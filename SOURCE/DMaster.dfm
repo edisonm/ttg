@@ -14,15 +14,12 @@ object MasterDataModule: TMasterDataModule
     RecalcOnIndex = False
     RecalcOnFetch = True
     SortOptions = []
-    Performance = mtpfFast
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
     StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
     PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
@@ -32,7 +29,7 @@ object MasterDataModule: TMasterDataModule
     EnableVersioning = False
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
-    Version = '2.50e Beta'
+    Version = '2.49'
     Left = 250
     Top = 11
     object TbTmpProfesorCargaCodProfesor: TIntegerField
@@ -124,15 +121,12 @@ object MasterDataModule: TMasterDataModule
     RecalcOnIndex = False
     RecalcOnFetch = True
     SortOptions = []
-    Performance = mtpfFast
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
     StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
     PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
@@ -142,7 +136,7 @@ object MasterDataModule: TMasterDataModule
     EnableVersioning = False
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
-    Version = '2.50e Beta'
+    Version = '2.49'
     Left = 250
     Top = 115
     object QuDistributivoProfesorCodMateria: TIntegerField
@@ -238,15 +232,12 @@ object MasterDataModule: TMasterDataModule
     RecalcOnIndex = False
     RecalcOnFetch = True
     SortOptions = []
-    Performance = mtpfFast
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
     StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
     PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
@@ -256,7 +247,7 @@ object MasterDataModule: TMasterDataModule
     EnableVersioning = False
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
-    Version = '2.50e Beta'
+    Version = '2.49'
     Left = 58
     Top = 157
     object QuProfesorProhibicionCantCodProfesor: TIntegerField
@@ -276,15 +267,12 @@ object MasterDataModule: TMasterDataModule
     RecalcOnIndex = False
     RecalcOnFetch = True
     SortOptions = []
-    Performance = mtpfFast
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
     StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
     PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
@@ -294,7 +282,7 @@ object MasterDataModule: TMasterDataModule
     EnableVersioning = False
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
-    Version = '2.50e Beta'
+    Version = '2.49'
     Left = 250
     Top = 62
     object TbTmpAulaTipoCargaCodAulaTipo: TIntegerField

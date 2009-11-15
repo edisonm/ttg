@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   SysConst, ExtCtrls, DB, Menus, ComCtrls, Placemnt, MRUList, ImgList, Buttons,
   MrgMngr, SpeedBar, RxMenus, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,
-  TB97Ctls, DB97Btn, FSingEdt, QrPrntr, kbmMemTable, Protect;
+  TB97Ctls, DB97Btn, FSingEdt, QrPrntr, kbmMemTable{, Protect};
 type
   TMainForm = class(TForm)
     MainMenu: TMainMenu;
@@ -163,7 +163,6 @@ type
     MIMejorarHorario: TMenuItem;
     actCompactarTablas: TAction;
     Compactartablas1: TMenuItem;
-    Protect1: TProtect;
     SaveDialogCSV: TSaveDialog;
     actRegistrationInfo: TAction;
     MIRegistrationInfo: TMenuItem;
@@ -926,24 +925,24 @@ begin
 end;
 
 procedure TMainForm.PedirRegistrarSoftware;
-var
-  InitDate: TDateTime;
+{var
+  InitDate: TDateTime;}
 begin
-  with FSProteccion do
+{  with FSProteccion do
     if Protect1.Execute(VarToStr(StoredValue['Password'])) then
     begin
       InitDate := Now;
       StoredValue['Password'] := Protect1.Password;
       if VarToStr(StoredValue['InitDate']) = '' then
         StoredValue['InitDate'] := Double(InitDate);
-    end;
+    end;}
 end;
 
 procedure TMainForm.ProtegerSoftware;
-var
-  LastDate, InitDate: TDateTime;
+{var
+  LastDate, InitDate: TDateTime;}
 begin
-  with FSProteccion do
+{  with FSProteccion do
   begin
     if VarToStr(StoredValue['LastDate']) = '' then
       StoredValue['LastDate'] := Double(Now);
@@ -976,7 +975,7 @@ begin
         actMejorarHorario.Enabled := True;
       end;
     end;
-  end;
+  end;}
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
@@ -993,9 +992,9 @@ begin
 {$IFDEF FREEWARE}
     actElaborarHorario.Enabled := False;
 {$ENDIF}
-    Protect1.DaysExpire := 60;
+{    Protect1.DaysExpire := 60;}
     FormStorage.RestoreFormPlacement;
-    with FSProteccion do
+{    with FSProteccion do
     begin
       //StoredValue['Password'] := '';
       //StoredValue['InitDate'] := '';
@@ -1005,7 +1004,7 @@ begin
       if StoredValue['Password'] <> Protect1.Password then
         PedirRegistrarSoftware;
       ProtegerSoftware;
-    end;
+    end;}
   except
     actElaborarHorario.Enabled := False;
     actMejorarHorario.Enabled := False;
