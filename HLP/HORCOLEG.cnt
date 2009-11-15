@@ -1,0 +1,50 @@
+; This contents file was created with HelpScribble 5.4.2
+; *** UNREGISTERED ***
+
+:BASE HORCOLEG.hlp
+:TITLE Ayuda del Sistema de Generación de Horarios para Colegio
+1 Introducción=Scribble10
+1 Iniciando SGHC=Scribble20
+1 Lista de acciones
+2 Categorías
+3 Archivo=Scribble30
+3 Datos=Scribble40
+3 Herramientas=Scribble50
+3 Ver=Scribble60
+3 Ayuda=Scribble70
+2 Acciones
+3 Archivo
+4 Nuevo=Scribble80
+4 Abrir=Scribble90
+4 Guardar=Scribble100
+4 Clave=Scribble110
+4 Cambiar Clave=Scribble120
+4 Salir=Scribble130
+3 Datos
+4 Días=Scribble140
+4 Horas académicas=Scribble150
+4 Períodos laborables=Scribble160
+4 Niveles=Scribble170
+4 Especializaciones=Scribble180
+4 Identificadores de paralelo=Scribble190
+4 Paralelos=Scribble200
+4 Materias=Scribble210
+4 Tipos de aula=Scribble220
+4 Asignaturas=Scribble230
+4 Profesores=Scribble240
+3 Herramientas
+4 Configurar=Scribble250
+4 Chequear factibilidad=Scribble260
+4 Elaborar horario=Scribble270
+3 Ver
+4 Horarios=Scribble280
+4 Presentar los horarios por profesor=Scribble290
+4 Presentar los horarios por paralelo=Scribble300
+4 Presentar prohibición de profesores=Scribble310
+4 Presentar prohibición de materias=Scribble320
+4 Presentar la carga académica por materias=Scribble330
+4 Presentar la carga académica por profesores=Scribble340
+3 Ayuda
+4 Contenido=Scribble350
+4 Indice=Scribble360
+4 Acerca de...=Scribble370
