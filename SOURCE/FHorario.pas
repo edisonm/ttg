@@ -138,6 +138,7 @@ type
     StringField16: TStringField;
     StringField17: TStringField;
     DSMateriaCortadaHora: TDataSource;
+    btn97HorarioAulaTipo: TDBToolbarButton97;
     procedure btn97HorarioParaleloClick(Sender: TObject);
     procedure btn97CruceProfesorClick(Sender: TObject);
     procedure btn97CruceMateriaClick(Sender: TObject);
@@ -152,6 +153,7 @@ type
       AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure btn97MateriaCortadaDiaClick(Sender: TObject);
     procedure btn97MateriaCortadaHoraClick(Sender: TObject);
+    procedure btn97HorarioAulaTipoClick(Sender: TObject);
   private
     { Private declarations }
     procedure EdQuCruceProfesorDestroy(Sender: TObject);
@@ -167,7 +169,7 @@ type
 
 implementation
 uses
-  FCrsMMER, FHorPara, DMaster, SGHCUtls, FMasDEEd, FCrsMME1, FHorProf,
+  FCrsMMER, FHorPara, FHorAulT, DMaster, SGHCUtls, FMasDEEd, FCrsMME1, FHorProf,
   FConfig, QMaDeRep, Printers;
 {$R *.DFM}
 
@@ -182,7 +184,6 @@ begin
     Caption := Format('%s %d', [TbHorario.TableName,
       TbHorarioCodHorario.Value]);
     LoadHints(HorarioParaleloForm, TbDia, TbHora, TbMateria);
-    CodHorario := TbHorarioCodHorario.Value;
   end;
 end;
 
@@ -277,7 +278,6 @@ begin
       RestoreFormPlacement;
     end;
     LoadHints(HorarioProfesorForm, TbDia, TbHora, TbProfesor);
-    CodHorario := TbHorarioCodHorario.Value;
   end;
 end;
 
@@ -441,6 +441,20 @@ begin
     MyMasterDetailShowEditor(MasterDetailEditorForm, QuMateriaCortadaHora,
       QuMateriaCortadaHoraDetalle, ConfiguracionForm.edtNomColegio.Text,
       EdQuMateriaCortadaHoraDestroy);
+  end;
+end;
+
+procedure THorarioForm.btn97HorarioAulaTipoClick(Sender: TObject);
+var
+  HorarioAulaTipoForm: THorarioAulaTipoForm;
+begin
+  inherited;
+  HorarioAulaTipoForm := THorarioAulaTipoForm.Create(Self);
+  with MasterDataModule, HorarioAulaTipoForm do
+  begin
+    Caption := Format('%s %d', [TbHorario.TableName,
+      TbHorarioCodHorario.Value]);
+    LoadHints(HorarioAulaTipoForm, TbDia, TbHora, TbMateria);
   end;
 end;
 

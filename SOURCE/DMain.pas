@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DBTables, DBPacker, Db, RxLogin, DBSecur, StrHlder, Placemnt;
+  DBTables, DBPacker, Db, RxLogin, DBSecur, StrHlder, Placemnt, BDEUtils;
 
 type
   TMainDataModule = class(TDataModule)
@@ -25,8 +25,9 @@ type
     { Public declarations }
     procedure SaveToFile(FileName: TFileName);
     procedure LoadFromFile(FileName: TFileName);
-    procedure NewDatabase(OnProgress: TDataSetNotifyEvent);
+    procedure NewDatabase(OnDataSetProgress: TDataSetNotifyEvent);
     procedure FillDefaultData;
+    procedure CompactarTablas(OnCompactar: TNotifyEvent);
   end;
 
 var
@@ -66,7 +67,7 @@ begin
   dbpkMain.SaveToFile(FileName);
 end;
 
-procedure TMainDataModule.NewDatabase(OnProgress: TDataSetNotifyEvent);
+procedure TMainDataModule.NewDatabase(OnDataSetProgress: TDataSetNotifyEvent);
 begin
   dbMain.Close;
   try
@@ -77,9 +78,9 @@ begin
       dbpkMain.LoadFromFile('..\BIN\HORCOLEG.DB0');
     end
     else
-      EmptyDataBase(dbMain, OnProgress);
-    if not Assigned(MasterDataModule.OnProgress) then
-      MasterDataModule.OnProgress := OnProgress;
+      EmptyDataBase(dbMain, OnDataSetProgress);
+    if not Assigned(MasterDataModule.OnDataSetProgress) then
+      MasterDataModule.OnDataSetProgress := OnDataSetProgress;
   finally
     FillDefaultData;
   end;
@@ -123,11 +124,11 @@ const
     );
   EValMateProhibicionTipo: array[0..1] of Double = (
     50,
-    100
+    500
     );
   EValProfProhibicionTipo: array[0..1] of Double = (
     50,
-    100
+    500
     );
 var
   t: TDateTime;
@@ -167,8 +168,8 @@ begin
             t := t + 1 / 48
           else
             t := t + 1 / 32;
-          Fields[1].AsString := s + '-' + FormatDateTime(ShortTimeFormat, t);
-          Fields[2].AsString := SNomHora[i];
+          Fields[1].AsString := SNomHora[i];
+          Fields[2].AsString := s + '-' + FormatDateTime(ShortTimeFormat, t);
           Post;
         end;
       finally
@@ -266,6 +267,59 @@ procedure TMainDataModule.sesMainPassword(Sender: TObject;
   var Continue: Boolean);
 begin
   Continue := False;
+end;
+
+procedure TMainDataModule.CompactarTablas(OnCompactar: TNotifyEvent);
+var
+  s: string;
+  i: Integer;
+  List: TStrings;
+  TbSource: TTable;
+begin
+  List := TStringList.Create;
+  try
+    TbSource := TTable.Create(nil);
+    //TbSource.TableLevel := 7;
+    //TbSource.TableType := ttParadox;
+    //TbSource.Exclusive := True;
+    try
+      TbSource.DisableControls;
+      TbSource.Exclusive := True;
+      TbSource.DatabaseName := dbMain.DatabaseName;
+      TbSource.SessionName := dbMain.SessionName;
+      dbMain.Connected := False;
+      dbMain.Exclusive := True;
+      dbMain.KeepConnection := False;
+      try
+        dbMain.Session.GetTableNames(dbMain.DatabaseName, '', False, False, List);
+        s := '';
+        for i := 0 to List.Count - 1 do
+        begin
+          TbSource.TableName := List.Strings[i];
+          TbSource.Active := True;
+          if Assigned(OnCompactar) then
+            OnCompactar(TbSource);
+          try
+            try
+              PackTable(TbSource);
+            except
+              //Application.HandleException(Self);
+            end;
+          finally
+            TbSource.Active := False;
+          end;
+        end;
+      finally
+        dbMain.KeepConnection := True;
+        dbMain.Exclusive := False;
+        dbMain.Connected := True;
+      end;
+    finally
+      TbSource.Free;
+    end;
+  finally
+    List.Free;
+  end;
 end;
 
 end.

@@ -5,7 +5,7 @@ interface
 uses
   Classes, DB, DBTables, Dialogs, SysConst, Math, Forms;
 type
-  TProgressEvent = procedure(i, max: Integer) of object;
+  TProgressEvent = procedure(I, Max: Integer; Value: Double; var Stop: Boolean) of object;
   TDynamicWordArray = array of Word;
   TDynamicWordArrayArray = array of TDynamicWordArray;
   TDynamicSmallintArray = array of Smallint;
@@ -125,10 +125,12 @@ type
     FDatabase: TDatabase;
     function GetDiaAMaxHorarioLaborable(d: Smallint): Smallint;
   protected
-    procedure DoProgress(i, max: Integer); dynamic;
+    procedure DoProgress(I, Max: Integer; Value: Double; var Stop: Boolean); dynamic;
     property MoldeHorarioDetalle: TDynamicSmallintArrayArray read
       FMoldeHorarioDetalle;
   public
+    property HorarioLaborableCant: Smallint read FHorarioLaborableCant;
+    property ParaleloCant: Smallint read FParaleloCant;
     procedure Configurar(
       ACruceProfesorValor,
       AProfesorFraccionamientoValor,
@@ -263,16 +265,22 @@ type
     procedure ActualizarDiaProfesorFraccionamiento;
     function GetDiaProfesorFraccionamiento(di, p: Smallint): Smallint;
     function DescensoRapidoDobleInterno: Boolean;
+    function DescensoRapidoPuntualInterno(var Delta: Double): Boolean; overload;
+    function DescensoRapidoPuntualInterno(AParalelo: Smallint;
+      var Delta: Double): Boolean; overload;
     //procedure Check(s: string); overload;
     //procedure Check(AParalelo: Smallint; s: string); overload;
   protected
     property RecalcularValor: boolean read FRecalcularValor write
       FRecalcularValor;
   public
+
     function DescensoRapido: Boolean;
     function DescensoRapidoDoble: Boolean;
     procedure DescensoRapidoDobleForzado;
     procedure DescensoRapidoForzado;
+    function DescensoRapidoOptimizadoInterno: Boolean;
+    procedure DescensoRapidoOptimizadoForzado;
     procedure InvalidarValor;
     procedure Actualizar;
     procedure SaveToFile(const AFileName: string);
@@ -959,7 +967,7 @@ end;
 procedure CruzarIndividuosPunto(var Uno, Dos: TObjetoModeloHorario; AParalelo:
   Integer);
 var
-  s, j, d, d1, d2: Smallint;
+  s, j, d: Smallint;
   k1, k2, l: Longint;
 begin
   with Uno.ModeloHorario do
@@ -975,10 +983,8 @@ begin
     begin
       s := FMoldeHorarioDetalle[AParalelo, j];
       d := FSesionADuracion[s];
-      d1 := FSesionADuracion[Uno.FParaleloPeriodoASesion[AParalelo, j]];
-      d2 := FSesionADuracion[Dos.FParaleloPeriodoASesion[AParalelo, j]];
-      if d1 <> d2 then
-        raise Exception.Create('Desincronización de las distancias');
+      //d1 := FSesionADuracion[Uno.FParaleloPeriodoASesion[AParalelo, j]];
+      //d2 := FSesionADuracion[Dos.FParaleloPeriodoASesion[AParalelo, j]];
       if crand32 mod 2 = 0 then
       begin
         k1 := Uno.FClaveAleatoria[AParalelo, j];
@@ -1059,21 +1065,29 @@ end;
 
 procedure TObjetoModeloHorario.HacerAleatorio;
 var
-  i, j, k, m: Smallint;
-  d: Longint;
+  i, j, d, l: Smallint;
+  r: Longint;
   p: PSmallintArray;
   q: PLongintArray;
 begin
   with ModeloHorario do
   begin
-    d := 0;
-    k := -2;
     for i := 0 to FParaleloCant - 1 do
     begin
       p := @ParaleloPeriodoASesion[i, 0];
       q := @FClaveAleatoria[i, 0];
       Move(FMoldeHorarioDetalle[i, 0], p[0], FHorarioLaborableCant *
         SizeOf(Smallint));
+      j := 0;
+      while j < FHorarioLaborableCant do
+      begin
+        d := FSesionADuracion[p[j]];
+        r := crand32;
+        for l := j + d - 1 downto j do
+          q[l] := r;
+        Inc(j, d);
+      end;
+(*
       for j := 0 to FHorarioLaborableCant - 1 do
       begin
         m := p[j];
@@ -1084,6 +1098,7 @@ begin
         end;
         q[j] := d;
       end;
+*)
       SortLongint(q^, p^, 0, FHorarioLaborableCant - 1);
     end;
   end;
@@ -1102,9 +1117,7 @@ end;
 
 procedure TObjetoModeloHorario.AleatorizarClave(AParalelo: Smallint);
 var
-  j, d, k, s, l: Smallint;
-  //j, k, l, m: Integer;
-  //d: Longint;
+  j, d, k, l: Smallint;
   NumberList: array[0..4095] of Longint;
   p: PSmallintArray;
   q: PLongintArray;
@@ -1120,38 +1133,12 @@ begin
     k := 0;
     while j < FHorarioLaborableCant do
     begin
-      s := p[j];
-      d := FSesionADuracion[s];
+      d := FSesionADuracion[p[j]];
       for l := j + d - 1 downto j do
-      begin
         q[l] := NumberList[k];
-      end;
       Inc(k);
       Inc(j, d);
     end;
-    {
-    k := p[0];
-    l := 1;
-    d := NumberList[0];
-    q[0] := d;
-    for j := 1 to FHorarioLaborableCant - 1 do
-    begin
-      m := p[j];
-      if (m < 0) or (k <> m) then
-      begin
-        k := m;
-        d := NumberList[l];
-        Inc(l);
-      end;
-      q[j] := d;
-    end;
-    }
-    //Check(AParalelo, 'AleatorizarClaveDespues');
-    {
-    if l <> FParaleloASesionCant[AParalelo] then
-      raise Exception.CreateFmt('Error aleatorizando clave: %d <> %d',
-        [l, FParaleloASesionCant[AParalelo]]);
-    }
   end;
 end;
 
@@ -1472,15 +1459,16 @@ end;
 
 procedure TObjetoModeloHorario.MutarInterno;
 var
-  l: Integer;
+  l: Longint;
   i, j, j1: Smallint;
 begin
   with ModeloHorario do
   begin
-    l := crand32 mod (FParaleloCant * FHorarioLaborableCant);
-    i := l div FHorarioLaborableCant;
+    l := crand32 mod (FParaleloCant * Sqr(FHorarioLaborableCant));
     j := l mod FHorarioLaborableCant;
-    j1 := crand32 mod FHorarioLaborableCant;
+    l := l div FHorarioLaborableCant;
+    i := l div FHorarioLaborableCant;
+    j1 := l mod FHorarioLaborableCant;
     if ParaleloPeriodoASesion[i, j] <> ParaleloPeriodoASesion[i, j1] then
       Intercambiar(i, j, j1);
   end;
@@ -2720,10 +2708,6 @@ begin
     s1 := q[AHorarioLaborable1];
     d := FSesionADuracion[s];
     d1 := FSesionADuracion[s1];
-    if q[AHorarioLaborable1 + d1 - 1] <> s1 then
-    begin
-      raise Exception.CreateFmt('Problemas %d %d %d', [AHorarioLaborable1, d1, s1]);
-    end;
     if s >= 0 then
     begin
       m := FSesionAMateria[s];
@@ -2816,48 +2800,246 @@ begin
 end;
 }
 
-function TObjetoModeloHorario.DescensoRapidoDobleInterno: Boolean;
+function TObjetoModeloHorario.DescensoRapidoPuntualInterno(AParalelo: Smallint;
+  var Delta: Double): Boolean;
 var
-  ci, i, j, j1: Smallint;
-  dk1, v1, v2: Double;
+  j, j1, d: Smallint;
+  dk: Double;
+  p: PSmallintArray;
+begin
+  with FModeloHorario do
+  begin
+    Result := True;
+    j := 0;
+    p := @FParaleloPeriodoASesion[AParalelo, 0];
+    while j < FHorarioLaborableCant do
+    begin
+      j1 := j + FSesionADuracion[p[j]];
+      while j1 < FHorarioLaborableCant do
+      begin
+        d := FSesionADuracion[p[j1]];
+        dk := EvaluarIntercambioInterno(AParalelo, j, j1);
+        if Delta + dk < 0 then
+        begin
+          IntercambiarInterno(AParalelo, j, j1, True);
+          Delta := Delta + dk;
+          Result := False;
+          Exit;
+        end;
+        Inc(j1, d);
+      end;
+      Inc(j, FSesionADuracion[p[j]]);
+    end;
+  end;
+end;
+
+function TObjetoModeloHorario.DescensoRapidoPuntualInterno(var Delta: Double): Boolean;
+var
+  ci, i, j, j1, d: Smallint;
+  dk: Double;
   RandomOrdersi: array[0..4095] of Smallint;
   RandomValues: array[0..4095] of Longint;
+  p: PSmallintArray;
+begin
+  with FModeloHorario do
+  begin
+    Result := True;
+    for ci := 0 to FParaleloCant - 1 do
+    begin
+      RandomOrdersi[ci] := ci;
+      RandomValues[ci] := rand32;
+    end;
+    SortLongint(RandomValues, RandomOrdersi, 0, FParaleloCant - 1);
+    ci := 0;
+    while ci < FParaleloCant do
+    begin
+      i := RandomOrdersi[ci];
+      j := 0;
+      p := @FParaleloPeriodoASesion[i, 0];
+      while j < FHorarioLaborableCant do
+      begin
+        j1 := j + FSesionADuracion[p[j]];
+        while j1 < FHorarioLaborableCant do
+        begin
+          d := FSesionADuracion[p[j1]];
+          dk := EvaluarIntercambioInterno(i, j, j1);
+          if Delta + dk < 0 then
+          begin
+            IntercambiarInterno(i, j, j1, True);
+            Delta := Delta + dk;
+            Result := False;
+            Exit;
+          end;
+          Inc(j1, d);
+        end;
+        Inc(j, FSesionADuracion[p[j]]);
+      end;
+      Inc(ci);
+    end;
+  end;
+end;
+
+function TObjetoModeloHorario.DescensoRapidoOptimizadoInterno: Boolean;
+var
+  j, j1, d, d1, ci, i, k, s, l: Smallint;
+  dk, v1: Double;
+  RandomOrdersi: array[0..4095] of Smallint;
+  RandomValues: array[0..4095] of Longint;
+  p: PSmallintArray;
+  Stop: Boolean;
   {Continuar: Boolean;}
 begin
+  Actualizar;
+  DoGetValor;
   with ModeloHorario do
   begin
     for ci := 0 to FParaleloCant - 1 do
     begin
       RandomOrdersi[ci] := ci;
-      Randomvalues[ci] := rand32;
+      RandomValues[ci] := $7FFFFFFF;
     end;
+    for i := 0 to FProfesorCant - 1 do
+    begin
+      for j := 0 to FHorarioLaborableCant - 1 do
+      begin
+        if FProfesorHorarioLaborableCant[i, j] > 1 then
+        begin
+          for k := 0 to FParaleloCant - 1 do
+          begin
+            s := FParaleloPeriodoASesion[k, j];
+            if (s >= 0) and (FParaleloMateriaAProfesor[k, FSesionAMateria[s]] = i) then
+              RandomValues[k] := rand32 div 2;
+          end;
+        end;
+      end;
+    end;
+    SortLongint(RandomValues, RandomOrdersi, 0, FParaleloCant - 1);
+    Result := True;
+    l := 0;
+    while (l < FParaleloCant) and (RandomValues[l] <> $7FFFFFFF) do
+    begin
+      Inc(l);
+    end;
+    ci := 0;
+    v1 := Valor;
+    while ci < l do
+    begin
+      {Continuar := True;}
+      i := RandomOrdersi[ci];
+      j := 0;
+      p := @FParaleloPeriodoASesion[i, 0];
+      while j < FHorarioLaborableCant do
+      begin
+        j1 := j + FSesionADuracion[p[j]];
+        while j1 < FHorarioLaborableCant do
+        begin
+          Stop := False;
+          DoProgress((j + ci * FHorarioLaborableCant) * FHorarioLaborableCant + j1,
+            l * Sqr(FHorarioLaborableCant), v1, Stop);
+          if Stop then
+            Exit;
+          dk := EvaluarIntercambioInterno(i, j, j1);
+          d := FSesionADuracion[p[j]];
+          d1 := FSesionADuracion[p[j1]];
+          IntercambiarInterno(i, j, j1, True);
+          if dk < 0 then
+          begin
+            Result := False;
+          end
+          else
+          begin
+            if DescensoRapidoPuntualInterno(i, dk) then
+            begin
+              IntercambiarInterno(i, j, j1 + d1 - d);
+              dk := 0;
+            end
+            else
+            begin
+              Normalizar(i, j);
+              Result := False;
+            end;
+          end;
+          v1 := v1 + dk;
+          Normalizar(i, j1);
+          Inc(j1, FSesionADuracion[p[j1]]);
+        end;
+        Normalizar(i, j);
+        Inc(j, FSesionADuracion[p[j]]);
+      end;
+      {if Continuar then}
+      Inc(ci);
+    end;
+  end;
+end;
+
+function TObjetoModeloHorario.DescensoRapidoDobleInterno: Boolean;
+var
+  j, j1, d, d1, ci, i, k: Smallint;
+  dk, v1: Double;
+  RandomOrdersi: array[0..4095] of Smallint;
+  RandomValues: array[0..4095] of Longint;
+  p: PSmallintArray;
+  Stop: Boolean;
+  {Continuar: Boolean;}
+begin
+  Actualizar;
+  DoGetValor;
+  with ModeloHorario do
+  begin
+    for ci := 0 to FParaleloCant - 1 do
+    begin
+      RandomOrdersi[ci] := ci;
+      RandomValues[ci] := rand32;
+    end;
+    SortLongint(RandomValues, RandomOrdersi, 0, FParaleloCant - 1);
     Result := True;
     ci := 0;
+    v1 := Valor;
     while ci < FParaleloCant do
     begin
       {Continuar := True;}
       i := RandomOrdersi[ci];
-      for j := 0 to FHorarioLaborableCant - 1 do
+      j := 0;
+      p := @FParaleloPeriodoASesion[i, 0];
+      while j < FHorarioLaborableCant do
       begin
-        DoProgress(j + ci * FHorarioLaborableCant,
-          FParaleloCant * FHorarioLaborableCant);
-        for j1 := j + 1 to FHorarioLaborableCant - 1 do
+        j1 := j + FSesionADuracion[p[j]];
+        k := j1;
+        while j1 < FHorarioLaborableCant do
         begin
-          Actualizar;
-          DoGetValor;
-          v1 := Valor;
-          Intercambiar(i, j, j1);
-          Actualizar;
-          DoGetValor;
-          v2 := Valor;
-          dk1 := v2 - v1;
-          if dk1 >= 0 then
+          Stop := False;
+          DoProgress(ci * FHorarioLaborableCant * (FHorarioLaborableCant - 1) div 2
+            + j * (FHorarioLaborableCant - 1) - j * (j - 1) div 2 + j1 - k,
+            FParaleloCant * FHorarioLaborableCant * (FHorarioLaborableCant - 1) div 2, v1, Stop);
+          if Stop then
+            Exit;
+          dk := EvaluarIntercambioInterno(i, j, j1);
+          d := FSesionADuracion[p[j]];
+          d1 := FSesionADuracion[p[j1]];
+          IntercambiarInterno(i, j, j1, True);
+          if dk < 0 then
           begin
-            if not DescensoRapidoInterno(-dk1) then
-              Intercambiar(i, j, j1);
+            Result := False;
+          end
+          else
+          begin
+            if DescensoRapidoPuntualInterno(dk) then
+            begin
+              IntercambiarInterno(i, j, j1 + d1 - d);
+              dk := 0;
+            end
+            else
+            begin
+              Normalizar(i, j);
+              Result := False;
+            end;
           end;
-          Result := Result and (dk1 >= 0);
+          v1 := v1 + dk;
+          Normalizar(i, j1);
+          Inc(j1, FSesionADuracion[p[j1]]);
         end;
+        Normalizar(i, j);
+        Inc(j, FSesionADuracion[p[j]]);
       end;
       {if Continuar then}
       Inc(ci);
@@ -2866,6 +3048,7 @@ begin
 end;
 
 {Retorna verdadero cuando no ha descendido}
+
 function TObjetoModeloHorario.DescensoRapidoInterno: Boolean;
 begin
   result := DescensoRapidoInterno(0);
@@ -2887,6 +3070,7 @@ begin
       RandomOrdersi[ci] := ci;
       Randomvalues[ci] := rand32;
     end;
+    SortLongint(RandomValues, RandomOrdersi, 0, FParaleloCant - 1);
     Result := True;
     ci := 0;
     while ci < FParaleloCant do
@@ -2917,8 +3101,8 @@ begin
             if Abs((v2 - v1) - dk1) > 0.00001 then
               raise Exception.Create('Problemas');
 {$ENDIF}
+            Result := False;
           end;
-          Result := Result and (dk1 >= 0);
           {Continuar := Continuar and (dk1 >= 0);}
           Inc(j1, d1);
         end;
@@ -2940,7 +3124,14 @@ end;
 
 function TObjetoModeloHorario.DescensoRapidoDoble: Boolean;
 begin
-  Result := DescensoRapidoInterno;
+  Result := DescensoRapidoDobleInterno;
+  RecalcularValor := True;
+end;
+
+procedure TObjetoModeloHorario.DescensoRapidoOptimizadoForzado;
+begin
+  repeat
+  until DescensoRapidoOptimizadoInterno;
   RecalcularValor := True;
 end;
 
@@ -3197,6 +3388,8 @@ function TObjetoModeloHorario.GetDiaProfesorFraccionamiento(di, p: Smallint):
   Smallint;
 var
   h_, iMax, iMin, iCant, n: Smallint;
+  q: PSmallintArray;
+  r: PShortintArray;
 begin
   iCant := 0;
   iMax := -1;
@@ -3204,12 +3397,12 @@ begin
   with ModeloHorario do
   begin
     n := FDiaAMaxHorarioLaborable[di];
+    q := @FProfesorHorarioLaborableCant[p, 0];
+    r := @FProfesorHorarioLaborableAProfesorProhibicionTipo[p, 0];
     for h_ := FDiaHoraAHorarioLaborable[di, 0] to n do
     begin
-      if (FProfesorHorarioLaborableCant[p, h_] > 0) or
-        (FProfesorProhibicionTipoAValor[
-        FProfesorHorarioLaborableAProfesorProhibicionTipo[p, h_]] =
-          FMaxProfesorProhibicionTipoValor) then
+      if (q[h_] > 0) or (FProfesorProhibicionTipoAValor[r[h_]] =
+        FMaxProfesorProhibicionTipoValor) then
       begin
         iMax := FHorarioLaborableAHora[h_];
         Inc(iCant);
@@ -3278,10 +3471,10 @@ begin
   ActualizarDiaProfesorFraccionamiento;
 end;
 
-procedure TModeloHorario.DoProgress(i, max: Integer);
+procedure TModeloHorario.DoProgress(I, Max: Integer; Value: Double; var Stop: Boolean);
 begin
   if Assigned(FOnProgress) then
-    FOnProgress(i, max);
+    FOnProgress(I, Max, Value, Stop);
 end;
 
 destructor TModeloHorario.Destroy;

@@ -108,14 +108,13 @@ type
     procedure RxDBGridGetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure CBRandomizeClick(Sender: TObject);
-    procedure bbtnOkClick(Sender: TObject);
-    procedure bbtnCancelClick(Sender: TObject);
     procedure edtNomColegioChange(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     procedure InitRandom;
+    procedure Clear;
   end;
 
 var
@@ -171,37 +170,46 @@ begin
     setseeds(speSeed1.Value, speSeed2.Value, speSeed3.Value, speSeed4.Value);
 end;
 
-procedure TConfiguracionForm.bbtnOkClick(Sender: TObject);
-begin
-  MainDataModule.dbMain.Commit;
-  FormStorage.SaveFormPlacement;
-  with MasterDataModule.TbMateriaProhibicionTipo do
-  begin
-    CheckBrowseMode;
-    FlushBuffers;
-  end;
-  with MasterDataModule.TbProfesorProhibicionTipo do
-  begin
-    CheckBrowseMode;
-    FlushBuffers;
-  end;
-  if MainForm.Ejecutando then
-    MainForm.AjustarPesos;
-end;
-
-procedure TConfiguracionForm.bbtnCancelClick(Sender: TObject);
-begin
-  FormStorage.RestoreFormPlacement;
-  MainDataModule.dbMain.Rollback;
-  MasterDataModule.TbMateriaProhibicionTipo.Refresh;
-  MasterDataModule.TbProfesorProhibicionTipo.Refresh;
-end;
-
 procedure TConfiguracionForm.edtNomColegioChange(Sender: TObject);
 begin
   MainForm.Caption := Application.Title + ' - ' + edtNomColegio.Text;
 end;
 
+procedure TConfiguracionForm.Clear;
+begin
+  edtNomColegio.Text := '';
+  edtAnioLectivo.Text := '';
+  edtNomAutoridad.Text := '';
+  edtCarAutoridad.Text := '';
+  speMaxCargaProfesor.Value := 20;
+  lblHorarioSeleccionado.Caption := '(Ninguno)';
+  memComentarios.Clear;
+  speSeed1.Value := 1;
+  speSeed2.Value := 1;
+  speSeed3.Value := 1;
+  speSeed4.Value := 1;
+  CBRandomize.Checked := False;
+  speNumIteraciones.Value := 1;
+  edtHorarioIni.Text := '';
+  dedCompartir.Text := '';
+  edtMostrarProfesorHorarioTexto.Text := 'AbrNivel + " " + NomParaleloId + " " + AbrEspecializacion + " " + NomMateria';
+  speMostrarProfesorHorarioLongitud.Value := 20;
+  edtProfesorHorarioExcluirProfProhibicion.Text := 'ProfesorProhibicion.CodProfProhibicionTipo NOT IN (0,1)';
+  creCruceProfesor.Value := 200;
+  creProfesorFraccionamiento.Value := 50;
+  creCruceAulaTipo.Value := 200;
+  creHoraHueca.Value := 100;
+  creSesionCortada.Value := 150;
+  creMateriaNoDispersa.Value := 5;
+  speTamPoblacion.Value := 10;
+  speNumMaxGeneracion.Value := 10000;
+  creProbCruzamiento.Value := 0.30;
+  creProbMutacion1.Value := 0.20;
+  speOrdenMutacion1.Value := 3;
+  creProbMutacion2.Value := 0.20;
+  creProbReparacion.Value := 0.20;
+  speRangoPolinizacion.Value := 1;
+end;
+
 end.
 
- 

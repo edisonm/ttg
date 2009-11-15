@@ -7,7 +7,7 @@ uses
   SysConst, ExtCtrls, DB, Menus, ComCtrls, Placemnt,
   MRUList, ImgList, Buttons, MrgMngr, SpeedBar, RxMenus, ActnList, ToolWin,
   MenuBar, StdActns, StdCtrls, RxQuery, DBTables,
-  TB97Ctls, DB97Btn, FSingEdt, Excels, QrPrntr, kbmMemTable;
+  TB97Ctls, DB97Btn, FSingEdt, QrPrntr, kbmMemTable, Protect;
 type
   TMainForm = class(TForm)
     MainMenu: TMainMenu;
@@ -170,11 +170,19 @@ type
     rxmProfesor1: TkbmMemTable;
     actPresentarCargaAcademicaProfesor: TAction;
     MIPresentarCargaAcademicaProfesor: TMenuItem;
-    actExportarExcel: TAction;
-    AdvExcel1: TAdvExcel;
+    actExportarCSV: TAction;
     ExportarelhorarioaExcel1: TMenuItem;
     N7: TMenuItem;
     N8: TMenuItem;
+    actMejorarHorario: TAction;
+    MIMejorarHorario: TMenuItem;
+    actCompactarTablas: TAction;
+    Compactartablas1: TMenuItem;
+    Protect1: TProtect;
+    SaveDialogCSV: TSaveDialog;
+    actRegistrationInfo: TAction;
+    MIRegistrationInfo: TMenuItem;
+    FSProteccion: TFormStorage;
     procedure actExitExecute(Sender: TObject);
     procedure actProfesorExecute(Sender: TObject);
     procedure actMateriaExecute(Sender: TObject);
@@ -224,13 +232,18 @@ type
     procedure actPresentarCargaAcademicaProfesorExecute(Sender: TObject);
     procedure actContentsExecute(Sender: TObject);
     procedure actIndexExecute(Sender: TObject);
-    procedure actExportarExcelExecute(Sender: TObject);
+    procedure actExportarCSVExecute(Sender: TObject);
+    procedure actMejorarHorarioExecute(Sender: TObject);
+    procedure FormDblClick(Sender: TObject);
+    procedure actCompactarTablasExecute(Sender: TObject);
+    procedure actRegistrationInfoExecute(Sender: TObject);
   private
     { Private declarations }
 {$IFNDEF FREEWARE}
     FInit: TDateTime;
     FCloseClick, FCancelClick: Boolean;
 {$ENDIF}
+    FPasada: Integer;
     FPosition: Integer;
     FRelPosition: Integer;
     FNumIteraciones: Integer;
@@ -276,13 +289,19 @@ type
 {$ENDIF}
     procedure InternalShowFormulary(ASingleEditorForm: TSingleEditorForm;
       ADataSet: TDataSet; AAction: TAction; DestroyEvent: TNotifyEvent);
-    procedure ExportarHojaExcel(AMasterDataSet, ADetailDataSet: TDataSet);
+    procedure ExportarCSV(AMasterDataSet, ADetailDataSet: TDataSet; AStrings: TStrings);
     procedure PrepareReportProfesorHorario(Sender: TObject);
     procedure PrepareReportParaleloHorario(Sender: TObject);
     procedure PrepareReportProhibicion(Sender: TObject);
     procedure PrepareReportCargaAcademicaMateria(Sender: TObject);
     procedure PrepareReportCargaAcademicaProfesor(Sender: TObject);
     procedure Progress(Sender: TObject);
+    procedure ProgressDescensoDoble(I, Max: Integer; Value: Double; var Stop: Boolean);
+    procedure OnCompactar(Sender: TObject);
+    procedure ExportToFile(AFileName: TFileName);
+    procedure ExportToStrings(AStrings: TStrings);
+    procedure PedirRegistrarSoftware;
+    procedure ProtegerSoftware;
     //procedure MarcarProgreso(Count, Cant: Integer);
 
   public
@@ -518,6 +537,7 @@ begin
     begin
       Max := 20;
       MainDataModule.NewDataBase(OnProgress);
+      ConfiguracionForm.Clear;
       Position := 0;
     end;
   finally
@@ -622,7 +642,8 @@ begin
   StatusBar.Panels[2].Text := 'Eliminando ' + (DataSet as TTable).TableName;
 end;
 
-{procedure TMainForm.MarcarProgreso(Count, Cant: Integer);
+{
+procedure TMainForm.MarcarProgreso(Count, Cant: Integer);
 begin
   Position := Count;
   Min := 0;
@@ -933,19 +954,92 @@ begin
     StatusBar.Canvas.FillRect(Rect);
 end;
 
+procedure TMainForm.PedirRegistrarSoftware;
+var
+  InitDate: TDateTime;
+begin
+  with FSProteccion do
+    if Protect1.Execute(VarToStr(StoredValue['Password'])) then
+    begin
+      InitDate := Now;
+      StoredValue['Password'] := Protect1.Password;
+      if VarToStr(StoredValue['InitDate']) = '' then
+        StoredValue['InitDate'] := Double(InitDate);
+    end;
+end;
+
+procedure TMainForm.ProtegerSoftware;
+var
+  LastDate, InitDate: TDateTime;
+begin
+  with FSProteccion do
+  begin
+    if VarToStr(StoredValue['LastDate']) = '' then
+      StoredValue['LastDate'] := Double(Now);
+    if VarToStr(StoredValue['Password']) = Protect1.Password then
+    begin
+      InitDate := StoredValue['InitDate'];
+      LastDate := StoredValue['LastDate'];
+      if LastDate < Now then
+      begin
+        LastDate := Now;
+        StoredValue['LastDate'] := Double(LastDate);
+      end;
+      if (Protect1.DaysExpire > 0) and ((Protect1.DaysExpire + InitDate < LastDate)
+        or (LastDate > Now)) then
+      begin
+        MessageDlg('El tiempo de prueba a concluido'#13#10 +
+          ' El sistema correrá sin las opciones que permiten generar el horario',
+          mtWarning, [mbOk], 0);
+        actElaborarHorario.Enabled := False;
+        actMejorarHorario.Enabled := False;
+      end
+      else if Protect1.DaysExpire > 0 then
+      begin
+        StatusBar.Panels[2].Text := Format('Transcurridos %d de %d días',
+          [Trunc(LastDate - InitDate), Protect1.DaysExpire]);
+      end
+      else
+      begin
+        actElaborarHorario.Enabled := True;
+        actMejorarHorario.Enabled := True;
+      end;
+    end;
+  end;
+end;
+
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-  FMin := 0;
-  FMax := 100;
-  FPosition := 0;
-  FRelPosition := 0;
-  FStep := 1;
-  FEjecutando := False;
-  FAjustar := False;
-  FLogStrings := TStringList.Create;
+  try
+    FMin := 0;
+    FMax := 100;
+    FPosition := 0;
+    FRelPosition := 0;
+    FStep := 1;
+    FEjecutando := False;
+    FAjustar := False;
+    FLogStrings := TStringList.Create;
 {$IFDEF FREEWARE}
-  actElaborarHorario.Enabled := False;
+    actElaborarHorario.Enabled := False;
 {$ENDIF}
+    Protect1.DaysExpire := 60;
+    FormStorage.RestoreFormPlacement;
+    with FSProteccion do
+    begin
+      //StoredValue['Password'] := '';
+      //StoredValue['InitDate'] := '';
+      //StoredValue['LastDate'] := '';
+      RestoreFormPlacement;
+      Protect1.UserID := Protect1.HardDiskID;
+      if StoredValue['Password'] <> Protect1.Password then
+        PedirRegistrarSoftware;
+      ProtegerSoftware;
+    end;
+  except
+    actElaborarHorario.Enabled := False;
+    actMejorarHorario.Enabled := False;
+    raise;
+  end;
   MainDataModule.dbpkMain.OnProgress := Progress;
 end;
 
@@ -979,7 +1073,30 @@ begin
   MasterDataModule.TbProfesorProhibicionTipo.Open;
   ConfiguracionForm.HelpContext := actConfigurar.HelpContext;
   MainDataModule.dbMain.StartTransaction;
-  ConfiguracionForm.ShowModal;
+  if ConfiguracionForm.ShowModal = mrOk then
+  begin
+    ConfiguracionForm.FormStorage.SaveFormPlacement;
+    MainDataModule.dbMain.Commit;
+    with MasterDataModule.TbMateriaProhibicionTipo do
+    begin
+      CheckBrowseMode;
+      FlushBuffers;
+    end;
+    with MasterDataModule.TbProfesorProhibicionTipo do
+    begin
+      CheckBrowseMode;
+      FlushBuffers;
+    end;
+    if Self.Ejecutando then
+      Self.AjustarPesos;
+  end
+  else
+  begin
+    ConfiguracionForm.FormStorage.RestoreFormPlacement;
+    MainDataModule.dbMain.Rollback;
+    MasterDataModule.TbMateriaProhibicionTipo.Refresh;
+    MasterDataModule.TbProfesorProhibicionTipo.Refresh;
+  end;
   FNumIteraciones := ConfiguracionForm.speNumIteraciones.Value;
 end;
 
@@ -994,8 +1111,10 @@ begin
   end
   else
   begin
-    MessageDlg('No se encontraron errores, está listo para generar horario',
-      mtInformation, [mbOk], 0);
+    if MessageDlg('No se encontraron errores, está listo para generar horario.'#13#10 +
+      '¿Desea mostrar el resumen del chequeo del horario?',
+      mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      LogisticForm.Show;
   end;
 end;
 
@@ -1018,6 +1137,8 @@ end;
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
   FLogStrings.Free;
+  FormStorage.SaveFormPlacement;
+  FSProteccion.SaveFormPlacement;
 end;
 
 procedure TMainForm.ObtProfesorHorario;
@@ -1323,69 +1444,95 @@ begin
   Application.HelpCommand(HELP_FINDER, 0);
 end;
 
-procedure TMainForm.ExportarHojaExcel(AMasterDataSet, ADetailDataSet: TDataSet);
+procedure TMainForm.ExportarCSV(AMasterDataSet, ADetailDataSet: TDataSet;
+  AStrings: TStrings);
 var
   s: string;
-  i, j, k: Integer;
+  j: Integer;
 begin
+  AStrings.Add(',,,,,,');
   AMasterDataSet.First;
-  i := 1;
+  Max := AMasterDataSet.RecordCount;
   while not AMasterDataSet.Eof do
   begin
-    Inc(i);
     s := '';
+    Position := AMasterDataSet.RecNo;
     for j := 0 to AMasterDataSet.FieldCount - 1 do
     begin
       if AMasterDataSet.Fields[j].Visible then
         s := s + AMasterDataSet.Fields[j].AsString + ' ';
     end;
-    AdvExcel1.PutStrAt(i, 1, s);
-    Inc(i);
+    AStrings.Add(s + ',,,,,,');
     ADetailDataSet.First;
-    k := 1;
+    s := '';
     for j := 0 to ADetailDataSet.FieldCount - 1 do
     begin
       if ADetailDataSet.Fields[j].Visible then
       begin
-        AdvExcel1.PutStrAt(i, k, ADetailDataSet.Fields[j].DisplayLabel);
-        Inc(k);
+        s := s + ADetailDataSet.Fields[j].DisplayLabel + ',';
       end;
     end;
-    Inc(i);
+    AStrings.Add(s);
     while not ADetailDataSet.Eof do
     begin
-      k := 1;
+      s := '';
       for j := 0 to ADetailDataSet.FieldCount - 1 do
       begin
         if ADetailDataSet.Fields[j].Visible then
-        begin
-          AdvExcel1.PutStrAt(i, k, ADetailDataSet.Fields[j].AsString);
-          Inc(k);
-        end;
+          s := s + ADetailDataSet.Fields[j].AsString + ',';
       end;
-      Inc(i);
+      AStrings.Add(s);
       ADetailDataSet.Next;
     end;
+    AStrings.Add(',,,,,,');
     AMasterDataSet.Next;
   end;
 end;
 
-procedure TMainForm.actExportarExcelExecute(Sender: TObject);
+procedure TMainForm.actExportarCSVExecute(Sender: TObject);
 begin
-  AdvExcel1.Connect;
-  AdvExcel1.EchoOff;
+  StatusBar.Panels[1].Style := psOwnerDraw;
+  Position := 0;
   try
-    AdvExcel1.NewWorkbook(Sheet, '');
-    ObtParaleloHorario;
-    ExportarHojaExcel(QuParalelo, rxmParalelo);
-    AdvExcel1.NewSheet(Sheet, '');
-    ObtProfesorHorario;
-    ExportarHojaExcel(QuProfesor, rxmProfesor);
+    SaveDialogCSV.HelpContext := actSave.HelpContext;
+    if SaveDialogCSV.Execute then
+      ExportToFile(SaveDialogCSV.FileName);
   finally
-    AdvExcel1.EchoOn;
-    AdvExcel1.Disconnect;
+    Position := 0;
+    StatusBar.Panels[1].Style := psText;
+    StatusBar.Panels[2].Text := 'Listo';
   end;
 end;
+
+
+procedure TMainForm.ExportToFile(AFileName: TFileName);
+var
+  Strings: TStrings;
+begin
+  Strings := TStringList.Create;
+  try
+    ExportToStrings(Strings);
+    Strings.SaveToFile(AFileName);
+  finally
+    Strings.Free;
+  end;
+end;
+
+procedure TMainForm.ExportToStrings(AStrings: TStrings);
+begin
+  AStrings.BeginUpdate;
+  try
+    ObtParaleloHorario;
+    AStrings.Add('HORARIO POR PARALELOS,,,,,,');
+    ExportarCSV(QuParalelo, rxmParalelo, AStrings);
+    AStrings.Add('HORARIO POR PROFESORES,,,,,,');
+    ObtProfesorHorario;
+    ExportarCSV(QuProfesor, rxmProfesor, AStrings);
+  finally
+    AStrings.EndUpdate;
+  end;
+end;
+
 {
 procedure TMainForm.ToolbarButton971Click(Sender: TObject);
 begin
@@ -1437,6 +1584,141 @@ begin
     qrlAnioLectivo.Caption := 'Año Lectivo: ' +
       ConfiguracionForm.edtAnioLectivo.Text;
   end;
+end;
+
+var
+  MomentoInicialProgress: TDateTime;
+
+procedure TMainForm.ProgressDescensoDoble(I, Max: Integer; value: Double; var Stop: Boolean);
+var
+  t, x: TDateTime;
+begin
+  if I = 0 then
+  begin
+    Self.Max := Max;
+    x := 0;
+    Inc(FPasada);
+    MomentoInicialProgress := Now;
+    t := 0;
+  end
+  else
+  begin
+    t := Now - MomentoInicialProgress;
+    x := t * (Max - I) / I;
+  end;
+  Self.Position := i;
+  StatusBar.Panels[0].Text := Format('Pasada %d - %d de %d %f - van: %d-%s - restan: %d-%s',
+    [FPasada, i, max, value, Trunc(t), FormatDateTime('hh:mm:ss', t), Trunc(x),
+    FormatDateTime('hh:mm:ss', x)]);
+  Application.ProcessMessages;
+  Stop := FCloseClick;
+end;
+
+procedure TMainForm.actMejorarHorarioExecute(Sender: TObject);
+var
+  VModeloHorario: TModeloHorario;
+  VObjetoModeloHorario: TObjetoModeloHorario;
+  CodHorarioFuente, CodHorarioDestino: Integer;
+  Informe: TStrings;
+  MomentoInicial, MomentoFinal: TDateTime;
+  s, d: string;
+  va, vd: Double;
+begin
+  if not InputQuery('Código del horario a mejorar: ',
+    'Código del horario a mejorar', s) then
+    Exit;
+  if s <> '' then
+    CodHorarioFuente := StrToInt(s);
+  if not InputQuery('Código del horario mejorado: ',
+    'Código del horario mejorado', d) then
+    Exit;
+  CodHorarioDestino := StrToInt(d);
+  FCloseClick := False;
+  with ConfiguracionForm do
+  begin
+    InitRandom;
+    MomentoInicial := Now;
+    FNumIteraciones := speNumIteraciones.Value;
+    FEjecutando := True;
+    VModeloHorario :=
+      TModeloHorario.CrearDesdeDatabase(MainDataModule.dbMain,
+      creCruceProfesor.Value,
+      creProfesorFraccionamiento.Value,
+      creCruceAulaTipo.Value,
+      creHoraHueca.Value,
+      creSesionCortada.Value,
+      creMateriaNoDispersa.Value);
+    StatusBar.Panels[1].Style := psOwnerDraw;
+    Self.Position := 0;
+    FPasada := 0;
+    try
+      VModeloHorario.OnProgress := Self.ProgressDescensoDoble;
+      Self.Step := 1;
+      VObjetoModeloHorario := TObjetoModeloHorario.CrearDesdeModelo(VModeloHorario);
+      try
+        if s = '' then
+          VObjetoModeloHorario.HacerAleatorio
+        else
+          VObjetoModeloHorario.LoadFromDatabase(CodHorarioFuente);
+        va := VObjetoModeloHorario.Valor;
+        VObjetoModeloHorario.DescensoRapidoForzado;
+        VObjetoModeloHorario.DescensoRapidoDobleForzado;
+        vd := VObjetoModeloHorario.Valor;
+        MomentoFinal := Now;
+        Informe := TStringList.Create;
+        try
+          Informe.Add(Format('Peso del horario antes:  %f', [va]));
+          Informe.Add(Format('Peso del horaro despues: %f', [vd]));
+          VObjetoModeloHorario.SaveToDatabase(CodHorarioDestino, MomentoInicial,
+            MomentoFinal, Informe);
+          if MasterDataModule.TbHorario.Active then
+            MasterDataModule.TbHorario.Refresh;
+        finally
+          Informe.Free;
+        end;
+      finally
+        VObjetoModeloHorario.Free;
+      end;
+    finally
+      VModeloHorario.Free;
+      FEjecutando := False;
+      StatusBar.Panels[1].Style := psText;
+      StatusBar.Panels[2].Text := 'Listo';
+    end;
+  end;
+end;
+
+procedure TMainForm.FormDblClick(Sender: TObject);
+begin
+  if FEjecutando
+    and (MessageDlg('¿Está seguro de que desea finalizar esta operación?',
+    mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
+    FCloseClick := True;
+end;
+
+procedure TMainForm.actCompactarTablasExecute(Sender: TObject);
+begin
+  Max := 20;
+  StatusBar.Panels[1].Style := psOwnerDraw;
+  Self.Position := 0;
+  try
+    MainDataModule.CompactarTablas(OnCompactar);
+  finally
+    StatusBar.Panels[1].Style := psText;
+    StatusBar.Panels[2].Text := 'Listo';
+  end;
+end;
+
+procedure TMainForm.OnCompactar(Sender: TObject);
+begin
+  StatusBar.Panels[2].Text := 'Compactando ' + (Sender as TTable).TableName;
+  Self.Position := Self.Position + 1;
+end;
+
+procedure TMainForm.actRegistrationInfoExecute(Sender: TObject);
+begin
+  PedirRegistrarSoftware;
+  ProtegerSoftware;
 end;
 
 end.

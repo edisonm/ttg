@@ -161,8 +161,8 @@ begin
     FRowFieldName := ARowDataSet.FindField(ARowFieldName);
     FRowField := ARelDataSet.FindField(ARowField);
     ReadData;
-    if not Visible then
-      ShowModal;
+    {if not Visible then
+      ShowModal;}
   finally
     FColDataSet.EnableControls;
     FRowDataSet.EnableControls;
@@ -175,8 +175,7 @@ begin
 end;
 
 procedure TCrossManyToManyEditorForm.ReadDataSet(ADataset: TDataset; AFieldKey,
-  AFieldName: TField;
-  var AMin, AMax: Integer; var APosKey, AKeyPos: array of Integer;
+  AFieldName: TField; var AMin, AMax: Integer; var APosKey, AKeyPos: array of Integer;
   var APosName: array of string);
 var
   i: Integer;
@@ -399,7 +398,6 @@ end;
 
 function TCrossManyToManyEditorForm.ColRowIsValid(i, j: Integer): Boolean;
 begin
-
   Result := (i >= 0) and (i < FColDataSetRecordCount) and (j >= 0)
     and (j < FRowDataSetRecordCount);
 end;

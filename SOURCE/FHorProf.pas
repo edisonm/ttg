@@ -26,13 +26,11 @@ type
   private
     { Private declarations }
     FCodHorario: Integer;
+  protected
   public
     { Public declarations }
     property CodHorario: Integer read FCodHorario write FCodHorario;
   end;
-
-var
-  HorarioProfesorForm: THorarioProfesorForm;
 
 implementation
 uses
@@ -71,11 +69,14 @@ end;
 procedure THorarioProfesorForm.FormCreate(Sender: TObject);
 begin
   inherited;
+  CodHorario := MasterDataModule.TbHorarioCodHorario.Value;
   QuProfesor.Prepare;
   QuProfesor.Open;
   cbVerProfesor.Items.Clear;
   LoadNames(MasterDataModule.StrHolderShowProfesor.Strings, cbVerProfesor.Items);
   cbVerProfesor.Text := cbVerProfesor.Items[0];
+  dlcProfesor.KeyValue := QuProfesor.FindField('CodProfesor').AsInteger;
+  btn97MostrarClick(nil);
 end;
 
 procedure THorarioProfesorForm.FormDestroy(Sender: TObject);

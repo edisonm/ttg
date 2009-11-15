@@ -24,7 +24,7 @@ uses
   FLogstic in 'FLogstic.pas' {LogisticForm},
   FHorPara in 'FHorPara.pas' {HorarioParaleloForm},
   FMasDeEd in 'FMasDeEd.pas' {MasterDetailEditorForm},
-  FHorProf in 'FHorProf.pas' {HorarioProfesorForm},
+  FHorAulT in 'FHorAulT.pas' {HorarioAulaTipoForm},
   FSplash in 'FSplash.pas' {SplashForm},
   QSingRep in 'QSingRep.pas' {SingleReportQrp},
   QMaDeRep in 'QMaDeRep.pas' {MasterDetailReportQrp},
@@ -32,7 +32,8 @@ uses
   FSingEdt in 'fsingedt.pas' {SingleEditorForm},
   FHorario in 'FHorario.pas' {HorarioForm},
   About in 'About.pas',
-  HorColCm in 'HorColCm.pas';
+  HorColCm in 'HorColCm.pas',
+  FHorProf in 'FHorProf.pas' {HorarioProfesorForm};
 
 {$R *.RES}
 
@@ -42,14 +43,10 @@ begin
   SplashForm.Update;
   SplashForm.PBLoad.Max := 5;
   Application.Initialize;
-{$IFDEF FREEWARE}
-  Application.Title := 'Horarios Para Colegio 1.2. Edición estándar.';
-{$ELSE}
   Application.Title := 'Horarios Para Colegio 1.2';
-{$ENDIF}
   Application.HelpFile := '..\HLP\HORCOLEG.HLP';
   Application.CreateForm(TMasterDataModule, MasterDataModule);
-  MasterDataModule.OnProgress := SplashForm.OnProgress;
+  MasterDataModule.OnDataSetProgress := SplashForm.OnDataSetProgress;
   SplashForm.IncPosition;
   Application.CreateForm(TMainDataModule, MainDataModule);
   SplashForm.IncPosition;
@@ -59,10 +56,8 @@ begin
   SplashForm.IncPosition;
   Application.CreateForm(TLogisticForm, LogisticForm);
   SplashForm.IncPosition;
-{$IFNDEF FREEWARE}
   Application.CreateForm(TProgressForm, ProgressForm);
-{$ENDIF}
-  MasterDataModule.OnProgress := nil;
+  MasterDataModule.OnDataSetProgress := nil;
   SplashForm.Hide;
   SplashForm.Free;
   MainDataModule.DbMain.Session.GetPassword;

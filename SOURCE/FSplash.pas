@@ -14,7 +14,6 @@ type
     PBLoad: TProgressBar;
     Label4: TLabel;
     lblTable: TLabel;
-    imgLogo: TImage;
     lblYearLabel: TLabel;
     Label1: TLabel;
     Label2: TLabel;
@@ -27,7 +26,7 @@ type
     FVerInfo: TVersionInfo;
   public
     { Public declarations }
-    procedure OnProgress(DataSet: TDataSet);
+    procedure OnDataSetProgress(DataSet: TDataSet);
     procedure IncPosition;
     property VerInfo: TVersionInfo read FVerInfo;
   end;
@@ -45,7 +44,7 @@ begin
   PBLoad.Position := PBLoad.Position + 1;
 end;
 
-procedure TSplashForm.OnProgress(DataSet: TDataSet);
+procedure TSplashForm.OnDataSetProgress(DataSet: TDataSet);
 begin
   lblTable.Caption := DataSet.Name;
   lblTable.Repaint;
