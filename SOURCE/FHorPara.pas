@@ -30,13 +30,13 @@ type
     QuHorarioParaleloApeNomProfesor: TStringField;
     QuHorarioParaleloNombre: TStringField;
     kbmParalelo: TkbmMemTable;
+    dsParalelo: TDataSource;
+    kbmParaleloNomParaleloId: TStringField;
+    kbmParaleloAbrEspecializacion: TStringField;
+    kbmParaleloAbrNivel: TStringField;
+    kbmParaleloCodParaleloId: TIntegerField;
     kbmParaleloCodNivel: TIntegerField;
     kbmParaleloCodEspecializacion: TIntegerField;
-    kbmParaleloCodParaleloId: TIntegerField;
-    kbmParaleloAbrNivel: TStringField;
-    kbmParaleloAbrEspecializacion: TStringField;
-    kbmParaleloNomParaleloId: TStringField;
-    dsParalelo: TDataSource;
     procedure btn97MostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure IntercambiarPeriodosClick(Sender: TObject);
@@ -163,6 +163,8 @@ end;
 procedure THorarioParaleloForm.FormCreate(Sender: TObject);
 begin
   inherited;
+  kbmParalelo.Open;
+  QuHorarioParalelo.Open;
   CodHorario := SourceDataModule.kbmHorarioCodHorario.Value;
   cbVerParalelo.Items.Clear;
   FillHorarioParalelo;

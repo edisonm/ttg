@@ -271,6 +271,7 @@ type
 
     procedure LoadFromFile(const AFileName: string);
     procedure SaveToFile(const AFileName: string);
+    procedure SaveTxtToFile(const AFileName: string);
     {procedure DBGridGetCellParamsColor(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);}
     function ConfirmOperation: boolean;
@@ -564,6 +565,17 @@ begin
   finally
     StatusBar.Panels[1].Style := psText;
     StatusBar.Panels[2].Text := 'Listo';
+  end;
+end;
+
+procedure TMainForm.SaveTxtToFile(const AFileName: string);
+begin
+  Cursor := crHourGlass;
+  try
+    ConfiguracionForm.FormStorage.SaveFormPlacement;
+    SourceDataModule.SaveToFile(AFileName);
+  finally
+    Cursor := crDefault;
   end;
 end;
 

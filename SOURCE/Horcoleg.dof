@@ -28,7 +28,6 @@ Z=1
 ShowHints=1
 ShowWarnings=1
 UnitAliases=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
-
 [Linker]
 MapFile=0
 OutputObjs=0
@@ -39,7 +38,6 @@ MinStackSize=16384
 MaxStackSize=1048576
 ImageBase=4194304
 ExeDescription=
-
 [Directories]
 OutputDir=..\BIN
 UnitOutputDir=
@@ -50,23 +48,20 @@ Packages=VCL40;VCLX40;VCLDB40;VCLDBX40;VCLSMP40;QRPT40;ibevnt40;nmfast40;NavBtn4
 Conditionals=
 DebugSourceDirs=
 UsePackages=0
-
 [Parameters]
 RunParams=
 HostApplication=
-
 [Language]
 ActiveLang=
 ProjectLang=$0000300A
 RootDir=d:\proyecto\sghc\1.2\source\
-
 [Version Info]
 IncludeVerInfo=1
 AutoIncBuild=1
 MajorVer=1
 MinorVer=2
 Release=1
-Build=0
+Build=1
 Debug=0
 PreRelease=1
 Special=0
@@ -74,11 +69,10 @@ Private=0
 DLL=0
 Locale=12298
 CodePage=1252
-
 [Version Info Keys]
 CompanyName=Edison Mera
 FileDescription=Horarios para Colegio
-FileVersion=1.2.1.0
+FileVersion=1.2.1.1
 InternalName=SGHC
 LegalCopyright=2000 por Edison Mera
 LegalTrademarks=

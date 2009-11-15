@@ -312,8 +312,8 @@ object MainForm: TMainForm
   end
   object MainMenu: TMainMenu
     Images = ImageList
-    Left = 177
-    Top = 65
+    Left = 169
+    Top = 57
     object MIFile: TMenuItem
       Caption = '&Archivo'
       HelpContext = 30
@@ -498,8 +498,8 @@ object MainForm: TMainForm
   end
   object SaveDialog: TSaveDialog
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 121
-    Top = 65
+    Left = 113
+    Top = 57
   end
   object FormStorage: TFormStorage
     Active = False
@@ -510,26 +510,26 @@ object MainForm: TMainForm
       'SaveDialogCSV.FileName'
       'OpenDialog.FileName')
     StoredValues = <>
-    Left = 93
-    Top = 65
+    Left = 85
+    Top = 57
   end
   object OpenDialog: TOpenDialog
     DefaultExt = 'hpc'
     Filter = 'Horario para colegio (*.hpc)|*.hpc'
     Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
-    Left = 65
-    Top = 65
+    Left = 57
+    Top = 57
   end
   object MRUManager: TMRUManager
     IniStorage = FormStorage
     RecentMenu = MIReopen
     OnClick = MRUManagerClick
-    Left = 205
-    Top = 65
+    Left = 197
+    Top = 57
   end
   object ImageList: TImageList
-    Left = 37
-    Top = 65
+    Left = 29
+    Top = 57
     Bitmap = {
       494C01011E002200040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000009000000001002000000000000090
@@ -1728,8 +1728,8 @@ object MainForm: TMainForm
   end
   object ActionList: TActionList
     Images = ImageList
-    Left = 9
-    Top = 65
+    Left = 1
+    Top = 57
     object actContents: TAction
       Category = 'Help'
       Caption = 'Contenido'
@@ -2574,8 +2574,8 @@ object MainForm: TMainForm
     DefaultExt = 'csv'
     Filter = 'CSV delimitado por comas(*.csv)|*.csv'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 149
-    Top = 65
+    Left = 141
+    Top = 57
   end
   object FSProteccion: TFormStorage
     Active = False
@@ -2593,7 +2593,7 @@ object MainForm: TMainForm
       item
         Name = 'LastDate'
       end>
-    Left = 261
-    Top = 65
+    Left = 225
+    Top = 57
   end
 end
