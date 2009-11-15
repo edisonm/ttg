@@ -3,13 +3,13 @@ unit FMain;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  SysConst, ExtCtrls, DB, Menus, ComCtrls, Placemnt, MRUList, ImgList, Buttons,
-  MrgMngr, SpeedBar, RxMenus, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,
-  TB97Ctls, DB97Btn, FSingEdt, QrPrntr, kbmMemTable{, Protect};
-type
-  TMainForm = class(TForm)
-    MainMenu: TMainMenu;
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  SysConst, ExtCtrls, DB, Menus, ComCtrls, Placemnt, MRUList, ImgList, Buttons,
+  MrgMngr, SpeedBar, RxMenus, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,
+  TB97Ctls, DB97Btn, FSingEdt, QrPrntr, kbmMemTable{, Protect};
+type
+  TMainForm = class(TForm)
+    MainMenu: TMainMenu;
     MIProfesor: TMenuItem;
     MIMateria: TMenuItem;
     MIEspecializacion: TMenuItem;
@@ -178,6 +178,8 @@ type
     QuProfesorHorarioDetalleCodDia: TIntegerField;
     QuProfesorHorarioDetalleCodHora: TIntegerField;
     QuProfesorHorarioDetalleNombre: TStringField;
+    actSaveTxt: TAction;
+    MISaveTxt: TMenuItem;
     procedure actExitExecute(Sender: TObject);
     procedure actProfesorExecute(Sender: TObject);
     procedure actMateriaExecute(Sender: TObject);
@@ -229,6 +231,7 @@ type
     procedure FormDblClick(Sender: TObject);
     procedure actCompactarTablasExecute(Sender: TObject);
     procedure actRegistrationInfoExecute(Sender: TObject);
+    procedure actSaveTxtExecute(Sender: TObject);
   private
     { Private declarations }
 {$IFNDEF FREEWARE}
@@ -527,11 +530,34 @@ begin
   StatusBar.Panels[1].Style := psOwnerDraw;
   Position := 0;
   Max := 100;
+  SaveDialog.DefaultExt := 'hpc';
+  SaveDialog.Filter := 'Horario para colegio (*.hpc)|*.hpc';
   try
     SaveDialog.HelpContext := actSave.HelpContext;
     if SaveDialog.Execute then
     begin
       SaveToFile(SaveDialog.FileName);
+      OpenDialog.FileName := SaveDialog.FileName;
+      MRUManager.Add(SaveDialog.FileName, 0);
+    end;
+  finally
+    StatusBar.Panels[1].Style := psText;
+    StatusBar.Panels[2].Text := 'Listo';
+  end;
+end;
+
+procedure TMainForm.actSaveTxtExecute(Sender: TObject);
+begin
+  StatusBar.Panels[1].Style := psOwnerDraw;
+  Position := 0;
+  Max := 100;
+  SaveDialog.DefaultExt := 'txt';
+  SaveDialog.Filter := 'Horario en formato texto (*.txt)|*.txt';
+  try
+    SaveDialog.HelpContext := actSave.HelpContext;
+    if SaveDialog.Execute then
+    begin
+      SaveTxtToFile(SaveDialog.FileName);
       OpenDialog.FileName := SaveDialog.FileName;
       MRUManager.Add(SaveDialog.FileName, 0);
     end;
