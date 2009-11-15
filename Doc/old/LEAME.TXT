@@ -1,0 +1,85 @@
+      --------------------------------------------------------
+         Sistema de Generación de Horarios para Colegio 1.0
+		          Septiembre de l999
+      --------------------------------------------------------
+                 (c) Edición 1999 por Edison Mera
+
+
+Este documento contiene información adicional o de última hora
+que complementa la documentación del SGHC.
+
+----------------------------
+CÓMO UTILIZAR ESTE DOCUMENTO
+----------------------------
+
+Para ver LEAME.TXT en la pantalla del Bloc de notas, maximice la ventana
+del Bloc de notas.
+
+Para imprimir LEAME.TXT, ábralo en el Bloc de notas o en otro procesador
+de textos y, a continuación, utilice el comando Imprimir del menú Archivo.
+
+
+---------
+CONTENIDO
+---------
+
+SI AÚN NO HA INSTALADO SGHC
+VER LOS DATOS DE EJEMPLO
+INICIANDO SGHC
+RECOMPILAR SGHC
+DESINSTALAR SGHC
+PROBLEMAS CONOCIDOS
+CONTACTAR AL AUTOR
+--------
+
+
+SI AÚN NO HA INSTALADO SGHC
+===========================
+
+Para instalar SGHC, simplemente inserte el primer disco en su unidad de disco flexible y ejecute el programa INSTALAR.EXE, a continuación siga las instrucciones que aparecen en pantalla e inserte el resto de discos cuando le sea solicitado.
+
+INICIANDO SGHC
+==============
+
+Cuando inicie SGHC se le solicitará el ingreso de una clave, si usted no ha configurado clave alguna, cancele este diálogo y la ejecución del programa continuará normalmente.
+
+
+VER LOS DATOS DE EJEMPLO
+========================
+
+Podrá ver datos de ejemplo abriendo el archivo DEMO\DEMO199x.DBP desde el menú Archivo|Abrir.
+
+
+RECOMPILAR SGHC
+===============
+Si su distribución de SGHC vino con código fuente, podrá recompilar el SGHC ejecutando el archivo BUILDALL.BAT que se encuentra en la carpeta SRC\PROYECTO\SGHC\1.0\BAT del directorio donde se instaló el SGHC.  
+
+Para recompilar el SGHC usted debe poseer el Borland Delphi 4.03, Microsoft Access 97, Inno Setup Compiler 1.11x disponible en http://www.jordanr.dhs.org/ y opcionalmente el ASPack 1.08.03 que se encuentra en www.enterchtaiwan.com/aspack.htm.
+
+Si usted desea modificar o recompilar la ayuda, necesitará el HelpScribble 4.2.1, disponible en http://www.jgsoft.com.  El archivo BUILDALL.BAT no recompila la ayuda.
+
+En la carpeta SRC\PROYECTO\SGHC\1.0\EXTRAS se encuentran las librerías de terceros que fueron utilizadas en el desarrollo de este sistema, se recomienda encarecidamente instalarlas antes de abrir el proyecto en el Borland Delphi.
+
+Los discos de instalación fueron formateados con ayuda del WinImage 5.0 disponible en www.winimage.com, usando DMF (cluster 2048).
+
+Si se acaba el espacio de entorno, antes de recompilar con BUILDALL.BAT, ejecutar COMMAND.COM /E:4096 para tener un mayor espacio de entorno.
+
+Se asume que el BDE está instalado en el directorio c:\archivos de programa\archivos comunes\borland\bde, y que en este directorio el archivo bdeinst.dll ha sido extraido de bdeinst.cab.  El archivo IDR20009.DLL del BDE puede remplazarse con una versión en español, para que no salgan mensajes en inglés.
+
+DESINSTALAR SGHC
+================
+Para desinstalar SGHC, haga clic en el menú Inicio, escoja Programas | Horarios para Colegio 1.0 | Desinstalación de Horarios para Colegio 1.0 y confirme la operación.
+
+Por seguridad, el código fuente y la base de datos no se desinstalan automáticamente, por lo que si desea eliminar completamente el SGHC las carpetas SRC y DAT deberán borrarse manualmente.
+
+PROBLEMAS CONOCIDOS
+===================
+Año 2000:  En principio el sistema no depende de las fechas, por lo que es casi imposible que surja un problema de "año 2000".  Si en las fechas cortas se muestra el año únicamente con dos dígitos, puede cambiar la configuración en Panel de control | Configuración regional | Fecha, para que se muestre el año con cuatro dígitos.
+
+CONTACTAR AL AUTOR
+==================
+Puede enviar sus sugerencias, observaciones o solicitar mayor información a la siguiente dirección:
+
+Edison Mera Menéndez
+correo electrónico: edmera@yahoo.com
+página web:         http://www.geocites.com/SiliconValley/Grids/3690

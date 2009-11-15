@@ -1,0 +1,37 @@
+1.0 ACUERDO DE LICENCIA DEL PRODUCTO
+
+AVISO AL USUARIO: LEA DETENIDAMENTE EL SIGUIENTE 
+ACUERDO LEGAL. EL USO DEL SOFTWARE PROPORCIONADO 
+CON ESTE ACUERDO (EL "SOFTWARE") CONSTITUYE LA 
+ACEPTACIÓN DE ESTAS CONDICIONES. SI NO ESTÁ DE ACUERDO 
+CON LAS CONDICIONES DE ESTE ACUERDO, ELIMINE 
+INMEDIATAMENTE EL SOFTWARE JUNTO CON TODAS LAS 
+COPIAS DE SU PC. EL USO DE ESTE SOFTWARE POR PARTE 
+DEL USUARIO ESTÁ CONDICIONADO POR LA CONFORMIDAD 
+DEL USUARIO CON LAS CONDICIONES DE ESTE ACUERDO
+
+1. CONCESIÓN DE LICENCIA. El Autor y sus Proveedores le otorgarán un derecho no exclusivo y no transferible para utilizar el SOFTWARE en servidores de archivos conectados a un máximo de PCs de usuarios, o en un máximo de PCs de usuarios que no exceda el número de PCs especificado en el paquete de este producto.  Esta licencia para utilizar el SOFTWARE está condicionado por su conformidad con las condiciones de este acuerdo.  
+
+El usuario acepta que sólo copiará el SOFTWARE en forma impresa o legible por PC, según sea necesario para utilizarlo en conformidad con esta licencia o para copia de seguridad del SOFTWARE. Esta licencia es efectiva hasta que se termine. Puede terminarla en cualquier momento destruyendo el SOFTWARE y todas las copias del SOFTWARE. Además, el Autor tiene la opción de terminarlo si el usuario no cumple con alguna cláusula o condición de este acuerdo. El usuario acepta destruir el SOFTWARE junto con todas sus copias tras dicha terminación del contrato.
+
+2. COPYRIGHT. El SOFTWARE está protegido por las leyes del copyright del Ecuador y disposiciones de tratados internacionales. El usuario acepta que no se le transfiere ningún título de propiedad intelectual del SOFTWARE. Reconoce expresamente que el título y todos los derechos de propiedad del SOFTWARE son propiedad exclusiva del Autor o de sus proveedores, y no adquirirá ningún derecho sobre el SOFTWARE excepto los enunciados expresamente en esta licencia. El usuario acepta que todas las copias del SOFTWARE contendrán los mismos avisos sobre la propiedad que aparecen en el SOFTWARE.  
+
+3. INGENIERÍA INVERSA. El usuario no realizará compilación inversa, no modificará, traducirá ni desmontará el SOFTWARE en todo o en parte.
+
+4. GARANTÍA LIMITADA. El Autor garantiza que el SOFTWARE se ejecutará substancialmente de acuerdo con el material escrito que le acompaña durante un período de treinta (30) días a partir de la fecha de compra. Toda garantía implícita relativa al SOFTWARE está limitada a treinta (30) días.
+
+5. SOLUCIONES AL CLIENTE. Si el SOFTWARE no se ajusta a la garantía limitada de la Sección 4 anterior ("Garantía limitada"), toda la responsabilidad del Autor y sus proveedores para solucionar el problema será, por parte del Autor, (a) corregir el error o (b) ayudarle a evitar el error.  La Garantía limitada queda anulada si los errores del SOFTWARE se deben al uso o aplicación indebidos por parte del usuario. Toda sustitución del SOFTWARE estará en garantía durante el resto del período de Garantía limitada original.
+
+6. NINGUNA OTRA GARANTÍA. EL AUTOR Y SUS PROVEEDORES NO GARANTIZAN QUE EL SOFTWARE ESTÉ LIBRE DE ERRORES. CON LA EXCEPCIÓN DE LA GARANTÍA LIMITADA EXPRESA DE LA SECCIÓN 4 ("GARANTÍA LIMITADA"), EL AUTOR Y SUS PROVEEDORES DECLINAN TODAS LAS DEMÁS GARANTÍAS RESPECTO AL SOFTWARE, YA SEAN EXPRESAS O IMPLÍCITAS, INCLUIDAS PERO NO LIMITADAS A LAS GARANTÍAS IMPLÍCITAS DE COMERCIABILIDAD, ADAPTABILIDAD A UN OBJETIVO PARTICULAR Y NO VIOLACIÓN DE LOS DERECHOS DE TERCEROS.
+
+7. DIVISIBILIDAD DEL CONTRATO. En caso de invalidez de alguna cláusula de esta licencia, las partes acuerdan que tal invalidez no afectará a la validez de las demás disposiciones de esta licencia.
+
+8. RESPONSABILIDADES POR DAÑOS DERIVADOS. EL AUTOR Y SUS PROVEEDORES NO SERÁN RESPONSABLES EN NINGÚN CASO POR LOS DAÑOS DERIVADOS, ESPECIALES, IMPREVISTOS O INDIRECTOS DE NINGÚN TIPO QUE RESULTEN DE LA ENTREGA, EJECUCIÓN O USO DEL SOFTWARE, AUN CUANDO EL AUTOR HAYA SIDO ADVERTIDO DE LA POSIBILIDAD DE DICHO DAÑO.  LA RESPONSABILIDAD DEL AUTOR POR RECLAMACIONES, YA SEA EN CONTRATO, DAÑO LEGAL O ALGUNA OTRA TEORÍA SOBRE RESPONSABILIDAD NO EXCEDERÁ EN NINGÚN CASO EL PRECIO PAGADO POR LA LICENCIA, EN SU CASO.
+
+9. DERECHO APLICABLE. Esta licencia se regirá por las leyes de la República del Ecuador, y para ejecutarse por completo en Ecuador. Queda expresamente declinada la Convención de las Naciones Unidas sobre contratos para la venta internacional de productos. 
+
+10. ACUERDO TOTAL. Éste es un acuerdo total entre el usuario y el Autor, que sustituye cualquier acuerdo o compromiso anterior, ya sea escrito o verbal, relativo al asunto de esta licencia.
+
+Si tiene alguna pregunta respecto a este acuerdo de licencia,
+llame al 923-751
+o escriba a: edmera@yahoo.com. Edison Mera.
