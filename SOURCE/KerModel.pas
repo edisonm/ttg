@@ -180,7 +180,6 @@ type
   TObjetoModeloHorario = class
   private
     FModeloHorario: TModeloHorario;
-    FClaveAleatoria: TDynamicLongintArrayArray;
     FParaleloPeriodoASesion,
       FMateriaHorarioLaborableCant,
       FProfesorHorarioLaborableCant,
@@ -217,8 +216,6 @@ type
     procedure SetClaveAleatoriaInterno(AParalelo, AHorarioLaborable, ADuracion: Smallint;
       AClaveAleatoria: Integer); overload;
 }
-    procedure AleatorizarClave; overload;
-    procedure AleatorizarClave(AParalelo: Smallint); overload;
     function GetMateriaNoDispersa: Integer;
     procedure DoGetMateriaNoDispersa;
     procedure DoGetHoraHuecaDesubicada;
@@ -965,50 +962,68 @@ begin
 end;
 
 procedure CruzarIndividuosPunto(var Uno, Dos: TObjetoModeloHorario; AParalelo:
-  Integer);
+  Smallint);
 var
   s, j, d: Smallint;
   k1, k2, l: Longint;
+  ClaveAleatoria1, ClaveAleatoria2: TDynamicLongintArray;
+  procedure AleatorizarClave(AObjetoModeloHorario: TObjetoModeloHorario;
+    var AClaveAleatoria: TDynamicLongintArray);
+  var
+    j, d, k, l: Smallint;
+    NumberList: array[0..4095] of Longint;
+    p: PSmallintArray;
+    q: PLongintArray;
+  begin
+    with AObjetoModeloHorario.ModeloHorario do
+    begin
+    //Check(AParalelo, 'AleatorizarClaveAntes');
+      Fillcrand32(NumberList, FParaleloASesionCant[AParalelo]);
+      lSort(NumberList, 0, FParaleloASesionCant[AParalelo] - 1);
+      p := @AObjetoModeloHorario.ParaleloPeriodoASesion[AParalelo, 0];
+      q := @AClaveAleatoria[0];
+      j := 0;
+      k := 0;
+      while j < FHorarioLaborableCant do
+      begin
+        d := FSesionADuracion[p[j]];
+        for l := j + d - 1 downto j do
+          q[l] := NumberList[k];
+        Inc(k);
+        Inc(j, d);
+      end;
+    end;
+  end;
 begin
   with Uno.ModeloHorario do
   begin
-    //Uno.Check('UnoCruzarIndividuosPuntoAntes');
-    //Dos.Check('DosCruzarIndividuosPuntoAntes');
+    SetLength(ClaveAleatoria1, FHorarioLaborableCant);
+    SetLength(ClaveAleatoria2, FHorarioLaborableCant);
+    AleatorizarClave(Uno, ClaveAleatoria1);
+    AleatorizarClave(Dos, ClaveAleatoria2);
     SortSmallint(Uno.ParaleloPeriodoASesion[AParalelo],
-      Uno.FClaveAleatoria[AParalelo], 0, FHorarioLaborableCant - 1);
+      ClaveAleatoria1, 0, FHorarioLaborableCant - 1);
     SortSmallint(Dos.ParaleloPeriodoASesion[AParalelo],
-      Dos.FClaveAleatoria[AParalelo], 0, FHorarioLaborableCant - 1);
+      ClaveAleatoria2, 0, FHorarioLaborableCant - 1);
     j := 0;
     while j < FHorarioLaborableCant do
     begin
       s := FMoldeHorarioDetalle[AParalelo, j];
       d := FSesionADuracion[s];
-      //d1 := FSesionADuracion[Uno.FParaleloPeriodoASesion[AParalelo, j]];
-      //d2 := FSesionADuracion[Dos.FParaleloPeriodoASesion[AParalelo, j]];
       if crand32 mod 2 = 0 then
       begin
-        k1 := Uno.FClaveAleatoria[AParalelo, j];
-        k2 := Dos.FClaveAleatoria[AParalelo, j];
+        k1 := ClaveAleatoria1[j];
+        k2 := ClaveAleatoria2[j];
         for l := j + d - 1 downto j do
         begin
-          Uno.FClaveAleatoria[AParalelo, l] := k2;
-          Dos.FClaveAleatoria[AParalelo, l] := k1;
+          ClaveAleatoria1[l] := k2;
+          ClaveAleatoria2[l] := k1;
         end;
       end;
       Inc(j, d);
     end;
-    SortLongint(Uno.FClaveAleatoria[AParalelo],
-      Uno.ParaleloPeriodoASesion[AParalelo], 0, FHorarioLaborableCant - 1);
-    //Dos.Check(AParalelo, 'CruzarIndividuosPuntoDos_1_a');
-    SortLongint(Dos.FClaveAleatoria[AParalelo],
-      Dos.ParaleloPeriodoASesion[AParalelo], 0, FHorarioLaborableCant - 1);
-    //Dos.Check(AParalelo, 'CruzarIndividuosPuntoDos_1_b');
-    //Uno.Check(AParalelo, 'CruzarIndividuosPuntoUno_1');
-    Uno.AleatorizarClave(AParalelo);
-    //Uno.Check(AParalelo, 'CruzarIndividuosPuntoUno_2');
-    //Dos.Check(AParalelo, 'CruzarIndividuosPuntoDos_1');
-    Dos.AleatorizarClave(AParalelo);
-    //Dos.Check(AParalelo, 'CruzarIndividuosPuntoDos_2');
+    SortLongint(ClaveAleatoria1, Uno.ParaleloPeriodoASesion[AParalelo], 0, FHorarioLaborableCant - 1);
+    SortLongint(ClaveAleatoria2, Dos.ParaleloPeriodoASesion[AParalelo], 0, FHorarioLaborableCant - 1);
   end;
 end;
 
@@ -1018,8 +1033,6 @@ var
 begin
   with Uno.ModeloHorario do
   begin
-    //Uno.Check('CruzarIndividuosUnoAntes');
-    //Dos.Check('CruzarIndividuosDosAntes');
     for i := 0 to FParaleloCant - 1 do
     begin
       CruzarIndividuosPunto(Uno, Dos, i);
@@ -1042,7 +1055,6 @@ begin
   FRecalcularValor := True;
   with ModeloHorario do
   begin
-    SetLength(FClaveAleatoria, FParaleloCant, FHorarioLaborableCant);
     SetLength(FParaleloPeriodoASesion, FParaleloCant, FHorarioLaborableCant);
     SetLength(FMateriaHorarioLaborableCant, FMateriaCant,
       FHorarioLaborableCant);
@@ -1069,13 +1081,15 @@ var
   r: Longint;
   p: PSmallintArray;
   q: PLongintArray;
+  ClaveAleatoria: TDynamicLongintArray;
 begin
   with ModeloHorario do
   begin
+    SetLength(ClaveAleatoria, FHorarioLaborableCant);
     for i := 0 to FParaleloCant - 1 do
     begin
       p := @ParaleloPeriodoASesion[i, 0];
-      q := @FClaveAleatoria[i, 0];
+      q := @ClaveAleatoria[0];
       Move(FMoldeHorarioDetalle[i, 0], p[0], FHorarioLaborableCant *
         SizeOf(Smallint));
       j := 0;
@@ -1087,59 +1101,11 @@ begin
           q[l] := r;
         Inc(j, d);
       end;
-(*
-      for j := 0 to FHorarioLaborableCant - 1 do
-      begin
-        m := p[j];
-        if (m < 0) or (k <> m) then
-        begin
-          k := m;
-          d := crand32;
-        end;
-        q[j] := d;
-      end;
-*)
       SortLongint(q^, p^, 0, FHorarioLaborableCant - 1);
     end;
   end;
   Actualizar;
   RecalcularValor := True;
-end;
-
-procedure TObjetoModeloHorario.AleatorizarClave;
-var
-  j: Smallint;
-begin
-  with FModeloHorario do
-    for j := 0 to FParaleloCant - 1 do
-      AleatorizarClave(j);
-end;
-
-procedure TObjetoModeloHorario.AleatorizarClave(AParalelo: Smallint);
-var
-  j, d, k, l: Smallint;
-  NumberList: array[0..4095] of Longint;
-  p: PSmallintArray;
-  q: PLongintArray;
-begin
-  with ModeloHorario do
-  begin
-    //Check(AParalelo, 'AleatorizarClaveAntes');
-    Fillcrand32(NumberList, FParaleloASesionCant[AParalelo]);
-    lSort(NumberList, 0, FParaleloASesionCant[AParalelo] - 1);
-    p := @ParaleloPeriodoASesion[AParalelo, 0];
-    q := @FClaveAleatoria[AParalelo, 0];
-    j := 0;
-    k := 0;
-    while j < FHorarioLaborableCant do
-    begin
-      d := FSesionADuracion[p[j]];
-      for l := j + d - 1 downto j do
-        q[l] := NumberList[k];
-      Inc(k);
-      Inc(j, d);
-    end;
-  end;
 end;
 
 procedure TObjetoModeloHorario.ActualizarMateriaHorarioLaborableCant;
@@ -1276,7 +1242,6 @@ var
     Smallint;
   k, k1: Longint;
   q, r: PSmallintArray;
-  ak: PLongintArray;
   TmpMateriaDiaMinMaxHora: TDynamicSmallintArrayArray;
   TmpMateriaNoDispersa: Integer;
   procedure RealizarMovimiento;
@@ -1285,17 +1250,13 @@ var
   begin
     Move(q[AHorarioLaborable + d], q[AHorarioLaborable + d1], (AHorarioLaborable1 - AHorarioLaborable - d) *
       SizeOf(Smallint));
-    Move(ak[AHorarioLaborable + d], ak[AHorarioLaborable + d1], (AHorarioLaborable1 - AHorarioLaborable - d) *
-      SizeOf(Longint));
     for l := d - 1 downto 0 do
     begin
       q[AHorarioLaborable1 + d1 - d + l] := s;
-      ak[AHorarioLaborable1 + d1 - d + l] := k1;
     end;
     for l := d1 - 1 downto 0 do
     begin
       q[AHorarioLaborable + l] := s1;
-      ak[AHorarioLaborable + l] := k;
     end;
   end;
 var
@@ -1354,9 +1315,6 @@ begin
     end
     else
     begin
-      ak := @FClaveAleatoria[AParalelo, 0];
-      k := ak[AHorarioLaborable];
-      k1 := ak[AHorarioLaborable1];
       for j_ := AHorarioLaborable to AHorarioLaborable1 + d1 - 1 do
       begin
         s_ := q[j_];
@@ -1526,14 +1484,7 @@ begin
         Move(p[n1], b[0], (d1 + 1) * SizeOf(Smallint));
         Move(p[n2], p[n1], (d1 + 1) * SizeOf(Smallint));
         Move(b[0], p[n2], (d1 + 1) * SizeOf(Smallint));
-        Move(FClaveAleatoria[i, n1], b, (d1 + 1) * SizeOf(Longint));
-        Move(FClaveAleatoria[i, n2], FClaveAleatoria[i, n1], (d1 + 1) *
-          SizeOf(Longint));
-        Move(b, FClaveAleatoria[i, n2], (d1 + 1) * SizeOf(Longint));
       end;
-      //Check('MutarDia_1');
-      AleatorizarClave(i);
-      //Check('MutarDia_2');
     end;
   end;
   Actualizar;
@@ -3173,8 +3124,6 @@ begin
   begin
     for i := 0 to FParaleloCant - 1 do
     begin
-      Move(AObjetoModeloHorario.FClaveAleatoria[i, 0], FClaveAleatoria[i, 0],
-        FHorarioLaborableCant * SizeOf(Longint));
       Move(AObjetoModeloHorario.ParaleloPeriodoASesion[i, 0], ParaleloPeriodoASesion[i, 0],
         FHorarioLaborableCant * SizeOf(Smallint));
     end;
@@ -3269,8 +3218,6 @@ begin
     begin
       Stream.Write(ParaleloPeriodoASesion[i, 0], FHorarioLaborableCant *
         SizeOf(Smallint));
-      Stream.Write(FClaveAleatoria[i, 0], FHorarioLaborableCant *
-        SizeOf(Longint));
     end;
 end;
 
@@ -3283,8 +3230,6 @@ begin
     begin
       Stream.Read(ParaleloPeriodoASesion[i, 0], FHorarioLaborableCant *
         SizeOf(Smallint));
-      Stream.Read(FClaveAleatoria[i, 0], FHorarioLaborableCant *
-        SizeOf(Longint));
     end;
   Actualizar;
   FRecalcularValor := True;
@@ -3350,7 +3295,6 @@ var
         FieldSesion := FindField('Sesion') as TIntegerField;
         for i := 0 to FParaleloCant - 1 do
         begin
-          Append;
           k := FNivelACodNivel[FParaleloANivel[i]];
           l := FParaleloIdACodParaleloId[FParaleloAParaleloId[i]];
           m :=
@@ -3458,8 +3402,6 @@ begin
   end;
   Actualizar;
   RecalcularValor := True;
-  AleatorizarClave;
-  //Check('LoadFromDatabase');
 end;
 
 procedure TObjetoModeloHorario.Actualizar;
