@@ -5,7 +5,6 @@ uses
   Dialogs,
   SysUtils,
   FMain in 'FMain.pas' {MainForm},
-  DMain in 'DMain.pas' {MainDataModule: TDataModule},
   DMaster in 'DMaster.PAS' {MasterDataModule: TDataModule},
   KerModel in 'KerModel.pas',
   KerEvolE in 'KerEvolE.pas',
@@ -33,7 +32,10 @@ uses
   FHorario in 'FHorario.pas' {HorarioForm},
   About in 'About.pas',
   HorColCm in 'HorColCm.pas',
-  FHorProf in 'FHorProf.pas' {HorarioProfesorForm};
+  FHorProf in 'FHorProf.pas' {HorarioProfesorForm},
+  DSrcBase in 'DSrcBase.pas' {SourceBaseDataModule: TDataModule},
+  RelUtils in 'RelUtils.pas',
+  DSource in 'DSource.pas' {SourceDataModule: TDataModule};
 
 {$R *.RES}
 
@@ -43,12 +45,11 @@ begin
   SplashForm.Update;
   SplashForm.PBLoad.Max := 5;
   Application.Initialize;
-  Application.Title := 'Horarios Para Colegio 1.2';
+  Application.Title := 'Horarios Para Colegio 1.2.1';
   Application.HelpFile := '..\HLP\HORCOLEG.HLP';
-  Application.CreateForm(TMasterDataModule, MasterDataModule);
-  MasterDataModule.OnDataSetProgress := SplashForm.OnDataSetProgress;
+  Application.CreateForm(TSourceDataModule, SourceDataModule);
   SplashForm.IncPosition;
-  Application.CreateForm(TMainDataModule, MainDataModule);
+  Application.CreateForm(TMasterDataModule, MasterDataModule);
   SplashForm.IncPosition;
   Application.CreateForm(TMainForm, MainForm);
   SplashForm.IncPosition;
@@ -57,10 +58,8 @@ begin
   Application.CreateForm(TLogisticForm, LogisticForm);
   SplashForm.IncPosition;
   Application.CreateForm(TProgressForm, ProgressForm);
-  MasterDataModule.OnDataSetProgress := nil;
   SplashForm.Hide;
   SplashForm.Free;
-  MainDataModule.DbMain.Session.GetPassword;
   Application.Run;
 end.
 

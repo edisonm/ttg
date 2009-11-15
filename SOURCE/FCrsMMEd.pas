@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, Grids, RXGrids, DBGrids, ExtCtrls, DB, Placemnt, DBTables,
+  StdCtrls, Buttons, Grids, RXGrids, DBGrids, ExtCtrls, DB, Placemnt,
   FEditor, TB97Ctls, DB97Btn, TB97, TB97Tlbr;
 
 type
@@ -119,10 +119,7 @@ begin
   if DataSet.IsEmpty then
   begin
     Release;
-    if DataSet is TTable then
-      s := (DataSet as TTable).TableName
-    else
-      s := DataSet.Name;
+    s := DataSet.Name;
     raise Exception.CreateFmt('El Conjunto de datos %s está vacío', [s]);
   end;
 end;
@@ -141,16 +138,16 @@ begin
     FSelDataSet.DisableControls;
   end;
   try
-    FColDataSet.Open;
-    FRowDataSet.Open;
-    FRelDataSet.Open;
+    FColDataSet.First;
+    FRowDataSet.First;
+    FRelDataSet.First;
     FColDataSetRecordCount := FColDataSet.RecordCount;
     FRowDataSetRecordCount := FRowDataSet.RecordCount;
     CheckDataSetEmpty(AColDataSet);
     CheckDataSetEmpty(ARowDataSet);
     if Assigned(FSelDataSet) then
     begin
-      FSelDataSet.Open;
+      FSelDataSet.First;
       FColFieldSel := FSelDataSet.FindField(AColFieldSel);
       FRowFieldSel := FSelDataSet.FindField(ARowFieldSel);
     end;
@@ -256,11 +253,7 @@ end;
 procedure TCrossManyToManyEditorForm.WriteData;
 var
   i, j: Integer;
-  RelDataSetIsDBDataSet: Boolean;
 begin
-  RelDataSetIsDBDataSet := (FRelDataSet is TDBDataSet);
-  if RelDataSetIsDBDataSet then
-    TDBDataSet(FRelDataSet).Database.StartTransaction;
   try
     for i := 0 to FColDataset.RecordCount - 1 do
       for j := 0 to FRowDataset.RecordCount - 1 do
@@ -283,13 +276,9 @@ begin
               DeleteRelRecord(i, j);
           end;
         end;
-    if RelDataSetIsDBDataSet then
-      TDBDataSet(FRelDataSet).Database.Commit;
     FEditing := False;
   except
     FRelDataSet.Cancel;
-    if RelDataSetIsDBDataSet then
-      TDBDataSet(FRelDataSet).Database.Rollback;
     raise;
   end;
 end;

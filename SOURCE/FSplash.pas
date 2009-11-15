@@ -35,8 +35,7 @@ var
   SplashForm: TSplashForm;
 
 implementation
-uses
-  DBTables;
+
 {$R *.DFM}
 
 procedure TSplashForm.IncPosition;

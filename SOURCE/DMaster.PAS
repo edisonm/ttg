@@ -4,224 +4,43 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DB, DBTables, StrHlder, Placemnt, RxQuery, kbmMemTable;
+  DB, StrHlder, Placemnt, kbmMemTable;
 
 type
   TMasterDataModule = class(TDataModule)
-    TbEspecializacion: TTable;
-    DSEspecializacion: TDataSource;
-    TbNivel: TTable;
-    DSNivel: TDataSource;
-    TbAulaTipo: TTable;
-    DSAulaTipo: TDataSource;
-    TbDia: TTable;
-    DSDia: TDataSource;
-    TbProfesorProhibicionTipo: TTable;
-    DSProfesorProhibicionTipo: TDataSource;
-    TbCurso: TTable;
-    DSCurso: TDataSource;
-    TbParaleloId: TTable;
-    DSParaleloId: TDataSource;
-    TbParalelo: TTable;
-    DSParalelo: TDataSource;
-    TbHora: TTable;
-    DSHora: TDataSource;
-    TbMateria: TTable;
-    DSMateria: TDataSource;
-    TbProfesor: TTable;
-    DSProfesor: TDataSource;
-    TbHorarioLaborable: TTable;
-    DSHorarioLaborable: TDataSource;
-    TbAsignatura: TTable;
-    DSAsignatura: TDataSource;
-    TbMateriaProhibicionTipo: TTable;
-    DSMateriaProhibicionTipo: TDataSource;
-    TbHorario: TTable;
-    DSHorario: TDataSource;
-    DSCargaAcademica: TDataSource;
-    TbHorarioDetalle: TTable;
-    DSHorarioDetalle: TDataSource;
-    TbProfesorProhibicion: TTable;
-    DSProfesorProhibicion: TDataSource;
-    TbMateriaProhibicion: TTable;
-    DSMateriaProhibicion: TDataSource;
-    TbHoraCodHora: TIntegerField;
-    TbHoraIntervalo: TStringField;
-    TbHoraNomHora: TStringField;
-    TbHorarioCodHorario: TIntegerField;
-    TbHorarioMomentoInicial: TDateTimeField;
-    TbHorarioMomentoFinal: TDateTimeField;
-    TbHorarioDetalleCodHorario: TIntegerField;
-    TbHorarioDetalleCodNivel: TIntegerField;
-    TbHorarioDetalleCodParaleloId: TIntegerField;
-    TbHorarioDetalleCodDia: TIntegerField;
-    TbHorarioDetalleCodHora: TIntegerField;
-    TbHorarioDetalleSesion: TIntegerField;
-    TbProfesorCodProfesor: TIntegerField;
-    TbProfesorCedProfesor: TStringField;
-    TbProfesorNomProfesor: TStringField;
-    TbProfesorApeProfesor: TStringField;
-    TbProfesorProhibicionCodProfesor: TIntegerField;
-    TbProfesorProhibicionCodDia: TIntegerField;
-    TbProfesorProhibicionCodHora: TIntegerField;
-    TbProfesorProhibicionCodProfProhibicionTipo: TIntegerField;
-    TbCursoCodNivel: TIntegerField;
-    TbCursoCodEspecializacion: TIntegerField;
-    TbHorarioLaborableCodDia: TIntegerField;
-    TbHorarioLaborableCodHora: TIntegerField;
-    TbMateriaProhibicionDia: TIntegerField;
-    TbMateriaProhibicionHora: TIntegerField;
-    TbMateriaProhibicionCodMateProhibicionTipo: TIntegerField;
-    TbCursoAbrNivel: TStringField;
-    TbCursoAbrEspecializacion: TStringField;
-    TbMateriaCodMateria: TIntegerField;
-    TbMateriaNomMateria: TStringField;
-    TbAsignaturaCodMateria: TIntegerField;
-    TbAsignaturaComposicion: TStringField;
-    TbProfesorApeNomProfesor: TStringField;
-    TbCargaAcademica: TTable;
-    TbCargaAcademicaCodMateria: TIntegerField;
-    TbCargaAcademicaCodNivel: TIntegerField;
-    TbCargaAcademicaCodParaleloId: TIntegerField;
-    TbCargaAcademicaCodProfesor: TIntegerField;
-    QuProfesorCarga: TQuery;
-    QuProfesorCargaCodProfesor: TIntegerField;
-    QuProfesorCargaCantidad: TIntegerField;
-    QuProfesorCargaComposicion: TStringField;
     TbTmpProfesorCarga: TkbmMemTable;
     TbTmpProfesorCargaCodProfesor: TIntegerField;
     TbTmpProfesorCargaNomProfesor: TStringField;
     TbTmpProfesorCargaApeProfesor: TStringField;
     TbTmpProfesorCargaCarga: TIntegerField;
-    FormStorage: TFormStorage;
-    TbCargaAcademicaComposicion: TStringField;
-    TbHorarioDetalleCodMateria: TIntegerField;
-    TbCargaAcademicaDuracion: TIntegerField;
-    TbProfesorProhibicionNomProfProhibicionTipo: TStringField;
-    TbMateriaProhibicionNomMateProhibicionTipo: TStringField;
-    TbHorarioDetalleNomMateria: TStringField;
-    StrHolderShowProfesor: TStrHolder;
-    TbHorarioInforme: TMemoField;
-    QuCargaAcademica: TQuery;
-    QuCargaAcademicaCodMateria: TIntegerField;
-    QuCargaAcademicaCodNivel: TIntegerField;
-    QuCargaAcademicaCodParaleloId: TIntegerField;
-    QuCargaAcademicaNomMateria: TStringField;
-    QuCargaAcademicaAbrNivel: TStringField;
-    QuCargaAcademicaNomParaleloId: TStringField;
-    StrHolderShowParalelo: TStrHolder;
-    TbCursoAbrCurso: TStringField;
-    TbCargaAcademicaNomMateria: TStringField;
-    TbCargaAcademicaAbrNivel: TStringField;
-    TbCargaAcademicaNomParaleloId: TStringField;
-    TbCargaAcademicaApeNomProfesor: TStringField;
-    TbProfesor1: TTable;
-    IntegerField6: TIntegerField;
-    StringField8: TStringField;
-    StringField9: TStringField;
-    StringField10: TStringField;
-    StringField11: TStringField;
-    SQLScrDelHorario: TSQLScript;
-    TbMateria1: TTable;
-    TbMateria1CodMateria: TIntegerField;
-    TbMateria1NomMateria: TStringField;
-    TbAsignaturaNomMateria: TStringField;
-    TbAsignaturaAbrNivel: TStringField;
-    QuCargaAcademicaProfesor: TQuery;
-    QuCargaAcademicaProfesorCodMateria: TIntegerField;
-    QuCargaAcademicaProfesorCodNivel: TIntegerField;
-    QuCargaAcademicaProfesorCodParaleloId: TIntegerField;
-    QuCargaAcademicaProfesorNomMateria: TStringField;
-    QuCargaAcademicaProfesorAbrNivel: TStringField;
-    QuCargaAcademicaProfesorNomParaleloId: TStringField;
-    QuCargaAcademicaProfesorCodProfesor: TIntegerField;
-    QuCargaAcademicaProfesorApeNomProfesor: TStringField;
-    TbAsignaturaCodNivel: TIntegerField;
-    TbAsignaturaCodEspecializacion: TIntegerField;
-    TbHorarioTiempo: TTimeField;
-    TbAsignaturaCodAulaTipo: TIntegerField;
-    TbCargaAcademicaCodEspecializacion: TIntegerField;
-    TbCargaAcademicaAbrEspecializacion: TStringField;
-    QuCargaAcademicaProfesorCodEspecializacion: TIntegerField;
-    TbHorarioDetalleCodEspecializacion: TIntegerField;
-    TbAsignaturaAbrEspecializacion: TStringField;
-    TbAsignaturaAbrAulaTipo: TStringField;
-    QuCargaAcademicaCodEspecializacion: TIntegerField;
-    QuCargaAcademicaAbrEspecializacion: TStringField;
-    QuCargaAcademicaProfesorAbrEspecializacion: TStringField;
-    TbEspecializacionCodEspecializacion: TIntegerField;
-    TbEspecializacionNomEspecializacion: TStringField;
-    TbEspecializacionAbrEspecializacion: TStringField;
-    TbAulaTipoCodAulaTipo: TIntegerField;
-    TbAulaTipoNomAulaTipo: TStringField;
-    TbAulaTipoAbrAulaTipo: TStringField;
-    TbAulaTipoCantidad: TIntegerField;
-    TbNivelCodNivel: TIntegerField;
-    TbNivelNomNivel: TStringField;
-    TbNivelAbrNivel: TStringField;
-    TbDiaCodDia: TIntegerField;
-    TbDiaNomDia: TStringField;
-    TbProfesorProhibicionTipoCodProfProhibicionTipo: TIntegerField;
-    TbProfesorProhibicionTipoNomProfProhibicionTipo: TStringField;
-    TbProfesorProhibicionTipoColProfProhibicionTipo: TIntegerField;
-    TbProfesorProhibicionTipoValProfProhibicionTipo: TFloatField;
-    TbParaleloIdCodParaleloId: TIntegerField;
-    TbParaleloIdNomParaleloId: TStringField;
-    TbParaleloCodNivel: TIntegerField;
-    TbParaleloCodEspecializacion: TIntegerField;
-    TbParaleloCodParaleloId: TIntegerField;
-    TbMateriaProhibicionTipoCodMateProhibicionTipo: TIntegerField;
-    TbMateriaProhibicionTipoNomMateProhibicionTipo: TStringField;
-    TbMateriaProhibicionTipoColMateProhibicionTipo: TIntegerField;
-    TbMateriaProhibicionTipoValMateProhibicionTipo: TFloatField;
-    TbMateriaProhibicionCodMateria: TIntegerField;
-    TbParalelo1: TTable;
-    IntegerField1: TIntegerField;
-    IntegerField2: TIntegerField;
-    IntegerField3: TIntegerField;
-    StringField1: TStringField;
-    StringField2: TStringField;
-    StringField3: TStringField;
-    SQLScrDelCurso: TSQLScript;
-    QuProfesorProhibicionCant: TQuery;
+    strHolderShowProfesor: TStrHolder;
+    strHolderShowParalelo: TStrHolder;
+    QuDistributivoProfesor: TkbmMemTable;
+    QuDistributivoProfesorCodMateria: TIntegerField;
+    QuDistributivoProfesorCodNivel: TIntegerField;
+    QuDistributivoProfesorCodParaleloId: TIntegerField;
+    QuDistributivoProfesorNomMateria: TStringField;
+    QuDistributivoProfesorAbrNivel: TStringField;
+    QuDistributivoProfesorNomParaleloId: TStringField;
+    QuDistributivoProfesorCodProfesor: TIntegerField;
+    QuDistributivoProfesorApeNomProfesor: TStringField;
+    QuDistributivoProfesorCodEspecializacion: TIntegerField;
+    QuDistributivoProfesorAbrEspecializacion: TStringField;
+    QuProfesorProhibicionCant: TkbmMemTable;
     QuProfesorProhibicionCantCodProfesor: TIntegerField;
     QuProfesorProhibicionCantCantidad: TIntegerField;
-    QuAulaTipoCarga: TQuery;
-    QuAulaTipoCargaCodAulaTipo: TIntegerField;
-    QuAulaTipoCargaCantidad: TIntegerField;
-    QuAulaTipoCargaComposicion: TStringField;
     TbTmpAulaTipoCarga: TkbmMemTable;
     TbTmpAulaTipoCargaCodAulaTipo: TIntegerField;
     TbTmpAulaTipoCargaAbrAulaTipo: TStringField;
     TbTmpAulaTipoCargaCarga: TIntegerField;
-    SQLScrDelAsignatura: TSQLScript;
-    StrHolderShowAulaTipo: TStrHolder;
-    procedure TbProfesorCalcFields(DataSet: TDataSet);
-    procedure TbCargaAcademicaCalcFields(DataSet: TDataSet);
-    procedure MasterDataModuleCreate(Sender: TObject);
-    procedure MasterDataModuleDestroy(Sender: TObject);
-    procedure TbHorarioBeforeDelete(DataSet: TDataSet);
-    procedure DataSetBeforePost(DataSet: TDataSet);
-    procedure TbCursoCalcFields(DataSet: TDataSet);
-    procedure TbCargaAcademicaBeforeOpen(DataSet: TDataSet);
-    procedure TbAsignaturaBeforePost(DataSet: TDataSet);
-    procedure TbHorarioCalcFields(DataSet: TDataSet);
-    procedure TbCargaAcademicaBeforePost(DataSet: TDataSet);
-    procedure DataSetBeforeClose(DataSet: TDataSet);
-    procedure TbCargaAcademicaAfterInsert(DataSet: TDataSet);
-    procedure TbAsignaturaAfterInsert(DataSet: TDataSet);
-    procedure TbCursoBeforeDelete(DataSet: TDataSet);
-    procedure TbAsignaturaBeforeDelete(DataSet: TDataSet);
+    strHolderShowAulaTipo: TStrHolder;
   private
     { Private declarations }
-    FOnDataSetProgress: TDataSetNotifyEvent;
+    procedure FillProfesorProhibicionCant;
   public
     { Public declarations }
     procedure IntercambiarPeriodos(ACodHorario, ACodNivel, ACodEspecializacion,
       ACodParaleloId, ACodDia1, ACodHora1, ACodDia2, ACodHora2: Integer);
-    procedure ProcessTable(ATable: TTable);
-    property OnDataSetProgress: TDataSetNotifyEvent read FOnDataSetProgress write FOnDataSetProgress;
-    function GetDescription(ATable: TTable): string;
     function GetCargaActual: Integer;
     function PerformAllChecks(AMainStrings, ASubStrings: TStrings;
       AMaxCargaProfesor: Integer): Boolean;
@@ -233,69 +52,80 @@ var
 implementation
 
 uses
-  DMain, SGHCUtls, HorColCm;
+  SGHCUtls, HorColCm, DSource;
 {$R *.DFM}
 
-procedure TMasterDataModule.ProcessTable(ATable: TTable);
+procedure TMasterDataModule.FillProfesorProhibicionCant;
+var
+  CodProfesor, CodProfesor1: Integer;
 begin
-  try
-    ATable.Open
-  except
+  with SourceDataModule, QuProfesorProhibicionCant do
+  begin
+    Close;
+    Open;
+    kbmProfesorProhibicion.IndexFieldNames := 'CodProfesor';
+    kbmProfesorProhibicion.First;
+    CodProfesor := -$7FFFFFFF;
+    while not kbmProfesorProhibicion.Eof do
+    begin
+      CodProfesor1 := kbmProfesorProhibicionCodProfesor.Value;
+      if CodProfesor <> CodProfesor1 then
+      begin
+        Append;
+        with QuProfesorProhibicionCantCantidad do
+          Value := 1;
+        CodProfesor := CodProfesor1;
+      end
+      else
+      begin
+        Edit;
+        with QuProfesorProhibicionCantCantidad do
+          Value := Value + 1;
+      end;
+      Post;
+      kbmProfesorProhibicion.Next;
+    end;
   end;
-  if Assigned(FOnDataSetProgress) then
-    FOnDataSetProgress(ATable)
-end;
-
-procedure TMasterDataModule.TbProfesorCalcFields(DataSet: TDataSet);
-begin
-  with DataSet do
-    FieldValues['ApeNomProfesor'] := FieldValues['ApeProfesor'] + ' ' +
-      FieldValues['NomProfesor'];
-end;
-
-function TMasterDataModule.GetDescription(ATable: TTable): string;
-begin
-  Result :=
-    MainDataModule.sthProperty.Strings.Values[Format('Table[%s].Description',
-    [ATable.TableName])];
 end;
 
 function TMasterDataModule.PerformAllChecks(AMainStrings, ASubStrings:
   TStrings; AMaxCargaProfesor: Integer): Boolean;
 var
   HuboProblemas: Boolean;
-  iHorarioLaborableCant: Integer;
-  procedure ObtenerHorarioLaborableCant;
+  iPeriodoCant: Integer;
+  procedure ObtenerPeriodoCant;
   begin
-    TbHorarioLaborable.Open;
-    iHorarioLaborableCant := TbHorarioLaborable.RecordCount;
+    with SourceDataModule do
+    begin
+      iPeriodoCant := kbmPeriodo.RecordCount;
+    end;
   end;
   procedure ObtenerProfesorCarga;
+  var
+    CodProfesor, CodProfesor1: Integer;
   begin
-    with QuProfesorCarga do
+    with SourceDataModule, kbmDistributivo do
     begin
-      Close;
-      Open;
+      IndexFieldNames := 'CodProfesor';
+      First;
       TbTmpProfesorCarga.Open;
+      CodProfesor := -$7FFFFFFF;
       while not Eof do
       begin
-        if not TbTmpProfesorCarga.Locate('CodProfesor',
-          QuProfesorCargaCodProfesor.Value, []) then
+        CodProfesor1 := kbmDistributivoCodProfesor.Value;
+        if CodProfesor <> CodProfesor1 then
         begin
           TbTmpProfesorCarga.Append;
           TbTmpProfesorCargaCodProfesor.Value :=
-            QuProfesorCargaCodProfesor.Value;
-          if not QuProfesorCargaCantidad.isNull then
-            TbTmpProfesorCargaCarga.Value := QuProfesorCargaCantidad.Value *
-              ComposicionADuracion(QuProfesorCargaComposicion.Value);
+            kbmDistributivoCodProfesor.Value;
+          TbTmpProfesorCargaCarga.Value := ComposicionADuracion(kbmDistributivoComposicion.Value);
+          CodProfesor := CodProfesor1;
         end
         else
         begin
           TbTmpProfesorCarga.Edit;
-          if not QuProfesorCargaCantidad.isNull then
-            with TbTmpProfesorCargaCarga do
-              Value := Value + QuProfesorCargaCantidad.Value *
-                ComposicionADuracion(QuProfesorCargaComposicion.Value);
+          with TbTmpProfesorCargaCarga do
+            Value := Value + ComposicionADuracion(kbmDistributivoComposicion.Value);
         end;
         TbTmpProfesorCarga.Post;
         Next;
@@ -303,31 +133,30 @@ var
     end;
   end;
   procedure ObtenerAulaTipoCarga;
+  var
+    CodAulaTipo, CodAulaTipo1: Integer;
   begin
-    with QuAulaTipoCarga do
+    with SourceDataModule, kbmDistributivo do
     begin
-      Close;
-      Open;
       TbTmpAulaTipoCarga.Open;
+      IndexFieldNames := 'CodAulaTipo';
+      First;
+      CodAulaTipo := -$7FFFFFFF;
       while not Eof do
       begin
-        if not TbTmpAulaTipoCarga.Locate('CodAulaTipo',
-          QuAulaTipoCargaCodAulaTipo.Value, []) then
+        CodAulaTipo1 := kbmDistributivoCodAulaTipo.Value;
+        if CodAulaTipo <> CodAulaTipo1 then
         begin
           TbTmpAulaTipoCarga.Append;
-          TbTmpAulaTipoCargaCodAulaTipo.Value :=
-            QuAulaTipoCargaCodAulaTipo.Value;
-          if not QuAulaTipoCargaCantidad.isNull then
-            TbTmpAulaTipoCargaCarga.Value := QuAulaTipoCargaCantidad.Value *
-              ComposicionADuracion(QuAulaTipoCargaComposicion.Value);
+          TbTmpAulaTipoCargaCodAulaTipo.Value := kbmDistributivoCodAulaTipo.Value;
+          TbTmpAulaTipoCargaCarga.Value := ComposicionADuracion(kbmDistributivoComposicion.Value);
+          CodAulaTipo := CodAulaTipo1;
         end
         else
         begin
           TbTmpAulaTipoCarga.Edit;
-          if not QuAulaTipoCargaCantidad.isNull then
-            with TbTmpAulaTipoCargaCarga do
-              Value := Value + QuAulaTipoCargaCantidad.Value *
-                ComposicionADuracion(QuAulaTipoCargaComposicion.Value);
+          with TbTmpAulaTipoCargaCarga do
+            Value := Value + ComposicionADuracion(kbmDistributivoComposicion.Value);
         end;
         TbTmpAulaTipoCarga.Post;
         Next;
@@ -346,8 +175,7 @@ var
     s := '%s %s; %d';
     with QuProfesorProhibicionCant do
     begin
-      Close;
-      Open;
+      FillProfesorProhibicionCant;
       if not IsEmpty then
       begin
         try
@@ -360,7 +188,7 @@ var
               QuProfesorProhibicionCantCodProfesor.AsInteger, []) then
             begin
               if QuProfesorProhibicionCantCantidad.AsInteger +
-                TbTmpProfesorCargaCarga.AsInteger > iHorarioLaborableCant then
+                TbTmpProfesorCargaCarga.AsInteger > iPeriodoCant then
               begin
                 if not HuboProblemasInterno then
                 begin
@@ -455,14 +283,13 @@ var
     s: string;
     bAulaTipoActive, HuboProblemasInterno: Boolean;
   begin
-    with TbTmpAulaTipoCarga do
+    with SourceDataModule, TbTmpAulaTipoCarga do
       if not IsEmpty then
       begin
         HuboProblemasInterno := False;
-        bAulaTipoActive := TbAulaTipo.Active;
-        TbAulaTipo.Open;
+        bAulaTipoActive := kbmAulaTipo.Active;
         try
-          TbAulaTipo.First;
+          kbmAulaTipo.First;
           First;
           s := '%s; %d; %d';
           ASubStrings.Add('Tipos de aulas sin problemas...');
@@ -470,9 +297,9 @@ var
           ASubStrings.Add('AulaTipo; Horas disponibles; Carga');
           while not Eof do
           begin
-            if TbAulaTipo.Locate('CodAulaTipo', TbTmpAulaTipoCargaCodAulaTipo.AsInteger, []) then
+            if kbmAulaTipo.Locate('CodAulaTipo', TbTmpAulaTipoCargaCodAulaTipo.AsInteger, []) then
             begin
-              c := iHorarioLaborableCant * TbAulaTipoCantidad.AsInteger;
+              c := iPeriodoCant * kbmAulaTipoCantidad.AsInteger;
               if TbTmpAulaTipoCargaCarga.Value > c then
               begin
                 if not HuboProblemasInterno then
@@ -495,7 +322,7 @@ var
             Next;
           end;
         finally
-          TbAulaTipo.Active := bAulaTipoActive;
+          kbmAulaTipo.Active := bAulaTipoActive;
         end;
         if HuboProblemas then
         begin
@@ -513,56 +340,58 @@ var
   var
     t, vMainMin, vMainMax, vSubMin, vSubMax: Integer;
     s: string;
-    bActive, bAsignaturaActive, bHorarioLaborableActive,
-      HuboProblemasInterno: Boolean;
+    HuboProblemasInterno: Boolean;
   begin
-    with TbCurso do
+    with SourceDataModule, kbmParalelo do
     begin
-      s := '%s %s; %d';
-      bActive := Active;
-      bAsignaturaActive := TbAsignatura.Active;
-      bHorarioLaborableActive := TbHorarioLaborable.Active;
+      s := '%s %s %s; %d';
       HuboProblemasInterno := False;
       try
         Open;
-        TbAsignatura.Open;
-        TbHorarioLaborable.Open;
+        kbmDistributivo.First;
+        kbmPeriodo.First;
         First;
         ASubStrings.Add('Carga Horaria de paralelos sin problemas...');
         vSubMin := ASubStrings.Count;
-        ASubStrings.Add('Curso; Carga');
+        ASubStrings.Add('Paralelo; Carga');
         while not Eof do
         begin
-          TbAsignatura.Filter := Format('CodNivel=%d and CodEspecializacion=%d',
-            [TbCursoCodNivel.Value, TbCursoCodEspecializacion.Value]);
-          TbAsignatura.Filtered := true;
-          TbAsignatura.First;
+          kbmDistributivo.Filter :=
+            Format('CodNivel=%d and CodEspecializacion=%d and CodParaleloId=%d', [
+            kbmParaleloCodNivel.Value,
+              kbmParaleloCodEspecializacion.Value,
+              kbmParaleloCodParaleloId.Value]);
+          kbmDistributivo.Filtered := true;
+          kbmDistributivo.First;
           t := 0;
           try
-            while not TbAsignatura.Eof do
+            while not kbmDistributivo.Eof do
             begin
-              Inc(t, ComposicionADuracion(TbAsignaturaComposicion.Value));
-              TbAsignatura.Next;
+              Inc(t, ComposicionADuracion(kbmDistributivoComposicion.Value));
+              kbmDistributivo.Next;
             end;
-            if (t <= 0) or (t > TbHorarioLaborable.RecordCount) then
+            if (t <= 0) or (t > kbmPeriodo.RecordCount) then
             begin
               if not HuboProblemasInterno then
               begin
                 AMainStrings.Add('Carga Horaria de paralelos con problemas...');
                 vMainMin := AMainStrings.Count;
-                AMainStrings.Add('Curso; Carga');
+                AMainStrings.Add('Paralelo; Carga');
               end;
-              AMainStrings.Add(Format(s, [TbCursoAbrNivel.Value,
-                TbCursoAbrEspecializacion.Value, t]));
+              AMainStrings.Add(Format(s, [kbmParaleloAbrNivel.Value,
+                kbmParaleloAbrEspecializacion.Value,
+                kbmParaleloNomParaleloId.Value, t]));
               HuboProblemas := True;
               HuboProblemasInterno := True;
             end
             else
-              ASubStrings.Add(Format(s, [TbCursoAbrNivel.Value,
-                TbCursoAbrEspecializacion.Value, t]));
+              ASubStrings.Add(Format(s, [kbmParaleloAbrNivel.Value,
+                kbmParaleloAbrEspecializacion.Value,
+                kbmParaleloNomParaleloId.Value, t]));
           except
-            ASubStrings.Add(Format('Problemas: Curso %s; Materia %s',
-              [TbCursoAbrCurso.AsString, TbAsignaturaNomMateria.AsString]));
+            ASubStrings.Add(Format('Problemas: %s %s %s, Materia %s',
+              [kbmParaleloAbrNivel.AsString, kbmParaleloAbrEspecializacion.AsString,
+              kbmParaleloNomParaleloId.AsString, kbmDistributivoNomMateria.AsString]));
             HuboProblemas := True;
           end;
           Next;
@@ -577,53 +406,10 @@ var
         EqualSpaced(ASubStrings, vSubMin, vSubMax, ';');
         ASubStrings.Add('');
       finally
-        TbAsignatura.Filter := '';
-        TbAsignatura.Filtered := false;
+        kbmDistributivo.Filter := '';
+        kbmDistributivo.Filtered := false;
         First;
-        TbAsignatura.First;
-        TbHorarioLaborable.Active := bHorarioLaborableActive;
-        TbAsignatura.Active := bAsignaturaActive;
-        Active := bActive;
-      end;
-    end;
-  end;
-  procedure CheckCargaAcademica;
-  begin
-    with QuCargaAcademica do
-    begin
-      Close;
-      Open;
-      try
-        if not IsEmpty then
-        begin
-          AMainStrings.Add('Carga Academica de Materias no asignadas...');
-          LoadStringsFromDataSet(AMainStrings, QuCargaAcademica,
-            'NomMateria;AbrNivel;AbrEspecializacion;NomParaleloId', true, true);
-          AMainStrings.Add('');
-          HuboProblemas := True;
-        end;
-      finally
-        Close;
-      end;
-    end;
-  end;
-  procedure CheckCargaAcademicaProfesor;
-  begin
-    with QuCargaAcademicaProfesor do
-    begin
-      Close;
-      Open;
-      try
-        if not IsEmpty then
-        begin
-          AMainStrings.Add('Carga Academica de Profesores no relacionadas con Asignaturas...');
-          LoadStringsFromDataSet(AMainStrings, QuCargaAcademicaProfesor,
-            'NomMateria;AbrNivel;AbrEspecializacion;NomParaleloId;ApeNomProfesor', true, true);
-          AMainStrings.Add('');
-          HuboProblemas := True;
-        end;
-      finally
-        Close;
+        kbmDistributivo.First;
       end;
     end;
   end;
@@ -634,64 +420,20 @@ begin
   ASubStrings.BeginUpdate;
   HuboProblemas := False;
   try
-    ObtenerHorarioLaborableCant;
+    ObtenerPeriodoCant;
     ObtenerProfesorCarga;
     ObtenerAulaTipoCarga;
     CheckProfesorCarga;
     CheckProfesorProhibicionCant;
     CheckAulaTipoCarga;
     CheckCursoCarga;
-    CheckCargaAcademica;
-    CheckCargaAcademicaProfesor;
   finally
     AMainStrings.EndUpdate;
     ASubStrings.EndUpdate;
     TbTmpProfesorCarga.Close;
-    QuProfesorCarga.Close;
     TbTmpAulaTipoCarga.Close;
-    QuAulaTipoCarga.Close;
     Result := HuboProblemas;
   end;
-end;
-
-procedure TMasterDataModule.TbCargaAcademicaBeforePost(DataSet: TDataSet);
-begin
-  if VarIsNull(DataSet['Composicion']) then
-    raise Exception.Create('Materia no asignada a este Paralelo');
-  TbCargaAcademicaCodMateria.DefaultExpression :=
-    TbCargaAcademicaCodMateria.AsString;
-  TbCargaAcademicaCodNivel.DefaultExpression :=
-    TbCargaAcademicaCodNivel.AsString;
-  TbCargaAcademicaCodEspecializacion.DefaultExpression :=
-    TbCargaAcademicaCodEspecializacion.AsString;
-  TbCargaAcademicaCodParaleloId.DefaultExpression :=
-    TbCargaAcademicaCodParaleloId.AsString;
-end;
-
-procedure TMasterDataModule.TbCargaAcademicaCalcFields(DataSet: TDataSet);
-var
-  v: Variant;
-begin
-  try
-    v := TbAsignatura.Lookup('CodMateria;CodNivel;CodEspecializacion',
-      VarArrayOf([TbCargaAcademicaCodMateria.AsInteger,
-      TbCargaAcademicaCodNivel.AsInteger,
-        TbCargaAcademicaCodEspecializacion.AsInteger]),
-        'Composicion');
-    DataSet['Composicion'] := v;
-    DataSet['Duracion'] := ComposicionADuracion(VarToStr(v));
-  except
-  end;
-end;
-
-procedure TMasterDataModule.MasterDataModuleCreate(Sender: TObject);
-begin
-  FormStorage.RestoreFormPlacement;
-end;
-
-procedure TMasterDataModule.MasterDataModuleDestroy(Sender: TObject);
-begin
-  FormStorage.SaveFormPlacement;
 end;
 
 function TMasterDataModule.GetCargaActual: Integer;
@@ -699,7 +441,7 @@ var
   VBookmark: TBookmark;
   c: Integer;
 begin
-  with TbCargaAcademica do
+  with SourceDataModule, kbmDistributivo do
   begin
     VBookmark := GetBookmark;
     DisableControls;
@@ -708,7 +450,7 @@ begin
       c := 0;
       while not Eof do
       begin
-        Inc(c, ComposicionADuracion(TbCargaAcademicaComposicion.Value));
+        Inc(c, ComposicionADuracion(kbmDistributivoComposicion.Value));
         Next;
       end;
       Result := c;
@@ -719,60 +461,6 @@ begin
   end;
 end;
 
-procedure TMasterDataModule.TbHorarioBeforeDelete(DataSet: TDataSet);
-begin
-  SQLScrDelHorario.ParamByName('CodHorario').AsInteger :=
-    TbHorarioCodHorario.AsInteger;
-  SQLScrDelHorario.ExecSQL;
-end;
-
-procedure TMasterDataModule.DataSetBeforePost(DataSet: TDataSet);
-begin
-  if (DataSet.State in dsEditModes) and DataSet.Fields[0].IsNull
-    then DataSet.Fields[0].Value := GetFreeCode(DataSet as TTable,
-      DataSet.Fields[0].FieldName);
-end;
-
-procedure TMasterDataModule.TbCursoCalcFields(DataSet: TDataSet);
-begin
-  DataSet['AbrCurso'] := DataSet['AbrNivel'] + ' ' +
-    DataSet['AbrEspecializacion'];
-end;
-
-procedure TMasterDataModule.TbCargaAcademicaBeforeOpen(DataSet: TDataSet);
-begin
-  TbParalelo.Open;
-  TbAsignatura.Open;
-end;
-
-procedure TMasterDataModule.TbAsignaturaBeforePost(DataSet: TDataSet);
-var
-  s: string;
-begin
-  s := TbAsignaturaComposicion.Value;
-  if ComposicionADuracion(s) <= 0 then
-    raise Exception.CreateFmt('Composición no válida: "%s"', [s]);
-  TbAsignaturaCodMateria.DefaultExpression :=
-    TbAsignaturaCodMateria.AsString;
-  TbAsignaturaCodNivel.DefaultExpression :=
-    TbAsignaturaCodNivel.AsString;
-  TbAsignaturaCodEspecializacion.DefaultExpression :=
-    TbAsignaturaCodEspecializacion.AsString;
-  TbAsignaturaCodAulaTipo.DefaultExpression :=
-    TbAsignaturaCodAulaTipo.AsString;
-end;
-
-procedure TMasterDataModule.TbHorarioCalcFields(DataSet: TDataSet);
-begin
-  TbHorarioTiempo.Value := TbHorarioMomentoFinal.Value -
-    TbHorarioMomentoInicial.Value;
-end;
-
-procedure TMasterDataModule.DataSetBeforeClose(DataSet: TDataSet);
-begin
-  (DataSet as TBDEDataSet).FlushBuffers;
-end;
-
 procedure TMasterDataModule.IntercambiarPeriodos(ACodHorario, ACodNivel,
   ACodEspecializacion, ACodParaleloId, ACodDia1, ACodHora1, ACodDia2,
   ACodHora2: Integer);
@@ -781,93 +469,61 @@ var
   Bookmark1, Bookmark2: TBookmark;
   iCodMateria1, iSesion1, iCodMateria2, iSesion2: Integer;
 begin
-  Locate1 := TbHorarioDetalle.Locate(
-    'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora',
-    VarArrayOf([ACodHorario, ACodNivel, ACodEspecializacion, ACodParaleloId,
-    ACodDia1, ACodHora1]), []);
-  Bookmark1 := TbHorarioDetalle.GetBookmark;
-  try
-    Locate2 := TbHorarioDetalle.Locate(
+  with SourceDataModule do
+  begin
+    Locate1 := kbmHorarioDetalle.Locate(
       'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora',
       VarArrayOf([ACodHorario, ACodNivel, ACodEspecializacion, ACodParaleloId,
-      ACodDia2, ACodHora2]), []);
-    Bookmark2 := TbHorarioDetalle.GetBookmark;
+      ACodDia1, ACodHora1]), []);
+    Bookmark1 := kbmHorarioDetalle.GetBookmark;
     try
-      if Locate1 and Locate2 then
-      begin
-        TbHorarioDetalle.GotoBookmark(Bookmark1);
-        iCodMateria1 := TbHorarioDetalleCodMateria.Value;
-        iSesion1 := TbHorarioDetalleSesion.Value;
-        TbHorarioDetalle.GotoBookmark(Bookmark2);
-        iCodMateria2 := TbHorarioDetalleCodMateria.Value;
-        iSesion2 := TbHorarioDetalleSesion.Value;
-        TbHorarioDetalle.Edit;
-        TbHorarioDetalleCodMateria.Value := iCodMateria1;
-        TbHorarioDetalleSesion.Value := iSesion1;
-        TbHorarioDetalle.Post;
-        TbHorarioDetalle.GotoBookmark(Bookmark1);
-        TbHorarioDetalle.Edit;
-        TbHorarioDetalleCodMateria.Value := iCodMateria2;
-        TbHorarioDetalleSesion.Value := iSesion2;
-        TbHorarioDetalle.Post;
-      end
-      else if Locate1 then
-      begin
-        TbHorarioDetalle.GotoBookmark(Bookmark1);
-        TbHorarioDetalle.Edit;
-        TbHorarioDetalleCodDia.Value := ACodDia2;
-        TbHorarioDetalleCodHora.Value := ACodHora2;
-        TbHorarioDetalle.Post;
-      end
-      else if Locate2 then
-      begin
-        TbHorarioDetalle.GotoBookmark(Bookmark1);
-        TbHorarioDetalle.Edit;
-        TbHorarioDetalleCodDia.Value := ACodDia1;
-        TbHorarioDetalleCodHora.Value := ACodHora1;
-        TbHorarioDetalle.Post;
+      Locate2 := kbmHorarioDetalle.Locate(
+        'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora',
+        VarArrayOf([ACodHorario, ACodNivel, ACodEspecializacion, ACodParaleloId,
+        ACodDia2, ACodHora2]), []);
+      Bookmark2 := kbmHorarioDetalle.GetBookmark;
+      try
+        if Locate1 and Locate2 then
+        begin
+          kbmHorarioDetalle.GotoBookmark(Bookmark1);
+          iCodMateria1 := kbmHorarioDetalleCodMateria.Value;
+          iSesion1 := kbmHorarioDetalleSesion.Value;
+          kbmHorarioDetalle.GotoBookmark(Bookmark2);
+          iCodMateria2 := kbmHorarioDetalleCodMateria.Value;
+          iSesion2 := kbmHorarioDetalleSesion.Value;
+          kbmHorarioDetalle.Edit;
+          kbmHorarioDetalleCodMateria.Value := iCodMateria1;
+          kbmHorarioDetalleSesion.Value := iSesion1;
+          kbmHorarioDetalle.Post;
+          kbmHorarioDetalle.GotoBookmark(Bookmark1);
+          kbmHorarioDetalle.Edit;
+          kbmHorarioDetalleCodMateria.Value := iCodMateria2;
+          kbmHorarioDetalleSesion.Value := iSesion2;
+          kbmHorarioDetalle.Post;
+        end
+        else if Locate1 then
+        begin
+          kbmHorarioDetalle.GotoBookmark(Bookmark1);
+          kbmHorarioDetalle.Edit;
+          kbmHorarioDetalleCodDia.Value := ACodDia2;
+          kbmHorarioDetalleCodHora.Value := ACodHora2;
+          kbmHorarioDetalle.Post;
+        end
+        else if Locate2 then
+        begin
+          kbmHorarioDetalle.GotoBookmark(Bookmark1);
+          kbmHorarioDetalle.Edit;
+          kbmHorarioDetalleCodDia.Value := ACodDia1;
+          kbmHorarioDetalleCodHora.Value := ACodHora1;
+          kbmHorarioDetalle.Post;
+        end;
+      finally
+        kbmHorarioDetalle.FreeBookmark(Bookmark2);
       end;
     finally
-      TbHorarioDetalle.FreeBookmark(Bookmark2);
+      kbmHorarioDetalle.FreeBookmark(Bookmark1);
     end;
-  finally
-    TbHorarioDetalle.FreeBookmark(Bookmark1);
   end;
-end;
-
-procedure TMasterDataModule.TbCargaAcademicaAfterInsert(DataSet: TDataSet);
-begin
-  TbCargaAcademicaCodMateria.AsString :=
-    TbCargaAcademicaCodMateria.DefaultExpression;
-  TbCargaAcademicaCodNivel.AsString :=
-    TbCargaAcademicaCodNivel.DefaultExpression;
-  TbCargaAcademicaCodEspecializacion.AsString :=
-    TbCargaAcademicaCodEspecializacion.DefaultExpression;
-  TbCargaAcademicaCodParaleloId.AsString :=
-    TbCargaAcademicaCodParaleloId.DefaultExpression;
-end;
-
-procedure TMasterDataModule.TbAsignaturaAfterInsert(DataSet: TDataSet);
-begin
-  TbAsignaturaCodMateria.AsString := TbAsignaturaCodMateria.DefaultExpression;
-  TbAsignaturaCodNivel.AsString := TbAsignaturaCodNivel.DefaultExpression;
-  TbAsignaturaCodEspecializacion.AsString := TbAsignaturaCodEspecializacion.DefaultExpression;
-  TbAsignaturaCodAulaTipo.AsString := TbAsignaturaCodAulaTipo.DefaultExpression;
-end;
-
-procedure TMasterDataModule.TbCursoBeforeDelete(DataSet: TDataSet);
-begin
-  SQLScrDelCurso.ParamByName('CodNivel').AsInteger := TbCursoCodNivel.AsInteger;
-  SQLScrDelCurso.ParamByName('CodEspecializacion').AsInteger := TbCursoCodEspecializacion.AsInteger;
-  SQLScrDelCurso.ExecSQL;
-end;
-
-procedure TMasterDataModule.TbAsignaturaBeforeDelete(DataSet: TDataSet);
-begin
-  SQLScrDelAsignatura.ParamByName('CodMateria').AsInteger := TbAsignaturaCodMateria.AsInteger;
-  SQLScrDelAsignatura.ParamByName('CodNivel').AsInteger := TbAsignaturaCodNivel.AsInteger;
-  SQLScrDelAsignatura.ParamByName('CodEspecializacion').AsInteger := TbAsignaturaCodEspecializacion.AsInteger;
-  SQLScrDelAsignatura.ExecSQL;
 end;
 
 end.

@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons,
   DBBBtn, DBCtrls, ExtCtrls, RXCtrls, RXDBCtrl, TB97Tlbr, TB97, TB97Ctls,
-  DB97Btn, DBTables, Printers, RXSplit, CDBFmlry, DBFmlry;
+  DB97Btn, Printers, RXSplit, CDBFmlry, DBFmlry;
 
 type
   TMateriaForm = class(TSingleEditorForm)
@@ -24,43 +24,44 @@ var
 
 implementation
 uses
-  DMaster, FCrsMMER, FCrsMMEd, SGHCUtls, FConfig, QMaDeRep, QSingRep;
+  DMaster, FCrsMMER, FCrsMMEd, SGHCUtls, FConfig, QMaDeRep, QSingRep,
+  DSource;
 {$R *.DFM}
 
 procedure TMateriaForm.btn97MateriaProhibicionClick(Sender: TObject);
 begin
   inherited;
-  with MasterDataModule, TCrossManyToManyEditorRForm.Create(Self) do
+  with SourceDataModule, TCrossManyToManyEditorRForm.Create(Self) do
   begin
     with FormStorage do
     begin
-      IniSection := IniSection + '\MMEdR' + TbMateriaProhibicion.TableName;
+      IniSection := IniSection + '\MMEdR' + kbmMateriaProhibicion.Name;
       Active := True;
       RestoreFormPlacement;
     end;
-    Caption := Format('%s %s - Editando %s', [TbMateria.TableName,
-      TbMateriaNomMateria.Value, GetDescription(TbMateriaProhibicion)]);
+    Caption := Format('%s %s - Editando %s', [SourceDataModule.Name[kbmMateria],
+      kbmMateriaNomMateria.Value, Description[kbmMateriaProhibicion]]);
     RxDrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
-      [GetDescription(TbMateriaProhibicion), GetDescription(TbDia),
-      GetDescription(TbHora)]);
+      [Description[kbmMateriaProhibicion], Description[kbmDia],
+      Description[kbmHora]]);
     ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda',
-      [GetDescription(TbMateriaProhibicionTipo),
-      GetDescription(TbMateriaProhibicionTipo)]);
-    ShowEditor(TbDia, TbHora, TbMateriaProhibicionTipo, TbMateriaProhibicion,
-      TbHorarioLaborable, 'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora',
+      [Description[kbmMateriaProhibicionTipo],
+      Description[kbmMateriaProhibicionTipo]]);
+    ShowEditor(kbmDia, kbmHora, kbmMateriaProhibicionTipo, kbmMateriaProhibicion,
+      kbmPeriodo, 'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora',
       'NomHora', 'CodHora', 'CodHora', 'CodMateProhibicionTipo',
       'NomMateProhibicionTipo', 'ColMateProhibicionTipo',
       'CodMateProhibicionTipo');
-    Tag := TbMateriaCodMateria.Value;
+    Tag := kbmMateriaCodMateria.Value;
     OnActivate := FormActivate;
   end;
 end;
 
 procedure TMateriaForm.FormActivate(Sender: TObject);
 begin
-  with MasterDataModule do
+  with SourceDataModule do
   begin
-    TbMateria.Locate('CodMateria', (Sender as TCustomForm).Tag, []);
+    kbmMateria.Locate('CodMateria', (Sender as TCustomForm).Tag, []);
   end;
 end;
 

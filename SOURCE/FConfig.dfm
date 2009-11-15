@@ -530,7 +530,7 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 176
         Width = 233
         Height = 73
-        DataSource = MasterDataModule.DSMateriaProhibicionTipo
+        DataSource = SourceDataModule.dsMateriaProhibicionTipo
         TabOrder = 6
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -538,29 +538,13 @@ object ConfiguracionForm: TConfiguracionForm
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
         OnGetCellParams = RxDBGridGetCellParams
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'NomMateProhibicionTipo'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ColMateProhibicionTipo'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ValMateProhibicionTipo'
-            Visible = True
-          end>
       end
       object RxDBGrid2: TRxDBGrid
         Left = 8
         Top = 280
         Width = 233
         Height = 97
-        DataSource = MasterDataModule.DSProfesorProhibicionTipo
+        DataSource = SourceDataModule.dsProfesorProhibicionTipo
         TabOrder = 7
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -568,22 +552,6 @@ object ConfiguracionForm: TConfiguracionForm
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
         OnGetCellParams = RxDBGridGetCellParams
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'NomProfProhibicionTipo'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ColProfProhibicionTipo'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ValProfProhibicionTipo'
-            Visible = True
-          end>
       end
       object creProfesorFraccionamiento: TCurrencyEdit
         Left = 152
@@ -603,7 +571,7 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 81
         Height = 21
         DataField = 'NomMateProhibicionTipo'
-        DataSource = MasterDataModule.DSMateriaProhibicionTipo
+        DataSource = SourceDataModule.dsMateriaProhibicionTipo
         TabOrder = 8
       end
       object dbcColMateProhibicionTipo: TDBColorComboBox
@@ -612,7 +580,7 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 81
         Height = 22
         TabOrder = 9
-        DataSource = MasterDataModule.DSMateriaProhibicionTipo
+        DataSource = SourceDataModule.dsMateriaProhibicionTipo
         ReadOnly = False
         DataField = 'ColMateProhibicionTipo'
       end
@@ -622,7 +590,7 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 81
         Height = 21
         DataField = 'ValMateProhibicionTipo'
-        DataSource = MasterDataModule.DSMateriaProhibicionTipo
+        DataSource = SourceDataModule.dsMateriaProhibicionTipo
         TabOrder = 10
       end
       object dbeNomProfProhibicionTipo: TDBEdit
@@ -631,7 +599,7 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 81
         Height = 21
         DataField = 'NomProfProhibicionTipo'
-        DataSource = MasterDataModule.DSProfesorProhibicionTipo
+        DataSource = SourceDataModule.dsProfesorProhibicionTipo
         TabOrder = 11
       end
       object dbcColProfProhibicionTipo: TDBColorComboBox
@@ -640,7 +608,7 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 81
         Height = 22
         TabOrder = 12
-        DataSource = MasterDataModule.DSProfesorProhibicionTipo
+        DataSource = SourceDataModule.dsProfesorProhibicionTipo
         ReadOnly = False
         DataField = 'ColProfProhibicionTipo'
       end
@@ -650,7 +618,7 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 81
         Height = 21
         DataField = 'ValProfProhibicionTipo'
-        DataSource = MasterDataModule.DSProfesorProhibicionTipo
+        DataSource = SourceDataModule.dsProfesorProhibicionTipo
         TabOrder = 13
       end
     end
@@ -813,7 +781,7 @@ object ConfiguracionForm: TConfiguracionForm
   end
   object FormStorage: TFormStorage
     Active = False
-    IniFileName = '..\DAT\CONFIG.INI'
+    IniFileName = 'CONFIG.INI'
     IniSection = 'CONFIG'
     Options = []
     StoredProps.Strings = (

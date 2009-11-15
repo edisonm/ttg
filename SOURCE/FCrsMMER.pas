@@ -74,7 +74,7 @@ begin
   FLstDataSet := ALstDataSet;
   FLstDataSet.DisableControls;
   try
-    FLstDataSet.Open;
+    FLstDataSet.First;
     CheckDataSetEmpty(FLstDataSet);
     FLstFieldKey := ALstDataSet.FindField(ALstFieldKey);
     FLstFieldName := ALstDataSet.FindField(ALstFieldName);

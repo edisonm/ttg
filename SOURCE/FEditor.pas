@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, Mask, DBCtrls, Grids, DBGrids, DBTables, Buttons,
+  Db, StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons,
   ExtCtrls, DBBBtn, Placemnt, DBIndex, ComCtrls, RXCtrls, RXDBCtrl, TB97,
   TB97Tlbr, TB97Ctls, DB97Btn, RXSplit, CDBFmlry, DBFmlry;
 
@@ -21,7 +21,6 @@ type
     tb97Show: TToolbar97;
     btn97Show: TToolbarButton97;
     Panel1: TPanel;
-    procedure btn97CloseClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
@@ -37,11 +36,6 @@ implementation
 uses
   QSingRep, Printers;
 {$R *.DFM}
-
-procedure TEditorForm.btn97CloseClick(Sender: TObject);
-begin
-  Close;
-end;
 
 procedure TEditorForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin

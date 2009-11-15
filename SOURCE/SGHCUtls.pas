@@ -3,21 +3,20 @@ unit SGHCUtls;
 interface
 
 uses
-  Classes, Forms, Db, DbTables, FCrsMMEd, FCrsMMER, FSingEdt, FMasDeEd;
+  Classes, Forms, Db, FCrsMMEd, FCrsMMER, FSingEdt, FMasDeEd, DSource;
 
 procedure MyMasterDetailShowEditor(MasterDetailEditorForm:
-  TMasterDetailEditorForm;
-  DataSet, DataSetDetail: TDataSet; const SuperTitle: string; DestroyEvent:
+  TMasterDetailEditorForm; DataSet, DataSetDetail: TDataSet; const SuperTitle: string; DestroyEvent:
   TNotifyEvent);
 procedure MySingleShowEditor(FSingleEditor: TSingleEditorForm; DataSet:
   TDataSet;
   const SuperTitle: string; DestroyEvent: TNotifyEvent);
-procedure LoadCaption(AForm: TForm; ATable: TTable);
+procedure LoadCaption(AForm: TForm; ADataSet: TDataSet);
 function ComposicionADuracion(const s: string): Integer;
 procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorForm;
-  AColDataSet, ARowDataSet, ARelDataSet: TTable); overload;
+  AColDataSet, ARowDataSet, ARelDataSet: TDataSet); overload;
 procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorRForm;
-  AColDataSet, ARowDataSet, ALstDataSet, ARelDataSet: TTable); overload;
+  AColDataSet, ARowDataSet, ALstDataSet, ARelDataSet: TDataSet); overload;
 {procedure LoadHints(ACrossManyToManyEditorForm: TFCubicalEditor2; AColDataSet,
   ARowDataSet, ALstDataSet, ARelDataSet: TTable); overload;}
 procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
@@ -27,32 +26,32 @@ procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
 implementation
 
 uses
-  SysUtils, RxGrids, DMaster, DMain, Consts, ArDBUtls, BDE;
+  SysUtils, RxGrids, DMaster, Consts, ArDBUtls, BDE;
 
 procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorForm;
-  AColDataSet, ARowDataSet, ARelDataSet: TTable);
+  AColDataSet, ARowDataSet, ARelDataSet: TDataSet);
 begin
-  with MasterDataModule, ACrossManyToManyEditorForm do
+  with SourceDataModule, ACrossManyToManyEditorForm do
   begin
     RxDrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
-      [GetDescription(ARelDataSet), GetDescription(AColDataSet),
-      GetDescription(ARowDataSet)]);
+      [Description[ARelDataSet], Description[AColDataSet],
+      Description[ARowDataSet]]);
   end;
 end;
 
 procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorRForm;
-  AColDataSet, ARowDataSet, ALstDataSet, ARelDataSet: TTable);
+  AColDataSet, ARowDataSet, ALstDataSet, ARelDataSet: TDataSet);
 begin
-  with MasterDataModule, ACrossManyToManyEditorForm do
+  with SourceDataModule, ACrossManyToManyEditorForm do
   begin
     RxDrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
-      [GetDescription(ARelDataSet), GetDescription(AColDataSet),
-      GetDescription(ARowDataSet)]);
+      [Description[ARelDataSet], Description[AColDataSet],
+      Description[ARowDataSet]]);
     ListBox.Hint := Format('%s|%s', [ALstDataSet.Name,
-      GetDescription(ALstDataSet)]);
+      Description[ALstDataSet]]);
   end;
 end;
-{
+(*
 procedure LoadHints(ACrossManyToManyEditorForm: TFCubicalEditor2; AColDataSet,
   ARowDataSet, ALstDataSet, ARelDataSet: TTable);
 begin
@@ -65,7 +64,8 @@ begin
       GetDescription(ALstDataSet)]);
   end;
 end;
-}
+*)
+
 function ComposicionADuracion(const s: string): Integer;
 var
   VPos, d: Integer;
@@ -82,9 +82,9 @@ begin
 end;
 
 
-procedure LoadCaption(AForm: TForm; ATable: TTable);
+procedure LoadCaption(AForm: TForm; ADataSet: TDataSet);
 begin
-  AForm.Caption := MasterDataModule.GetDescription(ATable);
+  AForm.Caption := SourceDataModule.Description[ADataSet];
 end;
 
 procedure MyMasterDetailShowEditor(MasterDetailEditorForm:
@@ -101,15 +101,8 @@ procedure MySingleShowEditor(FSingleEditor: TSingleEditorForm; DataSet:
 var
   s: string;
 begin
-  if DataSet is TTable then
-  begin
-    LoadCaption(FSingleEditor, DataSet as TTable);
-    s := (DataSet as TTable).TableName;
-  end
-  else
-  begin
-    s := DataSet.Name;
-  end;
+  LoadCaption(FSingleEditor, DataSet);
+  s := SourceDataModule.Name[DataSet];
   with FSingleEditor do
   begin
     OnDestroy := DestroyEvent;
@@ -139,9 +132,9 @@ begin
   bRowDataSetActive := ARowDataSet.Active;
   bRelDataSetActive := ARelDataSet.Active;
   try
-    AColDataSet.Open;
-    ARowDataSet.Open;
-    ARelDataSet.Open;
+    AColDataSet.First;
+    ARowDataSet.First;
+    ARelDataSet.First;
     vColFieldName := AColDataSet.FindField(AColFieldName);
     vColField := ARelDataSet.FindField(AColField);
     vRowFieldName := ARowDataSet.FindField(ARowFieldName);
@@ -193,7 +186,9 @@ begin
         AColDataSet.Next;
       end;
       ARowDataSet.First;
-      Open;
+      if not Active then
+        Open else
+        First;
       Fields[0].Visible := false;
       i := 0;
       while i < iCountRowField do

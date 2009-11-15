@@ -67,7 +67,7 @@ begin
   if FRel[i, j] = '' then
     FRel[i, j] := FRelFieldKey.AsString
   else
-    FRel[i, j] := FRel[i, j] + '/' + FRelFieldKey.AsString;
+    FRel[i, j] := FRel[i, j] + '; ' + FRelFieldKey.AsString;
 end;
 
 function TCrossManyToManyEditor1Form.RelRecordExists(i, j: Integer): Boolean;

@@ -3,7 +3,7 @@ unit KerEvolE;
 interface
 
 uses
-  Classes, SysUtils, DB, DBTables, KerModel;
+  Classes, SysUtils, DB, KerModel;
 
 type
   TObjetoModeloHorarioArray = array of TObjetoModeloHorario;
@@ -92,7 +92,6 @@ type
     function GetMejorMateriaNoDispersa: Integer;
     function GetMejorMateriaNoDispersaValor: Double;
     procedure CopiarIndividuo(Destino, Fuente: Integer);
-    function GetDatabase: TDatabase;
     function GetMejorObjetoModeloHorario: TObjetoModeloHorario;
   protected
   public
@@ -156,7 +155,6 @@ type
       GetMejorObjetoModeloHorario;
     property ModeloHorario: TModeloHorario read
       FModeloHorario;
-    property Database: TDatabase read GetDatabase;
     property SyncDirectory: string read FSyncDirectory write FSyncDirectory;
     property FileName: string read GetFileName;
     property SyncFileName: string read GetSyncFileName;
@@ -653,7 +651,7 @@ begin
   Informe := TStringList.Create;
   try
     LlenarInforme(Informe);
-    FPoblacion[FTamPoblacion].SaveToDatabase(CodHorario, MomentoInicial,
+    FPoblacion[FTamPoblacion].SaveToDataModule(CodHorario, MomentoInicial,
       MomentoFinal, Informe);
   finally
     Informe.Free;
@@ -831,11 +829,6 @@ begin
       MejorProfesorProhibicion, MejorDisponiblidadValor,
       MejorValor
       ]));
-end;
-
-function TEvolElitista.GetDatabase: TDatabase;
-begin
-  Result := FModeloHorario.Database;
 end;
 
 procedure TEvolElitista.PrefijarHorarios(const Horarios: string);

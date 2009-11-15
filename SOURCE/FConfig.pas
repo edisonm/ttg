@@ -123,22 +123,19 @@ var
 implementation
 
 uses
-  DMain, DMaster, rand, FMain;
+  DSource, rand, FMain;
 
 {$R *.DFM}
 
 procedure TConfiguracionForm.FormCreate(Sender: TObject);
 begin
-  with FormStorage do
-  begin
-    IniFileName := MainDataModule.dbMain.Directory + 'CONFIG.INI';
-    RestoreFormPlacement;
-  end;
+  Clear;
+  FormStorage.IniFileName := GetCurrentDir + '\CONFIG.INI';
 end;
 
 procedure TConfiguracionForm.FormDestroy(Sender: TObject);
 begin
-  FormStorage.SaveFormPlacement;
+  DeleteFile(FormStorage.IniFileName);
 end;
 
 procedure TConfiguracionForm.RxDBGridGetCellParams(Sender: TObject;

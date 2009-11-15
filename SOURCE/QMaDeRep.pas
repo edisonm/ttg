@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  QSingRep, Qrctrls, QuickRpt, ExtCtrls, Db, DBTables, Printers;
+  QSingRep, Qrctrls, QuickRpt, ExtCtrls, Db, Printers;
 
 type
   TMasterDetailReportQrp = class(TSingleReportQrp)

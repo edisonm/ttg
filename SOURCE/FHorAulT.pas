@@ -5,31 +5,39 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, RxLookup,
-  FCrsMME0, Db, DBTables, RxQuery, FCrsMME1, TB97Ctls, DB97Btn, TB97,
+  FCrsMME0, Db, FCrsMME1, TB97Ctls, DB97Btn, TB97,
   TB97Tlbr, kbmMemTable;
 
 type
   THorarioAulaTipoForm = class(TCrossManyToManyEditor1Form)
-    QuHorarioAulaTipo: TRxQuery;
-    DSAulaTipo: TDataSource;
+    QuHorarioAulaTipo: TkbmMemTable;
     dlcAulaTipo: TRxDBLookupCombo;
     cbVerAulaTipo: TComboBox;
     btn97Mostrar: TToolbarButton97;
     btn97Next: TToolbarButton97;
     btn97Prior: TToolbarButton97;
-    TbTmpAulaTipo: TkbmMemTable;
-    TbTmpAulaTipoCodAulaTipo: TIntegerField;
-    TbTmpAulaTipoNomAulaTipo: TStringField;
-    TbTmpAulaTipoAbrAulaTipo: TStringField;
-    TbTmpAulaTipoCantidad: TIntegerField;
+    QuHorarioAulaTipoCodMateria: TIntegerField;
+    QuHorarioAulaTipoCodNivel: TIntegerField;
+    QuHorarioAulaTipoCodEspecializacion: TIntegerField;
+    QuHorarioAulaTipoCodParaleloId: TIntegerField;
+    QuHorarioAulaTipoCodHora: TIntegerField;
+    QuHorarioAulaTipoCodDia: TIntegerField;
+    QuHorarioAulaTipoNomMateria: TStringField;
+    QuHorarioAulaTipoAbrNivel: TStringField;
+    QuHorarioAulaTipoAbrEspecializacion: TStringField;
+    QuHorarioAulaTipoNomParaleloId: TStringField;
+    QuHorarioAulaTipoNombre: TStringField;
+    QuHorarioAulaTipoCodAulaTipo: TAutoIncField;
     procedure btn97MostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure btn97PriorClick(Sender: TObject);
     procedure btn97NextClick(Sender: TObject);
+    procedure QuHorarioAulaTipoCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     FCodHorario: Integer;
+    FNombre: string;
+    procedure FillHorarioAulaTipo;
   protected
   public
     { Public declarations }
@@ -38,32 +46,56 @@ type
 
 implementation
 uses
-  DMaster, HorColCm, FConfig;
+  DMaster, HorColCm, FConfig, DSource;
 {$R *.DFM}
+
+procedure THorarioAulaTipoForm.FillHorarioAulaTipo;
+begin
+  with SourceDataModule do
+  begin
+    kbmHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+    if kbmHorarioDetalle.Locate('CodHorario', CodHorario, []) then
+    begin
+      kbmDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+      kbmDistributivo.MasterFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+      kbmDistributivo.MasterSource := dsHorarioDetalle;
+      try
+        QuHorarioAulaTipo.EmptyTable;
+        while (kbmHorarioDetalleCodHorario.Value = CodHorario) and not kbmHorarioDetalle.Eof do
+        begin
+          QuHorarioAulaTipo.Append;
+          QuHorarioAulaTipoCodAulaTipo.Value := kbmAulaTipoCodAulaTipo.Value;
+          QuHorarioAulaTipoCodMateria.Value := kbmHorarioDetalleCodMateria.Value;
+          QuHorarioAulaTipoCodNivel.Value := kbmHorarioDetalleCodNivel.Value;
+          QuHorarioAulaTipoCodEspecializacion.Value := kbmHorarioDetalleCodEspecializacion.Value;
+          QuHorarioAulaTipoCodParaleloId.Value := kbmHorarioDetalleCodParaleloId.Value;
+          QuHorarioAulaTipoCodHora.Value := kbmHorarioDetalleCodHora.Value;
+          QuHorarioAulaTipoCodDia.Value := kbmHorarioDetalleCodDia.Value;
+          QuHorarioAulaTipo.Post;
+          kbmHorarioDetalle.Next;
+        end;
+      finally
+        kbmDistributivo.IndexFieldNames := '';
+        kbmDistributivo.MasterFields := '';
+        kbmDistributivo.MasterSource := nil;
+      end;
+    end;
+  end;
+end;
 
 procedure THorarioAulaTipoForm.btn97MostrarClick(Sender: TObject);
 var
   s: string;
 begin
   inherited;
-  with MasterDataModule do
+  with SourceDataModule, MasterDataModule do
   begin
     if varIsEmpty(dlcAulaTipo.KeyValue) then
       raise Exception.Create('Debe especificar un tipo de aula');
-    with QuHorarioAulaTipo do
-    begin
-      Close;
-      MacroByName('FieldKey').AsString :=
-        StrHolderShowAulaTipo.Strings.Values[CBVerAulaTipo.Text];
-      ParamByName('CodAulaTipo').AsInteger := dlcAulaTipo.KeyValue;
-      ParamByName('CodHorario').AsInteger := CodHorario;
-      Prepare;
-      Open;
-      s := Format('[%s %d] - %s', [TbHorario.TableName, CodHorario,
-        dlcAulaTipo.Text]);
-    end;
+    s := Format('[%s %d] - %s', [kbmHorario.Name, CodHorario, dlcAulaTipo.Text]);
     Caption := s;
-    ShowEditor(TbDia, TbHora, QuHorarioAulaTipo, TbHorarioLaborable, 'CodDia', 'NomDia',
+    FNombre := StrHolderShowAulaTipo.Strings.Values[cbVerAulaTipo.Text];
+    ShowEditor(kbmDia, kbmHora, QuHorarioAulaTipo, kbmPeriodo, 'CodDia', 'NomDia',
       'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora', 'CodHora', 'Nombre');
   end;
 end;
@@ -71,37 +103,39 @@ end;
 procedure THorarioAulaTipoForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  CodHorario := MasterDataModule.TbHorarioCodHorario.Value;
+  CodHorario := SourceDataModule.kbmHorarioCodHorario.Value;
   cbVerAulaTipo.Items.Clear;
-  TbTmpAulaTipo.LoadFromDataSet(MasterDataModule.TbAulaTipo, []);
-  TbTmpAulaTipo.Open;
+  FillHorarioAulaTipo;
   LoadNames(MasterDataModule.StrHolderShowAulaTipo.Strings, cbVerAulaTipo.Items);
   cbVerAulaTipo.Text := cbVerAulaTipo.Items[0];
-  dlcAulaTipo.KeyValue := TbTmpAulaTipo.FindField('CodAulaTipo').AsInteger;
+  SourceDataModule.kbmAulaTipo.First;
+  dlcAulaTipo.KeyValue := SourceDataModule.kbmAulaTipoCodAulaTipo.Value;
   btn97MostrarClick(nil);
-end;
-
-procedure THorarioAulaTipoForm.FormDestroy(Sender: TObject);
-begin
-  inherited;
-  TbTmpAulaTipo.Close;
 end;
 
 procedure THorarioAulaTipoForm.btn97PriorClick(Sender: TObject);
 begin
   inherited;
-  TbTmpAulaTipo.Prior;
-  dlcAulaTipo.KeyValue := TbTmpAulaTipo.FindField('CodAulaTipo').AsInteger;
+  SourceDataModule.kbmAulaTipo.Prior;
+  dlcAulaTipo.KeyValue := SourceDataModule.kbmAulaTipoCodAulaTipo.AsInteger;
   btn97MostrarClick(nil);
 end;
 
 procedure THorarioAulaTipoForm.btn97NextClick(Sender: TObject);
 begin
   inherited;
-  TbTmpAulaTipo.Next;
-  dlcAulaTipo.KeyValue := TbTmpAulaTipo.FindField('CodAulaTipo').AsInteger;
+  SourceDataModule.kbmAulaTipo.Next;
+  dlcAulaTipo.KeyValue := SourceDataModule.kbmAulaTipoCodAulaTipo.Value;
   btn97MostrarClick(nil);
 end;
 
+procedure THorarioAulaTipoForm.QuHorarioAulaTipoCalcFields(
+  DataSet: TDataSet);
+begin
+  inherited;
+  if FNombre <> '' then
+    DataSet['Nombre'] := VarArrToStr(DataSet[FNombre], ' ');
+end;
+
 end.
-   
+

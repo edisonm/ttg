@@ -3,10 +3,9 @@ unit HorColCm;
 interface
 
 uses
-  Classes, Dialogs, Db, DbTables, RXDBCtrl;
+  Classes, Dialogs, Db, RXDBCtrl;
 
 function NullToZero(A: Variant): Variant;
-function GetFreeCode(Table: TTable; KeyName: string): variant;
 procedure EqualSpaced(Strings: TStrings; ini, fin: Integer; delim: string);
 procedure LoadStringsFromDataSet(Strings: TStrings; DataSet: TDataSet;
   FieldNames: string; Title, Column: Boolean);
@@ -14,11 +13,11 @@ function DisplayLabels(ADataSet: TDataSet; const AFieldNames: string): string;
 procedure LoadNames(Source, Destination: TStrings);
 procedure SearchInField(AField: TField; AValue: Variant);
 procedure SearchInDBGrid(DBGrid: TRxDBGrid);
+function VarArrToStr(v: Variant; Separator: string = '; '): string;
 
 implementation
 
-
-function VarArrToStr(v: Variant): string;
+function VarArrToStr(v: Variant; Separator: string = '; '): string;
 var
   i: Integer;
 begin
@@ -28,7 +27,7 @@ begin
       if Result = '' then
         Result := v[i]
       else
-        Result := Result + '; ' + VarToStr(v[i]);
+        Result := Result + Separator + VarToStr(v[i]);
     end;
   end
   else
@@ -105,36 +104,6 @@ begin
     Result := A;
 end;
 
-function GetFreeCode(Table: TTable; KeyName: string): variant;
-var
-  s, s1: string;
-begin
-  with TQuery.Create(Table) do
-  begin
-    try
-      DatabaseName := Table.DatabaseName;
-      SessionName := Table.SessionName;
-      s := Table.TableName;
-      s1 := Table.TableName + '_1';
-      SQL.Add('SELECT ' + s + '.' + KeyName);
-      SQL.Add('FROM ' + s + ' LEFT JOIN ' + s + ' AS ' + s1
-        + ' ON ' + s + '.' + KeyName + '=' + s1 + '.' + KeyName + ' - 1');
-      SQL.Add('WHERE ' + s1 + '.' + KeyName + ' is Null');
-      SQL.Add('ORDER BY ' + s + '.' + KeyName);
-      Open;
-      if IsEmpty then
-        Result := 1
-      else
-      begin
-        Result := NullToZero(FieldValues[KeyName]) + 1;
-      end;
-      Close;
-    finally
-      Free;
-    end;
-  end;
-end;
-
 procedure LoadNames(Source, Destination: TStrings);
 var
   i: Integer;
@@ -178,3 +147,4 @@ begin
 end;
 
 end.
+

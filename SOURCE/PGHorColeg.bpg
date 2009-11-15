@@ -9,12 +9,18 @@ MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
 DCC = $(ROOT)\bin\dcc32.exe $**
 BRCC = $(ROOT)\bin\brcc32.exe $**
 #------------------------------------------------------------------------------
-PROJECTS = Horcoleg.exe
+PROJECTS = Horcoleg.exe Convert.exe DBUTILS.exe
 #------------------------------------------------------------------------------
 default: $(PROJECTS)
 #------------------------------------------------------------------------------
 
 Horcoleg.exe: Horcoleg.dpr
+  $(DCC)
+
+Convert.exe: Convert.dpr
+  $(DCC)
+
+DBUTILS.exe: ..\..\..\DBUTILS\DBUTILS.dpr
   $(DCC)
 
 

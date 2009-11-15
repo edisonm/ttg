@@ -9,9 +9,9 @@
     CreateUninstallRegKey=1
     UsePreviousAppDir=1
     UsePreviousGroup=1
-    AppVersion=1.2
-    AppVerName=Horarios para Colegio 1.2
-    AppCopyright=Edición 01-08-2000, Edison Mera, Quito - Ecuador
+    AppVersion=1.2.1
+    AppVerName=Horarios para Colegio 1.2.1
+    AppCopyright=Edición 15-10-2000, Edison Mera, Quito - Ecuador
     WindowShowCaption=0
     WindowStartMaximized=0
     WindowVisible=0
@@ -23,16 +23,16 @@
     CreateAppDir=1
     DisableProgramGroupPage=0
     AlwaysCreateUninstallIcon=1
-    UninstallIconName=Desinstalación de Horarios para Colegio 1.2
+    UninstallIconName=Desinstalación de Horarios para Colegio 1.2.1
     Uninstallable=1
-    DefaultDirName={pf}\HorCole1.2
-    DefaultGroupName=Horarios para Colegio 1.2
+    DefaultDirName={pf}\HorCole1.2.1
+    DefaultGroupName=Horarios para Colegio 1.2.1
     LicenseFile=..\DOC\Licencia.txt
     InfoAfterFile=..\DOC\Leame.txt
     OutputBaseFilename=INSTALAR
     MessagesFile=C:\Archivos de programa\Inno Setup 1.3\Spanish-2-1.3.14.isl
-    DiskSpanning=1
-    DiskSize=1716224
+    DiskSpanning=0
+    ;DiskSize=1716224
     DiskClusterSize=512
     ReserveBytes=4096
     UseSetupLdr=1
@@ -47,18 +47,19 @@
     Name: {tmp}\PACKS; Flags: uninsneveruninstall  deleteafterinstall
 
 [Files]
-    Source: ..\BIN\HORCOLEG.DB0; DestDir: {app}\BIN\; DestName: HORCOLEG.DB0
+    ;Source: ..\BIN\HORCOLEG.DB0; DestDir: {app}\BIN\; DestName: HORCOLEG.DB0
     Source: ..\BIN\HORCOLEG.EXE; DestDir: {app}\BIN\; DestName: HORCOLEG.EXE
     Source: ..\HLP\HORCOLEG.CNT; DestDir: {app}\HLP\; DestName: HORCOLEG.CNT
     Source: ..\HLP\HORCOLEG.HLP; DestDir: {app}\HLP\; DestName: HORCOLEG.HLP
     Source: ..\DOC\MANUAL.DOC; DestDir: {app}\DOC\; DestName: MANUAL.DOC
-    Source: ..\DEMOS\DEMO1.DBP; DestDir: {app}\DEMOS\; DestName: DEMO1.DBP
-    Source: ..\DEMOS\DEMO2.DBP; DestDir: {app}\DEMOS\; DestName: DEMO2.DBP
-    Source: C:\Archivos de programa\Archivos comunes\Borland Shared\BDE\bdeinst.dll; DestDir: {tmp}\PACKS\; DestName: BDEINST.DLL; Flags: uninsneveruninstall
+    Source: ..\DEMOS\DEMO1.HPC; DestDir: {app}\DEMOS\; DestName: DEMO1.HPC
+    Source: ..\DEMOS\DEMO2.HPC; DestDir: {app}\DEMOS\; DestName: DEMO2.HPC
+    Source: ..\DEMOS\DEMO3.HPC; DestDir: {app}\DEMOS\; DestName: DEMO3.HPC
+    ;Source: C:\Archivos de programa\Archivos comunes\Borland Shared\BDE\bdeinst.dll; DestDir: {tmp}\PACKS\; DestName: BDEINST.DLL; Flags: uninsneveruninstall
     Source: C:\WINDOWS\SYSTEM\Comctl32.dll; DestDir: {sys}\; DestName: Comctl32.dll; Flags: uninsneveruninstall restartreplace
     ;Source: IDR20009.DLL; DestDir: {cf}\Borland Shared\BDE\IDR20009.DLL; Flags: uninsneveruninstall
 [Icons]
-    Name: {group}\Horarios Para Colegio 1.2; Filename: {app}\BIN\HORCOLEG.EXE; WorkingDir: {app}\BIN\; IconIndex: 0
+    Name: {group}\Horarios Para Colegio 1.2.1; Filename: {app}\BIN\HORCOLEG.EXE; WorkingDir: {app}\BIN\; IconIndex: 0
     Name: {group}\Manual del Usuario (DOC); Filename: {app}\DOC\MANUAL.DOC
     Name: {group}\Manual del Usuario (HELP); Filename: {app}\HLP\HORCOLEG.HLP
 
@@ -89,10 +90,10 @@
 ;PostReadme=..\DOC\Leame.txt
 
 ;[ScriptSetup]
-;VerNum=1.2
+;VerNum=1.2.1
 ;InnoVer=1.3
 ;AddVerTo=AppVerName
 ;SetupFilename=INSTALAR.EXE
 ;OutputFolder=OUTPUT
-;CopyrightText=Edición 01-08-2000, Edison Mera, Quito - Ecuador
+;CopyrightText=Edición 15-10-2000, Edison Mera, Quito - Ecuador
 

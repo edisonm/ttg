@@ -6,24 +6,23 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons,
   DBBBtn, DBCtrls, ExtCtrls, ComCtrls, RXCtrls, RXDBCtrl, TB97Tlbr, TB97,
-  DBTables, TB97Ctls, DB97Btn, Printers, RXSplit, CDBFmlry,
-  DBFmlry;
+  TB97Ctls, DB97Btn, Printers, RXSplit, CDBFmlry, DBFmlry;
 
 type
   TProfesorForm = class(TSingleEditorForm)
     btn97ProfesorProhibicion: TDBToolbarButton97;
-    btn97CargaAcademica: TDBToolbarButton97;
+    btn97Distributivo: TDBToolbarButton97;
     procedure btn97ProfesorProhibicionClick(Sender: TObject);
-    procedure btn97CargaAcademicaClick(Sender: TObject);
+    procedure btn97DistributivoClick(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure FormCreate(Sender: TObject);
-    procedure btn97CloseClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     FLbCarga: TLabel;
     FSuperTitle: string;
     FFSingleEditor: TSingleEditorForm;
-    procedure EdQuProfesorCargaAcademicaDestroy(Sender: TObject);
+    procedure EdQuProfesorDistributivoDestroy(Sender: TObject);
     procedure LbCargaDblClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
   public
@@ -36,67 +35,65 @@ var
 implementation
 
 uses
-  DMaster, FCrsMMER, SGHCUtls, FConfig, QMaDeRep, QSingRep;
+  DMaster, FCrsMMER, SGHCUtls, FConfig, QMaDeRep, QSingRep, DSource;
 
 {$R *.DFM}
 
 procedure TProfesorForm.btn97ProfesorProhibicionClick(Sender: TObject);
 begin
   inherited;
-  with MasterDataModule, TCrossManyToManyEditorRForm.Create(Self) do
+  with SourceDataModule, TCrossManyToManyEditorRForm.Create(Self) do
   begin
     with FormStorage do
     begin
-      IniSection := IniSection + '\MMEdR' + TbProfesorProhibicion.TableName;
+      IniSection := IniSection + '\MMEdR' + kbmProfesorProhibicion.Name;
       Active := True;
       RestoreFormPlacement;
     end;
-    Caption := Format('%s %s - Editando %s', [TbProfesor.TableName,
-      TbProfesorApeNomProfesor.Value, GetDescription(TbProfesorProhibicion)]);
+    Caption := Format('%s %s - Editando %s', [SourceDataModule.Name[kbmProfesor],
+      kbmProfesorApeNomProfesor.Value, Description[kbmProfesorProhibicion]]);
     RxDrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
-      [GetDescription(TbProfesorProhibicion), GetDescription(TbDia),
-      GetDescription(TbHora)]);
+      [Description[kbmProfesorProhibicion], Description[kbmDia], Description[kbmHora]]);
     ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda',
-      [TbProfesorProhibicionTipo.Name,
-      GetDescription(TbProfesorProhibicionTipo)]);
-    ShowEditor(TbDia, TbHora, TbProfesorProhibicionTipo, TbProfesorProhibicion,
-      TbHorarioLaborable, 'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora',
+      [SourceDataModule.Name[kbmProfesorProhibicionTipo],
+      Description[kbmProfesorProhibicionTipo]]);
+    ShowEditor(kbmDia, kbmHora, kbmProfesorProhibicionTipo, kbmProfesorProhibicion,
+      kbmPeriodo, 'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora',
       'NomHora', 'CodHora', 'CodHora', 'CodProfProhibicionTipo',
       'NomProfProhibicionTipo', 'ColProfProhibicionTipo',
       'CodProfProhibicionTipo');
-    Tag := TbProfesorCodProfesor.Value;
+    Tag := kbmProfesorCodProfesor.Value;
     OnActivate := FormActivate;
   end;
 end;
 
 procedure TProfesorForm.FormActivate(Sender: TObject);
 begin
-  with MasterDataModule do
+  with SourceDataModule do
   begin
-    TbProfesor.Locate('CodProfesor', (Sender as TCustomForm).Tag, []);
+    kbmProfesor.Locate('CodProfesor', (Sender as TCustomForm).Tag, []);
   end;
 end;
 
-procedure TProfesorForm.btn97CargaAcademicaClick(Sender: TObject);
+procedure TProfesorForm.btn97DistributivoClick(Sender: TObject);
 begin
   inherited;
-  with MasterDataModule do
+  with SourceDataModule do
   begin
-    TbParalelo.Open;
-    TbAsignatura.Open;
-    with TbCargaAcademica do
+    kbmParalelo.First;
+    kbmDistributivo.First;
+    with kbmDistributivo do
     begin
       DisableControls;
       try
-        btn97CargaAcademica.Enabled := False;
-        MasterSource := DSProfesor;
-        MasterFields := 'CodProfesor';
+        btn97Distributivo.Enabled := False;
         IndexFieldNames := 'CodProfesor';
+        MasterFields := 'CodProfesor';
+        MasterSource := dsProfesor;
       finally
         EnableControls;
       end;
       FFSingleEditor := TSingleEditorForm.Create(Self);
-      FFSingleEditor.DBIndexCombo.Enabled := False;
       FFSingleEditor.btn97Find.Enabled := False;
       Self.DataSource.OnDataChange := DataSourceDataChange;
       FLbCarga.Parent := FFSingleEditor.pnlStatus;
@@ -104,8 +101,8 @@ begin
       FLbCarga.Left := 400;
       FLbCarga.OnDblClick := LbCargaDblClick;
       MySingleShowEditor(FFSingleEditor,
-        TbCargaAcademica, ConfiguracionForm.edtNomColegio.Text,
-        EdQuProfesorCargaAcademicaDestroy);
+        kbmDistributivo, ConfiguracionForm.edtNomColegio.Text,
+        EdQuProfesorDistributivoDestroy);
       FSuperTitle := FFSingleEditor.Caption;
       DataSourceDataChange(nil, nil);
     end;
@@ -117,10 +114,10 @@ begin
   DataSourceDataChange(nil, nil);
 end;
 
-procedure TProfesorForm.EdQuProfesorCargaAcademicaDestroy(Sender: TObject);
+procedure TProfesorForm.EdQuProfesorDistributivoDestroy(Sender: TObject);
 begin
-  if Assigned(btn97CargaAcademica) then
-    btn97CargaAcademica.Enabled := True;
+  if Assigned(btn97Distributivo) then
+    btn97Distributivo.Enabled := True;
   DataSource.OnDataChange := nil;
   FLbCarga.Parent := nil;
 end;
@@ -131,7 +128,7 @@ begin
   inherited;
   FLbCarga.Caption := Format('Carga: %d', [MasterDataModule.GetCargaActual]);
   FFSingleEditor.Caption := FSuperTitle + ' - ' +
-    MasterDataModule.TbProfesorApeNomProfesor.AsString;
+    SourceDataModule.kbmProfesorApeNomProfesor.AsString;
 end;
 
 procedure TProfesorForm.FormCreate(Sender: TObject);
@@ -140,16 +137,22 @@ begin
   FLbCarga := TLabel.Create(Self);
 end;
 
-procedure TProfesorForm.btn97CloseClick(Sender: TObject);
+procedure TProfesorForm.FormClose(Sender: TObject;
+  var Action: TCloseAction);
 begin
-  inherited;
+  with SourceDataModule.kbmDistributivo do
+  begin
+    MasterSource := nil;
+    MasterFields := '';
+    IndexFieldNames := '';
+  end;
   if Assigned(FFSingleEditor) then
   begin
     FFSingleEditor.OnDestroy := nil;
     DataSource.OnDataChange := nil;
     FLbCarga.Free;
   end;
-  Close;
+  inherited;
 end;
 
 end.
