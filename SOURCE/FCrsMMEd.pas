@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, Grids, RXGrids, DBGrids, ExtCtrls, DB, Placemnt,
-  FEditor, TB97Ctls, DB97Btn, TB97, TB97Tlbr;
+  FEditor, ImgList, ComCtrls, ToolWin;
 
 type
   PIntegerArray = ^TIntegerArray;
@@ -22,8 +22,8 @@ type
     ARowName: string) of object;
   TCrossManyToManyEditorForm = class(TEditorForm)
     RxDrawGrid: TRxDrawGrid;
-    btn97Ok: TToolbarButton97;
-    btn97Cancel: TToolbarButton97;
+    btn97Ok: TToolButton;
+    btn97Cancel: TToolButton;
     procedure btn97OkClick(Sender: TObject);
     procedure btn97CancelClick(Sender: TObject);
     procedure RxDrawGridDrawCell(Sender: TObject; ACol, ARow: Integer;

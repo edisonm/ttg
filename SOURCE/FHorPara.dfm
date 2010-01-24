@@ -1,6 +1,5 @@
 inherited HorarioParaleloForm: THorarioParaleloForm
-  Left = 376
-  Top = 250
+  Left = 360
   Width = 704
   Height = 428
   OldCreateOrder = False
@@ -97,6 +96,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Left = 662
       Top = 0
       Hint = 'Intercambiar períodos|Intercambiar períodos'
+      ImageIndex = 6
       ParentShowHint = False
       ShowHint = True
       OnClick = IntercambiarPeriodosClick

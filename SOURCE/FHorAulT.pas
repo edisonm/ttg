@@ -5,17 +5,16 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, RxLookup,
-  FCrsMME0, Db, FCrsMME1, TB97Ctls, DB97Btn, TB97,
-  TB97Tlbr, kbmMemTable;
+  FCrsMME0, Db, FCrsMME1, kbmMemTable, ImgList, ComCtrls, ToolWin;
 
 type
   THorarioAulaTipoForm = class(TCrossManyToManyEditor1Form)
     QuHorarioAulaTipo: TkbmMemTable;
     dlcAulaTipo: TRxDBLookupCombo;
     cbVerAulaTipo: TComboBox;
-    btn97Mostrar: TToolbarButton97;
-    btn97Next: TToolbarButton97;
-    btn97Prior: TToolbarButton97;
+    btn97Mostrar: TToolButton;
+    btn97Next: TToolButton;
+    btn97Prior: TToolButton;
     QuHorarioAulaTipoCodMateria: TIntegerField;
     QuHorarioAulaTipoCodNivel: TIntegerField;
     QuHorarioAulaTipoCodEspecializacion: TIntegerField;

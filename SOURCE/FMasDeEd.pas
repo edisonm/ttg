@@ -5,8 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Placemnt, Grids, DBGrids, RXCtrls, RXDBCtrl, StdCtrls,
-  DBIndex, Buttons, DBBBtn, DBCtrls, ExtCtrls, TB97Tlbr, TB97, DB97Btn,
-  TB97Ctls, RXSplit;
+  DBIndex, Buttons, DBBBtn, DBCtrls, ExtCtrls, RXSplit, ImgList, ComCtrls, ToolWin;
 
 type
   TMasterDetailEditorForm = class(TSingleEditorForm)

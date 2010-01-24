@@ -46,6 +46,7 @@ object MainForm: TMainForm
     F78F78F7877000000000000000000000000000000000FFFF0000FFFF00000000
     0000000000000000000000000000000000000000000000000000000000000000
     000000000000000000000000000000000000FFFF0000}
+  Menu = MainMenu
   OldCreateOrder = False
   Position = poScreenCenter
   OnCloseQuery = FormCloseQuery
@@ -56,7 +57,7 @@ object MainForm: TMainForm
   TextHeight = 13
   object Label1: TLabel
     Left = 330
-    Top = 316
+    Top = 297
     Width = 237
     Height = 13
     Alignment = taRightJustify
@@ -65,7 +66,7 @@ object MainForm: TMainForm
   end
   object StatusBar: TStatusBar
     Left = 0
-    Top = 343
+    Top = 324
     Width = 593
     Height = 22
     AutoHint = True
@@ -82,43 +83,17 @@ object MainForm: TMainForm
     SimplePanel = False
     OnDrawPanel = StatusBarDrawPanel
   end
-  object ControlBar: TControlBar
+  object ToolBar: TToolBar
     Left = 0
     Top = 0
     Width = 593
-    Height = 52
-    Align = alTop
-    AutoSize = True
-    BevelInner = bvNone
-    BevelOuter = bvNone
-    Color = clBtnFace
-    ParentColor = False
-    ParentShowHint = False
-    ShowHint = True
+    Height = 25
+    Flat = True
+    Images = ImageList
     TabOrder = 1
-    object MenuBar: TMenuBar
-      Left = 11
-      Top = 2
-      Width = 227
-      Height = 21
-      Align = alNone
-      AutoSize = True
-      ButtonHeight = 21
-      ButtonWidth = 75
-      Caption = 'MenuBar'
-      Color = clBtnFace
-      EdgeInner = esNone
-      EdgeOuter = esNone
-      Flat = True
-      ParentColor = False
-      ShowCaptions = True
-      TabOrder = 1
-      Wrapable = False
-      Menu = MainMenu
-    end
     object SpeedBar: TToolBar
-      Left = 11
-      Top = 28
+      Left = 0
+      Top = 0
       Width = 469
       Height = 22
       Align = alNone

@@ -5,13 +5,13 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons,
-  DBBBtn, DBCtrls, ExtCtrls, ComCtrls, RXCtrls, RXDBCtrl, TB97Tlbr, TB97,
-  TB97Ctls, DB97Btn, Printers, RXSplit, CDBFmlry, DBFmlry;
+  DBBBtn, DBCtrls, ExtCtrls, ComCtrls, RXCtrls, RXDBCtrl,
+  Printers, RXSplit, CDBFmlry, DBFmlry, ImgList, ToolWin;
 
 type
   TProfesorForm = class(TSingleEditorForm)
-    btn97ProfesorProhibicion: TDBToolbarButton97;
-    btn97Distributivo: TDBToolbarButton97;
+    btn97ProfesorProhibicion: TToolButton;
+    btn97Distributivo: TToolButton;
     procedure btn97ProfesorProhibicionClick(Sender: TObject);
     procedure btn97DistributivoClick(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);

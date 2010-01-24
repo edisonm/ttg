@@ -5,19 +5,18 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons,
-  DBBBtn, DBCtrls, ExtCtrls, RXCtrls, RXDBCtrl, TB97Tlbr, TB97, TB97Ctls,
-  DB97Btn, StrHlder, RXSplit, CDBFmlry, DBFmlry,
-  kbmMemTable;
+  DBBBtn, DBCtrls, ExtCtrls, RXCtrls, RXDBCtrl,
+  StrHlder, RXSplit, CDBFmlry, DBFmlry, kbmMemTable, ImgList, ComCtrls, ToolWin;
 
 type
   THorarioForm = class(TSingleEditorForm)
-    btn97MateriaProhibicionNoRespetada: TDBToolbarButton97;
-    btn97ProfesorProhibicionNoRespetada: TDBToolbarButton97;
-    btn97HorarioParalelo: TDBToolbarButton97;
-    btn97Profesor: TDBToolbarButton97;
-    btn97CruceProfesor: TDBToolbarButton97;
-    btn97CruceMateria: TDBToolbarButton97;
-    btn97CruceAula: TDBToolbarButton97;
+    btn97MateriaProhibicionNoRespetada: TToolButton;
+    btn97ProfesorProhibicionNoRespetada: TToolButton;
+    btn97HorarioParalelo: TToolButton;
+    btn97Profesor: TToolButton;
+    btn97CruceProfesor: TToolButton;
+    btn97CruceMateria: TToolButton;
+    btn97CruceAula: TToolButton;
     QuCruceAula: TkbmMemTable;
     QuCruceAulaCodDia: TIntegerField;
     QuCruceAulaCodHora: TIntegerField;
@@ -92,8 +91,8 @@ type
     RxQuHorarioDetalleProfesorProhibicionNomHora: TStringField;
     Panel2: TPanel;
     dbmInforme: TDBMemo;
-    btn97SeleccionarHorario: TDBToolbarButton97;
-    btn97MateriaCortadaDia: TDBToolbarButton97;
+    btn97SeleccionarHorario: TToolButton;
+    btn97MateriaCortadaDia: TToolButton;
     QuMateriaCortadaDia: TkbmMemTable;
     QuMateriaCortadaDiaCodNivel: TIntegerField;
     QuMateriaCortadaDiaCodEspecializacion: TIntegerField;
@@ -107,13 +106,13 @@ type
     QuMateriaCortadaDiaNomMateria: TStringField;
     QuMateriaCortadaDiaNomDia: TStringField;
     QuMateriaCortadaDiaNomHora: TStringField;
-    btn97MateriaCortadaHora: TDBToolbarButton97;
+    btn97MateriaCortadaHora: TToolButton;
     QuMateriaCortadaHora: TkbmMemTable;
     QuMateriaCortadaHoraCodDia: TIntegerField;
     QuMateriaCortadaHoraCodHora: TIntegerField;
     QuMateriaCortadaHoraDetalle: TkbmMemTable;
     dsMateriaCortadaHora: TDataSource;
-    btn97HorarioAulaTipo: TDBToolbarButton97;
+    btn97HorarioAulaTipo: TToolButton;
     QuCruceAulaDetalleCodDia: TIntegerField;
     QuCruceAulaDetalleCodHora: TIntegerField;
     QuCruceAulaDetalleCodAulaTipo: TIntegerField;

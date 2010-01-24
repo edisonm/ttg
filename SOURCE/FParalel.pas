@@ -5,8 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Placemnt, Grids, DBGrids, RXDBCtrl, RXCtrls, ExtCtrls,
-  StdCtrls, DBIndex, DBCtrls, TB97Ctls, DB97Btn, TB97, TB97Tlbr, RXSplit,
-  CheckLst, DBChLsBx, Printers, kbmMemTable;
+  StdCtrls, DBIndex, DBCtrls, RXSplit,
+  CheckLst, DBChLsBx, Printers, kbmMemTable, ImgList, ComCtrls, ToolWin;
 
 type
   TParaleloForm = class(TSingleEditorForm)

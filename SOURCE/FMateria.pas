@@ -5,12 +5,13 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons,
-  DBBBtn, DBCtrls, ExtCtrls, RXCtrls, RXDBCtrl, TB97Tlbr, TB97, TB97Ctls,
-  DB97Btn, Printers, RXSplit, CDBFmlry, DBFmlry;
+  DBBBtn, DBCtrls, ExtCtrls,
+  Printers, CDBFmlry, DBFmlry, ImgList, ComCtrls, ToolWin, RXSplit,
+  RXDBCtrl, RXCtrls;
 
 type
   TMateriaForm = class(TSingleEditorForm)
-    btn97MateriaProhibicion: TDBToolbarButton97;
+    btn97MateriaProhibicion: TToolButton;
     procedure btn97MateriaProhibicionClick(Sender: TObject);
   private
     procedure FormActivate(Sender: TObject);

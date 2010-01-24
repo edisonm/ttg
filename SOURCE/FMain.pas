@@ -3,7 +3,7 @@ unit FMain;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,  SysConst, ExtCtrls, DB, Menus, ComCtrls, Placemnt, MRUList, ImgList, Buttons,  MrgMngr, SpeedBar, RxMenus, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,  TB97Ctls, DB97Btn, FSingEdt, QrPrntr, kbmMemTable{, Protect};
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,  SysConst, ExtCtrls, DB, Menus, ComCtrls, Placemnt, MRUList, ImgList, Buttons,  MrgMngr, SpeedBar, RxMenus, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,  FSingEdt, QrPrntr, kbmMemTable{, Protect};
 type
   TMainForm = class(TForm)
     MainMenu: TMainMenu;
@@ -86,8 +86,6 @@ type
     actAbout: TAction;
     actContents: TAction;
     actIndex: TAction;
-    ControlBar: TControlBar;
-    MenuBar: TMenuBar;
     ToolButton1: TToolButton;
     ToolButton2: TToolButton;
     ToolButton3: TToolButton;
@@ -177,6 +175,7 @@ type
     MISaveTxt: TMenuItem;
     actOpenCSV: TAction;
     AbrirTexto1: TMenuItem;
+    ToolBar: TToolBar;
     procedure actExitExecute(Sender: TObject);
     procedure actProfesorExecute(Sender: TObject);
     procedure actMateriaExecute(Sender: TObject);
@@ -1727,11 +1726,12 @@ begin
   if not InputQuery('Código del horario a mejorar: ',
     'Código del horario a mejorar', s) then
     Exit;
-  if s <> '' then
-    CodHorarioFuente := StrToInt(s);
+  if s = '' then
+    Exit;
   if not InputQuery('Código del horario mejorado: ',
     'Código del horario mejorado', d) then
     Exit;
+  CodHorarioFuente := StrToInt(s);
   CodHorarioDestino := StrToInt(d);
   FCloseClick := False;
   with ConfiguracionForm do

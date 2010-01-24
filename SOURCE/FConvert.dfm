@@ -1,6 +1,6 @@
 object ConvertForm: TConvertForm
-  Left = 317
-  Top = 41
+  Left = 382
+  Top = 120
   Width = 445
   Height = 379
   Caption = 'Convertidor de formatos'

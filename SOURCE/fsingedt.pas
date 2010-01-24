@@ -5,8 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Db, StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons,
-  ExtCtrls, DBBBtn, Placemnt, DBIndex, ComCtrls, RXCtrls, RXDBCtrl, TB97,
-  TB97Tlbr, TB97Ctls, DB97Btn, RXSplit, CDBFmlry, DBFmlry, FEditor, kbmMemTable;
+  ExtCtrls, DBBBtn, Placemnt, DBIndex, ComCtrls, RXCtrls, RXDBCtrl,
+  RXSplit, CDBFmlry, DBFmlry, FEditor, kbmMemTable, ImgList, ToolWin;
 
 type
   TSingleEditorForm = class(TEditorForm)
@@ -15,7 +15,7 @@ type
     SLRecordNo: TDBStatusLabel;
     SLState: TDBStatusLabel;
     DBGrid: TRxDBGrid;
-    btn97Find: TDBToolbarButton97;
+    btn97Find: TToolButton;
     RxSplitter1: TRxSplitter;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn97FindClick(Sender: TObject);
