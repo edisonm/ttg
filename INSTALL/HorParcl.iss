@@ -3,39 +3,37 @@
 ; 3 Junio 1999 at 08:27
 
 [Setup]
-MinVersion=4.0,3.51
+MinVersion=4.0,4.0
 AppName=Horarios para Colegio
 AppVerName=Horarios para Colegio 1.1
 AppCopyright=Edición 09-01-1999, Edison Mera, SOLAR, Quito - Ecuador
-SingleEXE=0
-Bits=32
+; SingleEXE=0
+; Bits=32
 BackColor=$FF0000
 BackSolid=0
-DisableDirExistsWarning=0
+; DisableDirExistsWarning=0
 DisableDirPage=0
 DisableStartupPrompt=0
 CreateAppDir=1
 DisableProgramGroupPage=0
-AlwaysCreateUninstallIcon=1
-OverwriteUninstRegEntries=1
-UninstallIconName=Desinstalación de Horarios para Colegio 1.1
+; OverwriteUninstRegEntries=1
 Uninstallable=1
 AllowNoIcons=0
 AlwaysRestart=0
-CompressLevel=9
 DefaultDirName={pf}\HorCole1
-InstallToProgramFiles=1
+; InstallToProgramFiles=1
 DefaultGroupName=Horarios para Colegio 1.1
 LicenseFile=..\DOC\Licencia.txt
 DiskSpanning=0
-SourceDir="."
-OutputDir="..\INSTALL\PARCIAL"
+SourceDir=.
+OutputDir=..\INSTALL\PARCIAL
+Compression=zip/9
 
 [Dirs]
-Name: "{app}\HLP"
-Name: "{app}\BIN"
-Name: "{app}\DEMOS"
-Name: "{app}\DOC"
+Name: {app}\HLP
+Name: {app}\BIN
+Name: {app}\DEMOS
+Name: {app}\DOC
 
 [Files]
 Source: ..\BIN\HORCOLEG.DB0; DestDir: {app}\BIN\; DestName: HORCOLEG.DB0
@@ -43,8 +41,8 @@ Source: ..\BIN\HORCOLEG.EXE; DestDir: {app}\BIN\; DestName: HORCOLEG.EXE
 Source: ..\HLP\HORCOLEG.CNT; DestDir: {app}\HLP\; DestName: HORCOLEG.CNT
 Source: ..\HLP\HORCOLEG.HLP; DestDir: {app}\HLP\; DestName: HORCOLEG.HLP
 Source: ..\DOC\MANUAL.DOC; DestDir: {app}\DOC\; DestName: MANUAL.DOC
-Source: ..\DEMOS\DEMO1998.DBP; DestDir: {app}\DEMOS\; DestName: DEMO1998.DBP
-Source: ..\DEMOS\DEMO1999.DBP; DestDir: {app}\DEMOS\; DestName: DEMO1999.DBP
+; Source: ..\DEMOS\DEMO1998.DBP; DestDir: {app}\DEMOS\; DestName: DEMO1998.DBP
+; Source: ..\DEMOS\DEMO1999.DBP; DestDir: {app}\DEMOS\; DestName: DEMO1999.DBP
 
 [Icons]
 Name: {group}\Horarios Para Colegio 1.1; Filename: {app}\BIN\HORCOLEG.EXE; WorkingDir: {app}\BIN\; IconIndex: 0

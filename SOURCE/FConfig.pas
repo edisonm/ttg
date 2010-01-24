@@ -130,12 +130,12 @@ uses
 procedure TConfiguracionForm.FormCreate(Sender: TObject);
 begin
   Clear;
-  FormStorage.IniFileName := GetCurrentDir + '\CONFIG.INI';
+  FormStorage.IniFileName := GetCurrentDir + '\config.ini';
 end;
 
 procedure TConfiguracionForm.FormDestroy(Sender: TObject);
 begin
-  DeleteFile(FormStorage.IniFileName);
+  //DeleteFile(FormStorage.IniFileName);
 end;
 
 procedure TConfiguracionForm.RxDBGridGetCellParams(Sender: TObject;

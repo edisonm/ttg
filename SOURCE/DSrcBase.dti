@@ -1,7 +1,7 @@
 [Designer]
 Version=1
-Left=599
-Top=11
+Left=539
+Top=13
 Width=741
 Height=500
 Splitter=393
@@ -20,7 +20,7 @@ PrintToFile=0
 PrintBorders=1
 PrintSelected=0
 PrintVisible=0
-ExpandedItems=SourceBaseDataModule\kbmHorarioDetalle\kbmHorarioDetalle.IndexDefs,SourceBaseDataModule\kbmHorario,SourceBaseDataModule\kbmAulaTipo
+ExpandedItems=SourceBaseDataModule\kbmCurso\kbmCurso.FieldDefs,SourceBaseDataModule\kbmCurso\<Fields>.kbmCurso,SourceBaseDataModule\kbmAulaTipo\kbmAulaTipo.FieldDefs
 
 [DataDiagrams]
 Version=1

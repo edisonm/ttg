@@ -3,10 +3,7 @@ unit FMain;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  SysConst, ExtCtrls, DB, Menus, ComCtrls, Placemnt, MRUList, ImgList, Buttons,
-  MrgMngr, SpeedBar, RxMenus, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,
-  TB97Ctls, DB97Btn, FSingEdt, QrPrntr, kbmMemTable{, Protect};
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,  SysConst, ExtCtrls, DB, Menus, ComCtrls, Placemnt, MRUList, ImgList, Buttons,  MrgMngr, SpeedBar, RxMenus, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,  TB97Ctls, DB97Btn, FSingEdt, QrPrntr, kbmMemTable{, Protect};
 type
   TMainForm = class(TForm)
     MainMenu: TMainMenu;
@@ -161,8 +158,6 @@ type
     N8: TMenuItem;
     actMejorarHorario: TAction;
     MIMejorarHorario: TMenuItem;
-    actCompactarTablas: TAction;
-    Compactartablas1: TMenuItem;
     SaveDialogCSV: TSaveDialog;
     actRegistrationInfo: TAction;
     MIRegistrationInfo: TMenuItem;
@@ -178,8 +173,10 @@ type
     QuProfesorHorarioDetalleCodDia: TIntegerField;
     QuProfesorHorarioDetalleCodHora: TIntegerField;
     QuProfesorHorarioDetalleNombre: TStringField;
-    actSaveTxt: TAction;
+    actSaveCSV: TAction;
     MISaveTxt: TMenuItem;
+    actOpenCSV: TAction;
+    AbrirTexto1: TMenuItem;
     procedure actExitExecute(Sender: TObject);
     procedure actProfesorExecute(Sender: TObject);
     procedure actMateriaExecute(Sender: TObject);
@@ -229,9 +226,9 @@ type
     procedure actExportarCSVExecute(Sender: TObject);
     procedure actMejorarHorarioExecute(Sender: TObject);
     procedure FormDblClick(Sender: TObject);
-    procedure actCompactarTablasExecute(Sender: TObject);
     procedure actRegistrationInfoExecute(Sender: TObject);
-    procedure actSaveTxtExecute(Sender: TObject);
+    procedure actSaveCSVExecute(Sender: TObject);
+    procedure actOpenCSVExecute(Sender: TObject);
   private
     { Private declarations }
 {$IFNDEF FREEWARE}
@@ -270,8 +267,9 @@ type
     procedure EdHorarioDestroy(Sender: TObject);
 
     procedure LoadFromFile(const AFileName: string);
+    procedure LoadFromTextDir(const ADirName: string);
     procedure SaveToFile(const AFileName: string);
-    procedure SaveTxtToFile(const AFileName: string);
+    procedure SaveToTextDir(const ADirName: string);
     {procedure DBGridGetCellParamsColor(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);}
     function ConfirmOperation: boolean;
@@ -547,33 +545,27 @@ begin
   end;
 end;
 
-procedure TMainForm.actSaveTxtExecute(Sender: TObject);
+procedure TMainForm.actSaveCSVExecute(Sender: TObject);
+var
+  DirName: string;
 begin
   StatusBar.Panels[1].Style := psOwnerDraw;
   Position := 0;
   Max := 100;
-  SaveDialog.DefaultExt := 'txt';
-  SaveDialog.Filter := 'Horario en formato texto (*.txt)|*.txt';
-  try
-    SaveDialog.HelpContext := actSave.HelpContext;
-    if SaveDialog.Execute then
-    begin
-      SaveTxtToFile(SaveDialog.FileName);
-      OpenDialog.FileName := SaveDialog.FileName;
-      MRUManager.Add(SaveDialog.FileName, 0);
-    end;
-  finally
-    StatusBar.Panels[1].Style := psText;
-    StatusBar.Panels[2].Text := 'Listo';
+  if InputQuery('Directorio', 'Directorio en el que guardar los ficheros:',
+        DirName) then
+  begin
+    SaveToTextDir(DirName);
   end;
 end;
 
-procedure TMainForm.SaveTxtToFile(const AFileName: string);
+procedure TMainForm.SaveToTextDir(const ADirName: string);
 begin
   Cursor := crHourGlass;
   try
+    ConfiguracionForm.FormStorage.IniFileName := ADirName + '\config.ini';
     ConfiguracionForm.FormStorage.SaveFormPlacement;
-    SourceDataModule.SaveToFile(AFileName);
+    SourceDataModule.SaveToTextDir(ADirName);
   finally
     Cursor := crDefault;
   end;
@@ -595,6 +587,19 @@ begin
   Cursor := crHourGlass;
   try
     SourceDataModule.LoadFromFile(AFileName);
+    ConfiguracionForm.FormStorage.RestoreFormPlacement;
+  finally
+    Cursor := crDefault;
+  end;
+end;
+
+procedure TMainForm.LoadFromTextDir(const ADirName: string);
+begin
+  Cursor := crHourGlass;
+  try
+    SourceDataModule.EmptyTables;
+    SourceDataModule.LoadFromTextDir(ADirName);
+    ConfiguracionForm.FormStorage.IniFileName := ADirName + '\config.ini';
     ConfiguracionForm.FormStorage.RestoreFormPlacement;
   finally
     Cursor := crDefault;
@@ -1791,19 +1796,6 @@ begin
     FCloseClick := True;
 end;
 
-procedure TMainForm.actCompactarTablasExecute(Sender: TObject);
-begin
-  Max := 20;
-  StatusBar.Panels[1].Style := psOwnerDraw;
-  Self.Position := 0;
-  try
-    SourceDataModule.PackTables;
-  finally
-    StatusBar.Panels[1].Style := psText;
-    StatusBar.Panels[2].Text := 'Listo';
-  end;
-end;
-
 procedure TMainForm.actRegistrationInfoExecute(Sender: TObject);
 begin
   PedirRegistrarSoftware;
@@ -1979,6 +1971,27 @@ begin
       kbmHora.GotoBookmark(q);
       kbmHora.FreeBookmark(q);
     end;
+  end;
+end;
+
+procedure TMainForm.actOpenCSVExecute(Sender: TObject);
+var
+  DirName: string;
+begin
+  StatusBar.Panels[1].Style := psOwnerDraw;
+  Position := 0;
+  try
+    if ConfirmOperation then
+    begin
+      if InputQuery('Directorio', 'Directorio del cual leer los archivos CSV:',
+        DirName) then
+      begin
+        LoadFromTextDir(DirName);
+      end;
+    end;
+  finally
+    StatusBar.Panels[1].Style := psText;
+    StatusBar.Panels[2].Text := 'Listo';
   end;
 end;
 

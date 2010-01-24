@@ -1,10 +1,10 @@
 [Designer]
 Version=1
-Left=318
-Top=328
+Left=319
+Top=144
 Width=758
 Height=496
-Splitter=222
+Splitter=377
 SelectedTab=Components
 
 [Components]
@@ -20,7 +20,7 @@ PrintToFile=0
 PrintBorders=1
 PrintSelected=0
 PrintVisible=0
-ExpandedItems=SourceDataModule\kbmProfesorProhibicionTipo,SourceDataModule\kbmParalelo,SourceDataModule\kbmParaleloId
+ExpandedItems=SourceDataModule\kbmHorario\kbmHorario.FieldDefs,SourceDataModule\kbmHorario\<Fields>.kbmHorario
 
 [DataDiagrams]
 Version=1

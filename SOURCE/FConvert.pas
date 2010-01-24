@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Mask, ToolEdit, kbmMemTable, DB, Placemnt, Grids, DBGrids;
+  StdCtrls, Mask, ToolEdit, kbmMemTable, DB, Placemnt, Grids, DBGrids,
+  DBPacker;
 
 type
   EConvertError = class(Exception);

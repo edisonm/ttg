@@ -30,6 +30,7 @@ type
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
+    FFlags : TkbmMemTableSaveFlags;
     procedure SaveToStream(AStream: TStream);
     procedure SaveUnCompToStream(AStream: TStream);
     procedure LoadFromStream(AStream: TStream);
@@ -38,9 +39,9 @@ type
     { Public declarations }
     procedure SaveToFile(const AFileName: TFileName);
     procedure LoadFromFile(const AFileName: TFileName);
+    procedure SaveToTextDir(const AFileName: TFileName); overload;
     procedure NewDatabase;
     procedure FillDefaultData;
-    procedure PackTables;
   end;
 
 var
@@ -135,14 +136,7 @@ var
   StreamConfig: TStream;
   n: Longint;
 begin
-  SourceDataModule.SaveToBinaryStream(AStream,
-    [mtfSaveData,
-    mtfSaveNonVisible,
-      mtfSaveBlobs,
-      mtfSaveFiltered,
-      mtfSaveIgnoreRange,
-      mtfSaveIgnoreMasterDetail,
-      mtfSaveDeltas]);
+  SaveToBinaryStream(AStream, FFlags);
   StreamConfig := TFileStream.Create(ConfiguracionForm.FormStorage.IniFileName,
     fmOpenRead or fmShareDenyWrite);
   try
@@ -357,15 +351,25 @@ begin
   end;
 end;
 
-procedure TSourceDataModule.PackTables;
-begin
-  PackTables;
-end;
-
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
+  FFlags :=
+    [mtfSaveData,
+      mtfSaveNonVisible,
+      mtfSaveBlobs,
+      mtfSaveFiltered,
+      mtfSaveIgnoreRange,
+      mtfSkipRest,
+      mtfSaveInLocalFormat,
+      mtfSaveIgnoreMasterDetail];
+//      mtfSaveDeltas];
   NewDataBase;
+end;
+
+procedure TSourceDataModule.SaveToTextDir(const AFileName: TFileName);
+begin
+  SaveToTextDir(AFileName, FFlags);
 end;
 
 end.

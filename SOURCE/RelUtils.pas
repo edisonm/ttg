@@ -22,6 +22,8 @@ procedure doErrorRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADeta
 function CompareField(Field: TField; Value: Variant): Boolean;
 function CompareRecord(Fields: TList; KeyValue: Variant): Boolean;
 function CompareVarArray(v1, v2: Variant): Boolean;
+procedure SaveDataSetToCSVFile(ADataSet: TDataSet; const AFileName: TFileName);
+procedure LoadDataSetFromCSVFile(ADataSet: TDataSet; const AFileName: TFileName);
 
 implementation
 
@@ -334,6 +336,147 @@ procedure doErrorRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADeta
 begin
   if CheckRelation(AMaster, ADetail, AMasterFields, ADetailFields) then
     raise ERelationUtils.CreateFmt('Error verificando relación entre %s y %s.  Campos detallados no tienen maestro', [AMaster.Name, ADetail.Name]);
+end;
+
+function StringToScaped(const AString: string): string;
+var
+  i, l: Integer;
+begin
+  Result := '';
+  l := Length(AString);
+  for i := 1 to l do
+  begin
+    case AString[i] of
+      #13 : Result := Result + '\n';
+      #10 : Result := Result + '\r';
+      '\' : Result := Result + '\\';
+      '''': Result := Result + '\''';
+      '"' : Result := Result + '\"';
+    else
+      Result := Result + AString[i]
+    end
+  end
+end;
+
+function ScapedToString(const AString: string; var i: Integer): string;
+var
+  l: Integer;
+begin
+  Result := '';
+  l := Length(AString);
+  while i <= l do
+  begin
+    case AString[i] of
+    '\' :
+    begin
+      Inc(i);
+      case AString[i] of
+        'n': Result := Result + #13;
+        'r': Result := Result + #10;
+      else
+        Result := Result + AString[i];
+      end
+    end;
+    '"' : Exit;
+    else
+      Result := Result + AString[i];
+    end;
+    inc(i);
+  end;
+end;
+
+procedure SaveDataSetToCSVFile(ADataSet: TDataSet; const AFileName: TFileName);
+var
+  s, v: string;
+  i: Integer;
+  AStrings: TStrings;
+begin
+  AStrings := TStringList.Create;
+  try
+    for i := 0 to ADataSet.FieldCount - 1 do
+    begin
+      if ADataSet.Fields[i].FieldKind = fkData then
+      begin
+        s := s + '"' + StringToScaped(ADataSet.Fields[i].FieldName) + '",';
+      end
+    end;
+    AStrings.Add(s);
+    ADataSet.DisableControls;
+    try
+      ADataSet.First;
+      while not ADataSet.Eof do
+      begin
+        s := '';
+        for i := 0 to ADataSet.FieldCount - 1 do
+        begin
+          if ADataSet.Fields[i].FieldKind = fkData then
+          begin
+            v := StringToScaped(ADataSet.Fields[i].AsString);
+            s := s + '"' + v + '",';
+          end;
+        end;
+        AStrings.Add(s);
+        ADataSet.Next;
+      end;
+    finally
+      ADataSet.EnableControls;
+    end;
+    AStrings.SaveToFile(AFileName);
+  finally
+    AStrings.Free;
+  end;
+end;
+
+procedure LoadDataSetFromCSVFile(ADataSet: TDataSet; const AFileName: TFileName);
+var
+  s, v: string;
+  i, j, l, Pos: Integer;
+  AStrings: TStrings;
+  Fields: array of TField;
+  Field: TField;
+begin
+  AStrings := TStringList.Create;
+  try
+    AStrings.LoadFromFile(AFileName);
+    s := AStrings.Strings[0];
+    Pos := 2;
+    l := 0;
+    while True do
+    begin
+      v := ScapedToString(s, Pos);
+      if v = '' then
+      break;
+      Field := ADataSet.FindField(v);
+      if Assigned(Field) then
+      begin
+        Inc(l);
+        SetLength(Fields, l);
+        Fields[l - 1] := Field;
+      end;
+      Inc(Pos, 3);
+    end;
+    ADataSet.DisableControls;
+    try
+      for i := 1 to AStrings.Count - 1 do
+      begin
+        ADataSet.Append;
+        Pos := 2;
+        s := AStrings[i];
+        for j := 0 to l - 1 do
+        begin
+          v := ScapedToString(s, Pos);
+          Fields[j].AsString := v;
+          Inc(Pos, 3);
+        end;
+        ADataSet.Post;
+      end;
+    finally
+      ADataSet.EnableControls;
+    end;
+    AStrings.SaveToFile(AFileName);
+  finally
+    AStrings.Free;
+  end;
 end;
 
 end.

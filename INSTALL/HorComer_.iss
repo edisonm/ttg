@@ -3,7 +3,7 @@
 ; 23 Agosto 1999 at 00:51
 
 [Setup]
-MinVersion=4.0,3.51
+MinVersion=4.0,4.0
 AppName=Horarios para Colegio
 AppVerName=Horarios para Colegio 1.2
 AppCopyright=Edición 01-02-1999, Edison Mera, Quito - Ecuador

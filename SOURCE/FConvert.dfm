@@ -48,9 +48,9 @@ object ConvertForm: TConvertForm
     TabOrder = 1
   end
   object btnConvertir: TButton
-    Left = 357
+    Left = 352
     Top = 322
-    Width = 75
+    Width = 80
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = 'Convertir'
@@ -73,7 +73,7 @@ object ConvertForm: TConvertForm
   object cbxDataSet: TComboBox
     Left = 8
     Top = 323
-    Width = 336
+    Width = 337
     Height = 21
     Anchors = [akLeft, akRight, akBottom]
     ItemHeight = 13
@@ -91,7 +91,7 @@ object ConvertForm: TConvertForm
   object kbmAsignatura: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
-    AutoIncMinValue = 0
+    AutoIncMinValue = -1
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -144,15 +144,12 @@ object ConvertForm: TConvertForm
     RecalcOnIndex = False
     RecalcOnFetch = True
     SortOptions = []
-    Performance = mtpfFast
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
     StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
     PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
@@ -162,7 +159,7 @@ object ConvertForm: TConvertForm
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.50e Beta'
+    Version = '2.49'
     Left = 4
     Top = 6
     object kbmAsignaturaCodMateria: TIntegerField

@@ -1,12 +1,11 @@
 unit DSrcBase;
 (*
-  Domingo, 22 de Octubre de 2000 10:47:53 a.m.
+  domingo, 24 de enero de 2010 1:51:13
 
-  Advertencia:
+  Warning:
 
-    Este módulo ha sido creado automáticamente.
-    No lo modifique manualmente, ya que los cambios se perderán la próxima
-    vez que se genere.
+    This module has been created automatically.
+    Do not modify it manually or the changes will be lost the next update
 
 
 *)
@@ -166,12 +165,13 @@ type
   public
     procedure LoadFromBinaryStream(AStream: TStream);
     procedure LoadFromBinaryFile(const AFileName: string);
+    procedure LoadFromTextDir(const ADirName: string);
     procedure SaveToBinaryStream(AStream: TStream; flags:TkbmMemTableSaveFlags);
     procedure SaveToBinaryFile(const AFileName: string; flags:TkbmMemTableSaveFlags);
+    procedure SaveToTextDir(const ADirName: string; flags:TkbmMemTableSaveFlags);
     procedure EmptyTables;
     procedure OpenTables;
     procedure CloseTables;
-    procedure PackTables;
     property CheckRelations: Boolean read FCheckRelations write FCheckRelations;
     property DataSetNameList: TStrings read FDataSetNameList;
     property DataSetDescList: TStrings read FDataSetDescList;
@@ -725,6 +725,33 @@ begin
   end;
 end;
 
+procedure TSourceBaseDataModule.LoadFromTextDir(const ADirName: string);
+begin
+  FCheckRelations := False;
+  try
+    LoadDataSetFromCSVFile(kbmAulaTipo, ADirName + '\AulaTipo.csv');
+    LoadDataSetFromCSVFile(kbmEspecializacion, ADirName + '\Especializacion.csv');
+    LoadDataSetFromCSVFile(kbmDia, ADirName + '\Dia.csv');
+    LoadDataSetFromCSVFile(kbmMateria, ADirName + '\Materia.csv');
+    LoadDataSetFromCSVFile(kbmNivel, ADirName + '\Nivel.csv');
+    LoadDataSetFromCSVFile(kbmHora, ADirName + '\Hora.csv');
+    LoadDataSetFromCSVFile(kbmHorario, ADirName + '\Horario.csv');
+    LoadDataSetFromCSVFile(kbmCurso, ADirName + '\Curso.csv');
+    LoadDataSetFromCSVFile(kbmParaleloId, ADirName + '\ParaleloId.csv');
+    LoadDataSetFromCSVFile(kbmMateriaProhibicionTipo, ADirName + '\MateriaProhibicionTipo.csv');
+    LoadDataSetFromCSVFile(kbmPeriodo, ADirName + '\Periodo.csv');
+    LoadDataSetFromCSVFile(kbmParalelo, ADirName + '\Paralelo.csv');
+    LoadDataSetFromCSVFile(kbmProfesor, ADirName + '\Profesor.csv');
+    LoadDataSetFromCSVFile(kbmMateriaProhibicion, ADirName + '\MateriaProhibicion.csv');
+    LoadDataSetFromCSVFile(kbmDistributivo, ADirName + '\Distributivo.csv');
+    LoadDataSetFromCSVFile(kbmHorarioDetalle, ADirName + '\HorarioDetalle.csv');
+    LoadDataSetFromCSVFile(kbmProfesorProhibicionTipo, ADirName + '\ProfesorProhibicionTipo.csv');
+    LoadDataSetFromCSVFile(kbmProfesorProhibicion, ADirName + '\ProfesorProhibicion.csv');
+  finally
+    FCheckRelations := True;
+  end;
+end;
+
 procedure TSourceBaseDataModule.SaveToBinaryStream(AStream: TStream; flags:TkbmMemTableSaveFlags);
 begin
   kbmAulaTipo.SaveToBinaryStream(AStream, flags);
@@ -757,6 +784,28 @@ begin
   finally
     Stream.Free;
   end;
+end;
+
+procedure TSourceBaseDataModule.SaveToTextDir(const ADirName: string; flags:TkbmMemTableSaveFlags);
+begin
+  SaveDataSetToCSVFile(kbmAulaTipo, ADirName + '\AulaTipo.csv');
+  SaveDataSetToCSVFile(kbmEspecializacion, ADirName + '\Especializacion.csv');
+  SaveDataSetToCSVFile(kbmDia, ADirName + '\Dia.csv');
+  SaveDataSetToCSVFile(kbmMateria, ADirName + '\Materia.csv');
+  SaveDataSetToCSVFile(kbmNivel, ADirName + '\Nivel.csv');
+  SaveDataSetToCSVFile(kbmHora, ADirName + '\Hora.csv');
+  SaveDataSetToCSVFile(kbmHorario, ADirName + '\Horario.csv');
+  SaveDataSetToCSVFile(kbmCurso, ADirName + '\Curso.csv');
+  SaveDataSetToCSVFile(kbmParaleloId, ADirName + '\ParaleloId.csv');
+  SaveDataSetToCSVFile(kbmMateriaProhibicionTipo, ADirName + '\MateriaProhibicionTipo.csv');
+  SaveDataSetToCSVFile(kbmPeriodo, ADirName + '\Periodo.csv');
+  SaveDataSetToCSVFile(kbmParalelo, ADirName + '\Paralelo.csv');
+  SaveDataSetToCSVFile(kbmProfesor, ADirName + '\Profesor.csv');
+  SaveDataSetToCSVFile(kbmMateriaProhibicion, ADirName + '\MateriaProhibicion.csv');
+  SaveDataSetToCSVFile(kbmDistributivo, ADirName + '\Distributivo.csv');
+  SaveDataSetToCSVFile(kbmHorarioDetalle, ADirName + '\HorarioDetalle.csv');
+  SaveDataSetToCSVFile(kbmProfesorProhibicionTipo, ADirName + '\ProfesorProhibicionTipo.csv');
+  SaveDataSetToCSVFile(kbmProfesorProhibicion, ADirName + '\ProfesorProhibicion.csv');
 end;
 
 procedure TSourceBaseDataModule.EmptyTables;
@@ -823,28 +872,6 @@ begin
   kbmHorarioDetalle.Close;
   kbmProfesorProhibicionTipo.Close;
   kbmProfesorProhibicion.Close;
-end;
-
-procedure TSourceBaseDataModule.PackTables;
-begin
-  kbmAulaTipo.PackTable;
-  kbmEspecializacion.PackTable;
-  kbmDia.PackTable;
-  kbmMateria.PackTable;
-  kbmNivel.PackTable;
-  kbmHora.PackTable;
-  kbmHorario.PackTable;
-  kbmCurso.PackTable;
-  kbmParaleloId.PackTable;
-  kbmMateriaProhibicionTipo.PackTable;
-  kbmPeriodo.PackTable;
-  kbmParalelo.PackTable;
-  kbmProfesor.PackTable;
-  kbmMateriaProhibicion.PackTable;
-  kbmDistributivo.PackTable;
-  kbmHorarioDetalle.PackTable;
-  kbmProfesorProhibicionTipo.PackTable;
-  kbmProfesorProhibicion.PackTable;
 end;
 end.
 

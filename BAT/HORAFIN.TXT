@@ -1,2 +1,1 @@
-La hora actual es  17:13:53,73
-Escriba la nueva hora: 
+22:07

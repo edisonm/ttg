@@ -578,11 +578,11 @@ object ConfiguracionForm: TConfiguracionForm
         Left = 304
         Top = 200
         Width = 81
-        Height = 22
-        TabOrder = 9
-        DataSource = SourceDataModule.dsMateriaProhibicionTipo
-        ReadOnly = False
+        Height = 21
         DataField = 'ColMateProhibicionTipo'
+        DataSource = SourceDataModule.dsMateriaProhibicionTipo
+        ItemHeight = 13
+        TabOrder = 9
       end
       object dbeValMateProhibicionTipo: TDBEdit
         Left = 304
@@ -606,11 +606,11 @@ object ConfiguracionForm: TConfiguracionForm
         Left = 304
         Top = 304
         Width = 81
-        Height = 22
-        TabOrder = 12
-        DataSource = SourceDataModule.dsProfesorProhibicionTipo
-        ReadOnly = False
+        Height = 21
         DataField = 'ColProfProhibicionTipo'
+        DataSource = SourceDataModule.dsProfesorProhibicionTipo
+        ItemHeight = 13
+        TabOrder = 12
       end
       object dbeValProfProhibicionTipo: TDBEdit
         Left = 304

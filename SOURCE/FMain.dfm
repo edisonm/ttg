@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 662
-  Top = 431
+  Left = 220
+  Top = 279
   Width = 601
   Height = 392
   Caption = 'Horarios para Colegio 1.2.1'
@@ -312,8 +312,8 @@ object MainForm: TMainForm
   end
   object MainMenu: TMainMenu
     Images = ImageList
-    Left = 169
-    Top = 57
+    Left = 170
+    Top = 56
     object MIFile: TMenuItem
       Caption = '&Archivo'
       HelpContext = 30
@@ -324,11 +324,14 @@ object MainForm: TMainForm
       object MIOpen: TMenuItem
         Action = actOpen
       end
+      object AbrirTexto1: TMenuItem
+        Action = actOpenCSV
+      end
       object MISave: TMenuItem
         Action = actSave
       end
       object MISaveTxt: TMenuItem
-        Action = actSaveTxt
+        Action = actSaveCSV
       end
       object MIReopen: TMenuItem
         Caption = 'Volver a abrir'
@@ -411,9 +414,6 @@ object MainForm: TMainForm
       end
       object MIMejorarHorario: TMenuItem
         Action = actMejorarHorario
-      end
-      object Compactartablas1: TMenuItem
-        Action = actCompactarTablas
       end
     end
     object MIView: TMenuItem
@@ -498,8 +498,8 @@ object MainForm: TMainForm
   end
   object SaveDialog: TSaveDialog
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 113
-    Top = 57
+    Left = 114
+    Top = 56
   end
   object FormStorage: TFormStorage
     Active = False
@@ -510,26 +510,26 @@ object MainForm: TMainForm
       'SaveDialogCSV.FileName'
       'OpenDialog.FileName')
     StoredValues = <>
-    Left = 85
-    Top = 57
+    Left = 86
+    Top = 56
   end
   object OpenDialog: TOpenDialog
     DefaultExt = 'hpc'
     Filter = 'Horario para colegio (*.hpc)|*.hpc'
     Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
-    Left = 57
-    Top = 57
+    Left = 58
+    Top = 56
   end
   object MRUManager: TMRUManager
     IniStorage = FormStorage
     RecentMenu = MIReopen
     OnClick = MRUManagerClick
-    Left = 197
-    Top = 57
+    Left = 198
+    Top = 56
   end
   object ImageList: TImageList
-    Left = 29
-    Top = 57
+    Left = 30
+    Top = 56
     Bitmap = {
       494C01011E002200040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000009000000001002000000000000090
@@ -1728,8 +1728,8 @@ object MainForm: TMainForm
   end
   object ActionList: TActionList
     Images = ImageList
-    Left = 1
-    Top = 57
+    Left = 2
+    Top = 56
     object actContents: TAction
       Category = 'Help'
       Caption = 'Contenido'
@@ -2019,16 +2019,17 @@ object MainForm: TMainForm
       Hint = 'Mejorar Horario|Mejorar el Horario buscando en doble profundidad'
       OnExecute = actMejorarHorarioExecute
     end
-    object actCompactarTablas: TAction
-      Category = 'Tools'
-      Caption = 'Compactar tablas'
-      Hint = 'Compactar tablas|Compactar tablas'
-      OnExecute = actCompactarTablasExecute
-    end
-    object actSaveTxt: TAction
+    object actSaveCSV: TAction
       Category = 'File'
-      Caption = 'Guardar como texto'
-      OnExecute = actSaveTxtExecute
+      Caption = 'Guardar Texto...'
+      Hint = 'Guardar|Guardar colegio en directorio de archivos CSV'
+      OnExecute = actSaveCSVExecute
+    end
+    object actOpenCSV: TAction
+      Category = 'File'
+      Caption = 'Abrir Texto'
+      Hint = 'Abrir|Abrir colegio previamente guardado en directorio de CSV'
+      OnExecute = actOpenCSVExecute
     end
   end
   object rxmParalelo: TkbmMemTable
@@ -2574,8 +2575,8 @@ object MainForm: TMainForm
     DefaultExt = 'csv'
     Filter = 'CSV delimitado por comas(*.csv)|*.csv'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 141
-    Top = 57
+    Left = 142
+    Top = 56
   end
   object FSProteccion: TFormStorage
     Active = False
@@ -2593,7 +2594,7 @@ object MainForm: TMainForm
       item
         Name = 'LastDate'
       end>
-    Left = 225
-    Top = 57
+    Left = 226
+    Top = 56
   end
 end
