@@ -748,7 +748,8 @@ begin
   if PackerFileHeader.GenHeader <> 'DBP' + ^Z then
     raise EConvertError.Create(SNotDBPackerFile);
   if PackerFileHeader.VersionNumber <> pfhPackerVersionNumber then
-    raise EConvertError.Create(SInvalidDBPackerVersion);
+    raise EConvertError.CreateFmt(SInvalidDBPackerVersion,
+      [PackerFileHeader.VersionNumber, pfhPackerVersionNumber]);
   HPCFileHeader.GenHeader := 'HPC' + ^Z;
   HPCFileHeader.VersionNumber := pfhHPCVersionNumber;
   ADestination.Write(HPCFileHeader, SizeOf(HPCFileHeader));
