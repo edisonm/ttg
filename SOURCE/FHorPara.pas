@@ -6,19 +6,19 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FCrsMMER, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, RxLookup,
   Db, FCrsMME1, TB97Ctls, DB97Btn, TB97,
-  TB97Tlbr, kbmMemTable, DBCtrls;
+  TB97Tlbr, kbmMemTable, DBCtrls, ImgList, ComCtrls, ToolWin;
 
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)
     QuHorarioParalelo: TkbmMemTable;
-    btn97IntercambiarPeriodos: TToolbarButton97;
+    btn97IntercambiarPeriodos: TToolButton;
     dlcNivel: TRxDBLookupCombo;
     dlcEspecializacion: TRxDBLookupCombo;
     dlcParaleloId: TRxDBLookupCombo;
     cbVerParalelo: TComboBox;
-    btn97Mostrar: TToolbarButton97;
-    btn97Prior: TToolbarButton97;
-    btn97Next: TToolbarButton97;
+    btn97Mostrar: TToolButton;
+    btn97Prior: TToolButton;
+    btn97Next: TToolButton;
     QuHorarioParaleloCodMateria: TIntegerField;
     QuHorarioParaleloCodNivel: TIntegerField;
     QuHorarioParaleloCodEspecializacion: TIntegerField;
@@ -31,12 +31,12 @@ type
     QuHorarioParaleloNombre: TStringField;
     kbmParalelo: TkbmMemTable;
     dsParalelo: TDataSource;
-    kbmParaleloNomParaleloId: TStringField;
-    kbmParaleloAbrEspecializacion: TStringField;
-    kbmParaleloAbrNivel: TStringField;
     kbmParaleloCodParaleloId: TIntegerField;
-    kbmParaleloCodNivel: TIntegerField;
     kbmParaleloCodEspecializacion: TIntegerField;
+    kbmParaleloCodNivel: TIntegerField;
+    kbmParaleloAbrNivel: TStringField;
+    kbmParaleloAbrEspecializacion: TStringField;
+    kbmParaleloNomParaleloId: TStringField;
     procedure btn97MostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure IntercambiarPeriodosClick(Sender: TObject);
