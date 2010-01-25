@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Placemnt, Grids, DBGrids, RXCtrls, RXDBCtrl, StdCtrls,
-  DBIndex, Buttons, DBBBtn, DBCtrls, ExtCtrls, RXSplit, ImgList, ComCtrls, ToolWin;
+  DBIndex, Buttons, DBCtrls, ExtCtrls, RXSplit, ImgList, ComCtrls, ToolWin;
 
 type
   TMasterDetailEditorForm = class(TSingleEditorForm)
@@ -25,7 +25,7 @@ var
 
 implementation
 uses
-  DBBtnCmn, QMaDeRep, Printers, FMain;
+  QMaDeRep, Printers, FMain;
 {$R *.DFM}
 
 procedure TMasterDetailEditorForm.DBGridEnter(Sender: TObject);

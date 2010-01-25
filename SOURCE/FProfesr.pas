@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons,
-  DBBBtn, DBCtrls, ExtCtrls, ComCtrls, RXCtrls, RXDBCtrl,
+  DBCtrls, ExtCtrls, ComCtrls, RXCtrls, RXDBCtrl,
   Printers, RXSplit, CDBFmlry, DBFmlry, ImgList, ToolWin;
 
 type
