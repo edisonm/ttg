@@ -2403,10 +2403,8 @@ var
         begin
           for k := 0 to d - 1 do
           begin
-            mp := FMateriaPeriodoAMateriaProhibicionTipo[m,
-              APeriodo + k];
-            mp1 := FMateriaPeriodoAMateriaProhibicionTipo[m,
-              APeriodo1 + k];
+            mp := FMateriaPeriodoAMateriaProhibicionTipo[m, APeriodo + k];
+            mp1 := FMateriaPeriodoAMateriaProhibicionTipo[m, APeriodo1 + k];
             if mp <> mp1 then
             begin
               if mp >= 0 then
