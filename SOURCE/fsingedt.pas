@@ -3,10 +3,9 @@ unit FSingEdt;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons,
-  ExtCtrls, Placemnt, DBIndex, ComCtrls, RXCtrls, RXDBCtrl,
-  RXSplit, CDBFmlry, DBFmlry, FEditor, kbmMemTable, ImgList, ToolWin;
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
+  StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls, Placemnt, DBIndex,
+  ComCtrls, RXCtrls, RXDBCtrl, RXSplit, FEditor, kbmMemTable, ImgList, ToolWin;
 
 type
   TSingleEditorForm = class(TEditorForm)

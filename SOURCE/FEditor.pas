@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Db, StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls,
-  Placemnt, DBIndex, ComCtrls, CDBFmlry, DBFmlry, ImgList, ToolWin;
+  Placemnt, DBIndex, ComCtrls, ImgList, ToolWin;
 
 type
   TEditorForm = class(TForm)

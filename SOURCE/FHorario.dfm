@@ -1,6 +1,6 @@
 inherited HorarioForm: THorarioForm
-  Left = 455
-  Top = 301
+  Left = 297
+  Top = 299
   Width = 626
   Height = 361
   Caption = 'HorarioForm'
