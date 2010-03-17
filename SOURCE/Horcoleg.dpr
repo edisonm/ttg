@@ -5,7 +5,7 @@ uses
   Dialogs,
   SysUtils,
   FMain in 'FMain.pas' {MainForm},
-  DMaster in 'DMaster.PAS' {MasterDataModule: TDataModule},
+  DMaster in 'DMaster.pas' {MasterDataModule: TDataModule},
   KerModel in 'KerModel.pas',
   KerEvolE in 'KerEvolE.pas',
   FProgres in 'FProgres.pas' {ProgressForm},
