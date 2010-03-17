@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FCrsMMER, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids,
-  Db, FCrsMME1, kbmMemTable, DBCtrls, ImgList, ComCtrls, ToolWin;
+  FCrsMMER, StdCtrls, Buttons, ExtCtrls, Grids, Db, FCrsMME1, kbmMemTable,
+  DBCtrls, ImgList, ComCtrls, ToolWin;
 
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)

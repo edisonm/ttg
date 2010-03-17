@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons, DBCtrls,
-  ExtCtrls, ComCtrls, Printers, ImgList, ToolWin;
+  FSingEdt, Db, Grids, DBGrids, StdCtrls, DBIndex, Buttons, DBCtrls, ExtCtrls,
+  ComCtrls, Printers, ImgList, ToolWin;
 
 type
   TProfesorForm = class(TSingleEditorForm)

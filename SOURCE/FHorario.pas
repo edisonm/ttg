@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons,
-  DBCtrls, ExtCtrls, kbmMemTable, ImgList, ComCtrls, ToolWin;
+  FSingEdt, Db, Grids, DBGrids, StdCtrls, DBIndex, Buttons, DBCtrls, ExtCtrls,
+  kbmMemTable, ImgList, ComCtrls, ToolWin;
 (*
   FormStorage:
    Panel2.Width

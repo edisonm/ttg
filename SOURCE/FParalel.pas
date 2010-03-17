@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Placemnt, Grids, DBGrids, ExtCtrls, StdCtrls, DBIndex, DBCtrls,
-  CheckLst, DBChLsBx, Printers, kbmMemTable, ImgList, ComCtrls, ToolWin;
+  FSingEdt, Db, Grids, DBGrids, ExtCtrls, StdCtrls, DBIndex, DBCtrls, CheckLst,
+  DBChLsBx, Printers, kbmMemTable, ImgList, ComCtrls, ToolWin;
 (*
   FormStorage:
     DBCheckListBox.Width

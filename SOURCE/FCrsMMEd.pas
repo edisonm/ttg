@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, Grids, DBGrids, ExtCtrls, DB, Placemnt,
-  FEditor, ImgList, ComCtrls, ToolWin;
+  StdCtrls, Buttons, Grids, DBGrids, ExtCtrls, DB, FEditor, ImgList, ComCtrls,
+  ToolWin;
 
 type
   PIntegerArray = ^TIntegerArray;
