@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 220
-  Top = 279
+  Left = 745
+  Top = 310
   Width = 601
   Height = 392
   Caption = 'Horarios para Colegio 1.2.1'
@@ -476,18 +476,6 @@ object MainForm: TMainForm
     Left = 114
     Top = 56
   end
-  object FormStorage: TFormStorage
-    Active = False
-    IniSection = '\Software\SGHC1\FMain'
-    UseRegistry = True
-    StoredProps.Strings = (
-      'SaveDialog.FileName'
-      'SaveDialogCSV.FileName'
-      'OpenDialog.FileName')
-    StoredValues = <>
-    Left = 86
-    Top = 56
-  end
   object OpenDialog: TOpenDialog
     DefaultExt = 'hpc'
     Filter = 'Horario para colegio (*.hpc)|*.hpc'
@@ -496,7 +484,6 @@ object MainForm: TMainForm
     Top = 56
   end
   object MRUManager: TMRUManager
-    IniStorage = FormStorage
     RecentMenu = MIReopen
     OnClick = MRUManagerClick
     Left = 198
@@ -2007,7 +1994,7 @@ object MainForm: TMainForm
       OnExecute = actOpenCSVExecute
     end
   end
-  object rxmParalelo: TkbmMemTable
+  object tbParalelo: TkbmMemTable
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -2033,11 +2020,11 @@ object MainForm: TMainForm
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    OnFilterRecord = rxmParaleloFilterRecord
+    OnFilterRecord = tbParaleloFilterRecord
     Left = 48
     Top = 111
   end
-  object rxmProfesor: TkbmMemTable
+  object tbProfesor: TkbmMemTable
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -2063,7 +2050,7 @@ object MainForm: TMainForm
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    OnFilterRecord = rxmProfesorFilterRecord
+    OnFilterRecord = tbProfesorFilterRecord
     Left = 48
     Top = 139
   end
@@ -2290,7 +2277,7 @@ object MainForm: TMainForm
       Lookup = True
     end
   end
-  object rxmMateria: TkbmMemTable
+  object tbMateria: TkbmMemTable
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -2316,7 +2303,7 @@ object MainForm: TMainForm
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    OnFilterRecord = rxmMateriaFilterRecord
+    OnFilterRecord = tbMateriaFilterRecord
     Left = 48
     Top = 184
   end
@@ -2516,7 +2503,7 @@ object MainForm: TMainForm
       Size = 10
     end
   end
-  object rxmProfesor1: TkbmMemTable
+  object tbProfesor1: TkbmMemTable
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -2542,7 +2529,7 @@ object MainForm: TMainForm
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    OnFilterRecord = rxmProfesor1FilterRecord
+    OnFilterRecord = tbProfesor1FilterRecord
     Left = 48
     Top = 212
   end
@@ -2551,25 +2538,6 @@ object MainForm: TMainForm
     Filter = 'CSV delimitado por comas(*.csv)|*.csv'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 142
-    Top = 56
-  end
-  object FSProteccion: TFormStorage
-    Active = False
-    IniSection = '\Software\SPS1'
-    Options = []
-    RegistryRoot = prLocalMachine
-    UseRegistry = True
-    StoredValues = <
-      item
-        Name = 'Password'
-      end
-      item
-        Name = 'InitDate'
-      end
-      item
-        Name = 'LastDate'
-      end>
-    Left = 226
     Top = 56
   end
 end

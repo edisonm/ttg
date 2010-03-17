@@ -1,6 +1,6 @@
 object SplashForm: TSplashForm
-  Left = 176
-  Top = 223
+  Left = 181
+  Top = 260
   BorderStyle = bsNone
   ClientHeight = 182
   ClientWidth = 373

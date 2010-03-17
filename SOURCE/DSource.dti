@@ -1,9 +1,9 @@
 [Designer]
 Version=1
-Left=319
-Top=144
-Width=758
-Height=496
+Left=311
+Top=148
+Width=940
+Height=527
 Splitter=377
 SelectedTab=Components
 
@@ -20,7 +20,7 @@ PrintToFile=0
 PrintBorders=1
 PrintSelected=0
 PrintVisible=0
-ExpandedItems=SourceDataModule\kbmHorario\kbmHorario.FieldDefs,SourceDataModule\kbmHorario\<Fields>.kbmHorario
+ExpandedItems=SourceDataModule\kbmParalelo,SourceDataModule\kbmParaleloId,SourceDataModule\kbmHorario\kbmHorario.FieldDefs,SourceDataModule\kbmHorario\<Fields>.kbmHorario
 
 [DataDiagrams]
 Version=1

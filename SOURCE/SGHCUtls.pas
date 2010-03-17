@@ -8,8 +8,7 @@ uses
 procedure MyMasterDetailShowEditor(MasterDetailEditorForm:
   TMasterDetailEditorForm; DataSet, DataSetDetail: TDataSet; const SuperTitle: string; DestroyEvent:
   TNotifyEvent);
-procedure MySingleShowEditor(FSingleEditor: TSingleEditorForm; DataSet:
-  TDataSet;
+procedure MySingleShowEditor(FSingleEditor: TSingleEditorForm; DataSet: TDataSet;
   const SuperTitle: string; DestroyEvent: TNotifyEvent);
 procedure LoadCaption(AForm: TForm; ADataSet: TDataSet);
 function ComposicionADuracion(const s: string): Integer;
@@ -26,14 +25,14 @@ procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
 implementation
 
 uses
-  SysUtils, RxGrids, DMaster, Consts, ArDBUtls, BDE;
+  SysUtils, DMaster, Consts, BaseUtls;
 
 procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorForm;
   AColDataSet, ARowDataSet, ARelDataSet: TDataSet);
 begin
   with SourceDataModule, ACrossManyToManyEditorForm do
   begin
-    RxDrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
+    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [Description[ARelDataSet], Description[AColDataSet],
       Description[ARowDataSet]]);
   end;
@@ -44,7 +43,7 @@ procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorRForm;
 begin
   with SourceDataModule, ACrossManyToManyEditorForm do
   begin
-    RxDrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
+    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [Description[ARelDataSet], Description[AColDataSet],
       Description[ARowDataSet]]);
     ListBox.Hint := Format('%s|%s', [ALstDataSet.Name,
@@ -57,7 +56,7 @@ procedure LoadHints(ACrossManyToManyEditorForm: TFCubicalEditor2; AColDataSet,
 begin
   with MasterDataModule, ACrossManyToManyEditorForm do
   begin
-    RxDrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
+    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [GetDescription(ARelDataSet), GetDescription(AColDataSet),
       GetDescription(ARowDataSet)]);
     CheckListBox.Hint := Format('%s|%s', [ALstDataSet.Name,
@@ -106,6 +105,7 @@ begin
   with FSingleEditor do
   begin
     OnDestroy := DestroyEvent;
+    (*
     with FormStorage do
     begin
       if not Active then
@@ -115,6 +115,7 @@ begin
         RestoreFormPlacement;
       end;
     end;
+    *)
     ShowEditor(DataSet, SuperTitle);
   end;
 end;

@@ -9,21 +9,20 @@ inherited ParaleloForm: TParaleloForm
       Hints.Strings = ()
     end
   end
-  inherited pnlStatus: TPanel
-    inherited SLRecordNo: TDBStatusLabel
-      Left = 481
-      Width = 20
-    end
-  end
   inherited Panel1: TPanel
-    inherited DBGrid: TRxDBGrid
-      Width = 346
+    object Splitter1: TSplitter [0]
+      Left = 350
+      Top = 1
+      Width = 3
+      Height = 253
+      Cursor = crHSplit
+      Align = alRight
+    end
+    inherited DBGrid: TDBGrid
+      Width = 349
       Hint = 'Cursos|Cursos disponibles'
       ParentShowHint = False
       ShowHint = True
-    end
-    inherited RxSplitter1: TRxSplitter
-      Left = 350
     end
     object DBCheckListBox: TDBCheckListBox
       Left = 353
@@ -43,26 +42,9 @@ inherited ParaleloForm: TParaleloForm
       ListField = 'NomParaleloId'
       KeyField = 'CodParaleloId'
     end
-    object RxSplitter: TRxSplitter
-      Left = 347
-      Top = 1
-      Width = 3
-      Height = 253
-      ControlFirst = DBCheckListBox
-      Align = alRight
-    end
   end
-  inherited FormStorage: TFormStorage
-    Active = True
-    IniSection = '\Software\SGHC1\SEParalelo'
-    StoredProps.Strings = (
-      'tb97Show.DockedTo'
-      'tb97Show.DockPos'
-      'tb97Show.DockRow'
-      'DBCheckListBox.Width')
-  end
-  inherited DataSource: TDataSource
-    DataSet = SourceDataModule.kbmCurso
+  inherited ImageList: TImageList
+    Left = 64
   end
   object DataSourceList: TDataSource
     DataSet = SourceDataModule.kbmParaleloId

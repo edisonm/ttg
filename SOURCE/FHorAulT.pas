@@ -4,13 +4,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, RxLookup,
-  FCrsMME0, Db, FCrsMME1, kbmMemTable, ImgList, ComCtrls, ToolWin;
+  Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, FCrsMME0, Db, FCrsMME1,
+  kbmMemTable, ImgList, ComCtrls, ToolWin, DBCtrls;
 
 type
   THorarioAulaTipoForm = class(TCrossManyToManyEditor1Form)
     QuHorarioAulaTipo: TkbmMemTable;
-    dlcAulaTipo: TRxDBLookupCombo;
+    dlcAulaTipo: TDBLookupComboBox;
     cbVerAulaTipo: TComboBox;
     btn97Mostrar: TToolButton;
     btn97Next: TToolButton;
@@ -93,7 +93,7 @@ begin
       raise Exception.Create('Debe especificar un tipo de aula');
     s := Format('[%s %d] - %s', [kbmHorario.Name, CodHorario, dlcAulaTipo.Text]);
     Caption := s;
-    FNombre := StrHolderShowAulaTipo.Strings.Values[cbVerAulaTipo.Text];
+    FNombre := StringsShowAulaTipo.Values[cbVerAulaTipo.Text];
     ShowEditor(kbmDia, kbmHora, QuHorarioAulaTipo, kbmPeriodo, 'CodDia', 'NomDia',
       'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora', 'CodHora', 'Nombre');
   end;
@@ -105,7 +105,7 @@ begin
   CodHorario := SourceDataModule.kbmHorarioCodHorario.Value;
   cbVerAulaTipo.Items.Clear;
   FillHorarioAulaTipo;
-  LoadNames(MasterDataModule.StrHolderShowAulaTipo.Strings, cbVerAulaTipo.Items);
+  LoadNames(MasterDataModule.StringsShowAulaTipo, cbVerAulaTipo.Items);
   cbVerAulaTipo.Text := cbVerAulaTipo.Items[0];
   SourceDataModule.kbmAulaTipo.First;
   dlcAulaTipo.KeyValue := SourceDataModule.kbmAulaTipoCodAulaTipo.Value;

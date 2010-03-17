@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons, DBCtrls,
-  ExtCtrls, ComCtrls, RXCtrls, RXDBCtrl, Printers, RXSplit, ImgList, ToolWin;
+  ExtCtrls, ComCtrls, Printers, ImgList, ToolWin;
 
 type
   TProfesorForm = class(TSingleEditorForm)
@@ -34,7 +34,7 @@ var
 implementation
 
 uses
-  DMaster, FCrsMMER, SGHCUtls, FConfig, QMaDeRep, QSingRep, DSource;
+  DMaster, FCrsMMER, SGHCUtls, FConfig, QSingRep, DSource;
 
 {$R *.DFM}
 
@@ -43,15 +43,17 @@ begin
   inherited;
   with SourceDataModule, TCrossManyToManyEditorRForm.Create(Self) do
   begin
+    (*
     with FormStorage do
     begin
       IniSection := IniSection + '\MMEdR' + kbmProfesorProhibicion.Name;
       Active := True;
       RestoreFormPlacement;
     end;
+    *)
     Caption := Format('%s %s - Editando %s', [SourceDataModule.Name[kbmProfesor],
       kbmProfesorApeNomProfesor.Value, Description[kbmProfesorProhibicion]]);
-    RxDrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
+    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [Description[kbmProfesorProhibicion], Description[kbmDia], Description[kbmHora]]);
     ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda',
       [SourceDataModule.Name[kbmProfesorProhibicionTipo],

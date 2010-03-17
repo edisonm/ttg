@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DB, StrHlder, Placemnt, kbmMemTable;
+  DB, StrHlder, Placemnt, kbmMemTable, SGHCUtls;
 
 type
   TMasterDataModule = class(TDataModule)
@@ -13,8 +13,6 @@ type
     TbTmpProfesorCargaNomProfesor: TStringField;
     TbTmpProfesorCargaApeProfesor: TStringField;
     TbTmpProfesorCargaCarga: TIntegerField;
-    strHolderShowProfesor: TStrHolder;
-    strHolderShowParalelo: TStrHolder;
     QuDistributivoProfesor: TkbmMemTable;
     QuDistributivoProfesorCodMateria: TIntegerField;
     QuDistributivoProfesorCodNivel: TIntegerField;
@@ -33,9 +31,13 @@ type
     TbTmpAulaTipoCargaCodAulaTipo: TIntegerField;
     TbTmpAulaTipoCargaAbrAulaTipo: TStringField;
     TbTmpAulaTipoCargaCarga: TIntegerField;
-    strHolderShowAulaTipo: TStrHolder;
+    procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
+    FStringsShowAulaTipo: TStrings;
+    FStringsShowProfesor: TStrings;
+    FStringsShowParalelo: TStrings;
     procedure FillProfesorProhibicionCant;
   public
     { Public declarations }
@@ -44,6 +46,9 @@ type
     function GetCargaActual: Integer;
     function PerformAllChecks(AMainStrings, ASubStrings: TStrings;
       AMaxCargaProfesor: Integer): Boolean;
+    property StringsShowAulaTipo: TStrings read FStringsShowAulaTipo;
+    property StringsShowProfesor: TStrings read FStringsShowProfesor;
+    property StringsShowParalelo: TStrings read FStringsShowParalelo;
   end;
 
 var
@@ -52,7 +57,7 @@ var
 implementation
 
 uses
-  SGHCUtls, HorColCm, DSource;
+  HorColCm, DSource, BaseUtls;
 {$R *.DFM}
 
 procedure TMasterDataModule.FillProfesorProhibicionCant;
@@ -524,6 +529,46 @@ begin
       kbmHorarioDetalle.FreeBookmark(Bookmark1);
     end;
   end;
+end;
+
+procedure TMasterDataModule.DataModuleCreate(Sender: TObject);
+begin
+  FStringsShowAulaTipo := TStringList.Create;
+  FStringsShowProfesor := TStringList.Create;
+  FStringsShowParalelo := TStringList.Create;
+  with FStringsShowAulaTipo do
+  begin
+    add('Nivel_Paralelo=AbrNivel;NomParaleloId');
+    add('Nivel_Paralelo_Materia=AbrNivel;NomParaleloId;NomMateria');
+    add('Nivel_Paralelo_Especializacion=AbrNivel;NomParaleloId;AbrEspecializacion');
+    add('Nivel_Paralelo_Especializacion_Materia=AbrNivel;NomParaleloId;AbrEspecializacion;NomMateria');
+    add('Nivel_Especializacion_Paralelo=AbrNivel;AbrEspecializacion;NomParaleloId');
+    add('Nivel_Especializacion_Paralelo_Materia=AbrNivel;AbrEspecializacion;NomParaleloId;NomMateria');
+    add('Materia=NomMateria');
+  end;
+  with FStringsShowProfesor do
+  begin
+    add('Nivel_Paralelo=AbrNivel;NomParaleloId');
+    add('Nivel_Paralelo_Materia=AbrNivel;NomParaleloId;NomMateria');
+    add('Nivel_Paralelo_Especializacion=AbrNivel;NomParaleloId;AbrEspecializacion');
+    add('Nivel_Paralelo_Especializacion_Materia=AbrNivel;NomParaleloId;AbrEspecializacion;NomMateria');
+    add('Nivel_Especializacion_Paralelo=AbrNivel;AbrEspecializacion;NomParaleloId');
+    add('Nivel_Especializacion_Paralelo_Materia=AbrNivel;AbrEspecializacion;NomParaleloId;NomMateria');
+    add('Materia=NomMateria');
+  end;
+  with FStringsShowParalelo do
+  begin
+    add('Materia=NomMateria');
+    add('Profesor=ApeNomProfesor');
+    add('Materia_Profesor=NomMateria;ApeNomProfesor');
+  end;
+end;
+
+procedure TMasterDataModule.DataModuleDestroy(Sender: TObject);
+begin
+  FStringsShowAulaTipo.Free;
+  FStringsShowProfesor.Free;
+  FStringsShowParalelo.Free;
 end;
 
 end.

@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, DB, About, ExtCtrls, RxVerInf, AppEvent;
+  StdCtrls, ComCtrls, DB, ExtCtrls, AppEvent;
 
 type
   TSplashForm = class(TForm)
@@ -23,12 +23,12 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    FVerInfo: TVersionInfo;
+(*    FVerInfo: TVersionInfo; *)
   public
     { Public declarations }
     procedure OnDataSetProgress(DataSet: TDataSet);
     procedure IncPosition;
-    property VerInfo: TVersionInfo read FVerInfo;
+(*    property VerInfo: TVersionInfo read FVerInfo; *)
   end;
 
 var
@@ -76,6 +76,7 @@ procedure TSplashForm.FormCreate(Sender: TObject);
   end;
 begin
   UpdBackground;
+  (*
   FVerInfo := TVersionInfo.Create(Application.ExeName);
   if VerInfo.Valid then
   begin
@@ -85,11 +86,12 @@ begin
   Caption := VerInfo.FileDescription;
   lblProductName.Caption := VerInfo.FileDescription;
   lblCopyright.Caption := FormatDateTime('c', VerInfo.VerFileDate);
+  *)
 end;
 
 procedure TSplashForm.FormDestroy(Sender: TObject);
 begin
-  VerInfo.Free;
+(*  VerInfo.Free; *)
 end;
 
 end.

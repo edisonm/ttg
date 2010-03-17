@@ -4,7 +4,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ExtCtrls, Placemnt, RXSplit;
+  StdCtrls, Buttons, ExtCtrls;
+(*
+  FormStorage:
+  memResumen.Height
+*)
 
 type
   TLogisticForm = class(TForm)
@@ -12,10 +16,9 @@ type
     Panel2: TPanel;
     bbtnClose: TBitBtn;
     lblMsg: TLabel;
-    FormStorage: TFormStorage;
     memResumen: TMemo;
     Panel1: TPanel;
-    RxSplitter1: TRxSplitter;
+    Splitter1: TSplitter;
   private
     { Private declarations }
   public

@@ -4,13 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, RxLookup, FCrsMME0, Db,
-  FCrsMME1, kbmMemTable, ImgList, ComCtrls, ToolWin;
+  Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, FCrsMME0, Db,
+  FCrsMME1, kbmMemTable, ImgList, ComCtrls, ToolWin, DBCtrls;
 
 type
   THorarioProfesorForm = class(TCrossManyToManyEditor1Form)
     QuHorarioProfesor: TkbmMemTable;
-    dlcProfesor: TRxDBLookupCombo;
     cbVerProfesor: TComboBox;
     btn97Mostrar: TToolButton;
     btn97Next: TToolButton;
@@ -27,6 +26,7 @@ type
     QuHorarioProfesorAbrNivel: TStringField;
     QuHorarioProfesorAbrEspecializacion: TStringField;
     QuHorarioProfesorNomParaleloId: TStringField;
+    dlcProfesor: TDBLookupComboBox;
     procedure btn97MostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btn97PriorClick(Sender: TObject);
@@ -60,7 +60,7 @@ begin
     s := Format('[%s %d] - %s', [Description[kbmHorario], CodHorario,
       dlcProfesor.Text]);
     Caption := s;
-    FNombre := StrHolderShowProfesor.Strings.Values[cbVerProfesor.Text];
+    FNombre := StringsShowProfesor.Values[cbVerProfesor.Text];
     ShowEditor(kbmDia, kbmHora, QuHorarioProfesor, kbmPeriodo, 'CodDia', 'NomDia',
       'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora', 'CodHora', 'Nombre');
   end;
@@ -73,7 +73,7 @@ begin
   SourceDataModule.kbmProfesor.First;
   cbVerProfesor.Items.Clear;
   FillHorarioProfesor;
-  LoadNames(MasterDataModule.StrHolderShowProfesor.Strings, cbVerProfesor.Items);
+  LoadNames(MasterDataModule.StringsShowProfesor, cbVerProfesor.Items);
   cbVerProfesor.Text := cbVerProfesor.Items[0];
   dlcProfesor.KeyValue := SourceDataModule.kbmProfesorCodProfesor.Value;
   btn97MostrarClick(nil);

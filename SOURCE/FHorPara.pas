@@ -4,16 +4,16 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FCrsMMER, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, RxLookup,
+  FCrsMMER, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids,
   Db, FCrsMME1, kbmMemTable, DBCtrls, ImgList, ComCtrls, ToolWin;
 
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)
     QuHorarioParalelo: TkbmMemTable;
     btn97IntercambiarPeriodos: TToolButton;
-    dlcNivel: TRxDBLookupCombo;
-    dlcEspecializacion: TRxDBLookupCombo;
-    dlcParaleloId: TRxDBLookupCombo;
+    dlcNivel: TDBLookupComboBox;
+    dlcEspecializacion: TDBLookupComboBox;
+    dlcParaleloId: TDBLookupComboBox;
     cbVerParalelo: TComboBox;
     btn97Mostrar: TToolButton;
     btn97Prior: TToolButton;
@@ -30,12 +30,9 @@ type
     QuHorarioParaleloNombre: TStringField;
     kbmParalelo: TkbmMemTable;
     dsParalelo: TDataSource;
-    kbmParaleloCodParaleloId: TIntegerField;
-    kbmParaleloCodEspecializacion: TIntegerField;
     kbmParaleloCodNivel: TIntegerField;
-    kbmParaleloAbrNivel: TStringField;
-    kbmParaleloAbrEspecializacion: TStringField;
-    kbmParaleloNomParaleloId: TStringField;
+    kbmParaleloCodEspecializacion: TIntegerField;
+    kbmParaleloCodParaleloId: TIntegerField;
     procedure btn97MostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure IntercambiarPeriodosClick(Sender: TObject);
@@ -75,12 +72,12 @@ uses
 
 function THorarioParaleloForm.GetCodDia: Integer;
 begin
-  Result := ColKey[RxDrawGrid.Col - 1];
+  Result := ColKey[DrawGrid.Col - 1];
 end;
 
 function THorarioParaleloForm.GetCodHora: Integer;
 begin
-  Result := RowKey[RxDrawGrid.Row - 1];
+  Result := RowKey[DrawGrid.Row - 1];
 end;
 
 function THorarioParaleloForm.GetCodNivel: Integer;
@@ -106,17 +103,17 @@ end;
 
 function THorarioParaleloForm.GetNomNivel: string;
 begin
-  Result := dlcNivel.DisplayValue;
+  Result := dlcNivel.Text;
 end;
 
 function THorarioParaleloForm.GetNomEspecializacion: string;
 begin
-  Result := dlcEspecializacion.DisplayValue;
+  Result := dlcEspecializacion.Text;
 end;
 
 function THorarioParaleloForm.GetNomParaleloId: string;
 begin
-  Result := dlcParaleloId.DisplayValue;
+  Result := dlcParaleloId.Text;
 end;
 
 procedure THorarioParaleloForm.btn97MostrarClick(Sender: TObject);
@@ -146,7 +143,7 @@ procedure THorarioParaleloForm.btn97MostrarClick(Sender: TObject);
   begin
     with SourceDataModule, MasterDataModule do
     begin
-      FNombre := StrHolderShowParalelo.Strings.Values[cbVerParalelo.Text];
+      FNombre := StringsShowParalelo.Values[cbVerParalelo.Text];
       ShowEditor(kbmDia, kbmHora, QuHorarioParalelo, kbmPeriodo,
         'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora',
         'CodHora', 'Nombre');
@@ -168,8 +165,7 @@ begin
   cbVerParalelo.Items.Clear;
   FillHorarioParalelo;
   kbmParalelo.First;
-  LoadNames(MasterDataModule.StrHolderShowParalelo.Strings,
-    cbVerParalelo.Items);
+  LoadNames(MasterDataModule.StringsShowParalelo, cbVerParalelo.Items);
   cbVerParalelo.Text := cbVerParalelo.Items[0];
   dlcNivel.KeyValue := kbmParaleloCodNivel.AsInteger;
   dlcEspecializacion.KeyValue := kbmParaleloCodEspecializacion.AsInteger;

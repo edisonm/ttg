@@ -5,8 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons,
-  DBCtrls, ExtCtrls, Printers, ImgList, ComCtrls, ToolWin, RXSplit,
-  RXDBCtrl, RXCtrls;
+  DBCtrls, ExtCtrls, Printers, ImgList, ComCtrls, ToolWin;
 
 type
   TMateriaForm = class(TSingleEditorForm)
@@ -24,8 +23,7 @@ var
 
 implementation
 uses
-  DMaster, FCrsMMER, FCrsMMEd, SGHCUtls, FConfig, QMaDeRep, QSingRep,
-  DSource;
+  DMaster, FCrsMMER, FCrsMMEd, SGHCUtls, FConfig, DSource;
 {$R *.DFM}
 
 procedure TMateriaForm.btn97MateriaProhibicionClick(Sender: TObject);
@@ -33,15 +31,17 @@ begin
   inherited;
   with SourceDataModule, TCrossManyToManyEditorRForm.Create(Self) do
   begin
+    (*
     with FormStorage do
     begin
       IniSection := IniSection + '\MMEdR' + kbmMateriaProhibicion.Name;
       Active := True;
       RestoreFormPlacement;
     end;
+    *)
     Caption := Format('%s %s - Editando %s', [SourceDataModule.Name[kbmMateria],
       kbmMateriaNomMateria.Value, Description[kbmMateriaProhibicion]]);
-    RxDrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
+    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [Description[kbmMateriaProhibicion], Description[kbmDia],
       Description[kbmHora]]);
     ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda',

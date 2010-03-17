@@ -16,7 +16,6 @@ unit SortAlgs;
 
   Dependencias:
     Delphi 4.0
-    RxLib
     Tb97
     ArCtrls
 

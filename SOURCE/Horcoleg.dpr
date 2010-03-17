@@ -25,17 +25,15 @@ uses
   FMasDeEd in 'FMasDeEd.pas' {MasterDetailEditorForm},
   FHorAulT in 'FHorAulT.pas' {HorarioAulaTipoForm},
   FSplash in 'FSplash.pas' {SplashForm},
-  QSingRep in 'QSingRep.pas' {SingleReportQrp},
-  QMaDeRep in 'QMaDeRep.pas' {MasterDetailReportQrp},
   FParalel in 'FParalel.pas' {ParaleloForm},
   FSingEdt in 'fsingedt.pas' {SingleEditorForm},
   FHorario in 'FHorario.pas' {HorarioForm},
-  About in 'About.pas',
   HorColCm in 'HorColCm.pas',
   FHorProf in 'FHorProf.pas' {HorarioProfesorForm},
   DSrcBase in 'DSrcBase.pas' {SourceBaseDataModule: TDataModule},
   RelUtils in 'RelUtils.pas',
-  DSource in 'DSource.pas' {SourceDataModule: TDataModule};
+  DSource in 'DSource.pas' {SourceDataModule: TDataModule},
+  BaseUtls in 'BaseUtls.pas';
 
 {$R *.RES}
 

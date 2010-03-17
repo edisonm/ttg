@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, ToolEdit, CurrEdit, Placemnt, Buttons, ComCtrls, Spin,
-  RxLookup, Grids, DBGrids, RXDBCtrl, Db, RXCombos, DBColCBx, DBCtrls;
+  Grids, DBGrids, Db, DBCtrls;
 
 type
   TConfiguracionForm = class(TForm)
@@ -46,9 +46,9 @@ type
     creProbReparacion: TCurrencyEdit;
     Label12: TLabel;
     Label15: TLabel;
-    RxDBGrid1: TRxDBGrid;
+    DBGrid1: TDBGrid;
     Label18: TLabel;
-    RxDBGrid2: TRxDBGrid;
+    DBGrid2: TDBGrid;
     tbsOpciones: TTabSheet;
     CBRandomize: TCheckBox;
     Label19: TLabel;
@@ -87,7 +87,7 @@ type
     Label36: TLabel;
     edtHorarioIni: TEdit;
     dbeNomMateProhibicionTipo: TDBEdit;
-    dbcColMateProhibicionTipo: TDBColorComboBox;
+    dbcColMateProhibicionTipo: TDBComboBox;
     dbeValMateProhibicionTipo: TDBEdit;
     Label30: TLabel;
     Label37: TLabel;
@@ -95,7 +95,7 @@ type
     Label39: TLabel;
     dbeNomProfProhibicionTipo: TDBEdit;
     Label40: TLabel;
-    dbcColProfProhibicionTipo: TDBColorComboBox;
+    dbcColProfProhibicionTipo: TDBComboBox;
     Label41: TLabel;
     dbeValProfProhibicionTipo: TDBEdit;
     Label42: TLabel;
@@ -105,7 +105,7 @@ type
     Label43: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure RxDBGridGetCellParams(Sender: TObject; Field: TField;
+    procedure DBGridGetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure CBRandomizeClick(Sender: TObject);
     procedure edtNomColegioChange(Sender: TObject);
@@ -138,7 +138,7 @@ begin
   //DeleteFile(FormStorage.IniFileName);
 end;
 
-procedure TConfiguracionForm.RxDBGridGetCellParams(Sender: TObject;
+procedure TConfiguracionForm.DBGridGetCellParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
   if Assigned(Field) and (Copy(Field.FieldName, 1, 3) = 'Col') and not Field.isNull then

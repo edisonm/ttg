@@ -5,8 +5,11 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons,
-  DBCtrls, ExtCtrls, RXCtrls, RXDBCtrl,
-  StrHlder, RXSplit, kbmMemTable, ImgList, ComCtrls, ToolWin;
+  DBCtrls, ExtCtrls, kbmMemTable, ImgList, ComCtrls, ToolWin;
+(*
+  FormStorage:
+   Panel2.Width
+*)
 
 type
   THorarioForm = class(TSingleEditorForm)
@@ -183,7 +186,7 @@ type
 implementation
 uses
   FCrsMMER, FHorPara, FHorAulT, DMaster, SGHCUtls, FMasDEEd, FCrsMME1, FHorProf,
-  FConfig, QMaDeRep, Printers, DSource;
+  FConfig, Printers, DSource;
 {$R *.DFM}
 
 procedure THorarioForm.btn97HorarioParaleloClick(Sender: TObject);
@@ -425,12 +428,14 @@ begin
   begin
     Caption := Format('%s %d', [Description[kbmHorario],
       kbmHorarioCodHorario.Value]);
+    (*
     with FormStorage do
     begin
       IniSection := IniSection + '\MMEd1HorarioProfesor';
       Active := True;
       RestoreFormPlacement;
     end;
+    *)
     LoadHints(HorarioProfesorForm, kbmDia, kbmHora, kbmProfesor);
   end;
 end;

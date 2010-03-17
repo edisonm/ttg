@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, Grids, RXGrids, DBGrids, ExtCtrls, DB, Placemnt,
+  StdCtrls, Buttons, Grids, DBGrids, ExtCtrls, DB, Placemnt,
   FEditor, ImgList, ComCtrls, ToolWin;
 
 type
@@ -21,15 +21,15 @@ type
   TGetRowNameNotifyEvent = procedure(Sender: TObject; ARow: Integer; var
     ARowName: string) of object;
   TCrossManyToManyEditorForm = class(TEditorForm)
-    RxDrawGrid: TRxDrawGrid;
+    DrawGrid: TDrawGrid;
     btn97Ok: TToolButton;
     btn97Cancel: TToolButton;
     procedure btn97OkClick(Sender: TObject);
     procedure btn97CancelClick(Sender: TObject);
-    procedure RxDrawGridDrawCell(Sender: TObject; ACol, ARow: Integer;
+    procedure DrawGridDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure RxDrawGridSelectCell(Sender: TObject; ACol, ARow: Integer;
+    procedure DrawGridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -210,8 +210,8 @@ begin
     FColKey, FKeyCol, FColName);
   ReadDataSet(FRowDataset, FRowFieldKey, FRowFieldName, FRowMin, FRowMax,
     FRowKey, FKeyRow, FRowName);
-  RxDrawGrid.ColCount := FColDataset.RecordCount + 1;
-  RxDrawGrid.RowCount := FRowDataset.RecordCount + 1;
+  DrawGrid.ColCount := FColDataset.RecordCount + 1;
+  DrawGrid.RowCount := FRowDataset.RecordCount + 1;
   if Assigned(FSelDataSet) then
   begin
     FSelDataSet.First;
@@ -247,7 +247,7 @@ end;
 
 procedure TCrossManyToManyEditorForm.InvalidateData;
 begin
-  RxDrawGrid.Invalidate;
+  DrawGrid.Invalidate;
 end;
 
 procedure TCrossManyToManyEditorForm.WriteData;
@@ -293,14 +293,14 @@ begin
   ReadData;
 end;
 
-procedure TCrossManyToManyEditorForm.RxDrawGridDrawCell(Sender: TObject; ACol,
+procedure TCrossManyToManyEditorForm.DrawGridDrawCell(Sender: TObject; ACol,
   ARow: Integer; Rect: TRect; State: TGridDrawState);
 var
   S: string;
   VColor: TColor;
   procedure DrawCellText;
   begin
-    with (Sender as TRxDrawGrid) do begin
+    with (Sender as TDrawGrid) do begin
       if ((ARow = Row) or (ACol = Col)) and (gdFixed in State) then
       begin
         VColor := Canvas.Font.Color;
@@ -323,7 +323,7 @@ var
   end;
   procedure GetValue;
   begin
-    with RxDrawGrid do
+    with DrawGrid do
     begin
       if (ACol = 0) and (ARow > 0) then
         s := RowName[ARow]
@@ -338,8 +338,10 @@ var
 begin
   if State = [gdSelected, gdFocused] then
   begin
-    (Sender as TRxDrawGrid).InvalidateCell(ACol, 0);
-    (Sender as TRxDrawGrid).InvalidateCell(0, ARow);
+(*
+    (Sender as TDrawGrid).InvalidateCell(ACol, 0);
+    (Sender as TDrawGrid).InvalidateCell(0, ARow);
+*)
   end;
   if Assigned(FColDataSet) and Assigned(FRowDataSet) then
   begin
@@ -370,16 +372,17 @@ begin
   Action := caFree;
 end;
 
-procedure TCrossManyToManyEditorForm.RxDrawGridSelectCell(Sender: TObject; ACol,
+procedure TCrossManyToManyEditorForm.DrawGridSelectCell(Sender: TObject; ACol,
   ARow: Integer; var CanSelect: Boolean);
 begin
   inherited;
-
-  with (Sender as TRxDrawGrid) do
+(*
+  with (Sender as TDrawGrid) do
   begin
     if ACol <> Col then InvalidateCell(Col, 0);
     if ARow <> Row then InvalidateCell(0, Row);
   end;
+*)
   if Assigned(FSelDataSet) then
     CanSelect := FSel[ACol - 1, ARow - 1];
 end;

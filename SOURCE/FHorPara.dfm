@@ -8,6 +8,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   TextHeight = 13
   inherited tb97Show: TToolBar
     Width = 696
+    Visible = True
     inherited btn97Ok: TToolButton
       Enabled = False
       Visible = False
@@ -37,51 +38,45 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       ImageIndex = 5
       OnClick = btn97NextClick
     end
-    object dlcNivel: TRxDBLookupCombo
+    object dlcNivel: TDBLookupComboBox
       Left = 138
       Top = 0
-      Width = 113
-      Height = 22
+      Width = 145
+      Height = 21
       Hint = 'Nivel|Seleccione el nivel'
-      DropDownCount = 8
-      DisplayEmpty = '(Nivel)'
-      LookupField = 'CodNivel'
-      LookupDisplay = 'AbrNivel'
-      LookupSource = SourceDataModule.dsNivel
+      KeyField = 'CodNivel'
+      ListField = 'AbrNivel'
+      ListSource = SourceDataModule.dsNivel
       TabOrder = 0
     end
-    object dlcEspecializacion: TRxDBLookupCombo
-      Left = 251
+    object dlcEspecializacion: TDBLookupComboBox
+      Left = 283
       Top = 0
       Width = 113
-      Height = 22
+      Height = 21
       Hint = 'Especialización|Seleccione la especialización'
-      DropDownCount = 8
-      DisplayEmpty = '(Especialización)'
-      LookupField = 'CodEspecializacion'
-      LookupDisplay = 'NomEspecializacion'
-      LookupSource = SourceDataModule.dsEspecializacion
+      KeyField = 'CodEspecializacion'
+      ListField = 'NomEspecializacion'
+      ListSource = SourceDataModule.dsEspecializacion
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
     end
-    object dlcParaleloId: TRxDBLookupCombo
-      Left = 364
+    object dlcParaleloId: TDBLookupComboBox
+      Left = 396
       Top = 0
       Width = 113
-      Height = 22
-      Hint = 'Seleccione el tipo de paralelo'
-      DropDownCount = 8
-      DisplayEmpty = '(Paralelo)'
-      LookupField = 'CodParaleloId'
-      LookupDisplay = 'NomParaleloId'
-      LookupSource = SourceDataModule.dsParaleloId
+      Height = 21
+      Hint = 'Paralelo|Seleccione el tipo de paralelo'
+      KeyField = 'CodParaleloId'
+      ListField = 'NomParaleloId'
+      ListSource = SourceDataModule.dsParaleloId
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
     end
     object cbVerParalelo: TComboBox
-      Left = 477
+      Left = 509
       Top = 0
       Width = 185
       Height = 21
@@ -93,7 +88,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Text = 'cbVerParalelo'
     end
     object btn97IntercambiarPeriodos: TToolButton
-      Left = 662
+      Left = 694
       Top = 0
       Hint = 'Intercambiar períodos|Intercambiar períodos'
       ImageIndex = 6
@@ -110,16 +105,11 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     Width = 696
     Height = 357
   end
-  inherited RxDrawGrid: TRxDrawGrid
+  inherited DrawGrid: TDrawGrid
     Width = 696
     Height = 357
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
     OnDblClick = IntercambiarPeriodosClick
-  end
-  inherited FormStorage: TFormStorage
-    Active = True
-    IniSection = '\Software\SGHC1\MMEd1HorarioParalelo'
-    Top = 104
   end
   inherited ImageList: TImageList
     Left = 116
@@ -588,28 +578,28 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     Version = '2.49'
     Left = 88
     Top = 104
-    object kbmParaleloCodNivel:TIntegerField
+    object TIntegerField
       DisplayLabel = 'Nivel'
       DisplayWidth = 10
       FieldName = 'CodNivel'
       Required = True
       Visible = False
     end
-    object kbmParaleloCodEspecializacion:TIntegerField
+    object TIntegerField
       DisplayLabel = 'Especialización'
       DisplayWidth = 10
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
     end
-    object kbmParaleloCodParaleloId:TIntegerField
+    object TIntegerField
       DisplayLabel = 'Paralelo'
       DisplayWidth = 10
       FieldName = 'CodParaleloId'
       Required = True
       Visible = False
     end
-    object kbmParaleloAbrNivel:TStringField
+    object TStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -621,7 +611,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Size = 5
       Lookup = True
     end
-    object kbmParaleloAbrEspecializacion:TStringField
+    object TStringField
       DisplayLabel = 'Especializacion'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -633,7 +623,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Size = 10
       Lookup = True
     end
-    object kbmParaleloNomParaleloId:TStringField
+    object TStringField
       DisplayLabel = 'Paralelo'
       DisplayWidth = 5
       FieldKind = fkLookup

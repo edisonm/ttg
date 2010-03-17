@@ -1,9 +1,11 @@
 object MasterDataModule: TMasterDataModule
   OldCreateOrder = False
-  Left = 222
-  Top = 122
-  Height = 404
-  Width = 748
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
+  Left = 35
+  Top = 307
+  Height = 320
+  Width = 575
   object TbTmpProfesorCarga: TkbmMemTable
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -63,53 +65,6 @@ object MasterDataModule: TMasterDataModule
     object TbTmpProfesorCargaCarga: TIntegerField
       FieldName = 'Carga'
     end
-  end
-  object strHolderShowProfesor: TStrHolder
-    Capacity = 8
-    Macros = <>
-    Left = 58
-    Top = 59
-    InternalVer = 1
-    StrData = (
-      ''
-      
-        '4e6976656c5f506172616c656c6f3d4162724e6976656c3b4e6f6d506172616c' +
-        '656c6f4964'
-      
-        '4e6976656c5f506172616c656c6f5f4d6174657269613d4162724e6976656c3b' +
-        '4e6f6d506172616c656c6f49643b4e6f6d4d617465726961'
-      
-        '4e6976656c5f506172616c656c6f5f457370656369616c697a6163696f6e3d41' +
-        '62724e6976656c3b4e6f6d506172616c656c6f49643b41627245737065636961' +
-        '6c697a6163696f6e'
-      
-        '4e6976656c5f506172616c656c6f5f457370656369616c697a6163696f6e5f4d' +
-        '6174657269613d4162724e6976656c3b4e6f6d506172616c656c6f49643b4162' +
-        '72457370656369616c697a6163696f6e3b4e6f6d4d617465726961'
-      
-        '4e6976656c5f457370656369616c697a6163696f6e5f506172616c656c6f3d41' +
-        '62724e6976656c3b416272457370656369616c697a6163696f6e3b4e6f6d5061' +
-        '72616c656c6f4964'
-      
-        '4e6976656c5f457370656369616c697a6163696f6e5f506172616c656c6f5f4d' +
-        '6174657269613d4162724e6976656c3b416272457370656369616c697a616369' +
-        '6f6e3b4e6f6d506172616c656c6f49643b4e6f6d4d617465726961'
-      '4d6174657269613d4e6f6d4d617465726961')
-  end
-  object strHolderShowParalelo: TStrHolder
-    Capacity = 4
-    Macros = <>
-    Left = 58
-    Top = 107
-    InternalVer = 1
-    StrData = (
-      ''
-      '4d6174657269613d4e6f6d4d617465726961'
-      '50726f6665736f723d4170654e6f6d50726f6665736f72'
-      
-        '4d6174657269615f50726f6665736f723d4e6f6d4d6174657269613b4170654e' +
-        '6f6d50726f6665736f72'
-      '20')
   end
   object QuDistributivoProfesor: TkbmMemTable
     AttachedAutoRefresh = True
@@ -249,7 +204,7 @@ object MasterDataModule: TMasterDataModule
     FilterOptions = []
     Version = '2.49'
     Left = 58
-    Top = 157
+    Top = 117
     object QuProfesorProhibicionCantCodProfesor: TIntegerField
       FieldName = 'CodProfesor'
     end
@@ -304,37 +259,5 @@ object MasterDataModule: TMasterDataModule
     object TbTmpAulaTipoCargaCarga: TIntegerField
       FieldName = 'Carga'
     end
-  end
-  object strHolderShowAulaTipo: TStrHolder
-    Capacity = 8
-    Macros = <>
-    Left = 58
-    Top = 11
-    InternalVer = 1
-    StrData = (
-      ''
-      
-        '4e6976656c5f506172616c656c6f3d4162724e6976656c3b4e6f6d506172616c' +
-        '656c6f4964'
-      
-        '4e6976656c5f506172616c656c6f5f4d6174657269613d4162724e6976656c3b' +
-        '4e6f6d506172616c656c6f49643b4e6f6d4d617465726961'
-      
-        '4e6976656c5f506172616c656c6f5f457370656369616c697a6163696f6e3d41' +
-        '62724e6976656c3b4e6f6d506172616c656c6f49643b41627245737065636961' +
-        '6c697a6163696f6e'
-      
-        '4e6976656c5f506172616c656c6f5f457370656369616c697a6163696f6e5f4d' +
-        '6174657269613d4162724e6976656c3b4e6f6d506172616c656c6f49643b4162' +
-        '72457370656369616c697a6163696f6e3b4e6f6d4d617465726961'
-      
-        '4e6976656c5f457370656369616c697a6163696f6e5f506172616c656c6f3d41' +
-        '62724e6976656c3b416272457370656369616c697a6163696f6e3b4e6f6d5061' +
-        '72616c656c6f4964'
-      
-        '4e6976656c5f457370656369616c697a6163696f6e5f506172616c656c6f5f4d' +
-        '6174657269613d4162724e6976656c3b416272457370656369616c697a616369' +
-        '6f6e3b4e6f6d506172616c656c6f49643b4e6f6d4d617465726961'
-      '4d6174657269613d4e6f6d4d617465726961')
   end
 end

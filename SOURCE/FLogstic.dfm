@@ -1,6 +1,6 @@
 object LogisticForm: TLogisticForm
-  Left = 247
-  Top = 170
+  Left = 717
+  Top = 301
   Width = 442
   Height = 394
   Caption = 'Visor de mensajes'
@@ -23,6 +23,14 @@ object LogisticForm: TLogisticForm
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 0
+    object Splitter1: TSplitter
+      Left = 1
+      Top = 269
+      Width = 432
+      Height = 3
+      Cursor = crVSplit
+      Align = alBottom
+    end
     object memLogistic: TMemo
       Left = 1
       Top = 1
@@ -52,15 +60,6 @@ object LogisticForm: TLogisticForm
       ParentFont = False
       TabOrder = 1
     end
-    object RxSplitter1: TRxSplitter
-      Left = 1
-      Top = 269
-      Width = 432
-      Height = 3
-      ControlFirst = memLogistic
-      ControlSecond = memResumen
-      Align = alBottom
-    end
   end
   object Panel2: TPanel
     Left = 0
@@ -85,14 +84,5 @@ object LogisticForm: TLogisticForm
       TabOrder = 0
       Kind = bkClose
     end
-  end
-  object FormStorage: TFormStorage
-    IniSection = '\Software\SGHC1\FLogistic'
-    UseRegistry = True
-    StoredProps.Strings = (
-      'memResumen.Height')
-    StoredValues = <>
-    Left = 256
-    Top = 8
   end
 end

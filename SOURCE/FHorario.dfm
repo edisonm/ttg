@@ -119,19 +119,14 @@ inherited HorarioForm: THorarioForm
   inherited pnlStatus: TPanel
     Top = 315
     Width = 618
-    inherited SLRecordNo: TDBStatusLabel
-      Left = 547
-    end
   end
   inherited Panel1: TPanel
     Width = 618
     Height = 290
-    inherited DBGrid: TRxDBGrid
-      Width = 310
+    inherited DBGrid: TDBGrid
+      Width = 313
       Height = 288
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-      MultiSelect = True
-      OnGetCellParams = DBGridGetCellParams
       Columns = <
         item
           Expanded = False
@@ -156,11 +151,6 @@ inherited HorarioForm: THorarioForm
           Visible = True
         end>
     end
-    inherited RxSplitter1: TRxSplitter
-      Left = 311
-      Height = 288
-      ControlSecond = Panel2
-    end
     object Panel2: TPanel
       Left = 314
       Top = 1
@@ -168,7 +158,7 @@ inherited HorarioForm: THorarioForm
       Height = 288
       Align = alRight
       BevelOuter = bvNone
-      TabOrder = 2
+      TabOrder = 1
       object dbmInforme: TDBMemo
         Left = 0
         Top = 0
@@ -186,16 +176,6 @@ inherited HorarioForm: THorarioForm
         TabOrder = 0
       end
     end
-  end
-  inherited FormStorage: TFormStorage
-    Active = True
-    IniSection = '\Software\SGHC1\SEHorario'
-    StoredProps.Strings = (
-      'tb97Show.DockedTo'
-      'tb97Show.DockPos'
-      'Panel2.Width')
-    Left = 88
-    Top = 140
   end
   inherited ImageList: TImageList
     Left = 196

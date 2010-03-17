@@ -39,14 +39,10 @@ inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
   inherited Panel1: TPanel
     Width = 532
   end
-  inherited RxDrawGrid: TRxDrawGrid
+  inherited DrawGrid: TDrawGrid
     Width = 532
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goColSizing]
-    OnKeyUp = RxDrawGridKeyUp
-    OnMouseUp = RxDrawGridMouseUp
-  end
-  inherited FormStorage: TFormStorage
-    Left = 120
-    Top = 88
+    OnKeyUp = DrawGridKeyUp
+    OnMouseUp = DrawGridMouseUp
   end
 end

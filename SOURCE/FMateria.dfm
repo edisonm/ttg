@@ -25,22 +25,12 @@ inherited MateriaForm: TMateriaForm
   end
   inherited pnlStatus: TPanel
     Width = 594
-    inherited SLRecordNo: TDBStatusLabel
-      Left = 523
-    end
   end
   inherited Panel1: TPanel
     Width = 594
-    inherited DBGrid: TRxDBGrid
-      Width = 589
+    inherited DBGrid: TDBGrid
+      Width = 592
     end
-    inherited RxSplitter1: TRxSplitter
-      Left = 590
-    end
-  end
-  inherited FormStorage: TFormStorage
-    Active = True
-    IniSection = '\Software\SGHC1\SEMateria'
   end
   inherited ImageList: TImageList
     Bitmap = {

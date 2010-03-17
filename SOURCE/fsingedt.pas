@@ -5,26 +5,25 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
   StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls, Placemnt, DBIndex,
-  ComCtrls, RXCtrls, RXDBCtrl, RXSplit, FEditor, kbmMemTable, ImgList, ToolWin;
+  ComCtrls, FEditor, kbmMemTable, ImgList, ToolWin;
 
 type
   TSingleEditorForm = class(TEditorForm)
     DBNavigator: TDBNavigator;
     DataSource: TDataSource;
-    SLRecordNo: TDBStatusLabel;
-    SLState: TDBStatusLabel;
-    DBGrid: TRxDBGrid;
+    DBGrid: TDBGrid;
     btn97Find: TToolButton;
-    RxSplitter1: TRxSplitter;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn97FindClick(Sender: TObject);
     procedure btn97ShowClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBGridCheckButton(Sender: TObject; ACol: Integer;
       Field: TField; var Enabled: Boolean);
+(*
     procedure DBGridGetBtnParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; var SortMarker: TSortMarker;
       IsDown: Boolean);
+*)
     procedure DBGridTitleBtnClick(Sender: TObject; ACol: Integer;
       Field: TField);
     procedure DBGridDblClick(Sender: TObject);
@@ -90,30 +89,32 @@ procedure TSingleEditorForm.DBGridCheckButton(Sender: TObject;
   ACol: Integer; Field: TField; var Enabled: Boolean);
 begin
   inherited;
-  Enabled := (TRxDBGrid(Sender).DataSource.DataSet is TKbmMemTable) and
+  Enabled := (TDBGrid(Sender).DataSource.DataSet is TKbmMemTable) and
     (Field <> nil) and not (Field is TBlobField) and
-    (TKbmMemTable(TRxDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0);
+    (TKbmMemTable(TDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0);
 end;
 
+(*
 procedure TSingleEditorForm.DBGridGetBtnParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor;
   var SortMarker: TSortMarker; IsDown: Boolean);
 begin
   inherited;
-  if (TRxDBGrid(Sender).DataSource.DataSet is TKbmMemTable) and (Field <> nil) and
+  if (TDBGrid(Sender).DataSource.DataSet is TKbmMemTable) and (Field <> nil) and
     ((Field.IsIndexField) or ((Field.FieldKind = fkLookup)
-    and(TRxDBGrid(Sender).DataSource.DataSet.FindField(Field.KeyFields).IsIndexField))) then
+    and(TDBGrid(Sender).DataSource.DataSet.FindField(Field.KeyFields).IsIndexField))) then
   begin
     SortMarker := smDown;
   end;
 end;
+*)
 
 procedure TSingleEditorForm.DBGridTitleBtnClick(Sender: TObject;
   ACol: Integer; Field: TField);
 begin
   inherited;
-  if TRxDBGrid(Sender).DataSource.DataSet is TKbmMemTable then
-    with TKbmMemTable(TRxDBGrid(Sender).DataSource.DataSet) do
+  if TDBGrid(Sender).DataSource.DataSet is TKbmMemTable then
+    with TKbmMemTable(TDBGrid(Sender).DataSource.DataSet) do
     try
       if Field.FieldKind = fkLookup then
         IndexFieldNames :=IndexDefs.FindIndexForFields(FindField(Field.KeyFields).FieldName).Fields
@@ -127,8 +128,8 @@ end;
 procedure TSingleEditorForm.DBGridDblClick(Sender: TObject);
 begin
   inherited;
-  if TRxDBGrid(Sender).DataSource.DataSet is TKbmMemTable then
-    with TKbmMemTable(TRxDBGrid(Sender).DataSource.DataSet) do
+  if TDBGrid(Sender).DataSource.DataSet is TKbmMemTable then
+    with TKbmMemTable(TDBGrid(Sender).DataSource.DataSet) do
       IndexFieldNames := '';
 end;
 

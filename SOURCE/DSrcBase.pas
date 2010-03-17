@@ -13,7 +13,8 @@ unit DSrcBase;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, KbmMemTable;
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
+  KbmMemTable;
 
 type
   TSourceBaseDataModule = class(TDataModule)

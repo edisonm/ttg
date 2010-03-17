@@ -4,14 +4,14 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FCrsMMEd, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, DB,
+  FCrsMMEd, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, DB,
   ImgList, ComCtrls, ToolWin;
 
 type
   TCrossManyToManyEditor1Form = class(TCrossManyToManyEditorForm)
-    procedure RxDrawGridGetEditText(Sender: TObject; ACol, ARow: Integer;
+    procedure DrawGridGetEditText(Sender: TObject; ACol, ARow: Integer;
       var Value: string);
-    procedure RxDrawGridSetEditText(Sender: TObject; ACol, ARow: Integer;
+    procedure DrawGridSetEditText(Sender: TObject; ACol, ARow: Integer;
       const Value: string);
   private
     { Private declarations }
@@ -49,7 +49,7 @@ begin
   if RelRecordExists(i, j) then
     Result := clScrollBar
   else
-    Result := RxDrawGrid.Canvas.Brush.Color;
+    Result := DrawGrid.Canvas.Brush.Color;
 end;
 
 procedure TCrossManyToManyEditor1Form.InitRelArray;
@@ -109,7 +109,7 @@ begin
   end;
 end;
 
-procedure TCrossManyToManyEditor1Form.RxDrawGridGetEditText(Sender: TObject;
+procedure TCrossManyToManyEditor1Form.DrawGridGetEditText(Sender: TObject;
   ACol,
   ARow: Integer; var Value: string);
 begin
@@ -121,7 +121,7 @@ begin
   end;
 end;
 
-procedure TCrossManyToManyEditor1Form.RxDrawGridSetEditText(Sender: TObject;
+procedure TCrossManyToManyEditor1Form.DrawGridSetEditText(Sender: TObject;
   ACol,
   ARow: Integer; const Value: string);
 begin

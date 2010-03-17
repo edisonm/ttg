@@ -4,14 +4,16 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Placemnt, Grids, DBGrids, RXDBCtrl, RXCtrls, ExtCtrls,
-  StdCtrls, DBIndex, DBCtrls, RXSplit,
+  FSingEdt, Db, Placemnt, Grids, DBGrids, ExtCtrls, StdCtrls, DBIndex, DBCtrls,
   CheckLst, DBChLsBx, Printers, kbmMemTable, ImgList, ComCtrls, ToolWin;
+(*
+  FormStorage:
+    DBCheckListBox.Width
+*)
 
 type
   TParaleloForm = class(TSingleEditorForm)
     DBCheckListBox: TDBCheckListBox;
-    RxSplitter: TRxSplitter;
     DataSourceList: TDataSource;
     DataSourceDetail: TDataSource;
     kbmParalelo: TkbmMemTable;
@@ -21,6 +23,7 @@ type
     kbmParaleloAbrNivel: TStringField;
     kbmParaleloAbrEspecializacion: TStringField;
     kbmParaleloNomParaleloId: TStringField;
+    Splitter1: TSplitter;
     procedure btn97ShowClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -32,7 +35,7 @@ type
 implementation
 
 uses
-  DMaster, FCrsMME1, SGHCUtls, Consts, FMain, QMaDeRep, QSingRep, DSource;
+  DMaster, FCrsMME1, SGHCUtls, Consts, FMain, QSingRep, DSource;
 
 {$R *.DFM}
 

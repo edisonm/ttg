@@ -4,24 +4,24 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, DB, FCrsMMEd,
-  ImgList, ComCtrls, ToolWin;
+  Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, DB, FCrsMMEd, ImgList, ComCtrls,
+  ToolWin;
 
 type
   TCrossManyToManyEditorRForm = class(TCrossManyToManyEditorForm)
     Panel2: TPanel;
     Splitter: TSplitter;
     ListBox: TListBox;
-    procedure RxDrawGridSelectCell(Sender: TObject; ACol, ARow: Integer;
+    procedure DrawGridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure ListBoxDrawItem(Control: TWinControl; Index: Integer;
       Rect: TRect; State: TOwnerDrawState);
     procedure ListBoxClick(Sender: TObject);
-    procedure RxDrawGridKeyUp(Sender: TObject; var Key: Word;
+    procedure DrawGridKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure ListBoxKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure RxDrawGridMouseUp(Sender: TObject; Button: TMouseButton;
+    procedure DrawGridMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
@@ -92,13 +92,13 @@ begin
   end;
 end;
 
-procedure TCrossManyToManyEditorRForm.RxDrawGridSelectCell(Sender: TObject;
+procedure TCrossManyToManyEditorRForm.DrawGridSelectCell(Sender: TObject;
   ACol, ARow: Integer; var CanSelect: Boolean);
 begin
   inherited;
   if CanSelect then
   begin
-    with RxDrawGrid do
+    with DrawGrid do
       ListBox.ItemIndex := FRel[ACol - 1, ARow - 1];
   end;
   FRestaurar := not CanSelect;
@@ -143,7 +143,7 @@ end;
 
 procedure TCrossManyToManyEditorRForm.InvalidateData;
 begin
-  ListBox.ItemIndex := FRel[RxDrawGrid.Col - 1, RxDrawGrid.Row - 1];
+  ListBox.ItemIndex := FRel[DrawGrid.Col - 1, DrawGrid.Row - 1];
   inherited;
 end;
 
@@ -227,7 +227,7 @@ var
   VCol, VRow: Longint;
 begin
   inherited;
-  with RxDrawGrid do
+  with DrawGrid do
   begin
     Edit;
     for VCol := Selection.Left to Selection.Right do
@@ -235,12 +235,12 @@ begin
       begin
         if Sel[VCol - 1, VRow - 1] then
           FRel[VCol - 1, VRow - 1] := ListBox.ItemIndex;
-        InvalidateCell(VCol, VRow);
+//        InvalidateCell(VCol, VRow);
       end;
   end;
 end;
 
-procedure TCrossManyToManyEditorRForm.RxDrawGridKeyUp(Sender: TObject;
+procedure TCrossManyToManyEditorRForm.DrawGridKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
   inherited;
@@ -252,14 +252,14 @@ procedure TCrossManyToManyEditorRForm.ClearSelection;
 var
   VCol, VRow: Longint;
 begin
-  with RxDrawGrid do
+  with DrawGrid do
   begin
     Edit;
     for VCol := Selection.Left to Selection.Right do
       for VRow := Selection.Top to Selection.Bottom do
       begin
         FRel[VCol - 1, VRow - 1] := -1;
-        InvalidateCell(VCol, VRow);
+//        InvalidateCell(VCol, VRow);
       end;
     ListBox.ItemIndex := -1;
   end;
@@ -273,7 +273,7 @@ begin
     ClearSelection;
 end;
 
-procedure TCrossManyToManyEditorRForm.RxDrawGridMouseUp(Sender: TObject;
+procedure TCrossManyToManyEditorRForm.DrawGridMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var
   S: TGridRect;
@@ -281,11 +281,11 @@ begin
   inherited;
   if FRestaurar then
   begin
-    S.Top := RxDrawGrid.Row;
-    S.Bottom := RxDrawGrid.Row;
-    S.Left := RxDrawGrid.Col;
-    S.Right := RxDrawGrid.Col;
-    RxDrawGrid.Selection := S;
+    S.Top := DrawGrid.Row;
+    S.Bottom := DrawGrid.Row;
+    S.Left := DrawGrid.Col;
+    S.Right := DrawGrid.Col;
+    DrawGrid.Selection := S;
     FRestaurar := False;
   end
 end;

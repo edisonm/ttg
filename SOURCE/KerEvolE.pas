@@ -165,7 +165,7 @@ type
 implementation
 
 uses
-  Rand, ArDBUtls;
+  Rand, BaseUtls;
 
 procedure TEvolElitista.Configurar(ATamPoblacion: Longint);
 var

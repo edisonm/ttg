@@ -8,6 +8,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
   TextHeight = 13
   inherited tb97Show: TToolBar
     Width = 766
+    Visible = True
     object btn97Mostrar: TToolButton
       Left = 69
       Top = 0
@@ -29,21 +30,19 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       ImageIndex = 5
       OnClick = btn97PriorClick
     end
-    object dlcProfesor: TRxDBLookupCombo
+    object dlcProfesor: TDBLookupComboBox
       Left = 138
       Top = 0
-      Width = 169
-      Height = 22
-      DropDownCount = 8
-      DisplayEmpty = '(Profesor)'
-      ListStyle = lsDelimited
-      LookupField = 'CodProfesor'
-      LookupDisplay = 'ApeNomProfesor'
-      LookupSource = SourceDataModule.dsProfesor
-      TabOrder = 0
+      Width = 145
+      Height = 21
+      Hint = 'Profesor'
+      KeyField = 'CodProfesor'
+      ListField = 'ApeNomProfesor'
+      ListSource = SourceDataModule.dsProfesor
+      TabOrder = 1
     end
     object cbVerProfesor: TComboBox
-      Left = 307
+      Left = 283
       Top = 0
       Width = 193
       Height = 21
@@ -51,7 +50,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       ItemHeight = 13
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 1
+      TabOrder = 0
     end
   end
   inherited pnlStatus: TPanel
@@ -62,16 +61,10 @@ inherited HorarioProfesorForm: THorarioProfesorForm
     Width = 766
     Height = 328
   end
-  inherited RxDrawGrid: TRxDrawGrid
+  inherited DrawGrid: TDrawGrid
     Width = 766
     Height = 328
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
-  end
-  inherited FormStorage: TFormStorage
-    Active = True
-    IniSection = '\Software\SGHC1\MMEd1HorarioProfesor'
-    Left = 120
-    Top = 88
   end
   inherited ImageList: TImageList
     Bitmap = {
