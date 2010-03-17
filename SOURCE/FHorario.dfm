@@ -1354,7 +1354,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object RxQuHorarioDetalleMateriaProhibicion: TkbmMemTable
+  object QuHorarioDetalleMateriaProhibicion: TkbmMemTable
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -1363,7 +1363,7 @@ inherited HorarioForm: THorarioForm
     IndexFieldNames = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
     IndexDefs = <
       item
-        Name = 'RxQuHorarioDetalleMateriaProhibicionIndex1'
+        Name = 'QuHorarioDetalleMateriaProhibicionIndex1'
         DescFields = 'CodMateProhibicionTipo'
         Fields = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
         Options = [ixDescending]
@@ -1389,7 +1389,7 @@ inherited HorarioForm: THorarioForm
     Version = '2.49'
     Left = 60
     Top = 168
-    object RxQuHorarioDetalleMateriaProhibicionNomMateProhibicionTipo: TStringField
+    object QuHorarioDetalleMateriaProhibicionNomMateProhibicionTipo: TStringField
       DisplayLabel = 'Tipo prohib. mat.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1402,35 +1402,35 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object RxQuHorarioDetalleMateriaProhibicionNomMateria: TStringField
+    object QuHorarioDetalleMateriaProhibicionNomMateria: TStringField
       DisplayLabel = 'Materia'
       FieldName = 'NomMateria'
     end
-    object RxQuHorarioDetalleMateriaProhibicionCodHora: TIntegerField
+    object QuHorarioDetalleMateriaProhibicionCodHora: TIntegerField
       FieldName = 'CodHora'
       Visible = False
     end
-    object RxQuHorarioDetalleMateriaProhibicionCodDia: TIntegerField
+    object QuHorarioDetalleMateriaProhibicionCodDia: TIntegerField
       FieldName = 'CodDia'
       Visible = False
     end
-    object RxQuHorarioDetalleMateriaProhibicionCodMateProhibicionTipo: TIntegerField
+    object QuHorarioDetalleMateriaProhibicionCodMateProhibicionTipo: TIntegerField
       FieldName = 'CodMateProhibicionTipo'
       Visible = False
     end
-    object RxQuHorarioDetalleMateriaProhibicionCodNivel: TIntegerField
+    object QuHorarioDetalleMateriaProhibicionCodNivel: TIntegerField
       FieldName = 'CodNivel'
       Visible = False
     end
-    object RxQuHorarioDetalleMateriaProhibicionCodEspecializacion: TIntegerField
+    object QuHorarioDetalleMateriaProhibicionCodEspecializacion: TIntegerField
       FieldName = 'CodEspecializacion'
       Visible = False
     end
-    object RxQuHorarioDetalleMateriaProhibicionCodParaleloId: TIntegerField
+    object QuHorarioDetalleMateriaProhibicionCodParaleloId: TIntegerField
       FieldName = 'CodParaleloId'
       Visible = False
     end
-    object RxQuHorarioDetalleMateriaProhibicionNomDia: TStringField
+    object QuHorarioDetalleMateriaProhibicionNomDia: TStringField
       DisplayLabel = 'Día'
       FieldKind = fkLookup
       FieldName = 'NomDia'
@@ -1442,7 +1442,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object RxQuHorarioDetalleMateriaProhibicionNomHora: TStringField
+    object QuHorarioDetalleMateriaProhibicionNomHora: TStringField
       DisplayLabel = 'Hora'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1455,7 +1455,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object RxQuHorarioDetalleMateriaProhibicionAbrNivel: TStringField
+    object QuHorarioDetalleMateriaProhibicionAbrNivel: TStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1467,7 +1467,7 @@ inherited HorarioForm: THorarioForm
       Size = 5
       Lookup = True
     end
-    object RxQuHorarioDetalleMateriaProhibicionAbrEspecializacion: TStringField
+    object QuHorarioDetalleMateriaProhibicionAbrEspecializacion: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1480,7 +1480,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object RxQuHorarioDetalleMateriaProhibicionNomParaleloId: TStringField
+    object QuHorarioDetalleMateriaProhibicionNomParaleloId: TStringField
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
@@ -1492,7 +1492,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object RxQuHorarioDetalleProfesorProhibicion: TkbmMemTable
+  object QuHorarioDetalleProfesorProhibicion: TkbmMemTable
     AttachedAutoRefresh = True
     AutoIncMinValue = 0
     FieldDefs = <>
@@ -1520,7 +1520,7 @@ inherited HorarioForm: THorarioForm
     Version = '2.49'
     Left = 60
     Top = 196
-    object RxQuHorarioDetalleProfesorProhibicionNomProfProhibicionTipo: TStringField
+    object QuHorarioDetalleProfesorProhibicionNomProfProhibicionTipo: TStringField
       DisplayLabel = 'Tipo prohib. prof.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1533,42 +1533,42 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object RxQuHorarioDetalleProfesorProhibicionApeNomProfesor: TStringField
+    object QuHorarioDetalleProfesorProhibicionApeNomProfesor: TStringField
       DisplayLabel = 'Apellido'
       DisplayWidth = 31
       FieldName = 'ApeNomProfesor'
       Size = 31
     end
-    object RxQuHorarioDetalleProfesorProhibicionNomProfesor: TStringField
+    object QuHorarioDetalleProfesorProhibicionNomProfesor: TStringField
       DisplayLabel = 'Nombre'
       FieldName = 'NomProfesor'
       Size = 15
     end
-    object RxQuHorarioDetalleProfesorProhibicionCodDia: TIntegerField
+    object QuHorarioDetalleProfesorProhibicionCodDia: TIntegerField
       FieldName = 'CodDia'
       Visible = False
     end
-    object RxQuHorarioDetalleProfesorProhibicionCodHora: TIntegerField
+    object QuHorarioDetalleProfesorProhibicionCodHora: TIntegerField
       FieldName = 'CodHora'
       Visible = False
     end
-    object RxQuHorarioDetalleProfesorProhibicionCodProfProhibicionTipo: TIntegerField
+    object QuHorarioDetalleProfesorProhibicionCodProfProhibicionTipo: TIntegerField
       FieldName = 'CodProfProhibicionTipo'
       Visible = False
     end
-    object RxQuHorarioDetalleProfesorProhibicionCodNivel: TIntegerField
+    object QuHorarioDetalleProfesorProhibicionCodNivel: TIntegerField
       FieldName = 'CodNivel'
       Visible = False
     end
-    object RxQuHorarioDetalleProfesorProhibicionCodEspecializacion: TIntegerField
+    object QuHorarioDetalleProfesorProhibicionCodEspecializacion: TIntegerField
       FieldName = 'CodEspecializacion'
       Visible = False
     end
-    object RxQuHorarioDetalleProfesorProhibicionCodParaleloId: TIntegerField
+    object QuHorarioDetalleProfesorProhibicionCodParaleloId: TIntegerField
       FieldName = 'CodParaleloId'
       Visible = False
     end
-    object RxQuHorarioDetalleProfesorProhibicionNomDia: TStringField
+    object QuHorarioDetalleProfesorProhibicionNomDia: TStringField
       DisplayLabel = 'Día'
       FieldKind = fkLookup
       FieldName = 'NomDia'
@@ -1580,7 +1580,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object RxQuHorarioDetalleProfesorProhibicionNomHora: TStringField
+    object QuHorarioDetalleProfesorProhibicionNomHora: TStringField
       DisplayLabel = 'Hora'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1593,7 +1593,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object RxQuHorarioDetalleProfesorProhibicionNomNivel: TStringField
+    object QuHorarioDetalleProfesorProhibicionNomNivel: TStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1605,7 +1605,7 @@ inherited HorarioForm: THorarioForm
       Size = 5
       Lookup = True
     end
-    object RxQuHorarioDetalleProfesorProhibicionNomEspecializacion: TStringField
+    object QuHorarioDetalleProfesorProhibicionNomEspecializacion: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1618,7 +1618,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object RxQuHorarioDetalleProfesorProhibicionNomParaleloId: TStringField
+    object QuHorarioDetalleProfesorProhibicionNomParaleloId: TStringField
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'

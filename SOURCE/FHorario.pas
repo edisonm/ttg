@@ -63,35 +63,35 @@ type
     QuCruceMateriaCodMateria: TIntegerField;
     QuCruceMateriaNomMateria: TStringField;
     QuCruceMateriaDetalle: TkbmMemTable;
-    RxQuHorarioDetalleMateriaProhibicion: TkbmMemTable;
-    RxQuHorarioDetalleMateriaProhibicionNomMateria: TStringField;
-    RxQuHorarioDetalleMateriaProhibicionCodDia: TIntegerField;
-    RxQuHorarioDetalleMateriaProhibicionCodHora: TIntegerField;
-    RxQuHorarioDetalleMateriaProhibicionCodMateProhibicionTipo: TIntegerField;
-    RxQuHorarioDetalleMateriaProhibicionCodNivel: TIntegerField;
-    RxQuHorarioDetalleMateriaProhibicionCodEspecializacion: TIntegerField;
-    RxQuHorarioDetalleMateriaProhibicionCodParaleloId: TIntegerField;
-    RxQuHorarioDetalleMateriaProhibicionNomDia: TStringField;
-    RxQuHorarioDetalleMateriaProhibicionNomHora: TStringField;
-    RxQuHorarioDetalleMateriaProhibicionNomMateProhibicionTipo: TStringField;
-    RxQuHorarioDetalleMateriaProhibicionAbrNivel: TStringField;
-    RxQuHorarioDetalleMateriaProhibicionAbrEspecializacion: TStringField;
-    RxQuHorarioDetalleMateriaProhibicionNomParaleloId: TStringField;
-    RxQuHorarioDetalleProfesorProhibicion: TkbmMemTable;
-    RxQuHorarioDetalleProfesorProhibicionApeNomProfesor: TStringField;
-    RxQuHorarioDetalleProfesorProhibicionNomProfesor: TStringField;
-    RxQuHorarioDetalleProfesorProhibicionCodDia: TIntegerField;
-    RxQuHorarioDetalleProfesorProhibicionCodHora: TIntegerField;
-    RxQuHorarioDetalleProfesorProhibicionCodProfProhibicionTipo: TIntegerField;
-    RxQuHorarioDetalleProfesorProhibicionCodNivel: TIntegerField;
-    RxQuHorarioDetalleProfesorProhibicionCodEspecializacion: TIntegerField;
-    RxQuHorarioDetalleProfesorProhibicionCodParaleloId: TIntegerField;
-    RxQuHorarioDetalleProfesorProhibicionNomProfProhibicionTipo: TStringField;
-    RxQuHorarioDetalleProfesorProhibicionNomNivel: TStringField;
-    RxQuHorarioDetalleProfesorProhibicionNomEspecializacion: TStringField;
-    RxQuHorarioDetalleProfesorProhibicionNomParaleloId: TStringField;
-    RxQuHorarioDetalleProfesorProhibicionNomDia: TStringField;
-    RxQuHorarioDetalleProfesorProhibicionNomHora: TStringField;
+    QuHorarioDetalleMateriaProhibicion: TkbmMemTable;
+    QuHorarioDetalleMateriaProhibicionNomMateria: TStringField;
+    QuHorarioDetalleMateriaProhibicionCodDia: TIntegerField;
+    QuHorarioDetalleMateriaProhibicionCodHora: TIntegerField;
+    QuHorarioDetalleMateriaProhibicionCodMateProhibicionTipo: TIntegerField;
+    QuHorarioDetalleMateriaProhibicionCodNivel: TIntegerField;
+    QuHorarioDetalleMateriaProhibicionCodEspecializacion: TIntegerField;
+    QuHorarioDetalleMateriaProhibicionCodParaleloId: TIntegerField;
+    QuHorarioDetalleMateriaProhibicionNomDia: TStringField;
+    QuHorarioDetalleMateriaProhibicionNomHora: TStringField;
+    QuHorarioDetalleMateriaProhibicionNomMateProhibicionTipo: TStringField;
+    QuHorarioDetalleMateriaProhibicionAbrNivel: TStringField;
+    QuHorarioDetalleMateriaProhibicionAbrEspecializacion: TStringField;
+    QuHorarioDetalleMateriaProhibicionNomParaleloId: TStringField;
+    QuHorarioDetalleProfesorProhibicion: TkbmMemTable;
+    QuHorarioDetalleProfesorProhibicionApeNomProfesor: TStringField;
+    QuHorarioDetalleProfesorProhibicionNomProfesor: TStringField;
+    QuHorarioDetalleProfesorProhibicionCodDia: TIntegerField;
+    QuHorarioDetalleProfesorProhibicionCodHora: TIntegerField;
+    QuHorarioDetalleProfesorProhibicionCodProfProhibicionTipo: TIntegerField;
+    QuHorarioDetalleProfesorProhibicionCodNivel: TIntegerField;
+    QuHorarioDetalleProfesorProhibicionCodEspecializacion: TIntegerField;
+    QuHorarioDetalleProfesorProhibicionCodParaleloId: TIntegerField;
+    QuHorarioDetalleProfesorProhibicionNomProfProhibicionTipo: TStringField;
+    QuHorarioDetalleProfesorProhibicionNomNivel: TStringField;
+    QuHorarioDetalleProfesorProhibicionNomEspecializacion: TStringField;
+    QuHorarioDetalleProfesorProhibicionNomParaleloId: TStringField;
+    QuHorarioDetalleProfesorProhibicionNomDia: TStringField;
+    QuHorarioDetalleProfesorProhibicionNomHora: TStringField;
     Panel2: TPanel;
     dbmInforme: TDBMemo;
     btn97SeleccionarHorario: TToolButton;
@@ -407,7 +407,7 @@ procedure THorarioForm.EdQuHorarioDetalleMateriaProhibicionDestroy(Sender:
 begin
   if Assigned(btn97MateriaProhibicionNoRespetada) then
     btn97MateriaProhibicionNoRespetada.Enabled := true;
-  RxQuHorarioDetalleMateriaProhibicion.Close;
+  QuHorarioDetalleMateriaProhibicion.Close;
 end;
 
 procedure THorarioForm.EdQuHorarioDetalleProfesorProhibicionDestroy(Sender:
@@ -415,7 +415,7 @@ procedure THorarioForm.EdQuHorarioDetalleProfesorProhibicionDestroy(Sender:
 begin
   if Assigned(btn97ProfesorProhibicionNoRespetada) then
     btn97ProfesorProhibicionNoRespetada.Enabled := true;
-  RxQuHorarioDetalleProfesorProhibicion.Close;
+  QuHorarioDetalleProfesorProhibicion.Close;
 end;
 
 procedure THorarioForm.btn97HorarioProfesorClick(Sender: TObject);
@@ -556,8 +556,8 @@ begin
   with SourceDataModule do
   begin
     CodHorario := kbmHorarioCodHorario.Value;
-    RxQuHorarioDetalleMateriaProhibicion.Close;
-    RxQuHorarioDetalleMateriaProhibicion.Open;
+    QuHorarioDetalleMateriaProhibicion.Close;
+    QuHorarioDetalleMateriaProhibicion.Open;
     kbmMateriaProhibicion.IndexFieldNames := 'CodMateria;CodDia;CodHora';
     kbmHorarioDetalle.IndexFieldNames := 'CodHorario';
     if kbmHorarioDetalle.Locate('CodHorario', CodHorario, []) then
@@ -567,15 +567,15 @@ begin
         if kbmMateriaProhibicion.FindKey([kbmHorarioDetalleCodMateria.Value,
           kbmHorarioDetalleCodDia.Value, kbmHorarioDetalleCodHora.Value]) then
         begin
-          RxQuHorarioDetalleMateriaProhibicion.Append;
-          RxQuHorarioDetalleMateriaProhibicionNomMateria.Value := kbmHorarioDetalleNomMateria.Value;
-          RxQuHorarioDetalleMateriaProhibicionCodHora.Value := kbmHorarioDetalleCodHora.Value;
-          RxQuHorarioDetalleMateriaProhibicionCodDia.Value := kbmHorarioDetalleCodDia.Value;
-          RxQuHorarioDetalleMateriaProhibicionCodMateProhibicionTipo.Value := kbmMateriaProhibicionCodMateProhibicionTipo.Value;
-          RxQuHorarioDetalleMateriaProhibicionCodNivel.Value := kbmHorarioDetalleCodNivel.Value;
-          RxQuHorarioDetalleMateriaProhibicionCodEspecializacion.Value := kbmHorarioDetalleCodEspecializacion.Value;
-          RxQuHorarioDetalleMateriaProhibicionCodParaleloId.Value := kbmHorarioDetalleCodParaleloId.Value;
-          RxQuHorarioDetalleMateriaProhibicion.Post;
+          QuHorarioDetalleMateriaProhibicion.Append;
+          QuHorarioDetalleMateriaProhibicionNomMateria.Value := kbmHorarioDetalleNomMateria.Value;
+          QuHorarioDetalleMateriaProhibicionCodHora.Value := kbmHorarioDetalleCodHora.Value;
+          QuHorarioDetalleMateriaProhibicionCodDia.Value := kbmHorarioDetalleCodDia.Value;
+          QuHorarioDetalleMateriaProhibicionCodMateProhibicionTipo.Value := kbmMateriaProhibicionCodMateProhibicionTipo.Value;
+          QuHorarioDetalleMateriaProhibicionCodNivel.Value := kbmHorarioDetalleCodNivel.Value;
+          QuHorarioDetalleMateriaProhibicionCodEspecializacion.Value := kbmHorarioDetalleCodEspecializacion.Value;
+          QuHorarioDetalleMateriaProhibicionCodParaleloId.Value := kbmHorarioDetalleCodParaleloId.Value;
+          QuHorarioDetalleMateriaProhibicion.Post;
         end;
         kbmHorarioDetalle.Next;
       end;
@@ -588,14 +588,14 @@ var
   FSingleEditor: TSingleEditorForm;
 begin
   inherited;
-  with SourceDataModule, RxQuHorarioDetalleMateriaProhibicion do
+  with SourceDataModule, QuHorarioDetalleMateriaProhibicion do
   begin
     FillHorarioDetalleMateriaProhibicion;
     btn97MateriaProhibicionNoRespetada.Enabled := false;
     FSingleEditor := TSingleEditorForm.Create(Self);
     FSingleEditor.Caption := Description[kbmMateriaProhibicion] +
       ' No Respetadas';
-    MySingleShowEditor(FSingleEditor, RxQuHorarioDetalleMateriaProhibicion,
+    MySingleShowEditor(FSingleEditor, QuHorarioDetalleMateriaProhibicion,
       ConfiguracionForm.edtNomColegio.Text, EdQuHorarioDetalleMateriaProhibicionDestroy);
   end;
 end;
@@ -607,8 +607,8 @@ begin
   with SourceDataModule do
   begin
     CodHorario := kbmHorarioCodHorario.Value;
-    RxQuHorarioDetalleProfesorProhibicion.Close;
-    RxQuHorarioDetalleProfesorProhibicion.Open;
+    QuHorarioDetalleProfesorProhibicion.Close;
+    QuHorarioDetalleProfesorProhibicion.Open;
     kbmProfesorProhibicion.IndexFieldNames := 'CodProfesor;CodDia;CodHora';
     kbmHorarioDetalle.IndexFieldNames :=
       'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
@@ -632,15 +632,15 @@ begin
         if kbmProfesorProhibicion.FindKey([kbmDistributivoCodProfesor.Value,
           kbmHorarioDetalleCodDia.Value, kbmHorarioDetalleCodHora.Value]) then
         begin
-          RxQuHorarioDetalleProfesorProhibicion.Append;
-          RxQuHorarioDetalleProfesorProhibicionApeNomProfesor.Value := kbmDistributivoApeNomProfesor.Value;
-          RxQuHorarioDetalleProfesorProhibicionCodHora.Value := kbmHorarioDetalleCodHora.Value;
-          RxQuHorarioDetalleProfesorProhibicionCodDia.Value := kbmHorarioDetalleCodDia.Value;
-          RxQuHorarioDetalleProfesorProhibicionCodProfProhibicionTipo.Value := kbmProfesorProhibicionCodProfProhibicionTipo.Value;
-          RxQuHorarioDetalleProfesorProhibicionCodNivel.Value := kbmHorarioDetalleCodNivel.Value;
-          RxQuHorarioDetalleProfesorProhibicionCodEspecializacion.Value := kbmHorarioDetalleCodEspecializacion.Value;
-          RxQuHorarioDetalleProfesorProhibicionCodParaleloId.Value := kbmHorarioDetalleCodParaleloId.Value;
-          RxQuHorarioDetalleProfesorProhibicion.Post;
+          QuHorarioDetalleProfesorProhibicion.Append;
+          QuHorarioDetalleProfesorProhibicionApeNomProfesor.Value := kbmDistributivoApeNomProfesor.Value;
+          QuHorarioDetalleProfesorProhibicionCodHora.Value := kbmHorarioDetalleCodHora.Value;
+          QuHorarioDetalleProfesorProhibicionCodDia.Value := kbmHorarioDetalleCodDia.Value;
+          QuHorarioDetalleProfesorProhibicionCodProfProhibicionTipo.Value := kbmProfesorProhibicionCodProfProhibicionTipo.Value;
+          QuHorarioDetalleProfesorProhibicionCodNivel.Value := kbmHorarioDetalleCodNivel.Value;
+          QuHorarioDetalleProfesorProhibicionCodEspecializacion.Value := kbmHorarioDetalleCodEspecializacion.Value;
+          QuHorarioDetalleProfesorProhibicionCodParaleloId.Value := kbmHorarioDetalleCodParaleloId.Value;
+          QuHorarioDetalleProfesorProhibicion.Post;
         end;
         kbmHorarioDetalle.Next;
       end;
@@ -654,14 +654,14 @@ var
   FSingleEditor: TSingleEditorForm;
 begin
   inherited;
-  with SourceDataModule, RxQuHorarioDetalleProfesorProhibicion do
+  with SourceDataModule, QuHorarioDetalleProfesorProhibicion do
   begin
     FillHorarioDetalleProfesorProhibicion;
     btn97ProfesorProhibicionNoRespetada.Enabled := false;
     FSingleEditor := TSingleEditorForm.Create(Self);
     FSingleEditor.Caption := 'Prohibiciones de profesor no respetadas';
     MySingleShowEditor(FSingleEditor,
-      RxQuHorarioDetalleProfesorProhibicion,
+      QuHorarioDetalleProfesorProhibicion,
       ConfiguracionForm.edtNomColegio.Text,
       EdQuHorarioDetalleProfesorProhibicionDestroy);
   end;
