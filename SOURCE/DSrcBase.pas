@@ -166,9 +166,13 @@ type
     procedure LoadFromBinaryStream(AStream: TStream);
     procedure LoadFromBinaryFile(const AFileName: string);
     procedure LoadFromTextDir(const ADirName: string);
+    procedure LoadFromTextFile(const AFileName: string);
+    procedure LoadFromStrings(AStrings: TStrings);
     procedure SaveToBinaryStream(AStream: TStream; flags:TkbmMemTableSaveFlags);
     procedure SaveToBinaryFile(const AFileName: string; flags:TkbmMemTableSaveFlags);
-    procedure SaveToTextDir(const ADirName: string; flags:TkbmMemTableSaveFlags);
+    procedure SaveToTextFile(const AFileName: string);
+    procedure SaveToStrings(AStrings: TStrings);
+    procedure SaveToTextDir(const ADirName: string);
     procedure EmptyTables;
     procedure OpenTables;
     procedure CloseTables;
@@ -725,6 +729,47 @@ begin
   end;
 end;
 
+procedure TSourceBaseDataModule.LoadFromTextFile(const AFileName: string);
+var
+  AStrings: TStrings;
+begin
+  AStrings := TStringList.Create;
+  try
+    LoadFromStrings(AStrings);
+  finally
+    AStrings.Free;
+  end;
+end;
+
+procedure TSourceBaseDataModule.LoadFromStrings(AStrings: TStrings);
+var
+  Position: Integer;
+begin
+  FCheckRelations := False;
+  try
+    LoadDataSetFromStrings(kbmAulaTipo, AStrings, Position);
+    LoadDataSetFromStrings(kbmEspecializacion, AStrings, Position);
+    LoadDataSetFromStrings(kbmDia, AStrings, Position);
+    LoadDataSetFromStrings(kbmMateria, AStrings, Position);
+    LoadDataSetFromStrings(kbmNivel, AStrings, Position);
+    LoadDataSetFromStrings(kbmHora, AStrings, Position);
+    LoadDataSetFromStrings(kbmHorario, AStrings, Position);
+    LoadDataSetFromStrings(kbmCurso, AStrings, Position);
+    LoadDataSetFromStrings(kbmParaleloId, AStrings, Position);
+    LoadDataSetFromStrings(kbmMateriaProhibicionTipo, AStrings, Position);
+    LoadDataSetFromStrings(kbmPeriodo, AStrings, Position);
+    LoadDataSetFromStrings(kbmParalelo, AStrings, Position);
+    LoadDataSetFromStrings(kbmProfesor, AStrings, Position);
+    LoadDataSetFromStrings(kbmMateriaProhibicion, AStrings, Position);
+    LoadDataSetFromStrings(kbmDistributivo, AStrings, Position);
+    LoadDataSetFromStrings(kbmHorarioDetalle, AStrings, Position);
+    LoadDataSetFromStrings(kbmProfesorProhibicionTipo, AStrings, Position);
+    LoadDataSetFromStrings(kbmProfesorProhibicion, AStrings, Position);
+  finally
+    FCheckRelations := True;
+  end;
+end;
+
 procedure TSourceBaseDataModule.LoadFromTextDir(const ADirName: string);
 begin
   FCheckRelations := False;
@@ -786,7 +831,42 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.SaveToTextDir(const ADirName: string; flags:TkbmMemTableSaveFlags);
+procedure TSourceBaseDataModule.SaveToStrings(AStrings: TStrings);
+begin
+  SaveDataSetToStrings(kbmAulaTipo, AStrings);
+  SaveDataSetToStrings(kbmEspecializacion, AStrings);
+  SaveDataSetToStrings(kbmDia, AStrings);
+  SaveDataSetToStrings(kbmMateria, AStrings);
+  SaveDataSetToStrings(kbmNivel, AStrings);
+  SaveDataSetToStrings(kbmHora, AStrings);
+  SaveDataSetToStrings(kbmHorario, AStrings);
+  SaveDataSetToStrings(kbmCurso, AStrings);
+  SaveDataSetToStrings(kbmParaleloId, AStrings);
+  SaveDataSetToStrings(kbmMateriaProhibicionTipo, AStrings);
+  SaveDataSetToStrings(kbmPeriodo, AStrings);
+  SaveDataSetToStrings(kbmParalelo, AStrings);
+  SaveDataSetToStrings(kbmProfesor, AStrings);
+  SaveDataSetToStrings(kbmMateriaProhibicion, AStrings);
+  SaveDataSetToStrings(kbmDistributivo, AStrings);
+  SaveDataSetToStrings(kbmHorarioDetalle, AStrings);
+  SaveDataSetToStrings(kbmProfesorProhibicionTipo, AStrings);
+  SaveDataSetToStrings(kbmProfesorProhibicion, AStrings);
+end;
+
+procedure TSourceBaseDataModule.SaveToTextFile(const AFileName: string);
+var
+  AStrings: TStrings;
+begin
+  AStrings := TStringList.Create;
+  try
+    SaveToStrings(AStrings);
+    AStrings.SaveToFile(AFileName);
+  finally
+    AStrings.Free;
+  end;
+end;
+
+procedure TSourceBaseDataModule.SaveToTextDir(const ADirName: string);
 begin
   SaveDataSetToCSVFile(kbmAulaTipo, ADirName + '\AulaTipo.csv');
   SaveDataSetToCSVFile(kbmEspecializacion, ADirName + '\Especializacion.csv');
@@ -873,5 +953,6 @@ begin
   kbmProfesorProhibicionTipo.Close;
   kbmProfesorProhibicion.Close;
 end;
+
 end.
 

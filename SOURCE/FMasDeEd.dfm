@@ -1,6 +1,6 @@
 inherited MasterDetailEditorForm: TMasterDetailEditorForm
-  Left = 57
-  Top = 178
+  Left = 60
+  Top = 209
   PixelsPerInch = 96
   TextHeight = 13
   inherited tb97Show: TToolBar

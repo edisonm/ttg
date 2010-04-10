@@ -369,7 +369,7 @@ end;
 
 procedure TSourceDataModule.SaveToTextDir(const AFileName: TFileName);
 begin
-  SaveToTextDir(AFileName, FFlags);
+  SaveToTextDir(AFileName);
 end;
 
 end.

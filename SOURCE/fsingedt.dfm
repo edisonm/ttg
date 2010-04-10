@@ -1,6 +1,6 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 385
-  Top = 154
+  Left = 397
+  Top = 181
   Width = 510
   OldCreateOrder = True
   PixelsPerInch = 96

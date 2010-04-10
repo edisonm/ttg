@@ -575,7 +575,7 @@ begin
   Cursor := crHourGlass;
   try
     ConfiguracionForm.FormStorage.SaveFormPlacement;
-    SourceDataModule.SaveToFile(AFileName);
+    SourceDataModule.SaveToTextFile(AFileName);
   finally
     Cursor := crDefault;
   end;
@@ -585,7 +585,7 @@ procedure TMainForm.LoadFromFile(const AFileName: string);
 begin
   Cursor := crHourGlass;
   try
-    SourceDataModule.LoadFromFile(AFileName);
+    SourceDataModule.LoadFromTextFile(AFileName);
     ConfiguracionForm.FormStorage.RestoreFormPlacement;
   finally
     Cursor := crDefault;
