@@ -8,6 +8,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
   TextHeight = 13
   inherited tb97Show: TToolBar
     Width = 766
+    Visible = True
     object btn97Mostrar: TToolButton
       Left = 69
       Top = 0
@@ -70,8 +71,6 @@ inherited HorarioProfesorForm: THorarioProfesorForm
   inherited FormStorage: TFormStorage
     Active = True
     IniSection = '\Software\SGHC1\MMEd1HorarioProfesor'
-    Left = 120
-    Top = 88
   end
   inherited ImageList: TImageList
     Bitmap = {

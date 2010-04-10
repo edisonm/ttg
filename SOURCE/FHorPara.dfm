@@ -1,5 +1,6 @@
 inherited HorarioParaleloForm: THorarioParaleloForm
-  Left = 360
+  Left = 388
+  Top = 156
   Width = 704
   Height = 428
   OldCreateOrder = False
@@ -8,6 +9,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   TextHeight = 13
   inherited tb97Show: TToolBar
     Width = 696
+    Visible = True
     inherited btn97Ok: TToolButton
       Enabled = False
       Visible = False
@@ -119,6 +121,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   inherited FormStorage: TFormStorage
     Active = True
     IniSection = '\Software\SGHC1\MMEd1HorarioParalelo'
+    Left = 144
     Top = 104
   end
   inherited ImageList: TImageList
@@ -588,28 +591,28 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     Version = '2.49'
     Left = 88
     Top = 104
-    object kbmParaleloCodNivel:TIntegerField
+    object TIntegerField
       DisplayLabel = 'Nivel'
       DisplayWidth = 10
       FieldName = 'CodNivel'
       Required = True
       Visible = False
     end
-    object kbmParaleloCodEspecializacion:TIntegerField
+    object TIntegerField
       DisplayLabel = 'Especialización'
       DisplayWidth = 10
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
     end
-    object kbmParaleloCodParaleloId:TIntegerField
+    object TIntegerField
       DisplayLabel = 'Paralelo'
       DisplayWidth = 10
       FieldName = 'CodParaleloId'
       Required = True
       Visible = False
     end
-    object kbmParaleloAbrNivel:TStringField
+    object TStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -621,7 +624,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Size = 5
       Lookup = True
     end
-    object kbmParaleloAbrEspecializacion:TStringField
+    object TStringField
       DisplayLabel = 'Especializacion'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -633,7 +636,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Size = 10
       Lookup = True
     end
-    object kbmParaleloNomParaleloId:TStringField
+    object TStringField
       DisplayLabel = 'Paralelo'
       DisplayWidth = 5
       FieldKind = fkLookup
