@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, Buttons, ExtCtrls, CDBFmlry, DBFmlry, kbmMemTable;
+  Db, StdCtrls, Buttons, ExtCtrls, CDBFmlry, DBFmlry, kbmMemTable, DBCtrls;
 
 type
   TSelPeriodoForm = class(TForm)
@@ -14,10 +14,13 @@ type
     rxmDiaHoraCodHora: TIntegerField;
     rxmDiaHoraNomDia: TStringField;
     rxmDiaHoraNomHora: TStringField;
-    DBFormulary1: TDBFormulary;
     BBAceptar: TBitBtn;
     BBCancelar: TBitBtn;
     Label1: TLabel;
+    Label2: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
+    Label3: TLabel;
+    DBLookupComboBox2: TDBLookupComboBox;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }

@@ -35,7 +35,8 @@ uses
   FHorProf in 'FHorProf.pas' {HorarioProfesorForm},
   DSrcBase in 'DSrcBase.pas' {SourceBaseDataModule: TDataModule},
   RelUtils in 'RelUtils.pas',
-  DSource in 'DSource.pas' {SourceDataModule: TDataModule};
+  DSource in 'DSource.pas' {SourceDataModule: TDataModule},
+  FSelPeIn in 'FSelPeIn.pas' {SelPeriodoForm};
 
 {$R *.RES}
 
