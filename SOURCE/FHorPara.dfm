@@ -591,28 +591,28 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     Version = '2.49'
     Left = 88
     Top = 104
-    object TIntegerField
+    object kbmParaleloCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       DisplayWidth = 10
       FieldName = 'CodNivel'
       Required = True
       Visible = False
     end
-    object TIntegerField
+    object kbmParaleloCodEspecializacion: TIntegerField
       DisplayLabel = 'Especialización'
       DisplayWidth = 10
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
     end
-    object TIntegerField
+    object kbmParaleloCodParaleloId: TIntegerField
       DisplayLabel = 'Paralelo'
       DisplayWidth = 10
       FieldName = 'CodParaleloId'
       Required = True
       Visible = False
     end
-    object TStringField
+    object kbmParaleloAbrNivel: TStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -624,7 +624,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Size = 5
       Lookup = True
     end
-    object TStringField
+    object kbmParaleloAbrEspecializacion: TStringField
       DisplayLabel = 'Especializacion'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -636,7 +636,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Size = 10
       Lookup = True
     end
-    object TStringField
+    object kbmParaleloNomParaleloId: TStringField
       DisplayLabel = 'Paralelo'
       DisplayWidth = 5
       FieldKind = fkLookup
