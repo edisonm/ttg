@@ -32,14 +32,19 @@ type
     { Private declarations }
     FFlags : TkbmMemTableSaveFlags;
     procedure SaveToStream(AStream: TStream);
+    procedure SaveToStrings(AStrings: TStrings); override;
     procedure SaveUnCompToStream(AStream: TStream);
     procedure LoadFromStream(AStream: TStream);
+    procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer); override;
     procedure LoadUnCompFromStream(AStream: TStream);
+    procedure SaveIniStrings(AStrings: TStrings);
+    procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
+    procedure SaveToTextDir(const ADirName: TFileName);
   public
     { Public declarations }
     procedure SaveToFile(const AFileName: TFileName);
+    procedure SaveToTextFile(const AFileName: TFileName);
     procedure LoadFromFile(const AFileName: TFileName);
-    procedure SaveToTextDir(const AFileName: TFileName); overload;
     procedure NewDatabase;
     procedure FillDefaultData;
   end;
@@ -159,6 +164,20 @@ begin
     Stream.Free;
   end;
 end;
+
+procedure TSourceDataModule.SaveToTextFile(const AFileName: TFileName);
+var
+  Strings: TStrings;
+begin
+  Strings := TStringList.Create;
+  try
+    SaveToStrings(Strings);
+    Strings.SaveToFile(AFileName);
+  finally
+    Strings.Free;
+  end;
+end;
+
 
 procedure TSourceDataModule.NewDatabase;
 begin
@@ -367,9 +386,65 @@ begin
   NewDataBase;
 end;
 
-procedure TSourceDataModule.SaveToTextDir(const AFileName: TFileName);
+procedure TSourceDataModule.SaveToStrings(AStrings: TStrings);
 begin
-  SaveToTextDir(AFileName);
+  AStrings.Add('HPC ' + IntToStr(pfhVersionNumber));
+  inherited;
+  SaveIniStrings(AStrings);
+end;
+
+procedure TSourceDataModule.SaveIniStrings(AStrings: TStrings);
+var
+  IniStrings: TStrings;
+begin
+  IniStrings := TStringList.Create;
+  try
+    ConfiguracionForm.FormStorage.SaveFormPlacement;
+    IniStrings.LoadFromFile(ConfiguracionForm.FormStorage.IniFileName);
+    AStrings.Add(IntToStr(IniStrings.Count));
+    AStrings.AddStrings(IniStrings);
+  finally
+    IniStrings.Free;
+  end;
+end;
+
+procedure TSourceDataModule.LoadIniStrings(AStrings: TStrings; var APosition: Integer);
+var
+  IniStrings: TStrings;
+  Count, Limit: Integer;
+begin
+  IniStrings := TStringList.Create;
+  try
+    Count := StrToInt(AStrings.Strings[APosition]);
+    Inc(APosition);
+    Limit := APosition + Count;
+    while APosition < Limit do
+    begin
+      IniStrings.Add(AStrings[APosition]);
+      Inc(APosition);
+    end;
+    AStrings.Add(IntToStr(IniStrings.Count));
+    AStrings.AddStrings(IniStrings);
+    IniStrings.SaveToFile(ConfiguracionForm.FormStorage.IniFileName);
+    ConfiguracionForm.FormStorage.RestoreFormPlacement;
+  finally
+    IniStrings.Free;
+  end;
+end;
+
+procedure TSourceDataModule.LoadFromStrings(AStrings: TStrings; var APosition: Integer);
+begin
+  // version stored in AStrings.Strings[APosition];
+  Inc(APosition);
+  inherited LoadFromStrings(AStrings, APosition);
+  LoadIniStrings(AStrings, APosition);
+end;
+
+procedure TSourceDataModule.SaveToTextDir(const ADirName: TFileName);
+begin
+  ConfiguracionForm.FormStorage.IniFileName := ADirName + '\config.ini';
+  ConfiguracionForm.FormStorage.SaveFormPlacement;
+  inherited;
 end;
 
 end.

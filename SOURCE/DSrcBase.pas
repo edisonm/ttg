@@ -166,13 +166,13 @@ type
     procedure LoadFromBinaryStream(AStream: TStream);
     procedure LoadFromBinaryFile(const AFileName: string);
     procedure LoadFromTextDir(const ADirName: string);
-    procedure LoadFromTextFile(const AFileName: string);
-    procedure LoadFromStrings(AStrings: TStrings);
+    procedure LoadFromTextFile(const AFileName: TFileName);
+    procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer); virtual;
     procedure SaveToBinaryStream(AStream: TStream; flags:TkbmMemTableSaveFlags);
-    procedure SaveToBinaryFile(const AFileName: string; flags:TkbmMemTableSaveFlags);
-    procedure SaveToTextFile(const AFileName: string);
-    procedure SaveToStrings(AStrings: TStrings);
-    procedure SaveToTextDir(const ADirName: string);
+    procedure SaveToBinaryFile(const AFileName: TFileName; flags:TkbmMemTableSaveFlags);
+    procedure SaveToTextFile(const AFileName: TFileName);
+    procedure SaveToStrings(AStrings: TStrings); virtual;
+    procedure SaveToTextDir(const ADirName: TFileName); virtual;
     procedure EmptyTables;
     procedure OpenTables;
     procedure CloseTables;
@@ -729,42 +729,43 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.LoadFromTextFile(const AFileName: string);
+procedure TSourceBaseDataModule.LoadFromTextFile(const AFileName: TFileName);
 var
   AStrings: TStrings;
+  APosition: Integer;
 begin
   AStrings := TStringList.Create;
   try
-    LoadFromStrings(AStrings);
+    AStrings.LoadFromFile(AFileName);
+    APosition := 0;
+    LoadFromStrings(AStrings, APosition);
   finally
     AStrings.Free;
   end;
 end;
 
-procedure TSourceBaseDataModule.LoadFromStrings(AStrings: TStrings);
-var
-  Position: Integer;
+procedure TSourceBaseDataModule.LoadFromStrings(AStrings: TStrings; var APosition: Integer);
 begin
   FCheckRelations := False;
   try
-    LoadDataSetFromStrings(kbmAulaTipo, AStrings, Position);
-    LoadDataSetFromStrings(kbmEspecializacion, AStrings, Position);
-    LoadDataSetFromStrings(kbmDia, AStrings, Position);
-    LoadDataSetFromStrings(kbmMateria, AStrings, Position);
-    LoadDataSetFromStrings(kbmNivel, AStrings, Position);
-    LoadDataSetFromStrings(kbmHora, AStrings, Position);
-    LoadDataSetFromStrings(kbmHorario, AStrings, Position);
-    LoadDataSetFromStrings(kbmCurso, AStrings, Position);
-    LoadDataSetFromStrings(kbmParaleloId, AStrings, Position);
-    LoadDataSetFromStrings(kbmMateriaProhibicionTipo, AStrings, Position);
-    LoadDataSetFromStrings(kbmPeriodo, AStrings, Position);
-    LoadDataSetFromStrings(kbmParalelo, AStrings, Position);
-    LoadDataSetFromStrings(kbmProfesor, AStrings, Position);
-    LoadDataSetFromStrings(kbmMateriaProhibicion, AStrings, Position);
-    LoadDataSetFromStrings(kbmDistributivo, AStrings, Position);
-    LoadDataSetFromStrings(kbmHorarioDetalle, AStrings, Position);
-    LoadDataSetFromStrings(kbmProfesorProhibicionTipo, AStrings, Position);
-    LoadDataSetFromStrings(kbmProfesorProhibicion, AStrings, Position);
+    LoadDataSetFromStrings(kbmAulaTipo, AStrings, APosition);
+    LoadDataSetFromStrings(kbmEspecializacion, AStrings, APosition);
+    LoadDataSetFromStrings(kbmDia, AStrings, APosition);
+    LoadDataSetFromStrings(kbmMateria, AStrings, APosition);
+    LoadDataSetFromStrings(kbmNivel, AStrings, APosition);
+    LoadDataSetFromStrings(kbmHora, AStrings, APosition);
+    LoadDataSetFromStrings(kbmHorario, AStrings, APosition);
+    LoadDataSetFromStrings(kbmCurso, AStrings, APosition);
+    LoadDataSetFromStrings(kbmParaleloId, AStrings, APosition);
+    LoadDataSetFromStrings(kbmMateriaProhibicionTipo, AStrings, APosition);
+    LoadDataSetFromStrings(kbmPeriodo, AStrings, APosition);
+    LoadDataSetFromStrings(kbmParalelo, AStrings, APosition);
+    LoadDataSetFromStrings(kbmProfesor, AStrings, APosition);
+    LoadDataSetFromStrings(kbmMateriaProhibicion, AStrings, APosition);
+    LoadDataSetFromStrings(kbmDistributivo, AStrings, APosition);
+    LoadDataSetFromStrings(kbmHorarioDetalle, AStrings, APosition);
+    LoadDataSetFromStrings(kbmProfesorProhibicionTipo, AStrings, APosition);
+    LoadDataSetFromStrings(kbmProfesorProhibicion, AStrings, APosition);
   finally
     FCheckRelations := True;
   end;
@@ -819,7 +820,7 @@ begin
   kbmProfesorProhibicion.SaveToBinaryStream(AStream, flags);
 end;
 
-procedure TSourceBaseDataModule.SaveToBinaryFile(const AFileName: string; flags:TkbmMemTableSaveFlags);
+procedure TSourceBaseDataModule.SaveToBinaryFile(const AFileName: TFileName; flags:TkbmMemTableSaveFlags);
 var
   Stream: TStream;
 begin
@@ -853,7 +854,7 @@ begin
   SaveDataSetToStrings(kbmProfesorProhibicion, AStrings);
 end;
 
-procedure TSourceBaseDataModule.SaveToTextFile(const AFileName: string);
+procedure TSourceBaseDataModule.SaveToTextFile(const AFileName: TFileName);
 var
   AStrings: TStrings;
 begin
@@ -866,7 +867,7 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.SaveToTextDir(const ADirName: string);
+procedure TSourceBaseDataModule.SaveToTextDir(const ADirName: TFileName);
 begin
   SaveDataSetToCSVFile(kbmAulaTipo, ADirName + '\AulaTipo.csv');
   SaveDataSetToCSVFile(kbmEspecializacion, ADirName + '\Especializacion.csv');

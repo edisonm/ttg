@@ -23,7 +23,7 @@ function CompareField(Field: TField; Value: Variant): Boolean;
 function CompareRecord(Fields: TList; KeyValue: Variant): Boolean;
 function CompareVarArray(v1, v2: Variant): Boolean;
 procedure SaveDataSetToCSVFile(ADataSet: TDataSet; const AFileName: TFileName);
-procedure SaveDataSetToStrings(ADataSet:TDataSet; AStrings: TSTrings);
+procedure SaveDataSetToStrings(ADataSet:TDataSet; AStrings: TStrings);
 procedure LoadDataSetFromCSVFile(ADataSet: TDataSet; const AFileName: TFileName);
 
 procedure LoadDataSetFromStrings(ADataSet: TDataSet; AStrings: TStrings;
@@ -425,8 +425,9 @@ begin
   end;
 end;
 
-procedure SaveDataSetToStrings(ADataSet:TDataSet; AStrings: TSTrings);
+procedure SaveDataSetToStrings(ADataSet:TDataSet; AStrings: TStrings);
 begin
+  AStrings.Add('// ' + ADataSet.Name);
   AStrings.Add(IntToStr(ADataSet.RecordCount));
   SaveDataSetToStrings0(ADataSet, AStrings);
 end;
@@ -445,16 +446,17 @@ begin
 end;
 
 procedure LoadDataSetFromStrings0(ADataSet: TDataSet; AStrings: TStrings;
-  Position: Integer; Count: Integer);
+  var Position: Integer; RecordCount: Integer);
 var
   s, v: string;
-  i, j, l, Pos: Integer;
+  i, j, l, Pos, Limit: Integer;
   Fields: array of TField;
   Field: TField;
 begin
-  s := AStrings.Strings[0];
+  s := AStrings.Strings[Position];
   Pos := 2;
   l := 0;
+  Inc(Position);
   while True do
   begin
     v := ScapedToString(s, Pos);
@@ -471,11 +473,12 @@ begin
   end;
   ADataSet.DisableControls;
   try
-    for i := Position + 1 to Position + Count do
+    Limit := Position + RecordCount;
+    while Position < Limit do
     begin
       ADataSet.Append;
       Pos := 2;
-      s := AStrings[i];
+      s := AStrings[Position];
       for j := 0 to l - 1 do
       begin
         v := ScapedToString(s, Pos);
@@ -483,6 +486,7 @@ begin
         Inc(Pos, 3);
       end;
       ADataSet.Post;
+      Inc(Position);
     end;
   finally
     ADataSet.EnableControls;
@@ -492,21 +496,24 @@ end;
 procedure LoadDataSetFromStrings(ADataSet: TDataSet; AStrings: TStrings;
   var Position: Integer);
 var
-  Count: Integer;
+  RecordCount: Integer;
 begin
-  Count := StrToInt(AStrings.Strings[Position]);
-  LoadDataSetFromStrings0(ADataSet, AStrings, Position, Count);
-  Inc(Position, 1 + Count);
+  Inc(Position); // Skip Table Name
+  RecordCount := StrToInt(AStrings.Strings[Position]);
+  Inc(Position);
+  LoadDataSetFromStrings0(ADataSet, AStrings, Position, RecordCount);
 end;
 
 procedure LoadDataSetFromCSVFile(ADataSet: TDataSet; const AFileName: TFileName);
 var
   AStrings: TStrings;
+  Position: Integer;
 begin
   AStrings := TStringList.Create;
   try
     AStrings.LoadFromFile(AFileName);
-    LoadDataSetFromStrings0(ADataSet, AStrings, 0, AStrings.Count - 1);
+    Position := 0;
+    LoadDataSetFromStrings0(ADataSet, AStrings, Position, AStrings.Count - 1);
   finally
     AStrings.Free;
   end;

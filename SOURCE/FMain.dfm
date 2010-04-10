@@ -287,8 +287,8 @@ object MainForm: TMainForm
   end
   object MainMenu: TMainMenu
     Images = ImageList
-    Left = 170
-    Top = 56
+    Left = 186
+    Top = 72
     object MIFile: TMenuItem
       Caption = '&Archivo'
       HelpContext = 30
@@ -473,8 +473,8 @@ object MainForm: TMainForm
   end
   object SaveDialog: TSaveDialog
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 114
-    Top = 56
+    Left = 130
+    Top = 72
   end
   object FormStorage: TFormStorage
     Active = False
@@ -485,26 +485,26 @@ object MainForm: TMainForm
       'SaveDialogCSV.FileName'
       'OpenDialog.FileName')
     StoredValues = <>
-    Left = 86
-    Top = 56
+    Left = 102
+    Top = 72
   end
   object OpenDialog: TOpenDialog
     DefaultExt = 'hpc'
     Filter = 'Horario para colegio (*.hpc)|*.hpc'
     Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
-    Left = 58
-    Top = 56
+    Left = 74
+    Top = 72
   end
   object MRUManager: TMRUManager
     IniStorage = FormStorage
     RecentMenu = MIReopen
     OnClick = MRUManagerClick
-    Left = 198
-    Top = 56
+    Left = 214
+    Top = 72
   end
   object ImageList: TImageList
-    Left = 30
-    Top = 56
+    Left = 46
+    Top = 72
     Bitmap = {
       494C01011E002200040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000009000000001002000000000000090
@@ -1703,8 +1703,8 @@ object MainForm: TMainForm
   end
   object ActionList: TActionList
     Images = ImageList
-    Left = 2
-    Top = 56
+    Left = 18
+    Top = 72
     object actContents: TAction
       Category = 'Help'
       Caption = 'Contenido'
@@ -2035,7 +2035,7 @@ object MainForm: TMainForm
     Version = '2.49'
     OnFilterRecord = rxmParaleloFilterRecord
     Left = 48
-    Top = 111
+    Top = 119
   end
   object rxmProfesor: TkbmMemTable
     AttachedAutoRefresh = True
@@ -2065,7 +2065,7 @@ object MainForm: TMainForm
     Version = '2.49'
     OnFilterRecord = rxmProfesorFilterRecord
     Left = 48
-    Top = 139
+    Top = 147
   end
   object QuParaleloHora: TkbmMemTable
     AttachedAutoRefresh = True
@@ -2094,7 +2094,7 @@ object MainForm: TMainForm
     FilterOptions = []
     Version = '2.49'
     Left = 76
-    Top = 111
+    Top = 119
     object QuParaleloHoraCodNivel: TIntegerField
       FieldName = 'CodNivel'
       Visible = False
@@ -2150,7 +2150,7 @@ object MainForm: TMainForm
     FilterOptions = []
     Version = '2.49'
     Left = 76
-    Top = 139
+    Top = 147
     object QuProfesorHoraCodProfesor: TIntegerField
       FieldName = 'CodProfesor'
       Required = True
@@ -2200,7 +2200,7 @@ object MainForm: TMainForm
     FilterOptions = []
     Version = '2.49'
     Left = 104
-    Top = 139
+    Top = 147
     object QuProfesorHorarioDetalleCodProfesor: TIntegerField
       DisplayLabel = 'Profesor'
       FieldName = 'CodProfesor'
@@ -2248,7 +2248,7 @@ object MainForm: TMainForm
     FilterOptions = []
     Version = '2.49'
     Left = 104
-    Top = 111
+    Top = 119
     object QuParaleloHorarioDetalleCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
@@ -2550,8 +2550,8 @@ object MainForm: TMainForm
     DefaultExt = 'csv'
     Filter = 'CSV delimitado por comas(*.csv)|*.csv'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    Left = 142
-    Top = 56
+    Left = 158
+    Top = 72
   end
   object FSProteccion: TFormStorage
     Active = False
@@ -2569,7 +2569,7 @@ object MainForm: TMainForm
       item
         Name = 'LastDate'
       end>
-    Left = 226
-    Top = 56
+    Left = 242
+    Top = 72
   end
 end

@@ -562,8 +562,6 @@ procedure TMainForm.SaveToTextDir(const ADirName: string);
 begin
   Cursor := crHourGlass;
   try
-    ConfiguracionForm.FormStorage.IniFileName := ADirName + '\config.ini';
-    ConfiguracionForm.FormStorage.SaveFormPlacement;
     SourceDataModule.SaveToTextDir(ADirName);
   finally
     Cursor := crDefault;
@@ -574,7 +572,6 @@ procedure TMainForm.SaveToFile(const AFileName: string);
 begin
   Cursor := crHourGlass;
   try
-    ConfiguracionForm.FormStorage.SaveFormPlacement;
     SourceDataModule.SaveToTextFile(AFileName);
   finally
     Cursor := crDefault;
@@ -585,8 +582,8 @@ procedure TMainForm.LoadFromFile(const AFileName: string);
 begin
   Cursor := crHourGlass;
   try
+    SourceDataModule.EmptyTables;
     SourceDataModule.LoadFromTextFile(AFileName);
-    ConfiguracionForm.FormStorage.RestoreFormPlacement;
   finally
     Cursor := crDefault;
   end;
