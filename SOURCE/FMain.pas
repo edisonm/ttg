@@ -1,5 +1,7 @@
 unit FMain;
 
+{$I SGHC.INC}
+
 interface
 
 uses
@@ -171,10 +173,6 @@ type
     QuProfesorHorarioDetalleCodDia: TIntegerField;
     QuProfesorHorarioDetalleCodHora: TIntegerField;
     QuProfesorHorarioDetalleNombre: TStringField;
-    actSaveCSV: TAction;
-    MISaveTxt: TMenuItem;
-    actOpenCSV: TAction;
-    AbrirTexto1: TMenuItem;
     ToolBar: TToolBar;
     procedure actExitExecute(Sender: TObject);
     procedure actProfesorExecute(Sender: TObject);
@@ -226,22 +224,25 @@ type
     procedure actMejorarHorarioExecute(Sender: TObject);
     procedure FormDblClick(Sender: TObject);
     procedure actRegistrationInfoExecute(Sender: TObject);
+{
     procedure actSaveCSVExecute(Sender: TObject);
     procedure actOpenCSVExecute(Sender: TObject);
+}
   private
     { Private declarations }
 {$IFNDEF FREEWARE}
     FInit: TDateTime;
-    FCloseClick, FCancelClick: Boolean;
-{$ENDIF}
+    FCloseClick:Boolean;
+    FCancelClick: Boolean;
+    FEjecutando: Boolean;
     FPasada: Integer;
+{$ENDIF}
     FPosition: Integer;
     FRelPosition: Integer;
     FNumIteraciones: Integer;
     FMin: Integer;
     FMax: Integer;
     FStep: Integer;
-    FEjecutando: Boolean;
     FAjustar: Boolean;
     FLogStrings: TStrings;
     FCodHorario: Integer;
@@ -266,9 +267,9 @@ type
     procedure EdHorarioDestroy(Sender: TObject);
 
     procedure LoadFromFile(const AFileName: string);
-    procedure LoadFromTextDir(const ADirName: string);
+//    procedure LoadFromTextDir(const ADirName: string);
+//    procedure SaveToTextDir(const ADirName: string);
     procedure SaveToFile(const AFileName: string);
-    procedure SaveToTextDir(const ADirName: string);
     {procedure DBGridGetCellParamsColor(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);}
     function ConfirmOperation: boolean;
@@ -278,6 +279,8 @@ type
 {$IFNDEF FREEWARE}
     procedure InitRandom;
     procedure ElaborarHorario(s: string);
+    procedure MejorarHorario;
+    procedure ProgressDescensoDoble(I, Max: Integer; Value: Double; var Stop: Boolean);
 {$ENDIF}
     procedure InternalShowFormulary(ASingleEditorForm: TSingleEditorForm;
       ADataSet: TDataSet; AAction: TAction; DestroyEvent: TNotifyEvent);
@@ -287,7 +290,6 @@ type
     procedure PrepareReportProhibicion(Sender: TObject);
     procedure PrepareReportDistributivoMateria(Sender: TObject);
     procedure PrepareReportDistributivoProfesor(Sender: TObject);
-    procedure ProgressDescensoDoble(I, Max: Integer; Value: Double; var Stop: Boolean);
     procedure ExportToFile(AFileName: TFileName);
     procedure ExportToStrings(AStrings: TStrings);
     procedure PedirRegistrarSoftware;
@@ -305,19 +307,19 @@ type
 
   public
     { Public declarations }
+    procedure AjustarPesos;
+    procedure PrepareReport(Sender: TObject);
 {$IFNDEF FREEWARE}
     procedure OnIterar(Sender: TObject);
     procedure OnRegistrarMejor(Sender: TObject);
     procedure ProgressFormCloseClick(Sender: TObject);
     procedure ProgressFormCancelClick(Sender: TObject);
+    property Ejecutando: Boolean read FEjecutando;
 {$ENDIF}
-    procedure AjustarPesos;
-    procedure PrepareReport(Sender: TObject);
     property Position: Integer read FPosition write SetPosition;
     property Min: Integer read FMin write SetMin;
     property Max: Integer read FMax write SetMax;
     property Step: Integer read FStep write SetStep;
-    property Ejecutando: Boolean read FEjecutando;
     property CodHorario: Integer read FCodHorario write FCodHorario;
     property NumIteraciones: Integer read FNumIteraciones write FNumIteraciones;
     property CodHorarioSeleccionado: Integer read GetCodHorarioSeleccionado;
@@ -528,8 +530,8 @@ begin
   StatusBar.Panels[1].Style := psOwnerDraw;
   Position := 0;
   Max := 100;
-  SaveDialog.DefaultExt := 'hpc';
-  SaveDialog.Filter := 'Horario para colegio (*.hpc)|*.hpc';
+  SaveDialog.DefaultExt := 'ttd'; // Time Tabling Data
+  SaveDialog.Filter := 'Horario para colegio (*.ttd)|*.ttd';
   try
     SaveDialog.HelpContext := actSave.HelpContext;
     if SaveDialog.Execute then
@@ -544,6 +546,7 @@ begin
   end;
 end;
 
+(*
 procedure TMainForm.actSaveCSVExecute(Sender: TObject);
 var
   DirName: string;
@@ -567,6 +570,7 @@ begin
     Cursor := crDefault;
   end;
 end;
+*)
 
 procedure TMainForm.SaveToFile(const AFileName: string);
 begin
@@ -589,6 +593,7 @@ begin
   end;
 end;
 
+(*
 procedure TMainForm.LoadFromTextDir(const ADirName: string);
 begin
   Cursor := crHourGlass;
@@ -601,6 +606,7 @@ begin
     Cursor := crDefault;
   end;
 end;
+*)
 
 procedure TMainForm.actOpenExecute(Sender: TObject);
 begin
@@ -896,6 +902,34 @@ begin
   ProgressForm.Close;
 end;
 
+var
+  MomentoInicialProgress: TDateTime;
+
+procedure TMainForm.ProgressDescensoDoble(I, Max: Integer; value: Double; var Stop: Boolean);
+var
+  t, x: TDateTime;
+begin
+  if I = 0 then
+  begin
+    Self.Max := Max;
+    x := 0;
+    Inc(FPasada);
+    MomentoInicialProgress := Now;
+    t := 0;
+  end
+  else
+  begin
+    t := Now - MomentoInicialProgress;
+    x := t * (Max - I) / I;
+  end;
+  Self.Position := i;
+  StatusBar.Panels[0].Text := Format('Pasada %d - %d de %d %f - van: %d-%s - restan: %d-%s',
+    [FPasada, i, max, value, Trunc(t), FormatDateTime('hh:mm:ss', t), Trunc(x),
+    FormatDateTime('hh:mm:ss', x)]);
+  Application.ProcessMessages;
+  Stop := FCloseClick;
+end;
+
 {$ENDIF}
 
 procedure TMainForm.SetMax(Value: Integer);
@@ -1025,11 +1059,15 @@ begin
     FPosition := 0;
     FRelPosition := 0;
     FStep := 1;
-    FEjecutando := False;
     FAjustar := False;
     FLogStrings := TStringList.Create;
 {$IFDEF FREEWARE}
     actElaborarHorario.Enabled := False;
+    actMejorarHorario.Enabled := False;
+    Caption := Caption + ' ***Freeware***';
+{$ENDIF}
+{$IFNDEF FREEWARE}
+    FEjecutando := False;
 {$ENDIF}
 {    Protect1.DaysExpire := 60;}
     FormStorage.RestoreFormPlacement;
@@ -1070,8 +1108,10 @@ begin
   begin
     ConfiguracionForm.FormStorage.SaveFormPlacement;
     //SourceDataModule.dbMain.Commit;
-    if Self.Ejecutando then
+{$IFNDEF FREEWARE}
+    if FEjecutando then
       Self.AjustarPesos;
+{$ENDIF}
   end
   else
   begin
@@ -1629,44 +1669,6 @@ begin
   end;
 end;
 
-{
-procedure TMainForm.ToolbarButton971Click(Sender: TObject);
-begin
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG1.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('1-5');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG2.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('6-10');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG3.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('11-15');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG4.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('16-20');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG5.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('21-25');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG6.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('26-30');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG7.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('31-35');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG8.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('36-40');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG9.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('41-45');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG10.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('46-50');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\CONFIG.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-end;
-}
-
 procedure TMainForm.PrepareReport(Sender: TObject);
 begin
   with Sender as TSingleReportQrp, ConfiguracionForm do
@@ -1682,35 +1684,15 @@ begin
   end;
 end;
 
-var
-  MomentoInicialProgress: TDateTime;
-
-procedure TMainForm.ProgressDescensoDoble(I, Max: Integer; value: Double; var Stop: Boolean);
-var
-  t, x: TDateTime;
+procedure TMainForm.actMejorarHorarioExecute(Sender: TObject);
 begin
-  if I = 0 then
-  begin
-    Self.Max := Max;
-    x := 0;
-    Inc(FPasada);
-    MomentoInicialProgress := Now;
-    t := 0;
-  end
-  else
-  begin
-    t := Now - MomentoInicialProgress;
-    x := t * (Max - I) / I;
-  end;
-  Self.Position := i;
-  StatusBar.Panels[0].Text := Format('Pasada %d - %d de %d %f - van: %d-%s - restan: %d-%s',
-    [FPasada, i, max, value, Trunc(t), FormatDateTime('hh:mm:ss', t), Trunc(x),
-    FormatDateTime('hh:mm:ss', x)]);
-  Application.ProcessMessages;
-  Stop := FCloseClick;
+{$IFNDEF FREEWARE}
+  MejorarHorario;
+{$ENDIF}
 end;
 
-procedure TMainForm.actMejorarHorarioExecute(Sender: TObject);
+{$IFNDEF FREEWARE}
+procedure TMainForm.MejorarHorario;
 var
   VModeloHorario: TModeloHorario;
   VObjetoModeloHorario: TObjetoModeloHorario;
@@ -1784,13 +1766,16 @@ begin
     end;
   end;
 end;
+{$ENDIF}
 
 procedure TMainForm.FormDblClick(Sender: TObject);
 begin
+{$IFNDEF FREEWARE}
   if FEjecutando
     and (MessageDlg('¿Está seguro de que desea finalizar esta operación?',
     mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
     FCloseClick := True;
+{$ENDIF}
 end;
 
 procedure TMainForm.actRegistrationInfoExecute(Sender: TObject);
@@ -1971,6 +1956,7 @@ begin
   end;
 end;
 
+(*
 procedure TMainForm.actOpenCSVExecute(Sender: TObject);
 var
   DirName: string;
@@ -1991,6 +1977,7 @@ begin
     StatusBar.Panels[2].Text := 'Listo';
   end;
 end;
+*)
 
 end.
 

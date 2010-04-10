@@ -1,5 +1,7 @@
 unit About;
 
+{$I SGHC.INC}
+
 {$I RX.INC}
 
 interface
@@ -116,6 +118,9 @@ begin
           FYearLabel.Caption := Format(SCopyright,
             [ExtractYear(VerInfo.VerFileDate)]);
         FProductVersion.Caption := Format(sFileVer, [VerInfo.FileVersion]);
+{$IFDEF FREEWARE}
+        FProductVersion.Caption := FProductVersion.Caption + ' ***Freeware***';
+{$ENDIF}
       end
       else begin
         FYearLabel.Caption := Format(SCopyright,

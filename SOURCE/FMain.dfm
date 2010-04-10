@@ -62,7 +62,7 @@ object MainForm: TMainForm
     Height = 13
     Alignment = taRightJustify
     Anchors = [akRight, akBottom]
-    Caption = 'Edición 01-08-2000, Edison Mera, Quito - Ecuador'
+    Caption = 'Edición 12-04-2010, Edison Mera, Quito - Ecuador'
   end
   object StatusBar: TStatusBar
     Left = 0
@@ -299,14 +299,8 @@ object MainForm: TMainForm
       object MIOpen: TMenuItem
         Action = actOpen
       end
-      object AbrirTexto1: TMenuItem
-        Action = actOpenCSV
-      end
       object MISave: TMenuItem
         Action = actSave
-      end
-      object MISaveTxt: TMenuItem
-        Action = actSaveCSV
       end
       object MIReopen: TMenuItem
         Caption = 'Volver a abrir'
@@ -489,8 +483,8 @@ object MainForm: TMainForm
     Top = 72
   end
   object OpenDialog: TOpenDialog
-    DefaultExt = 'hpc'
-    Filter = 'Horario para colegio (*.hpc)|*.hpc'
+    DefaultExt = 'ttd'
+    Filter = 'Horario para colegio (*.ttd)|*.ttd'
     Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
     Left = 74
     Top = 72
@@ -1993,18 +1987,6 @@ object MainForm: TMainForm
       Caption = 'Mejorar Horario'
       Hint = 'Mejorar Horario|Mejorar el Horario buscando en doble profundidad'
       OnExecute = actMejorarHorarioExecute
-    end
-    object actSaveCSV: TAction
-      Category = 'File'
-      Caption = 'Guardar Texto...'
-      Hint = 'Guardar|Guardar colegio en directorio de archivos CSV'
-      OnExecute = actSaveCSVExecute
-    end
-    object actOpenCSV: TAction
-      Category = 'File'
-      Caption = 'Abrir Texto'
-      Hint = 'Abrir|Abrir colegio previamente guardado en directorio de CSV'
-      OnExecute = actOpenCSVExecute
     end
   end
   object rxmParalelo: TkbmMemTable

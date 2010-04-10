@@ -32,18 +32,18 @@ type
     { Private declarations }
     FFlags : TkbmMemTableSaveFlags;
     procedure SaveToStream(AStream: TStream);
-    procedure SaveToStrings(AStrings: TStrings); override;
     procedure SaveUnCompToStream(AStream: TStream);
     procedure LoadFromStream(AStream: TStream);
-    procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer); override;
     procedure LoadUnCompFromStream(AStream: TStream);
     procedure SaveIniStrings(AStrings: TStrings);
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
-    procedure SaveToTextDir(const ADirName: TFileName);
   public
     { Public declarations }
+    procedure SaveToStrings(AStrings: TStrings); override;
+    procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer); override;
     procedure SaveToFile(const AFileName: TFileName);
     procedure SaveToTextFile(const AFileName: TFileName);
+    procedure SaveToTextDir(const ADirName: TFileName); override;
     procedure LoadFromFile(const AFileName: TFileName);
     procedure NewDatabase;
     procedure FillDefaultData;
@@ -60,19 +60,19 @@ uses
 
 type
   EMainDataModuleError = class(Exception);
-  THPCFileHeader = packed record
+  TTTDFileHeader = packed record
     GenHeader: array[1..4] of Char;
     VersionNumber: Integer;
   end;
 
 const
-  pfhVersionNumber = $00000121;
+  pfhVersionNumber = $00000122;
 
 resourcestring
 
-  SNotHPCFile = 'No es un archivo HPC';
-  SInvalidHPCVersion = 'Versión archivo HPC inválida';
-  //SInvalidHPCFile = 'Archivo HPC no válido';
+  SNotTTDFile = 'No es un archivo TTD';
+  SInvalidTTDVersion = 'Versión archivo TTD inválida';
+  //SInvalidTTDFile = 'Archivo TTD no válido';
 
 procedure TSourceDataModule.kbmProfesorCalcFields(DataSet: TDataSet);
 begin
@@ -116,11 +116,11 @@ end;
 procedure TSourceDataModule.SaveToStream(AStream: TStream);
 var
   Stream, BZip2Stream: TStream;
-  HPCFileHeader: THPCFileHeader;
+  TTDFileHeader: TTTDFileHeader;
 begin
-  HPCFileHeader.GenHeader := 'HPC' + ^Z;
-  HPCFileHeader.VersionNumber := pfhVersionNumber;
-  AStream.Write(HPCFileHeader, SizeOf(HPCFileHeader));
+  TTDFileHeader.GenHeader := 'TTD' + ^Z;
+  TTDFileHeader.VersionNumber := pfhVersionNumber;
+  AStream.Write(TTDFileHeader, SizeOf(TTDFileHeader));
   Stream := TMemoryStream.Create;
   try
     SaveUncompToStream(Stream);
@@ -195,13 +195,13 @@ var
   Count: Integer;
   Buffer: array[0..BufferSize - 1] of Byte;
   MemoryStream, BZip2Stream: TStream;
-  HPCFileHeader: THPCFileHeader;
+  TTDFileHeader: TTTDFileHeader;
 begin
-  AStream.Read(HPCFileHeader, SizeOf(HPCFileHeader));
-  if HPCFileHeader.GenHeader <> 'HPC' + ^Z then
-    raise EMainDataModuleError.Create(SNotHPCFile);
-  if HPCFileHeader.VersionNumber <> pfhVersionNumber then
-    raise EMainDataModuleError.Create(SInvalidHPCVersion);
+  AStream.Read(TTDFileHeader, SizeOf(TTDFileHeader));
+  if TTDFileHeader.GenHeader <> 'TTD' + ^Z then
+    raise EMainDataModuleError.Create(SNotTTDFile);
+  if TTDFileHeader.VersionNumber <> pfhVersionNumber then
+    raise EMainDataModuleError.Create(SInvalidTTDVersion);
   MemoryStream := TMemoryStream.Create;
   try
     BZip2Stream := TBZDecompressionStream.Create(AStream);
@@ -388,7 +388,7 @@ end;
 
 procedure TSourceDataModule.SaveToStrings(AStrings: TStrings);
 begin
-  AStrings.Add('HPC ' + IntToStr(pfhVersionNumber));
+  AStrings.Add('TTD ' + IntToStr(pfhVersionNumber));
   inherited;
   SaveIniStrings(AStrings);
 end;
