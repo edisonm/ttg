@@ -1,37 +1,12 @@
-inherited SourceBaseDataModule: TSourceBaseDataModule
-  OldCreateOrder = True
-  Left = 556
-  Top = 16
-  Height = 500
-  Width = 741
+object SourceBaseDataModule: TSourceBaseDataModule
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
   object TbAulaTipo: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodAulaTipo'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomAulaTipo'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 25
-      end
-      item
-        Name = 'AbrAulaTipo'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'Cantidad'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 48
+    Top = 48
+    active = True
+    BeforePost = TbAulaTipoBeforePost
+    BeforeDelete = TbAulaTipoBeforeDelete
     IndexDefs = <
       item
         Name = 'TbAulaTipoixAbrAulaTipo'
@@ -48,29 +23,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodAulaTipo'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbAulaTipoBeforePost
-    BeforeDelete = TbAulaTipoBeforeDelete
-    Left = 48
-    Top = 48
     object TbAulaTipoCodAulaTipo: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodAulaTipo'
@@ -88,6 +40,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 10
     end
     object TbAulaTipoCantidad: TIntegerField
+      DisplayLabel = 'Cantidad'
       FieldName = 'Cantidad'
       Required = True
     end
@@ -98,28 +51,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 40
   end
   object TbEspecializacion: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodEspecializacion'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'AbrEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 144
+    Top = 60
+    active = True
+    BeforePost = TbEspecializacionBeforePost
+    BeforeDelete = TbEspecializacionBeforeDelete
     IndexDefs = <
       item
         Name = 'TbEspecializacionixAbrEspecializacion'
@@ -136,29 +72,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodEspecializacion'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbEspecializacionBeforePost
-    BeforeDelete = TbEspecializacionBeforeDelete
-    Left = 144
-    Top = 60
     object TbEspecializacionCodEspecializacion: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodEspecializacion'
@@ -167,6 +80,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       DisplayLabel = 'Nombre'
       FieldName = 'NomEspecializacion'
       Required = True
+      Size = 20
     end
     object TbEspecializacionAbrEspecializacion: TStringField
       DisplayLabel = 'Abreviatura'
@@ -181,22 +95,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 52
   end
   object TbDia: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodDia'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomDia'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 240
+    Top = 48
+    active = True
+    BeforePost = TbDiaBeforePost
+    BeforeDelete = TbDiaBeforeDelete
     IndexDefs = <
       item
         Name = 'TbDiaixNomDia'
@@ -208,29 +111,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodDia'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbDiaBeforePost
-    BeforeDelete = TbDiaBeforeDelete
-    Left = 240
-    Top = 48
     object TbDiaCodDia: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodDia'
@@ -248,22 +128,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 40
   end
   object TbMateria: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodMateria'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomMateria'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 20
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 336
+    Top = 60
+    active = True
+    BeforePost = TbMateriaBeforePost
+    BeforeDelete = TbMateriaBeforeDelete
     IndexDefs = <
       item
         Name = 'TbMateriaixNomMateria'
@@ -275,29 +144,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodMateria'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbMateriaBeforePost
-    BeforeDelete = TbMateriaBeforeDelete
-    Left = 336
-    Top = 60
     object TbMateriaCodMateria: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodMateria'
@@ -306,6 +152,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       DisplayLabel = 'Nombre'
       FieldName = 'NomMateria'
       Required = True
+      Size = 20
     end
   end
   object dsMateria: TDataSource
@@ -314,27 +161,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 52
   end
   object TbNivel: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodNivel'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomNivel'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 15
-      end
-      item
-        Name = 'AbrNivel'
-        DataType = ftString
-        Size = 5
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 432
+    Top = 48
+    active = True
+    BeforePost = TbNivelBeforePost
+    BeforeDelete = TbNivelBeforeDelete
     IndexDefs = <
       item
         Name = 'TbNivelixAbrNivel'
@@ -351,29 +182,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodNivel'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbNivelBeforePost
-    BeforeDelete = TbNivelBeforeDelete
-    Left = 432
-    Top = 48
     object TbNivelCodNivel: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodNivel'
@@ -396,28 +204,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 40
   end
   object TbHora: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodHora'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomHora'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'Intervalo'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 21
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 48
+    Top = 144
+    active = True
+    BeforePost = TbHoraBeforePost
+    BeforeDelete = TbHoraBeforeDelete
     IndexDefs = <
       item
         Name = 'TbHoraixIntervalo'
@@ -434,29 +225,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodHora'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbHoraBeforePost
-    BeforeDelete = TbHoraBeforeDelete
-    Left = 48
-    Top = 144
     object TbHoraCodHora: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodHora'
@@ -468,6 +236,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 10
     end
     object TbHoraIntervalo: TStringField
+      DisplayLabel = 'Intervalo'
       FieldName = 'Intervalo'
       Required = True
       Size = 21
@@ -479,30 +248,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 136
   end
   object TbHorario: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodHorario'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'MomentoInicial'
-        Attributes = [faRequired]
-        DataType = ftDateTime
-      end
-      item
-        Name = 'MomentoFinal'
-        Attributes = [faRequired]
-        DataType = ftDateTime
-      end
-      item
-        Name = 'Informe'
-        DataType = ftMemo
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 144
+    Top = 156
+    active = True
+    BeforePost = TbHorarioBeforePost
+    BeforeDelete = TbHorarioBeforeDelete
     IndexDefs = <
       item
         Name = 'TbHorarioixMomentoFinal'
@@ -517,29 +267,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodHorario'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbHorarioBeforePost
-    BeforeDelete = TbHorarioBeforeDelete
-    Left = 144
-    Top = 156
     object TbHorarioCodHorario: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodHorario'
@@ -555,8 +282,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbHorarioInforme: TMemoField
+      DisplayLabel = 'Informe'
       FieldName = 'Informe'
-      BlobType = ftMemo
     end
   end
   object dsHorario: TDataSource
@@ -565,22 +292,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 148
   end
   object TbCurso: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 240
+    Top = 144
+    active = True
+    BeforePost = TbCursoBeforePost
+    BeforeDelete = TbCursoBeforeDelete
     IndexDefs = <
       item
         Name = 'TbCursoEspecializacionCurso'
@@ -595,29 +311,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodNivel;CodEspecializacion'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbCursoBeforePost
-    BeforeDelete = TbCursoBeforeDelete
-    Left = 240
-    Top = 144
     object TbCursoCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
@@ -635,22 +328,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 136
   end
   object TbParaleloId: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodParaleloId'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomParaleloId'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 5
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 336
+    Top = 156
+    active = True
+    BeforePost = TbParaleloIdBeforePost
+    BeforeDelete = TbParaleloIdBeforeDelete
     IndexDefs = <
       item
         Name = 'TbParaleloIdixNomParaleloId'
@@ -662,29 +344,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodParaleloId'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbParaleloIdBeforePost
-    BeforeDelete = TbParaleloIdBeforeDelete
-    Left = 336
-    Top = 156
     object TbParaleloIdCodParaleloId: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodParaleloId'
@@ -702,33 +361,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 148
   end
   object TbMateriaProhibicionTipo: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodMateProhibicionTipo'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'NomMateProhibicionTipo'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'ColMateProhibicionTipo'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'ValMateProhibicionTipo'
-        Attributes = [faRequired]
-        DataType = ftFloat
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 432
+    Top = 144
+    active = True
+    BeforePost = TbMateriaProhibicionTipoBeforePost
+    BeforeDelete = TbMateriaProhibicionTipoBeforeDelete
     IndexDefs = <
       item
         Name = 'TbMateriaProhibicionTipoixNomMateProhibicionTipo'
@@ -740,29 +377,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodMateProhibicionTipo'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbMateriaProhibicionTipoBeforePost
-    BeforeDelete = TbMateriaProhibicionTipoBeforeDelete
-    Left = 432
-    Top = 144
     object TbMateriaProhibicionTipoCodMateProhibicionTipo: TIntegerField
       DisplayLabel = 'Código'
       FieldName = 'CodMateProhibicionTipo'
@@ -791,22 +405,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 136
   end
   object TbPeriodo: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodDia'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 48
+    Top = 240
+    active = True
+    BeforePost = TbPeriodoBeforePost
+    BeforeDelete = TbPeriodoBeforeDelete
     IndexDefs = <
       item
         Name = 'TbPeriodoDiaPeriodo'
@@ -821,29 +424,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbPeriodoBeforePost
-    BeforeDelete = TbPeriodoBeforeDelete
-    Left = 48
-    Top = 240
     object TbPeriodoCodDia: TIntegerField
       DisplayLabel = 'Día'
       FieldName = 'CodDia'
@@ -861,27 +441,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 232
   end
   object TbParalelo: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodParaleloId'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 144
+    Top = 252
+    active = True
+    BeforePost = TbParaleloBeforePost
+    BeforeDelete = TbParaleloBeforeDelete
     IndexDefs = <
       item
         Name = 'TbParaleloCursoParalelo'
@@ -896,29 +460,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodNivel;CodEspecializacion;CodParaleloId'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbParaleloBeforePost
-    BeforeDelete = TbParaleloBeforeDelete
-    Left = 144
-    Top = 252
     object TbParaleloCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
@@ -941,34 +482,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 244
   end
   object TbProfesor: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodProfesor'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'CedProfesor'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 11
-      end
-      item
-        Name = 'ApeProfesor'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 15
-      end
-      item
-        Name = 'NomProfesor'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 15
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 240
+    Top = 240
+    active = True
+    BeforePost = TbProfesorBeforePost
+    BeforeDelete = TbProfesorBeforeDelete
     IndexDefs = <
       item
         Name = 'TbProfesorixApeNomProfesor'
@@ -985,29 +503,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodProfesor'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbProfesorBeforePost
-    BeforeDelete = TbProfesorBeforeDelete
-    Left = 240
-    Top = 240
     object TbProfesorCodProfesor: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodProfesor'
@@ -1037,32 +532,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 232
   end
   object TbMateriaProhibicion: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodMateria'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodDia'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodMateProhibicionTipo'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 336
+    Top = 252
+    active = True
+    BeforePost = TbMateriaProhibicionBeforePost
     IndexDefs = <
       item
         Name = 'TbMateriaProhibicionMateriaMateriaProhibicion'
@@ -1081,28 +554,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodMateria;CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbMateriaProhibicionBeforePost
-    Left = 336
-    Top = 252
     object TbMateriaProhibicionCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
@@ -1130,48 +581,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 244
   end
   object TbDistributivo: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodMateria'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodParaleloId'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodProfesor'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodAulaTipo'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'Composicion'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 40
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 432
+    Top = 240
+    active = True
+    BeforePost = TbDistributivoBeforePost
+    BeforeDelete = TbDistributivoBeforeDelete
     IndexDefs = <
       item
         Name = 'TbDistributivoAulaTipoDistributivo'
@@ -1194,29 +608,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Name = 'TbDistributivoProfesorDistributivo'
         Fields = 'CodProfesor'
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbDistributivoBeforePost
-    BeforeDelete = TbDistributivoBeforeDelete
-    Left = 432
-    Top = 240
     object TbDistributivoCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
@@ -1260,52 +651,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 232
   end
   object TbHorarioDetalle: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodHorario'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodMateria'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodParaleloId'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodDia'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'Sesion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 48
+    Top = 336
+    active = True
+    BeforePost = TbHorarioDetalleBeforePost
     IndexDefs = <
       item
         Name = 'TbHorarioDetalleDistributivoHorarioDetalle'
@@ -1321,9 +670,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'TbHorarioDetalleixRestriccionMateria'
-        Fields = 
-          'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
-          'ora'
+        Fields = 'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
         Options = [ixUnique]
       end
       item
@@ -1332,33 +679,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'TbHorarioDetallePrimaryKey'
-        Fields = 
-          'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;' +
-          'CodDia;CodHora'
+        Fields = 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbHorarioDetalleBeforePost
-    Left = 48
-    Top = 336
     object TbHorarioDetalleCodHorario: TIntegerField
       DisplayLabel = 'Horario'
       FieldName = 'CodHorario'
@@ -1406,32 +729,11 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 328
   end
   object TbProfesorProhibicionTipo: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodProfProhibicionTipo'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomProfProhibicionTipo'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'ColProfProhibicionTipo'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'ValProfProhibicionTipo'
-        Attributes = [faRequired]
-        DataType = ftFloat
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 144
+    Top = 348
+    active = True
+    BeforePost = TbProfesorProhibicionTipoBeforePost
+    BeforeDelete = TbProfesorProhibicionTipoBeforeDelete
     IndexDefs = <
       item
         Name = 'TbProfesorProhibicionTipoixNomProfProhibicionTipo'
@@ -1443,29 +745,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodProfProhibicionTipo'
         Options = [ixPrimary, ixUnique]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbProfesorProhibicionTipoBeforePost
-    BeforeDelete = TbProfesorProhibicionTipoBeforeDelete
-    Left = 144
-    Top = 348
     object TbProfesorProhibicionTipoCodProfProhibicionTipo: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodProfProhibicionTipo'
@@ -1493,32 +772,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 340
   end
   object TbProfesorProhibicion: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
-      item
-        Name = 'CodProfesor'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodDia'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodProfProhibicionTipo'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end>
-    EnableIndexes = True
-    AutoReposition = False
+    Left = 240
+    Top = 336
+    active = True
+    BeforePost = TbProfesorProhibicionBeforePost
     IndexDefs = <
       item
         Name = 'TbProfesorProhibicionPeriodoProfesorProhibicion'
@@ -1537,28 +794,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Name = 'TbProfesorProhibicionProfesorProhibicionTipoProfesorProhibicion'
         Fields = 'CodProfProhibicionTipo'
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    BeforePost = TbProfesorProhibicionBeforePost
-    Left = 240
-    Top = 336
     object TbProfesorProhibicionCodProfesor: TIntegerField
       DisplayLabel = 'Profesor'
       FieldName = 'CodProfesor'
