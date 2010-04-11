@@ -8,25 +8,25 @@ uses
 
 type
   TSourceDataModule = class(TSourceBaseDataModule)
-    kbmCursoAbrNivel: TStringField;
-    kbmCursoAbrEspecializacion: TStringField;
-    kbmProfesorApeNomProfesor: TStringField;
-    kbmHorarioDetalleNomMateria: TStringField;
+    TbCursoAbrNivel: TStringField;
+    TbCursoAbrEspecializacion: TStringField;
+    TbProfesorApeNomProfesor: TStringField;
+    TbHorarioDetalleNomMateria: TStringField;
     TbProfesorProhibicionNomProfProhibicionTipo: TStringField;
     TbMateriaProhibicionNomMateProhibicionTipo: TStringField;
-    kbmDistributivoNomMateria: TStringField;
-    kbmDistributivoDuracion: TIntegerField;
-    kbmDistributivoApeNomProfesor: TStringField;
-    kbmDistributivoAbrNivel: TStringField;
-    kbmDistributivoNomParaleloId: TStringField;
-    kbmDistributivoAbrEspecializacion: TStringField;
-    kbmDistributivoAbrAulaTipo: TStringField;
-    kbmParaleloAbrNivel: TStringField;
-    kbmParaleloAbrEspecializacion: TStringField;
-    kbmParaleloNomParaleloId: TStringField;
-    procedure kbmProfesorCalcFields(DataSet: TDataSet);
-    procedure kbmDistributivoBeforePost(DataSet: TDataSet);
-    procedure kbmDistributivoCalcFields(DataSet: TDataSet);
+    TbDistributivoNomMateria: TStringField;
+    TbDistributivoDuracion: TIntegerField;
+    TbDistributivoApeNomProfesor: TStringField;
+    TbDistributivoAbrNivel: TStringField;
+    TbDistributivoNomParaleloId: TStringField;
+    TbDistributivoAbrEspecializacion: TStringField;
+    TbDistributivoAbrAulaTipo: TStringField;
+    TbParaleloAbrNivel: TStringField;
+    TbParaleloAbrEspecializacion: TStringField;
+    TbParaleloNomParaleloId: TStringField;
+    procedure TbProfesorCalcFields(DataSet: TDataSet);
+    procedure TbDistributivoBeforePost(DataSet: TDataSet);
+    procedure TbDistributivoCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -35,11 +35,16 @@ type
     procedure SaveUnCompToStream(AStream: TStream);
     procedure LoadFromStream(AStream: TStream);
     procedure LoadUnCompFromStream(AStream: TStream);
+    procedure SaveIniStrings(AStrings: TStrings);
+    procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
   public
     { Public declarations }
+    procedure SaveToStrings(AStrings: TStrings); override;
+    procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer); override;
     procedure SaveToFile(const AFileName: TFileName);
+    procedure SaveToTextFile(const AFileName: TFileName);
+    procedure SaveToTextDir(const ADirName: TFileName); override;
     procedure LoadFromFile(const AFileName: TFileName);
-    procedure SaveToTextDir(const AFileName: TFileName); overload;
     procedure NewDatabase;
     procedure FillDefaultData;
   end;
@@ -55,21 +60,21 @@ uses
 
 type
   EMainDataModuleError = class(Exception);
-  THPCFileHeader = packed record
+  TTTDFileHeader = packed record
     GenHeader: array[1..4] of Char;
     VersionNumber: Integer;
   end;
 
 const
-  pfhVersionNumber = $00000121;
+  pfhVersionNumber = $00000122;
 
 resourcestring
 
-  SNotHPCFile = 'No es un archivo HPC';
-  SInvalidHPCVersion = 'Versión archivo HPC inválida';
-  //SInvalidHPCFile = 'Archivo HPC no válido';
+  SNotTTDFile = 'No es un archivo TTD';
+  SInvalidTTDVersion = 'Versión archivo TTD inválida';
+  //SInvalidTTDFile = 'Archivo TTD no válido';
 
-procedure TSourceDataModule.kbmProfesorCalcFields(DataSet: TDataSet);
+procedure TSourceDataModule.TbProfesorCalcFields(DataSet: TDataSet);
 begin
   inherited;
   with DataSet do
@@ -77,22 +82,22 @@ begin
       FieldValues['NomProfesor'];
 end;
 
-procedure TSourceDataModule.kbmDistributivoBeforePost(DataSet: TDataSet);
+procedure TSourceDataModule.TbDistributivoBeforePost(DataSet: TDataSet);
 var
   s: string;
 begin
   inherited;
-  s := kbmDistributivoComposicion.Value;
+  s := TbDistributivoComposicion.Value;
   if ComposicionADuracion(s) <= 0 then
     raise Exception.CreateFmt('Composición no válida: "%s"', [s]);
-  with kbmDistributivoCodMateria do DefaultExpression := AsString;
-  with kbmDistributivoCodNivel do DefaultExpression := AsString;
-  with kbmDistributivoCodEspecializacion do DefaultExpression := AsString;
-  with kbmDistributivoCodParaleloId do DefaultExpression := AsString;
-  with kbmDistributivoCodAulaTipo do DefaultExpression := AsString;
+  with TbDistributivoCodMateria do DefaultExpression := AsString;
+  with TbDistributivoCodNivel do DefaultExpression := AsString;
+  with TbDistributivoCodEspecializacion do DefaultExpression := AsString;
+  with TbDistributivoCodParaleloId do DefaultExpression := AsString;
+  with TbDistributivoCodAulaTipo do DefaultExpression := AsString;
 end;
 
-procedure TSourceDataModule.kbmDistributivoCalcFields(DataSet: TDataSet);
+procedure TSourceDataModule.TbDistributivoCalcFields(DataSet: TDataSet);
 var
   v: Variant;
 begin
@@ -111,11 +116,11 @@ end;
 procedure TSourceDataModule.SaveToStream(AStream: TStream);
 var
   Stream, BZip2Stream: TStream;
-  HPCFileHeader: THPCFileHeader;
+  TTDFileHeader: TTTDFileHeader;
 begin
-  HPCFileHeader.GenHeader := 'HPC' + ^Z;
-  HPCFileHeader.VersionNumber := pfhVersionNumber;
-  AStream.Write(HPCFileHeader, SizeOf(HPCFileHeader));
+  TTDFileHeader.GenHeader := 'TTD' + ^Z;
+  TTDFileHeader.VersionNumber := pfhVersionNumber;
+  AStream.Write(TTDFileHeader, SizeOf(TTDFileHeader));
   Stream := TMemoryStream.Create;
   try
     SaveUncompToStream(Stream);
@@ -160,6 +165,20 @@ begin
   end;
 end;
 
+procedure TSourceDataModule.SaveToTextFile(const AFileName: TFileName);
+var
+  Strings: TStrings;
+begin
+  Strings := TStringList.Create;
+  try
+    SaveToStrings(Strings);
+    Strings.SaveToFile(AFileName);
+  finally
+    Strings.Free;
+  end;
+end;
+
+
 procedure TSourceDataModule.NewDatabase;
 begin
   try
@@ -176,13 +195,13 @@ var
   Count: Integer;
   Buffer: array[0..BufferSize - 1] of Byte;
   MemoryStream, BZip2Stream: TStream;
-  HPCFileHeader: THPCFileHeader;
+  TTDFileHeader: TTTDFileHeader;
 begin
-  AStream.Read(HPCFileHeader, SizeOf(HPCFileHeader));
-  if HPCFileHeader.GenHeader <> 'HPC' + ^Z then
-    raise EMainDataModuleError.Create(SNotHPCFile);
-  if HPCFileHeader.VersionNumber <> pfhVersionNumber then
-    raise EMainDataModuleError.Create(SInvalidHPCVersion);
+  AStream.Read(TTDFileHeader, SizeOf(TTDFileHeader));
+  if TTDFileHeader.GenHeader <> 'TTD' + ^Z then
+    raise EMainDataModuleError.Create(SNotTTDFile);
+  if TTDFileHeader.VersionNumber <> pfhVersionNumber then
+    raise EMainDataModuleError.Create(SInvalidTTDVersion);
   MemoryStream := TMemoryStream.Create;
   try
     BZip2Stream := TBZDecompressionStream.Create(AStream);
@@ -276,7 +295,7 @@ begin
     // Días laborables por defecto, excepto sábados y domingos:
     CheckRelations := False;
     try
-      with kbmDia do
+      with TbDia do
       begin
         for i := Low(LongDayNames) + 1 to High(LongDayNames) - 1 do
         begin
@@ -287,7 +306,7 @@ begin
         end;
       end;
       // Horas por defecto:
-      with kbmHora do
+      with TbHora do
       begin
         t := 7 / 24;
         for i := Low(SNomHora) to High(SNomHora) do
@@ -305,7 +324,7 @@ begin
         end;
       end;
       // Generar todos los períodos, exceptuando el sábado, domingo y el recreo:
-      with kbmPeriodo do
+      with TbPeriodo do
       begin
         for i := Low(LongDayNames) + 1 to High(LongDayNames) - 1 do
         begin
@@ -321,7 +340,7 @@ begin
           end;
         end;
       end;
-      with kbmMateriaProhibicionTipo do
+      with TbMateriaProhibicionTipo do
       begin
         for i := Low(SNomMateProhibicionTipo) to High(SNomMateProhibicionTipo) do
         begin
@@ -333,7 +352,7 @@ begin
           Post;
         end;
       end;
-      with kbmProfesorProhibicionTipo do
+      with TbProfesorProhibicionTipo do
       begin
         for i := Low(SNomProfProhibicionTipo) to High(SNomProfProhibicionTipo) do
         begin
@@ -367,9 +386,65 @@ begin
   NewDataBase;
 end;
 
-procedure TSourceDataModule.SaveToTextDir(const AFileName: TFileName);
+procedure TSourceDataModule.SaveToStrings(AStrings: TStrings);
 begin
-  SaveToTextDir(AFileName, FFlags);
+  AStrings.Add('TTD ' + IntToStr(pfhVersionNumber));
+  inherited;
+  SaveIniStrings(AStrings);
+end;
+
+procedure TSourceDataModule.SaveIniStrings(AStrings: TStrings);
+var
+  IniStrings: TStrings;
+begin
+  IniStrings := TStringList.Create;
+  try
+    ConfiguracionForm.FormStorage.SaveFormPlacement;
+    IniStrings.LoadFromFile(ConfiguracionForm.FormStorage.IniFileName);
+    AStrings.Add(IntToStr(IniStrings.Count));
+    AStrings.AddStrings(IniStrings);
+  finally
+    IniStrings.Free;
+  end;
+end;
+
+procedure TSourceDataModule.LoadIniStrings(AStrings: TStrings; var APosition: Integer);
+var
+  IniStrings: TStrings;
+  Count, Limit: Integer;
+begin
+  IniStrings := TStringList.Create;
+  try
+    Count := StrToInt(AStrings.Strings[APosition]);
+    Inc(APosition);
+    Limit := APosition + Count;
+    while APosition < Limit do
+    begin
+      IniStrings.Add(AStrings[APosition]);
+      Inc(APosition);
+    end;
+    AStrings.Add(IntToStr(IniStrings.Count));
+    AStrings.AddStrings(IniStrings);
+    IniStrings.SaveToFile(ConfiguracionForm.FormStorage.IniFileName);
+    ConfiguracionForm.FormStorage.RestoreFormPlacement;
+  finally
+    IniStrings.Free;
+  end;
+end;
+
+procedure TSourceDataModule.LoadFromStrings(AStrings: TStrings; var APosition: Integer);
+begin
+  // version stored in AStrings.Strings[APosition];
+  Inc(APosition);
+  inherited LoadFromStrings(AStrings, APosition);
+  LoadIniStrings(AStrings, APosition);
+end;
+
+procedure TSourceDataModule.SaveToTextDir(const ADirName: TFileName);
+begin
+  ConfiguracionForm.FormStorage.IniFileName := ADirName + '\config.ini';
+  ConfiguracionForm.FormStorage.SaveFormPlacement;
+  inherited;
 end;
 
 end.

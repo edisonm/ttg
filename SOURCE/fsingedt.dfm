@@ -1,6 +1,6 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 433
-  Top = 145
+  Left = 397
+  Top = 181
   Width = 510
   OldCreateOrder = True
   PixelsPerInch = 96
@@ -33,16 +33,38 @@ inherited SingleEditorForm: TSingleEditorForm
   end
   inherited pnlStatus: TPanel
     Width = 502
+    object SLState: TDBStatusLabel
+      Left = 1
+      Top = 1
+      Width = 66
+      Height = 17
+      DataSource = DataSource
+      CalcRecCount = True
+      ShowOptions = doBoth
+      Align = alLeft
+    end
+    object SLRecordNo: TDBStatusLabel
+      Left = 431
+      Top = 1
+      Width = 70
+      Height = 17
+      DataSource = DataSource
+      Style = lsRecordNo
+      CalcRecCount = True
+      ShowOptions = doBoth
+      Align = alRight
+    end
   end
   inherited Panel1: TPanel
     Width = 502
-    object DBGrid: TDBGrid
+    object DBGrid: TRxDBGrid
       Left = 1
       Top = 1
-      Width = 500
+      Width = 497
       Height = 253
       Align = alClient
       DataSource = DataSource
+      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -50,6 +72,19 @@ inherited SingleEditorForm: TSingleEditorForm
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
       OnDblClick = DBGridDblClick
+      IniStorage = FormStorage
+      TitleButtons = True
+      OnCheckButton = DBGridCheckButton
+      OnGetBtnParams = DBGridGetBtnParams
+      OnTitleBtnClick = DBGridTitleBtnClick
+    end
+    object Splitter1: TRxSplitter
+      Left = 498
+      Top = 1
+      Width = 3
+      Height = 253
+      ControlFirst = DBGrid
+      Align = alRight
     end
   end
   inherited ImageList: TImageList

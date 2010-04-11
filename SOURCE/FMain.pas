@@ -1,17 +1,11 @@
 unit FMain;
 
+{$I SGHC.INC}
+
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,  SysConst, ExtCtrls, DB, Menus, ComCtrls, MRUList, ImgList, Buttons, MrgMngr,  SpeedBar, ActnList, ToolWin, StdActns, StdCtrls, FSingEdt, kbmMemTable;(*
-   FormStorage:
-   
-   SaveDialog.FileName
-   SaveDialogCSV.FileName
-   OpenDialog.FileName
-   OpenDialogCSV.FileName
-*)
-
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,  SysConst, ExtCtrls, DB, Menus, ComCtrls, Placemnt, MRUList, ImgList, Buttons,  MrgMngr, SpeedBar, RxMenus, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,  FSingEdt, QrPrntr, kbmMemTable{, Protect};
 type
   TMainForm = class(TForm)
     MainMenu: TMainMenu;
@@ -40,6 +34,7 @@ type
     MIHora: TMenuItem;
     MIParalelo: TMenuItem;
     SaveDialog: TSaveDialog;
+    FormStorage: TFormStorage;
     OpenDialog: TOpenDialog;
     MIPeriodo: TMenuItem;
     SpeedBar: TToolBar;
@@ -124,8 +119,8 @@ type
     MIPresentarProfesorProhibicion: TMenuItem;
     MIPresentarMateriaProhibicion: TMenuItem;
     MIPresentarDistributivoMateria: TMenuItem;
-    tbParalelo: TkbmMemTable;
-    tbProfesor: TkbmMemTable;
+    TbParalelo: TkbmMemTable;
+    TbProfesor: TkbmMemTable;
     QuParaleloHora: TkbmMemTable;
     QuParaleloHoraCodNivel: TIntegerField;
     QuParaleloHoraCodEspecializacion: TIntegerField;
@@ -138,7 +133,7 @@ type
     QuProfesorHoraNomHora: TStringField;
     QuProfesorHorarioDetalle: TkbmMemTable;
     QuParaleloHorarioDetalle: TkbmMemTable;
-    tbMateria: TkbmMemTable;
+    TbMateria: TkbmMemTable;
     QuMateriaMateriaProhibicion: TkbmMemTable;
     QuMateriaMateriaProhibicionCodMateria: TIntegerField;
     QuMateriaMateriaProhibicionNomMateria: TStringField;
@@ -154,7 +149,7 @@ type
     QuProfesorProfesorProhibicionHoraCodProfesor: TIntegerField;
     QuProfesorProfesorProhibicionHoraCodHora: TIntegerField;
     QuProfesorProfesorProhibicionHoraNomHora: TStringField;
-    tbProfesor1: TkbmMemTable;
+    TbProfesor1: TkbmMemTable;
     actPresentarDistributivoProfesor: TAction;
     MIPresentarDistributivoProfesor: TMenuItem;
     actExportarCSV: TAction;
@@ -166,6 +161,7 @@ type
     SaveDialogCSV: TSaveDialog;
     actRegistrationInfo: TAction;
     MIRegistrationInfo: TMenuItem;
+    FSProteccion: TFormStorage;
     QuParaleloHorarioDetalleCodNivel: TIntegerField;
     QuParaleloHorarioDetalleCodEspecializacion: TIntegerField;
     QuParaleloHorarioDetalleCodParaleloId: TIntegerField;
@@ -177,10 +173,6 @@ type
     QuProfesorHorarioDetalleCodDia: TIntegerField;
     QuProfesorHorarioDetalleCodHora: TIntegerField;
     QuProfesorHorarioDetalleNombre: TStringField;
-    actSaveCSV: TAction;
-    MISaveTxt: TMenuItem;
-    actOpenCSV: TAction;
-    AbrirTexto1: TMenuItem;
     ToolBar: TToolBar;
     procedure actExitExecute(Sender: TObject);
     procedure actProfesorExecute(Sender: TObject);
@@ -212,18 +204,18 @@ type
     procedure actPresentarParaleloHorarioExecute(Sender: TObject);
     procedure QuParaleloAfterScroll(DataSet: TDataSet);
     procedure QuProfesorAfterScroll(DataSet: TDataSet);
-    procedure tbParaleloFilterRecord(DataSet: TDataSet;
+    procedure TbParaleloFilterRecord(DataSet: TDataSet;
       var Accept: Boolean);
-    procedure tbProfesorFilterRecord(DataSet: TDataSet;
+    procedure TbProfesorFilterRecord(DataSet: TDataSet;
       var Accept: Boolean);
     procedure actPresentarMateriaProhibicionExecute(Sender: TObject);
-    procedure tbMateriaFilterRecord(DataSet: TDataSet;
+    procedure TbMateriaFilterRecord(DataSet: TDataSet;
       var Accept: Boolean);
     procedure QuMateriaMateriaProhibicionAfterScroll(DataSet: TDataSet);
     procedure actPresentarDistributivoMateriaExecute(Sender: TObject);
     procedure actPresentarProfesorProhibicionExecute(Sender: TObject);
     procedure QuProfesorProfesorProhibicionAfterScroll(DataSet: TDataSet);
-    procedure tbProfesor1FilterRecord(DataSet: TDataSet;
+    procedure TbProfesor1FilterRecord(DataSet: TDataSet;
       var Accept: Boolean);
     procedure actPresentarDistributivoProfesorExecute(Sender: TObject);
     procedure actContentsExecute(Sender: TObject);
@@ -232,22 +224,25 @@ type
     procedure actMejorarHorarioExecute(Sender: TObject);
     procedure FormDblClick(Sender: TObject);
     procedure actRegistrationInfoExecute(Sender: TObject);
+{
     procedure actSaveCSVExecute(Sender: TObject);
     procedure actOpenCSVExecute(Sender: TObject);
+}
   private
     { Private declarations }
 {$IFNDEF FREEWARE}
     FInit: TDateTime;
-    FCloseClick, FCancelClick: Boolean;
-{$ENDIF}
+    FCloseClick:Boolean;
+    FCancelClick: Boolean;
+    FEjecutando: Boolean;
     FPasada: Integer;
+{$ENDIF}
     FPosition: Integer;
     FRelPosition: Integer;
     FNumIteraciones: Integer;
     FMin: Integer;
     FMax: Integer;
     FStep: Integer;
-    FEjecutando: Boolean;
     FAjustar: Boolean;
     FLogStrings: TStrings;
     FCodHorario: Integer;
@@ -272,9 +267,9 @@ type
     procedure EdHorarioDestroy(Sender: TObject);
 
     procedure LoadFromFile(const AFileName: string);
-    procedure LoadFromTextDir(const ADirName: string);
+//    procedure LoadFromTextDir(const ADirName: string);
+//    procedure SaveToTextDir(const ADirName: string);
     procedure SaveToFile(const AFileName: string);
-    procedure SaveToTextDir(const ADirName: string);
     {procedure DBGridGetCellParamsColor(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);}
     function ConfirmOperation: boolean;
@@ -284,6 +279,8 @@ type
 {$IFNDEF FREEWARE}
     procedure InitRandom;
     procedure ElaborarHorario(s: string);
+    procedure MejorarHorario;
+    procedure ProgressDescensoDoble(I, Max: Integer; Value: Double; var Stop: Boolean);
 {$ENDIF}
     procedure InternalShowFormulary(ASingleEditorForm: TSingleEditorForm;
       ADataSet: TDataSet; AAction: TAction; DestroyEvent: TNotifyEvent);
@@ -293,7 +290,6 @@ type
     procedure PrepareReportProhibicion(Sender: TObject);
     procedure PrepareReportDistributivoMateria(Sender: TObject);
     procedure PrepareReportDistributivoProfesor(Sender: TObject);
-    procedure ProgressDescensoDoble(I, Max: Integer; Value: Double; var Stop: Boolean);
     procedure ExportToFile(AFileName: TFileName);
     procedure ExportToStrings(AStrings: TStrings);
     procedure PedirRegistrarSoftware;
@@ -311,19 +307,19 @@ type
 
   public
     { Public declarations }
+    procedure AjustarPesos;
+    procedure PrepareReport(Sender: TObject);
 {$IFNDEF FREEWARE}
     procedure OnIterar(Sender: TObject);
     procedure OnRegistrarMejor(Sender: TObject);
     procedure ProgressFormCloseClick(Sender: TObject);
     procedure ProgressFormCancelClick(Sender: TObject);
+    property Ejecutando: Boolean read FEjecutando;
 {$ENDIF}
-    procedure AjustarPesos;
-    procedure PrepareReport(Sender: TObject);
     property Position: Integer read FPosition write SetPosition;
     property Min: Integer read FMin write SetMin;
     property Max: Integer read FMax write SetMax;
     property Step: Integer read FStep write SetStep;
-    property Ejecutando: Boolean read FEjecutando;
     property CodHorario: Integer read FCodHorario write FCodHorario;
     property NumIteraciones: Integer read FNumIteraciones write FNumIteraciones;
     property CodHorarioSeleccionado: Integer read GetCodHorarioSeleccionado;
@@ -338,8 +334,9 @@ uses
 {$IFNDEF FREEWARE}
   KerEvolE, KerModel, FProgres,
 {$ENDIF}
-  FCrsMMEd, FCrsMME0, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FConfig,
-  FLogstic, BaseUtls, Consts, FParalel, Rand, Printers, DSource, SGHCUtls;
+  FCrsMMEd, FCrsMME0, FCrsMME1, DMaster, FMateria, FProfesr, FHorario,
+  FConfig, FLogstic, SGHCUtls, About, Consts, FParalel, Rand, ArDBUtls,
+  QMaDeRep, Printers, QSingRep, QuickRpt, Qrctrls, DSource;
 
 {$R *.DFM}
 
@@ -406,7 +403,7 @@ end;
 procedure TMainForm.actProfesorExecute(Sender: TObject);
 begin
   InternalShowFormulary(TProfesorForm.Create(Application),
-    SourceDataModule.kbmProfesor, actProfesor, EdProfesorDestroy);
+    SourceDataModule.TbProfesor, actProfesor, EdProfesorDestroy);
 end;
 
 procedure TMainForm.actPeriodoExecute(Sender: TObject);
@@ -418,18 +415,16 @@ begin
   with SourceDataModule, MasterDataModule, PeriodoForm do
   begin
     HelpContext := actPeriodo.HelpContext;
-    //LoadCaption(PeriodoForm, kbmPeriodo);
+    //LoadCaption(PeriodoForm, TbPeriodo);
     OnDestroy := EdPeriodoDestroy;
-    (*
     with FormStorage do
     begin
-      IniSection := IniSection + '\CrMME0' + kbmPeriodo.Name;
+      IniSection := IniSection + '\CrMME0' + TbPeriodo.Name;
       Active := True;
       RestoreFormPlacement;
     end;
-    ShowEditor(kbmDia, kbmHora, kbmPeriodo, nil, 'CodDia', 'NomDia', 'CodDia',
+    ShowEditor(TbDia, TbHora, TbPeriodo, nil, 'CodDia', 'NomDia', 'CodDia',
       '', 'CodHora', 'NomHora', 'CodHora', '');
-    *)
   end;
   actPeriodo.Enabled := False;
 end;
@@ -446,50 +441,50 @@ end;
 procedure TMainForm.actMateriaExecute(Sender: TObject);
 begin
   InternalShowFormulary(TMateriaForm.Create(Application),
-    SourceDataModule.kbmMateria, actMateria, EdMateriaDestroy);
+    SourceDataModule.TbMateria, actMateria, EdMateriaDestroy);
 end;
 
 procedure TMainForm.actEspecializacionExecute(Sender: TObject);
 begin
   InternalShowFormulary(TSingleEditorForm.Create(Application),
-    SourceDataModule.kbmEspecializacion, actEspecializacion,
+    SourceDataModule.TbEspecializacion, actEspecializacion,
     EdEspecializacionDestroy);
 end;
 
 procedure TMainForm.actNivelExecute(Sender: TObject);
 begin
   InternalShowFormulary(TSingleEditorForm.Create(Application),
-    SourceDataModule.kbmNivel, actNivel, EdNivelDestroy);
+    SourceDataModule.TbNivel, actNivel, EdNivelDestroy);
 end;
 
 procedure TMainForm.actAulaTipoExecute(Sender: TObject);
 begin
   InternalShowFormulary(TSingleEditorForm.Create(Application),
-    SourceDataModule.kbmAulaTipo, actAulaTipo, EdAulaTipoDestroy);
+    SourceDataModule.TbAulaTipo, actAulaTipo, EdAulaTipoDestroy);
 end;
 
 procedure TMainForm.actParaleloIdExecute(Sender: TObject);
 begin
   InternalShowFormulary(TSingleEditorForm.Create(Application),
-    SourceDataModule.kbmParaleloId, actParaleloId, EdParaleloIdDestroy);
+    SourceDataModule.TbParaleloId, actParaleloId, EdParaleloIdDestroy);
 end;
 
 procedure TMainForm.actDiaExecute(Sender: TObject);
 begin
   InternalShowFormulary(TSingleEditorForm.Create(Application),
-    SourceDataModule.kbmDia, ActDia, EdDiaDestroy);
+    SourceDataModule.TbDia, ActDia, EdDiaDestroy);
 end;
 
 procedure TMainForm.actHoraExecute(Sender: TObject);
 begin
   InternalShowFormulary(TSingleEditorForm.Create(Application),
-    SourceDataModule.kbmHora, actHora, EdHoraDestroy);
+    SourceDataModule.TbHora, actHora, EdHoraDestroy);
 end;
 
 procedure TMainForm.actHorarioExecute(Sender: TObject);
 begin
   InternalShowFormulary(THorarioForm.Create(Application),
-    SourceDataModule.kbmHorario, actHorario, EdHorarioDestroy);
+    SourceDataModule.TbHorario, actHorario, EdHorarioDestroy);
 end;
 
 procedure TMainForm.actParaleloExecute(Sender: TObject);
@@ -499,7 +494,7 @@ begin
   ParaleloForm := TParaleloForm.Create(Application);
   with SourceDataModule, ParaleloForm do
   begin
-    InternalShowFormulary(ParaleloForm, kbmCurso, actParalelo,
+    InternalShowFormulary(ParaleloForm, TbCurso, actParalelo,
       EdParaleloDestroy);
     //Caption := GetDescription(TbParalelo);
   end;
@@ -535,8 +530,8 @@ begin
   StatusBar.Panels[1].Style := psOwnerDraw;
   Position := 0;
   Max := 100;
-  SaveDialog.DefaultExt := 'hpc';
-  SaveDialog.Filter := 'Horario para colegio (*.hpc)|*.hpc';
+  SaveDialog.DefaultExt := 'ttd'; // Time Tabling Data
+  SaveDialog.Filter := 'Horario para colegio (*.ttd)|*.ttd';
   try
     SaveDialog.HelpContext := actSave.HelpContext;
     if SaveDialog.Execute then
@@ -551,6 +546,7 @@ begin
   end;
 end;
 
+(*
 procedure TMainForm.actSaveCSVExecute(Sender: TObject);
 var
   DirName: string;
@@ -569,20 +565,18 @@ procedure TMainForm.SaveToTextDir(const ADirName: string);
 begin
   Cursor := crHourGlass;
   try
-    ConfiguracionForm.FormStorage.IniFileName := ADirName + '\config.ini';
-    ConfiguracionForm.FormStorage.SaveFormPlacement;
     SourceDataModule.SaveToTextDir(ADirName);
   finally
     Cursor := crDefault;
   end;
 end;
+*)
 
 procedure TMainForm.SaveToFile(const AFileName: string);
 begin
   Cursor := crHourGlass;
   try
-    ConfiguracionForm.FormStorage.SaveFormPlacement;
-    SourceDataModule.SaveToFile(AFileName);
+    SourceDataModule.SaveToTextFile(AFileName);
   finally
     Cursor := crDefault;
   end;
@@ -592,13 +586,14 @@ procedure TMainForm.LoadFromFile(const AFileName: string);
 begin
   Cursor := crHourGlass;
   try
-    SourceDataModule.LoadFromFile(AFileName);
-    ConfiguracionForm.FormStorage.RestoreFormPlacement;
+    SourceDataModule.EmptyTables;
+    SourceDataModule.LoadFromTextFile(AFileName);
   finally
     Cursor := crDefault;
   end;
 end;
 
+(*
 procedure TMainForm.LoadFromTextDir(const ADirName: string);
 begin
   Cursor := crHourGlass;
@@ -611,6 +606,7 @@ begin
     Cursor := crDefault;
   end;
 end;
+*)
 
 procedure TMainForm.actOpenExecute(Sender: TObject);
 begin
@@ -704,7 +700,7 @@ var
   procedure ProcesarCodHorario(Cod: Integer);
   begin
     CodHorario := Cod;
-    if SourceDataModule.kbmHorario.Locate('CodHorario', CodHorario, []) then
+    if SourceDataModule.TbHorario.Locate('CodHorario', CodHorario, []) then
       sProb := sProb + ' ' + IntToStr(CodHorario)
     else
     begin
@@ -836,8 +832,8 @@ begin
       ProgressForm.bbtnCancel.Kind := bkCancel;
       ProgressForm.Close;
       actElaborarHorario.Enabled := True;
-      if kbmHorarioDetalle.Active then
-        kbmHorarioDetalle.Refresh;
+      if TbHorarioDetalle.Active then
+        TbHorarioDetalle.Refresh;
     end;
   end;
   StatusBar.Panels[2].Text := '';
@@ -904,6 +900,34 @@ procedure TMainForm.ProgressFormCancelClick(Sender: TObject);
 begin
   FCancelClick := True;
   ProgressForm.Close;
+end;
+
+var
+  MomentoInicialProgress: TDateTime;
+
+procedure TMainForm.ProgressDescensoDoble(I, Max: Integer; value: Double; var Stop: Boolean);
+var
+  t, x: TDateTime;
+begin
+  if I = 0 then
+  begin
+    Self.Max := Max;
+    x := 0;
+    Inc(FPasada);
+    MomentoInicialProgress := Now;
+    t := 0;
+  end
+  else
+  begin
+    t := Now - MomentoInicialProgress;
+    x := t * (Max - I) / I;
+  end;
+  Self.Position := i;
+  StatusBar.Panels[0].Text := Format('Pasada %d - %d de %d %f - van: %d-%s - restan: %d-%s',
+    [FPasada, i, max, value, Trunc(t), FormatDateTime('hh:mm:ss', t), Trunc(x),
+    FormatDateTime('hh:mm:ss', x)]);
+  Application.ProcessMessages;
+  Stop := FCloseClick;
 end;
 
 {$ENDIF}
@@ -1035,14 +1059,18 @@ begin
     FPosition := 0;
     FRelPosition := 0;
     FStep := 1;
-    FEjecutando := False;
     FAjustar := False;
     FLogStrings := TStringList.Create;
 {$IFDEF FREEWARE}
     actElaborarHorario.Enabled := False;
+    actMejorarHorario.Enabled := False;
+    Caption := Caption + ' ***Freeware***';
+{$ENDIF}
+{$IFNDEF FREEWARE}
+    FEjecutando := False;
 {$ENDIF}
 {    Protect1.DaysExpire := 60;}
-//    FormStorage.RestoreFormPlacement;
+    FormStorage.RestoreFormPlacement;
 {    with FSProteccion do
     begin
       //StoredValue['Password'] := '';
@@ -1080,15 +1108,17 @@ begin
   begin
     ConfiguracionForm.FormStorage.SaveFormPlacement;
     //SourceDataModule.dbMain.Commit;
-    if Self.Ejecutando then
+{$IFNDEF FREEWARE}
+    if FEjecutando then
       Self.AjustarPesos;
+{$ENDIF}
   end
   else
   begin
     ConfiguracionForm.FormStorage.RestoreFormPlacement;
     //SourceDataModule.dbMain.Rollback;
-    SourceDataModule.kbmMateriaProhibicionTipo.Refresh;
-    SourceDataModule.kbmProfesorProhibicionTipo.Refresh;
+    SourceDataModule.TbMateriaProhibicionTipo.Refresh;
+    SourceDataModule.TbProfesorProhibicionTipo.Refresh;
   end;
   FNumIteraciones := ConfiguracionForm.speNumIteraciones.Value;
 end;
@@ -1113,22 +1143,22 @@ end;
 
 procedure TMainForm.actAboutExecute(Sender: TObject);
 begin
-  (* VerAboutBox; *)
+  VerAboutBox;
 end;
 
 procedure TMainForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose :=
     MessageDlg('Los cambios realizados hasta el momento se perderán.'#13#10 +
-      '¿Está seguro que desea cerrar el programa?',
+    '¿Está seguro que desea cerrar el programa?',
     mtWarning, [mbYes, mbNo], 0) = mrYes;
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
   FLogStrings.Free;
-//  FormStorage.SaveFormPlacement;
-//  FSProteccion.SaveFormPlacement;
+  FormStorage.SaveFormPlacement;
+  FSProteccion.SaveFormPlacement;
 end;
 
 procedure TMainForm.FillProfesorHorarioDetalle;
@@ -1139,29 +1169,29 @@ begin
     begin
       Close;
       Open;
-      kbmHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
-      kbmDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
-      kbmDistributivo.First;
+      TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+      TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+      TbDistributivo.First;
       try
-        if kbmHorarioDetalle.Locate('CodHorario', CodHorarioSeleccionado, []) then
+        if TbHorarioDetalle.Locate('CodHorario', CodHorarioSeleccionado, []) then
         begin
-          while (kbmHorarioDetalleCodHorario.Value = CodHorarioSeleccionado) and not Eof do
+          while (TbHorarioDetalleCodHorario.Value = CodHorarioSeleccionado) and not Eof do
           begin
             QuProfesorHorarioDetalle.Append;
-            QuProfesorHorarioDetalleCodProfesor.Value := kbmDistributivoCodProfesor.Value;
-            QuProfesorHorarioDetalleCodDia.Value := kbmHorarioDetalleCodDia.Value;
-            QuProfesorHorarioDetalleCodHora.Value := kbmHorarioDetalleCodHora.Value;
+            QuProfesorHorarioDetalleCodProfesor.Value := TbDistributivoCodProfesor.Value;
+            QuProfesorHorarioDetalleCodDia.Value := TbHorarioDetalleCodDia.Value;
+            QuProfesorHorarioDetalleCodHora.Value := TbHorarioDetalleCodHora.Value;
             QuProfesorHorarioDetalleNombre.Value :=
-              kbmDistributivoAbrNivel.Value + ' ' +
-              kbmDistributivoAbrEspecializacion.Value + ' ' +
-              kbmDistributivoNomParaleloId.Value + ' ' +
-              kbmDistributivoNomMateria.Value;
+              TbDistributivoAbrNivel.Value + ' ' +
+              TbDistributivoAbrEspecializacion.Value + ' ' +
+              TbDistributivoNomParaleloId.Value + ' ' +
+              TbDistributivoNomMateria.Value;
             QuProfesorHorarioDetalle.Post;
           end;
         end;
       finally
-        kbmDistributivo.MasterFields := '';
-        kbmDistributivo.MasterSource := nil;
+        TbDistributivo.MasterFields := '';
+        TbDistributivo.MasterSource := nil;
       end;
     end;
   end;
@@ -1173,14 +1203,14 @@ begin
   begin
     FillProfesorHora;
     FillProfesorHorarioDetalle;
-    tbProfesor.Close;
-    tbProfesor.Filtered := false;
+    TbProfesor.Close;
+    TbProfesor.Filtered := false;
     with QuProfesorHorarioDetalle do
     begin
-      CrossBatchMove(kbmDia, QuProfesorHora, QuProfesorHorarioDetalle,
-        tbProfesor, 'CodDia', 'NomDia', 'CodDia', 'CodProfesor;CodHora',
+      CrossBatchMove(TbDia, QuProfesorHora, QuProfesorHorarioDetalle,
+        TbProfesor, 'CodDia', 'NomDia', 'CodDia', 'CodProfesor;CodHora',
         'NomHora', 'CodProfesor;CodHora', 'Nombre');
-      tbProfesor.Filtered := true;
+      TbProfesor.Filtered := true;
     end;
   end;
 end;
@@ -1188,25 +1218,21 @@ end;
 procedure TMainForm.PrepareReportProfesorHorario(Sender: TObject);
 begin
   PrepareReport(Sender);
-  (*
   with Sender as TSingleReportQrp do
   begin
     TitleBand1.BandType := rbPageHeader;
   end;
-  *)
 end;
 
 procedure TMainForm.actPresentarProfesorHorarioExecute(Sender: TObject);
 begin
   ObtProfesorHorario;
-  (*
   with SourceDataModule, MasterDataModule do
   begin
-    PreviewMasterDetailReport(kbmProfesor, tbProfesor,
+    PreviewMasterDetailReport(TbProfesor, TbProfesor,
       'ApeProfesor;NomProfesor', '', '', ConfiguracionForm.edtNomColegio.Text,
       'Horario de profesores', poLandscape, PrepareReportProfesorHorario);
   end;
-  *)
 end;
 
 procedure TMainForm.FillParaleloHorarioDetalle;
@@ -1218,30 +1244,30 @@ begin
   begin
     Close;
     Open;
-    s := kbmHorarioDetalle.IndexFieldNames;
-    p := kbmHorarioDetalle.GetBookmark;
+    s := TbHorarioDetalle.IndexFieldNames;
+    p := TbHorarioDetalle.GetBookmark;
     try
-      kbmHorarioDetalle.IndexFieldNames := 'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
-      kbmHorarioDetalle.First;
-      if kbmHorarioDetalle.Locate('CodHorario', CodHorario, []) then
+      TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+      TbHorarioDetalle.First;
+      if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
       begin
-        while (kbmHorarioDetalleCodHorario.Value = CodHorario) and not kbmHorarioDetalle.Eof do
+        while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
         begin
           Append;
-          QuParaleloHorarioDetalleCodNivel.Value := kbmHorarioDetalleCodNivel.Value;
-          QuParaleloHorarioDetalleCodEspecializacion.Value := kbmHorarioDetalleCodNivel.Value;
-          QuParaleloHorarioDetalleCodParaleloId.Value := kbmHorarioDetalleCodParaleloId.Value;
-          QuParaleloHorarioDetalleCodHora.Value := kbmHorarioDetalleCodHora.Value;
-          QuParaleloHorarioDetalleCodDia.Value := kbmHorarioDetalleCodDia.Value;
+          QuParaleloHorarioDetalleCodNivel.Value := TbHorarioDetalleCodNivel.Value;
+          QuParaleloHorarioDetalleCodEspecializacion.Value := TbHorarioDetalleCodNivel.Value;
+          QuParaleloHorarioDetalleCodParaleloId.Value := TbHorarioDetalleCodParaleloId.Value;
+          QuParaleloHorarioDetalleCodHora.Value := TbHorarioDetalleCodHora.Value;
+          QuParaleloHorarioDetalleCodDia.Value := TbHorarioDetalleCodDia.Value;
           Post;
-          kbmHorarioDetalle.Next;
+          TbHorarioDetalle.Next;
         end;
         First;
       end;
     finally
-      kbmHorarioDetalle.IndexFieldNames := s;
-      kbmHorarioDetalle.GotoBookmark(p);
-      kbmHorarioDetalle.FreeBookmark(p);
+      TbHorarioDetalle.IndexFieldNames := s;
+      TbHorarioDetalle.GotoBookmark(p);
+      TbHorarioDetalle.FreeBookmark(p);
     end;
   end;
 end;
@@ -1252,15 +1278,15 @@ begin
   begin
     FillParaleloHora;
     FillParaleloHorarioDetalle;
-    tbParalelo.Close;
-    tbParalelo.Filtered := false;
+    TbParalelo.Close;
+    TbParalelo.Filtered := false;
     with QuParaleloHorarioDetalle do
     begin
-      CrossBatchMove(kbmDia, QuParaleloHora, QuParaleloHorarioDetalle,
-        tbParalelo, 'CodDia', 'NomDia', 'CodDia',
+      CrossBatchMove(TbDia, QuParaleloHora, QuParaleloHorarioDetalle,
+        TbParalelo, 'CodDia', 'NomDia', 'CodDia',
         'CodNivel;CodEspecializacion;CodParaleloId;CodHora', 'NomHora',
         'CodNivel;CodEspecializacion;CodParaleloId;CodHora', 'NomMateria');
-      tbParalelo.Filtered := true;
+      TbParalelo.Filtered := true;
     end;
   end;
 end;
@@ -1268,20 +1294,17 @@ end;
 procedure TMainForm.actPresentarParaleloHorarioExecute(Sender: TObject);
 begin
   ObtParaleloHorario;
-  (*
   with SourceDataModule, MasterDataModule do
   begin
-    PreviewMasterDetailReport(kbmParalelo, tbParalelo, '', '', '',
+    PreviewMasterDetailReport(TbParalelo, TbParalelo, '', '', '',
       ConfiguracionForm.edtNomColegio.Text, 'Horario de paralelos',
       poLandscape, PrepareReportParaleloHorario);
   end;
-  *)
 end;
 
 procedure TMainForm.PrepareReportParaleloHorario(Sender: TObject);
 begin
   PrepareReport(Sender);
-  (*
   with Sender as TSingleReportQrp do
   begin
     QRBand1.Free;
@@ -1289,61 +1312,58 @@ begin
     PageFooterBand1.BandType := rbSummary;
     DetailBand1.ForceNewColumn := False;
   end;
-  *)
 end;
 
 procedure TMainForm.QuParaleloAfterScroll(DataSet: TDataSet);
 begin
-  tbParalelo.Filtered := false;
-  tbParalelo.Filtered := true;
+  TbParalelo.Filtered := false;
+  TbParalelo.Filtered := true;
 end;
 
 procedure TMainForm.QuProfesorAfterScroll(DataSet: TDataSet);
 begin
-  tbProfesor.Filtered := false;
-  tbProfesor.Filtered := true;
+  TbProfesor.Filtered := false;
+  TbProfesor.Filtered := true;
 end;
 
-procedure TMainForm.tbParaleloFilterRecord(DataSet: TDataSet;
+procedure TMainForm.TbParaleloFilterRecord(DataSet: TDataSet;
   var Accept: Boolean);
 begin
   with SourceDataModule do
     Accept := (DataSet.FindField('CodNivel').AsInteger =
-      kbmParaleloCodNivel.Value) and (DataSet.FindField('CodParaleloId').AsInteger
-      = kbmParaleloCodParaleloId.Value);
+      TbParaleloCodNivel.Value) and (DataSet.FindField('CodParaleloId').AsInteger
+      = TbParaleloCodParaleloId.Value);
 end;
 
-procedure TMainForm.tbProfesorFilterRecord(DataSet: TDataSet;
+procedure TMainForm.TbProfesorFilterRecord(DataSet: TDataSet;
   var Accept: Boolean);
 begin
   with SourceDataModule do
     Accept := DataSet.FindField('CodProfesor').AsInteger =
-      kbmProfesorCodProfesor.AsInteger;
+      TbProfesorCodProfesor.AsInteger;
 end;
 
 procedure TMainForm.actPresentarMateriaProhibicionExecute(Sender: TObject);
 begin
   FillMateriaMateriaProhibicion;
   FillMateriaMateriaProhibicionHora;
-  tbMateria.Close;
-  tbMateria.Filtered := false;
+  TbMateria.Close;
+  TbMateria.Filtered := false;
   with SourceDataModule, MasterDataModule do
   begin
-    kbmMateriaProhibicion.MasterSource := nil;
+    TbMateriaProhibicion.MasterSource := nil;
     try
-      CrossBatchMove(kbmDia, QuMateriaMateriaProhibicionHora,
-        kbmMateriaProhibicion, tbMateria,
+      CrossBatchMove(TbDia, QuMateriaMateriaProhibicionHora,
+        TbMateriaProhibicion, TbMateria,
         'CodDia', 'NomDia', 'CodDia', 'CodMateria;CodHora', 'NomHora',
         'CodMateria;CodHora', 'NomMateProhibicionTipo');
-      tbMateria.Filtered := true;
-      (*
-      PreviewMasterDetailReport(QuMateriaMateriaProhibicion, tbMateria, '', '',
+      TbMateria.Filtered := true;
+      PreviewMasterDetailReport(QuMateriaMateriaProhibicion, TbMateria, '', '',
         '', ConfiguracionForm.edtNomColegio.Text,
         '' {tDescription(TbMateriaProhibicion)}, poPortrait,
         PrepareReportProhibicion);
-      *)
     finally
-      kbmMateriaProhibicion.MasterSource := dsMateria;
+      TbMateriaProhibicion.MasterSource := dsMateria;
     end;
   end;
 end;
@@ -1351,16 +1371,14 @@ end;
 procedure TMainForm.PrepareReportProhibicion(Sender: TObject);
 begin
   PrepareReport(Sender);
-  (*
   with Sender as TSingleReportQrp do
   begin
     DetailBand1.ForceNewColumn := False;
     PageFooterBand1.BandType := rbSummary;
   end;
-  *)
 end;
 
-procedure TMainForm.tbMateriaFilterRecord(DataSet: TDataSet;
+procedure TMainForm.TbMateriaFilterRecord(DataSet: TDataSet;
   var Accept: Boolean);
 begin
   Accept := DataSet.FindField('CodMateria').AsInteger =
@@ -1370,8 +1388,8 @@ end;
 procedure TMainForm.QuMateriaMateriaProhibicionAfterScroll(
   DataSet: TDataSet);
 begin
-  tbMateria.Filtered := false;
-  tbMateria.Filtered := true;
+  TbMateria.Filtered := false;
+  TbMateria.Filtered := true;
 end;
 
 procedure TMainForm.actPresentarDistributivoMateriaExecute(
@@ -1379,35 +1397,31 @@ procedure TMainForm.actPresentarDistributivoMateriaExecute(
 begin
   with SourceDataModule, MasterDataModule do
   begin
-    kbmDistributivo.MasterSource := nil;
-    kbmDistributivo.IndexFieldNames :=
+    TbDistributivo.MasterSource := nil;
+    TbDistributivo.IndexFieldNames :=
       'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
-    kbmDistributivo.MasterFields := 'CodMateria';
-    kbmDistributivo.MasterSource := DSMateria;
-    (*
-    PreviewMasterDetailReport(kbmMateria, kbmDistributivo, 'NomMateria',
+    TbDistributivo.MasterFields := 'CodMateria';
+    TbDistributivo.MasterSource := DSMateria;
+    PreviewMasterDetailReport(TbMateria, TbDistributivo, 'NomMateria',
       'AbrNivel;AbrEspecializacion;NomParaleloId;ApeNomProfesor;Duracion',
       'Duracion', ConfiguracionForm.edtNomColegio.Text,
       'Distributivo por materias', poPortrait,
       PrepareReportDistributivoMateria);
-    *)
-    kbmDistributivo.MasterSource := nil;
-    kbmDistributivo.IndexFieldNames := 'CodProfesor';
-    kbmDistributivo.MasterFields := 'CodProfesor';
-    kbmDistributivo.MasterSource := DSProfesor;
+    TbDistributivo.MasterSource := nil;
+    TbDistributivo.IndexFieldNames := 'CodProfesor';
+    TbDistributivo.MasterFields := 'CodProfesor';
+    TbDistributivo.MasterSource := DSProfesor;
   end;
 end;
 
 procedure TMainForm.PrepareReportDistributivoMateria(Sender: TObject);
 begin
   PrepareReport(Sender);
-  (*
   with Sender as TSingleReportQrp do
   begin
     DetailBand1.ForceNewColumn := False;
     PageFooterBand1.BandType := rbSummary;
   end;
-  *)
 end;
 
 procedure TMainForm.FillProfesorProfesorProhibicion;
@@ -1419,25 +1433,25 @@ begin
   begin
     QuProfesorProfesorProhibicion.Close;
     QuProfesorProfesorProhibicion.Open;
-    kbmProfesor.First;
-    s := kbmProfesor.IndexFieldNames;
-    p := kbmProfesor.GetBookmark;
-    kbmProfesor.IndexFieldNames := 'NomMateria';
+    TbProfesor.First;
+    s := TbProfesor.IndexFieldNames;
+    p := TbProfesor.GetBookmark;
+    TbProfesor.IndexFieldNames := 'NomMateria';
     try
-      while not kbmProfesor.Eof do
+      while not TbProfesor.Eof do
       begin
-        if kbmProfesorProhibicion.Locate('CodProfesor', kbmProfesorCodProfesor.Value, []) then
+        if TbProfesorProhibicion.Locate('CodProfesor', TbProfesorCodProfesor.Value, []) then
         begin
           QuProfesorProfesorProhibicion.Append;
-          QuProfesorProfesorProhibicionCodProfesor.Value := kbmProfesorCodProfesor.Value;
+          QuProfesorProfesorProhibicionCodProfesor.Value := TbProfesorCodProfesor.Value;
           QuProfesorProfesorProhibicion.Post;
         end;
-        kbmProfesor.Next;
+        TbProfesor.Next;
       end;
     finally
-      kbmProfesor.IndexFieldNames := s;
-      kbmProfesor.GotoBookmark(p);
-      kbmProfesor.FreeBookmark(p);
+      TbProfesor.IndexFieldNames := s;
+      TbProfesor.GotoBookmark(p);
+      TbProfesor.FreeBookmark(p);
     end;
   end;
 end;
@@ -1451,37 +1465,37 @@ begin
   begin
     QuProfesorProfesorProhibicionHora.Close;
     QuProfesorProfesorProhibicionHora.Open;
-    kbmProfesor.First;
-    s := kbmProfesor.IndexFieldNames;
-    d := kbmHora.IndexFieldNames;
-    p := kbmProfesor.GetBookmark;
-    q := kbmHora.GetBookmark;
-    kbmProfesor.IndexFieldNames := 'NomMateria';
-    kbmHora.IndexFieldNames := 'CodHora';
+    TbProfesor.First;
+    s := TbProfesor.IndexFieldNames;
+    d := TbHora.IndexFieldNames;
+    p := TbProfesor.GetBookmark;
+    q := TbHora.GetBookmark;
+    TbProfesor.IndexFieldNames := 'NomMateria';
+    TbHora.IndexFieldNames := 'CodHora';
     try
-      while not kbmProfesor.Eof do
+      while not TbProfesor.Eof do
       begin
-        if kbmProfesorProhibicion.Locate('CodProfesor', kbmProfesorCodProfesor.Value, []) then
+        if TbProfesorProhibicion.Locate('CodProfesor', TbProfesorCodProfesor.Value, []) then
         begin
-          kbmHora.First;
-          while not kbmHora.Eof do
+          TbHora.First;
+          while not TbHora.Eof do
           begin
             QuProfesorProfesorProhibicionHora.Append;
-            QuProfesorProfesorProhibicionHoraCodProfesor.Value := kbmProfesorCodProfesor.Value;
-            QuProfesorProfesorProhibicionHoraCodHora.Value := kbmHoraCodHora.Value;
+            QuProfesorProfesorProhibicionHoraCodProfesor.Value := TbProfesorCodProfesor.Value;
+            QuProfesorProfesorProhibicionHoraCodHora.Value := TbHoraCodHora.Value;
             QuProfesorProfesorProhibicionHora.Post;
-            kbmHora.Next;
+            TbHora.Next;
           end;
         end;
-        kbmProfesor.Next;
+        TbProfesor.Next;
       end;
     finally
-      kbmProfesor.IndexFieldNames := s;
-      kbmProfesor.GotoBookmark(p);
-      kbmProfesor.FreeBookmark(p);
-      kbmHora.IndexFieldNames := d;
-      kbmHora.GotoBookmark(q);
-      kbmHora.FreeBookmark(q);
+      TbProfesor.IndexFieldNames := s;
+      TbProfesor.GotoBookmark(p);
+      TbProfesor.FreeBookmark(p);
+      TbHora.IndexFieldNames := d;
+      TbHora.GotoBookmark(q);
+      TbHora.FreeBookmark(q);
     end;
   end;
 end;
@@ -1491,34 +1505,32 @@ procedure TMainForm.actPresentarProfesorProhibicionExecute(
 begin
   FillProfesorProfesorProhibicion;
   FillProfesorProfesorProhibicionHora;
-  tbProfesor1.Close;
-  tbProfesor1.Filtered := false;
+  TbProfesor1.Close;
+  TbProfesor1.Filtered := false;
   with SourceDataModule, MasterDataModule do
   begin
-    kbmProfesorProhibicion.MasterSource := nil;
-    CrossBatchMove(kbmDia, QuProfesorProfesorProhibicionHora,
-      kbmProfesorProhibicion, tbProfesor1, 'CodDia', 'NomDia', 'CodDia',
+    TbProfesorProhibicion.MasterSource := nil;
+    CrossBatchMove(TbDia, QuProfesorProfesorProhibicionHora,
+      TbProfesorProhibicion, TbProfesor1, 'CodDia', 'NomDia', 'CodDia',
       'CodProfesor;CodHora', 'NomHora', 'CodProfesor;CodHora',
       'NomProfProhibicionTipo');
-    tbProfesor1.Filtered := true;
-    (*
-    PreviewMasterDetailReport(QuProfesorProfesorProhibicion, tbProfesor1, '',
+    TbProfesor1.Filtered := true;
+    PreviewMasterDetailReport(QuProfesorProfesorProhibicion, TbProfesor1, '',
       '', '', ConfiguracionForm.edtNomColegio.Text,
       '' {GetDescription(TbProfesorProhibicion)}, poPortrait,
       PrepareReportProhibicion);
-    *)
-    kbmProfesorProhibicion.MasterSource := DSProfesor;
+    TbProfesorProhibicion.MasterSource := DSProfesor;
   end;
 end;
 
 procedure TMainForm.QuProfesorProfesorProhibicionAfterScroll(
   DataSet: TDataSet);
 begin
-  tbProfesor1.Filtered := false;
-  tbProfesor1.Filtered := true;
+  TbProfesor1.Filtered := false;
+  TbProfesor1.Filtered := true;
 end;
 
-procedure TMainForm.tbProfesor1FilterRecord(DataSet: TDataSet;
+procedure TMainForm.TbProfesor1FilterRecord(DataSet: TDataSet;
   var Accept: Boolean);
 begin
   Accept := DataSet.FindField('CodProfesor').AsInteger =
@@ -1528,29 +1540,25 @@ end;
 procedure TMainForm.actPresentarDistributivoProfesorExecute(
   Sender: TObject);
 begin
-(*
   with SourceDataModule, MasterDataModule do
   begin
-    PreviewMasterDetailReport(kbmProfesor, kbmDistributivo,
+    PreviewMasterDetailReport(TbProfesor, TbDistributivo,
       'ApeProfesor;NomProfesor',
       'NomMateria;AbrNivel;AbrEspecializacion;NomParaleloId;Duracion',
       'Duracion', ConfiguracionForm.edtNomColegio.Text,
       'Distributivo por profesores', poPortrait,
       PrepareReportDistributivoProfesor);
   end;
-*)
 end;
 
 procedure TMainForm.PrepareReportDistributivoProfesor(Sender: TObject);
 begin
   PrepareReport(Sender);
-  (*
   with Sender as TSingleReportQrp do
   begin
     TitleBand1.BandType := rbPageHeader;
     PageFooterBand1.Visible := False;
   end;
-  *)
 end;
 
 function TMainForm.GetCodHorarioSeleccionado: Integer;
@@ -1652,56 +1660,17 @@ begin
   try
     ObtParaleloHorario;
     AStrings.Add('HORARIO POR PARALELOS,,,,,,');
-    ExportarCSV(SourceDataModule.kbmParalelo, tbParalelo, AStrings);
+    ExportarCSV(SourceDataModule.TbParalelo, TbParalelo, AStrings);
     AStrings.Add('HORARIO POR PROFESORES,,,,,,');
     ObtProfesorHorario;
-    ExportarCSV(SourceDataModule.kbmProfesor, tbProfesor, AStrings);
+    ExportarCSV(SourceDataModule.TbProfesor, TbProfesor, AStrings);
   finally
     AStrings.EndUpdate;
   end;
 end;
 
-{
-procedure TMainForm.ToolbarButton971Click(Sender: TObject);
-begin
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG1.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('1-5');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG2.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('6-10');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG3.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('11-15');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG4.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('16-20');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG5.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('21-25');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG6.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('26-30');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG7.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('31-35');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG8.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('36-40');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG9.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('41-45');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\PRUEBAS\CONFIG10.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  ElaborarHorario('46-50');
-  ConfiguracionForm.FormStorage.IniFileName := '..\DAT\CONFIG.INI';
-  ConfiguracionForm.FormStorage.RestoreFormPlacement;
-end;
-}
-
 procedure TMainForm.PrepareReport(Sender: TObject);
 begin
-(*
   with Sender as TSingleReportQrp, ConfiguracionForm do
   begin
     qrlFirm1.Caption := 'Autoridad';
@@ -1713,38 +1682,17 @@ begin
     qrlAnioLectivo.Caption := 'Año Lectivo: ' +
       ConfiguracionForm.edtAnioLectivo.Text;
   end;
-*)
-end;
-
-var
-  MomentoInicialProgress: TDateTime;
-
-procedure TMainForm.ProgressDescensoDoble(I, Max: Integer; value: Double; var Stop: Boolean);
-var
-  t, x: TDateTime;
-begin
-  if I = 0 then
-  begin
-    Self.Max := Max;
-    x := 0;
-    Inc(FPasada);
-    MomentoInicialProgress := Now;
-    t := 0;
-  end
-  else
-  begin
-    t := Now - MomentoInicialProgress;
-    x := t * (Max - I) / I;
-  end;
-  Self.Position := i;
-  StatusBar.Panels[0].Text := Format('Pasada %d - %d de %d %f - van: %d-%s - restan: %d-%s',
-    [FPasada, i, max, value, Trunc(t), FormatDateTime('hh:mm:ss', t), Trunc(x),
-    FormatDateTime('hh:mm:ss', x)]);
-  Application.ProcessMessages;
-  Stop := FCloseClick;
 end;
 
 procedure TMainForm.actMejorarHorarioExecute(Sender: TObject);
+begin
+{$IFNDEF FREEWARE}
+  MejorarHorario;
+{$ENDIF}
+end;
+
+{$IFNDEF FREEWARE}
+procedure TMainForm.MejorarHorario;
 var
   VModeloHorario: TModeloHorario;
   VObjetoModeloHorario: TObjetoModeloHorario;
@@ -1802,8 +1750,8 @@ begin
           Informe.Add(Format('Peso del horaro despues: %f', [vd]));
           VObjetoModeloHorario.SaveToDataModule(CodHorarioDestino, MomentoInicial,
             MomentoFinal, Informe);
-          if SourceDataModule.kbmHorario.Active then
-            SourceDataModule.kbmHorario.Refresh;
+          if SourceDataModule.TbHorario.Active then
+            SourceDataModule.TbHorario.Refresh;
         finally
           Informe.Free;
         end;
@@ -1818,13 +1766,16 @@ begin
     end;
   end;
 end;
+{$ENDIF}
 
 procedure TMainForm.FormDblClick(Sender: TObject);
 begin
+{$IFNDEF FREEWARE}
   if FEjecutando
     and (MessageDlg('¿Está seguro de que desea finalizar esta operación?',
     mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
     FCloseClick := True;
+{$ENDIF}
 end;
 
 procedure TMainForm.actRegistrationInfoExecute(Sender: TObject);
@@ -1842,42 +1793,42 @@ begin
   begin
     QuParaleloHora.Close;
     QuParaleloHora.Open;
-    kbmParalelo.CheckBrowseMode;
-    kbmParalelo.DisableControls;
-    s := kbmParalelo.IndexFieldNames;
-    p := kbmParalelo.GetBookmark;
-    kbmHora.CheckBrowseMode;
-    kbmHora.DisableControls;
-    d := kbmHora.IndexFieldNames;
-    q := kbmHora.GetBookmark;
+    TbParalelo.CheckBrowseMode;
+    TbParalelo.DisableControls;
+    s := TbParalelo.IndexFieldNames;
+    p := TbParalelo.GetBookmark;
+    TbHora.CheckBrowseMode;
+    TbHora.DisableControls;
+    d := TbHora.IndexFieldNames;
+    q := TbHora.GetBookmark;
     try
-      kbmParalelo.IndexFieldNames := 'CodNivel;CodEspecializacion;CodParaleloId';
-      kbmParalelo.First;
-      kbmHora.IndexFieldNames := 'CodHora';
-      while not kbmParalelo.Eof do
+      TbParalelo.IndexFieldNames := 'CodNivel;CodEspecializacion;CodParaleloId';
+      TbParalelo.First;
+      TbHora.IndexFieldNames := 'CodHora';
+      while not TbParalelo.Eof do
       begin
-        kbmHora.First;
-        while not kbmHora.Eof do
+        TbHora.First;
+        while not TbHora.Eof do
         begin
           QuParaleloHora.Append;
-          QuParaleloHoraCodNivel.Value := kbmParaleloCodNivel.Value;
-          QuParaleloHoraCodEspecializacion.Value := kbmParaleloCodEspecializacion.Value;
-          QuParaleloHoraCodParaleloId.Value := kbmParaleloCodParaleloId.Value;
-          QuParaleloHoraCodHora.Value := kbmHoraCodHora.Value;
+          QuParaleloHoraCodNivel.Value := TbParaleloCodNivel.Value;
+          QuParaleloHoraCodEspecializacion.Value := TbParaleloCodEspecializacion.Value;
+          QuParaleloHoraCodParaleloId.Value := TbParaleloCodParaleloId.Value;
+          QuParaleloHoraCodHora.Value := TbHoraCodHora.Value;
           QuParaleloHora.Post;
-          kbmHora.Next;
+          TbHora.Next;
         end;
-        kbmParalelo.Next;
+        TbParalelo.Next;
       end;
     finally
-      kbmParalelo.IndexFieldNames := s;
-      kbmParalelo.GotoBookmark(p);
-      kbmParalelo.FreeBookmark(p);
-      kbmParalelo.EnableControls;
-      kbmHora.IndexFieldNames := d;
-      kbmHora.GotoBookmark(q);
-      kbmHora.FreeBookmark(q);
-      kbmHora.EnableControls;
+      TbParalelo.IndexFieldNames := s;
+      TbParalelo.GotoBookmark(p);
+      TbParalelo.FreeBookmark(p);
+      TbParalelo.EnableControls;
+      TbHora.IndexFieldNames := d;
+      TbHora.GotoBookmark(q);
+      TbHora.FreeBookmark(q);
+      TbHora.EnableControls;
     end;
   end;
 end;
@@ -1891,40 +1842,40 @@ begin
   begin
     QuProfesorHora.Close;
     QuProfesorHora.Open;
-    kbmProfesor.CheckBrowseMode;
-    kbmProfesor.DisableControls;
-    s := kbmProfesor.IndexFieldNames;
-    kbmProfesor.IndexFieldNames := 'NomMateria';
-    p := kbmProfesor.GetBookmark;
-    kbmHora.CheckBrowseMode;
-    kbmHora.DisableControls;
-    d := kbmHora.IndexFieldNames;
-    kbmHora.IndexFieldNames := 'CodHora';
-    q := kbmHora.GetBookmark;
+    TbProfesor.CheckBrowseMode;
+    TbProfesor.DisableControls;
+    s := TbProfesor.IndexFieldNames;
+    TbProfesor.IndexFieldNames := 'NomMateria';
+    p := TbProfesor.GetBookmark;
+    TbHora.CheckBrowseMode;
+    TbHora.DisableControls;
+    d := TbHora.IndexFieldNames;
+    TbHora.IndexFieldNames := 'CodHora';
+    q := TbHora.GetBookmark;
     try
-      kbmProfesor.First;
-      while not kbmProfesor.Eof do
+      TbProfesor.First;
+      while not TbProfesor.Eof do
       begin
-        kbmHora.First;
-        while not kbmHora.Eof do
+        TbHora.First;
+        while not TbHora.Eof do
         begin
           QuProfesorHora.Append;
-          QuProfesorHoraCodProfesor.Value := kbmProfesorCodProfesor.Value;
-          QuProfesorHoraCodHora.Value := kbmHoraCodHora.Value;
+          QuProfesorHoraCodProfesor.Value := TbProfesorCodProfesor.Value;
+          QuProfesorHoraCodHora.Value := TbHoraCodHora.Value;
           QuProfesorHora.Post;
-          kbmHora.Next;
+          TbHora.Next;
         end;
-        kbmProfesor.Next;
+        TbProfesor.Next;
       end;
     finally
-      kbmProfesor.IndexFieldNames := s;
-      kbmProfesor.GotoBookmark(p);
-      kbmProfesor.FreeBookmark(p);
-      kbmProfesor.EnableControls;
-      kbmHora.IndexFieldNames := d;
-      kbmHora.GotoBookmark(q);
-      kbmHora.FreeBookmark(q);
-      kbmHora.EnableControls;
+      TbProfesor.IndexFieldNames := s;
+      TbProfesor.GotoBookmark(p);
+      TbProfesor.FreeBookmark(p);
+      TbProfesor.EnableControls;
+      TbHora.IndexFieldNames := d;
+      TbHora.GotoBookmark(q);
+      TbHora.FreeBookmark(q);
+      TbHora.EnableControls;
     end;
   end;
 end;
@@ -1938,25 +1889,25 @@ begin
   QuMateriaMateriaProhibicion.Open;
   with SourceDataModule do
   begin
-    kbmMateria.First;
-    s := kbmMateria.IndexFieldNames;
-    kbmMateria.IndexFieldNames := 'NomMateria';
-    p := kbmMateria.GetBookmark;
+    TbMateria.First;
+    s := TbMateria.IndexFieldNames;
+    TbMateria.IndexFieldNames := 'NomMateria';
+    p := TbMateria.GetBookmark;
     try
-      while not kbmMateria.Eof do
+      while not TbMateria.Eof do
       begin
-        if kbmMateriaProhibicion.Locate('CodMateria', kbmMateriaCodMateria.Value, []) then
+        if TbMateriaProhibicion.Locate('CodMateria', TbMateriaCodMateria.Value, []) then
         begin
           QuMateriaMateriaProhibicion.Append;
-          QuMateriaMateriaProhibicionCodMateria.Value := kbmMateriaCodMateria.Value;
+          QuMateriaMateriaProhibicionCodMateria.Value := TbMateriaCodMateria.Value;
           QuMateriaMateriaProhibicion.Post;
         end;
-        kbmMateria.Next;
+        TbMateria.Next;
       end;
     finally
-      kbmMateria.IndexFieldNames := s;
-      kbmMateria.GotoBookmark(p);
-      kbmMateria.FreeBookmark(p);
+      TbMateria.IndexFieldNames := s;
+      TbMateria.GotoBookmark(p);
+      TbMateria.FreeBookmark(p);
     end;
   end;
 end;
@@ -1970,41 +1921,42 @@ begin
   QuMateriaMateriaProhibicionHora.Open;
   with SourceDataModule do
   begin
-    s := kbmMateria.IndexFieldNames;
-    kbmMateria.IndexFieldNames := 'NomMateria';
-    p := kbmMateria.GetBookmark;
-    d := kbmHora.IndexFieldNames;
-    kbmHora.IndexFieldNames := 'CodHora';
-    q := kbmHora.GetBookmark;
+    s := TbMateria.IndexFieldNames;
+    TbMateria.IndexFieldNames := 'NomMateria';
+    p := TbMateria.GetBookmark;
+    d := TbHora.IndexFieldNames;
+    TbHora.IndexFieldNames := 'CodHora';
+    q := TbHora.GetBookmark;
     try
-      kbmMateria.First;
-      while not kbmMateria.Eof do
+      TbMateria.First;
+      while not TbMateria.Eof do
       begin
-        if kbmMateriaProhibicion.Locate('CodMateria', kbmMateriaCodMateria.Value, []) then
+        if TbMateriaProhibicion.Locate('CodMateria', TbMateriaCodMateria.Value, []) then
         begin
-          kbmHora.First;
-          while not kbmHora.Eof do
+          TbHora.First;
+          while not TbHora.Eof do
           begin
             QuMateriaMateriaProhibicionHora.Append;
-            QuMateriaMateriaProhibicionHoraCodMateria.Value := kbmMateriaCodMateria.Value;
-            QuMateriaMateriaProhibicionHoraCodHora.Value := kbmHoraCodHora.Value;
+            QuMateriaMateriaProhibicionHoraCodMateria.Value := TbMateriaCodMateria.Value;
+            QuMateriaMateriaProhibicionHoraCodHora.Value := TbHoraCodHora.Value;
             QuMateriaMateriaProhibicionHora.Post;
-            kbmHora.Next;
+            TbHora.Next;
           end;
         end;
-        kbmMateria.Next;
+        TbMateria.Next;
       end;
     finally
-      kbmMateria.IndexFieldNames := s;
-      kbmMateria.GotoBookmark(p);
-      kbmMateria.FreeBookmark(p);
-      kbmHora.IndexFieldNames := d;
-      kbmHora.GotoBookmark(q);
-      kbmHora.FreeBookmark(q);
+      TbMateria.IndexFieldNames := s;
+      TbMateria.GotoBookmark(p);
+      TbMateria.FreeBookmark(p);
+      TbHora.IndexFieldNames := d;
+      TbHora.GotoBookmark(q);
+      TbHora.FreeBookmark(q);
     end;
   end;
 end;
 
+(*
 procedure TMainForm.actOpenCSVExecute(Sender: TObject);
 var
   DirName: string;
@@ -2025,6 +1977,7 @@ begin
     StatusBar.Panels[2].Text := 'Listo';
   end;
 end;
+*)
 
 end.
 

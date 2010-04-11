@@ -1,6 +1,6 @@
 inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
-  Left = 496
-  Top = 334
+  Left = 405
+  Top = 348
   Width = 656
   Height = 287
   Icon.Data = {
@@ -74,7 +74,7 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
     Width = 648
     Height = 216
   end
-  object DrawGrid: TDrawGrid [3]
+  object DrawGrid: TRxDrawGrid [3]
     Left = 0
     Top = 25
     Width = 648
@@ -88,9 +88,13 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
     TabOrder = 0
     OnDrawCell = DrawGridDrawCell
     OnSelectCell = DrawGridSelectCell
+    IniStorage = FormStorage
     RowHeights = (
       18
       18)
+  end
+  inherited FormStorage: TFormStorage
+    Left = 120
   end
   inherited ImageList: TImageList
     Bitmap = {

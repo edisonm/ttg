@@ -1,6 +1,6 @@
 object ConfiguracionForm: TConfiguracionForm
-  Left = 307
-  Top = 154
+  Left = 362
+  Top = 22
   BorderStyle = bsDialog
   Caption = 'Configuración'
   ClientHeight = 451
@@ -525,7 +525,7 @@ object ConfiguracionForm: TConfiguracionForm
         Value = 5
         ZeroEmpty = False
       end
-      object DBGrid1: TDBGrid
+      object DBGrid1: TRxDBGrid
         Left = 8
         Top = 176
         Width = 233
@@ -537,8 +537,9 @@ object ConfiguracionForm: TConfiguracionForm
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
+        OnGetCellParams = DBGridGetCellParams
       end
-      object DBGrid2: TDBGrid
+      object DBGrid2: TRxDBGrid
         Left = 8
         Top = 280
         Width = 233
@@ -550,6 +551,7 @@ object ConfiguracionForm: TConfiguracionForm
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
+        OnGetCellParams = DBGridGetCellParams
       end
       object creProfesorFraccionamiento: TCurrencyEdit
         Left = 152
@@ -572,7 +574,7 @@ object ConfiguracionForm: TConfiguracionForm
         DataSource = SourceDataModule.dsMateriaProhibicionTipo
         TabOrder = 8
       end
-      object dbcColMateProhibicionTipo: TDBComboBox
+      object dbcColMateProhibicionTipo: TDBColorComboBox
         Left = 304
         Top = 200
         Width = 81
@@ -600,7 +602,7 @@ object ConfiguracionForm: TConfiguracionForm
         DataSource = SourceDataModule.dsProfesorProhibicionTipo
         TabOrder = 11
       end
-      object dbcColProfProhibicionTipo: TDBComboBox
+      object dbcColProfProhibicionTipo: TDBColorComboBox
         Left = 304
         Top = 304
         Width = 81

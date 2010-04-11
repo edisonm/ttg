@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Mask, ToolEdit, CurrEdit, Buttons, ComCtrls, Spin, Grids, DBGrids,
-  Db, DBCtrls;
+  StdCtrls, Mask, ToolEdit, CurrEdit, Placemnt, Buttons, ComCtrls, Spin,
+  RxLookup, Grids, DBGrids, RXDBCtrl, Db, RXCombos, DBColCBx, DBCtrls;
 
 type
   TConfiguracionForm = class(TForm)
@@ -46,9 +46,9 @@ type
     creProbReparacion: TCurrencyEdit;
     Label12: TLabel;
     Label15: TLabel;
-    DBGrid1: TDBGrid;
+    DBGrid1: TRxDBGrid;
     Label18: TLabel;
-    DBGrid2: TDBGrid;
+    DBGrid2: TRxDBGrid;
     tbsOpciones: TTabSheet;
     CBRandomize: TCheckBox;
     Label19: TLabel;
@@ -87,7 +87,7 @@ type
     Label36: TLabel;
     edtHorarioIni: TEdit;
     dbeNomMateProhibicionTipo: TDBEdit;
-    dbcColMateProhibicionTipo: TDBComboBox;
+    dbcColMateProhibicionTipo: TDBColorComboBox;
     dbeValMateProhibicionTipo: TDBEdit;
     Label30: TLabel;
     Label37: TLabel;
@@ -95,7 +95,7 @@ type
     Label39: TLabel;
     dbeNomProfProhibicionTipo: TDBEdit;
     Label40: TLabel;
-    dbcColProfProhibicionTipo: TDBComboBox;
+    dbcColProfProhibicionTipo: TDBColorComboBox;
     Label41: TLabel;
     dbeValProfProhibicionTipo: TDBEdit;
     Label42: TLabel;

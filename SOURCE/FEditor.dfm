@@ -1,6 +1,6 @@
 object EditorForm: TEditorForm
-  Left = 818
-  Top = 353
+  Left = 842
+  Top = 352
   Width = 487
   Height = 326
   Color = clBtnFace
@@ -85,6 +85,14 @@ object EditorForm: TEditorForm
     Height = 255
     Align = alClient
     TabOrder = 1
+  end
+  object FormStorage: TFormStorage
+    Active = False
+    IniSection = '\Software\SGHC'
+    UseRegistry = True
+    StoredValues = <>
+    Left = 64
+    Top = 88
   end
   object ImageList: TImageList
     Left = 92

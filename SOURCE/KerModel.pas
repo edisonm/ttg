@@ -398,7 +398,7 @@ var
     i, j, k: Integer;
     VFieldNivel, VFieldEspecializacion: TIntegerField;
   begin
-    with SourceDataModule.kbmCurso do
+    with SourceDataModule.TbCurso do
     begin
       IndexFieldNames := 'CodNivel;CodEspecializacion';
       First;
@@ -427,7 +427,7 @@ var
     i, j, k: Integer;
     VFieldDia, VFieldHora: TIntegerField;
   begin
-    with SourceDataModule.kbmPeriodo do
+    with SourceDataModule.TbPeriodo do
     begin
       IndexFieldNames := 'CodDia;CodHora';
       First;
@@ -464,7 +464,7 @@ var
     i, j, k, l, m: Integer;
     VFieldNivel, VFieldEspecializacion, VFieldParaleloId: TIntegerField;
   begin
-    with SourceDataModule.kbmParalelo do
+    with SourceDataModule.TbParalelo do
     begin
       IndexFieldNames := 'CodNivel;CodEspecializacion;CodParaleloId';
       First;
@@ -501,7 +501,7 @@ var
     i: Integer;
     VFieldCantidad: TIntegerField;
   begin
-    with SourceDataModule.kbmAulaTipo do
+    with SourceDataModule.TbAulaTipo do
     begin
       IndexFieldNames := 'CodAulaTipo';
       First;
@@ -521,7 +521,7 @@ var
     VFieldValor: TFloatField;
     dMaxMateriaProhibicionTipoValor: Double;
   begin
-    with SourceDataModule.kbmMateriaProhibicionTipo do
+    with SourceDataModule.TbMateriaProhibicionTipo do
     begin
       IndexFieldNames := 'CodMateProhibicionTipo';
       First;
@@ -548,7 +548,7 @@ var
     i: Integer;
     VFieldValor: TFloatField;
   begin
-    with SourceDataModule.kbmProfesorProhibicionTipo do
+    with SourceDataModule.TbProfesorProhibicionTipo do
     begin
       IndexFieldNames := 'CodProfProhibicionTipo';
       First;
@@ -576,7 +576,7 @@ var
     VFieldMateria, VFieldDia, VFieldHora, VFieldMateriaProhibicionTipo:
       TIntegerField;
   begin
-    with SourceDataModule.kbmMateriaProhibicion do
+    with SourceDataModule.TbMateriaProhibicion do
     begin
       IndexFieldNames := 'CodMateria;CodDia;CodHora';
       First;
@@ -620,7 +620,7 @@ var
     VFieldProfesor, VFieldDia, VFieldHora, VFieldProfesorProhibicionTipo:
       TIntegerField;
   begin
-    with SourceDataModule.kbmProfesorProhibicion do
+    with SourceDataModule.TbProfesorProhibicion do
     begin
       IndexFieldNames := 'CodProfesor;CodDia;CodHora';
       First;
@@ -672,7 +672,7 @@ var
     VSesionADuracion, VSesionADistributivo: array[0..16383] of Smallint;
     s: string;
   begin
-    with SourceDataModule.kbmDistributivo do
+    with SourceDataModule.TbDistributivo do
     begin
       IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
       First;
@@ -803,36 +803,36 @@ begin
     Configurar(ACruceProfesorValor, AProfesorFraccionamientoValor,
       ACruceAulaTipoValor, AHoraHuecaDesubicadaValor, ASesionCortadaValor,
       AMateriaNoDispersaValor);
-    Cargar(kbmProfesor, 'CodProfesor', FMinCodProfesor, FCodProfesorAProfesor,
+    Cargar(TbProfesor, 'CodProfesor', FMinCodProfesor, FCodProfesorAProfesor,
       FProfesorACodProfesor);
     FProfesorCant := Length(FProfesorACodProfesor);
     SetLength(FProfesorCantHora, FProfesorCant);
-    Cargar(kbmNivel, 'CodNivel', FMinCodNivel, FCodNivelANivel, FNivelACodNivel);
+    Cargar(TbNivel, 'CodNivel', FMinCodNivel, FCodNivelANivel, FNivelACodNivel);
     FNivelCant := Length(FNivelACodNivel);
-    Cargar(kbmEspecializacion, 'CodEspecializacion', FMinCodEspecializacion,
+    Cargar(TbEspecializacion, 'CodEspecializacion', FMinCodEspecializacion,
       FCodEspecializacionAEspecializacion,
       FEspecializacionACodEspecializacion);
     FEspecializacionCant := Length(FEspecializacionACodEspecializacion);
     CargarCurso;
-    Cargar(kbmParaleloId, 'CodParaleloId', FMinCodParaleloId,
+    Cargar(TbParaleloId, 'CodParaleloId', FMinCodParaleloId,
       FCodParaleloIdAParaleloId,
       FParaleloIdACodParaleloId);
-    Cargar(kbmMateria, 'CodMateria', FMinCodMateria, FCodMateriaAMateria,
+    Cargar(TbMateria, 'CodMateria', FMinCodMateria, FCodMateriaAMateria,
       FMateriaACodMateria);
     FMateriaCant := Length(FMateriaACodMateria);
-    Cargar(kbmDia, 'CodDia', FMinCodDia, FCodDiaADia, FDiaACodDia);
+    Cargar(TbDia, 'CodDia', FMinCodDia, FCodDiaADia, FDiaACodDia);
     FDiaCant := Length(FDiaACodDia);
-    Cargar(kbmHora, 'CodHora', FMinCodHora, FCodHoraAHora, FHoraACodHora);
+    Cargar(TbHora, 'CodHora', FMinCodHora, FCodHoraAHora, FHoraACodHora);
     FHoraCant := Length(FHoraACodHora);
-    Cargar(kbmMateriaProhibicionTipo, 'CodMateProhibicionTipo',
+    Cargar(TbMateriaProhibicionTipo, 'CodMateProhibicionTipo',
       FMinCodMateProhibicionTipo,
       FCodMateProhibicionTipoAMateriaProhibicionTipo,
       FMateriaProhibicionTipoACodMateProhibicionTipo);
-    Cargar(kbmProfesorProhibicionTipo, 'CodProfProhibicionTipo',
+    Cargar(TbProfesorProhibicionTipo, 'CodProfProhibicionTipo',
       FMinCodProfProhibicionTipo,
       FCodProfProhibicionTipoAProfesorProhibicionTipo,
       FProfesorProhibicionTipoACodProfProhibicionTipo);
-    Cargar(kbmAulaTipo, 'CodAulaTipo', FMinCodAulaTipo,
+    Cargar(TbAulaTipo, 'CodAulaTipo', FMinCodAulaTipo,
       FCodAulaTipoAAulaTipo,
       FAulaTipoACodAulaTipo);
     FAulaTipoCant := Length(FAulaTipoACodAulaTipo);
@@ -3167,20 +3167,20 @@ var
   Stream: TStream;
   procedure SaveHorario;
   begin
-    with SourceDataModule, kbmHorario do
+    with SourceDataModule, TbHorario do
     begin
       DisableControls;
       try
         IndexFieldNames := 'CodHorario';
         Append;
-        kbmHorarioCodHorario.AsInteger := CodHorario;
-        kbmHorarioMomentoInicial.AsDateTime := MomentoInicial;
-        kbmHorarioMomentoFinal.AsDateTime := MomentoFinal;
+        TbHorarioCodHorario.AsInteger := CodHorario;
+        TbHorarioMomentoInicial.AsDateTime := MomentoInicial;
+        TbHorarioMomentoFinal.AsDateTime := MomentoFinal;
         Stream := TMemoryStream.Create;
         try
           Informe.SaveToStream(Stream);
           Stream.Position := 0;
-          TBlobField(kbmHorarioInforme).LoadFromStream(Stream);
+          TBlobField(TbHorarioInforme).LoadFromStream(Stream);
         finally
           Stream.Free;
         end;
@@ -3196,7 +3196,7 @@ var
       FieldHora, FieldMateria, FieldSesion: TIntegerField;
     i, j, k, l, m, s: Integer;
   begin
-    with ModeloHorario, SourceDataModule.kbmHorarioDetalle do
+    with ModeloHorario, SourceDataModule.TbHorarioDetalle do
     begin
       DisableControls;
       try
@@ -3289,9 +3289,9 @@ var
     FieldHora, FieldSesion: TIntegerField;
   i, j: Smallint;
 begin
-  with SourceDataModule, ModeloHorario, kbmHorarioDetalle do
+  with SourceDataModule, ModeloHorario, TbHorarioDetalle do
   begin
-    kbmHorario.Locate('CodHorario', CodHorario, []);
+    TbHorario.Locate('CodHorario', CodHorario, []);
     IndexFieldNames := 'CodHorario';
     MasterFields := 'CodHorario';
     MasterSource := dsHorario;

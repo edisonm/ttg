@@ -4,7 +4,7 @@ object SourceBaseDataModule: TSourceBaseDataModule
   OnDestroy = DataModuleDestroy
   Height = 0
   Width = 0
-  object kbmAulaTipo: TkbmMemTable
+  object TbAulaTipo: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -34,17 +34,17 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmAulaTipoixAbrAulaTipo'
+        Name = 'TbAulaTipoixAbrAulaTipo'
         Fields = 'AbrAulaTipo'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmAulaTipoixNomAulaTipo'
+        Name = 'TbAulaTipoixNomAulaTipo'
         Fields = 'NomAulaTipo'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmAulaTipoPrimaryKey'
+        Name = 'TbAulaTipoPrimaryKey'
         Fields = 'CodAulaTipo'
         Options = [ixPrimary, ixUnique]
       end>
@@ -67,37 +67,37 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmAulaTipoBeforePost
-    BeforeDelete = kbmAulaTipoBeforeDelete
+    BeforePost = TbAulaTipoBeforePost
+    BeforeDelete = TbAulaTipoBeforeDelete
     Left = 48
     Top = 48
-    object kbmAulaTipoCodAulaTipo: TAutoIncField
+    object TbAulaTipoCodAulaTipo: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodAulaTipo'
     end
-    object kbmAulaTipoNomAulaTipo: TStringField
+    object TbAulaTipoNomAulaTipo: TStringField
       DisplayLabel = 'Nombre'
       FieldName = 'NomAulaTipo'
       Required = True
       Size = 25
     end
-    object kbmAulaTipoAbrAulaTipo: TStringField
+    object TbAulaTipoAbrAulaTipo: TStringField
       DisplayLabel = 'Abreviatura'
       FieldName = 'AbrAulaTipo'
       Required = True
       Size = 10
     end
-    object kbmAulaTipoCantidad: TIntegerField
+    object TbAulaTipoCantidad: TIntegerField
       FieldName = 'Cantidad'
       Required = True
     end
   end
   object dsAulaTipo: TDataSource
-    DataSet = kbmAulaTipo
+    DataSet = TbAulaTipo
     Left = 56
     Top = 40
   end
-  object kbmEspecializacion: TkbmMemTable
+  object TbEspecializacion: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -122,17 +122,17 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmEspecializacionixAbrEspecializacion'
+        Name = 'TbEspecializacionixAbrEspecializacion'
         Fields = 'AbrEspecializacion'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmEspecializacionixNomEspecializacion'
+        Name = 'TbEspecializacionixNomEspecializacion'
         Fields = 'NomEspecializacion'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmEspecializacionPrimaryKey'
+        Name = 'TbEspecializacionPrimaryKey'
         Fields = 'CodEspecializacion'
         Options = [ixPrimary, ixUnique]
       end>
@@ -155,20 +155,20 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmEspecializacionBeforePost
-    BeforeDelete = kbmEspecializacionBeforeDelete
+    BeforePost = TbEspecializacionBeforePost
+    BeforeDelete = TbEspecializacionBeforeDelete
     Left = 144
     Top = 60
-    object kbmEspecializacionCodEspecializacion: TAutoIncField
+    object TbEspecializacionCodEspecializacion: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodEspecializacion'
     end
-    object kbmEspecializacionNomEspecializacion: TStringField
+    object TbEspecializacionNomEspecializacion: TStringField
       DisplayLabel = 'Nombre'
       FieldName = 'NomEspecializacion'
       Required = True
     end
-    object kbmEspecializacionAbrEspecializacion: TStringField
+    object TbEspecializacionAbrEspecializacion: TStringField
       DisplayLabel = 'Abreviatura'
       FieldName = 'AbrEspecializacion'
       Required = True
@@ -176,11 +176,11 @@ object SourceBaseDataModule: TSourceBaseDataModule
     end
   end
   object dsEspecializacion: TDataSource
-    DataSet = kbmEspecializacion
+    DataSet = TbEspecializacion
     Left = 152
     Top = 52
   end
-  object kbmDia: TkbmMemTable
+  object TbDia: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -199,12 +199,12 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmDiaixNomDia'
+        Name = 'TbDiaixNomDia'
         Fields = 'NomDia'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmDiaPrimaryKey'
+        Name = 'TbDiaPrimaryKey'
         Fields = 'CodDia'
         Options = [ixPrimary, ixUnique]
       end>
@@ -227,15 +227,15 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmDiaBeforePost
-    BeforeDelete = kbmDiaBeforeDelete
+    BeforePost = TbDiaBeforePost
+    BeforeDelete = TbDiaBeforeDelete
     Left = 240
     Top = 48
-    object kbmDiaCodDia: TAutoIncField
+    object TbDiaCodDia: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodDia'
     end
-    object kbmDiaNomDia: TStringField
+    object TbDiaNomDia: TStringField
       DisplayLabel = 'Nombre'
       FieldName = 'NomDia'
       Required = True
@@ -243,11 +243,11 @@ object SourceBaseDataModule: TSourceBaseDataModule
     end
   end
   object dsDia: TDataSource
-    DataSet = kbmDia
+    DataSet = TbDia
     Left = 248
     Top = 40
   end
-  object kbmMateria: TkbmMemTable
+  object TbMateria: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -266,12 +266,12 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmMateriaixNomMateria'
+        Name = 'TbMateriaixNomMateria'
         Fields = 'NomMateria'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmMateriaPrimaryKey'
+        Name = 'TbMateriaPrimaryKey'
         Fields = 'CodMateria'
         Options = [ixPrimary, ixUnique]
       end>
@@ -294,26 +294,26 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmMateriaBeforePost
-    BeforeDelete = kbmMateriaBeforeDelete
+    BeforePost = TbMateriaBeforePost
+    BeforeDelete = TbMateriaBeforeDelete
     Left = 336
     Top = 60
-    object kbmMateriaCodMateria: TAutoIncField
+    object TbMateriaCodMateria: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodMateria'
     end
-    object kbmMateriaNomMateria: TStringField
+    object TbMateriaNomMateria: TStringField
       DisplayLabel = 'Nombre'
       FieldName = 'NomMateria'
       Required = True
     end
   end
   object dsMateria: TDataSource
-    DataSet = kbmMateria
+    DataSet = TbMateria
     Left = 344
     Top = 52
   end
-  object kbmNivel: TkbmMemTable
+  object TbNivel: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -337,17 +337,17 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmNivelixAbrNivel'
+        Name = 'TbNivelixAbrNivel'
         Fields = 'AbrNivel'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmNivelixNomNivel'
+        Name = 'TbNivelixNomNivel'
         Fields = 'NomNivel'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmNivelPrimaryKey'
+        Name = 'TbNivelPrimaryKey'
         Fields = 'CodNivel'
         Options = [ixPrimary, ixUnique]
       end>
@@ -370,32 +370,32 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmNivelBeforePost
-    BeforeDelete = kbmNivelBeforeDelete
+    BeforePost = TbNivelBeforePost
+    BeforeDelete = TbNivelBeforeDelete
     Left = 432
     Top = 48
-    object kbmNivelCodNivel: TAutoIncField
+    object TbNivelCodNivel: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodNivel'
     end
-    object kbmNivelNomNivel: TStringField
+    object TbNivelNomNivel: TStringField
       DisplayLabel = 'Nombre'
       FieldName = 'NomNivel'
       Required = True
       Size = 15
     end
-    object kbmNivelAbrNivel: TStringField
+    object TbNivelAbrNivel: TStringField
       DisplayLabel = 'Abreviatura'
       FieldName = 'AbrNivel'
       Size = 5
     end
   end
   object dsNivel: TDataSource
-    DataSet = kbmNivel
+    DataSet = TbNivel
     Left = 440
     Top = 40
   end
-  object kbmHora: TkbmMemTable
+  object TbHora: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -420,17 +420,17 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmHoraixIntervalo'
+        Name = 'TbHoraixIntervalo'
         Fields = 'Intervalo'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmHoraixNomHora'
+        Name = 'TbHoraixNomHora'
         Fields = 'NomHora'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmHoraPrimaryKey'
+        Name = 'TbHoraPrimaryKey'
         Fields = 'CodHora'
         Options = [ixPrimary, ixUnique]
       end>
@@ -453,32 +453,32 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmHoraBeforePost
-    BeforeDelete = kbmHoraBeforeDelete
+    BeforePost = TbHoraBeforePost
+    BeforeDelete = TbHoraBeforeDelete
     Left = 48
     Top = 144
-    object kbmHoraCodHora: TAutoIncField
+    object TbHoraCodHora: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodHora'
     end
-    object kbmHoraNomHora: TStringField
+    object TbHoraNomHora: TStringField
       DisplayLabel = 'Nombre'
       FieldName = 'NomHora'
       Required = True
       Size = 10
     end
-    object kbmHoraIntervalo: TStringField
+    object TbHoraIntervalo: TStringField
       FieldName = 'Intervalo'
       Required = True
       Size = 21
     end
   end
   object dsHora: TDataSource
-    DataSet = kbmHora
+    DataSet = TbHora
     Left = 56
     Top = 136
   end
-  object kbmHorario: TkbmMemTable
+  object TbHorario: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -505,15 +505,15 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmHorarioixMomentoFinal'
+        Name = 'TbHorarioixMomentoFinal'
         Fields = 'MomentoFinal'
       end
       item
-        Name = 'kbmHorarioixMomentoInicial'
+        Name = 'TbHorarioixMomentoInicial'
         Fields = 'MomentoInicial'
       end
       item
-        Name = 'kbmHorarioPrimaryKey'
+        Name = 'TbHorarioPrimaryKey'
         Fields = 'CodHorario'
         Options = [ixPrimary, ixUnique]
       end>
@@ -536,35 +536,35 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmHorarioBeforePost
-    BeforeDelete = kbmHorarioBeforeDelete
+    BeforePost = TbHorarioBeforePost
+    BeforeDelete = TbHorarioBeforeDelete
     Left = 144
     Top = 156
-    object kbmHorarioCodHorario: TAutoIncField
+    object TbHorarioCodHorario: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodHorario'
     end
-    object kbmHorarioMomentoInicial: TDateTimeField
+    object TbHorarioMomentoInicial: TDateTimeField
       DisplayLabel = 'Momento Inicial'
       FieldName = 'MomentoInicial'
       Required = True
     end
-    object kbmHorarioMomentoFinal: TDateTimeField
+    object TbHorarioMomentoFinal: TDateTimeField
       DisplayLabel = 'Momento Final'
       FieldName = 'MomentoFinal'
       Required = True
     end
-    object kbmHorarioInforme: TMemoField
+    object TbHorarioInforme: TMemoField
       FieldName = 'Informe'
       BlobType = ftMemo
     end
   end
   object dsHorario: TDataSource
-    DataSet = kbmHorario
+    DataSet = TbHorario
     Left = 152
     Top = 148
   end
-  object kbmCurso: TkbmMemTable
+  object TbCurso: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -583,15 +583,15 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmCursoEspecializacionCurso'
+        Name = 'TbCursoEspecializacionCurso'
         Fields = 'CodEspecializacion'
       end
       item
-        Name = 'kbmCursoNivelCurso'
+        Name = 'TbCursoNivelCurso'
         Fields = 'CodNivel'
       end
       item
-        Name = 'kbmCursoPrimaryKey'
+        Name = 'TbCursoPrimaryKey'
         Fields = 'CodNivel;CodEspecializacion'
         Options = [ixPrimary, ixUnique]
       end>
@@ -614,27 +614,27 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmCursoBeforePost
-    BeforeDelete = kbmCursoBeforeDelete
+    BeforePost = TbCursoBeforePost
+    BeforeDelete = TbCursoBeforeDelete
     Left = 240
     Top = 144
-    object kbmCursoCodNivel: TIntegerField
+    object TbCursoCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
     end
-    object kbmCursoCodEspecializacion: TIntegerField
+    object TbCursoCodEspecializacion: TIntegerField
       DisplayLabel = 'Especialización'
       FieldName = 'CodEspecializacion'
       Required = True
     end
   end
   object dsCurso: TDataSource
-    DataSet = kbmCurso
+    DataSet = TbCurso
     Left = 248
     Top = 136
   end
-  object kbmParaleloId: TkbmMemTable
+  object TbParaleloId: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -653,12 +653,12 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmParaleloIdixNomParaleloId'
+        Name = 'TbParaleloIdixNomParaleloId'
         Fields = 'NomParaleloId'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmParaleloIdPrimaryKey'
+        Name = 'TbParaleloIdPrimaryKey'
         Fields = 'CodParaleloId'
         Options = [ixPrimary, ixUnique]
       end>
@@ -681,15 +681,15 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmParaleloIdBeforePost
-    BeforeDelete = kbmParaleloIdBeforeDelete
+    BeforePost = TbParaleloIdBeforePost
+    BeforeDelete = TbParaleloIdBeforeDelete
     Left = 336
     Top = 156
-    object kbmParaleloIdCodParaleloId: TAutoIncField
+    object TbParaleloIdCodParaleloId: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodParaleloId'
     end
-    object kbmParaleloIdNomParaleloId: TStringField
+    object TbParaleloIdNomParaleloId: TStringField
       DisplayLabel = 'Nombre'
       FieldName = 'NomParaleloId'
       Required = True
@@ -697,11 +697,11 @@ object SourceBaseDataModule: TSourceBaseDataModule
     end
   end
   object dsParaleloId: TDataSource
-    DataSet = kbmParaleloId
+    DataSet = TbParaleloId
     Left = 344
     Top = 148
   end
-  object kbmMateriaProhibicionTipo: TkbmMemTable
+  object TbMateriaProhibicionTipo: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -731,12 +731,12 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmMateriaProhibicionTipoixNomMateProhibicionTipo'
+        Name = 'TbMateriaProhibicionTipoixNomMateProhibicionTipo'
         Fields = 'NomMateProhibicionTipo'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmMateriaProhibicionTipoPrimaryKey'
+        Name = 'TbMateriaProhibicionTipoPrimaryKey'
         Fields = 'CodMateProhibicionTipo'
         Options = [ixPrimary, ixUnique]
       end>
@@ -759,38 +759,38 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmMateriaProhibicionTipoBeforePost
-    BeforeDelete = kbmMateriaProhibicionTipoBeforeDelete
+    BeforePost = TbMateriaProhibicionTipoBeforePost
+    BeforeDelete = TbMateriaProhibicionTipoBeforeDelete
     Left = 432
     Top = 144
-    object kbmMateriaProhibicionTipoCodMateProhibicionTipo: TIntegerField
+    object TbMateriaProhibicionTipoCodMateProhibicionTipo: TIntegerField
       DisplayLabel = 'Código'
       FieldName = 'CodMateProhibicionTipo'
       Required = True
     end
-    object kbmMateriaProhibicionTipoNomMateProhibicionTipo: TStringField
+    object TbMateriaProhibicionTipoNomMateProhibicionTipo: TStringField
       DisplayLabel = 'Nombre'
       FieldName = 'NomMateProhibicionTipo'
       Required = True
       Size = 10
     end
-    object kbmMateriaProhibicionTipoColMateProhibicionTipo: TIntegerField
+    object TbMateriaProhibicionTipoColMateProhibicionTipo: TIntegerField
       DisplayLabel = 'Color'
       FieldName = 'ColMateProhibicionTipo'
       Required = True
     end
-    object kbmMateriaProhibicionTipoValMateProhibicionTipo: TFloatField
+    object TbMateriaProhibicionTipoValMateProhibicionTipo: TFloatField
       DisplayLabel = 'Valor'
       FieldName = 'ValMateProhibicionTipo'
       Required = True
     end
   end
   object dsMateriaProhibicionTipo: TDataSource
-    DataSet = kbmMateriaProhibicionTipo
+    DataSet = TbMateriaProhibicionTipo
     Left = 440
     Top = 136
   end
-  object kbmPeriodo: TkbmMemTable
+  object TbPeriodo: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -809,15 +809,15 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmPeriodoDiaPeriodo'
+        Name = 'TbPeriodoDiaPeriodo'
         Fields = 'CodDia'
       end
       item
-        Name = 'kbmPeriodoHoraPeriodo'
+        Name = 'TbPeriodoHoraPeriodo'
         Fields = 'CodHora'
       end
       item
-        Name = 'kbmPeriodoPrimaryKey'
+        Name = 'TbPeriodoPrimaryKey'
         Fields = 'CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
@@ -840,27 +840,27 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmPeriodoBeforePost
-    BeforeDelete = kbmPeriodoBeforeDelete
+    BeforePost = TbPeriodoBeforePost
+    BeforeDelete = TbPeriodoBeforeDelete
     Left = 48
     Top = 240
-    object kbmPeriodoCodDia: TIntegerField
+    object TbPeriodoCodDia: TIntegerField
       DisplayLabel = 'Día'
       FieldName = 'CodDia'
       Required = True
     end
-    object kbmPeriodoCodHora: TIntegerField
+    object TbPeriodoCodHora: TIntegerField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True
     end
   end
   object dsPeriodo: TDataSource
-    DataSet = kbmPeriodo
+    DataSet = TbPeriodo
     Left = 56
     Top = 232
   end
-  object kbmParalelo: TkbmMemTable
+  object TbParalelo: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -884,15 +884,15 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmParaleloCursoParalelo'
+        Name = 'TbParaleloCursoParalelo'
         Fields = 'CodNivel;CodEspecializacion'
       end
       item
-        Name = 'kbmParaleloParaleloIdParalelo'
+        Name = 'TbParaleloParaleloIdParalelo'
         Fields = 'CodParaleloId'
       end
       item
-        Name = 'kbmParaleloPrimaryKey'
+        Name = 'TbParaleloPrimaryKey'
         Fields = 'CodNivel;CodEspecializacion;CodParaleloId'
         Options = [ixPrimary, ixUnique]
       end>
@@ -915,32 +915,32 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmParaleloBeforePost
-    BeforeDelete = kbmParaleloBeforeDelete
+    BeforePost = TbParaleloBeforePost
+    BeforeDelete = TbParaleloBeforeDelete
     Left = 144
     Top = 252
-    object kbmParaleloCodNivel: TIntegerField
+    object TbParaleloCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
     end
-    object kbmParaleloCodEspecializacion: TIntegerField
+    object TbParaleloCodEspecializacion: TIntegerField
       DisplayLabel = 'Especialización'
       FieldName = 'CodEspecializacion'
       Required = True
     end
-    object kbmParaleloCodParaleloId: TIntegerField
+    object TbParaleloCodParaleloId: TIntegerField
       DisplayLabel = 'Paralelo'
       FieldName = 'CodParaleloId'
       Required = True
     end
   end
   object dsParalelo: TDataSource
-    DataSet = kbmParalelo
+    DataSet = TbParalelo
     Left = 152
     Top = 244
   end
-  object kbmProfesor: TkbmMemTable
+  object TbProfesor: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -971,17 +971,17 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmProfesorixApeNomProfesor'
+        Name = 'TbProfesorixApeNomProfesor'
         Fields = 'ApeProfesor;NomProfesor'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmProfesorixNomApeProfesor'
+        Name = 'TbProfesorixNomApeProfesor'
         Fields = 'NomProfesor;ApeProfesor'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmProfesorPrimaryKey'
+        Name = 'TbProfesorPrimaryKey'
         Fields = 'CodProfesor'
         Options = [ixPrimary, ixUnique]
       end>
@@ -1004,27 +1004,27 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmProfesorBeforePost
-    BeforeDelete = kbmProfesorBeforeDelete
+    BeforePost = TbProfesorBeforePost
+    BeforeDelete = TbProfesorBeforeDelete
     Left = 240
     Top = 240
-    object kbmProfesorCodProfesor: TAutoIncField
+    object TbProfesorCodProfesor: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodProfesor'
     end
-    object kbmProfesorCedProfesor: TStringField
+    object TbProfesorCedProfesor: TStringField
       DisplayLabel = 'Cédula'
       FieldName = 'CedProfesor'
       Required = True
       Size = 11
     end
-    object kbmProfesorApeProfesor: TStringField
+    object TbProfesorApeProfesor: TStringField
       DisplayLabel = 'Apellido'
       FieldName = 'ApeProfesor'
       Required = True
       Size = 15
     end
-    object kbmProfesorNomProfesor: TStringField
+    object TbProfesorNomProfesor: TStringField
       DisplayLabel = 'Nombre'
       FieldName = 'NomProfesor'
       Required = True
@@ -1032,11 +1032,11 @@ object SourceBaseDataModule: TSourceBaseDataModule
     end
   end
   object dsProfesor: TDataSource
-    DataSet = kbmProfesor
+    DataSet = TbProfesor
     Left = 248
     Top = 232
   end
-  object kbmMateriaProhibicion: TkbmMemTable
+  object TbMateriaProhibicion: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -1065,19 +1065,19 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmMateriaProhibicionMateriaMateriaProhibicion'
+        Name = 'TbMateriaProhibicionMateriaMateriaProhibicion'
         Fields = 'CodMateria'
       end
       item
-        Name = 'kbmMateriaProhibicionMateriaProhibicionTipoMateriaProhibicion'
+        Name = 'TbMateriaProhibicionMateriaProhibicionTipoMateriaProhibicion'
         Fields = 'CodMateProhibicionTipo'
       end
       item
-        Name = 'kbmMateriaProhibicionPeriodoMateriaProhibicion'
+        Name = 'TbMateriaProhibicionPeriodoMateriaProhibicion'
         Fields = 'CodDia;CodHora'
       end
       item
-        Name = 'kbmMateriaProhibicionPrimaryKey'
+        Name = 'TbMateriaProhibicionPrimaryKey'
         Fields = 'CodMateria;CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
@@ -1100,36 +1100,36 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmMateriaProhibicionBeforePost
+    BeforePost = TbMateriaProhibicionBeforePost
     Left = 336
     Top = 252
-    object kbmMateriaProhibicionCodMateria: TIntegerField
+    object TbMateriaProhibicionCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
       Required = True
     end
-    object kbmMateriaProhibicionCodDia: TIntegerField
+    object TbMateriaProhibicionCodDia: TIntegerField
       DisplayLabel = 'Día'
       FieldName = 'CodDia'
       Required = True
     end
-    object kbmMateriaProhibicionCodHora: TIntegerField
+    object TbMateriaProhibicionCodHora: TIntegerField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True
     end
-    object kbmMateriaProhibicionCodMateProhibicionTipo: TIntegerField
+    object TbMateriaProhibicionCodMateProhibicionTipo: TIntegerField
       DisplayLabel = 'Tipo de Prohibición'
       FieldName = 'CodMateProhibicionTipo'
       Required = True
     end
   end
   object dsMateriaProhibicion: TDataSource
-    DataSet = kbmMateriaProhibicion
+    DataSet = TbMateriaProhibicion
     Left = 344
     Top = 244
   end
-  object kbmDistributivo: TkbmMemTable
+  object TbDistributivo: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -1174,24 +1174,24 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmDistributivoAulaTipoDistributivo'
+        Name = 'TbDistributivoAulaTipoDistributivo'
         Fields = 'CodAulaTipo'
       end
       item
-        Name = 'kbmDistributivoMateriaDistributivo'
+        Name = 'TbDistributivoMateriaDistributivo'
         Fields = 'CodMateria'
       end
       item
-        Name = 'kbmDistributivoParaleloDistributivo'
+        Name = 'TbDistributivoParaleloDistributivo'
         Fields = 'CodNivel;CodEspecializacion;CodParaleloId'
       end
       item
-        Name = 'kbmDistributivoPrimaryKey'
+        Name = 'TbDistributivoPrimaryKey'
         Fields = 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId'
         Options = [ixPrimary, ixUnique]
       end
       item
-        Name = 'kbmDistributivoProfesorDistributivo'
+        Name = 'TbDistributivoProfesorDistributivo'
         Fields = 'CodProfesor'
       end>
     RecalcOnIndex = False
@@ -1213,41 +1213,41 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmDistributivoBeforePost
-    BeforeDelete = kbmDistributivoBeforeDelete
+    BeforePost = TbDistributivoBeforePost
+    BeforeDelete = TbDistributivoBeforeDelete
     Left = 432
     Top = 240
-    object kbmDistributivoCodMateria: TIntegerField
+    object TbDistributivoCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
       Required = True
     end
-    object kbmDistributivoCodNivel: TIntegerField
+    object TbDistributivoCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
     end
-    object kbmDistributivoCodEspecializacion: TIntegerField
+    object TbDistributivoCodEspecializacion: TIntegerField
       DisplayLabel = 'Especialización'
       FieldName = 'CodEspecializacion'
       Required = True
     end
-    object kbmDistributivoCodParaleloId: TIntegerField
+    object TbDistributivoCodParaleloId: TIntegerField
       DisplayLabel = 'Paralelo'
       FieldName = 'CodParaleloId'
       Required = True
     end
-    object kbmDistributivoCodProfesor: TIntegerField
+    object TbDistributivoCodProfesor: TIntegerField
       DisplayLabel = 'Profesor'
       FieldName = 'CodProfesor'
       Required = True
     end
-    object kbmDistributivoCodAulaTipo: TIntegerField
+    object TbDistributivoCodAulaTipo: TIntegerField
       DisplayLabel = 'Tipo de Aula'
       FieldName = 'CodAulaTipo'
       Required = True
     end
-    object kbmDistributivoComposicion: TStringField
+    object TbDistributivoComposicion: TStringField
       DisplayLabel = 'Composición'
       FieldName = 'Composicion'
       Required = True
@@ -1255,11 +1255,11 @@ object SourceBaseDataModule: TSourceBaseDataModule
     end
   end
   object dsDistributivo: TDataSource
-    DataSet = kbmDistributivo
+    DataSet = TbDistributivo
     Left = 440
     Top = 232
   end
-  object kbmHorarioDetalle: TkbmMemTable
+  object TbHorarioDetalle: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -1308,30 +1308,30 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmHorarioDetalleDistributivoHorarioDetalle'
+        Name = 'TbHorarioDetalleDistributivoHorarioDetalle'
         Fields = 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId'
       end
       item
-        Name = 'kbmHorarioDetalleHorarioDetalleCodMateria'
+        Name = 'TbHorarioDetalleHorarioDetalleCodMateria'
         Fields = 'CodMateria'
       end
       item
-        Name = 'kbmHorarioDetalleHorarioHorarioDetalle'
+        Name = 'TbHorarioDetalleHorarioHorarioDetalle'
         Fields = 'CodHorario'
       end
       item
-        Name = 'kbmHorarioDetalleixRestriccionMateria'
+        Name = 'TbHorarioDetalleixRestriccionMateria'
         Fields = 
           'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
           'ora'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmHorarioDetallePeriodoHorarioDetalle'
+        Name = 'TbHorarioDetallePeriodoHorarioDetalle'
         Fields = 'CodDia;CodHora'
       end
       item
-        Name = 'kbmHorarioDetallePrimaryKey'
+        Name = 'TbHorarioDetallePrimaryKey'
         Fields = 
           'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;' +
           'CodDia;CodHora'
@@ -1356,56 +1356,56 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmHorarioDetalleBeforePost
+    BeforePost = TbHorarioDetalleBeforePost
     Left = 48
     Top = 336
-    object kbmHorarioDetalleCodHorario: TIntegerField
+    object TbHorarioDetalleCodHorario: TIntegerField
       DisplayLabel = 'Horario'
       FieldName = 'CodHorario'
       Required = True
     end
-    object kbmHorarioDetalleCodMateria: TIntegerField
+    object TbHorarioDetalleCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
       Required = True
     end
-    object kbmHorarioDetalleCodNivel: TIntegerField
+    object TbHorarioDetalleCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
     end
-    object kbmHorarioDetalleCodEspecializacion: TIntegerField
+    object TbHorarioDetalleCodEspecializacion: TIntegerField
       DisplayLabel = 'Especialización'
       FieldName = 'CodEspecializacion'
       Required = True
     end
-    object kbmHorarioDetalleCodParaleloId: TIntegerField
+    object TbHorarioDetalleCodParaleloId: TIntegerField
       DisplayLabel = 'Paralelo'
       FieldName = 'CodParaleloId'
       Required = True
     end
-    object kbmHorarioDetalleCodDia: TIntegerField
+    object TbHorarioDetalleCodDia: TIntegerField
       DisplayLabel = 'Día'
       FieldName = 'CodDia'
       Required = True
     end
-    object kbmHorarioDetalleCodHora: TIntegerField
+    object TbHorarioDetalleCodHora: TIntegerField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True
     end
-    object kbmHorarioDetalleSesion: TIntegerField
+    object TbHorarioDetalleSesion: TIntegerField
       DisplayLabel = 'Sesión'
       FieldName = 'Sesion'
       Required = True
     end
   end
   object dsHorarioDetalle: TDataSource
-    DataSet = kbmHorarioDetalle
+    DataSet = TbHorarioDetalle
     Left = 56
     Top = 328
   end
-  object kbmProfesorProhibicionTipo: TkbmMemTable
+  object TbProfesorProhibicionTipo: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -1434,12 +1434,12 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmProfesorProhibicionTipoixNomProfProhibicionTipo'
+        Name = 'TbProfesorProhibicionTipoixNomProfProhibicionTipo'
         Fields = 'NomProfProhibicionTipo'
         Options = [ixUnique]
       end
       item
-        Name = 'kbmProfesorProhibicionTipoPrimaryKey'
+        Name = 'TbProfesorProhibicionTipoPrimaryKey'
         Fields = 'CodProfProhibicionTipo'
         Options = [ixPrimary, ixUnique]
       end>
@@ -1462,37 +1462,37 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmProfesorProhibicionTipoBeforePost
-    BeforeDelete = kbmProfesorProhibicionTipoBeforeDelete
+    BeforePost = TbProfesorProhibicionTipoBeforePost
+    BeforeDelete = TbProfesorProhibicionTipoBeforeDelete
     Left = 144
     Top = 348
-    object kbmProfesorProhibicionTipoCodProfProhibicionTipo: TAutoIncField
+    object TbProfesorProhibicionTipoCodProfProhibicionTipo: TAutoIncField
       DisplayLabel = 'Código'
       FieldName = 'CodProfProhibicionTipo'
     end
-    object kbmProfesorProhibicionTipoNomProfProhibicionTipo: TStringField
+    object TbProfesorProhibicionTipoNomProfProhibicionTipo: TStringField
       DisplayLabel = 'Nombre'
       FieldName = 'NomProfProhibicionTipo'
       Required = True
       Size = 10
     end
-    object kbmProfesorProhibicionTipoColProfProhibicionTipo: TIntegerField
+    object TbProfesorProhibicionTipoColProfProhibicionTipo: TIntegerField
       DisplayLabel = 'Color'
       FieldName = 'ColProfProhibicionTipo'
       Required = True
     end
-    object kbmProfesorProhibicionTipoValProfProhibicionTipo: TFloatField
+    object TbProfesorProhibicionTipoValProfProhibicionTipo: TFloatField
       DisplayLabel = 'Valor'
       FieldName = 'ValProfProhibicionTipo'
       Required = True
     end
   end
   object dsProfesorProhibicionTipo: TDataSource
-    DataSet = kbmProfesorProhibicionTipo
+    DataSet = TbProfesorProhibicionTipo
     Left = 152
     Top = 340
   end
-  object kbmProfesorProhibicion: TkbmMemTable
+  object TbProfesorProhibicion: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -1521,20 +1521,20 @@ object SourceBaseDataModule: TSourceBaseDataModule
     AutoReposition = False
     IndexDefs = <
       item
-        Name = 'kbmProfesorProhibicionPeriodoProfesorProhibicion'
+        Name = 'TbProfesorProhibicionPeriodoProfesorProhibicion'
         Fields = 'CodDia;CodHora'
       end
       item
-        Name = 'kbmProfesorProhibicionPrimaryKey'
+        Name = 'TbProfesorProhibicionPrimaryKey'
         Fields = 'CodProfesor;CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end
       item
-        Name = 'kbmProfesorProhibicionProfesorProfesorProhibicion'
+        Name = 'TbProfesorProhibicionProfesorProfesorProhibicion'
         Fields = 'CodProfesor'
       end
       item
-        Name = 'kbmProfesorProhibicionProfesorProhibicionTipoProfesorProhibicion'
+        Name = 'TbProfesorProhibicionProfesorProhibicionTipoProfesorProhibicion'
         Fields = 'CodProfProhibicionTipo'
       end>
     RecalcOnIndex = False
@@ -1556,32 +1556,32 @@ object SourceBaseDataModule: TSourceBaseDataModule
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    BeforePost = kbmProfesorProhibicionBeforePost
+    BeforePost = TbProfesorProhibicionBeforePost
     Left = 240
     Top = 336
-    object kbmProfesorProhibicionCodProfesor: TIntegerField
+    object TbProfesorProhibicionCodProfesor: TIntegerField
       DisplayLabel = 'Profesor'
       FieldName = 'CodProfesor'
       Required = True
     end
-    object kbmProfesorProhibicionCodDia: TIntegerField
+    object TbProfesorProhibicionCodDia: TIntegerField
       DisplayLabel = 'Día'
       FieldName = 'CodDia'
       Required = True
     end
-    object kbmProfesorProhibicionCodHora: TIntegerField
+    object TbProfesorProhibicionCodHora: TIntegerField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True
     end
-    object kbmProfesorProhibicionCodProfProhibicionTipo: TIntegerField
+    object TbProfesorProhibicionCodProfProhibicionTipo: TIntegerField
       DisplayLabel = 'Tipo de prohibición'
       FieldName = 'CodProfProhibicionTipo'
       Required = True
     end
   end
   object dsProfesorProhibicion: TDataSource
-    DataSet = kbmProfesorProhibicion
+    DataSet = TbProfesorProhibicion
     Left = 248
     Top = 328
   end

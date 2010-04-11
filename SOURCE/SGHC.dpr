@@ -1,11 +1,11 @@
-program HorColeg;
+program SGHC;
 {$IMAGEBASE $00400000}
 uses
   Forms,
   Dialogs,
   SysUtils,
   FMain in 'FMain.pas' {MainForm},
-  DMaster in 'DMaster.pas' {MasterDataModule: TDataModule},
+  DMaster in 'DMaster.PAS' {MasterDataModule: TDataModule},
   KerModel in 'KerModel.pas',
   KerEvolE in 'KerEvolE.pas',
   FProgres in 'FProgres.pas' {ProgressForm},
@@ -25,15 +25,18 @@ uses
   FMasDeEd in 'FMasDeEd.pas' {MasterDetailEditorForm},
   FHorAulT in 'FHorAulT.pas' {HorarioAulaTipoForm},
   FSplash in 'FSplash.pas' {SplashForm},
+  QSingRep in 'QSingRep.pas' {SingleReportQrp},
+  QMaDeRep in 'QMaDeRep.pas' {MasterDetailReportQrp},
   FParalel in 'FParalel.pas' {ParaleloForm},
   FSingEdt in 'fsingedt.pas' {SingleEditorForm},
   FHorario in 'FHorario.pas' {HorarioForm},
+  About in 'About.pas',
   HorColCm in 'HorColCm.pas',
   FHorProf in 'FHorProf.pas' {HorarioProfesorForm},
   DSrcBase in 'DSrcBase.pas' {SourceBaseDataModule: TDataModule},
   RelUtils in 'RelUtils.pas',
   DSource in 'DSource.pas' {SourceDataModule: TDataModule},
-  BaseUtls in 'BaseUtls.pas';
+  FSelPeIn in 'FSelPeIn.pas' {SelPeriodoForm};
 
 {$R *.RES}
 

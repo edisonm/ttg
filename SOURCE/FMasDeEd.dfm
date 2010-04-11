@@ -1,6 +1,6 @@
 inherited MasterDetailEditorForm: TMasterDetailEditorForm
-  Left = 59
-  Top = 207
+  Left = 60
+  Top = 209
   PixelsPerInch = 96
   TextHeight = 13
   inherited tb97Show: TToolBar
@@ -17,12 +17,15 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
       Cursor = crVSplit
       Align = alBottom
     end
-    inherited DBGrid: TDBGrid
+    inherited DBGrid: TRxDBGrid
       Height = 154
       TabOrder = 1
       OnEnter = DBGridEnter
     end
-    object DBGridDetail: TDBGrid
+    inherited Splitter1: TRxSplitter
+      Height = 154
+    end
+    object DBGridDetail: TRxDBGrid
       Left = 1
       Top = 158
       Width = 500
@@ -36,7 +39,14 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
       OnEnter = DBGridEnter
+      IniStorage = FormStorage
     end
+  end
+  inherited FormStorage: TFormStorage
+    StoredProps.Strings = (
+      'DBGridDetail.Height')
+    Left = 92
+    Top = 116
   end
   inherited DataSource: TDataSource
     Left = 120

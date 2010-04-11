@@ -4,20 +4,24 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, Buttons, ExtCtrls, CDBFmlry, DBFmlry, kbmMemTable;
+  Db, StdCtrls, Buttons, ExtCtrls, CDBFmlry, DBFmlry, kbmMemTable, DBCtrls,
+  DMaster, DSource;
 
 type
   TSelPeriodoForm = class(TForm)
-    rxmDiaHora: TkbmMemTable;
+    TbDiaHora: TkbmMemTable;
     DSDiaHora: TDataSource;
-    rxmDiaHoraCodDia: TIntegerField;
-    rxmDiaHoraCodHora: TIntegerField;
-    rxmDiaHoraNomDia: TStringField;
-    rxmDiaHoraNomHora: TStringField;
-    DBFormulary1: TDBFormulary;
+    TbDiaHoraCodDia: TIntegerField;
+    TbDiaHoraCodHora: TIntegerField;
+    TbDiaHoraNomDia: TStringField;
+    TbDiaHoraNomHora: TStringField;
     BBAceptar: TBitBtn;
     BBCancelar: TBitBtn;
     Label1: TLabel;
+    Label2: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
+    Label3: TLabel;
+    DBLookupComboBox2: TDBLookupComboBox;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -29,7 +33,6 @@ function SeleccionarPeriodo(var ACodDia, ACodHora: Integer): Boolean;
 
 implementation
 
-uses DMaster;
 {$R *.DFM}
 
 function SeleccionarPeriodo(var ACodDia, ACodHora: Integer): Boolean;
@@ -41,8 +44,8 @@ begin
     Result := FSelPeriodoForm.ShowModal = mrOk;
     if Result then
     begin
-      ACodDia := FSelPeriodoForm.rxmDiaHoraCodDia.Value;
-      ACodHora := FSelPeriodoForm.rxmDiaHoraCodHora.Value;
+      ACodDia := FSelPeriodoForm.TbDiaHoraCodDia.Value;
+      ACodHora := FSelPeriodoForm.TbDiaHoraCodHora.Value;
     end;
   finally
     FSelPeriodoForm.Release;
@@ -51,7 +54,7 @@ end;
 
 procedure TSelPeriodoForm.FormShow(Sender: TObject);
 begin
-  rxmDiaHora.Open;
+  TbDiaHora.Open;
 end;
 
 end.

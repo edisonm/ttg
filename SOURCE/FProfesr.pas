@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Grids, DBGrids, StdCtrls, DBIndex, Buttons, DBCtrls, ExtCtrls,
-  ComCtrls, Printers, ImgList, ToolWin;
+  FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons, DBCtrls,
+  ExtCtrls, ComCtrls, RXCtrls, RXDBCtrl, Printers, RXSplit, ImgList, ToolWin;
 
 type
   TProfesorForm = class(TSingleEditorForm)
@@ -34,7 +34,7 @@ var
 implementation
 
 uses
-  DMaster, FCrsMMER, SGHCUtls, FConfig, QSingRep, DSource;
+  DMaster, FCrsMMER, SGHCUtls, FConfig, QMaDeRep, QSingRep, DSource;
 
 {$R *.DFM}
 
@@ -43,27 +43,25 @@ begin
   inherited;
   with SourceDataModule, TCrossManyToManyEditorRForm.Create(Self) do
   begin
-    (*
     with FormStorage do
     begin
-      IniSection := IniSection + '\MMEdR' + kbmProfesorProhibicion.Name;
+      IniSection := IniSection + '\MMEdR' + TbProfesorProhibicion.Name;
       Active := True;
       RestoreFormPlacement;
     end;
-    *)
-    Caption := Format('%s %s - Editando %s', [SourceDataModule.Name[kbmProfesor],
-      kbmProfesorApeNomProfesor.Value, Description[kbmProfesorProhibicion]]);
+    Caption := Format('%s %s - Editando %s', [SourceDataModule.Name[TbProfesor],
+      TbProfesorApeNomProfesor.Value, Description[TbProfesorProhibicion]]);
     DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
-      [Description[kbmProfesorProhibicion], Description[kbmDia], Description[kbmHora]]);
+      [Description[TbProfesorProhibicion], Description[TbDia], Description[TbHora]]);
     ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda',
-      [SourceDataModule.Name[kbmProfesorProhibicionTipo],
-      Description[kbmProfesorProhibicionTipo]]);
-    ShowEditor(kbmDia, kbmHora, kbmProfesorProhibicionTipo, kbmProfesorProhibicion,
-      kbmPeriodo, 'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora',
+      [SourceDataModule.Name[TbProfesorProhibicionTipo],
+      Description[TbProfesorProhibicionTipo]]);
+    ShowEditor(TbDia, TbHora, TbProfesorProhibicionTipo, TbProfesorProhibicion,
+      TbPeriodo, 'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora',
       'NomHora', 'CodHora', 'CodHora', 'CodProfProhibicionTipo',
       'NomProfProhibicionTipo', 'ColProfProhibicionTipo',
       'CodProfProhibicionTipo');
-    Tag := kbmProfesorCodProfesor.Value;
+    Tag := TbProfesorCodProfesor.Value;
     OnActivate := FormActivate;
   end;
 end;
@@ -72,7 +70,7 @@ procedure TProfesorForm.FormActivate(Sender: TObject);
 begin
   with SourceDataModule do
   begin
-    kbmProfesor.Locate('CodProfesor', (Sender as TCustomForm).Tag, []);
+    TbProfesor.Locate('CodProfesor', (Sender as TCustomForm).Tag, []);
   end;
 end;
 
@@ -81,9 +79,9 @@ begin
   inherited;
   with SourceDataModule do
   begin
-    kbmParalelo.First;
-    kbmDistributivo.First;
-    with kbmDistributivo do
+    TbParalelo.First;
+    TbDistributivo.First;
+    with TbDistributivo do
     begin
       DisableControls;
       try
@@ -102,7 +100,7 @@ begin
       FLbCarga.Left := 400;
       FLbCarga.OnDblClick := LbCargaDblClick;
       MySingleShowEditor(FFSingleEditor,
-        kbmDistributivo, ConfiguracionForm.edtNomColegio.Text,
+        TbDistributivo, ConfiguracionForm.edtNomColegio.Text,
         EdQuProfesorDistributivoDestroy);
       FSuperTitle := FFSingleEditor.Caption;
       DataSourceDataChange(nil, nil);
@@ -129,7 +127,7 @@ begin
   inherited;
   FLbCarga.Caption := Format('Carga: %d', [MasterDataModule.GetCargaActual]);
   FFSingleEditor.Caption := FSuperTitle + ' - ' +
-    SourceDataModule.kbmProfesorApeNomProfesor.AsString;
+    SourceDataModule.TbProfesorApeNomProfesor.AsString;
 end;
 
 procedure TProfesorForm.FormCreate(Sender: TObject);
@@ -141,7 +139,7 @@ end;
 procedure TProfesorForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  with SourceDataModule.kbmDistributivo do
+  with SourceDataModule.TbDistributivo do
   begin
     MasterSource := nil;
     MasterFields := '';

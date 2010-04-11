@@ -9,20 +9,21 @@ inherited ParaleloForm: TParaleloForm
       Hints.Strings = ()
     end
   end
-  inherited Panel1: TPanel
-    object Splitter1: TSplitter [0]
-      Left = 350
-      Top = 1
-      Width = 3
-      Height = 253
-      Cursor = crHSplit
-      Align = alRight
+  inherited pnlStatus: TPanel
+    inherited SLRecordNo: TDBStatusLabel
+      Left = 481
+      Width = 20
     end
-    inherited DBGrid: TDBGrid
-      Width = 349
+  end
+  inherited Panel1: TPanel
+    inherited DBGrid: TRxDBGrid
+      Width = 346
       Hint = 'Cursos|Cursos disponibles'
       ParentShowHint = False
       ShowHint = True
+    end
+    inherited Splitter1: TRxSplitter
+      Left = 350
     end
     object DBCheckListBox: TDBCheckListBox
       Left = 353
@@ -42,12 +43,29 @@ inherited ParaleloForm: TParaleloForm
       ListField = 'NomParaleloId'
       KeyField = 'CodParaleloId'
     end
+    object Splitter: TRxSplitter
+      Left = 347
+      Top = 1
+      Width = 3
+      Height = 253
+      ControlFirst = DBCheckListBox
+      Align = alRight
+    end
   end
-  inherited ImageList: TImageList
-    Left = 64
+  inherited FormStorage: TFormStorage
+    Active = True
+    IniSection = '\Software\SGHC\SEParalelo'
+    StoredProps.Strings = (
+      'tb97Show.DockedTo'
+      'tb97Show.DockPos'
+      'tb97Show.DockRow'
+      'DBCheckListBox.Width')
+  end
+  inherited DataSource: TDataSource
+    DataSet = SourceDataModule.TbCurso
   end
   object DataSourceList: TDataSource
-    DataSet = SourceDataModule.kbmParaleloId
+    DataSet = SourceDataModule.TbParaleloId
     Left = 64
     Top = 116
   end
@@ -55,7 +73,7 @@ inherited ParaleloForm: TParaleloForm
     Left = 36
     Top = 116
   end
-  object kbmParalelo: TkbmMemTable
+  object TbParalelo: TkbmMemTable
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <
@@ -94,15 +112,15 @@ inherited ParaleloForm: TParaleloForm
     IndexFieldNames = 'CodNivel;CodEspecializacion'
     IndexDefs = <
       item
-        Name = 'kbmParaleloCursoParalelo'
+        Name = 'TbParaleloCursoParalelo'
         Fields = 'CodNivel;CodEspecializacion'
       end
       item
-        Name = 'kbmParaleloParaleloIdParalelo'
+        Name = 'TbParaleloParaleloIdParalelo'
         Fields = 'CodParaleloId'
       end
       item
-        Name = 'kbmParaleloPrimaryKey'
+        Name = 'TbParaleloPrimaryKey'
         Fields = 'CodNivel;CodEspecializacion;CodParaleloId'
         Options = [ixPrimary, ixUnique]
       end>
@@ -128,48 +146,48 @@ inherited ParaleloForm: TParaleloForm
     Version = '2.49'
     Left = 92
     Top = 88
-    object kbmParaleloCodNivel: TIntegerField
+    object TbParaleloCodNivel: TIntegerField
       FieldName = 'CodNivel'
       Required = True
       Visible = False
     end
-    object kbmParaleloCodEspecializacion: TIntegerField
+    object TbParaleloCodEspecializacion: TIntegerField
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
     end
-    object kbmParaleloCodParaleloId: TIntegerField
+    object TbParaleloCodParaleloId: TIntegerField
       FieldName = 'CodParaleloId'
       Required = True
       Visible = False
     end
-    object kbmParaleloAbrNivel: TStringField
+    object TbParaleloAbrNivel: TStringField
       DisplayLabel = 'Nivel'
       FieldKind = fkLookup
       FieldName = 'AbrNivel'
-      LookupDataSet = SourceDataModule.kbmNivel
+      LookupDataSet = SourceDataModule.TbNivel
       LookupKeyFields = 'CodNivel'
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
       Lookup = True
     end
-    object kbmParaleloAbrEspecializacion: TStringField
+    object TbParaleloAbrEspecializacion: TStringField
       DisplayLabel = 'Especializacion'
       FieldKind = fkLookup
       FieldName = 'AbrEspecializacion'
-      LookupDataSet = SourceDataModule.kbmEspecializacion
+      LookupDataSet = SourceDataModule.TbEspecializacion
       LookupKeyFields = 'CodEspecializacion'
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
       Size = 10
       Lookup = True
     end
-    object kbmParaleloNomParaleloId: TStringField
+    object TbParaleloNomParaleloId: TStringField
       DisplayLabel = 'Paralelo'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
-      LookupDataSet = SourceDataModule.kbmParaleloId
+      LookupDataSet = SourceDataModule.TbParaleloId
       LookupKeyFields = 'CodParaleloId'
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'

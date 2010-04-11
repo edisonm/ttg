@@ -88,7 +88,7 @@ object ConvertForm: TConvertForm
     Left = 96
     Top = 56
   end
-  object kbmAsignatura: TkbmMemTable
+  object TbAsignatura: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -122,22 +122,22 @@ object ConvertForm: TConvertForm
     EnableIndexes = True
     AutoReposition = False
     IndexFieldNames = 'CodMateria;CodNivel;CodEspecializacion'
-    IndexName = 'kbmAsignaturaPrimaryKey'
+    IndexName = 'TbAsignaturaPrimaryKey'
     IndexDefs = <
       item
-        Name = 'kbmAsignaturaAulaTipo'
+        Name = 'TbAsignaturaAulaTipo'
         Fields = 'CodAulaTipo'
       end
       item
-        Name = 'kbmAsignaturaCargaAcademicaNivel'
+        Name = 'TbAsignaturaCargaAcademicaNivel'
         Fields = 'CodNivel'
       end
       item
-        Name = 'kbmAsignaturaMateria'
+        Name = 'TbAsignaturaMateria'
         Fields = 'CodMateria'
       end
       item
-        Name = 'kbmAsignaturaPrimaryKey'
+        Name = 'TbAsignaturaPrimaryKey'
         Fields = 'CodMateria;CodNivel;CodEspecializacion'
         Options = [ixPrimary, ixUnique]
       end>
@@ -162,27 +162,27 @@ object ConvertForm: TConvertForm
     Version = '2.49'
     Left = 4
     Top = 6
-    object kbmAsignaturaCodMateria: TIntegerField
+    object TbAsignaturaCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
       Required = True
     end
-    object kbmAsignaturaCodNivel: TIntegerField
+    object TbAsignaturaCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
     end
-    object kbmAsignaturaCodEspecializacion: TIntegerField
+    object TbAsignaturaCodEspecializacion: TIntegerField
       DisplayLabel = 'Especialización'
       FieldName = 'CodEspecializacion'
       Required = True
     end
-    object kbmAsignaturaCodAulaTipo: TIntegerField
+    object TbAsignaturaCodAulaTipo: TIntegerField
       DisplayLabel = 'Tipo de Aula'
       FieldName = 'CodAulaTipo'
       Required = True
     end
-    object kbmAsignaturaComposicion: TStringField
+    object TbAsignaturaComposicion: TStringField
       DisplayLabel = 'Composición'
       FieldName = 'Composicion'
       Required = True

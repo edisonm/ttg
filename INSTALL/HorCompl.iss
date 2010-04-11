@@ -64,8 +64,7 @@ Name: {group}\Manual del Usuario (HELP); Filename: {app}\HLP\HORCOLEG.HLP
 [INI]
 
 [Registry]
-Root: HKCU; SubKey: Software\HORCOLEG; ValueType: NONE; Flags: uninsdeletekey
-Root: HKCU; SubKey: Software\SGHC1; ValueType: NONE; Flags: uninsdeletekey
+Root: HKCU; SubKey: Software\SGHC; ValueType: NONE; Flags: uninsdeletekey
 
 [UninstallDelete]
 

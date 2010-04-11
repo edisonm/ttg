@@ -4,16 +4,16 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FCrsMMER, StdCtrls, Buttons, ExtCtrls, Grids, Db, FCrsMME1, kbmMemTable,
-  DBCtrls, ImgList, ComCtrls, ToolWin;
+  FCrsMMER, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, RxLookup,
+  Db, FCrsMME1, kbmMemTable, DBCtrls, ImgList, ComCtrls, DMaster, DSource, ToolWin;
 
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)
     QuHorarioParalelo: TkbmMemTable;
     btn97IntercambiarPeriodos: TToolButton;
-    dlcNivel: TDBLookupComboBox;
-    dlcEspecializacion: TDBLookupComboBox;
-    dlcParaleloId: TDBLookupComboBox;
+    dlcNivel: TRxDBLookupCombo;
+    dlcEspecializacion: TRxDBLookupCombo;
+    dlcParaleloId: TRxDBLookupCombo;
     cbVerParalelo: TComboBox;
     btn97Mostrar: TToolButton;
     btn97Prior: TToolButton;
@@ -28,11 +28,14 @@ type
     QuHorarioParaleloNomMateria: TStringField;
     QuHorarioParaleloApeNomProfesor: TStringField;
     QuHorarioParaleloNombre: TStringField;
-    kbmParalelo: TkbmMemTable;
+    TbParalelo: TkbmMemTable;
     dsParalelo: TDataSource;
-    kbmParaleloCodNivel: TIntegerField;
-    kbmParaleloCodEspecializacion: TIntegerField;
-    kbmParaleloCodParaleloId: TIntegerField;
+    TbParaleloCodParaleloId: TIntegerField;
+    TbParaleloCodEspecializacion: TIntegerField;
+    TbParaleloCodNivel: TIntegerField;
+    TbParaleloAbrNivel: TStringField;
+    TbParaleloAbrEspecializacion: TStringField;
+    TbParaleloNomParaleloId: TStringField;
     procedure btn97MostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure IntercambiarPeriodosClick(Sender: TObject);
@@ -67,7 +70,7 @@ type
 
 implementation
 uses
-  DMaster, HorColCm, FSelPeIn, DSource;
+  HorColCm, FSelPeIn;
 {$R *.DFM}
 
 function THorarioParaleloForm.GetCodDia: Integer;
@@ -103,17 +106,17 @@ end;
 
 function THorarioParaleloForm.GetNomNivel: string;
 begin
-  Result := dlcNivel.Text;
+  Result := dlcNivel.DisplayValue;
 end;
 
 function THorarioParaleloForm.GetNomEspecializacion: string;
 begin
-  Result := dlcEspecializacion.Text;
+  Result := dlcEspecializacion.DisplayValue;
 end;
 
 function THorarioParaleloForm.GetNomParaleloId: string;
 begin
-  Result := dlcParaleloId.Text;
+  Result := dlcParaleloId.DisplayValue;
 end;
 
 procedure THorarioParaleloForm.btn97MostrarClick(Sender: TObject);
@@ -125,17 +128,17 @@ procedure THorarioParaleloForm.btn97MostrarClick(Sender: TObject);
     with MasterDataModule do
     begin
       FParalelo :=
-        SourceDataModule.kbmParalelo.Lookup('CodNivel;CodEspecializacion;CodParaleloId',
+        SourceDataModule.TbParalelo.Lookup('CodNivel;CodEspecializacion;CodParaleloId',
         VarArrayOf([CodNivel, CodEspecializacion, CodParaleloId]),
         'CodNivel;CodEspecializacion;CodParaleloId');
       if VarIsNull(FParalelo) then
         raise Exception.CreateFmt('%s %s %s no es un %s válido',
-          [NomNivel, NomEspecializacion, NomParaleloId, kbmParalelo.Name]);
-      s := Format('[%s %d] - %s %s %s', [SourceDataModule.kbmHorario.Name, CodHorario,
+          [NomNivel, NomEspecializacion, NomParaleloId, TbParalelo.Name]);
+      s := Format('[%s %d] - %s %s %s', [SourceDataModule.TbHorario.Name, CodHorario,
         dlcNivel.Text, dlcEspecializacion.Text, dlcParaleloId.Text]);
       if QuHorarioParalelo.IsEmpty then
         raise Exception.CreateFmt('%s %s no válido', [s,
-          kbmParalelo.Name]);
+          TbParalelo.Name]);
       Caption := s;
     end;
   end;
@@ -143,8 +146,8 @@ procedure THorarioParaleloForm.btn97MostrarClick(Sender: TObject);
   begin
     with SourceDataModule, MasterDataModule do
     begin
-      FNombre := StringsShowParalelo.Values[cbVerParalelo.Text];
-      ShowEditor(kbmDia, kbmHora, QuHorarioParalelo, kbmPeriodo,
+      FNombre := StrHolderShowParalelo.Strings.Values[cbVerParalelo.Text];
+      ShowEditor(TbDia, TbHora, QuHorarioParalelo, TbPeriodo,
         'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora',
         'CodHora', 'Nombre');
       btn97IntercambiarPeriodos.Enabled := True;
@@ -159,17 +162,18 @@ end;
 procedure THorarioParaleloForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  kbmParalelo.Open;
+  TbParalelo.Open;
   QuHorarioParalelo.Open;
-  CodHorario := SourceDataModule.kbmHorarioCodHorario.Value;
+  CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
   cbVerParalelo.Items.Clear;
   FillHorarioParalelo;
-  kbmParalelo.First;
-  LoadNames(MasterDataModule.StringsShowParalelo, cbVerParalelo.Items);
+  TbParalelo.First;
+  LoadNames(MasterDataModule.StrHolderShowParalelo.Strings,
+    cbVerParalelo.Items);
   cbVerParalelo.Text := cbVerParalelo.Items[0];
-  dlcNivel.KeyValue := kbmParaleloCodNivel.AsInteger;
-  dlcEspecializacion.KeyValue := kbmParaleloCodEspecializacion.AsInteger;
-  dlcParaleloId.KeyValue := kbmParaleloCodParaleloId.AsInteger;
+  dlcNivel.KeyValue := TbParaleloCodNivel.AsInteger;
+  dlcEspecializacion.KeyValue := TbParaleloCodEspecializacion.AsInteger;
+  dlcParaleloId.KeyValue := TbParaleloCodParaleloId.AsInteger;
   btn97MostrarClick(nil);
 end;
 
@@ -189,20 +193,20 @@ end;
 procedure THorarioParaleloForm.btn97PriorClick(Sender: TObject);
 begin
   inherited;
-  kbmParalelo.Prior;
-  dlcNivel.KeyValue := kbmParaleloCodNivel.AsInteger;
-  dlcEspecializacion.KeyValue := kbmParaleloCodEspecializacion.AsInteger;
-  dlcParaleloId.KeyValue := kbmParaleloCodParaleloId.AsInteger;
+  TbParalelo.Prior;
+  dlcNivel.KeyValue := TbParaleloCodNivel.AsInteger;
+  dlcEspecializacion.KeyValue := TbParaleloCodEspecializacion.AsInteger;
+  dlcParaleloId.KeyValue := TbParaleloCodParaleloId.AsInteger;
   btn97MostrarClick(nil);
 end;
 
 procedure THorarioParaleloForm.btn97NextClick(Sender: TObject);
 begin
   inherited;
-  kbmParalelo.Next;
-  dlcNivel.KeyValue := kbmParaleloCodNivel.AsInteger;
-  dlcEspecializacion.KeyValue := kbmParaleloCodEspecializacion.AsInteger;
-  dlcParaleloId.KeyValue := kbmParaleloCodParaleloId.AsInteger;
+  TbParalelo.Next;
+  dlcNivel.KeyValue := TbParaleloCodNivel.AsInteger;
+  dlcEspecializacion.KeyValue := TbParaleloCodEspecializacion.AsInteger;
+  dlcParaleloId.KeyValue := TbParaleloCodParaleloId.AsInteger;
   btn97MostrarClick(nil);
 end;
 
@@ -214,42 +218,42 @@ begin
   with SourceDataModule do
   begin
     QuHorarioParalelo.EmptyTable;
-    CodHorario := kbmHorarioCodHorario.Value;
-    kbmHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
-    if kbmHorarioDetalle.Locate('CodHorario', CodHorario, []) then
+    CodHorario := TbHorarioCodHorario.Value;
+    TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+    if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
     begin
-      kbmDistributivo.DisableControls;
-      s := kbmDistributivo.IndexFieldNames;
-      kbmDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
-      kbmDistributivo.First;
+      TbDistributivo.DisableControls;
+      s := TbDistributivo.IndexFieldNames;
+      TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+      TbDistributivo.First;
       QuHorarioParalelo.DisableControls;
       try
-        while (kbmHorarioDetalleCodHorario.Value = CodHorario) and not kbmHorarioDetalle.Eof do
+        while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
         begin
-          CodMateria := kbmHorarioDetalleCodMateria.Value;
-          CodNivel := kbmHorarioDetalleCodNivel.Value;
-          CodEspecializacion := kbmHorarioDetalleCodEspecializacion.Value;
-          CodParaleloId := kbmHorarioDetalleCodParaleloId.Value;
-          while ((kbmDistributivoCodMateria.Value <> CodMateria)
-            or (kbmDistributivoCodNivel.Value <> CodNivel)
-            or (kbmDistributivoCodEspecializacion.Value <> CodEspecializacion)
-            or (kbmDistributivoCodParaleloId.Value <> CodParaleloId))
-            and not kbmDistributivo.Eof do
-            kbmDistributivo.Next;
+          CodMateria := TbHorarioDetalleCodMateria.Value;
+          CodNivel := TbHorarioDetalleCodNivel.Value;
+          CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
+          CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
+          while ((TbDistributivoCodMateria.Value <> CodMateria)
+            or (TbDistributivoCodNivel.Value <> CodNivel)
+            or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
+            or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
+            and not TbDistributivo.Eof do
+            TbDistributivo.Next;
           QuHorarioParalelo.Append;
-          QuHorarioParaleloCodProfesor.Value := kbmDistributivoCodProfesor.Value;
+          QuHorarioParaleloCodProfesor.Value := TbDistributivoCodProfesor.Value;
           QuHorarioParaleloCodMateria.Value := CodMateria;
           QuHorarioParaleloCodNivel.Value := CodNivel;
           QuHorarioParaleloCodEspecializacion.Value := CodEspecializacion;
           QuHorarioParaleloCodParaleloId.Value := CodParaleloId;
-          QuHorarioParaleloCodDia.Value := kbmHorarioDetalleCodDia.Value;
-          QuHorarioParaleloCodHora.Value := kbmHorarioDetalleCodHora.Value;
+          QuHorarioParaleloCodDia.Value := TbHorarioDetalleCodDia.Value;
+          QuHorarioParaleloCodHora.Value := TbHorarioDetalleCodHora.Value;
           QuHorarioParalelo.Post;
-          kbmHorarioDetalle.Next;
+          TbHorarioDetalle.Next;
         end;
       finally
-        kbmDistributivo.IndexFieldNames := s;
-        kbmDistributivo.EnableControls;
+        TbDistributivo.IndexFieldNames := s;
+        TbDistributivo.EnableControls;
         QuHorarioParalelo.EnableControls;
       end;
     end;

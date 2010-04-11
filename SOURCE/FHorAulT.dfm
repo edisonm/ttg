@@ -1,6 +1,6 @@
 inherited HorarioAulaTipoForm: THorarioAulaTipoForm
-  Left = 213
-  Top = 313
+  Left = 207
+  Top = 269
   Width = 721
   Height = 399
   OnCreate = FormCreate
@@ -29,15 +29,17 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       ImageIndex = 5
       OnClick = btn97PriorClick
     end
-    object dlcAulaTipo: TDBLookupComboBox
+    object dlcAulaTipo: TRxDBLookupCombo
       Left = 138
       Top = 0
       Width = 169
-      Height = 21
-      Hint = 'Tipo de aula'
-      KeyField = 'CodAulaTipo'
-      ListField = 'AbrAulaTipo'
-      ListSource = SourceDataModule.dsAulaTipo
+      Height = 22
+      DropDownCount = 8
+      DisplayEmpty = '(Tipo de aula)'
+      ListStyle = lsDelimited
+      LookupField = 'CodAulaTipo'
+      LookupDisplay = 'AbrAulaTipo'
+      LookupSource = SourceDataModule.dsAulaTipo
       TabOrder = 0
     end
     object cbVerAulaTipo: TComboBox
@@ -60,10 +62,16 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
     Width = 713
     Height = 328
   end
-  inherited DrawGrid: TDrawGrid
+  inherited DrawGrid: TRxDrawGrid
     Width = 713
     Height = 328
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
+  end
+  inherited FormStorage: TFormStorage
+    Active = True
+    IniSection = '\Software\SGHC\MMEd1HorarioProfesor'
+    Left = 56
+    Top = 80
   end
   inherited ImageList: TImageList
     Left = 112

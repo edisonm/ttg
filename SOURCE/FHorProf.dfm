@@ -30,19 +30,21 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       ImageIndex = 5
       OnClick = btn97PriorClick
     end
-    object dlcProfesor: TDBLookupComboBox
+    object dlcProfesor: TRxDBLookupCombo
       Left = 138
       Top = 0
-      Width = 145
-      Height = 21
-      Hint = 'Profesor'
-      KeyField = 'CodProfesor'
-      ListField = 'ApeNomProfesor'
-      ListSource = SourceDataModule.dsProfesor
-      TabOrder = 1
+      Width = 169
+      Height = 22
+      DropDownCount = 8
+      DisplayEmpty = '(Profesor)'
+      ListStyle = lsDelimited
+      LookupField = 'CodProfesor'
+      LookupDisplay = 'ApeNomProfesor'
+      LookupSource = SourceDataModule.dsProfesor
+      TabOrder = 0
     end
     object cbVerProfesor: TComboBox
-      Left = 283
+      Left = 307
       Top = 0
       Width = 193
       Height = 21
@@ -50,7 +52,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       ItemHeight = 13
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 0
+      TabOrder = 1
     end
   end
   inherited pnlStatus: TPanel
@@ -61,10 +63,14 @@ inherited HorarioProfesorForm: THorarioProfesorForm
     Width = 766
     Height = 328
   end
-  inherited DrawGrid: TDrawGrid
+  inherited DrawGrid: TRxDrawGrid
     Width = 766
     Height = 328
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
+  end
+  inherited FormStorage: TFormStorage
+    Active = True
+    IniSection = '\Software\SGHC\MMEd1HorarioProfesor'
   end
   inherited ImageList: TImageList
     Bitmap = {
