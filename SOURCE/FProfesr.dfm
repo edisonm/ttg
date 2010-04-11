@@ -42,11 +42,7 @@ inherited ProfesorForm: TProfesorForm
     Width = 702
     Height = 356
     inherited DBGrid: TRxDBGrid
-      Width = 697
-      Height = 354
-    end
-    inherited Splitter1: TRxSplitter
-      Left = 698
+      Width = 700
       Height = 354
     end
   end

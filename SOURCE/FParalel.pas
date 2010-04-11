@@ -20,6 +20,7 @@ type
     TbParaleloAbrNivel: TStringField;
     TbParaleloAbrEspecializacion: TStringField;
     TbParaleloNomParaleloId: TStringField;
+    Splitter1: TSplitter;
     procedure btn97ShowClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private

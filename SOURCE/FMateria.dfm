@@ -32,10 +32,7 @@ inherited MateriaForm: TMateriaForm
   inherited Panel1: TPanel
     Width = 594
     inherited DBGrid: TRxDBGrid
-      Width = 589
-    end
-    inherited Splitter1: TRxSplitter
-      Left = 590
+      Width = 592
     end
   end
   inherited FormStorage: TFormStorage

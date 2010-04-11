@@ -16,18 +16,19 @@ inherited ParaleloForm: TParaleloForm
     end
   end
   inherited Panel1: TPanel
+    object Splitter1: TSplitter [0]
+      Left = 350
+      Top = 1
+      Width = 3
+      Height = 253
+      Cursor = crHSplit
+      Align = alRight
+    end
     inherited DBGrid: TRxDBGrid
       Width = 349
       Hint = 'Cursos|Cursos disponibles'
       ParentShowHint = False
       ShowHint = True
-    end
-    object Splitter1: TRxSplitter
-      Left = 350
-      Top = 1
-      Width = 3
-      Height = 253
-      Align = alRight
     end
     object DBCheckListBox: TDBCheckListBox
       Left = 353
