@@ -36,29 +36,28 @@ SourceDir=.
 OutputDir=OUTPUT
 
 [Dirs]
-    ; Name: {app}\HLP
-    ; Name: {app}\BIN
-    ; Name: {app}\DEMOS
-    ; Name: {app}\DOC
-    ; Name: {tmp}\PACKS; Flags: uninsneveruninstall  deleteafterinstall
+Name: {app}\HLP
+Name: {app}\BIN
+Name: {app}\DEMOS
+Name: {app}\DOC
 
 [Files]
-    ; Source: ..\BIN\HORCOLEG.EXE; DestDir: {app}\BIN\; DestName: HORCOLEG.EXE
-    ; Source: ..\HLP\HORCOLEG.CNT; DestDir: {app}\HLP\; DestName: HORCOLEG.CNT
-    ; Source: ..\HLP\HORCOLEG.HLP; DestDir: {app}\HLP\; DestName: HORCOLEG.HLP
-    ; Source: ..\DOC\MANUAL.DOC; DestDir: {app}\DOC\; DestName: MANUAL.DOC
-    ; Source: ..\DEMOS\BritanicoInt\BritanicoInt2000.ttd; DestDir: {app}\DEMOS\; DestName: BritanicoInt.ttd
-    ; Source: ..\DEMOS\Salamanca\Salamanca1999.ttd; DestDir: {app}\DEMOS\; DestName: Salamanca.ttd
+Source: ..\BIN\SGHC.EXE; DestDir: {app}\BIN\; DestName: SGHC.EXE
+Source: ..\HLP\HORCOLEG.CNT; DestDir: {app}\HLP\; DestName: HORCOLEG.CNT
+Source: ..\HLP\HORCOLEG.HLP; DestDir: {app}\HLP\; DestName: HORCOLEG.HLP
+Source: ..\DOC\MANUAL.DOC; DestDir: {app}\DOC\; DestName: MANUAL.DOC
+Source: ..\DEMOS\BritanicoInt\BritanicoInt2000.ttd; DestDir: {app}\DEMOS\; DestName: BRITANIC.TTD
+Source: ..\DEMOS\Salamanca\Salamanca1999.ttd; DestDir: {app}\DEMOS\; DestName: SALAMANC.TTD
 [Icons]
-    ; Name: {group}\Horarios Para Colegio 1.2.1; Filename: {app}\BIN\HORCOLEG.EXE; WorkingDir: {app}\BIN\; IconIndex: 0
-    ; Name: {group}\Manual del Usuario (DOC); Filename: {app}\DOC\MANUAL.DOC
-    ; Name: {group}\Manual del Usuario (HELP); Filename: {app}\HLP\HORCOLEG.HLP
-	; Name: {group}\{cm:UninstallProgram, Horarios Para Colegio 1.2.1}; Filename: {uninstallexe}
+Name: {group}\Horarios Para Colegio 1.2.1; Filename: {app}\BIN\SGHC.EXE; WorkingDir: {app}\BIN\; IconIndex: 0
+Name: {group}\Manual del Usuario (DOC); Filename: {app}\DOC\MANUAL.DOC
+Name: {group}\Manual del Usuario (HELP); Filename: {app}\HLP\HORCOLEG.HLP
+Name: {group}\{cm:UninstallProgram, Horarios Para Colegio 1.2.1}; Filename: {uninstallexe}
 [INI]
 
 [Registry]
-    ; Root: HKCU; SubKey: Software\HORCOLEG; ValueType: none; Flags: uninsdeletekey
-    ; Root: HKCU; SubKey: Software\SGHC1; ValueType: none; Flags: uninsdeletekey
+Root: HKCU; SubKey: Software\HORCOLEG; ValueType: none; Flags: uninsdeletekey
+Root: HKCU; SubKey: Software\SGHC1; ValueType: none; Flags: uninsdeletekey
 
 [UninstallDelete]
 
@@ -69,4 +68,4 @@ OutputDir=OUTPUT
 [UninstallRun]
 
 [Languages]
-    ; Name: default; MessagesFile: C:\Archivos de programa\Inno Setup 5\Languages\Spanish.isl
+Name: default; MessagesFile: C:\Archivos de programa\Inno Setup 5\Languages\Spanish.isl
