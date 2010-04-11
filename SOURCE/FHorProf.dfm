@@ -18,17 +18,17 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       ShowHint = True
       OnClick = btn97MostrarClick
     end
-    object btn97Next: TToolButton
-      Left = 92
-      Top = 0
-      ImageIndex = 4
-      OnClick = btn97NextClick
-    end
     object btn97Prior: TToolButton
-      Left = 115
+      Left = 92
       Top = 0
       ImageIndex = 5
       OnClick = btn97PriorClick
+    end
+    object btn97Next: TToolButton
+      Left = 115
+      Top = 0
+      ImageIndex = 4
+      OnClick = btn97NextClick
     end
     object dlcProfesor: TRxDBLookupCombo
       Left = 138
