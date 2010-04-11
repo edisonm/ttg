@@ -478,6 +478,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       000000000000}
   end
   object QuHorarioProfesor: TkbmMemTable
+    Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <
