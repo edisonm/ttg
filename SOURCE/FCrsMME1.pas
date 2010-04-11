@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FCrsMMEd, StdCtrls, Buttons, ExtCtrls, Grids, DB, ImgList, ComCtrls, ToolWin;
+  FCrsMMEd, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, DB,
+  ImgList, ComCtrls, ToolWin;
 
 type
   TCrossManyToManyEditor1Form = class(TCrossManyToManyEditorForm)

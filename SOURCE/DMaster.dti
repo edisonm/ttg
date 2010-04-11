@@ -1,7 +1,7 @@
 [Designer]
 Version=1
-Left=35
-Top=307
+Left=214
+Top=221
 Width=575
 Height=320
 Splitter=142
@@ -20,7 +20,7 @@ PrintToFile=0
 PrintBorders=1
 PrintSelected=0
 PrintVisible=0
-ExpandedItems=MasterDataModule\TbTmpProfesorCarga
+ExpandedItems=MasterDataModule\strHolderShowProfesor,MasterDataModule\TbTmpProfesorCarga
 
 [DataDiagrams]
 Version=1

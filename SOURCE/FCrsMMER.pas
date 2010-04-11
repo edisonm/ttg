@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ExtCtrls, Grids, DB, FCrsMMEd, ImgList, ComCtrls, ToolWin;
+  Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, DB, FCrsMMEd,
+  ImgList, ComCtrls, ToolWin;
 
 type
   TCrossManyToManyEditorRForm = class(TCrossManyToManyEditorForm)
@@ -234,7 +235,7 @@ begin
       begin
         if Sel[VCol - 1, VRow - 1] then
           FRel[VCol - 1, VRow - 1] := ListBox.ItemIndex;
-//        InvalidateCell(VCol, VRow);
+        InvalidateCell(VCol, VRow);
       end;
   end;
 end;
@@ -258,7 +259,7 @@ begin
       for VRow := Selection.Top to Selection.Bottom do
       begin
         FRel[VCol - 1, VRow - 1] := -1;
-//        InvalidateCell(VCol, VRow);
+        InvalidateCell(VCol, VRow);
       end;
     ListBox.ItemIndex := -1;
   end;

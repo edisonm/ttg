@@ -8,7 +8,8 @@ uses
 procedure MyMasterDetailShowEditor(MasterDetailEditorForm:
   TMasterDetailEditorForm; DataSet, DataSetDetail: TDataSet; const SuperTitle: string; DestroyEvent:
   TNotifyEvent);
-procedure MySingleShowEditor(FSingleEditor: TSingleEditorForm; DataSet: TDataSet;
+procedure MySingleShowEditor(FSingleEditor: TSingleEditorForm; DataSet:
+  TDataSet;
   const SuperTitle: string; DestroyEvent: TNotifyEvent);
 procedure LoadCaption(AForm: TForm; ADataSet: TDataSet);
 function ComposicionADuracion(const s: string): Integer;
@@ -25,7 +26,7 @@ procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
 implementation
 
 uses
-  SysUtils, DMaster, Consts, BaseUtls;
+  SysUtils, RxGrids, DMaster, Consts, ArDBUtls, BDE;
 
 procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorForm;
   AColDataSet, ARowDataSet, ARelDataSet: TDataSet);
@@ -105,7 +106,6 @@ begin
   with FSingleEditor do
   begin
     OnDestroy := DestroyEvent;
-    (*
     with FormStorage do
     begin
       if not Active then
@@ -115,7 +115,6 @@ begin
         RestoreFormPlacement;
       end;
     end;
-    *)
     ShowEditor(DataSet, SuperTitle);
   end;
 end;
