@@ -1,4 +1,4 @@
-object SourceBaseDataModule: TSourceBaseDataModule
+inherited SourceBaseDataModule: TSourceBaseDataModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   object TbAulaTipo: TkbmMemTable

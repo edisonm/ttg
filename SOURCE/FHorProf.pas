@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, RxLookup, FCrsMME0, Db,
-  FCrsMME1, kbmMemTable, ImgList, ComCtrls, ToolWin, DMaster, DSource;
+  FCrsMME1, kbmMemTable, ImgList, ComCtrls, ToolWin;
 
 type
   THorarioProfesorForm = class(TCrossManyToManyEditor1Form)
@@ -45,7 +45,7 @@ type
 
 implementation
 uses
-  HorColCm, FConfig;
+  HorColCm, FConfig, DMaster, DSource;
 {$R *.DFM}
 
 procedure THorarioProfesorForm.btn97MostrarClick(Sender: TObject);

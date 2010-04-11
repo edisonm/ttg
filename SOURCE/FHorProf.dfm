@@ -478,7 +478,6 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       000000000000}
   end
   object QuHorarioProfesor: TkbmMemTable
-    Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <
@@ -621,7 +620,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       DisplayWidth = 5
       FieldKind = fkLookup
       FieldName = 'AbrNivel'
-      LookupDataSet = SourceDataModule.kbmNivel
+      LookupDataSet = SourceDataModule.TbNivel
       LookupKeyFields = 'CodNivel'
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
@@ -633,7 +632,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'AbrEspecializacion'
-      LookupDataSet = SourceDataModule.kbmEspecializacion
+      LookupDataSet = SourceDataModule.TbEspecializacion
       LookupKeyFields = 'CodEspecializacion'
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
@@ -644,7 +643,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
-      LookupDataSet = SourceDataModule.kbmParaleloId
+      LookupDataSet = SourceDataModule.TbParalelo
       LookupKeyFields = 'CodParaleloId'
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
@@ -656,7 +655,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'NomMateria'
-      LookupDataSet = SourceDataModule.kbmMateria
+      LookupDataSet = SourceDataModule.TbMateria
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
