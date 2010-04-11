@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FCrsMMER, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, RxLookup,
-  Db, FCrsMME1, kbmMemTable, DBCtrls, ImgList, ComCtrls, ToolWin;
+  Db, FCrsMME1, kbmMemTable, DBCtrls, ImgList, ComCtrls, DMaster, DSource, ToolWin;
 
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)
@@ -70,7 +70,7 @@ type
 
 implementation
 uses
-  DMaster, HorColCm, FSelPeIn, DSource;
+  HorColCm, FSelPeIn;
 {$R *.DFM}
 
 function THorarioParaleloForm.GetCodDia: Integer;
