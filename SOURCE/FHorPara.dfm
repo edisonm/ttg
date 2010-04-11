@@ -529,13 +529,13 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       80078E0FFE07F0008007DF07FE07E0008007FF83FC07C000800FFFC1F8038000
       800FFFE0F0418000800FFFF0F0E00000801FFFF8F9F00000803FFFFCFFF80001
       C07FFFFEFFFF0003FFFFFFFFFFFF000700000000000000000000000000000000
-      000000000000}
-  end
-  object TbParalelo: TkbmMemTable
-    Active = True
-    AttachedTo = SourceDataModule.TbParalelo
-    AttachedAutoRefresh = True
-    AutoIncMinValue = 0
+      000000000000}
+  end
+  object TbParalelo: TkbmMemTable
+    Active = True
+    AttachedTo = SourceDataModule.TbParalelo
+    AttachedAutoRefresh = True
+    AutoIncMinValue = 0
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -588,58 +588,58 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
-    Left = 88
-    Top = 104
-    object TbParaleloCodNivel: TIntegerField
-      DisplayLabel = 'Nivel'
-      DisplayWidth = 10
-      FieldName = 'CodNivel'
-      Required = True
-      Visible = False
-    end
-    object TbParaleloCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especialización'
-      DisplayWidth = 10
-      FieldName = 'CodEspecializacion'
-      Required = True
-      Visible = False
-    end
-    object TbParaleloCodParaleloId: TIntegerField
-      DisplayLabel = 'Paralelo'
-      DisplayWidth = 10
-      FieldName = 'CodParaleloId'
-      Required = True
-      Visible = False
-    end
-    object TbParaleloAbrNivel: TStringField
-      DisplayLabel = 'Nivel'
-      DisplayWidth = 5
-      FieldKind = fkLookup
+    Version = '2.49'
+    Left = 88
+    Top = 104
+    object TbParaleloCodNivel: TIntegerField
+      DisplayLabel = 'Nivel'
+      DisplayWidth = 10
+      FieldName = 'CodNivel'
+      Required = True
+      Visible = False
+    end
+    object TbParaleloCodEspecializacion: TIntegerField
+      DisplayLabel = 'Especialización'
+      DisplayWidth = 10
+      FieldName = 'CodEspecializacion'
+      Required = True
+      Visible = False
+    end
+    object TbParaleloCodParaleloId: TIntegerField
+      DisplayLabel = 'Paralelo'
+      DisplayWidth = 10
+      FieldName = 'CodParaleloId'
+      Required = True
+      Visible = False
+    end
+    object TbParaleloAbrNivel: TStringField
+      DisplayLabel = 'Nivel'
+      DisplayWidth = 5
+      FieldKind = fkLookup
       FieldName = 'AbrNivel'
       LookupDataSet = SourceDataModule.TbNivel
       LookupKeyFields = 'CodNivel'
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
-      Size = 5
-      Lookup = True
-    end
-    object TbParaleloAbrEspecializacion: TStringField
-      DisplayLabel = 'Especializacion'
-      DisplayWidth = 10
-      FieldKind = fkLookup
+      Size = 5
+      Lookup = True
+    end
+    object TbParaleloAbrEspecializacion: TStringField
+      DisplayLabel = 'Especializacion'
+      DisplayWidth = 10
+      FieldKind = fkLookup
       FieldName = 'AbrEspecializacion'
       LookupDataSet = SourceDataModule.TbEspecializacion
       LookupKeyFields = 'CodEspecializacion'
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
-      Size = 10
-      Lookup = True
-    end
-    object TbParaleloNomParaleloId: TStringField
-      DisplayLabel = 'Paralelo'
-      DisplayWidth = 5
-      FieldKind = fkLookup
+      Size = 10
+      Lookup = True
+    end
+    object TbParaleloNomParaleloId: TStringField
+      DisplayLabel = 'Paralelo'
+      DisplayWidth = 5
+      FieldKind = fkLookup
       FieldName = 'NomParaleloId'
       LookupDataSet = SourceDataModule.TbParaleloId
       LookupKeyFields = 'CodParaleloId'
@@ -647,13 +647,13 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       KeyFields = 'CodParaleloId'
       Size = 5
       Lookup = True
-    end
-  end
-  object QuHorarioParalelo: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
+    end
+  end
+  object QuHorarioParalelo: TkbmMemTable
+    Active = True
+    AttachedAutoRefresh = True
+    AutoIncMinValue = -1
+    FieldDefs = <
       item
         Name = 'CodNivel'
         Attributes = [faRequired]

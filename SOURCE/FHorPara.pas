@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FCrsMMER, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, RxLookup,
-  Db, FCrsMME1, kbmMemTable, DBCtrls, ImgList, ComCtrls, DMaster, DSource, ToolWin;
+  Db, FCrsMME1, kbmMemTable, DBCtrls, ImgList, ComCtrls, ToolWin;
 
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)
@@ -70,7 +70,7 @@ type
 
 implementation
 uses
-  HorColCm, FSelPeIn;
+  HorColCm, FSelPeIn, DSource, DMaster;
 {$R *.DFM}
 
 function THorarioParaleloForm.GetCodDia: Integer;
@@ -146,7 +146,7 @@ procedure THorarioParaleloForm.btn97MostrarClick(Sender: TObject);
   begin
     with SourceDataModule, MasterDataModule do
     begin
-      FNombre := StrHolderShowParalelo.Strings.Values[cbVerParalelo.Text];
+      FNombre := strHolderShowParalelo.Strings.Values[cbVerParalelo.Text];
       ShowEditor(TbDia, TbHora, QuHorarioParalelo, TbPeriodo,
         'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora',
         'CodHora', 'Nombre');

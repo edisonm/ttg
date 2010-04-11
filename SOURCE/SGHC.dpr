@@ -5,7 +5,7 @@ uses
   Dialogs,
   SysUtils,
   FMain in 'FMain.pas' {MainForm},
-  DMaster in 'DMaster.PAS' {MasterDataModule: TDataModule},
+  DMaster in 'DMaster.pas' {MasterDataModule: TDataModule},
   KerModel in 'KerModel.pas',
   KerEvolE in 'KerEvolE.pas',
   FProgres in 'FProgres.pas' {ProgressForm},
@@ -36,7 +36,8 @@ uses
   DSrcBase in 'DSrcBase.pas' {SourceBaseDataModule: TDataModule},
   RelUtils in 'RelUtils.pas',
   DSource in 'DSource.pas' {SourceDataModule: TDataModule},
-  FSelPeIn in 'FSelPeIn.pas' {SelPeriodoForm};
+  FSelPeIn in 'FSelPeIn.pas' {SelPeriodoForm},
+  DBase in 'DBase.pas' {BaseDataModule: TDataModule};
 
 {$R *.RES}
 

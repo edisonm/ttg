@@ -1,9 +1,9 @@
-object SourceBaseDataModule: TSourceBaseDataModule
+inherited SourceBaseDataModule: TSourceBaseDataModule
   OldCreateOrder = True
-  OnCreate = DataModuleCreate
-  OnDestroy = DataModuleDestroy
-  Height = 0
-  Width = 0
+  Left = 556
+  Top = 16
+  Height = 500
+  Width = 741
   object TbAulaTipo: TkbmMemTable
     Active = True
     AttachedAutoRefresh = True

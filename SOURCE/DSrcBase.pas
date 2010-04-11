@@ -13,10 +13,11 @@ unit DSrcBase;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, KbmMemTable;
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, KbmMemTable,
+  DBase;
 
 type
-  TSourceBaseDataModule = class(TDataModule)
+  TSourceBaseDataModule = class(TBaseDataModule)
     TbAulaTipo: TkbmMemTable;
     TbAulaTipoCodAulaTipo:TAutoIncField;
     TbAulaTipoNomAulaTipo:TStringField;
@@ -152,35 +153,9 @@ type
     procedure TbProfesorProhibicionTipoBeforePost(DataSet: TDataSet);
     procedure TbProfesorProhibicionTipoBeforeDelete(DataSet: TDataSet);
     procedure TbProfesorProhibicionBeforePost(DataSet: TDataSet);
-
     procedure DataModuleCreate(Sender: TObject);
-    procedure DataModuleDestroy(Sender: TObject);
   private
-    FDataSetNameList: TStrings;
-    FDataSetDescList: TStrings;
-    FCheckRelations: Boolean;
-    FBeforePostLocks: array[0..17] of Boolean;
-    function GetDescription(ADataSet: TDataSet): string;
-    function GetName(ADataSet: TDataSet): string;
   public
-    procedure LoadFromBinaryStream(AStream: TStream);
-    procedure LoadFromBinaryFile(const AFileName: string);
-    procedure LoadFromTextDir(const ADirName: string);
-    procedure LoadFromTextFile(const AFileName: TFileName);
-    procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer); virtual;
-    procedure SaveToBinaryStream(AStream: TStream; flags:TkbmMemTableSaveFlags);
-    procedure SaveToBinaryFile(const AFileName: TFileName; flags:TkbmMemTableSaveFlags);
-    procedure SaveToTextFile(const AFileName: TFileName);
-    procedure SaveToStrings(AStrings: TStrings); virtual;
-    procedure SaveToTextDir(const ADirName: TFileName); virtual;
-    procedure EmptyTables;
-    procedure OpenTables;
-    procedure CloseTables;
-    property CheckRelations: Boolean read FCheckRelations write FCheckRelations;
-    property DataSetNameList: TStrings read FDataSetNameList;
-    property DataSetDescList: TStrings read FDataSetDescList;
-    property Description[ADataSet: TDataSet]: string read GetDescription;
-    property Name[ADataSet: TDataSet]: string read GetName;
   end;
 var
   SourceBaseDataModule: TSourceBaseDataModule;
@@ -626,10 +601,28 @@ end;
 
 procedure TSourceBaseDataModule.DataModuleCreate(Sender: TObject);
 begin
-  FDataSetNameList := TStringList.Create;
-  FDataSetDescList := TStringList.Create;
-  FCheckRelations := True;
-  with FDataSetNameList do
+  inherited;
+  SetLength(FTables, 18);
+  SetLength(FBeforePostLocks, 18);
+  Tables[0] := TbAulaTipo;
+  Tables[1] := TbEspecializacion;
+  Tables[2] := TbDia;
+  Tables[3] := TbMateria;
+  Tables[4] := TbNivel;
+  Tables[5] := TbHora;
+  Tables[6] := TbHorario;
+  Tables[7] := TbCurso;
+  Tables[8] := TbParaleloId;
+  Tables[9] := TbMateriaProhibicionTipo;
+  Tables[10] := TbPeriodo;
+  Tables[11] := TbParalelo;
+  Tables[12] := TbProfesor;
+  Tables[13] := TbMateriaProhibicion;
+  Tables[14] := TbDistributivo;
+  Tables[15] := TbHorarioDetalle;
+  Tables[16] := TbProfesorProhibicionTipo;
+  Tables[17] := TbProfesorProhibicion;
+  with DataSetNameList do
   begin
     Add('TbAulaTipo=AulaTipo');
     Add('TbEspecializacion=Especializacion');
@@ -650,7 +643,7 @@ begin
     Add('TbProfesorProhibicionTipo=ProfesorProhibicionTipo');
     Add('TbProfesorProhibicion=ProfesorProhibicion');
   end;
-  with FDataSetDescList do
+  with DataSetDescList do
   begin
     Add('TbAulaTipo=Tipos de aula');
     Add('TbEspecializacion=Especializaciones');
@@ -673,287 +666,4 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.DataModuleDestroy(Sender: TObject);
-begin
-  FDataSetNameList.Free;
-  FDataSetDescList.Free;
-  CloseTables;
-end;
-
-function TSourceBaseDataModule.GetDescription(ADataSet: TDataSet): string;
-begin
-  result := FDataSetDescList.Values[ADataSet.Name];
-end;
-
-function TSourceBaseDataModule.GetName(ADataSet: TDataSet): string;
-begin
-  result := FDataSetNameList.Values[ADataSet.Name];
-end;
-
-procedure TSourceBaseDataModule.LoadFromBinaryStream(AStream: TStream);
-begin
-  FCheckRelations := False;
-  try
-    TbAulaTipo.LoadFromBinaryStream(AStream);
-    TbEspecializacion.LoadFromBinaryStream(AStream);
-    TbDia.LoadFromBinaryStream(AStream);
-    TbMateria.LoadFromBinaryStream(AStream);
-    TbNivel.LoadFromBinaryStream(AStream);
-    TbHora.LoadFromBinaryStream(AStream);
-    TbHorario.LoadFromBinaryStream(AStream);
-    TbCurso.LoadFromBinaryStream(AStream);
-    TbParaleloId.LoadFromBinaryStream(AStream);
-    TbMateriaProhibicionTipo.LoadFromBinaryStream(AStream);
-    TbPeriodo.LoadFromBinaryStream(AStream);
-    TbParalelo.LoadFromBinaryStream(AStream);
-    TbProfesor.LoadFromBinaryStream(AStream);
-    TbMateriaProhibicion.LoadFromBinaryStream(AStream);
-    TbDistributivo.LoadFromBinaryStream(AStream);
-    TbHorarioDetalle.LoadFromBinaryStream(AStream);
-    TbProfesorProhibicionTipo.LoadFromBinaryStream(AStream);
-    TbProfesorProhibicion.LoadFromBinaryStream(AStream);
-  finally
-    FCheckRelations := True;
-  end;
-end;
-
-procedure TSourceBaseDataModule.LoadFromBinaryFile(const AFileName: string);
-var
-  Stream: TStream;
-begin
-  Stream := TFileStream.Create(AFileName, fmOpenRead + fmShareDenyNone);
-  try
-    LoadFromBinaryStream(Stream);
-  finally
-    Stream.Free;
-  end;
-end;
-
-procedure TSourceBaseDataModule.LoadFromTextFile(const AFileName: TFileName);
-var
-  AStrings: TStrings;
-  APosition: Integer;
-begin
-  AStrings := TStringList.Create;
-  try
-    AStrings.LoadFromFile(AFileName);
-    APosition := 0;
-    LoadFromStrings(AStrings, APosition);
-  finally
-    AStrings.Free;
-  end;
-end;
-
-procedure TSourceBaseDataModule.LoadFromStrings(AStrings: TStrings; var APosition: Integer);
-begin
-  FCheckRelations := False;
-  try
-    LoadDataSetFromStrings(TbAulaTipo, AStrings, APosition);
-    LoadDataSetFromStrings(TbEspecializacion, AStrings, APosition);
-    LoadDataSetFromStrings(TbDia, AStrings, APosition);
-    LoadDataSetFromStrings(TbMateria, AStrings, APosition);
-    LoadDataSetFromStrings(TbNivel, AStrings, APosition);
-    LoadDataSetFromStrings(TbHora, AStrings, APosition);
-    LoadDataSetFromStrings(TbHorario, AStrings, APosition);
-    LoadDataSetFromStrings(TbCurso, AStrings, APosition);
-    LoadDataSetFromStrings(TbParaleloId, AStrings, APosition);
-    LoadDataSetFromStrings(TbMateriaProhibicionTipo, AStrings, APosition);
-    LoadDataSetFromStrings(TbPeriodo, AStrings, APosition);
-    LoadDataSetFromStrings(TbParalelo, AStrings, APosition);
-    LoadDataSetFromStrings(TbProfesor, AStrings, APosition);
-    LoadDataSetFromStrings(TbMateriaProhibicion, AStrings, APosition);
-    LoadDataSetFromStrings(TbDistributivo, AStrings, APosition);
-    LoadDataSetFromStrings(TbHorarioDetalle, AStrings, APosition);
-    LoadDataSetFromStrings(TbProfesorProhibicionTipo, AStrings, APosition);
-    LoadDataSetFromStrings(TbProfesorProhibicion, AStrings, APosition);
-  finally
-    FCheckRelations := True;
-  end;
-end;
-
-procedure TSourceBaseDataModule.LoadFromTextDir(const ADirName: string);
-begin
-  FCheckRelations := False;
-  try
-    LoadDataSetFromCSVFile(TbAulaTipo, ADirName + '\AulaTipo.csv');
-    LoadDataSetFromCSVFile(TbEspecializacion, ADirName + '\Especializacion.csv');
-    LoadDataSetFromCSVFile(TbDia, ADirName + '\Dia.csv');
-    LoadDataSetFromCSVFile(TbMateria, ADirName + '\Materia.csv');
-    LoadDataSetFromCSVFile(TbNivel, ADirName + '\Nivel.csv');
-    LoadDataSetFromCSVFile(TbHora, ADirName + '\Hora.csv');
-    LoadDataSetFromCSVFile(TbHorario, ADirName + '\Horario.csv');
-    LoadDataSetFromCSVFile(TbCurso, ADirName + '\Curso.csv');
-    LoadDataSetFromCSVFile(TbParaleloId, ADirName + '\ParaleloId.csv');
-    LoadDataSetFromCSVFile(TbMateriaProhibicionTipo, ADirName + '\MateriaProhibicionTipo.csv');
-    LoadDataSetFromCSVFile(TbPeriodo, ADirName + '\Periodo.csv');
-    LoadDataSetFromCSVFile(TbParalelo, ADirName + '\Paralelo.csv');
-    LoadDataSetFromCSVFile(TbProfesor, ADirName + '\Profesor.csv');
-    LoadDataSetFromCSVFile(TbMateriaProhibicion, ADirName + '\MateriaProhibicion.csv');
-    LoadDataSetFromCSVFile(TbDistributivo, ADirName + '\Distributivo.csv');
-    LoadDataSetFromCSVFile(TbHorarioDetalle, ADirName + '\HorarioDetalle.csv');
-    LoadDataSetFromCSVFile(TbProfesorProhibicionTipo, ADirName + '\ProfesorProhibicionTipo.csv');
-    LoadDataSetFromCSVFile(TbProfesorProhibicion, ADirName + '\ProfesorProhibicion.csv');
-  finally
-    FCheckRelations := True;
-  end;
-end;
-
-procedure TSourceBaseDataModule.SaveToBinaryStream(AStream: TStream; flags:TkbmMemTableSaveFlags);
-begin
-  TbAulaTipo.SaveToBinaryStream(AStream, flags);
-  TbEspecializacion.SaveToBinaryStream(AStream, flags);
-  TbDia.SaveToBinaryStream(AStream, flags);
-  TbMateria.SaveToBinaryStream(AStream, flags);
-  TbNivel.SaveToBinaryStream(AStream, flags);
-  TbHora.SaveToBinaryStream(AStream, flags);
-  TbHorario.SaveToBinaryStream(AStream, flags);
-  TbCurso.SaveToBinaryStream(AStream, flags);
-  TbParaleloId.SaveToBinaryStream(AStream, flags);
-  TbMateriaProhibicionTipo.SaveToBinaryStream(AStream, flags);
-  TbPeriodo.SaveToBinaryStream(AStream, flags);
-  TbParalelo.SaveToBinaryStream(AStream, flags);
-  TbProfesor.SaveToBinaryStream(AStream, flags);
-  TbMateriaProhibicion.SaveToBinaryStream(AStream, flags);
-  TbDistributivo.SaveToBinaryStream(AStream, flags);
-  TbHorarioDetalle.SaveToBinaryStream(AStream, flags);
-  TbProfesorProhibicionTipo.SaveToBinaryStream(AStream, flags);
-  TbProfesorProhibicion.SaveToBinaryStream(AStream, flags);
-end;
-
-procedure TSourceBaseDataModule.SaveToBinaryFile(const AFileName: TFileName; flags:TkbmMemTableSaveFlags);
-var
-  Stream: TStream;
-begin
-  Stream := TFileStream.Create(AFileName, fmCreate);
-  try
-    SaveToBinaryStream(Stream, flags);
-  finally
-    Stream.Free;
-  end;
-end;
-
-procedure TSourceBaseDataModule.SaveToStrings(AStrings: TStrings);
-begin
-  SaveDataSetToStrings(TbAulaTipo, AStrings);
-  SaveDataSetToStrings(TbEspecializacion, AStrings);
-  SaveDataSetToStrings(TbDia, AStrings);
-  SaveDataSetToStrings(TbMateria, AStrings);
-  SaveDataSetToStrings(TbNivel, AStrings);
-  SaveDataSetToStrings(TbHora, AStrings);
-  SaveDataSetToStrings(TbHorario, AStrings);
-  SaveDataSetToStrings(TbCurso, AStrings);
-  SaveDataSetToStrings(TbParaleloId, AStrings);
-  SaveDataSetToStrings(TbMateriaProhibicionTipo, AStrings);
-  SaveDataSetToStrings(TbPeriodo, AStrings);
-  SaveDataSetToStrings(TbParalelo, AStrings);
-  SaveDataSetToStrings(TbProfesor, AStrings);
-  SaveDataSetToStrings(TbMateriaProhibicion, AStrings);
-  SaveDataSetToStrings(TbDistributivo, AStrings);
-  SaveDataSetToStrings(TbHorarioDetalle, AStrings);
-  SaveDataSetToStrings(TbProfesorProhibicionTipo, AStrings);
-  SaveDataSetToStrings(TbProfesorProhibicion, AStrings);
-end;
-
-procedure TSourceBaseDataModule.SaveToTextFile(const AFileName: TFileName);
-var
-  AStrings: TStrings;
-begin
-  AStrings := TStringList.Create;
-  try
-    SaveToStrings(AStrings);
-    AStrings.SaveToFile(AFileName);
-  finally
-    AStrings.Free;
-  end;
-end;
-
-procedure TSourceBaseDataModule.SaveToTextDir(const ADirName: TFileName);
-begin
-  SaveDataSetToCSVFile(TbAulaTipo, ADirName + '\AulaTipo.csv');
-  SaveDataSetToCSVFile(TbEspecializacion, ADirName + '\Especializacion.csv');
-  SaveDataSetToCSVFile(TbDia, ADirName + '\Dia.csv');
-  SaveDataSetToCSVFile(TbMateria, ADirName + '\Materia.csv');
-  SaveDataSetToCSVFile(TbNivel, ADirName + '\Nivel.csv');
-  SaveDataSetToCSVFile(TbHora, ADirName + '\Hora.csv');
-  SaveDataSetToCSVFile(TbHorario, ADirName + '\Horario.csv');
-  SaveDataSetToCSVFile(TbCurso, ADirName + '\Curso.csv');
-  SaveDataSetToCSVFile(TbParaleloId, ADirName + '\ParaleloId.csv');
-  SaveDataSetToCSVFile(TbMateriaProhibicionTipo, ADirName + '\MateriaProhibicionTipo.csv');
-  SaveDataSetToCSVFile(TbPeriodo, ADirName + '\Periodo.csv');
-  SaveDataSetToCSVFile(TbParalelo, ADirName + '\Paralelo.csv');
-  SaveDataSetToCSVFile(TbProfesor, ADirName + '\Profesor.csv');
-  SaveDataSetToCSVFile(TbMateriaProhibicion, ADirName + '\MateriaProhibicion.csv');
-  SaveDataSetToCSVFile(TbDistributivo, ADirName + '\Distributivo.csv');
-  SaveDataSetToCSVFile(TbHorarioDetalle, ADirName + '\HorarioDetalle.csv');
-  SaveDataSetToCSVFile(TbProfesorProhibicionTipo, ADirName + '\ProfesorProhibicionTipo.csv');
-  SaveDataSetToCSVFile(TbProfesorProhibicion, ADirName + '\ProfesorProhibicion.csv');
-end;
-
-procedure TSourceBaseDataModule.EmptyTables;
-begin
-  TbAulaTipo.EmptyTable;
-  TbEspecializacion.EmptyTable;
-  TbDia.EmptyTable;
-  TbMateria.EmptyTable;
-  TbNivel.EmptyTable;
-  TbHora.EmptyTable;
-  TbHorario.EmptyTable;
-  TbCurso.EmptyTable;
-  TbParaleloId.EmptyTable;
-  TbMateriaProhibicionTipo.EmptyTable;
-  TbPeriodo.EmptyTable;
-  TbParalelo.EmptyTable;
-  TbProfesor.EmptyTable;
-  TbMateriaProhibicion.EmptyTable;
-  TbDistributivo.EmptyTable;
-  TbHorarioDetalle.EmptyTable;
-  TbProfesorProhibicionTipo.EmptyTable;
-  TbProfesorProhibicion.EmptyTable;
-end;
-
-procedure TSourceBaseDataModule.OpenTables;
-begin
-  TbAulaTipo.Open;
-  TbEspecializacion.Open;
-  TbDia.Open;
-  TbMateria.Open;
-  TbNivel.Open;
-  TbHora.Open;
-  TbHorario.Open;
-  TbCurso.Open;
-  TbParaleloId.Open;
-  TbMateriaProhibicionTipo.Open;
-  TbPeriodo.Open;
-  TbParalelo.Open;
-  TbProfesor.Open;
-  TbMateriaProhibicion.Open;
-  TbDistributivo.Open;
-  TbHorarioDetalle.Open;
-  TbProfesorProhibicionTipo.Open;
-  TbProfesorProhibicion.Open;
-end;
-
-procedure TSourceBaseDataModule.CloseTables;
-begin
-  TbAulaTipo.Close;
-  TbEspecializacion.Close;
-  TbDia.Close;
-  TbMateria.Close;
-  TbNivel.Close;
-  TbHora.Close;
-  TbHorario.Close;
-  TbCurso.Close;
-  TbParaleloId.Close;
-  TbMateriaProhibicionTipo.Close;
-  TbPeriodo.Close;
-  TbParalelo.Close;
-  TbProfesor.Close;
-  TbMateriaProhibicion.Close;
-  TbDistributivo.Close;
-  TbHorarioDetalle.Close;
-  TbProfesorProhibicionTipo.Close;
-  TbProfesorProhibicion.Close;
-end;
-
 end.
-

@@ -31,7 +31,8 @@ type
   private
     { Private declarations }
     FFlags : TkbmMemTableSaveFlags;
-    procedure SaveToStream(AStream: TStream);
+    // procedure SaveToFile(const AFileName: TFileName);
+    // procedure SaveToStream(AStream: TStream);
     procedure SaveUnCompToStream(AStream: TStream);
     procedure LoadFromStream(AStream: TStream);
     procedure LoadUnCompFromStream(AStream: TStream);
@@ -41,8 +42,6 @@ type
     { Public declarations }
     procedure SaveToStrings(AStrings: TStrings); override;
     procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer); override;
-    procedure SaveToFile(const AFileName: TFileName);
-    procedure SaveToTextFile(const AFileName: TFileName);
     procedure SaveToTextDir(const ADirName: TFileName); override;
     procedure LoadFromFile(const AFileName: TFileName);
     procedure NewDatabase;
@@ -113,6 +112,7 @@ begin
   end
 end;
 
+(*
 procedure TSourceDataModule.SaveToStream(AStream: TStream);
 var
   Stream, BZip2Stream: TStream;
@@ -135,6 +135,7 @@ begin
     Stream.Free;
   end;
 end;
+*)
 
 procedure TSourceDataModule.SaveUnCompToStream(AStream: TStream);
 var
@@ -152,32 +153,6 @@ begin
     StreamConfig.Free;
   end;
 end;
-
-procedure TSourceDataModule.SaveToFile(const AFileName: TFileName);
-var
-  Stream: TStream;
-begin
-  Stream := TFileStream.Create(AFileName, fmCreate);
-  try
-    SaveToStream(Stream);
-  finally
-    Stream.Free;
-  end;
-end;
-
-procedure TSourceDataModule.SaveToTextFile(const AFileName: TFileName);
-var
-  Strings: TStrings;
-begin
-  Strings := TStringList.Create;
-  try
-    SaveToStrings(Strings);
-    Strings.SaveToFile(AFileName);
-  finally
-    Strings.Free;
-  end;
-end;
-
 
 procedure TSourceDataModule.NewDatabase;
 begin
@@ -436,7 +411,7 @@ procedure TSourceDataModule.LoadFromStrings(AStrings: TStrings; var APosition: I
 begin
   // version stored in AStrings.Strings[APosition];
   Inc(APosition);
-  inherited LoadFromStrings(AStrings, APosition);
+  inherited;
   LoadIniStrings(AStrings, APosition);
 end;
 
@@ -446,6 +421,20 @@ begin
   ConfiguracionForm.FormStorage.SaveFormPlacement;
   inherited;
 end;
+
+(*
+procedure TSourceDataModule.SaveToFile(const AFileName: TFileName);
+var
+  Stream: TStream;
+begin
+  Stream := TFileStream.Create(AFileName, fmCreate);
+  try
+    SaveToStream(Stream);
+  finally
+    Stream.Free;
+  end;
+end;
+*)
 
 end.
 
