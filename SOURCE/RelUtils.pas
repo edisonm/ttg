@@ -449,7 +449,7 @@ procedure LoadDataSetFromStrings0(ADataSet: TDataSet; AStrings: TStrings;
   var Position: Integer; RecordCount: Integer);
 var
   s, v: string;
-  i, j, l, Pos, Limit: Integer;
+  j, l, Pos, Limit: Integer;
   Fields: array of TField;
   Field: TField;
 begin

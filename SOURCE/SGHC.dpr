@@ -1,4 +1,4 @@
-program HorColeg;
+program SGHC;
 {$IMAGEBASE $00400000}
 uses
   Forms,
