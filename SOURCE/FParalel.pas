@@ -11,7 +11,6 @@ uses
 type
   TParaleloForm = class(TSingleEditorForm)
     DBCheckListBox: TDBCheckListBox;
-    Splitter: TRxSplitter;
     DataSourceList: TDataSource;
     DataSourceDetail: TDataSource;
     TbParalelo: TkbmMemTable;

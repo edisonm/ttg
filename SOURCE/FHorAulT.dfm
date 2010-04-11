@@ -624,7 +624,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'NomMateria'
-      LookupDataSet = SourceDataModule.kbmMateria
+      LookupDataSet = SourceDataModule.TbMateria
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
@@ -636,7 +636,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       DisplayWidth = 5
       FieldKind = fkLookup
       FieldName = 'AbrNivel'
-      LookupDataSet = SourceDataModule.kbmNivel
+      LookupDataSet = SourceDataModule.TbNivel
       LookupKeyFields = 'CodNivel'
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
@@ -648,7 +648,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'AbrEspecializacion'
-      LookupDataSet = SourceDataModule.kbmEspecializacion
+      LookupDataSet = SourceDataModule.TbEspecializacion
       LookupKeyFields = 'CodEspecializacion'
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
@@ -659,7 +659,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
-      LookupDataSet = SourceDataModule.kbmParaleloId
+      LookupDataSet = SourceDataModule.TbParaleloId
       LookupKeyFields = 'CodParaleloId'
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'

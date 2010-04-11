@@ -60,7 +60,7 @@ inherited SingleEditorForm: TSingleEditorForm
     object DBGrid: TRxDBGrid
       Left = 1
       Top = 1
-      Width = 497
+      Width = 500
       Height = 253
       Align = alClient
       DataSource = DataSource
@@ -77,14 +77,6 @@ inherited SingleEditorForm: TSingleEditorForm
       OnCheckButton = DBGridCheckButton
       OnGetBtnParams = DBGridGetBtnParams
       OnTitleBtnClick = DBGridTitleBtnClick
-    end
-    object Splitter1: TRxSplitter
-      Left = 498
-      Top = 1
-      Width = 3
-      Height = 253
-      ControlFirst = DBGrid
-      Align = alRight
     end
   end
   inherited ImageList: TImageList

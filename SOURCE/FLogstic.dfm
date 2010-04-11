@@ -23,6 +23,14 @@ object LogisticForm: TLogisticForm
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 0
+    object Splitter1: TSplitter
+      Left = 1
+      Top = 269
+      Width = 432
+      Height = 3
+      Cursor = crVSplit
+      Align = alBottom
+    end
     object memLogistic: TMemo
       Left = 1
       Top = 1
@@ -51,15 +59,6 @@ object LogisticForm: TLogisticForm
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-    end
-    object Splitter1: TRxSplitter
-      Left = 1
-      Top = 269
-      Width = 432
-      Height = 3
-      ControlFirst = memLogistic
-      ControlSecond = memResumen
-      Align = alBottom
     end
   end
   object Panel2: TPanel

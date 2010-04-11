@@ -17,13 +17,17 @@ inherited ParaleloForm: TParaleloForm
   end
   inherited Panel1: TPanel
     inherited DBGrid: TRxDBGrid
-      Width = 346
+      Width = 349
       Hint = 'Cursos|Cursos disponibles'
       ParentShowHint = False
       ShowHint = True
     end
-    inherited Splitter1: TRxSplitter
+    object Splitter1: TRxSplitter
       Left = 350
+      Top = 1
+      Width = 3
+      Height = 253
+      Align = alRight
     end
     object DBCheckListBox: TDBCheckListBox
       Left = 353
@@ -42,14 +46,6 @@ inherited ParaleloForm: TParaleloForm
       ListSource = DataSourceList
       ListField = 'NomParaleloId'
       KeyField = 'CodParaleloId'
-    end
-    object Splitter: TRxSplitter
-      Left = 347
-      Top = 1
-      Width = 3
-      Height = 253
-      ControlFirst = DBCheckListBox
-      Align = alRight
     end
   end
   inherited FormStorage: TFormStorage

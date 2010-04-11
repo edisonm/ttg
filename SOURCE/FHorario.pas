@@ -143,6 +143,7 @@ type
     QuMateriaCortadaHoraDetalleNomHora: TStringField;
     QuMateriaCortadaHoraDetalleNomMateria: TStringField;
     QuMateriaCortadaHoraDetalleCodHora: TIntegerField;
+    Splitter1: TSplitter;
     procedure btn97HorarioParaleloClick(Sender: TObject);
     procedure btn97CruceProfesorClick(Sender: TObject);
     procedure btn97CruceMateriaClick(Sender: TObject);

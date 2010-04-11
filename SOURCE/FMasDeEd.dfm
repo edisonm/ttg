@@ -1,6 +1,6 @@
 inherited MasterDetailEditorForm: TMasterDetailEditorForm
-  Left = 60
-  Top = 209
+  Left = 411
+  Top = 234
   PixelsPerInch = 96
   TextHeight = 13
   inherited tb97Show: TToolBar
@@ -21,9 +21,6 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
       Height = 154
       TabOrder = 1
       OnEnter = DBGridEnter
-    end
-    inherited Splitter1: TRxSplitter
-      Height = 154
     end
     object DBGridDetail: TRxDBGrid
       Left = 1

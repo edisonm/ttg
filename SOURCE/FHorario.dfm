@@ -1,6 +1,6 @@
 inherited HorarioForm: THorarioForm
-  Left = 297
-  Top = 299
+  Left = 335
+  Top = 196
   Width = 626
   Height = 361
   Caption = 'HorarioForm'
@@ -126,6 +126,14 @@ inherited HorarioForm: THorarioForm
   inherited Panel1: TPanel
     Width = 618
     Height = 290
+    object Splitter1: TSplitter [0]
+      Left = 311
+      Top = 1
+      Width = 3
+      Height = 288
+      Cursor = crHSplit
+      Align = alRight
+    end
     inherited DBGrid: TRxDBGrid
       Width = 310
       Height = 288
@@ -156,11 +164,6 @@ inherited HorarioForm: THorarioForm
           Visible = True
         end>
     end
-    inherited Splitter1: TRxSplitter
-      Left = 311
-      Height = 288
-      ControlSecond = Panel2
-    end
     object Panel2: TPanel
       Left = 314
       Top = 1
@@ -168,7 +171,7 @@ inherited HorarioForm: THorarioForm
       Height = 288
       Align = alRight
       BevelOuter = bvNone
-      TabOrder = 2
+      TabOrder = 1
       object dbmInforme: TDBMemo
         Left = 0
         Top = 0
