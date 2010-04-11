@@ -46,9 +46,9 @@ type
     creProbReparacion: TCurrencyEdit;
     Label12: TLabel;
     Label15: TLabel;
-    RxDBGrid1: TRxDBGrid;
+    DBGrid1: TRxDBGrid;
     Label18: TLabel;
-    RxDBGrid2: TRxDBGrid;
+    DBGrid2: TRxDBGrid;
     tbsOpciones: TTabSheet;
     CBRandomize: TCheckBox;
     Label19: TLabel;
@@ -105,7 +105,7 @@ type
     Label43: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure RxDBGridGetCellParams(Sender: TObject; Field: TField;
+    procedure DBGridGetCellParams(Sender: TObject; Field: TField;
       AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure CBRandomizeClick(Sender: TObject);
     procedure edtNomColegioChange(Sender: TObject);

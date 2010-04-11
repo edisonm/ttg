@@ -47,11 +47,11 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
     Width = 501
     Height = 205
   end
-  inherited RxDrawGrid: TRxDrawGrid
+  inherited DrawGrid: TRxDrawGrid
     Width = 501
     Height = 205
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goColSizing]
-    OnKeyUp = RxDrawGridKeyUp
-    OnMouseUp = RxDrawGridMouseUp
+    OnKeyUp = DrawGridKeyUp
+    OnMouseUp = DrawGridMouseUp
   end
 end

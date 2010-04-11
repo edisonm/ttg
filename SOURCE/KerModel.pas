@@ -3167,20 +3167,20 @@ var
   Stream: TStream;
   procedure SaveHorario;
   begin
-    with SourceDataModule, kbmHorario do
+    with SourceDataModule, TbHorario do
     begin
       DisableControls;
       try
         IndexFieldNames := 'CodHorario';
         Append;
-        kbmHorarioCodHorario.AsInteger := CodHorario;
-        kbmHorarioMomentoInicial.AsDateTime := MomentoInicial;
-        kbmHorarioMomentoFinal.AsDateTime := MomentoFinal;
+        TbHorarioCodHorario.AsInteger := CodHorario;
+        TbHorarioMomentoInicial.AsDateTime := MomentoInicial;
+        TbHorarioMomentoFinal.AsDateTime := MomentoFinal;
         Stream := TMemoryStream.Create;
         try
           Informe.SaveToStream(Stream);
           Stream.Position := 0;
-          TBlobField(kbmHorarioInforme).LoadFromStream(Stream);
+          TBlobField(TbHorarioInforme).LoadFromStream(Stream);
         finally
           Stream.Free;
         end;
@@ -3196,7 +3196,7 @@ var
       FieldHora, FieldMateria, FieldSesion: TIntegerField;
     i, j, k, l, m, s: Integer;
   begin
-    with ModeloHorario, SourceDataModule.kbmHorarioDetalle do
+    with ModeloHorario, SourceDataModule.TbHorarioDetalle do
     begin
       DisableControls;
       try
@@ -3289,9 +3289,9 @@ var
     FieldHora, FieldSesion: TIntegerField;
   i, j: Smallint;
 begin
-  with SourceDataModule, ModeloHorario, kbmHorarioDetalle do
+  with SourceDataModule, ModeloHorario, TbHorarioDetalle do
   begin
-    kbmHorario.Locate('CodHorario', CodHorario, []);
+    TbHorario.Locate('CodHorario', CodHorario, []);
     IndexFieldNames := 'CodHorario';
     MasterFields := 'CodHorario';
     MasterSource := dsHorario;

@@ -17,141 +17,141 @@ uses
 
 type
   TSourceBaseDataModule = class(TDataModule)
-    kbmAulaTipo: TkbmMemTable;
-    kbmAulaTipoCodAulaTipo:TAutoIncField;
-    kbmAulaTipoNomAulaTipo:TStringField;
-    kbmAulaTipoAbrAulaTipo:TStringField;
-    kbmAulaTipoCantidad:TIntegerField;
+    TbAulaTipo: TkbmMemTable;
+    TbAulaTipoCodAulaTipo:TAutoIncField;
+    TbAulaTipoNomAulaTipo:TStringField;
+    TbAulaTipoAbrAulaTipo:TStringField;
+    TbAulaTipoCantidad:TIntegerField;
     dsAulaTipo: TDataSource;
-    kbmEspecializacion: TkbmMemTable;
-    kbmEspecializacionCodEspecializacion:TAutoIncField;
-    kbmEspecializacionNomEspecializacion:TStringField;
-    kbmEspecializacionAbrEspecializacion:TStringField;
+    TbEspecializacion: TkbmMemTable;
+    TbEspecializacionCodEspecializacion:TAutoIncField;
+    TbEspecializacionNomEspecializacion:TStringField;
+    TbEspecializacionAbrEspecializacion:TStringField;
     dsEspecializacion: TDataSource;
-    kbmDia: TkbmMemTable;
-    kbmDiaCodDia:TAutoIncField;
-    kbmDiaNomDia:TStringField;
+    TbDia: TkbmMemTable;
+    TbDiaCodDia:TAutoIncField;
+    TbDiaNomDia:TStringField;
     dsDia: TDataSource;
-    kbmMateria: TkbmMemTable;
-    kbmMateriaCodMateria:TAutoIncField;
-    kbmMateriaNomMateria:TStringField;
+    TbMateria: TkbmMemTable;
+    TbMateriaCodMateria:TAutoIncField;
+    TbMateriaNomMateria:TStringField;
     dsMateria: TDataSource;
-    kbmNivel: TkbmMemTable;
-    kbmNivelCodNivel:TAutoIncField;
-    kbmNivelNomNivel:TStringField;
-    kbmNivelAbrNivel:TStringField;
+    TbNivel: TkbmMemTable;
+    TbNivelCodNivel:TAutoIncField;
+    TbNivelNomNivel:TStringField;
+    TbNivelAbrNivel:TStringField;
     dsNivel: TDataSource;
-    kbmHora: TkbmMemTable;
-    kbmHoraCodHora:TAutoIncField;
-    kbmHoraNomHora:TStringField;
-    kbmHoraIntervalo:TStringField;
+    TbHora: TkbmMemTable;
+    TbHoraCodHora:TAutoIncField;
+    TbHoraNomHora:TStringField;
+    TbHoraIntervalo:TStringField;
     dsHora: TDataSource;
-    kbmHorario: TkbmMemTable;
-    kbmHorarioCodHorario:TAutoIncField;
-    kbmHorarioMomentoInicial:TDateTimeField;
-    kbmHorarioMomentoFinal:TDateTimeField;
-    kbmHorarioInforme:TMemoField;
+    TbHorario: TkbmMemTable;
+    TbHorarioCodHorario:TAutoIncField;
+    TbHorarioMomentoInicial:TDateTimeField;
+    TbHorarioMomentoFinal:TDateTimeField;
+    TbHorarioInforme:TMemoField;
     dsHorario: TDataSource;
-    kbmCurso: TkbmMemTable;
-    kbmCursoCodNivel:TIntegerField;
-    kbmCursoCodEspecializacion:TIntegerField;
+    TbCurso: TkbmMemTable;
+    TbCursoCodNivel:TIntegerField;
+    TbCursoCodEspecializacion:TIntegerField;
     dsCurso: TDataSource;
-    kbmParaleloId: TkbmMemTable;
-    kbmParaleloIdCodParaleloId:TAutoIncField;
-    kbmParaleloIdNomParaleloId:TStringField;
+    TbParaleloId: TkbmMemTable;
+    TbParaleloIdCodParaleloId:TAutoIncField;
+    TbParaleloIdNomParaleloId:TStringField;
     dsParaleloId: TDataSource;
-    kbmMateriaProhibicionTipo: TkbmMemTable;
-    kbmMateriaProhibicionTipoCodMateProhibicionTipo:TIntegerField;
-    kbmMateriaProhibicionTipoNomMateProhibicionTipo:TStringField;
-    kbmMateriaProhibicionTipoColMateProhibicionTipo:TIntegerField;
-    kbmMateriaProhibicionTipoValMateProhibicionTipo:TFloatField;
+    TbMateriaProhibicionTipo: TkbmMemTable;
+    TbMateriaProhibicionTipoCodMateProhibicionTipo:TIntegerField;
+    TbMateriaProhibicionTipoNomMateProhibicionTipo:TStringField;
+    TbMateriaProhibicionTipoColMateProhibicionTipo:TIntegerField;
+    TbMateriaProhibicionTipoValMateProhibicionTipo:TFloatField;
     dsMateriaProhibicionTipo: TDataSource;
-    kbmPeriodo: TkbmMemTable;
-    kbmPeriodoCodDia:TIntegerField;
-    kbmPeriodoCodHora:TIntegerField;
+    TbPeriodo: TkbmMemTable;
+    TbPeriodoCodDia:TIntegerField;
+    TbPeriodoCodHora:TIntegerField;
     dsPeriodo: TDataSource;
-    kbmParalelo: TkbmMemTable;
-    kbmParaleloCodNivel:TIntegerField;
-    kbmParaleloCodEspecializacion:TIntegerField;
-    kbmParaleloCodParaleloId:TIntegerField;
+    TbParalelo: TkbmMemTable;
+    TbParaleloCodNivel:TIntegerField;
+    TbParaleloCodEspecializacion:TIntegerField;
+    TbParaleloCodParaleloId:TIntegerField;
     dsParalelo: TDataSource;
-    kbmProfesor: TkbmMemTable;
-    kbmProfesorCodProfesor:TAutoIncField;
-    kbmProfesorCedProfesor:TStringField;
-    kbmProfesorApeProfesor:TStringField;
-    kbmProfesorNomProfesor:TStringField;
+    TbProfesor: TkbmMemTable;
+    TbProfesorCodProfesor:TAutoIncField;
+    TbProfesorCedProfesor:TStringField;
+    TbProfesorApeProfesor:TStringField;
+    TbProfesorNomProfesor:TStringField;
     dsProfesor: TDataSource;
-    kbmMateriaProhibicion: TkbmMemTable;
-    kbmMateriaProhibicionCodMateria:TIntegerField;
-    kbmMateriaProhibicionCodDia:TIntegerField;
-    kbmMateriaProhibicionCodHora:TIntegerField;
-    kbmMateriaProhibicionCodMateProhibicionTipo:TIntegerField;
+    TbMateriaProhibicion: TkbmMemTable;
+    TbMateriaProhibicionCodMateria:TIntegerField;
+    TbMateriaProhibicionCodDia:TIntegerField;
+    TbMateriaProhibicionCodHora:TIntegerField;
+    TbMateriaProhibicionCodMateProhibicionTipo:TIntegerField;
     dsMateriaProhibicion: TDataSource;
-    kbmDistributivo: TkbmMemTable;
-    kbmDistributivoCodMateria:TIntegerField;
-    kbmDistributivoCodNivel:TIntegerField;
-    kbmDistributivoCodEspecializacion:TIntegerField;
-    kbmDistributivoCodParaleloId:TIntegerField;
-    kbmDistributivoCodProfesor:TIntegerField;
-    kbmDistributivoCodAulaTipo:TIntegerField;
-    kbmDistributivoComposicion:TStringField;
+    TbDistributivo: TkbmMemTable;
+    TbDistributivoCodMateria:TIntegerField;
+    TbDistributivoCodNivel:TIntegerField;
+    TbDistributivoCodEspecializacion:TIntegerField;
+    TbDistributivoCodParaleloId:TIntegerField;
+    TbDistributivoCodProfesor:TIntegerField;
+    TbDistributivoCodAulaTipo:TIntegerField;
+    TbDistributivoComposicion:TStringField;
     dsDistributivo: TDataSource;
-    kbmHorarioDetalle: TkbmMemTable;
-    kbmHorarioDetalleCodHorario:TIntegerField;
-    kbmHorarioDetalleCodMateria:TIntegerField;
-    kbmHorarioDetalleCodNivel:TIntegerField;
-    kbmHorarioDetalleCodEspecializacion:TIntegerField;
-    kbmHorarioDetalleCodParaleloId:TIntegerField;
-    kbmHorarioDetalleCodDia:TIntegerField;
-    kbmHorarioDetalleCodHora:TIntegerField;
-    kbmHorarioDetalleSesion:TIntegerField;
+    TbHorarioDetalle: TkbmMemTable;
+    TbHorarioDetalleCodHorario:TIntegerField;
+    TbHorarioDetalleCodMateria:TIntegerField;
+    TbHorarioDetalleCodNivel:TIntegerField;
+    TbHorarioDetalleCodEspecializacion:TIntegerField;
+    TbHorarioDetalleCodParaleloId:TIntegerField;
+    TbHorarioDetalleCodDia:TIntegerField;
+    TbHorarioDetalleCodHora:TIntegerField;
+    TbHorarioDetalleSesion:TIntegerField;
     dsHorarioDetalle: TDataSource;
-    kbmProfesorProhibicionTipo: TkbmMemTable;
-    kbmProfesorProhibicionTipoCodProfProhibicionTipo:TAutoIncField;
-    kbmProfesorProhibicionTipoNomProfProhibicionTipo:TStringField;
-    kbmProfesorProhibicionTipoColProfProhibicionTipo:TIntegerField;
-    kbmProfesorProhibicionTipoValProfProhibicionTipo:TFloatField;
+    TbProfesorProhibicionTipo: TkbmMemTable;
+    TbProfesorProhibicionTipoCodProfProhibicionTipo:TAutoIncField;
+    TbProfesorProhibicionTipoNomProfProhibicionTipo:TStringField;
+    TbProfesorProhibicionTipoColProfProhibicionTipo:TIntegerField;
+    TbProfesorProhibicionTipoValProfProhibicionTipo:TFloatField;
     dsProfesorProhibicionTipo: TDataSource;
-    kbmProfesorProhibicion: TkbmMemTable;
-    kbmProfesorProhibicionCodProfesor:TIntegerField;
-    kbmProfesorProhibicionCodDia:TIntegerField;
-    kbmProfesorProhibicionCodHora:TIntegerField;
-    kbmProfesorProhibicionCodProfProhibicionTipo:TIntegerField;
+    TbProfesorProhibicion: TkbmMemTable;
+    TbProfesorProhibicionCodProfesor:TIntegerField;
+    TbProfesorProhibicionCodDia:TIntegerField;
+    TbProfesorProhibicionCodHora:TIntegerField;
+    TbProfesorProhibicionCodProfProhibicionTipo:TIntegerField;
     dsProfesorProhibicion: TDataSource;
 
-    procedure kbmAulaTipoBeforePost(DataSet: TDataSet);
-    procedure kbmAulaTipoBeforeDelete(DataSet: TDataSet);
-    procedure kbmEspecializacionBeforePost(DataSet: TDataSet);
-    procedure kbmEspecializacionBeforeDelete(DataSet: TDataSet);
-    procedure kbmDiaBeforePost(DataSet: TDataSet);
-    procedure kbmDiaBeforeDelete(DataSet: TDataSet);
-    procedure kbmMateriaBeforePost(DataSet: TDataSet);
-    procedure kbmMateriaBeforeDelete(DataSet: TDataSet);
-    procedure kbmNivelBeforePost(DataSet: TDataSet);
-    procedure kbmNivelBeforeDelete(DataSet: TDataSet);
-    procedure kbmHoraBeforePost(DataSet: TDataSet);
-    procedure kbmHoraBeforeDelete(DataSet: TDataSet);
-    procedure kbmHorarioBeforePost(DataSet: TDataSet);
-    procedure kbmHorarioBeforeDelete(DataSet: TDataSet);
-    procedure kbmCursoBeforePost(DataSet: TDataSet);
-    procedure kbmCursoBeforeDelete(DataSet: TDataSet);
-    procedure kbmParaleloIdBeforePost(DataSet: TDataSet);
-    procedure kbmParaleloIdBeforeDelete(DataSet: TDataSet);
-    procedure kbmMateriaProhibicionTipoBeforePost(DataSet: TDataSet);
-    procedure kbmMateriaProhibicionTipoBeforeDelete(DataSet: TDataSet);
-    procedure kbmPeriodoBeforePost(DataSet: TDataSet);
-    procedure kbmPeriodoBeforeDelete(DataSet: TDataSet);
-    procedure kbmParaleloBeforePost(DataSet: TDataSet);
-    procedure kbmParaleloBeforeDelete(DataSet: TDataSet);
-    procedure kbmProfesorBeforePost(DataSet: TDataSet);
-    procedure kbmProfesorBeforeDelete(DataSet: TDataSet);
-    procedure kbmMateriaProhibicionBeforePost(DataSet: TDataSet);
-    procedure kbmDistributivoBeforePost(DataSet: TDataSet);
-    procedure kbmDistributivoBeforeDelete(DataSet: TDataSet);
-    procedure kbmHorarioDetalleBeforePost(DataSet: TDataSet);
-    procedure kbmProfesorProhibicionTipoBeforePost(DataSet: TDataSet);
-    procedure kbmProfesorProhibicionTipoBeforeDelete(DataSet: TDataSet);
-    procedure kbmProfesorProhibicionBeforePost(DataSet: TDataSet);
+    procedure TbAulaTipoBeforePost(DataSet: TDataSet);
+    procedure TbAulaTipoBeforeDelete(DataSet: TDataSet);
+    procedure TbEspecializacionBeforePost(DataSet: TDataSet);
+    procedure TbEspecializacionBeforeDelete(DataSet: TDataSet);
+    procedure TbDiaBeforePost(DataSet: TDataSet);
+    procedure TbDiaBeforeDelete(DataSet: TDataSet);
+    procedure TbMateriaBeforePost(DataSet: TDataSet);
+    procedure TbMateriaBeforeDelete(DataSet: TDataSet);
+    procedure TbNivelBeforePost(DataSet: TDataSet);
+    procedure TbNivelBeforeDelete(DataSet: TDataSet);
+    procedure TbHoraBeforePost(DataSet: TDataSet);
+    procedure TbHoraBeforeDelete(DataSet: TDataSet);
+    procedure TbHorarioBeforePost(DataSet: TDataSet);
+    procedure TbHorarioBeforeDelete(DataSet: TDataSet);
+    procedure TbCursoBeforePost(DataSet: TDataSet);
+    procedure TbCursoBeforeDelete(DataSet: TDataSet);
+    procedure TbParaleloIdBeforePost(DataSet: TDataSet);
+    procedure TbParaleloIdBeforeDelete(DataSet: TDataSet);
+    procedure TbMateriaProhibicionTipoBeforePost(DataSet: TDataSet);
+    procedure TbMateriaProhibicionTipoBeforeDelete(DataSet: TDataSet);
+    procedure TbPeriodoBeforePost(DataSet: TDataSet);
+    procedure TbPeriodoBeforeDelete(DataSet: TDataSet);
+    procedure TbParaleloBeforePost(DataSet: TDataSet);
+    procedure TbParaleloBeforeDelete(DataSet: TDataSet);
+    procedure TbProfesorBeforePost(DataSet: TDataSet);
+    procedure TbProfesorBeforeDelete(DataSet: TDataSet);
+    procedure TbMateriaProhibicionBeforePost(DataSet: TDataSet);
+    procedure TbDistributivoBeforePost(DataSet: TDataSet);
+    procedure TbDistributivoBeforeDelete(DataSet: TDataSet);
+    procedure TbHorarioDetalleBeforePost(DataSet: TDataSet);
+    procedure TbProfesorProhibicionTipoBeforePost(DataSet: TDataSet);
+    procedure TbProfesorProhibicionTipoBeforeDelete(DataSet: TDataSet);
+    procedure TbProfesorProhibicionBeforePost(DataSet: TDataSet);
 
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
@@ -191,7 +191,7 @@ implementation
 
 uses RelUtils;
 
-procedure TSourceBaseDataModule.kbmAulaTipoBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbAulaTipoBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[0] then
   begin
@@ -199,7 +199,7 @@ begin
     try
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmDistributivo, 'CodAulaTipo', 'CodAulaTipo', False);
+        CheckMasterRelationUpdate(DataSet, TbDistributivo, 'CodAulaTipo', 'CodAulaTipo', False);
       end;
     finally
       FBeforePostLocks[0] := False
@@ -207,15 +207,15 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmAulaTipoBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbAulaTipoBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmDistributivo, 'CodAulaTipo', 'CodAulaTipo', False);
+    CheckMasterRelationDelete(DataSet, TbDistributivo, 'CodAulaTipo', 'CodAulaTipo', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmEspecializacionBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbEspecializacionBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[1] then
   begin
@@ -223,7 +223,7 @@ begin
     try
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmCurso, 'CodEspecializacion', 'CodEspecializacion', False);
+        CheckMasterRelationUpdate(DataSet, TbCurso, 'CodEspecializacion', 'CodEspecializacion', False);
       end;
     finally
       FBeforePostLocks[1] := False
@@ -231,15 +231,15 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmEspecializacionBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbEspecializacionBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmCurso, 'CodEspecializacion', 'CodEspecializacion', False);
+    CheckMasterRelationDelete(DataSet, TbCurso, 'CodEspecializacion', 'CodEspecializacion', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmDiaBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbDiaBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[2] then
   begin
@@ -247,7 +247,7 @@ begin
     try
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmPeriodo, 'CodDia', 'CodDia', False);
+        CheckMasterRelationUpdate(DataSet, TbPeriodo, 'CodDia', 'CodDia', False);
       end;
     finally
       FBeforePostLocks[2] := False
@@ -255,15 +255,15 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmDiaBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbDiaBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmPeriodo, 'CodDia', 'CodDia', False);
+    CheckMasterRelationDelete(DataSet, TbPeriodo, 'CodDia', 'CodDia', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmMateriaBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbMateriaBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[3] then
   begin
@@ -271,8 +271,8 @@ begin
     try
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmDistributivo, 'CodMateria', 'CodMateria', False);
-        CheckMasterRelationUpdate(DataSet, kbmMateriaProhibicion, 'CodMateria', 'CodMateria', False);
+        CheckMasterRelationUpdate(DataSet, TbDistributivo, 'CodMateria', 'CodMateria', False);
+        CheckMasterRelationUpdate(DataSet, TbMateriaProhibicion, 'CodMateria', 'CodMateria', False);
       end;
     finally
       FBeforePostLocks[3] := False
@@ -280,16 +280,16 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmMateriaBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbMateriaBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmDistributivo, 'CodMateria', 'CodMateria', False);
-    CheckMasterRelationDelete(DataSet, kbmMateriaProhibicion, 'CodMateria', 'CodMateria', False);
+    CheckMasterRelationDelete(DataSet, TbDistributivo, 'CodMateria', 'CodMateria', False);
+    CheckMasterRelationDelete(DataSet, TbMateriaProhibicion, 'CodMateria', 'CodMateria', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmNivelBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbNivelBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[4] then
   begin
@@ -297,7 +297,7 @@ begin
     try
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmCurso, 'CodNivel', 'CodNivel', False);
+        CheckMasterRelationUpdate(DataSet, TbCurso, 'CodNivel', 'CodNivel', False);
       end;
     finally
       FBeforePostLocks[4] := False
@@ -305,15 +305,15 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmNivelBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbNivelBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmCurso, 'CodNivel', 'CodNivel', False);
+    CheckMasterRelationDelete(DataSet, TbCurso, 'CodNivel', 'CodNivel', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmHoraBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbHoraBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[5] then
   begin
@@ -321,7 +321,7 @@ begin
     try
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmPeriodo, 'CodHora', 'CodHora', False);
+        CheckMasterRelationUpdate(DataSet, TbPeriodo, 'CodHora', 'CodHora', False);
       end;
     finally
       FBeforePostLocks[5] := False
@@ -329,15 +329,15 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmHoraBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbHoraBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmPeriodo, 'CodHora', 'CodHora', False);
+    CheckMasterRelationDelete(DataSet, TbPeriodo, 'CodHora', 'CodHora', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmHorarioBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbHorarioBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[6] then
   begin
@@ -345,7 +345,7 @@ begin
     try
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmHorarioDetalle, 'CodHorario', 'CodHorario', True);
+        CheckMasterRelationUpdate(DataSet, TbHorarioDetalle, 'CodHorario', 'CodHorario', True);
       end;
     finally
       FBeforePostLocks[6] := False
@@ -353,25 +353,25 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmHorarioBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbHorarioBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmHorarioDetalle, 'CodHorario', 'CodHorario', True);
+    CheckMasterRelationDelete(DataSet, TbHorarioDetalle, 'CodHorario', 'CodHorario', True);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmCursoBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbCursoBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[7] then
   begin
     FBeforePostLocks[7] := True;
     try
-      CheckDetailRelation(kbmEspecializacion, DataSet, 'CodEspecializacion', 'CodEspecializacion');
-      CheckDetailRelation(kbmNivel, DataSet, 'CodNivel', 'CodNivel');
+      CheckDetailRelation(TbEspecializacion, DataSet, 'CodEspecializacion', 'CodEspecializacion');
+      CheckDetailRelation(TbNivel, DataSet, 'CodNivel', 'CodNivel');
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmParalelo, 'CodNivel;CodEspecializacion', 'CodNivel;CodEspecializacion', False);
+        CheckMasterRelationUpdate(DataSet, TbParalelo, 'CodNivel;CodEspecializacion', 'CodNivel;CodEspecializacion', False);
       end;
     finally
       FBeforePostLocks[7] := False
@@ -379,15 +379,15 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmCursoBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbCursoBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmParalelo, 'CodNivel;CodEspecializacion', 'CodNivel;CodEspecializacion', False);
+    CheckMasterRelationDelete(DataSet, TbParalelo, 'CodNivel;CodEspecializacion', 'CodNivel;CodEspecializacion', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmParaleloIdBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbParaleloIdBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[8] then
   begin
@@ -395,7 +395,7 @@ begin
     try
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmParalelo, 'CodParaleloId', 'CodParaleloId', False);
+        CheckMasterRelationUpdate(DataSet, TbParalelo, 'CodParaleloId', 'CodParaleloId', False);
       end;
     finally
       FBeforePostLocks[8] := False
@@ -403,15 +403,15 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmParaleloIdBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbParaleloIdBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmParalelo, 'CodParaleloId', 'CodParaleloId', False);
+    CheckMasterRelationDelete(DataSet, TbParalelo, 'CodParaleloId', 'CodParaleloId', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmMateriaProhibicionTipoBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbMateriaProhibicionTipoBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[9] then
   begin
@@ -419,7 +419,7 @@ begin
     try
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmMateriaProhibicion, 'CodMateProhibicionTipo', 'CodMateProhibicionTipo', False);
+        CheckMasterRelationUpdate(DataSet, TbMateriaProhibicion, 'CodMateProhibicionTipo', 'CodMateProhibicionTipo', False);
       end;
     finally
       FBeforePostLocks[9] := False
@@ -427,27 +427,27 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmMateriaProhibicionTipoBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbMateriaProhibicionTipoBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmMateriaProhibicion, 'CodMateProhibicionTipo', 'CodMateProhibicionTipo', False);
+    CheckMasterRelationDelete(DataSet, TbMateriaProhibicion, 'CodMateProhibicionTipo', 'CodMateProhibicionTipo', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmPeriodoBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbPeriodoBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[10] then
   begin
     FBeforePostLocks[10] := True;
     try
-      CheckDetailRelation(kbmDia, DataSet, 'CodDia', 'CodDia');
-      CheckDetailRelation(kbmHora, DataSet, 'CodHora', 'CodHora');
+      CheckDetailRelation(TbDia, DataSet, 'CodDia', 'CodDia');
+      CheckDetailRelation(TbHora, DataSet, 'CodHora', 'CodHora');
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmHorarioDetalle, 'CodDia;CodHora', 'CodDia;CodHora', False);
-        CheckMasterRelationUpdate(DataSet, kbmMateriaProhibicion, 'CodDia;CodHora', 'CodDia;CodHora', False);
-        CheckMasterRelationUpdate(DataSet, kbmProfesorProhibicion, 'CodDia;CodHora', 'CodDia;CodHora', False);
+        CheckMasterRelationUpdate(DataSet, TbHorarioDetalle, 'CodDia;CodHora', 'CodDia;CodHora', False);
+        CheckMasterRelationUpdate(DataSet, TbMateriaProhibicion, 'CodDia;CodHora', 'CodDia;CodHora', False);
+        CheckMasterRelationUpdate(DataSet, TbProfesorProhibicion, 'CodDia;CodHora', 'CodDia;CodHora', False);
       end;
     finally
       FBeforePostLocks[10] := False
@@ -455,27 +455,27 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmPeriodoBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbPeriodoBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmHorarioDetalle, 'CodDia;CodHora', 'CodDia;CodHora', False);
-    CheckMasterRelationDelete(DataSet, kbmMateriaProhibicion, 'CodDia;CodHora', 'CodDia;CodHora', False);
-    CheckMasterRelationDelete(DataSet, kbmProfesorProhibicion, 'CodDia;CodHora', 'CodDia;CodHora', False);
+    CheckMasterRelationDelete(DataSet, TbHorarioDetalle, 'CodDia;CodHora', 'CodDia;CodHora', False);
+    CheckMasterRelationDelete(DataSet, TbMateriaProhibicion, 'CodDia;CodHora', 'CodDia;CodHora', False);
+    CheckMasterRelationDelete(DataSet, TbProfesorProhibicion, 'CodDia;CodHora', 'CodDia;CodHora', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmParaleloBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbParaleloBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[11] then
   begin
     FBeforePostLocks[11] := True;
     try
-      CheckDetailRelation(kbmCurso, DataSet, 'CodNivel;CodEspecializacion', 'CodNivel;CodEspecializacion');
-      CheckDetailRelation(kbmParaleloId, DataSet, 'CodParaleloId', 'CodParaleloId');
+      CheckDetailRelation(TbCurso, DataSet, 'CodNivel;CodEspecializacion', 'CodNivel;CodEspecializacion');
+      CheckDetailRelation(TbParaleloId, DataSet, 'CodParaleloId', 'CodParaleloId');
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmDistributivo, 'CodNivel;CodEspecializacion;CodParaleloId', 'CodNivel;CodEspecializacion;CodParaleloId', False);
+        CheckMasterRelationUpdate(DataSet, TbDistributivo, 'CodNivel;CodEspecializacion;CodParaleloId', 'CodNivel;CodEspecializacion;CodParaleloId', False);
       end;
     finally
       FBeforePostLocks[11] := False
@@ -483,15 +483,15 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmParaleloBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbParaleloBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmDistributivo, 'CodNivel;CodEspecializacion;CodParaleloId', 'CodNivel;CodEspecializacion;CodParaleloId', False);
+    CheckMasterRelationDelete(DataSet, TbDistributivo, 'CodNivel;CodEspecializacion;CodParaleloId', 'CodNivel;CodEspecializacion;CodParaleloId', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmProfesorBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbProfesorBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[12] then
   begin
@@ -499,8 +499,8 @@ begin
     try
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmDistributivo, 'CodProfesor', 'CodProfesor', False);
-        CheckMasterRelationUpdate(DataSet, kbmProfesorProhibicion, 'CodProfesor', 'CodProfesor', False);
+        CheckMasterRelationUpdate(DataSet, TbDistributivo, 'CodProfesor', 'CodProfesor', False);
+        CheckMasterRelationUpdate(DataSet, TbProfesorProhibicion, 'CodProfesor', 'CodProfesor', False);
       end;
     finally
       FBeforePostLocks[12] := False
@@ -508,24 +508,24 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmProfesorBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbProfesorBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmDistributivo, 'CodProfesor', 'CodProfesor', False);
-    CheckMasterRelationDelete(DataSet, kbmProfesorProhibicion, 'CodProfesor', 'CodProfesor', False);
+    CheckMasterRelationDelete(DataSet, TbDistributivo, 'CodProfesor', 'CodProfesor', False);
+    CheckMasterRelationDelete(DataSet, TbProfesorProhibicion, 'CodProfesor', 'CodProfesor', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmMateriaProhibicionBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbMateriaProhibicionBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[13] then
   begin
     FBeforePostLocks[13] := True;
     try
-      CheckDetailRelation(kbmMateria, DataSet, 'CodMateria', 'CodMateria');
-      CheckDetailRelation(kbmMateriaProhibicionTipo, DataSet, 'CodMateProhibicionTipo', 'CodMateProhibicionTipo');
-      CheckDetailRelation(kbmPeriodo, DataSet, 'CodDia;CodHora', 'CodDia;CodHora');
+      CheckDetailRelation(TbMateria, DataSet, 'CodMateria', 'CodMateria');
+      CheckDetailRelation(TbMateriaProhibicionTipo, DataSet, 'CodMateProhibicionTipo', 'CodMateProhibicionTipo');
+      CheckDetailRelation(TbPeriodo, DataSet, 'CodDia;CodHora', 'CodDia;CodHora');
       if DataSet.State = dsEdit then
       begin
       end;
@@ -535,19 +535,19 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmDistributivoBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbDistributivoBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[14] then
   begin
     FBeforePostLocks[14] := True;
     try
-      CheckDetailRelation(kbmAulaTipo, DataSet, 'CodAulaTipo', 'CodAulaTipo');
-      CheckDetailRelation(kbmMateria, DataSet, 'CodMateria', 'CodMateria');
-      CheckDetailRelation(kbmParalelo, DataSet, 'CodNivel;CodEspecializacion;CodParaleloId', 'CodNivel;CodEspecializacion;CodParaleloId');
-      CheckDetailRelation(kbmProfesor, DataSet, 'CodProfesor', 'CodProfesor');
+      CheckDetailRelation(TbAulaTipo, DataSet, 'CodAulaTipo', 'CodAulaTipo');
+      CheckDetailRelation(TbMateria, DataSet, 'CodMateria', 'CodMateria');
+      CheckDetailRelation(TbParalelo, DataSet, 'CodNivel;CodEspecializacion;CodParaleloId', 'CodNivel;CodEspecializacion;CodParaleloId');
+      CheckDetailRelation(TbProfesor, DataSet, 'CodProfesor', 'CodProfesor');
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmHorarioDetalle, 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', False);
+        CheckMasterRelationUpdate(DataSet, TbHorarioDetalle, 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', False);
       end;
     finally
       FBeforePostLocks[14] := False
@@ -555,23 +555,23 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmDistributivoBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbDistributivoBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmHorarioDetalle, 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', False);
+    CheckMasterRelationDelete(DataSet, TbHorarioDetalle, 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmHorarioDetalleBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbHorarioDetalleBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[15] then
   begin
     FBeforePostLocks[15] := True;
     try
-      CheckDetailRelation(kbmDistributivo, DataSet, 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId');
-      CheckDetailRelation(kbmHorario, DataSet, 'CodHorario', 'CodHorario');
-      CheckDetailRelation(kbmPeriodo, DataSet, 'CodDia;CodHora', 'CodDia;CodHora');
+      CheckDetailRelation(TbDistributivo, DataSet, 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId');
+      CheckDetailRelation(TbHorario, DataSet, 'CodHorario', 'CodHorario');
+      CheckDetailRelation(TbPeriodo, DataSet, 'CodDia;CodHora', 'CodDia;CodHora');
       if DataSet.State = dsEdit then
       begin
       end;
@@ -581,7 +581,7 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmProfesorProhibicionTipoBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbProfesorProhibicionTipoBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[16] then
   begin
@@ -589,7 +589,7 @@ begin
     try
       if DataSet.State = dsEdit then
       begin
-        CheckMasterRelationUpdate(DataSet, kbmProfesorProhibicion, 'CodProfProhibicionTipo', 'CodProfProhibicionTipo', False);
+        CheckMasterRelationUpdate(DataSet, TbProfesorProhibicion, 'CodProfProhibicionTipo', 'CodProfProhibicionTipo', False);
       end;
     finally
       FBeforePostLocks[16] := False
@@ -597,23 +597,23 @@ begin
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmProfesorProhibicionTipoBeforeDelete(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbProfesorProhibicionTipoBeforeDelete(DataSet: TDataSet);
 begin
   if CheckRelations then
   begin
-    CheckMasterRelationDelete(DataSet, kbmProfesorProhibicion, 'CodProfProhibicionTipo', 'CodProfProhibicionTipo', False);
+    CheckMasterRelationDelete(DataSet, TbProfesorProhibicion, 'CodProfProhibicionTipo', 'CodProfProhibicionTipo', False);
   end;
 end;
 
-procedure TSourceBaseDataModule.kbmProfesorProhibicionBeforePost(DataSet: TDataSet);
+procedure TSourceBaseDataModule.TbProfesorProhibicionBeforePost(DataSet: TDataSet);
 begin
   if CheckRelations and not FBeforePostLocks[17] then
   begin
     FBeforePostLocks[17] := True;
     try
-      CheckDetailRelation(kbmPeriodo, DataSet, 'CodDia;CodHora', 'CodDia;CodHora');
-      CheckDetailRelation(kbmProfesor, DataSet, 'CodProfesor', 'CodProfesor');
-      CheckDetailRelation(kbmProfesorProhibicionTipo, DataSet, 'CodProfProhibicionTipo', 'CodProfProhibicionTipo');
+      CheckDetailRelation(TbPeriodo, DataSet, 'CodDia;CodHora', 'CodDia;CodHora');
+      CheckDetailRelation(TbProfesor, DataSet, 'CodProfesor', 'CodProfesor');
+      CheckDetailRelation(TbProfesorProhibicionTipo, DataSet, 'CodProfProhibicionTipo', 'CodProfProhibicionTipo');
       if DataSet.State = dsEdit then
       begin
       end;
@@ -631,45 +631,45 @@ begin
   FCheckRelations := True;
   with FDataSetNameList do
   begin
-    Add('kbmAulaTipo=AulaTipo');
-    Add('kbmEspecializacion=Especializacion');
-    Add('kbmDia=Dia');
-    Add('kbmMateria=Materia');
-    Add('kbmNivel=Nivel');
-    Add('kbmHora=Hora');
-    Add('kbmHorario=Horario');
-    Add('kbmCurso=Curso');
-    Add('kbmParaleloId=ParaleloId');
-    Add('kbmMateriaProhibicionTipo=MateriaProhibicionTipo');
-    Add('kbmPeriodo=Periodo');
-    Add('kbmParalelo=Paralelo');
-    Add('kbmProfesor=Profesor');
-    Add('kbmMateriaProhibicion=MateriaProhibicion');
-    Add('kbmDistributivo=Distributivo');
-    Add('kbmHorarioDetalle=HorarioDetalle');
-    Add('kbmProfesorProhibicionTipo=ProfesorProhibicionTipo');
-    Add('kbmProfesorProhibicion=ProfesorProhibicion');
+    Add('TbAulaTipo=AulaTipo');
+    Add('TbEspecializacion=Especializacion');
+    Add('TbDia=Dia');
+    Add('TbMateria=Materia');
+    Add('TbNivel=Nivel');
+    Add('TbHora=Hora');
+    Add('TbHorario=Horario');
+    Add('TbCurso=Curso');
+    Add('TbParaleloId=ParaleloId');
+    Add('TbMateriaProhibicionTipo=MateriaProhibicionTipo');
+    Add('TbPeriodo=Periodo');
+    Add('TbParalelo=Paralelo');
+    Add('TbProfesor=Profesor');
+    Add('TbMateriaProhibicion=MateriaProhibicion');
+    Add('TbDistributivo=Distributivo');
+    Add('TbHorarioDetalle=HorarioDetalle');
+    Add('TbProfesorProhibicionTipo=ProfesorProhibicionTipo');
+    Add('TbProfesorProhibicion=ProfesorProhibicion');
   end;
   with FDataSetDescList do
   begin
-    Add('kbmAulaTipo=Tipos de aula');
-    Add('kbmEspecializacion=Especializaciones');
-    Add('kbmDia=Días laborables');
-    Add('kbmMateria=Materias');
-    Add('kbmNivel=Niveles');
-    Add('kbmHora=Horas académicas');
-    Add('kbmHorario=Horarios del colegio');
-    Add('kbmCurso=Cursos');
-    Add('kbmParaleloId=Identificadores de paralelo');
-    Add('kbmMateriaProhibicionTipo=Tipos de prohibición de materia');
-    Add('kbmPeriodo=Períodos laborables');
-    Add('kbmParalelo=Paralelos');
-    Add('kbmProfesor=Profesores');
-    Add('kbmMateriaProhibicion=Prohibiciones de materia');
-    Add('kbmDistributivo=Distributivo');
-    Add('kbmHorarioDetalle=Detalle de los horarios');
-    Add('kbmProfesorProhibicionTipo=Tipos de prohibición de profesor');
-    Add('kbmProfesorProhibicion=Prohibiciones de profesor');
+    Add('TbAulaTipo=Tipos de aula');
+    Add('TbEspecializacion=Especializaciones');
+    Add('TbDia=Días laborables');
+    Add('TbMateria=Materias');
+    Add('TbNivel=Niveles');
+    Add('TbHora=Horas académicas');
+    Add('TbHorario=Horarios del colegio');
+    Add('TbCurso=Cursos');
+    Add('TbParaleloId=Identificadores de paralelo');
+    Add('TbMateriaProhibicionTipo=Tipos de prohibición de materia');
+    Add('TbPeriodo=Períodos laborables');
+    Add('TbParalelo=Paralelos');
+    Add('TbProfesor=Profesores');
+    Add('TbMateriaProhibicion=Prohibiciones de materia');
+    Add('TbDistributivo=Distributivo');
+    Add('TbHorarioDetalle=Detalle de los horarios');
+    Add('TbProfesorProhibicionTipo=Tipos de prohibición de profesor');
+    Add('TbProfesorProhibicion=Prohibiciones de profesor');
   end;
 end;
 
@@ -694,24 +694,24 @@ procedure TSourceBaseDataModule.LoadFromBinaryStream(AStream: TStream);
 begin
   FCheckRelations := False;
   try
-    kbmAulaTipo.LoadFromBinaryStream(AStream);
-    kbmEspecializacion.LoadFromBinaryStream(AStream);
-    kbmDia.LoadFromBinaryStream(AStream);
-    kbmMateria.LoadFromBinaryStream(AStream);
-    kbmNivel.LoadFromBinaryStream(AStream);
-    kbmHora.LoadFromBinaryStream(AStream);
-    kbmHorario.LoadFromBinaryStream(AStream);
-    kbmCurso.LoadFromBinaryStream(AStream);
-    kbmParaleloId.LoadFromBinaryStream(AStream);
-    kbmMateriaProhibicionTipo.LoadFromBinaryStream(AStream);
-    kbmPeriodo.LoadFromBinaryStream(AStream);
-    kbmParalelo.LoadFromBinaryStream(AStream);
-    kbmProfesor.LoadFromBinaryStream(AStream);
-    kbmMateriaProhibicion.LoadFromBinaryStream(AStream);
-    kbmDistributivo.LoadFromBinaryStream(AStream);
-    kbmHorarioDetalle.LoadFromBinaryStream(AStream);
-    kbmProfesorProhibicionTipo.LoadFromBinaryStream(AStream);
-    kbmProfesorProhibicion.LoadFromBinaryStream(AStream);
+    TbAulaTipo.LoadFromBinaryStream(AStream);
+    TbEspecializacion.LoadFromBinaryStream(AStream);
+    TbDia.LoadFromBinaryStream(AStream);
+    TbMateria.LoadFromBinaryStream(AStream);
+    TbNivel.LoadFromBinaryStream(AStream);
+    TbHora.LoadFromBinaryStream(AStream);
+    TbHorario.LoadFromBinaryStream(AStream);
+    TbCurso.LoadFromBinaryStream(AStream);
+    TbParaleloId.LoadFromBinaryStream(AStream);
+    TbMateriaProhibicionTipo.LoadFromBinaryStream(AStream);
+    TbPeriodo.LoadFromBinaryStream(AStream);
+    TbParalelo.LoadFromBinaryStream(AStream);
+    TbProfesor.LoadFromBinaryStream(AStream);
+    TbMateriaProhibicion.LoadFromBinaryStream(AStream);
+    TbDistributivo.LoadFromBinaryStream(AStream);
+    TbHorarioDetalle.LoadFromBinaryStream(AStream);
+    TbProfesorProhibicionTipo.LoadFromBinaryStream(AStream);
+    TbProfesorProhibicion.LoadFromBinaryStream(AStream);
   finally
     FCheckRelations := True;
   end;
@@ -748,24 +748,24 @@ procedure TSourceBaseDataModule.LoadFromStrings(AStrings: TStrings; var APositio
 begin
   FCheckRelations := False;
   try
-    LoadDataSetFromStrings(kbmAulaTipo, AStrings, APosition);
-    LoadDataSetFromStrings(kbmEspecializacion, AStrings, APosition);
-    LoadDataSetFromStrings(kbmDia, AStrings, APosition);
-    LoadDataSetFromStrings(kbmMateria, AStrings, APosition);
-    LoadDataSetFromStrings(kbmNivel, AStrings, APosition);
-    LoadDataSetFromStrings(kbmHora, AStrings, APosition);
-    LoadDataSetFromStrings(kbmHorario, AStrings, APosition);
-    LoadDataSetFromStrings(kbmCurso, AStrings, APosition);
-    LoadDataSetFromStrings(kbmParaleloId, AStrings, APosition);
-    LoadDataSetFromStrings(kbmMateriaProhibicionTipo, AStrings, APosition);
-    LoadDataSetFromStrings(kbmPeriodo, AStrings, APosition);
-    LoadDataSetFromStrings(kbmParalelo, AStrings, APosition);
-    LoadDataSetFromStrings(kbmProfesor, AStrings, APosition);
-    LoadDataSetFromStrings(kbmMateriaProhibicion, AStrings, APosition);
-    LoadDataSetFromStrings(kbmDistributivo, AStrings, APosition);
-    LoadDataSetFromStrings(kbmHorarioDetalle, AStrings, APosition);
-    LoadDataSetFromStrings(kbmProfesorProhibicionTipo, AStrings, APosition);
-    LoadDataSetFromStrings(kbmProfesorProhibicion, AStrings, APosition);
+    LoadDataSetFromStrings(TbAulaTipo, AStrings, APosition);
+    LoadDataSetFromStrings(TbEspecializacion, AStrings, APosition);
+    LoadDataSetFromStrings(TbDia, AStrings, APosition);
+    LoadDataSetFromStrings(TbMateria, AStrings, APosition);
+    LoadDataSetFromStrings(TbNivel, AStrings, APosition);
+    LoadDataSetFromStrings(TbHora, AStrings, APosition);
+    LoadDataSetFromStrings(TbHorario, AStrings, APosition);
+    LoadDataSetFromStrings(TbCurso, AStrings, APosition);
+    LoadDataSetFromStrings(TbParaleloId, AStrings, APosition);
+    LoadDataSetFromStrings(TbMateriaProhibicionTipo, AStrings, APosition);
+    LoadDataSetFromStrings(TbPeriodo, AStrings, APosition);
+    LoadDataSetFromStrings(TbParalelo, AStrings, APosition);
+    LoadDataSetFromStrings(TbProfesor, AStrings, APosition);
+    LoadDataSetFromStrings(TbMateriaProhibicion, AStrings, APosition);
+    LoadDataSetFromStrings(TbDistributivo, AStrings, APosition);
+    LoadDataSetFromStrings(TbHorarioDetalle, AStrings, APosition);
+    LoadDataSetFromStrings(TbProfesorProhibicionTipo, AStrings, APosition);
+    LoadDataSetFromStrings(TbProfesorProhibicion, AStrings, APosition);
   finally
     FCheckRelations := True;
   end;
@@ -775,24 +775,24 @@ procedure TSourceBaseDataModule.LoadFromTextDir(const ADirName: string);
 begin
   FCheckRelations := False;
   try
-    LoadDataSetFromCSVFile(kbmAulaTipo, ADirName + '\AulaTipo.csv');
-    LoadDataSetFromCSVFile(kbmEspecializacion, ADirName + '\Especializacion.csv');
-    LoadDataSetFromCSVFile(kbmDia, ADirName + '\Dia.csv');
-    LoadDataSetFromCSVFile(kbmMateria, ADirName + '\Materia.csv');
-    LoadDataSetFromCSVFile(kbmNivel, ADirName + '\Nivel.csv');
-    LoadDataSetFromCSVFile(kbmHora, ADirName + '\Hora.csv');
-    LoadDataSetFromCSVFile(kbmHorario, ADirName + '\Horario.csv');
-    LoadDataSetFromCSVFile(kbmCurso, ADirName + '\Curso.csv');
-    LoadDataSetFromCSVFile(kbmParaleloId, ADirName + '\ParaleloId.csv');
-    LoadDataSetFromCSVFile(kbmMateriaProhibicionTipo, ADirName + '\MateriaProhibicionTipo.csv');
-    LoadDataSetFromCSVFile(kbmPeriodo, ADirName + '\Periodo.csv');
-    LoadDataSetFromCSVFile(kbmParalelo, ADirName + '\Paralelo.csv');
-    LoadDataSetFromCSVFile(kbmProfesor, ADirName + '\Profesor.csv');
-    LoadDataSetFromCSVFile(kbmMateriaProhibicion, ADirName + '\MateriaProhibicion.csv');
-    LoadDataSetFromCSVFile(kbmDistributivo, ADirName + '\Distributivo.csv');
-    LoadDataSetFromCSVFile(kbmHorarioDetalle, ADirName + '\HorarioDetalle.csv');
-    LoadDataSetFromCSVFile(kbmProfesorProhibicionTipo, ADirName + '\ProfesorProhibicionTipo.csv');
-    LoadDataSetFromCSVFile(kbmProfesorProhibicion, ADirName + '\ProfesorProhibicion.csv');
+    LoadDataSetFromCSVFile(TbAulaTipo, ADirName + '\AulaTipo.csv');
+    LoadDataSetFromCSVFile(TbEspecializacion, ADirName + '\Especializacion.csv');
+    LoadDataSetFromCSVFile(TbDia, ADirName + '\Dia.csv');
+    LoadDataSetFromCSVFile(TbMateria, ADirName + '\Materia.csv');
+    LoadDataSetFromCSVFile(TbNivel, ADirName + '\Nivel.csv');
+    LoadDataSetFromCSVFile(TbHora, ADirName + '\Hora.csv');
+    LoadDataSetFromCSVFile(TbHorario, ADirName + '\Horario.csv');
+    LoadDataSetFromCSVFile(TbCurso, ADirName + '\Curso.csv');
+    LoadDataSetFromCSVFile(TbParaleloId, ADirName + '\ParaleloId.csv');
+    LoadDataSetFromCSVFile(TbMateriaProhibicionTipo, ADirName + '\MateriaProhibicionTipo.csv');
+    LoadDataSetFromCSVFile(TbPeriodo, ADirName + '\Periodo.csv');
+    LoadDataSetFromCSVFile(TbParalelo, ADirName + '\Paralelo.csv');
+    LoadDataSetFromCSVFile(TbProfesor, ADirName + '\Profesor.csv');
+    LoadDataSetFromCSVFile(TbMateriaProhibicion, ADirName + '\MateriaProhibicion.csv');
+    LoadDataSetFromCSVFile(TbDistributivo, ADirName + '\Distributivo.csv');
+    LoadDataSetFromCSVFile(TbHorarioDetalle, ADirName + '\HorarioDetalle.csv');
+    LoadDataSetFromCSVFile(TbProfesorProhibicionTipo, ADirName + '\ProfesorProhibicionTipo.csv');
+    LoadDataSetFromCSVFile(TbProfesorProhibicion, ADirName + '\ProfesorProhibicion.csv');
   finally
     FCheckRelations := True;
   end;
@@ -800,24 +800,24 @@ end;
 
 procedure TSourceBaseDataModule.SaveToBinaryStream(AStream: TStream; flags:TkbmMemTableSaveFlags);
 begin
-  kbmAulaTipo.SaveToBinaryStream(AStream, flags);
-  kbmEspecializacion.SaveToBinaryStream(AStream, flags);
-  kbmDia.SaveToBinaryStream(AStream, flags);
-  kbmMateria.SaveToBinaryStream(AStream, flags);
-  kbmNivel.SaveToBinaryStream(AStream, flags);
-  kbmHora.SaveToBinaryStream(AStream, flags);
-  kbmHorario.SaveToBinaryStream(AStream, flags);
-  kbmCurso.SaveToBinaryStream(AStream, flags);
-  kbmParaleloId.SaveToBinaryStream(AStream, flags);
-  kbmMateriaProhibicionTipo.SaveToBinaryStream(AStream, flags);
-  kbmPeriodo.SaveToBinaryStream(AStream, flags);
-  kbmParalelo.SaveToBinaryStream(AStream, flags);
-  kbmProfesor.SaveToBinaryStream(AStream, flags);
-  kbmMateriaProhibicion.SaveToBinaryStream(AStream, flags);
-  kbmDistributivo.SaveToBinaryStream(AStream, flags);
-  kbmHorarioDetalle.SaveToBinaryStream(AStream, flags);
-  kbmProfesorProhibicionTipo.SaveToBinaryStream(AStream, flags);
-  kbmProfesorProhibicion.SaveToBinaryStream(AStream, flags);
+  TbAulaTipo.SaveToBinaryStream(AStream, flags);
+  TbEspecializacion.SaveToBinaryStream(AStream, flags);
+  TbDia.SaveToBinaryStream(AStream, flags);
+  TbMateria.SaveToBinaryStream(AStream, flags);
+  TbNivel.SaveToBinaryStream(AStream, flags);
+  TbHora.SaveToBinaryStream(AStream, flags);
+  TbHorario.SaveToBinaryStream(AStream, flags);
+  TbCurso.SaveToBinaryStream(AStream, flags);
+  TbParaleloId.SaveToBinaryStream(AStream, flags);
+  TbMateriaProhibicionTipo.SaveToBinaryStream(AStream, flags);
+  TbPeriodo.SaveToBinaryStream(AStream, flags);
+  TbParalelo.SaveToBinaryStream(AStream, flags);
+  TbProfesor.SaveToBinaryStream(AStream, flags);
+  TbMateriaProhibicion.SaveToBinaryStream(AStream, flags);
+  TbDistributivo.SaveToBinaryStream(AStream, flags);
+  TbHorarioDetalle.SaveToBinaryStream(AStream, flags);
+  TbProfesorProhibicionTipo.SaveToBinaryStream(AStream, flags);
+  TbProfesorProhibicion.SaveToBinaryStream(AStream, flags);
 end;
 
 procedure TSourceBaseDataModule.SaveToBinaryFile(const AFileName: TFileName; flags:TkbmMemTableSaveFlags);
@@ -834,24 +834,24 @@ end;
 
 procedure TSourceBaseDataModule.SaveToStrings(AStrings: TStrings);
 begin
-  SaveDataSetToStrings(kbmAulaTipo, AStrings);
-  SaveDataSetToStrings(kbmEspecializacion, AStrings);
-  SaveDataSetToStrings(kbmDia, AStrings);
-  SaveDataSetToStrings(kbmMateria, AStrings);
-  SaveDataSetToStrings(kbmNivel, AStrings);
-  SaveDataSetToStrings(kbmHora, AStrings);
-  SaveDataSetToStrings(kbmHorario, AStrings);
-  SaveDataSetToStrings(kbmCurso, AStrings);
-  SaveDataSetToStrings(kbmParaleloId, AStrings);
-  SaveDataSetToStrings(kbmMateriaProhibicionTipo, AStrings);
-  SaveDataSetToStrings(kbmPeriodo, AStrings);
-  SaveDataSetToStrings(kbmParalelo, AStrings);
-  SaveDataSetToStrings(kbmProfesor, AStrings);
-  SaveDataSetToStrings(kbmMateriaProhibicion, AStrings);
-  SaveDataSetToStrings(kbmDistributivo, AStrings);
-  SaveDataSetToStrings(kbmHorarioDetalle, AStrings);
-  SaveDataSetToStrings(kbmProfesorProhibicionTipo, AStrings);
-  SaveDataSetToStrings(kbmProfesorProhibicion, AStrings);
+  SaveDataSetToStrings(TbAulaTipo, AStrings);
+  SaveDataSetToStrings(TbEspecializacion, AStrings);
+  SaveDataSetToStrings(TbDia, AStrings);
+  SaveDataSetToStrings(TbMateria, AStrings);
+  SaveDataSetToStrings(TbNivel, AStrings);
+  SaveDataSetToStrings(TbHora, AStrings);
+  SaveDataSetToStrings(TbHorario, AStrings);
+  SaveDataSetToStrings(TbCurso, AStrings);
+  SaveDataSetToStrings(TbParaleloId, AStrings);
+  SaveDataSetToStrings(TbMateriaProhibicionTipo, AStrings);
+  SaveDataSetToStrings(TbPeriodo, AStrings);
+  SaveDataSetToStrings(TbParalelo, AStrings);
+  SaveDataSetToStrings(TbProfesor, AStrings);
+  SaveDataSetToStrings(TbMateriaProhibicion, AStrings);
+  SaveDataSetToStrings(TbDistributivo, AStrings);
+  SaveDataSetToStrings(TbHorarioDetalle, AStrings);
+  SaveDataSetToStrings(TbProfesorProhibicionTipo, AStrings);
+  SaveDataSetToStrings(TbProfesorProhibicion, AStrings);
 end;
 
 procedure TSourceBaseDataModule.SaveToTextFile(const AFileName: TFileName);
@@ -869,90 +869,90 @@ end;
 
 procedure TSourceBaseDataModule.SaveToTextDir(const ADirName: TFileName);
 begin
-  SaveDataSetToCSVFile(kbmAulaTipo, ADirName + '\AulaTipo.csv');
-  SaveDataSetToCSVFile(kbmEspecializacion, ADirName + '\Especializacion.csv');
-  SaveDataSetToCSVFile(kbmDia, ADirName + '\Dia.csv');
-  SaveDataSetToCSVFile(kbmMateria, ADirName + '\Materia.csv');
-  SaveDataSetToCSVFile(kbmNivel, ADirName + '\Nivel.csv');
-  SaveDataSetToCSVFile(kbmHora, ADirName + '\Hora.csv');
-  SaveDataSetToCSVFile(kbmHorario, ADirName + '\Horario.csv');
-  SaveDataSetToCSVFile(kbmCurso, ADirName + '\Curso.csv');
-  SaveDataSetToCSVFile(kbmParaleloId, ADirName + '\ParaleloId.csv');
-  SaveDataSetToCSVFile(kbmMateriaProhibicionTipo, ADirName + '\MateriaProhibicionTipo.csv');
-  SaveDataSetToCSVFile(kbmPeriodo, ADirName + '\Periodo.csv');
-  SaveDataSetToCSVFile(kbmParalelo, ADirName + '\Paralelo.csv');
-  SaveDataSetToCSVFile(kbmProfesor, ADirName + '\Profesor.csv');
-  SaveDataSetToCSVFile(kbmMateriaProhibicion, ADirName + '\MateriaProhibicion.csv');
-  SaveDataSetToCSVFile(kbmDistributivo, ADirName + '\Distributivo.csv');
-  SaveDataSetToCSVFile(kbmHorarioDetalle, ADirName + '\HorarioDetalle.csv');
-  SaveDataSetToCSVFile(kbmProfesorProhibicionTipo, ADirName + '\ProfesorProhibicionTipo.csv');
-  SaveDataSetToCSVFile(kbmProfesorProhibicion, ADirName + '\ProfesorProhibicion.csv');
+  SaveDataSetToCSVFile(TbAulaTipo, ADirName + '\AulaTipo.csv');
+  SaveDataSetToCSVFile(TbEspecializacion, ADirName + '\Especializacion.csv');
+  SaveDataSetToCSVFile(TbDia, ADirName + '\Dia.csv');
+  SaveDataSetToCSVFile(TbMateria, ADirName + '\Materia.csv');
+  SaveDataSetToCSVFile(TbNivel, ADirName + '\Nivel.csv');
+  SaveDataSetToCSVFile(TbHora, ADirName + '\Hora.csv');
+  SaveDataSetToCSVFile(TbHorario, ADirName + '\Horario.csv');
+  SaveDataSetToCSVFile(TbCurso, ADirName + '\Curso.csv');
+  SaveDataSetToCSVFile(TbParaleloId, ADirName + '\ParaleloId.csv');
+  SaveDataSetToCSVFile(TbMateriaProhibicionTipo, ADirName + '\MateriaProhibicionTipo.csv');
+  SaveDataSetToCSVFile(TbPeriodo, ADirName + '\Periodo.csv');
+  SaveDataSetToCSVFile(TbParalelo, ADirName + '\Paralelo.csv');
+  SaveDataSetToCSVFile(TbProfesor, ADirName + '\Profesor.csv');
+  SaveDataSetToCSVFile(TbMateriaProhibicion, ADirName + '\MateriaProhibicion.csv');
+  SaveDataSetToCSVFile(TbDistributivo, ADirName + '\Distributivo.csv');
+  SaveDataSetToCSVFile(TbHorarioDetalle, ADirName + '\HorarioDetalle.csv');
+  SaveDataSetToCSVFile(TbProfesorProhibicionTipo, ADirName + '\ProfesorProhibicionTipo.csv');
+  SaveDataSetToCSVFile(TbProfesorProhibicion, ADirName + '\ProfesorProhibicion.csv');
 end;
 
 procedure TSourceBaseDataModule.EmptyTables;
 begin
-  kbmAulaTipo.EmptyTable;
-  kbmEspecializacion.EmptyTable;
-  kbmDia.EmptyTable;
-  kbmMateria.EmptyTable;
-  kbmNivel.EmptyTable;
-  kbmHora.EmptyTable;
-  kbmHorario.EmptyTable;
-  kbmCurso.EmptyTable;
-  kbmParaleloId.EmptyTable;
-  kbmMateriaProhibicionTipo.EmptyTable;
-  kbmPeriodo.EmptyTable;
-  kbmParalelo.EmptyTable;
-  kbmProfesor.EmptyTable;
-  kbmMateriaProhibicion.EmptyTable;
-  kbmDistributivo.EmptyTable;
-  kbmHorarioDetalle.EmptyTable;
-  kbmProfesorProhibicionTipo.EmptyTable;
-  kbmProfesorProhibicion.EmptyTable;
+  TbAulaTipo.EmptyTable;
+  TbEspecializacion.EmptyTable;
+  TbDia.EmptyTable;
+  TbMateria.EmptyTable;
+  TbNivel.EmptyTable;
+  TbHora.EmptyTable;
+  TbHorario.EmptyTable;
+  TbCurso.EmptyTable;
+  TbParaleloId.EmptyTable;
+  TbMateriaProhibicionTipo.EmptyTable;
+  TbPeriodo.EmptyTable;
+  TbParalelo.EmptyTable;
+  TbProfesor.EmptyTable;
+  TbMateriaProhibicion.EmptyTable;
+  TbDistributivo.EmptyTable;
+  TbHorarioDetalle.EmptyTable;
+  TbProfesorProhibicionTipo.EmptyTable;
+  TbProfesorProhibicion.EmptyTable;
 end;
 
 procedure TSourceBaseDataModule.OpenTables;
 begin
-  kbmAulaTipo.Open;
-  kbmEspecializacion.Open;
-  kbmDia.Open;
-  kbmMateria.Open;
-  kbmNivel.Open;
-  kbmHora.Open;
-  kbmHorario.Open;
-  kbmCurso.Open;
-  kbmParaleloId.Open;
-  kbmMateriaProhibicionTipo.Open;
-  kbmPeriodo.Open;
-  kbmParalelo.Open;
-  kbmProfesor.Open;
-  kbmMateriaProhibicion.Open;
-  kbmDistributivo.Open;
-  kbmHorarioDetalle.Open;
-  kbmProfesorProhibicionTipo.Open;
-  kbmProfesorProhibicion.Open;
+  TbAulaTipo.Open;
+  TbEspecializacion.Open;
+  TbDia.Open;
+  TbMateria.Open;
+  TbNivel.Open;
+  TbHora.Open;
+  TbHorario.Open;
+  TbCurso.Open;
+  TbParaleloId.Open;
+  TbMateriaProhibicionTipo.Open;
+  TbPeriodo.Open;
+  TbParalelo.Open;
+  TbProfesor.Open;
+  TbMateriaProhibicion.Open;
+  TbDistributivo.Open;
+  TbHorarioDetalle.Open;
+  TbProfesorProhibicionTipo.Open;
+  TbProfesorProhibicion.Open;
 end;
 
 procedure TSourceBaseDataModule.CloseTables;
 begin
-  kbmAulaTipo.Close;
-  kbmEspecializacion.Close;
-  kbmDia.Close;
-  kbmMateria.Close;
-  kbmNivel.Close;
-  kbmHora.Close;
-  kbmHorario.Close;
-  kbmCurso.Close;
-  kbmParaleloId.Close;
-  kbmMateriaProhibicionTipo.Close;
-  kbmPeriodo.Close;
-  kbmParalelo.Close;
-  kbmProfesor.Close;
-  kbmMateriaProhibicion.Close;
-  kbmDistributivo.Close;
-  kbmHorarioDetalle.Close;
-  kbmProfesorProhibicionTipo.Close;
-  kbmProfesorProhibicion.Close;
+  TbAulaTipo.Close;
+  TbEspecializacion.Close;
+  TbDia.Close;
+  TbMateria.Close;
+  TbNivel.Close;
+  TbHora.Close;
+  TbHorario.Close;
+  TbCurso.Close;
+  TbParaleloId.Close;
+  TbMateriaProhibicionTipo.Close;
+  TbPeriodo.Close;
+  TbParalelo.Close;
+  TbProfesor.Close;
+  TbMateriaProhibicion.Close;
+  TbDistributivo.Close;
+  TbHorarioDetalle.Close;
+  TbProfesorProhibicionTipo.Close;
+  TbProfesorProhibicion.Close;
 end;
 
 end.

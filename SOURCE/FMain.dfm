@@ -1989,7 +1989,7 @@ object MainForm: TMainForm
       OnExecute = actMejorarHorarioExecute
     end
   end
-  object rxmParalelo: TkbmMemTable
+  object TbParalelo: TkbmMemTable
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -2015,11 +2015,11 @@ object MainForm: TMainForm
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    OnFilterRecord = rxmParaleloFilterRecord
+    OnFilterRecord = TbParaleloFilterRecord
     Left = 48
     Top = 119
   end
-  object rxmProfesor: TkbmMemTable
+  object TbProfesor: TkbmMemTable
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -2045,7 +2045,7 @@ object MainForm: TMainForm
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    OnFilterRecord = rxmProfesorFilterRecord
+    OnFilterRecord = TbProfesorFilterRecord
     Left = 48
     Top = 147
   end
@@ -2272,7 +2272,7 @@ object MainForm: TMainForm
       Lookup = True
     end
   end
-  object rxmMateria: TkbmMemTable
+  object TbMateria: TkbmMemTable
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -2298,7 +2298,7 @@ object MainForm: TMainForm
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    OnFilterRecord = rxmMateriaFilterRecord
+    OnFilterRecord = TbMateriaFilterRecord
     Left = 48
     Top = 184
   end
@@ -2498,7 +2498,7 @@ object MainForm: TMainForm
       Size = 10
     end
   end
-  object rxmProfesor1: TkbmMemTable
+  object TbProfesor1: TkbmMemTable
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -2524,7 +2524,7 @@ object MainForm: TMainForm
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
     Version = '2.49'
-    OnFilterRecord = rxmProfesor1FilterRecord
+    OnFilterRecord = TbProfesor1FilterRecord
     Left = 48
     Top = 212
   end

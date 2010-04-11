@@ -18,12 +18,12 @@ type
     FormStorage1: TFormStorage;
     DBGrid1: TDBGrid;
     cbxDataSet: TComboBox;
-    kbmAsignatura: TkbmMemTable;
-    kbmAsignaturaCodMateria: TIntegerField;
-    kbmAsignaturaCodNivel: TIntegerField;
-    kbmAsignaturaCodEspecializacion: TIntegerField;
-    kbmAsignaturaCodAulaTipo: TIntegerField;
-    kbmAsignaturaComposicion: TStringField;
+    TbAsignatura: TkbmMemTable;
+    TbAsignaturaCodMateria: TIntegerField;
+    TbAsignaturaCodNivel: TIntegerField;
+    TbAsignaturaCodEspecializacion: TIntegerField;
+    TbAsignaturaCodAulaTipo: TIntegerField;
+    TbAsignaturaComposicion: TStringField;
     procedure btnConvertirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure cbxDataSetChange(Sender: TObject);
@@ -67,21 +67,21 @@ procedure TConvertForm.ConvertDBP120_HPC121(ASource, ADestination: TStream);
 var
   PackerFileHeader: TPackerFileHeader;
   HPCFileHeader: THPCFileHeader;
-  KbmMemTable: TKbmMemTable;
-  procedure LoadSource(ASource, ADestination: TStream; AkbmMemTable: TKbmMemTable);
+  TbMemTable: TKbmMemTable;
+  procedure LoadSource(ASource, ADestination: TStream; ATable: TkbmMemTable);
   begin
-    kbmMemTable.Open;
+    TbMemTable.Open;
     try
-      LoadDataSetFromStream(kbmMemTable, ASource);
-      AkbmMemTable.EmptyTable;
-      AkbmMemTable.LoadFromDataSet(kbmMemTable, []);
+      LoadDataSetFromStream(TbMemTable, ASource);
+      ATable.EmptyTable;
+      ATable.LoadFromDataSet(TbMemTable, []);
     finally
-      kbmMemTable.Close;
+      TbMemTable.Close;
     end;
   end;
   procedure AddFDCodAulaTipo;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'CodAulaTipo';
       DataType := ftInteger;
@@ -89,7 +89,7 @@ var
   end;
   procedure AddFDNomAulaTipo;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'NomAulaTipo';
       DataType := ftString;
@@ -98,7 +98,7 @@ var
   end;
   procedure AddFDAbrAulaTipo;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'AbrAulaTipo';
       DataType := ftString;
@@ -107,7 +107,7 @@ var
   end;
   procedure AddFDCantidad;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'Cantidad';
       DataType := ftInteger;
@@ -115,16 +115,16 @@ var
   end;
   procedure CargarAulaTipo(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodAulaTipo;
     AddFDNomAulaTipo;
     AddFDAbrAulaTipo;
     AddFDCantidad;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmAulaTipo);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbAulaTipo);
   end;
   procedure AddFDCodEspecializacion;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'CodEspecializacion';
       DataType := ftInteger;
@@ -132,7 +132,7 @@ var
   end;
   procedure AddFDNomEspecializacion;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'NomEspecializacion';
       DataType := ftString;
@@ -141,7 +141,7 @@ var
   end;
   procedure AddFDAbrEspecializacion;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'AbrEspecializacion';
       DataType := ftString;
@@ -150,15 +150,15 @@ var
   end;
   procedure CargarEspecializacion(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodEspecializacion;
     AddFDNomEspecializacion;
     AddFDAbrEspecializacion;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmEspecializacion);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbEspecializacion);
   end;
   procedure AddFDCodNivel;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'CodNivel';
       DataType := ftInteger;
@@ -166,7 +166,7 @@ var
   end;
   procedure AddFDNomNivel;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'NomNivel';
       DataType := ftString;
@@ -175,7 +175,7 @@ var
   end;
   procedure AddFDAbrNivel;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'AbrNivel';
       DataType := ftString;
@@ -184,15 +184,15 @@ var
   end;
   procedure CargarNivel(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodNivel;
     AddFDNomNivel;
     AddFDAbrNivel;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmNivel);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbNivel);
   end;
   procedure AddFDCodMateria;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'CodMateria';
       DataType := ftInteger;
@@ -200,7 +200,7 @@ var
   end;
   procedure AddFDNomMateria;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'NomMateria';
       DataType := ftString;
@@ -209,14 +209,14 @@ var
   end;
   procedure CargarMateria(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodMateria;
     AddFDNomMateria;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmMateria);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbMateria);
   end;
   procedure AddFDCodDia;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'CodDia';
       DataType := ftInteger;
@@ -224,7 +224,7 @@ var
   end;
   procedure AddFDNomDia;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'NomDia';
       DataType := ftString;
@@ -233,21 +233,21 @@ var
   end;
   procedure CargarDia(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodDia;
     AddFDNomDia;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmDia);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbDia);
   end;
   procedure CargarCurso(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodNivel;
     AddFDCodEspecializacion;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmCurso);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbCurso);
   end;
   procedure AddFDCodHora;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'CodHora';
       DataType := ftInteger;
@@ -255,7 +255,7 @@ var
   end;
   procedure AddFDNomHora;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'NomHora';
       DataType := ftString;
@@ -264,7 +264,7 @@ var
   end;
   procedure AddFDIntervalo;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'Intervalo';
       DataType := ftString;
@@ -273,15 +273,15 @@ var
   end;
   procedure CargarHora(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodHora;
     AddFDNomHora;
     AddFDIntervalo;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmHora);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbHora);
   end;
   procedure AddFDCodHorario;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'CodHorario';
       DataType := ftInteger;
@@ -289,7 +289,7 @@ var
   end;
   procedure AddFDMomentoInicial;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'MomentoInicial';
       DataType := ftDateTime;
@@ -297,7 +297,7 @@ var
   end;
   procedure AddFDMomentoFinal;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'MomentoFinal';
       DataType := ftDateTime;
@@ -305,7 +305,7 @@ var
   end;
   procedure AddFDInforme;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'Informe';
       DataType := ftMemo;
@@ -314,16 +314,16 @@ var
   end;
   procedure CargarHorario(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodHorario;
     AddFDMomentoInicial;
     AddFDMomentoFinal;
     AddFDInforme;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmHorario);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbHorario);
   end;
   procedure AddFDComposicion;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'Composicion';
       DataType := ftString;
@@ -332,17 +332,17 @@ var
   end;
   procedure CargarAsignatura(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodMateria;
     AddFDCodNivel;
     AddFDCodEspecializacion;
     AddFDCodAulaTipo;
     AddFDComposicion;
-    LoadSource(ASource, ADestination, kbmAsignatura);
+    LoadSource(ASource, ADestination, TbAsignatura);
   end;
   procedure AddFDCodParaleloId;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'CodParaleloId';
       DataType := ftInteger;
@@ -350,7 +350,7 @@ var
   end;
   procedure AddFDNomParaleloId;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'NomParaleloId';
       DataType := ftString;
@@ -359,14 +359,14 @@ var
   end;
   procedure CargarParaleloId(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodParaleloId;
     AddFDNomParaleloId;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmParaleloId);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbParaleloId);
   end;
   procedure AddFDCodMateProhibicionTipo;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'CodMateProhibicionTipo';
       DataType := ftInteger;
@@ -374,7 +374,7 @@ var
   end;
   procedure AddFDNomMateProhibicionTipo;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'NomMateProhibicionTipo';
       DataType := ftString;
@@ -383,7 +383,7 @@ var
   end;
   procedure AddFDColMateProhibicionTipo;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'ColMateProhibicionTipo';
       DataType := ftInteger;
@@ -391,7 +391,7 @@ var
   end;
   procedure AddFDValMateProhibicionTipo;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'ValMateProhibicionTipo';
       DataType := ftFloat;
@@ -399,23 +399,23 @@ var
   end;
   procedure CargarMateriaProhibicionTipo(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodMateProhibicionTipo;
     AddFDNomMateProhibicionTipo;
     AddFDColMateProhibicionTipo;
     AddFDValMateProhibicionTipo;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmMateriaProhibicionTipo);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbMateriaProhibicionTipo);
   end;
   procedure CargarHorarioLaborable(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodDia;
     AddFDCodHora;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmPeriodo);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbPeriodo);
   end;
   procedure AddFDSesion;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'Sesion';
       DataType := ftInteger;
@@ -423,7 +423,7 @@ var
   end;
   procedure CargarHorarioDetalle(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodHorario;
     AddFDCodNivel;
     AddFDCodEspecializacion;
@@ -432,19 +432,19 @@ var
     AddFDCodHora;
     AddFDCodMateria;
     AddFDSesion;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmHorarioDetalle);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbHorarioDetalle);
   end;
   procedure CargarParalelo(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodNivel;
     AddFDCodEspecializacion;
     AddFDCodParaleloId;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmParalelo);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbParalelo);
   end;
   procedure AddFDCodProfesor;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'CodProfesor';
       DataType := ftInteger;
@@ -452,7 +452,7 @@ var
   end;
   procedure AddFDCedProfesor;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'CedProfesor';
       DataType := ftString;
@@ -461,7 +461,7 @@ var
   end;
   procedure AddFDApeProfesor;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'ApeProfesor';
       DataType := ftString;
@@ -470,7 +470,7 @@ var
   end;
   procedure AddFDNomProfesor;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'NomProfesor';
       DataType := ftString;
@@ -479,69 +479,69 @@ var
   end;
   procedure CargarProfesor(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodProfesor;
     AddFDCedProfesor;
     AddFDApeProfesor;
     AddFDNomProfesor;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmProfesor);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbProfesor);
   end;
   procedure CargarMateriaProhibicion(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodMateria;
     AddFDCodDia;
     AddFDCodHora;
     AddFDCodMateProhibicionTipo;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmMateriaProhibicion);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbMateriaProhibicion);
   end;
   procedure CargarCargaAcademica(ASource, ADestination: TStream);
   var
-    kbmMemTableCodMateria, kbmMemTableCodNivel, kbmMemTableCodEspecializacion,
-    kbmMemTableCodParaleloId, kbmMemTableCodProfesor: TIntegerField;
+    TbMemTableCodMateria, TbMemTableCodNivel, TbMemTableCodEspecializacion,
+    TbMemTableCodParaleloId, TbMemTableCodProfesor: TIntegerField;
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodMateria;
     AddFDCodNivel;
     AddFDCodEspecializacion;
     AddFDCodParaleloId;
     AddFDCodProfesor;
-    kbmMemTable.Open;
-    kbmMemTableCodMateria := TIntegerField(kbmMemTable.FindField('CodMateria'));
-    kbmMemTableCodNivel := TIntegerField(kbmMemTable.FindField('CodNivel'));
-    kbmMemTableCodEspecializacion := TIntegerField(kbmMemTable.FindField('CodEspecializacion'));
-    kbmMemTableCodParaleloId := TIntegerField(kbmMemTable.FindField('CodParaleloId'));
-    kbmMemTableCodProfesor := TIntegerField(kbmMemTable.FindField('CodProfesor'));
+    TbMemTable.Open;
+    TbMemTableCodMateria := TIntegerField(TbMemTable.FindField('CodMateria'));
+    TbMemTableCodNivel := TIntegerField(TbMemTable.FindField('CodNivel'));
+    TbMemTableCodEspecializacion := TIntegerField(TbMemTable.FindField('CodEspecializacion'));
+    TbMemTableCodParaleloId := TIntegerField(TbMemTable.FindField('CodParaleloId'));
+    TbMemTableCodProfesor := TIntegerField(TbMemTable.FindField('CodProfesor'));
     with SourceBaseDataModule do
     try
-      LoadDataSetFromStream(kbmMemTable, ASource);
-      kbmDistributivo.EmptyTable;
-      kbmAsignatura.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion';
-      while not kbmMemTable.Eof do
+      LoadDataSetFromStream(TbMemTable, ASource);
+      TbDistributivo.EmptyTable;
+      TbAsignatura.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion';
+      while not TbMemTable.Eof do
       begin
-        kbmAsignatura.FindKey([kbmMemTable.FindField('CodMateria'),
-          kbmMemTable.FindField('CodNivel'),
-          kbmMemTable.FindField('CodEspecializacion')]);
-        kbmDistributivo.Append;
-        kbmDistributivoCodMateria.Value := kbmMemTableCodMateria.Value;
-        kbmDistributivoCodNivel.Value := kbmMemTableCodNivel.Value;
-        kbmDistributivoCodEspecializacion.Value := kbmMemTableCodEspecializacion.Value;
-        kbmDistributivoCodParaleloId.Value := kbmMemTableCodParaleloId.Value;
-        kbmDistributivoCodProfesor.Value := kbmMemTableCodProfesor.Value;
-        kbmDistributivoCodAulaTipo.Value := kbmAsignaturaCodAulaTipo.Value;
-        kbmDistributivoComposicion.Value := kbmAsignaturaComposicion.Value;
-        kbmDistributivo.Post;
-        kbmMemTable.Next;
+        TbAsignatura.FindKey([TbMemTable.FindField('CodMateria'),
+          TbMemTable.FindField('CodNivel'),
+          TbMemTable.FindField('CodEspecializacion')]);
+        TbDistributivo.Append;
+        TbDistributivoCodMateria.Value := TbMemTableCodMateria.Value;
+        TbDistributivoCodNivel.Value := TbMemTableCodNivel.Value;
+        TbDistributivoCodEspecializacion.Value := TbMemTableCodEspecializacion.Value;
+        TbDistributivoCodParaleloId.Value := TbMemTableCodParaleloId.Value;
+        TbDistributivoCodProfesor.Value := TbMemTableCodProfesor.Value;
+        TbDistributivoCodAulaTipo.Value := TbAsignaturaCodAulaTipo.Value;
+        TbDistributivoComposicion.Value := TbAsignaturaComposicion.Value;
+        TbDistributivo.Post;
+        TbMemTable.Next;
       end;
-      //kbmDistributivo.LoadFromDataSet(kbmMemTable, []);
+      //TbDistributivo.LoadFromDataSet(TbMemTable, []);
     finally
-      kbmMemTable.Close;
+      TbMemTable.Close;
     end;
-    //LoadSource(ASource, ADestination, SourceBaseDataModule.kbmCargaAcademica);
+    //LoadSource(ASource, ADestination, SourceBaseDataModule.TbCargaAcademica);
   end;
   procedure AddFDCodProfProhibicionTipo;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'CodProfProhibicionTipo';
       DataType := ftInteger;
@@ -549,7 +549,7 @@ var
   end;
   procedure AddFDNomProfProhibicionTipo;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'NomProfProhibicionTipo';
       DataType := ftString;
@@ -558,7 +558,7 @@ var
   end;
   procedure AddFDColProfProhibicionTipo;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'ColProfProhibicionTipo';
       DataType := ftInteger;
@@ -566,7 +566,7 @@ var
   end;
   procedure AddFDValProfProhibicionTipo;
   begin
-    with kbmMemTable.FieldDefs.AddFieldDef do
+    with TbMemTable.FieldDefs.AddFieldDef do
     begin
       Name := 'ValProfProhibicionTipo';
       DataType := ftFloat;
@@ -574,21 +574,21 @@ var
   end;
   procedure CargarProfesorProhibicionTipo(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodProfProhibicionTipo;
     AddFDNomProfProhibicionTipo;
     AddFDColProfProhibicionTipo;
     AddFDValProfProhibicionTipo;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmProfesorProhibicionTipo);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbProfesorProhibicionTipo);
   end;
   procedure CargarProfesorProhibicion(ASource, ADestination: TStream);
   begin
-    kbmMemTable.FieldDefs.Clear;
+    TbMemTable.FieldDefs.Clear;
     AddFDCodProfesor;
     AddFDCodDia;
     AddFDCodHora;
     AddFDCodProfProhibicionTipo;
-    LoadSource(ASource, ADestination, SourceBaseDataModule.kbmProfesorProhibicion);
+    LoadSource(ASource, ADestination, SourceBaseDataModule.TbProfesorProhibicion);
   end;
   procedure ConvertConfig(ASource, ADestination: TStream);
   var
@@ -630,7 +630,7 @@ var
   begin
     ASource.Read(l, SizeOf(l));
     List := TStringList.Create;
-    kbmMemTable := TKbmMemTable.Create(nil);
+    TbMemTable := TkbmMemTable.Create(nil);
     SourceBaseDataModule.CheckRelations := False;
     with List do
     try
@@ -701,7 +701,7 @@ var
       end;
     finally
       SourceBaseDataModule.CheckRelations := True;
-      KbmMemTable.Free;
+      TbMemTable.Free;
       Free;
     end;
   end;

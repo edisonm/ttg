@@ -73,7 +73,7 @@ object SelPeriodoForm: TSelPeriodoForm
     DataSource = DSDiaHora
     TabOrder = 3
   end
-  object rxmDiaHora: TkbmMemTable
+  object TbDiaHora: TkbmMemTable
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -101,20 +101,20 @@ object SelPeriodoForm: TSelPeriodoForm
     Version = '2.49'
     Left = 24
     Top = 64
-    object rxmDiaHoraCodDia: TIntegerField
+    object TbDiaHoraCodDia: TIntegerField
       DisplayLabel = 'Día'
       FieldName = 'CodDia'
       Required = True
       Visible = False
     end
-    object rxmDiaHoraCodHora: TIntegerField
+    object TbDiaHoraCodHora: TIntegerField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True
       Visible = False
       AttributeSet = 'CodHora'
     end
-    object rxmDiaHoraNomDia: TStringField
+    object TbDiaHoraNomDia: TStringField
       DisplayLabel = 'Día'
       FieldKind = fkLookup
       FieldName = 'NomDia'
@@ -125,7 +125,7 @@ object SelPeriodoForm: TSelPeriodoForm
       Size = 10
       Lookup = True
     end
-    object rxmDiaHoraNomHora: TStringField
+    object TbDiaHoraNomHora: TStringField
       DisplayLabel = 'Hora'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -139,7 +139,7 @@ object SelPeriodoForm: TSelPeriodoForm
     end
   end
   object DSDiaHora: TDataSource
-    DataSet = rxmDiaHora
+    DataSet = TbDiaHora
     Left = 52
     Top = 64
   end

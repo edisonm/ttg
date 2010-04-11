@@ -8,25 +8,25 @@ uses
 
 type
   TSourceDataModule = class(TSourceBaseDataModule)
-    kbmCursoAbrNivel: TStringField;
-    kbmCursoAbrEspecializacion: TStringField;
-    kbmProfesorApeNomProfesor: TStringField;
-    kbmHorarioDetalleNomMateria: TStringField;
+    TbCursoAbrNivel: TStringField;
+    TbCursoAbrEspecializacion: TStringField;
+    TbProfesorApeNomProfesor: TStringField;
+    TbHorarioDetalleNomMateria: TStringField;
     TbProfesorProhibicionNomProfProhibicionTipo: TStringField;
     TbMateriaProhibicionNomMateProhibicionTipo: TStringField;
-    kbmDistributivoNomMateria: TStringField;
-    kbmDistributivoDuracion: TIntegerField;
-    kbmDistributivoApeNomProfesor: TStringField;
-    kbmDistributivoAbrNivel: TStringField;
-    kbmDistributivoNomParaleloId: TStringField;
-    kbmDistributivoAbrEspecializacion: TStringField;
-    kbmDistributivoAbrAulaTipo: TStringField;
-    kbmParaleloAbrNivel: TStringField;
-    kbmParaleloAbrEspecializacion: TStringField;
-    kbmParaleloNomParaleloId: TStringField;
-    procedure kbmProfesorCalcFields(DataSet: TDataSet);
-    procedure kbmDistributivoBeforePost(DataSet: TDataSet);
-    procedure kbmDistributivoCalcFields(DataSet: TDataSet);
+    TbDistributivoNomMateria: TStringField;
+    TbDistributivoDuracion: TIntegerField;
+    TbDistributivoApeNomProfesor: TStringField;
+    TbDistributivoAbrNivel: TStringField;
+    TbDistributivoNomParaleloId: TStringField;
+    TbDistributivoAbrEspecializacion: TStringField;
+    TbDistributivoAbrAulaTipo: TStringField;
+    TbParaleloAbrNivel: TStringField;
+    TbParaleloAbrEspecializacion: TStringField;
+    TbParaleloNomParaleloId: TStringField;
+    procedure TbProfesorCalcFields(DataSet: TDataSet);
+    procedure TbDistributivoBeforePost(DataSet: TDataSet);
+    procedure TbDistributivoCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -74,7 +74,7 @@ resourcestring
   SInvalidTTDVersion = 'Versión archivo TTD inválida';
   //SInvalidTTDFile = 'Archivo TTD no válido';
 
-procedure TSourceDataModule.kbmProfesorCalcFields(DataSet: TDataSet);
+procedure TSourceDataModule.TbProfesorCalcFields(DataSet: TDataSet);
 begin
   inherited;
   with DataSet do
@@ -82,22 +82,22 @@ begin
       FieldValues['NomProfesor'];
 end;
 
-procedure TSourceDataModule.kbmDistributivoBeforePost(DataSet: TDataSet);
+procedure TSourceDataModule.TbDistributivoBeforePost(DataSet: TDataSet);
 var
   s: string;
 begin
   inherited;
-  s := kbmDistributivoComposicion.Value;
+  s := TbDistributivoComposicion.Value;
   if ComposicionADuracion(s) <= 0 then
     raise Exception.CreateFmt('Composición no válida: "%s"', [s]);
-  with kbmDistributivoCodMateria do DefaultExpression := AsString;
-  with kbmDistributivoCodNivel do DefaultExpression := AsString;
-  with kbmDistributivoCodEspecializacion do DefaultExpression := AsString;
-  with kbmDistributivoCodParaleloId do DefaultExpression := AsString;
-  with kbmDistributivoCodAulaTipo do DefaultExpression := AsString;
+  with TbDistributivoCodMateria do DefaultExpression := AsString;
+  with TbDistributivoCodNivel do DefaultExpression := AsString;
+  with TbDistributivoCodEspecializacion do DefaultExpression := AsString;
+  with TbDistributivoCodParaleloId do DefaultExpression := AsString;
+  with TbDistributivoCodAulaTipo do DefaultExpression := AsString;
 end;
 
-procedure TSourceDataModule.kbmDistributivoCalcFields(DataSet: TDataSet);
+procedure TSourceDataModule.TbDistributivoCalcFields(DataSet: TDataSet);
 var
   v: Variant;
 begin
@@ -295,7 +295,7 @@ begin
     // Días laborables por defecto, excepto sábados y domingos:
     CheckRelations := False;
     try
-      with kbmDia do
+      with TbDia do
       begin
         for i := Low(LongDayNames) + 1 to High(LongDayNames) - 1 do
         begin
@@ -306,7 +306,7 @@ begin
         end;
       end;
       // Horas por defecto:
-      with kbmHora do
+      with TbHora do
       begin
         t := 7 / 24;
         for i := Low(SNomHora) to High(SNomHora) do
@@ -324,7 +324,7 @@ begin
         end;
       end;
       // Generar todos los períodos, exceptuando el sábado, domingo y el recreo:
-      with kbmPeriodo do
+      with TbPeriodo do
       begin
         for i := Low(LongDayNames) + 1 to High(LongDayNames) - 1 do
         begin
@@ -340,7 +340,7 @@ begin
           end;
         end;
       end;
-      with kbmMateriaProhibicionTipo do
+      with TbMateriaProhibicionTipo do
       begin
         for i := Low(SNomMateProhibicionTipo) to High(SNomMateProhibicionTipo) do
         begin
@@ -352,7 +352,7 @@ begin
           Post;
         end;
       end;
-      with kbmProfesorProhibicionTipo do
+      with TbProfesorProhibicionTipo do
       begin
         for i := Low(SNomProfProhibicionTipo) to High(SNomProfProhibicionTipo) do
         begin

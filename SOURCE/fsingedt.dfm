@@ -78,7 +78,7 @@ inherited SingleEditorForm: TSingleEditorForm
       OnGetBtnParams = DBGridGetBtnParams
       OnTitleBtnClick = DBGridTitleBtnClick
     end
-    object RxSplitter1: TRxSplitter
+    object Splitter1: TRxSplitter
       Left = 498
       Top = 1
       Width = 3

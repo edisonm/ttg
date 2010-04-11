@@ -33,7 +33,7 @@ procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorForm;
 begin
   with SourceDataModule, ACrossManyToManyEditorForm do
   begin
-    RxDrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
+    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [Description[ARelDataSet], Description[AColDataSet],
       Description[ARowDataSet]]);
   end;
@@ -44,7 +44,7 @@ procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorRForm;
 begin
   with SourceDataModule, ACrossManyToManyEditorForm do
   begin
-    RxDrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
+    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [Description[ARelDataSet], Description[AColDataSet],
       Description[ARowDataSet]]);
     ListBox.Hint := Format('%s|%s', [ALstDataSet.Name,
@@ -57,7 +57,7 @@ procedure LoadHints(ACrossManyToManyEditorForm: TFCubicalEditor2; AColDataSet,
 begin
   with MasterDataModule, ACrossManyToManyEditorForm do
   begin
-    RxDrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
+    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [GetDescription(ARelDataSet), GetDescription(AColDataSet),
       GetDescription(ARowDataSet)]);
     CheckListBox.Hint := Format('%s|%s', [ALstDataSet.Name,

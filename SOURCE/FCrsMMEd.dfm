@@ -74,7 +74,7 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
     Width = 648
     Height = 216
   end
-  object RxDrawGrid: TRxDrawGrid [3]
+  object DrawGrid: TRxDrawGrid [3]
     Left = 0
     Top = 25
     Width = 648
@@ -86,8 +86,8 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
     ParentShowHint = False
     ShowHint = True
     TabOrder = 0
-    OnDrawCell = RxDrawGridDrawCell
-    OnSelectCell = RxDrawGridSelectCell
+    OnDrawCell = DrawGridDrawCell
+    OnSelectCell = DrawGridSelectCell
     IniStorage = FormStorage
     RowHeights = (
       18

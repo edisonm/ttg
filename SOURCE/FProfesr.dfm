@@ -45,7 +45,7 @@ inherited ProfesorForm: TProfesorForm
       Width = 697
       Height = 354
     end
-    inherited RxSplitter1: TRxSplitter
+    inherited Splitter1: TRxSplitter
       Left = 698
       Height = 354
     end

@@ -62,7 +62,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
     Width = 713
     Height = 328
   end
-  inherited RxDrawGrid: TRxDrawGrid
+  inherited DrawGrid: TRxDrawGrid
     Width = 713
     Height = 328
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]

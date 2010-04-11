@@ -3,37 +3,37 @@ inherited SourceDataModule: TSourceDataModule
   Top = 144
   Height = 496
   Width = 758
-  inherited kbmAulaTipo: TkbmMemTable
-    inherited kbmAulaTipoCodAulaTipo: TAutoIncField
+  inherited TbAulaTipo: TkbmMemTable
+    inherited TbAulaTipoCodAulaTipo: TAutoIncField
       Visible = False
     end
   end
-  inherited kbmEspecializacion: TkbmMemTable
-    inherited kbmEspecializacionCodEspecializacion: TAutoIncField
+  inherited TbEspecializacion: TkbmMemTable
+    inherited TbEspecializacionCodEspecializacion: TAutoIncField
       Visible = False
     end
   end
-  inherited kbmDia: TkbmMemTable
-    inherited kbmDiaCodDia: TAutoIncField
+  inherited TbDia: TkbmMemTable
+    inherited TbDiaCodDia: TAutoIncField
       Visible = False
     end
   end
-  inherited kbmMateria: TkbmMemTable
-    inherited kbmMateriaCodMateria: TAutoIncField
+  inherited TbMateria: TkbmMemTable
+    inherited TbMateriaCodMateria: TAutoIncField
       Visible = False
     end
   end
-  inherited kbmNivel: TkbmMemTable
-    inherited kbmNivelCodNivel: TAutoIncField
+  inherited TbNivel: TkbmMemTable
+    inherited TbNivelCodNivel: TAutoIncField
       Visible = False
     end
   end
-  inherited kbmHora: TkbmMemTable
-    inherited kbmHoraCodHora: TAutoIncField
+  inherited TbHora: TkbmMemTable
+    inherited TbHoraCodHora: TAutoIncField
       Visible = False
     end
   end
-  inherited kbmCurso: TkbmMemTable
+  inherited TbCurso: TkbmMemTable
     FieldDefs = <
       item
         Name = 'AbrNivel'
@@ -55,56 +55,56 @@ inherited SourceDataModule: TSourceDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
-    object kbmCursoAbrNivel: TStringField [0]
+    object TbCursoAbrNivel: TStringField [0]
       DisplayLabel = 'Nivel'
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'AbrNivel'
-      LookupDataSet = kbmNivel
+      LookupDataSet = TbNivel
       LookupKeyFields = 'CodNivel'
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 10
       Lookup = True
     end
-    object kbmCursoAbrEspecializacion: TStringField [1]
+    object TbCursoAbrEspecializacion: TStringField [1]
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'AbrEspecializacion'
-      LookupDataSet = kbmEspecializacion
+      LookupDataSet = TbEspecializacion
       LookupKeyFields = 'CodEspecializacion'
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
       Size = 10
       Lookup = True
     end
-    inherited kbmCursoCodNivel: TIntegerField
+    inherited TbCursoCodNivel: TIntegerField
       Visible = False
     end
-    inherited kbmCursoCodEspecializacion: TIntegerField
-      Visible = False
-    end
-  end
-  inherited kbmParaleloId: TkbmMemTable
-    inherited kbmParaleloIdCodParaleloId: TAutoIncField
+    inherited TbCursoCodEspecializacion: TIntegerField
       Visible = False
     end
   end
-  inherited kbmMateriaProhibicionTipo: TkbmMemTable
-    inherited kbmMateriaProhibicionTipoCodMateProhibicionTipo: TIntegerField
+  inherited TbParaleloId: TkbmMemTable
+    inherited TbParaleloIdCodParaleloId: TAutoIncField
       Visible = False
     end
   end
-  inherited kbmPeriodo: TkbmMemTable
-    inherited kbmPeriodoCodDia: TIntegerField
-      Visible = False
-    end
-    inherited kbmPeriodoCodHora: TIntegerField
+  inherited TbMateriaProhibicionTipo: TkbmMemTable
+    inherited TbMateriaProhibicionTipoCodMateProhibicionTipo: TIntegerField
       Visible = False
     end
   end
-  inherited kbmParalelo: TkbmMemTable
+  inherited TbPeriodo: TkbmMemTable
+    inherited TbPeriodoCodDia: TIntegerField
+      Visible = False
+    end
+    inherited TbPeriodoCodHora: TIntegerField
+      Visible = False
+    end
+  end
+  inherited TbParalelo: TkbmMemTable
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -136,42 +136,42 @@ inherited SourceDataModule: TSourceDataModule
         DataType = ftString
         Size = 5
       end>
-    inherited kbmParaleloCodNivel: TIntegerField
+    inherited TbParaleloCodNivel: TIntegerField
       Visible = False
     end
-    inherited kbmParaleloCodEspecializacion: TIntegerField
+    inherited TbParaleloCodEspecializacion: TIntegerField
       Visible = False
     end
-    inherited kbmParaleloCodParaleloId: TIntegerField
+    inherited TbParaleloCodParaleloId: TIntegerField
       Visible = False
     end
-    object kbmParaleloAbrNivel: TStringField
+    object TbParaleloAbrNivel: TStringField
       DisplayLabel = 'Nivel'
       FieldKind = fkLookup
       FieldName = 'AbrNivel'
-      LookupDataSet = kbmNivel
+      LookupDataSet = TbNivel
       LookupKeyFields = 'CodNivel'
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
       Lookup = True
     end
-    object kbmParaleloAbrEspecializacion: TStringField
+    object TbParaleloAbrEspecializacion: TStringField
       DisplayLabel = 'Especializacion'
       FieldKind = fkLookup
       FieldName = 'AbrEspecializacion'
-      LookupDataSet = kbmEspecializacion
+      LookupDataSet = TbEspecializacion
       LookupKeyFields = 'CodEspecializacion'
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
       Size = 10
       Lookup = True
     end
-    object kbmParaleloNomParaleloId: TStringField
+    object TbParaleloNomParaleloId: TStringField
       DisplayLabel = 'Paralelo'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
-      LookupDataSet = kbmParaleloId
+      LookupDataSet = TbParaleloId
       LookupKeyFields = 'CodParaleloId'
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
@@ -179,7 +179,7 @@ inherited SourceDataModule: TSourceDataModule
       Lookup = True
     end
   end
-  inherited kbmProfesor: TkbmMemTable
+  inherited TbProfesor: TkbmMemTable
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -208,11 +208,11 @@ inherited SourceDataModule: TSourceDataModule
         DataType = ftString
         Size = 31
       end>
-    OnCalcFields = kbmProfesorCalcFields
-    inherited kbmProfesorCodProfesor: TAutoIncField
+    OnCalcFields = TbProfesorCalcFields
+    inherited TbProfesorCodProfesor: TAutoIncField
       Visible = False
     end
-    object kbmProfesorApeNomProfesor: TStringField
+    object TbProfesorApeNomProfesor: TStringField
       DisplayLabel = 'Apellido Nombre'
       DisplayWidth = 31
       FieldKind = fkCalculated
@@ -222,7 +222,7 @@ inherited SourceDataModule: TSourceDataModule
       Calculated = True
     end
   end
-  inherited kbmMateriaProhibicion: TkbmMemTable
+  inherited TbMateriaProhibicion: TkbmMemTable
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -249,16 +249,16 @@ inherited SourceDataModule: TSourceDataModule
         DataType = ftString
         Size = 10
       end>
-    inherited kbmMateriaProhibicionCodMateria: TIntegerField
+    inherited TbMateriaProhibicionCodMateria: TIntegerField
       Visible = False
     end
-    inherited kbmMateriaProhibicionCodDia: TIntegerField
+    inherited TbMateriaProhibicionCodDia: TIntegerField
       Visible = False
     end
-    inherited kbmMateriaProhibicionCodHora: TIntegerField
+    inherited TbMateriaProhibicionCodHora: TIntegerField
       Visible = False
     end
-    inherited kbmMateriaProhibicionCodMateProhibicionTipo: TIntegerField
+    inherited TbMateriaProhibicionCodMateProhibicionTipo: TIntegerField
       Visible = False
     end
     object TbMateriaProhibicionNomMateProhibicionTipo: TStringField
@@ -266,7 +266,7 @@ inherited SourceDataModule: TSourceDataModule
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'NomMateProhibicionTipo'
-      LookupDataSet = kbmMateriaProhibicionTipo
+      LookupDataSet = TbMateriaProhibicionTipo
       LookupKeyFields = 'CodMateProhibicionTipo'
       LookupResultField = 'NomMateProhibicionTipo'
       KeyFields = 'CodMateProhibicionTipo'
@@ -274,7 +274,7 @@ inherited SourceDataModule: TSourceDataModule
       Lookup = True
     end
   end
-  inherited kbmDistributivo: TkbmMemTable
+  inherited TbDistributivo: TkbmMemTable
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -346,19 +346,19 @@ inherited SourceDataModule: TSourceDataModule
         Name = 'Duracion'
         DataType = ftInteger
       end>
-    OnCalcFields = kbmDistributivoCalcFields
-    inherited kbmDistributivoCodEspecializacion: TIntegerField
+    OnCalcFields = TbDistributivoCalcFields
+    inherited TbDistributivoCodEspecializacion: TIntegerField
       Visible = False
     end
-    inherited kbmDistributivoCodAulaTipo: TIntegerField
+    inherited TbDistributivoCodAulaTipo: TIntegerField
       Visible = False
     end
-    object kbmDistributivoApeNomProfesor: TStringField [6]
+    object TbDistributivoApeNomProfesor: TStringField [6]
       DisplayLabel = 'Profesor'
       DisplayWidth = 31
       FieldKind = fkLookup
       FieldName = 'ApeNomProfesor'
-      LookupDataSet = kbmProfesor
+      LookupDataSet = TbProfesor
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'ApeNomProfesor'
       KeyFields = 'CodProfesor'
@@ -366,71 +366,71 @@ inherited SourceDataModule: TSourceDataModule
       Size = 31
       Lookup = True
     end
-    object kbmDistributivoAbrNivel: TStringField [7]
+    object TbDistributivoAbrNivel: TStringField [7]
       DisplayLabel = 'Nivel'
       FieldKind = fkLookup
       FieldName = 'AbrNivel'
-      LookupDataSet = kbmNivel
+      LookupDataSet = TbNivel
       LookupKeyFields = 'CodNivel'
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
       Lookup = True
     end
-    object kbmDistributivoAbrEspecializacion: TStringField [8]
+    object TbDistributivoAbrEspecializacion: TStringField [8]
       DisplayLabel = 'Especializacion'
       FieldKind = fkLookup
       FieldName = 'AbrEspecializacion'
-      LookupDataSet = kbmEspecializacion
+      LookupDataSet = TbEspecializacion
       LookupKeyFields = 'CodEspecializacion'
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
       Size = 10
       Lookup = True
     end
-    object kbmDistributivoNomParaleloId: TStringField [9]
+    object TbDistributivoNomParaleloId: TStringField [9]
       DisplayLabel = 'Paralelo'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
-      LookupDataSet = kbmParaleloId
+      LookupDataSet = TbParaleloId
       LookupKeyFields = 'CodParaleloId'
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
       Lookup = True
     end
-    object kbmDistributivoNomMateria: TStringField [10]
+    object TbDistributivoNomMateria: TStringField [10]
       DisplayLabel = 'Materia'
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'NomMateria'
-      LookupDataSet = kbmMateria
+      LookupDataSet = TbMateria
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
       Size = 15
       Lookup = True
     end
-    object kbmDistributivoAbrAulaTipo: TStringField [11]
+    object TbDistributivoAbrAulaTipo: TStringField [11]
       DisplayLabel = 'Tipo aula'
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'AbrAulaTipo'
-      LookupDataSet = kbmAulaTipo
+      LookupDataSet = TbAulaTipo
       LookupKeyFields = 'CodAulaTipo'
       LookupResultField = 'AbrAulaTipo'
       KeyFields = 'CodAulaTipo'
       Size = 10
       Lookup = True
     end
-    object kbmDistributivoDuracion: TIntegerField
+    object TbDistributivoDuracion: TIntegerField
       DisplayLabel = 'Duración'
       FieldKind = fkCalculated
       FieldName = 'Duracion'
       Calculated = True
     end
   end
-  inherited kbmHorarioDetalle: TkbmMemTable
+  inherited TbHorarioDetalle: TkbmMemTable
     FieldDefs = <
       item
         Name = 'CodHorario'
@@ -477,33 +477,33 @@ inherited SourceDataModule: TSourceDataModule
         DataType = ftString
         Size = 15
       end>
-    inherited kbmHorarioDetalleCodHorario: TIntegerField
+    inherited TbHorarioDetalleCodHorario: TIntegerField
       Visible = False
     end
-    inherited kbmHorarioDetalleCodMateria: TIntegerField
+    inherited TbHorarioDetalleCodMateria: TIntegerField
       Visible = False
     end
-    inherited kbmHorarioDetalleCodNivel: TIntegerField
+    inherited TbHorarioDetalleCodNivel: TIntegerField
       Visible = False
     end
-    inherited kbmHorarioDetalleCodEspecializacion: TIntegerField
+    inherited TbHorarioDetalleCodEspecializacion: TIntegerField
       Visible = False
     end
-    inherited kbmHorarioDetalleCodParaleloId: TIntegerField
+    inherited TbHorarioDetalleCodParaleloId: TIntegerField
       Visible = False
     end
-    inherited kbmHorarioDetalleCodDia: TIntegerField
+    inherited TbHorarioDetalleCodDia: TIntegerField
       Visible = False
     end
-    inherited kbmHorarioDetalleCodHora: TIntegerField
+    inherited TbHorarioDetalleCodHora: TIntegerField
       Visible = False
     end
-    object kbmHorarioDetalleNomMateria: TStringField
+    object TbHorarioDetalleNomMateria: TStringField
       DisplayLabel = 'Materia'
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'NomMateria'
-      LookupDataSet = kbmMateria
+      LookupDataSet = TbMateria
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
@@ -511,12 +511,12 @@ inherited SourceDataModule: TSourceDataModule
       Lookup = True
     end
   end
-  inherited kbmProfesorProhibicionTipo: TkbmMemTable
-    inherited kbmProfesorProhibicionTipoCodProfProhibicionTipo: TAutoIncField
+  inherited TbProfesorProhibicionTipo: TkbmMemTable
+    inherited TbProfesorProhibicionTipoCodProfProhibicionTipo: TAutoIncField
       Visible = False
     end
   end
-  inherited kbmProfesorProhibicion: TkbmMemTable
+  inherited TbProfesorProhibicion: TkbmMemTable
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -543,16 +543,16 @@ inherited SourceDataModule: TSourceDataModule
         DataType = ftString
         Size = 10
       end>
-    inherited kbmProfesorProhibicionCodProfesor: TIntegerField
+    inherited TbProfesorProhibicionCodProfesor: TIntegerField
       Visible = False
     end
-    inherited kbmProfesorProhibicionCodDia: TIntegerField
+    inherited TbProfesorProhibicionCodDia: TIntegerField
       Visible = False
     end
-    inherited kbmProfesorProhibicionCodHora: TIntegerField
+    inherited TbProfesorProhibicionCodHora: TIntegerField
       Visible = False
     end
-    inherited kbmProfesorProhibicionCodProfProhibicionTipo: TIntegerField
+    inherited TbProfesorProhibicionCodProfProhibicionTipo: TIntegerField
       Visible = False
     end
     object TbProfesorProhibicionNomProfProhibicionTipo: TStringField
@@ -560,7 +560,7 @@ inherited SourceDataModule: TSourceDataModule
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'NomProfProhibicionTipo'
-      LookupDataSet = kbmProfesorProhibicionTipo
+      LookupDataSet = TbProfesorProhibicionTipo
       LookupKeyFields = 'CodProfProhibicionTipo'
       LookupResultField = 'NomProfProhibicionTipo'
       KeyFields = 'CodProfProhibicionTipo'

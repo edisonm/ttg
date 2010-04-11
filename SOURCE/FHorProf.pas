@@ -57,11 +57,11 @@ begin
   begin
     if varIsEmpty(dlcProfesor.KeyValue) then
       raise Exception.Create('Debe especificar un Profesor');
-    s := Format('[%s %d] - %s', [Description[kbmHorario], CodHorario,
+    s := Format('[%s %d] - %s', [Description[TbHorario], CodHorario,
       dlcProfesor.Text]);
     Caption := s;
     FNombre := StrHolderShowProfesor.Strings.Values[cbVerProfesor.Text];
-    ShowEditor(kbmDia, kbmHora, QuHorarioProfesor, kbmPeriodo, 'CodDia', 'NomDia',
+    ShowEditor(TbDia, TbHora, QuHorarioProfesor, TbPeriodo, 'CodDia', 'NomDia',
       'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora', 'CodHora', 'Nombre');
   end;
 end;
@@ -69,29 +69,29 @@ end;
 procedure THorarioProfesorForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  CodHorario := SourceDataModule.kbmHorarioCodHorario.Value;
-  SourceDataModule.kbmProfesor.First;
+  CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
+  SourceDataModule.TbProfesor.First;
   cbVerProfesor.Items.Clear;
   FillHorarioProfesor;
   LoadNames(MasterDataModule.StrHolderShowProfesor.Strings, cbVerProfesor.Items);
   cbVerProfesor.Text := cbVerProfesor.Items[0];
-  dlcProfesor.KeyValue := SourceDataModule.kbmProfesorCodProfesor.Value;
+  dlcProfesor.KeyValue := SourceDataModule.TbProfesorCodProfesor.Value;
   btn97MostrarClick(nil);
 end;
 
 procedure THorarioProfesorForm.btn97PriorClick(Sender: TObject);
 begin
   inherited;
-  SourceDataModule.kbmProfesor.Prior;
-  dlcProfesor.KeyValue := SourceDataModule.kbmProfesorCodProfesor.Value;
+  SourceDataModule.TbProfesor.Prior;
+  dlcProfesor.KeyValue := SourceDataModule.TbProfesorCodProfesor.Value;
   btn97MostrarClick(nil);
 end;
 
 procedure THorarioProfesorForm.btn97NextClick(Sender: TObject);
 begin
   inherited;
-  SourceDataModule.kbmProfesor.Next;
-  dlcProfesor.KeyValue := SourceDataModule.kbmProfesorCodProfesor.Value;
+  SourceDataModule.TbProfesor.Next;
+  dlcProfesor.KeyValue := SourceDataModule.TbProfesorCodProfesor.Value;
   btn97MostrarClick(nil);
 end;
 
@@ -101,38 +101,38 @@ var
 begin
   with SourceDataModule do
   begin
-    kbmHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
-    if kbmHorarioDetalle.Locate('CodHorario', CodHorario, []) then
+    TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+    if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
     begin
-      kbmDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+      TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
       try
         QuHorarioProfesor.EmptyTable;
-        kbmDistributivo.First;
-        while (kbmHorarioDetalleCodHorario.Value = CodHorario) and not kbmHorarioDetalle.Eof do
+        TbDistributivo.First;
+        while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
         begin
-          CodMateria := kbmHorarioDetalleCodMateria.Value;
-          CodNivel := kbmHorarioDetalleCodNivel.Value;
-          CodEspecializacion := kbmHorarioDetalleCodEspecializacion.Value;
-          CodParaleloId := kbmHorarioDetalleCodParaleloId.Value;
-          while ((kbmDistributivoCodMateria.Value <> CodMateria)
-            or (kbmDistributivoCodNivel.Value <> CodNivel)
-            or (kbmDistributivoCodEspecializacion.Value <> CodEspecializacion)
-            or (kbmDistributivoCodParaleloId.Value <> CodParaleloId))
-            and not kbmDistributivo.Eof do
-            kbmDistributivo.Next;
+          CodMateria := TbHorarioDetalleCodMateria.Value;
+          CodNivel := TbHorarioDetalleCodNivel.Value;
+          CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
+          CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
+          while ((TbDistributivoCodMateria.Value <> CodMateria)
+            or (TbDistributivoCodNivel.Value <> CodNivel)
+            or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
+            or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
+            and not TbDistributivo.Eof do
+            TbDistributivo.Next;
           QuHorarioProfesor.Append;
-          QuHorarioProfesorCodProfesor.Value := kbmDistributivoCodProfesor.Value;
-          QuHorarioProfesorCodMateria.Value := kbmHorarioDetalleCodMateria.Value;
-          QuHorarioProfesorCodNivel.Value := kbmHorarioDetalleCodNivel.Value;
-          QuHorarioProfesorCodEspecializacion.Value := kbmHorarioDetalleCodEspecializacion.Value;
-          QuHorarioProfesorCodParaleloId.Value := kbmHorarioDetalleCodParaleloId.Value;
-          QuHorarioProfesorCodHora.Value := kbmHorarioDetalleCodHora.Value;
-          QuHorarioProfesorCodDia.Value := kbmHorarioDetalleCodDia.Value;
+          QuHorarioProfesorCodProfesor.Value := TbDistributivoCodProfesor.Value;
+          QuHorarioProfesorCodMateria.Value := TbHorarioDetalleCodMateria.Value;
+          QuHorarioProfesorCodNivel.Value := TbHorarioDetalleCodNivel.Value;
+          QuHorarioProfesorCodEspecializacion.Value := TbHorarioDetalleCodEspecializacion.Value;
+          QuHorarioProfesorCodParaleloId.Value := TbHorarioDetalleCodParaleloId.Value;
+          QuHorarioProfesorCodHora.Value := TbHorarioDetalleCodHora.Value;
+          QuHorarioProfesorCodDia.Value := TbHorarioDetalleCodDia.Value;
           QuHorarioProfesor.Post;
-          kbmHorarioDetalle.Next;
+          TbHorarioDetalle.Next;
         end;
       finally
-        kbmDistributivo.IndexFieldNames := '';
+        TbDistributivo.IndexFieldNames := '';
       end;
     end;
   end;

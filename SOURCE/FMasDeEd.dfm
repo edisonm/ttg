@@ -22,7 +22,7 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
       TabOrder = 1
       OnEnter = DBGridEnter
     end
-    inherited RxSplitter1: TRxSplitter
+    inherited Splitter1: TRxSplitter
       Height = 154
     end
     object DBGridDetail: TRxDBGrid

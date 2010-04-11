@@ -112,7 +112,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     Width = 696
     Height = 357
   end
-  inherited RxDrawGrid: TRxDrawGrid
+  inherited DrawGrid: TRxDrawGrid
     Width = 696
     Height = 357
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
@@ -531,9 +531,9 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       C07FFFFEFFFF0003FFFFFFFFFFFF000700000000000000000000000000000000
       000000000000}
   end
-  object kbmParalelo: TkbmMemTable
+  object TbParalelo: TkbmMemTable
     Active = True
-    AttachedTo = SourceDataModule.kbmParalelo
+    AttachedTo = SourceDataModule.TbParalelo
     AttachedAutoRefresh = True
     AutoIncMinValue = 0
     FieldDefs = <
@@ -591,57 +591,57 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     Version = '2.49'
     Left = 88
     Top = 104
-    object kbmParaleloCodNivel: TIntegerField
+    object TbParaleloCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       DisplayWidth = 10
       FieldName = 'CodNivel'
       Required = True
       Visible = False
     end
-    object kbmParaleloCodEspecializacion: TIntegerField
+    object TbParaleloCodEspecializacion: TIntegerField
       DisplayLabel = 'Especialización'
       DisplayWidth = 10
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
     end
-    object kbmParaleloCodParaleloId: TIntegerField
+    object TbParaleloCodParaleloId: TIntegerField
       DisplayLabel = 'Paralelo'
       DisplayWidth = 10
       FieldName = 'CodParaleloId'
       Required = True
       Visible = False
     end
-    object kbmParaleloAbrNivel: TStringField
+    object TbParaleloAbrNivel: TStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
       FieldName = 'AbrNivel'
-      LookupDataSet = SourceDataModule.kbmNivel
+      LookupDataSet = SourceDataModule.TbNivel
       LookupKeyFields = 'CodNivel'
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
       Lookup = True
     end
-    object kbmParaleloAbrEspecializacion: TStringField
+    object TbParaleloAbrEspecializacion: TStringField
       DisplayLabel = 'Especializacion'
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'AbrEspecializacion'
-      LookupDataSet = SourceDataModule.kbmEspecializacion
+      LookupDataSet = SourceDataModule.TbEspecializacion
       LookupKeyFields = 'CodEspecializacion'
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
       Size = 10
       Lookup = True
     end
-    object kbmParaleloNomParaleloId: TStringField
+    object TbParaleloNomParaleloId: TStringField
       DisplayLabel = 'Paralelo'
       DisplayWidth = 5
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
-      LookupDataSet = SourceDataModule.kbmParaleloId
+      LookupDataSet = SourceDataModule.TbParaleloId
       LookupKeyFields = 'CodParaleloId'
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
@@ -783,7 +783,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'NomMateria'
-      LookupDataSet = SourceDataModule.kbmMateria
+      LookupDataSet = SourceDataModule.TbMateria
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
@@ -795,7 +795,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       DisplayWidth = 31
       FieldKind = fkLookup
       FieldName = 'ApeNomProfesor'
-      LookupDataSet = SourceDataModule.kbmProfesor
+      LookupDataSet = SourceDataModule.TbProfesor
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'ApeNomProfesor'
       KeyFields = 'CodProfesor'
@@ -811,7 +811,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     end
   end
   object dsParalelo: TDataSource
-    DataSet = kbmParalelo
+    DataSet = TbParalelo
     Left = 88
     Top = 132
   end

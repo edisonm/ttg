@@ -35,24 +35,24 @@ begin
   begin
     with FormStorage do
     begin
-      IniSection := IniSection + '\MMEdR' + kbmMateriaProhibicion.Name;
+      IniSection := IniSection + '\MMEdR' + TbMateriaProhibicion.Name;
       Active := True;
       RestoreFormPlacement;
     end;
-    Caption := Format('%s %s - Editando %s', [SourceDataModule.Name[kbmMateria],
-      kbmMateriaNomMateria.Value, Description[kbmMateriaProhibicion]]);
-    RxDrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
-      [Description[kbmMateriaProhibicion], Description[kbmDia],
-      Description[kbmHora]]);
+    Caption := Format('%s %s - Editando %s', [SourceDataModule.Name[TbMateria],
+      TbMateriaNomMateria.Value, Description[TbMateriaProhibicion]]);
+    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
+      [Description[TbMateriaProhibicion], Description[TbDia],
+      Description[TbHora]]);
     ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda',
-      [Description[kbmMateriaProhibicionTipo],
-      Description[kbmMateriaProhibicionTipo]]);
-    ShowEditor(kbmDia, kbmHora, kbmMateriaProhibicionTipo, kbmMateriaProhibicion,
-      kbmPeriodo, 'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora',
+      [Description[TbMateriaProhibicionTipo],
+      Description[TbMateriaProhibicionTipo]]);
+    ShowEditor(TbDia, TbHora, TbMateriaProhibicionTipo, TbMateriaProhibicion,
+      TbPeriodo, 'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora',
       'NomHora', 'CodHora', 'CodHora', 'CodMateProhibicionTipo',
       'NomMateProhibicionTipo', 'ColMateProhibicionTipo',
       'CodMateProhibicionTipo');
-    Tag := kbmMateriaCodMateria.Value;
+    Tag := TbMateriaCodMateria.Value;
     OnActivate := FormActivate;
   end;
 end;
@@ -61,7 +61,7 @@ procedure TMateriaForm.FormActivate(Sender: TObject);
 begin
   with SourceDataModule do
   begin
-    kbmMateria.Locate('CodMateria', (Sender as TCustomForm).Tag, []);
+    TbMateria.Locate('CodMateria', (Sender as TCustomForm).Tag, []);
   end;
 end;
 

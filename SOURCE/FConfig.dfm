@@ -525,7 +525,7 @@ object ConfiguracionForm: TConfiguracionForm
         Value = 5
         ZeroEmpty = False
       end
-      object RxDBGrid1: TRxDBGrid
+      object DBGrid1: TRxDBGrid
         Left = 8
         Top = 176
         Width = 233
@@ -537,9 +537,9 @@ object ConfiguracionForm: TConfiguracionForm
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
-        OnGetCellParams = RxDBGridGetCellParams
+        OnGetCellParams = DBGridGetCellParams
       end
-      object RxDBGrid2: TRxDBGrid
+      object DBGrid2: TRxDBGrid
         Left = 8
         Top = 280
         Width = 233
@@ -551,7 +551,7 @@ object ConfiguracionForm: TConfiguracionForm
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
-        OnGetCellParams = RxDBGridGetCellParams
+        OnGetCellParams = DBGridGetCellParams
       end
       object creProfesorFraccionamiento: TCurrencyEdit
         Left = 152

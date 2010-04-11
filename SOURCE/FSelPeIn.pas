@@ -8,12 +8,12 @@ uses
 
 type
   TSelPeriodoForm = class(TForm)
-    rxmDiaHora: TkbmMemTable;
+    TbDiaHora: TkbmMemTable;
     DSDiaHora: TDataSource;
-    rxmDiaHoraCodDia: TIntegerField;
-    rxmDiaHoraCodHora: TIntegerField;
-    rxmDiaHoraNomDia: TStringField;
-    rxmDiaHoraNomHora: TStringField;
+    TbDiaHoraCodDia: TIntegerField;
+    TbDiaHoraCodHora: TIntegerField;
+    TbDiaHoraNomDia: TStringField;
+    TbDiaHoraNomHora: TStringField;
     BBAceptar: TBitBtn;
     BBCancelar: TBitBtn;
     Label1: TLabel;
@@ -44,8 +44,8 @@ begin
     Result := FSelPeriodoForm.ShowModal = mrOk;
     if Result then
     begin
-      ACodDia := FSelPeriodoForm.rxmDiaHoraCodDia.Value;
-      ACodHora := FSelPeriodoForm.rxmDiaHoraCodHora.Value;
+      ACodDia := FSelPeriodoForm.TbDiaHoraCodDia.Value;
+      ACodHora := FSelPeriodoForm.TbDiaHoraCodHora.Value;
     end;
   finally
     FSelPeriodoForm.Release;
@@ -54,7 +54,7 @@ end;
 
 procedure TSelPeriodoForm.FormShow(Sender: TObject);
 begin
-  rxmDiaHora.Open;
+  TbDiaHora.Open;
 end;
 
 end.

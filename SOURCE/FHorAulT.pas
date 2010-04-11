@@ -52,31 +52,31 @@ procedure THorarioAulaTipoForm.FillHorarioAulaTipo;
 begin
   with SourceDataModule do
   begin
-    kbmHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
-    if kbmHorarioDetalle.Locate('CodHorario', CodHorario, []) then
+    TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+    if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
     begin
-      kbmDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
-      kbmDistributivo.MasterFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
-      kbmDistributivo.MasterSource := dsHorarioDetalle;
+      TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+      TbDistributivo.MasterFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+      TbDistributivo.MasterSource := dsHorarioDetalle;
       try
         QuHorarioAulaTipo.EmptyTable;
-        while (kbmHorarioDetalleCodHorario.Value = CodHorario) and not kbmHorarioDetalle.Eof do
+        while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
         begin
           QuHorarioAulaTipo.Append;
-          QuHorarioAulaTipoCodAulaTipo.Value := kbmAulaTipoCodAulaTipo.Value;
-          QuHorarioAulaTipoCodMateria.Value := kbmHorarioDetalleCodMateria.Value;
-          QuHorarioAulaTipoCodNivel.Value := kbmHorarioDetalleCodNivel.Value;
-          QuHorarioAulaTipoCodEspecializacion.Value := kbmHorarioDetalleCodEspecializacion.Value;
-          QuHorarioAulaTipoCodParaleloId.Value := kbmHorarioDetalleCodParaleloId.Value;
-          QuHorarioAulaTipoCodHora.Value := kbmHorarioDetalleCodHora.Value;
-          QuHorarioAulaTipoCodDia.Value := kbmHorarioDetalleCodDia.Value;
+          QuHorarioAulaTipoCodAulaTipo.Value := TbAulaTipoCodAulaTipo.Value;
+          QuHorarioAulaTipoCodMateria.Value := TbHorarioDetalleCodMateria.Value;
+          QuHorarioAulaTipoCodNivel.Value := TbHorarioDetalleCodNivel.Value;
+          QuHorarioAulaTipoCodEspecializacion.Value := TbHorarioDetalleCodEspecializacion.Value;
+          QuHorarioAulaTipoCodParaleloId.Value := TbHorarioDetalleCodParaleloId.Value;
+          QuHorarioAulaTipoCodHora.Value := TbHorarioDetalleCodHora.Value;
+          QuHorarioAulaTipoCodDia.Value := TbHorarioDetalleCodDia.Value;
           QuHorarioAulaTipo.Post;
-          kbmHorarioDetalle.Next;
+          TbHorarioDetalle.Next;
         end;
       finally
-        kbmDistributivo.IndexFieldNames := '';
-        kbmDistributivo.MasterFields := '';
-        kbmDistributivo.MasterSource := nil;
+        TbDistributivo.IndexFieldNames := '';
+        TbDistributivo.MasterFields := '';
+        TbDistributivo.MasterSource := nil;
       end;
     end;
   end;
@@ -91,10 +91,10 @@ begin
   begin
     if varIsEmpty(dlcAulaTipo.KeyValue) then
       raise Exception.Create('Debe especificar un tipo de aula');
-    s := Format('[%s %d] - %s', [kbmHorario.Name, CodHorario, dlcAulaTipo.Text]);
+    s := Format('[%s %d] - %s', [TbHorario.Name, CodHorario, dlcAulaTipo.Text]);
     Caption := s;
     FNombre := StrHolderShowAulaTipo.Strings.Values[cbVerAulaTipo.Text];
-    ShowEditor(kbmDia, kbmHora, QuHorarioAulaTipo, kbmPeriodo, 'CodDia', 'NomDia',
+    ShowEditor(TbDia, TbHora, QuHorarioAulaTipo, TbPeriodo, 'CodDia', 'NomDia',
       'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora', 'CodHora', 'Nombre');
   end;
 end;
@@ -102,29 +102,29 @@ end;
 procedure THorarioAulaTipoForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  CodHorario := SourceDataModule.kbmHorarioCodHorario.Value;
+  CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
   cbVerAulaTipo.Items.Clear;
   FillHorarioAulaTipo;
   LoadNames(MasterDataModule.StrHolderShowAulaTipo.Strings, cbVerAulaTipo.Items);
   cbVerAulaTipo.Text := cbVerAulaTipo.Items[0];
-  SourceDataModule.kbmAulaTipo.First;
-  dlcAulaTipo.KeyValue := SourceDataModule.kbmAulaTipoCodAulaTipo.Value;
+  SourceDataModule.TbAulaTipo.First;
+  dlcAulaTipo.KeyValue := SourceDataModule.TbAulaTipoCodAulaTipo.Value;
   btn97MostrarClick(nil);
 end;
 
 procedure THorarioAulaTipoForm.btn97PriorClick(Sender: TObject);
 begin
   inherited;
-  SourceDataModule.kbmAulaTipo.Prior;
-  dlcAulaTipo.KeyValue := SourceDataModule.kbmAulaTipoCodAulaTipo.AsInteger;
+  SourceDataModule.TbAulaTipo.Prior;
+  dlcAulaTipo.KeyValue := SourceDataModule.TbAulaTipoCodAulaTipo.AsInteger;
   btn97MostrarClick(nil);
 end;
 
 procedure THorarioAulaTipoForm.btn97NextClick(Sender: TObject);
 begin
   inherited;
-  SourceDataModule.kbmAulaTipo.Next;
-  dlcAulaTipo.KeyValue := SourceDataModule.kbmAulaTipoCodAulaTipo.Value;
+  SourceDataModule.TbAulaTipo.Next;
+  dlcAulaTipo.KeyValue := SourceDataModule.TbAulaTipoCodAulaTipo.Value;
   btn97MostrarClick(nil);
 end;
 

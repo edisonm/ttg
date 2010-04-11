@@ -15,7 +15,7 @@ type
     SLState: TDBStatusLabel;
     DBGrid: TRxDBGrid;
     btn97Find: TToolButton;
-    RxSplitter1: TRxSplitter;
+    Splitter1: TRxSplitter;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn97FindClick(Sender: TObject);
     procedure btn97ShowClick(Sender: TObject);

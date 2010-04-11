@@ -52,7 +52,7 @@ object LogisticForm: TLogisticForm
       ParentFont = False
       TabOrder = 1
     end
-    object RxSplitter1: TRxSplitter
+    object Splitter1: TRxSplitter
       Left = 1
       Top = 269
       Width = 432

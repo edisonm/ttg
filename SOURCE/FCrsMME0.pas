@@ -12,13 +12,13 @@ type
     Panel2: TPanel;
     ListBox: TListBox;
     Splitter: TSplitter;
-    procedure RxDrawGridMouseUp(Sender: TObject; Button: TMouseButton;
+    procedure DrawGridMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure RxDrawGridSelectCell(Sender: TObject; ACol, ARow: Integer;
+    procedure DrawGridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure ListBoxDrawItem(Control: TWinControl; Index: Integer;
       Rect: TRect; State: TOwnerDrawState);
-    procedure RxDrawGridKeyUp(Sender: TObject; var Key: Word;
+    procedure DrawGridKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure ListBoxClick(Sender: TObject);
     procedure ListBoxKeyUp(Sender: TObject; var Key: Word;
@@ -101,7 +101,7 @@ var
   FCol, FRow: Integer;
   FSelected: Boolean;
 
-procedure TCrossManyToManyEditor0Form.RxDrawGridSelectCell(Sender: TObject;
+procedure TCrossManyToManyEditor0Form.DrawGridSelectCell(Sender: TObject;
   ACol, ARow: Integer; var CanSelect: Boolean);
 begin
   inherited;
@@ -115,13 +115,13 @@ begin
   Result := '';
 end;
 
-procedure TCrossManyToManyEditor0Form.RxDrawGridMouseUp(Sender: TObject;
+procedure TCrossManyToManyEditor0Form.DrawGridMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 {var
   VCol, VRow: Longint;}
 begin
   inherited;
-{  with RxDrawGrid do
+{  with DrawGrid do
     if (FSelected) or (Selection.Left <> Selection.Right) or
       (Selection.Top <> Selection.Bottom) then
     begin
@@ -164,7 +164,7 @@ begin
   end;
 end;
 
-procedure TCrossManyToManyEditor0Form.RxDrawGridKeyUp(Sender: TObject;
+procedure TCrossManyToManyEditor0Form.DrawGridKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
   inherited;
@@ -176,7 +176,7 @@ procedure TCrossManyToManyEditor0Form.ClearSelection;
 var
   VCol, VRow: Longint;
 begin
-  with RxDrawGrid do
+  with DrawGrid do
   begin
     Edit;
     for VCol := Selection.Left to Selection.Right do
@@ -195,7 +195,7 @@ var
   VCol, VRow: Longint;
 begin
   inherited;
-  with RxDrawGrid do
+  with DrawGrid do
   begin
     Edit;
     for VCol := Selection.Left to Selection.Right do

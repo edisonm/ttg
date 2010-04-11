@@ -34,7 +34,7 @@ inherited MateriaForm: TMateriaForm
     inherited DBGrid: TRxDBGrid
       Width = 589
     end
-    inherited RxSplitter1: TRxSplitter
+    inherited Splitter1: TRxSplitter
       Left = 590
     end
   end

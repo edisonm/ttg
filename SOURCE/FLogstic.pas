@@ -15,7 +15,7 @@ type
     FormStorage: TFormStorage;
     memResumen: TMemo;
     Panel1: TPanel;
-    RxSplitter1: TRxSplitter;
+    Splitter1: TRxSplitter;
   private
     { Private declarations }
   public
