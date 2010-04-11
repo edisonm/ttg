@@ -1,12 +1,12 @@
 1.0 ACUERDO DE LICENCIA DEL PRODUCTO
 
-AVISO AL USUARIO: LEA DETENIDAMENTE EL SIGUIENTE ACUERDO LEGAL. EL USO
-DEL SOFTWARE PROPORCIONADO CON ESTE ACUERDO (EL "SOFTWARE") CONSTITUYE
-LA  ACEPTACIÓN DE ESTAS  CONDICIONES. SI  NO ESTÁ  DE ACUERDO  CON LAS
-CONDICIONES DE ESTE ACUERDO,  ELIMINE INMEDIATAMENTE EL SOFTWARE JUNTO
-CON TODAS LAS COPIAS  DE SU PC. EL USO DE ESTE  SOFTWARE POR PARTE DEL
-USUARIO  ESTÁ CONDICIONADO  POR  LA CONFORMIDAD  DEL  USUARIO CON  LAS
-CONDICIONES DE ESTE ACUERDO
+AVISO AL USUARIO: Lea detenidamente el siguiente acuerdo legal. El uso
+del software proporcionado con este acuerdo (el "software") constituye
+la  aceptación de estas  condiciones. Si  no está  de acuerdo  con las
+condiciones de este acuerdo,  elimine inmediatamente el software junto
+con todas las copias  de su pc. El uso de este  software por parte del
+usuario  está condicionado  por  la conformidad  del  usuario con  las
+condiciones de este acuerdo.
 
 1. CONCESIÓN DE  LICENCIA. El Autor y sus  Proveedores le otorgarán un
 derecho no  exclusivo y no  transferible para utilizar el  SOFTWARE en
