@@ -2097,7 +2097,7 @@ object MainForm: TMainForm
     object QuParaleloHoraNomHora: TStringField
       DisplayLabel = 'Hora'
       FieldName = 'NomHora'
-      LookupDataSet = SourceDataModule.kbmHora
+      LookupDataSet = SourceDataModule.TbHora
       LookupKeyFields = 'CodHora'
       LookupResultField = 'NomHora'
       KeyFields = 'CodHora'
@@ -2147,7 +2147,7 @@ object MainForm: TMainForm
       DisplayLabel = 'Hora'
       FieldKind = fkLookup
       FieldName = 'NomHora'
-      LookupDataSet = SourceDataModule.kbmHora
+      LookupDataSet = SourceDataModule.TbHora
       LookupKeyFields = 'CodHora'
       LookupResultField = 'NomHora'
       KeyFields = 'CodHora'
@@ -2386,7 +2386,7 @@ object MainForm: TMainForm
       DisplayLabel = 'Hora'
       FieldKind = fkLookup
       FieldName = 'NomHora'
-      LookupDataSet = SourceDataModule.kbmHora
+      LookupDataSet = SourceDataModule.TbHora
       LookupKeyFields = 'CodHora'
       LookupResultField = 'NomHora'
       KeyFields = 'CodHora'

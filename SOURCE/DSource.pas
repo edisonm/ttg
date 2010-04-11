@@ -33,7 +33,7 @@ type
     FFlags : TkbmMemTableSaveFlags;
     // procedure SaveToFile(const AFileName: TFileName);
     // procedure SaveToStream(AStream: TStream);
-    procedure SaveUnCompToStream(AStream: TStream);
+    // procedure SaveUnCompToStream(AStream: TStream);
     procedure LoadFromStream(AStream: TStream);
     procedure LoadUnCompFromStream(AStream: TStream);
     procedure SaveIniStrings(AStrings: TStrings);
@@ -135,7 +135,6 @@ begin
     Stream.Free;
   end;
 end;
-*)
 
 procedure TSourceDataModule.SaveUnCompToStream(AStream: TStream);
 var
@@ -153,6 +152,7 @@ begin
     StreamConfig.Free;
   end;
 end;
+*)
 
 procedure TSourceDataModule.NewDatabase;
 begin

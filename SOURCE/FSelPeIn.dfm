@@ -118,7 +118,7 @@ object SelPeriodoForm: TSelPeriodoForm
       DisplayLabel = 'Día'
       FieldKind = fkLookup
       FieldName = 'NomDia'
-      LookupDataSet = SourceDataModule.kbmDia
+      LookupDataSet = SourceDataModule.TbDia
       LookupKeyFields = 'CodDia'
       LookupResultField = 'NomDia'
       KeyFields = 'CodDia'
@@ -131,7 +131,7 @@ object SelPeriodoForm: TSelPeriodoForm
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'NomHora'
-      LookupDataSet = SourceDataModule.kbmHora
+      LookupDataSet = SourceDataModule.TbHora
       LookupKeyFields = 'CodHora'
       LookupResultField = 'NomHora'
       KeyFields = 'CodHora'
