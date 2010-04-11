@@ -88,7 +88,7 @@ object EditorForm: TEditorForm
   end
   object FormStorage: TFormStorage
     Active = False
-    IniSection = '\Software\SGHC1'
+    IniSection = '\Software\SGHC'
     UseRegistry = True
     StoredValues = <>
     Left = 64

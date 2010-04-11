@@ -52,7 +52,7 @@ inherited ProfesorForm: TProfesorForm
   end
   inherited FormStorage: TFormStorage
     Active = True
-    IniSection = '\Software\SGHC1\SEProfesor'
+    IniSection = '\Software\SGHC\SEProfesor'
     Left = 260
     Top = 48
   end

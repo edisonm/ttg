@@ -472,7 +472,7 @@ object MainForm: TMainForm
   end
   object FormStorage: TFormStorage
     Active = False
-    IniSection = '\Software\SGHC1\FMain'
+    IniSection = '\Software\SGHC\FMain'
     UseRegistry = True
     StoredProps.Strings = (
       'SaveDialog.FileName'

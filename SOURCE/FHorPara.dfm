@@ -120,7 +120,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   end
   inherited FormStorage: TFormStorage
     Active = True
-    IniSection = '\Software\SGHC1\MMEd1HorarioParalelo'
+    IniSection = '\Software\SGHC\MMEd1HorarioParalelo'
     Left = 144
     Top = 104
   end

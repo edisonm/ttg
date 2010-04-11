@@ -69,7 +69,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
   end
   inherited FormStorage: TFormStorage
     Active = True
-    IniSection = '\Software\SGHC1\MMEd1HorarioProfesor'
+    IniSection = '\Software\SGHC\MMEd1HorarioProfesor'
     Left = 56
     Top = 80
   end

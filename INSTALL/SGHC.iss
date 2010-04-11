@@ -56,8 +56,7 @@ Name: {group}\{cm:UninstallProgram, Horarios Para Colegio 1.2.1}; Filename: {uni
 [INI]
 
 [Registry]
-Root: HKCU; SubKey: Software\HORCOLEG; ValueType: none; Flags: uninsdeletekey
-Root: HKCU; SubKey: Software\SGHC1; ValueType: none; Flags: uninsdeletekey
+Root: HKCU; SubKey: Software\SGHC; ValueType: none; Flags: uninsdeletekey
 
 [UninstallDelete]
 

@@ -40,7 +40,7 @@ inherited MateriaForm: TMateriaForm
   end
   inherited FormStorage: TFormStorage
     Active = True
-    IniSection = '\Software\SGHC1\SEMateria'
+    IniSection = '\Software\SGHC\SEMateria'
   end
   inherited ImageList: TImageList
     Bitmap = {

@@ -54,7 +54,7 @@ inherited ParaleloForm: TParaleloForm
   end
   inherited FormStorage: TFormStorage
     Active = True
-    IniSection = '\Software\SGHC1\SEParalelo'
+    IniSection = '\Software\SGHC\SEParalelo'
     StoredProps.Strings = (
       'tb97Show.DockedTo'
       'tb97Show.DockPos'

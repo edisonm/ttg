@@ -189,7 +189,7 @@ inherited HorarioForm: THorarioForm
   end
   inherited FormStorage: TFormStorage
     Active = True
-    IniSection = '\Software\SGHC1\SEHorario'
+    IniSection = '\Software\SGHC\SEHorario'
     StoredProps.Strings = (
       'tb97Show.DockedTo'
       'tb97Show.DockPos'

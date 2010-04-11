@@ -87,7 +87,7 @@ object LogisticForm: TLogisticForm
     end
   end
   object FormStorage: TFormStorage
-    IniSection = '\Software\SGHC1\FLogistic'
+    IniSection = '\Software\SGHC\FLogistic'
     UseRegistry = True
     StoredProps.Strings = (
       'memResumen.Height')

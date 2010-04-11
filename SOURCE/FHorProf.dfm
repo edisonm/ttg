@@ -70,7 +70,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
   end
   inherited FormStorage: TFormStorage
     Active = True
-    IniSection = '\Software\SGHC1\MMEd1HorarioProfesor'
+    IniSection = '\Software\SGHC\MMEd1HorarioProfesor'
   end
   inherited ImageList: TImageList
     Bitmap = {

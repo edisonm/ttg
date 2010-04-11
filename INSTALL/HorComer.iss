@@ -66,8 +66,7 @@
 [INI]
 
 [Registry]
-    Root: HKCU; SubKey: Software\HORCOLEG; ValueType: none; Flags: uninsdeletekey
-    Root: HKCU; SubKey: Software\SGHC1; ValueType: none; Flags: uninsdeletekey
+    Root: HKCU; SubKey: Software\SGHC; ValueType: none; Flags: uninsdeletekey
 
 [UninstallDelete]
 
