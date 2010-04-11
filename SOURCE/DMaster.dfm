@@ -41,7 +41,6 @@ object MasterDataModule: TMasterDataModule
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'ApeProfesor'
-      LookupDataSet = SourceDataModule.kbmProfesor
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'ApeProfesor'
       KeyFields = 'CodProfesor'
@@ -53,7 +52,6 @@ object MasterDataModule: TMasterDataModule
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'NomProfesor'
-      LookupDataSet = SourceDataModule.kbmProfesor
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'NomProfesor'
       KeyFields = 'CodProfesor'
@@ -164,7 +162,6 @@ object MasterDataModule: TMasterDataModule
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'NomMateria'
-      LookupDataSet = SourceDataModule.kbmMateria
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
@@ -177,7 +174,6 @@ object MasterDataModule: TMasterDataModule
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'AbrNivel'
-      LookupDataSet = SourceDataModule.kbmNivel
       LookupKeyFields = 'CodNivel'
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
@@ -189,7 +185,6 @@ object MasterDataModule: TMasterDataModule
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'AbrEspecializacion'
-      LookupDataSet = SourceDataModule.kbmEspecializacion
       LookupKeyFields = 'CodEspecializacion'
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
@@ -202,7 +197,6 @@ object MasterDataModule: TMasterDataModule
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
-      LookupDataSet = SourceDataModule.kbmParaleloId
       LookupKeyFields = 'CodParaleloId'
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
@@ -214,7 +208,6 @@ object MasterDataModule: TMasterDataModule
       DisplayWidth = 31
       FieldKind = fkLookup
       FieldName = 'ApeNomProfesor'
-      LookupDataSet = SourceDataModule.kbmProfesor
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'ApeNomProfesor'
       KeyFields = 'CodProfesor'
@@ -294,7 +287,6 @@ object MasterDataModule: TMasterDataModule
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'AbrAulaTipo'
-      LookupDataSet = SourceDataModule.kbmAulaTipo
       LookupKeyFields = 'CodAulaTipo'
       LookupResultField = 'AbrAulaTipo'
       KeyFields = 'CodAulaTipo'

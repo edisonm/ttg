@@ -138,7 +138,7 @@ begin
   //DeleteFile(FormStorage.IniFileName);
 end;
 
-procedure TConfiguracionForm.RxDBGridGetCellParams(Sender: TObject;
+procedure TConfiguracionForm.DBGridGetCellParams(Sender: TObject;
   Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
 begin
   if Assigned(Field) and (Copy(Field.FieldName, 1, 3) = 'Col') and not Field.isNull then

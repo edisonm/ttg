@@ -63,12 +63,12 @@ begin
   begin
     Close;
     Open;
-    kbmProfesorProhibicion.IndexFieldNames := 'CodProfesor';
-    kbmProfesorProhibicion.First;
+    TbProfesorProhibicion.IndexFieldNames := 'CodProfesor';
+    TbProfesorProhibicion.First;
     CodProfesor := -$7FFFFFFF;
-    while not kbmProfesorProhibicion.Eof do
+    while not TbProfesorProhibicion.Eof do
     begin
-      CodProfesor1 := kbmProfesorProhibicionCodProfesor.Value;
+      CodProfesor1 := TbProfesorProhibicionCodProfesor.Value;
       if CodProfesor <> CodProfesor1 then
       begin
         Append;
@@ -83,7 +83,7 @@ begin
           Value := Value + 1;
       end;
       Post;
-      kbmProfesorProhibicion.Next;
+      TbProfesorProhibicion.Next;
     end;
   end;
 end;
@@ -97,14 +97,14 @@ var
   begin
     with SourceDataModule do
     begin
-      iPeriodoCant := kbmPeriodo.RecordCount;
+      iPeriodoCant := TbPeriodo.RecordCount;
     end;
   end;
   procedure ObtenerProfesorCarga;
   var
     CodProfesor, CodProfesor1: Integer;
   begin
-    with SourceDataModule, kbmDistributivo do
+    with SourceDataModule, TbDistributivo do
     begin
       IndexFieldNames := 'CodProfesor';
       First;
@@ -112,20 +112,20 @@ var
       CodProfesor := -$7FFFFFFF;
       while not Eof do
       begin
-        CodProfesor1 := kbmDistributivoCodProfesor.Value;
+        CodProfesor1 := TbDistributivoCodProfesor.Value;
         if CodProfesor <> CodProfesor1 then
         begin
           TbTmpProfesorCarga.Append;
           TbTmpProfesorCargaCodProfesor.Value :=
-            kbmDistributivoCodProfesor.Value;
-          TbTmpProfesorCargaCarga.Value := ComposicionADuracion(kbmDistributivoComposicion.Value);
+            TbDistributivoCodProfesor.Value;
+          TbTmpProfesorCargaCarga.Value := ComposicionADuracion(TbDistributivoComposicion.Value);
           CodProfesor := CodProfesor1;
         end
         else
         begin
           TbTmpProfesorCarga.Edit;
           with TbTmpProfesorCargaCarga do
-            Value := Value + ComposicionADuracion(kbmDistributivoComposicion.Value);
+            Value := Value + ComposicionADuracion(TbDistributivoComposicion.Value);
         end;
         TbTmpProfesorCarga.Post;
         Next;
@@ -136,7 +136,7 @@ var
   var
     CodAulaTipo, CodAulaTipo1: Integer;
   begin
-    with SourceDataModule, kbmDistributivo do
+    with SourceDataModule, TbDistributivo do
     begin
       TbTmpAulaTipoCarga.Open;
       IndexFieldNames := 'CodAulaTipo';
@@ -144,19 +144,19 @@ var
       CodAulaTipo := -$7FFFFFFF;
       while not Eof do
       begin
-        CodAulaTipo1 := kbmDistributivoCodAulaTipo.Value;
+        CodAulaTipo1 := TbDistributivoCodAulaTipo.Value;
         if CodAulaTipo <> CodAulaTipo1 then
         begin
           TbTmpAulaTipoCarga.Append;
-          TbTmpAulaTipoCargaCodAulaTipo.Value := kbmDistributivoCodAulaTipo.Value;
-          TbTmpAulaTipoCargaCarga.Value := ComposicionADuracion(kbmDistributivoComposicion.Value);
+          TbTmpAulaTipoCargaCodAulaTipo.Value := TbDistributivoCodAulaTipo.Value;
+          TbTmpAulaTipoCargaCarga.Value := ComposicionADuracion(TbDistributivoComposicion.Value);
           CodAulaTipo := CodAulaTipo1;
         end
         else
         begin
           TbTmpAulaTipoCarga.Edit;
           with TbTmpAulaTipoCargaCarga do
-            Value := Value + ComposicionADuracion(kbmDistributivoComposicion.Value);
+            Value := Value + ComposicionADuracion(TbDistributivoComposicion.Value);
         end;
         TbTmpAulaTipoCarga.Post;
         Next;
@@ -287,9 +287,9 @@ var
       if not IsEmpty then
       begin
         HuboProblemasInterno := False;
-        bAulaTipoActive := kbmAulaTipo.Active;
+        bAulaTipoActive := TbAulaTipo.Active;
         try
-          kbmAulaTipo.First;
+          TbAulaTipo.First;
           First;
           s := '%s; %d; %d';
           ASubStrings.Add('Tipos de aulas sin problemas...');
@@ -297,9 +297,9 @@ var
           ASubStrings.Add('AulaTipo; Horas disponibles; Carga');
           while not Eof do
           begin
-            if kbmAulaTipo.Locate('CodAulaTipo', TbTmpAulaTipoCargaCodAulaTipo.AsInteger, []) then
+            if TbAulaTipo.Locate('CodAulaTipo', TbTmpAulaTipoCargaCodAulaTipo.AsInteger, []) then
             begin
-              c := iPeriodoCant * kbmAulaTipoCantidad.AsInteger;
+              c := iPeriodoCant * TbAulaTipoCantidad.AsInteger;
               if TbTmpAulaTipoCargaCarga.Value > c then
               begin
                 if not HuboProblemasInterno then
@@ -322,7 +322,7 @@ var
             Next;
           end;
         finally
-          kbmAulaTipo.Active := bAulaTipoActive;
+          TbAulaTipo.Active := bAulaTipoActive;
         end;
         if HuboProblemas then
         begin
@@ -342,35 +342,35 @@ var
     s: string;
     HuboProblemasInterno: Boolean;
   begin
-    with SourceDataModule, kbmParalelo do
+    with SourceDataModule, TbParalelo do
     begin
       s := '%s %s %s; %d';
       HuboProblemasInterno := False;
       try
         Open;
-        kbmDistributivo.First;
-        kbmPeriodo.First;
+        TbDistributivo.First;
+        TbPeriodo.First;
         First;
         ASubStrings.Add('Carga Horaria de paralelos sin problemas...');
         vSubMin := ASubStrings.Count;
         ASubStrings.Add('Paralelo; Carga');
         while not Eof do
         begin
-          kbmDistributivo.Filter :=
+          TbDistributivo.Filter :=
             Format('CodNivel=%d and CodEspecializacion=%d and CodParaleloId=%d', [
-            kbmParaleloCodNivel.Value,
-              kbmParaleloCodEspecializacion.Value,
-              kbmParaleloCodParaleloId.Value]);
-          kbmDistributivo.Filtered := true;
-          kbmDistributivo.First;
+            TbParaleloCodNivel.Value,
+              TbParaleloCodEspecializacion.Value,
+              TbParaleloCodParaleloId.Value]);
+          TbDistributivo.Filtered := true;
+          TbDistributivo.First;
           t := 0;
           try
-            while not kbmDistributivo.Eof do
+            while not TbDistributivo.Eof do
             begin
-              Inc(t, ComposicionADuracion(kbmDistributivoComposicion.Value));
-              kbmDistributivo.Next;
+              Inc(t, ComposicionADuracion(TbDistributivoComposicion.Value));
+              TbDistributivo.Next;
             end;
-            if (t <= 0) or (t > kbmPeriodo.RecordCount) then
+            if (t <= 0) or (t > TbPeriodo.RecordCount) then
             begin
               if not HuboProblemasInterno then
               begin
@@ -378,20 +378,20 @@ var
                 vMainMin := AMainStrings.Count;
                 AMainStrings.Add('Paralelo; Carga');
               end;
-              AMainStrings.Add(Format(s, [kbmParaleloAbrNivel.Value,
-                kbmParaleloAbrEspecializacion.Value,
-                kbmParaleloNomParaleloId.Value, t]));
+              AMainStrings.Add(Format(s, [TbParaleloAbrNivel.Value,
+                TbParaleloAbrEspecializacion.Value,
+                TbParaleloNomParaleloId.Value, t]));
               HuboProblemas := True;
               HuboProblemasInterno := True;
             end
             else
-              ASubStrings.Add(Format(s, [kbmParaleloAbrNivel.Value,
-                kbmParaleloAbrEspecializacion.Value,
-                kbmParaleloNomParaleloId.Value, t]));
+              ASubStrings.Add(Format(s, [TbParaleloAbrNivel.Value,
+                TbParaleloAbrEspecializacion.Value,
+                TbParaleloNomParaleloId.Value, t]));
           except
             ASubStrings.Add(Format('Problemas: %s %s %s, Materia %s',
-              [kbmParaleloAbrNivel.AsString, kbmParaleloAbrEspecializacion.AsString,
-              kbmParaleloNomParaleloId.AsString, kbmDistributivoNomMateria.AsString]));
+              [TbParaleloAbrNivel.AsString, TbParaleloAbrEspecializacion.AsString,
+              TbParaleloNomParaleloId.AsString, TbDistributivoNomMateria.AsString]));
             HuboProblemas := True;
           end;
           Next;
@@ -406,10 +406,10 @@ var
         EqualSpaced(ASubStrings, vSubMin, vSubMax, ';');
         ASubStrings.Add('');
       finally
-        kbmDistributivo.Filter := '';
-        kbmDistributivo.Filtered := false;
+        TbDistributivo.Filter := '';
+        TbDistributivo.Filtered := false;
         First;
-        kbmDistributivo.First;
+        TbDistributivo.First;
       end;
     end;
   end;
@@ -441,7 +441,7 @@ var
   VBookmark: TBookmark;
   c: Integer;
 begin
-  with SourceDataModule, kbmDistributivo do
+  with SourceDataModule, TbDistributivo do
   begin
     VBookmark := GetBookmark;
     DisableControls;
@@ -450,7 +450,7 @@ begin
       c := 0;
       while not Eof do
       begin
-        Inc(c, ComposicionADuracion(kbmDistributivoComposicion.Value));
+        Inc(c, ComposicionADuracion(TbDistributivoComposicion.Value));
         Next;
       end;
       Result := c;
@@ -471,57 +471,57 @@ var
 begin
   with SourceDataModule do
   begin
-    Locate1 := kbmHorarioDetalle.Locate(
+    Locate1 := TbHorarioDetalle.Locate(
       'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora',
       VarArrayOf([ACodHorario, ACodNivel, ACodEspecializacion, ACodParaleloId,
       ACodDia1, ACodHora1]), []);
-    Bookmark1 := kbmHorarioDetalle.GetBookmark;
+    Bookmark1 := TbHorarioDetalle.GetBookmark;
     try
-      Locate2 := kbmHorarioDetalle.Locate(
+      Locate2 := TbHorarioDetalle.Locate(
         'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora',
         VarArrayOf([ACodHorario, ACodNivel, ACodEspecializacion, ACodParaleloId,
         ACodDia2, ACodHora2]), []);
-      Bookmark2 := kbmHorarioDetalle.GetBookmark;
+      Bookmark2 := TbHorarioDetalle.GetBookmark;
       try
         if Locate1 and Locate2 then
         begin
-          kbmHorarioDetalle.GotoBookmark(Bookmark1);
-          iCodMateria1 := kbmHorarioDetalleCodMateria.Value;
-          iSesion1 := kbmHorarioDetalleSesion.Value;
-          kbmHorarioDetalle.GotoBookmark(Bookmark2);
-          iCodMateria2 := kbmHorarioDetalleCodMateria.Value;
-          iSesion2 := kbmHorarioDetalleSesion.Value;
-          kbmHorarioDetalle.Edit;
-          kbmHorarioDetalleCodMateria.Value := iCodMateria1;
-          kbmHorarioDetalleSesion.Value := iSesion1;
-          kbmHorarioDetalle.Post;
-          kbmHorarioDetalle.GotoBookmark(Bookmark1);
-          kbmHorarioDetalle.Edit;
-          kbmHorarioDetalleCodMateria.Value := iCodMateria2;
-          kbmHorarioDetalleSesion.Value := iSesion2;
-          kbmHorarioDetalle.Post;
+          TbHorarioDetalle.GotoBookmark(Bookmark1);
+          iCodMateria1 := TbHorarioDetalleCodMateria.Value;
+          iSesion1 := TbHorarioDetalleSesion.Value;
+          TbHorarioDetalle.GotoBookmark(Bookmark2);
+          iCodMateria2 := TbHorarioDetalleCodMateria.Value;
+          iSesion2 := TbHorarioDetalleSesion.Value;
+          TbHorarioDetalle.Edit;
+          TbHorarioDetalleCodMateria.Value := iCodMateria1;
+          TbHorarioDetalleSesion.Value := iSesion1;
+          TbHorarioDetalle.Post;
+          TbHorarioDetalle.GotoBookmark(Bookmark1);
+          TbHorarioDetalle.Edit;
+          TbHorarioDetalleCodMateria.Value := iCodMateria2;
+          TbHorarioDetalleSesion.Value := iSesion2;
+          TbHorarioDetalle.Post;
         end
         else if Locate1 then
         begin
-          kbmHorarioDetalle.GotoBookmark(Bookmark1);
-          kbmHorarioDetalle.Edit;
-          kbmHorarioDetalleCodDia.Value := ACodDia2;
-          kbmHorarioDetalleCodHora.Value := ACodHora2;
-          kbmHorarioDetalle.Post;
+          TbHorarioDetalle.GotoBookmark(Bookmark1);
+          TbHorarioDetalle.Edit;
+          TbHorarioDetalleCodDia.Value := ACodDia2;
+          TbHorarioDetalleCodHora.Value := ACodHora2;
+          TbHorarioDetalle.Post;
         end
         else if Locate2 then
         begin
-          kbmHorarioDetalle.GotoBookmark(Bookmark1);
-          kbmHorarioDetalle.Edit;
-          kbmHorarioDetalleCodDia.Value := ACodDia1;
-          kbmHorarioDetalleCodHora.Value := ACodHora1;
-          kbmHorarioDetalle.Post;
+          TbHorarioDetalle.GotoBookmark(Bookmark1);
+          TbHorarioDetalle.Edit;
+          TbHorarioDetalleCodDia.Value := ACodDia1;
+          TbHorarioDetalleCodHora.Value := ACodHora1;
+          TbHorarioDetalle.Post;
         end;
       finally
-        kbmHorarioDetalle.FreeBookmark(Bookmark2);
+        TbHorarioDetalle.FreeBookmark(Bookmark2);
       end;
     finally
-      kbmHorarioDetalle.FreeBookmark(Bookmark1);
+      TbHorarioDetalle.FreeBookmark(Bookmark1);
     end;
   end;
 end;

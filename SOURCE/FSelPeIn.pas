@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, Buttons, ExtCtrls, CDBFmlry, DBFmlry, kbmMemTable, DBCtrls;
+  Db, StdCtrls, Buttons, ExtCtrls, CDBFmlry, DBFmlry, kbmMemTable, DBCtrls,
+  DMaster, DSource;
 
 type
   TSelPeriodoForm = class(TForm)
@@ -32,7 +33,6 @@ function SeleccionarPeriodo(var ACodDia, ACodHora: Integer): Boolean;
 
 implementation
 
-uses DMaster;
 {$R *.DFM}
 
 function SeleccionarPeriodo(var ACodDia, ACodHora: Integer): Boolean;
