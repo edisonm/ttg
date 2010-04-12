@@ -1,6 +1,6 @@
 object ConfiguracionForm: TConfiguracionForm
-  Left = 362
-  Top = 22
+  Left = 765
+  Top = 116
   BorderStyle = bsDialog
   Caption = 'Configuración'
   ClientHeight = 451
@@ -30,7 +30,7 @@ object ConfiguracionForm: TConfiguracionForm
     Top = 8
     Width = 401
     Height = 409
-    ActivePage = tbsUnidadEducativa
+    ActivePage = tbsPesos
     ParentShowHint = False
     ShowHint = True
     TabOrder = 1
@@ -411,7 +411,7 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object Label18: TLabel
         Left = 8
-        Top = 264
+        Top = 272
         Width = 122
         Height = 13
         Caption = 'Prohibiciones de profesor:'
@@ -525,34 +525,6 @@ object ConfiguracionForm: TConfiguracionForm
         Value = 5
         ZeroEmpty = False
       end
-      object DBGrid1: TRxDBGrid
-        Left = 8
-        Top = 176
-        Width = 233
-        Height = 73
-        DataSource = SourceDataModule.dsMateriaProhibicionTipo
-        TabOrder = 6
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = []
-        OnGetCellParams = DBGridGetCellParams
-      end
-      object DBGrid2: TRxDBGrid
-        Left = 8
-        Top = 280
-        Width = 233
-        Height = 97
-        DataSource = SourceDataModule.dsProfesorProhibicionTipo
-        TabOrder = 7
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = []
-        OnGetCellParams = DBGridGetCellParams
-      end
       object creProfesorFraccionamiento: TCurrencyEdit
         Left = 152
         Top = 32
@@ -620,6 +592,34 @@ object ConfiguracionForm: TConfiguracionForm
         DataField = 'ValProfProhibicionTipo'
         DataSource = SourceDataModule.dsProfesorProhibicionTipo
         TabOrder = 13
+      end
+      object DBGrid1: TDBGrid
+        Left = 8
+        Top = 176
+        Width = 233
+        Height = 89
+        DataSource = SourceDataModule.dsMateriaProhibicionTipo
+        TabOrder = 6
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridDrawColumnCell
+      end
+      object DBGrid2: TDBGrid
+        Left = 8
+        Top = 288
+        Width = 233
+        Height = 89
+        DataSource = SourceDataModule.dsProfesorProhibicionTipo
+        TabOrder = 7
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridDrawColumnCell
       end
     end
     object tbsAlgoritmoEvolutivo: TTabSheet

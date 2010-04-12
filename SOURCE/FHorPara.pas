@@ -4,16 +4,16 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FCrsMMER, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, RxLookup,
+  FCrsMMER, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids,
   Db, FCrsMME1, kbmMemTable, DBCtrls, ImgList, ComCtrls, ToolWin;
 
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)
     QuHorarioParalelo: TkbmMemTable;
     btn97IntercambiarPeriodos: TToolButton;
-    dlcNivel: TRxDBLookupCombo;
-    dlcEspecializacion: TRxDBLookupCombo;
-    dlcParaleloId: TRxDBLookupCombo;
+    dlcNivel: TDBLookupComboBox;
+    dlcEspecializacion: TDBLookupComboBox;
+    dlcParaleloId: TDBLookupComboBox;
     cbVerParalelo: TComboBox;
     btn97Mostrar: TToolButton;
     btn97Prior: TToolButton;
@@ -106,17 +106,17 @@ end;
 
 function THorarioParaleloForm.GetNomNivel: string;
 begin
-  Result := dlcNivel.DisplayValue;
+  Result := dlcNivel.Text;
 end;
 
 function THorarioParaleloForm.GetNomEspecializacion: string;
 begin
-  Result := dlcEspecializacion.DisplayValue;
+  Result := dlcEspecializacion.Text;
 end;
 
 function THorarioParaleloForm.GetNomParaleloId: string;
 begin
-  Result := dlcParaleloId.DisplayValue;
+  Result := dlcParaleloId.Text;
 end;
 
 procedure THorarioParaleloForm.btn97MostrarClick(Sender: TObject);
@@ -146,7 +146,7 @@ procedure THorarioParaleloForm.btn97MostrarClick(Sender: TObject);
   begin
     with SourceDataModule, MasterDataModule do
     begin
-      FNombre := strHolderShowParalelo.Strings.Values[cbVerParalelo.Text];
+      FNombre := StringsShowParalelo.Values[cbVerParalelo.Text];
       ShowEditor(TbDia, TbHora, QuHorarioParalelo, TbPeriodo,
         'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora',
         'CodHora', 'Nombre');
@@ -168,8 +168,7 @@ begin
   cbVerParalelo.Items.Clear;
   FillHorarioParalelo;
   TbParalelo.First;
-  LoadNames(MasterDataModule.StrHolderShowParalelo.Strings,
-    cbVerParalelo.Items);
+  LoadNames(MasterDataModule.StringsShowParalelo, cbVerParalelo.Items);
   cbVerParalelo.Text := cbVerParalelo.Items[0];
   dlcNivel.KeyValue := TbParaleloCodNivel.AsInteger;
   dlcEspecializacion.KeyValue := TbParaleloCodEspecializacion.AsInteger;

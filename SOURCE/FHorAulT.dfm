@@ -29,17 +29,15 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       ImageIndex = 5
       OnClick = btn97PriorClick
     end
-    object dlcAulaTipo: TRxDBLookupCombo
+    object dlcAulaTipo: TDBLookupComboBox
       Left = 138
       Top = 0
       Width = 169
-      Height = 22
-      DropDownCount = 8
-      DisplayEmpty = '(Tipo de aula)'
-      ListStyle = lsDelimited
-      LookupField = 'CodAulaTipo'
-      LookupDisplay = 'AbrAulaTipo'
-      LookupSource = SourceDataModule.dsAulaTipo
+      Height = 21
+      Hint = 'Tipo de aula'
+      KeyField = 'CodAulaTipo'
+      ListField = 'AbrAulaTipo'
+      ListSource = SourceDataModule.dsAulaTipo
       TabOrder = 0
     end
     object cbVerAulaTipo: TComboBox

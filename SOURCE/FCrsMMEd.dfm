@@ -1,6 +1,6 @@
 inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
-  Left = 405
-  Top = 348
+  Left = 396
+  Top = 302
   Width = 656
   Height = 287
   Icon.Data = {

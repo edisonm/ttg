@@ -39,45 +39,39 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       ImageIndex = 5
       OnClick = btn97NextClick
     end
-    object dlcNivel: TRxDBLookupCombo
+    object dlcNivel: TDBLookupComboBox
       Left = 138
       Top = 0
       Width = 113
       Height = 22
       Hint = 'Nivel|Seleccione el nivel'
-      DropDownCount = 8
-      DisplayEmpty = '(Nivel)'
-      LookupField = 'CodNivel'
-      LookupDisplay = 'AbrNivel'
-      LookupSource = SourceDataModule.dsNivel
+      KeyField = 'CodNivel'
+      ListField = 'AbrNivel'
+      ListSource = SourceDataModule.dsNivel
       TabOrder = 0
     end
-    object dlcEspecializacion: TRxDBLookupCombo
+    object dlcEspecializacion: TDBLookupComboBox
       Left = 251
       Top = 0
       Width = 113
       Height = 22
       Hint = 'Especialización|Seleccione la especialización'
-      DropDownCount = 8
-      DisplayEmpty = '(Especialización)'
-      LookupField = 'CodEspecializacion'
-      LookupDisplay = 'NomEspecializacion'
-      LookupSource = SourceDataModule.dsEspecializacion
+      KeyField = 'CodEspecializacion'
+      ListField = 'NomEspecializacion'
+      ListSource = SourceDataModule.dsEspecializacion
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
     end
-    object dlcParaleloId: TRxDBLookupCombo
+    object dlcParaleloId: TDBLookupComboBox
       Left = 364
       Top = 0
       Width = 113
       Height = 22
-      Hint = 'Seleccione el tipo de paralelo'
-      DropDownCount = 8
-      DisplayEmpty = '(Paralelo)'
-      LookupField = 'CodParaleloId'
-      LookupDisplay = 'NomParaleloId'
-      LookupSource = SourceDataModule.dsParaleloId
+      Hint = 'Paralelo|Seleccione el tipo de paralelo'
+      KeyField = 'CodParaleloId'
+      ListField = 'NomParaleloId'
+      ListSource = SourceDataModule.dsParaleloId
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2

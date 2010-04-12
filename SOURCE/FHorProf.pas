@@ -4,13 +4,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, RxLookup, FCrsMME0, Db,
-  FCrsMME1, kbmMemTable, ImgList, ComCtrls, ToolWin;
+  Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, FCrsMME0, Db,
+  FCrsMME1, kbmMemTable, ImgList, ComCtrls, ToolWin, DBCtrls;
 
 type
   THorarioProfesorForm = class(TCrossManyToManyEditor1Form)
     QuHorarioProfesor: TkbmMemTable;
-    dlcProfesor: TRxDBLookupCombo;
+    dlcProfesor: TDBLookupComboBox;
     cbVerProfesor: TComboBox;
     btn97Mostrar: TToolButton;
     btn97Next: TToolButton;
@@ -60,7 +60,7 @@ begin
     s := Format('[%s %d] - %s', [Description[TbHorario], CodHorario,
       dlcProfesor.Text]);
     Caption := s;
-    FNombre := StrHolderShowProfesor.Strings.Values[cbVerProfesor.Text];
+    FNombre := StringsShowProfesor.Values[cbVerProfesor.Text];
     ShowEditor(TbDia, TbHora, QuHorarioProfesor, TbPeriodo, 'CodDia', 'NomDia',
       'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora', 'CodHora', 'Nombre');
   end;
@@ -73,7 +73,7 @@ begin
   SourceDataModule.TbProfesor.First;
   cbVerProfesor.Items.Clear;
   FillHorarioProfesor;
-  LoadNames(MasterDataModule.StrHolderShowProfesor.Strings, cbVerProfesor.Items);
+  LoadNames(MasterDataModule.StringsShowProfesor, cbVerProfesor.Items);
   cbVerProfesor.Text := cbVerProfesor.Items[0];
   dlcProfesor.KeyValue := SourceDataModule.TbProfesorCodProfesor.Value;
   btn97MostrarClick(nil);
@@ -121,13 +121,13 @@ begin
             and not TbDistributivo.Eof do
             TbDistributivo.Next;
           QuHorarioProfesor.Append;
-          QuHorarioProfesorCodProfesor.Value := TbDistributivoCodProfesor.Value;
-          QuHorarioProfesorCodMateria.Value := TbHorarioDetalleCodMateria.Value;
-          QuHorarioProfesorCodNivel.Value := TbHorarioDetalleCodNivel.Value;
+          QuHorarioProfesorCodProfesor.Value        := TbDistributivoCodProfesor.Value;
+          QuHorarioProfesorCodMateria.Value         := TbHorarioDetalleCodMateria.Value;
+          QuHorarioProfesorCodNivel.Value           := TbHorarioDetalleCodNivel.Value;
           QuHorarioProfesorCodEspecializacion.Value := TbHorarioDetalleCodEspecializacion.Value;
-          QuHorarioProfesorCodParaleloId.Value := TbHorarioDetalleCodParaleloId.Value;
-          QuHorarioProfesorCodHora.Value := TbHorarioDetalleCodHora.Value;
-          QuHorarioProfesorCodDia.Value := TbHorarioDetalleCodDia.Value;
+          QuHorarioProfesorCodParaleloId.Value      := TbHorarioDetalleCodParaleloId.Value;
+          QuHorarioProfesorCodHora.Value            := TbHorarioDetalleCodHora.Value;
+          QuHorarioProfesorCodDia.Value             := TbHorarioDetalleCodDia.Value;
           QuHorarioProfesor.Post;
           TbHorarioDetalle.Next;
         end;

@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DB, kbmMemTable, SGHCUtls, StrHlder;
+  DB, kbmMemTable, SGHCUtls;
 
 type
   TMasterDataModule = class(TDataModule)
@@ -31,9 +31,6 @@ type
     TbTmpAulaTipoCargaCodAulaTipo: TIntegerField;
     TbTmpAulaTipoCargaAbrAulaTipo: TStringField;
     TbTmpAulaTipoCargaCarga: TIntegerField;
-    strHolderShowAulaTipo: TStrHolder;
-    strHolderShowProfesor: TStrHolder;
-    strHolderShowParalelo: TStrHolder;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private

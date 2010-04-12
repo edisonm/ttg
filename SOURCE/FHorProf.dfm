@@ -30,17 +30,15 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       ImageIndex = 4
       OnClick = btn97NextClick
     end
-    object dlcProfesor: TRxDBLookupCombo
+    object dlcProfesor: TDBLookupComboBox
       Left = 138
       Top = 0
       Width = 169
-      Height = 22
-      DropDownCount = 8
-      DisplayEmpty = '(Profesor)'
-      ListStyle = lsDelimited
-      LookupField = 'CodProfesor'
-      LookupDisplay = 'ApeNomProfesor'
-      LookupSource = SourceDataModule.dsProfesor
+      Height = 21
+      Hint = 'Profesor'
+      KeyField = 'CodProfesor'
+      ListField = 'ApeNomProfesor'
+      ListSource = SourceDataModule.dsProfesor
       TabOrder = 0
     end
     object cbVerProfesor: TComboBox

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, ToolEdit, CurrEdit, Placemnt, Buttons, ComCtrls, Spin,
-  RxLookup, Grids, DBGrids, RXDBCtrl, Db, RXCombos, DBColCBx, DBCtrls;
+  Grids, DBGrids, RXDBCtrl, Db, RXCombos, DBColCBx, DBCtrls;
 
 type
   TConfiguracionForm = class(TForm)
@@ -46,9 +46,7 @@ type
     creProbReparacion: TCurrencyEdit;
     Label12: TLabel;
     Label15: TLabel;
-    DBGrid1: TRxDBGrid;
     Label18: TLabel;
-    DBGrid2: TRxDBGrid;
     tbsOpciones: TTabSheet;
     CBRandomize: TCheckBox;
     Label19: TLabel;
@@ -103,12 +101,14 @@ type
     bbtnCancel: TBitBtn;
     speRangoPolinizacion: TSpinEdit;
     Label43: TLabel;
+    DBGrid1: TDBGrid;
+    DBGrid2: TDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure DBGridGetCellParams(Sender: TObject; Field: TField;
-      AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure CBRandomizeClick(Sender: TObject);
     procedure edtNomColegioChange(Sender: TObject);
+    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -138,14 +138,18 @@ begin
   //DeleteFile(FormStorage.IniFileName);
 end;
 
-procedure TConfiguracionForm.DBGridGetCellParams(Sender: TObject;
-  Field: TField; AFont: TFont; var Background: TColor; Highlight: Boolean);
+procedure TConfiguracionForm.DBGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+var
+  DBGrid: TCustomDBGrid;
 begin
-  if Assigned(Field) and (Copy(Field.FieldName, 1, 3) = 'Col') and not Field.isNull then
-  begin
-    Background := Field.AsInteger;
-    AFont.Color := Field.AsInteger;
-  end;
+  DBGrid := Sender as TCustomDBGrid;
+  if (Copy(Column.Field.FieldName, 1, 3) = 'Col') and not Column.Field.isNull then
+    Column.Color := Column.Field.AsInteger
+  else
+    Column.Color := clWhite;
+  DBGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
 procedure TConfiguracionForm.CBRandomizeClick(Sender: TObject);
