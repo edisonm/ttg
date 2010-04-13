@@ -3,7 +3,7 @@ unit HorColCm;
 interface
 
 uses
-  Classes, Dialogs, Db, RXDBCtrl;
+  Classes, Dialogs, Db, RXDBCtrl, Variants;
 
 function NullToZero(A: Variant): Variant;
 procedure EqualSpaced(Strings: TStrings; ini, fin: Integer; delim: string);

@@ -13,16 +13,10 @@ type
     DBCheckListBox: TDBCheckListBox;
     DataSourceList: TDataSource;
     DataSourceDetail: TDataSource;
-    TbParalelo: TkbmMemTable;
-    TbParaleloCodNivel: TIntegerField;
-    TbParaleloCodEspecializacion: TIntegerField;
-    TbParaleloCodParaleloId: TIntegerField;
-    TbParaleloAbrNivel: TStringField;
-    TbParaleloAbrEspecializacion: TStringField;
-    TbParaleloNomParaleloId: TStringField;
     Splitter1: TSplitter;
     procedure btn97ShowClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,16 +32,32 @@ uses
 
 procedure TParaleloForm.btn97ShowClick(Sender: TObject);
 begin
-  PreviewSingleReport(TbParalelo, '', '', SuperTitle, Caption,
+  PreviewSingleReport(SourceDataModule.TbParalelo, '', '', SuperTitle, Caption,
     poPortrait, MainForm.PrepareReport);
 end;
 
 procedure TParaleloForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  TbParalelo.AttachedTo := SourceDataModule.TbParalelo;
-  TbParalelo.Open;
-  TbParalelo.MasterSource := DataSource;
+  SourceDataModule.TbParalelo.MasterSource := DataSource;
+  SourceDataModule.TbParalelo.MasterFields := 'CodNivel;CodEspecializacion';
+  with DBCheckListBox do
+  begin
+    (DataSource.DataSet as TkbmMemTable).IndexFieldNames :=
+      (DataSource.DataSet as TkbmMemTable).MasterFields + ';' + DataField;
+    (ListSource.DataSet as TkbmMemTable).IndexFieldNames := KeyField;
+  end;
+end;
+
+procedure TParaleloForm.FormDestroy(Sender: TObject);
+begin
+  inherited;
+  with DBCheckListBox do
+  begin
+    (DataSource.DataSet as TkbmMemTable).IndexFieldNames := '';
+    (ListSource.DataSet as TkbmMemTable).IndexFieldNames := '';
+  end;
+  SourceDataModule.TbParalelo.MasterSource := nil;
 end;
 
 end.

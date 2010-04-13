@@ -1,6 +1,6 @@
 inherited SourceDataModule: TSourceDataModule
-  Left = 319
-  Top = 144
+  Left = 359
+  Top = 108
   Height = 496
   Width = 758
   inherited TbAulaTipo: TkbmMemTable
@@ -9,6 +9,24 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbEspecializacion: TkbmMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'CodEspecializacion'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'NomEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'AbrEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end>
     inherited TbEspecializacionCodEspecializacion: TAutoIncField
       Visible = False
     end
@@ -19,11 +37,40 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbMateria: TkbmMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'CodMateria'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'NomMateria'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 20
+      end>
     inherited TbMateriaCodMateria: TAutoIncField
       Visible = False
     end
   end
   inherited TbNivel: TkbmMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'CodNivel'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'NomNivel'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'AbrNivel'
+        DataType = ftString
+        Size = 5
+      end>
     inherited TbNivelCodNivel: TAutoIncField
       Visible = False
     end
@@ -34,27 +81,6 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbCurso: TkbmMemTable
-    FieldDefs = <
-      item
-        Name = 'AbrNivel'
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'AbrEspecializacion'
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end>
     object TbCursoAbrNivel: TStringField [0]
       DisplayLabel = 'Nivel'
       DisplayWidth = 10
@@ -87,6 +113,18 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbParaleloId: TkbmMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'CodParaleloId'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'NomParaleloId'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 5
+      end>
     inherited TbParaleloIdCodParaleloId: TAutoIncField
       Visible = False
     end
@@ -105,6 +143,7 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbParalelo: TkbmMemTable
+    AttachMaxCount = 2
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -120,21 +159,6 @@ inherited SourceDataModule: TSourceDataModule
         Name = 'CodParaleloId'
         Attributes = [faRequired]
         DataType = ftInteger
-      end
-      item
-        Name = 'AbrNivel'
-        DataType = ftString
-        Size = 5
-      end
-      item
-        Name = 'AbrEspecializacion'
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'NomParaleloId'
-        DataType = ftString
-        Size = 5
       end>
     inherited TbParaleloCodNivel: TIntegerField
       Visible = False
@@ -180,6 +204,7 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbProfesor: TkbmMemTable
+    Active = True
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -202,11 +227,6 @@ inherited SourceDataModule: TSourceDataModule
         Attributes = [faRequired]
         DataType = ftString
         Size = 15
-      end
-      item
-        Name = 'ApeNomProfesor'
-        DataType = ftString
-        Size = 31
       end>
     OnCalcFields = TbProfesorCalcFields
     inherited TbProfesorCodProfesor: TAutoIncField
@@ -223,32 +243,6 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbMateriaProhibicion: TkbmMemTable
-    FieldDefs = <
-      item
-        Name = 'CodMateria'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodDia'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodMateProhibicionTipo'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'NomMateProhibicionTipo'
-        DataType = ftString
-        Size = 10
-      end>
     inherited TbMateriaProhibicionCodMateria: TIntegerField
       Visible = False
     end
@@ -275,77 +269,6 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbDistributivo: TkbmMemTable
-    FieldDefs = <
-      item
-        Name = 'CodMateria'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodParaleloId'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodProfesor'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodAulaTipo'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'ApeNomProfesor'
-        DataType = ftString
-        Size = 31
-      end
-      item
-        Name = 'AbrNivel'
-        DataType = ftString
-        Size = 5
-      end
-      item
-        Name = 'AbrEspecializacion'
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'NomParaleloId'
-        DataType = ftString
-        Size = 5
-      end
-      item
-        Name = 'NomMateria'
-        DataType = ftString
-        Size = 15
-      end
-      item
-        Name = 'AbrAulaTipo'
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'Composicion'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 40
-      end
-      item
-        Name = 'Duracion'
-        DataType = ftInteger
-      end>
     OnCalcFields = TbDistributivoCalcFields
     inherited TbDistributivoCodEspecializacion: TIntegerField
       Visible = False
@@ -424,59 +347,13 @@ inherited SourceDataModule: TSourceDataModule
       Lookup = True
     end
     object TbDistributivoDuracion: TIntegerField
-      DisplayLabel = 'Duración'
+      DisplayLabel = 'Duraci'#243'n'
       FieldKind = fkCalculated
       FieldName = 'Duracion'
       Calculated = True
     end
   end
   inherited TbHorarioDetalle: TkbmMemTable
-    FieldDefs = <
-      item
-        Name = 'CodHorario'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodMateria'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodParaleloId'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodDia'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'Sesion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'NomMateria'
-        DataType = ftString
-        Size = 15
-      end>
     inherited TbHorarioDetalleCodHorario: TIntegerField
       Visible = False
     end
@@ -517,32 +394,6 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbProfesorProhibicion: TkbmMemTable
-    FieldDefs = <
-      item
-        Name = 'CodProfesor'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodDia'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodProfProhibicionTipo'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'NomProfProhibicionTipo'
-        DataType = ftString
-        Size = 10
-      end>
     inherited TbProfesorProhibicionCodProfesor: TIntegerField
       Visible = False
     end

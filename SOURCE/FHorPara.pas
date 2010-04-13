@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FCrsMMER, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids,
+  FCrsMMER, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, Variants,
   Db, FCrsMME1, kbmMemTable, DBCtrls, ImgList, ComCtrls, ToolWin;
 
 type
@@ -28,14 +28,7 @@ type
     QuHorarioParaleloNomMateria: TStringField;
     QuHorarioParaleloApeNomProfesor: TStringField;
     QuHorarioParaleloNombre: TStringField;
-    TbParalelo: TkbmMemTable;
     dsParalelo: TDataSource;
-    TbParaleloCodParaleloId: TIntegerField;
-    TbParaleloCodEspecializacion: TIntegerField;
-    TbParaleloCodNivel: TIntegerField;
-    TbParaleloAbrNivel: TStringField;
-    TbParaleloAbrEspecializacion: TStringField;
-    TbParaleloNomParaleloId: TStringField;
     procedure btn97MostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure IntercambiarPeriodosClick(Sender: TObject);
@@ -125,6 +118,7 @@ procedure THorarioParaleloForm.btn97MostrarClick(Sender: TObject);
     FParalelo: Variant;
     s: string;
   begin
+    SourceDataModule.TbParalelo.IndexFieldNames := 'CodNivel;CodEspecializacion;CodParaleloId';
     with MasterDataModule do
     begin
       FParalelo :=
@@ -133,12 +127,11 @@ procedure THorarioParaleloForm.btn97MostrarClick(Sender: TObject);
         'CodNivel;CodEspecializacion;CodParaleloId');
       if VarIsNull(FParalelo) then
         raise Exception.CreateFmt('%s %s %s no es un %s válido',
-          [NomNivel, NomEspecializacion, NomParaleloId, TbParalelo.Name]);
+          [NomNivel, NomEspecializacion, NomParaleloId, SourceDataModule.TbParalelo.Name]);
       s := Format('[%s %d] - %s %s %s', [SourceDataModule.TbHorario.Name, CodHorario,
         dlcNivel.Text, dlcEspecializacion.Text, dlcParaleloId.Text]);
       if QuHorarioParalelo.IsEmpty then
-        raise Exception.CreateFmt('%s %s no válido', [s,
-          TbParalelo.Name]);
+        raise Exception.CreateFmt('%s %s no válido', [s, SourceDataModule.TbParalelo.Name]);
       Caption := s;
     end;
   end;
@@ -162,17 +155,16 @@ end;
 procedure THorarioParaleloForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  TbParalelo.Open;
+  SourceDataModule.TbParalelo.First;
   QuHorarioParalelo.Open;
   CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
   cbVerParalelo.Items.Clear;
   FillHorarioParalelo;
-  TbParalelo.First;
   LoadNames(MasterDataModule.StringsShowParalelo, cbVerParalelo.Items);
   cbVerParalelo.Text := cbVerParalelo.Items[0];
-  dlcNivel.KeyValue := TbParaleloCodNivel.AsInteger;
-  dlcEspecializacion.KeyValue := TbParaleloCodEspecializacion.AsInteger;
-  dlcParaleloId.KeyValue := TbParaleloCodParaleloId.AsInteger;
+  dlcNivel.KeyValue := SourceDataModule.TbParaleloCodNivel.AsInteger;
+  dlcEspecializacion.KeyValue := SourceDataModule.TbParaleloCodEspecializacion.AsInteger;
+  dlcParaleloId.KeyValue := SourceDataModule.TbParaleloCodParaleloId.AsInteger;
   btn97MostrarClick(nil);
 end;
 
@@ -192,20 +184,20 @@ end;
 procedure THorarioParaleloForm.btn97PriorClick(Sender: TObject);
 begin
   inherited;
-  TbParalelo.Prior;
-  dlcNivel.KeyValue := TbParaleloCodNivel.AsInteger;
-  dlcEspecializacion.KeyValue := TbParaleloCodEspecializacion.AsInteger;
-  dlcParaleloId.KeyValue := TbParaleloCodParaleloId.AsInteger;
+  SourceDataModule.TbParalelo.Prior;
+  dlcNivel.KeyValue := SourceDataModule.TbParaleloCodNivel.AsInteger;
+  dlcEspecializacion.KeyValue := SourceDataModule.TbParaleloCodEspecializacion.AsInteger;
+  dlcParaleloId.KeyValue := SourceDataModule.TbParaleloCodParaleloId.AsInteger;
   btn97MostrarClick(nil);
 end;
 
 procedure THorarioParaleloForm.btn97NextClick(Sender: TObject);
 begin
   inherited;
-  TbParalelo.Next;
-  dlcNivel.KeyValue := TbParaleloCodNivel.AsInteger;
-  dlcEspecializacion.KeyValue := TbParaleloCodEspecializacion.AsInteger;
-  dlcParaleloId.KeyValue := TbParaleloCodParaleloId.AsInteger;
+  SourceDataModule.TbParalelo.Next;
+  dlcNivel.KeyValue := SourceDataModule.TbParaleloCodNivel.AsInteger;
+  dlcEspecializacion.KeyValue := SourceDataModule.TbParaleloCodEspecializacion.AsInteger;
+  dlcParaleloId.KeyValue := SourceDataModule.TbParaleloCodParaleloId.AsInteger;
   btn97MostrarClick(nil);
 end;
 
@@ -267,4 +259,3 @@ begin
 end;
 
 end.
-

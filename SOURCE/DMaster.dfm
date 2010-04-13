@@ -1,35 +1,35 @@
 object MasterDataModule: TMasterDataModule
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
   Left = 222
   Top = 122
   Height = 404
   Width = 748
   object TbTmpProfesorCarga: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 250
     Top = 11
     object TbTmpProfesorCargaCodProfesor: TIntegerField
@@ -63,31 +63,29 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object QuDistributivoProfesor: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 250
     Top = 115
     object QuDistributivoProfesorCodMateria: TIntegerField
@@ -169,31 +167,29 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object QuProfesorProhibicionCant: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 58
     Top = 157
     object QuProfesorProhibicionCantCodProfesor: TIntegerField
@@ -204,31 +200,29 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object TbTmpAulaTipoCarga: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 250
     Top = 62
     object TbTmpAulaTipoCargaCodAulaTipo: TIntegerField

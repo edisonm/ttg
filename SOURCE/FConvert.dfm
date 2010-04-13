@@ -155,7 +155,6 @@ object ConvertForm: TConvertForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []

@@ -94,7 +94,6 @@ object SelPeriodoForm: TSelPeriodoForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []

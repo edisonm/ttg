@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Grids, DBGrids, Db, DbUtils, kbmMemTable;
+  Grids, DBGrids, Db, DbUtils, kbmMemTable, Variants;
 
 type ERelationUtils = class(Exception);
 
@@ -239,7 +239,7 @@ begin
   with AMaster do
   begin
     DisableControls;
-    dsMaster := DataSource;
+    dsMaster := MasterSource;
     MasterSource := nil;
     try
       if not (Eof and Bof) then

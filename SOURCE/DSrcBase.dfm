@@ -4,7 +4,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbAulaTipo: TkbmMemTable
     Left = 48
     Top = 48
-    active = True
     BeforePost = TbAulaTipoBeforePost
     BeforeDelete = TbAulaTipoBeforeDelete
     IndexDefs = <
@@ -53,7 +52,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbEspecializacion: TkbmMemTable
     Left = 144
     Top = 60
-    active = True
     BeforePost = TbEspecializacionBeforePost
     BeforeDelete = TbEspecializacionBeforeDelete
     IndexDefs = <
@@ -97,7 +95,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbDia: TkbmMemTable
     Left = 240
     Top = 48
-    active = True
     BeforePost = TbDiaBeforePost
     BeforeDelete = TbDiaBeforeDelete
     IndexDefs = <
@@ -130,7 +127,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbMateria: TkbmMemTable
     Left = 336
     Top = 60
-    active = True
     BeforePost = TbMateriaBeforePost
     BeforeDelete = TbMateriaBeforeDelete
     IndexDefs = <
@@ -163,7 +159,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbNivel: TkbmMemTable
     Left = 432
     Top = 48
-    active = True
     BeforePost = TbNivelBeforePost
     BeforeDelete = TbNivelBeforeDelete
     IndexDefs = <
@@ -206,7 +201,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbHora: TkbmMemTable
     Left = 48
     Top = 144
-    active = True
     BeforePost = TbHoraBeforePost
     BeforeDelete = TbHoraBeforeDelete
     IndexDefs = <
@@ -250,7 +244,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbHorario: TkbmMemTable
     Left = 144
     Top = 156
-    active = True
     BeforePost = TbHorarioBeforePost
     BeforeDelete = TbHorarioBeforeDelete
     IndexDefs = <
@@ -294,7 +287,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbCurso: TkbmMemTable
     Left = 240
     Top = 144
-    active = True
     BeforePost = TbCursoBeforePost
     BeforeDelete = TbCursoBeforeDelete
     IndexDefs = <
@@ -330,7 +322,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbParaleloId: TkbmMemTable
     Left = 336
     Top = 156
-    active = True
     BeforePost = TbParaleloIdBeforePost
     BeforeDelete = TbParaleloIdBeforeDelete
     IndexDefs = <
@@ -363,7 +354,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbMateriaProhibicionTipo: TkbmMemTable
     Left = 432
     Top = 144
-    active = True
     BeforePost = TbMateriaProhibicionTipoBeforePost
     BeforeDelete = TbMateriaProhibicionTipoBeforeDelete
     IndexDefs = <
@@ -407,7 +397,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbPeriodo: TkbmMemTable
     Left = 48
     Top = 240
-    active = True
     BeforePost = TbPeriodoBeforePost
     BeforeDelete = TbPeriodoBeforeDelete
     IndexDefs = <
@@ -443,7 +432,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbParalelo: TkbmMemTable
     Left = 144
     Top = 252
-    active = True
     BeforePost = TbParaleloBeforePost
     BeforeDelete = TbParaleloBeforeDelete
     IndexDefs = <
@@ -484,7 +472,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbProfesor: TkbmMemTable
     Left = 240
     Top = 240
-    active = True
     BeforePost = TbProfesorBeforePost
     BeforeDelete = TbProfesorBeforeDelete
     IndexDefs = <
@@ -534,7 +521,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbMateriaProhibicion: TkbmMemTable
     Left = 336
     Top = 252
-    active = True
     BeforePost = TbMateriaProhibicionBeforePost
     IndexDefs = <
       item
@@ -583,7 +569,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbDistributivo: TkbmMemTable
     Left = 432
     Top = 240
-    active = True
     BeforePost = TbDistributivoBeforePost
     BeforeDelete = TbDistributivoBeforeDelete
     IndexDefs = <
@@ -653,7 +638,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbHorarioDetalle: TkbmMemTable
     Left = 48
     Top = 336
-    active = True
     BeforePost = TbHorarioDetalleBeforePost
     IndexDefs = <
       item
@@ -731,7 +715,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbProfesorProhibicionTipo: TkbmMemTable
     Left = 144
     Top = 348
-    active = True
     BeforePost = TbProfesorProhibicionTipoBeforePost
     BeforeDelete = TbProfesorProhibicionTipoBeforeDelete
     IndexDefs = <
@@ -774,7 +757,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbProfesorProhibicion: TkbmMemTable
     Left = 240
     Top = 336
-    active = True
     BeforePost = TbProfesorProhibicionBeforePost
     IndexDefs = <
       item

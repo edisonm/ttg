@@ -45,7 +45,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       Top = 0
       Width = 193
       Height = 21
-      Hint = 'Ver|Qué ver en el horario del tipo de aula'
+      Hint = 'Ver|Qu'#233' ver en el horario del tipo de aula'
       ItemHeight = 13
       ParentShowHint = False
       ShowHint = True
@@ -480,7 +480,9 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
   end
   object QuHorarioAulaTipo: TkbmMemTable
     Active = True
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <
       item
@@ -516,34 +518,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
         Name = 'CodDia'
         Attributes = [faRequired]
         DataType = ftInteger
-      end
-      item
-        Name = 'NomMateria'
-        DataType = ftString
-        Size = 15
-      end
-      item
-        Name = 'AbrNivel'
-        DataType = ftString
-        Size = 5
-      end
-      item
-        Name = 'AbrEspecializacion'
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'NomParaleloId'
-        DataType = ftString
-        Size = 5
-      end
-      item
-        Name = 'Nombre'
-        DataType = ftString
-        Size = 40
       end>
-    EnableIndexes = True
-    AutoReposition = False
     IndexFieldNames = 'CodAulaTipo'
     IndexName = 'QuHorarioAulaTipoIxCodAulaTipo'
     IndexDefs = <
@@ -551,33 +526,31 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
         Name = 'QuHorarioAulaTipoIxCodAulaTipo'
         Fields = 'CodAulaTipo'
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     MasterFields = 'CodAulaTipo'
     MasterSource = SourceDataModule.dsAulaTipo
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     OnCalcFields = QuHorarioAulaTipoCalcFields
     Left = 84
     Top = 80
     object QuHorarioAulaTipoCodAulaTipo: TAutoIncField
       AutoGenerateValue = arAutoInc
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodAulaTipo'
       Visible = False
     end
@@ -594,7 +567,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       Visible = False
     end
     object QuHorarioAulaTipoCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especialización'
+      DisplayLabel = 'Especializaci'#243'n'
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
@@ -612,7 +585,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       Visible = False
     end
     object QuHorarioAulaTipoCodDia: TIntegerField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldName = 'CodDia'
       Required = True
       Visible = False

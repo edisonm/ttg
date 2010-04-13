@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids, FCrsMME0, Db,
-  FCrsMME1, kbmMemTable, ImgList, ComCtrls, ToolWin, DBCtrls;
+  FCrsMME1, kbmMemTable, ImgList, ComCtrls, ToolWin, DBCtrls, Variants;
 
 type
   THorarioProfesorForm = class(TCrossManyToManyEditor1Form)
@@ -69,6 +69,7 @@ end;
 procedure THorarioProfesorForm.FormCreate(Sender: TObject);
 begin
   inherited;
+  QuHorarioProfesor.Open;
   CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
   SourceDataModule.TbProfesor.First;
   cbVerProfesor.Items.Clear;

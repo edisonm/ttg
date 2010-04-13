@@ -2,7 +2,7 @@ object ConfiguracionForm: TConfiguracionForm
   Left = 765
   Top = 116
   BorderStyle = bsDialog
-  Caption = 'Configuración'
+  Caption = 'Configuraci'#243'n'
   ClientHeight = 451
   ClientWidth = 415
   Color = clBtnFace
@@ -30,9 +30,10 @@ object ConfiguracionForm: TConfiguracionForm
     Top = 8
     Width = 401
     Height = 409
-    ActivePage = tbsPesos
+    ActivePage = tbsUnidadEducativa
     ParentShowHint = False
     ShowHint = True
+    TabIndex = 0
     TabOrder = 1
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
@@ -45,7 +46,7 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 109
         Width = 130
         Height = 13
-        Caption = 'Carga Máxima por Profesor:'
+        Caption = 'Carga M'#225'xima por Profesor:'
       end
       object lblComentarios: TLabel
         Left = 8
@@ -94,7 +95,7 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 36
         Width = 60
         Height = 13
-        Caption = 'Año Lectivo:'
+        Caption = 'A'#241'o Lectivo:'
       end
       object lblHorarioSeleccionado: TLabel
         Left = 152
@@ -208,14 +209,14 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 12
         Width = 159
         Height = 13
-        Caption = 'Generador de números aleatorios:'
+        Caption = 'Generador de n'#250'meros aleatorios:'
       end
       object Label28: TLabel
         Left = 8
         Top = 160
         Width = 52
         Height = 13
-        Caption = 'Aplicación:'
+        Caption = 'Aplicaci'#243'n:'
       end
       object Label29: TLabel
         Left = 16
@@ -250,7 +251,7 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 328
         Width = 191
         Height = 13
-        Caption = 'Expresión de exclusión de prohibiciones:'
+        Caption = 'Expresi'#243'n de exclusi'#243'n de prohibiciones:'
       end
       object Label36: TLabel
         Left = 16
@@ -264,7 +265,7 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 228
         Width = 189
         Height = 13
-        Caption = 'Directorio de comunicación asincrónica:'
+        Caption = 'Directorio de comunicaci'#243'n asincr'#243'nica:'
       end
       object CBRandomize: TCheckBox
         Left = 16
@@ -605,7 +606,6 @@ object ConfiguracionForm: TConfiguracionForm
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
-        OnDrawColumnCell = DBGridDrawColumnCell
       end
       object DBGrid2: TDBGrid
         Left = 8
@@ -619,7 +619,6 @@ object ConfiguracionForm: TConfiguracionForm
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
-        OnDrawColumnCell = DBGridDrawColumnCell
       end
     end
     object tbsAlgoritmoEvolutivo: TTabSheet
@@ -630,7 +629,7 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 13
         Width = 117
         Height = 13
-        Caption = 'Tamaño de la población:'
+        Caption = 'Tama'#241'o de la poblaci'#243'n:'
       end
       object Label10: TLabel
         Left = 8
@@ -644,42 +643,42 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 85
         Width = 132
         Height = 13
-        Caption = 'Probabilidad de Mutación 1:'
+        Caption = 'Probabilidad de Mutaci'#243'n 1:'
       end
       object Label13: TLabel
         Left = 8
         Top = 37
         Width = 121
         Height = 13
-        Caption = 'Máximo de generaciones:'
+        Caption = 'M'#225'ximo de generaciones:'
       end
       object Label7: TLabel
         Left = 8
         Top = 109
         Width = 114
         Height = 13
-        Caption = 'Orden de la Mutación 1:'
+        Caption = 'Orden de la Mutaci'#243'n 1:'
       end
       object Label9: TLabel
         Left = 8
         Top = 133
         Width = 132
         Height = 13
-        Caption = 'Probabilidad de Mutación 2:'
+        Caption = 'Probabilidad de Mutaci'#243'n 2:'
       end
       object Label12: TLabel
         Left = 8
         Top = 157
         Width = 134
         Height = 13
-        Caption = 'Probabilidad de Reparación:'
+        Caption = 'Probabilidad de Reparaci'#243'n:'
       end
       object Label43: TLabel
         Left = 8
         Top = 181
         Width = 108
         Height = 13
-        Caption = 'Rango de polinización:'
+        Caption = 'Rango de polinizaci'#243'n:'
       end
       object speTamPoblacion: TSpinEdit
         Left = 152

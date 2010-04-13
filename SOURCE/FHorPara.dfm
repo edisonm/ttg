@@ -43,7 +43,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Left = 138
       Top = 0
       Width = 113
-      Height = 22
+      Height = 21
       Hint = 'Nivel|Seleccione el nivel'
       KeyField = 'CodNivel'
       ListField = 'AbrNivel'
@@ -54,8 +54,8 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Left = 251
       Top = 0
       Width = 113
-      Height = 22
-      Hint = 'Especialización|Seleccione la especialización'
+      Height = 21
+      Hint = 'Especializaci'#243'n|Seleccione la especializaci'#243'n'
       KeyField = 'CodEspecializacion'
       ListField = 'NomEspecializacion'
       ListSource = SourceDataModule.dsEspecializacion
@@ -67,7 +67,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Left = 364
       Top = 0
       Width = 113
-      Height = 22
+      Height = 21
       Hint = 'Paralelo|Seleccione el tipo de paralelo'
       KeyField = 'CodParaleloId'
       ListField = 'NomParaleloId'
@@ -81,7 +81,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Top = 0
       Width = 185
       Height = 21
-      Hint = 'Ver|Seleccione el parámetro a ver en el horario'
+      Hint = 'Ver|Seleccione el par'#225'metro a ver en el horario'
       ItemHeight = 13
       ParentShowHint = False
       ShowHint = True
@@ -91,7 +91,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     object btn97IntercambiarPeriodos: TToolButton
       Left = 662
       Top = 0
-      Hint = 'Intercambiar períodos|Intercambiar períodos'
+      Hint = 'Intercambiar per'#237'odos|Intercambiar per'#237'odos'
       ImageIndex = 6
       ParentShowHint = False
       ShowHint = True
@@ -523,131 +523,15 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       80078E0FFE07F0008007DF07FE07E0008007FF83FC07C000800FFFC1F8038000
       800FFFE0F0418000800FFFF0F0E00000801FFFF8F9F00000803FFFFCFFF80001
       C07FFFFEFFFF0003FFFFFFFFFFFF000700000000000000000000000000000000
-      000000000000}
-  end
-  object TbParalelo: TkbmMemTable
-    Active = True
-    AttachedTo = SourceDataModule.TbParalelo
-    AttachedAutoRefresh = True
-    AutoIncMinValue = 0
+      000000000000}
+  end
+  object QuHorarioParalelo: TkbmMemTable
+    Active = True
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
+    AutoIncMinValue = -1
     FieldDefs = <
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodParaleloId'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'AbrNivel'
-        DataType = ftString
-        Size = 5
-      end
-      item
-        Name = 'AbrEspecializacion'
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'NomParaleloId'
-        DataType = ftString
-        Size = 5
-      end>
-    EnableIndexes = True
-    AutoReposition = False
-    IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvmAllSinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
-    Left = 88
-    Top = 104
-    object TbParaleloCodNivel: TIntegerField
-      DisplayLabel = 'Nivel'
-      DisplayWidth = 10
-      FieldName = 'CodNivel'
-      Required = True
-      Visible = False
-    end
-    object TbParaleloCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especialización'
-      DisplayWidth = 10
-      FieldName = 'CodEspecializacion'
-      Required = True
-      Visible = False
-    end
-    object TbParaleloCodParaleloId: TIntegerField
-      DisplayLabel = 'Paralelo'
-      DisplayWidth = 10
-      FieldName = 'CodParaleloId'
-      Required = True
-      Visible = False
-    end
-    object TbParaleloAbrNivel: TStringField
-      DisplayLabel = 'Nivel'
-      DisplayWidth = 5
-      FieldKind = fkLookup
-      FieldName = 'AbrNivel'
-      LookupDataSet = SourceDataModule.TbNivel
-      LookupKeyFields = 'CodNivel'
-      LookupResultField = 'AbrNivel'
-      KeyFields = 'CodNivel'
-      Size = 5
-      Lookup = True
-    end
-    object TbParaleloAbrEspecializacion: TStringField
-      DisplayLabel = 'Especializacion'
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'AbrEspecializacion'
-      LookupDataSet = SourceDataModule.TbEspecializacion
-      LookupKeyFields = 'CodEspecializacion'
-      LookupResultField = 'AbrEspecializacion'
-      KeyFields = 'CodEspecializacion'
-      Size = 10
-      Lookup = True
-    end
-    object TbParaleloNomParaleloId: TStringField
-      DisplayLabel = 'Paralelo'
-      DisplayWidth = 5
-      FieldKind = fkLookup
-      FieldName = 'NomParaleloId'
-      LookupDataSet = SourceDataModule.TbParaleloId
-      LookupKeyFields = 'CodParaleloId'
-      LookupResultField = 'NomParaleloId'
-      KeyFields = 'CodParaleloId'
-      Size = 5
-      Lookup = True
-    end
-  end
-  object QuHorarioParalelo: TkbmMemTable
-    Active = True
-    AttachedAutoRefresh = True
-    AutoIncMinValue = -1
-    FieldDefs = <
       item
         Name = 'CodNivel'
         Attributes = [faRequired]
@@ -681,24 +565,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       item
         Name = 'CodProfesor'
         DataType = ftAutoInc
-      end
-      item
-        Name = 'NomMateria'
-        DataType = ftString
-        Size = 15
-      end
-      item
-        Name = 'ApeNomProfesor'
-        DataType = ftString
-        Size = 31
-      end
-      item
-        Name = 'Nombre'
-        DataType = ftString
-        Size = 40
       end>
-    EnableIndexes = True
-    AutoReposition = False
     IndexFieldNames = 'CodNivel;CodEspecializacion;CodParaleloId'
     IndexName = 'QuHorarioParaleloIxParalelo'
     IndexDefs = <
@@ -706,27 +573,25 @@ inherited HorarioParaleloForm: THorarioParaleloForm
         Name = 'QuHorarioParaleloIxParalelo'
         Fields = 'CodNivel;CodEspecializacion;CodParaleloId'
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableJournal = False
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
     MasterFields = 'CodNivel;CodEspecializacion;CodParaleloId'
     MasterSource = dsParalelo
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     OnCalcFields = QuHorarioParaleloCalcFields
     Left = 60
     Top = 104
@@ -737,7 +602,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Visible = False
     end
     object QuHorarioParaleloCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especialización'
+      DisplayLabel = 'Especializaci'#243'n'
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
@@ -755,7 +620,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Visible = False
     end
     object QuHorarioParaleloCodDia: TIntegerField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldName = 'CodDia'
       Required = True
       Visible = False
@@ -768,7 +633,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     end
     object QuHorarioParaleloCodProfesor: TAutoIncField
       AutoGenerateValue = arAutoInc
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodProfesor'
       Visible = False
     end
@@ -805,8 +670,8 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     end
   end
   object dsParalelo: TDataSource
-    DataSet = TbParalelo
+    DataSet = SourceDataModule.TbParalelo
     Left = 88
-    Top = 132
+    Top = 104
   end
 end

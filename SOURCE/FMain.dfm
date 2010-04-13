@@ -2010,7 +2010,6 @@ object MainForm: TMainForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
@@ -2040,7 +2039,6 @@ object MainForm: TMainForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
@@ -2070,7 +2068,6 @@ object MainForm: TMainForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
@@ -2126,7 +2123,6 @@ object MainForm: TMainForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
@@ -2176,7 +2172,6 @@ object MainForm: TMainForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
@@ -2224,7 +2219,6 @@ object MainForm: TMainForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
@@ -2293,7 +2287,6 @@ object MainForm: TMainForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
@@ -2323,7 +2316,6 @@ object MainForm: TMainForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
@@ -2367,7 +2359,6 @@ object MainForm: TMainForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
@@ -2415,7 +2406,6 @@ object MainForm: TMainForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
@@ -2474,7 +2464,6 @@ object MainForm: TMainForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
@@ -2519,7 +2508,6 @@ object MainForm: TMainForm
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     LoadLimit = -1
-    EnableJournal = False
     EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []

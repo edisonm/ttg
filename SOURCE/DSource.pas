@@ -55,7 +55,7 @@ implementation
 
 {$R *.DFM}
 uses
-  SGHCUtls, BZip2, FConfig;
+  SGHCUtls, BZip2, FConfig, Variants, DBase;
 
 type
   EMainDataModuleError = class(Exception);
@@ -348,6 +348,7 @@ end;
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
+  OpenTables;
   FFlags :=
     [mtfSaveData,
       mtfSaveNonVisible,
