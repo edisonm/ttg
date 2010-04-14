@@ -1,10 +1,11 @@
 inherited SourceBaseDataModule: TSourceBaseDataModule
-  OldCreateOrder = True
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
   object TbAulaTipo: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 48
+    Top = 48
+    BeforePost = TbAulaTipoBeforePost
+    BeforeDelete = TbAulaTipoBeforeDelete
     IndexDefs = <
       item
         Name = 'TbAulaTipoixAbrAulaTipo'
@@ -21,29 +22,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodAulaTipo'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbAulaTipoBeforePost
-    BeforeDelete = TbAulaTipoBeforeDelete
-    Left = 48
-    Top = 48
     object TbAulaTipoCodAulaTipo: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'CodAulaTipo'
     end
     object TbAulaTipoNomAulaTipo: TStringField
@@ -59,6 +39,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 10
     end
     object TbAulaTipoCantidad: TIntegerField
+      DisplayLabel = 'Cantidad'
       FieldName = 'Cantidad'
       Required = True
     end
@@ -69,10 +50,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 40
   end
   object TbEspecializacion: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 144
+    Top = 60
+    BeforePost = TbEspecializacionBeforePost
+    BeforeDelete = TbEspecializacionBeforeDelete
     IndexDefs = <
       item
         Name = 'TbEspecializacionixAbrEspecializacion'
@@ -89,35 +70,15 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodEspecializacion'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbEspecializacionBeforePost
-    BeforeDelete = TbEspecializacionBeforeDelete
-    Left = 144
-    Top = 60
     object TbEspecializacionCodEspecializacion: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'CodEspecializacion'
     end
     object TbEspecializacionNomEspecializacion: TStringField
       DisplayLabel = 'Nombre'
       FieldName = 'NomEspecializacion'
       Required = True
+      Size = 20
     end
     object TbEspecializacionAbrEspecializacion: TStringField
       DisplayLabel = 'Abreviatura'
@@ -132,10 +93,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 52
   end
   object TbDia: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 240
+    Top = 48
+    BeforePost = TbDiaBeforePost
+    BeforeDelete = TbDiaBeforeDelete
     IndexDefs = <
       item
         Name = 'TbDiaixNomDia'
@@ -147,29 +108,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodDia'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbDiaBeforePost
-    BeforeDelete = TbDiaBeforeDelete
-    Left = 240
-    Top = 48
     object TbDiaCodDia: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'CodDia'
     end
     object TbDiaNomDia: TStringField
@@ -185,10 +125,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 40
   end
   object TbMateria: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 336
+    Top = 60
+    BeforePost = TbMateriaBeforePost
+    BeforeDelete = TbMateriaBeforeDelete
     IndexDefs = <
       item
         Name = 'TbMateriaixNomMateria'
@@ -200,35 +140,15 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodMateria'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbMateriaBeforePost
-    BeforeDelete = TbMateriaBeforeDelete
-    Left = 336
-    Top = 60
     object TbMateriaCodMateria: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'CodMateria'
     end
     object TbMateriaNomMateria: TStringField
       DisplayLabel = 'Nombre'
       FieldName = 'NomMateria'
       Required = True
+      Size = 20
     end
   end
   object dsMateria: TDataSource
@@ -237,10 +157,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 52
   end
   object TbNivel: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 432
+    Top = 48
+    BeforePost = TbNivelBeforePost
+    BeforeDelete = TbNivelBeforeDelete
     IndexDefs = <
       item
         Name = 'TbNivelixAbrNivel'
@@ -257,29 +177,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodNivel'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbNivelBeforePost
-    BeforeDelete = TbNivelBeforeDelete
-    Left = 432
-    Top = 48
     object TbNivelCodNivel: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'CodNivel'
     end
     object TbNivelNomNivel: TStringField
@@ -300,10 +199,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 40
   end
   object TbHora: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 48
+    Top = 144
+    BeforePost = TbHoraBeforePost
+    BeforeDelete = TbHoraBeforeDelete
     IndexDefs = <
       item
         Name = 'TbHoraixIntervalo'
@@ -320,29 +219,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodHora'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbHoraBeforePost
-    BeforeDelete = TbHoraBeforeDelete
-    Left = 48
-    Top = 144
     object TbHoraCodHora: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'CodHora'
     end
     object TbHoraNomHora: TStringField
@@ -352,6 +230,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 10
     end
     object TbHoraIntervalo: TStringField
+      DisplayLabel = 'Intervalo'
       FieldName = 'Intervalo'
       Required = True
       Size = 21
@@ -363,10 +242,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 136
   end
   object TbHorario: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 144
+    Top = 156
+    BeforePost = TbHorarioBeforePost
+    BeforeDelete = TbHorarioBeforeDelete
     IndexDefs = <
       item
         Name = 'TbHorarioixMomentoFinal'
@@ -381,29 +260,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodHorario'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbHorarioBeforePost
-    BeforeDelete = TbHorarioBeforeDelete
-    Left = 144
-    Top = 156
     object TbHorarioCodHorario: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'CodHorario'
     end
     object TbHorarioMomentoInicial: TDateTimeField
@@ -417,8 +275,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbHorarioInforme: TMemoField
+      DisplayLabel = 'Informe'
       FieldName = 'Informe'
-      BlobType = ftMemo
     end
   end
   object dsHorario: TDataSource
@@ -427,10 +285,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 148
   end
   object TbCurso: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 240
+    Top = 144
+    BeforePost = TbCursoBeforePost
+    BeforeDelete = TbCursoBeforeDelete
     IndexDefs = <
       item
         Name = 'TbCursoEspecializacionCurso'
@@ -445,34 +303,13 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodNivel;CodEspecializacion'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbCursoBeforePost
-    BeforeDelete = TbCursoBeforeDelete
-    Left = 240
-    Top = 144
     object TbCursoCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
     end
     object TbCursoCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especializaci'#243'n'
+      DisplayLabel = 'Especialización'
       FieldName = 'CodEspecializacion'
       Required = True
     end
@@ -483,10 +320,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 136
   end
   object TbParaleloId: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 336
+    Top = 156
+    BeforePost = TbParaleloIdBeforePost
+    BeforeDelete = TbParaleloIdBeforeDelete
     IndexDefs = <
       item
         Name = 'TbParaleloIdixNomParaleloId'
@@ -498,29 +335,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodParaleloId'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbParaleloIdBeforePost
-    BeforeDelete = TbParaleloIdBeforeDelete
-    Left = 336
-    Top = 156
     object TbParaleloIdCodParaleloId: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'CodParaleloId'
     end
     object TbParaleloIdNomParaleloId: TStringField
@@ -536,10 +352,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 148
   end
   object TbMateriaProhibicionTipo: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 432
+    Top = 144
+    BeforePost = TbMateriaProhibicionTipoBeforePost
+    BeforeDelete = TbMateriaProhibicionTipoBeforeDelete
     IndexDefs = <
       item
         Name = 'TbMateriaProhibicionTipoixNomMateProhibicionTipo'
@@ -551,29 +367,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodMateProhibicionTipo'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbMateriaProhibicionTipoBeforePost
-    BeforeDelete = TbMateriaProhibicionTipoBeforeDelete
-    Left = 432
-    Top = 144
     object TbMateriaProhibicionTipoCodMateProhibicionTipo: TIntegerField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'CodMateProhibicionTipo'
       Required = True
     end
@@ -600,10 +395,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 136
   end
   object TbPeriodo: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 48
+    Top = 240
+    BeforePost = TbPeriodoBeforePost
+    BeforeDelete = TbPeriodoBeforeDelete
     IndexDefs = <
       item
         Name = 'TbPeriodoDiaPeriodo'
@@ -618,29 +413,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbPeriodoBeforePost
-    BeforeDelete = TbPeriodoBeforeDelete
-    Left = 48
-    Top = 240
     object TbPeriodoCodDia: TIntegerField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Día'
       FieldName = 'CodDia'
       Required = True
     end
@@ -656,10 +430,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 232
   end
   object TbParalelo: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 144
+    Top = 252
+    BeforePost = TbParaleloBeforePost
+    BeforeDelete = TbParaleloBeforeDelete
     IndexDefs = <
       item
         Name = 'TbParaleloCursoParalelo'
@@ -674,34 +448,13 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodNivel;CodEspecializacion;CodParaleloId'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbParaleloBeforePost
-    BeforeDelete = TbParaleloBeforeDelete
-    Left = 144
-    Top = 252
     object TbParaleloCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
     end
     object TbParaleloCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especializaci'#243'n'
+      DisplayLabel = 'Especialización'
       FieldName = 'CodEspecializacion'
       Required = True
     end
@@ -717,10 +470,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 244
   end
   object TbProfesor: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 240
+    Top = 240
+    BeforePost = TbProfesorBeforePost
+    BeforeDelete = TbProfesorBeforeDelete
     IndexDefs = <
       item
         Name = 'TbProfesorixApeNomProfesor'
@@ -737,33 +490,12 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodProfesor'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbProfesorBeforePost
-    BeforeDelete = TbProfesorBeforeDelete
-    Left = 240
-    Top = 240
     object TbProfesorCodProfesor: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'CodProfesor'
     end
     object TbProfesorCedProfesor: TStringField
-      DisplayLabel = 'C'#233'dula'
+      DisplayLabel = 'Cédula'
       FieldName = 'CedProfesor'
       Required = True
       Size = 11
@@ -787,10 +519,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 232
   end
   object TbMateriaProhibicion: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 336
+    Top = 252
+    BeforePost = TbMateriaProhibicionBeforePost
     IndexDefs = <
       item
         Name = 'TbMateriaProhibicionMateriaMateriaProhibicion'
@@ -809,33 +540,13 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodMateria;CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbMateriaProhibicionBeforePost
-    Left = 336
-    Top = 252
     object TbMateriaProhibicionCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
       Required = True
     end
     object TbMateriaProhibicionCodDia: TIntegerField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Día'
       FieldName = 'CodDia'
       Required = True
     end
@@ -845,7 +556,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbMateriaProhibicionCodMateProhibicionTipo: TIntegerField
-      DisplayLabel = 'Tipo de Prohibici'#243'n'
+      DisplayLabel = 'Tipo de Prohibición'
       FieldName = 'CodMateProhibicionTipo'
       Required = True
     end
@@ -856,10 +567,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 244
   end
   object TbDistributivo: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 432
+    Top = 240
+    BeforePost = TbDistributivoBeforePost
+    BeforeDelete = TbDistributivoBeforeDelete
     IndexDefs = <
       item
         Name = 'TbDistributivoAulaTipoDistributivo'
@@ -882,27 +593,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Name = 'TbDistributivoProfesorDistributivo'
         Fields = 'CodProfesor'
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbDistributivoBeforePost
-    BeforeDelete = TbDistributivoBeforeDelete
-    Left = 432
-    Top = 240
     object TbDistributivoCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
@@ -914,7 +604,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbDistributivoCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especializaci'#243'n'
+      DisplayLabel = 'Especialización'
       FieldName = 'CodEspecializacion'
       Required = True
     end
@@ -934,7 +624,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbDistributivoComposicion: TStringField
-      DisplayLabel = 'Composici'#243'n'
+      DisplayLabel = 'Composición'
       FieldName = 'Composicion'
       Required = True
       Size = 40
@@ -946,10 +636,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 232
   end
   object TbHorarioDetalle: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 48
+    Top = 336
+    BeforePost = TbHorarioDetalleBeforePost
     IndexDefs = <
       item
         Name = 'TbHorarioDetalleDistributivoHorarioDetalle'
@@ -965,9 +654,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'TbHorarioDetalleixRestriccionMateria'
-        Fields = 
-          'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
-          'ora'
+        Fields = 'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
         Options = [ixUnique]
       end
       item
@@ -976,31 +663,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'TbHorarioDetallePrimaryKey'
-        Fields = 
-          'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;' +
-          'CodDia;CodHora'
+        Fields = 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbHorarioDetalleBeforePost
-    Left = 48
-    Top = 336
     object TbHorarioDetalleCodHorario: TIntegerField
       DisplayLabel = 'Horario'
       FieldName = 'CodHorario'
@@ -1017,7 +682,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbHorarioDetalleCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especializaci'#243'n'
+      DisplayLabel = 'Especialización'
       FieldName = 'CodEspecializacion'
       Required = True
     end
@@ -1027,7 +692,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbHorarioDetalleCodDia: TIntegerField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Día'
       FieldName = 'CodDia'
       Required = True
     end
@@ -1037,7 +702,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbHorarioDetalleSesion: TIntegerField
-      DisplayLabel = 'Sesi'#243'n'
+      DisplayLabel = 'Sesión'
       FieldName = 'Sesion'
       Required = True
     end
@@ -1048,10 +713,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 328
   end
   object TbProfesorProhibicionTipo: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 144
+    Top = 348
+    BeforePost = TbProfesorProhibicionTipoBeforePost
+    BeforeDelete = TbProfesorProhibicionTipoBeforeDelete
     IndexDefs = <
       item
         Name = 'TbProfesorProhibicionTipoixNomProfProhibicionTipo'
@@ -1063,29 +728,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodProfProhibicionTipo'
         Options = [ixPrimary, ixUnique]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbProfesorProhibicionTipoBeforePost
-    BeforeDelete = TbProfesorProhibicionTipoBeforeDelete
-    Left = 144
-    Top = 348
     object TbProfesorProhibicionTipoCodProfProhibicionTipo: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Código'
       FieldName = 'CodProfProhibicionTipo'
     end
     object TbProfesorProhibicionTipoNomProfProhibicionTipo: TStringField
@@ -1111,10 +755,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 340
   end
   object TbProfesorProhibicion: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
+    Left = 240
+    Top = 336
+    BeforePost = TbProfesorProhibicionBeforePost
     IndexDefs = <
       item
         Name = 'TbProfesorProhibicionPeriodoProfesorProhibicion'
@@ -1133,33 +776,13 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Name = 'TbProfesorProhibicionProfesorProhibicionTipoProfesorProhibicion'
         Fields = 'CodProfProhibicionTipo'
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
-    BeforePost = TbProfesorProhibicionBeforePost
-    Left = 240
-    Top = 336
     object TbProfesorProhibicionCodProfesor: TIntegerField
       DisplayLabel = 'Profesor'
       FieldName = 'CodProfesor'
       Required = True
     end
     object TbProfesorProhibicionCodDia: TIntegerField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Día'
       FieldName = 'CodDia'
       Required = True
     end
@@ -1169,7 +792,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbProfesorProhibicionCodProfProhibicionTipo: TIntegerField
-      DisplayLabel = 'Tipo de prohibici'#243'n'
+      DisplayLabel = 'Tipo de prohibición'
       FieldName = 'CodProfProhibicionTipo'
       Required = True
     end
