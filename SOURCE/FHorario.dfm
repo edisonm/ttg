@@ -1,6 +1,6 @@
 inherited HorarioForm: THorarioForm
-  Left = 335
-  Top = 196
+  Left = 347
+  Top = 204
   Width = 626
   Height = 361
   Caption = 'HorarioForm'
@@ -91,7 +91,7 @@ inherited HorarioForm: THorarioForm
     object btn97MateriaCortadaDia: TToolButton
       Left = 384
       Top = 0
-      Hint = 'Materias cortadas por el día|Materias cortadas por el día'
+      Hint = 'Materias cortadas por el d'#237'a|Materias cortadas por el d'#237'a'
       ImageIndex = 5
       ParentShowHint = False
       ShowHint = True
@@ -134,23 +134,19 @@ inherited HorarioForm: THorarioForm
       Cursor = crHSplit
       Align = alRight
     end
-    inherited DBGrid: TRxDBGrid
+    inherited DBGrid: TDBGrid
       Width = 310
       Height = 288
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-      MultiSelect = True
-      OnGetCellParams = DBGridGetCellParams
       Columns = <
         item
           Expanded = False
           FieldName = 'CodHorario'
-          PickList.Strings = ()
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'MomentoInicial'
-          PickList.Strings = ()
           ReadOnly = True
           Width = 93
           Visible = True
@@ -158,7 +154,6 @@ inherited HorarioForm: THorarioForm
         item
           Expanded = False
           FieldName = 'MomentoFinal'
-          PickList.Strings = ()
           ReadOnly = True
           Width = 110
           Visible = True
@@ -745,35 +740,34 @@ inherited HorarioForm: THorarioForm
     Top = 140
   end
   object QuCruceAula: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
-    AutoIncMinValue = 0
+    AttachMaxCount = 1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexFieldNames = 'CodAulaTipo;CodDia;CodHora'
     IndexDefs = <
       item
         Name = 'QuCruceAulaIndex1'
         Fields = 'CodAulaTipo;CodDia;CodHora'
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 88
     Top = 168
     object QuCruceAulaCodDia: TIntegerField
@@ -817,7 +811,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
     object QuCruceAulaNomDia: TStringField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -843,8 +837,9 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceAulaDetalle: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
-    AutoIncMinValue = 0
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodHora'
@@ -887,34 +882,32 @@ inherited HorarioForm: THorarioForm
         DataType = ftString
         Size = 5
       end>
-    EnableIndexes = True
-    AutoReposition = False
     IndexFieldNames = 'CodAulaTipo;CodDia;CodHora'
     IndexDefs = <
       item
         Name = 'QuCruceAulaDetalleIndex1'
         Fields = 'CodAulaTipo;CodDia;CodHora'
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
     MasterFields = 'CodAulaTipo;CodDia;CodHora'
     MasterSource = dsCruceAula
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 116
     Top = 168
     object QuCruceAulaDetalleCodHora: TIntegerField
@@ -988,30 +981,29 @@ inherited HorarioForm: THorarioForm
     Top = 168
   end
   object QuCruceProfesorDetalle: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
-    AutoIncMinValue = 0
+    AttachMaxCount = 1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 116
     Top = 196
     object QuCruceProfesorDetalleCodProfesor: TIntegerField
@@ -1101,35 +1093,34 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceProfesor: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
-    AutoIncMinValue = 0
+    AttachMaxCount = 1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexFieldNames = 'CodProfesor;CodDia;CodHora'
     IndexDefs = <
       item
         Name = 'QuCruceProfesorIndex1'
         Fields = 'CodProfesor;CodDia;CodHora'
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     AfterScroll = QuCruceProfesorAfterScroll
     Left = 88
     Top = 196
@@ -1183,7 +1174,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
     object QuCruceProfesorNomDia: TStringField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -1199,11 +1190,10 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceMateria: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
-    AutoIncMinValue = 0
+    AttachMaxCount = 1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <
       item
         Name = 'QuCruceMateriaIxCodMateria'
@@ -1213,24 +1203,24 @@ inherited HorarioForm: THorarioForm
         Name = 'QuCruceMateriaIxNomMateria'
         Fields = 'NomMateria'
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     AfterScroll = QuCruceMateriaAfterScroll
     Left = 88
     Top = 224
@@ -1246,11 +1236,10 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceMateriaDetalle: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
-    AutoIncMinValue = 0
+    AttachMaxCount = 1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexFieldNames = 
       'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
       'ora'
@@ -1261,24 +1250,24 @@ inherited HorarioForm: THorarioForm
           'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
           'ora'
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 116
     Top = 224
     object QuCruceMateriaDetalleCodMateria: TIntegerField
@@ -1299,7 +1288,7 @@ inherited HorarioForm: THorarioForm
       Visible = False
     end
     object QuCruceMateriaDetalleCodDia: TIntegerField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldName = 'CodDia'
       Required = True
       Visible = False
@@ -1346,7 +1335,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
     object QuCruceMateriaDetalleNomDia: TStringField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -1372,11 +1361,11 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuHorarioDetalleMateriaProhibicion: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexFieldNames = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
     IndexDefs = <
       item
@@ -1385,24 +1374,23 @@ inherited HorarioForm: THorarioForm
         Fields = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
         Options = [ixDescending]
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 60
     Top = 168
     object QuHorarioDetalleMateriaProhibicionNomMateProhibicionTipo: TStringField
@@ -1447,7 +1435,7 @@ inherited HorarioForm: THorarioForm
       Visible = False
     end
     object QuHorarioDetalleMateriaProhibicionNomDia: TStringField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -1509,30 +1497,29 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuHorarioDetalleProfesorProhibicion: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
-    AutoIncMinValue = 0
+    AttachMaxCount = 1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 60
     Top = 196
     object QuHorarioDetalleProfesorProhibicionNomProfProhibicionTipo: TStringField
@@ -1584,7 +1571,7 @@ inherited HorarioForm: THorarioForm
       Visible = False
     end
     object QuHorarioDetalleProfesorProhibicionNomDia: TStringField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -1646,30 +1633,29 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuMateriaCortadaDia: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
-    AutoIncMinValue = 0
+    AttachMaxCount = 1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     AfterScroll = QuCruceMateriaAfterScroll
     Left = 60
     Top = 224
@@ -1740,7 +1726,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
     object QuMateriaCortadaDiaNomDia: TStringField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -1778,35 +1764,34 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuMateriaCortadaHora: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
-    AutoIncMinValue = 0
+    AttachMaxCount = 1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexFieldNames = 'CodDia'
     IndexDefs = <
       item
         Name = 'QuMateriaCortadaHoraIxCodDia'
         Fields = 'CodDia'
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 60
     Top = 252
     object QuMateriaCortadaHoraCodDia: TIntegerField
@@ -1820,7 +1805,7 @@ inherited HorarioForm: THorarioForm
       Visible = False
     end
     object QuMateriaCortadaHoraNomDia: TStringField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -1846,37 +1831,36 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuMateriaCortadaHoraDetalle: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
-    AutoIncMinValue = 0
+    AttachMaxCount = 1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexFieldNames = 'CodDia;CodHora;CodHora0'
     IndexDefs = <
       item
         Name = 'QuMateriaCortadaHoraDetalleIxCodDia'
         Fields = 'CodDia;CodHora;CodHora0'
       end>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
     MasterFields = 'CodDia;CodHora'
     MasterSource = dsMateriaCortadaHora
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 88
     Top = 252
     object QuMateriaCortadaHoraDetalleCodNivel: TIntegerField
@@ -1951,7 +1935,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
     object QuMateriaCortadaHoraDetalleNomDia: TStringField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia

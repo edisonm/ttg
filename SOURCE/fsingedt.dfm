@@ -1,6 +1,6 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 397
-  Top = 181
+  Left = 386
+  Top = 191
   Width = 510
   OldCreateOrder = True
   PixelsPerInch = 96
@@ -13,7 +13,7 @@ inherited SingleEditorForm: TSingleEditorForm
     object btn97Find: TToolButton
       Left = 23
       Top = 0
-      Hint = 'Buscar|Buscar un campo específico'
+      Hint = 'Buscar|Buscar un campo espec'#237'fico'
       ImageIndex = 1
       ParentShowHint = False
       ShowHint = True
@@ -57,14 +57,13 @@ inherited SingleEditorForm: TSingleEditorForm
   end
   inherited Panel1: TPanel
     Width = 502
-    object DBGrid: TRxDBGrid
+    object DBGrid: TDBGrid
       Left = 1
       Top = 1
       Width = 500
       Height = 253
       Align = alClient
       DataSource = DataSource
-      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -72,11 +71,6 @@ inherited SingleEditorForm: TSingleEditorForm
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
       OnDblClick = DBGridDblClick
-      IniStorage = FormStorage
-      TitleButtons = True
-      OnCheckButton = DBGridCheckButton
-      OnGetBtnParams = DBGridGetBtnParams
-      OnTitleBtnClick = DBGridTitleBtnClick
     end
   end
   inherited ImageList: TImageList

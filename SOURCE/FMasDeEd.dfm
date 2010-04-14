@@ -17,12 +17,12 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
       Cursor = crVSplit
       Align = alBottom
     end
-    inherited DBGrid: TRxDBGrid
+    inherited DBGrid: TDBGrid
       Height = 154
       TabOrder = 1
       OnEnter = DBGridEnter
     end
-    object DBGridDetail: TRxDBGrid
+    object DBGridDetail: TDBGrid
       Left = 1
       Top = 158
       Width = 500

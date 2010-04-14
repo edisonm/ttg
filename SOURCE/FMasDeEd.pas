@@ -10,7 +10,7 @@ uses
 type
   TMasterDetailEditorForm = class(TSingleEditorForm)
     DataSourceDetail: TDataSource;
-    DBGridDetail: TRxDBGrid;
+    DBGridDetail: TDBGrid;
     Splitter1: TSplitter;
     procedure DBGridEnter(Sender: TObject);
     procedure btn97ShowClick(Sender: TObject);
@@ -31,8 +31,8 @@ uses
 procedure TMasterDetailEditorForm.DBGridEnter(Sender: TObject);
 begin
   inherited;
-  SLState.DataSource := (Sender as TRxDBGrid).DataSource;
-  SLRecordNo.DataSource := (Sender as TRxDBGrid).DataSource;
+  SLState.DataSource := (Sender as TCustomDBGrid).DataSource;
+  SLRecordNo.DataSource := (Sender as TCustomDBGrid).DataSource;
 end;
 
 procedure TMasterDetailEditorForm.btn97ShowClick(Sender: TObject);

@@ -3,7 +3,7 @@ unit HorColCm;
 interface
 
 uses
-  Classes, Dialogs, Db, RXDBCtrl, Variants;
+  Classes, Dialogs, Db, DBGrids, Variants;
 
 function NullToZero(A: Variant): Variant;
 procedure EqualSpaced(Strings: TStrings; ini, fin: Integer; delim: string);
@@ -12,7 +12,7 @@ procedure LoadStringsFromDataSet(Strings: TStrings; DataSet: TDataSet;
 function DisplayLabels(ADataSet: TDataSet; const AFieldNames: string): string;
 procedure LoadNames(Source, Destination: TStrings);
 procedure SearchInField(AField: TField; AValue: Variant);
-procedure SearchInDBGrid(DBGrid: TRxDBGrid);
+procedure SearchInDBGrid(DBGrid: TDBGrid);
 function VarArrToStr(v: Variant; Separator: string = '; '): string;
 
 implementation
@@ -113,7 +113,7 @@ begin
     Destination.Add(Source.Names[i]);
 end;
 
-procedure SearchInDBGrid(DBGrid: TRxDBGrid);
+procedure SearchInDBGrid(DBGrid: TDBGrid);
 var
   s: string;
 begin

@@ -1,5 +1,7 @@
+[FileVersion]
+Version=6.0
 [Compiler]
-A=1
+A=8
 B=0
 C=1
 D=1
@@ -51,6 +53,9 @@ UsePackages=0
 [Parameters]
 RunParams=
 HostApplication=
+Launcher=
+UseLauncher=0
+DebugCWD=
 [Language]
 ActiveLang=
 ProjectLang=$0000300A
@@ -61,7 +66,7 @@ AutoIncBuild=1
 MajorVer=1
 MinorVer=2
 Release=1
-Build=12
+Build=13
 Debug=0
 PreRelease=1
 Special=0
@@ -72,7 +77,7 @@ CodePage=1252
 [Version Info Keys]
 CompanyName=Edison Mera
 FileDescription=Horarios para Colegio
-FileVersion=1.2.1.12
+FileVersion=1.2.1.13
 InternalName=SGHC
 LegalCopyright=2010 por Edison Mera
 LegalTrademarks=

@@ -41,7 +41,7 @@ inherited ProfesorForm: TProfesorForm
   inherited Panel1: TPanel
     Width = 702
     Height = 356
-    inherited DBGrid: TRxDBGrid
+    inherited DBGrid: TDBGrid
       Width = 700
       Height = 354
     end

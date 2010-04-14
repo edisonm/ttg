@@ -23,6 +23,9 @@ type
     { Public declarations }
   end;
 
+var
+  ParaleloForm: TParaleloForm;
+
 implementation
 
 uses

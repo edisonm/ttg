@@ -31,7 +31,7 @@ inherited MateriaForm: TMateriaForm
   end
   inherited Panel1: TPanel
     Width = 594
-    inherited DBGrid: TRxDBGrid
+    inherited DBGrid: TDBGrid
       Width = 592
     end
   end

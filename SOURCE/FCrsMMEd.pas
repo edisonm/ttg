@@ -374,7 +374,6 @@ procedure TCrossManyToManyEditorForm.DrawGridSelectCell(Sender: TObject; ACol,
   ARow: Integer; var CanSelect: Boolean);
 begin
   inherited;
-
   with (Sender as TRxDrawGrid) do
   begin
     if ACol <> Col then InvalidateCell(Col, 0);

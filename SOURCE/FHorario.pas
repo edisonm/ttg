@@ -181,6 +181,9 @@ type
     { Public declarations }
   end;
 
+var
+  HorarioForm: THorarioForm;
+
 implementation
 uses
   FCrsMMER, FHorPara, FHorAulT, DMaster, SGHCUtls, FMasDEEd, FCrsMME1, FHorProf,

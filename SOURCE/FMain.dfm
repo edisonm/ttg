@@ -53,16 +53,19 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnDblClick = FormDblClick
   OnDestroy = FormDestroy
+  DesignSize = (
+    593
+    346)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 330
-    Top = 297
-    Width = 237
+    Left = 335
+    Top = 305
+    Width = 240
     Height = 13
     Alignment = taRightJustify
     Anchors = [akRight, akBottom]
-    Caption = 'Edición 12-04-2010, Edison Mera, Quito - Ecuador'
+    Caption = 'Edici'#243'n 12-04-2010, Edison Mera, Madrid - Espa'#241'a'
   end
   object StatusBar: TStatusBar
     Left = 0
@@ -388,7 +391,7 @@ object MainForm: TMainForm
     object MIView: TMenuItem
       Caption = '&Ver'
       HelpContext = 60
-      Hint = 'Ver|Presentación de resultados'
+      Hint = 'Ver|Presentaci'#243'n de resultados'
       object MIHorario: TMenuItem
         Action = actHorario
         ShortCut = 49224
@@ -447,7 +450,7 @@ object MainForm: TMainForm
     object MIHelp: TMenuItem
       Caption = 'A&yuda'
       HelpContext = 70
-      Hint = 'Ayuda|Temas de Ayuda en línea'
+      Hint = 'Ayuda|Temas de Ayuda en l'#237'nea'
       object MIContent: TMenuItem
         Action = actContents
       end
@@ -1737,12 +1740,12 @@ object MainForm: TMainForm
       Category = 'Help'
       Caption = 'Acerca de...'
       HelpContext = 370
-      Hint = 'Acerca de|Información referente a este programa'
+      Hint = 'Acerca de|Informaci'#243'n referente a este programa'
       OnExecute = actAboutExecute
     end
     object actRegistrationInfo: TAction
       Category = 'Help'
-      Caption = 'Información de registro'
+      Caption = 'Informaci'#243'n de registro'
       OnExecute = actRegistrationInfoExecute
     end
     object actPresentarParaleloHorario: TAction
@@ -1846,18 +1849,18 @@ object MainForm: TMainForm
     end
     object actDia: TAction
       Category = 'Data'
-      Caption = 'Días laborables'
+      Caption = 'D'#237'as laborables'
       HelpContext = 140
-      Hint = 'Días laborables|Dias laborables'
+      Hint = 'D'#237'as laborables|Dias laborables'
       ImageIndex = 4
       ShortCut = 16452
       OnExecute = actDiaExecute
     end
     object actHora: TAction
       Category = 'Data'
-      Caption = 'Horas académicas'
+      Caption = 'Horas acad'#233'micas'
       HelpContext = 150
-      Hint = 'Horas académicas|Horas académicas'
+      Hint = 'Horas acad'#233'micas|Horas acad'#233'micas'
       ImageIndex = 5
       ShortCut = 16456
       OnExecute = actHoraExecute
@@ -1887,9 +1890,9 @@ object MainForm: TMainForm
     end
     object actPeriodo: TAction
       Category = 'Data'
-      Caption = 'Períodos laborables'
+      Caption = 'Per'#237'odos laborables'
       HelpContext = 160
-      Hint = 'Períodos laborables|Períodos laborables'
+      Hint = 'Per'#237'odos laborables|Per'#237'odos laborables'
       ImageIndex = 13
       ShortCut = 49225
       OnExecute = actPeriodoExecute
@@ -1961,7 +1964,7 @@ object MainForm: TMainForm
       Category = 'Tools'
       Caption = 'Configurar...'
       HelpContext = 250
-      Hint = 'Configurar|Cambiar la configuración del sistema'
+      Hint = 'Configurar|Cambiar la configuraci'#243'n del sistema'
       ImageIndex = 19
       OnExecute = actConfigurarExecute
     end
@@ -1990,88 +1993,88 @@ object MainForm: TMainForm
     end
   end
   object TbParalelo: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     OnFilterRecord = TbParaleloFilterRecord
     Left = 48
     Top = 119
   end
   object TbProfesor: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     OnFilterRecord = TbProfesorFilterRecord
     Left = 48
     Top = 147
   end
   object QuParaleloHora: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 76
     Top = 119
     object QuParaleloHoraCodNivel: TIntegerField
@@ -2103,30 +2106,30 @@ object MainForm: TMainForm
     end
   end
   object QuProfesorHora: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 76
     Top = 147
     object QuProfesorHoraCodProfesor: TIntegerField
@@ -2152,30 +2155,30 @@ object MainForm: TMainForm
     end
   end
   object QuProfesorHorarioDetalle: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 104
     Top = 147
     object QuProfesorHorarioDetalleCodProfesor: TIntegerField
@@ -2184,7 +2187,7 @@ object MainForm: TMainForm
       Required = True
     end
     object QuProfesorHorarioDetalleCodDia: TIntegerField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldName = 'CodDia'
       Required = True
     end
@@ -2199,30 +2202,30 @@ object MainForm: TMainForm
     end
   end
   object QuParaleloHorarioDetalle: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 104
     Top = 119
     object QuParaleloHorarioDetalleCodNivel: TIntegerField
@@ -2231,7 +2234,7 @@ object MainForm: TMainForm
       Required = True
     end
     object QuParaleloHorarioDetalleCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especialización'
+      DisplayLabel = 'Especializaci'#243'n'
       FieldName = 'CodEspecializacion'
       Required = True
     end
@@ -2241,7 +2244,7 @@ object MainForm: TMainForm
       Required = True
     end
     object QuParaleloHorarioDetalleCodDia: TIntegerField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldName = 'CodDia'
       Required = True
     end
@@ -2259,7 +2262,6 @@ object MainForm: TMainForm
       DisplayLabel = 'Materia'
       FieldKind = fkLookup
       FieldName = 'NomMateria'
-      LookupDataSet = SourceDataModule.kbmMateria
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
@@ -2267,59 +2269,59 @@ object MainForm: TMainForm
     end
   end
   object TbMateria: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     OnFilterRecord = TbMateriaFilterRecord
     Left = 48
     Top = 184
   end
   object QuMateriaMateriaProhibicion: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     AfterScroll = QuMateriaMateriaProhibicionAfterScroll
     Left = 76
     Top = 184
@@ -2331,7 +2333,6 @@ object MainForm: TMainForm
       DisplayLabel = 'Materia'
       FieldKind = fkLookup
       FieldName = 'NomMateria'
-      LookupDataSet = SourceDataModule.kbmMateria
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
@@ -2339,30 +2340,30 @@ object MainForm: TMainForm
     end
   end
   object QuMateriaMateriaProhibicionHora: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 104
     Top = 184
     object QuMateriaMateriaProhibicionHoraCodMateria: TIntegerField
@@ -2386,35 +2387,35 @@ object MainForm: TMainForm
     end
   end
   object QuProfesorProfesorProhibicion: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     AfterScroll = QuProfesorProfesorProhibicionAfterScroll
     Left = 76
     Top = 212
     object QuProfesorProfesorProhibicionCodProfesor: TIntegerField
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodProfesor'
       Visible = False
     end
@@ -2422,7 +2423,6 @@ object MainForm: TMainForm
       DisplayLabel = 'Apellido'
       FieldKind = fkLookup
       FieldName = 'ApeProfesor'
-      LookupDataSet = SourceDataModule.kbmProfesor
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'ApeProfesor'
       KeyFields = 'ApeProfesor'
@@ -2434,7 +2434,6 @@ object MainForm: TMainForm
       DisplayLabel = 'Nombre'
       FieldKind = fkLookup
       FieldName = 'NomProfesor'
-      LookupDataSet = SourceDataModule.kbmProfesor
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'NomProfesor'
       KeyFields = 'NomProfesor'
@@ -2444,30 +2443,30 @@ object MainForm: TMainForm
     end
   end
   object QuProfesorProfesorProhibicionHora: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 104
     Top = 212
     object QuProfesorProfesorProhibicionHoraCodProfesor: TIntegerField
@@ -2488,30 +2487,30 @@ object MainForm: TMainForm
     end
   end
   object TbProfesor1: TkbmMemTable
+    DesignActivation = True
     AttachedAutoRefresh = True
+    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
     CommaTextOptions = [mtfSaveData]
     CSVQuote = '"'
     CSVFieldDelimiter = ','
     CSVRecordDelimiter = ','
+    CSVTrueString = 'True'
+    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
-    PersistentSaveFormat = mtsfBinary
     PersistentBackup = False
     ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
     VersioningMode = mtvmAllSinceCheckPoint
     FilterOptions = []
-    Version = '2.49'
+    Version = '2.53b'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     OnFilterRecord = TbProfesor1FilterRecord
     Left = 48
     Top = 212

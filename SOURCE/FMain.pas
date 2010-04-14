@@ -5,10 +5,13 @@ unit FMain;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,  SysConst, ExtCtrls, DB, Menus, ComCtrls, Placemnt, MRUList, ImgList, Buttons,  MrgMngr, SpeedBar, RxMenus, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,  FSingEdt, QrPrntr, kbmMemTable{, Protect};
-type
-  TMainForm = class(TForm)
-    MainMenu: TMainMenu;
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  SysConst, ExtCtrls, DB, Menus, ComCtrls, Placemnt, MRUList, ImgList, Buttons,
+  MrgMngr, SpeedBar, RxMenus, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,
+  FSingEdt, QrPrntr, kbmMemTable, FCrsMME0{, Protect};
+type
+  TMainForm = class(TForm)
+    MainMenu: TMainMenu;
     MIProfesor: TMenuItem;
     MIMateria: TMenuItem;
     MIEspecializacion: TMenuItem;
@@ -230,6 +233,13 @@ type
 }
   private
     { Private declarations }
+    FDiaForm,
+    FNivelForm,
+    FAulaTipoForm,
+    FParaleloIdForm,
+    FHoraForm,
+    FEspecializacionForm: TSingleEditorForm;
+    FPeriodoForm: TCrossManyToManyEditor0Form;
 {$IFNDEF FREEWARE}
     FInit: TDateTime;
     FCloseClick:Boolean;
@@ -282,8 +292,6 @@ type
     procedure MejorarHorario;
     procedure ProgressDescensoDoble(I, Max: Integer; Value: Double; var Stop: Boolean);
 {$ENDIF}
-    procedure InternalShowFormulary(ASingleEditorForm: TSingleEditorForm;
-      ADataSet: TDataSet; AAction: TAction; DestroyEvent: TNotifyEvent);
     procedure ExportarCSV(AMasterDataSet, ADetailDataSet: TDataSet; AStrings: TStrings);
     procedure PrepareReportProfesorHorario(Sender: TObject);
     procedure PrepareReportParaleloHorario(Sender: TObject);
@@ -303,6 +311,8 @@ type
     procedure FillProfesorProfesorProhibicionHora;
     procedure FillParaleloHorarioDetalle;
     procedure FillProfesorHorarioDetalle;
+    procedure InternalShowFormulary(FormClass: TFormClass; var Reference;
+      ADataSet: TDataSet; AAction: TAction; DestroyEvent: TNotifyEvent);
     //procedure MarcarProgreso(Count, Cant: Integer);
 
   public
@@ -334,7 +344,7 @@ uses
 {$IFNDEF FREEWARE}
   KerEvolE, KerModel, FProgres,
 {$ENDIF}
-  FCrsMMEd, FCrsMME0, FCrsMME1, DMaster, FMateria, FProfesr, FHorario,
+  FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario,
   FConfig, FLogstic, SGHCUtls, About, Consts, FParalel, Rand, ArDBUtls,
   QMaDeRep, Printers, QSingRep, QuickRpt, Qrctrls, DSource;
 
@@ -347,157 +357,163 @@ end;
 
 procedure TMainForm.EdProfesorDestroy(Sender: TObject);
 begin
-  actProfesor.Enabled := True;
+  actProfesor.Checked := False;
 end;
 
 procedure TMainForm.EdParaleloDestroy(Sender: TObject);
 begin
-  actParalelo.Enabled := true;
+  actParalelo.Checked := False;
 end;
 
 procedure TMainForm.EdDiaDestroy(Sender: TObject);
 begin
-  actDia.Enabled := true;
+  actDia.Checked := False;
 end;
 
 procedure TMainForm.EdEspecializacionDestroy(Sender: TObject);
 begin
-  actEspecializacion.Enabled := true;
+  actEspecializacion.Checked := False;
 end;
 
 procedure TMainForm.EdHoraDestroy(Sender: TObject);
 begin
-  actHora.Enabled := true;
+  actHora.Checked := False;
 end;
 
 procedure TMainForm.EdMateriaDestroy(Sender: TObject);
 begin
-  actMateria.Enabled := True;
+  actMateria.Checked := False;
 end;
 
 procedure TMainForm.EdNivelDestroy(Sender: TObject);
 begin
-  actNivel.Enabled := True;
+  actNivel.Checked := False;
 end;
 
 procedure TMainForm.EdParaleloIdDestroy(Sender: TObject);
 begin
-  actParaleloId.Enabled := True;
+  actParaleloId.Checked := False;
 end;
 
 procedure TMainForm.EdPeriodoDestroy(Sender: TObject);
 begin
-  actPeriodo.Enabled := True;
+  actPeriodo.Checked := False;
 end;
 
 procedure TMainForm.EdAulaTipoDestroy(Sender: TObject);
 begin
-  actAulaTipo.Enabled := True;
+  actAulaTipo.Checked := False;
 end;
 
 procedure TMainForm.EdHorarioDestroy(Sender: TObject);
 begin
-  actHorario.Enabled := True;
+  actHorario.Checked := False;
 end;
 
 procedure TMainForm.actProfesorExecute(Sender: TObject);
 begin
-  InternalShowFormulary(TProfesorForm.Create(Application),
+  InternalShowFormulary(TProfesorForm, ProfesorForm,
     SourceDataModule.TbProfesor, actProfesor, EdProfesorDestroy);
 end;
 
 procedure TMainForm.actPeriodoExecute(Sender: TObject);
-var
-  PeriodoForm: TCrossManyToManyEditor0Form;
 begin
-  PeriodoForm :=
-    TCrossManyToManyEditor0Form.Create(Application);
-  with SourceDataModule, MasterDataModule, PeriodoForm do
+  if ActPeriodo.Checked then
   begin
-    HelpContext := actPeriodo.HelpContext;
-    //LoadCaption(PeriodoForm, TbPeriodo);
-    OnDestroy := EdPeriodoDestroy;
+    FPeriodoForm.Free;
+  end
+  else
+  begin
+    ActPeriodo.Checked := not ActPeriodo.Checked;
+    Application.CreateForm(TCrossManyToManyEditor0Form, FPeriodoForm);
+    with FPeriodoForm do
+    begin
+      HelpContext := actPeriodo.HelpContext;
+      //LoadCaption(PeriodoForm, TbPeriodo);
+      OnDestroy := EdPeriodoDestroy;
+    end;
     with FormStorage do
     begin
-      IniSection := IniSection + '\CrMME0' + TbPeriodo.Name;
+      IniSection := IniSection + '\CrMME0' + SourceDataModule.TbPeriodo.Name;
       Active := True;
       RestoreFormPlacement;
     end;
-    ShowEditor(TbDia, TbHora, TbPeriodo, nil, 'CodDia', 'NomDia', 'CodDia',
-      '', 'CodHora', 'NomHora', 'CodHora', '');
+    with SourceDataModule do
+      FPeriodoForm.ShowEditor(TbDia, TbHora, TbPeriodo, nil, 'CodDia', 'NomDia', 'CodDia',
+        '', 'CodHora', 'NomHora', 'CodHora', '');
   end;
-  actPeriodo.Enabled := False;
 end;
 
-procedure TMainForm.InternalShowFormulary(ASingleEditorForm: TSingleEditorForm;
+procedure TMainForm.InternalShowFormulary(FormClass: TFormClass; var Reference;
   ADataSet: TDataSet; AAction: TAction; DestroyEvent: TNotifyEvent);
 begin
-  ASingleEditorForm.HelpContext := AAction.HelpContext;
-  MySingleShowEditor(ASingleEditorForm, ADataSet,
-    ConfiguracionForm.edtNomColegio.Text, DestroyEvent);
-  AAction.Enabled := false;
+  if AAction.Checked then
+  begin
+    TObject(Reference).Free;
+  end
+  else
+  begin
+    AAction.Checked := not AAction.Checked;
+    Application.CreateForm(FormClass, Reference);
+    TControl(Reference).HelpContext := AAction.HelpContext;
+    MySingleShowEditor(TSingleEditorForm(Reference), ADataSet,
+      ConfiguracionForm.edtNomColegio.Text, DestroyEvent);
+  end;
 end;
 
 procedure TMainForm.actMateriaExecute(Sender: TObject);
 begin
-  InternalShowFormulary(TMateriaForm.Create(Application),
+  InternalShowFormulary(TMateriaForm, MateriaForm,
     SourceDataModule.TbMateria, actMateria, EdMateriaDestroy);
 end;
 
 procedure TMainForm.actEspecializacionExecute(Sender: TObject);
 begin
-  InternalShowFormulary(TSingleEditorForm.Create(Application),
+  InternalShowFormulary(TSingleEditorForm, FEspecializacionForm,
     SourceDataModule.TbEspecializacion, actEspecializacion,
     EdEspecializacionDestroy);
 end;
 
 procedure TMainForm.actNivelExecute(Sender: TObject);
 begin
-  InternalShowFormulary(TSingleEditorForm.Create(Application),
+  InternalShowFormulary(TSingleEditorForm, FNivelForm,
     SourceDataModule.TbNivel, actNivel, EdNivelDestroy);
 end;
 
 procedure TMainForm.actAulaTipoExecute(Sender: TObject);
 begin
-  InternalShowFormulary(TSingleEditorForm.Create(Application),
+  InternalShowFormulary(TSingleEditorForm, FAulaTipoForm,
     SourceDataModule.TbAulaTipo, actAulaTipo, EdAulaTipoDestroy);
 end;
 
 procedure TMainForm.actParaleloIdExecute(Sender: TObject);
 begin
-  InternalShowFormulary(TSingleEditorForm.Create(Application),
+  InternalShowFormulary(TSingleEditorForm, FParaleloIdForm,
     SourceDataModule.TbParaleloId, actParaleloId, EdParaleloIdDestroy);
 end;
 
 procedure TMainForm.actDiaExecute(Sender: TObject);
 begin
-  InternalShowFormulary(TSingleEditorForm.Create(Application),
-    SourceDataModule.TbDia, ActDia, EdDiaDestroy);
+  InternalShowFormulary(TSingleEditorForm, FDiaForm, SourceDataModule.TbDia,
+    ActDia, EdDiaDestroy);
 end;
 
 procedure TMainForm.actHoraExecute(Sender: TObject);
 begin
-  InternalShowFormulary(TSingleEditorForm.Create(Application),
+  InternalShowFormulary(TSingleEditorForm, FHoraForm,
     SourceDataModule.TbHora, actHora, EdHoraDestroy);
 end;
 
 procedure TMainForm.actHorarioExecute(Sender: TObject);
 begin
-  InternalShowFormulary(THorarioForm.Create(Application),
+  InternalShowFormulary(THorarioForm, HorarioForm,
     SourceDataModule.TbHorario, actHorario, EdHorarioDestroy);
 end;
 
 procedure TMainForm.actParaleloExecute(Sender: TObject);
-var
-  ParaleloForm: TParaleloForm;
 begin
-  ParaleloForm := TParaleloForm.Create(Application);
-  with SourceDataModule, ParaleloForm do
-  begin
-    InternalShowFormulary(ParaleloForm, TbCurso, actParalelo,
-      EdParaleloDestroy);
-    //Caption := GetDescription(TbParalelo);
-  end;
+  InternalShowFormulary(TParaleloForm, ParaleloForm,
+    SourceDataModule.TbCurso, actParalelo, EdParaleloDestroy);
 end;
 
 function TMainForm.ConfirmOperation: boolean;
@@ -1385,8 +1401,7 @@ begin
     QuMateriaMateriaProhibicionCodMateria.Value;
 end;
 
-procedure TMainForm.QuMateriaMateriaProhibicionAfterScroll(
-  DataSet: TDataSet);
+procedure TMainForm.QuMateriaMateriaProhibicionAfterScroll(DataSet: TDataSet);
 begin
   TbMateria.Filtered := false;
   TbMateria.Filtered := true;

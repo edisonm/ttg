@@ -19,7 +19,7 @@ inherited ParaleloForm: TParaleloForm
       Cursor = crHSplit
       Align = alRight
     end
-    inherited DBGrid: TRxDBGrid
+    inherited DBGrid: TDBGrid
       Width = 349
       Hint = 'Cursos|Cursos disponibles'
       ParentShowHint = False
