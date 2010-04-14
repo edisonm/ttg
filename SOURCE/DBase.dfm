@@ -2,8 +2,8 @@ object BaseDataModule: TBaseDataModule
   OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Left = 396
-  Top = 179
+  Left = 332
+  Top = 137
   Height = 480
   Width = 928
 end
