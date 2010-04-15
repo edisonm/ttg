@@ -154,11 +154,11 @@ type
     procedure QuCruceProfesorAfterScroll(DataSet: TDataSet);
     procedure QuCruceMateriaAfterScroll(DataSet: TDataSet);
     procedure btn97SeleccionarHorarioClick(Sender: TObject);
-    procedure DBGridGetCellParams(Sender: TObject; Field: TField;
-      AFont: TFont; var Background: TColor; Highlight: Boolean);
     procedure btn97MateriaCortadaDiaClick(Sender: TObject);
     procedure btn97MateriaCortadaHoraClick(Sender: TObject);
     procedure btn97HorarioAulaTipoClick(Sender: TObject);
+    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
     procedure EdQuCruceProfesorDestroy(Sender: TObject);
@@ -857,16 +857,6 @@ begin
   DBGrid.Refresh;
 end;
 
-procedure THorarioForm.DBGridGetCellParams(Sender: TObject; Field: TField;
-  AFont: TFont; var Background: TColor; Highlight: Boolean);
-begin
-  inherited;
-  if (ConfiguracionForm.lblHorarioSeleccionado.Caption <> '(Ninguno)')
-    and (ConfiguracionForm.lblHorarioSeleccionado.Caption
-    = SourceDataModule.TbHorarioCodHorario.AsString) then
-    Background := clAqua;
-end;
-
 procedure THorarioForm.FillMateriaCortadaDia;
 var
   CodHorario, CodNivel, CodEspecializacion, CodParaleloId, CodDia, CodHora,
@@ -1102,6 +1092,21 @@ begin
       TbHorarioCodHorario.Value]);
     LoadHints(HorarioAulaTipoForm, TbDia, TbHora, TbMateria);
   end;
+end;
+
+procedure THorarioForm.DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+  DBGrid: TCustomDBGrid;
+begin
+  DBGrid := Sender as TCustomDBGrid;
+  if (ConfiguracionForm.lblHorarioSeleccionado.Caption <> '(Ninguno)')
+    and (ConfiguracionForm.lblHorarioSeleccionado.Caption
+      = SourceDataModule.TbHorarioCodHorario.AsString) then
+    Column.Color := clAqua
+  else
+    Column.Color := clWhite;
+  DBGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
 end.

@@ -137,7 +137,9 @@ inherited HorarioForm: THorarioForm
     inherited DBGrid: TDBGrid
       Width = 310
       Height = 288
+      DefaultDrawing = False
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+      OnDrawColumnCell = DBGridDrawColumnCell
       Columns = <
         item
           Expanded = False
