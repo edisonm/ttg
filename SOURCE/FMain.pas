@@ -7,7 +7,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   SysConst, ExtCtrls, DB, Menus, ComCtrls, Placemnt, MRUList, ImgList, Buttons,
-  MrgMngr, SpeedBar, RxMenus, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,
+  MrgMngr, SpeedBar, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,
   FSingEdt, QrPrntr, kbmMemTable, FCrsMME0{, Protect};
 type
   TMainForm = class(TForm)

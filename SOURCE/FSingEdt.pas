@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
   StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls, Placemnt, DBIndex,
-  ComCtrls, RXCtrls, FEditor, ImgList, ToolWin, RXDBCtrl, kbmMemTable, ActnList;
+  ComCtrls, RXCtrls, FEditor, ImgList, ToolWin, kbmMemTable, ActnList,
+  RXDBCtrl;
 
 type
   TSingleEditorForm = class(TEditorForm)

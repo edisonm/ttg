@@ -38,7 +38,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Hint = 'Profesor'
       KeyField = 'CodProfesor'
       ListField = 'ApeNomProfesor'
-      ListSource = SourceDataModule.dsProfesor
+      ListSource = SourceDataModule.DSProfesor
       TabOrder = 0
     end
     object cbVerProfesor: TComboBox
@@ -520,7 +520,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
         Fields = 'CodProfesor'
       end>
     MasterFields = 'CodProfesor'
-    MasterSource = SourceDataModule.dsProfesor
+    MasterSource = SourceDataModule.DSProfesor
     OnCalcFields = QuHorarioProfesorCalcFields
     Left = 64
     Top = 88
