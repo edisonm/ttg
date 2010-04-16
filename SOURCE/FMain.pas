@@ -1119,11 +1119,8 @@ end;
 procedure TMainForm.actConfigurarExecute(Sender: TObject);
 begin
   ConfiguracionForm.HelpContext := actConfigurar.HelpContext;
-  //SourceDataModule.dbMain.StartTransaction;
   if ConfiguracionForm.ShowModal = mrOk then
   begin
-    ConfiguracionForm.FormStorage.SaveFormPlacement;
-    //SourceDataModule.dbMain.Commit;
 {$IFNDEF FREEWARE}
     if FEjecutando then
       Self.AjustarPesos;
@@ -1131,8 +1128,6 @@ begin
   end
   else
   begin
-    ConfiguracionForm.FormStorage.RestoreFormPlacement;
-    //SourceDataModule.dbMain.Rollback;
     SourceDataModule.TbMateriaProhibicionTipo.Refresh;
     SourceDataModule.TbProfesorProhibicionTipo.Refresh;
   end;

@@ -8,6 +8,9 @@ uses
 
 type ERelationUtils = class(Exception);
 
+function StringToScaped(const AString: string): string;
+function ScapedToString(const AString: string): string; overload;
+function ScapedToString(const AString: string; var i: Integer): string; overload;
 function GetOldFieldValues(ADataSet: TDataSet; const AFieldNames: string): Variant;
 procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TKbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
@@ -347,7 +350,7 @@ function StringToScaped(const AString: string): string;
 var
   i, l: Integer;
 begin
-  Result := '';
+  Result := '"';
   l := Length(AString);
   for i := 1 to l do
   begin
@@ -360,7 +363,16 @@ begin
     else
       Result := Result + AString[i]
     end
-  end
+  end;
+  Result := Result + '"';
+end;
+
+function ScapedToString(const AString: string): string;
+var
+  i: Integer;
+begin
+  i := 2;
+  Result := ScapedToString(AString, i);
 end;
 
 function ScapedToString(const AString: string; var i: Integer): string;
@@ -399,7 +411,7 @@ begin
   begin
     if ADataSet.Fields[i].FieldKind = fkData then
     begin
-      s := s + '"' + StringToScaped(ADataSet.Fields[i].FieldName) + '";';
+      s := s + StringToScaped(ADataSet.Fields[i].FieldName) + ';';
     end
   end;
   AStrings.Add(s);
@@ -414,7 +426,7 @@ begin
         if ADataSet.Fields[i].FieldKind = fkData then
         begin
           v := StringToScaped(ADataSet.Fields[i].AsString);
-          s := s + '"' + v + '";';
+          s := s + v + ';';
         end;
       end;
       AStrings.Add(s);
@@ -461,7 +473,7 @@ begin
   begin
     v := ScapedToString(s, Pos);
     if v = '' then
-    break;
+      break;
     Field := ADataSet.FindField(v);
     if Assigned(Field) then
     begin

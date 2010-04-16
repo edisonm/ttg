@@ -11,6 +11,7 @@ object ConfiguracionForm: TConfiguracionForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  OldCreateOrder = True
   Position = poDesktopCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -543,16 +544,16 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 81
         Height = 21
         DataField = 'NomMateProhibicionTipo'
-        DataSource = SourceDataModule.dsMateriaProhibicionTipo
+        DataSource = SourceDataModule.DSMateriaProhibicionTipo
         TabOrder = 8
       end
-      object dbcColMateProhibicionTipo: TDBColorComboBox
+      object dbcColMateProhibicionTipo: TDBComboBox
         Left = 304
         Top = 200
         Width = 81
         Height = 21
         DataField = 'ColMateProhibicionTipo'
-        DataSource = SourceDataModule.dsMateriaProhibicionTipo
+        DataSource = SourceDataModule.DSMateriaProhibicionTipo
         ItemHeight = 13
         TabOrder = 9
       end
@@ -562,7 +563,7 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 81
         Height = 21
         DataField = 'ValMateProhibicionTipo'
-        DataSource = SourceDataModule.dsMateriaProhibicionTipo
+        DataSource = SourceDataModule.DSMateriaProhibicionTipo
         TabOrder = 10
       end
       object dbeNomProfProhibicionTipo: TDBEdit
@@ -571,16 +572,16 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 81
         Height = 21
         DataField = 'NomProfProhibicionTipo'
-        DataSource = SourceDataModule.dsProfesorProhibicionTipo
+        DataSource = SourceDataModule.DSProfesorProhibicionTipo
         TabOrder = 11
       end
-      object dbcColProfProhibicionTipo: TDBColorComboBox
+      object dbcColProfProhibicionTipo: TDBComboBox
         Left = 304
         Top = 304
         Width = 81
         Height = 21
         DataField = 'ColProfProhibicionTipo'
-        DataSource = SourceDataModule.dsProfesorProhibicionTipo
+        DataSource = SourceDataModule.DSProfesorProhibicionTipo
         ItemHeight = 13
         TabOrder = 12
       end
@@ -590,7 +591,7 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 81
         Height = 21
         DataField = 'ValProfProhibicionTipo'
-        DataSource = SourceDataModule.dsProfesorProhibicionTipo
+        DataSource = SourceDataModule.DSProfesorProhibicionTipo
         TabOrder = 13
       end
       object DBGrid1: TDBGrid
@@ -598,7 +599,7 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 176
         Width = 233
         Height = 89
-        DataSource = SourceDataModule.dsMateriaProhibicionTipo
+        DataSource = SourceDataModule.DSMateriaProhibicionTipo
         TabOrder = 6
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -611,7 +612,7 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 288
         Width = 233
         Height = 89
-        DataSource = SourceDataModule.dsProfesorProhibicionTipo
+        DataSource = SourceDataModule.DSProfesorProhibicionTipo
         TabOrder = 7
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -776,49 +777,5 @@ object ConfiguracionForm: TConfiguracionForm
     Height = 25
     TabOrder = 2
     Kind = bkCancel
-  end
-  object FormStorage: TFormStorage
-    Active = False
-    IniFileName = 'CONFIG.INI'
-    IniSection = 'CONFIG'
-    Options = []
-    StoredProps.Strings = (
-      'edtNomColegio.Text'
-      'edtAnioLectivo.Text'
-      'edtNomAutoridad.Text'
-      'edtCarAutoridad.Text'
-      'edtNomResponsable.Text'
-      'edtCarResponsable.Text'
-      'speMaxCargaProfesor.Value'
-      'lblHorarioSeleccionado.Caption'
-      'memComentarios.Lines'
-      'CBRandomize.Checked'
-      'speSeed1.Value'
-      'speSeed2.Value'
-      'speSeed3.Value'
-      'speSeed4.Value'
-      'speNumIteraciones.Value'
-      'creCruceProfesor.Value'
-      'creProfesorFraccionamiento.Value'
-      'creCruceAulaTipo.Value'
-      'creHoraHueca.Value'
-      'creSesionCortada.Value'
-      'creMateriaNoDispersa.Value'
-      'speTamPoblacion.Value'
-      'speNumMaxGeneracion.Value'
-      'creProbCruzamiento.Value'
-      'creProbMutacion1.Value'
-      'speOrdenMutacion1.Value'
-      'creProbMutacion2.Value'
-      'creProbReparacion.Value'
-      'edtMostrarProfesorHorarioTexto.Text'
-      'speMostrarProfesorHorarioLongitud.Value'
-      'edtProfesorHorarioExcluirProfProhibicion.Text'
-      'edtHorarioIni.Text'
-      'dedCompartir.Text'
-      'speRangoPolinizacion.Value')
-    StoredValues = <>
-    Left = 368
-    Top = 248
   end
 end

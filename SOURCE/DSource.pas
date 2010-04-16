@@ -28,14 +28,16 @@ type
     procedure TbDistributivoBeforePost(DataSet: TDataSet);
     procedure TbDistributivoCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
     FFlags : TkbmMemTableSaveFlags;
+    FConfigStrings: TStrings;
     // procedure SaveToFile(const AFileName: TFileName);
     // procedure SaveToStream(AStream: TStream);
     // procedure SaveUnCompToStream(AStream: TStream);
-    procedure LoadFromStream(AStream: TStream);
-    procedure LoadUnCompFromStream(AStream: TStream);
+    // procedure LoadFromStream(AStream: TStream);
+    // procedure LoadUnCompFromStream(AStream: TStream);
     procedure SaveIniStrings(AStrings: TStrings);
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
   public
@@ -43,7 +45,7 @@ type
     procedure SaveToStrings(AStrings: TStrings); override;
     procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer); override;
     procedure SaveToTextDir(const ADirName: TFileName); override;
-    procedure LoadFromFile(const AFileName: TFileName);
+    // procedure LoadFromFile(const AFileName: TFileName);
     procedure NewDatabase;
     procedure FillDefaultData;
   end;
@@ -55,7 +57,7 @@ implementation
 
 {$R *.DFM}
 uses
-  SGHCUtls, BZip2, FConfig, Variants, DBase;
+  SGHCUtls, BZip2, FConfig, Variants, DBase, RelUtils;
 
 type
   EMainDataModuleError = class(Exception);
@@ -163,6 +165,7 @@ begin
   end;
 end;
 
+(*
 procedure TSourceDataModule.LoadFromStream(AStream: TStream);
 const
   BufferSize = 65536;
@@ -222,6 +225,7 @@ begin
     Stream.Free;
   end;
 end;
+*)
 
 procedure TSourceDataModule.FillDefaultData;
 const
@@ -348,6 +352,7 @@ end;
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
+  FConfigStrings := TStringList.Create;
   OpenTables;
   FFlags :=
     [mtfSaveData,
@@ -375,8 +380,7 @@ var
 begin
   IniStrings := TStringList.Create;
   try
-    ConfiguracionForm.FormStorage.SaveFormPlacement;
-    IniStrings.LoadFromFile(ConfiguracionForm.FormStorage.IniFileName);
+    ConfiguracionForm.SaveToStrings(IniStrings);
     AStrings.Add(IntToStr(IniStrings.Count));
     AStrings.AddStrings(IniStrings);
   finally
@@ -401,8 +405,7 @@ begin
     end;
     AStrings.Add(IntToStr(IniStrings.Count));
     AStrings.AddStrings(IniStrings);
-    IniStrings.SaveToFile(ConfiguracionForm.FormStorage.IniFileName);
-    ConfiguracionForm.FormStorage.RestoreFormPlacement;
+    ConfiguracionForm.LoadFromStrings(IniStrings);
   finally
     IniStrings.Free;
   end;
@@ -417,10 +420,17 @@ begin
 end;
 
 procedure TSourceDataModule.SaveToTextDir(const ADirName: TFileName);
+var
+  ConfigStrings: TStrings;
 begin
-  ConfiguracionForm.FormStorage.IniFileName := ADirName + '\config.ini';
-  ConfiguracionForm.FormStorage.SaveFormPlacement;
   inherited;
+  ConfigStrings := TStringList.Create;
+  try
+    ConfiguracionForm.SaveToStrings(ConfigStrings);
+    ConfigStrings.SaveToFile(ADirName + '\config.ini');
+  finally
+    ConfigStrings.Free;
+  end;
 end;
 
 (*
@@ -436,6 +446,12 @@ begin
   end;
 end;
 *)
+
+procedure TSourceDataModule.DataModuleDestroy(Sender: TObject);
+begin
+  inherited;
+  FConfigStrings.Free;
+end;
 
 end.
 

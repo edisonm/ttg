@@ -21,9 +21,6 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBGridCheckButton(Sender: TObject; ACol: Integer;
       Field: TField; var Enabled: Boolean);
-    procedure DBGridGetBtnParams(Sender: TObject; Field: TField;
-      AFont: TFont; var Background: TColor; var SortMarker: TSortMarker;
-      IsDown: Boolean);
     procedure DBGridTitleBtnClick(Sender: TObject; ACol: Integer;
       Field: TField);
     procedure DBGridDblClick(Sender: TObject);
@@ -96,19 +93,6 @@ begin
     (TKbmMemTable(TCustomDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0);
 end;
 
-procedure TSingleEditorForm.DBGridGetBtnParams(Sender: TObject;
-  Field: TField; AFont: TFont; var Background: TColor;
-  var SortMarker: TSortMarker; IsDown: Boolean);
-begin
-  inherited;
-  if (TCustomDBGrid(Sender).DataSource.DataSet is TKbmMemTable) and (Field <> nil) and
-    ((Field.IsIndexField) or ((Field.FieldKind = fkLookup)
-    and(TCustomDBGrid(Sender).DataSource.DataSet.FindField(Field.KeyFields).IsIndexField))) then
-  begin
-    SortMarker := smDown;
-  end;
-end;
-
 procedure TSingleEditorForm.DBGridTitleBtnClick(Sender: TObject;
   ACol: Integer; Field: TField);
 begin
@@ -129,7 +113,7 @@ procedure TSingleEditorForm.DBGridDblClick(Sender: TObject);
 begin
   inherited;
   if TCustomDBGrid(Sender).DataSource.DataSet is TKbmMemTable then
-    with TKbmMemTable(TRxDBGrid(Sender).DataSource.DataSet) do
+    with TKbmMemTable(TDBGrid(Sender).DataSource.DataSet) do
       IndexFieldNames := '';
 end;
 
@@ -141,7 +125,8 @@ const
 procedure TSingleEditorForm.DataSourceStateChange(Sender: TObject);
 begin
   inherited;
-  SLState.Caption := DataSource.DataSet.Name + ':' + TextState[DataSource.State];
+  if assigned(DataSource.DataSet) then
+    SLState.Caption := DataSource.DataSet.Name + ':' + TextState[DataSource.State];
 end;
 
 procedure TSingleEditorForm.DataSourceDataChange(Sender: TObject;
@@ -150,7 +135,7 @@ begin
   inherited;
   if assigned(DataSource.DataSet) then
     SLRecordNo.Caption := IntToStr(DataSource.DataSet.RecNo) + '/'
-      + IntToStr(DataSource.DataSet.RecordCount;
+      + IntToStr(DataSource.DataSet.RecordCount)
   else
     SLRecordNo.Caption := '';
 end;

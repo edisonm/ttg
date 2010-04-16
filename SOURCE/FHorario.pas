@@ -852,7 +852,6 @@ begin
   inherited;
   ConfiguracionForm.lblHorarioSeleccionado.Caption :=
     SourceDataModule.TbHorarioCodHorario.AsString;
-  ConfiguracionForm.FormStorage.SaveFormPlacement;
   DBGrid.Refresh;
 end;
 

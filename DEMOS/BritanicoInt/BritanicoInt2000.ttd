@@ -1365,16 +1365,7 @@ TTD 290
 "12";"6";"2";"1";
 "12";"6";"3";"1";
 "12";"6";"4";"1";
-69
-[CONFIG]
-Flags=0
-ShowCmd=1
-PixelsPerInch=96
-MinMaxPos(1024x768)=-1,-1,-3,-3
-MinMaxPos=-1,-1,-1,-1
-NormPos(1024x768)=529,143,952,598
-NormPos=203,117,624,593
-Visible=0
+32
 edtNomColegio_Text=Colegio Experimental Británico Internacional
 edtAnioLectivo_Text=2000-2001
 edtNomAutoridad_Text=Dr. Benjamín Tobar
@@ -1383,55 +1374,27 @@ edtNomResponsable_Text=Comisión
 edtCarResponsable_Text=Comisión
 speMaxCargaProfesor_Value=35
 lblHorarioSeleccionado_Caption=3
-CBRandomize_Checked=True
+memComentarios_Lines="Horario de la Sección Secundaria.\n\rClave:\n\rA3000013\n\r"
+CBRandomize_Checked=-1
 speSeed1_Value=2587
 speSeed2_Value=65165498
 speSeed3_Value=16264
 speSeed4_Value=65698
 speNumIteraciones_Value=10
 creCruceProfesor_Value=305
+creProfesorFraccionamiento_Value=15
 creCruceAulaTipo_Value=65
 creHoraHueca_Value=95
 creSesionCortada_Value=150
 creMateriaNoDispersa_Value=1
-spePopulationSize_Value=5
-speMaxGeneration_Value=1000
-creProbCrossover_Value=0.4
-creProbMutation1_Value=0.2
-speOrderMutation1_Value=3
-creProbMutation2_Value=0.1
-creProbReparacion_Value=0.1
-creProfesorFraccionamiento_Value=15
+speTamPoblacion_Value=6
+speNumMaxGeneracion_Value=50000
+creProbCruzamiento_Value=0,3
+creProbMutacion1_Value=0,2
+speOrdenMutacion1_Value=3
+creProbMutacion2_Value=0,2
+creProbReparacion_Value=0,1
 edtMostrarProfesorHorarioTexto_Text=AbrNivel + " " + NomParaleloId + " " + NomMateria
 speMostrarProfesorHorarioLongitud_Value=20
 edtProfesorHorarioExcluirProfProhibicion_Text=(ProfesorProhibicion.CodProfProhibicionTipo <> 2)AND(ProfesorProhibicion.CodProfProhibicionTipo <> 3)
-MinMaxPos(640x480)=-1,-1,-3,-3
-NormPos(640x480)=529,143,952,575
-MinMaxPos(800x600)=-1,-1,-3,-3
-NormPos(800x600)=270,106,693,537
-FormVersion=0
-speTamPoblacion_Value=6
-speNumMaxGeneracion_Value=50000
-creProbCruzamiento_Value=0.3
-creProbMutacion1_Value=0.2
-speOrdenMutacion1_Value=3
-creProbMutacion2_Value=0.2
-edtHorarioIni_Text=
-dedCompartir_Text=
 speRangoPolinizacion_Value=10
-MinMaxPos(1440x900)=-1,-1,-3,-3
-NormPos(1440x900)=509,212,930,688
-MinMaxPos(1680x1050)=-1,-1,-3,-3
-NormPos(1680x1050)=629,287,1050,763
-MinMaxPos(1280x720)=-1,-1,-3,-3
-NormPos(1280x720)=362,22,783,498
-MinMaxPos(1366x768)=-1,-1,-3,-3
-NormPos(1366x768)=362,22,783,498
-MinMaxPos(1327x659)=-1,-1,-1,-1
-NormPos(1327x659)=203,117,624,593
-
-[CONFIG.memComentarios_Lines]
-Count=3
-Item0=Horario de la Sección Secundaria.
-Item1=Clave:
-Item2=A3000013

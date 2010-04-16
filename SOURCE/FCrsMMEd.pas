@@ -336,11 +336,13 @@ var
     end;
   end;
 begin
+(*
   if State = [gdSelected, gdFocused] then
   begin
-    (Sender as TRxDrawGrid).InvalidateCell(ACol, 0);
-    (Sender as TRxDrawGrid).InvalidateCell(0, ARow);
+    (Sender as TDrawGrid).InvalidateCell(ACol, 0);
+    (Sender as TDrawGrid).InvalidateCell(0, ARow);
   end;
+*)
   if Assigned(FColDataSet) and Assigned(FRowDataSet) then
   begin
     GetValue;

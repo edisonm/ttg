@@ -4,13 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Mask, ToolEdit, CurrEdit, Placemnt, Buttons, ComCtrls, Spin,
-  Grids, DBGrids, RXDBCtrl, Db, RXCombos, DBColCBx, DBCtrls;
+  StdCtrls, Mask, ToolEdit, CurrEdit, Buttons, ComCtrls, Spin, Grids, DBGrids,
+  Db, DBCtrls;
 
 type
   TConfiguracionForm = class(TForm)
     bbtnOk: TBitBtn;
-    FormStorage: TFormStorage;
     pgcConfig: TPageControl;
     tbsPesos: TTabSheet;
     tbsAlgoritmoEvolutivo: TTabSheet;
@@ -85,7 +84,7 @@ type
     Label36: TLabel;
     edtHorarioIni: TEdit;
     dbeNomMateProhibicionTipo: TDBEdit;
-    dbcColMateProhibicionTipo: TDBColorComboBox;
+    dbcColMateProhibicionTipo: TDBComboBox;
     dbeValMateProhibicionTipo: TDBEdit;
     Label30: TLabel;
     Label37: TLabel;
@@ -93,7 +92,7 @@ type
     Label39: TLabel;
     dbeNomProfProhibicionTipo: TDBEdit;
     Label40: TLabel;
-    dbcColProfProhibicionTipo: TDBColorComboBox;
+    dbcColProfProhibicionTipo: TDBComboBox;
     Label41: TLabel;
     dbeValProfProhibicionTipo: TDBEdit;
     Label42: TLabel;
@@ -115,6 +114,8 @@ type
     { Public declarations }
     procedure InitRandom;
     procedure Clear;
+    procedure LoadFromStrings(AStrings: TStrings);
+    procedure SaveToStrings(AStrings: TStrings);
   end;
 
 var
@@ -123,14 +124,13 @@ var
 implementation
 
 uses
-  DSource, rand, FMain;
+  DSource, rand, FMain, RelUtils;
 
 {$R *.DFM}
 
 procedure TConfiguracionForm.FormCreate(Sender: TObject);
 begin
   Clear;
-  FormStorage.IniFileName := GetCurrentDir + '\config.ini';
 end;
 
 procedure TConfiguracionForm.FormDestroy(Sender: TObject);
@@ -210,6 +210,92 @@ begin
   creProbMutacion2.Value := 0.20;
   creProbReparacion.Value := 0.20;
   speRangoPolinizacion.Value := 1;
+end;
+
+procedure TConfiguracionForm.LoadFromStrings(AStrings: TStrings);
+begin
+  with AStrings do
+  begin
+    edtNomColegio.Text := Values['edtNomColegio_Text'];
+    edtAnioLectivo.Text := Values['edtAnioLectivo_Text'];
+    edtNomAutoridad.Text := Values['edtNomAutoridad_Text'];
+    edtCarAutoridad.Text := Values['edtCarAutoridad_Text'];
+    edtNomResponsable.Text := Values['edtNomResponsable_Text'];
+    edtCarResponsable.Text := Values['edtCarResponsable_Text'];
+    speMaxCargaProfesor.Value := StrToInt(Values['speMaxCargaProfesor_Value']);
+    lblHorarioSeleccionado.Caption := Values['lblHorarioSeleccionado_Caption'];
+    memComentarios.Lines.Text := ScapedToString(Values['memComentarios_Lines']);
+    CBRandomize.Checked := StrToBool(Values['CBRandomize_Checked']);
+    speSeed1.Value := StrToInt(Values['speSeed1_Value']);
+    speSeed2.Value := StrToInt(Values['speSeed2_Value']);
+    speSeed3.Value := StrToInt(Values['speSeed3_Value']);
+    speSeed4.Value := StrToInt(Values['speSeed4_Value']);
+    speNumIteraciones.Value := StrToInt(Values['speNumIteraciones_Value']);
+    creCruceProfesor.Value := StrToFloat(Values['creCruceProfesor_Value']);
+    creProfesorFraccionamiento.Value := StrToFloat(Values['creProfesorFraccionamiento_Value']);
+    creCruceAulaTipo.Value := StrToFloat(Values['creCruceAulaTipo_Value']);
+    creHoraHueca.Value := StrToFloat(Values['creHoraHueca_Value']);
+    creSesionCortada.Value := StrToFloat(Values['creSesionCortada_Value']);
+    creMateriaNoDispersa.Value := StrToFloat(Values['creMateriaNoDispersa_Value']);
+    speTamPoblacion.Value := StrToInt(Values['speTamPoblacion_Value']);
+    speNumMaxGeneracion.Value := StrToInt(Values['speNumMaxGeneracion_Value']);
+    creProbCruzamiento.Value := StrToFloat(Values['creProbCruzamiento_Value']);
+    creProbMutacion1.Value := StrToFloat(Values['creProbMutacion1_Value']);
+    speOrdenMutacion1.Value := StrToInt(Values['speOrdenMutacion1_Value']);
+    creProbMutacion2.Value := StrToFloat(Values['creProbMutacion2_Value']);
+    creProbReparacion.Value := StrToFloat(Values['creProbReparacion_Value']);
+    edtMostrarProfesorHorarioTexto.Text := Values['edtMostrarProfesorHorarioTexto_Text'];
+    speMostrarProfesorHorarioLongitud.Value :=
+      StrToInt(Values['speMostrarProfesorHorarioLongitud_Value']);
+    edtProfesorHorarioExcluirProfProhibicion.Text :=
+      Values['edtProfesorHorarioExcluirProfProhibicion_Text'];
+    edtHorarioIni.Text := Values['edtHorarioIni_Text'];
+    dedCompartir.Text := Values['dedCompartir_Text'];
+    speRangoPolinizacion.Value := StrToInt(Values['speRangoPolinizacion_Value']);
+  end;
+end;
+
+procedure TConfiguracionForm.SaveToStrings(AStrings: TStrings);
+begin
+  with AStrings do
+  begin
+    Values['edtNomColegio_Text'] := edtNomColegio.Text;
+    Values['edtAnioLectivo_Text'] := edtAnioLectivo.Text;
+    Values['edtNomAutoridad_Text'] := edtNomAutoridad.Text;
+    Values['edtCarAutoridad_Text'] := edtCarAutoridad.Text;
+    Values['edtNomResponsable_Text'] := edtNomResponsable.Text;
+    Values['edtCarResponsable_Text'] := edtCarResponsable.Text;
+    Values['speMaxCargaProfesor_Value'] := IntToStr(speMaxCargaProfesor.Value);
+    Values['lblHorarioSeleccionado_Caption'] := lblHorarioSeleccionado.Caption;
+    Values['memComentarios_Lines'] := StringToScaped(memComentarios.Lines.Text);
+    Values['CBRandomize_Checked'] := BoolToStr(CBRandomize.Checked);
+    Values['speSeed1_Value'] := IntToStr(speSeed1.Value);
+    Values['speSeed2_Value'] := IntToStr(speSeed2.Value);
+    Values['speSeed3_Value'] := IntToStr(speSeed3.Value);
+    Values['speSeed4_Value'] := IntToStr(speSeed4.Value);
+    Values['speNumIteraciones_Value'] := IntToStr(speNumIteraciones.Value);
+    Values['creCruceProfesor_Value'] := FloatToStr(creCruceProfesor.Value);
+    Values['creProfesorFraccionamiento_Value'] := FloatToStr(creProfesorFraccionamiento.Value);
+    Values['creCruceAulaTipo_Value'] := FloatToStr(creCruceAulaTipo.Value);
+    Values['creHoraHueca_Value'] := FloatToStr(creHoraHueca.Value);
+    Values['creSesionCortada_Value'] := FloatToStr(creSesionCortada.Value);
+    Values['creMateriaNoDispersa_Value'] := FloatToStr(creMateriaNoDispersa.Value);
+    Values['speTamPoblacion_Value'] := IntToStr(speTamPoblacion.Value);
+    Values['speNumMaxGeneracion_Value'] := IntToStr(speNumMaxGeneracion.Value);
+    Values['creProbCruzamiento_Value'] := FloatToStr(creProbCruzamiento.Value);
+    Values['creProbMutacion1_Value'] := FloatToStr(creProbMutacion1.Value);
+    Values['speOrdenMutacion1_Value'] := IntToStr(speOrdenMutacion1.Value);
+    Values['creProbMutacion2_Value'] := FloatToStr(creProbMutacion2.Value);
+    Values['creProbReparacion_Value'] := FloatToStr(creProbReparacion.Value);
+    Values['edtMostrarProfesorHorarioTexto_Text'] := edtMostrarProfesorHorarioTexto.Text;
+    Values['speMostrarProfesorHorarioLongitud_Value'] :=
+      IntToStr(speMostrarProfesorHorarioLongitud.Value);
+    Values['edtProfesorHorarioExcluirProfProhibicion_Text'] :=
+      edtProfesorHorarioExcluirProfProhibicion.Text;
+    Values['edtHorarioIni_Text'] := edtHorarioIni.Text;
+    Values['dedCompartir_Text'] := dedCompartir.Text;
+    Values['speRangoPolinizacion_Value'] := IntToStr(speRangoPolinizacion.Value);
+  end;
 end;
 
 end.
