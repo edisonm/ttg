@@ -5,15 +5,14 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
   StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls, Placemnt, DBIndex,
-  ComCtrls, RXCtrls, FEditor, ImgList, ToolWin, kbmMemTable, ActnList,
-  RXDBCtrl;
+  ComCtrls, RXCtrls, FEditor, ImgList, ToolWin, kbmMemTable, ActnList;
 
 type
   TSingleEditorForm = class(TEditorForm)
     DBNavigator: TDBNavigator;
     DataSource: TDataSource;
-    SLRecordNo: TDBStatusLabel;
-    SLState: TDBStatusLabel;
+    SLRecordNo: TLabel;
+    SLState: TLabel;
     DBGrid: TDBGrid;
     BtnFind: TToolButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -28,6 +27,8 @@ type
     procedure DBGridTitleBtnClick(Sender: TObject; ACol: Integer;
       Field: TField);
     procedure DBGridDblClick(Sender: TObject);
+    procedure DataSourceStateChange(Sender: TObject);
+    procedure DataSourceDataChange(Sender: TObject; Field: TField);
   private
     { Private declarations }
     FSuperTitle: string;
@@ -130,6 +131,28 @@ begin
   if TCustomDBGrid(Sender).DataSource.DataSet is TKbmMemTable then
     with TKbmMemTable(TRxDBGrid(Sender).DataSource.DataSet) do
       IndexFieldNames := '';
+end;
+
+const
+  TextState: array[TDataSetState] of string =('dsInactive', 'dsBrowse',
+    'dsEdit', 'dsInsert', 'dsSetKey', 'dsCalcFields', 'dsFilter', 'dsNewValue',
+    'dsOldValue', 'dsCurValue', 'dsBlockRead', 'dsInternalCalc', 'dsOpening');
+
+procedure TSingleEditorForm.DataSourceStateChange(Sender: TObject);
+begin
+  inherited;
+  SLState.Caption := DataSource.DataSet.Name + ':' + TextState[DataSource.State];
+end;
+
+procedure TSingleEditorForm.DataSourceDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+  if assigned(DataSource.DataSet) then
+    SLRecordNo.Caption := IntToStr(DataSource.DataSet.RecNo) + '/'
+      + IntToStr(DataSource.DataSet.RecordCount;
+  else
+    SLRecordNo.Caption := '';
 end;
 
 end.

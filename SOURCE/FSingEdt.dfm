@@ -32,25 +32,18 @@ inherited SingleEditorForm: TSingleEditorForm
   end
   inherited pnlStatus: TPanel
     Width = 502
-    object SLState: TDBStatusLabel
+    object SLState: TLabel
       Left = 1
       Top = 1
-      Width = 66
+      Width = 3
       Height = 17
-      DataSource = DataSource
-      CalcRecCount = True
-      ShowOptions = doBoth
       Align = alLeft
     end
-    object SLRecordNo: TDBStatusLabel
-      Left = 431
+    object SLRecordNo: TLabel
+      Left = 498
       Top = 1
-      Width = 70
+      Width = 3
       Height = 17
-      DataSource = DataSource
-      Style = lsRecordNo
-      CalcRecCount = True
-      ShowOptions = doBoth
       Align = alRight
     end
   end
@@ -214,6 +207,8 @@ inherited SingleEditorForm: TSingleEditorForm
       000000000000}
   end
   object DataSource: TDataSource
+    OnStateChange = DataSourceStateChange
+    OnDataChange = DataSourceDataChange
     Left = 36
     Top = 88
   end

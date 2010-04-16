@@ -20,7 +20,6 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
     inherited DBGrid: TDBGrid
       Height = 154
       TabOrder = 1
-      OnEnter = DBGridEnter
     end
     object DBGridDetail: TDBGrid
       Left = 1
@@ -35,7 +34,6 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
       TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
-      OnEnter = DBGridEnter
     end
   end
   inherited FormStorage: TFormStorage

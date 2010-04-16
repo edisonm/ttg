@@ -12,7 +12,6 @@ type
     DataSourceDetail: TDataSource;
     DBGridDetail: TDBGrid;
     Splitter1: TSplitter;
-    procedure DBGridEnter(Sender: TObject);
     procedure BtnShowClick(Sender: TObject);
   private
     { Private declarations }
@@ -27,13 +26,6 @@ implementation
 uses
   QMaDeRep, Printers, FMain;
 {$R *.DFM}
-
-procedure TMasterDetailEditorForm.DBGridEnter(Sender: TObject);
-begin
-  inherited;
-  SLState.DataSource := (Sender as TCustomDBGrid).DataSource;
-  SLRecordNo.DataSource := (Sender as TCustomDBGrid).DataSource;
-end;
 
 procedure TMasterDetailEditorForm.BtnShowClick(Sender: TObject);
 begin

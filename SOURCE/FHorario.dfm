@@ -119,8 +119,8 @@ inherited HorarioForm: THorarioForm
   inherited pnlStatus: TPanel
     Top = 315
     Width = 618
-    inherited SLRecordNo: TDBStatusLabel
-      Left = 547
+    inherited SLRecordNo: TLabel
+      Left = 614
     end
   end
   inherited Panel1: TPanel

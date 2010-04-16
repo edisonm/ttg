@@ -432,7 +432,7 @@ begin
       //LoadCaption(PeriodoForm, TbPeriodo);
       OnDestroy := EdPeriodoDestroy;
     end;
-    with FormStorage do
+    with FPeriodoForm.FormStorage do
     begin
       IniSection := IniSection + '\CrMME0' + SourceDataModule.TbPeriodo.Name;
       Active := True;

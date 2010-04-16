@@ -34,7 +34,7 @@ inherited ProfesorForm: TProfesorForm
   inherited pnlStatus: TPanel
     Top = 381
     Width = 702
-    inherited SLRecordNo: TDBStatusLabel
+    inherited SLRecordNo: TLabel
       Left = 631
     end
   end
