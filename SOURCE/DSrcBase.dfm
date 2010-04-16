@@ -4,8 +4,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbAulaTipo: TkbmMemTable
     BeforePost = TbAulaTipoBeforePost
     BeforeDelete = TbAulaTipoBeforeDelete
-    Left = 48
-    Top = 48
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbAulaTipoixAbrAulaTipo'
@@ -22,8 +21,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodAulaTipo'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 48
+    Top = 48
     object TbAulaTipoCodAulaTipo: TAutoIncField
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodAulaTipo'
     end
     object TbAulaTipoNomAulaTipo: TStringField
@@ -52,8 +53,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbEspecializacion: TkbmMemTable
     BeforePost = TbEspecializacionBeforePost
     BeforeDelete = TbEspecializacionBeforeDelete
-    Left = 144
-    Top = 60
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbEspecializacionixAbrEspecializacion'
@@ -70,8 +70,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodEspecializacion'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 144
+    Top = 60
     object TbEspecializacionCodEspecializacion: TAutoIncField
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodEspecializacion'
     end
     object TbEspecializacionNomEspecializacion: TStringField
@@ -95,8 +97,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbDia: TkbmMemTable
     BeforePost = TbDiaBeforePost
     BeforeDelete = TbDiaBeforeDelete
-    Left = 240
-    Top = 48
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbDiaixNomDia'
@@ -108,8 +109,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodDia'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 240
+    Top = 48
     object TbDiaCodDia: TAutoIncField
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodDia'
     end
     object TbDiaNomDia: TStringField
@@ -127,8 +130,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbMateria: TkbmMemTable
     BeforePost = TbMateriaBeforePost
     BeforeDelete = TbMateriaBeforeDelete
-    Left = 336
-    Top = 60
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbMateriaixNomMateria'
@@ -140,8 +142,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodMateria'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 336
+    Top = 60
     object TbMateriaCodMateria: TAutoIncField
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodMateria'
     end
     object TbMateriaNomMateria: TStringField
@@ -159,8 +163,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbNivel: TkbmMemTable
     BeforePost = TbNivelBeforePost
     BeforeDelete = TbNivelBeforeDelete
-    Left = 432
-    Top = 48
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbNivelixAbrNivel'
@@ -177,8 +180,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodNivel'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 432
+    Top = 48
     object TbNivelCodNivel: TAutoIncField
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodNivel'
     end
     object TbNivelNomNivel: TStringField
@@ -201,8 +206,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbHora: TkbmMemTable
     BeforePost = TbHoraBeforePost
     BeforeDelete = TbHoraBeforeDelete
-    Left = 48
-    Top = 144
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbHoraixIntervalo'
@@ -219,8 +223,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodHora'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 48
+    Top = 144
     object TbHoraCodHora: TAutoIncField
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodHora'
     end
     object TbHoraNomHora: TStringField
@@ -244,8 +250,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbHorario: TkbmMemTable
     BeforePost = TbHorarioBeforePost
     BeforeDelete = TbHorarioBeforeDelete
-    Left = 144
-    Top = 156
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbHorarioixMomentoFinal'
@@ -260,8 +265,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodHorario'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 144
+    Top = 156
     object TbHorarioCodHorario: TAutoIncField
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodHorario'
     end
     object TbHorarioMomentoInicial: TDateTimeField
@@ -287,8 +294,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbCurso: TkbmMemTable
     BeforePost = TbCursoBeforePost
     BeforeDelete = TbCursoBeforeDelete
-    Left = 240
-    Top = 144
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbCursoEspecializacionCurso'
@@ -303,13 +309,15 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodNivel;CodEspecializacion'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 240
+    Top = 144
     object TbCursoCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
     end
     object TbCursoCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especialización'
+      DisplayLabel = 'Especializaci'#243'n'
       FieldName = 'CodEspecializacion'
       Required = True
     end
@@ -322,8 +330,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbParaleloId: TkbmMemTable
     BeforePost = TbParaleloIdBeforePost
     BeforeDelete = TbParaleloIdBeforeDelete
-    Left = 336
-    Top = 156
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbParaleloIdixNomParaleloId'
@@ -335,8 +342,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodParaleloId'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 336
+    Top = 156
     object TbParaleloIdCodParaleloId: TAutoIncField
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodParaleloId'
     end
     object TbParaleloIdNomParaleloId: TStringField
@@ -354,8 +363,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbMateriaProhibicionTipo: TkbmMemTable
     BeforePost = TbMateriaProhibicionTipoBeforePost
     BeforeDelete = TbMateriaProhibicionTipoBeforeDelete
-    Left = 432
-    Top = 144
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbMateriaProhibicionTipoixNomMateProhibicionTipo'
@@ -367,8 +375,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodMateProhibicionTipo'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 432
+    Top = 144
     object TbMateriaProhibicionTipoCodMateProhibicionTipo: TIntegerField
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodMateProhibicionTipo'
       Required = True
     end
@@ -397,8 +407,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbPeriodo: TkbmMemTable
     BeforePost = TbPeriodoBeforePost
     BeforeDelete = TbPeriodoBeforeDelete
-    Left = 48
-    Top = 240
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbPeriodoDiaPeriodo'
@@ -413,8 +422,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 48
+    Top = 240
     object TbPeriodoCodDia: TIntegerField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldName = 'CodDia'
       Required = True
     end
@@ -432,8 +443,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbParalelo: TkbmMemTable
     BeforePost = TbParaleloBeforePost
     BeforeDelete = TbParaleloBeforeDelete
-    Left = 144
-    Top = 252
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbParaleloCursoParalelo'
@@ -448,13 +458,15 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodNivel;CodEspecializacion;CodParaleloId'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 144
+    Top = 252
     object TbParaleloCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
     end
     object TbParaleloCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especialización'
+      DisplayLabel = 'Especializaci'#243'n'
       FieldName = 'CodEspecializacion'
       Required = True
     end
@@ -472,8 +484,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbProfesor: TkbmMemTable
     BeforePost = TbProfesorBeforePost
     BeforeDelete = TbProfesorBeforeDelete
-    Left = 240
-    Top = 240
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbProfesorixApeNomProfesor'
@@ -490,12 +501,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodProfesor'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 240
+    Top = 240
     object TbProfesorCodProfesor: TAutoIncField
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodProfesor'
     end
     object TbProfesorCedProfesor: TStringField
-      DisplayLabel = 'Cédula'
+      DisplayLabel = 'C'#233'dula'
       FieldName = 'CedProfesor'
       Required = True
       Size = 11
@@ -520,8 +533,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbMateriaProhibicion: TkbmMemTable
     BeforePost = TbMateriaProhibicionBeforePost
-    Left = 336
-    Top = 252
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbMateriaProhibicionMateriaMateriaProhibicion'
@@ -540,13 +552,15 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodMateria;CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 336
+    Top = 252
     object TbMateriaProhibicionCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
       Required = True
     end
     object TbMateriaProhibicionCodDia: TIntegerField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldName = 'CodDia'
       Required = True
     end
@@ -556,7 +570,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbMateriaProhibicionCodMateProhibicionTipo: TIntegerField
-      DisplayLabel = 'Tipo de Prohibición'
+      DisplayLabel = 'Tipo de Prohibici'#243'n'
       FieldName = 'CodMateProhibicionTipo'
       Required = True
     end
@@ -569,8 +583,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbDistributivo: TkbmMemTable
     BeforePost = TbDistributivoBeforePost
     BeforeDelete = TbDistributivoBeforeDelete
-    Left = 432
-    Top = 240
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbDistributivoAulaTipoDistributivo'
@@ -593,6 +606,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Name = 'TbDistributivoProfesorDistributivo'
         Fields = 'CodProfesor'
       end>
+    Left = 432
+    Top = 240
     object TbDistributivoCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
@@ -604,7 +619,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbDistributivoCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especialización'
+      DisplayLabel = 'Especializaci'#243'n'
       FieldName = 'CodEspecializacion'
       Required = True
     end
@@ -624,7 +639,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbDistributivoComposicion: TStringField
-      DisplayLabel = 'Composición'
+      DisplayLabel = 'Composici'#243'n'
       FieldName = 'Composicion'
       Required = True
       Size = 40
@@ -637,8 +652,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbHorarioDetalle: TkbmMemTable
     BeforePost = TbHorarioDetalleBeforePost
-    Left = 48
-    Top = 336
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbHorarioDetalleDistributivoHorarioDetalle'
@@ -666,6 +680,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 48
+    Top = 336
     object TbHorarioDetalleCodHorario: TIntegerField
       DisplayLabel = 'Horario'
       FieldName = 'CodHorario'
@@ -682,7 +698,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbHorarioDetalleCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especialización'
+      DisplayLabel = 'Especializaci'#243'n'
       FieldName = 'CodEspecializacion'
       Required = True
     end
@@ -692,7 +708,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbHorarioDetalleCodDia: TIntegerField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldName = 'CodDia'
       Required = True
     end
@@ -702,7 +718,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbHorarioDetalleSesion: TIntegerField
-      DisplayLabel = 'Sesión'
+      DisplayLabel = 'Sesi'#243'n'
       FieldName = 'Sesion'
       Required = True
     end
@@ -715,8 +731,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbProfesorProhibicionTipo: TkbmMemTable
     BeforePost = TbProfesorProhibicionTipoBeforePost
     BeforeDelete = TbProfesorProhibicionTipoBeforeDelete
-    Left = 144
-    Top = 348
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbProfesorProhibicionTipoixNomProfProhibicionTipo'
@@ -728,8 +743,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodProfProhibicionTipo'
         Options = [ixPrimary, ixUnique]
       end>
+    Left = 144
+    Top = 348
     object TbProfesorProhibicionTipoCodProfProhibicionTipo: TAutoIncField
-      DisplayLabel = 'Código'
+      DisplayLabel = 'C'#243'digo'
       FieldName = 'CodProfProhibicionTipo'
     end
     object TbProfesorProhibicionTipoNomProfProhibicionTipo: TStringField
@@ -756,8 +773,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbProfesorProhibicion: TkbmMemTable
     BeforePost = TbProfesorProhibicionBeforePost
-    Left = 240
-    Top = 336
+    FieldDefs = <>
     IndexDefs = <
       item
         Name = 'TbProfesorProhibicionPeriodoProfesorProhibicion'
@@ -776,13 +792,15 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Name = 'TbProfesorProhibicionProfesorProhibicionTipoProfesorProhibicion'
         Fields = 'CodProfProhibicionTipo'
       end>
+    Left = 240
+    Top = 336
     object TbProfesorProhibicionCodProfesor: TIntegerField
       DisplayLabel = 'Profesor'
       FieldName = 'CodProfesor'
       Required = True
     end
     object TbProfesorProhibicionCodDia: TIntegerField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldName = 'CodDia'
       Required = True
     end
@@ -792,7 +810,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbProfesorProhibicionCodProfProhibicionTipo: TIntegerField
-      DisplayLabel = 'Tipo de prohibición'
+      DisplayLabel = 'Tipo de prohibici'#243'n'
       FieldName = 'CodProfProhibicionTipo'
       Required = True
     end
