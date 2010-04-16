@@ -2,8 +2,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   object TbAulaTipo: TkbmMemTable
-    BeforePost = TbAulaTipoBeforePost
-    BeforeDelete = TbAulaTipoBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -21,6 +19,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodAulaTipo'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbAulaTipoBeforePost
+    BeforeDelete = TbAulaTipoBeforeDelete
     Left = 48
     Top = 48
     object TbAulaTipoCodAulaTipo: TAutoIncField
@@ -51,8 +51,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 40
   end
   object TbEspecializacion: TkbmMemTable
-    BeforePost = TbEspecializacionBeforePost
-    BeforeDelete = TbEspecializacionBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -70,6 +68,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodEspecializacion'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbEspecializacionBeforePost
+    BeforeDelete = TbEspecializacionBeforeDelete
     Left = 144
     Top = 60
     object TbEspecializacionCodEspecializacion: TAutoIncField
@@ -95,8 +95,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 52
   end
   object TbDia: TkbmMemTable
-    BeforePost = TbDiaBeforePost
-    BeforeDelete = TbDiaBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -109,6 +107,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodDia'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbDiaBeforePost
+    BeforeDelete = TbDiaBeforeDelete
     Left = 240
     Top = 48
     object TbDiaCodDia: TAutoIncField
@@ -128,8 +128,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 40
   end
   object TbMateria: TkbmMemTable
-    BeforePost = TbMateriaBeforePost
-    BeforeDelete = TbMateriaBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -142,6 +140,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodMateria'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbMateriaBeforePost
+    BeforeDelete = TbMateriaBeforeDelete
     Left = 336
     Top = 60
     object TbMateriaCodMateria: TAutoIncField
@@ -161,8 +161,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 52
   end
   object TbNivel: TkbmMemTable
-    BeforePost = TbNivelBeforePost
-    BeforeDelete = TbNivelBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -180,6 +178,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodNivel'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbNivelBeforePost
+    BeforeDelete = TbNivelBeforeDelete
     Left = 432
     Top = 48
     object TbNivelCodNivel: TAutoIncField
@@ -204,8 +204,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 40
   end
   object TbHora: TkbmMemTable
-    BeforePost = TbHoraBeforePost
-    BeforeDelete = TbHoraBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -223,6 +221,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodHora'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbHoraBeforePost
+    BeforeDelete = TbHoraBeforeDelete
     Left = 48
     Top = 144
     object TbHoraCodHora: TAutoIncField
@@ -248,8 +248,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 136
   end
   object TbHorario: TkbmMemTable
-    BeforePost = TbHorarioBeforePost
-    BeforeDelete = TbHorarioBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -265,6 +263,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodHorario'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbHorarioBeforePost
+    BeforeDelete = TbHorarioBeforeDelete
     Left = 144
     Top = 156
     object TbHorarioCodHorario: TAutoIncField
@@ -292,8 +292,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 148
   end
   object TbCurso: TkbmMemTable
-    BeforePost = TbCursoBeforePost
-    BeforeDelete = TbCursoBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -309,6 +307,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodNivel;CodEspecializacion'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbCursoBeforePost
+    BeforeDelete = TbCursoBeforeDelete
     Left = 240
     Top = 144
     object TbCursoCodNivel: TIntegerField
@@ -328,8 +328,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 136
   end
   object TbParaleloId: TkbmMemTable
-    BeforePost = TbParaleloIdBeforePost
-    BeforeDelete = TbParaleloIdBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -342,6 +340,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodParaleloId'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbParaleloIdBeforePost
+    BeforeDelete = TbParaleloIdBeforeDelete
     Left = 336
     Top = 156
     object TbParaleloIdCodParaleloId: TAutoIncField
@@ -361,8 +361,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 148
   end
   object TbMateriaProhibicionTipo: TkbmMemTable
-    BeforePost = TbMateriaProhibicionTipoBeforePost
-    BeforeDelete = TbMateriaProhibicionTipoBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -375,6 +373,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodMateProhibicionTipo'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbMateriaProhibicionTipoBeforePost
+    BeforeDelete = TbMateriaProhibicionTipoBeforeDelete
     Left = 432
     Top = 144
     object TbMateriaProhibicionTipoCodMateProhibicionTipo: TIntegerField
@@ -405,8 +405,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 136
   end
   object TbPeriodo: TkbmMemTable
-    BeforePost = TbPeriodoBeforePost
-    BeforeDelete = TbPeriodoBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -422,6 +420,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbPeriodoBeforePost
+    BeforeDelete = TbPeriodoBeforeDelete
     Left = 48
     Top = 240
     object TbPeriodoCodDia: TIntegerField
@@ -441,8 +441,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 232
   end
   object TbParalelo: TkbmMemTable
-    BeforePost = TbParaleloBeforePost
-    BeforeDelete = TbParaleloBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -458,6 +456,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodNivel;CodEspecializacion;CodParaleloId'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbParaleloBeforePost
+    BeforeDelete = TbParaleloBeforeDelete
     Left = 144
     Top = 252
     object TbParaleloCodNivel: TIntegerField
@@ -482,8 +482,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 244
   end
   object TbProfesor: TkbmMemTable
-    BeforePost = TbProfesorBeforePost
-    BeforeDelete = TbProfesorBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -501,6 +499,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodProfesor'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbProfesorBeforePost
+    BeforeDelete = TbProfesorBeforeDelete
     Left = 240
     Top = 240
     object TbProfesorCodProfesor: TAutoIncField
@@ -532,7 +532,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 232
   end
   object TbMateriaProhibicion: TkbmMemTable
-    BeforePost = TbMateriaProhibicionBeforePost
     FieldDefs = <>
     IndexDefs = <
       item
@@ -552,6 +551,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodMateria;CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbMateriaProhibicionBeforePost
     Left = 336
     Top = 252
     object TbMateriaProhibicionCodMateria: TIntegerField
@@ -581,8 +581,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 244
   end
   object TbDistributivo: TkbmMemTable
-    BeforePost = TbDistributivoBeforePost
-    BeforeDelete = TbDistributivoBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -606,6 +604,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Name = 'TbDistributivoProfesorDistributivo'
         Fields = 'CodProfesor'
       end>
+    BeforePost = TbDistributivoBeforePost
+    BeforeDelete = TbDistributivoBeforeDelete
     Left = 432
     Top = 240
     object TbDistributivoCodMateria: TIntegerField
@@ -651,7 +651,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 232
   end
   object TbHorarioDetalle: TkbmMemTable
-    BeforePost = TbHorarioDetalleBeforePost
     FieldDefs = <>
     IndexDefs = <
       item
@@ -680,6 +679,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbHorarioDetalleBeforePost
     Left = 48
     Top = 336
     object TbHorarioDetalleCodHorario: TIntegerField
@@ -729,8 +729,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 328
   end
   object TbProfesorProhibicionTipo: TkbmMemTable
-    BeforePost = TbProfesorProhibicionTipoBeforePost
-    BeforeDelete = TbProfesorProhibicionTipoBeforeDelete
     FieldDefs = <>
     IndexDefs = <
       item
@@ -743,6 +741,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Fields = 'CodProfProhibicionTipo'
         Options = [ixPrimary, ixUnique]
       end>
+    BeforePost = TbProfesorProhibicionTipoBeforePost
+    BeforeDelete = TbProfesorProhibicionTipoBeforeDelete
     Left = 144
     Top = 348
     object TbProfesorProhibicionTipoCodProfProhibicionTipo: TAutoIncField
@@ -772,7 +772,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Top = 340
   end
   object TbProfesorProhibicion: TkbmMemTable
-    BeforePost = TbProfesorProhibicionBeforePost
     FieldDefs = <>
     IndexDefs = <
       item
@@ -792,6 +791,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Name = 'TbProfesorProhibicionProfesorProhibicionTipoProfesorProhibicion'
         Fields = 'CodProfProhibicionTipo'
       end>
+    BeforePost = TbProfesorProhibicionBeforePost
     Left = 240
     Top = 336
     object TbProfesorProhibicionCodProfesor: TIntegerField
