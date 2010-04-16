@@ -1,6 +1,6 @@
 object SingleReportQrp: TSingleReportQrp
   Left = 82
-  Top = 133
+  Top = 116
   Width = 683
   Height = 399
   VertScrollBar.Position = 41
@@ -252,7 +252,7 @@ object SingleReportQrp: TSingleReportQrp
         1600.72916666667)
       BandType = rbPageFooter
       object QRSysData1: TQRSysData
-        Left = -45
+        Left = 545
         Top = 98
         Width = 60
         Height = 17
@@ -277,7 +277,7 @@ object SingleReportQrp: TSingleReportQrp
         Font.Name = 'Arial'
         Font.Style = []
         ParentFont = False
-        Text = 'Pág.'
+        Text = 'P'#225'g.'
         Transparent = False
         FontSize = 8
       end

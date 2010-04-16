@@ -34,7 +34,7 @@ var
 implementation
 
 uses
-  DMaster, FCrsMMER, SGHCUtls, FConfig, QMaDeRep, QSingRep, DSource;
+  DMaster, FCrsMMER, SGHCUtls, FConfig, DSource;
 
 {$R *.DFM}
 

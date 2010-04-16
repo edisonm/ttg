@@ -27,8 +27,6 @@ type
 
 implementation
 
-uses
-  QSingRep, Printers;
 {$R *.DFM}
 
 procedure TEditorForm.FormClose(Sender: TObject; var Action: TCloseAction);

@@ -137,7 +137,6 @@ inherited HorarioForm: THorarioForm
     inherited DBGrid: TDBGrid
       Width = 310
       Height = 288
-      DefaultDrawing = False
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
       OnDrawColumnCell = DBGridDrawColumnCell
       Columns = <
@@ -979,8 +978,8 @@ inherited HorarioForm: THorarioForm
   end
   object dsCruceAula: TDataSource
     DataSet = QuCruceAula
-    Left = 144
-    Top = 168
+    Left = 116
+    Top = 140
   end
   object QuCruceProfesorDetalle: TkbmMemTable
     DesignActivation = True

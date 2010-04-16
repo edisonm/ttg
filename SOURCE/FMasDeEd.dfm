@@ -36,7 +36,6 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
       OnEnter = DBGridEnter
-      IniStorage = FormStorage
     end
   end
   inherited FormStorage: TFormStorage

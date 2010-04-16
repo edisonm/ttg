@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 191
-  Top = 211
+  Left = 398
+  Top = 178
   Width = 601
   Height = 392
   Caption = 'Horarios para Colegio 1.2.1'
@@ -2262,6 +2262,7 @@ object MainForm: TMainForm
       DisplayLabel = 'Materia'
       FieldKind = fkLookup
       FieldName = 'NomMateria'
+      LookupDataSet = SourceDataModule.TbMateria
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
@@ -2302,7 +2303,11 @@ object MainForm: TMainForm
     AttachedAutoRefresh = True
     AttachMaxCount = 1
     AutoIncMinValue = -1
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodMateria'
+        DataType = ftInteger
+      end>
     IndexDefs = <>
     SortOptions = []
     AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
@@ -2333,6 +2338,7 @@ object MainForm: TMainForm
       DisplayLabel = 'Materia'
       FieldKind = fkLookup
       FieldName = 'NomMateria'
+      LookupDataSet = SourceDataModule.TbMateria
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
@@ -2423,6 +2429,7 @@ object MainForm: TMainForm
       DisplayLabel = 'Apellido'
       FieldKind = fkLookup
       FieldName = 'ApeProfesor'
+      LookupDataSet = SourceDataModule.TbProfesor
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'ApeProfesor'
       KeyFields = 'ApeProfesor'
@@ -2434,6 +2441,7 @@ object MainForm: TMainForm
       DisplayLabel = 'Nombre'
       FieldKind = fkLookup
       FieldName = 'NomProfesor'
+      LookupDataSet = SourceDataModule.TbProfesor
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'NomProfesor'
       KeyFields = 'NomProfesor'

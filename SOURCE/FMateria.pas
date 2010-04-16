@@ -24,8 +24,7 @@ var
 
 implementation
 uses
-  DMaster, FCrsMMER, FCrsMMEd, SGHCUtls, FConfig, QMaDeRep, QSingRep,
-  DSource;
+  DMaster, FCrsMMER, FCrsMMEd, SGHCUtls, FConfig, DSource;
 {$R *.DFM}
 
 procedure TMateriaForm.btn97MateriaProhibicionClick(Sender: TObject);

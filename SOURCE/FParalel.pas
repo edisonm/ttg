@@ -29,7 +29,7 @@ var
 implementation
 
 uses
-  DMaster, FCrsMME1, SGHCUtls, Consts, FMain, QMaDeRep, QSingRep, DSource;
+  DMaster, FCrsMME1, SGHCUtls, Consts, FMain, QSingRep, DSource;
 
 {$R *.DFM}
 

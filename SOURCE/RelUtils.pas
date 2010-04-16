@@ -399,7 +399,7 @@ begin
   begin
     if ADataSet.Fields[i].FieldKind = fkData then
     begin
-      s := s + '"' + StringToScaped(ADataSet.Fields[i].FieldName) + '",';
+      s := s + '"' + StringToScaped(ADataSet.Fields[i].FieldName) + '";';
     end
   end;
   AStrings.Add(s);
@@ -414,7 +414,7 @@ begin
         if ADataSet.Fields[i].FieldKind = fkData then
         begin
           v := StringToScaped(ADataSet.Fields[i].AsString);
-          s := s + '"' + v + '",';
+          s := s + '"' + v + '";';
         end;
       end;
       AStrings.Add(s);

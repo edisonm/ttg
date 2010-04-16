@@ -1,6 +1,6 @@
 inherited SourceDataModule: TSourceDataModule
-  Left = 301
-  Top = 84
+  Left = 488
+  Top = 108
   Height = 496
   Width = 758
   inherited TbAulaTipo: TkbmMemTable

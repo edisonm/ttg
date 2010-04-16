@@ -1,13 +1,15 @@
 inherited MasterDetailReportQrp: TMasterDetailReportQrp
   Left = 6
   Top = 180
-  Width = 728
-  Height = 386
+  Width = 1013
+  Height = 476
+  VertScrollBar.Position = 0
   Caption = 'MasterDetailReportQrp'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited qrpSingleReport: TQuickRep
+    Top = 24
     Functions.DATA = (
       '0'
       '0'
@@ -229,7 +231,6 @@ inherited MasterDetailReportQrp: TMasterDetailReportQrp
         47.625
         1600.72916666667)
       inherited qreSum: TQRExpr
-        Left = 520
         Size.Values = (
           44.9791666666667
           1375.83333333333

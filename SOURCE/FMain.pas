@@ -346,7 +346,7 @@ uses
 {$ENDIF}
   FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario,
   FConfig, FLogstic, SGHCUtls, About, Consts, FParalel, Rand, ArDBUtls,
-  QMaDeRep, Printers, QSingRep, QuickRpt, Qrctrls, DSource;
+  QMaDeRep, Printers, QSingRep, QuickRpt, Qrctrls, DSource, DSrcBase;
 
 {$R *.DFM}
 
@@ -1179,7 +1179,7 @@ end;
 
 procedure TMainForm.FillProfesorHorarioDetalle;
 begin
-  with SourceDataModule, MasterDataModule do
+  with SourceDataModule do
   begin
     with QuProfesorHorarioDetalle do
     begin
@@ -1187,11 +1187,13 @@ begin
       Open;
       TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
       TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+      TbDistributivo.MasterFields := TbDistributivo.IndexFieldNames;
+      TbDistributivo.MasterSource := dsHorarioDetalle;
       TbDistributivo.First;
       try
         if TbHorarioDetalle.Locate('CodHorario', CodHorarioSeleccionado, []) then
         begin
-          while (TbHorarioDetalleCodHorario.Value = CodHorarioSeleccionado) and not Eof do
+          while (TbHorarioDetalleCodHorario.Value = CodHorarioSeleccionado) and not TbHorarioDetalle.Eof do
           begin
             QuProfesorHorarioDetalle.Append;
             QuProfesorHorarioDetalleCodProfesor.Value := TbDistributivoCodProfesor.Value;
@@ -1203,6 +1205,7 @@ begin
               TbDistributivoNomParaleloId.Value + ' ' +
               TbDistributivoNomMateria.Value;
             QuProfesorHorarioDetalle.Post;
+            TbHorarioDetalle.Next;
           end;
         end;
       finally
@@ -1215,20 +1218,14 @@ end;
 
 procedure TMainForm.ObtProfesorHorario;
 begin
-  with SourceDataModule, MasterDataModule do
-  begin
-    FillProfesorHora;
-    FillProfesorHorarioDetalle;
-    TbProfesor.Close;
-    TbProfesor.Filtered := false;
-    with QuProfesorHorarioDetalle do
-    begin
-      CrossBatchMove(TbDia, QuProfesorHora, QuProfesorHorarioDetalle,
-        TbProfesor, 'CodDia', 'NomDia', 'CodDia', 'CodProfesor;CodHora',
-        'NomHora', 'CodProfesor;CodHora', 'Nombre');
-      TbProfesor.Filtered := true;
-    end;
-  end;
+  FillProfesorHora;
+  FillProfesorHorarioDetalle;
+  TbProfesor.Close;
+  TbProfesor.Filtered := false;
+  CrossBatchMove(SourceDataModule.TbDia, QuProfesorHora, QuProfesorHorarioDetalle,
+    TbProfesor, 'CodDia', 'NomDia', 'CodDia', 'CodProfesor;CodHora',
+    'NomHora', 'CodProfesor;CodHora', 'Nombre');
+  TbProfesor.Filtered := true;
 end;
 
 procedure TMainForm.PrepareReportProfesorHorario(Sender: TObject);
@@ -1243,12 +1240,9 @@ end;
 procedure TMainForm.actPresentarProfesorHorarioExecute(Sender: TObject);
 begin
   ObtProfesorHorario;
-  with SourceDataModule, MasterDataModule do
-  begin
-    PreviewMasterDetailReport(TbProfesor, TbProfesor,
-      'ApeProfesor;NomProfesor', '', '', ConfiguracionForm.edtNomColegio.Text,
-      'Horario de profesores', poLandscape, PrepareReportProfesorHorario);
-  end;
+  PreviewMasterDetailReport(SourceDataModule.TbProfesor, TbProfesor,
+    'ApeProfesor;NomProfesor', '', '', ConfiguracionForm.edtNomColegio.Text,
+    'Horario de profesores', poLandscape, PrepareReportProfesorHorario);
 end;
 
 procedure TMainForm.FillParaleloHorarioDetalle;
@@ -1256,10 +1250,10 @@ var
   s: string;
   p: TBookmark;
 begin
-  with SourceDataModule, QuParaleloHorarioDetalle do
+  QuParaleloHorarioDetalle.Close;
+  QuParaleloHorarioDetalle.Open;
+  with SourceDataModule do
   begin
-    Close;
-    Open;
     s := TbHorarioDetalle.IndexFieldNames;
     p := TbHorarioDetalle.GetBookmark;
     try
@@ -1269,53 +1263,44 @@ begin
       begin
         while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
         begin
-          Append;
+          QuParaleloHorarioDetalle.Append;
           QuParaleloHorarioDetalleCodNivel.Value := TbHorarioDetalleCodNivel.Value;
           QuParaleloHorarioDetalleCodEspecializacion.Value := TbHorarioDetalleCodNivel.Value;
           QuParaleloHorarioDetalleCodParaleloId.Value := TbHorarioDetalleCodParaleloId.Value;
           QuParaleloHorarioDetalleCodHora.Value := TbHorarioDetalleCodHora.Value;
           QuParaleloHorarioDetalleCodDia.Value := TbHorarioDetalleCodDia.Value;
-          Post;
+          QuParaleloHorarioDetalle.Post;
           TbHorarioDetalle.Next;
         end;
-        First;
+        QuParaleloHorarioDetalle.First;
       end;
     finally
       TbHorarioDetalle.IndexFieldNames := s;
       TbHorarioDetalle.GotoBookmark(p);
       TbHorarioDetalle.FreeBookmark(p);
     end;
-  end;
+  end
 end;
 
 procedure TMainForm.ObtParaleloHorario;
 begin
-  with SourceDataModule, MasterDataModule do
-  begin
-    FillParaleloHora;
-    FillParaleloHorarioDetalle;
-    TbParalelo.Close;
-    TbParalelo.Filtered := false;
-    with QuParaleloHorarioDetalle do
-    begin
-      CrossBatchMove(TbDia, QuParaleloHora, QuParaleloHorarioDetalle,
-        TbParalelo, 'CodDia', 'NomDia', 'CodDia',
-        'CodNivel;CodEspecializacion;CodParaleloId;CodHora', 'NomHora',
-        'CodNivel;CodEspecializacion;CodParaleloId;CodHora', 'NomMateria');
-      TbParalelo.Filtered := true;
-    end;
-  end;
+  FillParaleloHora;
+  FillParaleloHorarioDetalle;
+  TbParalelo.Close;
+  TbParalelo.Filtered := false;
+  CrossBatchMove(SourceDataModule.TbDia, QuParaleloHora, QuParaleloHorarioDetalle,
+    TbParalelo, 'CodDia', 'NomDia', 'CodDia',
+    'CodNivel;CodEspecializacion;CodParaleloId;CodHora', 'NomHora',
+    'CodNivel;CodEspecializacion;CodParaleloId;CodHora', 'NomMateria');
+  TbParalelo.Filtered := true;
 end;
 
 procedure TMainForm.actPresentarParaleloHorarioExecute(Sender: TObject);
 begin
   ObtParaleloHorario;
-  with SourceDataModule, MasterDataModule do
-  begin
-    PreviewMasterDetailReport(TbParalelo, TbParalelo, '', '', '',
-      ConfiguracionForm.edtNomColegio.Text, 'Horario de paralelos',
-      poLandscape, PrepareReportParaleloHorario);
-  end;
+  PreviewMasterDetailReport(SourceDataModule.TbParalelo, TbParalelo, '', '', '',
+    ConfiguracionForm.edtNomColegio.Text, 'Horario de paralelos',
+    poLandscape, PrepareReportParaleloHorario);
 end;
 
 procedure TMainForm.PrepareReportParaleloHorario(Sender: TObject);
@@ -1365,22 +1350,19 @@ begin
   FillMateriaMateriaProhibicionHora;
   TbMateria.Close;
   TbMateria.Filtered := false;
-  with SourceDataModule, MasterDataModule do
-  begin
-    TbMateriaProhibicion.MasterSource := nil;
-    try
-      CrossBatchMove(TbDia, QuMateriaMateriaProhibicionHora,
-        TbMateriaProhibicion, TbMateria,
-        'CodDia', 'NomDia', 'CodDia', 'CodMateria;CodHora', 'NomHora',
-        'CodMateria;CodHora', 'NomMateProhibicionTipo');
-      TbMateria.Filtered := true;
-      PreviewMasterDetailReport(QuMateriaMateriaProhibicion, TbMateria, '', '',
-        '', ConfiguracionForm.edtNomColegio.Text,
-        '' {tDescription(TbMateriaProhibicion)}, poPortrait,
-        PrepareReportProhibicion);
-    finally
-      TbMateriaProhibicion.MasterSource := dsMateria;
-    end;
+  SourceDataModule.TbMateriaProhibicion.MasterSource := nil;
+  try
+    CrossBatchMove(SourceDataModule.TbDia, QuMateriaMateriaProhibicionHora,
+      SourceDataModule.TbMateriaProhibicion, TbMateria,
+      'CodDia', 'NomDia', 'CodDia', 'CodMateria;CodHora', 'NomHora',
+      'CodMateria;CodHora', 'NomMateProhibicionTipo');
+    TbMateria.Filtered := true;
+    PreviewMasterDetailReport(QuMateriaMateriaProhibicion, TbMateria, '', '',
+      '', ConfiguracionForm.edtNomColegio.Text,
+      '' {tDescription(TbMateriaProhibicion)}, poPortrait,
+      PrepareReportProhibicion);
+  finally
+    SourceDataModule.TbMateriaProhibicion.MasterSource := SourceDataModule.dsMateria;
   end;
 end;
 
@@ -1555,15 +1537,13 @@ end;
 procedure TMainForm.actPresentarDistributivoProfesorExecute(
   Sender: TObject);
 begin
-  with SourceDataModule, MasterDataModule do
-  begin
-    PreviewMasterDetailReport(TbProfesor, TbDistributivo,
-      'ApeProfesor;NomProfesor',
-      'NomMateria;AbrNivel;AbrEspecializacion;NomParaleloId;Duracion',
-      'Duracion', ConfiguracionForm.edtNomColegio.Text,
-      'Distributivo por profesores', poPortrait,
-      PrepareReportDistributivoProfesor);
-  end;
+  PreviewMasterDetailReport(SourceDataModule.TbProfesor,
+    SourceDataModule.TbDistributivo,
+    'ApeProfesor;NomProfesor',
+    'NomMateria;AbrNivel;AbrEspecializacion;NomParaleloId;Duracion',
+    'Duracion', ConfiguracionForm.edtNomColegio.Text,
+    'Distributivo por profesores', poPortrait,
+    PrepareReportDistributivoProfesor);
 end;
 
 procedure TMainForm.PrepareReportDistributivoProfesor(Sender: TObject);
@@ -1601,7 +1581,7 @@ var
   s: string;
   j: Integer;
 begin
-  AStrings.Add(',,,,,,');
+  AStrings.Add(';;;;;;');
   AMasterDataSet.First;
   Max := AMasterDataSet.RecordCount;
   while not AMasterDataSet.Eof do
@@ -1613,14 +1593,14 @@ begin
       if AMasterDataSet.Fields[j].Visible then
         s := s + AMasterDataSet.Fields[j].AsString + ' ';
     end;
-    AStrings.Add(s + ',,,,,,');
+    AStrings.Add(s + ';;;;;;');
     ADetailDataSet.First;
     s := '';
     for j := 0 to ADetailDataSet.FieldCount - 1 do
     begin
       if ADetailDataSet.Fields[j].Visible then
       begin
-        s := s + ADetailDataSet.Fields[j].DisplayLabel + ',';
+        s := s + ADetailDataSet.Fields[j].DisplayLabel + ';';
       end;
     end;
     AStrings.Add(s);
@@ -1630,12 +1610,12 @@ begin
       for j := 0 to ADetailDataSet.FieldCount - 1 do
       begin
         if ADetailDataSet.Fields[j].Visible then
-          s := s + ADetailDataSet.Fields[j].AsString + ',';
+          s := s + ADetailDataSet.Fields[j].AsString + ';';
       end;
       AStrings.Add(s);
       ADetailDataSet.Next;
     end;
-    AStrings.Add(',,,,,,');
+    AStrings.Add(';;;;;;');
     AMasterDataSet.Next;
   end;
 end;
@@ -1674,9 +1654,9 @@ begin
   AStrings.BeginUpdate;
   try
     ObtParaleloHorario;
-    AStrings.Add('HORARIO POR PARALELOS,,,,,,');
+    AStrings.Add('HORARIO POR PARALELOS;;;;;;');
     ExportarCSV(SourceDataModule.TbParalelo, TbParalelo, AStrings);
-    AStrings.Add('HORARIO POR PROFESORES,,,,,,');
+    AStrings.Add('HORARIO POR PROFESORES;;;;;;');
     ObtProfesorHorario;
     ExportarCSV(SourceDataModule.TbProfesor, TbProfesor, AStrings);
   finally

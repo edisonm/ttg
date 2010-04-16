@@ -187,7 +187,7 @@ var
 implementation
 uses
   FCrsMMER, FHorPara, FHorAulT, DMaster, SGHCUtls, FMasDEEd, FCrsMME1, FHorProf,
-  FConfig, QMaDeRep, Printers, DSource;
+  FConfig, Printers, DSource;
 {$R *.DFM}
 
 procedure THorarioForm.btn97HorarioParaleloClick(Sender: TObject);

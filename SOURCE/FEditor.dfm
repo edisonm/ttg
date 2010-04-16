@@ -1,6 +1,6 @@
 object EditorForm: TEditorForm
-  Left = 821
-  Top = 303
+  Left = 800
+  Top = 262
   Width = 487
   Height = 326
   Color = clBtnFace
@@ -56,14 +56,14 @@ object EditorForm: TEditorForm
     Top = 0
     Width = 479
     Height = 25
-    Caption = 'Presentación'
+    Caption = 'Presentaci'#243'n'
     Flat = True
     Images = ImageList
     TabOrder = 2
     object btn97Show: TToolButton
       Left = 0
       Top = 0
-      Hint = 'Presentar|Presenta el contenido de la cuadrícula en un reporte'
+      Hint = 'Presentar|Presenta el contenido de la cuadr'#237'cula en un reporte'
       ImageIndex = 0
       ParentShowHint = False
       ShowHint = True
