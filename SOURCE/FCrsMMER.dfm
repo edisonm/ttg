@@ -32,11 +32,11 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
       Top = 1
       Width = 111
       Height = 203
+      Style = lbOwnerDrawFixed
       Align = alClient
       ItemHeight = 18
       ParentShowHint = False
       ShowHint = True
-      Style = lbOwnerDrawFixed
       TabOrder = 0
       OnClick = ListBoxClick
       OnDrawItem = ListBoxDrawItem

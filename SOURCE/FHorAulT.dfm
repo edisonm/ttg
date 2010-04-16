@@ -480,9 +480,6 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
   end
   object QuHorarioAulaTipo: TkbmMemTable
     Active = True
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <
       item
@@ -526,25 +523,8 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
         Name = 'QuHorarioAulaTipoIxCodAulaTipo'
         Fields = 'CodAulaTipo'
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
     MasterFields = 'CodAulaTipo'
     MasterSource = SourceDataModule.dsAulaTipo
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     OnCalcFields = QuHorarioAulaTipoCalcFields
     Left = 84
     Top = 80

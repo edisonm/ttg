@@ -1,5 +1,4 @@
 object MasterDataModule: TMasterDataModule
-  OldCreateOrder = False
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Left = 222
@@ -7,29 +6,10 @@ object MasterDataModule: TMasterDataModule
   Height = 404
   Width = 748
   object TbTmpProfesorCarga: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     Left = 250
     Top = 11
     object TbTmpProfesorCargaCodProfesor: TIntegerField
@@ -63,29 +43,9 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object QuDistributivoProfesor: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     Left = 250
     Top = 115
     object QuDistributivoProfesorCodMateria: TIntegerField
@@ -167,29 +127,9 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object QuProfesorProhibicionCant: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     Left = 58
     Top = 157
     object QuProfesorProhibicionCantCodProfesor: TIntegerField
@@ -200,29 +140,10 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object TbTmpAulaTipoCarga: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     Left = 250
     Top = 62
     object TbTmpAulaTipoCargaCodAulaTipo: TIntegerField

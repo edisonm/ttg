@@ -11,7 +11,6 @@ object SingleReportQrp: TSingleReportQrp
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   Scaled = False
   OnClose = FormClose
   PixelsPerInch = 96

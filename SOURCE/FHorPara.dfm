@@ -1,9 +1,8 @@
 inherited HorarioParaleloForm: THorarioParaleloForm
-  Left = 388
-  Top = 156
+  Left = 379
+  Top = 161
   Width = 704
   Height = 428
-  OldCreateOrder = False
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -527,9 +526,6 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   end
   object QuHorarioParalelo: TkbmMemTable
     Active = True
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <
       item
@@ -573,25 +569,8 @@ inherited HorarioParaleloForm: THorarioParaleloForm
         Name = 'QuHorarioParaleloIxParalelo'
         Fields = 'CodNivel;CodEspecializacion;CodParaleloId'
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
     MasterFields = 'CodNivel;CodEspecializacion;CodParaleloId'
     MasterSource = dsParalelo
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     OnCalcFields = QuHorarioParaleloCalcFields
     Left = 60
     Top = 104

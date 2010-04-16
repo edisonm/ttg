@@ -741,9 +741,6 @@ inherited HorarioForm: THorarioForm
     Top = 140
   end
   object QuCruceAula: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     FieldDefs = <>
     IndexFieldNames = 'CodAulaTipo;CodDia;CodHora'
     IndexDefs = <
@@ -751,24 +748,7 @@ inherited HorarioForm: THorarioForm
         Name = 'QuCruceAulaIndex1'
         Fields = 'CodAulaTipo;CodDia;CodHora'
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     VersioningMode = mtvmAllSinceCheckPoint
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     Left = 88
     Top = 168
     object QuCruceAulaCodDia: TIntegerField
@@ -838,9 +818,6 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceAulaDetalle: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodHora'
@@ -889,26 +866,9 @@ inherited HorarioForm: THorarioForm
         Name = 'QuCruceAulaDetalleIndex1'
         Fields = 'CodAulaTipo;CodDia;CodHora'
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     VersioningMode = mtvmAllSinceCheckPoint
-    FilterOptions = []
     MasterFields = 'CodAulaTipo;CodDia;CodHora'
     MasterSource = dsCruceAula
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     Left = 116
     Top = 168
     object QuCruceAulaDetalleCodHora: TIntegerField
@@ -982,29 +942,9 @@ inherited HorarioForm: THorarioForm
     Top = 140
   end
   object QuCruceProfesorDetalle: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     FieldDefs = <>
     IndexDefs = <>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     VersioningMode = mtvmAllSinceCheckPoint
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     Left = 116
     Top = 196
     object QuCruceProfesorDetalleCodProfesor: TIntegerField
@@ -1094,9 +1034,6 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceProfesor: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     FieldDefs = <>
     IndexFieldNames = 'CodProfesor;CodDia;CodHora'
     IndexDefs = <
@@ -1104,24 +1041,7 @@ inherited HorarioForm: THorarioForm
         Name = 'QuCruceProfesorIndex1'
         Fields = 'CodProfesor;CodDia;CodHora'
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     VersioningMode = mtvmAllSinceCheckPoint
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     AfterScroll = QuCruceProfesorAfterScroll
     Left = 88
     Top = 196
@@ -1191,9 +1111,6 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceMateria: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     FieldDefs = <>
     IndexDefs = <
       item
@@ -1204,24 +1121,7 @@ inherited HorarioForm: THorarioForm
         Name = 'QuCruceMateriaIxNomMateria'
         Fields = 'NomMateria'
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     VersioningMode = mtvmAllSinceCheckPoint
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     AfterScroll = QuCruceMateriaAfterScroll
     Left = 88
     Top = 224
@@ -1237,9 +1137,6 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceMateriaDetalle: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     FieldDefs = <>
     IndexFieldNames = 
       'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
@@ -1251,24 +1148,7 @@ inherited HorarioForm: THorarioForm
           'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
           'ora'
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     VersioningMode = mtvmAllSinceCheckPoint
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     Left = 116
     Top = 224
     object QuCruceMateriaDetalleCodMateria: TIntegerField
@@ -1362,9 +1242,6 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuHorarioDetalleMateriaProhibicion: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <>
     IndexFieldNames = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
@@ -1375,23 +1252,6 @@ inherited HorarioForm: THorarioForm
         Fields = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
         Options = [ixDescending]
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     Left = 60
     Top = 168
     object QuHorarioDetalleMateriaProhibicionNomMateProhibicionTipo: TStringField
@@ -1498,29 +1358,9 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuHorarioDetalleProfesorProhibicion: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     FieldDefs = <>
     IndexDefs = <>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     VersioningMode = mtvmAllSinceCheckPoint
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     Left = 60
     Top = 196
     object QuHorarioDetalleProfesorProhibicionNomProfProhibicionTipo: TStringField
@@ -1634,29 +1474,9 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuMateriaCortadaDia: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     FieldDefs = <>
     IndexDefs = <>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     VersioningMode = mtvmAllSinceCheckPoint
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     AfterScroll = QuCruceMateriaAfterScroll
     Left = 60
     Top = 224
@@ -1765,9 +1585,6 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuMateriaCortadaHora: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     FieldDefs = <>
     IndexFieldNames = 'CodDia'
     IndexDefs = <
@@ -1775,24 +1592,7 @@ inherited HorarioForm: THorarioForm
         Name = 'QuMateriaCortadaHoraIxCodDia'
         Fields = 'CodDia'
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     VersioningMode = mtvmAllSinceCheckPoint
-    FilterOptions = []
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     Left = 60
     Top = 252
     object QuMateriaCortadaHoraCodDia: TIntegerField
@@ -1832,9 +1632,6 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuMateriaCortadaHoraDetalle: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     FieldDefs = <>
     IndexFieldNames = 'CodDia;CodHora;CodHora0'
     IndexDefs = <
@@ -1842,26 +1639,9 @@ inherited HorarioForm: THorarioForm
         Name = 'QuMateriaCortadaHoraDetalleIxCodDia'
         Fields = 'CodDia;CodHora;CodHora0'
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
     VersioningMode = mtvmAllSinceCheckPoint
-    FilterOptions = []
     MasterFields = 'CodDia;CodHora'
     MasterSource = dsMateriaCortadaHora
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     Left = 88
     Top = 252
     object QuMateriaCortadaHoraDetalleCodNivel: TIntegerField

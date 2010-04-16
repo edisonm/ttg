@@ -1,5 +1,5 @@
 object SplashForm: TSplashForm
-  Left = 176
+  Left = 185
   Top = 223
   BorderStyle = bsNone
   ClientHeight = 182
@@ -45,7 +45,6 @@ object SplashForm: TSplashForm
     F78F78F7877000000000000000000000000000000000FFFF0000FFFF00000000
     0000000000000000000000000000000000000000000000000000000000000000
     000000000000000000000000000000000000FFFF0000}
-  OldCreateOrder = False
   Position = poScreenCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -148,7 +147,7 @@ object SplashForm: TSplashForm
     Top = 64
     Width = 46
     Height = 16
-    Caption = 'Versión'
+    Caption = 'Versi'#243'n'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -176,7 +175,7 @@ object SplashForm: TSplashForm
     Top = 112
     Width = 45
     Height = 16
-    Caption = 'Edición'
+    Caption = 'Edici'#243'n'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13

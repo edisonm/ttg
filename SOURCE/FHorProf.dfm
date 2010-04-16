@@ -476,9 +476,6 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       000000000000}
   end
   object QuHorarioProfesor: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
     AutoIncMinValue = -1
     FieldDefs = <
       item
@@ -522,25 +519,8 @@ inherited HorarioProfesorForm: THorarioProfesorForm
         Name = 'QuHorarioProfesorIndex1'
         Fields = 'CodProfesor'
       end>
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
-    CSVTrueString = 'True'
-    CSVFalseString = 'False'
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail]
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    FilterOptions = []
     MasterFields = 'CodProfesor'
     MasterSource = SourceDataModule.dsProfesor
-    Version = '2.53b'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
     OnCalcFields = QuHorarioProfesorCalcFields
     Left = 64
     Top = 88

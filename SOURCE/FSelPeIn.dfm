@@ -1,8 +1,8 @@
 object SelPeriodoForm: TSelPeriodoForm
-  Left = 316
-  Top = 244
+  Left = 306
+  Top = 249
   BorderStyle = bsDialog
-  Caption = 'Seleccionar período'
+  Caption = 'Seleccionar per'#237'odo'
   ClientHeight = 105
   ClientWidth = 282
   Color = clBtnFace
@@ -11,7 +11,6 @@ object SelPeriodoForm: TSelPeriodoForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   Position = poScreenCenter
   OnShow = FormShow
   PixelsPerInch = 96
@@ -21,14 +20,14 @@ object SelPeriodoForm: TSelPeriodoForm
     Top = 8
     Width = 173
     Height = 13
-    Caption = 'Seleccione el período a intercambiar'
+    Caption = 'Seleccione el per'#237'odo a intercambiar'
   end
   object Label2: TLabel
     Left = 16
     Top = 24
     Width = 18
     Height = 13
-    Caption = 'Día'
+    Caption = 'D'#237'a'
     FocusControl = DBLookupComboBox1
   end
   object Label3: TLabel
@@ -74,34 +73,14 @@ object SelPeriodoForm: TSelPeriodoForm
     TabOrder = 3
   end
   object TbDiaHora: TkbmMemTable
-    AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
-    EnableIndexes = True
-    AutoReposition = False
     IndexDefs = <>
-    RecalcOnIndex = False
-    RecalcOnFetch = True
-    SortOptions = []
-    AllDataOptions = [mtfSaveData, mtfSaveNonVisible, mtfSaveBlobs, mtfSaveFiltered, mtfSaveIgnoreRange, mtfSaveIgnoreMasterDetail, mtfSaveDeltas]
-    StoreDataOnForm = False
-    CommaTextOptions = [mtfSaveData]
-    CSVQuote = '"'
-    CSVFieldDelimiter = ','
-    CSVRecordDelimiter = ','
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
-    PersistentSaveFormat = mtsfBinary
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadLimit = -1
-    EnableVersioning = False
-    VersioningMode = mtvm1SinceCheckPoint
-    FilterOptions = []
-    Version = '2.49'
     Left = 24
     Top = 64
     object TbDiaHoraCodDia: TIntegerField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldName = 'CodDia'
       Required = True
       Visible = False
@@ -114,7 +93,7 @@ object SelPeriodoForm: TSelPeriodoForm
       AttributeSet = 'CodHora'
     end
     object TbDiaHoraNomDia: TStringField
-      DisplayLabel = 'Día'
+      DisplayLabel = 'D'#237'a'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia

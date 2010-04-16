@@ -1,8 +1,8 @@
 object ProgressForm: TProgressForm
-  Left = 114
-  Top = 166
+  Left = 134
+  Top = 159
   BorderStyle = bsDialog
-  Caption = 'Progreso de la búsqueda'
+  Caption = 'Progreso de la b'#250'squeda'
   ClientHeight = 342
   ClientWidth = 405
   Color = clBtnFace
@@ -11,7 +11,6 @@ object ProgressForm: TProgressForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
@@ -353,7 +352,7 @@ object ProgressForm: TProgressForm
       Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Generación:'
+      Caption = ' Generaci'#243'n:'
       TabOrder = 15
       object lblNumGeneracion: TLabel
         Left = 186

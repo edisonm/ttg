@@ -5,7 +5,6 @@ inherited MasterDetailReportQrp: TMasterDetailReportQrp
   Height = 476
   VertScrollBar.Position = 0
   Caption = 'MasterDetailReportQrp'
-  OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited qrpSingleReport: TQuickRep

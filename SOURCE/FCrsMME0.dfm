@@ -24,12 +24,12 @@ inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
       Top = 1
       Width = 111
       Height = 214
+      Style = lbOwnerDrawFixed
       Align = alClient
       ItemHeight = 18
       Items.Strings = (
         'No Asignar'
         'Asignar')
-      Style = lbOwnerDrawFixed
       TabOrder = 0
       OnClick = ListBoxClick
       OnDrawItem = ListBoxDrawItem
@@ -44,9 +44,5 @@ inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goColSizing]
     OnKeyUp = DrawGridKeyUp
     OnMouseUp = DrawGridMouseUp
-  end
-  inherited FormStorage: TFormStorage
-    Left = 120
-    Top = 88
   end
 end

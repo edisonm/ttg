@@ -1,8 +1,7 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 386
-  Top = 191
+  Left = 378
+  Top = 192
   Width = 510
-  OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited tb97Show: TToolBar

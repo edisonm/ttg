@@ -11,7 +11,6 @@ object ConfiguracionForm: TConfiguracionForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy

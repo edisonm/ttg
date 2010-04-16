@@ -1,6 +1,6 @@
 object LogisticForm: TLogisticForm
-  Left = 247
-  Top = 170
+  Left = 243
+  Top = 186
   Width = 442
   Height = 394
   Caption = 'Visor de mensajes'
@@ -11,7 +11,6 @@ object LogisticForm: TLogisticForm
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsStayOnTop
-  OldCreateOrder = False
   Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
@@ -69,6 +68,9 @@ object LogisticForm: TLogisticForm
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
+    DesignSize = (
+      434
+      30)
     object lblMsg: TLabel
       Left = 8
       Top = 16
