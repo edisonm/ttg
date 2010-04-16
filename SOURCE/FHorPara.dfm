@@ -46,7 +46,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Hint = 'Nivel|Seleccione el nivel'
       KeyField = 'CodNivel'
       ListField = 'AbrNivel'
-      ListSource = SourceDataModule.dsNivel
+      ListSource = SourceDataModule.DSNivel
       TabOrder = 0
     end
     object dlcEspecializacion: TDBLookupComboBox
@@ -57,7 +57,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Hint = 'Especializaci'#243'n|Seleccione la especializaci'#243'n'
       KeyField = 'CodEspecializacion'
       ListField = 'NomEspecializacion'
-      ListSource = SourceDataModule.dsEspecializacion
+      ListSource = SourceDataModule.DSEspecializacion
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
@@ -70,7 +70,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Hint = 'Paralelo|Seleccione el tipo de paralelo'
       KeyField = 'CodParaleloId'
       ListField = 'NomParaleloId'
-      ListSource = SourceDataModule.dsParaleloId
+      ListSource = SourceDataModule.DSParaleloId
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
@@ -105,7 +105,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     Width = 696
     Height = 357
   end
-  inherited DrawGrid: TRxDrawGrid
+  inherited DrawGrid: TDrawGrid
     Width = 696
     Height = 357
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]

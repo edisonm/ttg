@@ -39,7 +39,7 @@ inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
   inherited Panel1: TPanel
     Width = 532
   end
-  inherited DrawGrid: TRxDrawGrid
+  inherited DrawGrid: TDrawGrid
     Width = 532
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goColSizing]
     OnKeyUp = DrawGridKeyUp

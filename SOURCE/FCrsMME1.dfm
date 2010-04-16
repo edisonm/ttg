@@ -3,7 +3,7 @@ inherited CrossManyToManyEditor1Form: TCrossManyToManyEditor1Form
   Top = 218
   PixelsPerInch = 96
   TextHeight = 13
-  inherited DrawGrid: TRxDrawGrid
+  inherited DrawGrid: TDrawGrid
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing, goEditing]
     OnGetEditText = DrawGridGetEditText
     OnSetEditText = DrawGridSetEditText

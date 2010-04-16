@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FCrsMMEd, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, RXGrids,
+  FCrsMMEd, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids,
   ImgList, ComCtrls, ToolWin;
 
 type
@@ -183,7 +183,9 @@ begin
       for VRow := Selection.Top to Selection.Bottom do
       begin
         FRel[VCol - 1, VRow - 1] := False;
-        InvalidateCell(VCol, VRow);
+{$IFDEF FPC}
+	InvalidateCell(VCol, VRow);
+{$ENDIF}
       end;
     ListBox.ItemIndex := -1;
   end;
@@ -202,7 +204,9 @@ begin
       for VRow := Selection.Top to Selection.Bottom do
       begin
         FRel[VCol - 1, VRow - 1] := LstSelection[ListBox.ItemIndex];
-        InvalidateCell(VCol, VRow);
+{$IFDEF FPC}
+	InvalidateCell(VCol, VRow);
+{$ENDIF}
       end;
   end;
 end;

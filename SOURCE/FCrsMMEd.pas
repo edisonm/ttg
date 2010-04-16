@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, Grids, DBGrids, ExtCtrls, DB, Placemnt, Variants,
-  FEditor, ImgList, ComCtrls, ToolWin, RXGrids;
+  FEditor, ImgList, ComCtrls, ToolWin;
 
 type
   PIntegerArray = ^TIntegerArray;
@@ -21,7 +21,7 @@ type
   TGetRowNameNotifyEvent = procedure(Sender: TObject; ARow: Integer; var
     ARowName: string) of object;
   TCrossManyToManyEditorForm = class(TEditorForm)
-    DrawGrid: TRxDrawGrid;
+    DrawGrid: TDrawGrid;
     BtnOk: TToolButton;
     BtnCancel: TToolButton;
     procedure BtnOkClick(Sender: TObject);
@@ -300,7 +300,7 @@ var
   VColor: TColor;
   procedure DrawCellText;
   begin
-    with (Sender as TRxDrawGrid) do begin
+    with (Sender as TDrawGrid) do begin
       if ((ARow = Row) or (ACol = Col)) and (gdFixed in State) then
       begin
         VColor := Canvas.Font.Color;
@@ -336,13 +336,13 @@ var
     end;
   end;
 begin
-(*
+{$IFDEF FPC}
   if State = [gdSelected, gdFocused] then
   begin
     (Sender as TDrawGrid).InvalidateCell(ACol, 0);
     (Sender as TDrawGrid).InvalidateCell(0, ARow);
   end;
-*)
+{$ENDIF}
   if Assigned(FColDataSet) and Assigned(FRowDataSet) then
   begin
     GetValue;
@@ -376,10 +376,12 @@ procedure TCrossManyToManyEditorForm.DrawGridSelectCell(Sender: TObject; ACol,
   ARow: Integer; var CanSelect: Boolean);
 begin
   inherited;
-  with (Sender as TRxDrawGrid) do
+  with (Sender as TDrawGrid) do
   begin
+{$IFDEF FPC}
     if ACol <> Col then InvalidateCell(Col, 0);
     if ARow <> Row then InvalidateCell(0, Row);
+{$ENDIF}
   end;
   if Assigned(FSelDataSet) then
     CanSelect := FSel[ACol - 1, ARow - 1];

@@ -37,7 +37,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       Hint = 'Tipo de aula'
       KeyField = 'CodAulaTipo'
       ListField = 'AbrAulaTipo'
-      ListSource = SourceDataModule.dsAulaTipo
+      ListSource = SourceDataModule.DSAulaTipo
       TabOrder = 0
     end
     object cbVerAulaTipo: TComboBox
@@ -60,7 +60,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
     Width = 713
     Height = 328
   end
-  inherited DrawGrid: TRxDrawGrid
+  inherited DrawGrid: TDrawGrid
     Width = 713
     Height = 328
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
@@ -524,7 +524,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
         Fields = 'CodAulaTipo'
       end>
     MasterFields = 'CodAulaTipo'
-    MasterSource = SourceDataModule.dsAulaTipo
+    MasterSource = SourceDataModule.DSAulaTipo
     OnCalcFields = QuHorarioAulaTipoCalcFields
     Left = 84
     Top = 80

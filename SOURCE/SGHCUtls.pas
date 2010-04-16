@@ -26,7 +26,7 @@ procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
 implementation
 
 uses
-  SysUtils, RxGrids, DMaster, Consts, ArDBUtls, BDE;
+  SysUtils, DMaster, Consts, ArDBUtls, BDE;
 
 procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorForm;
   AColDataSet, ARowDataSet, ARelDataSet: TDataSet);

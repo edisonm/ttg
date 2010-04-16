@@ -61,7 +61,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
     Width = 766
     Height = 328
   end
-  inherited DrawGrid: TRxDrawGrid
+  inherited DrawGrid: TDrawGrid
     Width = 766
     Height = 328
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
