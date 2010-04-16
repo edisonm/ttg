@@ -10,8 +10,8 @@ uses
 
 type
   TMateriaForm = class(TSingleEditorForm)
-    btn97MateriaProhibicion: TToolButton;
-    procedure btn97MateriaProhibicionClick(Sender: TObject);
+    BtnMateriaProhibicion: TToolButton;
+    procedure BtnMateriaProhibicionClick(Sender: TObject);
   private
     procedure FormActivate(Sender: TObject);
     { Private declarations }
@@ -27,7 +27,7 @@ uses
   DMaster, FCrsMMER, FCrsMMEd, SGHCUtls, FConfig, DSource;
 {$R *.DFM}
 
-procedure TMateriaForm.btn97MateriaProhibicionClick(Sender: TObject);
+procedure TMateriaForm.BtnMateriaProhibicionClick(Sender: TObject);
 begin
   inherited;
   with SourceDataModule, TCrossManyToManyEditorRForm.Create(Self) do

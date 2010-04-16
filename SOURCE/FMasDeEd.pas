@@ -13,7 +13,7 @@ type
     DBGridDetail: TDBGrid;
     Splitter1: TSplitter;
     procedure DBGridEnter(Sender: TObject);
-    procedure btn97ShowClick(Sender: TObject);
+    procedure BtnShowClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,7 +35,7 @@ begin
   SLRecordNo.DataSource := (Sender as TCustomDBGrid).DataSource;
 end;
 
-procedure TMasterDetailEditorForm.btn97ShowClick(Sender: TObject);
+procedure TMasterDetailEditorForm.BtnShowClick(Sender: TObject);
 begin
   PreviewMasterDetailReport(DataSource.DataSet, DataSourceDetail.DataSet,
     '', '', '', SuperTitle, Caption, poPortrait, MainForm.PrepareReport);

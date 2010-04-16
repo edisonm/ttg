@@ -8,23 +8,23 @@ inherited HorarioForm: THorarioForm
   TextHeight = 13
   inherited tb97Show: TToolBar
     Width = 618
-    object btn97HorarioParalelo: TToolButton [2]
+    object BtnHorarioParalelo: TToolButton [2]
       Left = 46
       Top = 0
       Hint = 'Horario de paralelos|Horario de paralelos'
       ImageIndex = 2
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97HorarioParaleloClick
+      OnClick = BtnHorarioParaleloClick
     end
-    object btn97Profesor: TToolButton [3]
+    object BtnProfesor: TToolButton [3]
       Left = 69
       Top = 0
       Hint = 'Horario de Profesores|Horario de Profesores'
       ImageIndex = 3
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97HorarioProfesorClick
+      OnClick = BtnHorarioProfesorClick
     end
     inherited DBNavigator: TDBNavigator
       Left = 92
@@ -32,43 +32,43 @@ inherited HorarioForm: THorarioForm
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbPost, nbCancel]
       Hints.Strings = ()
     end
-    object btn97CruceProfesor: TToolButton
+    object BtnCruceProfesor: TToolButton
       Left = 246
       Top = 0
       Hint = 'Cruce de profesores|Cruce de profesores'
       ImageIndex = 4
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97CruceProfesorClick
+      OnClick = BtnCruceProfesorClick
     end
-    object btn97CruceMateria: TToolButton
+    object BtnCruceMateria: TToolButton
       Left = 269
       Top = 0
       Hint = 'Cruce de materias|Cruce de materias'
       ImageIndex = 5
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97CruceMateriaClick
+      OnClick = BtnCruceMateriaClick
     end
-    object btn97CruceAula: TToolButton
+    object BtnCruceAula: TToolButton
       Left = 292
       Top = 0
       Hint = 'Cruce de aulas|Cruce de aulas del mismo tipo'
       ImageIndex = 6
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97CruceAulaClick
+      OnClick = BtnCruceAulaClick
     end
-    object btn97MateriaProhibicionNoRespetada: TToolButton
+    object BtnMateriaProhibicionNoRespetada: TToolButton
       Left = 315
       Top = 0
       Hint = 'Prohibiciones de materia|Prohibiciones de materia no respetadas'
       ImageIndex = 7
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97MateriaProhibicionNoRespetadaClick
+      OnClick = BtnMateriaProhibicionNoRespetadaClick
     end
-    object btn97ProfesorProhibicionNoRespetada: TToolButton
+    object BtnProfesorProhibicionNoRespetada: TToolButton
       Left = 338
       Top = 0
       Hint = 
@@ -77,43 +77,43 @@ inherited HorarioForm: THorarioForm
       ImageIndex = 8
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97ProfesorProhibicionNoRespetadaClick
+      OnClick = BtnProfesorProhibicionNoRespetadaClick
     end
-    object btn97SeleccionarHorario: TToolButton
+    object BtnSeleccionarHorario: TToolButton
       Left = 361
       Top = 0
       Hint = 'Seleccionar horario|Seleccionar un horario de colegio'
       ImageIndex = 9
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97SeleccionarHorarioClick
+      OnClick = BtnSeleccionarHorarioClick
     end
-    object btn97MateriaCortadaDia: TToolButton
+    object BtnMateriaCortadaDia: TToolButton
       Left = 384
       Top = 0
       Hint = 'Materias cortadas por el d'#237'a|Materias cortadas por el d'#237'a'
       ImageIndex = 5
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97MateriaCortadaDiaClick
+      OnClick = BtnMateriaCortadaDiaClick
     end
-    object btn97MateriaCortadaHora: TToolButton
+    object BtnMateriaCortadaHora: TToolButton
       Left = 407
       Top = 0
       Hint = 'Materias cortadas por la hora|Materias cortadas por la hora'
       ImageIndex = 5
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97MateriaCortadaHoraClick
+      OnClick = BtnMateriaCortadaHoraClick
     end
-    object btn97HorarioAulaTipo: TToolButton
+    object BtnHorarioAulaTipo: TToolButton
       Left = 430
       Top = 0
       Hint = 'Horario por tipo de aulas|Horario por tipo de aulas'
       ImageIndex = 6
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97HorarioAulaTipoClick
+      OnClick = BtnHorarioAulaTipoClick
     end
   end
   inherited pnlStatus: TPanel

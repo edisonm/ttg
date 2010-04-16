@@ -12,7 +12,7 @@ type
     pnlStatus: TPanel;
     FormStorage: TFormStorage;
     tb97Show: TToolBar;
-    btn97Show: TToolButton;
+    BtnShow: TToolButton;
     Panel1: TPanel;
     ImageList: TImageList;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

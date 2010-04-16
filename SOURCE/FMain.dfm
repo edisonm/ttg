@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 368
-  Top = 179
+  Left = 202
+  Top = 177
   Width = 601
   Height = 392
   Caption = 'Horarios para Colegio 1.2.1'
@@ -47,6 +47,7 @@ object MainForm: TMainForm
     0000000000000000000000000000000000000000000000000000000000000000
     000000000000000000000000000000000000FFFF0000}
   Menu = MainMenu
+  OldCreateOrder = True
   Position = poScreenCenter
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate

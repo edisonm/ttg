@@ -8,26 +8,26 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
   TextHeight = 13
   inherited tb97Show: TToolBar
     Width = 713
-    object btn97Mostrar: TToolButton
+    object BtnMostrar: TToolButton
       Left = 69
       Top = 0
       Hint = 'Mostrar|Mostrar el horario'
       ImageIndex = 3
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97MostrarClick
+      OnClick = BtnMostrarClick
     end
-    object btn97Next: TToolButton
+    object BtnNext: TToolButton
       Left = 92
       Top = 0
       ImageIndex = 4
-      OnClick = btn97NextClick
+      OnClick = BtnNextClick
     end
-    object btn97Prior: TToolButton
+    object BtnPrior: TToolButton
       Left = 115
       Top = 0
       ImageIndex = 5
-      OnClick = btn97PriorClick
+      OnClick = BtnPriorClick
     end
     object dlcAulaTipo: TDBLookupComboBox
       Left = 138

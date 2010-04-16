@@ -14,7 +14,7 @@ type
     DataSourceList: TDataSource;
     DataSourceDetail: TDataSource;
     Splitter1: TSplitter;
-    procedure btn97ShowClick(Sender: TObject);
+    procedure BtnShowClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
@@ -33,7 +33,7 @@ uses
 
 {$R *.DFM}
 
-procedure TParaleloForm.btn97ShowClick(Sender: TObject);
+procedure TParaleloForm.BtnShowClick(Sender: TObject);
 begin
   PreviewSingleReport(SourceDataModule.TbParalelo, '', '', SuperTitle, Caption,
     poPortrait, MainForm.PrepareReport);

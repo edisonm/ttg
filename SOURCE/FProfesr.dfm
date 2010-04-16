@@ -8,23 +8,23 @@ inherited ProfesorForm: TProfesorForm
   TextHeight = 13
   inherited tb97Show: TToolBar
     Width = 702
-    object btn97ProfesorProhibicion: TToolButton [2]
+    object BtnProfesorProhibicion: TToolButton [2]
       Left = 46
       Top = 0
       Hint = 'Prohibiciones de profesor|Prohibiciones de profesor'
       ImageIndex = 2
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97ProfesorProhibicionClick
+      OnClick = BtnProfesorProhibicionClick
     end
-    object btn97Distributivo: TToolButton [3]
+    object BtnDistributivo: TToolButton [3]
       Left = 69
       Top = 0
       Hint = 'Distributivo|Ver distributivo del profesor'
       ImageIndex = 3
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97DistributivoClick
+      OnClick = BtnDistributivoClick
     end
     inherited DBNavigator: TDBNavigator
       Left = 92

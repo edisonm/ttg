@@ -12,9 +12,9 @@ type
     QuHorarioProfesor: TkbmMemTable;
     dlcProfesor: TDBLookupComboBox;
     cbVerProfesor: TComboBox;
-    btn97Mostrar: TToolButton;
-    btn97Next: TToolButton;
-    btn97Prior: TToolButton;
+    BtnMostrar: TToolButton;
+    BtnNext: TToolButton;
+    BtnPrior: TToolButton;
     QuHorarioProfesorCodNivel: TIntegerField;
     QuHorarioProfesorCodEspecializacion: TIntegerField;
     QuHorarioProfesorCodParaleloId: TIntegerField;
@@ -27,10 +27,10 @@ type
     QuHorarioProfesorAbrNivel: TStringField;
     QuHorarioProfesorAbrEspecializacion: TStringField;
     QuHorarioProfesorNomParaleloId: TStringField;
-    procedure btn97MostrarClick(Sender: TObject);
+    procedure BtnMostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure btn97PriorClick(Sender: TObject);
-    procedure btn97NextClick(Sender: TObject);
+    procedure BtnPriorClick(Sender: TObject);
+    procedure BtnNextClick(Sender: TObject);
     procedure QuHorarioProfesorCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
@@ -48,7 +48,7 @@ uses
   HorColCm, FConfig, DMaster, DSource;
 {$R *.DFM}
 
-procedure THorarioProfesorForm.btn97MostrarClick(Sender: TObject);
+procedure THorarioProfesorForm.BtnMostrarClick(Sender: TObject);
 var
   s: string;
 begin
@@ -77,23 +77,23 @@ begin
   LoadNames(MasterDataModule.StringsShowProfesor, cbVerProfesor.Items);
   cbVerProfesor.Text := cbVerProfesor.Items[0];
   dlcProfesor.KeyValue := SourceDataModule.TbProfesorCodProfesor.Value;
-  btn97MostrarClick(nil);
+  BtnMostrarClick(nil);
 end;
 
-procedure THorarioProfesorForm.btn97PriorClick(Sender: TObject);
+procedure THorarioProfesorForm.BtnPriorClick(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbProfesor.Prior;
   dlcProfesor.KeyValue := SourceDataModule.TbProfesorCodProfesor.Value;
-  btn97MostrarClick(nil);
+  BtnMostrarClick(nil);
 end;
 
-procedure THorarioProfesorForm.btn97NextClick(Sender: TObject);
+procedure THorarioProfesorForm.BtnNextClick(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbProfesor.Next;
   dlcProfesor.KeyValue := SourceDataModule.TbProfesorCodProfesor.Value;
-  btn97MostrarClick(nil);
+  BtnMostrarClick(nil);
 end;
 
 procedure THorarioProfesorForm.FillHorarioProfesor;

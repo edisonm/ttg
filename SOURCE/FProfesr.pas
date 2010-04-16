@@ -9,10 +9,10 @@ uses
 
 type
   TProfesorForm = class(TSingleEditorForm)
-    btn97ProfesorProhibicion: TToolButton;
-    btn97Distributivo: TToolButton;
-    procedure btn97ProfesorProhibicionClick(Sender: TObject);
-    procedure btn97DistributivoClick(Sender: TObject);
+    BtnProfesorProhibicion: TToolButton;
+    BtnDistributivo: TToolButton;
+    procedure BtnProfesorProhibicionClick(Sender: TObject);
+    procedure BtnDistributivoClick(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -38,7 +38,7 @@ uses
 
 {$R *.DFM}
 
-procedure TProfesorForm.btn97ProfesorProhibicionClick(Sender: TObject);
+procedure TProfesorForm.BtnProfesorProhibicionClick(Sender: TObject);
 begin
   inherited;
   with SourceDataModule, TCrossManyToManyEditorRForm.Create(Self) do
@@ -74,7 +74,7 @@ begin
   end;
 end;
 
-procedure TProfesorForm.btn97DistributivoClick(Sender: TObject);
+procedure TProfesorForm.BtnDistributivoClick(Sender: TObject);
 begin
   inherited;
   with SourceDataModule do
@@ -85,7 +85,7 @@ begin
     begin
       DisableControls;
       try
-        btn97Distributivo.Enabled := False;
+        BtnDistributivo.Enabled := False;
         IndexFieldNames := 'CodProfesor';
         MasterFields := 'CodProfesor';
         MasterSource := dsProfesor;
@@ -93,7 +93,7 @@ begin
         EnableControls;
       end;
       FFSingleEditor := TSingleEditorForm.Create(Self);
-      FFSingleEditor.btn97Find.Enabled := False;
+      FFSingleEditor.BtnFind.Enabled := False;
       Self.DataSource.OnDataChange := DataSourceDataChange;
       FLbCarga.Parent := FFSingleEditor.pnlStatus;
       FLbCarga.Top := 1;
@@ -115,8 +115,8 @@ end;
 
 procedure TProfesorForm.EdQuProfesorDistributivoDestroy(Sender: TObject);
 begin
-  if Assigned(btn97Distributivo) then
-    btn97Distributivo.Enabled := True;
+  if Assigned(BtnDistributivo) then
+    BtnDistributivo.Enabled := True;
   DataSource.OnDataChange := nil;
   FLbCarga.Parent := nil;
 end;

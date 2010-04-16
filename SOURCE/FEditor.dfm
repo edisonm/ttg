@@ -59,7 +59,7 @@ object EditorForm: TEditorForm
     Flat = True
     Images = ImageList
     TabOrder = 2
-    object btn97Show: TToolButton
+    object BtnShow: TToolButton
       Left = 0
       Top = 0
       Hint = 'Presentar|Presenta el contenido de la cuadr'#237'cula en un reporte'

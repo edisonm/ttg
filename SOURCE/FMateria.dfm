@@ -7,7 +7,7 @@ inherited MateriaForm: TMateriaForm
   TextHeight = 13
   inherited tb97Show: TToolBar
     Width = 594
-    object btn97MateriaProhibicion: TToolButton [2]
+    object BtnMateriaProhibicion: TToolButton [2]
       Left = 46
       Top = 0
       Hint = 
@@ -16,7 +16,7 @@ inherited MateriaForm: TMateriaForm
       ImageIndex = 2
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97MateriaProhibicionClick
+      OnClick = BtnMateriaProhibicionClick
     end
     inherited DBNavigator: TDBNavigator
       Left = 69

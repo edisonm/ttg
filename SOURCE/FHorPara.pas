@@ -10,14 +10,14 @@ uses
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)
     QuHorarioParalelo: TkbmMemTable;
-    btn97IntercambiarPeriodos: TToolButton;
+    BtnIntercambiarPeriodos: TToolButton;
     dlcNivel: TDBLookupComboBox;
     dlcEspecializacion: TDBLookupComboBox;
     dlcParaleloId: TDBLookupComboBox;
     cbVerParalelo: TComboBox;
-    btn97Mostrar: TToolButton;
-    btn97Prior: TToolButton;
-    btn97Next: TToolButton;
+    BtnMostrar: TToolButton;
+    BtnPrior: TToolButton;
+    BtnNext: TToolButton;
     QuHorarioParaleloCodMateria: TIntegerField;
     QuHorarioParaleloCodNivel: TIntegerField;
     QuHorarioParaleloCodEspecializacion: TIntegerField;
@@ -29,11 +29,11 @@ type
     QuHorarioParaleloApeNomProfesor: TStringField;
     QuHorarioParaleloNombre: TStringField;
     dsParalelo: TDataSource;
-    procedure btn97MostrarClick(Sender: TObject);
+    procedure BtnMostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure IntercambiarPeriodosClick(Sender: TObject);
-    procedure btn97PriorClick(Sender: TObject);
-    procedure btn97NextClick(Sender: TObject);
+    procedure BtnPriorClick(Sender: TObject);
+    procedure BtnNextClick(Sender: TObject);
     procedure QuHorarioParaleloCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
@@ -112,7 +112,7 @@ begin
   Result := dlcParaleloId.Text;
 end;
 
-procedure THorarioParaleloForm.btn97MostrarClick(Sender: TObject);
+procedure THorarioParaleloForm.BtnMostrarClick(Sender: TObject);
   procedure HorarioParalelo;
   var
     FParalelo: Variant;
@@ -143,7 +143,7 @@ procedure THorarioParaleloForm.btn97MostrarClick(Sender: TObject);
       ShowEditor(TbDia, TbHora, QuHorarioParalelo, TbPeriodo,
         'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora',
         'CodHora', 'Nombre');
-      btn97IntercambiarPeriodos.Enabled := True;
+      BtnIntercambiarPeriodos.Enabled := True;
     end;
   end;
 begin
@@ -165,7 +165,7 @@ begin
   dlcNivel.KeyValue := SourceDataModule.TbParaleloCodNivel.AsInteger;
   dlcEspecializacion.KeyValue := SourceDataModule.TbParaleloCodEspecializacion.AsInteger;
   dlcParaleloId.KeyValue := SourceDataModule.TbParaleloCodParaleloId.AsInteger;
-  btn97MostrarClick(nil);
+  BtnMostrarClick(nil);
 end;
 
 procedure THorarioParaleloForm.IntercambiarPeriodosClick(Sender: TObject);
@@ -177,28 +177,28 @@ begin
   begin
     MasterDataModule.IntercambiarPeriodos(CodHorario, CodNivel,
       CodEspecializacion, CodParaleloId, CodDia, CodHora, iCodDia, iCodHora);
-    btn97MostrarClick(nil);
+    BtnMostrarClick(nil);
   end;
 end;
 
-procedure THorarioParaleloForm.btn97PriorClick(Sender: TObject);
+procedure THorarioParaleloForm.BtnPriorClick(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbParalelo.Prior;
   dlcNivel.KeyValue := SourceDataModule.TbParaleloCodNivel.AsInteger;
   dlcEspecializacion.KeyValue := SourceDataModule.TbParaleloCodEspecializacion.AsInteger;
   dlcParaleloId.KeyValue := SourceDataModule.TbParaleloCodParaleloId.AsInteger;
-  btn97MostrarClick(nil);
+  BtnMostrarClick(nil);
 end;
 
-procedure THorarioParaleloForm.btn97NextClick(Sender: TObject);
+procedure THorarioParaleloForm.BtnNextClick(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbParalelo.Next;
   dlcNivel.KeyValue := SourceDataModule.TbParaleloCodNivel.AsInteger;
   dlcEspecializacion.KeyValue := SourceDataModule.TbParaleloCodEspecializacion.AsInteger;
   dlcParaleloId.KeyValue := SourceDataModule.TbParaleloCodParaleloId.AsInteger;
-  btn97MostrarClick(nil);
+  BtnMostrarClick(nil);
 end;
 
 procedure THorarioParaleloForm.FillHorarioParalelo;

@@ -10,13 +10,13 @@ uses
 
 type
   THorarioForm = class(TSingleEditorForm)
-    btn97MateriaProhibicionNoRespetada: TToolButton;
-    btn97ProfesorProhibicionNoRespetada: TToolButton;
-    btn97HorarioParalelo: TToolButton;
-    btn97Profesor: TToolButton;
-    btn97CruceProfesor: TToolButton;
-    btn97CruceMateria: TToolButton;
-    btn97CruceAula: TToolButton;
+    BtnMateriaProhibicionNoRespetada: TToolButton;
+    BtnProfesorProhibicionNoRespetada: TToolButton;
+    BtnHorarioParalelo: TToolButton;
+    BtnProfesor: TToolButton;
+    BtnCruceProfesor: TToolButton;
+    BtnCruceMateria: TToolButton;
+    BtnCruceAula: TToolButton;
     QuCruceAula: TkbmMemTable;
     QuCruceAulaCodDia: TIntegerField;
     QuCruceAulaCodHora: TIntegerField;
@@ -91,8 +91,8 @@ type
     QuHorarioDetalleProfesorProhibicionNomHora: TStringField;
     Panel2: TPanel;
     dbmInforme: TDBMemo;
-    btn97SeleccionarHorario: TToolButton;
-    btn97MateriaCortadaDia: TToolButton;
+    BtnSeleccionarHorario: TToolButton;
+    BtnMateriaCortadaDia: TToolButton;
     QuMateriaCortadaDia: TkbmMemTable;
     QuMateriaCortadaDiaCodNivel: TIntegerField;
     QuMateriaCortadaDiaCodEspecializacion: TIntegerField;
@@ -106,13 +106,13 @@ type
     QuMateriaCortadaDiaNomMateria: TStringField;
     QuMateriaCortadaDiaNomDia: TStringField;
     QuMateriaCortadaDiaNomHora: TStringField;
-    btn97MateriaCortadaHora: TToolButton;
+    BtnMateriaCortadaHora: TToolButton;
     QuMateriaCortadaHora: TkbmMemTable;
     QuMateriaCortadaHoraCodDia: TIntegerField;
     QuMateriaCortadaHoraCodHora: TIntegerField;
     QuMateriaCortadaHoraDetalle: TkbmMemTable;
     dsMateriaCortadaHora: TDataSource;
-    btn97HorarioAulaTipo: TToolButton;
+    BtnHorarioAulaTipo: TToolButton;
     QuCruceAulaDetalleCodDia: TIntegerField;
     QuCruceAulaDetalleCodHora: TIntegerField;
     QuCruceAulaDetalleCodAulaTipo: TIntegerField;
@@ -144,19 +144,19 @@ type
     QuMateriaCortadaHoraDetalleNomMateria: TStringField;
     QuMateriaCortadaHoraDetalleCodHora: TIntegerField;
     Splitter1: TSplitter;
-    procedure btn97HorarioParaleloClick(Sender: TObject);
-    procedure btn97CruceProfesorClick(Sender: TObject);
-    procedure btn97CruceMateriaClick(Sender: TObject);
-    procedure btn97HorarioProfesorClick(Sender: TObject);
-    procedure btn97MateriaProhibicionNoRespetadaClick(Sender: TObject);
-    procedure btn97ProfesorProhibicionNoRespetadaClick(Sender: TObject);
-    procedure btn97CruceAulaClick(Sender: TObject);
+    procedure BtnHorarioParaleloClick(Sender: TObject);
+    procedure BtnCruceProfesorClick(Sender: TObject);
+    procedure BtnCruceMateriaClick(Sender: TObject);
+    procedure BtnHorarioProfesorClick(Sender: TObject);
+    procedure BtnMateriaProhibicionNoRespetadaClick(Sender: TObject);
+    procedure BtnProfesorProhibicionNoRespetadaClick(Sender: TObject);
+    procedure BtnCruceAulaClick(Sender: TObject);
     procedure QuCruceProfesorAfterScroll(DataSet: TDataSet);
     procedure QuCruceMateriaAfterScroll(DataSet: TDataSet);
-    procedure btn97SeleccionarHorarioClick(Sender: TObject);
-    procedure btn97MateriaCortadaDiaClick(Sender: TObject);
-    procedure btn97MateriaCortadaHoraClick(Sender: TObject);
-    procedure btn97HorarioAulaTipoClick(Sender: TObject);
+    procedure BtnSeleccionarHorarioClick(Sender: TObject);
+    procedure BtnMateriaCortadaDiaClick(Sender: TObject);
+    procedure BtnMateriaCortadaHoraClick(Sender: TObject);
+    procedure BtnHorarioAulaTipoClick(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
@@ -190,7 +190,7 @@ uses
   FConfig, Printers, DSource;
 {$R *.DFM}
 
-procedure THorarioForm.btn97HorarioParaleloClick(Sender: TObject);
+procedure THorarioForm.BtnHorarioParaleloClick(Sender: TObject);
 var
   HorarioParaleloForm: THorarioParaleloForm;
 begin
@@ -350,7 +350,7 @@ begin
   end;
 end;
 
-procedure THorarioForm.btn97CruceProfesorClick(Sender: TObject);
+procedure THorarioForm.BtnCruceProfesorClick(Sender: TObject);
 var
   MasterDetailEditorForm: TMasterDetailEditorForm;
 begin
@@ -360,7 +360,7 @@ begin
     FillCruceProfesor;
     FillCruceProfesorDetalle;
     First;
-    btn97CruceProfesor.Enabled := false;
+    BtnCruceProfesor.Enabled := false;
     MasterDetailEditorForm := TMasterDetailEditorForm.Create(Self);
     MasterDetailEditorForm.Caption := 'Cruce de Profesores';
     MyMasterDetailShowEditor(MasterDetailEditorForm, QuCruceProfesor,
@@ -371,34 +371,34 @@ end;
 
 procedure THorarioForm.EdQuCruceProfesorDestroy(Sender: TObject);
 begin
-  if Assigned(btn97CruceProfesor) then btn97CruceProfesor.Enabled := true;
+  if Assigned(BtnCruceProfesor) then BtnCruceProfesor.Enabled := true;
   QuCruceProfesor.Close;
   QuCruceProfesorDetalle.Close;
 end;
 
 procedure THorarioForm.EdQuCruceAulaTipoDestroy(Sender: TObject);
 begin
-  if Assigned(btn97CruceAula) then btn97CruceAula.Enabled := true;
+  if Assigned(BtnCruceAula) then BtnCruceAula.Enabled := true;
   QuCruceAula.Close;
   QuCruceAulaDetalle.Close;
 end;
 
 procedure THorarioForm.EdQuCruceMateriaDestroy(Sender: TObject);
 begin
-  if Assigned(btn97CruceMateria) then btn97CruceMateria.Enabled := true;
+  if Assigned(BtnCruceMateria) then BtnCruceMateria.Enabled := true;
   QuCruceMateria.Close;
   QuCruceMateriaDetalle.Close;
 end;
 
 procedure THorarioForm.EdQuMateriaCortadaDiaDestroy(Sender: TObject);
 begin
-  if Assigned(btn97MateriaCortadaDia) then btn97MateriaCortadaDia.Enabled := true;
+  if Assigned(BtnMateriaCortadaDia) then BtnMateriaCortadaDia.Enabled := true;
   QuMateriaCortadaDia.Close;
 end;
 
 procedure THorarioForm.EdQuMateriaCortadaHoraDestroy(Sender: TObject);
 begin
-  if Assigned(btn97MateriaCortadaHora) then btn97MateriaCortadaHora.Enabled := true;
+  if Assigned(BtnMateriaCortadaHora) then BtnMateriaCortadaHora.Enabled := true;
   QuMateriaCortadaHora.Close;
   QuMateriaCortadaHoraDetalle.Close;
 end;
@@ -406,20 +406,20 @@ end;
 procedure THorarioForm.EdQuHorarioDetalleMateriaProhibicionDestroy(Sender:
   TObject);
 begin
-  if Assigned(btn97MateriaProhibicionNoRespetada) then
-    btn97MateriaProhibicionNoRespetada.Enabled := true;
+  if Assigned(BtnMateriaProhibicionNoRespetada) then
+    BtnMateriaProhibicionNoRespetada.Enabled := true;
   QuHorarioDetalleMateriaProhibicion.Close;
 end;
 
 procedure THorarioForm.EdQuHorarioDetalleProfesorProhibicionDestroy(Sender:
   TObject);
 begin
-  if Assigned(btn97ProfesorProhibicionNoRespetada) then
-    btn97ProfesorProhibicionNoRespetada.Enabled := true;
+  if Assigned(BtnProfesorProhibicionNoRespetada) then
+    BtnProfesorProhibicionNoRespetada.Enabled := true;
   QuHorarioDetalleProfesorProhibicion.Close;
 end;
 
-procedure THorarioForm.btn97HorarioProfesorClick(Sender: TObject);
+procedure THorarioForm.BtnHorarioProfesorClick(Sender: TObject);
 var
   HorarioProfesorForm: THorarioProfesorForm;
 begin
@@ -531,7 +531,7 @@ begin
   end;
 end;
 
-procedure THorarioForm.btn97CruceMateriaClick(Sender: TObject);
+procedure THorarioForm.BtnCruceMateriaClick(Sender: TObject);
 var
   MasterDetailEditorForm: TMasterDetailEditorForm;
 begin
@@ -539,7 +539,7 @@ begin
   with SourceDataModule, MasterDataModule, QuCruceMateria do
   begin
     FillCruceMateria;
-    btn97CruceMateria.Enabled := false;
+    BtnCruceMateria.Enabled := false;
     MasterDetailEditorForm := TMasterDetailEditorForm.Create(Self);
     MasterDetailEditorForm.Caption := 'Cruce de Materias';
     MyMasterDetailShowEditor(MasterDetailEditorForm, QuCruceMateria,
@@ -582,7 +582,7 @@ begin
   end;
 end;
 
-procedure THorarioForm.btn97MateriaProhibicionNoRespetadaClick(Sender: TObject);
+procedure THorarioForm.BtnMateriaProhibicionNoRespetadaClick(Sender: TObject);
 var
   FSingleEditor: TSingleEditorForm;
 begin
@@ -590,7 +590,7 @@ begin
   with SourceDataModule, QuHorarioDetalleMateriaProhibicion do
   begin
     FillHorarioDetalleMateriaProhibicion;
-    btn97MateriaProhibicionNoRespetada.Enabled := false;
+    BtnMateriaProhibicionNoRespetada.Enabled := false;
     FSingleEditor := TSingleEditorForm.Create(Self);
     FSingleEditor.Caption := Description[TbMateriaProhibicion] +
       ' No Respetadas';
@@ -647,7 +647,7 @@ begin
   end;
 end;
 
-procedure THorarioForm.btn97ProfesorProhibicionNoRespetadaClick(Sender:
+procedure THorarioForm.BtnProfesorProhibicionNoRespetadaClick(Sender:
   TObject);
 var
   FSingleEditor: TSingleEditorForm;
@@ -656,7 +656,7 @@ begin
   with SourceDataModule, QuHorarioDetalleProfesorProhibicion do
   begin
     FillHorarioDetalleProfesorProhibicion;
-    btn97ProfesorProhibicionNoRespetada.Enabled := false;
+    BtnProfesorProhibicionNoRespetada.Enabled := false;
     FSingleEditor := TSingleEditorForm.Create(Self);
     FSingleEditor.Caption := 'Prohibiciones de profesor no respetadas';
     MySingleShowEditor(FSingleEditor,
@@ -812,7 +812,7 @@ begin
   end;
 end;
 
-procedure THorarioForm.btn97CruceAulaClick(Sender: TObject);
+procedure THorarioForm.BtnCruceAulaClick(Sender: TObject);
 var
   MasterDetailEditorForm: TMasterDetailEditorForm;
 begin
@@ -823,7 +823,7 @@ begin
     FillCruceAulaDetalle;
     Last;
     First;
-    btn97CruceAula.Enabled := false;
+    BtnCruceAula.Enabled := false;
     MasterDetailEditorForm := TMasterDetailEditorForm.Create(Self);
     MasterDetailEditorForm.Caption := 'Cruce de aulas del mismo tipo';
     MyMasterDetailShowEditor(MasterDetailEditorForm, QuCruceAula,
@@ -848,7 +848,7 @@ begin
     [QuCruceMateriaCodMateria.Value]);
 end;
 
-procedure THorarioForm.btn97SeleccionarHorarioClick(Sender: TObject);
+procedure THorarioForm.BtnSeleccionarHorarioClick(Sender: TObject);
 begin
   inherited;
   ConfiguracionForm.lblHorarioSeleccionado.Caption :=
@@ -932,7 +932,7 @@ begin
   end;
 end;
 
-procedure THorarioForm.btn97MateriaCortadaDiaClick(Sender: TObject);
+procedure THorarioForm.BtnMateriaCortadaDiaClick(Sender: TObject);
 var
   SingleEditorForm: TSingleEditorForm;
 begin
@@ -940,7 +940,7 @@ begin
   with SourceDataModule, QuMateriaCortadaDia do
   begin
     FillMateriaCortadaDia;
-    btn97MateriaCortadaDia.Enabled := false;
+    BtnMateriaCortadaDia.Enabled := false;
     SingleEditorForm := TSingleEditorForm.Create(Self);
     SingleEditorForm.Caption := 'Materias cortadas por el día';
     MySingleShowEditor(SingleEditorForm, QuMateriaCortadaDia,
@@ -1063,7 +1063,7 @@ begin
   end;
 end;
 
-procedure THorarioForm.btn97MateriaCortadaHoraClick(Sender: TObject);
+procedure THorarioForm.BtnMateriaCortadaHoraClick(Sender: TObject);
 var
   MasterDetailEditorForm: TMasterDetailEditorForm;
 begin
@@ -1071,7 +1071,7 @@ begin
   with SourceDataModule, QuMateriaCortadaHora do
   begin
     FillMateriaCortadaHora;
-    btn97MateriaCortadaHora.Enabled := false;
+    BtnMateriaCortadaHora.Enabled := false;
     MasterDetailEditorForm := TMasterDetailEditorForm.Create(Self);
     MasterDetailEditorForm.Caption := 'Materias cortadas por la hora';
     MyMasterDetailShowEditor(MasterDetailEditorForm, QuMateriaCortadaHora,
@@ -1080,7 +1080,7 @@ begin
   end;
 end;
 
-procedure THorarioForm.btn97HorarioAulaTipoClick(Sender: TObject);
+procedure THorarioForm.BtnHorarioAulaTipoClick(Sender: TObject);
 var
   HorarioAulaTipoForm: THorarioAulaTipoForm;
 begin

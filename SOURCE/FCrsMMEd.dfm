@@ -45,23 +45,23 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
     Width = 648
     TabOrder = 3
     Visible = False
-    object btn97Ok: TToolButton
+    object BtnOk: TToolButton
       Left = 23
       Top = 0
       Hint = 'Aceptar|Aceptar'
       ImageIndex = 1
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97OkClick
+      OnClick = BtnOkClick
     end
-    object btn97Cancel: TToolButton
+    object BtnCancel: TToolButton
       Left = 46
       Top = 0
       Hint = 'Cancelar|Cancelar'
       ImageIndex = 2
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97CancelClick
+      OnClick = BtnCancelClick
     end
   end
   inherited pnlStatus: TPanel

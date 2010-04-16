@@ -14,10 +14,10 @@ type
     SLRecordNo: TDBStatusLabel;
     SLState: TDBStatusLabel;
     DBGrid: TDBGrid;
-    btn97Find: TToolButton;
+    BtnFind: TToolButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure btn97FindClick(Sender: TObject);
-    procedure btn97ShowClick(Sender: TObject);
+    procedure BtnFindClick(Sender: TObject);
+    procedure BtnShowClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBGridCheckButton(Sender: TObject; ACol: Integer;
       Field: TField; var Enabled: Boolean);
@@ -67,12 +67,12 @@ begin
   inherited;
 end;
 
-procedure TSingleEditorForm.btn97FindClick(Sender: TObject);
+procedure TSingleEditorForm.BtnFindClick(Sender: TObject);
 begin
   SearchInDBGrid(DBGrid);
 end;
 
-procedure TSingleEditorForm.btn97ShowClick(Sender: TObject);
+procedure TSingleEditorForm.BtnShowClick(Sender: TObject);
 begin
   PreviewSingleReport(DataSource.DataSet, '', '', SuperTitle, Caption,
     poPortrait, MainForm.PrepareReport);

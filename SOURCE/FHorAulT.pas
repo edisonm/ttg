@@ -12,9 +12,9 @@ type
     QuHorarioAulaTipo: TkbmMemTable;
     dlcAulaTipo: TDBLookupComboBox;
     cbVerAulaTipo: TComboBox;
-    btn97Mostrar: TToolButton;
-    btn97Next: TToolButton;
-    btn97Prior: TToolButton;
+    BtnMostrar: TToolButton;
+    BtnNext: TToolButton;
+    BtnPrior: TToolButton;
     QuHorarioAulaTipoCodMateria: TIntegerField;
     QuHorarioAulaTipoCodNivel: TIntegerField;
     QuHorarioAulaTipoCodEspecializacion: TIntegerField;
@@ -27,10 +27,10 @@ type
     QuHorarioAulaTipoNomParaleloId: TStringField;
     QuHorarioAulaTipoNombre: TStringField;
     QuHorarioAulaTipoCodAulaTipo: TAutoIncField;
-    procedure btn97MostrarClick(Sender: TObject);
+    procedure BtnMostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure btn97PriorClick(Sender: TObject);
-    procedure btn97NextClick(Sender: TObject);
+    procedure BtnPriorClick(Sender: TObject);
+    procedure BtnNextClick(Sender: TObject);
     procedure QuHorarioAulaTipoCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
@@ -82,7 +82,7 @@ begin
   end;
 end;
 
-procedure THorarioAulaTipoForm.btn97MostrarClick(Sender: TObject);
+procedure THorarioAulaTipoForm.BtnMostrarClick(Sender: TObject);
 var
   s: string;
 begin
@@ -109,23 +109,23 @@ begin
   cbVerAulaTipo.Text := cbVerAulaTipo.Items[0];
   SourceDataModule.TbAulaTipo.First;
   dlcAulaTipo.KeyValue := SourceDataModule.TbAulaTipoCodAulaTipo.Value;
-  btn97MostrarClick(nil);
+  BtnMostrarClick(nil);
 end;
 
-procedure THorarioAulaTipoForm.btn97PriorClick(Sender: TObject);
+procedure THorarioAulaTipoForm.BtnPriorClick(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbAulaTipo.Prior;
   dlcAulaTipo.KeyValue := SourceDataModule.TbAulaTipoCodAulaTipo.AsInteger;
-  btn97MostrarClick(nil);
+  BtnMostrarClick(nil);
 end;
 
-procedure THorarioAulaTipoForm.btn97NextClick(Sender: TObject);
+procedure THorarioAulaTipoForm.BtnNextClick(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbAulaTipo.Next;
   dlcAulaTipo.KeyValue := SourceDataModule.TbAulaTipoCodAulaTipo.Value;
-  btn97MostrarClick(nil);
+  BtnMostrarClick(nil);
 end;
 
 procedure THorarioAulaTipoForm.QuHorarioAulaTipoCalcFields(

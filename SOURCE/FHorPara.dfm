@@ -9,34 +9,34 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   inherited tb97Show: TToolBar
     Width = 696
     Visible = True
-    inherited btn97Ok: TToolButton
+    inherited BtnOk: TToolButton
       Enabled = False
       Visible = False
     end
-    inherited btn97Cancel: TToolButton
+    inherited BtnCancel: TToolButton
       Enabled = False
       Visible = False
     end
-    object btn97Mostrar: TToolButton
+    object BtnMostrar: TToolButton
       Left = 69
       Top = 0
       Hint = 'Mostrar|Mostrar el horario'
       ImageIndex = 3
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97MostrarClick
+      OnClick = BtnMostrarClick
     end
-    object btn97Prior: TToolButton
+    object BtnPrior: TToolButton
       Left = 92
       Top = 0
       ImageIndex = 4
-      OnClick = btn97PriorClick
+      OnClick = BtnPriorClick
     end
-    object btn97Next: TToolButton
+    object BtnNext: TToolButton
       Left = 115
       Top = 0
       ImageIndex = 5
-      OnClick = btn97NextClick
+      OnClick = BtnNextClick
     end
     object dlcNivel: TDBLookupComboBox
       Left = 138
@@ -87,7 +87,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       TabOrder = 3
       Text = 'cbVerParalelo'
     end
-    object btn97IntercambiarPeriodos: TToolButton
+    object BtnIntercambiarPeriodos: TToolButton
       Left = 662
       Top = 0
       Hint = 'Intercambiar per'#237'odos|Intercambiar per'#237'odos'

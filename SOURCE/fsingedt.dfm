@@ -6,17 +6,17 @@ inherited SingleEditorForm: TSingleEditorForm
   TextHeight = 13
   inherited tb97Show: TToolBar
     Width = 502
-    inherited btn97Show: TToolButton
-      OnClick = btn97ShowClick
+    inherited BtnShow: TToolButton
+      OnClick = BtnShowClick
     end
-    object btn97Find: TToolButton
+    object BtnFind: TToolButton
       Left = 23
       Top = 0
       Hint = 'Buscar|Buscar un campo espec'#237'fico'
       ImageIndex = 1
       ParentShowHint = False
       ShowHint = True
-      OnClick = btn97FindClick
+      OnClick = BtnFindClick
     end
     object DBNavigator: TDBNavigator
       Left = 46
