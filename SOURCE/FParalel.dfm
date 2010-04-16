@@ -5,7 +5,7 @@ inherited ParaleloForm: TParaleloForm
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
-  inherited tb97Show: TToolBar
+  inherited TlBShow: TToolBar
     inherited DBNavigator: TDBNavigator
       Hints.Strings = ()
     end
@@ -48,9 +48,9 @@ inherited ParaleloForm: TParaleloForm
     Active = True
     IniSection = '\Software\SGHC\SEParalelo'
     StoredProps.Strings = (
-      'tb97Show.DockedTo'
-      'tb97Show.DockPos'
-      'tb97Show.DockRow'
+      'TlBShow.DockedTo'
+      'TlBShow.DockPos'
+      'TlBShow.DockRow'
       'DBCheckListBox.Width')
   end
   inherited DataSource: TDataSource

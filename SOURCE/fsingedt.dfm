@@ -4,7 +4,7 @@ inherited SingleEditorForm: TSingleEditorForm
   Width = 510
   PixelsPerInch = 96
   TextHeight = 13
-  inherited tb97Show: TToolBar
+  inherited TlBShow: TToolBar
     Width = 502
     inherited BtnShow: TToolButton
       OnClick = BtnShowClick

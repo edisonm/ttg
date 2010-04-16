@@ -13,7 +13,7 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
     Cursor = crHSplit
     Align = alRight
   end
-  inherited tb97Show: TToolBar
+  inherited TlBShow: TToolBar
     Width = 617
   end
   inherited pnlStatus: TPanel

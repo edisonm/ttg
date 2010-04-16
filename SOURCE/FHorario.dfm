@@ -6,7 +6,7 @@ inherited HorarioForm: THorarioForm
   Caption = 'HorarioForm'
   PixelsPerInch = 96
   TextHeight = 13
-  inherited tb97Show: TToolBar
+  inherited TlBShow: TToolBar
     Width = 618
     object BtnHorarioParalelo: TToolButton [2]
       Left = 46
@@ -190,8 +190,8 @@ inherited HorarioForm: THorarioForm
     Active = True
     IniSection = '\Software\SGHC\SEHorario'
     StoredProps.Strings = (
-      'tb97Show.DockedTo'
-      'tb97Show.DockPos'
+      'TlBShow.DockedTo'
+      'TlBShow.DockPos'
       'Panel2.Width')
     Left = 88
     Top = 140

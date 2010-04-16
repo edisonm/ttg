@@ -11,7 +11,7 @@ type
   TEditorForm = class(TForm)
     pnlStatus: TPanel;
     FormStorage: TFormStorage;
-    tb97Show: TToolBar;
+    TlBShow: TToolBar;
     BtnShow: TToolButton;
     Panel1: TPanel;
     ImageList: TImageList;

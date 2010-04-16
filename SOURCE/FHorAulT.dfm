@@ -6,7 +6,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  inherited tb97Show: TToolBar
+  inherited TlBShow: TToolBar
     Width = 713
     object BtnMostrar: TToolButton
       Left = 69

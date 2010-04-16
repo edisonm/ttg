@@ -50,7 +50,7 @@ object EditorForm: TEditorForm
   OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
-  object tb97Show: TToolBar
+  object TlBShow: TToolBar
     Left = 0
     Top = 0
     Width = 479

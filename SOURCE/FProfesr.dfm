@@ -6,7 +6,7 @@ inherited ProfesorForm: TProfesorForm
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  inherited tb97Show: TToolBar
+  inherited TlBShow: TToolBar
     Width = 702
     object BtnProfesorProhibicion: TToolButton [2]
       Left = 46

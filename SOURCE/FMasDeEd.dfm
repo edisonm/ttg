@@ -3,7 +3,7 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
   Top = 234
   PixelsPerInch = 96
   TextHeight = 13
-  inherited tb97Show: TToolBar
+  inherited TlBShow: TToolBar
     inherited DBNavigator: TDBNavigator
       Hints.Strings = ()
     end
