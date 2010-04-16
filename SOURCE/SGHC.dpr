@@ -28,7 +28,7 @@ uses
   QSingRep in 'QSingRep.pas' {SingleReportQrp},
   QMaDeRep in 'QMaDeRep.pas' {MasterDetailReportQrp},
   FParalel in 'FParalel.pas' {ParaleloForm},
-  FSingEdt in 'fsingedt.pas' {SingleEditorForm},
+  FSingEdt in 'FSingEdt.pas' {SingleEditorForm},
   FHorario in 'FHorario.pas' {HorarioForm},
   About in 'About.pas',
   HorColCm in 'HorColCm.pas',

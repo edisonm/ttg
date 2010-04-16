@@ -868,7 +868,7 @@ inherited HorarioForm: THorarioForm
       end>
     VersioningMode = mtvmAllSinceCheckPoint
     MasterFields = 'CodAulaTipo;CodDia;CodHora'
-    MasterSource = dsCruceAula
+    MasterSource = DSCruceAula
     Left = 116
     Top = 168
     object QuCruceAulaDetalleCodHora: TIntegerField
@@ -936,7 +936,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object dsCruceAula: TDataSource
+  object DSCruceAula: TDataSource
     DataSet = QuCruceAula
     Left = 116
     Top = 140
@@ -1641,7 +1641,7 @@ inherited HorarioForm: THorarioForm
       end>
     VersioningMode = mtvmAllSinceCheckPoint
     MasterFields = 'CodDia;CodHora'
-    MasterSource = dsMateriaCortadaHora
+    MasterSource = DSMateriaCortadaHora
     Left = 88
     Top = 252
     object QuMateriaCortadaHoraDetalleCodNivel: TIntegerField
@@ -1753,7 +1753,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object dsMateriaCortadaHora: TDataSource
+  object DSMateriaCortadaHora: TDataSource
     DataSet = QuMateriaCortadaHora
     Left = 116
     Top = 252

@@ -88,7 +88,7 @@ begin
         BtnDistributivo.Enabled := False;
         IndexFieldNames := 'CodProfesor';
         MasterFields := 'CodProfesor';
-        MasterSource := dsProfesor;
+        MasterSource := DSProfesor;
       finally
         EnableControls;
       end;

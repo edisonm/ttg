@@ -175,12 +175,12 @@ var
   bBookmark: TBookmark;
   OldIndexFieldNames: string;
   VFields: TList;
-  dsDetail: TDataSource;
+  DSDetail: TDataSource;
 begin
   with ADetail do
   begin
     DisableControls;
-    dsDetail := MasterSource;
+    DSDetail := MasterSource;
     MasterSource := nil;
     try
       if not (Eof and Bof) then
@@ -224,7 +224,7 @@ begin
         end;
       end;
     finally
-      MasterSource := dsDetail;
+      MasterSource := DSDetail;
       EnableControls;
     end;
   end;
@@ -234,12 +234,12 @@ procedure CheckDetailRelation(AMaster: TKbmMemTable; ADetail: TDataSet;
   const AMasterFields, ADetailFields: string);
 var
   bBookmark: TBookmark;
-  dsMaster: TDataSource;
+  DSMaster: TDataSource;
 begin
   with AMaster do
   begin
     DisableControls;
-    dsMaster := MasterSource;
+    DSMaster := MasterSource;
     MasterSource := nil;
     try
       if not (Eof and Bof) then
@@ -262,7 +262,7 @@ begin
         end;
       end;
     finally
-      MasterSource := dsMaster;
+      MasterSource := DSMaster;
       EnableControls;
     end;
   end;

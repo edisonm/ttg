@@ -570,7 +570,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
         Fields = 'CodNivel;CodEspecializacion;CodParaleloId'
       end>
     MasterFields = 'CodNivel;CodEspecializacion;CodParaleloId'
-    MasterSource = dsParalelo
+    MasterSource = DSParalelo
     OnCalcFields = QuHorarioParaleloCalcFields
     Left = 60
     Top = 104
@@ -648,7 +648,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Calculated = True
     end
   end
-  object dsParalelo: TDataSource
+  object DSParalelo: TDataSource
     DataSet = SourceDataModule.TbParalelo
     Left = 88
     Top = 104

@@ -34,7 +34,7 @@ type
     QuCruceAulaDetalleAbrNivel: TStringField;
     QuCruceAulaDetalleAbrEspecializacion: TStringField;
     QuCruceAulaDetalleNomParaleloId: TStringField;
-    dsCruceAula: TDataSource;
+    DSCruceAula: TDataSource;
     QuCruceProfesorDetalle: TkbmMemTable;
     QuCruceProfesorDetalleCodProfesor: TIntegerField;
     QuCruceProfesorDetalleCodDia: TIntegerField;
@@ -111,7 +111,7 @@ type
     QuMateriaCortadaHoraCodDia: TIntegerField;
     QuMateriaCortadaHoraCodHora: TIntegerField;
     QuMateriaCortadaHoraDetalle: TkbmMemTable;
-    dsMateriaCortadaHora: TDataSource;
+    DSMateriaCortadaHora: TDataSource;
     BtnHorarioAulaTipo: TToolButton;
     QuCruceAulaDetalleCodDia: TIntegerField;
     QuCruceAulaDetalleCodHora: TIntegerField;

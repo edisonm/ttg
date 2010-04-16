@@ -1188,7 +1188,7 @@ begin
       TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
       TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
       TbDistributivo.MasterFields := TbDistributivo.IndexFieldNames;
-      TbDistributivo.MasterSource := dsHorarioDetalle;
+      TbDistributivo.MasterSource := DSHorarioDetalle;
       TbDistributivo.First;
       try
         if TbHorarioDetalle.Locate('CodHorario', CodHorarioSeleccionado, []) then
@@ -1362,7 +1362,7 @@ begin
       '' {tDescription(TbMateriaProhibicion)}, poPortrait,
       PrepareReportProhibicion);
   finally
-    SourceDataModule.TbMateriaProhibicion.MasterSource := SourceDataModule.dsMateria;
+    SourceDataModule.TbMateriaProhibicion.MasterSource := SourceDataModule.DSMateria;
   end;
 end;
 

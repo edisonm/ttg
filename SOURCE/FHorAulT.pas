@@ -57,7 +57,7 @@ begin
     begin
       TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
       TbDistributivo.MasterFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
-      TbDistributivo.MasterSource := dsHorarioDetalle;
+      TbDistributivo.MasterSource := DSHorarioDetalle;
       try
         QuHorarioAulaTipo.EmptyTable;
         while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do

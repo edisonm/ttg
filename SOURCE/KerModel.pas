@@ -3294,7 +3294,7 @@ begin
     TbHorario.Locate('CodHorario', CodHorario, []);
     IndexFieldNames := 'CodHorario';
     MasterFields := 'CodHorario';
-    MasterSource := dsHorario;
+    MasterSource := DSHorario;
     try
       FieldNivel := FindField('CodNivel') as TIntegerField;
       FieldParaleloId := FindField('CodParaleloId') as TIntegerField;

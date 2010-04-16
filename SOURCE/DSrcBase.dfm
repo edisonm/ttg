@@ -43,7 +43,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
   end
-  object dsAulaTipo: TDataSource
+  object DSAulaTipo: TDataSource
     DataSet = TbAulaTipo
     Left = 56
     Top = 40
@@ -87,7 +87,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 10
     end
   end
-  object dsEspecializacion: TDataSource
+  object DSEspecializacion: TDataSource
     DataSet = TbEspecializacion
     Left = 152
     Top = 52
@@ -120,7 +120,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 10
     end
   end
-  object dsDia: TDataSource
+  object DSDia: TDataSource
     DataSet = TbDia
     Left = 248
     Top = 40
@@ -153,7 +153,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 20
     end
   end
-  object dsMateria: TDataSource
+  object DSMateria: TDataSource
     DataSet = TbMateria
     Left = 344
     Top = 52
@@ -196,7 +196,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 5
     end
   end
-  object dsNivel: TDataSource
+  object DSNivel: TDataSource
     DataSet = TbNivel
     Left = 440
     Top = 40
@@ -240,7 +240,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 21
     end
   end
-  object dsHora: TDataSource
+  object DSHora: TDataSource
     DataSet = TbHora
     Left = 56
     Top = 136
@@ -284,7 +284,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       FieldName = 'Informe'
     end
   end
-  object dsHorario: TDataSource
+  object DSHorario: TDataSource
     DataSet = TbHorario
     Left = 152
     Top = 148
@@ -320,7 +320,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
   end
-  object dsCurso: TDataSource
+  object DSCurso: TDataSource
     DataSet = TbCurso
     Left = 248
     Top = 136
@@ -353,7 +353,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 5
     end
   end
-  object dsParaleloId: TDataSource
+  object DSParaleloId: TDataSource
     DataSet = TbParaleloId
     Left = 344
     Top = 148
@@ -397,7 +397,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
   end
-  object dsMateriaProhibicionTipo: TDataSource
+  object DSMateriaProhibicionTipo: TDataSource
     DataSet = TbMateriaProhibicionTipo
     Left = 440
     Top = 136
@@ -433,7 +433,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
   end
-  object dsPeriodo: TDataSource
+  object DSPeriodo: TDataSource
     DataSet = TbPeriodo
     Left = 56
     Top = 232
@@ -474,7 +474,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
   end
-  object dsParalelo: TDataSource
+  object DSParalelo: TDataSource
     DataSet = TbParalelo
     Left = 152
     Top = 244
@@ -524,7 +524,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 15
     end
   end
-  object dsProfesor: TDataSource
+  object DSProfesor: TDataSource
     DataSet = TbProfesor
     Left = 248
     Top = 232
@@ -573,7 +573,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
   end
-  object dsMateriaProhibicion: TDataSource
+  object DSMateriaProhibicion: TDataSource
     DataSet = TbMateriaProhibicion
     Left = 344
     Top = 244
@@ -643,7 +643,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 40
     end
   end
-  object dsDistributivo: TDataSource
+  object DSDistributivo: TDataSource
     DataSet = TbDistributivo
     Left = 440
     Top = 232
@@ -721,7 +721,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
   end
-  object dsHorarioDetalle: TDataSource
+  object DSHorarioDetalle: TDataSource
     DataSet = TbHorarioDetalle
     Left = 56
     Top = 328
@@ -764,7 +764,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
   end
-  object dsProfesorProhibicionTipo: TDataSource
+  object DSProfesorProhibicionTipo: TDataSource
     DataSet = TbProfesorProhibicionTipo
     Left = 152
     Top = 340
@@ -813,7 +813,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
   end
-  object dsProfesorProhibicion: TDataSource
+  object DSProfesorProhibicion: TDataSource
     DataSet = TbProfesorProhibicion
     Left = 248
     Top = 328

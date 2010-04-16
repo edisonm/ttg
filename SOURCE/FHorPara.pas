@@ -28,7 +28,7 @@ type
     QuHorarioParaleloNomMateria: TStringField;
     QuHorarioParaleloApeNomProfesor: TStringField;
     QuHorarioParaleloNombre: TStringField;
-    dsParalelo: TDataSource;
+    DSParalelo: TDataSource;
     procedure BtnMostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure IntercambiarPeriodosClick(Sender: TObject);
