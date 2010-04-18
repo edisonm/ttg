@@ -5,19 +5,23 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
   StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls, Placemnt, DBIndex,
-  ComCtrls, RXCtrls, FEditor, ImgList, ToolWin, kbmMemTable, ActnList;
+  ComCtrls, FEditor, ImgList, ToolWin, kbmMemTable, ActnList;
 
 type
-  TSingleEditorForm = class(TEditorForm)
+
+TSingleEditorForm = class(TEditorForm)
     DBNavigator: TDBNavigator;
     DataSource: TDataSource;
     SLRecordNo: TLabel;
     SLState: TLabel;
     DBGrid: TDBGrid;
     BtnFind: TToolButton;
+    ActionList: TActionList;
+    ActShow: TAction;
+    ActFind: TAction;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure BtnFindClick(Sender: TObject);
-    procedure BtnShowClick(Sender: TObject);
+    procedure ActFindExecute(Sender: TObject);
+    procedure ActShowExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBGridCheckButton(Sender: TObject; ACol: Integer;
       Field: TField; var Enabled: Boolean);
@@ -28,12 +32,14 @@ type
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
   private
     { Private declarations }
-    FSuperTitle: string;
-  protected
-    property SuperTitle: string read FSuperTitle;
+    procedure SetDataSet(ADataSet: TDataSet);
   public
     { Public declarations }
-    procedure ShowEditor(ADataSet: TDataSet; const ASuperTitle: string);
+    property DataSet: TDataSet write SetDataSet;
+    class function ToggleSingleEditor(var AForm;
+                                      AConfigStrings: TStrings;
+                                      AAction: TAction;
+                                      ADataSet: TDataSet): Boolean;
   end;
 
 implementation
@@ -42,36 +48,34 @@ uses
   HorColCm, QSingRep, Printers, FMain, DMaster;
 {$R *.DFM}
 
-procedure TSingleEditorForm.ShowEditor(ADataSet: TDataSet; const ASuperTitle:
-  string);
+class function TSingleEditorForm.ToggleSingleEditor(var AForm;
+                                                    AConfigStrings: TStrings;
+                                                    AAction: TAction;
+                                                    ADataSet: TDataSet): Boolean;
 begin
-  with DataSource do
-  try
-    DataSet := ADataSet;
-    FSuperTitle := ASuperTitle;
-  except
-    Close;
-    raise;
-  end;
+  Result := ToggleEditor(AForm, AConfigStrings, AAction);
+  if Result then
+    TSingleEditorForm(AForm).DataSet := ADataSet;
+end;
+
+procedure TSingleEditorForm.SetDataSet(ADataSet: TDataSet);
+begin
+  DataSource.DataSet := ADataSet;
 end;
 
 procedure TSingleEditorForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  with DataSource do
-  begin
-    //if Assigned(DataSet) then DataSet.Close;
-    DataSet := nil;
-  end;
+  DataSource.DataSet := nil;
   inherited;
 end;
 
-procedure TSingleEditorForm.BtnFindClick(Sender: TObject);
+procedure TSingleEditorForm.ActFindExecute(Sender: TObject);
 begin
   SearchInDBGrid(DBGrid);
 end;
 
-procedure TSingleEditorForm.BtnShowClick(Sender: TObject);
+procedure TSingleEditorForm.ActShowExecute(Sender: TObject);
 begin
   PreviewSingleReport(DataSource.DataSet, '', '', SuperTitle, Caption,
     poPortrait, MainForm.PrepareReport);
@@ -126,7 +130,8 @@ procedure TSingleEditorForm.DataSourceStateChange(Sender: TObject);
 begin
   inherited;
   if assigned(DataSource.DataSet) then
-    SLState.Caption := DataSource.DataSet.Name + ':' + TextState[DataSource.State];
+    SLState.Caption := DataSource.DataSet.Name + ':'
+      + TextState[DataSource.State];
 end;
 
 procedure TSingleEditorForm.DataSourceDataChange(Sender: TObject;

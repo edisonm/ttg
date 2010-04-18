@@ -36,12 +36,6 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
       TitleFont.Style = []
     end
   end
-  inherited FormStorage: TFormStorage
-    StoredProps.Strings = (
-      'DBGridDetail.Height')
-    Left = 92
-    Top = 116
-  end
   inherited DataSource: TDataSource
     Left = 120
   end

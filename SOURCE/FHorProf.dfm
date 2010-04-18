@@ -40,6 +40,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       ListField = 'ApeNomProfesor'
       ListSource = SourceDataModule.DSProfesor
       TabOrder = 0
+      OnCloseUp = BtnMostrarClick
     end
     object cbVerProfesor: TComboBox
       Left = 307
@@ -51,6 +52,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
+      OnChange = BtnMostrarClick
     end
   end
   inherited pnlStatus: TPanel
@@ -65,10 +67,6 @@ inherited HorarioProfesorForm: THorarioProfesorForm
     Width = 766
     Height = 328
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
-  end
-  inherited FormStorage: TFormStorage
-    Active = True
-    IniSection = '\Software\SGHC\MMEd1HorarioProfesor'
   end
   inherited ImageList: TImageList
     Bitmap = {

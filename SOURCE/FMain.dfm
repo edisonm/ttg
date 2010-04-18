@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 202
-  Top = 177
+  Left = 217
+  Top = 124
   Width = 601
   Height = 392
   Caption = 'Horarios para Colegio 1.2.1'
@@ -47,7 +47,7 @@ object MainForm: TMainForm
     0000000000000000000000000000000000000000000000000000000000000000
     000000000000000000000000000000000000FFFF0000}
   Menu = MainMenu
-  OldCreateOrder = True
+  OldCreateOrder = False
   Position = poScreenCenter
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -116,28 +116,28 @@ object MainForm: TMainForm
       object SINew: TToolButton
         Left = 0
         Top = 0
-        Action = actNew
+        Action = ActNew
         ParentShowHint = False
         ShowHint = True
       end
       object SIOpen: TToolButton
         Left = 23
         Top = 0
-        Action = actOpen
+        Action = ActOpen
         ParentShowHint = False
         ShowHint = True
       end
       object SISave: TToolButton
         Left = 46
         Top = 0
-        Action = actSave
+        Action = ActSave
         ParentShowHint = False
         ShowHint = True
       end
       object SIPasswd: TToolButton
         Left = 69
         Top = 0
-        Action = actPasswd
+        Action = ActPasswd
         ParentShowHint = False
         ShowHint = True
       end
@@ -154,70 +154,70 @@ object MainForm: TMainForm
       object SIDia: TToolButton
         Left = 100
         Top = 0
-        Action = actDia
+        Action = ActDia
         ParentShowHint = False
         ShowHint = True
       end
       object SIHora: TToolButton
         Left = 123
         Top = 0
-        Action = actHora
+        Action = ActHora
         ParentShowHint = False
         ShowHint = True
       end
       object SIPeriodo: TToolButton
         Left = 146
         Top = 0
-        Action = actPeriodo
+        Action = ActPeriodo
         ParentShowHint = False
         ShowHint = True
       end
       object SINivel: TToolButton
         Left = 169
         Top = 0
-        Action = actNivel
+        Action = ActNivel
         ParentShowHint = False
         ShowHint = True
       end
       object SIEspecializacion: TToolButton
         Left = 192
         Top = 0
-        Action = actEspecializacion
+        Action = ActEspecializacion
         ParentShowHint = False
         ShowHint = True
       end
       object SIParaleloId: TToolButton
         Left = 215
         Top = 0
-        Action = actParaleloId
+        Action = ActParaleloId
         ParentShowHint = False
         ShowHint = True
       end
       object SIParalelo: TToolButton
         Left = 238
         Top = 0
-        Action = actParalelo
+        Action = ActParalelo
         ParentShowHint = False
         ShowHint = True
       end
       object SIMateria: TToolButton
         Left = 261
         Top = 0
-        Action = actMateria
+        Action = ActMateria
         ParentShowHint = False
         ShowHint = True
       end
       object SIAulaTipo: TToolButton
         Left = 284
         Top = 0
-        Action = actAulaTipo
+        Action = ActAulaTipo
         ParentShowHint = False
         ShowHint = True
       end
       object SIProfesor: TToolButton
         Left = 307
         Top = 0
-        Action = actProfesor
+        Action = ActProfesor
         ParentShowHint = False
         ShowHint = True
       end
@@ -234,14 +234,14 @@ object MainForm: TMainForm
       object SIConfig: TToolButton
         Left = 338
         Top = 0
-        Action = actConfigurar
+        Action = ActConfigurar
         ParentShowHint = False
         ShowHint = True
       end
       object SIFindMejor: TToolButton
         Left = 361
         Top = 0
-        Action = actElaborarHorario
+        Action = ActElaborarHorario
         ParentShowHint = False
         ShowHint = True
       end
@@ -258,7 +258,7 @@ object MainForm: TMainForm
       object SIHorario: TToolButton
         Left = 392
         Top = 0
-        Action = actHorario
+        Action = ActHorario
         ParentShowHint = False
         ShowHint = True
       end
@@ -275,14 +275,14 @@ object MainForm: TMainForm
       object SIContent: TToolButton
         Left = 423
         Top = 0
-        Action = actContents
+        Action = ActContents
         ParentShowHint = False
         ShowHint = True
       end
       object SIIndex: TToolButton
         Left = 446
         Top = 0
-        Action = actIndex
+        Action = ActIndex
         ParentShowHint = False
         ShowHint = True
       end
@@ -290,20 +290,20 @@ object MainForm: TMainForm
   end
   object MainMenu: TMainMenu
     Images = ImageList
-    Left = 186
+    Left = 102
     Top = 72
     object MIFile: TMenuItem
       Caption = '&Archivo'
       HelpContext = 30
       Hint = 'Archivo|Utilidades de la base de datos'
       object MINew: TMenuItem
-        Action = actNew
+        Action = ActNew
       end
       object MIOpen: TMenuItem
-        Action = actOpen
+        Action = ActOpen
       end
       object MISave: TMenuItem
-        Action = actSave
+        Action = ActSave
       end
       object MIReopen: TMenuItem
         Caption = 'Volver a abrir'
@@ -311,16 +311,16 @@ object MainForm: TMainForm
         Hint = 'Volver a abrir|Volver a abrir un colegio'
       end
       object MIPasswd: TMenuItem
-        Action = actPasswd
+        Action = ActPasswd
       end
       object MIChangePasswd: TMenuItem
-        Action = actChangePasswd
+        Action = ActChangePasswd
       end
       object N1: TMenuItem
         Caption = '-'
       end
       object MIExit: TMenuItem
-        Action = actExit
+        Action = ActExit
       end
     end
     object MIData: TMenuItem
@@ -328,46 +328,46 @@ object MainForm: TMainForm
       HelpContext = 40
       Hint = 'Datos|Ingreso de datos'
       object MIDia: TMenuItem
-        Action = actDia
+        Action = ActDia
       end
       object MIHora: TMenuItem
-        Action = actHora
+        Action = ActHora
       end
       object MIPeriodo: TMenuItem
-        Action = actPeriodo
+        Action = ActPeriodo
         ShortCut = 49232
       end
       object N2: TMenuItem
         Caption = '-'
       end
       object MINivel: TMenuItem
-        Action = actNivel
+        Action = ActNivel
       end
       object MIEspecializacion: TMenuItem
-        Action = actEspecializacion
+        Action = ActEspecializacion
       end
       object MIParaleloId: TMenuItem
-        Action = actParaleloId
+        Action = ActParaleloId
         ShortCut = 16457
       end
       object MIParalelo: TMenuItem
-        Action = actParalelo
+        Action = ActParalelo
         ShortCut = 49234
       end
       object N5: TMenuItem
         Caption = '-'
       end
       object MIMateria: TMenuItem
-        Action = actMateria
+        Action = ActMateria
       end
       object MIAulaTipo: TMenuItem
-        Action = actAulaTipo
+        Action = ActAulaTipo
       end
       object N6: TMenuItem
         Caption = '-'
       end
       object MIProfesor: TMenuItem
-        Action = actProfesor
+        Action = ActProfesor
       end
     end
     object MITool: TMenuItem
@@ -375,17 +375,17 @@ object MainForm: TMainForm
       HelpContext = 50
       Hint = 'Herramientas|Herramientas que permiten elaborar un horario'
       object MIConfig: TMenuItem
-        Action = actConfigurar
+        Action = ActConfigurar
       end
       object MICheckFeasibility: TMenuItem
-        Action = actChequearFactibilidad
+        Action = ActChequearFactibilidad
       end
       object MIElaborarHorario: TMenuItem
-        Action = actElaborarHorario
+        Action = ActElaborarHorario
         Hint = 'Elaborar horario|Elaborar horario'
       end
       object MIMejorarHorario: TMenuItem
-        Action = actMejorarHorario
+        Action = ActMejorarHorario
       end
     end
     object MIView: TMenuItem
@@ -393,35 +393,35 @@ object MainForm: TMainForm
       HelpContext = 60
       Hint = 'Ver|Presentaci'#243'n de resultados'
       object MIHorario: TMenuItem
-        Action = actHorario
+        Action = ActHorario
         ShortCut = 49224
       end
       object N7: TMenuItem
         Caption = '-'
       end
       object MIPresentarProfesorHorario: TMenuItem
-        Action = actPresentarProfesorHorario
+        Action = ActPresentarProfesorHorario
       end
       object MIPresentarParaleloHorario: TMenuItem
-        Action = actPresentarParaleloHorario
+        Action = ActPresentarParaleloHorario
       end
       object N8: TMenuItem
         Caption = '-'
       end
       object MIPresentarProfesorProhibicion: TMenuItem
-        Action = actPresentarProfesorProhibicion
+        Action = ActPresentarProfesorProhibicion
       end
       object MIPresentarMateriaProhibicion: TMenuItem
-        Action = actPresentarMateriaProhibicion
+        Action = ActPresentarMateriaProhibicion
       end
       object MIPresentarDistributivoMateria: TMenuItem
-        Action = actPresentarDistributivoMateria
+        Action = ActPresentarDistributivoMateria
       end
       object MIPresentarDistributivoProfesor: TMenuItem
-        Action = actPresentarDistributivoProfesor
+        Action = ActPresentarDistributivoProfesor
       end
       object ExportarelhorarioaExcel1: TMenuItem
-        Action = actExportarCSV
+        Action = ActExportarCSV
       end
       object N4: TMenuItem
         Caption = '-'
@@ -452,37 +452,25 @@ object MainForm: TMainForm
       HelpContext = 70
       Hint = 'Ayuda|Temas de Ayuda en l'#237'nea'
       object MIContent: TMenuItem
-        Action = actContents
+        Action = ActContents
       end
       object MIIndex: TMenuItem
-        Action = actIndex
+        Action = ActIndex
       end
       object MIRegistrationInfo: TMenuItem
-        Action = actRegistrationInfo
+        Action = ActRegistrationInfo
       end
       object N3: TMenuItem
         Caption = '-'
       end
       object MIAbout: TMenuItem
-        Action = actAbout
+        Action = ActAbout
       end
     end
   end
   object SaveDialog: TSaveDialog
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 130
-    Top = 72
-  end
-  object FormStorage: TFormStorage
-    Active = False
-    IniSection = '\Software\SGHC\FMain'
-    UseRegistry = True
-    StoredProps.Strings = (
-      'SaveDialog.FileName'
-      'SaveDialogCSV.FileName'
-      'OpenDialog.FileName')
-    StoredValues = <>
-    Left = 102
     Top = 72
   end
   object OpenDialog: TOpenDialog
@@ -493,10 +481,9 @@ object MainForm: TMainForm
     Top = 72
   end
   object MRUManager: TMRUManager
-    IniStorage = FormStorage
     RecentMenu = MIReopen
     OnClick = MRUManagerClick
-    Left = 214
+    Left = 186
     Top = 72
   end
   object ImageList: TImageList
@@ -1702,131 +1689,131 @@ object MainForm: TMainForm
     Images = ImageList
     Left = 18
     Top = 72
-    object actContents: TAction
+    object ActContents: TAction
       Category = 'Help'
       Caption = 'Contenido'
       HelpContext = 350
       Hint = 'Contenido|Contenido de la Ayuda'
       ImageIndex = 24
-      OnExecute = actContentsExecute
+      OnExecute = ActContentsExecute
     end
-    object actIndex: TAction
+    object ActIndex: TAction
       Category = 'Help'
       Caption = 'Indice'
       HelpContext = 360
       Hint = 'Indice|Indice de la Ayuda'
       ImageIndex = 25
-      OnExecute = actIndexExecute
+      OnExecute = ActIndexExecute
     end
-    object actHorario: TAction
+    object ActHorario: TAction
       Category = 'View'
       Caption = 'Horarios'
       HelpContext = 280
       Hint = 'Horarios|Ver los horarios elaborados'
       ImageIndex = 20
       ShortCut = 49234
-      OnExecute = actHorarioExecute
+      OnExecute = ActHorarioExecute
     end
-    object actPresentarProfesorHorario: TAction
+    object ActPresentarProfesorHorario: TAction
       Category = 'View'
       Caption = 'Presentar los horarios por profesor'
       HelpContext = 290
       Hint = 
         'Presentar los horarios por profesor|Presentar los horarios por p' +
         'rofesor'
-      OnExecute = actPresentarProfesorHorarioExecute
+      OnExecute = ActPresentarProfesorHorarioExecute
     end
-    object actAbout: TAction
+    object ActAbout: TAction
       Category = 'Help'
       Caption = 'Acerca de...'
       HelpContext = 370
       Hint = 'Acerca de|Informaci'#243'n referente a este programa'
-      OnExecute = actAboutExecute
+      OnExecute = ActAboutExecute
     end
-    object actRegistrationInfo: TAction
+    object ActRegistrationInfo: TAction
       Category = 'Help'
       Caption = 'Informaci'#243'n de registro'
-      OnExecute = actRegistrationInfoExecute
+      OnExecute = ActRegistrationInfoExecute
     end
-    object actPresentarParaleloHorario: TAction
+    object ActPresentarParaleloHorario: TAction
       Category = 'View'
       Caption = 'Presentar los horarios por paralelo'
       HelpContext = 300
       Hint = 
         'Presentar los horarios por paralelo|Presentar los horarios por p' +
         'aralelo'
-      OnExecute = actPresentarParaleloHorarioExecute
+      OnExecute = ActPresentarParaleloHorarioExecute
     end
-    object actPresentarProfesorProhibicion: TAction
+    object ActPresentarProfesorProhibicion: TAction
       Category = 'View'
       Caption = 'Presentar prohibiciones de profesor'
       HelpContext = 310
       Hint = 
         'Presentar prohibiciones de profesor|Presentar prohibiciones de p' +
         'rofesor'
-      OnExecute = actPresentarProfesorProhibicionExecute
+      OnExecute = ActPresentarProfesorProhibicionExecute
     end
-    object actNew: TAction
+    object ActNew: TAction
       Category = 'File'
       Caption = '&Nuevo'
       HelpContext = 80
       Hint = 'Nuevo|Nuevo colegio'
       ImageIndex = 0
       ShortCut = 16462
-      OnExecute = actNewExecute
+      OnExecute = ActNewExecute
     end
-    object actPresentarMateriaProhibicion: TAction
+    object ActPresentarMateriaProhibicion: TAction
       Category = 'View'
       Caption = 'Presentar prohibiciones de materia'
       HelpContext = 320
       Hint = 
         'Presentar prohibiciones de materia|Presentar prohibiciones de ma' +
         'teria'
-      OnExecute = actPresentarMateriaProhibicionExecute
+      OnExecute = ActPresentarMateriaProhibicionExecute
     end
-    object actPresentarDistributivoProfesor: TAction
+    object ActPresentarDistributivoProfesor: TAction
       Category = 'View'
       Caption = 'Presentar el distributivo por profesores'
       HelpContext = 340
       Hint = 
         'Presentar el distributivo por profesores|Presentar el distributi' +
         'vo por profesores'
-      OnExecute = actPresentarDistributivoProfesorExecute
+      OnExecute = ActPresentarDistributivoProfesorExecute
     end
-    object actPresentarDistributivoMateria: TAction
+    object ActPresentarDistributivoMateria: TAction
       Category = 'View'
       Caption = 'Presentar el distributivo por materias'
       HelpContext = 330
       Hint = 
         'Presentar el distributivo por materias|Presentar el distributivo' +
         ' por materias'
-      OnExecute = actPresentarDistributivoMateriaExecute
+      OnExecute = ActPresentarDistributivoMateriaExecute
     end
-    object actExportarCSV: TAction
+    object ActExportarCSV: TAction
       Category = 'View'
       Caption = 'Exportar el horario'
       Hint = 'Exportar el horario|Exportar el horario'
-      OnExecute = actExportarCSVExecute
+      OnExecute = ActExportarCSVExecute
     end
-    object actOpen: TAction
+    object ActOpen: TAction
       Category = 'File'
       Caption = 'Abrir'
       HelpContext = 90
       Hint = 'Abrir|Abrir colegio previamente guardado'
       ImageIndex = 1
       ShortCut = 16449
-      OnExecute = actOpenExecute
+      OnExecute = ActOpenExecute
     end
-    object actSave: TAction
+    object ActSave: TAction
       Category = 'File'
       Caption = 'Guardar...'
       HelpContext = 100
       Hint = 'Guardar|Guardar colegio'
       ImageIndex = 2
       ShortCut = 16455
-      OnExecute = actSaveExecute
+      OnExecute = ActSaveExecute
     end
-    object actPasswd: TAction
+    object ActPasswd: TAction
       Category = 'File'
       Caption = 'Clave...'
       HelpContext = 110
@@ -1834,36 +1821,36 @@ object MainForm: TMainForm
       ImageIndex = 3
       ShortCut = 16459
     end
-    object actChangePasswd: TAction
+    object ActChangePasswd: TAction
       Category = 'File'
       Caption = 'Cambiar clave...'
       HelpContext = 120
       Hint = 'Cambiar Clave|Permite cambiar la clave de acceso al sistema'
     end
-    object actExit: TAction
+    object ActExit: TAction
       Category = 'File'
       Caption = 'Salir'
       HelpContext = 130
       Hint = 'Salir|Salir del programa'
-      OnExecute = actExitExecute
+      OnExecute = ActExitExecute
     end
-    object actDia: TAction
+    object ActDia: TAction
       Category = 'Data'
       Caption = 'D'#237'as laborables'
       HelpContext = 140
       Hint = 'D'#237'as laborables|Dias laborables'
       ImageIndex = 4
       ShortCut = 16452
-      OnExecute = actDiaExecute
+      OnExecute = ActDiaExecute
     end
-    object actHora: TAction
+    object ActHora: TAction
       Category = 'Data'
       Caption = 'Horas acad'#233'micas'
       HelpContext = 150
       Hint = 'Horas acad'#233'micas|Horas acad'#233'micas'
       ImageIndex = 5
       ShortCut = 16456
-      OnExecute = actHoraExecute
+      OnExecute = ActHoraExecute
     end
     object WindowMinimizeAll: TWindowMinimizeAll
       Category = 'View'
@@ -1888,108 +1875,108 @@ object MainForm: TMainForm
       Category = 'View'
       Caption = '&Arrange'
     end
-    object actPeriodo: TAction
+    object ActPeriodo: TAction
       Category = 'Data'
       Caption = 'Per'#237'odos laborables'
       HelpContext = 160
       Hint = 'Per'#237'odos laborables|Per'#237'odos laborables'
       ImageIndex = 13
       ShortCut = 49225
-      OnExecute = actPeriodoExecute
+      OnExecute = ActPeriodoExecute
     end
-    object actNivel: TAction
+    object ActNivel: TAction
       Category = 'Data'
       Caption = 'Niveles'
       HelpContext = 170
       Hint = 'Niveles|Niveles'
       ImageIndex = 7
       ShortCut = 16462
-      OnExecute = actNivelExecute
+      OnExecute = ActNivelExecute
     end
-    object actEspecializacion: TAction
+    object ActEspecializacion: TAction
       Category = 'Data'
       Caption = 'Especializaciones'
       HelpContext = 180
       Hint = 'Especializaciones|Especializaciones'
       ImageIndex = 6
       ShortCut = 16453
-      OnExecute = actEspecializacionExecute
+      OnExecute = ActEspecializacionExecute
     end
-    object actParaleloId: TAction
+    object ActParaleloId: TAction
       Category = 'Data'
       Caption = 'Identificadores de paralelo'
       HelpContext = 190
       Hint = 'Identificadores de paralelo|Identificadores de paralelo'
       ImageIndex = 8
       ShortCut = 16466
-      OnExecute = actParaleloIdExecute
+      OnExecute = ActParaleloIdExecute
     end
-    object actParalelo: TAction
+    object ActParalelo: TAction
       Category = 'Data'
       Caption = 'Paralelos'
       HelpContext = 200
       Hint = 'Paralelos|Cursos con sus respectivos paralelos'
       ImageIndex = 14
       ShortCut = 49219
-      OnExecute = actParaleloExecute
+      OnExecute = ActParaleloExecute
     end
-    object actMateria: TAction
+    object ActMateria: TAction
       Category = 'Data'
       Caption = 'Materias'
       HelpContext = 210
       Hint = 'Materias|Materias'
       ImageIndex = 15
       ShortCut = 49229
-      OnExecute = actMateriaExecute
+      OnExecute = ActMateriaExecute
     end
-    object actAulaTipo: TAction
+    object ActAulaTipo: TAction
       Category = 'Data'
       Caption = 'Tipos de aula'
       HelpContext = 220
       Hint = 'Tipos de aula|Tipos de aula'
       ImageIndex = 10
       ShortCut = 49217
-      OnExecute = actAulaTipoExecute
+      OnExecute = ActAulaTipoExecute
     end
-    object actProfesor: TAction
+    object ActProfesor: TAction
       Category = 'Data'
       Caption = 'Profesores'
       HelpContext = 240
       Hint = 'Profesores|Profesores'
       ImageIndex = 9
       ShortCut = 16463
-      OnExecute = actProfesorExecute
+      OnExecute = ActProfesorExecute
     end
-    object actConfigurar: TAction
+    object ActConfigurar: TAction
       Category = 'Tools'
       Caption = 'Configurar...'
       HelpContext = 250
       Hint = 'Configurar|Cambiar la configuraci'#243'n del sistema'
       ImageIndex = 19
-      OnExecute = actConfigurarExecute
+      OnExecute = ActConfigurarExecute
     end
-    object actChequearFactibilidad: TAction
+    object ActChequearFactibilidad: TAction
       Category = 'Tools'
       Caption = 'Chequear factibilidad'
       HelpContext = 260
       Hint = 
         'Chequear factibilidad|Chequear la factibilidad de los datos ingr' +
         'esados'
-      OnExecute = actChequearFactibilidadExecute
+      OnExecute = ActChequearFactibilidadExecute
     end
-    object actElaborarHorario: TAction
+    object ActElaborarHorario: TAction
       Category = 'Tools'
       Caption = 'Elaborar horario'
       HelpContext = 270
       Hint = 'Elaborar Horario|Elaborar Horario'
       ImageIndex = 17
-      OnExecute = actElaborarHorarioExecute
+      OnExecute = ActElaborarHorarioExecute
     end
-    object actMejorarHorario: TAction
+    object ActMejorarHorario: TAction
       Category = 'Tools'
       Caption = 'Mejorar Horario'
       Hint = 'Mejorar Horario|Mejorar el Horario buscando en doble profundidad'
-      OnExecute = actMejorarHorarioExecute
+      OnExecute = ActMejorarHorarioExecute
     end
   end
   object TbParalelo: TkbmMemTable
@@ -2292,25 +2279,6 @@ object MainForm: TMainForm
     Filter = 'CSV delimitado por comas(*.csv)|*.csv'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 158
-    Top = 72
-  end
-  object FSProteccion: TFormStorage
-    Active = False
-    IniSection = '\Software\SPS1'
-    Options = []
-    RegistryRoot = prLocalMachine
-    UseRegistry = True
-    StoredValues = <
-      item
-        Name = 'Password'
-      end
-      item
-        Name = 'InitDate'
-      end
-      item
-        Name = 'LastDate'
-      end>
-    Left = 242
     Top = 72
   end
 end

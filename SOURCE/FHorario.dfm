@@ -1,6 +1,6 @@
 inherited HorarioForm: THorarioForm
-  Left = 347
-  Top = 204
+  Left = 438
+  Top = 156
   Width = 626
   Height = 361
   Caption = 'HorarioForm'
@@ -8,112 +8,87 @@ inherited HorarioForm: THorarioForm
   TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 618
-    object BtnHorarioParalelo: TToolButton [2]
-      Left = 46
-      Top = 0
-      Hint = 'Horario de paralelos|Horario de paralelos'
-      ImageIndex = 2
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = BtnHorarioParaleloClick
-    end
-    object BtnProfesor: TToolButton [3]
-      Left = 69
-      Top = 0
-      Hint = 'Horario de Profesores|Horario de Profesores'
-      ImageIndex = 3
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = BtnHorarioProfesorClick
-    end
     inherited DBNavigator: TDBNavigator
-      Left = 92
       Width = 154
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbPost, nbCancel]
       Hints.Strings = ()
     end
+    object BtnHorarioParalelo: TToolButton
+      Left = 200
+      Top = 0
+      Action = ActHorarioParalelo
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object BtnHorarioProfesor: TToolButton
+      Left = 223
+      Top = 0
+      Action = ActHorarioProfesor
+      ParentShowHint = False
+      ShowHint = True
+    end
     object BtnCruceProfesor: TToolButton
       Left = 246
       Top = 0
-      Hint = 'Cruce de profesores|Cruce de profesores'
-      ImageIndex = 4
+      Action = ActCruceProfesor
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnCruceProfesorClick
     end
     object BtnCruceMateria: TToolButton
       Left = 269
       Top = 0
-      Hint = 'Cruce de materias|Cruce de materias'
-      ImageIndex = 5
+      Action = ActCruceMateria
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnCruceMateriaClick
     end
     object BtnCruceAula: TToolButton
       Left = 292
       Top = 0
-      Hint = 'Cruce de aulas|Cruce de aulas del mismo tipo'
-      ImageIndex = 6
+      Action = ActCruceAula
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnCruceAulaClick
     end
     object BtnMateriaProhibicionNoRespetada: TToolButton
       Left = 315
       Top = 0
-      Hint = 'Prohibiciones de materia|Prohibiciones de materia no respetadas'
-      ImageIndex = 7
+      Action = ActMateriaProhibicionNoRespetada
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnMateriaProhibicionNoRespetadaClick
     end
     object BtnProfesorProhibicionNoRespetada: TToolButton
       Left = 338
       Top = 0
-      Hint = 
-        'Prohibiciones de profesor|Prohibiciones de profesor no respetada' +
-        'ss'
-      ImageIndex = 8
+      Action = ActProfesorProhibicionNoRespetada
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnProfesorProhibicionNoRespetadaClick
     end
     object BtnSeleccionarHorario: TToolButton
       Left = 361
       Top = 0
-      Hint = 'Seleccionar horario|Seleccionar un horario de colegio'
-      ImageIndex = 9
+      Action = ActSeleccionarHorario
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnSeleccionarHorarioClick
     end
     object BtnMateriaCortadaDia: TToolButton
       Left = 384
       Top = 0
-      Hint = 'Materias cortadas por el d'#237'a|Materias cortadas por el d'#237'a'
-      ImageIndex = 5
+      Action = ActMateriaCortadaDia
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnMateriaCortadaDiaClick
     end
     object BtnMateriaCortadaHora: TToolButton
       Left = 407
       Top = 0
-      Hint = 'Materias cortadas por la hora|Materias cortadas por la hora'
-      ImageIndex = 5
+      Action = ActMateriaCortadaHora
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnMateriaCortadaHoraClick
     end
     object BtnHorarioAulaTipo: TToolButton
       Left = 430
       Top = 0
-      Hint = 'Horario por tipo de aulas|Horario por tipo de aulas'
-      ImageIndex = 6
+      Action = ActHorarioAulaTipo
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnHorarioAulaTipoClick
     end
   end
   inherited pnlStatus: TPanel
@@ -138,7 +113,6 @@ inherited HorarioForm: THorarioForm
       Width = 310
       Height = 288
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
-      OnDrawColumnCell = DBGridDrawColumnCell
       Columns = <
         item
           Expanded = False
@@ -186,19 +160,9 @@ inherited HorarioForm: THorarioForm
       end
     end
   end
-  inherited FormStorage: TFormStorage
-    Active = True
-    IniSection = '\Software\SGHC\SEHorario'
-    StoredProps.Strings = (
-      'TlBShow.DockedTo'
-      'TlBShow.DockPos'
-      'Panel2.Width')
+  inherited ImageList: TImageList
     Left = 88
     Top = 140
-  end
-  inherited ImageList: TImageList
-    Left = 196
-    Top = 160
     Bitmap = {
       494C01010A000E00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
@@ -740,7 +704,7 @@ inherited HorarioForm: THorarioForm
     Left = 60
     Top = 140
   end
-  object QuCruceAula: TkbmMemTable
+  object QuCruceAula: TkbmMemTable [5]
     FieldDefs = <>
     IndexFieldNames = 'CodAulaTipo;CodDia;CodHora'
     IndexDefs = <
@@ -817,7 +781,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuCruceAulaDetalle: TkbmMemTable
+  object QuCruceAulaDetalle: TkbmMemTable [6]
     FieldDefs = <
       item
         Name = 'CodHora'
@@ -936,12 +900,12 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object DSCruceAula: TDataSource
+  object DSCruceAula: TDataSource [7]
     DataSet = QuCruceAula
     Left = 116
     Top = 140
   end
-  object QuCruceProfesorDetalle: TkbmMemTable
+  object QuCruceProfesorDetalle: TkbmMemTable [8]
     FieldDefs = <>
     IndexDefs = <>
     VersioningMode = mtvmAllSinceCheckPoint
@@ -1033,7 +997,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuCruceProfesor: TkbmMemTable
+  object QuCruceProfesor: TkbmMemTable [9]
     FieldDefs = <>
     IndexFieldNames = 'CodProfesor;CodDia;CodHora'
     IndexDefs = <
@@ -1110,7 +1074,7 @@ inherited HorarioForm: THorarioForm
       FieldName = 'Cruces'
     end
   end
-  object QuCruceMateria: TkbmMemTable
+  object QuCruceMateria: TkbmMemTable [10]
     FieldDefs = <>
     IndexDefs = <
       item
@@ -1136,7 +1100,7 @@ inherited HorarioForm: THorarioForm
       FieldName = 'NomMateria'
     end
   end
-  object QuCruceMateriaDetalle: TkbmMemTable
+  object QuCruceMateriaDetalle: TkbmMemTable [11]
     FieldDefs = <>
     IndexFieldNames = 
       'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
@@ -1241,7 +1205,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuHorarioDetalleMateriaProhibicion: TkbmMemTable
+  object QuHorarioDetalleMateriaProhibicion: TkbmMemTable [12]
     AutoIncMinValue = -1
     FieldDefs = <>
     IndexFieldNames = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
@@ -1357,7 +1321,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuHorarioDetalleProfesorProhibicion: TkbmMemTable
+  object QuHorarioDetalleProfesorProhibicion: TkbmMemTable [13]
     FieldDefs = <>
     IndexDefs = <>
     VersioningMode = mtvmAllSinceCheckPoint
@@ -1473,7 +1437,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuMateriaCortadaDia: TkbmMemTable
+  object QuMateriaCortadaDia: TkbmMemTable [14]
     FieldDefs = <>
     IndexDefs = <>
     VersioningMode = mtvmAllSinceCheckPoint
@@ -1482,32 +1446,26 @@ inherited HorarioForm: THorarioForm
     Top = 224
     object QuMateriaCortadaDiaCodNivel: TIntegerField
       FieldName = 'CodNivel'
-      Origin = '"HorarioDetalle.DB".CodNivel'
       Visible = False
     end
     object QuMateriaCortadaDiaCodEspecializacion: TIntegerField
       FieldName = 'CodEspecializacion'
-      Origin = '"HorarioDetalle.DB".CodEspecializacion'
       Visible = False
     end
     object QuMateriaCortadaDiaCodParaleloId: TIntegerField
       FieldName = 'CodParaleloId'
-      Origin = '"HorarioDetalle.DB".CodParaleloId'
       Visible = False
     end
     object QuMateriaCortadaDiaCodDia: TIntegerField
       FieldName = 'CodDia'
-      Origin = '"HorarioDetalle.DB".CodDia'
       Visible = False
     end
     object QuMateriaCortadaDiaCodHora: TIntegerField
       FieldName = 'CodHora'
-      Origin = '"HorarioDetalle.DB".CodHora'
       Visible = False
     end
     object QuMateriaCortadaDiaCodMateria: TIntegerField
       FieldName = 'CodMateria'
-      Origin = '"HorarioDetalle.DB".CodMateria'
       Visible = False
     end
     object QuMateriaCortadaDiaAbrNivel: TStringField
@@ -1584,7 +1542,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuMateriaCortadaHora: TkbmMemTable
+  object QuMateriaCortadaHora: TkbmMemTable [15]
     FieldDefs = <>
     IndexFieldNames = 'CodDia'
     IndexDefs = <
@@ -1597,12 +1555,10 @@ inherited HorarioForm: THorarioForm
     Top = 252
     object QuMateriaCortadaHoraCodDia: TIntegerField
       FieldName = 'CodDia'
-      Origin = '"HorarioDetalle.DB".CodDia'
       Visible = False
     end
     object QuMateriaCortadaHoraCodHora: TIntegerField
       FieldName = 'CodHora'
-      Origin = '"HorarioDetalle.DB".CodHora'
       Visible = False
     end
     object QuMateriaCortadaHoraNomDia: TStringField
@@ -1631,7 +1587,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuMateriaCortadaHoraDetalle: TkbmMemTable
+  object QuMateriaCortadaHoraDetalle: TkbmMemTable [16]
     FieldDefs = <>
     IndexFieldNames = 'CodDia;CodHora;CodHora0'
     IndexDefs = <
@@ -1646,37 +1602,30 @@ inherited HorarioForm: THorarioForm
     Top = 252
     object QuMateriaCortadaHoraDetalleCodNivel: TIntegerField
       FieldName = 'CodNivel'
-      Origin = '"HorarioDetalle.DB".CodNivel'
       Visible = False
     end
     object QuMateriaCortadaHoraDetalleCodEspecializacion: TIntegerField
       FieldName = 'CodEspecializacion'
-      Origin = '"HorarioDetalle.DB".CodEspecializacion'
       Visible = False
     end
     object QuMateriaCortadaHoraDetalleCodParaleloId: TIntegerField
       FieldName = 'CodParaleloId'
-      Origin = '"HorarioDetalle.DB".CodParaleloId'
       Visible = False
     end
     object QuMateriaCortadaHoraDetalleCodDia: TIntegerField
       FieldName = 'CodDia'
-      Origin = '"HorarioDetalle.DB".CodDia'
       Visible = False
     end
     object QuMateriaCortadaHoraDetalleCodHora: TIntegerField
       FieldName = 'CodHora'
-      Origin = '"HorarioDetalle.DB".CodHora'
       Visible = False
     end
     object QuMateriaCortadaHoraDetalleCodHora0: TIntegerField
       FieldName = 'CodHora0'
-      Origin = '"HorarioDetalle.DB".CodHora'
       Visible = False
     end
     object QuMateriaCortadaHoraDetalleCodMateria: TIntegerField
       FieldName = 'CodMateria'
-      Origin = '"HorarioDetalle.DB".CodMateria'
       Visible = False
     end
     object QuMateriaCortadaHoraDetalleAbrNivel: TStringField
@@ -1753,9 +1702,79 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object DSMateriaCortadaHora: TDataSource
+  object DSMateriaCortadaHora: TDataSource [17]
     DataSet = QuMateriaCortadaHora
     Left = 116
     Top = 252
+  end
+  inherited ActionList: TActionList
+    object ActHorarioParalelo: TAction
+      Caption = 'Horario de paralelos'
+      Hint = 'Horario de paralelos|Horario de paralelos'
+      ImageIndex = 2
+      OnExecute = ActHorarioParaleloExecute
+    end
+    object ActHorarioProfesor: TAction
+      Caption = 'Horario de Profesores'
+      Hint = 'Horario de Profesores|Horario de Profesores'
+      ImageIndex = 3
+      OnExecute = ActHorarioProfesorExecute
+    end
+    object ActCruceProfesor: TAction
+      Caption = 'Cruce de profesores'
+      Hint = 'Cruce de profesores|Cruce de profesores'
+      ImageIndex = 4
+      OnExecute = ActCruceProfesorExecute
+    end
+    object ActCruceMateria: TAction
+      Caption = 'Cruce de materias'
+      Hint = 'Cruce de materias|Cruce de materias'
+      ImageIndex = 5
+      OnExecute = ActCruceMateriaExecute
+    end
+    object ActCruceAula: TAction
+      Caption = 'Cruce de aulas'
+      Hint = 'Cruce de aulas|Cruce de aulas del mismo tipo'
+      ImageIndex = 6
+      OnExecute = ActCruceAulaExecute
+    end
+    object ActMateriaProhibicionNoRespetada: TAction
+      Caption = 'Prohibiciones de materia'
+      Hint = 'Prohibiciones de materia|Prohibiciones de materia no respetadas'
+      ImageIndex = 7
+      OnExecute = ActMateriaProhibicionNoRespetadaExecute
+    end
+    object ActProfesorProhibicionNoRespetada: TAction
+      Caption = 'Prohibiciones de profesor'
+      Hint = 
+        'Prohibiciones de profesor|Prohibiciones de profesor no respetada' +
+        's'
+      ImageIndex = 8
+      OnExecute = ActProfesorProhibicionNoRespetadaExecute
+    end
+    object ActSeleccionarHorario: TAction
+      Caption = 'Seleccionar horario'
+      Hint = 'Seleccionar horario|Seleccionar un horario de colegio'
+      ImageIndex = 9
+      OnExecute = ActSeleccionarHorarioExecute
+    end
+    object ActMateriaCortadaDia: TAction
+      Caption = 'Materias cortadas por el d'#237'a'
+      Hint = 'Materias cortadas por el d'#237'a|Materias cortadas por el d'#237'a'
+      ImageIndex = 5
+      OnExecute = ActMateriaCortadaDiaExecute
+    end
+    object ActMateriaCortadaHora: TAction
+      Caption = 'Materias cortadas por la hora'
+      Hint = 'Materias cortadas por la hora|Materias cortadas por la hora'
+      ImageIndex = 5
+      OnExecute = ActMateriaCortadaHoraExecute
+    end
+    object ActHorarioAulaTipo: TAction
+      Caption = 'Horario por tipo de aulas'
+      Hint = 'Horario por tipo de aulas|Horario por tipo de aulas'
+      ImageIndex = 6
+      OnExecute = ActHorarioAulaTipoExecute
+    end
   end
 end

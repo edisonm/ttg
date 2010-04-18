@@ -121,7 +121,7 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 6
         Value = 20
       end
-      object memComentarios: TMemo
+      object MemComentarios: TMemo
         Left = 8
         Top = 184
         Width = 377

@@ -4,15 +4,16 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons,
-  DBCtrls, ExtCtrls, RXCtrls, RXDBCtrl, kbmMemTable, ImgList, ComCtrls, ToolWin;
+  FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons, FEditor,
+  DBCtrls, ExtCtrls, kbmMemTable, ImgList, ComCtrls, ToolWin, FMasDeEd,
+  ActnList, FHorProf, FHorAulT, FHorPara;
 
 type
   THorarioForm = class(TSingleEditorForm)
     BtnMateriaProhibicionNoRespetada: TToolButton;
     BtnProfesorProhibicionNoRespetada: TToolButton;
     BtnHorarioParalelo: TToolButton;
-    BtnProfesor: TToolButton;
+    BtnHorarioProfesor: TToolButton;
     BtnCruceProfesor: TToolButton;
     BtnCruceMateria: TToolButton;
     BtnCruceAula: TToolButton;
@@ -143,30 +144,44 @@ type
     QuMateriaCortadaHoraDetalleNomMateria: TStringField;
     QuMateriaCortadaHoraDetalleCodHora: TIntegerField;
     Splitter1: TSplitter;
-    procedure BtnHorarioParaleloClick(Sender: TObject);
-    procedure BtnCruceProfesorClick(Sender: TObject);
-    procedure BtnCruceMateriaClick(Sender: TObject);
-    procedure BtnHorarioProfesorClick(Sender: TObject);
-    procedure BtnMateriaProhibicionNoRespetadaClick(Sender: TObject);
-    procedure BtnProfesorProhibicionNoRespetadaClick(Sender: TObject);
-    procedure BtnCruceAulaClick(Sender: TObject);
+    ActHorarioParalelo: TAction;
+    ActHorarioProfesor: TAction;
+    ActCruceProfesor: TAction;
+    ActCruceMateria: TAction;
+    ActCruceAula: TAction;
+    ActMateriaProhibicionNoRespetada: TAction;
+    ActProfesorProhibicionNoRespetada: TAction;
+    ActSeleccionarHorario: TAction;
+    ActMateriaCortadaDia: TAction;
+    ActMateriaCortadaHora: TAction;
+    ActHorarioAulaTipo: TAction;
+    procedure ActHorarioParaleloExecute(Sender: TObject);
+    procedure ActCruceProfesorExecute(Sender: TObject);
+    procedure ActCruceMateriaExecute(Sender: TObject);
+    procedure ActHorarioProfesorExecute(Sender: TObject);
+    procedure ActMateriaProhibicionNoRespetadaExecute(Sender: TObject);
+    procedure ActProfesorProhibicionNoRespetadaExecute(Sender: TObject);
+    procedure ActCruceAulaExecute(Sender: TObject);
     procedure QuCruceProfesorAfterScroll(DataSet: TDataSet);
     procedure QuCruceMateriaAfterScroll(DataSet: TDataSet);
-    procedure BtnSeleccionarHorarioClick(Sender: TObject);
-    procedure BtnMateriaCortadaDiaClick(Sender: TObject);
-    procedure BtnMateriaCortadaHoraClick(Sender: TObject);
-    procedure BtnHorarioAulaTipoClick(Sender: TObject);
+    procedure ActSeleccionarHorarioExecute(Sender: TObject);
+    procedure ActMateriaCortadaDiaExecute(Sender: TObject);
+    procedure ActMateriaCortadaHoraExecute(Sender: TObject);
+    procedure ActHorarioAulaTipoExecute(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
-    procedure EdQuCruceProfesorDestroy(Sender: TObject);
-    procedure EdQuCruceMateriaDestroy(Sender: TObject);
-    procedure EdQuHorarioDetalleProfesorProhibicionDestroy(Sender: TObject);
-    procedure EdQuHorarioDetalleMateriaProhibicionDestroy(Sender: TObject);
-    procedure EdQuCruceAulaTipoDestroy(Sender: TObject);
-    procedure EdQuMateriaCortadaDiaDestroy(Sender: TObject);
-    procedure EdQuMateriaCortadaHoraDestroy(Sender: TObject);
+    FCruceAulaForm,
+    FCruceMateriaForm,
+    FMateriaCortadaHoraForm,
+    FMateriaCortadaDiaForm,
+    FCruceProfesorForm: TMasterDetailEditorForm;
+    FMateriaProhibicionNoRespetadaForm,
+    FProfesorProhibicionNoRespetadaForm: TSingleEditorForm;
+    FHorarioProfesorForm: THorarioProfesorForm;
+    FHorarioAulaTipoForm: THorarioAulaTipoForm;
+    FHorarioParaleloForm: THorarioParaleloForm;
     procedure FillHorarioDetalleMateriaProhibicion;
     procedure FillCruceAula;
     procedure FillCruceAulaDetalle;
@@ -176,6 +191,9 @@ type
     procedure FillMateriaCortadaDia;
     procedure FillCruceMateria;
     procedure FillMateriaCortadaHora;
+  protected
+    procedure doLoadConfig; override;
+    procedure doSaveConfig; override;
   public
     { Public declarations }
   end;
@@ -185,21 +203,18 @@ var
 
 implementation
 uses
-  FCrsMMER, FHorPara, FHorAulT, DMaster, SGHCUtls, FMasDEEd, FCrsMME1, FHorProf,
-  FConfig, Printers, DSource;
+  FCrsMMER, DMaster, SGHCUtls, FCrsMME1, FConfig, Printers, DSource, FMain;
 {$R *.DFM}
 
-procedure THorarioForm.BtnHorarioParaleloClick(Sender: TObject);
-var
-  HorarioParaleloForm: THorarioParaleloForm;
+procedure THorarioForm.ActHorarioParaleloExecute(Sender: TObject);
 begin
   inherited;
-  HorarioParaleloForm := THorarioParaleloForm.Create(Self);
-  with SourceDataModule, HorarioParaleloForm do
+  if THorarioParaleloForm.ToggleEditor(FHorarioParaleloForm, ConfigStrings,
+				       ActHorarioParalelo) then
   begin
-    Caption := Format('%s %d', [Description[TbHorario],
-      TbHorarioCodHorario.Value]);
-    LoadHints(HorarioParaleloForm, TbDia, TbHora, TbMateria);
+    with SourceDataModule do
+      LoadHints(FHorarioParaleloForm, TbDia, TbHora, TbMateria);
+    FHorarioParaleloForm.BtnMostrarClick(nil);
   end;
 end;
 
@@ -211,71 +226,68 @@ var
 begin
   with SourceDataModule do
   begin
-    QuCruceProfesor.Close;
-    QuCruceProfesor.Open;
     CodHorario := TbHorarioCodHorario.Value;
     TbHorarioDetalle.DisableControls;
+    d := TbHorarioDetalle.IndexFieldNames;
     try
-      d := TbHorarioDetalle.IndexFieldNames;
       TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
-      try
-        if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
-        begin
-          s := TbDistributivo.IndexFieldNames;
-          TbDistributivo.DisableControls;
+      if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
+      begin
+        QuCruceProfesor.DisableControls;
+        TbDistributivo.DisableControls;
+        s := TbDistributivo.IndexFieldNames;
+        try
           TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
           TbDistributivo.First;
-          QuCruceProfesor.DisableControls;
-          try
-            while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
+          QuCruceProfesor.Close;
+          QuCruceProfesor.Open;
+          while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
+          begin
+            CodMateria := TbHorarioDetalleCodMateria.Value;
+            CodNivel := TbHorarioDetalleCodNivel.Value;
+            CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
+            CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
+            while ((TbDistributivoCodMateria.Value <> CodMateria)
+              or (TbDistributivoCodNivel.Value <> CodNivel)
+              or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
+              or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
+              and not TbDistributivo.Eof do
+              TbDistributivo.Next;
+            CodProfesor := TbDistributivoCodProfesor.Value;
+            CodDia := TbHorarioDetalleCodDia.Value;
+            CodHora := TbHorarioDetalleCodHora.Value;
+            if QuCruceProfesor.FindKey([CodProfesor, CodDia, CodHora]) then
             begin
-              CodMateria := TbHorarioDetalleCodMateria.Value;
-              CodNivel := TbHorarioDetalleCodNivel.Value;
-              CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
-              CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
-              while ((TbDistributivoCodMateria.Value <> CodMateria)
-                or (TbDistributivoCodNivel.Value <> CodNivel)
-                or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
-                or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
-                and not TbDistributivo.Eof do
-                TbDistributivo.Next;
-              CodProfesor := TbDistributivoCodProfesor.Value;
-              CodDia := TbHorarioDetalleCodDia.Value;
-              CodHora := TbHorarioDetalleCodHora.Value;
-              if QuCruceProfesor.FindKey([CodProfesor, CodDia, CodHora]) then
-              begin
-                QuCruceProfesor.Edit;
-                with QuCruceProfesorCruces do Value := Value + 1;
-              end
-              else
-              begin
-                QuCruceProfesor.Append;
-                QuCruceProfesorCodProfesor.Value := CodProfesor;
-                QuCruceProfesorCodHora.Value := CodHora;
-                QuCruceProfesorCodDia.Value := CodDia;
-                QuCruceProfesorCruces.Value := 1;
-              end;
-              QuCruceProfesor.Post;
-              TbHorarioDetalle.Next;
-            end;
-            QuCruceProfesor.First;
-            while not QuCruceProfesor.Eof do
+              QuCruceProfesor.Edit;
+              with QuCruceProfesorCruces do Value := Value + 1;
+            end
+            else
             begin
-              if QuCruceProfesorCruces.Value > 1 then
-                QuCruceProfesor.Next
-              else
-                QuCruceProfesor.Delete;
+              QuCruceProfesor.Append;
+              QuCruceProfesorCodProfesor.Value := CodProfesor;
+              QuCruceProfesorCodHora.Value := CodHora;
+              QuCruceProfesorCodDia.Value := CodDia;
+              QuCruceProfesorCruces.Value := 1;
             end;
-          finally
-            TbDistributivo.IndexFieldNames := s;
-            TbDistributivo.EnableControls;
-            QuCruceProfesor.EnableControls;
+            QuCruceProfesor.Post;
+            TbHorarioDetalle.Next;
           end;
+          QuCruceProfesor.First;
+          while not QuCruceProfesor.Eof do
+          begin
+            if QuCruceProfesorCruces.Value > 1 then
+              QuCruceProfesor.Next
+            else
+              QuCruceProfesor.Delete;
+          end;
+        finally
+          TbDistributivo.IndexFieldNames := s;
+          TbDistributivo.EnableControls;
+          QuCruceProfesor.EnableControls;
         end;
-      finally
-        TbHorarioDetalle.IndexFieldNames := d;
       end;
     finally
+      TbHorarioDetalle.IndexFieldNames := d;
       TbHorarioDetalle.EnableControls;
     end;
   end;
@@ -293,149 +305,91 @@ begin
     QuCruceProfesorDetalle.Open;
     CodHorario := TbHorarioCodHorario.Value;
     TbHorarioDetalle.DisableControls;
+    d := TbHorarioDetalle.IndexFieldNames;
     try
-      d := TbHorarioDetalle.IndexFieldNames;
       TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
-      try
-        if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
-        begin
-          s := TbDistributivo.IndexFieldNames;
-          TbDistributivo.DisableControls;
+      if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
+      begin
+        s := TbDistributivo.IndexFieldNames;
+        TbDistributivo.DisableControls;
+        QuCruceProfesorDetalle.DisableControls;
+        try
           TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
           TbDistributivo.First;
-          QuCruceProfesorDetalle.DisableControls;
-          try
-            while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
+          while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
+          begin
+            CodMateria := TbHorarioDetalleCodMateria.Value;
+            CodNivel := TbHorarioDetalleCodNivel.Value;
+            CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
+            CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
+            while ((TbDistributivoCodMateria.Value <> CodMateria)
+              or (TbDistributivoCodNivel.Value <> CodNivel)
+              or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
+              or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
+              and not TbDistributivo.Eof do
+              TbDistributivo.Next;
+            CodProfesor := TbDistributivoCodProfesor.Value;
+            CodHora := TbHorarioDetalleCodHora.Value;
+            CodDia := TbHorarioDetalleCodDia.Value;
+            if QuCruceProfesor.FindKey([CodProfesor, CodDia, CodHora]) then
             begin
-              CodMateria := TbHorarioDetalleCodMateria.Value;
-              CodNivel := TbHorarioDetalleCodNivel.Value;
-              CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
-              CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
-              while ((TbDistributivoCodMateria.Value <> CodMateria)
-                or (TbDistributivoCodNivel.Value <> CodNivel)
-                or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
-                or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
-                and not TbDistributivo.Eof do
-                TbDistributivo.Next;
-              CodProfesor := TbDistributivoCodProfesor.Value;
-              CodHora := TbHorarioDetalleCodHora.Value;
-              CodDia := TbHorarioDetalleCodDia.Value;
-              if QuCruceProfesor.FindKey([CodProfesor, CodDia, CodHora]) then
-              begin
-                QuCruceProfesorDetalle.Append;
-                QuCruceProfesorDetalleCodProfesor.Value := CodProfesor;
-                QuCruceProfesorDetalleCodDia.Value := CodDia;
-                QuCruceProfesorDetalleCodHora.Value := CodHora;
-                QuCruceProfesorDetalleCodNivel.Value := CodNivel;
-                QuCruceProfesorDetalleCodEspecializacion.Value := CodEspecializacion;
-                QuCruceProfesorDetalleCodParaleloId.Value := CodParaleloId;
-                QuCruceProfesorDetalleCodMateria.Value := TbHorarioDetalleCodMateria.Value;
-                QuCruceProfesorDetalle.Post;
-              end;
-              TbHorarioDetalle.Next;
+              QuCruceProfesorDetalle.Append;
+              QuCruceProfesorDetalleCodProfesor.Value := CodProfesor;
+              QuCruceProfesorDetalleCodDia.Value := CodDia;
+              QuCruceProfesorDetalleCodHora.Value := CodHora;
+              QuCruceProfesorDetalleCodNivel.Value := CodNivel;
+              QuCruceProfesorDetalleCodEspecializacion.Value := CodEspecializacion;
+              QuCruceProfesorDetalleCodParaleloId.Value := CodParaleloId;
+              QuCruceProfesorDetalleCodMateria.Value := TbHorarioDetalleCodMateria.Value;
+              QuCruceProfesorDetalle.Post;
             end;
-          finally
-            TbDistributivo.IndexFieldNames := s;
-            TbDistributivo.EnableControls;
-            QuCruceProfesorDetalle.EnableControls;
+            TbHorarioDetalle.Next;
           end;
+        finally
+          TbDistributivo.IndexFieldNames := s;
+          TbDistributivo.EnableControls;
+          QuCruceProfesorDetalle.EnableControls;
         end;
-      finally
-        TbHorarioDetalle.IndexFieldNames := d;
       end;
     finally
+      TbHorarioDetalle.IndexFieldNames := d;
       TbHorarioDetalle.EnableControls;
     end;
   end;
 end;
 
-procedure THorarioForm.BtnCruceProfesorClick(Sender: TObject);
-var
-  MasterDetailEditorForm: TMasterDetailEditorForm;
+procedure THorarioForm.ActCruceProfesorExecute(Sender: TObject);
+begin
+   inherited;
+   with SourceDataModule, MasterDataModule, QuCruceProfesor do
+   begin
+      if TMasterDetailEditorForm.ToggleMasterDetailEditor(FCruceProfesorForm,
+							  MainForm.ConfigStrings,
+							  ActCruceProfesor,
+							  QuCruceProfesor,
+							  QuCruceProfesorDetalle) then
+      begin
+	 // TODO: Create dinamically QuCruceProfesor and QuCruceProfesorDetalle
+	 // QuCruceProfesor.Close;
+	 // QuCruceProfesorDetalle.Close;
+	 FillCruceProfesor;
+	 FillCruceProfesorDetalle;
+	 First;
+      end;
+   end;
+end;
+
+procedure THorarioForm.ActHorarioProfesorExecute(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule, MasterDataModule, QuCruceProfesor do
+  if THorarioProfesorForm.ToggleEditor(FHorarioProfesorForm,
+				       ConfigStrings,
+				       ActHorarioProfesor) then
   begin
-    FillCruceProfesor;
-    FillCruceProfesorDetalle;
-    First;
-    BtnCruceProfesor.Enabled := false;
-    MasterDetailEditorForm := TMasterDetailEditorForm.Create(Self);
-    MasterDetailEditorForm.Caption := 'Cruce de Profesores';
-    MyMasterDetailShowEditor(MasterDetailEditorForm, QuCruceProfesor,
-      QuCruceProfesorDetalle, ConfiguracionForm.edtNomColegio.Text,
-      EdQuCruceProfesorDestroy);
-  end;
-end;
-
-procedure THorarioForm.EdQuCruceProfesorDestroy(Sender: TObject);
-begin
-  if Assigned(BtnCruceProfesor) then BtnCruceProfesor.Enabled := true;
-  QuCruceProfesor.Close;
-  QuCruceProfesorDetalle.Close;
-end;
-
-procedure THorarioForm.EdQuCruceAulaTipoDestroy(Sender: TObject);
-begin
-  if Assigned(BtnCruceAula) then BtnCruceAula.Enabled := true;
-  QuCruceAula.Close;
-  QuCruceAulaDetalle.Close;
-end;
-
-procedure THorarioForm.EdQuCruceMateriaDestroy(Sender: TObject);
-begin
-  if Assigned(BtnCruceMateria) then BtnCruceMateria.Enabled := true;
-  QuCruceMateria.Close;
-  QuCruceMateriaDetalle.Close;
-end;
-
-procedure THorarioForm.EdQuMateriaCortadaDiaDestroy(Sender: TObject);
-begin
-  if Assigned(BtnMateriaCortadaDia) then BtnMateriaCortadaDia.Enabled := true;
-  QuMateriaCortadaDia.Close;
-end;
-
-procedure THorarioForm.EdQuMateriaCortadaHoraDestroy(Sender: TObject);
-begin
-  if Assigned(BtnMateriaCortadaHora) then BtnMateriaCortadaHora.Enabled := true;
-  QuMateriaCortadaHora.Close;
-  QuMateriaCortadaHoraDetalle.Close;
-end;
-
-procedure THorarioForm.EdQuHorarioDetalleMateriaProhibicionDestroy(Sender:
-  TObject);
-begin
-  if Assigned(BtnMateriaProhibicionNoRespetada) then
-    BtnMateriaProhibicionNoRespetada.Enabled := true;
-  QuHorarioDetalleMateriaProhibicion.Close;
-end;
-
-procedure THorarioForm.EdQuHorarioDetalleProfesorProhibicionDestroy(Sender:
-  TObject);
-begin
-  if Assigned(BtnProfesorProhibicionNoRespetada) then
-    BtnProfesorProhibicionNoRespetada.Enabled := true;
-  QuHorarioDetalleProfesorProhibicion.Close;
-end;
-
-procedure THorarioForm.BtnHorarioProfesorClick(Sender: TObject);
-var
-  HorarioProfesorForm: THorarioProfesorForm;
-begin
-  inherited;
-  HorarioProfesorForm := THorarioProfesorForm.Create(Self);
-  with SourceDataModule, MasterDataModule, HorarioProfesorForm do
-  begin
-    Caption := Format('%s %d', [Description[TbHorario],
-      TbHorarioCodHorario.Value]);
-    with FormStorage do
-    begin
-      IniSection := IniSection + '\MMEd1HorarioProfesor';
-      Active := True;
-      RestoreFormPlacement;
-    end;
-    LoadHints(HorarioProfesorForm, TbDia, TbHora, TbProfesor);
-  end;
+    with SourceDataModule do
+      LoadHints(FHorarioProfesorForm, TbDia, TbHora, TbProfesor);
+    FHorarioProfesorForm.BtnMostrarClick(nil);
+  end
 end;
 
 procedure THorarioForm.FillCruceMateria;
@@ -450,6 +404,7 @@ var
     TbMemTableCodParaleloId,
     TbMemTableCodDia,
     TbMemTableSesion: TIntegerField;
+  s: string;
 begin
   with SourceDataModule do
   begin
@@ -460,10 +415,12 @@ begin
     CodHorario := TbHorarioCodHorario.Value;
     TbMemTable := TkbmMemTable.Create(nil);
     try
-      TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
-      TbHorarioDetalle.Filtered := True;
-      TbHorarioDetalle.Filter := Format('CodHorario=%d', [CodHorario]);
+      TbHorarioDetalle.DisableControls;
+      s := TbHorarioDetalle.IndexFieldNames;
       try
+        TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+        TbHorarioDetalle.Filtered := True;
+        TbHorarioDetalle.Filter := Format('CodHorario=%d', [CodHorario]);
         TbMemTable.LoadFromDataSet(TbHorarioDetalle, [mtcpoStructure]);
         TbHorarioDetalle.First;
         with TbMemTable.IndexDefs.AddIndexDef do
@@ -522,6 +479,8 @@ begin
       finally
         TbHorarioDetalle.Filtered := False;
         TbHorarioDetalle.Filter := '';
+        TbHorarioDetalle.IndexFieldNames := s;
+        TbHorarioDetalle.EnableControls;
       end;
       QuCruceMateria.IndexFieldNames := 'NomMateria';
     finally
@@ -530,138 +489,181 @@ begin
   end;
 end;
 
-procedure THorarioForm.BtnCruceMateriaClick(Sender: TObject);
-var
-  MasterDetailEditorForm: TMasterDetailEditorForm;
-begin
-  inherited;
-  with SourceDataModule, MasterDataModule, QuCruceMateria do
-  begin
-    FillCruceMateria;
-    BtnCruceMateria.Enabled := false;
-    MasterDetailEditorForm := TMasterDetailEditorForm.Create(Self);
-    MasterDetailEditorForm.Caption := 'Cruce de Materias';
-    MyMasterDetailShowEditor(MasterDetailEditorForm, QuCruceMateria,
-      QuCruceMateriaDetalle, ConfiguracionForm.edtNomColegio.Text,
-      EdQuCruceMateriaDestroy);
-  end;
+procedure THorarioForm.ActCruceMateriaExecute(Sender: TObject);
+begin			  
+   inherited;
+   with SourceDataModule do
+   begin
+      if TMasterDetailEditorForm.ToggleMasterDetailEditor(FCruceMateriaForm,
+							  ConfigStrings,
+							  ActCruceMateria,
+							  QuCruceMateria,
+							  QuCruceMateriaDetalle) then
+      begin
+	 // QuCruceMateria.Close;
+	 // QuCruceMateriaDetalle.Close;
+	 FillCruceMateria;
+      end;
+   end;
 end;
 
 procedure THorarioForm.FillHorarioDetalleMateriaProhibicion;
 var
   CodHorario: Integer;
+  s, d: string; 
 begin
   with SourceDataModule do
   begin
     CodHorario := TbHorarioCodHorario.Value;
     QuHorarioDetalleMateriaProhibicion.Close;
     QuHorarioDetalleMateriaProhibicion.Open;
-    TbMateriaProhibicion.IndexFieldNames := 'CodMateria;CodDia;CodHora';
-    TbHorarioDetalle.IndexFieldNames := 'CodHorario';
-    if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
-    begin
-      while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
+    TbHorarioDetalle.DisableControls;
+    d := TbHorarioDetalle.IndexFieldNames;
+    try
+      TbHorarioDetalle.IndexFieldNames := 'CodHorario';
+      if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
       begin
-        if TbMateriaProhibicion.FindKey([TbHorarioDetalleCodMateria.Value,
-          TbHorarioDetalleCodDia.Value, TbHorarioDetalleCodHora.Value]) then
-        begin
-          QuHorarioDetalleMateriaProhibicion.Append;
-          QuHorarioDetalleMateriaProhibicionNomMateria.Value := TbHorarioDetalleNomMateria.Value;
-          QuHorarioDetalleMateriaProhibicionCodHora.Value := TbHorarioDetalleCodHora.Value;
-          QuHorarioDetalleMateriaProhibicionCodDia.Value := TbHorarioDetalleCodDia.Value;
-          QuHorarioDetalleMateriaProhibicionCodMateProhibicionTipo.Value := TbMateriaProhibicionCodMateProhibicionTipo.Value;
-          QuHorarioDetalleMateriaProhibicionCodNivel.Value := TbHorarioDetalleCodNivel.Value;
-          QuHorarioDetalleMateriaProhibicionCodEspecializacion.Value := TbHorarioDetalleCodEspecializacion.Value;
-          QuHorarioDetalleMateriaProhibicionCodParaleloId.Value := TbHorarioDetalleCodParaleloId.Value;
-          QuHorarioDetalleMateriaProhibicion.Post;
+        TbMateriaProhibicion.DisableControls;
+        s := TbMateriaProhibicion.IndexFieldNames;
+        try
+          TbMateriaProhibicion.IndexFieldNames := 'CodMateria;CodDia;CodHora';
+          while (TbHorarioDetalleCodHorario.Value = CodHorario)
+      	    and not TbHorarioDetalle.Eof do
+          begin
+            if TbMateriaProhibicion.FindKey([TbHorarioDetalleCodMateria.Value,
+              TbHorarioDetalleCodDia.Value, TbHorarioDetalleCodHora.Value]) then
+            begin
+              QuHorarioDetalleMateriaProhibicion.Append;
+              QuHorarioDetalleMateriaProhibicionNomMateria.Value :=
+                TbHorarioDetalleNomMateria.Value;
+              QuHorarioDetalleMateriaProhibicionCodHora.Value :=
+                TbHorarioDetalleCodHora.Value;
+              QuHorarioDetalleMateriaProhibicionCodDia.Value :=
+                TbHorarioDetalleCodDia.Value;
+              QuHorarioDetalleMateriaProhibicionCodMateProhibicionTipo.Value :=
+                TbMateriaProhibicionCodMateProhibicionTipo.Value;
+              QuHorarioDetalleMateriaProhibicionCodNivel.Value :=
+                TbHorarioDetalleCodNivel.Value;
+              QuHorarioDetalleMateriaProhibicionCodEspecializacion.Value :=
+                TbHorarioDetalleCodEspecializacion.Value;
+              QuHorarioDetalleMateriaProhibicionCodParaleloId.Value :=
+                TbHorarioDetalleCodParaleloId.Value;
+              QuHorarioDetalleMateriaProhibicion.Post;
+            end;
+            TbHorarioDetalle.Next;
+          end;
+        finally
+          TbMateriaProhibicion.IndexFieldNames := s;
+          TbMateriaProhibicion.EnableControls;
         end;
-        TbHorarioDetalle.Next;
       end;
+    finally
+      s := TbMateriaProhibicion.IndexFieldNames;
+      TbHorarioDetalle.EnableControls;
     end;
   end;
 end;
 
-procedure THorarioForm.BtnMateriaProhibicionNoRespetadaClick(Sender: TObject);
-var
-  FSingleEditor: TSingleEditorForm;
+procedure THorarioForm.ActMateriaProhibicionNoRespetadaExecute(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule, QuHorarioDetalleMateriaProhibicion do
+  if TSingleEditorForm.ToggleSingleEditor(FMateriaProhibicionNoRespetadaForm,
+					  MainForm.ConfigStrings,
+					  ActMateriaProhibicionNoRespetada,
+					  QuHorarioDetalleMateriaProhibicion) then
   begin
+   // QuHorarioDetalleMateriaProhibicion.Close;
     FillHorarioDetalleMateriaProhibicion;
-    BtnMateriaProhibicionNoRespetada.Enabled := false;
-    FSingleEditor := TSingleEditorForm.Create(Self);
-    FSingleEditor.Caption := Description[TbMateriaProhibicion] +
-      ' No Respetadas';
-    MySingleShowEditor(FSingleEditor, QuHorarioDetalleMateriaProhibicion,
-      ConfiguracionForm.edtNomColegio.Text, EdQuHorarioDetalleMateriaProhibicionDestroy);
   end;
 end;
 
 procedure THorarioForm.FillHorarioDetalleProfesorProhibicion;
 var
-  CodHorario, CodMateria, CodNivel, CodEspecializacion, CodParaleloId: Integer;
+   CodHorario, CodMateria, CodNivel, CodEspecializacion, CodParaleloId: Integer;
+   r, s, d: string;
 begin
   with SourceDataModule do
   begin
     CodHorario := TbHorarioCodHorario.Value;
-    QuHorarioDetalleProfesorProhibicion.Close;
-    QuHorarioDetalleProfesorProhibicion.Open;
-    TbProfesorProhibicion.IndexFieldNames := 'CodProfesor;CodDia;CodHora';
-    TbHorarioDetalle.IndexFieldNames :=
-      'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
-    TbDistributivo.IndexFieldNames :=
-      'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
-    if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
-    begin
-      TbDistributivo.First;
-      while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
+    TbHorarioDetalle.DisableControls; 
+    r := TbHorarioDetalle.IndexFieldNames;
+    try
+      TbHorarioDetalle.IndexFieldNames :=
+        'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+      if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
       begin
-        CodMateria := TbHorarioDetalleCodMateria.Value;
-        CodNivel := TbHorarioDetalleCodNivel.Value;
-        CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
-        CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
-        while ((TbDistributivoCodMateria.Value <> CodMateria)
-          or (TbDistributivoCodNivel.Value <> CodNivel)
-          or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
-          or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
-          and not TbDistributivo.Eof do
-          TbDistributivo.Next;
-        if TbProfesorProhibicion.FindKey([TbDistributivoCodProfesor.Value,
-          TbHorarioDetalleCodDia.Value, TbHorarioDetalleCodHora.Value]) then
-        begin
-          QuHorarioDetalleProfesorProhibicion.Append;
-          QuHorarioDetalleProfesorProhibicionApeNomProfesor.Value := TbDistributivoApeNomProfesor.Value;
-          QuHorarioDetalleProfesorProhibicionCodHora.Value := TbHorarioDetalleCodHora.Value;
-          QuHorarioDetalleProfesorProhibicionCodDia.Value := TbHorarioDetalleCodDia.Value;
-          QuHorarioDetalleProfesorProhibicionCodProfProhibicionTipo.Value := TbProfesorProhibicionCodProfProhibicionTipo.Value;
-          QuHorarioDetalleProfesorProhibicionCodNivel.Value := TbHorarioDetalleCodNivel.Value;
-          QuHorarioDetalleProfesorProhibicionCodEspecializacion.Value := TbHorarioDetalleCodEspecializacion.Value;
-          QuHorarioDetalleProfesorProhibicionCodParaleloId.Value := TbHorarioDetalleCodParaleloId.Value;
-          QuHorarioDetalleProfesorProhibicion.Post;
+        TbDistributivo.DisableControls;
+        s := TbDistributivo.IndexFieldNames;
+        TbProfesorProhibicion.DisableControls;
+        d := TbProfesorProhibicion.IndexFieldNames;
+        QuHorarioDetalleProfesorProhibicion.DisableControls;
+        try
+          QuHorarioDetalleProfesorProhibicion.Close;
+          QuHorarioDetalleProfesorProhibicion.Open;
+          TbProfesorProhibicion.IndexFieldNames := 'CodProfesor;CodDia;CodHora';
+          TbDistributivo.IndexFieldNames :=
+            'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+          TbDistributivo.First;
+          while (TbHorarioDetalleCodHorario.Value = CodHorario)
+            and not TbHorarioDetalle.Eof do
+          begin
+            CodMateria := TbHorarioDetalleCodMateria.Value;
+            CodNivel := TbHorarioDetalleCodNivel.Value;
+            CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
+            CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
+            while ((TbDistributivoCodMateria.Value <> CodMateria)
+              or (TbDistributivoCodNivel.Value <> CodNivel)
+              or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
+              or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
+              and not TbDistributivo.Eof do
+              TbDistributivo.Next;
+            if TbProfesorProhibicion.FindKey([TbDistributivoCodProfesor.Value,
+              TbHorarioDetalleCodDia.Value, TbHorarioDetalleCodHora.Value]) then
+            begin
+              QuHorarioDetalleProfesorProhibicion.Append;
+              QuHorarioDetalleProfesorProhibicionApeNomProfesor.Value :=
+    	    TbDistributivoApeNomProfesor.Value;
+              QuHorarioDetalleProfesorProhibicionCodHora.Value :=
+    	    TbHorarioDetalleCodHora.Value;
+              QuHorarioDetalleProfesorProhibicionCodDia.Value :=
+    	    TbHorarioDetalleCodDia.Value;
+              QuHorarioDetalleProfesorProhibicionCodProfProhibicionTipo.Value :=
+    	    TbProfesorProhibicionCodProfProhibicionTipo.Value;
+              QuHorarioDetalleProfesorProhibicionCodNivel.Value :=
+    	    TbHorarioDetalleCodNivel.Value;
+              QuHorarioDetalleProfesorProhibicionCodEspecializacion.Value :=
+    	    TbHorarioDetalleCodEspecializacion.Value;
+              QuHorarioDetalleProfesorProhibicionCodParaleloId.Value :=
+    	    TbHorarioDetalleCodParaleloId.Value;
+              QuHorarioDetalleProfesorProhibicion.Post;
+            end;
+            TbHorarioDetalle.Next;
+          end;
+        finally
+          TbDistributivo.IndexFieldNames := s;
+          TbProfesorProhibicion.IndexFieldNames := d;
+          TbDistributivo.EnableControls;
+          TbProfesorProhibicion.EnableControls;
+          QuHorarioDetalleProfesorProhibicion.EnableControls;
         end;
-        TbHorarioDetalle.Next;
       end;
+    finally
+      TbHorarioDetalle.IndexFieldNames := r;
+      TbHorarioDetalle.EnableControls;
     end;
   end;
 end;
 
-procedure THorarioForm.BtnProfesorProhibicionNoRespetadaClick(Sender:
-  TObject);
-var
-  FSingleEditor: TSingleEditorForm;
+procedure THorarioForm.ActProfesorProhibicionNoRespetadaExecute(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule, QuHorarioDetalleProfesorProhibicion do
+  if TSingleEditorForm.ToggleSingleEditor(FProfesorProhibicionNoRespetadaForm,
+					  ConfigStrings,
+					  ActProfesorProhibicionNoRespetada,
+					  QuHorarioDetalleProfesorProhibicion) then
   begin
+    // QuHorarioDetalleProfesorProhibicion.Close;
     FillHorarioDetalleProfesorProhibicion;
-    BtnProfesorProhibicionNoRespetada.Enabled := false;
-    FSingleEditor := TSingleEditorForm.Create(Self);
-    FSingleEditor.Caption := 'Prohibiciones de profesor no respetadas';
-    MySingleShowEditor(FSingleEditor,
-      QuHorarioDetalleProfesorProhibicion,
-      ConfiguracionForm.edtNomColegio.Text,
-      EdQuHorarioDetalleProfesorProhibicionDestroy);
   end;
 end;
 
@@ -677,72 +679,72 @@ begin
     QuCruceAula.Open;
     CodHorario := TbHorarioCodHorario.Value;
     TbHorarioDetalle.DisableControls;
+    d := TbHorarioDetalle.IndexFieldNames;
     try
-      d := TbHorarioDetalle.IndexFieldNames;
       TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
-      try
-        if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
-        begin
-          s := TbDistributivo.IndexFieldNames;
-          TbDistributivo.DisableControls;
-          TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
-          TbDistributivo.First;
-          QuCruceAula.DisableControls;
-          try
-            while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
+      TbHorarioDetalle.First;
+      if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
+      begin
+        TbDistributivo.DisableControls;
+        s := TbDistributivo.IndexFieldNames;
+        TbDistributivo.IndexFieldNames :=
+	    'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+        TbDistributivo.First;
+        QuCruceAula.DisableControls;
+        try
+          while (TbHorarioDetalleCodHorario.Value = CodHorario)
+	      and not TbHorarioDetalle.Eof do
+          begin
+            CodMateria := TbHorarioDetalleCodMateria.Value;
+            CodNivel := TbHorarioDetalleCodNivel.Value;
+            CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
+            CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
+            while ((TbDistributivoCodMateria.Value <> CodMateria)
+              or (TbDistributivoCodNivel.Value <> CodNivel)
+              or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
+              or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
+              and not TbDistributivo.Eof do
+              TbDistributivo.Next;
+            CodAulaTipo := TbDistributivoCodAulaTipo.Value;
+            CodHora := TbHorarioDetalleCodHora.Value;
+            CodDia := TbHorarioDetalleCodDia.Value;
+            if QuCruceAula.FindKey([CodAulaTipo, CodDia, CodHora]) then
             begin
-              CodMateria := TbHorarioDetalleCodMateria.Value;
-              CodNivel := TbHorarioDetalleCodNivel.Value;
-              CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
-              CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
-              while ((TbDistributivoCodMateria.Value <> CodMateria)
-                or (TbDistributivoCodNivel.Value <> CodNivel)
-                or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
-                or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
-                and not TbDistributivo.Eof do
-                TbDistributivo.Next;
-              CodAulaTipo := TbDistributivoCodAulaTipo.Value;
-              CodHora := TbHorarioDetalleCodHora.Value;
-              CodDia := TbHorarioDetalleCodDia.Value;
-              if QuCruceAula.FindKey([CodAulaTipo, CodDia, CodHora]) then
-              begin
-                QuCruceAula.Edit;
-                with QuCruceAulaUsadas do Value := Value + 1;
-              end
-              else
-              begin
-                QuCruceAula.Append;
-                QuCruceAulaCodAulaTipo.Value := CodAulaTipo;
-                QuCruceAulaCodHora.Value := CodHora;
-                QuCruceAulaCodDia.Value := CodDia;
-                QuCruceAulaUsadas.Value := 1;
-              end;
-              QuCruceAula.Post;
-              TbHorarioDetalle.Next;
-            end;
-            QuCruceAula.First;
-            while not QuCruceAula.Eof do
+              QuCruceAula.Edit;
+              with QuCruceAulaUsadas do Value := Value + 1;
+            end
+            else
             begin
-              if QuCruceAulaUsadas.Value > QuCruceAulaCantidad.Value then
-              begin
-                QuCruceAula.Edit;
-                QuCruceAulaCruces.Value := QuCruceAulaUsadas.Value - QuCruceAulaCantidad.Value;
-                QuCruceAula.Post;
-                QuCruceAula.Next;
-              end
-              else
-                QuCruceAula.Delete;
+              QuCruceAula.Append;
+              QuCruceAulaCodAulaTipo.Value := CodAulaTipo;
+              QuCruceAulaCodHora.Value := CodHora;
+              QuCruceAulaCodDia.Value := CodDia;
+              QuCruceAulaUsadas.Value := 1;
             end;
-          finally
-            TbDistributivo.IndexFieldNames := s;
-            TbDistributivo.EnableControls;
-            QuCruceAula.EnableControls;
+            QuCruceAula.Post;
+            TbHorarioDetalle.Next;
           end;
+          QuCruceAula.First;
+          while not QuCruceAula.Eof do
+          begin
+            if QuCruceAulaUsadas.Value > QuCruceAulaCantidad.Value then
+            begin
+              QuCruceAula.Edit;
+              QuCruceAulaCruces.Value := QuCruceAulaUsadas.Value - QuCruceAulaCantidad.Value;
+              QuCruceAula.Post;
+              QuCruceAula.Next;
+            end
+            else
+              QuCruceAula.Delete;
+          end;
+        finally
+          TbDistributivo.IndexFieldNames := s;
+          TbDistributivo.EnableControls;
+          QuCruceAula.EnableControls;
         end;
-      finally
-        TbHorarioDetalle.IndexFieldNames := d;
       end;
     finally
+      TbHorarioDetalle.IndexFieldNames := d;
       TbHorarioDetalle.EnableControls;
     end;
   end;
@@ -811,23 +813,24 @@ begin
   end;
 end;
 
-procedure THorarioForm.BtnCruceAulaClick(Sender: TObject);
-var
-  MasterDetailEditorForm: TMasterDetailEditorForm;
+procedure THorarioForm.ActCruceAulaExecute(Sender: TObject);
 begin
   inherited;
   with SourceDataModule, QuCruceAula do
   begin
-    FillCruceAula;
-    FillCruceAulaDetalle;
-    Last;
-    First;
-    BtnCruceAula.Enabled := false;
-    MasterDetailEditorForm := TMasterDetailEditorForm.Create(Self);
-    MasterDetailEditorForm.Caption := 'Cruce de aulas del mismo tipo';
-    MyMasterDetailShowEditor(MasterDetailEditorForm, QuCruceAula,
-      QuCruceAulaDetalle, ConfiguracionForm.edtNomColegio.Text,
-      EdQuCruceAulaTipoDestroy);
+     if TMasterDetailEditorForm.ToggleMasterDetailEditor(FCruceAulaForm,
+							 ConfigStrings,
+							 ActCruceAula,
+							 QuCruceAula,
+							 QuCruceAulaDetalle) then
+     begin
+	// QuCruceAula.Close;
+	// QuCruceAulaDetalle.Close;
+	FillCruceAula;
+	FillCruceAulaDetalle;
+	Last;
+	First;
+     end;
   end;
 end;
 
@@ -847,7 +850,7 @@ begin
     [QuCruceMateriaCodMateria.Value]);
 end;
 
-procedure THorarioForm.BtnSeleccionarHorarioClick(Sender: TObject);
+procedure THorarioForm.ActSeleccionarHorarioExecute(Sender: TObject);
 begin
   inherited;
   ConfiguracionForm.lblHorarioSeleccionado.Caption :=
@@ -865,22 +868,23 @@ begin
   with SourceDataModule do
   begin
     CodHorario := TbHorarioCodHorario.Value;
-    QuMateriaCortadaDia.Close;
-    QuMateriaCortadaDia.Open;
     TbHorarioDetalle.DisableControls;
+    d := TbHorarioDetalle.IndexFieldNames;
     try
-      d := TbHorarioDetalle.IndexFieldNames;
       TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
-      try
-        if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
-        begin
-          CodNivel1 := TbHorarioDetalleCodNivel.Value;
-          CodEspecializacion1 := TbHorarioDetalleCodEspecializacion.Value;
-          CodParaleloId1 := TbHorarioDetalleCodParaleloId.Value;
-          CodDia1 := TbHorarioDetalleCodDia.Value;
-          CodHora1 := TbHorarioDetalleCodHora.Value;
-          Sesion1 := TbHorarioDetalleSesion.Value;
-          TbHorarioDetalle.Next;
+      if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
+      begin
+        CodNivel1 := TbHorarioDetalleCodNivel.Value;
+        CodEspecializacion1 := TbHorarioDetalleCodEspecializacion.Value;
+        CodParaleloId1 := TbHorarioDetalleCodParaleloId.Value;
+        CodDia1 := TbHorarioDetalleCodDia.Value;
+        CodHora1 := TbHorarioDetalleCodHora.Value;
+        Sesion1 := TbHorarioDetalleSesion.Value;
+        TbHorarioDetalle.Next;
+        QuMateriaCortadaDia.Close;
+        QuMateriaCortadaDia.Open;
+        QuMateriaCortadaDia.DisableControls;
+        try
           while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
           begin
             CodNivel := TbHorarioDetalleCodNivel.Value;
@@ -920,175 +924,192 @@ begin
             Sesion1 := Sesion;
             TbHorarioDetalle.Next;
           end;
-        end
-      finally
-        TbHorarioDetalle.IndexFieldNames := d;
-      end;
+        finally
+          QuMateriaCortadaDia.EnableControls;
+        end;
+      end
     finally
+      TbHorarioDetalle.IndexFieldNames := d;
       TbHorarioDetalle.EnableControls;
     end;
   end;
 end;
 
-procedure THorarioForm.BtnMateriaCortadaDiaClick(Sender: TObject);
-var
-  SingleEditorForm: TSingleEditorForm;
+procedure THorarioForm.ActMateriaCortadaDiaExecute(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule, QuMateriaCortadaDia do
-  begin
+  if TSingleEditorForm.ToggleSingleEditor(FMateriaCortadaDiaForm,
+					MainForm.ConfigStrings,
+					ActMateriaCortadaDia,
+					QuMateriaCortadaDia) then
+  begin;
+    // QuMateriaCortadaDia.Close;
     FillMateriaCortadaDia;
-    BtnMateriaCortadaDia.Enabled := false;
-    SingleEditorForm := TSingleEditorForm.Create(Self);
-    SingleEditorForm.Caption := 'Materias cortadas por el día';
-    MySingleShowEditor(SingleEditorForm, QuMateriaCortadaDia,
-      ConfiguracionForm.edtNomColegio.Text, EdQuMateriaCortadaDiaDestroy);
   end;
 end;
 
 procedure THorarioForm.FillMateriaCortadaHora;
 var
-  s: string;
+  d, h, s: string;
   CodHorario, CodMateria, CodNivel, CodEspecializacion, CodParaleloId, CodDia,
     CodHora, CodNivel1, CodMateria1, CodEspecializacion1, CodParaleloId1,
     CodHora1, CodDia1, CodHora2: Integer;
 begin
   with SourceDataModule do
   begin
-    QuMateriaCortadaHora.Close;
-    QuMateriaCortadaHora.Open;
-    QuMateriaCortadaHoraDetalle.Close;
-    QuMateriaCortadaHoraDetalle.Open;
-    TbHora.IndexFieldNames := 'CodHora';
-    TbDia.IndexFieldNames := 'CodDia';
-    TbHora.First;
-    TbPeriodo.IndexFieldNames := 'CodDia;CodHora';
-    while not TbHora.Eof do
-    begin
-      TbDia.First;
-      CodHora := TbHoraCodHora.Value;
-      while not TbDia.Eof do
-      begin
-        CodDia := TbDiaCodDia.Value;
-        if not TbPeriodo.FindKey([CodDia, CodHora]) then
-        begin
-          QuMateriaCortadaHora.Append;
-          QuMateriaCortadaHoraCodDia.Value := CodDia;
-          QuMateriaCortadaHoraCodHora.Value := CodHora;
-          QuMateriaCortadaHora.Post;
-        end;
-        TbDia.Next;
-      end;
-      TbHora.Next;
-    end;
-    QuMateriaCortadaHora.First;
-    s := TbHorarioDetalle.IndexFieldNames;
-    TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+    QuMateriaCortadaHora.DisableControls;
+    QuMateriaCortadaHoraDetalle.DisableControls;
+    TbHora.DisableControls;
+    TbDia.DisableControls;
+    h := TbHora.IndexFieldNames;
+    d := TbDia.IndexFieldNames;
     try
-      CodHorario := TbHorarioCodHorario.Value;
-      if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
+      QuMateriaCortadaHora.Close;
+      QuMateriaCortadaHora.Open;
+      QuMateriaCortadaHoraDetalle.Close;
+      QuMateriaCortadaHoraDetalle.Open;
+      TbHora.IndexFieldNames := 'CodHora';
+      TbDia.IndexFieldNames := 'CodDia';
+      TbHora.First;
+      TbPeriodo.IndexFieldNames := 'CodDia;CodHora';
+      while not TbHora.Eof do
       begin
-        CodMateria1 := TbHorarioDetalleCodMateria.Value;
-        CodNivel1 := TbHorarioDetalleCodNivel.Value;
-        CodEspecializacion1 := TbHorarioDetalleCodEspecializacion.Value;
-        CodParaleloId1 := TbHorarioDetalleCodParaleloId.Value;
-        CodDia1 := TbHorarioDetalleCodDia.Value;
-        CodHora1 := TbHorarioDetalleCodHora.Value;
-        TbHorarioDetalle.Next;
-        while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
+        TbDia.First;
+        CodHora := TbHoraCodHora.Value;
+        while not TbDia.Eof do
         begin
-          CodMateria := TbHorarioDetalleCodMateria.Value;
-          CodNivel := TbHorarioDetalleCodNivel.Value;
-          CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
-          CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
-          CodDia := TbHorarioDetalleCodDia.Value;
-          CodHora2 := TbHorarioDetalleCodHora.Value;
-          if (CodMateria1 = CodMateria)
-            and (CodNivel1 = CodNivel)
-            and (CodEspecializacion1 = CodEspecializacion)
-            and (CodParaleloId1 = CodParaleloId)
-            and (CodDia1 = CodDia)
-            and QuMateriaCortadaHora.Locate('CodDia', CodDia, []) then
+          CodDia := TbDiaCodDia.Value;
+          if not TbPeriodo.FindKey([CodDia, CodHora]) then
           begin
-            while (QuMateriaCortadaHoraCodDia.Value = CodDia) and not QuMateriaCortadaHora.Eof do
-            begin
-              CodHora := QuMateriaCortadaHoraCodHora.Value;
-              if (CodHora1 < CodHora)
-                and (CodHora < CodHora2) then
-              begin
-                QuMateriaCortadaHoraDetalle.Append;
-                QuMateriaCortadaHoraDetalleCodMateria.Value := CodMateria;
-                QuMateriaCortadaHoraDetalleCodNivel.Value := CodNivel;
-                QuMateriaCortadaHoraDetalleCodEspecializacion.Value := CodEspecializacion;
-                QuMateriaCortadaHoraDetalleCodParaleloId.Value := CodParaleloId;
-                QuMateriaCortadaHoraDetalleCodDia.Value := CodDia;
-                QuMateriaCortadaHoraDetalleCodHora.Value := CodHora;
-                QuMateriaCortadaHoraDetalleCodHora0.Value := CodHora1;
-                QuMateriaCortadaHoraDetalle.Post;
-                QuMateriaCortadaHoraDetalle.Append;
-                QuMateriaCortadaHoraDetalleCodMateria.Value := CodMateria;
-                QuMateriaCortadaHoraDetalleCodNivel.Value := CodNivel;
-                QuMateriaCortadaHoraDetalleCodEspecializacion.Value := CodEspecializacion;
-                QuMateriaCortadaHoraDetalleCodParaleloId.Value := CodParaleloId;
-                QuMateriaCortadaHoraDetalleCodDia.Value := CodDia;
-                QuMateriaCortadaHoraDetalleCodHora.Value := CodHora;
-                QuMateriaCortadaHoraDetalleCodHora0.Value := CodHora2;
-                QuMateriaCortadaHoraDetalle.Post;
-              end;
-              QuMateriaCortadaHora.Next;
-            end;
+            QuMateriaCortadaHora.Append;
+            QuMateriaCortadaHoraCodDia.Value := CodDia;
+            QuMateriaCortadaHoraCodHora.Value := CodHora;
+            QuMateriaCortadaHora.Post;
           end;
-          CodMateria1 := CodMateria;
-          CodNivel1 := CodNivel;
-          CodEspecializacion1 := CodEspecializacion;
-          CodParaleloId1 := CodParaleloId;
-          CodDia1 := CodDia;
-          CodHora1 := CodHora2;
-          TbHorarioDetalle.Next;
+          TbDia.Next;
         end;
+        TbHora.Next;
       end;
       QuMateriaCortadaHora.First;
-      while not QuMateriaCortadaHora.Eof do
-      begin
-        if QuMateriaCortadaHoraDetalle.RecordCount = 0 then
-          QuMateriaCortadaHora.Delete
-        else
-          QuMateriaCortadaHora.Next;
+      TbHorarioDetalle.DisableControls;
+      s := TbHorarioDetalle.IndexFieldNames;
+      try
+        TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+        CodHorario := TbHorarioCodHorario.Value;
+        if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
+        begin
+          CodMateria1 := TbHorarioDetalleCodMateria.Value;
+          CodNivel1 := TbHorarioDetalleCodNivel.Value;
+          CodEspecializacion1 := TbHorarioDetalleCodEspecializacion.Value;
+          CodParaleloId1 := TbHorarioDetalleCodParaleloId.Value;
+          CodDia1 := TbHorarioDetalleCodDia.Value;
+          CodHora1 := TbHorarioDetalleCodHora.Value;
+          TbHorarioDetalle.Next;
+          while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
+          begin
+            CodMateria := TbHorarioDetalleCodMateria.Value;
+            CodNivel := TbHorarioDetalleCodNivel.Value;
+            CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
+            CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
+            CodDia := TbHorarioDetalleCodDia.Value;
+            CodHora2 := TbHorarioDetalleCodHora.Value;
+            if (CodMateria1 = CodMateria)
+              and (CodNivel1 = CodNivel)
+              and (CodEspecializacion1 = CodEspecializacion)
+              and (CodParaleloId1 = CodParaleloId)
+              and (CodDia1 = CodDia)
+              and QuMateriaCortadaHora.Locate('CodDia', CodDia, []) then
+            begin
+              while (QuMateriaCortadaHoraCodDia.Value = CodDia) and not QuMateriaCortadaHora.Eof do
+              begin
+                CodHora := QuMateriaCortadaHoraCodHora.Value;
+                if (CodHora1 < CodHora)
+                  and (CodHora < CodHora2) then
+                begin
+                  QuMateriaCortadaHoraDetalle.Append;
+                  QuMateriaCortadaHoraDetalleCodMateria.Value := CodMateria;
+                  QuMateriaCortadaHoraDetalleCodNivel.Value := CodNivel;
+                  QuMateriaCortadaHoraDetalleCodEspecializacion.Value := CodEspecializacion;
+                  QuMateriaCortadaHoraDetalleCodParaleloId.Value := CodParaleloId;
+                  QuMateriaCortadaHoraDetalleCodDia.Value := CodDia;
+                  QuMateriaCortadaHoraDetalleCodHora.Value := CodHora;
+                  QuMateriaCortadaHoraDetalleCodHora0.Value := CodHora1;
+                  QuMateriaCortadaHoraDetalle.Post;
+                  QuMateriaCortadaHoraDetalle.Append;
+                  QuMateriaCortadaHoraDetalleCodMateria.Value := CodMateria;
+                  QuMateriaCortadaHoraDetalleCodNivel.Value := CodNivel;
+                  QuMateriaCortadaHoraDetalleCodEspecializacion.Value := CodEspecializacion;
+                  QuMateriaCortadaHoraDetalleCodParaleloId.Value := CodParaleloId;
+                  QuMateriaCortadaHoraDetalleCodDia.Value := CodDia;
+                  QuMateriaCortadaHoraDetalleCodHora.Value := CodHora;
+                  QuMateriaCortadaHoraDetalleCodHora0.Value := CodHora2;
+                  QuMateriaCortadaHoraDetalle.Post;
+                end;
+                QuMateriaCortadaHora.Next;
+              end;
+            end;
+            CodMateria1 := CodMateria;
+            CodNivel1 := CodNivel;
+            CodEspecializacion1 := CodEspecializacion;
+            CodParaleloId1 := CodParaleloId;
+            CodDia1 := CodDia;
+            CodHora1 := CodHora2;
+            TbHorarioDetalle.Next;
+          end;
+        end;
+        QuMateriaCortadaHora.First;
+        while not QuMateriaCortadaHora.Eof do
+        begin
+          if QuMateriaCortadaHoraDetalle.RecordCount = 0 then
+            QuMateriaCortadaHora.Delete
+          else
+            QuMateriaCortadaHora.Next;
+        end;
+      finally
+        TbHorarioDetalle.EnableControls;
+        TbHorarioDetalle.IndexFieldNames := s;
       end;
     finally
-      TbHorarioDetalle.IndexFieldNames := s;
-    end;
+      QuMateriaCortadaHora.EnableControls;
+      QuMateriaCortadaHoraDetalle.EnableControls;
+      TbHora.IndexFieldNames := h;
+      TbDia.IndexFieldNames := d;
+      TbHora.EnableControls;
+      TbDia.EnableControls;
+    end
   end;
 end;
 
-procedure THorarioForm.BtnMateriaCortadaHoraClick(Sender: TObject);
-var
-  MasterDetailEditorForm: TMasterDetailEditorForm;
+procedure THorarioForm.ActMateriaCortadaHoraExecute(Sender: TObject);
 begin
   inherited;
   with SourceDataModule, QuMateriaCortadaHora do
   begin
-    FillMateriaCortadaHora;
-    BtnMateriaCortadaHora.Enabled := false;
-    MasterDetailEditorForm := TMasterDetailEditorForm.Create(Self);
-    MasterDetailEditorForm.Caption := 'Materias cortadas por la hora';
-    MyMasterDetailShowEditor(MasterDetailEditorForm, QuMateriaCortadaHora,
-      QuMateriaCortadaHoraDetalle, ConfiguracionForm.edtNomColegio.Text,
-      EdQuMateriaCortadaHoraDestroy);
+     if TMasterDetailEditorForm.ToggleMasterDetailEditor(FMateriaCortadaHoraForm,
+							 ConfigStrings,
+							 ActMateriaCortadaHora,
+							 QuMateriaCortadaHora,
+							 QuMateriaCortadaHoraDetalle) then
+     begin
+	// QuMateriaCortadaHora.Close;
+	// QuMateriaCortadaHoraDetalle.Close;
+	FillMateriaCortadaHora;
+     end;
   end;
 end;
 
-procedure THorarioForm.BtnHorarioAulaTipoClick(Sender: TObject);
-var
-  HorarioAulaTipoForm: THorarioAulaTipoForm;
+procedure THorarioForm.ActHorarioAulaTipoExecute(Sender: TObject);
 begin
   inherited;
-  HorarioAulaTipoForm := THorarioAulaTipoForm.Create(Self);
-  with SourceDataModule, HorarioAulaTipoForm do
+  if THorarioAulaTipoForm.ToggleEditor(FHorarioAulaTipoForm,
+				       ConfigStrings,
+				       ActHorarioAulaTipo) then
   begin
-    Caption := Format('%s %d', [Description[TbHorario],
-      TbHorarioCodHorario.Value]);
-    LoadHints(HorarioAulaTipoForm, TbDia, TbHora, TbMateria);
+    with SourceDataModule do
+    begin
+      LoadHints(FHorarioAulaTipoForm, TbDia, TbHora, TbMateria);
+    end;
+    FHorarioAulaTipoForm.BtnMostrarClick(nil);
   end;
 end;
 
@@ -1107,5 +1128,16 @@ begin
   DBGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
-end.
+procedure THorarioForm.doLoadConfig;
+begin
+  inherited;
+  Panel2.Width := ConfigIntegers['Panel2_Width'];
+end;
 
+procedure THorarioForm.doSaveConfig;
+begin
+  inherited;
+  ConfigIntegers['Panel2_Width'] := Panel2.Width;
+end;
+
+end.

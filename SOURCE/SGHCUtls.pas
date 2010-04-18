@@ -3,15 +3,8 @@ unit SGHCUtls;
 interface
 
 uses
-  Classes, Forms, Db, FCrsMMEd, FCrsMMER, FSingEdt, FMasDeEd, DSource;
+  Classes, Forms, Db, FCrsMMEd, FCrsMMER, FSingEdt, FMasDeEd, DSource, ActnList;
 
-procedure MyMasterDetailShowEditor(MasterDetailEditorForm:
-  TMasterDetailEditorForm; DataSet, DataSetDetail: TDataSet; const SuperTitle: string; DestroyEvent:
-  TNotifyEvent);
-procedure MySingleShowEditor(FSingleEditor: TSingleEditorForm; DataSet:
-  TDataSet;
-  const SuperTitle: string; DestroyEvent: TNotifyEvent);
-procedure LoadCaption(AForm: TForm; ADataSet: TDataSet);
 function ComposicionADuracion(const s: string): Integer;
 procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorForm;
   AColDataSet, ARowDataSet, ARelDataSet: TDataSet); overload;
@@ -51,6 +44,7 @@ begin
       Description[ALstDataSet]]);
   end;
 end;
+
 (*
 procedure LoadHints(ACrossManyToManyEditorForm: TFCubicalEditor2; AColDataSet,
   ARowDataSet, ALstDataSet, ARelDataSet: TTable);
@@ -80,45 +74,7 @@ begin
     Inc(Result, d);
   end;
 end;
-
-
-procedure LoadCaption(AForm: TForm; ADataSet: TDataSet);
-begin
-  AForm.Caption := SourceDataModule.Description[ADataSet];
-end;
-
-procedure MyMasterDetailShowEditor(MasterDetailEditorForm:
-  TMasterDetailEditorForm;
-  DataSet, DataSetDetail: TDataSet; const SuperTitle: string; DestroyEvent:
-  TNotifyEvent);
-begin
-  MasterDetailEditorForm.DatasourceDetail.DataSet := DataSetDetail;
-  MySingleShowEditor(MasterDetailEditorForm, DataSet, SuperTitle, DestroyEvent);
-end;
-
-procedure MySingleShowEditor(FSingleEditor: TSingleEditorForm; DataSet:
-  TDataSet; const SuperTitle: string; DestroyEvent: TNotifyEvent);
-var
-  s: string;
-begin
-  LoadCaption(FSingleEditor, DataSet);
-  s := SourceDataModule.Name[DataSet];
-  with FSingleEditor do
-  begin
-    OnDestroy := DestroyEvent;
-    with FormStorage do
-    begin
-      if not Active then
-      begin
-        IniSection := IniSection + '\SE' + s;
-        Active := True;
-        RestoreFormPlacement;
-      end;
-    end;
-    ShowEditor(DataSet, SuperTitle);
-  end;
-end;
-
+			   
 procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
   TDataSet; const AColFieldKey, AColFieldName, AColField, ARowFieldsKey,
   ARowFieldName, ARowFields, ARelFieldKey: string);

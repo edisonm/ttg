@@ -11,6 +11,7 @@ object LogisticForm: TLogisticForm
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsStayOnTop
+  OldCreateOrder = True
   Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
@@ -30,7 +31,7 @@ object LogisticForm: TLogisticForm
       Cursor = crVSplit
       Align = alBottom
     end
-    object memLogistic: TMemo
+    object MemLogistic: TMemo
       Left = 1
       Top = 1
       Width = 432
@@ -45,7 +46,7 @@ object LogisticForm: TLogisticForm
       ReadOnly = True
       TabOrder = 0
     end
-    object memResumen: TMemo
+    object MemResumen: TMemo
       Left = 1
       Top = 272
       Width = 432
@@ -86,14 +87,5 @@ object LogisticForm: TLogisticForm
       TabOrder = 0
       Kind = bkClose
     end
-  end
-  object FormStorage: TFormStorage
-    IniSection = '\Software\SGHC\FLogistic'
-    UseRegistry = True
-    StoredProps.Strings = (
-      'memResumen.Height')
-    StoredValues = <>
-    Left = 256
-    Top = 8
   end
 end

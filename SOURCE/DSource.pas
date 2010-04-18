@@ -114,48 +114,6 @@ begin
   end
 end;
 
-(*
-procedure TSourceDataModule.SaveToStream(AStream: TStream);
-var
-  Stream, BZip2Stream: TStream;
-  TTDFileHeader: TTTDFileHeader;
-begin
-  TTDFileHeader.GenHeader := 'TTD' + ^Z;
-  TTDFileHeader.VersionNumber := pfhVersionNumber;
-  AStream.Write(TTDFileHeader, SizeOf(TTDFileHeader));
-  Stream := TMemoryStream.Create;
-  try
-    SaveUncompToStream(Stream);
-    BZip2Stream := TBZCompressionStream.Create(bs9, AStream);
-    // Stream: Datos descomprimidos
-    try
-      BZip2Stream.CopyFrom(Stream, 0);
-    finally
-      BZip2Stream.Free;
-    end;
-  finally
-    Stream.Free;
-  end;
-end;
-
-procedure TSourceDataModule.SaveUnCompToStream(AStream: TStream);
-var
-  StreamConfig: TStream;
-  n: Longint;
-begin
-  SaveToBinaryStream(AStream, FFlags);
-  StreamConfig := TFileStream.Create(ConfiguracionForm.FormStorage.IniFileName,
-    fmOpenRead or fmShareDenyWrite);
-  try
-    n := StreamConfig.Size;
-    AStream.Write(n, SizeOf(n));
-    AStream.CopyFrom(StreamConfig, n);
-  finally
-    StreamConfig.Free;
-  end;
-end;
-*)
-
 procedure TSourceDataModule.NewDatabase;
 begin
   try
@@ -164,68 +122,6 @@ begin
     FillDefaultData;
   end;
 end;
-
-(*
-procedure TSourceDataModule.LoadFromStream(AStream: TStream);
-const
-  BufferSize = 65536;
-var
-  Count: Integer;
-  Buffer: array[0..BufferSize - 1] of Byte;
-  MemoryStream, BZip2Stream: TStream;
-  TTDFileHeader: TTTDFileHeader;
-begin
-  AStream.Read(TTDFileHeader, SizeOf(TTDFileHeader));
-  if TTDFileHeader.GenHeader <> 'TTD' + ^Z then
-    raise EMainDataModuleError.Create(SNotTTDFile);
-  if TTDFileHeader.VersionNumber <> pfhVersionNumber then
-    raise EMainDataModuleError.Create(SInvalidTTDVersion);
-  MemoryStream := TMemoryStream.Create;
-  try
-    BZip2Stream := TBZDecompressionStream.Create(AStream);
-    try
-      while True do
-      begin
-        Count := BZip2Stream.Read(Buffer, BufferSize);
-        if Count <> 0 then MemoryStream.WriteBuffer(Buffer, Count) else Break;
-      end;
-    finally
-      BZip2Stream.Free;
-    end;
-    MemoryStream.Position := 0;
-    LoadUncompFromStream(MemoryStream);
-  finally
-    MemoryStream.Free;
-  end;
-end;
-
-procedure TSourceDataModule.LoadUnCompFromStream(AStream: TStream);
-var
-  n: Longint;
-begin
-  SourceDataModule.EmptyTables;
-  SourceDataModule.LoadFromBinaryStream(AStream);
-  AStream.Read(n, SizeOf(n));
-  with TFileStream.Create(ConfiguracionForm.FormStorage.IniFileName, fmCreate) do
-  try
-    CopyFrom(AStream, n);
-  finally
-    Free;
-  end;
-end;
-
-procedure TSourceDataModule.LoadFromFile(const AFileName: TFileName);
-var
-  Stream: TStream;
-begin
-  Stream := TFileStream.Create(AFileName, fmOpenRead + fmShareDenyNone);
-  try
-    LoadFromStream(Stream);
-  finally
-    Stream.Free;
-  end;
-end;
-*)
 
 procedure TSourceDataModule.FillDefaultData;
 const

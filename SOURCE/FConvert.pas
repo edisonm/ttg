@@ -797,7 +797,7 @@ begin
       if Components[i] is TDataSet then
       begin
         DataSet := TDataSet(Components[i]);
-        cbxDataSet.Items.Add(Name[DataSet]);
+        cbxDataSet.Items.Add(NameDataSet[DataSet]);
       end;
     end;
   end;

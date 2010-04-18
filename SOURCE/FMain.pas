@@ -6,9 +6,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  SysConst, ExtCtrls, DB, Menus, ComCtrls, Placemnt, MRUList, ImgList, Buttons,
+  SysConst, ExtCtrls, DB, Menus, ComCtrls, MRUList, ImgList, Buttons,
   MrgMngr, SpeedBar, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,
-  FSingEdt, QrPrntr, kbmMemTable, FCrsMME0{, Protect};
+  FSingEdt, QrPrntr, kbmMemTable, FCrsMME0, FEditor{, Protect};
 type
   TMainForm = class(TForm)
     MainMenu: TMainMenu;
@@ -37,7 +37,6 @@ type
     MIHora: TMenuItem;
     MIParalelo: TMenuItem;
     SaveDialog: TSaveDialog;
-    FormStorage: TFormStorage;
     OpenDialog: TOpenDialog;
     MIPeriodo: TMenuItem;
     SpeedBar: TToolBar;
@@ -69,28 +68,28 @@ type
     SIConfig: TToolButton;
     MICheckFeasibility: TMenuItem;
     ActionList: TActionList;
-    actNew: TAction;
-    actOpen: TAction;
-    actSave: TAction;
-    actPasswd: TAction;
-    actExit: TAction;
-    actDia: TAction;
-    actHora: TAction;
-    actEspecializacion: TAction;
-    actNivel: TAction;
-    actParaleloId: TAction;
-    actProfesor: TAction;
-    actAulaTipo: TAction;
-    actPeriodo: TAction;
-    actParalelo: TAction;
-    actMateria: TAction;
-    actChequearFactibilidad: TAction;
-    actElaborarHorario: TAction;
-    actConfigurar: TAction;
-    actHorario: TAction;
-    actAbout: TAction;
-    actContents: TAction;
-    actIndex: TAction;
+    ActNew: TAction;
+    ActOpen: TAction;
+    ActSave: TAction;
+    ActPasswd: TAction;
+    ActExit: TAction;
+    ActDia: TAction;
+    ActHora: TAction;
+    ActEspecializacion: TAction;
+    ActNivel: TAction;
+    ActParaleloId: TAction;
+    ActProfesor: TAction;
+    ActAulaTipo: TAction;
+    ActPeriodo: TAction;
+    ActParalelo: TAction;
+    ActMateria: TAction;
+    ActChequearFactibilidad: TAction;
+    ActElaborarHorario: TAction;
+    ActConfigurar: TAction;
+    ActHorario: TAction;
+    ActAbout: TAction;
+    ActContents: TAction;
+    ActIndex: TAction;
     ToolButton1: TToolButton;
     ToolButton2: TToolButton;
     ToolButton3: TToolButton;
@@ -107,18 +106,18 @@ type
     TileVertically1: TMenuItem;
     Arrange1: TMenuItem;
     MIChangePasswd: TMenuItem;
-    actChangePasswd: TAction;
+    ActChangePasswd: TAction;
     Label1: TLabel;
     N2: TMenuItem;
     N5: TMenuItem;
     N6: TMenuItem;
     MIPresentarProfesorHorario: TMenuItem;
     MIPresentarParaleloHorario: TMenuItem;
-    actPresentarParaleloHorario: TAction;
-    actPresentarProfesorHorario: TAction;
-    actPresentarMateriaProhibicion: TAction;
-    actPresentarDistributivoMateria: TAction;
-    actPresentarProfesorProhibicion: TAction;
+    ActPresentarParaleloHorario: TAction;
+    ActPresentarProfesorHorario: TAction;
+    ActPresentarMateriaProhibicion: TAction;
+    ActPresentarDistributivoMateria: TAction;
+    ActPresentarProfesorProhibicion: TAction;
     MIPresentarProfesorProhibicion: TMenuItem;
     MIPresentarMateriaProhibicion: TMenuItem;
     MIPresentarDistributivoMateria: TMenuItem;
@@ -153,18 +152,17 @@ type
     QuProfesorProfesorProhibicionHoraCodHora: TIntegerField;
     QuProfesorProfesorProhibicionHoraNomHora: TStringField;
     TbProfesor1: TkbmMemTable;
-    actPresentarDistributivoProfesor: TAction;
+    ActPresentarDistributivoProfesor: TAction;
     MIPresentarDistributivoProfesor: TMenuItem;
-    actExportarCSV: TAction;
+    ActExportarCSV: TAction;
     ExportarelhorarioaExcel1: TMenuItem;
     N7: TMenuItem;
     N8: TMenuItem;
-    actMejorarHorario: TAction;
+    ActMejorarHorario: TAction;
     MIMejorarHorario: TMenuItem;
     SaveDialogCSV: TSaveDialog;
-    actRegistrationInfo: TAction;
+    ActRegistrationInfo: TAction;
     MIRegistrationInfo: TMenuItem;
-    FSProteccion: TFormStorage;
     QuParaleloHorarioDetalleCodNivel: TIntegerField;
     QuParaleloHorarioDetalleCodEspecializacion: TIntegerField;
     QuParaleloHorarioDetalleCodParaleloId: TIntegerField;
@@ -177,62 +175,64 @@ type
     QuProfesorHorarioDetalleCodHora: TIntegerField;
     QuProfesorHorarioDetalleNombre: TStringField;
     ToolBar: TToolBar;
-    procedure actExitExecute(Sender: TObject);
-    procedure actProfesorExecute(Sender: TObject);
-    procedure actMateriaExecute(Sender: TObject);
-    procedure actEspecializacionExecute(Sender: TObject);
-    procedure actNivelExecute(Sender: TObject);
-    procedure actAulaTipoExecute(Sender: TObject);
-    procedure actParaleloIdExecute(Sender: TObject);
-    procedure actParaleloExecute(Sender: TObject);
-    procedure actDiaExecute(Sender: TObject);
-    procedure actHoraExecute(Sender: TObject);
-    procedure actNewExecute(Sender: TObject);
-    procedure actSaveExecute(Sender: TObject);
-    procedure actOpenExecute(Sender: TObject);
-    procedure actHorarioExecute(Sender: TObject);
-    procedure actElaborarHorarioExecute(Sender: TObject);
-    procedure actPeriodoExecute(Sender: TObject);
+    procedure ActExitExecute(Sender: TObject);
+    procedure ActProfesorExecute(Sender: TObject);
+    procedure ActMateriaExecute(Sender: TObject);
+    procedure ActEspecializacionExecute(Sender: TObject);
+    procedure ActNivelExecute(Sender: TObject);
+    procedure ActAulaTipoExecute(Sender: TObject);
+    procedure ActParaleloIdExecute(Sender: TObject);
+    procedure ActParaleloExecute(Sender: TObject);
+    procedure ActDiaExecute(Sender: TObject);
+    procedure ActHoraExecute(Sender: TObject);
+    procedure ActNewExecute(Sender: TObject);
+    procedure ActSaveExecute(Sender: TObject);
+    procedure ActOpenExecute(Sender: TObject);
+    procedure ActHorarioExecute(Sender: TObject);
+    procedure ActElaborarHorarioExecute(Sender: TObject);
+    procedure ActPeriodoExecute(Sender: TObject);
     procedure StatusBarDrawPanel(StatusBar: TStatusBar;
       Panel: TStatusPanel; const Rect: TRect);
     procedure FormCreate(Sender: TObject);
     procedure MRUManagerClick(Sender: TObject; const RecentName,
       Caption: string; UserData: Integer);
-    procedure actConfigurarExecute(Sender: TObject);
-    procedure actChequearFactibilidadExecute(Sender: TObject);
-    procedure actAboutExecute(Sender: TObject);
+    procedure ActConfigurarExecute(Sender: TObject);
+    procedure ActChequearFactibilidadExecute(Sender: TObject);
+    procedure ActAboutExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDestroy(Sender: TObject);
-    procedure actPresentarProfesorHorarioExecute(Sender: TObject);
-    procedure actPresentarParaleloHorarioExecute(Sender: TObject);
+    procedure ActPresentarProfesorHorarioExecute(Sender: TObject);
+    procedure ActPresentarParaleloHorarioExecute(Sender: TObject);
     procedure QuParaleloAfterScroll(DataSet: TDataSet);
     procedure QuProfesorAfterScroll(DataSet: TDataSet);
     procedure TbParaleloFilterRecord(DataSet: TDataSet;
       var Accept: Boolean);
     procedure TbProfesorFilterRecord(DataSet: TDataSet;
       var Accept: Boolean);
-    procedure actPresentarMateriaProhibicionExecute(Sender: TObject);
+    procedure ActPresentarMateriaProhibicionExecute(Sender: TObject);
     procedure TbMateriaFilterRecord(DataSet: TDataSet;
       var Accept: Boolean);
     procedure QuMateriaMateriaProhibicionAfterScroll(DataSet: TDataSet);
-    procedure actPresentarDistributivoMateriaExecute(Sender: TObject);
-    procedure actPresentarProfesorProhibicionExecute(Sender: TObject);
+    procedure ActPresentarDistributivoMateriaExecute(Sender: TObject);
+    procedure ActPresentarProfesorProhibicionExecute(Sender: TObject);
     procedure QuProfesorProfesorProhibicionAfterScroll(DataSet: TDataSet);
     procedure TbProfesor1FilterRecord(DataSet: TDataSet;
       var Accept: Boolean);
-    procedure actPresentarDistributivoProfesorExecute(Sender: TObject);
-    procedure actContentsExecute(Sender: TObject);
-    procedure actIndexExecute(Sender: TObject);
-    procedure actExportarCSVExecute(Sender: TObject);
-    procedure actMejorarHorarioExecute(Sender: TObject);
+    procedure ActPresentarDistributivoProfesorExecute(Sender: TObject);
+    procedure ActContentsExecute(Sender: TObject);
+    procedure ActIndexExecute(Sender: TObject);
+    procedure ActExportarCSVExecute(Sender: TObject);
+    procedure ActMejorarHorarioExecute(Sender: TObject);
     procedure FormDblClick(Sender: TObject);
-    procedure actRegistrationInfoExecute(Sender: TObject);
+    procedure ActRegistrationInfoExecute(Sender: TObject);
 {
-    procedure actSaveCSVExecute(Sender: TObject);
-    procedure actOpenCSVExecute(Sender: TObject);
+    procedure ActSaveCSVExecute(Sender: TObject);
+    procedure ActOpenCSVExecute(Sender: TObject);
 }
   private
     { Private declarations }
+    FConfigStrings: TStrings;
+    FConfigFileName: string;
     FDiaForm,
     FNivelForm,
     FAulaTipoForm,
@@ -247,8 +247,8 @@ type
     FEjecutando: Boolean;
     FPasada: Integer;
 {$ENDIF}
-    FPosition: Integer;
-    FRelPosition: Integer;
+    FProgress: Integer;
+    FRelProgress: Integer;
     FNumIteraciones: Integer;
     FMin: Integer;
     FMax: Integer;
@@ -256,32 +256,16 @@ type
     FAjustar: Boolean;
     FLogStrings: TStrings;
     FCodHorario: Integer;
-    procedure SetPosition(Value: Integer);
+    procedure SetProgress(Value: Integer);
     procedure SetMin(Value: Integer);
     procedure SetMax(Value: Integer);
     procedure SetStep(Value: Integer);
-    procedure UpdRelPosition;
-
-    procedure EdProfesorDestroy(Sender: TObject);
-    procedure EdEspecializacionDestroy(Sender: TObject);
-    procedure EdNivelDestroy(Sender: TObject);
-    procedure EdParaleloIdDestroy(Sender: TObject);
-    procedure EdAulaTipoDestroy(Sender: TObject);
-    procedure EdDiaDestroy(Sender: TObject);
-    procedure EdHoraDestroy(Sender: TObject);
-
-    procedure EdPeriodoDestroy(Sender: TObject);
-    procedure EdParaleloDestroy(Sender: TObject);
-    procedure EdMateriaDestroy(Sender: TObject);
-
-    procedure EdHorarioDestroy(Sender: TObject);
+    procedure SaveConfig(Strings: TStrings);
+    procedure LoadConfig(Strings: TStrings);
+    procedure UpdRelProgress;
 
     procedure LoadFromFile(const AFileName: string);
-//    procedure LoadFromTextDir(const ADirName: string);
-//    procedure SaveToTextDir(const ADirName: string);
     procedure SaveToFile(const AFileName: string);
-    {procedure DBGridGetCellParamsColor(Sender: TObject; Field: TField;
-      AFont: TFont; var Background: TColor; Highlight: Boolean);}
     function ConfirmOperation: boolean;
     function GetCodHorarioSeleccionado: Integer;
     procedure ObtParaleloHorario;
@@ -311,8 +295,7 @@ type
     procedure FillProfesorProfesorProhibicionHora;
     procedure FillParaleloHorarioDetalle;
     procedure FillProfesorHorarioDetalle;
-    procedure InternalShowFormulary(FormClass: TFormClass; var Reference;
-      ADataSet: TDataSet; AAction: TAction; DestroyEvent: TNotifyEvent);
+
     //procedure MarcarProgreso(Count, Cant: Integer);
 
   public
@@ -326,13 +309,14 @@ type
     procedure ProgressFormCancelClick(Sender: TObject);
     property Ejecutando: Boolean read FEjecutando;
 {$ENDIF}
-    property Position: Integer read FPosition write SetPosition;
+    property Progress: Integer read FProgress write SetProgress;
     property Min: Integer read FMin write SetMin;
     property Max: Integer read FMax write SetMax;
     property Step: Integer read FStep write SetStep;
     property CodHorario: Integer read FCodHorario write FCodHorario;
     property NumIteraciones: Integer read FNumIteraciones write FNumIteraciones;
     property CodHorarioSeleccionado: Integer read GetCodHorarioSeleccionado;
+    property ConfigStrings: TStrings read FConfigStrings;
   end;
 
 var
@@ -350,170 +334,81 @@ uses
 
 {$R *.DFM}
 
-procedure TMainForm.actExitExecute(Sender: TObject);
+procedure TMainForm.ActExitExecute(Sender: TObject);
 begin
   Close;
 end;
 
-procedure TMainForm.EdProfesorDestroy(Sender: TObject);
+procedure TMainForm.ActProfesorExecute(Sender: TObject);
 begin
-  actProfesor.Checked := False;
+  TProfesorForm.ToggleSingleEditor(ProfesorForm, ConfigStrings, actProfesor,
+				   SourceDataModule.TbProfesor);
 end;
 
-procedure TMainForm.EdParaleloDestroy(Sender: TObject);
+procedure TMainForm.ActPeriodoExecute(Sender: TObject);
 begin
-  actParalelo.Checked := False;
+   with SourceDataModule do
+      if TCrossManyToManyEditor0Form.ToggleEditor(FPeriodoForm,
+						  ConfigStrings,
+						  ActPeriodo) then
+	 FPeriodoForm.ShowEditor(TbDia, TbHora, TbPeriodo, nil, 'CodDia',
+				 'NomDia', 'CodDia', '', 'CodHora', 'NomHora',
+				 'CodHora', '');
 end;
 
-procedure TMainForm.EdDiaDestroy(Sender: TObject);
+procedure TMainForm.ActMateriaExecute(Sender: TObject);
 begin
-  actDia.Checked := False;
+   TMateriaForm.ToggleSingleEditor(MateriaForm, ConfigStrings, ActMateria,
+				   SourceDataModule.TbMateria);
 end;
 
-procedure TMainForm.EdEspecializacionDestroy(Sender: TObject);
+procedure TMainForm.ActEspecializacionExecute(Sender: TObject);
 begin
-  actEspecializacion.Checked := False;
+   TSingleEditorForm.ToggleSingleEditor(FEspecializacionForm, ConfigStrings,
+					ActEspecializacion,
+					SourceDataModule.TbEspecializacion);
 end;
 
-procedure TMainForm.EdHoraDestroy(Sender: TObject);
+procedure TMainForm.ActNivelExecute(Sender: TObject);
 begin
-  actHora.Checked := False;
+   TSingleEditorForm.ToggleSingleEditor(FNivelForm, ConfigStrings, ActNivel,
+					SourceDataModule.TbNivel);
 end;
 
-procedure TMainForm.EdMateriaDestroy(Sender: TObject);
+procedure TMainForm.ActAulaTipoExecute(Sender: TObject);
 begin
-  actMateria.Checked := False;
+   TSingleEditorForm.ToggleSingleEditor(FAulaTipoForm, ConfigStrings, ActAulaTipo,
+					SourceDataModule.TbAulaTipo);
 end;
 
-procedure TMainForm.EdNivelDestroy(Sender: TObject);
+procedure TMainForm.ActParaleloIdExecute(Sender: TObject);
 begin
-  actNivel.Checked := False;
+   TSingleEditorForm.ToggleSingleEditor(FParaleloIdForm, ConfigStrings, ActParaleloId,
+					SourceDataModule.TbParaleloId);
 end;
 
-procedure TMainForm.EdParaleloIdDestroy(Sender: TObject);
+procedure TMainForm.ActDiaExecute(Sender: TObject);
 begin
-  actParaleloId.Checked := False;
+   TSingleEditorForm.ToggleSingleEditor(FDiaForm, ConfigStrings,
+					ActDia, SourceDataModule.TbDia);
 end;
 
-procedure TMainForm.EdPeriodoDestroy(Sender: TObject);
+procedure TMainForm.ActHoraExecute(Sender: TObject);
 begin
-  actPeriodo.Checked := False;
+   TSingleEditorForm.ToggleSingleEditor(FHoraForm, ConfigStrings,
+					ActHora, SourceDataModule.TbHora);
 end;
 
-procedure TMainForm.EdAulaTipoDestroy(Sender: TObject);
+procedure TMainForm.ActHorarioExecute(Sender: TObject);
 begin
-  actAulaTipo.Checked := False;
+   THorarioForm.ToggleSingleEditor(HorarioForm, ConfigStrings,
+				   ActHorario, SourceDataModule.TbHorario);
 end;
 
-procedure TMainForm.EdHorarioDestroy(Sender: TObject);
+procedure TMainForm.ActParaleloExecute(Sender: TObject);
 begin
-  actHorario.Checked := False;
-end;
-
-procedure TMainForm.actProfesorExecute(Sender: TObject);
-begin
-  InternalShowFormulary(TProfesorForm, ProfesorForm,
-    SourceDataModule.TbProfesor, actProfesor, EdProfesorDestroy);
-end;
-
-procedure TMainForm.actPeriodoExecute(Sender: TObject);
-begin
-  if ActPeriodo.Checked then
-  begin
-    FPeriodoForm.Free;
-  end
-  else
-  begin
-    ActPeriodo.Checked := not ActPeriodo.Checked;
-    Application.CreateForm(TCrossManyToManyEditor0Form, FPeriodoForm);
-    with FPeriodoForm do
-    begin
-      HelpContext := actPeriodo.HelpContext;
-      //LoadCaption(PeriodoForm, TbPeriodo);
-      OnDestroy := EdPeriodoDestroy;
-    end;
-    with FPeriodoForm.FormStorage do
-    begin
-      IniSection := IniSection + '\CrMME0' + SourceDataModule.TbPeriodo.Name;
-      Active := True;
-      RestoreFormPlacement;
-    end;
-    with SourceDataModule do
-      FPeriodoForm.ShowEditor(TbDia, TbHora, TbPeriodo, nil, 'CodDia', 'NomDia', 'CodDia',
-        '', 'CodHora', 'NomHora', 'CodHora', '');
-  end;
-end;
-
-procedure TMainForm.InternalShowFormulary(FormClass: TFormClass; var Reference;
-  ADataSet: TDataSet; AAction: TAction; DestroyEvent: TNotifyEvent);
-begin
-  if AAction.Checked then
-  begin
-    TObject(Reference).Free;
-  end
-  else
-  begin
-    AAction.Checked := not AAction.Checked;
-    Application.CreateForm(FormClass, Reference);
-    TControl(Reference).HelpContext := AAction.HelpContext;
-    MySingleShowEditor(TSingleEditorForm(Reference), ADataSet,
-      ConfiguracionForm.edtNomColegio.Text, DestroyEvent);
-  end;
-end;
-
-procedure TMainForm.actMateriaExecute(Sender: TObject);
-begin
-  InternalShowFormulary(TMateriaForm, MateriaForm,
-    SourceDataModule.TbMateria, actMateria, EdMateriaDestroy);
-end;
-
-procedure TMainForm.actEspecializacionExecute(Sender: TObject);
-begin
-  InternalShowFormulary(TSingleEditorForm, FEspecializacionForm,
-    SourceDataModule.TbEspecializacion, actEspecializacion,
-    EdEspecializacionDestroy);
-end;
-
-procedure TMainForm.actNivelExecute(Sender: TObject);
-begin
-  InternalShowFormulary(TSingleEditorForm, FNivelForm,
-    SourceDataModule.TbNivel, actNivel, EdNivelDestroy);
-end;
-
-procedure TMainForm.actAulaTipoExecute(Sender: TObject);
-begin
-  InternalShowFormulary(TSingleEditorForm, FAulaTipoForm,
-    SourceDataModule.TbAulaTipo, actAulaTipo, EdAulaTipoDestroy);
-end;
-
-procedure TMainForm.actParaleloIdExecute(Sender: TObject);
-begin
-  InternalShowFormulary(TSingleEditorForm, FParaleloIdForm,
-    SourceDataModule.TbParaleloId, actParaleloId, EdParaleloIdDestroy);
-end;
-
-procedure TMainForm.actDiaExecute(Sender: TObject);
-begin
-  InternalShowFormulary(TSingleEditorForm, FDiaForm, SourceDataModule.TbDia,
-    ActDia, EdDiaDestroy);
-end;
-
-procedure TMainForm.actHoraExecute(Sender: TObject);
-begin
-  InternalShowFormulary(TSingleEditorForm, FHoraForm,
-    SourceDataModule.TbHora, actHora, EdHoraDestroy);
-end;
-
-procedure TMainForm.actHorarioExecute(Sender: TObject);
-begin
-  InternalShowFormulary(THorarioForm, HorarioForm,
-    SourceDataModule.TbHorario, actHorario, EdHorarioDestroy);
-end;
-
-procedure TMainForm.actParaleloExecute(Sender: TObject);
-begin
-  InternalShowFormulary(TParaleloForm, ParaleloForm,
-    SourceDataModule.TbCurso, actParalelo, EdParaleloDestroy);
+   TParaleloForm.ToggleSingleEditor(ParaleloForm, ConfigStrings,
+				    ActParalelo, SourceDataModule.TbCurso);
 end;
 
 function TMainForm.ConfirmOperation: boolean;
@@ -523,17 +418,17 @@ begin
     + '¿Está seguro?', mtWarning, [mbYes, mbNo], 0) = mrYes
 end;
 
-procedure TMainForm.actNewExecute(Sender: TObject);
+procedure TMainForm.ActNewExecute(Sender: TObject);
 begin
   StatusBar.Panels[1].Style := psOwnerDraw;
-  Position := 0;
+  Progress := 0;
   try
     if ConfirmOperation then
     begin
       Max := 20;
       SourceDataModule.NewDataBase;
       ConfiguracionForm.Clear;
-      Position := 0;
+      Progress := 0;
     end;
   finally
     StatusBar.Panels[1].Style := psText;
@@ -541,15 +436,15 @@ begin
   end;
 end;
 
-procedure TMainForm.actSaveExecute(Sender: TObject);
+procedure TMainForm.ActSaveExecute(Sender: TObject);
 begin
   StatusBar.Panels[1].Style := psOwnerDraw;
-  Position := 0;
+  Progress := 0;
   Max := 100;
   SaveDialog.DefaultExt := 'ttd'; // Time Tabling Data
   SaveDialog.Filter := 'Horario para colegio (*.ttd)|*.ttd';
   try
-    SaveDialog.HelpContext := actSave.HelpContext;
+    SaveDialog.HelpContext := ActSave.HelpContext;
     if SaveDialog.Execute then
     begin
       SaveToFile(SaveDialog.FileName);
@@ -561,32 +456,6 @@ begin
     StatusBar.Panels[2].Text := 'Listo';
   end;
 end;
-
-(*
-procedure TMainForm.actSaveCSVExecute(Sender: TObject);
-var
-  DirName: string;
-begin
-  StatusBar.Panels[1].Style := psOwnerDraw;
-  Position := 0;
-  Max := 100;
-  if InputQuery('Directorio', 'Directorio en el que guardar los ficheros:',
-        DirName) then
-  begin
-    SaveToTextDir(DirName);
-  end;
-end;
-
-procedure TMainForm.SaveToTextDir(const ADirName: string);
-begin
-  Cursor := crHourGlass;
-  try
-    SourceDataModule.SaveToTextDir(ADirName);
-  finally
-    Cursor := crDefault;
-  end;
-end;
-*)
 
 procedure TMainForm.SaveToFile(const AFileName: string);
 begin
@@ -609,29 +478,14 @@ begin
   end;
 end;
 
-(*
-procedure TMainForm.LoadFromTextDir(const ADirName: string);
-begin
-  Cursor := crHourGlass;
-  try
-    SourceDataModule.EmptyTables;
-    SourceDataModule.LoadFromTextDir(ADirName);
-    ConfiguracionForm.FormStorage.IniFileName := ADirName + '\config.ini';
-    ConfiguracionForm.FormStorage.RestoreFormPlacement;
-  finally
-    Cursor := crDefault;
-  end;
-end;
-*)
-
-procedure TMainForm.actOpenExecute(Sender: TObject);
+procedure TMainForm.ActOpenExecute(Sender: TObject);
 begin
   StatusBar.Panels[1].Style := psOwnerDraw;
-  Position := 0;
+  Progress := 0;
   try
     if ConfirmOperation then
     begin
-      OpenDialog.HelpContext := actOpen.HelpContext;
+      OpenDialog.HelpContext := ActOpen.HelpContext;
       if OpenDialog.Execute then
       begin
         LoadFromFile(OpenDialog.FileName);
@@ -659,7 +513,7 @@ begin
 end;
 
 
-procedure TMainForm.actElaborarHorarioExecute(Sender: TObject);
+procedure TMainForm.ActElaborarHorarioExecute(Sender: TObject);
 {$IFNDEF FREEWARE}
 var
   s: string;
@@ -676,16 +530,6 @@ begin
 {$ENDIF}
 end;
 
-{
-procedure TMainForm.MarcarProgreso(Count, Cant: Integer);
-begin
-  Position := Count;
-  Min := 0;
-  Max := Cant - 1;
-  StatusBar.Panels[2].Text := Format('%d de %d', [Count, Cant]);
-  Application.ProcessMessages;
-end;
-}
 {$IFNDEF FREEWARE}
 
 procedure TMainForm.ElaborarHorario(s: string);
@@ -699,7 +543,7 @@ var
     with ProgressForm do
     begin
       Show;
-      HelpContext := actElaborarHorario.HelpContext;
+      HelpContext := ActElaborarHorario.HelpContext;
       NumMaxGeneracion := vEvolElitista.NumMaxGeneracion;
       FInit := Now;
       Caption :=
@@ -733,7 +577,6 @@ var
       if FCancelClick then
         Exit;
       VEvolElitista.DescensoRapidoForzado;
-      // Condicionar lo siguiente
       {if True then
       begin
         with VEvolElitista.MejorObjetoModeloHorario do
@@ -741,11 +584,10 @@ var
           DescensoRapido2(MarcarProgreso);
         end;
       end;}
-      // fin de lo que debe ser condicionado
       FMomentoFinal := Now;
       VEvolElitista.SaveMejorToDatabase(Cod, FMomentoInicial,
         FMomentoFinal);
-    end; // if
+    end;
   end;
   procedure ProcessCodList(const CodList: string);
   var
@@ -778,7 +620,7 @@ begin
   with SourceDataModule, MasterDataModule do
   begin
     InitRandom;
-    actElaborarHorario.Enabled := False;
+    ActElaborarHorario.Enabled := False;
     FEjecutando := True;
     try
       with ConfiguracionForm do
@@ -847,7 +689,7 @@ begin
       ProgressForm.bbtnClose.Caption := 'Finalizar';
       ProgressForm.bbtnCancel.Kind := bkCancel;
       ProgressForm.Close;
-      actElaborarHorario.Enabled := True;
+      ActElaborarHorario.Enabled := True;
       if TbHorarioDetalle.Active then
         TbHorarioDetalle.Refresh;
     end;
@@ -938,7 +780,7 @@ begin
     t := Now - MomentoInicialProgress;
     x := t * (Max - I) / I;
   end;
-  Self.Position := i;
+  Self.Progress := i;
   StatusBar.Panels[0].Text := Format('Pasada %d - %d de %d %f - van: %d-%s - restan: %d-%s',
     [FPasada, i, max, value, Trunc(t), FormatDateTime('hh:mm:ss', t), Trunc(x),
     FormatDateTime('hh:mm:ss', x)]);
@@ -966,12 +808,12 @@ begin
   end;
 end;
 
-procedure TMainForm.SetPosition(Value: Integer);
+procedure TMainForm.SetProgress(Value: Integer);
 begin
-  if FPosition <> Value then
+  if FProgress <> Value then
   begin
-    FPosition := Value;
-    UpdRelPosition;
+    FProgress := Value;
+    UpdRelProgress;
   end;
 end;
 
@@ -980,18 +822,18 @@ begin
   if FStep <> Value then
   begin
     FStep := Value;
-    UpdRelPosition;
+    UpdRelProgress;
   end;
 end;
 
-procedure TMainForm.UpdRelPosition;
+procedure TMainForm.UpdRelProgress;
 var
-  VRelPosition: Integer;
+  VRelProgress: Integer;
 begin
-  VRelPosition := ((FPosition - FMin) div FStep) * FStep;
-  if FRelPosition <> VRelPosition then
+  VRelProgress := ((FProgress - FMin) div FStep) * FStep;
+  if FRelProgress <> VRelProgress then
   begin
-    FRelPosition := VRelPosition;
+    FRelProgress := VRelProgress;
     StatusBar.Repaint;
   end;
 end;
@@ -1001,10 +843,10 @@ procedure TMainForm.StatusBarDrawPanel(StatusBar: TStatusBar;
 var
   VRect: TRect;
 begin
-  if FRelPosition <> 0 then
+  if FRelProgress <> 0 then
   begin
     VRect := Rect;
-    VRect.Right := VRect.Left + MulDiv(Rect.Right - Rect.Left, FRelPosition,
+    VRect.Right := VRect.Left + MulDiv(Rect.Right - Rect.Left, FRelProgress,
       (FMax - FMin));
     StatusBar.Canvas.Brush.Color := clNavy;
     StatusBar.Canvas.FillRect(VRect);
@@ -1050,8 +892,8 @@ begin
         MessageDlg('El tiempo de prueba a concluido'#13#10 +
           ' El sistema correrá sin las opciones que permiten generar el horario',
           mtWarning, [mbOk], 0);
-        actElaborarHorario.Enabled := False;
-        actMejorarHorario.Enabled := False;
+        ActElaborarHorario.Enabled := False;
+        ActMejorarHorario.Enabled := False;
       end
       else if Protect1.DaysExpire > 0 then
       begin
@@ -1060,8 +902,8 @@ begin
       end
       else
       begin
-        actElaborarHorario.Enabled := True;
-        actMejorarHorario.Enabled := True;
+        ActElaborarHorario.Enabled := True;
+        ActMejorarHorario.Enabled := True;
       end;
     end;
   end;}
@@ -1069,24 +911,30 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
+  FConfigFileName := GetCurrentDir + '\SGHC.cfg';
+  FConfigStrings := TStringList.Create;
   try
+    if FileExists(FConfigFileName) then
+    begin
+      FConfigStrings.LoadFromFile(FConfigFileName);
+      LoadConfig(FConfigStrings);
+    end;
     FMin := 0;
     FMax := 100;
-    FPosition := 0;
-    FRelPosition := 0;
+    FProgress := 0;
+    FRelProgress := 0;
     FStep := 1;
     FAjustar := False;
     FLogStrings := TStringList.Create;
 {$IFDEF FREEWARE}
-    actElaborarHorario.Enabled := False;
-    actMejorarHorario.Enabled := False;
+    ActElaborarHorario.Enabled := False;
+    ActMejorarHorario.Enabled := False;
     Caption := Caption + ' ***Freeware***';
 {$ENDIF}
 {$IFNDEF FREEWARE}
     FEjecutando := False;
 {$ENDIF}
 {    Protect1.DaysExpire := 60;}
-    FormStorage.RestoreFormPlacement;
 {    with FSProteccion do
     begin
       //StoredValue['Password'] := '';
@@ -1099,8 +947,8 @@ begin
       ProtegerSoftware;
     end;}
   except
-    actElaborarHorario.Enabled := False;
-    actMejorarHorario.Enabled := False;
+    ActElaborarHorario.Enabled := False;
+    ActMejorarHorario.Enabled := False;
     raise;
   end;
 end;
@@ -1116,9 +964,9 @@ begin
   end;
 end;
 
-procedure TMainForm.actConfigurarExecute(Sender: TObject);
+procedure TMainForm.ActConfigurarExecute(Sender: TObject);
 begin
-  ConfiguracionForm.HelpContext := actConfigurar.HelpContext;
+  ConfiguracionForm.HelpContext := ActConfigurar.HelpContext;
   if ConfiguracionForm.ShowModal = mrOk then
   begin
 {$IFNDEF FREEWARE}
@@ -1134,11 +982,11 @@ begin
   FNumIteraciones := ConfiguracionForm.speNumIteraciones.Value;
 end;
 
-procedure TMainForm.actChequearFactibilidadExecute(Sender: TObject);
+procedure TMainForm.ActChequearFactibilidadExecute(Sender: TObject);
 begin
-  LogisticForm.HelpContext := actChequearFactibilidad.HelpContext;
-  if MasterDataModule.PerformAllChecks(LogisticForm.memLogistic.Lines,
-    LogisticForm.memResumen.Lines, ConfiguracionForm.speMaxCargaProfesor.Value)
+  LogisticForm.HelpContext := ActChequearFactibilidad.HelpContext;
+  if MasterDataModule.PerformAllChecks(LogisticForm.MemLogistic.Lines,
+    LogisticForm.MemResumen.Lines, ConfiguracionForm.speMaxCargaProfesor.Value)
     then
   begin
     LogisticForm.Show;
@@ -1152,7 +1000,7 @@ begin
   end;
 end;
 
-procedure TMainForm.actAboutExecute(Sender: TObject);
+procedure TMainForm.ActAboutExecute(Sender: TObject);
 begin
   VerAboutBox;
 end;
@@ -1168,8 +1016,9 @@ end;
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
   FLogStrings.Free;
-  FormStorage.SaveFormPlacement;
-  FSProteccion.SaveFormPlacement;
+  SaveConfig(FConfigStrings);
+  FConfigStrings.SaveToFile(FConfigFileName);
+  FConfigStrings.Free;
 end;
 
 procedure TMainForm.FillProfesorHorarioDetalle;
@@ -1232,7 +1081,7 @@ begin
   end;
 end;
 
-procedure TMainForm.actPresentarProfesorHorarioExecute(Sender: TObject);
+procedure TMainForm.ActPresentarProfesorHorarioExecute(Sender: TObject);
 begin
   ObtProfesorHorario;
   PreviewMasterDetailReport(SourceDataModule.TbProfesor, TbProfesor,
@@ -1290,7 +1139,7 @@ begin
   TbParalelo.Filtered := true;
 end;
 
-procedure TMainForm.actPresentarParaleloHorarioExecute(Sender: TObject);
+procedure TMainForm.ActPresentarParaleloHorarioExecute(Sender: TObject);
 begin
   ObtParaleloHorario;
   PreviewMasterDetailReport(SourceDataModule.TbParalelo, TbParalelo, '', '', '',
@@ -1331,15 +1180,14 @@ begin
       = TbParaleloCodParaleloId.Value);
 end;
 
-procedure TMainForm.TbProfesorFilterRecord(DataSet: TDataSet;
-  var Accept: Boolean);
+procedure TMainForm.TbProfesorFilterRecord(DataSet: TDataSet; var Accept: Boolean);
 begin
   with SourceDataModule do
     Accept := DataSet.FindField('CodProfesor').AsInteger =
       TbProfesorCodProfesor.AsInteger;
 end;
 
-procedure TMainForm.actPresentarMateriaProhibicionExecute(Sender: TObject);
+procedure TMainForm.ActPresentarMateriaProhibicionExecute(Sender: TObject);
 begin
   FillMateriaMateriaProhibicion;
   FillMateriaMateriaProhibicionHora;
@@ -1384,8 +1232,7 @@ begin
   TbMateria.Filtered := true;
 end;
 
-procedure TMainForm.actPresentarDistributivoMateriaExecute(
-  Sender: TObject);
+procedure TMainForm.ActPresentarDistributivoMateriaExecute(Sender: TObject);
 begin
   with SourceDataModule, MasterDataModule do
   begin
@@ -1492,8 +1339,7 @@ begin
   end;
 end;
 
-procedure TMainForm.actPresentarProfesorProhibicionExecute(
-  Sender: TObject);
+procedure TMainForm.ActPresentarProfesorProhibicionExecute(Sender: TObject);
 begin
   FillProfesorProfesorProhibicion;
   FillProfesorProfesorProhibicionHora;
@@ -1529,7 +1375,7 @@ begin
     QuProfesorProfesorProhibicionCodProfesor.Value;
 end;
 
-procedure TMainForm.actPresentarDistributivoProfesorExecute(
+procedure TMainForm.ActPresentarDistributivoProfesorExecute(
   Sender: TObject);
 begin
   PreviewMasterDetailReport(SourceDataModule.TbProfesor,
@@ -1560,12 +1406,12 @@ begin
   end;
 end;
 
-procedure TMainForm.actContentsExecute(Sender: TObject);
+procedure TMainForm.ActContentsExecute(Sender: TObject);
 begin
   Application.HelpCommand(HELP_FINDER, 0);
 end;
 
-procedure TMainForm.actIndexExecute(Sender: TObject);
+procedure TMainForm.ActIndexExecute(Sender: TObject);
 begin
   Application.HelpCommand(HELP_FINDER, 0);
 end;
@@ -1582,7 +1428,7 @@ begin
   while not AMasterDataSet.Eof do
   begin
     s := '';
-    Position := AMasterDataSet.RecNo;
+    Progress := AMasterDataSet.RecNo;
     for j := 0 to AMasterDataSet.FieldCount - 1 do
     begin
       if AMasterDataSet.Fields[j].Visible then
@@ -1615,16 +1461,16 @@ begin
   end;
 end;
 
-procedure TMainForm.actExportarCSVExecute(Sender: TObject);
+procedure TMainForm.ActExportarCSVExecute(Sender: TObject);
 begin
   StatusBar.Panels[1].Style := psOwnerDraw;
-  Position := 0;
+  Progress := 0;
   try
-    SaveDialogCSV.HelpContext := actSave.HelpContext;
+    SaveDialogCSV.HelpContext := ActSave.HelpContext;
     if SaveDialogCSV.Execute then
       ExportToFile(SaveDialogCSV.FileName);
   finally
-    Position := 0;
+    Progress := 0;
     StatusBar.Panels[1].Style := psText;
     StatusBar.Panels[2].Text := 'Listo';
   end;
@@ -1674,7 +1520,7 @@ begin
   end;
 end;
 
-procedure TMainForm.actMejorarHorarioExecute(Sender: TObject);
+procedure TMainForm.ActMejorarHorarioExecute(Sender: TObject);
 begin
 {$IFNDEF FREEWARE}
   MejorarHorario;
@@ -1718,7 +1564,7 @@ begin
       creSesionCortada.Value,
       creMateriaNoDispersa.Value);
     StatusBar.Panels[1].Style := psOwnerDraw;
-    Self.Position := 0;
+    Self.Progress := 0;
     FPasada := 0;
     try
       VModeloHorario.OnProgress := Self.ProgressDescensoDoble;
@@ -1768,7 +1614,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TMainForm.actRegistrationInfoExecute(Sender: TObject);
+procedure TMainForm.ActRegistrationInfoExecute(Sender: TObject);
 begin
   PedirRegistrarSoftware;
   ProtegerSoftware;
@@ -1947,12 +1793,12 @@ begin
 end;
 
 (*
-procedure TMainForm.actOpenCSVExecute(Sender: TObject);
+procedure TMainForm.ActOpenCSVExecute(Sender: TObject);
 var
   DirName: string;
 begin
   StatusBar.Panels[1].Style := psOwnerDraw;
-  Position := 0;
+  Progress := 0;
   try
     if ConfirmOperation then
     begin
@@ -1969,5 +1815,43 @@ begin
 end;
 *)
 
-end.
+procedure TMainForm.LoadConfig(Strings: TStrings);
+begin
+  Position := poDesigned;
+  with Strings do
+  begin
+    Top := StrToInt(Values['MainForm_Top']);
+    Left := StrToInt(Values['MainForm_Left']);
+    Width := StrToInt(Values['MainForm_Width']);
+    Height := StrToInt(Values['MainForm_Height']);
+    WindowState := TWindowState(StrToInt(Values['MainForm_WindowState']));
+    SaveDialog.FileName := Values['SaveDialog_FileName'];
+    SaveDialogCSV.FileName := Values['SaveDialogCSV_FileName'];
+    OpenDialog.FileName := Values['OpenDialog_FileName'];
+{
+    LogisticForm.MemResumen.Height :=
+      StrToInt(Values['LogisticForm_MemResumen_Height']);
+}
+  end;
+end;
 
+procedure TMainForm.SaveConfig(Strings: TStrings);
+begin
+  with Strings do
+  begin
+    Values['MainForm_Top'] := IntToStr(Top);
+    Values['MainForm_Left'] := IntToStr(Left);
+    Values['MainForm_Width'] := IntToStr(Width);
+    Values['MainForm_Height'] := IntToStr(Height);
+    Values['MainForm_WindowState'] := IntToStr(Ord(WindowState));
+    Values['SaveDialog_FileName'] := SaveDialog.FileName;
+    Values['SaveDialogCSV_FileName'] := SaveDialogCSV.FileName;
+    Values['OpenDialog_FileName'] := OpenDialog.FileName;
+{
+    Values['LogisticForm_MemResumen_Height'] :=
+      IntToStr(LogisticForm.MemResumen.Height);
+}
+  end;
+end;
+
+end.

@@ -34,7 +34,7 @@ type
     tbsUnidadEducativa: TTabSheet;
     Label14: TLabel;
     speMaxCargaProfesor: TSpinEdit;
-    memComentarios: TMemo;
+    MemComentarios: TMemo;
     lblComentarios: TLabel;
     Label17: TLabel;
     edtNomColegio: TEdit;
@@ -135,7 +135,6 @@ end;
 
 procedure TConfiguracionForm.FormDestroy(Sender: TObject);
 begin
-  //DeleteFile(FormStorage.IniFileName);
 end;
 
 procedure TConfiguracionForm.DBGridDrawColumnCell(Sender: TObject;
@@ -184,7 +183,7 @@ begin
   edtCarAutoridad.Text := '';
   speMaxCargaProfesor.Value := 20;
   lblHorarioSeleccionado.Caption := '(Ninguno)';
-  memComentarios.Clear;
+  MemComentarios.Clear;
   speSeed1.Value := 1;
   speSeed2.Value := 1;
   speSeed3.Value := 1;
@@ -224,7 +223,7 @@ begin
     edtCarResponsable.Text := Values['edtCarResponsable_Text'];
     speMaxCargaProfesor.Value := StrToInt(Values['speMaxCargaProfesor_Value']);
     lblHorarioSeleccionado.Caption := Values['lblHorarioSeleccionado_Caption'];
-    memComentarios.Lines.Text := ScapedToString(Values['memComentarios_Lines']);
+    MemComentarios.Lines.Text := ScapedToString(Values['MemComentarios_Lines']);
     CBRandomize.Checked := StrToBool(Values['CBRandomize_Checked']);
     speSeed1.Value := StrToInt(Values['speSeed1_Value']);
     speSeed2.Value := StrToInt(Values['speSeed2_Value']);
@@ -267,7 +266,7 @@ begin
     Values['edtCarResponsable_Text'] := edtCarResponsable.Text;
     Values['speMaxCargaProfesor_Value'] := IntToStr(speMaxCargaProfesor.Value);
     Values['lblHorarioSeleccionado_Caption'] := lblHorarioSeleccionado.Caption;
-    Values['memComentarios_Lines'] := StringToScaped(memComentarios.Lines.Text);
+    Values['MemComentarios_Lines'] := StringToScaped(MemComentarios.Lines.Text);
     Values['CBRandomize_Checked'] := BoolToStr(CBRandomize.Checked);
     Values['speSeed1_Value'] := IntToStr(speSeed1.Value);
     Values['speSeed2_Value'] := IntToStr(speSeed2.Value);

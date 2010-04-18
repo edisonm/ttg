@@ -49,10 +49,8 @@ type
     { Public declarations }
     procedure ShowEditor(AColDataSet, ARowDataSet, ALstDataSet,
       ARelDataSet, ASelDataSet: TDataSet; const AColFieldKey, AColFieldName,
-      AColField,
-      AColFieldSel, ARowFieldKey, ARowFieldName, ARowField, ARowFieldSel,
-      ALstFieldKey,
-      ALstFieldName, ALstFieldColor, ALstField: string);
+      AColField, AColFieldSel, ARowFieldKey, ARowFieldName, ARowField,
+      ARowFieldSel, ALstFieldKey, ALstFieldName, ALstFieldColor, ALstField: string);
     property LstDataset: TDataset read FLstDataset; // write FColDataset;
   end;
 

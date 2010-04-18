@@ -3,84 +3,56 @@ DROOT = $(MAKEDIR)\..
 !endif
 
 # REQUIRED PACKAGES
-CONTROLS=C:\ARCHIV~1\BORLAND\CONTROLS
-ARCTL=$(CONTROLS)\ARCTL\SOURCE
-KBMMEMTB=$(CONTROLS)\KBMMEMTB
-NAVBTN=$(CONTROLS)\NAVBTN
-RX=$(CONTROLS)\RX\UNITS
-TB97=$(CONTROLS)\TB97\SOURCE
-AEXCEL=$(CONTROLS)\AEXCEL\FREE.SRC
-ARCTLEX=$(CONTROLS)\ARCTLEX\SOURCE
-UPATH=$(ARCTL);$(KBMMEMTB);$(NAVBTN);$(RX);$(TB97);$(AEXCEL);$(ARCTLEX)
+CONTROLS=Z:\apps\pascal
+ARCTL=$(CONTROLS)\arctl\SOURCE
+KBMMEMTB=$(CONTROLS)\kbmmemtb253
+RX=$(CONTROLS)\RX\Units
+UPATH=$(ARCTL);$(KBMMEMTB);$(RX)
 
 # REQUIRED UTILITIES
-INNOSETUP="C:\Archivos de programa\Inno Setup 1.2\COMPIL32.EXE"
-ASPACK="C:\Archivos de programa\ASPack\aspack.exe"
-BZ2=C:\WINDOWS\BZIP2.EXE
-TAR=C:\WINDOWS\TAR.EXE
-DBUTILSSRC=E:\PROYECTO\DBUTILS\DBUTILS.DPR
+INNOSETUP="C:\Archivos de programa\Inno Setup 5\COMPIL32.EXE"
+DBUTILSSRC=Z:\apps\pascal\DBUTILS\DBUTILS.DPR
 
 # COMPILER OPTIONS
 DCC=$(DROOT)\BIN\DCC32.EXE
 COMPILE=$(DCC) -U$(UPATH)
-UNITS=about.pas dmain.pas dmaster.pas fconfig.pas fcrsmme0.pas fcrsmme1.pas \
-  fcrsmmed.pas fcrsmmer.pas feditor.pas fhorario.pas fhorpara.pas fhorprof.pas \
-  flogstic.pas fmain.pas fmasdeed.pas fmateria.pas fparalel.pas fprofesr.pas \
-  fprogres.pas fsingedt.pas fsplash.pas horcolcm.pas kerevole.pas kermodel.pas \
-  qmaderep.pas qsingrep.pas rand.pas sghcutls.pas sortalgs.pas
+UNITS= FMain.pas DMaster.pas KerModel.pas KerEvolE.pas FProgres.pas \
+  SortAlgs.pas Rand.pas FCrsMMEd.pas FCrsMME0.pas FCrsMME1.pas FCrsMMER.pas \
+  FEditor.pas FMateria.pas FProfesr.pas SGHCUtls.pas FConfig.pas FLogstic.pas \
+  FHorPara.pas FMasDeEd.pas FHorAulT.pas FSplash.pas QSingRep.pas QMaDeRep.pas \
+  FParalel.pas FSingEdt.pas FHorario.pas About.pas HorColCm.pas FHorProf.pas \
+  DSrcBase.pas RelUtils.pas DSource.pas FSelPeIn.pas DBase.pas
+
+# About.pas DMaster.pas FConfig.pas fcrsmme0.pas fcrsmme1.pas \
+#   fcrsmmed.pas fcrsmmer.pas feditor.pas fhorario.pas fhorpara.pas fhorprof.pas \
+#   flogstic.pas fmain.pas fmasdeed.pas fmateria.pas fparalel.pas fprofesr.pas \
+#   fprogres.pas fsingedt.pas fsplash.pas horcolcm.pas kerevole.pas kermodel.pas \
+#   qmaderep.pas qsingrep.pas rand.pas sghcutls.pas sortalgs.pas
 # DFMS=
-all: install
 
-..\bin\horcoleg.exe: $(UNITS)
-        $(COMPILE) -E..\bin\ HORCOLEG.DPR
+all: installer
 
-..\bin\horcoleg.db0: sghc.mdb dbutils.exe
-        DBUTILS.EXE /ACC2PDX SGHC.MDB ..\DAT
-        DBUTILS.EXE /DBPACK ..\DAT ..\BIN\HORCOLEG.DB0
-        DELTREE /Y ..\DAT
+..\bin\sghc.exe: $(UNITS)
+        $(COMPILE) -E..\bin\ SGHC.dpr
 
-dbutils.exe:
-        $(COMPILE) -E. $(DBUTILSSRC)
+..\bin\dbutils.exe:
+        $(COMPILE) -E..\bin\ $(DBUTILSSRC)
 
-sghc.tar.bz2: sghc.tar
-        $(BZ2) -9 --repetitive-best sghc.tar
-sghc.tar:
-        CD ..
-        $(TAR) -cv -TFILELIST.TXT -fsource\sghc.tar
-        CD SOURCE
+DSrcBase.pas DSrcBase.dfm: SGHC.MDB ..\bin\dbutils.exe
+	..\bin\dbutils.exe /ACC2DM Z:\apps\pascal\SGHC\SOURCE\SGHC.MDB SourceBaseDataModule Z:\apps\pascal\SGHC\SOURCE\DSrcBase /DS
 
-install: complete parcial comercial
-
-complete: ..\install\horcompl.iss ..\bin\horcoleg.exe ..\bin\horcoleg.db0 sghc.tar.bz2
-        cd ..\install
-        START /W $(INNOSETUP) /cc horcompl.iss
-        rename complete\setup.exe INSTALAR.EXE
-        copy ..\doc\leame.txt complete
-        cd ..\source
-
-parcial: ..\install\horparcl.iss ..\bin\horcoleg.exe ..\bin\horcoleg.db0
-        cd ..\install
-        START /W $(INNOSETUP) /cc horparcl.iss
-        rename parcial\setup.exe INSTALAR.EXE
-        copy ..\doc\leame.txt parcial
-        cd ..\source
-
-comercial: ..\install\horcomer.iss ..\bin\horcoleg.exe ..\bin\horcoleg.db0
-        cd ..\install
-        START /W $(INNOSETUP) /cc horcomer.iss
-        rename comerc\setup.exe INSTALAR.EXE
-        copy ..\doc\leame.txt comerc
-        cd ..\source
+installer:
+	cd ..\install
+	$(INNOSETUP) /cc sghc.iss
+	cd ..\source
 
 clean:
         del *.~*
         del *.dcu
         del *.obj
-        del *.zip
-        del *.exe
-        del sghc.tar.bz2
-        deltree /Y ..\dat
-        deltree /Y install\complete
-        deltree /Y install\parecial
-        deltree /Y install\comerc
+	del *.exe
+        del ..\bin\*.exe
+        del install\OUTPUT\*.exe
 
+test:
+	echo MAKEDIR=$(MAKEDIR)

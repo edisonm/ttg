@@ -5,14 +5,15 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons,
-  DBCtrls, ExtCtrls, Printers, ImgList, ComCtrls, ToolWin,
-  RXDBCtrl, RXCtrls;
+  DBCtrls, ExtCtrls, Printers, ImgList, ComCtrls, ToolWin, ActnList, FCrsMMER;
 
 type
   TMateriaForm = class(TSingleEditorForm)
     BtnMateriaProhibicion: TToolButton;
-    procedure BtnMateriaProhibicionClick(Sender: TObject);
+    ActMateriaProhibicion: TAction;
+    procedure ActMateriaProhibicionExecute(Sender: TObject);
   private
+    FMateriaProhibicionForm: TCrossManyToManyEditorRForm;
     procedure FormActivate(Sender: TObject);
     { Private declarations }
   public
@@ -24,22 +25,21 @@ var
 
 implementation
 uses
-  DMaster, FCrsMMER, FCrsMMEd, SGHCUtls, FConfig, DSource;
+  DMaster, FCrsMMEd, SGHCUtls, FConfig, DSource;
 {$R *.DFM}
 
-procedure TMateriaForm.BtnMateriaProhibicionClick(Sender: TObject);
+procedure TMateriaForm.ActMateriaProhibicionExecute(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule, TCrossManyToManyEditorRForm.Create(Self) do
+  if TCrossManyToManyEditorRForm.ToggleEditor(FMateriaProhibicionForm,
+					      ConfigStrings,
+					      ActMateriaProhibicion) then
+  with SourceDataModule, FMateriaProhibicionForm do
   begin
-    with FormStorage do
-    begin
-      IniSection := IniSection + '\MMEdR' + TbMateriaProhibicion.Name;
-      Active := True;
-      RestoreFormPlacement;
-    end;
-    Caption := Format('%s %s - Editando %s', [SourceDataModule.Name[TbMateria],
-      TbMateriaNomMateria.Value, Description[TbMateriaProhibicion]]);
+    Caption := Format('%s %s - Editando %s', [
+		      SourceDataModule.NameDataSet[TbMateria],
+		      TbMateriaNomMateria.Value,
+		      Description[TbMateriaProhibicion]]);
     DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [Description[TbMateriaProhibicion], Description[TbDia],
       Description[TbHora]]);

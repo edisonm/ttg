@@ -2,7 +2,6 @@ inherited ParaleloForm: TParaleloForm
   Left = 338
   Top = 206
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   inherited TlBShow: TToolBar
@@ -43,15 +42,6 @@ inherited ParaleloForm: TParaleloForm
       ListField = 'NomParaleloId'
       KeyField = 'CodParaleloId'
     end
-  end
-  inherited FormStorage: TFormStorage
-    Active = True
-    IniSection = '\Software\SGHC\SEParalelo'
-    StoredProps.Strings = (
-      'TlBShow.DockedTo'
-      'TlBShow.DockPos'
-      'TlBShow.DockRow'
-      'DBCheckListBox.Width')
   end
   inherited DataSource: TDataSource
     DataSet = SourceDataModule.TbCurso

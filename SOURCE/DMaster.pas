@@ -63,11 +63,13 @@ uses
 procedure TMasterDataModule.FillProfesorProhibicionCant;
 var
   CodProfesor, CodProfesor1: Integer;
+  s: string;
 begin
   with SourceDataModule, QuProfesorProhibicionCant do
   begin
     Close;
     Open;
+    s := TbProfesorProhibicion.IndexFieldNames;
     TbProfesorProhibicion.IndexFieldNames := 'CodProfesor';
     TbProfesorProhibicion.First;
     CodProfesor := -$7FFFFFFF;
@@ -90,6 +92,7 @@ begin
       Post;
       TbProfesorProhibicion.Next;
     end;
+    TbProfesorProhibicion.IndexFieldNames := s;
   end;
 end;
 
@@ -100,17 +103,16 @@ var
   iPeriodoCant: Integer;
   procedure ObtenerPeriodoCant;
   begin
-    with SourceDataModule do
-    begin
-      iPeriodoCant := TbPeriodo.RecordCount;
-    end;
+    iPeriodoCant := SourceDataModule.TbPeriodo.RecordCount;
   end;
   procedure ObtenerProfesorCarga;
   var
     CodProfesor, CodProfesor1: Integer;
+    s: string;
   begin
     with SourceDataModule, TbDistributivo do
     begin
+      s := IndexFieldNames;
       IndexFieldNames := 'CodProfesor';
       First;
       TbTmpProfesorCarga.Open;
@@ -135,15 +137,18 @@ var
         TbTmpProfesorCarga.Post;
         Next;
       end;
+      IndexFieldNames := s;
     end;
   end;
   procedure ObtenerAulaTipoCarga;
   var
     CodAulaTipo, CodAulaTipo1: Integer;
+    s: string;  
   begin
     with SourceDataModule, TbDistributivo do
     begin
       TbTmpAulaTipoCarga.Open;
+      s := IndexFieldNames;
       IndexFieldNames := 'CodAulaTipo';
       First;
       CodAulaTipo := -$7FFFFFFF;
@@ -166,6 +171,7 @@ var
         TbTmpAulaTipoCarga.Post;
         Next;
       end;
+      IndexFieldNames := s;
     end;
   end;
   // Chequea que no hayan asignadas más horas de materias a profesores de las

@@ -20,6 +20,7 @@ type
     AColName: string) of object;
   TGetRowNameNotifyEvent = procedure(Sender: TObject; ARow: Integer; var
     ARowName: string) of object;
+
   TCrossManyToManyEditorForm = class(TEditorForm)
     DrawGrid: TDrawGrid;
     BtnOk: TToolButton;
@@ -120,7 +121,7 @@ begin
   begin
     Release;
     s := DataSet.Name;
-    raise Exception.CreateFmt('El Conjunto de datos %s está vacío', [s]);
+    raise Exception.CreateFmt('%s está vacío', [s]);
   end;
 end;
 

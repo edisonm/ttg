@@ -3,9 +3,9 @@ unit FHorPara;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FCrsMMER, Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, Variants,
-  Db, FCrsMME1, kbmMemTable, DBCtrls, ImgList, ComCtrls, ToolWin;
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
+  FCrsMMER, StdCtrls, Buttons, ExtCtrls, Grids, Variants, FCrsMME1, DBCtrls,
+  kbmMemTable, ImgList, ComCtrls, ToolWin;
 
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)
@@ -29,12 +29,17 @@ type
     QuHorarioParaleloApeNomProfesor: TStringField;
     QuHorarioParaleloNombre: TStringField;
     DSParalelo: TDataSource;
+    DSNivel: TDataSource;
+    DSEspecializacion: TDataSource;
+    DSParaleloId: TDataSource;
     procedure BtnMostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure IntercambiarPeriodosClick(Sender: TObject);
     procedure BtnPriorClick(Sender: TObject);
     procedure BtnNextClick(Sender: TObject);
     procedure QuHorarioParaleloCalcFields(DataSet: TDataSet);
+    procedure DSParaleloDataChange(Sender: TObject; Field: TField);
+    procedure DSLookupDataChange(Sender: TObject; Field: TField);
   private
     { Private declarations }
     FCodHorario: Integer;
@@ -113,43 +118,37 @@ begin
 end;
 
 procedure THorarioParaleloForm.BtnMostrarClick(Sender: TObject);
-  procedure HorarioParalelo;
-  var
-    FParalelo: Variant;
-    s: string;
-  begin
-    SourceDataModule.TbParalelo.IndexFieldNames := 'CodNivel;CodEspecializacion;CodParaleloId';
-    with MasterDataModule do
-    begin
-      FParalelo :=
-        SourceDataModule.TbParalelo.Lookup('CodNivel;CodEspecializacion;CodParaleloId',
-        VarArrayOf([CodNivel, CodEspecializacion, CodParaleloId]),
-        'CodNivel;CodEspecializacion;CodParaleloId');
-      if VarIsNull(FParalelo) then
-        raise Exception.CreateFmt('%s %s %s no es un %s válido',
-          [NomNivel, NomEspecializacion, NomParaleloId, SourceDataModule.TbParalelo.Name]);
-      s := Format('[%s %d] - %s %s %s', [SourceDataModule.TbHorario.Name, CodHorario,
-        dlcNivel.Text, dlcEspecializacion.Text, dlcParaleloId.Text]);
-      if QuHorarioParalelo.IsEmpty then
-        raise Exception.CreateFmt('%s %s no válido', [s, SourceDataModule.TbParalelo.Name]);
-      Caption := s;
-    end;
-  end;
-  procedure Mostrar;
-  begin
-    with SourceDataModule, MasterDataModule do
-    begin
-      FNombre := StringsShowParalelo.Values[cbVerParalelo.Text];
-      ShowEditor(TbDia, TbHora, QuHorarioParalelo, TbPeriodo,
-        'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora',
-        'CodHora', 'Nombre');
-      BtnIntercambiarPeriodos.Enabled := True;
-    end;
-  end;
+var
+  d, s: string;
 begin
   inherited;
-  HorarioParalelo;
-  Mostrar;
+  if varIsEmpty(dlcNivel.KeyValue) then
+    raise Exception.Create('Debe especificar un Nivel');
+  if varIsEmpty(dlcEspecializacion.KeyValue) then
+    raise Exception.Create('Debe especificar una Especialización');
+  if varIsEmpty(dlcParaleloId.KeyValue) then
+    raise Exception.Create('Debe especificar un Identificador de Paralelo');
+  SourceDataModule.TbParalelo.DisableControls;
+  d := SourceDataModule.TbParalelo.IndexFieldNames;
+  try
+    SourceDataModule.TbParalelo.IndexFieldNames := 'CodNivel;CodEspecializacion;CodParaleloId';
+    SourceDataModule.TbParalelo.First;
+    with SourceDataModule do
+    begin
+      if not TbParalelo.Locate('CodNivel;CodEspecializacion;CodParaleloId',
+        VarArrayOf([CodNivel, CodEspecializacion, CodParaleloId]), []) then
+        raise Exception.CreateFmt('%s %s %s no es un %s válido',
+          [NomNivel, NomEspecializacion, NomParaleloId, TbParalelo.Name]);
+      s := Format('[%s %d] - %s %s %s', [SuperTitle, CodHorario, dlcNivel.Text,
+        dlcEspecializacion.Text, dlcParaleloId.Text]);
+      if QuHorarioParalelo.IsEmpty then
+        raise Exception.CreateFmt('%s %s no válido', [s, TbParalelo.Name]);
+      Caption := s;
+    end;
+  finally
+    SourceDataModule.TbParalelo.IndexFieldNames := d;
+    SourceDataModule.TbParalelo.EnableControls;
+  end;
 end;
 
 procedure THorarioParaleloForm.FormCreate(Sender: TObject);
@@ -165,7 +164,6 @@ begin
   dlcNivel.KeyValue := SourceDataModule.TbParaleloCodNivel.AsInteger;
   dlcEspecializacion.KeyValue := SourceDataModule.TbParaleloCodEspecializacion.AsInteger;
   dlcParaleloId.KeyValue := SourceDataModule.TbParaleloCodParaleloId.AsInteger;
-  BtnMostrarClick(nil);
 end;
 
 procedure THorarioParaleloForm.IntercambiarPeriodosClick(Sender: TObject);
@@ -188,7 +186,6 @@ begin
   dlcNivel.KeyValue := SourceDataModule.TbParaleloCodNivel.AsInteger;
   dlcEspecializacion.KeyValue := SourceDataModule.TbParaleloCodEspecializacion.AsInteger;
   dlcParaleloId.KeyValue := SourceDataModule.TbParaleloCodParaleloId.AsInteger;
-  BtnMostrarClick(nil);
 end;
 
 procedure THorarioParaleloForm.BtnNextClick(Sender: TObject);
@@ -198,7 +195,6 @@ begin
   dlcNivel.KeyValue := SourceDataModule.TbParaleloCodNivel.AsInteger;
   dlcEspecializacion.KeyValue := SourceDataModule.TbParaleloCodEspecializacion.AsInteger;
   dlcParaleloId.KeyValue := SourceDataModule.TbParaleloCodParaleloId.AsInteger;
-  BtnMostrarClick(nil);
 end;
 
 procedure THorarioParaleloForm.FillHorarioParalelo;
@@ -258,4 +254,26 @@ begin
     DataSet['Nombre'] := VarArrToStr(DataSet[FNombre], ' ');
 end;
 
+procedure THorarioParaleloForm.DSParaleloDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+  if QuHorarioParalelo.Active then
+    with SourceDataModule do
+    begin
+      FNombre := MasterDataModule.StringsShowParalelo.Values[cbVerParalelo.Text];
+      ShowEditor(TbDia, TbHora, QuHorarioParalelo, TbPeriodo, 'CodDia', 'NomDia',
+        'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora', 'CodHora', 'Nombre');
+    end;
+end;
+
+procedure THorarioParaleloForm.DSLookupDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+  if QuHorarioParalelo.Active then
+    BtnMostrarClick(nil);
+end;
+
 end.
+

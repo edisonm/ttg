@@ -46,7 +46,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Hint = 'Nivel|Seleccione el nivel'
       KeyField = 'CodNivel'
       ListField = 'AbrNivel'
-      ListSource = SourceDataModule.DSNivel
+      ListSource = DSNivel
       TabOrder = 0
     end
     object dlcEspecializacion: TDBLookupComboBox
@@ -57,7 +57,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Hint = 'Especializaci'#243'n|Seleccione la especializaci'#243'n'
       KeyField = 'CodEspecializacion'
       ListField = 'NomEspecializacion'
-      ListSource = SourceDataModule.DSEspecializacion
+      ListSource = DSEspecializacion
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
@@ -70,7 +70,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Hint = 'Paralelo|Seleccione el tipo de paralelo'
       KeyField = 'CodParaleloId'
       ListField = 'NomParaleloId'
-      ListSource = SourceDataModule.DSParaleloId
+      ListSource = DSParaleloId
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
@@ -86,6 +86,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       ShowHint = True
       TabOrder = 3
       Text = 'cbVerParalelo'
+      OnChange = BtnMostrarClick
     end
     object BtnIntercambiarPeriodos: TToolButton
       Left = 662
@@ -110,12 +111,6 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     Height = 357
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
     OnDblClick = IntercambiarPeriodosClick
-  end
-  inherited FormStorage: TFormStorage
-    Active = True
-    IniSection = '\Software\SGHC\MMEd1HorarioParalelo'
-    Left = 144
-    Top = 104
   end
   inherited ImageList: TImageList
     Left = 116
@@ -650,7 +645,26 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   end
   object DSParalelo: TDataSource
     DataSet = SourceDataModule.TbParalelo
+    OnDataChange = DSParaleloDataChange
     Left = 88
     Top = 104
+  end
+  object DSNivel: TDataSource
+    DataSet = SourceDataModule.TbNivel
+    OnDataChange = DSLookupDataChange
+    Left = 60
+    Top = 132
+  end
+  object DSEspecializacion: TDataSource
+    DataSet = SourceDataModule.TbEspecializacion
+    OnDataChange = DSLookupDataChange
+    Left = 88
+    Top = 132
+  end
+  object DSParaleloId: TDataSource
+    DataSet = SourceDataModule.TbParaleloId
+    OnDataChange = DSLookupDataChange
+    Left = 116
+    Top = 132
   end
 end

@@ -17,7 +17,7 @@ type
     FDataSetDescList: TStrings;
     FCheckRelations: Boolean;
     function GetDescription(ADataSet: TDataSet): string;
-    function GetName(ADataSet: TDataSet): string;
+    function GetNameDataSet(ADataSet: TDataSet): string;
   protected
     FTables: TDataSetArray;
     FBeforePostLocks: array of Boolean;
@@ -41,7 +41,7 @@ type
     property CheckRelations: Boolean read FCheckRelations write FCheckRelations;
     property Tables: TDataSetArray read FTables write FTables;
     property Description[ADataSet: TDataSet]: string read GetDescription;
-    property Name[ADataSet: TDataSet]: string read GetName;
+    property NameDataSet[ADataSet: TDataSet]: string read GetNameDataSet;
     { Public declarations }
   end;
 
@@ -76,7 +76,7 @@ var
   i: Integer;
 begin
   for i := Low(FTables) to High(FTables) do
-    SaveDataSetToCSVFile(Tables[i], ADirName + '\' + Name[Tables[i]] + '.csv');
+    SaveDataSetToCSVFile(Tables[i], ADirName + '\' + NameDataSet[Tables[i]] + '.csv');
 end;
 
 procedure TBaseDataModule.LoadFromTextDir(const ADirName: string);
@@ -86,7 +86,7 @@ begin
   FCheckRelations := False;
   try
     for i := Low(FTables) to High(FTables) do
-      LoadDataSetFromCSVFile(Tables[i], ADirName + '\' + Name[Tables[i]] + '.csv');
+      LoadDataSetFromCSVFile(Tables[i], ADirName + '\' + NameDataSet[Tables[i]] + '.csv');
   finally
     FCheckRelations := True;
   end;
@@ -211,12 +211,16 @@ end;
 
 function TBaseDataModule.GetDescription(ADataSet: TDataSet): string;
 begin
-  result := DataSetDescList.Values[ADataSet.Name];
+  Result := DataSetDescList.Values[ADataSet.Name];
+  if Result = '' then
+    Result := ADataSet.Name;
 end;
 
-function TBaseDataModule.GetName(ADataSet: TDataSet): string;
+function TBaseDataModule.GetNameDataSet(ADataSet: TDataSet): string;
 begin
-  result := DataSetNameList.Values[ADataSet.Name];
+  Result := DataSetNameList.Values[ADataSet.Name];
+  if Result = '' then
+    Result := ADataSet.Name;
 end;
 
 end.

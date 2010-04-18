@@ -1,6 +1,6 @@
 inherited HorarioAulaTipoForm: THorarioAulaTipoForm
-  Left = 207
-  Top = 269
+  Left = 576
+  Top = 221
   Width = 721
   Height = 399
   OnCreate = FormCreate
@@ -8,6 +8,10 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
   TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 713
+    Visible = True
+    inherited BtnShow: TToolButton
+      Visible = False
+    end
     object BtnMostrar: TToolButton
       Left = 69
       Top = 0
@@ -17,17 +21,17 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       ShowHint = True
       OnClick = BtnMostrarClick
     end
-    object BtnNext: TToolButton
-      Left = 92
-      Top = 0
-      ImageIndex = 4
-      OnClick = BtnNextClick
-    end
     object BtnPrior: TToolButton
-      Left = 115
+      Left = 92
       Top = 0
       ImageIndex = 5
       OnClick = BtnPriorClick
+    end
+    object BtnNext: TToolButton
+      Left = 115
+      Top = 0
+      ImageIndex = 4
+      OnClick = BtnNextClick
     end
     object dlcAulaTipo: TDBLookupComboBox
       Left = 138
@@ -39,6 +43,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       ListField = 'AbrAulaTipo'
       ListSource = SourceDataModule.DSAulaTipo
       TabOrder = 0
+      OnCloseUp = BtnMostrarClick
     end
     object cbVerAulaTipo: TComboBox
       Left = 307
@@ -50,6 +55,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
+      OnChange = BtnMostrarClick
     end
   end
   inherited pnlStatus: TPanel
@@ -64,12 +70,6 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
     Width = 713
     Height = 328
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
-  end
-  inherited FormStorage: TFormStorage
-    Active = True
-    IniSection = '\Software\SGHC\MMEd1HorarioProfesor'
-    Left = 56
-    Top = 80
   end
   inherited ImageList: TImageList
     Left = 112

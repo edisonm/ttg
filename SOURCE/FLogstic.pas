@@ -4,16 +4,15 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ExtCtrls, Placemnt, RXSplit;
+  StdCtrls, Buttons, ExtCtrls;
 
 type
   TLogisticForm = class(TForm)
-    memLogistic: TMemo;
+    MemLogistic: TMemo;
     Panel2: TPanel;
     bbtnClose: TBitBtn;
     lblMsg: TLabel;
-    FormStorage: TFormStorage;
-    memResumen: TMemo;
+    MemResumen: TMemo;
     Panel1: TPanel;
     Splitter1: TSplitter;
   private

@@ -3,10 +3,10 @@ unit FParalel;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Placemnt, Grids, DBGrids, RXDBCtrl, RXCtrls, ExtCtrls,
-  StdCtrls, DBIndex, DBCtrls, RXSplit,
-  CheckLst, DBChLsBx, Printers, kbmMemTable, ImgList, ComCtrls, ToolWin;
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
+  FSingEdt, DBGrids, ExtCtrls, DBIndex, kbmMemTable, DBCtrls,
+  Grids, CheckLst, DBChLsBx, Printers, StdCtrls, ImgList, ComCtrls, ToolWin,
+  ActnList;
 
 type
   TParaleloForm = class(TSingleEditorForm)
@@ -19,6 +19,9 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
+  protected
+    procedure doLoadConfig; override;
+    procedure doSaveConfig; override;
   public
     { Public declarations }
   end;
@@ -63,5 +66,16 @@ begin
   SourceDataModule.TbParalelo.MasterSource := nil;
 end;
 
-end.
+procedure TParaleloForm.doLoadConfig;
+begin
+  inherited;
+  DBCheckListBox.Width := ConfigIntegers['DBCheckListBox_Width'];
+end;
 
+procedure TParaleloForm.doSaveConfig;
+begin
+  inherited;
+  ConfigIntegers['DBCheckListBox_Width'] := DBCheckListBox.Width;
+end;
+
+end.

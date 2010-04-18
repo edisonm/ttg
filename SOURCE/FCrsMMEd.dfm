@@ -91,9 +91,6 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
       18
       18)
   end
-  inherited FormStorage: TFormStorage
-    Left = 120
-  end
   inherited ImageList: TImageList
     Bitmap = {
       494C010103000400040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600

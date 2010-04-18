@@ -49,18 +49,14 @@ uses
 {$R *.DFM}
 
 procedure THorarioProfesorForm.BtnMostrarClick(Sender: TObject);
-var
-  s: string;
 begin
   inherited;
-  with SourceDataModule, MasterDataModule do
+  with SourceDataModule do
   begin
     if varIsEmpty(dlcProfesor.KeyValue) then
       raise Exception.Create('Debe especificar un Profesor');
-    s := Format('[%s %d] - %s', [Description[TbHorario], CodHorario,
-      dlcProfesor.Text]);
-    Caption := s;
-    FNombre := StringsShowProfesor.Values[cbVerProfesor.Text];
+    Caption := Format('[%s %d] - %s', [SuperTitle, CodHorario, dlcProfesor.Text]);
+    FNombre := MasterDataModule.StringsShowProfesor.Values[cbVerProfesor.Text];
     ShowEditor(TbDia, TbHora, QuHorarioProfesor, TbPeriodo, 'CodDia', 'NomDia',
       'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora', 'CodHora', 'Nombre');
   end;
@@ -77,7 +73,6 @@ begin
   LoadNames(MasterDataModule.StringsShowProfesor, cbVerProfesor.Items);
   cbVerProfesor.Text := cbVerProfesor.Items[0];
   dlcProfesor.KeyValue := SourceDataModule.TbProfesorCodProfesor.Value;
-  BtnMostrarClick(nil);
 end;
 
 procedure THorarioProfesorForm.BtnPriorClick(Sender: TObject);
@@ -109,7 +104,8 @@ begin
       try
         QuHorarioProfesor.EmptyTable;
         TbDistributivo.First;
-        while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
+        while (TbHorarioDetalleCodHorario.Value = CodHorario)
+	    and not TbHorarioDetalle.Eof do
         begin
           CodMateria := TbHorarioDetalleCodMateria.Value;
           CodNivel := TbHorarioDetalleCodNivel.Value;
@@ -139,8 +135,7 @@ begin
   end;
 end;
 
-procedure THorarioProfesorForm.QuHorarioProfesorCalcFields(
-  DataSet: TDataSet);
+procedure THorarioProfesorForm.QuHorarioProfesorCalcFields(DataSet: TDataSet);
 begin
   inherited;
   if FNombre <> '' then

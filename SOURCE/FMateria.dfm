@@ -10,13 +10,9 @@ inherited MateriaForm: TMateriaForm
     object BtnMateriaProhibicion: TToolButton [2]
       Left = 46
       Top = 0
-      Hint = 
-        'Prohibiciones de materia|Ingresar el horario de prohibiciones de' +
-        ' materia'
-      ImageIndex = 2
+      Action = ActMateriaProhibicion
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnMateriaProhibicionClick
     end
     inherited DBNavigator: TDBNavigator
       Left = 69
@@ -26,7 +22,7 @@ inherited MateriaForm: TMateriaForm
   inherited pnlStatus: TPanel
     Width = 594
     inherited SLRecordNo: TLabel
-      Left = 523
+      Left = 590
     end
   end
   inherited Panel1: TPanel
@@ -34,10 +30,6 @@ inherited MateriaForm: TMateriaForm
     inherited DBGrid: TDBGrid
       Width = 592
     end
-  end
-  inherited FormStorage: TFormStorage
-    Active = True
-    IniSection = '\Software\SGHC\SEMateria'
   end
   inherited ImageList: TImageList
     Bitmap = {
@@ -179,5 +171,15 @@ inherited MateriaForm: TMateriaForm
       800FF80300070000800FF803001F0000801FFC07001F0000803FFC0FFFFF0000
       C07FFFFFFFFF0000FFFFFFFFFFFF000000000000000000000000000000000000
       000000000000}
+  end
+  inherited ActionList: TActionList
+    object ActMateriaProhibicion: TAction
+      Caption = 'Prohibiciones de materia'
+      Hint = 
+        'Prohibiciones de materia|Ingresar el horario de prohibiciones de' +
+        ' materia'
+      ImageIndex = 2
+      OnExecute = ActMateriaProhibicionExecute
+    end
   end
 end

@@ -7,16 +7,14 @@ inherited SingleEditorForm: TSingleEditorForm
   inherited TlBShow: TToolBar
     Width = 502
     inherited BtnShow: TToolButton
-      OnClick = BtnShowClick
+      Action = ActShow
     end
     object BtnFind: TToolButton
       Left = 23
       Top = 0
-      Hint = 'Buscar|Buscar un campo espec'#237'fico'
-      ImageIndex = 1
+      Action = ActFind
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnFindClick
     end
     object DBNavigator: TDBNavigator
       Left = 46
@@ -211,5 +209,22 @@ inherited SingleEditorForm: TSingleEditorForm
     OnDataChange = DataSourceDataChange
     Left = 36
     Top = 88
+  end
+  object ActionList: TActionList
+    Images = ImageList
+    Left = 64
+    Top = 88
+    object ActShow: TAction
+      Caption = 'Mostrar'
+      Hint = 'Presentar|Presenta el contenido de la cuadr'#237'cula en un reporte'
+      ImageIndex = 0
+      OnExecute = ActShowExecute
+    end
+    object ActFind: TAction
+      Caption = 'Buscar'
+      Hint = 'Buscar|Buscar un campo espec'#237'fico'
+      ImageIndex = 1
+      OnExecute = ActFindExecute
+    end
   end
 end

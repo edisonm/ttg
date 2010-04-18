@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Placemnt, StdCtrls, Buttons, ExtCtrls, Grids, FCrsMME0, Db,
-  FCrsMME1, kbmMemTable, ImgList, ComCtrls, ToolWin, DBCtrls, Variants;
+  StdCtrls, Buttons, ExtCtrls, Grids, FCrsMME0, Db, FCrsMME1, kbmMemTable,
+  ImgList, ComCtrls, ToolWin, DBCtrls, Variants;
 
 type
   THorarioAulaTipoForm = class(TCrossManyToManyEditor1Form)
@@ -53,6 +53,7 @@ begin
   with SourceDataModule do
   begin
     TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+    TbHorarioDetalle.First;
     if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
     begin
       TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
@@ -63,7 +64,7 @@ begin
         while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
         begin
           QuHorarioAulaTipo.Append;
-          QuHorarioAulaTipoCodAulaTipo.Value := TbAulaTipoCodAulaTipo.Value;
+          QuHorarioAulaTipoCodAulaTipo.Value := TbDistributivoCodAulaTipo.Value;
           QuHorarioAulaTipoCodMateria.Value := TbHorarioDetalleCodMateria.Value;
           QuHorarioAulaTipoCodNivel.Value := TbHorarioDetalleCodNivel.Value;
           QuHorarioAulaTipoCodEspecializacion.Value := TbHorarioDetalleCodEspecializacion.Value;
@@ -83,16 +84,13 @@ begin
 end;
 
 procedure THorarioAulaTipoForm.BtnMostrarClick(Sender: TObject);
-var
-  s: string;
 begin
   inherited;
   with SourceDataModule, MasterDataModule do
   begin
     if varIsEmpty(dlcAulaTipo.KeyValue) then
       raise Exception.Create('Debe especificar un tipo de aula');
-    s := Format('[%s %d] - %s', [TbHorario.Name, CodHorario, dlcAulaTipo.Text]);
-    Caption := s;
+    Caption := Format('[%s %d] - %s', [SuperTitle, CodHorario, dlcAulaTipo.Text]);
     FNombre := StringsShowAulaTipo.Values[cbVerAulaTipo.Text];
     ShowEditor(TbDia, TbHora, QuHorarioAulaTipo, TbPeriodo, 'CodDia', 'NomDia',
       'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora', 'CodHora', 'Nombre');
@@ -109,7 +107,6 @@ begin
   cbVerAulaTipo.Text := cbVerAulaTipo.Items[0];
   SourceDataModule.TbAulaTipo.First;
   dlcAulaTipo.KeyValue := SourceDataModule.TbAulaTipoCodAulaTipo.Value;
-  BtnMostrarClick(nil);
 end;
 
 procedure THorarioAulaTipoForm.BtnPriorClick(Sender: TObject);
@@ -128,8 +125,7 @@ begin
   BtnMostrarClick(nil);
 end;
 
-procedure THorarioAulaTipoForm.QuHorarioAulaTipoCalcFields(
-  DataSet: TDataSet);
+procedure THorarioAulaTipoForm.QuHorarioAulaTipoCalcFields(DataSet: TDataSet);
 begin
   inherited;
   if FNombre <> '' then

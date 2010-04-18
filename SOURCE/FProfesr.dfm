@@ -11,20 +11,16 @@ inherited ProfesorForm: TProfesorForm
     object BtnProfesorProhibicion: TToolButton [2]
       Left = 46
       Top = 0
-      Hint = 'Prohibiciones de profesor|Prohibiciones de profesor'
-      ImageIndex = 2
+      Action = ActProfesorProhibicion
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnProfesorProhibicionClick
     end
     object BtnDistributivo: TToolButton [3]
       Left = 69
       Top = 0
-      Hint = 'Distributivo|Ver distributivo del profesor'
-      ImageIndex = 3
+      Action = ActDistributivo
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnDistributivoClick
     end
     inherited DBNavigator: TDBNavigator
       Left = 92
@@ -35,7 +31,7 @@ inherited ProfesorForm: TProfesorForm
     Top = 381
     Width = 702
     inherited SLRecordNo: TLabel
-      Left = 631
+      Left = 698
     end
   end
   inherited Panel1: TPanel
@@ -45,12 +41,6 @@ inherited ProfesorForm: TProfesorForm
       Width = 700
       Height = 354
     end
-  end
-  inherited FormStorage: TFormStorage
-    Active = True
-    IniSection = '\Software\SGHC\SEProfesor'
-    Left = 260
-    Top = 48
   end
   inherited ImageList: TImageList
     Left = 204
@@ -460,8 +450,21 @@ inherited ProfesorForm: TProfesorForm
       000000000000}
   end
   inherited DataSource: TDataSource
-    OnDataChange = DataSourceDataChange
     Left = 232
     Top = 48
+  end
+  inherited ActionList: TActionList
+    object ActDistributivo: TAction
+      Caption = 'Distributivo'
+      Hint = 'Distributivo|Ver distributivo del profesor'
+      ImageIndex = 3
+      OnExecute = ActDistributivoExecute
+    end
+    object ActProfesorProhibicion: TAction
+      Caption = 'Prohibiciones de profesor'
+      Hint = 'Prohibiciones de profesor|Prohibiciones de profesor'
+      ImageIndex = 2
+      OnExecute = ActProfesorProhibicionExecute
+    end
   end
 end
