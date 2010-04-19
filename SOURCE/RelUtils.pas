@@ -404,12 +404,14 @@ end;
 
 procedure SaveDataSetToStrings0(ADataSet:TDataSet; AStrings: TSTrings);
 var
-  s, v: string;
+  s: string;
   i: Integer;
 begin
+  s := '';
   for i := 0 to ADataSet.FieldCount - 1 do
   begin
-    if ADataSet.Fields[i].FieldKind = fkData then
+    if (ADataSet.Fields[i].FieldKind = fkData)
+      and (ADataSet.Fields[i].DataType <> ftAutoInc) then
     begin
       s := s + StringToScaped(ADataSet.Fields[i].FieldName) + ';';
     end
@@ -423,11 +425,9 @@ begin
       s := '';
       for i := 0 to ADataSet.FieldCount - 1 do
       begin
-        if ADataSet.Fields[i].FieldKind = fkData then
-        begin
-          v := StringToScaped(ADataSet.Fields[i].AsString);
-          s := s + v + ';';
-        end;
+        if (ADataSet.Fields[i].FieldKind = fkData)
+          and (ADataSet.Fields[i].DataType <> ftAutoInc) then
+          s := s + StringToScaped(ADataSet.Fields[i].AsString) + ';';
       end;
       AStrings.Add(s);
       ADataSet.Next;

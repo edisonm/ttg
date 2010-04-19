@@ -1,6 +1,6 @@
 inherited HorarioParaleloForm: THorarioParaleloForm
-  Left = 379
-  Top = 161
+  Left = 610
+  Top = 192
   Width = 704
   Height = 428
   OnCreate = FormCreate
@@ -17,66 +17,31 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Enabled = False
       Visible = False
     end
-    object BtnMostrar: TToolButton
-      Left = 69
-      Top = 0
-      Hint = 'Mostrar|Mostrar el horario'
-      ImageIndex = 3
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = BtnMostrarClick
-    end
     object BtnPrior: TToolButton
-      Left = 92
+      Left = 69
       Top = 0
       ImageIndex = 4
       OnClick = BtnPriorClick
     end
     object BtnNext: TToolButton
-      Left = 115
+      Left = 92
       Top = 0
       ImageIndex = 5
       OnClick = BtnNextClick
     end
-    object dlcNivel: TDBLookupComboBox
-      Left = 138
+    object dlcParalelo: TDBLookupComboBox
+      Left = 115
       Top = 0
-      Width = 113
+      Width = 150
       Height = 21
-      Hint = 'Nivel|Seleccione el nivel'
-      KeyField = 'CodNivel'
-      ListField = 'AbrNivel'
-      ListSource = DSNivel
-      TabOrder = 0
-    end
-    object dlcEspecializacion: TDBLookupComboBox
-      Left = 251
-      Top = 0
-      Width = 113
-      Height = 21
-      Hint = 'Especializaci'#243'n|Seleccione la especializaci'#243'n'
-      KeyField = 'CodEspecializacion'
-      ListField = 'NomEspecializacion'
-      ListSource = DSEspecializacion
-      ParentShowHint = False
-      ShowHint = True
+      KeyField = 'CodParalelo'
+      ListField = 'AbrNivel;AbrEspecializacion;NomParaleloId;NomParalelo'
+      ListFieldIndex = 3
+      ListSource = DSParalelo
       TabOrder = 1
     end
-    object dlcParaleloId: TDBLookupComboBox
-      Left = 364
-      Top = 0
-      Width = 113
-      Height = 21
-      Hint = 'Paralelo|Seleccione el tipo de paralelo'
-      KeyField = 'CodParaleloId'
-      ListField = 'NomParaleloId'
-      ListSource = DSParaleloId
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 2
-    end
     object cbVerParalelo: TComboBox
-      Left = 477
+      Left = 265
       Top = 0
       Width = 185
       Height = 21
@@ -84,12 +49,12 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       ItemHeight = 13
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 3
+      TabOrder = 0
       Text = 'cbVerParalelo'
       OnChange = BtnMostrarClick
     end
     object BtnIntercambiarPeriodos: TToolButton
-      Left = 662
+      Left = 450
       Top = 0
       Hint = 'Intercambiar per'#237'odos|Intercambiar per'#237'odos'
       ImageIndex = 6
@@ -648,23 +613,5 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     OnDataChange = DSParaleloDataChange
     Left = 88
     Top = 104
-  end
-  object DSNivel: TDataSource
-    DataSet = SourceDataModule.TbNivel
-    OnDataChange = DSLookupDataChange
-    Left = 60
-    Top = 132
-  end
-  object DSEspecializacion: TDataSource
-    DataSet = SourceDataModule.TbEspecializacion
-    OnDataChange = DSLookupDataChange
-    Left = 88
-    Top = 132
-  end
-  object DSParaleloId: TDataSource
-    DataSet = SourceDataModule.TbParaleloId
-    OnDataChange = DSLookupDataChange
-    Left = 116
-    Top = 132
   end
 end

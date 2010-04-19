@@ -1,6 +1,6 @@
 inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
-  Left = 324
-  Top = 384
+  Left = 379
+  Top = 320
   Width = 625
   Height = 276
   PixelsPerInch = 96

@@ -12,7 +12,6 @@ type
     QuHorarioProfesor: TkbmMemTable;
     dlcProfesor: TDBLookupComboBox;
     cbVerProfesor: TComboBox;
-    BtnMostrar: TToolButton;
     BtnNext: TToolButton;
     BtnPrior: TToolButton;
     QuHorarioProfesorCodNivel: TIntegerField;
@@ -27,11 +26,13 @@ type
     QuHorarioProfesorAbrNivel: TStringField;
     QuHorarioProfesorAbrEspecializacion: TStringField;
     QuHorarioProfesorNomParaleloId: TStringField;
+    DSProfesor: TDataSource;
     procedure BtnMostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtnPriorClick(Sender: TObject);
     procedure BtnNextClick(Sender: TObject);
     procedure QuHorarioProfesorCalcFields(DataSet: TDataSet);
+    procedure DSProfesorDataChange(Sender: TObject; Field: TField);
   private
     { Private declarations }
     FCodHorario: Integer;
@@ -53,9 +54,8 @@ begin
   inherited;
   with SourceDataModule do
   begin
-    if varIsEmpty(dlcProfesor.KeyValue) then
-      raise Exception.Create('Debe especificar un Profesor');
-    Caption := Format('[%s %d] - %s', [SuperTitle, CodHorario, dlcProfesor.Text]);
+    Caption := Format('[%s %d] - %s', [SuperTitle, CodHorario,
+      SourceDataModule.TbProfesorApeNomProfesor.AsString]);
     FNombre := MasterDataModule.StringsShowProfesor.Values[cbVerProfesor.Text];
     ShowEditor(TbDia, TbHora, QuHorarioProfesor, TbPeriodo, 'CodDia', 'NomDia',
       'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora', 'CodHora', 'Nombre');
@@ -80,7 +80,6 @@ begin
   inherited;
   SourceDataModule.TbProfesor.Prior;
   dlcProfesor.KeyValue := SourceDataModule.TbProfesorCodProfesor.Value;
-  BtnMostrarClick(nil);
 end;
 
 procedure THorarioProfesorForm.BtnNextClick(Sender: TObject);
@@ -88,7 +87,6 @@ begin
   inherited;
   SourceDataModule.TbProfesor.Next;
   dlcProfesor.KeyValue := SourceDataModule.TbProfesorCodProfesor.Value;
-  BtnMostrarClick(nil);
 end;
 
 procedure THorarioProfesorForm.FillHorarioProfesor;
@@ -140,6 +138,13 @@ begin
   inherited;
   if FNombre <> '' then
     DataSet['Nombre'] := VarArrToStr(DataSet[FNombre], ' ');
+end;
+
+procedure THorarioProfesorForm.DSProfesorDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+  BtnMostrarClick(nil);
 end;
 
 end.

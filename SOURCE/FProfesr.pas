@@ -46,7 +46,8 @@ begin
    inherited;
    with SourceDataModule do
    begin
-      if TCrossManyToManyEditorRForm.ToggleEditor(FProfesorProhibicionForm,
+      if TCrossManyToManyEditorRForm.ToggleEditor(Self,
+						  FProfesorProhibicionForm,
 						  ConfigStrings,
                                                   ActProfesorProhibicion) then
 	 with FProfesorProhibicionForm do
@@ -86,8 +87,11 @@ begin
    inherited;
    with SourceDataModule do
    begin
-      if TSingleEditorForm.ToggleSingleEditor(FDistributivoForm, ConfigStrings,
-					      ActDistributivo, TbDistributivo) then
+      if TSingleEditorForm.ToggleSingleEditor(Self,
+					      FDistributivoForm,
+					      ConfigStrings,
+					      ActDistributivo,
+					      TbDistributivo) then
       begin
 	 TbParalelo.First;
 	 TbDistributivo.First;

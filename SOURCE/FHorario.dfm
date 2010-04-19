@@ -20,73 +20,73 @@ inherited HorarioForm: THorarioForm
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnHorarioProfesor: TToolButton
+    object BtnHorarioAulaTipo: TToolButton
       Left = 223
+      Top = 0
+      Action = ActHorarioAulaTipo
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object BtnHorarioProfesor: TToolButton
+      Left = 246
       Top = 0
       Action = ActHorarioProfesor
       ParentShowHint = False
       ShowHint = True
     end
     object BtnCruceProfesor: TToolButton
-      Left = 246
+      Left = 269
       Top = 0
       Action = ActCruceProfesor
       ParentShowHint = False
       ShowHint = True
     end
     object BtnCruceMateria: TToolButton
-      Left = 269
+      Left = 292
       Top = 0
       Action = ActCruceMateria
       ParentShowHint = False
       ShowHint = True
     end
     object BtnCruceAula: TToolButton
-      Left = 292
+      Left = 315
       Top = 0
       Action = ActCruceAula
       ParentShowHint = False
       ShowHint = True
     end
     object BtnMateriaProhibicionNoRespetada: TToolButton
-      Left = 315
+      Left = 338
       Top = 0
       Action = ActMateriaProhibicionNoRespetada
       ParentShowHint = False
       ShowHint = True
     end
     object BtnProfesorProhibicionNoRespetada: TToolButton
-      Left = 338
+      Left = 361
       Top = 0
       Action = ActProfesorProhibicionNoRespetada
       ParentShowHint = False
       ShowHint = True
     end
     object BtnSeleccionarHorario: TToolButton
-      Left = 361
+      Left = 384
       Top = 0
       Action = ActSeleccionarHorario
       ParentShowHint = False
       ShowHint = True
     end
     object BtnMateriaCortadaDia: TToolButton
-      Left = 384
+      Left = 407
       Top = 0
       Action = ActMateriaCortadaDia
       ParentShowHint = False
       ShowHint = True
     end
     object BtnMateriaCortadaHora: TToolButton
-      Left = 407
-      Top = 0
-      Action = ActMateriaCortadaHora
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object BtnHorarioAulaTipo: TToolButton
       Left = 430
       Top = 0
-      Action = ActHorarioAulaTipo
+      Action = ActMateriaCortadaHora
       ParentShowHint = False
       ShowHint = True
     end

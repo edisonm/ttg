@@ -160,6 +160,29 @@ inherited SourceDataModule: TSourceDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+    IndexDefs = <
+      item
+        Name = 'TbParaleloCursoParalelo'
+        Fields = 'CodNivel;CodEspecializacion'
+      end
+      item
+        Name = 'TbParaleloParaleloIdParalelo'
+        Fields = 'CodParaleloId'
+      end
+      item
+        Name = 'TbParaleloPrimaryKey'
+        Fields = 'CodNivel;CodEspecializacion;CodParaleloId'
+        Options = [ixPrimary, ixUnique]
+      end
+      item
+        Name = 'TbParaleloCodParalelo'
+        Fields = 'CodParalelo'
+        Options = [ixUnique]
+      end>
+    OnCalcFields = TbParaleloCalcFields
+    object TbParaleloCodParalelo: TAutoIncField [0]
+      FieldName = 'CodParalelo'
+    end
     inherited TbParaleloCodNivel: TIntegerField
       Visible = False
     end
@@ -201,6 +224,11 @@ inherited SourceDataModule: TSourceDataModule
       KeyFields = 'CodParaleloId'
       Size = 5
       Lookup = True
+    end
+    object TbParaleloNomParalelo: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'NomParalelo'
+      Calculated = True
     end
   end
   inherited TbProfesor: TkbmMemTable

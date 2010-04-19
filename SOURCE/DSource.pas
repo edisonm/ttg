@@ -24,11 +24,14 @@ type
     TbParaleloAbrNivel: TStringField;
     TbParaleloAbrEspecializacion: TStringField;
     TbParaleloNomParaleloId: TStringField;
+    TbParaleloCodParalelo: TAutoIncField;
+    TbParaleloNomParalelo: TStringField;
     procedure TbProfesorCalcFields(DataSet: TDataSet);
     procedure TbDistributivoBeforePost(DataSet: TDataSet);
     procedure TbDistributivoCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
+    procedure TbParaleloCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     FFlags : TkbmMemTableSaveFlags;
@@ -48,6 +51,7 @@ type
     // procedure LoadFromFile(const AFileName: TFileName);
     procedure NewDatabase;
     procedure FillDefaultData;
+    property ConfigStrings: TStrings read FConfigStrings;
   end;
 
 var
@@ -57,7 +61,7 @@ implementation
 
 {$R *.DFM}
 uses
-  SGHCUtls, BZip2, FConfig, Variants, DBase, RelUtils;
+  SGHCUtls, BZip2, Variants, DBase, RelUtils, FConfig;
 
 type
   EMainDataModuleError = class(Exception);
@@ -271,40 +275,27 @@ begin
 end;
 
 procedure TSourceDataModule.SaveIniStrings(AStrings: TStrings);
-var
-  IniStrings: TStrings;
 begin
-  IniStrings := TStringList.Create;
-  try
-    ConfiguracionForm.SaveToStrings(IniStrings);
-    AStrings.Add(IntToStr(IniStrings.Count));
-    AStrings.AddStrings(IniStrings);
-  finally
-    IniStrings.Free;
-  end;
+  ConfiguracionForm.SaveToStrings(FConfigStrings);
+  AStrings.Add(IntToStr(FConfigStrings.Count));
+  AStrings.AddStrings(FConfigStrings);
 end;
 
 procedure TSourceDataModule.LoadIniStrings(AStrings: TStrings; var APosition: Integer);
 var
-  IniStrings: TStrings;
   Count, Limit: Integer;
 begin
-  IniStrings := TStringList.Create;
-  try
-    Count := StrToInt(AStrings.Strings[APosition]);
+  Count := StrToInt(AStrings.Strings[APosition]);
+  Inc(APosition);
+  Limit := APosition + Count;
+  while APosition < Limit do
+  begin
+    FConfigStrings.Add(AStrings[APosition]);
     Inc(APosition);
-    Limit := APosition + Count;
-    while APosition < Limit do
-    begin
-      IniStrings.Add(AStrings[APosition]);
-      Inc(APosition);
-    end;
-    AStrings.Add(IntToStr(IniStrings.Count));
-    AStrings.AddStrings(IniStrings);
-    ConfiguracionForm.LoadFromStrings(IniStrings);
-  finally
-    IniStrings.Free;
   end;
+  AStrings.Add(IntToStr(FConfigStrings.Count));
+  AStrings.AddStrings(FConfigStrings);
+  ConfiguracionForm.LoadFromStrings(FConfigStrings);
 end;
 
 procedure TSourceDataModule.LoadFromStrings(AStrings: TStrings; var APosition: Integer);
@@ -316,17 +307,9 @@ begin
 end;
 
 procedure TSourceDataModule.SaveToTextDir(const ADirName: TFileName);
-var
-  ConfigStrings: TStrings;
 begin
   inherited;
-  ConfigStrings := TStringList.Create;
-  try
-    ConfiguracionForm.SaveToStrings(ConfigStrings);
-    ConfigStrings.SaveToFile(ADirName + '\config.ini');
-  finally
-    ConfigStrings.Free;
-  end;
+  FConfigStrings.SaveToFile(ADirName + '\config.ini');
 end;
 
 (*
@@ -347,6 +330,14 @@ procedure TSourceDataModule.DataModuleDestroy(Sender: TObject);
 begin
   inherited;
   FConfigStrings.Free;
+end;
+
+procedure TSourceDataModule.TbParaleloCalcFields(DataSet: TDataSet);
+begin
+  inherited;
+  with DataSet do
+    FieldValues['NomParalelo'] := FieldValues['AbrNivel'] + ' ' +
+      FieldValues['AbrEspecializacion'] + ' ' + FieldValues['NomParaleloId'];
 end;
 
 end.

@@ -53,7 +53,8 @@ type
       AAction: TAction);
     procedure LoadConfig;
     procedure SaveConfig;
-    class function ToggleEditor(var AForm;
+    class function ToggleEditor(AOwner: TComponent;
+                                var AForm;
                                 AConfigStrings: TStrings;
                                 AAction: TAction): Boolean;
   end;
@@ -65,11 +66,11 @@ uses
 
 {$R *.DFM}
 
-class function TEditorForm.ToggleEditor(var AForm;
+class function TEditorForm.ToggleEditor(AOwner: TComponent; var AForm;
                                         AConfigStrings: TStrings;
                                         AAction: TAction): Boolean;
 var
-   Form: TEditorForm;
+  Instance: TComponent;
 begin
   if AAction.Checked then
   begin
@@ -79,12 +80,10 @@ begin
   end
   else
   begin
-    Application.CreateForm(Self, AForm);
-    Form := TEditorForm(AForm);
-    Form.InitEditor(AConfigStrings, AAction.Name + 'Form', AAction);
-    Form.HelpContext := AAction.HelpContext;
-    Form.FSuperTitle := AAction.Caption;
-    Form.Caption := AAction.Caption;
+    Instance := TComponent(Self.NewInstance);
+    TComponent(AForm) := Instance;
+    Instance.Create(AOwner);
+    TEditorForm(AForm).InitEditor(AConfigStrings, AAction.Name + 'Form', AAction);
     Result := True;
   end;
 end;
@@ -95,8 +94,13 @@ begin
   FConfigStrings := AConfigStrings;
   FPreffix := APreffix;
   FAction := AAction;
-  if assigned(FAction) then
+  if Assigned(FAction) then
+  begin
     AAction.Checked := True;
+    HelpContext := FAction.HelpContext;
+    FSuperTitle := FAction.Caption;
+    Caption := FAction.Caption;
+  end;
   LoadConfig;
 end;
 

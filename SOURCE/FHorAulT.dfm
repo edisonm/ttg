@@ -12,29 +12,20 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
     inherited BtnShow: TToolButton
       Visible = False
     end
-    object BtnMostrar: TToolButton
-      Left = 69
-      Top = 0
-      Hint = 'Mostrar|Mostrar el horario'
-      ImageIndex = 3
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = BtnMostrarClick
-    end
     object BtnPrior: TToolButton
-      Left = 92
+      Left = 69
       Top = 0
       ImageIndex = 5
       OnClick = BtnPriorClick
     end
     object BtnNext: TToolButton
-      Left = 115
+      Left = 92
       Top = 0
       ImageIndex = 4
       OnClick = BtnNextClick
     end
     object dlcAulaTipo: TDBLookupComboBox
-      Left = 138
+      Left = 115
       Top = 0
       Width = 169
       Height = 21
@@ -43,10 +34,9 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       ListField = 'AbrAulaTipo'
       ListSource = SourceDataModule.DSAulaTipo
       TabOrder = 0
-      OnCloseUp = BtnMostrarClick
     end
     object cbVerAulaTipo: TComboBox
-      Left = 307
+      Left = 284
       Top = 0
       Width = 193
       Height = 21
@@ -623,5 +613,11 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       Size = 40
       Calculated = True
     end
+  end
+  object DSAulaTipo: TDataSource
+    DataSet = SourceDataModule.TbAulaTipo
+    OnDataChange = DSAulaTipoDataChange
+    Left = 84
+    Top = 108
   end
 end

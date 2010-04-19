@@ -36,7 +36,8 @@ TSingleEditorForm = class(TEditorForm)
   public
     { Public declarations }
     property DataSet: TDataSet write SetDataSet;
-    class function ToggleSingleEditor(var AForm;
+    class function ToggleSingleEditor(AOwner: TComponent;
+                                      var AForm;
                                       AConfigStrings: TStrings;
                                       AAction: TAction;
                                       ADataSet: TDataSet): Boolean;
@@ -48,12 +49,13 @@ uses
   HorColCm, QSingRep, Printers, FMain, DMaster;
 {$R *.DFM}
 
-class function TSingleEditorForm.ToggleSingleEditor(var AForm;
+class function TSingleEditorForm.ToggleSingleEditor(AOwner: TComponent;
+                                                    var AForm;
                                                     AConfigStrings: TStrings;
                                                     AAction: TAction;
                                                     ADataSet: TDataSet): Boolean;
 begin
-  Result := ToggleEditor(AForm, AConfigStrings, AAction);
+  Result := ToggleEditor(AOwner, AForm, AConfigStrings, AAction);
   if Result then
     TSingleEditorForm(AForm).DataSet := ADataSet;
 end;

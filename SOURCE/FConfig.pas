@@ -103,7 +103,6 @@ type
     DBGrid1: TDBGrid;
     DBGrid2: TDBGrid;
     procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure CBRandomizeClick(Sender: TObject);
     procedure edtNomColegioChange(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
@@ -131,10 +130,6 @@ uses
 procedure TConfiguracionForm.FormCreate(Sender: TObject);
 begin
   Clear;
-end;
-
-procedure TConfiguracionForm.FormDestroy(Sender: TObject);
-begin
 end;
 
 procedure TConfiguracionForm.DBGridDrawColumnCell(Sender: TObject;

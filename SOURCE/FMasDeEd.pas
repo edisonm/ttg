@@ -23,7 +23,8 @@ type
     procedure doSaveConfig; override;
   public
     { Public declarations }
-    class function ToggleMasterDetailEditor(var AForm;
+    class function ToggleMasterDetailEditor(AOwner: TComponent;
+                                            var AForm;
                                             AConfigStrings: TStrings;
                                             AAction: TAction;
                                             ADataSet, ADataSetDetail: TDataSet): Boolean;
@@ -38,12 +39,13 @@ uses
   QMaDeRep, Printers, FMain;
 {$R *.DFM}
 
-class function TMasterDetailEditorForm.ToggleMasterDetailEditor(var AForm;
+class function TMasterDetailEditorForm.ToggleMasterDetailEditor(AOwner: TComponent;
+                                                                var AForm;
                                                                 AConfigStrings: TStrings;
                                                                 AAction: TAction;
                                                                 ADataSet, ADataSetDetail: TDataSet): Boolean;
 begin
-   Result := ToggleSingleEditor(AForm, AConfigStrings, AAction, ADataSet);
+   Result := ToggleSingleEditor(AOwner, AForm, AConfigStrings, AAction, ADataSet);
    if Result then
    begin
       TMasterDetailEditorForm(AForm).DataSetDetail := ADataSetDetail;

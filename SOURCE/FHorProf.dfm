@@ -1,6 +1,6 @@
 inherited HorarioProfesorForm: THorarioProfesorForm
-  Left = 496
-  Top = 158
+  Left = 498
+  Top = 197
   Width = 774
   Height = 399
   OnCreate = FormCreate
@@ -9,41 +9,38 @@ inherited HorarioProfesorForm: THorarioProfesorForm
   inherited TlBShow: TToolBar
     Width = 766
     Visible = True
-    object BtnMostrar: TToolButton
-      Left = 69
-      Top = 0
-      Hint = 'Mostrar|Mostrar el horario'
-      ImageIndex = 3
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = BtnMostrarClick
+    inherited BtnOk: TToolButton
+      Visible = False
+    end
+    inherited BtnCancel: TToolButton
+      Visible = False
     end
     object BtnPrior: TToolButton
-      Left = 92
+      Left = 69
       Top = 0
       ImageIndex = 5
       OnClick = BtnPriorClick
     end
     object BtnNext: TToolButton
-      Left = 115
+      Left = 92
       Top = 0
       ImageIndex = 4
       OnClick = BtnNextClick
     end
     object dlcProfesor: TDBLookupComboBox
-      Left = 138
+      Left = 115
       Top = 0
-      Width = 169
+      Width = 206
       Height = 21
       Hint = 'Profesor'
       KeyField = 'CodProfesor'
-      ListField = 'ApeNomProfesor'
-      ListSource = SourceDataModule.DSProfesor
+      ListField = 'ApeProfesor;NomProfesor;ApeNomProfesor'
+      ListFieldIndex = 2
+      ListSource = DSProfesor
       TabOrder = 0
-      OnCloseUp = BtnMostrarClick
     end
     object cbVerProfesor: TComboBox
-      Left = 307
+      Left = 321
       Top = 0
       Width = 193
       Height = 21
@@ -617,5 +614,11 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Size = 40
       Calculated = True
     end
+  end
+  object DSProfesor: TDataSource
+    DataSet = SourceDataModule.TbProfesor
+    OnDataChange = DSProfesorDataChange
+    Left = 64
+    Top = 116
   end
 end

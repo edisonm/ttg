@@ -31,7 +31,8 @@ uses
 procedure TMateriaForm.ActMateriaProhibicionExecute(Sender: TObject);
 begin
   inherited;
-  if TCrossManyToManyEditorRForm.ToggleEditor(FMateriaProhibicionForm,
+  if TCrossManyToManyEditorRForm.ToggleEditor(Self,
+                                              FMateriaProhibicionForm,
 					      ConfigStrings,
 					      ActMateriaProhibicion) then
   with SourceDataModule, FMateriaProhibicionForm do

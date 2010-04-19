@@ -141,7 +141,7 @@ begin
   try
     FColDataSet.First;
     FRowDataSet.First;
-    FRelDataSet.First;
+    if FRelDataSet.Active then FRelDataSet.First;
     FColDataSetRecordCount := FColDataSet.RecordCount;
     FRowDataSetRecordCount := FRowDataSet.RecordCount;
     CheckDataSetEmpty(AColDataSet);
@@ -207,16 +207,16 @@ procedure TCrossManyToManyEditorForm.ReadData;
 var
   j, k: Integer;
 begin
-  ReadDataSet(FColDataset, FColFieldKey, FColFieldName, FColMin, FColMax,
+  ReadDataSet(FColDataSet, FColFieldKey, FColFieldName, FColMin, FColMax,
     FColKey, FKeyCol, FColName);
-  ReadDataSet(FRowDataset, FRowFieldKey, FRowFieldName, FRowMin, FRowMax,
+  ReadDataSet(FRowDataSet, FRowFieldKey, FRowFieldName, FRowMin, FRowMax,
     FRowKey, FKeyRow, FRowName);
   DrawGrid.ColCount := FColDataset.RecordCount + 1;
   DrawGrid.RowCount := FRowDataset.RecordCount + 1;
-  if Assigned(FSelDataSet) then
+  if Assigned(FSelDataSet) and FSelDataSet.Active then
   begin
     FSelDataSet.First;
-    SetLength(FSel, FColDataset.RecordCount, FRowDataset.RecordCount);
+    SetLength(FSel, FColDataSet.RecordCount, FRowDataSet.RecordCount);
     for j := 0 to FColDataSet.RecordCount - 1 do
       for k := 0 to FColDataSet.RecordCount - 1 do
         FSel[j, k] := False;
@@ -256,8 +256,8 @@ var
   i, j: Integer;
 begin
   try
-    for i := 0 to FColDataset.RecordCount - 1 do
-      for j := 0 to FRowDataset.RecordCount - 1 do
+    for i := 0 to FColDataSet.RecordCount - 1 do
+      for j := 0 to FRowDataSet.RecordCount - 1 do
         if not Assigned(FSelDataSet) or FSel[i, j] then
         begin
           if RelRecordExists(i, j) then
@@ -436,3 +436,4 @@ begin
 end;
 
 end.
+

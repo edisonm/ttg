@@ -12,7 +12,6 @@ type
     QuHorarioAulaTipo: TkbmMemTable;
     dlcAulaTipo: TDBLookupComboBox;
     cbVerAulaTipo: TComboBox;
-    BtnMostrar: TToolButton;
     BtnNext: TToolButton;
     BtnPrior: TToolButton;
     QuHorarioAulaTipoCodMateria: TIntegerField;
@@ -27,11 +26,13 @@ type
     QuHorarioAulaTipoNomParaleloId: TStringField;
     QuHorarioAulaTipoNombre: TStringField;
     QuHorarioAulaTipoCodAulaTipo: TAutoIncField;
-    procedure BtnMostrarClick(Sender: TObject);
+    DSAulaTipo: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure BtnPriorClick(Sender: TObject);
     procedure BtnNextClick(Sender: TObject);
     procedure QuHorarioAulaTipoCalcFields(DataSet: TDataSet);
+    procedure DSAulaTipoDataChange(Sender: TObject; Field: TField);
+    procedure BtnMostrarClick(Sender: TObject);
   private
     { Private declarations }
     FCodHorario: Integer;
@@ -88,9 +89,8 @@ begin
   inherited;
   with SourceDataModule, MasterDataModule do
   begin
-    if varIsEmpty(dlcAulaTipo.KeyValue) then
-      raise Exception.Create('Debe especificar un tipo de aula');
-    Caption := Format('[%s %d] - %s', [SuperTitle, CodHorario, dlcAulaTipo.Text]);
+    Caption := Format('[%s %d] - %s', [SuperTitle, CodHorario,
+      SourceDataModule.TbAulaTipoAbrAulaTipo.AsString]);
     FNombre := StringsShowAulaTipo.Values[cbVerAulaTipo.Text];
     ShowEditor(TbDia, TbHora, QuHorarioAulaTipo, TbPeriodo, 'CodDia', 'NomDia',
       'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora', 'CodHora', 'Nombre');
@@ -114,7 +114,6 @@ begin
   inherited;
   SourceDataModule.TbAulaTipo.Prior;
   dlcAulaTipo.KeyValue := SourceDataModule.TbAulaTipoCodAulaTipo.AsInteger;
-  BtnMostrarClick(nil);
 end;
 
 procedure THorarioAulaTipoForm.BtnNextClick(Sender: TObject);
@@ -122,7 +121,6 @@ begin
   inherited;
   SourceDataModule.TbAulaTipo.Next;
   dlcAulaTipo.KeyValue := SourceDataModule.TbAulaTipoCodAulaTipo.Value;
-  BtnMostrarClick(nil);
 end;
 
 procedure THorarioAulaTipoForm.QuHorarioAulaTipoCalcFields(DataSet: TDataSet);
@@ -130,6 +128,13 @@ begin
   inherited;
   if FNombre <> '' then
     DataSet['Nombre'] := VarArrToStr(DataSet[FNombre], ' ');
+end;
+
+procedure THorarioAulaTipoForm.DSAulaTipoDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+  BtnMostrarClick(nil);
 end;
 
 end.

@@ -209,7 +209,9 @@ uses
 procedure THorarioForm.ActHorarioParaleloExecute(Sender: TObject);
 begin
   inherited;
-  if THorarioParaleloForm.ToggleEditor(FHorarioParaleloForm, ConfigStrings,
+  if THorarioParaleloForm.ToggleEditor(Self,
+				       FHorarioParaleloForm,
+				       ConfigStrings,
 				       ActHorarioParalelo) then
   begin
     with SourceDataModule do
@@ -363,7 +365,8 @@ begin
    inherited;
    with SourceDataModule, MasterDataModule, QuCruceProfesor do
    begin
-      if TMasterDetailEditorForm.ToggleMasterDetailEditor(FCruceProfesorForm,
+      if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
+							  FCruceProfesorForm,
 							  MainForm.ConfigStrings,
 							  ActCruceProfesor,
 							  QuCruceProfesor,
@@ -382,7 +385,8 @@ end;
 procedure THorarioForm.ActHorarioProfesorExecute(Sender: TObject);
 begin
   inherited;
-  if THorarioProfesorForm.ToggleEditor(FHorarioProfesorForm,
+  if THorarioProfesorForm.ToggleEditor(Self,
+				       FHorarioProfesorForm,
 				       ConfigStrings,
 				       ActHorarioProfesor) then
   begin
@@ -494,7 +498,8 @@ begin
    inherited;
    with SourceDataModule do
    begin
-      if TMasterDetailEditorForm.ToggleMasterDetailEditor(FCruceMateriaForm,
+      if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
+							  FCruceMateriaForm,
 							  ConfigStrings,
 							  ActCruceMateria,
 							  QuCruceMateria,
@@ -515,8 +520,6 @@ begin
   with SourceDataModule do
   begin
     CodHorario := TbHorarioCodHorario.Value;
-    QuHorarioDetalleMateriaProhibicion.Close;
-    QuHorarioDetalleMateriaProhibicion.Open;
     TbHorarioDetalle.DisableControls;
     d := TbHorarioDetalle.IndexFieldNames;
     try
@@ -527,6 +530,10 @@ begin
         s := TbMateriaProhibicion.IndexFieldNames;
         try
           TbMateriaProhibicion.IndexFieldNames := 'CodMateria;CodDia;CodHora';
+          QuHorarioDetalleMateriaProhibicion.Close;
+          QuHorarioDetalleMateriaProhibicion.Open;
+          QuHorarioDetalleMateriaProhibicion.DisableControls;
+          try
           while (TbHorarioDetalleCodHorario.Value = CodHorario)
       	    and not TbHorarioDetalle.Eof do
           begin
@@ -552,6 +559,9 @@ begin
             end;
             TbHorarioDetalle.Next;
           end;
+          finally
+            QuHorarioDetalleMateriaProhibicion.EnableControls;
+          end;
         finally
           TbMateriaProhibicion.IndexFieldNames := s;
           TbMateriaProhibicion.EnableControls;
@@ -567,7 +577,8 @@ end;
 procedure THorarioForm.ActMateriaProhibicionNoRespetadaExecute(Sender: TObject);
 begin
   inherited;
-  if TSingleEditorForm.ToggleSingleEditor(FMateriaProhibicionNoRespetadaForm,
+  if TSingleEditorForm.ToggleSingleEditor(Self,
+					  FMateriaProhibicionNoRespetadaForm,
 					  MainForm.ConfigStrings,
 					  ActMateriaProhibicionNoRespetada,
 					  QuHorarioDetalleMateriaProhibicion) then
@@ -657,7 +668,8 @@ end;
 procedure THorarioForm.ActProfesorProhibicionNoRespetadaExecute(Sender: TObject);
 begin
   inherited;
-  if TSingleEditorForm.ToggleSingleEditor(FProfesorProhibicionNoRespetadaForm,
+  if TSingleEditorForm.ToggleSingleEditor(Self,
+					  FProfesorProhibicionNoRespetadaForm,
 					  ConfigStrings,
 					  ActProfesorProhibicionNoRespetada,
 					  QuHorarioDetalleProfesorProhibicion) then
@@ -818,7 +830,8 @@ begin
   inherited;
   with SourceDataModule, QuCruceAula do
   begin
-     if TMasterDetailEditorForm.ToggleMasterDetailEditor(FCruceAulaForm,
+     if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
+                                                         FCruceAulaForm,
 							 ConfigStrings,
 							 ActCruceAula,
 							 QuCruceAula,
@@ -938,10 +951,11 @@ end;
 procedure THorarioForm.ActMateriaCortadaDiaExecute(Sender: TObject);
 begin
   inherited;
-  if TSingleEditorForm.ToggleSingleEditor(FMateriaCortadaDiaForm,
-					MainForm.ConfigStrings,
-					ActMateriaCortadaDia,
-					QuMateriaCortadaDia) then
+  if TSingleEditorForm.ToggleSingleEditor(Self,
+					  FMateriaCortadaDiaForm,
+					  MainForm.ConfigStrings,
+					  ActMateriaCortadaDia,
+					  QuMateriaCortadaDia) then
   begin;
     // QuMateriaCortadaDia.Close;
     FillMateriaCortadaDia;
@@ -1085,7 +1099,8 @@ begin
   inherited;
   with SourceDataModule, QuMateriaCortadaHora do
   begin
-     if TMasterDetailEditorForm.ToggleMasterDetailEditor(FMateriaCortadaHoraForm,
+     if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
+                                                         FMateriaCortadaHoraForm,
 							 ConfigStrings,
 							 ActMateriaCortadaHora,
 							 QuMateriaCortadaHora,
@@ -1101,7 +1116,8 @@ end;
 procedure THorarioForm.ActHorarioAulaTipoExecute(Sender: TObject);
 begin
   inherited;
-  if THorarioAulaTipoForm.ToggleEditor(FHorarioAulaTipoForm,
+  if THorarioAulaTipoForm.ToggleEditor(Self,
+				       FHorarioAulaTipoForm,
 				       ConfigStrings,
 				       ActHorarioAulaTipo) then
   begin

@@ -1,6 +1,6 @@
 inherited MasterDetailReportQrp: TMasterDetailReportQrp
-  Left = 6
-  Top = 180
+  Left = 94
+  Top = 54
   Width = 1013
   Height = 476
   VertScrollBar.Position = 0

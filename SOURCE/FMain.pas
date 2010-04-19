@@ -328,7 +328,7 @@ uses
 {$IFNDEF FREEWARE}
   KerEvolE, KerModel, FProgres,
 {$ENDIF}
-  FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario,
+  FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd,
   FConfig, FLogstic, SGHCUtls, About, Consts, FParalel, Rand, ArDBUtls,
   QMaDeRep, Printers, QSingRep, QuickRpt, Qrctrls, DSource, DSrcBase;
 
@@ -341,14 +341,18 @@ end;
 
 procedure TMainForm.ActProfesorExecute(Sender: TObject);
 begin
-  TProfesorForm.ToggleSingleEditor(ProfesorForm, ConfigStrings, actProfesor,
+  TProfesorForm.ToggleSingleEditor(Self,
+				   ProfesorForm,
+				   ConfigStrings,
+				   actProfesor,
 				   SourceDataModule.TbProfesor);
 end;
 
 procedure TMainForm.ActPeriodoExecute(Sender: TObject);
 begin
    with SourceDataModule do
-      if TCrossManyToManyEditor0Form.ToggleEditor(FPeriodoForm,
+      if TCrossManyToManyEditor0Form.ToggleEditor(Self,
+						  FPeriodoForm,
 						  ConfigStrings,
 						  ActPeriodo) then
 	 FPeriodoForm.ShowEditor(TbDia, TbHora, TbPeriodo, nil, 'CodDia',
@@ -358,57 +362,83 @@ end;
 
 procedure TMainForm.ActMateriaExecute(Sender: TObject);
 begin
-   TMateriaForm.ToggleSingleEditor(MateriaForm, ConfigStrings, ActMateria,
+   TMateriaForm.ToggleSingleEditor(Self,
+				   MateriaForm,
+				   ConfigStrings,
+				   ActMateria,
 				   SourceDataModule.TbMateria);
 end;
 
 procedure TMainForm.ActEspecializacionExecute(Sender: TObject);
 begin
-   TSingleEditorForm.ToggleSingleEditor(FEspecializacionForm, ConfigStrings,
+   TSingleEditorForm.ToggleSingleEditor(Self,
+					FEspecializacionForm,
+					ConfigStrings,
 					ActEspecializacion,
 					SourceDataModule.TbEspecializacion);
 end;
 
 procedure TMainForm.ActNivelExecute(Sender: TObject);
 begin
-   TSingleEditorForm.ToggleSingleEditor(FNivelForm, ConfigStrings, ActNivel,
+   TSingleEditorForm.ToggleSingleEditor(Self,
+					FNivelForm,
+					ConfigStrings,
+					ActNivel,
 					SourceDataModule.TbNivel);
 end;
 
 procedure TMainForm.ActAulaTipoExecute(Sender: TObject);
 begin
-   TSingleEditorForm.ToggleSingleEditor(FAulaTipoForm, ConfigStrings, ActAulaTipo,
+   TSingleEditorForm.ToggleSingleEditor(Self,
+					FAulaTipoForm,
+					ConfigStrings,
+					ActAulaTipo,
 					SourceDataModule.TbAulaTipo);
 end;
 
 procedure TMainForm.ActParaleloIdExecute(Sender: TObject);
 begin
-   TSingleEditorForm.ToggleSingleEditor(FParaleloIdForm, ConfigStrings, ActParaleloId,
+   TSingleEditorForm.ToggleSingleEditor(Self,
+					FParaleloIdForm,
+					ConfigStrings,
+					ActParaleloId,
 					SourceDataModule.TbParaleloId);
 end;
 
 procedure TMainForm.ActDiaExecute(Sender: TObject);
 begin
-   TSingleEditorForm.ToggleSingleEditor(FDiaForm, ConfigStrings,
-					ActDia, SourceDataModule.TbDia);
+   TSingleEditorForm.ToggleSingleEditor(Self,
+					FDiaForm,
+					ConfigStrings,
+					ActDia,
+					SourceDataModule.TbDia);
 end;
 
 procedure TMainForm.ActHoraExecute(Sender: TObject);
 begin
-   TSingleEditorForm.ToggleSingleEditor(FHoraForm, ConfigStrings,
-					ActHora, SourceDataModule.TbHora);
+   TSingleEditorForm.ToggleSingleEditor(Self,
+					FHoraForm,
+					ConfigStrings,
+					ActHora,
+					SourceDataModule.TbHora);
 end;
 
 procedure TMainForm.ActHorarioExecute(Sender: TObject);
 begin
-   THorarioForm.ToggleSingleEditor(HorarioForm, ConfigStrings,
-				   ActHorario, SourceDataModule.TbHorario);
+   THorarioForm.ToggleSingleEditor(Self,
+				   HorarioForm,
+				   ConfigStrings,
+				   ActHorario,
+				   SourceDataModule.TbHorario);
 end;
 
 procedure TMainForm.ActParaleloExecute(Sender: TObject);
 begin
-   TParaleloForm.ToggleSingleEditor(ParaleloForm, ConfigStrings,
-				    ActParalelo, SourceDataModule.TbCurso);
+   TParaleloForm.ToggleSingleEditor(Self,
+				    ParaleloForm,
+				    ConfigStrings,
+				    ActParalelo,
+				    SourceDataModule.TbCurso);
 end;
 
 function TMainForm.ConfirmOperation: boolean;
@@ -967,12 +997,14 @@ end;
 procedure TMainForm.ActConfigurarExecute(Sender: TObject);
 begin
   ConfiguracionForm.HelpContext := ActConfigurar.HelpContext;
+//  ConfiguracionForm.LoadFromStrings(SourceDataModule.ConfigStrings);
   if ConfiguracionForm.ShowModal = mrOk then
   begin
 {$IFNDEF FREEWARE}
     if FEjecutando then
       Self.AjustarPesos;
 {$ENDIF}
+    ConfiguracionForm.SaveToStrings(SourceDataModule.ConfigStrings);
   end
   else
   begin
