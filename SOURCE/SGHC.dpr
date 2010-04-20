@@ -63,4 +63,3 @@ begin
   SplashForm.Free;
   Application.Run;
 end.
-

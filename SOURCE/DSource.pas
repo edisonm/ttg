@@ -35,11 +35,6 @@ type
     { Private declarations }
     FFlags : TkbmMemTableSaveFlags;
     FConfigStorage: TConfigStorage;
-    // procedure SaveToFile(const AFileName: TFileName);
-    // procedure SaveToStream(AStream: TStream);
-    // procedure SaveUnCompToStream(AStream: TStream);
-    // procedure LoadFromStream(AStream: TStream);
-    // procedure LoadUnCompFromStream(AStream: TStream);
     procedure SaveIniStrings(AStrings: TStrings);
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
 
@@ -179,7 +174,6 @@ resourcestring
 
   SNotTTDFile = 'No es un archivo TTD';
   SInvalidTTDVersion = 'Versión archivo TTD inválida';
-  //SInvalidTTDFile = 'Archivo TTD no válido';
 
 procedure TSourceDataModule.TbProfesorCalcFields(DataSet: TDataSet);
 begin
@@ -444,20 +438,6 @@ begin
   inherited;
   FConfigStorage.ConfigStrings.SaveToFile(ADirName + '\config.ini');
 end;
-
-(*
-procedure TSourceDataModule.SaveToFile(const AFileName: TFileName);
-var
-  Stream: TStream;
-begin
-  Stream := TFileStream.Create(AFileName, fmCreate);
-  try
-    SaveToStream(Stream);
-  finally
-    Stream.Free;
-  end;
-end;
-*)
 
 procedure TSourceDataModule.TbParaleloCalcFields(DataSet: TDataSet);
 begin

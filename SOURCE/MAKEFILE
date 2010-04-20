@@ -34,7 +34,7 @@ all: installer
 DSrcBase.pas DSrcBase.dfm: SGHC.MDB ..\bin\dbutils.exe
 	..\bin\dbutils.exe /ACC2DM Z:\apps\pascal\SGHC\SOURCE\SGHC.MDB SourceBaseDataModule Z:\apps\pascal\SGHC\SOURCE\DSrcBase /DS
 
-installer:
+installer: ..\bin\sghc.exe
 	cd ..\install
 	$(INNOSETUP) /cc sghc.iss
 	cd ..\source
