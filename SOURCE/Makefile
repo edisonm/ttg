@@ -11,7 +11,7 @@ UPATH=$(ARCTL);$(KBMMEMTB);$(RX)
 
 # REQUIRED UTILITIES
 INNOSETUP="C:\Archivos de programa\Inno Setup 5\COMPIL32.EXE"
-DBUTILSSRC=Z:\apps\pascal\DBUTILS\DBUTILS.DPR
+DBUTILSSRC=Z:\apps\pascal\SGHC\DBUTILS\DBUTILS.DPR
 
 # COMPILER OPTIONS
 DCC=$(DROOT)\BIN\DCC32.EXE
@@ -31,8 +31,8 @@ all: installer
 ..\bin\dbutils.exe:
         $(COMPILE) -E..\bin\ $(DBUTILSSRC)
 
-DSrcBase.pas DSrcBase.dfm: SGHC.MDB ..\bin\dbutils.exe
-	..\bin\dbutils.exe /ACC2DM Z:\apps\pascal\SGHC\SOURCE\SGHC.MDB SourceBaseDataModule Z:\apps\pascal\SGHC\SOURCE\DSrcBase /DS
+# DSrcBase.pas DSrcBase.dfm: SGHC.MDB ..\bin\dbutils.exe
+# 	..\bin\dbutils.exe /ACC2DM Z:\apps\pascal\SGHC\SOURCE\SGHC.MDB SourceBaseDataModule Z:\apps\pascal\SGHC\SOURCE\DSrcBase /DS
 
 installer: ..\bin\sghc.exe
 	cd ..\install

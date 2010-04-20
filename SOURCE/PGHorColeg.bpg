@@ -17,7 +17,7 @@ default: $(PROJECTS)
 Convert.exe: Convert.dpr
   $(DCC)
 
-DBUTILS.exe: ..\..\DBUTILS\DBUTILS.dpr
+DBUTILS.exe: ..\DBUTILS\DBUTILS.dpr
   $(DCC)
 
 SGHC.exe: SGHC.dpr
