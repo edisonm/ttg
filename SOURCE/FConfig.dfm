@@ -28,10 +28,10 @@ object ConfiguracionForm: TConfiguracionForm
     Top = 8
     Width = 401
     Height = 409
-    ActivePage = tbsPesos
+    ActivePage = tbsUnidadEducativa
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 1
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
