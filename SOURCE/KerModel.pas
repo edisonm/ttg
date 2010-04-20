@@ -438,8 +438,7 @@ var
       SetLength(FDiaHoraAPeriodo, FDiaCant, FHoraCant);
       for i := 0 to FDiaCant - 1 do
       begin
-        FillChar(FDiaHoraAPeriodo[i, 0], FHoraCant * SizeOf(Smallint),
-          #$FF);
+        FillChar(FDiaHoraAPeriodo[i, 0], FHoraCant * SizeOf(Smallint), #$FF);
       end;
       VFieldDia := FindField('CodDia') as TIntegerField;
       VFieldHora := FindField('CodHora') as TIntegerField;
