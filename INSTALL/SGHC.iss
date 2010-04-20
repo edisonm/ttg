@@ -46,8 +46,8 @@ Source: ..\BIN\SGHC.EXE; DestDir: {app}\BIN\; DestName: SGHC.EXE
 Source: ..\HLP\HORCOLEG.CNT; DestDir: {app}\HLP\; DestName: HORCOLEG.CNT
 Source: ..\HLP\HORCOLEG.HLP; DestDir: {app}\HLP\; DestName: HORCOLEG.HLP
 Source: ..\DOC\MANUAL.DOC; DestDir: {app}\DOC\; DestName: MANUAL.DOC
-Source: ..\DEMOS\BritanicoInt\BritanicoInt2000.ttd; DestDir: {app}\DEMOS\; DestName: BRITANIC.TTD
-Source: ..\DEMOS\Salamanca\Salamanca1999.ttd; DestDir: {app}\DEMOS\; DestName: SALAMANC.TTD
+Source: ..\DEMOS\BritanicoInt2000.ttd; DestDir: {app}\DEMOS\; DestName: BRITANIC.TTD
+Source: ..\DEMOS\Salamanca1999.ttd; DestDir: {app}\DEMOS\; DestName: SALAMANC.TTD
 [Icons]
 Name: {group}\Horarios Para Colegio 1.2.1; Filename: {app}\BIN\SGHC.EXE; WorkingDir: {app}\BIN\; IconIndex: 0
 Name: {group}\Manual del Usuario (DOC); Filename: {app}\DOC\MANUAL.DOC
