@@ -33,7 +33,7 @@ begin
   inherited;
   if TCrossManyToManyEditorRForm.ToggleEditor(Self,
                                               FMateriaProhibicionForm,
-					      ConfigStrings,
+					      ConfigStorage,
 					      ActMateriaProhibicion) then
   with SourceDataModule, FMateriaProhibicionForm do
   begin

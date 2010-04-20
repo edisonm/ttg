@@ -1,6 +1,6 @@
 object EditorForm: TEditorForm
-  Left = 800
-  Top = 262
+  Left = 627
+  Top = 364
   Width = 487
   Height = 326
   Color = clBtnFace

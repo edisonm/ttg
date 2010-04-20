@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 217
-  Top = 124
+  Left = 275
+  Top = 174
   Width = 601
   Height = 392
   Caption = 'Horarios para Colegio 1.2.1'

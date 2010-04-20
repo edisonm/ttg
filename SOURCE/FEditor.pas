@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
   StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls, DBIndex, ComCtrls,
-  ImgList, ToolWin, ActnList;
+  ImgList, ToolWin, ActnList, UConfig;
 
 type
   TEditorForm = class(TForm)
@@ -19,7 +19,7 @@ type
   private
     { Private declarations }
     FSuperTitle: string;
-    FConfigStrings: TStrings;
+    FConfigStorage: TConfigStorage;
     FPreffix: string;
     FAction: TAction;
     function GetConfigValues(const Index: string): string;
@@ -36,29 +36,29 @@ type
     property SuperTitle: string read FSuperTitle;
   public
     { Public declarations }
-    property ConfigStrings: TStrings read FConfigStrings;
+    property ConfigStorage: TConfigStorage read FConfigStorage;
     property ConfigValues[const Index: string]: string
-                                             read GetConfigValues
-                                             write SetConfigValues;
+                                                   read GetConfigValues
+                                                   write SetConfigValues;
     property ConfigIntegers[const Index: string]: Integer
-                                               read GetConfigIntegers
-                                               write SetConfigIntegers;
+                                                     read GetConfigIntegers
+                                                     write SetConfigIntegers;
     property ConfigTexts[const Index: string]: string
-                                              read GetConfigTexts
-                                              write SetConfigTexts;
+                                                  read GetConfigTexts
+                                                  write SetConfigTexts;
     property ConfigFloats[const Index: string]: Extended
-                                             read GetConfigFloats
-                                             write SetConfigFloats;
-    procedure InitEditor(AConfigStrings: TStrings; const APreffix: string;
-      AAction: TAction);
+                                                   read GetConfigFloats
+                                                   write SetConfigFloats;
+    procedure InitEditor(AConfigStorage: TConfigStorage; const APreffix: string;
+                         AAction: TAction);
     procedure LoadConfig;
     procedure SaveConfig;
     class function ToggleEditor(AOwner: TComponent;
                                 var AForm;
-                                AConfigStrings: TStrings;
+                                AConfigStorage: TConfigStorage;
                                 AAction: TAction): Boolean;
   end;
-
+  
 implementation
 
 uses
@@ -67,31 +67,31 @@ uses
 {$R *.DFM}
 
 class function TEditorForm.ToggleEditor(AOwner: TComponent; var AForm;
-                                        AConfigStrings: TStrings;
+                                        AConfigStorage: TConfigStorage;
                                         AAction: TAction): Boolean;
 var
   Instance: TComponent;
 begin
-  if AAction.Checked then
-  begin
-    TEditorForm(AForm).Free;
-    TEditorForm(AForm) := nil;
-    Result := False;
-  end
-  else
-  begin
-    Instance := TComponent(Self.NewInstance);
-    TComponent(AForm) := Instance;
-    Instance.Create(AOwner);
-    TEditorForm(AForm).InitEditor(AConfigStrings, AAction.Name + 'Form', AAction);
-    Result := True;
-  end;
+   if AAction.Checked then
+   begin
+      TEditorForm(AForm).Free;
+      TEditorForm(AForm) := nil;
+      Result := False;
+   end
+   else
+   begin
+      Instance := TComponent(Self.NewInstance);
+      TComponent(AForm) := Instance;
+      Instance.Create(AOwner);
+      TEditorForm(AForm).InitEditor(AConfigStorage, AAction.Name + 'Form', AAction);
+      Result := True;
+   end;
 end;
 
-procedure TEditorForm.InitEditor(AConfigStrings: TStrings; const APreffix: string;
+procedure TEditorForm.InitEditor(AConfigStorage: TConfigStorage; const APreffix: string;
     AAction: TAction);
 begin
-  FConfigStrings := AConfigStrings;
+  FConfigStorage := AConfigStorage;
   FPreffix := APreffix;
   FAction := AAction;
   if Assigned(FAction) then
@@ -107,7 +107,7 @@ end;
 procedure TEditorForm.LoadConfig;
 begin
   Position := poDesigned;
-  if FConfigStrings.Values[FPreffix] = '1' then
+  if FConfigStorage.Values[FPreffix] = '1' then
     doLoadConfig;
 end;
 
@@ -126,7 +126,7 @@ end;
 
 procedure TEditorForm.doSaveConfig;
 begin
-  ConfigStrings.Values[FPreffix] := '1';
+  ConfigStorage.Values[FPreffix] := '1';
   ConfigIntegers['Top'] := Top;
   ConfigIntegers['Left'] := Left;
   ConfigIntegers['Width'] := Width;
@@ -135,49 +135,47 @@ end;
 
 function TEditorForm.GetConfigValues(const Index: string): string;
 begin
-  Result := ConfigStrings.Values[FPreffix + '_' + Index];
+  Result := ConfigStorage.Values[FPreffix + '_' + Index];
 end;
 
 procedure TEditorForm.SetConfigValues(const Index: string; const Value: string);
 begin
-  ConfigStrings.Values[FPreffix + '_' + Index] := Value;
+  ConfigStorage.Values[FPreffix + '_' + Index] := Value;
 end;
 
 function TEditorForm.GetConfigIntegers(const Index: string): Integer;
 begin
-  Result := StrToInt(ConfigValues[Index]);
+   Result := ConfigStorage.Integers[Index];
 end;
 
 procedure TEditorForm.SetConfigIntegers(const Index: string; Value: Integer);
 begin
-  ConfigValues[Index] := IntToStr(Value);
+   ConfigStorage.Integers[Index] := Value;
 end;
 
 function TEditorForm.GetConfigTexts(const Index: string): string;
 begin
-  Result := ScapedToString(ConfigValues[Index]);
+   Result := ConfigStorage.Texts[Index];
 end;
 
 procedure TEditorForm.SetConfigTexts(const Index: string; const Value: string);
 begin
-  ConfigValues[Index] := StringToScaped(Value);
-end;
-
-
-procedure TEditorForm.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  Action := caFree;
+   ConfigStorage.Texts[Index] := Value;
 end;
 
 function TEditorForm.GetConfigFloats(const Index: string): Extended;
 begin
-  Result := StrToFloat(ConfigValues[Index]);
+   Result := ConfigStorage.Floats[Index];
 end;
 
-procedure TEditorForm.SetConfigFloats(const Index: string;
-  Value: Extended);
+procedure TEditorForm.SetConfigFloats(const Index : string; Value: Extended);
 begin
-  ConfigValues[Index] := FloatToStr(Value);
+   ConfigStorage.Floats[Index] := Value;
+end;
+
+procedure TEditorForm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
 end;
 
 procedure TEditorForm.FormDestroy(Sender: TObject);

@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls,
+  FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, UConfig,
   DBIndex, Buttons, DBCtrls, ExtCtrls, ImgList, ComCtrls, ToolWin,
   ActnList;
 
@@ -25,7 +25,7 @@ type
     { Public declarations }
     class function ToggleMasterDetailEditor(AOwner: TComponent;
                                             var AForm;
-                                            AConfigStrings: TStrings;
+                                            AConfigStorage: TConfigStorage;
                                             AAction: TAction;
                                             ADataSet, ADataSetDetail: TDataSet): Boolean;
     property DataSetDetail: TDataSet write SetDataSetDetail;
@@ -41,11 +41,11 @@ uses
 
 class function TMasterDetailEditorForm.ToggleMasterDetailEditor(AOwner: TComponent;
                                                                 var AForm;
-                                                                AConfigStrings: TStrings;
+                                                                AConfigStorage: TConfigStorage;
                                                                 AAction: TAction;
                                                                 ADataSet, ADataSetDetail: TDataSet): Boolean;
 begin
-   Result := ToggleSingleEditor(AOwner, AForm, AConfigStrings, AAction, ADataSet);
+   Result := ToggleSingleEditor(AOwner, AForm, AConfigStorage, AAction, ADataSet);
    if Result then
    begin
       TMasterDetailEditorForm(AForm).DataSetDetail := ADataSetDetail;

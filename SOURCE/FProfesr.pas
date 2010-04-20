@@ -43,70 +43,63 @@ uses
 
 procedure TProfesorForm.ActProfesorProhibicionExecute(Sender: TObject);
 begin
-   inherited;
-   with SourceDataModule do
-   begin
-      if TCrossManyToManyEditorRForm.ToggleEditor(Self,
-						  FProfesorProhibicionForm,
-						  ConfigStrings,
-                                                  ActProfesorProhibicion) then
-	 with FProfesorProhibicionForm do
-	 begin
-	    Caption := Format('%s %s - Editando %s', [
-			      NameDataSet[TbProfesor],
-			      TbProfesorApeNomProfesor.Value,
-			      Description[TbProfesorProhibicion]]);
-	    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ', [
-				    Description[TbProfesorProhibicion],
-				    Description[TbDia],
-				    Description[TbHora]]);
-	    ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda', [
-				   NameDataSet[TbProfesorProhibicionTipo],
-				   Description[TbProfesorProhibicionTipo]]);
-	    ShowEditor(TbDia, TbHora, TbProfesorProhibicionTipo, TbProfesorProhibicion,
-		       TbPeriodo, 'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora',
-		       'NomHora', 'CodHora', 'CodHora', 'CodProfProhibicionTipo',
-		   'NomProfProhibicionTipo', 'ColProfProhibicionTipo',
-		       'CodProfProhibicionTipo');
-	    Tag := TbProfesorCodProfesor.Value;
-	    OnActivate := FormActivate;
-	 end;
-   end;
+  inherited;
+  if TCrossManyToManyEditorRForm.ToggleEditor(Self,
+					      FProfesorProhibicionForm,
+					      ConfigStorage,
+                                              ActProfesorProhibicion) then
+  with SourceDataModule, FProfesorProhibicionForm do
+  begin
+    Caption := Format('%s %s - Editando %s', [
+    		      NameDataSet[TbProfesor],
+		      TbProfesorApeNomProfesor.Value,
+		      Description[TbProfesorProhibicion]]);
+    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ', [
+			    Description[TbProfesorProhibicion],
+			    Description[TbDia],
+			    Description[TbHora]]);
+    ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda', [
+			   NameDataSet[TbProfesorProhibicionTipo],
+			   Description[TbProfesorProhibicionTipo]]);
+    ShowEditor(TbDia, TbHora, TbProfesorProhibicionTipo, TbProfesorProhibicion,
+	       TbPeriodo, 'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora',
+	       'NomHora', 'CodHora', 'CodHora', 'CodProfProhibicionTipo',
+	       'NomProfProhibicionTipo', 'ColProfProhibicionTipo',
+	       'CodProfProhibicionTipo');
+    Tag := TbProfesorCodProfesor.Value;
+    OnActivate := FormActivate;
+  end;
 end;
 
 procedure TProfesorForm.FormActivate(Sender: TObject);
 begin
-  with SourceDataModule do
-  begin
-    TbProfesor.Locate('CodProfesor', (Sender as TCustomForm).Tag, []);
-  end;
+  SourceDataModule.TbProfesor.Locate('CodProfesor', (Sender as TCustomForm).Tag, []);
 end;
 
 procedure TProfesorForm.ActDistributivoExecute(Sender: TObject);
 begin
    inherited;
-   with SourceDataModule do
-   begin
-      if TSingleEditorForm.ToggleSingleEditor(Self,
-					      FDistributivoForm,
-					      ConfigStrings,
-					      ActDistributivo,
-					      TbDistributivo) then
+   if TSingleEditorForm.ToggleSingleEditor(Self,
+					   FDistributivoForm,
+					   ConfigStorage,
+					   ActDistributivo,
+					   SourceDataModule.TbDistributivo) then
+      with SourceDataModule do
       begin
-	 TbParalelo.First;
-	 TbDistributivo.First;
+         TbParalelo.First;
+         TbDistributivo.First;
 	 with TbDistributivo do
 	 begin
 	    DisableControls;
 	    try
-	       IndexFieldNames := 'CodProfesor';
-  	       MasterFields := 'CodProfesor';
-	       MasterSource := DSProfesor;
+               IndexFieldNames := 'CodProfesor';
+               MasterFields := 'CodProfesor';
+               MasterSource := DSProfesor;
 	    finally
-	       EnableControls;
+               EnableControls;
             end
-	 end;
-	 Self.DataSource.OnDataChange := DataSourceDataChange;
+         end;
+         Self.DataSource.OnDataChange := DataSourceDataChange;
 	 FLbCarga.Parent := FDistributivoForm.pnlStatus;
 	 FLbCarga.Top := 1;
 	 FLbCarga.Left := 400;
@@ -115,7 +108,6 @@ begin
 	 FSuperTitle := FDistributivoForm.Caption;
 	 DataSourceDataChange(nil, nil);
       end;
-   end;
 end;
 
 procedure TProfesorForm.LbCargaDblClick(Sender: TObject);

@@ -8,7 +8,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   SysConst, ExtCtrls, DB, Menus, ComCtrls, MRUList, ImgList, Buttons,
   MrgMngr, SpeedBar, ActnList, ToolWin, MenuBar, StdActns, StdCtrls,
-  FSingEdt, QrPrntr, kbmMemTable, FCrsMME0, FEditor{, Protect};
+  FSingEdt, QrPrntr, kbmMemTable, FCrsMME0, FEditor, UConfig{, Protect};
 type
   TMainForm = class(TForm)
     MainMenu: TMainMenu;
@@ -231,8 +231,8 @@ type
 }
   private
     { Private declarations }
-    FConfigStrings: TStrings;
     FConfigFileName: string;
+    FConfigStorage: TConfigStorage;
     FDiaForm,
     FNivelForm,
     FAulaTipoForm,
@@ -249,7 +249,6 @@ type
 {$ENDIF}
     FProgress: Integer;
     FRelProgress: Integer;
-    FNumIteraciones: Integer;
     FMin: Integer;
     FMax: Integer;
     FStep: Integer;
@@ -314,9 +313,8 @@ type
     property Max: Integer read FMax write SetMax;
     property Step: Integer read FStep write SetStep;
     property CodHorario: Integer read FCodHorario write FCodHorario;
-    property NumIteraciones: Integer read FNumIteraciones write FNumIteraciones;
     property CodHorarioSeleccionado: Integer read GetCodHorarioSeleccionado;
-    property ConfigStrings: TStrings read FConfigStrings;
+    property ConfigStorage: TConfigStorage read FConfigStorage;
   end;
 
 var
@@ -343,28 +341,27 @@ procedure TMainForm.ActProfesorExecute(Sender: TObject);
 begin
   TProfesorForm.ToggleSingleEditor(Self,
 				   ProfesorForm,
-				   ConfigStrings,
+				   ConfigStorage,
 				   actProfesor,
 				   SourceDataModule.TbProfesor);
 end;
 
 procedure TMainForm.ActPeriodoExecute(Sender: TObject);
 begin
-   with SourceDataModule do
-      if TCrossManyToManyEditor0Form.ToggleEditor(Self,
-						  FPeriodoForm,
-						  ConfigStrings,
-						  ActPeriodo) then
-	 FPeriodoForm.ShowEditor(TbDia, TbHora, TbPeriodo, nil, 'CodDia',
-				 'NomDia', 'CodDia', '', 'CodHora', 'NomHora',
-				 'CodHora', '');
+  if TCrossManyToManyEditor0Form.ToggleEditor(Self,
+                                              FPeriodoForm,
+					      ConfigStorage,
+					      ActPeriodo) then
+  with SourceDataModule do
+    FPeriodoForm.ShowEditor(TbDia, TbHora, TbPeriodo, nil, 'CodDia', 'NomDia',
+                            'CodDia', '', 'CodHora', 'NomHora', 'CodHora', '');
 end;
 
 procedure TMainForm.ActMateriaExecute(Sender: TObject);
 begin
    TMateriaForm.ToggleSingleEditor(Self,
 				   MateriaForm,
-				   ConfigStrings,
+				   ConfigStorage,
 				   ActMateria,
 				   SourceDataModule.TbMateria);
 end;
@@ -373,7 +370,7 @@ procedure TMainForm.ActEspecializacionExecute(Sender: TObject);
 begin
    TSingleEditorForm.ToggleSingleEditor(Self,
 					FEspecializacionForm,
-					ConfigStrings,
+					ConfigStorage,
 					ActEspecializacion,
 					SourceDataModule.TbEspecializacion);
 end;
@@ -382,7 +379,7 @@ procedure TMainForm.ActNivelExecute(Sender: TObject);
 begin
    TSingleEditorForm.ToggleSingleEditor(Self,
 					FNivelForm,
-					ConfigStrings,
+					ConfigStorage,
 					ActNivel,
 					SourceDataModule.TbNivel);
 end;
@@ -391,7 +388,7 @@ procedure TMainForm.ActAulaTipoExecute(Sender: TObject);
 begin
    TSingleEditorForm.ToggleSingleEditor(Self,
 					FAulaTipoForm,
-					ConfigStrings,
+					ConfigStorage,
 					ActAulaTipo,
 					SourceDataModule.TbAulaTipo);
 end;
@@ -400,7 +397,7 @@ procedure TMainForm.ActParaleloIdExecute(Sender: TObject);
 begin
    TSingleEditorForm.ToggleSingleEditor(Self,
 					FParaleloIdForm,
-					ConfigStrings,
+					ConfigStorage,
 					ActParaleloId,
 					SourceDataModule.TbParaleloId);
 end;
@@ -409,7 +406,7 @@ procedure TMainForm.ActDiaExecute(Sender: TObject);
 begin
    TSingleEditorForm.ToggleSingleEditor(Self,
 					FDiaForm,
-					ConfigStrings,
+					ConfigStorage,
 					ActDia,
 					SourceDataModule.TbDia);
 end;
@@ -418,7 +415,7 @@ procedure TMainForm.ActHoraExecute(Sender: TObject);
 begin
    TSingleEditorForm.ToggleSingleEditor(Self,
 					FHoraForm,
-					ConfigStrings,
+					ConfigStorage,
 					ActHora,
 					SourceDataModule.TbHora);
 end;
@@ -427,7 +424,7 @@ procedure TMainForm.ActHorarioExecute(Sender: TObject);
 begin
    THorarioForm.ToggleSingleEditor(Self,
 				   HorarioForm,
-				   ConfigStrings,
+				   ConfigStorage,
 				   ActHorario,
 				   SourceDataModule.TbHorario);
 end;
@@ -436,7 +433,7 @@ procedure TMainForm.ActParaleloExecute(Sender: TObject);
 begin
    TParaleloForm.ToggleSingleEditor(Self,
 				    ParaleloForm,
-				    ConfigStrings,
+				    ConfigStorage,
 				    ActParalelo,
 				    SourceDataModule.TbCurso);
 end;
@@ -457,7 +454,6 @@ begin
     begin
       Max := 20;
       SourceDataModule.NewDataBase;
-      ConfiguracionForm.Clear;
       Progress := 0;
     end;
   finally
@@ -521,6 +517,7 @@ begin
         LoadFromFile(OpenDialog.FileName);
         MRUManager.Add(OpenDialog.FileName, 0);
         SaveDialog.FileName := OpenDialog.FileName;
+        MainForm.Caption := Application.Title + ' - ' + SourceDataModule.NomColegio;
       end;
     end;
   finally
@@ -530,10 +527,9 @@ begin
 end;
 
 {$IFNDEF FREEWARE}
-
 procedure TMainForm.InitRandom;
 begin
-  ConfiguracionForm.InitRandom;
+  SourceDataModule.InitRandom;
 end;
 {$ENDIF}
 
@@ -653,61 +649,57 @@ begin
     ActElaborarHorario.Enabled := False;
     FEjecutando := True;
     try
-      with ConfiguracionForm do
-      begin
-        FNumIteraciones := speNumIteraciones.Value;
-        VModeloHorario :=
-          TModeloHorario.CrearDesdeDataModule(
-          creCruceProfesor.Value,
-          creProfesorFraccionamiento.Value,
-          creCruceAulaTipo.Value,
-          creHoraHueca.Value,
-          creSesionCortada.Value,
-          creMateriaNoDispersa.Value);
-        try
-          VEvolElitista := TEvolElitista.CrearDesdeModelo(VModeloHorario,
-            speTamPoblacion.Value);
-          VEvolElitista.NumMaxGeneracion := speNumMaxGeneracion.Value;
-          VEvolElitista.ProbCruzamiento := creProbCruzamiento.Value;
-          VEvolElitista.ProbMutacion1 := creProbMutacion1.Value;
-          VEvolElitista.OrdenMutacion1 := speOrdenMutacion1.Value;
-          VEvolElitista.ProbMutacion2 := creProbMutacion2.Value;
-          VEvolElitista.ProbReparacion := creProbReparacion.Value;
-          VEvolElitista.SyncDirectory := dedCompartir.Text;
-          VEvolElitista.RangoPolinizacion := speRangoPolinizacion.Value;
-          if (dedCompartir.Text <> '')
-            and FileExists(VEvolElitista.SyncFileName) then
+       VModeloHorario :=
+         TModeloHorario.CrearDesdeDataModule(
+           CruceProfesor,
+           ProfesorFraccionamiento,
+           CruceAulaTipo,
+           HoraHueca,
+           SesionCortada,
+           MateriaNoDispersa);
+      try
+        VEvolElitista := TEvolElitista.CrearDesdeModelo(VModeloHorario,
+          speTamPoblacion.Value);
+        VEvolElitista.NumMaxGeneracion := NumMaxGeneracion;
+        VEvolElitista.ProbCruzamiento := ProbCruzamiento;
+        VEvolElitista.ProbMutacion1 := ProbMutacion1;
+        VEvolElitista.OrdenMutacion1 := OrdenMutacion1;
+        VEvolElitista.ProbMutacion2 := ProbMutacion2;
+        VEvolElitista.ProbReparacion := ProbReparacion;
+        VEvolElitista.SyncDirectory := Compartir;
+        VEvolElitista.RangoPolinizacion := RangoPolinizacion;
+        if (dedCompartir.Text <> '')
+          and FileExists(VEvolElitista.SyncFileName) then
+        begin
+          mr := MessageDlg('El archivo de sincronización ya existe.  ' +
+            '¿Desea eliminar los archivos relacionados?', mtWarning, [mbYes,
+            mbNo, mbCancel], 0);
+          if mr = mrYes then
           begin
-            mr := MessageDlg('El archivo de sincronización ya existe.  ' +
-              '¿Desea eliminar los archivos relacionados?', mtWarning, [mbYes,
-              mbNo, mbCancel], 0);
-            if mr = mrYes then
-            begin
-              DeleteFile(VEvolElitista.FileName);
-              DeleteFile(VEvolElitista.SyncFileName);
-            end
-            else if mr = mrCancel then
-            begin
-              raise Exception.Create('Operación cancelada por el usuario');
-            end
-          end;
-          VEvolElitista.PrefijarHorarios(ConfiguracionForm.edtHorarioIni.Text);
-          FCancelClick := False;
-          FAjustar := False;
-          VEvolElitista.OnIterar := Self.OnIterar;
-          VEvolElitista.OnRegistrarMejor := Self.OnRegistrarMejor;
-          try
-            sProb := '';
-            ProcessCodList(s);
-            if sProb <> '' then
-              MessageDlg(Format('Los siguientes horarios ya existían: %s',
-                [sProb]), mtError, [mbOK], 0);
-          finally
-            VEvolElitista.Free;
-          end;
-        finally
-          VModeloHorario.Free;
+            DeleteFile(VEvolElitista.FileName);
+            DeleteFile(VEvolElitista.SyncFileName);
+          end
+          else if mr = mrCancel then
+          begin
+            raise Exception.Create('Operación cancelada por el usuario');
+          end
         end;
+        VEvolElitista.PrefijarHorarios(HorarioIni);
+        FCancelClick := False;
+        FAjustar := False;
+        VEvolElitista.OnIterar := Self.OnIterar;
+        VEvolElitista.OnRegistrarMejor := Self.OnRegistrarMejor;
+        try
+          sProb := '';
+          ProcessCodList(s);
+          if sProb <> '' then
+            MessageDlg(Format('Los siguientes horarios ya existían: %s',
+              [sProb]), mtError, [mbOK], 0);
+        finally
+          VEvolElitista.Free;
+        end;
+      finally
+        VModeloHorario.Free;
       end;
     finally
       FEjecutando := False;
@@ -731,7 +723,7 @@ procedure TMainForm.OnIterar(Sender: TObject);
 begin
   with Sender as TEvolElitista do
   begin
-    if NumGeneracion mod NumIteraciones = 0 then
+    if NumGeneracion mod SourceDataModule.NumIteraciones = 0 then
     begin
       Application.ProcessMessages;
       StatusBar.Panels[2].Text := Format('%d de %d', [NumGeneracion,
@@ -747,19 +739,18 @@ begin
         MejorMateriaProhibicionValor, MejorDisponiblidadValor,
         MejorMateriaNoDispersaValor, MejorValor);
       if FAjustar then
-        with ConfiguracionForm do
-        begin
-          InvalidarValores;
-          //Actualizar;
-          ModeloHorario.Configurar(
-            creCruceProfesor.Value,
-            creProfesorFraccionamiento.Value,
-            creCruceAulaTipo.Value,
-            creHoraHueca.Value,
-            creSesionCortada.Value,
-            creMateriaNoDispersa.Value);
-          FAjustar := False;
-        end;
+      begin
+        InvalidarValores;
+	//Actualizar;
+        with SourceDataModule do
+	  ModeloHorario.Configurar(CruceProfesor,
+	               		   ProfesorFraccionamiento,
+				   CruceAulaTipo,
+				   HoraHueca,
+				   SesionCortada,
+				   MateriaNoDispersa);
+        FAjustar := False;
+      end;
       if (FCloseClick or FCancelClick) then
         Terminar;
     end;
@@ -942,12 +933,12 @@ end;
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   FConfigFileName := GetCurrentDir + '\SGHC.cfg';
-  FConfigStrings := TStringList.Create;
+  FConfigStorage := TConfigStorage.Create;
   try
     if FileExists(FConfigFileName) then
     begin
-      FConfigStrings.LoadFromFile(FConfigFileName);
-      LoadConfig(FConfigStrings);
+      FConfigStorage.ConfigStrings.LoadFromFile(FConfigFileName);
+      LoadConfig(FConfigStorage.ConfigStrings);
     end;
     FMin := 0;
     FMax := 100;
@@ -996,29 +987,26 @@ end;
 
 procedure TMainForm.ActConfigurarExecute(Sender: TObject);
 begin
-  ConfiguracionForm.HelpContext := ActConfigurar.HelpContext;
-//  ConfiguracionForm.LoadFromStrings(SourceDataModule.ConfigStrings);
-  if ConfiguracionForm.ShowModal = mrOk then
-  begin
-{$IFNDEF FREEWARE}
-    if FEjecutando then
-      Self.AjustarPesos;
-{$ENDIF}
-    ConfiguracionForm.SaveToStrings(SourceDataModule.ConfigStrings);
-  end
-  else
-  begin
-    SourceDataModule.TbMateriaProhibicionTipo.Refresh;
-    SourceDataModule.TbProfesorProhibicionTipo.Refresh;
-  end;
-  FNumIteraciones := ConfiguracionForm.speNumIteraciones.Value;
+   if ShowConfiguracionForm(ActConfigurar.HelpContext) = mrOK then
+   begin
+      MainForm.Caption := Application.Title + ' - ' + SourceDataModule.NomColegio;
+      {$IFNDEF FREEWARE}
+      if FEjecutando then
+	 Self.AjustarPesos;
+      {$ENDIF}
+   end
+   else
+   begin
+      SourceDataModule.TbMateriaProhibicionTipo.Refresh;
+      SourceDataModule.TbProfesorProhibicionTipo.Refresh;
+   end;
 end;
 
 procedure TMainForm.ActChequearFactibilidadExecute(Sender: TObject);
 begin
   LogisticForm.HelpContext := ActChequearFactibilidad.HelpContext;
   if MasterDataModule.PerformAllChecks(LogisticForm.MemLogistic.Lines,
-    LogisticForm.MemResumen.Lines, ConfiguracionForm.speMaxCargaProfesor.Value)
+    LogisticForm.MemResumen.Lines, SourceDataModule.MaxCargaProfesor)
     then
   begin
     LogisticForm.Show;
@@ -1048,9 +1036,9 @@ end;
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
   FLogStrings.Free;
-  SaveConfig(FConfigStrings);
-  FConfigStrings.SaveToFile(FConfigFileName);
-  FConfigStrings.Free;
+  SaveConfig(FConfigStorage.ConfigStrings);
+  FConfigStorage.ConfigStrings.SaveToFile(FConfigFileName);
+  FConfigStorage.Free;
 end;
 
 procedure TMainForm.FillProfesorHorarioDetalle;
@@ -1117,8 +1105,8 @@ procedure TMainForm.ActPresentarProfesorHorarioExecute(Sender: TObject);
 begin
   ObtProfesorHorario;
   PreviewMasterDetailReport(SourceDataModule.TbProfesor, TbProfesor,
-    'ApeProfesor;NomProfesor', '', '', ConfiguracionForm.edtNomColegio.Text,
-    'Horario de profesores', poLandscape, PrepareReportProfesorHorario);
+			    'ApeProfesor;NomProfesor', '', '', SourceDataModule.NomColegio,
+			    'Horario de profesores', poLandscape, PrepareReportProfesorHorario);
 end;
 
 procedure TMainForm.FillParaleloHorarioDetalle;
@@ -1175,7 +1163,7 @@ procedure TMainForm.ActPresentarParaleloHorarioExecute(Sender: TObject);
 begin
   ObtParaleloHorario;
   PreviewMasterDetailReport(SourceDataModule.TbParalelo, TbParalelo, '', '', '',
-    ConfiguracionForm.edtNomColegio.Text, 'Horario de paralelos',
+			    SourceDataModule.NomColegio, 'Horario de paralelos',
     poLandscape, PrepareReportParaleloHorario);
 end;
 
@@ -1233,8 +1221,7 @@ begin
       'CodMateria;CodHora', 'NomMateProhibicionTipo');
     TbMateria.Filtered := true;
     PreviewMasterDetailReport(QuMateriaMateriaProhibicion, TbMateria, '', '',
-      '', ConfiguracionForm.edtNomColegio.Text,
-      '' {tDescription(TbMateriaProhibicion)}, poPortrait,
+      '', SourceDataModule.NomColegio, '' {tDescription(TbMateriaProhibicion)}, poPortrait,
       PrepareReportProhibicion);
   finally
     SourceDataModule.TbMateriaProhibicion.MasterSource := SourceDataModule.DSMateria;
@@ -1275,8 +1262,7 @@ begin
     TbDistributivo.MasterSource := DSMateria;
     PreviewMasterDetailReport(TbMateria, TbDistributivo, 'NomMateria',
       'AbrNivel;AbrEspecializacion;NomParaleloId;ApeNomProfesor;Duracion',
-      'Duracion', ConfiguracionForm.edtNomColegio.Text,
-      'Distributivo por materias', poPortrait,
+      'Duracion', NomColegio, 'Distributivo por materias', poPortrait,
       PrepareReportDistributivoMateria);
     TbDistributivo.MasterSource := nil;
     TbDistributivo.IndexFieldNames := 'CodProfesor';
@@ -1386,8 +1372,7 @@ begin
       'NomProfProhibicionTipo');
     TbProfesor1.Filtered := true;
     PreviewMasterDetailReport(QuProfesorProfesorProhibicion, TbProfesor1, '',
-      '', '', ConfiguracionForm.edtNomColegio.Text,
-      '' {GetDescription(TbProfesorProhibicion)}, poPortrait,
+      '', '', NomColegio, '' {GetDescription(TbProfesorProhibicion)}, poPortrait,
       PrepareReportProhibicion);
     TbProfesorProhibicion.MasterSource := DSProfesor;
   end;
@@ -1407,16 +1392,15 @@ begin
     QuProfesorProfesorProhibicionCodProfesor.Value;
 end;
 
-procedure TMainForm.ActPresentarDistributivoProfesorExecute(
-  Sender: TObject);
+procedure TMainForm.ActPresentarDistributivoProfesorExecute(Sender: TObject);
 begin
-  PreviewMasterDetailReport(SourceDataModule.TbProfesor,
-    SourceDataModule.TbDistributivo,
-    'ApeProfesor;NomProfesor',
-    'NomMateria;AbrNivel;AbrEspecializacion;NomParaleloId;Duracion',
-    'Duracion', ConfiguracionForm.edtNomColegio.Text,
-    'Distributivo por profesores', poPortrait,
-    PrepareReportDistributivoProfesor);
+   PreviewMasterDetailReport(SourceDataModule.TbProfesor,
+                             SourceDataModule.TbDistributivo,
+                             'ApeProfesor;NomProfesor',
+                             'NomMateria;AbrNivel;AbrEspecializacion;NomParaleloId;Duracion',
+                             'Duracion', SourceDataModule.NomColegio,
+                             'Distributivo por profesores', poPortrait,
+                             PrepareReportDistributivoProfesor);
 end;
 
 procedure TMainForm.PrepareReportDistributivoProfesor(Sender: TObject);
@@ -1432,7 +1416,7 @@ end;
 function TMainForm.GetCodHorarioSeleccionado: Integer;
 begin
   try
-    Result := StrToInt(ConfiguracionForm.lblHorarioSeleccionado.Caption);
+    Result := SourceDataModule.HorarioSeleccionado;
   except
     raise Exception.Create('Debe seleccionar un horario');
   end;
@@ -1539,16 +1523,15 @@ end;
 
 procedure TMainForm.PrepareReport(Sender: TObject);
 begin
-  with Sender as TSingleReportQrp, ConfiguracionForm do
+  with Sender as TSingleReportQrp, SourceDataModule do
   begin
     qrlFirm1.Caption := 'Autoridad';
-    qrlName1.Caption := edtNomAutoridad.Text;
-    qrlPosition1.Caption := edtCarAutoridad.Text;
+    qrlName1.Caption := NomAutoridad;
+    qrlPosition1.Caption := CarAutoridad;
     qrlFirm2.Caption := 'Responsable';
-    qrlName2.Caption := edtNomResponsable.Text;
-    qrlPosition2.Caption := edtCarResponsable.Text;
-    qrlAnioLectivo.Caption := 'Año Lectivo: ' +
-      ConfiguracionForm.edtAnioLectivo.Text;
+    qrlName2.Caption := NomResponsable;
+    qrlPosition2.Caption := CarResponsable;
+    qrlAnioLectivo.Caption := 'Año Lectivo: ' + AnioLectivo;
   end;
 end;
 
@@ -1581,20 +1564,19 @@ begin
   CodHorarioFuente := StrToInt(s);
   CodHorarioDestino := StrToInt(d);
   FCloseClick := False;
-  with ConfiguracionForm do
+  with SourceDataModule do
   begin
     InitRandom;
     MomentoInicial := Now;
-    FNumIteraciones := speNumIteraciones.Value;
     FEjecutando := True;
     VModeloHorario :=
       TModeloHorario.CrearDesdeDataModule(
-      creCruceProfesor.Value,
-      creProfesorFraccionamiento.Value,
-      creCruceAulaTipo.Value,
-      creHoraHueca.Value,
-      creSesionCortada.Value,
-      creMateriaNoDispersa.Value);
+        CruceProfesor,
+        ProfesorFraccionamiento,
+        CruceAulaTipo,
+        HoraHueca,
+        SesionCortada,
+        MateriaNoDispersa);
     StatusBar.Panels[1].Style := psOwnerDraw;
     Self.Progress := 0;
     FPasada := 0;

@@ -13,7 +13,6 @@ object ConfiguracionForm: TConfiguracionForm
   Font.Style = []
   OldCreateOrder = True
   Position = poDesktopCenter
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object bbtnOk: TBitBtn
@@ -134,7 +133,6 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 21
         Hint = 'Colegio|Nombre del colegio'
         TabOrder = 0
-        OnChange = edtNomColegioChange
       end
       object edtNomResponsable: TEdit
         Left = 80

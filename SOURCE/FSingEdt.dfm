@@ -1,6 +1,6 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 378
-  Top = 192
+  Left = 479
+  Top = 268
   Width = 510
   PixelsPerInch = 96
   TextHeight = 13

@@ -18,17 +18,10 @@ DCC=$(DROOT)\BIN\DCC32.EXE
 COMPILE=$(DCC) -U$(UPATH)
 UNITS= FMain.pas DMaster.pas KerModel.pas KerEvolE.pas FProgres.pas \
   SortAlgs.pas Rand.pas FCrsMMEd.pas FCrsMME0.pas FCrsMME1.pas FCrsMMER.pas \
-  FEditor.pas FMateria.pas FProfesr.pas SGHCUtls.pas FConfig.pas FLogstic.pas \
-  FHorPara.pas FMasDeEd.pas FHorAulT.pas FSplash.pas QSingRep.pas QMaDeRep.pas \
-  FParalel.pas FSingEdt.pas FHorario.pas About.pas HorColCm.pas FHorProf.pas \
-  DSrcBase.pas RelUtils.pas DSource.pas FSelPeIn.pas DBase.pas
-
-# About.pas DMaster.pas FConfig.pas fcrsmme0.pas fcrsmme1.pas \
-#   fcrsmmed.pas fcrsmmer.pas feditor.pas fhorario.pas fhorpara.pas fhorprof.pas \
-#   flogstic.pas fmain.pas fmasdeed.pas fmateria.pas fparalel.pas fprofesr.pas \
-#   fprogres.pas fsingedt.pas fsplash.pas horcolcm.pas kerevole.pas kermodel.pas \
-#   qmaderep.pas qsingrep.pas rand.pas sghcutls.pas sortalgs.pas
-# DFMS=
+  FEditor.pas FMateria.pas FProfesr.pas SGHCUtls.pas UConfig.pas FConfig.pas \
+  FLogstic.pas FHorPara.pas FMasDeEd.pas FHorAulT.pas FSplash.pas QSingRep.pas \
+  QMaDeRep.pas FParalel.pas FSingEdt.pas FHorario.pas About.pas HorColCm.pas \
+  FHorProf.pas DSrcBase.pas RelUtils.pas DSource.pas FSelPeIn.pas DBase.pas
 
 all: installer
 

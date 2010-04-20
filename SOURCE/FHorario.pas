@@ -211,7 +211,7 @@ begin
   inherited;
   if THorarioParaleloForm.ToggleEditor(Self,
 				       FHorarioParaleloForm,
-				       ConfigStrings,
+				       ConfigStorage,
 				       ActHorarioParalelo) then
   begin
     with SourceDataModule do
@@ -367,7 +367,7 @@ begin
    begin
       if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
 							  FCruceProfesorForm,
-							  MainForm.ConfigStrings,
+							  ConfigStorage,
 							  ActCruceProfesor,
 							  QuCruceProfesor,
 							  QuCruceProfesorDetalle) then
@@ -387,7 +387,7 @@ begin
   inherited;
   if THorarioProfesorForm.ToggleEditor(Self,
 				       FHorarioProfesorForm,
-				       ConfigStrings,
+				       ConfigStorage,
 				       ActHorarioProfesor) then
   begin
     with SourceDataModule do
@@ -500,7 +500,7 @@ begin
    begin
       if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
 							  FCruceMateriaForm,
-							  ConfigStrings,
+							  ConfigStorage,
 							  ActCruceMateria,
 							  QuCruceMateria,
 							  QuCruceMateriaDetalle) then
@@ -579,7 +579,7 @@ begin
   inherited;
   if TSingleEditorForm.ToggleSingleEditor(Self,
 					  FMateriaProhibicionNoRespetadaForm,
-					  MainForm.ConfigStrings,
+					  ConfigStorage,
 					  ActMateriaProhibicionNoRespetada,
 					  QuHorarioDetalleMateriaProhibicion) then
   begin
@@ -670,7 +670,7 @@ begin
   inherited;
   if TSingleEditorForm.ToggleSingleEditor(Self,
 					  FProfesorProhibicionNoRespetadaForm,
-					  ConfigStrings,
+					  ConfigStorage,
 					  ActProfesorProhibicionNoRespetada,
 					  QuHorarioDetalleProfesorProhibicion) then
   begin
@@ -832,7 +832,7 @@ begin
   begin
      if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
                                                          FCruceAulaForm,
-							 ConfigStrings,
+							 ConfigStorage,
 							 ActCruceAula,
 							 QuCruceAula,
 							 QuCruceAulaDetalle) then
@@ -866,8 +866,8 @@ end;
 procedure THorarioForm.ActSeleccionarHorarioExecute(Sender: TObject);
 begin
   inherited;
-  ConfiguracionForm.lblHorarioSeleccionado.Caption :=
-    SourceDataModule.TbHorarioCodHorario.AsString;
+  with SourceDataModule do
+    SeleccionarHorario;
   DBGrid.Refresh;
 end;
 
@@ -953,7 +953,7 @@ begin
   inherited;
   if TSingleEditorForm.ToggleSingleEditor(Self,
 					  FMateriaCortadaDiaForm,
-					  MainForm.ConfigStrings,
+					  ConfigStorage,
 					  ActMateriaCortadaDia,
 					  QuMateriaCortadaDia) then
   begin;
@@ -1101,7 +1101,7 @@ begin
   begin
      if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
                                                          FMateriaCortadaHoraForm,
-							 ConfigStrings,
+							 ConfigStorage,
 							 ActMateriaCortadaHora,
 							 QuMateriaCortadaHora,
 							 QuMateriaCortadaHoraDetalle) then
@@ -1118,7 +1118,7 @@ begin
   inherited;
   if THorarioAulaTipoForm.ToggleEditor(Self,
 				       FHorarioAulaTipoForm,
-				       ConfigStrings,
+				       ConfigStorage,
 				       ActHorarioAulaTipo) then
   begin
     with SourceDataModule do
@@ -1135,9 +1135,9 @@ var
   DBGrid: TCustomDBGrid;
 begin
   DBGrid := Sender as TCustomDBGrid;
-  if (ConfiguracionForm.lblHorarioSeleccionado.Caption <> '(Ninguno)')
-    and (ConfiguracionForm.lblHorarioSeleccionado.Caption
-      = SourceDataModule.TbHorarioCodHorario.AsString) then
+  if (SourceDataModule.HorarioSeleccionado <> -1)
+    and (SourceDataModule.HorarioSeleccionado
+      = SourceDataModule.TbHorarioCodHorario.Value) then
     Column.Color := clAqua
   else
     Column.Color := clWhite;

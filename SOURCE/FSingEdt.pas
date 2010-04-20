@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
   StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls, Placemnt, DBIndex,
-  ComCtrls, FEditor, ImgList, ToolWin, kbmMemTable, ActnList;
+  ComCtrls, FEditor, ImgList, ToolWin, kbmMemTable, ActnList, UConfig;
 
 type
 
@@ -38,7 +38,7 @@ TSingleEditorForm = class(TEditorForm)
     property DataSet: TDataSet write SetDataSet;
     class function ToggleSingleEditor(AOwner: TComponent;
                                       var AForm;
-                                      AConfigStrings: TStrings;
+                                      AConfigStorage: TConfigStorage;
                                       AAction: TAction;
                                       ADataSet: TDataSet): Boolean;
   end;
@@ -51,11 +51,11 @@ uses
 
 class function TSingleEditorForm.ToggleSingleEditor(AOwner: TComponent;
                                                     var AForm;
-                                                    AConfigStrings: TStrings;
+                                                    AConfigStorage: TConfigStorage;
                                                     AAction: TAction;
                                                     ADataSet: TDataSet): Boolean;
 begin
-  Result := ToggleEditor(AOwner, AForm, AConfigStrings, AAction);
+  Result := ToggleEditor(AOwner, AForm, AConfigStorage, AAction);
   if Result then
     TSingleEditorForm(AForm).DataSet := ADataSet;
 end;

@@ -19,6 +19,7 @@ uses
   FMateria in 'FMateria.pas' {MateriaForm},
   FProfesr in 'FProfesr.pas' {ProfesorForm},
   SGHCUtls in 'SGHCUtls.pas',
+  UConfig in 'UConfig.pas',
   FConfig in 'FConfig.pas' {ConfiguracionForm},
   FLogstic in 'FLogstic.pas' {LogisticForm},
   FHorPara in 'FHorPara.pas' {HorarioParaleloForm},
@@ -45,7 +46,7 @@ begin
   SplashForm := TSplashForm.Create(Application);
   SplashForm.Show;
   SplashForm.Update;
-  SplashForm.PBLoad.Max := 5;
+  SplashForm.PBLoad.Max := 4;
   Application.Initialize;
   Application.Title := 'Horarios Para Colegio 1.2.1';
   Application.HelpFile := '..\HLP\HORCOLEG.HLP';
@@ -54,8 +55,6 @@ begin
   Application.CreateForm(TMasterDataModule, MasterDataModule);
   SplashForm.IncPosition;
   Application.CreateForm(TMainForm, MainForm);
-  SplashForm.IncPosition;
-  Application.CreateForm(TConfiguracionForm, ConfiguracionForm);
   SplashForm.IncPosition;
   Application.CreateForm(TLogisticForm, LogisticForm);
   SplashForm.IncPosition;
