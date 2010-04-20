@@ -30,7 +30,6 @@ type
     procedure TbDistributivoBeforePost(DataSet: TDataSet);
     procedure TbDistributivoCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
-    procedure DataModuleDestroy(Sender: TObject);
     procedure TbParaleloCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
@@ -388,7 +387,7 @@ end;
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
-  FConfigStorage := TConfigStorage.Create;
+  FConfigStorage := TConfigStorage.Create(Self);
   OpenTables;
   FFlags :=
     [mtfSaveData,
@@ -459,12 +458,6 @@ begin
   end;
 end;
 *)
-
-procedure TSourceDataModule.DataModuleDestroy(Sender: TObject);
-begin
-  inherited;
-  FConfigStorage.Free;
-end;
 
 procedure TSourceDataModule.TbParaleloCalcFields(DataSet: TDataSet);
 begin

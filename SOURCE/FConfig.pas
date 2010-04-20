@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Mask, ToolEdit, CurrEdit, Buttons, ComCtrls, Spin, Grids, DBGrids,
-  Db, DSource, DBCtrls;
+  Db, DSource, DBCtrls, ExtCtrls;
 
 type
   TConfiguracionForm = class(TForm)
@@ -84,7 +84,6 @@ type
     Label36: TLabel;
     edtHorarioIni: TEdit;
     dbeNomMateProhibicionTipo: TDBEdit;
-    dbcColMateProhibicionTipo: TDBComboBox;
     dbeValMateProhibicionTipo: TDBEdit;
     Label30: TLabel;
     Label37: TLabel;
@@ -92,7 +91,6 @@ type
     Label39: TLabel;
     dbeNomProfProhibicionTipo: TDBEdit;
     Label40: TLabel;
-    dbcColProfProhibicionTipo: TDBComboBox;
     Label41: TLabel;
     dbeValProfProhibicionTipo: TDBEdit;
     Label42: TLabel;
@@ -102,9 +100,21 @@ type
     Label43: TLabel;
     DBGrid1: TDBGrid;
     DBGrid2: TDBGrid;
+    CBColMateProhibicionTipo: TColorBox;
+    DSMateriaProhibicionTipo: TDataSource;
+    DSProfesorProhibicionTipo: TDataSource;
+    CBColProfProhibicionTipo: TColorBox;
     procedure CBRandomizeClick(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DSMateriaProhibicionTipoDataChange(Sender: TObject;
+      Field: TField);
+    procedure CBColMateProhibicionTipoExit(Sender: TObject);
+    procedure CBColMateProhibicionTipoChange(Sender: TObject);
+    procedure CBColProfProhibicionTipoChange(Sender: TObject);
+    procedure CBColProfProhibicionTipoExit(Sender: TObject);
+    procedure DSProfesorProhibicionTipoDataChange(Sender: TObject;
+      Field: TField);
   private
     { Private declarations }
   public
@@ -118,7 +128,7 @@ function ShowConfiguracionForm(AHelpContext: THelpContext): Integer;
 implementation
 
 uses
-  FMain, RelUtils;
+  FMain, RelUtils, DSrcBase;
 
 {$R *.DFM}
 
@@ -239,11 +249,63 @@ begin
       ProbReparacion := creProbReparacion.Value;
       MostrarProfesorHorarioTexto := edtMostrarProfesorHorarioTexto.Text;
       MostrarProfesorHorarioLongitud := speMostrarProfesorHorarioLongitud.Value;
-      ProfesorHorarioExcluirProfProhibicion := edtProfesorHorarioExcluirProfProhibicion.Text;
+      ProfesorHorarioExcluirProfProhibicion
+        := edtProfesorHorarioExcluirProfProhibicion.Text;
       HorarioIni := edtHorarioIni.Text;
       Compartir := dedCompartir.Text;
       RangoPolinizacion := speRangoPolinizacion.Value;
    end;
 end;
 
+procedure TConfiguracionForm.DSMateriaProhibicionTipoDataChange(
+  Sender: TObject; Field: TField);
+begin
+  CBColMateProhibicionTipo.Selected :=
+    SourceDataModule.TbMateriaProhibicionTipoColMateProhibicionTipo.Value;
+end;
+
+procedure TConfiguracionForm.CBColMateProhibicionTipoExit(Sender: TObject);
+begin
+  with SourceDataModule.TbMateriaProhibicionTipoColMateProhibicionTipo do
+    if (DSMateriaProhibicionTipo.State in [dsEdit, dsInsert])
+        and (Value <> CBColMateProhibicionTipo.Selected) then
+      Value := CBColMateProhibicionTipo.Selected;
+end;
+
+procedure TConfiguracionForm.CBColMateProhibicionTipoChange(Sender: TObject);
+begin
+  with DSMateriaProhibicionTipo do
+  begin
+    OnDataChange := nil;
+    Edit;
+    OnDataChange := DSMateriaProhibicionTipoDataChange;
+  end
+end;
+
+procedure TConfiguracionForm.CBColProfProhibicionTipoChange(Sender: TObject);
+begin
+  with DSProfesorProhibicionTipo do
+  begin
+    OnDataChange := nil;
+    Edit;
+    OnDataChange := DSProfesorProhibicionTipoDataChange;
+  end
+end;
+
+procedure TConfiguracionForm.CBColProfProhibicionTipoExit(Sender: TObject);
+begin
+  with SourceDataModule.TbProfesorProhibicionTipoColProfProhibicionTipo do
+    if (DSProfesorProhibicionTipo.State in [dsEdit, dsInsert])
+        and (Value <> CBColProfProhibicionTipo.Selected) then
+      Value := CBColProfProhibicionTipo.Selected;
+end;
+
+procedure TConfiguracionForm.DSProfesorProhibicionTipoDataChange(
+  Sender: TObject; Field: TField);
+begin
+  CBColProfProhibicionTipo.Selected
+    := SourceDataModule.TbProfesorProhibicionTipoColProfProhibicionTipo.Value;
+end;
+
 end.
+

@@ -28,10 +28,10 @@ object ConfiguracionForm: TConfiguracionForm
     Top = 8
     Width = 401
     Height = 409
-    ActivePage = tbsUnidadEducativa
+    ActivePage = tbsPesos
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 1
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
@@ -544,16 +544,6 @@ object ConfiguracionForm: TConfiguracionForm
         DataSource = SourceDataModule.DSMateriaProhibicionTipo
         TabOrder = 8
       end
-      object dbcColMateProhibicionTipo: TDBComboBox
-        Left = 304
-        Top = 200
-        Width = 81
-        Height = 21
-        DataField = 'ColMateProhibicionTipo'
-        DataSource = SourceDataModule.DSMateriaProhibicionTipo
-        ItemHeight = 13
-        TabOrder = 9
-      end
       object dbeValMateProhibicionTipo: TDBEdit
         Left = 304
         Top = 224
@@ -571,16 +561,6 @@ object ConfiguracionForm: TConfiguracionForm
         DataField = 'NomProfProhibicionTipo'
         DataSource = SourceDataModule.DSProfesorProhibicionTipo
         TabOrder = 11
-      end
-      object dbcColProfProhibicionTipo: TDBComboBox
-        Left = 304
-        Top = 304
-        Width = 81
-        Height = 21
-        DataField = 'ColProfProhibicionTipo'
-        DataSource = SourceDataModule.DSProfesorProhibicionTipo
-        ItemHeight = 13
-        TabOrder = 12
       end
       object dbeValProfProhibicionTipo: TDBEdit
         Left = 304
@@ -616,6 +596,26 @@ object ConfiguracionForm: TConfiguracionForm
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = []
+      end
+      object CBColMateProhibicionTipo: TColorBox
+        Left = 304
+        Top = 200
+        Width = 81
+        Height = 22
+        ItemHeight = 16
+        TabOrder = 9
+        OnChange = CBColMateProhibicionTipoChange
+        OnExit = CBColMateProhibicionTipoExit
+      end
+      object CBColProfProhibicionTipo: TColorBox
+        Left = 304
+        Top = 304
+        Width = 81
+        Height = 22
+        ItemHeight = 16
+        TabOrder = 12
+        OnChange = CBColProfProhibicionTipoChange
+        OnExit = CBColProfProhibicionTipoExit
       end
     end
     object tbsAlgoritmoEvolutivo: TTabSheet
@@ -774,5 +774,17 @@ object ConfiguracionForm: TConfiguracionForm
     Height = 25
     TabOrder = 2
     Kind = bkCancel
+  end
+  object DSMateriaProhibicionTipo: TDataSource
+    DataSet = SourceDataModule.TbMateriaProhibicionTipo
+    OnDataChange = DSMateriaProhibicionTipoDataChange
+    Left = 208
+    Top = 232
+  end
+  object DSProfesorProhibicionTipo: TDataSource
+    DataSet = SourceDataModule.TbProfesorProhibicionTipo
+    OnDataChange = DSProfesorProhibicionTipoDataChange
+    Left = 208
+    Top = 340
   end
 end

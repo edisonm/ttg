@@ -933,7 +933,7 @@ end;
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   FConfigFileName := GetCurrentDir + '\SGHC.cfg';
-  FConfigStorage := TConfigStorage.Create;
+  FConfigStorage := TConfigStorage.Create(Self);
   try
     if FileExists(FConfigFileName) then
     begin
@@ -1035,10 +1035,9 @@ end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
-  FLogStrings.Free;
   SaveConfig(FConfigStorage.ConfigStrings);
   FConfigStorage.ConfigStrings.SaveToFile(FConfigFileName);
-  FConfigStorage.Free;
+  FLogStrings.Free;
 end;
 
 procedure TMainForm.FillProfesorHorarioDetalle;

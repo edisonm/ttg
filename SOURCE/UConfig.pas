@@ -6,7 +6,7 @@ uses
    SysUtils, Classes;
 
 type
-   TConfigStorage    =  class(TObject)
+   TConfigStorage = class(TComponent)
    private
       FConfigStrings: TStrings;
       function GetValues(const Index: string): string;
@@ -20,7 +20,7 @@ type
       function GetFloats(const Index: string): Extended;
       procedure SetFloats(const Index: string; Value: Extended);
    public
-      constructor Create;
+      constructor Create(AOwner: TComponent);
       destructor Destroy; override;
       property ConfigStrings: TStrings read FConfigStrings;
       property Values[const Index: string]: string
@@ -45,7 +45,7 @@ implementation
 uses
   RelUtils;
 
-constructor TConfigStorage.Create;
+constructor TConfigStorage.Create(AOwner: TComponent);
 begin
    inherited;
    FConfigStrings := TStringList.Create;
