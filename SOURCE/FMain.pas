@@ -270,7 +270,6 @@ type
     procedure ObtParaleloHorario;
     procedure ObtProfesorHorario;
 {$IFNDEF FREEWARE}
-    procedure InitRandom;
     procedure ElaborarHorario(s: string);
     procedure MejorarHorario;
     procedure ProgressDescensoDoble(I, Max: Integer; Value: Double; var Stop: Boolean);
@@ -526,13 +525,6 @@ begin
   end;
 end;
 
-{$IFNDEF FREEWARE}
-procedure TMainForm.InitRandom;
-begin
-  SourceDataModule.InitRandom;
-end;
-{$ENDIF}
-
 procedure TMainForm.AjustarPesos;
 begin
   FAjustar := True;
@@ -659,7 +651,7 @@ begin
            MateriaNoDispersa);
       try
         VEvolElitista := TEvolElitista.CrearDesdeModelo(VModeloHorario,
-          speTamPoblacion.Value);
+          TamPoblacion);
         VEvolElitista.NumMaxGeneracion := NumMaxGeneracion;
         VEvolElitista.ProbCruzamiento := ProbCruzamiento;
         VEvolElitista.ProbMutacion1 := ProbMutacion1;
@@ -668,7 +660,7 @@ begin
         VEvolElitista.ProbReparacion := ProbReparacion;
         VEvolElitista.SyncDirectory := Compartir;
         VEvolElitista.RangoPolinizacion := RangoPolinizacion;
-        if (dedCompartir.Text <> '')
+        if (Compartir <> '')
           and FileExists(VEvolElitista.SyncFileName) then
         begin
           mr := MessageDlg('El archivo de sincronización ya existe.  ' +
