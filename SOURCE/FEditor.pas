@@ -145,32 +145,32 @@ end;
 
 function TEditorForm.GetConfigIntegers(const Index: string): Integer;
 begin
-   Result := ConfigStorage.Integers[Index];
+   Result := ConfigStorage.Integers[FPreffix + '_' + Index];
 end;
 
 procedure TEditorForm.SetConfigIntegers(const Index: string; Value: Integer);
 begin
-   ConfigStorage.Integers[Index] := Value;
+   ConfigStorage.Integers[FPreffix + '_' + Index] := Value;
 end;
 
 function TEditorForm.GetConfigTexts(const Index: string): string;
 begin
-   Result := ConfigStorage.Texts[Index];
+   Result := ConfigStorage.Texts[FPreffix + '_' + Index];
 end;
 
 procedure TEditorForm.SetConfigTexts(const Index: string; const Value: string);
 begin
-   ConfigStorage.Texts[Index] := Value;
+   ConfigStorage.Texts[FPreffix + '_' + Index] := Value;
 end;
 
 function TEditorForm.GetConfigFloats(const Index: string): Extended;
 begin
-   Result := ConfigStorage.Floats[Index];
+   Result := ConfigStorage.Floats[FPreffix + '_' + Index];
 end;
 
 procedure TEditorForm.SetConfigFloats(const Index : string; Value: Extended);
 begin
-   ConfigStorage.Floats[Index] := Value;
+   ConfigStorage.Floats[FPreffix + '_' + Index] := Value;
 end;
 
 procedure TEditorForm.FormClose(Sender: TObject; var Action: TCloseAction);
