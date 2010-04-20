@@ -529,12 +529,12 @@ end;
 
 function TSourceDataModule.GetComentarios: string;
 begin
-   Result := ConfigStorage.Texts['MemComentarios_Lines'];
+   Result := ConfigStorage.Texts['Comentarios'];
 end;
 
 procedure TSourceDataModule.SetComentarios(const Value: string);
 begin
-  ConfigStorage.Texts['MemComentarios_Lines'] := Value;
+  ConfigStorage.Texts['Comentarios'] := Value;
 end;
 
 function TSourceDataModule.GetRandomize: Boolean;

@@ -20,7 +20,7 @@ type
       function GetFloats(const Index: string): Extended;
       procedure SetFloats(const Index: string; Value: Extended);
    public
-      constructor Create(AOwner: TComponent);
+      constructor Create(AOwner: TComponent); override;
       destructor Destroy; override;
       property ConfigStrings: TStrings read FConfigStrings;
       property Values[const Index: string]: string

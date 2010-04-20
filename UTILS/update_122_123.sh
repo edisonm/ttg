@@ -6,7 +6,7 @@
 ## Login   <edison@vaio2edison>
 ## 
 ## Started on  Wed Apr 21 01:03:49 2010 Edison Mera
-## Last update Wed Apr 21 01:11:47 2010 Edison Mera
+## Last update Wed Apr 21 01:23:32 2010 Edison Mera
 ##
 
 find . -name ".svn" -prune -o \( -name "*.pas" -o -name "*.ttd" \) -exec str_replace edtNomColegio_Text NomColegio {} \;
@@ -18,6 +18,7 @@ find . -name ".svn" -prune -o \( -name "*.pas" -o -name "*.ttd" \) -exec str_rep
 find . -name ".svn" -prune -o \( -name "*.pas" -o -name "*.ttd" \) -exec str_replace speMaxCargaProfesor_Value MaxCargaProfesor {} \;
 find . -name ".svn" -prune -o \( -name "*.pas" -o -name "*.ttd" \) -exec str_replace lblHorarioSeleccionado_Caption HorarioSeleccionado {} \;
 find . -name ".svn" -prune -o \( -name "*.pas" -o -name "*.ttd" \) -exec str_replace memComentarios_Lines Comentarios {} \;
+find . -name ".svn" -prune -o \( -name "*.pas" -o -name "*.ttd" \) -exec str_replace MemComentarios_Lines Comentarios {} \;
 find . -name ".svn" -prune -o \( -name "*.pas" -o -name "*.ttd" \) -exec str_replace CBRandomize_Checked Randomize {} \;
 find . -name ".svn" -prune -o \( -name "*.pas" -o -name "*.ttd" \) -exec str_replace speSeed1_Value Seed1 {} \;
 find . -name ".svn" -prune -o \( -name "*.pas" -o -name "*.ttd" \) -exec str_replace speSeed2_Value Seed2 {} \;
