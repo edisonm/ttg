@@ -168,7 +168,7 @@ type
   EMainDataModuleError = class(Exception);
 
 const
-  pfhVersionNumber = $00000122;
+  pfhVersionNumber = $00000123;
 
 resourcestring
 
@@ -449,82 +449,82 @@ end;
 
 function TSourceDataModule.GetNomColegio: string;
 begin
-   Result := ConfigStorage.Values['edtNomColegio_Text'];
+   Result := ConfigStorage.Values['NomColegio'];
 end;
 
 procedure TSourceDataModule.SetNomColegio(const Value: string);
 begin
-   ConfigStorage.Values['edtNomColegio_Text'] := Value;
+   ConfigStorage.Values['NomColegio'] := Value;
 end;
 
 function TSourceDataModule.GetAnioLectivo: string;
 begin
-   Result := ConfigStorage.Values['edtAnioLectivo_Text'];
+   Result := ConfigStorage.Values['AnioLectivo'];
 end;
 
 procedure TSourceDataModule.SetAnioLectivo(const Value: string);
 begin
-   ConfigStorage.Values['edtAnioLectivo_Text'] := Value;
+   ConfigStorage.Values['AnioLectivo'] := Value;
 end;
 
 function TSourceDataModule.GetNomAutoridad: string;
 begin
-   Result := ConfigStorage.Values['edtNomAutoridad_Text'];
+   Result := ConfigStorage.Values['NomAutoridad'];
 end;
 
 procedure TSourceDataModule.SetNomAutoridad(const Value: string);
 begin
-   ConfigStorage.Values['edtNomAutoridad_Text'] := Value;
+   ConfigStorage.Values['NomAutoridad'] := Value;
 end;
 
 function TSourceDataModule.GetCarAutoridad: string;
 begin
-   Result := ConfigStorage.Values['edtCarAutoridad_Text'];
+   Result := ConfigStorage.Values['CarAutoridad'];
 end;
 
 procedure TSourceDataModule.SetCarAutoridad(const Value: string);
 begin
-   ConfigStorage.Values['edtCarAutoridad_Text'] := Value;
+   ConfigStorage.Values['CarAutoridad'] := Value;
 end;
 
 function TSourceDataModule.GetNomResponsable: string;
 begin
-   Result := ConfigStorage.Values['edtNomResponsable_Text'];
+   Result := ConfigStorage.Values['NomResponsable'];
 end;
 
 procedure TSourceDataModule.SetNomResponsable(const Value: string);
 begin
-   ConfigStorage.Values['edtNomResponsable_Text'] := Value;
+   ConfigStorage.Values['NomResponsable'] := Value;
 end;
 
 function TSourceDataModule.GetCarResponsable: string;
 begin
-   Result := ConfigStorage.Values['edtCarResponsable_Text'];
+   Result := ConfigStorage.Values['CarResponsable'];
 end;
 
 procedure TSourceDataModule.SetCarResponsable(const Value: string);
 begin
-   ConfigStorage.Values['edtCarResponsable_Text'] := Value;
+   ConfigStorage.Values['CarResponsable'] := Value;
 end;
 
 function TSourceDataModule.GetMaxCargaProfesor: Integer;
 begin
-   Result := ConfigStorage.Integers['speMaxCargaProfesor_Value'];
+   Result := ConfigStorage.Integers['MaxCargaProfesor'];
 end;
 
 procedure TSourceDataModule.SetMaxCargaProfesor(Value: Integer);
 begin
-   ConfigStorage.Integers['speMaxCargaProfesor_Value'] := Value;
+   ConfigStorage.Integers['MaxCargaProfesor'] := Value;
 end;
 
 function TSourceDataModule.GetHorarioSeleccionado: Integer;
 begin
-   Result := ConfigStorage.Integers['lblHorarioSeleccionado_Caption'];
+   Result := ConfigStorage.Integers['HorarioSeleccionado'];
 end;
 
 procedure TSourceDataModule.SetHorarioSeleccionado(Value: Integer);
 begin
-  ConfigStorage.Integers['lblHorarioSeleccionado_Caption'] := Value;
+  ConfigStorage.Integers['HorarioSeleccionado'] := Value;
 end;
 
 function TSourceDataModule.GetComentarios: string;
@@ -539,222 +539,222 @@ end;
 
 function TSourceDataModule.GetRandomize: Boolean;
 begin
-   Result := ConfigStorage.Booleans['CBRandomize_Checked'];
+   Result := ConfigStorage.Booleans['Randomize'];
 end;
 
 procedure TSourceDataModule.SetRandomize(Value: Boolean);
 begin
-  ConfigStorage.Booleans['CBRandomize_Checked'] := Value;
+  ConfigStorage.Booleans['Randomize'] := Value;
 end;
 
 function TSourceDataModule.GetSeed1: Integer;
 begin
-  Result := ConfigStorage.Integers['speSeed1_Value'];
+  Result := ConfigStorage.Integers['Seed1'];
 end;
 
 procedure TSourceDataModule.SetSeed1(Value: Integer);
 begin
-  ConfigStorage.Integers['speSeed1_Value'] := Value;
+  ConfigStorage.Integers['Seed1'] := Value;
 end;
 
 function TSourceDataModule.GetSeed2: Integer;
 begin
-  Result := ConfigStorage.Integers['speSeed2_Value'];
+  Result := ConfigStorage.Integers['Seed2'];
 end;
 
 procedure TSourceDataModule.SetSeed2(Value: Integer);
 begin
-  ConfigStorage.Integers['speSeed2_Value'] := Value;
+  ConfigStorage.Integers['Seed2'] := Value;
 end;
 
 function TSourceDataModule.GetSeed3: Integer;
 begin
-  Result := ConfigStorage.Integers['speSeed3_Value'];
+  Result := ConfigStorage.Integers['Seed3'];
 end;
 
 procedure TSourceDataModule.SetSeed3(Value: Integer);
 begin
-  ConfigStorage.Integers['speSeed3_Value'] := Value;
+  ConfigStorage.Integers['Seed3'] := Value;
 end;
 
 function TSourceDataModule.GetSeed4: Integer;
 begin
-  Result := ConfigStorage.Integers['speSeed4_Value'];
+  Result := ConfigStorage.Integers['Seed4'];
 end;
 
 procedure TSourceDataModule.SetSeed4(Value: Integer);
 begin
-  ConfigStorage.Integers['speSeed4_Value'] := Value;
+  ConfigStorage.Integers['Seed4'] := Value;
 end;
 
 function TSourceDataModule.GetNumIteraciones: Integer;
 begin
-  Result := ConfigStorage.Integers['speNumIteraciones_Value'];
+  Result := ConfigStorage.Integers['NumIteraciones'];
 end;
 
 procedure TSourceDataModule.SetNumIteraciones(Value: Integer);
 begin
-  ConfigStorage.Integers['speNumIteraciones_Value'] := Value;
+  ConfigStorage.Integers['NumIteraciones'] := Value;
 end;
 
 function TSourceDataModule.GetCruceProfesor: Extended;
 begin
-  Result := ConfigStorage.Floats['creCruceProfesor_Value'];
+  Result := ConfigStorage.Floats['CruceProfesor'];
 end;
 
 procedure TSourceDataModule.SetCruceProfesor(Value: Extended);
 begin
-  ConfigStorage.Floats['creCruceProfesor_Value'] := Value;
+  ConfigStorage.Floats['CruceProfesor'] := Value;
 end;
 
 function TSourceDataModule.GetProfesorFraccionamiento: Extended;
 begin
-  Result := ConfigStorage.Floats['creProfesorFraccionamiento_Value'];
+  Result := ConfigStorage.Floats['ProfesorFraccionamiento'];
 end;
 
 procedure TSourceDataModule.SetProfesorFraccionamiento(Value: Extended);
 begin
-  ConfigStorage.Floats['creProfesorFraccionamiento_Value'] := Value;
+  ConfigStorage.Floats['ProfesorFraccionamiento'] := Value;
 end;
 
 function TSourceDataModule.GetCruceAulaTipo: Extended;
 begin
-  Result := ConfigStorage.Floats['creCruceAulaTipo_Value'];
+  Result := ConfigStorage.Floats['CruceAulaTipo'];
 end;
 
 procedure TSourceDataModule.SetCruceAulaTipo(Value: Extended);
 begin
-  ConfigStorage.Floats['creCruceAulaTipo_Value'] := Value;
+  ConfigStorage.Floats['CruceAulaTipo'] := Value;
 end;
 
 function TSourceDataModule.GetHoraHueca: Extended;
 begin
-  Result := ConfigStorage.Floats['creHoraHueca_Value'];
+  Result := ConfigStorage.Floats['HoraHueca'];
 end;
 
 procedure TSourceDataModule.SetHoraHueca(Value: Extended);
 begin
-  ConfigStorage.Floats['creHoraHueca_Value'] := Value;
+  ConfigStorage.Floats['HoraHueca'] := Value;
 end;
 
 function TSourceDataModule.GetSesionCortada: Extended;
 begin
-  Result := ConfigStorage.Floats['creSesionCortada_Value'];
+  Result := ConfigStorage.Floats['SesionCortada'];
 end;
 
 procedure TSourceDataModule.SetSesionCortada(Value: Extended);
 begin
-  ConfigStorage.Floats['creSesionCortada_Value'] := Value;
+  ConfigStorage.Floats['SesionCortada'] := Value;
 end;
 
 function TSourceDataModule.GetMateriaNoDispersa: Extended;
 begin
-  Result := ConfigStorage.Floats['creMateriaNoDispersa_Value'];
+  Result := ConfigStorage.Floats['MateriaNoDispersa'];
 end;
 
 procedure TSourceDataModule.SetMateriaNoDispersa(Value: Extended);
 begin
-  ConfigStorage.Floats['creMateriaNoDispersa_Value'] := Value;
+  ConfigStorage.Floats['MateriaNoDispersa'] := Value;
 end;
 
 function TSourceDataModule.GetTamPoblacion: Integer;
 begin
-  Result := ConfigStorage.Integers['speTamPoblacion_Value'];
+  Result := ConfigStorage.Integers['TamPoblacion'];
 end;
 
 procedure TSourceDataModule.SetTamPoblacion(Value: Integer);
 begin
-  ConfigStorage.Integers['speTamPoblacion_Value'] := Value;
+  ConfigStorage.Integers['TamPoblacion'] := Value;
 end;
 
 function TSourceDataModule.GetNumMaxGeneracion: Integer;
 begin
-  Result := ConfigStorage.Integers['speNumMaxGeneracion_Value'];
+  Result := ConfigStorage.Integers['NumMaxGeneracion'];
 end;
 
 procedure TSourceDataModule.SetNumMaxGeneracion(Value: Integer);
 begin
-  ConfigStorage.Integers['speNumMaxGeneracion_Value'] := Value;
+  ConfigStorage.Integers['NumMaxGeneracion'] := Value;
 end;
 
 function TSourceDataModule.GetProbCruzamiento: Extended;
 begin
-  Result := ConfigStorage.Floats['creProbCruzamiento_Value'];
+  Result := ConfigStorage.Floats['ProbCruzamiento'];
 end;
 
 procedure TSourceDataModule.SetProbCruzamiento(Value: Extended);
 begin
-  ConfigStorage.Floats['creProbCruzamiento_Value'] := Value;
+  ConfigStorage.Floats['ProbCruzamiento'] := Value;
 end;
 
 function TSourceDataModule.GetProbMutacion1: Extended;
 begin
-  Result := ConfigStorage.Floats['creProbMutacion1_Value'];
+  Result := ConfigStorage.Floats['ProbMutacion1'];
 end;
 
 procedure TSourceDataModule.SetProbMutacion1(Value: Extended);
 begin
-  ConfigStorage.Floats['creProbMutacion1_Value'] := Value;
+  ConfigStorage.Floats['ProbMutacion1'] := Value;
 end;
 
 function TSourceDataModule.GetOrdenMutacion1: Integer;
 begin
-  Result := ConfigStorage.Integers['speOrdenMutacion1_Value'];
+  Result := ConfigStorage.Integers['OrdenMutacion1'];
 end;
 
 procedure TSourceDataModule.SetOrdenMutacion1(Value: Integer);
 begin
-  ConfigStorage.Integers['speOrdenMutacion1_Value'] := Value;
+  ConfigStorage.Integers['OrdenMutacion1'] := Value;
 end;
 
 function TSourceDataModule.GetProbMutacion2: Extended;
 begin
-  Result := ConfigStorage.Floats['creProbMutacion2_Value'];
+  Result := ConfigStorage.Floats['ProbMutacion2'];
 end;
 
 procedure TSourceDataModule.SetProbMutacion2(Value: Extended);
 begin
-  ConfigStorage.Floats['creProbMutacion2_Value'] := Value;
+  ConfigStorage.Floats['ProbMutacion2'] := Value;
 end;
 
 function TSourceDataModule.GetProbReparacion: Extended;
 begin
-  Result := ConfigStorage.Floats['creProbReparacion_Value'];
+  Result := ConfigStorage.Floats['ProbReparacion'];
 end;
 
 procedure TSourceDataModule.SetProbReparacion(Value: Extended);
 begin
-  ConfigStorage.Floats['creProbReparacion_Value'] := Value;
+  ConfigStorage.Floats['ProbReparacion'] := Value;
 end;
 
 function TSourceDataModule.GetMostrarProfesorHorarioTexto: string;
 begin
-  Result := ConfigStorage.Values['edtMostrarProfesorHorarioTexto_Text'];
+  Result := ConfigStorage.Values['MostrarProfesorHorarioTexto'];
 end;
 
 procedure TSourceDataModule.SetMostrarProfesorHorarioTexto(const Value: string);
 begin
-  ConfigStorage.Values['edtMostrarProfesorHorarioTexto_Text'] := Value;
+  ConfigStorage.Values['MostrarProfesorHorarioTexto'] := Value;
 end;
 
 function TSourceDataModule.GetMostrarProfesorHorarioLongitud: Integer;
 begin
-  Result := ConfigStorage.Integers['speMostrarProfesorHorarioLongitud_Value'];
+  Result := ConfigStorage.Integers['MostrarProfesorHorarioLongitud'];
 end;
 
 procedure TSourceDataModule.SetMostrarProfesorHorarioLongitud(Value: Integer);
 begin
-  ConfigStorage.Integers['speMostrarProfesorHorarioLongitud_Value'] := Value;
+  ConfigStorage.Integers['MostrarProfesorHorarioLongitud'] := Value;
 end;
 
 function TSourceDataModule.GetProfesorHorarioExcluirProfProhibicion: string;
 begin
-  Result := ConfigStorage.Values['edtProfesorHorarioExcluirProfProhibicion_Text'];
+  Result := ConfigStorage.Values['ProfesorHorarioExcluirProfProhibicion'];
 end;
 
 procedure TSourceDataModule.SetProfesorHorarioExcluirProfProhibicion(const Value: string);
 begin
-  ConfigStorage.Values['edtProfesorHorarioExcluirProfProhibicion_Text'] := Value;
+  ConfigStorage.Values['ProfesorHorarioExcluirProfProhibicion'] := Value;
 end;
 
 function TSourceDataModule.GetHorarioIni: string;
@@ -779,12 +779,12 @@ end;
 
 function TSourceDataModule.GetRangoPolinizacion: Integer;
 begin
-  Result := ConfigStorage.Integers['speRangoPolinizacion_Value'];
+  Result := ConfigStorage.Integers['RangoPolinizacion'];
 end;
 
 procedure TSourceDataModule.SetRangoPolinizacion(Value: Integer);
 begin
-  ConfigStorage.Integers['speRangoPolinizacion_Value'] := Value;
+  ConfigStorage.Integers['RangoPolinizacion'] := Value;
 end;
 
 procedure TSourceDataModule.InitRandom;
