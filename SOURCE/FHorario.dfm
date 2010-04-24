@@ -711,7 +711,6 @@ inherited HorarioForm: THorarioForm
         Name = 'QuCruceAulaIndex1'
         Fields = 'CodAulaTipo;CodDia;CodHora'
       end>
-    VersioningMode = mtvmAllSinceCheckPoint
     Left = 88
     Top = 168
     object QuCruceAulaCodDia: TIntegerField
@@ -829,7 +828,6 @@ inherited HorarioForm: THorarioForm
         Name = 'QuCruceAulaDetalleIndex1'
         Fields = 'CodAulaTipo;CodDia;CodHora'
       end>
-    VersioningMode = mtvmAllSinceCheckPoint
     MasterFields = 'CodAulaTipo;CodDia;CodHora'
     MasterSource = DSCruceAula
     Left = 116
@@ -907,7 +905,6 @@ inherited HorarioForm: THorarioForm
   object QuCruceProfesorDetalle: TkbmMemTable [8]
     FieldDefs = <>
     IndexDefs = <>
-    VersioningMode = mtvmAllSinceCheckPoint
     Left = 116
     Top = 196
     object QuCruceProfesorDetalleCodProfesor: TIntegerField
@@ -1004,7 +1001,6 @@ inherited HorarioForm: THorarioForm
         Name = 'QuCruceProfesorIndex1'
         Fields = 'CodProfesor;CodDia;CodHora'
       end>
-    VersioningMode = mtvmAllSinceCheckPoint
     AfterScroll = QuCruceProfesorAfterScroll
     Left = 88
     Top = 196
@@ -1084,7 +1080,6 @@ inherited HorarioForm: THorarioForm
         Name = 'QuCruceMateriaIxNomMateria'
         Fields = 'NomMateria'
       end>
-    VersioningMode = mtvmAllSinceCheckPoint
     AfterScroll = QuCruceMateriaAfterScroll
     Left = 88
     Top = 224
@@ -1111,7 +1106,6 @@ inherited HorarioForm: THorarioForm
           'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
           'ora'
       end>
-    VersioningMode = mtvmAllSinceCheckPoint
     Left = 116
     Top = 224
     object QuCruceMateriaDetalleCodMateria: TIntegerField
@@ -1322,7 +1316,6 @@ inherited HorarioForm: THorarioForm
   object QuHorarioDetalleProfesorProhibicion: TkbmMemTable [13]
     FieldDefs = <>
     IndexDefs = <>
-    VersioningMode = mtvmAllSinceCheckPoint
     Left = 60
     Top = 196
     object QuHorarioDetalleProfesorProhibicionNomProfProhibicionTipo: TStringField
@@ -1438,7 +1431,6 @@ inherited HorarioForm: THorarioForm
   object QuMateriaCortadaDia: TkbmMemTable [14]
     FieldDefs = <>
     IndexDefs = <>
-    VersioningMode = mtvmAllSinceCheckPoint
     AfterScroll = QuCruceMateriaAfterScroll
     Left = 60
     Top = 224
@@ -1548,7 +1540,6 @@ inherited HorarioForm: THorarioForm
         Name = 'QuMateriaCortadaHoraIxCodDia'
         Fields = 'CodDia'
       end>
-    VersioningMode = mtvmAllSinceCheckPoint
     Left = 60
     Top = 252
     object QuMateriaCortadaHoraCodDia: TIntegerField
@@ -1593,7 +1584,6 @@ inherited HorarioForm: THorarioForm
         Name = 'QuMateriaCortadaHoraDetalleIxCodDia'
         Fields = 'CodDia;CodHora;CodHora0'
       end>
-    VersioningMode = mtvmAllSinceCheckPoint
     MasterFields = 'CodDia;CodHora'
     MasterSource = DSMateriaCortadaHora
     Left = 88
