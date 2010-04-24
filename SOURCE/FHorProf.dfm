@@ -518,7 +518,6 @@ inherited HorarioProfesorForm: THorarioProfesorForm
     Left = 64
     Top = 88
     object QuHorarioProfesorCodProfesor: TAutoIncField
-      AutoGenerateValue = arAutoInc
       DisplayLabel = 'C'#243'digo'
       FieldName = 'CodProfesor'
       Visible = False
