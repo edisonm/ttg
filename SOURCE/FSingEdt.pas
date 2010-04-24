@@ -45,7 +45,7 @@ TSingleEditorForm = class(TEditorForm)
 implementation
 
 uses
-  HorColCm, QSingRep, Printers, FMain, DMaster;
+  HorColCm, Printers, FMain, DMaster;
 {$R *.DFM}
 
 class function TSingleEditorForm.ToggleSingleEditor(AOwner: TComponent;
