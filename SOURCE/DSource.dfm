@@ -1,8 +1,4 @@
 inherited SourceDataModule: TSourceDataModule
-  Left = 286
-  Top = 151
-  Height = 496
-  Width = 758
   inherited TbAulaTipo: TkbmMemTable
     inherited TbAulaTipoCodAulaTipo: TAutoIncField
       Visible = False
@@ -143,7 +139,6 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbParalelo: TkbmMemTable
-    AttachMaxCount = 2
     FieldDefs = <
       item
         Name = 'CodNivel'
