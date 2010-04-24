@@ -470,7 +470,6 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
   end
   object QuHorarioAulaTipo: TkbmMemTable
     Active = True
-    AutoIncMinValue = -1
     FieldDefs = <
       item
         Name = 'CodAulaTipo'

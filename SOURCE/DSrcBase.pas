@@ -1,6 +1,6 @@
 unit DSrcBase;
 (*
-  viernes, 16 de abril de 2010 16:16:15
+  sábado, 24 de abril de 2010 10:23:21
 
   Warning:
 
@@ -120,39 +120,6 @@ type
     TbProfesorProhibicionCodProfProhibicionTipo:TIntegerField;
     DSProfesorProhibicion: TDataSource;
 
-    procedure TbAulaTipoBeforePost(DataSet: TDataSet);
-    procedure TbAulaTipoBeforeDelete(DataSet: TDataSet);
-    procedure TbEspecializacionBeforePost(DataSet: TDataSet);
-    procedure TbEspecializacionBeforeDelete(DataSet: TDataSet);
-    procedure TbDiaBeforePost(DataSet: TDataSet);
-    procedure TbDiaBeforeDelete(DataSet: TDataSet);
-    procedure TbMateriaBeforePost(DataSet: TDataSet);
-    procedure TbMateriaBeforeDelete(DataSet: TDataSet);
-    procedure TbNivelBeforePost(DataSet: TDataSet);
-    procedure TbNivelBeforeDelete(DataSet: TDataSet);
-    procedure TbHoraBeforePost(DataSet: TDataSet);
-    procedure TbHoraBeforeDelete(DataSet: TDataSet);
-    procedure TbHorarioBeforePost(DataSet: TDataSet);
-    procedure TbHorarioBeforeDelete(DataSet: TDataSet);
-    procedure TbCursoBeforePost(DataSet: TDataSet);
-    procedure TbCursoBeforeDelete(DataSet: TDataSet);
-    procedure TbParaleloIdBeforePost(DataSet: TDataSet);
-    procedure TbParaleloIdBeforeDelete(DataSet: TDataSet);
-    procedure TbMateriaProhibicionTipoBeforePost(DataSet: TDataSet);
-    procedure TbMateriaProhibicionTipoBeforeDelete(DataSet: TDataSet);
-    procedure TbPeriodoBeforePost(DataSet: TDataSet);
-    procedure TbPeriodoBeforeDelete(DataSet: TDataSet);
-    procedure TbParaleloBeforePost(DataSet: TDataSet);
-    procedure TbParaleloBeforeDelete(DataSet: TDataSet);
-    procedure TbProfesorBeforePost(DataSet: TDataSet);
-    procedure TbProfesorBeforeDelete(DataSet: TDataSet);
-    procedure TbMateriaProhibicionBeforePost(DataSet: TDataSet);
-    procedure TbDistributivoBeforePost(DataSet: TDataSet);
-    procedure TbDistributivoBeforeDelete(DataSet: TDataSet);
-    procedure TbHorarioDetalleBeforePost(DataSet: TDataSet);
-    procedure TbProfesorProhibicionTipoBeforePost(DataSet: TDataSet);
-    procedure TbProfesorProhibicionTipoBeforeDelete(DataSet: TDataSet);
-    procedure TbProfesorProhibicionBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
   private
   public
@@ -166,443 +133,13 @@ implementation
 
 uses RelUtils;
 
-procedure TSourceBaseDataModule.TbAulaTipoBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[0] then
-  begin
-    FBeforePostLocks[0] := True;
-    try
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbDistributivo, 'CodAulaTipo', 'CodAulaTipo', False);
-      end;
-    finally
-      FBeforePostLocks[0] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbAulaTipoBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbDistributivo, 'CodAulaTipo', 'CodAulaTipo', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbEspecializacionBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[1] then
-  begin
-    FBeforePostLocks[1] := True;
-    try
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbCurso, 'CodEspecializacion', 'CodEspecializacion', False);
-      end;
-    finally
-      FBeforePostLocks[1] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbEspecializacionBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbCurso, 'CodEspecializacion', 'CodEspecializacion', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbDiaBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[2] then
-  begin
-    FBeforePostLocks[2] := True;
-    try
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbPeriodo, 'CodDia', 'CodDia', False);
-      end;
-    finally
-      FBeforePostLocks[2] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbDiaBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbPeriodo, 'CodDia', 'CodDia', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbMateriaBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[3] then
-  begin
-    FBeforePostLocks[3] := True;
-    try
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbDistributivo, 'CodMateria', 'CodMateria', False);
-        CheckMasterRelationUpdate(DataSet, TbMateriaProhibicion, 'CodMateria', 'CodMateria', False);
-      end;
-    finally
-      FBeforePostLocks[3] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbMateriaBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbDistributivo, 'CodMateria', 'CodMateria', False);
-    CheckMasterRelationDelete(DataSet, TbMateriaProhibicion, 'CodMateria', 'CodMateria', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbNivelBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[4] then
-  begin
-    FBeforePostLocks[4] := True;
-    try
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbCurso, 'CodNivel', 'CodNivel', False);
-      end;
-    finally
-      FBeforePostLocks[4] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbNivelBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbCurso, 'CodNivel', 'CodNivel', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbHoraBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[5] then
-  begin
-    FBeforePostLocks[5] := True;
-    try
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbPeriodo, 'CodHora', 'CodHora', False);
-      end;
-    finally
-      FBeforePostLocks[5] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbHoraBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbPeriodo, 'CodHora', 'CodHora', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbHorarioBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[6] then
-  begin
-    FBeforePostLocks[6] := True;
-    try
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbHorarioDetalle, 'CodHorario', 'CodHorario', True);
-      end;
-    finally
-      FBeforePostLocks[6] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbHorarioBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbHorarioDetalle, 'CodHorario', 'CodHorario', True);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbCursoBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[7] then
-  begin
-    FBeforePostLocks[7] := True;
-    try
-      CheckDetailRelation(TbEspecializacion, DataSet, 'CodEspecializacion', 'CodEspecializacion');
-      CheckDetailRelation(TbNivel, DataSet, 'CodNivel', 'CodNivel');
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbParalelo, 'CodNivel;CodEspecializacion', 'CodNivel;CodEspecializacion', False);
-      end;
-    finally
-      FBeforePostLocks[7] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbCursoBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbParalelo, 'CodNivel;CodEspecializacion', 'CodNivel;CodEspecializacion', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbParaleloIdBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[8] then
-  begin
-    FBeforePostLocks[8] := True;
-    try
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbParalelo, 'CodParaleloId', 'CodParaleloId', False);
-      end;
-    finally
-      FBeforePostLocks[8] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbParaleloIdBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbParalelo, 'CodParaleloId', 'CodParaleloId', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbMateriaProhibicionTipoBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[9] then
-  begin
-    FBeforePostLocks[9] := True;
-    try
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbMateriaProhibicion, 'CodMateProhibicionTipo', 'CodMateProhibicionTipo', False);
-      end;
-    finally
-      FBeforePostLocks[9] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbMateriaProhibicionTipoBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbMateriaProhibicion, 'CodMateProhibicionTipo', 'CodMateProhibicionTipo', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbPeriodoBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[10] then
-  begin
-    FBeforePostLocks[10] := True;
-    try
-      CheckDetailRelation(TbDia, DataSet, 'CodDia', 'CodDia');
-      CheckDetailRelation(TbHora, DataSet, 'CodHora', 'CodHora');
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbHorarioDetalle, 'CodDia;CodHora', 'CodDia;CodHora', False);
-        CheckMasterRelationUpdate(DataSet, TbMateriaProhibicion, 'CodDia;CodHora', 'CodDia;CodHora', False);
-        CheckMasterRelationUpdate(DataSet, TbProfesorProhibicion, 'CodDia;CodHora', 'CodDia;CodHora', False);
-      end;
-    finally
-      FBeforePostLocks[10] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbPeriodoBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbHorarioDetalle, 'CodDia;CodHora', 'CodDia;CodHora', False);
-    CheckMasterRelationDelete(DataSet, TbMateriaProhibicion, 'CodDia;CodHora', 'CodDia;CodHora', False);
-    CheckMasterRelationDelete(DataSet, TbProfesorProhibicion, 'CodDia;CodHora', 'CodDia;CodHora', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbParaleloBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[11] then
-  begin
-    FBeforePostLocks[11] := True;
-    try
-      CheckDetailRelation(TbCurso, DataSet, 'CodNivel;CodEspecializacion', 'CodNivel;CodEspecializacion');
-      CheckDetailRelation(TbParaleloId, DataSet, 'CodParaleloId', 'CodParaleloId');
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbDistributivo, 'CodNivel;CodEspecializacion;CodParaleloId', 'CodNivel;CodEspecializacion;CodParaleloId', False);
-      end;
-    finally
-      FBeforePostLocks[11] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbParaleloBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbDistributivo, 'CodNivel;CodEspecializacion;CodParaleloId', 'CodNivel;CodEspecializacion;CodParaleloId', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbProfesorBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[12] then
-  begin
-    FBeforePostLocks[12] := True;
-    try
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbDistributivo, 'CodProfesor', 'CodProfesor', False);
-        CheckMasterRelationUpdate(DataSet, TbProfesorProhibicion, 'CodProfesor', 'CodProfesor', False);
-      end;
-    finally
-      FBeforePostLocks[12] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbProfesorBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbDistributivo, 'CodProfesor', 'CodProfesor', False);
-    CheckMasterRelationDelete(DataSet, TbProfesorProhibicion, 'CodProfesor', 'CodProfesor', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbMateriaProhibicionBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[13] then
-  begin
-    FBeforePostLocks[13] := True;
-    try
-      CheckDetailRelation(TbMateria, DataSet, 'CodMateria', 'CodMateria');
-      CheckDetailRelation(TbMateriaProhibicionTipo, DataSet, 'CodMateProhibicionTipo', 'CodMateProhibicionTipo');
-      CheckDetailRelation(TbPeriodo, DataSet, 'CodDia;CodHora', 'CodDia;CodHora');
-      if DataSet.State = dsEdit then
-      begin
-      end;
-    finally
-      FBeforePostLocks[13] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbDistributivoBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[14] then
-  begin
-    FBeforePostLocks[14] := True;
-    try
-      CheckDetailRelation(TbAulaTipo, DataSet, 'CodAulaTipo', 'CodAulaTipo');
-      CheckDetailRelation(TbMateria, DataSet, 'CodMateria', 'CodMateria');
-      CheckDetailRelation(TbParalelo, DataSet, 'CodNivel;CodEspecializacion;CodParaleloId', 'CodNivel;CodEspecializacion;CodParaleloId');
-      CheckDetailRelation(TbProfesor, DataSet, 'CodProfesor', 'CodProfesor');
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbHorarioDetalle, 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', False);
-      end;
-    finally
-      FBeforePostLocks[14] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbDistributivoBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbHorarioDetalle, 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbHorarioDetalleBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[15] then
-  begin
-    FBeforePostLocks[15] := True;
-    try
-      CheckDetailRelation(TbDistributivo, DataSet, 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId');
-      CheckDetailRelation(TbHorario, DataSet, 'CodHorario', 'CodHorario');
-      CheckDetailRelation(TbPeriodo, DataSet, 'CodDia;CodHora', 'CodDia;CodHora');
-      if DataSet.State = dsEdit then
-      begin
-      end;
-    finally
-      FBeforePostLocks[15] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbProfesorProhibicionTipoBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[16] then
-  begin
-    FBeforePostLocks[16] := True;
-    try
-      if DataSet.State = dsEdit then
-      begin
-        CheckMasterRelationUpdate(DataSet, TbProfesorProhibicion, 'CodProfProhibicionTipo', 'CodProfProhibicionTipo', False);
-      end;
-    finally
-      FBeforePostLocks[16] := False
-    end;
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbProfesorProhibicionTipoBeforeDelete(DataSet: TDataSet);
-begin
-  if CheckRelations then
-  begin
-    CheckMasterRelationDelete(DataSet, TbProfesorProhibicion, 'CodProfProhibicionTipo', 'CodProfProhibicionTipo', False);
-  end;
-end;
-
-procedure TSourceBaseDataModule.TbProfesorProhibicionBeforePost(DataSet: TDataSet);
-begin
-  if CheckRelations and not FBeforePostLocks[17] then
-  begin
-    FBeforePostLocks[17] := True;
-    try
-      CheckDetailRelation(TbPeriodo, DataSet, 'CodDia;CodHora', 'CodDia;CodHora');
-      CheckDetailRelation(TbProfesor, DataSet, 'CodProfesor', 'CodProfesor');
-      CheckDetailRelation(TbProfesorProhibicionTipo, DataSet, 'CodProfProhibicionTipo', 'CodProfProhibicionTipo');
-      if DataSet.State = dsEdit then
-      begin
-      end;
-    finally
-      FBeforePostLocks[17] := False
-    end;
-  end;
-end;
-
 
 procedure TSourceBaseDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
   SetLength(FTables, 18);
+  SetLength(FMasterRels, 18);
+  SetLength(FDetailRels, 18);
   SetLength(FBeforePostLocks, 18);
   Tables[0] := TbAulaTipo;
   Tables[1] := TbEspecializacion;
@@ -622,6 +159,289 @@ begin
   Tables[15] := TbHorarioDetalle;
   Tables[16] := TbProfesorProhibicionTipo;
   Tables[17] := TbProfesorProhibicion;
+  SetLength(FMasterRels[0], 1);
+  with FMasterRels[0, 0] do
+  begin
+    DetailDataSet := TbDistributivo;
+    MasterFields := 'CodAulaTipo';
+    DetailFields := 'CodAulaTipo';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[0], 0);
+  SetLength(FMasterRels[1], 1);
+  with FMasterRels[1, 0] do
+  begin
+    DetailDataSet := TbCurso;
+    MasterFields := 'CodEspecializacion';
+    DetailFields := 'CodEspecializacion';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[1], 0);
+  SetLength(FMasterRels[2], 1);
+  with FMasterRels[2, 0] do
+  begin
+    DetailDataSet := TbPeriodo;
+    MasterFields := 'CodDia';
+    DetailFields := 'CodDia';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[2], 0);
+  SetLength(FMasterRels[3], 2);
+  with FMasterRels[3, 0] do
+  begin
+    DetailDataSet := TbDistributivo;
+    MasterFields := 'CodMateria';
+    DetailFields := 'CodMateria';
+    Cascade := False;
+  end;
+  with FMasterRels[3, 1] do
+  begin
+    DetailDataSet := TbMateriaProhibicion;
+    MasterFields := 'CodMateria';
+    DetailFields := 'CodMateria';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[3], 0);
+  SetLength(FMasterRels[4], 1);
+  with FMasterRels[4, 0] do
+  begin
+    DetailDataSet := TbCurso;
+    MasterFields := 'CodNivel';
+    DetailFields := 'CodNivel';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[4], 0);
+  SetLength(FMasterRels[5], 1);
+  with FMasterRels[5, 0] do
+  begin
+    DetailDataSet := TbPeriodo;
+    MasterFields := 'CodHora';
+    DetailFields := 'CodHora';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[5], 0);
+  SetLength(FMasterRels[6], 1);
+  with FMasterRels[6, 0] do
+  begin
+    DetailDataSet := TbHorarioDetalle;
+    MasterFields := 'CodHorario';
+    DetailFields := 'CodHorario';
+    Cascade := True;
+  end;
+  SetLength(FDetailRels[6], 0);
+  SetLength(FMasterRels[7], 1);
+  with FMasterRels[7, 0] do
+  begin
+    DetailDataSet := TbParalelo;
+    MasterFields := 'CodNivel;CodEspecializacion';
+    DetailFields := 'CodNivel;CodEspecializacion';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[7], 2);
+  with FDetailRels[7, 0] do
+  begin
+    MasterDataSet := TbEspecializacion;
+    MasterFields := 'CodEspecializacion';
+    DetailFields := 'CodEspecializacion';
+  end;
+  with FDetailRels[7, 1] do
+  begin
+    MasterDataSet := TbNivel;
+    MasterFields := 'CodNivel';
+    DetailFields := 'CodNivel';
+  end;
+  SetLength(FMasterRels[8], 1);
+  with FMasterRels[8, 0] do
+  begin
+    DetailDataSet := TbParalelo;
+    MasterFields := 'CodParaleloId';
+    DetailFields := 'CodParaleloId';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[8], 0);
+  SetLength(FMasterRels[9], 1);
+  with FMasterRels[9, 0] do
+  begin
+    DetailDataSet := TbMateriaProhibicion;
+    MasterFields := 'CodMateProhibicionTipo';
+    DetailFields := 'CodMateProhibicionTipo';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[9], 0);
+  SetLength(FMasterRels[10], 3);
+  with FMasterRels[10, 0] do
+  begin
+    DetailDataSet := TbHorarioDetalle;
+    MasterFields := 'CodDia;CodHora';
+    DetailFields := 'CodDia;CodHora';
+    Cascade := False;
+  end;
+  with FMasterRels[10, 1] do
+  begin
+    DetailDataSet := TbMateriaProhibicion;
+    MasterFields := 'CodDia;CodHora';
+    DetailFields := 'CodDia;CodHora';
+    Cascade := False;
+  end;
+  with FMasterRels[10, 2] do
+  begin
+    DetailDataSet := TbProfesorProhibicion;
+    MasterFields := 'CodDia;CodHora';
+    DetailFields := 'CodDia;CodHora';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[10], 2);
+  with FDetailRels[10, 0] do
+  begin
+    MasterDataSet := TbDia;
+    MasterFields := 'CodDia';
+    DetailFields := 'CodDia';
+  end;
+  with FDetailRels[10, 1] do
+  begin
+    MasterDataSet := TbHora;
+    MasterFields := 'CodHora';
+    DetailFields := 'CodHora';
+  end;
+  SetLength(FMasterRels[11], 1);
+  with FMasterRels[11, 0] do
+  begin
+    DetailDataSet := TbDistributivo;
+    MasterFields := 'CodNivel;CodEspecializacion;CodParaleloId';
+    DetailFields := 'CodNivel;CodEspecializacion;CodParaleloId';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[11], 2);
+  with FDetailRels[11, 0] do
+  begin
+    MasterDataSet := TbCurso;
+    MasterFields := 'CodNivel;CodEspecializacion';
+    DetailFields := 'CodNivel;CodEspecializacion';
+  end;
+  with FDetailRels[11, 1] do
+  begin
+    MasterDataSet := TbParaleloId;
+    MasterFields := 'CodParaleloId';
+    DetailFields := 'CodParaleloId';
+  end;
+  SetLength(FMasterRels[12], 2);
+  with FMasterRels[12, 0] do
+  begin
+    DetailDataSet := TbDistributivo;
+    MasterFields := 'CodProfesor';
+    DetailFields := 'CodProfesor';
+    Cascade := False;
+  end;
+  with FMasterRels[12, 1] do
+  begin
+    DetailDataSet := TbProfesorProhibicion;
+    MasterFields := 'CodProfesor';
+    DetailFields := 'CodProfesor';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[12], 0);
+  SetLength(FMasterRels[13], 0);
+  SetLength(FDetailRels[13], 3);
+  with FDetailRels[13, 0] do
+  begin
+    MasterDataSet := TbMateria;
+    MasterFields := 'CodMateria';
+    DetailFields := 'CodMateria';
+  end;
+  with FDetailRels[13, 1] do
+  begin
+    MasterDataSet := TbMateriaProhibicionTipo;
+    MasterFields := 'CodMateProhibicionTipo';
+    DetailFields := 'CodMateProhibicionTipo';
+  end;
+  with FDetailRels[13, 2] do
+  begin
+    MasterDataSet := TbPeriodo;
+    MasterFields := 'CodDia;CodHora';
+    DetailFields := 'CodDia;CodHora';
+  end;
+  SetLength(FMasterRels[14], 1);
+  with FMasterRels[14, 0] do
+  begin
+    DetailDataSet := TbHorarioDetalle;
+    MasterFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+    DetailFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[14], 4);
+  with FDetailRels[14, 0] do
+  begin
+    MasterDataSet := TbAulaTipo;
+    MasterFields := 'CodAulaTipo';
+    DetailFields := 'CodAulaTipo';
+  end;
+  with FDetailRels[14, 1] do
+  begin
+    MasterDataSet := TbMateria;
+    MasterFields := 'CodMateria';
+    DetailFields := 'CodMateria';
+  end;
+  with FDetailRels[14, 2] do
+  begin
+    MasterDataSet := TbParalelo;
+    MasterFields := 'CodNivel;CodEspecializacion;CodParaleloId';
+    DetailFields := 'CodNivel;CodEspecializacion;CodParaleloId';
+  end;
+  with FDetailRels[14, 3] do
+  begin
+    MasterDataSet := TbProfesor;
+    MasterFields := 'CodProfesor';
+    DetailFields := 'CodProfesor';
+  end;
+  SetLength(FMasterRels[15], 0);
+  SetLength(FDetailRels[15], 3);
+  with FDetailRels[15, 0] do
+  begin
+    MasterDataSet := TbDistributivo;
+    MasterFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+    DetailFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+  end;
+  with FDetailRels[15, 1] do
+  begin
+    MasterDataSet := TbHorario;
+    MasterFields := 'CodHorario';
+    DetailFields := 'CodHorario';
+  end;
+  with FDetailRels[15, 2] do
+  begin
+    MasterDataSet := TbPeriodo;
+    MasterFields := 'CodDia;CodHora';
+    DetailFields := 'CodDia;CodHora';
+  end;
+  SetLength(FMasterRels[16], 1);
+  with FMasterRels[16, 0] do
+  begin
+    DetailDataSet := TbProfesorProhibicion;
+    MasterFields := 'CodProfProhibicionTipo';
+    DetailFields := 'CodProfProhibicionTipo';
+    Cascade := False;
+  end;
+  SetLength(FDetailRels[16], 0);
+  SetLength(FMasterRels[17], 0);
+  SetLength(FDetailRels[17], 3);
+  with FDetailRels[17, 0] do
+  begin
+    MasterDataSet := TbPeriodo;
+    MasterFields := 'CodDia;CodHora';
+    DetailFields := 'CodDia;CodHora';
+  end;
+  with FDetailRels[17, 1] do
+  begin
+    MasterDataSet := TbProfesor;
+    MasterFields := 'CodProfesor';
+    DetailFields := 'CodProfesor';
+  end;
+  with FDetailRels[17, 2] do
+  begin
+    MasterDataSet := TbProfesorProhibicionTipo;
+    MasterFields := 'CodProfProhibicionTipo';
+    DetailFields := 'CodProfProhibicionTipo';
+  end;
   with DataSetNameList do
   begin
     Add('TbAulaTipo=AulaTipo');

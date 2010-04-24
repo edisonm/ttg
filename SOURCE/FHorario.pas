@@ -362,24 +362,24 @@ end;
 
 procedure THorarioForm.ActCruceProfesorExecute(Sender: TObject);
 begin
-   inherited;
-   with SourceDataModule, MasterDataModule, QuCruceProfesor do
-   begin
-      if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
-							  FCruceProfesorForm,
-							  ConfigStorage,
-							  ActCruceProfesor,
-							  QuCruceProfesor,
-							  QuCruceProfesorDetalle) then
-      begin
-	 // TODO: Create dinamically QuCruceProfesor and QuCruceProfesorDetalle
-	 // QuCruceProfesor.Close;
-	 // QuCruceProfesorDetalle.Close;
-	 FillCruceProfesor;
-	 FillCruceProfesorDetalle;
-	 First;
-      end;
-   end;
+  inherited;
+  with SourceDataModule, MasterDataModule, QuCruceProfesor do
+  begin
+    if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
+                                                        FCruceProfesorForm,
+                                                        ConfigStorage,
+                                                        ActCruceProfesor,
+                                                        QuCruceProfesor,
+                                                        QuCruceProfesorDetalle) then
+    begin
+      // TODO: Create dinamically QuCruceProfesor and QuCruceProfesorDetalle
+      // QuCruceProfesor.Close;
+      // QuCruceProfesorDetalle.Close;
+      FillCruceProfesor;
+      FillCruceProfesorDetalle;
+      First;
+    end;
+  end;
 end;
 
 procedure THorarioForm.ActHorarioProfesorExecute(Sender: TObject);
@@ -399,15 +399,15 @@ end;
 procedure THorarioForm.FillCruceMateria;
 var
   CodHorario, CodMateria, CodNivel, CodEspecializacion, CodParaleloId, CodDia,
-    Sesion: Integer;
+  Sesion: Integer;
   TbMemTable: TkbmMemTable;
   TbMemTableCodHorario,
-    TbMemTableCodMateria,
-    TbMemTableCodNivel,
-    TbMemTableCodEspecializacion,
-    TbMemTableCodParaleloId,
-    TbMemTableCodDia,
-    TbMemTableSesion: TIntegerField;
+  TbMemTableCodMateria,
+  TbMemTableCodNivel,
+  TbMemTableCodEspecializacion,
+  TbMemTableCodParaleloId,
+  TbMemTableCodDia,
+  TbMemTableSesion: TIntegerField;
   s: string;
 begin
   with SourceDataModule do
@@ -451,12 +451,12 @@ begin
           Sesion := TbHorarioDetalleSesion.Value;
           TbMemTable.FindKey([CodHorario, CodMateria, CodNivel, CodEspecializacion, CodParaleloId, CodDia]);
           while (TbMemTableCodHorario.Value = CodHorario)
-            and (TbMemTableCodMateria.Value = CodMateria)
-            and (TbMemTableCodNivel.Value = CodNivel)
-            and (TbMemTableCodEspecializacion.Value = CodEspecializacion)
-            and (TbMemTableCodParaleloId.Value = CodParaleloId)
-            and (TbMemTableCodDia.Value = CodDia)
-            and not TbMemTable.Eof do
+                and (TbMemTableCodMateria.Value = CodMateria)
+                and (TbMemTableCodNivel.Value = CodNivel)
+                and (TbMemTableCodEspecializacion.Value = CodEspecializacion)
+                and (TbMemTableCodParaleloId.Value = CodParaleloId)
+                and (TbMemTableCodDia.Value = CodDia)
+                and not TbMemTable.Eof do
           begin
             if TbMemTableSesion.Value <> Sesion then
             begin
@@ -495,21 +495,21 @@ end;
 
 procedure THorarioForm.ActCruceMateriaExecute(Sender: TObject);
 begin			  
-   inherited;
-   with SourceDataModule do
-   begin
-      if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
-							  FCruceMateriaForm,
-							  ConfigStorage,
-							  ActCruceMateria,
-							  QuCruceMateria,
-							  QuCruceMateriaDetalle) then
-      begin
-	 // QuCruceMateria.Close;
-	 // QuCruceMateriaDetalle.Close;
-	 FillCruceMateria;
-      end;
-   end;
+  inherited;
+  with SourceDataModule do
+  begin
+    if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
+                                                        FCruceMateriaForm,
+                                                        ConfigStorage,
+                                                        ActCruceMateria,
+                                                        QuCruceMateria,
+                                                        QuCruceMateriaDetalle) then
+    begin
+      // QuCruceMateria.Close;
+      // QuCruceMateriaDetalle.Close;
+      FillCruceMateria;
+    end;
+  end;
 end;
 
 procedure THorarioForm.FillHorarioDetalleMateriaProhibicion;
@@ -590,8 +590,8 @@ end;
 
 procedure THorarioForm.FillHorarioDetalleProfesorProhibicion;
 var
-   CodHorario, CodMateria, CodNivel, CodEspecializacion, CodParaleloId: Integer;
-   r, s, d: string;
+  CodHorario, CodMateria, CodNivel, CodEspecializacion, CodParaleloId: Integer;
+  r, s, d: string;
 begin
   with SourceDataModule do
   begin
@@ -616,36 +616,36 @@ begin
             'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
           TbDistributivo.First;
           while (TbHorarioDetalleCodHorario.Value = CodHorario)
-            and not TbHorarioDetalle.Eof do
+                and not TbHorarioDetalle.Eof do
           begin
             CodMateria := TbHorarioDetalleCodMateria.Value;
             CodNivel := TbHorarioDetalleCodNivel.Value;
             CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
             CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
             while ((TbDistributivoCodMateria.Value <> CodMateria)
-              or (TbDistributivoCodNivel.Value <> CodNivel)
-              or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
-              or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
-              and not TbDistributivo.Eof do
+                   or (TbDistributivoCodNivel.Value <> CodNivel)
+                   or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
+                   or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
+                  and not TbDistributivo.Eof do
               TbDistributivo.Next;
             if TbProfesorProhibicion.FindKey([TbDistributivoCodProfesor.Value,
-              TbHorarioDetalleCodDia.Value, TbHorarioDetalleCodHora.Value]) then
+                                              TbHorarioDetalleCodDia.Value, TbHorarioDetalleCodHora.Value]) then
             begin
               QuHorarioDetalleProfesorProhibicion.Append;
               QuHorarioDetalleProfesorProhibicionApeNomProfesor.Value :=
-    	    TbDistributivoApeNomProfesor.Value;
+                TbDistributivoApeNomProfesor.Value;
               QuHorarioDetalleProfesorProhibicionCodHora.Value :=
-    	    TbHorarioDetalleCodHora.Value;
+                TbHorarioDetalleCodHora.Value;
               QuHorarioDetalleProfesorProhibicionCodDia.Value :=
-    	    TbHorarioDetalleCodDia.Value;
+                TbHorarioDetalleCodDia.Value;
               QuHorarioDetalleProfesorProhibicionCodProfProhibicionTipo.Value :=
-    	    TbProfesorProhibicionCodProfProhibicionTipo.Value;
+                TbProfesorProhibicionCodProfProhibicionTipo.Value;
               QuHorarioDetalleProfesorProhibicionCodNivel.Value :=
-    	    TbHorarioDetalleCodNivel.Value;
+                TbHorarioDetalleCodNivel.Value;
               QuHorarioDetalleProfesorProhibicionCodEspecializacion.Value :=
-    	    TbHorarioDetalleCodEspecializacion.Value;
+                TbHorarioDetalleCodEspecializacion.Value;
               QuHorarioDetalleProfesorProhibicionCodParaleloId.Value :=
-    	    TbHorarioDetalleCodParaleloId.Value;
+                TbHorarioDetalleCodParaleloId.Value;
               QuHorarioDetalleProfesorProhibicion.Post;
             end;
             TbHorarioDetalle.Next;
@@ -682,7 +682,7 @@ end;
 procedure THorarioForm.FillCruceAula;
 var
   CodHorario, CodMateria, CodNivel, CodEspecializacion, CodParaleloId,
-    CodAulaTipo, CodDia, CodHora: Integer;
+  CodAulaTipo, CodDia, CodHora: Integer;
   s, d: string;
 begin
   with SourceDataModule do
@@ -700,22 +700,22 @@ begin
         TbDistributivo.DisableControls;
         s := TbDistributivo.IndexFieldNames;
         TbDistributivo.IndexFieldNames :=
-	    'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+          'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
         TbDistributivo.First;
         QuCruceAula.DisableControls;
         try
           while (TbHorarioDetalleCodHorario.Value = CodHorario)
-	      and not TbHorarioDetalle.Eof do
+                and not TbHorarioDetalle.Eof do
           begin
             CodMateria := TbHorarioDetalleCodMateria.Value;
             CodNivel := TbHorarioDetalleCodNivel.Value;
             CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
             CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
             while ((TbDistributivoCodMateria.Value <> CodMateria)
-              or (TbDistributivoCodNivel.Value <> CodNivel)
-              or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
-              or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
-              and not TbDistributivo.Eof do
+                   or (TbDistributivoCodNivel.Value <> CodNivel)
+                   or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
+                   or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
+                  and not TbDistributivo.Eof do
               TbDistributivo.Next;
             CodAulaTipo := TbDistributivoCodAulaTipo.Value;
             CodHora := TbHorarioDetalleCodHora.Value;
@@ -790,9 +790,9 @@ begin
             CodNivel := TbHorarioDetalleCodNivel.Value;
             CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
             while ((TbDistributivoCodMateria.Value <> CodMateria)
-              or (TbDistributivoCodNivel.Value <> CodNivel)
-              or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion))
-              and not TbDistributivo.Eof do
+                   or (TbDistributivoCodNivel.Value <> CodNivel)
+                   or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion))
+                  and not TbDistributivo.Eof do
               TbDistributivo.Next;
             CodAulaTipo := TbDistributivoCodAulaTipo.Value;
             CodHora := TbHorarioDetalleCodHora.Value;
@@ -830,20 +830,20 @@ begin
   inherited;
   with SourceDataModule, QuCruceAula do
   begin
-     if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
-                                                         FCruceAulaForm,
-							 ConfigStorage,
-							 ActCruceAula,
-							 QuCruceAula,
-							 QuCruceAulaDetalle) then
-     begin
-	// QuCruceAula.Close;
-	// QuCruceAulaDetalle.Close;
-	FillCruceAula;
-	FillCruceAulaDetalle;
-	Last;
-	First;
-     end;
+    if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
+                                                        FCruceAulaForm,
+                                                        ConfigStorage,
+                                                        ActCruceAula,
+                                                        QuCruceAula,
+                                                        QuCruceAulaDetalle) then
+    begin
+      // QuCruceAula.Close;
+      // QuCruceAulaDetalle.Close;
+      FillCruceAula;
+      FillCruceAulaDetalle;
+      Last;
+      First;
+    end;
   end;
 end;
 
@@ -852,8 +852,8 @@ begin
   inherited;
   QuCruceProfesorDetalle.Filter :=
     Format('CodDia=%d and CodHora=%d and CodProfesor=%d',
-    [QuCruceProfesorCodDia.Value, QuCruceProfesorCodHora.Value,
-    QuCruceProfesorCodProfesor.Value]);
+           [QuCruceProfesorCodDia.Value, QuCruceProfesorCodHora.Value,
+            QuCruceProfesorCodProfesor.Value]);
 end;
 
 procedure THorarioForm.QuCruceMateriaAfterScroll(DataSet: TDataSet);
@@ -966,8 +966,8 @@ procedure THorarioForm.FillMateriaCortadaHora;
 var
   d, h, s: string;
   CodHorario, CodMateria, CodNivel, CodEspecializacion, CodParaleloId, CodDia,
-    CodHora, CodNivel1, CodMateria1, CodEspecializacion1, CodParaleloId1,
-    CodHora1, CodDia1, CodHora2: Integer;
+  CodHora, CodNivel1, CodMateria1, CodEspecializacion1, CodParaleloId1,
+  CodHora1, CodDia1, CodHora2: Integer;
 begin
   with SourceDataModule do
   begin
@@ -1028,17 +1028,16 @@ begin
             CodDia := TbHorarioDetalleCodDia.Value;
             CodHora2 := TbHorarioDetalleCodHora.Value;
             if (CodMateria1 = CodMateria)
-              and (CodNivel1 = CodNivel)
-              and (CodEspecializacion1 = CodEspecializacion)
-              and (CodParaleloId1 = CodParaleloId)
-              and (CodDia1 = CodDia)
-              and QuMateriaCortadaHora.Locate('CodDia', CodDia, []) then
+               and (CodNivel1 = CodNivel)
+               and (CodEspecializacion1 = CodEspecializacion)
+               and (CodParaleloId1 = CodParaleloId)
+               and (CodDia1 = CodDia)
+               and QuMateriaCortadaHora.Locate('CodDia', CodDia, []) then
             begin
               while (QuMateriaCortadaHoraCodDia.Value = CodDia) and not QuMateriaCortadaHora.Eof do
               begin
                 CodHora := QuMateriaCortadaHoraCodHora.Value;
-                if (CodHora1 < CodHora)
-                  and (CodHora < CodHora2) then
+                if (CodHora1 < CodHora) and (CodHora < CodHora2) then
                 begin
                   QuMateriaCortadaHoraDetalle.Append;
                   QuMateriaCortadaHoraDetalleCodMateria.Value := CodMateria;
@@ -1099,17 +1098,17 @@ begin
   inherited;
   with SourceDataModule, QuMateriaCortadaHora do
   begin
-     if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
-                                                         FMateriaCortadaHoraForm,
-							 ConfigStorage,
-							 ActMateriaCortadaHora,
-							 QuMateriaCortadaHora,
-							 QuMateriaCortadaHoraDetalle) then
-     begin
-	// QuMateriaCortadaHora.Close;
-	// QuMateriaCortadaHoraDetalle.Close;
-	FillMateriaCortadaHora;
-     end;
+    if TMasterDetailEditorForm.ToggleMasterDetailEditor(Self,
+                                                        FMateriaCortadaHoraForm,
+                                                        ConfigStorage,
+                                                        ActMateriaCortadaHora,
+                                                        QuMateriaCortadaHora,
+                                                        QuMateriaCortadaHoraDetalle) then
+    begin
+      // QuMateriaCortadaHora.Close;
+      // QuMateriaCortadaHoraDetalle.Close;
+      FillMateriaCortadaHora;
+    end;
   end;
 end;
 
@@ -1130,14 +1129,14 @@ begin
 end;
 
 procedure THorarioForm.DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
-  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+                                            DataCol: Integer; Column: TColumn; State: TGridDrawState);
 var
   DBGrid: TCustomDBGrid;
 begin
   DBGrid := Sender as TCustomDBGrid;
   if (SourceDataModule.HorarioSeleccionado <> -1)
-    and (SourceDataModule.HorarioSeleccionado
-      = SourceDataModule.TbHorarioCodHorario.Value) then
+     and (SourceDataModule.HorarioSeleccionado
+          = SourceDataModule.TbHorarioCodHorario.Value) then
     Column.Color := clAqua
   else
     Column.Color := clWhite;

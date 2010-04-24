@@ -8,19 +8,37 @@ uses
 
 type
   TDataSetArray = array of TDataSet;
+  
+  TMasterRel = record
+    DetailDataSet: TkbmMemTable;
+    MasterFields: string;
+    DetailFields: string;
+    Cascade: Boolean;
+  end;
+  
+  TDetailRel = record
+    MasterDataSet: TkbmMemTable;
+    MasterFields: string;
+    DetailFields: string;
+  end;
+
   TBaseDataModule = class(TDataModule)
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
+    procedure DataSetBeforePost(DataSet: TDataSet);
+    procedure DataSetBeforeDelete(DataSet: TDataSet);
   private
     { Private declarations }
     FDataSetNameList: TStrings;
     FDataSetDescList: TStrings;
     FCheckRelations: Boolean;
+    FTables: TDataSetArray;
+    FBeforePostLocks: array of Boolean;
+    FMasterRels: array of array of TMasterRel;
+    FDetailRels: array of array of TDetailRel;
     function GetDescription(ADataSet: TDataSet): string;
     function GetNameDataSet(ADataSet: TDataSet): string;
   protected
-    FTables: TDataSetArray;
-    FBeforePostLocks: array of Boolean;
     property DataSetNameList: TStrings read FDataSetNameList;
     property DataSetDescList: TStrings read FDataSetDescList;
     procedure SaveToStrings(AStrings: TStrings); virtual;
@@ -221,6 +239,45 @@ begin
   Result := DataSetNameList.Values[ADataSet.Name];
   if Result = '' then
     Result := ADataSet.Name;
+end;
+
+procedure TBaseDataModule.DataSetBeforePost(DataSet: TDataSet);
+var
+   i, j: Integer;
+begin
+  i := DataSet.Tag;
+  if CheckRelations and not FBeforePostLocks[i] then
+  begin
+    FBeforePostLocks[i] := True;
+    try
+      for j := Low(FDetailRels[i]) to High(FDetailRels[i]) do
+        with FDetailRels[i, j] do
+          CheckDetailRelation(MasterDataSet, DataSet, MasterFields, DetailFields);
+      if DataSet.State = dsEdit then
+      begin
+	for j := Low(FMasterRels[i]) to High(FMasterRels[i]) do
+          with FMasterRels[i, j] do
+            CheckMasterRelationUpdate(DataSet, DetailDataSet, MasterFields,
+                                      DetailFields, Cascade);
+      end;
+    finally
+      FBeforePostLocks[i] := False
+    end;
+  end;
+end;
+
+procedure TBaseDataModule.DataSetBeforeDelete(DataSet: TDataSet);
+var
+   i, j: Integer;
+begin
+  i := DataSet.Tag;
+  if CheckRelations then
+  begin
+    for j := Low(FMasterRels[i]) to High(FMasterRels[i]) do
+      with FMasterRels[i, j] do
+        CheckMasterRelationUpdate(DataSet, DetailDataSet, MasterFields,
+                                  DetailFields, Cascade);
+  end;
 end;
 
 end.

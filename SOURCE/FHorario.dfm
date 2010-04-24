@@ -1206,7 +1206,6 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuHorarioDetalleMateriaProhibicion: TkbmMemTable [12]
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexFieldNames = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
     IndexDefs = <

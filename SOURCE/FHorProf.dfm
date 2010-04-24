@@ -471,7 +471,6 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       000000000000}
   end
   object QuHorarioProfesor: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <
       item
         Name = 'CodProfesor'

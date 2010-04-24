@@ -73,7 +73,6 @@ object SelPeriodoForm: TSelPeriodoForm
     TabOrder = 3
   end
   object TbDiaHora: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]

@@ -283,89 +283,16 @@ begin
           //VTableName := VTableDef.Name;
           StringPAS.Add(Format('    Tb%s: TkbmMemTable;', [VTableName]));
           StringDFM.Add(Format('  object Tb%s: TkbmMemTable', [VTableName]));
-          //StringDFM.Add('    active = True');
+          StringDFM.Add(Format('    Tag = %d', [i]));
 	  StringDFM.Add('    FieldDefs = <>');
           LoadIndexDefs;
           if (DetailRels[i].Count > 0) or (MasterRels[i].Count > 0) then
           begin
-            StringDFM.Add(Format('    BeforePost = Tb%sBeforePost', [VTableName]));
-            ProcDefs.Add(Format('    procedure Tb%sBeforePost(DataSet: TDataSet);', [VTableName]));
-            ProcImpl.Add(Format('procedure T%s.Tb%sBeforePost(DataSet: TDataSet);', [DataModuleName, VTableName]));
-            ProcImpl.Add('begin');
-            ProcImpl.Add(Format('  if CheckRelations and not FBeforePostLocks[%d] then', [i]));
-            ProcImpl.Add('  begin');
-            ProcImpl.Add(Format('    FBeforePostLocks[%d] := True;', [i]));
-            ProcImpl.Add('    try');
-            with DetailRels[i] do
-              for j := 0 to Count - 1 do
-              begin
-                with Relations.Item[Integer(Items[j])] do
-                begin
-                  s := Fields.Item[0].Name;
-                  d := Fields.Item[0].ForeignName;
-                  for k := 1 to Fields.Count - 1 do
-                  begin
-                    s := s + ';' + Fields.Item[k].Name;
-                    d := d + ';' + Fields.Item[k].ForeignName;
-                  end;
-                  ProcImpl.Add(Format('      CheckDetailRelation(Tb%s, DataSet, ''%s'', ''%s'');', [Table, s, d]));
-                end;
-              end;
-            ProcImpl.Add('      if DataSet.State = dsEdit then');
-            ProcImpl.Add('      begin');
-            with MasterRels[i] do
-              for j := 0 to Count - 1 do
-              begin
-                with Relations.Item[Integer(Items[j])] do
-                begin
-                  s := Fields.Item[0].Name;
-                  d := Fields.Item[0].ForeignName;
-                  for k := 1 to Fields.Count - 1 do
-                  begin
-                    s := s + ';' + Fields.Item[k].Name;
-                    d := d + ';' + Fields.Item[k].ForeignName;
-                  end;
-                  ProcImpl.Add(Format('        CheckMasterRelationUpdate(DataSet, Tb%s, ''%s'', ''%s'', %s);',
-                    [ForeignTable, d, s, sBoolean[(Attributes and dbRelationUpdateCascade) <> 0]]));
-                end;
-              end;
-            ProcImpl.Add('      end;');
-            ProcImpl.Add('    finally');
-            ProcImpl.Add(Format('      FBeforePostLocks[%d] := False', [i]));
-            ProcImpl.Add('    end;');
-            ProcImpl.Add('  end;');
-            ProcImpl.Add('end;');
-            ProcImpl.Add('');
+            StringDFM.Add('    BeforePost = DataSetBeforePost');
           end;
           with MasterRels[i] do
             if Count > 0 then
-            begin
-              StringDFM.Add(Format('    BeforeDelete = Tb%sBeforeDelete', [VTableName]));
-              ProcDefs.Add(Format('    procedure Tb%sBeforeDelete(DataSet: TDataSet);', [VTableName]));
-              ProcImpl.Add(Format('procedure T%s.Tb%sBeforeDelete(DataSet: TDataSet);',
-                [DataModuleName, VTableName]));
-              ProcImpl.Add('begin');
-              ProcImpl.Add('  if CheckRelations then');
-              ProcImpl.Add('  begin');
-              for j := 0 to Count - 1 do
-              begin
-                with Relations.Item[Integer(Items[j])] do
-                begin
-                  s := Fields.Item[0].Name;
-                  d := Fields.Item[0].ForeignName;
-                  for k := 1 to Fields.Count - 1 do
-                  begin
-                    s := s + ';' + Fields.Item[k].Name;
-                    d := d + ';' + Fields.Item[k].ForeignName;
-                  end;
-                  ProcImpl.Add(Format('    CheckMasterRelationDelete(DataSet, Tb%s, ''%s'', ''%s'', %s);',
-                    [ForeignTable, d, s, sBoolean[(Attributes and dbRelationDeleteCascade) <> 0]]));
-                end;
-              end;
-              ProcImpl.Add('  end;');
-              ProcImpl.Add('end;');
-              ProcImpl.Add('');
-            end;
+	      StringDFM.Add('    BeforeDelete = DataSetBeforeDelete');
           StringDFM.Add(Format('    Left = %d', [48 + 96 * (i mod 5)]));
           StringDFM.Add(Format('    Top = %d', [48 + 96 * (i div 5) + 12 * ((i mod 5) mod 2)]));
           LoadFields;
@@ -382,14 +309,6 @@ begin
         //LoadIndexes(VTableDef);
         //LoadRelations
         end;
-      finally
-        for i := VStringList.Count - 1 downto 0 do
-        begin
-          DetailRels[i].Free;
-          MasterRels[i].Free;
-        end;
-      end;
-    end;
     StringDFM.Add('end');
     with StringPAS do
     begin
@@ -414,12 +333,65 @@ begin
       Add('begin');
       Add('  inherited;');
       Add(Format('  SetLength(FTables, %d);', [VStringList.Count]));
+      Add(Format('  SetLength(FMasterRels, %d);', [VStringList.Count]));
+      Add(Format('  SetLength(FDetailRels, %d);', [VStringList.Count]));
       Add(Format('  SetLength(FBeforePostLocks, %d);', [VStringList.Count]));
       for i := 0 to VStringList.Count - 1 do
       begin
         d := VStringList[i];
         Add(Format('  Tables[%d] := Tb%s;', [i, d]));
       end;
+      for i := 0 to VStringList.Count - 1 do
+      begin
+	with MasterRels[i] do
+	begin
+	  StringPAS.Add(Format('  SetLength(FMasterRels[%d], %d);', [i, Count]));
+	  for j := 0 to Count - 1 do
+	    begin
+	      with Relations.Item[Integer(Items[j])] do
+	      begin
+		s := Fields.Item[0].Name;
+		d := Fields.Item[0].ForeignName;
+		for k := 1 to Fields.Count - 1 do
+		begin
+		  s := s + ';' + Fields.Item[k].Name;
+		  d := d + ';' + Fields.Item[k].ForeignName;
+		end;
+		StringPAS.Add(Format('  with FMasterRels[%d, %d] do', [i, j]));
+		StringPAS.Add('  begin');
+		StringPAS.Add(Format('    DetailDataSet := Tb%s;', [ForeignTable]));
+		StringPAS.Add(Format('    MasterFields := ''%s'';', [d]));
+		StringPAS.Add(Format('    DetailFields := ''%s'';', [s]));
+		StringPAS.Add(Format('    Cascade := %s;', [sBoolean[(Attributes and dbRelationUpdateCascade) <> 0]]));
+		StringPAS.Add('  end;');
+              end;
+	    end;
+	end;
+	with DetailRels[i] do
+	begin
+	  StringPAS.Add(Format('  SetLength(FDetailRels[%d], %d);', [i, Count]));
+	  for j := 0 to Count - 1 do
+	  begin
+	    with Relations.Item[Integer(Items[j])] do
+	    begin
+	      s := Fields.Item[0].Name;
+	      d := Fields.Item[0].ForeignName;
+	      for k := 1 to Fields.Count - 1 do
+	      begin
+		s := s + ';' + Fields.Item[k].Name;
+		d := d + ';' + Fields.Item[k].ForeignName;
+	      end;
+	      StringPAS.Add(Format('  with FDetailRels[%d, %d] do', [i, j]));
+	      StringPAS.Add('  begin');
+	      StringPAS.Add(Format('    MasterDataSet := Tb%s;', [Table]));
+	      StringPAS.Add(Format('    MasterFields := ''%s'';', [s]));
+	      StringPAS.Add(Format('    DetailFields := ''%s'';', [d]));
+	      StringPAS.Add('  end;');
+	    end;
+	  end;
+	end;
+      end;
+      
       Add('  with DataSetNameList do');
       Add('  begin');
       for i := 0 to VStringList.Count - 1 do
@@ -445,6 +417,14 @@ begin
       Add('');
       Add('end.');
       Add('');
+    end;
+      finally
+        for i := VStringList.Count - 1 downto 0 do
+        begin
+          DetailRels[i].Free;
+          MasterRels[i].Free;
+        end;
+      end;
     end;
   finally
     SecureFree(VStringList);

@@ -6,7 +6,6 @@ object MasterDataModule: TMasterDataModule
   Height = 404
   Width = 748
   object TbTmpProfesorCarga: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
@@ -43,7 +42,6 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object QuDistributivoProfesor: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     Left = 250
@@ -127,7 +125,6 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object QuProfesorProhibicionCant: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     Left = 58
@@ -140,7 +137,6 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object TbTmpAulaTipoCarga: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]

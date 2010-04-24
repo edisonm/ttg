@@ -486,7 +486,6 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   end
   object QuHorarioParalelo: TkbmMemTable
     Active = True
-    AutoIncMinValue = -1
     FieldDefs = <
       item
         Name = 'CodNivel'

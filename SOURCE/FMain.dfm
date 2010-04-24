@@ -1980,7 +1980,6 @@ object MainForm: TMainForm
     end
   end
   object TbParalelo: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
@@ -1990,7 +1989,6 @@ object MainForm: TMainForm
     Top = 119
   end
   object TbProfesor: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
@@ -2000,7 +1998,6 @@ object MainForm: TMainForm
     Top = 147
   end
   object QuParaleloHora: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     VersioningMode = mtvmAllSinceCheckPoint
@@ -2035,7 +2032,6 @@ object MainForm: TMainForm
     end
   end
   object QuProfesorHora: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     VersioningMode = mtvmAllSinceCheckPoint
@@ -2064,7 +2060,6 @@ object MainForm: TMainForm
     end
   end
   object QuProfesorHorarioDetalle: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     VersioningMode = mtvmAllSinceCheckPoint
@@ -2091,7 +2086,6 @@ object MainForm: TMainForm
     end
   end
   object QuParaleloHorarioDetalle: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     VersioningMode = mtvmAllSinceCheckPoint
@@ -2139,7 +2133,6 @@ object MainForm: TMainForm
     end
   end
   object TbMateria: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
@@ -2149,7 +2142,6 @@ object MainForm: TMainForm
     Top = 184
   end
   object QuMateriaMateriaProhibicion: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -2176,7 +2168,6 @@ object MainForm: TMainForm
     end
   end
   object QuMateriaMateriaProhibicionHora: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     VersioningMode = mtvmAllSinceCheckPoint
@@ -2203,7 +2194,6 @@ object MainForm: TMainForm
     end
   end
   object QuProfesorProfesorProhibicion: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     VersioningMode = mtvmAllSinceCheckPoint
@@ -2241,7 +2231,6 @@ object MainForm: TMainForm
     end
   end
   object QuProfesorProfesorProhibicionHora: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     VersioningMode = mtvmAllSinceCheckPoint
@@ -2265,7 +2254,6 @@ object MainForm: TMainForm
     end
   end
   object TbProfesor1: TkbmMemTable
-    AutoIncMinValue = -1
     FieldDefs = <>
     IndexDefs = <>
     PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]

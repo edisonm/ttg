@@ -641,17 +641,17 @@ begin
     ActElaborarHorario.Enabled := False;
     FEjecutando := True;
     try
-       VModeloHorario :=
-         TModeloHorario.CrearDesdeDataModule(
-           CruceProfesor,
-           ProfesorFraccionamiento,
-           CruceAulaTipo,
-           HoraHueca,
-           SesionCortada,
-           MateriaNoDispersa);
+      VModeloHorario :=
+        TModeloHorario.CrearDesdeDataModule(
+          CruceProfesor,
+          ProfesorFraccionamiento,
+          CruceAulaTipo,
+          HoraHueca,
+          SesionCortada,
+          MateriaNoDispersa);
       try
         VEvolElitista := TEvolElitista.CrearDesdeModelo(VModeloHorario,
-          TamPoblacion);
+                                                        TamPoblacion);
         VEvolElitista.NumMaxGeneracion := NumMaxGeneracion;
         VEvolElitista.ProbCruzamiento := ProbCruzamiento;
         VEvolElitista.ProbMutacion1 := ProbMutacion1;
@@ -661,11 +661,11 @@ begin
         VEvolElitista.SyncDirectory := Compartir;
         VEvolElitista.RangoPolinizacion := RangoPolinizacion;
         if (Compartir <> '')
-          and FileExists(VEvolElitista.SyncFileName) then
+           and FileExists(VEvolElitista.SyncFileName) then
         begin
           mr := MessageDlg('El archivo de sincronización ya existe.  ' +
-            '¿Desea eliminar los archivos relacionados?', mtWarning, [mbYes,
-            mbNo, mbCancel], 0);
+                             '¿Desea eliminar los archivos relacionados?',
+                           mtWarning, [mbYes, mbNo, mbCancel], 0);
           if mr = mrYes then
           begin
             DeleteFile(VEvolElitista.FileName);
@@ -686,7 +686,7 @@ begin
           ProcessCodList(s);
           if sProb <> '' then
             MessageDlg(Format('Los siguientes horarios ya existían: %s',
-              [sProb]), mtError, [mbOK], 0);
+                              [sProb]), mtError, [mbOK], 0);
         finally
           VEvolElitista.Free;
         end;
@@ -720,16 +720,28 @@ begin
       Application.ProcessMessages;
       StatusBar.Panels[2].Text := Format('%d de %d', [NumGeneracion,
         ProgressForm.PBNumMaxGeneracion.Max]);
-      ProgressForm.SetValues(Now - FInit, NumGeneracion, MejorCruceProfesor,
-        MejorProfesorFraccionamiento,
-        MejorCruceAulaTipo, MejorHoraHuecaDesubicada, MejorSesionCortada,
-        MejorMateriaProhibicion, MejorProfesorProhibicion,
-        MejorMateriaNoDispersa, NumImportacion, NumExportacion, NumColision,
-        MejorCruceProfesorValor,
-        MejorProfesorFraccionamientoValor, MejorCruceAulaTipoValor,
-        MejorHoraHuecaDesubicadaValor, MejorSesionCortadaValor,
-        MejorMateriaProhibicionValor, MejorDisponiblidadValor,
-        MejorMateriaNoDispersaValor, MejorValor);
+      ProgressForm.SetValues(Now - FInit,
+                             NumGeneracion,
+                             MejorCruceProfesor,
+                             MejorProfesorFraccionamiento,
+                             MejorCruceAulaTipo,
+                             MejorHoraHuecaDesubicada,
+                             MejorSesionCortada,
+                             MejorMateriaProhibicion,
+                             MejorProfesorProhibicion,
+                             MejorMateriaNoDispersa,
+                             NumImportacion,
+                             NumExportacion,
+                             NumColision,
+                             MejorCruceProfesorValor,
+                             MejorProfesorFraccionamientoValor,
+                             MejorCruceAulaTipoValor,
+                             MejorHoraHuecaDesubicadaValor,
+                             MejorSesionCortadaValor,
+                             MejorMateriaProhibicionValor,
+                             MejorDisponiblidadValor,
+                             MejorMateriaNoDispersaValor,
+                             MejorValor);
       if FAjustar then
       begin
         InvalidarValores;
@@ -757,7 +769,7 @@ begin
   begin
     t := Now - FInit;
     FLogStrings.Add(Format('%g; %d; %g; %g', [t, NumGeneracion, MejorValor,
-      PromedioValor]));
+                                              PromedioValor]));
   end;
 end;
 
@@ -795,8 +807,9 @@ begin
   end;
   Self.Progress := i;
   StatusBar.Panels[0].Text := Format('Pasada %d - %d de %d %f - van: %d-%s - restan: %d-%s',
-    [FPasada, i, max, value, Trunc(t), FormatDateTime('hh:mm:ss', t), Trunc(x),
-    FormatDateTime('hh:mm:ss', x)]);
+                                     [FPasada, i, max, value, Trunc(t),
+                                      FormatDateTime('hh:mm:ss', t), Trunc(x),
+                                      FormatDateTime('hh:mm:ss', x)]);
   Application.ProcessMessages;
   Stop := FCloseClick;
 end;
@@ -859,8 +872,8 @@ begin
   if FRelProgress <> 0 then
   begin
     VRect := Rect;
-    VRect.Right := VRect.Left + MulDiv(Rect.Right - Rect.Left, FRelProgress,
-      (FMax - FMin));
+    VRect.Right := VRect.Left
+      + MulDiv(Rect.Right - Rect.Left, FRelProgress, (FMax - FMin));
     StatusBar.Canvas.Brush.Color := clNavy;
     StatusBar.Canvas.FillRect(VRect);
   end
@@ -939,14 +952,14 @@ begin
     FStep := 1;
     FAjustar := False;
     FLogStrings := TStringList.Create;
-{$IFDEF FREEWARE}
+    {$IFDEF FREEWARE}
     ActElaborarHorario.Enabled := False;
     ActMejorarHorario.Enabled := False;
     Caption := Caption + ' ***Freeware***';
-{$ENDIF}
-{$IFNDEF FREEWARE}
+    {$ENDIF}
+    {$IFNDEF FREEWARE}
     FEjecutando := False;
-{$ENDIF}
+    {$ENDIF}
 {    Protect1.DaysExpire := 60;}
 {    with FSProteccion do
     begin
@@ -967,7 +980,7 @@ begin
 end;
 
 procedure TMainForm.MRUManagerClick(Sender: TObject; const RecentName,
-  Caption: string; UserData: Integer);
+                                    Caption: string; UserData: Integer);
 begin
   if ConfirmOperation then
   begin
@@ -981,16 +994,16 @@ procedure TMainForm.ActConfigurarExecute(Sender: TObject);
 begin
    if ShowConfiguracionForm(ActConfigurar.HelpContext) = mrOK then
    begin
-      MainForm.Caption := Application.Title + ' - ' + SourceDataModule.NomColegio;
-      {$IFNDEF FREEWARE}
-      if FEjecutando then
-	 Self.AjustarPesos;
-      {$ENDIF}
+     MainForm.Caption := Application.Title + ' - ' + SourceDataModule.NomColegio;
+     {$IFNDEF FREEWARE}
+     if FEjecutando then
+       Self.AjustarPesos;
+     {$ENDIF}
    end
    else
    begin
-      SourceDataModule.TbMateriaProhibicionTipo.Refresh;
-      SourceDataModule.TbProfesorProhibicionTipo.Refresh;
+     SourceDataModule.TbMateriaProhibicionTipo.Refresh;
+     SourceDataModule.TbProfesorProhibicionTipo.Refresh;
    end;
 end;
 
@@ -998,16 +1011,17 @@ procedure TMainForm.ActChequearFactibilidadExecute(Sender: TObject);
 begin
   LogisticForm.HelpContext := ActChequearFactibilidad.HelpContext;
   if MasterDataModule.PerformAllChecks(LogisticForm.MemLogistic.Lines,
-    LogisticForm.MemResumen.Lines, SourceDataModule.MaxCargaProfesor)
-    then
+                                       LogisticForm.MemResumen.Lines,
+                                       SourceDataModule.MaxCargaProfesor)
+  then
   begin
     LogisticForm.Show;
   end
   else
   begin
     if MessageDlg('No se encontraron errores, está listo para generar horario.'#13#10 +
-      '¿Desea mostrar el resumen del chequeo del horario?',
-      mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+                    '¿Desea mostrar el resumen del chequeo del horario?',
+                  mtConfirmation, [mbYes, mbNo], 0) = mrYes then
       LogisticForm.Show;
   end;
 end;
@@ -1144,9 +1158,9 @@ begin
   TbParalelo.Close;
   TbParalelo.Filtered := false;
   CrossBatchMove(SourceDataModule.TbDia, QuParaleloHora, QuParaleloHorarioDetalle,
-    TbParalelo, 'CodDia', 'NomDia', 'CodDia',
-    'CodNivel;CodEspecializacion;CodParaleloId;CodHora', 'NomHora',
-    'CodNivel;CodEspecializacion;CodParaleloId;CodHora', 'NomMateria');
+                 TbParalelo, 'CodDia', 'NomDia', 'CodDia',
+                 'CodNivel;CodEspecializacion;CodParaleloId;CodHora', 'NomHora',
+                 'CodNivel;CodEspecializacion;CodParaleloId;CodHora', 'NomMateria');
   TbParalelo.Filtered := true;
 end;
 
@@ -1155,7 +1169,7 @@ begin
   ObtParaleloHorario;
   PreviewMasterDetailReport(SourceDataModule.TbParalelo, TbParalelo, '', '', '',
 			    SourceDataModule.NomColegio, 'Horario de paralelos',
-    poLandscape, PrepareReportParaleloHorario);
+                            poLandscape, PrepareReportParaleloHorario);
 end;
 
 procedure TMainForm.PrepareReportParaleloHorario(Sender: TObject);
@@ -1186,16 +1200,15 @@ procedure TMainForm.TbParaleloFilterRecord(DataSet: TDataSet;
   var Accept: Boolean);
 begin
   with SourceDataModule do
-    Accept := (DataSet.FindField('CodNivel').AsInteger =
-      TbParaleloCodNivel.Value) and (DataSet.FindField('CodParaleloId').AsInteger
-      = TbParaleloCodParaleloId.Value);
+    Accept := (DataSet.FindField('CodNivel').AsInteger = TbParaleloCodNivel.Value)
+    and (DataSet.FindField('CodParaleloId').AsInteger = TbParaleloCodParaleloId.Value);
 end;
 
 procedure TMainForm.TbProfesorFilterRecord(DataSet: TDataSet; var Accept: Boolean);
 begin
   with SourceDataModule do
     Accept := DataSet.FindField('CodProfesor').AsInteger =
-      TbProfesorCodProfesor.AsInteger;
+    TbProfesorCodProfesor.AsInteger;
 end;
 
 procedure TMainForm.ActPresentarMateriaProhibicionExecute(Sender: TObject);
