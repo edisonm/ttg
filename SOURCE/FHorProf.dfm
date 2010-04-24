@@ -568,7 +568,6 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
-      Lookup = True
     end
     object QuHorarioProfesorAbrEspecializacion: TStringField
       DisplayLabel = 'Espec.'
@@ -580,7 +579,6 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
       Size = 10
-      Lookup = True
     end
     object QuHorarioProfesorNomParaleloId: TStringField
       DisplayLabel = 'Par.'
@@ -591,7 +589,6 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
-      Lookup = True
     end
     object QuHorarioProfesorNomMateria: TStringField
       DisplayLabel = 'Materia'
@@ -603,7 +600,6 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
       Size = 15
-      Lookup = True
     end
     object QuHorarioProfesorNombre: TStringField
       FieldKind = fkCalculated

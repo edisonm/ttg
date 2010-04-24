@@ -2036,7 +2036,6 @@ object MainForm: TMainForm
       LookupResultField = 'NomHora'
       KeyFields = 'CodHora'
       Size = 10
-      Lookup = True
     end
   end
   object QuProfesorHorarioDetalle: TkbmMemTable
@@ -2107,7 +2106,6 @@ object MainForm: TMainForm
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
-      Lookup = True
     end
   end
   object TbMateria: TkbmMemTable
@@ -2139,7 +2137,6 @@ object MainForm: TMainForm
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
-      Lookup = True
     end
   end
   object QuMateriaMateriaProhibicionHora: TkbmMemTable
@@ -2164,7 +2161,6 @@ object MainForm: TMainForm
       LookupResultField = 'NomHora'
       KeyFields = 'CodHora'
       Size = 10
-      Lookup = True
     end
   end
   object QuProfesorProfesorProhibicion: TkbmMemTable
@@ -2188,7 +2184,6 @@ object MainForm: TMainForm
       KeyFields = 'ApeProfesor'
       Size = 15
       AttributeSet = 'ApeProfesor'
-      Lookup = True
     end
     object QuProfesorProfesorProhibicionNomProfesor: TStringField
       DisplayLabel = 'Nombre'
@@ -2200,7 +2195,6 @@ object MainForm: TMainForm
       KeyFields = 'NomProfesor'
       Size = 15
       AttributeSet = 'Nombre'
-      Lookup = True
     end
   end
   object QuProfesorProfesorProhibicionHora: TkbmMemTable

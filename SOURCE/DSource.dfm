@@ -87,7 +87,6 @@ inherited SourceDataModule: TSourceDataModule
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 10
-      Lookup = True
     end
     object TbCursoAbrEspecializacion: TStringField [1]
       DisplayLabel = 'Espec.'
@@ -99,7 +98,6 @@ inherited SourceDataModule: TSourceDataModule
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
       Size = 10
-      Lookup = True
     end
     inherited TbCursoCodNivel: TIntegerField
       Visible = False
@@ -196,7 +194,6 @@ inherited SourceDataModule: TSourceDataModule
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
-      Lookup = True
     end
     object TbParaleloAbrEspecializacion: TStringField
       DisplayLabel = 'Especializacion'
@@ -207,7 +204,6 @@ inherited SourceDataModule: TSourceDataModule
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
       Size = 10
-      Lookup = True
     end
     object TbParaleloNomParaleloId: TStringField
       DisplayLabel = 'Paralelo'
@@ -218,7 +214,6 @@ inherited SourceDataModule: TSourceDataModule
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
-      Lookup = True
     end
     object TbParaleloNomParalelo: TStringField
       FieldKind = fkCalculated
@@ -288,7 +283,6 @@ inherited SourceDataModule: TSourceDataModule
       LookupResultField = 'NomMateProhibicionTipo'
       KeyFields = 'CodMateProhibicionTipo'
       Size = 10
-      Lookup = True
     end
   end
   inherited TbDistributivo: TkbmMemTable
@@ -310,7 +304,6 @@ inherited SourceDataModule: TSourceDataModule
       KeyFields = 'CodProfesor'
       Visible = False
       Size = 31
-      Lookup = True
     end
     object TbDistributivoAbrNivel: TStringField [7]
       DisplayLabel = 'Nivel'
@@ -321,7 +314,6 @@ inherited SourceDataModule: TSourceDataModule
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
-      Lookup = True
     end
     object TbDistributivoAbrEspecializacion: TStringField [8]
       DisplayLabel = 'Especializacion'
@@ -332,7 +324,6 @@ inherited SourceDataModule: TSourceDataModule
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
       Size = 10
-      Lookup = True
     end
     object TbDistributivoNomParaleloId: TStringField [9]
       DisplayLabel = 'Paralelo'
@@ -343,7 +334,6 @@ inherited SourceDataModule: TSourceDataModule
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
-      Lookup = True
     end
     object TbDistributivoNomMateria: TStringField [10]
       DisplayLabel = 'Materia'
@@ -355,7 +345,6 @@ inherited SourceDataModule: TSourceDataModule
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
       Size = 15
-      Lookup = True
     end
     object TbDistributivoAbrAulaTipo: TStringField [11]
       DisplayLabel = 'Tipo aula'
@@ -367,7 +356,6 @@ inherited SourceDataModule: TSourceDataModule
       LookupResultField = 'AbrAulaTipo'
       KeyFields = 'CodAulaTipo'
       Size = 10
-      Lookup = True
     end
     object TbDistributivoDuracion: TIntegerField
       DisplayLabel = 'Duraci'#243'n'
@@ -408,7 +396,6 @@ inherited SourceDataModule: TSourceDataModule
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
       Size = 15
-      Lookup = True
     end
   end
   inherited TbProfesorProhibicionTipo: TkbmMemTable
@@ -439,7 +426,6 @@ inherited SourceDataModule: TSourceDataModule
       LookupResultField = 'NomProfProhibicionTipo'
       KeyFields = 'CodProfProhibicionTipo'
       Size = 10
-      Lookup = True
     end
   end
 end

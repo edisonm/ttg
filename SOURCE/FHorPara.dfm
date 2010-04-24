@@ -583,7 +583,6 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
       Size = 15
-      Lookup = True
     end
     object QuHorarioParaleloApeNomProfesor: TStringField
       DisplayLabel = 'Profesor'
@@ -596,7 +595,6 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       KeyFields = 'CodProfesor'
       Visible = False
       Size = 31
-      Lookup = True
     end
     object QuHorarioParaleloNombre: TStringField
       FieldKind = fkCalculated

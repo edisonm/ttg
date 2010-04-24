@@ -99,7 +99,6 @@ object SelPeriodoForm: TSelPeriodoForm
       KeyFields = 'CodDia'
       Required = True
       Size = 10
-      Lookup = True
     end
     object TbDiaHoraNomHora: TStringField
       DisplayLabel = 'Hora'
@@ -112,7 +111,6 @@ object SelPeriodoForm: TSelPeriodoForm
       KeyFields = 'CodHora'
       Required = True
       Size = 10
-      Lookup = True
     end
   end
   object DSDiaHora: TDataSource
