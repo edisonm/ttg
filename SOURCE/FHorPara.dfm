@@ -569,7 +569,6 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Visible = False
     end
     object QuHorarioParaleloCodProfesor: TAutoIncField
-      AutoGenerateValue = arAutoInc
       DisplayLabel = 'C'#243'digo'
       FieldName = 'CodProfesor'
       Visible = False
