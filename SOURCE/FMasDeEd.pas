@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, UConfig,
-  DBIndex, Buttons, DBCtrls, ExtCtrls, ImgList, ComCtrls, ToolWin,
+  FSingEdt, Db, Grids, DBGrids, StdCtrls, UConfig,
+  Buttons, DBCtrls, ExtCtrls, ImgList, ComCtrls, ToolWin,
   ActnList;
 
 type
@@ -14,7 +14,6 @@ type
     DBGridDetail: TDBGrid;
     Splitter1: TSplitter;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure BtnShowClick(Sender: TObject);
   private
     { Private declarations }
     procedure SetDataSetDetail(ADataSetDetail: TDataSet);
@@ -62,12 +61,6 @@ procedure TMasterDetailEditorForm.FormClose(Sender: TObject;
 begin
   DataSourceDetail.DataSet := nil;
   inherited;
-end;
-
-procedure TMasterDetailEditorForm.BtnShowClick(Sender: TObject);
-begin
-  PreviewMasterDetailReport(DataSource.DataSet, DataSourceDetail.DataSet,
-    '', '', '', SuperTitle, Caption, poPortrait, MainForm.PrepareReport);
 end;
 
 procedure TMasterDetailEditorForm.doLoadConfig;

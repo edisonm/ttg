@@ -28,10 +28,10 @@ object ConfiguracionForm: TConfiguracionForm
     Top = 8
     Width = 401
     Height = 409
-    ActivePage = tbsUnidadEducativa
+    ActivePage = tbsOpciones
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
@@ -354,12 +354,11 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 21
         TabOrder = 9
       end
-      object dedCompartir: TDirectoryEdit
+      object dedCompartir: TEdit
         Left = 216
         Top = 224
         Width = 169
         Height = 21
-        NumGlyphs = 1
         TabOrder = 10
       end
     end
@@ -463,77 +462,53 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Caption = 'Valor:'
       end
-      object creCruceProfesor: TCurrencyEdit
+      object creCruceProfesor: TEdit
         Left = 152
         Top = 8
         Width = 233
         Height = 21
         AutoSize = False
-        DecimalPlaces = 20
-        DisplayFormat = '0'
         TabOrder = 0
-        Value = 200
-        ZeroEmpty = False
       end
-      object creCruceAulaTipo: TCurrencyEdit
+      object creCruceAulaTipo: TEdit
         Left = 152
         Top = 56
         Width = 233
         Height = 21
         AutoSize = False
-        DecimalPlaces = 20
-        DisplayFormat = '0'
         TabOrder = 2
-        Value = 200
-        ZeroEmpty = False
       end
-      object creHoraHueca: TCurrencyEdit
+      object creHoraHueca: TEdit
         Left = 152
         Top = 80
         Width = 233
         Height = 21
         AutoSize = False
-        DecimalPlaces = 20
-        DisplayFormat = '0'
         TabOrder = 3
-        Value = 100
-        ZeroEmpty = False
       end
-      object creSesionCortada: TCurrencyEdit
+      object creSesionCortada: TEdit
         Left = 152
         Top = 104
         Width = 233
         Height = 21
         AutoSize = False
-        DecimalPlaces = 20
-        DisplayFormat = '0'
         TabOrder = 4
-        Value = 150
-        ZeroEmpty = False
       end
-      object creMateriaNoDispersa: TCurrencyEdit
+      object creMateriaNoDispersa: TEdit
         Left = 152
         Top = 128
         Width = 233
         Height = 21
         AutoSize = False
-        DecimalPlaces = 20
-        DisplayFormat = '0'
         TabOrder = 5
-        Value = 5
-        ZeroEmpty = False
       end
-      object creProfesorFraccionamiento: TCurrencyEdit
+      object creProfesorFraccionamiento: TEdit
         Left = 152
         Top = 32
         Width = 233
         Height = 21
         AutoSize = False
-        DecimalPlaces = 20
-        DisplayFormat = '0'
         TabOrder = 1
-        Value = 50
-        ZeroEmpty = False
       end
       object dbeNomMateProhibicionTipo: TDBEdit
         Left = 304
@@ -687,29 +662,21 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 0
         Value = 10
       end
-      object creProbCruzamiento: TCurrencyEdit
+      object creProbCruzamiento: TEdit
         Left = 152
         Top = 56
         Width = 233
         Height = 21
         AutoSize = False
-        DecimalPlaces = 20
-        DisplayFormat = '0.00'
-        MaxValue = 1
         TabOrder = 2
-        Value = 0.3
       end
-      object creProbMutacion1: TCurrencyEdit
+      object creProbMutacion1: TEdit
         Left = 152
         Top = 80
         Width = 233
         Height = 21
         AutoSize = False
-        DecimalPlaces = 20
-        DisplayFormat = '0.00'
-        MaxValue = 1
         TabOrder = 3
-        Value = 0.2
       end
       object speNumMaxGeneracion: TSpinEdit
         Left = 152
@@ -731,29 +698,21 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 4
         Value = 3
       end
-      object creProbMutacion2: TCurrencyEdit
+      object creProbMutacion2: TEdit
         Left = 152
         Top = 128
         Width = 233
         Height = 21
         AutoSize = False
-        DecimalPlaces = 20
-        DisplayFormat = '0.00'
-        MaxValue = 1
         TabOrder = 5
-        Value = 0.2
       end
-      object creProbReparacion: TCurrencyEdit
+      object creProbReparacion: TEdit
         Left = 152
         Top = 152
         Width = 233
         Height = 21
         AutoSize = False
-        DecimalPlaces = 20
-        DisplayFormat = '0.00'
-        MaxValue = 1
         TabOrder = 6
-        Value = 0.2
       end
       object speRangoPolinizacion: TSpinEdit
         Left = 152

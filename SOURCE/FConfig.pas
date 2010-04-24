@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Mask, ToolEdit, CurrEdit, Buttons, ComCtrls, Spin, Grids, DBGrids,
+  StdCtrls, Mask, Buttons, ComCtrls, Spin, Grids, DBGrids,
   Db, DSource, DBCtrls, ExtCtrls;
 
 type
@@ -19,16 +19,16 @@ type
     Label3: TLabel;
     Label5: TLabel;
     Label6: TLabel;
-    creCruceProfesor: TCurrencyEdit;
-    creCruceAulaTipo: TCurrencyEdit;
-    creHoraHueca: TCurrencyEdit;
-    creSesionCortada: TCurrencyEdit;
-    creMateriaNoDispersa: TCurrencyEdit;
+    creCruceProfesor: TEdit;
+    creCruceAulaTipo: TEdit;
+    creHoraHueca: TEdit;
+    creSesionCortada: TEdit;
+    creMateriaNoDispersa: TEdit;
     Label8: TLabel;
-    creProbCruzamiento: TCurrencyEdit;
+    creProbCruzamiento: TEdit;
     Label10: TLabel;
     Label11: TLabel;
-    creProbMutacion1: TCurrencyEdit;
+    creProbMutacion1: TEdit;
     Label13: TLabel;
     speNumMaxGeneracion: TSpinEdit;
     tbsUnidadEducativa: TTabSheet;
@@ -41,8 +41,8 @@ type
     speOrdenMutacion1: TSpinEdit;
     Label7: TLabel;
     Label9: TLabel;
-    creProbMutacion2: TCurrencyEdit;
-    creProbReparacion: TCurrencyEdit;
+    creProbMutacion2: TEdit;
+    creProbReparacion: TEdit;
     Label12: TLabel;
     Label15: TLabel;
     Label18: TLabel;
@@ -73,7 +73,7 @@ type
     lblHorarioSeleccionado: TLabel;
     Label33: TLabel;
     Label16: TLabel;
-    creProfesorFraccionamiento: TCurrencyEdit;
+    creProfesorFraccionamiento: TEdit;
     Label24: TLabel;
     edtMostrarProfesorHorarioTexto: TEdit;
     Label32: TLabel;
@@ -94,7 +94,7 @@ type
     Label41: TLabel;
     dbeValProfProhibicionTipo: TDBEdit;
     Label42: TLabel;
-    dedCompartir: TDirectoryEdit;
+    dedCompartir: TEdit;
     bbtnCancel: TBitBtn;
     speRangoPolinizacion: TSpinEdit;
     Label43: TLabel;
@@ -193,19 +193,19 @@ begin
       speSeed3.Value := Seed3;
       speSeed4.Value := Seed4;
       speNumIteraciones.Value := NumIteraciones;
-      creCruceProfesor.Value := CruceProfesor;
-      creProfesorFraccionamiento.Value := ProfesorFraccionamiento;
-      creCruceAulaTipo.Value := CruceAulaTipo;
-      creHoraHueca.Value := HoraHueca;
-      creSesionCortada.Value := SesionCortada;
-      creMateriaNoDispersa.Value := MateriaNoDispersa;
+      creCruceProfesor.Text := FloatToStr(CruceProfesor);
+      creProfesorFraccionamiento.Text := FloatToStr(ProfesorFraccionamiento);
+      creCruceAulaTipo.Text := FloatToStr(CruceAulaTipo);
+      creHoraHueca.Text := FloatToStr(HoraHueca);
+      creSesionCortada.Text := FloatToStr(SesionCortada);
+      creMateriaNoDispersa.Text := FloatToStr(MateriaNoDispersa);
       speTamPoblacion.Value := TamPoblacion;
       speNumMaxGeneracion.Value := NumMaxGeneracion;
-      creProbCruzamiento.Value := ProbCruzamiento;
-      creProbMutacion1.Value := ProbMutacion1;
+      creProbCruzamiento.Text := FloatToStr(ProbCruzamiento);
+      creProbMutacion1.Text := FloatToStr(ProbMutacion1);
       speOrdenMutacion1.Value := OrdenMutacion1;
-      creProbMutacion2.Value := ProbMutacion2;
-      creProbReparacion.Value := ProbReparacion;
+      creProbMutacion2.Text := FloatToStr(ProbMutacion2);
+      creProbReparacion.Text := FloatToStr(ProbReparacion);
       edtMostrarProfesorHorarioTexto.Text := MostrarProfesorHorarioTexto;
       speMostrarProfesorHorarioLongitud.Value := MostrarProfesorHorarioLongitud;
       edtProfesorHorarioExcluirProfProhibicion.Text := ProfesorHorarioExcluirProfProhibicion;
@@ -234,19 +234,19 @@ begin
       Seed3 := speSeed3.Value;
       Seed4 := speSeed4.Value;
       NumIteraciones := speNumIteraciones.Value;
-      CruceProfesor := creCruceProfesor.Value;
-      ProfesorFraccionamiento := creProfesorFraccionamiento.Value;
-      CruceAulaTipo := creCruceAulaTipo.Value;
-      HoraHueca := creHoraHueca.Value;
-      SesionCortada := creSesionCortada.Value;
-      MateriaNoDispersa := creMateriaNoDispersa.Value;
+      CruceProfesor := StrToFloat(creCruceProfesor.Text);
+      ProfesorFraccionamiento := StrToFloat(creProfesorFraccionamiento.Text);
+      CruceAulaTipo := StrToFloat(creCruceAulaTipo.Text);
+      HoraHueca := StrToFloat(creHoraHueca.Text);
+      SesionCortada := StrToFloat(creSesionCortada.Text);
+      MateriaNoDispersa := StrToFloat(creMateriaNoDispersa.Text);
       TamPoblacion := speTamPoblacion.Value;
       NumMaxGeneracion := speNumMaxGeneracion.Value;
-      ProbCruzamiento := creProbCruzamiento.Value;
-      ProbMutacion1 := creProbMutacion1.Value;
+      ProbCruzamiento := StrToFloat(creProbCruzamiento.Text);
+      ProbMutacion1 := StrToFloat(creProbMutacion1.Text);
       OrdenMutacion1 := speOrdenMutacion1.Value;
-      ProbMutacion2 := creProbMutacion2.Value;
-      ProbReparacion := creProbReparacion.Value;
+      ProbMutacion2 := StrToFloat(creProbMutacion2.Text);
+      ProbReparacion := StrToFloat(creProbReparacion.Text);
       MostrarProfesorHorarioTexto := edtMostrarProfesorHorarioTexto.Text;
       MostrarProfesorHorarioLongitud := speMostrarProfesorHorarioLongitud.Value;
       ProfesorHorarioExcluirProfProhibicion

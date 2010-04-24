@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Grids, DBGrids, Db, DbUtils, kbmMemTable, Variants;
+  Grids, DBGrids, Db, kbmMemTable, Variants;
 
 type ERelationUtils = class(Exception);
 

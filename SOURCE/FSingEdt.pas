@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
-  StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls, Placemnt, DBIndex,
+  StdCtrls, Mask, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls,
   ComCtrls, FEditor, ImgList, ToolWin, kbmMemTable, ActnList, UConfig;
 
 type
@@ -21,7 +21,6 @@ TSingleEditorForm = class(TEditorForm)
     ActFind: TAction;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ActFindExecute(Sender: TObject);
-    procedure ActShowExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBGridCheckButton(Sender: TObject; ACol: Integer;
       Field: TField; var Enabled: Boolean);
@@ -75,12 +74,6 @@ end;
 procedure TSingleEditorForm.ActFindExecute(Sender: TObject);
 begin
   SearchInDBGrid(DBGrid);
-end;
-
-procedure TSingleEditorForm.ActShowExecute(Sender: TObject);
-begin
-  PreviewSingleReport(DataSource.DataSet, '', '', SuperTitle, Caption,
-    poPortrait, MainForm.PrepareReport);
 end;
 
 procedure TSingleEditorForm.FormCloseQuery(Sender: TObject;

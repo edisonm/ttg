@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, DB, About, ExtCtrls, RxVerInf, AppEvent;
+  StdCtrls, ComCtrls, DB, ExtCtrls;
 
 type
   TSplashForm = class(TForm)
@@ -20,15 +20,12 @@ type
     Label3: TLabel;
     Image1: TImage;
     procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    FVerInfo: TVersionInfo;
   public
     { Public declarations }
     procedure OnDataSetProgress(DataSet: TDataSet);
     procedure IncPosition;
-    property VerInfo: TVersionInfo read FVerInfo;
   end;
 
 var
@@ -76,20 +73,12 @@ procedure TSplashForm.FormCreate(Sender: TObject);
   end;
 begin
   UpdBackground;
-  FVerInfo := TVersionInfo.Create(Application.ExeName);
-  if VerInfo.Valid then
-  begin
-    lblYearLabel.Caption := VerInfo.LegalCopyright;
-    lblProductVersion.Caption := VerInfo.FileVersion;
-  end;
-  Caption := VerInfo.FileDescription;
-  lblProductName.Caption := VerInfo.FileDescription;
-  lblCopyright.Caption := FormatDateTime('c', VerInfo.VerFileDate);
-end;
-
-procedure TSplashForm.FormDestroy(Sender: TObject);
-begin
-  VerInfo.Free;
+  lblYearLabel.Caption := '2010';
+  lblProductVersion.Caption := '1.2.1.17';
+  Caption := 'Generador de Horarios Automático';
+  lblProductName.Caption := Caption;
+  lblCopyright.Caption := '1999-2010 por Edison Mera';
 end;
 
 end.
+

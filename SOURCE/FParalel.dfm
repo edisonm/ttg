@@ -1,6 +1,6 @@
 inherited ParaleloForm: TParaleloForm
-  Left = 338
-  Top = 206
+  Left = 595
+  Top = 270
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -11,7 +11,7 @@ inherited ParaleloForm: TParaleloForm
   end
   inherited Panel1: TPanel
     object Splitter1: TSplitter [0]
-      Left = 350
+      Left = 349
       Top = 1
       Width = 3
       Height = 253
@@ -19,28 +19,20 @@ inherited ParaleloForm: TParaleloForm
       Align = alRight
     end
     inherited DBGrid: TDBGrid
-      Width = 349
+      Width = 348
       Hint = 'Cursos|Cursos disponibles'
       ParentShowHint = False
       ShowHint = True
     end
-    object DBCheckListBox: TDBCheckListBox
-      Left = 353
+    object CheckListBox: TCheckListBox
+      Left = 352
       Top = 1
-      Width = 148
+      Width = 149
       Height = 253
-      Hint = 'Paralelos|Lista de Paralelos'
       Align = alRight
       ItemHeight = 13
-      ParentShowHint = False
-      ShowHint = True
       TabOrder = 1
-      DataSource = DataSourceDetail
-      ReadOnly = False
-      DataField = 'CodParaleloId'
-      ListSource = DataSourceList
-      ListField = 'NomParaleloId'
-      KeyField = 'CodParaleloId'
+      OnExit = CheckListBoxExit
     end
   end
   inherited DataSource: TDataSource

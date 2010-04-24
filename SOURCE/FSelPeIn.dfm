@@ -11,6 +11,7 @@ object SelPeriodoForm: TSelPeriodoForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  OldCreateOrder = True
   Position = poScreenCenter
   OnShow = FormShow
   PixelsPerInch = 96

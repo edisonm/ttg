@@ -218,7 +218,6 @@ inherited SingleEditorForm: TSingleEditorForm
       Caption = 'Mostrar'
       Hint = 'Presentar|Presenta el contenido de la cuadr'#237'cula en un reporte'
       ImageIndex = 0
-      OnExecute = ActShowExecute
     end
     object ActFind: TAction
       Caption = 'Buscar'

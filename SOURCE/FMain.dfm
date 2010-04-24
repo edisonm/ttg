@@ -480,12 +480,6 @@ object MainForm: TMainForm
     Left = 74
     Top = 72
   end
-  object MRUManager: TMRUManager
-    RecentMenu = MIReopen
-    OnClick = MRUManagerClick
-    Left = 186
-    Top = 72
-  end
   object ImageList: TImageList
     Left = 46
     Top = 72
@@ -1721,7 +1715,6 @@ object MainForm: TMainForm
       Hint = 
         'Presentar los horarios por profesor|Presentar los horarios por p' +
         'rofesor'
-      OnExecute = ActPresentarProfesorHorarioExecute
     end
     object ActAbout: TAction
       Category = 'Help'
@@ -1742,7 +1735,6 @@ object MainForm: TMainForm
       Hint = 
         'Presentar los horarios por paralelo|Presentar los horarios por p' +
         'aralelo'
-      OnExecute = ActPresentarParaleloHorarioExecute
     end
     object ActPresentarProfesorProhibicion: TAction
       Category = 'View'
@@ -1751,7 +1743,6 @@ object MainForm: TMainForm
       Hint = 
         'Presentar prohibiciones de profesor|Presentar prohibiciones de p' +
         'rofesor'
-      OnExecute = ActPresentarProfesorProhibicionExecute
     end
     object ActNew: TAction
       Category = 'File'
@@ -1769,7 +1760,6 @@ object MainForm: TMainForm
       Hint = 
         'Presentar prohibiciones de materia|Presentar prohibiciones de ma' +
         'teria'
-      OnExecute = ActPresentarMateriaProhibicionExecute
     end
     object ActPresentarDistributivoProfesor: TAction
       Category = 'View'
@@ -1778,7 +1768,6 @@ object MainForm: TMainForm
       Hint = 
         'Presentar el distributivo por profesores|Presentar el distributi' +
         'vo por profesores'
-      OnExecute = ActPresentarDistributivoProfesorExecute
     end
     object ActPresentarDistributivoMateria: TAction
       Category = 'View'
@@ -1787,7 +1776,6 @@ object MainForm: TMainForm
       Hint = 
         'Presentar el distributivo por materias|Presentar el distributivo' +
         ' por materias'
-      OnExecute = ActPresentarDistributivoMateriaExecute
     end
     object ActExportarCSV: TAction
       Category = 'View'

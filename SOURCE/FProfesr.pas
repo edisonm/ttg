@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Placemnt, Grids, DBGrids, StdCtrls, DBIndex, Buttons, DBCtrls,
+  FSingEdt, Db, Grids, DBGrids, StdCtrls, Buttons, DBCtrls,
   ExtCtrls, ComCtrls, Printers, ImgList, ToolWin, ActnList, FCrsMMER;
 
 type
