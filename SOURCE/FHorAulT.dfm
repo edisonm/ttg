@@ -517,7 +517,6 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
     Left = 84
     Top = 80
     object QuHorarioAulaTipoCodAulaTipo: TAutoIncField
-      AutoGenerateValue = arAutoInc
       DisplayLabel = 'C'#243'digo'
       FieldName = 'CodAulaTipo'
       Visible = False
