@@ -43,16 +43,12 @@ type
     property DataSetDescList: TStrings read FDataSetDescList;
     procedure SaveToStrings(AStrings: TStrings); virtual;
     procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer); virtual;
-    procedure LoadFromBinaryStream(AStream: TStream);
-    procedure SaveToBinaryStream(AStream: TStream; flags:TkbmMemTableSaveFlags);
   public
     procedure OpenTables;
     procedure CloseTables;
     procedure EmptyTables;
-    procedure LoadFromBinaryFile(const AFileName: string);
     procedure LoadFromTextDir(const ADirName: string);
     procedure LoadFromTextFile(const AFileName: TFileName);
-    procedure SaveToBinaryFile(const AFileName: TFileName; flags:TkbmMemTableSaveFlags);
     procedure SaveToTextDir(const ADirName: TFileName); virtual;
     procedure SaveToTextFile(const AFileName: TFileName);
     
@@ -151,51 +147,6 @@ begin
       LoadDataSetFromStrings(Tables[i], AStrings, APosition);
   finally
     FCheckRelations := True;
-  end;
-end;
-
-procedure TBaseDataModule.LoadFromBinaryFile(const AFileName: string);
-var
-  Stream: TStream;
-begin
-  Stream := TFileStream.Create(AFileName, fmOpenRead + fmShareDenyNone);
-  try
-    LoadFromBinaryStream(Stream);
-  finally
-    Stream.Free;
-  end;
-end;
-
-procedure TBaseDataModule.LoadFromBinaryStream(AStream: TStream);
-var
-  i: Integer;
-begin
-  FCheckRelations := False;
-  try
-    for i := Low(FTables) to High(FTables) do
-      (FTables[i] as TkbmMemTable).LoadFromBinaryStream(AStream);
-  finally
-    FCheckRelations := True;
-  end;
-end;
-
-procedure TBaseDataModule.SaveToBinaryStream(AStream: TStream; flags:TkbmMemTableSaveFlags);
-var
-  i: Integer;
-begin
-  for i := Low(FTables) to High(FTables) do
-    (FTables[i] as TkbmMemTable).SaveToBinaryStream(AStream, flags);
-end;
-
-procedure TBaseDataModule.SaveToBinaryFile(const AFileName: TFileName; flags:TkbmMemTableSaveFlags);
-var
-  Stream: TStream;
-begin
-  Stream := TFileStream.Create(AFileName, fmCreate);
-  try
-    SaveToBinaryStream(Stream, flags);
-  finally
-    Stream.Free;
   end;
 end;
 
