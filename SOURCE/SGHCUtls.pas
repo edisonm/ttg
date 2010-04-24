@@ -21,7 +21,7 @@ function ExtractString(const Strings: string; var Pos: Integer; Separator:
 implementation
 
 uses
-  SysUtils, DMaster, Consts;
+  Consts, SysUtils, DMaster;
 
 procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorForm;
   AColDataSet, ARowDataSet, ARelDataSet: TDataSet);
