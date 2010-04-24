@@ -67,9 +67,6 @@ object LogisticForm: TLogisticForm
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    DesignSize = (
-      434
-      30)
     object lblMsg: TLabel
       Left = 8
       Top = 16
