@@ -82,13 +82,15 @@ unit rand;
 
 *******************************************************************************)
 
+{ $DEFINE USEASSEMBLER}
+
 interface
 
 uses
   SysUtils;
 
-procedure setseeds(ASeed1, ASeed2, ASeed3, ASeed4: LongInt);
-procedure getseeds(var ASeed1, ASeed2, ASeed3, ASeed4: LongInt);
+procedure SetSeeds(ASeed1, ASeed2, ASeed3, ASeed4: LongInt);
+procedure GetSeeds(var ASeed1, ASeed2, ASeed3, ASeed4: LongInt);
 
 // generador acoplado de 32 bits con signo:
 // -2147483648 <= rand32 < 2147483648
@@ -130,13 +132,17 @@ const
   MULTIPLIER2: LongInt = 1219071924; //m2
 
 var
-  Seed1, Seed2, Seed3, Seed4: Longint;
+  Seed1: Longint;
+  Seed2: Longint;
+  Seed3: Longint;
+  Seed4: Longint;
 
 (*---------------------------------------------------------------------------- )
 ( Observese que esta función se programó en ensamblador, para evitar que el    )
 ( compilador realice alguna optimización no deseada.                           )
 (-----------------------------------------------------------------------------*)
 
+{$IFDEF USEASSEMBLER}
 procedure setseeds(ASeed1, ASeed2, ASeed3, ASeed4: LongInt); assembler;
 asm
     mov     eax, ASeed1
@@ -148,8 +154,17 @@ asm
     mov     eax, ASeed4
     mov     Seed4, eax
 end;
+{$ELSE}
+procedure SetSeeds(ASeed1, ASeed2, ASeed3, ASeed4: LongInt);
+begin
+  Seed1 := ASeed1;
+  Seed2 := ASeed2;
+  Seed3 := ASeed3;
+  Seed4 := ASeed4;
+end;
+{$ENDIF}
 
-procedure getseeds(var ASeed1, ASeed2, ASeed3, ASeed4: Longint);
+procedure GetSeeds(var ASeed1, ASeed2, ASeed3, ASeed4: Longint);
 begin
   ASeed1 := Seed1;
   ASeed2 := Seed2;
@@ -180,6 +195,7 @@ begin
   Seed4 := Seed4 * k; Inc(Seed4);
 end;
 
+{$IFDEF USEASSEMBLER}
 function _rand321: Longint; assembler;
 asm
     mov     eax, Seed1
@@ -234,6 +250,56 @@ asm
   add     edx, Seed1
 end;
 
+{$ELSE}
+
+function _rand321: Longint;
+var
+  x: Int64;
+begin
+  x := Int64(Seed1) * MULTIPLIER1 + Seed2;
+  Seed1 := x and $FFFFFFFF;
+  Seed2 := x shr 32;
+  Result := Seed1;
+end;
+
+function _rand322: Longint;
+var
+  x: Int64;
+begin
+  x := Int64(Seed3) * MULTIPLIER1 + Seed4;
+  Seed3 := x and $FFFFFFFF;
+  Seed4 := x shr 32;
+  Result := Seed3;
+end;
+
+// función que genera un número aleatorio de 32 bits con signo
+
+function rand32: Longint;
+begin
+  Result := _rand321 + _rand322;
+end;
+
+// función que genera un número aleatorio de 31 bits sin signo
+
+function crand32: Longint;
+begin
+  Result := (_rand321 + _rand322) and $7FFFFFFF;
+end;
+
+// función que genera un número aleatorio de 32 bits sin signo
+
+function urand32: Longword;
+begin
+  Result := _rand321 + _rand322;
+end;
+
+function rand64: Int64;
+begin
+  Result := Int64(_rand321) shl 32 + _rand322;
+end;
+
+{$ENDIF}
+
 procedure FillRandom(var X; Count: Integer);
 type
   PInt64Array = ^TInt64Array;
@@ -277,6 +343,7 @@ end;
 (  _rand322 fueron expandidas en línea                                         )
 (-----------------------------------------------------------------------------*)
 
+{$IFDEF USEASSEMBLER}
 function randl: extended; assembler;
 var
   x: extended;
@@ -307,6 +374,12 @@ asm
     fld1
     fsubp
 end;
+{$ELSE}
+function randl: extended;
+begin
+  Result := (LongWord(_rand321) + LongWord(_rand322)/$100000000)/$100000000;
+end;
+{$ENDIF}
 
 initialization
   (*

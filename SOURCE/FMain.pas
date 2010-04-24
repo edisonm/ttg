@@ -7,7 +7,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   SysConst, ExtCtrls, DB, Menus, ComCtrls, ImgList, Buttons,
-  ActnList, ToolWin, MenuBar, StdActns, StdCtrls,
+  ActnList, ToolWin, StdActns, StdCtrls,
   FSingEdt, kbmMemTable, FCrsMME0, FEditor, UConfig{, Protect};
 type
   TMainForm = class(TForm)
@@ -313,7 +313,7 @@ uses
   KerEvolE, KerModel, FProgres,
 {$ENDIF}
   FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd,
-  FConfig, FLogstic, SGHCUtls, Consts, FParalel, Rand, ArDBUtls,
+  FConfig, FLogstic, SGHCUtls, Consts, FParalel, Rand,
   QMaDeRep, Printers, DSource, DSrcBase;
 
 {$R *.DFM}
