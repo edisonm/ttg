@@ -32,13 +32,13 @@ type
     FDataSetNameList: TStrings;
     FDataSetDescList: TStrings;
     FCheckRelations: Boolean;
+    function GetDescription(ADataSet: TDataSet): string;
+    function GetNameDataSet(ADataSet: TDataSet): string;
+  protected
     FTables: TDataSetArray;
     FBeforePostLocks: array of Boolean;
     FMasterRels: array of array of TMasterRel;
     FDetailRels: array of array of TDetailRel;
-    function GetDescription(ADataSet: TDataSet): string;
-    function GetNameDataSet(ADataSet: TDataSet): string;
-  protected
     property DataSetNameList: TStrings read FDataSetNameList;
     property DataSetDescList: TStrings read FDataSetDescList;
     procedure SaveToStrings(AStrings: TStrings); virtual;
