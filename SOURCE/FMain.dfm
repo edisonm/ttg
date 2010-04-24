@@ -1968,8 +1968,6 @@ object MainForm: TMainForm
   object TbParalelo: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
-    VersioningMode = mtvmAllSinceCheckPoint
     OnFilterRecord = TbParaleloFilterRecord
     Left = 48
     Top = 119
@@ -1977,8 +1975,6 @@ object MainForm: TMainForm
   object TbProfesor: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
-    VersioningMode = mtvmAllSinceCheckPoint
     OnFilterRecord = TbProfesorFilterRecord
     Left = 48
     Top = 147
@@ -1986,7 +1982,6 @@ object MainForm: TMainForm
   object QuParaleloHora: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    VersioningMode = mtvmAllSinceCheckPoint
     Left = 76
     Top = 119
     object QuParaleloHoraCodNivel: TIntegerField
@@ -2020,7 +2015,6 @@ object MainForm: TMainForm
   object QuProfesorHora: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    VersioningMode = mtvmAllSinceCheckPoint
     Left = 76
     Top = 147
     object QuProfesorHoraCodProfesor: TIntegerField
@@ -2048,7 +2042,6 @@ object MainForm: TMainForm
   object QuProfesorHorarioDetalle: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    VersioningMode = mtvmAllSinceCheckPoint
     Left = 104
     Top = 147
     object QuProfesorHorarioDetalleCodProfesor: TIntegerField
@@ -2074,7 +2067,6 @@ object MainForm: TMainForm
   object QuParaleloHorarioDetalle: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    VersioningMode = mtvmAllSinceCheckPoint
     Left = 104
     Top = 119
     object QuParaleloHorarioDetalleCodNivel: TIntegerField
@@ -2121,8 +2113,6 @@ object MainForm: TMainForm
   object TbMateria: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
-    VersioningMode = mtvmAllSinceCheckPoint
     OnFilterRecord = TbMateriaFilterRecord
     Left = 48
     Top = 184
@@ -2134,7 +2124,6 @@ object MainForm: TMainForm
         DataType = ftInteger
       end>
     IndexDefs = <>
-    VersioningMode = mtvmAllSinceCheckPoint
     AfterScroll = QuMateriaMateriaProhibicionAfterScroll
     Left = 76
     Top = 184
@@ -2156,7 +2145,6 @@ object MainForm: TMainForm
   object QuMateriaMateriaProhibicionHora: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    VersioningMode = mtvmAllSinceCheckPoint
     Left = 104
     Top = 184
     object QuMateriaMateriaProhibicionHoraCodMateria: TIntegerField
@@ -2182,7 +2170,6 @@ object MainForm: TMainForm
   object QuProfesorProfesorProhibicion: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    VersioningMode = mtvmAllSinceCheckPoint
     AfterScroll = QuProfesorProfesorProhibicionAfterScroll
     Left = 76
     Top = 212
@@ -2219,7 +2206,6 @@ object MainForm: TMainForm
   object QuProfesorProfesorProhibicionHora: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    VersioningMode = mtvmAllSinceCheckPoint
     Left = 104
     Top = 212
     object QuProfesorProfesorProhibicionHoraCodProfesor: TIntegerField
@@ -2242,8 +2228,6 @@ object MainForm: TMainForm
   object TbProfesor1: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
-    VersioningMode = mtvmAllSinceCheckPoint
     OnFilterRecord = TbProfesor1FilterRecord
     Left = 48
     Top = 212
