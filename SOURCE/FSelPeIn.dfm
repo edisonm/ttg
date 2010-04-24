@@ -74,7 +74,6 @@ object SelPeriodoForm: TSelPeriodoForm
   object TbDiaHora: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
     Left = 24
     Top = 64
     object TbDiaHoraCodDia: TIntegerField
