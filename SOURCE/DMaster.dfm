@@ -8,7 +8,6 @@ object MasterDataModule: TMasterDataModule
   object TbTmpProfesorCarga: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
     Left = 250
     Top = 11
     object TbTmpProfesorCargaCodProfesor: TIntegerField
@@ -139,7 +138,6 @@ object MasterDataModule: TMasterDataModule
   object TbTmpAulaTipoCarga: TkbmMemTable
     FieldDefs = <>
     IndexDefs = <>
-    PersistentSaveOptions = [mtfSaveData, mtfSaveNonVisible]
     Left = 250
     Top = 62
     object TbTmpAulaTipoCargaCodAulaTipo: TIntegerField
