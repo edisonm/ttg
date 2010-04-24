@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Grids, DBGrids, Db, kbmMemTable, Variants;
+  Grids, DBGrids, Db, kbmMemTable;
 
 type ERelationUtils = class(Exception);
 
@@ -33,6 +33,9 @@ procedure LoadDataSetFromStrings(ADataSet: TDataSet; AStrings: TStrings;
   var Position: Integer);
 
 implementation
+
+uses
+  Variants;
 
 function GetOldFieldValues(ADataSet: TDataSet; const AFieldNames: string): Variant;
 var
