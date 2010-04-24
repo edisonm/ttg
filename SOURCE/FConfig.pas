@@ -4,8 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ComCtrls, Spin, Grids, DBGrids,
-  Db, DSource, DBCtrls, ExtCtrls, Mask;
+  StdCtrls, Buttons, ComCtrls, Spin, Grids, DBGrids, Mask, DSource, DB,
+  ExtCtrls, DBCtrls;
 
 type
   TConfiguracionForm = class(TForm)
