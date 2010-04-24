@@ -1108,10 +1108,12 @@ end;
 
 procedure TMainForm.ActPresentarProfesorHorarioExecute(Sender: TObject);
 begin
+(*
   ObtProfesorHorario;
   PreviewMasterDetailReport(SourceDataModule.TbProfesor, TbProfesor,
 			    'ApeProfesor;NomProfesor', '', '', SourceDataModule.NomColegio,
 			    'Horario de profesores', poLandscape, PrepareReportProfesorHorario);
+*)  
 end;
 
 procedure TMainForm.FillParaleloHorarioDetalle;
@@ -1166,10 +1168,12 @@ end;
 
 procedure TMainForm.ActPresentarParaleloHorarioExecute(Sender: TObject);
 begin
+(*
   ObtParaleloHorario;
   PreviewMasterDetailReport(SourceDataModule.TbParalelo, TbParalelo, '', '', '',
 			    SourceDataModule.NomColegio, 'Horario de paralelos',
-                            poLandscape, PrepareReportParaleloHorario);
+  poLandscape, PrepareReportParaleloHorario);
+*)
 end;
 
 procedure TMainForm.PrepareReportParaleloHorario(Sender: TObject);
@@ -1520,6 +1524,55 @@ begin
     AStrings.Add('HORARIO POR PROFESORES;;;;;;');
     ObtProfesorHorario;
     ExportarCSV(SourceDataModule.TbProfesor, TbProfesor, AStrings);
+    
+    FillProfesorProfesorProhibicion;
+    FillProfesorProfesorProhibicionHora;
+    TbProfesor1.Close;
+    TbProfesor1.Filtered := false;
+    AStrings.Add('PROHIBICIONES DE PROFESORES;;;;;;');
+    with SourceDataModule, MasterDataModule do
+    begin
+      TbProfesorProhibicion.MasterSource := nil;
+      CrossBatchMove(TbDia, QuProfesorProfesorProhibicionHora,
+                     TbProfesorProhibicion, TbProfesor1, 'CodDia', 'NomDia', 'CodDia',
+                     'CodProfesor;CodHora', 'NomHora', 'CodProfesor;CodHora',
+                     'NomProfProhibicionTipo');
+      TbProfesor1.Filtered := true;
+      ExportarCSV(QuProfesorProfesorProhibicion, TbProfesor1, AStrings);
+      TbProfesorProhibicion.MasterSource := DSProfesor;
+    end;
+    AStrings.Add('DISTRIBUTIVO POR PROFESORES;;;;;;');
+    FillMateriaMateriaProhibicion;
+    FillMateriaMateriaProhibicionHora;
+    TbMateria.Close;
+    TbMateria.Filtered := false;
+    SourceDataModule.TbMateriaProhibicion.MasterSource := nil;
+    try
+      CrossBatchMove(SourceDataModule.TbDia, QuMateriaMateriaProhibicionHora,
+                     SourceDataModule.TbMateriaProhibicion, TbMateria,
+                     'CodDia', 'NomDia', 'CodDia', 'CodMateria;CodHora', 'NomHora',
+                     'CodMateria;CodHora', 'NomMateProhibicionTipo');
+      TbMateria.Filtered := true;
+      ExportarCSV(QuMateriaMateriaProhibicion, TbMateria, AStrings);
+    finally
+      SourceDataModule.TbMateriaProhibicion.MasterSource := SourceDataModule.DSMateria;
+    end;
+    AStrings.Add('DISTRIBUTIVO POR PROFESORES;;;;;;');
+    ExportarCSV(SourceDataModule.TbProfesor, SourceDataModule.TbDistributivo, AStrings);
+    AStrings.Add('DISTRIBUTIVO POR MATERIAS;;;;;;');
+    with SourceDataModule, MasterDataModule do
+    begin
+      TbDistributivo.MasterSource := nil;
+      TbDistributivo.IndexFieldNames :=
+        'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+      TbDistributivo.MasterFields := 'CodMateria';
+      TbDistributivo.MasterSource := DSMateria;
+      ExportarCSV(TbMateria, TbDistributivo, AStrings);
+      TbDistributivo.MasterSource := nil;
+      TbDistributivo.IndexFieldNames := 'CodProfesor';
+      TbDistributivo.MasterFields := 'CodProfesor';
+      TbDistributivo.MasterSource := DSProfesor;
+    end;
   finally
     AStrings.EndUpdate;
   end;
