@@ -5,7 +5,6 @@ inherited HorarioProfesorForm: THorarioProfesorForm
   Height = 399
   OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 766
     Visible = True

@@ -13,7 +13,6 @@ object ProgressForm: TProgressForm
   Font.Style = []
   Position = poDesktopCenter
   PixelsPerInch = 96
-  TextHeight = 13
   object pnlProgress: TPanel
     Left = 8
     Top = 8

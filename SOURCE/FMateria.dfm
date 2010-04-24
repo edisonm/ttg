@@ -4,7 +4,6 @@ inherited MateriaForm: TMateriaForm
   Width = 602
   Caption = 'Materias'
   PixelsPerInch = 96
-  TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 594
     object BtnMateriaProhibicion: TToolButton [2]

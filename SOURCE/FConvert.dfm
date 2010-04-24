@@ -13,7 +13,6 @@ object ConvertForm: TConvertForm
   Position = poDesktopCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 13
   object Label1: TLabel
     Left = 32
     Top = 16

@@ -47,7 +47,6 @@ object MainForm: TMainForm
     0000000000000000000000000000000000000000000000000000000000000000
     000000000000000000000000000000000000FFFF0000}
   Menu = MainMenu
-  OldCreateOrder = False
   Position = poScreenCenter
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -57,7 +56,6 @@ object MainForm: TMainForm
     593
     346)
   PixelsPerInch = 96
-  TextHeight = 13
   object Label1: TLabel
     Left = 335
     Top = 305

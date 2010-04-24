@@ -5,7 +5,6 @@ inherited HorarioForm: THorarioForm
   Height = 361
   Caption = 'HorarioForm'
   PixelsPerInch = 96
-  TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 618
     inherited DBNavigator: TDBNavigator

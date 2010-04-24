@@ -45,13 +45,11 @@ object EditorForm: TEditorForm
     00000000000000000000000000000000000000000000FFFF0000E0030000C003
     0000C0030000C0030000C0030000C0030000C0030000C0030000C0030000C003
     0000C0030000C0030000C0070000FFFF0000FFFF0000}
-  OldCreateOrder = True
   Position = poMainFormCenter
   Visible = True
   OnClose = FormClose
   OnDestroy = FormDestroy
   PixelsPerInch = 96
-  TextHeight = 13
   object TlBShow: TToolBar
     Left = 0
     Top = 0

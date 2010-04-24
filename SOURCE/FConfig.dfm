@@ -11,10 +11,8 @@ object ConfiguracionForm: TConfiguracionForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = True
   Position = poDesktopCenter
   PixelsPerInch = 96
-  TextHeight = 13
   object bbtnOk: TBitBtn
     Left = 255
     Top = 424

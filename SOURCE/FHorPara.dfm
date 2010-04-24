@@ -5,7 +5,6 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   Height = 428
   OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 696
     Visible = True
