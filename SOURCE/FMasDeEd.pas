@@ -35,7 +35,7 @@ var
 
 implementation
 uses
-  QMaDeRep, Printers, FMain;
+  Printers, FMain;
 {$R *.DFM}
 
 class function TMasterDetailEditorForm.ToggleMasterDetailEditor(AOwner: TComponent;

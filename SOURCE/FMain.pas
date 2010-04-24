@@ -313,8 +313,7 @@ uses
   KerEvolE, KerModel, FProgres,
 {$ENDIF}
   FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd,
-  FConfig, FLogstic, SGHCUtls, Consts, FParalel, Rand,
-  QMaDeRep, Printers, DSource, DSrcBase;
+  FConfig, FLogstic, SGHCUtls, Consts, FParalel, Rand, Printers, DSource, DSrcBase;
 
 {$R *.DFM}
 
