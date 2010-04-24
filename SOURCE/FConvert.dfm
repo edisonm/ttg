@@ -89,7 +89,6 @@ object ConvertForm: TConvertForm
   end
   object TbAsignatura: TkbmMemTable
     Active = True
-    AttachedAutoRefresh = True
     FieldDefs = <
       item
         Name = 'CodMateria'
