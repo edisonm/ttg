@@ -87,7 +87,6 @@ object SelPeriodoForm: TSelPeriodoForm
       FieldName = 'CodHora'
       Required = True
       Visible = False
-      AttributeSet = 'CodHora'
     end
     object TbDiaHoraNomDia: TStringField
       DisplayLabel = 'D'#237'a'

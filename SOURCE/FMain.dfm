@@ -2183,7 +2183,6 @@ object MainForm: TMainForm
       LookupResultField = 'ApeProfesor'
       KeyFields = 'ApeProfesor'
       Size = 15
-      AttributeSet = 'ApeProfesor'
     end
     object QuProfesorProfesorProhibicionNomProfesor: TStringField
       DisplayLabel = 'Nombre'
@@ -2194,7 +2193,6 @@ object MainForm: TMainForm
       LookupResultField = 'NomProfesor'
       KeyFields = 'NomProfesor'
       Size = 15
-      AttributeSet = 'Nombre'
     end
   end
   object QuProfesorProfesorProhibicionHora: TkbmMemTable
