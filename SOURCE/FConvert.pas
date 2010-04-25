@@ -519,9 +519,10 @@ var
       TbAsignatura.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion';
       while not TbMemTable.Eof do
       begin
-        TbAsignatura.FindKey([TbMemTable.FindField('CodMateria'),
-          TbMemTable.FindField('CodNivel'),
-          TbMemTable.FindField('CodEspecializacion')]);
+        TbAsignatura.Locate('CodMateria;CodNivel;CodEspecializacion',
+                            VarArrayOf([TbMemTable.FindField('CodMateria'),
+                                        TbMemTable.FindField('CodNivel'),
+                                        TbMemTable.FindField('CodEspecializacion')]), []);
         TbDistributivo.Append;
         TbDistributivoCodMateria.Value := TbMemTableCodMateria.Value;
         TbDistributivoCodNivel.Value := TbMemTableCodNivel.Value;

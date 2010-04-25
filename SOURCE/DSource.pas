@@ -33,7 +33,6 @@ type
     procedure TbParaleloCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
-    FFlags : TkbmMemTableSaveFlags;
     FConfigStorage: TConfigStorage;
     procedure SaveIniStrings(AStrings: TStrings);
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
@@ -383,16 +382,6 @@ begin
   inherited;
   FConfigStorage := TConfigStorage.Create(Self);
   OpenTables;
-  FFlags :=
-    [mtfSaveData,
-      mtfSaveNonVisible,
-      mtfSaveBlobs,
-      mtfSaveFiltered,
-      mtfSaveIgnoreRange,
-      mtfSkipRest,
-      mtfSaveInLocalFormat,
-      mtfSaveIgnoreMasterDetail];
-//      mtfSaveDeltas];
   NewDataBase;
 end;
 

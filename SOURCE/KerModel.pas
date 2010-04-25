@@ -1303,7 +1303,7 @@ end;
   Versión en Pascal del procedimiento Normalizar.  No borrar, ya que es la base
   de la versión en ensamblador
 }
-(*
+
 procedure TObjetoModeloHorario.Normalizar(AParalelo: Smallint;
   var APeriodo: Smallint);
 var
@@ -1311,13 +1311,13 @@ var
   l: PSmallintArray;
 begin
   l := @FParaleloPeriodoASesion[AParalelo, 0];
-  k := l[j];
+  k := l[APeriodo];
   if k >= 0 then
-    while (j > 0) and (k = l[j - 1]) do
-      Dec(j);
+    while (APeriodo > 0) and (k = l[APeriodo - 1]) do
+      Dec(APeriodo);
 end;
-*)
 
+(*
 procedure TObjetoModeloHorario.Normalizar(AParalelo: Smallint;
   var APeriodo: Smallint); assembler;
 asm
@@ -1341,6 +1341,7 @@ asm
 @end2:
   pop     ebx
 end;
+*)
 
 procedure TObjetoModeloHorario.MutarInterno;
 var

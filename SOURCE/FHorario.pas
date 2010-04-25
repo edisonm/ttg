@@ -258,7 +258,8 @@ begin
             CodProfesor := TbDistributivoCodProfesor.Value;
             CodDia := TbHorarioDetalleCodDia.Value;
             CodHora := TbHorarioDetalleCodHora.Value;
-            if QuCruceProfesor.FindKey([CodProfesor, CodDia, CodHora]) then
+	     if QuCruceProfesor.Locate('CodProfesor;CodDia;CodHora',
+				       VarArrayOf([CodProfesor, CodDia, CodHora]), []) then
             begin
               QuCruceProfesor.Edit;
               with QuCruceProfesorCruces do Value := Value + 1;
@@ -325,15 +326,16 @@ begin
             CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
             CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
             while ((TbDistributivoCodMateria.Value <> CodMateria)
-              or (TbDistributivoCodNivel.Value <> CodNivel)
-              or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
-              or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
-              and not TbDistributivo.Eof do
+		   or (TbDistributivoCodNivel.Value <> CodNivel)
+		   or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
+		   or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
+                  and not TbDistributivo.Eof do
               TbDistributivo.Next;
             CodProfesor := TbDistributivoCodProfesor.Value;
             CodHora := TbHorarioDetalleCodHora.Value;
             CodDia := TbHorarioDetalleCodDia.Value;
-            if QuCruceProfesor.FindKey([CodProfesor, CodDia, CodHora]) then
+            if QuCruceProfesor.Locate('CodProfesor;CodDia;CodHora',
+                                      VarArrayOf([CodProfesor, CodDia, CodHora]), []) then
             begin
               QuCruceProfesorDetalle.Append;
               QuCruceProfesorDetalleCodProfesor.Value := CodProfesor;
@@ -346,7 +348,7 @@ begin
               QuCruceProfesorDetalle.Post;
             end;
             TbHorarioDetalle.Next;
-          end;
+	  end;
         finally
           TbDistributivo.IndexFieldNames := s;
           TbDistributivo.EnableControls;
@@ -449,7 +451,8 @@ begin
           CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
           CodDia := TbHorarioDetalleCodDia.Value;
           Sesion := TbHorarioDetalleSesion.Value;
-          TbMemTable.FindKey([CodHorario, CodMateria, CodNivel, CodEspecializacion, CodParaleloId, CodDia]);
+          TbMemTable.Locate('CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia',
+                            VarArrayOf([CodHorario, CodMateria, CodNivel, CodEspecializacion, CodParaleloId, CodDia]), []);
           while (TbMemTableCodHorario.Value = CodHorario)
                 and (TbMemTableCodMateria.Value = CodMateria)
                 and (TbMemTableCodNivel.Value = CodNivel)
@@ -460,7 +463,7 @@ begin
           begin
             if TbMemTableSesion.Value <> Sesion then
             begin
-              if not QuCruceMateria.FindKey([CodMateria]) then
+              if not QuCruceMateria.Locate('CodMateria', CodMateria, []) then
               begin
                 QuCruceMateria.Append;
                 QuCruceMateriaCodMateria.Value := TbHorarioDetalleCodMateria.Value;
@@ -537,8 +540,9 @@ begin
           while (TbHorarioDetalleCodHorario.Value = CodHorario)
       	    and not TbHorarioDetalle.Eof do
           begin
-            if TbMateriaProhibicion.FindKey([TbHorarioDetalleCodMateria.Value,
-              TbHorarioDetalleCodDia.Value, TbHorarioDetalleCodHora.Value]) then
+            if TbMateriaProhibicion.Locate('CodMateria;CodDia;CodHora',
+                                           VarArrayOf([TbHorarioDetalleCodMateria.Value,
+              TbHorarioDetalleCodDia.Value, TbHorarioDetalleCodHora.Value]), []) then
             begin
               QuHorarioDetalleMateriaProhibicion.Append;
               QuHorarioDetalleMateriaProhibicionNomMateria.Value :=
@@ -628,8 +632,10 @@ begin
                    or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
                   and not TbDistributivo.Eof do
               TbDistributivo.Next;
-            if TbProfesorProhibicion.FindKey([TbDistributivoCodProfesor.Value,
-                                              TbHorarioDetalleCodDia.Value, TbHorarioDetalleCodHora.Value]) then
+            if TbProfesorProhibicion.Locate('CodProfesor;CodDia;CodHora',
+                                            VarArrayOf([TbDistributivoCodProfesor.Value,
+                                                        TbHorarioDetalleCodDia.Value,
+                                                        TbHorarioDetalleCodHora.Value]), []) then
             begin
               QuHorarioDetalleProfesorProhibicion.Append;
               QuHorarioDetalleProfesorProhibicionApeNomProfesor.Value :=
@@ -720,7 +726,8 @@ begin
             CodAulaTipo := TbDistributivoCodAulaTipo.Value;
             CodHora := TbHorarioDetalleCodHora.Value;
             CodDia := TbHorarioDetalleCodDia.Value;
-            if QuCruceAula.FindKey([CodAulaTipo, CodDia, CodHora]) then
+            if QuCruceAula.Locate('CodAulaTipo;CodDia;CodHora',
+                                  VarArrayOf([CodAulaTipo, CodDia, CodHora]), []) then
             begin
               QuCruceAula.Edit;
               with QuCruceAulaUsadas do Value := Value + 1;
@@ -797,7 +804,8 @@ begin
             CodAulaTipo := TbDistributivoCodAulaTipo.Value;
             CodHora := TbHorarioDetalleCodHora.Value;
             CodDia := TbHorarioDetalleCodDia.Value;
-            if QuCruceAula.FindKey([CodAulaTipo, CodDia, CodHora]) then
+            if QuCruceAula.Locate('CodAulaTipo;CodDia;CodHora',
+                                  VarArrayOf([CodAulaTipo, CodDia, CodHora]), []) then
             begin
               QuCruceAulaDetalle.Append;
               QuCruceAulaDetalleCodAulaTipo.Value := CodAulaTipo;
@@ -993,7 +1001,7 @@ begin
         while not TbDia.Eof do
         begin
           CodDia := TbDiaCodDia.Value;
-          if not TbPeriodo.FindKey([CodDia, CodHora]) then
+          if not TbPeriodo.FindKey('CodDia;CodHora', VarArrayOf([CodDia, CodHora]), []) then
           begin
             QuMateriaCortadaHora.Append;
             QuMateriaCortadaHoraCodDia.Value := CodDia;
