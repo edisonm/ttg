@@ -170,6 +170,7 @@ type
     procedure ActHorarioAulaTipoExecute(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     FCruceAulaForm,
@@ -1162,6 +1163,24 @@ procedure THorarioForm.doSaveConfig;
 begin
   inherited;
   ConfigIntegers['Panel2_Width'] := Panel2.Width;
+end;
+
+procedure THorarioForm.FormCreate(Sender: TObject);
+begin
+  inherited;
+  QuCruceAula.AddIndex('QuCruceAulaIndex1', 'CodAulaTipo;CodDia;CodHora', []);
+  QuCruceAulaDetalle.AddIndex('QuCruceAulaDetalleIndex1', 'CodAulaTipo;CodDia;CodHora', []);
+  QuCruceProfesor.AddIndex('QuCruceProfesorIndex1', 'CodProfesor;CodDia;CodHora', []);
+  QuCruceMateria.AddIndex('QuCruceMateriaIxCodMateria', 'CodMateria', []);
+  QuCruceMateria.AddIndex('QuCruceMateriaIxNomMateria', 'NomMateria', []);
+  QuCruceMateriaDetalle.AddIndex('QuCruceMateriaDetalleIndex1',
+                                 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora', []);
+  QuHorarioDetalleMateriaProhibicion.AddIndex('QuHorarioDetalleMateriaProhibicionIndex1',
+                                              'CodMateProhibicionTipo;NomMateria;CodDia;CodHora',
+                                              [ixDescending],
+                                              'CodMateProhibicionTipo');
+  QuMateriaCortadaHora.AddIndex('QuMateriaCortadaHoraIxCodDia', 'CodDia', []);
+  QuMateriaCortadaDetalle.AddIndex('QuMateriaCortadaHoraDetalleIxCodDia', 'CodDia;CodHora;CodHora0', []);
 end;
 
 end.

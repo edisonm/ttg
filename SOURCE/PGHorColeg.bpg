@@ -14,7 +14,7 @@ PROJECTS = Convert.exe DBUTILS.exe SGHC.exe
 default: $(PROJECTS)
 #------------------------------------------------------------------------------
 
-Convert.exe: Convert.dpr
+Convert.exe: ..\CONVERT\Convert.dpr
   $(DCC)
 
 DBUTILS.exe: ..\DBUTILS\DBUTILS.dpr
@@ -22,5 +22,3 @@ DBUTILS.exe: ..\DBUTILS\DBUTILS.dpr
 
 SGHC.exe: SGHC.dpr
   $(DCC)
-
-

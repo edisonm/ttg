@@ -506,11 +506,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       end>
     IndexFieldNames = 'CodAulaTipo'
     IndexName = 'QuHorarioAulaTipoIxCodAulaTipo'
-    IndexDefs = <
-      item
-        Name = 'QuHorarioAulaTipoIxCodAulaTipo'
-        Fields = 'CodAulaTipo'
-      end>
+    IndexDefs = <>
     MasterFields = 'CodAulaTipo'
     MasterSource = SourceDataModule.DSAulaTipo
     OnCalcFields = QuHorarioAulaTipoCalcFields

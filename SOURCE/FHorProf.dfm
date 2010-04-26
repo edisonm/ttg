@@ -507,11 +507,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       end>
     IndexFieldNames = 'CodProfesor'
     IndexName = 'QuHorarioProfesorIndex1'
-    IndexDefs = <
-      item
-        Name = 'QuHorarioProfesorIndex1'
-        Fields = 'CodProfesor'
-      end>
+    IndexDefs = <>
     MasterFields = 'CodProfesor'
     MasterSource = SourceDataModule.DSProfesor
     OnCalcFields = QuHorarioProfesorCalcFields

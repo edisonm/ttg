@@ -11,10 +11,10 @@ uses
   AccUtl in 'AccUtl.pas',
   Ac2DMUtl in 'Ac2DMUtl.pas',
   Acc2DM in 'Acc2DM.pas',
-  ArDBUtls in '\\vaio2edison\edison\apps\pascal\arctl\SOURCE\ArDBUtls.pas',
-  DBPacker in '\\vaio2edison\edison\apps\pascal\arctl\SOURCE\DBPacker.pas',
-  BZip2 in '\\vaio2edison\edison\apps\pascal\arctl\SOURCE\BZIP2.PAS',
-  ARCConst in '\\vaio2edison\edison\apps\pascal\arctl\SOURCE\ARCConst.pas';
+  ArDBUtls in '..\..\arctl\SOURCE\ArDBUtls.pas',
+  DBPacker in '..\..\arctl\SOURCE\DBPacker.pas',
+  BZip2 in '..\..\arctl\SOURCE\BZIP2.PAS',
+  ARCConst in '..\..\arctl\SOURCE\ARCConst.pas';
 
 begin
   if ParamCount = 0 then
@@ -47,4 +47,3 @@ begin
       raise Exception.Create('Opci¢n no v lida');
   end;
 end.
-

@@ -4,6 +4,7 @@ inherited HorarioForm: THorarioForm
   Width = 626
   Height = 361
   Caption = 'HorarioForm'
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   inherited TlBShow: TToolBar
@@ -707,11 +708,7 @@ inherited HorarioForm: THorarioForm
   object QuCruceAula: TkbmMemTable [5]
     FieldDefs = <>
     IndexFieldNames = 'CodAulaTipo;CodDia;CodHora'
-    IndexDefs = <
-      item
-        Name = 'QuCruceAulaIndex1'
-        Fields = 'CodAulaTipo;CodDia;CodHora'
-      end>
+    IndexDefs = <>
     Left = 88
     Top = 168
     object QuCruceAulaCodDia: TIntegerField
@@ -824,11 +821,7 @@ inherited HorarioForm: THorarioForm
         Size = 5
       end>
     IndexFieldNames = 'CodAulaTipo;CodDia;CodHora'
-    IndexDefs = <
-      item
-        Name = 'QuCruceAulaDetalleIndex1'
-        Fields = 'CodAulaTipo;CodDia;CodHora'
-      end>
+    IndexDefs = <>
     MasterFields = 'CodAulaTipo;CodDia;CodHora'
     MasterSource = DSCruceAula
     Left = 116
@@ -997,11 +990,7 @@ inherited HorarioForm: THorarioForm
   object QuCruceProfesor: TkbmMemTable [9]
     FieldDefs = <>
     IndexFieldNames = 'CodProfesor;CodDia;CodHora'
-    IndexDefs = <
-      item
-        Name = 'QuCruceProfesorIndex1'
-        Fields = 'CodProfesor;CodDia;CodHora'
-      end>
+    IndexDefs = <>
     AfterScroll = QuCruceProfesorAfterScroll
     Left = 88
     Top = 196
@@ -1072,15 +1061,7 @@ inherited HorarioForm: THorarioForm
   end
   object QuCruceMateria: TkbmMemTable [10]
     FieldDefs = <>
-    IndexDefs = <
-      item
-        Name = 'QuCruceMateriaIxCodMateria'
-        Fields = 'CodMateria'
-      end
-      item
-        Name = 'QuCruceMateriaIxNomMateria'
-        Fields = 'NomMateria'
-      end>
+    IndexDefs = <>
     AfterScroll = QuCruceMateriaAfterScroll
     Left = 88
     Top = 224
@@ -1100,13 +1081,7 @@ inherited HorarioForm: THorarioForm
     IndexFieldNames = 
       'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
       'ora'
-    IndexDefs = <
-      item
-        Name = 'QuCruceMateriaDetalleIndex1'
-        Fields = 
-          'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
-          'ora'
-      end>
+    IndexDefs = <>
     Left = 116
     Top = 224
     object QuCruceMateriaDetalleCodMateria: TIntegerField
@@ -1202,13 +1177,7 @@ inherited HorarioForm: THorarioForm
   object QuHorarioDetalleMateriaProhibicion: TkbmMemTable [12]
     FieldDefs = <>
     IndexFieldNames = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
-    IndexDefs = <
-      item
-        Name = 'QuHorarioDetalleMateriaProhibicionIndex1'
-        DescFields = 'CodMateProhibicionTipo'
-        Fields = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
-        Options = [ixDescending]
-      end>
+    IndexDefs = <>
     Left = 60
     Top = 168
     object QuHorarioDetalleMateriaProhibicionNomMateProhibicionTipo: TStringField
@@ -1536,11 +1505,7 @@ inherited HorarioForm: THorarioForm
   object QuMateriaCortadaHora: TkbmMemTable [15]
     FieldDefs = <>
     IndexFieldNames = 'CodDia'
-    IndexDefs = <
-      item
-        Name = 'QuMateriaCortadaHoraIxCodDia'
-        Fields = 'CodDia'
-      end>
+    IndexDefs = <>
     Left = 60
     Top = 252
     object QuMateriaCortadaHoraCodDia: TIntegerField
@@ -1580,11 +1545,7 @@ inherited HorarioForm: THorarioForm
   object QuMateriaCortadaHoraDetalle: TkbmMemTable [16]
     FieldDefs = <>
     IndexFieldNames = 'CodDia;CodHora;CodHora0'
-    IndexDefs = <
-      item
-        Name = 'QuMateriaCortadaHoraDetalleIxCodDia'
-        Fields = 'CodDia;CodHora;CodHora0'
-      end>
+    IndexDefs = <>
     MasterFields = 'CodDia;CodHora'
     MasterSource = DSMateriaCortadaHora
     Left = 88
