@@ -5,6 +5,7 @@ inherited HorarioForm: THorarioForm
   Height = 361
   Caption = 'HorarioForm'
   PixelsPerInch = 96
+  TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 618
     inherited DBNavigator: TDBNavigator
@@ -741,6 +742,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'AbrAulaTipo'
       KeyFields = 'CodAulaTipo'
       Size = 10
+      Lookup = True
     end
     object QuCruceAulaCantidad: TIntegerField
       FieldKind = fkLookup
@@ -750,6 +752,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'Cantidad'
       KeyFields = 'CodAulaTipo'
       Visible = False
+      Lookup = True
     end
     object QuCruceAulaNomDia: TStringField
       DisplayLabel = 'D'#237'a'
@@ -761,6 +764,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodDia'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuCruceAulaNomHora: TStringField
       DisplayLabel = 'Hora'
@@ -773,6 +777,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodHora'
       Required = True
       Size = 10
+      Lookup = True
     end
   end
   object QuCruceAulaDetalle: TkbmMemTable [6]
@@ -866,6 +871,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
+      Lookup = True
     end
     object QuCruceAulaDetalleAbrEspecializacion: TStringField
       DisplayLabel = 'Espec.'
@@ -878,6 +884,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodEspecializacion'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuCruceAulaDetalleNomParaleloId: TStringField
       DisplayLabel = 'Par.'
@@ -888,6 +895,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
+      Lookup = True
     end
   end
   object DSCruceAula: TDataSource [7]
@@ -947,6 +955,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
+      Lookup = True
     end
     object QuCruceProfesorDetalleAbrEspecializacion: TStringField
       DisplayLabel = 'Espec.'
@@ -959,6 +968,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodEspecializacion'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuCruceProfesorDetalleNomParaleloId: TStringField
       DisplayLabel = 'Par.'
@@ -969,6 +979,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
+      Lookup = True
     end
     object QuCruceProfesorDetalleNomMateria: TStringField
       DisplayLabel = 'Materia'
@@ -980,6 +991,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
       Size = 15
+      Lookup = True
     end
   end
   object QuCruceProfesor: TkbmMemTable [9]
@@ -1015,6 +1027,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodProfesor'
       Size = 15
       AttributeSet = 'ApeProfesor'
+      Lookup = True
     end
     object QuCruceProfesorNomProfesor: TStringField
       DisplayLabel = 'Nombre'
@@ -1026,6 +1039,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodProfesor'
       Size = 15
       AttributeSet = 'Nombre'
+      Lookup = True
     end
     object QuCruceProfesorNomHora: TStringField
       DisplayLabel = 'Hora'
@@ -1038,6 +1052,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodHora'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuCruceProfesorNomDia: TStringField
       DisplayLabel = 'D'#237'a'
@@ -1049,6 +1064,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodDia'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuCruceProfesorCruces: TIntegerField
       FieldName = 'Cruces'
@@ -1131,6 +1147,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
+      Lookup = True
     end
     object QuCruceMateriaDetalleAbrEspecializacion: TStringField
       DisplayLabel = 'Espec.'
@@ -1143,6 +1160,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodEspecializacion'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuCruceMateriaDetalleNomParaleloId: TStringField
       DisplayLabel = 'Par.'
@@ -1153,6 +1171,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
+      Lookup = True
     end
     object QuCruceMateriaDetalleNomDia: TStringField
       DisplayLabel = 'D'#237'a'
@@ -1164,6 +1183,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodDia'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuCruceMateriaDetalleNomHora: TStringField
       DisplayLabel = 'Hora'
@@ -1176,6 +1196,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodHora'
       Required = True
       Size = 10
+      Lookup = True
     end
   end
   object QuHorarioDetalleMateriaProhibicion: TkbmMemTable [12]
@@ -1201,6 +1222,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodMateProhibicionTipo'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuHorarioDetalleMateriaProhibicionNomMateria: TStringField
       DisplayLabel = 'Materia'
@@ -1240,6 +1262,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodDia'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuHorarioDetalleMateriaProhibicionNomHora: TStringField
       DisplayLabel = 'Hora'
@@ -1252,6 +1275,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodHora'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuHorarioDetalleMateriaProhibicionAbrNivel: TStringField
       DisplayLabel = 'Nivel'
@@ -1263,6 +1287,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
+      Lookup = True
     end
     object QuHorarioDetalleMateriaProhibicionAbrEspecializacion: TStringField
       DisplayLabel = 'Espec.'
@@ -1275,6 +1300,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodEspecializacion'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuHorarioDetalleMateriaProhibicionNomParaleloId: TStringField
       DisplayLabel = 'Par.'
@@ -1285,6 +1311,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
+      Lookup = True
     end
   end
   object QuHorarioDetalleProfesorProhibicion: TkbmMemTable [13]
@@ -1303,6 +1330,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodProfProhibicionTipo'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuHorarioDetalleProfesorProhibicionApeNomProfesor: TStringField
       DisplayLabel = 'Apellido'
@@ -1349,6 +1377,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodDia'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuHorarioDetalleProfesorProhibicionNomHora: TStringField
       DisplayLabel = 'Hora'
@@ -1361,6 +1390,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodHora'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuHorarioDetalleProfesorProhibicionNomNivel: TStringField
       DisplayLabel = 'Nivel'
@@ -1372,6 +1402,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
+      Lookup = True
     end
     object QuHorarioDetalleProfesorProhibicionNomEspecializacion: TStringField
       DisplayLabel = 'Espec.'
@@ -1384,6 +1415,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodEspecializacion'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuHorarioDetalleProfesorProhibicionNomParaleloId: TStringField
       DisplayLabel = 'Par.'
@@ -1394,6 +1426,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
+      Lookup = True
     end
   end
   object QuMateriaCortadaDia: TkbmMemTable [14]
@@ -1436,6 +1469,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
+      Lookup = True
     end
     object QuMateriaCortadaDiaAbrEspecializacion: TStringField
       DisplayLabel = 'Espec.'
@@ -1448,6 +1482,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodEspecializacion'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuMateriaCortadaDiaNomParaleloId: TStringField
       DisplayLabel = 'Par.'
@@ -1458,6 +1493,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
+      Lookup = True
     end
     object QuMateriaCortadaDiaNomDia: TStringField
       DisplayLabel = 'D'#237'a'
@@ -1469,6 +1505,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodDia'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuMateriaCortadaDiaNomHora: TStringField
       DisplayLabel = 'Hora'
@@ -1481,6 +1518,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodHora'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuMateriaCortadaDiaNomMateria: TStringField
       DisplayLabel = 'Materia'
@@ -1492,6 +1530,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
       Size = 15
+      Lookup = True
     end
   end
   object QuMateriaCortadaHora: TkbmMemTable [15]
@@ -1522,6 +1561,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodDia'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuMateriaCortadaHoraNomHora: TStringField
       DisplayLabel = 'Hora'
@@ -1534,6 +1574,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodHora'
       Required = True
       Size = 10
+      Lookup = True
     end
   end
   object QuMateriaCortadaHoraDetalle: TkbmMemTable [16]
@@ -1586,6 +1627,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
+      Lookup = True
     end
     object QuMateriaCortadaHoraDetalleAbrEspecializacion: TStringField
       DisplayLabel = 'Espec.'
@@ -1598,6 +1640,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodEspecializacion'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuMateriaCortadaHoraDetalleNomParaleloId: TStringField
       DisplayLabel = 'Par.'
@@ -1608,6 +1651,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
+      Lookup = True
     end
     object QuMateriaCortadaHoraDetalleNomDia: TStringField
       DisplayLabel = 'D'#237'a'
@@ -1619,6 +1663,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodDia'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuMateriaCortadaHoraDetalleNomHora: TStringField
       DisplayLabel = 'Hora'
@@ -1631,6 +1676,7 @@ inherited HorarioForm: THorarioForm
       KeyFields = 'CodHora0'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuMateriaCortadaHoraDetalleNomMateria: TStringField
       DisplayLabel = 'Materia'
@@ -1642,6 +1688,7 @@ inherited HorarioForm: THorarioForm
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
       Size = 15
+      Lookup = True
     end
   end
   object DSMateriaCortadaHora: TDataSource [17]

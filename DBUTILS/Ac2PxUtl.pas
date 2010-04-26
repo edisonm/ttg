@@ -28,7 +28,7 @@ procedure CopyAllAccessToParadox(DBAcc: Database; DBPdx: TDatabase;
 implementation
 
 uses
-  BDE, ArDBUtls, AccUtl;
+  BDE, AccUtl, ArDBUtls;
 
 const
   Acc2PdxFieldType: array[1..$17] of ShortInt = (

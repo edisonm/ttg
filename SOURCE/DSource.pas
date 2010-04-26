@@ -380,6 +380,7 @@ end;
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
+  TbParalelo.AddIndex('TbParaleloCodParalelo', 'CodParalelo', [ixUnique]);
   FConfigStorage := TConfigStorage.Create(Self);
   OpenTables;
   NewDataBase;

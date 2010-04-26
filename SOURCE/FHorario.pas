@@ -203,7 +203,8 @@ var
 
 implementation
 uses
-  FCrsMMER, DMaster, SGHCUtls, FCrsMME1, FConfig, Printers, DSource, FMain;
+  FCrsMMER, DMaster, SGHCUtls, FCrsMME1, FConfig, Printers, DSource, FMain,
+  Variants;
 {$R *.DFM}
 
 procedure THorarioForm.ActHorarioParaleloExecute(Sender: TObject);
@@ -1001,7 +1002,7 @@ begin
         while not TbDia.Eof do
         begin
           CodDia := TbDiaCodDia.Value;
-          if not TbPeriodo.FindKey('CodDia;CodHora', VarArrayOf([CodDia, CodHora]), []) then
+          if not TbPeriodo.Locate('CodDia;CodHora', VarArrayOf([CodDia, CodHora]), []) then
           begin
             QuMateriaCortadaHora.Append;
             QuMateriaCortadaHoraCodDia.Value := CodDia;

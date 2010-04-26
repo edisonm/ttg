@@ -1,22 +1,29 @@
 inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbAulaTipo: TkbmMemTable
     Tag = 0
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbAulaTipoixAbrAulaTipo'
-        Fields = 'AbrAulaTipo'
-        Options = [ixUnique]
+        Name = 'CodAulaTipo'
+        DataType = ftAutoInc
       end
       item
-        Name = 'TbAulaTipoixNomAulaTipo'
-        Fields = 'NomAulaTipo'
-        Options = [ixUnique]
+        Name = 'NomAulaTipo'
+        DataType = ftString
+        Precision = -1
+        Size = 25
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbAulaTipoPrimaryKey'
-        Fields = 'CodAulaTipo'
-        Options = [ixPrimary, ixUnique]
+        Name = 'AbrAulaTipo'
+        DataType = ftString
+        Precision = -1
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'Cantidad'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -51,22 +58,24 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbEspecializacion: TkbmMemTable
     Tag = 1
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbEspecializacionixAbrEspecializacion'
-        Fields = 'AbrEspecializacion'
-        Options = [ixUnique]
+        Name = 'CodEspecializacion'
+        DataType = ftAutoInc
       end
       item
-        Name = 'TbEspecializacionixNomEspecializacion'
-        Fields = 'NomEspecializacion'
-        Options = [ixUnique]
+        Name = 'NomEspecializacion'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbEspecializacionPrimaryKey'
-        Fields = 'CodEspecializacion'
-        Options = [ixPrimary, ixUnique]
+        Name = 'AbrEspecializacion'
+        DataType = ftString
+        Precision = -1
+        Size = 10
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -96,17 +105,17 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbDia: TkbmMemTable
     Tag = 2
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbDiaixNomDia'
-        Fields = 'NomDia'
-        Options = [ixUnique]
+        Name = 'CodDia'
+        DataType = ftAutoInc
       end
       item
-        Name = 'TbDiaPrimaryKey'
-        Fields = 'CodDia'
-        Options = [ixPrimary, ixUnique]
+        Name = 'NomDia'
+        DataType = ftString
+        Precision = -1
+        Size = 10
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -130,17 +139,17 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbMateria: TkbmMemTable
     Tag = 3
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbMateriaixNomMateria'
-        Fields = 'NomMateria'
-        Options = [ixUnique]
+        Name = 'CodMateria'
+        DataType = ftAutoInc
       end
       item
-        Name = 'TbMateriaPrimaryKey'
-        Fields = 'CodMateria'
-        Options = [ixPrimary, ixUnique]
+        Name = 'NomMateria'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -164,22 +173,23 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbNivel: TkbmMemTable
     Tag = 4
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbNivelixAbrNivel'
-        Fields = 'AbrNivel'
-        Options = [ixUnique]
+        Name = 'CodNivel'
+        DataType = ftAutoInc
       end
       item
-        Name = 'TbNivelixNomNivel'
-        Fields = 'NomNivel'
-        Options = [ixUnique]
+        Name = 'NomNivel'
+        DataType = ftString
+        Precision = -1
+        Size = 15
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbNivelPrimaryKey'
-        Fields = 'CodNivel'
-        Options = [ixPrimary, ixUnique]
+        Name = 'AbrNivel'
+        DataType = ftString
+        Precision = -1
+        Size = 5
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -208,22 +218,24 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbHora: TkbmMemTable
     Tag = 5
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbHoraixIntervalo'
-        Fields = 'Intervalo'
-        Options = [ixUnique]
+        Name = 'CodHora'
+        DataType = ftAutoInc
       end
       item
-        Name = 'TbHoraixNomHora'
-        Fields = 'NomHora'
-        Options = [ixUnique]
+        Name = 'NomHora'
+        DataType = ftString
+        Precision = -1
+        Size = 10
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbHoraPrimaryKey'
-        Fields = 'CodHora'
-        Options = [ixPrimary, ixUnique]
+        Name = 'Intervalo'
+        DataType = ftString
+        Precision = -1
+        Size = 21
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -253,20 +265,24 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbHorario: TkbmMemTable
     Tag = 6
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbHorarioixMomentoFinal'
-        Fields = 'MomentoFinal'
+        Name = 'CodHorario'
+        DataType = ftAutoInc
       end
       item
-        Name = 'TbHorarioixMomentoInicial'
-        Fields = 'MomentoInicial'
+        Name = 'MomentoInicial'
+        DataType = ftDateTime
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbHorarioPrimaryKey'
-        Fields = 'CodHorario'
-        Options = [ixPrimary, ixUnique]
+        Name = 'MomentoFinal'
+        DataType = ftDateTime
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'Informe'
+        DataType = ftMemo
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -298,20 +314,16 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbCurso: TkbmMemTable
     Tag = 7
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbCursoEspecializacionCurso'
-        Fields = 'CodEspecializacion'
+        Name = 'CodNivel'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbCursoNivelCurso'
-        Fields = 'CodNivel'
-      end
-      item
-        Name = 'TbCursoPrimaryKey'
-        Fields = 'CodNivel;CodEspecializacion'
-        Options = [ixPrimary, ixUnique]
+        Name = 'CodEspecializacion'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -335,17 +347,17 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbParaleloId: TkbmMemTable
     Tag = 8
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbParaleloIdixNomParaleloId'
-        Fields = 'NomParaleloId'
-        Options = [ixUnique]
+        Name = 'CodParaleloId'
+        DataType = ftAutoInc
       end
       item
-        Name = 'TbParaleloIdPrimaryKey'
-        Fields = 'CodParaleloId'
-        Options = [ixPrimary, ixUnique]
+        Name = 'NomParaleloId'
+        DataType = ftString
+        Precision = -1
+        Size = 5
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -369,17 +381,28 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbMateriaProhibicionTipo: TkbmMemTable
     Tag = 9
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbMateriaProhibicionTipoixNomMateProhibicionTipo'
-        Fields = 'NomMateProhibicionTipo'
-        Options = [ixUnique]
+        Name = 'CodMateProhibicionTipo'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbMateriaProhibicionTipoPrimaryKey'
-        Fields = 'CodMateProhibicionTipo'
-        Options = [ixPrimary, ixUnique]
+        Name = 'NomMateProhibicionTipo'
+        DataType = ftString
+        Precision = -1
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'ColMateProhibicionTipo'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'ValMateProhibicionTipo'
+        DataType = ftFloat
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -414,20 +437,16 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbPeriodo: TkbmMemTable
     Tag = 10
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbPeriodoDiaPeriodo'
-        Fields = 'CodDia'
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbPeriodoHoraPeriodo'
-        Fields = 'CodHora'
-      end
-      item
-        Name = 'TbPeriodoPrimaryKey'
-        Fields = 'CodDia;CodHora'
-        Options = [ixPrimary, ixUnique]
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -451,20 +470,21 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbParalelo: TkbmMemTable
     Tag = 11
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbParaleloCursoParalelo'
-        Fields = 'CodNivel;CodEspecializacion'
+        Name = 'CodNivel'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbParaleloParaleloIdParalelo'
-        Fields = 'CodParaleloId'
+        Name = 'CodEspecializacion'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbParaleloPrimaryKey'
-        Fields = 'CodNivel;CodEspecializacion;CodParaleloId'
-        Options = [ixPrimary, ixUnique]
+        Name = 'CodParaleloId'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -493,22 +513,31 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbProfesor: TkbmMemTable
     Tag = 12
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbProfesorixApeNomProfesor'
-        Fields = 'ApeProfesor;NomProfesor'
-        Options = [ixUnique]
+        Name = 'CodProfesor'
+        DataType = ftAutoInc
       end
       item
-        Name = 'TbProfesorixNomApeProfesor'
-        Fields = 'NomProfesor;ApeProfesor'
-        Options = [ixUnique]
+        Name = 'CedProfesor'
+        DataType = ftString
+        Precision = -1
+        Size = 11
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbProfesorPrimaryKey'
-        Fields = 'CodProfesor'
-        Options = [ixPrimary, ixUnique]
+        Name = 'ApeProfesor'
+        DataType = ftString
+        Precision = -1
+        Size = 15
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomProfesor'
+        DataType = ftString
+        Precision = -1
+        Size = 15
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -544,24 +573,26 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbMateriaProhibicion: TkbmMemTable
     Tag = 13
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbMateriaProhibicionMateriaMateriaProhibicion'
-        Fields = 'CodMateria'
+        Name = 'CodMateria'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbMateriaProhibicionMateriaProhibicionTipoMateriaProhibicion'
-        Fields = 'CodMateProhibicionTipo'
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbMateriaProhibicionPeriodoMateriaProhibicion'
-        Fields = 'CodDia;CodHora'
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbMateriaProhibicionPrimaryKey'
-        Fields = 'CodMateria;CodDia;CodHora'
-        Options = [ixPrimary, ixUnique]
+        Name = 'CodMateProhibicionTipo'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     Left = 336
@@ -594,28 +625,43 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbDistributivo: TkbmMemTable
     Tag = 14
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbDistributivoAulaTipoDistributivo'
-        Fields = 'CodAulaTipo'
+        Name = 'CodMateria'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbDistributivoMateriaDistributivo'
-        Fields = 'CodMateria'
+        Name = 'CodNivel'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbDistributivoParaleloDistributivo'
-        Fields = 'CodNivel;CodEspecializacion;CodParaleloId'
+        Name = 'CodEspecializacion'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbDistributivoPrimaryKey'
-        Fields = 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId'
-        Options = [ixPrimary, ixUnique]
+        Name = 'CodParaleloId'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbDistributivoProfesorDistributivo'
-        Fields = 'CodProfesor'
+        Name = 'CodProfesor'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodAulaTipo'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'Composicion'
+        DataType = ftString
+        Precision = -1
+        Size = 40
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -665,33 +711,46 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbHorarioDetalle: TkbmMemTable
     Tag = 15
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbHorarioDetalleDistributivoHorarioDetalle'
-        Fields = 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId'
+        Name = 'CodHorario'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbHorarioDetalleHorarioDetalleCodMateria'
-        Fields = 'CodMateria'
+        Name = 'CodMateria'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbHorarioDetalleHorarioHorarioDetalle'
-        Fields = 'CodHorario'
+        Name = 'CodNivel'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbHorarioDetalleixRestriccionMateria'
-        Fields = 'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
-        Options = [ixUnique]
+        Name = 'CodEspecializacion'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbHorarioDetallePeriodoHorarioDetalle'
-        Fields = 'CodDia;CodHora'
+        Name = 'CodParaleloId'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbHorarioDetallePrimaryKey'
-        Fields = 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
-        Options = [ixPrimary, ixUnique]
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'Sesion'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     Left = 48
@@ -744,17 +803,27 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbProfesorProhibicionTipo: TkbmMemTable
     Tag = 16
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbProfesorProhibicionTipoixNomProfProhibicionTipo'
-        Fields = 'NomProfProhibicionTipo'
-        Options = [ixUnique]
+        Name = 'CodProfProhibicionTipo'
+        DataType = ftAutoInc
       end
       item
-        Name = 'TbProfesorProhibicionTipoPrimaryKey'
-        Fields = 'CodProfProhibicionTipo'
-        Options = [ixPrimary, ixUnique]
+        Name = 'NomProfProhibicionTipo'
+        DataType = ftString
+        Precision = -1
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'ColProfProhibicionTipo'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'ValProfProhibicionTipo'
+        DataType = ftFloat
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
@@ -788,24 +857,26 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbProfesorProhibicion: TkbmMemTable
     Tag = 17
-    FieldDefs = <>
-    IndexDefs = <
+    FieldDefs = <
       item
-        Name = 'TbProfesorProhibicionPeriodoProfesorProhibicion'
-        Fields = 'CodDia;CodHora'
+        Name = 'CodProfesor'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbProfesorProhibicionPrimaryKey'
-        Fields = 'CodProfesor;CodDia;CodHora'
-        Options = [ixPrimary, ixUnique]
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbProfesorProhibicionProfesorProfesorProhibicion'
-        Fields = 'CodProfesor'
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end
       item
-        Name = 'TbProfesorProhibicionProfesorProhibicionTipoProfesorProhibicion'
-        Fields = 'CodProfProhibicionTipo'
+        Name = 'CodProfProhibicionTipo'
+        DataType = ftInteger
+        Attributes = [faRequired]
       end>
     BeforePost = DataSetBeforePost
     Left = 240

@@ -1,4 +1,5 @@
 object BaseDataModule: TBaseDataModule
+  OldCreateOrder = True
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Left = 72

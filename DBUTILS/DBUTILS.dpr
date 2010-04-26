@@ -10,7 +10,11 @@ uses
   DAO_TLB in 'C:\Archivos de programa\Borland\Delphi5\Imports\DAO_TLB.pas',
   AccUtl in 'AccUtl.pas',
   Ac2DMUtl in 'Ac2DMUtl.pas',
-  Acc2DM in 'Acc2DM.pas';
+  Acc2DM in 'Acc2DM.pas',
+  ArDBUtls in '\\vaio2edison\edison\apps\pascal\arctl\SOURCE\ArDBUtls.pas',
+  DBPacker in '\\vaio2edison\edison\apps\pascal\arctl\SOURCE\DBPacker.pas',
+  BZip2 in '\\vaio2edison\edison\apps\pascal\arctl\SOURCE\BZIP2.PAS',
+  ARCConst in '\\vaio2edison\edison\apps\pascal\arctl\SOURCE\ARCConst.pas';
 
 begin
   if ParamCount = 0 then

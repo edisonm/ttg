@@ -47,6 +47,7 @@ type
     procedure OpenTables;
     procedure CloseTables;
     procedure EmptyTables;
+//    procedure ExecuteAction(DoAction: procedure of object);
     procedure LoadFromTextDir(const ADirName: string);
     procedure LoadFromTextFile(const AFileName: TFileName);
     procedure SaveToTextDir(const ADirName: TFileName); virtual;

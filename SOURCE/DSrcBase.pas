@@ -1,6 +1,6 @@
 unit DSrcBase;
 (*
-  sábado, 24 de abril de 2010 10:23:21
+  lunes, 26 de abril de 2010 13:51:26
 
   Warning:
 
@@ -13,7 +13,7 @@ unit DSrcBase;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, kbmMemTable,
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, KbmMemTable,
   DBase;
 
 type
@@ -159,6 +159,116 @@ begin
   Tables[15] := TbHorarioDetalle;
   Tables[16] := TbProfesorProhibicionTipo;
   Tables[17] := TbProfesorProhibicion;
+  with TbAulaTipo do
+  begin
+    AddIndex('TbAulaTipoixAbrAulaTipo', 'AbrAulaTipo', [ixUnique]);
+    AddIndex('TbAulaTipoixNomAulaTipo', 'NomAulaTipo', [ixUnique]);
+    AddIndex('TbAulaTipoPrimaryKey', 'CodAulaTipo', [ixPrimary, ixUnique]);
+  end;
+  with TbEspecializacion do
+  begin
+    AddIndex('TbEspecializacionixAbrEspecializacion', 'AbrEspecializacion', [ixUnique]);
+    AddIndex('TbEspecializacionixNomEspecializacion', 'NomEspecializacion', [ixUnique]);
+    AddIndex('TbEspecializacionPrimaryKey', 'CodEspecializacion', [ixPrimary, ixUnique]);
+  end;
+  with TbDia do
+  begin
+    AddIndex('TbDiaixNomDia', 'NomDia', [ixUnique]);
+    AddIndex('TbDiaPrimaryKey', 'CodDia', [ixPrimary, ixUnique]);
+  end;
+  with TbMateria do
+  begin
+    AddIndex('TbMateriaixNomMateria', 'NomMateria', [ixUnique]);
+    AddIndex('TbMateriaPrimaryKey', 'CodMateria', [ixPrimary, ixUnique]);
+  end;
+  with TbNivel do
+  begin
+    AddIndex('TbNivelixAbrNivel', 'AbrNivel', [ixUnique]);
+    AddIndex('TbNivelixNomNivel', 'NomNivel', [ixUnique]);
+    AddIndex('TbNivelPrimaryKey', 'CodNivel', [ixPrimary, ixUnique]);
+  end;
+  with TbHora do
+  begin
+    AddIndex('TbHoraixIntervalo', 'Intervalo', [ixUnique]);
+    AddIndex('TbHoraixNomHora', 'NomHora', [ixUnique]);
+    AddIndex('TbHoraPrimaryKey', 'CodHora', [ixPrimary, ixUnique]);
+  end;
+  with TbHorario do
+  begin
+    AddIndex('TbHorarioixMomentoFinal', 'MomentoFinal', []);
+    AddIndex('TbHorarioixMomentoInicial', 'MomentoInicial', []);
+    AddIndex('TbHorarioPrimaryKey', 'CodHorario', [ixPrimary, ixUnique]);
+  end;
+  with TbCurso do
+  begin
+    AddIndex('TbCursoEspecializacionCurso', 'CodEspecializacion', []);
+    AddIndex('TbCursoNivelCurso', 'CodNivel', []);
+    AddIndex('TbCursoPrimaryKey', 'CodNivel;CodEspecializacion', [ixPrimary, ixUnique]);
+  end;
+  with TbParaleloId do
+  begin
+    AddIndex('TbParaleloIdixNomParaleloId', 'NomParaleloId', [ixUnique]);
+    AddIndex('TbParaleloIdPrimaryKey', 'CodParaleloId', [ixPrimary, ixUnique]);
+  end;
+  with TbMateriaProhibicionTipo do
+  begin
+    AddIndex('TbMateriaProhibicionTipoixNomMateProhibicionTipo', 'NomMateProhibicionTipo', [ixUnique]);
+    AddIndex('TbMateriaProhibicionTipoPrimaryKey', 'CodMateProhibicionTipo', [ixPrimary, ixUnique]);
+  end;
+  with TbPeriodo do
+  begin
+    AddIndex('TbPeriodoDiaPeriodo', 'CodDia', []);
+    AddIndex('TbPeriodoHoraPeriodo', 'CodHora', []);
+    AddIndex('TbPeriodoPrimaryKey', 'CodDia;CodHora', [ixPrimary, ixUnique]);
+  end;
+  with TbParalelo do
+  begin
+    AddIndex('TbParaleloCursoParalelo', 'CodNivel;CodEspecializacion', []);
+    AddIndex('TbParaleloParaleloIdParalelo', 'CodParaleloId', []);
+    AddIndex('TbParaleloPrimaryKey', 'CodNivel;CodEspecializacion;CodParaleloId', [ixPrimary, ixUnique]);
+  end;
+  with TbProfesor do
+  begin
+    AddIndex('TbProfesorixApeNomProfesor', 'ApeProfesor;NomProfesor', [ixUnique]);
+    AddIndex('TbProfesorixNomApeProfesor', 'NomProfesor;ApeProfesor', [ixUnique]);
+    AddIndex('TbProfesorPrimaryKey', 'CodProfesor', [ixPrimary, ixUnique]);
+  end;
+  with TbMateriaProhibicion do
+  begin
+    AddIndex('TbMateriaProhibicionMateriaMateriaProhibicion', 'CodMateria', []);
+    AddIndex('TbMateriaProhibicionMateriaProhibicionTipoMateriaProhibicion', 'CodMateProhibicionTipo', []);
+    AddIndex('TbMateriaProhibicionPeriodoMateriaProhibicion', 'CodDia;CodHora', []);
+    AddIndex('TbMateriaProhibicionPrimaryKey', 'CodMateria;CodDia;CodHora', [ixPrimary, ixUnique]);
+  end;
+  with TbDistributivo do
+  begin
+    AddIndex('TbDistributivoAulaTipoDistributivo', 'CodAulaTipo', []);
+    AddIndex('TbDistributivoMateriaDistributivo', 'CodMateria', []);
+    AddIndex('TbDistributivoParaleloDistributivo', 'CodNivel;CodEspecializacion;CodParaleloId', []);
+    AddIndex('TbDistributivoPrimaryKey', 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', [ixPrimary, ixUnique]);
+    AddIndex('TbDistributivoProfesorDistributivo', 'CodProfesor', []);
+  end;
+  with TbHorarioDetalle do
+  begin
+    AddIndex('TbHorarioDetalleDistributivoHorarioDetalle', 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId', []);
+    AddIndex('TbHorarioDetalleHorarioDetalleCodMateria', 'CodMateria', []);
+    AddIndex('TbHorarioDetalleHorarioHorarioDetalle', 'CodHorario', []);
+    AddIndex('TbHorarioDetalleixRestriccionMateria', 'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora', [ixUnique]);
+    AddIndex('TbHorarioDetallePeriodoHorarioDetalle', 'CodDia;CodHora', []);
+    AddIndex('TbHorarioDetallePrimaryKey', 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora', [ixPrimary, ixUnique]);
+  end;
+  with TbProfesorProhibicionTipo do
+  begin
+    AddIndex('TbProfesorProhibicionTipoixNomProfProhibicionTipo', 'NomProfProhibicionTipo', [ixUnique]);
+    AddIndex('TbProfesorProhibicionTipoPrimaryKey', 'CodProfProhibicionTipo', [ixPrimary, ixUnique]);
+  end;
+  with TbProfesorProhibicion do
+  begin
+    AddIndex('TbProfesorProhibicionPeriodoProfesorProhibicion', 'CodDia;CodHora', []);
+    AddIndex('TbProfesorProhibicionPrimaryKey', 'CodProfesor;CodDia;CodHora', [ixPrimary, ixUnique]);
+    AddIndex('TbProfesorProhibicionProfesorProfesorProhibicion', 'CodProfesor', []);
+    AddIndex('TbProfesorProhibicionProfesorProhibicionTipoProfesorProhibicion', 'CodProfProhibicionTipo', []);
+  end;
   SetLength(FMasterRels[0], 1);
   with FMasterRels[0, 0] do
   begin
