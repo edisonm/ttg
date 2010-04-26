@@ -431,11 +431,8 @@ begin
         TbHorarioDetalle.Filter := Format('CodHorario=%d', [CodHorario]);
         TbMemTable.LoadFromDataSet(TbHorarioDetalle, [mtcpoStructure]);
         TbHorarioDetalle.First;
-        with TbMemTable.IndexDefs.AddIndexDef do
-        begin
-          Name := 'ixTmp1';
-          Fields := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia';
-        end;
+        TbMemTable.AddIndex('ixTmp1',
+                            'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia', []);
         TbMemTableCodHorario := TbMemTable.FindField('CodHorario') as TIntegerField;
         TbMemTableCodMateria := TbMemTable.FindField('CodMateria') as TIntegerField;
         TbMemTableCodNivel := TbMemTable.FindField('CodNivel') as TIntegerField;
@@ -1175,12 +1172,22 @@ begin
   QuCruceMateria.AddIndex('QuCruceMateriaIxNomMateria', 'NomMateria', []);
   QuCruceMateriaDetalle.AddIndex('QuCruceMateriaDetalleIndex1',
                                  'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora', []);
+  {$IFDEF FPC}
   QuHorarioDetalleMateriaProhibicion.AddIndex('QuHorarioDetalleMateriaProhibicionIndex1',
                                               'CodMateProhibicionTipo;NomMateria;CodDia;CodHora',
                                               [ixDescending],
                                               'CodMateProhibicionTipo');
+  {$ELSE}
+  with QuHorarioDetalleMateriaProhibicion.IndexDefs.AddIndexDef do
+  begin
+    Name := 'QuHorarioDetalleMateriaProhibicionIndex1';
+    Fields := 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora';
+    Options := [ixDescending];
+     DescFields := 'CodMateProhibicionTipo';
+  end;
+  {$ENDIF}
   QuMateriaCortadaHora.AddIndex('QuMateriaCortadaHoraIxCodDia', 'CodDia', []);
-  QuMateriaCortadaDetalle.AddIndex('QuMateriaCortadaHoraDetalleIxCodDia', 'CodDia;CodHora;CodHora0', []);
+  QuMateriaCortadaHoraDetalle.AddIndex('QuMateriaCortadaHoraDetalleIxCodDia', 'CodDia;CodHora;CodHora0', []);
 end;
 
 end.

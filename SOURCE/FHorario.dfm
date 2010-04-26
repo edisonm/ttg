@@ -6,6 +6,7 @@ inherited HorarioForm: THorarioForm
   Caption = 'HorarioForm'
   OnCreate = FormCreate
   PixelsPerInch = 96
+  TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 618
     inherited DBNavigator: TDBNavigator
@@ -728,12 +729,12 @@ inherited HorarioForm: THorarioForm
       end
       item
         Name = 'AbrAulaTipo'
-	DataType = ftString
-	Size = 10
+        DataType = ftString
+        Size = 10
       end
       item
         Name = 'Cantidad'
-	DataType = ftInteger
+        DataType = ftInteger
       end
       item
         Name = 'NomDia'
@@ -938,38 +939,38 @@ inherited HorarioForm: THorarioForm
     FieldDefs = <
       item
         Name = 'CodProfesor'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodNivel'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodEspecializacion'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodParaleloId'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodMateria'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'AbrNivel'
@@ -978,63 +979,63 @@ inherited HorarioForm: THorarioForm
       end
       item
         Name = 'AbrEspecializacion'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomParaleloId'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 5
-        Attributes = [faRequired]
       end
       item
         Name = 'NomMateria'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 20
-        Attributes = [faRequired]
       end>
     IndexDefs = <>
     Left = 116
     Top = 196
     object QuCruceProfesorDetalleCodProfesor: TIntegerField
       FieldName = 'CodProfesor'
-      Visible = False
       Required = True
+      Visible = False
     end
     object QuCruceProfesorDetalleCodDia: TIntegerField
       FieldName = 'CodDia'
-      Visible = False
       Required = True
+      Visible = False
     end
     object QuCruceProfesorDetalleCodHora: TIntegerField
       FieldName = 'CodHora'
-      Visible = False
       Required = True
+      Visible = False
     end
     object QuCruceProfesorDetalleCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
-      Visible = False
       Required = True
+      Visible = False
     end
     object QuCruceProfesorDetalleCodEspecializacion: TIntegerField
       DisplayLabel = 'Espec.'
       FieldName = 'CodEspecializacion'
-      Visible = False
       Required = True
+      Visible = False
     end
     object QuCruceProfesorDetalleCodParaleloId: TIntegerField
       DisplayLabel = 'Tipo de paralelo'
       FieldName = 'CodParaleloId'
-      Visible = False
       Required = True
+      Visible = False
     end
     object QuCruceProfesorDetalleCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
-      Visible = False
       Required = True
+      Visible = False
     end
     object QuCruceProfesorDetalleAbrNivel: TStringField
       DisplayLabel = 'Nivel'
@@ -1089,47 +1090,47 @@ inherited HorarioForm: THorarioForm
     FieldDefs = <
       item
         Name = 'CodProfesor'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'ApeProfesor'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 15
-        Attributes = [faRequired]
       end
       item
         Name = 'NomProfesor'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 15
-        Attributes = [faRequired]
       end
       item
         Name = 'NomHora'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomDia'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'Cruces'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end>
     IndexFieldNames = 'CodProfesor;CodDia;CodHora'
     IndexDefs = <>
@@ -1205,14 +1206,14 @@ inherited HorarioForm: THorarioForm
     FieldDefs = <
       item
         Name = 'CodMateria'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'NomMateria'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 20
-        Attributes = [faRequired]
       end>
     IndexDefs = <>
     AfterScroll = QuCruceMateriaAfterScroll
@@ -1233,33 +1234,33 @@ inherited HorarioForm: THorarioForm
     FieldDefs = <
       item
         Name = 'CodMateria'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodNivel'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodEspecializacion'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodParaleloId'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'AbrNivel'
@@ -1278,18 +1279,19 @@ inherited HorarioForm: THorarioForm
       end
       item
         Name = 'NomDia'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomHora'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end>
     IndexFieldNames = 
-      'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
+      'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
+      'ora'
     IndexDefs = <>
     Left = 116
     Top = 224
@@ -1386,15 +1388,16 @@ inherited HorarioForm: THorarioForm
   object QuHorarioDetalleMateriaProhibicion: TkbmMemTable [12]
     FieldDefs = <
       item
-        Name = 'CodMateProhibicionTipo'
-        DataType = ftInteger
+        Name = 'NomMateProhibicionTipo'
         Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
       end
       item
         Name = 'NomMateria'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 20
-        Attributes = [faRequired]
       end
       item
         Name = 'CodHora'
@@ -1402,40 +1405,40 @@ inherited HorarioForm: THorarioForm
       end
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodMateProhibicionTipo'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodNivel'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodEspecializacion'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodParaleloId'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'NomDia'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomHora'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'AbrNivel'
@@ -1444,15 +1447,15 @@ inherited HorarioForm: THorarioForm
       end
       item
         Name = 'AbrEspecializacion'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomParaleloId'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 5
-        Attributes = [faRequired]
       end>
     IndexFieldNames = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
     IndexDefs = <>
@@ -1565,31 +1568,31 @@ inherited HorarioForm: THorarioForm
     FieldDefs = <
       item
         Name = 'NomProfProhibicionTipo'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'ApeNomProfesor'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 31
-        Attributes = [faRequired]
       end
       item
         Name = 'NomProfesor'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 15
-        Attributes = [faRequired]
       end
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodProfProhibicionTipo'
@@ -1597,48 +1600,48 @@ inherited HorarioForm: THorarioForm
       end
       item
         Name = 'CodNivel'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodEspecializacion'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodParaleloId'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'NomDia'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomHora'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomNivel'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 15
-        Attributes = [faRequired]
       end
       item
         Name = 'NomEspecializacion'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 20
-        Attributes = [faRequired]
       end
       item
         Name = 'NomParaleloId'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 5
-        Attributes = [faRequired]
       end>
     IndexDefs = <>
     Left = 60
@@ -1757,33 +1760,33 @@ inherited HorarioForm: THorarioForm
     FieldDefs = <
       item
         Name = 'CodNivel'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodEspecializacion'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodParaleloId'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodMateria'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'AbrNivel'
@@ -1792,33 +1795,33 @@ inherited HorarioForm: THorarioForm
       end
       item
         Name = 'AbrEspecializacion'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomParaleloId'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 5
-        Attributes = [faRequired]
       end
       item
         Name = 'NomDia'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomHora'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomMateria'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 20
-        Attributes = [faRequired]
       end>
     IndexDefs = <>
     AfterScroll = QuCruceMateriaAfterScroll
@@ -1926,25 +1929,25 @@ inherited HorarioForm: THorarioForm
     FieldDefs = <
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'NomDia'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomHora'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end>
     IndexFieldNames = 'CodDia'
     IndexDefs = <>
@@ -1988,38 +1991,38 @@ inherited HorarioForm: THorarioForm
     FieldDefs = <
       item
         Name = 'CodNivel'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodEspecializacion'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodParaleloId'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora0'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodMateria'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'AbrNivel'
@@ -2028,33 +2031,33 @@ inherited HorarioForm: THorarioForm
       end
       item
         Name = 'AbrEspecializacion'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomParaleloId'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 5
-        Attributes = [faRequired]
       end
       item
         Name = 'NomDia'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomHora'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomMateria'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 20
-        Attributes = [faRequired]
       end>
     IndexFieldNames = 'CodDia;CodHora;CodHora0'
     IndexDefs = <>
