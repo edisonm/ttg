@@ -519,6 +519,22 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       item
         Name = 'CodProfesor'
         DataType = ftAutoInc
+      end
+      item
+        Name = 'NomMateria'
+        DataType = ftString
+        Size = 20
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'ApeNomProfesor'
+        DataType = ftString
+        Size = 31
+      end
+      item
+        Name = 'Nombre'
+        DataType = ftString
+        Size = 40
       end>
     IndexFieldNames = 'CodNivel;CodEspecializacion;CodParaleloId'
     IndexName = 'QuHorarioParaleloIxParalelo'

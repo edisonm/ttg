@@ -1945,7 +1945,33 @@ object MainForm: TMainForm
     Top = 147
   end
   object QuParaleloHora: TkbmMemTable
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodNivel'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodEspecializacion'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodParaleloId'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomHora'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end>
     IndexDefs = <>
     Left = 76
     Top = 119
@@ -1978,7 +2004,23 @@ object MainForm: TMainForm
     end
   end
   object QuProfesorHora: TkbmMemTable
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodProfesor'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomHora'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end>
     IndexDefs = <>
     Left = 76
     Top = 147
@@ -2004,7 +2046,28 @@ object MainForm: TMainForm
     end
   end
   object QuProfesorHorarioDetalle: TkbmMemTable
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodProfesor'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'Nombre'
+        DataType = ftString
+        Size = 40
+        Attributes = [faRequired]
+      end>
     IndexDefs = <>
     Left = 104
     Top = 147
@@ -2029,7 +2092,42 @@ object MainForm: TMainForm
     end
   end
   object QuParaleloHorarioDetalle: TkbmMemTable
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodNivel'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodEspecializacion'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodParaleloId'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodMateria'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'NomMateria'
+        DataType = ftString
+        Size = 20
+        Attributes = [faRequired]
+      end>
     IndexDefs = <>
     Left = 104
     Top = 119
@@ -2085,6 +2183,12 @@ object MainForm: TMainForm
       item
         Name = 'CodMateria'
         DataType = ftInteger
+      end
+      item
+        Name = 'NomMateria'
+        DataType = ftString
+        Size = 20
+        Attributes = [faRequired]
       end>
     IndexDefs = <>
     AfterScroll = QuMateriaMateriaProhibicionAfterScroll
@@ -2105,7 +2209,21 @@ object MainForm: TMainForm
     end
   end
   object QuMateriaMateriaProhibicionHora: TkbmMemTable
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodMateria'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'Hora'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end>
     IndexDefs = <>
     Left = 104
     Top = 184
@@ -2129,7 +2247,23 @@ object MainForm: TMainForm
     end
   end
   object QuProfesorProfesorProhibicion: TkbmMemTable
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodProfesor'
+        DataType = ftInteger
+      end
+      item
+        Name = 'ApeProfesor'
+        DataType = ftString
+        Size = 15
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomProfesor'
+        DataType = ftString
+        Size = 15
+        Attributes = [faRequired]
+      end>
     IndexDefs = <>
     AfterScroll = QuProfesorProfesorProhibicionAfterScroll
     Left = 76
@@ -2161,7 +2295,23 @@ object MainForm: TMainForm
     end
   end
   object QuProfesorProfesorProhibicionHora: TkbmMemTable
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodProfesor'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomHora'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end>
     IndexDefs = <>
     Left = 104
     Top = 212

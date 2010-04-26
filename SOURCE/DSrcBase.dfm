@@ -9,14 +9,12 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       item
         Name = 'NomAulaTipo'
         DataType = ftString
-        Precision = -1
         Size = 25
         Attributes = [faRequired]
       end
       item
         Name = 'AbrAulaTipo'
         DataType = ftString
-        Precision = -1
         Size = 10
         Attributes = [faRequired]
       end
@@ -66,14 +64,12 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       item
         Name = 'NomEspecializacion'
         DataType = ftString
-        Precision = -1
         Size = 20
         Attributes = [faRequired]
       end
       item
         Name = 'AbrEspecializacion'
         DataType = ftString
-        Precision = -1
         Size = 10
         Attributes = [faRequired]
       end>
@@ -113,7 +109,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       item
         Name = 'NomDia'
         DataType = ftString
-        Precision = -1
         Size = 10
         Attributes = [faRequired]
       end>
@@ -147,7 +142,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       item
         Name = 'NomMateria'
         DataType = ftString
-        Precision = -1
         Size = 20
         Attributes = [faRequired]
       end>
@@ -181,14 +175,12 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       item
         Name = 'NomNivel'
         DataType = ftString
-        Precision = -1
         Size = 15
         Attributes = [faRequired]
       end
       item
         Name = 'AbrNivel'
         DataType = ftString
-        Precision = -1
         Size = 5
       end>
     BeforePost = DataSetBeforePost
@@ -226,14 +218,12 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       item
         Name = 'NomHora'
         DataType = ftString
-        Precision = -1
         Size = 10
         Attributes = [faRequired]
       end
       item
         Name = 'Intervalo'
         DataType = ftString
-        Precision = -1
         Size = 21
         Attributes = [faRequired]
       end>
@@ -355,7 +345,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       item
         Name = 'NomParaleloId'
         DataType = ftString
-        Precision = -1
         Size = 5
         Attributes = [faRequired]
       end>
@@ -390,7 +379,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       item
         Name = 'NomMateProhibicionTipo'
         DataType = ftString
-        Precision = -1
         Size = 10
         Attributes = [faRequired]
       end
@@ -521,21 +509,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       item
         Name = 'CedProfesor'
         DataType = ftString
-        Precision = -1
         Size = 11
         Attributes = [faRequired]
       end
       item
         Name = 'ApeProfesor'
         DataType = ftString
-        Precision = -1
         Size = 15
         Attributes = [faRequired]
       end
       item
         Name = 'NomProfesor'
         DataType = ftString
-        Precision = -1
         Size = 15
         Attributes = [faRequired]
       end>
@@ -659,7 +644,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       item
         Name = 'Composicion'
         DataType = ftString
-        Precision = -1
         Size = 40
         Attributes = [faRequired]
       end>
@@ -811,7 +795,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       item
         Name = 'NomProfProhibicionTipo'
         DataType = ftString
-        Precision = -1
         Size = 10
         Attributes = [faRequired]
       end

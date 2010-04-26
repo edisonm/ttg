@@ -1,6 +1,6 @@
 inherited SourceDataModule: TSourceDataModule
-  Left = 117
-  Top = 132
+  Left = 110
+  Top = 133
   inherited TbAulaTipo: TkbmMemTable
     inherited TbAulaTipoCodAulaTipo: TAutoIncField
       Visible = False

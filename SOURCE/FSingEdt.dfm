@@ -1,6 +1,6 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 479
-  Top = 268
+  Left = 449
+  Top = 269
   Width = 510
   PixelsPerInch = 96
   inherited TlBShow: TToolBar

@@ -72,7 +72,27 @@ object SelPeriodoForm: TSelPeriodoForm
     TabOrder = 3
   end
   object TbDiaHora: TkbmMemTable
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodDia'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'NomDia'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomHora'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end>
     IndexDefs = <>
     Left = 24
     Top = 64

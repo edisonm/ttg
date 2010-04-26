@@ -6,7 +6,17 @@ object MasterDataModule: TMasterDataModule
   Height = 404
   Width = 748
   object TbTmpProfesorCarga: TkbmMemTable
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodProfesor'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'Carga'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end>
     IndexDefs = <>
     Left = 250
     Top = 11
@@ -23,6 +33,7 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'ApeProfesor'
       KeyFields = 'CodProfesor'
       Size = 31
+      Lookup = True
     end
     object TbTmpProfesorCargaNomProfesor: TStringField
       DisplayLabel = 'Nombre'
@@ -33,13 +44,39 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'NomProfesor'
       KeyFields = 'CodProfesor'
       Size = 31
+      Lookup = True
     end
     object TbTmpProfesorCargaCarga: TIntegerField
       FieldName = 'Carga'
     end
   end
   object QuDistributivoProfesor: TkbmMemTable
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodMateria'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodNivel'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodParaleloId'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodProfesor'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end>
     IndexDefs = <>
     Left = 250
     Top = 115
@@ -72,6 +109,7 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
       Size = 15
+      Lookup = True
     end
     object QuDistributivoProfesorAbrNivel: TStringField
       Alignment = taRightJustify
@@ -83,6 +121,7 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 10
+      Lookup = True
     end
     object QuDistributivoProfesorAbrEspecializacion: TStringField
       DisplayLabel = 'Espec.'
@@ -94,6 +133,7 @@ object MasterDataModule: TMasterDataModule
       KeyFields = 'CodEspecializacion'
       Required = True
       Size = 10
+      Lookup = True
     end
     object QuDistributivoProfesorNomParaleloId: TStringField
       Alignment = taRightJustify
@@ -104,6 +144,7 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
+      Lookup = True
     end
     object QuDistributivoProfesorApeNomProfesor: TStringField
       DisplayLabel = 'Profesor'
@@ -114,10 +155,21 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'ApeNomProfesor'
       KeyFields = 'CodProfesor'
       Size = 31
+      Lookup = True
     end
   end
   object QuProfesorProhibicionCant: TkbmMemTable
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodProfesor'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'Cantidad'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end>
     IndexDefs = <>
     Left = 58
     Top = 157
@@ -129,7 +181,17 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object TbTmpAulaTipoCarga: TkbmMemTable
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodAulaTipo'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'Carga'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end>
     IndexDefs = <>
     Left = 250
     Top = 62
@@ -146,6 +208,7 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'AbrAulaTipo'
       KeyFields = 'CodAulaTipo'
       Size = 31
+      Lookup = True
     end
     object TbTmpAulaTipoCargaCarga: TIntegerField
       FieldName = 'Carga'

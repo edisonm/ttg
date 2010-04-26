@@ -504,6 +504,34 @@ inherited HorarioProfesorForm: THorarioProfesorForm
         Name = 'CodMateria'
         Attributes = [faRequired]
         DataType = ftInteger
+      end
+      item
+        Name = 'AbrNivel'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'AbrEspecializacion'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomParaleloId'
+        DataType = ftString
+        Size = 5
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomMateria'
+        DataType = ftString
+        Size = 20
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'Nombre'
+        DataType = ftString
+        Size = 40
       end>
     IndexFieldNames = 'CodProfesor'
     IndexName = 'QuHorarioProfesorIndex1'

@@ -6,7 +6,6 @@ inherited HorarioForm: THorarioForm
   Caption = 'HorarioForm'
   OnCreate = FormCreate
   PixelsPerInch = 96
-  TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 618
     inherited DBNavigator: TDBNavigator
@@ -706,7 +705,46 @@ inherited HorarioForm: THorarioForm
     Top = 140
   end
   object QuCruceAula: TkbmMemTable [5]
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodDia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodAulaTipo'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Usadas'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Cruces'
+        DataType = ftInteger
+      end
+      item
+        Name = 'AbrAulaTipo'
+	DataType = ftString
+	Size = 10
+      end
+      item
+        Name = 'Cantidad'
+	DataType = ftInteger
+      end
+      item
+        Name = 'NomDia'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomHora'
+        DataType = ftString
+        Size = 10
+      end>
     IndexFieldNames = 'CodAulaTipo;CodDia;CodHora'
     IndexDefs = <>
     Left = 88
@@ -897,46 +935,106 @@ inherited HorarioForm: THorarioForm
     Top = 140
   end
   object QuCruceProfesorDetalle: TkbmMemTable [8]
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodProfesor'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodNivel'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodEspecializacion'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodParaleloId'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodMateria'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'AbrNivel'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'AbrEspecializacion'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomParaleloId'
+        DataType = ftString
+        Size = 5
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomMateria'
+        DataType = ftString
+        Size = 20
+        Attributes = [faRequired]
+      end>
     IndexDefs = <>
     Left = 116
     Top = 196
     object QuCruceProfesorDetalleCodProfesor: TIntegerField
       FieldName = 'CodProfesor'
       Visible = False
+      Required = True
     end
     object QuCruceProfesorDetalleCodDia: TIntegerField
       FieldName = 'CodDia'
       Visible = False
+      Required = True
     end
     object QuCruceProfesorDetalleCodHora: TIntegerField
       FieldName = 'CodHora'
       Visible = False
+      Required = True
     end
     object QuCruceProfesorDetalleCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Visible = False
-      AttributeSet = 'CodNivel'
+      Required = True
     end
     object QuCruceProfesorDetalleCodEspecializacion: TIntegerField
       DisplayLabel = 'Espec.'
       FieldName = 'CodEspecializacion'
       Visible = False
-      AttributeSet = 'CodEspecializacion'
+      Required = True
     end
     object QuCruceProfesorDetalleCodParaleloId: TIntegerField
       DisplayLabel = 'Tipo de paralelo'
       FieldName = 'CodParaleloId'
       Visible = False
-      AttributeSet = 'CodParaleloId'
+      Required = True
     end
     object QuCruceProfesorDetalleCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
-      Required = True
       Visible = False
-      AttributeSet = 'CodMateria'
+      Required = True
     end
     object QuCruceProfesorDetalleAbrNivel: TStringField
       DisplayLabel = 'Nivel'
@@ -988,7 +1086,51 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceProfesor: TkbmMemTable [9]
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodProfesor'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'ApeProfesor'
+        DataType = ftString
+        Size = 15
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomProfesor'
+        DataType = ftString
+        Size = 15
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomHora'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomDia'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'Cruces'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end>
     IndexFieldNames = 'CodProfesor;CodDia;CodHora'
     IndexDefs = <>
     AfterScroll = QuCruceProfesorAfterScroll
@@ -1060,7 +1202,18 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceMateria: TkbmMemTable [10]
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodMateria'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomMateria'
+        DataType = ftString
+        Size = 20
+        Attributes = [faRequired]
+      end>
     IndexDefs = <>
     AfterScroll = QuCruceMateriaAfterScroll
     Left = 88
@@ -1077,10 +1230,66 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceMateriaDetalle: TkbmMemTable [11]
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodMateria'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodNivel'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodEspecializacion'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodParaleloId'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'AbrNivel'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'AbrEspecializacion'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomParaleloId'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'NomDia'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomHora'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end>
     IndexFieldNames = 
-      'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
-      'ora'
+      'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
     IndexDefs = <>
     Left = 116
     Top = 224
@@ -1175,7 +1384,76 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuHorarioDetalleMateriaProhibicion: TkbmMemTable [12]
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodMateProhibicionTipo'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomMateria'
+        DataType = ftString
+        Size = 20
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodMateProhibicionTipo'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodNivel'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodEspecializacion'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodParaleloId'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomDia'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomHora'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'AbrNivel'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'AbrEspecializacion'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomParaleloId'
+        DataType = ftString
+        Size = 5
+        Attributes = [faRequired]
+      end>
     IndexFieldNames = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
     IndexDefs = <>
     Left = 60
@@ -1284,7 +1562,84 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuHorarioDetalleProfesorProhibicion: TkbmMemTable [13]
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'NomProfProhibicionTipo'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'ApeNomProfesor'
+        DataType = ftString
+        Size = 31
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomProfesor'
+        DataType = ftString
+        Size = 15
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodProfProhibicionTipo'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'CodNivel'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodEspecializacion'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodParaleloId'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomDia'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomHora'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomNivel'
+        DataType = ftString
+        Size = 15
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomEspecializacion'
+        DataType = ftString
+        Size = 20
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomParaleloId'
+        DataType = ftString
+        Size = 5
+        Attributes = [faRequired]
+      end>
     IndexDefs = <>
     Left = 60
     Top = 196
@@ -1399,7 +1754,72 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuMateriaCortadaDia: TkbmMemTable [14]
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodNivel'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodEspecializacion'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodParaleloId'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodMateria'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'AbrNivel'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'AbrEspecializacion'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomParaleloId'
+        DataType = ftString
+        Size = 5
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomDia'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomHora'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomMateria'
+        DataType = ftString
+        Size = 20
+        Attributes = [faRequired]
+      end>
     IndexDefs = <>
     AfterScroll = QuCruceMateriaAfterScroll
     Left = 60
@@ -1503,7 +1923,29 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuMateriaCortadaHora: TkbmMemTable [15]
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomDia'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomHora'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end>
     IndexFieldNames = 'CodDia'
     IndexDefs = <>
     Left = 60
@@ -1543,7 +1985,77 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuMateriaCortadaHoraDetalle: TkbmMemTable [16]
-    FieldDefs = <>
+    FieldDefs = <
+      item
+        Name = 'CodNivel'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodEspecializacion'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodParaleloId'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodDia'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodHora0'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'CodMateria'
+        DataType = ftInteger
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'AbrNivel'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'AbrEspecializacion'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomParaleloId'
+        DataType = ftString
+        Size = 5
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomDia'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomHora'
+        DataType = ftString
+        Size = 10
+        Attributes = [faRequired]
+      end
+      item
+        Name = 'NomMateria'
+        DataType = ftString
+        Size = 20
+        Attributes = [faRequired]
+      end>
     IndexFieldNames = 'CodDia;CodHora;CodHora0'
     IndexDefs = <>
     MasterFields = 'CodDia;CodHora'
