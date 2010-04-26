@@ -28,7 +28,7 @@ function CompareVarArray(v1, v2: Variant): Boolean;
 procedure SaveDataSetToCSVFile(ADataSet: TDataSet; const AFileName: TFileName);
 procedure SaveDataSetToStrings(ADataSet:TDataSet; AStrings: TStrings);
 procedure LoadDataSetFromCSVFile(ADataSet: TDataSet; const AFileName: TFileName);
-
+procedure LoadDataSetFromDataSet(ATarget, ASource: TDataSet);
 procedure LoadDataSetFromStrings(ADataSet: TDataSet; AStrings: TStrings;
   var Position: Integer);
 
@@ -505,6 +505,46 @@ begin
     end;
   finally
     ADataSet.EnableControls;
+  end;
+end;
+
+procedure LoadDataSetFromDataSet(ATarget, ASource: TDataSet);
+var
+  s, v: string;
+  i, j, l: Integer;
+  SourceFields, TargetFields: array of TField;
+  SourceField, TargetField: TField;
+begin
+  for i := 0 to ATarget.Fields.Count -1 do
+  begin
+    TargetField := ATarget.Fields[i];
+    SourceField := ASource.FindField(TargetField.FieldName);
+    if Assigned(SourceField) then
+    begin
+      Inc(l);
+      SetLength(TargetFields, l);
+      TargetFields[l - 1] := TargetField;
+      SetLength(SourceFields, l);
+      SourceFields[l - 1] := SourceField;
+    end;
+  end;
+  ATarget.DisableControls;
+  ASource.DisableControls;
+  try
+    ASource.First;
+    while not ASource.Eof do
+    begin
+      ATarget.Append;
+      for j := 0 to l - 1 do
+      begin
+        TargetFields[j].Value := SourceFields[j].Value;
+      end;
+      ATarget.Post;
+      ASource.Next;
+    end;
+  finally
+    ATarget.EnableControls;
+    ASource.EnableControls;
   end;
 end;
 

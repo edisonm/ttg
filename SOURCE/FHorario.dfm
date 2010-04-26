@@ -163,7 +163,7 @@ inherited HorarioForm: THorarioForm
   end
   inherited ImageList: TImageList
     Left = 88
-    Top = 140
+    Top = 112
     Bitmap = {
       494C01010A000E00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
@@ -2169,10 +2169,12 @@ inherited HorarioForm: THorarioForm
   end
   object DSMateriaCortadaHora: TDataSource [17]
     DataSet = QuMateriaCortadaHora
-    Left = 116
-    Top = 252
+    Left = 88
+    Top = 140
   end
   inherited ActionList: TActionList
+    Left = 60
+    Top = 112
     object ActHorarioParalelo: TAction
       Caption = 'Horario de paralelos'
       Hint = 'Horario de paralelos|Horario de paralelos'
@@ -2240,6 +2242,93 @@ inherited HorarioForm: THorarioForm
       Hint = 'Horario por tipo de aulas|Horario por tipo de aulas'
       ImageIndex = 6
       OnExecute = ActHorarioAulaTipoExecute
+    end
+  end
+  object QuHorarioDetalle: TkbmMemTable
+    Tag = 15
+    FieldDefs = <
+      item
+        Name = 'CodHorario'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodMateria'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodNivel'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodParaleloId'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodDia'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodHora'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'Sesion'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end>
+    IndexDefs = <>
+    Left = 116
+    Top = 252
+    object QuHorarioDetalleCodHorario: TIntegerField
+      DisplayLabel = 'Horario'
+      FieldName = 'CodHorario'
+      Required = True
+    end
+    object QuHorarioDetalleCodMateria: TIntegerField
+      DisplayLabel = 'Materia'
+      FieldName = 'CodMateria'
+      Required = True
+    end
+    object QuHorarioDetalleCodNivel: TIntegerField
+      DisplayLabel = 'Nivel'
+      FieldName = 'CodNivel'
+      Required = True
+    end
+    object QuHorarioDetalleCodEspecializacion: TIntegerField
+      DisplayLabel = 'Especializaci'#243'n'
+      FieldName = 'CodEspecializacion'
+      Required = True
+    end
+    object QuHorarioDetalleCodParaleloId: TIntegerField
+      DisplayLabel = 'Paralelo'
+      FieldName = 'CodParaleloId'
+      Required = True
+    end
+    object QuHorarioDetalleCodDia: TIntegerField
+      DisplayLabel = 'D'#237'a'
+      FieldName = 'CodDia'
+      Required = True
+    end
+    object QuHorarioDetalleCodHora: TIntegerField
+      DisplayLabel = 'Hora'
+      FieldName = 'CodHora'
+      Required = True
+    end
+    object QuHorarioDetalleSesion: TIntegerField
+      DisplayLabel = 'Sesi'#243'n'
+      FieldName = 'Sesion'
+      Required = True
     end
   end
 end
