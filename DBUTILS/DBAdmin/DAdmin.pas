@@ -12,95 +12,95 @@ unit DAdmin;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, KbmMemTable;
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, dbf;
 
 type
   TAdminDM = class(TDataModule)
-    kbmAulaTipo: TkbmMemTable;
+    kbmAulaTipo: TDbf;
     kbmAulaTipoCodAulaTipo:TIntegerField;
     kbmAulaTipoNomAulaTipo:TStringField;
     kbmAulaTipoAbrAulaTipo:TStringField;
     kbmAulaTipoCantidad:TIntegerField;
     dsAulaTipo: TDataSource;
-    kbmEspecializacion: TkbmMemTable;
+    kbmEspecializacion: TDbf;
     kbmEspecializacionCodEspecializacion:TIntegerField;
     kbmEspecializacionNomEspecializacion:TStringField;
     kbmEspecializacionAbrEspecializacion:TStringField;
     dsEspecializacion: TDataSource;
-    kbmMateria: TkbmMemTable;
+    kbmMateria: TDbf;
     kbmMateriaCodMateria:TIntegerField;
     kbmMateriaNomMateria:TStringField;
     dsMateria: TDataSource;
-    kbmNivel: TkbmMemTable;
+    kbmNivel: TDbf;
     kbmNivelCodNivel:TIntegerField;
     kbmNivelNomNivel:TStringField;
     kbmNivelAbrNivel:TStringField;
     dsNivel: TDataSource;
-    kbmDia: TkbmMemTable;
+    kbmDia: TDbf;
     kbmDiaCodDia:TIntegerField;
     kbmDiaNomDia:TStringField;
     dsDia: TDataSource;
-    kbmCurso: TkbmMemTable;
+    kbmCurso: TDbf;
     kbmCursoCodNivel:TIntegerField;
     kbmCursoCodEspecializacion:TIntegerField;
     dsCurso: TDataSource;
-    kbmHora: TkbmMemTable;
+    kbmHora: TDbf;
     kbmHoraCodHora:TIntegerField;
     kbmHoraNomHora:TStringField;
     kbmHoraIntervalo:TStringField;
     dsHora: TDataSource;
-    kbmHorario: TkbmMemTable;
+    kbmHorario: TDbf;
     kbmHorarioCodHorario:TIntegerField;
     kbmHorarioMomentoInicial:TDateField;
     kbmHorarioMomentoFinal:TDateField;
     kbmHorarioInforme:TMemoField;
     dsHorario: TDataSource;
-    kbmHorarioLaborable: TkbmMemTable;
+    kbmHorarioLaborable: TDbf;
     kbmHorarioLaborableCodDia:TIntegerField;
     kbmHorarioLaborableCodHora:TIntegerField;
     dsHorarioLaborable: TDataSource;
-    kbmParaleloId: TkbmMemTable;
+    kbmParaleloId: TDbf;
     kbmParaleloIdCodParaleloId:TIntegerField;
     kbmParaleloIdNomParaleloId:TStringField;
     dsParaleloId: TDataSource;
-    kbmParalelo: TkbmMemTable;
+    kbmParalelo: TDbf;
     kbmParaleloCodNivel:TIntegerField;
     kbmParaleloCodEspecializacion:TIntegerField;
     kbmParaleloCodParaleloId:TIntegerField;
     dsParalelo: TDataSource;
-    kbmMateriaProhibicionTipo: TkbmMemTable;
+    kbmMateriaProhibicionTipo: TDbf;
     kbmMateriaProhibicionTipoCodMateProhibicionTipo:TIntegerField;
     kbmMateriaProhibicionTipoNomMateProhibicionTipo:TStringField;
     kbmMateriaProhibicionTipoColMateProhibicionTipo:TIntegerField;
     kbmMateriaProhibicionTipoValMateProhibicionTipo:TFloatField;
     dsMateriaProhibicionTipo: TDataSource;
-    kbmMateriaProhibicion: TkbmMemTable;
+    kbmMateriaProhibicion: TDbf;
     kbmMateriaProhibicionCodMateria:TIntegerField;
     kbmMateriaProhibicionCodDia:TIntegerField;
     kbmMateriaProhibicionCodHora:TIntegerField;
     kbmMateriaProhibicionCodMateProhibicionTipo:TIntegerField;
     dsMateriaProhibicion: TDataSource;
-    kbmAsignatura: TkbmMemTable;
+    kbmAsignatura: TDbf;
     kbmAsignaturaCodMateria:TIntegerField;
     kbmAsignaturaCodNivel:TIntegerField;
     kbmAsignaturaCodEspecializacion:TIntegerField;
     kbmAsignaturaCodAulaTipo:TIntegerField;
     kbmAsignaturaComposicion:TStringField;
     dsAsignatura: TDataSource;
-    kbmProfesor: TkbmMemTable;
+    kbmProfesor: TDbf;
     kbmProfesorCodProfesor:TIntegerField;
     kbmProfesorCedProfesor:TStringField;
     kbmProfesorApeProfesor:TStringField;
     kbmProfesorNomProfesor:TStringField;
     dsProfesor: TDataSource;
-    kbmCargaAcademica: TkbmMemTable;
+    kbmCargaAcademica: TDbf;
     kbmCargaAcademicaCodMateria:TIntegerField;
     kbmCargaAcademicaCodNivel:TIntegerField;
     kbmCargaAcademicaCodEspecializacion:TIntegerField;
     kbmCargaAcademicaCodParaleloId:TIntegerField;
     kbmCargaAcademicaCodProfesor:TIntegerField;
     dsCargaAcademica: TDataSource;
-    kbmHorarioDetalle: TkbmMemTable;
+    kbmHorarioDetalle: TDbf;
     kbmHorarioDetalleCodHorario:TIntegerField;
     kbmHorarioDetalleCodNivel:TIntegerField;
     kbmHorarioDetalleCodEspecializacion:TIntegerField;
@@ -110,13 +110,13 @@ type
     kbmHorarioDetalleCodMateria:TIntegerField;
     kbmHorarioDetalleSesion:TIntegerField;
     dsHorarioDetalle: TDataSource;
-    kbmProfesorProhibicionTipo: TkbmMemTable;
+    kbmProfesorProhibicionTipo: TDbf;
     kbmProfesorProhibicionTipoCodProfProhibicionTipo:TIntegerField;
     kbmProfesorProhibicionTipoNomProfProhibicionTipo:TStringField;
     kbmProfesorProhibicionTipoColProfProhibicionTipo:TIntegerField;
     kbmProfesorProhibicionTipoValProfProhibicionTipo:TFloatField;
     dsProfesorProhibicionTipo: TDataSource;
-    kbmProfesorProhibicion: TkbmMemTable;
+    kbmProfesorProhibicion: TDbf;
     kbmProfesorProhibicionCodProfesor:TIntegerField;
     kbmProfesorProhibicionCodDia:TIntegerField;
     kbmProfesorProhibicionCodHora:TIntegerField;
@@ -160,8 +160,8 @@ type
   public
     procedure LoadFromBinaryStream(AStream: TStream);
     procedure LoadFromBinaryFile(const AFileName: string);
-    procedure SaveToBinaryStream(AStream: TStream; flags:TkbmMemTableSaveFlags);
-    procedure SaveToBinaryFile(const AFileName: string; flags:TkbmMemTableSaveFlags);
+    procedure SaveToBinaryStream(AStream: TStream; flags:TDbfSaveFlags);
+    procedure SaveToBinaryFile(const AFileName: string; flags:TDbfSaveFlags);
     procedure EmptyTables;
   end;
 var
@@ -407,7 +407,7 @@ begin
   end;
 end;
 
-procedure TAdminDM.SaveToBinaryStream(AStream: TStream; flags:TkbmMemTableSaveFlags);
+procedure TAdminDM.SaveToBinaryStream(AStream: TStream; flags:TDbfSaveFlags);
 begin
   kbmAulaTipo.SaveToBinaryStream(AStream, flags);
   kbmEspecializacion.SaveToBinaryStream(AStream, flags);
@@ -430,7 +430,7 @@ begin
   kbmProfesorProhibicion.SaveToBinaryStream(AStream, flags);
 end;
 
-procedure TAdminDM.SaveToBinaryFile(const AFileName: string; flags:TkbmMemTableSaveFlags);
+procedure TAdminDM.SaveToBinaryFile(const AFileName: string; flags:TDbfSaveFlags);
 var
   Stream: TStream;
 begin

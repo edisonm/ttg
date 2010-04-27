@@ -1,5 +1,5 @@
 object DMPrueba: TDMPrueba
-  object kbmAulaTipo: TkbmMemTable
+  object kbmAulaTipo: TDbf
     left = 48
     top = 48
     BeforePost = kbmAulaTipoBeforePost
@@ -34,7 +34,7 @@ object DMPrueba: TDMPrueba
     left = 56
     top = 40
   end
-  object kbmCurso: TkbmMemTable
+  object kbmCurso: TDbf
     left = 144
     top = 60
     BeforePost = kbmCursoBeforePost
@@ -65,7 +65,7 @@ object DMPrueba: TDMPrueba
     left = 152
     top = 52
   end
-  object kbmDia: TkbmMemTable
+  object kbmDia: TDbf
     left = 240
     top = 48
     BeforePost = kbmDiaBeforePost
@@ -96,7 +96,7 @@ object DMPrueba: TDMPrueba
     left = 248
     top = 40
   end
-  object kbmMateria: TkbmMemTable
+  object kbmMateria: TDbf
     left = 336
     top = 60
     BeforePost = kbmMateriaBeforePost
@@ -127,7 +127,7 @@ object DMPrueba: TDMPrueba
     left = 344
     top = 52
   end
-  object kbmParaleloId: TkbmMemTable
+  object kbmParaleloId: TDbf
     left = 432
     top = 48
     BeforePost = kbmParaleloIdBeforePost
@@ -158,7 +158,7 @@ object DMPrueba: TDMPrueba
     left = 440
     top = 40
   end
-  object kbmParalelo: TkbmMemTable
+  object kbmParalelo: TDbf
     left = 48
     top = 144
     BeforePost = kbmParaleloBeforePost
@@ -191,7 +191,7 @@ object DMPrueba: TDMPrueba
     left = 56
     top = 136
   end
-  object kbmHora: TkbmMemTable
+  object kbmHora: TDbf
     left = 144
     top = 156
     BeforePost = kbmHoraBeforePost
@@ -222,7 +222,7 @@ object DMPrueba: TDMPrueba
     left = 152
     top = 148
   end
-  object kbmHorario: TkbmMemTable
+  object kbmHorario: TDbf
     left = 240
     top = 144
     BeforePost = kbmHorarioBeforePost
@@ -262,7 +262,7 @@ object DMPrueba: TDMPrueba
     left = 248
     top = 136
   end
-  object kbmPeriodo: TkbmMemTable
+  object kbmPeriodo: TDbf
     left = 336
     top = 156
     BeforePost = kbmPeriodoBeforePost
@@ -295,7 +295,7 @@ object DMPrueba: TDMPrueba
     left = 344
     top = 148
   end
-  object kbmDistributivo: TkbmMemTable
+  object kbmDistributivo: TDbf
     left = 432
     top = 144
     BeforePost = kbmDistributivoBeforePost
@@ -345,7 +345,7 @@ object DMPrueba: TDMPrueba
     left = 440
     top = 136
   end
-  object kbmMateriaProhibicionTipo: TkbmMemTable
+  object kbmMateriaProhibicionTipo: TDbf
     left = 48
     top = 240
     BeforePost = kbmMateriaProhibicionTipoBeforePost
@@ -384,7 +384,7 @@ object DMPrueba: TDMPrueba
     left = 56
     top = 232
   end
-  object kbmMateriaProhibicion: TkbmMemTable
+  object kbmMateriaProhibicion: TDbf
     left = 144
     top = 252
     BeforePost = kbmMateriaProhibicionBeforePost
@@ -428,7 +428,7 @@ object DMPrueba: TDMPrueba
     left = 152
     top = 244
   end
-  object kbmDistributivoVinculo: TkbmMemTable
+  object kbmDistributivoVinculo: TDbf
     left = 240
     top = 240
     BeforePost = kbmDistributivoVinculoBeforePost
@@ -484,7 +484,7 @@ object DMPrueba: TDMPrueba
     left = 248
     top = 232
   end
-  object kbmProfesor: TkbmMemTable
+  object kbmProfesor: TDbf
     left = 336
     top = 252
     BeforePost = kbmProfesorBeforePost
@@ -525,7 +525,7 @@ object DMPrueba: TDMPrueba
     left = 344
     top = 244
   end
-  object kbmParaleloProhibicionTipo: TkbmMemTable
+  object kbmParaleloProhibicionTipo: TDbf
     left = 432
     top = 240
     BeforePost = kbmParaleloProhibicionTipoBeforePost
@@ -564,7 +564,7 @@ object DMPrueba: TDMPrueba
     left = 440
     top = 232
   end
-  object kbmParaleloProhibicion: TkbmMemTable
+  object kbmParaleloProhibicion: TDbf
     left = 48
     top = 336
     BeforePost = kbmParaleloProhibicionBeforePost
@@ -616,7 +616,7 @@ object DMPrueba: TDMPrueba
     left = 56
     top = 328
   end
-  object kbmHorarioDetalle: TkbmMemTable
+  object kbmHorarioDetalle: TDbf
     left = 144
     top = 348
     BeforePost = kbmHorarioDetalleBeforePost
@@ -676,7 +676,7 @@ object DMPrueba: TDMPrueba
     left = 152
     top = 340
   end
-  object kbmDistributivoProfesor: TkbmMemTable
+  object kbmDistributivoProfesor: TDbf
     left = 240
     top = 336
     BeforePost = kbmDistributivoProfesorBeforePost
@@ -716,7 +716,7 @@ object DMPrueba: TDMPrueba
     left = 248
     top = 328
   end
-  object kbmProfesorProhibicionTipo: TkbmMemTable
+  object kbmProfesorProhibicionTipo: TDbf
     left = 336
     top = 348
     BeforePost = kbmProfesorProhibicionTipoBeforePost
@@ -755,7 +755,7 @@ object DMPrueba: TDMPrueba
     left = 344
     top = 340
   end
-  object kbmProfesorProhibicion: TkbmMemTable
+  object kbmProfesorProhibicion: TDbf
     left = 432
     top = 336
     BeforePost = kbmProfesorProhibicionBeforePost

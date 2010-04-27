@@ -8,7 +8,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, DBCtrls, DAO_TLB, kbmMemTable;
+  Db, StdCtrls, DBCtrls, DAO_TLB, dbf;
 
 type
   EInitAc2PxUtl = class(Exception);
@@ -154,7 +154,7 @@ var
           case Acc2DMFieldType[type_] of
             ftString, ftBytes, ftVarBytes:
               begin
-                StringDFM.Add('        Precision = -1');
+//                StringDFM.Add('        Precision = -1');
                 StringDFM.Add(Format('        Size = %d', [Size]));
               end
           end;
@@ -384,7 +384,7 @@ begin
     Add('interface');
     Add('');
     Add('uses');
-    Add('  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, KbmMemTable,');
+    Add('  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, dbf,');
     Add('  DBase;');
     Add('');
     Add('type');
@@ -422,8 +422,8 @@ begin
           VTableDef := TableDefs.Item[VTableName];
           //VTableDef := TableDefs.Item[i];
           //VTableName := VTableDef.Name;
-          StringPAS.Add(Format('    Tb%s: TkbmMemTable;', [VTableName]));
-          StringDFM.Add(Format('  object Tb%s: TkbmMemTable', [VTableName]));
+          StringPAS.Add(Format('    Tb%s: TDbf;', [VTableName]));
+          StringDFM.Add(Format('  object Tb%s: TDbf', [VTableName]));
           StringDFM.Add(Format('    Tag = %d', [i]));
 	  if ACreateFieldDefs then
             CreateFieldDefs

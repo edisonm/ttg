@@ -1,5 +1,5 @@
 object AdminDM: TAdminDM
-  object kbmAulaTipo: TkbmMemTable
+  object kbmAulaTipo: TDbf
     left = 48
     top = 48
     active = True
@@ -48,7 +48,7 @@ object AdminDM: TAdminDM
     left = 56
     top = 40
   end
-  object kbmEspecializacion: TkbmMemTable
+  object kbmEspecializacion: TDbf
     left = 144
     top = 60
     active = True
@@ -92,7 +92,7 @@ object AdminDM: TAdminDM
     left = 152
     top = 52
   end
-  object kbmMateria: TkbmMemTable
+  object kbmMateria: TDbf
     left = 240
     top = 48
     active = True
@@ -125,7 +125,7 @@ object AdminDM: TAdminDM
     left = 248
     top = 40
   end
-  object kbmNivel: TkbmMemTable
+  object kbmNivel: TDbf
     left = 336
     top = 60
     active = True
@@ -168,7 +168,7 @@ object AdminDM: TAdminDM
     left = 344
     top = 52
   end
-  object kbmDia: TkbmMemTable
+  object kbmDia: TDbf
     left = 432
     top = 48
     active = True
@@ -201,7 +201,7 @@ object AdminDM: TAdminDM
     left = 440
     top = 40
   end
-  object kbmCurso: TkbmMemTable
+  object kbmCurso: TDbf
     left = 48
     top = 144
     active = True
@@ -237,7 +237,7 @@ object AdminDM: TAdminDM
     left = 56
     top = 136
   end
-  object kbmHora: TkbmMemTable
+  object kbmHora: TDbf
     left = 144
     top = 156
     active = True
@@ -281,7 +281,7 @@ object AdminDM: TAdminDM
     left = 152
     top = 148
   end
-  object kbmHorario: TkbmMemTable
+  object kbmHorario: TDbf
     left = 240
     top = 144
     active = True
@@ -325,7 +325,7 @@ object AdminDM: TAdminDM
     left = 248
     top = 136
   end
-  object kbmHorarioLaborable: TkbmMemTable
+  object kbmHorarioLaborable: TDbf
     left = 336
     top = 156
     active = True
@@ -361,7 +361,7 @@ object AdminDM: TAdminDM
     left = 344
     top = 148
   end
-  object kbmParaleloId: TkbmMemTable
+  object kbmParaleloId: TDbf
     left = 432
     top = 144
     active = True
@@ -394,7 +394,7 @@ object AdminDM: TAdminDM
     left = 440
     top = 136
   end
-  object kbmParalelo: TkbmMemTable
+  object kbmParalelo: TDbf
     left = 48
     top = 240
     active = True
@@ -435,7 +435,7 @@ object AdminDM: TAdminDM
     left = 56
     top = 232
   end
-  object kbmMateriaProhibicionTipo: TkbmMemTable
+  object kbmMateriaProhibicionTipo: TDbf
     left = 144
     top = 252
     active = True
@@ -479,7 +479,7 @@ object AdminDM: TAdminDM
     left = 152
     top = 244
   end
-  object kbmMateriaProhibicion: TkbmMemTable
+  object kbmMateriaProhibicion: TDbf
     left = 240
     top = 240
     active = True
@@ -528,7 +528,7 @@ object AdminDM: TAdminDM
     left = 248
     top = 232
   end
-  object kbmAsignatura: TkbmMemTable
+  object kbmAsignatura: TDbf
     left = 336
     top = 252
     active = True
@@ -583,7 +583,7 @@ object AdminDM: TAdminDM
     left = 344
     top = 244
   end
-  object kbmProfesor: TkbmMemTable
+  object kbmProfesor: TDbf
     left = 432
     top = 240
     active = True
@@ -633,7 +633,7 @@ object AdminDM: TAdminDM
     left = 440
     top = 232
   end
-  object kbmCargaAcademica: TkbmMemTable
+  object kbmCargaAcademica: TDbf
     left = 48
     top = 336
     active = True
@@ -692,7 +692,7 @@ object AdminDM: TAdminDM
     left = 56
     top = 328
   end
-  object kbmHorarioDetalle: TkbmMemTable
+  object kbmHorarioDetalle: TDbf
     left = 144
     top = 348
     active = True
@@ -761,7 +761,7 @@ object AdminDM: TAdminDM
     left = 152
     top = 340
   end
-  object kbmProfesorProhibicionTipo: TkbmMemTable
+  object kbmProfesorProhibicionTipo: TDbf
     left = 240
     top = 336
     active = True
@@ -804,7 +804,7 @@ object AdminDM: TAdminDM
     left = 248
     top = 328
   end
-  object kbmProfesorProhibicion: TkbmMemTable
+  object kbmProfesorProhibicion: TDbf
     left = 336
     top = 348
     active = True

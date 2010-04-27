@@ -52,7 +52,7 @@ object Form1: TForm1
     TitleFont.Name = 'MS Sans Serif'
     TitleFont.Style = []
   end
-  object kbmDia: TkbmMemTable
+  object kbmDia: TDbf
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -126,7 +126,7 @@ object Form1: TForm1
     Left = 352
     Top = 220
   end
-  object kbmHora: TkbmMemTable
+  object kbmHora: TDbf
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
@@ -193,7 +193,7 @@ object Form1: TForm1
     Left = 424
     Top = 220
   end
-  object kbmPeriodo: TkbmMemTable
+  object kbmPeriodo: TDbf
     Active = True
     AttachedAutoRefresh = True
     AutoIncMinValue = -1

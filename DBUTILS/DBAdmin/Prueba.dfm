@@ -2,7 +2,7 @@ object DMPrueba: TDMPrueba
   OldCreateOrder = True
   Height = 0
   Width = 0
-  object kbmAulaTipo: TkbmMemTable
+  object kbmAulaTipo: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -61,7 +61,7 @@ object DMPrueba: TDMPrueba
     Left = 56
     Top = 40
   end
-  object kbmCurso: TkbmMemTable
+  object kbmCurso: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -116,7 +116,7 @@ object DMPrueba: TDMPrueba
     Left = 152
     Top = 52
   end
-  object kbmDia: TkbmMemTable
+  object kbmDia: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -171,7 +171,7 @@ object DMPrueba: TDMPrueba
     Left = 248
     Top = 40
   end
-  object kbmMateria: TkbmMemTable
+  object kbmMateria: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -225,7 +225,7 @@ object DMPrueba: TDMPrueba
     Left = 344
     Top = 52
   end
-  object kbmParaleloId: TkbmMemTable
+  object kbmParaleloId: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -280,7 +280,7 @@ object DMPrueba: TDMPrueba
     Left = 440
     Top = 40
   end
-  object kbmParalelo: TkbmMemTable
+  object kbmParalelo: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -337,7 +337,7 @@ object DMPrueba: TDMPrueba
     Left = 56
     Top = 136
   end
-  object kbmHora: TkbmMemTable
+  object kbmHora: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -392,7 +392,7 @@ object DMPrueba: TDMPrueba
     Left = 152
     Top = 148
   end
-  object kbmHorario: TkbmMemTable
+  object kbmHorario: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -457,7 +457,7 @@ object DMPrueba: TDMPrueba
     Left = 248
     Top = 136
   end
-  object kbmPeriodo: TkbmMemTable
+  object kbmPeriodo: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -514,7 +514,7 @@ object DMPrueba: TDMPrueba
     Left = 344
     Top = 148
   end
-  object kbmDistributivo: TkbmMemTable
+  object kbmDistributivo: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -588,7 +588,7 @@ object DMPrueba: TDMPrueba
     Left = 440
     Top = 136
   end
-  object kbmMateriaProhibicionTipo: TkbmMemTable
+  object kbmMateriaProhibicionTipo: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -651,7 +651,7 @@ object DMPrueba: TDMPrueba
     Left = 56
     Top = 232
   end
-  object kbmMateriaProhibicion: TkbmMemTable
+  object kbmMateriaProhibicion: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -719,7 +719,7 @@ object DMPrueba: TDMPrueba
     Left = 152
     Top = 244
   end
-  object kbmDistributivoVinculo: TkbmMemTable
+  object kbmDistributivoVinculo: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -801,7 +801,7 @@ object DMPrueba: TDMPrueba
     Left = 248
     Top = 232
   end
-  object kbmProfesor: TkbmMemTable
+  object kbmProfesor: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -866,7 +866,7 @@ object DMPrueba: TDMPrueba
     Left = 344
     Top = 244
   end
-  object kbmParaleloProhibicionTipo: TkbmMemTable
+  object kbmParaleloProhibicionTipo: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -929,7 +929,7 @@ object DMPrueba: TDMPrueba
     Left = 440
     Top = 232
   end
-  object kbmParaleloProhibicion: TkbmMemTable
+  object kbmParaleloProhibicion: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -1005,7 +1005,7 @@ object DMPrueba: TDMPrueba
     Left = 56
     Top = 328
   end
-  object kbmHorarioDetalle: TkbmMemTable
+  object kbmHorarioDetalle: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -1089,7 +1089,7 @@ object DMPrueba: TDMPrueba
     Left = 152
     Top = 340
   end
-  object kbmDistributivoProfesor: TkbmMemTable
+  object kbmDistributivoProfesor: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -1153,7 +1153,7 @@ object DMPrueba: TDMPrueba
     Left = 248
     Top = 328
   end
-  object kbmProfesorProhibicionTipo: TkbmMemTable
+  object kbmProfesorProhibicionTipo: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
@@ -1216,7 +1216,7 @@ object DMPrueba: TDMPrueba
     Left = 344
     Top = 340
   end
-  object kbmProfesorProhibicion: TkbmMemTable
+  object kbmProfesorProhibicion: TDbf
     AttachedAutoRefresh = True
     AutoIncMinValue = -1
     FieldDefs = <>
