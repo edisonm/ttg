@@ -48,7 +48,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 10
     end
     object TbAulaTipoCantidad: TIntegerField
-      DisplayLabel = 'Cantidad'
       FieldName = 'Cantidad'
       Required = True
     end
@@ -94,7 +93,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       DisplayLabel = 'Nombre'
       FieldName = 'NomEspecializacion'
       Required = True
-      Size = 20
     end
     object TbEspecializacionAbrEspecializacion: TStringField
       DisplayLabel = 'Abreviatura'
@@ -176,7 +174,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       DisplayLabel = 'Nombre'
       FieldName = 'NomMateria'
       Required = True
-      Size = 20
     end
   end
   object DSMateria: TDataSource
@@ -271,7 +268,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 10
     end
     object TbHoraIntervalo: TStringField
-      DisplayLabel = 'Intervalo'
       FieldName = 'Intervalo'
       Required = True
       Size = 21
@@ -327,8 +323,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbHorarioInforme: TMemoField
-      DisplayLabel = 'Informe'
       FieldName = 'Informe'
+      BlobType = ftMemo
     end
   end
   object DSHorario: TDataSource

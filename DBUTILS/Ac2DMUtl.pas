@@ -206,7 +206,8 @@ var
           except
             s := Name;
           end;
-          StringDFM.Add('      DisplayLabel = ''' + EscapeStrForm(s) + '''');
+          if s <> Name then
+            StringDFM.Add('      DisplayLabel = ''' + EscapeStrForm(s) + '''');
           StringDFM.Add('      FieldName = ''' + name + '''');
           if Required then
             StringDFM.Add('      Required = True');
