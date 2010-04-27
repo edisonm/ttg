@@ -216,7 +216,8 @@ var
             StringDFM.Add(Format('      DefaultExpression = ''%s''', [VarToStr(vv)]));
           case Acc2DMFieldType[type_] of
             ftString, ftBytes, ftVarBytes:
-              StringDFM.Add(Format('      Size = %d', [Size]));
+              if Size <> 20 then
+                StringDFM.Add(Format('      Size = %d', [Size]));
           end;
           StringDFM.Add('    end');
           StringPAS.Add(Format('    Tb%s%s:%s;', [VTableName, name, VFieldClassName]));
