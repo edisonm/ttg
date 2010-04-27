@@ -71,7 +71,7 @@ object SelPeriodoForm: TSelPeriodoForm
     DataSource = DSDiaHora
     TabOrder = 3
   end
-  object TbDiaHora: TkbmMemTable
+  object TbDiaHora: TDbf
     FieldDefs = <
       item
         Name = 'CodDia'

@@ -4,12 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ExtCtrls, Grids, FCrsMME0, Db, FCrsMME1, kbmMemTable,
+  StdCtrls, Buttons, ExtCtrls, Grids, FCrsMME0, Db, FCrsMME1, dbf,
   ImgList, ComCtrls, ToolWin, DBCtrls, Variants;
 
 type
   THorarioProfesorForm = class(TCrossManyToManyEditor1Form)
-    QuHorarioProfesor: TkbmMemTable;
+    QuHorarioProfesor: TDbf;
     dlcProfesor: TDBLookupComboBox;
     cbVerProfesor: TComboBox;
     BtnNext: TToolButton;

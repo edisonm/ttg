@@ -1,10 +1,11 @@
 inherited HorarioParaleloForm: THorarioParaleloForm
-  Left = 610
-  Top = 192
+  Left = 488
+  Top = 189
   Width = 704
   Height = 428
   OnCreate = FormCreate
   PixelsPerInch = 96
+  TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 696
     Visible = True
@@ -483,8 +484,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       C07FFFFEFFFF0003FFFFFFFFFFFF000700000000000000000000000000000000
       000000000000}
   end
-  object QuHorarioParalelo: TkbmMemTable
-    Active = True
+  object QuHorarioParalelo: TDbf
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -519,22 +519,6 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       item
         Name = 'CodProfesor'
         DataType = ftAutoInc
-      end
-      item
-        Name = 'NomMateria'
-        DataType = ftString
-        Size = 20
-        Attributes = [faRequired]
-      end
-      item
-        Name = 'ApeNomProfesor'
-        DataType = ftString
-        Size = 31
-      end
-      item
-        Name = 'Nombre'
-        DataType = ftString
-        Size = 40
       end>
     IndexFieldNames = 'CodNivel;CodEspecializacion;CodParaleloId'
     IndexName = 'QuHorarioParaleloIxParalelo'
@@ -595,6 +579,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
       Size = 15
+      Lookup = True
     end
     object QuHorarioParaleloApeNomProfesor: TStringField
       DisplayLabel = 'Profesor'
@@ -607,6 +592,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       KeyFields = 'CodProfesor'
       Visible = False
       Size = 31
+      Lookup = True
     end
     object QuHorarioParaleloNombre: TStringField
       FieldKind = fkCalculated

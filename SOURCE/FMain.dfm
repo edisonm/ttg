@@ -1930,21 +1930,21 @@ object MainForm: TMainForm
       OnExecute = ActMejorarHorarioExecute
     end
   end
-  object TbParalelo: TkbmMemTable
+  object TbParalelo: TDbf
     FieldDefs = <>
     IndexDefs = <>
     OnFilterRecord = TbParaleloFilterRecord
     Left = 48
     Top = 119
   end
-  object TbProfesor: TkbmMemTable
+  object TbProfesor: TDbf
     FieldDefs = <>
     IndexDefs = <>
     OnFilterRecord = TbProfesorFilterRecord
     Left = 48
     Top = 147
   end
-  object QuParaleloHora: TkbmMemTable
+  object QuParaleloHora: TDbf
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -2003,7 +2003,7 @@ object MainForm: TMainForm
       Size = 10
     end
   end
-  object QuProfesorHora: TkbmMemTable
+  object QuProfesorHora: TDbf
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -2045,7 +2045,7 @@ object MainForm: TMainForm
       Size = 10
     end
   end
-  object QuProfesorHorarioDetalle: TkbmMemTable
+  object QuProfesorHorarioDetalle: TDbf
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -2091,7 +2091,7 @@ object MainForm: TMainForm
       Size = 40
     end
   end
-  object QuParaleloHorarioDetalle: TkbmMemTable
+  object QuParaleloHorarioDetalle: TDbf
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -2171,14 +2171,14 @@ object MainForm: TMainForm
       KeyFields = 'CodMateria'
     end
   end
-  object TbMateria: TkbmMemTable
+  object TbMateria: TDbf
     FieldDefs = <>
     IndexDefs = <>
     OnFilterRecord = TbMateriaFilterRecord
     Left = 48
     Top = 184
   end
-  object QuMateriaMateriaProhibicion: TkbmMemTable
+  object QuMateriaMateriaProhibicion: TDbf
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -2208,7 +2208,7 @@ object MainForm: TMainForm
       KeyFields = 'CodMateria'
     end
   end
-  object QuMateriaMateriaProhibicionHora: TkbmMemTable
+  object QuMateriaMateriaProhibicionHora: TDbf
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -2246,7 +2246,7 @@ object MainForm: TMainForm
       Size = 10
     end
   end
-  object QuProfesorProfesorProhibicion: TkbmMemTable
+  object QuProfesorProfesorProhibicion: TDbf
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -2294,7 +2294,7 @@ object MainForm: TMainForm
       Size = 15
     end
   end
-  object QuProfesorProfesorProhibicionHora: TkbmMemTable
+  object QuProfesorProfesorProhibicionHora: TDbf
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -2332,7 +2332,7 @@ object MainForm: TMainForm
       Size = 10
     end
   end
-  object TbProfesor1: TkbmMemTable
+  object TbProfesor1: TDbf
     FieldDefs = <>
     IndexDefs = <>
     OnFilterRecord = TbProfesor1FilterRecord

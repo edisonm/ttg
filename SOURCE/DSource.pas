@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DSrcBase, Db, kbmMemTable, UConfig;
+  DSrcBase, Db, dbf, UConfig;
 
 type
   TSourceDataModule = class(TSourceBaseDataModule)

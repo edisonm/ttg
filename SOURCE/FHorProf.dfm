@@ -1,10 +1,11 @@
 inherited HorarioProfesorForm: THorarioProfesorForm
-  Left = 498
-  Top = 197
+  Left = 423
+  Top = 215
   Width = 774
   Height = 399
   OnCreate = FormCreate
   PixelsPerInch = 96
+  TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 766
     Visible = True
@@ -469,7 +470,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       C07FFFFEFFFF0003FFFFFFFFFFFF000700000000000000000000000000000000
       000000000000}
   end
-  object QuHorarioProfesor: TkbmMemTable
+  object QuHorarioProfesor: TDbf
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -512,21 +513,21 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       end
       item
         Name = 'AbrEspecializacion'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'NomParaleloId'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 5
-        Attributes = [faRequired]
       end
       item
         Name = 'NomMateria'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 20
-        Attributes = [faRequired]
       end
       item
         Name = 'Nombre'
@@ -592,6 +593,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
+      Lookup = True
     end
     object QuHorarioProfesorAbrEspecializacion: TStringField
       DisplayLabel = 'Espec.'
@@ -603,6 +605,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
       Size = 10
+      Lookup = True
     end
     object QuHorarioProfesorNomParaleloId: TStringField
       DisplayLabel = 'Par.'
@@ -613,6 +616,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
+      Lookup = True
     end
     object QuHorarioProfesorNomMateria: TStringField
       DisplayLabel = 'Materia'
@@ -624,6 +628,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
       Size = 15
+      Lookup = True
     end
     object QuHorarioProfesorNombre: TStringField
       FieldKind = fkCalculated

@@ -4,12 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, Buttons, ExtCtrls, kbmMemTable, DBCtrls,
+  Db, StdCtrls, Buttons, ExtCtrls, dbf, DBCtrls,
   DMaster, DSource;
 
 type
   TSelPeriodoForm = class(TForm)
-    TbDiaHora: TkbmMemTable;
+    TbDiaHora: TDbf;
     DSDiaHora: TDataSource;
     TbDiaHoraCodDia: TIntegerField;
     TbDiaHoraCodHora: TIntegerField;

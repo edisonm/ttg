@@ -1,12 +1,12 @@
 inherited SourceDataModule: TSourceDataModule
   Left = 110
   Top = 133
-  inherited TbAulaTipo: TkbmMemTable
+  inherited TbAulaTipo: TDbf
     inherited TbAulaTipoCodAulaTipo: TAutoIncField
       Visible = False
     end
   end
-  inherited TbEspecializacion: TkbmMemTable
+  inherited TbEspecializacion: TDbf
     Active = True
     FieldDefs = <
       item
@@ -29,12 +29,12 @@ inherited SourceDataModule: TSourceDataModule
       Visible = False
     end
   end
-  inherited TbDia: TkbmMemTable
+  inherited TbDia: TDbf
     inherited TbDiaCodDia: TAutoIncField
       Visible = False
     end
   end
-  inherited TbMateria: TkbmMemTable
+  inherited TbMateria: TDbf
     Active = True
     FieldDefs = <
       item
@@ -51,7 +51,7 @@ inherited SourceDataModule: TSourceDataModule
       Visible = False
     end
   end
-  inherited TbNivel: TkbmMemTable
+  inherited TbNivel: TDbf
     Active = True
     FieldDefs = <
       item
@@ -73,12 +73,12 @@ inherited SourceDataModule: TSourceDataModule
       Visible = False
     end
   end
-  inherited TbHora: TkbmMemTable
+  inherited TbHora: TDbf
     inherited TbHoraCodHora: TAutoIncField
       Visible = False
     end
   end
-  inherited TbCurso: TkbmMemTable
+  inherited TbCurso: TDbf
     object TbCursoAbrNivel: TStringField [0]
       DisplayLabel = 'Nivel'
       DisplayWidth = 10
@@ -110,7 +110,7 @@ inherited SourceDataModule: TSourceDataModule
       Visible = False
     end
   end
-  inherited TbParaleloId: TkbmMemTable
+  inherited TbParaleloId: TDbf
     Active = True
     FieldDefs = <
       item
@@ -127,12 +127,12 @@ inherited SourceDataModule: TSourceDataModule
       Visible = False
     end
   end
-  inherited TbMateriaProhibicionTipo: TkbmMemTable
+  inherited TbMateriaProhibicionTipo: TDbf
     inherited TbMateriaProhibicionTipoCodMateProhibicionTipo: TIntegerField
       Visible = False
     end
   end
-  inherited TbPeriodo: TkbmMemTable
+  inherited TbPeriodo: TDbf
     inherited TbPeriodoCodDia: TIntegerField
       Visible = False
     end
@@ -140,7 +140,7 @@ inherited SourceDataModule: TSourceDataModule
       Visible = False
     end
   end
-  inherited TbParalelo: TkbmMemTable
+  inherited TbParalelo: TDbf
     OnCalcFields = TbParaleloCalcFields
     object TbParaleloCodParalelo: TAutoIncField [0]
       FieldName = 'CodParalelo'
@@ -193,7 +193,7 @@ inherited SourceDataModule: TSourceDataModule
       Calculated = True
     end
   end
-  inherited TbProfesor: TkbmMemTable
+  inherited TbProfesor: TDbf
     Active = True
     FieldDefs = <
       item
@@ -232,7 +232,7 @@ inherited SourceDataModule: TSourceDataModule
       Calculated = True
     end
   end
-  inherited TbMateriaProhibicion: TkbmMemTable
+  inherited TbMateriaProhibicion: TDbf
     inherited TbMateriaProhibicionCodMateria: TIntegerField
       Visible = False
     end
@@ -258,7 +258,7 @@ inherited SourceDataModule: TSourceDataModule
       Lookup = True
     end
   end
-  inherited TbDistributivo: TkbmMemTable
+  inherited TbDistributivo: TDbf
     OnCalcFields = TbDistributivoCalcFields
     inherited TbDistributivoCodEspecializacion: TIntegerField
       Visible = False
@@ -343,7 +343,7 @@ inherited SourceDataModule: TSourceDataModule
       Calculated = True
     end
   end
-  inherited TbHorarioDetalle: TkbmMemTable
+  inherited TbHorarioDetalle: TDbf
     inherited TbHorarioDetalleCodHorario: TIntegerField
       Visible = False
     end
@@ -378,12 +378,12 @@ inherited SourceDataModule: TSourceDataModule
       Lookup = True
     end
   end
-  inherited TbProfesorProhibicionTipo: TkbmMemTable
+  inherited TbProfesorProhibicionTipo: TDbf
     inherited TbProfesorProhibicionTipoCodProfProhibicionTipo: TAutoIncField
       Visible = False
     end
   end
-  inherited TbProfesorProhibicion: TkbmMemTable
+  inherited TbProfesorProhibicion: TDbf
     inherited TbProfesorProhibicionCodProfesor: TIntegerField
       Visible = False
     end

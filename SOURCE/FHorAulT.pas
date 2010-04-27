@@ -4,12 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ExtCtrls, Grids, FCrsMME0, Db, FCrsMME1, kbmMemTable,
+  StdCtrls, Buttons, ExtCtrls, Grids, FCrsMME0, Db, FCrsMME1, dbf,
   ImgList, ComCtrls, ToolWin, DBCtrls, Variants;
 
 type
   THorarioAulaTipoForm = class(TCrossManyToManyEditor1Form)
-    QuHorarioAulaTipo: TkbmMemTable;
+    QuHorarioAulaTipo: TDbf;
     dlcAulaTipo: TDBLookupComboBox;
     cbVerAulaTipo: TComboBox;
     BtnNext: TToolButton;
@@ -101,6 +101,7 @@ procedure THorarioAulaTipoForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuHorarioAulaTipo.AddIndex('QuHorarioAulaTipoIxCodAulaTipo', 'CodAulaTipo', []);
+  QuHorarioAulaTipo.Open;
   CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
   cbVerAulaTipo.Items.Clear;
   FillHorarioAulaTipo;

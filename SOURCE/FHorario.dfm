@@ -705,7 +705,7 @@ inherited HorarioForm: THorarioForm
     Left = 60
     Top = 140
   end
-  object QuCruceAula: TkbmMemTable [5]
+  object QuCruceAula: TDbf [5]
     FieldDefs = <
       item
         Name = 'CodDia'
@@ -816,7 +816,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuCruceAulaDetalle: TkbmMemTable [6]
+  object QuCruceAulaDetalle: TDbf [6]
     FieldDefs = <
       item
         Name = 'CodHora'
@@ -935,7 +935,7 @@ inherited HorarioForm: THorarioForm
     Left = 116
     Top = 140
   end
-  object QuCruceProfesorDetalle: TkbmMemTable [8]
+  object QuCruceProfesorDetalle: TDbf [8]
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -1086,7 +1086,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuCruceProfesor: TkbmMemTable [9]
+  object QuCruceProfesor: TDbf [9]
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -1202,7 +1202,7 @@ inherited HorarioForm: THorarioForm
       FieldName = 'Cruces'
     end
   end
-  object QuCruceMateria: TkbmMemTable [10]
+  object QuCruceMateria: TDbf [10]
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -1230,7 +1230,7 @@ inherited HorarioForm: THorarioForm
       FieldName = 'NomMateria'
     end
   end
-  object QuCruceMateriaDetalle: TkbmMemTable [11]
+  object QuCruceMateriaDetalle: TDbf [11]
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -1385,7 +1385,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuHorarioDetalleMateriaProhibicion: TkbmMemTable [12]
+  object QuHorarioDetalleMateriaProhibicion: TDbf [12]
     FieldDefs = <
       item
         Name = 'NomMateProhibicionTipo'
@@ -1564,7 +1564,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuHorarioDetalleProfesorProhibicion: TkbmMemTable [13]
+  object QuHorarioDetalleProfesorProhibicion: TDbf [13]
     FieldDefs = <
       item
         Name = 'NomProfProhibicionTipo'
@@ -1756,7 +1756,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuMateriaCortadaDia: TkbmMemTable [14]
+  object QuMateriaCortadaDia: TDbf [14]
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -1925,7 +1925,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuMateriaCortadaHora: TkbmMemTable [15]
+  object QuMateriaCortadaHora: TDbf [15]
     FieldDefs = <
       item
         Name = 'CodDia'
@@ -1987,7 +1987,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuMateriaCortadaHoraDetalle: TkbmMemTable [16]
+  object QuMateriaCortadaHoraDetalle: TDbf [16]
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -2244,7 +2244,7 @@ inherited HorarioForm: THorarioForm
       OnExecute = ActHorarioAulaTipoExecute
     end
   end
-  object QuHorarioDetalle: TkbmMemTable
+  object QuHorarioDetalle: TDbf
     Tag = 15
     FieldDefs = <
       item

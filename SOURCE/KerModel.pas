@@ -3,7 +3,7 @@ unit KerModel;
 interface
 
 uses
-  Classes, DB, Dialogs, SysConst, Math, Forms, kbmMemTable;
+  Classes, DB, Dialogs, SysConst, Math, Forms, dbf;
 type
   TProgressEvent = procedure(I, Max: Integer; Value: Double; var Stop: Boolean) of object;
   TDynamicWordArray = array of Word;
@@ -360,7 +360,7 @@ var
     FProfesorProhibicionTipoACodProfProhibicionTipo,
     FAulaTipoACodAulaTipo,
     FMateriaProhibicionTipoACodMateProhibicionTipo: TDynamicLongintArray;
-  procedure Cargar(ATable: TKbmMemTable; ALstName: string; var FMinCodLst:
+  procedure Cargar(ATable: Tdbf; ALstName: string; var FMinCodLst:
     Integer; var FCodLstALst: TDynamicSmallintArray; var FLstACodLst:
     TDynamicLongintArray);
   var

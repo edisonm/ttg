@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Grids, DBGrids, StdCtrls, Buttons, FEditor,
-  DBCtrls, ExtCtrls, kbmMemTable, ImgList, ComCtrls, ToolWin, FMasDeEd,
+  DBCtrls, ExtCtrls, dbf, ImgList, ComCtrls, ToolWin, FMasDeEd,
   ActnList, FHorProf, FHorAulT, FHorPara;
 
 type
@@ -17,7 +17,7 @@ type
     BtnCruceProfesor: TToolButton;
     BtnCruceMateria: TToolButton;
     BtnCruceAula: TToolButton;
-    QuHorarioDetalle: TkbmMemTable;
+    QuHorarioDetalle: TDbf;
     QuHorarioDetalleCodHorario: TIntegerField;
     QuHorarioDetalleCodMateria: TIntegerField;
     QuHorarioDetalleCodNivel: TIntegerField;
@@ -25,7 +25,7 @@ type
     QuHorarioDetalleCodParaleloId: TIntegerField;
     QuHorarioDetalleCodDia: TIntegerField;
     QuHorarioDetalleSesion: TIntegerField;
-    QuCruceAula: TkbmMemTable;
+    QuCruceAula: TDbf;
     QuCruceAulaCodDia: TIntegerField;
     QuCruceAulaCodHora: TIntegerField;
     QuCruceAulaCodAulaTipo: TIntegerField;
@@ -34,7 +34,7 @@ type
     QuCruceAulaNomHora: TStringField;
     QuCruceAulaUsadas: TIntegerField;
     QuCruceAulaCruces: TIntegerField;
-    QuCruceAulaDetalle: TkbmMemTable;
+    QuCruceAulaDetalle: TDbf;
     QuCruceAulaDetalleCodNivel: TIntegerField;
     QuCruceAulaDetalleCodEspecializacion: TIntegerField;
     QuCruceAulaDetalleCodParaleloId: TIntegerField;
@@ -43,7 +43,7 @@ type
     QuCruceAulaDetalleAbrEspecializacion: TStringField;
     QuCruceAulaDetalleNomParaleloId: TStringField;
     DSCruceAula: TDataSource;
-    QuCruceProfesorDetalle: TkbmMemTable;
+    QuCruceProfesorDetalle: TDbf;
     QuCruceProfesorDetalleCodProfesor: TIntegerField;
     QuCruceProfesorDetalleCodDia: TIntegerField;
     QuCruceProfesorDetalleCodHora: TIntegerField;
@@ -55,7 +55,7 @@ type
     QuCruceProfesorDetalleAbrEspecializacion: TStringField;
     QuCruceProfesorDetalleNomParaleloId: TStringField;
     QuCruceProfesorDetalleNomMateria: TStringField;
-    QuCruceProfesor: TkbmMemTable;
+    QuCruceProfesor: TDbf;
     QuCruceProfesorCodProfesor: TIntegerField;
     QuCruceProfesorCodDia: TIntegerField;
     QuCruceProfesorCodHora: TIntegerField;
@@ -64,11 +64,11 @@ type
     QuCruceProfesorNomDia: TStringField;
     QuCruceProfesorNomHora: TStringField;
     QuCruceProfesorCruces: TIntegerField;
-    QuCruceMateria: TkbmMemTable;
+    QuCruceMateria: TDbf;
     QuCruceMateriaCodMateria: TIntegerField;
     QuCruceMateriaNomMateria: TStringField;
-    QuCruceMateriaDetalle: TkbmMemTable;
-    QuHorarioDetalleMateriaProhibicion: TkbmMemTable;
+    QuCruceMateriaDetalle: TDbf;
+    QuHorarioDetalleMateriaProhibicion: TDbf;
     QuHorarioDetalleMateriaProhibicionNomMateria: TStringField;
     QuHorarioDetalleMateriaProhibicionCodDia: TIntegerField;
     QuHorarioDetalleMateriaProhibicionCodHora: TIntegerField;
@@ -82,7 +82,7 @@ type
     QuHorarioDetalleMateriaProhibicionAbrNivel: TStringField;
     QuHorarioDetalleMateriaProhibicionAbrEspecializacion: TStringField;
     QuHorarioDetalleMateriaProhibicionNomParaleloId: TStringField;
-    QuHorarioDetalleProfesorProhibicion: TkbmMemTable;
+    QuHorarioDetalleProfesorProhibicion: TDbf;
     QuHorarioDetalleProfesorProhibicionApeNomProfesor: TStringField;
     QuHorarioDetalleProfesorProhibicionNomProfesor: TStringField;
     QuHorarioDetalleProfesorProhibicionCodDia: TIntegerField;
@@ -101,7 +101,7 @@ type
     dbmInforme: TDBMemo;
     BtnSeleccionarHorario: TToolButton;
     BtnMateriaCortadaDia: TToolButton;
-    QuMateriaCortadaDia: TkbmMemTable;
+    QuMateriaCortadaDia: TDbf;
     QuMateriaCortadaDiaCodNivel: TIntegerField;
     QuMateriaCortadaDiaCodEspecializacion: TIntegerField;
     QuMateriaCortadaDiaCodParaleloId: TIntegerField;
@@ -115,10 +115,10 @@ type
     QuMateriaCortadaDiaNomDia: TStringField;
     QuMateriaCortadaDiaNomHora: TStringField;
     BtnMateriaCortadaHora: TToolButton;
-    QuMateriaCortadaHora: TkbmMemTable;
+    QuMateriaCortadaHora: TDbf;
     QuMateriaCortadaHoraCodDia: TIntegerField;
     QuMateriaCortadaHoraCodHora: TIntegerField;
-    QuMateriaCortadaHoraDetalle: TkbmMemTable;
+    QuMateriaCortadaHoraDetalle: TDbf;
     DSMateriaCortadaHora: TDataSource;
     BtnHorarioAulaTipo: TToolButton;
     QuCruceAulaDetalleCodDia: TIntegerField;

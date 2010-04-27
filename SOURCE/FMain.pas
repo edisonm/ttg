@@ -8,7 +8,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   SysConst, ExtCtrls, DB, Menus, ComCtrls, ImgList, Buttons,
   ActnList, ToolWin, StdActns, StdCtrls,
-  FSingEdt, kbmMemTable, FCrsMME0, FEditor, UConfig{, Protect};
+  FSingEdt, dbf, FCrsMME0, FEditor, UConfig{, Protect};
 type
   TMainForm = class(TForm)
     MainMenu: TMainMenu;
@@ -120,37 +120,37 @@ type
     MIPresentarProfesorProhibicion: TMenuItem;
     MIPresentarMateriaProhibicion: TMenuItem;
     MIPresentarDistributivoMateria: TMenuItem;
-    TbParalelo: TkbmMemTable;
-    TbProfesor: TkbmMemTable;
-    QuParaleloHora: TkbmMemTable;
+    TbParalelo: TDbf;
+    TbProfesor: TDbf;
+    QuParaleloHora: TDbf;
     QuParaleloHoraCodNivel: TIntegerField;
     QuParaleloHoraCodEspecializacion: TIntegerField;
     QuParaleloHoraCodParaleloId: TIntegerField;
     QuParaleloHoraCodHora: TIntegerField;
     QuParaleloHoraNomHora: TStringField;
-    QuProfesorHora: TkbmMemTable;
+    QuProfesorHora: TDbf;
     QuProfesorHoraCodProfesor: TIntegerField;
     QuProfesorHoraCodHora: TIntegerField;
     QuProfesorHoraNomHora: TStringField;
-    QuProfesorHorarioDetalle: TkbmMemTable;
-    QuParaleloHorarioDetalle: TkbmMemTable;
-    TbMateria: TkbmMemTable;
-    QuMateriaMateriaProhibicion: TkbmMemTable;
+    QuProfesorHorarioDetalle: TDbf;
+    QuParaleloHorarioDetalle: TDbf;
+    TbMateria: TDbf;
+    QuMateriaMateriaProhibicion: TDbf;
     QuMateriaMateriaProhibicionCodMateria: TIntegerField;
     QuMateriaMateriaProhibicionNomMateria: TStringField;
-    QuMateriaMateriaProhibicionHora: TkbmMemTable;
+    QuMateriaMateriaProhibicionHora: TDbf;
     QuMateriaMateriaProhibicionHoraCodMateria: TIntegerField;
     QuMateriaMateriaProhibicionHoraCodHora: TIntegerField;
     QuMateriaMateriaProhibicionHoraNomHora: TStringField;
-    QuProfesorProfesorProhibicion: TkbmMemTable;
+    QuProfesorProfesorProhibicion: TDbf;
     QuProfesorProfesorProhibicionApeProfesor: TStringField;
     QuProfesorProfesorProhibicionNomProfesor: TStringField;
     QuProfesorProfesorProhibicionCodProfesor: TIntegerField;
-    QuProfesorProfesorProhibicionHora: TkbmMemTable;
+    QuProfesorProfesorProhibicionHora: TDbf;
     QuProfesorProfesorProhibicionHoraCodProfesor: TIntegerField;
     QuProfesorProfesorProhibicionHoraCodHora: TIntegerField;
     QuProfesorProfesorProhibicionHoraNomHora: TStringField;
-    TbProfesor1: TkbmMemTable;
+    TbProfesor1: TDbf;
     ActPresentarDistributivoProfesor: TAction;
     MIPresentarDistributivoProfesor: TMenuItem;
     ActExportarCSV: TAction;

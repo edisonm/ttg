@@ -4,20 +4,20 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
-  kbmMemTable;
+  dbf;
 
 type
   TDataSetArray = array of TDataSet;
   
   TMasterRel = record
-    DetailDataSet: TkbmMemTable;
+    DetailDataSet: TDbf;
     MasterFields: string;
     DetailFields: string;
     Cascade: Boolean;
   end;
   
   TDetailRel = record
-    MasterDataSet: TkbmMemTable;
+    MasterDataSet: TDbf;
     MasterFields: string;
     DetailFields: string;
   end;
@@ -113,7 +113,7 @@ var
   i: Integer;
 begin
   for i := Low(FTables) to High(FTables) do
-    (FTables[i] as TkbmMemTable).EmptyTable;
+    (FTables[i] as TDbf).EmptyTable;
 end;
 
 procedure TBaseDataModule.DataModuleCreate(Sender: TObject);

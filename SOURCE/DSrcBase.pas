@@ -1,6 +1,6 @@
 unit DSrcBase;
 (*
-  lunes, 26 de abril de 2010 21:58:58
+  miércoles, 28 de abril de 2010 0:41:04
 
   Warning:
 
@@ -13,82 +13,82 @@ unit DSrcBase;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, KbmMemTable,
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, dbf,
   DBase;
 
 type
   TSourceBaseDataModule = class(TBaseDataModule)
-    TbAulaTipo: TkbmMemTable;
+    TbAulaTipo: TDbf;
     TbAulaTipoCodAulaTipo:TAutoIncField;
     TbAulaTipoNomAulaTipo:TStringField;
     TbAulaTipoAbrAulaTipo:TStringField;
     TbAulaTipoCantidad:TIntegerField;
     DSAulaTipo: TDataSource;
-    TbEspecializacion: TkbmMemTable;
+    TbEspecializacion: TDbf;
     TbEspecializacionCodEspecializacion:TAutoIncField;
     TbEspecializacionNomEspecializacion:TStringField;
     TbEspecializacionAbrEspecializacion:TStringField;
     DSEspecializacion: TDataSource;
-    TbDia: TkbmMemTable;
+    TbDia: TDbf;
     TbDiaCodDia:TAutoIncField;
     TbDiaNomDia:TStringField;
     DSDia: TDataSource;
-    TbMateria: TkbmMemTable;
+    TbMateria: TDbf;
     TbMateriaCodMateria:TAutoIncField;
     TbMateriaNomMateria:TStringField;
     DSMateria: TDataSource;
-    TbNivel: TkbmMemTable;
+    TbNivel: TDbf;
     TbNivelCodNivel:TAutoIncField;
     TbNivelNomNivel:TStringField;
     TbNivelAbrNivel:TStringField;
     DSNivel: TDataSource;
-    TbHora: TkbmMemTable;
+    TbHora: TDbf;
     TbHoraCodHora:TAutoIncField;
     TbHoraNomHora:TStringField;
     TbHoraIntervalo:TStringField;
     DSHora: TDataSource;
-    TbHorario: TkbmMemTable;
+    TbHorario: TDbf;
     TbHorarioCodHorario:TAutoIncField;
     TbHorarioMomentoInicial:TDateTimeField;
     TbHorarioMomentoFinal:TDateTimeField;
     TbHorarioInforme:TMemoField;
     DSHorario: TDataSource;
-    TbCurso: TkbmMemTable;
+    TbCurso: TDbf;
     TbCursoCodNivel:TIntegerField;
     TbCursoCodEspecializacion:TIntegerField;
     DSCurso: TDataSource;
-    TbParaleloId: TkbmMemTable;
+    TbParaleloId: TDbf;
     TbParaleloIdCodParaleloId:TAutoIncField;
     TbParaleloIdNomParaleloId:TStringField;
     DSParaleloId: TDataSource;
-    TbMateriaProhibicionTipo: TkbmMemTable;
+    TbMateriaProhibicionTipo: TDbf;
     TbMateriaProhibicionTipoCodMateProhibicionTipo:TIntegerField;
     TbMateriaProhibicionTipoNomMateProhibicionTipo:TStringField;
     TbMateriaProhibicionTipoColMateProhibicionTipo:TIntegerField;
     TbMateriaProhibicionTipoValMateProhibicionTipo:TFloatField;
     DSMateriaProhibicionTipo: TDataSource;
-    TbPeriodo: TkbmMemTable;
+    TbPeriodo: TDbf;
     TbPeriodoCodDia:TIntegerField;
     TbPeriodoCodHora:TIntegerField;
     DSPeriodo: TDataSource;
-    TbParalelo: TkbmMemTable;
+    TbParalelo: TDbf;
     TbParaleloCodNivel:TIntegerField;
     TbParaleloCodEspecializacion:TIntegerField;
     TbParaleloCodParaleloId:TIntegerField;
     DSParalelo: TDataSource;
-    TbProfesor: TkbmMemTable;
+    TbProfesor: TDbf;
     TbProfesorCodProfesor:TAutoIncField;
     TbProfesorCedProfesor:TStringField;
     TbProfesorApeProfesor:TStringField;
     TbProfesorNomProfesor:TStringField;
     DSProfesor: TDataSource;
-    TbMateriaProhibicion: TkbmMemTable;
+    TbMateriaProhibicion: TDbf;
     TbMateriaProhibicionCodMateria:TIntegerField;
     TbMateriaProhibicionCodDia:TIntegerField;
     TbMateriaProhibicionCodHora:TIntegerField;
     TbMateriaProhibicionCodMateProhibicionTipo:TIntegerField;
     DSMateriaProhibicion: TDataSource;
-    TbDistributivo: TkbmMemTable;
+    TbDistributivo: TDbf;
     TbDistributivoCodMateria:TIntegerField;
     TbDistributivoCodNivel:TIntegerField;
     TbDistributivoCodEspecializacion:TIntegerField;
@@ -97,7 +97,7 @@ type
     TbDistributivoCodAulaTipo:TIntegerField;
     TbDistributivoComposicion:TStringField;
     DSDistributivo: TDataSource;
-    TbHorarioDetalle: TkbmMemTable;
+    TbHorarioDetalle: TDbf;
     TbHorarioDetalleCodHorario:TIntegerField;
     TbHorarioDetalleCodMateria:TIntegerField;
     TbHorarioDetalleCodNivel:TIntegerField;
@@ -107,13 +107,13 @@ type
     TbHorarioDetalleCodHora:TIntegerField;
     TbHorarioDetalleSesion:TIntegerField;
     DSHorarioDetalle: TDataSource;
-    TbProfesorProhibicionTipo: TkbmMemTable;
+    TbProfesorProhibicionTipo: TDbf;
     TbProfesorProhibicionTipoCodProfProhibicionTipo:TAutoIncField;
     TbProfesorProhibicionTipoNomProfProhibicionTipo:TStringField;
     TbProfesorProhibicionTipoColProfProhibicionTipo:TIntegerField;
     TbProfesorProhibicionTipoValProfProhibicionTipo:TFloatField;
     DSProfesorProhibicionTipo: TDataSource;
-    TbProfesorProhibicion: TkbmMemTable;
+    TbProfesorProhibicion: TDbf;
     TbProfesorProhibicionCodProfesor:TIntegerField;
     TbProfesorProhibicionCodDia:TIntegerField;
     TbProfesorProhibicionCodHora:TIntegerField;

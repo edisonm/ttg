@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
   StdCtrls, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls,
-  ComCtrls, FEditor, ImgList, ToolWin, kbmMemTable, ActnList, UConfig;
+  ComCtrls, FEditor, ImgList, ToolWin, dbf, ActnList, UConfig;
 
 type
 
@@ -87,17 +87,17 @@ procedure TSingleEditorForm.DBGridCheckButton(Sender: TObject;
   ACol: Integer; Field: TField; var Enabled: Boolean);
 begin
   inherited;
-  Enabled := (TDBGrid(Sender).DataSource.DataSet is TKbmMemTable) and
+  Enabled := (TDBGrid(Sender).DataSource.DataSet is Tdbf) and
     (Field <> nil) and not (Field is TBlobField) and
-    (TKbmMemTable(TDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0);
+    (Tdbf(TDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0);
 end;
 
 procedure TSingleEditorForm.DBGridTitleBtnClick(Sender: TObject;
   ACol: Integer; Field: TField);
 begin
   inherited;
-  if TDBGrid(Sender).DataSource.DataSet is TKbmMemTable then
-    with TKbmMemTable(TDBGrid(Sender).DataSource.DataSet) do
+  if TDBGrid(Sender).DataSource.DataSet is Tdbf then
+    with Tdbf(TDBGrid(Sender).DataSource.DataSet) do
     try
       if Field.FieldKind = fkLookup then
         IndexFieldNames :=IndexDefs.FindIndexForFields(FindField(Field.KeyFields).FieldName).Fields
@@ -111,8 +111,8 @@ end;
 procedure TSingleEditorForm.DBGridDblClick(Sender: TObject);
 begin
   inherited;
-  if TDBGrid(Sender).DataSource.DataSet is TKbmMemTable then
-    with TKbmMemTable(TDBGrid(Sender).DataSource.DataSet) do
+  if TDBGrid(Sender).DataSource.DataSet is Tdbf then
+    with Tdbf(TDBGrid(Sender).DataSource.DataSet) do
       IndexFieldNames := '';
 end;
 

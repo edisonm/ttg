@@ -1,5 +1,5 @@
 inherited SourceBaseDataModule: TSourceBaseDataModule
-  object TbAulaTipo: TkbmMemTable
+  object TbAulaTipo: TDbf
     Tag = 0
     FieldDefs = <
       item
@@ -54,7 +54,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 56
     Top = 40
   end
-  object TbEspecializacion: TkbmMemTable
+  object TbEspecializacion: TDbf
     Tag = 1
     FieldDefs = <
       item
@@ -99,7 +99,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 152
     Top = 52
   end
-  object TbDia: TkbmMemTable
+  object TbDia: TDbf
     Tag = 2
     FieldDefs = <
       item
@@ -132,7 +132,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 248
     Top = 40
   end
-  object TbMateria: TkbmMemTable
+  object TbMateria: TDbf
     Tag = 3
     FieldDefs = <
       item
@@ -165,7 +165,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 344
     Top = 52
   end
-  object TbNivel: TkbmMemTable
+  object TbNivel: TDbf
     Tag = 4
     FieldDefs = <
       item
@@ -208,7 +208,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 440
     Top = 40
   end
-  object TbHora: TkbmMemTable
+  object TbHora: TDbf
     Tag = 5
     FieldDefs = <
       item
@@ -253,7 +253,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 56
     Top = 136
   end
-  object TbHorario: TkbmMemTable
+  object TbHorario: TDbf
     Tag = 6
     FieldDefs = <
       item
@@ -302,7 +302,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 152
     Top = 148
   end
-  object TbCurso: TkbmMemTable
+  object TbCurso: TDbf
     Tag = 7
     FieldDefs = <
       item
@@ -335,7 +335,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 248
     Top = 136
   end
-  object TbParaleloId: TkbmMemTable
+  object TbParaleloId: TDbf
     Tag = 8
     FieldDefs = <
       item
@@ -368,7 +368,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 344
     Top = 148
   end
-  object TbMateriaProhibicionTipo: TkbmMemTable
+  object TbMateriaProhibicionTipo: TDbf
     Tag = 9
     FieldDefs = <
       item
@@ -423,7 +423,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 440
     Top = 136
   end
-  object TbPeriodo: TkbmMemTable
+  object TbPeriodo: TDbf
     Tag = 10
     FieldDefs = <
       item
@@ -456,7 +456,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 56
     Top = 232
   end
-  object TbParalelo: TkbmMemTable
+  object TbParalelo: TDbf
     Tag = 11
     FieldDefs = <
       item
@@ -499,7 +499,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 152
     Top = 244
   end
-  object TbProfesor: TkbmMemTable
+  object TbProfesor: TDbf
     Tag = 12
     FieldDefs = <
       item
@@ -556,7 +556,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 248
     Top = 232
   end
-  object TbMateriaProhibicion: TkbmMemTable
+  object TbMateriaProhibicion: TDbf
     Tag = 13
     FieldDefs = <
       item
@@ -608,7 +608,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 344
     Top = 244
   end
-  object TbDistributivo: TkbmMemTable
+  object TbDistributivo: TDbf
     Tag = 14
     FieldDefs = <
       item
@@ -693,7 +693,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 440
     Top = 232
   end
-  object TbHorarioDetalle: TkbmMemTable
+  object TbHorarioDetalle: TDbf
     Tag = 15
     FieldDefs = <
       item
@@ -785,7 +785,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 56
     Top = 328
   end
-  object TbProfesorProhibicionTipo: TkbmMemTable
+  object TbProfesorProhibicionTipo: TDbf
     Tag = 16
     FieldDefs = <
       item
@@ -838,7 +838,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 152
     Top = 340
   end
-  object TbProfesorProhibicion: TkbmMemTable
+  object TbProfesorProhibicion: TDbf
     Tag = 17
     FieldDefs = <
       item
