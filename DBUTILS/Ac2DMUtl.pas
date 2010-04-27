@@ -214,6 +214,8 @@ var
           vv := DefaultValue;
           if not VarIsNull(vv) and (vv <> '') then
             StringDFM.Add(Format('      DefaultExpression = ''%s''', [VarToStr(vv)]));
+          if type_ = ftMemo then
+            StringDFM.Add('      BlobType = ftMemo');
           case Acc2DMFieldType[type_] of
             ftString, ftBytes, ftVarBytes:
               if Size <> 20 then

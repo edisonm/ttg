@@ -324,7 +324,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     end
     object TbHorarioInforme: TMemoField
       FieldName = 'Informe'
-      BlobType = ftMemo
     end
   end
   object DSHorario: TDataSource
