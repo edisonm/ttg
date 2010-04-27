@@ -146,6 +146,8 @@ var
         begin
           StringDFM.Add('      item');
           StringDFM.Add(Format('        Name = ''%s''', [name]));
+          if Required then
+            StringDFM.Add('        Attributes = [faRequired]');
           if (Attributes and dbAutoIncrField) <> 0 then
             DataTypeName := 'ftAutoInc'
           else
@@ -158,8 +160,6 @@ var
                 StringDFM.Add(Format('        Size = %d', [Size]));
               end
           end;
-          if Required then
-            StringDFM.Add('        Attributes = [faRequired]');
           StringDFM.Add('      end');
         end;
       end;
@@ -424,13 +424,21 @@ begin
           //VTableName := VTableDef.Name;
           StringPAS.Add(Format('    Tb%s: TDbf;', [VTableName]));
           StringDFM.Add(Format('  object Tb%s: TDbf', [VTableName]));
-          StringDFM.Add(Format('    Tag = %d', [i]));
+          if i <> 0 then
+            StringDFM.Add(Format('    Tag = %d', [i]));
+          if ACreateIndexDefs then
+            CreateIndexDefs
+          else
+            StringDFM.Add('    IndexDefs = <>');
+          StringDFM.Add('    OpenMode = omAutoCreate');
+          StringDFM.Add('    Storage = stoMemory');
+	  if ACreateFieldDefs or ACreateIndexDefs then
+            StringDFM.Add('    StoreDefs = True');
+          StringDFM.Add('    TableLevel = 4');
 	  if ACreateFieldDefs then
             CreateFieldDefs
           else
             StringDFM.Add('    FieldDefs = <>');
-          if ACreateIndexDefs then
-            CreateIndexDefs;
           if (DetailRels[i].Count > 0) or (MasterRels[i].Count > 0) then
           begin
             StringDFM.Add('    BeforePost = DataSetBeforePost');
