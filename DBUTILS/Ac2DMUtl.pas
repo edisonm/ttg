@@ -438,8 +438,8 @@ begin
           StringDFM.Add('    Storage = stoMemory');
 	  if ACreateFieldDefs or ACreateIndexDefs then
             StringDFM.Add('    StoreDefs = True');
-          StringDFM.Add('    TableLevel = 25');
           StringDFM.Add(Format('    TableName = ''%s''', [VTableName]));
+          StringDFM.Add('    TableLevel = 25');
 	  if ACreateFieldDefs then
             CreateFieldDefs
           else
