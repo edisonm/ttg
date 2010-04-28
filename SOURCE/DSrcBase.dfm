@@ -4,7 +4,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'AulaTipo'
     FieldDefs = <
       item
         Name = 'CodAulaTipo'
@@ -63,7 +64,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'Especializacion'
     FieldDefs = <
       item
         Name = 'CodEspecializacion'
@@ -112,7 +114,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'Dia'
     FieldDefs = <
       item
         Name = 'CodDia'
@@ -150,7 +153,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'Materia'
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -187,7 +191,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'Nivel'
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -235,7 +240,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'Hora'
     FieldDefs = <
       item
         Name = 'CodHora'
@@ -284,7 +290,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'Horario'
     FieldDefs = <
       item
         Name = 'CodHorario'
@@ -338,7 +345,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'Curso'
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -376,7 +384,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'ParaleloId'
     FieldDefs = <
       item
         Name = 'CodParaleloId'
@@ -414,7 +423,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'MateriaProhibicionTipo'
     FieldDefs = <
       item
         Name = 'CodMateProhibicionTipo'
@@ -474,7 +484,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'Periodo'
     FieldDefs = <
       item
         Name = 'CodDia'
@@ -512,7 +523,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'Paralelo'
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -560,7 +572,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'Profesor'
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -622,7 +635,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'MateriaProhibicion'
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -679,7 +693,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'Distributivo'
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -769,7 +784,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'HorarioDetalle'
     FieldDefs = <
       item
         Name = 'CodHorario'
@@ -866,7 +882,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'ProfesorProhibicionTipo'
     FieldDefs = <
       item
         Name = 'CodProfProhibicionTipo'
@@ -924,7 +941,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
-    TableLevel = 4
+    TableLevel = 25
+    TableName = 'ProfesorProhibicion'
     FieldDefs = <
       item
         Name = 'CodProfesor'
