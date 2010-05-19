@@ -20,7 +20,7 @@ type
     QuHorarioParaleloCodParaleloId: TIntegerField;
     QuHorarioParaleloCodHora: TIntegerField;
     QuHorarioParaleloCodDia: TIntegerField;
-    QuHorarioParaleloCodProfesor: TAutoIncField;
+    QuHorarioParaleloCodProfesor: TIntegerField;
     QuHorarioParaleloNomMateria: TStringField;
     QuHorarioParaleloApeNomProfesor: TStringField;
     QuHorarioParaleloNombre: TStringField;

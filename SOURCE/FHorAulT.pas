@@ -25,7 +25,7 @@ type
     QuHorarioAulaTipoAbrEspecializacion: TStringField;
     QuHorarioAulaTipoNomParaleloId: TStringField;
     QuHorarioAulaTipoNombre: TStringField;
-    QuHorarioAulaTipoCodAulaTipo: TAutoIncField;
+    QuHorarioAulaTipoCodAulaTipo: TIntegerField;
     DSAulaTipo: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure BtnPriorClick(Sender: TObject);
@@ -100,8 +100,8 @@ end;
 procedure THorarioAulaTipoForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  QuHorarioAulaTipo.AddIndex('QuHorarioAulaTipoIxCodAulaTipo', 'CodAulaTipo', []);
   QuHorarioAulaTipo.Open;
+  QuHorarioAulaTipo.AddIndex('QuHorarioAulaTipoIxCodAulaTipo', 'CodAulaTipo', []);
   CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
   cbVerAulaTipo.Items.Clear;
   FillHorarioAulaTipo;

@@ -1,80 +1,31 @@
 inherited SourceDataModule: TSourceDataModule
-  Left = 110
-  Top = 133
   inherited TbAulaTipo: TDbf
-    inherited TbAulaTipoCodAulaTipo: TAutoIncField
+    inherited TbAulaTipoCodAulaTipo: TIntegerField
       Visible = False
     end
   end
   inherited TbEspecializacion: TDbf
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'CodEspecializacion'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'AbrEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end>
-    inherited TbEspecializacionCodEspecializacion: TAutoIncField
+    inherited TbEspecializacionCodEspecializacion: TIntegerField
       Visible = False
     end
   end
   inherited TbDia: TDbf
-    inherited TbDiaCodDia: TAutoIncField
+    inherited TbDiaCodDia: TIntegerField
       Visible = False
     end
   end
   inherited TbMateria: TDbf
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'CodMateria'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomMateria'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 20
-      end>
-    inherited TbMateriaCodMateria: TAutoIncField
+    inherited TbMateriaCodMateria: TIntegerField
       Visible = False
     end
   end
   inherited TbNivel: TDbf
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'CodNivel'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomNivel'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 15
-      end
-      item
-        Name = 'AbrNivel'
-        DataType = ftString
-        Size = 5
-      end>
-    inherited TbNivelCodNivel: TAutoIncField
+    inherited TbNivelCodNivel: TIntegerField
       Visible = False
     end
   end
   inherited TbHora: TDbf
-    inherited TbHoraCodHora: TAutoIncField
+    inherited TbHoraCodHora: TIntegerField
       Visible = False
     end
   end
@@ -111,19 +62,7 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbParaleloId: TDbf
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'CodParaleloId'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomParaleloId'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 5
-      end>
-    inherited TbParaleloIdCodParaleloId: TAutoIncField
+    inherited TbParaleloIdCodParaleloId: TIntegerField
       Visible = False
     end
   end
@@ -141,8 +80,31 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbParalelo: TDbf
+    FieldDefs = <
+      item
+        Name = 'CodParalelo'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodNivel'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodParaleloId'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end>
     OnCalcFields = TbParaleloCalcFields
-    object TbParaleloCodParalelo: TAutoIncField [0]
+    object TbParaleloCodParalelo: TIntegerField [0]
+      AutoGenerateValue = arAutoInc
+      DefaultExpression = '0'
       FieldName = 'CodParalelo'
     end
     inherited TbParaleloCodNivel: TIntegerField
@@ -194,32 +156,8 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbProfesor: TDbf
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'CodProfesor'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'CedProfesor'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 11
-      end
-      item
-        Name = 'ApeProfesor'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 15
-      end
-      item
-        Name = 'NomProfesor'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 15
-      end>
     OnCalcFields = TbProfesorCalcFields
-    inherited TbProfesorCodProfesor: TAutoIncField
+    inherited TbProfesorCodProfesor: TIntegerField
       Visible = False
     end
     object TbProfesorApeNomProfesor: TStringField
@@ -379,7 +317,7 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbProfesorProhibicionTipo: TDbf
-    inherited TbProfesorProhibicionTipoCodProfProhibicionTipo: TAutoIncField
+    inherited TbProfesorProhibicionTipoCodProfProhibicionTipo: TIntegerField
       Visible = False
     end
   end

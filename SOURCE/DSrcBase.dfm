@@ -1,15 +1,14 @@
 inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbAulaTipo: TDbf
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'AulaTipo'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodAulaTipo'
-        DataType = ftAutoInc
+        DataType = ftInteger
       end
       item
         Name = 'NomAulaTipo'
@@ -28,11 +27,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 48
     Top = 48
-    object TbAulaTipoCodAulaTipo: TAutoIncField
+    object TbAulaTipoCodAulaTipo: TIntegerField
+      AutoGenerateValue = arAutoInc
+      DefaultExpression = '0'
       DisplayLabel = 'C'#243'digo'
       FieldName = 'CodAulaTipo'
     end
@@ -61,15 +63,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbEspecializacion: TDbf
     Tag = 1
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'Especializacion'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodEspecializacion'
-        DataType = ftAutoInc
+        DataType = ftInteger
       end
       item
         Name = 'NomEspecializacion'
@@ -83,11 +84,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         DataType = ftString
         Size = 10
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 144
     Top = 60
-    object TbEspecializacionCodEspecializacion: TAutoIncField
+    object TbEspecializacionCodEspecializacion: TIntegerField
+      AutoGenerateValue = arAutoInc
+      DefaultExpression = '0'
       DisplayLabel = 'C'#243'digo'
       FieldName = 'CodEspecializacion'
     end
@@ -111,15 +115,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbDia: TDbf
     Tag = 2
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'Dia'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodDia'
-        DataType = ftAutoInc
+        DataType = ftInteger
       end
       item
         Name = 'NomDia'
@@ -127,11 +130,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         DataType = ftString
         Size = 10
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 240
     Top = 48
-    object TbDiaCodDia: TAutoIncField
+    object TbDiaCodDia: TIntegerField
+      AutoGenerateValue = arAutoInc
+      DefaultExpression = '0'
       DisplayLabel = 'C'#243'digo'
       FieldName = 'CodDia'
     end
@@ -150,15 +156,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbMateria: TDbf
     Tag = 3
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'Materia'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodMateria'
-        DataType = ftAutoInc
+        DataType = ftInteger
       end
       item
         Name = 'NomMateria'
@@ -166,11 +171,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         DataType = ftString
         Size = 20
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 336
     Top = 60
-    object TbMateriaCodMateria: TAutoIncField
+    object TbMateriaCodMateria: TIntegerField
+      AutoGenerateValue = arAutoInc
+      DefaultExpression = '0'
       DisplayLabel = 'C'#243'digo'
       FieldName = 'CodMateria'
     end
@@ -188,15 +196,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbNivel: TDbf
     Tag = 4
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'Nivel'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodNivel'
-        DataType = ftAutoInc
+        DataType = ftInteger
       end
       item
         Name = 'NomNivel'
@@ -209,11 +216,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         DataType = ftString
         Size = 5
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 432
     Top = 48
-    object TbNivelCodNivel: TAutoIncField
+    object TbNivelCodNivel: TIntegerField
+      AutoGenerateValue = arAutoInc
+      DefaultExpression = '0'
       DisplayLabel = 'C'#243'digo'
       FieldName = 'CodNivel'
     end
@@ -237,15 +247,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbHora: TDbf
     Tag = 5
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'Hora'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodHora'
-        DataType = ftAutoInc
+        DataType = ftInteger
       end
       item
         Name = 'NomHora'
@@ -259,11 +268,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         DataType = ftString
         Size = 21
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 48
     Top = 144
-    object TbHoraCodHora: TAutoIncField
+    object TbHoraCodHora: TIntegerField
+      AutoGenerateValue = arAutoInc
+      DefaultExpression = '0'
       DisplayLabel = 'C'#243'digo'
       FieldName = 'CodHora'
     end
@@ -287,15 +299,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbHorario: TDbf
     Tag = 6
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'Horario'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodHorario'
-        DataType = ftAutoInc
+        DataType = ftInteger
       end
       item
         Name = 'MomentoInicial'
@@ -311,11 +322,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Name = 'Informe'
         DataType = ftMemo
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 144
     Top = 156
-    object TbHorarioCodHorario: TAutoIncField
+    object TbHorarioCodHorario: TIntegerField
+      AutoGenerateValue = arAutoInc
+      DefaultExpression = '0'
       DisplayLabel = 'C'#243'digo'
       FieldName = 'CodHorario'
     end
@@ -342,11 +356,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbCurso: TDbf
     Tag = 7
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'Curso'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -358,6 +371,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 240
@@ -381,15 +395,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbParaleloId: TDbf
     Tag = 8
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'ParaleloId'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodParaleloId'
-        DataType = ftAutoInc
+        DataType = ftInteger
       end
       item
         Name = 'NomParaleloId'
@@ -397,11 +410,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         DataType = ftString
         Size = 5
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 336
     Top = 156
-    object TbParaleloIdCodParaleloId: TAutoIncField
+    object TbParaleloIdCodParaleloId: TIntegerField
+      AutoGenerateValue = arAutoInc
+      DefaultExpression = '0'
       DisplayLabel = 'C'#243'digo'
       FieldName = 'CodParaleloId'
     end
@@ -420,11 +436,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbMateriaProhibicionTipo: TDbf
     Tag = 9
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'MateriaProhibicionTipo'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodMateProhibicionTipo'
@@ -447,6 +462,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftFloat
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 432
@@ -481,11 +497,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbPeriodo: TDbf
     Tag = 10
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'Periodo'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodDia'
@@ -497,6 +512,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 48
@@ -520,11 +536,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbParalelo: TDbf
     Tag = 11
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'Paralelo'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -541,6 +556,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 144
@@ -569,15 +585,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbProfesor: TDbf
     Tag = 12
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'Profesor'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodProfesor'
-        DataType = ftAutoInc
+        DataType = ftInteger
       end
       item
         Name = 'CedProfesor'
@@ -597,11 +612,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         DataType = ftString
         Size = 15
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 240
     Top = 240
-    object TbProfesorCodProfesor: TAutoIncField
+    object TbProfesorCodProfesor: TIntegerField
+      AutoGenerateValue = arAutoInc
+      DefaultExpression = '0'
       DisplayLabel = 'C'#243'digo'
       FieldName = 'CodProfesor'
     end
@@ -632,11 +650,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbMateriaProhibicion: TDbf
     Tag = 13
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'MateriaProhibicion'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -658,6 +675,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     Left = 336
     Top = 252
@@ -690,11 +708,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbDistributivo: TDbf
     Tag = 14
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'Distributivo'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -732,6 +749,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         DataType = ftString
         Size = 40
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 432
@@ -781,11 +799,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbHorarioDetalle: TDbf
     Tag = 15
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'HorarioDetalle'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodHorario'
@@ -827,6 +844,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     Left = 48
     Top = 336
@@ -879,15 +897,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbProfesorProhibicionTipo: TDbf
     Tag = 16
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'ProfesorProhibicionTipo'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodProfProhibicionTipo'
-        DataType = ftAutoInc
+        DataType = ftInteger
       end
       item
         Name = 'NomProfProhibicionTipo'
@@ -905,11 +922,14 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftFloat
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 144
     Top = 348
-    object TbProfesorProhibicionTipoCodProfProhibicionTipo: TAutoIncField
+    object TbProfesorProhibicionTipoCodProfProhibicionTipo: TIntegerField
+      AutoGenerateValue = arAutoInc
+      DefaultExpression = '0'
       DisplayLabel = 'C'#243'digo'
       FieldName = 'CodProfProhibicionTipo'
     end
@@ -938,11 +958,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbProfesorProhibicion: TDbf
     Tag = 17
     IndexDefs = <>
-    OpenMode = omAutoCreate
     Storage = stoMemory
     StoreDefs = True
     TableName = 'ProfesorProhibicion'
-    TableLevel = 25
+    TableLevel = 7
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -964,6 +983,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+    AfterOpen = DataSetAfterOpen
     BeforePost = DataSetBeforePost
     Left = 240
     Top = 336

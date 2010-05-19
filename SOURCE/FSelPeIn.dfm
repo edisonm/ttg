@@ -75,11 +75,11 @@ object SelPeriodoForm: TSelPeriodoForm
     FieldDefs = <
       item
         Name = 'CodDia'
-        DataType = ftAutoInc
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftAutoInc
+        DataType = ftInteger
       end
       item
         Name = 'NomDia'

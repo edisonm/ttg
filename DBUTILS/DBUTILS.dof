@@ -77,9 +77,3 @@ CodePage=1252
 [Excluded Packages]
 c:\archivos de programa\borland\delphi6\Projects\Bpl\TB97_d5.bpl=Toolbar97 Components
 c:\archivos de programa\borland\delphi6\Projects\Bpl\CoolNavBtnD5.bpl=Database Navigation Button for Coolbar
-[HistoryLists\hlUnitAliases]
-Count=1
-Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;
-[HistoryLists\hlOutputDirectorry]
-Count=1
-Item0=..\BIN

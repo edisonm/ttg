@@ -12,7 +12,7 @@ procedure EmptyAccDatabaseList(DBAcc: Database; List: TStrings);
 procedure SecureFree(AList: TStrings);
 
 var
-  Engine: DBEngine;
+  Engine: _DBEngine;
 
 implementation
 

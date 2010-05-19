@@ -128,6 +128,7 @@ procedure ConvertAccessToDataModule(DBAcc: Database;
                                     ACreateSrcFields: Boolean;  // Code in .pas
                                     ACreateFieldDefs: Boolean;  // Code in .dfm
                                     ACreateDfmFields: Boolean;  // Code in .dfm
+                                    ASupportAutoIncs: Boolean;  // AutoInc Fields
                                     StringDFM, StringPAS, Msgs: TStrings);
 var
   VTableDef: TableDef;
@@ -148,7 +149,7 @@ var
           StringDFM.Add(Format('        Name = ''%s''', [name]));
           if Required then
             StringDFM.Add('        Attributes = [faRequired]');
-          if (Attributes and dbAutoIncrField) <> 0 then
+          if ASupportAutoIncs and ((Attributes and dbAutoIncrField) <> 0) then
             DataTypeName := 'ftAutoInc'
           else
             DataTypeName := Acc2DMFieldTypeName[type_];
@@ -176,7 +177,7 @@ var
       begin
         with Item[j] do
         begin
-          if (Attributes and dbAutoIncrField) <> 0 then
+          if ASupportAutoIncs and ((Attributes and dbAutoIncrField) <> 0) then
             DataTypeName := 'ftAutoInc'
           else
             DataTypeName := Acc2DMFieldTypeName[type_];
@@ -196,18 +197,26 @@ var
       begin
         with Item[j] do
         begin
-          if (Attributes and dbAutoIncrField) <> 0 then
+          if ASupportAutoIncs and ((Attributes and dbAutoIncrField) <> 0) then
             VFieldClassName := 'TAutoIncField'
           else
             VFieldClassName := Acc2DMFieldClassName[type_];
           StringDFM.Add(Format('    object Tb%s%s: %s', [VTableName, name, VFieldClassName]));
           try
-            s := VarToStr(Properties['Caption']);
+            s := VarToStr(VTableDef.Fields.Item[j].Properties['Caption']);
           except
             s := Name;
           end;
           if s <> Name then
             StringDFM.Add('      DisplayLabel = ''' + EscapeStrForm(s) + '''');
+          if not ASupportAutoIncs then
+          begin
+            if (Attributes and dbAutoIncrField) <> 0 then
+            begin
+              StringDFM.Add('      AutoGenerateValue = arAutoInc');
+              StringDFM.Add('      DefaultExpression = ''0''');
+            end;
+          end;
           StringDFM.Add('      FieldName = ''' + name + '''');
           if Required then
             StringDFM.Add('      Required = True');
@@ -226,7 +235,7 @@ var
         end;
       end;
   end;
-  procedure CreateSrcIndexes;
+  procedure CreateSrcIndexes(AIxTable: Integer);
   var
     s, d, o: string;
     k, n, i: Smallint;
@@ -234,10 +243,7 @@ var
     with VTableDef, Indexes do
     begin
       n := Count;
-      if n <> 0 then
-      begin
-        StringPAS.Add(Format('  with Tb%s do', [VTableDef.name]));
-        StringPAS.Add('  begin');
+      StringPAS.Add(Format('  SetLength(FIndexes[%d], %d);', [AIxTable, n]));
         for i := 0 to n - 1 do
           with Item[i] do
           begin
@@ -279,15 +285,14 @@ var
               else
                 o := o + ', ' + 'ixUnique';
             end;
-            if d <> '' then
-              StringPAS.Add(Format('    AddIndex(''Tb%s%s'', ''%s'', [%s], %s);',
-                                   [VTableDef.name, Name, s, o, d]))
-            else
-              StringPAS.Add(Format('    AddIndex(''Tb%s%s'', ''%s'', [%s]);',
-                                   [VTableDef.name, Name, s, o]));
+            StringPAS.Add(Format('  with FIndexes[%d, %d] do', [AIxTable, i]));
+            StringPAS.Add('  begin');
+            StringPAS.Add(Format('    Name := ''Tb%s%s'';', [VTableDef.Name, Name]));
+            StringPAS.Add(Format('    Fields := ''%s'';', [s]));
+            StringPAS.Add(Format('    Options := [%s];', [o]));
+            StringPAS.Add(Format('    DescFields := ''%s'';', [d]));
+            StringPAS.Add('  end;');
           end;
-        StringPAS.Add('  end;');
-      end;
     end;
   end;
   procedure CreateIndexDefs;
@@ -434,20 +439,19 @@ begin
             CreateIndexDefs
           else
             StringDFM.Add('    IndexDefs = <>');
-          StringDFM.Add('    OpenMode = omAutoCreate');
           StringDFM.Add('    Storage = stoMemory');
 	  if ACreateFieldDefs or ACreateIndexDefs then
             StringDFM.Add('    StoreDefs = True');
           StringDFM.Add(Format('    TableName = ''%s''', [VTableName]));
-          StringDFM.Add('    TableLevel = 25');
+          StringDFM.Add('    TableLevel = 7');
 	  if ACreateFieldDefs then
             CreateFieldDefs
           else
             StringDFM.Add('    FieldDefs = <>');
           if (DetailRels[i].Count > 0) or (MasterRels[i].Count > 0) then
-          begin
             StringDFM.Add('    BeforePost = DataSetBeforePost');
-          end;
+          if VTableDef.Indexes.Count > 0 then
+            StringDFM.Add('    AfterOpen = DataSetAfterOpen');
           with MasterRels[i] do
             if Count > 0 then
 	      StringDFM.Add('    BeforeDelete = DataSetBeforeDelete');
@@ -499,6 +503,7 @@ begin
         d := VStringList[i];
         Add(Format('  Tables[%d] := Tb%s;', [i, d]));
       end;
+      Add(Format('  SetLength(FIndexes, %d);', [VStringList.Count]));
       for i := 0 to VStringList.Count - 1 do
       begin
         VTableName := VStringList.Strings[i];
@@ -506,7 +511,7 @@ begin
         if ACreateSrcFields then
           CreateSrcFields;
         if ACreateSrcIndexes then
-          CreateSrcIndexes;
+          CreateSrcIndexes(i);
       end;
       for i := 0 to VStringList.Count - 1 do
       begin
@@ -546,8 +551,8 @@ begin
 	      d := Fields.Item[0].ForeignName;
 	      for k := 1 to Fields.Count - 1 do
 	      begin
-		s := s + ';' + Fields.Item[k].Name;
-		d := d + ';' + Fields.Item[k].ForeignName;
+		      s := s + ';' + Fields.Item[k].Name;
+		      d := d + ';' + Fields.Item[k].ForeignName;
 	      end;
 	      StringPAS.Add(Format('  with FDetailRels[%d, %d] do', [i, j]));
 	      StringPAS.Add('  begin');
@@ -608,7 +613,7 @@ var
   StringDFM, StringPAS: TStrings;
 begin
   if not Assigned(Engine) then
-    Engine := CoDBEngine.Create;
+    Engine := _DBEngine(CoDBEngine.Create);
   StringDFM := TStringList.Create;
   StringPAS := TStringList.Create;
   try
@@ -616,7 +621,7 @@ begin
     try
       ConvertAccessToDataModule(DBAcc, DataModuleName,
                                 DataModuleFileName, ACreateDataSource,
-                                True, False, False, True, True,
+                                False, False, False, True, True, False,
                                 StringDFM, StringPAS, Msgs);
     finally
       DBAcc.Close;

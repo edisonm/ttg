@@ -24,8 +24,6 @@ TSingleEditorForm = class(TEditorForm)
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBGridCheckButton(Sender: TObject; ACol: Integer;
       Field: TField; var Enabled: Boolean);
-    procedure DBGridTitleBtnClick(Sender: TObject; ACol: Integer;
-      Field: TField);
     procedure DBGridDblClick(Sender: TObject);
     procedure DataSourceStateChange(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
@@ -90,22 +88,6 @@ begin
   Enabled := (TDBGrid(Sender).DataSource.DataSet is Tdbf) and
     (Field <> nil) and not (Field is TBlobField) and
     (Tdbf(TDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0);
-end;
-
-procedure TSingleEditorForm.DBGridTitleBtnClick(Sender: TObject;
-  ACol: Integer; Field: TField);
-begin
-  inherited;
-  if TDBGrid(Sender).DataSource.DataSet is Tdbf then
-    with Tdbf(TDBGrid(Sender).DataSource.DataSet) do
-    try
-      if Field.FieldKind = fkLookup then
-        IndexFieldNames :=IndexDefs.FindIndexForFields(FindField(Field.KeyFields).FieldName).Fields
-      else
-       IndexFieldNames := IndexDefs.FindIndexForFields(Field.FieldName).Fields;
-    except
-      IndexFieldNames := '';
-    end;
 end;
 
 procedure TSingleEditorForm.DBGridDblClick(Sender: TObject);

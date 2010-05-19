@@ -20,7 +20,7 @@ type
     QuHorarioProfesorCodHora: TIntegerField;
     QuHorarioProfesorCodDia: TIntegerField;
     QuHorarioProfesorCodMateria: TIntegerField;
-    QuHorarioProfesorCodProfesor: TAutoIncField;
+    QuHorarioProfesorCodProfesor: TIntegerField;
     QuHorarioProfesorNomMateria: TStringField;
     QuHorarioProfesorNombre: TStringField;
     QuHorarioProfesorAbrNivel: TStringField;
