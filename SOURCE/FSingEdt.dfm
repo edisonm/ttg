@@ -1,9 +1,8 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 750
-  Top = 334
+  Left = 449
+  Top = 269
   Width = 510
   PixelsPerInch = 96
-  TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 502
     inherited BtnShow: TToolButton
@@ -51,7 +50,7 @@ inherited SingleEditorForm: TSingleEditorForm
       Left = 1
       Top = 1
       Width = 500
-      Height = 246
+      Height = 253
       Align = alClient
       DataSource = DataSource
       TabOrder = 0

@@ -4,14 +4,14 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Grids, DBGrids, Db, DbUtils, dbf;
+  Grids, DBGrids, Db, DbUtils, kbmMemTable;
 
 type ERelationUtils = class(Exception);
 
 function GetOldFieldValues(ADataSet: TDataSet; const AFieldNames: string): Variant;
-procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: Tdbf;
+procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TKbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
-procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: Tdbf;
+procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TKbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 procedure CheckDetailRelation(AMaster, ADetail: TDataSet;
   const AMasterFields, ADetailFields: string);
@@ -71,7 +71,7 @@ begin
   end;
 end;
 
-procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TDbf;
+procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TkbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
   vo, vn: Variant;
@@ -135,7 +135,7 @@ begin
       end;
 end;
 
-procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: Tdbf;
+procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TKbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
   vo: Variant;

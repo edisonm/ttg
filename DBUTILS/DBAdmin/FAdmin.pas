@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Menus, ToolWin, ComCtrls, MenuBar, ExtCtrls, DBCtrls, Grids, DBGrids,
-  StdCtrls, Db, dbf;
+  StdCtrls, Db, kbmMemTable;
 
 type
   TAdminForm = class(TForm)

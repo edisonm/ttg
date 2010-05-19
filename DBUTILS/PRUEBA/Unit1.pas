@@ -4,21 +4,21 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Grids, DBGrids, Db, dbf;
+  Grids, DBGrids, Db, kbmMemTable;
 
 type
   TForm1 = class(TForm)
-    kbmDia: TDbf;
+    kbmDia: TkbmMemTable;
     dsDia: TDataSource;
     dsHora: TDataSource;
-    kbmHora: TDbf;
+    kbmHora: TkbmMemTable;
     tbmHoraCodHora: TIntegerField;
     tbmHoraNomHora: TStringField;
     DBGrid1: TDBGrid;
     DBGrid2: TDBGrid;
     DBGrid3: TDBGrid;
     dsPeriodo: TDataSource;
-    kbmPeriodo: TDbf;
+    kbmPeriodo: TkbmMemTable;
     tbmPeriodoCodDia: TIntegerField;
     tbmPeriodoCodHora: TIntegerField;
     kbmDiaNomDia: TStringField;

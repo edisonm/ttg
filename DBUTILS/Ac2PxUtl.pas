@@ -588,7 +588,7 @@ var
   DBPdx: TDatabase;
 begin
   if not Assigned(Engine) then
-    Engine := _DBEngine(CoDBEngine.Create);
+    Engine := CoDBEngine.Create;
   DBPdx := TDatabase.Create(nil);
   try
     DBAcc := Engine.OpenDatabase(AccessFileName, 0, true, '');

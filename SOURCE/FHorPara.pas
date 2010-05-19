@@ -5,11 +5,11 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
   FCrsMMER, StdCtrls, Buttons, ExtCtrls, Grids, Variants, FCrsMME1, DBCtrls,
-  dbf, ImgList, ComCtrls, ToolWin;
+  kbmMemTable, ImgList, ComCtrls, ToolWin;
 
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)
-    QuHorarioParalelo: TDbf;
+    QuHorarioParalelo: TkbmMemTable;
     BtnIntercambiarPeriodos: TToolButton;
     cbVerParalelo: TComboBox;
     BtnPrior: TToolButton;
@@ -20,7 +20,7 @@ type
     QuHorarioParaleloCodParaleloId: TIntegerField;
     QuHorarioParaleloCodHora: TIntegerField;
     QuHorarioParaleloCodDia: TIntegerField;
-    QuHorarioParaleloCodProfesor: TIntegerField;
+    QuHorarioParaleloCodProfesor: TAutoIncField;
     QuHorarioParaleloNomMateria: TStringField;
     QuHorarioParaleloApeNomProfesor: TStringField;
     QuHorarioParaleloNombre: TStringField;

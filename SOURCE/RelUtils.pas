@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Grids, DBGrids, Db, dbf;
+  Grids, DBGrids, Db, kbmMemTable;
 
 type ERelationUtils = class(Exception);
 
@@ -12,11 +12,11 @@ function StringToScaped(const AString: string): string;
 function ScapedToString(const AString: string): string; overload;
 function ScapedToString(const AString: string; var i: Integer): string; overload;
 function GetOldFieldValues(ADataSet: TDataSet; const AFieldNames: string): Variant;
-procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: Tdbf;
+procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TKbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
-procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: Tdbf;
+procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TKbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
-procedure CheckDetailRelation(AMaster: Tdbf; ADetail: TDataSet;
+procedure CheckDetailRelation(AMaster: TKbmMemTable; ADetail: TDataSet;
   const AMasterFields, ADetailFields: string);
 
 function CheckRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADetailFields: string; AProblem: TDataSet): Boolean; overload;
@@ -113,7 +113,7 @@ begin
   end;
 end;
 
-procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TDbf;
+procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TkbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
   vo, vn: Variant;
@@ -174,7 +174,7 @@ begin
     end;
 end;
 
-procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: Tdbf;
+procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TKbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
   vo: Variant;
@@ -236,7 +236,7 @@ begin
   end;
 end;
 
-procedure CheckDetailRelation(AMaster: Tdbf; ADetail: TDataSet;
+procedure CheckDetailRelation(AMaster: TKbmMemTable; ADetail: TDataSet;
   const AMasterFields, ADetailFields: string);
 var
   bBookmark: TBookmark;
@@ -510,11 +510,11 @@ end;
 
 procedure LoadDataSetFromDataSet(ATarget, ASource: TDataSet);
 var
+  s, v: string;
   i, j, l: Integer;
   SourceFields, TargetFields: array of TField;
   SourceField, TargetField: TField;
 begin
-  l := 0;
   for i := 0 to ATarget.Fields.Count -1 do
   begin
     TargetField := ATarget.Fields[i];

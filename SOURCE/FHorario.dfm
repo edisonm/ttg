@@ -1,22 +1,18 @@
 inherited HorarioForm: THorarioForm
-  Left = 143
-  Top = 319
+  Left = 452
+  Top = 218
+  Width = 626
+  Height = 361
   Caption = 'HorarioForm'
-  ClientHeight = 327
-  ClientWidth = 618
-  Position = poDesigned
-  ExplicitWidth = 626
-  ExplicitHeight = 361
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 618
-    ExplicitWidth = 618
     inherited DBNavigator: TDBNavigator
       Width = 154
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbPost, nbCancel]
       Hints.Strings = ()
-      ExplicitWidth = 154
     end
     object BtnHorarioParalelo: TToolButton
       Left = 200
@@ -97,29 +93,26 @@ inherited HorarioForm: THorarioForm
     end
   end
   inherited pnlStatus: TPanel
-    Top = 308
+    Top = 315
     Width = 618
-    ExplicitTop = 308
-    ExplicitWidth = 618
     inherited SLRecordNo: TLabel
       Left = 614
-      ExplicitLeft = 614
     end
   end
   inherited Panel1: TPanel
     Width = 618
-    Height = 283
-    ExplicitWidth = 618
-    ExplicitHeight = 283
+    Height = 290
     object Splitter1: TSplitter [0]
       Left = 311
       Top = 1
-      Height = 281
+      Width = 3
+      Height = 288
+      Cursor = crHSplit
       Align = alRight
     end
     inherited DBGrid: TDBGrid
       Width = 310
-      Height = 281
+      Height = 288
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
       Columns = <
         item
@@ -146,7 +139,7 @@ inherited HorarioForm: THorarioForm
       Left = 314
       Top = 1
       Width = 303
-      Height = 281
+      Height = 288
       Align = alRight
       BevelOuter = bvNone
       TabOrder = 1
@@ -154,7 +147,7 @@ inherited HorarioForm: THorarioForm
         Left = 0
         Top = 0
         Width = 303
-        Height = 281
+        Height = 288
         Align = alClient
         DataField = 'Informe'
         DataSource = DataSource
@@ -173,7 +166,135 @@ inherited HorarioForm: THorarioForm
     Top = 112
     Bitmap = {
       494C01010A000E00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
-      0000000000003600000028000000400000003000000001002000000000000030
+      0000000000003600000028000000400000004000000001002000000000000040
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000008080800080808000808080000000000000000000000000000000
@@ -559,8 +680,12 @@ inherited HorarioForm: THorarioForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000424D3E000000000000003E000000
-      2800000040000000300000000100010000000000800100000000000000000000
-      000000000000000000000000FFFFFF00FFF0FFFF00000000FFE0FFFF00000000
+      2800000040000000400000000100010000000000000200000000000000000000
+      000000000000000000000000FFFFFF0000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000FFF0FFFF00000000FFE0FFFF00000000
       FFC01FFF00000000FFE0041F00000000FFC1000F000000000003000F00000000
       000F000700000000001F000100000000001F000000000000001F000100000000
       001F003F00000000001FFC7F00000000001FFFFF00000000FFFFFFFF00000000
@@ -576,14 +701,53 @@ inherited HorarioForm: THorarioForm
       000000000000}
   end
   inherited DataSource: TDataSource
-    DataSet = SourceDataModule.TbHorario
+    DataSet = QuCruceAula
     Left = 60
     Top = 140
   end
-  object QuCruceAula: TDbf [5]
+  object QuCruceAula: TkbmMemTable [5]
+    FieldDefs = <
+      item
+        Name = 'CodDia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodAulaTipo'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Usadas'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Cruces'
+        DataType = ftInteger
+      end
+      item
+        Name = 'AbrAulaTipo'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'Cantidad'
+        DataType = ftInteger
+      end
+      item
+        Name = 'NomDia'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomHora'
+        DataType = ftString
+        Size = 10
+      end>
+    IndexFieldNames = 'CodAulaTipo;CodDia;CodHora'
     IndexDefs = <>
-    Storage = stoMemory
-    TableLevel = 7
     Left = 88
     Top = 168
     object QuCruceAulaCodDia: TIntegerField
@@ -652,12 +816,53 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuCruceAulaDetalle: TDbf [6]
+  object QuCruceAulaDetalle: TkbmMemTable [6]
+    FieldDefs = <
+      item
+        Name = 'CodHora'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodDia'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodNivel'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodEspecializacion'
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodParaleloId'
+        DataType = ftInteger
+      end
+      item
+        Name = 'NomMateria'
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'AbrNivel'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'AbrEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomParaleloId'
+        DataType = ftString
+        Size = 5
+      end>
+    IndexFieldNames = 'CodAulaTipo;CodDia;CodHora'
     IndexDefs = <>
     MasterFields = 'CodAulaTipo;CodDia;CodHora'
     MasterSource = DSCruceAula
-    Storage = stoMemory
-    TableLevel = 7
     Left = 116
     Top = 168
     object QuCruceAulaDetalleCodHora: TIntegerField
@@ -730,10 +935,67 @@ inherited HorarioForm: THorarioForm
     Left = 116
     Top = 140
   end
-  object QuCruceProfesorDetalle: TDbf [8]
+  object QuCruceProfesorDetalle: TkbmMemTable [8]
+    FieldDefs = <
+      item
+        Name = 'CodProfesor'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodDia'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodHora'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodNivel'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodParaleloId'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodMateria'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'AbrNivel'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'AbrEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomParaleloId'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'NomMateria'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 20
+      end>
     IndexDefs = <>
-    Storage = stoMemory
-    TableLevel = 7
     Left = 116
     Top = 196
     object QuCruceProfesorDetalleCodProfesor: TIntegerField
@@ -824,10 +1086,54 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuCruceProfesor: TDbf [9]
+  object QuCruceProfesor: TkbmMemTable [9]
+    FieldDefs = <
+      item
+        Name = 'CodProfesor'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodHora'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodDia'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'ApeProfesor'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'NomProfesor'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'NomHora'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomDia'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'Cruces'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end>
+    IndexFieldNames = 'CodProfesor;CodDia;CodHora'
     IndexDefs = <>
-    Storage = stoMemory
-    TableLevel = 7
     AfterScroll = QuCruceProfesorAfterScroll
     Left = 88
     Top = 196
@@ -896,10 +1202,20 @@ inherited HorarioForm: THorarioForm
       FieldName = 'Cruces'
     end
   end
-  object QuCruceMateria: TDbf [10]
+  object QuCruceMateria: TkbmMemTable [10]
+    FieldDefs = <
+      item
+        Name = 'CodMateria'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'NomMateria'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 20
+      end>
     IndexDefs = <>
-    Storage = stoMemory
-    TableLevel = 7
     AfterScroll = QuCruceMateriaAfterScroll
     Left = 88
     Top = 224
@@ -914,10 +1230,69 @@ inherited HorarioForm: THorarioForm
       FieldName = 'NomMateria'
     end
   end
-  object QuCruceMateriaDetalle: TDbf [11]
+  object QuCruceMateriaDetalle: TkbmMemTable [11]
+    FieldDefs = <
+      item
+        Name = 'CodMateria'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodNivel'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodParaleloId'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodDia'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodHora'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'AbrNivel'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'AbrEspecializacion'
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomParaleloId'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'NomDia'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomHora'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end>
+    IndexFieldNames = 
+      'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
+      'ora'
     IndexDefs = <>
-    Storage = stoMemory
-    TableLevel = 7
     Left = 116
     Top = 224
     object QuCruceMateriaDetalleCodMateria: TIntegerField
@@ -1010,11 +1385,80 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuHorarioDetalleMateriaProhibicion: TDbf [12]
+  object QuHorarioDetalleMateriaProhibicion: TkbmMemTable [12]
+    FieldDefs = <
+      item
+        Name = 'NomMateProhibicionTipo'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomMateria'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'CodHora'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'CodDia'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodMateProhibicionTipo'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodNivel'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodParaleloId'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'NomDia'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomHora'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'AbrNivel'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'AbrEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomParaleloId'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 5
+      end>
+    IndexFieldNames = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
     IndexDefs = <>
-    OpenMode = omAutoCreate
-    Storage = stoMemory
-    TableLevel = 7
     Left = 60
     Top = 168
     object QuHorarioDetalleMateriaProhibicionNomMateProhibicionTipo: TStringField
@@ -1120,10 +1564,86 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuHorarioDetalleProfesorProhibicion: TDbf [13]
+  object QuHorarioDetalleProfesorProhibicion: TkbmMemTable [13]
+    FieldDefs = <
+      item
+        Name = 'NomProfProhibicionTipo'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'ApeNomProfesor'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 31
+      end
+      item
+        Name = 'NomProfesor'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'CodDia'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodHora'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodProfProhibicionTipo'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'CodNivel'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodParaleloId'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'NomDia'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomHora'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomNivel'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 15
+      end
+      item
+        Name = 'NomEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 20
+      end
+      item
+        Name = 'NomParaleloId'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 5
+      end>
     IndexDefs = <>
-    Storage = stoMemory
-    TableLevel = 7
     Left = 60
     Top = 196
     object QuHorarioDetalleProfesorProhibicionNomProfProhibicionTipo: TStringField
@@ -1236,10 +1756,74 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuMateriaCortadaDia: TDbf [14]
+  object QuMateriaCortadaDia: TkbmMemTable [14]
+    FieldDefs = <
+      item
+        Name = 'CodNivel'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodParaleloId'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodDia'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodHora'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodMateria'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'AbrNivel'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'AbrEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomParaleloId'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'NomDia'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomHora'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomMateria'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 20
+      end>
     IndexDefs = <>
-    Storage = stoMemory
-    TableLevel = 7
     AfterScroll = QuCruceMateriaAfterScroll
     Left = 60
     Top = 224
@@ -1341,10 +1925,32 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuMateriaCortadaHora: TDbf [15]
+  object QuMateriaCortadaHora: TkbmMemTable [15]
+    FieldDefs = <
+      item
+        Name = 'CodDia'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodHora'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'NomDia'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomHora'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end>
+    IndexFieldNames = 'CodDia'
     IndexDefs = <>
-    Storage = stoMemory
-    TableLevel = 7
     Left = 60
     Top = 252
     object QuMateriaCortadaHoraCodDia: TIntegerField
@@ -1381,24 +1987,84 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuMateriaCortadaHoraDetalle: TDbf [16]
+  object QuMateriaCortadaHoraDetalle: TkbmMemTable [16]
+    FieldDefs = <
+      item
+        Name = 'CodNivel'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodParaleloId'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodDia'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodHora'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodHora0'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodMateria'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'AbrNivel'
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'AbrEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomParaleloId'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 5
+      end
+      item
+        Name = 'NomDia'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomHora'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'NomMateria'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 20
+      end>
+    IndexFieldNames = 'CodDia;CodHora;CodHora0'
     IndexDefs = <>
-    Storage = stoMemory
-    TableLevel = 7
+    MasterFields = 'CodDia;CodHora'
+    MasterSource = DSMateriaCortadaHora
     Left = 88
     Top = 252
-    object QuMateriaCortadaHoraDetalleCodDia: TIntegerField
-      FieldName = 'CodDia'
-      Visible = False
-    end
-    object QuMateriaCortadaHoraDetalleCodHora: TIntegerField
-      FieldName = 'CodHora'
-      Visible = False
-    end
-    object QuMateriaCortadaHoraDetalleCodHora0: TIntegerField
-      FieldName = 'CodHora0'
-      Visible = False
-    end
     object QuMateriaCortadaHoraDetalleCodNivel: TIntegerField
       FieldName = 'CodNivel'
       Visible = False
@@ -1409,6 +2075,18 @@ inherited HorarioForm: THorarioForm
     end
     object QuMateriaCortadaHoraDetalleCodParaleloId: TIntegerField
       FieldName = 'CodParaleloId'
+      Visible = False
+    end
+    object QuMateriaCortadaHoraDetalleCodDia: TIntegerField
+      FieldName = 'CodDia'
+      Visible = False
+    end
+    object QuMateriaCortadaHoraDetalleCodHora: TIntegerField
+      FieldName = 'CodHora'
+      Visible = False
+    end
+    object QuMateriaCortadaHoraDetalleCodHora0: TIntegerField
+      FieldName = 'CodHora0'
       Visible = False
     end
     object QuMateriaCortadaHoraDetalleCodMateria: TIntegerField
@@ -1566,11 +2244,50 @@ inherited HorarioForm: THorarioForm
       OnExecute = ActHorarioAulaTipoExecute
     end
   end
-  object QuHorarioDetalle: TDbf
+  object QuHorarioDetalle: TkbmMemTable
     Tag = 15
+    FieldDefs = <
+      item
+        Name = 'CodHorario'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodMateria'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodNivel'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodParaleloId'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodDia'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodHora'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'Sesion'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end>
     IndexDefs = <>
-    Storage = stoMemory
-    TableLevel = 7
     Left = 116
     Top = 252
     object QuHorarioDetalleCodHorario: TIntegerField

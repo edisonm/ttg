@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
   StdCtrls, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls,
-  ComCtrls, FEditor, ImgList, ToolWin, dbf, ActnList, UConfig;
+  ComCtrls, FEditor, ImgList, ToolWin, kbmMemTable, ActnList, UConfig;
 
 type
 
@@ -24,6 +24,8 @@ TSingleEditorForm = class(TEditorForm)
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBGridCheckButton(Sender: TObject; ACol: Integer;
       Field: TField; var Enabled: Boolean);
+    procedure DBGridTitleBtnClick(Sender: TObject; ACol: Integer;
+      Field: TField);
     procedure DBGridDblClick(Sender: TObject);
     procedure DataSourceStateChange(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
@@ -85,16 +87,32 @@ procedure TSingleEditorForm.DBGridCheckButton(Sender: TObject;
   ACol: Integer; Field: TField; var Enabled: Boolean);
 begin
   inherited;
-  Enabled := (TDBGrid(Sender).DataSource.DataSet is Tdbf) and
+  Enabled := (TDBGrid(Sender).DataSource.DataSet is TKbmMemTable) and
     (Field <> nil) and not (Field is TBlobField) and
-    (Tdbf(TDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0);
+    (TKbmMemTable(TDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0);
+end;
+
+procedure TSingleEditorForm.DBGridTitleBtnClick(Sender: TObject;
+  ACol: Integer; Field: TField);
+begin
+  inherited;
+  if TDBGrid(Sender).DataSource.DataSet is TKbmMemTable then
+    with TKbmMemTable(TDBGrid(Sender).DataSource.DataSet) do
+    try
+      if Field.FieldKind = fkLookup then
+        IndexFieldNames :=IndexDefs.FindIndexForFields(FindField(Field.KeyFields).FieldName).Fields
+      else
+       IndexFieldNames := IndexDefs.FindIndexForFields(Field.FieldName).Fields;
+    except
+      IndexFieldNames := '';
+    end;
 end;
 
 procedure TSingleEditorForm.DBGridDblClick(Sender: TObject);
 begin
   inherited;
-  if TDBGrid(Sender).DataSource.DataSet is Tdbf then
-    with Tdbf(TDBGrid(Sender).DataSource.DataSet) do
+  if TDBGrid(Sender).DataSource.DataSet is TKbmMemTable then
+    with TKbmMemTable(TDBGrid(Sender).DataSource.DataSet) do
       IndexFieldNames := '';
 end;
 

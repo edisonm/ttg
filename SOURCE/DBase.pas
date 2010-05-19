@@ -4,29 +4,22 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
-  dbf;
+  kbmMemTable;
 
 type
   TDataSetArray = array of TDataSet;
   
   TMasterRel = record
-    DetailDataSet: TDbf;
+    DetailDataSet: TkbmMemTable;
     MasterFields: string;
     DetailFields: string;
     Cascade: Boolean;
   end;
   
   TDetailRel = record
-    MasterDataSet: TDbf;
+    MasterDataSet: TkbmMemTable;
     MasterFields: string;
     DetailFields: string;
-  end;
-
-  TIndexes = record
-    Name: string;
-    Fields: string;
-    Options: TIndexOptions;
-    DescFields: string;
   end;
 
   TBaseDataModule = class(TDataModule)
@@ -34,7 +27,6 @@ type
     procedure DataModuleDestroy(Sender: TObject);
     procedure DataSetBeforePost(DataSet: TDataSet);
     procedure DataSetBeforeDelete(DataSet: TDataSet);
-    procedure DataSetAfterOpen(DataSet: TDataSet);
   private
     { Private declarations }
     FDataSetNameList: TStrings;
@@ -47,7 +39,6 @@ type
     FBeforePostLocks: array of Boolean;
     FMasterRels: array of array of TMasterRel;
     FDetailRels: array of array of TDetailRel;
-    FIndexes: array of array of TIndexes;
     property DataSetNameList: TStrings read FDataSetNameList;
     property DataSetDescList: TStrings read FDataSetDescList;
     procedure SaveToStrings(AStrings: TStrings); virtual;
@@ -77,7 +68,7 @@ implementation
 {$R *.DFM}
 
 uses
-  RelUtils, math;
+  RelUtils;
 
 procedure TBaseDataModule.OpenTables;
 var
@@ -122,7 +113,7 @@ var
   i: Integer;
 begin
   for i := Low(FTables) to High(FTables) do
-    (FTables[i] as TDbf).EmptyTable;
+    (FTables[i] as TkbmMemTable).EmptyTable;
 end;
 
 procedure TBaseDataModule.DataModuleCreate(Sender: TObject);
@@ -224,46 +215,6 @@ begin
     finally
       FBeforePostLocks[i] := False
     end;
-  end;
-  for j := 0 to DataSet.Fields.Count - 1 do
-  begin
-    with DataSet.Fields[j] do
-    begin
-      if AutoGenerateValue = arAutoInc then
-      begin
-        if IsNull then
-        begin
-          AsInteger := StrToInt(DefaultExpression) + 1;
-          DefaultExpression := IntToStr(AsInteger);
-        end
-        else
-        begin
-          DefaultExpression :=
-            IntToStr(Max(AsInteger, StrToInt(DefaultExpression)) + 1);
-        end;
-      end;
-    end;
-  end;
-end;
-
-procedure TBaseDataModule.DataSetAfterOpen(DataSet: TDataSet);
-var
-  i, j: Integer;
-begin
-  i := DataSet.Tag;
-  for j := Low(FIndexes[i]) to High(FIndexes[i]) - 1 do
-  begin
-    with FIndexes[i, j] do
-      try
-        (DataSet as TDbf).AddIndex(Name, Fields, Options, DescFields);
-      except
-        on E: Exception do
-        begin
-          MessageDlg(Format('Raised Exception when creating index %s(%s)',
-                     [Name, Fields]), mtError, [mbOk], 0);
-          raise E;
-        end;
-      end;
   end;
 end;
 

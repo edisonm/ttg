@@ -8,7 +8,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, DBCtrls, DAO_TLB, dbf;
+  Db, StdCtrls, DBCtrls, DAO_TLB, kbmMemTable;
 
 type
   EInitAc2PxUtl = class(Exception);
@@ -128,7 +128,6 @@ procedure ConvertAccessToDataModule(DBAcc: Database;
                                     ACreateSrcFields: Boolean;  // Code in .pas
                                     ACreateFieldDefs: Boolean;  // Code in .dfm
                                     ACreateDfmFields: Boolean;  // Code in .dfm
-                                    ASupportAutoIncs: Boolean;  // AutoInc Fields
                                     StringDFM, StringPAS, Msgs: TStrings);
 var
   VTableDef: TableDef;
@@ -147,9 +146,7 @@ var
         begin
           StringDFM.Add('      item');
           StringDFM.Add(Format('        Name = ''%s''', [name]));
-          if Required then
-            StringDFM.Add('        Attributes = [faRequired]');
-          if ASupportAutoIncs and ((Attributes and dbAutoIncrField) <> 0) then
+          if (Attributes and dbAutoIncrField) <> 0 then
             DataTypeName := 'ftAutoInc'
           else
             DataTypeName := Acc2DMFieldTypeName[type_];
@@ -157,10 +154,12 @@ var
           case Acc2DMFieldType[type_] of
             ftString, ftBytes, ftVarBytes:
               begin
-//                StringDFM.Add('        Precision = -1');
+                StringDFM.Add('        Precision = -1');
                 StringDFM.Add(Format('        Size = %d', [Size]));
               end
           end;
+          if Required then
+            StringDFM.Add('        Attributes = [faRequired]');
           StringDFM.Add('      end');
         end;
       end;
@@ -177,7 +176,7 @@ var
       begin
         with Item[j] do
         begin
-          if ASupportAutoIncs and ((Attributes and dbAutoIncrField) <> 0) then
+          if (Attributes and dbAutoIncrField) <> 0 then
             DataTypeName := 'ftAutoInc'
           else
             DataTypeName := Acc2DMFieldTypeName[type_];
@@ -197,26 +196,17 @@ var
       begin
         with Item[j] do
         begin
-          if ASupportAutoIncs and ((Attributes and dbAutoIncrField) <> 0) then
+          if (Attributes and dbAutoIncrField) <> 0 then
             VFieldClassName := 'TAutoIncField'
           else
             VFieldClassName := Acc2DMFieldClassName[type_];
           StringDFM.Add(Format('    object Tb%s%s: %s', [VTableName, name, VFieldClassName]));
           try
-            s := VarToStr(VTableDef.Fields.Item[j].Properties['Caption']);
+            s := VarToStr(Properties['Caption']);
           except
             s := Name;
           end;
-          if s <> Name then
-            StringDFM.Add('      DisplayLabel = ''' + EscapeStrForm(s) + '''');
-          if not ASupportAutoIncs then
-          begin
-            if (Attributes and dbAutoIncrField) <> 0 then
-            begin
-              StringDFM.Add('      AutoGenerateValue = arAutoInc');
-              StringDFM.Add('      DefaultExpression = ''0''');
-            end;
-          end;
+          StringDFM.Add('      DisplayLabel = ''' + EscapeStrForm(s) + '''');
           StringDFM.Add('      FieldName = ''' + name + '''');
           if Required then
             StringDFM.Add('      Required = True');
@@ -225,17 +215,14 @@ var
             StringDFM.Add(Format('      DefaultExpression = ''%s''', [VarToStr(vv)]));
           case Acc2DMFieldType[type_] of
             ftString, ftBytes, ftVarBytes:
-              if Size <> 20 then
-                StringDFM.Add(Format('      Size = %d', [Size]));
-	    ftMemo:
-              StringDFM.Add('      BlobType = ftMemo');
+              StringDFM.Add(Format('      Size = %d', [Size]));
           end;
           StringDFM.Add('    end');
           StringPAS.Add(Format('    Tb%s%s:%s;', [VTableName, name, VFieldClassName]));
         end;
       end;
   end;
-  procedure CreateSrcIndexes(AIxTable: Integer);
+  procedure CreateSrcIndexes;
   var
     s, d, o: string;
     k, n, i: Smallint;
@@ -243,7 +230,10 @@ var
     with VTableDef, Indexes do
     begin
       n := Count;
-      StringPAS.Add(Format('  SetLength(FIndexes[%d], %d);', [AIxTable, n]));
+      if n <> 0 then
+      begin
+        StringPAS.Add(Format('  with Tb%s do', [VTableDef.name]));
+        StringPAS.Add('  begin');
         for i := 0 to n - 1 do
           with Item[i] do
           begin
@@ -285,14 +275,15 @@ var
               else
                 o := o + ', ' + 'ixUnique';
             end;
-            StringPAS.Add(Format('  with FIndexes[%d, %d] do', [AIxTable, i]));
-            StringPAS.Add('  begin');
-            StringPAS.Add(Format('    Name := ''Tb%s%s'';', [VTableDef.Name, Name]));
-            StringPAS.Add(Format('    Fields := ''%s'';', [s]));
-            StringPAS.Add(Format('    Options := [%s];', [o]));
-            StringPAS.Add(Format('    DescFields := ''%s'';', [d]));
-            StringPAS.Add('  end;');
+            if d <> '' then
+              StringPAS.Add(Format('    AddIndex(''Tb%s%s'', ''%s'', [%s], %s);',
+                                   [VTableDef.name, Name, s, o, d]))
+            else
+              StringPAS.Add(Format('    AddIndex(''Tb%s%s'', ''%s'', [%s]);',
+                                   [VTableDef.name, Name, s, o]));
           end;
+        StringPAS.Add('  end;');
+      end;
     end;
   end;
   procedure CreateIndexDefs;
@@ -393,7 +384,7 @@ begin
     Add('interface');
     Add('');
     Add('uses');
-    Add('  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, dbf,');
+    Add('  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, KbmMemTable,');
     Add('  DBase;');
     Add('');
     Add('type');
@@ -431,27 +422,19 @@ begin
           VTableDef := TableDefs.Item[VTableName];
           //VTableDef := TableDefs.Item[i];
           //VTableName := VTableDef.Name;
-          StringPAS.Add(Format('    Tb%s: TDbf;', [VTableName]));
-          StringDFM.Add(Format('  object Tb%s: TDbf', [VTableName]));
-          if i <> 0 then
-            StringDFM.Add(Format('    Tag = %d', [i]));
-          if ACreateIndexDefs then
-            CreateIndexDefs
-          else
-            StringDFM.Add('    IndexDefs = <>');
-          StringDFM.Add('    Storage = stoMemory');
-	  if ACreateFieldDefs or ACreateIndexDefs then
-            StringDFM.Add('    StoreDefs = True');
-          StringDFM.Add(Format('    TableName = ''%s''', [VTableName]));
-          StringDFM.Add('    TableLevel = 7');
+          StringPAS.Add(Format('    Tb%s: TkbmMemTable;', [VTableName]));
+          StringDFM.Add(Format('  object Tb%s: TkbmMemTable', [VTableName]));
+          StringDFM.Add(Format('    Tag = %d', [i]));
 	  if ACreateFieldDefs then
             CreateFieldDefs
           else
             StringDFM.Add('    FieldDefs = <>');
+          if ACreateIndexDefs then
+            CreateIndexDefs;
           if (DetailRels[i].Count > 0) or (MasterRels[i].Count > 0) then
+          begin
             StringDFM.Add('    BeforePost = DataSetBeforePost');
-          if VTableDef.Indexes.Count > 0 then
-            StringDFM.Add('    AfterOpen = DataSetAfterOpen');
+          end;
           with MasterRels[i] do
             if Count > 0 then
 	      StringDFM.Add('    BeforeDelete = DataSetBeforeDelete');
@@ -503,7 +486,6 @@ begin
         d := VStringList[i];
         Add(Format('  Tables[%d] := Tb%s;', [i, d]));
       end;
-      Add(Format('  SetLength(FIndexes, %d);', [VStringList.Count]));
       for i := 0 to VStringList.Count - 1 do
       begin
         VTableName := VStringList.Strings[i];
@@ -511,7 +493,7 @@ begin
         if ACreateSrcFields then
           CreateSrcFields;
         if ACreateSrcIndexes then
-          CreateSrcIndexes(i);
+          CreateSrcIndexes;
       end;
       for i := 0 to VStringList.Count - 1 do
       begin
@@ -551,8 +533,8 @@ begin
 	      d := Fields.Item[0].ForeignName;
 	      for k := 1 to Fields.Count - 1 do
 	      begin
-		      s := s + ';' + Fields.Item[k].Name;
-		      d := d + ';' + Fields.Item[k].ForeignName;
+		s := s + ';' + Fields.Item[k].Name;
+		d := d + ';' + Fields.Item[k].ForeignName;
 	      end;
 	      StringPAS.Add(Format('  with FDetailRels[%d, %d] do', [i, j]));
 	      StringPAS.Add('  begin');
@@ -613,7 +595,7 @@ var
   StringDFM, StringPAS: TStrings;
 begin
   if not Assigned(Engine) then
-    Engine := _DBEngine(CoDBEngine.Create);
+    Engine := CoDBEngine.Create;
   StringDFM := TStringList.Create;
   StringPAS := TStringList.Create;
   try
@@ -621,7 +603,7 @@ begin
     try
       ConvertAccessToDataModule(DBAcc, DataModuleName,
                                 DataModuleFileName, ACreateDataSource,
-                                False, False, False, True, True, False,
+                                True, False, False, True, True,
                                 StringDFM, StringPAS, Msgs);
     finally
       DBAcc.Close;

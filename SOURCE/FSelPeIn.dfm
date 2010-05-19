@@ -71,15 +71,15 @@ object SelPeriodoForm: TSelPeriodoForm
     DataSource = DSDiaHora
     TabOrder = 3
   end
-  object TbDiaHora: TDbf
+  object TbDiaHora: TkbmMemTable
     FieldDefs = <
       item
         Name = 'CodDia'
-        DataType = ftInteger
+        DataType = ftAutoInc
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
+        DataType = ftAutoInc
       end
       item
         Name = 'NomDia'

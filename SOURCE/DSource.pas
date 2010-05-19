@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DSrcBase, Db, dbf, UConfig;
+  DSrcBase, Db, kbmMemTable, UConfig;
 
 type
   TSourceDataModule = class(TSourceBaseDataModule)
@@ -24,7 +24,7 @@ type
     TbParaleloAbrNivel: TStringField;
     TbParaleloAbrEspecializacion: TStringField;
     TbParaleloNomParaleloId: TStringField;
-    TbParaleloCodParalelo: TIntegerField;
+    TbParaleloCodParalelo: TAutoIncField;
     TbParaleloNomParalelo: TStringField;
     procedure TbProfesorCalcFields(DataSet: TDataSet);
     procedure TbDistributivoBeforePost(DataSet: TDataSet);
@@ -380,9 +380,9 @@ end;
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
+  TbParalelo.AddIndex('TbParaleloCodParalelo', 'CodParalelo', [ixUnique]);
   FConfigStorage := TConfigStorage.Create(Self);
   OpenTables;
-  TbParalelo.AddIndex('TbParaleloCodParalelo', 'CodParalelo', [ixUnique]);
   NewDataBase;
 end;
 

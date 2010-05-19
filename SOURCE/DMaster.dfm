@@ -5,7 +5,7 @@ object MasterDataModule: TMasterDataModule
   Top = 122
   Height = 404
   Width = 748
-  object TbTmpProfesorCarga: TDbf
+  object TbTmpProfesorCarga: TkbmMemTable
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -50,7 +50,7 @@ object MasterDataModule: TMasterDataModule
       FieldName = 'Carga'
     end
   end
-  object QuDistributivoProfesor: TDbf
+  object QuDistributivoProfesor: TkbmMemTable
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -158,7 +158,7 @@ object MasterDataModule: TMasterDataModule
       Lookup = True
     end
   end
-  object QuProfesorProhibicionCant: TDbf
+  object QuProfesorProhibicionCant: TkbmMemTable
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -180,7 +180,7 @@ object MasterDataModule: TMasterDataModule
       FieldName = 'Cantidad'
     end
   end
-  object TbTmpAulaTipoCarga: TDbf
+  object TbTmpAulaTipoCarga: TkbmMemTable
     FieldDefs = <
       item
         Name = 'CodAulaTipo'

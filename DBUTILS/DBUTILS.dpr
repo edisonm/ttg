@@ -7,14 +7,14 @@ uses
   DBPack in 'DBPack.pas',
   Ac2PxUtl in 'Ac2PxUtl.pas',
   PdxUtils in 'PdxUtils.pas',
+  DAO_TLB in 'C:\Archivos de programa\Borland\Delphi5\Imports\DAO_TLB.pas',
   AccUtl in 'AccUtl.pas',
   Ac2DMUtl in 'Ac2DMUtl.pas',
   Acc2DM in 'Acc2DM.pas',
   ArDBUtls in '..\..\arctl\SOURCE\ArDBUtls.pas',
   DBPacker in '..\..\arctl\SOURCE\DBPacker.pas',
-  BZIP2 in '..\..\arctl\SOURCE\BZIP2.PAS',
-  ARCConst in '..\..\arctl\SOURCE\ARCConst.pas',
-  DAO_TLB in 'C:\Documents and Settings\edison\Mis documentos\RAD Studio\5.0\Imports\DAO_TLB.pas';
+  BZip2 in '..\..\arctl\SOURCE\BZIP2.PAS',
+  ARCConst in '..\..\arctl\SOURCE\ARCConst.pas';
 
 begin
   if ParamCount = 0 then

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Grids, DBGrids, StdCtrls, Buttons, FEditor,
-  DBCtrls, ExtCtrls, dbf, ImgList, ComCtrls, ToolWin, FMasDeEd,
+  DBCtrls, ExtCtrls, kbmMemTable, ImgList, ComCtrls, ToolWin, FMasDeEd,
   ActnList, FHorProf, FHorAulT, FHorPara;
 
 type
@@ -17,7 +17,7 @@ type
     BtnCruceProfesor: TToolButton;
     BtnCruceMateria: TToolButton;
     BtnCruceAula: TToolButton;
-    QuHorarioDetalle: TDbf;
+    QuHorarioDetalle: TkbmMemTable;
     QuHorarioDetalleCodHorario: TIntegerField;
     QuHorarioDetalleCodMateria: TIntegerField;
     QuHorarioDetalleCodNivel: TIntegerField;
@@ -25,7 +25,7 @@ type
     QuHorarioDetalleCodParaleloId: TIntegerField;
     QuHorarioDetalleCodDia: TIntegerField;
     QuHorarioDetalleSesion: TIntegerField;
-    QuCruceAula: TDbf;
+    QuCruceAula: TkbmMemTable;
     QuCruceAulaCodDia: TIntegerField;
     QuCruceAulaCodHora: TIntegerField;
     QuCruceAulaCodAulaTipo: TIntegerField;
@@ -34,7 +34,7 @@ type
     QuCruceAulaNomHora: TStringField;
     QuCruceAulaUsadas: TIntegerField;
     QuCruceAulaCruces: TIntegerField;
-    QuCruceAulaDetalle: TDbf;
+    QuCruceAulaDetalle: TkbmMemTable;
     QuCruceAulaDetalleCodNivel: TIntegerField;
     QuCruceAulaDetalleCodEspecializacion: TIntegerField;
     QuCruceAulaDetalleCodParaleloId: TIntegerField;
@@ -43,7 +43,7 @@ type
     QuCruceAulaDetalleAbrEspecializacion: TStringField;
     QuCruceAulaDetalleNomParaleloId: TStringField;
     DSCruceAula: TDataSource;
-    QuCruceProfesorDetalle: TDbf;
+    QuCruceProfesorDetalle: TkbmMemTable;
     QuCruceProfesorDetalleCodProfesor: TIntegerField;
     QuCruceProfesorDetalleCodDia: TIntegerField;
     QuCruceProfesorDetalleCodHora: TIntegerField;
@@ -55,7 +55,7 @@ type
     QuCruceProfesorDetalleAbrEspecializacion: TStringField;
     QuCruceProfesorDetalleNomParaleloId: TStringField;
     QuCruceProfesorDetalleNomMateria: TStringField;
-    QuCruceProfesor: TDbf;
+    QuCruceProfesor: TkbmMemTable;
     QuCruceProfesorCodProfesor: TIntegerField;
     QuCruceProfesorCodDia: TIntegerField;
     QuCruceProfesorCodHora: TIntegerField;
@@ -64,11 +64,11 @@ type
     QuCruceProfesorNomDia: TStringField;
     QuCruceProfesorNomHora: TStringField;
     QuCruceProfesorCruces: TIntegerField;
-    QuCruceMateria: TDbf;
+    QuCruceMateria: TkbmMemTable;
     QuCruceMateriaCodMateria: TIntegerField;
     QuCruceMateriaNomMateria: TStringField;
-    QuCruceMateriaDetalle: TDbf;
-    QuHorarioDetalleMateriaProhibicion: TDbf;
+    QuCruceMateriaDetalle: TkbmMemTable;
+    QuHorarioDetalleMateriaProhibicion: TkbmMemTable;
     QuHorarioDetalleMateriaProhibicionNomMateria: TStringField;
     QuHorarioDetalleMateriaProhibicionCodDia: TIntegerField;
     QuHorarioDetalleMateriaProhibicionCodHora: TIntegerField;
@@ -82,7 +82,7 @@ type
     QuHorarioDetalleMateriaProhibicionAbrNivel: TStringField;
     QuHorarioDetalleMateriaProhibicionAbrEspecializacion: TStringField;
     QuHorarioDetalleMateriaProhibicionNomParaleloId: TStringField;
-    QuHorarioDetalleProfesorProhibicion: TDbf;
+    QuHorarioDetalleProfesorProhibicion: TkbmMemTable;
     QuHorarioDetalleProfesorProhibicionApeNomProfesor: TStringField;
     QuHorarioDetalleProfesorProhibicionNomProfesor: TStringField;
     QuHorarioDetalleProfesorProhibicionCodDia: TIntegerField;
@@ -101,7 +101,7 @@ type
     dbmInforme: TDBMemo;
     BtnSeleccionarHorario: TToolButton;
     BtnMateriaCortadaDia: TToolButton;
-    QuMateriaCortadaDia: TDbf;
+    QuMateriaCortadaDia: TkbmMemTable;
     QuMateriaCortadaDiaCodNivel: TIntegerField;
     QuMateriaCortadaDiaCodEspecializacion: TIntegerField;
     QuMateriaCortadaDiaCodParaleloId: TIntegerField;
@@ -115,10 +115,10 @@ type
     QuMateriaCortadaDiaNomDia: TStringField;
     QuMateriaCortadaDiaNomHora: TStringField;
     BtnMateriaCortadaHora: TToolButton;
-    QuMateriaCortadaHora: TDbf;
+    QuMateriaCortadaHora: TkbmMemTable;
     QuMateriaCortadaHoraCodDia: TIntegerField;
     QuMateriaCortadaHoraCodHora: TIntegerField;
-    QuMateriaCortadaHoraDetalle: TDbf;
+    QuMateriaCortadaHoraDetalle: TkbmMemTable;
     DSMateriaCortadaHora: TDataSource;
     BtnHorarioAulaTipo: TToolButton;
     QuCruceAulaDetalleCodDia: TIntegerField;
@@ -178,6 +178,7 @@ type
     procedure ActHorarioAulaTipoExecute(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     FCruceAulaForm,
@@ -241,7 +242,7 @@ begin
     TbHorarioDetalle.DisableControls;
     d := TbHorarioDetalle.IndexFieldNames;
     try
-//      TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+      TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
       if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
       begin
         QuCruceProfesor.DisableControls;
@@ -252,7 +253,6 @@ begin
           TbDistributivo.First;
           QuCruceProfesor.Close;
           QuCruceProfesor.Open;
-          QuCruceProfesor.AddIndex('QuCruceProfesorIndex1', 'CodProfesor;CodDia;CodHora', []);
           while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
           begin
             CodMateria := TbHorarioDetalleCodMateria.Value;
@@ -418,12 +418,8 @@ begin
   begin
     QuCruceMateria.Close;
     QuCruceMateria.Open;
-    QuCruceMateria.AddIndex('QuCruceMateriaIxCodMateria', 'CodMateria', []);
-    QuCruceMateria.AddIndex('QuCruceMateriaIxNomMateria', 'NomMateria', []);
     QuCruceMateriaDetalle.Close;
     QuCruceMateriaDetalle.Open;
-    QuCruceMateriaDetalle.AddIndex('QuCruceMateriaDetalleIndex1',
-                                   'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora', []);
     CodHorario := TbHorarioCodHorario.Value;
     TbHorarioDetalle.DisableControls;
     s := TbHorarioDetalle.IndexFieldNames;
@@ -431,10 +427,6 @@ begin
       TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
       TbHorarioDetalle.Filtered := True;
       TbHorarioDetalle.Filter := Format('CodHorario=%d', [CodHorario]);
-      QuHorarioDetalle.Close;
-      QuHorarioDetalle.Open;
-      QuHorarioDetalle.AddIndex('QuHorarioDetalleIndex1',
-                                'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia', []);
       LoadDataSetFromDataSet(QuHorarioDetalle, TbHorarioDetalle);
       TbHorarioDetalle.First;
       QuCruceMateria.IndexFieldNames := 'CodMateria';
@@ -528,10 +520,6 @@ begin
           TbMateriaProhibicion.IndexFieldNames := 'CodMateria;CodDia;CodHora';
           QuHorarioDetalleMateriaProhibicion.Close;
           QuHorarioDetalleMateriaProhibicion.Open;
-          QuHorarioDetalleMateriaProhibicion.AddIndex('QuHorarioDetalleMateriaProhibicionIndex1',
-                                                      'CodMateProhibicionTipo;NomMateria;CodDia;CodHora',
-                                                      [ixDescending],
-                                                      'CodMateProhibicionTipo');
           QuHorarioDetalleMateriaProhibicion.DisableControls;
           try
           while (TbHorarioDetalleCodHorario.Value = CodHorario)
@@ -692,7 +680,6 @@ begin
   begin
     QuCruceAula.Close;
     QuCruceAula.Open;
-    QuCruceAula.AddIndex('QuCruceAulaIndex1', 'CodAulaTipo;CodDia;CodHora', []);
     CodHorario := TbHorarioCodHorario.Value;
     TbHorarioDetalle.DisableControls;
     d := TbHorarioDetalle.IndexFieldNames;
@@ -776,12 +763,11 @@ begin
   begin
     QuCruceAulaDetalle.Close;
     QuCruceAulaDetalle.Open;
-    QuCruceAulaDetalle.AddIndex('QuCruceAulaDetalleIndex1', 'CodAulaTipo;CodDia;CodHora', []);
     CodHorario := TbHorarioCodHorario.Value;
     d := TbHorarioDetalle.IndexFieldNames;
     TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
     QuCruceAulaDetalle.DisableControls;
-//    QuCruceAulaDetalle.EnableIndexes := False;
+    QuCruceAulaDetalle.EnableIndexes := False;
     try
       if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
       begin
@@ -825,8 +811,8 @@ begin
       end;
     finally
       TbHorarioDetalle.IndexFieldNames := d;
-//      QuCruceAulaDetalle.EnableIndexes := True;
-//      QuCruceAulaDetalle.UpdateIndexes;
+      QuCruceAulaDetalle.EnableIndexes := True;
+      QuCruceAulaDetalle.UpdateIndexes;
       QuCruceAulaDetalle.EnableControls;
     end;
   end;
@@ -985,18 +971,10 @@ begin
     h := TbHora.IndexFieldNames;
     d := TbDia.IndexFieldNames;
     try
-      QuMateriaCortadaHoraDetalle.Close;
-      QuMateriaCortadaHoraDetalle.MasterSource := nil;
-      QuMateriaCortadaHoraDetalle.MasterFields := '';
       QuMateriaCortadaHora.Close;
       QuMateriaCortadaHora.Open;
-      QuMateriaCortadaHora.AddIndex('QuMateriaCortadaHoraIxCodDia', 'CodDia', []);
+      QuMateriaCortadaHoraDetalle.Close;
       QuMateriaCortadaHoraDetalle.Open;
-      QuMateriaCortadaHoraDetalle.AddIndex('QuMateriaCortadaHoraDetalleCodDia',
-                                           'CodDia;CodHora;CodHora0', []);
-      QuMateriaCortadaHoraDetalle.MasterSource := DSMateriaCortadaHora;
-      QuMateriaCortadaHoraDetalle.MasterFields := 'CodDia;CodHora';
-      QuMateriaCortadaHoraDetalle.IndexFieldNames := 'CodDia;CodHora;CodHora0';
       TbHora.IndexFieldNames := 'CodHora';
       TbDia.IndexFieldNames := 'CodDia';
       TbHora.First;
@@ -1168,6 +1146,36 @@ procedure THorarioForm.doSaveConfig;
 begin
   inherited;
   ConfigIntegers['Panel2_Width'] := Panel2.Width;
+end;
+
+procedure THorarioForm.FormCreate(Sender: TObject);
+begin
+  inherited;
+  QuHorarioDetalle.AddIndex('QuHorarioDetalleIndex1',
+                            'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia', []);
+  QuCruceAula.AddIndex('QuCruceAulaIndex1', 'CodAulaTipo;CodDia;CodHora', []);
+  QuCruceAulaDetalle.AddIndex('QuCruceAulaDetalleIndex1', 'CodAulaTipo;CodDia;CodHora', []);
+  QuCruceProfesor.AddIndex('QuCruceProfesorIndex1', 'CodProfesor;CodDia;CodHora', []);
+  QuCruceMateria.AddIndex('QuCruceMateriaIxCodMateria', 'CodMateria', []);
+  QuCruceMateria.AddIndex('QuCruceMateriaIxNomMateria', 'NomMateria', []);
+  QuCruceMateriaDetalle.AddIndex('QuCruceMateriaDetalleIndex1',
+                                 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora', []);
+  {$IFDEF FPC}
+  QuHorarioDetalleMateriaProhibicion.AddIndex('QuHorarioDetalleMateriaProhibicionIndex1',
+                                              'CodMateProhibicionTipo;NomMateria;CodDia;CodHora',
+                                              [ixDescending],
+                                              'CodMateProhibicionTipo');
+  {$ELSE}
+  with QuHorarioDetalleMateriaProhibicion.IndexDefs.AddIndexDef do
+  begin
+    Name := 'QuHorarioDetalleMateriaProhibicionIndex1';
+    Fields := 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora';
+    Options := [ixDescending];
+     DescFields := 'CodMateProhibicionTipo';
+  end;
+  {$ENDIF}
+  QuMateriaCortadaHora.AddIndex('QuMateriaCortadaHoraIxCodDia', 'CodDia', []);
+  QuMateriaCortadaHoraDetalle.AddIndex('QuMateriaCortadaHoraDetalleIxCodDia', 'CodDia;CodHora;CodHora0', []);
 end;
 
 end.

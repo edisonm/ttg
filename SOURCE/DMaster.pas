@@ -4,16 +4,16 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DB, dbf, SGHCUtls, Variants;
+  DB, kbmMemTable, SGHCUtls, Variants;
 
 type
   TMasterDataModule = class(TDataModule)
-    TbTmpProfesorCarga: TDbf;
+    TbTmpProfesorCarga: TkbmMemTable;
     TbTmpProfesorCargaCodProfesor: TIntegerField;
     TbTmpProfesorCargaNomProfesor: TStringField;
     TbTmpProfesorCargaApeProfesor: TStringField;
     TbTmpProfesorCargaCarga: TIntegerField;
-    QuDistributivoProfesor: TDbf;
+    QuDistributivoProfesor: TkbmMemTable;
     QuDistributivoProfesorCodMateria: TIntegerField;
     QuDistributivoProfesorCodNivel: TIntegerField;
     QuDistributivoProfesorCodParaleloId: TIntegerField;
@@ -24,10 +24,10 @@ type
     QuDistributivoProfesorApeNomProfesor: TStringField;
     QuDistributivoProfesorCodEspecializacion: TIntegerField;
     QuDistributivoProfesorAbrEspecializacion: TStringField;
-    QuProfesorProhibicionCant: TDbf;
+    QuProfesorProhibicionCant: TkbmMemTable;
     QuProfesorProhibicionCantCodProfesor: TIntegerField;
     QuProfesorProhibicionCantCantidad: TIntegerField;
-    TbTmpAulaTipoCarga: TDbf;
+    TbTmpAulaTipoCarga: TkbmMemTable;
     TbTmpAulaTipoCargaCodAulaTipo: TIntegerField;
     TbTmpAulaTipoCargaAbrAulaTipo: TStringField;
     TbTmpAulaTipoCargaCarga: TIntegerField;
