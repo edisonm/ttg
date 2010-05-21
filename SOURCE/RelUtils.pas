@@ -510,11 +510,11 @@ end;
 
 procedure LoadDataSetFromDataSet(ATarget, ASource: TDataSet);
 var
-  s, v: string;
   i, j, l: Integer;
   SourceFields, TargetFields: array of TField;
   SourceField, TargetField: TField;
 begin
+  l := 0;
   for i := 0 to ATarget.Fields.Count -1 do
   begin
     TargetField := ATarget.Fields[i];

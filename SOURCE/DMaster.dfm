@@ -1,11 +1,15 @@
 object MasterDataModule: TMasterDataModule
+  OldCreateOrder = True
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Left = 222
-  Top = 122
+  Left = 213
+  Top = 113
   Height = 404
   Width = 748
   object TbTmpProfesorCarga: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -18,6 +22,17 @@ object MasterDataModule: TMasterDataModule
         DataType = ftInteger
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 250
     Top = 11
     object TbTmpProfesorCargaCodProfesor: TIntegerField
@@ -51,6 +66,9 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object QuDistributivoProfesor: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -78,6 +96,17 @@ object MasterDataModule: TMasterDataModule
         DataType = ftInteger
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 250
     Top = 115
     object QuDistributivoProfesorCodMateria: TIntegerField
@@ -159,6 +188,9 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object QuProfesorProhibicionCant: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -171,6 +203,17 @@ object MasterDataModule: TMasterDataModule
         DataType = ftInteger
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 58
     Top = 157
     object QuProfesorProhibicionCantCodProfesor: TIntegerField
@@ -181,6 +224,9 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object TbTmpAulaTipoCarga: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodAulaTipo'
@@ -193,6 +239,17 @@ object MasterDataModule: TMasterDataModule
         DataType = ftInteger
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 250
     Top = 62
     object TbTmpAulaTipoCargaCodAulaTipo: TIntegerField

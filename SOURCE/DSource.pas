@@ -187,7 +187,7 @@ var
   s: string;
 begin
   inherited;
-  s := TbDistributivoComposicion.Value;
+  s := TbDistributivoComposicion.AsString;
   if ComposicionADuracion(s) <= 0 then
     raise Exception.CreateFmt('Composición no válida: "%s"', [s]);
   with TbDistributivoCodMateria do DefaultExpression := AsString;

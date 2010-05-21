@@ -717,7 +717,7 @@ var
         FDistributivoAMateria[i] := j;
         FParaleloMateriaAProfesor[n, j] := o;
         FParaleloMateriaADistributivo[n, j] := i;
-        s := VFieldComposicion.Value;
+        s := VFieldComposicion.AsString;
         VPos := 1;
         l := ss;
         //t := 0;

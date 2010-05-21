@@ -125,14 +125,14 @@ var
           TbTmpProfesorCarga.Append;
           TbTmpProfesorCargaCodProfesor.Value :=
             TbDistributivoCodProfesor.Value;
-          TbTmpProfesorCargaCarga.Value := ComposicionADuracion(TbDistributivoComposicion.Value);
+          TbTmpProfesorCargaCarga.Value := ComposicionADuracion(TbDistributivoComposicion.AsString);
           CodProfesor := CodProfesor1;
         end
         else
         begin
           TbTmpProfesorCarga.Edit;
           with TbTmpProfesorCargaCarga do
-            Value := Value + ComposicionADuracion(TbDistributivoComposicion.Value);
+            Value := Value + ComposicionADuracion(TbDistributivoComposicion.AsString);
         end;
         TbTmpProfesorCarga.Post;
         Next;
@@ -159,14 +159,14 @@ var
         begin
           TbTmpAulaTipoCarga.Append;
           TbTmpAulaTipoCargaCodAulaTipo.Value := TbDistributivoCodAulaTipo.Value;
-          TbTmpAulaTipoCargaCarga.Value := ComposicionADuracion(TbDistributivoComposicion.Value);
+          TbTmpAulaTipoCargaCarga.Value := ComposicionADuracion(TbDistributivoComposicion.AsString);
           CodAulaTipo := CodAulaTipo1;
         end
         else
         begin
           TbTmpAulaTipoCarga.Edit;
           with TbTmpAulaTipoCargaCarga do
-            Value := Value + ComposicionADuracion(TbDistributivoComposicion.Value);
+            Value := Value + ComposicionADuracion(TbDistributivoComposicion.AsString);
         end;
         TbTmpAulaTipoCarga.Post;
         Next;
@@ -378,7 +378,7 @@ var
           try
             while not TbDistributivo.Eof do
             begin
-              Inc(t, ComposicionADuracion(TbDistributivoComposicion.Value));
+              Inc(t, ComposicionADuracion(TbDistributivoComposicion.AsString));
               TbDistributivo.Next;
             end;
             if (t <= 0) or (t > TbPeriodo.RecordCount) then
@@ -461,7 +461,7 @@ begin
       c := 0;
       while not Eof do
       begin
-        Inc(c, ComposicionADuracion(TbDistributivoComposicion.Value));
+        Inc(c, ComposicionADuracion(TbDistributivoComposicion.AsString));
         Next;
       end;
       Result := c;

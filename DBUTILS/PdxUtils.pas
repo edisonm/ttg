@@ -22,7 +22,7 @@ var
   i, n: Integer;
 begin
   hTypeCur := nil;
-  Check(DbiOpenTableTypesList(PChar(Driver), hTypeCur));
+  Check(DbiOpenTableTypesList(PAnsiChar(Driver), hTypeCur));
   Check(DbiGetRecordCount(hTypeCur, n));
   i := 0;
   SetLength(TblTypes, n);
@@ -39,7 +39,7 @@ var
   i, n: Integer;
 begin
   TmpCursor := nil;
-  Check(DbiOpenFieldTypesList(PChar(DrvType), PChar(TblType), TmpCursor));
+  Check(DbiOpenFieldTypesList(PAnsiChar(DrvType), PAnsiChar(TblType), TmpCursor));
   Check(DbiGetRecordCount(TmpCursor, n));
   SetLength(FieldTypes, n);
   i := 0;
@@ -54,7 +54,7 @@ var
   i, n: Integer;
 begin
   TmpCursor := nil;
-  Check(DbiOpenIndexTypesList(PChar(DrvType), TmpCursor));
+  Check(DbiOpenIndexTypesList(PAnsiChar(DrvType), TmpCursor));
   Check(DbiGetRecordCount(TmpCursor, n));
   SetLength(IDXTypes, n);
   i := 0;
