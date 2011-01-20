@@ -1,6 +1,6 @@
 inherited SourceDataModule: TSourceDataModule
-  Left = 110
-  Top = 133
+  Left = 189
+  Top = 130
   inherited TbAulaTipo: TkbmMemTable
     inherited TbAulaTipoCodAulaTipo: TAutoIncField
       Visible = False
@@ -260,26 +260,25 @@ inherited SourceDataModule: TSourceDataModule
   end
   inherited TbDistributivo: TkbmMemTable
     OnCalcFields = TbDistributivoCalcFields
+    inherited TbDistributivoCodMateria: TIntegerField
+      Visible = False
+    end
+    inherited TbDistributivoCodNivel: TIntegerField
+      Visible = False
+    end
     inherited TbDistributivoCodEspecializacion: TIntegerField
+      Visible = False
+    end
+    inherited TbDistributivoCodParaleloId: TIntegerField
+      Visible = False
+    end
+    inherited TbDistributivoCodProfesor: TIntegerField
       Visible = False
     end
     inherited TbDistributivoCodAulaTipo: TIntegerField
       Visible = False
     end
-    object TbDistributivoApeNomProfesor: TStringField [6]
-      DisplayLabel = 'Profesor'
-      DisplayWidth = 31
-      FieldKind = fkLookup
-      FieldName = 'ApeNomProfesor'
-      LookupDataSet = TbProfesor
-      LookupKeyFields = 'CodProfesor'
-      LookupResultField = 'ApeNomProfesor'
-      KeyFields = 'CodProfesor'
-      Visible = False
-      Size = 31
-      Lookup = True
-    end
-    object TbDistributivoAbrNivel: TStringField [7]
+    object TbDistributivoAbrNivel: TStringField [6]
       DisplayLabel = 'Nivel'
       FieldKind = fkLookup
       FieldName = 'AbrNivel'
@@ -290,7 +289,7 @@ inherited SourceDataModule: TSourceDataModule
       Size = 5
       Lookup = True
     end
-    object TbDistributivoAbrEspecializacion: TStringField [8]
+    object TbDistributivoAbrEspecializacion: TStringField [7]
       DisplayLabel = 'Especializacion'
       FieldKind = fkLookup
       FieldName = 'AbrEspecializacion'
@@ -301,7 +300,7 @@ inherited SourceDataModule: TSourceDataModule
       Size = 10
       Lookup = True
     end
-    object TbDistributivoNomParaleloId: TStringField [9]
+    object TbDistributivoNomParaleloId: TStringField [8]
       DisplayLabel = 'Paralelo'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
@@ -312,7 +311,7 @@ inherited SourceDataModule: TSourceDataModule
       Size = 5
       Lookup = True
     end
-    object TbDistributivoNomMateria: TStringField [10]
+    object TbDistributivoNomMateria: TStringField [9]
       DisplayLabel = 'Materia'
       DisplayWidth = 15
       FieldKind = fkLookup
@@ -321,24 +320,24 @@ inherited SourceDataModule: TSourceDataModule
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
-      Size = 15
-      Lookup = True
-    end
-    object TbDistributivoAbrAulaTipo: TStringField [11]
-      DisplayLabel = 'Tipo aula'
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'AbrAulaTipo'
-      LookupDataSet = TbAulaTipo
-      LookupKeyFields = 'CodAulaTipo'
-      LookupResultField = 'AbrAulaTipo'
-      KeyFields = 'CodAulaTipo'
-      Size = 10
-      Lookup = True
-    end
-    object TbDistributivoDuracion: TIntegerField
-      DisplayLabel = 'Duraci'#243'n'
-      FieldKind = fkCalculated
+      Size = 15
+      Lookup = True
+    end
+    object TbDistributivoAbrAulaTipo: TStringField [11]
+      DisplayLabel = 'Tipo aula'
+      DisplayWidth = 10
+      FieldKind = fkLookup
+      FieldName = 'AbrAulaTipo'
+      LookupDataSet = TbAulaTipo
+      LookupKeyFields = 'CodAulaTipo'
+      LookupResultField = 'AbrAulaTipo'
+      KeyFields = 'CodAulaTipo'
+      Size = 10
+      Lookup = True
+    end
+    object TbDistributivoDuracion: TIntegerField
+      DisplayLabel = 'Duraci'#243'n'
+      FieldKind = fkCalculated
       FieldName = 'Duracion'
       Calculated = True
     end

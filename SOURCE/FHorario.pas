@@ -84,7 +84,6 @@ type
     QuHorarioDetalleMateriaProhibicionNomParaleloId: TStringField;
     QuHorarioDetalleProfesorProhibicion: TkbmMemTable;
     QuHorarioDetalleProfesorProhibicionApeNomProfesor: TStringField;
-    QuHorarioDetalleProfesorProhibicionNomProfesor: TStringField;
     QuHorarioDetalleProfesorProhibicionCodDia: TIntegerField;
     QuHorarioDetalleProfesorProhibicionCodHora: TIntegerField;
     QuHorarioDetalleProfesorProhibicionCodProfProhibicionTipo: TIntegerField;
@@ -163,6 +162,7 @@ type
     ActMateriaCortadaDia: TAction;
     ActMateriaCortadaHora: TAction;
     ActHorarioAulaTipo: TAction;
+    QuHorarioDetalleProfesorProhibicionCodProfesor: TIntegerField;
     procedure ActHorarioParaleloExecute(Sender: TObject);
     procedure ActCruceProfesorExecute(Sender: TObject);
     procedure ActCruceMateriaExecute(Sender: TObject);
@@ -623,8 +623,8 @@ begin
                                                         TbHorarioDetalleCodHora.Value]), []) then
             begin
               QuHorarioDetalleProfesorProhibicion.Append;
-              QuHorarioDetalleProfesorProhibicionApeNomProfesor.Value :=
-                TbDistributivoApeNomProfesor.Value;
+              QuHorarioDetalleProfesorProhibicionCodProfesor.Value :=
+                TbDistributivoCodProfesor.Value;
               QuHorarioDetalleProfesorProhibicionCodHora.Value :=
                 TbHorarioDetalleCodHora.Value;
               QuHorarioDetalleProfesorProhibicionCodDia.Value :=

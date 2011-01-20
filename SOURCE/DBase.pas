@@ -52,7 +52,7 @@ type
     procedure LoadFromTextFile(const AFileName: TFileName);
     procedure SaveToTextDir(const ADirName: TFileName); virtual;
     procedure SaveToTextFile(const AFileName: TFileName);
-    
+
     property CheckRelations: Boolean read FCheckRelations write FCheckRelations;
     property Tables: TDataSetArray read FTables write FTables;
     property Description[ADataSet: TDataSet]: string read GetDescription;
@@ -207,7 +207,7 @@ begin
           CheckDetailRelation(MasterDataSet, DataSet, MasterFields, DetailFields);
       if DataSet.State = dsEdit then
       begin
-	for j := Low(FMasterRels[i]) to High(FMasterRels[i]) do
+	      for j := Low(FMasterRels[i]) to High(FMasterRels[i]) do
           with FMasterRels[i, j] do
             CheckMasterRelationUpdate(DataSet, DetailDataSet, MasterFields,
                                       DetailFields, Cascade);

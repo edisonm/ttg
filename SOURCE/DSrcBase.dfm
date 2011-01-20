@@ -1,6 +1,10 @@
 inherited SourceBaseDataModule: TSourceBaseDataModule
+  Left = 217
+  Top = 105
   object TbAulaTipo: TkbmMemTable
-    Tag = 0
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodAulaTipo'
@@ -8,23 +12,35 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'NomAulaTipo'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 25
-        Attributes = [faRequired]
       end
       item
         Name = 'AbrAulaTipo'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'Cantidad'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 48
@@ -46,7 +62,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 10
     end
     object TbAulaTipoCantidad: TIntegerField
-      DisplayLabel = 'Cantidad'
       FieldName = 'Cantidad'
       Required = True
     end
@@ -58,6 +73,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbEspecializacion: TkbmMemTable
     Tag = 1
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodEspecializacion'
@@ -65,18 +83,30 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'NomEspecializacion'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 20
-        Attributes = [faRequired]
       end
       item
         Name = 'AbrEspecializacion'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 10
-        Attributes = [faRequired]
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 144
@@ -89,7 +119,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       DisplayLabel = 'Nombre'
       FieldName = 'NomEspecializacion'
       Required = True
-      Size = 20
     end
     object TbEspecializacionAbrEspecializacion: TStringField
       DisplayLabel = 'Abreviatura'
@@ -105,6 +134,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbDia: TkbmMemTable
     Tag = 2
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodDia'
@@ -112,11 +144,23 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'NomDia'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 10
-        Attributes = [faRequired]
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 240
@@ -139,6 +183,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbMateria: TkbmMemTable
     Tag = 3
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -146,11 +193,23 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'NomMateria'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 20
-        Attributes = [faRequired]
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 336
@@ -163,7 +222,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       DisplayLabel = 'Nombre'
       FieldName = 'NomMateria'
       Required = True
-      Size = 20
     end
   end
   object DSMateria: TDataSource
@@ -173,6 +231,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbNivel: TkbmMemTable
     Tag = 4
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -180,10 +241,10 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'NomNivel'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 15
-        Attributes = [faRequired]
       end
       item
         Name = 'AbrNivel'
@@ -191,6 +252,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Precision = -1
         Size = 5
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 432
@@ -218,6 +291,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbHora: TkbmMemTable
     Tag = 5
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodHora'
@@ -225,18 +301,30 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'NomHora'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'Intervalo'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 21
-        Attributes = [faRequired]
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 48
@@ -252,7 +340,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 10
     end
     object TbHoraIntervalo: TStringField
-      DisplayLabel = 'Intervalo'
       FieldName = 'Intervalo'
       Required = True
       Size = 21
@@ -265,6 +352,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbHorario: TkbmMemTable
     Tag = 6
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodHorario'
@@ -272,18 +362,30 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'MomentoInicial'
-        DataType = ftDateTime
         Attributes = [faRequired]
+        DataType = ftDateTime
       end
       item
         Name = 'MomentoFinal'
-        DataType = ftDateTime
         Attributes = [faRequired]
+        DataType = ftDateTime
       end
       item
         Name = 'Informe'
         DataType = ftMemo
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 144
@@ -303,8 +405,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbHorarioInforme: TMemoField
-      DisplayLabel = 'Informe'
       FieldName = 'Informe'
+      BlobType = ftMemo
     end
   end
   object DSHorario: TDataSource
@@ -314,17 +416,32 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbCurso: TkbmMemTable
     Tag = 7
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodNivel'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodEspecializacion'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 240
@@ -347,6 +464,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbParaleloId: TkbmMemTable
     Tag = 8
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodParaleloId'
@@ -354,11 +474,23 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'NomParaleloId'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 5
-        Attributes = [faRequired]
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 336
@@ -381,29 +513,44 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbMateriaProhibicionTipo: TkbmMemTable
     Tag = 9
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodMateProhibicionTipo'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'NomMateProhibicionTipo'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'ColMateProhibicionTipo'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'ValMateProhibicionTipo'
-        DataType = ftFloat
         Attributes = [faRequired]
+        DataType = ftFloat
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 432
@@ -437,17 +584,32 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbPeriodo: TkbmMemTable
     Tag = 10
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 48
@@ -470,22 +632,37 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbParalelo: TkbmMemTable
     Tag = 11
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodNivel'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodEspecializacion'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodParaleloId'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 144
@@ -513,6 +690,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbProfesor: TkbmMemTable
     Tag = 12
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -520,25 +700,37 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'CedProfesor'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 11
-        Attributes = [faRequired]
       end
       item
         Name = 'ApeProfesor'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 15
-        Attributes = [faRequired]
       end
       item
         Name = 'NomProfesor'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 15
-        Attributes = [faRequired]
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 240
@@ -573,27 +765,42 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbMateriaProhibicion: TkbmMemTable
     Tag = 13
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodMateria'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodMateProhibicionTipo'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     Left = 336
     Top = 252
@@ -625,44 +832,59 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbDistributivo: TkbmMemTable
     Tag = 14
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodMateria'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodNivel'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodEspecializacion'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodParaleloId'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodProfesor'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodAulaTipo'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'Composicion'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 40
-        Attributes = [faRequired]
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 432
@@ -711,47 +933,62 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbHorarioDetalle: TkbmMemTable
     Tag = 15
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodHorario'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodMateria'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodNivel'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodEspecializacion'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodParaleloId'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'Sesion'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     Left = 48
     Top = 336
@@ -803,6 +1040,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbProfesorProhibicionTipo: TkbmMemTable
     Tag = 16
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodProfProhibicionTipo'
@@ -810,21 +1050,33 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       end
       item
         Name = 'NomProfProhibicionTipo'
+        Attributes = [faRequired]
         DataType = ftString
         Precision = -1
         Size = 10
-        Attributes = [faRequired]
       end
       item
         Name = 'ColProfProhibicionTipo'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'ValProfProhibicionTipo'
-        DataType = ftFloat
         Attributes = [faRequired]
+        DataType = ftFloat
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 144
@@ -857,27 +1109,42 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbProfesorProhibicion: TkbmMemTable
     Tag = 17
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodProfesor'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodProfProhibicionTipo'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end>
+    IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     BeforePost = DataSetBeforePost
     Left = 240
     Top = 336

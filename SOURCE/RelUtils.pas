@@ -235,7 +235,22 @@ begin
     end;
   end;
 end;
-
+{
+function VarIsNull2(const Value: Variant): Boolean;
+var
+  i: Integer;
+begin
+  Result := VarIsNull(Value);
+  if VarIsArray(Value) then
+  begin
+    Result := true;
+    for i := VarArrayLowBound(Value, 1) to VarArrayHighBound(Value, 1) do
+    begin
+      Result := Result and VarIsNull(Value[i]);
+    end;
+  end;
+end;
+}
 procedure CheckDetailRelation(AMaster: TKbmMemTable; ADetail: TDataSet;
   const AMasterFields, ADetailFields: string);
 var
@@ -254,7 +269,8 @@ begin
         try
           try
             if not Locate(AMasterFields, ADetail.FieldValues[ADetailFields], []) then
-              raise ERelationUtils.CreateFmt('No existe registro maestro en la tabla %s', [AMaster.Name]);
+              raise ERelationUtils.CreateFmt('No existe registro maestro para %s.%s en la tabla %s',
+                [ADetail.Name, ADetailFields, AMaster.Name]);
           finally
             try
               if Assigned(bBookmark) and BookmarkValid(bBookmark) then

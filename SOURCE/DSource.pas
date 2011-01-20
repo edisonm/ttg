@@ -16,11 +16,10 @@ type
     TbMateriaProhibicionNomMateProhibicionTipo: TStringField;
     TbDistributivoNomMateria: TStringField;
     TbDistributivoDuracion: TIntegerField;
-    TbDistributivoApeNomProfesor: TStringField;
     TbDistributivoAbrNivel: TStringField;
     TbDistributivoNomParaleloId: TStringField;
     TbDistributivoAbrEspecializacion: TStringField;
-    TbDistributivoAbrAulaTipo: TStringField;
+    TbDistributivoAbrAulaTipo: TStringField;
     TbParaleloAbrNivel: TStringField;
     TbParaleloAbrEspecializacion: TStringField;
     TbParaleloNomParaleloId: TStringField;

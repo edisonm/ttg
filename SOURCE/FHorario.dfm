@@ -706,6 +706,9 @@ inherited HorarioForm: THorarioForm
     Top = 140
   end
   object QuCruceAula: TkbmMemTable [5]
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodDia'
@@ -748,6 +751,17 @@ inherited HorarioForm: THorarioForm
       end>
     IndexFieldNames = 'CodAulaTipo;CodDia;CodHora'
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 88
     Top = 168
     object QuCruceAulaCodDia: TIntegerField
@@ -817,6 +831,9 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceAulaDetalle: TkbmMemTable [6]
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodHora'
@@ -861,8 +878,19 @@ inherited HorarioForm: THorarioForm
       end>
     IndexFieldNames = 'CodAulaTipo;CodDia;CodHora'
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
     MasterFields = 'CodAulaTipo;CodDia;CodHora'
     MasterSource = DSCruceAula
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 116
     Top = 168
     object QuCruceAulaDetalleCodHora: TIntegerField
@@ -936,6 +964,9 @@ inherited HorarioForm: THorarioForm
     Top = 140
   end
   object QuCruceProfesorDetalle: TkbmMemTable [8]
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -996,6 +1027,17 @@ inherited HorarioForm: THorarioForm
         Size = 20
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 116
     Top = 196
     object QuCruceProfesorDetalleCodProfesor: TIntegerField
@@ -1087,6 +1129,9 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceProfesor: TkbmMemTable [9]
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -1134,6 +1179,17 @@ inherited HorarioForm: THorarioForm
       end>
     IndexFieldNames = 'CodProfesor;CodDia;CodHora'
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     AfterScroll = QuCruceProfesorAfterScroll
     Left = 88
     Top = 196
@@ -1203,6 +1259,9 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceMateria: TkbmMemTable [10]
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -1216,6 +1275,17 @@ inherited HorarioForm: THorarioForm
         Size = 20
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     AfterScroll = QuCruceMateriaAfterScroll
     Left = 88
     Top = 224
@@ -1231,6 +1301,9 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuCruceMateriaDetalle: TkbmMemTable [11]
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -1293,6 +1366,17 @@ inherited HorarioForm: THorarioForm
       'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodH' +
       'ora'
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 116
     Top = 224
     object QuCruceMateriaDetalleCodMateria: TIntegerField
@@ -1386,6 +1470,9 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuHorarioDetalleMateriaProhibicion: TkbmMemTable [12]
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'NomMateProhibicionTipo'
@@ -1459,6 +1546,17 @@ inherited HorarioForm: THorarioForm
       end>
     IndexFieldNames = 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora'
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 60
     Top = 168
     object QuHorarioDetalleMateriaProhibicionNomMateProhibicionTipo: TStringField
@@ -1565,6 +1663,9 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuHorarioDetalleProfesorProhibicion: TkbmMemTable [13]
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'NomProfProhibicionTipo'
@@ -1644,6 +1745,17 @@ inherited HorarioForm: THorarioForm
         Size = 5
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 60
     Top = 196
     object QuHorarioDetalleProfesorProhibicionNomProfProhibicionTipo: TStringField
@@ -1663,12 +1775,17 @@ inherited HorarioForm: THorarioForm
       DisplayLabel = 'Apellido'
       DisplayWidth = 31
       FieldName = 'ApeNomProfesor'
+      LookupDataSet = SourceDataModule.TbProfesor
+      LookupKeyFields = 'CodProfesor'
+      LookupResultField = 'ApeNomProfesor'
+      KeyFields = 'CodProfesor'
       Size = 31
     end
-    object QuHorarioDetalleProfesorProhibicionNomProfesor: TStringField
-      DisplayLabel = 'Nombre'
-      FieldName = 'NomProfesor'
-      Size = 15
+    object QuHorarioDetalleProfesorProhibicionCodProfesor: TIntegerField
+      DisplayLabel = 'Profesor'
+      FieldName = 'CodProfesor'
+      Required = True
+      Visible = False
     end
     object QuHorarioDetalleProfesorProhibicionCodDia: TIntegerField
       FieldName = 'CodDia'
@@ -1757,6 +1874,9 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuMateriaCortadaDia: TkbmMemTable [14]
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -1824,6 +1944,17 @@ inherited HorarioForm: THorarioForm
         Size = 20
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     AfterScroll = QuCruceMateriaAfterScroll
     Left = 60
     Top = 224
@@ -1926,6 +2057,9 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuMateriaCortadaHora: TkbmMemTable [15]
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodDia'
@@ -1951,6 +2085,17 @@ inherited HorarioForm: THorarioForm
       end>
     IndexFieldNames = 'CodDia'
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 60
     Top = 252
     object QuMateriaCortadaHoraCodDia: TIntegerField
@@ -1988,6 +2133,9 @@ inherited HorarioForm: THorarioForm
     end
   end
   object QuMateriaCortadaHoraDetalle: TkbmMemTable [16]
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -2061,8 +2209,19 @@ inherited HorarioForm: THorarioForm
       end>
     IndexFieldNames = 'CodDia;CodHora;CodHora0'
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
     MasterFields = 'CodDia;CodHora'
     MasterSource = DSMateriaCortadaHora
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 88
     Top = 252
     object QuMateriaCortadaHoraDetalleCodNivel: TIntegerField
@@ -2246,6 +2405,9 @@ inherited HorarioForm: THorarioForm
   end
   object QuHorarioDetalle: TkbmMemTable
     Tag = 15
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodHorario'
@@ -2288,6 +2450,17 @@ inherited HorarioForm: THorarioForm
         DataType = ftInteger
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 116
     Top = 252
     object QuHorarioDetalleCodHorario: TIntegerField
