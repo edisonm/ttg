@@ -3,6 +3,7 @@ inherited ParaleloForm: TParaleloForm
   Top = 270
   OnCreate = FormCreate
   PixelsPerInch = 96
+  TextHeight = 13
   inherited TlBShow: TToolBar
     inherited DBNavigator: TDBNavigator
       Hints.Strings = ()

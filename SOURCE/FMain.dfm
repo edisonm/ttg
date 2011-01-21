@@ -12,6 +12,7 @@ object MainForm: TMainForm
   Font.Style = []
   FormStyle = fsMDIForm
   Menu = MainMenu
+  OldCreateOrder = True
   Position = poScreenCenter
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -21,6 +22,7 @@ object MainForm: TMainForm
     593
     346)
   PixelsPerInch = 96
+  TextHeight = 13
   object Label1: TLabel
     Left = 335
     Top = 305
@@ -1931,48 +1933,90 @@ object MainForm: TMainForm
     end
   end
   object TbParalelo: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     OnFilterRecord = TbParaleloFilterRecord
     Left = 48
     Top = 119
   end
   object TbProfesor: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     OnFilterRecord = TbProfesorFilterRecord
     Left = 48
     Top = 147
   end
   object QuParaleloHora: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodNivel'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodEspecializacion'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodParaleloId'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'NomHora'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 76
     Top = 119
     object QuParaleloHoraCodNivel: TIntegerField
@@ -2004,24 +2048,38 @@ object MainForm: TMainForm
     end
   end
   object QuProfesorHora: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodProfesor'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'NomHora'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 76
     Top = 147
     object QuProfesorHoraCodProfesor: TIntegerField
@@ -2043,32 +2101,47 @@ object MainForm: TMainForm
       LookupResultField = 'NomHora'
       KeyFields = 'CodHora'
       Size = 10
+      Lookup = True
     end
   end
   object QuProfesorHorarioDetalle: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodProfesor'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'Nombre'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 40
-        Attributes = [faRequired]
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 104
     Top = 147
     object QuProfesorHorarioDetalleCodProfesor: TIntegerField
@@ -2092,31 +2165,34 @@ object MainForm: TMainForm
     end
   end
   object QuParaleloHorarioDetalle: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodNivel'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodEspecializacion'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodParaleloId'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodDia'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodMateria'
@@ -2124,11 +2200,22 @@ object MainForm: TMainForm
       end
       item
         Name = 'NomMateria'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 20
-        Attributes = [faRequired]
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 104
     Top = 119
     object QuParaleloHorarioDetalleCodNivel: TIntegerField
@@ -2169,16 +2256,34 @@ object MainForm: TMainForm
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
+      Lookup = True
     end
   end
   object TbMateria: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     OnFilterRecord = TbMateriaFilterRecord
     Left = 48
     Top = 184
   end
   object QuMateriaMateriaProhibicion: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -2186,11 +2291,22 @@ object MainForm: TMainForm
       end
       item
         Name = 'NomMateria'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 20
-        Attributes = [faRequired]
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     AfterScroll = QuMateriaMateriaProhibicionAfterScroll
     Left = 76
     Top = 184
@@ -2206,9 +2322,13 @@ object MainForm: TMainForm
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
+      Lookup = True
     end
   end
   object QuMateriaMateriaProhibicionHora: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -2220,11 +2340,22 @@ object MainForm: TMainForm
       end
       item
         Name = 'Hora'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 104
     Top = 184
     object QuMateriaMateriaProhibicionHoraCodMateria: TIntegerField
@@ -2244,9 +2375,13 @@ object MainForm: TMainForm
       LookupResultField = 'NomHora'
       KeyFields = 'CodHora'
       Size = 10
+      Lookup = True
     end
   end
   object QuProfesorProfesorProhibicion: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -2254,17 +2389,28 @@ object MainForm: TMainForm
       end
       item
         Name = 'ApeProfesor'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 15
-        Attributes = [faRequired]
       end
       item
         Name = 'NomProfesor'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 15
-        Attributes = [faRequired]
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     AfterScroll = QuProfesorProfesorProhibicionAfterScroll
     Left = 76
     Top = 212
@@ -2282,6 +2428,7 @@ object MainForm: TMainForm
       LookupResultField = 'ApeProfesor'
       KeyFields = 'ApeProfesor'
       Size = 15
+      Lookup = True
     end
     object QuProfesorProfesorProhibicionNomProfesor: TStringField
       DisplayLabel = 'Nombre'
@@ -2292,27 +2439,42 @@ object MainForm: TMainForm
       LookupResultField = 'NomProfesor'
       KeyFields = 'NomProfesor'
       Size = 15
+      Lookup = True
     end
   end
   object QuProfesorProfesorProhibicionHora: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <
       item
         Name = 'CodProfesor'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'CodHora'
-        DataType = ftInteger
         Attributes = [faRequired]
+        DataType = ftInteger
       end
       item
         Name = 'NomHora'
+        Attributes = [faRequired]
         DataType = ftString
         Size = 10
-        Attributes = [faRequired]
       end>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     Left = 104
     Top = 212
     object QuProfesorProfesorProhibicionHoraCodProfesor: TIntegerField
@@ -2333,8 +2495,22 @@ object MainForm: TMainForm
     end
   end
   object TbProfesor1: TkbmMemTable
+    DesignActivation = True
+    AttachedAutoRefresh = True
+    AttachMaxCount = 1
     FieldDefs = <>
     IndexDefs = <>
+    SortOptions = []
+    PersistentBackup = False
+    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
+    LoadedCompletely = False
+    SavedCompletely = False
+    FilterOptions = []
+    Version = '5.52'
+    LanguageID = 0
+    SortID = 0
+    SubLanguageID = 1
+    LocaleID = 1024
     OnFilterRecord = TbProfesor1FilterRecord
     Left = 48
     Top = 212

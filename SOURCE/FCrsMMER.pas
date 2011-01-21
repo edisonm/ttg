@@ -60,6 +60,9 @@ implementation
 
 {$R *.DFM}
 
+uses
+  kbmMemTable;
+  
 { TFCrMMEditorR }
 
 procedure TCrossManyToManyEditorRForm.ShowEditor(AColDataSet, ARowDataSet,
@@ -155,7 +158,11 @@ begin
   begin
     RelDataSet.Edit;
     FLstField.Value := FLstKey[FRel[i, j]];
-    RelDataSet.Post;
+    try
+      RelDataSet.Post;
+    except
+      on EMemTableDupKey do;
+    end;
   end;
 end;
 
@@ -165,7 +172,11 @@ begin
   ColField.AsInteger := ColKey[i];
   RowField.AsInteger := RowKey[j];
   FLstField.Value := FLstKey[FRel[i, j]];
-  RelDataSet.Post;
+  try
+    RelDataSet.Post;
+  except
+    on EMemTableDupKey do;
+  end;
 end;
 
 function TCrossManyToManyEditorRForm.RelRecordExists(i, j: Integer): Boolean;
@@ -234,6 +245,8 @@ begin
           FRel[VCol - 1, VRow - 1] := ListBox.ItemIndex;
 {$IFDEF FPC}
 	InvalidateCell(VCol, VRow);
+{$ELSE}
+        Invalidate;
 {$ENDIF}
       end;
   end;
@@ -260,6 +273,8 @@ begin
         FRel[VCol - 1, VRow - 1] := -1;
 {$IFDEF FPC}
 	InvalidateCell(VCol, VRow);
+{$ELSE}
+        Invalidate;
 {$ENDIF}
       end;
     ListBox.ItemIndex := -1;

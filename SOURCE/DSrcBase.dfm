@@ -1,6 +1,6 @@
 inherited SourceBaseDataModule: TSourceBaseDataModule
-  Left = 217
-  Top = 105
+  Left = 371
+  Top = 143
   object TbAulaTipo: TkbmMemTable
     DesignActivation = True
     AttachedAutoRefresh = True

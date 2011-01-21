@@ -44,6 +44,7 @@ uses
 procedure TProfesorForm.ActProfesorProhibicionExecute(Sender: TObject);
 begin
   inherited;
+  DataSource.DataSet.CheckBrowseMode;
   if TCrossManyToManyEditorRForm.ToggleEditor(Self,
 					      FProfesorProhibicionForm,
 					      ConfigStorage,
@@ -79,6 +80,7 @@ end;
 procedure TProfesorForm.ActDistributivoExecute(Sender: TObject);
 begin
    inherited;
+   DataSource.DataSet.CheckBrowseMode;
    if TSingleEditorForm.ToggleSingleEditor(Self,
 					   FDistributivoForm,
 					   ConfigStorage,

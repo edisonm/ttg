@@ -44,6 +44,20 @@ begin
   SourceDataModule.TbParalelo.IndexFieldNames :=
       SourceDataModule.TbParalelo.MasterFields + ';' + 'CodParaleloId';
   SourceDataModule.TbParaleloId.IndexFieldNames := 'CodParaleloId';
+  with CheckListBox do
+  begin
+    Items.Clear;
+    if Assigned(DataSourceList.DataSet) then
+    with DataSourceList.DataSet do
+    begin
+      First;
+      while not Eof do
+      begin
+        Items.Add(FindField('NomParaleloId').AsString);
+        Next;
+      end;
+    end;
+  end;
 end;
 
 procedure TParaleloForm.FormDestroy(Sender: TObject);
@@ -68,22 +82,16 @@ end;
 
 procedure TParaleloForm.DataSourceDataChange(Sender: TObject;
   Field: TField);
+var
+  i: Integer;
 begin
   inherited;
   with CheckListBox do
   begin
-    Items.Clear;
+    for i := 0 to Items.Count - 1 do
+      Checked[i] := False;
     if Assigned(DataSourceList.DataSet) then
     begin
-    with DataSourceList.DataSet do
-    begin
-      First;
-      while not Eof do
-      begin
-        Items.Add(FindField('NomParaleloId').AsString);
-        Next;
-      end;
-    end;
     with DataSourceDetail.DataSet do
     begin
       First;
@@ -108,7 +116,7 @@ begin
     if Assigned(DataSourceList.DataSet) then
     for i := 0 to Items.Count - 1 do
     begin
-      CodParaleloId := DataSourceList.DataSet.Lookup('NomParaleloId',Items[i], 'CodParaleloId');
+      CodParaleloId := DataSourceList.DataSet.Lookup('NomParaleloId', Items[i], 'CodParaleloId');
       if DataSourceDetail.DataSet.Locate('CodParaleloId', CodParaleloId, []) then
       begin
         if not Checked[i] then
@@ -118,11 +126,16 @@ begin
       begin
         if Checked[i] then
         begin
+          DataSource.DataSet.CheckBrowseMode;
+          try
           DataSourceDetail.DataSet.Append;
           DataSourceDetail.DataSet.FindField('CodNivel').Value := DataSource.DataSet.FindField('CodNivel').Value;
           DataSourceDetail.DataSet.FindField('CodEspecializacion').Value := DataSource.DataSet.FindField('CodEspecializacion').Value;
           DataSourceDetail.DataSet.FindField('CodParaleloId').Value := CodParaleloId;
           DataSourceDetail.DataSet.Post;
+          except
+            on EMemTableDupKey do;
+          end;
         end;
       end;
     end;

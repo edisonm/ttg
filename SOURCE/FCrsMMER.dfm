@@ -4,6 +4,7 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
   Width = 625
   Height = 276
   PixelsPerInch = 96
+  TextHeight = 13
   object Splitter: TSplitter [0]
     Left = 501
     Top = 25

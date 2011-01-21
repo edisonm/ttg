@@ -1,14 +1,14 @@
 inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
-  Left = 396
-  Top = 302
+  Left = 499
+  Top = 554
   Width = 656
   Height = 287
   OnCloseQuery = FormCloseQuery
   PixelsPerInch = 96
+  TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 648
     TabOrder = 3
-    Visible = False
     object BtnOk: TToolButton
       Left = 23
       Top = 0

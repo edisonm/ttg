@@ -144,6 +144,7 @@ inherited SourceDataModule: TSourceDataModule
     OnCalcFields = TbParaleloCalcFields
     object TbParaleloCodParalelo: TAutoIncField [0]
       FieldName = 'CodParalelo'
+      Visible = False
     end
     inherited TbParaleloCodNivel: TIntegerField
       Visible = False
@@ -233,6 +234,9 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbMateriaProhibicion: TkbmMemTable
+    IndexFieldNames = 'CodMateria;CodDia;CodHora'
+    MasterFields = 'CodMateria'
+    MasterSource = DSMateria
     inherited TbMateriaProhibicionCodMateria: TIntegerField
       Visible = False
     end
@@ -320,24 +324,24 @@ inherited SourceDataModule: TSourceDataModule
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
-      Size = 15
-      Lookup = True
-    end
-    object TbDistributivoAbrAulaTipo: TStringField [11]
-      DisplayLabel = 'Tipo aula'
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'AbrAulaTipo'
-      LookupDataSet = TbAulaTipo
-      LookupKeyFields = 'CodAulaTipo'
-      LookupResultField = 'AbrAulaTipo'
-      KeyFields = 'CodAulaTipo'
-      Size = 10
-      Lookup = True
-    end
-    object TbDistributivoDuracion: TIntegerField
-      DisplayLabel = 'Duraci'#243'n'
-      FieldKind = fkCalculated
+      Size = 15
+      Lookup = True
+    end
+    object TbDistributivoAbrAulaTipo: TStringField
+      DisplayLabel = 'Tipo aula'
+      DisplayWidth = 10
+      FieldKind = fkLookup
+      FieldName = 'AbrAulaTipo'
+      LookupDataSet = TbAulaTipo
+      LookupKeyFields = 'CodAulaTipo'
+      LookupResultField = 'AbrAulaTipo'
+      KeyFields = 'CodAulaTipo'
+      Size = 10
+      Lookup = True
+    end
+    object TbDistributivoDuracion: TIntegerField
+      DisplayLabel = 'Duraci'#243'n'
+      FieldKind = fkCalculated
       FieldName = 'Duracion'
       Calculated = True
     end
@@ -383,6 +387,9 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbProfesorProhibicion: TkbmMemTable
+    IndexFieldNames = 'CodProfesor;CodDia;CodHora'
+    MasterFields = 'CodProfesor'
+    MasterSource = DSProfesor
     inherited TbProfesorProhibicionCodProfesor: TIntegerField
       Visible = False
     end

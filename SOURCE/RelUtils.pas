@@ -251,11 +251,29 @@ begin
   end;
 end;
 }
+function VarToStr2(const Value: Variant): string;
+var
+  i: Integer;
+begin
+  Result := '';
+  if VarIsArray(Value) then
+  begin
+    for i := VarArrayLowBound(Value, 1) to VarArrayHighBound(Value, 1) do
+    begin
+      Result := Result + ' ' + VarToStrDef(Value[i], '(Null)');
+    end;
+  end
+  else
+    Result := VarToStrDef(Value, '(Null)');
+end;
+
 procedure CheckDetailRelation(AMaster: TKbmMemTable; ADetail: TDataSet;
   const AMasterFields, ADetailFields: string);
 var
   bBookmark: TBookmark;
   DSMaster: TDataSource;
+  Value: Variant;
+  s: string;
 begin
   with AMaster do
   begin
@@ -268,9 +286,13 @@ begin
         bBookmark := GetBookmark;
         try
           try
-            if not Locate(AMasterFields, ADetail.FieldValues[ADetailFields], []) then
-              raise ERelationUtils.CreateFmt('No existe registro maestro para %s.%s en la tabla %s',
-                [ADetail.Name, ADetailFields, AMaster.Name]);
+            Value := ADetail.FieldValues[ADetailFields];
+            if not Locate(AMasterFields, Value, []) then
+            begin
+              s := VarToStr2(Value);
+              raise ERelationUtils.CreateFmt('No existe registro maestro en %s para %s.[%s]=%s',
+                [AMaster.Name, ADetail.Name, ADetailFields, S]);
+            end;
           finally
             try
               if Assigned(bBookmark) and BookmarkValid(bBookmark) then
@@ -430,7 +452,8 @@ begin
   for i := 0 to ADataSet.FieldCount - 1 do
   begin
     if (ADataSet.Fields[i].FieldKind = fkData)
-      and (ADataSet.Fields[i].DataType <> ftAutoInc) then
+//      and (ADataSet.Fields[i].DataType <> ftAutoInc)
+    then
     begin
       s := s + StringToScaped(ADataSet.Fields[i].FieldName) + ';';
     end
@@ -445,7 +468,8 @@ begin
       for i := 0 to ADataSet.FieldCount - 1 do
       begin
         if (ADataSet.Fields[i].FieldKind = fkData)
-          and (ADataSet.Fields[i].DataType <> ftAutoInc) then
+//          and (ADataSet.Fields[i].DataType <> ftAutoInc)
+        then
           s := s + StringToScaped(ADataSet.Fields[i].AsString) + ';';
       end;
       AStrings.Add(s);
@@ -459,8 +483,13 @@ end;
 procedure SaveDataSetToStrings(ADataSet:TDataSet; AStrings: TStrings);
 begin
   AStrings.Add('// ' + ADataSet.Name);
-  AStrings.Add(IntToStr(ADataSet.RecordCount));
-  SaveDataSetToStrings0(ADataSet, AStrings);
+  if Assigned(ADataSet.DataSource) then ADataSet.DataSource.Enabled := False;
+  try
+    AStrings.Add(IntToStr(ADataSet.RecordCount));
+    SaveDataSetToStrings0(ADataSet, AStrings);
+  finally
+    if Assigned(ADataSet.DataSource) then ADataSet.DataSource.Enabled := True;
+  end;
 end;
 
 procedure SaveDataSetToCSVFile(ADataSet: TDataSet; const AFileName: TFileName);
