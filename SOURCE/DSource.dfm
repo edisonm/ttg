@@ -263,6 +263,46 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbDistributivo: TkbmMemTable
+    FieldDefs = <
+      item
+        Name = 'CodMateria'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodNivel'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodEspecializacion'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodParaleloId'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodProfesor'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'CodAulaTipo'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end
+      item
+        Name = 'Composicion'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 40
+      end>
+    IndexFieldNames = 'CodProfesor'
+    MasterFields = 'CodProfesor'
+    MasterSource = DSProfesor
     OnCalcFields = TbDistributivoCalcFields
     inherited TbDistributivoCodMateria: TIntegerField
       Visible = False
@@ -343,6 +383,7 @@ inherited SourceDataModule: TSourceDataModule
       DisplayLabel = 'Duraci'#243'n'
       FieldKind = fkCalculated
       FieldName = 'Duracion'
+      ReadOnly = True
       Calculated = True
     end
   end
