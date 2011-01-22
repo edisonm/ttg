@@ -16,7 +16,7 @@ procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TKbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TKbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
-procedure CheckDetailRelation(AMaster: TKbmMemTable; ADetail: TDataSet;
+procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TKbmMemTable;
   const AMasterFields, ADetailFields: string);
 
 function CheckRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADetailFields: string; AProblem: TDataSet): Boolean; overload;
@@ -267,19 +267,22 @@ begin
     Result := VarToStrDef(Value, '(Null)');
 end;
 
-procedure CheckDetailRelation(AMaster: TKbmMemTable; ADetail: TDataSet;
+procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TKbmMemTable;
   const AMasterFields, ADetailFields: string);
 var
   bBookmark: TBookmark;
-  DSMaster: TDataSource;
   Value: Variant;
   s: string;
 begin
   with AMaster do
-  begin
+    if not (Assigned(ADetail.MasterSource) and Assigned(ADetail.MasterSource.DataSet)
+      and ADetail.MasterSource.Enabled and (ADetail.MasterSource.DataSet = AMaster))
+      then // this condition avoids an undesirable loop in DoBeforePost
+           // that causes a key violation, and also is an optimization:
+           // we do not need to verify master-detail relationship if the tables
+           // are already linked using the MasterSource property.
+    begin
     DisableControls;
-    DSMaster := MasterSource;
-    MasterSource := nil;
     try
       if not (Eof and Bof) then
       begin
@@ -306,7 +309,6 @@ begin
         end;
       end;
     finally
-      MasterSource := DSMaster;
       EnableControls;
     end;
   end;

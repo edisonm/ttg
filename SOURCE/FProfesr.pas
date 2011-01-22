@@ -2,13 +2,13 @@ unit FProfesr;
 
 interface
 
-uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Grids, DBGrids, StdCtrls, Buttons, DBCtrls,
-  ExtCtrls, ComCtrls, Printers, ImgList, ToolWin, ActnList, FCrsMMER;
-
-type
-  TProfesorForm	= class(TSingleEditorForm)
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  FSingEdt, Db, Grids, DBGrids, StdCtrls, Buttons, DBCtrls,
+  ExtCtrls, ComCtrls, Printers, ImgList, ToolWin, ActnList, FCrsMMER;
+
+type
+  TProfesorForm	= class(TSingleEditorForm)
     BtnProfesorProhibicion: TToolButton;
     BtnDistributivo: TToolButton;
     ActDistributivo: TAction;
@@ -98,20 +98,20 @@ begin
                MasterFields := 'CodProfesor';
                MasterSource := DSProfesor;
 	    finally
-               EnableControls;
-            end
-         end;
-         Self.DataSource.OnDataChange := DataSourceDataChange;
-	 FLbCarga.Parent := FDistributivoForm.pnlStatus;
-	 FLbCarga.Top := 1;
-	 FLbCarga.Left := 400;
-	 FLbCarga.OnDblClick := LbCargaDblClick;
-	 FDistributivoForm.OnDestroy := EdQuProfesorDistributivoDestroy;
-	 FSuperTitle := FDistributivoForm.Caption;
-	 DataSourceDataChange(nil, nil);
-      end;
-end;
-
+               EnableControls;
+            end
+         end;
+         Self.DataSource.OnDataChange := DataSourceDataChange;
+	 FLbCarga.Parent := FDistributivoForm.pnlStatus;
+	 FLbCarga.Top := 1;
+	 FLbCarga.Left := 400;
+	 FLbCarga.OnDblClick := LbCargaDblClick;
+	 FDistributivoForm.OnDestroy := EdQuProfesorDistributivoDestroy;
+	 FSuperTitle := FDistributivoForm.Caption;
+	 DataSourceDataChange(nil, nil);
+      end;
+end;
+
 procedure TProfesorForm.LbCargaDblClick(Sender: TObject);
 begin
   DataSourceDataChange(nil, nil);

@@ -2,8 +2,6 @@ object MasterDataModule: TMasterDataModule
   OldCreateOrder = True
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Left = 213
-  Top = 113
   Height = 404
   Width = 748
   object TbTmpProfesorCarga: TkbmMemTable
@@ -44,6 +42,7 @@ object MasterDataModule: TMasterDataModule
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'ApeProfesor'
+      LookupDataSet = SourceDataModule.TbProfesor
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'ApeProfesor'
       KeyFields = 'CodProfesor'
@@ -55,6 +54,7 @@ object MasterDataModule: TMasterDataModule
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'NomProfesor'
+      LookupDataSet = SourceDataModule.TbProfesor
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'NomProfesor'
       KeyFields = 'CodProfesor'
@@ -261,6 +261,7 @@ object MasterDataModule: TMasterDataModule
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'AbrAulaTipo'
+      LookupDataSet = SourceDataModule.TbAulaTipo
       LookupKeyFields = 'CodAulaTipo'
       LookupResultField = 'AbrAulaTipo'
       KeyFields = 'CodAulaTipo'

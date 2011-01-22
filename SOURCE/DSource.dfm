@@ -1,7 +1,28 @@
 inherited SourceDataModule: TSourceDataModule
-  Left = 189
-  Top = 130
   inherited TbAulaTipo: TkbmMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'CodAulaTipo'
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'NomAulaTipo'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 25
+      end
+      item
+        Name = 'AbrAulaTipo'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 10
+      end
+      item
+        Name = 'Cantidad'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end>
     inherited TbAulaTipoCodAulaTipo: TAutoIncField
       Visible = False
     end
@@ -383,7 +404,6 @@ inherited SourceDataModule: TSourceDataModule
       DisplayLabel = 'Duraci'#243'n'
       FieldKind = fkCalculated
       FieldName = 'Duracion'
-      ReadOnly = True
       Calculated = True
     end
   end

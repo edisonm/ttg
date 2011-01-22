@@ -17,7 +17,7 @@ type
   end;
   
   TDetailRel = record
-    MasterDataSet: TkbmMemTable;
+    MasterDataSet: TDataSet;
     MasterFields: string;
     DetailFields: string;
   end;
@@ -204,7 +204,7 @@ begin
     try
       for j := Low(FDetailRels[i]) to High(FDetailRels[i]) do
         with FDetailRels[i, j] do
-          CheckDetailRelation(MasterDataSet, DataSet, MasterFields, DetailFields);
+          CheckDetailRelation(MasterDataSet, DataSet as TkbmMemTable, MasterFields, DetailFields);
       if DataSet.State = dsEdit then
       begin
 	      for j := Low(FMasterRels[i]) to High(FMasterRels[i]) do

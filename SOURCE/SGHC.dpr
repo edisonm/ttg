@@ -10,7 +10,7 @@ uses
   KerEvolE in 'KerEvolE.pas',
   FProgres in 'FProgres.pas' {ProgressForm},
   SortAlgs in 'SortAlgs.pas',
-  rand in 'Rand.pas',
+  Rand in 'Rand.pas',
   FCrsMMEd in 'FCrsMMEd.pas' {CrossManyToManyEditorForm},
   FCrsMME0 in 'FCrsMME0.pas' {CrossManyToManyEditor0Form},
   FCrsMME1 in 'FCrsMME1.pas' {CrossManyToManyEditor1Form},
@@ -37,7 +37,7 @@ uses
   FSelPeIn in 'FSelPeIn.pas' {SelPeriodoForm},
   DBase in 'DBase.pas' {BaseDataModule: TDataModule};
 
-{$R *.RES}
+{$R *.res}
 
 begin
   SplashForm := TSplashForm.Create(Application);
@@ -45,7 +45,7 @@ begin
   SplashForm.Update;
   SplashForm.PBLoad.Max := 4;
   Application.Initialize;
-  Application.Title := 'Horarios Para Colegio 1.2.1';
+  Application.Title := 'Generador de Horarios Automatico 1.2.1';
   Application.HelpFile := '..\HLP\HORCOLEG.HLP';
   Application.CreateForm(TSourceDataModule, SourceDataModule);
   SplashForm.IncPosition;

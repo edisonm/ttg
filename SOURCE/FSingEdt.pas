@@ -111,9 +111,11 @@ end;
 procedure TSingleEditorForm.DBGridDblClick(Sender: TObject);
 begin
   inherited;
+  {
   if TDBGrid(Sender).DataSource.DataSet is TKbmMemTable then
     with TKbmMemTable(TDBGrid(Sender).DataSource.DataSet) do
       IndexFieldNames := '';
+  }
 end;
 
 const
@@ -133,7 +135,7 @@ procedure TSingleEditorForm.DataSourceDataChange(Sender: TObject;
   Field: TField);
 begin
   inherited;
-  if assigned(DataSource.DataSet) then
+  if assigned(DataSource.DataSet) and (DataSource.DataSet.State = dsBrowse) then
     SLRecordNo.Caption := IntToStr(DataSource.DataSet.RecNo) + '/'
       + IntToStr(DataSource.DataSet.RecordCount)
   else

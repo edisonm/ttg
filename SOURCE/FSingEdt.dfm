@@ -1,10 +1,14 @@
 inherited SingleEditorForm: TSingleEditorForm
   Left = 449
   Top = 269
-  Width = 510
+  ClientWidth = 502
+  ExplicitWidth = 510
+  ExplicitHeight = 240
   PixelsPerInch = 96
+  TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 502
+    ExplicitWidth = 502
     inherited BtnShow: TToolButton
       Action = ActShow
     end
@@ -29,23 +33,25 @@ inherited SingleEditorForm: TSingleEditorForm
   end
   inherited pnlStatus: TPanel
     Width = 502
+    ExplicitWidth = 502
     object SLState: TLabel
       Left = 1
       Top = 1
       Width = 3
-      Height = 17
+      Height = 13
       Align = alLeft
     end
     object SLRecordNo: TLabel
       Left = 498
       Top = 1
       Width = 3
-      Height = 17
+      Height = 13
       Align = alRight
     end
   end
   inherited Panel1: TPanel
     Width = 502
+    ExplicitWidth = 502
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
