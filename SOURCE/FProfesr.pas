@@ -37,7 +37,7 @@ var
 implementation
 
 uses
-  DMaster, SGHCUtls, FConfig, DSource, FEditor;
+  DMaster, GAHUtls, FConfig, DSource, FEditor;
 
 {$R *.DFM}
 

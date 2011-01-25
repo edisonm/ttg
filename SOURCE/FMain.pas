@@ -1,6 +1,6 @@
 unit FMain;
 
-{$I SGHC.INC}
+{$I GAH.inc}
 
 interface
 
@@ -313,7 +313,7 @@ uses
   KerEvolE, KerModel, FProgres,
 {$ENDIF}
   FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd,
-  FConfig, FLogstic, SGHCUtls, Consts, FParalel, Rand, Printers, DSource, DSrcBase;
+  FConfig, FLogstic, GAHUtls, Consts, FParalel, Rand, Printers, DSource, DSrcBase;
 
 {$R *.DFM}
 

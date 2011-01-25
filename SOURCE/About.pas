@@ -1,6 +1,6 @@
 unit About;
 
-{$I SGHC.INC}
+{$I GAH.inc}
 
 {$I RX.INC}
 

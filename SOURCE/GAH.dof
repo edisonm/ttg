@@ -59,7 +59,7 @@ DebugCWD=
 [Language]
 ActiveLang=
 ProjectLang=$0000300A
-RootDir=d:\proyecto\sghc\1.2\source\
+RootDir=e:\apps\pascal\sghc\source\
 [Version Info]
 IncludeVerInfo=1
 AutoIncBuild=1
@@ -78,10 +78,10 @@ CodePage=1252
 CompanyName=Edison Mera
 FileDescription=Horarios para Colegio
 FileVersion=1.2.1.26
-InternalName=SGHC
+InternalName=GAH
 LegalCopyright=2010 por Edison Mera
 LegalTrademarks=
-OriginalFilename=SGHC
+OriginalFilename=GAH
 ProductName=HorColeg
 ProductVersion=1.2.1.0
 Comments=

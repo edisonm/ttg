@@ -1,4 +1,4 @@
-program SGHC;
+program GAH;
 {$IMAGEBASE $00400000}
 uses
   Forms,

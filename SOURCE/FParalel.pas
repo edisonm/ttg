@@ -32,7 +32,7 @@ var
 implementation
 
 uses
-  DMaster, FCrsMME1, SGHCUtls, Consts, FMain, DSource;
+  DMaster, FCrsMME1, GAHUtls, Consts, FMain, DSource;
 
 {$R *.DFM}
 
