@@ -1,7 +1,7 @@
 object MainForm: TMainForm
   Left = 275
   Top = 174
-  Caption = 'Horarios para Colegio 1.2.1'
+  Caption = 'Generador Automatico de Horarios 1.2.1'
   ClientHeight = 365
   ClientWidth = 593
   Color = clBtnFace
@@ -49,7 +49,6 @@ object MainForm: TMainForm
         Width = 153
       end>
     OnDrawPanel = StatusBarDrawPanel
-    ExplicitTop = 324
   end
   object ToolBar: TToolBar
     Left = 0
@@ -292,12 +291,15 @@ object MainForm: TMainForm
       Hint = 'Datos|Ingreso de datos'
       object MIDia: TMenuItem
         Action = ActDia
+        AutoCheck = True
       end
       object MIHora: TMenuItem
         Action = ActHora
+        AutoCheck = True
       end
       object MIPeriodo: TMenuItem
         Action = ActPeriodo
+        AutoCheck = True
         ShortCut = 49232
       end
       object N2: TMenuItem
@@ -305,16 +307,20 @@ object MainForm: TMainForm
       end
       object MINivel: TMenuItem
         Action = ActNivel
+        AutoCheck = True
       end
       object MIEspecializacion: TMenuItem
         Action = ActEspecializacion
+        AutoCheck = True
       end
       object MIParaleloId: TMenuItem
         Action = ActParaleloId
+        AutoCheck = True
         ShortCut = 16457
       end
       object MIParalelo: TMenuItem
         Action = ActParalelo
+        AutoCheck = True
         ShortCut = 49234
       end
       object N5: TMenuItem
@@ -322,15 +328,18 @@ object MainForm: TMainForm
       end
       object MIMateria: TMenuItem
         Action = ActMateria
+        AutoCheck = True
       end
       object MIAulaTipo: TMenuItem
         Action = ActAulaTipo
+        AutoCheck = True
       end
       object N6: TMenuItem
         Caption = '-'
       end
       object MIProfesor: TMenuItem
         Action = ActProfesor
+        AutoCheck = True
       end
     end
     object MITool: TMenuItem
@@ -345,6 +354,7 @@ object MainForm: TMainForm
       end
       object MIElaborarHorario: TMenuItem
         Action = ActElaborarHorario
+        AutoCheck = True
         Hint = 'Elaborar horario|Elaborar horario'
       end
       object MIMejorarHorario: TMenuItem
@@ -357,6 +367,7 @@ object MainForm: TMainForm
       Hint = 'Ver|Presentaci'#243'n de resultados'
       object MIHorario: TMenuItem
         Action = ActHorario
+        AutoCheck = True
         ShortCut = 49224
       end
       object N7: TMenuItem
@@ -416,9 +427,11 @@ object MainForm: TMainForm
       Hint = 'Ayuda|Temas de Ayuda en l'#237'nea'
       object MIContent: TMenuItem
         Action = ActContents
+        AutoCheck = True
       end
       object MIIndex: TMenuItem
         Action = ActIndex
+        AutoCheck = True
       end
       object MIRegistrationInfo: TMenuItem
         Action = ActRegistrationInfo
@@ -1516,6 +1529,7 @@ object MainForm: TMainForm
     Top = 72
     object ActContents: TAction
       Category = 'Help'
+      AutoCheck = True
       Caption = 'Contenido'
       HelpContext = 350
       Hint = 'Contenido|Contenido de la Ayuda'
@@ -1524,6 +1538,7 @@ object MainForm: TMainForm
     end
     object ActIndex: TAction
       Category = 'Help'
+      AutoCheck = True
       Caption = 'Indice'
       HelpContext = 360
       Hint = 'Indice|Indice de la Ayuda'
@@ -1532,6 +1547,7 @@ object MainForm: TMainForm
     end
     object ActHorario: TAction
       Category = 'View'
+      AutoCheck = True
       Caption = 'Horarios'
       HelpContext = 280
       Hint = 'Horarios|Ver los horarios elaborados'
@@ -1655,6 +1671,7 @@ object MainForm: TMainForm
     end
     object ActDia: TAction
       Category = 'Data'
+      AutoCheck = True
       Caption = 'D'#237'as laborables'
       HelpContext = 140
       Hint = 'D'#237'as laborables|Dias laborables'
@@ -1664,6 +1681,7 @@ object MainForm: TMainForm
     end
     object ActHora: TAction
       Category = 'Data'
+      AutoCheck = True
       Caption = 'Horas acad'#233'micas'
       HelpContext = 150
       Hint = 'Horas acad'#233'micas|Horas acad'#233'micas'
@@ -1696,6 +1714,7 @@ object MainForm: TMainForm
     end
     object ActPeriodo: TAction
       Category = 'Data'
+      AutoCheck = True
       Caption = 'Per'#237'odos laborables'
       HelpContext = 160
       Hint = 'Per'#237'odos laborables|Per'#237'odos laborables'
@@ -1705,6 +1724,7 @@ object MainForm: TMainForm
     end
     object ActNivel: TAction
       Category = 'Data'
+      AutoCheck = True
       Caption = 'Niveles'
       HelpContext = 170
       Hint = 'Niveles|Niveles'
@@ -1714,6 +1734,7 @@ object MainForm: TMainForm
     end
     object ActEspecializacion: TAction
       Category = 'Data'
+      AutoCheck = True
       Caption = 'Especializaciones'
       HelpContext = 180
       Hint = 'Especializaciones|Especializaciones'
@@ -1723,6 +1744,7 @@ object MainForm: TMainForm
     end
     object ActParaleloId: TAction
       Category = 'Data'
+      AutoCheck = True
       Caption = 'Identificadores de paralelo'
       HelpContext = 190
       Hint = 'Identificadores de paralelo|Identificadores de paralelo'
@@ -1732,6 +1754,7 @@ object MainForm: TMainForm
     end
     object ActParalelo: TAction
       Category = 'Data'
+      AutoCheck = True
       Caption = 'Paralelos'
       HelpContext = 200
       Hint = 'Paralelos|Cursos con sus respectivos paralelos'
@@ -1741,6 +1764,7 @@ object MainForm: TMainForm
     end
     object ActMateria: TAction
       Category = 'Data'
+      AutoCheck = True
       Caption = 'Materias'
       HelpContext = 210
       Hint = 'Materias|Materias'
@@ -1750,6 +1774,7 @@ object MainForm: TMainForm
     end
     object ActAulaTipo: TAction
       Category = 'Data'
+      AutoCheck = True
       Caption = 'Tipos de aula'
       HelpContext = 220
       Hint = 'Tipos de aula|Tipos de aula'
@@ -1759,6 +1784,7 @@ object MainForm: TMainForm
     end
     object ActProfesor: TAction
       Category = 'Data'
+      AutoCheck = True
       Caption = 'Profesores'
       HelpContext = 240
       Hint = 'Profesores|Profesores'
@@ -1785,6 +1811,7 @@ object MainForm: TMainForm
     end
     object ActElaborarHorario: TAction
       Category = 'Tools'
+      AutoCheck = True
       Caption = 'Elaborar horario'
       HelpContext = 270
       Hint = 'Elaborar Horario|Elaborar Horario'

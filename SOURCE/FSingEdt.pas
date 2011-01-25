@@ -19,7 +19,6 @@ TSingleEditorForm = class(TEditorForm)
     ActionList: TActionList;
     ActShow: TAction;
     ActFind: TAction;
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ActFindExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBGridCheckButton(Sender: TObject; ACol: Integer;
@@ -62,13 +61,6 @@ end;
 procedure TSingleEditorForm.SetDataSet(ADataSet: TDataSet);
 begin
   DataSource.DataSet := ADataSet;
-end;
-
-procedure TSingleEditorForm.FormClose(Sender: TObject;
-  var Action: TCloseAction);
-begin
-  DataSource.DataSet := nil;
-  inherited;
 end;
 
 procedure TSingleEditorForm.ActFindExecute(Sender: TObject);

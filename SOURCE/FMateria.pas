@@ -25,7 +25,7 @@ var
 
 implementation
 uses
-  DMaster, FCrsMMEd, GAHUtls, FConfig, DSource;
+  DMaster, FCrsMMEd, TTGUtls, FConfig, DSource;
 {$R *.DFM}
 
 procedure TMateriaForm.ActMateriaProhibicionExecute(Sender: TObject);

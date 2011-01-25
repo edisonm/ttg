@@ -1,6 +1,6 @@
 unit About;
 
-{$I GAH.inc}
+{$I TTG.inc}
 
 {$I RX.INC}
 

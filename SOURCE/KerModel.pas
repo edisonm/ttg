@@ -324,7 +324,7 @@ procedure CruzarIndividuos(var Uno, Dos: TObjetoModeloHorario);
 implementation
 
 uses
-  SysUtils, SortAlgs, rand, DSource, GAHUtls;
+  SysUtils, SortAlgs, rand, DSource, TTGUtls;
 var
   SortLongint: procedure(var List1: array of Longint;
     var List2: array of Smallint; min, max: Longint);

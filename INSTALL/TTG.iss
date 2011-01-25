@@ -4,13 +4,13 @@
 
 [Setup]
 MinVersion=4.0,4.0
-AppName=Horarios para Colegio
-AppId=Horarios para Colegio
+AppName=Generador Automatico de Horarios
+AppId=Generador Automatico de Horarios
 CreateUninstallRegKey=1
 UsePreviousAppDir=1
 UsePreviousGroup=1
 AppVersion=1.2.1
-AppVerName=Horarios para Colegio 1.2.1
+AppVerName=Generador Automatico de Horarios 1.2.1
 AppCopyright=Edición 12-04-2010. Edison Mera. Quito-Ecuador. Madrid-España
 WindowShowCaption=0
 WindowStartMaximized=0
@@ -23,11 +23,11 @@ DisableStartupPrompt=0
 CreateAppDir=1
 DisableProgramGroupPage=0
 Uninstallable=1
-DefaultDirName={pf}\SGHC\1.2.1
-DefaultGroupName=Horarios para Colegio 1.2.1
+DefaultDirName={pf}\TTG\1.2.1
+DefaultGroupName=Generador Automatico de Horarios 1.2.1
 LicenseFile=..\DOC\Licencia.txt
 InfoAfterFile=..\DOC\Leame.txt
-OutputBaseFilename=SGHCSETUP
+OutputBaseFilename=TTGSETUP
 DiskSpanning=0
 DiskClusterSize=512
 ReserveBytes=4096
@@ -42,21 +42,21 @@ Name: {app}\DEMOS
 Name: {app}\DOC
 
 [Files]
-Source: ..\BIN\SGHC.EXE; DestDir: {app}\BIN\; DestName: SGHC.EXE
+Source: ..\BIN\TTG.EXE; DestDir: {app}\BIN\; DestName: TTG.EXE
 Source: ..\HLP\HORCOLEG.CNT; DestDir: {app}\HLP\; DestName: HORCOLEG.CNT
 Source: ..\HLP\HORCOLEG.HLP; DestDir: {app}\HLP\; DestName: HORCOLEG.HLP
 Source: ..\DOC\MANUAL.DOC; DestDir: {app}\DOC\; DestName: MANUAL.DOC
 Source: ..\DEMOS\BritanicoInt2000.ttd; DestDir: {app}\DEMOS\; DestName: BRITANIC.TTD
 Source: ..\DEMOS\Salamanca1999.ttd; DestDir: {app}\DEMOS\; DestName: SALAMANC.TTD
 [Icons]
-Name: {group}\Horarios Para Colegio 1.2.1; Filename: {app}\BIN\SGHC.EXE; WorkingDir: {app}\BIN\; IconIndex: 0
+Name: {group}\Generador Automatico de Horarios 1.2.1; Filename: {app}\BIN\TTG.EXE; WorkingDir: {app}\BIN\; IconIndex: 0
 Name: {group}\Manual del Usuario (DOC); Filename: {app}\DOC\MANUAL.DOC
 Name: {group}\Manual del Usuario (HELP); Filename: {app}\HLP\HORCOLEG.HLP
-Name: {group}\{cm:UninstallProgram, Horarios Para Colegio 1.2.1}; Filename: {uninstallexe}
+Name: {group}\{cm:UninstallProgram, Generador Automatico de Horarios 1.2.1}; Filename: {uninstallexe}
 [INI]
 
 [Registry]
-Root: HKCU; SubKey: Software\SGHC; ValueType: none; Flags: uninsdeletekey
+Root: HKCU; SubKey: Software\TTG; ValueType: none; Flags: uninsdeletekey
 
 [UninstallDelete]
 

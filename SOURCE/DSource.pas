@@ -160,7 +160,7 @@ implementation
 
 {$R *.DFM}
 uses
-  GAHUtls, rand, Variants, DBase, RelUtils, FConfig;
+  TTGUtls, rand, Variants, DBase, RelUtils, FConfig;
 
 type
   EMainDataModuleError = class(Exception);

@@ -1,6 +1,6 @@
 unit FMain;
 
-{$I GAH.inc}
+{$I TTG.inc}
 
 interface
 
@@ -218,6 +218,7 @@ type
     procedure ActMejorarHorarioExecute(Sender: TObject);
     procedure FormDblClick(Sender: TObject);
     procedure ActRegistrationInfoExecute(Sender: TObject);
+    procedure ToolButton5Click(Sender: TObject);
 {
     procedure ActSaveCSVExecute(Sender: TObject);
     procedure ActOpenCSVExecute(Sender: TObject);
@@ -313,7 +314,7 @@ uses
   KerEvolE, KerModel, FProgres,
 {$ENDIF}
   FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd,
-  FConfig, FLogstic, GAHUtls, Consts, FParalel, Rand, Printers, DSource, DSrcBase;
+  FConfig, FLogstic, TTGUtls, Consts, FParalel, Rand, Printers, DSource, DSrcBase;
 
 {$R *.DFM}
 
@@ -1158,6 +1159,12 @@ begin
   with SourceDataModule do
     Accept := DataSet.FindField('CodProfesor').AsInteger =
     TbProfesorCodProfesor.AsInteger;
+end;
+
+procedure TMainForm.ToolButton5Click(Sender: TObject);
+begin
+//  if not ToolButton5.Down then
+//    ToolButton5.Down := True;
 end;
 
 procedure TMainForm.TbMateriaFilterRecord(DataSet: TDataSet;

@@ -165,7 +165,7 @@ type
 implementation
 
 uses
-  Rand, GAHUtls;
+  Rand, TTGUtls;
 
 procedure TEvolElitista.Configurar(ATamPoblacion: Longint);
 var

@@ -34,8 +34,12 @@ inherited ProfesorForm: TProfesorForm
     Width = 702
     ExplicitTop = 381
     ExplicitWidth = 702
+    inherited SLState: TLabel
+      Height = 17
+    end
     inherited SLRecordNo: TLabel
       Left = 698
+      Height = 17
       ExplicitLeft = 698
     end
   end
@@ -330,12 +334,14 @@ inherited ProfesorForm: TProfesorForm
   end
   inherited ActionList: TActionList
     object ActDistributivo: TAction
+      AutoCheck = True
       Caption = 'Distributivo'
       Hint = 'Distributivo|Ver distributivo del profesor'
       ImageIndex = 3
       OnExecute = ActDistributivoExecute
     end
     object ActProfesorProhibicion: TAction
+      AutoCheck = True
       Caption = 'Prohibiciones de profesor'
       Hint = 'Prohibiciones de profesor|Prohibiciones de profesor'
       ImageIndex = 2

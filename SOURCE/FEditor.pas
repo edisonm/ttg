@@ -72,20 +72,25 @@ class function TEditorForm.ToggleEditor(AOwner: TComponent; var AForm;
 var
   Instance: TComponent;
 begin
-   if AAction.Checked then
-   begin
-      TEditorForm(AForm).Free;
+  if not AAction.Checked then
+  begin
+    if TEditorForm(AForm).CloseQuery then
+    begin
+      TEditorForm(AForm).Close;
       TEditorForm(AForm) := nil;
-      Result := False;
-   end
-   else
-   begin
-      Instance := TComponent(Self.NewInstance);
-      TComponent(AForm) := Instance;
-      Instance.Create(AOwner);
-      TEditorForm(AForm).InitEditor(AConfigStorage, AAction.Name + 'Form', AAction);
-      Result := True;
-   end;
+    end
+    else
+      AAction.Checked := True;
+    Result := False;
+  end
+  else
+  begin
+    Instance := TComponent(Self.NewInstance);
+    TComponent(AForm) := Instance;
+    Instance.Create(AOwner);
+    TEditorForm(AForm).InitEditor(AConfigStorage, AAction.Name + 'Form', AAction);
+    Result := True;
+  end;
 end;
 
 procedure TEditorForm.InitEditor(AConfigStorage: TConfigStorage; const APreffix: string;

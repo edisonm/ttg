@@ -1,4 +1,4 @@
-program GAH;
+program TTG;
 {$IMAGEBASE $00400000}
 uses
   Forms,
@@ -18,7 +18,7 @@ uses
   FEditor in 'FEditor.pas' {EditorForm},
   FMateria in 'FMateria.pas' {MateriaForm},
   FProfesr in 'FProfesr.pas' {ProfesorForm},
-  SGHCUtls in 'SGHCUtls.pas',
+  TTGUtls in 'TTGUtls.pas',
   UConfig in 'UConfig.pas',
   FConfig in 'FConfig.pas' {ConfiguracionForm},
   FLogstic in 'FLogstic.pas' {LogisticForm},

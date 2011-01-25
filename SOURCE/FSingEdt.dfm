@@ -2,8 +2,8 @@ inherited SingleEditorForm: TSingleEditorForm
   Left = 449
   Top = 269
   ClientWidth = 502
+  OnCloseQuery = FormCloseQuery
   ExplicitWidth = 510
-  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 13
   inherited TlBShow: TToolBar
@@ -38,15 +38,17 @@ inherited SingleEditorForm: TSingleEditorForm
       Left = 1
       Top = 1
       Width = 3
-      Height = 13
+      Height = 17
       Align = alLeft
+      ExplicitHeight = 13
     end
     object SLRecordNo: TLabel
       Left = 498
       Top = 1
       Width = 3
-      Height = 13
+      Height = 17
       Align = alRight
+      ExplicitHeight = 13
     end
   end
   inherited Panel1: TPanel

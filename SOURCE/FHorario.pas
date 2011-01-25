@@ -212,7 +212,7 @@ var
 
 implementation
 uses
-  FCrsMMER, DMaster, GAHUtls, FCrsMME1, FConfig, Printers, DSource, FMain,
+  FCrsMMER, DMaster, TTGUtls, FCrsMME1, FConfig, Printers, DSource, FMain,
   Variants, RelUtils;
 {$R *.DFM}
 

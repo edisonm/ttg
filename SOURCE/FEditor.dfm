@@ -1,8 +1,8 @@
 object EditorForm: TEditorForm
   Left = 587
   Top = 303
-  Width = 487
-  Height = 326
+  ClientHeight = 299
+  ClientWidth = 479
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -10,18 +10,19 @@ object EditorForm: TEditorForm
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsMDIChild
+  OldCreateOrder = True
   Position = poMainFormCenter
   Visible = True
   OnClose = FormClose
   OnDestroy = FormDestroy
   PixelsPerInch = 96
+  TextHeight = 13
   object TlBShow: TToolBar
     Left = 0
     Top = 0
     Width = 479
     Height = 25
     Caption = 'Presentaci'#243'n'
-    Flat = True
     Images = ImageList
     TabOrder = 2
     object BtnShow: TToolButton

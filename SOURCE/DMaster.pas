@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DB, kbmMemTable, GAHUtls, Variants;
+  DB, kbmMemTable, TTGUtls, Variants;
 
 type
   TMasterDataModule = class(TDataModule)

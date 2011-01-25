@@ -18,7 +18,7 @@ DCC=$(DROOT)\BIN\DCC32.EXE
 COMPILE=$(DCC) -U$(UPATH)
 UNITS= FMain.pas DMaster.pas KerModel.pas KerEvolE.pas FProgres.pas \
   SortAlgs.pas Rand.pas FCrsMMEd.pas FCrsMME0.pas FCrsMME1.pas FCrsMMER.pas \
-  FEditor.pas FMateria.pas FProfesr.pas SGHCUtls.pas UConfig.pas FConfig.pas \
+  FEditor.pas FMateria.pas FProfesr.pas TTGUtls.pas UConfig.pas FConfig.pas \
   FLogstic.pas FHorPara.pas FMasDeEd.pas FHorAulT.pas FSplash.pas QSingRep.pas \
   QMaDeRep.pas FParalel.pas FSingEdt.pas FHorario.pas About.pas HorColCm.pas \
   FHorProf.pas DSrcBase.pas RelUtils.pas DSource.pas FSelPeIn.pas DBase.pas
