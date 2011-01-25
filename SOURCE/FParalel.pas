@@ -127,15 +127,11 @@ begin
         if Checked[i] then
         begin
           DataSource.DataSet.CheckBrowseMode;
-          try
           DataSourceDetail.DataSet.Append;
           DataSourceDetail.DataSet.FindField('CodNivel').Value := DataSource.DataSet.FindField('CodNivel').Value;
           DataSourceDetail.DataSet.FindField('CodEspecializacion').Value := DataSource.DataSet.FindField('CodEspecializacion').Value;
           DataSourceDetail.DataSet.FindField('CodParaleloId').Value := CodParaleloId;
           DataSourceDetail.DataSet.Post;
-          except
-            on EMemTableDupKey do;
-          end;
         end;
       end;
     end;

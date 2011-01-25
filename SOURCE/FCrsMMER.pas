@@ -158,11 +158,7 @@ begin
   begin
     RelDataSet.Edit;
     FLstField.Value := FLstKey[FRel[i, j]];
-    try
-      RelDataSet.Post;
-    except
-      on EMemTableDupKey do;
-    end;
+    RelDataSet.Post;
   end;
 end;
 
@@ -172,11 +168,7 @@ begin
   ColField.AsInteger := ColKey[i];
   RowField.AsInteger := RowKey[j];
   FLstField.Value := FLstKey[FRel[i, j]];
-  try
-    RelDataSet.Post;
-  except
-    on EMemTableDupKey do;
-  end;
+  RelDataSet.Post;
 end;
 
 function TCrossManyToManyEditorRForm.RelRecordExists(i, j: Integer): Boolean;

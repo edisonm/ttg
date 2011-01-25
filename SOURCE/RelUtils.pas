@@ -177,7 +177,7 @@ end;
 procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TKbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
-  vo: Variant;
+  vOld: Variant;
   bBookmark: TBookmark;
   OldIndexFieldNames: string;
   VFields: TList;
@@ -194,19 +194,19 @@ begin
         VFields := TList.Create;
         try
           GetFieldList(VFields, ADetailFields);
-          vo := GetOldFieldValues(AMaster, AMasterFields);
+          vOld := GetOldFieldValues(AMaster, AMasterFields);
           bBookmark := GetBookmark;
           try
             try
               OldIndexFieldNames := IndexFieldNames;
               IndexFieldNames := ADetailFields;
               try
-                if Locate(ADetailFields, vo, []) then
+                if Locate(ADetailFields, vOld, []) then
                 begin
                   if ACascade then
                   begin
                       // Se puede optimizar
-                    while not (Eof and Bof) and CompareRecord(VFields, vo) do
+                    while not (Eof and Bof) and CompareRecord(VFields, vOld) do
                       Delete;
                   end
                   else
@@ -275,13 +275,14 @@ var
   s: string;
 begin
   with AMaster do
-    if not (Assigned(ADetail.MasterSource) and Assigned(ADetail.MasterSource.DataSet)
-      and ADetail.MasterSource.Enabled and (ADetail.MasterSource.DataSet = AMaster))
-      then // this condition avoids an undesirable loop in DoBeforePost
-           // that causes a key violation, and also is an optimization:
-           // we do not need to verify master-detail relationship if the tables
-           // are already linked using the MasterSource property.
-    begin
+  if not (Assigned(ADetail.MasterSource) and ADetail.MasterSource.Enabled
+        and Assigned(ADetail.MasterSource.DataSet)
+        and (ADetail.MasterSource.DataSet = AMaster))
+    then // this condition avoids an undesirable loop in DoBeforePost
+         // that causes a key violation, and also is an optimization:
+         // We do not need to verify master-detail relationship if the tables
+         // are already linked using the MasterSource property.
+  begin
     DisableControls;
     try
       if not (Eof and Bof) then
@@ -314,7 +315,7 @@ begin
   end;
 end;
 
-//Retorna verdadero si hubo problemas
+// Returns true in case of problems
 
 function CheckRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADetailFields: string;
   AProblem: TDataSet): Boolean;

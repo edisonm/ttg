@@ -2,6 +2,7 @@ inherited ParaleloForm: TParaleloForm
   Left = 595
   Top = 270
   OnCreate = FormCreate
+  ExplicitWidth = 320
   PixelsPerInch = 96
   TextHeight = 13
   inherited TlBShow: TToolBar
@@ -13,9 +14,7 @@ inherited ParaleloForm: TParaleloForm
     object Splitter1: TSplitter [0]
       Left = 349
       Top = 1
-      Width = 3
       Height = 253
-      Cursor = crHSplit
       Align = alRight
     end
     inherited DBGrid: TDBGrid
