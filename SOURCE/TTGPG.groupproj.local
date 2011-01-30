@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Default.Personality>
-		<Projects ActiveProject="DBUTILS.exe"/>
-	</Default.Personality>  <Transactions> </Transactions>
+		<Projects ActiveProject="TTG.exe"/>
+	</Default.Personality>
+	<Transactions>
+	</Transactions>
 </BorlandProject>
