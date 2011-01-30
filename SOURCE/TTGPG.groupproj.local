@@ -2,5 +2,5 @@
 <BorlandProject>
 	<Default.Personality>
 		<Projects ActiveProject="DBUTILS.exe"/>
-	</Default.Personality>
+	</Default.Personality>  <Transactions> </Transactions>
 </BorlandProject>
