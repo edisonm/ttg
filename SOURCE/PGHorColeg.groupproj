@@ -1,0 +1,40 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{321addf8-0483-4ffc-a12b-e3beadcf7ce8}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup />
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="DBUTILS">
+    <MSBuild Projects="..\DBUTILS\DBUTILS.dproj" Targets="" />
+  </Target>
+  <Target Name="DBUTILS:Clean">
+    <MSBuild Projects="..\DBUTILS\DBUTILS.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="DBUTILS:Make">
+    <MSBuild Projects="..\DBUTILS\DBUTILS.dproj" Targets="Make" />
+  </Target>
+  <Target Name="TTG">
+    <MSBuild Projects="TTG.dproj" Targets="" />
+  </Target>
+  <Target Name="TTG:Clean">
+    <MSBuild Projects="TTG.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="TTG:Make">
+    <MSBuild Projects="TTG.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="DBUTILS;TTG" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="DBUTILS:Clean;TTG:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="DBUTILS:Make;TTG:Make" />
+  </Target>
+</Project>
