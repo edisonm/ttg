@@ -1,32 +1,40 @@
 inherited MateriaForm: TMateriaForm
   Left = 286
   Top = 248
-  Width = 602
   Caption = 'Materias'
+  ClientWidth = 594
+  ExplicitWidth = 602
   PixelsPerInch = 96
   TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 594
-    object BtnMateriaProhibicion: TToolButton [2]
-      Left = 46
+    ExplicitWidth = 594
+    inherited DBNavigator: TDBNavigator
+      Hints.Strings = ()
+    end
+    object BtnMateriaProhibicion: TToolButton
+      Left = 256
       Top = 0
       Action = ActMateriaProhibicion
       ParentShowHint = False
       ShowHint = True
     end
-    inherited DBNavigator: TDBNavigator
-      Left = 69
-      Hints.Strings = ()
-    end
   end
   inherited pnlStatus: TPanel
     Width = 594
+    ExplicitWidth = 594
+    inherited SLState: TLabel
+      Height = 17
+    end
     inherited SLRecordNo: TLabel
       Left = 590
+      Height = 17
+      ExplicitLeft = 590
     end
   end
   inherited Panel1: TPanel
     Width = 594
+    ExplicitWidth = 594
     inherited DBGrid: TDBGrid
       Width = 592
     end
@@ -174,6 +182,7 @@ inherited MateriaForm: TMateriaForm
   end
   inherited ActionList: TActionList
     object ActMateriaProhibicion: TAction
+      AutoCheck = True
       Caption = 'Prohibiciones de materia'
       Hint = 
         'Prohibiciones de materia|Ingresar el horario de prohibiciones de' +

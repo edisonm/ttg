@@ -2,7 +2,7 @@ object MainForm: TMainForm
   Left = 275
   Top = 174
   Caption = 'Generador Automatico de Horarios 1.2.1'
-  ClientHeight = 365
+  ClientHeight = 384
   ClientWidth = 593
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,21 +20,22 @@ object MainForm: TMainForm
   OnDestroy = FormDestroy
   DesignSize = (
     593
-    365)
+    384)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
-    Left = 335
-    Top = 305
+    Left = 338
+    Top = 343
     Width = 240
     Height = 13
     Alignment = taRightJustify
     Anchors = [akRight, akBottom]
-    Caption = 'Edici'#243'n 12-04-2010, Edison Mera, Madrid - Espa'#241'a'
+    Caption = 'Edici'#243'n 30-01-2011, Edison Mera, Madrid - Espa'#241'a'
+    ExplicitTop = 324
   end
   object StatusBar: TStatusBar
     Left = 0
-    Top = 343
+    Top = 362
     Width = 593
     Height = 22
     AutoHint = True
@@ -49,6 +50,7 @@ object MainForm: TMainForm
         Width = 153
       end>
     OnDrawPanel = StatusBarDrawPanel
+    ExplicitTop = 343
   end
   object ToolBar: TToolBar
     Left = 0

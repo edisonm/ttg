@@ -1014,7 +1014,7 @@ end;
 procedure TMainForm.ActAboutExecute(Sender: TObject);
 begin
   MessageDlg('Generador de Horarios Automático.'#13#10 +
-    'Elaborado por Edison Mera. 1999-2010. Quito-Ecuador, Madrid-España.',
+    'Elaborado por Edison Mera. 1999-2011. Quito-Ecuador, Madrid-España.',
     mtInformation, [mbOK], 0);
 end;
 
