@@ -2,7 +2,7 @@ object MainForm: TMainForm
   Left = 275
   Top = 174
   Caption = 'Generador Automatico de Horarios 1.2.1'
-  ClientHeight = 384
+  ClientHeight = 403
   ClientWidth = 593
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,16 +22,17 @@ object MainForm: TMainForm
   TextHeight = 13
   object Label1: TLabel
     Left = 338
-    Top = 343
+    Top = 362
     Width = 240
     Height = 13
     Alignment = taRightJustify
     Anchors = [akRight, akBottom]
     Caption = 'Edici'#243'n 30-01-2011, Edison Mera, Madrid - Espa'#241'a'
+    ExplicitTop = 343
   end
   object StatusBar: TStatusBar
     Left = 0
-    Top = 362
+    Top = 381
     Width = 593
     Height = 22
     AutoHint = True
@@ -46,6 +47,7 @@ object MainForm: TMainForm
         Width = 153
       end>
     OnDrawPanel = StatusBarDrawPanel
+    ExplicitTop = 362
   end
   object ToolBar: TToolBar
     Left = 0
@@ -393,29 +395,6 @@ object MainForm: TMainForm
       end
       object ExportarelhorarioaExcel1: TMenuItem
         Action = ActExportarCSV
-      end
-      object N4: TMenuItem
-        Caption = '-'
-      end
-      object MinimizeAll1: TMenuItem
-        Action = WindowMinimizeAll
-        Caption = '&Minimizar Todo'
-      end
-      object Cascade1: TMenuItem
-        Action = WindowCascade
-        Caption = '&Cascada'
-      end
-      object TileHorizontally1: TMenuItem
-        Action = WindowTileHorizontal
-        Caption = 'Mosaico &Horizontal'
-      end
-      object TileVertically1: TMenuItem
-        Action = WindowTileVertical
-        Caption = 'M&osaico Vertical'
-      end
-      object Arrange1: TMenuItem
-        Action = WindowArrange
-        Caption = 'O&rganizar'
       end
     end
     object MIHelp: TMenuItem
@@ -1685,29 +1664,6 @@ object MainForm: TMainForm
       ImageIndex = 5
       ShortCut = 16456
       OnExecute = ActHoraExecute
-    end
-    object WindowMinimizeAll: TWindowMinimizeAll
-      Category = 'View'
-      Caption = '&Minimize All'
-    end
-    object WindowCascade: TWindowCascade
-      Category = 'View'
-      Caption = '&Cascade'
-      ImageIndex = 26
-    end
-    object WindowTileHorizontal: TWindowTileHorizontal
-      Category = 'View'
-      Caption = 'Tile &Horizontally'
-      ImageIndex = 27
-    end
-    object WindowTileVertical: TWindowTileVertical
-      Category = 'View'
-      Caption = '&Tile Vertically'
-      ImageIndex = 28
-    end
-    object WindowArrange: TWindowArrange
-      Category = 'View'
-      Caption = '&Arrange'
     end
     object ActPeriodo: TAction
       Category = 'Data'

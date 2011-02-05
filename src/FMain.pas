@@ -93,17 +93,6 @@ type
     ToolButton2: TToolButton;
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;
-    WindowArrange: TWindowArrange;
-    WindowCascade: TWindowCascade;
-    WindowMinimizeAll: TWindowMinimizeAll;
-    N4: TMenuItem;
-    MinimizeAll1: TMenuItem;
-    Cascade1: TMenuItem;
-    WindowTileHorizontal: TWindowTileHorizontal;
-    WindowTileVertical: TWindowTileVertical;
-    TileHorizontally1: TMenuItem;
-    TileVertically1: TMenuItem;
-    Arrange1: TMenuItem;
     MIChangePasswd: TMenuItem;
     ActChangePasswd: TAction;
     Label1: TLabel;
