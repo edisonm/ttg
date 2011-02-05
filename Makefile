@@ -20,6 +20,15 @@ TTGSQLITE3=dat/TTG.db
 DSRCBASE=src/DSrcBase
 ABOUTPAS=src/About.pas
 
+UNITS=KerModel RelUtils HorColCm TTGUtls Rand SortAlgs About KerEvolE	\
+	BaseUtls UConfig
+
+FORMS=FCrsMMEd FSplash FSingEdt FMasDeEd FHorario FLogstic FCrsMME0	\
+	FCrsMME1 FHorProf FProfesr DSrcBase FMain FEditor DMaster	\
+	FHorPara DSource FSelPeIn FConfig FCrsMMER DBase FHorAulT	\
+	FParalel FProgres FMateria
+
+
 APPVERSION=1.2.1
 APPNAME=Generador Automatico de Horarios
 BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ \ \ \ %Y)
@@ -68,39 +77,51 @@ clean:
 .PHONY: srclaz
 
 srclaz:
-	mkdir -p srclaz
-	rsync -av src/ srclaz/
+	for i in $(UNITS) $(FORMS) ; do \
+	  cp src/$$i.pas srclaz/$$i.pas ; \
+	done
+	for i in $(FORMS) ; do \
+	  cp src/$$i.dfm srclaz/$$i.lfm ; \
+	  lazres srclaz/$$i.lrs srclaz/$$i.lfm ; \
+	done
+	cp src/TTG.dpr srclaz/TTG.lpr ; \
 	cd srclaz ; find . -name "*.pas" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \;
 	cd srclaz ; find . -name "*.pas" -exec str_replace "kbmMemTable"     "Sqlite3DS" {} \;
 	cd srclaz ; find . -name "*.pas" -exec str_replace "KbmMemTable"     "Sqlite3DS" {} \;
 	cd srclaz ; find . -name "*.pas" -exec str_replace "TIntegerField"   "TLongIntField" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "TIntegerField"   "TLongIntField" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "TIntegerField"   "TLongIntField" {} \;
 	cd srclaz ; find . -name "*.pas" -exec str_replace "Windows,"        "LResources," {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "  OldCreateOrder = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "  TextHeight = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "  ExplicitWidth = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "  ExplicitHeight = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    ExplicitTop = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    ExplicitLeft = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    DesignActivation = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    AttachedAutoRefresh = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    AttachMaxCount = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    FieldDefs = <>" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    IndexDefs = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    SortOptions = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    PersistentBackup = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    ProgressFlags = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    LoadedCompletely = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    SavedCompletely = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    Version = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    LanguageID = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    SortID = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    SubLanguageID = .*" "" {} \;
-	cd srclaz ; find . -name "*.dfm" -exec str_replace "    LocaleID = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "  OldCreateOrder = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "  TextHeight = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "  ExplicitWidth = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "  ExplicitHeight = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    ExplicitTop = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    ExplicitLeft = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    DesignActivation = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    AttachedAutoRefresh = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    AttachMaxCount = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    FieldDefs = <>" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    IndexDefs = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    SortOptions = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    PersistentBackup = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    ProgressFlags = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    LoadedCompletely = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    SavedCompletely = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    Version = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    LanguageID = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    SortID = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    SubLanguageID = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "    LocaleID = .*" "" {} \;
 
 srclazclean:
-	$(RM) -r srclaz
+	for i in $(UNITS) $(FORMS) ; do \
+	  $(RM) srclaz/$$i.pas ; \
+	done
+	for i in $(FORMS) ; do \
+	  $(RM) srclaz/$$i.lfm srclaz/$$i.lrs ; \
+	done
+	$(RM) -r srclaz/TTG.lpr
 
 test:
 	@echo TTGDIR=$(TTGDIR)
