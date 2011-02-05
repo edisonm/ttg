@@ -4,13 +4,13 @@
 
 [Setup]
 MinVersion=4.0,4.0
-AppName=Generador Automatico de Horarios
-AppId=Generador Automatico de Horarios
+AppName=<v>AppName</v>
+AppId=<v>AppName</v>
 CreateUninstallRegKey=1
 UsePreviousAppDir=1
 UsePreviousGroup=1
-AppVersion=1.2.1
-AppVerName=Generador Automatico de Horarios 1.2.1
+AppVersion=<v>AppVersion</v>
+AppVerName=<v>AppName</v> <v>AppVersion</v>
 AppCopyright=Edición 30-01-2011. Edison Mera. Quito-Ecuador. Madrid-España
 WindowShowCaption=0
 WindowStartMaximized=0
@@ -23,8 +23,8 @@ DisableStartupPrompt=0
 CreateAppDir=1
 DisableProgramGroupPage=0
 Uninstallable=1
-DefaultDirName={pf}\TTG\1.2.1
-DefaultGroupName=Generador Automatico de Horarios 1.2.1
+DefaultDirName={pf}\TTG\<v>AppVersion</v>
+DefaultGroupName=<v>AppName</v> <v>AppVersion</v>
 LicenseFile=..\DOC\Licencia.txt
 InfoAfterFile=..\DOC\Leame.txt
 OutputBaseFilename=TTGSETUP
@@ -33,7 +33,7 @@ DiskClusterSize=512
 ReserveBytes=4096
 UseSetupLdr=1
 SourceDir=.
-OutputDir=OUTPUT
+OutputDir=..\bin
 
 [Dirs]
 Name: {app}\hlp
@@ -49,10 +49,10 @@ Source: ..\doc\TTG.doc; DestDir: {app}\doc\; DestName: TTG.doc
 Source: ..\demos\BritanicoInt2000.ttd; DestDir: {app}\demos\; DestName: britanic.ttd
 Source: ..\demos\Salamanca1999.ttd; DestDir: {app}\demos\; DestName: salamanc.ttd
 [Icons]
-Name: {group}\Generador Automatico de Horarios 1.2.1; Filename: {app}\BIN\TTG.EXE; WorkingDir: {app}\BIN\; IconIndex: 0
+Name: {group}\<v>AppName</v> <v>AppVersion</v>; Filename: {app}\BIN\TTG.EXE; WorkingDir: {app}\BIN\; IconIndex: 0
 Name: {group}\Manual del Usuario (doc); Filename: {app}\doc\TTG.doc
 Name: {group}\Manual del Usuario (hlp); Filename: {app}\hlp\TTG.hlp
-Name: {group}\{cm:UninstallProgram, Generador Automatico de Horarios 1.2.1}; Filename: {uninstallexe}
+Name: {group}\{cm:UninstallProgram, <v>AppName</v> <v>AppVersion</v>}; Filename: {uninstallexe}
 [INI]
 
 [Registry]

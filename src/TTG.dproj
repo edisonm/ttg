@@ -112,6 +112,7 @@
     <DCCReference Include="KerEvolE.pas" />
     <DCCReference Include="KerModel.pas" />
     <DCCReference Include="Rand.pas" />
+    <DCCReference Include="About.pas" />
     <DCCReference Include="RelUtils.pas" />
     <DCCReference Include="SortAlgs.pas" />
     <DCCReference Include="TTGUtls.pas" />

@@ -11,6 +11,7 @@ uses
   FProgres in 'FProgres.pas' {ProgressForm},
   SortAlgs in 'SortAlgs.pas',
   Rand in 'Rand.pas',
+  About in 'About.pas',
   FCrsMMEd in 'FCrsMMEd.pas' {CrossManyToManyEditorForm},
   FCrsMME0 in 'FCrsMME0.pas' {CrossManyToManyEditor0Form},
   FCrsMME1 in 'FCrsMME1.pas' {CrossManyToManyEditor1Form},

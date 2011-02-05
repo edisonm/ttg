@@ -18,6 +18,10 @@ TTGMDB=dat/TTG.mdb
 TTGSQL=dat/TTG.sql
 TTGSQLITE3=dat/TTG.db
 DSRCBASE=src/DSrcBase
+ABOUTPAS=src/About.pas
+
+APPVERSION=1.2.1
+APPNAME=Generador Automatico de Horarios
 
 all: $(INSTALLER) $(TTGSQLITE3)
 
@@ -27,7 +31,17 @@ dcchelp:
 $(INSTALLER): $(ISS) $(TTGEXE)
 	$(INNOIDE) '$(shell cygpath -w $(ISS))'
 
-$(TTGEXE): src/$(TTGDPR) $(DSRCBASE).pas
+iss: $(ISS)
+
+$(ISS): $(ISS).tmpl
+	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
+	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
+
+$(ABOUTPAS): $(ABOUTPAS).tmpl
+	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
+	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
+
+$(TTGEXE): src/$(TTGDPR) $(DSRCBASE).pas $(ABOUTPAS)
 	cd src; $(DCC32) $(DCC32OPTS) $(TTGDPR)
 
 $(DBUTILS): DBUTILS/$(DBUTILSDPR)
@@ -43,7 +57,10 @@ $(TTGSQLITE3): $(TTGSQL)
 	sqlite3 $(TTGSQLITE3) ".read $(TTGSQL)"
 
 clean:
-	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) $(TTGSQLITE3) obj/* src/DSrcBase.{pas,dfm}
+	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) \
+	  $(TTGSQLITE3) obj/* \
+	  src/DSrcBase.{pas,dfm} \
+	  $(ISS)
 	$(RM) -r src/__history DBUTILS/__history
 
 test:

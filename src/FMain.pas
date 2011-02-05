@@ -313,7 +313,7 @@ uses
 {$IFNDEF FREEWARE}
   KerEvolE, KerModel, FProgres,
 {$ENDIF}
-  FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd,
+  FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd, About,
   FConfig, FLogstic, TTGUtls, Consts, FParalel, Rand, Printers, DSource, DSrcBase;
 
 {$R *.DFM}
@@ -1013,8 +1013,9 @@ end;
 
 procedure TMainForm.ActAboutExecute(Sender: TObject);
 begin
-  MessageDlg('Generador de Horarios Automático.'#13#10 +
-    'Elaborado por Edison Mera. 1999-2011. Quito-Ecuador, Madrid-España.',
+  MessageDlg(sAppName + ' ' + sAppVersion + '.'#13#10 +
+               'Elaborado por Edison Mera.'#13#10 +
+               '1999-2011. Quito-Ecuador, Madrid-España.',
     mtInformation, [mbOK], 0);
 end;
 
