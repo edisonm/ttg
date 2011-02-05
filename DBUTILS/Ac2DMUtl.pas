@@ -25,8 +25,8 @@ uses
   ArDBUtls, AccUtl, Variants;
 
 const
-  Acc2DMFieldClassName: array [1 .. $17] of string = ('TBooleanField',
-    { dbBoolean }
+  Acc2DMFieldClassName: array [1 .. $17] of string = (
+    'TBooleanField', { dbBoolean }
     'TSmallintField', { dbByte }
     'TSmallintField', { dbInteger }
     'TIntegerField', { dbLong }
@@ -48,7 +48,8 @@ const
     'TTimeField', { dbTime }
     'TDateTimeField' { dbTimeStamp }
   );
-  Acc2DMFieldType: array [1 .. $17] of TFieldType = (ftBoolean, { dbBoolean }
+  Acc2DMFieldType: array [1 .. $17] of TFieldType = (
+    ftBoolean, { dbBoolean }
     ftSmallint, { dbByte }
     ftSmallint, { dbInteger }
     ftInteger, { dbLong }
@@ -140,6 +141,8 @@ var
             DataTypeName := 'ftAutoInc'
           else
             DataTypeName := Acc2DMFieldTypeName[type_];
+          if Required then
+            StringDFM.Add('        Attributes = [faRequired]');
           StringDFM.Add(Format('        DataType = %s', [DataTypeName]));
           case Acc2DMFieldType[type_] of
             ftString, ftBytes, ftVarBytes:
@@ -148,8 +151,6 @@ var
                 StringDFM.Add(Format('        Size = %d', [Size]));
               end
           end;
-          if Required then
-            StringDFM.Add('        Attributes = [faRequired]');
           StringDFM.Add('      end');
         end;
       end;
@@ -306,8 +307,7 @@ var
               end;
               *)
             s := Name;
-            StringDFM.Add
-              (Format('        Name = ''Tb%s%s''', [VTableDef.name, s]));
+            StringDFM.Add(Format('        Name = ''Tb%s%s''', [VTableDef.name, s]));
             s := '';
             d := '';
             for k := 0 to Fields.Count - 1 do

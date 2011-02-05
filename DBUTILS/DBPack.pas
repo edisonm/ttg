@@ -2,16 +2,16 @@ unit DBPack;
 
 interface
 
-procedure DBPack_;
+procedure DBPackCommand;
 
-procedure DBUnPack_;
+procedure DBUnPackCommand;
 
 implementation
 
 uses
   SysUtils, dbTables, DBPacker;
 
-procedure DBPack_;
+procedure DBPackCommand;
 var
   VDBPacker: TDBPacker;
   VDatabase: TDatabase;
@@ -55,7 +55,7 @@ begin
   end;
 end;
 
-procedure DBUnPack_;
+procedure DBUnPackCommand;
 var
   VDBPacker: TDBPacker;
   VDatabase: TDatabase;

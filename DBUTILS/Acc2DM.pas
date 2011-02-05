@@ -5,14 +5,14 @@ interface
 uses
   Classes, ActiveX, Ac2DMUtl;
 
-procedure Acc2DM_;
+procedure AccessToDataModuleCommand;
 
 implementation
 
 uses
-  FileCtrl, SysUtils;
+  SysUtils;
 
-procedure Acc2DM_;
+procedure AccessToDataModuleCommand;
 var
   Msgs: TStrings;
   CreateDS: Boolean;

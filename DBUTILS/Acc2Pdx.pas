@@ -7,14 +7,14 @@ interface
 uses
   Classes, ActiveX, Ac2PxUtl, PdxUtils;
 
-procedure Acc2Pdx_;
+procedure AccessToParadoxCommand;
 
 implementation
 
 uses
-  FileCtrl, SysUtils;
+  SysUtils;
 
-procedure Acc2Pdx_;
+procedure AccessToParadoxCommand;
 var
   Msgs: TStrings;
 begin

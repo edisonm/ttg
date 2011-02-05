@@ -14,21 +14,23 @@ uses
   DBPacker in '..\..\arctl\SOURCE\DBPacker.pas',
   BZIP2 in '..\..\arctl\SOURCE\BZIP2.PAS',
   ARCConst in '..\..\arctl\SOURCE\ARCConst.pas',
-  DAO_TLB in 'C:\Documents and Settings\edison\Mis documentos\RAD Studio\7.0\Imports\DAO_TLB.pas';
+  DAO_TLB in 'C:\Documents and Settings\edison\Mis documentos\RAD Studio\7.0\Imports\DAO_TLB.pas',
+  Ac2SQUtl in 'Ac2SQUtl.pas',
+  Acc2SQL in 'Acc2SQL.pas';
 
 begin
   if ParamCount = 0 then
   begin
     WriteLn(
-      'DBUTILS.  Utiler¡as de base de datos versi¢n 1.0'#13#10 +
+      'DBUTILS.  Database Utilities version 1.1'#13#10 +
       #13#10 +
-      'Edici¢n 09-13-1999 por Edison Mera.'#13#10 +
-      'Usar:'#13#10 +
-      '  DBUTILS [OPCION [PARAMETROS]]'#13#10 +
+      'Edition 09-13-1999/2011 by Edison Mera.'#13#10 +
+      'Usage:'#13#10 +
+      '  DBUTILS [OPTION [PARAMETERS]]'#13#10 +
       #13#10 +
-      '  OPCION:           Opcion seleccionada: /DBPACK, /DBUNPACK, /ACC2PDX, /ACC2DM.'#13#10 +
-      '  PARAMETROS:       Par metros acordes con la opción.'#13#10 +
-      '  Con la opci¢n sin par metros se muestra la ayuda.'#13#10 +
+      '  OPTION:      Selected option: /DBPACK, /DBUNPACK, /ACC2PDX, /ACC2DM, /ACC2SQL.'#13#10 +
+      '  PARAMETERS:  Parameters for the option.'#13#10 +
+      '  The option without parameters shows the help.'#13#10 +
       #13#10 +
       'Ejemplo:'#13#10 +
       '  DBUTILS /DBPACK C:\BASE BASE.DBP');
@@ -36,13 +38,15 @@ begin
   else
   begin
     if UpperCase(ParamStr(1)) = '/DBPACK' then
-      DBPack_
+      DBPackCommand
     else if UpperCase(ParamStr(1)) = '/DBUNPACK' then
-      DBUnPack_
+      DBUnPackCommand
     else if UpperCase(ParamStr(1)) = '/ACC2PDX' then
-      Acc2Pdx_
+      AccessToParadoxCommand
     else if UpperCase(PAramStr(1)) = '/ACC2DM' then
-      Acc2DM_
+      AccessToDataModuleCommand
+    else if UpperCase(PAramStr(1)) = '/ACC2SQL' then
+      AccessToSQLCommand
     else
       raise Exception.Create('Opci¢n no v lida');
   end;

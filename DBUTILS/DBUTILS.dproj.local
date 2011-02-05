@@ -1,2 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject/>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2011/02/02 19:29:30.703.pas,E:\apps\pascal\TTG\DBUTILS\Unit1.pas=E:\apps\pascal\TTG\DBUTILS\Acc2SQL.pas</Transaction>
+    <Transaction>2011/02/02 19:37:16.717.pas,E:\apps\pascal\TTG\DBUTILS\Acc2SQL.pas=E:\apps\pascal\TTG\DBUTILS\Ac2SQUtl.pas</Transaction>
+    <Transaction>2011/02/02 19:39:07.981.pas,E:\apps\pascal\TTG\DBUTILS\Unit1.pas=E:\apps\pascal\TTG\DBUTILS\Acc2SQL.pas</Transaction>
+  </Transactions>
+</BorlandProject>
