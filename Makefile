@@ -70,14 +70,33 @@ clean:
 srclaz:
 	mkdir -p srclaz
 	cp src/* srclaz/
-	cd srclaz ; \
-	  find . -name "*.pas" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \; ; \
-	  find . -name "*.dfm" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \; ; \
-	  find . -name "*.pas" -exec str_replace "kbmMemTable"     "Sqlite3DS" {} \; ; \
-	  find . -name "*.pas" -exec str_replace "KbmMemTable"     "Sqlite3DS" {} \; ; \
-	  find . -name "*.pas" -exec str_replace "TIntegerField"   "TLongIntField" {} \; ; \
-	  find . -name "*.dfm" -exec str_replace "TIntegerField"   "TLongIntField" {} \; ; \
-	  find . -name "*.pas" -exec str_replace "Windows,"        "{Windows,}" {} \; ; \
+	cd srclaz ; find . -name "*.pas" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \;
+	cd srclaz ; find . -name "*.pas" -exec str_replace "kbmMemTable"     "Sqlite3DS" {} \;
+	cd srclaz ; find . -name "*.pas" -exec str_replace "KbmMemTable"     "Sqlite3DS" {} \;
+	cd srclaz ; find . -name "*.pas" -exec str_replace "TIntegerField"   "TLongIntField" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "TIntegerField"   "TLongIntField" {} \;
+	cd srclaz ; find . -name "*.pas" -exec str_replace "Windows,"        "{Windows,}" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "  OldCreateOrder = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "  TextHeight = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    DesignActivation = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    AttachedAutoRefresh = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    AttachMaxCount = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    FieldDefs = <>" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    IndexDefs = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    SortOptions = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    PersistentBackup = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    ProgressFlags = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    LoadedCompletely = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    SavedCompletely = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    Version = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    LanguageID = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    SortID = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    SubLanguageID = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    LocaleID = .*" "" {} \;
+
+srclazclean:
+	$(RM) -r srclaz
 
 test:
 	@echo TTGDIR=$(TTGDIR)

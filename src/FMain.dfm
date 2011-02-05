@@ -18,9 +18,6 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnDblClick = FormDblClick
   OnDestroy = FormDestroy
-  DesignSize = (
-    593
-    384)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -31,7 +28,6 @@ object MainForm: TMainForm
     Alignment = taRightJustify
     Anchors = [akRight, akBottom]
     Caption = 'Edici'#243'n 30-01-2011, Edison Mera, Madrid - Espa'#241'a'
-    ExplicitTop = 324
   end
   object StatusBar: TStatusBar
     Left = 0
@@ -50,7 +46,6 @@ object MainForm: TMainForm
         Width = 153
       end>
     OnDrawPanel = StatusBarDrawPanel
-    ExplicitTop = 343
   end
   object ToolBar: TToolBar
     Left = 0
