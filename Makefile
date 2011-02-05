@@ -22,7 +22,7 @@ ABOUTPAS=src/About.pas
 
 APPVERSION=1.2.1
 APPNAME=Generador Automatico de Horarios
-BUILDDATETIME=$(shell /bin/date +%a\ %b\ %e\ %H\\:%M\\:%S\ \ \ \ %Y)
+BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ \ \ \ %Y)
 
 all: $(INSTALLER) $(TTGSQLITE3)
 
@@ -64,6 +64,18 @@ clean:
 	  src/DSrcBase.{pas,dfm} \
 	  $(ISS) $(ABOUTPAS)
 	$(RM) -r src/__history DBUTILS/__history
+
+srclaz:
+	mkdir -p srclaz
+	 cp src/* srclaz/*
+	cd srclaz ; \
+	  find . -name "*.pas" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \; ; \
+	  find . -name "*.dfm" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \; ; \
+	  find . -name "*.pas" -exec str_replace "kbmMemTable"     "Sqlite3DS" {} \; ; \
+	  find . -name "*.pas" -exec str_replace "KbmMemTable"     "Sqlite3DS" {} \; ; \
+	  find . -name "*.pas" -exec str_replace "TIntegerField"   "TLongIntField" {} \; ; \
+	  find . -name "*.dfm" -exec str_replace "TIntegerField"   "TLongIntField" {} \; ; \
+	  find . -name "*.pas" -exec str_replace "Windows,"        "{Windows,}" {} \; ; \
 
 test:
 	@echo TTGDIR=$(TTGDIR)

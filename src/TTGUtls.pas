@@ -21,7 +21,7 @@ function ExtractString(const Strings: string; var Pos: Integer; Separator:
 implementation
 
 uses
-  Consts, SysUtils, DMaster;
+  SysUtils, DMaster;
 
 procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorForm;
   AColDataSet, ARowDataSet, ARelDataSet: TDataSet);
@@ -84,7 +84,7 @@ begin
   begin
     d := StrToInt(ExtractString(s, VPos, '.'));
     if d <= 0 then
-      raise Exception.Create(SInvalidNumber);
+      raise Exception.Create('Composicion Erroea');
     Inc(Result, d);
   end;
 end;

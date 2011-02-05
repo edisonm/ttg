@@ -314,7 +314,7 @@ uses
   KerEvolE, KerModel, FProgres,
 {$ENDIF}
   FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd, About,
-  FConfig, FLogstic, TTGUtls, Consts, FParalel, Rand, Printers, DSource, DSrcBase;
+  FConfig, FLogstic, TTGUtls, FParalel, Rand, Printers, DSource, DSrcBase;
 
 {$R *.DFM}
 
