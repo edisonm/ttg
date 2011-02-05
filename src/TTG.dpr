@@ -1,7 +1,5 @@
 program TTG;
 
-{$MODE Delphi}
-
 {$IMAGEBASE $00400000}
 uses
   Forms,

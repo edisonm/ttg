@@ -69,14 +69,14 @@ clean:
 
 srclaz:
 	mkdir -p srclaz
-	cp src/* srclaz/
+	rsync -av src/ srclaz/
 	cd srclaz ; find . -name "*.pas" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \;
 	cd srclaz ; find . -name "*.dfm" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \;
 	cd srclaz ; find . -name "*.pas" -exec str_replace "kbmMemTable"     "Sqlite3DS" {} \;
 	cd srclaz ; find . -name "*.pas" -exec str_replace "KbmMemTable"     "Sqlite3DS" {} \;
 	cd srclaz ; find . -name "*.pas" -exec str_replace "TIntegerField"   "TLongIntField" {} \;
 	cd srclaz ; find . -name "*.dfm" -exec str_replace "TIntegerField"   "TLongIntField" {} \;
-	cd srclaz ; find . -name "*.pas" -exec str_replace "Windows,"        "{Windows,}" {} \;
+	cd srclaz ; find . -name "*.pas" -exec str_replace "Windows,"        "LResources," {} \;
 	cd srclaz ; find . -name "*.dfm" -exec str_replace "  OldCreateOrder = .*" "" {} \;
 	cd srclaz ; find . -name "*.dfm" -exec str_replace "  TextHeight = .*" "" {} \;
 	cd srclaz ; find . -name "*.dfm" -exec str_replace "  ExplicitWidth = .*" "" {} \;

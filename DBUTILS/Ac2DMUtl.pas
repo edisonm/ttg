@@ -371,6 +371,7 @@ begin
   with StringPAS do
   begin
     Add(Format('unit %s;', [ExtractFileName(DataModuleFileName)]));
+    Add('');
     Add('(*');
     Add('  ' + FormatDateTime(LongDateFormat + ' ' + LongTimeFormat, Now));
     Add('');

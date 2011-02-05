@@ -51,7 +51,7 @@ Conditionals=
 DebugSourceDirs=
 UsePackages=0
 [Parameters]
-RunParams=/ACC2DM Z:\apps\pascal\SGHC\SOURCE\SGHC.MDB SourceBaseDataModule Z:\apps\pascal\SGHC\SOURCE\DSrcBase /DS
+RunParams=/ACC2DM E:\apps\pascal\TTG\dat\TTG.mdb SourceBaseDataModule E:\apps\pascal\TTG\src\DSrcBase /DS
 HostApplication=
 Launcher=
 UseLauncher=0
