@@ -1,4 +1,7 @@
 program TTG;
+
+{$MODE Delphi}
+
 {$IMAGEBASE $00400000}
 uses
   Forms,
@@ -42,12 +45,15 @@ uses
 
 begin
   SplashForm := TSplashForm.Create(Application);
+  SplashForm.Caption := sAppName + ' ' + sAppVersion;
+  SplashForm.lblProductName.Caption := SplashForm.Caption;
+  SplashForm.lblProductVersion.Caption := sAppVersion;
   SplashForm.Show;
   SplashForm.Update;
   SplashForm.PBLoad.Max := 4;
   Application.Initialize;
-  Application.Title := 'Generador de Horarios Automatico 1.2.1';
-  Application.HelpFile := '..\HLP\HORCOLEG.HLP';
+  Application.Title := sAppName + ' ' + sAppVersion;
+  Application.HelpFile := '..\hlp\TTG.hlp';
   Application.CreateForm(TSourceDataModule, SourceDataModule);
   SplashForm.IncPosition;
   Application.CreateForm(TMasterDataModule, MasterDataModule);

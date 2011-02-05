@@ -1,5 +1,7 @@
 unit FConfig;
 
+{$I TTG.inc}
+
 interface
 
 uses

@@ -1,5 +1,7 @@
 unit UConfig;
 
+{$I TTG.inc}
+
 interface
 
 uses

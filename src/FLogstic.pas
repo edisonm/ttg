@@ -1,5 +1,7 @@
 unit FLogstic;
 
+{$I TTG.inc}
+
 interface
 
 uses

@@ -1,5 +1,7 @@
 unit FEditor;
 
+{$I TTG.inc}
+
 interface
 
 uses

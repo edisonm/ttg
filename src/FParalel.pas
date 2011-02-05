@@ -1,5 +1,7 @@
 unit FParalel;
 
+{$I TTG.inc}
+
 interface
 
 uses

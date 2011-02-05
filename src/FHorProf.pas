@@ -1,5 +1,7 @@
 unit FHorProf;
 
+{$I TTG.inc}
+
 interface
 
 uses

@@ -1,5 +1,7 @@
 unit DBase;
 
+{$I TTG.inc}
+
 interface
 
 uses

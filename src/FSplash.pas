@@ -1,5 +1,7 @@
 unit FSplash;
 
+{$I TTG.inc}
+
 interface
 
 uses
@@ -73,11 +75,8 @@ procedure TSplashForm.FormCreate(Sender: TObject);
   end;
 begin
   UpdBackground;
-  lblYearLabel.Caption := '2010';
-  lblProductVersion.Caption := '1.2.1.17';
-  Caption := 'Generador de Horarios Automático';
-  lblProductName.Caption := Caption;
-  lblCopyright.Caption := '1999-2010 por Edison Mera';
+  lblYearLabel.Caption := '2011';
+  lblCopyright.Caption := '1999-2011 por Edison Mera';
 end;
 
 end.

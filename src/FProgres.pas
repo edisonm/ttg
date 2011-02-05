@@ -1,5 +1,7 @@
 unit FProgres;
 
+{$I TTG.inc}
+
 interface
 
 uses

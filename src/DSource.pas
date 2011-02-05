@@ -1,5 +1,7 @@
 unit DSource;
 
+{$I TTG.inc}
+
 interface
 
 uses

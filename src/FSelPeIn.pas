@@ -1,5 +1,7 @@
 unit FSelPeIn;
 
+{$I TTG.inc}
+
 interface
 
 uses

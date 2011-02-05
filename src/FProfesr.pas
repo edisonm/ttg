@@ -1,13 +1,17 @@
 unit FProfesr;
 
+{$I TTG.inc}
+
 interface
 
-uses  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Grids, DBGrids, StdCtrls, Buttons, DBCtrls,
   ExtCtrls, ComCtrls, Printers, ImgList, ToolWin, ActnList, FCrsMMER;
 
-type
-  TProfesorForm	= class(TSingleEditorForm)    BtnProfesorProhibicion: TToolButton;
+type
+  TProfesorForm	= class(TSingleEditorForm)
+    BtnProfesorProhibicion: TToolButton;
     BtnDistributivo: TToolButton;
     ActDistributivo: TAction;
     ActProfesorProhibicion: TAction;
@@ -92,7 +96,8 @@ begin
                MasterFields := 'CodProfesor';
                MasterSource := DSProfesor;
 	    finally
-               EnableControls;            end
+               EnableControls;
+            end
          end;
          Self.DataSource.OnDataChange := DataSourceDataChange;
 	 FLbCarga.Parent := FDistributivoForm.pnlStatus;
@@ -151,4 +156,3 @@ begin
 end;
 
 end.
-

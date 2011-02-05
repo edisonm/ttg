@@ -1,5 +1,7 @@
 unit FMateria;
 
+{$I TTG.inc}
+
 interface
 
 uses

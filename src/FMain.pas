@@ -8,7 +8,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   SysConst, ExtCtrls, DB, Menus, ComCtrls, ImgList, Buttons,
   ActnList, ToolWin, StdActns, StdCtrls,
-  FSingEdt, kbmMemTable, FCrsMME0, FEditor, UConfig{, Protect};
+  FSingEdt, kbmMemTable, FCrsMME0, FEditor, UConfig;
 type
   TMainForm = class(TForm)
     MainMenu: TMainMenu;

@@ -1,5 +1,7 @@
 unit FSingEdt;
 
+{$I TTG.inc}
+
 interface
 
 uses

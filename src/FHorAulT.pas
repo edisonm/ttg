@@ -1,5 +1,7 @@
 unit FHorAulT;
 
+{$I TTG.inc}
+
 interface
 
 uses

@@ -1,5 +1,7 @@
 unit FMasDeEd;
 
+{$I TTG.inc}
+
 interface
 
 uses

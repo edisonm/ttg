@@ -1,5 +1,7 @@
 unit KerEvolE;
 
+{$I TTG.inc}
+
 interface
 
 uses

@@ -1,5 +1,7 @@
 unit FCrsMMER;
 
+{$I TTG.inc}
+
 interface
 
 uses

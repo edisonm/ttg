@@ -1,5 +1,7 @@
 unit FHorPara;
 
+{$I TTG.inc}
+
 interface
 
 uses

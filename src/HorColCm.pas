@@ -1,5 +1,7 @@
 unit HorColCm;
 
+{$I TTG.inc}
+
 interface
 
 uses

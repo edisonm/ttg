@@ -1,5 +1,7 @@
 unit RelUtils;
 
+{$I TTG.inc}
+
 interface
 
 uses

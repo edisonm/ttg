@@ -1,5 +1,7 @@
 unit TTGUtls;
 
+{$I TTG.inc}
+
 interface
 
 uses

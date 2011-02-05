@@ -1,5 +1,7 @@
 unit FHorario;
 
+{$I TTG.inc}
+
 interface
 
 uses

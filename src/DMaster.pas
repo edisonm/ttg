@@ -1,5 +1,7 @@
 unit DMaster;
 
+{$I TTG.inc}
+
 interface
 
 uses

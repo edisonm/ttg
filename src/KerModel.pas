@@ -1,5 +1,7 @@
 unit KerModel;
 
+{$I TTG.inc}
+
 interface
 
 uses
