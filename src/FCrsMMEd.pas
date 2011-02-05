@@ -296,9 +296,21 @@ end;
 
 procedure TCrossManyToManyEditorForm.DrawGridDrawCell(Sender: TObject; ACol,
   ARow: Integer; Rect: TRect; State: TGridDrawState);
-var
-  S: string;
-  procedure DrawCellText;
+  function GetValue: string;
+  begin
+    with (Sender as TDrawGrid) do
+    begin
+      if (ACol = 0) and (ARow > 0) then
+        Result := RowName[ARow]
+      else if (ACol > 0) and (ARow = 0) then
+        Result := ColName[ACol]
+      else if not RelRecordExists(ACol - 1, ARow - 1) then
+        Result := ''
+      else
+        Result := GetText(ACol - 1, ARow - 1);
+    end;
+  end;
+  procedure DrawCellText(AText: string);
   begin
     with (Sender as TDrawGrid) do begin
       if ((ARow = Row) or (ACol = Col)) and (gdFixed in State) then
@@ -310,21 +322,7 @@ var
         if ColRowIsValid(ACol - 1, ARow - 1) and not (gdSelected in State) then
           Canvas.Brush.Color := ColorHighLight[ACol - 1, ARow - 1];
       end;
-      Canvas.TextRect(Rect, Rect.Left+2, Rect.Top+2, S);
-    end;
-  end;
-  procedure GetValue;
-  begin
-    with DrawGrid do
-    begin
-      if (ACol = 0) and (ARow > 0) then
-        s := RowName[ARow]
-      else if (ACol > 0) and (ARow = 0) then
-        s := ColName[ACol]
-      else if not RelRecordExists(ACol - 1, ARow - 1) then
-        s := ''
-      else
-        s := GetText(ACol - 1, ARow - 1);
+      Canvas.TextRect(Rect, Rect.Left+2, Rect.Top+2, AText);
     end;
   end;
 begin
@@ -337,8 +335,7 @@ begin
 {$ENDIF}
   if Assigned(FColDataSet) and Assigned(FRowDataSet) then
   begin
-    GetValue;
-    DrawCellText;
+    DrawCellText(GetValue);
   end;
 end;
 

@@ -911,7 +911,7 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-  FConfigFileName := GetCurrentDir + '\SGHC.cfg';
+  FConfigFileName := GetCurrentDir + '\TTG.cfg';
   FConfigStorage := TConfigStorage.Create(Self);
   try
     if FileExists(FConfigFileName) then
