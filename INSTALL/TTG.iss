@@ -36,22 +36,22 @@ SourceDir=.
 OutputDir=OUTPUT
 
 [Dirs]
-Name: {app}\HLP
-Name: {app}\BIN
-Name: {app}\DEMOS
-Name: {app}\DOC
+Name: {app}\hlp
+Name: {app}\bin
+Name: {app}\demos
+Name: {app}\doc
 
 [Files]
-Source: ..\BIN\TTG.EXE; DestDir: {app}\BIN\; DestName: TTG.EXE
-Source: ..\HLP\HORCOLEG.CNT; DestDir: {app}\HLP\; DestName: HORCOLEG.CNT
-Source: ..\HLP\HORCOLEG.HLP; DestDir: {app}\HLP\; DestName: HORCOLEG.HLP
-Source: ..\DOC\MANUAL.DOC; DestDir: {app}\DOC\; DestName: MANUAL.DOC
-Source: ..\DEMOS\BritanicoInt2000.ttd; DestDir: {app}\DEMOS\; DestName: BRITANIC.TTD
-Source: ..\DEMOS\Salamanca1999.ttd; DestDir: {app}\DEMOS\; DestName: SALAMANC.TTD
+Source: ..\bin\TTG.exe; DestDir: {app}\bin\; DestName: TTG.exe
+Source: ..\hlp\TTG.CNT; DestDir: {app}\hlp\; DestName: TTG.CNT
+Source: ..\hlp\TTG.hlp; DestDir: {app}\hlp\; DestName: TTG.hlp
+Source: ..\doc\TTG.doc; DestDir: {app}\doc\; DestName: TTG.doc
+Source: ..\demos\BritanicoInt2000.ttd; DestDir: {app}\demos\; DestName: britanic.ttd
+Source: ..\demos\Salamanca1999.ttd; DestDir: {app}\demos\; DestName: salamanc.ttd
 [Icons]
 Name: {group}\Generador Automatico de Horarios 1.2.1; Filename: {app}\BIN\TTG.EXE; WorkingDir: {app}\BIN\; IconIndex: 0
-Name: {group}\Manual del Usuario (DOC); Filename: {app}\DOC\MANUAL.DOC
-Name: {group}\Manual del Usuario (HELP); Filename: {app}\HLP\HORCOLEG.HLP
+Name: {group}\Manual del Usuario (doc); Filename: {app}\doc\TTG.doc
+Name: {group}\Manual del Usuario (hlp); Filename: {app}\hlp\TTG.hlp
 Name: {group}\{cm:UninstallProgram, Generador Automatico de Horarios 1.2.1}; Filename: {uninstallexe}
 [INI]
 

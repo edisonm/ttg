@@ -32,7 +32,7 @@ begin
       '  PARAMETERS:  Parameters for the option.'#13#10 +
       '  The option without parameters shows the help.'#13#10 +
       #13#10 +
-      'Ejemplo:'#13#10 +
+      'Example:'#13#10 +
       '  DBUTILS /DBPACK C:\BASE BASE.DBP');
   end
   else
@@ -48,6 +48,6 @@ begin
     else if UpperCase(PAramStr(1)) = '/ACC2SQL' then
       AccessToSQLCommand
     else
-      raise Exception.Create('Opci¢n no v lida');
+      raise Exception.Create('Invalid option');
   end;
 end.

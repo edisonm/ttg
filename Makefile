@@ -14,10 +14,10 @@ DCC32OPTS= \
 	-N0'$(shell cygpath -w $(TTGDIR)/obj)'
 TTGDPR=TTG.dpr
 DBUTILSDPR=DBUTILS.dpr
-TTGMDB=DAT/TTG.mdb
-TTGSQL=DAT/TTG.sql
-TTGSQLITE3=DAT/TTG.db
-DSRCBASE=SOURCE/DSrcBase
+TTGMDB=dat/TTG.mdb
+TTGSQL=dat/TTG.sql
+TTGSQLITE3=dat/TTG.db
+DSRCBASE=src/DSrcBase
 
 all: $(INSTALLER) $(TTGSQLITE3)
 
@@ -27,8 +27,8 @@ dcchelp:
 $(INSTALLER): $(ISS) $(TTGEXE)
 	$(INNOIDE) '$(shell cygpath -w $(ISS))'
 
-$(TTGEXE): SOURCE/$(TTGDPR) $(DSRCBASE).pas
-	cd SOURCE; $(DCC32) $(DCC32OPTS) $(TTGDPR)
+$(TTGEXE): src/$(TTGDPR) $(DSRCBASE).pas
+	cd src; $(DCC32) $(DCC32OPTS) $(TTGDPR)
 
 $(DBUTILS): DBUTILS/$(DBUTILSDPR)
 	cd DBUTILS; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
@@ -43,7 +43,7 @@ $(TTGSQLITE3): $(TTGSQL)
 	sqlite3 $(TTGSQLITE3) ".read $(TTGSQL)"
 
 clean:
-	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) $(TTGSQLITE3) OBJ/* SOURCE/DSrcBase.{pas,dfm}
+	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) $(TTGSQLITE3) obj/* src/DSrcBase.{pas,dfm}
 
 test:
 	@echo TTGDIR=$(TTGDIR)

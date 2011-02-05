@@ -3,8 +3,8 @@ program Convert;
 uses
   Forms,
   FConvert in 'FConvert.pas' {ConvertForm},
-  DSrcBase in '..\SOURCE\DSrcBase.pas' {SourceBaseDataModule: TDataModule},
-  RelUtils in '..\SOURCE\RelUtils.pas';
+  DSrcBase in '..\src\DSrcBase.pas' {SourceBaseDataModule: TDataModule},
+  RelUtils in '..\src\RelUtils.pas';
 
 {$R *.RES}
 
