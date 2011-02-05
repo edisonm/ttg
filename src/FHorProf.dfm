@@ -534,8 +534,6 @@ inherited HorarioProfesorForm: THorarioProfesorForm
         Size = 40
       end>
     IndexFieldNames = 'CodProfesor'
-    IndexName = 'QuHorarioProfesorIndex1'
-    IndexDefs = <>
     MasterFields = 'CodProfesor'
     MasterSource = SourceDataModule.DSProfesor
     OnCalcFields = QuHorarioProfesorCalcFields

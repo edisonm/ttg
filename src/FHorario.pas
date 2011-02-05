@@ -24,6 +24,7 @@ type
     QuHorarioDetalleCodEspecializacion: TIntegerField;
     QuHorarioDetalleCodParaleloId: TIntegerField;
     QuHorarioDetalleCodDia: TIntegerField;
+    QuHorarioDetalleCodHora: TIntegerField;
     QuHorarioDetalleSesion: TIntegerField;
     QuCruceAula: TkbmMemTable;
     QuCruceAulaCodDia: TIntegerField;

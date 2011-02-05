@@ -533,8 +533,6 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
         Size = 40
       end>
     IndexFieldNames = 'CodAulaTipo'
-    IndexName = 'QuHorarioAulaTipoIxCodAulaTipo'
-    IndexDefs = <>
     MasterFields = 'CodAulaTipo'
     MasterSource = SourceDataModule.DSAulaTipo
     OnCalcFields = QuHorarioAulaTipoCalcFields

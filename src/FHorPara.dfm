@@ -537,8 +537,6 @@ inherited HorarioParaleloForm: THorarioParaleloForm
         Size = 40
       end>
     IndexFieldNames = 'CodNivel;CodEspecializacion;CodParaleloId'
-    IndexName = 'QuHorarioParaleloIxParalelo'
-    IndexDefs = <>
     MasterFields = 'CodNivel;CodEspecializacion;CodParaleloId'
     MasterSource = DSParalelo
     OnCalcFields = QuHorarioParaleloCalcFields
