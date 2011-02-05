@@ -6,7 +6,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ComCtrls, Spin, Grids, DBGrids, DSource, DB,
+  StdCtrls, Buttons, ComCtrls, Spin, Grids, DBGrids, DSource, DB,{$IFDEF FPC}ColorBox,{$ENDIF}
   ExtCtrls, DBCtrls;
 
 type
