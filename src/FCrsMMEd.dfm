@@ -1,14 +1,17 @@
 inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
   Left = 499
   Top = 554
-  Width = 656
-  Height = 287
+  ClientHeight = 260
+  ClientWidth = 648
   OnCloseQuery = FormCloseQuery
+  ExplicitWidth = 656
+  ExplicitHeight = 287
   PixelsPerInch = 96
   TextHeight = 13
   inherited TlBShow: TToolBar
     Width = 648
     TabOrder = 3
+    ExplicitWidth = 648
     object BtnOk: TToolButton
       Left = 23
       Top = 0
@@ -32,10 +35,14 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
     Top = 241
     Width = 648
     TabOrder = 2
+    ExplicitTop = 241
+    ExplicitWidth = 648
   end
   inherited Panel1: TPanel
     Width = 648
     Height = 216
+    ExplicitWidth = 648
+    ExplicitHeight = 216
   end
   object DrawGrid: TDrawGrid [3]
     Left = 0

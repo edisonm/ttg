@@ -1,5 +1,5 @@
 # GuideLine: Prefer definition of posix directories, because we are
-# migrating this system to Linux
+# migrating this system to Linux.
 
 INNOIDE="c:/archivos de programa/Inno Setup 5/ISCC.exe"
 TTGDIR:=$(shell pwd)
@@ -79,6 +79,10 @@ srclaz:
 	cd srclaz ; find . -name "*.pas" -exec str_replace "Windows,"        "{Windows,}" {} \;
 	cd srclaz ; find . -name "*.dfm" -exec str_replace "  OldCreateOrder = .*" "" {} \;
 	cd srclaz ; find . -name "*.dfm" -exec str_replace "  TextHeight = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "  ExplicitWidth = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "  ExplicitHeight = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    ExplicitTop = .*" "" {} \;
+	cd srclaz ; find . -name "*.dfm" -exec str_replace "    ExplicitLeft = .*" "" {} \;
 	cd srclaz ; find . -name "*.dfm" -exec str_replace "    DesignActivation = .*" "" {} \;
 	cd srclaz ; find . -name "*.dfm" -exec str_replace "    AttachedAutoRefresh = .*" "" {} \;
 	cd srclaz ; find . -name "*.dfm" -exec str_replace "    AttachMaxCount = .*" "" {} \;

@@ -12,11 +12,11 @@ function StringToScaped(const AString: string): string;
 function ScapedToString(const AString: string): string; overload;
 function ScapedToString(const AString: string; var i: Integer): string; overload;
 function GetOldFieldValues(ADataSet: TDataSet; const AFieldNames: string): Variant;
-procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TKbmMemTable;
+procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TkbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
-procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TKbmMemTable;
+procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TkbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
-procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TKbmMemTable;
+procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TkbmMemTable;
   const AMasterFields, ADetailFields: string);
 
 function CheckRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADetailFields: string; AProblem: TDataSet): Boolean; overload;
@@ -174,7 +174,7 @@ begin
     end;
 end;
 
-procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TKbmMemTable;
+procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TkbmMemTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
   vOld: Variant;
@@ -267,7 +267,7 @@ begin
     Result := VarToStrDef(Value, '(Null)');
 end;
 
-procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TKbmMemTable;
+procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TkbmMemTable;
   const AMasterFields, ADetailFields: string);
 var
   bBookmark: TBookmark;

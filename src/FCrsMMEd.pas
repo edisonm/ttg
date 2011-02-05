@@ -298,28 +298,19 @@ procedure TCrossManyToManyEditorForm.DrawGridDrawCell(Sender: TObject; ACol,
   ARow: Integer; Rect: TRect; State: TGridDrawState);
 var
   S: string;
-  VColor: TColor;
   procedure DrawCellText;
   begin
     with (Sender as TDrawGrid) do begin
       if ((ARow = Row) or (ACol = Col)) and (gdFixed in State) then
       begin
-        VColor := Canvas.Font.Color;
-        Canvas.Font.Color := clSilver;
-        ExtTextOut(Canvas.Handle, Rect.Left + 4, Rect.Top + 4,
-          ETO_CLIPPED or ETO_OPAQUE, @Rect, PChar(S), Length(S), nil);
-        Canvas.Font.Color := VColor;
         Canvas.Brush.Style := bsClear;
-        ExtTextOut(Canvas.Handle, Rect.Left + 2, Rect.Top + 2, ETO_CLIPPED,
-          @Rect, PChar(S), Length(S), nil);
       end
       else
       begin
         if ColRowIsValid(ACol - 1, ARow - 1) and not (gdSelected in State) then
           Canvas.Brush.Color := ColorHighLight[ACol - 1, ARow - 1];
-        ExtTextOut(Canvas.Handle, Rect.Left + 2, Rect.Top + 2,
-          ETO_CLIPPED or ETO_OPAQUE, @Rect, PChar(S), Length(S), nil);
       end;
+      Canvas.TextRect(Rect, Rect.Left+2, Rect.Top+2, S);
     end;
   end;
   procedure GetValue;

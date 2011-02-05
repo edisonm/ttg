@@ -360,7 +360,7 @@ var
     FProfesorProhibicionTipoACodProfProhibicionTipo,
     FAulaTipoACodAulaTipo,
     FMateriaProhibicionTipoACodMateProhibicionTipo: TDynamicLongintArray;
-  procedure Cargar(ATable: TKbmMemTable; ALstName: string; var FMinCodLst:
+  procedure Cargar(ATable: TkbmMemTable; ALstName: string; var FMinCodLst:
     Integer; var FCodLstALst: TDynamicSmallintArray; var FLstACodLst:
     TDynamicLongintArray);
   var
