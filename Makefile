@@ -5,13 +5,13 @@ INNOIDE="c:/archivos de programa/Inno Setup 5/ISCC.exe"
 TTGDIR:=$(shell pwd)
 ISS=$(TTGDIR)/INSTALL/TTG.iss
 INSTALLER=$(TTGDIR)/INSTALL/OUTPUT/TTGSETUP.exe
-TTGEXE=$(TTGDIR)/BIN/TTG.exe
-DBUTILS=$(TTGDIR)/BIN/DBUTILS.exe
+TTGEXE=$(TTGDIR)/bin/TTG.exe
+DBUTILS=$(TTGDIR)/bin/DBUTILS.exe
 DCC32="c:/archivos de programa/CodeGear/RAD Studio/5.0/bin/dcc32"
 DCC32OPTS= \
-	-E'$(shell cygpath -w $(TTGDIR)/BIN)' \
+	-E'$(shell cygpath -w $(TTGDIR)/bin)' \
 	-U'$(shell cygpath -w $(TTGDIR)/../kbmMemTable552/Source)' \
-	-N0'$(shell cygpath -w $(TTGDIR)/OBJ)'
+	-N0'$(shell cygpath -w $(TTGDIR)/obj)'
 TTGDPR=TTG.dpr
 DBUTILSDPR=DBUTILS.dpr
 TTGMDB=DAT/TTG.mdb
