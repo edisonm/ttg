@@ -1,0 +1,7 @@
+object BaseDataModule: TBaseDataModule
+
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
+  Height = 480
+  Width = 928
+end
