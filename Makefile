@@ -65,9 +65,11 @@ clean:
 	  $(ISS) $(ABOUTPAS)
 	$(RM) -r src/__history DBUTILS/__history
 
+.PHONY: srclaz
+
 srclaz:
 	mkdir -p srclaz
-	 cp src/* srclaz/*
+	cp src/* srclaz/
 	cd srclaz ; \
 	  find . -name "*.pas" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \; ; \
 	  find . -name "*.dfm" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \; ; \
