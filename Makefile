@@ -44,6 +44,7 @@ $(TTGSQLITE3): $(TTGSQL)
 
 clean:
 	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) $(TTGSQLITE3) obj/* src/DSrcBase.{pas,dfm}
+	$(RM) -r src/__history DBUTILS/__history
 
 test:
 	@echo TTGDIR=$(TTGDIR)
