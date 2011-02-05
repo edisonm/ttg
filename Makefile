@@ -3,8 +3,8 @@
 
 INNOIDE="c:/archivos de programa/Inno Setup 5/ISCC.exe"
 TTGDIR:=$(shell pwd)
-ISS=$(TTGDIR)/INSTALL/TTG.iss
-INSTALLER=$(TTGDIR)/INSTALL/OUTPUT/TTGSETUP.exe
+ISS=$(TTGDIR)/install/TTG.iss
+INSTALLER=$(TTGDIR)/bin/TTGSETUP.exe
 TTGEXE=$(TTGDIR)/bin/TTG.exe
 DBUTILS=$(TTGDIR)/bin/DBUTILS.exe
 DCC32="c:/archivos de programa/CodeGear/RAD Studio/5.0/bin/dcc32"
@@ -22,6 +22,7 @@ ABOUTPAS=src/About.pas
 
 APPVERSION=1.2.1
 APPNAME=Generador Automatico de Horarios
+BUILDDATETIME=$(shell /bin/date +%a\ %b\ %e\ %H\\:%M\\:%S\ \ \ \ %Y)
 
 all: $(INSTALLER) $(TTGSQLITE3)
 
@@ -39,6 +40,7 @@ $(ISS): $(ISS).tmpl
 
 $(ABOUTPAS): $(ABOUTPAS).tmpl
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
+	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
 $(TTGEXE): src/$(TTGDPR) $(DSRCBASE).pas $(ABOUTPAS)
@@ -60,7 +62,7 @@ clean:
 	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) \
 	  $(TTGSQLITE3) obj/* \
 	  src/DSrcBase.{pas,dfm} \
-	  $(ISS)
+	  $(ISS) $(ABOUTPAS)
 	$(RM) -r src/__history DBUTILS/__history
 
 test:

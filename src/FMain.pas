@@ -1014,6 +1014,7 @@ end;
 procedure TMainForm.ActAboutExecute(Sender: TObject);
 begin
   MessageDlg(sAppName + ' ' + sAppVersion + '.'#13#10 +
+               'Compilado: ' + sBuildDateTime + #13#10 +
                'Elaborado por Edison Mera.'#13#10 +
                '1999-2011. Quito-Ecuador, Madrid-España.',
     mtInformation, [mbOK], 0);
