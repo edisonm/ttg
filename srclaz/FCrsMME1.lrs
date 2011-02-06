@@ -1,8 +1,0 @@
-LazarusResources.Add('TCrossManyToManyEditor1Form','FORMDATA',[
-  'TPF0'#241#27'TCrossManyToManyEditor1Form'#26'CrossManyToManyEditor1Form'#4'L'
-  +'eft'#2'R'#3'Top'#3#218#0#13'PixelsPerInch'#2'`'#0#241#9'TDrawGrid'#8'DrawGr'
-  +'id'#7'Options'#11#15'goFixedVertLine'#15'goFixedHorzLine'#10'goVertLine'#10
-  +'goHorzLine'#19'goDrawFocusSelected'#11'goColSizing'#9'goEditing'#0#13'OnGet'
-  +'EditText'#7#19'DrawGridGetEditText'#13'OnSetEditText'#7#19'DrawGridSetEditT'
-  +'ext'#0#0#0
-]);

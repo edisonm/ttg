@@ -43,6 +43,7 @@
       <Unit1>
         <Filename Value="FMain.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="MainForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMain"/>
@@ -236,7 +237,9 @@
       <Unit29>
         <Filename Value="DSrcBase.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="SourceBaseDataModule"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit29>
@@ -249,10 +252,12 @@
       <Unit31>
         <Filename Value="DSource.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="SourceDataModule"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSource"/>
         <CursorPos X="1" Y="1"/>
-        <TopLine Value="169"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="2"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
@@ -267,7 +272,9 @@
       <Unit33>
         <Filename Value="DBase.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="BaseDataModule"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit33>

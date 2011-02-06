@@ -1,5 +1,5 @@
 LazarusResources.Add('TBaseDataModule','FORMDATA',[
-  'TPF0'#15'TBaseDataModule'#14'BaseDataModule'#14'OldCreateOrder'#9#8'OnCreate'
-  +#7#16'DataModuleCreate'#9'OnDestroy'#7#17'DataModuleDestroy'#6'Height'#3#224
-  +#1#5'Width'#3#160#3#0#0
+  'TPF0'#15'TBaseDataModule'#14'BaseDataModule'#8'OnCreate'#7#16'DataModuleCrea'
+  +'te'#9'OnDestroy'#7#17'DataModuleDestroy'#6'Height'#3#224#1#5'Width'#3#160#3
+  +#0#0
 ]);

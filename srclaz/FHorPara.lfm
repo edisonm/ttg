@@ -610,7 +610,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       FieldKind = fkCalculated
       FieldName = 'Nombre'
       Size = 40
-      Calculated = True
+
     end
   end
   object DSParalelo: TDataSource

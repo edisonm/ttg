@@ -627,7 +627,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       FieldKind = fkCalculated
       FieldName = 'Nombre'
       Size = 40
-      Calculated = True
+
     end
   end
   object DSProfesor: TDataSource

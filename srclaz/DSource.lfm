@@ -212,7 +212,7 @@ inherited SourceDataModule: TSourceDataModule
     object TbParaleloNomParalelo: TStringField
       FieldKind = fkCalculated
       FieldName = 'NomParalelo'
-      Calculated = True
+
     end
   end
   inherited TbProfesor: TSqlite3Dataset
@@ -251,7 +251,7 @@ inherited SourceDataModule: TSourceDataModule
       FieldName = 'ApeNomProfesor'
       Visible = False
       Size = 31
-      Calculated = True
+
     end
   end
   inherited TbMateriaProhibicion: TSqlite3Dataset
@@ -404,7 +404,7 @@ inherited SourceDataModule: TSourceDataModule
       DisplayLabel = 'Duraci'#243'n'
       FieldKind = fkCalculated
       FieldName = 'Duracion'
-      Calculated = True
+
     end
   end
   inherited TbHorarioDetalle: TSqlite3Dataset

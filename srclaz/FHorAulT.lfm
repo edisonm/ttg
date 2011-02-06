@@ -626,7 +626,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       FieldKind = fkCalculated
       FieldName = 'Nombre'
       Size = 40
-      Calculated = True
+
     end
   end
   object DSAulaTipo: TDataSource
