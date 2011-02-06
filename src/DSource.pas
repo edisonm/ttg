@@ -25,7 +25,6 @@ type
     TbParaleloAbrNivel: TStringField;
     TbParaleloAbrEspecializacion: TStringField;
     TbParaleloNomParaleloId: TStringField;
-    TbParaleloCodParalelo: TAutoIncField;
     TbParaleloNomParalelo: TStringField;
     procedure TbProfesorCalcFields(DataSet: TDataSet);
     procedure TbDistributivoBeforePost(DataSet: TDataSet);
@@ -384,7 +383,6 @@ end;
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
-  TbParalelo.AddIndex('TbParaleloCodParalelo', 'CodParalelo', [ixUnique]);
   FConfigStorage := TConfigStorage.Create(Self);
   OpenTables;
   NewDataBase;

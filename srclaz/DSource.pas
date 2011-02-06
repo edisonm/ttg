@@ -25,7 +25,6 @@ type
     TbParaleloAbrNivel: TStringField;
     TbParaleloAbrEspecializacion: TStringField;
     TbParaleloNomParaleloId: TStringField;
-    TbParaleloCodParalelo: TAutoIncField;
     TbParaleloNomParalelo: TStringField;
     procedure TbProfesorCalcFields(DataSet: TDataSet);
     procedure TbDistributivoBeforePost(DataSet: TDataSet);

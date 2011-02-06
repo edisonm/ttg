@@ -10,21 +10,54 @@ procedure AccessToDataModuleCommand;
 implementation
 
 uses
-  SysUtils;
+  SysUtils, DB;
 
 procedure AccessToDataModuleCommand;
 var
   Msgs: TStrings;
-  CreateDS: Boolean;
+  CreateDataSource,
+  CreateSrcIndexes, // Code in .pas
+  CreateIndexDefs,  // Code in .dfm
+  CreateSrcFields,  // Code in .pas
+  CreateFieldDefs,  // Code in .dfm
+  CreateDfmFields,   // Code in .dfm
+  CreateSrcRels,
+  LazarusFrm: Boolean;
+  iPos: Integer;
+  Option, Options: string;
 begin
   if (ParamCount = 4) or (ParamCount = 5) then
   begin
     CoInitialize(nil);
     Msgs := TStringList.Create;
     Msgs.BeginUpdate;
-    CreateDS := (ParamCount = 5) and (UpperCase(ParamStr(5)) = '/DS');
+    CreateDataSource := False;
+    CreateSrcIndexes := False;
+    CreateIndexDefs := False;
+    CreateSrcFields := False;
+    CreateFieldDefs := False;
+    CreateSrcRels := False;
+    if ParamCount = 5 then
+    begin
+      iPos := 1;
+      Options := ParamStr(5);
+      while iPos <= Length(Options) do
+      begin
+        Option := ExtractFieldName(Options, iPos);
+        if Option = 'cds' then CreateDataSource := True
+        else if Option = 'csi' then CreateSrcIndexes := True
+        else if Option = 'cid' then CreateIndexDefs := True
+        else if Option = 'csf' then CreateSrcFields := True
+        else if Option = 'cfd' then CreateFieldDefs := True
+        else if Option = 'csr' then CreateSrcRels := True
+        else if Option = 'lfm' then LazarusFrm := True;
+        // else invalid option
+      end;
+    end;
     try
-      AccessToDataModule(ParamStr(2), ParamStr(3), ParamStr(4), CreateDS, Msgs);
+      AccessToDataModule(ParamStr(2), ParamStr(3), ParamStr(4),
+        CreateDataSource, CreateSrcIndexes, CreateIndexDefs, CreateSrcFields,
+        CreateFieldDefs, CreateDfmFields, CreateSrcRels, LazarusFrm, Msgs);
       if Msgs.Count > 0 then
         Msgs.SaveToFile('ERRORS.TXT');
     finally

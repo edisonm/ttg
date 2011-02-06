@@ -13,11 +13,17 @@ uses
 type
   EInitAc2PxUtl = class(Exception);
 
-    // Field Types constants
-
-    // procedure InitAc2PxUtl;
-    procedure AccessToDataModule(AccessFileName, DataModuleName,
-      DataModuleFileName: string; ACreateDataSource: Boolean; Msgs: TStrings);
+procedure AccessToDataModule(AccessFileName, DataModuleName,
+  DataModuleFileName: string;
+  ACreateDataSource, // Create TDataSource components
+  ACreateSrcIndexes, // Code in .pas
+  ACreateIndexDefs,  // Code in .dfm
+  ACreateSrcFields,  // Code in .pas
+  ACreateFieldDefs,  // Code in .dfm
+  ACreateDfmFields,   // Code in .dfm
+  ACreateSrcRels,
+  ALazarusFrm: Boolean;
+  Msgs: TStrings);
 
 implementation
 
@@ -113,17 +119,20 @@ begin
 end;
 
 procedure ConvertAccessToDataModule(DBAcc: Database; const DataModuleName,
-  DataModuleFileName: string; ACreateDataSource: Boolean;
-  ACreateSrcIndexes: Boolean; // Code in .pas
-  ACreateIndexDefs: Boolean; // Code in .dfm
-  ACreateSrcFields: Boolean; // Code in .pas
-  ACreateFieldDefs: Boolean; // Code in .dfm
-  ACreateDfmFields: Boolean; // Code in .dfm
+  DataModuleFileName: string;
+  ACreateDataSource, // Create TDataSource components
+  ACreateSrcIndexes, // Code in .pas
+  ACreateIndexDefs,  // Code in .dfm
+  ACreateSrcFields,  // Code in .pas
+  ACreateFieldDefs,  // Code in .dfm
+  ACreateDfmFields,  // Code in .dfm
+  ACreateSrcRels,    // Code in .src
+  ALazarusFrm: Boolean;
   StringDFM, StringPAS, Msgs: TStrings);
 var
   VTableDef: TableDef;
   DataTypeName, VFieldClassName, VTableName: string;
-  VStringList: TStrings;
+  VTableList: TStrings;
   vv: Variant;
   procedure CreateFieldDefs;
   var
@@ -363,7 +372,7 @@ var
 
 var
   i, j, k: Smallint;
-  s, d: string;
+  s, d, DatasetClass: string;
   ProcDefs, ProcImpl: TStrings;
   MasterRels, DetailRels: array of TList; // TList used as Integer list
 begin
@@ -386,47 +395,55 @@ begin
     Add('interface');
     Add('');
     Add('uses');
-    Add('  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, KbmMemTable,');
+    if ALazarusFrm then
+      Add('  LResources, Sqlite3DS,')
+    else
+      Add('  Windows, KbmMemTable,');
+    Add('  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,');
     Add('  DBase;');
     Add('');
     Add('type');
     Add(Format('  T%s = class(TBaseDataModule)', [DataModuleName]));
   end;
+  if ALazarusFrm then
+    DataSetClass := 'Sqlite3Dataset'
+  else
+    DataSetClass := 'kbmMemTable';
   StringDFM.Add(Format('inherited %s: T%s', [DataModuleName, DataModuleName]));
   Msgs.Clear;
   Msgs.BeginUpdate;
-  VStringList := TStringList.Create;
+  VTableList := TStringList.Create;
   ProcDefs := TStringList.Create;
   ProcImpl := TStringList.Create;
   try
-    GetAccTableNamesByRefIntOrder(DBAcc, VStringList);
+    GetAccTableNamesByRefIntOrder(DBAcc, VTableList);
     with DBAcc do
     begin
-      SetLength(MasterRels, VStringList.Count);
-      SetLength(DetailRels, VStringList.Count);
-      for i := 0 to VStringList.Count - 1 do
+      SetLength(MasterRels, VTableList.Count);
+      SetLength(DetailRels, VTableList.Count);
+      for i := 0 to VTableList.Count - 1 do
       begin
         MasterRels[i] := TList.Create;
         DetailRels[i] := TList.Create;
       end;
       try
-        with Relations do
+        if ACreateSrcRels then with Relations do
         begin
           for i := 0 to Count - 1 do
           begin
-            MasterRels[VStringList.IndexOf(Item[i].Table)].Add(Pointer(i));
-            DetailRels[VStringList.IndexOf(Item[i].ForeignTable)].Add
+            MasterRels[VTableList.IndexOf(Item[i].Table)].Add(Pointer(i));
+            DetailRels[VTableList.IndexOf(Item[i].ForeignTable)].Add
               (Pointer(i));
           end;
         end;
-        for i := 0 to VStringList.Count - 1 do
+        for i := 0 to VTableList.Count - 1 do
         begin
-          VTableName := VStringList.Strings[i];
+          VTableName := VTableList.Strings[i];
           VTableDef := TableDefs.Item[VTableName];
           // VTableDef := TableDefs.Item[i];
           // VTableName := VTableDef.Name;
-          StringPAS.Add(Format('    Tb%s: TkbmMemTable;', [VTableName]));
-          StringDFM.Add(Format('  object Tb%s: TkbmMemTable', [VTableName]));
+          StringPAS.Add(Format('    Tb%s: T%s;', [VTableName, DataSetClass]));
+          StringDFM.Add(Format('  object Tb%s: T%s', [VTableName, DataSetClass]));
           StringDFM.Add(Format('    Tag = %d', [i]));
           if ACreateFieldDefs then
             CreateFieldDefs
@@ -475,7 +492,9 @@ begin
           Add('');
           Add('implementation');
           Add('');
+          Add('{$IFNDEF FPC}');
           Add('{$R *.DFM}');
+          Add('{$ENDIF}');
           Add('');
           Add('uses RelUtils;');
           Add('');
@@ -485,31 +504,33 @@ begin
               [DataModuleName]));
           Add('begin');
           Add('  inherited;');
-          Add(Format('  SetLength(FTables, %d);', [VStringList.Count]));
-          Add(Format('  SetLength(FMasterRels, %d);', [VStringList.Count]));
-          Add(Format('  SetLength(FDetailRels, %d);', [VStringList.Count]));
-          Add(Format('  SetLength(FBeforePostLocks, %d);', [VStringList.Count])
-            );
-          for i := 0 to VStringList.Count - 1 do
+          Add(Format('  SetLength(FTables, %d);', [VTableList.Count]));
+          if ACreateSrcRels then
           begin
-            d := VStringList[i];
+            Add(Format('  SetLength(FMasterRels, %d);', [VTableList.Count]));
+            Add(Format('  SetLength(FDetailRels, %d);', [VTableList.Count]));
+            Add(Format('  SetLength(FBeforePostLocks, %d);', [VTableList.Count]));
+          end;
+          for i := 0 to VTableList.Count - 1 do
+          begin
+            d := VTableList[i];
             Add(Format('  Tables[%d] := Tb%s;', [i, d]));
           end;
-          for i := 0 to VStringList.Count - 1 do
+          for i := 0 to VTableList.Count - 1 do
           begin
-            VTableName := VStringList.Strings[i];
+            VTableName := VTableList.Strings[i];
             VTableDef := TableDefs.Item[VTableName];
             if ACreateSrcFields then
               CreateSrcFields;
             if ACreateSrcIndexes then
               CreateSrcIndexes;
           end;
-          for i := 0 to VStringList.Count - 1 do
+          for i := 0 to VTableList.Count - 1 do
           begin
             with MasterRels[i] do
             begin
-              StringPAS.Add
-                (Format('  SetLength(FMasterRels[%d], %d);', [i, Count]));
+              if Count > 0 then
+                StringPAS.Add(Format('  SetLength(FMasterRels[%d], %d);', [i, Count]));
               for j := 0 to Count - 1 do
               begin
                 with Relations.Item[Integer(Items[j])] do
@@ -521,25 +542,21 @@ begin
                     s := s + ';' + Fields.Item[k].Name;
                     d := d + ';' + Fields.Item[k].ForeignName;
                   end;
-                  StringPAS.Add(Format('  with FMasterRels[%d, %d] do', [i, j])
-                    );
+                  StringPAS.Add(Format('  with FMasterRels[%d, %d] do', [i, j]));
                   StringPAS.Add('  begin');
-                  StringPAS.Add
-                    (Format('    DetailDataSet := Tb%s;', [ForeignTable]));
+                  StringPAS.Add(Format('    DetailDataSet := Tb%s;', [ForeignTable]));
                   StringPAS.Add(Format('    MasterFields := ''%s'';', [d]));
                   StringPAS.Add(Format('    DetailFields := ''%s'';', [s]));
-                  StringPAS.Add
-                    (Format('    Cascade := %s;',
-                      [sBoolean[(Attributes and dbRelationUpdateCascade) <> 0]])
-                    );
+                  StringPAS.Add(Format('    Cascade := %s;',
+                    [sBoolean[(Attributes and dbRelationUpdateCascade) <> 0]]));
                   StringPAS.Add('  end;');
                 end;
               end;
             end;
             with DetailRels[i] do
             begin
-              StringPAS.Add
-                (Format('  SetLength(FDetailRels[%d], %d);', [i, Count]));
+              if Count > 0 then
+                StringPAS.Add(Format('  SetLength(FDetailRels[%d], %d);', [i, Count]));
               for j := 0 to Count - 1 do
               begin
                 with Relations.Item[Integer(Items[j])] do
@@ -551,8 +568,7 @@ begin
                     s := s + ';' + Fields.Item[k].Name;
                     d := d + ';' + Fields.Item[k].ForeignName;
                   end;
-                  StringPAS.Add(Format('  with FDetailRels[%d, %d] do', [i, j])
-                    );
+                  StringPAS.Add(Format('  with FDetailRels[%d, %d] do', [i, j]));
                   StringPAS.Add('  begin');
                   StringPAS.Add(Format('    MasterDataSet := Tb%s;', [Table]));
                   StringPAS.Add(Format('    MasterFields := ''%s'';', [s]));
@@ -564,17 +580,17 @@ begin
           end;
           Add('  with DataSetNameList do');
           Add('  begin');
-          for i := 0 to VStringList.Count - 1 do
+          for i := 0 to VTableList.Count - 1 do
           begin
-            d := VStringList[i];
+            d := VTableList[i];
             Add(Format('    Add(''Tb%s=%s'');', [d, d]));
           end;
           Add('  end;');
           Add('  with DataSetDescList do');
           Add('  begin');
-          for i := 0 to VStringList.Count - 1 do
+          for i := 0 to VTableList.Count - 1 do
           begin
-            d := VStringList[i];
+            d := VTableList[i];
             try
               s := DBAcc.TableDefs[d].Properties['Description'].Value;
             except
@@ -585,11 +601,15 @@ begin
           Add('  end;');
           Add('end;');
           Add('');
+          Add('initialization');
+          Add('{$IFDEF FPC}');
+          Add(Format('  {$i %s.lrs}', [ExtractFileName(DataModuleFileName)]));
+          Add('{$ENDIF}');
           Add('end.');
           Add('');
         end;
       finally
-        for i := VStringList.Count - 1 downto 0 do
+        for i := VTableList.Count - 1 downto 0 do
         begin
           DetailRels[i].Free;
           MasterRels[i].Free;
@@ -597,7 +617,7 @@ begin
       end;
     end;
   finally
-    SecureFree(VStringList);
+    SecureFree(VTableList);
     ProcDefs.Free;
     ProcImpl.Free;
     Msgs.EndUpdate;
@@ -605,10 +625,20 @@ begin
 end;
 
 procedure AccessToDataModule(AccessFileName, DataModuleName,
-  DataModuleFileName: string; ACreateDataSource: Boolean; Msgs: TStrings);
+  DataModuleFileName: string;
+  ACreateDataSource, // Create TDataSource components
+  ACreateSrcIndexes, // Code in .pas
+  ACreateIndexDefs,  // Code in .dfm
+  ACreateSrcFields,  // Code in .pas
+  ACreateFieldDefs,  // Code in .dfm
+  ACreateDfmFields,  // Code in .dfm
+  ACreateSrcRels,
+  ALazarusFrm: Boolean;
+  Msgs: TStrings);
 var
   DBAcc: Database;
   StringDFM, StringPAS: TStrings;
+  FormExtension: string;
 begin
   if not Assigned(Engine) then
     Engine := CoDBEngine.Create;
@@ -618,12 +648,17 @@ begin
     DBAcc := Engine.OpenDatabase(AccessFileName, 0, true, '');
     try
       ConvertAccessToDataModule(DBAcc, DataModuleName, DataModuleFileName,
-        ACreateDataSource, True, False, False, True, True, StringDFM,
-        StringPAS, Msgs);
+        ACreateDataSource, ACreateSrcIndexes, ACreateIndexDefs, ACreateSrcFields,
+        ACreateFieldDefs, ACreateDfmFields, ACreateSrcRels, ALazarusFrm,
+        StringDFM, StringPAS, Msgs);
     finally
       DBAcc.Close;
     end;
-    StringDFM.SaveToFile(DataModuleFileName + '.dfm');
+    if ALazarusFrm then
+      FormExtension := '.lfm'
+    else
+      FormExtension := '.dfm';
+    StringDFM.SaveToFile(DataModuleFileName + FormExtension);
     StringPAS.SaveToFile(DataModuleFileName + '.pas');
   finally
     StringDFM.Free;

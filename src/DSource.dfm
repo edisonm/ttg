@@ -163,8 +163,7 @@ inherited SourceDataModule: TSourceDataModule
   end
   inherited TbParalelo: TkbmMemTable
     OnCalcFields = TbParaleloCalcFields
-    object TbParaleloCodParalelo: TAutoIncField [0]
-      FieldName = 'CodParalelo'
+    inherited TbParaleloCodParalelo: TAutoIncField
       Visible = False
     end
     inherited TbParaleloCodNivel: TIntegerField

@@ -18,13 +18,14 @@ TTGMDB=dat/TTG.mdb
 TTGSQL=dat/TTG.sql
 TTGSQLITE3=dat/TTG.db
 DSRCBASE=src/DSrcBase
+DLAZBASE=srclaz/DSrcBase
 ABOUTPAS=src/About.pas
 
 UNITS=KerModel RelUtils HorColCm TTGUtls Rand SortAlgs About KerEvolE	\
 	BaseUtls UConfig
 
 FORMS=FCrsMMEd FSplash FSingEdt FMasDeEd FHorario FLogstic FCrsMME0	\
-	FCrsMME1 FHorProf FProfesr DSrcBase FMain FEditor DMaster	\
+	FCrsMME1 FHorProf FProfesr FMain FEditor DMaster		\
 	FHorPara DSource FSelPeIn FConfig FCrsMMER DBase FHorAulT	\
 	FParalel FProgres FMateria
 
@@ -52,37 +53,44 @@ $(ABOUTPAS): $(ABOUTPAS).tmpl
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-$(TTGEXE): src/$(TTGDPR) $(DSRCBASE).pas $(ABOUTPAS)
+$(TTGEXE): src/$(TTGDPR) $(addpreffix src/, $(addsuffx .pas, $(UNITS) $(FORMS))) $(DSRCBASE).pas $(ABOUTPAS)
 	cd src; $(DCC32) $(DCC32OPTS) $(TTGDPR)
 
 $(DBUTILS): DBUTILS/$(DBUTILSDPR)
 	cd DBUTILS; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
 
 $(DSRCBASE).pas: $(DBUTILS) $(TTGMDB)
-	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule '$(shell cygpath -w $(DSRCBASE))' /DS
+	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule '$(shell cygpath -w $(DSRCBASE))' 'csi;cfd;cdf;csr;cds'
+
+$(DLAZBASE).pas: $(DBUTILS) $(TTGMDB)
+	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule '$(shell cygpath -w $(DLAZBASE))' 'cfd;cdf;cds;lfm'
 
 $(TTGSQL): $(DBUTILS) $(TTGMDB)
 	$(DBUTILS) /ACC2SQL $(TTGMDB) '$(shell cygpath -w $@)'
 
 $(TTGSQLITE3): $(TTGSQL)
-	sqlite3 $(TTGSQLITE3) ".read $(TTGSQL)"
+	$(RM) $@
+	sqlite3 $@ ".read $(TTGSQL)"
 
 clean:
 	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) \
 	  $(TTGSQLITE3) obj/* \
-	  src/DSrcBase.{pas,dfm} \
+	  $(DSRCBASE).{pas,dfm} \
+	  $(DLAZBASE).{pas,dfm} \
 	  $(ISS) $(ABOUTPAS)
 	$(RM) -r src/__history DBUTILS/__history
 
 .PHONY: srclaz
 
-srclaz:
+srclaz: $(DLAZBASE).pas
 	for i in $(UNITS) $(FORMS) ; do \
 	  cp src/$$i.pas srclaz/$$i.pas ; \
 	done
 	for i in $(FORMS) ; do \
 	  cp src/$$i.dfm srclaz/$$i.lfm ; \
-	  lazres srclaz/$$i.lrs srclaz/$$i.lfm ; \
+	done
+	for i in $(addprefix 'srclaz/', $(FORMS)) $(DLAZBASE) ; do \
+	  lazres $$i.lrs $$i.lfm ; \
 	done
 	cp src/TTG.dpr srclaz/TTG.lpr ; \
 	cd srclaz ; find . -name "*.pas" -exec str_replace "TkbmMemTable"    "TSqlite3Dataset" {} \;
