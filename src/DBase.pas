@@ -117,7 +117,13 @@ var
   i: Integer;
 begin
   for i := Low(FTables) to High(FTables) do
-    (FTables[i] as TkbmMemTable).EmptyTable;
+  begin
+    with (FTables[i] as TkbmMemTable) do
+    begin
+      Close;
+      Open;
+    end;
+  end;
 end;
 
 procedure TBaseDataModule.DataModuleCreate(Sender: TObject);
