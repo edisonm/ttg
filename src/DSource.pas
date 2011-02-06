@@ -160,7 +160,10 @@ var
 
 implementation
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
+
 uses
   TTGUtls, rand, Variants, DBase, RelUtils, FConfig;
 
@@ -791,5 +794,9 @@ begin
   HorarioSeleccionado := SourceDataModule.TbHorarioCodHorario.Value;
 end;
 
-end.
+initialization
+{$IFDEF FPC}
+  {$i DSource.lrs}
+{$ENDIF}
 
+end.

@@ -60,7 +60,9 @@ var
 
 implementation
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 uses
   kbmMemTable;
@@ -297,8 +299,13 @@ begin
     S.Right := DrawGrid.Col;
     DrawGrid.Selection := S;
     FRestaurar := False;
-  end
+  end;
 end;
 
-end.
+initialization
 
+{$IFDEF FPC}
+  {$i FCrsMMER.lrs}
+{$ENDIF}
+
+end.

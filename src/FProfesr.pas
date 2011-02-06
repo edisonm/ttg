@@ -41,7 +41,9 @@ implementation
 uses
   DMaster, TTGUtls, FConfig, DSource, FEditor;
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 procedure TProfesorForm.ActProfesorProhibicionExecute(Sender: TObject);
 begin
@@ -154,5 +156,11 @@ begin
   end;
   inherited;
 end;
+
+initialization
+
+{$IFDEF FPC}
+  {$i FProfesr.lrs}
+{$ENDIF}
 
 end.

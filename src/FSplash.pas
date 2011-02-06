@@ -35,7 +35,9 @@ var
 
 implementation
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 procedure TSplashForm.IncPosition;
 begin
@@ -76,8 +78,13 @@ procedure TSplashForm.FormCreate(Sender: TObject);
 begin
   UpdBackground;
   lblYearLabel.Caption := '2011';
-  lblCopyright.Caption := '1999-2011 por Edison Mera';
+  lblCopyright.Caption := '1999-2011 por Edison Mera';
 end;
 
-end.
+initialization
 
+{$IFDEF FPC}
+  {$i FSplash.lrs}
+{$ENDIF}
+
+end.

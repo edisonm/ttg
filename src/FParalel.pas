@@ -36,7 +36,9 @@ implementation
 uses
   DMaster, FCrsMME1, TTGUtls, FMain, DSource;
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 procedure TParaleloForm.FormCreate(Sender: TObject);
 begin
@@ -139,5 +141,10 @@ begin
     end;
   end;
 end;
+
+initialization
+{$IFDEF FPC}
+  {$i FParalel.lrs}
+{$ENDIF}
 
 end.

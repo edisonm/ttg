@@ -1,5 +1,7 @@
 Unit About;
 
+{$I TTG.inc}
+
 interface
 
 resourcestring

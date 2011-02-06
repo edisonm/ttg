@@ -67,7 +67,9 @@ var
 
 implementation
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 uses
   RelUtils;
@@ -233,5 +235,11 @@ begin
                                   DetailFields, Cascade);
   end;
 end;
+
+initialization
+
+{$IFDEF FPC}
+  {$i DBase.lrs}
+{$ENDIF}
 
 end.

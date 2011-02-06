@@ -113,7 +113,9 @@ var
 
 implementation
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 procedure TCrossManyToManyEditorForm.CheckDataSetEmpty(DataSet: TDataSet);
 var
@@ -424,6 +426,11 @@ begin
   else
     Result := clScrollBar;
 end;
+
+initialization
+{$IFDEF FPC}
+  {$i FCrsMMEd.lrs}
+{$ENDIF}
 
 end.
 

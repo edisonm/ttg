@@ -66,7 +66,9 @@ implementation
 uses
   RelUtils;
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 class function TEditorForm.ToggleEditor(AOwner: TComponent; var AForm;
                                         AConfigStorage: TConfigStorage;
@@ -191,5 +193,11 @@ begin
     FAction.Checked := False;
   SaveConfig;
 end;
+
+initialization
+
+{$IFDEF FPC}
+  {$i FEditor.lrs}
+{$ENDIF}
 
 end.

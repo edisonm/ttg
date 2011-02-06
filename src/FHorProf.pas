@@ -49,7 +49,10 @@ type
 implementation
 uses
   HorColCm, FConfig, DMaster, DSource;
+
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 procedure THorarioProfesorForm.BtnMostrarClick(Sender: TObject);
 begin
@@ -150,5 +153,9 @@ begin
   BtnMostrarClick(nil);
 end;
 
-end.
+initialization
+{$IFDEF FPC}
+  {$i FHorProf.lrs}
+{$ENDIF}
 
+end.
