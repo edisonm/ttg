@@ -3,7 +3,7 @@ program TTG;
 {$IMAGEBASE $00400000}
 uses
   Forms,
-  Dialogs,
+  Dialogs, Interfaces,
   SysUtils,
   FMain in 'FMain.pas' {MainForm},
   DMaster in 'DMaster.pas' {MasterDataModule: TDataModule},
