@@ -18,6 +18,9 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnDblClick = FormDblClick
   OnDestroy = FormDestroy
+  DesignSize = (
+    593
+    403)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -1782,6 +1785,7 @@ object MainForm: TMainForm
     AttachedAutoRefresh = True
     AttachMaxCount = 1
     FieldDefs = <>
+    IndexFieldNames = 'CodNivel;CodEspecializacion;CodParaleloId'
     IndexDefs = <>
     SortOptions = []
     PersistentBackup = False
@@ -1789,12 +1793,13 @@ object MainForm: TMainForm
     LoadedCompletely = False
     SavedCompletely = False
     FilterOptions = []
+    MasterFields = 'CodNivel;CodEspecializacion;CodParaleloId'
+    MasterSource = SourceDataModule.DSParalelo
     Version = '5.52'
     LanguageID = 0
     SortID = 0
     SubLanguageID = 1
     LocaleID = 1024
-    OnFilterRecord = TbParaleloFilterRecord
     Left = 48
     Top = 119
   end
@@ -1803,6 +1808,7 @@ object MainForm: TMainForm
     AttachedAutoRefresh = True
     AttachMaxCount = 1
     FieldDefs = <>
+    IndexFieldNames = 'CodProfesor'
     IndexDefs = <>
     SortOptions = []
     PersistentBackup = False
@@ -1810,12 +1816,13 @@ object MainForm: TMainForm
     LoadedCompletely = False
     SavedCompletely = False
     FilterOptions = []
+    MasterFields = 'CodProfesor'
+    MasterSource = SourceDataModule.DSProfesor
     Version = '5.52'
     LanguageID = 0
     SortID = 0
     SubLanguageID = 1
     LocaleID = 1024
-    OnFilterRecord = TbProfesorFilterRecord
     Left = 48
     Top = 147
   end
@@ -2109,6 +2116,7 @@ object MainForm: TMainForm
     AttachedAutoRefresh = True
     AttachMaxCount = 1
     FieldDefs = <>
+    IndexFieldNames = 'CodMateria'
     IndexDefs = <>
     SortOptions = []
     PersistentBackup = False
@@ -2116,12 +2124,13 @@ object MainForm: TMainForm
     LoadedCompletely = False
     SavedCompletely = False
     FilterOptions = []
+    MasterFields = 'CodMateria'
+    MasterSource = DSMateriaMateriaProhibicion
     Version = '5.52'
     LanguageID = 0
     SortID = 0
     SubLanguageID = 1
     LocaleID = 1024
-    OnFilterRecord = TbMateriaFilterRecord
     Left = 48
     Top = 184
   end
@@ -2152,7 +2161,6 @@ object MainForm: TMainForm
     SortID = 0
     SubLanguageID = 1
     LocaleID = 1024
-    AfterScroll = QuMateriaMateriaProhibicionAfterScroll
     Left = 76
     Top = 184
     object QuMateriaMateriaProhibicionCodMateria: TIntegerField
@@ -2344,6 +2352,7 @@ object MainForm: TMainForm
     AttachedAutoRefresh = True
     AttachMaxCount = 1
     FieldDefs = <>
+    IndexFieldNames = 'CodProfesor'
     IndexDefs = <>
     SortOptions = []
     PersistentBackup = False
@@ -2351,12 +2360,13 @@ object MainForm: TMainForm
     LoadedCompletely = False
     SavedCompletely = False
     FilterOptions = []
+    MasterFields = 'CodProfesor'
+    MasterSource = DSProfesorProfesorProhibicion
     Version = '5.52'
     LanguageID = 0
     SortID = 0
     SubLanguageID = 1
     LocaleID = 1024
-    OnFilterRecord = TbProfesor1FilterRecord
     Left = 48
     Top = 212
   end
@@ -2366,5 +2376,15 @@ object MainForm: TMainForm
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 158
     Top = 72
+  end
+  object DSProfesorProfesorProhibicion: TDataSource
+    DataSet = QuProfesorProfesorProhibicion
+    Left = 76
+    Top = 240
+  end
+  object DSMateriaMateriaProhibicion: TDataSource
+    DataSet = QuMateriaMateriaProhibicion
+    Left = 104
+    Top = 240
   end
 end

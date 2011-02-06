@@ -163,6 +163,8 @@ type
     QuProfesorHorarioDetalleCodHora: TIntegerField;
     QuProfesorHorarioDetalleNombre: TStringField;
     ToolBar: TToolBar;
+    DSProfesorProfesorProhibicion: TDataSource;
+    DSMateriaMateriaProhibicion: TDataSource;
     procedure ActExitExecute(Sender: TObject);
     procedure ActProfesorExecute(Sender: TObject);
     procedure ActMateriaExecute(Sender: TObject);
@@ -189,25 +191,13 @@ type
     procedure ActAboutExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDestroy(Sender: TObject);
-    procedure QuParaleloAfterScroll(DataSet: TDataSet);
-    procedure QuProfesorAfterScroll(DataSet: TDataSet);
-    procedure TbParaleloFilterRecord(DataSet: TDataSet;
-      var Accept: Boolean);
-    procedure TbProfesorFilterRecord(DataSet: TDataSet;
-      var Accept: Boolean);
-    procedure TbMateriaFilterRecord(DataSet: TDataSet;
-      var Accept: Boolean);
-    procedure QuMateriaMateriaProhibicionAfterScroll(DataSet: TDataSet);
     procedure QuProfesorProfesorProhibicionAfterScroll(DataSet: TDataSet);
-    procedure TbProfesor1FilterRecord(DataSet: TDataSet;
-      var Accept: Boolean);
     procedure ActContentsExecute(Sender: TObject);
     procedure ActIndexExecute(Sender: TObject);
     procedure ActExportarCSVExecute(Sender: TObject);
     procedure ActMejorarHorarioExecute(Sender: TObject);
     procedure FormDblClick(Sender: TObject);
     procedure ActRegistrationInfoExecute(Sender: TObject);
-    procedure ToolButton5Click(Sender: TObject);
 {
     procedure ActSaveCSVExecute(Sender: TObject);
     procedure ActOpenCSVExecute(Sender: TObject);
@@ -1070,11 +1060,11 @@ begin
   FillProfesorHora;
   FillProfesorHorarioDetalle;
   TbProfesor.Close;
-  TbProfesor.Filtered := false;
+  TbProfesor.MasterSource.Enabled := false;
   CrossBatchMove(SourceDataModule.TbDia, QuProfesorHora, QuProfesorHorarioDetalle,
     TbProfesor, 'CodDia', 'NomDia', 'CodDia', 'CodProfesor;CodHora',
     'NomHora', 'CodProfesor;CodHora', 'Nombre');
-  TbProfesor.Filtered := true;
+  TbProfesor.MasterSource.Enabled := true;
 end;
 
 procedure TMainForm.FillParaleloHorarioDetalle;
@@ -1119,58 +1109,12 @@ begin
   FillParaleloHora;
   FillParaleloHorarioDetalle;
   TbParalelo.Close;
-  TbParalelo.Filtered := false;
+  TbParalelo.MasterSource.Enabled := false;
   CrossBatchMove(SourceDataModule.TbDia, QuParaleloHora, QuParaleloHorarioDetalle,
                  TbParalelo, 'CodDia', 'NomDia', 'CodDia',
                  'CodNivel;CodEspecializacion;CodParaleloId;CodHora', 'NomHora',
                  'CodNivel;CodEspecializacion;CodParaleloId;CodHora', 'NomMateria');
-  TbParalelo.Filtered := true;
-end;
-
-procedure TMainForm.QuParaleloAfterScroll(DataSet: TDataSet);
-begin
-  TbParalelo.Filtered := false;
-  TbParalelo.Filtered := true;
-end;
-
-procedure TMainForm.QuProfesorAfterScroll(DataSet: TDataSet);
-begin
-  TbProfesor.Filtered := false;
-  TbProfesor.Filtered := true;
-end;
-
-procedure TMainForm.TbParaleloFilterRecord(DataSet: TDataSet;
-  var Accept: Boolean);
-begin
-  with SourceDataModule do
-    Accept := (DataSet.FindField('CodNivel').AsInteger = TbParaleloCodNivel.Value)
-    and (DataSet.FindField('CodParaleloId').AsInteger = TbParaleloCodParaleloId.Value);
-end;
-
-procedure TMainForm.TbProfesorFilterRecord(DataSet: TDataSet; var Accept: Boolean);
-begin
-  with SourceDataModule do
-    Accept := DataSet.FindField('CodProfesor').AsInteger =
-    TbProfesorCodProfesor.AsInteger;
-end;
-
-procedure TMainForm.ToolButton5Click(Sender: TObject);
-begin
-//  if not ToolButton5.Down then
-//    ToolButton5.Down := True;
-end;
-
-procedure TMainForm.TbMateriaFilterRecord(DataSet: TDataSet;
-  var Accept: Boolean);
-begin
-  Accept := DataSet.FindField('CodMateria').AsInteger =
-    QuMateriaMateriaProhibicionCodMateria.Value;
-end;
-
-procedure TMainForm.QuMateriaMateriaProhibicionAfterScroll(DataSet: TDataSet);
-begin
-  TbMateria.Filtered := false;
-  TbMateria.Filtered := true;
+  TbParalelo.MasterSource.Enabled := true;
 end;
 
 procedure TMainForm.FillProfesorProfesorProhibicion;
@@ -1254,13 +1198,6 @@ procedure TMainForm.QuProfesorProfesorProhibicionAfterScroll(
 begin
   TbProfesor1.Filtered := false;
   TbProfesor1.Filtered := true;
-end;
-
-procedure TMainForm.TbProfesor1FilterRecord(DataSet: TDataSet;
-  var Accept: Boolean);
-begin
-  Accept := DataSet.FindField('CodProfesor').AsInteger =
-    QuProfesorProfesorProhibicionCodProfesor.Value;
 end;
 
 function TMainForm.GetCodHorarioSeleccionado: Integer;
@@ -1366,11 +1303,11 @@ begin
     AStrings.Add('HORARIO POR PROFESORES;;;;;;');
     ObtProfesorHorario;
     ExportarCSV(SourceDataModule.TbProfesor, TbProfesor, AStrings);
-    
+
     FillProfesorProfesorProhibicion;
     FillProfesorProfesorProhibicionHora;
     TbProfesor1.Close;
-    TbProfesor1.Filtered := false;
+    TbProfesor1.MasterSource.Enabled := false;
     AStrings.Add('PROHIBICIONES DE PROFESORES;;;;;;');
     with SourceDataModule, MasterDataModule do
     begin
@@ -1379,7 +1316,7 @@ begin
                      TbProfesorProhibicion, TbProfesor1, 'CodDia', 'NomDia', 'CodDia',
                      'CodProfesor;CodHora', 'NomHora', 'CodProfesor;CodHora',
                      'NomProfProhibicionTipo');
-      TbProfesor1.Filtered := true;
+      TbProfesor1.MasterSource.Enabled := true;
       ExportarCSV(QuProfesorProfesorProhibicion, TbProfesor1, AStrings);
       TbProfesorProhibicion.MasterSource := DSProfesor;
     end;
@@ -1387,14 +1324,14 @@ begin
     FillMateriaMateriaProhibicion;
     FillMateriaMateriaProhibicionHora;
     TbMateria.Close;
-    TbMateria.Filtered := false;
+    TbMateria.MasterSource.Enabled := false;
     SourceDataModule.TbMateriaProhibicion.MasterSource := nil;
     try
       CrossBatchMove(SourceDataModule.TbDia, QuMateriaMateriaProhibicionHora,
                      SourceDataModule.TbMateriaProhibicion, TbMateria,
                      'CodDia', 'NomDia', 'CodDia', 'CodMateria;CodHora', 'NomHora',
                      'CodMateria;CodHora', 'NomMateProhibicionTipo');
-      TbMateria.Filtered := true;
+      TbMateria.MasterSource.Enabled := true;
       ExportarCSV(QuMateriaMateriaProhibicion, TbMateria, AStrings);
     finally
       SourceDataModule.TbMateriaProhibicion.MasterSource := SourceDataModule.DSMateria;
