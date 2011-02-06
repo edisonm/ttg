@@ -3,7 +3,10 @@ program TTG;
 {$IMAGEBASE $00400000}
 uses
   Forms,
-  Dialogs, Interfaces,
+  Dialogs,
+{$IFDEF FPC}
+  Interfaces,
+{$ENDIF}
   SysUtils,
   FMain in 'FMain.pas' {MainForm},
   DMaster in 'DMaster.pas' {MasterDataModule: TDataModule},
@@ -39,7 +42,9 @@ uses
   FSelPeIn in 'FSelPeIn.pas' {SelPeriodoForm},
   DBase in 'DBase.pas' {BaseDataModule: TDataModule};
 
+{$IFNDEF FPC}
 {$R *.res}
+{$ENDIF}
 
 begin
   SplashForm := TSplashForm.Create(Application);
