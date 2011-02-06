@@ -28,6 +28,13 @@ var
 
 implementation
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
+
+initialization
+{$IFDEF FPC}
+  {$i FLogstic.lrs}
+{$ENDIF}
 
 end.

@@ -41,7 +41,9 @@ var
 
 implementation
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 { TFCrMMEditor1 }
 
@@ -139,5 +141,9 @@ begin
     Result := '';
 end;
 
-end.
+initialization
+{$IFDEF FPC}
+  {$i FCrsMME1.lrs}
+{$ENDIF}
 
+end.

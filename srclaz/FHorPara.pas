@@ -52,7 +52,10 @@ type
 implementation
 uses
   HorColCm, FSelPeIn, DSource, DMaster;
+
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 function THorarioParaleloForm.GetCodDia: Integer;
 begin
@@ -183,6 +186,12 @@ begin
   inherited;
   BtnMostrarClick(nil);
 end;
+
+initialization
+
+{$IFDEF FPC}
+  {$i FHorPara.lrs}
+{$ENDIF}
 
 end.
 

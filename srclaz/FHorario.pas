@@ -217,7 +217,10 @@ implementation
 uses
   FCrsMMER, DMaster, TTGUtls, FCrsMME1, FConfig, Printers, DSource, FMain,
   Variants, RelUtils;
+
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 procedure THorarioForm.ActHorarioParaleloExecute(Sender: TObject);
 begin
@@ -1180,5 +1183,10 @@ begin
   QuMateriaCortadaHora.AddIndex('QuMateriaCortadaHoraIxCodDia', 'CodDia', []);
   QuMateriaCortadaHoraDetalle.AddIndex('QuMateriaCortadaHoraDetalleIxCodDia', 'CodDia;CodHora;CodHora0', []);
 end;
+
+initialization
+{$IFDEF FPC}
+  {$i FHorario.lrs}
+{$ENDIF}
 
 end.

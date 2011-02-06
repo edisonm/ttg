@@ -130,7 +130,9 @@ var
 
 implementation
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 uses RelUtils;
 
@@ -597,5 +599,10 @@ begin
   end;
 end;
 
-end.
+initialization
 
+{$IFDEF FPC}
+  {$i DSrcBase.lrs}
+{$ENDIF}
+
+end.

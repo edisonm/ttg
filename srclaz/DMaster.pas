@@ -60,7 +60,10 @@ implementation
 
 uses
   HorColCm, DSource, BaseUtls;
+
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 procedure TMasterDataModule.FillProfesorProhibicionCant;
 var
@@ -578,6 +581,11 @@ begin
   FStringsShowProfesor.Free;
   FStringsShowParalelo.Free;
 end;
+
+initialization
+{$IFDEF FPC}
+  {$i DMaster.lrs}
+{$ENDIF}
 
 end.
 

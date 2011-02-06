@@ -28,7 +28,10 @@ var
 implementation
 uses
   DMaster, FCrsMMEd, TTGUtls, FConfig, DSource;
+
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 procedure TMateriaForm.ActMateriaProhibicionExecute(Sender: TObject);
 begin
@@ -66,6 +69,10 @@ begin
   end;
 end;
 
+initialization
+
+{$IFDEF FPC}
+{$i FMateria.lrs}
+{$ENDIF}
 
 end.
-

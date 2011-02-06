@@ -35,7 +35,9 @@ function SeleccionarPeriodo(var ACodDia, ACodHora: Integer): Boolean;
 
 implementation
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 function SeleccionarPeriodo(var ACodDia, ACodHora: Integer): Boolean;
 var
@@ -58,5 +60,10 @@ procedure TSelPeriodoForm.FormShow(Sender: TObject);
 begin
   TbDiaHora.Open;
 end;
+
+initialization
+{$IFDEF FPC}
+  {$i FSelPeIn.lrs}
+{$ENDIF}
 
 end.

@@ -47,7 +47,10 @@ implementation
 
 uses
   HorColCm, Printers, FMain, DMaster;
+
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 class function TSingleEditorForm.ToggleSingleEditor(AOwner: TComponent;
                                                     var AForm;
@@ -135,6 +138,11 @@ begin
   else
     SLRecordNo.Caption := '';
 end;
+
+initialization
+{$IFDEF FPC}
+  {$i FSingEdt.lrs}
+{$ENDIF}
 
 end.
 

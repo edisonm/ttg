@@ -91,7 +91,9 @@ var
 
 implementation
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 { TFProgress }
 
@@ -149,5 +151,9 @@ begin
   lblColisiones.Caption := Format('%d ', [ANumColision]);
 end;
 
-end.
+initialization
+{$IFDEF FPC}
+  {$i FProgres.lrs}
+{$ENDIF}
 
+end.

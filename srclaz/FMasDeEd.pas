@@ -38,7 +38,10 @@ var
 implementation
 uses
   Printers, FMain;
+
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 class function TMasterDetailEditorForm.ToggleMasterDetailEditor(AOwner: TComponent;
                                                                 var AForm;
@@ -76,5 +79,10 @@ begin
   inherited;
   ConfigIntegers['DBGridDetail_Height'] := DBGridDetail.Height;
 end;
+
+initialization
+{$IFDEF FPC}
+  {$i FMasDeEd.lrs}
+{$ENDIF}
 
 end.

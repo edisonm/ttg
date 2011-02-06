@@ -132,7 +132,9 @@ implementation
 uses
   FMain, RelUtils, DSrcBase;
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 function ShowConfiguracionForm(AHelpContext: THelpContext): Integer;
 var
@@ -308,6 +310,11 @@ begin
   CBColProfProhibicionTipo.Selected
     := SourceDataModule.TbProfesorProhibicionTipoColProfProhibicionTipo.Value;
 end;
+
+initialization
+{$IFDEF FPC}
+  {$i FConfig.lrs}
+{$ENDIF}
 
 end.
 

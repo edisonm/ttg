@@ -49,7 +49,10 @@ type
 implementation
 uses
   DMaster, HorColCm, FConfig, DSource;
+
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 procedure THorarioAulaTipoForm.FillHorarioAulaTipo;
 begin
@@ -140,5 +143,9 @@ begin
   BtnMostrarClick(nil);
 end;
 
-end.
+initialization
+{$IFDEF FPC}
+  {$i FHorAulT.lrs}
+{$ENDIF}
 
+end.

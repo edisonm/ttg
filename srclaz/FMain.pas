@@ -305,7 +305,9 @@ uses
   FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd, About,
   FConfig, FLogstic, TTGUtls, FParalel, Rand, Printers, DSource, DSrcBase;
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 procedure TMainForm.ActExitExecute(Sender: TObject);
 begin
@@ -1750,5 +1752,11 @@ begin
 }
   end;
 end;
+
+initialization
+
+{$IFDEF FPC}
+  {$i FMain.lrs}
+{$ENDIF}
 
 end.

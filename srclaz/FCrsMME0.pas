@@ -50,7 +50,9 @@ var
 
 implementation
 
+{$IFNDEF FPC}
 {$R *.DFM}
+{$ENDIF}
 
 { TFCrMMEditor0 }
 
@@ -220,5 +222,9 @@ begin
     ClearSelection;
 end;
 
-end.
+initialization
+{$IFDEF FPC}
+  {$i FCrsMME0.lrs}
+{$ENDIF}
 
+end.
