@@ -1,7 +1,6 @@
 unit DSrcBase;
-
 (*
-  sábado, 05 de febrero de 2011 23:38:50
+  sábado, 05 de febrero de 2011 18:41:52
 
   Warning:
 
@@ -130,9 +129,7 @@ var
 
 implementation
 
-{$IFNDEF FPC}
 {$R *.DFM}
-{$ENDIF}
 
 uses RelUtils;
 
@@ -599,10 +596,5 @@ begin
   end;
 end;
 
-initialization
-
-{$IFDEF FPC}
-  {$i DSrcBase.lrs}
-{$ENDIF}
-
 end.
+

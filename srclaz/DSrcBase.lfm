@@ -1,6 +1,8 @@
 inherited SourceBaseDataModule: TSourceBaseDataModule
   object TbAulaTipo: TSqlite3Dataset
-    Tag = 0
+
+
+
     FieldDefs = <
       item
         Name = 'CodAulaTipo'
@@ -25,6 +27,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 48
@@ -46,7 +60,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 10
     end
     object TbAulaTipoCantidad: TLongIntField
-      DisplayLabel = 'Cantidad'
       FieldName = 'Cantidad'
       Required = True
     end
@@ -58,6 +71,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbEspecializacion: TSqlite3Dataset
     Tag = 1
+
+
+
     FieldDefs = <
       item
         Name = 'CodEspecializacion'
@@ -77,6 +93,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Precision = -1
         Size = 10
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 144
@@ -89,7 +117,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       DisplayLabel = 'Nombre'
       FieldName = 'NomEspecializacion'
       Required = True
-      Size = 20
     end
     object TbEspecializacionAbrEspecializacion: TStringField
       DisplayLabel = 'Abreviatura'
@@ -105,6 +132,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbDia: TSqlite3Dataset
     Tag = 2
+
+
+
     FieldDefs = <
       item
         Name = 'CodDia'
@@ -117,6 +147,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Precision = -1
         Size = 10
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 240
@@ -139,6 +181,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbMateria: TSqlite3Dataset
     Tag = 3
+
+
+
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -151,6 +196,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Precision = -1
         Size = 20
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 336
@@ -163,7 +220,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       DisplayLabel = 'Nombre'
       FieldName = 'NomMateria'
       Required = True
-      Size = 20
     end
   end
   object DSMateria: TDataSource
@@ -173,6 +229,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbNivel: TSqlite3Dataset
     Tag = 4
+
+
+
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -191,6 +250,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Precision = -1
         Size = 5
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 432
@@ -218,6 +289,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbHora: TSqlite3Dataset
     Tag = 5
+
+
+
     FieldDefs = <
       item
         Name = 'CodHora'
@@ -237,6 +311,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Precision = -1
         Size = 21
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 48
@@ -252,7 +338,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Size = 10
     end
     object TbHoraIntervalo: TStringField
-      DisplayLabel = 'Intervalo'
       FieldName = 'Intervalo'
       Required = True
       Size = 21
@@ -265,6 +350,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbHorario: TSqlite3Dataset
     Tag = 6
+
+
+
     FieldDefs = <
       item
         Name = 'CodHorario'
@@ -284,6 +372,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Name = 'Informe'
         DataType = ftMemo
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 144
@@ -303,8 +403,8 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
       Required = True
     end
     object TbHorarioInforme: TMemoField
-      DisplayLabel = 'Informe'
       FieldName = 'Informe'
+      BlobType = ftMemo
     end
   end
   object DSHorario: TDataSource
@@ -314,6 +414,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbCurso: TSqlite3Dataset
     Tag = 7
+
+
+
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -325,6 +428,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 240
@@ -347,6 +462,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbParaleloId: TSqlite3Dataset
     Tag = 8
+
+
+
     FieldDefs = <
       item
         Name = 'CodParaleloId'
@@ -359,6 +477,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Precision = -1
         Size = 5
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 336
@@ -381,6 +511,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbMateriaProhibicionTipo: TSqlite3Dataset
     Tag = 9
+
+
+
     FieldDefs = <
       item
         Name = 'CodMateProhibicionTipo'
@@ -404,6 +537,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftFloat
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 432
@@ -437,6 +582,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbPeriodo: TSqlite3Dataset
     Tag = 10
+
+
+
     FieldDefs = <
       item
         Name = 'CodDia'
@@ -448,6 +596,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 48
@@ -470,6 +630,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbParalelo: TSqlite3Dataset
     Tag = 11
+
+
+
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -486,6 +649,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 144
@@ -513,6 +688,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbProfesor: TSqlite3Dataset
     Tag = 12
+
+
+
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -539,6 +717,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Precision = -1
         Size = 15
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 240
@@ -573,6 +763,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbMateriaProhibicion: TSqlite3Dataset
     Tag = 13
+
+
+
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -594,6 +787,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     Left = 336
     Top = 252
@@ -625,6 +830,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbDistributivo: TSqlite3Dataset
     Tag = 14
+
+
+
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -663,6 +871,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Precision = -1
         Size = 40
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 432
@@ -711,6 +931,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbHorarioDetalle: TSqlite3Dataset
     Tag = 15
+
+
+
     FieldDefs = <
       item
         Name = 'CodHorario'
@@ -752,6 +975,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     Left = 48
     Top = 336
@@ -803,6 +1038,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbProfesorProhibicionTipo: TSqlite3Dataset
     Tag = 16
+
+
+
     FieldDefs = <
       item
         Name = 'CodProfProhibicionTipo'
@@ -825,6 +1063,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftFloat
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
     Left = 144
@@ -857,6 +1107,9 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbProfesorProhibicion: TSqlite3Dataset
     Tag = 17
+
+
+
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -878,6 +1131,18 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
         Attributes = [faRequired]
         DataType = ftInteger
       end>
+
+
+
+
+
+
+
+
+
+
+
+
     BeforePost = DataSetBeforePost
     Left = 240
     Top = 336

@@ -1782,6 +1782,7 @@ object MainForm: TMainForm
 
 
 
+    IndexFieldNames = 'CodNivel;CodEspecializacion;CodParaleloId'
 
 
 
@@ -1789,12 +1790,13 @@ object MainForm: TMainForm
 
 
 
+    MasterFields = 'CodNivel;CodEspecializacion;CodParaleloId'
+    MasterSource = SourceDataModule.DSParalelo
 
 
 
 
 
-    OnFilterRecord = TbParaleloFilterRecord
     Left = 48
     Top = 119
   end
@@ -1803,6 +1805,7 @@ object MainForm: TMainForm
 
 
 
+    IndexFieldNames = 'CodProfesor'
 
 
 
@@ -1810,12 +1813,13 @@ object MainForm: TMainForm
 
 
 
+    MasterFields = 'CodProfesor'
+    MasterSource = SourceDataModule.DSProfesor
 
 
 
 
 
-    OnFilterRecord = TbProfesorFilterRecord
     Left = 48
     Top = 147
   end
@@ -1946,7 +1950,7 @@ object MainForm: TMainForm
       LookupResultField = 'NomHora'
       KeyFields = 'CodHora'
       Size = 10
-      Lookup = True
+
     end
   end
   object QuProfesorHorarioDetalle: TSqlite3Dataset
@@ -2101,7 +2105,7 @@ object MainForm: TMainForm
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
-      Lookup = True
+
     end
   end
   object TbMateria: TSqlite3Dataset
@@ -2109,6 +2113,7 @@ object MainForm: TMainForm
 
 
 
+    IndexFieldNames = 'CodMateria'
 
 
 
@@ -2116,12 +2121,13 @@ object MainForm: TMainForm
 
 
 
+    MasterFields = 'CodMateria'
+    MasterSource = DSMateriaMateriaProhibicion
 
 
 
 
 
-    OnFilterRecord = TbMateriaFilterRecord
     Left = 48
     Top = 184
   end
@@ -2152,7 +2158,6 @@ object MainForm: TMainForm
 
 
 
-    AfterScroll = QuMateriaMateriaProhibicionAfterScroll
     Left = 76
     Top = 184
     object QuMateriaMateriaProhibicionCodMateria: TLongIntField
@@ -2167,7 +2172,7 @@ object MainForm: TMainForm
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
-      Lookup = True
+
     end
   end
   object QuMateriaMateriaProhibicionHora: TSqlite3Dataset
@@ -2220,7 +2225,7 @@ object MainForm: TMainForm
       LookupResultField = 'NomHora'
       KeyFields = 'CodHora'
       Size = 10
-      Lookup = True
+
     end
   end
   object QuProfesorProfesorProhibicion: TSqlite3Dataset
@@ -2273,7 +2278,7 @@ object MainForm: TMainForm
       LookupResultField = 'ApeProfesor'
       KeyFields = 'ApeProfesor'
       Size = 15
-      Lookup = True
+
     end
     object QuProfesorProfesorProhibicionNomProfesor: TStringField
       DisplayLabel = 'Nombre'
@@ -2284,7 +2289,7 @@ object MainForm: TMainForm
       LookupResultField = 'NomProfesor'
       KeyFields = 'NomProfesor'
       Size = 15
-      Lookup = True
+
     end
   end
   object QuProfesorProfesorProhibicionHora: TSqlite3Dataset
@@ -2344,6 +2349,7 @@ object MainForm: TMainForm
 
 
 
+    IndexFieldNames = 'CodProfesor'
 
 
 
@@ -2351,12 +2357,13 @@ object MainForm: TMainForm
 
 
 
+    MasterFields = 'CodProfesor'
+    MasterSource = DSProfesorProfesorProhibicion
 
 
 
 
 
-    OnFilterRecord = TbProfesor1FilterRecord
     Left = 48
     Top = 212
   end
@@ -2366,5 +2373,15 @@ object MainForm: TMainForm
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     Left = 158
     Top = 72
+  end
+  object DSProfesorProfesorProhibicion: TDataSource
+    DataSet = QuProfesorProfesorProhibicion
+    Left = 76
+    Top = 240
+  end
+  object DSMateriaMateriaProhibicion: TDataSource
+    DataSet = QuMateriaMateriaProhibicion
+    Left = 104
+    Top = 240
   end
 end

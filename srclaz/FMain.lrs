@@ -1343,120 +1343,123 @@ LazarusResources.Add('TMainForm','FORMDATA',[
   +'Caption'#6#15'Mejorar Horario'#4'Hint'#6'@Mejorar Horario|Mejorar el Horari'
   +'o buscando en doble profundidad'#9'OnExecute'#7#24'ActMejorarHorarioExecute'
   +#0#0#0#12'TkbmMemTable'#10'TbParalelo'#16'DesignActivation'#9#19'AttachedAut'
-  ,'oRefresh'#9#14'AttachMaxCount'#2#1#9'FieldDefs'#14#0#9'IndexDefs'#14#0#11'S'
-  +'ortOptions'#11#0#16'PersistentBackup'#8#13'ProgressFlags'#11#8'mtpcLoad'#8
-  +'mtpcSave'#8'mtpcCopy'#0#16'LoadedCompletely'#8#15'SavedCompletely'#8#13'Fil'
-  +'terOptions'#11#0#7'Version'#6#4'5.52'#10'LanguageID'#2#0#6'SortID'#2#0#13'S'
-  +'ubLanguageID'#2#1#8'LocaleID'#3#0#4#14'OnFilterRecord'#7#22'TbParaleloFilte'
-  +'rRecord'#4'Left'#2'0'#3'Top'#2'w'#0#0#12'TkbmMemTable'#10'TbProfesor'#16'De'
-  +'signActivation'#9#19'AttachedAutoRefresh'#9#14'AttachMaxCount'#2#1#9'FieldD'
-  +'efs'#14#0#9'IndexDefs'#14#0#11'SortOptions'#11#0#16'PersistentBackup'#8#13
-  +'ProgressFlags'#11#8'mtpcLoad'#8'mtpcSave'#8'mtpcCopy'#0#16'LoadedCompletely'
-  +#8#15'SavedCompletely'#8#13'FilterOptions'#11#0#7'Version'#6#4'5.52'#10'Lang'
-  +'uageID'#2#0#6'SortID'#2#0#13'SubLanguageID'#2#1#8'LocaleID'#3#0#4#14'OnFilt'
-  +'erRecord'#7#22'TbProfesorFilterRecord'#4'Left'#2'0'#3'Top'#3#147#0#0#0#12'T'
-  +'kbmMemTable'#14'QuParaleloHora'#16'DesignActivation'#9#19'AttachedAutoRefre'
-  +'sh'#9#14'AttachMaxCount'#2#1#9'FieldDefs'#14#1#4'Name'#6#8'CodNivel'#10'Att'
-  +'ributes'#11#10'faRequired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#18'Co'
-  +'dEspecializacion'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#9'ftInte'
-  +'ger'#0#1#4'Name'#6#13'CodParaleloId'#10'Attributes'#11#10'faRequired'#0#8'D'
-  +'ataType'#7#9'ftInteger'#0#1#4'Name'#6#7'CodHora'#10'Attributes'#11#10'faReq'
-  +'uired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#7'NomHora'#10'Attributes'
+  ,'oRefresh'#9#14'AttachMaxCount'#2#1#9'FieldDefs'#14#0#15'IndexFieldNames'#6
+  +')CodNivel;CodEspecializacion;CodParaleloId'#9'IndexDefs'#14#0#11'SortOption'
+  +'s'#11#0#16'PersistentBackup'#8#13'ProgressFlags'#11#8'mtpcLoad'#8'mtpcSave'
+  +#8'mtpcCopy'#0#16'LoadedCompletely'#8#15'SavedCompletely'#8#13'FilterOptions'
+  +#11#0#12'MasterFields'#6')CodNivel;CodEspecializacion;CodParaleloId'#12'Mast'
+  +'erSource'#7#27'SourceDataModule.DSParalelo'#7'Version'#6#4'5.52'#10'Languag'
+  +'eID'#2#0#6'SortID'#2#0#13'SubLanguageID'#2#1#8'LocaleID'#3#0#4#4'Left'#2'0'
+  +#3'Top'#2'w'#0#0#12'TkbmMemTable'#10'TbProfesor'#16'DesignActivation'#9#19'A'
+  +'ttachedAutoRefresh'#9#14'AttachMaxCount'#2#1#9'FieldDefs'#14#0#15'IndexFiel'
+  +'dNames'#6#11'CodProfesor'#9'IndexDefs'#14#0#11'SortOptions'#11#0#16'Persist'
+  +'entBackup'#8#13'ProgressFlags'#11#8'mtpcLoad'#8'mtpcSave'#8'mtpcCopy'#0#16
+  +'LoadedCompletely'#8#15'SavedCompletely'#8#13'FilterOptions'#11#0#12'MasterF'
+  +'ields'#6#11'CodProfesor'#12'MasterSource'#7#27'SourceDataModule.DSProfesor'
+  +#7'Version'#6#4'5.52'#10'LanguageID'#2#0#6'SortID'#2#0#13'SubLanguageID'#2#1
+  +#8'LocaleID'#3#0#4#4'Left'#2'0'#3'Top'#3#147#0#0#0#12'TkbmMemTable'#14'QuPar'
+  +'aleloHora'#16'DesignActivation'#9#19'AttachedAutoRefresh'#9#14'AttachMaxCou'
+  +'nt'#2#1#9'FieldDefs'#14#1#4'Name'#6#8'CodNivel'#10'Attributes'#11#10'faRequ'
+  +'ired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#18'CodEspecializacion'#10
+  +'Attributes'#11#10'faRequired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#13
+  +'CodParaleloId'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#9'ftInteger'
+  +#0#1#4'Name'#6#7'CodHora'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#9
+  +'ftInteger'#0#1#4'Name'#6#7'NomHora'#10'Attributes'#11#10'faRequired'#0#8'Da'
+  +'taType'#7#8'ftString'#4'Size'#2#10#0#0#9'IndexDefs'#14#0#11'SortOptions'#11
+  +#0#16'PersistentBackup'#8#13'ProgressFlags'#11#8'mtpcLoad'#8'mtpcSave'#8'mtp'
+  +'cCopy'#0#16'LoadedCompletely'#8#15'SavedCompletely'#8#13'FilterOptions'#11#0
+  +#7'Version'#6#4'5.52'#10'LanguageID'#2#0#6'SortID'#2#0#13'SubLanguageID'#2#1
+  +#8'LocaleID'#3#0#4#4'Left'#2'L'#3'Top'#2'w'#0#13'TIntegerField'#22'QuParalel'
+  +'oHoraCodNivel'#9'FieldName'#6#8'CodNivel'#7'Visible'#8#0#0#13'TIntegerField'
+  +' QuParaleloHoraCodEspecializacion'#9'FieldName'#6#18'CodEspecializacion'#7
+  +'Visible'#8#0#0#13'TIntegerField'#27'QuParaleloHoraCodParaleloId'#9'FieldNam'
+  +'e'#6#13'CodParaleloId'#7'Visible'#8#0#0#13'TIntegerField'#21'QuParaleloHora'
+  +'CodHora'#9'FieldName'#6#7'CodHora'#8'Required'#9#7'Visible'#8#0#0#12'TStrin'
+  +'gField'#21'QuParaleloHoraNomHora'#12'DisplayLabel'#6#4'Hora'#9'FieldName'#6
+  +#7'NomHora'#13'LookupDataSet'#7#23'SourceDataModule.TbHora'#15'LookupKeyFiel'
+  +'ds'#6#7'CodHora'#17'LookupResultField'#6#7'NomHora'#9'KeyFields'#6#7'CodHor'
+  +'a'#8'Required'#9#4'Size'#2#10#0#0#0#12'TkbmMemTable'#14'QuProfesorHora'#16
+  +'DesignActivation'#9#19'AttachedAutoRefresh'#9#14'AttachMaxCount'#2#1#9'Fiel'
+  +'dDefs'#14#1#4'Name'#6#11'CodProfesor'#10'Attributes'#11#10'faRequired'#0#8
+  +'DataType'#7#9'ftInteger'#0#1#4'Name'#6#7'CodHora'#10'Attributes'#11#10'faRe'
+  +'quired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#7'NomHora'#10'Attributes'
   +#11#10'faRequired'#0#8'DataType'#7#8'ftString'#4'Size'#2#10#0#0#9'IndexDefs'
   +#14#0#11'SortOptions'#11#0#16'PersistentBackup'#8#13'ProgressFlags'#11#8'mtp'
   +'cLoad'#8'mtpcSave'#8'mtpcCopy'#0#16'LoadedCompletely'#8#15'SavedCompletely'
   +#8#13'FilterOptions'#11#0#7'Version'#6#4'5.52'#10'LanguageID'#2#0#6'SortID'#2
-  +#0#13'SubLanguageID'#2#1#8'LocaleID'#3#0#4#4'Left'#2'L'#3'Top'#2'w'#0#13'TIn'
-  +'tegerField'#22'QuParaleloHoraCodNivel'#9'FieldName'#6#8'CodNivel'#7'Visible'
-  +#8#0#0#13'TIntegerField QuParaleloHoraCodEspecializacion'#9'FieldName'#6#18
-  +'CodEspecializacion'#7'Visible'#8#0#0#13'TIntegerField'#27'QuParaleloHoraCod'
-  +'ParaleloId'#9'FieldName'#6#13'CodParaleloId'#7'Visible'#8#0#0#13'TIntegerFi'
-  +'eld'#21'QuParaleloHoraCodHora'#9'FieldName'#6#7'CodHora'#8'Required'#9#7'Vi'
-  +'sible'#8#0#0#12'TStringField'#21'QuParaleloHoraNomHora'#12'DisplayLabel'#6#4
-  +'Hora'#9'FieldName'#6#7'NomHora'#13'LookupDataSet'#7#23'SourceDataModule.TbH'
-  +'ora'#15'LookupKeyFields'#6#7'CodHora'#17'LookupResultField'#6#7'NomHora'#9
-  +'KeyFields'#6#7'CodHora'#8'Required'#9#4'Size'#2#10#0#0#0#12'TkbmMemTable'#14
-  +'QuProfesorHora'#16'DesignActivation'#9#19'AttachedAutoRefresh'#9#14'AttachM'
-  +'axCount'#2#1#9'FieldDefs'#14#1#4'Name'#6#11'CodProfesor'#10'Attributes'#11
-  +#10'faRequired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#7'CodHora'#10'Att'
-  +'ributes'#11#10'faRequired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#7'Nom'
-  +'Hora'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#8'ftString'#4'Size'#2
-  +#10#0#0#9'IndexDefs'#14#0#11'SortOptions'#11#0#16'PersistentBackup'#8#13'Pro'
-  +'gressFlags'#11#8'mtpcLoad'#8'mtpcSave'#8'mtpcCopy'#0#16'LoadedCompletely'#8
-  +#15'SavedCompletely'#8#13'FilterOptions'#11#0#7'Version'#6#4'5.52'#10'Langua'
-  +'geID'#2#0#6'SortID'#2#0#13'SubLanguageID'#2#1#8'LocaleID'#3#0#4#4'Left'#2'L'
-  +#3'Top'#3#147#0#0#13'TIntegerField'#25'QuProfesorHoraCodProfesor'#9'FieldNam'
-  +'e'#6#11'CodProfesor'#8'Required'#9#7'Visible'#8#0#0#13'TIntegerField'#21'Qu'
-  +'ProfesorHoraCodHora'#9'FieldName'#6#7'CodHora'#8'Required'#9#7'Visible'#8#0
-  +#0#12'TStringField'#21'QuProfesorHoraNomHora'#12'DisplayLabel'#6#4'Hora'#9'F'
-  +'ieldKind'#7#8'fkLookup'#9'FieldName'#6#7'NomHora'#13'LookupDataSet'#7#23'So'
-  +'urceDataModule.TbHora'#15'LookupKeyFields'#6#7'CodHora'#17'LookupResultFiel'
-  +'d'#6#7'NomHora'#9'KeyFields'#6#7'CodHora'#4'Size'#2#10#6'Lookup'#9#0#0#0#12
-  +'TkbmMemTable'#24'QuProfesorHorarioDetalle'#16'DesignActivation'#9#19'Attach'
-  +'edAutoRefresh'#9#14'AttachMaxCount'#2#1#9'FieldDefs'#14#1#4'Name'#6#11'CodP'
-  +'rofesor'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#9'ftInteger'#0#1#4
-  +'Name'#6#6'CodDia'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#9'ftInte'
-  +'ger'#0#1#4'Name'#6#7'CodHora'#10'Attributes'#11#10'faRequired'#0#8'DataType'
-  +#7#9'ftInteger'#0#1#4'Name'#6#6'Nombre'#10'Attributes'#11#10'faRequired'#0#8
-  +'DataType'#7#8'ftString'#4'Size'#2'('#0#0#9'IndexDefs'#14#0#11'SortOptions'
-  +#11#0#16'PersistentBackup'#8#13'ProgressFlags'#11#8'mtpcLoad'#8'mtpcSave'#8
-  +'mtpcCopy'#0#16'LoadedCompletely'#8#15'SavedCompletely'#8#13'FilterOptions'
-  +#11#0#7'Version'#6#4'5.52'#10'LanguageID'#2#0#6'SortID'#2#0#13'SubLanguageID'
-  +#2#1#8'LocaleID'#3#0#4#4'Left'#2'h'#3'Top'#3#147#0#0#13'TIntegerField#QuProf'
-  +'esorHorarioDetalleCodProfesor'#12'DisplayLabel'#6#8'Profesor'#9'FieldName'#6
-  +#11'CodProfesor'#8'Required'#9#0#0#13'TIntegerField'#30'QuProfesorHorarioDet'
-  +'alleCodDia'#12'DisplayLabel'#18#3#0#0#0'D'#0#237#0'a'#0#9'FieldName'#6#6'Co'
-  +'dDia'#8'Required'#9#0#0#13'TIntegerField'#31'QuProfesorHorarioDetalleCodHor'
-  ,'a'#12'DisplayLabel'#6#4'Hora'#9'FieldName'#6#7'CodHora'#8'Required'#9#0#0#12
-  +'TStringField'#30'QuProfesorHorarioDetalleNombre'#9'FieldName'#6#6'Nombre'#4
-  +'Size'#2'('#0#0#0#12'TkbmMemTable'#24'QuParaleloHorarioDetalle'#16'DesignAct'
-  +'ivation'#9#19'AttachedAutoRefresh'#9#14'AttachMaxCount'#2#1#9'FieldDefs'#14
-  +#1#4'Name'#6#8'CodNivel'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#9
-  +'ftInteger'#0#1#4'Name'#6#18'CodEspecializacion'#10'Attributes'#11#10'faRequ'
-  +'ired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#13'CodParaleloId'#10'Attri'
-  +'butes'#11#10'faRequired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#6'CodDi'
-  +'a'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'
-  +#6#7'CodHora'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#9'ftInteger'#0
-  +#1#4'Name'#6#10'CodMateria'#8'DataType'#7#9'ftAutoInc'#0#1#4'Name'#6#10'NomM'
-  +'ateria'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#8'ftString'#4'Size'
-  +#2#20#0#0#9'IndexDefs'#14#0#11'SortOptions'#11#0#16'PersistentBackup'#8#13'P'
-  +'rogressFlags'#11#8'mtpcLoad'#8'mtpcSave'#8'mtpcCopy'#0#16'LoadedCompletely'
-  +#8#15'SavedCompletely'#8#13'FilterOptions'#11#0#7'Version'#6#4'5.52'#10'Lang'
-  +'uageID'#2#0#6'SortID'#2#0#13'SubLanguageID'#2#1#8'LocaleID'#3#0#4#4'Left'#2
-  +'h'#3'Top'#2'w'#0#13'TIntegerField QuParaleloHorarioDetalleCodNivel'#12'Disp'
-  +'layLabel'#6#5'Nivel'#9'FieldName'#6#8'CodNivel'#8'Required'#9#0#0#13'TInteg'
-  +'erField*QuParaleloHorarioDetalleCodEspecializacion'#12'DisplayLabel'#18#15#0
-  +#0#0'E'#0's'#0'p'#0'e'#0'c'#0'i'#0'a'#0'l'#0'i'#0'z'#0'a'#0'c'#0'i'#0#243#0
-  +'n'#0#9'FieldName'#6#18'CodEspecializacion'#8'Required'#9#0#0#13'TIntegerFie'
-  +'ld%QuParaleloHorarioDetalleCodParaleloId'#12'DisplayLabel'#6#8'Paralelo'#9
-  +'FieldName'#6#13'CodParaleloId'#8'Required'#9#0#0#13'TIntegerField'#30'QuPar'
-  +'aleloHorarioDetalleCodDia'#12'DisplayLabel'#18#3#0#0#0'D'#0#237#0'a'#0#9'Fi'
-  +'eldName'#6#6'CodDia'#8'Required'#9#0#0#13'TIntegerField'#31'QuParaleloHorar'
-  +'ioDetalleCodHora'#12'DisplayLabel'#6#4'Hora'#9'FieldName'#6#7'CodHora'#8'Re'
-  +'quired'#9#0#0#13'TIntegerField"QuParaleloHorarioDetalleCodMateria'#12'Displ'
-  +'ayLabel'#6#7'Materia'#9'FieldName'#6#10'CodMateria'#8'Required'#9#0#0#12'TS'
-  +'tringField"QuParaleloHorarioDetalleNomMateria'#12'DisplayLabel'#6#7'Materia'
-  +#9'FieldKind'#7#8'fkLookup'#9'FieldName'#6#10'NomMateria'#13'LookupDataSet'#7
-  +#26'SourceDataModule.TbMateria'#15'LookupKeyFields'#6#10'CodMateria'#17'Look'
-  +'upResultField'#6#10'NomMateria'#9'KeyFields'#6#10'CodMateria'#6'Lookup'#9#0
-  +#0#0#12'TkbmMemTable'#9'TbMateria'#16'DesignActivation'#9#19'AttachedAutoRef'
-  +'resh'#9#14'AttachMaxCount'#2#1#9'FieldDefs'#14#0#9'IndexDefs'#14#0#11'SortO'
-  +'ptions'#11#0#16'PersistentBackup'#8#13'ProgressFlags'#11#8'mtpcLoad'#8'mtpc'
-  +'Save'#8'mtpcCopy'#0#16'LoadedCompletely'#8#15'SavedCompletely'#8#13'FilterO'
-  +'ptions'#11#0#7'Version'#6#4'5.52'#10'LanguageID'#2#0#6'SortID'#2#0#13'SubLa'
-  +'nguageID'#2#1#8'LocaleID'#3#0#4#14'OnFilterRecord'#7#21'TbMateriaFilterReco'
-  +'rd'#4'Left'#2'0'#3'Top'#3#184#0#0#0#12'TkbmMemTable'#27'QuMateriaMateriaPro'
-  +'hibicion'#16'DesignActivation'#9#19'AttachedAutoRefresh'#9#14'AttachMaxCoun'
-  +'t'#2#1#9'FieldDefs'#14#1#4'Name'#6#10'CodMateria'#8'DataType'#7#9'ftInteger'
-  +#0#1#4'Name'#6#10'NomMateria'#10'Attributes'#11#10'faRequired'#0#8'DataType'
-  +#7#8'ftString'#4'Size'#2#20#0#0#9'IndexDefs'#14#0#11'SortOptions'#11#0#16'Pe'
-  +'rsistentBackup'#8#13'ProgressFlags'#11#8'mtpcLoad'#8'mtpcSave'#8'mtpcCopy'#0
-  +#16'LoadedCompletely'#8#15'SavedCompletely'#8#13'FilterOptions'#11#0#7'Versi'
-  +'on'#6#4'5.52'#10'LanguageID'#2#0#6'SortID'#2#0#13'SubLanguageID'#2#1#8'Loca'
-  +'leID'#3#0#4#11'AfterScroll'#7'&QuMateriaMateriaProhibicionAfterScroll'#4'Le'
-  +'ft'#2'L'#3'Top'#3#184#0#0#13'TIntegerField%QuMateriaMateriaProhibicionCodMa'
-  +'teria'#9'FieldName'#6#10'CodMateria'#7'Visible'#8#0#0#12'TStringField%QuMat'
-  +'eriaMateriaProhibicionNomMateria'#12'DisplayLabel'#6#7'Materia'#9'FieldKind'
+  +#0#13'SubLanguageID'#2#1#8'LocaleID'#3#0#4#4'Left'#2'L'#3'Top'#3#147#0#0#13
+  +'TIntegerField'#25'QuProfesorHoraCodProfesor'#9'FieldName'#6#11'CodProfesor'
+  +#8'Required'#9#7'Visible'#8#0#0#13'TIntegerField'#21'QuProfesorHoraCodHora'#9
+  +'FieldName'#6#7'CodHora'#8'Required'#9#7'Visible'#8#0#0#12'TStringField'#21
+  +'QuProfesorHoraNomHora'#12'DisplayLabel'#6#4'Hora'#9'FieldKind'#7#8'fkLookup'
+  +#9'FieldName'#6#7'NomHora'#13'LookupDataSet'#7#23'SourceDataModule.TbHora'#15
+  +'LookupKeyFields'#6#7'CodHora'#17'LookupResultField'#6#7'NomHora'#9'KeyField'
+  +'s'#6#7'CodHora'#4'Size'#2#10#6'Lookup'#9#0#0#0#12'TkbmMemTable'#24'QuProfes'
+  +'orHorarioDetalle'#16'DesignActivation'#9#19'AttachedAutoRefresh'#9#14'Attac'
+  +'hMaxCount'#2#1#9'FieldDefs'#14#1#4'Name'#6#11'CodProfesor'#10'Attributes'#11
+  +#10'faRequired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#6'CodDia'#10'Attr'
+  +'ibutes'#11#10'faRequired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#7'CodH'
+  +'ora'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Na'
+  +'me'#6#6'Nombre'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#8'ftString'
+  +#4'Size'#2'('#0#0#9'IndexDefs'#14#0#11'SortOptions'#11#0#16'PersistentBackup'
+  +#8#13'ProgressFlags'#11#8'mtpcLoad'#8'mtpcSave'#8'mtpcCopy'#0#16'LoadedCompl'
+  +'etely'#8#15'SavedCompletely'#8#13'FilterOptions'#11#0#7'Version'#6#4'5.52'
+  +#10'LanguageID'#2#0#6'SortID'#2#0#13'SubLanguageID'#2#1#8'LocaleID'#3#0#4#4
+  +'Left'#2'h'#3'Top'#3#147#0#0#13'TIntegerField#QuProfesorHorarioDetalleCodPro'
+  +'fesor'#12'DisplayLabel'#6#8'Profesor'#9'FieldName'#6#11'CodProfesor'#8'Requ'
+  ,'ired'#9#0#0#13'TIntegerField'#30'QuProfesorHorarioDetalleCodDia'#12'Display'
+  +'Label'#18#3#0#0#0'D'#0#237#0'a'#0#9'FieldName'#6#6'CodDia'#8'Required'#9#0#0
+  +#13'TIntegerField'#31'QuProfesorHorarioDetalleCodHora'#12'DisplayLabel'#6#4
+  +'Hora'#9'FieldName'#6#7'CodHora'#8'Required'#9#0#0#12'TStringField'#30'QuPro'
+  +'fesorHorarioDetalleNombre'#9'FieldName'#6#6'Nombre'#4'Size'#2'('#0#0#0#12'T'
+  +'kbmMemTable'#24'QuParaleloHorarioDetalle'#16'DesignActivation'#9#19'Attache'
+  +'dAutoRefresh'#9#14'AttachMaxCount'#2#1#9'FieldDefs'#14#1#4'Name'#6#8'CodNiv'
+  +'el'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Nam'
+  +'e'#6#18'CodEspecializacion'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7
+  +#9'ftInteger'#0#1#4'Name'#6#13'CodParaleloId'#10'Attributes'#11#10'faRequire'
+  +'d'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#6'CodDia'#10'Attributes'#11#10
+  +'faRequired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#7'CodHora'#10'Attrib'
+  +'utes'#11#10'faRequired'#0#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#10'CodMa'
+  +'teria'#8'DataType'#7#9'ftAutoInc'#0#1#4'Name'#6#10'NomMateria'#10'Attribute'
+  +'s'#11#10'faRequired'#0#8'DataType'#7#8'ftString'#4'Size'#2#20#0#0#9'IndexDe'
+  +'fs'#14#0#11'SortOptions'#11#0#16'PersistentBackup'#8#13'ProgressFlags'#11#8
+  +'mtpcLoad'#8'mtpcSave'#8'mtpcCopy'#0#16'LoadedCompletely'#8#15'SavedComplete'
+  +'ly'#8#13'FilterOptions'#11#0#7'Version'#6#4'5.52'#10'LanguageID'#2#0#6'Sort'
+  +'ID'#2#0#13'SubLanguageID'#2#1#8'LocaleID'#3#0#4#4'Left'#2'h'#3'Top'#2'w'#0
+  +#13'TIntegerField QuParaleloHorarioDetalleCodNivel'#12'DisplayLabel'#6#5'Niv'
+  +'el'#9'FieldName'#6#8'CodNivel'#8'Required'#9#0#0#13'TIntegerField*QuParalel'
+  +'oHorarioDetalleCodEspecializacion'#12'DisplayLabel'#18#15#0#0#0'E'#0's'#0'p'
+  +#0'e'#0'c'#0'i'#0'a'#0'l'#0'i'#0'z'#0'a'#0'c'#0'i'#0#243#0'n'#0#9'FieldName'
+  +#6#18'CodEspecializacion'#8'Required'#9#0#0#13'TIntegerField%QuParaleloHorar'
+  +'ioDetalleCodParaleloId'#12'DisplayLabel'#6#8'Paralelo'#9'FieldName'#6#13'Co'
+  +'dParaleloId'#8'Required'#9#0#0#13'TIntegerField'#30'QuParaleloHorarioDetall'
+  +'eCodDia'#12'DisplayLabel'#18#3#0#0#0'D'#0#237#0'a'#0#9'FieldName'#6#6'CodDi'
+  +'a'#8'Required'#9#0#0#13'TIntegerField'#31'QuParaleloHorarioDetalleCodHora'
+  +#12'DisplayLabel'#6#4'Hora'#9'FieldName'#6#7'CodHora'#8'Required'#9#0#0#13'T'
+  +'IntegerField"QuParaleloHorarioDetalleCodMateria'#12'DisplayLabel'#6#7'Mater'
+  +'ia'#9'FieldName'#6#10'CodMateria'#8'Required'#9#0#0#12'TStringField"QuParal'
+  +'eloHorarioDetalleNomMateria'#12'DisplayLabel'#6#7'Materia'#9'FieldKind'#7#8
+  +'fkLookup'#9'FieldName'#6#10'NomMateria'#13'LookupDataSet'#7#26'SourceDataMo'
+  +'dule.TbMateria'#15'LookupKeyFields'#6#10'CodMateria'#17'LookupResultField'#6
+  +#10'NomMateria'#9'KeyFields'#6#10'CodMateria'#6'Lookup'#9#0#0#0#12'TkbmMemTa'
+  +'ble'#9'TbMateria'#16'DesignActivation'#9#19'AttachedAutoRefresh'#9#14'Attac'
+  +'hMaxCount'#2#1#9'FieldDefs'#14#0#15'IndexFieldNames'#6#10'CodMateria'#9'Ind'
+  +'exDefs'#14#0#11'SortOptions'#11#0#16'PersistentBackup'#8#13'ProgressFlags'
+  +#11#8'mtpcLoad'#8'mtpcSave'#8'mtpcCopy'#0#16'LoadedCompletely'#8#15'SavedCom'
+  +'pletely'#8#13'FilterOptions'#11#0#12'MasterFields'#6#10'CodMateria'#12'Mast'
+  +'erSource'#7#27'DSMateriaMateriaProhibicion'#7'Version'#6#4'5.52'#10'Languag'
+  +'eID'#2#0#6'SortID'#2#0#13'SubLanguageID'#2#1#8'LocaleID'#3#0#4#4'Left'#2'0'
+  +#3'Top'#3#184#0#0#0#12'TkbmMemTable'#27'QuMateriaMateriaProhibicion'#16'Desi'
+  +'gnActivation'#9#19'AttachedAutoRefresh'#9#14'AttachMaxCount'#2#1#9'FieldDef'
+  +'s'#14#1#4'Name'#6#10'CodMateria'#8'DataType'#7#9'ftInteger'#0#1#4'Name'#6#10
+  +'NomMateria'#10'Attributes'#11#10'faRequired'#0#8'DataType'#7#8'ftString'#4
+  +'Size'#2#20#0#0#9'IndexDefs'#14#0#11'SortOptions'#11#0#16'PersistentBackup'#8
+  +#13'ProgressFlags'#11#8'mtpcLoad'#8'mtpcSave'#8'mtpcCopy'#0#16'LoadedComplet'
+  +'ely'#8#15'SavedCompletely'#8#13'FilterOptions'#11#0#7'Version'#6#4'5.52'#10
+  +'LanguageID'#2#0#6'SortID'#2#0#13'SubLanguageID'#2#1#8'LocaleID'#3#0#4#4'Lef'
+  +'t'#2'L'#3'Top'#3#184#0#0#13'TIntegerField%QuMateriaMateriaProhibicionCodMat'
+  +'eria'#9'FieldName'#6#10'CodMateria'#7'Visible'#8#0#0#12'TStringField%QuMate'
+  +'riaMateriaProhibicionNomMateria'#12'DisplayLabel'#6#7'Materia'#9'FieldKind'
   +#7#8'fkLookup'#9'FieldName'#6#10'NomMateria'#13'LookupDataSet'#7#26'SourceDa'
   +'taModule.TbMateria'#15'LookupKeyFields'#6#10'CodMateria'#17'LookupResultFie'
   +'ld'#6#10'NomMateria'#9'KeyFields'#6#10'CodMateria'#6'Lookup'#9#0#0#0#12'Tkb'
@@ -1468,10 +1471,10 @@ LazarusResources.Add('TMainForm','FORMDATA',[
   +#0#16'PersistentBackup'#8#13'ProgressFlags'#11#8'mtpcLoad'#8'mtpcSave'#8'mtp'
   +'cCopy'#0#16'LoadedCompletely'#8#15'SavedCompletely'#8#13'FilterOptions'#11#0
   +#7'Version'#6#4'5.52'#10'LanguageID'#2#0#6'SortID'#2#0#13'SubLanguageID'#2#1
-  +#8'LocaleID'#3#0#4#4'Left'#2'h'#3'Top'#3#184#0#0#13'TIntegerField)QuMateriaM'
+  ,#8'LocaleID'#3#0#4#4'Left'#2'h'#3'Top'#3#184#0#0#13'TIntegerField)QuMateriaM'
   +'ateriaProhibicionHoraCodMateria'#9'FieldName'#6#10'CodMateria'#7'Visible'#8
   +#0#0#13'TIntegerField&QuMateriaMateriaProhibicionHoraCodHora'#9'FieldName'#6
-  ,#7'CodHora'#7'Visible'#8#0#0#12'TStringField&QuMateriaMateriaProhibicionHora'
+  +#7'CodHora'#7'Visible'#8#0#0#12'TStringField&QuMateriaMateriaProhibicionHora'
   +'NomHora'#12'DisplayLabel'#6#4'Hora'#9'FieldKind'#7#8'fkLookup'#9'FieldName'
   +#6#7'NomHora'#13'LookupDataSet'#7#23'SourceDataModule.TbHora'#15'LookupKeyFi'
   +'elds'#6#7'CodHora'#17'LookupResultField'#6#7'NomHora'#9'KeyFields'#6#7'CodH'
@@ -1513,13 +1516,17 @@ LazarusResources.Add('TMainForm','FORMDATA',[
   +'(QuProfesorProfesorProhibicionHoraNomHora'#12'DisplayLabel'#6#4'Hora'#9'Fie'
   +'ldName'#6#7'NomHora'#8'Required'#9#4'Size'#2#10#0#0#0#12'TkbmMemTable'#11'T'
   +'bProfesor1'#16'DesignActivation'#9#19'AttachedAutoRefresh'#9#14'AttachMaxCo'
-  +'unt'#2#1#9'FieldDefs'#14#0#9'IndexDefs'#14#0#11'SortOptions'#11#0#16'Persis'
-  +'tentBackup'#8#13'ProgressFlags'#11#8'mtpcLoad'#8'mtpcSave'#8'mtpcCopy'#0#16
-  +'LoadedCompletely'#8#15'SavedCompletely'#8#13'FilterOptions'#11#0#7'Version'
-  +#6#4'5.52'#10'LanguageID'#2#0#6'SortID'#2#0#13'SubLanguageID'#2#1#8'LocaleID'
-  +#3#0#4#14'OnFilterRecord'#7#23'TbProfesor1FilterRecord'#4'Left'#2'0'#3'Top'#3
-  +#212#0#0#0#11'TSaveDialog'#13'SaveDialogCSV'#10'DefaultExt'#6#3'csv'#6'Filte'
-  +'r'#6'%CSV delimitado por comas(*.csv)|*.csv'#7'Options'#11#17'ofOverwritePr'
-  +'ompt'#14'ofHideReadOnly'#14'ofEnableSizing'#0#4'Left'#3#158#0#3'Top'#2'H'#0
-  +#0#0
+  +'unt'#2#1#9'FieldDefs'#14#0#15'IndexFieldNames'#6#11'CodProfesor'#9'IndexDef'
+  +'s'#14#0#11'SortOptions'#11#0#16'PersistentBackup'#8#13'ProgressFlags'#11#8
+  +'mtpcLoad'#8'mtpcSave'#8'mtpcCopy'#0#16'LoadedCompletely'#8#15'SavedComplete'
+  +'ly'#8#13'FilterOptions'#11#0#12'MasterFields'#6#11'CodProfesor'#12'MasterSo'
+  +'urce'#7#29'DSProfesorProfesorProhibicion'#7'Version'#6#4'5.52'#10'LanguageI'
+  +'D'#2#0#6'SortID'#2#0#13'SubLanguageID'#2#1#8'LocaleID'#3#0#4#4'Left'#2'0'#3
+  +'Top'#3#212#0#0#0#11'TSaveDialog'#13'SaveDialogCSV'#10'DefaultExt'#6#3'csv'#6
+  +'Filter'#6'%CSV delimitado por comas(*.csv)|*.csv'#7'Options'#11#17'ofOverwr'
+  +'itePrompt'#14'ofHideReadOnly'#14'ofEnableSizing'#0#4'Left'#3#158#0#3'Top'#2
+  +'H'#0#0#11'TDataSource'#29'DSProfesorProfesorProhibicion'#7'DataSet'#7#29'Qu'
+  +'ProfesorProfesorProhibicion'#4'Left'#2'L'#3'Top'#3#240#0#0#0#11'TDataSource'
+  +#27'DSMateriaMateriaProhibicion'#7'DataSet'#7#27'QuMateriaMateriaProhibicion'
+  +#4'Left'#2'h'#3'Top'#3#240#0#0#0#0
 ]);

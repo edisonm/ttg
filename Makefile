@@ -114,6 +114,7 @@ srclaz:
 	cd srclaz ; find . -name "*.lfm" -exec str_replace "    SubLanguageID = .*" "" {} \;
 	cd srclaz ; find . -name "*.lfm" -exec str_replace "    LocaleID = .*" "" {} \;
 	cd srclaz ; find . -name "*.lfm" -exec str_replace "    FilterOptions = .*" "" {} \;
+	cd srclaz ; find . -name "*.lfm" -exec str_replace "      Lookup = .*" "" {} \;
 
 srclazclean:
 	for i in $(UNITS) $(FORMS) ; do \

@@ -117,7 +117,13 @@ var
   i: Integer;
 begin
   for i := Low(FTables) to High(FTables) do
-    (FTables[i] as TSqlite3Dataset).EmptyTable;
+  begin
+    with (FTables[i] as TSqlite3Dataset) do
+    begin
+      Close;
+      Open;
+    end;
+  end;
 end;
 
 procedure TBaseDataModule.DataModuleCreate(Sender: TObject);
