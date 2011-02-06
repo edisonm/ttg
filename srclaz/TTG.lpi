@@ -5,7 +5,6 @@
     <General>
       <MainUnit Value="0"/>
       <TargetFileExt Value=""/>
-      <Icon Value="0"/>
       <UseXPManifest Value="True"/>
       <ActiveEditorIndexAtStart Value="0"/>
     </General>
@@ -40,17 +39,18 @@
         <EditorIndex Value="0"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
-        <SyntaxHighlighter Value="Delphi"/>
       </Unit0>
       <Unit1>
         <Filename Value="FMain.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit1>
       <Unit2>
         <Filename Value="DMaster.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit2>
@@ -69,6 +69,7 @@
       <Unit5>
         <Filename Value="FProgres.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit5>
@@ -93,42 +94,49 @@
       <Unit9>
         <Filename Value="FCrsMMEd.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit9>
       <Unit10>
         <Filename Value="FCrsMME0.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit10>
       <Unit11>
         <Filename Value="FCrsMME1.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit11>
       <Unit12>
         <Filename Value="FCrsMMER.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit12>
       <Unit13>
         <Filename Value="FEditor.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit13>
       <Unit14>
         <Filename Value="FMateria.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit14>
       <Unit15>
         <Filename Value="FProfesr.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit15>
@@ -147,54 +155,63 @@
       <Unit18>
         <Filename Value="FConfig.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit18>
       <Unit19>
         <Filename Value="FLogstic.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit19>
       <Unit20>
         <Filename Value="FHorPara.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit20>
       <Unit21>
         <Filename Value="FMasDeEd.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit21>
       <Unit22>
         <Filename Value="FHorAulT.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit22>
       <Unit23>
         <Filename Value="FSplash.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit23>
       <Unit24>
         <Filename Value="FParalel.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit24>
       <Unit25>
         <Filename Value="FSingEdt.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit25>
       <Unit26>
         <Filename Value="FHorario.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit26>
@@ -207,12 +224,14 @@
       <Unit28>
         <Filename Value="FHorProf.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit28>
       <Unit29>
         <Filename Value="DSrcBase.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit29>
@@ -225,18 +244,21 @@
       <Unit31>
         <Filename Value="DSource.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit31>
       <Unit32>
         <Filename Value="FSelPeIn.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit32>
       <Unit33>
         <Filename Value="DBase.pas"/>
         <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
         <UsageCount Value="20"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit33>

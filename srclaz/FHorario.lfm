@@ -756,7 +756,7 @@ inherited HorarioForm: THorarioForm
 
 
 
-    FilterOptions = []
+
 
 
 
@@ -883,7 +883,7 @@ inherited HorarioForm: THorarioForm
 
 
 
-    FilterOptions = []
+
     MasterFields = 'CodAulaTipo;CodDia;CodHora'
     MasterSource = DSCruceAula
 
@@ -1032,7 +1032,7 @@ inherited HorarioForm: THorarioForm
 
 
 
-    FilterOptions = []
+
 
 
 
@@ -1184,7 +1184,7 @@ inherited HorarioForm: THorarioForm
 
 
 
-    FilterOptions = []
+
 
 
 
@@ -1280,7 +1280,7 @@ inherited HorarioForm: THorarioForm
 
 
 
-    FilterOptions = []
+
 
 
 
@@ -1371,7 +1371,7 @@ inherited HorarioForm: THorarioForm
 
 
 
-    FilterOptions = []
+
 
 
 
@@ -1551,7 +1551,7 @@ inherited HorarioForm: THorarioForm
 
 
 
-    FilterOptions = []
+
 
 
 
@@ -1750,7 +1750,7 @@ inherited HorarioForm: THorarioForm
 
 
 
-    FilterOptions = []
+
 
 
 
@@ -1949,7 +1949,7 @@ inherited HorarioForm: THorarioForm
 
 
 
-    FilterOptions = []
+
 
 
 
@@ -2090,7 +2090,7 @@ inherited HorarioForm: THorarioForm
 
 
 
-    FilterOptions = []
+
 
 
 
@@ -2214,7 +2214,7 @@ inherited HorarioForm: THorarioForm
 
 
 
-    FilterOptions = []
+
     MasterFields = 'CodDia;CodHora'
     MasterSource = DSMateriaCortadaHora
 
@@ -2455,7 +2455,7 @@ inherited HorarioForm: THorarioForm
 
 
 
-    FilterOptions = []
+
 
 
 
