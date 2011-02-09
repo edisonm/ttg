@@ -74,9 +74,10 @@ begin
   {$IFDEF FPC}
   with QuHorarioProfesor do
   begin
+    Close;
     TableName := 'HorarioProfesorTmp';
     IndexFieldNames := 'CodProfesor';
-    if not Exists then CreateTable;
+    if not TableExists then CreateTable;
   end;
   {$ELSE}
   QuHorarioProfesor.AddIndex('QuHorarioProfesorIndex1', 'CodProfesor', []);
@@ -116,7 +117,6 @@ begin
     begin
       TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
       try
-        QuHorarioProfesor.EmptyTable;
         TbDistributivo.First;
         while (TbHorarioDetalleCodHorario.Value = CodHorario)
 	    and not TbHorarioDetalle.Eof do

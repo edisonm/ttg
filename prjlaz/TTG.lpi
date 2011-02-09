@@ -100,7 +100,9 @@
       <Unit9>
         <Filename Value="FCrsMMEd.pp"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="CrossManyToManyEditorForm"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit9>
@@ -114,7 +116,9 @@
       <Unit11>
         <Filename Value="FCrsMME1.pp"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="CrossManyToManyEditor1Form"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit11>
@@ -128,7 +132,9 @@
       <Unit13>
         <Filename Value="FEditor.pp"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="EditorForm"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit13>
@@ -234,8 +240,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FHorProf"/>
-        <CursorPos X="3" Y="153"/>
-        <TopLine Value="145"/>
+        <CursorPos X="1" Y="79"/>
+        <TopLine Value="74"/>
         <EditorIndex Value="2"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
@@ -297,7 +303,7 @@
         <Loaded Value="True"/>
       </Unit34>
     </Units>
-    <JumpHistory Count="3" HistoryIndex="2">
+    <JumpHistory Count="6" HistoryIndex="5">
       <Position1>
         <Filename Value="FMain.pp"/>
         <Caret Line="1" Column="1" TopLine="1"/>
@@ -310,6 +316,18 @@
         <Filename Value="FHorProf.pp"/>
         <Caret Line="73" Column="65" TopLine="65"/>
       </Position3>
+      <Position4>
+        <Filename Value="FHorProf.pp"/>
+        <Caret Line="153" Column="3" TopLine="145"/>
+      </Position4>
+      <Position5>
+        <Filename Value="FHorProf.pp"/>
+        <Caret Line="79" Column="19" TopLine="70"/>
+      </Position5>
+      <Position6>
+        <Filename Value="FHorProf.pp"/>
+        <Caret Line="91" Column="15" TopLine="86"/>
+      </Position6>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

@@ -141,6 +141,7 @@ LAZARUSFILES=$(addprefix src/, $(BASELAZFILES))
 srclaz: $(LAZARUSFILES)
 
 prjlaz: srclaz
+	cp src/TTG.inc prjlaz/TTG.inc
 	mv $(LAZARUSFILES) prjlaz/
 
 srclazclean:
