@@ -47,7 +47,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMain"/>
-        <CursorPos X="43" Y="12"/>
+        <CursorPos X="90" Y="9"/>
         <TopLine Value="1"/>
         <EditorIndex Value="1"/>
         <UsageCount Value="20"/>
