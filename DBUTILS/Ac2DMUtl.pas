@@ -8,13 +8,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, DBCtrls, DAO_TLB, kbmMemTable;
+  Db, StdCtrls, DBCtrls, DAO_TLB;
 
 type
   EInitAc2PxUtl = class(Exception);
 
 procedure AccessToDataModule(AccessFileName, DataModuleName,
-  DataModuleFileName: string;
+  DataModuleFileName, ADataSetClass, AUnits: string;
   ACreateDataSource, // Create TDataSource components
   ACreateSrcIndexes, // Code in .pas
   ACreateIndexDefs,  // Code in .dfm
@@ -119,15 +119,14 @@ begin
 end;
 
 procedure ConvertAccessToDataModule(DBAcc: Database; const DataModuleName,
-  DataModuleFileName: string;
+  DataModuleFileName, ADataSetClass, AUnits: string;
   ACreateDataSource, // Create TDataSource components
   ACreateSrcIndexes, // Code in .pas
   ACreateIndexDefs,  // Code in .dfm
   ACreateSrcFields,  // Code in .pas
   ACreateFieldDefs,  // Code in .dfm
   ACreateDfmFields,  // Code in .dfm
-  ACreateSrcRels,    // Code in .src
-  ALazarusFrm: Boolean;
+  ACreateSrcRels: Boolean;
   StringDFM, StringPAS, Msgs: TStrings);
 var
   VTableDef: TableDef;
@@ -372,7 +371,7 @@ var
 
 var
   i, j, k: Smallint;
-  s, d, DatasetClass: string;
+  s, d: string;
   ProcDefs, ProcImpl: TStrings;
   MasterRels, DetailRels: array of TList; // TList used as Integer list
 begin
@@ -395,20 +394,19 @@ begin
     Add('interface');
     Add('');
     Add('uses');
-    if ALazarusFrm then
-      Add('  LResources, Sqlite3DS,')
-    else
-      Add('  Windows, KbmMemTable,');
+    Add('{$IFDEF FPC}');
+    Add('  LResources,');
+    Add('{$ELSE}');
+    Add('  Windows,');
+    Add('{$ENDIF}');
     Add('  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,');
+    if AUnits <> '' then
+      Add('  ' + AUnits + ',');
     Add('  DBase;');
     Add('');
     Add('type');
     Add(Format('  T%s = class(TBaseDataModule)', [DataModuleName]));
   end;
-  if ALazarusFrm then
-    DataSetClass := 'Sqlite3Dataset'
-  else
-    DataSetClass := 'kbmMemTable';
   StringDFM.Add(Format('inherited %s: T%s', [DataModuleName, DataModuleName]));
   Msgs.Clear;
   Msgs.BeginUpdate;
@@ -442,8 +440,8 @@ begin
           VTableDef := TableDefs.Item[VTableName];
           // VTableDef := TableDefs.Item[i];
           // VTableName := VTableDef.Name;
-          StringPAS.Add(Format('    Tb%s: T%s;', [VTableName, DataSetClass]));
-          StringDFM.Add(Format('  object Tb%s: T%s', [VTableName, DataSetClass]));
+          StringPAS.Add(Format('    Tb%s: T%s;', [VTableName, ADataSetClass]));
+          StringDFM.Add(Format('  object Tb%s: T%s', [VTableName, ADataSetClass]));
           StringDFM.Add(Format('    Tag = %d', [i]));
           if ACreateFieldDefs then
             CreateFieldDefs
@@ -625,7 +623,7 @@ begin
 end;
 
 procedure AccessToDataModule(AccessFileName, DataModuleName,
-  DataModuleFileName: string;
+  DataModuleFileName, ADataSetClass, AUnits: string;
   ACreateDataSource, // Create TDataSource components
   ACreateSrcIndexes, // Code in .pas
   ACreateIndexDefs,  // Code in .dfm
@@ -648,8 +646,8 @@ begin
     DBAcc := Engine.OpenDatabase(AccessFileName, 0, true, '');
     try
       ConvertAccessToDataModule(DBAcc, DataModuleName, DataModuleFileName,
-        ACreateDataSource, ACreateSrcIndexes, ACreateIndexDefs, ACreateSrcFields,
-        ACreateFieldDefs, ACreateDfmFields, ACreateSrcRels, ALazarusFrm,
+        ADataSetClass, AUnits, ACreateDataSource, ACreateSrcIndexes, ACreateIndexDefs, ACreateSrcFields,
+        ACreateFieldDefs, ACreateDfmFields, ACreateSrcRels,
         StringDFM, StringPAS, Msgs);
     finally
       DBAcc.Close;

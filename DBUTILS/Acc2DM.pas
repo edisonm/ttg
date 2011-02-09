@@ -24,7 +24,7 @@ var
   CreateSrcRels,
   LazarusFrm: Boolean;
   iPos: Integer;
-  Option, Options: string;
+  Option, Options, DataSetClass, Units: string;
 begin
   if (ParamCount = 4) or (ParamCount = 5) then
   begin
@@ -35,8 +35,12 @@ begin
     CreateSrcIndexes := False;
     CreateIndexDefs := False;
     CreateSrcFields := False;
+    CreateDfmFields := False;
     CreateFieldDefs := False;
     CreateSrcRels := False;
+    LazarusFrm := False;
+    DataSetClass := 'Table';
+    Units := '';
     if ParamCount = 5 then
     begin
       iPos := 1;
@@ -49,13 +53,18 @@ begin
         else if Option = 'cid' then CreateIndexDefs := True
         else if Option = 'csf' then CreateSrcFields := True
         else if Option = 'cfd' then CreateFieldDefs := True
+        else if Option = 'cdf' then CreateDfmFields := True
         else if Option = 'csr' then CreateSrcRels := True
-        else if Option = 'lfm' then LazarusFrm := True;
+        else if Option = 'lfm' then LazarusFrm := True
+        else if StrPos(PChar(Option), 'DS=') <> nil then
+          DataSetClass := Copy(Option, 4, Length(Option) - 3)
+        else if StrPos(PChar(Option), 'U=') <> nil then
+          Units := Copy(Option, 3, Length(Option) - 2);
         // else invalid option
       end;
     end;
     try
-      AccessToDataModule(ParamStr(2), ParamStr(3), ParamStr(4),
+      AccessToDataModule(ParamStr(2), ParamStr(3), ParamStr(4), DataSetClass, Units,
         CreateDataSource, CreateSrcIndexes, CreateIndexDefs, CreateSrcFields,
         CreateFieldDefs, CreateDfmFields, CreateSrcRels, LazarusFrm, Msgs);
       if Msgs.Count > 0 then

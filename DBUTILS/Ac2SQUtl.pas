@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, DBCtrls, DAO_TLB, kbmMemTable;
+  Db, StdCtrls, DBCtrls, DAO_TLB;
 
 procedure AccessToSQL(AccessFileName, SQLFileName: string; Msgs: TStrings);
 

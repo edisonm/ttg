@@ -60,10 +60,10 @@ $(DBUTILS): DBUTILS/$(DBUTILSDPR)
 	cd DBUTILS; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
 
 $(DSRCBASE).pas: $(DBUTILS) $(TTGMDB)
-	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule '$(shell cygpath -w $(DSRCBASE))' 'csi;cfd;cdf;csr;cds'
+	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule '$(shell cygpath -w $(DSRCBASE))' 'csi;cfd;cdf;csr;cds;U=kbmMemTable;DS=kbmMemTable'
 
 $(DLAZBASE).pas: $(DBUTILS) $(TTGMDB)
-	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule '$(shell cygpath -w $(DLAZBASE))' 'cfd;cdf;cds;lfm'
+	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule '$(shell cygpath -w $(DLAZBASE))' 'cfd;cdf;cds;lfm;U=Sqlite3DS;DS=Sqlite3Dataset'
 
 $(TTGSQL): $(DBUTILS) $(TTGMDB)
 	$(DBUTILS) /ACC2SQL $(TTGMDB) '$(shell cygpath -w $@)'
