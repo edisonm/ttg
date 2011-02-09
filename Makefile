@@ -133,8 +133,8 @@ clean:
 
 LAZARUSFILES=$(addprefix src/, \
 	  $(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS)) \
-	  $(addsuffix .lfm, $(FORMS) $(DLAZBASE)) \
-	  $(addsuffix .lrs, $(FORMS) $(DLAZBASE)) TTG.lpr)
+	  $(addsuffix .lfm, $(FORMS) $(DSRCBASE)) \
+	  $(addsuffix .lrs, $(FORMS) $(DSRCBASE)) TTG.lpr)
 
 srclaz: $(LAZARUSFILES)
 
