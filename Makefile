@@ -60,13 +60,13 @@ $(DBUTILS): DBUTILS/$(DBUTILSDPR)
 	cd DBUTILS; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
 
 src/$(DSRCBASE).pas: $(DBUTILS) $(TTGMDB)
-	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule '$(shell cygpath -w $(DSRCBASE))' 'csi;cfd;cdf;csr;cds;U=kbmMemTable;DS=kbmMemTable'
+	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule $(DSRCBASE) 'csi;cfd;cdf;csr;cds;U=kbmMemTable;DS=kbmMemTable'
 
 src/$(DSRCBASE).pp: $(DBUTILS) $(TTGMDB)
-	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule '$(shell cygpath -w $(DLAZBASE))' 'cfd;cdf;cds;lfm;U=Sqlite3DS;DS=Sqlite3Dataset'
+	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule $(DSRCBASE) 'cfd;cdf;cds;lfm;U=Sqlite3DS;DS=Sqlite3Dataset'
 
 $(TTGSQL): $(DBUTILS) $(TTGMDB)
-	$(DBUTILS) /ACC2SQL $(TTGMDB) '$(shell cygpath -w $@)'
+	$(DBUTILS) /ACC2SQL $(TTGMDB) $@
 
 $(TTGSQLITE3): $(TTGSQL)
 	$(RM) $@
@@ -126,7 +126,7 @@ clean:
 	  -e s:"      Calculated = .*":"":g $< > $@
 
 %.lrs: %.lfm
-	$(LAZRES) $< $@
+	$(LAZRES) $@ $<
 
 %.lpr: %.dpr
 	sed -e s:"\.pas":"\.pp":g $< > $@

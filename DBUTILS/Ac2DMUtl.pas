@@ -636,7 +636,7 @@ procedure AccessToDataModule(AccessFileName, DataModuleName,
 var
   DBAcc: Database;
   StringDFM, StringPAS: TStrings;
-  FormExtension: string;
+  FormExtension, UnitExtension: string;
 begin
   if not Assigned(Engine) then
     Engine := CoDBEngine.Create;
@@ -653,11 +653,17 @@ begin
       DBAcc.Close;
     end;
     if ALazarusFrm then
-      FormExtension := '.lfm'
+    begin
+      FormExtension := '.lfm';
+      UnitExtension := '.pp';
+    end
     else
+    begin
       FormExtension := '.dfm';
+      UnitExtension := '.pas';
+    end;
     StringDFM.SaveToFile(DataModuleFileName + FormExtension);
-    StringPAS.SaveToFile(DataModuleFileName + '.pas');
+    StringPAS.SaveToFile(DataModuleFileName + UnitExtension);
   finally
     StringDFM.Free;
     StringPAS.Free;
