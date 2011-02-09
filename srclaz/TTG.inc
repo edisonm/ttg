@@ -1,5 +1,0 @@
-{$IFDEF FPC}
-{$MODE Delphi}
-{$ENDIF}
-
-{$DEFINE FREEWARE}
