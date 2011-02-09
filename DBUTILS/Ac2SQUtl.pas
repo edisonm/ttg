@@ -51,7 +51,8 @@ procedure ConvertAccessToSQL(DBAcc: Database; StringSQL, Msgs: TStrings);
         with Item[j] do
         begin
           if (Attributes and dbAutoIncrField) <> 0 then
-            DataTypeName := 'AUTOINC_INT'
+            {DataTypeName := 'AUTOINC_INT'}
+            DataTypeName := 'INTEGER'
           else
             DataTypeName := Acc2SQLDataType[type_];
           S := Format('    ''%s'' %s', [name, DataTypeName]);
@@ -72,8 +73,8 @@ procedure ConvertAccessToSQL(DBAcc: Database; StringSQL, Msgs: TStrings);
                 S := S + ' PRIMARY KEY';
                 if VTableDef.Indexes[j].Fields.Item[0].Attributes = dbDescending then
                   S := S + ' DESC';
-                {if (Attributes and dbAutoIncrField) <> 0 then
-                  S := S + ' AUTOINCREMENT'}
+                if (Attributes and dbAutoIncrField) <> 0 then
+                  S := S + ' AUTOINCREMENT'
               end
               else if VTableDef.Indexes[k].Unique then
               begin

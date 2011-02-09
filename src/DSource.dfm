@@ -162,7 +162,6 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbParalelo: TkbmMemTable
-    OnCalcFields = TbParaleloCalcFields
     inherited TbParaleloCodParalelo: TAutoIncField
       Visible = False
     end
@@ -239,7 +238,6 @@ inherited SourceDataModule: TSourceDataModule
         DataType = ftString
         Size = 15
       end>
-    OnCalcFields = TbProfesorCalcFields
     inherited TbProfesorCodProfesor: TAutoIncField
       Visible = False
     end
@@ -323,7 +321,6 @@ inherited SourceDataModule: TSourceDataModule
     IndexFieldNames = 'CodProfesor'
     MasterFields = 'CodProfesor'
     MasterSource = DSProfesor
-    OnCalcFields = TbDistributivoCalcFields
     inherited TbDistributivoCodMateria: TIntegerField
       Visible = False
     end

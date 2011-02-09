@@ -81,6 +81,7 @@ end;
 procedure THorarioParaleloForm.FormCreate(Sender: TObject);
 begin
   inherited;
+  QuHorarioParalelo.OnCalcFields := QuHorarioParaleloCalcFields;
   QuHorarioParalelo.AddIndex('QuHorarioParaleloIxParalelo', 'CodNivel;CodEspecializacion;CodParaleloId', []);
   SourceDataModule.TbParalelo.First;
   QuHorarioParalelo.Open;

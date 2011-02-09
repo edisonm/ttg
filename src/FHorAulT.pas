@@ -105,6 +105,7 @@ end;
 procedure THorarioAulaTipoForm.FormCreate(Sender: TObject);
 begin
   inherited;
+  QuHorarioAulaTipo.OnCalcFields := QuHorarioAulaTipoCalcFields;
   QuHorarioAulaTipo.AddIndex('QuHorarioAulaTipoIxCodAulaTipo', 'CodAulaTipo', []);
   CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
   cbVerAulaTipo.Items.Clear;

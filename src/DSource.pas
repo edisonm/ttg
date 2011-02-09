@@ -26,10 +26,10 @@ type
     TbParaleloAbrEspecializacion: TStringField;
     TbParaleloNomParaleloId: TStringField;
     TbParaleloNomParalelo: TStringField;
-    procedure TbProfesorCalcFields(DataSet: TDataSet);
     procedure TbDistributivoBeforePost(DataSet: TDataSet);
-    procedure TbDistributivoCalcFields(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
+    procedure TbProfesorCalcFields(DataSet: TDataSet);
+    procedure TbDistributivoCalcFields(DataSet: TDataSet);
     procedure TbParaleloCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
@@ -383,6 +383,9 @@ end;
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
+  TbProfesor.OnCalcFields := TbProfesorCalcFields;
+  TbDistributivo.OnCalcFields := TbDistributivoCalcFields;
+  TbParalelo.OnCalcFields := TbParaleloCalcFields;
   FConfigStorage := TConfigStorage.Create(Self);
   OpenTables;
   NewDataBase;

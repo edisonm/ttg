@@ -70,6 +70,7 @@ end;
 procedure THorarioProfesorForm.FormCreate(Sender: TObject);
 begin
   inherited;
+  QuHorarioProfesor.OnCalcFields := QuHorarioProfesorCalcFields;
   QuHorarioProfesor.AddIndex('QuHorarioProfesorIndex1', 'CodProfesor', []);
   QuHorarioProfesor.Open;
   CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
