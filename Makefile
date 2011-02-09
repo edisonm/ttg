@@ -8,7 +8,6 @@ INSTALLER=$(TTGDIR)/bin/TTGSETUP.exe
 TTGEXE=$(TTGDIR)/bin/TTG.exe
 DBUTILS=$(TTGDIR)/bin/DBUTILS.exe
 DCC32="c:/archivos de programa/CodeGear/RAD Studio/5.0/bin/dcc32"
-LAZRES="c:/lazarus/tools/lazres"
 DCC32OPTS= \
 	-E'$(shell cygpath -w $(TTGDIR)/bin)' \
 	-U'$(shell cygpath -w $(TTGDIR)/../kbmMemTable552/Source)' \
@@ -18,7 +17,14 @@ DBUTILSDPR=DBUTILS.dpr
 TTGMDB=dat/TTG.mdb
 TTGSQL=dat/TTG.sql
 TTGSQLITE3=dat/TTG.db
+
+ifneq ($(shell uname -s),Linux)
 DSRCBASE=DSrcBase
+LAZRES="c:/lazarus/tools/lazres"
+else
+LAZRES=lazres
+endif
+
 ABOUTPAS=src/About.pas
 
 UNITS=KerModel RelUtils HorColCm TTGUtls Rand SortAlgs About KerEvolE	\
@@ -81,24 +87,19 @@ clean:
 
 .PHONY: srclaz
 
-.SUFFIXES: .lrs .lfm .lpr .dpr
+.SUFFIXES: .lrs .lfm .dfm .pas .pp .lpr .dpr
 
 %.pp: %.pas
 	sed \
 	  -e s:"TkbmMemTable":"TSqlite3Dataset":g \
 	  -e s:"kbmMemTable":"Sqlite3DS":g \
-	  -e s:"KbmMemTable":"Sqlite3DS":g \
 	  -e s:"TIntegerField":"TLongIntField":g \
 	  -e s:"Windows,":"LResources,":g  $< > $@
 
 %.lfm: %.dfm
-	sed \
-	  -e s:"TkbmMemTable":"TSqlite3Dataset":g \
+	sed -e s:"TkbmMemTable":"TSqlite3Dataset":g \
 	  -e s:"kbmMemTable":"Sqlite3DS":g \
 	  -e s:"KbmMemTable":"Sqlite3DS":g \
-	  -e s:"TIntegerField":"TLongIntField":g \
-	  -e s:"Windows,":"LResources,":g \
-	  -e s:"TkbmMemTable":"TSqlite3Dataset":g \
 	  -e s:"TIntegerField":"TLongIntField":g \
 	  -e s:"  OldCreateOrder = .*":"":g \
 	  -e s:"  TextHeight = .*":"":g \
@@ -131,15 +132,19 @@ clean:
 %.lpr: %.dpr
 	sed -e s:"\.pas":"\.pp":g $< > $@
 
-LAZARUSFILES=$(addprefix src/, \
-	  $(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS)) \
+BASELAZFILES=$(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS)) \
 	  $(addsuffix .lfm, $(FORMS) $(DSRCBASE)) \
-	  $(addsuffix .lrs, $(FORMS) $(DSRCBASE)) TTG.lpr)
+	  $(addsuffix .lrs, $(FORMS) $(DSRCBASE)) TTG.lpr
+
+LAZARUSFILES=$(addprefix src/, $(BASELAZFILES))
 
 srclaz: $(LAZARUSFILES)
 
+prjlaz: srclaz
+	mv $(LAZARUSFILES) prjlaz/
+
 srclazclean:
-	$(RM) -r $(LAZARUSFILES)
+	$(RM) -r $(addprefix prjlaz/, $(LAZARUSFILES))
 
 test:
 	@echo TTGDIR=$(TTGDIR)

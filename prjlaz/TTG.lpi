@@ -6,7 +6,7 @@
       <MainUnit Value="0"/>
       <TargetFileExt Value=""/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="1"/>
+      <ActiveEditorIndexAtStart Value="2"/>
     </General>
     <VersionInfo>
       <ProjectVersion Value=""/>
@@ -30,260 +30,286 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="34">
+    <Units Count="35">
       <Unit0>
         <Filename Value="TTG.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="34" Y="4"/>
         <TopLine Value="1"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="FMain.pas"/>
+        <Filename Value="FMain.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MainForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMain"/>
-        <CursorPos X="90" Y="9"/>
+        <CursorPos X="79" Y="9"/>
         <TopLine Value="1"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
-        <Filename Value="DMaster.pas"/>
+        <Filename Value="DMaster.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit2>
       <Unit3>
-        <Filename Value="KerModel.pas"/>
+        <Filename Value="KerModel.pp"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit3>
       <Unit4>
-        <Filename Value="KerEvolE.pas"/>
+        <Filename Value="KerEvolE.pp"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit4>
       <Unit5>
-        <Filename Value="FProgres.pas"/>
+        <Filename Value="FProgres.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit5>
       <Unit6>
-        <Filename Value="SortAlgs.pas"/>
+        <Filename Value="SortAlgs.pp"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit6>
       <Unit7>
-        <Filename Value="Rand.pas"/>
+        <Filename Value="Rand.pp"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit7>
       <Unit8>
-        <Filename Value="About.pas"/>
+        <Filename Value="About.pp"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit8>
       <Unit9>
-        <Filename Value="FCrsMMEd.pas"/>
+        <Filename Value="FCrsMMEd.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit9>
       <Unit10>
-        <Filename Value="FCrsMME0.pas"/>
+        <Filename Value="FCrsMME0.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit10>
       <Unit11>
-        <Filename Value="FCrsMME1.pas"/>
+        <Filename Value="FCrsMME1.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit11>
       <Unit12>
-        <Filename Value="FCrsMMER.pas"/>
+        <Filename Value="FCrsMMER.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit12>
       <Unit13>
-        <Filename Value="FEditor.pas"/>
+        <Filename Value="FEditor.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit13>
       <Unit14>
-        <Filename Value="FMateria.pas"/>
+        <Filename Value="FMateria.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit14>
       <Unit15>
-        <Filename Value="FProfesr.pas"/>
+        <Filename Value="FProfesr.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit15>
       <Unit16>
-        <Filename Value="TTGUtls.pas"/>
+        <Filename Value="TTGUtls.pp"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit16>
       <Unit17>
-        <Filename Value="UConfig.pas"/>
+        <Filename Value="UConfig.pp"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit17>
       <Unit18>
-        <Filename Value="FConfig.pas"/>
+        <Filename Value="FConfig.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit18>
       <Unit19>
-        <Filename Value="FLogstic.pas"/>
+        <Filename Value="FLogstic.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit19>
       <Unit20>
-        <Filename Value="FHorPara.pas"/>
+        <Filename Value="FHorPara.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit20>
       <Unit21>
-        <Filename Value="FMasDeEd.pas"/>
+        <Filename Value="FMasDeEd.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit21>
       <Unit22>
-        <Filename Value="FHorAulT.pas"/>
+        <Filename Value="FHorAulT.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit22>
       <Unit23>
-        <Filename Value="FSplash.pas"/>
+        <Filename Value="FSplash.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit23>
       <Unit24>
-        <Filename Value="FParalel.pas"/>
+        <Filename Value="FParalel.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit24>
       <Unit25>
-        <Filename Value="FSingEdt.pas"/>
+        <Filename Value="FSingEdt.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit25>
       <Unit26>
-        <Filename Value="FHorario.pas"/>
+        <Filename Value="FHorario.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit26>
       <Unit27>
-        <Filename Value="HorColCm.pas"/>
+        <Filename Value="HorColCm.pp"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit27>
       <Unit28>
-        <Filename Value="FHorProf.pas"/>
+        <Filename Value="FHorProf.pp"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="HorarioProfesorForm"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
-        <SyntaxHighlighter Value="Text"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="FHorProf"/>
+        <CursorPos X="3" Y="153"/>
+        <TopLine Value="145"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
       </Unit28>
       <Unit29>
-        <Filename Value="DSrcBase.pas"/>
+        <Filename Value="DSrcBase.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SourceBaseDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
-        <UsageCount Value="20"/>
-        <SyntaxHighlighter Value="Text"/>
+        <UnitName Value="DSrcBase"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
       </Unit29>
       <Unit30>
-        <Filename Value="RelUtils.pas"/>
+        <Filename Value="RelUtils.pp"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit30>
       <Unit31>
-        <Filename Value="DSource.pas"/>
+        <Filename Value="DSource.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SourceDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSource"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="7" Y="3"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="2"/>
-        <UsageCount Value="20"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="21"/>
         <Loaded Value="True"/>
       </Unit31>
       <Unit32>
-        <Filename Value="FSelPeIn.pas"/>
+        <Filename Value="FSelPeIn.pp"/>
         <IsPartOfProject Value="True"/>
         <HasResources Value="True"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit32>
       <Unit33>
-        <Filename Value="DBase.pas"/>
+        <Filename Value="DBase.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="BaseDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
-        <UsageCount Value="20"/>
+        <UsageCount Value="21"/>
         <SyntaxHighlighter Value="Text"/>
       </Unit33>
+      <Unit34>
+        <Filename Value="TTG.inc"/>
+        <CursorPos X="15" Y="2"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit34>
     </Units>
-    <JumpHistory Count="1" HistoryIndex="0">
+    <JumpHistory Count="3" HistoryIndex="2">
       <Position1>
-        <Filename Value="FMain.pas"/>
+        <Filename Value="FMain.pp"/>
         <Caret Line="1" Column="1" TopLine="1"/>
       </Position1>
+      <Position2>
+        <Filename Value="FHorProf.pp"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position2>
+      <Position3>
+        <Filename Value="FHorProf.pp"/>
+        <Caret Line="73" Column="65" TopLine="65"/>
+      </Position3>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

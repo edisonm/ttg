@@ -126,7 +126,8 @@ procedure ConvertAccessToDataModule(DBAcc: Database; const DataModuleName,
   ACreateSrcFields,  // Code in .pas
   ACreateFieldDefs,  // Code in .dfm
   ACreateDfmFields,  // Code in .dfm
-  ACreateSrcRels: Boolean;
+  ACreateSrcRels,
+  ALazarusFrm: Boolean;
   StringDFM, StringPAS, Msgs: TStrings);
 var
   VTableDef: TableDef;
@@ -199,7 +200,11 @@ var
           if (Attributes and dbAutoIncrField) <> 0 then
             VFieldClassName := 'TAutoIncField'
           else
+          begin
             VFieldClassName := Acc2DMFieldClassName[type_];
+            if (VFieldClassName = 'TIntegerField') and ALazarusFrm then
+              VFieldClassName := 'TLongIntField';
+          end;
           StringDFM.Add(Format('    object Tb%s%s: %s', [VTableName, name,
               VFieldClassName]));
           try
@@ -646,8 +651,8 @@ begin
     DBAcc := Engine.OpenDatabase(AccessFileName, 0, true, '');
     try
       ConvertAccessToDataModule(DBAcc, DataModuleName, DataModuleFileName,
-        ADataSetClass, AUnits, ACreateDataSource, ACreateSrcIndexes, ACreateIndexDefs, ACreateSrcFields,
-        ACreateFieldDefs, ACreateDfmFields, ACreateSrcRels,
+        ADataSetClass, AUnits, ACreateDataSource, ACreateSrcIndexes, ACreateIndexDefs,
+        ACreateSrcFields, ACreateFieldDefs, ACreateDfmFields, ACreateSrcRels, ALazarusFrm,
         StringDFM, StringPAS, Msgs);
     finally
       DBAcc.Close;

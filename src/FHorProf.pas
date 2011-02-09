@@ -71,7 +71,16 @@ procedure THorarioProfesorForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuHorarioProfesor.OnCalcFields := QuHorarioProfesorCalcFields;
+  {$IFDEF FPC}
+  with QuHorarioProfesor do
+  begin
+    TableName := 'HorarioProfesorTmp';
+    IndexFieldNames := 'CodProfesor';
+    if not Exists then CreateTable;
+  end;
+  {$ELSE}
   QuHorarioProfesor.AddIndex('QuHorarioProfesorIndex1', 'CodProfesor', []);
+  {$ENDIF}
   QuHorarioProfesor.Open;
   CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
   SourceDataModule.TbProfesor.First;
