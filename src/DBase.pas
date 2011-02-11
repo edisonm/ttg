@@ -23,7 +23,7 @@ type
     DetailFields: string;
   end;
 
-  TApplyOnTable = procedure(ADataSet: TDataSet);
+  TApplyOnTable = procedure(ADataSet: TDataSet) of object;
 
   TBaseDataModule = class(TDataModule)
     procedure DataModuleCreate(Sender: TObject);

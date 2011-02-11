@@ -105,7 +105,9 @@ type
     procedure SetCompartir(const Value: string);
     function GetRangoPolinizacion: Integer;
     procedure SetRangoPolinizacion(Value: Integer);
-
+    {$IFDEF FPC}
+    procedure SetDataBase(ADataSet: TDataSet);
+    {$ENDIF}
   public
     { Public declarations }
     procedure SaveToStrings(AStrings: TStrings); override;
@@ -294,7 +296,7 @@ begin
   HorarioIni := '';
   Compartir := '';
   RangoPolinizacion := 1;
-  
+
   // Días laborables por defecto, excepto sábados y domingos:
   CheckRelations := False;
   try
@@ -303,7 +305,7 @@ begin
       for i := Low(LongDayNames) + 1 to High(LongDayNames) - 1 do
       begin
         Append;
-        Fields[0].AsInteger := i;
+        // Fields[0].AsInteger := i;
         Fields[1].AsString := LongDayNames[i];
         Post;
       end;
@@ -314,33 +316,38 @@ begin
       t := 7 / 24;
       for i := Low(SNomHora) to High(SNomHora) do
       begin
-        Append;
-        Fields[0].AsInteger := i;
         s := FormatDateTime(ShortTimeFormat, t);
         if i = 5 then
           t := t + 1 / 48
         else
           t := t + 1 / 32;
+        s := s + '-' + FormatDateTime(ShortTimeFormat, t);
+        Append;
+        Fields[0].AsInteger := i;
         Fields[1].AsString := SNomHora[i];
-        Fields[2].AsString := s + '-' + FormatDateTime(ShortTimeFormat, t);
+        Fields[2].AsString := s;
         Post;
       end;
     end;
     // Generar todos los períodos, exceptuando el sábado, domingo y el recreo:
     with TbPeriodo do
     begin
-      for i := Low(LongDayNames) + 1 to High(LongDayNames) - 1 do
+      TbDia.First;
+      while not TbDia.Eof do
       begin
-        for j := Low(SNomHora) to High(SNomHora) do
+        TbHora.First;
+        while not TbHora.Eof do
         begin
-          if j <> 5 then
+          TbHora.Next;
+          if TbHoraNomHora.AsString <> 'Recreo' then
           begin
             Append;
-            Fields[0].AsInteger := i;
-            Fields[1].AsInteger := j;
+            Fields[0].AsInteger := TbDiaCodDia.AsInteger;
+            Fields[1].AsInteger := TbHoraCodHora.AsInteger;
             Post;
           end;
         end;
+        TbDia.Next;
       end;
     end;
     with TbMateriaProhibicionTipo do
@@ -348,7 +355,7 @@ begin
       for i := Low(SNomMateProhibicionTipo) to High(SNomMateProhibicionTipo) do
       begin
         Append;
-        Fields[0].AsInteger := i;
+        // Fields[0].AsInteger := i;
         Fields[1].AsString := SNomMateProhibicionTipo[i];
         Fields[2].AsInteger := EColMateProhibicionTipo[i];
         Fields[3].AsFloat := EValMateProhibicionTipo[i];
@@ -360,7 +367,7 @@ begin
       for i := Low(SNomProfProhibicionTipo) to High(SNomProfProhibicionTipo) do
       begin
         Append;
-        Fields[0].AsInteger := i;
+        // Fields[0].AsInteger := i;
         Fields[1].AsString := SNomProfProhibicionTipo[i];
         Fields[2].AsInteger := EColProfProhibicionTipo[i];
         Fields[3].AsFloat := EValProfProhibicionTipo[i];
@@ -372,16 +379,18 @@ begin
   end;
 end;
 
-procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
-  {$IFDEF FPC}
-  procedure SetDataBase(ADataSet: TDataSet);
+{$IFDEF FPC}
+procedure TSourceDataModule.SetDataBase(ADataSet: TDataSet);
+begin
+  with (ADataSet as TkbmMemTable) do
   begin
-    with (ADataSet as TkbmMemTable) do
-    begin
-      FileName := '../dat/TTG.db';
-      TableName := NameDataSet[ADataSet];
+    FileName := '/home/edison/apps/pascal/TTG/dat/TTG.db';
+    TableName := NameDataSet[ADataSet];
   end;
-  {$ENDIF}
+end;
+{$ENDIF}
+
+procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
   TbProfesor.OnCalcFields := TbProfesorCalcFields;

@@ -216,6 +216,8 @@ var
           StringDFM.Add('      FieldName = ''' + name + '''');
           if Required then
             StringDFM.Add('      Required = True');
+          if ((Attributes and dbAutoIncrField) <> 0) and ALazarusFrm then
+            StringDFM.Add('      ReadOnly = False');
           vv := DefaultValue;
           if not VarIsNull(vv) and (vv <> '') then
             StringDFM.Add

@@ -1,6 +1,7 @@
 program TTG;
-
+{$IFNDEF FPC}
 {$IMAGEBASE $00400000}
+{$ENDIF}
 uses
   Forms,
   Dialogs,

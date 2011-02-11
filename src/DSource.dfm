@@ -1,6 +1,5 @@
 inherited SourceDataModule: TSourceDataModule
   inherited TbAulaTipo: TkbmMemTable
-    Active = True
     FieldDefs = <
       item
         Name = 'CodAulaTipo'
@@ -28,7 +27,6 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbEspecializacion: TkbmMemTable
-    Active = True
     FieldDefs = <
       item
         Name = 'CodEspecializacion'
@@ -56,7 +54,6 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbMateria: TkbmMemTable
-    Active = True
     FieldDefs = <
       item
         Name = 'CodMateria'
@@ -73,7 +70,6 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbNivel: TkbmMemTable
-    Active = True
     FieldDefs = <
       item
         Name = 'CodNivel'
@@ -132,7 +128,6 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbParaleloId: TkbmMemTable
-    Active = True
     FieldDefs = <
       item
         Name = 'CodParaleloId'
@@ -214,7 +209,6 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbProfesor: TkbmMemTable
-    Active = True
     FieldDefs = <
       item
         Name = 'CodProfesor'
@@ -252,7 +246,7 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbMateriaProhibicion: TkbmMemTable
-    IndexFieldNames = 'CodMateria;CodDia;CodHora'
+    IndexFieldNames = 'CodMateria'
     MasterFields = 'CodMateria'
     MasterSource = DSMateria
     inherited TbMateriaProhibicionCodMateria: TIntegerField
@@ -444,7 +438,7 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbProfesorProhibicion: TkbmMemTable
-    IndexFieldNames = 'CodProfesor;CodDia;CodHora'
+    IndexFieldNames = 'CodProfesor'
     MasterFields = 'CodProfesor'
     MasterSource = DSProfesor
     inherited TbProfesorProhibicionCodProfesor: TIntegerField
