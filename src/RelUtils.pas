@@ -5,8 +5,7 @@ unit RelUtils;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Grids, DBGrids, Db, kbmMemTable;
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Grids, Db, kbmMemTable;
 
 type ERelationUtils = class(Exception);
 
@@ -33,6 +32,7 @@ procedure LoadDataSetFromCSVFile(ADataSet: TDataSet; const AFileName: TFileName)
 procedure LoadDataSetFromDataSet(ATarget, ASource: TDataSet);
 procedure LoadDataSetFromStrings(ADataSet: TDataSet; AStrings: TStrings;
   var Position: Integer);
+procedure PrepareQuery(const AQuery: TkbmMemTable; const ATableName, AIndexFieldNames: string);
 
 implementation
 
@@ -621,6 +621,22 @@ begin
     LoadDataSetFromStrings0(ADataSet, AStrings, Position, AStrings.Count - 1);
   finally
     AStrings.Free;
+  end;
+end;
+
+procedure PrepareQuery(const AQuery: TkbmMemTable; const ATableName, AIndexFieldNames: string);
+begin
+  with AQuery do
+  begin
+    Close;
+    {$IFDEF FPC}
+    TableName := ATableName + 'Tmp';
+    IndexFieldNames := AIndexFieldNames;
+    if not TableExists then CreateTable;
+    {$ELSE}
+    AddIndex(ATableName + 'Index1', AIndexFieldNames, []);
+    {$ENDIF}
+    Open;
   end;
 end;
 

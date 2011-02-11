@@ -5,9 +5,9 @@ unit FProfesr;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Grids, DBGrids, StdCtrls, Buttons, DBCtrls,
-  ExtCtrls, ComCtrls, Printers, ImgList, ToolWin, ActnList, FCrsMMER;
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  FSingEdt, Db, Grids, StdCtrls, Buttons, DBCtrls,
+  ExtCtrls, ComCtrls, Printers, ImgList, ToolWin, ActnList, FCrsMMER, DBGrids;
 
 type
   TProfesorForm	= class(TSingleEditorForm)
@@ -39,7 +39,7 @@ var
 implementation
 
 uses
-  DMaster, TTGUtls, FConfig, DSource, FEditor;
+  DMaster, FConfig, DSource, FEditor;
 
 {$IFNDEF FPC}
 {$R *.DFM}

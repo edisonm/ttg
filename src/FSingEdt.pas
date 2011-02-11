@@ -84,15 +84,18 @@ procedure TSingleEditorForm.DBGridCheckButton(Sender: TObject;
   ACol: Integer; Field: TField; var Enabled: Boolean);
 begin
   inherited;
+  {$IFNDEF FPC}
   Enabled := (TDBGrid(Sender).DataSource.DataSet is TkbmMemTable) and
-    (Field <> nil) and not (Field is TBlobField) and
-    (TkbmMemTable(TDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0);
+    (Field <> nil) and not (Field is TBlobField)
+    and (TkbmMemTable(TDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0)
+  {$ENDIF};
 end;
 
 procedure TSingleEditorForm.DBGridTitleBtnClick(Sender: TObject;
   ACol: Integer; Field: TField);
 begin
   inherited;
+  {$IFNDEF FPC}
   if TDBGrid(Sender).DataSource.DataSet is TkbmMemTable then
     with TkbmMemTable(TDBGrid(Sender).DataSource.DataSet) do
     try
@@ -103,6 +106,7 @@ begin
     except
       IndexFieldNames := '';
     end;
+  {$ENDIF}
 end;
 
 procedure TSingleEditorForm.DBGridDblClick(Sender: TObject);

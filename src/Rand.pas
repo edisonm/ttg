@@ -269,7 +269,7 @@ function _rand322: Longint;
 var
   x: Int64;
 begin
-  x := Int64(Seed3) * MULTIPLIER1 + Seed4;
+  x := Int64(Seed3) * MULTIPLIER2 + Seed4;
   Seed3 := x and $FFFFFFFF;
   Seed4 := x shr 32;
   Result := Seed3;

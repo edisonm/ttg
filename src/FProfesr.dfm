@@ -32,6 +32,7 @@ inherited ProfesorForm: TProfesorForm
   inherited pnlStatus: TPanel
     Top = 381
     Width = 702
+    ExplicitTop = 381
     ExplicitWidth = 702
     inherited SLState: TLabel
       Height = 17

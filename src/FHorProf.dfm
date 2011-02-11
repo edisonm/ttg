@@ -45,9 +45,9 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Left = 321
       Top = 0
       Width = 193
-      Height = 21
+      Height = 22
       Hint = 'Ver|Qu'#233' ver en el horario del profesor'
-      ItemHeight = 13
+      ItemHeight = 0
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1

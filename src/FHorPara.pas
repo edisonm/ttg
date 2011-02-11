@@ -51,7 +51,7 @@ type
 
 implementation
 uses
-  HorColCm, FSelPeIn, DSource, DMaster;
+  HorColCm, FSelPeIn, DSource, DMaster, RelUtils;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -82,15 +82,17 @@ procedure THorarioParaleloForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuHorarioParalelo.OnCalcFields := QuHorarioParaleloCalcFields;
-  QuHorarioParalelo.AddIndex('QuHorarioParaleloIxParalelo', 'CodNivel;CodEspecializacion;CodParaleloId', []);
+  PrepareQuery(QuHorarioParalelo, 'HorarioParalelo',
+	       'CodNivel;CodEspecializacion;CodParaleloId');
   SourceDataModule.TbParalelo.First;
-  QuHorarioParalelo.Open;
   CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
   cbVerParalelo.Items.Clear;
   FillHorarioParalelo;
   LoadNames(MasterDataModule.StringsShowParalelo, cbVerParalelo.Items);
   cbVerParalelo.Text := cbVerParalelo.Items[0];
+  {$IFNDEF FPC}
   dlcParalelo.KeyValue := SourceDataModule.TbParaleloCodParalelo.AsInteger;
+  {$ENDIF}
 end;
 
 procedure THorarioParaleloForm.IntercambiarPeriodosClick(Sender: TObject);
@@ -114,14 +116,18 @@ procedure THorarioParaleloForm.BtnPriorClick(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbParalelo.Prior;
+  {$IFNDEF FPC}
   dlcParalelo.KeyValue := SourceDataModule.TbParaleloCodParalelo.AsInteger;
+  {$ENDIF}
 end;
 
 procedure THorarioParaleloForm.BtnNextClick(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbParalelo.Next;
+  {$IFNDEF FPC}
   dlcParalelo.KeyValue := SourceDataModule.TbParaleloCodParalelo.AsInteger;
+  {$ENDIF}
 end;
 
 procedure THorarioParaleloForm.FillHorarioParalelo;
@@ -131,7 +137,6 @@ var
 begin
   with SourceDataModule do
   begin
-    QuHorarioParalelo.EmptyTable;
     CodHorario := TbHorarioCodHorario.Value;
     TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
     if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then

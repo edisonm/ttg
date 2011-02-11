@@ -5,7 +5,7 @@ unit FCrsMMER;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, ExtCtrls, Grids, DB, FCrsMMEd, ImgList, ComCtrls, ToolWin;
 
 type
@@ -63,9 +63,6 @@ implementation
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
-
-uses
-  kbmMemTable;
   
 { TFCrMMEditorR }
 

@@ -5,9 +5,9 @@ unit FEditor;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
-  StdCtrls, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls, ComCtrls,
-  ImgList, ToolWin, ActnList, UConfig;
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  DBCtrls, Grids, Buttons, ExtCtrls, ComCtrls, ActnList, UConfig, ImgList,
+  ToolWin;
 
 type
   TEditorForm = class(TForm)
@@ -60,11 +60,8 @@ type
                                 AConfigStorage: TConfigStorage;
                                 AAction: TAction): Boolean;
   end;
-  
-implementation
 
-uses
-  RelUtils;
+implementation
 
 {$IFNDEF FPC}
 {$R *.DFM}

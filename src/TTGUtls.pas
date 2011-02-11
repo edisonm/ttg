@@ -5,7 +5,7 @@ unit TTGUtls;
 interface
 
 uses
-  Classes, Forms, Db, FCrsMMEd, FCrsMMER, FSingEdt, FMasDeEd, DSource, ActnList;
+  Classes, Forms, Db, FCrsMMEd, FCrsMMER, FMasDeEd, DSource, ActnList;
 
 function ComposicionADuracion(const s: string): Integer;
 procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorForm;

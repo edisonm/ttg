@@ -28,7 +28,7 @@ endif
 ABOUTPAS=src/About.pas
 
 UNITS=KerModel RelUtils HorColCm TTGUtls Rand SortAlgs About KerEvolE	\
-	BaseUtls UConfig
+	UConfig
 
 FORMS=FCrsMMEd FSplash FSingEdt FMasDeEd FHorario FLogstic FCrsMME0	\
 	FCrsMME1 FHorProf FProfesr FMain FEditor DMaster FHorPara	\

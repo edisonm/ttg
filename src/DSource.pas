@@ -5,8 +5,8 @@ unit DSource;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DSrcBase, Db, kbmMemTable, UConfig;
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, DSrcBase, Db, UConfig,
+  kbmMemTable;
 
 type
   TSourceDataModule = class(TSourceBaseDataModule)
@@ -164,18 +164,10 @@ implementation
 {$ENDIF}
 
 uses
-  TTGUtls, rand, Variants, DBase, RelUtils, FConfig;
-
-type
-  EMainDataModuleError = class(Exception);
+  TTGUtls, rand, Variants, DBase, FConfig;
 
 const
   pfhVersionNumber = $00000123;
-
-resourcestring
-
-  SNotTTDFile = 'No es un archivo TTD';
-  SInvalidTTDVersion = 'Versión archivo TTD inválida';
 
 procedure TSourceDataModule.TbProfesorCalcFields(DataSet: TDataSet);
 begin
@@ -381,12 +373,24 @@ begin
 end;
 
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
+  {$IFDEF FPC}
+  procedure SetDataBase(ADataSet: TDataSet);
+  begin
+    with (ADataSet as TkbmMemTable) do
+    begin
+      FileName := '../dat/TTG.db';
+      TableName := NameDataSet[ADataSet];
+  end;
+  {$ENDIF}
 begin
   inherited;
   TbProfesor.OnCalcFields := TbProfesorCalcFields;
   TbDistributivo.OnCalcFields := TbDistributivoCalcFields;
   TbParalelo.OnCalcFields := TbParaleloCalcFields;
   FConfigStorage := TConfigStorage.Create(Self);
+  {$IFDEF FPC}
+  ApplyOnTables(SetDataBase);
+  {$ENDIF}
   OpenTables;
   NewDataBase;
 end;

@@ -46,9 +46,9 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Left = 265
       Top = 0
       Width = 185
-      Height = 21
+      Height = 22
       Hint = 'Ver|Seleccione el par'#225'metro a ver en el horario'
-      ItemHeight = 13
+      ItemHeight = 0
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0

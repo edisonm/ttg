@@ -2,9 +2,18 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
   Left = 411
   Top = 234
   PixelsPerInch = 96
+  TextHeight = 13
   inherited TlBShow: TToolBar
     inherited DBNavigator: TDBNavigator
       Hints.Strings = ()
+    end
+  end
+  inherited pnlStatus: TPanel
+    inherited SLState: TLabel
+      Height = 17
+    end
+    inherited SLRecordNo: TLabel
+      Height = 17
     end
   end
   inherited Panel1: TPanel

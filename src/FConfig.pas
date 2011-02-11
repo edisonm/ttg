@@ -5,9 +5,9 @@ unit FConfig;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, Buttons, ComCtrls, Spin, Grids, DBGrids, DSource, DB,{$IFDEF FPC}ColorBox,{$ENDIF}
-  ExtCtrls, DBCtrls;
+  ExtCtrls, DBCtrls, Mask;
 
 type
   TConfiguracionForm = class(TForm)
@@ -130,7 +130,7 @@ function ShowConfiguracionForm(AHelpContext: THelpContext): Integer;
 implementation
 
 uses
-  FMain, RelUtils, DSrcBase;
+  DSrcBase;
 
 {$IFNDEF FPC}
 {$R *.DFM}

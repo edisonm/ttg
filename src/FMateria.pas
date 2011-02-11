@@ -5,9 +5,9 @@ unit FMateria;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Grids, DBGrids, StdCtrls, Buttons,
-  DBCtrls, ExtCtrls, Printers, ImgList, ComCtrls, ToolWin, ActnList, FCrsMMER;
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FSingEdt, DB,
+  Grids, Buttons, DBCtrls, ExtCtrls, Printers, ComCtrls, ToolWin, ActnList,
+  FCrsMMER, ImgList, DBGrids, StdCtrls;
 
 type
   TMateriaForm = class(TSingleEditorForm)
@@ -27,7 +27,7 @@ var
 
 implementation
 uses
-  DMaster, FCrsMMEd, TTGUtls, FConfig, DSource;
+  DMaster, FCrsMMEd, FConfig, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}

@@ -11,8 +11,10 @@ object ConfiguracionForm: TConfiguracionForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  OldCreateOrder = True
   Position = poDesktopCenter
   PixelsPerInch = 96
+  TextHeight = 13
   object bbtnOk: TBitBtn
     Left = 255
     Top = 424
@@ -29,7 +31,6 @@ object ConfiguracionForm: TConfiguracionForm
     ActivePage = tbsOpciones
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 1
     TabOrder = 1
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
@@ -37,6 +38,10 @@ object ConfiguracionForm: TConfiguracionForm
       ImageIndex = 2
       ParentShowHint = False
       ShowHint = True
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label14: TLabel
         Left = 8
         Top = 109
@@ -362,6 +367,10 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsPesos: TTabSheet
       Caption = 'Pesos'
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label1: TLabel
         Left = 8
         Top = 12
@@ -594,6 +603,10 @@ object ConfiguracionForm: TConfiguracionForm
     object tbsAlgoritmoEvolutivo: TTabSheet
       Caption = 'Algoritmo Evolutivo'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label8: TLabel
         Left = 8
         Top = 13

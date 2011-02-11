@@ -5,9 +5,8 @@ unit FCrsMMEd;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, Grids, DBGrids, ExtCtrls, DB, Variants,
-  FEditor, ImgList, ComCtrls, ToolWin;
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Buttons, Grids, ExtCtrls, DB, Variants, FEditor, ComCtrls, ImgList, ToolWin;
 
 type
   PIntegerArray = ^TIntegerArray;

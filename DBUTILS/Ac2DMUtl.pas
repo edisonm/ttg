@@ -404,7 +404,7 @@ begin
     Add('{$ELSE}');
     Add('  Windows,');
     Add('{$ENDIF}');
-    Add('  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,');
+    Add('  SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,');
     if AUnits <> '' then
       Add('  ' + AUnits + ',');
     Add('  DBase;');

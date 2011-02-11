@@ -48,7 +48,7 @@ type
 
 implementation
 uses
-  DMaster, HorColCm, FConfig, DSource;
+  DMaster, HorColCm, FConfig, DSource, RelUtils;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -66,7 +66,6 @@ begin
       TbDistributivo.MasterFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
       TbDistributivo.MasterSource := DSHorarioDetalle;
       try
-        QuHorarioAulaTipo.EmptyTable;
         while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
         begin
           QuHorarioAulaTipo.Append;
@@ -106,28 +105,34 @@ procedure THorarioAulaTipoForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuHorarioAulaTipo.OnCalcFields := QuHorarioAulaTipoCalcFields;
-  QuHorarioAulaTipo.AddIndex('QuHorarioAulaTipoIxCodAulaTipo', 'CodAulaTipo', []);
+  PrepareQuery(QuHorarioAulaTipo, 'HorarioAulaTipo', 'CodAulaTipo');
   CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
   cbVerAulaTipo.Items.Clear;
   FillHorarioAulaTipo;
   LoadNames(MasterDataModule.StringsShowAulaTipo, cbVerAulaTipo.Items);
   cbVerAulaTipo.Text := cbVerAulaTipo.Items[0];
   SourceDataModule.TbAulaTipo.First;
+  {$IFNDEF FPC}
   dlcAulaTipo.KeyValue := SourceDataModule.TbAulaTipoCodAulaTipo.Value;
+  {$ENDIF}
 end;
 
 procedure THorarioAulaTipoForm.BtnPriorClick(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbAulaTipo.Prior;
+  {$IFNDEF FPC}
   dlcAulaTipo.KeyValue := SourceDataModule.TbAulaTipoCodAulaTipo.AsInteger;
+  {$ENDIF}
 end;
 
 procedure THorarioAulaTipoForm.BtnNextClick(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbAulaTipo.Next;
+  {$IFNDEF FPC}
   dlcAulaTipo.KeyValue := SourceDataModule.TbAulaTipoCodAulaTipo.Value;
+  {$ENDIF}
 end;
 
 procedure THorarioAulaTipoForm.QuHorarioAulaTipoCalcFields(DataSet: TDataSet);

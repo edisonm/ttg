@@ -2,12 +2,11 @@ inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
   Left = 58
   Top = 222
   PixelsPerInch = 96
+  TextHeight = 13
   object Splitter: TSplitter [0]
     Left = 532
     Top = 25
-    Width = 3
     Height = 216
-    Cursor = crHSplit
     Align = alRight
   end
   object Panel2: TPanel [3]
@@ -37,11 +36,13 @@ inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
   end
   inherited Panel1: TPanel
     Width = 532
+    ExplicitWidth = 532
   end
   inherited DrawGrid: TDrawGrid
     Width = 532
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goColSizing]
     OnKeyUp = DrawGridKeyUp
     OnMouseUp = DrawGridMouseUp
+    ExplicitWidth = 532
   end
 end

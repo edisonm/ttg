@@ -5,8 +5,7 @@ unit DBase;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
-  kbmMemTable;
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, kbmMemTable;
 
 type
   TDataSetArray = array of TDataSet;
@@ -17,12 +16,14 @@ type
     DetailFields: string;
     Cascade: Boolean;
   end;
-  
+
   TDetailRel = record
     MasterDataSet: TDataSet;
     MasterFields: string;
     DetailFields: string;
   end;
+
+  TApplyOnTable = procedure(ADataSet: TDataSet);
 
   TBaseDataModule = class(TDataModule)
     procedure DataModuleCreate(Sender: TObject);
@@ -49,6 +50,7 @@ type
     procedure OpenTables;
     procedure CloseTables;
     procedure EmptyTables;
+    procedure ApplyOnTables(FApplyOnTable: TApplyOnTable);
 //    procedure ExecuteAction(DoAction: procedure of object);
     procedure LoadFromTextDir(const ADirName: string);
     procedure LoadFromTextFile(const AFileName: TFileName);
@@ -80,6 +82,14 @@ var
 begin
   for i := Low(FTables) to High(FTables) do
     FTables[i].Open;
+end;
+
+procedure TBaseDataModule.ApplyOnTables(FApplyOnTable: TApplyOnTable);
+var
+  I: Integer;
+begin
+  for I := Low(FTables) to High(FTables) do
+    FApplyOnTable(FTables[i]);
 end;
 
 procedure TBaseDataModule.CloseTables;

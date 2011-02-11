@@ -20,6 +20,7 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
   inherited pnlStatus: TPanel
     Top = 230
     Width = 617
+    ExplicitTop = 230
     ExplicitWidth = 617
   end
   object Panel2: TPanel [3]

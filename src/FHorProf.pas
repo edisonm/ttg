@@ -48,7 +48,7 @@ type
 
 implementation
 uses
-  HorColCm, FConfig, DMaster, DSource;
+  HorColCm, FConfig, DMaster, DSource, RelUtils;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -71,39 +71,34 @@ procedure THorarioProfesorForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuHorarioProfesor.OnCalcFields := QuHorarioProfesorCalcFields;
-  {$IFDEF FPC}
-  with QuHorarioProfesor do
-  begin
-    Close;
-    TableName := 'HorarioProfesorTmp';
-    IndexFieldNames := 'CodProfesor';
-    if not TableExists then CreateTable;
-  end;
-  {$ELSE}
-  QuHorarioProfesor.AddIndex('QuHorarioProfesorIndex1', 'CodProfesor', []);
-  {$ENDIF}
-  QuHorarioProfesor.Open;
+  PrepareQuery(QuHorarioProfesor, 'HorarioProfesor', 'CodProfesor');
   CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
   SourceDataModule.TbProfesor.First;
   cbVerProfesor.Items.Clear;
   FillHorarioProfesor;
   LoadNames(MasterDataModule.StringsShowProfesor, cbVerProfesor.Items);
   cbVerProfesor.Text := cbVerProfesor.Items[0];
+  {$IFNDEF FPC}
   dlcProfesor.KeyValue := SourceDataModule.TbProfesorCodProfesor.Value;
+  {$ENDIF}
 end;
 
 procedure THorarioProfesorForm.BtnPriorClick(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbProfesor.Prior;
+  {$IFNDEF FPC}
   dlcProfesor.KeyValue := SourceDataModule.TbProfesorCodProfesor.Value;
+  {$ENDIF}
 end;
 
 procedure THorarioProfesorForm.BtnNextClick(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbProfesor.Next;
+  {$IFNDEF FPC}
   dlcProfesor.KeyValue := SourceDataModule.TbProfesorCodProfesor.Value;
+  {$ENDIF}
 end;
 
 procedure THorarioProfesorForm.FillHorarioProfesor;

@@ -5,7 +5,7 @@ unit DMaster;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   DB, kbmMemTable, TTGUtls, Variants;
 
 type
@@ -59,7 +59,7 @@ var
 implementation
 
 uses
-  HorColCm, DSource, BaseUtls;
+  HorColCm, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}

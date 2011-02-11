@@ -18,6 +18,9 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnDblClick = FormDblClick
   OnDestroy = FormDestroy
+  DesignSize = (
+    593
+    403)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel

@@ -839,7 +839,7 @@ begin
   begin
     VRect := Rect;
     VRect.Right := VRect.Left
-      + MulDiv(Rect.Right - Rect.Left, FRelProgress, (FMax - FMin));
+      + (Rect.Right - Rect.Left) * FRelProgress div (FMax - FMin);
     StatusBar.Canvas.Brush.Color := clNavy;
     StatusBar.Canvas.FillRect(VRect);
   end
@@ -1211,12 +1211,16 @@ end;
 
 procedure TMainForm.ActContentsExecute(Sender: TObject);
 begin
+{$IFNDEF FPC}
   Application.HelpCommand(HELP_FINDER, 0);
+{$ENDIF}
 end;
 
 procedure TMainForm.ActIndexExecute(Sender: TObject);
 begin
+{$IFNDEF FPC}
   Application.HelpCommand(HELP_FINDER, 0);
+{$ENDIF}
 end;
 
 procedure TMainForm.ExportarCSV(AMasterDataSet, ADetailDataSet: TDataSet;

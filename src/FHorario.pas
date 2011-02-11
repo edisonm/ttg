@@ -773,7 +773,7 @@ begin
     d := TbHorarioDetalle.IndexFieldNames;
     TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
     QuCruceAulaDetalle.DisableControls;
-    QuCruceAulaDetalle.EnableIndexes := False;
+    //QuCruceAulaDetalle.EnableIndexes := False;
     try
       if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
       begin
@@ -817,8 +817,8 @@ begin
       end;
     finally
       TbHorarioDetalle.IndexFieldNames := d;
-      QuCruceAulaDetalle.EnableIndexes := True;
-      QuCruceAulaDetalle.UpdateIndexes;
+      //QuCruceAulaDetalle.EnableIndexes := True;
+      //QuCruceAulaDetalle.UpdateIndexes;
       QuCruceAulaDetalle.EnableControls;
     end;
   end;
@@ -1157,20 +1157,19 @@ end;
 procedure THorarioForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  QuHorarioDetalle.AddIndex('QuHorarioDetalleIndex1',
-                            'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia', []);
-  QuCruceAula.AddIndex('QuCruceAulaIndex1', 'CodAulaTipo;CodDia;CodHora', []);
-  QuCruceAulaDetalle.AddIndex('QuCruceAulaDetalleIndex1', 'CodAulaTipo;CodDia;CodHora', []);
-  QuCruceProfesor.AddIndex('QuCruceProfesorIndex1', 'CodProfesor;CodDia;CodHora', []);
-  QuCruceMateria.AddIndex('QuCruceMateriaIxCodMateria', 'CodMateria', []);
-  QuCruceMateria.AddIndex('QuCruceMateriaIxNomMateria', 'NomMateria', []);
-  QuCruceMateriaDetalle.AddIndex('QuCruceMateriaDetalleIndex1',
-                                 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora', []);
+  PrepareQuery(QuHorarioDetalle, 'HorarioDetalle',
+    'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia');
+  PrepareQuery(QuCruceAula, 'CruceAula', 'CodAulaTipo;CodDia;CodHora');
+  PrepareQuery(QuCruceAulaDetalle, 'CruceAulaDetalle', 'CodAulaTipo;CodDia;CodHora');
+  PrepareQuery(QuCruceProfesor, 'CruceProfesorInde', 'CodProfesor;CodDia;CodHora');
+  PrepareQuery(QuCruceMateria, 'CruceMateria', 'CodMateria');
+  //QuCruceMateria.AddIndex('QuCruceMateriaIxNomMateria', 'NomMateria', []);
+  PrepareQuery(QuCruceMateriaDetalle,'CruceMateriaDetalle',
+    'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora');
   {$IFDEF FPC}
-  QuHorarioDetalleMateriaProhibicion.AddIndex('QuHorarioDetalleMateriaProhibicionIndex1',
-                                              'CodMateProhibicionTipo;NomMateria;CodDia;CodHora',
-                                              [ixDescending],
-                                              'CodMateProhibicionTipo');
+  PrepareQuery(QuHorarioDetalleMateriaProhibicion,
+    'HorarioDetalleMateriaProhibicion',
+    'CodMateProhibicionTipo;NomMateria;CodDia;CodHora');
   {$ELSE}
   with QuHorarioDetalleMateriaProhibicion.IndexDefs.AddIndexDef do
   begin
@@ -1180,8 +1179,9 @@ begin
      DescFields := 'CodMateProhibicionTipo';
   end;
   {$ENDIF}
-  QuMateriaCortadaHora.AddIndex('QuMateriaCortadaHoraIxCodDia', 'CodDia', []);
-  QuMateriaCortadaHoraDetalle.AddIndex('QuMateriaCortadaHoraDetalleIxCodDia', 'CodDia;CodHora;CodHora0', []);
+  PrepareQuery(QuMateriaCortadaHora, 'MateriaCortadaHora', 'CodDia');
+  PrepareQuery(QuMateriaCortadaHoraDetalle,'MateriaCortadaHoraDetalle',
+    'CodDia;CodHora;CodHora0');
 end;
 
 initialization

@@ -38,17 +38,15 @@ inherited SingleEditorForm: TSingleEditorForm
       Left = 1
       Top = 1
       Width = 3
-      Height = 17
+      Height = 13
       Align = alLeft
-      ExplicitHeight = 13
     end
     object SLRecordNo: TLabel
       Left = 498
       Top = 1
       Width = 3
-      Height = 17
+      Height = 13
       Align = alRight
-      ExplicitHeight = 13
     end
   end
   inherited Panel1: TPanel

@@ -6,6 +6,7 @@ uses
   Dialogs,
 {$IFDEF FPC}
   Interfaces,
+  LResources,
 {$ENDIF}
   SysUtils,
   FMain in 'FMain.pas' {MainForm},
@@ -42,11 +43,16 @@ uses
   FSelPeIn in 'FSelPeIn.pas' {SelPeriodoForm},
   DBase in 'DBase.pas' {BaseDataModule: TDataModule};
 
-{$IFDEF FPC}
+{$IFNDEF FPC}
 {$R *.res}
 {$ENDIF}
 
+{$IFDEF WINDOWS}{$R TTG.rc}{$ENDIF}
+
 begin
+{$IFDEF FPC}
+  {$I TTG.lrs}
+{$ENDIF}
   SplashForm := TSplashForm.Create(Application);
   SplashForm.Caption := sAppName + ' ' + sAppVersion;
   SplashForm.lblProductName.Caption := SplashForm.Caption;
