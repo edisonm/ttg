@@ -7,7 +7,7 @@ interface
 uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   FSingEdt, Db, Grids, DBGrids, UConfig, Buttons, DBCtrls, ExtCtrls, ComCtrls,
-  ActnList, ImgList, StdCtrls, ToolWin;
+  ActnList, ImgList, ToolWin, StdCtrls;
 
 type
   TMasterDetailEditorForm = class(TSingleEditorForm)

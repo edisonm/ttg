@@ -29,14 +29,12 @@ object ConfiguracionForm: TConfiguracionForm
     Width = 401
     Height = 409
     ActivePage = tbsOpciones
-    ParentShowHint = False
     ShowHint = True
     TabOrder = 1
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
       Caption = 'Colegio'
       ImageIndex = 2
-      ParentShowHint = False
       ShowHint = True
       ExplicitLeft = 0
       ExplicitTop = 0

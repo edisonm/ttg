@@ -6,7 +6,7 @@ interface
 
 uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Buttons, Grids, ExtCtrls, DB, Variants, FEditor, ComCtrls, ImgList, ToolWin;
+  Buttons, ExtCtrls, DB, Variants, FEditor, ComCtrls, ImgList, ToolWin, Grids;
 
 type
   PIntegerArray = ^TIntegerArray;

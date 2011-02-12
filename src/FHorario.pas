@@ -1176,12 +1176,12 @@ begin
     Name := 'QuHorarioDetalleMateriaProhibicionIndex1';
     Fields := 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora';
     Options := [ixDescending];
-     DescFields := 'CodMateProhibicionTipo';
+    DescFields := 'CodMateProhibicionTipo';
   end;
   {$ENDIF}
   PrepareQuery(QuMateriaCortadaHora, 'MateriaCortadaHora', 'CodDia');
   PrepareQuery(QuMateriaCortadaHoraDetalle,'MateriaCortadaHoraDetalle',
-    'CodDia;CodHora;CodHora0');
+    'CodDia;CodHora');
 end;
 
 initialization

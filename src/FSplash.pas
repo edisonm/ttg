@@ -21,7 +21,9 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Image1: TImage;
+    Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,6 +37,9 @@ var
 
 implementation
 
+uses
+  About;
+
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
@@ -42,6 +47,7 @@ implementation
 procedure TSplashForm.IncPosition;
 begin
   PBLoad.Position := PBLoad.Position + 1;
+  Application.ProcessMessages;
 end;
 
 procedure TSplashForm.OnDataSetProgress(DataSet: TDataSet);
@@ -49,6 +55,11 @@ begin
   lblTable.Caption := DataSet.Name;
   lblTable.Repaint;
   IncPosition;
+end;
+
+procedure TSplashForm.Timer1Timer(Sender: TObject);
+begin
+  Free;
 end;
 
 procedure TSplashForm.FormCreate(Sender: TObject);
@@ -77,9 +88,8 @@ procedure TSplashForm.FormCreate(Sender: TObject);
   end;
 begin
   UpdBackground;
-  lblYearLabel.Caption := '2011';
-  lblCopyright.Caption := '1999-2011 por Edison Mera';
-end;
+  lblYearLabel.Caption := 'Build (' + SBuildDateTime + ')';
+  lblCopyright.Caption := '1999-2011 por Edison Mera';end;
 
 initialization
 

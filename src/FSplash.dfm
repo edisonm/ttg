@@ -3,23 +3,27 @@ object SplashForm: TSplashForm
   Top = 223
   BorderStyle = bsNone
   ClientHeight = 182
-  ClientWidth = 373
+  ClientWidth = 495
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  OldCreateOrder = True
   Position = poScreenCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
+  TextHeight = 13
   object Image1: TImage
     Left = 0
     Top = 0
-    Width = 373
+    Width = 495
     Height = 182
     Align = alClient
     Stretch = True
+    ExplicitWidth = 373
+    ExplicitHeight = 174
   end
   object lblProductName: TLabel
     Left = 88
@@ -149,11 +153,16 @@ object SplashForm: TSplashForm
   end
   object PBLoad: TProgressBar
     Left = 8
-    Top = 160
-    Width = 353
+    Top = 161
+    Width = 479
     Height = 13
-    Min = 0
     Max = 8
     TabOrder = 0
+  end
+  object Timer1: TTimer
+    Interval = 2500
+    OnTimer = Timer1Timer
+    Left = 432
+    Top = 16
   end
 end

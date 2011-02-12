@@ -30,7 +30,6 @@ object EditorForm: TEditorForm
       Top = 0
       Hint = 'Presentar|Presenta el contenido de la cuadr'#237'cula en un reporte'
       ImageIndex = 0
-      ParentShowHint = False
       ShowHint = True
     end
   end

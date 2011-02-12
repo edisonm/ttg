@@ -16,7 +16,6 @@ inherited SingleEditorForm: TSingleEditorForm
       Left = 23
       Top = 0
       Action = ActFind
-      ParentShowHint = False
       ShowHint = True
     end
     object DBNavigator: TDBNavigator
@@ -26,7 +25,6 @@ inherited SingleEditorForm: TSingleEditorForm
       Height = 22
       DataSource = DataSource
       Flat = True
-      ParentShowHint = False
       ShowHint = True
       TabOrder = 0
     end

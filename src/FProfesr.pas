@@ -47,12 +47,22 @@ uses
 
 procedure TProfesorForm.ActProfesorProhibicionExecute(Sender: TObject);
 begin
-  if TCrossManyToManyEditorRForm.ToggleEditor(Self,
-					      FProfesorProhibicionForm,
-					      ConfigStorage,
-                                              ActProfesorProhibicion) then
-  with SourceDataModule, FProfesorProhibicionForm do
+  with SourceDataModule do
+  if TCrossManyToManyEditorRForm.ToggleEditor(Self, FProfesorProhibicionForm,
+    ConfigStorage, ActProfesorProhibicion) then
+  with FProfesorProhibicionForm do
   begin
+    with TbProfesorProhibicion do
+    begin
+      DisableControls;
+      try
+        IndexFieldNames := 'CodProfesor';
+        MasterFields := 'CodProfesor';
+        MasterSource := DSProfesor;
+      finally
+        EnableControls;
+      end
+    end;
     Caption := Format('%s %s - Editando %s', [
     		      NameDataSet[TbProfesor],
 		      TbProfesorApeNomProfesor.Value,
@@ -71,7 +81,9 @@ begin
 	       'CodProfProhibicionTipo');
     Tag := TbProfesorCodProfesor.Value;
     OnActivate := FormActivate;
-  end;
+  end
+  else
+    TbProfesorProhibicion.MasterSource := nil;
 end;
 
 procedure TProfesorForm.FormActivate(Sender: TObject);
@@ -81,35 +93,37 @@ end;
 
 procedure TProfesorForm.ActDistributivoExecute(Sender: TObject);
 begin
-   if TSingleEditorForm.ToggleSingleEditor(Self,
-					   FDistributivoForm,
-					   ConfigStorage,
-					   ActDistributivo,
-					   SourceDataModule.TbDistributivo) then
-      with SourceDataModule do
+  with SourceDataModule do
+    if TSingleEditorForm.ToggleSingleEditor(Self,
+  				          FDistributivoForm,
+					  ConfigStorage,
+					  ActDistributivo,
+					  SourceDataModule.TbDistributivo) then
+    begin
+      TbParalelo.First;
+      TbDistributivo.First;
+      with TbDistributivo do
       begin
-         TbParalelo.First;
-         TbDistributivo.First;
-	 with TbDistributivo do
-	 begin
-	    DisableControls;
-	    try
-               IndexFieldNames := 'CodProfesor';
-               MasterFields := 'CodProfesor';
-               MasterSource := DSProfesor;
-	    finally
-               EnableControls;
-            end
-         end;
-         Self.DataSource.OnDataChange := DataSourceDataChange;
-	 FLbCarga.Parent := FDistributivoForm.pnlStatus;
-	 FLbCarga.Top := 1;
-	 FLbCarga.Left := 400;
-	 FLbCarga.OnDblClick := LbCargaDblClick;
-	 FDistributivoForm.OnDestroy := EdQuProfesorDistributivoDestroy;
-	 FSuperTitle := FDistributivoForm.Caption;
-	 DataSourceDataChange(nil, nil);
+        DisableControls;
+        try
+          IndexFieldNames := 'CodProfesor';
+          MasterFields := 'CodProfesor';
+          MasterSource := DSProfesor;
+        finally
+          EnableControls;
+        end
       end;
+      Self.DataSource.OnDataChange := DataSourceDataChange;
+      FLbCarga.Parent := FDistributivoForm.pnlStatus;
+      FLbCarga.Top := 1;
+      FLbCarga.Left := 400;
+      FLbCarga.OnDblClick := LbCargaDblClick;
+      FDistributivoForm.OnDestroy := EdQuProfesorDistributivoDestroy;
+      FSuperTitle := FDistributivoForm.Caption;
+      DataSourceDataChange(nil, nil);
+    end
+    else
+      TbDistributivo.MasterSource := nil;
 end;
 
 procedure TProfesorForm.LbCargaDblClick(Sender: TObject);

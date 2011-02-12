@@ -44,7 +44,6 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       Height = 22
       Hint = 'Ver|Qu'#233' ver en el horario del tipo de aula'
       ItemHeight = 0
-      ParentShowHint = False
       ShowHint = True
       TabOrder = 1
       OnChange = BtnMostrarClick

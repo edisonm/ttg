@@ -5,7 +5,7 @@ unit RelUtils;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Grids, Db, kbmMemTable;
+  Windows, SysUtils, Classes, Graphics, Forms, Dialogs, Db, kbmMemTable;
 
 type ERelationUtils = class(Exception);
 
@@ -487,14 +487,8 @@ end;
 
 procedure SaveDataSetToStrings(ADataSet:TDataSet; AStrings: TStrings);
 begin
-  AStrings.Add('// ' + ADataSet.Name);
-  if Assigned(ADataSet.DataSource) then ADataSet.DataSource.Enabled := False;
-  try
-    AStrings.Add(IntToStr(ADataSet.RecordCount));
-    SaveDataSetToStrings0(ADataSet, AStrings);
-  finally
-    if Assigned(ADataSet.DataSource) then ADataSet.DataSource.Enabled := True;
-  end;
+  AStrings.Add(IntToStr(ADataSet.RecordCount));
+  SaveDataSetToStrings0(ADataSet, AStrings);
 end;
 
 procedure SaveDataSetToCSVFile(ADataSet: TDataSet; const AFileName: TFileName);
@@ -630,6 +624,7 @@ begin
   begin
     Close;
     {$IFDEF FPC}
+    FileName := ':memory:';
     TableName := ATableName + 'Tmp';
     IndexFieldNames := AIndexFieldNames;
     if not TableExists then CreateTable;

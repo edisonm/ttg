@@ -20,7 +20,6 @@ inherited ParaleloForm: TParaleloForm
     inherited DBGrid: TDBGrid
       Width = 348
       Hint = 'Cursos|Cursos disponibles'
-      ParentShowHint = False
       ShowHint = True
     end
     object CheckListBox: TCheckListBox

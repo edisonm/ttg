@@ -130,8 +130,13 @@ begin
   begin
     with (FTables[i] as TkbmMemTable) do
     begin
+      {$IFDEF FPC}
       Close;
+      ExecuteDirect('delete from ' + NameDataSet[FTables[i]]);
       Open;
+      {$ELSE}
+      EmptyTable;
+      {$ENDIF}
     end;
   end;
 end;
@@ -155,7 +160,11 @@ var
   i: Integer;
 begin
   for i := Low(FTables) to High(FTables) do
+  begin
+    (FTables[i] as TkbmMemTable).MasterSource := nil;
+    AStrings.Add('// Tb' + NameDataSet[FTables[i]]);
     SaveDataSetToStrings(FTables[i], AStrings);
+  end;
 end;
 
 procedure TBaseDataModule.LoadFromStrings(AStrings: TStrings; var APosition: Integer);

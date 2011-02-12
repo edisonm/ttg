@@ -18,14 +18,12 @@ inherited ProfesorForm: TProfesorForm
       Left = 256
       Top = 0
       Action = ActProfesorProhibicion
-      ParentShowHint = False
       ShowHint = True
     end
     object BtnDistributivo: TToolButton
       Left = 279
       Top = 0
       Action = ActDistributivo
-      ParentShowHint = False
       ShowHint = True
     end
   end

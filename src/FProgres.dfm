@@ -721,7 +721,6 @@ object ProgressForm: TProgressForm
     Height = 17
     Min = 0
     Max = 100
-    ParentShowHint = False
     ShowHint = True
     TabOrder = 3
   end

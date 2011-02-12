@@ -49,7 +49,6 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Height = 22
       Hint = 'Ver|Seleccione el par'#225'metro a ver en el horario'
       ItemHeight = 0
-      ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       Text = 'cbVerParalelo'
@@ -60,7 +59,6 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Top = 0
       Hint = 'Intercambiar per'#237'odos|Intercambiar per'#237'odos'
       ImageIndex = 6
-      ParentShowHint = False
       ShowHint = True
       OnClick = IntercambiarPeriodosClick
     end

@@ -17,7 +17,6 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
       Top = 0
       Hint = 'Aceptar|Aceptar'
       ImageIndex = 1
-      ParentShowHint = False
       ShowHint = True
       OnClick = BtnOkClick
     end
@@ -26,7 +25,6 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
       Top = 0
       Hint = 'Cancelar|Cancelar'
       ImageIndex = 2
-      ParentShowHint = False
       ShowHint = True
       OnClick = BtnCancelClick
     end
@@ -53,7 +51,6 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
     ColCount = 2
     DefaultColWidth = 80
     RowCount = 2
-    ParentShowHint = False
     ShowHint = True
     TabOrder = 0
     OnDrawCell = DrawGridDrawCell

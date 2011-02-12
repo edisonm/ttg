@@ -197,7 +197,7 @@ var
       begin
         with Item[j] do
         begin
-          if (Attributes and dbAutoIncrField) <> 0 then
+          if not ALazarusFrm and ((Attributes and dbAutoIncrField) <> 0) then
             VFieldClassName := 'TAutoIncField'
           else
           begin
@@ -216,8 +216,8 @@ var
           StringDFM.Add('      FieldName = ''' + name + '''');
           if Required then
             StringDFM.Add('      Required = True');
-          if ((Attributes and dbAutoIncrField) <> 0) and ALazarusFrm then
-            StringDFM.Add('      ReadOnly = False');
+{          if ((Attributes and dbAutoIncrField) <> 0) and ALazarusFrm then
+            StringDFM.Add('      ReadOnly = False');}
           vv := DefaultValue;
           if not VarIsNull(vv) and (vv <> '') then
             StringDFM.Add
@@ -298,10 +298,45 @@ var
       end;
     end;
   end;
+
+  function GetFields(Item: Index): string;
+  var
+    k: Integer;
+  begin
+    Result := '';
+    with Item do if Primary then
+    begin
+      for k := 0 to Fields.Count - 1 do
+      begin
+        if Result = '' then
+          Result := Fields.Item[k].Name
+        else
+          Result := Result + ';' + Fields.Item[k].Name;
+      end;
+    end;
+  end;
+
+  function GetDescFields(Item: Index): string;
+  var
+    k: Integer;
+  begin
+    Result := '';
+    with Item do for k := 0 to Fields.Count - 1 do
+    begin
+      if Fields.Item[k].Attributes = dbDescending then
+      begin
+        if Result = '' then
+          Result := Fields.Item[k].Name
+        else
+          Result := Result + ';' + Fields.Item[k].Name;
+      end;
+    end;
+  end;
+
   procedure CreateIndexDefs;
   var
     s, d, o: string;
-    k, n, i: Smallint;
+    n, i: Smallint;
   begin
     with VTableDef, Indexes do
     begin
@@ -323,22 +358,8 @@ var
               *)
             s := Name;
             StringDFM.Add(Format('        Name = ''Tb%s%s''', [VTableDef.name, s]));
-            s := '';
-            d := '';
-            for k := 0 to Fields.Count - 1 do
-            begin
-              if s = '' then
-                s := Fields.Item[k].Name
-              else
-                s := s + ';' + Fields.Item[k].Name;
-              if Fields.Item[k].Attributes = dbDescending then
-              begin
-                if d = '' then
-                  d := Fields.Item[k].Name
-                else
-                  d := d + ';' + Fields.Item[k].Name;
-              end;
-            end;
+            s := GetFields(Item[i]);
+            d := GetDescFields(Item[i]);
             o := '';
             if d <> '' then
             begin
@@ -375,10 +396,35 @@ var
       end;
     end;
   end;
+  function GetPrimaryKey: Index;
+  var
+    n, i: Smallint;
+  begin
+    with VTableDef, Indexes do
+    begin
+      n := Count;
+      if n <> 0 then
+      begin
+        for i := 0 to n - 1 do
+          with Item[i] do
+          begin
+            if Primary then
+            begin
+              Result := Item[i];
+              Break;
+            end;
+          end;
+      end;
+    end;
+  end;
+  function GetPrimaryKeyFields: string;
+  begin
+    Result := GetFields(GetPrimaryKey);
+  end;
 
 var
   i, j, k: Smallint;
-  s, d: string;
+  s, d, PrimaryKeyFields: string;
   ProcDefs, ProcImpl: TStrings;
   MasterRels, DetailRels: array of TList; // TList used as Integer list
 begin
@@ -456,6 +502,13 @@ begin
             StringDFM.Add('    FieldDefs = <>');
           if ACreateIndexDefs then
             CreateIndexDefs;
+          //if ASetPrimaryKey then
+          begin
+            PrimaryKeyFields := GetPrimaryKeyFields;
+            if PrimaryKeyFields <> '' then
+              StringDFM.Add(Format('    IndexFieldNames = ''%s''',
+                [PrimaryKeyFields]));
+          end;
           if (DetailRels[i].Count > 0) or (MasterRels[i].Count > 0) then
           begin
             StringDFM.Add('    BeforePost = DataSetBeforePost');

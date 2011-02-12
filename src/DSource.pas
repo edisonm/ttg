@@ -256,7 +256,7 @@ const
     );
 var
   t: TDateTime;
-  i, j: Integer;
+  i: Integer;
   s: string;
 begin
   // Default configuration
@@ -305,7 +305,7 @@ begin
       for i := Low(LongDayNames) + 1 to High(LongDayNames) - 1 do
       begin
         Append;
-        // Fields[0].AsInteger := i;
+        Fields[0].AsInteger := i;
         Fields[1].AsString := LongDayNames[i];
         Post;
       end;
@@ -338,7 +338,6 @@ begin
         TbHora.First;
         while not TbHora.Eof do
         begin
-          TbHora.Next;
           if TbHoraNomHora.AsString <> 'Recreo' then
           begin
             Append;
@@ -346,6 +345,7 @@ begin
             Fields[1].AsInteger := TbHoraCodHora.AsInteger;
             Post;
           end;
+          TbHora.Next;
         end;
         TbDia.Next;
       end;
@@ -355,7 +355,7 @@ begin
       for i := Low(SNomMateProhibicionTipo) to High(SNomMateProhibicionTipo) do
       begin
         Append;
-        // Fields[0].AsInteger := i;
+        Fields[0].AsInteger := i;
         Fields[1].AsString := SNomMateProhibicionTipo[i];
         Fields[2].AsInteger := EColMateProhibicionTipo[i];
         Fields[3].AsFloat := EValMateProhibicionTipo[i];
@@ -367,7 +367,7 @@ begin
       for i := Low(SNomProfProhibicionTipo) to High(SNomProfProhibicionTipo) do
       begin
         Append;
-        // Fields[0].AsInteger := i;
+        Fields[0].AsInteger := i;
         Fields[1].AsString := SNomProfProhibicionTipo[i];
         Fields[2].AsInteger := EColProfProhibicionTipo[i];
         Fields[3].AsFloat := EValProfProhibicionTipo[i];

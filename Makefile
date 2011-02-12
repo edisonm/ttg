@@ -124,6 +124,7 @@ clean:
 	  -e s:"    LocaleID = .*":"":g \
 	  -e s:"    FilterOptions = .*":"":g \
 	  -e s:"      Lookup = .*":"":g \
+	  -e s:"      ParentShowHint = .*":"":g \
 	  -e s:"      Calculated = .*":"":g $< > $@
 
 %.lrs: %.lfm

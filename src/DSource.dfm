@@ -246,9 +246,6 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbMateriaProhibicion: TkbmMemTable
-    IndexFieldNames = 'CodMateria'
-    MasterFields = 'CodMateria'
-    MasterSource = DSMateria
     inherited TbMateriaProhibicionCodMateria: TIntegerField
       Visible = False
     end
@@ -312,9 +309,6 @@ inherited SourceDataModule: TSourceDataModule
         DataType = ftString
         Size = 40
       end>
-    IndexFieldNames = 'CodProfesor'
-    MasterFields = 'CodProfesor'
-    MasterSource = DSProfesor
     inherited TbDistributivoCodMateria: TIntegerField
       Visible = False
     end
@@ -438,9 +432,6 @@ inherited SourceDataModule: TSourceDataModule
     end
   end
   inherited TbProfesorProhibicion: TkbmMemTable
-    IndexFieldNames = 'CodProfesor'
-    MasterFields = 'CodProfesor'
-    MasterSource = DSProfesor
     inherited TbProfesorProhibicionCodProfesor: TIntegerField
       Visible = False
     end

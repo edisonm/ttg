@@ -2,4 +2,4 @@
 {$MODE Delphi}
 {$ENDIF}
 
-{$DEFINE FREEWARE}
+{ $DEFINE FREEWARE}

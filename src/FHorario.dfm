@@ -22,77 +22,66 @@ inherited HorarioForm: THorarioForm
       Left = 200
       Top = 0
       Action = ActHorarioParalelo
-      ParentShowHint = False
       ShowHint = True
     end
     object BtnHorarioAulaTipo: TToolButton
       Left = 223
       Top = 0
       Action = ActHorarioAulaTipo
-      ParentShowHint = False
       ShowHint = True
     end
     object BtnHorarioProfesor: TToolButton
       Left = 246
       Top = 0
       Action = ActHorarioProfesor
-      ParentShowHint = False
       ShowHint = True
     end
     object BtnCruceProfesor: TToolButton
       Left = 269
       Top = 0
       Action = ActCruceProfesor
-      ParentShowHint = False
       ShowHint = True
     end
     object BtnCruceMateria: TToolButton
       Left = 292
       Top = 0
       Action = ActCruceMateria
-      ParentShowHint = False
       ShowHint = True
     end
     object BtnCruceAula: TToolButton
       Left = 315
       Top = 0
       Action = ActCruceAula
-      ParentShowHint = False
       ShowHint = True
     end
     object BtnMateriaProhibicionNoRespetada: TToolButton
       Left = 338
       Top = 0
       Action = ActMateriaProhibicionNoRespetada
-      ParentShowHint = False
       ShowHint = True
     end
     object BtnProfesorProhibicionNoRespetada: TToolButton
       Left = 361
       Top = 0
       Action = ActProfesorProhibicionNoRespetada
-      ParentShowHint = False
       ShowHint = True
     end
     object BtnSeleccionarHorario: TToolButton
       Left = 384
       Top = 0
       Action = ActSeleccionarHorario
-      ParentShowHint = False
       ShowHint = True
     end
     object BtnMateriaCortadaDia: TToolButton
       Left = 407
       Top = 0
       Action = ActMateriaCortadaDia
-      ParentShowHint = False
       ShowHint = True
     end
     object BtnMateriaCortadaHora: TToolButton
       Left = 430
       Top = 0
       Action = ActMateriaCortadaHora
-      ParentShowHint = False
       ShowHint = True
     end
   end
@@ -580,7 +569,7 @@ inherited HorarioForm: THorarioForm
       000000000000}
   end
   inherited DataSource: TDataSource
-    DataSet = QuCruceAula
+    DataSet = SourceDataModule.TbHorario
     Left = 60
     Top = 140
   end
@@ -2084,7 +2073,7 @@ inherited HorarioForm: THorarioForm
         DataType = ftString
         Size = 20
       end>
-    IndexFieldNames = 'CodDia;CodHora;CodHora0'
+    IndexFieldNames = 'CodDia;CodHora'
     IndexDefs = <>
     SortOptions = []
     PersistentBackup = False

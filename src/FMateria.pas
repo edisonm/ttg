@@ -35,12 +35,24 @@ uses
 
 procedure TMateriaForm.ActMateriaProhibicionExecute(Sender: TObject);
 begin
+  with SourceDataModule do
   if TCrossManyToManyEditorRForm.ToggleEditor(Self,
                                               FMateriaProhibicionForm,
 					      ConfigStorage,
 					      ActMateriaProhibicion) then
-  with SourceDataModule, FMateriaProhibicionForm do
+  with FMateriaProhibicionForm do
   begin
+    with TbMateriaProhibicion do
+    begin
+      DisableControls;
+      try
+        IndexFieldNames := 'CodMateria';
+        MasterFields := 'CodMateria';
+        MasterSource := DSMateria;
+      finally
+        EnableControls;
+      end
+    end;
     Caption := Format('%s %s - Editando %s', [
 		      SourceDataModule.NameDataSet[TbMateria],
 		      TbMateriaNomMateria.Value,
@@ -58,7 +70,9 @@ begin
       'CodMateProhibicionTipo');
     Tag := TbMateriaCodMateria.Value;
     OnActivate := FormActivate;
-  end;
+  end
+  else
+    TbMateriaProhibicion.MasterSource := nil;
 end;
 
 procedure TMateriaForm.FormActivate(Sender: TObject);

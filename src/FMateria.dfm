@@ -16,7 +16,6 @@ inherited MateriaForm: TMateriaForm
       Left = 256
       Top = 0
       Action = ActMateriaProhibicion
-      ParentShowHint = False
       ShowHint = True
     end
   end
