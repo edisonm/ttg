@@ -78,19 +78,20 @@ begin
   else
   begin
     WriteLn(
-      'ACC2DM.  Convertidor de bases de datos de Access a m¢dulo de datos versi¢n 1.1'#13#10 +
+      'ACC2DM.  Access to Data Module Converter version 1.1'#13#10 +
       #13#10 +
-      'Edici¢n 09-17-2000 por Edison Mera.'#13#10 +
-      'Usar:'#13#10 +
-      '  ACC2DM NombreArchivoAccess NombreDataModule NombreArchivo [/DS]'#13#10 +
+      'Edition 09-17-2011 by Edison Mera.'#13#10 +
+      'Usage:'#13#10 +
+      '  ACC2DM AccessFileName NombreDataModule NombreArchivo [Option1;Option2;...]'#13#10 +
       #13#10 +
-      '  NombreArchivoAccess:    Nombre del archivo de Access.'#13#10 +
-      '  NombreDataModule:       Nombre del M¢dulo de datos.'#13#10 +
-      '  NombreArchivo:          Nombre del archivo del m¢dulo de datos sin extensi¢n.'#13#10 +
-      '  /DS:                    Especifica que se genere los DataSource para cada DataSet.'#13#10 +
+      '  AccessFileName:        Name of the Access File.'#13#10 +
+      '  DataModuleName:        Name of the Data Module.'#13#10 +
+      '  FileName:              Name of the Data Module File without extension.'#13#10 +
+      '  [Option1;Option2;...]: Optional Options separated with semi colon.'#13#10 +
+      '  Valid options are cds;csi;cid;csf;cfd;cdf;csr;lfm;DS=DataSetClassName;U=Units'#13#10 +
       #13#10 +
       'Ejemplo:'#13#10 +
-      '  ACC2DM PRUEBA.MDB DatosPrueba C:\DATOS\DmPrueba /DS');
+      '  ACC2DM Test.mdb TestData c:\data\DmTest cds;csi');
   end;
 end;
 

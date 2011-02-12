@@ -36,18 +36,18 @@ type
   TBooleanArray = array[0..16383] of Boolean;
 {
   Clase TModeloHorario
-  Descripción:
-    Implementa la carga de la información desde la base de datos a la memoria
+  Descripcion:
+    Implementa la carga de la informacion desde la base de datos a la memoria
     RAM.
     Miembros privados:
-      Todos los arreglos dinámicos que contienen la información, los campos que
-      contienen los pesos de la función objetivo y las funciones de uso interno.
+      Todos los arreglos dinamicos que contienen la informacion, los campos que
+      contienen los pesos de la funcion objetivo y las funciones de uso interno.
     Miembros protegidos:
-      Arreglo dinámico que contiene el molde de un horario, que facilita la
-      construcción de soluciones.
-    Miembros públicos:
-      El constructor, la función que permite configurar los pesos y los pesos
-      de cada restricción.
+      Arreglo dinamico que contiene el molde de un horario, que facilita la
+      construccion de soluciones.
+    Miembros publicos:
+      El constructor, la funcion que permite configurar los pesos y los pesos
+      de cada restriccion.
 }
   TModeloHorario = class
   private
@@ -159,21 +159,21 @@ type
   //TCountFunc = procedure(Count, Cant: Integer) of object;
 {
   Clase TObjetoModeloHorario
-  Descripción:
-    Implementa una solución del problema.
+  Descripcion:
+    Implementa una solucion del problema.
     Miembros privados:
-      Todos los arreglos dinámicos que contienen la información consistentes en
+      Todos los arreglos dinamicos que contienen la informacion consistentes en
       el horario, las claves aleatorias y datos temporales que aceleran la
-      evaluación de la función objetivo, los campos que contienen los valores
-      de cada parte de la función objetivo y las funciones de uso interno.
+      evaluacion de la funcion objetivo, los campos que contienen los valores
+      de cada parte de la funcion objetivo y las funciones de uso interno.
     Miembros protegidos:
-      Propiedad que forza a que se reevalúe toda la función objetivo.
-    Miembros públicos:
-      propiedades que devuelven el valor de cada componente de la función
-      objetivo, el valor de la función objetivo, el constructor, funciones que
-      permiten guardar el horario en una base de datos, métodos que consisten
-      en los operadores genéticos, como son cruce, mutación, etc., ModeloHorario
-      al que pertenece esta solución.
+      Propiedad que forza a que se reevalue toda la funcion objetivo.
+    Miembros publicos:
+      propiedades que devuelven el valor de cada componente de la funcion
+      objetivo, el valor de la funcion objetivo, el constructor, funciones que
+      permiten guardar el horario en una base de datos, metodos que consisten
+      en los operadores geneticos, como son cruce, mutacion, etc., ModeloHorario
+      al que pertenece esta solucion.
 }
   TObjetoModeloHorario = class
   private
@@ -314,7 +314,7 @@ type
     property ProfesorFraccionamiento: Integer read FProfesorFraccionamiento;
   end;
 
-// Procedimiento que crea una solución aleatoria de un TModeloHorario
+// Procedimiento que crea una solucion aleatoria de un TModeloHorario
 procedure CrearAleatorioDesdeModelo(var AObjetoModeloHorario:
   TObjetoModeloHorario; AModeloHorario: TModeloHorario);
 procedure CargarPrefijadoDesdeModelo(var AObjetoModeloHorario:
@@ -774,8 +774,8 @@ var
           q := d + o;
           if (q < 0) or (q >= r) then
             raise
-              Exception.CreateFmt('Se desbordó Molde de ParaleloPeriodoASesion: ' +
-              'Paralelo %d-%d Duración %d', [FParaleloANivel[k],
+              Exception.CreateFmt('Se desbordo Molde de ParaleloPeriodoASesion: ' +
+              'Paralelo %d-%d Duracion %d', [FParaleloANivel[k],
               FParaleloAParaleloId[k], q]);
           FMoldeHorarioDetalle[k, r - 1 - q] := FDistributivoASesiones[i, m];
         end;
@@ -1302,8 +1302,8 @@ begin
 end;
 
 {
-  Versión en Pascal del procedimiento Normalizar.  No borrar, ya que es la base
-  de la versión en ensamblador
+  Version en Pascal del procedimiento Normalizar.  No borrar, ya que es la base
+  de la version en ensamblador
 }
 
 procedure TObjetoModeloHorario.Normalizar(AParalelo: Smallint;
@@ -1783,7 +1783,7 @@ var
   q, r: PSmallintArray;
   FIncDiaProfesorCantHora,
     FIncProfesorPeriodoCant: TDynamicSmallintArrayArray;
-  // TList será usado como arreglo de enteros de 32 bits, no de punteros!
+  // TList sera usado como arreglo de enteros de 32 bits, no de punteros!
   procedure InsertarCambio(d, p: Smallint);
   var
     v: Longword;
@@ -2657,9 +2657,9 @@ begin
     begin
       d := FSesionADuracion[p[j]];
       if q[j] <> q[j + d - 1] then
-        raise Exception.Create('Error de sincronización entre clave aleatoria, duración y períodos ' + s);
+        raise Exception.Create('Error de sincronizacion entre clave aleatoria, duracion y periodos ' + s);
       if p[j] <> p[j + d - 1] then
-        raise Exception.Create('Error de sincronización entre sesión, duración y períodos ' + s);
+        raise Exception.Create('Error de sincronizacion entre sesion, duracion y periodos ' + s);
       j := j + d;
     end;
   end;

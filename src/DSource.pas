@@ -186,7 +186,7 @@ begin
   inherited;
   s := TbDistributivoComposicion.AsString;
   if ComposicionADuracion(s) <= 0 then
-    raise Exception.CreateFmt('Composición no válida: "%s"', [s]);
+    raise Exception.CreateFmt('Composicion no valida: "%s"', [s]);
   with TbDistributivoCodMateria do DefaultExpression := AsString;
   with TbDistributivoCodNivel do DefaultExpression := AsString;
   with TbDistributivoCodEspecializacion do DefaultExpression := AsString;
@@ -227,7 +227,7 @@ const
     'Recreo',
     'Quinta',
     'Sexta',
-    'Séptima',
+    'Septima',
     'Octava'
     );
   SNomMateProhibicionTipo: array[0..1] of string = (
@@ -297,7 +297,7 @@ begin
   Compartir := '';
   RangoPolinizacion := 1;
 
-  // Días laborables por defecto, excepto sábados y domingos:
+  // Dias laborables por defecto, excepto sabados y domingos:
   CheckRelations := False;
   try
     with TbDia do
@@ -329,7 +329,7 @@ begin
         Post;
       end;
     end;
-    // Generar todos los períodos, exceptuando el sábado, domingo y el recreo:
+    // Generar todos los periodos, exceptuando el sabado, domingo y el recreo:
     with TbPeriodo do
     begin
       TbDia.First;

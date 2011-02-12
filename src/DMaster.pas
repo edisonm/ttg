@@ -179,7 +179,7 @@ var
       IndexFieldNames := s;
     end;
   end;
-  // Chequea que no hayan asignadas más horas de materias a profesores de las
+  // Comprueba que no hayan asignadas mas horas de materias a profesores de las
   // permitidas
   procedure CheckProfesorProhibicionCant;
   var
@@ -195,7 +195,7 @@ var
       if not IsEmpty then
       begin
         try
-          ASubStrings.Add('Número de prohibiciones de profesores sin problemas...');
+          ASubStrings.Add('Numero de prohibiciones de profesores sin problemas...');
           vSubMin := ASubStrings.Count;
           ASubStrings.Add('Profesor; Prohibiciones');
           while not Eof do
@@ -208,7 +208,7 @@ var
               begin
                 if not HuboProblemasInterno then
                 begin
-                  AMainStrings.Add('Número de prohibiciones de Profesores con problemas...');
+                  AMainStrings.Add('Numero de prohibiciones de Profesores con problemas...');
                   vMainMin := AMainStrings.Count;
                   AMainStrings.Add('Profesor; Prohibiciones');
                 end;
@@ -351,7 +351,7 @@ var
         ASubStrings.Add('');
       end;
   end;
-  // Chequea que no hayan asignadas más horas de materias a Cursos que períodos
+  // Comprueba que no hayan asignadas mas horas de materias a Cursos que periodos
   procedure CheckCursoCarga;
   var
     t, vMainMin, vMainMax, vSubMin, vSubMax: Integer;

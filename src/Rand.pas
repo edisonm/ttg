@@ -5,14 +5,14 @@ unit Rand;
 (*******************************************************************************
 
   Archivo: rand.pas
-  Sistema: Unidad común.
-  Versión: 1.0
+  Sistema: Unidad comun.
+  Version: 1.0
 
   Creado:
     07/02/1998
 
-  Descripción
-    generador de números aleatorios 32/64 bits
+  Descripcion
+    generador de numeros aleatorios 32/64 bits
 
     algoritmo lineal congruente con carga, dos generadores acoplados:
 
@@ -34,7 +34,7 @@ unit Rand;
     return (x1 + y2) * 2^32 + (x2 + y1);
 
 
-    Período: p = p1*p2 ~ 2^126
+    Periodo: p = p1*p2 ~ 2^126
     p1 = [(m1/2)*2^32-1]
     p2 = [(m2/2)*2^32-1]
     m1 <> m2
@@ -61,7 +61,7 @@ unit Rand;
     Delphi / Pascal
   Compatibilidad:
     Delphi 2.0 en adelante / Debe funcionar en C++ Builder.  Algunas funciones
-    sólo funcionan en Delphi 4.0.
+    solo funcionan en Delphi 4.0.
 
   Últimas revisiones:
     20-04-1999
@@ -73,15 +73,14 @@ unit Rand;
 
   Derechos de Autor (c) 1999, Edison Mera.  Todos los derechos reservados.
 
-  Este código fuente contiene información privada con secretos de fábrica,
-  y no está disponible para publicación.  Este código no debe ser desclasificado
-  a NADIE, excepto a quienes tengan una autorización escrita.
+  Este codigo fuente contiene informacion privada con secretos de fabrica,
+  y no esta disponible para publicacion.  Este codigo no debe ser desclasificado
+  a NADIE, excepto a quienes tengan una autorizacion escrita.
 
-  Recuerde que la piratería está penada por la Ley.
+  Recuerde que la pirateria esta penada por la Ley.
 
   Edison Mera.
-  edmera@yahoo.com
-  593-2-451-004
+  edmera@gmail.com
 
 *******************************************************************************)
 
@@ -107,7 +106,7 @@ function crand32: Longint;
 // 0 <= crand32 < 4294967296
 function urand32: Longword;
 
-// generador de números flotantes de precisión extendida:
+// generador de numeros flotantes de precision extendida:
 // 0 <= randl < 1
 function randl: Extended;
 
@@ -116,10 +115,10 @@ function randl: Extended;
 function rand64: Int64;
 // assembler;
 
-// Función que llena una área de memoria con bits generados aleatoriamente.
+// Funcion que llena un area de memoria con bits generados aleatoriamente.
 procedure FillRandom(var X; Count: Integer);
 
-// Función que llena un arreglo de Longint con números generados aleatoriamente,
+// Funcion que llena un arreglo de Longint con numeros generados aleatoriamente,
 // de 31 bits.
 procedure Fillcrand32(var X: array of Longint; Count: Integer);
 
@@ -141,8 +140,8 @@ var
   Seed4: Longint;
 
 (*---------------------------------------------------------------------------- )
-( Observese que esta función se programó en ensamblador, para evitar que el    )
-( compilador realice alguna optimización no deseada.                           )
+( Observese que esta funcion se programo en ensamblador, para evitar que el    )
+( compilador realice alguna optimizacion no deseada.                           )
 (-----------------------------------------------------------------------------*)
 
 {$IFDEF USEASSEMBLER}
@@ -217,7 +216,7 @@ asm
     mov     Seed4, edx
 end;
 
-// función que genera un número aleatorio de 32 bits con signo
+// funcion que genera un numero aleatorio de 32 bits con signo
 
 function rand32: Longint; assembler;
 asm
@@ -226,7 +225,7 @@ asm
     add      eax, Seed1
 end;
 
-// función que genera un número aleatorio de 31 bits sin signo
+// funcion que genera un numero aleatorio de 31 bits sin signo
 
 function crand32: Longint; assembler;
 asm
@@ -236,7 +235,7 @@ asm
     and      eax, $7FFFFFFF
     wait
 end;
-// función que genera un número aleatorio de 32 bits sin signo
+// funcion que genera un numero aleatorio de 32 bits sin signo
 
 function urand32: Longword; assembler;
 asm
@@ -275,21 +274,21 @@ begin
   Result := Seed3;
 end;
 
-// función que genera un número aleatorio de 32 bits con signo
+// funcion que genera un numero aleatorio de 32 bits con signo
 
 function rand32: Longint;
 begin
   Result := _rand321 + _rand322;
 end;
 
-// función que genera un número aleatorio de 31 bits sin signo
+// funcion que genera un numero aleatorio de 31 bits sin signo
 
 function crand32: Longint;
 begin
   Result := (_rand321 + _rand322) and $7FFFFFFF;
 end;
 
-// función que genera un número aleatorio de 32 bits sin signo
+// funcion que genera un numero aleatorio de 32 bits sin signo
 
 function urand32: Longword;
 begin
@@ -341,9 +340,9 @@ begin
 end;
 
 (*-----------------------------------------------------------------------------)
-(  la función en ensamblador es 140% más rápida que su equivalente en Pascal:  )
-(  nótese que debido a lo crítico de esta función, las funciones _rand321 y    )
-(  _rand322 fueron expandidas en línea                                         )
+(  la funcion en ensamblador es 140% mas rapida que su equivalente en Pascal:  )
+(  notese que debido a lo critico de esta funcion, las funciones _rand321 y    )
+(  _rand322 fueron expandidas en linea                                         )
 (-----------------------------------------------------------------------------*)
 
 {$IFDEF USEASSEMBLER}

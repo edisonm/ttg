@@ -36,9 +36,10 @@
       <Unit0>
         <Filename Value="TTG.lpr"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="61"/>
+        <TopLine Value="1"/>
         <CursorPos X="73" Y="72"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
@@ -247,7 +248,7 @@
         <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="83" Y="18"/>
+        <CursorPos X="104" Y="9"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -277,7 +278,7 @@
         <UnitName Value="DSrcBase"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="132"/>
+        <TopLine Value="141"/>
         <CursorPos X="37" Y="141"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
@@ -294,10 +295,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSource"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="397"/>
+        <TopLine Value="396"/>
         <CursorPos X="39" Y="408"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>

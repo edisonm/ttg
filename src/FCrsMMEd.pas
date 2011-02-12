@@ -124,7 +124,7 @@ begin
   begin
     Release;
     s := DataSet.Name;
-    raise Exception.CreateFmt('%s está vacío', [s]);
+    raise Exception.CreateFmt('%s esta vacio', [s]);
   end;
 end;
 

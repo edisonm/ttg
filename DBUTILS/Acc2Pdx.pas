@@ -38,7 +38,7 @@ begin
   else
   begin
     WriteLn(
-      'ACC2PDX.  Convertidor de bases de datos de Access a paradox versi¢n 1.1'#13#10 +
+      'ACC2PDX.  Convertidor de bases de datos de Access a paradox version 1.1'#13#10 +
       #13#10 +
       'Edici¢n 02-26-1999 por Edison Mera.'#13#10 +
       'Usar:'#13#10 +

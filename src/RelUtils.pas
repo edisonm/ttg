@@ -388,7 +388,7 @@ end;
 procedure doErrorRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADetailFields: string);
 begin
   if CheckRelation(AMaster, ADetail, AMasterFields, ADetailFields) then
-    raise ERelationUtils.CreateFmt('Error verificando relación entre %s y %s.  Campos detallados no tienen maestro',
+    raise ERelationUtils.CreateFmt('Error verificando relacion entre %s y %s.  Campos detallados no tienen maestro',
       [AMaster.Name, ADetail.Name]);
 end;
 

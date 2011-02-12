@@ -11,22 +11,22 @@ type
   TObjetoModeloHorarioArray = array of TObjetoModeloHorario;
 {
   Clase TEvolElitista
-  Descripción:
+  Descripcion:
     Implementa el algoritmo evolutivo, utilizando el modelo elitista.
     Miembros privados:
-      Los parámetros de configuración del algoritmo evolutivo, y las funciones
+      Los parametros de configuracion del algoritmo evolutivo, y las funciones
       de uso interno.
     Miembros protegidos:
       No los hay.
-    Miembros públicos:
-      propiedades que devuelven el valor de cada componente de la evaluación
-      de la función objetivo en la mejor solución encontrada,
-      el valor de la función objetivo, el constructor, funciones que
-      permiten guardar el horario encontrado en una base de datos, métodos que
-      consisten en los operadores genéticos aplicados sobre la población, como
-      son cruce, mutación, etc., ModeloHorario al que se aplica el algoritmo
-      evolutivo, método que permite ejecutar el algoritmo evolutivo, Eventos que
-      se disparan cada cierto número de generaciones y cuando mejora la solución.
+    Miembros publicos:
+      propiedades que devuelven el valor de cada componente de la evaluacion
+      de la funcion objetivo en la mejor solucion encontrada,
+      el valor de la funcion objetivo, el constructor, funciones que
+      permiten guardar el horario encontrado en una base de datos, metodos que
+      consisten en los operadores geneticos aplicados sobre la poblacion, como
+      son cruce, mutacion, etc., ModeloHorario al que se aplica el algoritmo
+      evolutivo, metodo que permite ejecutar el algoritmo evolutivo, Eventos que
+      se disparan cada cierto numero de generaciones y cuando mejora la solucion.
 }
   TEvolElitista = class
   private
@@ -776,7 +776,7 @@ end;
 procedure TEvolElitista.LlenarInforme(AInforme: TStrings);
 begin
   AInforme.Add(Format(
-    'Semillas del generador de números aleatorios:'#13#10 +
+    'Semillas del generador de numeros aleatorios:'#13#10 +
     '  Semilla 1: %d'#13#10 +
     '  Semilla 2: %d'#13#10 +
     '  Semilla 3: %d'#13#10 +
@@ -803,11 +803,11 @@ begin
         MateriaNoDispersaValor]));
   end;
   AInforme.Add(Format(
-    'Parámetros: %d; %d; %g; %g; %d; %g; %g',
+    'Parametros: %d; %d; %g; %g; %d; %g; %g',
     [FTamPoblacion, FNumMaxGeneracion, FProbCruzamiento,
     FProbMutacion1, FOrdenMutacion1, FProbMutacion2, FProbReparacion]));
   AInforme.Add(Format(
-    'Número de generaciones:     %5.d '#13#10 +
+    'Numero de generaciones:     %5.d '#13#10 +
     'Detalle                     Cant.    Valor'#13#10 +
     'Cruce de profesores:        %5.d %8.2f'#13#10 +
     'Fracc. h. profesores:       %5.f %8.2f'#13#10 +

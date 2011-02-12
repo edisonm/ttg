@@ -408,8 +408,8 @@ end;
 function TMainForm.ConfirmOperation: boolean;
 begin
   Result :=
-    MessageDlg('Los cambios realizados hasta el momento se perderán, '#13#10
-    + '¿Está seguro?', mtWarning, [mbYes, mbNo], 0) = mrYes
+    MessageDlg('Los cambios realizados hasta el momento se perderan, '#13#10
+    + '¿Esta seguro?', mtWarning, [mbYes, mbNo], 0) = mrYes
 end;
 
 procedure TMainForm.ActNewExecute(Sender: TObject);
@@ -506,8 +506,8 @@ begin
 {$IFNDEF FREEWARE}
   with MasterDataModule do
   begin
-    if not InputQuery('Códigos de los Horarios: ',
-      'Ingrese los códigos de los Horarios a generar', s) then
+    if not InputQuery('Codigos de los Horarios: ',
+      'Ingrese los codigos de los Horarios a generar', s) then
       Exit;
     ElaborarHorario(s);
   end;
@@ -531,7 +531,7 @@ var
       NumMaxGeneracion := vEvolElitista.NumMaxGeneracion;
       FInit := Now;
       Caption :=
-        Format('Elaboración en progreso [%d]', [CodHorario]);
+        Format('Elaboracion en progreso [%d]', [CodHorario]);
       lblInit.Caption := FormatDateTime(Format('%s %s ', [ShortDateFormat,
         LongTimeFormat]), FInit);
       FCloseClick := False;
@@ -589,7 +589,7 @@ var
       else
         FCodFin := StrToInt(ExtractString(d, iPosd, '-'));
       if iPosd <= Length(d) then
-        raise Exception.Create('El dato ingresado no es válido');
+        raise Exception.Create('El dato ingresado no es valido');
       for iCod := FCodIni to FCodFin do
       begin
         ProcesarCodHorario(iCod);
@@ -629,7 +629,7 @@ begin
         if (Compartir <> '')
            and FileExists(VEvolElitista.SyncFileName) then
         begin
-          mr := MessageDlg('El archivo de sincronización ya existe.  ' +
+          mr := MessageDlg('El archivo de sincronizacion ya existe.  ' +
                              '¿Desea eliminar los archivos relacionados?',
                            mtWarning, [mbYes, mbNo, mbCancel], 0);
           if mr = mrYes then
@@ -639,7 +639,7 @@ begin
           end
           else if mr = mrCancel then
           begin
-            raise Exception.Create('Operación cancelada por el usuario');
+            raise Exception.Create('Operacion cancelada por el usuario');
           end
         end;
         VEvolElitista.PrefijarHorarios(HorarioIni);
@@ -651,7 +651,7 @@ begin
           sProb := '';
           ProcessCodList(s);
           if sProb <> '' then
-            MessageDlg(Format('Los siguientes horarios ya existían: %s',
+            MessageDlg(Format('Los siguientes horarios ya existian: %s',
                               [sProb]), mtError, [mbOK], 0);
         finally
           VEvolElitista.Free;
@@ -882,14 +882,14 @@ begin
         or (LastDate > Now)) then
       begin
         MessageDlg('El tiempo de prueba a concluido'#13#10 +
-          ' El sistema correrá sin las opciones que permiten generar el horario',
+          ' El sistema se ejecutara sin las opciones que permiten generar el horario',
           mtWarning, [mbOk], 0);
         ActElaborarHorario.Enabled := False;
         ActMejorarHorario.Enabled := False;
       end
       else if Protect1.DaysExpire > 0 then
       begin
-        StatusBar.Panels[2].Text := Format('Transcurridos %d de %d días',
+        StatusBar.Panels[2].Text := Format('Transcurridos %d de %d dias',
           [Trunc(LastDate - InitDate), Protect1.DaysExpire]);
       end
       else
@@ -985,7 +985,7 @@ begin
   end
   else
   begin
-    if MessageDlg('No se encontraron errores, está listo para generar horario.'#13#10 +
+    if MessageDlg('No se encontraron errores, esta listo para generar horario.'#13#10 +
                     '¿Desea mostrar el resumen del chequeo del horario?',
                   mtConfirmation, [mbYes, mbNo], 0) = mrYes then
       LogisticForm.Show;
@@ -1004,8 +1004,8 @@ end;
 procedure TMainForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose :=
-    MessageDlg('Los cambios realizados hasta el momento se perderán.'#13#10 +
-    '¿Está seguro que desea cerrar el programa?',
+    MessageDlg('Los cambios realizados hasta el momento se perderan.'#13#10 +
+    '¿Esta seguro que desea cerrar el programa?',
     mtWarning, [mbYes, mbNo], 0) = mrYes;
 end;
 
@@ -1379,13 +1379,13 @@ var
   s, d: string;
   va, vd: Double;
 begin
-  if not InputQuery('Código del horario a mejorar: ',
-    'Código del horario a mejorar', s) then
+  if not InputQuery('Codigo del horario a mejorar: ',
+    'Codigo del horario a mejorar', s) then
     Exit;
   if s = '' then
     Exit;
-  if not InputQuery('Código del horario mejorado: ',
-    'Código del horario mejorado', d) then
+  if not InputQuery('Codigo del horario mejorado: ',
+    'Codigo del horario mejorado', d) then
     Exit;
   CodHorarioFuente := StrToInt(s);
   CodHorarioDestino := StrToInt(d);
@@ -1448,7 +1448,7 @@ procedure TMainForm.FormDblClick(Sender: TObject);
 begin
 {$IFNDEF FREEWARE}
   if FEjecutando
-    and (MessageDlg('¿Está seguro de que desea finalizar esta operación?',
+    and (MessageDlg('¿Esta seguro de que desea finalizar esta operacion?',
     mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
     FCloseClick := True;
 {$ENDIF}

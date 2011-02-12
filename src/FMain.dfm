@@ -18,6 +18,9 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnDblClick = FormDblClick
   OnDestroy = FormDestroy
+  DesignSize = (
+    593
+    403)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -77,24 +80,28 @@ object MainForm: TMainForm
         Left = 0
         Top = 0
         Action = ActNew
+        ParentShowHint = False
         ShowHint = True
       end
       object SIOpen: TToolButton
         Left = 23
         Top = 0
         Action = ActOpen
+        ParentShowHint = False
         ShowHint = True
       end
       object SISave: TToolButton
         Left = 46
         Top = 0
         Action = ActSave
+        ParentShowHint = False
         ShowHint = True
       end
       object SIPasswd: TToolButton
         Left = 69
         Top = 0
         Action = ActPasswd
+        ParentShowHint = False
         ShowHint = True
       end
       object ToolButton1: TToolButton
@@ -103,6 +110,7 @@ object MainForm: TMainForm
         Width = 8
         Caption = 'ToolButton1'
         ImageIndex = 26
+        ParentShowHint = False
         ShowHint = True
         Style = tbsSeparator
       end
@@ -110,60 +118,70 @@ object MainForm: TMainForm
         Left = 100
         Top = 0
         Action = ActDia
+        ParentShowHint = False
         ShowHint = True
       end
       object SIHora: TToolButton
         Left = 123
         Top = 0
         Action = ActHora
+        ParentShowHint = False
         ShowHint = True
       end
       object SIPeriodo: TToolButton
         Left = 146
         Top = 0
         Action = ActPeriodo
+        ParentShowHint = False
         ShowHint = True
       end
       object SINivel: TToolButton
         Left = 169
         Top = 0
         Action = ActNivel
+        ParentShowHint = False
         ShowHint = True
       end
       object SIEspecializacion: TToolButton
         Left = 192
         Top = 0
         Action = ActEspecializacion
+        ParentShowHint = False
         ShowHint = True
       end
       object SIParaleloId: TToolButton
         Left = 215
         Top = 0
         Action = ActParaleloId
+        ParentShowHint = False
         ShowHint = True
       end
       object SIParalelo: TToolButton
         Left = 238
         Top = 0
         Action = ActParalelo
+        ParentShowHint = False
         ShowHint = True
       end
       object SIMateria: TToolButton
         Left = 261
         Top = 0
         Action = ActMateria
+        ParentShowHint = False
         ShowHint = True
       end
       object SIAulaTipo: TToolButton
         Left = 284
         Top = 0
         Action = ActAulaTipo
+        ParentShowHint = False
         ShowHint = True
       end
       object SIProfesor: TToolButton
         Left = 307
         Top = 0
         Action = ActProfesor
+        ParentShowHint = False
         ShowHint = True
       end
       object ToolButton3: TToolButton
@@ -172,6 +190,7 @@ object MainForm: TMainForm
         Width = 8
         Caption = 'ToolButton3'
         ImageIndex = 27
+        ParentShowHint = False
         ShowHint = True
         Style = tbsSeparator
       end
@@ -179,12 +198,14 @@ object MainForm: TMainForm
         Left = 338
         Top = 0
         Action = ActConfigurar
+        ParentShowHint = False
         ShowHint = True
       end
       object SIFindMejor: TToolButton
         Left = 361
         Top = 0
         Action = ActElaborarHorario
+        ParentShowHint = False
         ShowHint = True
       end
       object ToolButton4: TToolButton
@@ -193,6 +214,7 @@ object MainForm: TMainForm
         Width = 8
         Caption = 'ToolButton4'
         ImageIndex = 26
+        ParentShowHint = False
         ShowHint = True
         Style = tbsSeparator
       end
@@ -200,6 +222,7 @@ object MainForm: TMainForm
         Left = 392
         Top = 0
         Action = ActHorario
+        ParentShowHint = False
         ShowHint = True
       end
       object ToolButton2: TToolButton
@@ -208,6 +231,7 @@ object MainForm: TMainForm
         Width = 8
         Caption = 'ToolButton2'
         ImageIndex = 26
+        ParentShowHint = False
         ShowHint = True
         Style = tbsSeparator
       end
@@ -215,12 +239,14 @@ object MainForm: TMainForm
         Left = 423
         Top = 0
         Action = ActContents
+        ParentShowHint = False
         ShowHint = True
       end
       object SIIndex: TToolButton
         Left = 446
         Top = 0
         Action = ActIndex
+        ParentShowHint = False
         ShowHint = True
       end
     end

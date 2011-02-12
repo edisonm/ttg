@@ -5,13 +5,13 @@ unit SortAlgs;
 (*******************************************************************************
 
   Archivo: SortAlgs.pas
-  Sistema: Unidad común
-  Versión: 1.0
+  Sistema: Common Unit
+  Version: 1.0
 
   Creado:
     15/02/1999
 
-  Descripción:
+  Descripcion:
     Contiene funciones de ordenamiento de datos en memoria.
 
   Referencia:
@@ -24,8 +24,8 @@ unit SortAlgs;
     ArCtrls
 
   Compatibilidad:
-    Delphi 4.0 / Tiene características propias del Delphi 4.0, que lo hacen
-    difícil de hacer compatible con Delphi 3.0/2.0/1.0
+    Delphi 4.0 / Tiene caracteristicas propias del Delphi 4.0, que lo hacen
+    dificil de hacer compatible con Delphi 3.0/2.0/1.0
 
   Últimas revisiones:
     20-04-1999
@@ -37,15 +37,14 @@ unit SortAlgs;
 
   Derechos de Autor (c) 1999, Edison Mera.  Todos los derechos reservados.
 
-  Este código fuente contiene información privada con secretos de fábrica,
-  y no está disponible para publicación.  Este código no debe ser desclasificado
-  a NADIE, excepto a quienes tengan una autorización escrita.
+  Este codigo fuente contiene informacion privada con secretos de fabrica,
+  y no esta disponible para publicacion.  Este codigo no debe ser desclasificado
+  a NADIE, excepto a quienes tengan una autorizacion escrita.
 
-  Recuerde que la piratería está penada por la Ley.
+  Recuerde que la pirateria esta penada por la Ley.
 
   Edison Mera.
-  edmera@yahoo.com
-  593-2-923-751
+  efmera@gmail.com
 
 *******************************************************************************)
 
@@ -249,7 +248,7 @@ begin
   end; // for i := min to max - 1 do
 end;
 
-// Ordena una lista que está ordenada hasta med:
+// Ordena una lista que esta ordenada hasta med:
 
 procedure MySorterLongint(var List1: array of Longint; var List2: array of
   Smallint;
