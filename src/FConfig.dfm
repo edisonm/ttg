@@ -21,6 +21,7 @@ object ConfiguracionForm: TConfiguracionForm
     Width = 75
     Height = 25
     TabOrder = 0
+    OnClick = bbtnOkClick
     Kind = bkOK
   end
   object pgcConfig: TPageControl
@@ -29,17 +30,13 @@ object ConfiguracionForm: TConfiguracionForm
     Width = 401
     Height = 409
     ActivePage = tbsOpciones
+    ParentShowHint = False
     ShowHint = True
     TabOrder = 1
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
       Caption = 'Colegio'
       ImageIndex = 2
-      ShowHint = True
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label14: TLabel
         Left = 8
         Top = 109
@@ -279,8 +276,8 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 55
         Width = 233
         Height = 22
-        MaxValue = 0
-        MinValue = 0
+        MaxValue = 2147483647
+        MinValue = -2147483648
         TabOrder = 1
         Value = 1
       end
@@ -289,8 +286,8 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 79
         Width = 233
         Height = 22
-        MaxValue = 0
-        MinValue = 0
+        MaxValue = 2147483647
+        MinValue = -2147483648
         TabOrder = 2
         Value = 1
       end
@@ -299,8 +296,8 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 103
         Width = 233
         Height = 22
-        MaxValue = 0
-        MinValue = 0
+        MaxValue = 2147483647
+        MinValue = -2147483648
         TabOrder = 3
         Value = 1
       end
@@ -309,8 +306,8 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 127
         Width = 233
         Height = 22
-        MaxValue = 0
-        MinValue = 0
+        MaxValue = 2147483647
+        MinValue = -2147483648
         TabOrder = 4
         Value = 1
       end
@@ -332,8 +329,8 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 6
       end
       object speMostrarProfesorHorarioLongitud: TSpinEdit
-        Left = 72
-        Top = 296
+        Left = 77
+        Top = 299
         Width = 313
         Height = 22
         MaxValue = 2147483647
@@ -365,10 +362,6 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsPesos: TTabSheet
       Caption = 'Pesos'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label1: TLabel
         Left = 8
         Top = 12
@@ -601,10 +594,6 @@ object ConfiguracionForm: TConfiguracionForm
     object tbsAlgoritmoEvolutivo: TTabSheet
       Caption = 'Algoritmo Evolutivo'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label8: TLabel
         Left = 8
         Top = 13
@@ -741,6 +730,7 @@ object ConfiguracionForm: TConfiguracionForm
     Width = 75
     Height = 25
     TabOrder = 2
+    OnClick = bbtnCancelClick
     Kind = bkCancel
   end
   object DSMateriaProhibicionTipo: TDataSource

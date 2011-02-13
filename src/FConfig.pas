@@ -117,6 +117,8 @@ type
     procedure CBColProfProhibicionTipoExit(Sender: TObject);
     procedure DSProfesorProhibicionTipoDataChange(Sender: TObject;
       Field: TField);
+    procedure bbtnOkClick(Sender: TObject);
+    procedure bbtnCancelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -274,6 +276,16 @@ begin
     if (DSMateriaProhibicionTipo.State in [dsEdit, dsInsert])
         and (Value <> CBColMateProhibicionTipo.Selected) then
       Value := CBColMateProhibicionTipo.Selected;
+end;
+
+procedure TConfiguracionForm.bbtnCancelClick(Sender: TObject);
+begin
+  ModalResult := mrCancel;
+end;
+
+procedure TConfiguracionForm.bbtnOkClick(Sender: TObject);
+begin
+  ModalResult := mrOk;
 end;
 
 procedure TConfiguracionForm.CBColMateProhibicionTipoChange(Sender: TObject);

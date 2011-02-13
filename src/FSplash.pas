@@ -13,23 +13,18 @@ type
     lblProductName: TLabel;
     lblProductVersion: TLabel;
     lblCopyright: TLabel;
-    PBLoad: TProgressBar;
-    Label4: TLabel;
     lblTable: TLabel;
     lblYearLabel: TLabel;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Image1: TImage;
-    Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    procedure OnDataSetProgress(DataSet: TDataSet);
-    procedure IncPosition;
   end;
 
 var
@@ -44,22 +39,9 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-procedure TSplashForm.IncPosition;
+procedure TSplashForm.Image1Click(Sender: TObject);
 begin
-  PBLoad.Position := PBLoad.Position + 1;
-  Application.ProcessMessages;
-end;
-
-procedure TSplashForm.OnDataSetProgress(DataSet: TDataSet);
-begin
-  lblTable.Caption := DataSet.Name;
-  lblTable.Repaint;
-  IncPosition;
-end;
-
-procedure TSplashForm.Timer1Timer(Sender: TObject);
-begin
-  Free;
+  ModalResult := mrOk;
 end;
 
 procedure TSplashForm.FormCreate(Sender: TObject);

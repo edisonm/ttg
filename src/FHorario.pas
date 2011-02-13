@@ -5,10 +5,9 @@ unit FHorario;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Grids, DBGrids, StdCtrls, Buttons, FEditor,
-  DBCtrls, ExtCtrls, kbmMemTable, ImgList, ComCtrls, ToolWin, FMasDeEd,
-  ActnList, FHorProf, FHorAulT, FHorPara;
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
+  FSingEdt, Grids, DBGrids, StdCtrls, Buttons, FEditor, DBCtrls, ExtCtrls, ImgList,
+  kbmMemTable, ComCtrls, ToolWin, FMasDeEd, ActnList, FHorProf, FHorAulT, FHorPara;
 
 type
   THorarioForm = class(TSingleEditorForm)

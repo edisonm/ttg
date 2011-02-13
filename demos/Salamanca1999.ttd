@@ -3,20 +3,20 @@ TTD 291
 2
 "CodAulaTipo";"NomAulaTipo";"AbrAulaTipo";"Cantidad";
 "1";"Aula Normal";"NORMAL";"27";
-"2";"Lab. de Computación";"COMPUTAC";"1";
+"2";"Lab. de Computacion";"COMPUTAC";"1";
 // TbEspecializacion
 4
 "CodEspecializacion";"NomEspecializacion";"AbrEspecializacion";
-"1";"Básico";"BASICO";
+"1";"Basico";"BASICO";
 "2";"Contabilidad";"CONTA";
 "3";"Secretariado";"SECRE";
-"4";"Informática";"INFO";
+"4";"Informatica";"INFO";
 // TbDia
 5
 "CodDia";"NomDia";
 "2";"Lunes";
 "3";"Martes";
-"4";"Miércoles";
+"4";"Miercoles";
 "5";"Jueves";
 "6";"Viernes";
 // TbMateria
@@ -26,30 +26,30 @@ TTD 291
 "2";"Contabilidad";
 "3";"Tributaria";
 "4";"Taqui Mecano";
-"5";"Mecanografía";
+"5";"Mecanografia";
 "6";"Red. Comercial";
-"7";"Matemática";
-"8";"Estadística";
+"7";"Matematica";
+"8";"Estadistica";
 "9";"Castellano";
 "10";"Literatura";
 "11";"CC.SS.";
-"12";"Cívica";
+"12";"Civica";
 "13";"E.S.";
-"14";"Inglés";
+"14";"Ingles";
 "15";"CC.NN.";
 "16";"Der. Mercantil";
 "17";"Legis. Laboral";
-"18";"Administración";
+"18";"Administracion";
 "19";"R.H. y P.";
-"20";"Mecanización";
+"20";"Mecanizacion";
 "21";"Tec. Flujograma";
-"22";"Informática";
+"22";"Informatica";
 "23";"Lab. Programac.";
 "24";"Manten. Equipos";
 "25";"Leng. Programa.";
-"26";"Investigación";
+"26";"Investigacion";
 "27";"Dibujo";
-"28";"In. Tecnológica";
+"28";"In. Tecnologica";
 "29";"Org. Archivo";
 // TbNivel
 6
@@ -73,8 +73,8 @@ TTD 291
 // TbHorario
 2
 "CodHorario";"MomentoInicial";"MomentoFinal";"Informe";
-"1";"06/08/2000 11:13:11";"06/08/2000 11:26:56";"Semillas del generador de números aleatorios:\n\r  Semilla 1: -2109101231\n\r  Semilla 2: 655293367\n\r  Semilla 3: -1598628723\n\r  Semilla 4: 984621\n\rPesos:\n\r  Cruce de profesores             89,00\n\r  Fracc. h. profesores            15,00\n\r  Cruce de aulas:                 65,00\n\r  Horas Huecas desubicadas:       95,00\n\r  Materias cortadas:              55,00\n\r  Materias no dispersas:           1,00\n\rParámetros: 8; 100; 0,3; 0,2; 3; 0,2; 0,1\n\rNúmero de generaciones:       100 \n\rDetalle                     Cant.    Valor\n\rCruce de profesores:            1    89,00\n\rFracc. h. profesores:         408  6120,00\n\rCruce de aulas:                 0     0,00\n\rHoras Huecas desubicadas:       0     0,00\n\rMaterias cortadas:              5   275,00\n\rMaterias no dispersas:         94    94,00\n\rProhibiciones de materia:      38   760,00\n\rProhibiciones de profesor:     77  1540,00\n\r\n\rValor Total:                       8878,00\n\r";
-"8";"24/01/2010 01:31:34";"24/01/2010 01:40:28";"Semillas del generador de números aleatorios:\n\r  Semilla 1: 1259488459\n\r  Semilla 2: -896166044\n\r  Semilla 3: -445561037\n\r  Semilla 4: -641617919\n\rPesos:\n\r  Cruce de profesores            801,00\n\r  Fracc. h. profesores            15,00\n\r  Cruce de aulas:                 65,00\n\r  Horas Huecas desubicadas:       95,00\n\r  Materias cortadas:             403,00\n\r  Materias no dispersas:           1,00\n\rParámetros: 10; 5000; 0,3; 0,2; 3; 0,2; 0,1\n\rNúmero de generaciones:      2451 \n\rDetalle                     Cant.    Valor\n\rCruce de profesores:            0     0,00\n\rFracc. h. profesores:         378  5670,00\n\rCruce de aulas:                 0     0,00\n\rHoras Huecas desubicadas:       0     0,00\n\rMaterias cortadas:              0     0,00\n\rMaterias no dispersas:         96    96,00\n\rProhibiciones de materia:      36   720,00\n\rProhibiciones de profesor:     58  1640,00\n\r\n\rValor Total:                       8126,00\n\r";
+"1";"06/08/2000 11:13:11";"06/08/2000 11:26:56";"Semillas del generador de numeros aleatorios:\n\r  Semilla 1: -2109101231\n\r  Semilla 2: 655293367\n\r  Semilla 3: -1598628723\n\r  Semilla 4: 984621\n\rPesos:\n\r  Cruce de profesores             89,00\n\r  Fracc. h. profesores            15,00\n\r  Cruce de aulas:                 65,00\n\r  Horas Huecas desubicadas:       95,00\n\r  Materias cortadas:              55,00\n\r  Materias no dispersas:           1,00\n\rParametros: 8; 100; 0,3; 0,2; 3; 0,2; 0,1\n\rNumero de generaciones:       100 \n\rDetalle                     Cant.    Valor\n\rCruce de profesores:            1    89,00\n\rFracc. h. profesores:         408  6120,00\n\rCruce de aulas:                 0     0,00\n\rHoras Huecas desubicadas:       0     0,00\n\rMaterias cortadas:              5   275,00\n\rMaterias no dispersas:         94    94,00\n\rProhibiciones de materia:      38   760,00\n\rProhibiciones de profesor:     77  1540,00\n\r\n\rValor Total:                       8878,00\n\r";
+"8";"24/01/2010 01:31:34";"24/01/2010 01:40:28";"Semillas del generador de numeros aleatorios:\n\r  Semilla 1: 1259488459\n\r  Semilla 2: -896166044\n\r  Semilla 3: -445561037\n\r  Semilla 4: -641617919\n\rPesos:\n\r  Cruce de profesores            801,00\n\r  Fracc. h. profesores            15,00\n\r  Cruce de aulas:                 65,00\n\r  Horas Huecas desubicadas:       95,00\n\r  Materias cortadas:             403,00\n\r  Materias no dispersas:           1,00\n\rParametros: 10; 5000; 0,3; 0,2; 3; 0,2; 0,1\n\rNumero de generaciones:      2451 \n\rDetalle                     Cant.    Valor\n\rCruce de profesores:            0     0,00\n\rFracc. h. profesores:         378  5670,00\n\rCruce de aulas:                 0     0,00\n\rHoras Huecas desubicadas:       0     0,00\n\rMaterias cortadas:              0     0,00\n\rMaterias no dispersas:         96    96,00\n\rProhibiciones de materia:      36   720,00\n\rProhibiciones de profesor:     58  1640,00\n\r\n\rValor Total:                       8126,00\n\r";
 // TbCurso
 12
 "CodNivel";"CodEspecializacion";
@@ -170,54 +170,54 @@ TTD 291
 51
 "CodProfesor";"CedProfesor";"ApeProfesor";"NomProfesor";
 "1";"1";"Loza";"Wilson";
-"2";"2";"Fuentes";"María";
+"2";"2";"Fuentes";"Maria";
 "3";"3";"Pazmiño";"Luis";
 "4";"4";"Brito";"Piedad";
 "5";"5";"Noguera";"Patricia";
-"6";"6";"Córdova";"Edgar";
+"6";"6";"Cordova";"Edgar";
 "7";"7";"Cedeño";"Edith";
 "8";"8";"Tamayo";"Margarita";
 "9";"9";"Deley";"Pedro";
-"10";"10";"Barragán";"Miriam";
+"10";"10";"Barragan";"Miriam";
 "11";"11";"Boada";"Diego";
 "12";"12";"Ortega";"Gonzalo";
-"13";"13";"Jácome";"Galo";
+"13";"13";"Jacome";"Galo";
 "14";"14";"Gallardo";"Ramiro";
 "15";"15";"Rueda";"Hugo";
 "16";"16";"Aguas";"Patricio";
 "17";"17";"Sinche";"Denis";
 "18";"18";"Vega";"Pepe";
 "19";"19";"Pazmiño";"Mauro";
-"20";"20";"García";"América";
+"20";"20";"Garcia";"America";
 "21";"21";"Sandoval";"Lourdes";
 "22";"22";"Freire";"Magdalena";
-"23";"23";"Escobar";"Elías";
+"23";"23";"Escobar";"Elias";
 "24";"24";"Tirado";"Mario";
-"25";"25";"Enríquez";"Carlos";
+"25";"25";"Enriquez";"Carlos";
 "26";"26";"Albuja";"Ramiro";
-"27";"27";"Guamán";"Carlos";
+"27";"27";"Guaman";"Carlos";
 "28";"28";"Proaño";"Isabel";
-"29";"29";"Ruiz";"Lucía";
-"30";"30";"Chávez";"Piedad";
+"29";"29";"Ruiz";"Lucia";
+"30";"30";"Chavez";"Piedad";
 "31";"31";"Becerra";"Susana";
 "32";"32";"Burbano";"Milton";
 "33";"33";"Verdesoto";"Marcelo";
 "34";"34";"Baquero";"Zuly";
-"35";"35";"Vásquez";"José";
-"36";"36";"Espinoza";"Fabián";
-"37";"37";"Montenegro";"Efrén";
-"38";"38";"Mejía";"Oswaldo";
-"39";"39";"Jiménez";"Victoria";
-"40";"40";"Silva";"Rocío";
+"35";"35";"Vasquez";"Jose";
+"36";"36";"Espinoza";"Fabian";
+"37";"37";"Montenegro";"Efren";
+"38";"38";"Mejia";"Oswaldo";
+"39";"39";"Jimenez";"Victoria";
+"40";"40";"Silva";"Rocio";
 "41";"41";"Guerrero";"Edwin";
-"42";"42";"Idrobo";"Víctor";
+"42";"42";"Idrobo";"Victor";
 "43";"43";"Montenegro";"Fredy";
 "44";"44";"Montenegro";"Beatriz";
 "45";"45";"Esquivel";"Mercy";
 "46";"46";"Baca";"Patricio";
 "47";"47";"Salgado";"Rosario";
-"48";"48";"Menéndez";"Rosa";
-"49";"49";"Beltrán";"Irma";
+"48";"48";"Menendez";"Rosa";
+"49";"49";"Beltran";"Irma";
 "50";"50";"Baquero";"Rosario";
 "51";"51";"Mej¡a";"R¢mulo";
 // TbMateriaProhibicion
@@ -2443,7 +2443,7 @@ NomResponsable=Ing. Edison Mera
 CarResponsable=Prof. Suplente
 MaxCargaProfesor=23
 HorarioSeleccionado=8
-Comentarios="Pruebas realizadas.\n\r\n\rDatos necesarios para la realización del horario definitivo.\n\r"
+Comentarios="Pruebas realizadas.\n\r\n\rDatos necesarios para la realizacion del horario definitivo.\n\r"
 Randomize=0
 Seed1=11563
 Seed2=65165498

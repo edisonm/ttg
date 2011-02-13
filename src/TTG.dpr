@@ -58,27 +58,13 @@ begin
   DateSeparator := '/';
   ShortDateFormat := 'dd/mm/yyyy';
   LongTimeFormat := 'hh:nn:ss';
-  SplashForm := TSplashForm.Create(Application);
-  SplashForm.Caption := sAppName + ' ' + sAppVersion;
-  SplashForm.lblProductName.Caption := SplashForm.Caption;
-  SplashForm.lblProductVersion.Caption := sAppVersion;
-  SplashForm.Show;
-  SplashForm.Update;
-  Application.ProcessMessages;
-  SplashForm.PBLoad.Max := 4;
   Application.Initialize;
   Application.Title := sAppName + ' ' + sAppVersion;
   Application.HelpFile := '../hlp/TTG.hlp';
   Application.CreateForm(TSourceDataModule, SourceDataModule);
-  SplashForm.IncPosition;
   Application.CreateForm(TMasterDataModule, MasterDataModule);
-  SplashForm.IncPosition;
   Application.CreateForm(TMainForm, MainForm);
-  SplashForm.IncPosition;
   Application.CreateForm(TLogisticForm, LogisticForm);
-  SplashForm.IncPosition;
   Application.CreateForm(TProgressForm, ProgressForm);
-//  SplashForm.Hide;
-//  SplashForm.Free;
   Application.Run;
 end.

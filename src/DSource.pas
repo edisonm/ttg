@@ -384,7 +384,10 @@ procedure TSourceDataModule.SetDataBase(ADataSet: TDataSet);
 begin
   with (ADataSet as TkbmMemTable) do
   begin
-    FileName := '/home/edison/apps/pascal/TTG/dat/TTG.db';
+    FileName := '../dat/TTG.db';
+//    FileName := Copy(Application.ExeName,
+//      length(Application.ExecName) - Length('/bin/TTG.exe')) + 'dat/TTG.db';
+//    FileName :=  '/home/edison/apps/pascal/TTG/dat/TTG.db';
     TableName := NameDataSet[ADataSet];
   end;
 end;

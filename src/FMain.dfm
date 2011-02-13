@@ -2,15 +2,14 @@ object MainForm: TMainForm
   Left = 275
   Top = 174
   Caption = 'Generador Automatico de Horarios 1.2.1'
-  ClientHeight = 403
-  ClientWidth = 593
+  ClientHeight = 295
+  ClientWidth = 570
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  FormStyle = fsMDIForm
   Menu = MainMenu
   OldCreateOrder = True
   Position = poScreenCenter
@@ -18,25 +17,12 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnDblClick = FormDblClick
   OnDestroy = FormDestroy
-  DesignSize = (
-    593
-    403)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
-    Left = 338
-    Top = 362
-    Width = 240
-    Height = 13
-    Alignment = taRightJustify
-    Anchors = [akRight, akBottom]
-    Caption = 'Edici'#243'n 30-01-2011, Edison Mera, Madrid - Espa'#241'a'
-    ExplicitTop = 343
-  end
   object StatusBar: TStatusBar
     Left = 0
-    Top = 381
-    Width = 593
+    Top = 273
+    Width = 570
     Height = 22
     AutoHint = True
     Panels = <
@@ -50,14 +36,17 @@ object MainForm: TMainForm
         Width = 153
       end>
     OnDrawPanel = StatusBarDrawPanel
+    ExplicitTop = 400
+    ExplicitWidth = 593
   end
   object ToolBar: TToolBar
     Left = 0
     Top = 0
-    Width = 593
+    Width = 570
     Height = 25
     Images = ImageList
     TabOrder = 1
+    ExplicitWidth = 593
     object SpeedBar: TToolBar
       Left = 0
       Top = 0
@@ -349,6 +338,7 @@ object MainForm: TMainForm
       Hint = 'Herramientas|Herramientas que permiten elaborar un horario'
       object MIConfig: TMenuItem
         Action = ActConfigurar
+        AutoCheck = True
       end
       object MICheckFeasibility: TMenuItem
         Action = ActChequearFactibilidad
@@ -405,11 +395,9 @@ object MainForm: TMainForm
       Hint = 'Ayuda|Temas de Ayuda en l'#237'nea'
       object MIContent: TMenuItem
         Action = ActContents
-        AutoCheck = True
       end
       object MIIndex: TMenuItem
         Action = ActIndex
-        AutoCheck = True
       end
       object MIRegistrationInfo: TMenuItem
         Action = ActRegistrationInfo
@@ -1507,7 +1495,6 @@ object MainForm: TMainForm
     Top = 72
     object ActContents: TAction
       Category = 'Help'
-      AutoCheck = True
       Caption = 'Contenido'
       HelpContext = 350
       Hint = 'Contenido|Contenido de la Ayuda'
@@ -1516,7 +1503,6 @@ object MainForm: TMainForm
     end
     object ActIndex: TAction
       Category = 'Help'
-      AutoCheck = True
       Caption = 'Indice'
       HelpContext = 360
       Hint = 'Indice|Indice de la Ayuda'
@@ -1749,6 +1735,7 @@ object MainForm: TMainForm
     end
     object ActConfigurar: TAction
       Category = 'Tools'
+      AutoCheck = True
       Caption = 'Configurar...'
       HelpContext = 250
       Hint = 'Configurar|Cambiar la configuraci'#243'n del sistema'

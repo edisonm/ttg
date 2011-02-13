@@ -24,6 +24,13 @@ type
       Shift: TShiftState);
     procedure DrawGridMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormDestroy(Sender: TObject);
+    procedure BtnOkClick(Sender: TObject);
+    procedure BtnCancelClick(Sender: TObject);
+    procedure DrawGridDrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
   private
     { Private declarations }
     FRestaurar: Boolean;
@@ -96,13 +103,30 @@ end;
 procedure TCrossManyToManyEditorRForm.DrawGridSelectCell(Sender: TObject;
   ACol, ARow: Integer; var CanSelect: Boolean);
 begin
-  inherited;
+  inherited DrawGridSelectCell(Sender, ACol, ARow, CanSelect);
   if CanSelect then
   begin
     with DrawGrid do
       ListBox.ItemIndex := FRel[ACol - 1, ARow - 1];
   end;
   FRestaurar := not CanSelect;
+end;
+
+procedure TCrossManyToManyEditorRForm.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited FormClose(Sender, Action);
+end;
+
+procedure TCrossManyToManyEditorRForm.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  inherited FormCloseQuery(Sender, CanClose);
+end;
+
+procedure TCrossManyToManyEditorRForm.FormDestroy(Sender: TObject);
+begin
+  inherited FormDestroy(Sender);
 end;
 
 procedure TCrossManyToManyEditorRForm.InitRelArray;
@@ -245,12 +269,28 @@ begin
   end;
 end;
 
+procedure TCrossManyToManyEditorRForm.DrawGridDrawCell(Sender: TObject; ACol,
+  ARow: Integer; Rect: TRect; State: TGridDrawState);
+begin
+  inherited DrawGridDrawCell(Sender, ACol, ARow, Rect, State);
+end;
+
 procedure TCrossManyToManyEditorRForm.DrawGridKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
   inherited;
   if Key = 46 then
     ClearSelection;
+end;
+
+procedure TCrossManyToManyEditorRForm.BtnCancelClick(Sender: TObject);
+begin
+  inherited BtnCancelClick(Sender);
+end;
+
+procedure TCrossManyToManyEditorRForm.BtnOkClick(Sender: TObject);
+begin
+  inherited BtnOkClick(Sender);
 end;
 
 procedure TCrossManyToManyEditorRForm.ClearSelection;

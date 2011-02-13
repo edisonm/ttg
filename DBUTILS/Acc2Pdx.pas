@@ -48,6 +48,7 @@ begin
       '  DirectorioParadox:      Nombre del Directorio de Paradox.'#13#10 +
       #13#10 +
       'Ejemplo:'#13#10 +
+      
       '  ACC2PDX PRUEBA.MDB ..\PRUEBAP\');
   end;
 end;

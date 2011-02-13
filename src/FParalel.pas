@@ -34,7 +34,7 @@ var
 implementation
 
 uses
-  DMaster, FCrsMME1, TTGUtls, FMain, DSource;
+  DMaster, FCrsMME1, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}

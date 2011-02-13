@@ -9,7 +9,6 @@ object EditorForm: TEditorForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  FormStyle = fsMDIChild
   OldCreateOrder = True
   Position = poMainFormCenter
   Visible = True
@@ -30,6 +29,7 @@ object EditorForm: TEditorForm
       Top = 0
       Hint = 'Presentar|Presenta el contenido de la cuadr'#237'cula en un reporte'
       ImageIndex = 0
+      ParentShowHint = False
       ShowHint = True
     end
   end

@@ -59,7 +59,7 @@ $(ABOUTPAS): $(ABOUTPAS).tmpl
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-$(TTGEXE): src/$(TTGDPR) $(addpreffix src/, $(addsuffx .pas, $(UNITS) $(FORMS) $(DSRCBASE))) $(ABOUTPAS)
+$(TTGEXE): src/$(TTGDPR) $(addprefix src/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE))) $(ABOUTPAS)
 	cd src; $(DCC32) $(DCC32OPTS) $(TTGDPR)
 
 $(DBUTILS): DBUTILS/$(DBUTILSDPR)
@@ -150,3 +150,4 @@ srclazclean:
 
 test:
 	@echo TTGDIR=$(TTGDIR)
+	@echo FILES=$(addprefix src/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE)))

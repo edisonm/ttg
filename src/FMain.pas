@@ -7,7 +7,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   SysConst, ExtCtrls, DB, Menus, ComCtrls, ImgList, Buttons,
-  ActnList, ToolWin, StdActns, StdCtrls,
+  ActnList, ToolWin, StdActns, StdCtrls, FSplash,
   FSingEdt, kbmMemTable, FCrsMME0, FEditor, UConfig;
 type
   TMainForm = class(TForm)
@@ -95,7 +95,6 @@ type
     ToolButton4: TToolButton;
     MIChangePasswd: TMenuItem;
     ActChangePasswd: TAction;
-    Label1: TLabel;
     N2: TMenuItem;
     N5: TMenuItem;
     N6: TMenuItem;
@@ -409,7 +408,7 @@ function TMainForm.ConfirmOperation: boolean;
 begin
   Result :=
     MessageDlg('Los cambios realizados hasta el momento se perderan, '#13#10
-    + '¿Esta seguro?', mtWarning, [mbYes, mbNo], 0) = mrYes
+    + 'Esta seguro?', mtWarning, [mbYes, mbNo], 0) = mrYes
 end;
 
 procedure TMainForm.ActNewExecute(Sender: TObject);
@@ -505,11 +504,13 @@ var
 begin
 {$IFNDEF FREEWARE}
   with MasterDataModule do
-  begin
+  try
     if not InputQuery('Codigos de los Horarios: ',
       'Ingrese los codigos de los Horarios a generar', s) then
       Exit;
     ElaborarHorario(s);
+  finally
+    ActElaborarHorario.Checked := False;
   end;
 {$ENDIF}
 end;
@@ -630,7 +631,7 @@ begin
            and FileExists(VEvolElitista.SyncFileName) then
         begin
           mr := MessageDlg('El archivo de sincronizacion ya existe.  ' +
-                             '¿Desea eliminar los archivos relacionados?',
+                             'Desea eliminar los archivos relacionados?',
                            mtWarning, [mbYes, mbNo, mbCancel], 0);
           if mr = mrYes then
           begin
@@ -903,7 +904,7 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-  FConfigFileName := GetCurrentDir + '\TTG.cfg';
+  FConfigFileName := GetCurrentDir + '/TTG.cfg';
   FConfigStorage := TConfigStorage.Create(Self);
   try
     if FileExists(FConfigFileName) then
@@ -958,19 +959,23 @@ end;
 
 procedure TMainForm.ActConfigurarExecute(Sender: TObject);
 begin
-   if ShowConfiguracionForm(ActConfigurar.HelpContext) = mrOK then
-   begin
-     MainForm.Caption := Application.Title + ' - ' + SourceDataModule.NomColegio;
-     {$IFNDEF FREEWARE}
-     if FEjecutando then
-       Self.AjustarPesos;
-     {$ENDIF}
-   end
-   else
-   begin
-     SourceDataModule.TbMateriaProhibicionTipo.Refresh;
-     SourceDataModule.TbProfesorProhibicionTipo.Refresh;
-   end;
+  try
+    if ShowConfiguracionForm(ActConfigurar.HelpContext) = mrOK then
+    begin
+      MainForm.Caption := Application.Title + ' - ' + SourceDataModule.NomColegio;
+      {$IFNDEF FREEWARE}
+      if FEjecutando then
+        Self.AjustarPesos;
+      {$ENDIF}
+    end
+    else
+    begin
+      SourceDataModule.TbMateriaProhibicionTipo.Refresh;
+      SourceDataModule.TbProfesorProhibicionTipo.Refresh;
+    end;
+  finally
+    ActConfigurar.Checked := False;
+  end;
 end;
 
 procedure TMainForm.ActChequearFactibilidadExecute(Sender: TObject);
@@ -986,7 +991,7 @@ begin
   else
   begin
     if MessageDlg('No se encontraron errores, esta listo para generar horario.'#13#10 +
-                    '¿Desea mostrar el resumen del chequeo del horario?',
+                    'Desea mostrar el resumen del chequeo del horario?',
                   mtConfirmation, [mbYes, mbNo], 0) = mrYes then
       LogisticForm.Show;
   end;
@@ -994,18 +999,19 @@ end;
 
 procedure TMainForm.ActAboutExecute(Sender: TObject);
 begin
-  MessageDlg(sAppName + ' ' + sAppVersion + '.'#13#10 +
-               'Compilado: ' + sBuildDateTime + #13#10 +
-               'Elaborado por Edison Mera.'#13#10 +
-               '1999-2011. Quito-Ecuador, Madrid-España.',
-    mtInformation, [mbOK], 0);
+  SplashForm := TSplashForm.Create(Application);
+  SplashForm.Caption := sAppName + ' ' + sAppVersion;
+  SplashForm.lblProductName.Caption := SplashForm.Caption;
+  SplashForm.lblProductVersion.Caption := sAppVersion;
+  SplashForm.ShowModal;
+  ActAbout.Checked := False;
 end;
 
 procedure TMainForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose :=
     MessageDlg('Los cambios realizados hasta el momento se perderan.'#13#10 +
-    '¿Esta seguro que desea cerrar el programa?',
+    'Esta seguro que desea cerrar el programa?',
     mtWarning, [mbYes, mbNo], 0) = mrYes;
 end;
 
@@ -1448,7 +1454,7 @@ procedure TMainForm.FormDblClick(Sender: TObject);
 begin
 {$IFNDEF FREEWARE}
   if FEjecutando
-    and (MessageDlg('¿Esta seguro de que desea finalizar esta operacion?',
+    and (MessageDlg('Esta seguro de que desea finalizar esta operacion?',
     mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
     FCloseClick := True;
 {$ENDIF}

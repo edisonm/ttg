@@ -2,8 +2,8 @@ object SplashForm: TSplashForm
   Left = 185
   Top = 223
   BorderStyle = bsNone
-  ClientHeight = 182
-  ClientWidth = 495
+  ClientHeight = 155
+  ClientWidth = 509
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,12 +18,13 @@ object SplashForm: TSplashForm
   object Image1: TImage
     Left = 0
     Top = 0
-    Width = 495
-    Height = 182
+    Width = 509
+    Height = 155
     Align = alClient
     Stretch = True
-    ExplicitWidth = 373
-    ExplicitHeight = 174
+    OnClick = Image1Click
+    ExplicitWidth = 495
+    ExplicitHeight = 169
   end
   object lblProductName: TLabel
     Left = 88
@@ -59,20 +60,6 @@ object SplashForm: TSplashForm
     Width = 9
     Height = 16
     Caption = '...'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    Transparent = True
-  end
-  object Label4: TLabel
-    Left = 8
-    Top = 136
-    Width = 69
-    Height = 16
-    Caption = 'Cargando...'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -150,19 +137,5 @@ object SplashForm: TSplashForm
     Font.Style = []
     ParentFont = False
     Transparent = True
-  end
-  object PBLoad: TProgressBar
-    Left = 8
-    Top = 161
-    Width = 479
-    Height = 13
-    Max = 8
-    TabOrder = 0
-  end
-  object Timer1: TTimer
-    Interval = 2500
-    OnTimer = Timer1Timer
-    Left = 432
-    Top = 16
   end
 end

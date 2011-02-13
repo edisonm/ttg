@@ -35,6 +35,7 @@ type
       var CanSelect: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FColDataSetRecordCount,
@@ -313,7 +314,7 @@ procedure TCrossManyToManyEditorForm.DrawGridDrawCell(Sender: TObject; ACol,
         Result := GetText(ACol - 1, ARow - 1);
     end;
   end;
-  procedure DrawCellText(AText: string);
+  procedure DrawCellText(const AText: string);
   begin
     with (Sender as TDrawGrid) do begin
       if ((ARow = Row) or (ACol = Col)) and (gdFixed in State) then
@@ -330,11 +331,11 @@ procedure TCrossManyToManyEditorForm.DrawGridDrawCell(Sender: TObject; ACol,
   end;
 begin
 {$IFDEF FPC}
-  if State = [gdSelected, gdFocused] then
+{  if State = [gdSelected, gdFocused] then
   begin
     (Sender as TDrawGrid).InvalidateCell(ACol, 0);
     (Sender as TDrawGrid).InvalidateCell(0, ARow);
-  end;
+  end;}
 {$ENDIF}
   if Assigned(FColDataSet) and Assigned(FRowDataSet) then
   begin
@@ -359,22 +360,19 @@ end;
 procedure TCrossManyToManyEditorForm.FormClose(Sender: TObject; var Action:
   TCloseAction);
 begin
-  {if Assigned(FRelDataSet) then
-    FRelDataSet.Close;}
-  Action := caFree;
+  inherited FormClose(Sender, Action);
 end;
 
 procedure TCrossManyToManyEditorForm.DrawGridSelectCell(Sender: TObject; ACol,
   ARow: Integer; var CanSelect: Boolean);
 begin
-  inherited;
-  with (Sender as TDrawGrid) do
-  begin
 {$IFDEF FPC}
+  {with (Sender as TDrawGrid) do
+  begin
     if ACol <> Col then InvalidateCell(Col, 0);
     if ARow <> Row then InvalidateCell(0, Row);
+  end;}
 {$ENDIF}
-  end;
   if Assigned(FSelDataSet) then
     CanSelect := FSel[ACol - 1, ARow - 1];
 end;
@@ -391,6 +389,11 @@ begin
   FEditing := False;
 end;
 
+procedure TCrossManyToManyEditorForm.FormDestroy(Sender: TObject);
+begin
+  inherited FormDestroy(Sender);
+end;
+
 procedure TCrossManyToManyEditorForm.Edit;
 begin
   FEditing := True;
@@ -400,7 +403,7 @@ procedure TCrossManyToManyEditorForm.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
   if Editing then
-    case MessageDlg('¿Desea guardar los cambios efectuados?', mtConfirmation,
+    case MessageDlg('Desea guardar los cambios efectuados?', mtConfirmation,
       [mbYes, mbNo, MbCancel], 0) of
       mrYes: WriteData;
       mrNo: {Nothing to do};
