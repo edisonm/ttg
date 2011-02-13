@@ -2,7 +2,7 @@ object ProgressForm: TProgressForm
   Left = 134
   Top = 159
   BorderStyle = bsDialog
-  Caption = 'Progreso de la b'#250'squeda'
+  Caption = 'Progreso de la busqueda'
   ClientHeight = 342
   ClientWidth = 405
   Color = clBtnFace

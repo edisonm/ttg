@@ -436,7 +436,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       Visible = False
     end
     object QuHorarioAulaTipoCodDia: TIntegerField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
       Visible = False

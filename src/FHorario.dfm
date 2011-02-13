@@ -1321,7 +1321,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
     object QuCruceMateriaDetalleNomDia: TStringField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -1478,7 +1478,7 @@ inherited HorarioForm: THorarioForm
       Visible = False
     end
     object QuHorarioDetalleMateriaProhibicionNomDia: TStringField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -1689,7 +1689,7 @@ inherited HorarioForm: THorarioForm
       Visible = False
     end
     object QuHorarioDetalleProfesorProhibicionNomDia: TStringField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -1896,7 +1896,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
     object QuMateriaCortadaDiaNomDia: TStringField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -1984,7 +1984,7 @@ inherited HorarioForm: THorarioForm
       Visible = False
     end
     object QuMateriaCortadaHoraNomDia: TStringField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -2166,7 +2166,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
     object QuMateriaCortadaHoraDetalleNomDia: TStringField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -2262,8 +2262,8 @@ inherited HorarioForm: THorarioForm
       OnExecute = ActSeleccionarHorarioExecute
     end
     object ActMateriaCortadaDia: TAction
-      Caption = 'Materias cortadas por el d'#237'a'
-      Hint = 'Materias cortadas por el d'#237'a|Materias cortadas por el d'#237'a'
+      Caption = 'Materias cortadas por el dia'
+      Hint = 'Materias cortadas por el dia|Materias cortadas por el dia'
       ImageIndex = 5
       OnExecute = ActMateriaCortadaDiaExecute
     end
@@ -2366,7 +2366,7 @@ inherited HorarioForm: THorarioForm
       Required = True
     end
     object QuHorarioDetalleCodDia: TIntegerField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
     end

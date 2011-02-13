@@ -2,7 +2,7 @@ object SelPeriodoForm: TSelPeriodoForm
   Left = 306
   Top = 249
   BorderStyle = bsDialog
-  Caption = 'Seleccionar per'#237'odo'
+  Caption = 'Seleccionar periodo'
   ClientHeight = 105
   ClientWidth = 282
   Color = clBtnFace
@@ -19,14 +19,14 @@ object SelPeriodoForm: TSelPeriodoForm
     Top = 8
     Width = 173
     Height = 13
-    Caption = 'Seleccione el per'#237'odo a intercambiar'
+    Caption = 'Seleccione el periodo a intercambiar'
   end
   object Label2: TLabel
     Left = 16
     Top = 24
     Width = 18
     Height = 13
-    Caption = 'D'#237'a'
+    Caption = 'Dia'
     FocusControl = DBLookupComboBox1
   end
   object Label3: TLabel
@@ -97,7 +97,7 @@ object SelPeriodoForm: TSelPeriodoForm
     Left = 24
     Top = 64
     object TbDiaHoraCodDia: TIntegerField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
       Visible = False
@@ -109,7 +109,7 @@ object SelPeriodoForm: TSelPeriodoForm
       Visible = False
     end
     object TbDiaHoraNomDia: TStringField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia

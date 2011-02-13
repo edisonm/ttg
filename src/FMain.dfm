@@ -389,7 +389,7 @@ object MainForm: TMainForm
     object MIHelp: TMenuItem
       Caption = 'A&yuda'
       HelpContext = 70
-      Hint = 'Ayuda|Temas de Ayuda en l'#237'nea'
+      Hint = 'Ayuda|Temas de Ayuda en linea'
       object MIContent: TMenuItem
         Action = ActContents
       end
@@ -1986,7 +1986,7 @@ object MainForm: TMainForm
       Required = True
     end
     object QuProfesorHorarioDetalleCodDia: TIntegerField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
     end
@@ -2070,7 +2070,7 @@ object MainForm: TMainForm
       Required = True
     end
     object QuParaleloHorarioDetalleCodDia: TIntegerField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
     end

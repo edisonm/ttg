@@ -219,12 +219,12 @@ inherited SingleEditorForm: TSingleEditorForm
     Top = 88
     object ActShow: TAction
       Caption = 'Mostrar'
-      Hint = 'Presentar|Presenta el contenido de la cuadr'#237'cula en un reporte'
+      Hint = 'Presentar|Presenta el contenido de la cuadricula en un reporte'
       ImageIndex = 0
     end
     object ActFind: TAction
       Caption = 'Buscar'
-      Hint = 'Buscar|Buscar un campo espec'#237'fico'
+      Hint = 'Buscar|Buscar un campo especifico'
       ImageIndex = 1
       OnExecute = ActFindExecute
     end

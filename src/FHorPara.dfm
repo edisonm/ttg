@@ -57,7 +57,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     object BtnIntercambiarPeriodos: TToolButton
       Left = 450
       Top = 0
-      Hint = 'Intercambiar per'#237'odos|Intercambiar per'#237'odos'
+      Hint = 'Intercambiar periodos|Intercambiar periodos'
       ImageIndex = 6
       ShowHint = True
       OnClick = IntercambiarPeriodosClick
@@ -439,7 +439,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Visible = False
     end
     object QuHorarioParaleloCodDia: TIntegerField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
       Visible = False
