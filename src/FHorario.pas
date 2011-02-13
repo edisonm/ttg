@@ -181,6 +181,13 @@ type
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure FormDestroy(Sender: TObject);
+    procedure ActFindExecute(Sender: TObject);
+    procedure DBGridDblClick(Sender: TObject);
+    procedure DataSourceDataChange(Sender: TObject; Field: TField);
+    procedure DataSourceStateChange(Sender: TObject);
   private
     { Private declarations }
     FCruceAulaForm,
@@ -397,6 +404,11 @@ begin
       First;
     end;
   end;
+end;
+
+procedure THorarioForm.ActFindExecute(Sender: TObject);
+begin
+  inherited ActFindExecute(Sender);
 end;
 
 procedure THorarioForm.ActHorarioProfesorExecute(Sender: TObject);
@@ -1126,6 +1138,21 @@ begin
   end;
 end;
 
+procedure THorarioForm.DataSourceDataChange(Sender: TObject; Field: TField);
+begin
+  inherited DataSourceDataChange(Sender, Field);
+end;
+
+procedure THorarioForm.DataSourceStateChange(Sender: TObject);
+begin
+  inherited DataSourceStateChange(Sender);
+end;
+
+procedure THorarioForm.DBGridDblClick(Sender: TObject);
+begin
+  inherited DBGridDblClick(Sender);
+end;
+
 procedure THorarioForm.DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
                                             DataCol: Integer; Column: TColumn; State: TGridDrawState);
 var
@@ -1151,6 +1178,16 @@ procedure THorarioForm.doSaveConfig;
 begin
   inherited;
   ConfigIntegers['Panel2_Width'] := Panel2.Width;
+end;
+
+procedure THorarioForm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited FormClose(Sender, Action);
+end;
+
+procedure THorarioForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  inherited FormCloseQuery(Sender, CanClose);
 end;
 
 procedure THorarioForm.FormCreate(Sender: TObject);
@@ -1181,6 +1218,11 @@ begin
   PrepareQuery(QuMateriaCortadaHora, 'MateriaCortadaHora', 'CodDia');
   PrepareQuery(QuMateriaCortadaHoraDetalle,'MateriaCortadaHoraDetalle',
     'CodDia;CodHora');
+end;
+
+procedure THorarioForm.FormDestroy(Sender: TObject);
+begin
+  inherited FormDestroy(Sender);
 end;
 
 initialization

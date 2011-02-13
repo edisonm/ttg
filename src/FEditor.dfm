@@ -21,13 +21,13 @@ object EditorForm: TEditorForm
     Top = 0
     Width = 479
     Height = 25
-    Caption = 'Presentaci'#243'n'
+    Caption = 'Presentacion'
     Images = ImageList
     TabOrder = 2
     object BtnShow: TToolButton
       Left = 0
       Top = 0
-      Hint = 'Presentar|Presenta el contenido de la cuadr'#237'cula en un reporte'
+      Hint = 'Presentar|Presenta el contenido de la cuadricula en un reporte'
       ImageIndex = 0
       ParentShowHint = False
       ShowHint = True

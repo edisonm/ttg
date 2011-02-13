@@ -42,7 +42,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       Top = 0
       Width = 193
       Height = 22
-      Hint = 'Ver|Qu'#233' ver en el horario del tipo de aula'
+      Hint = 'Ver|Que ver en el horario del tipo de aula'
       ItemHeight = 0
       ShowHint = True
       TabOrder = 1
@@ -401,7 +401,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
     Left = 84
     Top = 80
     object QuHorarioAulaTipoCodAulaTipo: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Codigo'
       FieldName = 'CodAulaTipo'
       Visible = False
     end
@@ -418,7 +418,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       Visible = False
     end
     object QuHorarioAulaTipoCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especializaci'#243'n'
+      DisplayLabel = 'Especializacion'
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False

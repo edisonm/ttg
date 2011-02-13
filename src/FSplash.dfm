@@ -101,7 +101,7 @@ object SplashForm: TSplashForm
     Top = 64
     Width = 46
     Height = 16
-    Caption = 'Versi'#243'n'
+    Caption = 'Version'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -129,7 +129,7 @@ object SplashForm: TSplashForm
     Top = 112
     Width = 45
     Height = 16
-    Caption = 'Edici'#243'n'
+    Caption = 'Edicion'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13

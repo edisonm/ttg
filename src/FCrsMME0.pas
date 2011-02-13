@@ -13,8 +13,6 @@ type
     Panel2: TPanel;
     ListBox: TListBox;
     Splitter: TSplitter;
-    procedure DrawGridMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
     procedure DrawGridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure ListBoxDrawItem(Control: TWinControl; Index: Integer;
@@ -142,29 +140,6 @@ begin
   Result := '';
 end;
 
-procedure TCrossManyToManyEditor0Form.DrawGridMouseUp(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-{var
-  VCol, VRow: Longint;}
-begin
-  inherited;
-{  with DrawGrid do
-    if (FSelected) or (Selection.Left <> Selection.Right) or
-      (Selection.Top <> Selection.Bottom) then
-    begin
-      Edit;
-      for VCol := Selection.Left to Selection.Right do
-        for VRow := Selection.Top to Selection.Bottom do
-        begin
-          if (not Assigned(Sel)) or (Sel[VCol - 1, VRow - 1]) then
-            FRel[VCol - 1, VRow - 1] := not FRel[VCol - 1, VRow - 1];
-          InvalidateCell(VCol, VRow);
-        end;
-      FSelected := False;
-    end
-}
-end;
-
 procedure TCrossManyToManyEditor0Form.ListBoxDrawItem(Control: TWinControl;
   Index: Integer; Rect: TRect; State: TOwnerDrawState);
 var
@@ -174,18 +149,18 @@ begin
   inherited;
   with Control as TListBox do
   begin
-    begin
-      BrushColor := Canvas.Brush.Color;
-      VRect.TopLeft := Rect.TopLeft;
-      VRect.Bottom := Rect.Bottom;
-      VRect.Right := Rect.Left + (Rect.Bottom - Rect.Top);
-      Rect.Left := VRect.Right;
-      Canvas.Brush.Color := LstColor[Index];
-      Canvas.FillRect(VRect);
-      {Canvas.Brush.Color := clBlack;
-      Canvas.FrameRect(VRect);}
-      Canvas.Brush.Color := BrushColor;
-    end;
+    BrushColor := Canvas.Brush.Color;
+    VRect.TopLeft := Rect.TopLeft;
+    VRect.Bottom := Rect.Bottom;
+    VRect.Right := Rect.Left + (Rect.Bottom - Rect.Top);
+    Rect.Left := VRect.Right;
+    Canvas.Brush.Color := LstColor[Index];
+    Canvas.FillRect(VRect);
+    {
+    Canvas.Brush.Color := clBlack;
+    Canvas.FrameRect(VRect);
+    }
+    Canvas.Brush.Color := BrushColor;
     Canvas.FillRect(Rect);
     Canvas.TextOut(Rect.Left + 2, Rect.Top, Items[Index]);
   end;

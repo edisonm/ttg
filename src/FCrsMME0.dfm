@@ -42,7 +42,6 @@ inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
     Width = 532
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goColSizing]
     OnKeyUp = DrawGridKeyUp
-    OnMouseUp = DrawGridMouseUp
     ExplicitWidth = 532
   end
 end

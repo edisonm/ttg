@@ -351,7 +351,7 @@ object ProgressForm: TProgressForm
       Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Generaci'#243'n:'
+      Caption = ' Generacion:'
       TabOrder = 15
       object lblNumGeneracion: TLabel
         Left = 186

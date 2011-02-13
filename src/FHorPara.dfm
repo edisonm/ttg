@@ -47,7 +47,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Top = 0
       Width = 185
       Height = 22
-      Hint = 'Ver|Seleccione el par'#225'metro a ver en el horario'
+      Hint = 'Ver|Seleccione el parametro a ver en el horario'
       ItemHeight = 0
       ShowHint = True
       TabOrder = 0
@@ -421,7 +421,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Visible = False
     end
     object QuHorarioParaleloCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especializaci'#243'n'
+      DisplayLabel = 'Especializacion'
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
@@ -451,7 +451,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Visible = False
     end
     object QuHorarioParaleloCodProfesor: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Codigo'
       FieldName = 'CodProfesor'
       Visible = False
     end

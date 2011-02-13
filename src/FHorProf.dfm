@@ -46,7 +46,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Top = 0
       Width = 193
       Height = 22
-      Hint = 'Ver|Qu'#233' ver en el horario del profesor'
+      Hint = 'Ver|Que ver en el horario del profesor'
       ItemHeight = 0
       ShowHint = True
       TabOrder = 1
@@ -430,7 +430,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
     Left = 64
     Top = 88
     object QuHorarioProfesorCodProfesor: TAutoIncField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Codigo'
       FieldName = 'CodProfesor'
       Visible = False
     end
@@ -441,7 +441,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Visible = False
     end
     object QuHorarioProfesorCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especializaci'#243'n'
+      DisplayLabel = 'Especializacion'
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False

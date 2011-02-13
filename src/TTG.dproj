@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ProjectGuid>{7d7f2557-bd5b-4608-9a3e-1738e9a7ac33}</ProjectGuid>
     <MainSource>TTG.dpr</MainSource>
-    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
     <DCC_DependencyCheckOutputName>..\bin\TTG.exe</DCC_DependencyCheckOutputName>

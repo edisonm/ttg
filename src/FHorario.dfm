@@ -684,7 +684,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
     object QuCruceAulaNomDia: TStringField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -1120,7 +1120,7 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
     object QuCruceProfesorNomDia: TStringField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
       LookupDataSet = SourceDataModule.TbDia
@@ -1274,7 +1274,7 @@ inherited HorarioForm: THorarioForm
       Visible = False
     end
     object QuCruceMateriaDetalleCodDia: TIntegerField
-      DisplayLabel = 'D'#237'a'
+      DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
       Visible = False
@@ -2356,7 +2356,7 @@ inherited HorarioForm: THorarioForm
       Required = True
     end
     object QuHorarioDetalleCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especializaci'#243'n'
+      DisplayLabel = 'Especializacion'
       FieldName = 'CodEspecializacion'
       Required = True
     end
@@ -2376,7 +2376,7 @@ inherited HorarioForm: THorarioForm
       Required = True
     end
     object QuHorarioDetalleSesion: TIntegerField
-      DisplayLabel = 'Sesi'#243'n'
+      DisplayLabel = 'Sesion'
       FieldName = 'Sesion'
       Required = True
     end

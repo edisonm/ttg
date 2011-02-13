@@ -30,10 +30,11 @@ type
     procedure BtnCancelClick(Sender: TObject);
     procedure DrawGridDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
+    procedure DrawGridPrepareCanvas(sender: TObject; aCol, aRow: Integer;
+      aState: TGridDrawState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DrawGridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
-    procedure FormCreate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDestroy(Sender: TObject);
   private
@@ -162,9 +163,13 @@ begin
     FRowFieldKey := ARowDataSet.FindField(ARowFieldKey);
     FRowFieldName := ARowDataSet.FindField(ARowFieldName);
     FRowField := ARelDataSet.FindField(ARowField);
+    {$IFDEF FPC}
+    DrawGrid.OnPrepareCanvas := DrawGridPrepareCanvas;
+    {$ENDIF}
+    DrawGrid.OnDrawCell := DrawGridDrawCell;
     ReadData;
-    {if not Visible then
-      ShowModal;}
+    if not Visible then
+      ShowModal;
   finally
     FColDataSet.EnableControls;
     FRowDataSet.EnableControls;
@@ -314,32 +319,27 @@ procedure TCrossManyToManyEditorForm.DrawGridDrawCell(Sender: TObject; ACol,
         Result := GetText(ACol - 1, ARow - 1);
     end;
   end;
-  procedure DrawCellText(const AText: string);
-  begin
-    with (Sender as TDrawGrid) do begin
-      if ((ARow = Row) or (ACol = Col)) and (gdFixed in State) then
-      begin
-        Canvas.Brush.Style := bsClear;
-      end
-      else
-      begin
-        if ColRowIsValid(ACol - 1, ARow - 1) and not (gdSelected in State) then
-          Canvas.Brush.Color := ColorHighLight[ACol - 1, ARow - 1];
-      end;
-      Canvas.TextRect(Rect, Rect.Left+2, Rect.Top+2, AText);
-    end;
-  end;
 begin
-{$IFDEF FPC}
-{  if State = [gdSelected, gdFocused] then
-  begin
-    (Sender as TDrawGrid).InvalidateCell(ACol, 0);
-    (Sender as TDrawGrid).InvalidateCell(0, ARow);
-  end;}
+{$IFNDEF FPC}
+  DrawGridPrepareCanvas(Sender, ACol, ARow, State);
 {$ENDIF}
-  if Assigned(FColDataSet) and Assigned(FRowDataSet) then
+  TDrawGrid(Sender).Canvas.TextRect(Rect, Rect.Left+2, Rect.Top+2, GetValue);
+end;
+
+procedure TCrossManyToManyEditorForm.DrawGridPrepareCanvas(sender: TObject;
+  aCol, aRow: Integer; aState: TGridDrawState);
+begin
+  with (Sender as TDrawGrid) do
   begin
-    DrawCellText(GetValue);
+    if ((aRow = Row) or (aCol = Col)) and (gdFixed in aState) then
+    begin
+      Canvas.Brush.Style := bsClear;
+    end
+    else
+    begin
+      if ColRowIsValid(ACol - 1, ARow - 1) and not (gdSelected in aState) then
+        Canvas.Brush.Color := ColorHighLight[ACol - 1, ARow - 1];
+    end;
   end;
 end;
 
@@ -382,11 +382,6 @@ function TCrossManyToManyEditorForm.ColRowIsValid(i, j: Integer): Boolean;
 begin
   Result := (i >= 0) and (i < FColDataSetRecordCount) and (j >= 0)
     and (j < FRowDataSetRecordCount);
-end;
-
-procedure TCrossManyToManyEditorForm.FormCreate(Sender: TObject);
-begin
-  FEditing := False;
 end;
 
 procedure TCrossManyToManyEditorForm.FormDestroy(Sender: TObject);

@@ -385,7 +385,7 @@ inherited SourceDataModule: TSourceDataModule
       Lookup = True
     end
     object TbDistributivoDuracion: TIntegerField
-      DisplayLabel = 'Duraci'#243'n'
+      DisplayLabel = 'Duracion'
       FieldKind = fkCalculated
       FieldName = 'Duracion'
       Calculated = True

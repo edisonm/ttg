@@ -36,8 +36,6 @@ object MainForm: TMainForm
         Width = 153
       end>
     OnDrawPanel = StatusBarDrawPanel
-    ExplicitTop = 400
-    ExplicitWidth = 593
   end
   object ToolBar: TToolBar
     Left = 0
@@ -46,7 +44,6 @@ object MainForm: TMainForm
     Height = 25
     Images = ImageList
     TabOrder = 1
-    ExplicitWidth = 593
     object SpeedBar: TToolBar
       Left = 0
       Top = 0
@@ -355,7 +352,7 @@ object MainForm: TMainForm
     object MIView: TMenuItem
       Caption = '&Ver'
       HelpContext = 60
-      Hint = 'Ver|Presentaci'#243'n de resultados'
+      Hint = 'Ver|Presentacion de resultados'
       object MIHorario: TMenuItem
         Action = ActHorario
         AutoCheck = True
@@ -1531,12 +1528,12 @@ object MainForm: TMainForm
       Category = 'Help'
       Caption = 'Acerca de...'
       HelpContext = 370
-      Hint = 'Acerca de|Informaci'#243'n referente a este programa'
+      Hint = 'Acerca de|Informacion referente a este programa'
       OnExecute = ActAboutExecute
     end
     object ActRegistrationInfo: TAction
       Category = 'Help'
-      Caption = 'Informaci'#243'n de registro'
+      Caption = 'Informacion de registro'
       OnExecute = ActRegistrationInfoExecute
     end
     object ActPresentarParaleloHorario: TAction
@@ -1636,9 +1633,9 @@ object MainForm: TMainForm
     object ActDia: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'D'#237'as laborables'
+      Caption = 'Dias laborables'
       HelpContext = 140
-      Hint = 'D'#237'as laborables|Dias laborables'
+      Hint = 'Dias laborables|Dias laborables'
       ImageIndex = 4
       ShortCut = 16452
       OnExecute = ActDiaExecute
@@ -1646,9 +1643,9 @@ object MainForm: TMainForm
     object ActHora: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Horas acad'#233'micas'
+      Caption = 'Horas academicas'
       HelpContext = 150
-      Hint = 'Horas acad'#233'micas|Horas acad'#233'micas'
+      Hint = 'Horas academicas|Horas academicas'
       ImageIndex = 5
       ShortCut = 16456
       OnExecute = ActHoraExecute
@@ -1656,9 +1653,9 @@ object MainForm: TMainForm
     object ActPeriodo: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Per'#237'odos laborables'
+      Caption = 'Periodos laborables'
       HelpContext = 160
-      Hint = 'Per'#237'odos laborables|Per'#237'odos laborables'
+      Hint = 'Periodos laborables|Periodos laborables'
       ImageIndex = 13
       ShortCut = 49225
       OnExecute = ActPeriodoExecute
@@ -1738,7 +1735,7 @@ object MainForm: TMainForm
       AutoCheck = True
       Caption = 'Configurar...'
       HelpContext = 250
-      Hint = 'Configurar|Cambiar la configuraci'#243'n del sistema'
+      Hint = 'Configurar|Cambiar la configuracion del sistema'
       ImageIndex = 19
       OnExecute = ActConfigurarExecute
     end
@@ -2063,7 +2060,7 @@ object MainForm: TMainForm
       Required = True
     end
     object QuParaleloHorarioDetalleCodEspecializacion: TIntegerField
-      DisplayLabel = 'Especializaci'#243'n'
+      DisplayLabel = 'Especializacion'
       FieldName = 'CodEspecializacion'
       Required = True
     end
@@ -2255,7 +2252,7 @@ object MainForm: TMainForm
     Left = 76
     Top = 212
     object QuProfesorProfesorProhibicionCodProfesor: TIntegerField
-      DisplayLabel = 'C'#243'digo'
+      DisplayLabel = 'Codigo'
       FieldName = 'CodProfesor'
       Visible = False
     end

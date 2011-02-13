@@ -319,8 +319,13 @@ begin
 					      ConfigStorage,
 					      ActPeriodo) then
   with SourceDataModule do
+  begin
+    {$IFDEF FPC}
+    FPeriodoForm.DrawGrid.OnPrepareCanvas := FPeriodoForm.DrawGridPrepareCanvas;
+    {$ENDIF}
     FPeriodoForm.ShowEditor(TbDia, TbHora, TbPeriodo, nil, 'CodDia', 'NomDia',
                             'CodDia', '', 'CodHora', 'NomHora', 'CodHora', '');
+  end;
 end;
 
 procedure TMainForm.ActMateriaExecute(Sender: TObject);

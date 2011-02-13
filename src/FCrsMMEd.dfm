@@ -3,6 +3,7 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
   Top = 554
   ClientHeight = 260
   ClientWidth = 648
+  Visible = False
   OnCloseQuery = FormCloseQuery
   ExplicitWidth = 656
   ExplicitHeight = 287
