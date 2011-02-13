@@ -331,14 +331,13 @@ procedure TCrossManyToManyEditorForm.DrawGridPrepareCanvas(sender: TObject;
 begin
   with (Sender as TDrawGrid) do
   begin
-    if ((aRow = Row) or (aCol = Col)) and (gdFixed in aState) then
-    begin
-      Canvas.Brush.Style := bsClear;
-    end
-    else
+    if ((aRow <> Row) and (aCol <> Col)) or not (gdFixed in aState) then
     begin
       if ColRowIsValid(ACol - 1, ARow - 1) and not (gdSelected in aState) then
+      begin
+        Canvas.Brush.Style := bsSolid;
         Canvas.Brush.Color := ColorHighLight[ACol - 1, ARow - 1];
+      end;
     end;
   end;
 end;
