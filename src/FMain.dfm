@@ -2,8 +2,8 @@ object MainForm: TMainForm
   Left = 275
   Top = 174
   Caption = 'Generador Automatico de Horarios 1.2.1'
-  ClientHeight = 295
-  ClientWidth = 570
+  ClientHeight = 323
+  ClientWidth = 584
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,8 +21,8 @@ object MainForm: TMainForm
   TextHeight = 13
   object StatusBar: TStatusBar
     Left = 0
-    Top = 273
-    Width = 570
+    Top = 301
+    Width = 584
     Height = 22
     AutoHint = True
     Panels = <
@@ -36,14 +36,17 @@ object MainForm: TMainForm
         Width = 153
       end>
     OnDrawPanel = StatusBarDrawPanel
+    ExplicitTop = 273
+    ExplicitWidth = 570
   end
   object ToolBar: TToolBar
     Left = 0
     Top = 0
-    Width = 570
+    Width = 584
     Height = 25
     Images = ImageList
     TabOrder = 1
+    ExplicitWidth = 570
     object SpeedBar: TToolBar
       Left = 0
       Top = 0

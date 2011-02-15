@@ -16,7 +16,7 @@ TTGDPR=TTG.dpr
 DBUTILSDPR=DBUTILS.dpr
 TTGMDB=dat/TTG.mdb
 TTGSQL=dat/TTG.sql
-TTGSQLITE3=dat/TTG.db
+TTGSQLITE3=dat/TTG.s3fpc
 
 ifneq ($(shell uname -s),Linux)
 DSRCBASE=DSrcBase

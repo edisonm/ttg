@@ -16,7 +16,6 @@ type
     Splitter1: TSplitter;
     CheckListBox: TCheckListBox;
     procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure CheckListBoxExit(Sender: TObject);
   private
@@ -43,10 +42,18 @@ uses
 procedure TParaleloForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  SourceDataModule.TbParalelo.MasterSource := DataSource;
-  SourceDataModule.TbParalelo.MasterFields := 'CodNivel;CodEspecializacion';
-  SourceDataModule.TbParalelo.IndexFieldNames :=
-      SourceDataModule.TbParalelo.MasterFields + ';' + 'CodParaleloId';
+  with SourceDataModule.TbParalelo do
+  begin
+    {$IFDEF FPC}
+    Close;
+    {$ENDIF}
+    MasterSource := Self.DataSource;
+    MasterFields := 'CodNivel;CodEspecializacion';
+    IndexFieldNames := MasterFields; // + ';' + 'CodParaleloId';
+    {$IFDEF FPC}
+    Open;
+    {$ENDIF}
+  end;
   SourceDataModule.TbParaleloId.IndexFieldNames := 'CodParaleloId';
   with CheckListBox do
   begin
@@ -62,14 +69,6 @@ begin
       end;
     end;
   end;
-end;
-
-procedure TParaleloForm.FormDestroy(Sender: TObject);
-begin
-  inherited;
-  SourceDataModule.TbParaleloId.IndexFieldNames := '';
-  SourceDataModule.TbParalelo.IndexFieldNames := '';
-  SourceDataModule.TbParalelo.MasterSource := nil;
 end;
 
 procedure TParaleloForm.doLoadConfig;
@@ -95,7 +94,6 @@ begin
     for i := 0 to Items.Count - 1 do
       Checked[i] := False;
     if Assigned(DataSourceList.DataSet) then
-    begin
     with DataSourceDetail.DataSet do
     begin
       First;
@@ -105,7 +103,6 @@ begin
           FindField('CodParaleloId').AsInteger, 'NomParaleloId'))] := True;
         Next;
       end;
-    end;
     end;
   end;
 end;

@@ -65,7 +65,8 @@ end;
 
 procedure TSingleEditorForm.SetDataSet(ADataSet: TDataSet);
 begin
-  DataSource.DataSet := ADataSet;
+  if DataSource.DataSet <> ADataSet then
+    DataSource.DataSet := ADataSet;
 end;
 
 procedure TSingleEditorForm.ActFindExecute(Sender: TObject);
