@@ -1,19 +1,17 @@
 <?xml version="1.0"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="9"/>
+    <Version Value="7"/>
     <General>
       <MainUnit Value="0"/>
+      <TargetFileExt Value=".exe"/>
       <UseXPManifest Value="True"/>
-      <ActiveWindowIndexAtStart Value="0"/>
+      <ActiveEditorIndexAtStart Value="14"/>
     </General>
     <VersionInfo>
       <Language Value=""/>
       <CharSet Value=""/>
     </VersionInfo>
-    <BuildModes Count="1">
-      <Item1 Name="default" Default="True"/>
-    </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
       <IgnoreBinaries Value="False"/>
@@ -32,17 +30,15 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="61">
+    <Units Count="62">
       <Unit0>
         <Filename Value="TTG.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="0"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="42"/>
         <CursorPos X="5" Y="70"/>
+        <TopLine Value="42"/>
+        <EditorIndex Value="0"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="FMain.pp"/>
@@ -51,13 +47,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMain"/>
-        <EditorIndex Value="8"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="315"/>
         <CursorPos X="7" Y="324"/>
+        <TopLine Value="315"/>
+        <EditorIndex Value="8"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="DMaster.pp"/>
@@ -69,16 +63,16 @@
         <Filename Value="KerModel.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="KerModel"/>
-        <TopLine Value="1343"/>
         <CursorPos X="24" Y="1351"/>
+        <TopLine Value="1343"/>
         <UsageCount Value="41"/>
       </Unit3>
       <Unit4>
         <Filename Value="KerEvolE.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="KerEvolE"/>
-        <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
         <UsageCount Value="41"/>
       </Unit4>
       <Unit5>
@@ -88,8 +82,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FProgres"/>
-        <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
         <UsageCount Value="41"/>
       </Unit5>
       <Unit6>
@@ -114,13 +108,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FCrsMMEd"/>
-        <EditorIndex Value="10"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="319"/>
         <CursorPos X="45" Y="334"/>
+        <TopLine Value="319"/>
+        <EditorIndex Value="10"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit9>
       <Unit10>
         <Filename Value="FCrsMME0.pp"/>
@@ -129,13 +121,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FCrsMME0"/>
-        <EditorIndex Value="9"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="35"/>
         <CursorPos X="38" Y="63"/>
+        <TopLine Value="35"/>
+        <EditorIndex Value="9"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit10>
       <Unit11>
         <Filename Value="FCrsMME1.pp"/>
@@ -152,13 +142,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FCrsMMER"/>
-        <EditorIndex Value="4"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="106"/>
         <CursorPos X="3" Y="109"/>
+        <TopLine Value="106"/>
+        <EditorIndex Value="4"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit12>
       <Unit13>
         <Filename Value="FEditor.pp"/>
@@ -167,13 +155,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FEditor"/>
-        <EditorIndex Value="11"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="74"/>
         <CursorPos X="1" Y="94"/>
+        <TopLine Value="74"/>
+        <EditorIndex Value="11"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit13>
       <Unit14>
         <Filename Value="FMateria.pp"/>
@@ -204,13 +190,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FConfig"/>
-        <EditorIndex Value="1"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="169"/>
         <CursorPos X="46" Y="178"/>
+        <TopLine Value="169"/>
+        <EditorIndex Value="1"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit18>
       <Unit19>
         <Filename Value="FLogstic.pp"/>
@@ -243,13 +227,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FSplash"/>
-        <EditorIndex Value="2"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="36"/>
         <CursorPos X="7" Y="49"/>
+        <TopLine Value="36"/>
+        <EditorIndex Value="2"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit23>
       <Unit24>
         <Filename Value="FParalel.pp"/>
@@ -258,14 +240,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FParalel"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="13"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="40"/>
         <CursorPos X="1" Y="55"/>
+        <TopLine Value="40"/>
+        <EditorIndex Value="13"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit24>
       <Unit25>
         <Filename Value="FSingEdt.pp"/>
@@ -274,13 +253,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FSingEdt"/>
-        <EditorIndex Value="12"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="50"/>
         <CursorPos X="5" Y="69"/>
+        <TopLine Value="50"/>
+        <EditorIndex Value="12"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit25>
       <Unit26>
         <Filename Value="FHorario.pp"/>
@@ -289,13 +266,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FHorario"/>
-        <EditorIndex Value="5"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
         <CursorPos X="104" Y="9"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="5"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit26>
       <Unit27>
         <Filename Value="HorColCm.pp"/>
@@ -309,8 +284,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FHorProf"/>
-        <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
         <UsageCount Value="41"/>
       </Unit28>
       <Unit29>
@@ -320,13 +295,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSrcBase"/>
-        <EditorIndex Value="6"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="141"/>
         <CursorPos X="37" Y="141"/>
+        <TopLine Value="141"/>
+        <EditorIndex Value="6"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit29>
       <Unit30>
         <Filename Value="RelUtils.pp"/>
@@ -340,13 +313,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSource"/>
-        <EditorIndex Value="3"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="293"/>
         <CursorPos X="26" Y="306"/>
+        <TopLine Value="293"/>
+        <EditorIndex Value="3"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit31>
       <Unit32>
         <Filename Value="FSelPeIn.pp"/>
@@ -361,194 +332,202 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DBase"/>
-        <EditorIndex Value="7"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="123"/>
         <CursorPos X="74" Y="130"/>
+        <TopLine Value="123"/>
+        <EditorIndex Value="7"/>
         <UsageCount Value="41"/>
         <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit33>
       <Unit34>
         <Filename Value="TTG.inc"/>
-        <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
         <UsageCount Value="9"/>
       </Unit34>
       <Unit35>
         <Filename Value="C:/lazarus/lcl/interfaces/win32/win32wscontrols.pp"/>
         <UnitName Value="Win32WSControls"/>
-        <TopLine Value="213"/>
         <CursorPos X="1" Y="224"/>
+        <TopLine Value="213"/>
         <UsageCount Value="9"/>
       </Unit35>
       <Unit36>
         <Filename Value="FMain.lfm"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
         <UsageCount Value="13"/>
-        <DefaultSyntaxHighlighter Value="LFM"/>
+        <SyntaxHighlighter Value="LFM"/>
       </Unit36>
       <Unit37>
         <Filename Value="TTG.lrs"/>
-        <TopLine Value="5212"/>
         <CursorPos X="1" Y="5236"/>
+        <TopLine Value="5212"/>
         <UsageCount Value="14"/>
       </Unit37>
       <Unit38>
         <Filename Value="/usr/lib/lazarus/0.9.28.2/lcl/include/application.inc"/>
-        <TopLine Value="1949"/>
         <CursorPos X="35" Y="1959"/>
+        <TopLine Value="1949"/>
         <UsageCount Value="14"/>
       </Unit38>
       <Unit39>
         <Filename Value="/usr/share/fpcsrc/2.4.0/packages/fcl-db/src/sqlite/sqlite3ds.pas"/>
         <UnitName Value="Sqlite3DS"/>
-        <TopLine Value="23"/>
         <CursorPos X="32" Y="41"/>
+        <TopLine Value="23"/>
         <UsageCount Value="14"/>
       </Unit39>
       <Unit40>
         <Filename Value="/usr/share/fpcsrc/2.4.0/packages/sqlite/src/sqlite3.pp"/>
         <UnitName Value="sqlite3"/>
-        <TopLine Value="1"/>
         <CursorPos X="10" Y="1"/>
+        <TopLine Value="1"/>
         <UsageCount Value="14"/>
       </Unit40>
       <Unit41>
         <Filename Value="/usr/share/fpcsrc/2.4.0/packages/sqlite/src/sqlite3.inc"/>
-        <TopLine Value="387"/>
         <CursorPos X="37" Y="387"/>
+        <TopLine Value="387"/>
         <UsageCount Value="14"/>
       </Unit41>
       <Unit42>
         <Filename Value="/usr/share/fpcsrc/2.4.0/packages/fcl-db/src/sqlite/customsqliteds.pas"/>
         <UnitName Value="CustomSqliteDS"/>
-        <TopLine Value="93"/>
         <CursorPos X="36" Y="95"/>
+        <TopLine Value="93"/>
         <UsageCount Value="14"/>
       </Unit42>
       <Unit43>
         <Filename Value="/usr/share/fpcsrc/2.4.0/packages/fcl-db/src/base/db.pas"/>
         <UnitName Value="db"/>
-        <TopLine Value="601"/>
         <CursorPos X="29" Y="607"/>
+        <TopLine Value="601"/>
         <UsageCount Value="14"/>
       </Unit43>
       <Unit44>
         <Filename Value="../../fpc/rtl/objpas/sysutils/datih.inc"/>
-        <TopLine Value="44"/>
         <CursorPos X="53" Y="52"/>
+        <TopLine Value="44"/>
         <UsageCount Value="10"/>
       </Unit44>
       <Unit45>
         <Filename Value="../../fpc/rtl/objpas/sysutils/dati.inc"/>
-        <TopLine Value="337"/>
         <CursorPos X="1" Y="360"/>
+        <TopLine Value="337"/>
         <UsageCount Value="10"/>
       </Unit45>
       <Unit46>
         <Filename Value="../../lazarus/lcl/include/control.inc"/>
-        <TopLine Value="3096"/>
         <CursorPos X="25" Y="2783"/>
+        <TopLine Value="3096"/>
         <UsageCount Value="10"/>
       </Unit46>
       <Unit47>
         <Filename Value="../../lazarus/lcl/interfaces/gtk2/gtk2lclintf.inc"/>
-        <TopLine Value="1139"/>
         <CursorPos X="62" Y="1145"/>
+        <TopLine Value="1139"/>
         <UsageCount Value="11"/>
       </Unit47>
       <Unit48>
         <Filename Value="../../fpc/rtl/objpas/sysutils/sysinth.inc"/>
-        <TopLine Value="56"/>
         <CursorPos X="10" Y="79"/>
+        <TopLine Value="56"/>
         <UsageCount Value="10"/>
       </Unit48>
       <Unit49>
         <Filename Value="FParalel.lfm"/>
-        <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
         <UsageCount Value="10"/>
+        <SyntaxHighlighter Value="LFM"/>
       </Unit49>
       <Unit50>
         <Filename Value="C:/lazarus/lcl/include/progressbar.inc"/>
-        <TopLine Value="107"/>
         <CursorPos X="1" Y="118"/>
+        <TopLine Value="107"/>
         <UsageCount Value="10"/>
       </Unit50>
       <Unit51>
         <Filename Value="C:/lazarus/lcl/forms.pp"/>
         <UnitName Value="Forms"/>
-        <TopLine Value="520"/>
         <CursorPos X="21" Y="531"/>
+        <TopLine Value="520"/>
         <UsageCount Value="10"/>
       </Unit51>
       <Unit52>
         <Filename Value="C:/lazarus/lcl/include/customform.inc"/>
-        <TopLine Value="1654"/>
         <CursorPos X="3" Y="1673"/>
+        <TopLine Value="1654"/>
         <UsageCount Value="10"/>
       </Unit52>
       <Unit53>
         <Filename Value="FCrsMME0.lfm"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
         <UsageCount Value="13"/>
-        <DefaultSyntaxHighlighter Value="LFM"/>
+        <SyntaxHighlighter Value="LFM"/>
       </Unit53>
       <Unit54>
         <Filename Value="C:/lazarus/lcl/grids.pas"/>
         <UnitName Value="Grids"/>
-        <TopLine Value="7945"/>
         <CursorPos X="39" Y="7951"/>
+        <TopLine Value="7945"/>
         <UsageCount Value="11"/>
       </Unit54>
       <Unit55>
         <Filename Value="C:/lazarus/fpc/2.2.4/source/rtl/win/wininc/struct.inc"/>
-        <TopLine Value="1428"/>
         <CursorPos X="11" Y="1442"/>
+        <TopLine Value="1428"/>
         <UsageCount Value="11"/>
       </Unit55>
       <Unit56>
         <Filename Value="C:/lazarus/fpc/2.2.4/source/rtl/objpas/sysutils/sysinth.inc"/>
-        <TopLine Value="59"/>
         <CursorPos X="3" Y="31"/>
+        <TopLine Value="59"/>
         <UsageCount Value="11"/>
       </Unit56>
       <Unit57>
         <Filename Value="C:/lazarus/lcl/graphics.pp"/>
         <UnitName Value="Graphics"/>
-        <TopLine Value="636"/>
         <CursorPos X="25" Y="650"/>
+        <TopLine Value="636"/>
         <UsageCount Value="11"/>
       </Unit57>
       <Unit58>
         <Filename Value="C:/lazarus/fpc/2.2.4/source/packages/fcl-image/src/fpcanvas.pp"/>
         <UnitName Value="FPCanvas"/>
-        <TopLine Value="120"/>
         <CursorPos X="3" Y="134"/>
+        <TopLine Value="120"/>
         <UsageCount Value="11"/>
       </Unit58>
       <Unit59>
         <Filename Value="../../lazarus/lcl/dbgrids.pas"/>
         <UnitName Value="DBGrids"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="3624"/>
         <CursorPos X="1" Y="3636"/>
+        <TopLine Value="3624"/>
         <UsageCount Value="10"/>
       </Unit59>
       <Unit60>
         <Filename Value="../../lazarus/lcl/include/customform.inc"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="68"/>
         <CursorPos X="1" Y="82"/>
+        <TopLine Value="68"/>
         <UsageCount Value="10"/>
       </Unit60>
+      <Unit61>
+        <Filename Value="../../SQLitePass_0.55/Sources/SqlitePassErrorLogDialog.pas"/>
+        <ComponentName Value="SqlitePassErrorLogDlg"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="SqlitePassErrorLogDialog"/>
+        <CursorPos X="12" Y="78"/>
+        <TopLine Value="64"/>
+        <EditorIndex Value="14"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <SyntaxHighlighter Value="Delphi"/>
+      </Unit61>
     </Units>
-    <JumpHistory Count="24" HistoryIndex="23">
+    <JumpHistory Count="27" HistoryIndex="26">
       <Position1>
         <Filename Value="FParalel.pp"/>
         <Caret Line="116" Column="1" TopLine="96"/>
@@ -645,18 +624,25 @@
         <Filename Value="FSingEdt.pp"/>
         <Caret Line="63" Column="38" TopLine="50"/>
       </Position24>
+      <Position25>
+        <Filename Value="../../SQLitePass_0.55/Sources/SqlitePassErrorLogDialog.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position25>
+      <Position26>
+        <Filename Value="../../SQLitePass_0.55/Sources/SqlitePassErrorLogDialog.pas"/>
+        <Caret Line="78" Column="12" TopLine="64"/>
+      </Position26>
+      <Position27>
+        <Filename Value="../../SQLitePass_0.55/Sources/SqlitePassErrorLogDialog.pas"/>
+        <Caret Line="76" Column="27" TopLine="46"/>
+      </Position27>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="10"/>
+    <Version Value="8"/>
     <SearchPaths>
       <UnitOutputDirectory Value="../bin"/>
     </SearchPaths>
-    <Parsing>
-      <SyntaxOptions>
-        <UseAnsiStrings Value="False"/>
-      </SyntaxOptions>
-    </Parsing>
     <Linking>
       <Options>
         <Win32>
@@ -695,4 +681,4 @@
       </Item3>
     </Exceptions>
   </Debugging>
-</CONFIG>
+</CONFIG>

@@ -18,12 +18,14 @@ inherited ProfesorForm: TProfesorForm
       Left = 256
       Top = 0
       Action = ActProfesorProhibicion
+      ParentShowHint = False
       ShowHint = True
     end
     object BtnDistributivo: TToolButton
       Left = 279
       Top = 0
       Action = ActDistributivo
+      ParentShowHint = False
       ShowHint = True
     end
   end
@@ -32,12 +34,8 @@ inherited ProfesorForm: TProfesorForm
     Width = 702
     ExplicitTop = 381
     ExplicitWidth = 702
-    inherited SLState: TLabel
-      Height = 17
-    end
     inherited SLRecordNo: TLabel
       Left = 698
-      Height = 17
       ExplicitLeft = 698
     end
   end
@@ -55,7 +53,7 @@ inherited ProfesorForm: TProfesorForm
     Left = 204
     Top = 48
     Bitmap = {
-      494C010104000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000600040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

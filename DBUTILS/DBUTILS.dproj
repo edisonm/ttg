@@ -1,57 +1,128 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <ProjectGuid>{62cf20a2-e304-43d1-b340-a71c9b38a230}</ProjectGuid>
-    <MainSource>DBUTILS.dpr</MainSource>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-    <DCC_DependencyCheckOutputName>..\bin\DBUTILS.exe</DCC_DependencyCheckOutputName>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <Version>7.0</Version>
-    <DCC_DebugInformation>False</DCC_DebugInformation>
-    <DCC_WriteableConstants>True</DCC_WriteableConstants>
-    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
-    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
-    <DCC_Define>RELEASE</DCC_Define>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <Version>7.0</Version>
-    <DCC_WriteableConstants>True</DCC_WriteableConstants>
-    <DCC_Define>DEBUG</DCC_Define>
-    <DCC_ExeOutput>..\bin</DCC_ExeOutput>
-    <DCC_DcuOutput>..\obj</DCC_DcuOutput>
-    <DCC_ObjOutput>..\obj</DCC_ObjOutput>
-    <DCC_HppOutput>..\obj</DCC_HppOutput>
-  </PropertyGroup>
-  <ProjectExtensions>
-    <Borland.Personality>Delphi.Personality</Borland.Personality>
-    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
-    <BorlandProject>
-<BorlandProject><Delphi.Personality><Parameters><Parameters Name="RunParams">/ACC2DM E:\apps\pascal\TTG\dat\TTG.mdb SourceBaseDataModule E:\apps\pascal\TTG\src\DSrcBase csi;cfd;cdf;csr;cds;U=kbmMemTable;DS=kbmMemTable</Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><Language><Language Name="ProjectLang">$0000300A</Language></Language><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">12298</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">DBUTILS.dpr</Source></Source><Excluded_Packages>
-      
-      <Excluded_Packages Name="Z:\apps\pascal\TxQuery\Packages\D2007\bin\dclXq_D2007.bpl">File Z:\apps\pascal\TxQuery\Packages\D2007\bin\dclXq_D2007.bpl not found</Excluded_Packages>
-    </Excluded_Packages></Delphi.Personality></BorlandProject></BorlandProject>
-  </ProjectExtensions>
-  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
-  <ItemGroup>
-    <DelphiCompile Include="DBUTILS.dpr">
-      <MainSource>MainSource</MainSource>
-    </DelphiCompile>
-    <DCCReference Include="..\..\arctl\SOURCE\ARCConst.pas" />
-    <DCCReference Include="..\..\arctl\SOURCE\ArDBUtls.pas" />
-    <DCCReference Include="..\..\arctl\SOURCE\BZIP2.PAS" />
-    <DCCReference Include="..\..\arctl\SOURCE\DBPacker.pas" />
-    <DCCReference Include="Ac2DMUtl.pas" />
-    <DCCReference Include="Ac2PxUtl.pas" />
-    <DCCReference Include="Ac2SQUtl.pas" />
-    <DCCReference Include="Acc2DM.pas" />
-    <DCCReference Include="Acc2Pdx.pas" />
-    <DCCReference Include="Acc2SQL.pas" />
-    <DCCReference Include="AccUtl.pas" />
-    <DCCReference Include="C:\Documents and Settings\edison\Mis documentos\RAD Studio\7.0\Imports\DAO_TLB.pas" />
-    <DCCReference Include="DBPack.pas" />
-    <DCCReference Include="PdxUtils.pas" />
-  </ItemGroup>
-</Project>
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{62cf20a2-e304-43d1-b340-a71c9b38a230}</ProjectGuid>
+			<MainSource>DBUTILS.dpr</MainSource>
+			<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+			<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<DCC_DependencyCheckOutputName>..\bin\DBUTILS.exe</DCC_DependencyCheckOutputName>
+			<ProjectVersion>12.0</ProjectVersion>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_DependencyCheckOutputName>DBUTILS.exe</DCC_DependencyCheckOutputName>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<Version>7.0</Version>
+			<DCC_DebugInformation>False</DCC_DebugInformation>
+			<DCC_WriteableConstants>True</DCC_WriteableConstants>
+			<DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_DependencyCheckOutputName>..\bin\DBUTILS.exe</DCC_DependencyCheckOutputName>
+			<Version>7.0</Version>
+			<DCC_WriteableConstants>True</DCC_WriteableConstants>
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_ExeOutput>..\bin</DCC_ExeOutput>
+			<DCC_DcuOutput>..\obj</DCC_DcuOutput>
+			<DCC_ObjOutput>..\obj</DCC_ObjOutput>
+			<DCC_HppOutput>..\obj</DCC_HppOutput>
+		</PropertyGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>VCLApplication</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Parameters>
+						<Parameters Name="RunParams">/ACC2DM E:\apps\pascal\TTG\dat\TTG.mdb SourceBaseDataModule E:\apps\pascal\TTG\src\DSrcBase cds;csr;U=SqlitePassDbo;DS=SqlitePassDataset</Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<Language>
+						<Language Name="ProjectLang">$0000300A</Language>
+					</Language>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">12298</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Source>
+						<Source Name="MainSource">DBUTILS.dpr</Source>
+					</Source>
+					<Excluded_Packages>
+						<Excluded_Packages Name="Z:\apps\pascal\TxQuery\Packages\D2007\bin\dclXq_D2007.bpl">File Z:\apps\pascal\TxQuery\Packages\D2007\bin\dclXq_D2007.bpl not found</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+		<ItemGroup>
+			<DelphiCompile Include="DBUTILS.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="Acc2Pdx.pas"/>
+			<DCCReference Include="DBPack.pas"/>
+			<DCCReference Include="Ac2PxUtl.pas"/>
+			<DCCReference Include="PdxUtils.pas"/>
+			<DCCReference Include="AccUtl.pas"/>
+			<DCCReference Include="Ac2DMUtl.pas"/>
+			<DCCReference Include="Acc2DM.pas"/>
+			<DCCReference Include="..\..\arctl\SOURCE\ArDBUtls.pas"/>
+			<DCCReference Include="..\..\arctl\SOURCE\DBPacker.pas"/>
+			<DCCReference Include="..\..\arctl\SOURCE\BZIP2.PAS"/>
+			<DCCReference Include="..\..\arctl\SOURCE\ARCConst.pas"/>
+			<DCCReference Include="C:\Documents and Settings\edison\Mis documentos\RAD Studio\7.0\Imports\DAO_TLB.pas"/>
+			<DCCReference Include="Ac2SQUtl.pas"/>
+			<DCCReference Include="Acc2SQL.pas"/>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+	</Project>

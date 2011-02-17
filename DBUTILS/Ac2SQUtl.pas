@@ -15,27 +15,27 @@ uses
 
 const
   Acc2SQLDataType: array [1 .. $17] of string = (
-    'BOOL_INT', { dbBoolean }
-    'INTEGER', { dbByte }
-    'INTEGER', { dbInteger }
-    'LARGEINT', { dbLong }
-    'CURRENCY', { dbCurrency }
-    'FLOAT', { dbSingle }
-    'FLOAT', { dbDouble }
-    'DATETIME', { dbDate }
-    'TEXT', { dbBinary }
-    'VARCHAR', { dbText }
-    'TEXT', { dbLongBinary }
-    'TEXT', { dbMemo }
-    'NONE', 'NONE', 'TEXT', { dbGUID }
-    'LARGEINT', { dbBigInt }
-    'TEXT', { dbVarBinary }
-    'VARCHAR', { dbChar }
-    'FLOAT', { dbNumeric }
-    'FLOAT', { dbDecimal }
-    'FLOAT', { dbFloat }
-    'TIME', { dbTime }
-    'DATETIME' { dbTimeStamp }
+    'bool_int', { dbBoolean }
+    'integer', { dbByte }
+    'integer', { dbInteger }
+    'integer', { dbLong }
+    'currency', { dbCurrency }
+    'float', { dbSingle }
+    'float', { dbDouble }
+    'datetime', { dbDate }
+    'text', { dbBinary }
+    'varchar', { dbText }
+    'text', { dbLongBinary }
+    'text', { dbMemo }
+    'none', 'none', 'text', { dbGUID }
+    'integer', { dbBigInt }
+    'text', { dbVarBinary }
+    'varchar', { dbChar }
+    'float', { dbNumeric }
+    'float', { dbDecimal }
+    'float', { dbFloat }
+    'time', { dbTime }
+    'datetime' { dbTimeStamp }
   );
 
 
@@ -52,7 +52,7 @@ procedure ConvertAccessToSQL(DBAcc: Database; StringSQL, Msgs: TStrings);
         begin
           if (Attributes and dbAutoIncrField) <> 0 then
             {DataTypeName := 'AUTOINC_INT'}
-            DataTypeName := 'INTEGER'
+            DataTypeName := 'integer'
           else
             DataTypeName := Acc2SQLDataType[type_];
           S := Format('    ''%s'' %s', [name, DataTypeName]);
@@ -62,23 +62,23 @@ procedure ConvertAccessToSQL(DBAcc: Database; StringSQL, Msgs: TStrings);
                 S := S + Format('(%d)', [Size]);
               end
           end;
-          if Required then
-	     S := S + ' NOT NULL';
+          if Required or ((Attributes and dbAutoIncrField) <> 0) then
+            S := S + ' not null';
           for k := 0 to VTableDef.Indexes.Count - 1 do
           begin
             if (VTableDef.Indexes[k].Fields.Count = 1) and (VTableDef.Indexes[k].Fields.Item[0].Name = Name) then
             begin
               if VTableDef.Indexes[k].Primary then
               begin
-                S := S + ' PRIMARY KEY';
+                S := S + ' primary key';
                 if VTableDef.Indexes[j].Fields.Item[0].Attributes = dbDescending then
                   S := S + ' DESC';
                 if (Attributes and dbAutoIncrField) <> 0 then
-                  S := S + ' AUTOINCREMENT'
+                  S := S + ' autoincrement'
               end
               else if VTableDef.Indexes[k].Unique then
               begin
-                S := S + ' UNIQUE';
+                S := S + ' unique';
               end;
             end;
           end;

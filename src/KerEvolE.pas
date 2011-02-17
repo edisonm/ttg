@@ -105,7 +105,7 @@ type
     procedure Actualizar;
     procedure Configurar(ATamPoblacion: Integer);
     destructor Destroy; override;
-    procedure SaveMejorToDatabase(
+    procedure SaveBestToDatabase(
       CodHorario: Integer;
       MomentoInicial,
       MomentoFinal: TDateTime);
@@ -645,7 +645,7 @@ begin
   Result := FPoblacion[FTamPoblacion].DescensoRapido;
 end;
 
-procedure TEvolElitista.SaveMejorToDatabase(CodHorario: Integer; MomentoInicial,
+procedure TEvolElitista.SaveBestToDatabase(CodHorario: Integer; MomentoInicial,
   MomentoFinal: TDateTime);
 var
   Informe: TStrings;

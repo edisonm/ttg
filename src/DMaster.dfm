@@ -4,36 +4,29 @@ object MasterDataModule: TMasterDataModule
   OnDestroy = DataModuleDestroy
   Height = 404
   Width = 748
-  object TbTmpProfesorCarga: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodProfesor'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'Carga'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+  object TbTmpProfesorCarga: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 250
     Top = 11
-    object TbTmpProfesorCargaCodProfesor: TIntegerField
+    pParams = ()
+    object TbTmpProfesorCargaCodProfesor: TLargeintField
       DisplayLabel = 'Profesor'
       FieldName = 'CodProfesor'
     end
@@ -61,70 +54,48 @@ object MasterDataModule: TMasterDataModule
       Size = 31
       Lookup = True
     end
-    object TbTmpProfesorCargaCarga: TIntegerField
+    object TbTmpProfesorCargaCarga: TLargeintField
       FieldName = 'Carga'
     end
   end
-  object QuDistributivoProfesor: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodMateria'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodParaleloId'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodProfesor'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+  object QuDistributivoProfesor: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 250
     Top = 115
-    object QuDistributivoProfesorCodMateria: TIntegerField
+    pParams = ()
+    object QuDistributivoProfesorCodMateria: TLargeintField
       FieldName = 'CodMateria'
       Visible = False
     end
-    object QuDistributivoProfesorCodNivel: TIntegerField
+    object QuDistributivoProfesorCodNivel: TLargeintField
       FieldName = 'CodNivel'
       Visible = False
     end
-    object QuDistributivoProfesorCodEspecializacion: TIntegerField
+    object QuDistributivoProfesorCodEspecializacion: TLargeintField
       FieldName = 'CodEspecializacion'
     end
-    object QuDistributivoProfesorCodParaleloId: TIntegerField
+    object QuDistributivoProfesorCodParaleloId: TLargeintField
       FieldName = 'CodParaleloId'
       Visible = False
     end
-    object QuDistributivoProfesorCodProfesor: TIntegerField
+    object QuDistributivoProfesorCodProfesor: TLargeintField
       FieldName = 'CodProfesor'
       Visible = False
     end
@@ -187,72 +158,58 @@ object MasterDataModule: TMasterDataModule
       Lookup = True
     end
   end
-  object QuProfesorProhibicionCant: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodProfesor'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'Cantidad'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+  object QuProfesorProhibicionCant: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 58
     Top = 157
-    object QuProfesorProhibicionCantCodProfesor: TIntegerField
+    pParams = ()
+    object QuProfesorProhibicionCantCodProfesor: TLargeintField
       FieldName = 'CodProfesor'
     end
-    object QuProfesorProhibicionCantCantidad: TIntegerField
+    object QuProfesorProhibicionCantCantidad: TLargeintField
       FieldName = 'Cantidad'
     end
   end
-  object TbTmpAulaTipoCarga: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodAulaTipo'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'Carga'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+  object TbTmpAulaTipoCarga: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 250
     Top = 62
-    object TbTmpAulaTipoCargaCodAulaTipo: TIntegerField
+    pParams = ()
+    object TbTmpAulaTipoCargaCodAulaTipo: TLargeintField
       DisplayLabel = 'Tipo de aula'
       FieldName = 'CodAulaTipo'
     end
@@ -268,7 +225,7 @@ object MasterDataModule: TMasterDataModule
       Size = 31
       Lookup = True
     end
-    object TbTmpAulaTipoCargaCarga: TIntegerField
+    object TbTmpAulaTipoCargaCarga: TLargeintField
       FieldName = 'Carga'
     end
   end

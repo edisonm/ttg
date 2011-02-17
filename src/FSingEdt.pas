@@ -7,7 +7,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
   StdCtrls, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls,
-  ComCtrls, FEditor, ImgList, ToolWin, kbmMemTable, ActnList, UConfig;
+  ComCtrls, FEditor, ImgList, ToolWin, SqlitePassDbo, ActnList, UConfig;
 
 type
 
@@ -86,9 +86,9 @@ procedure TSingleEditorForm.DBGridCheckButton(Sender: TObject;
 begin
   inherited;
   {$IFNDEF FPC}
-  Enabled := (TDBGrid(Sender).DataSource.DataSet is TkbmMemTable) and
+  Enabled := (TDBGrid(Sender).DataSource.DataSet is TSqlitePassDataset) and
     (Field <> nil) and not (Field is TBlobField)
-    and (TkbmMemTable(TDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0)
+    and (TSqlitePassDataset(TDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0)
   {$ENDIF};
 end;
 
@@ -96,27 +96,26 @@ procedure TSingleEditorForm.DBGridTitleBtnClick(Sender: TObject;
   ACol: Integer; Field: TField);
 begin
   inherited;
-  {$IFNDEF FPC}
-  if TDBGrid(Sender).DataSource.DataSet is TkbmMemTable then
-    with TkbmMemTable(TDBGrid(Sender).DataSource.DataSet) do
+  {if TDBGrid(Sender).DataSource.DataSet is TSqlitePassDataset then
+    with TSqlitePassDataset(TDBGrid(Sender).DataSource.DataSet) do
     try
       if Field.FieldKind = fkLookup then
-        IndexFieldNames :=IndexDefs.FindIndexForFields(FindField(Field.KeyFields).FieldName).Fields
+        IndexedBy :=IndexDefs.FindIndexForFields(FindField(Field.KeyFields).FieldName).Fields
       else
-       IndexFieldNames := IndexDefs.FindIndexForFields(Field.FieldName).Fields;
+       IndexedBy := IndexDefs.FindIndexForFields(Field.FieldName).Fields;
     except
-      IndexFieldNames := '';
+      IndexedBy := '';
     end;
-  {$ENDIF}
+    }
 end;
 
 procedure TSingleEditorForm.DBGridDblClick(Sender: TObject);
 begin
   inherited;
   {
-  if TDBGrid(Sender).DataSource.DataSet is TkbmMemTable then
-    with TkbmMemTable(TDBGrid(Sender).DataSource.DataSet) do
-      IndexFieldNames := '';
+  if TDBGrid(Sender).DataSource.DataSet is TSqlitePassDataset then
+    with TSqlitePassDataset(TDBGrid(Sender).DataSource.DataSet) do
+      IndexedBy := '';
   }
 end;
 

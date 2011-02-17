@@ -56,7 +56,7 @@ begin
     begin
       DisableControls;
       try
-        IndexFieldNames := 'CodProfesor';
+        IndexedBy := 'CodProfesor';
         MasterFields := 'CodProfesor';
         MasterSource := DSProfesor;
       finally
@@ -65,7 +65,7 @@ begin
     end;
     Caption := Format('%s %s - Editando %s', [
     		      NameDataSet[TbProfesor],
-		      TbProfesorApeNomProfesor.Value,
+		      TbProfesor.FindField('ApeNomProfesor').Value,
 		      Description[TbProfesorProhibicion]]);
     DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ', [
 			    Description[TbProfesorProhibicion],
@@ -79,7 +79,7 @@ begin
 	       'NomHora', 'CodHora', 'CodHora', 'CodProfProhibicionTipo',
 	       'NomProfProhibicionTipo', 'ColProfProhibicionTipo',
 	       'CodProfProhibicionTipo');
-    Tag := TbProfesorCodProfesor.Value;
+    Tag := TbProfesor.FindField('CodProfesor').AsInteger;
     OnActivate := FormActivate;
   end
   else
@@ -106,7 +106,7 @@ begin
       begin
         DisableControls;
         try
-          IndexFieldNames := 'CodProfesor';
+          IndexedBy := 'CodProfesor';
           MasterFields := 'CodProfesor';
           MasterSource := DSProfesor;
         finally
@@ -144,7 +144,7 @@ begin
   inherited;
   FLbCarga.Caption := Format('Carga: %d', [MasterDataModule.GetCargaActual]);
   FDistributivoForm.Caption := FSuperTitle + ' - ' +
-    SourceDataModule.TbProfesorApeNomProfesor.AsString;
+    SourceDataModule.TbProfesor['ApeNomProfesor'].AsString;
 end;
 
 procedure TProfesorForm.FormCreate(Sender: TObject);
@@ -160,7 +160,7 @@ begin
   begin
     MasterSource := nil;
     MasterFields := '';
-    IndexFieldNames := '';
+    IndexedBy := '';
   end;
   if Assigned(FDistributivoForm) then
   begin

@@ -6,7 +6,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
-  FSingEdt, DBGrids, ExtCtrls, kbmMemTable, DBCtrls, Grids, CheckLst,
+  FSingEdt, DBGrids, ExtCtrls, SqlitePassDbo, DBCtrls, Grids, CheckLst,
   StdCtrls, ImgList, ComCtrls, ToolWin, ActnList;
 
 type
@@ -49,12 +49,12 @@ begin
     {$ENDIF}
     MasterSource := Self.DataSource;
     MasterFields := 'CodNivel;CodEspecializacion';
-    IndexFieldNames := MasterFields; // + ';' + 'CodParaleloId';
+    IndexedBy := MasterFields; // + ';' + 'CodParaleloId';
     {$IFDEF FPC}
     Open;
     {$ENDIF}
   end;
-  SourceDataModule.TbParaleloId.IndexFieldNames := 'CodParaleloId';
+  SourceDataModule.TbParaleloId.IndexedBy := 'CodParaleloId';
   with CheckListBox do
   begin
     Items.Clear;

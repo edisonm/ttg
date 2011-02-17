@@ -45,9 +45,9 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Left = 321
       Top = 0
       Width = 193
-      Height = 22
+      Height = 21
       Hint = 'Ver|Que ver en el horario del profesor'
-      ItemHeight = 0
+      ParentShowHint = False
       ShowHint = True
       TabOrder = 1
       OnChange = BtnMostrarClick
@@ -74,7 +74,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010106000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010106000800040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -345,126 +345,66 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       C07FFFFEFFFF0003FFFFFFFFFFFF000700000000000000000000000000000000
       000000000000}
   end
-  object QuHorarioProfesor: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodProfesor'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodParaleloId'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodDia'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodMateria'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'AbrNivel'
-        DataType = ftString
-        Size = 5
-      end
-      item
-        Name = 'AbrEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'NomParaleloId'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 5
-      end
-      item
-        Name = 'NomMateria'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'Nombre'
-        DataType = ftString
-        Size = 40
-      end>
-    IndexFieldNames = 'CodProfesor'
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
+  object QuHorarioProfesor: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
     MasterFields = 'CodProfesor'
     MasterSource = SourceDataModule.DSProfesor
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmPostponed
     Left = 64
     Top = 88
+    pParams = ()
     object QuHorarioProfesorCodProfesor: TAutoIncField
       DisplayLabel = 'Codigo'
       FieldName = 'CodProfesor'
       Visible = False
     end
-    object QuHorarioProfesorCodNivel: TIntegerField
+    object QuHorarioProfesorCodNivel: TLargeintField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodEspecializacion: TIntegerField
+    object QuHorarioProfesorCodEspecializacion: TLargeintField
       DisplayLabel = 'Especializacion'
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodParaleloId: TIntegerField
+    object QuHorarioProfesorCodParaleloId: TLargeintField
       DisplayLabel = 'Paralelo'
       FieldName = 'CodParaleloId'
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodHora: TIntegerField
+    object QuHorarioProfesorCodHora: TLargeintField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodDia: TIntegerField
+    object QuHorarioProfesorCodDia: TLargeintField
       DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodMateria: TIntegerField
+    object QuHorarioProfesorCodMateria: TLargeintField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
       Required = True

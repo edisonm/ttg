@@ -7,10 +7,11 @@ ISS=$(TTGDIR)/install/TTG.iss
 INSTALLER=$(TTGDIR)/bin/TTGSETUP.exe
 TTGEXE=$(TTGDIR)/bin/TTG.exe
 DBUTILS=$(TTGDIR)/bin/DBUTILS.exe
-DCC32="c:/archivos de programa/CodeGear/RAD Studio/5.0/bin/dcc32"
+DCC32="c:/archivos de programa/Embarcadero/RAD Studio/7.0/bin/dcc32"
+# DCC32="c:/archivos de programa/CodeGear/RAD Studio/5.0/bin/dcc32"
 DCC32OPTS= \
 	-E'$(shell cygpath -w $(TTGDIR)/bin)' \
-	-U'$(shell cygpath -w $(TTGDIR)/../kbmMemTable552/Source)' \
+	-U'$(shell cygpath -w $(TTGDIR)/../SQLitePass_0.55/Sources)' \
 	-N0'$(shell cygpath -w $(TTGDIR)/obj)'
 TTGDPR=TTG.dpr
 DBUTILSDPR=DBUTILS.dpr
@@ -18,14 +19,18 @@ TTGMDB=dat/TTG.mdb
 TTGSQL=dat/TTG.sql
 TTGSQLITE3=dat/TTG.s3fpc
 
+DSRCBASE0=DSrcBase
+
 ifneq ($(shell uname -s),Linux)
-DSRCBASE=DSrcBase
+DSRCBASE=$(DSRCBASE0)
 LAZRES="c:/lazarus/tools/lazres"
 else
 LAZRES=lazres
 endif
 
 ABOUTPAS=src/About.pas
+
+DBUNITS=Ac2DMUtl Ac2PxUtl Acc2DM Acc2Pdx Acc2SQL AccUtl DBPack PdxUtils
 
 UNITS=KerModel RelUtils HorColCm TTGUtls Rand SortAlgs About KerEvolE	\
 	UConfig
@@ -62,14 +67,14 @@ $(ABOUTPAS): $(ABOUTPAS).tmpl
 $(TTGEXE): src/$(TTGDPR) $(addprefix src/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE))) $(ABOUTPAS)
 	cd src; $(DCC32) $(DCC32OPTS) $(TTGDPR)
 
-$(DBUTILS): DBUTILS/$(DBUTILSDPR)
+$(DBUTILS): DBUTILS/$(DBUTILSDPR) $(addprefix DBUTILS/, $(addsuffix .pas, $(DBUNITS)))
 	cd DBUTILS; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
 
 src/$(DSRCBASE).pas: $(DBUTILS) $(TTGMDB)
-	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule $(DSRCBASE) 'csi;cfd;cdf;csr;cds;U=kbmMemTable;DS=kbmMemTable'
+	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule $(DSRCBASE) 'cds;U=SqlitePassDbo;DS=SqlitePassDataset'
 
 src/$(DSRCBASE).pp: $(DBUTILS) $(TTGMDB)
-	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule $(DSRCBASE) 'cfd;cdf;cds;lfm;U=Sqlite3DS;DS=Sqlite3Dataset'
+	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule $(DSRCBASE) 'cds;lfm;U=SqlitePassDbo;DS=SqlitePassDataset'
 
 $(TTGSQL): $(DBUTILS) $(TTGMDB)
 	$(DBUTILS) /ACC2SQL $(TTGMDB) $@
@@ -77,6 +82,7 @@ $(TTGSQL): $(DBUTILS) $(TTGMDB)
 $(TTGSQLITE3): $(TTGSQL)
 	$(RM) $@
 	sqlite3 $@ ".read $(TTGSQL)"
+	sqlite3 $@ ".genfkey --exec"
 
 clean:
 	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) \
@@ -88,6 +94,37 @@ clean:
 .PHONY: srclaz
 
 .SUFFIXES: .lrs .lfm .dfm .pas .pp .lpr .dpr
+
+kbmtosq3:
+	for i in $(addprefix src/, $(FORMS) $(DSRCBASE0) $(UNITS)) ; do \
+	  sed \
+	  -e s:"TkbmMemTable":"TSqlitePassDataset":g \
+	  -e s:"kbmMemTable":"SqlitePassDbo":g \
+	  -e s:"TIntegerField":"TLargeintField":g $$i.pas > $$i.pas.tmp && \
+	  mv -f $$i.pas.tmp $$i.pas ; done
+	for i in $(addprefix src/, $(FORMS) $(DSRCBASE0)) ; do \
+	  sed -e s:"TkbmMemTable":"TSqlitePassDataset":g \
+	  -e s:"kbmMemTable":"SqlitePassDbo":g \
+	  -e s:"KbmMemTable":"SqlitePassDbo":g \
+	  -e s:"TIntegerField":"TLargeintField":g \
+	  -e s:"    DesignActivation = .*":"":g \
+	  -e s:"    AttachedAutoRefresh = .*":"":g \
+	  -e s:"    AttachMaxCount = .*":"":g \
+	  -e s:"    FieldDefs = <>":"":g \
+	  -e s:"    IndexFieldNames = .*":"":g \
+	  -e s:"    IndexDefs = .*":"":g \
+	  -e s:"    SortOptions = .*":"":g \
+	  -e s:"    PersistentBackup = .*":"":g \
+	  -e s:"    ProgressFlags = .*":"":g \
+	  -e s:"    LoadedCompletely = .*":"":g \
+	  -e s:"    SavedCompletely = .*":"":g \
+	  -e s:"    Version = .*":"":g \
+	  -e s:"    LanguageID = .*":"":g \
+	  -e s:"    SortID = .*":"":g \
+	  -e s:"    SubLanguageID = .*":"":g \
+	  -e s:"    LocaleID = .*":"":g \
+	  $$i.dfm > $$i.dfm.tmp && \
+	  mv -f $$i.dfm.tmp $$i.dfm ; done
 
 %.pp: %.pas
 	sed \

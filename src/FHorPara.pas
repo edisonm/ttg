@@ -7,21 +7,21 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
   FCrsMMER, StdCtrls, Buttons, ExtCtrls, Grids, Variants, FCrsMME1, DBCtrls,
-  kbmMemTable, ImgList, ComCtrls, ToolWin;
+  SqlitePassDbo, ImgList, ComCtrls, ToolWin;
 
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)
-    QuHorarioParalelo: TkbmMemTable;
+    QuHorarioParalelo: TSqlitePassDataset;
     BtnIntercambiarPeriodos: TToolButton;
     cbVerParalelo: TComboBox;
     BtnPrior: TToolButton;
     BtnNext: TToolButton;
-    QuHorarioParaleloCodMateria: TIntegerField;
-    QuHorarioParaleloCodNivel: TIntegerField;
-    QuHorarioParaleloCodEspecializacion: TIntegerField;
-    QuHorarioParaleloCodParaleloId: TIntegerField;
-    QuHorarioParaleloCodHora: TIntegerField;
-    QuHorarioParaleloCodDia: TIntegerField;
+    QuHorarioParaleloCodMateria: TLargeintField;
+    QuHorarioParaleloCodNivel: TLargeintField;
+    QuHorarioParaleloCodEspecializacion: TLargeintField;
+    QuHorarioParaleloCodParaleloId: TLargeintField;
+    QuHorarioParaleloCodHora: TLargeintField;
+    QuHorarioParaleloCodDia: TLargeintField;
     QuHorarioParaleloCodProfesor: TAutoIncField;
     QuHorarioParaleloNomMateria: TStringField;
     QuHorarioParaleloApeNomProfesor: TStringField;
@@ -71,7 +71,7 @@ procedure THorarioParaleloForm.BtnMostrarClick(Sender: TObject);
 begin
   inherited;
   Caption := Format('[%s %d] - %s', [SuperTitle, CodHorario,
-    SourceDataModule.TbParaleloNomParalelo.AsString]);
+    SourceDataModule.TbParalelo.FindField('NomParalelo').AsString]);
   FNombre := MasterDataModule.StringsShowParalelo.Values[cbVerParalelo.Text];
   with SourceDataModule do
     ShowEditor(TbDia, TbHora, QuHorarioParalelo, TbPeriodo, 'CodDia', 'NomDia',
@@ -85,13 +85,13 @@ begin
   PrepareQuery(QuHorarioParalelo, 'HorarioParalelo',
 	       'CodNivel;CodEspecializacion;CodParaleloId');
   SourceDataModule.TbParalelo.First;
-  CodHorario := SourceDataModule.TbHorarioCodHorario.Value;
+  CodHorario := SourceDataModule.TbHorario.FindField('CodHorario').AsInteger;
   cbVerParalelo.Items.Clear;
   FillHorarioParalelo;
   LoadNames(MasterDataModule.StringsShowParalelo, cbVerParalelo.Items);
   cbVerParalelo.Text := cbVerParalelo.Items[0];
   {$IFNDEF FPC}
-  dlcParalelo.KeyValue := SourceDataModule.TbParaleloCodParalelo.AsInteger;
+  dlcParalelo.KeyValue := SourceDataModule.TbParalelo.FindField('CodParalelo').AsInteger;
   {$ENDIF}
 end;
 
@@ -104,9 +104,9 @@ begin
   begin
     with SourceDataModule do
       MasterDataModule.IntercambiarPeriodos(CodHorario,
-        TbParaleloCodNivel.AsInteger,
-        TbParaleloCodEspecializacion.AsInteger,
-        TbParaleloCodParaleloId.AsInteger,
+        TbParalelo.FindField('CodNivel').AsInteger,
+        TbParalelo.FindField('CodEspecializacion').AsInteger,
+        TbParalelo.FindField('CodParaleloId').AsInteger,
         CodDia, CodHora, iCodDia, iCodHora);
     BtnMostrarClick(nil);
   end;
@@ -117,7 +117,7 @@ begin
   inherited;
   SourceDataModule.TbParalelo.Prior;
   {$IFNDEF FPC}
-  dlcParalelo.KeyValue := SourceDataModule.TbParaleloCodParalelo.AsInteger;
+  dlcParalelo.KeyValue := SourceDataModule.TbParalelo.FindField('CodParalelo').AsInteger;
   {$ENDIF}
 end;
 
@@ -126,7 +126,7 @@ begin
   inherited;
   SourceDataModule.TbParalelo.Next;
   {$IFNDEF FPC}
-  dlcParalelo.KeyValue := SourceDataModule.TbParaleloCodParalelo.AsInteger;
+  dlcParalelo.KeyValue := SourceDataModule.TbParalelo.FindField('CodParalelo').AsInteger;
   {$ENDIF}
 end;
 
@@ -137,41 +137,41 @@ var
 begin
   with SourceDataModule do
   begin
-    CodHorario := TbHorarioCodHorario.Value;
-    TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+    CodHorario := TbHorario.FindField('CodHorario').AsInteger;
+    TbHorarioDetalle.IndexedBy := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
     if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
     begin
       TbDistributivo.DisableControls;
-      s := TbDistributivo.IndexFieldNames;
-      TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+      s := TbDistributivo.IndexedBy;
+      TbDistributivo.IndexedBy := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
       TbDistributivo.First;
       QuHorarioParalelo.DisableControls;
       try
-        while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
+        while (TbHorarioDetalle.FindField('CodHorario').AsInteger = CodHorario) and not TbHorarioDetalle.Eof do
         begin
-          CodMateria := TbHorarioDetalleCodMateria.Value;
-          CodNivel := TbHorarioDetalleCodNivel.Value;
-          CodEspecializacion := TbHorarioDetalleCodEspecializacion.Value;
-          CodParaleloId := TbHorarioDetalleCodParaleloId.Value;
-          while ((TbDistributivoCodMateria.Value <> CodMateria)
-            or (TbDistributivoCodNivel.Value <> CodNivel)
-            or (TbDistributivoCodEspecializacion.Value <> CodEspecializacion)
-            or (TbDistributivoCodParaleloId.Value <> CodParaleloId))
+          CodMateria := TbHorarioDetalle.FindField('CodMateria').AsInteger;
+          CodNivel := TbHorarioDetalle.FindField('CodNivel').AsInteger;
+          CodEspecializacion := TbHorarioDetalle.FindField('CodEspecializacion').AsInteger;
+          CodParaleloId := TbHorarioDetalle.FindField('CodParaleloId').AsInteger;
+          while ((TbDistributivo.FindField('CodMateria').AsInteger <> CodMateria)
+            or (TbDistributivo.FindField('CodNivel').AsInteger <> CodNivel)
+            or (TbDistributivo.FindField('CodEspecializacion').AsInteger <> CodEspecializacion)
+            or (TbDistributivo.FindField('CodParaleloId').AsInteger <> CodParaleloId))
             and not TbDistributivo.Eof do
             TbDistributivo.Next;
           QuHorarioParalelo.Append;
-          QuHorarioParaleloCodProfesor.Value := TbDistributivoCodProfesor.Value;
+          QuHorarioParaleloCodProfesor.Value := TbDistributivo.FindField('CodProfesor').AsInteger;
           QuHorarioParaleloCodMateria.Value := CodMateria;
           QuHorarioParaleloCodNivel.Value := CodNivel;
           QuHorarioParaleloCodEspecializacion.Value := CodEspecializacion;
           QuHorarioParaleloCodParaleloId.Value := CodParaleloId;
-          QuHorarioParaleloCodDia.Value := TbHorarioDetalleCodDia.Value;
-          QuHorarioParaleloCodHora.Value := TbHorarioDetalleCodHora.Value;
+          QuHorarioParaleloCodDia.Value := TbHorarioDetalle.FindField('CodDia').AsInteger;
+          QuHorarioParaleloCodHora.Value := TbHorarioDetalle.FindField('CodHora').AsInteger;
           QuHorarioParalelo.Post;
           TbHorarioDetalle.Next;
         end;
       finally
-        TbDistributivo.IndexFieldNames := s;
+        TbDistributivo.IndexedBy := s;
         TbDistributivo.EnableControls;
         QuHorarioParalelo.EnableControls;
       end;

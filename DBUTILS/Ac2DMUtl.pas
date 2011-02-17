@@ -34,8 +34,8 @@ const
   Acc2DMFieldClassName: array [1 .. $17] of string = (
     'TBooleanField', { dbBoolean }
     'TSmallintField', { dbByte }
-    'TSmallintField', { dbInteger }
-    'TIntegerField', { dbLong }
+    'TLargeintField', { dbInteger }
+    'TLargeintField', { dbLong }
     'TCurrencyField', { dbCurrency }
     'TFloatField', { dbSingle }
     'TFloatField', { dbDouble }
@@ -45,7 +45,7 @@ const
     'TLargeintField', { dbLongBinary }
     'TMemoField', { dbMemo }
     '', '', 'TGuidField', { dbGUID }
-    'TLargeIntField', { dbBigInt }
+    'TLargeintField', { dbBigInt }
     'TVarBytesField', { dbVarBinary }
     'TStringField', { dbChar }
     'TFloatField', { dbNumeric }
@@ -57,8 +57,8 @@ const
   Acc2DMFieldType: array [1 .. $17] of TFieldType = (
     ftBoolean, { dbBoolean }
     ftSmallint, { dbByte }
-    ftSmallint, { dbInteger }
-    ftInteger, { dbLong }
+    ftLargeint, { dbInteger }
+    ftLargeint, { dbLong }
     ftCurrency, { dbCurrency }
     ftFloat, { dbSingle }
     ftFloat, { dbDouble }
@@ -77,10 +77,11 @@ const
     ftTime, { dbTime }
     ftDateTime { dbTimeStamp }
   );
-  Acc2DMFieldTypeName: array [1 .. $17] of string = ('ftBoolean', { dbBoolean }
+  Acc2DMFieldTypeName: array [1 .. $17] of string = (
+    'ftBoolean', { dbBoolean }
     'ftSmallint', { dbByte }
-    'ftSmallint', { dbInteger }
-    'ftInteger', { dbLong }
+    'ftLargeint', { dbInteger }
+    'ftLargeint', { dbLong }
     'ftCurrency', { dbCurrency }
     'ftFloat', { dbSingle }
     'ftFloat', { dbDouble }
@@ -90,7 +91,7 @@ const
     'ftLargeint', { dbLongBinary }
     'ftMemo', { dbMemo }
     'ftUnknown', 'ftUnknown', 'ftGuid', { dbGUID }
-    'ftLargeInt', { dbBigInt }
+    'ftLargeint', { dbBigInt }
     'ftVarBytes', { dbVarBinary }
     'ftString', { dbChar }
     'ftFloat', { dbNumeric }
@@ -129,17 +130,13 @@ procedure ConvertAccessToDataModule(DBAcc: Database; const DataModuleName,
   ACreateSrcRels,
   ALazarusFrm: Boolean;
   StringDFM, StringPAS, Msgs: TStrings);
-var
-  VTableDef: TableDef;
-  DataTypeName, VFieldClassName, VTableName: string;
-  VTableList: TStrings;
-  vv: Variant;
-  procedure CreateFieldDefs;
+  procedure CreateFieldDefs(ATableDef: TableDef);
   var
     j: Integer;
+    DataTypeName: string;
   begin
     StringDFM.Add('    FieldDefs = <');
-    with VTableDef.Fields do
+    with ATableDef.Fields do
       for j := 0 to Count - 1 do
       begin
         with Item[j] do
@@ -166,13 +163,14 @@ var
     with StringDFM do
       Strings[Count - 1] := Strings[Count - 1] + '>';
   end;
-  procedure CreateSrcFields;
+  procedure CreateSrcFields(ATableDef: TableDef);
   var
     j: Integer;
+    DataTypeName: string;
   begin
-    StringPAS.Add(Format('  with Tb%s.FieldDefs do', [VTableName]));
+    StringPAS.Add(Format('  with Tb%s.FieldDefs do', [ATableDef.Name]));
     StringPAS.Add('  begin');
-    with VTableDef.Fields do
+    with ATableDef.Fields do
       for j := 0 to Count - 1 do
       begin
         with Item[j] do
@@ -187,62 +185,82 @@ var
       end;
     StringPAS.Add('  end;');
   end;
-  procedure CreateFields;
+  procedure SetExtraFieldProps(ATableDef: TableDef);
   var
     j: Integer;
     s: string;
   begin
-    with VTableDef.Fields do
+    with ATableDef.Fields do
       for j := 0 to Count - 1 do
       begin
         with Item[j] do
         begin
-          if not ALazarusFrm and ((Attributes and dbAutoIncrField) <> 0) then
-            VFieldClassName := 'TAutoIncField'
-          else
-          begin
-            VFieldClassName := Acc2DMFieldClassName[type_];
-            if (VFieldClassName = 'TIntegerField') and ALazarusFrm then
-              VFieldClassName := 'TLongIntField';
+          try
+            s := VarToStr(Properties['Caption']);
+          except
+            s := Name;
           end;
-          StringDFM.Add(Format('    object Tb%s%s: %s', [VTableName, name,
+          if s <> Name then
+            StringPAS.Add(Format('    Add(''Tb%s.%s=%s'');', [ATableDef.Name,
+              Name, s]));
+        end;
+      end;
+  end;
+  procedure CreateDfmFields(ATableDef: TableDef);
+  var
+    j: Integer;
+    VFieldClassName, s: string;
+    vv: Variant;
+  begin
+    with ATableDef.Fields do
+      for j := 0 to Count - 1 do
+      begin
+        with Item[j] do
+        begin
+          {if not ALazarusFrm and ((Attributes and dbAutoIncrField) <> 0) then
+            VFieldClassName := 'TAutoIncField'}
+          if Attributes and dbAutoIncrField <> 0 then
+            VFieldClassName := 'TLargeIntField'
+          else
+            VFieldClassName := Acc2DMFieldClassName[type_];
+          StringDFM.Add(Format('    object Tb%s%s: %s', [ATableDef.Name, Name,
               VFieldClassName]));
           try
             s := VarToStr(Properties['Caption']);
           except
             s := Name;
           end;
-          StringDFM.Add('      DisplayLabel = ''' + EscapeStrForm(s) + '''');
-          StringDFM.Add('      FieldName = ''' + name + '''');
+          if s <> Name then
+            StringDFM.Add('      DisplayLabel = ''' + EscapeStrForm(s) + '''');
+          StringDFM.Add('      FieldName = ''' + Name + '''');
           if Required then
             StringDFM.Add('      Required = True');
-{          if ((Attributes and dbAutoIncrField) <> 0) and ALazarusFrm then
-            StringDFM.Add('      ReadOnly = False');}
           vv := DefaultValue;
           if not VarIsNull(vv) and (vv <> '') then
             StringDFM.Add
               (Format('      DefaultExpression = ''%s''', [VarToStr(vv)]));
           case Acc2DMFieldType[type_] of
             ftString, ftBytes, ftVarBytes:
-              StringDFM.Add(Format('      Size = %d', [Size]));
+              if Size <> 20 then
+                StringDFM.Add(Format('      Size = %d', [Size]));
           end;
           StringDFM.Add('    end');
-          StringPAS.Add(Format('    Tb%s%s:%s;', [VTableName, name,
+          StringPAS.Add(Format('    Tb%s%s:%s;', [ATableDef.Name, Name,
               VFieldClassName]));
         end;
       end;
   end;
-  procedure CreateSrcIndexes;
+  procedure CreateSrcIndexes(ATableDef: TableDef);
   var
     s, d, o: string;
     k, n, i: Smallint;
   begin
-    with VTableDef, Indexes do
+    with ATableDef, Indexes do
     begin
       n := Count;
       if n <> 0 then
       begin
-        StringPAS.Add(Format('  with Tb%s do', [VTableDef.name]));
+        StringPAS.Add(Format('  with Tb%s do', [ATableDef.Name]));
         StringPAS.Add('  begin');
 //        StringPAS.Add(Format('    IndexDefs.Capacity := %d;', [n]));
         for i := 0 to n - 1 do
@@ -289,10 +307,10 @@ var
             if d <> '' then
               StringPAS.Add
                 (Format('    AddIndex(''Tb%s%s'', ''%s'', [%s], %s);',
-                  [VTableDef.name, Name, s, o, d]))
+                  [ATableDef.name, Name, s, o, d]))
             else
               StringPAS.Add(Format('    AddIndex(''Tb%s%s'', ''%s'', [%s]);',
-                  [VTableDef.name, Name, s, o]));
+                  [ATableDef.name, Name, s, o]));
           end;
         StringPAS.Add('  end;');
       end;
@@ -333,12 +351,12 @@ var
     end;
   end;
 
-  procedure CreateIndexDefs;
+  procedure CreateIndexDefs(ATableDef: TableDef);
   var
     s, d, o: string;
     n, i: Smallint;
   begin
-    with VTableDef, Indexes do
+    with ATableDef, Indexes do
     begin
       n := Count;
       if n <> 0 then
@@ -357,7 +375,7 @@ var
               end;
               *)
             s := Name;
-            StringDFM.Add(Format('        Name = ''Tb%s%s''', [VTableDef.name, s]));
+            StringDFM.Add(Format('        Name = ''Tb%s%s''', [ATableDef.Name, s]));
             s := GetFields(Item[i]);
             d := GetDescFields(Item[i]);
             o := '';
@@ -396,11 +414,11 @@ var
       end;
     end;
   end;
-  function GetPrimaryKey: Index;
+  function GetPrimaryKey(ATableDef: TableDef): Index;
   var
     n, i: Smallint;
   begin
-    with VTableDef, Indexes do
+    with ATableDef, Indexes do
     begin
       n := Count;
       if n <> 0 then
@@ -417,16 +435,18 @@ var
       end;
     end;
   end;
-  function GetPrimaryKeyFields: string;
+  function GetPrimaryKeyFields(ATableDef: TableDef): string;
   begin
-    Result := GetFields(GetPrimaryKey);
+    Result := GetFields(GetPrimaryKey(ATableDef));
   end;
 
 var
   i, j, k: Smallint;
-  s, d, PrimaryKeyFields: string;
+  s, d, PrimaryKeyFields, VTableName: string;
   ProcDefs, ProcImpl: TStrings;
   MasterRels, DetailRels: array of TList; // TList used as Integer list
+  VTableDef: TableDef;
+  VTableList: TStrings;
 begin
   // Creando encabezado:
   with StringPAS do
@@ -461,6 +481,10 @@ begin
     Add(Format('  T%s = class(TBaseDataModule)', [DataModuleName]));
   end;
   StringDFM.Add(Format('inherited %s: T%s', [DataModuleName, DataModuleName]));
+  StringDFM.Add('  inherited Database: TSqlitePassDatabase');
+  StringDFM.Add('    DatatypeOptions.pCustomFieldDefs = ()');
+  StringDFM.Add('    DatatypeOptions.pTranslationsRules = ()');
+  StringDFM.Add('  end');
   Msgs.Clear;
   Msgs.BeginUpdate;
   VTableList := TStringList.Create;
@@ -491,24 +515,29 @@ begin
         begin
           VTableName := VTableList.Strings[i];
           VTableDef := TableDefs.Item[VTableName];
-          // VTableDef := TableDefs.Item[i];
-          // VTableName := VTableDef.Name;
           StringPAS.Add(Format('    Tb%s: T%s;', [VTableName, ADataSetClass]));
           StringDFM.Add(Format('  object Tb%s: T%s', [VTableName, ADataSetClass]));
-          StringDFM.Add(Format('    Tag = %d', [i]));
-          if ACreateFieldDefs then
-            CreateFieldDefs
-          else
-            StringDFM.Add('    FieldDefs = <>');
-          if ACreateIndexDefs then
-            CreateIndexDefs;
+          if i <> 0 then
+            StringDFM.Add(Format('    Tag = %d', [i]));
+          StringDFM.Add('    Database = Database');
+          // StringDFM.Add(Format('    DatasetName = ''%s''', [VTableName]));
           //if ASetPrimaryKey then
           begin
-            PrimaryKeyFields := GetPrimaryKeyFields;
+            PrimaryKeyFields := GetPrimaryKeyFields(VTableDef);
             if PrimaryKeyFields <> '' then
-              StringDFM.Add(Format('    IndexFieldNames = ''%s''',
-                [PrimaryKeyFields]));
+            begin
+              StringDFM.Add('    Indexed = True');
+              StringDFM.Add(Format('    IndexedBy = ''%s''', [PrimaryKeyFields]));
+            end
+            else
+              StringDFM.Add('    Indexed = False');
           end;
+          if ACreateFieldDefs then
+            CreateFieldDefs(VTableDef);
+          {else
+            StringDFM.Add('    FieldDefs = <>');}
+          if ACreateIndexDefs then
+            CreateIndexDefs(VTableDef);
           if (DetailRels[i].Count > 0) or (MasterRels[i].Count > 0) then
           begin
             StringDFM.Add('    BeforePost = DataSetBeforePost');
@@ -520,7 +549,9 @@ begin
           StringDFM.Add
             (Format('    Top = %d', [48 + 96 * (i div 5) + 12 *
                 ((i mod 5) mod 2)]));
-          CreateFields;
+          StringDFM.Add('    pParams = ()');
+          if ACreateDfmFields then
+            CreateDfmFields(VTableDef);
           StringDFM.Add('  end');
           if ACreateDataSource then
           begin
@@ -574,15 +605,12 @@ begin
             d := VTableList[i];
             Add(Format('  Tables[%d] := Tb%s;', [i, d]));
           end;
-          for i := 0 to VTableList.Count - 1 do
-          begin
-            VTableName := VTableList.Strings[i];
-            VTableDef := TableDefs.Item[VTableName];
-            if ACreateSrcFields then
-              CreateSrcFields;
-            if ACreateSrcIndexes then
-              CreateSrcIndexes;
-          end;
+          if ACreateSrcFields then
+            for i := 0 to VTableList.Count - 1 do
+              CreateSrcFields(TableDefs.Item[VTableList.Strings[i]]);
+          if ACreateSrcIndexes then
+            for i := 0 to VTableList.Count - 1 do
+              CreateSrcIndexes(TableDefs.Item[VTableList.Strings[i]]);
           for i := 0 to VTableList.Count - 1 do
           begin
             with MasterRels[i] do
@@ -643,6 +671,11 @@ begin
             d := VTableList[i];
             Add(Format('    Add(''Tb%s=%s'');', [d, d]));
           end;
+          Add('  end;');
+          Add('  with FieldCaptionList do');
+          Add('  begin');
+          for i := 0 to VTableList.Count - 1 do
+            SetExtraFieldProps(TableDefs.Item[VTableList[i]]);
           Add('  end;');
           Add('  with DataSetDescList do');
           Add('  begin');

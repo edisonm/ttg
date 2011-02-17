@@ -16,18 +16,15 @@ inherited MateriaForm: TMateriaForm
       Left = 256
       Top = 0
       Action = ActMateriaProhibicion
+      ParentShowHint = False
       ShowHint = True
     end
   end
   inherited pnlStatus: TPanel
     Width = 594
     ExplicitWidth = 594
-    inherited SLState: TLabel
-      Height = 17
-    end
     inherited SLRecordNo: TLabel
       Left = 590
-      Height = 17
       ExplicitLeft = 590
     end
   end
@@ -40,7 +37,7 @@ inherited MateriaForm: TMateriaForm
   end
   inherited ImageList: TImageList
     Bitmap = {
-      494C010103000400040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000500040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

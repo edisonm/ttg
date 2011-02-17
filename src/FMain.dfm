@@ -10,8 +10,9 @@ object MainForm: TMainForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  FormStyle = fsMDIForm
   Menu = MainMenu
-  OldCreateOrder = True
+  OldCreateOrder = False
   Position = poScreenCenter
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -36,8 +37,6 @@ object MainForm: TMainForm
         Width = 153
       end>
     OnDrawPanel = StatusBarDrawPanel
-    ExplicitTop = 273
-    ExplicitWidth = 570
   end
   object ToolBar: TToolBar
     Left = 0
@@ -46,7 +45,6 @@ object MainForm: TMainForm
     Height = 25
     Images = ImageList
     TabOrder = 1
-    ExplicitWidth = 570
     object SpeedBar: TToolBar
       Left = 0
       Top = 0
@@ -426,7 +424,7 @@ object MainForm: TMainForm
     Left = 46
     Top = 72
     Bitmap = {
-      494C01011E002200040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01011E002000040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1767,110 +1765,91 @@ object MainForm: TMainForm
       OnExecute = ActMejorarHorarioExecute
     end
   end
-  object TbParalelo: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
-    IndexFieldNames = 'CodNivel;CodEspecializacion;CodParaleloId'
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
+  object TbParalelo: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
     MasterFields = 'CodNivel;CodEspecializacion;CodParaleloId'
     MasterSource = SourceDataModule.DSParalelo
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 48
     Top = 119
+    pParams = ()
   end
-  object TbProfesor: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
-    IndexFieldNames = 'CodProfesor'
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
+  object TbProfesor: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
     MasterFields = 'CodProfesor'
     MasterSource = SourceDataModule.DSProfesor
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 48
     Top = 147
+    pParams = ()
   end
-  object QuParaleloHora: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodParaleloId'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'NomHora'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+  object QuParaleloHora: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 76
     Top = 119
-    object QuParaleloHoraCodNivel: TIntegerField
+    pParams = ()
+    object QuParaleloHoraCodNivel: TLargeintField
       FieldName = 'CodNivel'
       Visible = False
     end
-    object QuParaleloHoraCodEspecializacion: TIntegerField
+    object QuParaleloHoraCodEspecializacion: TLargeintField
       FieldName = 'CodEspecializacion'
       Visible = False
     end
-    object QuParaleloHoraCodParaleloId: TIntegerField
+    object QuParaleloHoraCodParaleloId: TLargeintField
       FieldName = 'CodParaleloId'
       Visible = False
     end
-    object QuParaleloHoraCodHora: TIntegerField
+    object QuParaleloHoraCodHora: TLargeintField
       FieldName = 'CodHora'
       Required = True
       Visible = False
@@ -1886,47 +1865,34 @@ object MainForm: TMainForm
       Size = 10
     end
   end
-  object QuProfesorHora: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodProfesor'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'NomHora'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+  object QuProfesorHora: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 76
     Top = 147
-    object QuProfesorHoraCodProfesor: TIntegerField
+    pParams = ()
+    object QuProfesorHoraCodProfesor: TLargeintField
       FieldName = 'CodProfesor'
       Required = True
       Visible = False
     end
-    object QuProfesorHoraCodHora: TIntegerField
+    object QuProfesorHoraCodHora: TLargeintField
       FieldName = 'CodHora'
       Required = True
       Visible = False
@@ -1943,57 +1909,39 @@ object MainForm: TMainForm
       Lookup = True
     end
   end
-  object QuProfesorHorarioDetalle: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodProfesor'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodDia'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'Nombre'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 40
-      end>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+  object QuProfesorHorarioDetalle: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 104
     Top = 147
-    object QuProfesorHorarioDetalleCodProfesor: TIntegerField
+    pParams = ()
+    object QuProfesorHorarioDetalleCodProfesor: TLargeintField
       DisplayLabel = 'Profesor'
       FieldName = 'CodProfesor'
       Required = True
     end
-    object QuProfesorHorarioDetalleCodDia: TIntegerField
+    object QuProfesorHorarioDetalleCodDia: TLargeintField
       DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
     end
-    object QuProfesorHorarioDetalleCodHora: TIntegerField
+    object QuProfesorHorarioDetalleCodHora: TLargeintField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True
@@ -2003,86 +1951,54 @@ object MainForm: TMainForm
       Size = 40
     end
   end
-  object QuParaleloHorarioDetalle: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodParaleloId'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodDia'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodMateria'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomMateria'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 20
-      end>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+  object QuParaleloHorarioDetalle: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 104
     Top = 119
-    object QuParaleloHorarioDetalleCodNivel: TIntegerField
+    pParams = ()
+    object QuParaleloHorarioDetalleCodNivel: TLargeintField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
     end
-    object QuParaleloHorarioDetalleCodEspecializacion: TIntegerField
+    object QuParaleloHorarioDetalleCodEspecializacion: TLargeintField
       DisplayLabel = 'Especializacion'
       FieldName = 'CodEspecializacion'
       Required = True
     end
-    object QuParaleloHorarioDetalleCodParaleloId: TIntegerField
+    object QuParaleloHorarioDetalleCodParaleloId: TLargeintField
       DisplayLabel = 'Paralelo'
       FieldName = 'CodParaleloId'
       Required = True
     end
-    object QuParaleloHorarioDetalleCodDia: TIntegerField
+    object QuParaleloHorarioDetalleCodDia: TLargeintField
       DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
     end
-    object QuParaleloHorarioDetalleCodHora: TIntegerField
+    object QuParaleloHorarioDetalleCodHora: TLargeintField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True
     end
-    object QuParaleloHorarioDetalleCodMateria: TIntegerField
+    object QuParaleloHorarioDetalleCodMateria: TLargeintField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
       Required = True
@@ -2098,59 +2014,54 @@ object MainForm: TMainForm
       Lookup = True
     end
   end
-  object TbMateria: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
-    IndexFieldNames = 'CodMateria'
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
+  object TbMateria: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
     MasterFields = 'CodMateria'
     MasterSource = DSMateriaMateriaProhibicion
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 48
     Top = 184
+    pParams = ()
   end
-  object QuMateriaMateriaProhibicion: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodMateria'
-        DataType = ftInteger
-      end
-      item
-        Name = 'NomMateria'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 20
-      end>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+  object QuMateriaMateriaProhibicion: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 76
     Top = 184
-    object QuMateriaMateriaProhibicionCodMateria: TIntegerField
+    pParams = ()
+    object QuMateriaMateriaProhibicionCodMateria: TLargeintField
       FieldName = 'CodMateria'
       Visible = False
     end
@@ -2165,44 +2076,33 @@ object MainForm: TMainForm
       Lookup = True
     end
   end
-  object QuMateriaMateriaProhibicionHora: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodMateria'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'CodHora'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'Hora'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+  object QuMateriaMateriaProhibicionHora: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 104
     Top = 184
-    object QuMateriaMateriaProhibicionHoraCodMateria: TIntegerField
+    pParams = ()
+    object QuMateriaMateriaProhibicionHoraCodMateria: TLargeintField
       FieldName = 'CodMateria'
       Visible = False
     end
-    object QuMateriaMateriaProhibicionHoraCodHora: TIntegerField
+    object QuMateriaMateriaProhibicionHoraCodHora: TLargeintField
       FieldName = 'CodHora'
       Visible = False
     end
@@ -2218,43 +2118,30 @@ object MainForm: TMainForm
       Lookup = True
     end
   end
-  object QuProfesorProfesorProhibicion: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodProfesor'
-        DataType = ftInteger
-      end
-      item
-        Name = 'ApeProfesor'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 15
-      end
-      item
-        Name = 'NomProfesor'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 15
-      end>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+  object QuProfesorProfesorProhibicion: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     AfterScroll = QuProfesorProfesorProhibicionAfterScroll
     Left = 76
     Top = 212
-    object QuProfesorProfesorProhibicionCodProfesor: TIntegerField
+    pParams = ()
+    object QuProfesorProfesorProhibicionCodProfesor: TLargeintField
       DisplayLabel = 'Codigo'
       FieldName = 'CodProfesor'
       Visible = False
@@ -2282,47 +2169,34 @@ object MainForm: TMainForm
       Lookup = True
     end
   end
-  object QuProfesorProfesorProhibicionHora: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodProfesor'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'NomHora'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end>
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+  object QuProfesorProfesorProhibicionHora: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 104
     Top = 212
-    object QuProfesorProfesorProhibicionHoraCodProfesor: TIntegerField
+    pParams = ()
+    object QuProfesorProfesorProhibicionHoraCodProfesor: TLargeintField
       FieldName = 'CodProfesor'
       Required = True
       Visible = False
     end
-    object QuProfesorProfesorProhibicionHoraCodHora: TIntegerField
+    object QuProfesorProfesorProhibicionHoraCodHora: TLargeintField
       FieldName = 'CodHora'
       Required = True
       Visible = False
@@ -2334,28 +2208,30 @@ object MainForm: TMainForm
       Size = 10
     end
   end
-  object TbProfesor1: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <>
-    IndexFieldNames = 'CodProfesor'
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
+  object TbProfesor1: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
     MasterFields = 'CodProfesor'
     MasterSource = DSProfesorProfesorProhibicion
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmDirect
     Left = 48
     Top = 212
+    pParams = ()
   end
   object SaveDialogCSV: TSaveDialog
     DefaultExt = 'csv'

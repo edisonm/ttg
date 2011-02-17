@@ -117,7 +117,7 @@ end;
 
 procedure SearchInDBGrid(DBGrid: TDBGrid);
 var
-  s: AnsiString;
+  s: string;
 begin
   if Assigned(DBGrid.DataSource) and Assigned(DBGrid.SelectedField) then
     with DBGrid.SelectedField do

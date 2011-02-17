@@ -1,460 +1,131 @@
 inherited SourceDataModule: TSourceDataModule
-  inherited TbAulaTipo: TkbmMemTable
-    FieldDefs = <
-      item
-        Name = 'CodAulaTipo'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomAulaTipo'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 25
-      end
-      item
-        Name = 'AbrAulaTipo'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end
-      item
-        Name = 'Cantidad'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end>
-    inherited TbAulaTipoCodAulaTipo: TAutoIncField
-      Visible = False
-    end
+  inherited Database: TSqlitePassDatabase
+    Connected = True
+    Database = 'E:\apps\pascal\TTG\dat\TTG.s3fpc'
+    DatatypeOptions.BooleanFormat = 'True,Yes,On,1,-False,No,Off,0'
+    DatatypeOptions.DateTimeFormat = 'YYYY-MM-DD hh:mm:ss'
+    DatatypeOptions.DateTimeStorage = dtsText
+    DatatypeOptions.DecimalSeparator = '.'
+    DatatypeOptions.DefaultFieldType = ftString
+    DatatypeOptions.SaveOptions = []
+    DatatypeOptions.pCustomFieldDefs = ()
+    DatatypeOptions.pTranslationsRules = (
+      '__memo'
+      4
+      'Memo'
+      '__string'
+      4
+      'String'
+      'autoinc'
+      4
+      'Largeint'
+      'boolean'
+      4
+      'Boolean'
+      'currency'
+      4
+      'Currency'
+      'datetime'
+      4
+      'DateTime'
+      'date'
+      4
+      'Date'
+      'float'
+      4
+      'Float'
+      'int'
+      4
+      'Integer'
+      'integer'
+      4
+      'Integer'
+      'largeint'
+      4
+      'Largeint'
+      'numeric'
+      4
+      'Float'
+      'text'
+      4
+      'Memo'
+      'time'
+      4
+      'Time'
+      'varchar'
+      4
+      'String'
+      'word'
+      4
+      'Word')
+    Options.MaxPageCount = 1073741823
+    VersionInfo.Schema = 19
+    VersionInfo.SqliteLibrary = '3.7.5'
+    VersionInfo.SqliteLibraryNumber = 3007005
+    VersionInfo.SqliteSourceId = '2011-01-28 17:03:50 ed759d5a9edb3bba5f48f243df47be29e3fe8cd7'
+    VersionInfo.UserTag = 0
   end
-  inherited TbEspecializacion: TkbmMemTable
-    FieldDefs = <
-      item
-        Name = 'CodEspecializacion'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'AbrEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 10
-      end>
-    inherited TbEspecializacionCodEspecializacion: TAutoIncField
-      Visible = False
-    end
+  inherited TbAulaTipo: TSqlitePassDataset
+    pParams = ()
   end
-  inherited TbDia: TkbmMemTable
-    inherited TbDiaCodDia: TAutoIncField
-      Visible = False
-    end
+  inherited TbEspecializacion: TSqlitePassDataset
+    pParams = ()
   end
-  inherited TbMateria: TkbmMemTable
-    FieldDefs = <
-      item
-        Name = 'CodMateria'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomMateria'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 20
-      end>
-    inherited TbMateriaCodMateria: TAutoIncField
-      Visible = False
-    end
+  inherited TbDia: TSqlitePassDataset
+    Indexed = False
+    IndexedBy = ''
+    SQL.Strings = (
+      'SELECT * FROM "Dia";')
+    pParams = ()
   end
-  inherited TbNivel: TkbmMemTable
-    FieldDefs = <
-      item
-        Name = 'CodNivel'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomNivel'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 15
-      end
-      item
-        Name = 'AbrNivel'
-        DataType = ftString
-        Size = 5
-      end>
-    inherited TbNivelCodNivel: TAutoIncField
-      Visible = False
-    end
+  inherited TbMateria: TSqlitePassDataset
+    pParams = ()
   end
-  inherited TbHora: TkbmMemTable
-    inherited TbHoraCodHora: TAutoIncField
-      Visible = False
-    end
+  inherited TbNivel: TSqlitePassDataset
+    pParams = ()
   end
-  inherited TbCurso: TkbmMemTable
-    object TbCursoAbrNivel: TStringField [0]
-      DisplayLabel = 'Nivel'
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'AbrNivel'
-      LookupDataSet = TbNivel
-      LookupKeyFields = 'CodNivel'
-      LookupResultField = 'AbrNivel'
-      KeyFields = 'CodNivel'
-      Size = 10
-      Lookup = True
-    end
-    object TbCursoAbrEspecializacion: TStringField [1]
-      DisplayLabel = 'Espec.'
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'AbrEspecializacion'
-      LookupDataSet = TbEspecializacion
-      LookupKeyFields = 'CodEspecializacion'
-      LookupResultField = 'AbrEspecializacion'
-      KeyFields = 'CodEspecializacion'
-      Size = 10
-      Lookup = True
-    end
-    inherited TbCursoCodNivel: TIntegerField
-      Visible = False
-    end
-    inherited TbCursoCodEspecializacion: TIntegerField
-      Visible = False
-    end
+  inherited TbHora: TSqlitePassDataset
+    pParams = ()
   end
-  inherited TbParaleloId: TkbmMemTable
-    FieldDefs = <
-      item
-        Name = 'CodParaleloId'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomParaleloId'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 5
-      end>
-    inherited TbParaleloIdCodParaleloId: TAutoIncField
-      Visible = False
-    end
+  inherited TbHorario: TSqlitePassDataset
+    pParams = ()
   end
-  inherited TbMateriaProhibicionTipo: TkbmMemTable
-    inherited TbMateriaProhibicionTipoCodMateProhibicionTipo: TIntegerField
-      Visible = False
-    end
+  inherited TbCurso: TSqlitePassDataset
+    pParams = ()
   end
-  inherited TbPeriodo: TkbmMemTable
-    inherited TbPeriodoCodDia: TIntegerField
-      Visible = False
-    end
-    inherited TbPeriodoCodHora: TIntegerField
-      Visible = False
-    end
+  inherited TbParaleloId: TSqlitePassDataset
+    pParams = ()
   end
-  inherited TbParalelo: TkbmMemTable
-    inherited TbParaleloCodParalelo: TAutoIncField
-      Visible = False
-    end
-    inherited TbParaleloCodNivel: TIntegerField
-      Visible = False
-    end
-    inherited TbParaleloCodEspecializacion: TIntegerField
-      Visible = False
-    end
-    inherited TbParaleloCodParaleloId: TIntegerField
-      Visible = False
-    end
-    object TbParaleloAbrNivel: TStringField
-      DisplayLabel = 'Nivel'
-      FieldKind = fkLookup
-      FieldName = 'AbrNivel'
-      LookupDataSet = TbNivel
-      LookupKeyFields = 'CodNivel'
-      LookupResultField = 'AbrNivel'
-      KeyFields = 'CodNivel'
-      Size = 5
-      Lookup = True
-    end
-    object TbParaleloAbrEspecializacion: TStringField
-      DisplayLabel = 'Especializacion'
-      FieldKind = fkLookup
-      FieldName = 'AbrEspecializacion'
-      LookupDataSet = TbEspecializacion
-      LookupKeyFields = 'CodEspecializacion'
-      LookupResultField = 'AbrEspecializacion'
-      KeyFields = 'CodEspecializacion'
-      Size = 10
-      Lookup = True
-    end
-    object TbParaleloNomParaleloId: TStringField
-      DisplayLabel = 'Paralelo'
-      FieldKind = fkLookup
-      FieldName = 'NomParaleloId'
-      LookupDataSet = TbParaleloId
-      LookupKeyFields = 'CodParaleloId'
-      LookupResultField = 'NomParaleloId'
-      KeyFields = 'CodParaleloId'
-      Size = 5
-      Lookup = True
-    end
-    object TbParaleloNomParalelo: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'NomParalelo'
-      Calculated = True
-    end
+  inherited TbMateriaProhibicionTipo: TSqlitePassDataset
+    pParams = ()
   end
-  inherited TbProfesor: TkbmMemTable
-    FieldDefs = <
-      item
-        Name = 'CodProfesor'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'CedProfesor'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 11
-      end
-      item
-        Name = 'ApeProfesor'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 15
-      end
-      item
-        Name = 'NomProfesor'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 15
-      end>
-    inherited TbProfesorCodProfesor: TAutoIncField
-      Visible = False
-    end
-    object TbProfesorApeNomProfesor: TStringField
-      DisplayLabel = 'Apellido Nombre'
-      DisplayWidth = 31
-      FieldKind = fkCalculated
-      FieldName = 'ApeNomProfesor'
-      Visible = False
-      Size = 31
-      Calculated = True
-    end
+  inherited TbPeriodo: TSqlitePassDataset
+    DatasetName = 'Periodo'
+    Indexed = False
+    IndexedBy = ''
+    SQL.Strings = (
+      'SELECT * FROM "Periodo";')
+    pParams = ()
   end
-  inherited TbMateriaProhibicion: TkbmMemTable
-    inherited TbMateriaProhibicionCodMateria: TIntegerField
-      Visible = False
-    end
-    inherited TbMateriaProhibicionCodDia: TIntegerField
-      Visible = False
-    end
-    inherited TbMateriaProhibicionCodHora: TIntegerField
-      Visible = False
-    end
-    inherited TbMateriaProhibicionCodMateProhibicionTipo: TIntegerField
-      Visible = False
-    end
-    object TbMateriaProhibicionNomMateProhibicionTipo: TStringField
-      DisplayLabel = 'Tipo prohib. mat.'
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NomMateProhibicionTipo'
-      LookupDataSet = TbMateriaProhibicionTipo
-      LookupKeyFields = 'CodMateProhibicionTipo'
-      LookupResultField = 'NomMateProhibicionTipo'
-      KeyFields = 'CodMateProhibicionTipo'
-      Size = 10
-      Lookup = True
-    end
+  inherited TbParalelo: TSqlitePassDataset
+    pParams = ()
   end
-  inherited TbDistributivo: TkbmMemTable
-    FieldDefs = <
-      item
-        Name = 'CodMateria'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodParaleloId'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodProfesor'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodAulaTipo'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'Composicion'
-        Attributes = [faRequired]
-        DataType = ftString
-        Size = 40
-      end>
-    inherited TbDistributivoCodMateria: TIntegerField
-      Visible = False
-    end
-    inherited TbDistributivoCodNivel: TIntegerField
-      Visible = False
-    end
-    inherited TbDistributivoCodEspecializacion: TIntegerField
-      Visible = False
-    end
-    inherited TbDistributivoCodParaleloId: TIntegerField
-      Visible = False
-    end
-    inherited TbDistributivoCodProfesor: TIntegerField
-      Visible = False
-    end
-    inherited TbDistributivoCodAulaTipo: TIntegerField
-      Visible = False
-    end
-    object TbDistributivoAbrNivel: TStringField [6]
-      DisplayLabel = 'Nivel'
-      FieldKind = fkLookup
-      FieldName = 'AbrNivel'
-      LookupDataSet = TbNivel
-      LookupKeyFields = 'CodNivel'
-      LookupResultField = 'AbrNivel'
-      KeyFields = 'CodNivel'
-      Size = 5
-      Lookup = True
-    end
-    object TbDistributivoAbrEspecializacion: TStringField [7]
-      DisplayLabel = 'Especializacion'
-      FieldKind = fkLookup
-      FieldName = 'AbrEspecializacion'
-      LookupDataSet = TbEspecializacion
-      LookupKeyFields = 'CodEspecializacion'
-      LookupResultField = 'AbrEspecializacion'
-      KeyFields = 'CodEspecializacion'
-      Size = 10
-      Lookup = True
-    end
-    object TbDistributivoNomParaleloId: TStringField [8]
-      DisplayLabel = 'Paralelo'
-      FieldKind = fkLookup
-      FieldName = 'NomParaleloId'
-      LookupDataSet = TbParaleloId
-      LookupKeyFields = 'CodParaleloId'
-      LookupResultField = 'NomParaleloId'
-      KeyFields = 'CodParaleloId'
-      Size = 5
-      Lookup = True
-    end
-    object TbDistributivoNomMateria: TStringField [9]
-      DisplayLabel = 'Materia'
-      DisplayWidth = 15
-      FieldKind = fkLookup
-      FieldName = 'NomMateria'
-      LookupDataSet = TbMateria
-      LookupKeyFields = 'CodMateria'
-      LookupResultField = 'NomMateria'
-      KeyFields = 'CodMateria'
-      Size = 15
-      Lookup = True
-    end
-    object TbDistributivoAbrAulaTipo: TStringField
-      DisplayLabel = 'Tipo aula'
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'AbrAulaTipo'
-      LookupDataSet = TbAulaTipo
-      LookupKeyFields = 'CodAulaTipo'
-      LookupResultField = 'AbrAulaTipo'
-      KeyFields = 'CodAulaTipo'
-      Size = 10
-      Lookup = True
-    end
-    object TbDistributivoDuracion: TIntegerField
-      DisplayLabel = 'Duracion'
-      FieldKind = fkCalculated
-      FieldName = 'Duracion'
-      Calculated = True
-    end
+  inherited TbProfesor: TSqlitePassDataset
+    pParams = ()
   end
-  inherited TbHorarioDetalle: TkbmMemTable
-    inherited TbHorarioDetalleCodHorario: TIntegerField
-      Visible = False
-    end
-    inherited TbHorarioDetalleCodMateria: TIntegerField
-      Visible = False
-    end
-    inherited TbHorarioDetalleCodNivel: TIntegerField
-      Visible = False
-    end
-    inherited TbHorarioDetalleCodEspecializacion: TIntegerField
-      Visible = False
-    end
-    inherited TbHorarioDetalleCodParaleloId: TIntegerField
-      Visible = False
-    end
-    inherited TbHorarioDetalleCodDia: TIntegerField
-      Visible = False
-    end
-    inherited TbHorarioDetalleCodHora: TIntegerField
-      Visible = False
-    end
-    object TbHorarioDetalleNomMateria: TStringField
-      DisplayLabel = 'Materia'
-      DisplayWidth = 15
-      FieldKind = fkLookup
-      FieldName = 'NomMateria'
-      LookupDataSet = TbMateria
-      LookupKeyFields = 'CodMateria'
-      LookupResultField = 'NomMateria'
-      KeyFields = 'CodMateria'
-      Size = 15
-      Lookup = True
-    end
+  inherited TbMateriaProhibicion: TSqlitePassDataset
+    pParams = ()
   end
-  inherited TbProfesorProhibicionTipo: TkbmMemTable
-    inherited TbProfesorProhibicionTipoCodProfProhibicionTipo: TAutoIncField
-      Visible = False
-    end
+  inherited TbDistributivo: TSqlitePassDataset
+    pParams = ()
   end
-  inherited TbProfesorProhibicion: TkbmMemTable
-    inherited TbProfesorProhibicionCodProfesor: TIntegerField
-      Visible = False
-    end
-    inherited TbProfesorProhibicionCodDia: TIntegerField
-      Visible = False
-    end
-    inherited TbProfesorProhibicionCodHora: TIntegerField
-      Visible = False
-    end
-    inherited TbProfesorProhibicionCodProfProhibicionTipo: TIntegerField
-      Visible = False
-    end
-    object TbProfesorProhibicionNomProfProhibicionTipo: TStringField
-      DisplayLabel = 'Tipo prohib. prof.'
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NomProfProhibicionTipo'
-      LookupDataSet = TbProfesorProhibicionTipo
-      LookupKeyFields = 'CodProfProhibicionTipo'
-      LookupResultField = 'NomProfProhibicionTipo'
-      KeyFields = 'CodProfProhibicionTipo'
-      Size = 10
-      Lookup = True
-    end
+  inherited TbHorarioDetalle: TSqlitePassDataset
+    pParams = ()
+  end
+  inherited TbProfesorProhibicionTipo: TSqlitePassDataset
+    pParams = ()
+  end
+  inherited TbProfesorProhibicion: TSqlitePassDataset
+    pParams = ()
   end
 end

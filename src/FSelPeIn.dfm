@@ -71,38 +71,16 @@ object SelPeriodoForm: TSelPeriodoForm
     DataSource = DSDiaHora
     TabOrder = 3
   end
-  object TbDiaHora: TkbmMemTable
-    FieldDefs = <
-      item
-        Name = 'CodDia'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'CodHora'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'NomDia'
-        DataType = ftString
-        Size = 10
-        Attributes = [faRequired]
-      end
-      item
-        Name = 'NomHora'
-        DataType = ftString
-        Size = 10
-        Attributes = [faRequired]
-      end>
-    IndexDefs = <>
+  object TbDiaHora: TSqlitePassDataset
     Left = 24
     Top = 64
-    object TbDiaHoraCodDia: TIntegerField
+    object TbDiaHoraCodDia: TLargeintField
       DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
       Visible = False
     end
-    object TbDiaHoraCodHora: TIntegerField
+    object TbDiaHoraCodHora: TLargeintField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True

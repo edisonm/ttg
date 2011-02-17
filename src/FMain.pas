@@ -8,7 +8,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   SysConst, ExtCtrls, DB, Menus, ComCtrls, ImgList, Buttons,
   ActnList, ToolWin, StdActns, StdCtrls, FSplash,
-  FSingEdt, kbmMemTable, FCrsMME0, FEditor, UConfig;
+  FSingEdt, SqlitePassDbo, FCrsMME0, FEditor, UConfig;
 type
   TMainForm = class(TForm)
     MainMenu: TMainMenu;
@@ -108,37 +108,37 @@ type
     MIPresentarProfesorProhibicion: TMenuItem;
     MIPresentarMateriaProhibicion: TMenuItem;
     MIPresentarDistributivoMateria: TMenuItem;
-    TbParalelo: TkbmMemTable;
-    TbProfesor: TkbmMemTable;
-    QuParaleloHora: TkbmMemTable;
-    QuParaleloHoraCodNivel: TIntegerField;
-    QuParaleloHoraCodEspecializacion: TIntegerField;
-    QuParaleloHoraCodParaleloId: TIntegerField;
-    QuParaleloHoraCodHora: TIntegerField;
+    TbParalelo: TSqlitePassDataset;
+    TbProfesor: TSqlitePassDataset;
+    QuParaleloHora: TSqlitePassDataset;
+    QuParaleloHoraCodNivel: TLargeintField;
+    QuParaleloHoraCodEspecializacion: TLargeintField;
+    QuParaleloHoraCodParaleloId: TLargeintField;
+    QuParaleloHoraCodHora: TLargeintField;
     QuParaleloHoraNomHora: TStringField;
-    QuProfesorHora: TkbmMemTable;
-    QuProfesorHoraCodProfesor: TIntegerField;
-    QuProfesorHoraCodHora: TIntegerField;
+    QuProfesorHora: TSqlitePassDataset;
+    QuProfesorHoraCodProfesor: TLargeintField;
+    QuProfesorHoraCodHora: TLargeintField;
     QuProfesorHoraNomHora: TStringField;
-    QuProfesorHorarioDetalle: TkbmMemTable;
-    QuParaleloHorarioDetalle: TkbmMemTable;
-    TbMateria: TkbmMemTable;
-    QuMateriaMateriaProhibicion: TkbmMemTable;
-    QuMateriaMateriaProhibicionCodMateria: TIntegerField;
+    QuProfesorHorarioDetalle: TSqlitePassDataset;
+    QuParaleloHorarioDetalle: TSqlitePassDataset;
+    TbMateria: TSqlitePassDataset;
+    QuMateriaMateriaProhibicion: TSqlitePassDataset;
+    QuMateriaMateriaProhibicionCodMateria: TLargeintField;
     QuMateriaMateriaProhibicionNomMateria: TStringField;
-    QuMateriaMateriaProhibicionHora: TkbmMemTable;
-    QuMateriaMateriaProhibicionHoraCodMateria: TIntegerField;
-    QuMateriaMateriaProhibicionHoraCodHora: TIntegerField;
+    QuMateriaMateriaProhibicionHora: TSqlitePassDataset;
+    QuMateriaMateriaProhibicionHoraCodMateria: TLargeintField;
+    QuMateriaMateriaProhibicionHoraCodHora: TLargeintField;
     QuMateriaMateriaProhibicionHoraNomHora: TStringField;
-    QuProfesorProfesorProhibicion: TkbmMemTable;
+    QuProfesorProfesorProhibicion: TSqlitePassDataset;
     QuProfesorProfesorProhibicionApeProfesor: TStringField;
     QuProfesorProfesorProhibicionNomProfesor: TStringField;
-    QuProfesorProfesorProhibicionCodProfesor: TIntegerField;
-    QuProfesorProfesorProhibicionHora: TkbmMemTable;
-    QuProfesorProfesorProhibicionHoraCodProfesor: TIntegerField;
-    QuProfesorProfesorProhibicionHoraCodHora: TIntegerField;
+    QuProfesorProfesorProhibicionCodProfesor: TLargeintField;
+    QuProfesorProfesorProhibicionHora: TSqlitePassDataset;
+    QuProfesorProfesorProhibicionHoraCodProfesor: TLargeintField;
+    QuProfesorProfesorProhibicionHoraCodHora: TLargeintField;
     QuProfesorProfesorProhibicionHoraNomHora: TStringField;
-    TbProfesor1: TkbmMemTable;
+    TbProfesor1: TSqlitePassDataset;
     ActPresentarDistributivoProfesor: TAction;
     MIPresentarDistributivoProfesor: TMenuItem;
     ActExportarCSV: TAction;
@@ -150,16 +150,16 @@ type
     SaveDialogCSV: TSaveDialog;
     ActRegistrationInfo: TAction;
     MIRegistrationInfo: TMenuItem;
-    QuParaleloHorarioDetalleCodNivel: TIntegerField;
-    QuParaleloHorarioDetalleCodEspecializacion: TIntegerField;
-    QuParaleloHorarioDetalleCodParaleloId: TIntegerField;
-    QuParaleloHorarioDetalleCodDia: TIntegerField;
-    QuParaleloHorarioDetalleCodHora: TIntegerField;
-    QuParaleloHorarioDetalleCodMateria: TIntegerField;
+    QuParaleloHorarioDetalleCodNivel: TLargeintField;
+    QuParaleloHorarioDetalleCodEspecializacion: TLargeintField;
+    QuParaleloHorarioDetalleCodParaleloId: TLargeintField;
+    QuParaleloHorarioDetalleCodDia: TLargeintField;
+    QuParaleloHorarioDetalleCodHora: TLargeintField;
+    QuParaleloHorarioDetalleCodMateria: TLargeintField;
     QuParaleloHorarioDetalleNomMateria: TStringField;
-    QuProfesorHorarioDetalleCodProfesor: TIntegerField;
-    QuProfesorHorarioDetalleCodDia: TIntegerField;
-    QuProfesorHorarioDetalleCodHora: TIntegerField;
+    QuProfesorHorarioDetalleCodProfesor: TLargeintField;
+    QuProfesorHorarioDetalleCodDia: TLargeintField;
+    QuProfesorHorarioDetalleCodHora: TLargeintField;
     QuProfesorHorarioDetalleNombre: TStringField;
     ToolBar: TToolBar;
     DSProfesorProfesorProhibicion: TDataSource;
@@ -314,17 +314,15 @@ end;
 
 procedure TMainForm.ActPeriodoExecute(Sender: TObject);
 begin
-  if TCrossManyToManyEditor0Form.ToggleEditor(Self,
-                                              FPeriodoForm,
-					      ConfigStorage,
-					      ActPeriodo) then
+  if TCrossManyToManyEditor0Form.ToggleEditor(Self, FPeriodoForm,
+    ConfigStorage, ActPeriodo) then
   with SourceDataModule do
   begin
     {$IFDEF FPC}
     FPeriodoForm.DrawGrid.OnPrepareCanvas := FPeriodoForm.DrawGridPrepareCanvas;
     {$ENDIF}
     FPeriodoForm.ShowEditor(TbDia, TbHora, TbPeriodo, nil, 'CodDia', 'NomDia',
-                            'CodDia', '', 'CodHora', 'NomHora', 'CodHora', '');
+      'CodDia', '', 'CodHora', 'NomHora', 'CodHora', '');
   end;
 end;
 
@@ -575,7 +573,7 @@ var
         end;
       end;}
       FMomentoFinal := Now;
-      VEvolElitista.SaveMejorToDatabase(Cod, FMomentoInicial,
+      VEvolElitista.SaveBestToDatabase(Cod, FMomentoInicial,
         FMomentoFinal);
     end;
   end;
@@ -1035,25 +1033,25 @@ begin
     begin
       Close;
       Open;
-      TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
-      TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
-      TbDistributivo.MasterFields := TbDistributivo.IndexFieldNames;
+      TbHorarioDetalle.IndexedBy := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+      TbDistributivo.IndexedBy := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+      TbDistributivo.MasterFields := TbDistributivo.IndexedBy;
       TbDistributivo.MasterSource := DSHorarioDetalle;
       TbDistributivo.First;
       try
         if TbHorarioDetalle.Locate('CodHorario', CodHorarioSeleccionado, []) then
         begin
-          while (TbHorarioDetalleCodHorario.Value = CodHorarioSeleccionado) and not TbHorarioDetalle.Eof do
+          while (TbHorarioDetalle.FindField('CodHorario').AsInteger = CodHorarioSeleccionado) and not TbHorarioDetalle.Eof do
           begin
             QuProfesorHorarioDetalle.Append;
-            QuProfesorHorarioDetalleCodProfesor.Value := TbDistributivoCodProfesor.Value;
-            QuProfesorHorarioDetalleCodDia.Value := TbHorarioDetalleCodDia.Value;
-            QuProfesorHorarioDetalleCodHora.Value := TbHorarioDetalleCodHora.Value;
-            QuProfesorHorarioDetalleNombre.Value :=
-              TbDistributivoAbrNivel.Value + ' ' +
-              TbDistributivoAbrEspecializacion.Value + ' ' +
-              TbDistributivoNomParaleloId.Value + ' ' +
-              TbDistributivoNomMateria.Value;
+            QuProfesorHorarioDetalleCodProfesor.Value := TbDistributivo.FindField('CodProfesor').AsInteger;
+            QuProfesorHorarioDetalleCodDia.Value := TbHorarioDetalle.FindField('CodDia').AsInteger;
+            QuProfesorHorarioDetalleCodHora.Value := TbHorarioDetalle.FindField('CodHora').AsInteger;
+            QuProfesorHorarioDetalleNombre.AsString :=
+              TbDistributivo.FindField('AbrNivel').AsString + ' ' +
+              TbDistributivo.FindField('AbrEspecializacion').AsString + ' ' +
+              TbDistributivo.FindField('NomParaleloId').AsString + ' ' +
+              TbDistributivo.FindField('NomMateria').AsString;
             QuProfesorHorarioDetalle.Post;
             TbHorarioDetalle.Next;
           end;
@@ -1087,28 +1085,28 @@ begin
   QuParaleloHorarioDetalle.Open;
   with SourceDataModule do
   begin
-    s := TbHorarioDetalle.IndexFieldNames;
+    s := TbHorarioDetalle.IndexedBy;
     p := TbHorarioDetalle.GetBookmark;
     try
-      TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+      TbHorarioDetalle.IndexedBy := 'CodHorario;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
       TbHorarioDetalle.First;
       if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
       begin
-        while (TbHorarioDetalleCodHorario.Value = CodHorario) and not TbHorarioDetalle.Eof do
+        while (TbHorarioDetalle.FindField('CodHorario').AsInteger = CodHorario) and not TbHorarioDetalle.Eof do
         begin
           QuParaleloHorarioDetalle.Append;
-          QuParaleloHorarioDetalleCodNivel.Value := TbHorarioDetalleCodNivel.Value;
-          QuParaleloHorarioDetalleCodEspecializacion.Value := TbHorarioDetalleCodNivel.Value;
-          QuParaleloHorarioDetalleCodParaleloId.Value := TbHorarioDetalleCodParaleloId.Value;
-          QuParaleloHorarioDetalleCodHora.Value := TbHorarioDetalleCodHora.Value;
-          QuParaleloHorarioDetalleCodDia.Value := TbHorarioDetalleCodDia.Value;
+          QuParaleloHorarioDetalleCodNivel.Value := TbHorarioDetalle.FindField('CodNivel').AsInteger;
+          QuParaleloHorarioDetalleCodEspecializacion.Value := TbHorarioDetalle.FindField('CodNivel').AsInteger;
+          QuParaleloHorarioDetalleCodParaleloId.Value := TbHorarioDetalle.FindField('CodParaleloId').AsInteger;
+          QuParaleloHorarioDetalleCodHora.Value := TbHorarioDetalle.FindField('CodHora').AsInteger;
+          QuParaleloHorarioDetalleCodDia.Value := TbHorarioDetalle.FindField('CodDia').AsInteger;
           QuParaleloHorarioDetalle.Post;
           TbHorarioDetalle.Next;
         end;
         QuParaleloHorarioDetalle.First;
       end;
     finally
-      TbHorarioDetalle.IndexFieldNames := s;
+      TbHorarioDetalle.IndexedBy := s;
       TbHorarioDetalle.GotoBookmark(p);
       TbHorarioDetalle.FreeBookmark(p);
     end;
@@ -1138,22 +1136,22 @@ begin
     QuProfesorProfesorProhibicion.Close;
     QuProfesorProfesorProhibicion.Open;
     TbProfesor.First;
-    s := TbProfesor.IndexFieldNames;
+    s := TbProfesor.IndexedBy;
     p := TbProfesor.GetBookmark;
-    TbProfesor.IndexFieldNames := 'NomMateria';
+    TbProfesor.IndexedBy := 'NomMateria';
     try
       while not TbProfesor.Eof do
       begin
-        if TbProfesorProhibicion.Locate('CodProfesor', TbProfesorCodProfesor.Value, []) then
+        if TbProfesorProhibicion.Locate('CodProfesor', TbProfesor.FindField('CodProfesor').AsInteger, []) then
         begin
           QuProfesorProfesorProhibicion.Append;
-          QuProfesorProfesorProhibicionCodProfesor.Value := TbProfesorCodProfesor.Value;
+          QuProfesorProfesorProhibicionCodProfesor.Value := TbProfesor.FindField('CodProfesor').AsInteger;
           QuProfesorProfesorProhibicion.Post;
         end;
         TbProfesor.Next;
       end;
     finally
-      TbProfesor.IndexFieldNames := s;
+      TbProfesor.IndexedBy := s;
       TbProfesor.GotoBookmark(p);
       TbProfesor.FreeBookmark(p);
     end;
@@ -1170,23 +1168,23 @@ begin
     QuProfesorProfesorProhibicionHora.Close;
     QuProfesorProfesorProhibicionHora.Open;
     TbProfesor.First;
-    s := TbProfesor.IndexFieldNames;
-    d := TbHora.IndexFieldNames;
+    s := TbProfesor.IndexedBy;
+    d := TbHora.IndexedBy;
     p := TbProfesor.GetBookmark;
     q := TbHora.GetBookmark;
-    TbProfesor.IndexFieldNames := 'NomMateria';
-    TbHora.IndexFieldNames := 'CodHora';
+    TbProfesor.IndexedBy := 'NomMateria';
+    TbHora.IndexedBy := 'CodHora';
     try
       while not TbProfesor.Eof do
       begin
-        if TbProfesorProhibicion.Locate('CodProfesor', TbProfesorCodProfesor.Value, []) then
+        if TbProfesorProhibicion.Locate('CodProfesor', TbProfesor.FindField('CodProfesor').AsInteger, []) then
         begin
           TbHora.First;
           while not TbHora.Eof do
           begin
             QuProfesorProfesorProhibicionHora.Append;
-            QuProfesorProfesorProhibicionHoraCodProfesor.Value := TbProfesorCodProfesor.Value;
-            QuProfesorProfesorProhibicionHoraCodHora.Value := TbHoraCodHora.Value;
+            QuProfesorProfesorProhibicionHoraCodProfesor.Value := TbProfesor.FindField('CodProfesor').AsInteger;
+            QuProfesorProfesorProhibicionHoraCodHora.Value := TbHora.FindField('CodHora').AsInteger;
             QuProfesorProfesorProhibicionHora.Post;
             TbHora.Next;
           end;
@@ -1194,10 +1192,10 @@ begin
         TbProfesor.Next;
       end;
     finally
-      TbProfesor.IndexFieldNames := s;
+      TbProfesor.IndexedBy := s;
       TbProfesor.GotoBookmark(p);
       TbProfesor.FreeBookmark(p);
-      TbHora.IndexFieldNames := d;
+      TbHora.IndexedBy := d;
       TbHora.GotoBookmark(q);
       TbHora.FreeBookmark(q);
     end;
@@ -1357,13 +1355,13 @@ begin
     with SourceDataModule, MasterDataModule do
     begin
       TbDistributivo.MasterSource := nil;
-      TbDistributivo.IndexFieldNames :=
+      TbDistributivo.IndexedBy :=
         'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
       TbDistributivo.MasterFields := 'CodMateria';
       TbDistributivo.MasterSource := DSMateria;
       ExportarCSV(TbMateria, TbDistributivo, AStrings);
       TbDistributivo.MasterSource := nil;
-      TbDistributivo.IndexFieldNames := 'CodProfesor';
+      TbDistributivo.IndexedBy := 'CodProfesor';
       TbDistributivo.MasterFields := 'CodProfesor';
       TbDistributivo.MasterSource := DSProfesor;
     end;
@@ -1482,37 +1480,37 @@ begin
     QuParaleloHora.Open;
     TbParalelo.CheckBrowseMode;
     TbParalelo.DisableControls;
-    s := TbParalelo.IndexFieldNames;
+    s := TbParalelo.IndexedBy;
     p := TbParalelo.GetBookmark;
     TbHora.CheckBrowseMode;
     TbHora.DisableControls;
-    d := TbHora.IndexFieldNames;
+    d := TbHora.IndexedBy;
     q := TbHora.GetBookmark;
     try
-      TbParalelo.IndexFieldNames := 'CodNivel;CodEspecializacion;CodParaleloId';
+      TbParalelo.IndexedBy := 'CodNivel;CodEspecializacion;CodParaleloId';
       TbParalelo.First;
-      TbHora.IndexFieldNames := 'CodHora';
+      TbHora.IndexedBy := 'CodHora';
       while not TbParalelo.Eof do
       begin
         TbHora.First;
         while not TbHora.Eof do
         begin
           QuParaleloHora.Append;
-          QuParaleloHoraCodNivel.Value := TbParaleloCodNivel.Value;
-          QuParaleloHoraCodEspecializacion.Value := TbParaleloCodEspecializacion.Value;
-          QuParaleloHoraCodParaleloId.Value := TbParaleloCodParaleloId.Value;
-          QuParaleloHoraCodHora.Value := TbHoraCodHora.Value;
+          QuParaleloHoraCodNivel.Value := TbParalelo.FindField('CodNivel').AsInteger;
+          QuParaleloHoraCodEspecializacion.Value := TbParalelo.FindField('CodEspecializacion').AsInteger;
+          QuParaleloHoraCodParaleloId.Value := TbParalelo.FindField('CodParaleloId').AsInteger;
+          QuParaleloHoraCodHora.Value := TbHora.FindField('CodHora').AsInteger;
           QuParaleloHora.Post;
           TbHora.Next;
         end;
         TbParalelo.Next;
       end;
     finally
-      TbParalelo.IndexFieldNames := s;
+      TbParalelo.IndexedBy := s;
       TbParalelo.GotoBookmark(p);
       TbParalelo.FreeBookmark(p);
       TbParalelo.EnableControls;
-      TbHora.IndexFieldNames := d;
+      TbHora.IndexedBy := d;
       TbHora.GotoBookmark(q);
       TbHora.FreeBookmark(q);
       TbHora.EnableControls;
@@ -1531,13 +1529,13 @@ begin
     QuProfesorHora.Open;
     TbProfesor.CheckBrowseMode;
     TbProfesor.DisableControls;
-    s := TbProfesor.IndexFieldNames;
-    TbProfesor.IndexFieldNames := 'NomMateria';
+    s := TbProfesor.IndexedBy;
+    TbProfesor.IndexedBy := 'NomMateria';
     p := TbProfesor.GetBookmark;
     TbHora.CheckBrowseMode;
     TbHora.DisableControls;
-    d := TbHora.IndexFieldNames;
-    TbHora.IndexFieldNames := 'CodHora';
+    d := TbHora.IndexedBy;
+    TbHora.IndexedBy := 'CodHora';
     q := TbHora.GetBookmark;
     try
       TbProfesor.First;
@@ -1547,19 +1545,19 @@ begin
         while not TbHora.Eof do
         begin
           QuProfesorHora.Append;
-          QuProfesorHoraCodProfesor.Value := TbProfesorCodProfesor.Value;
-          QuProfesorHoraCodHora.Value := TbHoraCodHora.Value;
+          QuProfesorHoraCodProfesor.Value := TbProfesor.FindField('CodProfesor').AsInteger;
+          QuProfesorHoraCodHora.Value := TbHora.FindField('CodHora').AsInteger;
           QuProfesorHora.Post;
           TbHora.Next;
         end;
         TbProfesor.Next;
       end;
     finally
-      TbProfesor.IndexFieldNames := s;
+      TbProfesor.IndexedBy := s;
       TbProfesor.GotoBookmark(p);
       TbProfesor.FreeBookmark(p);
       TbProfesor.EnableControls;
-      TbHora.IndexFieldNames := d;
+      TbHora.IndexedBy := d;
       TbHora.GotoBookmark(q);
       TbHora.FreeBookmark(q);
       TbHora.EnableControls;
@@ -1577,22 +1575,22 @@ begin
   with SourceDataModule do
   begin
     TbMateria.First;
-    s := TbMateria.IndexFieldNames;
-    TbMateria.IndexFieldNames := 'NomMateria';
+    s := TbMateria.IndexedBy;
+    TbMateria.IndexedBy := 'NomMateria';
     p := TbMateria.GetBookmark;
     try
       while not TbMateria.Eof do
       begin
-        if TbMateriaProhibicion.Locate('CodMateria', TbMateriaCodMateria.Value, []) then
+        if TbMateriaProhibicion.Locate('CodMateria', TbMateria.FindField('CodMateria').AsInteger, []) then
         begin
           QuMateriaMateriaProhibicion.Append;
-          QuMateriaMateriaProhibicionCodMateria.Value := TbMateriaCodMateria.Value;
+          QuMateriaMateriaProhibicionCodMateria.Value := TbMateria.FindField('CodMateria').AsInteger;
           QuMateriaMateriaProhibicion.Post;
         end;
         TbMateria.Next;
       end;
     finally
-      TbMateria.IndexFieldNames := s;
+      TbMateria.IndexedBy := s;
       TbMateria.GotoBookmark(p);
       TbMateria.FreeBookmark(p);
     end;
@@ -1608,24 +1606,24 @@ begin
   QuMateriaMateriaProhibicionHora.Open;
   with SourceDataModule do
   begin
-    s := TbMateria.IndexFieldNames;
-    TbMateria.IndexFieldNames := 'NomMateria';
+    s := TbMateria.IndexedBy;
+    TbMateria.IndexedBy := 'NomMateria';
     p := TbMateria.GetBookmark;
-    d := TbHora.IndexFieldNames;
-    TbHora.IndexFieldNames := 'CodHora';
+    d := TbHora.IndexedBy;
+    TbHora.IndexedBy := 'CodHora';
     q := TbHora.GetBookmark;
     try
       TbMateria.First;
       while not TbMateria.Eof do
       begin
-        if TbMateriaProhibicion.Locate('CodMateria', TbMateriaCodMateria.Value, []) then
+        if TbMateriaProhibicion.Locate('CodMateria', TbMateria.FindField('CodMateria').AsInteger, []) then
         begin
           TbHora.First;
           while not TbHora.Eof do
           begin
             QuMateriaMateriaProhibicionHora.Append;
-            QuMateriaMateriaProhibicionHoraCodMateria.Value := TbMateriaCodMateria.Value;
-            QuMateriaMateriaProhibicionHoraCodHora.Value := TbHoraCodHora.Value;
+            QuMateriaMateriaProhibicionHoraCodMateria.Value := TbMateria.FindField('CodMateria').AsInteger;
+            QuMateriaMateriaProhibicionHoraCodHora.Value := TbHora.FindField('CodHora').AsInteger;
             QuMateriaMateriaProhibicionHora.Post;
             TbHora.Next;
           end;
@@ -1633,10 +1631,10 @@ begin
         TbMateria.Next;
       end;
     finally
-      TbMateria.IndexFieldNames := s;
+      TbMateria.IndexedBy := s;
       TbMateria.GotoBookmark(p);
       TbMateria.FreeBookmark(p);
-      TbHora.IndexFieldNames := d;
+      TbHora.IndexedBy := d;
       TbHora.GotoBookmark(q);
       TbHora.FreeBookmark(q);
     end;

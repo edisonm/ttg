@@ -267,12 +267,12 @@ procedure TConfiguracionForm.DSMateriaProhibicionTipoDataChange(
   Sender: TObject; Field: TField);
 begin
   CBColMateProhibicionTipo.Selected :=
-    SourceDataModule.TbMateriaProhibicionTipoColMateProhibicionTipo.Value;
+    SourceDataModule.TbMateriaProhibicionTipo.FindField('ColMateProhibicionTipo').Value;
 end;
 
 procedure TConfiguracionForm.CBColMateProhibicionTipoExit(Sender: TObject);
 begin
-  with SourceDataModule.TbMateriaProhibicionTipoColMateProhibicionTipo do
+  with SourceDataModule.TbMateriaProhibicionTipo.FindField('ColMateProhibicionTipo') do
     if (DSMateriaProhibicionTipo.State in [dsEdit, dsInsert])
         and (Value <> CBColMateProhibicionTipo.Selected) then
       Value := CBColMateProhibicionTipo.Selected;
@@ -310,7 +310,7 @@ end;
 
 procedure TConfiguracionForm.CBColProfProhibicionTipoExit(Sender: TObject);
 begin
-  with SourceDataModule.TbProfesorProhibicionTipoColProfProhibicionTipo do
+  with SourceDataModule.TbProfesorProhibicionTipo.FindField('ColProfProhibicionTipo') do
     if (DSProfesorProhibicionTipo.State in [dsEdit, dsInsert])
         and (Value <> CBColProfProhibicionTipo.Selected) then
       Value := CBColProfProhibicionTipo.Selected;
@@ -320,7 +320,7 @@ procedure TConfiguracionForm.DSProfesorProhibicionTipoDataChange(
   Sender: TObject; Field: TField);
 begin
   CBColProfProhibicionTipo.Selected
-    := SourceDataModule.TbProfesorProhibicionTipoColProfProhibicionTipo.Value;
+    := SourceDataModule.TbProfesorProhibicionTipo.FindField('ColProfProhibicionTipo').Value;
 end;
 
 initialization

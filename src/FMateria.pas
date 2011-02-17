@@ -46,7 +46,7 @@ begin
     begin
       DisableControls;
       try
-        IndexFieldNames := 'CodMateria';
+        IndexedBy := 'CodMateria';
         MasterFields := 'CodMateria';
         MasterSource := DSMateria;
       finally
@@ -55,7 +55,7 @@ begin
     end;
     Caption := Format('%s %s - Editando %s', [
 		      SourceDataModule.NameDataSet[TbMateria],
-		      TbMateriaNomMateria.Value,
+		      TbMateria.FindField('NomMateria').Value,
 		      Description[TbMateriaProhibicion]]);
     DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [Description[TbMateriaProhibicion], Description[TbDia],
@@ -68,7 +68,7 @@ begin
       'NomHora', 'CodHora', 'CodHora', 'CodMateProhibicionTipo',
       'NomMateProhibicionTipo', 'ColMateProhibicionTipo',
       'CodMateProhibicionTipo');
-    Tag := TbMateriaCodMateria.Value;
+    Tag := TbMateria.FindField('CodMateria').AsInteger;
     OnActivate := FormActivate;
   end
   else

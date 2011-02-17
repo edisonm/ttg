@@ -5,7 +5,7 @@ unit RelUtils;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Forms, Dialogs, Db, kbmMemTable;
+  Windows, SysUtils, Classes, Graphics, Forms, Dialogs, Db, SqlitePassDbo;
 
 type ERelationUtils = class(Exception);
 
@@ -13,11 +13,11 @@ function StringToScaped(const AString: string): string;
 function ScapedToString(const AString: string): string; overload;
 function ScapedToString(const AString: string; var i: Integer): string; overload;
 function GetOldFieldValues(ADataSet: TDataSet; const AFieldNames: string): Variant;
-procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TkbmMemTable;
+procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TSqlitePassDataset;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
-procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TkbmMemTable;
+procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TSqlitePassDataset;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
-procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TkbmMemTable;
+procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TSqlitePassDataset;
   const AMasterFields, ADetailFields: string);
 
 function CheckRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADetailFields: string; AProblem: TDataSet): Boolean; overload;
@@ -32,7 +32,7 @@ procedure LoadDataSetFromCSVFile(ADataSet: TDataSet; const AFileName: TFileName)
 procedure LoadDataSetFromDataSet(ATarget, ASource: TDataSet);
 procedure LoadDataSetFromStrings(ADataSet: TDataSet; AStrings: TStrings;
   var Position: Integer);
-procedure PrepareQuery(const AQuery: TkbmMemTable; const ATableName, AIndexFieldNames: string);
+procedure PrepareQuery(const AQuery: TSqlitePassDataset; const ATableName, AIndexedBy: string);
 
 implementation
 
@@ -115,12 +115,12 @@ begin
   end;
 end;
 
-procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TkbmMemTable;
+procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TSqlitePassDataset;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
   vo, vn: Variant;
   bBookmark: TBookmark;
-  OldIndexFieldNames: string;
+  OldIndexedBy: string;
   VFields: TList;
 begin
   with ADetail do
@@ -138,8 +138,8 @@ begin
           bBookmark := GetBookmark;
           try
             try
-              OldIndexFieldNames := IndexFieldNames;
-              IndexFieldNames := ADetailFields;
+              OldIndexedBy := IndexedBy;
+              IndexedBy := ADetailFields;
               try
                 if Locate(ADetailFields, vo, []) then
                 begin
@@ -156,7 +156,7 @@ begin
                     raise ERelationUtils.CreateFmt('Ya existen campos relacionados en la tabla %s', [Name]);
                 end;
               finally
-                IndexFieldNames := OldIndexFieldNames;
+                IndexedBy := OldIndexedBy;
               end;
             finally
               try
@@ -176,12 +176,12 @@ begin
     end;
 end;
 
-procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TkbmMemTable;
+procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TSqlitePassDataset;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
   vOld: Variant;
   bBookmark: TBookmark;
-  OldIndexFieldNames: string;
+  OldIndexedBy: string;
   VFields: TList;
   DSDetail: TDataSource;
 begin
@@ -200,8 +200,8 @@ begin
           bBookmark := GetBookmark;
           try
             try
-              OldIndexFieldNames := IndexFieldNames;
-              IndexFieldNames := ADetailFields;
+              OldIndexedBy := IndexedBy;
+              IndexedBy := ADetailFields;
               try
                 if Locate(ADetailFields, vOld, []) then
                 begin
@@ -215,7 +215,7 @@ begin
                     raise ERelationUtils.CreateFmt('Ya existen registros detalle en la tabla %s', [Name]);
                 end;
               finally
-                IndexFieldNames := OldIndexFieldNames;
+                IndexedBy := OldIndexedBy;
               end;
             finally
               try
@@ -269,7 +269,7 @@ begin
     Result := VarToStrDef(Value, '(Null)');
 end;
 
-procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TkbmMemTable;
+procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TSqlitePassDataset;
   const AMasterFields, ADetailFields: string);
 var
   bBookmark: TBookmark;
@@ -508,9 +508,10 @@ procedure LoadDataSetFromStrings0(ADataSet: TDataSet; AStrings: TStrings;
   var Position: Integer; RecordCount: Integer);
 var
   s, v: string;
-  j, l, Pos, Limit: Integer;
+  i, j, l, m, Pos, Limit: Integer;
   Fields: array of TField;
   Field: TField;
+  ExtraFields: array of TField;
 begin
   s := AStrings.Strings[Position];
   Pos := 2;
@@ -530,6 +531,18 @@ begin
     end;
     Inc(Pos, 3);
   end;
+  m := 0;
+  for i := ADataSet.Fields.Count - 1  downto 0 do
+  begin
+    Field := ADataSet.Fields[i];
+    if Field.Lookup or Field.Calculated then
+    begin
+      ADataSet.Fields.Remove(Field);
+      Inc(m);
+      SetLength(ExtraFields, m);
+      ExtraFields[m - 1] := Field;
+    end;
+  end;
   ADataSet.DisableControls;
   try
     Limit := Position + RecordCount;
@@ -541,13 +554,15 @@ begin
       for j := 0 to l - 1 do
       begin
         v := ScapedToString(s, Pos);
-        Fields[j].AsString := v;
+        Fields[j].Value := v;
         Inc(Pos, 3);
       end;
       ADataSet.Post;
       Inc(Position);
     end;
   finally
+    for i := m - 1 downto 0 do
+      ADataSet.Fields.Add(ExtraFields[i]);
     ADataSet.EnableControls;
   end;
 end;
@@ -618,19 +633,15 @@ begin
   end;
 end;
 
-procedure PrepareQuery(const AQuery: TkbmMemTable; const ATableName, AIndexFieldNames: string);
+procedure PrepareQuery(const AQuery: TSqlitePassDataset; const ATableName, AIndexedBy: string);
 begin
   with AQuery do
   begin
     Close;
-    {$IFDEF FPC}
-    FileName := ':memory:';
-    TableName := ATableName + 'Tmp';
-    IndexFieldNames := AIndexFieldNames;
-    if not TableExists then CreateTable;
-    {$ELSE}
-    AddIndex(ATableName + 'Index1', AIndexFieldNames, []);
-    {$ENDIF}
+//    FileName := ':memory:';
+    DatasetName := ATableName + 'Tmp';
+    IndexedBy := AIndexedBy;
+    //if not TableExists then CreateTable;
     Open;
   end;
 end;

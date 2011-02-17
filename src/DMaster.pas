@@ -6,33 +6,33 @@ interface
 
 uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DB, kbmMemTable, TTGUtls, Variants;
+  DB, SqlitePassDbo, TTGUtls, Variants;
 
 type
   TMasterDataModule = class(TDataModule)
-    TbTmpProfesorCarga: TkbmMemTable;
-    TbTmpProfesorCargaCodProfesor: TIntegerField;
+    TbTmpProfesorCarga: TSqlitePassDataset;
+    TbTmpProfesorCargaCodProfesor: TLargeintField;
     TbTmpProfesorCargaNomProfesor: TStringField;
     TbTmpProfesorCargaApeProfesor: TStringField;
-    TbTmpProfesorCargaCarga: TIntegerField;
-    QuDistributivoProfesor: TkbmMemTable;
-    QuDistributivoProfesorCodMateria: TIntegerField;
-    QuDistributivoProfesorCodNivel: TIntegerField;
-    QuDistributivoProfesorCodParaleloId: TIntegerField;
+    TbTmpProfesorCargaCarga: TLargeintField;
+    QuDistributivoProfesor: TSqlitePassDataset;
+    QuDistributivoProfesorCodMateria: TLargeintField;
+    QuDistributivoProfesorCodNivel: TLargeintField;
+    QuDistributivoProfesorCodParaleloId: TLargeintField;
     QuDistributivoProfesorNomMateria: TStringField;
     QuDistributivoProfesorAbrNivel: TStringField;
     QuDistributivoProfesorNomParaleloId: TStringField;
-    QuDistributivoProfesorCodProfesor: TIntegerField;
+    QuDistributivoProfesorCodProfesor: TLargeintField;
     QuDistributivoProfesorApeNomProfesor: TStringField;
-    QuDistributivoProfesorCodEspecializacion: TIntegerField;
+    QuDistributivoProfesorCodEspecializacion: TLargeintField;
     QuDistributivoProfesorAbrEspecializacion: TStringField;
-    QuProfesorProhibicionCant: TkbmMemTable;
-    QuProfesorProhibicionCantCodProfesor: TIntegerField;
-    QuProfesorProhibicionCantCantidad: TIntegerField;
-    TbTmpAulaTipoCarga: TkbmMemTable;
-    TbTmpAulaTipoCargaCodAulaTipo: TIntegerField;
+    QuProfesorProhibicionCant: TSqlitePassDataset;
+    QuProfesorProhibicionCantCodProfesor: TLargeintField;
+    QuProfesorProhibicionCantCantidad: TLargeintField;
+    TbTmpAulaTipoCarga: TSqlitePassDataset;
+    TbTmpAulaTipoCargaCodAulaTipo: TLargeintField;
     TbTmpAulaTipoCargaAbrAulaTipo: TStringField;
-    TbTmpAulaTipoCargaCarga: TIntegerField;
+    TbTmpAulaTipoCargaCarga: TLargeintField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -74,13 +74,13 @@ begin
   begin
     Close;
     Open;
-    s := TbProfesorProhibicion.IndexFieldNames;
-    TbProfesorProhibicion.IndexFieldNames := 'CodProfesor';
+    s := TbProfesorProhibicion.IndexedBy;
+    TbProfesorProhibicion.IndexedBy := 'CodProfesor';
     TbProfesorProhibicion.First;
     CodProfesor := -$7FFFFFFF;
     while not TbProfesorProhibicion.Eof do
     begin
-      CodProfesor1 := TbProfesorProhibicionCodProfesor.Value;
+      CodProfesor1 := TbProfesorProhibicion.FindField('CodProfesor').AsInteger;
       if CodProfesor <> CodProfesor1 then
       begin
         Append;
@@ -97,7 +97,7 @@ begin
       Post;
       TbProfesorProhibicion.Next;
     end;
-    TbProfesorProhibicion.IndexFieldNames := s;
+    TbProfesorProhibicion.IndexedBy := s;
   end;
 end;
 
@@ -117,32 +117,32 @@ var
   begin
     with SourceDataModule, TbDistributivo do
     begin
-      s := IndexFieldNames;
-      IndexFieldNames := 'CodProfesor';
+      s := IndexedBy;
+      IndexedBy := 'CodProfesor';
       First;
       TbTmpProfesorCarga.Open;
       CodProfesor := -$7FFFFFFF;
       while not Eof do
       begin
-        CodProfesor1 := TbDistributivoCodProfesor.Value;
+        CodProfesor1 := TbDistributivo.FindField('CodProfesor').AsInteger;
         if CodProfesor <> CodProfesor1 then
         begin
           TbTmpProfesorCarga.Append;
           TbTmpProfesorCargaCodProfesor.Value :=
-            TbDistributivoCodProfesor.Value;
-          TbTmpProfesorCargaCarga.Value := ComposicionADuracion(TbDistributivoComposicion.AsString);
+            TbDistributivo.FindField('CodProfesor').AsInteger;
+          TbTmpProfesorCargaCarga.Value := ComposicionADuracion(TbDistributivo.FindField('Composicion').AsString);
           CodProfesor := CodProfesor1;
         end
         else
         begin
           TbTmpProfesorCarga.Edit;
           with TbTmpProfesorCargaCarga do
-            Value := Value + ComposicionADuracion(TbDistributivoComposicion.AsString);
+            Value := Value + ComposicionADuracion(TbDistributivo.FindField('Composicion').AsString);
         end;
         TbTmpProfesorCarga.Post;
         Next;
       end;
-      IndexFieldNames := s;
+      IndexedBy := s;
     end;
   end;
   procedure ObtenerAulaTipoCarga;
@@ -153,30 +153,30 @@ var
     with SourceDataModule, TbDistributivo do
     begin
       TbTmpAulaTipoCarga.Open;
-      s := IndexFieldNames;
-      IndexFieldNames := 'CodAulaTipo';
+      s := IndexedBy;
+      IndexedBy := 'CodAulaTipo';
       First;
       CodAulaTipo := -$7FFFFFFF;
       while not Eof do
       begin
-        CodAulaTipo1 := TbDistributivoCodAulaTipo.Value;
+        CodAulaTipo1 := TbDistributivo.FindField('CodAulaTipo').AsInteger;
         if CodAulaTipo <> CodAulaTipo1 then
         begin
           TbTmpAulaTipoCarga.Append;
-          TbTmpAulaTipoCargaCodAulaTipo.Value := TbDistributivoCodAulaTipo.Value;
-          TbTmpAulaTipoCargaCarga.Value := ComposicionADuracion(TbDistributivoComposicion.AsString);
+          TbTmpAulaTipoCargaCodAulaTipo.Value := TbDistributivo.FindField('CodAulaTipo').AsInteger;
+          TbTmpAulaTipoCargaCarga.Value := ComposicionADuracion(TbDistributivo.FindField('Composicion').AsString);
           CodAulaTipo := CodAulaTipo1;
         end
         else
         begin
           TbTmpAulaTipoCarga.Edit;
           with TbTmpAulaTipoCargaCarga do
-            Value := Value + ComposicionADuracion(TbDistributivoComposicion.AsString);
+            Value := Value + ComposicionADuracion(TbDistributivo.FindField('Composicion').AsString);
         end;
         TbTmpAulaTipoCarga.Post;
         Next;
       end;
-      IndexFieldNames := s;
+      IndexedBy := s;
     end;
   end;
   // Comprueba que no hayan asignadas mas horas de materias a profesores de las
@@ -315,7 +315,7 @@ var
           begin
             if TbAulaTipo.Locate('CodAulaTipo', TbTmpAulaTipoCargaCodAulaTipo.AsInteger, []) then
             begin
-              c := iPeriodoCant * TbAulaTipoCantidad.AsInteger;
+              c := iPeriodoCant * TbAulaTipo.FindField('Cantidad').AsInteger;
               if TbTmpAulaTipoCargaCarga.Value > c then
               begin
                 if not HuboProblemasInterno then
@@ -374,16 +374,16 @@ var
         begin
           TbDistributivo.Filter :=
             Format('CodNivel=%d and CodEspecializacion=%d and CodParaleloId=%d', [
-            TbParaleloCodNivel.Value,
-              TbParaleloCodEspecializacion.Value,
-              TbParaleloCodParaleloId.Value]);
+            TbParalelo.FindField('CodNivel').AsInteger,
+              TbParalelo.FindField('CodEspecializacion').AsInteger,
+              TbParalelo.FindField('CodParaleloId').AsInteger]);
           TbDistributivo.Filtered := true;
           TbDistributivo.First;
           t := 0;
           try
             while not TbDistributivo.Eof do
             begin
-              Inc(t, ComposicionADuracion(TbDistributivoComposicion.AsString));
+              Inc(t, ComposicionADuracion(TbDistributivo.FindField('Composicion').AsString));
               TbDistributivo.Next;
             end;
             if (t <= 0) or (t > TbPeriodo.RecordCount) then
@@ -394,20 +394,20 @@ var
                 vMainMin := AMainStrings.Count;
                 AMainStrings.Add('Paralelo; Carga');
               end;
-              AMainStrings.Add(Format(s, [TbParaleloAbrNivel.Value,
-                TbParaleloAbrEspecializacion.Value,
-                TbParaleloNomParaleloId.Value, t]));
+              AMainStrings.Add(Format(s, [TbParalelo.FindField('AbrNivel').Value,
+                TbParalelo.FindField('AbrEspecializacion').Value,
+                TbParalelo.FindField('NomParaleloId').Value, t]));
               HuboProblemas := True;
               HuboProblemasInterno := True;
             end
             else
-              ASubStrings.Add(Format(s, [TbParaleloAbrNivel.Value,
-                TbParaleloAbrEspecializacion.Value,
-                TbParaleloNomParaleloId.Value, t]));
+              ASubStrings.Add(Format(s, [TbParalelo.FindField('AbrNivel').Value,
+                TbParalelo.FindField('AbrEspecializacion').Value,
+                TbParalelo.FindField('NomParaleloId').Value, t]));
           except
             ASubStrings.Add(Format('Problemas: %s %s %s, Materia %s',
-              [TbParaleloAbrNivel.AsString, TbParaleloAbrEspecializacion.AsString,
-              TbParaleloNomParaleloId.AsString, TbDistributivoNomMateria.AsString]));
+              [TbParalelo.FindField('AbrNivel').AsString, TbParalelo.FindField('AbrEspecializacion').AsString,
+              TbParalelo.FindField('NomParaleloId').AsString, TbDistributivo.FindField('NomMateria').AsString]));
             HuboProblemas := True;
           end;
           Next;
@@ -466,7 +466,7 @@ begin
       c := 0;
       while not Eof do
       begin
-        Inc(c, ComposicionADuracion(TbDistributivoComposicion.AsString));
+        Inc(c, ComposicionADuracion(TbDistributivo.FindField('Composicion').AsString));
         Next;
       end;
       Result := c;
@@ -502,35 +502,35 @@ begin
         if Locate1 and Locate2 then
         begin
           TbHorarioDetalle.GotoBookmark(Bookmark1);
-          iCodMateria1 := TbHorarioDetalleCodMateria.Value;
-          iSesion1 := TbHorarioDetalleSesion.Value;
+          iCodMateria1 := TbHorarioDetalle.FindField('CodMateria').AsInteger;
+          iSesion1 := TbHorarioDetalle.FindField('Sesion').Value;
           TbHorarioDetalle.GotoBookmark(Bookmark2);
-          iCodMateria2 := TbHorarioDetalleCodMateria.Value;
-          iSesion2 := TbHorarioDetalleSesion.Value;
+          iCodMateria2 := TbHorarioDetalle.FindField('CodMateria').AsInteger;
+          iSesion2 := TbHorarioDetalle.FindField('Sesion').Value;
           TbHorarioDetalle.Edit;
-          TbHorarioDetalleCodMateria.Value := iCodMateria1;
-          TbHorarioDetalleSesion.Value := iSesion1;
+          TbHorarioDetalle.FindField('CodMateria').AsInteger := iCodMateria1;
+          TbHorarioDetalle.FindField('Sesion').Value := iSesion1;
           TbHorarioDetalle.Post;
           TbHorarioDetalle.GotoBookmark(Bookmark1);
           TbHorarioDetalle.Edit;
-          TbHorarioDetalleCodMateria.Value := iCodMateria2;
-          TbHorarioDetalleSesion.Value := iSesion2;
+          TbHorarioDetalle.FindField('CodMateria').AsInteger := iCodMateria2;
+          TbHorarioDetalle['Sesion'].Value := iSesion2;
           TbHorarioDetalle.Post;
         end
         else if Locate1 then
         begin
           TbHorarioDetalle.GotoBookmark(Bookmark1);
           TbHorarioDetalle.Edit;
-          TbHorarioDetalleCodDia.Value := ACodDia2;
-          TbHorarioDetalleCodHora.Value := ACodHora2;
+          TbHorarioDetalle.FindField('CodDia').AsInteger := ACodDia2;
+          TbHorarioDetalle.FindField('CodHora').AsInteger := ACodHora2;
           TbHorarioDetalle.Post;
         end
         else if Locate2 then
         begin
           TbHorarioDetalle.GotoBookmark(Bookmark1);
           TbHorarioDetalle.Edit;
-          TbHorarioDetalleCodDia.Value := ACodDia1;
-          TbHorarioDetalleCodHora.Value := ACodHora1;
+          TbHorarioDetalle.FindField('CodDia').AsInteger := ACodDia1;
+          TbHorarioDetalle.FindField('CodHora').AsInteger := ACodHora1;
           TbHorarioDetalle.Post;
         end;
       finally

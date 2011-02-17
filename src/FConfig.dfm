@@ -20,9 +20,11 @@ object ConfiguracionForm: TConfiguracionForm
     Top = 424
     Width = 75
     Height = 25
+    DoubleBuffered = True
+    Kind = bkOK
+    ParentDoubleBuffered = False
     TabOrder = 0
     OnClick = bbtnOkClick
-    Kind = bkOK
   end
   object pgcConfig: TPageControl
     Left = 8
@@ -93,7 +95,7 @@ object ConfiguracionForm: TConfiguracionForm
       object Label31: TLabel
         Left = 8
         Top = 36
-        Width = 60
+        Width = 77
         Height = 13
         Caption = 'Periodo Lectivo:'
       end
@@ -175,6 +177,10 @@ object ConfiguracionForm: TConfiguracionForm
     object tbsOpciones: TTabSheet
       Caption = 'Opciones'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Label19: TLabel
         Left = 16
         Top = 60
@@ -213,7 +219,7 @@ object ConfiguracionForm: TConfiguracionForm
       object Label28: TLabel
         Left = 8
         Top = 160
-        Width = 52
+        Width = 58
         Height = 13
         Caption = 'Aplicacionn:'
       end
@@ -583,7 +589,6 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 200
         Width = 81
         Height = 22
-        ItemHeight = 16
         TabOrder = 9
         OnChange = CBColMateProhibicionTipoChange
         OnExit = CBColMateProhibicionTipoExit
@@ -593,7 +598,6 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 304
         Width = 81
         Height = 22
-        ItemHeight = 16
         TabOrder = 12
         OnChange = CBColProfProhibicionTipoChange
         OnExit = CBColProfProhibicionTipoExit
@@ -609,7 +613,7 @@ object ConfiguracionForm: TConfiguracionForm
       object Label8: TLabel
         Left = 8
         Top = 13
-        Width = 117
+        Width = 105
         Height = 13
         Caption = 'Numero de individuos:'
       end
@@ -741,9 +745,11 @@ object ConfiguracionForm: TConfiguracionForm
     Top = 424
     Width = 75
     Height = 25
+    DoubleBuffered = True
+    Kind = bkCancel
+    ParentDoubleBuffered = False
     TabOrder = 2
     OnClick = bbtnCancelClick
-    Kind = bkCancel
   end
   object DSMateriaProhibicionTipo: TDataSource
     DataSet = SourceDataModule.TbMateriaProhibicionTipo

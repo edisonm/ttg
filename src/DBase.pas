@@ -5,13 +5,13 @@ unit DBase;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, kbmMemTable;
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, SqlitePassDbo;
 
 type
   TDataSetArray = array of TDataSet;
   
   TMasterRel = record
-    DetailDataSet: TkbmMemTable;
+    DetailDataSet: TSqlitePassDataset;
     MasterFields: string;
     DetailFields: string;
     Cascade: Boolean;
@@ -26,6 +26,7 @@ type
   TApplyOnTable = procedure(ADataSet: TDataSet) of object;
 
   TBaseDataModule = class(TDataModule)
+    Database: TSqlitePassDatabase;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure DataSetBeforePost(DataSet: TDataSet);
@@ -34,9 +35,11 @@ type
     { Private declarations }
     FDataSetNameList: TStrings;
     FDataSetDescList: TStrings;
+    FFieldCaptionList: TStrings;
     FCheckRelations: Boolean;
     function GetDescription(ADataSet: TDataSet): string;
     function GetNameDataSet(ADataSet: TDataSet): string;
+    function GetFieldCaption(AField: TField): string;
   protected
     FTables: TDataSetArray;
     FBeforePostLocks: array of Boolean;
@@ -44,9 +47,11 @@ type
     FDetailRels: array of array of TDetailRel;
     property DataSetNameList: TStrings read FDataSetNameList;
     property DataSetDescList: TStrings read FDataSetDescList;
+    property FieldCaptionList: TStrings read FFieldCaptionList;
     procedure SaveToStrings(AStrings: TStrings); virtual;
     procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer); virtual;
   public
+    procedure PrepareFields;
     procedure OpenTables;
     procedure CloseTables;
     procedure EmptyTables;
@@ -61,6 +66,7 @@ type
     property Tables: TDataSetArray read FTables write FTables;
     property Description[ADataSet: TDataSet]: string read GetDescription;
     property NameDataSet[ADataSet: TDataSet]: string read GetNameDataSet;
+    property FieldCaption[AField: TField]: string read GetFieldCaption;
     { Public declarations }
   end;
 
@@ -82,6 +88,19 @@ var
 begin
   for i := Low(FTables) to High(FTables) do
     FTables[i].Open;
+end;
+
+procedure TBaseDataModule.PrepareFields;
+var
+  i, j: Integer;
+begin
+  for i := Low(FTables) to High(FTables) do
+  begin
+    FTables[i].FieldDefs.Update;
+    FTables[i].Fields.Clear;
+    for j := 0 to FTables[i].FieldDefs.Count - 1 do
+      FTables[i].FieldDefs[j].CreateField(FTables[i]);
+  end;
 end;
 
 procedure TBaseDataModule.ApplyOnTables(FApplyOnTable: TApplyOnTable);
@@ -128,15 +147,9 @@ var
 begin
   for i := Low(FTables) to High(FTables) do
   begin
-    with (FTables[i] as TkbmMemTable) do
+    with (FTables[i] as TSqlitePassDataset) do
     begin
-      {$IFDEF FPC}
-      Close;
-      ExecuteDirect('delete from ' + NameDataSet[FTables[i]]);
-      Open;
-      {$ELSE}
       EmptyTable;
-      {$ENDIF}
     end;
   end;
 end;
@@ -145,6 +158,7 @@ procedure TBaseDataModule.DataModuleCreate(Sender: TObject);
 begin
   FDataSetNameList := TStringList.Create;
   FDataSetDescList := TStringList.Create;
+  FFieldCaptionList := TStringList.Create;
   FCheckRelations := True;
 end;
 
@@ -153,6 +167,7 @@ begin
   CloseTables;
   FDataSetNameList.Free;
   FDataSetDescList.Free;
+  FFieldCaptionList.Free;
 end;
 
 procedure TBaseDataModule.SaveToStrings(AStrings: TStrings);
@@ -161,7 +176,7 @@ var
 begin
   for i := Low(FTables) to High(FTables) do
   begin
-    (FTables[i] as TkbmMemTable).MasterSource := nil;
+    (FTables[i] as TSqlitePassDataset).MasterSource := nil;
     AStrings.Add('// Tb' + NameDataSet[FTables[i]]);
     SaveDataSetToStrings(FTables[i], AStrings);
   end;
@@ -173,10 +188,24 @@ var
 begin
   FCheckRelations := False;
   try
-    for i := Low(FTables) to High(FTables) do
-      LoadDataSetFromStrings(Tables[i], AStrings, APosition);
-  finally
-    FCheckRelations := True;
+    Database.Engine.Transaction.StartInternalTransaction;
+    try
+      for i := Low(FTables) to High(FTables) do
+      begin
+        with (Tables[i] as TSqlitePassDataset) do
+        begin
+          AutoCalcFields := False;
+          LoadDataSetFromStrings(Tables[i], AStrings, APosition);
+          ApplyChanges;
+          AutoCalcFields := True;
+        end;
+      end;
+    finally
+      FCheckRelations := True;
+    end;
+    Database.Engine.Transaction.CommitInternalTransaction;
+  except
+    Database.Engine.Transaction.RollbackInternalTransaction;
   end;
 end;
 
@@ -215,6 +244,13 @@ begin
     Result := ADataSet.Name;
 end;
 
+function TBaseDataModule.GetFieldCaption(AField: TField): string;
+begin
+  Result := FieldCaptionList.Values[AField.DataSet.Name + '.' + AField.FieldName];
+  if Result = '' then
+    Result := AField.FieldName;
+end;
+
 function TBaseDataModule.GetNameDataSet(ADataSet: TDataSet): string;
 begin
   Result := DataSetNameList.Values[ADataSet.Name];
@@ -233,7 +269,7 @@ begin
     try
       for j := Low(FDetailRels[i]) to High(FDetailRels[i]) do
         with FDetailRels[i, j] do
-          CheckDetailRelation(MasterDataSet, DataSet as TkbmMemTable, MasterFields, DetailFields);
+          CheckDetailRelation(MasterDataSet, DataSet as TSqlitePassDataset, MasterFields, DetailFields);
       if DataSet.State = dsEdit then
       begin
 	      for j := Low(FMasterRels[i]) to High(FMasterRels[i]) do

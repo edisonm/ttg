@@ -46,9 +46,9 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Left = 265
       Top = 0
       Width = 185
-      Height = 22
+      Height = 21
       Hint = 'Ver|Seleccione el parametro a ver en el horario'
-      ItemHeight = 0
+      ParentShowHint = False
       ShowHint = True
       TabOrder = 0
       Text = 'cbVerParalelo'
@@ -59,6 +59,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Top = 0
       Hint = 'Intercambiar periodos|Intercambiar periodos'
       ImageIndex = 6
+      ParentShowHint = False
       ShowHint = True
       OnClick = IntercambiarPeriodosClick
     end
@@ -358,93 +359,61 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       C07FFFFEFFFF0003FFFFFFFFFFFF000700000000000000000000000000000000
       000000000000}
   end
-  object QuHorarioParalelo: TkbmMemTable
-    DesignActivation = True
-    AttachedAutoRefresh = True
-    AttachMaxCount = 1
-    FieldDefs = <
-      item
-        Name = 'CodNivel'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodEspecializacion'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodParaleloId'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodHora'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodDia'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodMateria'
-        Attributes = [faRequired]
-        DataType = ftInteger
-      end
-      item
-        Name = 'CodProfesor'
-        DataType = ftAutoInc
-      end>
-    IndexFieldNames = 'CodNivel;CodEspecializacion;CodParaleloId'
-    IndexDefs = <>
-    SortOptions = []
-    PersistentBackup = False
-    ProgressFlags = [mtpcLoad, mtpcSave, mtpcCopy]
-    LoadedCompletely = False
-    SavedCompletely = False
-    FilterOptions = []
+  object QuHorarioParalelo: TSqlitePassDataset
+    CalcDisplayedRecordsOnly = False
+    Database = SourceDataModule.Database
     MasterFields = 'CodNivel;CodEspecializacion;CodParaleloId'
     MasterSource = DSParalelo
-    Version = '5.52'
-    LanguageID = 0
-    SortID = 0
-    SubLanguageID = 1
-    LocaleID = 1024
+    MasterSourceAutoActivate = True
+    FilterMode = fmSQLDirect
+    FilterRecordLowerLimit = 0
+    FilterRecordUpperLimit = 0
+    Indexed = True
+    LocateSmartRefresh = False
+    LookUpCache = False
+    LookUpDisplayedRecordsOnly = False
+    LookUpSmartRefresh = False
+    Sorted = False
+    RecordsCacheCapacity = 100
+    DatabaseAutoActivate = True
+    VersionInfo.Component = '0.55'
+    VersionInfo.Package = '0.55'
+    ParamCheck = False
+    WriteMode = wmPostponed
     Left = 60
     Top = 104
-    object QuHorarioParaleloCodNivel: TIntegerField
+    pParams = ()
+    object QuHorarioParaleloCodNivel: TLargeintField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
       Visible = False
     end
-    object QuHorarioParaleloCodEspecializacion: TIntegerField
+    object QuHorarioParaleloCodEspecializacion: TLargeintField
       DisplayLabel = 'Especializacion'
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
     end
-    object QuHorarioParaleloCodParaleloId: TIntegerField
+    object QuHorarioParaleloCodParaleloId: TLargeintField
       DisplayLabel = 'Paralelo'
       FieldName = 'CodParaleloId'
       Required = True
       Visible = False
     end
-    object QuHorarioParaleloCodHora: TIntegerField
+    object QuHorarioParaleloCodHora: TLargeintField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True
       Visible = False
     end
-    object QuHorarioParaleloCodDia: TIntegerField
+    object QuHorarioParaleloCodDia: TLargeintField
       DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
       Visible = False
     end
-    object QuHorarioParaleloCodMateria: TIntegerField
+    object QuHorarioParaleloCodMateria: TLargeintField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
       Required = True

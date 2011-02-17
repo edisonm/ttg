@@ -6,31 +6,16 @@ interface
 
 uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, DSrcBase, Db, UConfig,
-  kbmMemTable;
+  SqlitePassDbo;
 
 type
   TSourceDataModule = class(TSourceBaseDataModule)
-    TbCursoAbrNivel: TStringField;
-    TbCursoAbrEspecializacion: TStringField;
-    TbProfesorApeNomProfesor: TStringField;
-    TbHorarioDetalleNomMateria: TStringField;
-    TbProfesorProhibicionNomProfProhibicionTipo: TStringField;
-    TbMateriaProhibicionNomMateProhibicionTipo: TStringField;
-    TbDistributivoNomMateria: TStringField;
-    TbDistributivoDuracion: TIntegerField;
-    TbDistributivoAbrNivel: TStringField;
-    TbDistributivoNomParaleloId: TStringField;
-    TbDistributivoAbrEspecializacion: TStringField;
-    TbDistributivoAbrAulaTipo: TStringField;
-    TbParaleloAbrNivel: TStringField;
-    TbParaleloAbrEspecializacion: TStringField;
-    TbParaleloNomParaleloId: TStringField;
-    TbParaleloNomParalelo: TStringField;
     procedure TbDistributivoBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure TbProfesorCalcFields(DataSet: TDataSet);
     procedure TbDistributivoCalcFields(DataSet: TDataSet);
     procedure TbParaleloCalcFields(DataSet: TDataSet);
+    procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
     FConfigStorage: TConfigStorage;
@@ -105,11 +90,13 @@ type
     procedure SetCompartir(const Value: string);
     function GetRangoPolinizacion: Integer;
     procedure SetRangoPolinizacion(Value: Integer);
-    {$IFDEF FPC}
-    procedure SetDataBase(ADataSet: TDataSet);
-    {$ENDIF}
+    procedure ConfigureTable(ADataSet: TDataSet);
+    procedure SetFieldCaption(ADataSet: TDataSet);
+    procedure PrepareLookupFields;
+    procedure HideFields;
   public
     { Public declarations }
+    procedure PrepareTables;
     procedure SaveToStrings(AStrings: TStrings); override;
     procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer); override;
     procedure SaveToTextDir(const ADirName: TFileName); override;
@@ -184,14 +171,14 @@ var
   s: string;
 begin
   inherited;
-  s := TbDistributivoComposicion.AsString;
+  s := TbDistributivo.FindField('Composicion').AsString;
   if ComposicionADuracion(s) <= 0 then
     raise Exception.CreateFmt('Composicion no valida: "%s"', [s]);
-  with TbDistributivoCodMateria do DefaultExpression := AsString;
-  with TbDistributivoCodNivel do DefaultExpression := AsString;
-  with TbDistributivoCodEspecializacion do DefaultExpression := AsString;
-  with TbDistributivoCodParaleloId do DefaultExpression := AsString;
-  with TbDistributivoCodAulaTipo do DefaultExpression := AsString;
+  with TbDistributivo.FindField('CodMateria') do DefaultExpression := AsString;
+  with TbDistributivo.FindField('CodNivel') do DefaultExpression := AsString;
+  with TbDistributivo.FindField('CodEspecializacion') do DefaultExpression := AsString;
+  with TbDistributivo.FindField('CodParaleloId') do DefaultExpression := AsString;
+  with TbDistributivo.FindField('CodAulaTipo') do DefaultExpression := AsString;
 end;
 
 procedure TSourceDataModule.TbDistributivoCalcFields(DataSet: TDataSet);
@@ -215,6 +202,12 @@ begin
   SourceDataModule.EmptyTables;
   ConfigStorage.ConfigStrings.Clear;
   FillDefaultData;
+end;
+
+procedure TSourceDataModule.DataModuleDestroy(Sender: TObject);
+begin
+  inherited;
+  Database.Close;
 end;
 
 procedure TSourceDataModule.FillDefaultData;
@@ -338,11 +331,11 @@ begin
         TbHora.First;
         while not TbHora.Eof do
         begin
-          if TbHoraNomHora.AsString <> 'Recreo' then
+          if TbHora.FindField('NomHora').AsString <> 'Recreo' then
           begin
             Append;
-            Fields[0].AsInteger := TbDiaCodDia.AsInteger;
-            Fields[1].AsInteger := TbHoraCodHora.AsInteger;
+            Fields[0].AsInteger := TbDia.FindField('CodDia').AsInteger;
+            Fields[1].AsInteger := TbHora.FindField('CodHora').AsInteger;
             Post;
           end;
           TbHora.Next;
@@ -379,19 +372,294 @@ begin
   end;
 end;
 
-{$IFDEF FPC}
-procedure TSourceDataModule.SetDataBase(ADataSet: TDataSet);
+procedure TSourceDataModule.ConfigureTable(ADataSet: TDataSet);
+var
+  AIndexedBy: string;
 begin
-  with (ADataSet as TkbmMemTable) do
+  with TSqlitePassDataset(ADataSet) do
   begin
-    FileName := '../dat/TTG.db';
-//    FileName := Copy(Application.ExeName,
-//      length(Application.ExecName) - Length('/bin/TTG.exe')) + 'dat/TTG.db';
-//    FileName :=  '/home/edison/apps/pascal/TTG/dat/TTG.db';
-    TableName := NameDataSet[ADataSet];
+    AIndexedBy := IndexedBy;
+    DatasetName := NameDataSet[ADataSet];
+    IndexedBy := AIndexedBy;
+    Indexed := True;
   end;
 end;
-{$ENDIF}
+
+procedure TSourceDataModule.PrepareLookupFields;
+var
+  Field: TField;
+begin
+  Field := TStringField.Create(TbCurso);
+  with Field do
+  begin
+    DisplayLabel := 'Nivel';
+    DisplayWidth := 10;
+    FieldKind := fkLookup;
+    FieldName := 'AbrNivel';
+    LookupDataSet := TbNivel;
+    LookupKeyFields := 'CodNivel';
+    LookupResultField := 'AbrNivel';
+    KeyFields := 'CodNivel';
+    Size := 10;
+    Lookup := True;
+    DataSet := TbCurso;
+  end;
+  Field := TStringField.Create(TbCurso);
+  with Field do
+  begin
+    DisplayLabel := 'Espec.';
+    DisplayWidth := 10;
+    FieldKind := fkLookup;
+    FieldName := 'AbrEspecializacion';
+    LookupDataSet := TbEspecializacion;
+    LookupKeyFields := 'CodEspecializacion';
+    LookupResultField := 'AbrEspecializacion';
+    KeyFields := 'CodEspecializacion';
+    Size := 10;
+    Lookup := True;
+    DataSet := TbCurso;
+  end;
+  Field := TStringField.Create(TbParalelo);
+  with Field do
+  begin
+    DisplayLabel := 'Nivel';
+    FieldKind := fkLookup;
+    FieldName := 'AbrNivel';
+    LookupDataSet := TbNivel;
+    LookupKeyFields := 'CodNivel';
+    LookupResultField := 'AbrNivel';
+    KeyFields := 'CodNivel';
+    Size := 5;
+    Lookup := True;
+    DataSet := TbParalelo;
+  end;
+  Field := TStringField.Create(TbParalelo);
+  with Field do
+  begin
+    DisplayLabel := 'Especializacion';
+    FieldKind := fkLookup;
+    FieldName := 'AbrEspecializacion';
+    LookupDataSet := TbEspecializacion;
+    LookupKeyFields := 'CodEspecializacion';
+    LookupResultField := 'AbrEspecializacion';
+    KeyFields := 'CodEspecializacion';
+    Size := 10;
+    Lookup := True;
+    DataSet := TbParalelo;
+  end;
+  Field := TStringField.Create(TbParalelo);
+  with Field do
+  begin
+    DisplayLabel := 'Paralelo';
+    FieldKind := fkLookup;
+    FieldName := 'NomParaleloId';
+    LookupDataSet := TbParaleloId;
+    LookupKeyFields := 'CodParaleloId';
+    LookupResultField := 'NomParaleloId';
+    KeyFields := 'CodParaleloId';
+    Size := 5;
+    Lookup := True;
+    DataSet := TbParalelo;
+  end;
+  Field := TStringField.Create(TbParalelo);
+  with Field do
+  begin
+    FieldKind := fkCalculated;
+    FieldName := 'NomParalelo';
+    Calculated := True;
+    DataSet := TbParalelo;
+  end;
+  Field := TStringField.Create(TbProfesor);
+  with Field do
+  begin
+    DisplayLabel := 'Apellido Nombre';
+    DisplayWidth := 31;
+    FieldKind := fkCalculated;
+    FieldName := 'ApeNomProfesor';
+    Visible := False;
+    Size := 31;
+    Calculated := True;
+    DataSet := TbProfesor;
+  end;
+  Field := TStringField.Create(TbMateriaProhibicion);
+  with Field do
+  begin
+    DisplayLabel := 'Tipo prohib. mat.';
+    DisplayWidth := 10;
+    FieldKind := fkLookup;
+    FieldName := 'NomMateProhibicionTipo';
+    LookupDataSet := TbMateriaProhibicionTipo;
+    LookupKeyFields := 'CodMateProhibicionTipo';
+    LookupResultField := 'NomMateProhibicionTipo';
+    KeyFields := 'CodMateProhibicionTipo';
+    Size := 10;
+    Lookup := True;
+    DataSet := TbMateriaProhibicion;
+  end;
+  Field := TStringField.Create(TbDistributivo);
+  with Field do
+  begin
+    DisplayLabel := 'Nivel';
+    FieldKind := fkLookup;
+    FieldName := 'AbrNivel';
+    LookupDataSet := TbNivel;
+    LookupKeyFields := 'CodNivel';
+    LookupResultField := 'AbrNivel';
+    KeyFields := 'CodNivel';
+    Size := 5;
+    Lookup := True;
+    DataSet := TbDistributivo;
+  end;
+  Field := TStringField.Create(TbDistributivo);
+  with Field do
+  begin
+    DisplayLabel := 'Especializacion';
+    FieldKind := fkLookup;
+    FieldName := 'AbrEspecializacion';
+    LookupDataSet := TbEspecializacion;
+    LookupKeyFields := 'CodEspecializacion';
+    LookupResultField := 'AbrEspecializacion';
+    KeyFields := 'CodEspecializacion';
+    Size := 10;
+    Lookup := True;
+    DataSet := TbDistributivo;
+  end;
+  TbDistributivo.Fields.Add(Field);
+  Field := TStringField.Create(TbDistributivo);
+  with Field do
+  begin
+    DisplayLabel := 'Paralelo';
+    FieldKind := fkLookup;
+    FieldName := 'NomParaleloId';
+    LookupDataSet := TbParaleloId;
+    LookupKeyFields := 'CodParaleloId';
+    LookupResultField := 'NomParaleloId';
+    KeyFields := 'CodParaleloId';
+    Size := 5;
+    Lookup := True;
+    DataSet := TbDistributivo;
+  end;
+  Field := TStringField.Create(TbDistributivo);
+  with Field do
+  begin
+    DisplayLabel := 'Materia';
+    DisplayWidth := 15;
+    FieldKind := fkLookup;
+    FieldName := 'NomMateria';
+    LookupDataSet := TbMateria;
+    LookupKeyFields := 'CodMateria';
+    LookupResultField := 'NomMateria';
+    KeyFields := 'CodMateria';
+    Size := 15;
+    Lookup := True;
+    DataSet := TbDistributivo;
+  end;
+  Field := TStringField.Create(TbDistributivo);
+  with Field do
+  begin
+    DisplayLabel := 'Tipo aula';
+    DisplayWidth := 10;
+    FieldKind := fkLookup;
+    FieldName := 'AbrAulaTipo';
+    LookupDataSet := TbAulaTipo;
+    LookupKeyFields := 'CodAulaTipo';
+    LookupResultField := 'AbrAulaTipo';
+    KeyFields := 'CodAulaTipo';
+    Size := 10;
+    Lookup := True;
+    DataSet := TbDistributivo;
+  end;
+  Field := TLargeintField.Create(TbDistributivo);
+  with Field do
+  begin
+    FieldKind := fkCalculated;
+    FieldName := 'Duracion';
+    Calculated := True;
+    DataSet := TbDistributivo;
+  end;
+  Field := TStringField.Create(TbHorarioDetalle);
+  with Field do
+  begin
+    DisplayLabel := 'Materia';
+    DisplayWidth := 15;
+    FieldKind := fkLookup;
+    FieldName := 'NomMateria';
+    LookupDataSet := TbMateria;
+    LookupKeyFields := 'CodMateria';
+    LookupResultField := 'NomMateria';
+    KeyFields := 'CodMateria';
+    Size := 15;
+    Lookup := True;
+    DataSet := TbHorarioDetalle;
+  end;
+  Field := TStringField.Create(TbProfesorProhibicion);
+  with Field do
+  begin
+    DisplayLabel := 'Tipo prohib. prof.';
+    DisplayWidth := 10;
+    FieldKind := fkLookup;
+    FieldName := 'NomProfProhibicionTipo';
+    LookupDataSet := TbProfesorProhibicionTipo;
+    LookupKeyFields := 'CodProfProhibicionTipo';
+    LookupResultField := 'NomProfProhibicionTipo';
+    KeyFields := 'CodProfProhibicionTipo';
+    Size := 10;
+    Lookup := True;
+    DataSet := TbProfesorProhibicion;
+  end;
+end;
+
+procedure TSourceDataModule.HideFields;
+begin
+  TbAulaTipo.FindField('CodAulaTipo').Visible := False;
+  TbEspecializacion.FindField('CodEspecializacion').Visible := False;
+  TbDia.FindField('CodDia').Visible := False;
+  TbMateria.FindField('CodMateria').Visible := False;
+  TbNivel.FindField('CodNivel').Visible := False;
+  TbHora.FindField('CodHora').Visible := False;
+  //TbHorario.FindField('CodHorario').Visible := False;
+  TbCurso.FindField('CodNivel').Visible := False;
+  TbCurso.FindField('CodEspecializacion').Visible := False;
+  TbParaleloId.FindField('CodParaleloId').Visible := False;
+  TbMateriaProhibicionTipo.FindField('CodMateProhibicionTipo').Visible := False;
+  TbPeriodo.FindField('CodDia').Visible := False;
+  TbPeriodo.FindField('CodHora').Visible := False;
+  TbParalelo.FindField('CodParalelo').Visible := False;
+  TbParalelo.FindField('CodNivel').Visible := False;
+  TbParalelo.FindField('CodEspecializacion').Visible := False;
+  TbParalelo.FindField('CodParaleloId').Visible := False;
+  TbProfesor.FindField('CodProfesor').Visible := False;
+  TbMateriaProhibicion.FindField('CodMateria').Visible := False;
+  TbMateriaProhibicion.FindField('CodDia').Visible := False;
+  TbMateriaProhibicion.FindField('CodHora').Visible := False;
+  TbMateriaProhibicion.FindField('CodMateProhibicionTipo').Visible := False;
+  TbDistributivo.FindField('CodMateria').Visible := False;
+  TbDistributivo.FindField('CodNivel').Visible := False;
+  TbDistributivo.FindField('CodEspecializacion').Visible := False;
+  TbDistributivo.FindField('CodParaleloId').Visible := False;
+  TbDistributivo.FindField('CodProfesor').Visible := False;
+  TbDistributivo.FindField('CodAulaTipo').Visible := False;
+  TbHorarioDetalle.FindField('CodHorario').Visible := False;
+  TbHorarioDetalle.FindField('CodMateria').Visible := False;
+  TbHorarioDetalle.FindField('CodNivel').Visible := False;
+  TbHorarioDetalle.FindField('CodEspecializacion').Visible := False;
+  TbHorarioDetalle.FindField('CodParaleloId').Visible := False;
+  TbHorarioDetalle.FindField('CodDia').Visible := False;
+  TbHorarioDetalle.FindField('CodHora').Visible := False;
+  TbProfesorProhibicionTipo.FindField('CodProfProhibicionTipo').Visible := False;
+  TbProfesorProhibicion.FindField('CodProfesor').Visible := False;
+  TbProfesorProhibicion.FindField('CodDia').Visible := False;
+  TbProfesorProhibicion.FindField('CodHora').Visible := False;
+  TbProfesorProhibicion.FindField('CodProfProhibicionTipo').Visible := False;
+end;
+
+procedure TSourceDataModule.PrepareTables;
+begin
+  PrepareFields;
+  PrepareLookupFields;
+  ApplyOnTables(SetFieldCaption);
+  HideFields;
+end;
 
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
 begin
@@ -400,9 +668,9 @@ begin
   TbDistributivo.OnCalcFields := TbDistributivoCalcFields;
   TbParalelo.OnCalcFields := TbParaleloCalcFields;
   FConfigStorage := TConfigStorage.Create(Self);
-  {$IFDEF FPC}
-  ApplyOnTables(SetDataBase);
-  {$ENDIF}
+  Database.Open;
+  ApplyOnTables(ConfigureTable);
+  PrepareTables;
   OpenTables;
   NewDataBase;
 end;
@@ -618,6 +886,16 @@ begin
   ConfigStorage.Floats['CruceProfesor'] := Value;
 end;
 
+procedure TSourceDataModule.SetFieldCaption(ADataSet: TDataSet);
+var
+  i: Integer;
+begin
+  for i := 0 to ADataSet.Fields.Count - 1 do
+  begin
+    ADataSet.Fields[i].DisplayLabel := FieldCaption[ADataSet.Fields[i]];
+  end;
+end;
+
 function TSourceDataModule.GetProfesorFraccionamiento: Extended;
 begin
   Result := ConfigStorage.Floats['ProfesorFraccionamiento'];
@@ -808,7 +1086,7 @@ end;
 
 procedure TSourceDataModule.SeleccionarHorario;
 begin
-  HorarioSeleccionado := SourceDataModule.TbHorarioCodHorario.Value;
+  HorarioSeleccionado := SourceDataModule.TbHorario.FindField('CodHorario').AsInteger;
 end;
 
 initialization
