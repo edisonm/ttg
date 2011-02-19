@@ -344,4 +344,57 @@ inherited ProfesorForm: TProfesorForm
       OnExecute = ActProfesorProhibicionExecute
     end
   end
+  object QuProfesorProhibicion: TZQuery
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodProfesor;CodDia;CodHora'
+    SQL.Strings = (
+      'select * from ProfesorProhibicion'
+      'where CodProfesor=:CodProfesor')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodProfesor'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSProfesor
+    MasterFields = 'CodProfesor'
+    MasterSource = SourceDataModule.DSProfesor
+    LinkedFields = 'CodProfesor'
+    IndexFieldNames = 'CodProfesor Asc;CodDia Asc;CodHora Asc'
+    Left = 232
+    Top = 104
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodProfesor'
+        ParamType = ptUnknown
+      end>
+  end
+  object QuDistributivo: TZQuery
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodProfesor'
+    OnCalcFields = QuDistributivoCalcFields
+    SQL.Strings = (
+      'select * from Distributivo'
+      'where CodProfesor=:CodProfesor')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodProfesor'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSProfesor
+    MasterFields = 'CodProfesor'
+    MasterSource = SourceDataModule.DSProfesor
+    LinkedFields = 'CodProfesor'
+    IndexFieldNames = 'CodProfesor Asc'
+    Left = 232
+    Top = 152
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodProfesor'
+        ParamType = ptUnknown
+      end>
+  end
 end

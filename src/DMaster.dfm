@@ -4,29 +4,29 @@ object MasterDataModule: TMasterDataModule
   OnDestroy = DataModuleDestroy
   Height = 404
   Width = 748
-  object TbTmpProfesorCarga: TSqlitePassDataset
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
+  object TbTmpProfesorCarga: TZTable
+
+    Connection = SourceDataModule.Database
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     Left = 250
     Top = 11
-    pParams = ()
-    object TbTmpProfesorCargaCodProfesor: TLargeintField
+
+    object TbTmpProfesorCargaCodProfesor: TIntegerField
       DisplayLabel = 'Profesor'
       FieldName = 'CodProfesor'
     end
@@ -54,48 +54,48 @@ object MasterDataModule: TMasterDataModule
       Size = 31
       Lookup = True
     end
-    object TbTmpProfesorCargaCarga: TLargeintField
+    object TbTmpProfesorCargaCarga: TIntegerField
       FieldName = 'Carga'
     end
   end
-  object QuDistributivoProfesor: TSqlitePassDataset
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
+  object QuDistributivoProfesor: TZTable
+
+    Connection = SourceDataModule.Database
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     Left = 250
     Top = 115
-    pParams = ()
-    object QuDistributivoProfesorCodMateria: TLargeintField
+
+    object QuDistributivoProfesorCodMateria: TIntegerField
       FieldName = 'CodMateria'
       Visible = False
     end
-    object QuDistributivoProfesorCodNivel: TLargeintField
+    object QuDistributivoProfesorCodNivel: TIntegerField
       FieldName = 'CodNivel'
       Visible = False
     end
-    object QuDistributivoProfesorCodEspecializacion: TLargeintField
+    object QuDistributivoProfesorCodEspecializacion: TIntegerField
       FieldName = 'CodEspecializacion'
     end
-    object QuDistributivoProfesorCodParaleloId: TLargeintField
+    object QuDistributivoProfesorCodParaleloId: TIntegerField
       FieldName = 'CodParaleloId'
       Visible = False
     end
-    object QuDistributivoProfesorCodProfesor: TLargeintField
+    object QuDistributivoProfesorCodProfesor: TIntegerField
       FieldName = 'CodProfesor'
       Visible = False
     end
@@ -158,58 +158,58 @@ object MasterDataModule: TMasterDataModule
       Lookup = True
     end
   end
-  object QuProfesorProhibicionCant: TSqlitePassDataset
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
+  object QuProfesorProhibicionCant: TZTable
+
+    Connection = SourceDataModule.Database
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     Left = 58
     Top = 157
-    pParams = ()
-    object QuProfesorProhibicionCantCodProfesor: TLargeintField
+
+    object QuProfesorProhibicionCantCodProfesor: TIntegerField
       FieldName = 'CodProfesor'
     end
-    object QuProfesorProhibicionCantCantidad: TLargeintField
+    object QuProfesorProhibicionCantCantidad: TIntegerField
       FieldName = 'Cantidad'
     end
   end
-  object TbTmpAulaTipoCarga: TSqlitePassDataset
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
+  object TbTmpAulaTipoCarga: TZTable
+
+    Connection = SourceDataModule.Database
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     Left = 250
     Top = 62
-    pParams = ()
-    object TbTmpAulaTipoCargaCodAulaTipo: TLargeintField
+
+    object TbTmpAulaTipoCargaCodAulaTipo: TIntegerField
       DisplayLabel = 'Tipo de aula'
       FieldName = 'CodAulaTipo'
     end
@@ -225,7 +225,7 @@ object MasterDataModule: TMasterDataModule
       Size = 31
       Lookup = True
     end
-    object TbTmpAulaTipoCargaCarga: TLargeintField
+    object TbTmpAulaTipoCargaCarga: TIntegerField
       FieldName = 'Carga'
     end
   end

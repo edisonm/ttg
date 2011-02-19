@@ -6,15 +6,15 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, Buttons, ExtCtrls, SqlitePassDbo, DBCtrls,
+  Db, StdCtrls, Buttons, ExtCtrls, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset, DBCtrls,
   DMaster, DSource;
 
 type
   TSelPeriodoForm = class(TForm)
-    TbDiaHora: TSqlitePassDataset;
+    TbDiaHora: TZTable;
     DSDiaHora: TDataSource;
-    TbDiaHoraCodDia: TLargeintField;
-    TbDiaHoraCodHora: TLargeintField;
+    TbDiaHoraCodDia: TIntegerField;
+    TbDiaHoraCodHora: TIntegerField;
     TbDiaHoraNomDia: TStringField;
     TbDiaHoraNomHora: TStringField;
     BBAceptar: TBitBtn;

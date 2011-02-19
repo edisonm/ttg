@@ -73,6 +73,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
     ExplicitHeight = 328
   end
   inherited ImageList: TImageList
+    Left = 148
     Bitmap = {
       494C010106000800040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
@@ -345,66 +346,97 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       C07FFFFEFFFF0003FFFFFFFFFFFF000700000000000000000000000000000000
       000000000000}
   end
-  object QuHorarioProfesor: TSqlitePassDataset
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
+  object QuHorarioProfesor: TZQuery
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodProfesor'
+    OnCalcFields = QuHorarioProfesorCalcFields
+    SQL.Strings = (
+      'select'
+      '  CodProfesor,'
+      '  CodNivel,'
+      '  CodEspecializacion,'
+      '  CodParaleloId,'
+      '  CodHora,'
+      '  CodDia,'
+      '  CodMateria'
+      'from'
+      '  HorarioDetalle inner join Distributivo on'
+      '  (HorarioDetalle.CodMateria = Distributivo.CodMateria)'
+      '  and (HorarioDetalle.CodNivel = Distributivo.CodNivel)'
+      
+        '  and (HorarioDetalle.CodEspecializacion = Distributivo.CodEspec' +
+        'ializacion)'
+      
+        '  and (HorarioDetalle.CodParaleloId = Distributivo.CodParaleloId' +
+        ')'
+      'where'
+      '  CodHorario=:CodHorario'
+      'and CodProfesor=:CodProfesor')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodProfesor'
+        ParamType = ptUnknown
+      end>
+    DataSource = DSProfesor
     MasterFields = 'CodProfesor'
     MasterSource = SourceDataModule.DSProfesor
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmPostponed
+    LinkedFields = 'CodProfesor'
+    IndexFieldNames = 'CodProfesor Asc'
     Left = 64
     Top = 88
-    pParams = ()
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodProfesor'
+        ParamType = ptUnknown
+      end>
     object QuHorarioProfesorCodProfesor: TAutoIncField
       DisplayLabel = 'Codigo'
       FieldName = 'CodProfesor'
       Visible = False
     end
-    object QuHorarioProfesorCodNivel: TLargeintField
+    object QuHorarioProfesorCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodEspecializacion: TLargeintField
+    object QuHorarioProfesorCodEspecializacion: TIntegerField
       DisplayLabel = 'Especializacion'
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodParaleloId: TLargeintField
+    object QuHorarioProfesorCodParaleloId: TIntegerField
       DisplayLabel = 'Paralelo'
       FieldName = 'CodParaleloId'
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodHora: TLargeintField
+    object QuHorarioProfesorCodHora: TIntegerField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodDia: TLargeintField
+    object QuHorarioProfesorCodDia: TIntegerField
       DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodMateria: TLargeintField
+    object QuHorarioProfesorCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
       Required = True
@@ -468,6 +500,6 @@ inherited HorarioProfesorForm: THorarioProfesorForm
     DataSet = SourceDataModule.TbProfesor
     OnDataChange = DSProfesorDataChange
     Left = 64
-    Top = 116
+    Top = 148
   end
 end

@@ -3,6 +3,7 @@ inherited MateriaForm: TMateriaForm
   Top = 248
   Caption = 'Materias'
   ClientWidth = 594
+  OnCreate = FormCreate
   ExplicitWidth = 602
   PixelsPerInch = 96
   TextHeight = 13
@@ -176,6 +177,9 @@ inherited MateriaForm: TMateriaForm
       C07FFFFFFFFF0000FFFFFFFFFFFF000000000000000000000000000000000000
       000000000000}
   end
+  inherited DataSource: TDataSource
+    DataSet = SourceDataModule.TbMateria
+  end
   inherited ActionList: TActionList
     object ActMateriaProhibicion: TAction
       AutoCheck = True
@@ -186,5 +190,31 @@ inherited MateriaForm: TMateriaForm
       ImageIndex = 2
       OnExecute = ActMateriaProhibicionExecute
     end
+  end
+  object QuMateriaProhibicion: TZQuery
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodMateria;CodDia;CodHora'
+    SQL.Strings = (
+      'select * from MateriaProhibicion'
+      'where CodMateria=:CodMateria')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodMateria'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSMateria
+    MasterFields = 'CodMateria'
+    MasterSource = SourceDataModule.DSMateria
+    LinkedFields = 'CodMateria'
+    IndexFieldNames = 'CodMateria Asc;CodDia Asc;CodHora Asc'
+    Left = 64
+    Top = 152
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodMateria'
+        ParamType = ptUnknown
+      end>
   end
 end

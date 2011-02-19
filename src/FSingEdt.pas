@@ -7,7 +7,7 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
   StdCtrls, DBCtrls, Grids, DBGrids, Buttons, ExtCtrls,
-  ComCtrls, FEditor, ImgList, ToolWin, SqlitePassDbo, ActnList, UConfig;
+  ComCtrls, FEditor, ImgList, ToolWin, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset, ActnList, UConfig;
 
 type
 
@@ -86,9 +86,11 @@ procedure TSingleEditorForm.DBGridCheckButton(Sender: TObject;
 begin
   inherited;
   {$IFNDEF FPC}
-  Enabled := (TDBGrid(Sender).DataSource.DataSet is TSqlitePassDataset) and
+{
+  Enabled := (TDBGrid(Sender).DataSource.DataSet is TZTable) and
     (Field <> nil) and not (Field is TBlobField)
-    and (TSqlitePassDataset(TDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0)
+    and (TZTable(TDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0)
+}
   {$ENDIF};
 end;
 
@@ -96,15 +98,15 @@ procedure TSingleEditorForm.DBGridTitleBtnClick(Sender: TObject;
   ACol: Integer; Field: TField);
 begin
   inherited;
-  {if TDBGrid(Sender).DataSource.DataSet is TSqlitePassDataset then
-    with TSqlitePassDataset(TDBGrid(Sender).DataSource.DataSet) do
+  {if TDBGrid(Sender).DataSource.DataSet is TZTable then
+    with TZTable(TDBGrid(Sender).DataSource.DataSet) do
     try
       if Field.FieldKind = fkLookup then
-        IndexedBy :=IndexDefs.FindIndexForFields(FindField(Field.KeyFields).FieldName).Fields
+        IndexFieldNames :=IndexDefs.FindIndexForFields(FindField(Field.KeyFields).FieldName).Fields
       else
-       IndexedBy := IndexDefs.FindIndexForFields(Field.FieldName).Fields;
+       IndexFieldNames := IndexDefs.FindIndexForFields(Field.FieldName).Fields;
     except
-      IndexedBy := '';
+      IndexFieldNames := '';
     end;
     }
 end;
@@ -113,9 +115,9 @@ procedure TSingleEditorForm.DBGridDblClick(Sender: TObject);
 begin
   inherited;
   {
-  if TDBGrid(Sender).DataSource.DataSet is TSqlitePassDataset then
-    with TSqlitePassDataset(TDBGrid(Sender).DataSource.DataSet) do
-      IndexedBy := '';
+  if TDBGrid(Sender).DataSource.DataSet is TZTable then
+    with TZTable(TDBGrid(Sender).DataSource.DataSet) do
+      IndexFieldNames := '';
   }
 end;
 

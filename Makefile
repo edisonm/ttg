@@ -11,7 +11,11 @@ DCC32="c:/archivos de programa/Embarcadero/RAD Studio/7.0/bin/dcc32"
 # DCC32="c:/archivos de programa/CodeGear/RAD Studio/5.0/bin/dcc32"
 DCC32OPTS= \
 	-E'$(shell cygpath -w $(TTGDIR)/bin)' \
-	-U'$(shell cygpath -w $(TTGDIR)/../SQLitePass_0.55/Sources)' \
+	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/component)' \
+	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/dbc)' \
+	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/core)' \
+	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/parsesql)' \
+	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/plain)' \
 	-N0'$(shell cygpath -w $(TTGDIR)/obj)'
 TTGDPR=TTG.dpr
 DBUTILSDPR=DBUTILS.dpr
@@ -70,11 +74,11 @@ $(TTGEXE): src/$(TTGDPR) $(addprefix src/, $(addsuffix .pas, $(UNITS) $(FORMS) $
 $(DBUTILS): DBUTILS/$(DBUTILSDPR) $(addprefix DBUTILS/, $(addsuffix .pas, $(DBUNITS)))
 	cd DBUTILS; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
 
-src/$(DSRCBASE).pas: $(DBUTILS) $(TTGMDB)
-	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule $(DSRCBASE) 'cds;U=SqlitePassDbo;DS=SqlitePassDataset'
+src/$(DSRCBASE).pas: $(DBUTILS) $(TTGMDB) Makefile
+	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule $(DSRCBASE) 'cds;csr;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
 
-src/$(DSRCBASE).pp: $(DBUTILS) $(TTGMDB)
-	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule $(DSRCBASE) 'cds;lfm;U=SqlitePassDbo;DS=SqlitePassDataset'
+src/$(DSRCBASE).pp: $(DBUTILS) $(TTGMDB) Makefile
+	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule $(DSRCBASE) 'cds;csr;lfm;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
 
 $(TTGSQL): $(DBUTILS) $(TTGMDB)
 	$(DBUTILS) /ACC2SQL $(TTGMDB) $@
@@ -82,7 +86,7 @@ $(TTGSQL): $(DBUTILS) $(TTGMDB)
 $(TTGSQLITE3): $(TTGSQL)
 	$(RM) $@
 	sqlite3 $@ ".read $(TTGSQL)"
-	sqlite3 $@ ".genfkey --exec"
+#	sqlite3 $@ ".genfkey --exec"
 
 clean:
 	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) \
@@ -125,6 +129,44 @@ kbmtosq3:
 	  -e s:"    LocaleID = .*":"":g \
 	  $$i.dfm > $$i.dfm.tmp && \
 	  mv -f $$i.dfm.tmp $$i.dfm ; done
+
+sq3tozeos:
+	for i in $(addprefix src/, $(FORMS) $(DSRCBASE0) $(UNITS)) ; do \
+	  sed \
+	  -e s:"TSqlitePassDataset":"TZTable":g \
+	  -e s:"TSqlitePassDatabase":"TZConnection":g \
+	  -e s:"IndexedBy":"IndexFieldNames":g \
+	  -e s:"DatasetName":"TableName":g \
+	  -e s:"SqlitePassDbo":"ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset":g \
+	  -e s:"TLargeintField":"TIntegerField":g $$i.pas > $$i.pas.tmp && \
+	  mv -f $$i.pas.tmp $$i.pas ; done
+	for i in $(addprefix src/, $(FORMS) $(DSRCBASE0)) ; do \
+	  sed -e s:"TSqlitePassDataset":"TZTable":g \
+	  -e s:"TSqlitePassDatabase":"TZConnection":g \
+	  -e s:"TLargeintField":"TIntegerField":g \
+	  -e s:"    CalcDisplayedRecordsOnly = .*"::g \
+	  -e s:"    MasterSourceAutoActivate = .*"::g \
+	  -e s:"    FilterMode = .*"::g \
+	  -e s:"    FilterRecordLowerLimit = .*"::g \
+	  -e s:"    FilterRecordUpperLimit = .*"::g \
+	  -e s:"    Indexed = .*"::g \
+	  -e s:"    LocateSmartRefresh = .*"::g \
+	  -e s:"    LookUpCache = .*"::g \
+	  -e s:"    LookUpDisplayedRecordsOnly = .*"::g \
+	  -e s:"    LookUpSmartRefresh = .*"::g \
+	  -e s:"    Sorted = .*"::g \
+	  -e s:"    RecordsCacheCapacity = .*"::g \
+	  -e s:"    DatabaseAutoActivate = .*"::g \
+	  -e s:"    VersionInfo.Component = .*"::g \
+	  -e s:"    VersionInfo.Package = .*"::g \
+	  -e s:"    ParamCheck = .*"::g \
+	  -e s:"    WriteMode = .*"::g \
+	  -e s:"    pParams = .*"::g \
+	  -e s:"    DatatypeOptions\..*"::g \
+	  -e s:"IndexedBy":"IndexFieldNames":g \
+	  $$i.dfm > $$i.dfm.tmp && \
+	  mv -f $$i.dfm.tmp $$i.dfm ; done
+
 
 %.pp: %.pas
 	sed \

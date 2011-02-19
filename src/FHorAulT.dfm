@@ -343,66 +343,51 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       C07FFFFEFFFF0003FFFFFFFFFFFF000700000000000000000000000000000000
       000000000000}
   end
-  object QuHorarioAulaTipo: TSqlitePassDataset
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
+  object QuHorarioAulaTipo: TZQuery
+    Connection = SourceDataModule.Database
+    OnCalcFields = QuHorarioAulaTipoCalcFields
+    Params = <>
+    DataSource = SourceDataModule.DSAulaTipo
     MasterFields = 'CodAulaTipo'
     MasterSource = SourceDataModule.DSAulaTipo
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
     Left = 84
     Top = 80
-    pParams = ()
     object QuHorarioAulaTipoCodAulaTipo: TAutoIncField
       DisplayLabel = 'Codigo'
       FieldName = 'CodAulaTipo'
       Visible = False
     end
-    object QuHorarioAulaTipoCodMateria: TLargeintField
+    object QuHorarioAulaTipoCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
       Required = True
       Visible = False
     end
-    object QuHorarioAulaTipoCodNivel: TLargeintField
+    object QuHorarioAulaTipoCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
       Visible = False
     end
-    object QuHorarioAulaTipoCodEspecializacion: TLargeintField
+    object QuHorarioAulaTipoCodEspecializacion: TIntegerField
       DisplayLabel = 'Especializacion'
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
     end
-    object QuHorarioAulaTipoCodParaleloId: TLargeintField
+    object QuHorarioAulaTipoCodParaleloId: TIntegerField
       DisplayLabel = 'Paralelo'
       FieldName = 'CodParaleloId'
       Required = True
       Visible = False
     end
-    object QuHorarioAulaTipoCodHora: TLargeintField
+    object QuHorarioAulaTipoCodHora: TIntegerField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True
       Visible = False
     end
-    object QuHorarioAulaTipoCodDia: TLargeintField
+    object QuHorarioAulaTipoCodDia: TIntegerField
       DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True

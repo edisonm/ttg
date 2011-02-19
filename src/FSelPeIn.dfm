@@ -71,16 +71,16 @@ object SelPeriodoForm: TSelPeriodoForm
     DataSource = DSDiaHora
     TabOrder = 3
   end
-  object TbDiaHora: TSqlitePassDataset
+  object TbDiaHora: TZTable
     Left = 24
     Top = 64
-    object TbDiaHoraCodDia: TLargeintField
+    object TbDiaHoraCodDia: TIntegerField
       DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
       Visible = False
     end
-    object TbDiaHoraCodHora: TLargeintField
+    object TbDiaHoraCodHora: TIntegerField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True

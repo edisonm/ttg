@@ -481,10 +481,6 @@ begin
     Add(Format('  T%s = class(TBaseDataModule)', [DataModuleName]));
   end;
   StringDFM.Add(Format('inherited %s: T%s', [DataModuleName, DataModuleName]));
-  StringDFM.Add('  inherited Database: TSqlitePassDatabase');
-  StringDFM.Add('    DatatypeOptions.pCustomFieldDefs = ()');
-  StringDFM.Add('    DatatypeOptions.pTranslationsRules = ()');
-  StringDFM.Add('  end');
   Msgs.Clear;
   Msgs.BeginUpdate;
   VTableList := TStringList.Create;
@@ -519,18 +515,13 @@ begin
           StringDFM.Add(Format('  object Tb%s: T%s', [VTableName, ADataSetClass]));
           if i <> 0 then
             StringDFM.Add(Format('    Tag = %d', [i]));
-          StringDFM.Add('    Database = Database');
-          // StringDFM.Add(Format('    DatasetName = ''%s''', [VTableName]));
+          StringDFM.Add('    Connection = Database');
+          StringDFM.Add(Format('    TableName = ''%s''', [VTableName]));
           //if ASetPrimaryKey then
           begin
             PrimaryKeyFields := GetPrimaryKeyFields(VTableDef);
             if PrimaryKeyFields <> '' then
-            begin
-              StringDFM.Add('    Indexed = True');
-              StringDFM.Add(Format('    IndexedBy = ''%s''', [PrimaryKeyFields]));
-            end
-            else
-              StringDFM.Add('    Indexed = False');
+              StringDFM.Add(Format('    IndexFieldNames = ''%s''', [PrimaryKeyFields]));
           end;
           if ACreateFieldDefs then
             CreateFieldDefs(VTableDef);
@@ -549,7 +540,6 @@ begin
           StringDFM.Add
             (Format('    Top = %d', [48 + 96 * (i div 5) + 12 *
                 ((i mod 5) mod 2)]));
-          StringDFM.Add('    pParams = ()');
           if ACreateDfmFields then
             CreateDfmFields(VTableDef);
           StringDFM.Add('  end');

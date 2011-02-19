@@ -6,22 +6,22 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ExtCtrls, Grids, FCrsMME0, Db, FCrsMME1, SqlitePassDbo,
+  StdCtrls, Buttons, ExtCtrls, Grids, FCrsMME0, Db, FCrsMME1, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset,
   ImgList, ComCtrls, ToolWin, DBCtrls, Variants;
 
 type
   THorarioProfesorForm = class(TCrossManyToManyEditor1Form)
-    QuHorarioProfesor: TSqlitePassDataset;
+    QuHorarioProfesor: TZQuery;
     dlcProfesor: TDBLookupComboBox;
     cbVerProfesor: TComboBox;
     BtnNext: TToolButton;
     BtnPrior: TToolButton;
-    QuHorarioProfesorCodNivel: TLargeintField;
-    QuHorarioProfesorCodEspecializacion: TLargeintField;
-    QuHorarioProfesorCodParaleloId: TLargeintField;
-    QuHorarioProfesorCodHora: TLargeintField;
-    QuHorarioProfesorCodDia: TLargeintField;
-    QuHorarioProfesorCodMateria: TLargeintField;
+    QuHorarioProfesorCodNivel: TIntegerField;
+    QuHorarioProfesorCodEspecializacion: TIntegerField;
+    QuHorarioProfesorCodParaleloId: TIntegerField;
+    QuHorarioProfesorCodHora: TIntegerField;
+    QuHorarioProfesorCodDia: TIntegerField;
+    QuHorarioProfesorCodMateria: TIntegerField;
     QuHorarioProfesorCodProfesor: TAutoIncField;
     QuHorarioProfesorNomMateria: TStringField;
     QuHorarioProfesorNombre: TStringField;
@@ -39,7 +39,6 @@ type
     { Private declarations }
     FCodHorario: Integer;
     FNombre: string;
-    procedure FillHorarioProfesor;
   protected
   public
     { Public declarations }
@@ -70,26 +69,19 @@ end;
 procedure THorarioProfesorForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  QuHorarioProfesor.OnCalcFields := QuHorarioProfesorCalcFields;
-  PrepareQuery(QuHorarioProfesor, 'HorarioProfesor', 'CodProfesor');
-  CodHorario := SourceDataModule.TbHorario.FindField('CodHorario').AsInteger;
   SourceDataModule.TbProfesor.First;
+  CodHorario := SourceDataModule.TbHorario.FindField('CodHorario').AsInteger;
   cbVerProfesor.Items.Clear;
-  FillHorarioProfesor;
+  QuHorarioProfesor.ParamByName('CodHorario').AsInteger := CodHorario;
+  QuHorarioProfesor.Open;
   LoadNames(MasterDataModule.StringsShowProfesor, cbVerProfesor.Items);
   cbVerProfesor.Text := cbVerProfesor.Items[0];
-  {$IFNDEF FPC}
-  dlcProfesor.KeyValue := SourceDataModule.TbProfesor.FindField('CodProfesor').AsInteger;
-  {$ENDIF}
 end;
 
 procedure THorarioProfesorForm.BtnPriorClick(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbProfesor.Prior;
-  {$IFNDEF FPC}
-  dlcProfesor.KeyValue := SourceDataModule.TbProfesor.FindField('CodProfesor').AsInteger;
-  {$ENDIF}
 end;
 
 procedure THorarioProfesorForm.BtnNextClick(Sender: TObject);
@@ -99,49 +91,6 @@ begin
   {$IFNDEF FPC}
   dlcProfesor.KeyValue := SourceDataModule.TbProfesor.FindField('CodProfesor').AsInteger;
   {$ENDIF}
-end;
-
-procedure THorarioProfesorForm.FillHorarioProfesor;
-var
-  CodMateria, CodNivel, CodEspecializacion, CodParaleloId: Integer;
-begin
-  with SourceDataModule do
-  begin
-    TbHorarioDetalle.IndexedBy := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
-    if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
-    begin
-      TbDistributivo.IndexedBy := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
-      try
-        TbDistributivo.First;
-        while (TbHorarioDetalle.FindField('CodHorario').AsInteger = CodHorario)
-	    and not TbHorarioDetalle.Eof do
-        begin
-          CodMateria := TbHorarioDetalle.FindField('CodMateria').AsInteger;
-          CodNivel := TbHorarioDetalle.FindField('CodNivel').AsInteger;
-          CodEspecializacion := TbHorarioDetalle.FindField('CodEspecializacion').AsInteger;
-          CodParaleloId := TbHorarioDetalle.FindField('CodParaleloId').AsInteger;
-          while ((TbDistributivo.FindField('CodMateria').AsInteger <> CodMateria)
-            or (TbDistributivo.FindField('CodNivel').AsInteger <> CodNivel)
-            or (TbDistributivo.FindField('CodEspecializacion').AsInteger <> CodEspecializacion)
-            or (TbDistributivo.FindField('CodParaleloId').AsInteger <> CodParaleloId))
-            and not TbDistributivo.Eof do
-            TbDistributivo.Next;
-          QuHorarioProfesor.Append;
-          QuHorarioProfesorCodProfesor.Value        := TbDistributivo.FindField('CodProfesor').AsInteger;
-          QuHorarioProfesorCodMateria.Value         := TbHorarioDetalle.FindField('CodMateria').AsInteger;
-          QuHorarioProfesorCodNivel.Value           := TbHorarioDetalle.FindField('CodNivel').AsInteger;
-          QuHorarioProfesorCodEspecializacion.Value := TbHorarioDetalle.FindField('CodEspecializacion').AsInteger;
-          QuHorarioProfesorCodParaleloId.Value      := TbHorarioDetalle.FindField('CodParaleloId').AsInteger;
-          QuHorarioProfesorCodHora.Value            := TbHorarioDetalle.FindField('CodHora').AsInteger;
-          QuHorarioProfesorCodDia.Value             := TbHorarioDetalle.FindField('CodDia').AsInteger;
-          QuHorarioProfesor.Post;
-          TbHorarioDetalle.Next;
-        end;
-      finally
-        TbDistributivo.IndexedBy := '';
-      end;
-    end;
-  end;
 end;
 
 procedure THorarioProfesorForm.QuHorarioProfesorCalcFields(DataSet: TDataSet);

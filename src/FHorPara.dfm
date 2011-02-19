@@ -36,10 +36,9 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Top = 0
       Width = 150
       Height = 21
-      KeyField = 'CodParalelo'
       ListField = 'AbrNivel;AbrEspecializacion;NomParaleloId;NomParalelo'
       ListFieldIndex = 3
-      ListSource = DSParalelo
+      ListSource = SourceDataModule.DSParalelo
       TabOrder = 1
     end
     object cbVerParalelo: TComboBox
@@ -85,7 +84,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     ExplicitHeight = 357
   end
   inherited ImageList: TImageList
-    Left = 116
+    Left = 140
     Top = 104
     Bitmap = {
       494C010107000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
@@ -359,67 +358,120 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       C07FFFFEFFFF0003FFFFFFFFFFFF000700000000000000000000000000000000
       000000000000}
   end
-  object QuHorarioParalelo: TSqlitePassDataset
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
+  object QuHorarioParalelo: TZQuery
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodNivel;CodEspecializacion;CodParaleloId'
+    OnCalcFields = QuHorarioParaleloCalcFields
+    SQL.Strings = (
+      'select'
+      '  CodNivel,'
+      '  CodEspecializacion,'
+      '  CodParaleloId,'
+      '  CodHora,'
+      '  CodDia,'
+      '  CodMateria,'
+      '  CodProfesor'
+      'from'
+      '  HorarioDetalle inner join Distributivo on'
+      '  (HorarioDetalle.CodMateria = Distributivo.CodMateria)'
+      '  and (HorarioDetalle.CodNivel = Distributivo.CodNivel)'
+      
+        '  and (HorarioDetalle.CodEspecializacion = Distributivo.CodEspec' +
+        'ializacion)'
+      
+        '  and (HorarioDetalle.CodParaleloId = Distributivo.CodParaleloId' +
+        ')'
+      'where'
+      '  CodHorario=:CodHorario'
+      'and CodNivel=:CodNivel'
+      'and CodEspecializacion=:CodEspecializacion'
+      'and CodParaleloId=:CodParaleloId')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodNivel'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodEspecializacion'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodParaleloId'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSParalelo
     MasterFields = 'CodNivel;CodEspecializacion;CodParaleloId'
-    MasterSource = DSParalelo
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmPostponed
+    MasterSource = SourceDataModule.DSParalelo
+    LinkedFields = 'CodNivel;CodEspecializacion;CodParaleloId'
+    IndexFieldNames = 'CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc'
     Left = 60
     Top = 104
-    pParams = ()
-    object QuHorarioParaleloCodNivel: TLargeintField
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodNivel'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodEspecializacion'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodParaleloId'
+        ParamType = ptUnknown
+      end>
+    object QuHorarioParaleloCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
       Visible = False
     end
-    object QuHorarioParaleloCodEspecializacion: TLargeintField
+    object QuHorarioParaleloCodEspecializacion: TIntegerField
       DisplayLabel = 'Especializacion'
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
     end
-    object QuHorarioParaleloCodParaleloId: TLargeintField
+    object QuHorarioParaleloCodParaleloId: TIntegerField
       DisplayLabel = 'Paralelo'
       FieldName = 'CodParaleloId'
       Required = True
       Visible = False
     end
-    object QuHorarioParaleloCodHora: TLargeintField
+    object QuHorarioParaleloCodHora: TIntegerField
       DisplayLabel = 'Hora'
       FieldName = 'CodHora'
       Required = True
       Visible = False
     end
-    object QuHorarioParaleloCodDia: TLargeintField
+    object QuHorarioParaleloCodDia: TIntegerField
       DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
       Visible = False
     end
-    object QuHorarioParaleloCodMateria: TLargeintField
+    object QuHorarioParaleloCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
       Required = True
       Visible = False
     end
-    object QuHorarioParaleloCodProfesor: TAutoIncField
+    object QuHorarioParaleloCodProfesor: TIntegerField
       DisplayLabel = 'Codigo'
       FieldName = 'CodProfesor'
       Visible = False
@@ -459,7 +511,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   object DSParalelo: TDataSource
     DataSet = SourceDataModule.TbParalelo
     OnDataChange = DSParaleloDataChange
-    Left = 88
-    Top = 104
+    Left = 56
+    Top = 152
   end
 end

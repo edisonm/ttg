@@ -5,7 +5,7 @@ unit KerModel;
 interface
 
 uses
-  Classes, DB, Dialogs, SysConst, Math, Forms, SqlitePassDbo;
+  Classes, DB, Dialogs, SysConst, Math, Forms, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
 type
   TProgressEvent = procedure(I, Max: Integer; Value: Double; var Stop: Boolean) of object;
   TDynamicWordArray = array of Word;
@@ -362,7 +362,7 @@ var
     FProfesorProhibicionTipoACodProfProhibicionTipo,
     FAulaTipoACodAulaTipo,
     FMateriaProhibicionTipoACodMateProhibicionTipo: TDynamicLongintArray;
-  procedure Cargar(ATable: TSqlitePassDataset; ALstName: string; var FMinCodLst:
+  procedure Cargar(ATable: TZTable; ALstName: string; var FMinCodLst:
     Integer; var FCodLstALst: TDynamicSmallintArray; var FLstACodLst:
     TDynamicLongintArray);
   var
@@ -371,7 +371,7 @@ var
   begin
     with ATable do
     begin
-      IndexedBy := ALstName;
+      IndexFieldNames := ALstName;
       First;
       VField := FindField(ALstName);
       FMinCodLst := VField.AsInteger;
@@ -402,7 +402,7 @@ var
   begin
     with SourceDataModule.TbCurso do
     begin
-      IndexedBy := 'CodNivel;CodEspecializacion';
+      IndexFieldNames := 'CodNivel;CodEspecializacion';
       First;
       FCursoCant := RecordCount;
       SetLength(FNivelEspecializacionACurso, FNivelCant, FEspecializacionCant);
@@ -431,7 +431,7 @@ var
   begin
     with SourceDataModule.TbPeriodo do
     begin
-      IndexedBy := 'CodDia;CodHora';
+      IndexFieldNames := 'CodDia;CodHora';
       First;
       FPeriodoCant := RecordCount;
       SetLength(FPeriodoADia, FPeriodoCant);
@@ -467,7 +467,7 @@ var
   begin
     with SourceDataModule.TbParalelo do
     begin
-      IndexedBy := 'CodNivel;CodEspecializacion;CodParaleloId';
+      IndexFieldNames := 'CodNivel;CodEspecializacion;CodParaleloId';
       First;
       FParaleloCant := RecordCount;
       SetLength(FParaleloACurso, FParaleloCant);
@@ -504,7 +504,7 @@ var
   begin
     with SourceDataModule.TbAulaTipo do
     begin
-      IndexedBy := 'CodAulaTipo';
+      IndexFieldNames := 'CodAulaTipo';
       First;
       SetLength(FAulaTipoACantidad, RecordCount);
       VFieldCantidad := FindField('Cantidad');
@@ -524,7 +524,7 @@ var
   begin
     with SourceDataModule.TbMateriaProhibicionTipo do
     begin
-      IndexedBy := 'CodMateProhibicionTipo';
+      IndexFieldNames := 'CodMateProhibicionTipo';
       First;
       VFieldValor := FindField('ValMateProhibicionTipo');
       FMaxMateriaProhibicionTipo := -1;
@@ -551,7 +551,7 @@ var
   begin
     with SourceDataModule.TbProfesorProhibicionTipo do
     begin
-      IndexedBy := 'CodProfProhibicionTipo';
+      IndexFieldNames := 'CodProfProhibicionTipo';
       First;
       VFieldValor := FindField('ValProfProhibicionTipo');
       FMaxProfesorProhibicionTipo := -1;
@@ -579,7 +579,7 @@ var
   begin
     with SourceDataModule.TbMateriaProhibicion do
     begin
-      IndexedBy := 'CodMateria;CodDia;CodHora';
+      IndexFieldNames := 'CodMateria;CodDia;CodHora';
       First;
       SetLength(FMateriaProhibicionAMateria, RecordCount);
       SetLength(FMateriaProhibicionAPeriodo, RecordCount);
@@ -622,7 +622,7 @@ var
   begin
     with SourceDataModule.TbProfesorProhibicion do
     begin
-      IndexedBy := 'CodProfesor;CodDia;CodHora';
+      IndexFieldNames := 'CodProfesor;CodDia;CodHora';
       First;
       SetLength(FProfesorProhibicionAProfesor, RecordCount);
       SetLength(FProfesorProhibicionAPeriodo, RecordCount);
@@ -672,7 +672,7 @@ var
   begin
     with SourceDataModule.TbDistributivo do
     begin
-      IndexedBy := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+      IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
       First;
       VFieldMateria := FindField('CodMateria');
       VFieldNivel := FindField('CodNivel');
@@ -3170,7 +3170,7 @@ var
     begin
       DisableControls;
       try
-        IndexedBy := 'CodHorario';
+        IndexFieldNames := 'CodHorario';
         Append;
         TbHorario.FindField('CodHorario').AsInteger := CodHorario;
         TbHorario.FindField('MomentoInicial').AsDateTime := MomentoInicial;
@@ -3284,22 +3284,22 @@ end;
 procedure TObjetoModeloHorario.LoadFromDataModule(CodHorario: Integer);
 var
   FieldNivel, FieldParaleloId, FieldEspecializacion, FieldDia,
-    FieldHora, FieldSesion: TLargeintField;
+    FieldHora, FieldSesion: TIntegerField;
   i, j: Smallint;
 begin
   with SourceDataModule, ModeloHorario, TbHorarioDetalle do
   begin
     TbHorario.Locate('CodHorario', CodHorario, []);
-    IndexedBy := 'CodHorario';
+    IndexFieldNames := 'CodHorario';
     MasterFields := 'CodHorario';
     MasterSource := DSHorario;
     try
-      FieldNivel := FindField('CodNivel') as TLargeintField;
-      FieldParaleloId := FindField('CodParaleloId') as TLargeintField;
-      FieldEspecializacion := FindField('CodEspecializacion') as TLargeintField;
-      FieldDia := FindField('CodDia') as TLargeintField;
-      FieldHora := FindField('CodHora') as TLargeintField;
-      FieldSesion := FindField('Sesion') as TLargeintField;
+      FieldNivel := FindField('CodNivel') as TIntegerField;
+      FieldParaleloId := FindField('CodParaleloId') as TIntegerField;
+      FieldEspecializacion := FindField('CodEspecializacion') as TIntegerField;
+      FieldDia := FindField('CodDia') as TIntegerField;
+      FieldHora := FindField('CodHora') as TIntegerField;
+      FieldSesion := FindField('Sesion') as TIntegerField;
       for i := 0 to FParaleloCant - 1 do
         FillChar(FParaleloPeriodoASesion[i, 0], FPeriodoCant *
           SizeOf(Smallint), #$FF);
@@ -3319,7 +3319,7 @@ begin
     finally
       MasterSource := nil;
       MasterFields := '';
-      IndexedBy := '';
+      IndexFieldNames := '';
     end;
   end;
   Actualizar;

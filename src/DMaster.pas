@@ -6,33 +6,33 @@ interface
 
 uses
   Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DB, SqlitePassDbo, TTGUtls, Variants;
+  DB, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset, TTGUtls, Variants;
 
 type
   TMasterDataModule = class(TDataModule)
-    TbTmpProfesorCarga: TSqlitePassDataset;
-    TbTmpProfesorCargaCodProfesor: TLargeintField;
+    TbTmpProfesorCarga: TZTable;
+    TbTmpProfesorCargaCodProfesor: TIntegerField;
     TbTmpProfesorCargaNomProfesor: TStringField;
     TbTmpProfesorCargaApeProfesor: TStringField;
-    TbTmpProfesorCargaCarga: TLargeintField;
-    QuDistributivoProfesor: TSqlitePassDataset;
-    QuDistributivoProfesorCodMateria: TLargeintField;
-    QuDistributivoProfesorCodNivel: TLargeintField;
-    QuDistributivoProfesorCodParaleloId: TLargeintField;
+    TbTmpProfesorCargaCarga: TIntegerField;
+    QuDistributivoProfesor: TZTable;
+    QuDistributivoProfesorCodMateria: TIntegerField;
+    QuDistributivoProfesorCodNivel: TIntegerField;
+    QuDistributivoProfesorCodParaleloId: TIntegerField;
     QuDistributivoProfesorNomMateria: TStringField;
     QuDistributivoProfesorAbrNivel: TStringField;
     QuDistributivoProfesorNomParaleloId: TStringField;
-    QuDistributivoProfesorCodProfesor: TLargeintField;
+    QuDistributivoProfesorCodProfesor: TIntegerField;
     QuDistributivoProfesorApeNomProfesor: TStringField;
-    QuDistributivoProfesorCodEspecializacion: TLargeintField;
+    QuDistributivoProfesorCodEspecializacion: TIntegerField;
     QuDistributivoProfesorAbrEspecializacion: TStringField;
-    QuProfesorProhibicionCant: TSqlitePassDataset;
-    QuProfesorProhibicionCantCodProfesor: TLargeintField;
-    QuProfesorProhibicionCantCantidad: TLargeintField;
-    TbTmpAulaTipoCarga: TSqlitePassDataset;
-    TbTmpAulaTipoCargaCodAulaTipo: TLargeintField;
+    QuProfesorProhibicionCant: TZTable;
+    QuProfesorProhibicionCantCodProfesor: TIntegerField;
+    QuProfesorProhibicionCantCantidad: TIntegerField;
+    TbTmpAulaTipoCarga: TZTable;
+    TbTmpAulaTipoCargaCodAulaTipo: TIntegerField;
     TbTmpAulaTipoCargaAbrAulaTipo: TStringField;
-    TbTmpAulaTipoCargaCarga: TLargeintField;
+    TbTmpAulaTipoCargaCarga: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -74,8 +74,8 @@ begin
   begin
     Close;
     Open;
-    s := TbProfesorProhibicion.IndexedBy;
-    TbProfesorProhibicion.IndexedBy := 'CodProfesor';
+    s := TbProfesorProhibicion.IndexFieldNames;
+    TbProfesorProhibicion.IndexFieldNames := 'CodProfesor';
     TbProfesorProhibicion.First;
     CodProfesor := -$7FFFFFFF;
     while not TbProfesorProhibicion.Eof do
@@ -97,7 +97,7 @@ begin
       Post;
       TbProfesorProhibicion.Next;
     end;
-    TbProfesorProhibicion.IndexedBy := s;
+    TbProfesorProhibicion.IndexFieldNames := s;
   end;
 end;
 
@@ -117,8 +117,8 @@ var
   begin
     with SourceDataModule, TbDistributivo do
     begin
-      s := IndexedBy;
-      IndexedBy := 'CodProfesor';
+      s := IndexFieldNames;
+      IndexFieldNames := 'CodProfesor';
       First;
       TbTmpProfesorCarga.Open;
       CodProfesor := -$7FFFFFFF;
@@ -142,7 +142,7 @@ var
         TbTmpProfesorCarga.Post;
         Next;
       end;
-      IndexedBy := s;
+      IndexFieldNames := s;
     end;
   end;
   procedure ObtenerAulaTipoCarga;
@@ -153,8 +153,8 @@ var
     with SourceDataModule, TbDistributivo do
     begin
       TbTmpAulaTipoCarga.Open;
-      s := IndexedBy;
-      IndexedBy := 'CodAulaTipo';
+      s := IndexFieldNames;
+      IndexFieldNames := 'CodAulaTipo';
       First;
       CodAulaTipo := -$7FFFFFFF;
       while not Eof do
@@ -176,7 +176,7 @@ var
         TbTmpAulaTipoCarga.Post;
         Next;
       end;
-      IndexedBy := s;
+      IndexFieldNames := s;
     end;
   end;
   // Comprueba que no hayan asignadas mas horas de materias a profesores de las

@@ -169,6 +169,8 @@ inherited HorarioForm: THorarioForm
         Font.Style = []
         ParentFont = False
         TabOrder = 0
+        ExplicitLeft = 3
+        ExplicitTop = -4
       end
     end
   end
@@ -581,62 +583,92 @@ inherited HorarioForm: THorarioForm
   end
   inherited DataSource: TDataSource
     DataSet = SourceDataModule.TbHorario
-    Left = 60
-    Top = 140
+    Left = 84
+    Top = 60
   end
-  object QuCruceAula: TSqlitePassDataset [5]
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
-    Left = 88
-    Top = 168
-    pParams = ()
-    object QuCruceAulaCodDia: TLargeintField
+  object QuCruceAula: TZQuery [5]
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario'
+    SQL.Strings = (
+      'SELECT'
+      '  CodHorario,'
+      '  CodDia,'
+      '  CodHora,'
+      '  AulaTipo.CodAulaTipo,'
+      '  AulaTipo.AbrAulaTipo,'
+      '  COUNT(*) AS Usadas,'
+      '  COUNT(*) - AulaTipo.Cantidad AS Cruces'
+      'FROM'
+      '  (HorarioDetalle INNER JOIN Distributivo ON'
+      '        HorarioDetalle.CodMateria=Distributivo.CodMateria'
+      '    AND HorarioDetalle.CodNivel=Distributivo.CodNivel'
+      
+        '    AND HorarioDetalle.CodEspecializacion=Distributivo.CodEspeci' +
+        'alizacion'
+      '    AND HorarioDetalle.CodParaleloId=Distributivo.CodParaleloId)'
+      
+        '  INNER JOIN AulaTipo on AulaTipo.CodAulaTipo=Distributivo.CodAu' +
+        'laTipo'
+      'WHERE'
+      '  HorarioDetalle.CodHorario=:CodHorario'
+      'GROUP BY'
+      '  HorarioDetalle.CodHorario,'
+      '  CodDia,'
+      '  CodHora,'
+      '  AulaTipo.CodAulaTipo,'
+      '  AulaTipo.AbrAulaTipo'
+      'ORDER BY CodDia, CodHora, AulaTipo.AbrAulaTipo')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSHorario
+    MasterFields = 'CodHorario'
+    MasterSource = SourceDataModule.DSHorario
+    LinkedFields = 'CodHorario'
+    IndexFieldNames = 'CodHorario Asc'
+    Left = 312
+    Top = 64
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    object QuCruceAulaCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+      ReadOnly = True
+    end
+    object QuCruceAulaCodDia: TIntegerField
       FieldName = 'CodDia'
       Visible = False
     end
-    object QuCruceAulaCodHora: TLargeintField
+    object QuCruceAulaCodHora: TIntegerField
       FieldName = 'CodHora'
       Visible = False
     end
-    object QuCruceAulaCodAulaTipo: TLargeintField
+    object QuCruceAulaCodAulaTipo: TIntegerField
       FieldName = 'CodAulaTipo'
       Visible = False
     end
-    object QuCruceAulaUsadas: TLargeintField
-      FieldName = 'Usadas'
-    end
-    object QuCruceAulaCruces: TLargeintField
-      FieldName = 'Cruces'
-    end
-    object QuCruceAulaAbrAulaTipo: TStringField
-      DisplayLabel = 'Tipo aula'
-      DisplayWidth = 10
-      FieldKind = fkLookup
+    object QuCruceAulaAbrAulaTipo: TWideStringField
       FieldName = 'AbrAulaTipo'
-      LookupDataSet = SourceDataModule.TbAulaTipo
-      LookupKeyFields = 'CodAulaTipo'
-      LookupResultField = 'AbrAulaTipo'
-      KeyFields = 'CodAulaTipo'
+      Required = True
       Size = 10
-      Lookup = True
     end
-    object QuCruceAulaCantidad: TLargeintField
+    object QuCruceAulaUsadas: TWideStringField
+      FieldName = 'Usadas'
+      ReadOnly = True
+      Size = 255
+    end
+    object QuCruceAulaCruces: TWideStringField
+      FieldName = 'Cruces'
+      ReadOnly = True
+      Size = 255
+    end
+    object QuCruceAulaCantidad: TIntegerField
       FieldKind = fkLookup
       FieldName = 'Cantidad'
       LookupDataSet = SourceDataModule.TbAulaTipo
@@ -646,7 +678,7 @@ inherited HorarioForm: THorarioForm
       Visible = False
       Lookup = True
     end
-    object QuCruceAulaNomDia: TStringField
+    object QuCruceAulaNomDia: TWideStringField
       DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
@@ -658,7 +690,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuCruceAulaNomHora: TStringField
+    object QuCruceAulaNomHora: TWideStringField
       DisplayLabel = 'Hora'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -672,59 +704,121 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuCruceAulaDetalle: TSqlitePassDataset [6]
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterFields = 'CodAulaTipo;CodDia;CodHora'
+  object QuCruceAulaDetalle: TZQuery [6]
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario;CodAulaTipo;CodDia;CodHora'
+    SQL.Strings = (
+      'SELECT'
+      '  HorarioDetalle.CodHorario,'
+      '  Distributivo.CodAulaTipo,'
+      '  HorarioDetalle.CodDia,'
+      '  HorarioDetalle.CodHora,'
+      '  HorarioDetalle.CodNivel,'
+      '  HorarioDetalle.CodEspecializacion,'
+      '  HorarioDetalle.CodParaleloId,'
+      '  Materia.NomMateria'
+      'FROM'
+      '  (HorarioDetalle INNER JOIN Distributivo ON'
+      '        HorarioDetalle.CodMateria=Distributivo.CodMateria'
+      '    AND HorarioDetalle.CodNivel=Distributivo.CodNivel'
+      
+        '    AND HorarioDetalle.CodEspecializacion=Distributivo.CodEspeci' +
+        'alizacion'
+      '    AND HorarioDetalle.CodParaleloId=Distributivo.CodParaleloId)'
+      
+        '  INNER JOIN Materia ON HorarioDetalle.CodMateria=Materia.CodMat' +
+        'eria'
+      'WHERE (HorarioDetalle.CodHorario=:CodHorario)'
+      '  AND (HorarioDetalle.CodDia=:CodDia)'
+      '  AND (HorarioDetalle.CodHora=:CodHora)'
+      '  AND (Distributivo.CodAulaTipo=:CodAulaTipo)'
+      'ORDER BY'
+      '  HorarioDetalle.CodNivel,'
+      '  HorarioDetalle.CodEspecializacion,'
+      '  HorarioDetalle.CodParaleloId,'
+      '  Materia.NomMateria')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodDia'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodHora'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodAulaTipo'
+        ParamType = ptUnknown
+      end>
+    DataSource = DSCruceAula
+    MasterFields = 'CodHorario;CodAulaTipo;CodDia;CodHora'
     MasterSource = DSCruceAula
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
-    Left = 116
-    Top = 168
-    pParams = ()
-    object QuCruceAulaDetalleCodHora: TLargeintField
-      FieldName = 'CodHora'
-      Visible = False
+    LinkedFields = 'CodHorario;CodAulaTipo;CodDia;CodHora'
+    IndexFieldNames = 'CodHorario Asc;CodAulaTipo Asc;CodDia Asc;CodHora Asc'
+    Left = 314
+    Top = 160
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodDia'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodHora'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodAulaTipo'
+        ParamType = ptUnknown
+      end>
+    object QuCruceAulaDetalleCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+      ReadOnly = True
     end
-    object QuCruceAulaDetalleCodDia: TLargeintField
-      FieldName = 'CodDia'
-      Visible = False
-    end
-    object QuCruceAulaDetalleCodAulaTipo: TLargeintField
+    object QuCruceAulaDetalleCodAulaTipo: TIntegerField
       FieldName = 'CodAulaTipo'
-      Visible = False
+      ReadOnly = True
     end
-    object QuCruceAulaDetalleCodNivel: TLargeintField
+    object QuCruceAulaDetalleCodDia: TIntegerField
+      FieldName = 'CodDia'
+      ReadOnly = True
+    end
+    object QuCruceAulaDetalleCodHora: TIntegerField
+      FieldName = 'CodHora'
+      ReadOnly = True
+    end
+    object QuCruceAulaDetalleCodNivel: TIntegerField
       FieldName = 'CodNivel'
       Visible = False
     end
-    object QuCruceAulaDetalleCodEspecializacion: TLargeintField
+    object QuCruceAulaDetalleCodEspecializacion: TIntegerField
       FieldName = 'CodEspecializacion'
       Visible = False
     end
-    object QuCruceAulaDetalleCodParaleloId: TLargeintField
+    object QuCruceAulaDetalleCodParaleloId: TIntegerField
       FieldName = 'CodParaleloId'
       Visible = False
     end
-    object QuCruceAulaDetalleNomMateria: TStringField
+    object QuCruceAulaDetalleNomMateria: TWideStringField
       DisplayLabel = 'Materia'
       FieldName = 'NomMateria'
     end
-    object QuCruceAulaDetalleAbrNivel: TStringField
+    object QuCruceAulaDetalleAbrNivel: TWideStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -736,7 +830,7 @@ inherited HorarioForm: THorarioForm
       Size = 5
       Lookup = True
     end
-    object QuCruceAulaDetalleAbrEspecializacion: TStringField
+    object QuCruceAulaDetalleAbrEspecializacion: TWideStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -749,7 +843,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuCruceAulaDetalleNomParaleloId: TStringField
+    object QuCruceAulaDetalleNomParaleloId: TWideStringField
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
@@ -763,71 +857,107 @@ inherited HorarioForm: THorarioForm
   end
   object DSCruceAula: TDataSource [7]
     DataSet = QuCruceAula
-    Left = 116
-    Top = 140
+    Left = 313
+    Top = 112
   end
-  object QuCruceProfesorDetalle: TSqlitePassDataset [8]
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
-    Left = 116
-    Top = 196
-    pParams = ()
-    object QuCruceProfesorDetalleCodProfesor: TLargeintField
+  object QuCruceProfesorDetalle: TZQuery [8]
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario;CodProfesor'
+    SQL.Strings = (
+      'SELECT DISTINCT'
+      '  HorarioDetalle.CodHorario,'
+      '  Distributivo.CodProfesor,'
+      '  HorarioDetalle.CodDia,'
+      '  HorarioDetalle.CodHora,'
+      '  Distributivo.CodNivel,'
+      '  Distributivo.CodEspecializacion,'
+      '  Distributivo.CodParaleloId,'
+      '  Distributivo.CodMateria'
+      'FROM (Distributivo'
+      '  INNER JOIN HorarioDetalle'
+      '   ON (Distributivo.CodNivel = HorarioDetalle.CodNivel)'
+      
+        '  AND (Distributivo.CodEspecializacion = HorarioDetalle.CodEspec' +
+        'ializacion)'
+      
+        '  AND (Distributivo.CodParaleloId = HorarioDetalle.CodParaleloId' +
+        ')'
+      '  AND (Distributivo.CodMateria = HorarioDetalle.CodMateria))'
+      'WHERE HorarioDetalle.CodHorario=:CodHorario'
+      '  AND Distributivo.CodProfesor=:CodProfesor')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodProfesor'
+        ParamType = ptUnknown
+      end>
+    DataSource = DSCruceProfesor
+    MasterFields = 'CodHorario;CodProfesor'
+    MasterSource = DSCruceProfesor
+    LinkedFields = 'CodHorario;CodProfesor'
+    IndexFieldNames = 'CodHorario Asc;CodProfesor Asc'
+    Left = 423
+    Top = 160
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodProfesor'
+        ParamType = ptUnknown
+      end>
+    object QuCruceProfesorDetalleCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+      ReadOnly = True
+    end
+    object QuCruceProfesorDetalleCodProfesor: TIntegerField
       FieldName = 'CodProfesor'
       Required = True
       Visible = False
     end
-    object QuCruceProfesorDetalleCodDia: TLargeintField
+    object QuCruceProfesorDetalleCodDia: TIntegerField
       FieldName = 'CodDia'
       Required = True
       Visible = False
     end
-    object QuCruceProfesorDetalleCodHora: TLargeintField
+    object QuCruceProfesorDetalleCodHora: TIntegerField
       FieldName = 'CodHora'
       Required = True
       Visible = False
     end
-    object QuCruceProfesorDetalleCodNivel: TLargeintField
+    object QuCruceProfesorDetalleCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
       Required = True
       Visible = False
     end
-    object QuCruceProfesorDetalleCodEspecializacion: TLargeintField
+    object QuCruceProfesorDetalleCodEspecializacion: TIntegerField
       DisplayLabel = 'Espec.'
       FieldName = 'CodEspecializacion'
       Required = True
       Visible = False
     end
-    object QuCruceProfesorDetalleCodParaleloId: TLargeintField
+    object QuCruceProfesorDetalleCodParaleloId: TIntegerField
       DisplayLabel = 'Tipo de paralelo'
       FieldName = 'CodParaleloId'
       Required = True
       Visible = False
     end
-    object QuCruceProfesorDetalleCodMateria: TLargeintField
+    object QuCruceProfesorDetalleCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
       Required = True
       Visible = False
     end
-    object QuCruceProfesorDetalleAbrNivel: TStringField
+    object QuCruceProfesorDetalleAbrNivel: TWideStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -839,7 +969,7 @@ inherited HorarioForm: THorarioForm
       Size = 5
       Lookup = True
     end
-    object QuCruceProfesorDetalleAbrEspecializacion: TStringField
+    object QuCruceProfesorDetalleAbrEspecializacion: TWideStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -852,7 +982,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuCruceProfesorDetalleNomParaleloId: TStringField
+    object QuCruceProfesorDetalleNomParaleloId: TWideStringField
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
@@ -863,7 +993,7 @@ inherited HorarioForm: THorarioForm
       Size = 5
       Lookup = True
     end
-    object QuCruceProfesorDetalleNomMateria: TStringField
+    object QuCruceProfesorDetalleNomMateria: TWideStringField
       DisplayLabel = 'Materia'
       DisplayWidth = 15
       FieldKind = fkLookup
@@ -876,64 +1006,91 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuCruceProfesor: TSqlitePassDataset [9]
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
+  object QuCruceProfesor: TZQuery [9]
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario'
     AfterScroll = QuCruceProfesorAfterScroll
-    Left = 88
-    Top = 196
-    pParams = ()
-    object QuCruceProfesorCodProfesor: TLargeintField
+    SQL.Strings = (
+      'SELECT DISTINCT'
+      '  HorarioDetalle.CodHorario,'
+      '  Distributivo.CodProfesor,'
+      '  HorarioDetalle.CodDia,'
+      '  HorarioDetalle.CodHora,'
+      '  Profesor.ApeProfesor,'
+      '  Profesor.NomProfesor,'
+      '  Count(*) AS Cruces'
+      'FROM (Distributivo'
+      '  INNER JOIN HorarioDetalle ON'
+      '       (Distributivo.CodMateria = HorarioDetalle.CodMateria)'
+      #9' AND (Distributivo.CodNivel = HorarioDetalle.CodNivel)'
+      
+        #9' AND (Distributivo.CodEspecializacion = HorarioDetalle.CodEspec' +
+        'ializacion)'
+      
+        #9' AND (Distributivo.CodParaleloId = HorarioDetalle.CodParaleloId' +
+        '))'
+      
+        '  INNER JOIN Profesor ON Distributivo.CodProfesor = Profesor.Cod' +
+        'Profesor'
+      'WHERE HorarioDetalle.CodHorario=:CodHorario'
+      'GROUP BY'
+      '  HorarioDetalle.CodHorario,'
+      '  Distributivo.CodProfesor,'
+      '  Profesor.ApeProfesor,'
+      '  Profesor.NomProfesor,'
+      '  HorarioDetalle.CodDia,'
+      '  HorarioDetalle.CodHora'
+      'HAVING Count(*) > 1'
+      'ORDER BY Profesor.ApeProfesor, Profesor.NomProfesor')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSHorario
+    MasterFields = 'CodHorario'
+    MasterSource = SourceDataModule.DSHorario
+    LinkedFields = 'CodHorario'
+    IndexFieldNames = 'CodHorario Asc'
+    Left = 424
+    Top = 63
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    object QuCruceProfesorCodHorario: TIntegerField
+      DisplayLabel = 'Horario'
+      FieldName = 'CodHorario'
+      Required = True
+    end
+    object QuCruceProfesorCodProfesor: TIntegerField
       FieldName = 'CodProfesor'
       Visible = False
     end
-    object QuCruceProfesorCodHora: TLargeintField
+    object QuCruceProfesorCodHora: TIntegerField
       FieldName = 'CodHora'
       Visible = False
     end
-    object QuCruceProfesorCodDia: TLargeintField
+    object QuCruceProfesorCodDia: TIntegerField
       FieldName = 'CodDia'
       Visible = False
     end
-    object QuCruceProfesorApeProfesor: TStringField
+    object QuCruceProfesorApeProfesor: TWideStringField
       DisplayLabel = 'Apellido'
-      FieldKind = fkLookup
       FieldName = 'ApeProfesor'
-      LookupDataSet = SourceDataModule.TbProfesor
-      LookupKeyFields = 'CodProfesor'
-      LookupResultField = 'ApeProfesor'
-      KeyFields = 'CodProfesor'
+      Required = True
       Size = 15
-      Lookup = True
     end
-    object QuCruceProfesorNomProfesor: TStringField
+    object QuCruceProfesorNomProfesor: TWideStringField
       DisplayLabel = 'Nombre'
-      FieldKind = fkLookup
       FieldName = 'NomProfesor'
-      LookupDataSet = SourceDataModule.TbProfesor
-      LookupKeyFields = 'CodProfesor'
-      LookupResultField = 'NomProfesor'
-      KeyFields = 'CodProfesor'
+      Required = True
       Size = 15
-      Lookup = True
     end
-    object QuCruceProfesorNomHora: TStringField
+    object QuCruceProfesorNomHora: TWideStringField
       DisplayLabel = 'Hora'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -946,7 +1103,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuCruceProfesorNomDia: TStringField
+    object QuCruceProfesorNomDia: TWideStringField
       DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
@@ -958,95 +1115,156 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuCruceProfesorCruces: TLargeintField
+    object QuCruceProfesorCruces: TWideStringField
       FieldName = 'Cruces'
+      ReadOnly = True
+      Size = 255
     end
   end
-  object QuCruceMateria: TSqlitePassDataset [10]
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
+  object QuCruceMateria: TZQuery [10]
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario'
     AfterScroll = QuCruceMateriaAfterScroll
-    Left = 88
-    Top = 224
-    pParams = ()
-    object QuCruceMateriaCodMateria: TLargeintField
+    SQL.Strings = (
+      'SELECT DISTINCT'
+      '  HorarioDetalle.CodHorario,'
+      '  HorarioDetalle.CodMateria,'
+      '  Materia.NomMateria'
+      'FROM'
+      '  (HorarioDetalle'
+      '  INNER JOIN HorarioDetalle as HorarioDetalle1'
+      '    ON (HorarioDetalle.CodHorario=HorarioDetalle1.CodHorario)'
+      '    AND (HorarioDetalle.CodNivel=HorarioDetalle1.CodNivel)'
+      
+        '    AND (HorarioDetalle.CodParaleloId=HorarioDetalle1.CodParalel' +
+        'oId)'
+      '    AND (HorarioDetalle.CodDia=HorarioDetalle1.CodDia)'
+      '    AND (HorarioDetalle.CodMateria=HorarioDetalle1.CodMateria))'
+      '  INNER JOIN Materia'
+      '    ON (HorarioDetalle.CodMateria=Materia.CodMateria)'
+      'WHERE (HorarioDetalle.Sesion<>HorarioDetalle1.Sesion)'
+      '  AND (HorarioDetalle.CodHorario=:CodHorario)'
+      'ORDER BY Materia.NomMateria')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSHorario
+    MasterFields = 'CodHorario'
+    MasterSource = SourceDataModule.DSHorario
+    LinkedFields = 'CodHorario'
+    IndexFieldNames = 'CodHorario Asc'
+    Left = 541
+    Top = 64
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    object QuCruceMateriaCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+      ReadOnly = True
+    end
+    object QuCruceMateriaCodMateria: TIntegerField
       FieldName = 'CodMateria'
       Required = True
       Visible = False
     end
-    object QuCruceMateriaNomMateria: TStringField
+    object QuCruceMateriaNomMateria: TWideStringField
       DisplayLabel = 'Materia'
       DisplayWidth = 20
       FieldName = 'NomMateria'
     end
   end
-  object QuCruceMateriaDetalle: TSqlitePassDataset [11]
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
-    Left = 116
-    Top = 224
-    pParams = ()
-    object QuCruceMateriaDetalleCodMateria: TLargeintField
+  object QuCruceMateriaDetalle: TZQuery [11]
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario;CodMateria'
+    SQL.Strings = (
+      'SELECT DISTINCT'
+      '  HorarioDetalle.CodHorario,'
+      '  HorarioDetalle.CodMateria,'
+      '  HorarioDetalle.CodNivel,'
+      '  HorarioDetalle.CodEspecializacion,'
+      '  HorarioDetalle.CodParaleloId,'
+      '  HorarioDetalle.CodDia,'
+      '  HorarioDetalle.CodHora'
+      'FROM'
+      '  HorarioDetalle'
+      '  INNER JOIN HorarioDetalle as HorarioDetalle1'
+      '    ON (HorarioDetalle.CodHorario=HorarioDetalle1.CodHorario)'
+      '    AND (HorarioDetalle.CodNivel=HorarioDetalle1.CodNivel)'
+      
+        '    AND (HorarioDetalle.CodParaleloId=HorarioDetalle1.CodParalel' +
+        'oId)'
+      '    AND (HorarioDetalle.CodDia=HorarioDetalle1.CodDia)'
+      '    AND (HorarioDetalle.CodMateria=HorarioDetalle1.CodMateria)'
+      'WHERE (HorarioDetalle.Sesion<>HorarioDetalle1.Sesion)'
+      '  AND (HorarioDetalle.CodHorario=:CodHorario)'
+      '  AND (HorarioDetalle.CodMateria=:CodMateria)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodMateria'
+        ParamType = ptUnknown
+      end>
+    DataSource = DSCruceMateria
+    MasterFields = 'CodHorario;CodMateria'
+    MasterSource = DSCruceMateria
+    LinkedFields = 'CodHorario;CodMateria'
+    IndexFieldNames = 'CodHorario Asc;CodMateria Asc'
+    Left = 540
+    Top = 160
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodMateria'
+        ParamType = ptUnknown
+      end>
+    object QuCruceMateriaDetalleCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+    end
+    object QuCruceMateriaDetalleCodMateria: TIntegerField
       FieldName = 'CodMateria'
       Required = True
       Visible = False
     end
-    object QuCruceMateriaDetalleCodNivel: TLargeintField
+    object QuCruceMateriaDetalleCodNivel: TIntegerField
       FieldName = 'CodNivel'
       Visible = False
     end
-    object QuCruceMateriaDetalleCodEspecializacion: TLargeintField
+    object QuCruceMateriaDetalleCodEspecializacion: TIntegerField
       FieldName = 'CodEspecializacion'
       Visible = False
     end
-    object QuCruceMateriaDetalleCodParaleloId: TLargeintField
+    object QuCruceMateriaDetalleCodParaleloId: TIntegerField
       FieldName = 'CodParaleloId'
       Visible = False
     end
-    object QuCruceMateriaDetalleCodDia: TLargeintField
+    object QuCruceMateriaDetalleCodDia: TIntegerField
       DisplayLabel = 'Dia'
       FieldName = 'CodDia'
       Required = True
       Visible = False
     end
-    object QuCruceMateriaDetalleCodHora: TLargeintField
+    object QuCruceMateriaDetalleCodHora: TIntegerField
       FieldName = 'CodHora'
       Required = True
       Visible = False
     end
-    object QuCruceMateriaDetalleAbrNivel: TStringField
+    object QuCruceMateriaDetalleAbrNivel: TWideStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1058,7 +1276,7 @@ inherited HorarioForm: THorarioForm
       Size = 5
       Lookup = True
     end
-    object QuCruceMateriaDetalleAbrEspecializacion: TStringField
+    object QuCruceMateriaDetalleAbrEspecializacion: TWideStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1071,7 +1289,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuCruceMateriaDetalleNomParaleloId: TStringField
+    object QuCruceMateriaDetalleNomParaleloId: TWideStringField
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
@@ -1082,7 +1300,7 @@ inherited HorarioForm: THorarioForm
       Size = 5
       Lookup = True
     end
-    object QuCruceMateriaDetalleNomDia: TStringField
+    object QuCruceMateriaDetalleNomDia: TWideStringField
       DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
@@ -1094,7 +1312,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuCruceMateriaDetalleNomHora: TStringField
+    object QuCruceMateriaDetalleNomHora: TWideStringField
       DisplayLabel = 'Hora'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1108,29 +1326,60 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuHorarioDetalleMateriaProhibicion: TSqlitePassDataset [12]
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
-    Left = 60
-    Top = 168
-    pParams = ()
-    object QuHorarioDetalleMateriaProhibicionNomMateProhibicionTipo: TStringField
+  object QuHorarioDetalleMateriaProhibicion: TZQuery [12]
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario'
+    SQL.Strings = (
+      'SELECT DISTINCT'
+      '  HorarioDetalle.CodHorario,'
+      '  MateriaProhibicion.CodMateProhibicionTipo,'
+      '  Materia.NomMateria,'
+      '  MateriaProhibicion.CodDia,'
+      '  MateriaProhibicion.CodHora,'
+      '  HorarioDetalle.CodNivel,'
+      '  HorarioDetalle.CodEspecializacion,'
+      '  HorarioDetalle.CodParaleloId'
+      'FROM'
+      '  ((HorarioDetalle INNER JOIN MateriaProhibicion'
+      '  ON (HorarioDetalle.CodMateria=MateriaProhibicion.CodMateria)'
+      '  AND (HorarioDetalle.CodDia=MateriaProhibicion.CodDia)'
+      '  AND (HorarioDetalle.CodHora=MateriaProhibicion.CodHora))'
+      
+        '  INNER JOIN MateriaProhibicionTipo ON MateriaProhibicion.CodMat' +
+        'eProhibicionTipo=MateriaProhibicionTipo.CodMateProhibicionTipo)'
+      
+        '  INNER JOIN Materia ON Materia.CodMateria=HorarioDetalle.CodMat' +
+        'eria'
+      'WHERE HorarioDetalle.CodHorario=:CodHorario'
+      'ORDER BY '
+      '  MateriaProhibicion.CodMateProhibicionTipo DESC,'
+      '  Materia.NomMateria,'
+      '  MateriaProhibicion.CodDia,'
+      '  MateriaProhibicion.CodHora')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSHorario
+    MasterFields = 'CodHorario'
+    MasterSource = SourceDataModule.DSHorario
+    LinkedFields = 'CodHorario'
+    IndexFieldNames = 'CodHorario Asc'
+    Left = 224
+    Top = 212
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    object QuHorarioDetalleMateriaProhibicionCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+      ReadOnly = True
+    end
+    object QuHorarioDetalleMateriaProhibicionNomMateProhibicionTipo: TWideStringField
       DisplayLabel = 'Tipo prohib. mat.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1143,35 +1392,35 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuHorarioDetalleMateriaProhibicionNomMateria: TStringField
+    object QuHorarioDetalleMateriaProhibicionNomMateria: TWideStringField
       DisplayLabel = 'Materia'
       FieldName = 'NomMateria'
     end
-    object QuHorarioDetalleMateriaProhibicionCodHora: TLargeintField
+    object QuHorarioDetalleMateriaProhibicionCodHora: TIntegerField
       FieldName = 'CodHora'
       Visible = False
     end
-    object QuHorarioDetalleMateriaProhibicionCodDia: TLargeintField
+    object QuHorarioDetalleMateriaProhibicionCodDia: TIntegerField
       FieldName = 'CodDia'
       Visible = False
     end
-    object QuHorarioDetalleMateriaProhibicionCodMateProhibicionTipo: TLargeintField
+    object QuHorarioDetalleMateriaProhibicionCodMateProhibicionTipo: TIntegerField
       FieldName = 'CodMateProhibicionTipo'
       Visible = False
     end
-    object QuHorarioDetalleMateriaProhibicionCodNivel: TLargeintField
+    object QuHorarioDetalleMateriaProhibicionCodNivel: TIntegerField
       FieldName = 'CodNivel'
       Visible = False
     end
-    object QuHorarioDetalleMateriaProhibicionCodEspecializacion: TLargeintField
+    object QuHorarioDetalleMateriaProhibicionCodEspecializacion: TIntegerField
       FieldName = 'CodEspecializacion'
       Visible = False
     end
-    object QuHorarioDetalleMateriaProhibicionCodParaleloId: TLargeintField
+    object QuHorarioDetalleMateriaProhibicionCodParaleloId: TIntegerField
       FieldName = 'CodParaleloId'
       Visible = False
     end
-    object QuHorarioDetalleMateriaProhibicionNomDia: TStringField
+    object QuHorarioDetalleMateriaProhibicionNomDia: TWideStringField
       DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
@@ -1183,7 +1432,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuHorarioDetalleMateriaProhibicionNomHora: TStringField
+    object QuHorarioDetalleMateriaProhibicionNomHora: TWideStringField
       DisplayLabel = 'Hora'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1196,7 +1445,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuHorarioDetalleMateriaProhibicionAbrNivel: TStringField
+    object QuHorarioDetalleMateriaProhibicionAbrNivel: TWideStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1208,7 +1457,7 @@ inherited HorarioForm: THorarioForm
       Size = 5
       Lookup = True
     end
-    object QuHorarioDetalleMateriaProhibicionAbrEspecializacion: TStringField
+    object QuHorarioDetalleMateriaProhibicionAbrEspecializacion: TWideStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1221,7 +1470,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuHorarioDetalleMateriaProhibicionNomParaleloId: TStringField
+    object QuHorarioDetalleMateriaProhibicionNomParaleloId: TWideStringField
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
@@ -1233,29 +1482,114 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuHorarioDetalleProfesorProhibicion: TSqlitePassDataset [13]
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
-    Left = 60
-    Top = 196
-    pParams = ()
-    object QuHorarioDetalleProfesorProhibicionNomProfProhibicionTipo: TStringField
+  object QuHorarioDetalleProfesorProhibicion: TZQuery [13]
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario'
+    SQL.Strings = (
+      'SELECT DISTINCT'
+      '  HorarioDetalle.CodHorario,'
+      '  ProfesorProhibicion.CodProfProhibicionTipo,'
+      '  Profesor.ApeProfesor,'
+      '  Profesor.NomProfesor,'
+      '  ProfesorProhibicion.CodDia,'
+      '  ProfesorProhibicion.CodHora,'
+      '  Distributivo.CodNivel,'
+      '  Distributivo.CodEspecializacion,'
+      '  Distributivo.CodParaleloId'
+      'FROM'
+      '  ((HorarioDetalle INNER JOIN Distributivo'
+      '  ON (HorarioDetalle.CodMateria=Distributivo.CodMateria)'
+      '  AND (HorarioDetalle.CodNivel=Distributivo.CodNivel)'
+      
+        '  AND (HorarioDetalle.CodEspecializacion=Distributivo.CodEspecia' +
+        'lizacion)'
+      '  AND (HorarioDetalle.CodParaleloId=Distributivo.CodParaleloId))'
+      '  INNER JOIN ProfesorProhibicion'
+      '  ON (ProfesorProhibicion.CodDia=HorarioDetalle.CodDia)'
+      '  AND (ProfesorProhibicion.CodHora=HorarioDetalle.CodHora)'
+      
+        '  AND (ProfesorProhibicion.CodProfesor=Distributivo.CodProfesor)' +
+        ')'
+      
+        '  INNER JOIN Profesor ON Profesor.CodProfesor=ProfesorProhibicio' +
+        'n.CodProfesor'
+      'WHERE'
+      '  HorarioDetalle.CodHorario=:CodHorario'
+      'ORDER BY'
+      '  ProfesorProhibicion.CodProfProhibicionTipo DESC,'
+      '  Profesor.ApeProfesor, Profesor.NomProfesor,'
+      '  ProfesorProhibicion.CodDia,'
+      '  ProfesorProhibicion.CodHora')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSHorario
+    MasterFields = 'CodHorario'
+    MasterSource = SourceDataModule.DSHorario
+    LinkedFields = 'CodHorario'
+    IndexFieldNames = 'CodHorario Asc'
+    Left = 401
+    Top = 212
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    object QuHorarioDetalleProfesorProhibicionCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+      ReadOnly = True
+    end
+    object QuHorarioDetalleProfesorProhibicionCodProfProhibicionTipo: TIntegerField
+      FieldName = 'CodProfProhibicionTipo'
+      Visible = False
+    end
+    object QuHorarioDetalleProfesorProhibicionApeProfesor: TWideStringField
+      FieldName = 'ApeProfesor'
+      Required = True
+      Size = 15
+    end
+    object QuHorarioDetalleProfesorProhibicionNomProfesor: TWideStringField
+      FieldName = 'NomProfesor'
+      Required = True
+      Size = 15
+    end
+    object QuHorarioDetalleProfesorProhibicionCodDia: TIntegerField
+      FieldName = 'CodDia'
+      Visible = False
+    end
+    object QuHorarioDetalleProfesorProhibicionCodHora: TIntegerField
+      FieldName = 'CodHora'
+      Visible = False
+    end
+    object QuHorarioDetalleProfesorProhibicionCodNivel: TIntegerField
+      FieldName = 'CodNivel'
+      Visible = False
+    end
+    object QuHorarioDetalleProfesorProhibicionCodEspecializacion: TIntegerField
+      FieldName = 'CodEspecializacion'
+      Visible = False
+    end
+    object QuHorarioDetalleProfesorProhibicionCodParaleloId: TIntegerField
+      FieldName = 'CodParaleloId'
+      Visible = False
+    end
+    object QuHorarioDetalleProfesorProhibicionNomDia: TWideStringField
+      DisplayLabel = 'Dia'
+      FieldKind = fkLookup
+      FieldName = 'NomDia'
+      LookupDataSet = SourceDataModule.TbDia
+      LookupKeyFields = 'CodDia'
+      LookupResultField = 'NomDia'
+      KeyFields = 'CodDia'
+      Required = True
+      Size = 10
+      Lookup = True
+    end
+    object QuHorarioDetalleProfesorProhibicionNomProfProhibicionTipo: TWideStringField
       DisplayLabel = 'Tipo prohib. prof.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1268,59 +1602,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuHorarioDetalleProfesorProhibicionApeNomProfesor: TStringField
-      DisplayLabel = 'Apellido'
-      DisplayWidth = 31
-      FieldName = 'ApeNomProfesor'
-      LookupDataSet = SourceDataModule.TbProfesor
-      LookupKeyFields = 'CodProfesor'
-      LookupResultField = 'ApeNomProfesor'
-      KeyFields = 'CodProfesor'
-      Size = 31
-    end
-    object QuHorarioDetalleProfesorProhibicionCodProfesor: TLargeintField
-      DisplayLabel = 'Profesor'
-      FieldName = 'CodProfesor'
-      Required = True
-      Visible = False
-    end
-    object QuHorarioDetalleProfesorProhibicionCodDia: TLargeintField
-      FieldName = 'CodDia'
-      Visible = False
-    end
-    object QuHorarioDetalleProfesorProhibicionCodHora: TLargeintField
-      FieldName = 'CodHora'
-      Visible = False
-    end
-    object QuHorarioDetalleProfesorProhibicionCodProfProhibicionTipo: TLargeintField
-      FieldName = 'CodProfProhibicionTipo'
-      Visible = False
-    end
-    object QuHorarioDetalleProfesorProhibicionCodNivel: TLargeintField
-      FieldName = 'CodNivel'
-      Visible = False
-    end
-    object QuHorarioDetalleProfesorProhibicionCodEspecializacion: TLargeintField
-      FieldName = 'CodEspecializacion'
-      Visible = False
-    end
-    object QuHorarioDetalleProfesorProhibicionCodParaleloId: TLargeintField
-      FieldName = 'CodParaleloId'
-      Visible = False
-    end
-    object QuHorarioDetalleProfesorProhibicionNomDia: TStringField
-      DisplayLabel = 'Dia'
-      FieldKind = fkLookup
-      FieldName = 'NomDia'
-      LookupDataSet = SourceDataModule.TbDia
-      LookupKeyFields = 'CodDia'
-      LookupResultField = 'NomDia'
-      KeyFields = 'CodDia'
-      Required = True
-      Size = 10
-      Lookup = True
-    end
-    object QuHorarioDetalleProfesorProhibicionNomHora: TStringField
+    object QuHorarioDetalleProfesorProhibicionNomHora: TWideStringField
       DisplayLabel = 'Hora'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1333,7 +1615,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuHorarioDetalleProfesorProhibicionNomNivel: TStringField
+    object QuHorarioDetalleProfesorProhibicionNomNivel: TWideStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1345,7 +1627,7 @@ inherited HorarioForm: THorarioForm
       Size = 5
       Lookup = True
     end
-    object QuHorarioDetalleProfesorProhibicionNomEspecializacion: TStringField
+    object QuHorarioDetalleProfesorProhibicionNomEspecializacion: TWideStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1358,7 +1640,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuHorarioDetalleProfesorProhibicionNomParaleloId: TStringField
+    object QuHorarioDetalleProfesorProhibicionNomParaleloId: TWideStringField
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
@@ -1370,54 +1652,80 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuMateriaCortadaDia: TSqlitePassDataset [14]
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
+  object QuMateriaCortadaDia: TZQuery [14]
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario'
     AfterScroll = QuCruceMateriaAfterScroll
-    Left = 60
-    Top = 224
-    pParams = ()
-    object QuMateriaCortadaDiaCodNivel: TLargeintField
+    SQL.Strings = (
+      'SELECT DISTINCT'
+      '  HorarioDetalle.CodHorario,'
+      '  HorarioDetalle.CodNivel,'
+      '  HorarioDetalle.CodEspecializacion,'
+      '  HorarioDetalle.CodParaleloId,'
+      '  HorarioDetalle.CodDia,'
+      '  HorarioDetalle.CodHora,'
+      '  HorarioDetalle.CodMateria'
+      'FROM'
+      '  HorarioDetalle'
+      '  INNER JOIN HorarioDetalle HorarioDetalle1'
+      '    ON (HorarioDetalle.CodHorario=HorarioDetalle1.CodHorario)'
+      '    AND (HorarioDetalle.CodNivel=HorarioDetalle1.CodNivel)'
+      
+        '    AND (HorarioDetalle.CodParaleloId=HorarioDetalle1.CodParalel' +
+        'oId)'
+      '    AND (HorarioDetalle.Sesion=HorarioDetalle1.Sesion)'
+      '    AND (HorarioDetalle.CodMateria=HorarioDetalle1.CodMateria)'
+      'WHERE (HorarioDetalle.CodHorario=:CodHorario)'
+      '  AND (HorarioDetalle.CodDia<>HorarioDetalle1.CodDia)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSHorario
+    MasterFields = 'CodHorario'
+    MasterSource = SourceDataModule.DSHorario
+    LinkedFields = 'CodHorario'
+    IndexFieldNames = 'CodHorario Asc'
+    Left = 544
+    Top = 212
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    object QuMateriaCortadaDiaCodHorario: TIntegerField
+      DisplayLabel = 'Horario'
+      FieldName = 'CodHorario'
+      Required = True
+    end
+    object QuMateriaCortadaDiaCodNivel: TIntegerField
       FieldName = 'CodNivel'
       Visible = False
     end
-    object QuMateriaCortadaDiaCodEspecializacion: TLargeintField
+    object QuMateriaCortadaDiaCodEspecializacion: TIntegerField
       FieldName = 'CodEspecializacion'
       Visible = False
     end
-    object QuMateriaCortadaDiaCodParaleloId: TLargeintField
+    object QuMateriaCortadaDiaCodParaleloId: TIntegerField
       FieldName = 'CodParaleloId'
       Visible = False
     end
-    object QuMateriaCortadaDiaCodDia: TLargeintField
+    object QuMateriaCortadaDiaCodDia: TIntegerField
       FieldName = 'CodDia'
       Visible = False
     end
-    object QuMateriaCortadaDiaCodHora: TLargeintField
+    object QuMateriaCortadaDiaCodHora: TIntegerField
       FieldName = 'CodHora'
       Visible = False
     end
-    object QuMateriaCortadaDiaCodMateria: TLargeintField
+    object QuMateriaCortadaDiaCodMateria: TIntegerField
       FieldName = 'CodMateria'
       Visible = False
     end
-    object QuMateriaCortadaDiaAbrNivel: TStringField
+    object QuMateriaCortadaDiaAbrNivel: TWideStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1429,7 +1737,7 @@ inherited HorarioForm: THorarioForm
       Size = 5
       Lookup = True
     end
-    object QuMateriaCortadaDiaAbrEspecializacion: TStringField
+    object QuMateriaCortadaDiaAbrEspecializacion: TWideStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1442,7 +1750,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuMateriaCortadaDiaNomParaleloId: TStringField
+    object QuMateriaCortadaDiaNomParaleloId: TWideStringField
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
@@ -1453,7 +1761,7 @@ inherited HorarioForm: THorarioForm
       Size = 5
       Lookup = True
     end
-    object QuMateriaCortadaDiaNomDia: TStringField
+    object QuMateriaCortadaDiaNomDia: TWideStringField
       DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
@@ -1465,7 +1773,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuMateriaCortadaDiaNomHora: TStringField
+    object QuMateriaCortadaDiaNomHora: TWideStringField
       DisplayLabel = 'Hora'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1478,7 +1786,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuMateriaCortadaDiaNomMateria: TStringField
+    object QuMateriaCortadaDiaNomMateria: TWideStringField
       DisplayLabel = 'Materia'
       DisplayWidth = 15
       FieldKind = fkLookup
@@ -1491,37 +1799,72 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuMateriaCortadaHora: TSqlitePassDataset [15]
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
-    Left = 60
-    Top = 252
-    pParams = ()
-    object QuMateriaCortadaHoraCodDia: TLargeintField
+  object QuMateriaCortadaHora: TZQuery [15]
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario'
+    SQL.Strings = (
+      'SELECT CodHorario, CodDia, CodHora'
+      'FROM Horario, Dia, Hora'
+      'WHERE'
+      '  CodHorario=:CodHorario'
+      '  AND'
+      ' ('
+      '  SELECT COUNT(*) FROM Periodo'
+      '  WHERE (Periodo.CodDia=Dia.CodDia)'
+      '    AND (Periodo.CodHora=Hora.CodHora)'
+      '  ) IS NULL'
+      '  AND ('
+      '  SELECT'
+      '    MAX(HorarioDetalle.CodHora)'
+      '  FROM'
+      '    HorarioDetalle'
+      '    INNER JOIN HorarioDetalle HorarioDetalle1'
+      '      ON (HorarioDetalle.CodHorario=HorarioDetalle1.CodHorario)'
+      '      AND (HorarioDetalle.CodNivel=HorarioDetalle1.CodNivel)'
+      
+        '      AND (HorarioDetalle.CodParaleloId=HorarioDetalle1.CodParal' +
+        'eloId)'
+      '      AND (HorarioDetalle.Sesion=HorarioDetalle1.Sesion)'
+      '      AND (HorarioDetalle.CodMateria=HorarioDetalle1.CodMateria)'
+      '      AND (HorarioDetalle.CodDia=HorarioDetalle1.CodDia)'
+      '    WHERE (HorarioDetalle.CodHorario=Horario.CodHorario)'
+      '      AND (HorarioDetalle.CodDia=Dia.CodDia)'
+      '      AND(HorarioDetalle.CodHora>Hora.CodHora)'
+      '      AND(HorarioDetalle1.CodHora<Hora.CodHora)'
+      '  ) IS NOT NULL')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSHorario
+    MasterFields = 'CodHorario'
+    MasterSource = SourceDataModule.DSHorario
+    LinkedFields = 'CodHorario'
+    IndexFieldNames = 'CodHorario Asc'
+    Left = 187
+    Top = 65
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    object QuMateriaCortadaHoraCodHorario: TIntegerField
+      DisplayLabel = 'Horario'
+      FieldName = 'CodHorario'
+      Required = True
+    end
+    object QuMateriaCortadaHoraCodDia: TIntegerField
       FieldName = 'CodDia'
       Visible = False
     end
-    object QuMateriaCortadaHoraCodHora: TLargeintField
+    object QuMateriaCortadaHoraCodHora: TIntegerField
       FieldName = 'CodHora'
       Visible = False
     end
-    object QuMateriaCortadaHoraNomDia: TStringField
+    object QuMateriaCortadaHoraNomDia: TWideStringField
       DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
@@ -1533,7 +1876,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuMateriaCortadaHoraNomHora: TStringField
+    object QuMateriaCortadaHoraNomHora: TWideStringField
       DisplayLabel = 'Hora'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1547,59 +1890,136 @@ inherited HorarioForm: THorarioForm
       Lookup = True
     end
   end
-  object QuMateriaCortadaHoraDetalle: TSqlitePassDataset [16]
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterFields = 'CodDia;CodHora'
+  object QuMateriaCortadaHoraDetalle: TZQuery [16]
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario;CodDia;CodHora'
+    SQL.Strings = (
+      'SELECT DISTINCT'
+      '  HorarioDetalle.CodHorario,'
+      '  HorarioDetalle.CodNivel,'
+      '  HorarioDetalle.CodEspecializacion,'
+      '  HorarioDetalle.CodParaleloId,'
+      '  HorarioDetalle.CodDia,'
+      '  HorarioDetalle.CodHora,'
+      '  HorarioDetalle1.CodHora as CodHora0,'
+      '  HorarioDetalle.CodMateria'
+      'FROM'
+      '  HorarioDetalle'
+      '  INNER JOIN HorarioDetalle HorarioDetalle1'
+      '    ON (HorarioDetalle.CodHorario=HorarioDetalle1.CodHorario)'
+      '    AND (HorarioDetalle.CodNivel=HorarioDetalle1.CodNivel)'
+      
+        '    AND (HorarioDetalle.CodParaleloId=HorarioDetalle1.CodParalel' +
+        'oId)'
+      '    AND (HorarioDetalle.Sesion=HorarioDetalle1.Sesion)'
+      '    AND (HorarioDetalle.CodMateria=HorarioDetalle1.CodMateria)'
+      '    AND (HorarioDetalle.CodDia=HorarioDetalle1.CodDia)'
+      'WHERE'
+      '  (HorarioDetalle.CodHorario=:CodHorario)'
+      '    AND (HorarioDetalle.CodDia=:CodDia)'
+      '    AND ((HorarioDetalle.CodHora>:CodHora)'
+      '     AND (HorarioDetalle1.CodHora<:CodHora)'
+      '     OR  (HorarioDetalle.CodHora<:CodHora)'
+      '     AND (HorarioDetalle1.CodHora>:CodHora))')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodDia'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodHora'
+        ParamType = ptUnknown
+      end>
+    Properties.Strings = (
+      'SELECT DISTINCT'
+      '  HorarioDetalle.CodNivel,'
+      '  HorarioDetalle.CodEspecializacion,'
+      '  HorarioDetalle.CodParaleloId,'
+      '  HorarioDetalle.CodDia,'
+      '  HorarioDetalle.CodHora,'
+      '  HorarioDetalle.CodMateria'
+      'FROM'
+      '  HorarioDetalle'
+      '  INNER JOIN HorarioDetalle HorarioDetalle1'
+      '    ON (HorarioDetalle.CodHorario=HorarioDetalle1.CodHorario)'
+      '    AND (HorarioDetalle.CodNivel=HorarioDetalle1.CodNivel)'
+      
+        '    AND (HorarioDetalle.CodParaleloId=HorarioDetalle1.CodParalel' +
+        'oId)'
+      '    AND (HorarioDetalle.Sesion=HorarioDetalle1.Sesion)'
+      '    AND (HorarioDetalle.CodMateria=HorarioDetalle1.CodMateria)'
+      '    AND (HorarioDetalle.CodDia=HorarioDetalle1.CodDia)'
+      'WHERE'
+      '  (HorarioDetalle.CodHorario=:CodHorario)'
+      '    AND(HorarioDetalle.CodDia=:CodDia)'
+      
+        '    AND((HorarioDetalle.CodHora>:CodHora)AND(HorarioDetalle1.Cod' +
+        'Hora<:CodHora)'
+      
+        '    OR(HorarioDetalle.CodHora<:CodHora)AND(HorarioDetalle1.CodHo' +
+        'ra>:CodHora))')
+    DataSource = DSMateriaCortadaHora
+    MasterFields = 'CodHorario;CodDia;CodHora'
     MasterSource = DSMateriaCortadaHora
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
-    Left = 88
-    Top = 252
-    pParams = ()
-    object QuMateriaCortadaHoraDetalleCodNivel: TLargeintField
+    LinkedFields = 'CodHorario;CodDia;CodHora'
+    IndexFieldNames = 'CodHorario Asc;CodDia Asc;CodHora Asc'
+    Left = 184
+    Top = 161
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodDia'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodHora'
+        ParamType = ptUnknown
+      end>
+    object QuMateriaCortadaHoraDetalleCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+    end
+    object QuMateriaCortadaHoraDetalleCodNivel: TIntegerField
       FieldName = 'CodNivel'
       Visible = False
     end
-    object QuMateriaCortadaHoraDetalleCodEspecializacion: TLargeintField
+    object QuMateriaCortadaHoraDetalleCodEspecializacion: TIntegerField
       FieldName = 'CodEspecializacion'
       Visible = False
     end
-    object QuMateriaCortadaHoraDetalleCodParaleloId: TLargeintField
+    object QuMateriaCortadaHoraDetalleCodParaleloId: TIntegerField
       FieldName = 'CodParaleloId'
       Visible = False
     end
-    object QuMateriaCortadaHoraDetalleCodDia: TLargeintField
+    object QuMateriaCortadaHoraDetalleCodDia: TIntegerField
       FieldName = 'CodDia'
       Visible = False
     end
-    object QuMateriaCortadaHoraDetalleCodHora: TLargeintField
+    object QuMateriaCortadaHoraDetalleCodHora: TIntegerField
       FieldName = 'CodHora'
       Visible = False
     end
-    object QuMateriaCortadaHoraDetalleCodHora0: TLargeintField
+    object QuMateriaCortadaHoraDetalleCodHora0: TIntegerField
       FieldName = 'CodHora0'
       Visible = False
     end
-    object QuMateriaCortadaHoraDetalleCodMateria: TLargeintField
+    object QuMateriaCortadaHoraDetalleCodMateria: TIntegerField
       FieldName = 'CodMateria'
       Visible = False
     end
-    object QuMateriaCortadaHoraDetalleAbrNivel: TStringField
+    object QuMateriaCortadaHoraDetalleAbrNivel: TWideStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1611,7 +2031,7 @@ inherited HorarioForm: THorarioForm
       Size = 5
       Lookup = True
     end
-    object QuMateriaCortadaHoraDetalleAbrEspecializacion: TStringField
+    object QuMateriaCortadaHoraDetalleAbrEspecializacion: TWideStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1624,7 +2044,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuMateriaCortadaHoraDetalleNomParaleloId: TStringField
+    object QuMateriaCortadaHoraDetalleNomParaleloId: TWideStringField
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
@@ -1635,7 +2055,7 @@ inherited HorarioForm: THorarioForm
       Size = 5
       Lookup = True
     end
-    object QuMateriaCortadaHoraDetalleNomDia: TStringField
+    object QuMateriaCortadaHoraDetalleNomDia: TWideStringField
       DisplayLabel = 'Dia'
       FieldKind = fkLookup
       FieldName = 'NomDia'
@@ -1647,7 +2067,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuMateriaCortadaHoraDetalleNomHora: TStringField
+    object QuMateriaCortadaHoraDetalleNomHora: TWideStringField
       DisplayLabel = 'Hora'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1660,7 +2080,7 @@ inherited HorarioForm: THorarioForm
       Size = 10
       Lookup = True
     end
-    object QuMateriaCortadaHoraDetalleNomMateria: TStringField
+    object QuMateriaCortadaHoraDetalleNomMateria: TWideStringField
       DisplayLabel = 'Materia'
       DisplayWidth = 15
       FieldKind = fkLookup
@@ -1675,49 +2095,56 @@ inherited HorarioForm: THorarioForm
   end
   object DSMateriaCortadaHora: TDataSource [17]
     DataSet = QuMateriaCortadaHora
-    Left = 88
-    Top = 140
+    Left = 185
+    Top = 113
   end
   inherited ActionList: TActionList
     Left = 60
     Top = 112
     object ActHorarioParalelo: TAction
+      AutoCheck = True
       Caption = 'Horario de paralelos'
       Hint = 'Horario de paralelos|Horario de paralelos'
       ImageIndex = 2
       OnExecute = ActHorarioParaleloExecute
     end
     object ActHorarioProfesor: TAction
+      AutoCheck = True
       Caption = 'Horario de Profesores'
       Hint = 'Horario de Profesores|Horario de Profesores'
       ImageIndex = 3
       OnExecute = ActHorarioProfesorExecute
     end
     object ActCruceProfesor: TAction
+      AutoCheck = True
       Caption = 'Cruce de profesores'
       Hint = 'Cruce de profesores|Cruce de profesores'
       ImageIndex = 4
       OnExecute = ActCruceProfesorExecute
     end
     object ActCruceMateria: TAction
+      AutoCheck = True
       Caption = 'Cruce de materias'
       Hint = 'Cruce de materias|Cruce de materias'
       ImageIndex = 5
       OnExecute = ActCruceMateriaExecute
     end
     object ActCruceAula: TAction
+      AutoCheck = True
       Caption = 'Cruce de aulas'
       Hint = 'Cruce de aulas|Cruce de aulas del mismo tipo'
       ImageIndex = 6
       OnExecute = ActCruceAulaExecute
     end
     object ActMateriaProhibicionNoRespetada: TAction
+      AutoCheck = True
       Caption = 'Prohibiciones de materia'
       Hint = 'Prohibiciones de materia|Prohibiciones de materia no respetadas'
       ImageIndex = 7
       OnExecute = ActMateriaProhibicionNoRespetadaExecute
     end
     object ActProfesorProhibicionNoRespetada: TAction
+      AutoCheck = True
       Caption = 'Prohibiciones de profesor'
       Hint = 
         'Prohibiciones de profesor|Prohibiciones de profesor no respetada' +
@@ -1726,91 +2153,42 @@ inherited HorarioForm: THorarioForm
       OnExecute = ActProfesorProhibicionNoRespetadaExecute
     end
     object ActSeleccionarHorario: TAction
+      AutoCheck = True
       Caption = 'Seleccionar horario'
       Hint = 'Seleccionar horario|Seleccionar un horario de colegio'
       ImageIndex = 9
       OnExecute = ActSeleccionarHorarioExecute
     end
     object ActMateriaCortadaDia: TAction
+      AutoCheck = True
       Caption = 'Materias cortadas por el dia'
       Hint = 'Materias cortadas por el dia|Materias cortadas por el dia'
       ImageIndex = 5
       OnExecute = ActMateriaCortadaDiaExecute
     end
     object ActMateriaCortadaHora: TAction
+      AutoCheck = True
       Caption = 'Materias cortadas por la hora'
       Hint = 'Materias cortadas por la hora|Materias cortadas por la hora'
       ImageIndex = 5
       OnExecute = ActMateriaCortadaHoraExecute
     end
     object ActHorarioAulaTipo: TAction
+      AutoCheck = True
       Caption = 'Horario por tipo de aulas'
       Hint = 'Horario por tipo de aulas|Horario por tipo de aulas'
       ImageIndex = 6
       OnExecute = ActHorarioAulaTipoExecute
     end
   end
-  object QuHorarioDetalle: TSqlitePassDataset
-    Tag = 15
-    CalcDisplayedRecordsOnly = False
-    Database = SourceDataModule.Database
-    MasterSourceAutoActivate = True
-    FilterMode = fmSQLDirect
-    FilterRecordLowerLimit = 0
-    FilterRecordUpperLimit = 0
-    Indexed = True
-    LocateSmartRefresh = False
-    LookUpCache = False
-    LookUpDisplayedRecordsOnly = False
-    LookUpSmartRefresh = False
-    Sorted = False
-    RecordsCacheCapacity = 100
-    DatabaseAutoActivate = True
-    VersionInfo.Component = '0.55'
-    VersionInfo.Package = '0.55'
-    ParamCheck = False
-    WriteMode = wmDirect
-    Left = 116
-    Top = 252
-    pParams = ()
-    object QuHorarioDetalleCodHorario: TLargeintField
-      DisplayLabel = 'Horario'
-      FieldName = 'CodHorario'
-      Required = True
-    end
-    object QuHorarioDetalleCodMateria: TLargeintField
-      DisplayLabel = 'Materia'
-      FieldName = 'CodMateria'
-      Required = True
-    end
-    object QuHorarioDetalleCodNivel: TLargeintField
-      DisplayLabel = 'Nivel'
-      FieldName = 'CodNivel'
-      Required = True
-    end
-    object QuHorarioDetalleCodEspecializacion: TLargeintField
-      DisplayLabel = 'Especializacion'
-      FieldName = 'CodEspecializacion'
-      Required = True
-    end
-    object QuHorarioDetalleCodParaleloId: TLargeintField
-      DisplayLabel = 'Paralelo'
-      FieldName = 'CodParaleloId'
-      Required = True
-    end
-    object QuHorarioDetalleCodDia: TLargeintField
-      DisplayLabel = 'Dia'
-      FieldName = 'CodDia'
-      Required = True
-    end
-    object QuHorarioDetalleCodHora: TLargeintField
-      DisplayLabel = 'Hora'
-      FieldName = 'CodHora'
-      Required = True
-    end
-    object QuHorarioDetalleSesion: TLargeintField
-      FieldName = 'Sesion'
-      Required = True
-    end
+  object DSCruceProfesor: TDataSource
+    DataSet = QuCruceProfesor
+    Left = 424
+    Top = 112
+  end
+  object DSCruceMateria: TDataSource
+    DataSet = QuCruceMateria
+    Left = 540
+    Top = 112
   end
 end

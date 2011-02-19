@@ -92,9 +92,8 @@ begin
       FLstFieldColor := ALstDataSet.FindField(ALstFieldColor);
     FLstField := ARelDataSet.FindField(ALstField);
     inherited ShowEditor(AColDataSet, ARowDataSet, ARelDataSet, ASelDataSet,
-      AColFieldKey,
-      AColFieldName, AColField, AColFieldSel, ARowFieldKey, ARowFieldName,
-      ARowField, ARowFieldSel);
+      AColFieldKey, AColFieldName, AColField, AColFieldSel, ARowFieldKey,
+      ARowFieldName, ARowField, ARowFieldSel);
   finally
     FLstDataSet.EnableControls;
   end;

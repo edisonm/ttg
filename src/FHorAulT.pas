@@ -6,22 +6,22 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ExtCtrls, Grids, FCrsMME0, Db, FCrsMME1, SqlitePassDbo,
+  StdCtrls, Buttons, ExtCtrls, Grids, FCrsMME0, Db, FCrsMME1, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset,
   ImgList, ComCtrls, ToolWin, DBCtrls, Variants;
 
 type
   THorarioAulaTipoForm = class(TCrossManyToManyEditor1Form)
-    QuHorarioAulaTipo: TSqlitePassDataset;
+    QuHorarioAulaTipo: TZQuery;
     dlcAulaTipo: TDBLookupComboBox;
     cbVerAulaTipo: TComboBox;
     BtnNext: TToolButton;
     BtnPrior: TToolButton;
-    QuHorarioAulaTipoCodMateria: TLargeintField;
-    QuHorarioAulaTipoCodNivel: TLargeintField;
-    QuHorarioAulaTipoCodEspecializacion: TLargeintField;
-    QuHorarioAulaTipoCodParaleloId: TLargeintField;
-    QuHorarioAulaTipoCodHora: TLargeintField;
-    QuHorarioAulaTipoCodDia: TLargeintField;
+    QuHorarioAulaTipoCodMateria: TIntegerField;
+    QuHorarioAulaTipoCodNivel: TIntegerField;
+    QuHorarioAulaTipoCodEspecializacion: TIntegerField;
+    QuHorarioAulaTipoCodParaleloId: TIntegerField;
+    QuHorarioAulaTipoCodHora: TIntegerField;
+    QuHorarioAulaTipoCodDia: TIntegerField;
     QuHorarioAulaTipoNomMateria: TStringField;
     QuHorarioAulaTipoAbrNivel: TStringField;
     QuHorarioAulaTipoAbrEspecializacion: TStringField;
@@ -58,11 +58,11 @@ procedure THorarioAulaTipoForm.FillHorarioAulaTipo;
 begin
   with SourceDataModule do
   begin
-    TbHorarioDetalle.IndexedBy := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
+    TbHorarioDetalle.IndexFieldNames := 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora';
     TbHorarioDetalle.First;
     if TbHorarioDetalle.Locate('CodHorario', CodHorario, []) then
     begin
-      TbDistributivo.IndexedBy := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+      TbDistributivo.IndexFieldNames := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
       TbDistributivo.MasterFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
       TbDistributivo.MasterSource := DSHorarioDetalle;
       try
@@ -80,7 +80,7 @@ begin
           TbHorarioDetalle.Next;
         end;
       finally
-        TbDistributivo.IndexedBy := '';
+        TbDistributivo.IndexFieldNames := '';
         TbDistributivo.MasterFields := '';
         TbDistributivo.MasterSource := nil;
       end;
@@ -104,17 +104,14 @@ end;
 procedure THorarioAulaTipoForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  QuHorarioAulaTipo.OnCalcFields := QuHorarioAulaTipoCalcFields;
-  PrepareQuery(QuHorarioAulaTipo, 'HorarioAulaTipo', 'CodAulaTipo');
+  SourceDataModule.TbAulaTipo.First;
   CodHorario := SourceDataModule.TbHorario.FindField('CodHorario').AsInteger;
   cbVerAulaTipo.Items.Clear;
   FillHorarioAulaTipo;
+  QuHorarioAulaTipo.ParamByName('CodHorario').AsInteger := CodHorario;
+  QuHorarioAulaTipo.Open;
   LoadNames(MasterDataModule.StringsShowAulaTipo, cbVerAulaTipo.Items);
   cbVerAulaTipo.Text := cbVerAulaTipo.Items[0];
-  SourceDataModule.TbAulaTipo.First;
-  {$IFNDEF FPC}
-  dlcAulaTipo.KeyValue := SourceDataModule.TbAulaTipo.FindField('CodAulaTipo').AsInteger;
-  {$ENDIF}
 end;
 
 procedure THorarioAulaTipoForm.BtnPriorClick(Sender: TObject);

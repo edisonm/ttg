@@ -5,13 +5,13 @@ unit DBase;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, SqlitePassDbo;
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
 
 type
   TDataSetArray = array of TDataSet;
   
   TMasterRel = record
-    DetailDataSet: TSqlitePassDataset;
+    DetailDataSet: TZTable;
     MasterFields: string;
     DetailFields: string;
     Cascade: Boolean;
@@ -26,7 +26,7 @@ type
   TApplyOnTable = procedure(ADataSet: TDataSet) of object;
 
   TBaseDataModule = class(TDataModule)
-    Database: TSqlitePassDatabase;
+    Database: TZConnection;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure DataSetBeforePost(DataSet: TDataSet);
@@ -92,15 +92,10 @@ end;
 
 procedure TBaseDataModule.PrepareFields;
 var
-  i, j: Integer;
+  i: Integer;
 begin
   for i := Low(FTables) to High(FTables) do
-  begin
-    FTables[i].FieldDefs.Update;
-    FTables[i].Fields.Clear;
-    for j := 0 to FTables[i].FieldDefs.Count - 1 do
-      FTables[i].FieldDefs[j].CreateField(FTables[i]);
-  end;
+    PrepareDataSetFields(FTables[i]);
 end;
 
 procedure TBaseDataModule.ApplyOnTables(FApplyOnTable: TApplyOnTable);
@@ -145,12 +140,20 @@ procedure TBaseDataModule.EmptyTables;
 var
   i: Integer;
 begin
-  for i := Low(FTables) to High(FTables) do
-  begin
-    with (FTables[i] as TSqlitePassDataset) do
+  try
+    Database.StartTransaction;
+    for i := Low(FTables) to High(FTables) do
     begin
-      EmptyTable;
+      with (FTables[i] as TZTable) do
+      begin
+        Connection.ExecuteDirect(Format('DELETE FROM %s', [TableName]));
+        EmptyDataSet;
+      end;
     end;
+    Database.Commit;
+  except
+    Database.Rollback;
+    raise;
   end;
 end;
 
@@ -176,8 +179,8 @@ var
 begin
   for i := Low(FTables) to High(FTables) do
   begin
-    (FTables[i] as TSqlitePassDataset).MasterSource := nil;
-    AStrings.Add('// Tb' + NameDataSet[FTables[i]]);
+    (FTables[i] as TZTable).MasterSource := nil;
+    AStrings.Add('// ' + NameDataSet[FTables[i]]);
     SaveDataSetToStrings(FTables[i], AStrings);
   end;
 end;
@@ -188,24 +191,19 @@ var
 begin
   FCheckRelations := False;
   try
-    Database.Engine.Transaction.StartInternalTransaction;
-    try
-      for i := Low(FTables) to High(FTables) do
-      begin
-        with (Tables[i] as TSqlitePassDataset) do
-        begin
-          AutoCalcFields := False;
-          LoadDataSetFromStrings(Tables[i], AStrings, APosition);
-          ApplyChanges;
-          AutoCalcFields := True;
-        end;
+    for i := Low(FTables) to High(FTables) do
+    begin
+      with Tables[i] as TZTable do
+      try
+        CachedUpdates := True;
+        LoadDataSetFromStrings(Tables[i], AStrings, APosition);
+        ApplyUpdates;
+      finally
+        CachedUpdates := False;
       end;
-    finally
-      FCheckRelations := True;
     end;
-    Database.Engine.Transaction.CommitInternalTransaction;
-  except
-    Database.Engine.Transaction.RollbackInternalTransaction;
+  finally
+    FCheckRelations := True;
   end;
 end;
 
@@ -269,7 +267,7 @@ begin
     try
       for j := Low(FDetailRels[i]) to High(FDetailRels[i]) do
         with FDetailRels[i, j] do
-          CheckDetailRelation(MasterDataSet, DataSet as TSqlitePassDataset, MasterFields, DetailFields);
+          CheckDetailRelation(MasterDataSet, DataSet as TZTable, MasterFields, DetailFields);
       if DataSet.State = dsEdit then
       begin
 	      for j := Low(FMasterRels[i]) to High(FMasterRels[i]) do

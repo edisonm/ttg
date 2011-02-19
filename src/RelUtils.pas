@@ -5,7 +5,7 @@ unit RelUtils;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Forms, Dialogs, Db, SqlitePassDbo;
+  Windows, SysUtils, Classes, Graphics, Forms, Dialogs, Db, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
 
 type ERelationUtils = class(Exception);
 
@@ -13,11 +13,11 @@ function StringToScaped(const AString: string): string;
 function ScapedToString(const AString: string): string; overload;
 function ScapedToString(const AString: string; var i: Integer): string; overload;
 function GetOldFieldValues(ADataSet: TDataSet; const AFieldNames: string): Variant;
-procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TSqlitePassDataset;
+procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TZTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
-procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TSqlitePassDataset;
+procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TZTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
-procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TSqlitePassDataset;
+procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TZTable;
   const AMasterFields, ADetailFields: string);
 
 function CheckRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADetailFields: string; AProblem: TDataSet): Boolean; overload;
@@ -32,7 +32,8 @@ procedure LoadDataSetFromCSVFile(ADataSet: TDataSet; const AFileName: TFileName)
 procedure LoadDataSetFromDataSet(ATarget, ASource: TDataSet);
 procedure LoadDataSetFromStrings(ADataSet: TDataSet; AStrings: TStrings;
   var Position: Integer);
-procedure PrepareQuery(const AQuery: TSqlitePassDataset; const ATableName, AIndexedBy: string);
+procedure PrepareDataSetFields(ADataSet: TDataSet);
+
 
 implementation
 
@@ -115,12 +116,12 @@ begin
   end;
 end;
 
-procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TSqlitePassDataset;
+procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TZTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
   vo, vn: Variant;
   bBookmark: TBookmark;
-  OldIndexedBy: string;
+  OldIndexFieldNames: string;
   VFields: TList;
 begin
   with ADetail do
@@ -138,8 +139,8 @@ begin
           bBookmark := GetBookmark;
           try
             try
-              OldIndexedBy := IndexedBy;
-              IndexedBy := ADetailFields;
+              OldIndexFieldNames := IndexFieldNames;
+              IndexFieldNames := ADetailFields;
               try
                 if Locate(ADetailFields, vo, []) then
                 begin
@@ -156,7 +157,7 @@ begin
                     raise ERelationUtils.CreateFmt('Ya existen campos relacionados en la tabla %s', [Name]);
                 end;
               finally
-                IndexedBy := OldIndexedBy;
+                IndexFieldNames := OldIndexFieldNames;
               end;
             finally
               try
@@ -176,12 +177,12 @@ begin
     end;
 end;
 
-procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TSqlitePassDataset;
+procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TZTable;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
   vOld: Variant;
   bBookmark: TBookmark;
-  OldIndexedBy: string;
+  OldIndexFieldNames: string;
   VFields: TList;
   DSDetail: TDataSource;
 begin
@@ -200,8 +201,8 @@ begin
           bBookmark := GetBookmark;
           try
             try
-              OldIndexedBy := IndexedBy;
-              IndexedBy := ADetailFields;
+              OldIndexFieldNames := IndexFieldNames;
+              IndexFieldNames := ADetailFields;
               try
                 if Locate(ADetailFields, vOld, []) then
                 begin
@@ -215,7 +216,7 @@ begin
                     raise ERelationUtils.CreateFmt('Ya existen registros detalle en la tabla %s', [Name]);
                 end;
               finally
-                IndexedBy := OldIndexedBy;
+                IndexFieldNames := OldIndexFieldNames;
               end;
             finally
               try
@@ -269,7 +270,7 @@ begin
     Result := VarToStrDef(Value, '(Null)');
 end;
 
-procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TSqlitePassDataset;
+procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TZTable;
   const AMasterFields, ADetailFields: string);
 var
   bBookmark: TBookmark;
@@ -508,10 +509,9 @@ procedure LoadDataSetFromStrings0(ADataSet: TDataSet; AStrings: TStrings;
   var Position: Integer; RecordCount: Integer);
 var
   s, v: string;
-  i, j, l, m, Pos, Limit: Integer;
+  j, l, Pos, Limit: Integer;
   Fields: array of TField;
   Field: TField;
-  ExtraFields: array of TField;
 begin
   s := AStrings.Strings[Position];
   Pos := 2;
@@ -531,7 +531,7 @@ begin
     end;
     Inc(Pos, 3);
   end;
-  m := 0;
+  {m := 0;
   for i := ADataSet.Fields.Count - 1  downto 0 do
   begin
     Field := ADataSet.Fields[i];
@@ -542,8 +542,9 @@ begin
       SetLength(ExtraFields, m);
       ExtraFields[m - 1] := Field;
     end;
-  end;
+  end;}
   ADataSet.DisableControls;
+  {ADataSet.AutoCalcFields := False;}
   try
     Limit := Position + RecordCount;
     while Position < Limit do
@@ -561,8 +562,9 @@ begin
       Inc(Position);
     end;
   finally
-    for i := m - 1 downto 0 do
+    {for i := m - 1 downto 0 do
       ADataSet.Fields.Add(ExtraFields[i]);
+    ADataSet.AutoCalcFields := True;}
     ADataSet.EnableControls;
   end;
 end;
@@ -633,16 +635,16 @@ begin
   end;
 end;
 
-procedure PrepareQuery(const AQuery: TSqlitePassDataset; const ATableName, AIndexedBy: string);
+procedure PrepareDataSetFields(ADataSet: TDataSet);
+var
+  j: Integer;
 begin
-  with AQuery do
+  with ADataSet do
   begin
-    Close;
-//    FileName := ':memory:';
-    DatasetName := ATableName + 'Tmp';
-    IndexedBy := AIndexedBy;
-    //if not TableExists then CreateTable;
-    Open;
+    FieldDefs.Update;
+    Fields.Clear;
+    for j := 0 to FieldDefs.Count - 1 do
+      FieldDefs[j].CreateField(ADataSet);
   end;
 end;
 
