@@ -23,11 +23,11 @@ type
     QuHorarioParaleloCodHora: TIntegerField;
     QuHorarioParaleloCodDia: TIntegerField;
     QuHorarioParaleloCodProfesor: TIntegerField;
-    QuHorarioParaleloNomMateria: TStringField;
-    QuHorarioParaleloApeNomProfesor: TStringField;
     QuHorarioParaleloNombre: TStringField;
     dlcParalelo: TDBLookupComboBox;
     DSParalelo: TDataSource;
+    QuHorarioParaleloNomMateria: TWideStringField;
+    QuHorarioParaleloApeNomProfesor: TWideStringField;
     procedure BtnMostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure IntercambiarPeriodosClick(Sender: TObject);

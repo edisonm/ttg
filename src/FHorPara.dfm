@@ -364,15 +364,17 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     OnCalcFields = QuHorarioParaleloCalcFields
     SQL.Strings = (
       'select'
-      '  CodNivel,'
-      '  CodEspecializacion,'
-      '  CodParaleloId,'
+      '  HorarioDetalle.CodNivel,'
+      '  HorarioDetalle.CodEspecializacion,'
+      '  HorarioDetalle.CodParaleloId,'
       '  CodHora,'
       '  CodDia,'
-      '  CodMateria,'
-      '  CodProfesor'
+      '  HorarioDetalle.CodMateria,'
+      '  Distributivo.CodProfesor,'
+      '  NomMateria,'
+      '  ApeProfesor + '#39' '#39' + NomProfesor as ApeNomProfesor'
       'from'
-      '  HorarioDetalle inner join Distributivo on'
+      '  ((HorarioDetalle inner join Distributivo on'
       '  (HorarioDetalle.CodMateria = Distributivo.CodMateria)'
       '  and (HorarioDetalle.CodNivel = Distributivo.CodNivel)'
       
@@ -380,12 +382,18 @@ inherited HorarioParaleloForm: THorarioParaleloForm
         'ializacion)'
       
         '  and (HorarioDetalle.CodParaleloId = Distributivo.CodParaleloId' +
-        ')'
+        '))'
+      
+        '  inner join Materia on (HorarioDetalle.CodMateria = Materia.Cod' +
+        'Materia))'
+      
+        '  inner join Profesor on (Distributivo.CodProfesor = Profesor.Co' +
+        'dProfesor)'
       'where'
       '  CodHorario=:CodHorario'
-      'and CodNivel=:CodNivel'
-      'and CodEspecializacion=:CodEspecializacion'
-      'and CodParaleloId=:CodParaleloId')
+      'and HorarioDetalle.CodNivel=:CodNivel'
+      'and HorarioDetalle.CodEspecializacion=:CodEspecializacion'
+      'and HorarioDetalle.CodParaleloId=:CodParaleloId')
     Params = <
       item
         DataType = ftUnknown
@@ -476,36 +484,21 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       FieldName = 'CodProfesor'
       Visible = False
     end
-    object QuHorarioParaleloNomMateria: TStringField
-      DisplayLabel = 'Materia'
-      DisplayWidth = 15
-      FieldKind = fkLookup
-      FieldName = 'NomMateria'
-      LookupDataSet = SourceDataModule.TbMateria
-      LookupKeyFields = 'CodMateria'
-      LookupResultField = 'NomMateria'
-      KeyFields = 'CodMateria'
-      Size = 15
-      Lookup = True
-    end
-    object QuHorarioParaleloApeNomProfesor: TStringField
-      DisplayLabel = 'Profesor'
-      DisplayWidth = 31
-      FieldKind = fkLookup
-      FieldName = 'ApeNomProfesor'
-      LookupDataSet = SourceDataModule.TbProfesor
-      LookupKeyFields = 'CodProfesor'
-      LookupResultField = 'ApeNomProfesor'
-      KeyFields = 'CodProfesor'
-      Visible = False
-      Size = 31
-      Lookup = True
-    end
     object QuHorarioParaleloNombre: TStringField
       FieldKind = fkCalculated
       FieldName = 'Nombre'
       Size = 40
       Calculated = True
+    end
+    object QuHorarioParaleloNomMateria: TWideStringField
+      FieldName = 'NomMateria'
+      ReadOnly = True
+    end
+    object QuHorarioParaleloApeNomProfesor: TWideStringField
+      DisplayWidth = 31
+      FieldName = 'ApeNomProfesor'
+      ReadOnly = True
+      Size = 31
     end
   end
   object DSParalelo: TDataSource
