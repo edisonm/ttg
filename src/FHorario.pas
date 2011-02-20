@@ -156,8 +156,6 @@ type
     QuHorarioDetalleProfesorProhibicionNomProfesor: TWideStringField;
     QuCruceAulaCodHorario: TIntegerField;
     QuCruceAulaAbrAulaTipo: TWideStringField;
-    QuCruceAulaUsadas: TWideStringField;
-    QuCruceAulaCruces: TWideStringField;
     QuCruceProfesorApeProfesor: TWideStringField;
     QuCruceProfesorNomProfesor: TWideStringField;
     QuCruceProfesorCruces: TWideStringField;
@@ -170,6 +168,8 @@ type
     DSCruceMateria: TDataSource;
     QuCruceMateriaDetalleCodHorario: TIntegerField;
     QuMateriaCortadaHoraDetalleCodHorario: TIntegerField;
+    QuCruceAulaCruces: TWideStringField;
+    QuCruceAulaUsadas: TWideStringField;
     procedure ActHorarioParaleloExecute(Sender: TObject);
     procedure ActCruceProfesorExecute(Sender: TObject);
     procedure ActCruceMateriaExecute(Sender: TObject);
@@ -236,18 +236,16 @@ end;
 procedure THorarioForm.ActCruceProfesorExecute(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule, MasterDataModule, QuCruceProfesor do
+  with SourceDataModule, MasterDataModule do
   begin
     if TMasterDetailEditorForm.ToggleMasterDetailEditor
       (Self, FCruceProfesorForm, ConfigStorage, ActCruceProfesor,
       QuCruceProfesor, QuCruceProfesorDetalle) then
     begin
-      // TODO: Create dinamically QuCruceProfesor and QuCruceProfesorDetalle
       QuCruceProfesor.Close;
-      QuCruceProfesor.Open;
       QuCruceProfesorDetalle.Close;
+      QuCruceProfesor.Open;
       QuCruceProfesorDetalle.Open;
-      First;
     end;
   end;
 end;

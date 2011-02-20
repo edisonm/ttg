@@ -358,7 +358,7 @@ procedure TSourceDataModule.PrepareLookupFields;
 var
   Field: TField;
 begin
-  Field := TStringField.Create(TbCurso);
+  Field := TWideStringField.Create(TbCurso);
   with Field do
   begin
     DisplayLabel := 'Nivel';
@@ -373,7 +373,7 @@ begin
     Lookup := True;
     DataSet := TbCurso;
   end;
-  Field := TStringField.Create(TbCurso);
+  Field := TWideStringField.Create(TbCurso);
   with Field do
   begin
     DisplayLabel := 'Espec.';
@@ -388,7 +388,7 @@ begin
     Lookup := True;
     DataSet := TbCurso;
   end;
-  Field := TStringField.Create(TbParalelo);
+  Field := TWideStringField.Create(TbParalelo);
   with Field do
   begin
     DisplayLabel := 'Nivel';
@@ -402,7 +402,7 @@ begin
     Lookup := True;
     DataSet := TbParalelo;
   end;
-  Field := TStringField.Create(TbParalelo);
+  Field := TWideStringField.Create(TbParalelo);
   with Field do
   begin
     DisplayLabel := 'Especializacion';
@@ -416,7 +416,7 @@ begin
     Lookup := True;
     DataSet := TbParalelo;
   end;
-  Field := TStringField.Create(TbParalelo);
+  Field := TWideStringField.Create(TbParalelo);
   with Field do
   begin
     DisplayLabel := 'Paralelo';
@@ -430,7 +430,7 @@ begin
     Lookup := True;
     DataSet := TbParalelo;
   end;
-  Field := TStringField.Create(TbParalelo);
+  Field := TWideStringField.Create(TbParalelo);
   with Field do
   begin
     FieldKind := fkCalculated;
@@ -438,7 +438,7 @@ begin
     Calculated := True;
     DataSet := TbParalelo;
   end;
-  Field := TStringField.Create(TbProfesor);
+  Field := TWideStringField.Create(TbProfesor);
   with Field do
   begin
     DisplayLabel := 'Apellido Nombre';
@@ -450,7 +450,7 @@ begin
     Calculated := True;
     DataSet := TbProfesor;
   end;
-  Field := TStringField.Create(TbMateriaProhibicion);
+  Field := TWideStringField.Create(TbMateriaProhibicion);
   with Field do
   begin
     DisplayLabel := 'Tipo prohib. mat.';
@@ -465,7 +465,7 @@ begin
     Lookup := True;
     DataSet := TbMateriaProhibicion;
   end;
-  Field := TStringField.Create(TbHorarioDetalle);
+  Field := TWideStringField.Create(TbHorarioDetalle);
   with Field do
   begin
     DisplayLabel := 'Materia';
@@ -480,7 +480,7 @@ begin
     Lookup := True;
     DataSet := TbHorarioDetalle;
   end;
-  Field := TStringField.Create(TbProfesorProhibicion);
+  Field := TWideStringField.Create(TbProfesorProhibicion);
   with Field do
   begin
     DisplayLabel := 'Tipo prohib. prof.';
@@ -561,6 +561,7 @@ begin
   if Database.Database = ':memory:' then
   try
     Strings.LoadFromFile('../dat/TTG.sql');
+    Database.ExecuteDirect('pragma journal_mode=off');
     Database.ExecuteDirect(Strings.GetText);
     PrepareTables;
     OpenTables;

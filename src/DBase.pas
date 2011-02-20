@@ -195,9 +195,9 @@ begin
     begin
       with Tables[i] as TZTable do
       try
-        CachedUpdates := True;
+//        CachedUpdates := True;
         LoadDataSetFromStrings(Tables[i], AStrings, APosition);
-        ApplyUpdates;
+//        ApplyUpdates;
       finally
         CachedUpdates := False;
       end;
@@ -290,7 +290,7 @@ begin
   begin
     for j := Low(FMasterRels[i]) to High(FMasterRels[i]) do
       with FMasterRels[i, j] do
-        CheckMasterRelationUpdate(DataSet, DetailDataSet, MasterFields,
+        CheckMasterRelationDelete(DataSet, DetailDataSet, MasterFields,
                                   DetailFields, Cascade);
   end;
 end;

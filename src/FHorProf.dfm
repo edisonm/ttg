@@ -8,48 +8,45 @@ inherited HorarioProfesorForm: THorarioProfesorForm
   ExplicitHeight = 399
   PixelsPerInch = 96
   TextHeight = 13
+  object Splitter1: TSplitter [0]
+    Left = 233
+    Top = 25
+    Height = 328
+    ExplicitTop = 15
+    ExplicitHeight = 357
+  end
   inherited TlBShow: TToolBar
     Width = 766
     ExplicitWidth = 766
     inherited BtnOk: TToolButton
+      Enabled = False
       Visible = False
     end
     inherited BtnCancel: TToolButton
+      Enabled = False
       Visible = False
     end
-    object BtnPrior: TToolButton
+    object DBNavigator: TDBNavigator
       Left = 69
       Top = 0
-      ImageIndex = 5
-      OnClick = BtnPriorClick
-    end
-    object BtnNext: TToolButton
-      Left = 92
-      Top = 0
-      ImageIndex = 4
-      OnClick = BtnNextClick
-    end
-    object dlcProfesor: TDBLookupComboBox
-      Left = 115
-      Top = 0
-      Width = 206
-      Height = 21
-      Hint = 'Profesor'
-      KeyField = 'CodProfesor'
-      ListField = 'ApeProfesor;NomProfesor;ApeNomProfesor'
-      ListFieldIndex = 2
-      ListSource = DSProfesor
-      TabOrder = 0
+      Width = 92
+      Height = 22
+      DataSource = DSProfesor
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+      Flat = True
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
     end
     object cbVerProfesor: TComboBox
-      Left = 321
+      Left = 161
       Top = 0
       Width = 193
       Height = 21
       Hint = 'Ver|Que ver en el horario del profesor'
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 1
+      TabOrder = 0
       OnChange = BtnMostrarClick
     end
   end
@@ -60,17 +57,35 @@ inherited HorarioProfesorForm: THorarioProfesorForm
     ExplicitWidth = 766
   end
   inherited Panel1: TPanel
-    Width = 766
+    Left = 236
+    Width = 530
     Height = 328
-    ExplicitWidth = 766
+    ExplicitLeft = 236
+    ExplicitWidth = 530
     ExplicitHeight = 328
   end
   inherited DrawGrid: TDrawGrid
-    Width = 766
+    Left = 236
+    Width = 530
     Height = 328
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
-    ExplicitWidth = 766
+    ExplicitLeft = 236
+    ExplicitWidth = 530
     ExplicitHeight = 328
+  end
+  object DBGrid1: TDBGrid [5]
+    Left = 0
+    Top = 25
+    Width = 233
+    Height = 328
+    Align = alLeft
+    DataSource = DSProfesor
+    TabOrder = 4
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
   end
   inherited ImageList: TImageList
     Left = 148
@@ -348,30 +363,28 @@ inherited HorarioProfesorForm: THorarioProfesorForm
   end
   object QuHorarioProfesor: TZQuery
     Connection = SourceDataModule.Database
-    SortedFields = 'CodProfesor'
+    SortedFields = 'CodHorario;CodProfesor'
     OnCalcFields = QuHorarioProfesorCalcFields
     SQL.Strings = (
       'select'
-      '  CodProfesor,'
-      '  CodNivel,'
-      '  CodEspecializacion,'
-      '  CodParaleloId,'
-      '  CodHora,'
-      '  CodDia,'
-      '  CodMateria'
+      ' CodHorario,'
+      ' CodProfesor,'
+      ' Distributivo.CodNivel,'
+      ' Distributivo.CodEspecializacion,'
+      ' Distributivo.CodParaleloId,'
+      ' CodHora,'
+      ' CodDia,'
+      ' Distributivo.CodMateria'
       'from'
-      '  HorarioDetalle inner join Distributivo on'
-      '  (HorarioDetalle.CodMateria = Distributivo.CodMateria)'
-      '  and (HorarioDetalle.CodNivel = Distributivo.CodNivel)'
+      ' HorarioDetalle inner join Distributivo on'
+      ' (HorarioDetalle.CodMateria = Distributivo.CodMateria)'
+      ' and (HorarioDetalle.CodNivel = Distributivo.CodNivel)'
       
-        '  and (HorarioDetalle.CodEspecializacion = Distributivo.CodEspec' +
-        'ializacion)'
-      
-        '  and (HorarioDetalle.CodParaleloId = Distributivo.CodParaleloId' +
-        ')'
-      'where'
-      '  CodHorario=:CodHorario'
-      'and CodProfesor=:CodProfesor')
+        ' and (HorarioDetalle.CodEspecializacion = Distributivo.CodEspeci' +
+        'alizacion)'
+      ' and (HorarioDetalle.CodParaleloId = Distributivo.CodParaleloId)'
+      'where CodHorario=:CodHorario'
+      ' and CodProfesor=:CodProfesor')
     Params = <
       item
         DataType = ftUnknown
@@ -384,10 +397,10 @@ inherited HorarioProfesorForm: THorarioProfesorForm
         ParamType = ptUnknown
       end>
     DataSource = DSProfesor
-    MasterFields = 'CodProfesor'
-    MasterSource = SourceDataModule.DSProfesor
-    LinkedFields = 'CodProfesor'
-    IndexFieldNames = 'CodProfesor Asc'
+    MasterFields = 'CodHorario;CodProfesor'
+    MasterSource = DSProfesor
+    LinkedFields = 'CodHorario;CodProfesor'
+    IndexFieldNames = 'CodHorario Asc;CodProfesor Asc'
     Left = 64
     Top = 88
     ParamData = <
@@ -401,10 +414,12 @@ inherited HorarioProfesorForm: THorarioProfesorForm
         Name = 'CodProfesor'
         ParamType = ptUnknown
       end>
-    object QuHorarioProfesorCodProfesor: TAutoIncField
-      DisplayLabel = 'Codigo'
+    object QuHorarioProfesorCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+    end
+    object QuHorarioProfesorCodProfesor: TIntegerField
       FieldName = 'CodProfesor'
-      Visible = False
+      Required = True
     end
     object QuHorarioProfesorCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
@@ -442,7 +457,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorAbrNivel: TStringField
+    object QuHorarioProfesorAbrNivel: TWideStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -454,7 +469,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Size = 5
       Lookup = True
     end
-    object QuHorarioProfesorAbrEspecializacion: TStringField
+    object QuHorarioProfesorAbrEspecializacion: TWideStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -466,18 +481,18 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Size = 10
       Lookup = True
     end
-    object QuHorarioProfesorNomParaleloId: TStringField
+    object QuHorarioProfesorNomParaleloId: TWideStringField
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
-      LookupDataSet = SourceDataModule.TbParalelo
+      LookupDataSet = SourceDataModule.TbParaleloId
       LookupKeyFields = 'CodParaleloId'
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
       Lookup = True
     end
-    object QuHorarioProfesorNomMateria: TStringField
+    object QuHorarioProfesorNomMateria: TWideStringField
       DisplayLabel = 'Materia'
       DisplayWidth = 15
       FieldKind = fkLookup
@@ -489,7 +504,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Size = 15
       Lookup = True
     end
-    object QuHorarioProfesorNombre: TStringField
+    object QuHorarioProfesorNombre: TWideStringField
       FieldKind = fkCalculated
       FieldName = 'Nombre'
       Size = 40
@@ -497,9 +512,66 @@ inherited HorarioProfesorForm: THorarioProfesorForm
     end
   end
   object DSProfesor: TDataSource
-    DataSet = SourceDataModule.TbProfesor
+    DataSet = QuProfesor
     OnDataChange = DSProfesorDataChange
     Left = 64
-    Top = 148
+    Top = 145
+  end
+  object QuProfesor: TZQuery
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario;ApeProfesor;NomProfesor'
+    OnCalcFields = QuHorarioProfesorCalcFields
+    SQL.Strings = (
+      'select'
+      '  CodHorario,'
+      '  CodProfesor,'
+      '  ApeProfesor,'
+      '  NomProfesor'
+      'from'
+      '  Profesor,'
+      '  Horario'
+      'where'
+      '  CodHorario=:CodHorario'
+      'order by'
+      '  CodHorario, ApeProfesor, NomProfesor')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSHorario
+    MasterFields = 'CodHorario'
+    MasterSource = SourceDataModule.DSHorario
+    LinkedFields = 'CodHorario'
+    IndexFieldNames = 'CodHorario Asc;ApeProfesor Asc;NomProfesor Asc'
+    Left = 144
+    Top = 144
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    object QuProfesorCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+      Visible = False
+    end
+    object QuProfesorCodProfesor: TIntegerField
+      FieldName = 'CodProfesor'
+      Visible = False
+    end
+    object QuProfesorApeProfesor: TWideStringField
+      DisplayLabel = 'Apellido'
+      FieldName = 'ApeProfesor'
+      Required = True
+      Size = 15
+    end
+    object QuProfesorNomProfesor: TWideStringField
+      DisplayLabel = 'Nombre'
+      FieldName = 'NomProfesor'
+      Required = True
+      Size = 15
+    end
   end
 end

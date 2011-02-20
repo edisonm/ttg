@@ -169,8 +169,6 @@ inherited HorarioForm: THorarioForm
         Font.Style = []
         ParentFont = False
         TabOrder = 0
-        ExplicitLeft = 3
-        ExplicitTop = -4
       end
     end
   end
@@ -589,6 +587,7 @@ inherited HorarioForm: THorarioForm
   object QuCruceAula: TZQuery [5]
     Connection = SourceDataModule.Database
     SortedFields = 'CodHorario'
+    ReadOnly = True
     SQL.Strings = (
       'SELECT'
       '  CodHorario,'
@@ -596,8 +595,8 @@ inherited HorarioForm: THorarioForm
       '  CodHora,'
       '  AulaTipo.CodAulaTipo,'
       '  AulaTipo.AbrAulaTipo,'
-      '  COUNT(*) AS Usadas,'
-      '  COUNT(*) - AulaTipo.Cantidad AS Cruces'
+      '  CAST(COUNT(*) AS INTEGER) AS Usadas,'
+      '  CAST(COUNT(*) - AulaTipo.Cantidad AS INTEGER) AS Cruces'
       'FROM'
       '  (HorarioDetalle INNER JOIN Distributivo ON'
       '        HorarioDetalle.CodMateria=Distributivo.CodMateria'
@@ -661,12 +660,10 @@ inherited HorarioForm: THorarioForm
     object QuCruceAulaUsadas: TWideStringField
       FieldName = 'Usadas'
       ReadOnly = True
-      Size = 255
     end
     object QuCruceAulaCruces: TWideStringField
       FieldName = 'Cruces'
       ReadOnly = True
-      Size = 255
     end
     object QuCruceAulaCantidad: TIntegerField
       FieldKind = fkLookup
@@ -707,6 +704,7 @@ inherited HorarioForm: THorarioForm
   object QuCruceAulaDetalle: TZQuery [6]
     Connection = SourceDataModule.Database
     SortedFields = 'CodHorario;CodAulaTipo;CodDia;CodHora'
+    ReadOnly = True
     SQL.Strings = (
       'SELECT'
       '  HorarioDetalle.CodHorario,'
@@ -863,6 +861,7 @@ inherited HorarioForm: THorarioForm
   object QuCruceProfesorDetalle: TZQuery [8]
     Connection = SourceDataModule.Database
     SortedFields = 'CodHorario;CodProfesor'
+    ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
       '  HorarioDetalle.CodHorario,'
@@ -1010,6 +1009,7 @@ inherited HorarioForm: THorarioForm
     Connection = SourceDataModule.Database
     SortedFields = 'CodHorario'
     AfterScroll = QuCruceProfesorAfterScroll
+    ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
       '  HorarioDetalle.CodHorario,'
@@ -1125,6 +1125,7 @@ inherited HorarioForm: THorarioForm
     Connection = SourceDataModule.Database
     SortedFields = 'CodHorario'
     AfterScroll = QuCruceMateriaAfterScroll
+    ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
       '  HorarioDetalle.CodHorario,'
@@ -1182,6 +1183,7 @@ inherited HorarioForm: THorarioForm
   object QuCruceMateriaDetalle: TZQuery [11]
     Connection = SourceDataModule.Database
     SortedFields = 'CodHorario;CodMateria'
+    ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
       '  HorarioDetalle.CodHorario,'
@@ -1329,6 +1331,7 @@ inherited HorarioForm: THorarioForm
   object QuHorarioDetalleMateriaProhibicion: TZQuery [12]
     Connection = SourceDataModule.Database
     SortedFields = 'CodHorario'
+    ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
       '  HorarioDetalle.CodHorario,'
@@ -1485,6 +1488,7 @@ inherited HorarioForm: THorarioForm
   object QuHorarioDetalleProfesorProhibicion: TZQuery [13]
     Connection = SourceDataModule.Database
     SortedFields = 'CodHorario'
+    ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
       '  HorarioDetalle.CodHorario,'
@@ -1656,6 +1660,7 @@ inherited HorarioForm: THorarioForm
     Connection = SourceDataModule.Database
     SortedFields = 'CodHorario'
     AfterScroll = QuCruceMateriaAfterScroll
+    ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
       '  HorarioDetalle.CodHorario,'
@@ -1802,6 +1807,7 @@ inherited HorarioForm: THorarioForm
   object QuMateriaCortadaHora: TZQuery [15]
     Connection = SourceDataModule.Database
     SortedFields = 'CodHorario'
+    ReadOnly = True
     SQL.Strings = (
       'SELECT CodHorario, CodDia, CodHora'
       'FROM Horario, Dia, Hora'
@@ -1893,6 +1899,7 @@ inherited HorarioForm: THorarioForm
   object QuMateriaCortadaHoraDetalle: TZQuery [16]
     Connection = SourceDataModule.Database
     SortedFields = 'CodHorario;CodDia;CodHora'
+    ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
       '  HorarioDetalle.CodHorario,'

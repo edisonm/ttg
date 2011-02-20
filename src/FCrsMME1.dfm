@@ -1,6 +1,7 @@
 inherited CrossManyToManyEditor1Form: TCrossManyToManyEditor1Form
   Left = 82
   Top = 218
+  Visible = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited DrawGrid: TDrawGrid

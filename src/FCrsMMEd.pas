@@ -168,8 +168,8 @@ begin
     {$ENDIF}
     DrawGrid.OnDrawCell := DrawGridDrawCell;
     ReadData;
-    if not Visible then
-      ShowModal;
+    {if not Visible then
+      ShowModal;}
   finally
     FColDataSet.EnableControls;
     FRowDataSet.EnableControls;

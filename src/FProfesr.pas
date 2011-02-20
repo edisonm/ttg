@@ -149,7 +149,7 @@ procedure TProfesorForm.PrepareDistributivoExtraFields;
 var
   Field: TField;
 begin
-  Field := TStringField.Create(QuDistributivo);
+  Field := TWideStringField.Create(QuDistributivo);
   with Field do
   begin
     DisplayLabel := 'Nivel';
@@ -163,7 +163,7 @@ begin
     Lookup := True;
     DataSet := QuDistributivo;
   end;
-  Field := TStringField.Create(QuDistributivo);
+  Field := TWideStringField.Create(QuDistributivo);
   with Field do
   begin
     DisplayLabel := 'Especializacion';
@@ -177,7 +177,7 @@ begin
     Lookup := True;
     DataSet := QuDistributivo;
   end;
-  Field := TStringField.Create(QuDistributivo);
+  Field := TWideStringField.Create(QuDistributivo);
   with Field do
   begin
     DisplayLabel := 'Paralelo';
@@ -191,7 +191,7 @@ begin
     Lookup := True;
     DataSet := QuDistributivo;
   end;
-  Field := TStringField.Create(QuDistributivo);
+  Field := TWideStringField.Create(QuDistributivo);
   with Field do
   begin
     DisplayLabel := 'Materia';
@@ -206,7 +206,7 @@ begin
     Lookup := True;
     DataSet := QuDistributivo;
   end;
-  Field := TStringField.Create(QuDistributivo);
+  Field := TWideStringField.Create(QuDistributivo);
   with Field do
   begin
     DisplayLabel := 'Tipo aula';

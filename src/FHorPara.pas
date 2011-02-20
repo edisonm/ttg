@@ -7,15 +7,14 @@ interface
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
   FCrsMMER, StdCtrls, Buttons, ExtCtrls, Grids, Variants, FCrsMME1, DBCtrls,
-  ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset, ImgList, ComCtrls, ToolWin;
+  ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset, ImgList, ComCtrls, ToolWin,
+  DBGrids;
 
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)
     QuHorarioParalelo: TZQuery;
     BtnIntercambiarPeriodos: TToolButton;
     cbVerParalelo: TComboBox;
-    BtnPrior: TToolButton;
-    BtnNext: TToolButton;
     QuHorarioParaleloCodMateria: TIntegerField;
     QuHorarioParaleloCodNivel: TIntegerField;
     QuHorarioParaleloCodEspecializacion: TIntegerField;
@@ -23,27 +22,37 @@ type
     QuHorarioParaleloCodHora: TIntegerField;
     QuHorarioParaleloCodDia: TIntegerField;
     QuHorarioParaleloCodProfesor: TIntegerField;
-    QuHorarioParaleloNombre: TStringField;
-    dlcParalelo: TDBLookupComboBox;
+    QuHorarioParaleloNombre: TWideStringField;
     DSParalelo: TDataSource;
     QuHorarioParaleloNomMateria: TWideStringField;
-    QuHorarioParaleloApeNomProfesor: TWideStringField;
+    QuParalelo: TZQuery;
+    QuParaleloCodHorario: TIntegerField;
+    QuParaleloCodNivel: TIntegerField;
+    QuParaleloCodEspecializacion: TIntegerField;
+    QuParaleloCodParaleloId: TIntegerField;
+    QuParaleloAbrNivel: TWideStringField;
+    QuParaleloAbrEspecializacion: TWideStringField;
+    QuParaleloNomParaleloId: TWideStringField;
+    QuHorarioParaleloCodHorario: TIntegerField;
+    QuHorarioParaleloApeProfesor: TWideStringField;
+    QuHorarioParaleloNomProfesor: TWideStringField;
+    DBGrid1: TDBGrid;
+    QuParaleloNomParalelo: TWideStringField;
+    Splitter1: TSplitter;
+    DBNavigator: TDBNavigator;
     procedure BtnMostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure IntercambiarPeriodosClick(Sender: TObject);
-    procedure BtnPriorClick(Sender: TObject);
-    procedure BtnNextClick(Sender: TObject);
     procedure QuHorarioParaleloCalcFields(DataSet: TDataSet);
     procedure DSParaleloDataChange(Sender: TObject; Field: TField);
+    procedure QuParaleloCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
-    FCodHorario: Integer;
     FNombre: string;
     function GetCodDia: Integer;
     function GetCodHora: Integer;
   public
     { Public declarations }
-    property CodHorario: Integer read FCodHorario write FCodHorario;
     property CodDia: Integer read GetCodDia;
     property CodHora: Integer read GetCodHora;
   end;
@@ -69,8 +78,11 @@ end;
 procedure THorarioParaleloForm.BtnMostrarClick(Sender: TObject);
 begin
   inherited;
-  Caption := Format('[%s %d] - %s', [SuperTitle, CodHorario,
-    SourceDataModule.TbParalelo.FindField('NomParalelo').AsString]);
+  Caption := Format('[%s %d] - %s %s %s', [SuperTitle,
+    QuParalelo.FindField('CodHorario').AsInteger,
+    QuParalelo.FindField('AbrNivel').AsString,
+    QuParalelo.FindField('AbrEspecializacion').AsString,
+    QuParalelo.FindField('NomParaleloId').AsString]);
   FNombre := MasterDataModule.StringsShowParalelo.Values[cbVerParalelo.Text];
   with SourceDataModule do
     ShowEditor(TbDia, TbHora, QuHorarioParalelo, TbPeriodo, 'CodDia', 'NomDia',
@@ -80,10 +92,8 @@ end;
 procedure THorarioParaleloForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  SourceDataModule.TbParalelo.First;
-  CodHorario := SourceDataModule.TbHorario.FindField('CodHorario').AsInteger;
+  QuParalelo.Open;
   cbVerParalelo.Items.Clear;
-  QuHorarioParalelo.ParamByName('CodHorario').AsInteger := CodHorario;
   QuHorarioParalelo.Open;
   LoadNames(MasterDataModule.StringsShowParalelo, cbVerParalelo.Items);
   cbVerParalelo.Text := cbVerParalelo.Items[0];
@@ -97,25 +107,15 @@ begin
   if SeleccionarPeriodo(iCodDia, iCodHora) then
   begin
     with SourceDataModule do
-      MasterDataModule.IntercambiarPeriodos(CodHorario,
-        TbParalelo.FindField('CodNivel').AsInteger,
-        TbParalelo.FindField('CodEspecializacion').AsInteger,
-        TbParalelo.FindField('CodParaleloId').AsInteger,
+      MasterDataModule.IntercambiarPeriodos(
+        TbHorario.FindField('CodHorario').AsInteger,
+        QuParalelo.FindField('CodNivel').AsInteger,
+        QuParalelo.FindField('CodEspecializacion').AsInteger,
+        QuParalelo.FindField('CodParaleloId').AsInteger,
         CodDia, CodHora, iCodDia, iCodHora);
+    QuHorarioParalelo.Refresh;
     BtnMostrarClick(nil);
   end;
-end;
-
-procedure THorarioParaleloForm.BtnPriorClick(Sender: TObject);
-begin
-  inherited;
-  SourceDataModule.TbParalelo.Prior;
-end;
-
-procedure THorarioParaleloForm.BtnNextClick(Sender: TObject);
-begin
-  inherited;
-  SourceDataModule.TbParalelo.Next;
 end;
 
 procedure THorarioParaleloForm.QuHorarioParaleloCalcFields(DataSet: TDataSet);
@@ -123,6 +123,12 @@ begin
   inherited;
   if FNombre <> '' then
     DataSet['Nombre'] := VarArrToStr(DataSet[FNombre], ' ');
+end;
+
+procedure THorarioParaleloForm.QuParaleloCalcFields(DataSet: TDataSet);
+begin
+  inherited;
+  DataSet['NomParalelo'] := VarArrToStr(DataSet['AbrNivel;AbrEspecializacion;NomParaleloId'], ' ');
 end;
 
 procedure THorarioParaleloForm.DSParaleloDataChange(Sender: TObject;

@@ -13,9 +13,9 @@ function StringToScaped(const AString: string): string;
 function ScapedToString(const AString: string): string; overload;
 function ScapedToString(const AString: string; var i: Integer): string; overload;
 function GetOldFieldValues(ADataSet: TDataSet; const AFieldNames: string): Variant;
-procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TZTable;
+procedure CheckMasterRelationUpdate(AMaster, ADetail: TDataSet;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
-procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TZTable;
+procedure CheckMasterRelationDelete(AMaster, ADetail: TDataSet;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TZTable;
   const AMasterFields, ADetailFields: string);
@@ -116,124 +116,76 @@ begin
   end;
 end;
 
-procedure CheckMasterRelationUpdate(AMaster: TDataSet; ADetail: TZTable;
+procedure CheckMasterRelationUpdate(AMaster, ADetail: TDataSet;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
   vo, vn: Variant;
   bBookmark: TBookmark;
-  OldIndexFieldNames: string;
-  VFields: TList;
 begin
   with ADetail do
-    if not (Eof and Bof) then
+  if not (Eof and Bof) then
+  begin
+    vo := GetOldFieldValues(AMaster, AMasterFields);
+    vn := AMaster.FieldValues[AMasterFields];
+    if not CompareVarArray(vo, vn) then
     begin
       DisableControls;
-      VFields := TList.Create;
+      CheckBrowseMode;
+      bBookmark := GetBookmark;
       try
-        GetFieldList(VFields, ADetailFields);
-        vo := GetOldFieldValues(AMaster, AMasterFields);
-        vn := AMaster.FieldValues[AMasterFields];
-        if not CompareVarArray(vo, vn) then
+        if Locate(ADetailFields, vo, []) then
         begin
-          CheckBrowseMode;
-          bBookmark := GetBookmark;
-          try
-            try
-              OldIndexFieldNames := IndexFieldNames;
-              IndexFieldNames := ADetailFields;
-              try
-                if Locate(ADetailFields, vo, []) then
-                begin
-                  if ACascade then
-                  begin
-                    repeat
-                      Edit;
-                      FieldValues[ADetailFields] := vn;
-                      Post;
-                      Next;
-                    until not CompareRecord(VFields, vo);
-                  end
-                  else
-                    raise ERelationUtils.CreateFmt('Ya existen campos relacionados en la tabla %s', [Name]);
-                end;
-              finally
-                IndexFieldNames := OldIndexFieldNames;
-              end;
-            finally
-              try
-                if BookmarkValid(bBookmark) then
-                  GotoBookmark(bBookmark);
-              except
-              end;
-            end;
-          finally
-            FreeBookmark(bBookmark);
-          end;
+          if ACascade then
+          repeat
+            Edit;
+            FieldValues[ADetailFields] := vn;
+            Post;
+          until not Locate(ADetailFields, vo, [])
+          else
+            raise ERelationUtils.CreateFmt('Ya existen campos relacionados en la tabla %s', [Name]);
         end;
       finally
+        try
+          if BookmarkValid(bBookmark) then
+            GotoBookmark(bBookmark);
+        except
+        end;
+        FreeBookmark(bBookmark);
         EnableControls;
-        VFields.Free;
       end;
     end;
+  end;
 end;
 
-procedure CheckMasterRelationDelete(AMaster: TDataSet; ADetail: TZTable;
+procedure CheckMasterRelationDelete(AMaster, ADetail: TDataSet;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
-  vOld: Variant;
+  MasterValues: Variant;
   bBookmark: TBookmark;
-  OldIndexFieldNames: string;
-  VFields: TList;
-  DSDetail: TDataSource;
 begin
   with ADetail do
+  if not (Eof and Bof) then
   begin
+    bBookmark := GetBookmark;
     DisableControls;
-    DSDetail := MasterSource;
-    MasterSource := nil;
     try
-      if not (Eof and Bof) then
+      MasterValues := AMaster[AMasterFields];
+      if Locate(ADetailFields, MasterValues, []) then
       begin
-        VFields := TList.Create;
-        try
-          GetFieldList(VFields, ADetailFields);
-          vOld := GetOldFieldValues(AMaster, AMasterFields);
-          bBookmark := GetBookmark;
-          try
-            try
-              OldIndexFieldNames := IndexFieldNames;
-              IndexFieldNames := ADetailFields;
-              try
-                if Locate(ADetailFields, vOld, []) then
-                begin
-                  if ACascade then
-                  begin
-                      // Se puede optimizar
-                    while not (Eof and Bof) and CompareRecord(VFields, vOld) do
-                      Delete;
-                  end
-                  else
-                    raise ERelationUtils.CreateFmt('Ya existen registros detalle en la tabla %s', [Name]);
-                end;
-              finally
-                IndexFieldNames := OldIndexFieldNames;
-              end;
-            finally
-              try
-                if BookmarkValid(bBookmark) then
-                  GotoBookmark(bBookmark);
-              except
-              end;
-            end;
-          finally
-            FreeBookmark(bBookmark);
-          end;
-        finally
-          VFields.Free;
-        end;
+        if ACascade then
+        repeat
+          Delete;
+        until not Locate(ADetailFields, MasterValues, [])
+        else
+          raise ERelationUtils.CreateFmt('Ya existen registros detalle en la tabla %s', [Name]);
       end;
     finally
-      MasterSource := DSDetail;
+      try
+        if BookmarkValid(bBookmark) then
+          GotoBookmark(bBookmark);
+      except
+      end;
+      FreeBookmark(bBookmark);
       EnableControls;
     end;
   end;

@@ -11,20 +11,13 @@ uses
 
 type
   TSelPeriodoForm = class(TForm)
-    TbDiaHora: TZTable;
-    DSDiaHora: TDataSource;
-    TbDiaHoraCodDia: TIntegerField;
-    TbDiaHoraCodHora: TIntegerField;
-    TbDiaHoraNomDia: TStringField;
-    TbDiaHoraNomHora: TStringField;
     BBAceptar: TBitBtn;
     BBCancelar: TBitBtn;
     Label1: TLabel;
     Label2: TLabel;
-    DBLookupComboBox1: TDBLookupComboBox;
+    CbDia: TDBLookupComboBox;
     Label3: TLabel;
-    DBLookupComboBox2: TDBLookupComboBox;
-    procedure FormShow(Sender: TObject);
+    CbHora: TDBLookupComboBox;
   private
     { Private declarations }
   public
@@ -48,17 +41,12 @@ begin
     Result := FSelPeriodoForm.ShowModal = mrOk;
     if Result then
     begin
-      ACodDia := FSelPeriodoForm.TbDiaHoraCodDia.Value;
-      ACodHora := FSelPeriodoForm.TbDiaHoraCodHora.Value;
+      ACodDia := FSelPeriodoForm.CbDia.KeyValue;
+      ACodHora := FSelPeriodoForm.CbHora.KeyValue;
     end;
   finally
     FSelPeriodoForm.Release;
   end;
-end;
-
-procedure TSelPeriodoForm.FormShow(Sender: TObject);
-begin
-  TbDiaHora.Open;
 end;
 
 initialization

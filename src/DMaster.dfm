@@ -5,32 +5,14 @@ object MasterDataModule: TMasterDataModule
   Height = 404
   Width = 748
   object TbTmpProfesorCarga: TZTable
-
     Connection = SourceDataModule.Database
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     Left = 250
     Top = 11
-
     object TbTmpProfesorCargaCodProfesor: TIntegerField
       DisplayLabel = 'Profesor'
       FieldName = 'CodProfesor'
     end
-    object TbTmpProfesorCargaApeProfesor: TStringField
+    object TbTmpProfesorCargaApeProfesor: TWideStringField
       DisplayLabel = 'Apellido'
       DisplayWidth = 15
       FieldKind = fkLookup
@@ -42,7 +24,7 @@ object MasterDataModule: TMasterDataModule
       Size = 31
       Lookup = True
     end
-    object TbTmpProfesorCargaNomProfesor: TStringField
+    object TbTmpProfesorCargaNomProfesor: TWideStringField
       DisplayLabel = 'Nombre'
       DisplayWidth = 15
       FieldKind = fkLookup
@@ -59,27 +41,9 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object QuDistributivoProfesor: TZTable
-
     Connection = SourceDataModule.Database
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     Left = 250
     Top = 115
-
     object QuDistributivoProfesorCodMateria: TIntegerField
       FieldName = 'CodMateria'
       Visible = False
@@ -99,7 +63,7 @@ object MasterDataModule: TMasterDataModule
       FieldName = 'CodProfesor'
       Visible = False
     end
-    object QuDistributivoProfesorNomMateria: TStringField
+    object QuDistributivoProfesorNomMateria: TWideStringField
       Alignment = taRightJustify
       DisplayLabel = 'Materia'
       DisplayWidth = 15
@@ -111,7 +75,7 @@ object MasterDataModule: TMasterDataModule
       Size = 15
       Lookup = True
     end
-    object QuDistributivoProfesorAbrNivel: TStringField
+    object QuDistributivoProfesorAbrNivel: TWideStringField
       Alignment = taRightJustify
       DisplayLabel = 'Nivel'
       DisplayWidth = 10
@@ -123,7 +87,7 @@ object MasterDataModule: TMasterDataModule
       Size = 10
       Lookup = True
     end
-    object QuDistributivoProfesorAbrEspecializacion: TStringField
+    object QuDistributivoProfesorAbrEspecializacion: TWideStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -135,7 +99,7 @@ object MasterDataModule: TMasterDataModule
       Size = 10
       Lookup = True
     end
-    object QuDistributivoProfesorNomParaleloId: TStringField
+    object QuDistributivoProfesorNomParaleloId: TWideStringField
       Alignment = taRightJustify
       DisplayLabel = 'Par.'
       FieldKind = fkLookup
@@ -146,7 +110,7 @@ object MasterDataModule: TMasterDataModule
       Size = 5
       Lookup = True
     end
-    object QuDistributivoProfesorApeNomProfesor: TStringField
+    object QuDistributivoProfesorApeNomProfesor: TWideStringField
       DisplayLabel = 'Profesor'
       DisplayWidth = 31
       FieldKind = fkLookup
@@ -159,27 +123,9 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object QuProfesorProhibicionCant: TZTable
-
     Connection = SourceDataModule.Database
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     Left = 58
     Top = 157
-
     object QuProfesorProhibicionCantCodProfesor: TIntegerField
       FieldName = 'CodProfesor'
     end
@@ -188,32 +134,14 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object TbTmpAulaTipoCarga: TZTable
-
     Connection = SourceDataModule.Database
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     Left = 250
     Top = 62
-
     object TbTmpAulaTipoCargaCodAulaTipo: TIntegerField
       DisplayLabel = 'Tipo de aula'
       FieldName = 'CodAulaTipo'
     end
-    object TbTmpAulaTipoCargaAbrAulaTipo: TStringField
+    object TbTmpAulaTipoCargaAbrAulaTipo: TWideStringField
       DisplayLabel = 'Nombre'
       DisplayWidth = 15
       FieldKind = fkLookup

@@ -12,26 +12,26 @@ type
   TMasterDataModule = class(TDataModule)
     TbTmpProfesorCarga: TZTable;
     TbTmpProfesorCargaCodProfesor: TIntegerField;
-    TbTmpProfesorCargaNomProfesor: TStringField;
-    TbTmpProfesorCargaApeProfesor: TStringField;
+    TbTmpProfesorCargaNomProfesor: TWideStringField;
+    TbTmpProfesorCargaApeProfesor: TWideStringField;
     TbTmpProfesorCargaCarga: TIntegerField;
     QuDistributivoProfesor: TZTable;
     QuDistributivoProfesorCodMateria: TIntegerField;
     QuDistributivoProfesorCodNivel: TIntegerField;
     QuDistributivoProfesorCodParaleloId: TIntegerField;
-    QuDistributivoProfesorNomMateria: TStringField;
-    QuDistributivoProfesorAbrNivel: TStringField;
-    QuDistributivoProfesorNomParaleloId: TStringField;
+    QuDistributivoProfesorNomMateria: TWideStringField;
+    QuDistributivoProfesorAbrNivel: TWideStringField;
+    QuDistributivoProfesorNomParaleloId: TWideStringField;
     QuDistributivoProfesorCodProfesor: TIntegerField;
-    QuDistributivoProfesorApeNomProfesor: TStringField;
+    QuDistributivoProfesorApeNomProfesor: TWideStringField;
     QuDistributivoProfesorCodEspecializacion: TIntegerField;
-    QuDistributivoProfesorAbrEspecializacion: TStringField;
+    QuDistributivoProfesorAbrEspecializacion: TWideStringField;
     QuProfesorProhibicionCant: TZTable;
     QuProfesorProhibicionCantCodProfesor: TIntegerField;
     QuProfesorProhibicionCantCantidad: TIntegerField;
     TbTmpAulaTipoCarga: TZTable;
     TbTmpAulaTipoCargaCodAulaTipo: TIntegerField;
-    TbTmpAulaTipoCargaAbrAulaTipo: TStringField;
+    TbTmpAulaTipoCargaAbrAulaTipo: TWideStringField;
     TbTmpAulaTipoCargaCarga: TIntegerField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
@@ -509,12 +509,12 @@ begin
           iSesion2 := TbHorarioDetalle.FindField('Sesion').Value;
           TbHorarioDetalle.Edit;
           TbHorarioDetalle.FindField('CodMateria').AsInteger := iCodMateria1;
-          TbHorarioDetalle.FindField('Sesion').Value := iSesion1;
+          TbHorarioDetalle.FindField('Sesion').AsInteger := iSesion1;
           TbHorarioDetalle.Post;
           TbHorarioDetalle.GotoBookmark(Bookmark1);
           TbHorarioDetalle.Edit;
           TbHorarioDetalle.FindField('CodMateria').AsInteger := iCodMateria2;
-          TbHorarioDetalle['Sesion'].Value := iSesion2;
+          TbHorarioDetalle.FindField('Sesion').AsInteger := iSesion2;
           TbHorarioDetalle.Post;
         end
         else if Locate1 then
@@ -527,7 +527,7 @@ begin
         end
         else if Locate2 then
         begin
-          TbHorarioDetalle.GotoBookmark(Bookmark1);
+          TbHorarioDetalle.GotoBookmark(Bookmark2);
           TbHorarioDetalle.Edit;
           TbHorarioDetalle.FindField('CodDia').AsInteger := ACodDia1;
           TbHorarioDetalle.FindField('CodHora').AsInteger := ACodHora1;
@@ -570,8 +570,8 @@ begin
   with FStringsShowParalelo do
   begin
     add('Materia=NomMateria');
-    add('Profesor=ApeNomProfesor');
-    add('Materia_Profesor=NomMateria;ApeNomProfesor');
+    add('Profesor=ApeProfesor;NomProfesor');
+    add('Materia_Profesor=NomMateria;ApeProfesor;NomProfesor');
   end;
 end;
 

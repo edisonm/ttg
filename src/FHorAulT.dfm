@@ -8,44 +8,48 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
   ExplicitHeight = 399
   PixelsPerInch = 96
   TextHeight = 13
+  object Splitter1: TSplitter [0]
+    Left = 233
+    Top = 25
+    Height = 328
+    ExplicitLeft = 241
+    ExplicitTop = 33
+  end
   inherited TlBShow: TToolBar
     Width = 713
     ExplicitWidth = 713
     inherited BtnShow: TToolButton
       Visible = False
     end
-    object BtnPrior: TToolButton
+    inherited BtnOk: TToolButton
+      Enabled = False
+      Visible = False
+    end
+    inherited BtnCancel: TToolButton
+      Enabled = False
+      Visible = False
+    end
+    object DBNavigator: TDBNavigator
       Left = 69
       Top = 0
-      ImageIndex = 5
-      OnClick = BtnPriorClick
-    end
-    object BtnNext: TToolButton
-      Left = 92
-      Top = 0
-      ImageIndex = 4
-      OnClick = BtnNextClick
-    end
-    object dlcAulaTipo: TDBLookupComboBox
-      Left = 115
-      Top = 0
-      Width = 169
-      Height = 21
-      Hint = 'Tipo de aula'
-      KeyField = 'CodAulaTipo'
-      ListField = 'AbrAulaTipo'
-      ListSource = SourceDataModule.DSAulaTipo
-      TabOrder = 0
+      Width = 92
+      Height = 22
+      DataSource = DSAulaTipo
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+      Flat = True
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
     end
     object cbVerAulaTipo: TComboBox
-      Left = 284
+      Left = 161
       Top = 0
       Width = 193
       Height = 21
       Hint = 'Ver|Que ver en el horario del tipo de aula'
       ParentShowHint = False
       ShowHint = True
-      TabOrder = 1
+      TabOrder = 0
       OnChange = BtnMostrarClick
     end
   end
@@ -56,20 +60,38 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
     ExplicitWidth = 713
   end
   inherited Panel1: TPanel
-    Width = 713
+    Left = 236
+    Width = 477
     Height = 328
-    ExplicitWidth = 713
+    ExplicitLeft = 236
+    ExplicitWidth = 477
     ExplicitHeight = 328
   end
   inherited DrawGrid: TDrawGrid
-    Width = 713
+    Left = 236
+    Width = 477
     Height = 328
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
-    ExplicitWidth = 713
+    ExplicitLeft = 236
+    ExplicitWidth = 477
     ExplicitHeight = 328
   end
+  object DBGrid1: TDBGrid [5]
+    Left = 0
+    Top = 25
+    Width = 233
+    Height = 328
+    Align = alLeft
+    DataSource = DSAulaTipo
+    TabOrder = 4
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+  end
   inherited ImageList: TImageList
-    Left = 112
+    Left = 168
     Top = 80
     Bitmap = {
       494C010106000800040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
@@ -345,21 +367,102 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
   end
   object QuHorarioAulaTipo: TZQuery
     Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario;CodAulaTipo'
     OnCalcFields = QuHorarioAulaTipoCalcFields
-    Params = <>
-    DataSource = SourceDataModule.DSAulaTipo
-    MasterFields = 'CodAulaTipo'
-    MasterSource = SourceDataModule.DSAulaTipo
+    ReadOnly = True
+    SQL.Strings = (
+      'SELECT'
+      '  HorarioDetalle.CodHorario,'
+      '  Distributivo.CodAulaTipo,'
+      '  HorarioDetalle.CodMateria,'
+      '  HorarioDetalle.CodDia,'
+      '  HorarioDetalle.CodHora,'
+      '  Nivel.CodNivel,'
+      '  Especializacion.CodEspecializacion,'
+      '  ParaleloId.CodParaleloId,'
+      '  Materia.NomMateria,'
+      '  AbrNivel,'
+      '  AbrEspecializacion,'
+      '  NomParaleloId'
+      'FROM'
+      '  ((((HorarioDetalle'
+      '  INNER JOIN Distributivo'
+      '   ON (HorarioDetalle.CodMateria=Distributivo.CodMateria)'
+      '  AND (HorarioDetalle.CodNivel=Distributivo.CodNivel)'
+      
+        '  AND (HorarioDetalle.CodEspecializacion=Distributivo.CodEspecia' +
+        'lizacion)'
+      '  AND (HorarioDetalle.CodParaleloId=Distributivo.CodParaleloId))'
+      '  INNER JOIN Nivel ON HorarioDetalle.CodNivel=Nivel.CodNivel)'
+      
+        '  INNER JOIN Especializacion ON HorarioDetalle.CodEspecializacio' +
+        'n=Especializacion.CodEspecializacion)'
+      
+        '  INNER JOIN ParaleloId ON Distributivo.CodParaleloId=ParaleloId' +
+        '.CodParaleloId)'
+      
+        '  INNER JOIN Materia ON Distributivo.CodMateria=Materia.CodMater' +
+        'ia'
+      'WHERE (Distributivo.CodAulaTipo=:CodAulaTipo)'
+      '  AND (HorarioDetalle.CodHorario=:CodHorario)'
+      'ORDER BY HorarioDetalle.CodDia,'
+      '  HorarioDetalle.CodHora,'
+      '  Nivel.CodNivel,'
+      '  Especializacion.CodEspecializacion,'
+      '  ParaleloId.CodParaleloId,'
+      '  Materia.NomMateria')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodAulaTipo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    DataSource = DSAulaTipo
+    MasterFields = 'CodHorario;CodAulaTipo'
+    MasterSource = DSAulaTipo
+    LinkedFields = 'CodHorario;CodAulaTipo'
+    IndexFieldNames = 'CodHorario Asc;CodAulaTipo Asc'
     Left = 84
     Top = 80
-    object QuHorarioAulaTipoCodAulaTipo: TAutoIncField
-      DisplayLabel = 'Codigo'
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodAulaTipo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    object QuHorarioAulaTipoCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+      ReadOnly = True
+    end
+    object QuHorarioAulaTipoCodAulaTipo: TIntegerField
       FieldName = 'CodAulaTipo'
-      Visible = False
+      ReadOnly = True
     end
     object QuHorarioAulaTipoCodMateria: TIntegerField
       DisplayLabel = 'Materia'
       FieldName = 'CodMateria'
+      Required = True
+      Visible = False
+    end
+    object QuHorarioAulaTipoCodDia: TIntegerField
+      DisplayLabel = 'Dia'
+      FieldName = 'CodDia'
+      Required = True
+      Visible = False
+    end
+    object QuHorarioAulaTipoCodHora: TIntegerField
+      DisplayLabel = 'Hora'
+      FieldName = 'CodHora'
       Required = True
       Visible = False
     end
@@ -381,66 +484,30 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       Required = True
       Visible = False
     end
-    object QuHorarioAulaTipoCodHora: TIntegerField
-      DisplayLabel = 'Hora'
-      FieldName = 'CodHora'
-      Required = True
-      Visible = False
-    end
-    object QuHorarioAulaTipoCodDia: TIntegerField
-      DisplayLabel = 'Dia'
-      FieldName = 'CodDia'
-      Required = True
-      Visible = False
-    end
-    object QuHorarioAulaTipoNomMateria: TStringField
+    object QuHorarioAulaTipoNomMateria: TWideStringField
       DisplayLabel = 'Materia'
       DisplayWidth = 15
-      FieldKind = fkLookup
       FieldName = 'NomMateria'
-      LookupDataSet = SourceDataModule.TbMateria
-      LookupKeyFields = 'CodMateria'
-      LookupResultField = 'NomMateria'
-      KeyFields = 'CodMateria'
       Size = 15
-      Lookup = True
     end
-    object QuHorarioAulaTipoAbrNivel: TStringField
+    object QuHorarioAulaTipoAbrNivel: TWideStringField
       DisplayLabel = 'Nivel'
       DisplayWidth = 5
-      FieldKind = fkLookup
       FieldName = 'AbrNivel'
-      LookupDataSet = SourceDataModule.TbNivel
-      LookupKeyFields = 'CodNivel'
-      LookupResultField = 'AbrNivel'
-      KeyFields = 'CodNivel'
       Size = 5
-      Lookup = True
     end
-    object QuHorarioAulaTipoAbrEspecializacion: TStringField
+    object QuHorarioAulaTipoAbrEspecializacion: TWideStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
-      FieldKind = fkLookup
       FieldName = 'AbrEspecializacion'
-      LookupDataSet = SourceDataModule.TbEspecializacion
-      LookupKeyFields = 'CodEspecializacion'
-      LookupResultField = 'AbrEspecializacion'
-      KeyFields = 'CodEspecializacion'
       Size = 10
-      Lookup = True
     end
-    object QuHorarioAulaTipoNomParaleloId: TStringField
+    object QuHorarioAulaTipoNomParaleloId: TWideStringField
       DisplayLabel = 'Par.'
-      FieldKind = fkLookup
       FieldName = 'NomParaleloId'
-      LookupDataSet = SourceDataModule.TbParaleloId
-      LookupKeyFields = 'CodParaleloId'
-      LookupResultField = 'NomParaleloId'
-      KeyFields = 'CodParaleloId'
       Size = 5
-      Lookup = True
     end
-    object QuHorarioAulaTipoNombre: TStringField
+    object QuHorarioAulaTipoNombre: TWideStringField
       FieldKind = fkCalculated
       FieldName = 'Nombre'
       Size = 40
@@ -448,9 +515,58 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
     end
   end
   object DSAulaTipo: TDataSource
-    DataSet = SourceDataModule.TbAulaTipo
+    DataSet = QuAulaTipo
     OnDataChange = DSAulaTipoDataChange
     Left = 84
-    Top = 108
+    Top = 140
+  end
+  object QuAulaTipo: TZQuery
+    Connection = SourceDataModule.Database
+    SortedFields = 'CodHorario'
+    OnCalcFields = QuHorarioAulaTipoCalcFields
+    ReadOnly = True
+    SQL.Strings = (
+      'select'
+      '  Horario.CodHorario,'
+      '  AulaTipo.CodAulaTipo,'
+      '  AulaTipo.AbrAulaTipo'
+      'from'
+      '  Horario,'
+      '  AulaTipo'
+      'where'
+      '  Horario.CodHorario=:CodHorario')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSHorario
+    MasterFields = 'CodHorario'
+    MasterSource = SourceDataModule.DSHorario
+    LinkedFields = 'CodHorario'
+    IndexFieldNames = 'CodHorario Asc'
+    Left = 164
+    Top = 140
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    object QuAulaTipoCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+      Visible = False
+    end
+    object QuAulaTipoCodAulaTipo: TIntegerField
+      FieldName = 'CodAulaTipo'
+      Visible = False
+    end
+    object QuAulaTipoAbrAulaTipo: TWideStringField
+      DisplayLabel = 'Aula'
+      FieldName = 'AbrAulaTipo'
+      Required = True
+      Size = 10
+    end
   end
 end

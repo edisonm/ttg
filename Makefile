@@ -86,6 +86,8 @@ $(TTGSQL): $(DBUTILS) $(TTGMDB)
 $(TTGSQLITE3): $(TTGSQL)
 	$(RM) $@
 	sqlite3 $@ ".read $(TTGSQL)"
+	sqlite3 $@ "pragma journal_mode=off"
+	sqlite3 $@ ".read $(TTGSQL)"
 #	sqlite3 $@ ".genfkey --exec"
 
 clean:

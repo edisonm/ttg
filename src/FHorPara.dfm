@@ -2,15 +2,23 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   Left = 610
   Top = 192
   ClientHeight = 401
-  ClientWidth = 696
+  ClientWidth = 765
   OnCreate = FormCreate
-  ExplicitWidth = 704
+  ExplicitWidth = 773
   ExplicitHeight = 428
   PixelsPerInch = 96
   TextHeight = 13
+  object Splitter1: TSplitter [0]
+    Left = 233
+    Top = 25
+    Height = 357
+    ExplicitLeft = 208
+    ExplicitTop = 104
+    ExplicitHeight = 100
+  end
   inherited TlBShow: TToolBar
-    Width = 696
-    ExplicitWidth = 696
+    Width = 765
+    ExplicitWidth = 765
     inherited BtnOk: TToolButton
       Enabled = False
       Visible = False
@@ -19,30 +27,20 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Enabled = False
       Visible = False
     end
-    object BtnPrior: TToolButton
+    object DBNavigator: TDBNavigator
       Left = 69
       Top = 0
-      ImageIndex = 4
-      OnClick = BtnPriorClick
-    end
-    object BtnNext: TToolButton
-      Left = 92
-      Top = 0
-      ImageIndex = 5
-      OnClick = BtnNextClick
-    end
-    object dlcParalelo: TDBLookupComboBox
-      Left = 115
-      Top = 0
-      Width = 150
-      Height = 21
-      ListField = 'AbrNivel;AbrEspecializacion;NomParaleloId;NomParalelo'
-      ListFieldIndex = 3
-      ListSource = SourceDataModule.DSParalelo
+      Width = 92
+      Height = 22
+      DataSource = DSParalelo
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+      Flat = True
+      ParentShowHint = False
+      ShowHint = True
       TabOrder = 1
     end
     object cbVerParalelo: TComboBox
-      Left = 265
+      Left = 161
       Top = 0
       Width = 185
       Height = 21
@@ -54,7 +52,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       OnChange = BtnMostrarClick
     end
     object BtnIntercambiarPeriodos: TToolButton
-      Left = 450
+      Left = 346
       Top = 0
       Hint = 'Intercambiar periodos|Intercambiar periodos'
       ImageIndex = 6
@@ -65,23 +63,41 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   end
   inherited pnlStatus: TPanel
     Top = 382
-    Width = 696
+    Width = 765
     ExplicitTop = 382
-    ExplicitWidth = 696
+    ExplicitWidth = 765
   end
   inherited Panel1: TPanel
-    Width = 696
+    Left = 236
+    Width = 529
     Height = 357
-    ExplicitWidth = 696
+    ExplicitLeft = 236
+    ExplicitWidth = 529
     ExplicitHeight = 357
   end
   inherited DrawGrid: TDrawGrid
-    Width = 696
+    Left = 236
+    Width = 529
     Height = 357
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
     OnDblClick = IntercambiarPeriodosClick
-    ExplicitWidth = 696
+    ExplicitLeft = 236
+    ExplicitWidth = 529
     ExplicitHeight = 357
+  end
+  object DBGrid1: TDBGrid [5]
+    Left = 0
+    Top = 25
+    Width = 233
+    Height = 357
+    Align = alLeft
+    DataSource = DSParalelo
+    TabOrder = 4
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
   end
   inherited ImageList: TImageList
     Left = 140
@@ -360,10 +376,12 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   end
   object QuHorarioParalelo: TZQuery
     Connection = SourceDataModule.Database
-    SortedFields = 'CodNivel;CodEspecializacion;CodParaleloId'
+    SortedFields = 'CodHorario;CodNivel;CodEspecializacion;CodParaleloId'
     OnCalcFields = QuHorarioParaleloCalcFields
+    ReadOnly = True
     SQL.Strings = (
       'select'
+      '  HorarioDetalle.CodHorario,'
       '  HorarioDetalle.CodNivel,'
       '  HorarioDetalle.CodEspecializacion,'
       '  HorarioDetalle.CodParaleloId,'
@@ -372,7 +390,8 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       '  HorarioDetalle.CodMateria,'
       '  Distributivo.CodProfesor,'
       '  NomMateria,'
-      '  ApeProfesor + '#39' '#39' + NomProfesor as ApeNomProfesor'
+      '  ApeProfesor,'
+      '  NomProfesor'
       'from'
       '  ((HorarioDetalle inner join Distributivo on'
       '  (HorarioDetalle.CodMateria = Distributivo.CodMateria)'
@@ -415,11 +434,13 @@ inherited HorarioParaleloForm: THorarioParaleloForm
         Name = 'CodParaleloId'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSParalelo
-    MasterFields = 'CodNivel;CodEspecializacion;CodParaleloId'
-    MasterSource = SourceDataModule.DSParalelo
-    LinkedFields = 'CodNivel;CodEspecializacion;CodParaleloId'
-    IndexFieldNames = 'CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc'
+    DataSource = DSParalelo
+    MasterFields = 'CodHorario;CodNivel;CodEspecializacion;CodParaleloId'
+    MasterSource = DSParalelo
+    LinkedFields = 'CodHorario;CodNivel;CodEspecializacion;CodParaleloId'
+    IndexFieldNames = 
+      'CodHorario Asc;CodNivel Asc;CodEspecializacion Asc;CodParaleloId' +
+      ' Asc'
     Left = 60
     Top = 104
     ParamData = <
@@ -443,6 +464,10 @@ inherited HorarioParaleloForm: THorarioParaleloForm
         Name = 'CodParaleloId'
         ParamType = ptUnknown
       end>
+    object QuHorarioParaleloCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+      ReadOnly = True
+    end
     object QuHorarioParaleloCodNivel: TIntegerField
       DisplayLabel = 'Nivel'
       FieldName = 'CodNivel'
@@ -484,7 +509,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       FieldName = 'CodProfesor'
       Visible = False
     end
-    object QuHorarioParaleloNombre: TStringField
+    object QuHorarioParaleloNombre: TWideStringField
       FieldKind = fkCalculated
       FieldName = 'Nombre'
       Size = 40
@@ -494,17 +519,112 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       FieldName = 'NomMateria'
       ReadOnly = True
     end
-    object QuHorarioParaleloApeNomProfesor: TWideStringField
-      DisplayWidth = 31
-      FieldName = 'ApeNomProfesor'
-      ReadOnly = True
-      Size = 31
+    object QuHorarioParaleloApeProfesor: TWideStringField
+      FieldName = 'ApeProfesor'
+      Required = True
+      Size = 15
+    end
+    object QuHorarioParaleloNomProfesor: TWideStringField
+      FieldName = 'NomProfesor'
+      Required = True
+      Size = 15
     end
   end
   object DSParalelo: TDataSource
-    DataSet = SourceDataModule.TbParalelo
+    DataSet = QuParalelo
     OnDataChange = DSParaleloDataChange
-    Left = 56
-    Top = 152
+    Left = 140
+    Top = 157
+  end
+  object QuParalelo: TZQuery
+    Connection = SourceDataModule.Database
+    OnCalcFields = QuParaleloCalcFields
+    ReadOnly = True
+    SQL.Strings = (
+      'select'
+      '  Horario.CodHorario,'
+      '  Paralelo.CodNivel,'
+      '  Paralelo.CodEspecializacion,'
+      '  Paralelo.CodParaleloId,'
+      '  AbrNivel,'
+      '  AbrEspecializacion,'
+      '  NomParaleloId'
+      'from'
+      '  ((Paralelo inner join Nivel on'
+      '    (Paralelo.CodNivel=Nivel.CodNivel))'
+      '    inner join Especializacion on'
+      
+        '    (Paralelo.CodEspecializacion=Especializacion.CodEspecializac' +
+        'ion))'
+      '    inner join ParaleloId on'
+      '    (Paralelo.CodParaleloId=ParaleloId.CodParaleloId),'
+      '  Horario'
+      'where'
+      '  Horario.CodHorario=:CodHorario'
+      'order by'
+      '  Paralelo.CodNivel,'
+      '  Paralelo.CodEspecializacion,'
+      '  Paralelo.CodParaleloId')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSHorario
+    MasterFields = 'CodHorario'
+    MasterSource = SourceDataModule.DSHorario
+    LinkedFields = 'CodHorario'
+    Left = 60
+    Top = 157
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'CodHorario'
+        ParamType = ptUnknown
+      end>
+    object QuParaleloCodHorario: TIntegerField
+      FieldName = 'CodHorario'
+      ReadOnly = True
+      Visible = False
+    end
+    object QuParaleloCodNivel: TIntegerField
+      FieldName = 'CodNivel'
+      ReadOnly = True
+      Visible = False
+    end
+    object QuParaleloCodEspecializacion: TIntegerField
+      FieldName = 'CodEspecializacion'
+      ReadOnly = True
+      Visible = False
+    end
+    object QuParaleloCodParaleloId: TIntegerField
+      FieldName = 'CodParaleloId'
+      Visible = False
+    end
+    object QuParaleloAbrNivel: TWideStringField
+      FieldName = 'AbrNivel'
+      ReadOnly = True
+      Visible = False
+      Size = 5
+    end
+    object QuParaleloAbrEspecializacion: TWideStringField
+      FieldName = 'AbrEspecializacion'
+      ReadOnly = True
+      Visible = False
+      Size = 10
+    end
+    object QuParaleloNomParaleloId: TWideStringField
+      FieldName = 'NomParaleloId'
+      Required = True
+      Visible = False
+      Size = 5
+    end
+    object QuParaleloNomParalelo: TWideStringField
+      FieldKind = fkCalculated
+      FieldName = 'NomParalelo'
+      Size = 30
+      Calculated = True
+    end
   end
 end
