@@ -1,17 +1,17 @@
 TTD 291
-// TbAulaTipo
+// AulaTipo
 2
 "CodAulaTipo";"NomAulaTipo";"AbrAulaTipo";"Cantidad";
 "1";"Aula Normal";"NORMAL";"27";
 "2";"Lab. de Computacion";"COMPUTAC";"1";
-// TbEspecializacion
+// Especializacion
 4
 "CodEspecializacion";"NomEspecializacion";"AbrEspecializacion";
 "1";"Basico";"BASICO";
 "2";"Contabilidad";"CONTA";
 "3";"Secretariado";"SECRE";
 "4";"Informatica";"INFO";
-// TbDia
+// Dia
 5
 "CodDia";"NomDia";
 "2";"Lunes";
@@ -19,7 +19,7 @@ TTD 291
 "4";"Miercoles";
 "5";"Jueves";
 "6";"Viernes";
-// TbMateria
+// Materia
 29
 "CodMateria";"NomMateria";
 "1";"Aso. de Clase";
@@ -51,7 +51,7 @@ TTD 291
 "27";"Dibujo";
 "28";"In. Tecnologica";
 "29";"Org. Archivo";
-// TbNivel
+// Nivel
 6
 "CodNivel";"NomNivel";"AbrNivel";
 "1";"Primero";"1";
@@ -60,7 +60,7 @@ TTD 291
 "4";"Cuarto";"4";
 "5";"Quinto";"5";
 "6";"Sexto";"6";
-// TbHora
+// Hora
 7
 "CodHora";"NomHora";"Intervalo";
 "1";"Primera";"07:00 p.m.-07:35 p.m.";
@@ -70,12 +70,12 @@ TTD 291
 "5";"Cuarta";"09:00 p.m.-09:35 p.m.";
 "6";"Quinta";"09:35 p.m.-10:10 p.m.";
 "7";"Sexta";"10:10 a.m.-10:45 p.m.";
-// TbHorario
+// Horario
 2
 "CodHorario";"MomentoInicial";"MomentoFinal";"Informe";
 "1";"06/08/2000 11:13:11";"06/08/2000 11:26:56";"Semillas del generador de numeros aleatorios:\n\r  Semilla 1: -2109101231\n\r  Semilla 2: 655293367\n\r  Semilla 3: -1598628723\n\r  Semilla 4: 984621\n\rPesos:\n\r  Cruce de profesores             89,00\n\r  Fracc. h. profesores            15,00\n\r  Cruce de aulas:                 65,00\n\r  Horas Huecas desubicadas:       95,00\n\r  Materias cortadas:              55,00\n\r  Materias no dispersas:           1,00\n\rParametros: 8; 100; 0,3; 0,2; 3; 0,2; 0,1\n\rNumero de generaciones:       100 \n\rDetalle                     Cant.    Valor\n\rCruce de profesores:            1    89,00\n\rFracc. h. profesores:         408  6120,00\n\rCruce de aulas:                 0     0,00\n\rHoras Huecas desubicadas:       0     0,00\n\rMaterias cortadas:              5   275,00\n\rMaterias no dispersas:         94    94,00\n\rProhibiciones de materia:      38   760,00\n\rProhibiciones de profesor:     77  1540,00\n\r\n\rValor Total:                       8878,00\n\r";
 "8";"24/01/2010 01:31:34";"24/01/2010 01:40:28";"Semillas del generador de numeros aleatorios:\n\r  Semilla 1: 1259488459\n\r  Semilla 2: -896166044\n\r  Semilla 3: -445561037\n\r  Semilla 4: -641617919\n\rPesos:\n\r  Cruce de profesores            801,00\n\r  Fracc. h. profesores            15,00\n\r  Cruce de aulas:                 65,00\n\r  Horas Huecas desubicadas:       95,00\n\r  Materias cortadas:             403,00\n\r  Materias no dispersas:           1,00\n\rParametros: 10; 5000; 0,3; 0,2; 3; 0,2; 0,1\n\rNumero de generaciones:      2451 \n\rDetalle                     Cant.    Valor\n\rCruce de profesores:            0     0,00\n\rFracc. h. profesores:         378  5670,00\n\rCruce de aulas:                 0     0,00\n\rHoras Huecas desubicadas:       0     0,00\n\rMaterias cortadas:              0     0,00\n\rMaterias no dispersas:         96    96,00\n\rProhibiciones de materia:      36   720,00\n\rProhibiciones de profesor:     58  1640,00\n\r\n\rValor Total:                       8126,00\n\r";
-// TbCurso
+// Curso
 12
 "CodNivel";"CodEspecializacion";
 "1";"1";
@@ -90,7 +90,7 @@ TTD 291
 "6";"2";
 "6";"3";
 "6";"4";
-// TbParaleloId
+// ParaleloId
 5
 "CodParaleloId";"NomParaleloId";
 "1";"A";
@@ -98,12 +98,12 @@ TTD 291
 "3";"C";
 "4";"S";
 "5";"D";
-// TbMateriaProhibicionTipo
+// MateriaProhibicionTipo
 2
 "CodMateProhibicionTipo";"NomMateProhibicionTipo";"ColMateProhibicionTipo";"ValMateProhibicionTipo";
 "2";"Inadecuado";"65280";"20";
 "3";"Imposible";"255";"500";
-// TbPeriodo
+// Periodo
 30
 "CodDia";"CodHora";
 "2";"1";
@@ -136,7 +136,7 @@ TTD 291
 "6";"5";
 "6";"6";
 "6";"7";
-// TbParalelo
+// Paralelo
 27
 "CodNivel";"CodEspecializacion";"CodParaleloId";
 "1";"1";"1";
@@ -166,7 +166,7 @@ TTD 291
 "6";"2";"3";
 "6";"3";"4";
 "6";"4";"5";
-// TbProfesor
+// Profesor
 51
 "CodProfesor";"CedProfesor";"ApeProfesor";"NomProfesor";
 "1";"1";"Loza";"Wilson";
@@ -220,7 +220,7 @@ TTD 291
 "49";"49";"Beltran";"Irma";
 "50";"50";"Baquero";"Rosario";
 "51";"51";"Mej¡a";"R¢mulo";
-// TbMateriaProhibicion
+// MateriaProhibicion
 35
 "CodMateria";"CodDia";"CodHora";"CodMateProhibicionTipo";
 "2";"2";"7";"2";
@@ -258,7 +258,7 @@ TTD 291
 "23";"6";"2";"2";
 "23";"6";"3";"2";
 "23";"6";"5";"2";
-// TbDistributivo
+// Distributivo
 268
 "CodMateria";"CodNivel";"CodEspecializacion";"CodParaleloId";"CodProfesor";"CodAulaTipo";"Composicion";
 "1";"1";"1";"1";"32";"1";"1";
@@ -529,7 +529,7 @@ TTD 291
 "29";"4";"3";"4";"8";"1";"1.1.1";
 "29";"5";"3";"4";"8";"1";"1.1.1";
 "29";"6";"3";"4";"8";"1";"1.1.1";
-// TbHorarioDetalle
+// HorarioDetalle
 1556
 "CodHorario";"CodMateria";"CodNivel";"CodEspecializacion";"CodParaleloId";"CodDia";"CodHora";"Sesion";
 "1";"1";"1";"1";"1";"2";"6";"0";
@@ -2088,12 +2088,12 @@ TTD 291
 "8";"29";"6";"3";"4";"2";"7";"638";
 "8";"29";"6";"3";"4";"3";"7";"637";
 "8";"29";"6";"3";"4";"6";"1";"639";
-// TbProfesorProhibicionTipo
+// ProfesorProhibicionTipo
 2
 "CodProfProhibicionTipo";"NomProfProhibicionTipo";"ColProfProhibicionTipo";"ValProfProhibicionTipo";
 "2";"No Gusta";"65280";"20";
 "3";"No Puede";"255";"500";
-// TbProfesorProhibicion
+// ProfesorProhibicion
 338
 "CodProfesor";"CodDia";"CodHora";"CodProfProhibicionTipo";
 "3";"2";"7";"2";
