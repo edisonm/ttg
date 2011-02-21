@@ -46,7 +46,6 @@ type
     { Public declarations }
     procedure IntercambiarPeriodos(ACodHorario, ACodNivel, ACodEspecializacion,
       ACodParaleloId, ACodDia1, ACodHora1, ACodDia2, ACodHora2: Integer);
-    function GetCargaActual: Integer;
     function PerformAllChecks(AMainStrings, ASubStrings: TStrings;
       AMaxCargaProfesor: Integer): Boolean;
     property StringsShowAulaTipo: TStrings read FStringsShowAulaTipo;
@@ -450,31 +449,6 @@ begin
     TbTmpProfesorCarga.Close;
     TbTmpAulaTipoCarga.Close;
     Result := HuboProblemas;
-  end;
-end;
-
-function TMasterDataModule.GetCargaActual: Integer;
-var
-  VBookmark: TBookmark;
-  c: Integer;
-begin
-  with SourceDataModule, TbDistributivo do
-  begin
-    VBookmark := GetBookmark;
-    DisableControls;
-    try
-      First;
-      c := 0;
-      while not Eof do
-      begin
-        Inc(c, ComposicionADuracion(TbDistributivo.FindField('Composicion').AsString));
-        Next;
-      end;
-      Result := c;
-    finally
-      EnableControls;
-      GotoBookmark(VBookmark);
-    end;
   end;
 end;
 

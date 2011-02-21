@@ -171,10 +171,12 @@ sq3tozeos:
 
 %.pp: %.pas
 	sed \
+	  -e s:"TWideStringField":"TStringField":g \
 	  -e s:"TIntegerField":"TLongintField":g $< > $@
 
 %.lfm: %.dfm
 	sed \
+	  -e s:"TWideStringField":"TStringField":g \
 	  -e s:"TIntegerField":"TLongIntField":g \
 	  -e s:"  OldCreateOrder = .*":"":g \
 	  -e s:"  TextHeight = .*":"":g \
@@ -186,6 +188,10 @@ sq3tozeos:
 	  -e s:"    AttachedAutoRefresh = .*":"":g \
 	  -e s:"    AttachMaxCount = .*":"":g \
 	  -e s:"    FilterOptions = .*":"":g \
+	  -e s:"    DoubleBuffered = .*":"":g \
+	  -e s:"    ParentDoubleBuffered = .*":"":g \
+	  -e s:"    Lookup = .*":"":g \
+	  -e s:"    Calculated = .*":"":g \
 	  -e s:"      ParentShowHint = .*":"":g $< > $@
 
 %.lrs: %.lfm

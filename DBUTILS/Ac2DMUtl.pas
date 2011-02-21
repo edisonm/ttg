@@ -468,11 +468,11 @@ begin
     Add('');
     Add('uses');
     Add('  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF},');
-    Add('  SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, DBase');
+    Add('  SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,');
     if AUnits <> '' then
-      Add('  ' + AUnits + ';')
+      Add('  DBase, ' + AUnits + ';')
     else
-      Add('  ;');
+      Add('  DBase;');
     Add('');
     Add('type');
     Add(Format('  T%s = class(TBaseDataModule)', [DataModuleName]));

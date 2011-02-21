@@ -34,8 +34,12 @@ inherited ProfesorForm: TProfesorForm
     Width = 702
     ExplicitTop = 381
     ExplicitWidth = 702
+    inherited SLState: TLabel
+      Height = 17
+    end
     inherited SLRecordNo: TLabel
       Left = 698
+      Height = 17
       ExplicitLeft = 698
     end
   end

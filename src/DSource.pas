@@ -11,10 +11,11 @@ uses
 
 type
   TSourceDataModule = class(TSourceBaseDataModule)
+    TbNivelCodNivel: TIntegerField;
+    TbNivelNomNivel: TWideStringField;
+    TbNivelAbrNivel: TWideStringField;
     procedure TbDistributivoBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
-    procedure TbProfesorCalcFields(DataSet: TDataSet);
-    procedure TbParaleloCalcFields(DataSet: TDataSet);
     procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
@@ -152,14 +153,6 @@ uses
 
 const
   pfhVersionNumber = 292;
-
-procedure TSourceDataModule.TbProfesorCalcFields(DataSet: TDataSet);
-begin
-  inherited;
-  with DataSet do
-    FieldValues['ApeNomProfesor'] := FieldValues['ApeProfesor'] + ' ' +
-      FieldValues['NomProfesor'];
-end;
 
 procedure TSourceDataModule.TbDistributivoBeforePost(DataSet: TDataSet);
 var
@@ -426,26 +419,6 @@ begin
     Lookup := True;
     DataSet := TbParalelo;
   end;
-  Field := TWideStringField.Create(TbParalelo);
-  with Field do
-  begin
-    FieldKind := fkCalculated;
-    FieldName := 'NomParalelo';
-    Calculated := True;
-    DataSet := TbParalelo;
-  end;
-  Field := TWideStringField.Create(TbProfesor);
-  with Field do
-  begin
-    DisplayLabel := 'Apellido Nombre';
-    DisplayWidth := 31;
-    FieldKind := fkCalculated;
-    FieldName := 'ApeNomProfesor';
-    Visible := False;
-    Size := 31;
-    Calculated := True;
-    DataSet := TbProfesor;
-  end;
   Field := TWideStringField.Create(TbMateriaProhibicion);
   with Field do
   begin
@@ -549,8 +522,6 @@ var
   Strings: TStrings;
 begin
   inherited;
-  TbProfesor.OnCalcFields := TbProfesorCalcFields;
-  TbParalelo.OnCalcFields := TbParaleloCalcFields;
   FConfigStorage := TConfigStorage.Create(Self);
   Database.Connect;
   Strings := TStringList.Create;
@@ -614,14 +585,6 @@ procedure TSourceDataModule.SaveToTextDir(const ADirName: TFileName);
 begin
   inherited;
   FConfigStorage.ConfigStrings.SaveToFile(ADirName + '/config.ini');
-end;
-
-procedure TSourceDataModule.TbParaleloCalcFields(DataSet: TDataSet);
-begin
-  inherited;
-  with DataSet do
-    FieldValues['NomParalelo'] := FieldValues['AbrNivel'] + ' ' +
-      FieldValues['AbrEspecializacion'] + ' ' + FieldValues['NomParaleloId'];
 end;
 
 function TSourceDataModule.GetNomColegio: string;

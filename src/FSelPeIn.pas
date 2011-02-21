@@ -41,8 +41,11 @@ begin
     Result := FSelPeriodoForm.ShowModal = mrOk;
     if Result then
     begin
-      ACodDia := FSelPeriodoForm.CbDia.KeyValue;
-      ACodHora := FSelPeriodoForm.CbHora.KeyValue;
+      with FSelPeriodoForm do
+      begin
+        ACodDia := CbDia.ListSource.DataSet.FindField('CodDia').AsInteger;
+        ACodHora := CbHora.ListSource.DataSet.FindField('CodHora').AsInteger;
+      end;
     end;
   finally
     FSelPeriodoForm.Release;
