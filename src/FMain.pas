@@ -13,10 +13,10 @@ TODO:
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  SysConst, ExtCtrls, DB, Menus, ComCtrls, ImgList, Buttons,
-  ActnList, ToolWin, StdActns, StdCtrls, FSplash,
-  FSingEdt, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset, FCrsMME0, FEditor, UConfig;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes, Graphics,
+  DB, Forms, Dialogs,SysConst, ExtCtrls, Menus, ComCtrls, ImgList, Buttons, ActnList,
+  ToolWin, StdActns, StdCtrls, FSplash, FSingEdt, ZConnection, Controls, FCrsMME0,
+  ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset, FEditor, UConfig;
 type
   TMainForm = class(TForm)
     MainMenu: TMainMenu;

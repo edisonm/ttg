@@ -5,8 +5,9 @@ unit DMaster;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DB, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset, TTGUtls, Variants;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics, DB,
+  Controls, Forms, Dialogs, ZConnection, ZAbstractRODataset, ZAbstractDataset,
+  ZAbstractTable, ZDataset, TTGUtls, Variants;
 
 type
   TMasterDataModule = class(TDataModule)

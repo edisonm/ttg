@@ -1,9 +1,9 @@
 object LogisticForm: TLogisticForm
   Left = 243
   Top = 186
-  Width = 442
-  Height = 394
   Caption = 'Visor de mensajes'
+  ClientHeight = 367
+  ClientWidth = 434
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,8 +11,10 @@ object LogisticForm: TLogisticForm
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsStayOnTop
+  OldCreateOrder = True
   Position = poScreenCenter
   PixelsPerInch = 96
+  TextHeight = 13
   object Panel1: TPanel
     Left = 0
     Top = 0
@@ -67,6 +69,9 @@ object LogisticForm: TLogisticForm
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
+    DesignSize = (
+      434
+      30)
     object lblMsg: TLabel
       Left = 8
       Top = 16
@@ -79,8 +84,10 @@ object LogisticForm: TLogisticForm
       Width = 75
       Height = 25
       Anchors = [akRight, akBottom]
-      TabOrder = 0
+      DoubleBuffered = True
       Kind = bkClose
+      ParentDoubleBuffered = False
+      TabOrder = 0
     end
   end
 end

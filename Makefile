@@ -171,15 +171,10 @@ sq3tozeos:
 
 %.pp: %.pas
 	sed \
-	  -e s:"TkbmMemTable":"TSqlite3Dataset":g \
-	  -e s:"kbmMemTable":"Sqlite3DS":g \
-	  -e s:"TIntegerField":"TLongIntField":g \
-	  -e s:"Windows,":"LResources,":g  $< > $@
+	  -e s:"TIntegerField":"TLongintField":g $< > $@
 
 %.lfm: %.dfm
-	sed -e s:"TkbmMemTable":"TSqlite3Dataset":g \
-	  -e s:"kbmMemTable":"Sqlite3DS":g \
-	  -e s:"KbmMemTable":"Sqlite3DS":g \
+	sed \
 	  -e s:"TIntegerField":"TLongIntField":g \
 	  -e s:"  OldCreateOrder = .*":"":g \
 	  -e s:"  TextHeight = .*":"":g \
@@ -190,22 +185,8 @@ sq3tozeos:
 	  -e s:"    DesignActivation = .*":"":g \
 	  -e s:"    AttachedAutoRefresh = .*":"":g \
 	  -e s:"    AttachMaxCount = .*":"":g \
-	  -e s:"    FieldDefs = <>":"":g \
-	  -e s:"    IndexDefs = .*":"":g \
-	  -e s:"    SortOptions = .*":"":g \
-	  -e s:"    PersistentBackup = .*":"":g \
-	  -e s:"    ProgressFlags = .*":"":g \
-	  -e s:"    LoadedCompletely = .*":"":g \
-	  -e s:"    SavedCompletely = .*":"":g \
-	  -e s:"    Version = .*":"":g \
-	  -e s:"    LanguageID = .*":"":g \
-	  -e s:"    SortID = .*":"":g \
-	  -e s:"    SubLanguageID = .*":"":g \
-	  -e s:"    LocaleID = .*":"":g \
 	  -e s:"    FilterOptions = .*":"":g \
-	  -e s:"      Lookup = .*":"":g \
-	  -e s:"      ParentShowHint = .*":"":g \
-	  -e s:"      Calculated = .*":"":g $< > $@
+	  -e s:"      ParentShowHint = .*":"":g $< > $@
 
 %.lrs: %.lfm
 	$(LAZRES) $@ $<

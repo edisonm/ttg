@@ -7,8 +7,8 @@ unit Ac2DMUtl;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, DBCtrls, DAO_TLB;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes,
+  Graphics, Controls, Forms, Dialogs, Db, StdCtrls, DBCtrls, DAO_TLB;
 
 type
   EInitAc2PxUtl = class(Exception);
@@ -467,15 +467,12 @@ begin
     Add('interface');
     Add('');
     Add('uses');
-    Add('{$IFDEF FPC}');
-    Add('  LResources,');
-    Add('{$ELSE}');
-    Add('  Windows,');
-    Add('{$ENDIF}');
-    Add('  SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,');
+    Add('  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF},');
+    Add('  SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, DBase');
     if AUnits <> '' then
-      Add('  ' + AUnits + ',');
-    Add('  DBase;');
+      Add('  ' + AUnits + ';')
+    else
+      Add('  ;');
     Add('');
     Add('type');
     Add(Format('  T%s = class(TBaseDataModule)', [DataModuleName]));

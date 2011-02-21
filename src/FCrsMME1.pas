@@ -5,8 +5,8 @@ unit FCrsMME1;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FCrsMMEd, Buttons, ExtCtrls, Grids, DB, ComCtrls, ToolWin, ImgList;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics, Dialogs,
+  Controls, Forms, FCrsMMEd, Buttons, ExtCtrls, Grids, DB, ComCtrls, ToolWin, ImgList;
 
 type
   TCrossManyToManyEditor1Form = class(TCrossManyToManyEditorForm)

@@ -101,12 +101,8 @@ inherited HorarioForm: THorarioForm
     Width = 618
     ExplicitTop = 315
     ExplicitWidth = 618
-    inherited SLState: TLabel
-      Height = 17
-    end
     inherited SLRecordNo: TLabel
       Left = 614
-      Height = 17
       ExplicitLeft = 614
     end
   end

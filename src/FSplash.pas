@@ -5,8 +5,8 @@ unit FSplash;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, DB, ExtCtrls;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes,
+  Graphics, Controls, Forms, Dialogs, StdCtrls, ComCtrls, DB, ExtCtrls;
 
 type
   TSplashForm = class(TForm)

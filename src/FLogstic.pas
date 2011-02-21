@@ -5,8 +5,8 @@ unit FLogstic;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, ExtCtrls;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes,
+  Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls;
 
 type
   TLogisticForm = class(TForm)

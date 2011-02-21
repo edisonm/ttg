@@ -5,8 +5,9 @@ unit DBase;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, RelUtils,
-  ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+  Controls, Forms, Dialogs, Db, RelUtils, ZConnection, ZAbstractRODataset,
+  ZAbstractDataset, ZAbstractTable, ZDataset;
 
 type
 

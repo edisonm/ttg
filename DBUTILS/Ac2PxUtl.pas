@@ -7,8 +7,8 @@ unit Ac2PxUtl;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, DBTables, StdCtrls, DBCtrls, DAO_TLB, Variants;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes, Forms,
+  Graphics, Controls, Dialogs, Db, DBTables, StdCtrls, DBCtrls, DAO_TLB, Variants;
 
 type
   EInitAc2PxUtl = class(Exception);

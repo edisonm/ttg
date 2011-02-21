@@ -1,6 +1,8 @@
 inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
   Left = 58
   Top = 222
+  ExplicitWidth = 320
+  ExplicitHeight = 240
   PixelsPerInch = 96
   TextHeight = 13
   object Splitter: TSplitter [0]

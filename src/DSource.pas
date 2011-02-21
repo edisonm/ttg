@@ -5,8 +5,9 @@ unit DSource;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, DSrcBase, UConfig,
-  Db, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+  Controls, Forms, Dialogs, DSrcBase, UConfig, Db, ZConnection, ZDataset,
+  ZAbstractRODataset, ZAbstractDataset, ZAbstractTable;
 
 type
   TSourceDataModule = class(TSourceBaseDataModule)

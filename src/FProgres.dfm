@@ -11,8 +11,10 @@ object ProgressForm: TProgressForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  OldCreateOrder = True
   Position = poDesktopCenter
   PixelsPerInch = 96
+  TextHeight = 13
   object pnlProgress: TPanel
     Left = 8
     Top = 8
@@ -32,7 +34,7 @@ object ProgressForm: TProgressForm
         Left = 364
         Top = 1
         Width = 12
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -68,7 +70,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -104,7 +106,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -130,7 +132,7 @@ object ProgressForm: TProgressForm
         Left = 91
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -156,7 +158,7 @@ object ProgressForm: TProgressForm
         Left = 91
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -192,7 +194,7 @@ object ProgressForm: TProgressForm
         Left = 91
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -218,7 +220,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -254,7 +256,7 @@ object ProgressForm: TProgressForm
         Left = 91
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -280,7 +282,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -306,7 +308,7 @@ object ProgressForm: TProgressForm
         Left = 373
         Top = 1
         Width = 3
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Font.Charset = DEFAULT_CHARSET
@@ -331,7 +333,7 @@ object ProgressForm: TProgressForm
         Left = 165
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -357,7 +359,7 @@ object ProgressForm: TProgressForm
         Left = 186
         Top = 1
         Width = 12
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -393,7 +395,7 @@ object ProgressForm: TProgressForm
         Left = 91
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -419,7 +421,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -455,7 +457,7 @@ object ProgressForm: TProgressForm
         Left = 91
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -481,7 +483,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -517,7 +519,7 @@ object ProgressForm: TProgressForm
         Left = 91
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -543,7 +545,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -579,7 +581,7 @@ object ProgressForm: TProgressForm
         Left = 91
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -605,7 +607,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -631,7 +633,7 @@ object ProgressForm: TProgressForm
         Left = 91
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -657,7 +659,7 @@ object ProgressForm: TProgressForm
         Left = 91
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -683,7 +685,7 @@ object ProgressForm: TProgressForm
         Left = 91
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -703,24 +705,27 @@ object ProgressForm: TProgressForm
     Width = 75
     Height = 25
     Caption = '&Finalizar'
-    TabOrder = 1
+    DoubleBuffered = True
     Kind = bkClose
+    ParentDoubleBuffered = False
+    TabOrder = 1
   end
   object bbtnCancel: TBitBtn
     Left = 248
     Top = 312
     Width = 75
     Height = 25
-    TabOrder = 2
+    DoubleBuffered = True
     Kind = bkCancel
+    ParentDoubleBuffered = False
+    TabOrder = 2
   end
   object PBNumMaxGeneracion: TProgressBar
     Left = 9
     Top = 315
     Width = 232
     Height = 17
-    Min = 0
-    Max = 100
+    ParentShowHint = False
     ShowHint = True
     TabOrder = 3
   end

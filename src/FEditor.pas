@@ -5,8 +5,8 @@ unit FEditor;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, DBCtrls,
-  Buttons, ExtCtrls, ComCtrls, ActnList, UConfig, ToolWin, ImgList;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics, Controls,
+  Forms, Dialogs, DBCtrls, Buttons, ExtCtrls, ComCtrls, ActnList, UConfig, ToolWin, ImgList;
 
 type
   TEditorForm = class(TForm)

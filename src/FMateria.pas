@@ -5,10 +5,10 @@ unit FMateria;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FSingEdt, DB,
-  Grids, Buttons, DBCtrls, ExtCtrls, Printers, ComCtrls, ToolWin, ActnList,
-  FCrsMMER, ImgList, DBGrids, StdCtrls, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+  Controls, Forms, Dialogs, FSingEdt, DB, Grids, Buttons, DBCtrls, ExtCtrls,
+  Printers, ComCtrls, ToolWin, ActnList, FCrsMMER, ImgList, DBGrids, StdCtrls,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset;
 
 type
   TMateriaForm = class(TSingleEditorForm)

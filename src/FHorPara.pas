@@ -5,10 +5,10 @@ unit FHorPara;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
-  FCrsMMER, StdCtrls, Buttons, ExtCtrls, Grids, Variants, FCrsMME1, DBCtrls,
-  ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset, ImgList, ComCtrls, ToolWin,
-  DBGrids;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes,
+  Graphics, Controls, Forms, Dialogs, Db, FCrsMMER, StdCtrls, Buttons, ExtCtrls,
+  Grids, Variants, FCrsMME1, DBCtrls, ZConnection, ZAbstractRODataset, DBGrids,
+  ZAbstractDataset, ZAbstractTable, ZDataset, ImgList, ComCtrls, ToolWin;
 
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)

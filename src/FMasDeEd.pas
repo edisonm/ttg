@@ -5,9 +5,9 @@ unit FMasDeEd;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Grids, DBGrids, UConfig, Buttons, DBCtrls, ExtCtrls, ComCtrls,
-  ActnList, ImgList, ToolWin, StdCtrls;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+  Controls, Forms, Dialogs, FSingEdt, Db, Grids, DBGrids, UConfig, Buttons,
+  DBCtrls, ExtCtrls, ComCtrls, ActnList, ImgList, ToolWin, StdCtrls;
 
 type
   TMasterDetailEditorForm = class(TSingleEditorForm)

@@ -3,8 +3,8 @@ unit Ac2SQUtl;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Db, StdCtrls, DBCtrls, DAO_TLB;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes,
+  Graphics, Controls, Forms, Dialogs, Db, StdCtrls, DBCtrls, DAO_TLB;
 
 procedure AccessToSQL(AccessFileName, SQLFileName: string; Msgs: TStrings);
 

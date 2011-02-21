@@ -5,10 +5,10 @@ unit FProfesr;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  FSingEdt, Db, Grids, StdCtrls, Buttons, DBCtrls, RelUtils, Variants,
-  ExtCtrls, ComCtrls, Printers, ImgList, ToolWin, ActnList, FCrsMMER, DBGrids,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+  Controls, Forms, Dialogs, FSingEdt, Db, Grids, StdCtrls, Buttons, DBCtrls,
+  RelUtils, Variants, ExtCtrls, ComCtrls, Printers, ImgList, ToolWin, ActnList,
+  FCrsMMER, DBGrids, ZAbstractRODataset, ZAbstractDataset, ZDataset;
 
 type
   TProfesorForm	= class(TSingleEditorForm)

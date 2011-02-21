@@ -5,9 +5,9 @@ unit FConfig;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls,
-  Buttons, ComCtrls, Spin, Grids, DBGrids, DSource, DB,{$IFDEF FPC}ColorBox,{$ENDIF}
-  ExtCtrls, DBCtrls{$IFNDEF FPC}, Mask{$ENDIF};
+  {$IFDEF FPC}ColorBox, LResources{$ELSE}Mask, Windows{$ENDIF}, SysUtils, Grids,
+  Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ComCtrls,
+  Spin, DBGrids, DSource, DB, ExtCtrls, DBCtrls;
 
 type
   TConfiguracionForm = class(TForm)
