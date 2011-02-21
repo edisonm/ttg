@@ -171,8 +171,15 @@ object MainForm: TMainForm
         ParentShowHint = False
         ShowHint = True
       end
-      object ToolButton3: TToolButton
+      object SIConfig: TToolButton
         Left = 330
+        Top = 0
+        Action = ActConfigurar
+        ParentShowHint = False
+        ShowHint = True
+      end
+      object ToolButton3: TToolButton
+        Left = 353
         Top = 0
         Width = 8
         Caption = 'ToolButton3'
@@ -180,13 +187,6 @@ object MainForm: TMainForm
         ParentShowHint = False
         ShowHint = True
         Style = tbsSeparator
-      end
-      object SIConfig: TToolButton
-        Left = 338
-        Top = 0
-        Action = ActConfigurar
-        ParentShowHint = False
-        ShowHint = True
       end
       object SIFindMejor: TToolButton
         Left = 361
@@ -1681,7 +1681,6 @@ object MainForm: TMainForm
       Category = 'Tools'
       Caption = 'Mejorar Horario'
       Hint = 'Mejorar Horario|Mejorar el Horario buscando en doble profundidad'
-      OnExecute = ActMejorarHorarioExecute
     end
   end
   object SaveDialogCSV: TSaveDialog

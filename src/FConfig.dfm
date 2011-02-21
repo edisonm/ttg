@@ -31,7 +31,7 @@ object ConfiguracionForm: TConfiguracionForm
     Top = 8
     Width = 401
     Height = 409
-    ActivePage = tbsOpciones
+    ActivePage = tbsUnidadEducativa
     ParentShowHint = False
     ShowHint = True
     TabOrder = 1
@@ -39,10 +39,6 @@ object ConfiguracionForm: TConfiguracionForm
       Hint = 'Datos del colegio'
       Caption = 'Colegio'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label14: TLabel
         Left = 8
         Top = 109
@@ -98,20 +94,6 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 77
         Height = 13
         Caption = 'Periodo Lectivo:'
-      end
-      object lblHorarioSeleccionado: TLabel
-        Left = 152
-        Top = 140
-        Width = 46
-        Height = 13
-        Caption = '(Ninguno)'
-      end
-      object Label33: TLabel
-        Left = 8
-        Top = 140
-        Width = 103
-        Height = 13
-        Caption = 'Horario seleccionado:'
       end
       object speMaxCargaProfesor: TSpinEdit
         Left = 152
@@ -177,10 +159,6 @@ object ConfiguracionForm: TConfiguracionForm
     object tbsOpciones: TTabSheet
       Caption = 'Opciones'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label19: TLabel
         Left = 16
         Top = 60
@@ -372,10 +350,6 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsPesos: TTabSheet
       Caption = 'Pesos'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label1: TLabel
         Left = 8
         Top = 12
@@ -606,10 +580,6 @@ object ConfiguracionForm: TConfiguracionForm
     object tbsAlgoritmoEvolutivo: TTabSheet
       Caption = 'Algoritmo Evolutivo'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object Label8: TLabel
         Left = 8
         Top = 13

@@ -74,24 +74,24 @@ inherited HorarioForm: THorarioForm
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnSeleccionarHorario: TToolButton
-      Left = 384
-      Top = 0
-      Action = ActSeleccionarHorario
-      ParentShowHint = False
-      ShowHint = True
-    end
     object BtnMateriaCortadaDia: TToolButton
-      Left = 407
+      Left = 384
       Top = 0
       Action = ActMateriaCortadaDia
       ParentShowHint = False
       ShowHint = True
     end
     object BtnMateriaCortadaHora: TToolButton
-      Left = 430
+      Left = 407
       Top = 0
       Action = ActMateriaCortadaHora
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object BtnMejorarHorario: TToolButton
+      Left = 430
+      Top = 0
+      Action = ActMejorarHorario
       ParentShowHint = False
       ShowHint = True
     end
@@ -124,7 +124,6 @@ inherited HorarioForm: THorarioForm
     inherited DBGrid: TDBGrid
       Width = 310
       Height = 288
-      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
       Columns = <
         item
           Expanded = False
@@ -595,8 +594,8 @@ inherited HorarioForm: THorarioForm
       '  CodHora,'
       '  AulaTipo.CodAulaTipo,'
       '  AulaTipo.AbrAulaTipo,'
-      '  CAST(COUNT(*) AS INTEGER) AS Usadas,'
-      '  CAST(COUNT(*) - AulaTipo.Cantidad AS INTEGER) AS Cruces'
+      '  COUNT(*) AS Usadas,'
+      '  COUNT(*) - AulaTipo.Cantidad AS Cruces'
       'FROM'
       '  (HorarioDetalle INNER JOIN Distributivo ON'
       '        HorarioDetalle.CodMateria=Distributivo.CodMateria'
@@ -616,6 +615,7 @@ inherited HorarioForm: THorarioForm
       '  CodHora,'
       '  AulaTipo.CodAulaTipo,'
       '  AulaTipo.AbrAulaTipo'
+      'HAVING Cruces > 0'
       'ORDER BY CodDia, CodHora, AulaTipo.AbrAulaTipo')
     Params = <
       item
@@ -639,6 +639,11 @@ inherited HorarioForm: THorarioForm
     object QuCruceAulaCodHorario: TIntegerField
       FieldName = 'CodHorario'
       ReadOnly = True
+      Visible = False
+    end
+    object QuCruceAulaCodAulaTipo: TIntegerField
+      FieldName = 'CodAulaTipo'
+      Visible = False
     end
     object QuCruceAulaCodDia: TIntegerField
       FieldName = 'CodDia'
@@ -646,10 +651,6 @@ inherited HorarioForm: THorarioForm
     end
     object QuCruceAulaCodHora: TIntegerField
       FieldName = 'CodHora'
-      Visible = False
-    end
-    object QuCruceAulaCodAulaTipo: TIntegerField
-      FieldName = 'CodAulaTipo'
       Visible = False
     end
     object QuCruceAulaAbrAulaTipo: TWideStringField
@@ -787,18 +788,22 @@ inherited HorarioForm: THorarioForm
     object QuCruceAulaDetalleCodHorario: TIntegerField
       FieldName = 'CodHorario'
       ReadOnly = True
+      Visible = False
     end
     object QuCruceAulaDetalleCodAulaTipo: TIntegerField
       FieldName = 'CodAulaTipo'
       ReadOnly = True
+      Visible = False
     end
     object QuCruceAulaDetalleCodDia: TIntegerField
       FieldName = 'CodDia'
       ReadOnly = True
+      Visible = False
     end
     object QuCruceAulaDetalleCodHora: TIntegerField
       FieldName = 'CodHora'
       ReadOnly = True
+      Visible = False
     end
     object QuCruceAulaDetalleCodNivel: TIntegerField
       FieldName = 'CodNivel'
@@ -860,7 +865,7 @@ inherited HorarioForm: THorarioForm
   end
   object QuCruceProfesorDetalle: TZQuery [8]
     Connection = SourceDataModule.Database
-    SortedFields = 'CodHorario;CodProfesor'
+    SortedFields = 'CodHorario;CodProfesor;CodDia;CodHora'
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
@@ -872,7 +877,7 @@ inherited HorarioForm: THorarioForm
       '  Distributivo.CodEspecializacion,'
       '  Distributivo.CodParaleloId,'
       '  Distributivo.CodMateria'
-      'FROM (Distributivo'
+      'FROM Distributivo'
       '  INNER JOIN HorarioDetalle'
       '   ON (Distributivo.CodNivel = HorarioDetalle.CodNivel)'
       
@@ -881,9 +886,11 @@ inherited HorarioForm: THorarioForm
       
         '  AND (Distributivo.CodParaleloId = HorarioDetalle.CodParaleloId' +
         ')'
-      '  AND (Distributivo.CodMateria = HorarioDetalle.CodMateria))'
+      '  AND (Distributivo.CodMateria = HorarioDetalle.CodMateria)'
       'WHERE HorarioDetalle.CodHorario=:CodHorario'
-      '  AND Distributivo.CodProfesor=:CodProfesor')
+      '  AND Distributivo.CodProfesor=:CodProfesor'
+      '  AND HorarioDetalle.CodDia=:CodDia'
+      '  AND HorarioDetalle.CodHora=:CodHora')
     Params = <
       item
         DataType = ftUnknown
@@ -894,12 +901,22 @@ inherited HorarioForm: THorarioForm
         DataType = ftUnknown
         Name = 'CodProfesor'
         ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodDia'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodHora'
+        ParamType = ptUnknown
       end>
     DataSource = DSCruceProfesor
-    MasterFields = 'CodHorario;CodProfesor'
+    MasterFields = 'CodHorario;CodProfesor;CodDia;CodHora'
     MasterSource = DSCruceProfesor
-    LinkedFields = 'CodHorario;CodProfesor'
-    IndexFieldNames = 'CodHorario Asc;CodProfesor Asc'
+    LinkedFields = 'CodHorario;CodProfesor;CodDia;CodHora'
+    IndexFieldNames = 'CodHorario Asc;CodProfesor Asc;CodDia Asc;CodHora Asc'
     Left = 423
     Top = 160
     ParamData = <
@@ -912,10 +929,21 @@ inherited HorarioForm: THorarioForm
         DataType = ftUnknown
         Name = 'CodProfesor'
         ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodDia'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CodHora'
+        ParamType = ptUnknown
       end>
     object QuCruceProfesorDetalleCodHorario: TIntegerField
       FieldName = 'CodHorario'
       ReadOnly = True
+      Visible = False
     end
     object QuCruceProfesorDetalleCodProfesor: TIntegerField
       FieldName = 'CodProfesor'
@@ -924,12 +952,10 @@ inherited HorarioForm: THorarioForm
     end
     object QuCruceProfesorDetalleCodDia: TIntegerField
       FieldName = 'CodDia'
-      Required = True
       Visible = False
     end
     object QuCruceProfesorDetalleCodHora: TIntegerField
       FieldName = 'CodHora'
-      Required = True
       Visible = False
     end
     object QuCruceProfesorDetalleCodNivel: TIntegerField
@@ -1007,7 +1033,7 @@ inherited HorarioForm: THorarioForm
   end
   object QuCruceProfesor: TZQuery [9]
     Connection = SourceDataModule.Database
-    SortedFields = 'CodHorario'
+    SortedFields = 'CodHorario;ApeProfesor;NomProfesor'
     AfterScroll = QuCruceProfesorAfterScroll
     ReadOnly = True
     SQL.Strings = (
@@ -1018,7 +1044,7 @@ inherited HorarioForm: THorarioForm
       '  HorarioDetalle.CodHora,'
       '  Profesor.ApeProfesor,'
       '  Profesor.NomProfesor,'
-      '  Count(*) AS Cruces'
+      '  Count(*) - 1 AS Cruces'
       'FROM (Distributivo'
       '  INNER JOIN HorarioDetalle ON'
       '       (Distributivo.CodMateria = HorarioDetalle.CodMateria)'
@@ -1040,8 +1066,10 @@ inherited HorarioForm: THorarioForm
       '  Profesor.NomProfesor,'
       '  HorarioDetalle.CodDia,'
       '  HorarioDetalle.CodHora'
-      'HAVING Count(*) > 1'
-      'ORDER BY Profesor.ApeProfesor, Profesor.NomProfesor')
+      'HAVING Cruces > 0'
+      
+        'ORDER BY HorarioDetalle.CodHorario, Profesor.ApeProfesor, Profes' +
+        'or.NomProfesor')
     Params = <
       item
         DataType = ftUnknown
@@ -1052,7 +1080,7 @@ inherited HorarioForm: THorarioForm
     MasterFields = 'CodHorario'
     MasterSource = SourceDataModule.DSHorario
     LinkedFields = 'CodHorario'
-    IndexFieldNames = 'CodHorario Asc'
+    IndexFieldNames = 'CodHorario Asc;ApeProfesor Asc;NomProfesor Asc'
     Left = 424
     Top = 63
     ParamData = <
@@ -1065,6 +1093,7 @@ inherited HorarioForm: THorarioForm
       DisplayLabel = 'Horario'
       FieldName = 'CodHorario'
       Required = True
+      Visible = False
     end
     object QuCruceProfesorCodProfesor: TIntegerField
       FieldName = 'CodProfesor'
@@ -1118,7 +1147,7 @@ inherited HorarioForm: THorarioForm
     object QuCruceProfesorCruces: TWideStringField
       FieldName = 'Cruces'
       ReadOnly = True
-      Size = 255
+      Size = 5
     end
   end
   object QuCruceMateria: TZQuery [10]
@@ -1136,6 +1165,9 @@ inherited HorarioForm: THorarioForm
       '  INNER JOIN HorarioDetalle as HorarioDetalle1'
       '    ON (HorarioDetalle.CodHorario=HorarioDetalle1.CodHorario)'
       '    AND (HorarioDetalle.CodNivel=HorarioDetalle1.CodNivel)'
+      
+        '    AND (HorarioDetalle.CodEspecializacion=HorarioDetalle1.CodEs' +
+        'pecializacion)'
       
         '    AND (HorarioDetalle.CodParaleloId=HorarioDetalle1.CodParalel' +
         'oId)'
@@ -1196,8 +1228,11 @@ inherited HorarioForm: THorarioForm
       'FROM'
       '  HorarioDetalle'
       '  INNER JOIN HorarioDetalle as HorarioDetalle1'
-      '    ON (HorarioDetalle.CodHorario=HorarioDetalle1.CodHorario)'
+      '     ON (HorarioDetalle.CodHorario=HorarioDetalle1.CodHorario)'
       '    AND (HorarioDetalle.CodNivel=HorarioDetalle1.CodNivel)'
+      
+        '    AND (HorarioDetalle.CodEspecializacion=HorarioDetalle1.CodEs' +
+        'pecializacion)'
       
         '    AND (HorarioDetalle.CodParaleloId=HorarioDetalle1.CodParalel' +
         'oId)'
@@ -1381,6 +1416,7 @@ inherited HorarioForm: THorarioForm
     object QuHorarioDetalleMateriaProhibicionCodHorario: TIntegerField
       FieldName = 'CodHorario'
       ReadOnly = True
+      Visible = False
     end
     object QuHorarioDetalleMateriaProhibicionNomMateProhibicionTipo: TWideStringField
       DisplayLabel = 'Tipo prohib. mat.'
@@ -1546,6 +1582,7 @@ inherited HorarioForm: THorarioForm
     object QuHorarioDetalleProfesorProhibicionCodHorario: TIntegerField
       FieldName = 'CodHorario'
       ReadOnly = True
+      Visible = False
     end
     object QuHorarioDetalleProfesorProhibicionCodProfProhibicionTipo: TIntegerField
       FieldName = 'CodProfProhibicionTipo'
@@ -1861,6 +1898,7 @@ inherited HorarioForm: THorarioForm
       DisplayLabel = 'Horario'
       FieldName = 'CodHorario'
       Required = True
+      Visible = False
     end
     object QuMateriaCortadaHoraCodDia: TIntegerField
       FieldName = 'CodDia'
@@ -1997,6 +2035,7 @@ inherited HorarioForm: THorarioForm
       end>
     object QuMateriaCortadaHoraDetalleCodHorario: TIntegerField
       FieldName = 'CodHorario'
+      Visible = False
     end
     object QuMateriaCortadaHoraDetalleCodNivel: TIntegerField
       FieldName = 'CodNivel'
@@ -2159,13 +2198,6 @@ inherited HorarioForm: THorarioForm
       ImageIndex = 8
       OnExecute = ActProfesorProhibicionNoRespetadaExecute
     end
-    object ActSeleccionarHorario: TAction
-      AutoCheck = True
-      Caption = 'Seleccionar horario'
-      Hint = 'Seleccionar horario|Seleccionar un horario de colegio'
-      ImageIndex = 9
-      OnExecute = ActSeleccionarHorarioExecute
-    end
     object ActMateriaCortadaDia: TAction
       AutoCheck = True
       Caption = 'Materias cortadas por el dia'
@@ -2186,6 +2218,13 @@ inherited HorarioForm: THorarioForm
       Hint = 'Horario por tipo de aulas|Horario por tipo de aulas'
       ImageIndex = 6
       OnExecute = ActHorarioAulaTipoExecute
+    end
+    object ActMejorarHorario: TAction
+      AutoCheck = True
+      Caption = 'ActMejorarHorario'
+      Hint = 'Mejorar horario|Mejorar horario seleccionado'
+      ImageIndex = 9
+      OnExecute = ActMejorarHorarioExecute
     end
   end
   object DSCruceProfesor: TDataSource

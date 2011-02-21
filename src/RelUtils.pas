@@ -5,9 +5,12 @@ unit RelUtils;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Forms, Dialogs, Db, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
+  Windows, SysUtils, Classes, Graphics, Forms, Dialogs, Db, ZConnection,
+  ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
 
-type ERelationUtils = class(Exception);
+type
+  ERelationUtils = class(Exception);
+  TDataSetArray = array of TDataSet;
 
 function StringToScaped(const AString: string): string;
 function ScapedToString(const AString: string): string; overload;
@@ -33,12 +36,15 @@ procedure LoadDataSetFromDataSet(ATarget, ASource: TDataSet);
 procedure LoadDataSetFromStrings(ADataSet: TDataSet; AStrings: TStrings;
   var Position: Integer);
 procedure PrepareDataSetFields(ADataSet: TDataSet);
-
+procedure LoadDatabaseFromStrings(AConnection: TZConnection; AStrings: TStrings;
+  NumTables: Integer; var APosition: Integer);
+procedure LoadDataSetsFromStrings(ATables: TDataSetArray; AStrings: TStrings;
+  var Position: Integer);
 
 implementation
 
 uses
-  Variants;
+  Variants, ZSysUtils;
 
 function GetOldFieldValues(ADataSet: TDataSet; const AFieldNames: string): Variant;
 var
@@ -428,7 +434,12 @@ begin
         if (ADataSet.Fields[i].FieldKind = fkData)
 //          and (ADataSet.Fields[i].DataType <> ftAutoInc)
         then
-          s := s + StringToScaped(ADataSet.Fields[i].AsString) + ';';
+        begin
+          if ADataSet.Fields[i].DataType in [ftDate, ftDateTime, ftTime, ftTimeStamp] then
+            s := s + StringToScaped(DateTimeToAnsiSQLDate(ADataSet.Fields[i].AsDateTime)) + ';'
+          else
+            s := s + StringToScaped(ADataSet.Fields[i].AsString) + ';';
+        end;
       end;
       AStrings.Add(s);
       ADataSet.Next;
@@ -561,12 +572,120 @@ begin
   end;
 end;
 
+procedure StringsToSQL(const ATableName: string;
+  AStrings, ASQL: TStrings; var Position: Integer; RecordCount: Integer);
+var
+  s: string;
+  j, l, Pos, Limit: Integer;
+  Value, Values, Field, Fields: string;
+begin
+  s := AStrings.Strings[Position];
+  Pos := 2;
+  l := 0;
+  Inc(Position);
+  while True do
+  begin
+    Field := ScapedToString(s, Pos);
+    if Field = '' then
+      break;
+    if l = 0 then
+      Fields := Field
+    else
+      Fields := Fields + ',' + Field;
+    Inc(l);
+    Inc(Pos, 3);
+  end;
+  Limit := Position + RecordCount;
+  while Position < Limit do
+  begin
+    Pos := 2;
+    s := AStrings[Position];
+    for j := 0 to l - 1 do
+    begin
+      Value := ScapedToString(s, Pos);
+      if j = 0 then
+        Values := Value
+      else
+        Values := Values + '","' + Value;
+      Inc(Pos, 3);
+    end;
+    ASQL.Add(Format('INSERT INTO %s (%s) VALUES ("%s");', [ATableName, Fields, Values]));
+    Inc(Position);
+  end;
+end;
+
+procedure LoadTableFromStrings0(const ATableName: string; AConnection: TZConnection;
+  AStrings: TStrings; var Position: Integer; RecordCount: Integer);
+var
+  SQL: TStrings;
+begin
+  SQL := TStringList.Create;
+  try
+    StringsToSQL(ATableName, AStrings, SQL, Position, RecordCount);
+    AConnection.ExecuteDirect(SQL.Text);
+  finally
+    SQL.Free;
+  end;
+end;
+
+procedure LoadTableFromStrings(const ATableName: string; AConnection: TZConnection;
+  AStrings: TStrings; var APosition: Integer);
+var
+  RecordCount: Integer;
+begin
+  RecordCount := StrToInt(AStrings.Strings[APosition]);
+  Inc(APosition);
+  LoadTableFromStrings0(ATableName, AConnection, AStrings, APosition, RecordCount);
+end;
+
+procedure LoadDatabaseFromStrings(AConnection: TZConnection; AStrings: TStrings;
+  NumTables: Integer; var APosition: Integer);
+var
+  i: Integer;
+  TableName: string;
+begin
+  for i := 0 to NumTables - 1 do
+  begin
+    TableName := AStrings[APosition];
+    Inc(APosition);
+    try
+      LoadTableFromStrings(TableName, AConnection, AStrings, APosition);
+    except
+      MessageDlg('When processing ' + TableName, mtError, [mbOk], 0);
+      raise;
+    end;
+  end;
+end;
+
+procedure LoadDataSetsFromStrings(ATables: TDataSetArray; AStrings: TStrings;
+  var Position: Integer);
+var
+  i: Integer;
+begin
+    for i := Low(ATables) to High(ATables) do
+    begin
+      with ATables[i] as TZTable do
+      try
+//        CachedUpdates := True;
+        try
+          Inc(Position); // Skip Table Name
+          LoadDataSetFromStrings(ATables[i], AStrings, Position);
+        except
+          MessageDlg('When processing ' + ATables[i].Name, mtError, [mbOk], 0);
+          raise;
+        end;
+//        ApplyUpdates;
+      finally
+//        CachedUpdates := False;
+      end;
+    end;
+end;
+
 procedure LoadDataSetFromStrings(ADataSet: TDataSet; AStrings: TStrings;
   var Position: Integer);
 var
   RecordCount: Integer;
 begin
-  Inc(Position); // Skip Table Name
   RecordCount := StrToInt(AStrings.Strings[Position]);
   Inc(Position);
   LoadDataSetFromStrings0(ADataSet, AStrings, Position, RecordCount);

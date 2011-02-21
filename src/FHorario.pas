@@ -36,8 +36,6 @@ type
     DSCruceAula: TDataSource;
     QuCruceProfesorDetalle: TZQuery;
     QuCruceProfesorDetalleCodProfesor: TIntegerField;
-    QuCruceProfesorDetalleCodDia: TIntegerField;
-    QuCruceProfesorDetalleCodHora: TIntegerField;
     QuCruceProfesorDetalleCodNivel: TIntegerField;
     QuCruceProfesorDetalleCodEspecializacion: TIntegerField;
     QuCruceProfesorDetalleCodParaleloId: TIntegerField;
@@ -85,7 +83,6 @@ type
     QuHorarioDetalleProfesorProhibicionNomHora: TWideStringField;
     Panel2: TPanel;
     dbmInforme: TDBMemo;
-    BtnSeleccionarHorario: TToolButton;
     BtnMateriaCortadaDia: TToolButton;
     QuMateriaCortadaDia: TZQuery;
     QuMateriaCortadaDiaCodNivel: TIntegerField;
@@ -142,7 +139,6 @@ type
     ActCruceAula: TAction;
     ActMateriaProhibicionNoRespetada: TAction;
     ActProfesorProhibicionNoRespetada: TAction;
-    ActSeleccionarHorario: TAction;
     ActMateriaCortadaDia: TAction;
     ActMateriaCortadaHora: TAction;
     ActHorarioAulaTipo: TAction;
@@ -170,6 +166,10 @@ type
     QuMateriaCortadaHoraDetalleCodHorario: TIntegerField;
     QuCruceAulaCruces: TWideStringField;
     QuCruceAulaUsadas: TWideStringField;
+    QuCruceProfesorDetalleCodDia: TIntegerField;
+    QuCruceProfesorDetalleCodHora: TIntegerField;
+    BtnMejorarHorario: TToolButton;
+    ActMejorarHorario: TAction;
     procedure ActHorarioParaleloExecute(Sender: TObject);
     procedure ActCruceProfesorExecute(Sender: TObject);
     procedure ActCruceMateriaExecute(Sender: TObject);
@@ -179,20 +179,18 @@ type
     procedure ActCruceAulaExecute(Sender: TObject);
     procedure QuCruceProfesorAfterScroll(DataSet: TDataSet);
     procedure QuCruceMateriaAfterScroll(DataSet: TDataSet);
-    procedure ActSeleccionarHorarioExecute(Sender: TObject);
     procedure ActMateriaCortadaDiaExecute(Sender: TObject);
     procedure ActMateriaCortadaHoraExecute(Sender: TObject);
     procedure ActHorarioAulaTipoExecute(Sender: TObject);
-    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDestroy(Sender: TObject);
-    procedure ActFindExecute(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure DataSourceStateChange(Sender: TObject);
+    procedure ActFindExecute(Sender: TObject);
+    procedure ActMejorarHorarioExecute(Sender: TObject);
   private
     { Private declarations }
     FCruceAulaForm, FCruceMateriaForm, FMateriaCortadaHoraForm,
@@ -202,6 +200,7 @@ type
     FHorarioProfesorForm: THorarioProfesorForm;
     FHorarioAulaTipoForm: THorarioAulaTipoForm;
     FHorarioParaleloForm: THorarioParaleloForm;
+    procedure MejorarHorario;
   protected
     procedure doLoadConfig; override;
     procedure doSaveConfig; override;
@@ -216,7 +215,7 @@ implementation
 
 uses
   FCrsMMER, DMaster, TTGUtls, FCrsMME1, FConfig, Printers, DSource, FMain,
-  Variants, RelUtils;
+  Variants, RelUtils, KerModel;
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
@@ -296,6 +295,88 @@ begin
   end;
 end;
 
+procedure THorarioForm.ActMejorarHorarioExecute(Sender: TObject);
+begin
+  inherited;
+{$IFNDEF FREEWARE}
+  MejorarHorario;
+{$ENDIF}
+end;
+
+{$IFNDEF FREEWARE}
+procedure THorarioForm.MejorarHorario;
+var
+  VModeloHorario: TModeloHorario;
+  VObjetoModeloHorario: TObjetoModeloHorario;
+  CodHorarioFuente, CodHorarioDestino: Integer;
+  Informe: TStrings;
+  MomentoInicial, MomentoFinal: TDateTime;
+  d: string;
+  va: Double;
+begin
+  CodHorarioFuente := SourceDataModule.TbHorario.FindField('CodHorario').AsInteger;
+  if not InputQuery(Format('Mejorando Horario %d: ', [CodHorarioFuente]),
+    'Codigo del horario mejorado', d) then
+    Exit;
+  CodHorarioDestino := StrToInt(d);
+  MainForm.CloseClick := False;
+  with SourceDataModule do
+  begin
+    InitRandom;
+    MomentoInicial := Now;
+    MainForm.Ejecutando := True;
+    VModeloHorario :=
+      TModeloHorario.CrearDesdeDataModule(
+        CruceProfesor,
+        ProfesorFraccionamiento,
+        CruceAulaTipo,
+        HoraHueca,
+        SesionCortada,
+        MateriaNoDispersa);
+    MainForm.StatusBar.Panels[1].Style := psOwnerDraw;
+    MainForm.Progress := 0;
+    MainForm.Pasada := 0;
+    try
+      VModeloHorario.OnProgress := MainForm.ProgressDescensoDoble;
+      MainForm.Step := 1;
+      VObjetoModeloHorario := TObjetoModeloHorario.CrearDesdeModelo(VModeloHorario);
+      try
+        {if s = '' then
+          VObjetoModeloHorario.HacerAleatorio
+        else}
+        VObjetoModeloHorario.LoadFromDataModule(CodHorarioFuente);
+        va := VObjetoModeloHorario.Valor;
+        VObjetoModeloHorario.DescensoRapidoForzado;
+        VObjetoModeloHorario.DescensoRapidoDobleForzado;
+        MomentoFinal := Now;
+        Informe := TStringList.Create;
+        try
+          Informe.Add('Algoritmo de Descenso Rapido Doble');
+          Informe.Add('==================================');
+          Informe.Add(Format('Horario base (Peso): %d (%f)',
+            [CodHorarioFuente, va]));
+          VModeloHorario.ReportParameters(Informe);
+          VObjetoModeloHorario.ReportValues(Informe);
+          VObjetoModeloHorario.SaveToDataModule(CodHorarioDestino, MomentoInicial,
+            MomentoFinal, Informe);
+          if SourceDataModule.TbHorario.Active then
+            SourceDataModule.TbHorario.Refresh;
+        finally
+          Informe.Free;
+        end;
+      finally
+        VObjetoModeloHorario.Free;
+      end;
+    finally
+      VModeloHorario.Free;
+      MainForm.Ejecutando := False;
+      MainForm.StatusBar.Panels[1].Style := psText;
+      MainForm.StatusBar.Panels[2].Text := 'Listo';
+    end;
+  end;
+end;
+{$ENDIF}
+
 procedure THorarioForm.ActProfesorProhibicionNoRespetadaExecute
   (Sender: TObject);
 begin
@@ -340,14 +421,6 @@ begin
   inherited;
   QuCruceMateriaDetalle.Filter := Format('CodMateria=%d',
     [QuCruceMateriaCodMateria.Value]);
-end;
-
-procedure THorarioForm.ActSeleccionarHorarioExecute(Sender: TObject);
-begin
-  inherited;
-  with SourceDataModule do
-    SeleccionarHorario;
-  DBGrid.Refresh;
 end;
 
 procedure THorarioForm.ActMateriaCortadaDiaExecute(Sender: TObject);
@@ -405,22 +478,6 @@ end;
 procedure THorarioForm.DBGridDblClick(Sender: TObject);
 begin
   inherited DBGridDblClick(Sender);
-end;
-
-procedure THorarioForm.DBGridDrawColumnCell
-  (Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-var
-  DBGrid: TCustomDBGrid;
-begin
-  DBGrid := Sender as TCustomDBGrid;
-  if (SourceDataModule.HorarioSeleccionado <> -1) and
-    (SourceDataModule.HorarioSeleccionado =
-      SourceDataModule.TbHorario.FindField('CodHorario').AsInteger) then
-    Column.Color := clAqua
-  else
-    Column.Color := clWhite;
-  DBGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
 procedure THorarioForm.doLoadConfig;

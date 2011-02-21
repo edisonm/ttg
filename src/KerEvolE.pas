@@ -1,5 +1,4 @@
 unit KerEvolE;
-
 {$I TTG.inc}
 
 interface
@@ -9,25 +8,26 @@ uses
 
 type
   TObjetoModeloHorarioArray = array of TObjetoModeloHorario;
-{
-  Clase TEvolElitista
-  Descripcion:
+
+  {
+    Clase TEvolElitista
+    Descripcion:
     Implementa el algoritmo evolutivo, utilizando el modelo elitista.
     Miembros privados:
-      Los parametros de configuracion del algoritmo evolutivo, y las funciones
-      de uso interno.
+    Los parametros de configuracion del algoritmo evolutivo, y las funciones
+    de uso interno.
     Miembros protegidos:
-      No los hay.
+    No los hay.
     Miembros publicos:
-      propiedades que devuelven el valor de cada componente de la evaluacion
-      de la funcion objetivo en la mejor solucion encontrada,
-      el valor de la funcion objetivo, el constructor, funciones que
-      permiten guardar el horario encontrado en una base de datos, metodos que
-      consisten en los operadores geneticos aplicados sobre la poblacion, como
-      son cruce, mutacion, etc., ModeloHorario al que se aplica el algoritmo
-      evolutivo, metodo que permite ejecutar el algoritmo evolutivo, Eventos que
-      se disparan cada cierto numero de generaciones y cuando mejora la solucion.
-}
+    propiedades que devuelven el valor de cada componente de la evaluacion
+    de la funcion objetivo en la mejor solucion encontrada,
+    el valor de la funcion objetivo, el constructor, funciones que
+    permiten guardar el horario encontrado en una base de datos, metodos que
+    consisten en los operadores geneticos aplicados sobre la poblacion, como
+    son cruce, mutacion, etc., ModeloHorario al que se aplica el algoritmo
+    evolutivo, metodo que permite ejecutar el algoritmo evolutivo, Eventos que
+    se disparan cada cierto numero de generaciones y cuando mejora la solucion.
+    }
   TEvolElitista = class
   private
     function GetFileName: string;
@@ -35,33 +35,16 @@ type
   private
     FModeloHorario: TModeloHorario;
     FSyncDirectory: string;
-    FSemilla1,
-      FSemilla2,
-      FSemilla3,
-      FSemilla4,
-      FTamPoblacion,
-      FNumGeneracion,
-      FNumMaxGeneracion,
-      FNumImportacion,
-      FNumExportacion,
-      FNumColision,
-      FRangoPolinizacion,
-      FOrdenMutacion1: Longint;
-    FProbCruzamiento,
-      FProbMutacion1,
-      FProbMutacion2,
-      FProbReparacion: Double;
-    FPoblacion,
-      FNuevaPoblacion: TObjetoModeloHorarioArray;
-    FValorArray,
-      FAptitudArray,
-      FNuevoValorArray,
-      FNuevoAptitudArray,
-      FRAptitudArray,
-      FCAptitudArray: TDynamicDoubleArray;
-    FSesionCortadaArray, FNuevoSesionCortadaArray,
-      FCruceProfesorArray, FNuevoCruceProfesorArray,
-      FCruceAulaTipoArray, FNuevoCruceAulaTipoArray: TDynamicLongintArray;
+    FSemilla1, FSemilla2, FSemilla3, FSemilla4, FTamPoblacion, FNumGeneracion,
+      FNumMaxGeneracion, FNumImportacion, FNumExportacion, FNumColision,
+      FRangoPolinizacion, FOrdenMutacion1: Longint;
+    FProbCruzamiento, FProbMutacion1, FProbMutacion2, FProbReparacion: Double;
+    FPoblacion, FNuevaPoblacion: TObjetoModeloHorarioArray;
+    FValorArray, FAptitudArray, FNuevoValorArray, FNuevoAptitudArray,
+      FRAptitudArray, FCAptitudArray: TDynamicDoubleArray;
+    FSesionCortadaArray, FNuevoSesionCortadaArray, FCruceProfesorArray,
+      FNuevoCruceProfesorArray, FCruceAulaTipoArray,
+      FNuevoCruceAulaTipoArray: TDynamicLongintArray;
     FHorariosPrefijados: TDynamicLongintArray;
     FTerminado: Boolean;
     FOnIterar: TNotifyEvent;
@@ -95,19 +78,17 @@ type
     function GetMejorMateriaNoDispersaValor: Double;
     procedure CopiarIndividuo(Destino, Fuente: Integer);
     function GetMejorObjetoModeloHorario: TObjetoModeloHorario;
+    procedure ReportParameters(AInforme: TStrings);
   protected
   public
-    constructor CrearDesdeModelo(
-      AModeloHorario: TModeloHorario;
+    constructor CrearDesdeModelo(AModeloHorario: TModeloHorario;
       ATamPoblacion: Longint);
     procedure PrefijarHorarios(const Horarios: string);
     procedure InvalidarValores;
     procedure Actualizar;
     procedure Configurar(ATamPoblacion: Integer);
     destructor Destroy; override;
-    procedure SaveBestToDatabase(
-      CodHorario: Integer;
-      MomentoInicial,
+    procedure SaveBestToDatabase(CodHorario: Integer; MomentoInicial,
       MomentoFinal: TDateTime);
     procedure SaveMejorToStream(AStream: TStream);
     procedure LlenarInforme(AInforme: TStrings);
@@ -117,19 +98,21 @@ type
     procedure Terminar;
     procedure Reparar;
     property OnIterar: TNotifyEvent read FOnIterar write FOnIterar;
-    property OnRegistrarMejor: TNotifyEvent read FOnRegistrarMejor write
-      FOnRegistrarMejor;
+    property OnRegistrarMejor
+      : TNotifyEvent read FOnRegistrarMejor write FOnRegistrarMejor;
     property NumGeneracion: Longint read FNumGeneracion;
-    property NumMaxGeneracion: Longint read FNumMaxGeneracion write FNumMaxGeneracion;
-    property ProbCruzamiento: Double read FProbCruzamiento write FProbCruzamiento;
+    property NumMaxGeneracion
+      : Longint read FNumMaxGeneracion write FNumMaxGeneracion;
+    property ProbCruzamiento
+      : Double read FProbCruzamiento write FProbCruzamiento;
     property ProbMutacion1: Double read FProbMutacion1 write FProbMutacion1;
     property OrdenMutacion1: Integer read FOrdenMutacion1 write FOrdenMutacion1;
     property ProbMutacion2: Double read FProbMutacion2 write FProbMutacion2;
     property ProbReparacion: Double read FProbReparacion write FProbReparacion;
     property MejorValor: Double read GetMejorValor;
     property MejorCruceProfesor: Integer read GetMejorCruceProfesor;
-    property MejorProfesorFraccionamiento: Double
-      read GetMejorProfesorFraccionamiento;
+    property MejorProfesorFraccionamiento
+      : Double read GetMejorProfesorFraccionamiento;
     property MejorCruceAulaTipo: Integer read GetMejorCruceAulaTipo;
     property MejorHoraHuecaDesubicada: Integer read GetMejorHoraHuecaDesubicada;
     property MejorSesionCortada: Integer read GetMejorSesionCortada;
@@ -138,30 +121,29 @@ type
     property NumImportacion: Integer read FNumImportacion;
     property NumExportacion: Integer read FNumExportacion;
     property NumColision: Integer read FNumColision;
-    property MejorMateriaProhibicionValor: Double read
-      GetMejorMateriaProhibicionValor;
+    property MejorMateriaProhibicionValor
+      : Double read GetMejorMateriaProhibicionValor;
     property MejorDisponiblidadValor: Double read
       GetMejorProfesorProhibicionValor;
     property MejorCruceProfesorValor: Double read GetMejorCruceProfesorValor;
-    property MejorProfesorFraccionamientoValor: Double
-      read GetMejorProfesorFraccionamientoValor;
+    property MejorProfesorFraccionamientoValor
+      : Double read GetMejorProfesorFraccionamientoValor;
     property MejorCruceAulaTipoValor: Double read GetMejorCruceAulaTipoValor;
-    property MejorMateriaNoDispersaValor: Double read
-      GetMejorMateriaNoDispersaValor;
+    property MejorMateriaNoDispersaValor
+      : Double read GetMejorMateriaNoDispersaValor;
     property MejorMateriaNoDispersa: Integer read GetMejorMateriaNoDispersa;
-    property MejorHoraHuecaDesubicadaValor: Double read
-      GetMejorHoraHuecaDesubicadaValor;
+    property MejorHoraHuecaDesubicadaValor
+      : Double read GetMejorHoraHuecaDesubicadaValor;
     property MejorSesionCortadaValor: Double read GetMejorSesionCortadaValor;
     property PromedioValor: Double read GetPromedioValor;
-    property MejorObjetoModeloHorario: TObjetoModeloHorario read
-      GetMejorObjetoModeloHorario;
-    property ModeloHorario: TModeloHorario read
-      FModeloHorario;
+    property MejorObjetoModeloHorario
+      : TObjetoModeloHorario read GetMejorObjetoModeloHorario;
+    property ModeloHorario: TModeloHorario read FModeloHorario;
     property SyncDirectory: string read FSyncDirectory write FSyncDirectory;
     property FileName: string read GetFileName;
     property SyncFileName: string read GetSyncFileName;
-    property RangoPolinizacion: Integer read FRangoPolinizacion
-      write FRangoPolinizacion;
+    property RangoPolinizacion
+      : Integer read FRangoPolinizacion write FRangoPolinizacion;
   end;
 
 implementation
@@ -191,8 +173,8 @@ begin
   for i := 0 to High(FPoblacion) do
   begin
     if not Assigned(FNuevaPoblacion[i]) then
-      FNuevaPoblacion[i] :=
-        TObjetoModeloHorario.CrearDesdeModelo(FModeloHorario);
+      FNuevaPoblacion[i] := TObjetoModeloHorario.CrearDesdeModelo
+        (FModeloHorario);
   end;
 end;
 
@@ -278,8 +260,10 @@ begin
   begin
     d := FPoblacion[i].Valor;
     FValorArray[i] := d;
-    if VMinValue > d then VMinValue := d;
-    if VMaxValue < d then VMaxValue := d;
+    if VMinValue > d then
+      VMinValue := d;
+    if VMaxValue < d then
+      VMaxValue := d;
     FSesionCortadaArray[i] := FPoblacion[i].SesionCortada;
     FCruceProfesorArray[i] := FPoblacion[i].CruceProfesor;
     FCruceAulaTipoArray[i] := FPoblacion[i].CruceAulaTipo;
@@ -292,8 +276,8 @@ end;
 
 procedure TEvolElitista.TomarElMejor;
 var
-  i, iMejor, iMejorSesionCortada, iMejorCruceProfesor, iMejorCruceAulaTipo:
-    Integer;
+  i, iMejor, iMejorSesionCortada, iMejorCruceProfesor,
+    iMejorCruceAulaTipo: Integer;
 begin
   iMejor := 0;
   iMejorSesionCortada := 0;
@@ -305,21 +289,21 @@ begin
     begin
       iMejor := i;
     end;
-    if (FSesionCortadaArray[i] < FSesionCortadaArray[iMejorSesionCortada])
-      or ((FSesionCortadaArray[i] = FSesionCortadaArray[iMejorSesionCortada])
-      and (FValorArray[i] < FValorArray[iMejorSesionCortada])) then
+    if (FSesionCortadaArray[i] < FSesionCortadaArray[iMejorSesionCortada]) or
+      ((FSesionCortadaArray[i] = FSesionCortadaArray[iMejorSesionCortada]) and
+        (FValorArray[i] < FValorArray[iMejorSesionCortada])) then
     begin
       iMejorSesionCortada := i;
     end;
-    if (FCruceProfesorArray[i] < FCruceProfesorArray[iMejorCruceProfesor])
-      or ((FCruceProfesorArray[i] = FCruceProfesorArray[iMejorCruceProfesor])
-      and (FValorArray[i] < FValorArray[iMejorCruceProfesor])) then
+    if (FCruceProfesorArray[i] < FCruceProfesorArray[iMejorCruceProfesor]) or
+      ((FCruceProfesorArray[i] = FCruceProfesorArray[iMejorCruceProfesor]) and
+        (FValorArray[i] < FValorArray[iMejorCruceProfesor])) then
     begin
       iMejorCruceProfesor := i;
     end;
-    if (FCruceAulaTipoArray[i] < FCruceAulaTipoArray[iMejorCruceAulaTipo])
-      or ((FCruceAulaTipoArray[i] = FCruceAulaTipoArray[iMejorCruceAulaTipo])
-      and (FValorArray[i] < FValorArray[iMejorCruceAulaTipo])) then
+    if (FCruceAulaTipoArray[i] < FCruceAulaTipoArray[iMejorCruceAulaTipo]) or
+      ((FCruceAulaTipoArray[i] = FCruceAulaTipoArray[iMejorCruceAulaTipo]) and
+        (FValorArray[i] < FValorArray[iMejorCruceAulaTipo])) then
     begin
       iMejorCruceAulaTipo := i;
     end
@@ -344,9 +328,8 @@ procedure TEvolElitista.Elitista;
 var
   VMejorValor, VWorstValue: Double;
   i, iMejor, iWorst, iMejorSesionCortada, iMejorCruceProfesor,
-    iMejorCruceAulaTipo:
-    Longint;
-  //AStream: TStream;
+    iMejorCruceAulaTipo: Longint;
+  // AStream: TStream;
   FindMejor: Boolean;
 begin
   VMejorValor := FValorArray[0];
@@ -358,21 +341,21 @@ begin
   iMejorCruceAulaTipo := FTamPoblacion + 3;
   for i := 0 to FTamPoblacion - 1 do
   begin
-    if (FSesionCortadaArray[i] < FSesionCortadaArray[iMejorSesionCortada])
-      or ((FSesionCortadaArray[i] = FSesionCortadaArray[iMejorSesionCortada])
-      and (FValorArray[i] <= FValorArray[iMejorSesionCortada])) then
+    if (FSesionCortadaArray[i] < FSesionCortadaArray[iMejorSesionCortada]) or
+      ((FSesionCortadaArray[i] = FSesionCortadaArray[iMejorSesionCortada]) and
+        (FValorArray[i] <= FValorArray[iMejorSesionCortada])) then
     begin
       iMejorSesionCortada := i;
     end;
-    if (FCruceProfesorArray[i] < FCruceProfesorArray[iMejorCruceProfesor])
-      or ((FCruceProfesorArray[i] = FCruceProfesorArray[iMejorCruceProfesor])
-      and (FValorArray[i] <= FValorArray[iMejorCruceProfesor])) then
+    if (FCruceProfesorArray[i] < FCruceProfesorArray[iMejorCruceProfesor]) or
+      ((FCruceProfesorArray[i] = FCruceProfesorArray[iMejorCruceProfesor]) and
+        (FValorArray[i] <= FValorArray[iMejorCruceProfesor])) then
     begin
       iMejorCruceProfesor := i;
     end;
-    if (FCruceAulaTipoArray[i] < FCruceAulaTipoArray[iMejorCruceAulaTipo])
-      or ((FCruceAulaTipoArray[i] = FCruceAulaTipoArray[iMejorCruceAulaTipo])
-      and (FValorArray[i] <= FValorArray[iMejorCruceAulaTipo])) then
+    if (FCruceAulaTipoArray[i] < FCruceAulaTipoArray[iMejorCruceAulaTipo]) or
+      ((FCruceAulaTipoArray[i] = FCruceAulaTipoArray[iMejorCruceAulaTipo]) and
+        (FValorArray[i] <= FValorArray[iMejorCruceAulaTipo])) then
     begin
       iMejorCruceAulaTipo := i;
     end;
@@ -441,8 +424,8 @@ procedure TEvolElitista.Polinizar;
   var
     SyncStream: TStream;
   begin
-    SyncStream := TFileStream.Create(SyncFileName, fmCreate or
-      fmShareExclusive);
+    SyncStream := TFileStream.Create
+      (SyncFileName, fmCreate or fmShareExclusive);
     try
       SyncStream.write(FValorArray[FTamPoblacion], SizeOf(Double));
       ExportarInterno;
@@ -458,8 +441,8 @@ procedure TEvolElitista.Polinizar;
     try
       if FileExists(SyncFileName) then
       begin
-        SyncStream := TFileStream.Create(SyncFileName, fmOpenRead
-          or fmShareDenyWrite);
+        SyncStream := TFileStream.Create
+          (SyncFileName, fmOpenRead or fmShareDenyWrite);
         try
           SyncStream.read(dValor, SizeOf(Double));
         finally
@@ -490,8 +473,8 @@ var
   p: Extended;
   VTmpPoblacion: TObjetoModeloHorarioArray;
   VTmpAptitudArray, VTmpValorArray: TDynamicDoubleArray;
-  VTmpSesionCortadaArray, VTmpCruceProfesorArray, VTmpCruceAulaTipoArray:
-    TDynamicLongintArray;
+  VTmpSesionCortadaArray, VTmpCruceProfesorArray,
+    VTmpCruceAulaTipoArray: TDynamicLongintArray;
 begin
   sum := 0;
   for mem := 0 to FTamPoblacion - 1 do
@@ -626,7 +609,8 @@ begin
     Reparar;
     if FSyncDirectory <> '' then
       Polinizar;
-    if Assigned(FOnIterar) then FOnIterar(Self);
+    if Assigned(FOnIterar) then
+      FOnIterar(Self);
     Evaluar;
     Elitista;
     Inc(FNumGeneracion);
@@ -645,8 +629,8 @@ begin
   Result := FPoblacion[FTamPoblacion].DescensoRapido;
 end;
 
-procedure TEvolElitista.SaveBestToDatabase(CodHorario: Integer; MomentoInicial,
-  MomentoFinal: TDateTime);
+procedure TEvolElitista.SaveBestToDatabase(CodHorario: Integer;
+  MomentoInicial, MomentoFinal: TDateTime);
 var
   Informe: TStrings;
 begin
@@ -773,64 +757,27 @@ begin
   Result := FPoblacion[FTamPoblacion].ProfesorProhibicionValor;
 end;
 
+procedure TEvolElitista.ReportParameters(AInforme: TStrings);
+begin
+  with AInforme do
+  begin
+    Add('Algoritmo Evolutivo Elitista');
+    Add('============================');
+    Add('Semillas del generador de numeros aleatorios:');
+    Add(Format('  %d, %d, %d, %d', [FSemilla1, FSemilla2, FSemilla3, FSemilla4])
+      );
+    Add(Format('Numero de generaciones:     %5.d ', [NumGeneracion]));
+    Add(Format('Parametros A. Evolutivo: %d; %d; %g; %g; %d; %g; %g',
+        [FTamPoblacion, FNumMaxGeneracion, FProbCruzamiento, FProbMutacion1,
+        FOrdenMutacion1, FProbMutacion2, FProbReparacion]));
+  end;
+end;
+
 procedure TEvolElitista.LlenarInforme(AInforme: TStrings);
 begin
-  AInforme.Add(Format(
-    'Semillas del generador de numeros aleatorios:'#13#10 +
-    '  Semilla 1: %d'#13#10 +
-    '  Semilla 2: %d'#13#10 +
-    '  Semilla 3: %d'#13#10 +
-    '  Semilla 4: %d', [
-    FSemilla1,
-      FSemilla2,
-      FSemilla3,
-      FSemilla4]));
-  with FModeloHorario do
-  begin
-    AInforme.Add(Format(
-      'Pesos:'#13#10 +
-      '  Cruce de profesores          %8.2f'#13#10 +
-      '  Fracc. h. profesores         %8.2f'#13#10 +
-      '  Cruce de aulas:              %8.2f'#13#10 +
-      '  Horas Huecas desubicadas:    %8.2f'#13#10 +
-      '  Materias cortadas:           %8.2f'#13#10 +
-      '  Materias no dispersas:       %8.2f', [
-      CruceProfesorValor,
-        ProfesorFraccionamientoValor,
-        CruceAulaTipoValor,
-        HoraHuecaDesubicadaValor,
-        SesionCortadaValor,
-        MateriaNoDispersaValor]));
-  end;
-  AInforme.Add(Format(
-    'Parametros: %d; %d; %g; %g; %d; %g; %g',
-    [FTamPoblacion, FNumMaxGeneracion, FProbCruzamiento,
-    FProbMutacion1, FOrdenMutacion1, FProbMutacion2, FProbReparacion]));
-  AInforme.Add(Format(
-    'Numero de generaciones:     %5.d '#13#10 +
-    'Detalle                     Cant.    Valor'#13#10 +
-    'Cruce de profesores:        %5.d %8.2f'#13#10 +
-    'Fracc. h. profesores:       %5.f %8.2f'#13#10 +
-    'Cruce de aulas:             %5.d %8.2f'#13#10 +
-    'Horas Huecas desubicadas:   %5.d %8.2f'#13#10 +
-    'Materias cortadas:          %5.d %8.2f'#13#10 +
-    'Materias no dispersas:      %5.d %8.2f'#13#10 +
-    'Prohibiciones de materia:   %5.d %8.2f'#13#10 +
-    'Prohibiciones de profesor:  %5.d %8.2f'#13#10 +
-    #13#10 +
-    'Valor Total:                      %8.2f',
-    [
-    NumGeneracion,
-      MejorCruceProfesor, MejorCruceProfesorValor,
-      MejorProfesorFraccionamiento, MejorProfesorFraccionamientoValor,
-      MejorCruceAulaTipo, MejorCruceAulaTipoValor,
-      MejorHoraHuecaDesubicada, MejorHoraHuecaDesubicadaValor,
-      MejorSesionCortada, MejorSesionCortadaValor,
-      MejorMateriaNoDispersa, MejorMateriaNoDispersaValor,
-      MejorMateriaProhibicion, MejorMateriaProhibicionValor,
-      MejorProfesorProhibicion, MejorDisponiblidadValor,
-      MejorValor
-      ]));
+  ReportParameters(AInforme);
+  //FModeloHorario.ReportParameters(AInforme);
+  MejorObjetoModeloHorario.ReportValues(AInforme);
 end;
 
 procedure TEvolElitista.PrefijarHorarios(const Horarios: string);
@@ -859,4 +806,3 @@ begin
 end;
 
 end.
-

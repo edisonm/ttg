@@ -5,8 +5,8 @@ unit DSource;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, DSrcBase, Db, UConfig,
-  ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, DSrcBase, UConfig,
+  Db, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
 
 type
   TSourceDataModule = class(TSourceBaseDataModule)
@@ -35,8 +35,6 @@ type
     procedure SetCarResponsable(const Value: string);
     function GetMaxCargaProfesor: Integer;
     procedure SetMaxCargaProfesor(Value: Integer);
-    function GetHorarioSeleccionado: Integer;
-    procedure SetHorarioSeleccionado(Value: Integer);
     function GetComentarios: string;
     procedure SetComentarios(const Value: string);
     function GetRandomize: Boolean;
@@ -103,7 +101,6 @@ type
     procedure FillDefaultData;
     property ConfigStorage: TConfigStorage read FConfigStorage;
     procedure InitRandom;
-    procedure SeleccionarHorario;
 
     property NomColegio: string read GetNomColegio write SetNomColegio;
     property AnioLectivo: string read GetAnioLectivo write SetAnioLectivo;
@@ -112,7 +109,6 @@ type
     property NomResponsable: string read GetNomResponsable write SetNomResponsable;
     property CarResponsable: string read GetCarResponsable write SetCarResponsable;
     property MaxCargaProfesor: Integer read GetMaxCargaProfesor write SetMaxCargaProfesor;
-    property HorarioSeleccionado: Integer read GetHorarioSeleccionado write SetHorarioSeleccionado;
     property Comentarios: string read GetComentarios write SetComentarios;
     property Randomize: Boolean read GetRandomize write SetRandomize;
     property Seed1: Integer read GetSeed1 write SetSeed1;
@@ -154,7 +150,7 @@ uses
   TTGUtls, rand, Variants, DBase, FConfig;
 
 const
-  pfhVersionNumber = $00000123;
+  pfhVersionNumber = 292;
 
 procedure TSourceDataModule.TbProfesorCalcFields(DataSet: TDataSet);
 begin
@@ -242,7 +238,6 @@ begin
   NomResponsable := '';
   CarResponsable := '';
   MaxCargaProfesor := 20;
-  HorarioSeleccionado := -1;
   Comentarios := '';
   Randomize := True;
   Seed1 := 1;
@@ -571,6 +566,7 @@ begin
   end
   else
   begin
+    Database.ExecuteDirect('pragma journal_mode=off');
     PrepareTables;
     OpenTables;
   end;
@@ -695,16 +691,6 @@ end;
 procedure TSourceDataModule.SetMaxCargaProfesor(Value: Integer);
 begin
    ConfigStorage.Integers['MaxCargaProfesor'] := Value;
-end;
-
-function TSourceDataModule.GetHorarioSeleccionado: Integer;
-begin
-   Result := ConfigStorage.Integers['HorarioSeleccionado'];
-end;
-
-procedure TSourceDataModule.SetHorarioSeleccionado(Value: Integer);
-begin
-  ConfigStorage.Integers['HorarioSeleccionado'] := Value;
 end;
 
 function TSourceDataModule.GetComentarios: string;
@@ -983,11 +969,6 @@ begin
     srandom
   else
     setseeds(Seed1, Seed2, Seed3, Seed4);
-end;
-
-procedure TSourceDataModule.SeleccionarHorario;
-begin
-  HorarioSeleccionado := SourceDataModule.TbHorario.FindField('CodHorario').AsInteger;
 end;
 
 initialization

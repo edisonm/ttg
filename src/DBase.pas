@@ -5,11 +5,11 @@ unit DBase;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
+  Windows, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, RelUtils,
+  ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
 
 type
-  TDataSetArray = array of TDataSet;
-  
+
   TMasterRel = record
     DetailDataSet: TZTable;
     MasterFields: string;
@@ -79,9 +79,6 @@ implementation
 {$R *.DFM}
 {$ENDIF}
 
-uses
-  RelUtils;
-
 procedure TBaseDataModule.OpenTables;
 var
   i: Integer;
@@ -147,7 +144,7 @@ begin
       with (FTables[i] as TZTable) do
       begin
         Connection.ExecuteDirect(Format('DELETE FROM %s', [TableName]));
-        EmptyDataSet;
+        Refresh;
       end;
     end;
     Database.Commit;
@@ -180,28 +177,28 @@ begin
   for i := Low(FTables) to High(FTables) do
   begin
     (FTables[i] as TZTable).MasterSource := nil;
-    AStrings.Add('// ' + NameDataSet[FTables[i]]);
+    AStrings.Add(NameDataSet[FTables[i]]);
     SaveDataSetToStrings(FTables[i], AStrings);
   end;
 end;
+
+{.$DEFINE USE_SQL}
 
 procedure TBaseDataModule.LoadFromStrings(AStrings: TStrings; var APosition: Integer);
 var
   i: Integer;
 begin
+{$IFDEF USE_SQL}
+  LoadDatabaseFromStrings(Database, AStrings, Length(FTables), APosition);
+{$ENDIF}
   FCheckRelations := False;
   try
+    {$IFNDEF USE_SQL}
+    LoadDataSetsFromStrings(FTables, AStrings, APosition);
+    {$ELSE}
     for i := Low(FTables) to High(FTables) do
-    begin
-      with Tables[i] as TZTable do
-      try
-//        CachedUpdates := True;
-        LoadDataSetFromStrings(Tables[i], AStrings, APosition);
-//        ApplyUpdates;
-      finally
-        CachedUpdates := False;
-      end;
-    end;
+      FTables[i].Refresh;
+    {$ENDIF}
   finally
     FCheckRelations := True;
   end;

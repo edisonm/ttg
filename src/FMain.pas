@@ -140,7 +140,6 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure ActContentsExecute(Sender: TObject);
     procedure ActIndexExecute(Sender: TObject);
-    procedure ActMejorarHorarioExecute(Sender: TObject);
     procedure FormDblClick(Sender: TObject);
     procedure ActRegistrationInfoExecute(Sender: TObject);
 {
@@ -184,11 +183,8 @@ type
     procedure LoadFromFile(const AFileName: string);
     procedure SaveToFile(const AFileName: string);
     function ConfirmOperation: boolean;
-    function GetCodHorarioSeleccionado: Integer;
 {$IFNDEF FREEWARE}
     procedure ElaborarHorario(s: string);
-    procedure MejorarHorario;
-    procedure ProgressDescensoDoble(I, Max: Integer; Value: Double; var Stop: Boolean);
 {$ENDIF}
     procedure PedirRegistrarSoftware;
     procedure ProtegerSoftware;
@@ -203,14 +199,16 @@ type
     procedure OnRegistrarMejor(Sender: TObject);
     procedure ProgressFormCloseClick(Sender: TObject);
     procedure ProgressFormCancelClick(Sender: TObject);
-    property Ejecutando: Boolean read FEjecutando;
+    procedure ProgressDescensoDoble(I, Max: Integer; Value: Double; var Stop: Boolean);
+    property Ejecutando: Boolean read FEjecutando write FEjecutando;
+    property CloseClick: Boolean read FCloseClick write FCloseClick;
+    property Pasada: Integer read FPasada write FPasada;
 {$ENDIF}
     property Progress: Integer read FProgress write SetProgress;
     property Min: Integer read FMin write SetMin;
     property Max: Integer read FMax write SetMax;
     property Step: Integer read FStep write SetStep;
     property CodHorario: Integer read FCodHorario write FCodHorario;
-    property CodHorarioSeleccionado: Integer read GetCodHorarioSeleccionado;
     property ConfigStorage: TConfigStorage read FConfigStorage;
   end;
 
@@ -505,8 +503,7 @@ var
         end;
       end;}
       FMomentoFinal := Now;
-      VEvolElitista.SaveBestToDatabase(Cod, FMomentoInicial,
-        FMomentoFinal);
+      VEvolElitista.SaveBestToDatabase(Cod, FMomentoInicial, FMomentoFinal);
     end;
   end;
   procedure ProcessCodList(const CodList: string);
@@ -606,8 +603,7 @@ begin
       ProgressForm.bbtnCancel.Kind := bkCancel;
       ProgressForm.Close;
       ActElaborarHorario.Enabled := True;
-      if TbHorarioDetalle.Active then
-        TbHorarioDetalle.Refresh;
+      TbHorarioDetalle.Refresh;
     end;
   end;
   StatusBar.Panels[2].Text := '';
@@ -622,39 +618,40 @@ begin
       Application.ProcessMessages;
       StatusBar.Panels[2].Text := Format('%d de %d', [NumGeneracion,
         ProgressForm.PBNumMaxGeneracion.Max]);
-      ProgressForm.SetValues(Now - FInit,
-                             NumGeneracion,
-                             MejorCruceProfesor,
-                             MejorProfesorFraccionamiento,
-                             MejorCruceAulaTipo,
-                             MejorHoraHuecaDesubicada,
-                             MejorSesionCortada,
-                             MejorMateriaProhibicion,
-                             MejorProfesorProhibicion,
-                             MejorMateriaNoDispersa,
-                             NumImportacion,
-                             NumExportacion,
-                             NumColision,
-                             MejorCruceProfesorValor,
-                             MejorProfesorFraccionamientoValor,
-                             MejorCruceAulaTipoValor,
-                             MejorHoraHuecaDesubicadaValor,
-                             MejorSesionCortadaValor,
-                             MejorMateriaProhibicionValor,
-                             MejorDisponiblidadValor,
-                             MejorMateriaNoDispersaValor,
-                             MejorValor);
+      with MejorObjetoModeloHorario do
+        ProgressForm.SetValues(Now - FInit,
+                               NumGeneracion,
+                               CruceProfesor,
+                               ProfesorFraccionamiento,
+                               CruceAulaTipo,
+                               HoraHuecaDesubicada,
+                               SesionCortada,
+                               MateriaProhibicion,
+                               ProfesorProhibicion,
+                               MateriaNoDispersa,
+                               NumImportacion,
+                               NumExportacion,
+                               NumColision,
+                               CruceProfesorValor,
+                               ProfesorFraccionamientoValor,
+                               CruceAulaTipoValor,
+                               HoraHuecaDesubicadaValor,
+                               SesionCortadaValor,
+                               MateriaProhibicionValor,
+                               ProfesorProhibicionValor,
+                               MateriaNoDispersaValor,
+                               Valor);
       if FAjustar then
       begin
         InvalidarValores;
-	//Actualizar;
+      	// Actualizar;
         with SourceDataModule do
 	  ModeloHorario.Configurar(CruceProfesor,
-	               		   ProfesorFraccionamiento,
-				   CruceAulaTipo,
-				   HoraHueca,
-				   SesionCortada,
-				   MateriaNoDispersa);
+	                    		   ProfesorFraccionamiento,
+				                     CruceAulaTipo,
+				                     HoraHueca,
+				                     SesionCortada,
+				                     MateriaNoDispersa);
         FAjustar := False;
       end;
       if (FCloseClick or FCancelClick) then
@@ -957,15 +954,6 @@ begin
   FLogStrings.Free;
 end;
 
-function TMainForm.GetCodHorarioSeleccionado: Integer;
-begin
-  try
-    Result := SourceDataModule.HorarioSeleccionado;
-  except
-    raise Exception.Create('Debe seleccionar un horario');
-  end;
-end;
-
 procedure TMainForm.ActContentsExecute(Sender: TObject);
 begin
 {$IFNDEF FPC}
@@ -979,89 +967,6 @@ begin
   Application.HelpCommand(HELP_FINDER, 0);
 {$ENDIF}
 end;
-
-procedure TMainForm.ActMejorarHorarioExecute(Sender: TObject);
-begin
-{$IFNDEF FREEWARE}
-  MejorarHorario;
-{$ENDIF}
-end;
-
-{$IFNDEF FREEWARE}
-procedure TMainForm.MejorarHorario;
-var
-  VModeloHorario: TModeloHorario;
-  VObjetoModeloHorario: TObjetoModeloHorario;
-  CodHorarioFuente, CodHorarioDestino: Integer;
-  Informe: TStrings;
-  MomentoInicial, MomentoFinal: TDateTime;
-  s, d: string;
-  va, vd: Double;
-begin
-  if not InputQuery('Codigo del horario a mejorar: ',
-    'Codigo del horario a mejorar', s) then
-    Exit;
-  if s = '' then
-    Exit;
-  if not InputQuery('Codigo del horario mejorado: ',
-    'Codigo del horario mejorado', d) then
-    Exit;
-  CodHorarioFuente := StrToInt(s);
-  CodHorarioDestino := StrToInt(d);
-  FCloseClick := False;
-  with SourceDataModule do
-  begin
-    InitRandom;
-    MomentoInicial := Now;
-    FEjecutando := True;
-    VModeloHorario :=
-      TModeloHorario.CrearDesdeDataModule(
-        CruceProfesor,
-        ProfesorFraccionamiento,
-        CruceAulaTipo,
-        HoraHueca,
-        SesionCortada,
-        MateriaNoDispersa);
-    StatusBar.Panels[1].Style := psOwnerDraw;
-    Self.Progress := 0;
-    FPasada := 0;
-    try
-      VModeloHorario.OnProgress := Self.ProgressDescensoDoble;
-      Self.Step := 1;
-      VObjetoModeloHorario := TObjetoModeloHorario.CrearDesdeModelo(VModeloHorario);
-      try
-        if s = '' then
-          VObjetoModeloHorario.HacerAleatorio
-        else
-          VObjetoModeloHorario.LoadFromDataModule(CodHorarioFuente);
-        va := VObjetoModeloHorario.Valor;
-        VObjetoModeloHorario.DescensoRapidoForzado;
-        VObjetoModeloHorario.DescensoRapidoDobleForzado;
-        vd := VObjetoModeloHorario.Valor;
-        MomentoFinal := Now;
-        Informe := TStringList.Create;
-        try
-          Informe.Add(Format('Peso del horario antes:  %f', [va]));
-          Informe.Add(Format('Peso del horaro despues: %f', [vd]));
-          VObjetoModeloHorario.SaveToDataModule(CodHorarioDestino, MomentoInicial,
-            MomentoFinal, Informe);
-          if SourceDataModule.TbHorario.Active then
-            SourceDataModule.TbHorario.Refresh;
-        finally
-          Informe.Free;
-        end;
-      finally
-        VObjetoModeloHorario.Free;
-      end;
-    finally
-      VModeloHorario.Free;
-      FEjecutando := False;
-      StatusBar.Panels[1].Style := psText;
-      StatusBar.Panels[2].Text := 'Listo';
-    end;
-  end;
-end;
-{$ENDIF}
 
 procedure TMainForm.FormDblClick(Sender: TObject);
 begin

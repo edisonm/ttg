@@ -72,8 +72,6 @@ type
     speNumIteraciones: TSpinEdit;
     Label31: TLabel;
     edtAnioLectivo: TEdit;
-    lblHorarioSeleccionado: TLabel;
-    Label33: TLabel;
     Label16: TLabel;
     creProfesorFraccionamiento: TEdit;
     Label24: TLabel;
@@ -191,7 +189,6 @@ begin
       edtNomResponsable.Text := NomResponsable;
       edtCarResponsable.Text := CarResponsable;
       speMaxCargaProfesor.Value := MaxCargaProfesor;
-      lblHorarioSeleccionado.Caption := IntToStr(HorarioSeleccionado);
       MemComentarios.Lines.Text := Comentarios;
       CBRandomize.Checked := Randomize;
       speSeed1.Value := Seed1;
@@ -232,7 +229,6 @@ begin
       NomResponsable := edtNomResponsable.Text;
       CarResponsable := edtCarResponsable.Text;
       MaxCargaProfesor := speMaxCargaProfesor.Value;
-      HorarioSeleccionado := StrToInt(lblHorarioSeleccionado.Caption);
       Comentarios := MemComentarios.Lines.Text;
       Randomize := CBRandomize.Checked;
       Seed1 := speSeed1.Value;

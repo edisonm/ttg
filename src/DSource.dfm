@@ -1,6 +1,6 @@
 inherited SourceDataModule: TSourceDataModule
   inherited Database: TZConnection
-    Connected = False
+    Database = 'E:\apps\pascal\TTG\dat\TTG.s3fpc'
   end
   inherited DSMateriaProhibicion: TDataSource
     DataSet = nil

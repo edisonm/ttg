@@ -249,12 +249,6 @@ end;
 
 procedure TProfesorForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  with SourceDataModule.TbDistributivo do
-  begin
-    MasterSource := nil;
-    MasterFields := '';
-    IndexFieldNames := '';
-  end;
   if Assigned(FDistributivoForm) then
   begin
     FDistributivoForm.OnDestroy := nil;

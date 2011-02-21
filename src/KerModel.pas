@@ -146,6 +146,7 @@ type
       ASesionCortadaValor,
       AMateriaNoDispersaValor: Double);
     destructor Destroy; override;
+    procedure ReportParameters(AReport: TStrings);
     property CruceProfesorValor: Double read FCruceProfesorValor;
     property ProfesorFraccionamientoValor: Double
       read FProfesorFraccionamientoValor;
@@ -290,6 +291,7 @@ type
     procedure Mutar; overload;
     procedure Mutar(Orden: Integer); overload;
     procedure MutarDia;
+    procedure ReportValues(AReport: TStrings);
     procedure Assign(AObjetoModeloHorario: TObjetoModeloHorario);
     property Valor: Double read GetValor;
     property CruceProfesor: Integer read FCruceProfesor;
@@ -870,6 +872,24 @@ begin
     Result := FDiaHoraAPeriodo[d + 1, 0] - 1;
 end;
 
+procedure TModeloHorario.ReportParameters(AReport: TStrings);
+begin
+  AReport.Add(Format(
+    'Pesos:'#13#10 +
+    '  Cruce de profesores          %8.2f'#13#10 +
+    '  Fracc. h. profesores         %8.2f'#13#10 +
+    '  Cruce de aulas:              %8.2f'#13#10 +
+    '  Horas Huecas desubicadas:    %8.2f'#13#10 +
+    '  Materias cortadas:           %8.2f'#13#10 +
+    '  Materias no dispersas:       %8.2f', [
+    CruceProfesorValor,
+      ProfesorFraccionamientoValor,
+      CruceAulaTipoValor,
+      HoraHuecaDesubicadaValor,
+      SesionCortadaValor,
+      MateriaNoDispersaValor]));
+end;
+
 procedure CrearAleatorioDesdeModelo(var AObjetoModeloHorario:
   TObjetoModeloHorario; AModeloHorario: TModeloHorario);
 begin
@@ -1314,6 +1334,37 @@ begin
   if k >= 0 then
     while (APeriodo > 0) and (k = l[APeriodo - 1]) do
       Dec(APeriodo);
+end;
+
+procedure TObjetoModeloHorario.ReportValues(AReport: TStrings);
+begin
+  with AReport do
+  begin
+    Add('Detalle                     Cant.    Peso    Valor');
+    Add(Format('Cruce de profesores:        %5.d %7.2f %8.2f',
+               [CruceProfesor, ModeloHorario.CruceProfesorValor,
+                CruceProfesorValor]));
+    Add(Format('Fracc. h. profesores:       %5.d %7.2f %8.2f',
+               [ProfesorFraccionamiento, ModeloHorario.ProfesorFraccionamientoValor,
+                ProfesorFraccionamientoValor]));
+    Add(Format('Cruce de aulas:             %5.d %7.2f %8.2f',
+               [CruceAulaTipo, ModeloHorario.CruceAulaTipoValor,
+                CruceAulaTipoValor]));
+    Add(Format('Horas Huecas desubicadas:   %5.d %7.2f %8.2f',
+               [HoraHuecaDesubicada, ModeloHorario.HoraHuecaDesubicadaValor,
+                HoraHuecaDesubicadaValor]));
+    Add(Format('Materias cortadas:          %5.d %7.2f %8.2f',
+               [SesionCortada, ModeloHorario.SesionCortadaValor,
+                SesionCortadaValor]));
+    Add(Format('Materias no dispersas:      %5.d %7.2f %8.2f',
+               [MateriaNoDispersa, ModeloHorario.MateriaNoDispersaValor,
+                MateriaNoDispersaValor]));
+    Add(Format('Prohibiciones de materia:   %5.d         %8.2f',
+               [MateriaProhibicion, MateriaProhibicionValor]));
+    Add(Format('Prohibiciones de profesor:  %5.d         %8.2f',
+               [ProfesorProhibicion, ProfesorProhibicionValor]));
+    Add(Format('Valor Total:                              %8.2f', [Valor]));
+  end;
 end;
 
 (*
@@ -3290,7 +3341,7 @@ begin
   with SourceDataModule, ModeloHorario, TbHorarioDetalle do
   begin
     TbHorario.Locate('CodHorario', CodHorario, []);
-    IndexFieldNames := 'CodHorario';
+    LinkedFields := 'CodHorario';
     MasterFields := 'CodHorario';
     MasterSource := DSHorario;
     try
@@ -3303,6 +3354,7 @@ begin
       for i := 0 to FParaleloCant - 1 do
         FillChar(FParaleloPeriodoASesion[i, 0], FPeriodoCant *
           SizeOf(Smallint), #$FF);
+      First;
       while not Eof do
       begin
         i := FCursoParaleloIdAParalelo[FNivelEspecializacionACurso[
@@ -3319,7 +3371,7 @@ begin
     finally
       MasterSource := nil;
       MasterFields := '';
-      IndexFieldNames := '';
+      LinkedFields := '';
     end;
   end;
   Actualizar;
