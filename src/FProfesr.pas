@@ -74,7 +74,7 @@ end;
 procedure TProfesorForm.DataSourceDataChange(Sender: TObject; Field: TField);
 begin
   inherited;
-  pnlStatus.Caption := Format('Carga: %d', [GetCargaActual]);
+  Caption := FSuperTitle + Format(' - Carga: %d', [GetCargaActual]);
 end;
 
 procedure TProfesorForm.FormActivate(Sender: TObject);
@@ -88,8 +88,6 @@ begin
     if TSingleEditorForm.ToggleSingleEditor(Self, FDistributivoForm,
 			ConfigStorage, ActDistributivo,	QuDistributivo) then
     begin
-      TbParalelo.First;
-      FSuperTitle := Caption;
       DataSourceDataChange(nil, nil);
     end
 end;
@@ -122,6 +120,7 @@ end;
 procedure TProfesorForm.FormCreate(Sender: TObject);
 begin
   inherited;
+  with SourceDataModule do FSuperTitle := Description[TbProfesor];
   with QuDistributivo do
   begin
     PrepareDataSetFields(QuDistributivo);
