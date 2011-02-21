@@ -92,8 +92,8 @@ $(TTGSQLITE3): $(TTGSQL)
 clean:
 	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) \
 	  $(TTGSQLITE3) obj/* \
-	  src/$(DSRCBASE).{pas,dfm} \
-	  $(ISS) $(ABOUTPAS)
+	  src/$(DSRCBASE0).pas src/$(DSRCBASE0).dfm \
+	  $(ISS) $(ABOUTPAS) src/*.identcache DBUTILS/*.identcache
 	$(RM) -r src/__history DBUTILS/__history
 
 .PHONY: srclaz
