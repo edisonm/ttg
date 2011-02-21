@@ -3,6 +3,7 @@ inherited ProfesorForm: TProfesorForm
   Top = 200
   ClientHeight = 400
   ClientWidth = 702
+  OnActivate = FormActivate
   OnCreate = FormCreate
   ExplicitWidth = 710
   ExplicitHeight = 427
@@ -329,7 +330,7 @@ inherited ProfesorForm: TProfesorForm
       000000000000}
   end
   inherited DataSource: TDataSource
-    Left = 232
+    Left = 288
     Top = 48
   end
   inherited ActionList: TActionList

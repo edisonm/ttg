@@ -20,19 +20,17 @@ type
     QuDistributivo: TZQuery;
     procedure ActProfesorProhibicionExecute(Sender: TObject);
     procedure ActDistributivoExecute(Sender: TObject);
-    procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure FormCreate(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure QuDistributivoCalcFields(DataSet: TDataSet);
+    procedure DataSourceDataChange(Sender: TObject; Field: TField);
+    procedure FormActivate(Sender: TObject);
   private
     { Private declarations }
-    FLbCarga: TLabel;
     FSuperTitle: string;
     FDistributivoForm: TSingleEditorForm;
     FProfesorProhibicionForm: TCrossManyToManyEditorRForm;
-    procedure EdQuProfesorDistributivoDestroy(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
     procedure PrepareDistributivoExtraFields;
+    function GetCargaActual: Integer;
   public
     { Public declarations }
   end;
@@ -56,6 +54,7 @@ begin
     ConfigStorage, ActProfesorProhibicion) then
   with FProfesorProhibicionForm do
   begin
+    Tag := TbProfesor.FindField('CodProfesor').AsInteger;
     QuProfesorProhibicion.Open;
     Caption := Format('%s %s %s - Editando %s', [NameDataSet[TbProfesor],
       TbProfesor.FindField('ApeProfesor').Value,
@@ -69,10 +68,13 @@ begin
 	    TbPeriodo, 'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora', 'NomHora',
       'CodHora', 'CodHora', 'CodProfProhibicionTipo', 'NomProfProhibicionTipo',
       'ColProfProhibicionTipo', 'CodProfProhibicionTipo');
-    Tag := TbProfesor.FindField('CodProfesor').AsInteger;
-    OnActivate := FormActivate;
-  end
-  else QuProfesorProhibicion.Close;
+  end;
+end;
+
+procedure TProfesorForm.DataSourceDataChange(Sender: TObject; Field: TField);
+begin
+  inherited;
+  pnlStatus.Caption := Format('Carga: %d', [GetCargaActual]);
 end;
 
 procedure TProfesorForm.FormActivate(Sender: TObject);
@@ -87,56 +89,34 @@ begin
 			ConfigStorage, ActDistributivo,	QuDistributivo) then
     begin
       TbParalelo.First;
-      with QuDistributivo do
-      begin
-        Close;
-        Open;
-      end;
-      Self.DataSource.OnDataChange := DataSourceDataChange;
-      FLbCarga := TLabel.Create(FDistributivoForm);
-      FLbCarga.Parent := FDistributivoForm.pnlStatus;
-      FLbCarga.Top := 1;
-      FLbCarga.Left := 400;
-      FDistributivoForm.OnDestroy := EdQuProfesorDistributivoDestroy;
-      FSuperTitle := FDistributivoForm.Caption;
+      FSuperTitle := Caption;
       DataSourceDataChange(nil, nil);
     end
 end;
 
-procedure TProfesorForm.EdQuProfesorDistributivoDestroy(Sender: TObject);
+function TProfesorForm.GetCargaActual: Integer;
+var
+  VBookmark: TBookmark;
+  FieldComposicion: TField;
 begin
-  (Sender as TEditorForm).FormDestroy(Sender);
-  DataSource.OnDataChange := nil;
-end;
-
-procedure TProfesorForm.DataSourceDataChange(Sender: TObject; Field: TField);
-  function GetCargaActual: Integer;
-  var
-    VBookmark: TBookmark;
-    FieldComposicion: TField;
+  Result := 0;
+  with SourceDataModule, QuDistributivo do if Active then
   begin
-    Result := 0;
-    with SourceDataModule, QuDistributivo do if Active then
-    begin
-      VBookmark := GetBookmark;
-      DisableControls;
-      try
-        First;
-        FieldComposicion := FindField('Composicion');
-        while not Eof do
-        begin
-          Inc(Result, ComposicionADuracion(FieldComposicion.AsString));
-          Next;
-        end;
-      finally
-        GotoBookmark(VBookmark);
-        EnableControls;
+    VBookmark := GetBookmark;
+    DisableControls;
+    try
+      First;
+      FieldComposicion := FindField('Composicion');
+      while not Eof do
+      begin
+        Inc(Result, ComposicionADuracion(FieldComposicion.AsString));
+        Next;
       end;
+    finally
+      GotoBookmark(VBookmark);
+      EnableControls;
     end;
   end;
-begin
-  inherited;
-  FLbCarga.Caption := Format('Carga: %d', [GetCargaActual]);
 end;
 
 procedure TProfesorForm.FormCreate(Sender: TObject);
@@ -152,6 +132,7 @@ begin
     FindField('CodProfesor').Visible := False;
     FindField('CodAulaTipo').Visible := False;
     PrepareDistributivoExtraFields;
+    Open;
   end;
 end;
 
@@ -236,7 +217,6 @@ begin
   begin
     FieldKind := fkCalculated;
     FieldName := 'Duracion';
-    Calculated := True;
     DataSet := QuDistributivo;
   end;
 end;
@@ -245,7 +225,6 @@ procedure TProfesorForm.QuDistributivoCalcFields(DataSet: TDataSet);
 var
   v: Variant;
 begin
-  inherited;
   try
     v := DataSet['Composicion'];
     if VarIsNull(v) then
@@ -255,17 +234,6 @@ begin
   except
     DataSet['Duracion'] := 0;
   end
-end;
-
-procedure TProfesorForm.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  if Assigned(FDistributivoForm) then
-  begin
-    FDistributivoForm.OnDestroy := nil;
-    DataSource.OnDataChange := nil;
-    FLbCarga.Free;
-  end;
-  inherited;
 end;
 
 initialization

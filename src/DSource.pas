@@ -422,7 +422,7 @@ begin
   Field := TWideStringField.Create(TbMateriaProhibicion);
   with Field do
   begin
-    DisplayLabel := 'Tipo prohib. mat.';
+    DisplayLabel := 'Prohibicion';
     DisplayWidth := 10;
     FieldKind := fkLookup;
     FieldName := 'NomMateProhibicionTipo';
@@ -452,7 +452,7 @@ begin
   Field := TWideStringField.Create(TbProfesorProhibicion);
   with Field do
   begin
-    DisplayLabel := 'Tipo prohib. prof.';
+    DisplayLabel := 'Prohibicion';
     DisplayWidth := 10;
     FieldKind := fkLookup;
     FieldName := 'NomProfProhibicionTipo';
@@ -474,7 +474,6 @@ begin
   TbMateria.FindField('CodMateria').Visible := False;
   TbNivel.FindField('CodNivel').Visible := False;
   TbHora.FindField('CodHora').Visible := False;
-  //TbHorario.FindField('CodHorario').Visible := False;
   TbCurso.FindField('CodNivel').Visible := False;
   TbCurso.FindField('CodEspecializacion').Visible := False;
   TbParaleloId.FindField('CodParaleloId').Visible := False;
@@ -485,16 +484,6 @@ begin
   TbParalelo.FindField('CodEspecializacion').Visible := False;
   TbParalelo.FindField('CodParaleloId').Visible := False;
   TbProfesor.FindField('CodProfesor').Visible := False;
-  {TbMateriaProhibicion.FindField('CodMateria').Visible := False;
-  TbMateriaProhibicion.FindField('CodDia').Visible := False;
-  TbMateriaProhibicion.FindField('CodHora').Visible := False;
-  TbMateriaProhibicion.FindField('CodMateProhibicionTipo').Visible := False;}
-  {TbDistributivo.FindField('CodMateria').Visible := False;
-  TbDistributivo.FindField('CodNivel').Visible := False;
-  TbDistributivo.FindField('CodEspecializacion').Visible := False;
-  TbDistributivo.FindField('CodParaleloId').Visible := False;
-  TbDistributivo.FindField('CodProfesor').Visible := False;
-  TbDistributivo.FindField('CodAulaTipo').Visible := False;}
   TbHorarioDetalle.FindField('CodHorario').Visible := False;
   TbHorarioDetalle.FindField('CodMateria').Visible := False;
   TbHorarioDetalle.FindField('CodNivel').Visible := False;
@@ -503,10 +492,6 @@ begin
   TbHorarioDetalle.FindField('CodDia').Visible := False;
   TbHorarioDetalle.FindField('CodHora').Visible := False;
   TbProfesorProhibicionTipo.FindField('CodProfProhibicionTipo').Visible := False;
-  {TbProfesorProhibicion.FindField('CodProfesor').Visible := False;
-  TbProfesorProhibicion.FindField('CodDia').Visible := False;
-  TbProfesorProhibicion.FindField('CodHora').Visible := False;
-  TbProfesorProhibicion.FindField('CodProfProhibicionTipo').Visible := False;}
 end;
 
 procedure TSourceDataModule.PrepareTables;

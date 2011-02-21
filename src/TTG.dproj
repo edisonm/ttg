@@ -74,7 +74,7 @@
 						<VersionInfo Name="MajorVer">1</VersionInfo>
 						<VersionInfo Name="MinorVer">2</VersionInfo>
 						<VersionInfo Name="Release">1</VersionInfo>
-						<VersionInfo Name="Build">478</VersionInfo>
+						<VersionInfo Name="Build">488</VersionInfo>
 						<VersionInfo Name="Debug">False</VersionInfo>
 						<VersionInfo Name="PreRelease">True</VersionInfo>
 						<VersionInfo Name="Special">False</VersionInfo>
@@ -86,7 +86,7 @@
 					<VersionInfoKeys>
 						<VersionInfoKeys Name="CompanyName">Edison Mera</VersionInfoKeys>
 						<VersionInfoKeys Name="FileDescription">Generador Automatico de Horarios</VersionInfoKeys>
-						<VersionInfoKeys Name="FileVersion">1.2.1.478</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">1.2.1.488</VersionInfoKeys>
 						<VersionInfoKeys Name="InternalName">TTG</VersionInfoKeys>
 						<VersionInfoKeys Name="LegalCopyright">2011 by Edison Mera</VersionInfoKeys>
 						<VersionInfoKeys Name="LegalTrademarks"/>
