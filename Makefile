@@ -83,9 +83,9 @@ src/$(DSRCBASE).pp: $(DBUTILS) $(TTGMDB) Makefile
 $(TTGSQL): $(DBUTILS) $(TTGMDB)
 	$(DBUTILS) /ACC2SQL $(TTGMDB) $@
 
-$(TTGSQLITE3): $(TTGSQL)
+$(TTGSQLITE3): $(TTGSQL) Makefile
 	$(RM) $@
-	sqlite3 $@ "pragma journal_mode=off;pragma foreign_keys=true;pragma encoding='UTF-16le'"
+	sqlite3 $@ "pragma journal_mode=off;pragma foreign_keys=true"
 	sqlite3 $@ ".read $(TTGSQL)"
 #	sqlite3 $@ ".genfkey --exec"
 
