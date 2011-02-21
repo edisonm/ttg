@@ -182,7 +182,7 @@ begin
   end;
 end;
 
-{.$DEFINE USE_SQL}
+{$DEFINE USE_SQL}
 
 procedure TBaseDataModule.LoadFromStrings(AStrings: TStrings; var APosition: Integer);
 var
