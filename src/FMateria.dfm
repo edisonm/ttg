@@ -24,8 +24,12 @@ inherited MateriaForm: TMateriaForm
   inherited pnlStatus: TPanel
     Width = 594
     ExplicitWidth = 594
+    inherited SLState: TLabel
+      Height = 17
+    end
     inherited SLRecordNo: TLabel
       Left = 590
+      Height = 17
       ExplicitLeft = 590
     end
   end

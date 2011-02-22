@@ -57,8 +57,8 @@ begin
     Tag := TbProfesor.FindField('CodProfesor').AsInteger;
     QuProfesorProhibicion.Open;
     Caption := Format('%s %s %s - Editando %s', [NameDataSet[TbProfesor],
-      TbProfesor.FindField('ApeProfesor').Value,
-      TbProfesor.FindField('NomProfesor').Value,
+      TbProfesor.FindField('ApeProfesor').AsString,
+      TbProfesor.FindField('NomProfesor').AsString,
       Description[TbProfesorProhibicion]]);
     DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [Description[TbProfesorProhibicion], Description[TbDia], Description[TbHora]]);

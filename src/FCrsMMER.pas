@@ -186,10 +186,10 @@ end;
 
 procedure TCrossManyToManyEditorRForm.UpdateRelRecord(i, j: Integer);
 begin
-  if FLstField.Value <> FLstKey[FRel[i, j]] then
+  if FLstField.AsInteger <> FLstKey[FRel[i, j]] then
   begin
     RelDataSet.Edit;
-    FLstField.Value := FLstKey[FRel[i, j]];
+    FLstField.AsInteger := FLstKey[FRel[i, j]];
     RelDataSet.Post;
   end;
 end;
@@ -199,7 +199,7 @@ begin
   RelDataSet.Insert;
   ColField.AsInteger := ColKey[i];
   RowField.AsInteger := RowKey[j];
-  FLstField.Value := FLstKey[FRel[i, j]];
+  FLstField.AsInteger := FLstKey[FRel[i, j]];
   RelDataSet.Post;
 end;
 

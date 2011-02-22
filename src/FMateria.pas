@@ -45,7 +45,7 @@ begin
   begin
     Caption := Format('%s %s - Editando %s', [
 		      SourceDataModule.NameDataSet[TbMateria],
-		      TbMateria.FindField('NomMateria').Value,
+		      TbMateria.FindField('NomMateria').AsString,
 		      Description[TbMateriaProhibicion]]);
     DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [Description[TbMateriaProhibicion], Description[TbDia],
