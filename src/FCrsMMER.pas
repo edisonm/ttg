@@ -32,6 +32,7 @@ type
     procedure BtnCancelClick(Sender: TObject);
     procedure DrawGridDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     FRestaurar: Boolean;
@@ -71,7 +72,7 @@ implementation
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
-  
+
 { TFCrMMEditorR }
 
 procedure TCrossManyToManyEditorRForm.ShowEditor(AColDataSet, ARowDataSet,
@@ -104,7 +105,7 @@ procedure TCrossManyToManyEditorRForm.DrawGridSelectCell(Sender: TObject;
   ACol, ARow: Integer; var CanSelect: Boolean);
 begin
   inherited DrawGridSelectCell(Sender, ACol, ARow, CanSelect);
-  if CanSelect then
+  if CanSelect and (ACol < Length(FRel)) and (ARow < Length(FRel[0])) then
   begin
     with DrawGrid do
       ListBox.ItemIndex := FRel[ACol - 1, ARow - 1];
@@ -122,6 +123,12 @@ procedure TCrossManyToManyEditorRForm.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
   inherited FormCloseQuery(Sender, CanClose);
+end;
+
+procedure TCrossManyToManyEditorRForm.FormCreate(Sender: TObject);
+begin
+  inherited;
+  SetLength(FRel, DrawGrid.ColCount, DrawGrid.RowCount);
 end;
 
 procedure TCrossManyToManyEditorRForm.FormDestroy(Sender: TObject);

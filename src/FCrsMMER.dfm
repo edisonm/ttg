@@ -3,6 +3,7 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
   Top = 320
   ClientHeight = 249
   ClientWidth = 617
+  OnCreate = FormCreate
   ExplicitWidth = 625
   ExplicitHeight = 276
   PixelsPerInch = 96
@@ -60,5 +61,8 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
     OnMouseUp = DrawGridMouseUp
     ExplicitWidth = 501
     ExplicitHeight = 205
+    RowHeights = (
+      18
+      24)
   end
 end

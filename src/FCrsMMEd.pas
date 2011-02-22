@@ -221,8 +221,6 @@ begin
     FColKey, FKeyCol, FColName);
   ReadDataSet(FRowDataSet, FRowFieldKey, FRowFieldName, FRowMin, FRowMax,
     FRowKey, FKeyRow, FRowName);
-  DrawGrid.ColCount := FColDataset.RecordCount + 1;
-  DrawGrid.RowCount := FRowDataset.RecordCount + 1;
   if Assigned(FSelDataSet) and FSelDataSet.Active then
   begin
     FSelDataSet.First;
@@ -253,6 +251,8 @@ begin
     FRelDataSet.First;
   end;
   FEditing := False;
+  DrawGrid.ColCount := FColDataset.RecordCount + 1;
+  DrawGrid.RowCount := FRowDataset.RecordCount + 1;
   InvalidateData;
 end;
 
