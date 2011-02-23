@@ -1,7 +1,7 @@
 object MainForm: TMainForm
   Left = 275
   Top = 174
-  Caption = 'Generador Automatico de Horarios 1.2.1'
+  Caption = ''
   ClientHeight = 323
   ClientWidth = 584
   Color = clBtnFace

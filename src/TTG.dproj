@@ -86,13 +86,13 @@
 					<VersionInfoKeys>
 						<VersionInfoKeys Name="CompanyName">Edison Mera</VersionInfoKeys>
 						<VersionInfoKeys Name="FileDescription">Generador Automatico de Horarios</VersionInfoKeys>
-						<VersionInfoKeys Name="FileVersion">1.2.1.493</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">1.2.2.0</VersionInfoKeys>
 						<VersionInfoKeys Name="InternalName">TTG</VersionInfoKeys>
 						<VersionInfoKeys Name="LegalCopyright">2011 by Edison Mera</VersionInfoKeys>
 						<VersionInfoKeys Name="LegalTrademarks"/>
 						<VersionInfoKeys Name="OriginalFilename">TTG</VersionInfoKeys>
 						<VersionInfoKeys Name="ProductName">TTG</VersionInfoKeys>
-						<VersionInfoKeys Name="ProductVersion">1.2.1.0</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">1.2.2</VersionInfoKeys>
 						<VersionInfoKeys Name="Comments"/>
 					</VersionInfoKeys>
 					<Source>

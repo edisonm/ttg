@@ -45,7 +45,7 @@ FORMS=FCrsMMEd FSplash FSingEdt FMasDeEd FHorario FLogstic FCrsMME0	\
 	FProgres FMateria
 
 
-APPVERSION=1.2.1
+APPVERSION=1.2.2
 APPNAME=Generador Automatico de Horarios
 BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ \ \ \ %Y)
 
@@ -75,10 +75,12 @@ $(DBUTILS): DBUTILS/$(DBUTILSDPR) $(addprefix DBUTILS/, $(addsuffix .pas, $(DBUN
 	cd DBUTILS; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
 
 src/$(DSRCBASE).pas: $(DBUTILS) $(TTGMDB) Makefile
-	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule $(DSRCBASE) 'cds;csr;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
+	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule \
+	  $(DSRCBASE) 'cds;csr;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
 
 src/$(DSRCBASE).pp: $(DBUTILS) $(TTGMDB) Makefile
-	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule $(DSRCBASE) 'cds;csr;lfm;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
+	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule \
+	  $(DSRCBASE) 'cds;csr;lfm;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
 
 $(TTGSQL): $(DBUTILS) $(TTGMDB)
 	$(DBUTILS) /ACC2SQL $(TTGMDB) $@
@@ -89,9 +91,11 @@ $(TTGSQLITE3): $(TTGSQL) Makefile
 	sqlite3 $@ ".read $(TTGSQL)"
 #	sqlite3 $@ ".genfkey --exec"
 
-clean:
+clean: srclazclean
 	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) \
 	  $(TTGSQLITE3) obj/* \
+	  bin/*.o \
+	  bin/*.ppu \
 	  src/$(DSRCBASE0).pas src/$(DSRCBASE0).dfm \
 	  $(ISS) $(ABOUTPAS) src/*.identcache DBUTILS/*.identcache
 	$(RM) -r src/__history DBUTILS/__history
@@ -213,7 +217,7 @@ prjlaz: srclaz
 	mv $(LAZARUSFILES) prjlaz/
 
 srclazclean:
-	$(RM) -r $(addprefix prjlaz/, $(LAZARUSFILES))
+	$(RM) -r $(addprefix prjlaz/, $(BASELAZFILES) $(DSRCBASE0).pp $(DSRCBASE0).lfm $(DSRCBASE0).lrs TTG.inc)
 
 test:
 	@echo TTGDIR=$(TTGDIR)
