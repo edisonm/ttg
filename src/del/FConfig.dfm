@@ -11,18 +11,18 @@ object ConfiguracionForm: TConfiguracionForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = True
+
   Position = poDesktopCenter
   PixelsPerInch = 96
-  TextHeight = 13
+
   object bbtnOk: TBitBtn
     Left = 255
     Top = 424
     Width = 75
     Height = 25
-    DoubleBuffered = True
+
     Kind = bkOK
-    ParentDoubleBuffered = False
+
     TabOrder = 0
     OnClick = bbtnOkClick
   end
@@ -39,10 +39,10 @@ object ConfiguracionForm: TConfiguracionForm
       Hint = 'Datos del colegio'
       Caption = 'Colegio'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+  
+  
+    
+    
       object Label14: TLabel
         Left = 8
         Top = 109
@@ -163,10 +163,10 @@ object ConfiguracionForm: TConfiguracionForm
     object tbsOpciones: TTabSheet
       Caption = 'Opciones'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+  
+  
+    
+    
       object Label19: TLabel
         Left = 16
         Top = 60
@@ -358,10 +358,10 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsPesos: TTabSheet
       Caption = 'Pesos'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+  
+  
+    
+    
       object Label1: TLabel
         Left = 8
         Top = 12
@@ -592,10 +592,10 @@ object ConfiguracionForm: TConfiguracionForm
     object tbsAlgoritmoEvolutivo: TTabSheet
       Caption = 'Algoritmo Evolutivo'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+  
+  
+    
+    
       object Label8: TLabel
         Left = 8
         Top = 13
@@ -731,9 +731,9 @@ object ConfiguracionForm: TConfiguracionForm
     Top = 424
     Width = 75
     Height = 25
-    DoubleBuffered = True
+
     Kind = bkCancel
-    ParentDoubleBuffered = False
+
     TabOrder = 2
     OnClick = bbtnCancelClick
   end

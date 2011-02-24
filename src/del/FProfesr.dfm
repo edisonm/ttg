@@ -5,13 +5,13 @@ inherited ProfesorForm: TProfesorForm
   ClientWidth = 702
   OnActivate = FormActivate
   OnCreate = FormCreate
-  ExplicitWidth = 710
-  ExplicitHeight = 427
+
+
   PixelsPerInch = 96
-  TextHeight = 13
+
   inherited TlBShow: TToolBar
     Width = 702
-    ExplicitWidth = 702
+  
     inherited DBNavigator: TDBNavigator
       Hints.Strings = ()
     end
@@ -19,36 +19,36 @@ inherited ProfesorForm: TProfesorForm
       Left = 256
       Top = 0
       Action = ActProfesorProhibicion
-      ParentShowHint = False
+
       ShowHint = True
     end
     object BtnDistributivo: TToolButton
       Left = 279
       Top = 0
       Action = ActDistributivo
-      ParentShowHint = False
+
       ShowHint = True
     end
   end
   inherited pnlStatus: TPanel
     Top = 381
     Width = 702
-    ExplicitTop = 381
-    ExplicitWidth = 702
+
+  
     inherited SLState: TLabel
       Height = 17
     end
     inherited SLRecordNo: TLabel
       Left = 698
       Height = 17
-      ExplicitLeft = 698
+  
     end
   end
   inherited Panel1: TPanel
     Width = 702
     Height = 356
-    ExplicitWidth = 702
-    ExplicitHeight = 356
+  
+  
     inherited DBGrid: TDBGrid
       Width = 700
       Height = 354

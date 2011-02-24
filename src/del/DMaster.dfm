@@ -1,5 +1,5 @@
 object MasterDataModule: TMasterDataModule
-  OldCreateOrder = True
+
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 404
@@ -22,7 +22,7 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'ApeProfesor'
       KeyFields = 'CodProfesor'
       Size = 31
-      Lookup = True
+  
     end
     object TbTmpProfesorCargaNomProfesor: TWideStringField
       DisplayLabel = 'Nombre'
@@ -34,7 +34,7 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'NomProfesor'
       KeyFields = 'CodProfesor'
       Size = 31
-      Lookup = True
+  
     end
     object TbTmpProfesorCargaCarga: TIntegerField
       FieldName = 'Carga'
@@ -73,7 +73,7 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
       Size = 15
-      Lookup = True
+  
     end
     object QuDistributivoProfesorAbrNivel: TWideStringField
       Alignment = taRightJustify
@@ -85,7 +85,7 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 10
-      Lookup = True
+  
     end
     object QuDistributivoProfesorAbrEspecializacion: TWideStringField
       DisplayLabel = 'Espec.'
@@ -97,7 +97,7 @@ object MasterDataModule: TMasterDataModule
       KeyFields = 'CodEspecializacion'
       Required = True
       Size = 10
-      Lookup = True
+  
     end
     object QuDistributivoProfesorNomParaleloId: TWideStringField
       Alignment = taRightJustify
@@ -108,7 +108,7 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
-      Lookup = True
+  
     end
     object QuDistributivoProfesorApeNomProfesor: TWideStringField
       DisplayLabel = 'Profesor'
@@ -119,7 +119,7 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'ApeNomProfesor'
       KeyFields = 'CodProfesor'
       Size = 31
-      Lookup = True
+  
     end
   end
   object QuProfesorProhibicionCant: TZTable
@@ -151,7 +151,7 @@ object MasterDataModule: TMasterDataModule
       LookupResultField = 'AbrAulaTipo'
       KeyFields = 'CodAulaTipo'
       Size = 31
-      Lookup = True
+  
     end
     object TbTmpAulaTipoCargaCarga: TIntegerField
       FieldName = 'Carga'

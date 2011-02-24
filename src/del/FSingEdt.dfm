@@ -3,12 +3,12 @@ inherited SingleEditorForm: TSingleEditorForm
   Top = 269
   ClientWidth = 502
   OnCloseQuery = FormCloseQuery
-  ExplicitWidth = 510
+
   PixelsPerInch = 96
-  TextHeight = 13
+
   inherited TlBShow: TToolBar
     Width = 502
-    ExplicitWidth = 502
+  
     inherited BtnShow: TToolButton
       Action = ActShow
     end
@@ -16,7 +16,7 @@ inherited SingleEditorForm: TSingleEditorForm
       Left = 23
       Top = 0
       Action = ActFind
-      ParentShowHint = False
+
       ShowHint = True
     end
     object DBNavigator: TDBNavigator
@@ -26,14 +26,14 @@ inherited SingleEditorForm: TSingleEditorForm
       Height = 22
       DataSource = DataSource
       Flat = True
-      ParentShowHint = False
+
       ShowHint = True
       TabOrder = 0
     end
   end
   inherited pnlStatus: TPanel
     Width = 502
-    ExplicitWidth = 502
+  
     object SLState: TLabel
       Left = 1
       Top = 1
@@ -51,7 +51,7 @@ inherited SingleEditorForm: TSingleEditorForm
   end
   inherited Panel1: TPanel
     Width = 502
-    ExplicitWidth = 502
+  
     object DBGrid: TDBGrid
       Left = 1
       Top = 1

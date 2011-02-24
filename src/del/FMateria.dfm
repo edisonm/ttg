@@ -4,12 +4,12 @@ inherited MateriaForm: TMateriaForm
   Caption = 'Materias'
   ClientWidth = 594
   OnCreate = FormCreate
-  ExplicitWidth = 602
+
   PixelsPerInch = 96
-  TextHeight = 13
+
   inherited TlBShow: TToolBar
     Width = 594
-    ExplicitWidth = 594
+  
     inherited DBNavigator: TDBNavigator
       Hints.Strings = ()
     end
@@ -17,25 +17,25 @@ inherited MateriaForm: TMateriaForm
       Left = 256
       Top = 0
       Action = ActMateriaProhibicion
-      ParentShowHint = False
+
       ShowHint = True
     end
   end
   inherited pnlStatus: TPanel
     Width = 594
-    ExplicitWidth = 594
+  
     inherited SLState: TLabel
       Height = 17
     end
     inherited SLRecordNo: TLabel
       Left = 590
       Height = 17
-      ExplicitLeft = 590
+  
     end
   end
   inherited Panel1: TPanel
     Width = 594
-    ExplicitWidth = 594
+  
     inherited DBGrid: TDBGrid
       Width = 592
     end

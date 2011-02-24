@@ -4,20 +4,20 @@ inherited HorarioProfesorForm: THorarioProfesorForm
   ClientHeight = 372
   ClientWidth = 766
   OnCreate = FormCreate
-  ExplicitWidth = 774
-  ExplicitHeight = 399
+
+
   PixelsPerInch = 96
-  TextHeight = 13
+
   object Splitter1: TSplitter [0]
     Left = 233
     Top = 25
     Height = 328
-    ExplicitTop = 15
-    ExplicitHeight = 357
+
+  
   end
   inherited TlBShow: TToolBar
     Width = 766
-    ExplicitWidth = 766
+  
     inherited BtnOk: TToolButton
       Enabled = False
       Visible = False
@@ -34,7 +34,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       DataSource = DSProfesor
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
       Flat = True
-      ParentShowHint = False
+
       ShowHint = True
       TabOrder = 1
     end
@@ -44,7 +44,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Width = 193
       Height = 21
       Hint = 'Ver|Que ver en el horario del profesor'
-      ParentShowHint = False
+
       ShowHint = True
       TabOrder = 0
       OnChange = BtnMostrarClick
@@ -53,25 +53,25 @@ inherited HorarioProfesorForm: THorarioProfesorForm
   inherited pnlStatus: TPanel
     Top = 353
     Width = 766
-    ExplicitTop = 353
-    ExplicitWidth = 766
+
+  
   end
   inherited Panel1: TPanel
     Left = 236
     Width = 530
     Height = 328
-    ExplicitLeft = 236
-    ExplicitWidth = 530
-    ExplicitHeight = 328
+
+  
+  
   end
   inherited DrawGrid: TDrawGrid
     Left = 236
     Width = 530
     Height = 328
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
-    ExplicitLeft = 236
-    ExplicitWidth = 530
-    ExplicitHeight = 328
+
+  
+  
   end
   object DBGrid1: TDBGrid [5]
     Left = 0
@@ -467,7 +467,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       LookupResultField = 'AbrNivel'
       KeyFields = 'CodNivel'
       Size = 5
-      Lookup = True
+  
     end
     object QuHorarioProfesorAbrEspecializacion: TWideStringField
       DisplayLabel = 'Espec.'
@@ -479,7 +479,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       LookupResultField = 'AbrEspecializacion'
       KeyFields = 'CodEspecializacion'
       Size = 10
-      Lookup = True
+  
     end
     object QuHorarioProfesorNomParaleloId: TWideStringField
       DisplayLabel = 'Par.'
@@ -490,7 +490,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       LookupResultField = 'NomParaleloId'
       KeyFields = 'CodParaleloId'
       Size = 5
-      Lookup = True
+  
     end
     object QuHorarioProfesorNomMateria: TWideStringField
       DisplayLabel = 'Materia'
@@ -502,13 +502,13 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       LookupResultField = 'NomMateria'
       KeyFields = 'CodMateria'
       Size = 15
-      Lookup = True
+  
     end
     object QuHorarioProfesorNombre: TWideStringField
       FieldKind = fkCalculated
       FieldName = 'Nombre'
       Size = 40
-      Calculated = True
+  
     end
   end
   object DSProfesor: TDataSource

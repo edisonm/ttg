@@ -1,9 +1,9 @@
 inherited MasterDetailEditorForm: TMasterDetailEditorForm
   Left = 411
   Top = 234
-  ExplicitHeight = 326
+
   PixelsPerInch = 96
-  TextHeight = 13
+
   inherited TlBShow: TToolBar
     inherited DBNavigator: TDBNavigator
       Hints.Strings = ()

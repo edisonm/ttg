@@ -4,21 +4,21 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   ClientHeight = 401
   ClientWidth = 765
   OnCreate = FormCreate
-  ExplicitWidth = 773
-  ExplicitHeight = 428
+
+
   PixelsPerInch = 96
-  TextHeight = 13
+
   object Splitter1: TSplitter [0]
     Left = 233
     Top = 25
     Height = 357
-    ExplicitLeft = 208
-    ExplicitTop = 104
-    ExplicitHeight = 100
+
+
+  
   end
   inherited TlBShow: TToolBar
     Width = 765
-    ExplicitWidth = 765
+  
     inherited BtnOk: TToolButton
       Enabled = False
       Visible = False
@@ -35,7 +35,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       DataSource = DSParalelo
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
       Flat = True
-      ParentShowHint = False
+
       ShowHint = True
       TabOrder = 1
     end
@@ -45,7 +45,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Width = 185
       Height = 21
       Hint = 'Ver|Seleccione el parametro a ver en el horario'
-      ParentShowHint = False
+
       ShowHint = True
       TabOrder = 0
       Text = 'cbVerParalelo'
@@ -56,7 +56,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Top = 0
       Hint = 'Intercambiar periodos|Intercambiar periodos'
       ImageIndex = 6
-      ParentShowHint = False
+
       ShowHint = True
       OnClick = IntercambiarPeriodosClick
     end
@@ -64,16 +64,16 @@ inherited HorarioParaleloForm: THorarioParaleloForm
   inherited pnlStatus: TPanel
     Top = 382
     Width = 765
-    ExplicitTop = 382
-    ExplicitWidth = 765
+
+  
   end
   inherited Panel1: TPanel
     Left = 236
     Width = 529
     Height = 357
-    ExplicitLeft = 236
-    ExplicitWidth = 529
-    ExplicitHeight = 357
+
+  
+  
   end
   inherited DrawGrid: TDrawGrid
     Left = 236
@@ -81,9 +81,9 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     Height = 357
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
     OnDblClick = IntercambiarPeriodosClick
-    ExplicitLeft = 236
-    ExplicitWidth = 529
-    ExplicitHeight = 357
+
+  
+  
   end
   object DBGrid1: TDBGrid [5]
     Left = 0
@@ -513,7 +513,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       FieldKind = fkCalculated
       FieldName = 'Nombre'
       Size = 40
-      Calculated = True
+  
     end
     object QuHorarioParaleloNomMateria: TWideStringField
       FieldName = 'NomMateria'
@@ -624,7 +624,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       FieldKind = fkCalculated
       FieldName = 'NomParalelo'
       Size = 30
-      Calculated = True
+  
     end
   end
 end

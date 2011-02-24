@@ -11,10 +11,10 @@ object SelPeriodoForm: TSelPeriodoForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = True
+
   Position = poScreenCenter
   PixelsPerInch = 96
-  TextHeight = 13
+
   object Label1: TLabel
     Left = 16
     Top = 8
@@ -43,9 +43,9 @@ object SelPeriodoForm: TSelPeriodoForm
     Top = 72
     Width = 75
     Height = 25
-    DoubleBuffered = True
+
     Kind = bkOK
-    ParentDoubleBuffered = False
+
     TabOrder = 1
   end
   object BBCancelar: TBitBtn
@@ -53,9 +53,9 @@ object SelPeriodoForm: TSelPeriodoForm
     Top = 72
     Width = 75
     Height = 25
-    DoubleBuffered = True
+
     Kind = bkCancel
-    ParentDoubleBuffered = False
+
     TabOrder = 0
   end
   object CbDia: TDBLookupComboBox

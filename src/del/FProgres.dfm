@@ -11,10 +11,10 @@ object ProgressForm: TProgressForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  OldCreateOrder = True
+
   Position = poDesktopCenter
   PixelsPerInch = 96
-  TextHeight = 13
+
   object pnlProgress: TPanel
     Left = 8
     Top = 8
@@ -705,9 +705,9 @@ object ProgressForm: TProgressForm
     Width = 75
     Height = 25
     Caption = '&Finalizar'
-    DoubleBuffered = True
+
     Kind = bkClose
-    ParentDoubleBuffered = False
+
     TabOrder = 1
   end
   object bbtnCancel: TBitBtn
@@ -715,9 +715,9 @@ object ProgressForm: TProgressForm
     Top = 312
     Width = 75
     Height = 25
-    DoubleBuffered = True
+
     Kind = bkCancel
-    ParentDoubleBuffered = False
+
     TabOrder = 2
   end
   object PBNumMaxGeneracion: TProgressBar

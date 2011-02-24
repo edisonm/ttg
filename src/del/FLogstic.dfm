@@ -11,10 +11,10 @@ object LogisticForm: TLogisticForm
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsStayOnTop
-  OldCreateOrder = True
+
   Position = poScreenCenter
   PixelsPerInch = 96
-  TextHeight = 13
+
   object Panel1: TPanel
     Left = 0
     Top = 0
@@ -81,9 +81,9 @@ object LogisticForm: TLogisticForm
       Width = 75
       Height = 25
       Anchors = [akRight, akBottom]
-      DoubleBuffered = True
+  
       Kind = bkClose
-      ParentDoubleBuffered = False
+  
       TabOrder = 0
     end
   end

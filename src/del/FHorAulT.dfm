@@ -4,20 +4,20 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
   ClientHeight = 372
   ClientWidth = 713
   OnCreate = FormCreate
-  ExplicitWidth = 721
-  ExplicitHeight = 399
+
+
   PixelsPerInch = 96
-  TextHeight = 13
+
   object Splitter1: TSplitter [0]
     Left = 233
     Top = 25
     Height = 328
-    ExplicitLeft = 241
-    ExplicitTop = 33
+
+
   end
   inherited TlBShow: TToolBar
     Width = 713
-    ExplicitWidth = 713
+  
     inherited BtnShow: TToolButton
       Visible = False
     end
@@ -37,7 +37,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       DataSource = DSAulaTipo
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
       Flat = True
-      ParentShowHint = False
+
       ShowHint = True
       TabOrder = 1
     end
@@ -47,7 +47,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       Width = 193
       Height = 21
       Hint = 'Ver|Que ver en el horario del tipo de aula'
-      ParentShowHint = False
+
       ShowHint = True
       TabOrder = 0
       OnChange = BtnMostrarClick
@@ -56,25 +56,25 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
   inherited pnlStatus: TPanel
     Top = 353
     Width = 713
-    ExplicitTop = 353
-    ExplicitWidth = 713
+
+  
   end
   inherited Panel1: TPanel
     Left = 236
     Width = 477
     Height = 328
-    ExplicitLeft = 236
-    ExplicitWidth = 477
-    ExplicitHeight = 328
+
+  
+  
   end
   inherited DrawGrid: TDrawGrid
     Left = 236
     Width = 477
     Height = 328
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
-    ExplicitLeft = 236
-    ExplicitWidth = 477
-    ExplicitHeight = 328
+
+  
+  
   end
   object DBGrid1: TDBGrid [5]
     Left = 0
@@ -511,7 +511,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       FieldKind = fkCalculated
       FieldName = 'Nombre'
       Size = 40
-      Calculated = True
+  
     end
   end
   object DSAulaTipo: TDataSource
