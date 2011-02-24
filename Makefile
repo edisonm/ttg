@@ -1,3 +1,5 @@
+# -*- mode: Makefile; -*-
+
 # GuideLine: Prefer definition of posix directories, because we are
 # migrating this system to Linux.
 
@@ -79,11 +81,11 @@ clean:
 	  bin/*.ppu \
 	  src/del/$(DSRCBASE0).pas src/del/$(DSRCBASE0).dfm \
 	  src/laz/$(DSRCBASE0).pp  src/laz/$(DSRCBASE0).lfm \
-	  $(ISS) $(ABOUTPAS) src/del/*.identcache src/dbutils/*.identcache
+	  $(ISS) $(ABOUT).pas src/del/*.identcache src/dbutils/*.identcache
 	$(RM) -r src/del/__history src/dbutils/__history
 
 kbmtosq3:
-	for i in $(addprefix src/, $(FORMS) $(DSRCBASE0) $(UNITS)) ; do \
+	for i in $(addprefix src/, $(FORMS) $(DSRCBASE0) $(UNITS) $(ABOUT)) ; do \
 	  sed \
 	  -e s:"TkbmMemTable":"TSqlitePassDataset":g \
 	  -e s:"kbmMemTable":"SqlitePassDbo":g \
@@ -114,7 +116,7 @@ kbmtosq3:
 	  mv -f $$i.dfm.tmp $$i.dfm ; done
 
 sq3tozeos:
-	for i in $(addprefix src/, $(FORMS) $(DSRCBASE0) $(UNITS)) ; do \
+	for i in $(addprefix src/, $(FORMS) $(DSRCBASE0) $(UNITS) $(ABOUT)) ; do \
 	  sed \
 	  -e s:"TSqlitePassDataset":"TZTable":g \
 	  -e s:"TSqlitePassDatabase":"TZConnection":g \
@@ -152,4 +154,4 @@ sq3tozeos:
 
 test:
 	@echo TTGDIR=$(TTGDIR)
-	@echo FILES=$(addprefix src/del/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE)))
+	@echo FILES=$(addprefix src/del/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE) $(ABOUT)))

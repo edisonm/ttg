@@ -1,0 +1,8 @@
+# -*- mode: Makefile; -*-
+
+ifneq ($(shell uname -s),Linux)
+DSRCBASE=$(DSRCBASE0)
+LAZRES="c:/lazarus/tools/lazres"
+else
+LAZRES=lazres
+endif
