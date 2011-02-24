@@ -10,9 +10,9 @@ include ../../COMMON
 .SUFFIXES: .lrs .lfm .dfm .pas .pp .lpr .dpr
 
 BASEDELFILES=$(addsuffix .pas,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
-	  $(addsuffix .dfm, $(FORMS) $(DSRCBASE)) ttg.lpr
+	  $(addsuffix .dfm, $(FORMS) $(DSRCBASE)) ttg.dpr
 
-LAZARUSFILES=$(BASELAZFILES)
+DELPHIFILES=$(BASEDELFILES)
 
 %.pas: %.pp
 	sed \
@@ -28,10 +28,10 @@ LAZARUSFILES=$(BASELAZFILES)
 	sed -e s:"\.pp":"\.pas":g $< | dos2unix > $@
 
 # srclazclean:
-# 	$(RM) -r $(addprefix prjlaz/, $(BASELAZFILES) $(DSRCBASE0).pp $(DSRCBASE0).lfm $(DSRCBASE0).lrs ttg.inc)
+# 	$(RM) -r $(addprefix prjlaz/, $(BASEDELFILES) $(DSRCBASE0).pp $(DSRCBASE0).lfm $(DSRCBASE0).lrs ttg.inc)
 
-srcdel: $(LAZARUSFILES)
+srcdel: $(DELPHIFILES)
 
 prjdel: srcdel
 	unix2dos < ttg.inc > ../../src/del/ttg.inc
-	mv $(LAZARUSFILES) ../../src/del/
+	mv $(DELPHIFILES) ../../src/del/
