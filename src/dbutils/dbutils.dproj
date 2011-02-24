@@ -1,11 +1,11 @@
 ﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{62cf20a2-e304-43d1-b340-a71c9b38a230}</ProjectGuid>
-			<MainSource>DBUTILS.dpr</MainSource>
+			<MainSource>dbutils.dpr</MainSource>
 			<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 			<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
-			<DCC_DependencyCheckOutputName>..\bin\DBUTILS.exe</DCC_DependencyCheckOutputName>
+			<DCC_DependencyCheckOutputName>..\..\bin\dbutils.exe</DCC_DependencyCheckOutputName>
 			<ProjectVersion>12.0</ProjectVersion>
 			<Config Condition="'$(Config)'==''">Debug</Config>
 		</PropertyGroup>
@@ -23,7 +23,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<DCC_DependencyCheckOutputName>DBUTILS.exe</DCC_DependencyCheckOutputName>
+			<DCC_DependencyCheckOutputName>dbutils.exe</DCC_DependencyCheckOutputName>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
 			<Version>7.0</Version>
@@ -34,7 +34,7 @@
 			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
-			<DCC_DependencyCheckOutputName>..\bin\DBUTILS.exe</DCC_DependencyCheckOutputName>
+			<DCC_DependencyCheckOutputName>..\..\bin\dbutils.exe</DCC_DependencyCheckOutputName>
 			<Version>7.0</Version>
 			<DCC_WriteableConstants>True</DCC_WriteableConstants>
 			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -85,7 +85,7 @@
 						<VersionInfoKeys Name="Comments"/>
 					</VersionInfoKeys>
 					<Source>
-						<Source Name="MainSource">DBUTILS.dpr</Source>
+						<Source Name="MainSource">dbutils.dpr</Source>
 					</Source>
 					<Excluded_Packages>
 						<Excluded_Packages Name="Z:\apps\pascal\TxQuery\Packages\D2007\bin\dclXq_D2007.bpl">File Z:\apps\pascal\TxQuery\Packages\D2007\bin\dclXq_D2007.bpl not found</Excluded_Packages>
@@ -95,7 +95,7 @@
 			<ProjectFileVersion>12</ProjectFileVersion>
 		</ProjectExtensions>
 		<ItemGroup>
-			<DelphiCompile Include="DBUTILS.dpr">
+			<DelphiCompile Include="dbutils.dpr">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
 			<DCCReference Include="Acc2Pdx.pas"/>

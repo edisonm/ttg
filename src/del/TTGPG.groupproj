@@ -3,7 +3,7 @@
 			<ProjectGuid>{321addf8-0483-4ffc-a12b-e3beadcf7ce8}</ProjectGuid>
 		</PropertyGroup>
 		<ItemGroup>
-			<Projects Include="..\DBUTILS\DBUTILS.dproj">
+			<Projects Include="..\dbutils\dbutils.dproj">
 				<Dependencies/>
 			</Projects>
 			<Projects Include="TTG.dproj">
@@ -19,14 +19,14 @@
 				</BorlandProject>
 			</BorlandProject>
 		</ProjectExtensions>
-		<Target Name="DBUTILS">
-			<MSBuild Projects="..\DBUTILS\DBUTILS.dproj"/>
+		<Target Name="dbutils">
+			<MSBuild Projects="..\dbutils\dbutils.dproj"/>
 		</Target>
-		<Target Name="DBUTILS:Clean">
-			<MSBuild Targets="Clean" Projects="..\DBUTILS\DBUTILS.dproj"/>
+		<Target Name="dbutils:Clean">
+			<MSBuild Targets="Clean" Projects="..\dbutils\dbutils.dproj"/>
 		</Target>
-		<Target Name="DBUTILS:Make">
-			<MSBuild Targets="Make" Projects="..\DBUTILS\DBUTILS.dproj"/>
+		<Target Name="dbutils:Make">
+			<MSBuild Targets="Make" Projects="..\dbutils\dbutils.dproj"/>
 		</Target>
 		<Target Name="TTG">
 			<MSBuild Projects="TTG.dproj"/>
@@ -38,13 +38,13 @@
 			<MSBuild Targets="Make" Projects="TTG.dproj"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="DBUTILS;TTG"/>
+			<CallTarget Targets="dbutils;ttg"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="DBUTILS:Clean;TTG:Clean"/>
+			<CallTarget Targets="dbutils:Clean;ttg:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="DBUTILS:Make;TTG:Make"/>
+			<CallTarget Targets="dbutils:Make;ttg:Make"/>
 		</Target>
 		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 	</Project>
