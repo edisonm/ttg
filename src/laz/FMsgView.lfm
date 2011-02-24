@@ -1,89 +1,87 @@
 object LogisticForm: TLogisticForm
   Left = 243
+  Height = 373
   Top = 186
+  Width = 434
+  ActiveControl = Panel1
   Caption = 'Visor de mensajes'
-  ClientHeight = 367
+  ClientHeight = 373
   ClientWidth = 434
-  Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
-  Font.Style = []
   FormStyle = fsStayOnTop
-
   Position = poScreenCenter
-  PixelsPerInch = 96
-
+  LCLVersion = '0.9.28.2'
   object Panel1: TPanel
     Left = 0
+    Height = 333
     Top = 0
     Width = 434
-    Height = 337
     Align = alClient
     Caption = 'Panel1'
+    ClientHeight = 333
+    ClientWidth = 434
     TabOrder = 0
     object Splitter1: TSplitter
-      Left = 1
-      Top = 269
-      Width = 432
-      Height = 3
       Cursor = crVSplit
+      Left = 1
+      Height = 3
+      Top = 273
+      Width = 432
       Align = alBottom
+      ResizeAnchor = akBottom
     end
     object MemLogistic: TMemo
       Left = 1
+      Height = 272
       Top = 1
       Width = 432
-      Height = 268
       Align = alClient
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
+      Font.CharSet = ANSI_CHARSET
       Font.Height = -11
       Font.Name = 'Courier New'
-      Font.Style = []
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
     end
     object MemResumen: TMemo
       Left = 1
-      Top = 272
+      Height = 56
+      Top = 276
       Width = 432
-      Height = 64
       Align = alBottom
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
+      Font.CharSet = ANSI_CHARSET
       Font.Height = -11
       Font.Name = 'Courier New'
-      Font.Style = []
       ParentFont = False
       TabOrder = 1
     end
   end
   object Panel2: TPanel
     Left = 0
-    Top = 337
+    Height = 40
+    Top = 333
     Width = 434
-    Height = 30
     Align = alBottom
     BevelOuter = bvNone
+    ClientHeight = 40
+    ClientWidth = 434
     TabOrder = 1
     object lblMsg: TLabel
       Left = 8
+      Height = 14
       Top = 16
-      Width = 3
-      Height = 13
+      Width = 4
+      ParentColor = False
     end
     object bbtnClose: TBitBtn
-      Left = 349
-      Top = 4
-      Width = 75
-      Height = 25
+      Left = 336
+      Height = 30
+      Top = 3
+      Width = 88
       Anchors = [akRight, akBottom]
-  
+      Caption = '&Close'
       Kind = bkClose
-  
       TabOrder = 0
     end
   end

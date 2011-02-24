@@ -1,4 +1,4 @@
-unit FLogstic;
+unit FMsgView;
 
 {$I ttg.inc}
 
@@ -34,7 +34,7 @@ implementation
 
 initialization
 {$IFDEF FPC}
-  {$i FLogstic.lrs}
+  {$i FMsgView.lrs}
 {$ENDIF}
 
 end.

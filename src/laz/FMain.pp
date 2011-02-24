@@ -222,7 +222,7 @@ uses
   KerEvolE, KerModel, FProgres,
 {$ENDIF}
   FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd, About,
-  FConfig, FLogstic, TTGUtls, FParalel, Rand, Printers, DSource, DSrcBase;
+  FConfig, FMsgView, TTGUtls, FParalel, Rand, Printers, DSource, DSrcBase;
 
 {$IFNDEF FPC}
 {$R *.DFM}

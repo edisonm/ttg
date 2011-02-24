@@ -27,7 +27,7 @@ uses
   TTGUtls in 'TTGUtls.pas',
   UConfig in 'UConfig.pas',
   FConfig in 'FConfig.pas' {ConfiguracionForm},
-  FLogstic in 'FLogstic.pas' {LogisticForm},
+  FMsgView in 'FMsgView.pas' {LogisticForm},
   FHorPara in 'FHorPara.pas' {HorarioParaleloForm},
   FMasDeEd in 'FMasDeEd.pas' {MasterDetailEditorForm},
   FHorAulT in 'FHorAulT.pas' {HorarioAulaTipoForm},

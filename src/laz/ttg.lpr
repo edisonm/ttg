@@ -27,7 +27,7 @@ uses
   TTGUtls in 'TTGUtls.pp',
   UConfig in 'UConfig.pp',
   FConfig in 'FConfig.pp' {ConfiguracionForm},
-  FLogstic in 'FLogstic.pp' {LogisticForm},
+  FMsgView in 'FMsgView.pp' {LogisticForm},
   FHorPara in 'FHorPara.pp' {HorarioParaleloForm},
   FMasDeEd in 'FMasDeEd.pp' {MasterDetailEditorForm},
   FHorAulT in 'FHorAulT.pp' {HorarioAulaTipoForm},

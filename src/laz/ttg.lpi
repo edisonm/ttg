@@ -6,7 +6,7 @@
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="0"/>
+      <ActiveEditorIndexAtStart Value="14"/>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
@@ -50,7 +50,7 @@
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="8" Y="47"/>
+        <CursorPos X="55" Y="60"/>
         <TopLine Value="41"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="47"/>
@@ -223,13 +223,13 @@
         <Loaded Value="True"/>
       </Unit18>
       <Unit19>
-        <Filename Value="FLogstic.pp"/>
+        <Filename Value="FMsgView.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="LogisticForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FLogstic"/>
-        <CursorPos X="2" Y="6"/>
+        <UnitName Value="FMsgView"/>
+        <CursorPos X="83" Y="8"/>
         <TopLine Value="1"/>
         <EditorIndex Value="14"/>
         <UsageCount Value="47"/>
