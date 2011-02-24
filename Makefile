@@ -32,7 +32,7 @@ else
 LAZRES=lazres
 endif
 
-ABOUTPAS=src/del/About.pas
+ABOUT=About
 
 DBUNITS=Ac2DMUtl Ac2PxUtl Acc2DM Acc2Pdx Acc2SQL AccUtl DBPack PdxUtils
 
@@ -63,12 +63,12 @@ $(ISS): $(ISS).tmpl
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-$(ABOUTPAS): $(ABOUTPAS).tmpl
+src/del/$(ABOUT).pas: src/del/$(ABOUT).pas.tmpl
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-$(TTGEXE): src/del/$(TTGDPR) $(addprefix src/del/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE))) $(ABOUTPAS)
+$(TTGEXE): src/del/$(TTGDPR) $(addprefix src/del/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE) $(ABOUT)))
 	cd src/del ; $(DCC32) $(DCC32OPTS) $(TTGDPR)
 
 $(DBUTILS): src/dbutils/$(DBUTILSDPR) $(addprefix src/dbutils/, $(addsuffix .pas, $(DBUNITS)))
@@ -208,7 +208,7 @@ BASELAZFILES=$(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS)) \
 	  $(addsuffix .lfm, $(FORMS) $(DSRCBASE)) \
 	  $(addsuffix .lrs, $(FORMS) $(DSRCBASE)) ttg.lpr
 
-LAZARUSFILES=$(addprefix src/, $(BASELAZFILES))
+LAZARUSFILES=$(addprefix src/del/, $(BASELAZFILES))
 
 srclaz: $(LAZARUSFILES)
 
