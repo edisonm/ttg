@@ -1,0 +1,70 @@
+; Inno Setup Script
+; Created with ScriptMaker Version 1.3.12
+; 4 Agosto 2000 at 18:15
+
+[Setup]
+MinVersion=4.0,4.0
+AppName=<v>AppName</v>
+AppId=<v>AppName</v>
+CreateUninstallRegKey=1
+UsePreviousAppDir=1
+UsePreviousGroup=1
+AppVersion=<v>AppVersion</v>
+AppVerName=<v>AppName</v> <v>AppVersion</v>
+AppCopyright=Edición 30-01-2011. Edison Mera. Quito-Ecuador. Madrid-España
+WindowShowCaption=0
+WindowStartMaximized=0
+WindowVisible=0
+WindowResizable=0
+UninstallLogMode=Append
+DirExistsWarning=0
+DisableDirPage=0
+DisableStartupPrompt=0
+CreateAppDir=1
+DisableProgramGroupPage=0
+Uninstallable=1
+DefaultDirName={pf}\TTG\<v>AppVersion</v>
+DefaultGroupName=<v>AppName</v> <v>AppVersion</v>
+LicenseFile=..\DOC\Licencia.txt
+InfoAfterFile=..\DOC\Leame.txt
+OutputBaseFilename=TTGSETUP
+DiskSpanning=0
+DiskClusterSize=512
+ReserveBytes=4096
+UseSetupLdr=1
+SourceDir=.
+OutputDir=..\bin
+
+[Dirs]
+Name: {app}\hlp
+Name: {app}\bin
+Name: {app}\demos
+Name: {app}\doc
+
+[Files]
+Source: ..\bin\TTG.exe; DestDir: {app}\bin\; DestName: TTG.exe
+Source: ..\hlp\TTG.cnt; DestDir: {app}\hlp\; DestName: TTG.cnt
+Source: ..\hlp\TTG.hlp; DestDir: {app}\hlp\; DestName: TTG.hlp
+Source: ..\doc\TTG.doc; DestDir: {app}\doc\; DestName: TTG.doc
+Source: ..\demos\BritanicoInt2000.ttd; DestDir: {app}\demos\; DestName: britanic.ttd
+Source: ..\demos\Salamanca1999.ttd; DestDir: {app}\demos\; DestName: salamanc.ttd
+[Icons]
+Name: {group}\<v>AppName</v> <v>AppVersion</v>; Filename: {app}\BIN\TTG.EXE; WorkingDir: {app}\BIN\; IconIndex: 0
+Name: {group}\Manual del Usuario (doc); Filename: {app}\doc\TTG.doc
+Name: {group}\Manual del Usuario (hlp); Filename: {app}\hlp\TTG.hlp
+Name: {group}\{cm:UninstallProgram, <v>AppName</v> <v>AppVersion</v>}; Filename: {uninstallexe}
+[INI]
+
+[Registry]
+Root: HKCU; SubKey: Software\TTG; ValueType: none; Flags: uninsdeletekey
+
+[UninstallDelete]
+
+[InstallDelete]
+
+[Run]
+
+[UninstallRun]
+
+[Languages]
+Name: default; MessagesFile: C:\Archivos de programa\Inno Setup 5\Languages\Spanish.isl
