@@ -1,6 +1,6 @@
 Unit About;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

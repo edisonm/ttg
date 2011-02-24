@@ -512,7 +512,7 @@ begin
   Strings := TStringList.Create;
   if Database.Database = ':memory:' then
   try
-    Strings.LoadFromFile('../dat/TTG.sql');
+    Strings.LoadFromFile('../dat/ttg.sql');
     Database.ExecuteDirect('pragma journal_mode=off');
     Database.ExecuteDirect(Strings.GetText);
     PrepareTables;

@@ -6,7 +6,7 @@
 			<Projects Include="..\dbutils\dbutils.dproj">
 				<Dependencies/>
 			</Projects>
-			<Projects Include="TTG.dproj">
+			<Projects Include="ttg.dproj">
 				<Dependencies/>
 			</Projects>
 		</ItemGroup>
@@ -28,14 +28,14 @@
 		<Target Name="dbutils:Make">
 			<MSBuild Targets="Make" Projects="..\dbutils\dbutils.dproj"/>
 		</Target>
-		<Target Name="TTG">
-			<MSBuild Projects="TTG.dproj"/>
+		<Target Name="ttg">
+			<MSBuild Projects="ttg.dproj"/>
 		</Target>
-		<Target Name="TTG:Clean">
-			<MSBuild Targets="Clean" Projects="TTG.dproj"/>
+		<Target Name="ttg:Clean">
+			<MSBuild Targets="Clean" Projects="ttg.dproj"/>
 		</Target>
-		<Target Name="TTG:Make">
-			<MSBuild Targets="Make" Projects="TTG.dproj"/>
+		<Target Name="ttg:Make">
+			<MSBuild Targets="Make" Projects="ttg.dproj"/>
 		</Target>
 		<Target Name="Build">
 			<CallTarget Targets="dbutils;ttg"/>

@@ -36,7 +36,7 @@
     </RequiredPackages>
     <Units Count="68">
       <Unit0>
-        <Filename Value="TTG.lpr"/>
+        <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="6" Y="7"/>
         <TopLine Value="7"/>
@@ -368,7 +368,7 @@
         <UsageCount Value="46"/>
       </Unit33>
       <Unit34>
-        <Filename Value="TTG.inc"/>
+        <Filename Value="ttg.inc"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
         <UsageCount Value="9"/>
@@ -388,7 +388,7 @@
         <SyntaxHighlighter Value="LFM"/>
       </Unit36>
       <Unit37>
-        <Filename Value="TTG.lrs"/>
+        <Filename Value="ttg.lrs"/>
         <CursorPos X="1" Y="5236"/>
         <TopLine Value="5212"/>
         <UsageCount Value="14"/>

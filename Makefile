@@ -90,7 +90,7 @@ $(TTGSQLITE3): $(TTGSQL) Makefile
 	sqlite3 $@ "pragma journal_mode=off;pragma foreign_keys=true"
 	sqlite3 $@ ".read $(TTGSQL)"
 
-clean: srclazclean
+clean:
 	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) \
 	  $(TTGSQLITE3) obj/* \
 	  bin/*.o \

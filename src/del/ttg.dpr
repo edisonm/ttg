@@ -48,11 +48,11 @@ uses
 {$R *.res}
 {$ENDIF}
 
-{$IFDEF WINDOWS}{$R TTG.rc}{$ENDIF}
+{$IFDEF WINDOWS}{$R ttg.rc}{$ENDIF}
 
 begin
 {$IFDEF FPC}
-  {$I TTG.lrs}
+  {$I ttg.lrs}
 {$ENDIF}
   DecimalSeparator := ',';
   DateSeparator := '/';
@@ -60,7 +60,7 @@ begin
   LongTimeFormat := 'hh:nn:ss';
   Application.Initialize;
   Application.Title := sAppName + ' ' + sAppVersion;
-  Application.HelpFile := '../hlp/TTG.hlp';
+  Application.HelpFile := '../hlp/ttg.hlp';
   Application.CreateForm(TSourceDataModule, SourceDataModule);
   Application.CreateForm(TMasterDataModule, MasterDataModule);
   Application.CreateForm(TMainForm, MainForm);
