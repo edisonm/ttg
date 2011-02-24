@@ -1,6 +1,8 @@
 # GuideLine: Prefer definition of posix directories, because we are
 # migrating this system to Linux.
 
+include SETTINGS
+
 INNOIDE="c:/archivos de programa/Inno Setup 5/ISCC.exe"
 TTGDIR:=$(shell pwd)
 ISS=$(TTGDIR)/src/iss/ttg.iss
@@ -150,4 +152,4 @@ sq3tozeos:
 
 test:
 	@echo TTGDIR=$(TTGDIR)
-	@echo FILES=$(addprefix src/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE)))
+	@echo FILES=$(addprefix src/del/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE)))
