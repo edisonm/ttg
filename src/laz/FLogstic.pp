@@ -1,6 +1,6 @@
 unit FLogstic;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

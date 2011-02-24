@@ -1,6 +1,6 @@
 unit FMateria;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

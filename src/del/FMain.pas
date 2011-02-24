@@ -1,6 +1,6 @@
 unit FMain;
 
-{$I TTG.inc}
+{$I ttg.inc}
 {
 TODO:
   - HORARIO POR PARALELOS

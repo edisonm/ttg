@@ -1,6 +1,6 @@
 unit TTGUtls;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

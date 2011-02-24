@@ -3,10 +3,10 @@
 
 INNOIDE="c:/archivos de programa/Inno Setup 5/ISCC.exe"
 TTGDIR:=$(shell pwd)
-ISS=$(TTGDIR)/src/iss/TTG.iss
-INSTALLER=$(TTGDIR)/bin/TTGSETUP.exe
-TTGEXE=$(TTGDIR)/bin/TTG.exe
-DBUTILS=$(TTGDIR)/bin/DBUTILS.exe
+ISS=$(TTGDIR)/src/iss/ttg.iss
+INSTALLER=$(TTGDIR)/bin/ttgsetup.exe
+TTGEXE=$(TTGDIR)/bin/ttg.exe
+DBUTILS=$(TTGDIR)/bin/dbutils.exe
 DCC32="c:/archivos de programa/Embarcadero/RAD Studio/7.0/bin/dcc32"
 # DCC32="c:/archivos de programa/CodeGear/RAD Studio/5.0/bin/dcc32"
 DCC32OPTS= \
@@ -17,11 +17,11 @@ DCC32OPTS= \
 	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/parsesql)' \
 	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/plain)' \
 	-N0'$(shell cygpath -w $(TTGDIR)/obj)'
-TTGDPR=TTG.dpr
-DBUTILSDPR=DBUTILS.dpr
-TTGMDB=dat/TTG.mdb
-TTGSQL=dat/TTG.sql
-TTGSQLITE3=dat/TTG.s3fpc
+TTGDPR=ttg.dpr
+DBUTILSDPR=dbutils.dpr
+TTGMDB=dat/ttg.mdb
+TTGSQL=dat/ttg.sql
+TTGSQLITE3=dat/ttg.s3fpc
 
 DSRCBASE0=DSrcBase
 
@@ -71,8 +71,8 @@ $(ABOUTPAS): $(ABOUTPAS).tmpl
 $(TTGEXE): src/del/$(TTGDPR) $(addprefix src/del/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE))) $(ABOUTPAS)
 	cd src; $(DCC32) $(DCC32OPTS) $(TTGDPR)
 
-$(DBUTILS): DBUTILS/$(DBUTILSDPR) $(addprefix DBUTILS/, $(addsuffix .pas, $(DBUNITS)))
-	cd DBUTILS; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
+$(DBUTILS): dbutils/$(DBUTILSDPR) $(addprefix dbutils/, $(addsuffix .pas, $(DBUNITS)))
+	cd dbutils; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
 
 src/del/$(DSRCBASE).pas: $(DBUTILS) $(TTGMDB) Makefile
 	cd src/del ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule \
@@ -96,8 +96,9 @@ clean: srclazclean
 	  bin/*.o \
 	  bin/*.ppu \
 	  src/del/$(DSRCBASE0).pas src/del/$(DSRCBASE0).dfm \
-	  $(ISS) $(ABOUTPAS) src/del/*.identcache DBUTILS/*.identcache
-	$(RM) -r src/del/__history DBUTILS/__history
+	  src/laz/$(DSRCBASE0).pp  src/laz/$(DSRCBASE0).lfm \
+	  $(ISS) $(ABOUTPAS) src/del/*.identcache src/dbutils/*.identcache
+	$(RM) -r src/del/__history src/dbutils/__history
 
 .PHONY: srclaz
 
@@ -205,18 +206,18 @@ sq3tozeos:
 
 BASELAZFILES=$(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS)) \
 	  $(addsuffix .lfm, $(FORMS) $(DSRCBASE)) \
-	  $(addsuffix .lrs, $(FORMS) $(DSRCBASE)) TTG.lpr
+	  $(addsuffix .lrs, $(FORMS) $(DSRCBASE)) ttg.lpr
 
 LAZARUSFILES=$(addprefix src/, $(BASELAZFILES))
 
 srclaz: $(LAZARUSFILES)
 
 prjlaz: srclaz
-	cp src/TTG.inc prjlaz/TTG.inc
-	mv $(LAZARUSFILES) prjlaz/
+	cp src/del/ttg.inc src/laz/ttg.inc
+	mv $(LAZARUSFILES) src/laz/
 
 # srclazclean:
-# 	$(RM) -r $(addprefix prjlaz/, $(BASELAZFILES) $(DSRCBASE0).pp $(DSRCBASE0).lfm $(DSRCBASE0).lrs TTG.inc)
+# 	$(RM) -r $(addprefix prjlaz/, $(BASELAZFILES) $(DSRCBASE0).pp $(DSRCBASE0).lfm $(DSRCBASE0).lrs ttg.inc)
 
 test:
 	@echo TTGDIR=$(TTGDIR)

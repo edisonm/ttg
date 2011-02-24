@@ -1,6 +1,6 @@
 unit DMaster;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

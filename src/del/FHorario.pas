@@ -1,5 +1,5 @@
 unit FHorario;
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

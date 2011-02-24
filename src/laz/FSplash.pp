@@ -1,6 +1,6 @@
 unit FSplash;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

@@ -1,6 +1,6 @@
 unit FCrsMMER;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

@@ -1,6 +1,6 @@
 unit DBase;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

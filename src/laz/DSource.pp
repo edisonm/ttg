@@ -1,6 +1,6 @@
 unit DSource;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

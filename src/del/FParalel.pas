@@ -1,6 +1,6 @@
 unit FParalel;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

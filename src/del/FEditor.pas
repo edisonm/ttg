@@ -1,6 +1,6 @@
 unit FEditor;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

@@ -1,6 +1,6 @@
 unit FProfesr;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

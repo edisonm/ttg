@@ -1,6 +1,6 @@
 unit HorColCm;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

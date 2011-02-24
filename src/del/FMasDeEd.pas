@@ -1,6 +1,6 @@
 unit FMasDeEd;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

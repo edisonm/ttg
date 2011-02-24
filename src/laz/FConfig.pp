@@ -1,6 +1,6 @@
 unit FConfig;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

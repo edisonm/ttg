@@ -1,6 +1,6 @@
 unit FHorPara;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

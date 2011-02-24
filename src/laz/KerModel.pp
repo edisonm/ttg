@@ -1,6 +1,6 @@
 unit KerModel;
 
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 

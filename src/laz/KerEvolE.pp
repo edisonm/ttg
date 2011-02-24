@@ -1,5 +1,5 @@
 unit KerEvolE;
-{$I TTG.inc}
+{$I ttg.inc}
 
 interface
 
