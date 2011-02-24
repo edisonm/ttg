@@ -3,7 +3,7 @@
 
 INNOIDE="c:/archivos de programa/Inno Setup 5/ISCC.exe"
 TTGDIR:=$(shell pwd)
-ISS=$(TTGDIR)/install/TTG.iss
+ISS=$(TTGDIR)/src/iss/TTG.iss
 INSTALLER=$(TTGDIR)/bin/TTGSETUP.exe
 TTGEXE=$(TTGDIR)/bin/TTG.exe
 DBUTILS=$(TTGDIR)/bin/DBUTILS.exe
@@ -32,7 +32,7 @@ else
 LAZRES=lazres
 endif
 
-ABOUTPAS=src/About.pas
+ABOUTPAS=src/del/About.pas
 
 DBUNITS=Ac2DMUtl Ac2PxUtl Acc2DM Acc2Pdx Acc2SQL AccUtl DBPack PdxUtils
 
@@ -68,14 +68,14 @@ $(ABOUTPAS): $(ABOUTPAS).tmpl
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-$(TTGEXE): src/$(TTGDPR) $(addprefix src/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE))) $(ABOUTPAS)
+$(TTGEXE): src/del/$(TTGDPR) $(addprefix src/del/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE))) $(ABOUTPAS)
 	cd src; $(DCC32) $(DCC32OPTS) $(TTGDPR)
 
 $(DBUTILS): DBUTILS/$(DBUTILSDPR) $(addprefix DBUTILS/, $(addsuffix .pas, $(DBUNITS)))
 	cd DBUTILS; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
 
-src/$(DSRCBASE).pas: $(DBUTILS) $(TTGMDB) Makefile
-	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule \
+src/del/$(DSRCBASE).pas: $(DBUTILS) $(TTGMDB) Makefile
+	cd src/del ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule \
 	  $(DSRCBASE) 'cds;csr;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
 
 #src/$(DSRCBASE).pp: $(DBUTILS) $(TTGMDB) Makefile
@@ -89,16 +89,15 @@ $(TTGSQLITE3): $(TTGSQL) Makefile
 	$(RM) $@
 	sqlite3 $@ "pragma journal_mode=off;pragma foreign_keys=true"
 	sqlite3 $@ ".read $(TTGSQL)"
-#	sqlite3 $@ ".genfkey --exec"
 
 clean: srclazclean
 	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) \
 	  $(TTGSQLITE3) obj/* \
 	  bin/*.o \
 	  bin/*.ppu \
-	  src/$(DSRCBASE0).pas src/$(DSRCBASE0).dfm \
-	  $(ISS) $(ABOUTPAS) src/*.identcache DBUTILS/*.identcache
-	$(RM) -r src/__history DBUTILS/__history
+	  src/del/$(DSRCBASE0).pas src/del/$(DSRCBASE0).dfm \
+	  $(ISS) $(ABOUTPAS) src/del/*.identcache DBUTILS/*.identcache
+	$(RM) -r src/del/__history DBUTILS/__history
 
 .PHONY: srclaz
 
@@ -216,8 +215,8 @@ prjlaz: srclaz
 	cp src/TTG.inc prjlaz/TTG.inc
 	mv $(LAZARUSFILES) prjlaz/
 
-srclazclean:
-	$(RM) -r $(addprefix prjlaz/, $(BASELAZFILES) $(DSRCBASE0).pp $(DSRCBASE0).lfm $(DSRCBASE0).lrs TTG.inc)
+# srclazclean:
+# 	$(RM) -r $(addprefix prjlaz/, $(BASELAZFILES) $(DSRCBASE0).pp $(DSRCBASE0).lfm $(DSRCBASE0).lrs TTG.inc)
 
 test:
 	@echo TTGDIR=$(TTGDIR)
