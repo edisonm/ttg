@@ -7,7 +7,6 @@ uses
   Dialogs,
 {$IFDEF FPC}
   Interfaces,
-  LResources,
 {$ENDIF}
   SysUtils,
   FMain in 'FMain.pp' {MainForm},
@@ -51,13 +50,6 @@ uses
 {$IFDEF WINDOWS}{$R ttg.rc}{$ENDIF}
 
 begin
-{$IFDEF FPC}
-  {$I ttg.lrs}
-{$ENDIF}
-  DecimalSeparator := ',';
-  DateSeparator := '/';
-  ShortDateFormat := 'dd/mm/yyyy';
-  LongTimeFormat := 'hh:nn:ss';
   Application.Initialize;
   Application.Title := sAppName + ' ' + sAppVersion;
   Application.HelpFile := '../hlp/ttg.hlp';
