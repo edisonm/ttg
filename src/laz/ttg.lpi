@@ -30,7 +30,7 @@
       <local>
         <FormatVersion Value="1"/>
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
-        <WorkingDirectory Value="E:/apps/pascal/TTG/bin"/>
+        <WorkingDirectory Value="/home/edison/apps/pascal/TTG/bin"/>
       </local>
     </RunParams>
     <RequiredPackages Count="3">
@@ -51,7 +51,7 @@
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="55" Y="60"/>
-        <TopLine Value="34"/>
+        <TopLine Value="39"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="53"/>
         <Loaded Value="True"/>
@@ -152,7 +152,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FCrsMME0"/>
         <CursorPos X="7" Y="246"/>
-        <TopLine Value="218"/>
+        <TopLine Value="226"/>
         <EditorIndex Value="6"/>
         <UsageCount Value="53"/>
         <Loaded Value="True"/>
@@ -385,7 +385,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="RelUtils"/>
         <CursorPos X="43" Y="672"/>
-        <TopLine Value="649"/>
+        <TopLine Value="652"/>
         <EditorIndex Value="18"/>
         <UsageCount Value="53"/>
         <Loaded Value="True"/>
@@ -411,7 +411,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FSelPeIn"/>
         <CursorPos X="6" Y="41"/>
-        <TopLine Value="18"/>
+        <TopLine Value="21"/>
         <EditorIndex Value="19"/>
         <UsageCount Value="53"/>
         <Loaded Value="True"/>
