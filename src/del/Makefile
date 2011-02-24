@@ -1,17 +1,13 @@
+# -*- mode: Makefile; -*-
+
 # This makefile is used only to generate the lazarus project
 
 include ../../SETTINGS
+include ../../COMMON
 
-.PHONY: srclaz
+.PHONY: prjlaz srclaz
 
 .SUFFIXES: .lrs .lfm .dfm .pas .pp .lpr .dpr
-
-ifneq ($(shell uname -s),Linux)
-DSRCBASE=$(DSRCBASE0)
-LAZRES="c:/lazarus/tools/lazres"
-else
-LAZRES=lazres
-endif
 
 BASELAZFILES=$(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
 	  $(addsuffix .lfm, $(FORMS) $(DSRCBASE)) \
