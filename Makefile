@@ -69,17 +69,17 @@ $(ABOUTPAS): $(ABOUTPAS).tmpl
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
 $(TTGEXE): src/del/$(TTGDPR) $(addprefix src/del/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE))) $(ABOUTPAS)
-	cd src; $(DCC32) $(DCC32OPTS) $(TTGDPR)
+	cd src/del ; $(DCC32) $(DCC32OPTS) $(TTGDPR)
 
-$(DBUTILS): dbutils/$(DBUTILSDPR) $(addprefix dbutils/, $(addsuffix .pas, $(DBUNITS)))
-	cd dbutils; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
+$(DBUTILS): src/dbutils/$(DBUTILSDPR) $(addprefix src/dbutils/, $(addsuffix .pas, $(DBUNITS)))
+	cd src/dbutils; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
 
 src/del/$(DSRCBASE).pas: $(DBUTILS) $(TTGMDB) Makefile
-	cd src/del ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule \
+	cd src/del ; $(DBUTILS) /ACC2DM ../../$(TTGMDB) SourceBaseDataModule \
 	  $(DSRCBASE) 'cds;csr;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
 
 #src/$(DSRCBASE).pp: $(DBUTILS) $(TTGMDB) Makefile
-#	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule \
+#	cd src/laz ; $(DBUTILS) /ACC2DM ../../$(TTGMDB) SourceBaseDataModule \
 #	  $(DSRCBASE) 'cds;csr;lfm;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
 
 $(TTGSQL): $(DBUTILS) $(TTGMDB)

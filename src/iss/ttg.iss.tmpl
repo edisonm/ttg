@@ -25,15 +25,15 @@ DisableProgramGroupPage=0
 Uninstallable=1
 DefaultDirName={pf}\TTG\<v>AppVersion</v>
 DefaultGroupName=<v>AppName</v> <v>AppVersion</v>
-LicenseFile=..\DOC\Licencia.txt
-InfoAfterFile=..\DOC\Leame.txt
-OutputBaseFilename=TTGSETUP
+LicenseFile=..\..\doc\Licencia.txt
+InfoAfterFile=..\..\doc\Leame.txt
+OutputBaseFilename=ttgsetup
 DiskSpanning=0
 DiskClusterSize=512
 ReserveBytes=4096
 UseSetupLdr=1
 SourceDir=.
-OutputDir=..\bin
+OutputDir=..\..\bin
 
 [Dirs]
 Name: {app}\hlp
@@ -42,12 +42,12 @@ Name: {app}\demos
 Name: {app}\doc
 
 [Files]
-Source: ..\bin\ttg.exe; DestDir: {app}\bin\; DestName: ttg.exe
-Source: ..\hlp\ttg.cnt; DestDir: {app}\hlp\; DestName: ttg.cnt
-Source: ..\hlp\ttg.hlp; DestDir: {app}\hlp\; DestName: ttg.hlp
-Source: ..\doc\ttg.doc; DestDir: {app}\doc\; DestName: ttg.doc
-Source: ..\demos\BritanicoInt2000.ttd; DestDir: {app}\demos\; DestName: britanic.ttd
-Source: ..\demos\Salamanca1999.ttd; DestDir: {app}\demos\; DestName: salamanc.ttd
+Source: ..\..\bin\ttg.exe; DestDir: {app}\bin\; DestName: ttg.exe
+Source: ..\..\hlp\ttg.cnt; DestDir: {app}\hlp\; DestName: ttg.cnt
+Source: ..\..\hlp\ttg.hlp; DestDir: {app}\hlp\; DestName: ttg.hlp
+Source: ..\..\doc\ttg.doc; DestDir: {app}\doc\; DestName: ttg.doc
+Source: ..\..\demos\BritanicoInt2000.ttd; DestDir: {app}\demos\; DestName: britanic.ttd
+Source: ..\..\demos\Salamanca1999.ttd; DestDir: {app}\demos\; DestName: salamanc.ttd
 [Icons]
 Name: {group}\<v>AppName</v> <v>AppVersion</v>; Filename: {app}\bin\ttg.EXE; WorkingDir: {app}\bin\; IconIndex: 0
 Name: {group}\Manual del Usuario (doc); Filename: {app}\doc\ttg.doc
