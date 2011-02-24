@@ -9,6 +9,9 @@ uses
   Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls;
 
 type
+
+  { TProgressForm }
+
   TProgressForm = class(TForm)
     pnlProgress: TPanel;
     bbtnClose: TBitBtn;

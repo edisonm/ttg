@@ -22,7 +22,11 @@ DELPHIFILES=$(BASEDELFILES)
 %.dfm: %.lfm
 	sed \
 	  -e s:"TStringField":"TWideStringField":g \
-	  -e s:"TLongIntField":"TIntegerField":g $< | unix2dos > $@
+	  -e s:"TLongIntField":"TIntegerField":g \
+	  -e s:"  LCLVersion = .*":"":g \
+	  -e s:"    BkColor = .*":"":g \
+	  -e s:"      ResizeAnchor = .*":"":g \
+	$< | unix2dos > $@
 
 %.dpr: %.lpr
 	sed -e s:"\.pp":"\.pas":g $< | dos2unix > $@

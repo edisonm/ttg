@@ -9,13 +9,13 @@ object EditorForm: TEditorForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-
+  OldCreateOrder = True
   Position = poMainFormCenter
   Visible = True
   OnClose = FormClose
   OnDestroy = FormDestroy
   PixelsPerInch = 96
-
+  TextHeight = 13
   object TlBShow: TToolBar
     Left = 0
     Top = 0
@@ -29,7 +29,7 @@ object EditorForm: TEditorForm
       Top = 0
       Hint = 'Presentar|Presenta el contenido de la cuadricula en un reporte'
       ImageIndex = 0
-
+      ParentShowHint = False
       ShowHint = True
     end
   end
