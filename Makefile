@@ -23,27 +23,7 @@ TTGMDB=dat/ttg.mdb
 TTGSQL=dat/ttg.sql
 TTGSQLITE3=dat/ttg.s3fpc
 
-DSRCBASE0=DSrcBase
-
-ifneq ($(shell uname -s),Linux)
-DSRCBASE=$(DSRCBASE0)
-LAZRES="c:/lazarus/tools/lazres"
-else
-LAZRES=lazres
-endif
-
-ABOUT=About
-
 DBUNITS=Ac2DMUtl Ac2PxUtl Acc2DM Acc2Pdx Acc2SQL AccUtl DBPack PdxUtils
-
-UNITS=KerModel RelUtils HorColCm TTGUtls Rand SortAlgs About KerEvolE	\
-	UConfig
-
-FORMS=FCrsMMEd FSplash FSingEdt FMasDeEd FHorario FLogstic FCrsMME0	\
-	FCrsMME1 FHorProf FProfesr FMain FEditor DMaster FHorPara	\
-	DSource FSelPeIn FConfig FCrsMMER DBase FHorAulT FParalel	\
-	FProgres FMateria
-
 
 APPVERSION=1.2.2
 APPNAME=Generador Automatico de Horarios
@@ -99,10 +79,6 @@ clean:
 	  src/laz/$(DSRCBASE0).pp  src/laz/$(DSRCBASE0).lfm \
 	  $(ISS) $(ABOUTPAS) src/del/*.identcache src/dbutils/*.identcache
 	$(RM) -r src/del/__history src/dbutils/__history
-
-.PHONY: srclaz
-
-.SUFFIXES: .lrs .lfm .dfm .pas .pp .lpr .dpr
 
 kbmtosq3:
 	for i in $(addprefix src/, $(FORMS) $(DSRCBASE0) $(UNITS)) ; do \
@@ -171,53 +147,6 @@ sq3tozeos:
 	  -e s:"IndexedBy":"IndexFieldNames":g \
 	  $$i.dfm > $$i.dfm.tmp && \
 	  mv -f $$i.dfm.tmp $$i.dfm ; done
-
-
-%.pp: %.pas
-	sed \
-	  -e s:"TWideStringField":"TStringField":g \
-	  -e s:"TIntegerField":"TLongintField":g $< | dos2unix > $@
-
-%.lfm: %.dfm
-	sed \
-	  -e s:"TWideStringField":"TStringField":g \
-	  -e s:"TIntegerField":"TLongIntField":g \
-	  -e s:"  OldCreateOrder = .*":"":g \
-	  -e s:"  TextHeight = .*":"":g \
-	  -e s:"  ExplicitWidth = .*":"":g \
-	  -e s:"  ExplicitHeight = .*":"":g \
-	  -e s:"    ExplicitTop = .*":"":g \
-	  -e s:"    ExplicitLeft = .*":"":g \
-	  -e s:"    DesignActivation = .*":"":g \
-	  -e s:"    AttachedAutoRefresh = .*":"":g \
-	  -e s:"    AttachMaxCount = .*":"":g \
-	  -e s:"    FilterOptions = .*":"":g \
-	  -e s:"    DoubleBuffered = .*":"":g \
-	  -e s:"    ParentDoubleBuffered = .*":"":g \
-	  -e s:"    Lookup = .*":"":g \
-	  -e s:"    Calculated = .*":"":g \
-	  -e s:"      ParentShowHint = .*":"":g $< | dos2unix > $@
-
-%.lrs: %.lfm
-	$(LAZRES) $@ $<
-
-%.lpr: %.dpr
-	sed -e s:"\.pas":"\.pp":g $< | dos2unix > $@
-
-BASELAZFILES=$(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS)) \
-	  $(addsuffix .lfm, $(FORMS) $(DSRCBASE)) \
-	  $(addsuffix .lrs, $(FORMS) $(DSRCBASE)) ttg.lpr
-
-LAZARUSFILES=$(addprefix src/del/, $(BASELAZFILES))
-
-srclaz: $(LAZARUSFILES)
-
-prjlaz: srclaz
-	cp src/del/ttg.inc src/laz/ttg.inc
-	mv $(LAZARUSFILES) src/laz/
-
-# srclazclean:
-# 	$(RM) -r $(addprefix prjlaz/, $(BASELAZFILES) $(DSRCBASE0).pp $(DSRCBASE0).lfm $(DSRCBASE0).lrs ttg.inc)
 
 test:
 	@echo TTGDIR=$(TTGDIR)

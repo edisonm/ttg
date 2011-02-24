@@ -1,4 +1,4 @@
-program TTG;
+program ttg;
 {$IFNDEF FPC}
 {$IMAGEBASE $00400000}
 {$ENDIF}
