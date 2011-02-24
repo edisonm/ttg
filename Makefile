@@ -78,9 +78,9 @@ src/$(DSRCBASE).pas: $(DBUTILS) $(TTGMDB) Makefile
 	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule \
 	  $(DSRCBASE) 'cds;csr;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
 
-src/$(DSRCBASE).pp: $(DBUTILS) $(TTGMDB) Makefile
-	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule \
-	  $(DSRCBASE) 'cds;csr;lfm;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
+#src/$(DSRCBASE).pp: $(DBUTILS) $(TTGMDB) Makefile
+#	cd src ; $(DBUTILS) /ACC2DM ../$(TTGMDB) SourceBaseDataModule \
+#	  $(DSRCBASE) 'cds;csr;lfm;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
 
 $(TTGSQL): $(DBUTILS) $(TTGMDB)
 	$(DBUTILS) /ACC2SQL $(TTGMDB) $@
