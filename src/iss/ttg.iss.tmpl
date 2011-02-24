@@ -1,3 +1,4 @@
+; -*- mode: iss; -*-
 ; Inno Setup Script
 ; Created with ScriptMaker Version 1.3.12
 ; 4 Agosto 2000 at 18:15
@@ -38,6 +39,7 @@ OutputDir=..\..\bin
 [Dirs]
 Name: {app}\hlp
 Name: {app}\bin
+Name: {app}\dat
 Name: {app}\demos
 Name: {app}\doc
 
@@ -47,6 +49,7 @@ Source: ..\..\dat\ttg.sql; DestDir: {app}\dat\; DestName: ttg.sql
 Source: ..\..\hlp\ttg.cnt; DestDir: {app}\hlp\; DestName: ttg.cnt
 Source: ..\..\hlp\ttg.hlp; DestDir: {app}\hlp\; DestName: ttg.hlp
 Source: ..\..\doc\ttg.doc; DestDir: {app}\doc\; DestName: ttg.doc
+Source: ..\..\..\sqlite3\sqlite3.dll; DestDir: {sys}; DestName: sqlite3.dll
 Source: ..\..\demos\BritanicoInt2000.ttd; DestDir: {app}\demos\; DestName: britanic.ttd
 Source: ..\..\demos\Salamanca1999.ttd; DestDir: {app}\demos\; DestName: salamanc.ttd
 [Icons]
