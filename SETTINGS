@@ -1,0 +1,17 @@
+ABOUT=About
+
+UNITS=KerModel RelUtils HorColCm TTGUtls Rand SortAlgs KerEvolE UConfig
+
+FORMS=FCrsMMEd FSplash FSingEdt FMasDeEd FHorario FLogstic FCrsMME0	\
+	FCrsMME1 FHorProf FProfesr FMain FEditor DMaster FHorPara	\
+	DSource FSelPeIn FConfig FCrsMMER DBase FHorAulT FParalel	\
+	FProgres FMateria
+
+DSRCBASE0=DSrcBase
+
+ifneq ($(shell uname -s),Linux)
+DSRCBASE=$(DSRCBASE0)
+LAZRES="c:/lazarus/tools/lazres"
+else
+LAZRES=lazres
+endif
