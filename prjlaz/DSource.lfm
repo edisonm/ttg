@@ -1,0 +1,19 @@
+inherited SourceDataModule: TSourceDataModule
+  inherited TbNivel: TZTable
+    object TbNivelCodNivel: TLongIntField
+      FieldName = 'CodNivel'
+    end
+    object TbNivelNomNivel: TStringField
+      FieldName = 'NomNivel'
+      Required = True
+      Size = 15
+    end
+    object TbNivelAbrNivel: TStringField
+      FieldName = 'AbrNivel'
+      Size = 5
+    end
+  end
+  inherited DSMateriaProhibicion: TDataSource
+    DataSet = nil
+  end
+end

@@ -1,0 +1,268 @@
+inherited SourceBaseDataModule: TSourceBaseDataModule
+  object TbAulaTipo: TZTable
+    Connection = Database
+    TableName = 'AulaTipo'
+    IndexFieldNames = 'CodAulaTipo'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 48
+    Top = 48
+  end
+  object DSAulaTipo: TDataSource
+    DataSet = TbAulaTipo
+    Left = 56
+    Top = 40
+  end
+  object TbEspecializacion: TZTable
+    Tag = 1
+    Connection = Database
+    TableName = 'Especializacion'
+    IndexFieldNames = 'CodEspecializacion'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 144
+    Top = 60
+  end
+  object DSEspecializacion: TDataSource
+    DataSet = TbEspecializacion
+    Left = 152
+    Top = 52
+  end
+  object TbDia: TZTable
+    Tag = 2
+    Connection = Database
+    TableName = 'Dia'
+    IndexFieldNames = 'CodDia'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 240
+    Top = 48
+  end
+  object DSDia: TDataSource
+    DataSet = TbDia
+    Left = 248
+    Top = 40
+  end
+  object TbMateria: TZTable
+    Tag = 3
+    Connection = Database
+    TableName = 'Materia'
+    IndexFieldNames = 'CodMateria'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 336
+    Top = 60
+  end
+  object DSMateria: TDataSource
+    DataSet = TbMateria
+    Left = 344
+    Top = 52
+  end
+  object TbNivel: TZTable
+    Tag = 4
+    Connection = Database
+    TableName = 'Nivel'
+    IndexFieldNames = 'CodNivel'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 432
+    Top = 48
+  end
+  object DSNivel: TDataSource
+    DataSet = TbNivel
+    Left = 440
+    Top = 40
+  end
+  object TbHora: TZTable
+    Tag = 5
+    Connection = Database
+    TableName = 'Hora'
+    IndexFieldNames = 'CodHora'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 48
+    Top = 144
+  end
+  object DSHora: TDataSource
+    DataSet = TbHora
+    Left = 56
+    Top = 136
+  end
+  object TbHorario: TZTable
+    Tag = 6
+    Connection = Database
+    TableName = 'Horario'
+    IndexFieldNames = 'CodHorario'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 144
+    Top = 156
+  end
+  object DSHorario: TDataSource
+    DataSet = TbHorario
+    Left = 152
+    Top = 148
+  end
+  object TbCurso: TZTable
+    Tag = 7
+    Connection = Database
+    TableName = 'Curso'
+    IndexFieldNames = 'CodNivel;CodEspecializacion'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 240
+    Top = 144
+  end
+  object DSCurso: TDataSource
+    DataSet = TbCurso
+    Left = 248
+    Top = 136
+  end
+  object TbParaleloId: TZTable
+    Tag = 8
+    Connection = Database
+    TableName = 'ParaleloId'
+    IndexFieldNames = 'CodParaleloId'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 336
+    Top = 156
+  end
+  object DSParaleloId: TDataSource
+    DataSet = TbParaleloId
+    Left = 344
+    Top = 148
+  end
+  object TbMateriaProhibicionTipo: TZTable
+    Tag = 9
+    Connection = Database
+    TableName = 'MateriaProhibicionTipo'
+    IndexFieldNames = 'CodMateProhibicionTipo'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 432
+    Top = 144
+  end
+  object DSMateriaProhibicionTipo: TDataSource
+    DataSet = TbMateriaProhibicionTipo
+    Left = 440
+    Top = 136
+  end
+  object TbPeriodo: TZTable
+    Tag = 10
+    Connection = Database
+    TableName = 'Periodo'
+    IndexFieldNames = 'CodDia;CodHora'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 48
+    Top = 240
+  end
+  object DSPeriodo: TDataSource
+    DataSet = TbPeriodo
+    Left = 56
+    Top = 232
+  end
+  object TbParalelo: TZTable
+    Tag = 11
+    Connection = Database
+    TableName = 'Paralelo'
+    IndexFieldNames = 'CodNivel;CodEspecializacion;CodParaleloId'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 144
+    Top = 252
+  end
+  object DSParalelo: TDataSource
+    DataSet = TbParalelo
+    Left = 152
+    Top = 244
+  end
+  object TbProfesor: TZTable
+    Tag = 12
+    Connection = Database
+    TableName = 'Profesor'
+    IndexFieldNames = 'CodProfesor'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 240
+    Top = 240
+  end
+  object DSProfesor: TDataSource
+    DataSet = TbProfesor
+    Left = 248
+    Top = 232
+  end
+  object TbMateriaProhibicion: TZTable
+    Tag = 13
+    Connection = Database
+    TableName = 'MateriaProhibicion'
+    IndexFieldNames = 'CodMateria;CodDia;CodHora'
+    BeforePost = DataSetBeforePost
+    Left = 336
+    Top = 252
+  end
+  object DSMateriaProhibicion: TDataSource
+    DataSet = TbMateriaProhibicion
+    Left = 344
+    Top = 244
+  end
+  object TbDistributivo: TZTable
+    Tag = 14
+    Connection = Database
+    TableName = 'Distributivo'
+    IndexFieldNames = 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 432
+    Top = 240
+  end
+  object DSDistributivo: TDataSource
+    DataSet = TbDistributivo
+    Left = 440
+    Top = 232
+  end
+  object TbHorarioDetalle: TZTable
+    Tag = 15
+    Connection = Database
+    TableName = 'HorarioDetalle'
+    IndexFieldNames = 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
+    BeforePost = DataSetBeforePost
+    Left = 48
+    Top = 336
+  end
+  object DSHorarioDetalle: TDataSource
+    DataSet = TbHorarioDetalle
+    Left = 56
+    Top = 328
+  end
+  object TbProfesorProhibicionTipo: TZTable
+    Tag = 16
+    Connection = Database
+    TableName = 'ProfesorProhibicionTipo'
+    IndexFieldNames = 'CodProfProhibicionTipo'
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+    Left = 144
+    Top = 348
+  end
+  object DSProfesorProhibicionTipo: TDataSource
+    DataSet = TbProfesorProhibicionTipo
+    Left = 152
+    Top = 340
+  end
+  object TbProfesorProhibicion: TZTable
+    Tag = 17
+    Connection = Database
+    TableName = 'ProfesorProhibicion'
+    IndexFieldNames = 'CodProfesor;CodDia;CodHora'
+    BeforePost = DataSetBeforePost
+    Left = 240
+    Top = 336
+  end
+  object DSProfesorProhibicion: TDataSource
+    DataSet = TbProfesorProhibicion
+    Left = 248
+    Top = 328
+  end
+end

@@ -176,7 +176,7 @@ sq3tozeos:
 %.pp: %.pas
 	sed \
 	  -e s:"TWideStringField":"TStringField":g \
-	  -e s:"TIntegerField":"TLongintField":g $< > $@
+	  -e s:"TIntegerField":"TLongintField":g $< | dos2unix > $@
 
 %.lfm: %.dfm
 	sed \
@@ -196,13 +196,13 @@ sq3tozeos:
 	  -e s:"    ParentDoubleBuffered = .*":"":g \
 	  -e s:"    Lookup = .*":"":g \
 	  -e s:"    Calculated = .*":"":g \
-	  -e s:"      ParentShowHint = .*":"":g $< > $@
+	  -e s:"      ParentShowHint = .*":"":g $< | dos2unix > $@
 
 %.lrs: %.lfm
 	$(LAZRES) $@ $<
 
 %.lpr: %.dpr
-	sed -e s:"\.pas":"\.pp":g $< > $@
+	sed -e s:"\.pas":"\.pp":g $< | dos2unix > $@
 
 BASELAZFILES=$(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS)) \
 	  $(addsuffix .lfm, $(FORMS) $(DSRCBASE)) \
