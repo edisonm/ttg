@@ -71,8 +71,7 @@ procedure TSplashForm.FormCreate(Sender: TObject);
 begin
   UpdBackground;
   lblYearLabel.Caption := 'Build (' + SBuildDateTime + ')';
-  lblCopyright.Caption := '1999-2011 por Edison Mera';
-end;
+  lblCopyright.Caption := '1999-2011 por Edison Mera';end;
 
 initialization
 
