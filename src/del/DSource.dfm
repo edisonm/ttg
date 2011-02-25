@@ -16,4 +16,8 @@ inherited SourceDataModule: TSourceDataModule
   inherited DSMateriaProhibicion: TDataSource
     DataSet = nil
   end
+  inherited TbDistributivo: TZTable
+    OnCalcFields = TbDistributivoCalcFields
+    BeforePost = TbDistributivoBeforePost
+  end
 end

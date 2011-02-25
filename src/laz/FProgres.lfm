@@ -35,7 +35,7 @@ object ProgressForm: TProgressForm
         Left = 420
         Top = 1
         Width = 12
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -48,7 +48,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlCruceProfesor: TPanel
@@ -74,7 +73,7 @@ object ProgressForm: TProgressForm
         Left = 119
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -87,7 +86,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlCruceAulaTipo: TPanel
@@ -113,7 +111,7 @@ object ProgressForm: TProgressForm
         Left = 119
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -126,7 +124,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlCruceProfesorCantidad: TPanel
@@ -142,7 +139,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -155,7 +152,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlCruceAulaTipoCantidad: TPanel
@@ -171,7 +167,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -184,7 +180,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlHoraHuecaDesubicada: TPanel
@@ -210,7 +205,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -223,7 +218,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlHoraHuecaDesubicadaValor: TPanel
@@ -239,7 +233,7 @@ object ProgressForm: TProgressForm
         Left = 119
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -252,7 +246,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlSesionCortada: TPanel
@@ -278,7 +271,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -291,7 +284,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlSesionCortadaValor: TPanel
@@ -307,7 +299,7 @@ object ProgressForm: TProgressForm
         Left = 119
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -320,7 +312,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlInitDateTime: TPanel
@@ -336,7 +327,7 @@ object ProgressForm: TProgressForm
         Left = 429
         Top = 1
         Width = 3
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Color = clBtnFace
@@ -348,7 +339,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlElapsedTime: TPanel
@@ -364,7 +354,7 @@ object ProgressForm: TProgressForm
         Left = 222
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -377,7 +367,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlNumGeneracion: TPanel
@@ -387,13 +376,13 @@ object ProgressForm: TProgressForm
       Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Generacion:'
+      Caption = ' Iteracion:'
       TabOrder = 15
       object lblNumGeneracion: TLabel
         Left = 184
         Top = 1
         Width = 12
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -406,7 +395,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlMateriaProhibicion: TPanel
@@ -432,7 +420,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -445,7 +433,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlMateriaProhibicionValor: TPanel
@@ -461,7 +448,7 @@ object ProgressForm: TProgressForm
         Left = 119
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -474,7 +461,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlProfesorProhibicion: TPanel
@@ -500,7 +486,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -513,7 +499,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object Panel26: TPanel
@@ -529,7 +514,7 @@ object ProgressForm: TProgressForm
         Left = 119
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -542,7 +527,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object pnlMateriaNoDispersa: TPanel
@@ -568,7 +552,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -581,7 +565,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object Panel29: TPanel
@@ -597,7 +580,7 @@ object ProgressForm: TProgressForm
         Left = 119
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -610,7 +593,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object Panel1: TPanel
@@ -636,7 +618,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -649,7 +631,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object Panel3: TPanel
@@ -665,7 +646,7 @@ object ProgressForm: TProgressForm
         Left = 119
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -678,7 +659,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object Panel5: TPanel
@@ -694,7 +674,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -707,7 +687,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object Panel6: TPanel
@@ -723,7 +702,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -736,7 +715,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
     object Panel4: TPanel
@@ -752,7 +730,7 @@ object ProgressForm: TProgressForm
         Left = 107
         Top = 1
         Width = 9
-        Height = 19
+        Height = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -765,7 +743,6 @@ object ProgressForm: TProgressForm
         ParentColor = False
         ParentFont = False
         Layout = tlCenter
-      
       end
     end
   end
@@ -781,16 +758,35 @@ object ProgressForm: TProgressForm
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    Kind = bkClose
+    Glyph.Data = {
+      DE010000424DDE01000000000000760000002800000024000000120000000100
+      0400000000006801000000000000000000001000000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00388888888877
+      F7F787F8888888888333333F00004444400888FFF444448888888888F333FF8F
+      000033334D5007FFF4333388888888883338888F0000333345D50FFFF4333333
+      338F888F3338F33F000033334D5D0FFFF43333333388788F3338F33F00003333
+      45D50FEFE4333333338F878F3338F33F000033334D5D0FFFF43333333388788F
+      3338F33F0000333345D50FEFE4333333338F878F3338F33F000033334D5D0FFF
+      F43333333388788F3338F33F0000333345D50FEFE4333333338F878F3338F33F
+      000033334D5D0EFEF43333333388788F3338F33F0000333345D50FEFE4333333
+      338F878F3338F33F000033334D5D0EFEF43333333388788F3338F33F00003333
+      4444444444333333338F8F8FFFF8F33F00003333333333333333333333888888
+      8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
+      333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
+      0000}
+    NumGlyphs = 2
 
     ParentFont = False
     TabOrder = 1
+    OnClick = bbtnCloseClick
   end
   object bbtnCancel: TBitBtn
     Left = 248
     Top = 312
     Width = 107
     Height = 28
+    Cancel = True
     Caption = 'Cancelar'
 
     Font.Charset = DEFAULT_CHARSET
@@ -798,12 +794,31 @@ object ProgressForm: TProgressForm
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    Kind = bkCancel
+    Glyph.Data = {
+      DE010000424DDE01000000000000760000002800000024000000120000000100
+      0400000000006801000000000000000000001000000000000000000000000000
+      80000080000000808000800000008000800080800000C0C0C000808080000000
+      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+      333333333333333333333333000033338833333333333333333F333333333333
+      0000333911833333983333333388F333333F3333000033391118333911833333
+      38F38F333F88F33300003339111183911118333338F338F3F8338F3300003333
+      911118111118333338F3338F833338F3000033333911111111833333338F3338
+      3333F8330000333333911111183333333338F333333F83330000333333311111
+      8333333333338F3333383333000033333339111183333333333338F333833333
+      00003333339111118333333333333833338F3333000033333911181118333333
+      33338333338F333300003333911183911183333333383338F338F33300003333
+      9118333911183333338F33838F338F33000033333913333391113333338FF833
+      38F338F300003333333333333919333333388333338FFF830000333333333333
+      3333333333333333333888330000333333333333333333333333333333333333
+      0000}
+    ModalResult = 2
+    NumGlyphs = 2
 
     ParentFont = False
     TabOrder = 2
+    OnClick = bbtnCancelClick
   end
-  object PBNumMaxGeneracion: TProgressBar
+  object PBProgress: TProgressBar
     Left = 9
     Top = 312
     Width = 232

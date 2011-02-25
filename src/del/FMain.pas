@@ -16,7 +16,9 @@ uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes, Graphics,
   DB, Forms, Dialogs,SysConst, ExtCtrls, Menus, ComCtrls, ImgList, Buttons, ActnList,
   ToolWin, StdActns, StdCtrls, FSplash, FSingEdt, ZConnection, Controls, FCrsMME0,
-  ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset, FEditor, UConfig;
+  ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset, FEditor, UConfig
+{$IFNDEF FREEWARE}, KerEvolE, KerModel, FProgres{$ENDIF};
+
 type
   TMainForm = class(TForm)
     MainMenu: TMainMenu;
@@ -142,10 +144,6 @@ type
     procedure ActIndexExecute(Sender: TObject);
     procedure FormDblClick(Sender: TObject);
     procedure ActRegistrationInfoExecute(Sender: TObject);
-{
-    procedure ActSaveCSVExecute(Sender: TObject);
-    procedure ActOpenCSVExecute(Sender: TObject);
-}
   private
     { Private declarations }
     FConfigFileName: string;
@@ -158,9 +156,6 @@ type
     FEspecializacionForm: TSingleEditorForm;
     FPeriodoForm: TCrossManyToManyEditor0Form;
 {$IFNDEF FREEWARE}
-    FInit: TDateTime;
-    FCloseClick:Boolean;
-    FCancelClick: Boolean;
     FEjecutando: Boolean;
     FPasada: Integer;
 {$ENDIF}
@@ -195,13 +190,8 @@ type
     { Public declarations }
     procedure AjustarPesos;
 {$IFNDEF FREEWARE}
-    procedure OnIterar(Sender: TObject);
     procedure OnRegistrarMejor(Sender: TObject);
-    procedure ProgressFormCloseClick(Sender: TObject);
-    procedure ProgressFormCancelClick(Sender: TObject);
-    procedure ProgressDescensoDoble(I, Max: Integer; Value: Double; var Stop: Boolean);
     property Ejecutando: Boolean read FEjecutando write FEjecutando;
-    property CloseClick: Boolean read FCloseClick write FCloseClick;
     property Pasada: Integer read FPasada write FPasada;
 {$ENDIF}
     property Progress: Integer read FProgress write SetProgress;
@@ -218,9 +208,6 @@ var
 implementation
 
 uses
-{$IFNDEF FREEWARE}
-  KerEvolE, KerModel, FProgres,
-{$ENDIF}
   FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd, About,
   FConfig, FMsgView, TTGUtls, FParalel, Rand, Printers, DSource, DSrcBase;
 
@@ -456,43 +443,24 @@ var
   VEvolElitista: TEvolElitista;
   FMomentoInicial, FMomentoFinal: TDateTime;
   sProb: string;
-  procedure ShowProgressForm;
+  procedure ProcesarCodHorario(ACodHorario: Integer);
   begin
-    with ProgressForm do
-    begin
-      Show;
-      HelpContext := ActElaborarHorario.HelpContext;
-      NumMaxGeneracion := vEvolElitista.NumMaxGeneracion;
-      FInit := Now;
-      Caption :=
-        Format('Elaboracion en progreso [%d]', [CodHorario]);
-      lblInit.Caption := FormatDateTime(Format('%s %s ', [ShortDateFormat,
-        LongTimeFormat]), FInit);
-      FCloseClick := False;
-      bbtnClose.OnClick := ProgressFormCloseClick;
-      bbtnClose.Kind := bkCustom;
-      bbtnCancel.OnClick := ProgressFormCancelClick;
-      bbtnCancel.Kind := bkCustom;
-    end;
-  end;
-  procedure ProcesarCodHorario(Cod: Integer);
-  begin
-    CodHorario := Cod;
+    CodHorario := ACodHorario;
     if SourceDataModule.TbHorario.Locate('CodHorario', CodHorario, []) then
       sProb := sProb + ' ' + IntToStr(CodHorario)
     else
     begin
       FMomentoInicial := Now;
-      ShowProgressForm;
+      ProgressForm.Caption := Format('Elaboracion en progreso [%d]', [CodHorario]);
       FLogStrings.Clear;
       FLogStrings.BeginUpdate;
       try
-        vEvolElitista.Ejecutar;
+        vEvolElitista.Ejecutar(SourceDataModule.NumIteraciones);
       finally
         FLogStrings.EndUpdate;
       end;
       //FLogStrings.SaveToFile(Format('LogHor_%d.txt', [CodHorario]));
-      if FCancelClick then
+      if ProgressForm.CancelClick then
         Exit;
       VEvolElitista.DescensoRapidoForzado;
       {if True then
@@ -503,7 +471,7 @@ var
         end;
       end;}
       FMomentoFinal := Now;
-      VEvolElitista.SaveBestToDatabase(Cod, FMomentoInicial, FMomentoFinal);
+      VEvolElitista.SaveBestToDatabase(ACodHorario, FMomentoInicial, FMomentoFinal);
     end;
   end;
   procedure ProcessCodList(const CodList: string);
@@ -526,7 +494,7 @@ var
       for iCod := FCodIni to FCodFin do
       begin
         ProcesarCodHorario(iCod);
-        if FCancelClick then
+        if ProgressForm.CancelClick then
           Exit;
       end;
     end;
@@ -539,155 +507,58 @@ begin
     InitRandom;
     ActElaborarHorario.Enabled := False;
     FEjecutando := True;
+    VModeloHorario := TModeloHorario.CrearDesdeDataModule(CruceProfesor,
+      ProfesorFraccionamiento, CruceAulaTipo, HoraHueca, SesionCortada, MateriaNoDispersa);
+    VEvolElitista := TEvolElitista.CrearDesdeModelo(VModeloHorario, TamPoblacion);
     try
-      VModeloHorario :=
-        TModeloHorario.CrearDesdeDataModule(
-          CruceProfesor,
-          ProfesorFraccionamiento,
-          CruceAulaTipo,
-          HoraHueca,
-          SesionCortada,
-          MateriaNoDispersa);
-      try
-        VEvolElitista := TEvolElitista.CrearDesdeModelo(VModeloHorario,
-                                                        TamPoblacion);
-        VEvolElitista.NumMaxGeneracion := NumMaxGeneracion;
-        VEvolElitista.ProbCruzamiento := ProbCruzamiento;
-        VEvolElitista.ProbMutacion1 := ProbMutacion1;
-        VEvolElitista.OrdenMutacion1 := OrdenMutacion1;
-        VEvolElitista.ProbMutacion2 := ProbMutacion2;
-        VEvolElitista.ProbReparacion := ProbReparacion;
-        VEvolElitista.SyncDirectory := Compartir;
-        VEvolElitista.RangoPolinizacion := RangoPolinizacion;
-        if (Compartir <> '')
-           and FileExists(VEvolElitista.SyncFileName) then
+      ProgressForm.ShowProgressForm(NumMaxGeneracion);
+      VModeloHorario.OnProgress := ProgressForm.OnProgress;
+      VEvolElitista.NumMaxGeneracion := NumMaxGeneracion;
+      VEvolElitista.ProbCruzamiento := ProbCruzamiento;
+      VEvolElitista.ProbMutacion1 := ProbMutacion1;
+      VEvolElitista.OrdenMutacion1 := OrdenMutacion1;
+      VEvolElitista.ProbMutacion2 := ProbMutacion2;
+      VEvolElitista.ProbReparacion := ProbReparacion;
+      VEvolElitista.SyncDirectory := Compartir;
+      VEvolElitista.RangoPolinizacion := RangoPolinizacion;
+      if (Compartir <> '')
+         and FileExists(VEvolElitista.SyncFileName) then
+      begin
+        mr := MessageDlg('El archivo de sincronizacion ya existe.  ' +
+                         'Desea eliminar los archivos relacionados?',
+                         mtWarning, [mbYes, mbNo, mbCancel], 0);
+        if mr = mrYes then
         begin
-          mr := MessageDlg('El archivo de sincronizacion ya existe.  ' +
-                             'Desea eliminar los archivos relacionados?',
-                           mtWarning, [mbYes, mbNo, mbCancel], 0);
-          if mr = mrYes then
-          begin
-            DeleteFile(VEvolElitista.FileName);
-            DeleteFile(VEvolElitista.SyncFileName);
-          end
-          else if mr = mrCancel then
-          begin
-            raise Exception.Create('Operacion cancelada por el usuario');
-          end
-        end;
-        VEvolElitista.PrefijarHorarios(HorarioIni);
-        FCancelClick := False;
-        FAjustar := False;
-        VEvolElitista.OnIterar := Self.OnIterar;
-        VEvolElitista.OnRegistrarMejor := Self.OnRegistrarMejor;
-        try
-          sProb := '';
-          ProcessCodList(s);
-          if sProb <> '' then
-            MessageDlg(Format('Los siguientes horarios ya existian: %s',
-                              [sProb]), mtError, [mbOK], 0);
-        finally
-          VEvolElitista.Free;
-        end;
-      finally
-        VModeloHorario.Free;
+          DeleteFile(VEvolElitista.FileName);
+          DeleteFile(VEvolElitista.SyncFileName);
+        end
+        else if mr = mrCancel then
+        begin
+          raise Exception.Create('Operacion cancelada por el usuario');
+        end
       end;
+      VEvolElitista.PrefijarHorarios(HorarioIni);
+      ProgressForm.CancelClick := False;
+      FAjustar := False;
+      VEvolElitista.OnRegistrarMejor := Self.OnRegistrarMejor;
+      sProb := '';
+      ProcessCodList(s);
+      if sProb <> '' then
+        MessageDlg(Format('Los siguientes horarios ya existian: %s', [sProb]),
+          mtError, [mbOK], 0);
     finally
+      VEvolElitista.Free;
+      VModeloHorario.Free;
       FEjecutando := False;
-      ProgressForm.bbtnClose.OnClick := nil;
-      ProgressForm.bbtnCancel.OnClick := nil;
-      FCloseClick := False;
-      FCancelClick := False;
-      ProgressForm.bbtnClose.Kind := bkClose;
-      ProgressForm.bbtnClose.Caption := 'Finalizar';
-      ProgressForm.bbtnCancel.Kind := bkCancel;
-      ProgressForm.Close;
+      ProgressForm.CloseProgressForm;
       ActElaborarHorario.Enabled := True;
       TbHorarioDetalle.Refresh;
     end;
   end;
-  StatusBar.Panels[2].Text := '';
 end;
 
-procedure TMainForm.OnIterar(Sender: TObject);
-begin
-  with Sender as TEvolElitista do
-  begin
-    if NumGeneracion mod SourceDataModule.NumIteraciones = 0 then
-    begin
-      Application.ProcessMessages;
-      StatusBar.Panels[2].Text := Format('%d de %d', [NumGeneracion,
-        ProgressForm.PBNumMaxGeneracion.Max]);
-      with MejorObjetoModeloHorario do
-        ProgressForm.SetValues(Now - FInit,
-                               NumGeneracion,
-                               CruceProfesor,
-                               ProfesorFraccionamiento,
-                               CruceAulaTipo,
-                               HoraHuecaDesubicada,
-                               SesionCortada,
-                               MateriaProhibicion,
-                               ProfesorProhibicion,
-                               MateriaNoDispersa,
-                               NumImportacion,
-                               NumExportacion,
-                               NumColision,
-                               CruceProfesorValor,
-                               ProfesorFraccionamientoValor,
-                               CruceAulaTipoValor,
-                               HoraHuecaDesubicadaValor,
-                               SesionCortadaValor,
-                               MateriaProhibicionValor,
-                               ProfesorProhibicionValor,
-                               MateriaNoDispersaValor,
-                               Valor);
-      if FAjustar then
-      begin
-        InvalidarValores;
-      	// Actualizar;
-        with SourceDataModule do
-	  ModeloHorario.Configurar(CruceProfesor,
-	                    		   ProfesorFraccionamiento,
-				                     CruceAulaTipo,
-				                     HoraHueca,
-				                     SesionCortada,
-				                     MateriaNoDispersa);
-        FAjustar := False;
-      end;
-      if (FCloseClick or FCancelClick) then
-        Terminar;
-    end;
-  end;
-end;
-
-procedure TMainForm.OnRegistrarMejor(Sender: TObject);
-var
-  t: TDateTime;
-begin
-  with Sender as TEvolElitista do
-  begin
-    t := Now - FInit;
-    FLogStrings.Add(Format('%g; %d; %g; %g', [t, NumGeneracion, MejorValor,
-                                              PromedioValor]));
-  end;
-end;
-
-procedure TMainForm.ProgressFormCloseClick(Sender: TObject);
-begin
-  FCloseClick := True;
-  ProgressForm.Close;
-end;
-
-procedure TMainForm.ProgressFormCancelClick(Sender: TObject);
-begin
-  FCancelClick := True;
-  ProgressForm.Close;
-end;
-
-var
-  MomentoInicialProgress: TDateTime;
-
-procedure TMainForm.ProgressDescensoDoble(I, Max: Integer; value: Double; var Stop: Boolean);
+{
+procedure TMainForm.ProgressDescensoDoble(I, Max: Integer; Horario: TObjetoModeloHorario; var Stop: Boolean);
 var
   t, x: TDateTime;
 begin
@@ -711,6 +582,15 @@ begin
                                       FormatDateTime('hh:mm:ss', x)]);
   Application.ProcessMessages;
   Stop := FCloseClick;
+end;
+}
+
+procedure TMainForm.OnRegistrarMejor(Sender: TObject);
+begin
+  with Sender as TEvolElitista do
+  begin
+    FLogStrings.Add(Format('%g; %g; %g', [Now, MejorValor, PromedioValor]));
+  end;
 end;
 
 {$ENDIF}
@@ -912,20 +792,19 @@ end;
 
 procedure TMainForm.ActChequearFactibilidadExecute(Sender: TObject);
 begin
-  LogisticForm.HelpContext := ActChequearFactibilidad.HelpContext;
-  if MasterDataModule.PerformAllChecks(LogisticForm.MemLogistic.Lines,
-                                       LogisticForm.MemResumen.Lines,
-                                       SourceDataModule.MaxCargaProfesor)
-  then
+  MessageViewForm.HelpContext := ActChequearFactibilidad.HelpContext;
+  if MasterDataModule.PerformAllChecks(MessageViewForm.MemLogistic.Lines,
+                                       MessageViewForm.MemResumen.Lines,
+                                       SourceDataModule.MaxCargaProfesor) then
   begin
-    LogisticForm.Show;
+    MessageViewForm.Show;
   end
   else
   begin
     if MessageDlg('No se encontraron errores, esta listo para generar horario.'#13#10 +
                     'Desea mostrar el resumen del chequeo del horario?',
                   mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-      LogisticForm.Show;
+      MessageViewForm.Show;
   end;
 end;
 
@@ -973,8 +852,8 @@ begin
 {$IFNDEF FREEWARE}
   if FEjecutando
     and (MessageDlg('Esta seguro de que desea finalizar esta operacion?',
-    mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
-    FCloseClick := True;
+      mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
+    ProgressForm.CloseClick := True;
 {$ENDIF}
 end;
 

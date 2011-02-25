@@ -7,7 +7,7 @@ uses
   Classes, SysUtils, DB, KerModel;
 
 type
-  TObjetoModeloHorarioArray = array of TObjetoModeloHorario;
+  TTimeTableArray = array of TTimeTable;
 
   {
     Clase TEvolElitista
@@ -39,15 +39,13 @@ type
       FNumMaxGeneracion, FNumImportacion, FNumExportacion, FNumColision,
       FRangoPolinizacion, FOrdenMutacion1: Longint;
     FProbCruzamiento, FProbMutacion1, FProbMutacion2, FProbReparacion: Double;
-    FPoblacion, FNuevaPoblacion: TObjetoModeloHorarioArray;
+    FPoblacion, FNuevaPoblacion: TTimeTableArray;
     FValorArray, FAptitudArray, FNuevoValorArray, FNuevoAptitudArray,
       FRAptitudArray, FCAptitudArray: TDynamicDoubleArray;
     FSesionCortadaArray, FNuevoSesionCortadaArray, FCruceProfesorArray,
       FNuevoCruceProfesorArray, FCruceAulaTipoArray,
       FNuevoCruceAulaTipoArray: TDynamicLongintArray;
     FHorariosPrefijados: TDynamicLongintArray;
-    FTerminado: Boolean;
-    FOnIterar: TNotifyEvent;
     FOnRegistrarMejor: TNotifyEvent;
     procedure Inicializar;
     procedure Evaluar;
@@ -77,7 +75,7 @@ type
     function GetMejorMateriaNoDispersa: Integer;
     function GetMejorMateriaNoDispersaValor: Double;
     procedure CopiarIndividuo(Destino, Fuente: Integer);
-    function GetMejorObjetoModeloHorario: TObjetoModeloHorario;
+    function GetBestTimeTable: TTimeTable;
     procedure ReportParameters(AInforme: TStrings);
   protected
   public
@@ -92,15 +90,12 @@ type
       MomentoFinal: TDateTime);
     procedure SaveMejorToStream(AStream: TStream);
     procedure LlenarInforme(AInforme: TStrings);
-    procedure Ejecutar;
+    procedure Ejecutar(NumIteraciones: Integer);
     procedure DescensoRapidoForzado;
     function DescensoRapido: Boolean;
-    procedure Terminar;
     procedure Reparar;
-    property OnIterar: TNotifyEvent read FOnIterar write FOnIterar;
     property OnRegistrarMejor
       : TNotifyEvent read FOnRegistrarMejor write FOnRegistrarMejor;
-    property NumGeneracion: Longint read FNumGeneracion;
     property NumMaxGeneracion
       : Longint read FNumMaxGeneracion write FNumMaxGeneracion;
     property ProbCruzamiento
@@ -136,8 +131,8 @@ type
       : Double read GetMejorHoraHuecaDesubicadaValor;
     property MejorSesionCortadaValor: Double read GetMejorSesionCortadaValor;
     property PromedioValor: Double read GetPromedioValor;
-    property MejorObjetoModeloHorario
-      : TObjetoModeloHorario read GetMejorObjetoModeloHorario;
+    property BestTimeTable
+      : TTimeTable read GetBestTimeTable;
     property ModeloHorario: TModeloHorario read FModeloHorario;
     property SyncDirectory: string read FSyncDirectory write FSyncDirectory;
     property FileName: string read GetFileName;
@@ -173,7 +168,7 @@ begin
   for i := 0 to High(FPoblacion) do
   begin
     if not Assigned(FNuevaPoblacion[i]) then
-      FNuevaPoblacion[i] := TObjetoModeloHorario.CrearDesdeModelo
+      FNuevaPoblacion[i] := TTimeTable.CrearDesdeModelo
         (FModeloHorario);
   end;
 end;
@@ -433,37 +428,32 @@ procedure TEvolElitista.Polinizar;
       SyncStream.Free;
     end;
   end;
-  procedure PolinizarInterno;
-  var
-    SyncStream: TStream;
-    dValor: Double;
-  begin
-    try
-      if FileExists(SyncFileName) then
-      begin
-        SyncStream := TFileStream.Create
-          (SyncFileName, fmOpenRead or fmShareDenyWrite);
-        try
-          SyncStream.read(dValor, SizeOf(Double));
-        finally
-          SyncStream.Free;
-        end;
-        if dValor < FValorArray[FTamPoblacion] then
-          Importar
-        else if dValor > FValorArray[FTamPoblacion] then
-          Exportar;
-      end
-      else
-      begin
-        Exportar;
-      end;
-    except
-      Inc(FNumColision);
-    end;
-  end;
+var
+  SyncStream: TStream;
+  dValor: Double;
 begin
-  if (FNumGeneracion mod FRangoPolinizacion) = 0 then
-    PolinizarInterno;
+  try
+    if FileExists(SyncFileName) then
+    begin
+      SyncStream := TFileStream.Create
+        (SyncFileName, fmOpenRead or fmShareDenyWrite);
+      try
+        SyncStream.read(dValor, SizeOf(Double));
+      finally
+        SyncStream.Free;
+      end;
+      if dValor < FValorArray[FTamPoblacion] then
+        Importar
+      else if dValor > FValorArray[FTamPoblacion] then
+        Exportar;
+    end
+    else
+    begin
+      Exportar;
+    end;
+  except
+    Inc(FNumColision);
+  end;
 end;
 
 procedure TEvolElitista.Seleccionar;
@@ -471,7 +461,7 @@ var
   mem, i, j: Longint;
   sum: Double;
   p: Extended;
-  VTmpPoblacion: TObjetoModeloHorarioArray;
+  VTmpPoblacion: TTimeTableArray;
   VTmpAptitudArray, VTmpValorArray: TDynamicDoubleArray;
   VTmpSesionCortadaArray, VTmpCruceProfesorArray,
     VTmpCruceAulaTipoArray: TDynamicLongintArray;
@@ -590,31 +580,37 @@ begin
   end;
 end;
 
-procedure TEvolElitista.Ejecutar;
+procedure TEvolElitista.Ejecutar(NumIteraciones: Integer);
+var
+  Stop: Boolean;
+  NumGeneracion: Integer;
 begin
   getseeds(FSemilla1, FSemilla2, FSemilla3, FSemilla4);
   Inicializar;
   Evaluar;
   TomarElMejor;
   FNumGeneracion := 0;
-  FTerminado := False;
   FNumImportacion := 0;
   FNumExportacion := 0;
   FNumColision := 0;
-  while (FNumGeneracion < FNumMaxGeneracion) and not FTerminado do
+  Stop := False;
+  NumGeneracion := 0;
+  while (NumGeneracion < FNumMaxGeneracion) and not Stop do
   begin
     Seleccionar;
     Cruzar;
     Mutar;
     Reparar;
-    if FSyncDirectory <> '' then
+    if ((NumGeneracion mod FRangoPolinizacion) = 0)
+       and (FSyncDirectory <> '') then
       Polinizar;
-    if Assigned(FOnIterar) then
-      FOnIterar(Self);
+    FModeloHorario.DoProgress(NumGeneracion, NumIteraciones,
+                              BestTimeTable, Stop);
     Evaluar;
     Elitista;
-    Inc(FNumGeneracion);
+    Inc(NumGeneracion);
   end;
+  if Stop then FNumMaxGeneracion := NumGeneracion; // Preserve the maximum in case of cancel
 end;
 
 procedure TEvolElitista.DescensoRapidoForzado;
@@ -649,11 +645,6 @@ begin
   FPoblacion[FTamPoblacion].SaveToStream(AStream);
 end;
 
-procedure TEvolElitista.Terminar;
-begin
-  FTerminado := True;
-end;
-
 function TEvolElitista.GetPromedioValor: Double;
 var
   i: Integer;
@@ -667,7 +658,7 @@ begin
   Result := sum / FTamPoblacion;
 end;
 
-function TEvolElitista.GetMejorObjetoModeloHorario: TObjetoModeloHorario;
+function TEvolElitista.GetBestTimeTable: TTimeTable;
 begin
   Result := FPoblacion[FTamPoblacion];
 end;
@@ -766,7 +757,6 @@ begin
     Add('Semillas del generador de numeros aleatorios:');
     Add(Format('  %d, %d, %d, %d', [FSemilla1, FSemilla2, FSemilla3, FSemilla4])
       );
-    Add(Format('Numero de generaciones:     %5.d ', [NumGeneracion]));
     Add(Format('Parametros A. Evolutivo: %d; %d; %g; %g; %d; %g; %g',
         [FTamPoblacion, FNumMaxGeneracion, FProbCruzamiento, FProbMutacion1,
         FOrdenMutacion1, FProbMutacion2, FProbReparacion]));
@@ -777,7 +767,7 @@ procedure TEvolElitista.LlenarInforme(AInforme: TStrings);
 begin
   ReportParameters(AInforme);
   //FModeloHorario.ReportParameters(AInforme);
-  MejorObjetoModeloHorario.ReportValues(AInforme);
+  BestTimeTable.ReportValues(AInforme);
 end;
 
 procedure TEvolElitista.PrefijarHorarios(const Horarios: string);

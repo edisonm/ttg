@@ -11,18 +11,18 @@ object ConfiguracionForm: TConfiguracionForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-
+  OldCreateOrder = True
   Position = poDesktopCenter
   PixelsPerInch = 96
-
+  TextHeight = 13
   object bbtnOk: TBitBtn
     Left = 255
     Top = 424
     Width = 75
     Height = 25
-
+    DoubleBuffered = True
     Kind = bkOK
-
+    ParentDoubleBuffered = False
     TabOrder = 0
     OnClick = bbtnOkClick
   end
@@ -31,7 +31,7 @@ object ConfiguracionForm: TConfiguracionForm
     Top = 8
     Width = 401
     Height = 409
-    ActivePage = tbsUnidadEducativa
+    ActivePage = tbsOpciones
     ParentShowHint = False
     ShowHint = True
     TabOrder = 1
@@ -39,10 +39,6 @@ object ConfiguracionForm: TConfiguracionForm
       Hint = 'Datos del colegio'
       Caption = 'Colegio'
       ImageIndex = 2
-  
-  
-    
-    
       object Label14: TLabel
         Left = 8
         Top = 109
@@ -163,10 +159,6 @@ object ConfiguracionForm: TConfiguracionForm
     object tbsOpciones: TTabSheet
       Caption = 'Opciones'
       ImageIndex = 3
-  
-  
-    
-    
       object Label19: TLabel
         Left = 16
         Top = 60
@@ -315,7 +307,7 @@ object ConfiguracionForm: TConfiguracionForm
         MaxValue = 2147483647
         MinValue = 1
         TabOrder = 5
-        Value = 1
+        Value = 10
       end
       object edtMostrarProfesorHorarioTexto: TEdit
         Left = 72
@@ -358,10 +350,6 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsPesos: TTabSheet
       Caption = 'Pesos'
-  
-  
-    
-    
       object Label1: TLabel
         Left = 8
         Top = 12
@@ -592,10 +580,6 @@ object ConfiguracionForm: TConfiguracionForm
     object tbsAlgoritmoEvolutivo: TTabSheet
       Caption = 'Algoritmo Evolutivo'
       ImageIndex = 1
-  
-  
-    
-    
       object Label8: TLabel
         Left = 8
         Top = 13
@@ -731,9 +715,9 @@ object ConfiguracionForm: TConfiguracionForm
     Top = 424
     Width = 75
     Height = 25
-
+    DoubleBuffered = True
     Kind = bkCancel
-
+    ParentDoubleBuffered = False
     TabOrder = 2
     OnClick = bbtnCancelClick
   end

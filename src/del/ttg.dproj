@@ -7,7 +7,7 @@
 			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
 			<DCC_DependencyCheckOutputName>..\..\bin\ttg.exe</DCC_DependencyCheckOutputName>
 			<ProjectVersion>12.0</ProjectVersion>
-			<Config Condition="'$(Config)'==''">Release</Config>
+			<Config Condition="'$(Config)'==''">Debug</Config>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
 			<Base>true</Base>
@@ -148,7 +148,7 @@
 			<DCCReference Include="FConfig.pas">
 				<Form>ConfiguracionForm</Form>
 			</DCCReference>
-			<DCCReference Include="FLogstic.pas">
+			<DCCReference Include="FMsgView.pas">
 				<Form>LogisticForm</Form>
 			</DCCReference>
 			<DCCReference Include="FHorPara.pas">

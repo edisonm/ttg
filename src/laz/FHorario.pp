@@ -215,7 +215,7 @@ implementation
 
 uses
   FCrsMMER, DMaster, TTGUtls, FCrsMME1, FConfig, Printers, DSource, FMain,
-  Variants, RelUtils, KerModel;
+  Variants, RelUtils, KerModel, FProgres;
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
@@ -297,20 +297,25 @@ end;
 
 procedure THorarioForm.ActMejorarHorarioExecute(Sender: TObject);
 begin
-  inherited;
+  ActMejorarHorario.Enabled := False;
+  try
 {$IFNDEF FREEWARE}
-  MejorarHorario;
+    MejorarHorario;
 {$ENDIF}
+  finally
+    ActMejorarHorario.Enabled := True;
+    ActMejorarHorario.Checked := False;
+  end;
 end;
 
 {$IFNDEF FREEWARE}
 procedure THorarioForm.MejorarHorario;
 var
   VModeloHorario: TModeloHorario;
-  VObjetoModeloHorario: TObjetoModeloHorario;
+  TimeTable: TTimeTable;
   CodHorarioFuente, CodHorarioDestino: Integer;
-  Informe: TStrings;
-  MomentoInicial, MomentoFinal: TDateTime;
+  Report: TStrings;
+  MomentoInicial, EndTime: TDateTime;
   d: string;
   va: Double;
 begin
@@ -319,7 +324,7 @@ begin
     'Codigo del horario mejorado', d) then
     Exit;
   CodHorarioDestino := StrToInt(d);
-  MainForm.CloseClick := False;
+  ProgressForm.CloseClick := False;
   with SourceDataModule do
   begin
     InitRandom;
@@ -337,35 +342,44 @@ begin
     MainForm.Progress := 0;
     MainForm.Pasada := 0;
     try
-      VModeloHorario.OnProgress := MainForm.ProgressDescensoDoble;
+      VModeloHorario.OnProgress := ProgressForm.OnProgress;
       MainForm.Step := 1;
-      VObjetoModeloHorario := TObjetoModeloHorario.CrearDesdeModelo(VModeloHorario);
+      TimeTable := TTimeTable.CrearDesdeModelo(VModeloHorario);
+      ProgressForm.Caption := Format('Mejorando Horario [%d] en [%d]',
+         [CodHorarioFuente, CodHorarioDestino]);
+      with VModeloHorario do
+        ProgressForm.ShowProgressForm(SesionCantidadDoble);
       try
         {if s = '' then
           VObjetoModeloHorario.HacerAleatorio
         else}
-        VObjetoModeloHorario.LoadFromDataModule(CodHorarioFuente);
-        va := VObjetoModeloHorario.Valor;
-        VObjetoModeloHorario.DescensoRapidoForzado;
-        VObjetoModeloHorario.DescensoRapidoDobleForzado;
-        MomentoFinal := Now;
-        Informe := TStringList.Create;
-        try
-          Informe.Add('Algoritmo de Descenso Rapido Doble');
-          Informe.Add('==================================');
-          Informe.Add(Format('Horario base (Peso): %d (%f)',
-            [CodHorarioFuente, va]));
-          VModeloHorario.ReportParameters(Informe);
-          VObjetoModeloHorario.ReportValues(Informe);
-          VObjetoModeloHorario.SaveToDataModule(CodHorarioDestino, MomentoInicial,
-            MomentoFinal, Informe);
-          if SourceDataModule.TbHorario.Active then
-            SourceDataModule.TbHorario.Refresh;
-        finally
-          Informe.Free;
+        TimeTable.LoadFromDataModule(CodHorarioFuente);
+        va := TimeTable.Valor;
+        TimeTable.DescensoRapidoForzado;
+        TimeTable.DescensoRapidoDobleForzado(SourceDataModule.NumIteraciones);
+        if not ProgressForm.CancelClick then
+        begin
+          EndTime := Now;
+          Report := TStringList.Create;
+          try
+            Report.Add('Algoritmo de Descenso Rapido Doble');
+            Report.Add('==================================');
+            Report.Add(Format('Horario base (Peso): %d (%f)',
+              [CodHorarioFuente, va]));
+            Report.Add('----------------------------------');
+            // VModeloHorario.ReportParameters(Report);
+            TimeTable.ReportValues(Report);
+            TimeTable.SaveToDataModule(CodHorarioDestino, MomentoInicial,
+              EndTime, Report);
+            if SourceDataModule.TbHorario.Active then
+              SourceDataModule.TbHorario.Refresh;
+          finally
+            Report.Free;
+          end;
         end;
       finally
-        VObjetoModeloHorario.Free;
+        ProgressForm.CloseProgressForm;
+        TimeTable.Free;
       end;
     finally
       VModeloHorario.Free;

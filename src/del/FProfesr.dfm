@@ -2,16 +2,16 @@ inherited ProfesorForm: TProfesorForm
   Left = 374
   Top = 200
   ClientHeight = 400
-  ClientWidth = 702
+  ClientWidth = 696
   OnActivate = FormActivate
   OnCreate = FormCreate
-
-
+  ExplicitWidth = 704
+  ExplicitHeight = 427
   PixelsPerInch = 96
-
+  TextHeight = 13
   inherited TlBShow: TToolBar
-    Width = 702
-  
+    Width = 696
+    ExplicitWidth = 702
     inherited DBNavigator: TDBNavigator
       Hints.Strings = ()
     end
@@ -19,39 +19,50 @@ inherited ProfesorForm: TProfesorForm
       Left = 256
       Top = 0
       Action = ActProfesorProhibicion
-
-      ShowHint = True
-    end
-    object BtnDistributivo: TToolButton
-      Left = 279
-      Top = 0
-      Action = ActDistributivo
-
+      ParentShowHint = False
       ShowHint = True
     end
   end
   inherited pnlStatus: TPanel
     Top = 381
-    Width = 702
-
-  
-    inherited SLState: TLabel
-      Height = 17
-    end
+    Width = 696
+    ExplicitTop = 381
+    ExplicitWidth = 702
     inherited SLRecordNo: TLabel
-      Left = 698
-      Height = 17
-  
+      Left = 692
+      ExplicitLeft = 698
     end
   end
   inherited Panel1: TPanel
-    Width = 702
+    Width = 696
     Height = 356
-  
-  
-    inherited DBGrid: TDBGrid
-      Width = 700
+    ExplicitWidth = 702
+    ExplicitHeight = 356
+    inherited Splitter1: TSplitter
+      Left = 302
+      Top = 1
+      Width = 3
       Height = 354
+      Cursor = crHSplit
+      Align = alLeft
+      ExplicitTop = 200
+      ExplicitWidth = 3
+      ExplicitHeight = 700
+    end
+    inherited DBGrid: TDBGrid
+      Width = 301
+      Height = 354
+      Align = alLeft
+    end
+    inherited DBGridDetail: TDBGrid
+      Left = 305
+      Top = 1
+      Width = 390
+      Height = 354
+      Hint = 'Distributivo de Profesores'
+      Align = alClient
+      ParentShowHint = False
+      ShowHint = True
     end
   end
   inherited ImageList: TImageList
@@ -330,17 +341,11 @@ inherited ProfesorForm: TProfesorForm
       000000000000}
   end
   inherited DataSource: TDataSource
-    Left = 288
-    Top = 48
+    DataSet = SourceDataModule.TbProfesor
+    Left = 200
+    Top = 112
   end
   inherited ActionList: TActionList
-    object ActDistributivo: TAction
-      AutoCheck = True
-      Caption = 'Distributivo'
-      Hint = 'Distributivo|Ver distributivo del profesor'
-      ImageIndex = 3
-      OnExecute = ActDistributivoExecute
-    end
     object ActProfesorProhibicion: TAction
       AutoCheck = True
       Caption = 'Prohibiciones de profesor'
@@ -349,57 +354,8 @@ inherited ProfesorForm: TProfesorForm
       OnExecute = ActProfesorProhibicionExecute
     end
   end
-  object QuProfesorProhibicion: TZQuery
-    Connection = SourceDataModule.Database
-    SortedFields = 'CodProfesor;CodDia;CodHora'
-    SQL.Strings = (
-      'select * from ProfesorProhibicion'
-      'where CodProfesor=:CodProfesor')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'CodProfesor'
-        ParamType = ptUnknown
-      end>
-    DataSource = SourceDataModule.DSProfesor
-    MasterFields = 'CodProfesor'
-    MasterSource = SourceDataModule.DSProfesor
-    LinkedFields = 'CodProfesor'
-    IndexFieldNames = 'CodProfesor Asc;CodDia Asc;CodHora Asc'
-    Left = 232
-    Top = 104
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'CodProfesor'
-        ParamType = ptUnknown
-      end>
-  end
-  object QuDistributivo: TZQuery
-    Connection = SourceDataModule.Database
-    SortedFields = 'CodProfesor'
-    OnCalcFields = QuDistributivoCalcFields
-    SQL.Strings = (
-      'select * from Distributivo'
-      'where CodProfesor=:CodProfesor')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'CodProfesor'
-        ParamType = ptUnknown
-      end>
-    DataSource = SourceDataModule.DSProfesor
-    MasterFields = 'CodProfesor'
-    MasterSource = SourceDataModule.DSProfesor
-    LinkedFields = 'CodProfesor'
-    IndexFieldNames = 'CodProfesor Asc'
-    Left = 232
-    Top = 152
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'CodProfesor'
-        ParamType = ptUnknown
-      end>
+  inherited DataSourceDetail: TDataSource
+    DataSet = SourceDataModule.TbDistributivo
+    Top = 112
   end
 end

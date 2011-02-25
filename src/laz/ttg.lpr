@@ -57,7 +57,7 @@ begin
   Application.CreateForm(TSourceDataModule, SourceDataModule);
   Application.CreateForm(TMasterDataModule, MasterDataModule);
   Application.CreateForm(TMainForm, MainForm);
-  Application.CreateForm(TLogisticForm, LogisticForm);
+  Application.CreateForm(TLogisticForm, MessageViewForm);
   Application.CreateForm(TProgressForm, ProgressForm);
   Application.Run;
 end.

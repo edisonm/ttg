@@ -8,28 +8,22 @@ uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, FSingEdt, Db, Grids, StdCtrls, Buttons, DBCtrls,
   RelUtils, Variants, ExtCtrls, ComCtrls, Printers, ImgList, ToolWin, ActnList,
-  FCrsMMER, DBGrids, ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  FMasDeEd, FCrsMMER, DBGrids, ZAbstractRODataset, ZAbstractDataset, ZDataset;
 
 type
-  TProfesorForm	= class(TSingleEditorForm)
+  TProfesorForm	= class(TMasterDetailEditorForm)
     BtnProfesorProhibicion: TToolButton;
-    BtnDistributivo: TToolButton;
-    ActDistributivo: TAction;
     ActProfesorProhibicion: TAction;
-    QuProfesorProhibicion: TZQuery;
-    QuDistributivo: TZQuery;
     procedure ActProfesorProhibicionExecute(Sender: TObject);
-    procedure ActDistributivoExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure QuDistributivoCalcFields(DataSet: TDataSet);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure FormActivate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FSuperTitle: string;
     FDistributivoForm: TSingleEditorForm;
     FProfesorProhibicionForm: TCrossManyToManyEditorRForm;
-    procedure PrepareDistributivoExtraFields;
     function GetCargaActual: Integer;
   public
     { Public declarations }
@@ -55,7 +49,9 @@ begin
   with FProfesorProhibicionForm do
   begin
     Tag := TbProfesor.FindField('CodProfesor').AsInteger;
-    QuProfesorProhibicion.Open;
+    TbProfesorProhibicion.MasterSource := DSProfesor;
+    TbProfesorProhibicion.MasterFields := 'CodProfesor';
+    TbProfesorProhibicion.LinkedFields := 'CodProfesor';
     Caption := Format('%s %s %s - Editando %s', [NameDataSet[TbProfesor],
       TbProfesor.FindField('ApeProfesor').AsString,
       TbProfesor.FindField('NomProfesor').AsString,
@@ -64,10 +60,14 @@ begin
       [Description[TbProfesorProhibicion], Description[TbDia], Description[TbHora]]);
     ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda',
       [NameDataSet[TbProfesorProhibicionTipo], Description[TbProfesorProhibicionTipo]]);
-    ShowEditor(TbDia, TbHora, TbProfesorProhibicionTipo, QuProfesorProhibicion,
+    ShowEditor(TbDia, TbHora, TbProfesorProhibicionTipo, TbProfesorProhibicion,
 	    TbPeriodo, 'CodDia', 'NomDia', 'CodDia', 'CodDia', 'CodHora', 'NomHora',
       'CodHora', 'CodHora', 'CodProfProhibicionTipo', 'NomProfProhibicionTipo',
       'ColProfProhibicionTipo', 'CodProfProhibicionTipo');
+  end
+  else
+  begin
+    TbProfesorProhibicion.MasterSource := nil;
   end;
 end;
 
@@ -82,23 +82,13 @@ begin
   SourceDataModule.TbProfesor.Locate('CodProfesor', (Sender as TCustomForm).Tag, []);
 end;
 
-procedure TProfesorForm.ActDistributivoExecute(Sender: TObject);
-begin
-  with SourceDataModule do
-    if TSingleEditorForm.ToggleSingleEditor(Self, FDistributivoForm,
-			ConfigStorage, ActDistributivo,	QuDistributivo) then
-    begin
-      DataSourceDataChange(nil, nil);
-    end
-end;
-
 function TProfesorForm.GetCargaActual: Integer;
 var
   VBookmark: TBookmark;
   FieldComposicion: TField;
 begin
   Result := 0;
-  with SourceDataModule, QuDistributivo do if Active then
+  with SourceDataModule, TbDistributivo do
   begin
     VBookmark := GetBookmark;
     DisableControls;
@@ -120,119 +110,19 @@ end;
 procedure TProfesorForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule do FSuperTitle := Description[TbProfesor];
-  with QuDistributivo do
+  with SourceDataModule do
   begin
-    PrepareDataSetFields(QuDistributivo);
-    FindField('CodMateria').Visible := False;
-    FindField('CodNivel').Visible := False;
-    FindField('CodEspecializacion').Visible := False;
-    FindField('CodParaleloId').Visible := False;
-    FindField('CodProfesor').Visible := False;
-    FindField('CodAulaTipo').Visible := False;
-    PrepareDistributivoExtraFields;
-    Open;
-  end;
-end;
-
-procedure TProfesorForm.PrepareDistributivoExtraFields;
-var
-  Field: TField;
-begin
-  Field := TStringField.Create(QuDistributivo.Owner);
-  with Field do
-  begin
-    DisplayLabel := 'Nivel';
-    FieldKind := fkLookup;
-    FieldName := 'AbrNivel';
-    LookupDataSet := SourceDataModule.TbNivel;
-    LookupKeyFields := 'CodNivel';
-    LookupResultField := 'AbrNivel';
-    KeyFields := 'CodNivel';
-    Size := 5;
-    Lookup := True;
-    DataSet := QuDistributivo;
-  end;
-  Field := TStringField.Create(QuDistributivo.Owner);
-  with Field do
-  begin
-    DisplayLabel := 'Especializacion';
-    FieldKind := fkLookup;
-    FieldName := 'AbrEspecializacion';
-    LookupDataSet := SourceDataModule.TbEspecializacion;
-    LookupKeyFields := 'CodEspecializacion';
-    LookupResultField := 'AbrEspecializacion';
-    KeyFields := 'CodEspecializacion';
-    Size := 10;
-    Lookup := True;
-    DataSet := QuDistributivo;
-  end;
-  Field := TStringField.Create(QuDistributivo.Owner);
-  with Field do
-  begin
-    DisplayLabel := 'Paralelo';
-    FieldKind := fkLookup;
-    FieldName := 'NomParaleloId';
-    LookupDataSet := SourceDataModule.TbParaleloId;
-    LookupKeyFields := 'CodParaleloId';
-    LookupResultField := 'NomParaleloId';
-    KeyFields := 'CodParaleloId';
-    Size := 5;
-    Lookup := True;
-    DataSet := QuDistributivo;
-  end;
-  Field := TStringField.Create(QuDistributivo.Owner);
-  with Field do
-  begin
-    DisplayLabel := 'Materia';
-    DisplayWidth := 15;
-    FieldKind := fkLookup;
-    FieldName := 'NomMateria';
-    LookupDataSet := SourceDataModule.TbMateria;
-    LookupKeyFields := 'CodMateria';
-    LookupResultField := 'NomMateria';
-    KeyFields := 'CodMateria';
-    Size := 15;
-    Lookup := True;
-    DataSet := QuDistributivo;
-  end;
-  Field := TStringField.Create(QuDistributivo.Owner);
-  with Field do
-  begin
-    DisplayLabel := 'Tipo aula';
-    DisplayWidth := 10;
-    FieldKind := fkLookup;
-    FieldName := 'AbrAulaTipo';
-    LookupDataSet := SourceDataModule.TbAulaTipo;
-    LookupKeyFields := 'CodAulaTipo';
-    LookupResultField := 'AbrAulaTipo';
-    KeyFields := 'CodAulaTipo';
-    Size := 10;
-    Lookup := True;
-    DataSet := QuDistributivo;
-  end;
-  Field := TLongintField.Create(QuDistributivo.Owner);
-  with Field do
-  begin
-    FieldKind := fkCalculated;
-    FieldName := 'Duracion';
-    DataSet := QuDistributivo;
-  end;
-end;
-
-procedure TProfesorForm.QuDistributivoCalcFields(DataSet: TDataSet);
-var
-  v: Variant;
-begin
-  try
-    v := DataSet['Composicion'];
-    if VarIsNull(v) then
-      DataSet['Duracion'] := 0
-    else
-      DataSet['Duracion'] := ComposicionADuracion(v);
-  except
-    DataSet['Duracion'] := 0;
+    FSuperTitle := Description[TbProfesor];
+    TbDistributivo.MasterFields := 'CodProfesor';
+    TbDistributivo.LinkedFields := 'CodProfesor';
+    TbDistributivo.MasterSource := DSProfesor;
   end
+end;
+
+procedure TProfesorForm.FormDestroy(Sender: TObject);
+begin
+  inherited;
+  SourceDataModule.TbDistributivo.MasterSource := nil;
 end;
 
 initialization

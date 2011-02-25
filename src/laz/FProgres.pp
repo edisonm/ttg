@@ -6,7 +6,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes,
-  Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls;
+  Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls, KerModel;
 
 type
 
@@ -59,7 +59,7 @@ type
     Panel29: TPanel;
     lblMateriaNoDispersaValor: TLabel;
     bbtnCancel: TBitBtn;
-    PBNumMaxGeneracion: TProgressBar;
+    PBProgress: TProgressBar;
     Panel1: TPanel;
     Panel2: TPanel;
     lblProfesorFraccionamiento: TLabel;
@@ -71,22 +71,31 @@ type
     lblExportaciones: TLabel;
     Panel4: TPanel;
     lblColisiones: TLabel;
+    procedure bbtnCancelClick(Sender: TObject);
+    procedure bbtnCloseClick(Sender: TObject);
   private
-    function GetNumMaxGeneracion: Integer;
-    procedure SetNumMaxGeneracion(const Value: Integer);
+    FInit: TDateTime;
+    FCloseClick:Boolean;
+    FCancelClick: Boolean;
+    function GetProgressMax: Integer;
+    procedure SetProgressMax(const Value: Integer);
     { Private declarations }
   public
-    procedure SetValues(AElapsed: TDateTime; ANumGeneracion,
-      ACruceProfesor: Integer; AProfesorFraccionamiento: Double; ACruceAulaTipo,
-      AHoraHuecaDesubicada, ASesionCortada, AMateriaProhibicion,
-      AProfesorProhibicion, AMateriaNoDispersa, ANumImportacion,
-      ANumExportacion, ANumColision: Integer;
+    procedure SetValues(AProgress, ACruceProfesor: Integer;
+      AProfesorFraccionamiento: Double; ACruceAulaTipo, AHoraHuecaDesubicada,
+      ASesionCortada, AMateriaProhibicion, AProfesorProhibicion,
+      AMateriaNoDispersa, ANumImportacion, ANumExportacion, ANumColision: Integer;
       ACruceProfesorValor, AProfesorFraccionamientoValor, ACruceAulaTipoValor,
       AHoraHuecaDesubicadaValor, ASesioncortadaValor, AMateriaProhibicionValor,
       AProfesorProhibicionValor, AMateriaNoDispersaValor, AValue: Double);
     { Public declarations }
-    property NumMaxGeneracion: Integer read GetNumMaxGeneracion write
-      SetNumMaxGeneracion;
+    procedure ShowProgressForm(AMax: Integer);
+    procedure CloseProgressForm;
+    property CloseClick: Boolean read FCloseClick write FCloseClick;
+    property CancelClick: Boolean read FCancelClick write FCancelClick;
+    property ProgressMax: Integer read GetProgressMax write SetProgressMax;
+    procedure OnProgress(Position, Step: Integer; Sender: TTimeTable;
+      var Stop: Boolean);
   end;
 
 var
@@ -100,17 +109,67 @@ implementation
 
 { TFProgress }
 
-function TProgressForm.GetNumMaxGeneracion: Integer;
+function TProgressForm.GetProgressMax: Integer;
 begin
-  Result := PBNumMaxGeneracion.Max;
+  Result := PBProgress.Max;
 end;
 
-procedure TProgressForm.SetNumMaxGeneracion(const Value: Integer);
+procedure TProgressForm.OnProgress(Position, Step: Integer;
+  Sender: TTimeTable; var Stop: Boolean);
 begin
-  PBNumMaxGeneracion.Max := Value;
+  with Sender do
+  begin
+    if Position mod Step = 0 then
+    begin
+      Application.ProcessMessages;
+      ProgressForm.SetValues(Position,
+                             CruceProfesor,
+                             ProfesorFraccionamiento,
+                             CruceAulaTipo,
+                             HoraHuecaDesubicada,
+                             SesionCortada,
+                             MateriaProhibicion,
+                             ProfesorProhibicion,
+                             MateriaNoDispersa,
+                             0, //NumImportacion,
+                             0, //NumExportacion,
+                             0, //NumColision,
+                             CruceProfesorValor,
+                             ProfesorFraccionamientoValor,
+                             CruceAulaTipoValor,
+                             HoraHuecaDesubicadaValor,
+                             SesionCortadaValor,
+                             MateriaProhibicionValor,
+                             ProfesorProhibicionValor,
+                             MateriaNoDispersaValor,
+                             Valor);
+      {
+      if FAjustar then
+      begin
+        InvalidarValores;
+      	// Actualizar;
+        with SourceDataModule do
+	        ModeloHorario.Configurar(CruceProfesor,
+                                   ProfesorFraccionamiento,
+                                   CruceAulaTipo,
+                                   HoraHueca,
+                                   SesionCortada,
+                                   MateriaNoDispersa);
+        FAjustar := False;
+      end;
+      }
+      if (ProgressForm.CloseClick or ProgressForm.CancelClick) then
+        Stop := True;
+    end;
+  end;
 end;
 
-procedure TProgressForm.SetValues(AElapsed: TDateTime; ANumGeneracion,
+procedure TProgressForm.SetProgressMax(const Value: Integer);
+begin
+  PBProgress.Max := Value;
+end;
+
+procedure TProgressForm.SetValues(AProgress,
   ACruceProfesor: Integer; AProfesorFraccionamiento: Double; ACruceAulaTipo,
   AHoraHuecaDesubicada, ASesionCortada, AMateriaProhibicion,
   AProfesorProhibicion, AMateriaNoDispersa, ANumImportacion, ANumExportacion,
@@ -119,11 +178,11 @@ procedure TProgressForm.SetValues(AElapsed: TDateTime; ANumGeneracion,
   AHoraHuecaDesubicadaValor, ASesioncortadaValor, AMateriaProhibicionValor,
   AProfesorProhibicionValor, AMateriaNoDispersaValor, AValue: Double);
 begin
-  lblElapsedTime.Caption := FormatDateTime('hh:nn:ss' + ' ', AElapsed);
-  lblNumGeneracion.Caption := Format('%d ', [ANumGeneracion]);
-  with PBNumMaxGeneracion do
+  lblElapsedTime.Caption := FormatDateTime('hh:nn:ss' + ' ', Now - FInit);
+  lblNumGeneracion.Caption := Format('%d ', [AProgress]);
+  with PBProgress do
   begin
-    Position := ANumGeneracion;
+    Position := AProgress;
     Hint := Format('%d de %d', [Position, Max]);
   end;
   lblCruceProfesor.Caption := Format('%d ', [ACruceProfesor]);
@@ -142,16 +201,47 @@ begin
   lblHoraHuecaDesubicadaValor.Caption := Format('%8.2f ',
     [AHoraHuecaDesubicadaValor]);
   lblSesionCortadaValor.Caption := Format('%8.2f ', [ASesionCortadaValor]);
-  lblMateriaProhibicionValor.Caption := Format('%8.2f ',
-    [AMateriaProhibicionValor]);
-  lblProfesorProhibicionValor.Caption := Format('%8.2f ',
-    [AProfesorProhibicionValor]);
-  lblMateriaNoDispersaValor.Caption := Format('%8.2f ',
-    [AMateriaNoDispersaValor]);
+  lblMateriaProhibicionValor.Caption := Format('%8.2f ', [AMateriaProhibicionValor]);
+  lblProfesorProhibicionValor.Caption := Format('%8.2f ', [AProfesorProhibicionValor]);
+  lblMateriaNoDispersaValor.Caption := Format('%8.2f ', [AMateriaNoDispersaValor]);
   lblValorTotal.Caption := Format('%8.2f ', [AValue]);
   lblImportaciones.Caption := Format('%d ', [ANumImportacion]);
   lblExportaciones.Caption := Format('%d ', [ANumExportacion]);
   lblColisiones.Caption := Format('%d ', [ANumColision]);
+end;
+
+
+procedure TProgressForm.ShowProgressForm(AMax: Integer);
+begin
+  // HelpContext := ActElaborarHorario.HelpContext;
+  ProgressMax := AMax;
+  FInit := Now;
+  lblInit.Caption := FormatDateTime(Format('%s %s ', [ShortDateFormat,
+    LongTimeFormat]), FInit);
+  FCloseClick := False;
+  bbtnClose.Kind := bkCustom;
+  bbtnCancel.Kind := bkCustom;
+  Show;
+  Application.ProcessMessages;
+end;
+
+procedure TProgressForm.bbtnCancelClick(Sender: TObject);
+begin
+  FCancelClick := True;
+  Close;
+end;
+
+procedure TProgressForm.bbtnCloseClick(Sender: TObject);
+begin
+  FCloseClick := True;
+  Close;
+end;
+
+procedure TProgressForm.CloseProgressForm;
+begin
+  FCloseClick := False;
+  FCancelClick := False;
+  ProgressForm.Close;
 end;
 
 initialization

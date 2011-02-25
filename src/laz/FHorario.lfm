@@ -2,15 +2,15 @@ inherited HorarioForm: THorarioForm
   Left = 452
   Top = 218
   Caption = 'HorarioForm'
-  ClientHeight = 334
-  ClientWidth = 618
+  ClientHeight = 383
+  ClientWidth = 666
   OnCreate = FormCreate
 
 
   PixelsPerInch = 96
 
   inherited TlBShow: TToolBar
-    Width = 618
+    Width = 666
   
     inherited DBNavigator: TDBNavigator
       Width = 154
@@ -97,29 +97,32 @@ inherited HorarioForm: THorarioForm
     end
   end
   inherited pnlStatus: TPanel
-    Top = 315
-    Width = 618
+    Top = 364
+    Width = 666
 
   
     inherited SLRecordNo: TLabel
-      Left = 614
+      Left = 662
   
     end
   end
   inherited Panel1: TPanel
-    Width = 618
-    Height = 290
+    Width = 666
+    Height = 339
   
   
     object Splitter1: TSplitter [0]
-      Left = 311
+      Left = 662
       Top = 1
-      Height = 288
+      Height = 337
       Align = alRight
+  
+    
     end
     inherited DBGrid: TDBGrid
       Width = 310
-      Height = 288
+      Height = 337
+      Align = alLeft
       Columns = <
         item
           Expanded = False
@@ -142,18 +145,18 @@ inherited HorarioForm: THorarioForm
         end>
     end
     object Panel2: TPanel
-      Left = 314
+      Left = 311
       Top = 1
-      Width = 303
-      Height = 288
-      Align = alRight
+      Width = 351
+      Height = 337
+      Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       object dbmInforme: TDBMemo
         Left = 0
         Top = 0
-        Width = 303
-        Height = 288
+        Width = 351
+        Height = 337
         Align = alClient
         DataField = 'Informe'
         DataSource = DataSource

@@ -24,7 +24,7 @@ type
   end;
 
 var
-  LogisticForm: TLogisticForm;
+  MessageViewForm: TLogisticForm;
 
 implementation
 
