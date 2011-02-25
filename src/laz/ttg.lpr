@@ -27,7 +27,7 @@ uses
   TTGUtls in 'TTGUtls.pp',
   UConfig in 'UConfig.pp',
   FConfig in 'FConfig.pp' {ConfiguracionForm},
-  FMsgView in 'FMsgView.pp' {LogisticForm},
+  FMsgView in 'FMsgView.pp' {MessageViewForm},
   FHorPara in 'FHorPara.pp' {HorarioParaleloForm},
   FMasDeEd in 'FMasDeEd.pp' {MasterDetailEditorForm},
   FHorAulT in 'FHorAulT.pp' {HorarioAulaTipoForm},
@@ -57,7 +57,7 @@ begin
   Application.CreateForm(TSourceDataModule, SourceDataModule);
   Application.CreateForm(TMasterDataModule, MasterDataModule);
   Application.CreateForm(TMainForm, MainForm);
-  Application.CreateForm(TLogisticForm, MessageViewForm);
+  Application.CreateForm(TMessageViewForm, MessageViewForm);
   Application.CreateForm(TProgressForm, ProgressForm);
   Application.Run;
 end.

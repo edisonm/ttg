@@ -877,8 +877,8 @@ begin
     SaveDialogCSV.FileName := Values['SaveDialogCSV_FileName'];
     OpenDialog.FileName := Values['OpenDialog_FileName'];
 {
-    LogisticForm.MemResumen.Height :=
-      StrToInt(Values['LogisticForm_MemResumen_Height']);
+    MessageViewForm.MemResumen.Height :=
+      StrToInt(Values['MessageViewForm_MemResumen_Height']);
 }
   end;
 end;
@@ -896,8 +896,8 @@ begin
     Values['SaveDialogCSV_FileName'] := SaveDialogCSV.FileName;
     Values['OpenDialog_FileName'] := OpenDialog.FileName;
 {
-    Values['LogisticForm_MemResumen_Height'] :=
-      IntToStr(LogisticForm.MemResumen.Height);
+    Values['MessageViewForm_MemResumen_Height'] :=
+      IntToStr(MessageViewForm.MemResumen.Height);
 }
   end;
 end;

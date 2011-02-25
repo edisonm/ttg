@@ -9,7 +9,7 @@ uses
   Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls;
 
 type
-  TLogisticForm = class(TForm)
+  TMessageViewForm = class(TForm)
     MemLogistic: TMemo;
     Panel2: TPanel;
     bbtnClose: TBitBtn;
@@ -24,7 +24,7 @@ type
   end;
 
 var
-  MessageViewForm: TLogisticForm;
+  MessageViewForm: TMessageViewForm;
 
 implementation
 

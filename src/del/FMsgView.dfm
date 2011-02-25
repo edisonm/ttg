@@ -1,4 +1,4 @@
-object LogisticForm: TLogisticForm
+object MessageViewForm: TMessageViewForm
   Left = 243
   Top = 186
   ActiveControl = Panel1
@@ -70,9 +70,6 @@ object LogisticForm: TLogisticForm
     Align = alBottom
     BevelOuter = bvNone
     TabOrder = 1
-    DesignSize = (
-      434
-      40)
     object lblMsg: TLabel
       Left = 8
       Top = 16
