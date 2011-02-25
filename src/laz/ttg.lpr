@@ -50,6 +50,7 @@ uses
 {$IFDEF WINDOWS}{$R ttg.rc}{$ENDIF}
 
 begin
+  DecimalSeparator := ',';
   Application.Initialize;
   Application.Title := sAppName + ' ' + sAppVersion;
   Application.HelpFile := '../hlp/ttg.hlp';
