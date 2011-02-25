@@ -6,7 +6,7 @@
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="21"/>
+      <ActiveEditorIndexAtStart Value="16"/>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
@@ -51,7 +51,7 @@
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="55" Y="60"/>
-        <TopLine Value="39"/>
+        <TopLine Value="38"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="53"/>
         <Loaded Value="True"/>
@@ -152,7 +152,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FCrsMME0"/>
         <CursorPos X="7" Y="246"/>
-        <TopLine Value="226"/>
+        <TopLine Value="222"/>
         <EditorIndex Value="6"/>
         <UsageCount Value="53"/>
         <Loaded Value="True"/>
@@ -248,7 +248,7 @@
       <Unit19>
         <Filename Value="FMsgView.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="LogisticForm"/>
+        <ComponentName Value="MessageViewForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMsgView"/>

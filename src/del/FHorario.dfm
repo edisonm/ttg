@@ -4,7 +4,6 @@ inherited HorarioForm: THorarioForm
   Caption = 'HorarioForm'
   ClientHeight = 383
   ClientWidth = 666
-  OnCreate = FormCreate
   ExplicitWidth = 674
   ExplicitHeight = 410
   PixelsPerInch = 96
@@ -101,8 +100,12 @@ inherited HorarioForm: THorarioForm
     Width = 666
     ExplicitTop = 364
     ExplicitWidth = 666
+    inherited SLState: TLabel
+      Height = 17
+    end
     inherited SLRecordNo: TLabel
       Left = 662
+      Height = 17
       ExplicitLeft = 662
     end
   end

@@ -182,10 +182,8 @@ type
     procedure ActMateriaCortadaDiaExecute(Sender: TObject);
     procedure ActMateriaCortadaHoraExecute(Sender: TObject);
     procedure ActHorarioAulaTipoExecute(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure FormDestroy(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure DataSourceStateChange(Sender: TObject);
@@ -514,43 +512,6 @@ end;
 procedure THorarioForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   inherited FormCloseQuery(Sender, CanClose);
-end;
-
-procedure THorarioForm.FormCreate(Sender: TObject);
-begin
-  inherited;
-  {PrepareQuery(QuHorarioDetalle, 'HorarioDetalle',
-    'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia');
-  PrepareQuery(QuCruceAula, 'CruceAula', 'CodAulaTipo;CodDia;CodHora');
-  PrepareQuery(QuCruceAulaDetalle, 'CruceAulaDetalle',
-    'CodAulaTipo;CodDia;CodHora');
-  PrepareQuery(QuCruceProfesor, 'CruceProfesorInde',
-    'CodProfesor;CodDia;CodHora');
-  PrepareQuery(QuCruceMateria, 'CruceMateria', 'CodMateria');
-  // QuCruceMateria.AddIndex('QuCruceMateriaIxNomMateria', 'NomMateria', []);
-  PrepareQuery(QuCruceMateriaDetalle, 'CruceMateriaDetalle',
-    'CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora');
-  PrepareQuery(QuHorarioDetalleMateriaProhibicion,
-    'HorarioDetalleMateriaProhibicion',
-    'CodMateProhibicionTipo;NomMateria;CodDia;CodHora');
-  }
-  { with QuHorarioDetalleMateriaProhibicion.IndexDefs.AddIndexDef do
-    begin
-      Name := 'QuHorarioDetalleMateriaProhibicionIndex1';
-      Fields := 'CodMateProhibicionTipo;NomMateria;CodDia;CodHora';
-      Options := [ixDescending];
-      DescFields := 'CodMateProhibicionTipo';
-    end; }
-  {
-  PrepareQuery(QuMateriaCortadaHora, 'MateriaCortadaHora', 'CodDia');
-  PrepareQuery(QuMateriaCortadaHoraDetalle, 'MateriaCortadaHoraDetalle',
-    'CodDia;CodHora');
-  }
-end;
-
-procedure THorarioForm.FormDestroy(Sender: TObject);
-begin
-  inherited FormDestroy(Sender);
 end;
 
 initialization
