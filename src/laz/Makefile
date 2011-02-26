@@ -53,7 +53,7 @@ $(TTGEXE):
 
 clean:
 # 	$(DSRCBASE0).lfm $(DSRCBASE0).pp
-	$(RM) $(TTGDIR)/bin/*.o \
+	$(RM) $(TTGEXE) $(TTGDIR)/bin/*.o \
 	  $(TTGDIR)/bin/*.ppu $(TTGDIR)/obj/*.o $(TTGDIR)/obj/*.ppu
 
 test:
