@@ -149,7 +149,7 @@
 				<Form>ConfiguracionForm</Form>
 			</DCCReference>
 			<DCCReference Include="FMsgView.pas">
-				<Form>LogisticForm</Form>
+				<Form>MessageViewForm</Form>
 			</DCCReference>
 			<DCCReference Include="FHorPara.pas">
 				<Form>HorarioParaleloForm</Form>

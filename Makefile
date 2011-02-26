@@ -34,8 +34,11 @@ $(ISS): $(ISS).tmpl $(TTGSQL)
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
+# $(TTGEXE):
+# 	cd src/del; $(MAKE) $(TTGEXE)
+
 $(TTGEXE):
-	cd src/del ; make $(TTGEXE)
+	cd src/laz; $(MAKE) $(TTGEXE)
 
 $(DBUTILS): src/dbutils/$(DBUTILSDPR) $(addprefix src/dbutils/, $(addsuffix .pas, $(DBUNITS)))
 	cd src/dbutils; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
@@ -49,12 +52,10 @@ $(TTGSQLITE3): $(TTGSQL) Makefile
 	sqlite3 $@ ".read $(TTGSQL)"
 
 clean:
+	cd src/del; $(MAKE) clean
+	cd src/laz; $(MAKE) clean
 	$(RM) $(INSTALLER) $(DBUTILS) $(TTGSQL) \
-	  $(TTGSQLITE3) obj/* \
-	  bin/*.o \
-	  bin/*.ppu \
-	  src/laz/$(DSRCBASE0).pp  src/laz/$(DSRCBASE0).lfm \
-	  $(ISS) $(ABOUT).pas src/dbutils/*.identcache
+	  $(TTGSQLITE3) obj/* $(ISS) $(ABOUT).pas src/dbutils/*.identcache
 	$(RM) -r src/dbutils/__history
 
 kbmtosq3:

@@ -2,6 +2,7 @@
 
 # This makefile is used only to generate the lazarus project
 
+TTGDIR:=$(shell cd ../..; pwd)
 include ../../SETTINGS
 include ../../COMMON
 
@@ -13,6 +14,13 @@ BASEDELFILES=$(addsuffix .pas,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
 	  $(addsuffix .dfm, $(FORMS) $(DSRCBASE)) ttg.dpr
 
 DELPHIFILES=$(BASEDELFILES)
+
+all: $(TTGEXE)
+
+##############################################################################
+# Migration options (lazarus-delphi): !!! WARNING VERY BUGGLY
+# NOT COMPATIBLE AT ALL !!!
+##############################################################################
 
 %.pas: %.pp
 	sed \
@@ -39,3 +47,14 @@ srcdel: $(DELPHIFILES)
 prjdel: srcdel
 	unix2dos < ttg.inc > ../../src/del/ttg.inc
 	mv $(DELPHIFILES) ../../src/del/
+
+$(TTGEXE):
+	lazbuild ttg.lpi
+
+clean:
+# 	$(DSRCBASE0).lfm $(DSRCBASE0).pp
+	$(RM) $(TTGDIR)/bin/*.o \
+	  $(TTGDIR)/bin/*.ppu $(TTGDIR)/obj/*.o $(TTGDIR)/obj/*.ppu
+
+test:
+	TTGEXE=$(TTGEXE)

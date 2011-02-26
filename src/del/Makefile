@@ -93,5 +93,6 @@ test:
 	@echo FILES=$(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE) $(ABOUT))
 
 clean:
-	$(RM) $(TTGEXE) $(TTGDIR)/obj/* $(DSRCBASE0).pas $(DSRCBASE0).dfm *.identcache
+	$(RM) $(TTGEXE) $(TTGDIR)/obj/*.dcu \
+	  $(DSRCBASE0).pas $(DSRCBASE0).dfm *.identcache
 	$(RM) -r src/del/__history
