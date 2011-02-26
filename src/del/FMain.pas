@@ -511,7 +511,6 @@ begin
       ProfesorFraccionamiento, CruceAulaTipo, HoraHueca, SesionCortada, MateriaNoDispersa);
     VEvolElitista := TEvolElitista.CrearDesdeModelo(VModeloHorario, TamPoblacion);
     try
-      ProgressForm.ShowProgressForm(NumMaxGeneracion);
       VModeloHorario.OnProgress := ProgressForm.OnProgress;
       VEvolElitista.NumMaxGeneracion := NumMaxGeneracion;
       VEvolElitista.ProbCruzamiento := ProbCruzamiento;
@@ -542,6 +541,7 @@ begin
       FAjustar := False;
       VEvolElitista.OnRegistrarMejor := Self.OnRegistrarMejor;
       sProb := '';
+      ProgressForm.ShowProgressForm(NumMaxGeneracion);
       ProcessCodList(s);
       if sProb <> '' then
         MessageDlg(Format('Los siguientes horarios ya existian: %s', [sProb]),
