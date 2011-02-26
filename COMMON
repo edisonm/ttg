@@ -6,3 +6,14 @@ LAZRES="c:/lazarus/tools/lazres"
 else
 LAZRES=lazres
 endif
+TTGEXE=$(TTGDIR)/bin/ttg.exe
+DBUTILS=$(TTGDIR)/bin/dbutils.exe
+DCC32="c:/archivos de programa/Embarcadero/RAD Studio/7.0/bin/dcc32"
+DCC32OPTS= \
+	-E'$(shell cygpath -w $(TTGDIR)/bin)' \
+	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/component)' \
+	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/dbc)' \
+	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/core)' \
+	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/parsesql)' \
+	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/plain)' \
+	-N0'$(shell cygpath -w $(TTGDIR)/obj)'

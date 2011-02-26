@@ -41,8 +41,8 @@ type
     lblInit: TLabel;
     pnlElapsedTime: TPanel;
     lblElapsedTime: TLabel;
-    pnlNumGeneracion: TPanel;
-    lblNumGeneracion: TLabel;
+    pnlEstimatedTime: TPanel;
+    lblRemainingTime: TLabel;
     pnlMateriaProhibicion: TPanel;
     pnlMateriaProhibicionCantidad: TPanel;
     lblMateriaProhibicion: TLabel;
@@ -71,6 +71,8 @@ type
     lblExportaciones: TLabel;
     Panel4: TPanel;
     lblColisiones: TLabel;
+    pnlPosition: TPanel;
+    lblPosition: TLabel;
     procedure bbtnCancelClick(Sender: TObject);
     procedure bbtnCloseClick(Sender: TObject);
   private
@@ -81,7 +83,7 @@ type
     procedure SetProgressMax(const Value: Integer);
     { Private declarations }
   public
-    procedure SetValues(AProgress, ACruceProfesor: Integer;
+    procedure SetValues(APosition, ACruceProfesor: Integer;
       AProfesorFraccionamiento: Double; ACruceAulaTipo, AHoraHuecaDesubicada,
       ASesionCortada, AMateriaProhibicion, AProfesorProhibicion,
       AMateriaNoDispersa, ANumImportacion, ANumExportacion, ANumColision: Integer;
@@ -169,20 +171,25 @@ begin
   PBProgress.Max := Value;
 end;
 
-procedure TProgressForm.SetValues(AProgress,
-  ACruceProfesor: Integer; AProfesorFraccionamiento: Double; ACruceAulaTipo,
-  AHoraHuecaDesubicada, ASesionCortada, AMateriaProhibicion,
-  AProfesorProhibicion, AMateriaNoDispersa, ANumImportacion, ANumExportacion,
-  ANumColision: Integer;
-  ACruceProfesorValor, AProfesorFraccionamientoValor, ACruceAulaTipoValor,
-  AHoraHuecaDesubicadaValor, ASesioncortadaValor, AMateriaProhibicionValor,
-  AProfesorProhibicionValor, AMateriaNoDispersaValor, AValue: Double);
+procedure TProgressForm.SetValues(APosition, ACruceProfesor: Integer;
+  AProfesorFraccionamiento: Double; ACruceAulaTipo, AHoraHuecaDesubicada,
+  ASesionCortada, AMateriaProhibicion, AProfesorProhibicion, AMateriaNoDispersa,
+  ANumImportacion, ANumExportacion, ANumColision: Integer; ACruceProfesorValor,
+  AProfesorFraccionamientoValor, ACruceAulaTipoValor, AHoraHuecaDesubicadaValor,
+  ASesioncortadaValor, AMateriaProhibicionValor, AProfesorProhibicionValor,
+  AMateriaNoDispersaValor, AValue: Double);
+var
+  t: TDateTime;
 begin
-  lblElapsedTime.Caption := FormatDateTime('hh:nn:ss' + ' ', Now - FInit);
-  lblNumGeneracion.Caption := Format('%d ', [AProgress]);
+  t := Now - FInit;
+  lblElapsedTime.Caption := FormatDateTime('hh:nn:ss ', t);
+  if APosition <> 0 then
+    lblRemainingTime.Caption := FormatDateTime('hh:nn:ss ',
+      t * (PBProgress.Max - APosition) / APosition);
+  lblPosition.Caption := Format('%d ', [APosition]);
   with PBProgress do
   begin
-    Position := AProgress;
+    Position := APosition;
     Hint := Format('%d de %d', [Position, Max]);
   end;
   lblCruceProfesor.Caption := Format('%d ', [ACruceProfesor]);

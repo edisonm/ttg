@@ -2,8 +2,13 @@
 
 # This makefile is used only to generate the lazarus project
 
+TTGDIR:=$(shell cd ../.. ; pwd)
+
 include ../../SETTINGS
 include ../../COMMON
+
+TTGMDB=../../dat/$(TTGMDBBASE)
+TTGDPR=ttg.dpr
 
 .PHONY: prjlaz srclaz
 
@@ -14,6 +19,12 @@ BASELAZFILES=$(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
 	  $(addsuffix .lrs, $(FORMS) $(DSRCBASE)) ttg.lpr
 
 LAZARUSFILES=$(BASELAZFILES)
+
+all: $(TTGEXE)
+
+##############################################################################
+# Migration options (delphi-lazarus):
+##############################################################################
 
 %.lrs: %.lfm
 	$(LAZRES) $@ $<
@@ -54,3 +65,33 @@ srclaz: $(LAZARUSFILES)
 prjlaz: srclaz
 	dos2unix < ttg.inc > ../../src/laz/ttg.inc
 	mv $(LAZARUSFILES) ../../src/laz/
+
+##############################################################################
+# Compiling options (Delphi)
+##############################################################################
+
+dcchelp:
+	$(DCC32)
+
+$(ABOUT).pas: $(ABOUT).pas.tmpl
+	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
+	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
+	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
+
+$(TTGEXE): $(TTGDPR) $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE) $(ABOUT))
+	$(DCC32) $(DCC32OPTS) $(TTGDPR)
+
+$(DSRCBASE).pas: $(DBUTILS) $(TTGMDB) Makefile
+	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule \
+	  $(DSRCBASE) 'cds;csr;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
+
+$(DBUTILS):
+	cd ../.. ; $(MAKE) $(DBUTILS)
+
+test:
+	@echo TTGDIR=$(TTGDIR)
+	@echo FILES=$(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE) $(ABOUT))
+
+clean:
+	$(RM) $(TTGEXE) $(TTGDIR)/obj/* $(DSRCBASE0).pas $(DSRCBASE0).dfm *.identcache
+	$(RM) -r src/del/__history

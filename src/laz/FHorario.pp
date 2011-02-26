@@ -345,8 +345,6 @@ begin
       TimeTable := TTimeTable.CrearDesdeModelo(VModeloHorario);
       ProgressForm.Caption := Format('Mejorando Horario [%d] en [%d]',
          [CodHorarioFuente, CodHorarioDestino]);
-      with VModeloHorario do
-        ProgressForm.ShowProgressForm(SesionCantidadDoble);
       try
         {if s = '' then
           VObjetoModeloHorario.HacerAleatorio
@@ -354,6 +352,8 @@ begin
         TimeTable.LoadFromDataModule(CodHorarioFuente);
         va := TimeTable.Valor;
         TimeTable.DescensoRapidoForzado;
+        with VModeloHorario do
+          ProgressForm.ShowProgressForm(SesionCantidadDoble);
         TimeTable.DescensoRapidoDobleForzado(SourceDataModule.NumIteraciones);
         if not ProgressForm.CancelClick then
         begin

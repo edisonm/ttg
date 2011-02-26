@@ -3,27 +3,17 @@
 # GuideLine: Prefer definition of posix directories, because we are
 # migrating this system to Linux.
 
+TTGDIR:=$(shell pwd)
+
 include SETTINGS
+include COMMON
 
 INNOIDE="c:/archivos de programa/Inno Setup 5/ISCC.exe"
-TTGDIR:=$(shell pwd)
 ISS=$(TTGDIR)/src/iss/ttg.iss
 INSTALLER=$(TTGDIR)/bin/ttgsetup.exe
-TTGEXE=$(TTGDIR)/bin/ttg.exe
-DBUTILS=$(TTGDIR)/bin/dbutils.exe
-DCC32="c:/archivos de programa/Embarcadero/RAD Studio/7.0/bin/dcc32"
-# DCC32="c:/archivos de programa/CodeGear/RAD Studio/5.0/bin/dcc32"
-DCC32OPTS= \
-	-E'$(shell cygpath -w $(TTGDIR)/bin)' \
-	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/component)' \
-	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/dbc)' \
-	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/core)' \
-	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/parsesql)' \
-	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/plain)' \
-	-N0'$(shell cygpath -w $(TTGDIR)/obj)'
-TTGDPR=ttg.dpr
+
 DBUTILSDPR=dbutils.dpr
-TTGMDB=dat/ttg.mdb
+TTGMDB=dat/$(TTGMDBBASE)
 TTGSQL=dat/ttg.sql
 TTGSQLITE3=dat/ttg.s3fpc
 
@@ -35,36 +25,20 @@ BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ \ \ \ %Y)
 
 all: $(INSTALLER) $(TTGSQLITE3)
 
-dcchelp:
-	$(DCC32)
-
 $(INSTALLER): $(ISS) $(TTGEXE)
 	$(INNOIDE) '$(shell cygpath -w $(ISS))'
 
 iss: $(ISS)
 
-$(ISS): $(ISS).tmpl
+$(ISS): $(ISS).tmpl $(TTGSQL)
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-src/del/$(ABOUT).pas: src/del/$(ABOUT).pas.tmpl
-	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
-	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
-	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
-
-$(TTGEXE): src/del/$(TTGDPR) $(addprefix src/del/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE) $(ABOUT)))
-	cd src/del ; $(DCC32) $(DCC32OPTS) $(TTGDPR)
+$(TTGEXE):
+	cd src/del ; make $(TTGEXE)
 
 $(DBUTILS): src/dbutils/$(DBUTILSDPR) $(addprefix src/dbutils/, $(addsuffix .pas, $(DBUNITS)))
 	cd src/dbutils; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
-
-src/del/$(DSRCBASE).pas: $(DBUTILS) $(TTGMDB) Makefile
-	cd src/del ; $(DBUTILS) /ACC2DM ../../$(TTGMDB) SourceBaseDataModule \
-	  $(DSRCBASE) 'cds;csr;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
-
-#src/$(DSRCBASE).pp: $(DBUTILS) $(TTGMDB) Makefile
-#	cd src/laz ; $(DBUTILS) /ACC2DM ../../$(TTGMDB) SourceBaseDataModule \
-#	  $(DSRCBASE) 'cds;csr;lfm;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
 
 $(TTGSQL): $(DBUTILS) $(TTGMDB)
 	$(DBUTILS) /ACC2SQL $(TTGMDB) $@
@@ -75,14 +49,13 @@ $(TTGSQLITE3): $(TTGSQL) Makefile
 	sqlite3 $@ ".read $(TTGSQL)"
 
 clean:
-	$(RM) $(INSTALLER) $(TTGEXE) $(DBUTILS) $(TTGSQL) \
+	$(RM) $(INSTALLER) $(DBUTILS) $(TTGSQL) \
 	  $(TTGSQLITE3) obj/* \
 	  bin/*.o \
 	  bin/*.ppu \
-	  src/del/$(DSRCBASE0).pas src/del/$(DSRCBASE0).dfm \
 	  src/laz/$(DSRCBASE0).pp  src/laz/$(DSRCBASE0).lfm \
-	  $(ISS) $(ABOUT).pas src/del/*.identcache src/dbutils/*.identcache
-	$(RM) -r src/del/__history src/dbutils/__history
+	  $(ISS) $(ABOUT).pas src/dbutils/*.identcache
+	$(RM) -r src/dbutils/__history
 
 kbmtosq3:
 	for i in $(addprefix src/, $(FORMS) $(DSRCBASE0) $(UNITS) $(ABOUT)) ; do \
@@ -152,6 +125,4 @@ sq3tozeos:
 	  $$i.dfm > $$i.dfm.tmp && \
 	  mv -f $$i.dfm.tmp $$i.dfm ; done
 
-test:
-	@echo TTGDIR=$(TTGDIR)
-	@echo FILES=$(addprefix src/del/, $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE) $(ABOUT)))
+dbutils: $(DBUTILS)
