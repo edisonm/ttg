@@ -1,11 +1,12 @@
 unit KerModel;
-
 {$I ttg.inc}
 
 interface
 
 uses
-  Classes, DB, Dialogs, SysConst, Math, Forms, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
+  Classes, DB, Dialogs, SysConst, Math, Forms, ZConnection, ZAbstractRODataset,
+  ZAbstractDataset, ZAbstractTable, ZDataset;
+
 type
   TDynamicWordArray = array of Word;
   TDynamicWordArrayArray = array of TDynamicWordArray;
@@ -22,137 +23,96 @@ type
   TDynamicDoubleArrayArray = array of TDynamicDoubleArray;
   TDynamicStringArray = array of string;
   PLongintArray = ^TLongintArray;
-  TLongintArray = array[0..16383] of Longint;
+  TLongintArray = array [0 .. 16383] of Longint;
   PSmallintArray = ^TSmallintArray;
-  TSmallintArray = array[0..16383] of Smallint;
+  TSmallintArray = array [0 .. 16383] of Smallint;
   PSmallintArrayArray = ^TSmallintArrayArray;
-  TSmallintArrayArray = array[0..0] of PSmallintArray;
+  TSmallintArrayArray = array [0 .. 0] of PSmallintArray;
   PShortintArray = ^TShortintArray;
-  TShortintArray = array[0..32767] of Shortint;
+  TShortintArray = array [0 .. 32767] of Shortint;
   PDoubleArray = ^TDoubleArray;
-  TDoubleArray = array[0..0] of Double;
+  TDoubleArray = array [0 .. 0] of Double;
   PBooleanArray = ^TBooleanArray;
-  TBooleanArray = array[0..16383] of Boolean;
-{
-  Clase TModeloHorario
-  Descripcion:
+  TBooleanArray = array [0 .. 16383] of Boolean;
+  {
+    Clase TModeloHorario
+    Descripcion:
     Implementa la carga de la informacion desde la base de datos a la memoria
     RAM.
     Miembros privados:
-      Todos los arreglos dinamicos que contienen la informacion, los campos que
-      contienen los pesos de la funcion objetivo y las funciones de uso interno.
+    Todos los arreglos dinamicos que contienen la informacion, los campos que
+    contienen los pesos de la funcion objetivo y las funciones de uso interno.
     Miembros protegidos:
-      Arreglo dinamico que contiene el molde de un horario, que facilita la
-      construccion de soluciones.
+    Arreglo dinamico que contiene el molde de un horario, que facilita la
+    construccion de soluciones.
     Miembros publicos:
-      El constructor, la funcion que permite configurar los pesos y los pesos
-      de cada restriccion.
-}
+    El constructor, la funcion que permite configurar los pesos y los pesos
+    de cada restriccion.
+  }
   TTimeTable = class;
-  TProgressEvent = procedure(Progress, Step: Integer;
-    Horario: TTimeTable; var Stop: Boolean) of object;
+  TProgressEvent = procedure(Progress, Step: Integer; Horario: TTimeTable;
+    var Stop: Boolean) of object;
+
   TModeloHorario = class
   private
     FOnProgress: TProgressEvent;
-    FCruceProfesorValor,
-      FCruceAulaTipoValor,
-      FHoraHuecaDesubicadaValor,
-      FSesionCortadaValor,
-      FProfesorFraccionamientoValor,
+    FCruceProfesorValor, FCruceAulaTipoValor, FHoraHuecaDesubicadaValor,
+      FSesionCortadaValor, FProfesorFraccionamientoValor,
       FMateriaNoDispersaValor: Double;
-    FPeriodoADia,
-      FPeriodoAHora,
-      FDiaAMaxPeriodo,
-      FSesionADistributivo,
-      FSesionAMateria,
-      FSesionAAulaTipo,
-      FAulaTipoACantidad,
-      FMateriaProhibicionAMateria,
-      FMateriaProhibicionAPeriodo,
+    FPeriodoADia, FPeriodoAHora, FDiaAMaxPeriodo, FSesionADistributivo,
+      FSesionAMateria, FSesionAAulaTipo, FAulaTipoACantidad,
+      FMateriaProhibicionAMateria, FMateriaProhibicionAPeriodo,
       FMateriaProhibicionAMateriaProhibicionTipo,
-      FProfesorProhibicionAProfesor,
-      FProfesorProhibicionAPeriodo,
-      FProfesorProhibicionAProfesorProhibicionTipo,
-      FDistributivoAAulaTipo,
-      FParaleloACurso,
-      FParaleloANivel,
-      FParaleloAParaleloId,
-      FParaleloAEspecializacion,
-      FProfesorCantHora,
+      FProfesorProhibicionAProfesor, FProfesorProhibicionAPeriodo,
+      FProfesorProhibicionAProfesorProhibicionTipo, FDistributivoAAulaTipo,
+      FParaleloACurso, FParaleloANivel, FParaleloAParaleloId,
+      FParaleloAEspecializacion, FProfesorCantHora,
       FParaleloASesionCant: TDynamicSmallintArray;
-    FSesionADuracion: array[-1..16382] of Smallint;
-    FDiaHoraAPeriodo,
-      FNivelEspecializacionACurso,
-      FCursoParaleloIdAParalelo,
-      FParaleloMateriaAProfesor,
-      FParaleloMateriaADistributivo,
-      FMoldeHorarioDetalle,
-      FDistributivoASesiones: TDynamicSmallintArrayArray;
+    FSesionADuracion: array [-1 .. 16382] of Smallint;
+    FDiaHoraAPeriodo, FNivelEspecializacionACurso, FCursoParaleloIdAParalelo,
+      FParaleloMateriaAProfesor, FParaleloMateriaADistributivo,
+      FMoldeHorarioDetalle, FDistributivoASesiones: TDynamicSmallintArrayArray;
     FProfesorPeriodoAProfesorProhibicionTipo,
-      FMateriaPeriodoAMateriaProhibicionTipo:
-      TDynamicShortintArrayArray;
+      FMateriaPeriodoAMateriaProhibicionTipo: TDynamicShortintArrayArray;
     FMateriaProhibicionTipoAValor,
-      FProfesorProhibicionTipoAValor: array[-1..4094] of Double;
-    FMateriaProhibicionAValor,
-      FProfesorProhibicionAValor: TDynamicDoubleArray;
-    FParaleloCant,
-      FMateriaCant,
-      FDiaCant,
-      FHoraCant,
-      FPeriodoCant,
-      FProfesorCant,
-      FNivelCant,
-      FEspecializacionCant,
-      FCursoCant,
-      FAulaTipoCant,
-      FDistributivoCant,
-      FMaxProfesorProhibicionTipo,
+      FProfesorProhibicionTipoAValor: array [-1 .. 4094] of Double;
+    FMateriaProhibicionAValor, FProfesorProhibicionAValor: TDynamicDoubleArray;
+    FParaleloCant, FMateriaCant, FDiaCant, FHoraCant, FPeriodoCant,
+      FProfesorCant, FNivelCant, FEspecializacionCant, FCursoCant,
+      FAulaTipoCant, FDistributivoCant, FMaxProfesorProhibicionTipo,
       FMaxMateriaProhibicionTipo: Smallint;
     FMaxProfesorProhibicionTipoValor: Double;
-    FParaleloIdACodParaleloId,
-      FMateriaACodMateria,
-      FDiaACodDia,
-      FHoraACodHora,
+    FParaleloIdACodParaleloId, FMateriaACodMateria, FDiaACodDia, FHoraACodHora,
       FNivelACodNivel,
       FEspecializacionACodEspecializacion: TDynamicLongintArray;
-    FCodNivelANivel,
-      FCodEspecializacionAEspecializacion,
-      FCodParaleloIdAParaleloId,
-      FCodDiaADia,
+    FCodNivelANivel, FCodEspecializacionAEspecializacion,
+      FCodParaleloIdAParaleloId, FCodDiaADia,
       FCodHoraAHora: TDynamicSmallintArray;
-    FMinCodNivel,
-      FMinCodEspecializacion,
-      FMinCodParaleloId,
-      FMinCodDia,
+    FMinCodNivel, FMinCodEspecializacion, FMinCodParaleloId, FMinCodDia,
       FMinCodHora: Longint;
     FSesionCantidadDoble: Integer;
     function GetDiaAMaxPeriodo(d: Smallint): Smallint;
   protected
-    property MoldeHorarioDetalle: TDynamicSmallintArrayArray read
-      FMoldeHorarioDetalle;
+    property MoldeHorarioDetalle
+      : TDynamicSmallintArrayArray read FMoldeHorarioDetalle;
   public
     property PeriodoCant: Smallint read FPeriodoCant;
     property ParaleloCant: Smallint read FParaleloCant;
-    procedure DoProgress(I, Step: Integer; Horario: TTimeTable; var Stop: Boolean); dynamic;
-    procedure Configurar(
-      ACruceProfesorValor,
-      AProfesorFraccionamientoValor,
-      ACruceAulaTipoValor,
-      AHoraHuecaDesubicadaValor,
-      ASesionCortadaValor,
+    procedure DoProgress(I, Step: Integer; Horario: TTimeTable;
+      var Stop: Boolean);
+    dynamic;
+    procedure Configurar(ACruceProfesorValor, AProfesorFraccionamientoValor,
+      ACruceAulaTipoValor, AHoraHuecaDesubicadaValor, ASesionCortadaValor,
       AMateriaNoDispersaValor: Double);
-    constructor CrearDesdeDataModule(
-      ACruceProfesorValor,
-      AProfesorFraccionamientoValor,
-      ACruceAulaTipoValor,
-      AHoraHuecaDesubicadaValor,
-      ASesionCortadaValor,
+    constructor CrearDesdeDataModule(ACruceProfesorValor,
+      AProfesorFraccionamientoValor, ACruceAulaTipoValor,
+      AHoraHuecaDesubicadaValor, ASesionCortadaValor,
       AMateriaNoDispersaValor: Double);
     destructor Destroy; override;
     procedure ReportParameters(AReport: TStrings);
     property CruceProfesorValor: Double read FCruceProfesorValor;
-    property ProfesorFraccionamientoValor: Double
-      read FProfesorFraccionamientoValor;
+    property ProfesorFraccionamientoValor
+      : Double read FProfesorFraccionamientoValor;
     property CruceAulaTipoValor: Double read FCruceAulaTipoValor;
     property HoraHuecaDesubicadaValor: Double read FHoraHuecaDesubicadaValor;
     property SesionCortadaValor: Double read FSesionCortadaValor;
@@ -160,35 +120,32 @@ type
     property OnProgress: TProgressEvent read FOnProgress write FOnProgress;
     property SesionCantidadDoble: Integer read FSesionCantidadDoble;
   end;
-//type
-  //TCountFunc = procedure(Count, Cant: Integer) of object;
-{
-  Clase TObjetoModeloHorario
-  Descripcion:
+
+  // type
+  // TCountFunc = procedure(Count, Cant: Integer) of object;
+  {
+    Clase TObjetoModeloHorario
+    Descripcion:
     Implementa una solucion del problema.
     Miembros privados:
-      Todos los arreglos dinamicos que contienen la informacion consistentes en
-      el horario, las claves aleatorias y datos temporales que aceleran la
-      evaluacion de la funcion objetivo, los campos que contienen los valores
-      de cada parte de la funcion objetivo y las funciones de uso interno.
+    Todos los arreglos dinamicos que contienen la informacion consistentes en
+    el horario, las claves aleatorias y datos temporales que aceleran la
+    evaluacion de la funcion objetivo, los campos que contienen los valores
+    de cada parte de la funcion objetivo y las funciones de uso interno.
     Miembros protegidos:
-      Propiedad que forza a que se reevalue toda la funcion objetivo.
+    Propiedad que forza a que se reevalue toda la funcion objetivo.
     Miembros publicos:
-      propiedades que devuelven el valor de cada componente de la funcion
-      objetivo, el valor de la funcion objetivo, el constructor, funciones que
-      permiten guardar el horario en una base de datos, metodos que consisten
-      en los operadores geneticos, como son cruce, mutacion, etc., ModeloHorario
-      al que pertenece esta solucion.
-}
+    propiedades que devuelven el valor de cada componente de la funcion
+    objetivo, el valor de la funcion objetivo, el constructor, funciones que
+    permiten guardar el horario en una base de datos, metodos que consisten
+    en los operadores geneticos, como son cruce, mutacion, etc., ModeloHorario
+    al que pertenece esta solucion.
+  }
   TTimeTable = class
   private
     FModeloHorario: TModeloHorario;
-    FParaleloPeriodoASesion,
-      FMateriaPeriodoCant,
-      FProfesorPeriodoCant,
-      FAulaTipoPeriodoCant,
-      FAntMateriaDiaMinHora,
-      FAntMateriaDiaMaxHora,
+    FParaleloPeriodoASesion, FMateriaPeriodoCant, FProfesorPeriodoCant,
+      FAulaTipoPeriodoCant, FAntMateriaDiaMinHora, FAntMateriaDiaMaxHora,
       FAntDiaProfesorMinHora,
       FAntDiaProfesorMaxHora: TDynamicSmallintArrayArray;
     FParaleloMateriaDiaMinHora,
@@ -196,28 +153,21 @@ type
     FAntListaCambios: TList;
     FParaleloMateriaNoDispersa: TDynamicSmallintArray;
     FDiaProfesorFraccionamiento: TDynamicSmallintArrayArray;
-    FCruceProfesor,
-      FCruceAulaTipo,
-      FHoraHuecaDesubicada,
-      FSesionCortada,
-      FMateriaNoDispersa,
-      FMateriaProhibicion,
-      FProfesorProhibicion,
+    FCruceProfesor, FCruceAulaTipo, FHoraHuecaDesubicada, FSesionCortada,
+      FMateriaNoDispersa, FMateriaProhibicion, FProfesorProhibicion,
       FAntMateriaNoDispersa: Integer;
     FProfesorFraccionamiento: Integer;
-    FMateriaProhibicionValor,
-      FProfesorProhibicionValor,
-      FValor: Double;
+    FMateriaProhibicionValor, FProfesorProhibicionValor, FValor: Double;
     FRecalcularValor: Boolean;
     function GetValor: Double;
     procedure DoGetValor;
     procedure Normalizar(AParalelo: Smallint; var APeriodo: Smallint);
-{
-    procedure SetClaveAleatoriaInterno(AParalelo, APeriodo: Smallint;
+    {
+      procedure SetClaveAleatoriaInterno(AParalelo, APeriodo: Smallint;
       AClaveAleatoria: Integer); overload;
-    procedure SetClaveAleatoriaInterno(AParalelo, APeriodo, ADuracion: Smallint;
+      procedure SetClaveAleatoriaInterno(AParalelo, APeriodo, ADuracion: Smallint;
       AClaveAleatoria: Integer); overload;
-}
+    }
     function GetMateriaNoDispersa: Integer;
     procedure DoGetMateriaNoDispersa;
     procedure DoGetHoraHuecaDesubicada;
@@ -237,19 +187,19 @@ type
     function GetProfesorProhibicion: Integer;
     function GetMateriaProhibicion: Integer;
     procedure MutarInterno;
-    function DescensoRapidoInterno(Delta: double): Boolean; overload;
+    function DescensoRapidoInterno(Delta: Double): Boolean; overload;
     function DescensoRapidoInterno: Boolean; overload;
     procedure IntercambiarInterno(AParalelo, APeriodo, APeriodo1: Smallint;
       FueEvaluado: Boolean = False);
     procedure Intercambiar(AParalelo, APeriodo, APeriodo1: Smallint);
-    function EvaluarIntercambioInterno(AParalelo, APeriodo,
-      APeriodo1: Smallint): Double;
-    property ProfesorPeriodoCant: TDynamicSmallintArrayArray read
-      FProfesorPeriodoCant;
-    property MateriaPeriodoCant: TDynamicSmallintArrayArray read
-      FMateriaPeriodoCant;
-    property AulaTipoPeriodoCant: TDynamicSmallintArrayArray read
-      FAulaTipoPeriodoCant;
+    function EvaluarIntercambioInterno(AParalelo, APeriodo, APeriodo1: Smallint)
+      : Double;
+    property ProfesorPeriodoCant
+      : TDynamicSmallintArrayArray read FProfesorPeriodoCant;
+    property MateriaPeriodoCant
+      : TDynamicSmallintArrayArray read FMateriaPeriodoCant;
+    property AulaTipoPeriodoCant
+      : TDynamicSmallintArrayArray read FAulaTipoPeriodoCant;
     procedure DoGetCruceProfesor;
     procedure DoGetCruceAulaTipo;
     procedure ActualizarAulaTipoPeriodoCant;
@@ -265,13 +215,13 @@ type
     function GetDiaProfesorFraccionamiento(di, p: Smallint): Smallint;
     function DescensoRapidoDobleInterno(Step: Integer): Boolean;
     function DescensoRapidoPuntualInterno(var Delta: Double): Boolean; overload;
-    function DescensoRapidoPuntualInterno(AParalelo: Smallint;
-      var Delta: Double): Boolean; overload;
-    //procedure Check(s: string); overload;
-    //procedure Check(AParalelo: Smallint; s: string); overload;
+    function DescensoRapidoPuntualInterno
+      (AParalelo: Smallint; var Delta: Double): Boolean; overload;
+    // procedure Check(s: string); overload;
+    // procedure Check(AParalelo: Smallint; s: string); overload;
   protected
-    property RecalcularValor: boolean read FRecalcularValor write
-      FRecalcularValor;
+    property RecalcularValor
+      : Boolean read FRecalcularValor write FRecalcularValor;
   public
 
     function DescensoRapido: Boolean;
@@ -283,8 +233,8 @@ type
     procedure InvalidarValor;
     procedure Actualizar;
     procedure SaveToFile(const AFileName: string);
-    procedure SaveToDataModule(CodHorario: Integer; MomentoInicial,
-      MomentoFinal: TDateTime; Informe: TStrings);
+    procedure SaveToDataModule(CodHorario: Integer;
+      MomentoInicial, MomentoFinal: TDateTime; Informe: TStrings);
     procedure LoadFromDataModule(CodHorario: Integer);
     procedure SaveToStream(Stream: TStream);
     procedure LoadFromStream(Stream: TStream);
@@ -302,7 +252,8 @@ type
     property HoraHuecaDesubicada: Integer read GetHoraHuecaDesubicada;
     property SesionCortada: Integer read GetSesionCortada;
     property CruceProfesorValor: Double read GetCruceProfesorValor;
-    property ProfesorFraccionamientoValor: Double read GetProfesorFraccionamientoValor;
+    property ProfesorFraccionamientoValor
+      : Double read GetProfesorFraccionamientoValor;
     property CruceAulaTipoValor: Double read GetCruceAulaTipoValor;
     property HoraHuecaDesubicadaValor: Double read GetHoraHuecaDesubicadaValor;
     property SesionCortadaValor: Double read GetSesionCortadaValor;
@@ -312,17 +263,18 @@ type
     property ProfesorProhibicionValor: Double read GetProfesorProhibicionValor;
     property MateriaNoDispersa: Integer read GetMateriaNoDispersa;
     property MateriaNoDispersaValor: Double read GetMateriaNoDispersaValor;
-    property ParaleloPeriodoASesion: TDynamicSmallintArrayArray read FParaleloPeriodoASesion
-      write FParaleloPeriodoASesion;
+    property ParaleloPeriodoASesion
+      : TDynamicSmallintArrayArray read FParaleloPeriodoASesion write
+      FParaleloPeriodoASesion;
     property ModeloHorario: TModeloHorario read FModeloHorario;
     property ProfesorFraccionamiento: Integer read FProfesorFraccionamiento;
   end;
 
-// Procedimiento que crea una solucion aleatoria de un TModeloHorario
+  // Procedimiento que crea una solucion aleatoria de un TModeloHorario
 procedure CrearAleatorioDesdeModelo(var ATimeTable: TTimeTable;
   AModeloHorario: TModeloHorario);
-procedure CargarPrefijadoDesdeModelo(var AObjetoModeloHorario:
-  TTimeTable; AModeloHorario: TModeloHorario; CodHorario: Integer);
+procedure CargarPrefijadoDesdeModelo(var AObjetoModeloHorario: TTimeTable;
+  AModeloHorario: TModeloHorario; CodHorario: Integer);
 
 // Procedimiento que aplica el operador de cruzamiento sobre dos TObjetoModeloHorario
 procedure CruzarIndividuos(var Uno, Dos: TTimeTable);
@@ -331,6 +283,7 @@ implementation
 
 uses
   SysUtils, SortAlgs, Rand, DSource, TTGUtls;
+
 var
   SortLongint: procedure(var List1: array of Longint;
     var List2: array of Smallint; min, max: Longint);
@@ -338,40 +291,29 @@ var
     var List2: array of Longint; min, max: Longint);
   lSort: procedure(var List1: array of Longint; min, max: Longint);
 
-constructor TModeloHorario.CrearDesdeDataModule(
-  ACruceProfesorValor,
-  AProfesorFraccionamientoValor,
-  ACruceAulaTipoValor,
-  AHoraHuecaDesubicadaValor,
-  ASesionCortadaValor,
+constructor TModeloHorario.CrearDesdeDataModule(ACruceProfesorValor,
+  AProfesorFraccionamientoValor, ACruceAulaTipoValor,
+  AHoraHuecaDesubicadaValor, ASesionCortadaValor,
   AMateriaNoDispersaValor: Double);
 var
   iMax: Integer;
-  FMinCodProfesor,
-    FMinCodMateria,
-    FMinCodAulaTipo,
-    FMinCodProfProhibicionTipo,
+  FMinCodProfesor, FMinCodMateria, FMinCodAulaTipo, FMinCodProfProhibicionTipo,
     FMinCodMateProhibicionTipo: Longint;
-  FDistributivoAMateria,
-    FCodMateriaAMateria,
+  FDistributivoAMateria, FCodMateriaAMateria,
 
-  FCodProfesorAProfesor,
-    FCodAulaTipoAAulaTipo,
+    FCodProfesorAProfesor, FCodAulaTipoAAulaTipo,
     FCodProfProhibicionTipoAProfesorProhibicionTipo,
-    FCodMateProhibicionTipoAMateriaProhibicionTipo,
-    FParaleloADuracion,
-    FDistributivoAProfesor,
-    FDistributivoAParalelo: TDynamicSmallintArray;
-  FProfesorACodProfesor,
-    FProfesorProhibicionTipoACodProfProhibicionTipo,
+    FCodMateProhibicionTipoAMateriaProhibicionTipo, FParaleloADuracion,
+    FDistributivoAProfesor, FDistributivoAParalelo: TDynamicSmallintArray;
+  FProfesorACodProfesor, FProfesorProhibicionTipoACodProfProhibicionTipo,
     FAulaTipoACodAulaTipo,
     FMateriaProhibicionTipoACodMateProhibicionTipo: TDynamicLongintArray;
-  procedure Cargar(ATable: TZTable; ALstName: string; var FMinCodLst:
-    Integer; var FCodLstALst: TDynamicSmallintArray; var FLstACodLst:
-    TDynamicLongintArray);
+  procedure Cargar(ATable: TZTable; ALstName: string; var FMinCodLst: Integer;
+    var FCodLstALst: TDynamicSmallintArray;
+    var FLstACodLst: TDynamicLongintArray);
   var
     VField: TField;
-    i, v: Integer;
+    I, v: Integer;
   begin
     with ATable do
     begin
@@ -381,19 +323,21 @@ var
       FMinCodLst := VField.AsInteger;
       iMax := VField.AsInteger;
       SetLength(FLstACodLst, RecordCount);
-      for i := 0 to RecordCount - 1 do
+      for I := 0 to RecordCount - 1 do
       begin
         v := VField.AsInteger;
-        if iMax < v then iMax := v;
-        if FMinCodLst > v then FMinCodLst := v;
-        FLstACodLst[i] := v;
+        if iMax < v then
+          iMax := v;
+        if FMinCodLst > v then
+          FMinCodLst := v;
+        FLstACodLst[I] := v;
         Next;
       end;
       First;
       SetLength(FCodLstALst, iMax - FMinCodLst + 1);
-      for i := 0 to RecordCount - 1 do
+      for I := 0 to RecordCount - 1 do
       begin
-        FCodLstALst[VField.AsInteger - FMinCodLst] := i;
+        FCodLstALst[VField.AsInteger - FMinCodLst] := I;
         Next;
       end;
       First;
@@ -401,7 +345,7 @@ var
   end;
   procedure CargarCurso;
   var
-    i, j, k: Integer;
+    I, j, k: Integer;
     VFieldNivel, VFieldEspecializacion: TField;
   begin
     with SourceDataModule.TbCurso do
@@ -410,19 +354,19 @@ var
       First;
       FCursoCant := RecordCount;
       SetLength(FNivelEspecializacionACurso, FNivelCant, FEspecializacionCant);
-      for i := 0 to FNivelCant - 1 do
+      for I := 0 to FNivelCant - 1 do
       begin
-        FillChar(FNivelEspecializacionACurso[i, 0], FEspecializacionCant *
-          SizeOf(Smallint), #$FF);
+        FillChar(FNivelEspecializacionACurso[I, 0],
+          FEspecializacionCant * SizeOf(Smallint), #$FF);
       end;
       VFieldNivel := FindField('CodNivel');
       VFieldEspecializacion := FindField('CodEspecializacion');
-      for i := 0 to FCursoCant - 1 do
+      for I := 0 to FCursoCant - 1 do
       begin
         j := FCodNivelANivel[VFieldNivel.AsInteger - FMinCodNivel];
-        k := FCodEspecializacionAEspecializacion[VFieldEspecializacion.AsInteger -
-          FMinCodEspecializacion];
-        FNivelEspecializacionACurso[j, k] := i;
+        k := FCodEspecializacionAEspecializacion
+          [VFieldEspecializacion.AsInteger - FMinCodEspecializacion];
+        FNivelEspecializacionACurso[j, k] := I;
         Next;
       end;
       First;
@@ -430,7 +374,7 @@ var
   end;
   procedure CargarPeriodo;
   var
-    i, j, k: Integer;
+    I, j, k: Integer;
     VFieldDia, VFieldHora: TField;
   begin
     with SourceDataModule.TbPeriodo do
@@ -442,31 +386,31 @@ var
       SetLength(FDiaAMaxPeriodo, FDiaCant);
       SetLength(FPeriodoAHora, FPeriodoCant);
       SetLength(FDiaHoraAPeriodo, FDiaCant, FHoraCant);
-      for i := 0 to FDiaCant - 1 do
+      for I := 0 to FDiaCant - 1 do
       begin
-        FillChar(FDiaHoraAPeriodo[i, 0], FHoraCant * SizeOf(Smallint), #$FF);
+        FillChar(FDiaHoraAPeriodo[I, 0], FHoraCant * SizeOf(Smallint), #$FF);
       end;
       VFieldDia := FindField('CodDia');
       VFieldHora := FindField('CodHora');
-      for i := 0 to FPeriodoCant - 1 do
+      for I := 0 to FPeriodoCant - 1 do
       begin
         j := FCodDiaADia[VFieldDia.AsInteger - FMinCodDia];
         k := FCodHoraAHora[VFieldHora.AsInteger - FMinCodHora];
-        FPeriodoADia[i] := j;
-        FPeriodoAHora[i] := k;
-        FDiaHoraAPeriodo[j, k] := i;
+        FPeriodoADia[I] := j;
+        FPeriodoAHora[I] := k;
+        FDiaHoraAPeriodo[j, k] := I;
         Next;
       end;
-      for i := 0 to FDiaCant - 1 do
+      for I := 0 to FDiaCant - 1 do
       begin
-        FDiaAMaxPeriodo[i] := GetDiaAMaxPeriodo(i);
+        FDiaAMaxPeriodo[I] := GetDiaAMaxPeriodo(I);
       end;
       First;
     end;
   end;
   procedure CargarParalelo;
   var
-    i, j, k, l, m: Integer;
+    I, j, k, l, m: Integer;
     VFieldNivel, VFieldEspecializacion, VFieldParaleloId: TField;
   begin
     with SourceDataModule.TbParalelo do
@@ -478,24 +422,24 @@ var
       SetLength(FParaleloAParaleloId, FParaleloCant);
       SetLength(FParaleloANivel, FParaleloCant);
       SetLength(FParaleloAEspecializacion, FParaleloCant);
-      SetLength(FCursoParaleloIdAParalelo, FCursoCant,
-        Length(FParaleloIdACodParaleloId));
+      SetLength(FCursoParaleloIdAParalelo, FCursoCant, Length
+          (FParaleloIdACodParaleloId));
       VFieldNivel := FindField('CodNivel');
       VFieldEspecializacion := FindField('CodEspecializacion');
       VFieldParaleloId := FindField('CodParaleloId');
-      for i := 0 to FParaleloCant - 1 do
+      for I := 0 to FParaleloCant - 1 do
       begin
         l := FCodNivelANivel[VFieldNivel.AsInteger - FMinCodNivel];
-        m := FCodEspecializacionAEspecializacion[VFieldEspecializacion.AsInteger -
-          FMinCodEspecializacion];
+        m := FCodEspecializacionAEspecializacion
+          [VFieldEspecializacion.AsInteger - FMinCodEspecializacion];
         j := FNivelEspecializacionACurso[l, m];
         k := FCodParaleloIdAParaleloId[VFieldParaleloId.AsInteger -
           FMinCodParaleloId];
-        FParaleloACurso[i] := j;
-        FParaleloANivel[i] := l;
-        FParaleloAParaleloId[i] := k;
-        FParaleloAEspecializacion[i] := m;
-        FCursoParaleloIdAParalelo[j, k] := i;
+        FParaleloACurso[I] := j;
+        FParaleloANivel[I] := l;
+        FParaleloAParaleloId[I] := k;
+        FParaleloAEspecializacion[I] := m;
+        FCursoParaleloIdAParalelo[j, k] := I;
         Next;
       end;
       First;
@@ -503,7 +447,7 @@ var
   end;
   procedure CargarAulaTipo;
   var
-    i: Integer;
+    I: Integer;
     VFieldCantidad: TField;
   begin
     with SourceDataModule.TbAulaTipo do
@@ -512,9 +456,9 @@ var
       First;
       SetLength(FAulaTipoACantidad, RecordCount);
       VFieldCantidad := FindField('Cantidad');
-      for i := 0 to RecordCount - 1 do
+      for I := 0 to RecordCount - 1 do
       begin
-        FAulaTipoACantidad[i] := VFieldCantidad.AsInteger;
+        FAulaTipoACantidad[I] := VFieldCantidad.AsInteger;
         Next;
       end;
       First;
@@ -522,7 +466,7 @@ var
   end;
   procedure CargarMateriaProhibicionTipo;
   var
-    i: Integer;
+    I: Integer;
     VFieldValor: TField;
     dMaxMateriaProhibicionTipoValor: Double;
   begin
@@ -534,14 +478,14 @@ var
       FMaxMateriaProhibicionTipo := -1;
       dMaxMateriaProhibicionTipoValor := -1.7E308;
       FMateriaProhibicionTipoAValor[-1] := 0;
-      for i := 0 to RecordCount - 1 do
+      for I := 0 to RecordCount - 1 do
       begin
-        FMateriaProhibicionTipoAValor[i] := VFieldValor.AsFloat;
-        if dMaxMateriaProhibicionTipoValor < FMateriaProhibicionTipoAValor[i]
+        FMateriaProhibicionTipoAValor[I] := VFieldValor.AsFloat;
+        if dMaxMateriaProhibicionTipoValor < FMateriaProhibicionTipoAValor[I]
           then
         begin
-          dMaxMateriaProhibicionTipoValor := FMateriaProhibicionTipoAValor[i];
-          FMaxMateriaProhibicionTipo := i;
+          dMaxMateriaProhibicionTipoValor := FMateriaProhibicionTipoAValor[I];
+          FMaxMateriaProhibicionTipo := I;
         end;
         Next;
       end;
@@ -550,7 +494,7 @@ var
   end;
   procedure CargarProfesorProhibicionTipo;
   var
-    i: Integer;
+    I: Integer;
     VFieldValor: TField;
   begin
     with SourceDataModule.TbProfesorProhibicionTipo do
@@ -561,14 +505,14 @@ var
       FMaxProfesorProhibicionTipo := -1;
       FMaxProfesorProhibicionTipoValor := -1.7E308;
       FProfesorProhibicionTipoAValor[-1] := 0;
-      for i := 0 to RecordCount - 1 do
+      for I := 0 to RecordCount - 1 do
       begin
-        FProfesorProhibicionTipoAValor[i] := VFieldValor.AsFloat;
-        if FMaxProfesorProhibicionTipoValor < FProfesorProhibicionTipoAValor[i]
+        FProfesorProhibicionTipoAValor[I] := VFieldValor.AsFloat;
+        if FMaxProfesorProhibicionTipoValor < FProfesorProhibicionTipoAValor[I]
           then
         begin
-          FMaxProfesorProhibicionTipoValor := FProfesorProhibicionTipoAValor[i];
-          FMaxProfesorProhibicionTipo := i;
+          FMaxProfesorProhibicionTipoValor := FProfesorProhibicionTipoAValor[I];
+          FMaxProfesorProhibicionTipo := I;
         end;
         Next;
       end;
@@ -577,9 +521,8 @@ var
   end;
   procedure CargarMateriaProhibicion;
   var
-    i, j, k, l: Integer;
-    VFieldMateria, VFieldDia, VFieldHora, VFieldMateriaProhibicionTipo:
-      TField;
+    I, j, k, l: Integer;
+    VFieldMateria, VFieldDia, VFieldHora, VFieldMateriaProhibicionTipo: TField;
   begin
     with SourceDataModule.TbMateriaProhibicion do
     begin
@@ -589,27 +532,26 @@ var
       SetLength(FMateriaProhibicionAPeriodo, RecordCount);
       SetLength(FMateriaProhibicionAMateriaProhibicionTipo, RecordCount);
       SetLength(FMateriaProhibicionAValor, RecordCount);
-      SetLength(FMateriaPeriodoAMateriaProhibicionTipo,
-        FMateriaCant, FPeriodoCant);
-      for i := 0 to FMateriaCant - 1 do
-        FillChar(FMateriaPeriodoAMateriaProhibicionTipo[i, 0],
-          FPeriodoCant * sizeof(Shortint), #$FF);
+      SetLength(FMateriaPeriodoAMateriaProhibicionTipo, FMateriaCant,
+        FPeriodoCant);
+      for I := 0 to FMateriaCant - 1 do
+        FillChar(FMateriaPeriodoAMateriaProhibicionTipo[I, 0],
+          FPeriodoCant * SizeOf(Shortint), #$FF);
       VFieldMateria := FindField('CodMateria');
       VFieldDia := FindField('CodDia');
       VFieldHora := FindField('CodHora');
       VFieldMateriaProhibicionTipo := FindField('CodMateProhibicionTipo');
-      for i := 0 to RecordCount - 1 do
+      for I := 0 to RecordCount - 1 do
       begin
         j := FCodMateriaAMateria[VFieldMateria.AsInteger - FMinCodMateria];
-        k := FDiaHoraAPeriodo[FCodDiaADia[VFieldDia.AsInteger -
-          FMinCodDia], FCodHoraAHora[VFieldHora.AsInteger - FMinCodHora]];
-        l :=
-          FCodMateProhibicionTipoAMateriaProhibicionTipo[VFieldMateriaProhibicionTipo.AsInteger
-          - FMinCodMateProhibicionTipo];
-        FMateriaProhibicionAMateria[i] := j;
-        FMateriaProhibicionAPeriodo[i] := k;
-        FMateriaProhibicionAMateriaProhibicionTipo[i] := l;
-        FMateriaProhibicionAValor[i] := FMateriaProhibicionTipoAValor[l];
+        k := FDiaHoraAPeriodo[FCodDiaADia[VFieldDia.AsInteger - FMinCodDia],
+          FCodHoraAHora[VFieldHora.AsInteger - FMinCodHora]];
+        l := FCodMateProhibicionTipoAMateriaProhibicionTipo
+          [VFieldMateriaProhibicionTipo.AsInteger - FMinCodMateProhibicionTipo];
+        FMateriaProhibicionAMateria[I] := j;
+        FMateriaProhibicionAPeriodo[I] := k;
+        FMateriaProhibicionAMateriaProhibicionTipo[I] := l;
+        FMateriaProhibicionAValor[I] := FMateriaProhibicionTipoAValor[l];
         FMateriaPeriodoAMateriaProhibicionTipo[j, k] := l;
         Next;
       end;
@@ -618,11 +560,11 @@ var
   end;
   procedure CargarProfesorProhibicion;
   var
-    i, j, k, l: Integer;
+    I, j, k, l: Integer;
     v: Double;
     p, h, d: Smallint;
-    VFieldProfesor, VFieldDia, VFieldHora, VFieldProfesorProhibicionTipo:
-      TField;
+    VFieldProfesor, VFieldDia, VFieldHora,
+      VFieldProfesorProhibicionTipo: TField;
   begin
     with SourceDataModule.TbProfesorProhibicion do
     begin
@@ -632,28 +574,29 @@ var
       SetLength(FProfesorProhibicionAPeriodo, RecordCount);
       SetLength(FProfesorProhibicionAProfesorProhibicionTipo, RecordCount);
       SetLength(FProfesorProhibicionAValor, RecordCount);
-      SetLength(FProfesorPeriodoAProfesorProhibicionTipo,
-        FProfesorCant, FPeriodoCant);
+      SetLength(FProfesorPeriodoAProfesorProhibicionTipo, FProfesorCant,
+        FPeriodoCant);
       for p := 0 to FProfesorCant - 1 do
         FillChar(FProfesorPeriodoAProfesorProhibicionTipo[p, 0],
-          FPeriodoCant * sizeof(Shortint), #$FF);
+          FPeriodoCant * SizeOf(Shortint), #$FF);
       VFieldProfesor := FindField('CodProfesor');
       VFieldHora := FindField('CodHora');
       VFieldDia := FindField('CodDia');
       VFieldProfesorProhibicionTipo := FindField('CodProfProhibicionTipo');
-      for i := 0 to RecordCount - 1 do
+      for I := 0 to RecordCount - 1 do
       begin
         j := FCodProfesorAProfesor[VFieldProfesor.AsInteger - FMinCodProfesor];
         d := FCodDiaADia[VFieldDia.AsInteger - FMinCodDia];
         h := FCodHoraAHora[VFieldHora.AsInteger - FMinCodHora];
         k := FDiaHoraAPeriodo[d, h];
-        l := FCodProfProhibicionTipoAProfesorProhibicionTipo[
-          VFieldProfesorProhibicionTipo.AsInteger - FMinCodProfProhibicionTipo];
-        FProfesorProhibicionAProfesor[i] := j;
-        FProfesorProhibicionAPeriodo[i] := k;
-        FProfesorProhibicionAProfesorProhibicionTipo[i] := l;
+        l := FCodProfProhibicionTipoAProfesorProhibicionTipo
+          [VFieldProfesorProhibicionTipo.AsInteger -
+          FMinCodProfProhibicionTipo];
+        FProfesorProhibicionAProfesor[I] := j;
+        FProfesorProhibicionAPeriodo[I] := k;
+        FProfesorProhibicionAProfesorProhibicionTipo[I] := l;
         v := FProfesorProhibicionTipoAValor[l];
-        FProfesorProhibicionAValor[i] := v;
+        FProfesorProhibicionAValor[I] := v;
         if v = FMaxProfesorProhibicionTipoValor then
         begin
           Inc(FProfesorCantHora[j]);
@@ -663,15 +606,15 @@ var
       end;
       First;
       Filter := '';
-      Filtered := false;
+      Filtered := False;
     end;
   end;
   procedure CargarDistributivo;
   var
-    i, j, k, l, m, n, o, p, q, ss, a, VPos: Integer;
+    I, j, k, l, m, n, o, p, q, ss, a, VPos: Integer;
     VFieldMateria, VFieldNivel, VFieldParaleloId, VFieldProfesor,
       VFieldEspecializacion, VFieldAulaTipo, VFieldComposicion: TField;
-    VSesionADuracion, VSesionADistributivo: array[0..16383] of Smallint;
+    VSesionADuracion, VSesionADistributivo: array [0 .. 16383] of Smallint;
     s: string;
   begin
     with SourceDataModule.TbDistributivo do
@@ -686,7 +629,7 @@ var
       VFieldAulaTipo := FindField('CodAulaTipo');
       VFieldComposicion := FindField('Composicion');
       FDistributivoCant := RecordCount;
-      //SetLength(FDistributivoAAsignatura, RecordCount);
+      // SetLength(FDistributivoAAsignatura, RecordCount);
       SetLength(FDistributivoAParalelo, FDistributivoCant);
       SetLength(FDistributivoAProfesor, FDistributivoCant);
       SetLength(FDistributivoAAulaTipo, FDistributivoCant);
@@ -694,49 +637,50 @@ var
       SetLength(FDistributivoAMateria, FDistributivoCant);
       SetLength(FParaleloMateriaAProfesor, FParaleloCant, FMateriaCant);
       SetLength(FParaleloMateriaADistributivo, FParaleloCant, FMateriaCant);
-      for i := 0 to FParaleloCant - 1 do
-        FillChar(FParaleloMateriaADistributivo[i, 0], FMateriaCant * SizeOf(Smallint),
-          #$FF);
-      for i := 0 to FParaleloCant - 1 do
+      for I := 0 to FParaleloCant - 1 do
+        FillChar(FParaleloMateriaADistributivo[I, 0], FMateriaCant * SizeOf
+            (Smallint), #$FF);
+      for I := 0 to FParaleloCant - 1 do
       begin
-        FillChar(FParaleloMateriaAProfesor[i, 0], FMateriaCant * SizeOf(Smallint), #$FF);
+        FillChar(FParaleloMateriaAProfesor[I, 0], FMateriaCant * SizeOf
+            (Smallint), #$FF);
       end;
       ss := 0;
-      for i := 0 to RecordCount - 1 do
+      for I := 0 to RecordCount - 1 do
       begin
         j := FCodMateriaAMateria[VFieldMateria.AsInteger - FMinCodMateria];
         k := FCodNivelANivel[VFieldNivel.AsInteger - FMinCodNivel];
         l := FCodParaleloIdAParaleloId[VFieldParaleloId.AsInteger -
           FMinCodParaleloId];
-        q := FCodEspecializacionAEspecializacion[VFieldEspecializacion.AsInteger -
-          FMinCodEspecializacion];
+        q := FCodEspecializacionAEspecializacion
+          [VFieldEspecializacion.AsInteger - FMinCodEspecializacion];
         a := FCodAulaTipoAAulaTipo[VFieldAulaTipo.AsInteger - FMinCodAulaTipo];
         p := FNivelEspecializacionACurso[k, q];
         n := FCursoParaleloIdAParalelo[p, l];
         o := FCodProfesorAProfesor[VFieldProfesor.AsInteger - FMinCodProfesor];
-        FDistributivoAParalelo[i] := n;
-        FDistributivoAProfesor[i] := o;
-        FDistributivoAAulaTipo[i] := a;
-        FDistributivoAMateria[i] := j;
+        FDistributivoAParalelo[I] := n;
+        FDistributivoAProfesor[I] := o;
+        FDistributivoAAulaTipo[I] := a;
+        FDistributivoAMateria[I] := j;
         FParaleloMateriaAProfesor[n, j] := o;
-        FParaleloMateriaADistributivo[n, j] := i;
+        FParaleloMateriaADistributivo[n, j] := I;
         s := VFieldComposicion.AsString;
         VPos := 1;
         l := ss;
-        //t := 0;
+        // t := 0;
         while VPos <= Length(s) do
         begin
           VSesionADuracion[ss] := StrToInt(ExtractString(s, VPos, '.'));
-          VSesionADistributivo[ss] := i;
-          //Inc(t, VSesionADuracion[ss]);
+          VSesionADistributivo[ss] := I;
+          // Inc(t, VSesionADuracion[ss]);
           Inc(ss);
         end;
-        SetLength(FDistributivoASesiones[i], ss - l);
+        SetLength(FDistributivoASesiones[I], ss - l);
         for m := l to ss - 1 do
         begin
-          FDistributivoASesiones[i, m - l] := m
+          FDistributivoASesiones[I, m - l] := m
         end;
-        //FParaleloADuracion[n] := FParaleloADuracion[n] + t;
+        // FParaleloADuracion[n] := FParaleloADuracion[n] + t;
         Next;
       end;
       SetLength(FSesionADistributivo, ss);
@@ -744,66 +688,68 @@ var
       SetLength(FSesionAAulaTipo, ss);
       Move(VSesionADuracion[0], FSesionADuracion[0], ss * SizeOf(Smallint));
       FSesionADuracion[-1] := 1;
-      Move(VSesionADistributivo[0], FSesionADistributivo[0], ss * SizeOf(Smallint));
-      for i := 0 to ss - 1 do
+      Move(VSesionADistributivo[0], FSesionADistributivo[0], ss * SizeOf
+          (Smallint));
+      for I := 0 to ss - 1 do
       begin
-        a := FSesionADistributivo[i];
-        FSesionAMateria[i] := FDistributivoAMateria[a];
-        FSesionAAulaTipo[i] := FDistributivoAAulaTipo[a];
+        a := FSesionADistributivo[I];
+        FSesionAMateria[I] := FDistributivoAMateria[a];
+        FSesionAAulaTipo[I] := FDistributivoAAulaTipo[a];
       end;
     end;
   end;
   procedure CargarMoldeHorarioDetalle;
   var
-    d, i, j, k, m, n, o, q, r, s: Integer;
+    d, I, j, k, m, n, o, q, r, s: Integer;
   begin
     SetLength(FMoldeHorarioDetalle, FParaleloCant, FPeriodoCant);
     SetLength(FParaleloASesionCant, FParaleloCant);
     SetLength(FParaleloADuracion, FParaleloCant);
     r := FPeriodoCant;
-    for i := 0 to FParaleloCant - 1 do
-      FillChar(FMoldeHorarioDetalle[i, 0], r * SizeOf(Smallint), #$FF);
-    for i := FDistributivoCant - 1 downto 0 do
+    for I := 0 to FParaleloCant - 1 do
+      FillChar(FMoldeHorarioDetalle[I, 0], r * SizeOf(Smallint), #$FF);
+    for I := FDistributivoCant - 1 downto 0 do
     begin
-      k := FDistributivoAParalelo[i];
-      for m := High(FDistributivoASesiones[i]) downto 0 do
+      k := FDistributivoAParalelo[I];
+      for m := High(FDistributivoASesiones[I]) downto 0 do
       begin
-        n := FSesionADuracion[FDistributivoASesiones[i, m]];
+        n := FSesionADuracion[FDistributivoASesiones[I, m]];
         d := FParaleloADuracion[k];
         for o := n - 1 downto 0 do
         begin
           q := d + o;
           if (q < 0) or (q >= r) then
-            raise
-              Exception.CreateFmt('Se desbordo Molde de ParaleloPeriodoASesion: ' +
-              'Paralelo %d-%d Duracion %d', [FParaleloANivel[k],
+            raise Exception.CreateFmt(
+              'Se desbordo Molde de ParaleloPeriodoASesion: ' +
+                'Paralelo %d-%d Duracion %d', [FParaleloANivel[k],
               FParaleloAParaleloId[k], q]);
-          FMoldeHorarioDetalle[k, r - 1 - q] := FDistributivoASesiones[i, m];
+          FMoldeHorarioDetalle[k, r - 1 - q] := FDistributivoASesiones[I, m];
         end;
         Inc(FParaleloADuracion[k], n);
       end;
     end;
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FParaleloCant - 1 do
     begin
       j := 0;
       while j < FPeriodoCant do
       begin
-        s := FMoldeHorarioDetalle[i, j];
+        s := FMoldeHorarioDetalle[I, j];
         d := FSesionADuracion[s];
         Inc(j, d);
-        Inc(FParaleloASesionCant[i]);
+        Inc(FParaleloASesionCant[I]);
         if s >= 0 then
-          Inc(FProfesorCantHora[FParaleloMateriaAProfesor[i,
-            FSesionAMateria[s]]], d);
+          Inc(FProfesorCantHora[FParaleloMateriaAProfesor[I, FSesionAMateria[s]]
+              ], d);
       end;
     end;
     FSesionCantidadDoble := 0;
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FParaleloCant - 1 do
     begin
-      j := FParaleloASesionCant[i];
+      j := FParaleloASesionCant[I];
       Inc(FSesionCantidadDoble, (j * (j - 1)) div 2);
     end;
   end;
+
 begin
   inherited Create;
   with SourceDataModule do
@@ -818,13 +764,11 @@ begin
     Cargar(TbNivel, 'CodNivel', FMinCodNivel, FCodNivelANivel, FNivelACodNivel);
     FNivelCant := Length(FNivelACodNivel);
     Cargar(TbEspecializacion, 'CodEspecializacion', FMinCodEspecializacion,
-      FCodEspecializacionAEspecializacion,
-      FEspecializacionACodEspecializacion);
+      FCodEspecializacionAEspecializacion, FEspecializacionACodEspecializacion);
     FEspecializacionCant := Length(FEspecializacionACodEspecializacion);
     CargarCurso;
     Cargar(TbParaleloId, 'CodParaleloId', FMinCodParaleloId,
-      FCodParaleloIdAParaleloId,
-      FParaleloIdACodParaleloId);
+      FCodParaleloIdAParaleloId, FParaleloIdACodParaleloId);
     Cargar(TbMateria, 'CodMateria', FMinCodMateria, FCodMateriaAMateria,
       FMateriaACodMateria);
     FMateriaCant := Length(FMateriaACodMateria);
@@ -840,8 +784,7 @@ begin
       FMinCodProfProhibicionTipo,
       FCodProfProhibicionTipoAProfesorProhibicionTipo,
       FProfesorProhibicionTipoACodProfProhibicionTipo);
-    Cargar(TbAulaTipo, 'CodAulaTipo', FMinCodAulaTipo,
-      FCodAulaTipoAAulaTipo,
+    Cargar(TbAulaTipo, 'CodAulaTipo', FMinCodAulaTipo, FCodAulaTipoAAulaTipo,
       FAulaTipoACodAulaTipo);
     FAulaTipoCant := Length(FAulaTipoACodAulaTipo);
     CargarPeriodo;
@@ -856,12 +799,9 @@ begin
   end;
 end;
 
-procedure TModeloHorario.Configurar(
-  ACruceProfesorValor,
-  AProfesorFraccionamientoValor,
-  ACruceAulaTipoValor,
-  AHoraHuecaDesubicadaValor,
-  ASesionCortadaValor,
+procedure TModeloHorario.Configurar(ACruceProfesorValor,
+  AProfesorFraccionamientoValor, ACruceAulaTipoValor,
+  AHoraHuecaDesubicadaValor, ASesionCortadaValor,
   AMateriaNoDispersaValor: Double);
 begin
   FCruceProfesorValor := ACruceProfesorValor;
@@ -882,42 +822,34 @@ end;
 
 procedure TModeloHorario.ReportParameters(AReport: TStrings);
 begin
-  AReport.Add(Format(
-    'Pesos:'#13#10 +
-    '  Cruce de profesores          %8.2f'#13#10 +
-    '  Fracc. h. profesores         %8.2f'#13#10 +
-    '  Cruce de aulas:              %8.2f'#13#10 +
-    '  Horas Huecas desubicadas:    %8.2f'#13#10 +
-    '  Materias cortadas:           %8.2f'#13#10 +
-    '  Materias no dispersas:       %8.2f', [
-    CruceProfesorValor,
-      ProfesorFraccionamientoValor,
-      CruceAulaTipoValor,
-      HoraHuecaDesubicadaValor,
-      SesionCortadaValor,
-      MateriaNoDispersaValor]));
+  AReport.Add(Format('Pesos:'#13#10 +
+        '  Cruce de profesores          %8.2f'#13#10 +
+        '  Fracc. h. profesores         %8.2f'#13#10 +
+        '  Cruce de aulas:              %8.2f'#13#10 +
+        '  Horas Huecas desubicadas:    %8.2f'#13#10 +
+        '  Materias cortadas:           %8.2f'#13#10 +
+        '  Materias no dispersas:       %8.2f', [CruceProfesorValor,
+      ProfesorFraccionamientoValor, CruceAulaTipoValor,
+      HoraHuecaDesubicadaValor, SesionCortadaValor, MateriaNoDispersaValor]));
 end;
 
 procedure CrearAleatorioDesdeModelo(var ATimeTable: TTimeTable;
   AModeloHorario: TModeloHorario);
 begin
   if not Assigned(ATimeTable) then
-    ATimeTable :=
-      TTimeTable.CrearDesdeModelo(AModeloHorario);
+    ATimeTable := TTimeTable.CrearDesdeModelo(AModeloHorario);
   ATimeTable.HacerAleatorio;
 end;
 
-procedure CargarPrefijadoDesdeModelo(var AObjetoModeloHorario:
-  TTimeTable; AModeloHorario: TModeloHorario; CodHorario: Integer);
+procedure CargarPrefijadoDesdeModelo(var AObjetoModeloHorario: TTimeTable;
+  AModeloHorario: TModeloHorario; CodHorario: Integer);
 begin
   if not Assigned(AObjetoModeloHorario) then
-    AObjetoModeloHorario :=
-      TTimeTable.CrearDesdeModelo(AModeloHorario);
+    AObjetoModeloHorario := TTimeTable.CrearDesdeModelo(AModeloHorario);
   AObjetoModeloHorario.LoadFromDataModule(CodHorario);
 end;
 
-procedure CruzarIndividuosPunto(var Uno, Dos: TTimeTable; AParalelo:
-  Smallint);
+procedure CruzarIndividuosPunto(var Uno, Dos: TTimeTable; AParalelo: Smallint);
 var
   s, j, d: Smallint;
   k1, k2, l: Longint;
@@ -926,13 +858,13 @@ var
     var AClaveAleatoria: TDynamicLongintArray);
   var
     j, d, k, l: Smallint;
-    NumberList: array[0..4095] of Longint;
+    NumberList: array [0 .. 4095] of Longint;
     p: PSmallintArray;
     q: PLongintArray;
   begin
     with AObjetoModeloHorario.ModeloHorario do
     begin
-    //Check(AParalelo, 'AleatorizarClaveAntes');
+      // Check(AParalelo, 'AleatorizarClaveAntes');
       Fillcrand32(NumberList, FParaleloASesionCant[AParalelo]);
       lSort(NumberList, 0, FParaleloASesionCant[AParalelo] - 1);
       p := @AObjetoModeloHorario.ParaleloPeriodoASesion[AParalelo, 0];
@@ -949,6 +881,7 @@ var
       end;
     end;
   end;
+
 begin
   with Uno.ModeloHorario do
   begin
@@ -956,10 +889,10 @@ begin
     SetLength(ClaveAleatoria2, FPeriodoCant);
     AleatorizarClave(Uno, ClaveAleatoria1);
     AleatorizarClave(Dos, ClaveAleatoria2);
-    SortSmallint(Uno.ParaleloPeriodoASesion[AParalelo],
-      ClaveAleatoria1, 0, FPeriodoCant - 1);
-    SortSmallint(Dos.ParaleloPeriodoASesion[AParalelo],
-      ClaveAleatoria2, 0, FPeriodoCant - 1);
+    SortSmallint(Uno.ParaleloPeriodoASesion[AParalelo], ClaveAleatoria1, 0,
+      FPeriodoCant - 1);
+    SortSmallint(Dos.ParaleloPeriodoASesion[AParalelo], ClaveAleatoria2, 0,
+      FPeriodoCant - 1);
     j := 0;
     while j < FPeriodoCant do
     begin
@@ -977,32 +910,33 @@ begin
       end;
       Inc(j, d);
     end;
-    SortLongint(ClaveAleatoria1, Uno.ParaleloPeriodoASesion[AParalelo], 0, FPeriodoCant - 1);
-    SortLongint(ClaveAleatoria2, Dos.ParaleloPeriodoASesion[AParalelo], 0, FPeriodoCant - 1);
+    SortLongint(ClaveAleatoria1, Uno.ParaleloPeriodoASesion[AParalelo], 0,
+      FPeriodoCant - 1);
+    SortLongint(ClaveAleatoria2, Dos.ParaleloPeriodoASesion[AParalelo], 0,
+      FPeriodoCant - 1);
   end;
 end;
 
 procedure CruzarIndividuos(var Uno, Dos: TTimeTable);
 var
-  i: Smallint;
+  I: Smallint;
 begin
   with Uno.ModeloHorario do
   begin
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FParaleloCant - 1 do
     begin
-      CruzarIndividuosPunto(Uno, Dos, i);
+      CruzarIndividuosPunto(Uno, Dos, I);
     end;
     Uno.Actualizar;
     Dos.Actualizar;
     Uno.RecalcularValor := True;
     Dos.RecalcularValor := True;
-    //Uno.Check('CruzarIndividuosUnoDespues');
-    //Dos.Check('CruzarIndividuosDosDespues');
+    // Uno.Check('CruzarIndividuosUnoDespues');
+    // Dos.Check('CruzarIndividuosDosDespues');
   end;
 end;
 
-constructor TTimeTable.CrearDesdeModelo(AModeloHorario:
-  TModeloHorario);
+constructor TTimeTable.CrearDesdeModelo(AModeloHorario: TModeloHorario);
 begin
   inherited Create;
   FAntListaCambios := TList.Create;
@@ -1011,16 +945,13 @@ begin
   with ModeloHorario do
   begin
     SetLength(FParaleloPeriodoASesion, FParaleloCant, FPeriodoCant);
-    SetLength(FMateriaPeriodoCant, FMateriaCant,
-      FPeriodoCant);
-    SetLength(FProfesorPeriodoCant, FProfesorCant,
-      FPeriodoCant);
-    SetLength(FAulaTipoPeriodoCant, FAulaTipoCant,
-      FPeriodoCant);
-    SetLength(FParaleloMateriaDiaMinHora, FParaleloCant,
-      FMateriaCant, FDiaCant);
-    SetLength(FParaleloMateriaDiaMaxHora, FParaleloCant,
-      FMateriaCant, FDiaCant);
+    SetLength(FMateriaPeriodoCant, FMateriaCant, FPeriodoCant);
+    SetLength(FProfesorPeriodoCant, FProfesorCant, FPeriodoCant);
+    SetLength(FAulaTipoPeriodoCant, FAulaTipoCant, FPeriodoCant);
+    SetLength(FParaleloMateriaDiaMinHora, FParaleloCant, FMateriaCant,
+      FDiaCant);
+    SetLength(FParaleloMateriaDiaMaxHora, FParaleloCant, FMateriaCant,
+      FDiaCant);
     SetLength(FDiaProfesorFraccionamiento, FDiaCant, FProfesorCant);
     SetLength(FParaleloMateriaNoDispersa, FParaleloCant);
     SetLength(FAntMateriaDiaMinHora, FMateriaCant, FDiaCant);
@@ -1032,7 +963,7 @@ end;
 
 procedure TTimeTable.HacerAleatorio;
 var
-  i, j, d, l: Smallint;
+  I, j, d, l: Smallint;
   r: Longint;
   p: PSmallintArray;
   q: PLongintArray;
@@ -1041,12 +972,11 @@ begin
   with ModeloHorario do
   begin
     SetLength(ClaveAleatoria, FPeriodoCant);
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FParaleloCant - 1 do
     begin
-      p := @ParaleloPeriodoASesion[i, 0];
+      p := @ParaleloPeriodoASesion[I, 0];
       q := @ClaveAleatoria[0];
-      Move(FMoldeHorarioDetalle[i, 0], p[0], FPeriodoCant *
-        SizeOf(Smallint));
+      Move(FMoldeHorarioDetalle[I, 0], p[0], FPeriodoCant * SizeOf(Smallint));
       j := 0;
       while j < FPeriodoCant do
       begin
@@ -1065,20 +995,19 @@ end;
 
 procedure TTimeTable.ActualizarMateriaPeriodoCant;
 var
-  i, j, m, s: Smallint;
+  I, j, m, s: Smallint;
   q: PSmallintArray;
 begin
   with ModeloHorario do
   begin
     for m := 0 to FMateriaCant - 1 do
     begin
-      FillChar(FMateriaPeriodoCant[m, 0], FPeriodoCant *
-        SizeOf(Smallint), #0);
+      FillChar(FMateriaPeriodoCant[m, 0], FPeriodoCant * SizeOf(Smallint), #0);
     end;
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FParaleloCant - 1 do
     begin
-      q := @ParaleloPeriodoASesion[i, 0];
-      for j := 0 to FPeriodocant - 1 do
+      q := @ParaleloPeriodoASesion[I, 0];
+      for j := 0 to FPeriodoCant - 1 do
       begin
         s := q[j];
         if s >= 0 then
@@ -1093,15 +1022,15 @@ end;
 
 procedure TTimeTable.ActualizarParaleloMateriaDiaMinMaxHora;
 var
-  i: Smallint;
+  I: Smallint;
 begin
   with ModeloHorario do
-    for i := 0 to FParaleloCant - 1 do
-      ActualizarParaleloMateriaDiaMinMaxHora(i);
+    for I := 0 to FParaleloCant - 1 do
+      ActualizarParaleloMateriaDiaMinMaxHora(I);
 end;
 
-procedure TTimeTable.ActualizarParaleloMateriaDiaMinMaxHora(AParalelo:
-  Smallint);
+procedure TTimeTable.ActualizarParaleloMateriaDiaMinMaxHora
+  (AParalelo: Smallint);
 var
   j, di, h, m, s: Smallint;
   q: PSmallintArray;
@@ -1110,11 +1039,10 @@ begin
   begin
     for j := 0 to FMateriaCant - 1 do
     begin
-      FillChar(FParaleloMateriaDiaMaxHora[AParalelo, j, 0], FDiaCant *
-        SizeOf(Smallint),
-        #$FF);
-      FillChar(FParaleloMateriaDiaMinHora[AParalelo, j, 0], FDiaCant *
-        SizeOf(Smallint), #$3F);
+      FillChar(FParaleloMateriaDiaMaxHora[AParalelo, j, 0], FDiaCant * SizeOf
+          (Smallint), #$FF);
+      FillChar(FParaleloMateriaDiaMinHora[AParalelo, j, 0], FDiaCant * SizeOf
+          (Smallint), #$3F);
     end;
     q := @ParaleloPeriodoASesion[AParalelo, 0];
     for j := 0 to FPeriodoCant - 1 do
@@ -1131,9 +1059,8 @@ begin
           FParaleloMateriaDiaMinHora[AParalelo, m, di] := h;
       end;
     end;
-    FParaleloMateriaNoDispersa[AParalelo] :=
-      GetParaleloMateriaNoDispersa(AParalelo,
-      FParaleloMateriaDiaMaxHora[AParalelo]);
+    FParaleloMateriaNoDispersa[AParalelo] := GetParaleloMateriaNoDispersa
+      (AParalelo, FParaleloMateriaDiaMaxHora[AParalelo]);
   end;
 end;
 
@@ -1147,8 +1074,8 @@ begin
     begin
       for p := 0 to FProfesorCant - 1 do
       begin
-        FDiaProfesorFraccionamiento[d, p] := GetDiaProfesorFraccionamiento(d,
-          p);
+        FDiaProfesorFraccionamiento[d, p] := GetDiaProfesorFraccionamiento
+          (d, p);
       end;
     end;
   end;
@@ -1161,26 +1088,25 @@ begin
 end;
 
 {
-procedure TObjetoModeloHorario.SetClaveAleatoriaInterno(AParalelo,
+  procedure TObjetoModeloHorario.SetClaveAleatoriaInterno(AParalelo,
   APeriodo: Smallint; AClaveAleatoria: Longint);
-begin
+  begin
   SetClaveAleatoriaInterno(AParalelo, APeriodo,
-    ModeloHorario.FSesionADuracion[ParaleloPeriodoASesion[AParalelo, APeriodo]],
-    AClaveAleatoria);
-end;
+  ModeloHorario.FSesionADuracion[ParaleloPeriodoASesion[AParalelo, APeriodo]],
+  AClaveAleatoria);
+  end;
 
-procedure TObjetoModeloHorario.SetClaveAleatoriaInterno(AParalelo, APeriodo,
+  procedure TObjetoModeloHorario.SetClaveAleatoriaInterno(AParalelo, APeriodo,
   ADuracion: Smallint; AClaveAleatoria: Longint);
-var
+  var
   l: Smallint;
-begin
+  begin
   for l := APeriodo + ADuracion - 1 downto APeriodo do
-    FClaveAleatoria[AParalelo, l] := AClaveAleatoria;
-end;
+  FClaveAleatoria[AParalelo, l] := AClaveAleatoria;
+  end;
 }
 
-procedure TTimeTable.Intercambiar(AParalelo, APeriodo,
-  APeriodo1: Smallint);
+procedure TTimeTable.Intercambiar(AParalelo, APeriodo, APeriodo1: Smallint);
 begin
   Normalizar(AParalelo, APeriodo);
   Normalizar(AParalelo, APeriodo1);
@@ -1190,11 +1116,11 @@ begin
     IntercambiarInterno(AParalelo, APeriodo1, APeriodo);
 end;
 
-procedure TTimeTable.IntercambiarInterno(AParalelo, APeriodo,
-  APeriodo1: Smallint; FueEvaluado: Boolean = False);
+procedure TTimeTable.IntercambiarInterno
+  (AParalelo, APeriodo, APeriodo1: Smallint; FueEvaluado: Boolean = False);
 var
-  m, m1, d, d1, s, s1, p, p1, a, a1, j_, s_, p_, a_, m_, {h, h1, h_, } hl, hl1:
-    Smallint;
+  m, m1, d, d1, s, s1, p, p1, a, a1, j_, s_, p_, a_, m_,
+  { h, h1, h_, } hl, hl1: Smallint;
   q, r: PSmallintArray;
   TmpMateriaDiaMinMaxHora: TDynamicSmallintArrayArray;
   TmpMateriaNoDispersa: Integer;
@@ -1202,8 +1128,8 @@ var
   var
     l: Smallint;
   begin
-    Move(q[APeriodo + d], q[APeriodo + d1], (APeriodo1 - APeriodo - d) *
-      SizeOf(Smallint));
+    Move(q[APeriodo + d], q[APeriodo + d1], (APeriodo1 - APeriodo - d) * SizeOf
+        (Smallint));
     for l := d - 1 downto 0 do
     begin
       q[APeriodo1 + d1 - d + l] := s;
@@ -1213,6 +1139,7 @@ var
       q[APeriodo + l] := s1;
     end;
   end;
+
 var
   l: Smallint;
   pd: LongWord;
@@ -1310,13 +1237,13 @@ begin
       FAntMateriaNoDispersa := TmpMateriaNoDispersa;
       for l := FAntListaCambios.Count - 1 downto 0 do
       begin
-        pd := Longword(FAntListaCambios.Items[l]);
+        pd := LongWord(FAntListaCambios.Items[l]);
         p := Smallint(pd);
         d := Smallint(pd shr 16);
-        FDiaProfesorFraccionamiento[d, p] :=
-          GetDiaProfesorFraccionamiento(d, p);
+        FDiaProfesorFraccionamiento[d, p] := GetDiaProfesorFraccionamiento
+          (d, p);
       end;
-      //ActualizarDiaProfesorFraccionamiento;
+      // ActualizarDiaProfesorFraccionamiento;
     end
     else
     begin
@@ -1331,8 +1258,7 @@ end;
   de la version en ensamblador
 }
 
-procedure TTimeTable.Normalizar(AParalelo: Smallint;
-  var APeriodo: Smallint);
+procedure TTimeTable.Normalizar(AParalelo: Smallint; var APeriodo: Smallint);
 var
   k: Smallint;
   l: PSmallintArray;
@@ -1350,37 +1276,34 @@ begin
   begin
     Add('Detalle                     Cant.    Peso    Valor');
     Add('--------------------------------------------------');
-    Add(Format('Cruce de profesores:        %5.d %7.2f %8.2f',
-               [CruceProfesor, ModeloHorario.CruceProfesorValor,
-                CruceProfesorValor]));
+    Add(Format('Cruce de profesores:        %5.d %7.2f %8.2f', [CruceProfesor,
+        ModeloHorario.CruceProfesorValor, CruceProfesorValor]));
     Add(Format('Fracc. h. profesores:       %5.d %7.2f %8.2f',
-               [ProfesorFraccionamiento, ModeloHorario.ProfesorFraccionamientoValor,
-                ProfesorFraccionamientoValor]));
-    Add(Format('Cruce de aulas:             %5.d %7.2f %8.2f',
-               [CruceAulaTipo, ModeloHorario.CruceAulaTipoValor,
-                CruceAulaTipoValor]));
+        [ProfesorFraccionamiento, ModeloHorario.ProfesorFraccionamientoValor,
+        ProfesorFraccionamientoValor]));
+    Add(Format('Cruce de aulas:             %5.d %7.2f %8.2f', [CruceAulaTipo,
+        ModeloHorario.CruceAulaTipoValor, CruceAulaTipoValor]));
     Add(Format('Horas Huecas desubicadas:   %5.d %7.2f %8.2f',
-               [HoraHuecaDesubicada, ModeloHorario.HoraHuecaDesubicadaValor,
-                HoraHuecaDesubicadaValor]));
-    Add(Format('Materias cortadas:          %5.d %7.2f %8.2f',
-               [SesionCortada, ModeloHorario.SesionCortadaValor,
-                SesionCortadaValor]));
+        [HoraHuecaDesubicada, ModeloHorario.HoraHuecaDesubicadaValor,
+        HoraHuecaDesubicadaValor]));
+    Add(Format('Materias cortadas:          %5.d %7.2f %8.2f', [SesionCortada,
+        ModeloHorario.SesionCortadaValor, SesionCortadaValor]));
     Add(Format('Materias no dispersas:      %5.d %7.2f %8.2f',
-               [MateriaNoDispersa, ModeloHorario.MateriaNoDispersaValor,
-                MateriaNoDispersaValor]));
+        [MateriaNoDispersa, ModeloHorario.MateriaNoDispersaValor,
+        MateriaNoDispersaValor]));
     Add(Format('Prohibiciones de materia:   %5.d         %8.2f',
-               [MateriaProhibicion, MateriaProhibicionValor]));
+        [MateriaProhibicion, MateriaProhibicionValor]));
     Add(Format('Prohibiciones de profesor:  %5.d         %8.2f',
-               [ProfesorProhibicion, ProfesorProhibicionValor]));
+        [ProfesorProhibicion, ProfesorProhibicionValor]));
     Add('--------------------------------------------------');
     Add(Format('Valor Total:                              %8.2f', [Valor]));
   end;
 end;
 
 (*
-procedure TObjetoModeloHorario.Normalizar(AParalelo: Smallint;
+  procedure TObjetoModeloHorario.Normalizar(AParalelo: Smallint;
   var APeriodo: Smallint); assembler;
-asm
+  asm
   push    ebx
   mov     eax, [eax + FParaleloPeriodoASesion]
   movsx   edx, AParalelo
@@ -1389,85 +1312,82 @@ asm
   mov     bx, [eax + edx * 2]
   cmp     bx, 0
   jl      @end2
-@beg:
+  @beg:
   cmp     edx, 0
   jle     @end
   cmp     bx, word ptr [eax + edx * 2 - 2]
   jne     @end
   Dec     edx
   jmp     @beg
-@end:
+  @end:
   mov     [ecx], dx
-@end2:
+  @end2:
   pop     ebx
-end;
+  end;
 *)
 
 procedure TTimeTable.MutarInterno;
 var
   l: Longint;
-  i, j, j1: Smallint;
+  I, j, j1: Smallint;
 begin
   with ModeloHorario do
   begin
     l := crand32 mod (FParaleloCant * Sqr(FPeriodoCant));
     j := l mod FPeriodoCant;
     l := l div FPeriodoCant;
-    i := l div FPeriodoCant;
+    I := l div FPeriodoCant;
     j1 := l mod FPeriodoCant;
-    if ParaleloPeriodoASesion[i, j] <> ParaleloPeriodoASesion[i, j1] then
-      Intercambiar(i, j, j1);
+    if ParaleloPeriodoASesion[I, j] <> ParaleloPeriodoASesion[I, j1] then
+      Intercambiar(I, j, j1);
   end;
 end;
 
 procedure TTimeTable.Mutar;
 begin
-  //Check('MutarAntes');
+  // Check('MutarAntes');
   MutarInterno;
   RecalcularValor := True;
-  //Check('MutarDespues');
+  // Check('MutarDespues');
 end;
 
 procedure TTimeTable.Mutar(Orden: Integer);
 var
   c: Integer;
 begin
-  //Check('MutarAntes(...)');
+  // Check('MutarAntes(...)');
   for c := crand32 mod Orden downto 0 do
     MutarInterno;
   RecalcularValor := True;
-  //Check('MutarDespues(...)');
+  // Check('MutarDespues(...)');
 end;
 
 procedure TTimeTable.MutarDia;
 var
-  i, j1, j2, n1, n2, d1, d2, m1, m2: Smallint;
-  b: array[0..16383] of Smallint;
+  I, j1, j2, n1, n2, d1, d2, m1, m2: Smallint;
+  b: array [0 .. 16383] of Smallint;
   p: PSmallintArray;
 begin
-  //Check('MutarDiaAntes');
+  // Check('MutarDiaAntes');
   with ModeloHorario do
   begin
     j1 := crand32 mod FDiaCant;
     repeat
       j2 := crand32 mod FDiaCant;
     until j1 <> j2;
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FParaleloCant - 1 do
     begin
-      p := @ParaleloPeriodoASesion[i, 0];
+      p := @ParaleloPeriodoASesion[I, 0];
       n1 := FDiaHoraAPeriodo[j1, 0];
       n2 := FDiaHoraAPeriodo[j2, 0];
       m1 := FDiaAMaxPeriodo[j1];
       m2 := FDiaAMaxPeriodo[j2];
       d1 := m1 - n1;
       d2 := m2 - n2;
-      if (d1 = d2) and ((n1 = 0) or (p[n1 - 1] < 0)
-        or (p[n1 - 1] <> p[n1])) and ((n2 = 0)
-        or (p[n2 - 1] < 0) or (p[n2 - 1] <> p[n2]))
-        and ((m1 = FPeriodoCant - 1) or (p[m1] < 0)
-        or (p[m1] <> p[m1 + 1]))
-        and ((m2 = FPeriodoCant - 1) or (p[m2] < 0)
-        or (p[m2] <> p[m2 + 1])) then
+      if (d1 = d2) and ((n1 = 0) or (p[n1 - 1] < 0) or (p[n1 - 1] <> p[n1]))
+        and ((n2 = 0) or (p[n2 - 1] < 0) or (p[n2 - 1] <> p[n2])) and
+        ((m1 = FPeriodoCant - 1) or (p[m1] < 0) or (p[m1] <> p[m1 + 1])) and
+        ((m2 = FPeriodoCant - 1) or (p[m2] < 0) or (p[m2] <> p[m2 + 1])) then
       begin
         Move(p[n1], b[0], (d1 + 1) * SizeOf(Smallint));
         Move(p[n2], p[n1], (d1 + 1) * SizeOf(Smallint));
@@ -1477,7 +1397,7 @@ begin
   end;
   Actualizar;
   FRecalcularValor := True;
-  //Check('MutarDiaDespues');
+  // Check('MutarDiaDespues');
 end;
 
 function TTimeTable.GetValor: Double;
@@ -1489,8 +1409,7 @@ end;
 
 function TTimeTable.GetHoraHuecaDesubicadaValor: Double;
 begin
-  Result := ModeloHorario.FHoraHuecaDesubicadaValor *
-    GetHoraHuecaDesubicada;
+  Result := ModeloHorario.FHoraHuecaDesubicadaValor * GetHoraHuecaDesubicada;
 end;
 
 function TTimeTable.GetHoraHuecaDesubicada: Integer;
@@ -1502,14 +1421,14 @@ end;
 
 procedure TTimeTable.DoGetHoraHuecaDesubicada;
 var
-  i, j, s: Integer;
+  I, j, s: Integer;
   p: PSmallintArray;
 begin
   FHoraHuecaDesubicada := 0;
   with ModeloHorario do
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FParaleloCant - 1 do
     begin
-      p := @ParaleloPeriodoASesion[i, 0];
+      p := @ParaleloPeriodoASesion[I, 0];
       for j := 0 to FPeriodoCant - 1 do
       begin
         s := p[j];
@@ -1533,24 +1452,24 @@ end;
 
 procedure TTimeTable.DoGetSesionCortada;
 var
-  i, j, d, s: Integer;
+  I, j, d, s: Integer;
   l, m, k, t: Smallint;
 begin
   FSesionCortada := 0;
   with ModeloHorario do
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FParaleloCant - 1 do
     begin
       j := 0;
       while j < FPeriodoCant do
       begin
-        s := ParaleloPeriodoASesion[i, j];
+        s := ParaleloPeriodoASesion[I, j];
         l := FSesionADuracion[s];
         if s >= 0 then
         begin
           d := FPeriodoADia[j];
           m := FSesionAMateria[s];
-          t := FParaleloMateriaDiaMaxHora[i, m, d] -
-            FParaleloMateriaDiaMinHora[i, m, d];
+          t := FParaleloMateriaDiaMaxHora[I, m, d] - FParaleloMateriaDiaMinHora
+            [I, m, d];
           if t >= 0 then
           begin
             k := Abs(t + 1 - l);
@@ -1599,7 +1518,7 @@ begin
         if pm[FDiaCant - 1] >= 0 then
           Inc(l);
         ns1 := Length(FDistributivoASesiones[n]);
-        ns := 2 * Min(ns1, FDiaCant + 1 - ns1);
+        ns := 2 * min(ns1, FDiaCant + 1 - ns1);
         Inc(Result, Abs(ns - l))
       end;
     end;
@@ -1607,14 +1526,14 @@ end;
 
 procedure TTimeTable.DoGetMateriaNoDispersa;
 var
-  i: Smallint;
+  I: Smallint;
 begin
   FMateriaNoDispersa := 0;
   with ModeloHorario do
   begin
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FParaleloCant - 1 do
     begin
-      Inc(FMateriaNoDispersa, FParaleloMateriaNoDispersa[i]);
+      Inc(FMateriaNoDispersa, FParaleloMateriaNoDispersa[I]);
     end;
   end;
 end;
@@ -1652,18 +1571,18 @@ end;
 
 procedure TTimeTable.DoGetMateriaProhibicionValor;
 var
-  i, m, j, c: Integer;
+  I, m, j, c: Integer;
   d: Double;
 begin
   FMateriaProhibicionValor := 0;
   FMateriaProhibicion := 0;
   with ModeloHorario do
-    for i := 0 to High(FMateriaProhibicionAMateria) do
+    for I := 0 to High(FMateriaProhibicionAMateria) do
     begin
-      m := FMateriaProhibicionAMateria[i];
-      j := FMateriaProhibicionAPeriodo[i];
+      m := FMateriaProhibicionAMateria[I];
+      j := FMateriaProhibicionAPeriodo[I];
       c := FMateriaPeriodoCant[m, j];
-      d := c * FMateriaProhibicionAValor[i];
+      d := c * FMateriaProhibicionAValor[I];
       FMateriaProhibicionValor := FMateriaProhibicionValor + d;
       Inc(FMateriaProhibicion, c);
     end;
@@ -1685,18 +1604,18 @@ end;
 
 procedure TTimeTable.DoGetProfesorProhibicionValor;
 var
-  i, p, j, c: Smallint;
+  I, p, j, c: Smallint;
   d: Double;
 begin
   FProfesorProhibicionValor := 0;
   FProfesorProhibicion := 0;
   with ModeloHorario do
-    for i := 0 to High(FProfesorProhibicionAProfesor) do
+    for I := 0 to High(FProfesorProhibicionAProfesor) do
     begin
-      p := FProfesorProhibicionAProfesor[i];
-      j := FProfesorProhibicionAPeriodo[i];
+      p := FProfesorProhibicionAProfesor[I];
+      j := FProfesorProhibicionAPeriodo[I];
       c := FProfesorPeriodoCant[p, j];
-      d := c * FProfesorProhibicionAValor[i];
+      d := c * FProfesorProhibicionAValor[I];
       FProfesorProhibicionValor := FProfesorProhibicionValor + d;
       Inc(FProfesorProhibicion, c);
     end;
@@ -1751,8 +1670,8 @@ end;
 
 function TTimeTable.GetProfesorFraccionamientoValor: Double;
 begin
-  Result := ModeloHorario.FProfesorFraccionamientoValor
-    * FProfesorFraccionamiento;
+  Result := ModeloHorario.FProfesorFraccionamientoValor *
+    FProfesorFraccionamiento;
 end;
 
 function TTimeTable.GetCruceAulaTipoValor: Double;
@@ -1762,7 +1681,7 @@ end;
 
 procedure TTimeTable.DoGetValor;
 begin
-  RecalcularValor := false;
+  RecalcularValor := False;
   with ModeloHorario do
   begin
     DoGetHoraHuecaDesubicada;
@@ -1773,28 +1692,27 @@ begin
     DoGetMateriaProhibicionValor;
     DoGetProfesorProhibicionValor;
     DoGetProfesorFraccionamiento;
-    FValor := Self.CruceProfesorValor + Self.CruceAulaTipoValor
-      + FMateriaProhibicionValor + FProfesorProhibicionValor
-      + FMateriaNoDispersa * FMateriaNoDispersaValor + FSesionCortada
-      * FSesionCortadaValor + FHoraHuecaDesubicada * FHoraHuecaDesubicadaValor
-      + FProfesorFraccionamiento * FProfesorFraccionamientoValor;
+    FValor := Self.CruceProfesorValor + Self.CruceAulaTipoValor +
+      FMateriaProhibicionValor + FProfesorProhibicionValor +
+      FMateriaNoDispersa * FMateriaNoDispersaValor + FSesionCortada *
+      FSesionCortadaValor + FHoraHuecaDesubicada * FHoraHuecaDesubicadaValor +
+      FProfesorFraccionamiento * FProfesorFraccionamientoValor;
   end;
 end;
 
 procedure TTimeTable.ActualizarProfesorPeriodoCant;
 var
-  i, j, p, s: Smallint;
+  I, j, p, s: Smallint;
   q, r: PSmallintArray;
 begin
   with ModeloHorario do
   begin
-    for i := 0 to FProfesorCant - 1 do
-      FillChar(FProfesorPeriodoCant[i, 0], FPeriodoCant *
-        SizeOf(Smallint), #0);
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FProfesorCant - 1 do
+      FillChar(FProfesorPeriodoCant[I, 0], FPeriodoCant * SizeOf(Smallint), #0);
+    for I := 0 to FParaleloCant - 1 do
     begin
-      q := @ParaleloPeriodoASesion[i, 0];
-      r := @FParaleloMateriaAProfesor[i, 0];
+      q := @ParaleloPeriodoASesion[I, 0];
+      r := @FParaleloMateriaAProfesor[I, 0];
       for j := 0 to FPeriodoCant - 1 do
       begin
         s := q[j];
@@ -1810,17 +1728,16 @@ end;
 
 procedure TTimeTable.ActualizarAulaTipoPeriodoCant;
 var
-  i, j, a, s: Smallint;
+  I, j, a, s: Smallint;
   q: PSmallintArray;
 begin
   with ModeloHorario do
   begin
-    for i := 0 to FAulaTipoCant - 1 do
-      FillChar(FAulaTipoPeriodoCant[i, 0], FPeriodoCant *
-        SizeOf(Smallint), #0);
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FAulaTipoCant - 1 do
+      FillChar(FAulaTipoPeriodoCant[I, 0], FPeriodoCant * SizeOf(Smallint), #0);
+    for I := 0 to FParaleloCant - 1 do
     begin
-      q := @ParaleloPeriodoASesion[i, 0];
+      q := @ParaleloPeriodoASesion[I, 0];
       for j := 0 to FPeriodoCant - 1 do
       begin
         s := q[j];
@@ -1834,17 +1751,16 @@ begin
   end;
 end;
 
-function TTimeTable.EvaluarIntercambioInterno(AParalelo, APeriodo,
-  APeriodo1: Smallint): Double;
+function TTimeTable.EvaluarIntercambioInterno
+  (AParalelo, APeriodo, APeriodo1: Smallint): Double;
 var
   d, d1, s, s1, di, di1, hl, hl1, m, m1, p, p1: Smallint;
   q, r: PSmallintArray;
-  FIncDiaProfesorCantHora,
-    FIncProfesorPeriodoCant: TDynamicSmallintArrayArray;
+  FIncDiaProfesorCantHora, FIncProfesorPeriodoCant: TDynamicSmallintArrayArray;
   // TList sera usado como arreglo de enteros de 32 bits, no de punteros!
   procedure InsertarCambio(d, p: Smallint);
   var
-    v: Longword;
+    v: LongWord;
   begin
     v := d shl 16 + p;
     if FAntListaCambios.IndexOf(Pointer(v)) < 0 then
@@ -2011,13 +1927,11 @@ var
       iMax := -1;
       iMin := 32767;
       with ModeloHorario do
-        for h_ := FDiaHoraAPeriodo[di, 0] to
-          FDiaAMaxPeriodo[di] do
+        for h_ := FDiaHoraAPeriodo[di, 0] to FDiaAMaxPeriodo[di] do
         begin
-          if (FIncProfesorPeriodoCant[p, h_] +
-            FProfesorPeriodoCant[p, h_] > 0) or
-            (FProfesorProhibicionTipoAValor[
-            FProfesorPeriodoAProfesorProhibicionTipo[p, h_]] =
+          if (FIncProfesorPeriodoCant[p, h_] + FProfesorPeriodoCant[p, h_] > 0)
+            or (FProfesorProhibicionTipoAValor[
+              FProfesorPeriodoAProfesorProhibicionTipo[p, h_]] =
               FMaxProfesorProhibicionTipoValor) then
           begin
             iMax := FPeriodoAHora[h_];
@@ -2031,20 +1945,21 @@ var
       else
         Result := iMax - iMin + 1 - iCant;
     end;
+
   var
     p, di: Smallint;
-    pd: Longword;
-    i: Integer;
+    pd: LongWord;
+    I: Integer;
   begin
     Result := 0;
     with FModeloHorario do
-      for i := FAntListaCambios.Count - 1 downto 0 do
+      for I := FAntListaCambios.Count - 1 downto 0 do
       begin
-        pd := Longword(FAntListaCambios.Items[i]);
+        pd := LongWord(FAntListaCambios.Items[I]);
         p := Smallint(pd);
         di := Smallint(pd shr 16);
-        Inc(Result, GetAntDiaProfesorFraccionamiento(di, p) -
-          FDiaProfesorFraccionamiento[di, p]);
+        Inc(Result, GetAntDiaProfesorFraccionamiento(di, p)
+            - FDiaProfesorFraccionamiento[di, p]);
       end;
   end;
   procedure ActMateriaDiaMinMaxEntraMovido;
@@ -2063,6 +1978,7 @@ var
         end;
       end;
     end;
+
   var
     m_, di_, h, s_, j_: Smallint;
   begin
@@ -2156,8 +2072,8 @@ var
         begin
           di_ := FPeriodoADia[j_];
           m_ := FSesionAMateria[s_];
-          t := FParaleloMateriaDiaMaxHora[AParalelo, m_, di_]
-            - FParaleloMateriaDiaMinHora[AParalelo, m_, di_];
+          t := FParaleloMateriaDiaMaxHora[AParalelo, m_, di_] -
+            FParaleloMateriaDiaMinHora[AParalelo, m_, di_];
           if t >= 0 then
           begin
             Dec(Result, Abs(t + 1 - d_));
@@ -2246,10 +2162,12 @@ var
     with FModeloHorario do
     begin
       if s >= 0 then
-        a := FSesionAAulaTipo[s] else
+        a := FSesionAAulaTipo[s]
+      else
         a := -1;
       if s1 >= 0 then
-        a1 := FSesionAAulaTipo[s1] else
+        a1 := FSesionAAulaTipo[s1]
+      else
         a1 := -1;
       if a = a1 then
         Result := 0
@@ -2263,8 +2181,7 @@ var
           begin
             if AulaTipoPeriodoCant[a, APeriodo1 + l] >= c then
               Inc(Result);
-            if AulaTipoPeriodoCant[a, APeriodo + l] > c
-              then
+            if AulaTipoPeriodoCant[a, APeriodo + l] > c then
               Dec(Result);
           end;
         end;
@@ -2448,8 +2365,8 @@ var
   end;
   function _EvaluarMateriaNoDispersaMovido: Smallint;
   begin
-    FAntMateriaNoDispersa := GetParaleloMateriaNoDispersa(AParalelo,
-      FAntMateriaDiaMaxHora);
+    FAntMateriaNoDispersa := GetParaleloMateriaNoDispersa
+      (AParalelo, FAntMateriaDiaMaxHora);
     Result := FAntMateriaNoDispersa - FParaleloMateriaNoDispersa[AParalelo];
   end;
   function _EvaluarMateriaProhibicion: Double;
@@ -2480,10 +2397,8 @@ var
         begin
           for k := 0 to d - 1 do
           begin
-            mp1 := FMateriaPeriodoAMateriaProhibicionTipo[m1,
-              APeriodo1 + k];
-            mp := FMateriaPeriodoAMateriaProhibicionTipo[m1,
-              APeriodo + k];
+            mp1 := FMateriaPeriodoAMateriaProhibicionTipo[m1, APeriodo1 + k];
+            mp := FMateriaPeriodoAMateriaProhibicionTipo[m1, APeriodo + k];
             if mp <> mp1 then
             begin
               if mp1 >= 0 then
@@ -2559,12 +2474,10 @@ var
           p := r[m];
           for k := 0 to d - 1 do
           begin
-            pp := FProfesorPeriodoAProfesorProhibicionTipo[p,
-              APeriodo + k];
+            pp := FProfesorPeriodoAProfesorProhibicionTipo[p, APeriodo + k];
             if pp >= 0 then
               Result := Result - FProfesorProhibicionTipoAValor[pp];
-            pp := FProfesorPeriodoAProfesorProhibicionTipo[p,
-              APeriodo1 + k];
+            pp := FProfesorPeriodoAProfesorProhibicionTipo[p, APeriodo1 + k];
             if pp >= 0 then
               Result := Result + FProfesorProhibicionTipoAValor[pp];
           end;
@@ -2574,12 +2487,10 @@ var
           p1 := r[m1];
           for k := 0 to d - 1 do
           begin
-            pp := FProfesorPeriodoAProfesorProhibicionTipo[p1,
-              APeriodo1 + k];
+            pp := FProfesorPeriodoAProfesorProhibicionTipo[p1, APeriodo1 + k];
             if pp >= 0 then
               Result := Result - FProfesorProhibicionTipoAValor[pp];
-            pp := FProfesorPeriodoAProfesorProhibicionTipo[p1,
-              APeriodo + k];
+            pp := FProfesorPeriodoAProfesorProhibicionTipo[p1, APeriodo + k];
             if pp >= 0 then
               Result := Result + FProfesorProhibicionTipoAValor[pp];
           end;
@@ -2638,6 +2549,7 @@ var
       end;
     end;
   end;
+
 begin
   with FModeloHorario do
   begin
@@ -2672,10 +2584,9 @@ begin
     di1 := FPeriodoADia[APeriodo1 + d1 - 1];
     hl1 := FDiaAMaxPeriodo[di1];
     SetLength(FIncDiaProfesorCantHora, FDiaCant, FProfesorCant);
-    SetLength(FIncProfesorPeriodoCant, FProfesorCant,
-      FPeriodoCant);
+    SetLength(FIncProfesorPeriodoCant, FProfesorCant, FPeriodoCant);
     ActMateriaDiaMinMaxEntraMovido;
-      //ActDiaProfesorMinMaxEntraMovido;
+    // ActDiaProfesorMinMaxEntraMovido;
     FAntListaCambios.Clear;
     if d = d1 then
     begin
@@ -2700,47 +2611,46 @@ begin
   end;
 end;
 
-{ $DEFINE DEBUG}
 {
-procedure TObjetoModeloHorario.Check(AParalelo: Smallint; s: string);
-var
+  procedure TObjetoModeloHorario.Check(AParalelo: Smallint; s: string);
+  var
   j, d: Smallint;
   p: PSmallintArray;
   q: PLongintArray;
-begin
+  begin
   p := @FParaleloPeriodoASesion[AParalelo, 0];
   q := @FClaveAleatoria[AParalelo, 0];
   j := 0;
   with ModeloHorario do
   begin
-    while j < FPeriodoCant do
-    begin
-      d := FSesionADuracion[p[j]];
-      if q[j] <> q[j + d - 1] then
-        raise Exception.Create('Error de sincronizacion entre clave aleatoria, duracion y periodos ' + s);
-      if p[j] <> p[j + d - 1] then
-        raise Exception.Create('Error de sincronizacion entre sesion, duracion y periodos ' + s);
-      j := j + d;
-    end;
+  while j < FPeriodoCant do
+  begin
+  d := FSesionADuracion[p[j]];
+  if q[j] <> q[j + d - 1] then
+  raise Exception.Create('Error de sincronizacion entre clave aleatoria, duracion y periodos ' + s);
+  if p[j] <> p[j + d - 1] then
+  raise Exception.Create('Error de sincronizacion entre sesion, duracion y periodos ' + s);
+  j := j + d;
   end;
-end;
+  end;
+  end;
 
-procedure TObjetoModeloHorario.Check(s: string);
-var
+  procedure TObjetoModeloHorario.Check(s: string);
+  var
   i: Smallint;
-begin
+  begin
   with ModeloHorario do
   begin
-    for i := 0 to FParaleloCant - 1 do
-    begin
-      Check(i, s);
-    end;
+  for i := 0 to FParaleloCant - 1 do
+  begin
+  Check(i, s);
   end;
-end;
+  end;
+  end;
 }
 
-function TTimeTable.DescensoRapidoPuntualInterno(AParalelo: Smallint;
-  var Delta: Double): Boolean;
+function TTimeTable.DescensoRapidoPuntualInterno
+  (AParalelo: Smallint; var Delta: Double): Boolean;
 var
   j, j1, d: Smallint;
   dk: Double;
@@ -2774,10 +2684,10 @@ end;
 
 function TTimeTable.DescensoRapidoPuntualInterno(var Delta: Double): Boolean;
 var
-  ci, i, j, j1, d: Smallint;
+  ci, I, j, j1, d: Smallint;
   dk: Double;
-  RandomOrdersi: array[0..4095] of Smallint;
-  RandomValues: array[0..4095] of Longint;
+  RandomOrdersi: array [0 .. 4095] of Smallint;
+  RandomValues: array [0 .. 4095] of Longint;
   p: PSmallintArray;
 begin
   with FModeloHorario do
@@ -2792,19 +2702,19 @@ begin
     ci := 0;
     while ci < FParaleloCant do
     begin
-      i := RandomOrdersi[ci];
+      I := RandomOrdersi[ci];
       j := 0;
-      p := @FParaleloPeriodoASesion[i, 0];
+      p := @FParaleloPeriodoASesion[I, 0];
       while j < FPeriodoCant do
       begin
         j1 := j + FSesionADuracion[p[j]];
         while j1 < FPeriodoCant do
         begin
           d := FSesionADuracion[p[j1]];
-          dk := EvaluarIntercambioInterno(i, j, j1);
+          dk := EvaluarIntercambioInterno(I, j, j1);
           if Delta + dk < 0 then
           begin
-            IntercambiarInterno(i, j, j1, True);
+            IntercambiarInterno(I, j, j1, True);
             Delta := Delta + dk;
             Result := False;
             Exit;
@@ -2820,13 +2730,13 @@ end;
 
 function TTimeTable.DescensoRapidoOptimizadoInterno(Step: Integer): Boolean;
 var
-  j, j1, d, d1, ci, i, k, s, l: Smallint;
+  j, j1, d, d1, ci, I, k, s, l: Smallint;
   dk, v1: Double;
-  RandomOrdersi: array[0..4095] of Smallint;
-  RandomValues: array[0..4095] of Longint;
+  RandomOrdersi: array [0 .. 4095] of Smallint;
+  RandomValues: array [0 .. 4095] of Longint;
   p: PSmallintArray;
   Stop: Boolean;
-  {Continuar: Boolean;}
+  { Continuar: Boolean; }
 begin
   Actualizar;
   DoGetValor;
@@ -2837,16 +2747,17 @@ begin
       RandomOrdersi[ci] := ci;
       RandomValues[ci] := $7FFFFFFF;
     end;
-    for i := 0 to FProfesorCant - 1 do
+    for I := 0 to FProfesorCant - 1 do
     begin
       for j := 0 to FPeriodoCant - 1 do
       begin
-        if FProfesorPeriodoCant[i, j] > 1 then
+        if FProfesorPeriodoCant[I, j] > 1 then
         begin
           for k := 0 to FParaleloCant - 1 do
           begin
             s := FParaleloPeriodoASesion[k, j];
-            if (s >= 0) and (FParaleloMateriaAProfesor[k, FSesionAMateria[s]] = i) then
+            if (s >= 0) and (FParaleloMateriaAProfesor[k, FSesionAMateria[s]]
+                = I) then
               RandomValues[k] := rand32 div 2;
           end;
         end;
@@ -2863,10 +2774,10 @@ begin
     v1 := Valor;
     while ci < l do
     begin
-      {Continuar := True;}
-      i := RandomOrdersi[ci];
+      { Continuar := True; }
+      I := RandomOrdersi[ci];
       j := 0;
-      p := @FParaleloPeriodoASesion[i, 0];
+      p := @FParaleloPeriodoASesion[I, 0];
       while j < FPeriodoCant do
       begin
         j1 := j + FSesionADuracion[p[j]];
@@ -2874,38 +2785,39 @@ begin
         begin
           Stop := False;
           // Max := l * Sqr(FPeriodoCant);
-          DoProgress((j + ci * FPeriodoCant) * FPeriodoCant + j1, Step, Self, Stop);
+          DoProgress((j + ci * FPeriodoCant) * FPeriodoCant + j1, Step, Self,
+            Stop);
           if Stop then
             Exit;
-          dk := EvaluarIntercambioInterno(i, j, j1);
+          dk := EvaluarIntercambioInterno(I, j, j1);
           d := FSesionADuracion[p[j]];
           d1 := FSesionADuracion[p[j1]];
-          IntercambiarInterno(i, j, j1, True);
+          IntercambiarInterno(I, j, j1, True);
           if dk < 0 then
           begin
             Result := False;
           end
           else
           begin
-            if DescensoRapidoPuntualInterno(i, dk) then
+            if DescensoRapidoPuntualInterno(I, dk) then
             begin
-              IntercambiarInterno(i, j, j1 + d1 - d);
+              IntercambiarInterno(I, j, j1 + d1 - d);
               dk := 0;
             end
             else
             begin
-              Normalizar(i, j);
+              Normalizar(I, j);
               Result := False;
             end;
           end;
           v1 := v1 + dk;
-          Normalizar(i, j1);
+          Normalizar(I, j1);
           Inc(j1, FSesionADuracion[p[j1]]);
         end;
-        Normalizar(i, j);
+        Normalizar(I, j);
         Inc(j, FSesionADuracion[p[j]]);
       end;
-      {if Continuar then}
+      { if Continuar then }
       Inc(ci);
     end;
   end;
@@ -2913,14 +2825,14 @@ end;
 
 function TTimeTable.DescensoRapidoDobleInterno(Step: Integer): Boolean;
 var
-  j, j1, d, d1, ci, i{, k}: Smallint;
+  j, j1, d, d1, ci, I { , k } : Smallint;
   dk, v1: Double;
   Position: Integer;
-  RandomOrdersi: array[0..4095] of Smallint;
-  RandomValues: array[0..4095] of Longint;
+  RandomOrdersi: array [0 .. 4095] of Smallint;
+  RandomValues: array [0 .. 4095] of Longint;
   p: PSmallintArray;
   Stop: Boolean;
-  {Continuar: Boolean;}
+  { Continuar: Boolean; }
 begin
   Actualizar;
   DoGetValor;
@@ -2938,10 +2850,10 @@ begin
     Position := 0;
     while ci < FParaleloCant do
     begin
-      {Continuar := True;}
-      i := RandomOrdersi[ci];
+      { Continuar := True; }
+      I := RandomOrdersi[ci];
       j := 0;
-      p := @FParaleloPeriodoASesion[i, 0];
+      p := @FParaleloPeriodoASesion[I, 0];
       while j < FPeriodoCant do
       begin
         j1 := j + FSesionADuracion[p[j]];
@@ -2950,15 +2862,15 @@ begin
         begin
           Stop := False;
           // Position := ci * FPeriodoCant * (FPeriodoCant - 1) div 2
-          //   + j * (FPeriodoCant - 1) - j * (j - 1) div 2 + j1 - k
+          // + j * (FPeriodoCant - 1) - j * (j - 1) div 2 + j1 - k
           DoProgress(Position, Step, Self, Stop);
           if Stop then
             Exit;
           Inc(Position);
-          dk := EvaluarIntercambioInterno(i, j, j1);
+          dk := EvaluarIntercambioInterno(I, j, j1);
           d := FSesionADuracion[p[j]];
           d1 := FSesionADuracion[p[j1]];
-          IntercambiarInterno(i, j, j1, True);
+          IntercambiarInterno(I, j, j1, True);
           if dk < 0 then
           begin
             Result := False;
@@ -2967,59 +2879,59 @@ begin
           begin
             if DescensoRapidoPuntualInterno(dk) then
             begin
-              IntercambiarInterno(i, j, j1 + d1 - d);
+              IntercambiarInterno(I, j, j1 + d1 - d);
               dk := 0;
             end
             else
             begin
-              Normalizar(i, j);
+              Normalizar(I, j);
               Result := False;
             end;
           end;
           v1 := v1 + dk;
-          Normalizar(i, j1);
+          Normalizar(I, j1);
           Inc(j1, FSesionADuracion[p[j1]]);
         end;
-        Normalizar(i, j);
+        Normalizar(I, j);
         Inc(j, FSesionADuracion[p[j]]);
       end;
-      {if Continuar then}
+      { if Continuar then }
       Inc(ci);
     end;
   end;
 end;
 
-{Retorna verdadero cuando no ha descendido}
+{ Retorna verdadero cuando no ha descendido }
 
 function TTimeTable.DescensoRapidoInterno: Boolean;
 begin
-  result := DescensoRapidoInterno(0);
+  Result := DescensoRapidoInterno(0);
 end;
 
 function TTimeTable.DescensoRapidoInterno(Delta: Double): Boolean;
 var
-  ci, i, j, j1, d1: Smallint;
-  dk1{$IFDEF DEBUG}, v1, v2{$ENDIF}: Double;
-  RandomOrdersi: array[0..4095] of Smallint;
-  RandomValues: array[0..4095] of Longint;
+  ci, I, j, j1, d1: Smallint;
+  dk1 {$IFDEF DEBUG}, v1, v2 {$ENDIF}: Double;
+  RandomOrdersi: array [0 .. 4095] of Smallint;
+  RandomValues: array [0 .. 4095] of Longint;
   p: PSmallintArray;
-  {Continuar: Boolean;}
+  { Continuar: Boolean; }
 begin
   with ModeloHorario do
   begin
     for ci := 0 to FParaleloCant - 1 do
     begin
       RandomOrdersi[ci] := ci;
-      Randomvalues[ci] := rand32;
+      RandomValues[ci] := rand32;
     end;
     SortLongint(RandomValues, RandomOrdersi, 0, FParaleloCant - 1);
     Result := True;
     ci := 0;
     while ci < FParaleloCant do
     begin
-      {Continuar := True;}
-      i := RandomOrdersi[ci];
-      p := @FParaleloPeriodoASesion[i, 0];
+      { Continuar := True; }
+      I := RandomOrdersi[ci];
+      p := @FParaleloPeriodoASesion[I, 0];
       j := 0;
       while j < FPeriodoCant do
       begin
@@ -3032,10 +2944,10 @@ begin
           DoGetValor;
           v1 := Valor;
 {$ENDIF}
-          dk1 := EvaluarIntercambioInterno(i, j, j1);
-          if (dk1 < Delta) {or ((dk1 = 0) and ((rand32 mod 4) = 0))} then
+          dk1 := EvaluarIntercambioInterno(I, j, j1);
+          if (dk1 < Delta) { or ((dk1 = 0) and ((rand32 mod 4) = 0)) } then
           begin
-            IntercambiarInterno(i, j, j1, True);
+            IntercambiarInterno(I, j, j1, True);
 {$IFDEF DEBUG}
             Actualizar;
             DoGetValor;
@@ -3045,12 +2957,12 @@ begin
 {$ENDIF}
             Result := False;
           end;
-          {Continuar := Continuar and (dk1 >= 0);}
+          { Continuar := Continuar and (dk1 >= 0); }
           Inc(j1, d1);
         end;
         Inc(j, FSesionADuracion[p[j]]);
       end;
-      {if Continuar then}
+      { if Continuar then }
       Inc(ci);
     end;
   end;
@@ -3058,10 +2970,10 @@ end;
 
 function TTimeTable.DescensoRapido: Boolean;
 begin
-  //Check('DescensoRapidoAntes');
+  // Check('DescensoRapidoAntes');
   Result := DescensoRapidoInterno;
   RecalcularValor := True;
-  //Check('DescensoRapidoDespues');
+  // Check('DescensoRapidoDespues');
 end;
 
 function TTimeTable.DescensoRapidoDoble(Step: Integer): Boolean;
@@ -3080,7 +2992,7 @@ end;
 procedure TTimeTable.DescensoRapidoDobleForzado(Step: Integer);
 begin
   repeat
-    //Application.ProcessMessages;
+    // Application.ProcessMessages;
   until DescensoRapidoDobleInterno(Step);
   RecalcularValor := True;
 end;
@@ -3088,16 +3000,16 @@ end;
 procedure TTimeTable.DescensoRapidoForzado;
 begin
   repeat
-    //Application.ProcessMessages;
+    // Application.ProcessMessages;
   until DescensoRapidoInterno;
   RecalcularValor := True;
 end;
 
-{procedure TObjetoModeloHorario.DescensoRapido2(CallBack: TCountFunc);
-begin
+{ procedure TObjetoModeloHorario.DescensoRapido2(CallBack: TCountFunc);
+  begin
   DescensoRapidoInterno2(CallBack);
   RecalcularValor := True;
-end;}
+  end; }
 
 destructor TTimeTable.Destroy;
 begin
@@ -3106,17 +3018,16 @@ begin
   inherited Destroy;
 end;
 
-procedure TTimeTable.Assign(ATimeTable:
-  TTimeTable);
+procedure TTimeTable.Assign(ATimeTable: TTimeTable);
 var
-  i, m, p, a, d: Smallint;
+  I, m, p, a, d: Smallint;
 begin
   with ModeloHorario do
   begin
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FParaleloCant - 1 do
     begin
-      Move(ATimeTable.ParaleloPeriodoASesion[i, 0], ParaleloPeriodoASesion[i, 0],
-        FPeriodoCant * SizeOf(Smallint));
+      Move(ATimeTable.ParaleloPeriodoASesion[I, 0],
+        ParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint));
     end;
     if ATimeTable.RecalcularValor then
       RecalcularValor := True
@@ -3131,96 +3042,93 @@ begin
       FMateriaProhibicion := ATimeTable.FMateriaProhibicion;
       FProfesorProhibicion := ATimeTable.FProfesorProhibicion;
       FMateriaProhibicionValor := ATimeTable.FMateriaProhibicionValor;
-      FProfesorProhibicionValor :=
-        ATimeTable.FProfesorProhibicionValor;
+      FProfesorProhibicionValor := ATimeTable.FProfesorProhibicionValor;
       FValor := ATimeTable.FValor;
       RecalcularValor := False;
     end;
     Move(ATimeTable.FParaleloMateriaNoDispersa[0],
       FParaleloMateriaNoDispersa[0], FParaleloCant * SizeOf(Smallint));
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FParaleloCant - 1 do
     begin
       for m := 0 to FMateriaCant - 1 do
       begin
-        Move(ATimeTable.FParaleloMateriaDiaMinHora[i, m, 0],
-          FParaleloMateriaDiaMinHora[i, m, 0], FDiaCant * SizeOf(Smallint));
-        Move(ATimeTable.FParaleloMateriaDiaMaxHora[i, m, 0],
-          FParaleloMateriaDiaMaxHora[i, m, 0], FDiaCant * SizeOf(Smallint));
+        Move(ATimeTable.FParaleloMateriaDiaMinHora[I, m, 0],
+          FParaleloMateriaDiaMinHora[I, m, 0], FDiaCant * SizeOf(Smallint));
+        Move(ATimeTable.FParaleloMateriaDiaMaxHora[I, m, 0],
+          FParaleloMateriaDiaMaxHora[I, m, 0], FDiaCant * SizeOf(Smallint));
       end;
     end;
     for m := 0 to FMateriaCant - 1 do
-      Move(ATimeTable.FMateriaPeriodoCant[m, 0],
-        FMateriaPeriodoCant[m, 0], FPeriodoCant *
-        SizeOf(Smallint));
+      Move(ATimeTable.FMateriaPeriodoCant[m, 0], FMateriaPeriodoCant[m, 0],
+        FPeriodoCant * SizeOf(Smallint));
     for p := 0 to FProfesorCant - 1 do
-      Move(ATimeTable.FProfesorPeriodoCant[p, 0],
-        FProfesorPeriodoCant[p, 0], FPeriodoCant *
-        SizeOf(Smallint));
+      Move(ATimeTable.FProfesorPeriodoCant[p, 0], FProfesorPeriodoCant[p, 0],
+        FPeriodoCant * SizeOf(Smallint));
     for d := 0 to FDiaCant - 1 do
     begin
       Move(ATimeTable.FDiaProfesorFraccionamiento[d, 0],
         FDiaProfesorFraccionamiento[d, 0], FProfesorCant * SizeOf(Smallint));
 
-      {Move(AObjetoModeloHorario.FDiaProfesorSumaHora[d, 0],
+      { Move(AObjetoModeloHorario.FDiaProfesorSumaHora[d, 0],
         FDiaProfesorSumaHora[d, 0], FProfesorCant * SizeOf(Smallint));
-      Move(AObjetoModeloHorario.FDiaProfesorSumaCuadradoHora[d, 0],
-        FDiaProfesorSumaCuadradoHora[d, 0], FProfesorCant * SizeOf(Smallint));}
+        Move(AObjetoModeloHorario.FDiaProfesorSumaCuadradoHora[d, 0],
+        FDiaProfesorSumaCuadradoHora[d, 0], FProfesorCant * SizeOf(Smallint)); }
     end;
     for a := 0 to FAulaTipoCant - 1 do
-      Move(ATimeTable.FAulaTipoPeriodoCant[a, 0],
-        FAulaTipoPeriodoCant[a, 0], FPeriodoCant *
-        SizeOf(Smallint));
+      Move(ATimeTable.FAulaTipoPeriodoCant[a, 0], FAulaTipoPeriodoCant[a, 0],
+        FPeriodoCant * SizeOf(Smallint));
   end;
 end;
 
 procedure TTimeTable.SaveToFile(const AFileName: string);
 var
   VStrings: TStrings;
-  i, j: Integer;
+  I, j: Integer;
 begin
   VStrings := TStringList.Create;
   with ModeloHorario do
-  try
-    for i := 0 to FParaleloCant - 1 do
-    begin
-      VStrings.Add(Format('Paralelo %d %d %d',
-        [FNivelACodNivel[FParaleloANivel[i]],
-        FEspecializacionACodEspecializacion[FParaleloAEspecializacion[i]],
-          FParaleloIdACodParaleloId[FParaleloAParaleloId[i]]]));
-      for j := 0 to FPeriodoCant - 1 do
+    try
+      for I := 0 to FParaleloCant - 1 do
       begin
-        VStrings.Add(Format(' Dia %d Hora %d Materia %d',
-          [FPeriodoADia[j], FPeriodoAHora[j],
-          FMateriaACodMateria[FSesionAMateria[ParaleloPeriodoASesion[i, j]]]]));
+        VStrings.Add(Format('Paralelo %d %d %d',
+            [FNivelACodNivel[FParaleloANivel[I]],
+            FEspecializacionACodEspecializacion[FParaleloAEspecializacion[I]],
+            FParaleloIdACodParaleloId[FParaleloAParaleloId[I]]]));
+        for j := 0 to FPeriodoCant - 1 do
+        begin
+          VStrings.Add(Format(' Dia %d Hora %d Materia %d', [FPeriodoADia[j],
+              FPeriodoAHora[j],
+              FMateriaACodMateria[FSesionAMateria[ParaleloPeriodoASesion[I, j]]]
+                ]));
+        end;
       end;
+      VStrings.SaveToFile(AFileName);
+    finally
+      VStrings.Free;
     end;
-    VStrings.SaveToFile(AFileName);
-  finally
-    VStrings.Free;
-  end;
 end;
 
 procedure TTimeTable.SaveToStream(Stream: TStream);
 var
-  i: Smallint;
+  I: Smallint;
 begin
   with FModeloHorario do
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FParaleloCant - 1 do
     begin
-      Stream.Write(ParaleloPeriodoASesion[i, 0], FPeriodoCant *
-        SizeOf(Smallint));
+      Stream.Write(ParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint)
+        );
     end;
 end;
 
 procedure TTimeTable.LoadFromStream(Stream: TStream);
 var
-  i: Smallint;
+  I: Smallint;
 begin
   with FModeloHorario do
-    for i := 0 to FParaleloCant - 1 do
+    for I := 0 to FParaleloCant - 1 do
     begin
-      Stream.Read(ParaleloPeriodoASesion[i, 0], FPeriodoCant *
-        SizeOf(Smallint));
+      Stream.Read(ParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint)
+        );
     end;
   Actualizar;
   FRecalcularValor := True;
@@ -3259,7 +3167,7 @@ var
   var
     FieldHorario, FieldNivel, FieldParaleloId, FieldEspecializacion, FieldDia,
       FieldHora, FieldMateria, FieldSesion: TField;
-    i, j, k, l, m, s: Integer;
+    I, j, k, l, m, s: Integer;
   begin
     with ModeloHorario, SourceDataModule.TbHorarioDetalle do
     begin
@@ -3274,15 +3182,15 @@ var
         FieldHora := FindField('CodHora');
         FieldMateria := FindField('CodMateria');
         FieldSesion := FindField('Sesion');
-        for i := 0 to FParaleloCant - 1 do
+        for I := 0 to FParaleloCant - 1 do
         begin
-          k := FNivelACodNivel[FParaleloANivel[i]];
-          l := FParaleloIdACodParaleloId[FParaleloAParaleloId[i]];
-          m :=
-            FEspecializacionACodEspecializacion[FParaleloAEspecializacion[i]];
+          k := FNivelACodNivel[FParaleloANivel[I]];
+          l := FParaleloIdACodParaleloId[FParaleloAParaleloId[I]];
+          m := FEspecializacionACodEspecializacion
+            [FParaleloAEspecializacion[I]];
           for j := 0 to FPeriodoCant - 1 do
           begin
-            s := ParaleloPeriodoASesion[i, j];
+            s := ParaleloPeriodoASesion[I, j];
             if s >= 0 then
             begin
               Append;
@@ -3303,6 +3211,7 @@ var
       end;
     end;
   end;
+
 begin
   SourceDataModule.CheckRelations := False;
   try
@@ -3313,8 +3222,7 @@ begin
   end;
 end;
 
-function TTimeTable.GetDiaProfesorFraccionamiento(di, p: Smallint):
-  Smallint;
+function TTimeTable.GetDiaProfesorFraccionamiento(di, p: Smallint): Smallint;
 var
   h_, iMax, iMin, iCant, n: Smallint;
   q: PSmallintArray;
@@ -3331,7 +3239,7 @@ begin
     for h_ := FDiaHoraAPeriodo[di, 0] to n do
     begin
       if (q[h_] > 0) or (FProfesorProhibicionTipoAValor[r[h_]] =
-        FMaxProfesorProhibicionTipoValor) then
+          FMaxProfesorProhibicionTipoValor) then
       begin
         iMax := FPeriodoAHora[h_];
         Inc(iCant);
@@ -3346,12 +3254,11 @@ begin
     Result := iMax - iMin + 1 - iCant;
 end;
 
-
 procedure TTimeTable.LoadFromDataModule(CodHorario: Integer);
 var
-  FieldNivel, FieldParaleloId, FieldEspecializacion, FieldDia,
-    FieldHora, FieldSesion: TLongintField;
-  i, j: Smallint;
+  FieldNivel, FieldParaleloId, FieldEspecializacion, FieldDia, FieldHora,
+    FieldSesion: TLongintField;
+  I, j: Smallint;
 begin
   with SourceDataModule, ModeloHorario, TbHorarioDetalle do
   begin
@@ -3366,21 +3273,21 @@ begin
       FieldDia := FindField('CodDia') as TLongintField;
       FieldHora := FindField('CodHora') as TLongintField;
       FieldSesion := FindField('Sesion') as TLongintField;
-      for i := 0 to FParaleloCant - 1 do
-        FillChar(FParaleloPeriodoASesion[i, 0], FPeriodoCant *
-          SizeOf(Smallint), #$FF);
+      for I := 0 to FParaleloCant - 1 do
+        FillChar(FParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint)
+            , #$FF);
       First;
       while not Eof do
       begin
-        i := FCursoParaleloIdAParalelo[FNivelEspecializacionACurso[
-          FCodNivelANivel[FieldNivel.AsInteger - FMinCodNivel],
-          FCodEspecializacionAEspecializacion[FieldEspecializacion.AsInteger
-          - FMinCodEspecializacion]],
+        I := FCursoParaleloIdAParalelo[FNivelEspecializacionACurso
+          [FCodNivelANivel[FieldNivel.AsInteger - FMinCodNivel],
+          FCodEspecializacionAEspecializacion[FieldEspecializacion.AsInteger -
+          FMinCodEspecializacion]],
           FCodParaleloIdAParaleloId[FieldParaleloId.AsInteger -
           FMinCodParaleloId]];
-        j := FDiaHoraAPeriodo[FCodDiaADia[FieldDia.AsInteger -
-          FMinCodDia], FCodHoraAHora[FieldHora.AsInteger - FMinCodHora]];
-        FParaleloPeriodoASesion[i, j] := FieldSesion.AsInteger;
+        j := FDiaHoraAPeriodo[FCodDiaADia[FieldDia.AsInteger - FMinCodDia],
+          FCodHoraAHora[FieldHora.AsInteger - FMinCodHora]];
+        FParaleloPeriodoASesion[I, j] := FieldSesion.AsInteger;
         Next;
       end;
     finally
@@ -3402,8 +3309,8 @@ begin
   ActualizarDiaProfesorFraccionamiento;
 end;
 
-procedure TModeloHorario.DoProgress(I, Step: Integer;
-  Horario: TTimeTable; var Stop: Boolean);
+procedure TModeloHorario.DoProgress(I, Step: Integer; Horario: TTimeTable;
+  var Stop: Boolean);
 begin
   if Assigned(FOnProgress) then
     FOnProgress(I, Step, Horario, Stop);
@@ -3414,13 +3321,13 @@ begin
   inherited Destroy;
 end;
 
-
 initialization
-  //SortLongint := QuicksortLongint;
-  //SortSmallint := QuicksortSmallint;
-  //lSort := lQuicksort;
-  SortLongint := BubblesortLongint;
-  SortSmallint := BubblesortSmallint;
-  lSort := lBubblesort;
-end.
 
+// SortLongint := QuicksortLongint;
+// SortSmallint := QuicksortSmallint;
+// lSort := lQuicksort;
+SortLongint := BubblesortLongint;
+SortSmallint := BubblesortSmallint;
+lSort := lBubblesort;
+
+end.

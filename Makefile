@@ -21,7 +21,7 @@ DBUNITS=Ac2DMUtl Ac2PxUtl Acc2DM Acc2Pdx Acc2SQL AccUtl DBPack PdxUtils
 
 APPVERSION=1.2.2
 APPNAME=Generador Automatico de Horarios
-BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ \ \ \ %Y)
+BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ %Y)
 
 all: $(INSTALLER) $(TTGSQLITE3)
 
@@ -34,11 +34,11 @@ $(ISS): $(ISS).tmpl $(TTGSQL)
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-# $(TTGEXE):
-# 	cd src/del; $(MAKE) $(TTGEXE)
+SRCTYPE=del
+# SRCTYPE=laz
 
 $(TTGEXE):
-	cd src/laz; $(MAKE) $(TTGEXE)
+	cd src/$(SRCTYPE) ; $(MAKE) $(TTGEXE)
 
 $(DBUTILS): src/dbutils/$(DBUTILSDPR) $(addprefix src/dbutils/, $(addsuffix .pas, $(DBUNITS)))
 	cd src/dbutils; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
@@ -127,3 +127,6 @@ sq3tozeos:
 	  mv -f $$i.dfm.tmp $$i.dfm ; done
 
 dbutils: $(DBUTILS)
+
+test:
+	@echo BUILDDATETIME="$(BUILDDATETIME)"

@@ -716,6 +716,10 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
+  MainForm.Caption := Application.Title;
+{$IFDEF DEBUG}
+  Caption := Caption + ' - Debug Build';
+{$ENDIF}
   FConfigFileName := GetCurrentDir + '/ttg.cfg';
   FConfigStorage := TConfigStorage.Create(Self);
   try
