@@ -5,6 +5,7 @@
     <General>
       <MainUnit Value="0"/>
       <TargetFileExt Value=".exe"/>
+      <Icon Value="0"/>
       <UseXPManifest Value="True"/>
       <ActiveEditorIndexAtStart Value="1"/>
     </General>
@@ -50,8 +51,8 @@
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="55" Y="60"/>
-        <TopLine Value="38"/>
+        <CursorPos X="55" Y="61"/>
+        <TopLine Value="39"/>
         <EditorIndex Value="0"/>
         <UsageCount Value="55"/>
         <Loaded Value="True"/>

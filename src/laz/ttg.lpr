@@ -6,6 +6,7 @@ uses
   Forms,
   Dialogs,
 {$IFDEF FPC}
+  LResources,
   Interfaces,
 {$ENDIF}
   SysUtils,
@@ -50,6 +51,9 @@ uses
 {$IFDEF WINDOWS}{$R ttg.rc}{$ENDIF}
 
 begin
+  {$IFDEF FPC}
+  {$I ttg.lrs}
+  {$ENDIF}
   DecimalSeparator := ',';
   Application.Initialize;
   Application.Title := sAppName + ' ' + sAppVersion;
