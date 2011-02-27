@@ -6,9 +6,8 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, FSingEdt, DB, Grids, Buttons, DBCtrls, ExtCtrls,
-  Printers, ComCtrls, ToolWin, ActnList, FCrsMMER, ImgList, DBGrids, StdCtrls,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  Controls, Forms, Dialogs, FSingEdt, Grids, Buttons, DBCtrls, ExtCtrls,
+  Printers, ComCtrls, ActnList, FCrsMMER, ZDataset;
 
 type
   TMateriaForm = class(TSingleEditorForm)

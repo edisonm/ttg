@@ -5,10 +5,10 @@ unit FHorAulT;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes,
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
   Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, Grids, Db,
-  FCrsMME0, FCrsMME1, DBGrids, ImgList, ComCtrls, ToolWin, DBCtrls, Variants,
-  ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
+  FCrsMME0, FCrsMME1, DBGrids, ComCtrls, DBCtrls, Variants,
+  ZConnection, ZDataset;
 
 type
   THorarioAulaTipoForm = class(TCrossManyToManyEditor1Form)
@@ -49,7 +49,7 @@ type
 
 implementation
 uses
-  DMaster, HorColCm, FConfig, DSource, RelUtils;
+  DMaster, HorColCm, FConfig, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}

@@ -1,268 +1,304 @@
 inherited SourceBaseDataModule: TSourceBaseDataModule
-  object TbAulaTipo: TZTable
+  object TbAulaTipo: TZTable[1]
     Connection = Database
-    TableName = 'AulaTipo'
-    IndexFieldNames = 'CodAulaTipo'
+    SortedFields = 'CodAulaTipo'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 48
-    Top = 48
+    TableName = 'AulaTipo'
+    IndexFieldNames = 'CodAulaTipo Asc'
+    left = 48
+    top = 48
   end
-  object DSAulaTipo: TDataSource
+  object DSAulaTipo: TDatasource[2]
     DataSet = TbAulaTipo
-    Left = 56
-    Top = 40
+    left = 56
+    top = 40
   end
-  object TbEspecializacion: TZTable
+  object TbEspecializacion: TZTable[3]
     Tag = 1
     Connection = Database
-    TableName = 'Especializacion'
-    IndexFieldNames = 'CodEspecializacion'
+    SortedFields = 'CodEspecializacion'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 144
-    Top = 60
+    TableName = 'Especializacion'
+    IndexFieldNames = 'CodEspecializacion Asc'
+    left = 144
+    top = 60
   end
-  object DSEspecializacion: TDataSource
+  object DSEspecializacion: TDatasource[4]
     DataSet = TbEspecializacion
-    Left = 152
-    Top = 52
+    left = 152
+    top = 52
   end
-  object TbDia: TZTable
+  object TbDia: TZTable[5]
     Tag = 2
     Connection = Database
-    TableName = 'Dia'
-    IndexFieldNames = 'CodDia'
+    SortedFields = 'CodDia'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 240
-    Top = 48
+    TableName = 'Dia'
+    IndexFieldNames = 'CodDia Asc'
+    left = 240
+    top = 48
   end
-  object DSDia: TDataSource
+  object DSDia: TDatasource[6]
     DataSet = TbDia
-    Left = 248
-    Top = 40
+    left = 248
+    top = 40
   end
-  object TbMateria: TZTable
+  object TbMateria: TZTable[7]
     Tag = 3
     Connection = Database
-    TableName = 'Materia'
-    IndexFieldNames = 'CodMateria'
+    SortedFields = 'CodMateria'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 336
-    Top = 60
+    TableName = 'Materia'
+    IndexFieldNames = 'CodMateria Asc'
+    left = 336
+    top = 60
   end
-  object DSMateria: TDataSource
+  object DSMateria: TDatasource[8]
     DataSet = TbMateria
-    Left = 344
-    Top = 52
+    left = 344
+    top = 52
   end
-  object TbNivel: TZTable
+  object TbNivel: TZTable[9]
     Tag = 4
     Connection = Database
-    TableName = 'Nivel'
-    IndexFieldNames = 'CodNivel'
+    SortedFields = 'CodNivel'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 432
-    Top = 48
+    TableName = 'Nivel'
+    IndexFieldNames = 'CodNivel Asc'
+    left = 432
+    top = 48
   end
-  object DSNivel: TDataSource
+  object DSNivel: TDatasource[10]
     DataSet = TbNivel
-    Left = 440
-    Top = 40
+    left = 440
+    top = 40
   end
-  object TbHora: TZTable
+  object TbHora: TZTable[11]
     Tag = 5
     Connection = Database
-    TableName = 'Hora'
-    IndexFieldNames = 'CodHora'
+    SortedFields = 'CodHora'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 48
-    Top = 144
+    TableName = 'Hora'
+    IndexFieldNames = 'CodHora Asc'
+    left = 48
+    top = 144
   end
-  object DSHora: TDataSource
+  object DSHora: TDatasource[12]
     DataSet = TbHora
-    Left = 56
-    Top = 136
+    left = 56
+    top = 136
   end
-  object TbHorario: TZTable
+  object TbHorario: TZTable[13]
     Tag = 6
     Connection = Database
-    TableName = 'Horario'
-    IndexFieldNames = 'CodHorario'
+    SortedFields = 'CodHorario'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 144
-    Top = 156
+    TableName = 'Horario'
+    IndexFieldNames = 'CodHorario Asc'
+    left = 144
+    top = 156
   end
-  object DSHorario: TDataSource
+  object DSHorario: TDatasource[14]
     DataSet = TbHorario
-    Left = 152
-    Top = 148
+    left = 152
+    top = 148
   end
-  object TbCurso: TZTable
+  object TbCurso: TZTable[15]
     Tag = 7
     Connection = Database
-    TableName = 'Curso'
-    IndexFieldNames = 'CodNivel;CodEspecializacion'
+    SortedFields = 'CodNivel;CodEspecializacion'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 240
-    Top = 144
+    TableName = 'Curso'
+    IndexFieldNames = 'CodNivel Asc;CodEspecializacion Asc'
+    left = 240
+    top = 144
   end
-  object DSCurso: TDataSource
+  object DSCurso: TDatasource[16]
     DataSet = TbCurso
-    Left = 248
-    Top = 136
+    left = 248
+    top = 136
   end
-  object TbParaleloId: TZTable
+  object TbParaleloId: TZTable[17]
     Tag = 8
     Connection = Database
-    TableName = 'ParaleloId'
-    IndexFieldNames = 'CodParaleloId'
+    SortedFields = 'CodParaleloId'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 336
-    Top = 156
+    TableName = 'ParaleloId'
+    IndexFieldNames = 'CodParaleloId Asc'
+    left = 336
+    top = 156
   end
-  object DSParaleloId: TDataSource
+  object DSParaleloId: TDatasource[18]
     DataSet = TbParaleloId
-    Left = 344
-    Top = 148
+    left = 344
+    top = 148
   end
-  object TbMateriaProhibicionTipo: TZTable
+  object TbMateriaProhibicionTipo: TZTable[19]
     Tag = 9
     Connection = Database
-    TableName = 'MateriaProhibicionTipo'
-    IndexFieldNames = 'CodMateProhibicionTipo'
+    SortedFields = 'CodMateProhibicionTipo'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 432
-    Top = 144
+    TableName = 'MateriaProhibicionTipo'
+    IndexFieldNames = 'CodMateProhibicionTipo Asc'
+    left = 432
+    top = 144
   end
-  object DSMateriaProhibicionTipo: TDataSource
+  object DSMateriaProhibicionTipo: TDatasource[20]
     DataSet = TbMateriaProhibicionTipo
-    Left = 440
-    Top = 136
+    left = 440
+    top = 136
   end
-  object TbPeriodo: TZTable
+  object TbPeriodo: TZTable[21]
     Tag = 10
     Connection = Database
-    TableName = 'Periodo'
-    IndexFieldNames = 'CodDia;CodHora'
+    SortedFields = 'CodDia;CodHora'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 48
-    Top = 240
+    TableName = 'Periodo'
+    IndexFieldNames = 'CodDia Asc;CodHora Asc'
+    left = 48
+    top = 240
   end
-  object DSPeriodo: TDataSource
+  object DSPeriodo: TDatasource[22]
     DataSet = TbPeriodo
-    Left = 56
-    Top = 232
+    left = 56
+    top = 232
   end
-  object TbParalelo: TZTable
+  object TbParalelo: TZTable[23]
     Tag = 11
     Connection = Database
-    TableName = 'Paralelo'
-    IndexFieldNames = 'CodNivel;CodEspecializacion;CodParaleloId'
+    SortedFields = 'CodNivel;CodEspecializacion;CodParaleloId'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 144
-    Top = 252
+    TableName = 'Paralelo'
+    IndexFieldNames = 'CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc'
+    left = 144
+    top = 252
   end
-  object DSParalelo: TDataSource
+  object DSParalelo: TDatasource[24]
     DataSet = TbParalelo
-    Left = 152
-    Top = 244
+    left = 152
+    top = 244
   end
-  object TbProfesor: TZTable
+  object TbProfesor: TZTable[25]
     Tag = 12
     Connection = Database
-    TableName = 'Profesor'
-    IndexFieldNames = 'CodProfesor'
+    SortedFields = 'CodProfesor'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 240
-    Top = 240
+    TableName = 'Profesor'
+    IndexFieldNames = 'CodProfesor Asc'
+    left = 240
+    top = 240
   end
-  object DSProfesor: TDataSource
+  object DSProfesor: TDatasource[26]
     DataSet = TbProfesor
-    Left = 248
-    Top = 232
+    left = 248
+    top = 232
   end
-  object TbMateriaProhibicion: TZTable
+  object TbMateriaProhibicion: TZTable[27]
     Tag = 13
     Connection = Database
-    TableName = 'MateriaProhibicion'
-    IndexFieldNames = 'CodMateria;CodDia;CodHora'
+    SortedFields = 'CodMateria;CodDia;CodHora'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
-    Left = 336
-    Top = 252
+    TableName = 'MateriaProhibicion'
+    IndexFieldNames = 'CodMateria Asc;CodDia Asc;CodHora Asc'
+    left = 336
+    top = 252
   end
-  object DSMateriaProhibicion: TDataSource
+  object DSMateriaProhibicion: TDatasource[28]
     DataSet = TbMateriaProhibicion
-    Left = 344
-    Top = 244
+    left = 344
+    top = 244
   end
-  object TbDistributivo: TZTable
+  object TbDistributivo: TZTable[29]
     Tag = 14
     Connection = Database
-    TableName = 'Distributivo'
-    IndexFieldNames = 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId'
+    SortedFields = 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 432
-    Top = 240
+    TableName = 'Distributivo'
+    IndexFieldNames = 'CodMateria Asc;CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc'
+    left = 432
+    top = 240
   end
-  object DSDistributivo: TDataSource
+  object DSDistributivo: TDatasource[30]
     DataSet = TbDistributivo
-    Left = 440
-    Top = 232
+    left = 440
+    top = 232
   end
-  object TbHorarioDetalle: TZTable
+  object TbHorarioDetalle: TZTable[31]
     Tag = 15
     Connection = Database
-    TableName = 'HorarioDetalle'
-    IndexFieldNames = 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
+    SortedFields = 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
-    Left = 48
-    Top = 336
+    TableName = 'HorarioDetalle'
+    IndexFieldNames = 'CodHorario Asc;CodMateria Asc;CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc;CodDia Asc;CodHora Asc'
+    left = 48
+    top = 336
   end
-  object DSHorarioDetalle: TDataSource
+  object DSHorarioDetalle: TDatasource[32]
     DataSet = TbHorarioDetalle
-    Left = 56
-    Top = 328
+    left = 56
+    top = 328
   end
-  object TbProfesorProhibicionTipo: TZTable
+  object TbProfesorProhibicionTipo: TZTable[33]
     Tag = 16
     Connection = Database
-    TableName = 'ProfesorProhibicionTipo'
-    IndexFieldNames = 'CodProfProhibicionTipo'
+    SortedFields = 'CodProfProhibicionTipo'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
-    Left = 144
-    Top = 348
+    TableName = 'ProfesorProhibicionTipo'
+    IndexFieldNames = 'CodProfProhibicionTipo Asc'
+    left = 144
+    top = 348
   end
-  object DSProfesorProhibicionTipo: TDataSource
+  object DSProfesorProhibicionTipo: TDatasource[34]
     DataSet = TbProfesorProhibicionTipo
-    Left = 152
-    Top = 340
+    left = 152
+    top = 340
   end
-  object TbProfesorProhibicion: TZTable
+  object TbProfesorProhibicion: TZTable[35]
     Tag = 17
     Connection = Database
-    TableName = 'ProfesorProhibicion'
-    IndexFieldNames = 'CodProfesor;CodDia;CodHora'
+    SortedFields = 'CodProfesor;CodDia;CodHora'
+    AutoCalcFields = False
     BeforePost = DataSetBeforePost
-    Left = 240
-    Top = 336
+    TableName = 'ProfesorProhibicion'
+    IndexFieldNames = 'CodProfesor Asc;CodDia Asc;CodHora Asc'
+    left = 240
+    top = 336
   end
-  object DSProfesorProhibicion: TDataSource
+  object DSProfesorProhibicion: TDatasource[36]
     DataSet = TbProfesorProhibicion
-    Left = 248
-    Top = 328
+    left = 248
+    top = 328
   end
 end

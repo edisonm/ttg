@@ -6,8 +6,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, DSrcBase, UConfig, Db, ZConnection, ZDataset,
-  ZAbstractRODataset, ZAbstractDataset, ZAbstractTable;
+  Controls, Forms, Dialogs, DSrcBase, UConfig, Db, ZConnection;
 
 type
   TSourceDataModule = class(TSourceBaseDataModule)

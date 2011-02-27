@@ -5,10 +5,9 @@ unit FHorPara;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes,
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
   Graphics, Controls, Forms, Dialogs, Db, FCrsMMER, StdCtrls, Buttons, ExtCtrls,
-  Grids, Variants, FCrsMME1, DBCtrls, ZConnection, ZAbstractRODataset, DBGrids,
-  ZAbstractDataset, ZAbstractTable, ZDataset, ImgList, ComCtrls, ToolWin;
+  Grids, Variants, FCrsMME1, DBCtrls, ZConnection, DBGrids, ZDataset, ComCtrls;
 
 type
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)
@@ -59,7 +58,7 @@ type
 
 implementation
 uses
-  HorColCm, FSelPeIn, DSource, DMaster, RelUtils;
+  HorColCm, FSelPeIn, DSource, DMaster;
 
 {$IFNDEF FPC}
 {$R *.DFM}

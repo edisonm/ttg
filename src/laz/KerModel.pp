@@ -282,7 +282,7 @@ procedure CruzarIndividuos(var Uno, Dos: TTimeTable);
 implementation
 
 uses
-  SysUtils, SortAlgs, Rand, DSource, TTGUtls;
+  SysUtils, SortAlgs, Rand, DSource, HorColCm;
 
 var
   SortLongint: procedure(var List1: array of Longint;

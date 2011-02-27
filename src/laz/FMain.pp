@@ -13,10 +13,9 @@ TODO:
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes, Graphics,
-  DB, Forms, Dialogs,SysConst, ExtCtrls, Menus, ComCtrls, ImgList, Buttons, ActnList,
-  ToolWin, StdActns, StdCtrls, FSplash, FSingEdt, ZConnection, Controls, FCrsMME0,
-  ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset, FEditor, UConfig
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+  Forms, Dialogs, ExtCtrls, Menus, ComCtrls, Buttons, ActnList,
+  FSplash, FSingEdt, ZConnection, Controls, FCrsMME0, FEditor, UConfig
 {$IFNDEF FREEWARE}, KerEvolE, KerModel, FProgres{$ENDIF};
 
 type
@@ -209,7 +208,7 @@ implementation
 
 uses
   FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd, About,
-  FConfig, FMsgView, TTGUtls, FParalel, Rand, Printers, DSource, DSrcBase;
+  FConfig, FMsgView, FParalel, Rand, Printers, DSource, DSrcBase, HorColCm;
 
 {$IFNDEF FPC}
 {$R *.DFM}

@@ -4,10 +4,10 @@ unit FHorario;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes,
-  Graphics, Controls, Forms, Dialogs, Db, FSingEdt, Grids, DBGrids, StdCtrls,
-  Buttons, FEditor, DBCtrls, ExtCtrls, ImgList, ComCtrls, ToolWin, ActnList,
-  ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset,
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
+  Graphics, Controls, Forms, Dialogs, Db, FSingEdt, Grids,
+  Buttons, FEditor, DBCtrls, ExtCtrls, ComCtrls, ActnList,
+  ZConnection, ZDataset,
   FMasDeEd, FHorProf, FHorAulT, FHorPara;
 
 type
@@ -213,7 +213,7 @@ implementation
 
 uses
   FCrsMMER, DMaster, TTGUtls, FCrsMME1, FConfig, Printers, DSource, FMain,
-  Variants, RelUtils, KerModel, FProgres;
+  Variants, KerModel, FProgres;
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}

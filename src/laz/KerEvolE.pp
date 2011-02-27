@@ -4,7 +4,7 @@ unit KerEvolE;
 interface
 
 uses
-  {$IFDEF UNIX}{cthreads, cmem, }{$ENDIF}{MTProcs, }Classes, SysUtils, DB, KerModel;
+  {$IFDEF UNIX}cthreads, cmem, {$ENDIF}MTProcs, Classes, SysUtils, DB, KerModel;
 
 type
   TTimeTableArray = array of TTimeTable;
@@ -144,7 +144,7 @@ type
 implementation
 
 uses
-  Rand, TTGUtls;
+  Rand, HorColCm;
 
 procedure TEvolElitista.Configurar(ATamPoblacion: Longint);
 var

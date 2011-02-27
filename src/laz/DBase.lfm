@@ -1,13 +1,15 @@
 object BaseDataModule: TBaseDataModule
-
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
+  OldCreateOrder = False
   Height = 480
+  HorizontalOffset = 0
+  VerticalOffset = 0
   Width = 928
   object Database: TZConnection
     Protocol = 'sqlite-3'
     Database = ':memory:'
-    Left = 528
-    Top = 16
+    left = 528
+    top = 16
   end
 end

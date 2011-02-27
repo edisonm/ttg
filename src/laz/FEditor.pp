@@ -6,7 +6,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics, Controls,
-  Forms, Dialogs, DBCtrls, Buttons, ExtCtrls, ComCtrls, ActnList, UConfig, ToolWin, ImgList;
+  Forms, Dialogs, DBCtrls, Buttons, ExtCtrls, ComCtrls, ActnList, UConfig;
 
 type
   TEditorForm = class(TForm)

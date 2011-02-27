@@ -5,10 +5,10 @@ unit FParalel;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes,
-  Graphics, Controls, Forms, Dialogs, Db, FSingEdt, DBGrids, ExtCtrls, DBCtrls,
-  ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset,
-  Grids, CheckLst, StdCtrls, ImgList, ComCtrls, ToolWin, ActnList, Variants;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
+  Graphics, Controls, Forms, Dialogs, Db, FSingEdt, ExtCtrls, DBCtrls,
+  ZConnection,
+  Grids, CheckLst, ComCtrls, ActnList, Variants;
 
 type
   TParaleloForm = class(TSingleEditorForm)

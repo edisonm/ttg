@@ -7,7 +7,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, FSingEdt, Db, Grids, DBGrids, UConfig, Buttons,
-  DBCtrls, ExtCtrls, ComCtrls, ActnList, ImgList, ToolWin, StdCtrls;
+  DBCtrls, ExtCtrls, ComCtrls, ActnList;
 
 type
   TMasterDetailEditorForm = class(TSingleEditorForm)

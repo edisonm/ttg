@@ -7,7 +7,7 @@
       <TargetFileExt Value=".exe"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="0"/>
+      <ActiveEditorIndexAtStart Value="2"/>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
@@ -31,13 +31,12 @@
       <local>
         <FormatVersion Value="1"/>
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
-        <WorkingDirectory Value="/home/edison/apps/pascal/TTG/bin"/>
+        <WorkingDirectory Value="E:/apps/pascal/TTG/bin"/>
       </local>
     </RunParams>
     <RequiredPackages Count="3">
       <Item1>
-        <PackageName Value="zcomponent"/>
-        <MinVersion Major="7" Valid="True"/>
+        <PackageName Value="MultiThreadProcsLaz"/>
       </Item1>
       <Item2>
         <PackageName Value="FCL"/>
@@ -47,14 +46,14 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="69">
+    <Units Count="72">
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="12" Y="9"/>
+        <CursorPos X="51" Y="13"/>
         <TopLine Value="1"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -64,9 +63,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMain"/>
-        <CursorPos X="11" Y="721"/>
-        <TopLine Value="717"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="53" Y="18"/>
+        <TopLine Value="5"/>
+        <UsageCount Value="69"/>
       </Unit1>
       <Unit2>
         <Filename Value="DMaster.pp"/>
@@ -75,28 +74,28 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DMaster"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="40" Y="9"/>
         <TopLine Value="1"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
       </Unit2>
       <Unit3>
         <Filename Value="KerModel.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="KerModel"/>
-        <CursorPos X="45" Y="8"/>
-        <TopLine Value="1"/>
-        <EditorIndex Value="6"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="36" Y="6"/>
+        <TopLine Value="6"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="69"/>
         <Loaded Value="True"/>
       </Unit3>
       <Unit4>
         <Filename Value="KerEvolE.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="KerEvolE"/>
-        <CursorPos X="43" Y="7"/>
-        <TopLine Value="1"/>
-        <EditorIndex Value="1"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="17" Y="147"/>
+        <TopLine Value="7"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="69"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -106,19 +105,19 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FProgres"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="47" Y="8"/>
         <TopLine Value="1"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
       </Unit5>
       <Unit6>
         <Filename Value="SortAlgs.pp"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
       </Unit6>
       <Unit7>
         <Filename Value="Rand.pp"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
       </Unit7>
       <Unit8>
         <Filename Value="About.pp"/>
@@ -126,7 +125,7 @@
         <UnitName Value="About"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
       </Unit8>
       <Unit9>
         <Filename Value="FCrsMMEd.pp"/>
@@ -135,10 +134,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FCrsMMEd"/>
-        <CursorPos X="29" Y="102"/>
-        <TopLine Value="91"/>
-        <EditorIndex Value="8"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="15" Y="68"/>
+        <TopLine Value="54"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="69"/>
         <Loaded Value="True"/>
       </Unit9>
       <Unit10>
@@ -148,9 +147,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FCrsMME0"/>
-        <CursorPos X="7" Y="246"/>
-        <TopLine Value="222"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="2" Y="108"/>
+        <TopLine Value="96"/>
+        <UsageCount Value="69"/>
       </Unit10>
       <Unit11>
         <Filename Value="FCrsMME1.pp"/>
@@ -159,9 +158,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FCrsMME1"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="77" Y="9"/>
         <TopLine Value="1"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
       </Unit11>
       <Unit12>
         <Filename Value="FCrsMMER.pp"/>
@@ -170,9 +169,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FCrsMMER"/>
-        <CursorPos X="3" Y="84"/>
-        <TopLine Value="78"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="30" Y="57"/>
+        <TopLine Value="43"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="69"/>
+        <Loaded Value="True"/>
       </Unit12>
       <Unit13>
         <Filename Value="FEditor.pp"/>
@@ -181,11 +182,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FEditor"/>
-        <CursorPos X="4" Y="183"/>
-        <TopLine Value="171"/>
-        <EditorIndex Value="2"/>
-        <UsageCount Value="59"/>
-        <Loaded Value="True"/>
+        <CursorPos X="83" Y="9"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="69"/>
       </Unit13>
       <Unit14>
         <Filename Value="FMateria.pp"/>
@@ -194,9 +193,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMateria"/>
-        <CursorPos X="26" Y="32"/>
-        <TopLine Value="29"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="41" Y="10"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="69"/>
       </Unit14>
       <Unit15>
         <Filename Value="FProfesr.pp"/>
@@ -205,19 +204,22 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FProfesr"/>
-        <CursorPos X="1" Y="70"/>
-        <TopLine Value="57"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="68" Y="10"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="69"/>
       </Unit15>
       <Unit16>
         <Filename Value="TTGUtls.pp"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="59"/>
+        <UnitName Value="TTGUtls"/>
+        <CursorPos X="23" Y="24"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="69"/>
       </Unit16>
       <Unit17>
         <Filename Value="UConfig.pp"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
       </Unit17>
       <Unit18>
         <Filename Value="FConfig.pp"/>
@@ -228,7 +230,7 @@
         <UnitName Value="FConfig"/>
         <CursorPos X="3" Y="19"/>
         <TopLine Value="9"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
       </Unit18>
       <Unit19>
         <Filename Value="FMsgView.pp"/>
@@ -237,9 +239,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMsgView"/>
-        <CursorPos X="83" Y="7"/>
+        <CursorPos X="47" Y="8"/>
         <TopLine Value="1"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
       </Unit19>
       <Unit20>
         <Filename Value="FHorPara.pp"/>
@@ -248,9 +250,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FHorPara"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="50" Y="10"/>
         <TopLine Value="1"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
       </Unit20>
       <Unit21>
         <Filename Value="FMasDeEd.pp"/>
@@ -259,9 +261,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMasDeEd"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="13" Y="6"/>
         <TopLine Value="1"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
       </Unit21>
       <Unit22>
         <Filename Value="FHorAulT.pp"/>
@@ -270,9 +272,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FHorAulT"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="47" Y="8"/>
         <TopLine Value="1"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
       </Unit22>
       <Unit23>
         <Filename Value="FSplash.pp"/>
@@ -281,9 +283,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FSplash"/>
-        <CursorPos X="7" Y="49"/>
-        <TopLine Value="36"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="47" Y="8"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="69"/>
       </Unit23>
       <Unit24>
         <Filename Value="FParalel.pp"/>
@@ -292,9 +294,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FParalel"/>
-        <CursorPos X="5" Y="69"/>
-        <TopLine Value="51"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="56" Y="11"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="69"/>
       </Unit24>
       <Unit25>
         <Filename Value="FSingEdt.pp"/>
@@ -303,11 +305,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FSingEdt"/>
-        <CursorPos X="38" Y="99"/>
-        <TopLine Value="77"/>
-        <EditorIndex Value="3"/>
-        <UsageCount Value="59"/>
-        <Loaded Value="True"/>
+        <CursorPos X="2" Y="9"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="69"/>
       </Unit25>
       <Unit26>
         <Filename Value="FHorario.pp"/>
@@ -316,18 +316,18 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FHorario"/>
-        <CursorPos X="31" Y="14"/>
-        <TopLine Value="9"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="11" Y="216"/>
+        <TopLine Value="202"/>
+        <UsageCount Value="69"/>
       </Unit26>
       <Unit27>
         <Filename Value="HorColCm.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="HorColCm"/>
-        <CursorPos X="6" Y="120"/>
-        <TopLine Value="113"/>
-        <EditorIndex Value="4"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="69"/>
         <Loaded Value="True"/>
       </Unit27>
       <Unit28>
@@ -337,9 +337,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FHorProf"/>
-        <CursorPos X="1" Y="1"/>
-        <TopLine Value="1"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="38" Y="53"/>
+        <TopLine Value="39"/>
+        <UsageCount Value="69"/>
       </Unit28>
       <Unit29>
         <Filename Value="DSrcBase.pp"/>
@@ -348,9 +348,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSrcBase"/>
-        <CursorPos X="27" Y="94"/>
-        <TopLine Value="77"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="1" Y="73"/>
+        <TopLine Value="59"/>
+        <UsageCount Value="69"/>
       </Unit29>
       <Unit30>
         <Filename Value="RelUtils.pp"/>
@@ -358,7 +358,7 @@
         <UnitName Value="RelUtils"/>
         <CursorPos X="43" Y="672"/>
         <TopLine Value="652"/>
-        <UsageCount Value="59"/>
+        <UsageCount Value="69"/>
       </Unit30>
       <Unit31>
         <Filename Value="DSource.pp"/>
@@ -367,9 +367,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSource"/>
-        <CursorPos X="103" Y="493"/>
-        <TopLine Value="487"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="55" Y="10"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="69"/>
       </Unit31>
       <Unit32>
         <Filename Value="FSelPeIn.pp"/>
@@ -378,9 +378,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FSelPeIn"/>
-        <CursorPos X="6" Y="41"/>
-        <TopLine Value="21"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="47" Y="8"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="69"/>
       </Unit32>
       <Unit33>
         <Filename Value="DBase.pp"/>
@@ -389,139 +389,137 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DBase"/>
-        <CursorPos X="1" Y="241"/>
-        <TopLine Value="228"/>
-        <UsageCount Value="59"/>
+        <CursorPos X="35" Y="10"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="69"/>
       </Unit33>
       <Unit34>
         <Filename Value="ttg.inc"/>
         <CursorPos X="37" Y="4"/>
         <TopLine Value="1"/>
-        <EditorIndex Value="5"/>
-        <UsageCount Value="10"/>
-        <Loaded Value="True"/>
+        <UsageCount Value="9"/>
       </Unit34>
       <Unit35>
         <Filename Value="C:/lazarus/lcl/interfaces/win32/win32wscontrols.pp"/>
         <UnitName Value="Win32WSControls"/>
         <CursorPos X="1" Y="224"/>
         <TopLine Value="213"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit35>
       <Unit36>
         <Filename Value="FMain.lfm"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
         <SyntaxHighlighter Value="LFM"/>
       </Unit36>
       <Unit37>
         <Filename Value="ttg.lrs"/>
         <CursorPos X="1" Y="5236"/>
         <TopLine Value="5212"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
       </Unit37>
       <Unit38>
         <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/include/application.inc"/>
         <CursorPos X="35" Y="1959"/>
         <TopLine Value="1949"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
       </Unit38>
       <Unit39>
         <Filename Value="../../../../usr/share/fpcsrc/2.4.0/packages/fcl-db/src/sqlite/sqlite3ds.pas"/>
         <UnitName Value="Sqlite3DS"/>
         <CursorPos X="32" Y="41"/>
         <TopLine Value="23"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
       </Unit39>
       <Unit40>
         <Filename Value="../../../../usr/share/fpcsrc/2.4.0/packages/sqlite/src/sqlite3.pp"/>
         <UnitName Value="sqlite3"/>
         <CursorPos X="10" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
       </Unit40>
       <Unit41>
         <Filename Value="../../../../usr/share/fpcsrc/2.4.0/packages/sqlite/src/sqlite3.inc"/>
         <CursorPos X="37" Y="387"/>
         <TopLine Value="387"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
       </Unit41>
       <Unit42>
         <Filename Value="../../../../usr/share/fpcsrc/2.4.0/packages/fcl-db/src/sqlite/customsqliteds.pas"/>
         <UnitName Value="CustomSqliteDS"/>
         <CursorPos X="36" Y="95"/>
         <TopLine Value="93"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
       </Unit42>
       <Unit43>
         <Filename Value="../../../../usr/share/fpcsrc/2.4.0/packages/fcl-db/src/base/db.pas"/>
         <UnitName Value="db"/>
         <CursorPos X="29" Y="607"/>
         <TopLine Value="601"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="12"/>
       </Unit43>
       <Unit44>
         <Filename Value="../../fpc/rtl/objpas/sysutils/datih.inc"/>
         <CursorPos X="53" Y="52"/>
         <TopLine Value="44"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit44>
       <Unit45>
         <Filename Value="../../fpc/rtl/objpas/sysutils/dati.inc"/>
         <CursorPos X="1" Y="360"/>
         <TopLine Value="337"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit45>
       <Unit46>
         <Filename Value="../../lazarus/lcl/include/control.inc"/>
         <CursorPos X="25" Y="2783"/>
         <TopLine Value="3096"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit46>
       <Unit47>
         <Filename Value="../../lazarus/lcl/interfaces/gtk2/gtk2lclintf.inc"/>
         <CursorPos X="62" Y="1145"/>
         <TopLine Value="1139"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit47>
       <Unit48>
         <Filename Value="../../fpc/rtl/objpas/sysutils/sysinth.inc"/>
         <CursorPos X="10" Y="79"/>
         <TopLine Value="56"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit48>
       <Unit49>
         <Filename Value="FParalel.lfm"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
         <SyntaxHighlighter Value="LFM"/>
       </Unit49>
       <Unit50>
         <Filename Value="C:/lazarus/lcl/include/progressbar.inc"/>
         <CursorPos X="1" Y="118"/>
         <TopLine Value="107"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit50>
       <Unit51>
         <Filename Value="C:/lazarus/lcl/forms.pp"/>
         <UnitName Value="Forms"/>
         <CursorPos X="21" Y="531"/>
         <TopLine Value="520"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit51>
       <Unit52>
         <Filename Value="C:/lazarus/lcl/include/customform.inc"/>
         <CursorPos X="3" Y="1673"/>
         <TopLine Value="1654"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit52>
       <Unit53>
         <Filename Value="FCrsMME0.lfm"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="11"/>
         <SyntaxHighlighter Value="LFM"/>
       </Unit53>
       <Unit54>
@@ -529,46 +527,46 @@
         <UnitName Value="Grids"/>
         <CursorPos X="39" Y="7951"/>
         <TopLine Value="7945"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit54>
       <Unit55>
         <Filename Value="C:/lazarus/fpc/2.2.4/source/rtl/win/wininc/struct.inc"/>
         <CursorPos X="11" Y="1442"/>
         <TopLine Value="1428"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit55>
       <Unit56>
         <Filename Value="C:/lazarus/fpc/2.2.4/source/rtl/objpas/sysutils/sysinth.inc"/>
         <CursorPos X="3" Y="31"/>
         <TopLine Value="59"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit56>
       <Unit57>
         <Filename Value="C:/lazarus/lcl/graphics.pp"/>
         <UnitName Value="Graphics"/>
         <CursorPos X="25" Y="650"/>
         <TopLine Value="636"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit57>
       <Unit58>
         <Filename Value="C:/lazarus/fpc/2.2.4/source/packages/fcl-image/src/fpcanvas.pp"/>
         <UnitName Value="FPCanvas"/>
         <CursorPos X="3" Y="134"/>
         <TopLine Value="120"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit58>
       <Unit59>
         <Filename Value="../../lazarus/lcl/dbgrids.pas"/>
         <UnitName Value="DBGrids"/>
         <CursorPos X="1" Y="3636"/>
         <TopLine Value="3624"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit59>
       <Unit60>
         <Filename Value="../../lazarus/lcl/include/customform.inc"/>
         <CursorPos X="1" Y="82"/>
         <TopLine Value="68"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit60>
       <Unit61>
         <Filename Value="../../SQLitePass_0.55/Sources/SqlitePassErrorLogDialog.pas"/>
@@ -578,178 +576,198 @@
         <UnitName Value="SqlitePassErrorLogDialog"/>
         <CursorPos X="12" Y="78"/>
         <TopLine Value="64"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit61>
       <Unit62>
         <Filename Value="../../ZEOSDBO-7.0.0-alpha/src/dbc/ZDbcSqLiteUtils.pas"/>
         <UnitName Value="ZDbcSqLiteUtils"/>
         <CursorPos X="16" Y="241"/>
         <TopLine Value="223"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit62>
       <Unit63>
         <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/include/control.inc"/>
         <CursorPos X="1" Y="2644"/>
         <TopLine Value="2631"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit63>
       <Unit64>
         <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/include/customform.inc"/>
         <CursorPos X="1" Y="2403"/>
         <TopLine Value="2390"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit64>
       <Unit65>
         <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/lclproc.pas"/>
         <UnitName Value="LCLProc"/>
         <CursorPos X="1" Y="1490"/>
         <TopLine Value="1477"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit65>
       <Unit66>
         <Filename Value="../../../../usr/lib/lazarus/0.9.28.2/lcl/grids.pas"/>
         <UnitName Value="Grids"/>
         <CursorPos X="1" Y="8202"/>
         <TopLine Value="8189"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit66>
       <Unit67>
         <Filename Value="../../ZEOSDBO-7.0.0-alpha/src/component/ZAbstractRODataset.pas"/>
         <UnitName Value="ZAbstractRODataset"/>
         <CursorPos X="1" Y="1894"/>
         <TopLine Value="1881"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="8"/>
       </Unit67>
       <Unit68>
         <Filename Value="../../../multithreadprocs/mtprocs.pas"/>
         <UnitName Value="MTProcs"/>
         <CursorPos X="17" Y="867"/>
-        <TopLine Value="850"/>
-        <EditorIndex Value="7"/>
-        <UsageCount Value="11"/>
-        <Loaded Value="True"/>
+        <TopLine Value="847"/>
+        <UsageCount Value="10"/>
       </Unit68>
+      <Unit69>
+        <Filename Value="C:/lazarus/fpc/2.2.4/source/rtl/objpas/sysutils/syswideh.inc"/>
+        <CursorPos X="10" Y="21"/>
+        <TopLine Value="7"/>
+        <UsageCount Value="9"/>
+      </Unit69>
+      <Unit70>
+        <Filename Value="C:/lazarus/fpc/2.2.4/source/rtl/objpas/objpas.pp"/>
+        <UnitName Value="objpas"/>
+        <CursorPos X="33" Y="40"/>
+        <TopLine Value="29"/>
+        <UsageCount Value="9"/>
+      </Unit70>
+      <Unit71>
+        <Filename Value="C:/lazarus/lcl/graphics.pp"/>
+        <UnitName Value="Graphics"/>
+        <CursorPos X="20" Y="52"/>
+        <TopLine Value="39"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit71>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="2156" Column="20" TopLine="2145"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="26" Column="30" TopLine="12"/>
       </Position1>
       <Position2>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="2199" Column="20" TopLine="2179"/>
+        <Filename Value="FCrsMMEd.pp"/>
+        <Caret Line="60" Column="13" TopLine="55"/>
       </Position2>
       <Position3>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Filename Value="FCrsMMEd.pp"/>
+        <Caret Line="217" Column="31" TopLine="204"/>
       </Position3>
       <Position4>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1751" Column="28" TopLine="1741"/>
+        <Filename Value="FCrsMMEd.pp"/>
+        <Caret Line="218" Column="31" TopLine="204"/>
       </Position4>
       <Position5>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Filename Value="FCrsMMEd.pp"/>
+        <Caret Line="1" Column="21" TopLine="1"/>
       </Position5>
       <Position6>
-        <Filename Value="KerEvolE.pp"/>
-        <Caret Line="250" Column="18" TopLine="245"/>
+        <Filename Value="FCrsMMEd.pp"/>
+        <Caret Line="60" Column="13" TopLine="46"/>
       </Position6>
       <Position7>
-        <Filename Value="KerEvolE.pp"/>
-        <Caret Line="247" Column="78" TopLine="236"/>
+        <Filename Value="FCrsMMEd.pp"/>
+        <Caret Line="217" Column="9" TopLine="204"/>
       </Position7>
       <Position8>
-        <Filename Value="KerEvolE.pp"/>
-        <Caret Line="805" Column="1" TopLine="783"/>
+        <Filename Value="FCrsMMEd.pp"/>
+        <Caret Line="190" Column="1" TopLine="172"/>
       </Position8>
       <Position9>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="195" Column="21" TopLine="184"/>
+        <Filename Value="FCrsMMEd.pp"/>
+        <Caret Line="13" Column="26" TopLine="4"/>
       </Position9>
       <Position10>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1404" Column="15" TopLine="1393"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="11" Column="17" TopLine="49"/>
       </Position10>
       <Position11>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1416" Column="15" TopLine="1405"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="42" Column="23" TopLine="28"/>
       </Position11>
       <Position12>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1447" Column="15" TopLine="1436"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="43" Column="26" TopLine="29"/>
       </Position12>
       <Position13>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1490" Column="15" TopLine="1479"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="148" Column="53" TopLine="136"/>
       </Position13>
       <Position14>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1559" Column="15" TopLine="1548"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="16" Column="26" TopLine="1"/>
       </Position14>
       <Position15>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1566" Column="15" TopLine="1548"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="43" Column="27" TopLine="29"/>
       </Position15>
       <Position16>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1592" Column="15" TopLine="1581"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="11" Column="11" TopLine="37"/>
       </Position16>
       <Position17>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1599" Column="15" TopLine="1581"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="43" Column="27" TopLine="29"/>
       </Position17>
       <Position18>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1680" Column="32" TopLine="1669"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="147" Column="26" TopLine="133"/>
       </Position18>
       <Position19>
-        <Filename Value="KerEvolE.pp"/>
-        <Caret Line="351" Column="31" TopLine="351"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="151" Column="18" TopLine="133"/>
       </Position19>
       <Position20>
-        <Filename Value="KerEvolE.pp"/>
-        <Caret Line="7" Column="80" TopLine="1"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="216" Column="26" TopLine="202"/>
       </Position20>
       <Position21>
-        <Filename Value="KerEvolE.pp"/>
-        <Caret Line="250" Column="20" TopLine="247"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="247" Column="38" TopLine="234"/>
       </Position21>
       <Position22>
-        <Filename Value="KerEvolE.pp"/>
-        <Caret Line="249" Column="19" TopLine="247"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="10" Column="21" TopLine="1"/>
       </Position22>
       <Position23>
-        <Filename Value="KerEvolE.pp"/>
-        <Caret Line="2" Column="2" TopLine="1"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="44" Column="34" TopLine="1"/>
       </Position23>
       <Position24>
-        <Filename Value="FEditor.pp"/>
-        <Caret Line="94" Column="1" TopLine="81"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="10" Column="17" TopLine="1"/>
       </Position24>
       <Position25>
-        <Filename Value="FEditor.pp"/>
-        <Caret Line="18" Column="47" TopLine="7"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="12" Column="40" TopLine="1"/>
       </Position25>
       <Position26>
-        <Filename Value="FSingEdt.pp"/>
-        <Caret Line="70" Column="29" TopLine="57"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="13" Column="36" TopLine="1"/>
       </Position26>
       <Position27>
-        <Filename Value="FSingEdt.pp"/>
-        <Caret Line="27" Column="27" TopLine="16"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="145" Column="21" TopLine="131"/>
       </Position27>
       <Position28>
-        <Filename Value="HorColCm.pp"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="144" Column="9" TopLine="131"/>
       </Position28>
       <Position29>
-        <Filename Value="HorColCm.pp"/>
-        <Caret Line="124" Column="65" TopLine="112"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="145" Column="17" TopLine="131"/>
       </Position29>
       <Position30>
-        <Filename Value="KerEvolE.pp"/>
-        <Caret Line="7" Column="42" TopLine="1"/>
+        <Filename Value="FCrsMMER.pp"/>
+        <Caret Line="43" Column="31" TopLine="29"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

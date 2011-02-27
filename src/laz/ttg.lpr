@@ -3,13 +3,16 @@ program ttg;
 {$IMAGEBASE $00400000}
 {$ENDIF}
 uses
-  Forms,
-  Dialogs,
-{$IFDEF FPC}
+{$IFDEF UNIX}
   CThreads,
+  CMem,
+{$ENDIF}
+{$IFDEF FPC}
   LResources,
   Interfaces,
 {$ENDIF}
+  Forms,
+  Dialogs, MultiThreadProcsLaz,
   SysUtils,
   FMain in 'FMain.pp' {MainForm},
   DMaster in 'DMaster.pp' {MasterDataModule: TDataModule},

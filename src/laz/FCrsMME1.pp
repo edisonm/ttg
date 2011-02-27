@@ -6,7 +6,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics, Dialogs,
-  Controls, Forms, FCrsMMEd, Buttons, ExtCtrls, Grids, DB, ComCtrls, ToolWin, ImgList;
+  Controls, Forms, FCrsMMEd, Buttons, ExtCtrls, Grids, DB, ComCtrls;
 
 type
   TCrossManyToManyEditor1Form = class(TCrossManyToManyEditorForm)

@@ -5,10 +5,10 @@ unit FHorProf;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes,
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
   Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, Grids, Db,
-  FCrsMME0, FCrsMME1, ImgList, ComCtrls, ToolWin, DBCtrls, Variants, DBGrids,
-  ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
+  FCrsMME0, FCrsMME1, ComCtrls, DBCtrls, Variants, DBGrids,
+  ZConnection, ZDataset;
 
 type
   THorarioProfesorForm = class(TCrossManyToManyEditor1Form)
@@ -50,7 +50,7 @@ type
 
 implementation
 uses
-  HorColCm, FConfig, DMaster, DSource, RelUtils;
+  HorColCm, FConfig, DMaster, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}

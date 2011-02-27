@@ -17,13 +17,11 @@ procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorRForm;
 procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
   TDataSet; const AColFieldKey, AColFieldName, AColField, ARowFieldsKey,
   ARowFieldName, ARowFields, ARelFieldKey: string);
-function ExtractString(const Strings: string; var Pos: Integer; Separator:
-  Char): string;
 
 implementation
 
 uses
-  SysUtils, DMaster;
+  SysUtils, HorColCm, DMaster;
 
 procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorForm;
   AColDataSet, ARowDataSet, ARelDataSet: TDataSet);
@@ -63,18 +61,6 @@ begin
   end;
 end;
 *)
-
-function ExtractString(const Strings: string; var Pos: Integer; Separator:
-  Char): string;
-var
-  I: Integer;
-begin
-  I := Pos;
-  while (I <= Length(Strings)) and (Strings[I] <> Separator) do Inc(I);
-  Result := Trim(Copy(Strings, Pos, I - Pos));
-  if (I <= Length(Strings)) and (Strings[I] = Separator) then Inc(I);
-  Pos := I;
-end;
 
 function ComposicionADuracion(const s: string): Integer;
 var

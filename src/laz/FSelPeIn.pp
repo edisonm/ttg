@@ -5,9 +5,8 @@ unit FSelPeIn;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes, Forms,
-  Graphics, Controls, Dialogs, Db, StdCtrls, Buttons, ExtCtrls, ZConnection, ZDataset,
-  ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, DBCtrls, DMaster, DSource;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Forms,
+  Graphics, Controls, Dialogs, StdCtrls, Buttons, ExtCtrls, ZConnection, DBCtrls, DMaster, DSource;
 
 type
   TSelPeriodoForm = class(TForm)

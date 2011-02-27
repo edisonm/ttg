@@ -6,9 +6,8 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, FSingEdt, Db, Grids, StdCtrls, Buttons, DBCtrls,
-  RelUtils, Variants, ExtCtrls, ComCtrls, Printers, ImgList, ToolWin, ActnList,
-  FMasDeEd, FCrsMMER, DBGrids, ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  Controls, Forms, Dialogs, Db, Grids, Buttons, DBCtrls, Variants, ExtCtrls, ComCtrls, Printers, ActnList,
+  FMasDeEd, FCrsMMER;
 
 type
   TProfesorForm	= class(TMasterDetailEditorForm)
@@ -22,7 +21,6 @@ type
   private
     { Private declarations }
     FSuperTitle: string;
-    FDistributivoForm: TSingleEditorForm;
     FProfesorProhibicionForm: TCrossManyToManyEditorRForm;
     function GetCargaActual: Integer;
   public

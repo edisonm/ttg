@@ -1,66 +1,127 @@
 object MasterDataModule: TMasterDataModule
-
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
+  OldCreateOrder = False
   Height = 404
+  HorizontalOffset = 0
+  VerticalOffset = 0
   Width = 748
   object TbTmpProfesorCarga: TZTable
     Connection = SourceDataModule.Database
-    Left = 250
-    Top = 11
-    object TbTmpProfesorCargaCodProfesor: TLongIntField
+    AutoCalcFields = False
+    left = 250
+    top = 11
+    object TbTmpProfesorCargaCodProfesor: TLongintField
       DisplayLabel = 'Profesor'
+      DisplayWidth = 10
+      FieldKind = fkData
       FieldName = 'CodProfesor'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object TbTmpProfesorCargaApeProfesor: TStringField
       DisplayLabel = 'Apellido'
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'ApeProfesor'
+      Index = 1
+      KeyFields = 'CodProfesor'
+      LookupCache = False
       LookupDataSet = SourceDataModule.TbProfesor
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'ApeProfesor'
-      KeyFields = 'CodProfesor'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 31
-  
     end
     object TbTmpProfesorCargaNomProfesor: TStringField
       DisplayLabel = 'Nombre'
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'NomProfesor'
+      Index = 2
+      KeyFields = 'CodProfesor'
+      LookupCache = False
       LookupDataSet = SourceDataModule.TbProfesor
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'NomProfesor'
-      KeyFields = 'CodProfesor'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 31
-  
     end
-    object TbTmpProfesorCargaCarga: TLongIntField
+    object TbTmpProfesorCargaCarga: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
       FieldName = 'Carga'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
   end
   object QuDistributivoProfesor: TZTable
     Connection = SourceDataModule.Database
-    Left = 250
-    Top = 115
-    object QuDistributivoProfesorCodMateria: TLongIntField
+    AutoCalcFields = False
+    left = 250
+    top = 115
+    object QuDistributivoProfesorCodMateria: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
       FieldName = 'CodMateria'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Visible = False
     end
-    object QuDistributivoProfesorCodNivel: TLongIntField
+    object QuDistributivoProfesorCodNivel: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
       FieldName = 'CodNivel'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Visible = False
     end
-    object QuDistributivoProfesorCodEspecializacion: TLongIntField
+    object QuDistributivoProfesorCodEspecializacion: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
       FieldName = 'CodEspecializacion'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
-    object QuDistributivoProfesorCodParaleloId: TLongIntField
+    object QuDistributivoProfesorCodParaleloId: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
       FieldName = 'CodParaleloId'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Visible = False
     end
-    object QuDistributivoProfesorCodProfesor: TLongIntField
+    object QuDistributivoProfesorCodProfesor: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
       FieldName = 'CodProfesor'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Visible = False
     end
     object QuDistributivoProfesorNomMateria: TStringField
@@ -69,11 +130,15 @@ object MasterDataModule: TMasterDataModule
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'NomMateria'
+      Index = 5
+      KeyFields = 'CodMateria'
+      LookupCache = False
       LookupKeyFields = 'CodMateria'
       LookupResultField = 'NomMateria'
-      KeyFields = 'CodMateria'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 15
-  
     end
     object QuDistributivoProfesorAbrNivel: TStringField
       Alignment = taRightJustify
@@ -81,80 +146,130 @@ object MasterDataModule: TMasterDataModule
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'AbrNivel'
+      Index = 6
+      KeyFields = 'CodNivel'
+      LookupCache = False
       LookupKeyFields = 'CodNivel'
       LookupResultField = 'AbrNivel'
-      KeyFields = 'CodNivel'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 10
-  
     end
     object QuDistributivoProfesorAbrEspecializacion: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'AbrEspecializacion'
+      Index = 7
+      KeyFields = 'CodEspecializacion'
+      LookupCache = False
       LookupKeyFields = 'CodEspecializacion'
       LookupResultField = 'AbrEspecializacion'
-      KeyFields = 'CodEspecializacion'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
       Required = True
       Size = 10
-  
     end
     object QuDistributivoProfesorNomParaleloId: TStringField
       Alignment = taRightJustify
       DisplayLabel = 'Par.'
+      DisplayWidth = 5
       FieldKind = fkLookup
       FieldName = 'NomParaleloId'
+      Index = 8
+      KeyFields = 'CodParaleloId'
+      LookupCache = False
       LookupKeyFields = 'CodParaleloId'
       LookupResultField = 'NomParaleloId'
-      KeyFields = 'CodParaleloId'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 5
-  
     end
     object QuDistributivoProfesorApeNomProfesor: TStringField
       DisplayLabel = 'Profesor'
       DisplayWidth = 31
       FieldKind = fkLookup
       FieldName = 'ApeNomProfesor'
+      Index = 9
+      KeyFields = 'CodProfesor'
+      LookupCache = False
       LookupKeyFields = 'CodProfesor'
       LookupResultField = 'ApeNomProfesor'
-      KeyFields = 'CodProfesor'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 31
-  
     end
   end
   object QuProfesorProhibicionCant: TZTable
     Connection = SourceDataModule.Database
-    Left = 58
-    Top = 157
-    object QuProfesorProhibicionCantCodProfesor: TLongIntField
+    AutoCalcFields = False
+    left = 58
+    top = 157
+    object QuProfesorProhibicionCantCodProfesor: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
       FieldName = 'CodProfesor'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
-    object QuProfesorProhibicionCantCantidad: TLongIntField
+    object QuProfesorProhibicionCantCantidad: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
       FieldName = 'Cantidad'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
   end
   object TbTmpAulaTipoCarga: TZTable
     Connection = SourceDataModule.Database
-    Left = 250
-    Top = 62
-    object TbTmpAulaTipoCargaCodAulaTipo: TLongIntField
+    AutoCalcFields = False
+    left = 250
+    top = 62
+    object TbTmpAulaTipoCargaCodAulaTipo: TLongintField
       DisplayLabel = 'Tipo de aula'
+      DisplayWidth = 10
+      FieldKind = fkData
       FieldName = 'CodAulaTipo'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
     object TbTmpAulaTipoCargaAbrAulaTipo: TStringField
       DisplayLabel = 'Nombre'
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'AbrAulaTipo'
+      Index = 1
+      KeyFields = 'CodAulaTipo'
+      LookupCache = False
       LookupDataSet = SourceDataModule.TbAulaTipo
       LookupKeyFields = 'CodAulaTipo'
       LookupResultField = 'AbrAulaTipo'
-      KeyFields = 'CodAulaTipo'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 31
-  
     end
-    object TbTmpAulaTipoCargaCarga: TLongIntField
+    object TbTmpAulaTipoCargaCarga: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
       FieldName = 'Carga'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
   end
 end

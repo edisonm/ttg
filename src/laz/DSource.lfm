@@ -1,19 +1,42 @@
 inherited SourceDataModule: TSourceDataModule
+  inherited Database: TZConnection
+    Connected = True
+  end
   inherited TbNivel: TZTable
-    object TbNivelCodNivel: TLongIntField
+    object TbNivelCodNivel: TLongintField[0]
+      DisplayWidth = 10
+      FieldKind = fkData
       FieldName = 'CodNivel'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
-    object TbNivelNomNivel: TStringField
+    object TbNivelNomNivel: TStringField[1]
+      DisplayWidth = 15
+      FieldKind = fkData
       FieldName = 'NomNivel'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
       Required = True
       Size = 15
     end
-    object TbNivelAbrNivel: TStringField
+    object TbNivelAbrNivel: TStringField[2]
+      DisplayWidth = 5
+      FieldKind = fkData
       FieldName = 'AbrNivel'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
       Size = 5
     end
   end
-  inherited DSMateriaProhibicion: TDataSource
+  inherited DSMateriaProhibicion: TDatasource
     DataSet = nil
   end
   inherited TbDistributivo: TZTable

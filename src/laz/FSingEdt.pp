@@ -5,10 +5,9 @@ unit FSingEdt;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes,
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
   Graphics, Controls, Forms, Dialogs, Db, StdCtrls, DBCtrls, Grids, DBGrids,
-  Buttons, ExtCtrls, ComCtrls, FEditor, ImgList, ToolWin, ActnList, ZConnection,
-  ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset, UConfig;
+  Buttons, ExtCtrls, ComCtrls, FEditor, ActnList, ZConnection, UConfig;
 
 type
 

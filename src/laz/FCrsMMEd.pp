@@ -6,15 +6,11 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, Buttons, ExtCtrls, DB, Variants, FEditor, ComCtrls,
-  ImgList, ToolWin, Grids;
+  Controls, Forms, Dialogs, Buttons, ExtCtrls, DB, Variants, FEditor, ComCtrls, Grids;
 
 type
-  PIntegerArray = ^TIntegerArray;
-  TIntegerArray = array[0..8191] of Integer;
-  PStringArray = ^TStringArray;
-  TStringArray = array[0..8191] of string;
-  TColorArray = array[0..8191] of TColor;
+  TDynamicStringArray = array of string;
+  TDynamicIntegerArray = array of Integer;
   TDynamicStringArrayArray = array of array of string;
   TDynamicIntegerArrayArray = array of array of Integer;
   TDynamicBooleanArrayArray = array of array of Boolean;
@@ -56,11 +52,8 @@ type
       FRowFieldSel
       : TField;
     FColMin, FRowMin, FColMax, FRowMax: Integer;
-    FKeyCol,
-      FKeyRow,
-      FRowKey,
-      FColKey: TIntegerArray;
-    FColName, FRowName: array[0..8191] of string;
+    FKeyCol, FKeyRow, FColKey, FRowKey: TDynamicIntegerArray;
+    FColName, FRowName: TDynamicStringArray;
     FOnGetColName: TGetColNameNotifyEvent;
     FOnGetRowName: TGetRowNameNotifyEvent;
     FEditing: Boolean;
@@ -72,9 +65,9 @@ type
     function GetColName(ACol: Integer): string; virtual;
     function GetRowName(ARow: Integer): string; virtual;
     procedure CheckDataSetEmpty(DataSet: TDataSet);
-    procedure ReadDataSet(ADataset: TDataset; AFieldKey,
-      AFieldName: TField; var AMin, AMax: Integer; var APosKey,
-      AKeyPos: array of Integer; var APosName: array of string);
+    procedure ReadDataSet(ADataset: TDataset; AFieldKey, AFieldName: TField;
+      var AMin, AMax: Integer; var APosKey, AKeyPos: TDynamicIntegerArray;
+      var APosName: TDynamicStringArray);
     procedure InvalidateData; virtual;
     function RelRecordExists(i, j: Integer): Boolean; virtual; abstract;
     function ColRowIsValid(i, j: Integer): Boolean;
@@ -89,8 +82,8 @@ type
     property ColDataset: TDataset read FColDataset;
     property RowDataset: TDataset read FRowDataset;
     property RelDataset: TDataset read FRelDataset;
-    property ColKey: TIntegerArray read FColKey;
-    property RowKey: TIntegerArray read FRowKey;
+    property ColKey: TDynamicIntegerArray read FColKey;
+    property RowKey: TDynamicIntegerArray read FRowKey;
     property RowField: TField read FRowField;
     property ColField: TField read FColField;
   public
@@ -183,8 +176,8 @@ begin
 end;
 
 procedure TCrossManyToManyEditorForm.ReadDataSet(ADataset: TDataset; AFieldKey,
-  AFieldName: TField; var AMin, AMax: Integer; var APosKey, AKeyPos: array of Integer;
-  var APosName: array of string);
+  AFieldName: TField; var AMin, AMax: Integer;
+  var APosKey, AKeyPos: TDynamicIntegerArray; var APosName: TDynamicStringArray);
 var
   i: Integer;
 begin
@@ -192,17 +185,20 @@ begin
   begin
     AMin := MaxLongint;
     AMax := -MaxLongint - 1;
+    SetLength(APosKey, RecordCount);
+    SetLength(APosName, RecordCount);
     First;
     for i := 0 to RecordCount - 1 do
     begin
       APosKey[i] := AFieldKey.AsInteger;
       APosName[i] := AFieldName.AsString;
-      if AMin > AKeyPos[i] then
-        AMin := AKeyPos[i];
-      if AMax < AKeyPos[i] then
-        AMax := AKeyPos[i];
+      if AMin > APosKey[i] then
+        AMin := APosKey[i];
+      if AMax < APosKey[i] then
+        AMax := APosKey[i];
       Next;
     end;
+    SetLength(AKeyPos, AMax - AMin + 1);
     First;
     for i := 0 to RecordCount - 1 do
     begin

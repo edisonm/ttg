@@ -1,61 +1,59 @@
 object ProgressForm: TProgressForm
   Left = 554
-  Top = 210
+  Height = 350
+  Top = 234
+  Width = 465
   ActiveControl = pnlProgress
   BorderStyle = bsDialog
   Caption = 'Progreso de la busqueda'
   ClientHeight = 350
   ClientWidth = 465
-  Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
-  Font.Style = []
-
   Position = poDesktopCenter
-  PixelsPerInch = 96
-
+  LCLVersion = '0.9.28.2'
   object pnlProgress: TPanel
     Left = 8
+    Height = 297
     Top = 8
     Width = 448
-    Height = 297
+    ClientHeight = 297
+    ClientWidth = 448
     TabOrder = 0
     object pnlValorTotal: TPanel
       Left = 8
+      Height = 21
       Top = 246
       Width = 433
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Valor Total:'
+      ClientHeight = 21
+      ClientWidth = 433
       TabOrder = 0
       object lblValorTotal: TLabel
         Left = 420
+        Height = 19
         Top = 1
         Width = 12
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object pnlCruceProfesor: TPanel
       Left = 8
+      Height = 21
       Top = 54
       Width = 181
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Cruce de profesores:'
@@ -63,38 +61,37 @@ object ProgressForm: TProgressForm
     end
     object pnlCruceProfesorValor: TPanel
       Left = 312
+      Height = 21
       Top = 54
       Width = 129
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Valor:'
+      ClientHeight = 21
+      ClientWidth = 129
       TabOrder = 2
       object lblCruceProfesorValor: TLabel
         Left = 119
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object pnlCruceAulaTipo: TPanel
       Left = 8
+      Height = 21
       Top = 102
       Width = 181
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Cruce de aulas:'
@@ -102,96 +99,93 @@ object ProgressForm: TProgressForm
     end
     object pnlCruceAulaTipoValor: TPanel
       Left = 312
+      Height = 21
       Top = 102
       Width = 129
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Valor:'
+      ClientHeight = 21
+      ClientWidth = 129
       TabOrder = 4
       object lblCruceAulaTipoValor: TLabel
         Left = 119
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object pnlCruceProfesorCantidad: TPanel
       Left = 192
+      Height = 21
       Top = 54
       Width = 117
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Cantidad:'
+      ClientHeight = 21
+      ClientWidth = 117
       TabOrder = 5
       object lblCruceProfesor: TLabel
         Left = 107
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object pnlCruceAulaTipoCantidad: TPanel
       Left = 192
+      Height = 21
       Top = 102
       Width = 117
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Cantidad:'
+      ClientHeight = 21
+      ClientWidth = 117
       TabOrder = 6
       object lblCruceAulaTipo: TLabel
         Left = 107
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object pnlHoraHuecaDesubicada: TPanel
       Left = 8
+      Height = 21
       Top = 126
       Width = 181
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Horas huecas desubicadas'
@@ -199,67 +193,65 @@ object ProgressForm: TProgressForm
     end
     object pnlHoraHuecaDesubicadaCantidad: TPanel
       Left = 192
+      Height = 21
       Top = 126
       Width = 117
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Cantidad:'
+      ClientHeight = 21
+      ClientWidth = 117
       TabOrder = 8
       object lblHoraHuecaDesubicada: TLabel
         Left = 107
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object pnlHoraHuecaDesubicadaValor: TPanel
       Left = 312
+      Height = 21
       Top = 126
       Width = 129
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Valor:'
+      ClientHeight = 21
+      ClientWidth = 129
       TabOrder = 9
       object lblHoraHuecaDesubicadaValor: TLabel
         Left = 119
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object pnlSesionCortada: TPanel
       Left = 8
+      Height = 21
       Top = 150
       Width = 181
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Materias cortadas'
@@ -267,156 +259,148 @@ object ProgressForm: TProgressForm
     end
     object pnlSesionCortadaCantidad: TPanel
       Left = 192
+      Height = 21
       Top = 150
       Width = 117
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Cantidad:'
+      ClientHeight = 21
+      ClientWidth = 117
       TabOrder = 11
       object lblSesionCortada: TLabel
         Left = 107
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object pnlSesionCortadaValor: TPanel
       Left = 312
+      Height = 21
       Top = 150
       Width = 129
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Valor:'
+      ClientHeight = 21
+      ClientWidth = 129
       TabOrder = 12
       object lblSesionCortadaValor: TLabel
         Left = 119
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object pnlInitDateTime: TPanel
       Left = 8
+      Height = 21
       Top = 6
       Width = 215
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = 'Iniciado el:'
+      ClientHeight = 21
+      ClientWidth = 215
       TabOrder = 13
       object lblInit: TLabel
         Left = 211
+        Height = 19
         Top = 1
         Width = 3
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-    
-      
+        Transparent = False
       end
     end
     object pnlElapsedTime: TPanel
       Left = 8
+      Height = 21
       Top = 30
       Width = 215
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Tiempo transcurrido:'
+      ClientHeight = 21
+      ClientWidth = 215
       TabOrder = 14
       object lblElapsedTime: TLabel
         Left = 205
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-    
-      
+        Transparent = False
       end
     end
     object pnlEstimatedTime: TPanel
       Left = 226
+      Height = 21
       Top = 30
       Width = 215
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = 'Tiempo restante:'
+      ClientHeight = 21
+      ClientWidth = 215
       TabOrder = 15
       object lblRemainingTime: TLabel
         Left = 205
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-    
-      
+        Transparent = False
       end
     end
     object pnlMateriaProhibicion: TPanel
       Left = 8
+      Height = 21
       Top = 198
       Width = 181
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Prohibiciones de materia:'
@@ -424,67 +408,65 @@ object ProgressForm: TProgressForm
     end
     object pnlMateriaProhibicionCantidad: TPanel
       Left = 192
+      Height = 21
       Top = 198
       Width = 117
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Cantidad:'
+      ClientHeight = 21
+      ClientWidth = 117
       TabOrder = 17
       object lblMateriaProhibicion: TLabel
         Left = 107
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object pnlMateriaProhibicionValor: TPanel
       Left = 312
+      Height = 21
       Top = 198
       Width = 129
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Valor:'
+      ClientHeight = 21
+      ClientWidth = 129
       TabOrder = 18
       object lblMateriaProhibicionValor: TLabel
         Left = 119
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object pnlProfesorProhibicion: TPanel
       Left = 8
+      Height = 21
       Top = 222
       Width = 181
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Prohibiciones de profesor:'
@@ -492,67 +474,65 @@ object ProgressForm: TProgressForm
     end
     object pnlProfesorProhibicionCantidad: TPanel
       Left = 192
+      Height = 21
       Top = 222
       Width = 117
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Cantidad:'
+      ClientHeight = 21
+      ClientWidth = 117
       TabOrder = 20
       object lblProfesorProhibicion: TLabel
         Left = 107
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object Panel26: TPanel
       Left = 312
+      Height = 21
       Top = 222
       Width = 129
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Valor:'
+      ClientHeight = 21
+      ClientWidth = 129
       TabOrder = 21
       object lblProfesorProhibicionValor: TLabel
         Left = 119
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object pnlMateriaNoDispersa: TPanel
       Left = 8
+      Height = 21
       Top = 174
       Width = 181
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Materias no dispersas:'
@@ -560,67 +540,65 @@ object ProgressForm: TProgressForm
     end
     object Panel28: TPanel
       Left = 192
+      Height = 21
       Top = 174
       Width = 117
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Cantidad:'
+      ClientHeight = 21
+      ClientWidth = 117
       TabOrder = 23
       object lblMateriaNoDispersa: TLabel
         Left = 107
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object Panel29: TPanel
       Left = 312
+      Height = 21
       Top = 174
       Width = 129
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Valor:'
+      ClientHeight = 21
+      ClientWidth = 129
       TabOrder = 24
       object lblMateriaNoDispersaValor: TLabel
         Left = 119
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object Panel1: TPanel
       Left = 8
+      Height = 21
       Top = 78
       Width = 181
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Fracc. del h. de profesores:'
@@ -628,192 +606,182 @@ object ProgressForm: TProgressForm
     end
     object Panel2: TPanel
       Left = 192
+      Height = 21
       Top = 78
       Width = 117
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Cantidad:'
+      ClientHeight = 21
+      ClientWidth = 117
       TabOrder = 26
       object lblProfesorFraccionamiento: TLabel
         Left = 107
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object Panel3: TPanel
       Left = 312
+      Height = 21
       Top = 78
       Width = 129
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Valor:'
+      ClientHeight = 21
+      ClientWidth = 129
       TabOrder = 27
       object lblProfesorFraccionamientoValor: TLabel
         Left = 119
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object Panel5: TPanel
       Left = 8
+      Height = 21
       Top = 270
       Width = 117
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = 'Importaciones:'
+      ClientHeight = 21
+      ClientWidth = 117
       TabOrder = 28
       object lblImportaciones: TLabel
         Left = 107
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object Panel6: TPanel
       Left = 128
+      Height = 21
       Top = 270
       Width = 117
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = 'Exportaciones:'
+      ClientHeight = 21
+      ClientWidth = 117
       TabOrder = 29
       object lblExportaciones: TLabel
         Left = 107
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object Panel4: TPanel
       Left = 248
+      Height = 21
       Top = 270
       Width = 117
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = 'Colisiones:'
+      ClientHeight = 21
+      ClientWidth = 117
       TabOrder = 30
       object lblColisiones: TLabel
         Left = 107
+        Height = 19
         Top = 1
         Width = 9
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = []
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-      
+        Transparent = False
       end
     end
     object pnlPosition: TPanel
       Left = 226
+      Height = 21
       Top = 6
       Width = 215
-      Height = 21
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Iteracion:'
+      ClientHeight = 21
+      ClientWidth = 215
       TabOrder = 31
       object lblPosition: TLabel
         Left = 202
+        Height = 19
         Top = 1
         Width = 12
-        Height = 19
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
         Color = clBtnFace
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
         Font.Style = [fsBold]
+        Layout = tlCenter
         ParentColor = False
         ParentFont = False
-        Layout = tlCenter
-    
-      
+        Transparent = False
       end
     end
   end
   object bbtnClose: TBitBtn
     Left = 360
+    Height = 28
     Top = 312
     Width = 96
-    Height = 28
     Caption = '&Finalizar'
-
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
-    Font.Style = []
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -830,26 +798,22 @@ object ProgressForm: TProgressForm
       4444444444333333338F8F8FFFF8F33F00003333333333333333333333888888
       8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
       333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
-      0000}
+      0000
+    }
     NumGlyphs = 2
-
+    OnClick = bbtnCloseClick
     ParentFont = False
     TabOrder = 1
-    OnClick = bbtnCloseClick
   end
   object bbtnCancel: TBitBtn
     Left = 248
+    Height = 28
     Top = 312
     Width = 107
-    Height = 28
     Cancel = True
     Caption = 'Cancelar'
-
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
-    Font.Style = []
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -866,19 +830,19 @@ object ProgressForm: TProgressForm
       9118333911183333338F33838F338F33000033333913333391113333338FF833
       38F338F300003333333333333919333333388333338FFF830000333333333333
       3333333333333333333888330000333333333333333333333333333333333333
-      0000}
+      0000
+    }
     ModalResult = 2
     NumGlyphs = 2
-
+    OnClick = bbtnCancelClick
     ParentFont = False
     TabOrder = 2
-    OnClick = bbtnCancelClick
   end
   object PBProgress: TProgressBar
     Left = 9
+    Height = 28
     Top = 312
     Width = 232
-    Height = 28
     ParentShowHint = False
     ShowHint = True
     TabOrder = 3

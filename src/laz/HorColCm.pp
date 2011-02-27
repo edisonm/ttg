@@ -5,7 +5,7 @@ unit HorColCm;
 interface
 
 uses
-  Classes, Dialogs, Db, DBGrids, Variants;
+  Classes, Dialogs, Db, DBGrids, SysUtils, Variants;
 
 function NullToZero(A: Variant): Variant;
 procedure EqualSpaced(Strings: TStrings; ini, fin: Integer; delim: string);
@@ -16,6 +16,8 @@ procedure LoadNames(Source, Destination: TStrings);
 procedure SearchInField(AField: TField; AValue: Variant);
 procedure SearchInDBGrid(DBGrid: TDBGrid);
 function VarArrToStr(v: Variant; Separator: string = '; '): string;
+function ExtractString(const Strings: string; var Pos: Integer; Separator:
+  Char): string;
 
 implementation
 
@@ -146,6 +148,18 @@ begin
       end;
     end;
   end;
+end;
+
+function ExtractString(const Strings: string; var Pos: Integer; Separator:
+  Char): string;
+var
+  I: Integer;
+begin
+  I := Pos;
+  while (I <= Length(Strings)) and (Strings[I] <> Separator) do Inc(I);
+  Result := Trim(Copy(Strings, Pos, I - Pos));
+  if (I <= Length(Strings)) and (Strings[I] = Separator) then Inc(I);
+  Pos := I;
 end;
 
 end.

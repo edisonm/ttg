@@ -7,9 +7,10 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, Grids, DB, FCrsMMEd,
-  ImgList, ComCtrls, ToolWin;
+  ComCtrls, HorColCm;
 
 type
+  TDynamicColorArray = array of TColor;
   TCrossManyToManyEditorRForm = class(TCrossManyToManyEditorForm)
     Panel2: TPanel;
     Splitter: TSplitter;
@@ -39,9 +40,9 @@ type
     FLstDataSet: TDataSet;
     FLstFieldKey, FLstFieldName, FLstFieldColor, FLstField: TField;
     FLstMin, FLstMax: Integer;
-    FKeyLst, FLstKey: TIntegerArray;
-    FLstName: TStringArray;
-    FLstColor: TColorArray;
+    FKeyLst, FLstKey: TDynamicIntegerArray;
+    FLstName: TDynamicStringArray;
+    FLstColor: TDynamicColorArray;
     FRel: TDynamicIntegerArrayArray;
     procedure ClearSelection;
   protected
@@ -53,7 +54,7 @@ type
     procedure UpdateRelRecord(i, j: Integer); override;
     function GetColorHighLight(i, j: Integer): TColor; override;
     function GetText(i, j: Integer): string; override;
-    property LstKey: TIntegerArray read FLstKey;
+    property LstKey: TDynamicIntegerArray read FLstKey;
     property Rel: TDynamicIntegerArrayArray read FRel;
   public
     { Public declarations }
@@ -145,6 +146,7 @@ begin
   if Assigned(FLstFieldColor) then
     with FLstDataSet do
     begin
+      SetLength(FLstColor, RecordCount);
       First;
       for i := 0 to RecordCount - 1 do
       begin

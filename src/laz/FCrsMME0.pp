@@ -6,8 +6,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, FCrsMMEd, StdCtrls, Buttons, ExtCtrls, ComCtrls,
-  ImgList, ToolWin, Grids;
+  Controls, Forms, Dialogs, FCrsMMEd, StdCtrls, Buttons, ExtCtrls, ComCtrls, Grids;
 
 type
   TCrossManyToManyEditor0Form = class(TCrossManyToManyEditorForm)
@@ -108,13 +107,11 @@ end;
 
 var
   FCol, FRow: Integer;
-  FSelected: Boolean;
 
 procedure TCrossManyToManyEditor0Form.DrawGridSelectCell(Sender: TObject;
   ACol, ARow: Integer; var CanSelect: Boolean);
 begin
   inherited DrawGridSelectCell(Sender, ACol, ARow, CanSelect);
-  FSelected := (FCol = ACol) and (FRow = ARow);
   FCol := ACol;
   FRow := ARow;
 end;
