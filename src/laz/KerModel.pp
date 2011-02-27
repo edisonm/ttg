@@ -948,10 +948,8 @@ begin
     SetLength(FMateriaPeriodoCant, FMateriaCant, FPeriodoCant);
     SetLength(FProfesorPeriodoCant, FProfesorCant, FPeriodoCant);
     SetLength(FAulaTipoPeriodoCant, FAulaTipoCant, FPeriodoCant);
-    SetLength(FParaleloMateriaDiaMinHora, FParaleloCant, FMateriaCant,
-      FDiaCant);
-    SetLength(FParaleloMateriaDiaMaxHora, FParaleloCant, FMateriaCant,
-      FDiaCant);
+    SetLength(FParaleloMateriaDiaMinHora, FParaleloCant, FMateriaCant, FDiaCant);
+    SetLength(FParaleloMateriaDiaMaxHora, FParaleloCant, FMateriaCant, FDiaCant);
     SetLength(FDiaProfesorFraccionamiento, FDiaCant, FProfesorCant);
     SetLength(FParaleloMateriaNoDispersa, FParaleloCant);
     SetLength(FAntMateriaDiaMinHora, FMateriaCant, FDiaCant);
@@ -1329,17 +1327,17 @@ end;
 procedure TTimeTable.MutarInterno;
 var
   l: Longint;
-  I, j, j1: Smallint;
+  Paralelo, Periodo1, Periodo2: Smallint;
 begin
   with ModeloHorario do
   begin
-    l := crand32 mod (FParaleloCant * Sqr(FPeriodoCant));
-    j := l mod FPeriodoCant;
-    l := l div FPeriodoCant;
-    I := l div FPeriodoCant;
-    j1 := l mod FPeriodoCant;
-    if ParaleloPeriodoASesion[I, j] <> ParaleloPeriodoASesion[I, j1] then
-      Intercambiar(I, j, j1);
+    l := crand32;
+    Periodo1 := l mod FPeriodoCant; l := l div FPeriodoCant;
+    Periodo2 := l mod FPeriodoCant; l := l div FPeriodoCant;
+    Paralelo := l mod FParaleloCant;
+    if ParaleloPeriodoASesion[Paralelo, Periodo1]
+    <> ParaleloPeriodoASesion[Paralelo, Periodo2] then
+      Intercambiar(Paralelo, Periodo1, Periodo2);
   end;
 end;
 

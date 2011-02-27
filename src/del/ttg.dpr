@@ -6,6 +6,7 @@ uses
   Forms,
   Dialogs,
 {$IFDEF FPC}
+  CThreads,
   LResources,
   Interfaces,
 {$ENDIF}

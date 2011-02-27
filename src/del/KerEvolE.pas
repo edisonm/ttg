@@ -4,7 +4,7 @@ unit KerEvolE;
 interface
 
 uses
-  Classes, SysUtils, DB, KerModel;
+  {$IFDEF UNIX}{cthreads, cmem, }{$ENDIF}{MTProcs, }Classes, SysUtils, DB, KerModel;
 
 type
   TTimeTableArray = array of TTimeTable;
@@ -243,7 +243,15 @@ begin
     FPoblacion[i].Actualizar;
   end;
 end;
-
+{
+procedure DoParallelGetValor(Index: PtrInt; Data: Pointer; Item: TMultiThreadProcItem);
+var
+  FPoblacion: ^TTimeTableArray;
+begin
+  FPoblacion := Data;
+  FPoblacion^[Index].Valor;
+end;
+}
 procedure TEvolElitista.Evaluar;
 var
   i: Integer;
@@ -251,6 +259,7 @@ var
 begin
   VMinValue := 1.7E308;
   VMaxValue := -1.7E308;
+  //ProcThreadPool.DoParallel(@DoParallelGetValor, 0, High(FPoblacion), @FPoblacion[0]);
   for i := 0 to High(FPoblacion) do
   begin
     d := FPoblacion[i].Valor;

@@ -25,7 +25,7 @@ TSingleEditorForm = class(TEditorForm)
     procedure ActFindExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBGridCheckButton(Sender: TObject; ACol: Integer;
-      Field: TField; var Enabled: Boolean);
+      Field: TField; var AEnabled: Boolean);
     procedure DBGridTitleBtnClick(Sender: TObject; ACol: Integer;
       Field: TField);
     procedure DBGridDblClick(Sender: TObject);
@@ -83,7 +83,7 @@ begin
 end;
 
 procedure TSingleEditorForm.DBGridCheckButton(Sender: TObject;
-  ACol: Integer; Field: TField; var Enabled: Boolean);
+  ACol: Integer; Field: TField; var AEnabled: Boolean);
 begin
   inherited;
   {$IFNDEF FPC}

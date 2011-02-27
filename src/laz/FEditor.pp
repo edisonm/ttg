@@ -15,7 +15,7 @@ type
     BtnShow: TToolButton;
     Panel1: TPanel;
     ImageList: TImageList;
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormClose(Sender: TObject; var AAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
@@ -178,9 +178,9 @@ begin
    ConfigStorage.Floats[FPreffix + '_' + Index] := Value;
 end;
 
-procedure TEditorForm.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TEditorForm.FormClose(Sender: TObject; var AAction: TCloseAction);
 begin
-  Action := caFree;
+  AAction := caFree;
 end;
 
 procedure TEditorForm.FormDestroy(Sender: TObject);
