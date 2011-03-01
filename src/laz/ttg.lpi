@@ -753,7 +753,7 @@
         <SyntaxHighlighter Value="LFM"/>
       </Unit84>
       <Unit85>
-        <Filename Value="ttgcfg.pas"/>
+        <Filename Value="ttgcfg.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TTGCfg"/>
         <CursorPos X="14" Y="151"/>

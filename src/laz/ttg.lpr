@@ -44,6 +44,7 @@ uses
   FHorProf in 'FHorProf.pp' {HorarioProfesorForm},
   DSrcBase in 'DSrcBase.pp' {SourceBaseDataModule: TDataModule},
   RelUtils in 'RelUtils.pp',
+  ttgcfg in 'ttgcfg.pp',
   DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   FSelPeIn in 'FSelPeIn.pp' {SelPeriodoForm},
   DBase in 'DBase.pp', TTGCfg {BaseDataModule: TDataModule};
