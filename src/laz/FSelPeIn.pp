@@ -5,25 +5,28 @@ unit FSelPeIn;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Forms,
-  Graphics, Controls, Dialogs, StdCtrls, Buttons, ExtCtrls, ZConnection, DBCtrls, DMaster, DSource;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Classes, SysUtils, FileUtil,
+  Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons, DbCtrls, DSource;
 
 type
+
+  { TSelPeriodoForm }
+
   TSelPeriodoForm = class(TForm)
     BBAceptar: TBitBtn;
     BBCancelar: TBitBtn;
+    CBDia: TDBLookupComboBox;
+    CBHora: TDBLookupComboBox;
     Label1: TLabel;
     Label2: TLabel;
-    CbDia: TDBLookupComboBox;
     Label3: TLabel;
-    CbHora: TDBLookupComboBox;
+    procedure FormCreate(Sender: TObject);
   private
-    { Private declarations }
+    { private declarations }
   public
-    { Public declarations }
+    { public declarations }
+    class function SeleccionarPeriodo(var ACodDia, ACodHora: Integer): Boolean;
   end;
-
-function SeleccionarPeriodo(var ACodDia, ACodHora: Integer): Boolean;
 
 implementation
 
@@ -31,7 +34,9 @@ implementation
 {$R *.DFM}
 {$ENDIF}
 
-function SeleccionarPeriodo(var ACodDia, ACodHora: Integer): Boolean;
+{ TSelPeriodoForm }
+
+class function TSelPeriodoForm.SeleccionarPeriodo(var ACodDia, ACodHora: Integer): Boolean;
 var
   FSelPeriodoForm: TSelPeriodoForm;
 begin
@@ -51,9 +56,16 @@ begin
   end;
 end;
 
+procedure TSelPeriodoForm.FormCreate(Sender: TObject);
+begin
+
+end;
+
 initialization
+
 {$IFDEF FPC}
-  {$i FSelPeIn.lrs}
+  {$I FSelPeIn.lrs}
 {$ENDIF}
 
 end.
+

@@ -7,11 +7,15 @@ interface
 uses
   {$IFDEF FPC}ColorBox, LResources{$ELSE}Mask, Windows{$ENDIF}, SysUtils, Grids,
   Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ComCtrls,
-  Spin, DBGrids, DSource, DB, ExtCtrls, DBCtrls;
+  Spin, DBGrids, DSource, DMaster, DB, ExtCtrls, DBCtrls;
 
 type
+
+  { TConfiguracionForm }
+
   TConfiguracionForm = class(TForm)
     bbtnOk: TBitBtn;
+    CBApplyDoubleDownHill: TCheckBox;
     pgcConfig: TPageControl;
     tbsPesos: TTabSheet;
     tbsAlgoritmoEvolutivo: TTabSheet;
@@ -74,13 +78,6 @@ type
     edtAnioLectivo: TEdit;
     Label16: TLabel;
     creProfesorFraccionamiento: TEdit;
-    Label24: TLabel;
-    edtMostrarProfesorHorarioTexto: TEdit;
-    Label32: TLabel;
-    Label34: TLabel;
-    speMostrarProfesorHorarioLongitud: TSpinEdit;
-    Label35: TLabel;
-    edtProfesorHorarioExcluirProfProhibicion: TEdit;
     Label36: TLabel;
     edtHorarioIni: TEdit;
     dbeNomMateProhibicionTipo: TDBEdit;
@@ -180,7 +177,7 @@ end;
 
 procedure TConfiguracionForm.LoadFromSourceDataModule;
 begin
-   with SourceDataModule do
+   with MasterDataModule.ConfigStorage do
    begin
       edtNomColegio.Text := NomColegio;
       edtAnioLectivo.Text := AnioLectivo;
@@ -209,18 +206,16 @@ begin
       speOrdenMutacion1.Value := OrdenMutacion1;
       creProbMutacion2.Text := FloatToStr(ProbMutacion2);
       creProbReparacion.Text := FloatToStr(ProbReparacion);
-      edtMostrarProfesorHorarioTexto.Text := MostrarProfesorHorarioTexto;
-      speMostrarProfesorHorarioLongitud.Value := MostrarProfesorHorarioLongitud;
-      edtProfesorHorarioExcluirProfProhibicion.Text := ProfesorHorarioExcluirProfProhibicion;
       edtHorarioIni.Text := HorarioIni;
       dedCompartir.Text := Compartir;
       speRangoPolinizacion.Value := RangoPolinizacion;
+      CBApplyDoubleDownHill.Checked := ApplyDoubleDownHill;
    end;
 end;
 
 procedure TConfiguracionForm.SaveToSourceDataModule;
 begin
-   with SourceDataModule do
+   with MasterDataModule.ConfigStorage do
    begin
       NomColegio := edtNomColegio.Text;
       AnioLectivo := edtAnioLectivo.Text;
@@ -249,13 +244,10 @@ begin
       OrdenMutacion1 := speOrdenMutacion1.Value;
       ProbMutacion2 := StrToFloat(creProbMutacion2.Text);
       ProbReparacion := StrToFloat(creProbReparacion.Text);
-      MostrarProfesorHorarioTexto := edtMostrarProfesorHorarioTexto.Text;
-      MostrarProfesorHorarioLongitud := speMostrarProfesorHorarioLongitud.Value;
-      ProfesorHorarioExcluirProfProhibicion
-        := edtProfesorHorarioExcluirProfProhibicion.Text;
       HorarioIni := edtHorarioIni.Text;
       Compartir := dedCompartir.Text;
       RangoPolinizacion := speRangoPolinizacion.Value;
+      ApplyDoubleDownHill := CBApplyDoubleDownHill.Checked;
    end;
 end;
 
@@ -263,15 +255,15 @@ procedure TConfiguracionForm.DSMateriaProhibicionTipoDataChange(
   Sender: TObject; Field: TField);
 begin
   CBColMateProhibicionTipo.Selected :=
-    SourceDataModule.TbMateriaProhibicionTipo.FindField('ColMateProhibicionTipo').Value;
+    SourceDataModule.TbMateriaProhibicionTipo.FindField('ColMateProhibicionTipo').AsInteger;
 end;
 
 procedure TConfiguracionForm.CBColMateProhibicionTipoExit(Sender: TObject);
 begin
   with SourceDataModule.TbMateriaProhibicionTipo.FindField('ColMateProhibicionTipo') do
     if (DSMateriaProhibicionTipo.State in [dsEdit, dsInsert])
-        and (Value <> CBColMateProhibicionTipo.Selected) then
-      Value := CBColMateProhibicionTipo.Selected;
+        and (AsInteger <> CBColMateProhibicionTipo.Selected) then
+      AsInteger := CBColMateProhibicionTipo.Selected;
 end;
 
 procedure TConfiguracionForm.bbtnCancelClick(Sender: TObject);
@@ -308,15 +300,15 @@ procedure TConfiguracionForm.CBColProfProhibicionTipoExit(Sender: TObject);
 begin
   with SourceDataModule.TbProfesorProhibicionTipo.FindField('ColProfProhibicionTipo') do
     if (DSProfesorProhibicionTipo.State in [dsEdit, dsInsert])
-        and (Value <> CBColProfProhibicionTipo.Selected) then
-      Value := CBColProfProhibicionTipo.Selected;
+        and (AsInteger <> CBColProfProhibicionTipo.Selected) then
+      AsInteger := CBColProfProhibicionTipo.Selected;
 end;
 
 procedure TConfiguracionForm.DSProfesorProhibicionTipoDataChange(
   Sender: TObject; Field: TField);
 begin
   CBColProfProhibicionTipo.Selected
-    := SourceDataModule.TbProfesorProhibicionTipo.FindField('ColProfProhibicionTipo').Value;
+    := SourceDataModule.TbProfesorProhibicionTipo.FindField('ColProfProhibicionTipo').AsInteger;
 end;
 
 initialization

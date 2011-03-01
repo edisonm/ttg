@@ -46,7 +46,7 @@ TSingleEditorForm = class(TEditorForm)
 implementation
 
 uses
-  HorColCm, Printers, FMain, DMaster;
+  HorColCm, DMaster;
 
 {$IFNDEF FPC}
 {$R *.DFM}

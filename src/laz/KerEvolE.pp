@@ -28,6 +28,9 @@ type
     evolutivo, metodo que permite ejecutar el algoritmo evolutivo, Eventos que
     se disparan cada cierto numero de generaciones y cuando mejora la solucion.
     }
+
+  { TEvolElitista }
+
   TEvolElitista = class
   private
     function GetFileName: string;
@@ -47,6 +50,8 @@ type
       FNuevoCruceAulaTipoArray: TDynamicLongintArray;
     FHorariosPrefijados: TDynamicLongintArray;
     FOnRegistrarMejor: TNotifyEvent;
+    procedure DoParallelGetValor(Index: PtrInt; Data: Pointer;
+      Item: TMultiThreadProcItem);
     procedure Inicializar;
     procedure Evaluar;
     procedure TomarElMejor;
@@ -76,9 +81,9 @@ type
     function GetMejorMateriaNoDispersaValor: Double;
     procedure CopiarIndividuo(Destino, Fuente: Integer);
     function GetBestTimeTable: TTimeTable;
-    procedure ReportParameters(AInforme: TStrings);
   protected
   public
+    procedure ReportParameters(AInforme: TStrings);
     constructor CrearDesdeModelo(AModeloHorario: TModeloHorario;
       ATamPoblacion: Longint);
     procedure PrefijarHorarios(const Horarios: string);
@@ -87,10 +92,9 @@ type
     procedure Configurar(ATamPoblacion: Integer);
     destructor Destroy; override;
     procedure SaveBestToDatabase(CodHorario: Integer; MomentoInicial,
-      MomentoFinal: TDateTime);
+      MomentoFinal: TDateTime; Report: TStrings);
     procedure SaveMejorToStream(AStream: TStream);
-    procedure LlenarInforme(AInforme: TStrings);
-    procedure Ejecutar(NumIteraciones: Integer);
+    procedure Execute(RefreshInterval: Integer);
     procedure DescensoRapidoForzado;
     function DescensoRapido: Boolean;
     procedure Reparar;
@@ -243,15 +247,15 @@ begin
     FPoblacion[i].Actualizar;
   end;
 end;
-{
-procedure DoParallelGetValor(Index: PtrInt; Data: Pointer; Item: TMultiThreadProcItem);
-var
-  FPoblacion: ^TTimeTableArray;
+
+procedure TEvolElitista.DoParallelGetValor(Index: PtrInt; Data: Pointer; Item: TMultiThreadProcItem);
 begin
-  FPoblacion := Data;
-  FPoblacion^[Index].Valor;
+  FValorArray[Index] := FPoblacion[Index].Valor;
+  FSesionCortadaArray[Index] := FPoblacion[Index].SesionCortada;
+  FCruceProfesorArray[Index] := FPoblacion[Index].CruceProfesor;
+  FCruceAulaTipoArray[Index] := FPoblacion[Index].CruceAulaTipo;
 end;
-}
+
 procedure TEvolElitista.Evaluar;
 var
   i: Integer;
@@ -259,18 +263,15 @@ var
 begin
   VMinValue := 1.7E308;
   VMaxValue := -1.7E308;
-  //ProcThreadPool.DoParallel(@DoParallelGetValor, 0, High(FPoblacion), @FPoblacion[0]);
+  ProcThreadPool.DoParallel(DoParallelGetValor, 0, High(FPoblacion), nil);
   for i := 0 to High(FPoblacion) do
   begin
-    d := FPoblacion[i].Valor;
-    FValorArray[i] := d;
+    // DoParallelGetValor(i, nil, nil);
+    d := FValorArray[i];
     if VMinValue > d then
       VMinValue := d;
     if VMaxValue < d then
       VMaxValue := d;
-    FSesionCortadaArray[i] := FPoblacion[i].SesionCortada;
-    FCruceProfesorArray[i] := FPoblacion[i].CruceProfesor;
-    FCruceAulaTipoArray[i] := FPoblacion[i].CruceAulaTipo;
   end;
   for i := 0 to High(FPoblacion) do
   begin
@@ -589,7 +590,7 @@ begin
   end;
 end;
 
-procedure TEvolElitista.Ejecutar(NumIteraciones: Integer);
+procedure TEvolElitista.Execute(RefreshInterval: Integer);
 var
   Stop: Boolean;
   NumGeneracion: Integer;
@@ -606,6 +607,7 @@ begin
   NumGeneracion := 0;
   while (NumGeneracion < FNumMaxGeneracion) and not Stop do
   begin
+    FModeloHorario.DoProgress(NumGeneracion, RefreshInterval, BestTimeTable, Stop);
     Seleccionar;
     Cruzar;
     Mutar;
@@ -613,8 +615,6 @@ begin
     if ((NumGeneracion mod FRangoPolinizacion) = 0)
        and (FSyncDirectory <> '') then
       Polinizar;
-    FModeloHorario.DoProgress(NumGeneracion, NumIteraciones,
-                              BestTimeTable, Stop);
     Evaluar;
     Elitista;
     Inc(NumGeneracion);
@@ -635,23 +635,14 @@ begin
 end;
 
 procedure TEvolElitista.SaveBestToDatabase(CodHorario: Integer;
-  MomentoInicial, MomentoFinal: TDateTime);
-var
-  Informe: TStrings;
+  MomentoInicial, MomentoFinal: TDateTime; Report: TStrings);
 begin
-  Informe := TStringList.Create;
-  try
-    LlenarInforme(Informe);
-    FPoblacion[FTamPoblacion].SaveToDataModule(CodHorario, MomentoInicial,
-      MomentoFinal, Informe);
-  finally
-    Informe.Free;
-  end;
+  BestTimeTable.SaveToDataModule(CodHorario, MomentoInicial, MomentoFinal, Report);
 end;
 
 procedure TEvolElitista.SaveMejorToStream(AStream: TStream);
 begin
-  FPoblacion[FTamPoblacion].SaveToStream(AStream);
+  BestTimeTable.SaveToStream(AStream);
 end;
 
 function TEvolElitista.GetPromedioValor: Double;
@@ -761,22 +752,17 @@ procedure TEvolElitista.ReportParameters(AInforme: TStrings);
 begin
   with AInforme do
   begin
-    Add('Algoritmo Evolutivo Elitista');
-    Add('============================');
     Add('Semillas del generador de numeros aleatorios:');
-    Add(Format('  %d, %d, %d, %d', [FSemilla1, FSemilla2, FSemilla3, FSemilla4])
-      );
-    Add(Format('Parametros A. Evolutivo: %d; %d; %g; %g; %d; %g; %g',
-        [FTamPoblacion, FNumMaxGeneracion, FProbCruzamiento, FProbMutacion1,
-        FOrdenMutacion1, FProbMutacion2, FProbReparacion]));
+    Add(Format('  %d, %d, %d, %d', [FSemilla1, FSemilla2, FSemilla3, FSemilla4]));
+    Add(Format('Numero de individuos:       %5.d', [FTamPoblacion]));
+    Add(Format('Maximo de generaciones:     %5.d', [FNumMaxGeneracion]));
+    Add(Format('Probabilidad de cruce:      %1.3f', [FProbCruzamiento]));
+    Add(Format('Probabilidad de Mutacion 1: %1.3f', [FProbMutacion1]));
+    Add(Format('Orden de la Mutacion 1:     %5.d', [FOrdenMutacion1]));
+    Add(Format('Probabilidad de Mutacion 1: %1.3f', [FProbMutacion2]));
+    Add(Format('Probabilidad de Reparacion: %1.3f', [FProbReparacion]));
+    Add(Format('Rango de polinizacion:      %5.d', [FRangoPolinizacion]));
   end;
-end;
-
-procedure TEvolElitista.LlenarInforme(AInforme: TStrings);
-begin
-  ReportParameters(AInforme);
-  //FModeloHorario.ReportParameters(AInforme);
-  BestTimeTable.ReportValues(AInforme);
 end;
 
 procedure TEvolElitista.PrefijarHorarios(const Horarios: string);

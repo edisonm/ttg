@@ -6,7 +6,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, FSingEdt, Db, Grids, DBGrids, UConfig, Buttons,
+  Controls, Forms, Dialogs, FSingEdt, Db, Grids, DBGrids, Buttons, UConfig,
   DBCtrls, ExtCtrls, ComCtrls, ActnList;
 
 type
@@ -35,8 +35,6 @@ var
   MasterDetailEditorForm: TMasterDetailEditorForm;
 
 implementation
-uses
-  Printers;
 
 {$IFNDEF FPC}
 {$R *.DFM}

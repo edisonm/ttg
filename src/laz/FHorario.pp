@@ -4,13 +4,15 @@ unit FHorario;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
-  Graphics, Controls, Forms, Dialogs, Db, FSingEdt, Grids,
-  Buttons, FEditor, DBCtrls, ExtCtrls, ComCtrls, ActnList,
-  ZConnection, ZDataset,
-  FMasDeEd, FHorProf, FHorAulT, FHorPara;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+  Controls, Forms, Dialogs, Db, FSingEdt, Grids, Buttons, FEditor, DBCtrls,
+  ExtCtrls, ComCtrls, ActnList, ZConnection, ZDataset, FCrsMMER, DMaster, FCrsMME1,
+  FConfig, DSource, FMain, FProgres, FMasDeEd, FHorProf, FHorAulT, FHorPara;
 
 type
+
+  { THorarioForm }
+
   THorarioForm = class(TSingleEditorForm)
     BtnMateriaProhibicionNoRespetada: TToolButton;
     BtnProfesorProhibicionNoRespetada: TToolButton;
@@ -182,8 +184,6 @@ type
     procedure ActMateriaCortadaDiaExecute(Sender: TObject);
     procedure ActMateriaCortadaHoraExecute(Sender: TObject);
     procedure ActHorarioAulaTipoExecute(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBGridDblClick(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure DataSourceStateChange(Sender: TObject);
@@ -212,8 +212,7 @@ var
 implementation
 
 uses
-  FCrsMMER, DMaster, TTGUtls, FCrsMME1, FConfig, Printers, DSource, FMain,
-  Variants, KerModel, FProgres;
+  Variants, KerModel;
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
@@ -225,7 +224,7 @@ begin
     ConfigStorage, ActHorarioParalelo) then
   begin
     with SourceDataModule do
-      LoadHints(FHorarioParaleloForm, TbDia, TbHora, TbMateria);
+      FHorarioParaleloForm.LoadHints(TbDia, TbHora, TbMateria);
     FHorarioParaleloForm.BtnMostrarClick(nil);
   end;
 end;
@@ -259,7 +258,7 @@ begin
     ConfigStorage, ActHorarioProfesor) then
   begin
     with SourceDataModule do
-      LoadHints(FHorarioProfesorForm, TbDia, TbHora, TbProfesor);
+      FHorarioProfesorForm.LoadHints(TbDia, TbHora, TbProfesor);
     FHorarioProfesorForm.BtnMostrarClick(nil);
   end
 end;
@@ -318,12 +317,13 @@ var
   va: Double;
 begin
   CodHorarioFuente := SourceDataModule.TbHorario.FindField('CodHorario').AsInteger;
+  d := IntToStr(MasterDataModule.NewCodHorario);
   if not InputQuery(Format('Mejorando Horario %d: ', [CodHorarioFuente]),
     'Codigo del horario mejorado', d) then
     Exit;
   CodHorarioDestino := StrToInt(d);
   ProgressForm.CloseClick := False;
-  with SourceDataModule do
+  with SourceDataModule, MasterDataModule.ConfigStorage do
   begin
     InitRandom;
     MomentoInicial := Now;
@@ -352,9 +352,9 @@ begin
         TimeTable.LoadFromDataModule(CodHorarioFuente);
         va := TimeTable.Valor;
         TimeTable.DescensoRapidoForzado;
-        with VModeloHorario do
-          ProgressForm.ShowProgressForm(SesionCantidadDoble);
-        TimeTable.DescensoRapidoDobleForzado(SourceDataModule.NumIteraciones);
+        ProgressForm.ProgressMax := vModeloHorario.SesionCantidadDoble;
+        ProgressForm.ShowProgressForm;
+        TimeTable.DescensoRapidoDobleForzado(MasterDataModule.ConfigStorage.NumIteraciones);
         if not ProgressForm.CancelClick then
         begin
           EndTime := Now;
@@ -471,7 +471,7 @@ begin
   begin
     with SourceDataModule do
     begin
-      LoadHints(FHorarioAulaTipoForm, TbDia, TbHora, TbMateria);
+      FHorarioAulaTipoForm.LoadHints(TbDia, TbHora, TbMateria);
     end;
     FHorarioAulaTipoForm.BtnMostrarClick(nil);
   end;
@@ -502,16 +502,6 @@ procedure THorarioForm.doSaveConfig;
 begin
   inherited;
   ConfigIntegers['Panel2_Width'] := Panel2.Width;
-end;
-
-procedure THorarioForm.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  inherited FormClose(Sender, Action);
-end;
-
-procedure THorarioForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-begin
-  inherited FormCloseQuery(Sender, CanClose);
 end;
 
 initialization

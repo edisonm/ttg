@@ -10,9 +10,6 @@ include ../../COMMON
 
 .SUFFIXES: .lrs .lfm .dfm .pas .pp .lpr .dpr
 
-BASEDELFILES=$(addsuffix .pas,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
-	  $(addsuffix .dfm, $(FORMS) $(DSRCBASE)) ttg.dpr
-
 DELPHIFILES=$(BASEDELFILES)
 
 all: $(TTGEXE)
@@ -48,8 +45,16 @@ prjdel: srcdel
 	unix2dos < ttg.inc > ../../src/del/ttg.inc
 	mv $(DELPHIFILES) ../../src/del/
 
-$(TTGEXE):
+$(TTGEXE): $(BASELAZFILES) ttg.lpi
 	lazbuild ttg.lpi
+
+$(DSRCBASE).pp $(DSRCBASE).lfm: dbutils $(TTGMDB) Makefile
+	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule \
+	  $(DSRCBASE) 'cds;csr;lfm;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
+	dos2unix $(DSRCBASE).pp $(DSRCBASE).lfm
+
+dbutils:
+	cd ../.. ; $(MAKE) $(DBUTILS)
 
 clean:
 # 	$(DSRCBASE0).lfm $(DSRCBASE0).pp
@@ -57,4 +62,7 @@ clean:
 	  $(TTGDIR)/bin/*.ppu $(TTGDIR)/obj/*.o $(TTGDIR)/obj/*.ppu
 
 test:
-	TTGEXE=$(TTGEXE)
+	@echo TTGEXE=$(TTGEXE)
+	@echo BASELAZFILES=$(BASELAZFILES)
+	@echo DSRCBASE=$(DSRCBASE)
+

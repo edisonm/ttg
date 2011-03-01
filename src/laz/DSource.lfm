@@ -1,46 +1,124 @@
 inherited SourceDataModule: TSourceDataModule
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
+  Height = 421
+  HorizontalOffset = 363
+  VerticalOffset = 210
+  Width = 630
   inherited Database: TZConnection
     Connected = True
   end
+  inherited TbAulaTipo: TZTable
+    Connection = Database
+  end
+  inherited DSAulaTipo: TDatasource
+    DataSet = TbAulaTipo
+  end
+  inherited TbEspecializacion: TZTable
+    Connection = Database
+  end
+  inherited DSEspecializacion: TDatasource
+    DataSet = TbEspecializacion
+  end
+  inherited TbDia: TZTable
+    Connection = Database
+    BeforeDelete = DataSetBeforeDelete
+  end
+  inherited DSDia: TDatasource
+    DataSet = TbDia
+  end
+  inherited TbMateria: TZTable
+    Connection = Database
+  end
+  inherited DSMateria: TDatasource
+    DataSet = TbMateria
+  end
   inherited TbNivel: TZTable
-    object TbNivelCodNivel: TLongintField[0]
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'CodNivel'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object TbNivelNomNivel: TStringField[1]
-      DisplayWidth = 15
-      FieldKind = fkData
-      FieldName = 'NomNivel'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 15
-    end
-    object TbNivelAbrNivel: TStringField[2]
-      DisplayWidth = 5
-      FieldKind = fkData
-      FieldName = 'AbrNivel'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 5
-    end
+    Connection = Database
+  end
+  inherited DSNivel: TDatasource
+    DataSet = TbNivel
+  end
+  inherited TbHora: TZTable
+    Connection = Database
+  end
+  inherited DSHora: TDatasource
+    DataSet = TbHora
+  end
+  inherited TbHorario: TZTable
+    Connection = Database
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
+  end
+  inherited DSHorario: TDatasource
+    DataSet = TbHorario
+  end
+  inherited TbCurso: TZTable
+    Connection = Database
+  end
+  inherited DSCurso: TDatasource
+    DataSet = TbCurso
+  end
+  inherited TbParaleloId: TZTable
+    Connection = Database
+  end
+  inherited DSParaleloId: TDatasource
+    DataSet = TbParaleloId
+  end
+  inherited TbMateriaProhibicionTipo: TZTable
+    Connection = Database
+  end
+  inherited DSMateriaProhibicionTipo: TDatasource
+    DataSet = TbMateriaProhibicionTipo
+  end
+  inherited TbPeriodo: TZTable
+    Connection = Database
+  end
+  inherited DSPeriodo: TDatasource
+    DataSet = TbPeriodo
+  end
+  inherited TbParalelo: TZTable
+    Connection = Database
+  end
+  inherited DSParalelo: TDatasource
+    DataSet = TbParalelo
+  end
+  inherited TbProfesor: TZTable
+    Connection = Database
+  end
+  inherited DSProfesor: TDatasource
+    DataSet = TbProfesor
+  end
+  inherited TbMateriaProhibicion: TZTable
+    Connection = Database
   end
   inherited DSMateriaProhibicion: TDatasource
-    DataSet = nil
+    DataSet = TbMateriaProhibicion
   end
   inherited TbDistributivo: TZTable
+    Connection = Database
     OnCalcFields = TbDistributivoCalcFields
     BeforePost = TbDistributivoBeforePost
+  end
+  inherited DSDistributivo: TDatasource
+    DataSet = TbDistributivo
+  end
+  inherited TbHorarioDetalle: TZTable
+    Connection = Database
+  end
+  inherited DSHorarioDetalle: TDatasource
+    DataSet = TbHorarioDetalle
+  end
+  inherited TbProfesorProhibicionTipo: TZTable
+    Connection = Database
+  end
+  inherited DSProfesorProhibicionTipo: TDatasource
+    DataSet = TbProfesorProhibicionTipo
+  end
+  inherited TbProfesorProhibicion: TZTable
+    Connection = Database
+  end
+  inherited DSProfesorProhibicion: TDatasource
+    DataSet = TbProfesorProhibicion
   end
 end

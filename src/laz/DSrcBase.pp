@@ -1,7 +1,7 @@
 unit DSrcBase;
 
 (*
-  jueves, 24 de febrero de 2011 14:26:51
+  martes, 01 de marzo de 2011 16:04:08
 
   Warning:
 
@@ -11,12 +11,14 @@ unit DSrcBase;
 
 *)
 
+{$I ttg.inc}
+
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF},
-  SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
-  DBase, ZConnection, ZDataset;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+  Controls, Forms, Dialogs, Db, DBase, ZConnection, ZAbstractRODataset,
+  ZAbstractDataset, ZAbstractTable, ZDataset;
 
 type
   TSourceBaseDataModule = class(TBaseDataModule)
@@ -70,34 +72,68 @@ implementation
 {$R *.DFM}
 {$ENDIF}
 
-
+uses RelUtils;
 
 
 procedure TSourceBaseDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
+  OnDestroy := DataModuleDestroy;
   SetLength(FTables, 18);
   SetLength(FMasterRels, 18);
   SetLength(FDetailRels, 18);
   SetLength(FBeforePostLocks, 18);
   Tables[0] := TbAulaTipo;
+  TbAulaTipo.BeforePost := DataSetBeforePost;
+  TbAulaTipo.BeforeDelete := DataSetBeforeDelete;
   Tables[1] := TbEspecializacion;
+  TbEspecializacion.BeforePost := DataSetBeforePost;
+  TbEspecializacion.BeforeDelete := DataSetBeforeDelete;
   Tables[2] := TbDia;
+  TbDia.BeforePost := DataSetBeforePost;
+  TbDia.BeforeDelete := DataSetBeforeDelete;
   Tables[3] := TbMateria;
+  TbMateria.BeforePost := DataSetBeforePost;
+  TbMateria.BeforeDelete := DataSetBeforeDelete;
   Tables[4] := TbNivel;
+  TbNivel.BeforePost := DataSetBeforePost;
+  TbNivel.BeforeDelete := DataSetBeforeDelete;
   Tables[5] := TbHora;
+  TbHora.BeforePost := DataSetBeforePost;
+  TbHora.BeforeDelete := DataSetBeforeDelete;
   Tables[6] := TbHorario;
+  TbHorario.BeforePost := DataSetBeforePost;
+  TbHorario.BeforeDelete := DataSetBeforeDelete;
   Tables[7] := TbCurso;
+  TbCurso.BeforePost := DataSetBeforePost;
+  TbCurso.BeforeDelete := DataSetBeforeDelete;
   Tables[8] := TbParaleloId;
+  TbParaleloId.BeforePost := DataSetBeforePost;
+  TbParaleloId.BeforeDelete := DataSetBeforeDelete;
   Tables[9] := TbMateriaProhibicionTipo;
+  TbMateriaProhibicionTipo.BeforePost := DataSetBeforePost;
+  TbMateriaProhibicionTipo.BeforeDelete := DataSetBeforeDelete;
   Tables[10] := TbPeriodo;
+  TbPeriodo.BeforePost := DataSetBeforePost;
+  TbPeriodo.BeforeDelete := DataSetBeforeDelete;
   Tables[11] := TbParalelo;
+  TbParalelo.BeforePost := DataSetBeforePost;
+  TbParalelo.BeforeDelete := DataSetBeforeDelete;
   Tables[12] := TbProfesor;
+  TbProfesor.BeforePost := DataSetBeforePost;
+  TbProfesor.BeforeDelete := DataSetBeforeDelete;
   Tables[13] := TbMateriaProhibicion;
+  TbMateriaProhibicion.BeforePost := DataSetBeforePost;
   Tables[14] := TbDistributivo;
+  TbDistributivo.BeforePost := DataSetBeforePost;
+  TbDistributivo.BeforeDelete := DataSetBeforeDelete;
   Tables[15] := TbHorarioDetalle;
+  TbHorarioDetalle.BeforePost := DataSetBeforePost;
   Tables[16] := TbProfesorProhibicionTipo;
+  TbProfesorProhibicionTipo.BeforePost := DataSetBeforePost;
+  TbProfesorProhibicionTipo.BeforeDelete := DataSetBeforeDelete;
   Tables[17] := TbProfesorProhibicion;
+  TbProfesorProhibicion.BeforePost := DataSetBeforePost;
   SetLength(FMasterRels[0], 1);
   with FMasterRels[0, 0] do
   begin

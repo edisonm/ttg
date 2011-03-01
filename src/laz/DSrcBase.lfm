@@ -1,10 +1,13 @@
 inherited SourceBaseDataModule: TSourceBaseDataModule
+  OnCreate = DataModuleCreate
+  OnDestroy = nil
+  Height = 480
+  HorizontalOffset = 406
+  VerticalOffset = 192
+  Width = 928
   object TbAulaTipo: TZTable[1]
     Connection = Database
     SortedFields = 'CodAulaTipo'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'AulaTipo'
     IndexFieldNames = 'CodAulaTipo Asc'
     left = 48
@@ -19,9 +22,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 1
     Connection = Database
     SortedFields = 'CodEspecializacion'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'Especializacion'
     IndexFieldNames = 'CodEspecializacion Asc'
     left = 144
@@ -36,9 +36,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 2
     Connection = Database
     SortedFields = 'CodDia'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'Dia'
     IndexFieldNames = 'CodDia Asc'
     left = 240
@@ -53,9 +50,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 3
     Connection = Database
     SortedFields = 'CodMateria'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'Materia'
     IndexFieldNames = 'CodMateria Asc'
     left = 336
@@ -70,9 +64,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 4
     Connection = Database
     SortedFields = 'CodNivel'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'Nivel'
     IndexFieldNames = 'CodNivel Asc'
     left = 432
@@ -87,9 +78,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 5
     Connection = Database
     SortedFields = 'CodHora'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'Hora'
     IndexFieldNames = 'CodHora Asc'
     left = 48
@@ -104,9 +92,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 6
     Connection = Database
     SortedFields = 'CodHorario'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'Horario'
     IndexFieldNames = 'CodHorario Asc'
     left = 144
@@ -121,9 +106,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 7
     Connection = Database
     SortedFields = 'CodNivel;CodEspecializacion'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'Curso'
     IndexFieldNames = 'CodNivel Asc;CodEspecializacion Asc'
     left = 240
@@ -138,9 +120,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 8
     Connection = Database
     SortedFields = 'CodParaleloId'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'ParaleloId'
     IndexFieldNames = 'CodParaleloId Asc'
     left = 336
@@ -155,9 +134,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 9
     Connection = Database
     SortedFields = 'CodMateProhibicionTipo'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'MateriaProhibicionTipo'
     IndexFieldNames = 'CodMateProhibicionTipo Asc'
     left = 432
@@ -172,9 +148,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 10
     Connection = Database
     SortedFields = 'CodDia;CodHora'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'Periodo'
     IndexFieldNames = 'CodDia Asc;CodHora Asc'
     left = 48
@@ -189,9 +162,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 11
     Connection = Database
     SortedFields = 'CodNivel;CodEspecializacion;CodParaleloId'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'Paralelo'
     IndexFieldNames = 'CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc'
     left = 144
@@ -206,9 +176,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 12
     Connection = Database
     SortedFields = 'CodProfesor'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'Profesor'
     IndexFieldNames = 'CodProfesor Asc'
     left = 240
@@ -223,8 +190,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 13
     Connection = Database
     SortedFields = 'CodMateria;CodDia;CodHora'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
     TableName = 'MateriaProhibicion'
     IndexFieldNames = 'CodMateria Asc;CodDia Asc;CodHora Asc'
     left = 336
@@ -239,9 +204,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 14
     Connection = Database
     SortedFields = 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'Distributivo'
     IndexFieldNames = 'CodMateria Asc;CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc'
     left = 432
@@ -256,8 +218,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 15
     Connection = Database
     SortedFields = 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
     TableName = 'HorarioDetalle'
     IndexFieldNames = 'CodHorario Asc;CodMateria Asc;CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc;CodDia Asc;CodHora Asc'
     left = 48
@@ -272,9 +232,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 16
     Connection = Database
     SortedFields = 'CodProfProhibicionTipo'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
     TableName = 'ProfesorProhibicionTipo'
     IndexFieldNames = 'CodProfProhibicionTipo Asc'
     left = 144
@@ -289,8 +246,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 17
     Connection = Database
     SortedFields = 'CodProfesor;CodDia;CodHora'
-    AutoCalcFields = False
-    BeforePost = DataSetBeforePost
     TableName = 'ProfesorProhibicion'
     IndexFieldNames = 'CodProfesor Asc;CodDia Asc;CodHora Asc'
     left = 240

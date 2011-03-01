@@ -1,6 +1,6 @@
 inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
-  Left = 423
-  Top = -102
+  Left = 182
+  Top = 455
   OnCreate = FormCreate
   inherited Panel1: TPanel
     Width = 361

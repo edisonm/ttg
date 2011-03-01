@@ -3,8 +3,8 @@ object MasterDataModule: TMasterDataModule
   OnDestroy = DataModuleDestroy
   OldCreateOrder = False
   Height = 404
-  HorizontalOffset = 0
-  VerticalOffset = 0
+  HorizontalOffset = 568
+  VerticalOffset = 275
   Width = 748
   object TbTmpProfesorCarga: TZTable
     Connection = SourceDataModule.Database
@@ -271,5 +271,18 @@ object MasterDataModule: TMasterDataModule
       ReadOnly = False
       Required = False
     end
+  end
+  object QuNewCodHorario: TZReadOnlyQuery
+    Connection = SourceDataModule.Database
+    SQL.Strings = (
+      'SELECT Horario.CodHorario + 1'
+      'FROM Horario left join Horario as Horario1 on'
+      'Horario.CodHorario + 1=Horario1.CodHorario'
+      'WHERE'
+      'Horario1.CodHorario is NULL'
+    )
+    Params = <>
+    left = 252
+    top = 168
   end
 end

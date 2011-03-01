@@ -6,7 +6,8 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, Buttons, ExtCtrls, DB, Variants, FEditor, ComCtrls, Grids;
+  Controls, Forms, Dialogs, Buttons, ExtCtrls, DB, Variants, FEditor, ComCtrls,
+  Grids;
 
 type
   TDynamicStringArray = array of string;
@@ -19,19 +20,25 @@ type
   TGetRowNameNotifyEvent = procedure(Sender: TObject; ARow: Integer; var
     ARowName: string) of object;
 
+  { TCrossManyToManyEditorForm }
+
   TCrossManyToManyEditorForm = class(TEditorForm)
     DrawGrid: TDrawGrid;
     BtnOk: TToolButton;
     BtnCancel: TToolButton;
     procedure BtnOkClick(Sender: TObject);
     procedure BtnCancelClick(Sender: TObject);
+    procedure DrawGridDrawCell(Sender: TObject; aCol, aRow: Integer;
+      aRect: TRect; aState: TGridDrawState);
+{
     procedure DrawGridDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
+}
     procedure DrawGridPrepareCanvas(sender: TObject; aCol, aRow: Integer;
       aState: TGridDrawState);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DrawGridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDestroy(Sender: TObject);
   private
@@ -88,9 +95,9 @@ type
     property ColField: TField read FColField;
   public
     { Public declarations }
+    procedure LoadHints(AColDataSet, ARowDataSet, ARelDataSet: TDataSet);
     procedure ShowEditor(AColDataSet, ARowDataSet, ARelDataSet, ASelDataSet:
-      TDataSet;
-      const AColFieldKey, AColFieldName, AColField, AColFieldSel, ARowFieldKey,
+      TDataSet; const AColFieldKey, AColFieldName, AColField, AColFieldSel, ARowFieldKey,
       ARowFieldName, ARowField, ARowFieldSel: string);
     property ColorHighLight[i, j: Integer]: TColor read GetColorHighLight;
     property Editing: Boolean read FEditing;
@@ -108,9 +115,23 @@ var
 
 implementation
 
+uses
+  DSource;
+
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
+
+procedure TCrossManyToManyEditorForm.LoadHints(AColDataSet, ARowDataSet,
+  ARelDataSet: TDataSet);
+begin
+  with SourceDataModule do
+  begin
+    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
+      [Description[ARelDataSet], Description[AColDataSet],
+      Description[ARowDataSet]]);
+  end;
+end;
 
 procedure TCrossManyToManyEditorForm.CheckDataSetEmpty(DataSet: TDataSet);
 var
@@ -124,7 +145,10 @@ begin
   end;
 end;
 
-procedure TCrossManyToManyEditorForm.ShowEditor;
+procedure TCrossManyToManyEditorForm.ShowEditor(AColDataSet, ARowDataSet,
+  ARelDataSet, ASelDataSet: TDataSet; const AColFieldKey, AColFieldName,
+  AColField, AColFieldSel, ARowFieldKey, ARowFieldName, ARowField,
+  ARowFieldSel: string);
 begin
   FColDataSet := AColDataSet;
   FRowDataSet := ARowDataSet;
@@ -300,27 +324,27 @@ begin
   ReadData;
 end;
 
-procedure TCrossManyToManyEditorForm.DrawGridDrawCell(Sender: TObject; ACol,
-  ARow: Integer; Rect: TRect; State: TGridDrawState);
+procedure TCrossManyToManyEditorForm.DrawGridDrawCell(Sender: TObject; aCol,
+  aRow: Integer; aRect: TRect; aState: TGridDrawState);
   function GetValue: string;
   begin
     with (Sender as TDrawGrid) do
     begin
-      if (ACol = 0) and (ARow > 0) then
+      if (aCol = 0) and (aRow > 0) then
         Result := RowName[ARow]
-      else if (ACol > 0) and (ARow = 0) then
-        Result := ColName[ACol]
-      else if not RelRecordExists(ACol - 1, ARow - 1) then
+      else if (aCol > 0) and (aRow = 0) then
+        Result := ColName[aCol]
+      else if not RelRecordExists(aCol - 1, aRow - 1) then
         Result := ''
       else
-        Result := GetText(ACol - 1, ARow - 1);
+        Result := GetText(aCol - 1, aRow - 1);
     end;
   end;
 begin
-{$IFNDEF FPC}
-  DrawGridPrepareCanvas(Sender, ACol, ARow, State);
-{$ENDIF}
-  TDrawGrid(Sender).Canvas.TextRect(Rect, Rect.Left+2, Rect.Top+2, GetValue);
+{ $IFNDEF FPC}
+  DrawGridPrepareCanvas(Sender, aCol, aRow, aState);
+{ $ENDIF}
+  TDrawGrid(Sender).Canvas.TextRect(aRect, aRect.Left+2, aRect.Top+2, GetValue);
 end;
 
 procedure TCrossManyToManyEditorForm.DrawGridPrepareCanvas(sender: TObject;
@@ -353,12 +377,6 @@ begin
     FOnGetColName(Self, ACol, Result);
 end;
 
-procedure TCrossManyToManyEditorForm.FormClose(Sender: TObject; var Action:
-  TCloseAction);
-begin
-  inherited FormClose(Sender, Action);
-end;
-
 procedure TCrossManyToManyEditorForm.DrawGridSelectCell(Sender: TObject; ACol,
   ARow: Integer; var CanSelect: Boolean);
 begin
@@ -373,16 +391,17 @@ begin
     CanSelect := FSel[ACol - 1, ARow - 1];
 end;
 
+procedure TCrossManyToManyEditorForm.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+begin
+  inherited;
+end;
+
 
 function TCrossManyToManyEditorForm.ColRowIsValid(i, j: Integer): Boolean;
 begin
   Result := (i >= 0) and (i < FColDataSetRecordCount) and (j >= 0)
     and (j < FRowDataSetRecordCount);
-end;
-
-procedure TCrossManyToManyEditorForm.FormDestroy(Sender: TObject);
-begin
-  inherited FormDestroy(Sender);
 end;
 
 procedure TCrossManyToManyEditorForm.Edit;
@@ -400,6 +419,11 @@ begin
       mrNo: {Nothing to do};
       mrCancel: CanClose := False;
     end;
+end;
+
+procedure TCrossManyToManyEditorForm.FormDestroy(Sender: TObject);
+begin
+  inherited;
 end;
 
 procedure TCrossManyToManyEditorForm.DeleteRelRecord(i, j: Integer);

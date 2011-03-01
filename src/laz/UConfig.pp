@@ -70,8 +70,14 @@ begin
 end;
 
 function TConfigStorage.GetIntegers(const Index: string): Integer;
+var
+  s: string;
 begin
-  Result := StrToInt(Values[Index]);
+  s := Values[Index];
+  if s = '' then
+    Result := 0
+  else
+    Result := StrToInt(s);
 end;
 
 procedure TConfigStorage.SetIntegers(const Index: string; Value: Integer);
@@ -80,8 +86,14 @@ begin
 end;
 
 function TConfigStorage.GetBooleans(const Index: string): Boolean;
+var
+  s: string;
 begin
-  Result := StrToBool(Values[Index]);
+  s := Values[Index];
+  if s = '' then
+    Result := False
+  else
+    Result := StrToBool(s);
 end;
 
 procedure TConfigStorage.SetBooleans(const Index: string; Value: Boolean);
@@ -101,8 +113,14 @@ end;
 
 
 function TConfigStorage.GetFloats(const Index: string): Extended;
+var
+  s: string;
 begin
-  Result := StrToFloat(Values[Index]);
+  s := Values[Index];
+  if s = '' then
+    Result := 0
+  else
+    Result := StrToFloat(s);
 end;
 
 procedure TConfigStorage.SetFloats(const Index: string;

@@ -33,7 +33,7 @@ var
 implementation
 
 uses
-  DMaster, FConfig, DSource, FEditor, TTGUtls;
+  DMaster, FConfig, DSource, FEditor, HorColCm;
 
 {$IFNDEF FPC}
 {$R *.DFM}

@@ -1,4 +1,6 @@
 inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
+  Left = 304
+  Top = 295
   inherited Panel1: TPanel
     Width = 361
   end

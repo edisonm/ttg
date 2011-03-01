@@ -7,11 +7,6 @@ interface
 uses
   Classes, Forms, Db, FCrsMMEd, FCrsMMER, FMasDeEd, DSource, ActnList;
 
-function ComposicionADuracion(const s: string): Integer;
-procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorForm;
-  AColDataSet, ARowDataSet, ARelDataSet: TDataSet); overload;
-procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorRForm;
-  AColDataSet, ARowDataSet, ALstDataSet, ARelDataSet: TDataSet); overload;
 {procedure LoadHints(ACrossManyToManyEditorForm: TFCubicalEditor2; AColDataSet,
   ARowDataSet, ALstDataSet, ARelDataSet: TTable); overload;}
 procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
@@ -21,31 +16,7 @@ procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
 implementation
 
 uses
-  SysUtils, HorColCm, DMaster;
-
-procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorForm;
-  AColDataSet, ARowDataSet, ARelDataSet: TDataSet);
-begin
-  with SourceDataModule, ACrossManyToManyEditorForm do
-  begin
-    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
-      [Description[ARelDataSet], Description[AColDataSet],
-      Description[ARowDataSet]]);
-  end;
-end;
-
-procedure LoadHints(ACrossManyToManyEditorForm: TCrossManyToManyEditorRForm;
-  AColDataSet, ARowDataSet, ALstDataSet, ARelDataSet: TDataSet);
-begin
-  with SourceDataModule, ACrossManyToManyEditorForm do
-  begin
-    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
-      [Description[ARelDataSet], Description[AColDataSet],
-      Description[ARowDataSet]]);
-    ListBox.Hint := Format('%s|%s', [ALstDataSet.Name,
-      Description[ALstDataSet]]);
-  end;
-end;
+  SysUtils, DMaster;
 
 (*
 procedure LoadHints(ACrossManyToManyEditorForm: TFCubicalEditor2; AColDataSet,
@@ -62,21 +33,6 @@ begin
 end;
 *)
 
-function ComposicionADuracion(const s: string): Integer;
-var
-  VPos, d: Integer;
-begin
-  VPos := 1;
-  Result := 0;
-  while VPos <= Length(s) do
-  begin
-    d := StrToInt(ExtractString(s, VPos, '.'));
-    if d <= 0 then
-      raise Exception.Create('Composicion Erroea');
-    Inc(Result, d);
-  end;
-end;
-			   
 procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
   TDataSet; const AColFieldKey, AColFieldName, AColField, ARowFieldsKey,
   ARowFieldName, ARowFields, ARelFieldKey: string);

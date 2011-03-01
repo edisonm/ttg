@@ -1,4 +1,8 @@
 inherited HorarioParaleloForm: THorarioParaleloForm
+  Left = 573
+  Height = 284
+  Top = 182
+  ClientHeight = 284
   OnCreate = FormCreate
   inherited TlBShow: TToolBar
     inherited BtnOk: TToolButton
@@ -47,25 +51,30 @@ inherited HorarioParaleloForm: THorarioParaleloForm
       Text = 'cbVerParalelo'
     end
   end
+  inherited pnlStatus: TPanel
+    Top = 265
+  end
   inherited Panel1: TPanel
     Left = 238
+    Height = 240
     Width = 241
   end
   inherited DrawGrid: TDrawGrid
     Left = 238
+    Height = 240
     Width = 241
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
     OnDblClick = IntercambiarPeriodosClick
   end
   object Splitter1: TSplitter[4]
     Left = 233
-    Height = 255
+    Height = 240
     Top = 25
     Width = 5
   end
   object DBGrid1: TDBGrid[5]
     Left = 0
-    Height = 255
+    Height = 240
     Top = 25
     Width = 233
     Align = alLeft

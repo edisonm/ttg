@@ -1,4 +1,6 @@
 inherited ProfesorForm: TProfesorForm
+  Left = 182
+  Top = 463
   OnActivate = FormActivate
   OnCreate = FormCreate
   inherited TlBShow: TToolBar

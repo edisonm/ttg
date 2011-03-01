@@ -4,8 +4,7 @@ unit KerModel;
 interface
 
 uses
-  Classes, DB, Dialogs, SysConst, Math, Forms, ZConnection, ZAbstractRODataset,
-  ZAbstractDataset, ZAbstractTable, ZDataset;
+  Classes, DB, Dialogs, Math, Forms;
 
 type
   TDynamicWordArray = array of Word;
@@ -98,7 +97,7 @@ type
   public
     property PeriodoCant: Smallint read FPeriodoCant;
     property ParaleloCant: Smallint read FParaleloCant;
-    procedure DoProgress(I, Step: Integer; Horario: TTimeTable;
+    procedure DoProgress(Position, RefreshInterval: Integer; Horario: TTimeTable;
       var Stop: Boolean);
     dynamic;
     procedure Configurar(ACruceProfesorValor, AProfesorFraccionamientoValor,
@@ -308,7 +307,7 @@ var
   FProfesorACodProfesor, FProfesorProhibicionTipoACodProfProhibicionTipo,
     FAulaTipoACodAulaTipo,
     FMateriaProhibicionTipoACodMateProhibicionTipo: TDynamicLongintArray;
-  procedure Cargar(ATable: TZTable; ALstName: string; var FMinCodLst: Integer;
+  procedure Cargar(ATable: TDataSet; ALstName: string; var FMinCodLst: Integer;
     var FCodLstALst: TDynamicSmallintArray;
     var FLstACodLst: TDynamicLongintArray);
   var
@@ -317,7 +316,6 @@ var
   begin
     with ATable do
     begin
-      IndexFieldNames := ALstName;
       First;
       VField := FindField(ALstName);
       FMinCodLst := VField.AsInteger;
@@ -749,7 +747,6 @@ var
       Inc(FSesionCantidadDoble, (j * (j - 1)) div 2);
     end;
   end;
-
 begin
   inherited Create;
   with SourceDataModule do
@@ -1238,8 +1235,7 @@ begin
         pd := LongWord(FAntListaCambios.Items[l]);
         p := Smallint(pd);
         d := Smallint(pd shr 16);
-        FDiaProfesorFraccionamiento[d, p] := GetDiaProfesorFraccionamiento
-          (d, p);
+        FDiaProfesorFraccionamiento[d, p] := GetDiaProfesorFraccionamiento(d, p);
       end;
       // ActualizarDiaProfesorFraccionamiento;
     end
@@ -1272,6 +1268,7 @@ procedure TTimeTable.ReportValues(AReport: TStrings);
 begin
   with AReport do
   begin
+    Add('--------------------------------------------------');
     Add('Detalle                     Cant.    Peso    Valor');
     Add('--------------------------------------------------');
     Add(Format('Cruce de profesores:        %5.d %7.2f %8.2f', [CruceProfesor,
@@ -3066,7 +3063,6 @@ begin
     begin
       Move(ATimeTable.FDiaProfesorFraccionamiento[d, 0],
         FDiaProfesorFraccionamiento[d, 0], FProfesorCant * SizeOf(Smallint));
-
       { Move(AObjetoModeloHorario.FDiaProfesorSumaHora[d, 0],
         FDiaProfesorSumaHora[d, 0], FProfesorCant * SizeOf(Smallint));
         Move(AObjetoModeloHorario.FDiaProfesorSumaCuadradoHora[d, 0],
@@ -3113,8 +3109,7 @@ begin
   with FModeloHorario do
     for I := 0 to FParaleloCant - 1 do
     begin
-      Stream.Write(ParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint)
-        );
+      Stream.Write(ParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint));
     end;
 end;
 
@@ -3125,8 +3120,7 @@ begin
   with FModeloHorario do
     for I := 0 to FParaleloCant - 1 do
     begin
-      Stream.Read(ParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint)
-        );
+      Stream.Read(ParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint));
     end;
   Actualizar;
   FRecalcularValor := True;
@@ -3209,7 +3203,6 @@ var
       end;
     end;
   end;
-
 begin
   SourceDataModule.CheckRelations := False;
   try
@@ -3307,11 +3300,11 @@ begin
   ActualizarDiaProfesorFraccionamiento;
 end;
 
-procedure TModeloHorario.DoProgress(I, Step: Integer; Horario: TTimeTable;
-  var Stop: Boolean);
+procedure TModeloHorario.DoProgress(Position, RefreshInterval: Integer;
+  Horario: TTimeTable; var Stop: Boolean);
 begin
   if Assigned(FOnProgress) then
-    FOnProgress(I, Step, Horario, Stop);
+    FOnProgress(Position, RefreshInterval, Horario, Stop);
 end;
 
 destructor TModeloHorario.Destroy;
@@ -3329,3 +3322,4 @@ SortSmallint := BubblesortSmallint;
 lSort := lBubblesort;
 
 end.
+

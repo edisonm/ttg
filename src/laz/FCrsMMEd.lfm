@@ -1,8 +1,12 @@
 inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
-  Left = 127
-  Top = 175
+  Left = 814
+  Top = 374
+  ActiveControl = Panel1
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
+  OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
+    Images = ImageList
     TabOrder = 3
     object BtnOk: TToolButton[1]
       Left = 24

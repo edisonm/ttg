@@ -1,4 +1,6 @@
 inherited SingleEditorForm: TSingleEditorForm
+  Left = 388
+  Top = 285
   OnCloseQuery = FormCloseQuery
   inherited TlBShow: TToolBar
     inherited BtnShow: TToolButton

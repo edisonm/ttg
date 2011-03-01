@@ -1,4 +1,10 @@
 inherited CrossManyToManyEditor1Form: TCrossManyToManyEditor1Form
+  Left = 338
+  Top = 243
+  ActiveControl = Panel1
+  inherited TlBShow: TToolBar
+    Images = ImageList
+  end
   inherited DrawGrid: TDrawGrid
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing, goEditing]
     OnGetEditText = DrawGridGetEditText

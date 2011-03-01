@@ -7,9 +7,13 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
   Graphics, Controls, Forms, Dialogs, Db, FCrsMMER, StdCtrls, Buttons, ExtCtrls,
-  Grids, Variants, FCrsMME1, DBCtrls, ZConnection, DBGrids, ZDataset, ComCtrls;
+  Grids, Variants, FCrsMME1, DBCtrls, ZConnection, DBGrids, ZDataset, ComCtrls,
+  FSelPeIn, DSource, DMaster;
 
 type
+
+  { THorarioParaleloForm }
+
   THorarioParaleloForm = class(TCrossManyToManyEditor1Form)
     QuHorarioParalelo: TZQuery;
     BtnIntercambiarPeriodos: TToolButton;
@@ -57,8 +61,9 @@ type
   end;
 
 implementation
+
 uses
-  HorColCm, FSelPeIn, DSource, DMaster;
+  HorColCm;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -103,7 +108,7 @@ var
   iCodDia, iCodHora: Integer;
 begin
   inherited;
-  if SeleccionarPeriodo(iCodDia, iCodHora) then
+  if TSelPeriodoForm.SeleccionarPeriodo(iCodDia, iCodHora) then
   begin
     with SourceDataModule do
       MasterDataModule.IntercambiarPeriodos(

@@ -7,6 +7,7 @@ interface
 uses
   Classes, Dialogs, Db, DBGrids, SysUtils, Variants;
 
+function ComposicionADuracion(const s: string): Integer;
 function NullToZero(A: Variant): Variant;
 procedure EqualSpaced(Strings: TStrings; ini, fin: Integer; delim: string);
 procedure LoadStringsFromDataSet(Strings: TStrings; DataSet: TDataSet;
@@ -20,6 +21,21 @@ function ExtractString(const Strings: string; var Pos: Integer; Separator:
   Char): string;
 
 implementation
+
+function ComposicionADuracion(const s: string): Integer;
+var
+  VPos, d: Integer;
+begin
+  VPos := 1;
+  Result := 0;
+  while VPos <= Length(s) do
+  begin
+    d := StrToInt(ExtractString(s, VPos, '.'));
+    if d <= 0 then
+      raise Exception.Create('Composicion Erroea');
+    Inc(Result, d);
+  end;
+end;
 
 function VarArrToStr(v: Variant; Separator: string = '; '): string;
 var

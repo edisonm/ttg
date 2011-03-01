@@ -48,19 +48,16 @@ type
     property DataSetNameList: TStrings read FDataSetNameList;
     property DataSetDescList: TStrings read FDataSetDescList;
     property FieldCaptionList: TStrings read FFieldCaptionList;
-    procedure SaveToStrings(AStrings: TStrings); virtual;
-    procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer); virtual;
   public
     procedure PrepareFields;
     procedure OpenTables;
     procedure CloseTables;
     procedure EmptyTables;
     procedure ApplyOnTables(FApplyOnTable: TApplyOnTable);
-//    procedure ExecuteAction(DoAction: procedure of object);
+    procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer); virtual;
+    procedure SaveToStrings(AStrings: TStrings); virtual;
     procedure LoadFromTextDir(const ADirName: string);
-    procedure LoadFromTextFile(const AFileName: TFileName);
-    procedure SaveToTextDir(const ADirName: TFileName); virtual;
-    procedure SaveToTextFile(const AFileName: TFileName);
+    procedure SaveToTextDir(const ADirName: TFileName);
 
     property CheckRelations: Boolean read FCheckRelations write FCheckRelations;
     property Tables: TDataSetArray read FTables write FTables;
@@ -201,34 +198,6 @@ begin
     {$ENDIF}
   finally
     FCheckRelations := True;
-  end;
-end;
-
-procedure TBaseDataModule.SaveToTextFile(const AFileName: TFileName);
-var
-  AStrings: TStrings;
-begin
-  AStrings := TStringList.Create;
-  try
-    SaveToStrings(AStrings);
-    AStrings.SaveToFile(AFileName);
-  finally
-    AStrings.Free;
-  end;
-end;
-
-procedure TBaseDataModule.LoadFromTextFile(const AFileName: TFileName);
-var
-  AStrings: TStrings;
-  APosition: Integer;
-begin
-  AStrings := TStringList.Create;
-  try
-    AStrings.LoadFromFile(AFileName);
-    APosition := 0;
-    LoadFromStrings(AStrings, APosition);
-  finally
-    AStrings.Free;
   end;
 end;
 

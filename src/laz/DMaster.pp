@@ -6,9 +6,12 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics, DB,
-  Controls, Forms, Dialogs, ZConnection, ZDataset, TTGUtls, Variants;
+  Controls, Forms, Dialogs, ZConnection, ZDataset, Variants, TTGCfg, UConfig;
 
 type
+
+  { TMasterDataModule }
+
   TMasterDataModule = class(TDataModule)
     TbTmpProfesorCarga: TZTable;
     TbTmpProfesorCargaCodProfesor: TLongintField;
@@ -33,6 +36,7 @@ type
     TbTmpAulaTipoCargaCodAulaTipo: TLongintField;
     TbTmpAulaTipoCargaAbrAulaTipo: TStringField;
     TbTmpAulaTipoCargaCarga: TLongintField;
+    QuNewCodHorario: TZReadOnlyQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -40,16 +44,27 @@ type
     FStringsShowAulaTipo: TStrings;
     FStringsShowProfesor: TStrings;
     FStringsShowParalelo: TStrings;
+    FConfigStorage: TTTGConfig;
     procedure FillProfesorProhibicionCant;
+    procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
   public
     { Public declarations }
     procedure IntercambiarPeriodos(ACodHorario, ACodNivel, ACodEspecializacion,
       ACodParaleloId, ACodDia1, ACodHora1, ACodDia2, ACodHora2: Integer);
     function PerformAllChecks(AMainStrings, ASubStrings: TStrings;
       AMaxCargaProfesor: Integer): Boolean;
+    function NewCodHorario: Integer;
+    procedure SaveToStrings(AStrings: TStrings);
+    procedure SaveIniStrings(AStrings: TStrings);
+    procedure SaveToTextDir(const ADirName: TFileName);
+    procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer);
+    procedure LoadFromTextFile(const AFileName: TFileName);
+    procedure SaveToTextFile(const AFileName: TFileName);
     property StringsShowAulaTipo: TStrings read FStringsShowAulaTipo;
     property StringsShowProfesor: TStrings read FStringsShowProfesor;
     property StringsShowParalelo: TStrings read FStringsShowParalelo;
+    property ConfigStorage: TTTGConfig read FConfigStorage;
+    procedure NewDatabase;
   end;
 
 var
@@ -63,6 +78,9 @@ uses
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
+
+const
+  pfhVersionNumber = 292;
 
 procedure TMasterDataModule.FillProfesorProhibicionCant;
 var
@@ -451,6 +469,65 @@ begin
   end;
 end;
 
+function TMasterDataModule.NewCodHorario: Integer;
+begin
+  with QuNewCodHorario do
+  begin
+    Open;
+    try
+      if Eof and Bof then
+        Result := 1
+      else
+        Result := QuNewCodHorario.Fields[0].AsInteger;
+    finally
+      Close;
+    end;
+  end;
+end;
+
+procedure TMasterDataModule.SaveToStrings(AStrings: TStrings);
+begin
+  AStrings.Add('TTD ' + IntToStr(pfhVersionNumber));
+  SourceDataModule.SaveToStrings(AStrings);
+  SaveIniStrings(AStrings);
+end;
+
+procedure TMasterDataModule.SaveIniStrings(AStrings: TStrings);
+begin
+  AStrings.Add(IntToStr(FConfigStorage.ConfigStrings.Count));
+  AStrings.AddStrings(FConfigStorage.ConfigStrings);
+end;
+
+procedure TMasterDataModule.SaveToTextDir(const ADirName: TFileName);
+begin
+  SourceDataModule.SaveToTextDir(ADirName);
+  FConfigStorage.ConfigStrings.SaveToFile(ADirName + '/config.ini');
+end;
+
+procedure TMasterDataModule.LoadIniStrings(AStrings: TStrings; var APosition: Integer);
+var
+  Count, Limit: Integer;
+begin
+  Count := StrToInt(AStrings.Strings[APosition]);
+  Inc(APosition);
+  Limit := APosition + Count;
+  FConfigStorage.ConfigStrings.Clear;
+  FConfigStorage.ConfigStrings.Capacity := Count;
+  while APosition < Limit do
+  begin
+    FConfigStorage.ConfigStrings.Add(AStrings[APosition]);
+    Inc(APosition);
+  end;
+end;
+
+procedure TMasterDataModule.LoadFromStrings(AStrings: TStrings; var APosition: Integer);
+begin
+  // version stored in AStrings.Strings[APosition];
+  Inc(APosition);
+  SourceDataModule.LoadFromStrings(AStrings, APosition);
+  LoadIniStrings(AStrings, APosition);
+end;
+
 procedure TMasterDataModule.IntercambiarPeriodos(ACodHorario, ACodNivel,
   ACodEspecializacion, ACodParaleloId, ACodDia1, ACodHora1, ACodDia2,
   ACodHora2: Integer);
@@ -517,10 +594,13 @@ begin
 end;
 
 procedure TMasterDataModule.DataModuleCreate(Sender: TObject);
+var
+  Strings: TStrings;
 begin
   FStringsShowAulaTipo := TStringList.Create;
   FStringsShowProfesor := TStringList.Create;
   FStringsShowParalelo := TStringList.Create;
+  FConfigStorage := TTTGConfig.Create(Self);
   with FStringsShowAulaTipo do
   begin
     add('Nivel_Paralelo=AbrNivel;NomParaleloId');
@@ -547,6 +627,29 @@ begin
     add('Profesor=ApeProfesor;NomProfesor');
     add('Materia_Profesor=NomMateria;ApeProfesor;NomProfesor');
   end;
+  with SourceDataModule do
+  begin
+    Database.Connect;
+    Strings := TStringList.Create;
+    if Database.Database = ':memory:' then
+    try
+      Strings.LoadFromFile('../dat/ttg.sql');
+      Database.ExecuteDirect('pragma journal_mode=off');
+      Database.ExecuteDirect(Strings.GetText);
+      PrepareTables;
+      OpenTables;
+      NewDatabase;
+    finally
+      Strings.Free;
+    end
+    else
+    begin
+      Database.ExecuteDirect('pragma journal_mode=off');
+      PrepareTables;
+      OpenTables;
+    end;
+    TbDistributivo.BeforePost := TbDistributivoBeforePost;
+  end;
 end;
 
 procedure TMasterDataModule.DataModuleDestroy(Sender: TObject);
@@ -554,6 +657,41 @@ begin
   FStringsShowAulaTipo.Free;
   FStringsShowProfesor.Free;
   FStringsShowParalelo.Free;
+end;
+
+procedure TMasterDataModule.NewDatabase;
+begin
+  SourceDataModule.EmptyTables;
+  ConfigStorage.ConfigStrings.Clear;
+  SourceDataModule.FillDefaultData;
+end;
+
+procedure TMasterDataModule.LoadFromTextFile(const AFileName: TFileName);
+var
+  AStrings: TStrings;
+  APosition: Integer;
+begin
+  AStrings := TStringList.Create;
+  try
+    AStrings.LoadFromFile(AFileName);
+    APosition := 0;
+    LoadFromStrings(AStrings, APosition);
+  finally
+    AStrings.Free;
+  end;
+end;
+
+procedure TMasterDataModule.SaveToTextFile(const AFileName: TFileName);
+var
+  AStrings: TStrings;
+begin
+  AStrings := TStringList.Create;
+  try
+    SaveToStrings(AStrings);
+    AStrings.SaveToFile(AFileName);
+  finally
+    AStrings.Free;
+  end;
 end;
 
 initialization

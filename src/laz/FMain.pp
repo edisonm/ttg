@@ -132,8 +132,6 @@ type
     procedure StatusBarDrawPanel(StatusBar: TStatusBar;
       Panel: TStatusPanel; const Rect: TRect);
     procedure FormCreate(Sender: TObject);
-    procedure MRUManagerClick(Sender: TObject; const RecentName,
-      Caption: string; UserData: Integer);
     procedure ActConfigurarExecute(Sender: TObject);
     procedure ActChequearFactibilidadExecute(Sender: TObject);
     procedure ActAboutExecute(Sender: TObject);
@@ -338,7 +336,7 @@ begin
     if ConfirmOperation then
     begin
       Max := 20;
-      SourceDataModule.NewDataBase;
+      MasterDataModule.NewDataBase;
       Progress := 0;
     end;
   finally
@@ -371,7 +369,7 @@ procedure TMainForm.SaveToFile(const AFileName: string);
 begin
   Cursor := crHourGlass;
   try
-    SourceDataModule.SaveToTextFile(AFileName);
+    MasterDataModule.SaveToTextFile(AFileName);
   finally
     Cursor := crDefault;
   end;
@@ -382,7 +380,7 @@ begin
   Cursor := crHourGlass;
   try
     SourceDataModule.EmptyTables;
-    SourceDataModule.LoadFromTextFile(AFileName);
+    MasterDataModule.LoadFromTextFile(AFileName);
   finally
     Cursor := crDefault;
   end;
@@ -400,7 +398,8 @@ begin
       begin
         LoadFromFile(OpenDialog.FileName);
         SaveDialog.FileName := OpenDialog.FileName;
-        MainForm.Caption := Application.Title + ' - ' + SourceDataModule.NomColegio;
+        MainForm.Caption := Application.Title + ' - ' +
+          MasterDataModule.ConfigStorage.NomColegio;
       end;
     end;
   finally
@@ -424,6 +423,7 @@ begin
 {$IFNDEF FREEWARE}
   with MasterDataModule do
   try
+    s := IntToStr(NewCodHorario);
     if not InputQuery('Codigos de los Horarios: ',
       'Ingrese los codigos de los Horarios a generar', s) then
       Exit;
@@ -442,6 +442,7 @@ var
   VEvolElitista: TEvolElitista;
   FMomentoInicial, FMomentoFinal: TDateTime;
   sProb: string;
+  Report: TStrings;
   procedure ProcesarCodHorario(ACodHorario: Integer);
   begin
     CodHorario := ACodHorario;
@@ -452,25 +453,45 @@ var
       FMomentoInicial := Now;
       ProgressForm.Caption := Format('Elaboracion en progreso [%d]', [CodHorario]);
       FLogStrings.Clear;
+      ProgressForm.ProgressMax := vEvolElitista.NumMaxGeneracion;
       FLogStrings.BeginUpdate;
+      ProgressForm.ShowProgressForm;
       try
-        vEvolElitista.Ejecutar(SourceDataModule.NumIteraciones);
+        vEvolElitista.Execute(MasterDataModule.ConfigStorage.NumIteraciones);
       finally
+        ProgressForm.CloseProgressForm;
         FLogStrings.EndUpdate;
       end;
       //FLogStrings.SaveToFile(Format('LogHor_%d.txt', [CodHorario]));
       if ProgressForm.CancelClick then
         Exit;
-      VEvolElitista.DescensoRapidoForzado;
-      {if True then
+      if MasterDataModule.ConfigStorage.ApplyDoubleDownHill then
       begin
-        with VEvolElitista.MejorObjetoModeloHorario do
-        begin
-          DescensoRapido2(MarcarProgreso);
+        ProgressForm.Caption := Format('Mejorando Horario [%d]', [CodHorario]);
+        ProgressForm.ProgressMax := vModeloHorario.SesionCantidadDoble;
+        ProgressForm.ShowProgressForm;
+        try
+          VEvolElitista.BestTimeTable.DescensoRapidoDobleForzado(
+            MasterDataModule.ConfigStorage.NumIteraciones);
+        finally
+          ProgressForm.CloseProgressForm;
         end;
-      end;}
+      end
+      else
+        VEvolElitista.DescensoRapidoForzado;
       FMomentoFinal := Now;
-      VEvolElitista.SaveBestToDatabase(ACodHorario, FMomentoInicial, FMomentoFinal);
+      Report := TStringList.Create;
+      try
+        Report.Add('Algoritmo Evolutivo Elitista');
+        Report.Add('============================');
+        Report.Add(Format('Descenso rapido doble: %s',
+          [BoolToStr(MasterDataModule.ConfigStorage.ApplyDoubleDownHill, 'Sí', 'No')]));
+        VEvolElitista.ReportParameters(Report);
+        VEvolElitista.BestTimeTable.ReportValues(Report);
+        VEvolElitista.SaveBestToDatabase(ACodHorario, FMomentoInicial, FMomentoFinal, Report);
+      finally
+        Report.Free;
+      end;
     end;
   end;
   procedure ProcessCodList(const CodList: string);
@@ -501,7 +522,7 @@ var
 var
   mr: TModalResult;
 begin
-  with SourceDataModule, MasterDataModule do
+  with SourceDataModule, MasterDataModule.ConfigStorage do
   begin
     InitRandom;
     ActElaborarHorario.Enabled := False;
@@ -540,7 +561,6 @@ begin
       FAjustar := False;
       VEvolElitista.OnRegistrarMejor := Self.OnRegistrarMejor;
       sProb := '';
-      ProgressForm.ShowProgressForm(NumMaxGeneracion);
       ProcessCodList(s);
       if sProb <> '' then
         MessageDlg(Format('Los siguientes horarios ya existian: %s', [sProb]),
@@ -549,7 +569,6 @@ begin
       VEvolElitista.Free;
       VModeloHorario.Free;
       FEjecutando := False;
-      ProgressForm.CloseProgressForm;
       ActElaborarHorario.Enabled := True;
       TbHorarioDetalle.Refresh;
     end;
@@ -761,23 +780,13 @@ begin
   end;
 end;
 
-procedure TMainForm.MRUManagerClick(Sender: TObject; const RecentName,
-                                    Caption: string; UserData: Integer);
-begin
-  if ConfirmOperation then
-  begin
-    LoadFromFile(RecentName);
-    SaveDialog.FileName := RecentName;
-    OpenDialog.FileName := RecentName;
-  end;
-end;
-
 procedure TMainForm.ActConfigurarExecute(Sender: TObject);
 begin
   try
     if ShowConfiguracionForm(ActConfigurar.HelpContext) = mrOK then
     begin
-      MainForm.Caption := Application.Title + ' - ' + SourceDataModule.NomColegio;
+      MainForm.Caption := Application.Title + ' - ' +
+        MasterDataModule.ConfigStorage.NomColegio;
       {$IFNDEF FREEWARE}
       if FEjecutando then
         Self.AjustarPesos;
@@ -798,7 +807,7 @@ begin
   MessageViewForm.HelpContext := ActChequearFactibilidad.HelpContext;
   if MasterDataModule.PerformAllChecks(MessageViewForm.MemLogistic.Lines,
                                        MessageViewForm.MemResumen.Lines,
-                                       SourceDataModule.MaxCargaProfesor) then
+                                       MasterDataModule.ConfigStorage.MaxCargaProfesor) then
   begin
     MessageViewForm.Show;
   end

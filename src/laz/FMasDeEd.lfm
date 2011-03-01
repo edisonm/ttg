@@ -1,4 +1,6 @@
 inherited MasterDetailEditorForm: TMasterDetailEditorForm
+  Left = 397
+  Top = 250
   inherited TlBShow: TToolBar
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )

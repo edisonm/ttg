@@ -91,7 +91,7 @@ type
       AHoraHuecaDesubicadaValor, ASesioncortadaValor, AMateriaProhibicionValor,
       AProfesorProhibicionValor, AMateriaNoDispersaValor, AValue: Double);
     { Public declarations }
-    procedure ShowProgressForm(AMax: Integer);
+    procedure ShowProgressForm;
     procedure CloseProgressForm;
     property CloseClick: Boolean read FCloseClick write FCloseClick;
     property CancelClick: Boolean read FCancelClick write FCancelClick;
@@ -218,16 +218,14 @@ begin
 end;
 
 
-procedure TProgressForm.ShowProgressForm(AMax: Integer);
+procedure TProgressForm.ShowProgressForm;
 begin
   // HelpContext := ActElaborarHorario.HelpContext;
-  ProgressMax := AMax;
   FInit := Now;
   lblInit.Caption := FormatDateTime(Format('%s %s ', [ShortDateFormat,
     LongTimeFormat]), FInit);
   FCloseClick := False;
-  bbtnClose.Kind := bkCustom;
-  bbtnCancel.Kind := bkCustom;
+  FCancelClick := False;
   Show;
   Application.ProcessMessages;
 end;

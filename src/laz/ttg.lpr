@@ -46,7 +46,7 @@ uses
   RelUtils in 'RelUtils.pp',
   DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   FSelPeIn in 'FSelPeIn.pp' {SelPeriodoForm},
-  DBase in 'DBase.pp' {BaseDataModule: TDataModule};
+  DBase in 'DBase.pp', TTGCfg {BaseDataModule: TDataModule};
 
 {$IFNDEF FPC}
 {$R *.res}

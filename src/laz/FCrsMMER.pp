@@ -7,10 +7,13 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, Grids, DB, FCrsMMEd,
-  ComCtrls, HorColCm;
+  ComCtrls;
 
 type
   TDynamicColorArray = array of TColor;
+
+  { TCrossManyToManyEditorRForm }
+
   TCrossManyToManyEditorRForm = class(TCrossManyToManyEditorForm)
     Panel2: TPanel;
     Splitter: TSplitter;
@@ -58,6 +61,7 @@ type
     property Rel: TDynamicIntegerArrayArray read FRel;
   public
     { Public declarations }
+    procedure LoadHints(AColDataSet, ARowDataSet, ALstDataSet, ARelDataSet: TDataSet); overload;
     procedure ShowEditor(AColDataSet, ARowDataSet, ALstDataSet,
       ARelDataSet, ASelDataSet: TDataSet; const AColFieldKey, AColFieldName,
       AColField, AColFieldSel, ARowFieldKey, ARowFieldName, ARowField,
@@ -70,6 +74,8 @@ var
 
 implementation
 
+uses
+  DSource;
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
@@ -230,6 +236,20 @@ begin
   else
     Result := '';
 end;
+
+procedure TCrossManyToManyEditorRForm.LoadHints(AColDataSet, ARowDataSet,
+  ALstDataSet, ARelDataSet: TDataSet);
+begin
+  with SourceDataModule do
+  begin
+    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
+      [Description[ARelDataSet], Description[AColDataSet],
+      Description[ARowDataSet]]);
+    ListBox.Hint := Format('%s|%s', [ALstDataSet.Name,
+      Description[ALstDataSet]]);
+  end;
+end;
+
 
 procedure TCrossManyToManyEditorRForm.ListBoxDrawItem(Control: TWinControl;
   Index: Integer; Rect: TRect; State: TOwnerDrawState);
