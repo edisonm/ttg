@@ -10,11 +10,20 @@ uses
   DBCtrls, ExtCtrls, ComCtrls, ActnList;
 
 type
+
+  { TMasterDetailEditorForm }
+
   TMasterDetailEditorForm = class(TSingleEditorForm)
     DataSourceDetail: TDataSource;
     DBGridDetail: TDBGrid;
     Splitter1: TSplitter;
+    procedure ActFindExecute(Sender: TObject);
+    procedure DataSourceDataChange(Sender: TObject; Field: TField);
+    procedure DataSourceStateChange(Sender: TObject);
+    procedure DBGridDblClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     procedure SetDataSetDetail(ADataSetDetail: TDataSet);
@@ -62,6 +71,38 @@ procedure TMasterDetailEditorForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   DataSourceDetail.DataSet := nil;
+  inherited;
+end;
+
+procedure TMasterDetailEditorForm.ActFindExecute(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure TMasterDetailEditorForm.DataSourceDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+end;
+
+procedure TMasterDetailEditorForm.DataSourceStateChange(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure TMasterDetailEditorForm.DBGridDblClick(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure TMasterDetailEditorForm.FormCloseQuery(Sender: TObject;
+  var CanClose: boolean);
+begin
+  inherited;
+end;
+
+procedure TMasterDetailEditorForm.FormDestroy(Sender: TObject);
+begin
   inherited;
 end;
 

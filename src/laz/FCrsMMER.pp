@@ -123,13 +123,13 @@ end;
 procedure TCrossManyToManyEditorRForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  inherited FormClose(Sender, Action);
+  inherited;
 end;
 
 procedure TCrossManyToManyEditorRForm.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
-  inherited FormCloseQuery(Sender, CanClose);
+  inherited;
 end;
 
 procedure TCrossManyToManyEditorRForm.FormCreate(Sender: TObject);
@@ -140,7 +140,7 @@ end;
 
 procedure TCrossManyToManyEditorRForm.FormDestroy(Sender: TObject);
 begin
-  inherited FormDestroy(Sender);
+  inherited;
 end;
 
 procedure TCrossManyToManyEditorRForm.InitRelArray;
@@ -314,12 +314,12 @@ end;
 
 procedure TCrossManyToManyEditorRForm.BtnCancelClick(Sender: TObject);
 begin
-  inherited BtnCancelClick(Sender);
+  inherited;
 end;
 
 procedure TCrossManyToManyEditorRForm.BtnOkClick(Sender: TObject);
 begin
-  inherited BtnOkClick(Sender);
+  inherited;
 end;
 
 procedure TCrossManyToManyEditorRForm.ClearSelection;

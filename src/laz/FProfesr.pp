@@ -10,10 +10,18 @@ uses
   FMasDeEd, FCrsMMER;
 
 type
+
+  { TProfesorForm }
+
   TProfesorForm	= class(TMasterDetailEditorForm)
     BtnProfesorProhibicion: TToolButton;
     ActProfesorProhibicion: TAction;
+    procedure ActFindExecute(Sender: TObject);
     procedure ActProfesorProhibicionExecute(Sender: TObject);
+    procedure DataSourceStateChange(Sender: TObject);
+    procedure DBGridDblClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure FormActivate(Sender: TObject);
@@ -67,6 +75,31 @@ begin
   begin
     TbProfesorProhibicion.MasterSource := nil;
   end;
+end;
+
+procedure TProfesorForm.DataSourceStateChange(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure TProfesorForm.DBGridDblClick(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure TProfesorForm.ActFindExecute(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure TProfesorForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  inherited;
+end;
+
+procedure TProfesorForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+begin
+  inherited;
 end;
 
 procedure TProfesorForm.DataSourceDataChange(Sender: TObject; Field: TField);

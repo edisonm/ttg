@@ -7,15 +7,25 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, FSingEdt, Grids, Buttons, DBCtrls, ExtCtrls,
-  Printers, ComCtrls, ActnList, FCrsMMER, ZDataset;
+  Printers, ComCtrls, ActnList, FCrsMMER, ZDataset, db;
 
 type
+
+  { TMateriaForm }
+
   TMateriaForm = class(TSingleEditorForm)
     BtnMateriaProhibicion: TToolButton;
     ActMateriaProhibicion: TAction;
     QuMateriaProhibicion: TZQuery;
+    procedure ActFindExecute(Sender: TObject);
     procedure ActMateriaProhibicionExecute(Sender: TObject);
+    procedure DataSourceDataChange(Sender: TObject; Field: TField);
+    procedure DataSourceStateChange(Sender: TObject);
+    procedure DBGridDblClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     FMateriaProhibicionForm: TCrossManyToManyEditorRForm;
     procedure FormActivate(Sender: TObject);
@@ -61,6 +71,37 @@ begin
   end;
 end;
 
+procedure TMateriaForm.DataSourceDataChange(Sender: TObject; Field: TField);
+begin
+  inherited;
+end;
+
+procedure TMateriaForm.DataSourceStateChange(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure TMateriaForm.DBGridDblClick(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure TMateriaForm.ActFindExecute(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure TMateriaForm.FormClose(Sender: TObject; var CloseAction: TCloseAction
+  );
+begin
+  inherited;
+end;
+
+procedure TMateriaForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+begin
+  inherited;
+end;
+
 procedure TMateriaForm.FormActivate(Sender: TObject);
 begin
   with SourceDataModule do
@@ -73,6 +114,11 @@ procedure TMateriaForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuMateriaProhibicion.Open;
+end;
+
+procedure TMateriaForm.FormDestroy(Sender: TObject);
+begin
+  inherited;
 end;
 
 initialization

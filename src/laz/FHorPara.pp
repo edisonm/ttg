@@ -43,8 +43,21 @@ type
     QuParaleloNomParalelo: TStringField;
     Splitter1: TSplitter;
     DBNavigator: TDBNavigator;
+    procedure BtnCancelClick(Sender: TObject);
     procedure BtnMostrarClick(Sender: TObject);
+    procedure BtnOkClick(Sender: TObject);
+    procedure DrawGridDrawCell(Sender: TObject; aCol, aRow: Integer;
+      aRect: TRect; aState: TGridDrawState);
+    procedure DrawGridGetEditText(Sender: TObject; ACol, ARow: Integer;
+      var Value: string);
+    procedure DrawGridSelectCell(Sender: TObject; aCol, aRow: Integer;
+      var CanSelect: Boolean);
+    procedure DrawGridSetEditText(Sender: TObject; ACol, ARow: Integer;
+      const Value: string);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure IntercambiarPeriodosClick(Sender: TObject);
     procedure QuHorarioParaleloCalcFields(DataSet: TDataSet);
     procedure DSParaleloDataChange(Sender: TObject; Field: TField);
@@ -93,6 +106,52 @@ begin
       'CodDia', 'CodDia', 'CodHora', 'NomHora', 'CodHora', 'CodHora', 'Nombre');
 end;
 
+procedure THorarioParaleloForm.BtnCancelClick(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure THorarioParaleloForm.BtnOkClick(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure THorarioParaleloForm.DrawGridDrawCell(Sender: TObject; aCol,
+  aRow: Integer; aRect: TRect; aState: TGridDrawState);
+begin
+  inherited;
+end;
+
+procedure THorarioParaleloForm.DrawGridGetEditText(Sender: TObject; ACol,
+  ARow: Integer; var Value: string);
+begin
+  inherited;
+end;
+
+procedure THorarioParaleloForm.DrawGridSelectCell(Sender: TObject; aCol,
+  aRow: Integer; var CanSelect: Boolean);
+begin
+  inherited;
+end;
+
+procedure THorarioParaleloForm.DrawGridSetEditText(Sender: TObject; ACol,
+  ARow: Integer; const Value: string);
+begin
+  inherited;
+end;
+
+procedure THorarioParaleloForm.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+begin
+  inherited;
+end;
+
+procedure THorarioParaleloForm.FormCloseQuery(Sender: TObject;
+  var CanClose: boolean);
+begin
+  inherited;
+end;
+
 procedure THorarioParaleloForm.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -101,6 +160,11 @@ begin
   QuHorarioParalelo.Open;
   LoadNames(MasterDataModule.StringsShowParalelo, cbVerParalelo.Items);
   cbVerParalelo.Text := cbVerParalelo.Items[0];
+end;
+
+procedure THorarioParaleloForm.FormDestroy(Sender: TObject);
+begin
+  inherited;
 end;
 
 procedure THorarioParaleloForm.IntercambiarPeriodosClick(Sender: TObject);

@@ -9,11 +9,23 @@ uses
   Controls, Forms, FCrsMMEd, Buttons, ExtCtrls, Grids, DB, ComCtrls;
 
 type
+
+  { TCrossManyToManyEditor1Form }
+
   TCrossManyToManyEditor1Form = class(TCrossManyToManyEditorForm)
+    procedure BtnCancelClick(Sender: TObject);
+    procedure BtnOkClick(Sender: TObject);
+    procedure DrawGridDrawCell(Sender: TObject; aCol, aRow: Integer;
+      aRect: TRect; aState: TGridDrawState);
     procedure DrawGridGetEditText(Sender: TObject; ACol, ARow: Integer;
       var Value: string);
+    procedure DrawGridSelectCell(Sender: TObject; aCol, aRow: Integer;
+      var CanSelect: Boolean);
     procedure DrawGridSetEditText(Sender: TObject; ACol, ARow: Integer;
       const Value: string);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FRelFieldKey: TField;
@@ -112,6 +124,22 @@ begin
   end;
 end;
 
+procedure TCrossManyToManyEditor1Form.BtnCancelClick(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure TCrossManyToManyEditor1Form.BtnOkClick(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure TCrossManyToManyEditor1Form.DrawGridDrawCell(Sender: TObject; aCol,
+  aRow: Integer; aRect: TRect; aState: TGridDrawState);
+begin
+  inherited;
+end;
+
 procedure TCrossManyToManyEditor1Form.DrawGridGetEditText(Sender: TObject;
   ACol,
   ARow: Integer; var Value: string);
@@ -124,6 +152,12 @@ begin
   end;
 end;
 
+procedure TCrossManyToManyEditor1Form.DrawGridSelectCell(Sender: TObject;
+  aCol, aRow: Integer; var CanSelect: Boolean);
+begin
+  inherited;
+end;
+
 procedure TCrossManyToManyEditor1Form.DrawGridSetEditText(Sender: TObject;
   ACol,
   ARow: Integer; const Value: string);
@@ -131,6 +165,23 @@ begin
   inherited;
   Edit;
   FRel[ACol - 1, ARow - 1] := Value;
+end;
+
+procedure TCrossManyToManyEditor1Form.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+begin
+  inherited;
+end;
+
+procedure TCrossManyToManyEditor1Form.FormCloseQuery(Sender: TObject;
+  var CanClose: boolean);
+begin
+  inherited;
+end;
+
+procedure TCrossManyToManyEditor1Form.FormDestroy(Sender: TObject);
+begin
+  inherited;
 end;
 
 function TCrossManyToManyEditor1Form.GetText(i, j: Integer): string;

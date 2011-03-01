@@ -1,16 +1,30 @@
 inherited HorarioAulaTipoForm: THorarioAulaTipoForm
+  Left = 268
+  Height = 431
+  Top = 222
+  Width = 775
+  ActiveControl = DBNavigator
+  ClientHeight = 431
+  ClientWidth = 775
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
+    Width = 775
+    Images = ImageList
     inherited BtnShow: TToolButton
       Visible = False
     end
     inherited BtnOk: TToolButton
       Enabled = False
       Visible = False
+      OnClick = BtnOkClick
     end
     inherited BtnCancel: TToolButton
       Enabled = False
       Visible = False
+      OnClick = BtnCancelClick
     end
     object DBNavigator: TDBNavigator[3]
       Left = 1
@@ -29,37 +43,47 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
     end
     object cbVerAulaTipo: TComboBox[4]
       Left = 93
-      Height = 21
+      Height = 23
       Hint = 'Ver|Que ver en el horario del tipo de aula'
       Top = 2
       Width = 193
-      ItemHeight = 13
+      ItemHeight = 0
       OnChange = BtnMostrarClick
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
     end
   end
+  inherited pnlStatus: TPanel
+    Top = 412
+    Width = 775
+  end
   inherited Panel1: TPanel
-    Left = 238
-    Width = 241
+    Left = 266
+    Height = 387
+    Width = 509
   end
   inherited DrawGrid: TDrawGrid
-    Left = 238
-    Width = 241
+    Left = 266
+    Height = 387
+    Width = 509
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
+    OnDrawCell = DrawGridDrawCell
+    OnGetEditText = DrawGridGetEditText
+    OnSelectCell = DrawGridSelectCell
+    OnSetEditText = DrawGridSetEditText
   end
   object Splitter1: TSplitter[4]
-    Left = 233
-    Height = 255
+    Left = 261
+    Height = 387
     Top = 25
     Width = 5
   end
   object DBGrid1: TDBGrid[5]
     Left = 0
-    Height = 255
+    Height = 387
     Top = 25
-    Width = 233
+    Width = 261
     Align = alLeft
     DataSource = DSAulaTipo
     TabOrder = 4

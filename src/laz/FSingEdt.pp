@@ -11,6 +11,8 @@ uses
 
 type
 
+{ TSingleEditorForm }
+
 TSingleEditorForm = class(TEditorForm)
     DBNavigator: TDBNavigator;
     DataSource: TDataSource;
@@ -22,6 +24,7 @@ TSingleEditorForm = class(TEditorForm)
     ActShow: TAction;
     ActFind: TAction;
     procedure ActFindExecute(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBGridCheckButton(Sender: TObject; ACol: Integer;
       Field: TField; var AEnabled: Boolean);
@@ -30,6 +33,7 @@ TSingleEditorForm = class(TEditorForm)
     procedure DBGridDblClick(Sender: TObject);
     procedure DataSourceStateChange(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     procedure SetDataSet(ADataSet: TDataSet);
@@ -72,6 +76,12 @@ end;
 procedure TSingleEditorForm.ActFindExecute(Sender: TObject);
 begin
   SearchInDBGrid(DBGrid);
+end;
+
+procedure TSingleEditorForm.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+begin
+  inherited;
 end;
 
 procedure TSingleEditorForm.FormCloseQuery(Sender: TObject;
@@ -143,6 +153,11 @@ begin
       + IntToStr(DataSource.DataSet.RecordCount)
   else
     SLRecordNo.Caption := '';
+end;
+
+procedure TSingleEditorForm.FormDestroy(Sender: TObject);
+begin
+  inherited;
 end;
 
 initialization

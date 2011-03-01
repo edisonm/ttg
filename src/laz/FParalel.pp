@@ -11,15 +11,23 @@ uses
   Grids, CheckLst, ComCtrls, ActnList, Variants;
 
 type
+
+  { TParaleloForm }
+
   TParaleloForm = class(TSingleEditorForm)
     DataSourceList: TDataSource;
     DataSourceDetail: TDataSource;
     Splitter1: TSplitter;
     CheckListBox: TCheckListBox;
+    procedure ActFindExecute(Sender: TObject);
+    procedure DBGridDblClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure CheckListBoxExit(Sender: TObject);
     procedure DataSourceStateChange(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FieldCodParaleloId, FieldNomParaleloId: TField;
@@ -66,6 +74,27 @@ begin
   end;
 end;
 
+procedure TParaleloForm.FormClose(Sender: TObject; var CloseAction: TCloseAction
+  );
+begin
+  inherited;
+end;
+
+procedure TParaleloForm.ActFindExecute(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure TParaleloForm.DBGridDblClick(Sender: TObject);
+begin
+  inherited;
+end;
+
+procedure TParaleloForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+begin
+  inherited;
+end;
+
 procedure TParaleloForm.doLoadConfig;
 begin
   inherited;
@@ -104,7 +133,12 @@ end;
 
 procedure TParaleloForm.DataSourceStateChange(Sender: TObject);
 begin
-  inherited DataSourceStateChange(Sender);
+  inherited;
+end;
+
+procedure TParaleloForm.FormDestroy(Sender: TObject);
+begin
+  inherited;
 end;
 
 procedure TParaleloForm.CheckListBoxExit(Sender: TObject);

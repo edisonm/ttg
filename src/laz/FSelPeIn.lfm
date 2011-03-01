@@ -1,12 +1,12 @@
 object SelPeriodoForm: TSelPeriodoForm
-  Left = 256
-  Height = 102
-  Top = 372
-  Width = 271
+  Left = 459
+  Height = 123
+  Top = 297
+  Width = 295
   ActiveControl = CBDia
   Caption = 'Intercambiar Periodo'
-  ClientHeight = 102
-  ClientWidth = 271
+  ClientHeight = 123
+  ClientWidth = 295
   OnCreate = FormCreate
   Position = poDesktopCenter
   LCLVersion = '0.9.28.2'
@@ -39,8 +39,8 @@ object SelPeriodoForm: TSelPeriodoForm
   object CBDia: TDBLookupComboBox
     Left = 16
     Height = 27
-    Top = 40
-    Width = 120
+    Top = 48
+    Width = 128
     KeyField = 'CodDia'
     ListField = 'NomDia'
     ListFieldIndex = 0
@@ -49,10 +49,10 @@ object SelPeriodoForm: TSelPeriodoForm
     TabOrder = 0
   end
   object CBHora: TDBLookupComboBox
-    Left = 143
+    Left = 152
     Height = 27
-    Top = 40
-    Width = 120
+    Top = 48
+    Width = 128
     KeyField = 'CodHora'
     ListField = 'NomHora'
     ListFieldIndex = 0
@@ -61,10 +61,10 @@ object SelPeriodoForm: TSelPeriodoForm
     TabOrder = 1
   end
   object BBAceptar: TBitBtn
-    Left = 104
-    Height = 25
-    Top = 72
-    Width = 75
+    Left = 64
+    Height = 32
+    Top = 80
+    Width = 99
     Caption = 'Aceptar'
     Default = True
     Kind = bkOK
@@ -72,10 +72,10 @@ object SelPeriodoForm: TSelPeriodoForm
     TabOrder = 2
   end
   object BBCancelar: TBitBtn
-    Left = 188
-    Height = 25
-    Top = 72
-    Width = 75
+    Left = 176
+    Height = 32
+    Top = 80
+    Width = 104
     Cancel = True
     Caption = 'Cancelar'
     Kind = bkCancel
