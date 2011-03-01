@@ -808,8 +808,8 @@ end;
 procedure TMainForm.ActChequearFactibilidadExecute(Sender: TObject);
 begin
   MessageViewForm.HelpContext := ActChequearFactibilidad.HelpContext;
-  if MasterDataModule.PerformAllChecks(MessageViewForm.MemLogistic.Lines,
-                                       MessageViewForm.MemResumen.Lines,
+  if MasterDataModule.PerformAllChecks(MessageViewForm.MemLog.Lines,
+                                       MessageViewForm.MemSummary.Lines,
                                        MasterDataModule.ConfigStorage.MaxCargaProfesor) then
   begin
     MessageViewForm.Show;
@@ -892,7 +892,7 @@ begin
     SaveDialogCSV.FileName := Values['SaveDialogCSV_FileName'];
     OpenDialog.FileName := Values['OpenDialog_FileName'];
 {
-    MessageViewForm.MemResumen.Height :=
+    MessageViewForm.MemSummary.Height :=
       StrToInt(Values['MessageViewForm_MemResumen_Height']);
 }
   end;
@@ -912,7 +912,7 @@ begin
     Values['OpenDialog_FileName'] := OpenDialog.FileName;
 {
     Values['MessageViewForm_MemResumen_Height'] :=
-      IntToStr(MessageViewForm.MemResumen.Height);
+      IntToStr(MessageViewForm.MemSummary.Height);
 }
   end;
 end;

@@ -159,7 +159,7 @@ type
     FMateriaProhibicionValor, FProfesorProhibicionValor, FValor: Double;
     FRecalcularValor: Boolean;
     function GetValor: Double;
-    procedure DoGetValor;
+    procedure UpdateValue;
     procedure Normalizar(AParalelo: Smallint; var APeriodo: Smallint);
     {
       procedure SetClaveAleatoriaInterno(AParalelo, APeriodo: Smallint;
@@ -1398,7 +1398,7 @@ end;
 function TTimeTable.GetValor: Double;
 begin
   if FRecalcularValor then
-    DoGetValor;
+    UpdateValue;
   Result := FValor;
 end;
 
@@ -1410,7 +1410,7 @@ end;
 function TTimeTable.GetHoraHuecaDesubicada: Integer;
 begin
   if FRecalcularValor then
-    DoGetValor;
+    UpdateValue;
   Result := FHoraHuecaDesubicada;
 end;
 
@@ -1441,7 +1441,7 @@ end;
 function TTimeTable.GetSesionCortada: Integer;
 begin
   if FRecalcularValor then
-    DoGetValor;
+    UpdateValue;
   Result := FSesionCortada;
 end;
 
@@ -1484,7 +1484,7 @@ end;
 function TTimeTable.GetMateriaNoDispersa: Integer;
 begin
   if FRecalcularValor then
-    DoGetValor;
+    UpdateValue;
   Result := FMateriaNoDispersa;
 end;
 
@@ -1553,14 +1553,14 @@ end;
 function TTimeTable.GetMateriaProhibicion: Integer;
 begin
   if FRecalcularValor then
-    DoGetValor;
+    UpdateValue;
   Result := FMateriaProhibicion;
 end;
 
 function TTimeTable.GetMateriaProhibicionValor: Double;
 begin
   if FRecalcularValor then
-    DoGetValor;
+    UpdateValue;
   Result := FMateriaProhibicionValor;
 end;
 
@@ -1586,14 +1586,14 @@ end;
 function TTimeTable.GetProfesorProhibicion: Integer;
 begin
   if FRecalcularValor then
-    DoGetValor;
+    UpdateValue;
   Result := FProfesorProhibicion;
 end;
 
 function TTimeTable.GetProfesorProhibicionValor: Double;
 begin
   if FRecalcularValor then
-    DoGetValor;
+    UpdateValue;
   Result := FProfesorProhibicionValor;
 end;
 
@@ -1674,7 +1674,7 @@ begin
   Result := ModeloHorario.FCruceAulaTipoValor * FCruceAulaTipo;
 end;
 
-procedure TTimeTable.DoGetValor;
+procedure TTimeTable.UpdateValue;
 begin
   RecalcularValor := False;
   with ModeloHorario do
@@ -2734,7 +2734,7 @@ var
   { Continuar: Boolean; }
 begin
   Actualizar;
-  DoGetValor;
+  UpdateValue;
   with ModeloHorario do
   begin
     for ci := 0 to FParaleloCant - 1 do
@@ -2830,7 +2830,7 @@ var
   { Continuar: Boolean; }
 begin
   Actualizar;
-  DoGetValor;
+  UpdateValue;
   with ModeloHorario do
   begin
     for ci := 0 to FParaleloCant - 1 do
@@ -2936,7 +2936,7 @@ begin
           d1 := FSesionADuracion[p[j1]];
 {$IFDEF DEBUG}
           Actualizar;
-          DoGetValor;
+          UpdateValue;
           v1 := Valor;
 {$ENDIF}
           dk1 := EvaluarIntercambioInterno(I, j, j1);
@@ -2945,7 +2945,7 @@ begin
             IntercambiarInterno(I, j, j1, True);
 {$IFDEF DEBUG}
             Actualizar;
-            DoGetValor;
+            UpdateValue;
             v2 := Valor;
             if Abs((v2 - v1) - dk1) > 0.00001 then
               raise Exception.Create('Problemas');

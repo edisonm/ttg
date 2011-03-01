@@ -5,16 +5,19 @@ unit FMsgView;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
-  Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+  Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls;
 
 type
+
+  { TMessageViewForm }
+
   TMessageViewForm = class(TForm)
-    MemLogistic: TMemo;
+    MemLog: TMemo;
+    MemSummary: TMemo;
     Panel2: TPanel;
     bbtnClose: TBitBtn;
     lblMsg: TLabel;
-    MemResumen: TMemo;
     Panel1: TPanel;
     Splitter1: TSplitter;
   private

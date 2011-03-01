@@ -1,10 +1,10 @@
 object MainForm: TMainForm
   Left = 686
-  Height = 203
+  Height = 76
   Top = 352
   Width = 613
   Caption = 'MainForm'
-  ClientHeight = 180
+  ClientHeight = 53
   ClientWidth = 613
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -54,7 +54,7 @@ object MainForm: TMainForm
   object StatusBar: TStatusBar
     Left = 0
     Height = 17
-    Top = 163
+    Top = 36
     Width = 613
     AutoHint = True
     Panels = <    
@@ -67,6 +67,7 @@ object MainForm: TMainForm
       item
         Width = 153
       end>
+    SizeGrip = False
     OnDrawPanel = StatusBarDrawPanel
   end
   object ToolBar: TToolBar

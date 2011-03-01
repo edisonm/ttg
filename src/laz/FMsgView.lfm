@@ -1,11 +1,11 @@
 object MessageViewForm: TMessageViewForm
   Left = 243
-  Height = 373
+  Height = 376
   Top = 207
   Width = 434
   ActiveControl = Panel1
   Caption = 'Visor de mensajes'
-  ClientHeight = 373
+  ClientHeight = 376
   ClientWidth = 434
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -14,26 +14,26 @@ object MessageViewForm: TMessageViewForm
   LCLVersion = '0.9.28.2'
   object Panel1: TPanel
     Left = 0
-    Height = 333
+    Height = 336
     Top = 0
     Width = 434
     Align = alClient
     Caption = 'Panel1'
-    ClientHeight = 333
+    ClientHeight = 336
     ClientWidth = 434
     TabOrder = 0
     object Splitter1: TSplitter
       Cursor = crVSplit
       Left = 1
       Height = 3
-      Top = 273
+      Top = 276
       Width = 432
       Align = alBottom
       ResizeAnchor = akBottom
     end
-    object MemLogistic: TMemo
+    object MemLog: TMemo
       Left = 1
-      Height = 272
+      Height = 275
       Top = 1
       Width = 432
       Align = alClient
@@ -44,10 +44,10 @@ object MessageViewForm: TMessageViewForm
       ReadOnly = True
       TabOrder = 0
     end
-    object MemResumen: TMemo
+    object MemSummary: TMemo
       Left = 1
       Height = 56
-      Top = 276
+      Top = 279
       Width = 432
       Align = alBottom
       Font.CharSet = ANSI_CHARSET
@@ -60,7 +60,7 @@ object MessageViewForm: TMessageViewForm
   object Panel2: TPanel
     Left = 0
     Height = 40
-    Top = 333
+    Top = 336
     Width = 434
     Align = alBottom
     BevelOuter = bvNone
@@ -69,19 +69,20 @@ object MessageViewForm: TMessageViewForm
     TabOrder = 1
     object lblMsg: TLabel
       Left = 8
-      Height = 13
+      Height = 14
       Top = 16
-      Width = 3
+      Width = 4
       Color = clBtnFace
       ParentColor = False
       Transparent = False
     end
     object bbtnClose: TBitBtn
-      Left = 336
-      Height = 30
+      Left = 328
+      Height = 32
       Top = 3
-      Width = 88
+      Width = 96
       Anchors = [akRight, akBottom]
+      Caption = '&Cerrar'
       Kind = bkClose
       TabOrder = 0
     end

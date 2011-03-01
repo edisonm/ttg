@@ -87,7 +87,7 @@ type
     constructor CrearDesdeModelo(AModeloHorario: TModeloHorario;
       ATamPoblacion: Longint);
     procedure PrefijarHorarios(const Horarios: string);
-    procedure InvalidarValores;
+    {procedure InvalidarValores;}
     procedure Actualizar;
     procedure Configurar(ATamPoblacion: Integer);
     destructor Destroy; override;
@@ -228,6 +228,7 @@ begin
   end;
 end;
 
+{
 procedure TEvolElitista.InvalidarValores;
 var
   i: Integer;
@@ -237,6 +238,7 @@ begin
     FPoblacion[i].InvalidarValor;
   end;
 end;
+}
 
 procedure TEvolElitista.Actualizar;
 var
