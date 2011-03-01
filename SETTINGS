@@ -2,12 +2,12 @@
 
 ABOUT=About
 
-UNITS=KerModel RelUtils HorColCm TTGUtls Rand SortAlgs KerEvolE UConfig
+UNITS=KerModel RelUtils HorColCm TTGUtls Rand SortAlgs KerEvolE UConfig ttgcfg
 
 FORMS=FCrsMMEd FSplash FSingEdt FMasDeEd FHorario FMsgView FCrsMME0	\
 	FCrsMME1 FHorProf FProfesr FMain FEditor DMaster FHorPara	\
 	DSource FSelPeIn FConfig FCrsMMER DBase FHorAulT FParalel	\
-	FProgres FMateria
+	FProgres FMateria 
 
 DSRCBASE0=DSrcBase
 

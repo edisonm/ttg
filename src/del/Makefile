@@ -7,16 +7,9 @@ TTGDIR:=$(shell cd ../.. ; pwd)
 include ../../SETTINGS
 include ../../COMMON
 
-TTGMDB=../../dat/$(TTGMDBBASE)
-TTGDPR=ttg.dpr
-
 .PHONY: prjlaz srclaz
 
 .SUFFIXES: .lrs .lfm .dfm .pas .pp .lpr .dpr
-
-BASELAZFILES=$(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
-	  $(addsuffix .lfm, $(FORMS) $(DSRCBASE)) \
-	  $(addsuffix .lrs, $(FORMS) $(DSRCBASE)) ttg.lpr
 
 LAZARUSFILES=$(BASELAZFILES)
 
@@ -37,7 +30,7 @@ all: $(TTGEXE)
 %.lfm: %.dfm
 	sed \
 	  -e s:"TWideStringField":"TStringField":g \
-	  -e s:"TIntegerField":"TLongIntField":g \
+	  -e s:"TIntegerField":"TLongintField":g \
 	  -e s:"  OldCreateOrder = .*":"":g \
 	  -e s:"  TextHeight = .*":"":g \
 	  -e s:"  ExplicitWidth = .*":"":g \
@@ -78,7 +71,7 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-$(TTGEXE): $(TTGDPR) $(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE) $(ABOUT))
+$(TTGEXE): $(BASEDELFILES)
 	$(DCC32) $(DCC32OPTS) $(TTGDPR)
 
 $(DSRCBASE).pas: $(DBUTILS) $(TTGMDB) Makefile
@@ -88,11 +81,11 @@ $(DSRCBASE).pas: $(DBUTILS) $(TTGMDB) Makefile
 $(DBUTILS):
 	cd ../.. ; $(MAKE) $(DBUTILS)
 
-test:
-	@echo TTGDIR=$(TTGDIR)
-	@echo FILES=$(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE) $(ABOUT))
-
 clean:
 	$(RM) $(TTGEXE) $(TTGDIR)/obj/*.dcu \
 	  $(DSRCBASE0).pas $(DSRCBASE0).dfm *.identcache
 	$(RM) -r src/del/__history
+
+test:
+	@echo TTGDIR=$(TTGDIR)
+	@echo FILES=$(addsuffix .pas, $(UNITS) $(FORMS) $(DSRCBASE) $(ABOUT))

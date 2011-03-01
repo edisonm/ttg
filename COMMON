@@ -3,10 +3,12 @@
 ifneq ($(shell uname -s),Linux)
 DSRCBASE=$(DSRCBASE0)
 LAZRES="c:/lazarus/tools/lazres"
+EXEEXT=.exe
 else
 LAZRES=lazres
+EXEEXT=
 endif
-TTGEXE=$(TTGDIR)/bin/ttg.exe
+TTGEXE=$(TTGDIR)/bin/ttg$(EXEEXT)
 DBUTILS=$(TTGDIR)/bin/dbutils.exe
 DCC32="c:/archivos de programa/Embarcadero/RAD Studio/7.0/bin/dcc32"
 DCC32OPTS= \
@@ -17,3 +19,17 @@ DCC32OPTS= \
 	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/parsesql)' \
 	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/plain)' \
 	-N0'$(shell cygpath -w $(TTGDIR)/obj)'
+
+TTGDPR=ttg.dpr
+TTGLPR=ttg.lpr
+TTGMDB=../../dat/$(TTGMDBBASE)
+
+BASELAZFILES=$(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
+	  $(addsuffix .lfm, $(FORMS) $(DSRCBASE)) \
+	  $(addsuffix .lrs, $(FORMS) $(DSRCBASE)) ttg.lpr
+
+BASEDELFILES=$(addsuffix .pas,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
+	  $(addsuffix .dfm, $(FORMS) $(DSRCBASE)) $(TTGDPR)
+
+%.lrs: %.lfm
+	$(LAZRES) $@ $<

@@ -99,7 +99,7 @@ const
     'ftFloat', { dbFloat }
     'ftTime', { dbTime }
     'ftDateTime' { dbTimeStamp }
-  );
+                                                    );
   sBoolean: array [Boolean] of string = ('False', 'True');
 
 resourcestring
@@ -464,6 +464,10 @@ begin
     Add('');
     Add('*)');
     Add('');
+    Add('{$IFDEF FPC}');
+    Add('{$MODE Delphi}');
+    Add('{$ENDIF}');
+    Add('');
     Add('interface');
     Add('');
     Add('uses');
@@ -478,6 +482,8 @@ begin
     Add(Format('  T%s = class(TBaseDataModule)', [DataModuleName]));
   end;
   StringDFM.Add(Format('inherited %s: T%s', [DataModuleName, DataModuleName]));
+  StringDFM.Add('  OnCreate = DataModuleCreate');
+  StringDFM.Add('  OnDestroy = nil');
   Msgs.Clear;
   Msgs.BeginUpdate;
   VTableList := TStringList.Create;
@@ -500,8 +506,7 @@ begin
           for i := 0 to Count - 1 do
           begin
             MasterRels[VTableList.IndexOf(Item[i].Table)].Add(Pointer(i));
-            DetailRels[VTableList.IndexOf(Item[i].ForeignTable)].Add
-              (Pointer(i));
+            DetailRels[VTableList.IndexOf(Item[i].ForeignTable)].Add(Pointer(i));
           end;
         end;
         for i := 0 to VTableList.Count - 1 do
@@ -526,13 +531,6 @@ begin
             StringDFM.Add('    FieldDefs = <>');}
           if ACreateIndexDefs then
             CreateIndexDefs(VTableDef);
-          if (DetailRels[i].Count > 0) or (MasterRels[i].Count > 0) then
-          begin
-            StringDFM.Add('    BeforePost = DataSetBeforePost');
-          end;
-          with MasterRels[i] do
-            if Count > 0 then
-              StringDFM.Add('    BeforeDelete = DataSetBeforeDelete');
           StringDFM.Add(Format('    Left = %d', [48 + 96 * (i mod 5)]));
           StringDFM.Add
             (Format('    Top = %d', [48 + 96 * (i div 5) + 12 *
@@ -580,6 +578,7 @@ begin
               [DataModuleName]));
           Add('begin');
           Add('  inherited;');
+          Add('  OnDestroy := DataModuleDestroy;');
           Add(Format('  SetLength(FTables, %d);', [VTableList.Count]));
           if ACreateSrcRels then
           begin
@@ -591,6 +590,13 @@ begin
           begin
             d := VTableList[i];
             Add(Format('  Tables[%d] := Tb%s;', [i, d]));
+            if (DetailRels[i].Count > 0) or (MasterRels[i].Count > 0) then
+            begin
+              Add(Format('  Tb%s.BeforePost := DataSetBeforePost;', [d]));
+            end;
+            with MasterRels[i] do
+              if Count > 0 then
+                StringPAS.Add(Format('  Tb%s.BeforeDelete := DataSetBeforeDelete;', [d]));
           end;
           if ACreateSrcFields then
             for i := 0 to VTableList.Count - 1 do

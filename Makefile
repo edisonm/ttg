@@ -34,11 +34,11 @@ $(ISS): $(ISS).tmpl $(TTGSQL)
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-SRCTYPE=del
-# SRCTYPE=laz
+# SRCTYPE=del
+SRCTYPE=laz
 
 $(TTGEXE):
-	cd src/$(SRCTYPE) ; $(MAKE) $(TTGEXE)
+	cd src/$(SRCTYPE) ; $(MAKE) $(TTGEXE) ; strip --strip-all $(TTGEXE)
 
 $(DBUTILS): src/dbutils/$(DBUTILSDPR) $(addprefix src/dbutils/, $(addsuffix .pas, $(DBUNITS)))
 	cd src/dbutils; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
@@ -130,3 +130,4 @@ dbutils: $(DBUTILS)
 
 test:
 	@echo BUILDDATETIME="$(BUILDDATETIME)"
+	@echo TTGEXE=$(TTGEXE)

@@ -4771,7 +4771,7 @@ ProfesorProhibicion
 "51";"6";"2";"2";
 "51";"6";"3";"2";
 "51";"6";"5";"2";
-32
+35
 NomColegio=Colegio Nacional Mixto Nocturno Salamanca
 AnioLectivo=1999-2000
 NomAutoridad=Dr. Edgar Velasco
@@ -4781,20 +4781,20 @@ CarResponsable=Prof. Suplente
 MaxCargaProfesor=23
 HorarioSeleccionado=8
 Comentarios="Pruebas realizadas.\n\r\n\rDatos necesarios para la realizacion del horario definitivo.\n\r"
-Randomize=0
+Randomize=-1
 Seed1=11563
 Seed2=65165498
 Seed3=16264
 Seed4=65698
-NumIteraciones=1
-CruceProfesor=89
+NumIteraciones=10
+CruceProfesor=189
 ProfesorFraccionamiento=15
 CruceAulaTipo=65
 HoraHueca=95
-SesionCortada=55
+SesionCortada=155
 MateriaNoDispersa=1
 TamPoblacion=5
-NumMaxGeneracion=400000
+NumMaxGeneracion=100000
 ProbCruzamiento=0,3
 ProbMutacion1=0,2
 OrdenMutacion1=3
@@ -4804,3 +4804,6 @@ MostrarProfesorHorarioTexto=AbrNivel + " " + NomParaleloId + " " + NomMateria
 MostrarProfesorHorarioLongitud=20
 ProfesorHorarioExcluirProfProhibicion=(ProfesorProhibicion.CodProfProhibicionTipo <> 2)AND(ProfesorProhibicion.CodProfProhibicionTipo <> 3)
 RangoPolinizacion=10
+edtHorarioIni_Text=
+dedCompartir_Text=
+ApplyDoubleDownHill=-1
