@@ -9,6 +9,9 @@ uses
   Controls, Forms, Dialogs, FCrsMMEd, StdCtrls, Buttons, ExtCtrls, ComCtrls, Grids;
 
 type
+
+  { TCrossManyToManyEditor0Form }
+
   TCrossManyToManyEditor0Form = class(TCrossManyToManyEditorForm)
     Panel2: TPanel;
     ListBox: TListBox;
@@ -111,7 +114,7 @@ var
 procedure TCrossManyToManyEditor0Form.DrawGridSelectCell(Sender: TObject;
   ACol, ARow: Integer; var CanSelect: Boolean);
 begin
-  inherited DrawGridSelectCell(Sender, ACol, ARow, CanSelect);
+  inherited;
   FCol := ACol;
   FRow := ARow;
 end;
@@ -119,18 +122,18 @@ end;
 procedure TCrossManyToManyEditor0Form.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  inherited FormClose(Sender, Action);
+  inherited;
 end;
 
 procedure TCrossManyToManyEditor0Form.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
-  inherited FormCloseQuery(Sender, CanClose);
+  inherited;
 end;
 
 procedure TCrossManyToManyEditor0Form.FormDestroy(Sender: TObject);
 begin
-  inherited FormDestroy(Sender);
+  inherited;
 end;
 
 function TCrossManyToManyEditor0Form.GetText(i, j: Integer): string;
@@ -167,7 +170,7 @@ end;
 procedure TCrossManyToManyEditor0Form.DrawGridDrawCell(Sender: TObject; ACol,
   ARow: Integer; Rect: TRect; State: TGridDrawState);
 begin
-  inherited DrawGridDrawCell(Sender, ACol, ARow, Rect, State);
+  inherited;
 end;
 
 procedure TCrossManyToManyEditor0Form.DrawGridKeyUp(Sender: TObject;
@@ -180,12 +183,12 @@ end;
 
 procedure TCrossManyToManyEditor0Form.BtnCancelClick(Sender: TObject);
 begin
-  inherited BtnCancelClick(Sender);
+  inherited;
 end;
 
 procedure TCrossManyToManyEditor0Form.BtnOkClick(Sender: TObject);
 begin
-  inherited BtnOkClick(Sender);
+  inherited;
 end;
 
 procedure TCrossManyToManyEditor0Form.ClearSelection;

@@ -1,7 +1,7 @@
 inherited HorarioForm: THorarioForm
-  Left = 211
+  Left = 631
   Height = 440
-  Top = 209
+  Top = 96
   Width = 677
   ActiveControl = DBNavigator
   Caption = 'HorarioForm'
@@ -181,7 +181,6 @@ inherited HorarioForm: THorarioForm
     end
   end
   inherited ImageList: TImageList
-    BkColor = clBtnFace
     left = 88
     top = 112
     Bitmap = {

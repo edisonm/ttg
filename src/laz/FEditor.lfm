@@ -1,7 +1,7 @@
 object EditorForm: TEditorForm
-  Left = 126
+  Left = 434
   Height = 299
-  Top = 160
+  Top = 140
   Width = 479
   ActiveControl = Panel1
   Caption = 'EditorForm'
@@ -49,7 +49,7 @@ object EditorForm: TEditorForm
     TabOrder = 1
   end
   object ImageList: TImageList
-    BkColor = clForeground
+    BkColor = clBtnFace
     left = 92
     top = 88
     Bitmap = {
