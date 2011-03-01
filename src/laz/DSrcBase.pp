@@ -1,7 +1,7 @@
 unit DSrcBase;
 
 (*
-  martes, 01 de marzo de 2011 16:04:08
+  martes, 01 de marzo de 2011 20:57:51
 
   Warning:
 
@@ -11,14 +11,16 @@ unit DSrcBase;
 
 *)
 
-{$I ttg.inc}
+{$IFDEF FPC}
+{$MODE Delphi}
+{$ENDIF}
 
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, Db, DBase, ZConnection, ZAbstractRODataset,
-  ZAbstractDataset, ZAbstractTable, ZDataset;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF},
+  SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
+  DBase, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
 
 type
   TSourceBaseDataModule = class(TBaseDataModule)

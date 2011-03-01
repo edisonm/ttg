@@ -436,6 +436,9 @@ end;
 
 {$IFNDEF FREEWARE}
 
+const
+  FBoolToStr: array [Boolean] of string = ('No', 'Sí');
+
 procedure TMainForm.ElaborarHorario(s: string);
 var
   VModeloHorario: TModeloHorario;
@@ -485,7 +488,7 @@ var
         Report.Add('Algoritmo Evolutivo Elitista');
         Report.Add('============================');
         Report.Add(Format('Descenso rapido doble: %s',
-          [BoolToStr(MasterDataModule.ConfigStorage.ApplyDoubleDownHill, 'Sí', 'No')]));
+          [FBoolToStr[MasterDataModule.ConfigStorage.ApplyDoubleDownHill]]));
         VEvolElitista.ReportParameters(Report);
         VEvolElitista.BestTimeTable.ReportValues(Report);
         VEvolElitista.SaveBestToDatabase(ACodHorario, FMomentoInicial, FMomentoFinal, Report);

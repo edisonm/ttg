@@ -7,7 +7,7 @@
       <TargetFileExt Value=".exe"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="6"/>
+      <ActiveEditorIndexAtStart Value="7"/>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
@@ -63,9 +63,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMain"/>
-        <CursorPos X="65" Y="225"/>
-        <TopLine Value="220"/>
+        <CursorPos X="40" Y="440"/>
+        <TopLine Value="427"/>
+        <EditorIndex Value="7"/>
         <UsageCount Value="108"/>
+        <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="DMaster.pp"/>
@@ -771,7 +773,7 @@
         <SyntaxHighlighter Value="LFM"/>
       </Unit87>
     </Units>
-    <JumpHistory Count="3" HistoryIndex="2">
+    <JumpHistory Count="5" HistoryIndex="4">
       <Position1>
         <Filename Value="FEditor.pp"/>
         <Caret Line="173" Column="109" TopLine="163"/>
@@ -784,6 +786,14 @@
         <Filename Value="FEditor.pp"/>
         <Caret Line="17" Column="5" TopLine="4"/>
       </Position3>
+      <Position4>
+        <Filename Value="FMain.pp"/>
+        <Caret Line="233" Column="27" TopLine="220"/>
+      </Position4>
+      <Position5>
+        <Filename Value="FMain.pp"/>
+        <Caret Line="441" Column="3" TopLine="426"/>
+      </Position5>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
