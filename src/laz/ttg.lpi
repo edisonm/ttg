@@ -7,7 +7,7 @@
       <TargetFileExt Value=".exe"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="11"/>
+      <ActiveEditorIndexAtStart Value="7"/>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
@@ -51,9 +51,9 @@
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="76" Y="47"/>
-        <TopLine Value="44"/>
+        <TopLine Value="21"/>
         <EditorIndex Value="0"/>
-        <UsageCount Value="156"/>
+        <UsageCount Value="161"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -63,10 +63,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMain"/>
-        <CursorPos X="7" Y="693"/>
-        <TopLine Value="693"/>
+        <CursorPos X="33" Y="534"/>
+        <TopLine Value="530"/>
         <EditorIndex Value="7"/>
-        <UsageCount Value="114"/>
+        <UsageCount Value="119"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
@@ -78,26 +78,27 @@
         <UnitName Value="DMaster"/>
         <CursorPos X="3" Y="123"/>
         <TopLine Value="123"/>
-        <UsageCount Value="154"/>
+        <UsageCount Value="159"/>
       </Unit2>
       <Unit3>
         <Filename Value="KerModel.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="KerModel"/>
-        <CursorPos X="69" Y="1294"/>
-        <TopLine Value="1281"/>
-        <EditorIndex Value="11"/>
-        <UsageCount Value="154"/>
+        <CursorPos X="1" Y="3130"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="12"/>
+        <UsageCount Value="159"/>
         <Loaded Value="True"/>
+        <FoldState Value=" T4i.H0w011111[44[99 PjUqP0W"/>
       </Unit3>
       <Unit4>
         <Filename Value="KerEvolE.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="KerEvolE"/>
-        <CursorPos X="46" Y="255"/>
-        <TopLine Value="250"/>
+        <CursorPos X="23" Y="14"/>
+        <TopLine Value="13"/>
         <EditorIndex Value="8"/>
-        <UsageCount Value="155"/>
+        <UsageCount Value="160"/>
         <Loaded Value="True"/>
       </Unit4>
       <Unit5>
@@ -107,10 +108,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FProgres"/>
-        <CursorPos X="97" Y="150"/>
-        <TopLine Value="138"/>
+        <CursorPos X="7" Y="127"/>
+        <TopLine Value="120"/>
         <EditorIndex Value="10"/>
-        <UsageCount Value="152"/>
+        <UsageCount Value="157"/>
         <Loaded Value="True"/>
       </Unit5>
       <Unit6>
@@ -119,13 +120,13 @@
         <UnitName Value="SortAlgs"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="156"/>
+        <UsageCount Value="161"/>
       </Unit6>
       <Unit7>
         <Filename Value="Rand.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Rand"/>
-        <UsageCount Value="152"/>
+        <UsageCount Value="157"/>
       </Unit7>
       <Unit8>
         <Filename Value="About.pp"/>
@@ -133,7 +134,7 @@
         <UnitName Value="About"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="154"/>
+        <UsageCount Value="159"/>
       </Unit8>
       <Unit9>
         <Filename Value="FCrsMMEd.pp"/>
@@ -145,7 +146,7 @@
         <CursorPos X="30" Y="75"/>
         <TopLine Value="75"/>
         <EditorIndex Value="3"/>
-        <UsageCount Value="155"/>
+        <UsageCount Value="160"/>
         <Loaded Value="True"/>
       </Unit9>
       <Unit10>
@@ -158,7 +159,7 @@
         <CursorPos X="12" Y="117"/>
         <TopLine Value="114"/>
         <EditorIndex Value="6"/>
-        <UsageCount Value="154"/>
+        <UsageCount Value="159"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
@@ -171,7 +172,7 @@
         <CursorPos X="55" Y="137"/>
         <TopLine Value="137"/>
         <EditorIndex Value="1"/>
-        <UsageCount Value="154"/>
+        <UsageCount Value="159"/>
         <Loaded Value="True"/>
       </Unit11>
       <Unit12>
@@ -184,7 +185,7 @@
         <CursorPos X="56" Y="135"/>
         <TopLine Value="130"/>
         <EditorIndex Value="2"/>
-        <UsageCount Value="155"/>
+        <UsageCount Value="160"/>
         <Loaded Value="True"/>
       </Unit12>
       <Unit13>
@@ -197,7 +198,7 @@
         <CursorPos X="32" Y="11"/>
         <TopLine Value="4"/>
         <EditorIndex Value="4"/>
-        <UsageCount Value="154"/>
+        <UsageCount Value="159"/>
         <Loaded Value="True"/>
       </Unit13>
       <Unit14>
@@ -209,7 +210,7 @@
         <UnitName Value="FMateria"/>
         <CursorPos X="13" Y="86"/>
         <TopLine Value="84"/>
-        <UsageCount Value="110"/>
+        <UsageCount Value="115"/>
       </Unit14>
       <Unit15>
         <Filename Value="FProfesr.pp"/>
@@ -221,7 +222,7 @@
         <CursorPos X="3" Y="92"/>
         <TopLine Value="90"/>
         <EditorIndex Value="5"/>
-        <UsageCount Value="129"/>
+        <UsageCount Value="134"/>
         <Loaded Value="True"/>
       </Unit15>
       <Unit16>
@@ -230,7 +231,7 @@
         <UnitName Value="TTGUtls"/>
         <CursorPos X="21" Y="93"/>
         <TopLine Value="69"/>
-        <UsageCount Value="129"/>
+        <UsageCount Value="134"/>
       </Unit16>
       <Unit17>
         <Filename Value="UConfig.pp"/>
@@ -238,7 +239,7 @@
         <UnitName Value="UConfig"/>
         <CursorPos X="49" Y="54"/>
         <TopLine Value="27"/>
-        <UsageCount Value="152"/>
+        <UsageCount Value="157"/>
       </Unit17>
       <Unit18>
         <Filename Value="FConfig.pp"/>
@@ -249,7 +250,7 @@
         <UnitName Value="FConfig"/>
         <CursorPos X="39" Y="218"/>
         <TopLine Value="208"/>
-        <UsageCount Value="154"/>
+        <UsageCount Value="159"/>
       </Unit18>
       <Unit19>
         <Filename Value="FMsgView.pp"/>
@@ -259,9 +260,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMsgView"/>
         <CursorPos X="1" Y="21"/>
-        <TopLine Value="8"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="9"/>
-        <UsageCount Value="110"/>
+        <UsageCount Value="115"/>
         <Loaded Value="True"/>
       </Unit19>
       <Unit20>
@@ -273,7 +274,7 @@
         <UnitName Value="FHorPara"/>
         <CursorPos X="34" Y="55"/>
         <TopLine Value="47"/>
-        <UsageCount Value="128"/>
+        <UsageCount Value="133"/>
       </Unit20>
       <Unit21>
         <Filename Value="FMasDeEd.pp"/>
@@ -284,7 +285,7 @@
         <UnitName Value="FMasDeEd"/>
         <CursorPos X="13" Y="90"/>
         <TopLine Value="82"/>
-        <UsageCount Value="128"/>
+        <UsageCount Value="133"/>
       </Unit21>
       <Unit22>
         <Filename Value="FHorAulT.pp"/>
@@ -295,7 +296,7 @@
         <UnitName Value="FHorAulT"/>
         <CursorPos X="86" Y="34"/>
         <TopLine Value="30"/>
-        <UsageCount Value="149"/>
+        <UsageCount Value="154"/>
       </Unit22>
       <Unit23>
         <Filename Value="FSplash.pp"/>
@@ -306,7 +307,7 @@
         <UnitName Value="FSplash"/>
         <CursorPos X="47" Y="8"/>
         <TopLine Value="1"/>
-        <UsageCount Value="152"/>
+        <UsageCount Value="157"/>
       </Unit23>
       <Unit24>
         <Filename Value="FParalel.pp"/>
@@ -317,7 +318,7 @@
         <UnitName Value="FParalel"/>
         <CursorPos X="3" Y="85"/>
         <TopLine Value="83"/>
-        <UsageCount Value="110"/>
+        <UsageCount Value="115"/>
       </Unit24>
       <Unit25>
         <Filename Value="FSingEdt.pp"/>
@@ -328,7 +329,7 @@
         <UnitName Value="FSingEdt"/>
         <CursorPos X="45" Y="151"/>
         <TopLine Value="143"/>
-        <UsageCount Value="152"/>
+        <UsageCount Value="157"/>
       </Unit25>
       <Unit26>
         <Filename Value="FHorario.pp"/>
@@ -337,9 +338,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FHorario"/>
-        <CursorPos X="13" Y="368"/>
-        <TopLine Value="1"/>
-        <UsageCount Value="129"/>
+        <CursorPos X="4" Y="311"/>
+        <TopLine Value="289"/>
+        <EditorIndex Value="11"/>
+        <UsageCount Value="134"/>
+        <Loaded Value="True"/>
       </Unit26>
       <Unit27>
         <Filename Value="HorColCm.pp"/>
@@ -347,7 +350,7 @@
         <UnitName Value="HorColCm"/>
         <CursorPos X="17" Y="143"/>
         <TopLine Value="128"/>
-        <UsageCount Value="155"/>
+        <UsageCount Value="160"/>
       </Unit27>
       <Unit28>
         <Filename Value="FHorProf.pp"/>
@@ -358,7 +361,7 @@
         <UnitName Value="FHorProf"/>
         <CursorPos X="3" Y="43"/>
         <TopLine Value="43"/>
-        <UsageCount Value="141"/>
+        <UsageCount Value="146"/>
       </Unit28>
       <Unit29>
         <Filename Value="DSrcBase.pp"/>
@@ -369,7 +372,7 @@
         <UnitName Value="DSrcBase"/>
         <CursorPos X="3" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="155"/>
+        <UsageCount Value="160"/>
       </Unit29>
       <Unit30>
         <Filename Value="RelUtils.pp"/>
@@ -377,7 +380,7 @@
         <UnitName Value="RelUtils"/>
         <CursorPos X="43" Y="672"/>
         <TopLine Value="652"/>
-        <UsageCount Value="152"/>
+        <UsageCount Value="157"/>
       </Unit30>
       <Unit31>
         <Filename Value="DSource.pp"/>
@@ -388,7 +391,7 @@
         <UnitName Value="DSource"/>
         <CursorPos X="1" Y="1"/>
         <TopLine Value="1"/>
-        <UsageCount Value="155"/>
+        <UsageCount Value="160"/>
       </Unit31>
       <Unit32>
         <Filename Value="FSelPeIn.pp"/>
@@ -399,7 +402,7 @@
         <UnitName Value="FSelPeIn"/>
         <CursorPos X="66" Y="9"/>
         <TopLine Value="1"/>
-        <UsageCount Value="127"/>
+        <UsageCount Value="132"/>
       </Unit32>
       <Unit33>
         <Filename Value="DBase.pp"/>
@@ -410,7 +413,7 @@
         <UnitName Value="DBase"/>
         <CursorPos X="59" Y="59"/>
         <TopLine Value="47"/>
-        <UsageCount Value="154"/>
+        <UsageCount Value="159"/>
       </Unit33>
       <Unit34>
         <Filename Value="ttg.inc"/>
@@ -423,7 +426,7 @@
         <UnitName Value="Win32WSControls"/>
         <CursorPos X="1" Y="224"/>
         <TopLine Value="213"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit35>
       <Unit36>
         <Filename Value="FMain.lfm"/>
@@ -764,7 +767,7 @@
         <UnitName Value="TTGCfg"/>
         <CursorPos X="14" Y="151"/>
         <TopLine Value="126"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="38"/>
       </Unit85>
       <Unit86>
         <Filename Value="FHorAulT.lfm"/>
@@ -783,124 +786,124 @@
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1394" Column="19" TopLine="1381"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="101" Column="18" TopLine="78"/>
       </Position1>
       <Position2>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1398" Column="22" TopLine="1381"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="102" Column="24" TopLine="79"/>
       </Position2>
       <Position3>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1400" Column="22" TopLine="1381"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="111" Column="51" TopLine="92"/>
       </Position3>
       <Position4>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1412" Column="22" TopLine="1399"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="669" Column="1" TopLine="647"/>
       </Position4>
       <Position5>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1443" Column="22" TopLine="1430"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="153" Column="34" TopLine="131"/>
       </Position5>
       <Position6>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1486" Column="22" TopLine="1473"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="65" Column="1" TopLine="43"/>
       </Position6>
       <Position7>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1555" Column="22" TopLine="1542"/>
+        <Filename Value="FMain.pp"/>
+        <Caret Line="583" Column="90" TopLine="540"/>
       </Position7>
       <Position8>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1562" Column="22" TopLine="1542"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="66" Column="1" TopLine="53"/>
       </Position8>
       <Position9>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1588" Column="22" TopLine="1575"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="97" Column="1" TopLine="76"/>
       </Position9>
       <Position10>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1595" Column="22" TopLine="1575"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="245" Column="31" TopLine="242"/>
       </Position10>
       <Position11>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="3102" Column="19" TopLine="3102"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="247" Column="10" TopLine="223"/>
       </Position11>
       <Position12>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="3126" Column="19" TopLine="3102"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="246" Column="11" TopLine="242"/>
       </Position12>
       <Position13>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="3232" Column="56" TopLine="3219"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="298" Column="14" TopLine="286"/>
       </Position13>
       <Position14>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="3233" Column="43" TopLine="3219"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="297" Column="21" TopLine="275"/>
       </Position14>
       <Position15>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="3291" Column="18" TopLine="3278"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="278" Column="24" TopLine="278"/>
       </Position15>
       <Position16>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="245" Column="38" TopLine="223"/>
       </Position16>
       <Position17>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="58" Column="72" TopLine="45"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="58" Column="28" TopLine="58"/>
       </Position17>
       <Position18>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="59" Column="57" TopLine="45"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="562" Column="11" TopLine="542"/>
       </Position18>
       <Position19>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="60" Column="30" TopLine="45"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="57" Column="20" TopLine="34"/>
       </Position19>
       <Position20>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="76" Column="34" TopLine="63"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="60" Column="21" TopLine="35"/>
       </Position20>
       <Position21>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="77" Column="37" TopLine="63"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="61" Column="17" TopLine="38"/>
       </Position21>
       <Position22>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="78" Column="58" TopLine="63"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="62" Column="17" TopLine="39"/>
       </Position22>
       <Position23>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="110" Column="37" TopLine="85"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="63" Column="19" TopLine="40"/>
       </Position23>
       <Position24>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="123" Column="32" TopLine="99"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="64" Column="27" TopLine="41"/>
       </Position24>
       <Position25>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="144" Column="74" TopLine="119"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="65" Column="22" TopLine="43"/>
       </Position25>
       <Position26>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="183" Column="29" TopLine="158"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="97" Column="21" TopLine="67"/>
       </Position26>
       <Position27>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="194" Column="45" TopLine="170"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="103" Column="23" TopLine="75"/>
       </Position27>
       <Position28>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="224" Column="29" TopLine="209"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="104" Column="65" TopLine="75"/>
       </Position28>
       <Position29>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="245" Column="29" TopLine="221"/>
+        <Filename Value="KerEvolE.pp"/>
+        <Caret Line="35" Column="9" TopLine="1"/>
       </Position29>
       <Position30>
-        <Filename Value="KerModel.pp"/>
-        <Caret Line="248" Column="7" TopLine="235"/>
+        <Filename Value="FMain.pp"/>
+        <Caret Line="614" Column="65" TopLine="592"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

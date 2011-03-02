@@ -34,7 +34,7 @@ type
   PBooleanArray = ^TBooleanArray;
   TBooleanArray = array [0 .. 16383] of Boolean;
   {
-    Clase TModeloHorario
+    Clase TTimeTableModel
     Descripcion:
     Implementa la carga de la informacion desde la base de datos a la memoria
     RAM.
@@ -49,10 +49,10 @@ type
     de cada restriccion.
   }
   TTimeTable = class;
-  TProgressEvent = procedure(Progress, Step: Integer; Horario: TTimeTable;
+  TProgressEvent = procedure(Progress, Step: Integer; TimeTable: TTimeTable;
     var Stop: Boolean) of object;
 
-  TModeloHorario = class
+  TTimeTableModel = class
   private
     FOnProgress: TProgressEvent;
     FCruceProfesorValor, FCruceAulaTipoValor, FHoraHuecaDesubicadaValor,
@@ -70,7 +70,7 @@ type
     FSesionADuracion: array [-1 .. 16382] of Smallint;
     FDiaHoraAPeriodo, FNivelEspecializacionACurso, FCursoParaleloIdAParalelo,
       FParaleloMateriaAProfesor, FParaleloMateriaADistributivo,
-      FMoldeHorarioDetalle, FDistributivoASesiones: TDynamicSmallintArrayArray;
+      FTimeTableDetailPattern, FDistributivoASesiones: TDynamicSmallintArrayArray;
     FProfesorPeriodoAProfesorProhibicionTipo,
       FMateriaPeriodoAMateriaProhibicionTipo: TDynamicShortintArrayArray;
     FMateriaProhibicionTipoAValor,
@@ -92,8 +92,8 @@ type
     FSesionCantidadDoble: Integer;
     function GetDiaAMaxPeriodo(d: Smallint): Smallint;
   protected
-    property MoldeHorarioDetalle
-      : TDynamicSmallintArrayArray read FMoldeHorarioDetalle;
+    property TimeTableDetailPattern
+      : TDynamicSmallintArrayArray read FTimeTableDetailPattern;
   public
     property PeriodoCant: Smallint read FPeriodoCant;
     property ParaleloCant: Smallint read FParaleloCant;
@@ -103,7 +103,7 @@ type
     procedure Configurar(ACruceProfesorValor, AProfesorFraccionamientoValor,
       ACruceAulaTipoValor, AHoraHuecaDesubicadaValor, ASesionCortadaValor,
       AMateriaNoDispersaValor: Double);
-    constructor CrearDesdeDataModule(ACruceProfesorValor,
+    constructor CreateFromDataModule(ACruceProfesorValor,
       AProfesorFraccionamientoValor, ACruceAulaTipoValor,
       AHoraHuecaDesubicadaValor, ASesionCortadaValor,
       AMateriaNoDispersaValor: Double);
@@ -123,7 +123,7 @@ type
   // type
   // TCountFunc = procedure(Count, Cant: Integer) of object;
   {
-    Clase TObjetoModeloHorario
+    Clase TTimeTable
     Descripcion:
     Implementa una solucion del problema.
     Miembros privados:
@@ -137,12 +137,12 @@ type
     propiedades que devuelven el valor de cada componente de la funcion
     objetivo, el valor de la funcion objetivo, el constructor, funciones que
     permiten guardar el horario en una base de datos, metodos que consisten
-    en los operadores geneticos, como son cruce, mutacion, etc., ModeloHorario
+    en los operadores geneticos, como son cruce, mutacion, etc., TimeTableModel
     al que pertenece esta solucion.
   }
   TTimeTable = class
   private
-    FModeloHorario: TModeloHorario;
+    FTimeTableModel: TTimeTableModel;
     FParaleloPeriodoASesion, FMateriaPeriodoCant, FProfesorPeriodoCant,
       FAulaTipoPeriodoCant, FAntMateriaDiaMinHora, FAntMateriaDiaMaxHora,
       FAntDiaProfesorMinHora,
@@ -156,11 +156,11 @@ type
       FMateriaNoDispersa, FMateriaProhibicion, FProfesorProhibicion,
       FAntMateriaNoDispersa: Integer;
     FProfesorFraccionamiento: Integer;
-    FMateriaProhibicionValor, FProfesorProhibicionValor, FValor: Double;
-    FRecalcularValor: Boolean;
-    function GetValor: Double;
-    procedure UpdateValue;
-    procedure Normalizar(AParalelo: Smallint; var APeriodo: Smallint);
+    FMateriaProhibicionValor, FProfesorProhibicionValor: Double;
+    FValue: Double;
+    FRecalculateValue: Boolean;
+    procedure CalculateValue;
+    procedure Normalize(AParalelo: Smallint; var APeriodo: Smallint);
     {
       procedure SetClaveAleatoriaInterno(AParalelo, APeriodo: Smallint;
       AClaveAleatoria: Integer); overload;
@@ -186,19 +186,15 @@ type
     function GetProfesorProhibicion: Integer;
     function GetMateriaProhibicion: Integer;
     procedure MutarInterno;
-    function DescensoRapidoInterno(Delta: Double): Boolean; overload;
-    function DescensoRapidoInterno: Boolean; overload;
-    procedure IntercambiarInterno(AParalelo, APeriodo, APeriodo1: Smallint;
+    function InternalDownHill(Delta: Double): Boolean; overload;
+    function InternalDownHill: Boolean; overload;
+    procedure InternalSwap(AParalelo, APeriodo, APeriodo1: Smallint;
       FueEvaluado: Boolean = False);
-    procedure Intercambiar(AParalelo, APeriodo, APeriodo1: Smallint);
-    function EvaluarIntercambioInterno(AParalelo, APeriodo, APeriodo1: Smallint)
-      : Double;
-    property ProfesorPeriodoCant
-      : TDynamicSmallintArrayArray read FProfesorPeriodoCant;
-    property MateriaPeriodoCant
-      : TDynamicSmallintArrayArray read FMateriaPeriodoCant;
-    property AulaTipoPeriodoCant
-      : TDynamicSmallintArrayArray read FAulaTipoPeriodoCant;
+    procedure Swap(AParalelo, APeriodo, APeriodo1: Smallint);
+    function EvaluateInternalSwap(AParalelo, APeriodo, APeriodo1: Smallint): Double;
+    property ProfesorPeriodoCant: TDynamicSmallintArrayArray read FProfesorPeriodoCant;
+    property MateriaPeriodoCant: TDynamicSmallintArrayArray read FMateriaPeriodoCant;
+    property AulaTipoPeriodoCant: TDynamicSmallintArrayArray read FAulaTipoPeriodoCant;
     procedure DoGetCruceProfesor;
     procedure DoGetCruceAulaTipo;
     procedure ActualizarAulaTipoPeriodoCant;
@@ -212,47 +208,45 @@ type
     procedure DoGetProfesorFraccionamiento;
     procedure ActualizarDiaProfesorFraccionamiento;
     function GetDiaProfesorFraccionamiento(di, p: Smallint): Smallint;
-    function DescensoRapidoDobleInterno(Step: Integer): Boolean;
-    function DescensoRapidoPuntualInterno(var Delta: Double): Boolean; overload;
-    function DescensoRapidoPuntualInterno
+    function InternalDoubleDownHill(Step: Integer): Boolean;
+    function InternalDownHillEach(var Delta: Double): Boolean; overload;
+    function InternalDownHillEach
       (AParalelo: Smallint; var Delta: Double): Boolean; overload;
     // procedure Check(s: string); overload;
     // procedure Check(AParalelo: Smallint; s: string); overload;
   protected
-    property RecalcularValor
-      : Boolean read FRecalcularValor write FRecalcularValor;
   public
-
-    function DescensoRapido: Boolean;
-    function DescensoRapidoDoble(Step: Integer): Boolean;
-    procedure DescensoRapidoDobleForzado(Step: Integer);
-    procedure DescensoRapidoForzado;
-    function DescensoRapidoOptimizadoInterno(Step: Integer): Boolean;
-    procedure DescensoRapidoOptimizadoForzado(Step: Integer);
-    procedure InvalidarValor;
-    procedure Actualizar;
+    procedure UpdateValue;
+    function DownHill: Boolean;
+    function DoubleDownHill(Step: Integer): Boolean;
+    procedure DoubleDownHillForced(Step: Integer);
+    procedure DownHillForced;
+    function InternalDownHillOptimized(Step: Integer): Boolean;
+    procedure InternalDownHillOptimizedForced(Step: Integer);
+    procedure InvalidateValue;
+    procedure Update;
     procedure SaveToFile(const AFileName: string);
     procedure SaveToDataModule(CodHorario: Integer;
       MomentoInicial, MomentoFinal: TDateTime; Informe: TStrings);
     procedure LoadFromDataModule(CodHorario: Integer);
     procedure SaveToStream(Stream: TStream);
     procedure LoadFromStream(Stream: TStream);
-    constructor CrearDesdeModelo(AModeloHorario: TModeloHorario);
+    constructor CreateFromModel(ATimeTableModel: TTimeTableModel);
     destructor Destroy; override;
-    procedure HacerAleatorio;
-    procedure Mutar; overload;
-    procedure Mutar(Orden: Integer); overload;
-    procedure MutarDia;
+    procedure MakeRandom;
+    procedure Mutate; overload;
+    procedure Mutate(Orden: Integer); overload;
+    procedure MutateDia;
     procedure ReportValues(AReport: TStrings);
     procedure Assign(ATimeTable: TTimeTable);
-    property Valor: Double read GetValor;
+    property Value: Double read FValue;
     property CruceProfesor: Integer read FCruceProfesor;
     property CruceAulaTipo: Integer read FCruceAulaTipo;
     property HoraHuecaDesubicada: Integer read GetHoraHuecaDesubicada;
     property SesionCortada: Integer read GetSesionCortada;
     property CruceProfesorValor: Double read GetCruceProfesorValor;
-    property ProfesorFraccionamientoValor
-      : Double read GetProfesorFraccionamientoValor;
+    property RecalcularValor: Boolean read FRecalculateValue write FRecalculateValue;
+    property ProfesorFraccionamientoValor: Double read GetProfesorFraccionamientoValor;
     property CruceAulaTipoValor: Double read GetCruceAulaTipoValor;
     property HoraHuecaDesubicadaValor: Double read GetHoraHuecaDesubicadaValor;
     property SesionCortadaValor: Double read GetSesionCortadaValor;
@@ -265,17 +259,17 @@ type
     property ParaleloPeriodoASesion
       : TDynamicSmallintArrayArray read FParaleloPeriodoASesion write
       FParaleloPeriodoASesion;
-    property ModeloHorario: TModeloHorario read FModeloHorario;
+    property TimeTableModel: TTimeTableModel read FTimeTableModel;
     property ProfesorFraccionamiento: Integer read FProfesorFraccionamiento;
   end;
 
-  // Procedimiento que crea una solucion aleatoria de un TModeloHorario
+  // Procedimiento que crea una solucion aleatoria de un TTimeTableModel
 procedure CrearAleatorioDesdeModelo(var ATimeTable: TTimeTable;
-  AModeloHorario: TModeloHorario);
-procedure CargarPrefijadoDesdeModelo(var AObjetoModeloHorario: TTimeTable;
-  AModeloHorario: TModeloHorario; CodHorario: Integer);
+  ATimeTableModel: TTimeTableModel);
+procedure CargarPrefijadoDesdeModelo(var AObjetoTimeTableModel: TTimeTable;
+  ATimeTableModel: TTimeTableModel; CodHorario: Integer);
 
-// Procedimiento que aplica el operador de cruzamiento sobre dos TObjetoModeloHorario
+// Procedimiento que aplica el operador de cruzamiento sobre dos TObjetoTimeTableModel
 procedure CruzarIndividuos(var Uno, Dos: TTimeTable);
 
 implementation
@@ -290,7 +284,7 @@ var
     var List2: array of Longint; min, max: Longint);
   lSort: procedure(var List1: array of Longint; min, max: Longint);
 
-constructor TModeloHorario.CrearDesdeDataModule(ACruceProfesorValor,
+constructor TTimeTableModel.CreateFromDataModule(ACruceProfesorValor,
   AProfesorFraccionamientoValor, ACruceAulaTipoValor,
   AHoraHuecaDesubicadaValor, ASesionCortadaValor,
   AMateriaNoDispersaValor: Double);
@@ -700,12 +694,12 @@ var
   var
     d, I, j, k, m, n, o, q, r, s: Integer;
   begin
-    SetLength(FMoldeHorarioDetalle, FParaleloCant, FPeriodoCant);
+    SetLength(FTimeTableDetailPattern, FParaleloCant, FPeriodoCant);
     SetLength(FParaleloASesionCant, FParaleloCant);
     SetLength(FParaleloADuracion, FParaleloCant);
     r := FPeriodoCant;
     for I := 0 to FParaleloCant - 1 do
-      FillChar(FMoldeHorarioDetalle[I, 0], r * SizeOf(Smallint), #$FF);
+      FillChar(FTimeTableDetailPattern[I, 0], r * SizeOf(Smallint), #$FF);
     for I := FDistributivoCant - 1 downto 0 do
     begin
       k := FDistributivoAParalelo[I];
@@ -721,7 +715,7 @@ var
               'Se desbordo Molde de ParaleloPeriodoASesion: ' +
                 'Paralelo %d-%d Duracion %d', [FParaleloANivel[k],
               FParaleloAParaleloId[k], q]);
-          FMoldeHorarioDetalle[k, r - 1 - q] := FDistributivoASesiones[I, m];
+          FTimeTableDetailPattern[k, r - 1 - q] := FDistributivoASesiones[I, m];
         end;
         Inc(FParaleloADuracion[k], n);
       end;
@@ -731,7 +725,7 @@ var
       j := 0;
       while j < FPeriodoCant do
       begin
-        s := FMoldeHorarioDetalle[I, j];
+        s := FTimeTableDetailPattern[I, j];
         d := FSesionADuracion[s];
         Inc(j, d);
         Inc(FParaleloASesionCant[I]);
@@ -796,7 +790,7 @@ begin
   end;
 end;
 
-procedure TModeloHorario.Configurar(ACruceProfesorValor,
+procedure TTimeTableModel.Configurar(ACruceProfesorValor,
   AProfesorFraccionamientoValor, ACruceAulaTipoValor,
   AHoraHuecaDesubicadaValor, ASesionCortadaValor,
   AMateriaNoDispersaValor: Double);
@@ -809,7 +803,7 @@ begin
   FMateriaNoDispersaValor := AMateriaNoDispersaValor;
 end;
 
-function TModeloHorario.GetDiaAMaxPeriodo(d: Smallint): Smallint;
+function TTimeTableModel.GetDiaAMaxPeriodo(d: Smallint): Smallint;
 begin
   if d = FDiaCant - 1 then
     Result := FPeriodoCant - 1
@@ -817,7 +811,7 @@ begin
     Result := FDiaHoraAPeriodo[d + 1, 0] - 1;
 end;
 
-procedure TModeloHorario.ReportParameters(AReport: TStrings);
+procedure TTimeTableModel.ReportParameters(AReport: TStrings);
 begin
   AReport.Add(Format('Pesos:'#13#10 +
         '  Cruce de profesores          %8.2f'#13#10 +
@@ -831,19 +825,19 @@ begin
 end;
 
 procedure CrearAleatorioDesdeModelo(var ATimeTable: TTimeTable;
-  AModeloHorario: TModeloHorario);
+  ATimeTableModel: TTimeTableModel);
 begin
   if not Assigned(ATimeTable) then
-    ATimeTable := TTimeTable.CrearDesdeModelo(AModeloHorario);
-  ATimeTable.HacerAleatorio;
+    ATimeTable := TTimeTable.CreateFromModel(ATimeTableModel);
+  ATimeTable.MakeRandom;
 end;
 
-procedure CargarPrefijadoDesdeModelo(var AObjetoModeloHorario: TTimeTable;
-  AModeloHorario: TModeloHorario; CodHorario: Integer);
+procedure CargarPrefijadoDesdeModelo(var AObjetoTimeTableModel: TTimeTable;
+  ATimeTableModel: TTimeTableModel; CodHorario: Integer);
 begin
-  if not Assigned(AObjetoModeloHorario) then
-    AObjetoModeloHorario := TTimeTable.CrearDesdeModelo(AModeloHorario);
-  AObjetoModeloHorario.LoadFromDataModule(CodHorario);
+  if not Assigned(AObjetoTimeTableModel) then
+    AObjetoTimeTableModel := TTimeTable.CreateFromModel(ATimeTableModel);
+  AObjetoTimeTableModel.LoadFromDataModule(CodHorario);
 end;
 
 procedure CruzarIndividuosPunto(var Uno, Dos: TTimeTable; AParalelo: Smallint);
@@ -851,7 +845,7 @@ var
   s, j, d: Smallint;
   k1, k2, l: Longint;
   ClaveAleatoria1, ClaveAleatoria2: TDynamicLongintArray;
-  procedure AleatorizarClave(AObjetoModeloHorario: TTimeTable;
+  procedure AleatorizarClave(AObjetoTimeTableModel: TTimeTable;
     var AClaveAleatoria: TDynamicLongintArray);
   var
     j, d, k, l: Smallint;
@@ -859,12 +853,12 @@ var
     p: PSmallintArray;
     q: PLongintArray;
   begin
-    with AObjetoModeloHorario.ModeloHorario do
+    with AObjetoTimeTableModel.TimeTableModel do
     begin
       // Check(AParalelo, 'AleatorizarClaveAntes');
       Fillcrand32(NumberList, FParaleloASesionCant[AParalelo]);
       lSort(NumberList, 0, FParaleloASesionCant[AParalelo] - 1);
-      p := @AObjetoModeloHorario.ParaleloPeriodoASesion[AParalelo, 0];
+      p := @AObjetoTimeTableModel.ParaleloPeriodoASesion[AParalelo, 0];
       q := @AClaveAleatoria[0];
       j := 0;
       k := 0;
@@ -880,7 +874,7 @@ var
   end;
 
 begin
-  with Uno.ModeloHorario do
+  with Uno.TimeTableModel do
   begin
     SetLength(ClaveAleatoria1, FPeriodoCant);
     SetLength(ClaveAleatoria2, FPeriodoCant);
@@ -893,7 +887,7 @@ begin
     j := 0;
     while j < FPeriodoCant do
     begin
-      s := FMoldeHorarioDetalle[AParalelo, j];
+      s := FTimeTableDetailPattern[AParalelo, j];
       d := FSesionADuracion[s];
       if crand32 mod 2 = 0 then
       begin
@@ -918,14 +912,14 @@ procedure CruzarIndividuos(var Uno, Dos: TTimeTable);
 var
   I: Smallint;
 begin
-  with Uno.ModeloHorario do
+  with Uno.TimeTableModel do
   begin
     for I := 0 to FParaleloCant - 1 do
     begin
       CruzarIndividuosPunto(Uno, Dos, I);
     end;
-    Uno.Actualizar;
-    Dos.Actualizar;
+    Uno.Update;
+    Dos.Update;
     Uno.RecalcularValor := True;
     Dos.RecalcularValor := True;
     // Uno.Check('CruzarIndividuosUnoDespues');
@@ -933,13 +927,13 @@ begin
   end;
 end;
 
-constructor TTimeTable.CrearDesdeModelo(AModeloHorario: TModeloHorario);
+constructor TTimeTable.CreateFromModel(ATimeTableModel: TTimeTableModel);
 begin
   inherited Create;
   FAntListaCambios := TList.Create;
-  FModeloHorario := AModeloHorario;
-  FRecalcularValor := True;
-  with ModeloHorario do
+  FTimeTableModel := ATimeTableModel;
+  FRecalculateValue := True;
+  with TimeTableModel do
   begin
     SetLength(FParaleloPeriodoASesion, FParaleloCant, FPeriodoCant);
     SetLength(FMateriaPeriodoCant, FMateriaCant, FPeriodoCant);
@@ -956,7 +950,7 @@ begin
   end;
 end;
 
-procedure TTimeTable.HacerAleatorio;
+procedure TTimeTable.MakeRandom;
 var
   I, j, d, l: Smallint;
   r: Longint;
@@ -964,14 +958,14 @@ var
   q: PLongintArray;
   ClaveAleatoria: TDynamicLongintArray;
 begin
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     SetLength(ClaveAleatoria, FPeriodoCant);
     for I := 0 to FParaleloCant - 1 do
     begin
       p := @ParaleloPeriodoASesion[I, 0];
       q := @ClaveAleatoria[0];
-      Move(FMoldeHorarioDetalle[I, 0], p[0], FPeriodoCant * SizeOf(Smallint));
+      Move(FTimeTableDetailPattern[I, 0], p[0], FPeriodoCant * SizeOf(Smallint));
       j := 0;
       while j < FPeriodoCant do
       begin
@@ -984,7 +978,7 @@ begin
       SortLongint(q^, p^, 0, FPeriodoCant - 1);
     end;
   end;
-  Actualizar;
+  Update;
   RecalcularValor := True;
 end;
 
@@ -993,7 +987,7 @@ var
   I, j, m, s: Smallint;
   q: PSmallintArray;
 begin
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     for m := 0 to FMateriaCant - 1 do
     begin
@@ -1019,7 +1013,7 @@ procedure TTimeTable.ActualizarParaleloMateriaDiaMinMaxHora;
 var
   I: Smallint;
 begin
-  with ModeloHorario do
+  with TimeTableModel do
     for I := 0 to FParaleloCant - 1 do
       ActualizarParaleloMateriaDiaMinMaxHora(I);
 end;
@@ -1030,7 +1024,7 @@ var
   j, di, h, m, s: Smallint;
   q: PSmallintArray;
 begin
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     for j := 0 to FMateriaCant - 1 do
     begin
@@ -1063,7 +1057,7 @@ procedure TTimeTable.ActualizarDiaProfesorFraccionamiento;
 var
   d, p: Smallint;
 begin
-  with FModeloHorario do
+  with FTimeTableModel do
   begin
     for d := 0 to FDiaCant - 1 do
     begin
@@ -1076,22 +1070,22 @@ begin
   end;
 end;
 
-procedure TTimeTable.InvalidarValor;
+procedure TTimeTable.InvalidateValue;
 begin
-  Actualizar;
+  Update;
   RecalcularValor := True;
 end;
 
 {
-  procedure TObjetoModeloHorario.SetClaveAleatoriaInterno(AParalelo,
+  procedure TObjetoTimeTableModel.SetClaveAleatoriaInterno(AParalelo,
   APeriodo: Smallint; AClaveAleatoria: Longint);
   begin
   SetClaveAleatoriaInterno(AParalelo, APeriodo,
-  ModeloHorario.FSesionADuracion[ParaleloPeriodoASesion[AParalelo, APeriodo]],
+  TimeTableModel.FSesionADuracion[ParaleloPeriodoASesion[AParalelo, APeriodo]],
   AClaveAleatoria);
   end;
 
-  procedure TObjetoModeloHorario.SetClaveAleatoriaInterno(AParalelo, APeriodo,
+  procedure TObjetoTimeTableModel.SetClaveAleatoriaInterno(AParalelo, APeriodo,
   ADuracion: Smallint; AClaveAleatoria: Longint);
   var
   l: Smallint;
@@ -1101,17 +1095,17 @@ end;
   end;
 }
 
-procedure TTimeTable.Intercambiar(AParalelo, APeriodo, APeriodo1: Smallint);
+procedure TTimeTable.Swap(AParalelo, APeriodo, APeriodo1: Smallint);
 begin
-  Normalizar(AParalelo, APeriodo);
-  Normalizar(AParalelo, APeriodo1);
+  Normalize(AParalelo, APeriodo);
+  Normalize(AParalelo, APeriodo1);
   if APeriodo < APeriodo1 then
-    IntercambiarInterno(AParalelo, APeriodo, APeriodo1)
+    InternalSwap(AParalelo, APeriodo, APeriodo1)
   else if APeriodo1 < APeriodo then
-    IntercambiarInterno(AParalelo, APeriodo1, APeriodo);
+    InternalSwap(AParalelo, APeriodo1, APeriodo);
 end;
 
-procedure TTimeTable.IntercambiarInterno
+procedure TTimeTable.InternalSwap
   (AParalelo, APeriodo, APeriodo1: Smallint; FueEvaluado: Boolean = False);
 var
   m, m1, d, d1, s, s1, p, p1, a, a1, j_, s_, p_, a_, m_,
@@ -1139,7 +1133,7 @@ var
   l: Smallint;
   pd: LongWord;
 begin
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     q := @ParaleloPeriodoASesion[AParalelo, 0];
     r := @FParaleloMateriaAProfesor[AParalelo, 0];
@@ -1252,7 +1246,7 @@ end;
   de la version en ensamblador
 }
 
-procedure TTimeTable.Normalizar(AParalelo: Smallint; var APeriodo: Smallint);
+procedure TTimeTable.Normalize(AParalelo: Smallint; var APeriodo: Smallint);
 var
   k: Smallint;
   l: PSmallintArray;
@@ -1272,31 +1266,31 @@ begin
     Add('Detalle                     Cant.    Peso    Valor');
     Add('--------------------------------------------------');
     Add(Format('Cruce de profesores:        %5.d %7.2f %8.2f', [CruceProfesor,
-        ModeloHorario.CruceProfesorValor, CruceProfesorValor]));
+        TimeTableModel.CruceProfesorValor, CruceProfesorValor]));
     Add(Format('Fracc. h. profesores:       %5.d %7.2f %8.2f',
-        [ProfesorFraccionamiento, ModeloHorario.ProfesorFraccionamientoValor,
+        [ProfesorFraccionamiento, TimeTableModel.ProfesorFraccionamientoValor,
         ProfesorFraccionamientoValor]));
     Add(Format('Cruce de aulas:             %5.d %7.2f %8.2f', [CruceAulaTipo,
-        ModeloHorario.CruceAulaTipoValor, CruceAulaTipoValor]));
+        TimeTableModel.CruceAulaTipoValor, CruceAulaTipoValor]));
     Add(Format('Horas Huecas desubicadas:   %5.d %7.2f %8.2f',
-        [HoraHuecaDesubicada, ModeloHorario.HoraHuecaDesubicadaValor,
+        [HoraHuecaDesubicada, TimeTableModel.HoraHuecaDesubicadaValor,
         HoraHuecaDesubicadaValor]));
     Add(Format('Materias cortadas:          %5.d %7.2f %8.2f', [SesionCortada,
-        ModeloHorario.SesionCortadaValor, SesionCortadaValor]));
+        TimeTableModel.SesionCortadaValor, SesionCortadaValor]));
     Add(Format('Materias no dispersas:      %5.d %7.2f %8.2f',
-        [MateriaNoDispersa, ModeloHorario.MateriaNoDispersaValor,
+        [MateriaNoDispersa, TimeTableModel.MateriaNoDispersaValor,
         MateriaNoDispersaValor]));
     Add(Format('Prohibiciones de materia:   %5.d         %8.2f',
         [MateriaProhibicion, MateriaProhibicionValor]));
     Add(Format('Prohibiciones de profesor:  %5.d         %8.2f',
         [ProfesorProhibicion, ProfesorProhibicionValor]));
     Add('--------------------------------------------------');
-    Add(Format('Valor Total:                              %8.2f', [Valor]));
+    Add(Format('Valor Total:                              %8.2f', [FValue]));
   end;
 end;
 
 (*
-  procedure TObjetoModeloHorario.Normalizar(AParalelo: Smallint;
+  procedure TObjetoTimeTableModel.Normalizar(AParalelo: Smallint;
   var APeriodo: Smallint); assembler;
   asm
   push    ebx
@@ -1326,7 +1320,7 @@ var
   l: Longint;
   Paralelo, Periodo1, Periodo2: Smallint;
 begin
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     l := crand32;
     Periodo1 := l mod FPeriodoCant; l := l div FPeriodoCant;
@@ -1334,11 +1328,11 @@ begin
     Paralelo := l mod FParaleloCant;
     if ParaleloPeriodoASesion[Paralelo, Periodo1]
     <> ParaleloPeriodoASesion[Paralelo, Periodo2] then
-      Intercambiar(Paralelo, Periodo1, Periodo2);
+      Swap(Paralelo, Periodo1, Periodo2);
   end;
 end;
 
-procedure TTimeTable.Mutar;
+procedure TTimeTable.Mutate;
 begin
   // Check('MutarAntes');
   MutarInterno;
@@ -1346,7 +1340,7 @@ begin
   // Check('MutarDespues');
 end;
 
-procedure TTimeTable.Mutar(Orden: Integer);
+procedure TTimeTable.Mutate(Orden: Integer);
 var
   c: Integer;
 begin
@@ -1357,14 +1351,14 @@ begin
   // Check('MutarDespues(...)');
 end;
 
-procedure TTimeTable.MutarDia;
+procedure TTimeTable.MutateDia;
 var
   I, j1, j2, n1, n2, d1, d2, m1, m2: Smallint;
   b: array [0 .. 16383] of Smallint;
   p: PSmallintArray;
 begin
   // Check('MutarDiaAntes');
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     j1 := crand32 mod FDiaCant;
     repeat
@@ -1390,27 +1384,26 @@ begin
       end;
     end;
   end;
-  Actualizar;
-  FRecalcularValor := True;
+  Update;
+  FRecalculateValue := True;
   // Check('MutarDiaDespues');
 end;
 
-function TTimeTable.GetValor: Double;
+procedure TTimeTable.UpdateValue;
 begin
-  if FRecalcularValor then
-    UpdateValue;
-  Result := FValor;
+  if FRecalculateValue then
+    CalculateValue;
 end;
 
 function TTimeTable.GetHoraHuecaDesubicadaValor: Double;
 begin
-  Result := ModeloHorario.FHoraHuecaDesubicadaValor * GetHoraHuecaDesubicada;
+  Result := TimeTableModel.FHoraHuecaDesubicadaValor * GetHoraHuecaDesubicada;
 end;
 
 function TTimeTable.GetHoraHuecaDesubicada: Integer;
 begin
-  if FRecalcularValor then
-    UpdateValue;
+  if FRecalculateValue then
+    CalculateValue;
   Result := FHoraHuecaDesubicada;
 end;
 
@@ -1420,7 +1413,7 @@ var
   p: PSmallintArray;
 begin
   FHoraHuecaDesubicada := 0;
-  with ModeloHorario do
+  with TimeTableModel do
     for I := 0 to FParaleloCant - 1 do
     begin
       p := @ParaleloPeriodoASesion[I, 0];
@@ -1435,13 +1428,13 @@ end;
 
 function TTimeTable.GetSesionCortadaValor: Double;
 begin
-  Result := GetSesionCortada * ModeloHorario.FSesionCortadaValor;
+  Result := GetSesionCortada * TimeTableModel.FSesionCortadaValor;
 end;
 
 function TTimeTable.GetSesionCortada: Integer;
 begin
-  if FRecalcularValor then
-    UpdateValue;
+  if FRecalculateValue then
+    CalculateValue;
   Result := FSesionCortada;
 end;
 
@@ -1451,7 +1444,7 @@ var
   l, m, k, t: Smallint;
 begin
   FSesionCortada := 0;
-  with ModeloHorario do
+  with TimeTableModel do
     for I := 0 to FParaleloCant - 1 do
     begin
       j := 0;
@@ -1478,13 +1471,13 @@ end;
 
 function TTimeTable.GetMateriaNoDispersaValor: Double;
 begin
-  Result := ModeloHorario.FMateriaNoDispersaValor * GetMateriaNoDispersa;
+  Result := TimeTableModel.FMateriaNoDispersaValor * GetMateriaNoDispersa;
 end;
 
 function TTimeTable.GetMateriaNoDispersa: Integer;
 begin
-  if FRecalcularValor then
-    UpdateValue;
+  if FRecalculateValue then
+    CalculateValue;
   Result := FMateriaNoDispersa;
 end;
 
@@ -1495,7 +1488,7 @@ var
   pm: PSmallintArray;
 begin
   Result := 0;
-  with ModeloHorario do
+  with TimeTableModel do
     for m := 0 to FMateriaCant - 1 do
     begin
       n := FParaleloMateriaADistributivo[AParalelo, m];
@@ -1524,7 +1517,7 @@ var
   I: Smallint;
 begin
   FMateriaNoDispersa := 0;
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     for I := 0 to FParaleloCant - 1 do
     begin
@@ -1537,7 +1530,7 @@ procedure TTimeTable.DoGetProfesorFraccionamiento;
 var
   p, d: Smallint;
 begin
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     FProfesorFraccionamiento := 0;
     for d := 0 to FDiaCant - 1 do
@@ -1552,15 +1545,15 @@ end;
 
 function TTimeTable.GetMateriaProhibicion: Integer;
 begin
-  if FRecalcularValor then
-    UpdateValue;
+  if FRecalculateValue then
+    CalculateValue;
   Result := FMateriaProhibicion;
 end;
 
 function TTimeTable.GetMateriaProhibicionValor: Double;
 begin
-  if FRecalcularValor then
-    UpdateValue;
+  if FRecalculateValue then
+    CalculateValue;
   Result := FMateriaProhibicionValor;
 end;
 
@@ -1571,7 +1564,7 @@ var
 begin
   FMateriaProhibicionValor := 0;
   FMateriaProhibicion := 0;
-  with ModeloHorario do
+  with TimeTableModel do
     for I := 0 to High(FMateriaProhibicionAMateria) do
     begin
       m := FMateriaProhibicionAMateria[I];
@@ -1585,15 +1578,15 @@ end;
 
 function TTimeTable.GetProfesorProhibicion: Integer;
 begin
-  if FRecalcularValor then
-    UpdateValue;
+  if FRecalculateValue then
+    CalculateValue;
   Result := FProfesorProhibicion;
 end;
 
 function TTimeTable.GetProfesorProhibicionValor: Double;
 begin
-  if FRecalcularValor then
-    UpdateValue;
+  if FRecalculateValue then
+    CalculateValue;
   Result := FProfesorProhibicionValor;
 end;
 
@@ -1604,7 +1597,7 @@ var
 begin
   FProfesorProhibicionValor := 0;
   FProfesorProhibicion := 0;
-  with ModeloHorario do
+  with TimeTableModel do
     for I := 0 to High(FProfesorProhibicionAProfesor) do
     begin
       p := FProfesorProhibicionAProfesor[I];
@@ -1622,7 +1615,7 @@ var
   r: PSmallintArray;
 begin
   FCruceProfesor := 0;
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     for p := 0 to FProfesorCant - 1 do
     begin
@@ -1643,7 +1636,7 @@ var
   r: PSmallintArray;
 begin
   FCruceAulaTipo := 0;
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     for a := 0 to FAulaTipoCant - 1 do
     begin
@@ -1660,24 +1653,24 @@ end;
 
 function TTimeTable.GetCruceProfesorValor: Double;
 begin
-  Result := ModeloHorario.FCruceProfesorValor * FCruceProfesor;
+  Result := TimeTableModel.FCruceProfesorValor * FCruceProfesor;
 end;
 
 function TTimeTable.GetProfesorFraccionamientoValor: Double;
 begin
-  Result := ModeloHorario.FProfesorFraccionamientoValor *
+  Result := TimeTableModel.FProfesorFraccionamientoValor *
     FProfesorFraccionamiento;
 end;
 
 function TTimeTable.GetCruceAulaTipoValor: Double;
 begin
-  Result := ModeloHorario.FCruceAulaTipoValor * FCruceAulaTipo;
+  Result := TimeTableModel.FCruceAulaTipoValor * FCruceAulaTipo;
 end;
 
-procedure TTimeTable.UpdateValue;
+procedure TTimeTable.CalculateValue;
 begin
   RecalcularValor := False;
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     DoGetHoraHuecaDesubicada;
     DoGetCruceProfesor;
@@ -1687,7 +1680,7 @@ begin
     DoGetMateriaProhibicionValor;
     DoGetProfesorProhibicionValor;
     DoGetProfesorFraccionamiento;
-    FValor := Self.CruceProfesorValor + Self.CruceAulaTipoValor +
+    FValue := Self.CruceProfesorValor + Self.CruceAulaTipoValor +
       FMateriaProhibicionValor + FProfesorProhibicionValor +
       FMateriaNoDispersa * FMateriaNoDispersaValor + FSesionCortada *
       FSesionCortadaValor + FHoraHuecaDesubicada * FHoraHuecaDesubicadaValor +
@@ -1700,7 +1693,7 @@ var
   I, j, p, s: Smallint;
   q, r: PSmallintArray;
 begin
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     for I := 0 to FProfesorCant - 1 do
       FillChar(FProfesorPeriodoCant[I, 0], FPeriodoCant * SizeOf(Smallint), #0);
@@ -1726,7 +1719,7 @@ var
   I, j, a, s: Smallint;
   q: PSmallintArray;
 begin
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     for I := 0 to FAulaTipoCant - 1 do
       FillChar(FAulaTipoPeriodoCant[I, 0], FPeriodoCant * SizeOf(Smallint), #0);
@@ -1746,7 +1739,7 @@ begin
   end;
 end;
 
-function TTimeTable.EvaluarIntercambioInterno
+function TTimeTable.EvaluateInternalSwap
   (AParalelo, APeriodo, APeriodo1: Smallint): Double;
 var
   d, d1, s, s1, di, di1, hl, hl1, m, m1, p, p1: Smallint;
@@ -1765,7 +1758,7 @@ var
   var
     l, di_, di1_: Smallint;
   begin
-    with FModeloHorario do
+    with FTimeTableModel do
     begin
       Result := 0;
       if p <> p1 then
@@ -1817,7 +1810,7 @@ var
   var
     p_, p1_, j_, s_, s1_, di_: Smallint;
   begin
-    with FModeloHorario do
+    with FTimeTableModel do
     begin
       Result := 0;
       for j_ := APeriodo to APeriodo + d1 - 1 do
@@ -1921,7 +1914,7 @@ var
       iCant := 0;
       iMax := -1;
       iMin := 32767;
-      with ModeloHorario do
+      with TimeTableModel do
         for h_ := FDiaHoraAPeriodo[di, 0] to FDiaAMaxPeriodo[di] do
         begin
           if (FIncProfesorPeriodoCant[p, h_] + FProfesorPeriodoCant[p, h_] > 0)
@@ -1947,7 +1940,7 @@ var
     I: Integer;
   begin
     Result := 0;
-    with FModeloHorario do
+    with FTimeTableModel do
       for I := FAntListaCambios.Count - 1 downto 0 do
       begin
         pd := LongWord(FAntListaCambios.Items[I]);
@@ -1962,7 +1955,7 @@ var
     var
       j_: Smallint;
     begin
-      with ModeloHorario do
+      with TimeTableModel do
       begin
         for j_ := 0 to FMateriaCant - 1 do
         begin
@@ -1978,7 +1971,7 @@ var
     m_, di_, h, s_, j_: Smallint;
   begin
     Preparar;
-    with ModeloHorario do
+    with TimeTableModel do
     begin
       for j_ := 0 to APeriodo - 1 do
       begin
@@ -2052,11 +2045,11 @@ var
   var
     j_, s_, d_, di_, m_, t: Smallint;
   begin
-    with ModeloHorario do
+    with TimeTableModel do
     begin
       Result := 0;
       j_ := hl;
-      Normalizar(AParalelo, j_);
+      Normalize(AParalelo, j_);
       if j_ <> hl then
         Inc(j_, FSesionADuracion[q[j_]]);
       while j_ <= hl1 do
@@ -2077,7 +2070,7 @@ var
         Inc(j_, d_);
       end;
       j_ := hl;
-      Normalizar(AParalelo, j_);
+      Normalize(AParalelo, j_);
       if j_ <> hl then
         Inc(j_, FSesionADuracion[q[j_]]);
       while j_ < APeriodo do
@@ -2154,7 +2147,7 @@ var
   var
     a, a1, l, c, c1: Smallint;
   begin
-    with FModeloHorario do
+    with FTimeTableModel do
     begin
       if s >= 0 then
         a := FSesionAAulaTipo[s]
@@ -2198,7 +2191,7 @@ var
   var
     a, a1, c, c1, j_, s_, s1_: Smallint;
   begin
-    with FModeloHorario do
+    with FTimeTableModel do
     begin
       Result := 0;
       c := 0;
@@ -2302,7 +2295,7 @@ var
     k: Smallint;
   begin
     Result := 0;
-    with ModeloHorario do
+    with TimeTableModel do
       if s <> s1 then
       begin
         if s < 0 then
@@ -2331,7 +2324,7 @@ var
   var
     j_, s_: Smallint;
   begin
-    with FModeloHorario do
+    with FTimeTableModel do
     begin
       Result := 0;
       for j_ := APeriodo to APeriodo1 + d1 - 1 do
@@ -2368,7 +2361,7 @@ var
   var
     k, mp, mp1: Smallint;
   begin
-    with ModeloHorario do
+    with TimeTableModel do
     begin
       Result := 0;
       if s <> s1 then
@@ -2410,7 +2403,7 @@ var
   var
     j_, m_, mp, s_: Smallint;
   begin
-    with ModeloHorario do
+    with TimeTableModel do
     begin
       Result := 0;
       for j_ := APeriodo to APeriodo1 + d1 - 1 do
@@ -2459,7 +2452,7 @@ var
   var
     p, p1, k, pp: Smallint;
   begin
-    with ModeloHorario do
+    with TimeTableModel do
     begin
       Result := 0;
       if s <> s1 then
@@ -2497,7 +2490,7 @@ var
   var
     j_, p_, pp, s_: Smallint;
   begin
-    with ModeloHorario do
+    with TimeTableModel do
     begin
       Result := 0;
       for j_ := APeriodo to APeriodo1 + d1 - 1 do
@@ -2546,7 +2539,7 @@ var
   end;
 
 begin
-  with FModeloHorario do
+  with FTimeTableModel do
   begin
     q := @ParaleloPeriodoASesion[AParalelo, 0];
     r := @FParaleloMateriaAProfesor[AParalelo, 0];
@@ -2607,7 +2600,7 @@ begin
 end;
 
 {
-  procedure TObjetoModeloHorario.Check(AParalelo: Smallint; s: string);
+  procedure TObjetoTimeTableModel.Check(AParalelo: Smallint; s: string);
   var
   j, d: Smallint;
   p: PSmallintArray;
@@ -2616,7 +2609,7 @@ end;
   p := @FParaleloPeriodoASesion[AParalelo, 0];
   q := @FClaveAleatoria[AParalelo, 0];
   j := 0;
-  with ModeloHorario do
+  with TimeTableModel do
   begin
   while j < FPeriodoCant do
   begin
@@ -2630,11 +2623,11 @@ end;
   end;
   end;
 
-  procedure TObjetoModeloHorario.Check(s: string);
+  procedure TObjetoTimeTableModel.Check(s: string);
   var
   i: Smallint;
   begin
-  with ModeloHorario do
+  with TimeTableModel do
   begin
   for i := 0 to FParaleloCant - 1 do
   begin
@@ -2644,14 +2637,14 @@ end;
   end;
 }
 
-function TTimeTable.DescensoRapidoPuntualInterno
+function TTimeTable.InternalDownHillEach
   (AParalelo: Smallint; var Delta: Double): Boolean;
 var
   j, j1, d: Smallint;
   dk: Double;
   p: PSmallintArray;
 begin
-  with FModeloHorario do
+  with FTimeTableModel do
   begin
     Result := True;
     j := 0;
@@ -2662,10 +2655,10 @@ begin
       while j1 < FPeriodoCant do
       begin
         d := FSesionADuracion[p[j1]];
-        dk := EvaluarIntercambioInterno(AParalelo, j, j1);
+        dk := EvaluateInternalSwap(AParalelo, j, j1);
         if Delta + dk < 0 then
         begin
-          IntercambiarInterno(AParalelo, j, j1, True);
+          InternalSwap(AParalelo, j, j1, True);
           Delta := Delta + dk;
           Result := False;
           Exit;
@@ -2677,7 +2670,7 @@ begin
   end;
 end;
 
-function TTimeTable.DescensoRapidoPuntualInterno(var Delta: Double): Boolean;
+function TTimeTable.InternalDownHillEach(var Delta: Double): Boolean;
 var
   ci, I, j, j1, d: Smallint;
   dk: Double;
@@ -2685,7 +2678,7 @@ var
   RandomValues: array [0 .. 4095] of Longint;
   p: PSmallintArray;
 begin
-  with FModeloHorario do
+  with FTimeTableModel do
   begin
     Result := True;
     for ci := 0 to FParaleloCant - 1 do
@@ -2706,10 +2699,10 @@ begin
         while j1 < FPeriodoCant do
         begin
           d := FSesionADuracion[p[j1]];
-          dk := EvaluarIntercambioInterno(I, j, j1);
+          dk := EvaluateInternalSwap(I, j, j1);
           if Delta + dk < 0 then
           begin
-            IntercambiarInterno(I, j, j1, True);
+            InternalSwap(I, j, j1, True);
             Delta := Delta + dk;
             Result := False;
             Exit;
@@ -2723,7 +2716,7 @@ begin
   end;
 end;
 
-function TTimeTable.DescensoRapidoOptimizadoInterno(Step: Integer): Boolean;
+function TTimeTable.InternalDownHillOptimized(Step: Integer): Boolean;
 var
   j, j1, d, d1, ci, I, k, s, l: Smallint;
   dk, v1: Double;
@@ -2733,9 +2726,9 @@ var
   Stop: Boolean;
   { Continuar: Boolean; }
 begin
-  Actualizar;
-  UpdateValue;
-  with ModeloHorario do
+  Update;
+  CalculateValue;
+  with TimeTableModel do
   begin
     for ci := 0 to FParaleloCant - 1 do
     begin
@@ -2766,7 +2759,7 @@ begin
       Inc(l);
     end;
     ci := 0;
-    v1 := Valor;
+    v1 := FValue;
     while ci < l do
     begin
       { Continuar := True; }
@@ -2784,32 +2777,32 @@ begin
             Stop);
           if Stop then
             Exit;
-          dk := EvaluarIntercambioInterno(I, j, j1);
+          dk := EvaluateInternalSwap(I, j, j1);
           d := FSesionADuracion[p[j]];
           d1 := FSesionADuracion[p[j1]];
-          IntercambiarInterno(I, j, j1, True);
+          InternalSwap(I, j, j1, True);
           if dk < 0 then
           begin
             Result := False;
           end
           else
           begin
-            if DescensoRapidoPuntualInterno(I, dk) then
+            if InternalDownHillEach(I, dk) then
             begin
-              IntercambiarInterno(I, j, j1 + d1 - d);
+              InternalSwap(I, j, j1 + d1 - d);
               dk := 0;
             end
             else
             begin
-              Normalizar(I, j);
+              Normalize(I, j);
               Result := False;
             end;
           end;
           v1 := v1 + dk;
-          Normalizar(I, j1);
+          Normalize(I, j1);
           Inc(j1, FSesionADuracion[p[j1]]);
         end;
-        Normalizar(I, j);
+        Normalize(I, j);
         Inc(j, FSesionADuracion[p[j]]);
       end;
       { if Continuar then }
@@ -2818,7 +2811,7 @@ begin
   end;
 end;
 
-function TTimeTable.DescensoRapidoDobleInterno(Step: Integer): Boolean;
+function TTimeTable.InternalDoubleDownHill(Step: Integer): Boolean;
 var
   j, j1, d, d1, ci, I { , k } : Smallint;
   dk, v1: Double;
@@ -2829,9 +2822,9 @@ var
   Stop: Boolean;
   { Continuar: Boolean; }
 begin
-  Actualizar;
-  UpdateValue;
-  with ModeloHorario do
+  Update;
+  CalculateValue;
+  with TimeTableModel do
   begin
     for ci := 0 to FParaleloCant - 1 do
     begin
@@ -2841,7 +2834,7 @@ begin
     SortLongint(RandomValues, RandomOrdersi, 0, FParaleloCant - 1);
     Result := True;
     ci := 0;
-    v1 := Valor;
+    v1 := FValue;
     Position := 0;
     while ci < FParaleloCant do
     begin
@@ -2862,32 +2855,32 @@ begin
           if Stop then
             Exit;
           Inc(Position);
-          dk := EvaluarIntercambioInterno(I, j, j1);
+          dk := EvaluateInternalSwap(I, j, j1);
           d := FSesionADuracion[p[j]];
           d1 := FSesionADuracion[p[j1]];
-          IntercambiarInterno(I, j, j1, True);
+          InternalSwap(I, j, j1, True);
           if dk < 0 then
           begin
             Result := False;
           end
           else
           begin
-            if DescensoRapidoPuntualInterno(dk) then
+            if InternalDownHillEach(dk) then
             begin
-              IntercambiarInterno(I, j, j1 + d1 - d);
+              InternalSwap(I, j, j1 + d1 - d);
               dk := 0;
             end
             else
             begin
-              Normalizar(I, j);
+              Normalize(I, j);
               Result := False;
             end;
           end;
           v1 := v1 + dk;
-          Normalizar(I, j1);
+          Normalize(I, j1);
           Inc(j1, FSesionADuracion[p[j1]]);
         end;
-        Normalizar(I, j);
+        Normalize(I, j);
         Inc(j, FSesionADuracion[p[j]]);
       end;
       { if Continuar then }
@@ -2898,12 +2891,12 @@ end;
 
 { Retorna verdadero cuando no ha descendido }
 
-function TTimeTable.DescensoRapidoInterno: Boolean;
+function TTimeTable.InternalDownHill: Boolean;
 begin
-  Result := DescensoRapidoInterno(0);
+  Result := InternalDownHill(0);
 end;
 
-function TTimeTable.DescensoRapidoInterno(Delta: Double): Boolean;
+function TTimeTable.InternalDownHill(Delta: Double): Boolean;
 var
   ci, I, j, j1, d1: Smallint;
   dk1 {$IFDEF DEBUG}, v1, v2 {$ENDIF}: Double;
@@ -2912,7 +2905,7 @@ var
   p: PSmallintArray;
   { Continuar: Boolean; }
 begin
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     for ci := 0 to FParaleloCant - 1 do
     begin
@@ -2939,10 +2932,10 @@ begin
           UpdateValue;
           v1 := Valor;
 {$ENDIF}
-          dk1 := EvaluarIntercambioInterno(I, j, j1);
+          dk1 := EvaluateInternalSwap(I, j, j1);
           if (dk1 < Delta) { or ((dk1 = 0) and ((rand32 mod 4) = 0)) } then
           begin
-            IntercambiarInterno(I, j, j1, True);
+            InternalSwap(I, j, j1, True);
 {$IFDEF DEBUG}
             Actualizar;
             UpdateValue;
@@ -2963,44 +2956,52 @@ begin
   end;
 end;
 
-function TTimeTable.DescensoRapido: Boolean;
+function TTimeTable.DownHill: Boolean;
 begin
   // Check('DescensoRapidoAntes');
-  Result := DescensoRapidoInterno;
-  RecalcularValor := True;
+  Result := InternalDownHill;
+  RecalcularValor := RecalcularValor or not Result;
   // Check('DescensoRapidoDespues');
 end;
 
-function TTimeTable.DescensoRapidoDoble(Step: Integer): Boolean;
+function TTimeTable.DoubleDownHill(Step: Integer): Boolean;
 begin
-  Result := DescensoRapidoDobleInterno(Step);
+  Result := InternalDoubleDownHill(Step);
   RecalcularValor := True;
 end;
 
-procedure TTimeTable.DescensoRapidoOptimizadoForzado(Step: Integer);
+procedure TTimeTable.InternalDownHillOptimizedForced(Step: Integer);
+var
+  b: Boolean;
 begin
+  b := True;
   repeat
-  until DescensoRapidoOptimizadoInterno(Step);
-  RecalcularValor := True;
+    b := b and InternalDownHillOptimized(Step);
+  until b;
+  RecalcularValor := RecalcularValor or not b;
 end;
 
-procedure TTimeTable.DescensoRapidoDobleForzado(Step: Integer);
-begin
-  repeat
-    // Application.ProcessMessages;
-  until DescensoRapidoDobleInterno(Step);
-  RecalcularValor := True;
-end;
-
-procedure TTimeTable.DescensoRapidoForzado;
+procedure TTimeTable.DoubleDownHillForced(Step: Integer);
 begin
   repeat
     // Application.ProcessMessages;
-  until DescensoRapidoInterno;
+  until InternalDoubleDownHill(Step);
   RecalcularValor := True;
 end;
 
-{ procedure TObjetoModeloHorario.DescensoRapido2(CallBack: TCountFunc);
+procedure TTimeTable.DownHillForced;
+var
+  b: Boolean;
+begin
+  b := True;
+  repeat
+    // Application.ProcessMessages;
+    b := b and InternalDownHill;
+  until b;
+  RecalcularValor := RecalcularValor or not b;
+end;
+
+{ procedure TObjetoTimeTableModel.DescensoRapido2(CallBack: TCountFunc);
   begin
   DescensoRapidoInterno2(CallBack);
   RecalcularValor := True;
@@ -3008,7 +3009,7 @@ end;
 
 destructor TTimeTable.Destroy;
 begin
-  FModeloHorario := nil;
+  FTimeTableModel := nil;
   FAntListaCambios.Free;
   inherited Destroy;
 end;
@@ -3017,7 +3018,7 @@ procedure TTimeTable.Assign(ATimeTable: TTimeTable);
 var
   I, m, p, a, d: Smallint;
 begin
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     for I := 0 to FParaleloCant - 1 do
     begin
@@ -3038,7 +3039,7 @@ begin
       FProfesorProhibicion := ATimeTable.FProfesorProhibicion;
       FMateriaProhibicionValor := ATimeTable.FMateriaProhibicionValor;
       FProfesorProhibicionValor := ATimeTable.FProfesorProhibicionValor;
-      FValor := ATimeTable.FValor;
+      FValue := ATimeTable.FValue;
       RecalcularValor := False;
     end;
     Move(ATimeTable.FParaleloMateriaNoDispersa[0],
@@ -3063,9 +3064,9 @@ begin
     begin
       Move(ATimeTable.FDiaProfesorFraccionamiento[d, 0],
         FDiaProfesorFraccionamiento[d, 0], FProfesorCant * SizeOf(Smallint));
-      { Move(AObjetoModeloHorario.FDiaProfesorSumaHora[d, 0],
+      { Move(AObjetoTimeTableModel.FDiaProfesorSumaHora[d, 0],
         FDiaProfesorSumaHora[d, 0], FProfesorCant * SizeOf(Smallint));
-        Move(AObjetoModeloHorario.FDiaProfesorSumaCuadradoHora[d, 0],
+        Move(AObjetoTimeTableModel.FDiaProfesorSumaCuadradoHora[d, 0],
         FDiaProfesorSumaCuadradoHora[d, 0], FProfesorCant * SizeOf(Smallint)); }
     end;
     for a := 0 to FAulaTipoCant - 1 do
@@ -3080,7 +3081,7 @@ var
   I, j: Integer;
 begin
   VStrings := TStringList.Create;
-  with ModeloHorario do
+  with TimeTableModel do
     try
       for I := 0 to FParaleloCant - 1 do
       begin
@@ -3106,7 +3107,7 @@ procedure TTimeTable.SaveToStream(Stream: TStream);
 var
   I: Smallint;
 begin
-  with FModeloHorario do
+  with FTimeTableModel do
     for I := 0 to FParaleloCant - 1 do
     begin
       Stream.Write(ParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint));
@@ -3117,13 +3118,13 @@ procedure TTimeTable.LoadFromStream(Stream: TStream);
 var
   I: Smallint;
 begin
-  with FModeloHorario do
+  with FTimeTableModel do
     for I := 0 to FParaleloCant - 1 do
     begin
       Stream.Read(ParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint));
     end;
-  Actualizar;
-  FRecalcularValor := True;
+  Update;
+  FRecalculateValue := True;
 end;
 
 procedure TTimeTable.SaveToDataModule(CodHorario: Integer;
@@ -3161,7 +3162,7 @@ var
       FieldHora, FieldMateria, FieldSesion: TField;
     I, j, k, l, m, s: Integer;
   begin
-    with ModeloHorario, SourceDataModule.TbHorarioDetalle do
+    with TimeTableModel, SourceDataModule.TbHorarioDetalle do
     begin
       DisableControls;
       try
@@ -3222,7 +3223,7 @@ begin
   iCant := 0;
   iMax := -1;
   iMin := 32767;
-  with ModeloHorario do
+  with TimeTableModel do
   begin
     n := FDiaAMaxPeriodo[di];
     q := @FProfesorPeriodoCant[p, 0];
@@ -3251,7 +3252,7 @@ var
     FieldSesion: TLongintField;
   I, j: Smallint;
 begin
-  with SourceDataModule, ModeloHorario, TbHorarioDetalle do
+  with SourceDataModule, TimeTableModel, TbHorarioDetalle do
   begin
     TbHorario.Locate('CodHorario', CodHorario, []);
     LinkedFields := 'CodHorario';
@@ -3287,11 +3288,11 @@ begin
       LinkedFields := '';
     end;
   end;
-  Actualizar;
+  Update;
   RecalcularValor := True;
 end;
 
-procedure TTimeTable.Actualizar;
+procedure TTimeTable.Update;
 begin
   ActualizarAulaTipoPeriodoCant;
   ActualizarProfesorPeriodoCant;
@@ -3300,14 +3301,14 @@ begin
   ActualizarDiaProfesorFraccionamiento;
 end;
 
-procedure TModeloHorario.DoProgress(Position, RefreshInterval: Integer;
+procedure TTimeTableModel.DoProgress(Position, RefreshInterval: Integer;
   Horario: TTimeTable; var Stop: Boolean);
 begin
   if Assigned(FOnProgress) then
     FOnProgress(Position, RefreshInterval, Horario, Stop);
 end;
 
-destructor TModeloHorario.Destroy;
+destructor TTimeTableModel.Destroy;
 begin
   inherited Destroy;
 end;

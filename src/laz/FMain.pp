@@ -441,8 +441,8 @@ const
 
 procedure TMainForm.ElaborarHorario(s: string);
 var
-  VModeloHorario: TModeloHorario;
-  VEvolElitista: TEvolElitista;
+  VTimeTableModel: TTimeTableModel;
+  VEvolElitist: TEvolElitist;
   FMomentoInicial, FMomentoFinal: TDateTime;
   sProb: string;
   Report: TStrings;
@@ -456,11 +456,11 @@ var
       FMomentoInicial := Now;
       ProgressForm.Caption := Format('Elaboracion en progreso [%d]', [CodHorario]);
       FLogStrings.Clear;
-      ProgressForm.ProgressMax := vEvolElitista.NumMaxGeneracion;
+      ProgressForm.ProgressMax := vEvolElitist.NumMaxGeneracion;
       FLogStrings.BeginUpdate;
       ProgressForm.ShowProgressForm;
       try
-        vEvolElitista.Execute(MasterDataModule.ConfigStorage.NumIteraciones);
+        vEvolElitist.Execute(MasterDataModule.ConfigStorage.NumIteraciones);
       finally
         ProgressForm.CloseProgressForm;
         FLogStrings.EndUpdate;
@@ -471,17 +471,18 @@ var
       if MasterDataModule.ConfigStorage.ApplyDoubleDownHill then
       begin
         ProgressForm.Caption := Format('Mejorando Horario [%d]', [CodHorario]);
-        ProgressForm.ProgressMax := vModeloHorario.SesionCantidadDoble;
+        ProgressForm.ProgressMax := vTimeTableModel.SesionCantidadDoble;
         ProgressForm.ShowProgressForm;
         try
-          VEvolElitista.BestTimeTable.DescensoRapidoDobleForzado(
-            MasterDataModule.ConfigStorage.NumIteraciones);
+          VEvolElitist.BestTimeTable.DoubleDownHillForced
+            (MasterDataModule.ConfigStorage.NumIteraciones);
         finally
           ProgressForm.CloseProgressForm;
         end;
       end
       else
-        VEvolElitista.DescensoRapidoForzado;
+        VEvolElitist.ForcedDownHill;
+      VEvolElitist.BestTimeTable.UpdateValue;
       FMomentoFinal := Now;
       Report := TStringList.Create;
       try
@@ -489,9 +490,9 @@ var
         Report.Add('============================');
         Report.Add(Format('Descenso rapido doble: %s',
           [FBoolToStr[MasterDataModule.ConfigStorage.ApplyDoubleDownHill]]));
-        VEvolElitista.ReportParameters(Report);
-        VEvolElitista.BestTimeTable.ReportValues(Report);
-        VEvolElitista.SaveBestToDatabase(ACodHorario, FMomentoInicial, FMomentoFinal, Report);
+        VEvolElitist.ReportParameters(Report);
+        VEvolElitist.BestTimeTable.ReportValues(Report);
+        VEvolElitist.SaveBestToDatabase(ACodHorario, FMomentoInicial, FMomentoFinal, Report);
       finally
         Report.Free;
       end;
@@ -530,47 +531,47 @@ begin
     InitRandom;
     ActElaborarHorario.Enabled := False;
     FEjecutando := True;
-    VModeloHorario := TModeloHorario.CrearDesdeDataModule(CruceProfesor,
+    VTimeTableModel := TTimeTableModel.CreateFromDataModule(CruceProfesor,
       ProfesorFraccionamiento, CruceAulaTipo, HoraHueca, SesionCortada, MateriaNoDispersa);
-    VEvolElitista := TEvolElitista.CrearDesdeModelo(VModeloHorario, TamPoblacion);
+    VEvolElitist := TEvolElitist.CreateFromModel(VTimeTableModel, TamPoblacion);
     try
-      VModeloHorario.OnProgress := ProgressForm.OnProgress;
-      VEvolElitista.NumMaxGeneracion := NumMaxGeneracion;
-      VEvolElitista.ProbCruzamiento := ProbCruzamiento;
-      VEvolElitista.ProbMutacion1 := ProbMutacion1;
-      VEvolElitista.OrdenMutacion1 := OrdenMutacion1;
-      VEvolElitista.ProbMutacion2 := ProbMutacion2;
-      VEvolElitista.ProbReparacion := ProbReparacion;
-      VEvolElitista.SyncDirectory := Compartir;
-      VEvolElitista.RangoPolinizacion := RangoPolinizacion;
+      VTimeTableModel.OnProgress := ProgressForm.OnProgress;
+      VEvolElitist.NumMaxGeneracion := NumMaxGeneracion;
+      VEvolElitist.ProbCruzamiento := ProbCruzamiento;
+      VEvolElitist.ProbMutacion1 := ProbMutacion1;
+      VEvolElitist.OrdenMutacion1 := OrdenMutacion1;
+      VEvolElitist.ProbMutacion2 := ProbMutacion2;
+      VEvolElitist.ProbReparacion := ProbReparacion;
+      VEvolElitist.SyncDirectory := Compartir;
+      VEvolElitist.RangoPolinizacion := RangoPolinizacion;
       if (Compartir <> '')
-         and FileExists(VEvolElitista.SyncFileName) then
+         and FileExists(VEvolElitist.SyncFileName) then
       begin
         mr := MessageDlg('El archivo de sincronizacion ya existe.  ' +
                          'Desea eliminar los archivos relacionados?',
                          mtWarning, [mbYes, mbNo, mbCancel], 0);
         if mr = mrYes then
         begin
-          DeleteFile(VEvolElitista.FileName);
-          DeleteFile(VEvolElitista.SyncFileName);
+          DeleteFile(VEvolElitist.FileName);
+          DeleteFile(VEvolElitist.SyncFileName);
         end
         else if mr = mrCancel then
         begin
           raise Exception.Create('Operacion cancelada por el usuario');
         end
       end;
-      VEvolElitista.PrefijarHorarios(HorarioIni);
+      VEvolElitist.PrefijarHorarios(HorarioIni);
       ProgressForm.CancelClick := False;
       FAjustar := False;
-      VEvolElitista.OnRegistrarMejor := Self.OnRegistrarMejor;
+      VEvolElitist.OnRecordBest := Self.OnRegistrarMejor;
       sProb := '';
       ProcessCodList(s);
       if sProb <> '' then
         MessageDlg(Format('Los siguientes horarios ya existian: %s', [sProb]),
           mtError, [mbOK], 0);
     finally
-      VEvolElitista.Free;
-      VModeloHorario.Free;
+      VEvolElitist.Free;
+      VTimeTableModel.Free;
       FEjecutando := False;
       ActElaborarHorario.Enabled := True;
       TbHorarioDetalle.Refresh;
@@ -579,7 +580,7 @@ begin
 end;
 
 {
-procedure TMainForm.ProgressDescensoDoble(I, Max: Integer; Horario: TObjetoModeloHorario; var Stop: Boolean);
+procedure TMainForm.ProgressDescensoDoble(I, Max: Integer; Horario: TObjetoTimeTableModel; var Stop: Boolean);
 var
   t, x: TDateTime;
 begin
@@ -608,9 +609,9 @@ end;
 
 procedure TMainForm.OnRegistrarMejor(Sender: TObject);
 begin
-  with Sender as TEvolElitista do
+  with Sender as TEvolElitist do
   begin
-    FLogStrings.Add(Format('%g; %g; %g', [Now, MejorValor, PromedioValor]));
+    FLogStrings.Add(Format('%g; %g; %g', [Now, BestTimeTable.Value, AverageValue]));
   end;
 end;
 

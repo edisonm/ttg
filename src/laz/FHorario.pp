@@ -308,7 +308,7 @@ end;
 {$IFNDEF FREEWARE}
 procedure THorarioForm.MejorarHorario;
 var
-  VModeloHorario: TModeloHorario;
+  TimeTableModel: TTimeTableModel;
   TimeTable: TTimeTable;
   CodHorarioFuente, CodHorarioDestino: Integer;
   Report: TStrings;
@@ -328,8 +328,8 @@ begin
     InitRandom;
     MomentoInicial := Now;
     MainForm.Ejecutando := True;
-    VModeloHorario :=
-      TModeloHorario.CrearDesdeDataModule(
+    TimeTableModel :=
+      TTimeTableModel.CreateFromDataModule(
         CruceProfesor,
         ProfesorFraccionamiento,
         CruceAulaTipo,
@@ -340,21 +340,21 @@ begin
     MainForm.Progress := 0;
     MainForm.Pasada := 0;
     try
-      VModeloHorario.OnProgress := ProgressForm.OnProgress;
+      TimeTableModel.OnProgress := ProgressForm.OnProgress;
       MainForm.Step := 1;
-      TimeTable := TTimeTable.CrearDesdeModelo(VModeloHorario);
+      TimeTable := TTimeTable.CreateFromModel(TimeTableModel);
       ProgressForm.Caption := Format('Mejorando Horario [%d] en [%d]',
          [CodHorarioFuente, CodHorarioDestino]);
       try
         {if s = '' then
-          VObjetoModeloHorario.HacerAleatorio
+          TimeTable.MakeRandom
         else}
         TimeTable.LoadFromDataModule(CodHorarioFuente);
-        va := TimeTable.Valor;
-        TimeTable.DescensoRapidoForzado;
-        ProgressForm.ProgressMax := vModeloHorario.SesionCantidadDoble;
+        va := TimeTable.Value;
+        TimeTable.DownHillForced;
+        ProgressForm.ProgressMax := TimeTableModel.SesionCantidadDoble;
         ProgressForm.ShowProgressForm;
-        TimeTable.DescensoRapidoDobleForzado(MasterDataModule.ConfigStorage.NumIteraciones);
+        TimeTable.DoubleDownHillForced(MasterDataModule.ConfigStorage.NumIteraciones);
         if not ProgressForm.CancelClick then
         begin
           EndTime := Now;
@@ -365,7 +365,7 @@ begin
             Report.Add(Format('Horario base (Peso): %d (%f)',
               [CodHorarioFuente, va]));
             Report.Add('----------------------------------');
-            // VModeloHorario.ReportParameters(Report);
+            // TimeTableModel.ReportParameters(Report);
             TimeTable.ReportValues(Report);
             TimeTable.SaveToDataModule(CodHorarioDestino, MomentoInicial,
               EndTime, Report);
@@ -380,7 +380,7 @@ begin
         TimeTable.Free;
       end;
     finally
-      VModeloHorario.Free;
+      TimeTableModel.Free;
       MainForm.Ejecutando := False;
       MainForm.StatusBar.Panels[1].Style := psText;
       MainForm.StatusBar.Panels[2].Text := 'Listo';

@@ -19,9 +19,6 @@ all: $(TTGEXE)
 # Migration options (delphi-lazarus):
 ##############################################################################
 
-%.lrs: %.lfm
-	$(LAZRES) $@ $<
-
 %.pp: %.pas
 	sed \
 	  -e s:"TWideStringField":"TStringField":g \

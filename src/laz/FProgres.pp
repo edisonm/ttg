@@ -144,14 +144,14 @@ begin
                              MateriaProhibicionValor,
                              ProfesorProhibicionValor,
                              MateriaNoDispersaValor,
-                             Valor);
+                             Value);
       {
       if FAjustar then
       begin
         InvalidarValores;
-      	// Actualizar;
+      	// Update;
         with SourceDataModule do
-	        ModeloHorario.Configurar(CruceProfesor,
+	        TimeTableModel.Configurar(CruceProfesor,
                                    ProfesorFraccionamiento,
                                    CruceAulaTipo,
                                    HoraHueca,
@@ -244,8 +244,6 @@ end;
 
 procedure TProgressForm.CloseProgressForm;
 begin
-  FCloseClick := False;
-  FCancelClick := False;
   ProgressForm.Close;
 end;
 
