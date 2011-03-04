@@ -20,7 +20,6 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    procedure FormCreate(Sender: TObject);
   private
     { private declarations }
   public
@@ -54,11 +53,6 @@ begin
   finally
     FSelPeriodoForm.Release;
   end;
-end;
-
-procedure TSelPeriodoForm.FormCreate(Sender: TObject);
-begin
-
 end;
 
 initialization

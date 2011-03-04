@@ -7,7 +7,6 @@ object SelPeriodoForm: TSelPeriodoForm
   Caption = 'Intercambiar Periodo'
   ClientHeight = 123
   ClientWidth = 295
-  OnCreate = FormCreate
   Position = poDesktopCenter
   LCLVersion = '0.9.28.2'
   object Label1: TLabel
