@@ -50,7 +50,7 @@ $(TTGEXE): $(BASELAZFILES) ttg.lpi
 
 $(DSRCBASE).pp $(DSRCBASE).lfm: dbutils $(TTGMDB) Makefile
 	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule \
-	  $(DSRCBASE) 'cds;csr;lfm;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
+	  $(DSRCBASE) 'cds;csr;lfm;U=ZConnection, ZDataset;DS=ZTable'
 	dos2unix $(DSRCBASE).pp $(DSRCBASE).lfm
 
 dbutils:

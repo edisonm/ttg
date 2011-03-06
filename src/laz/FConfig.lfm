@@ -1,7 +1,7 @@
 object ConfiguracionForm: TConfiguracionForm
-  Left = 499
+  Left = 485
   Height = 416
-  Top = 0
+  Top = 139
   Width = 490
   ActiveControl = pgcConfig
   BorderStyle = bsDialog
@@ -65,15 +65,15 @@ object ConfiguracionForm: TConfiguracionForm
     Height = 360
     Top = 8
     Width = 473
-    ActivePage = tbsAlgoritmoEvolutivo
+    ActivePage = tbsUnidadEducativa
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 3
+    TabIndex = 0
     TabOrder = 1
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
       Caption = 'Institucion'
-      ClientHeight = 324
+      ClientHeight = 325
       ClientWidth = 465
       ImageIndex = 2
       object Label14: TLabel

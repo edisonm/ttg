@@ -66,8 +66,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMain"/>
-        <CursorPos X="33" Y="534"/>
-        <TopLine Value="530"/>
+        <CursorPos X="40" Y="485"/>
+        <TopLine Value="473"/>
         <EditorIndex Value="7"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -79,16 +79,16 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DMaster"/>
-        <CursorPos X="3" Y="123"/>
-        <TopLine Value="123"/>
+        <CursorPos X="68" Y="9"/>
+        <TopLine Value="1"/>
         <UsageCount Value="203"/>
       </Unit2>
       <Unit3>
         <Filename Value="KerModel.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="KerModel"/>
-        <CursorPos X="5" Y="393"/>
-        <TopLine Value="365"/>
+        <CursorPos X="45" Y="3135"/>
+        <TopLine Value="3134"/>
         <EditorIndex Value="9"/>
         <UsageCount Value="203"/>
         <Loaded Value="True"/>
@@ -97,8 +97,8 @@
         <Filename Value="KerEvolE.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="KerEvolE"/>
-        <CursorPos X="5" Y="60"/>
-        <TopLine Value="32"/>
+        <CursorPos X="19" Y="466"/>
+        <TopLine Value="451"/>
         <EditorIndex Value="8"/>
         <UsageCount Value="204"/>
         <Loaded Value="True"/>
@@ -110,9 +110,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FProgres"/>
-        <CursorPos X="1" Y="127"/>
+        <CursorPos X="1" Y="126"/>
         <TopLine Value="111"/>
+        <EditorIndex Value="10"/>
         <UsageCount Value="201"/>
+        <Loaded Value="True"/>
       </Unit5>
       <Unit6>
         <Filename Value="SortAlgs.pp"/>
@@ -143,8 +145,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FCrsMMEd"/>
-        <CursorPos X="30" Y="75"/>
-        <TopLine Value="75"/>
+        <CursorPos X="40" Y="120"/>
+        <TopLine Value="96"/>
         <EditorIndex Value="3"/>
         <UsageCount Value="204"/>
         <Loaded Value="True"/>
@@ -156,8 +158,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FCrsMME0"/>
-        <CursorPos X="12" Y="117"/>
-        <TopLine Value="114"/>
+        <CursorPos X="22" Y="23"/>
+        <TopLine Value="1"/>
         <EditorIndex Value="6"/>
         <UsageCount Value="203"/>
         <Loaded Value="True"/>
@@ -210,7 +212,7 @@
         <UnitName Value="FMateria"/>
         <CursorPos X="13" Y="86"/>
         <TopLine Value="84"/>
-        <UsageCount Value="197"/>
+        <UsageCount Value="201"/>
       </Unit14>
       <Unit15>
         <Filename Value="FProfesr.pp"/>
@@ -220,7 +222,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FProfesr"/>
         <CursorPos X="3" Y="92"/>
-        <TopLine Value="90"/>
+        <TopLine Value="66"/>
         <EditorIndex Value="5"/>
         <UsageCount Value="214"/>
         <Loaded Value="True"/>
@@ -248,8 +250,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FConfig"/>
-        <CursorPos X="39" Y="218"/>
-        <TopLine Value="208"/>
+        <CursorPos X="3" Y="257"/>
+        <TopLine Value="254"/>
         <UsageCount Value="203"/>
       </Unit18>
       <Unit19>
@@ -261,7 +263,7 @@
         <UnitName Value="FMsgView"/>
         <CursorPos X="1" Y="21"/>
         <TopLine Value="1"/>
-        <UsageCount Value="197"/>
+        <UsageCount Value="201"/>
       </Unit19>
       <Unit20>
         <Filename Value="FHorPara.pp"/>
@@ -316,7 +318,7 @@
         <UnitName Value="FParalel"/>
         <CursorPos X="3" Y="85"/>
         <TopLine Value="83"/>
-        <UsageCount Value="197"/>
+        <UsageCount Value="201"/>
       </Unit24>
       <Unit25>
         <Filename Value="FSingEdt.pp"/>
@@ -325,8 +327,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FSingEdt"/>
-        <CursorPos X="45" Y="151"/>
-        <TopLine Value="143"/>
+        <CursorPos X="50" Y="29"/>
+        <TopLine Value="16"/>
         <UsageCount Value="201"/>
       </Unit25>
       <Unit26>
@@ -366,7 +368,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSrcBase"/>
-        <CursorPos X="3" Y="1"/>
+        <CursorPos X="49" Y="21"/>
         <TopLine Value="1"/>
         <UsageCount Value="204"/>
       </Unit29>
@@ -374,8 +376,8 @@
         <Filename Value="RelUtils.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="RelUtils"/>
-        <CursorPos X="43" Y="672"/>
-        <TopLine Value="652"/>
+        <CursorPos X="17" Y="669"/>
+        <TopLine Value="656"/>
         <UsageCount Value="201"/>
       </Unit30>
       <Unit31>
@@ -385,7 +387,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSource"/>
-        <CursorPos X="1" Y="1"/>
+        <CursorPos X="44" Y="9"/>
         <TopLine Value="1"/>
         <UsageCount Value="204"/>
       </Unit31>
@@ -417,7 +419,7 @@
         <UnitName Value="TTGCfg"/>
         <CursorPos X="14" Y="151"/>
         <TopLine Value="126"/>
-        <UsageCount Value="120"/>
+        <UsageCount Value="194"/>
       </Unit34>
     </Units>
   </ProjectOptions>
@@ -446,11 +448,19 @@
     </Other>
   </CompilerOptions>
   <Debugging>
-    <Watches Count="1">
+    <Watches Count="4">
       <Item1>
-        <Expression Value="FColDataset"/>
-        <Enabled Value="False"/>
+        <Expression Value="RecalculateValue"/>
       </Item1>
+      <Item2>
+        <Expression Value="TablingInfo.FProfesorProhibicionValor"/>
+      </Item2>
+      <Item3>
+        <Expression Value="TablingInfo.FProfesorProhibicion"/>
+      </Item3>
+      <Item4>
+        <Expression Value="d"/>
+      </Item4>
     </Watches>
     <Exceptions Count="3">
       <Item1>

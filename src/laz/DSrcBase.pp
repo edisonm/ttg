@@ -74,9 +74,6 @@ implementation
 {$R *.DFM}
 {$ENDIF}
 
-uses RelUtils;
-
-
 procedure TSourceBaseDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;

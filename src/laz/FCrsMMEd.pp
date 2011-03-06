@@ -76,16 +76,16 @@ type
       var AMin, AMax: Integer; var APosKey, AKeyPos: TDynamicIntegerArray;
       var APosName: TDynamicStringArray);
     procedure InvalidateData; virtual;
-    function RelRecordExists(i, j: Integer): Boolean; virtual; abstract;
-    function ColRowIsValid(i, j: Integer): Boolean;
-    function RelRecordIsValid(i, j: Integer): Boolean;
-    procedure WriteRelRecord(i, j: Integer); virtual; abstract;
-    procedure DeleteRelRecord(i, j: Integer); virtual;
-    procedure ReadRelRecord(i, j: Integer); virtual; abstract;
-    procedure UpdateRelRecord(i, j: Integer); virtual; abstract;
+    function RelRecordExists(ACol, ARow: Integer): Boolean; virtual; abstract;
+    function ColRowIsValid(ACol, ARow: Integer): Boolean;
+    function RelRecordIsValid(ACol, ARow: Integer): Boolean;
+    procedure WriteRelRecord(ACol, ARow: Integer); virtual; abstract;
+    procedure DeleteRelRecord(ACol, ARow: Integer); virtual;
+    procedure ReadRelRecord(ACol, ARow: Integer); virtual; abstract;
+    procedure UpdateRelRecord(ACol, ARow: Integer); virtual; abstract;
     procedure InitRelArray; virtual; abstract;
-    function GetColorHighLight(i, j: Integer): TColor; virtual;
-    function GetText(i, j: Integer): string; virtual; abstract;
+    function GetColorHighLight(ACol, ARow: Integer): TColor; virtual;
+    function GetText(ACol, ARow: Integer): string; virtual; abstract;
     property ColDataset: TDataset read FColDataset;
     property RowDataset: TDataset read FRowDataset;
     property RelDataset: TDataset read FRelDataset;
@@ -99,7 +99,7 @@ type
     procedure ShowEditor(AColDataSet, ARowDataSet, ARelDataSet, ASelDataSet:
       TDataSet; const AColFieldKey, AColFieldName, AColField, AColFieldSel, ARowFieldKey,
       ARowFieldName, ARowField, ARowFieldSel: string);
-    property ColorHighLight[i, j: Integer]: TColor read GetColorHighLight;
+    property ColorHighLight[ACol, ARow: Integer]: TColor read GetColorHighLight;
     property Editing: Boolean read FEditing;
     property Sel: TDynamicBooleanArrayArray read FSel;
     property RowName[ARow: Integer]: string read GetRowName;
@@ -398,10 +398,10 @@ begin
 end;
 
 
-function TCrossManyToManyEditorForm.ColRowIsValid(i, j: Integer): Boolean;
+function TCrossManyToManyEditorForm.ColRowIsValid(ACol, ARow: Integer): Boolean;
 begin
-  Result := (i >= 0) and (i < FColDataSetRecordCount) and (j >= 0)
-    and (j < FRowDataSetRecordCount);
+  Result := (ACol >= 0) and (ACol < FColDataSetRecordCount)
+    and (ARow >= 0) and (ARow < FRowDataSetRecordCount);
 end;
 
 procedure TCrossManyToManyEditorForm.Edit;
@@ -426,19 +426,19 @@ begin
   inherited;
 end;
 
-procedure TCrossManyToManyEditorForm.DeleteRelRecord(i, j: Integer);
+procedure TCrossManyToManyEditorForm.DeleteRelRecord(ACol, ARow: Integer);
 begin
   FRelDataSet.Delete;
 end;
 
-function TCrossManyToManyEditorForm.RelRecordIsValid(i, j: Integer): Boolean;
+function TCrossManyToManyEditorForm.RelRecordIsValid(ACol, ARow: Integer): Boolean;
 begin
-  Result := ColRowIsValid(i, j) and (not Assigned(FSelDataSet) or FSel[i, j]);
+  Result := ColRowIsValid(ACol, ARow) and (not Assigned(FSelDataSet) or FSel[ACol, ARow]);
 end;
 
-function TCrossManyToManyEditorForm.GetColorHighLight(i, j: Integer): TColor;
+function TCrossManyToManyEditorForm.GetColorHighLight(ACol, ARow: Integer): TColor;
 begin
-  if RelRecordIsValid(i, j) then
+  if RelRecordIsValid(ACol, ARow) then
     Result := clWindow
   else
     Result := clScrollBar;

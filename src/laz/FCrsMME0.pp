@@ -37,13 +37,13 @@ type
     FRel: TDynamicBooleanArrayArray;
     procedure ClearSelection;
   protected
-    function RelRecordExists(i, j: Integer): Boolean; override;
+    function RelRecordExists(ACol, ARow: Integer): Boolean; override;
     procedure InitRelArray; override;
-    procedure WriteRelRecord(i, j: Integer); override;
-    procedure UpdateRelRecord(i, j: Integer); override;
-    procedure ReadRelRecord(i, j: Integer); override;
-    function GetColorHighLight(i, j: Integer): TColor; override;
-    function GetText(i, j: Integer): string; override;
+    procedure WriteRelRecord(ACol, ARow: Integer); override;
+    procedure UpdateRelRecord(ACol, ARow: Integer); override;
+    procedure ReadRelRecord(ACol, ARow: Integer); override;
+    function GetColorHighLight(ACol, ARow: Integer): TColor; override;
+    function GetText(ACol, ARow: Integer): string; override;
     property Rel: TDynamicBooleanArrayArray read FRel;
   public
     { Public declarations }
@@ -64,12 +64,12 @@ implementation
 
 { TFCrMMEditor0 }
 
-function TCrossManyToManyEditor0Form.GetColorHighLight(i, j: Integer): TColor;
+function TCrossManyToManyEditor0Form.GetColorHighLight(ACol, ARow: Integer): TColor;
 begin
-  if RelRecordExists(i, j) then
+  if RelRecordExists(ARow, ARow) then
     Result := clRed
   else
-    Result := inherited GetColorHighLight(i, j);
+    Result := inherited GetColorHighLight(ACol, ARow);
 end;
 
 procedure TCrossManyToManyEditor0Form.InitRelArray;
@@ -82,41 +82,36 @@ begin
       FRel[j, k] := False;
 end;
 
-procedure TCrossManyToManyEditor0Form.WriteRelRecord(i, j: Integer);
+procedure TCrossManyToManyEditor0Form.WriteRelRecord(ACol, ARow: Integer);
 begin
   RelDataSet.Append;
-  ColField.AsInteger := ColKey[i];
-  RowField.AsInteger := RowKey[j];
+  ColField.AsInteger := ColKey[ACol];
+  RowField.AsInteger := RowKey[ARow];
   RelDataSet.Post;
 end;
 
-procedure TCrossManyToManyEditor0Form.UpdateRelRecord(i, j: Integer);
+procedure TCrossManyToManyEditor0Form.UpdateRelRecord(ACol, ARow: Integer);
 begin
 end;
 
-procedure TCrossManyToManyEditor0Form.ReadRelRecord(i, j: Integer);
+procedure TCrossManyToManyEditor0Form.ReadRelRecord(ACol, ARow: Integer);
 begin
-  FRel[i, j] := True;
+  FRel[ACol, ARow] := True;
 end;
 
-function TCrossManyToManyEditor0Form.RelRecordExists(i, j: Integer): Boolean;
+function TCrossManyToManyEditor0Form.RelRecordExists(ACol, ARow: Integer): Boolean;
 begin
   try
-    Result := RelRecordIsValid(i, j) and FRel[i, j]
+    Result := RelRecordIsValid(ACol, ARow) and FRel[ACol, ARow]
   except
     Result := False;
   end;
 end;
 
-var
-  FCol, FRow: Integer;
-
 procedure TCrossManyToManyEditor0Form.DrawGridSelectCell(Sender: TObject;
   ACol, ARow: Integer; var CanSelect: Boolean);
 begin
   inherited;
-  FCol := ACol;
-  FRow := ARow;
 end;
 
 procedure TCrossManyToManyEditor0Form.FormClose(Sender: TObject;
@@ -136,7 +131,7 @@ begin
   inherited;
 end;
 
-function TCrossManyToManyEditor0Form.GetText(i, j: Integer): string;
+function TCrossManyToManyEditor0Form.GetText(ACol, ARow: Integer): string;
 begin
   Result := '';
 end;

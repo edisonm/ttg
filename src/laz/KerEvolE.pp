@@ -66,8 +66,6 @@ type
     constructor CreateFromModel(ATimeTableModel: TTimeTableModel;
       ATamPoblacion: Longint);
     procedure PrefijarHorarios(const Horarios: string);
-    {procedure InvalidarValores;}
-    procedure Update;
     procedure Configure(ATamPoblacion: Integer);
     destructor Destroy; override;
     procedure SaveBestToDatabase(CodHorario: Integer; MomentoInicial,
@@ -174,28 +172,6 @@ begin
   end;
 end;
 
-{
-procedure TEvolElitist.InvalidarValores;
-var
-  i: Integer;
-begin
-  for i := 0 to High(FPoblacion) do
-  begin
-    FPoblacion[i].InvalidarValor;
-  end;
-end;
-}
-
-procedure TEvolElitist.Update;
-var
-  i: Integer;
-begin
-  for i := 0 to High(FPoblacion) do
-  begin
-    FPoblacion[i].Update;
-  end;
-end;
-
 procedure TEvolElitist.DoParallelGetValue(Index: PtrInt; Data: Pointer; Item: TMultiThreadProcItem);
 begin
   FPoblacion[Index].UpdateValue;
@@ -204,20 +180,21 @@ end;
 procedure TEvolElitist.Evaluate;
 var
   i: Integer;
-  d, VMinValue, VMaxValue: Double;
+  Value, MaxValue: Double;
 begin
-  VMaxValue := -1.7E308;
-  //ProcThreadPool.DoParallel(DoParallelGetValue, 0, High(FPoblacion), nil);
+  MaxValue := -1.7E308;
+  // ProcThreadPool.DoParallel(DoParallelGetValue, 0, High(FPoblacion), nil);
   for i := 0 to High(FPoblacion) do
   begin
-    DoParallelGetValue(i, nil, nil);
-    d := FPoblacion[i].Value;
-    if VMaxValue < d then
-      VMaxValue := d;
+    FPoblacion[i].UpdateValue;
+    // DoParallelGetValue(i, nil, nil);
+    Value := FPoblacion[i].Value;
+    if MaxValue < Value then
+      MaxValue := Value;
   end;
   for i := 0 to High(FPoblacion) do
   begin
-    FAptitudArray[i] := 1 + VMaxValue - FPoblacion[i].Value;
+    FAptitudArray[i] := 1 + MaxValue - FPoblacion[i].Value;
   end;
 end;
 
@@ -524,8 +501,7 @@ begin
     Cross;
     Mutate;
     Repair;
-    if ((NumGeneracion mod FRangoPolinizacion) = 0)
-       and (FSyncDirectory <> '') then
+    if ((NumGeneracion mod FRangoPolinizacion) = 0) and (FSyncDirectory <> '') then
       Pollinate;
     Evaluate;
     Elitista;

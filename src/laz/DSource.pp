@@ -6,7 +6,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, DSrcBase, DBase, UConfig, Db, ZConnection;
+  Controls, Forms, Dialogs, DSrcBase, DBase, Db, ZConnection;
 
 type
 

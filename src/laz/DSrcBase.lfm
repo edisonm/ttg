@@ -1,237 +1,259 @@
 inherited SourceBaseDataModule: TSourceBaseDataModule
   OnCreate = DataModuleCreate
   OnDestroy = nil
-  object TbAulaTipo: TZTable
+  Height = 480
+  HorizontalOffset = 25
+  VerticalOffset = 0
+  Width = 928
+  object TbAulaTipo: TZTable[1]
     Connection = Database
+    SortedFields = 'CodAulaTipo'
     TableName = 'AulaTipo'
-    IndexFieldNames = 'CodAulaTipo'
-    Left = 48
-    Top = 48
+    IndexFieldNames = 'CodAulaTipo Asc'
+    left = 48
+    top = 48
   end
-  object DSAulaTipo: TDataSource
+  object DSAulaTipo: TDatasource[2]
     DataSet = TbAulaTipo
-    Left = 56
-    Top = 40
+    left = 56
+    top = 40
   end
-  object TbEspecializacion: TZTable
+  object TbEspecializacion: TZTable[3]
     Tag = 1
     Connection = Database
+    SortedFields = 'CodEspecializacion'
     TableName = 'Especializacion'
-    IndexFieldNames = 'CodEspecializacion'
-    Left = 144
-    Top = 60
+    IndexFieldNames = 'CodEspecializacion Asc'
+    left = 144
+    top = 60
   end
-  object DSEspecializacion: TDataSource
+  object DSEspecializacion: TDatasource[4]
     DataSet = TbEspecializacion
-    Left = 152
-    Top = 52
+    left = 152
+    top = 52
   end
-  object TbDia: TZTable
+  object TbDia: TZTable[5]
     Tag = 2
     Connection = Database
+    SortedFields = 'CodDia'
     TableName = 'Dia'
-    IndexFieldNames = 'CodDia'
-    Left = 240
-    Top = 48
+    IndexFieldNames = 'CodDia Asc'
+    left = 240
+    top = 48
   end
-  object DSDia: TDataSource
+  object DSDia: TDatasource[6]
     DataSet = TbDia
-    Left = 248
-    Top = 40
+    left = 248
+    top = 40
   end
-  object TbMateria: TZTable
+  object TbMateria: TZTable[7]
     Tag = 3
     Connection = Database
+    SortedFields = 'CodMateria'
     TableName = 'Materia'
-    IndexFieldNames = 'CodMateria'
-    Left = 336
-    Top = 60
+    IndexFieldNames = 'CodMateria Asc'
+    left = 336
+    top = 60
   end
-  object DSMateria: TDataSource
+  object DSMateria: TDatasource[8]
     DataSet = TbMateria
-    Left = 344
-    Top = 52
+    left = 344
+    top = 52
   end
-  object TbNivel: TZTable
+  object TbNivel: TZTable[9]
     Tag = 4
     Connection = Database
+    SortedFields = 'CodNivel'
     TableName = 'Nivel'
-    IndexFieldNames = 'CodNivel'
-    Left = 432
-    Top = 48
+    IndexFieldNames = 'CodNivel Asc'
+    left = 432
+    top = 48
   end
-  object DSNivel: TDataSource
+  object DSNivel: TDatasource[10]
     DataSet = TbNivel
-    Left = 440
-    Top = 40
+    left = 440
+    top = 40
   end
-  object TbHora: TZTable
+  object TbHora: TZTable[11]
     Tag = 5
     Connection = Database
+    SortedFields = 'CodHora'
     TableName = 'Hora'
-    IndexFieldNames = 'CodHora'
-    Left = 48
-    Top = 144
+    IndexFieldNames = 'CodHora Asc'
+    left = 48
+    top = 144
   end
-  object DSHora: TDataSource
+  object DSHora: TDatasource[12]
     DataSet = TbHora
-    Left = 56
-    Top = 136
+    left = 56
+    top = 136
   end
-  object TbHorario: TZTable
+  object TbHorario: TZTable[13]
     Tag = 6
     Connection = Database
+    SortedFields = 'CodHorario'
     TableName = 'Horario'
-    IndexFieldNames = 'CodHorario'
-    Left = 144
-    Top = 156
+    IndexFieldNames = 'CodHorario Asc'
+    left = 144
+    top = 156
   end
-  object DSHorario: TDataSource
+  object DSHorario: TDatasource[14]
     DataSet = TbHorario
-    Left = 152
-    Top = 148
+    left = 152
+    top = 148
   end
-  object TbCurso: TZTable
+  object TbCurso: TZTable[15]
     Tag = 7
     Connection = Database
+    SortedFields = 'CodNivel;CodEspecializacion'
     TableName = 'Curso'
-    IndexFieldNames = 'CodNivel;CodEspecializacion'
-    Left = 240
-    Top = 144
+    IndexFieldNames = 'CodNivel Asc;CodEspecializacion Asc'
+    left = 240
+    top = 144
   end
-  object DSCurso: TDataSource
+  object DSCurso: TDatasource[16]
     DataSet = TbCurso
-    Left = 248
-    Top = 136
+    left = 248
+    top = 136
   end
-  object TbParaleloId: TZTable
+  object TbParaleloId: TZTable[17]
     Tag = 8
     Connection = Database
+    SortedFields = 'CodParaleloId'
     TableName = 'ParaleloId'
-    IndexFieldNames = 'CodParaleloId'
-    Left = 336
-    Top = 156
+    IndexFieldNames = 'CodParaleloId Asc'
+    left = 336
+    top = 156
   end
-  object DSParaleloId: TDataSource
+  object DSParaleloId: TDatasource[18]
     DataSet = TbParaleloId
-    Left = 344
-    Top = 148
+    left = 344
+    top = 148
   end
-  object TbMateriaProhibicionTipo: TZTable
+  object TbMateriaProhibicionTipo: TZTable[19]
     Tag = 9
     Connection = Database
+    SortedFields = 'CodMateProhibicionTipo'
     TableName = 'MateriaProhibicionTipo'
-    IndexFieldNames = 'CodMateProhibicionTipo'
-    Left = 432
-    Top = 144
+    IndexFieldNames = 'CodMateProhibicionTipo Asc'
+    left = 432
+    top = 144
   end
-  object DSMateriaProhibicionTipo: TDataSource
+  object DSMateriaProhibicionTipo: TDatasource[20]
     DataSet = TbMateriaProhibicionTipo
-    Left = 440
-    Top = 136
+    left = 440
+    top = 136
   end
-  object TbPeriodo: TZTable
+  object TbPeriodo: TZTable[21]
     Tag = 10
     Connection = Database
+    SortedFields = 'CodDia;CodHora'
     TableName = 'Periodo'
-    IndexFieldNames = 'CodDia;CodHora'
-    Left = 48
-    Top = 240
+    IndexFieldNames = 'CodDia Asc;CodHora Asc'
+    left = 48
+    top = 240
   end
-  object DSPeriodo: TDataSource
+  object DSPeriodo: TDatasource[22]
     DataSet = TbPeriodo
-    Left = 56
-    Top = 232
+    left = 56
+    top = 232
   end
-  object TbParalelo: TZTable
+  object TbParalelo: TZTable[23]
     Tag = 11
     Connection = Database
+    SortedFields = 'CodNivel;CodEspecializacion;CodParaleloId'
     TableName = 'Paralelo'
-    IndexFieldNames = 'CodNivel;CodEspecializacion;CodParaleloId'
-    Left = 144
-    Top = 252
+    IndexFieldNames = 'CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc'
+    left = 144
+    top = 252
   end
-  object DSParalelo: TDataSource
+  object DSParalelo: TDatasource[24]
     DataSet = TbParalelo
-    Left = 152
-    Top = 244
+    left = 152
+    top = 244
   end
-  object TbProfesor: TZTable
+  object TbProfesor: TZTable[25]
     Tag = 12
     Connection = Database
+    SortedFields = 'CodProfesor'
     TableName = 'Profesor'
-    IndexFieldNames = 'CodProfesor'
-    Left = 240
-    Top = 240
+    IndexFieldNames = 'CodProfesor Asc'
+    left = 240
+    top = 240
   end
-  object DSProfesor: TDataSource
+  object DSProfesor: TDatasource[26]
     DataSet = TbProfesor
-    Left = 248
-    Top = 232
+    left = 248
+    top = 232
   end
-  object TbMateriaProhibicion: TZTable
+  object TbMateriaProhibicion: TZTable[27]
     Tag = 13
     Connection = Database
+    SortedFields = 'CodMateria;CodDia;CodHora'
     TableName = 'MateriaProhibicion'
-    IndexFieldNames = 'CodMateria;CodDia;CodHora'
-    Left = 336
-    Top = 252
+    IndexFieldNames = 'CodMateria Asc;CodDia Asc;CodHora Asc'
+    left = 336
+    top = 252
   end
-  object DSMateriaProhibicion: TDataSource
+  object DSMateriaProhibicion: TDatasource[28]
     DataSet = TbMateriaProhibicion
-    Left = 344
-    Top = 244
+    left = 344
+    top = 244
   end
-  object TbDistributivo: TZTable
+  object TbDistributivo: TZTable[29]
     Tag = 14
     Connection = Database
+    SortedFields = 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId'
     TableName = 'Distributivo'
-    IndexFieldNames = 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId'
-    Left = 432
-    Top = 240
+    IndexFieldNames = 'CodMateria Asc;CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc'
+    left = 432
+    top = 240
   end
-  object DSDistributivo: TDataSource
+  object DSDistributivo: TDatasource[30]
     DataSet = TbDistributivo
-    Left = 440
-    Top = 232
+    left = 440
+    top = 232
   end
-  object TbHorarioDetalle: TZTable
+  object TbHorarioDetalle: TZTable[31]
     Tag = 15
     Connection = Database
+    SortedFields = 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
     TableName = 'HorarioDetalle'
-    IndexFieldNames = 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
-    Left = 48
-    Top = 336
+    IndexFieldNames = 'CodHorario Asc;CodMateria Asc;CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc;CodDia Asc;CodHora Asc'
+    left = 48
+    top = 336
   end
-  object DSHorarioDetalle: TDataSource
+  object DSHorarioDetalle: TDatasource[32]
     DataSet = TbHorarioDetalle
-    Left = 56
-    Top = 328
+    left = 56
+    top = 328
   end
-  object TbProfesorProhibicionTipo: TZTable
+  object TbProfesorProhibicionTipo: TZTable[33]
     Tag = 16
     Connection = Database
+    SortedFields = 'CodProfProhibicionTipo'
     TableName = 'ProfesorProhibicionTipo'
-    IndexFieldNames = 'CodProfProhibicionTipo'
-    Left = 144
-    Top = 348
+    IndexFieldNames = 'CodProfProhibicionTipo Asc'
+    left = 144
+    top = 348
   end
-  object DSProfesorProhibicionTipo: TDataSource
+  object DSProfesorProhibicionTipo: TDatasource[34]
     DataSet = TbProfesorProhibicionTipo
-    Left = 152
-    Top = 340
+    left = 152
+    top = 340
   end
-  object TbProfesorProhibicion: TZTable
+  object TbProfesorProhibicion: TZTable[35]
     Tag = 17
     Connection = Database
+    SortedFields = 'CodProfesor;CodDia;CodHora'
     TableName = 'ProfesorProhibicion'
-    IndexFieldNames = 'CodProfesor;CodDia;CodHora'
-    Left = 240
-    Top = 336
+    IndexFieldNames = 'CodProfesor Asc;CodDia Asc;CodHora Asc'
+    left = 240
+    top = 336
   end
-  object DSProfesorProhibicion: TDataSource
+  object DSProfesorProhibicion: TDatasource[36]
     DataSet = TbProfesorProhibicion
-    Left = 248
-    Top = 328
+    left = 248
+    top = 328
   end
 end

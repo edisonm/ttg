@@ -2,4 +2,6 @@
 {$MODE Delphi}
 {$ENDIF}
 
+{ $DEFINE DEBUG}
+
 { $DEFINE FREEWARE}

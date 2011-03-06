@@ -1,6 +1,4 @@
 inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
-  Left = 474
-  Top = 157
   ActiveControl = Panel1
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
