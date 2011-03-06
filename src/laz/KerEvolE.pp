@@ -442,21 +442,21 @@ end;
 
 procedure TEvolElitist.Cross;
 var
-  mem, one, First: Longint;
+  Individual, One, First: Longint;
   x: Double;
 begin
   First := 0;
-  one := 0;
-  for mem := 0 to FTamPoblacion - 1 do
+  One := 0;
+  for Individual := 0 to FTamPoblacion - 1 do
   begin
     x := randl;
     if x < FProbCruzamiento then
     begin
       Inc(First);
       if First mod 2 = 0 then
-        InternalCrossIndividuals(one, mem)
+        InternalCrossIndividuals(One, Individual)
       else
-        one := mem;
+        One := Individual;
     end;
   end;
 end;
