@@ -1752,20 +1752,24 @@ begin
   RecalculateValue := False;
   with TimeTableModel do
   begin
-    DoGetHoraHuecaDesubicada;
-    DoGetCruceProfesor;
     DoGetCruceAulaTipo;
-    DoGetSesionCortada;
+    DoGetCruceProfesor;
+    DoGetHoraHuecaDesubicada;
     DoGetMateriaNoDispersa;
     DoGetMateriaProhibicionValor;
-    DoGetProfesorProhibicionValor;
     DoGetProfesorFraccionamiento;
+    DoGetProfesorProhibicionValor;
+    DoGetSesionCortada;
     with TablingInfo do
-      FValue := Self.CruceProfesorValor + Self.CruceAulaTipoValor +
-      FMateriaProhibicionValor + FProfesorProhibicionValor +
-      FMateriaNoDispersa * FMateriaNoDispersaValor + FSesionCortada *
-      FSesionCortadaValor + FHoraHuecaDesubicada * FHoraHuecaDesubicadaValor +
-      FProfesorFraccionamiento * FProfesorFraccionamientoValor;
+      FValue :=
+      Self.CruceAulaTipoValor +
+      Self.CruceProfesorValor +
+      FHoraHuecaDesubicada * FHoraHuecaDesubicadaValor +
+      FMateriaNoDispersa * FMateriaNoDispersaValor +
+      FMateriaProhibicionValor +
+      FProfesorFraccionamiento * FProfesorFraccionamientoValor +
+      FProfesorProhibicionValor +
+      FSesionCortada * FSesionCortadaValor;
   end;
 end;
 
