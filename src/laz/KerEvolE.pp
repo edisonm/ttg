@@ -463,7 +463,7 @@ end;
 
 procedure TEvolElitist.InternalCrossIndividuals(Uno, Dos: Integer);
 begin
-  CruzarIndividuos(FPoblacion[Uno], FPoblacion[Dos]);
+  CrossIndividuals(FPoblacion[Uno], FPoblacion[Dos]);
 end;
 
 procedure TEvolElitist.Mutate;

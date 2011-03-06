@@ -288,7 +288,7 @@ procedure CargarPrefijadoDesdeModelo(var AObjetoTimeTableModel: TTimeTable;
   ATimeTableModel: TTimeTableModel; CodHorario: Integer);
 
 // Procedimiento que aplica el operador de cruzamiento sobre dos TObjetoTimeTableModel
-procedure CruzarIndividuos(var Uno, Dos: TTimeTable);
+procedure CrossIndividuals(var TimeTable1, TimeTable2: TTimeTable);
 
 implementation
 
@@ -857,7 +857,7 @@ begin
   AObjetoTimeTableModel.LoadFromDataModule(CodHorario);
 end;
 
-procedure CruzarIndividuosPunto(var Uno, Dos: TTimeTable; AParalelo: Smallint);
+procedure CrossIndividualsParalelo(var Uno, Dos: TTimeTable; AParalelo: Smallint);
 var
   s, j, d: Smallint;
   k1, k2, l: Longint;
@@ -925,22 +925,22 @@ begin
   end;
 end;
 
-procedure CruzarIndividuos(var Uno, Dos: TTimeTable);
+procedure CrossIndividuals(var TimeTable1, TimeTable2: TTimeTable);
 var
-  I: Smallint;
+  Paralelo: Smallint;
 begin
-  with Uno.TimeTableModel do
+  with TimeTable1.TimeTableModel do
   begin
-    for I := 0 to FParaleloCant - 1 do
+    for Paralelo := 0 to FParaleloCant - 1 do
     begin
-      CruzarIndividuosPunto(Uno, Dos, I);
+      CrossIndividualsParalelo(TimeTable1, TimeTable2, Paralelo);
     end;
-    Uno.Update;
-    Dos.Update;
-    Uno.RecalculateValue := True;
-    Dos.RecalculateValue := True;
-    // Uno.Check('CruzarIndividuosUnoDespues');
-    // Dos.Check('CruzarIndividuosDosDespues');
+    TimeTable1.Update;
+    TimeTable2.Update;
+    TimeTable1.RecalculateValue := True;
+    TimeTable2.RecalculateValue := True;
+    // TimeTable1.Check('CruzarIndividuosUnoDespues');
+    // TimeTable2.Check('CruzarIndividuosDosDespues');
   end;
 end;
 
