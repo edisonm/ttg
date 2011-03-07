@@ -53,6 +53,7 @@
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="ttg"/>
       </Unit0>
       <Unit1>
         <Filename Value="FMain.pp"/>
@@ -297,7 +298,7 @@
         <UnitName Value="TTGCfg"/>
       </Unit34>
       <Unit35>
-        <Filename Value="uindivid.pp"/>
+        <Filename Value="UIndivid.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UIndivid"/>
       </Unit35>

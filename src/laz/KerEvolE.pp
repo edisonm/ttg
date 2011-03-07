@@ -40,7 +40,7 @@ type
       FNumMaxGeneracion, FNumImportacion, FNumExportacion, FNumColision,
       FRangoPolinizacion, FOrdenMutacion1: Longint;
     FProbCruzamiento, FProbMutacion1, FProbMutacion2, FProbReparacion: Double;
-    FPoblacion, FNuevaPoblacion: TTimeTableArray;
+    FPopulation, FNewPopulation: TTimeTableArray;
     FAptitudArray, FNuevoAptitudArray, FRAptitudArray, FCAptitudArray: TDynamicDoubleArray;
     FFixedTimeTables: TDynamicLongintArray;
     FOnRecordBest: TNotifyEvent;
@@ -107,16 +107,16 @@ var
   i: Integer;
 begin
   FTamPoblacion := ATamPoblacion;
-  SetLength(FPoblacion, FTamPoblacion + 4);
-  SetLength(FNuevaPoblacion, Length(FPoblacion));
-  SetLength(FAptitudArray, Length(FPoblacion));
-  SetLength(FNuevoAptitudArray, Length(FPoblacion));
-  SetLength(FRAptitudArray, Length(FPoblacion));
-  SetLength(FCAptitudArray, Length(FPoblacion));
-  for i := 0 to High(FPoblacion) do
+  SetLength(FPopulation, FTamPoblacion + 4);
+  SetLength(FNewPopulation, Length(FPopulation));
+  SetLength(FAptitudArray, Length(FPopulation));
+  SetLength(FNuevoAptitudArray, Length(FPopulation));
+  SetLength(FRAptitudArray, Length(FPopulation));
+  SetLength(FCAptitudArray, Length(FPopulation));
+  for i := 0 to High(FPopulation) do
   begin
-    if not Assigned(FNuevaPoblacion[i]) then
-      FNuevaPoblacion[i] := TTimeTable.Create(FTimeTableModel);
+    if not Assigned(FNewPopulation[i]) then
+      FNewPopulation[i] := TTimeTable.Create(FTimeTableModel);
   end;
 end;
 
@@ -132,10 +132,10 @@ destructor TEvolElitist.Destroy;
 var
   i: Integer;
 begin
-  for i := 0 to High(FPoblacion) do
+  for i := 0 to High(FPopulation) do
   begin
-    FPoblacion[i].Free;
-    FNuevaPoblacion[i].Free;
+    FPopulation[i].Free;
+    FNewPopulation[i].Free;
   end;
   FTimeTableModel := nil;
   inherited Destroy;
@@ -146,15 +146,15 @@ var
   i: Integer;
 begin
   for i := 0 to High(FFixedTimeTables) do
-    LoadFixedFromModel(FPoblacion[i], FTimeTableModel,
+    LoadFixedFromModel(FPopulation[i], FTimeTableModel,
       FFixedTimeTables[i]);
-  for i := Length(FFixedTimeTables) to High(FPoblacion) do
+  for i := Length(FFixedTimeTables) to High(FPopulation) do
   begin
-    CreateRandomFromModel(FPoblacion[i], FTimeTableModel);
+    CreateRandomFromModel(FPopulation[i], FTimeTableModel);
   end;
   for i := Length(FFixedTimeTables) to FTamPoblacion - 1 do
   begin
-    FPoblacion[i].DownHill;
+    FPopulation[i].DownHill;
   end;
 end;
 
@@ -166,14 +166,14 @@ begin
   begin
     if randl < FProbReparacion then
     begin
-      FPoblacion[i].DownHill;
+      FPopulation[i].DownHill;
     end;
   end;
 end;
 
 procedure TEvolElitist.DoParallelGetValue(Index: PtrInt; Data: Pointer; Item: TMultiThreadProcItem);
 begin
-  FPoblacion[Index].UpdateValue;
+  FPopulation[Index].UpdateValue;
 end;
 
 procedure TEvolElitist.Evaluate;
@@ -182,18 +182,18 @@ var
   Value, MaxValue: Double;
 begin
   MaxValue := -1.7E308;
-  // ProcThreadPool.DoParallel(DoParallelGetValue, 0, High(FPoblacion), nil);
-  for i := 0 to High(FPoblacion) do
+  // ProcThreadPool.DoParallel(DoParallelGetValue, 0, High(FPopulation), nil);
+  for i := 0 to High(FPopulation) do
   begin
-    FPoblacion[i].UpdateValue;
+    FPopulation[i].UpdateValue;
     // DoParallelGetValue(i, nil, nil);
-    Value := FPoblacion[i].Value;
+    Value := FPopulation[i].Value;
     if MaxValue < Value then
       MaxValue := Value;
   end;
-  for i := 0 to High(FPoblacion) do
+  for i := 0 to High(FPopulation) do
   begin
-    FAptitudArray[i] := 1 + MaxValue - FPoblacion[i].Value;
+    FAptitudArray[i] := 1 + MaxValue - FPopulation[i].Value;
   end;
 end;
 
@@ -207,27 +207,27 @@ begin
   BestCruceProfesor := 0;
   BestCruceAulaTipo := 0;
   for i := 0 to FTamPoblacion - 1 do
-  with FPoblacion[i] do
+  with FPopulation[i] do
   begin
-    if Value < FPoblacion[Best].Value then
+    if Value < FPopulation[Best].Value then
     begin
       Best := i;
     end;
-    if (SesionCortada < FPoblacion[BestSesionCortada].SesionCortada) or
-      ((SesionCortada = FPoblacion[BestSesionCortada].SesionCortada) and
-        (Value < FPoblacion[BestSesionCortada].Value)) then
+    if (SesionCortada < FPopulation[BestSesionCortada].SesionCortada) or
+      ((SesionCortada = FPopulation[BestSesionCortada].SesionCortada) and
+        (Value < FPopulation[BestSesionCortada].Value)) then
     begin
       BestSesionCortada := i;
     end;
-    if (CruceProfesor < FPoblacion[BestCruceProfesor].CruceProfesor) or
-      ((CruceProfesor = FPoblacion[BestCruceProfesor].CruceProfesor) and
-        (Value < FPoblacion[BestCruceProfesor].Value)) then
+    if (CruceProfesor < FPopulation[BestCruceProfesor].CruceProfesor) or
+      ((CruceProfesor = FPopulation[BestCruceProfesor].CruceProfesor) and
+        (Value < FPopulation[BestCruceProfesor].Value)) then
     begin
       BestCruceProfesor := i;
     end;
-    if (CruceAulaTipo < FPoblacion[BestCruceAulaTipo].CruceAulaTipo) or
-      ((CruceAulaTipo = FPoblacion[BestCruceAulaTipo].CruceAulaTipo) and
-        (Value < FPoblacion[BestCruceAulaTipo].Value)) then
+    if (CruceAulaTipo < FPopulation[BestCruceAulaTipo].CruceAulaTipo) or
+      ((CruceAulaTipo = FPopulation[BestCruceAulaTipo].CruceAulaTipo) and
+        (Value < FPopulation[BestCruceAulaTipo].Value)) then
     begin
       BestCruceAulaTipo := i;
     end
@@ -240,7 +240,7 @@ end;
 
 procedure TEvolElitist.CopyIndividual(Target, Source: Integer);
 begin
-  FPoblacion[Target].Assign(FPoblacion[Source]);
+  FPopulation[Target].Assign(FPopulation[Source]);
   FAptitudArray[Target] := FAptitudArray[Source];
 end;
 
@@ -252,7 +252,7 @@ var
   // AStream: TStream;
   FindMejor: Boolean;
 begin
-  BestValue := FPoblacion[0].Value;
+  BestValue := FPopulation[0].Value;
   WorstValue := BestValue;
   Best := 0;
   Worst := 0;
@@ -260,23 +260,23 @@ begin
   BestCruceProfesor := FTamPoblacion + 2;
   BestCruceAulaTipo := FTamPoblacion + 3;
   for i := 0 to FTamPoblacion - 1 do
-  with FPoblacion[i] do
+  with FPopulation[i] do
   begin
-    if (SesionCortada < FPoblacion[BestSesionCortada].SesionCortada) or
-      ((SesionCortada = FPoblacion[BestSesionCortada].SesionCortada) and
-        (Value <= FPoblacion[BestSesionCortada].Value)) then
+    if (SesionCortada < FPopulation[BestSesionCortada].SesionCortada) or
+      ((SesionCortada = FPopulation[BestSesionCortada].SesionCortada) and
+        (Value <= FPopulation[BestSesionCortada].Value)) then
     begin
       BestSesionCortada := i;
     end;
-    if (CruceProfesor < FPoblacion[BestCruceProfesor].CruceProfesor) or
-      ((CruceProfesor = FPoblacion[BestCruceProfesor].CruceProfesor) and
-        (Value <= FPoblacion[BestCruceProfesor].Value)) then
+    if (CruceProfesor < FPopulation[BestCruceProfesor].CruceProfesor) or
+      ((CruceProfesor = FPopulation[BestCruceProfesor].CruceProfesor) and
+        (Value <= FPopulation[BestCruceProfesor].Value)) then
     begin
       BestCruceProfesor := i;
     end;
-    if (CruceAulaTipo < FPoblacion[BestCruceAulaTipo].CruceAulaTipo) or
-      ((CruceAulaTipo = FPoblacion[BestCruceAulaTipo].CruceAulaTipo) and
-        (Value <= FPoblacion[BestCruceAulaTipo].Value)) then
+    if (CruceAulaTipo < FPopulation[BestCruceAulaTipo].CruceAulaTipo) or
+      ((CruceAulaTipo = FPopulation[BestCruceAulaTipo].CruceAulaTipo) and
+        (Value <= FPopulation[BestCruceAulaTipo].Value)) then
     begin
       BestCruceAulaTipo := i;
     end;
@@ -303,9 +303,9 @@ begin
   begin
     CopyIndividual(FTamPoblacion + 3, BestCruceAulaTipo);
   end;
-  if BestValue <= FPoblacion[FTamPoblacion].Value then
+  if BestValue <= FPopulation[FTamPoblacion].Value then
   begin
-    FindMejor := BestValue < FPoblacion[FTamPoblacion].Value;
+    FindMejor := BestValue < FPopulation[FTamPoblacion].Value;
     CopyIndividual(FTamPoblacion, Best);
     if FindMejor and Assigned(OnRecordBest) then
       OnRecordBest(Self);
@@ -335,7 +335,7 @@ procedure TEvolElitist.Pollinate;
   begin
     Stream := TFileStream.Create(FileName, fmOpenRead or fmShareDenyWrite);
     try
-      FPoblacion[FTamPoblacion].LoadFromStream(Stream);
+      FPopulation[FTamPoblacion].LoadFromStream(Stream);
       Inc(FNumImportacion);
     finally
       Stream.Free;
@@ -349,7 +349,7 @@ procedure TEvolElitist.Pollinate;
     SyncStream := TFileStream.Create
       (SyncFileName, fmCreate or fmShareExclusive);
     try
-      Value := FPoblacion[FTamPoblacion].Value;
+      Value := FPopulation[FTamPoblacion].Value;
       SyncStream.write(Value, SizeOf(Double));
       ExportarInterno;
     finally
@@ -370,9 +370,9 @@ begin
       finally
         SyncStream.Free;
       end;
-      if Value < FPoblacion[FTamPoblacion].Value then
+      if Value < FPopulation[FTamPoblacion].Value then
         Importar
-      else if Value > FPoblacion[FTamPoblacion].Value then
+      else if Value > FPopulation[FTamPoblacion].Value then
         Exportar;
     end
     else
@@ -411,7 +411,7 @@ begin
     p := randl;
     if p < FCAptitudArray[0] then
     begin
-      FNuevaPoblacion[i].Assign(FPoblacion[0]);
+      FNewPopulation[i].Assign(FPopulation[0]);
       FNuevoAptitudArray[i] := FAptitudArray[0];
     end
     else
@@ -419,22 +419,22 @@ begin
       for j := 0 to FTamPoblacion - 1 do
         if (p >= FCAptitudArray[j]) and (p < FCAptitudArray[j + 1]) then
         begin
-          FNuevaPoblacion[i].Assign(FPoblacion[j + 1]);
+          FNewPopulation[i].Assign(FPopulation[j + 1]);
           FNuevoAptitudArray[i] := FAptitudArray[j + 1];
         end;
     end;
   end;
-  VTmpPoblacion := FPoblacion;
-  FPoblacion := FNuevaPoblacion;
-  FNuevaPoblacion := VTmpPoblacion;
+  VTmpPoblacion := FPopulation;
+  FPopulation := FNewPopulation;
+  FNewPopulation := VTmpPoblacion;
 
   VTmpAptitudArray := FAptitudArray;
   FAptitudArray := FNuevoAptitudArray;
   FNuevoAptitudArray := VTmpAptitudArray;
 
-  for i := FTamPoblacion to High(FPoblacion) do
+  for i := FTamPoblacion to High(FPopulation) do
   begin
-    FPoblacion[i].Assign(FNuevaPoblacion[i]);
+    FPopulation[i].Assign(FNewPopulation[i]);
     FAptitudArray[i] := FNuevoAptitudArray[i];
   end;
 end;
@@ -462,7 +462,7 @@ end;
 
 procedure TEvolElitist.InternalCrossIndividuals(Uno, Dos: Integer);
 begin
-  CrossIndividuals(FPoblacion[Uno], FPoblacion[Dos]);
+  CrossIndividuals(FPopulation[Uno], FPopulation[Dos]);
 end;
 
 procedure TEvolElitist.Mutate;
@@ -472,9 +472,9 @@ begin
   for i := 0 to FTamPoblacion - 1 do
   begin
     if randl < FProbMutacion1 then
-      FPoblacion[i].Mutate(FOrdenMutacion1);
+      FPopulation[i].Mutate(FOrdenMutacion1);
     if randl < FProbMutacion2 then
-      FPoblacion[i].MutateDia;
+      FPopulation[i].MutateDia;
   end;
 end;
 
@@ -511,14 +511,14 @@ end;
 
 procedure TEvolElitist.ForcedDownHill;
 begin
-  FPoblacion[FTamPoblacion].DownHillForced;
+  FPopulation[FTamPoblacion].DownHillForced;
   if Assigned(OnRecordBest) then
     OnRecordBest(Self);
 end;
 
 function TEvolElitist.DownHill: Boolean;
 begin
-  Result := FPoblacion[FTamPoblacion].DownHill;
+  Result := FPopulation[FTamPoblacion].DownHill;
 end;
 
 procedure TEvolElitist.SaveBestToDatabase(CodHorario: Integer;
@@ -540,14 +540,14 @@ begin
   sum := 0;
   for i := 0 to FTamPoblacion - 1 do
   begin
-    sum := sum + FPoblacion[i].Value;
+    sum := sum + FPopulation[i].Value;
   end;
   Result := sum / FTamPoblacion;
 end;
 
 function TEvolElitist.GetBestTimeTable: TTimeTable;
 begin
-  Result := FPoblacion[FTamPoblacion];
+  Result := FPopulation[FTamPoblacion];
 end;
 
 procedure TEvolElitist.ReportParameters(AInforme: TStrings);
