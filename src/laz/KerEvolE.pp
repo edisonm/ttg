@@ -4,8 +4,8 @@ unit KerEvolE;
 interface
 
 uses
-  {$IFDEF UNIX}cthreads, cmem, {$ENDIF}MTProcs, Classes, SysUtils, DB, Dialogs,
-  KerModel;
+  {$IFDEF UNIX}cthreads, cmem, {$ENDIF}MTProcs, Classes, SysUtils, Dialogs,
+  KerModel, UIndivid;
 
 type
 
@@ -106,7 +106,7 @@ var
   Individual: Integer;
 begin
   FTamPoblacion := ATamPoblacion;
-  SetLength(FPopulation, FTamPoblacion + 4);
+  SetLength(FPopulation, FTamPoblacion + 1 + FTimeTableModel.ElitistCount);
   SetLength(FNewPopulation, Length(FPopulation));
   SetLength(FAptitudArray, Length(FPopulation));
   SetLength(FNuevoAptitudArray, Length(FPopulation));
@@ -389,7 +389,7 @@ var
   sum: Double;
   p: Extended;
   VTmpPoblacion: TTimeTableArray;
-  VTmpAptitudArray, VTmpValorArray: TDynamicDoubleArray;
+  VTmpAptitudArray: TDynamicDoubleArray;
 begin
   sum := 0;
   for mem := 0 to FTamPoblacion - 1 do
