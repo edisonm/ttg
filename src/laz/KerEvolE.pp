@@ -278,9 +278,9 @@ end;
 
 procedure TEvolElitist.Elitista;
 var
-  BestValue, WorstValue: Double;
-  i, Best, Worst, BestSesionCortada, BestCruceProfesor,
-    BestCruceAulaTipo: Longint;
+  BestValue, WorstValue, EValue: Double;
+  Individual, EIndividual, Best, Worst: Longint;
+  EBest: TDynamicIntegerArray;
   // AStream: TStream;
   FindMejor: Boolean;
 begin
@@ -288,52 +288,37 @@ begin
   WorstValue := BestValue;
   Best := 0;
   Worst := 0;
-  BestSesionCortada := FTamPoblacion + 1;
-  BestCruceProfesor := FTamPoblacion + 2;
-  BestCruceAulaTipo := FTamPoblacion + 3;
-  for i := 0 to FTamPoblacion - 1 do
-  with FPopulation[i] do
+  SetLength(EBest, FTimeTableModel.ElitistCount);
+  for EIndividual := 0 to FTimeTableModel.ElitistCount - 1 do
   begin
-    if (SesionCortada < FPopulation[BestSesionCortada].SesionCortada) or
-      ((SesionCortada = FPopulation[BestSesionCortada].SesionCortada) and
-        (Value <= FPopulation[BestSesionCortada].Value)) then
+    EBest[EIndividual] := FTamPoblacion + 1 + EIndividual;
+  end;
+  for Individual := 0 to FTamPoblacion - 1 do
+  with FPopulation[Individual] do
+  begin
+    for EIndividual := 0 to FTimeTableModel.ElitistCount - 1 do
     begin
-      BestSesionCortada := i;
-    end;
-    if (CruceProfesor < FPopulation[BestCruceProfesor].CruceProfesor) or
-      ((CruceProfesor = FPopulation[BestCruceProfesor].CruceProfesor) and
-        (Value <= FPopulation[BestCruceProfesor].Value)) then
-    begin
-      BestCruceProfesor := i;
-    end;
-    if (CruceAulaTipo < FPopulation[BestCruceAulaTipo].CruceAulaTipo) or
-      ((CruceAulaTipo = FPopulation[BestCruceAulaTipo].CruceAulaTipo) and
-        (Value <= FPopulation[BestCruceAulaTipo].Value)) then
-    begin
-      BestCruceAulaTipo := i;
+      EValue := FPopulation[EBest[EIndividual]].ElitistValues[EIndividual];
+      if (ElitistValues[EIndividual] < EValue) or
+        ((ElitistValues[EIndividual] = EValue) and
+         (Value <= FPopulation[EBest[EIndividual]].Value)) then
+        EBest[EIndividual] := Individual;
     end;
     if Value <= BestValue then
     begin
       BestValue := Value;
-      Best := i;
+      Best := Individual;
     end;
     if Value >= WorstValue then
     begin
       WorstValue := Value;
-      Worst := i;
+      Worst := Individual;
     end;
   end;
-  if BestSesionCortada <> FTamPoblacion + 1 then
+  for EIndividual := 0 to FTimeTableModel.ElitistCount - 1 do
   begin
-    CopyIndividual(FTamPoblacion + 1, BestSesionCortada);
-  end;
-  if BestCruceProfesor <> FTamPoblacion + 2 then
-  begin
-    CopyIndividual(FTamPoblacion + 2, BestCruceProfesor);
-  end;
-  if BestCruceAulaTipo <> FTamPoblacion + 3 then
-  begin
-    CopyIndividual(FTamPoblacion + 3, BestCruceAulaTipo);
+    if EBest[EIndividual] <> FTamPoblacion + 1 + EIndividual then
+      CopyIndividual(FTamPoblacion + 1 + EIndividual, EBest[EIndividual]);
   end;
   if BestValue <= FPopulation[FTamPoblacion].Value then
   begin
@@ -344,7 +329,7 @@ begin
   end
   else
   begin
-    CopyIndividual(Worst, FTamPoblacion + crand32 mod 4);
+    CopyIndividual(Worst, FTamPoblacion + crand32 mod (1 + FTimeTableModel.ElitistCount));
   end;
 end;
 
