@@ -196,6 +196,7 @@ begin
   end;
 end;
 
+{
 procedure TEvolElitist.SelectTheBest;
 var
   i, Best, BestSesionCortada, BestCruceProfesor,
@@ -235,6 +236,38 @@ begin
   CopyIndividual(FTamPoblacion + 1, BestSesionCortada);
   CopyIndividual(FTamPoblacion + 2, BestCruceProfesor);
   CopyIndividual(FTamPoblacion + 3, BestCruceAulaTipo);
+end;
+}
+
+procedure TEvolElitist.SelectTheBest;
+var
+  Individual, EIndividual, Best: Integer;
+  EBest: TDynamicIntegerArray;
+  EValue: Double;
+begin
+  Best := 0;
+  SetLength(EBest, FTimeTableModel.ElitistCount);
+  for EIndividual := 0 to FTimeTableModel.ElitistCount - 1 do
+    EBest[EIndividual] := 0;
+  for Individual := 0 to FTamPoblacion - 1 do
+  with FPopulation[Individual] do
+  begin
+    if Value < FPopulation[Best].Value then
+    begin
+      Best := Individual;
+    end;
+    for EIndividual := 0 to FTimeTableModel.ElitistCount - 1 do
+    begin
+      EValue := FPopulation[EBest[EIndividual]].ElitistValues[EIndividual];
+      if (ElitistValues[EIndividual] < EValue) or
+        ((ElitistValues[EIndividual] = EValue) and
+        (Value < FPopulation[EBest[EIndividual]].Value)) then
+        EBest[EIndividual] := Individual;
+    end;
+  end;
+  CopyIndividual(FTamPoblacion, Best);
+  for EIndividual := 0 to FTimeTableModel.ElitistCount - 1 do
+    CopyIndividual(FTamPoblacion + 1 + EIndividual, EBest[EIndividual]);
 end;
 
 procedure TEvolElitist.CopyIndividual(Target, Source: Integer);
