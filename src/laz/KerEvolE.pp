@@ -359,41 +359,41 @@ end;
 
 procedure TEvolElitist.Select;
 var
-  mem, i, j: Longint;
-  sum: Double;
+  Individual, Individual1, Individual2: Longint;
+  Sum: Double;
   p: Extended;
   VTmpPoblacion: TTimeTableArray;
   VTmpAptitudArray: TDynamicDoubleArray;
 begin
-  sum := 0;
-  for mem := 0 to FTamPoblacion - 1 do
+  Sum := 0;
+  for Individual := 0 to FTamPoblacion - 1 do
   begin
-    sum := sum + FAptitudArray[mem];
+    Sum := Sum + FAptitudArray[Individual];
   end;
-  for mem := 0 to FTamPoblacion - 1 do
+  for Individual := 0 to FTamPoblacion - 1 do
   begin
-    FRAptitudArray[mem] := FAptitudArray[mem] / sum;
+    FRAptitudArray[Individual] := FAptitudArray[Individual] / Sum;
   end;
   FCAptitudArray[0] := FRAptitudArray[0];
-  for mem := 1 to FTamPoblacion - 1 do
+  for Individual := 1 to FTamPoblacion - 1 do
   begin
-    FCAptitudArray[mem] := FCAptitudArray[mem - 1] + FRAptitudArray[mem];
+    FCAptitudArray[Individual] := FCAptitudArray[Individual - 1] + FRAptitudArray[Individual];
   end;
-  for i := 0 to FTamPoblacion - 1 do
+  for Individual1 := 0 to FTamPoblacion - 1 do
   begin
     p := randl;
     if p < FCAptitudArray[0] then
     begin
-      FNewPopulation[i].Assign(FPopulation[0]);
-      FNuevoAptitudArray[i] := FAptitudArray[0];
+      FNewPopulation[Individual1].Assign(FPopulation[0]);
+      FNuevoAptitudArray[Individual1] := FAptitudArray[0];
     end
     else
     begin
-      for j := 0 to FTamPoblacion - 1 do
-        if (p >= FCAptitudArray[j]) and (p < FCAptitudArray[j + 1]) then
+      for Individual2 := 0 to FTamPoblacion - 1 do
+        if (p >= FCAptitudArray[Individual2]) and (p < FCAptitudArray[Individual2 + 1]) then
         begin
-          FNewPopulation[i].Assign(FPopulation[j + 1]);
-          FNuevoAptitudArray[i] := FAptitudArray[j + 1];
+          FNewPopulation[Individual1].Assign(FPopulation[Individual2 + 1]);
+          FNuevoAptitudArray[Individual1] := FAptitudArray[Individual2 + 1];
         end;
     end;
   end;
@@ -405,10 +405,10 @@ begin
   FAptitudArray := FNuevoAptitudArray;
   FNuevoAptitudArray := VTmpAptitudArray;
 
-  for i := FTamPoblacion to High(FPopulation) do
+  for Individual1 := FTamPoblacion to High(FPopulation) do
   begin
-    FPopulation[i].Assign(FNewPopulation[i]);
-    FAptitudArray[i] := FNuevoAptitudArray[i];
+    FPopulation[Individual1].Assign(FNewPopulation[Individual1]);
+    FAptitudArray[Individual1] := FNuevoAptitudArray[Individual1];
   end;
 end;
 
@@ -440,14 +440,14 @@ end;
 
 procedure TEvolElitist.Mutate;
 var
-  i: Integer;
+  Individual: Integer;
 begin
-  for i := 0 to FTamPoblacion - 1 do
+  for Individual := 0 to FTamPoblacion - 1 do
   begin
     if randl < FProbMutacion1 then
-      FPopulation[i].Mutate(FOrdenMutacion1);
+      FPopulation[Individual].Mutate(FOrdenMutacion1);
     if randl < FProbMutacion2 then
-      FPopulation[i].MutateDia;
+      FPopulation[Individual].MutateDia;
   end;
 end;
 
@@ -507,13 +507,13 @@ end;
 
 function TEvolElitist.GetAverageValue: Double;
 var
-  i: Integer;
+  Individual: Integer;
   sum: Double;
 begin
   sum := 0;
-  for i := 0 to FTamPoblacion - 1 do
+  for Individual := 0 to FTamPoblacion - 1 do
   begin
-    sum := sum + FPopulation[i].Value;
+    sum := sum + FPopulation[Individual].Value;
   end;
   Result := sum / FTamPoblacion;
 end;
