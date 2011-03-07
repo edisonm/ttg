@@ -1135,8 +1135,7 @@ end;
 procedure TTimeTable.InternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint;
   FueEvaluado: Boolean = False);
 var
-  Materia1, Materia2, Duracion1, Duracion2, Sesion1, Sesion2, Profesor1, p1, a, a1, j_, s_, p_, a_, m_,
-  { h, h1, h_, } hl, hl1: Smallint;
+  Materia, Duracion, Duracion1, Duracion2, Sesion1, Sesion2, Profesor: Smallint;
   PeriodoASesion, MateriaAProfesor: PSmallintArray;
   TmpMateriaDiaMinMaxHora: TDynamicSmallintArrayArray;
   TmpMateriaNoDispersa: Integer;
@@ -1156,6 +1155,42 @@ var
     end;
   end;
 
+  procedure DecCants(Periodo1, Periodo2: Smallint);
+  var
+    Periodo, Sesion, Profesor, AulaTipo: Smallint;
+  begin
+    for Periodo := Periodo1 to Periodo2 do
+    with TimeTableModel, TablingInfo do begin
+      Sesion := PeriodoASesion[Periodo];
+      if Sesion >= 0 then
+      begin
+        Materia := FSesionAMateria[Sesion];
+        Profesor := MateriaAProfesor[Materia];
+        AulaTipo := FSesionAAulaTipo[Sesion];
+        Dec(FProfesorPeriodoCant[Profesor, Periodo]);
+        Dec(FMateriaPeriodoCant[Materia, Periodo]);
+        Dec(FAulaTipoPeriodoCant[AulaTipo, Periodo]);
+      end;
+    end;
+  end;
+  procedure IncCants(Periodo1, Periodo2: Smallint);
+  var
+    Periodo, Sesion, Profesor, AulaTipo: Smallint;
+  begin
+    for Periodo := Periodo1 to Periodo2 do
+    with TimeTableModel, TablingInfo do begin
+      Sesion := PeriodoASesion[Periodo];
+      if Sesion >= 0 then
+      begin
+        Materia := FSesionAMateria[Sesion];
+        Profesor := MateriaAProfesor[Materia];
+        AulaTipo := FSesionAAulaTipo[Sesion];
+        Inc(FProfesorPeriodoCant[Profesor, Periodo]);
+        Inc(FMateriaPeriodoCant[Materia, Periodo]);
+        Inc(FAulaTipoPeriodoCant[AulaTipo, Periodo]);
+      end;
+    end;
+  end;
 var
   l: Smallint;
   pd: LongWord;
@@ -1170,75 +1205,21 @@ begin
     Duracion2 := FSesionADuracion[Sesion2];
     if Duracion1 = Duracion2 then
     begin
+      DecCants(APeriodo1, APeriodo1 + Duracion1 - 1);
+      DecCants(APeriodo2, APeriodo2 + Duracion2 - 1);
       for l := Duracion1 - 1 downto 0 do
       begin
         PeriodoASesion[APeriodo1 + l] := Sesion2;
         PeriodoASesion[APeriodo2 + l] := Sesion1;
       end;
-      if Sesion1 >= 0 then
-      begin
-        Materia1 := FSesionAMateria[Sesion1];
-        Profesor1 := MateriaAProfesor[Materia1];
-        a := FSesionAAulaTipo[Sesion1];
-        for l := Duracion1 - 1 downto 0 do
-        begin
-          hl := APeriodo1 + l;
-          hl1 := APeriodo2 + l;
-          Dec(ProfesorPeriodoCant[Profesor1, hl]);
-          Inc(ProfesorPeriodoCant[Profesor1, hl1]);
-          Dec(MateriaPeriodoCant[Materia1, hl]);
-          Inc(MateriaPeriodoCant[Materia1, hl1]);
-          Dec(AulaTipoPeriodoCant[a, hl]);
-          Inc(AulaTipoPeriodoCant[a, hl1]);
-        end;
-      end;
-      if Sesion2 >= 0 then
-      begin
-        Materia2 := FSesionAMateria[Sesion2];
-        p1 := MateriaAProfesor[Materia2];
-        a1 := FSesionAAulaTipo[Sesion2];
-        for l := Duracion1 - 1 downto 0 do
-        begin
-          hl := APeriodo1 + l;
-          hl1 := APeriodo2 + l;
-          Dec(ProfesorPeriodoCant[p1, hl1]);
-          Inc(ProfesorPeriodoCant[p1, hl]);
-          Dec(MateriaPeriodoCant[Materia2, hl1]);
-          Inc(MateriaPeriodoCant[Materia2, hl]);
-          Dec(AulaTipoPeriodoCant[a1, hl1]);
-          Inc(AulaTipoPeriodoCant[a1, hl]);
-        end;
-      end;
+      IncCants(APeriodo1, APeriodo1 + Duracion1 - 1);
+      IncCants(APeriodo2, APeriodo2 + Duracion2 - 1);
     end
     else
     begin
-      for j_ := APeriodo1 to APeriodo2 + Duracion2 - 1 do
-      begin
-        s_ := PeriodoASesion[j_];
-        if s_ >= 0 then
-        begin
-          m_ := FSesionAMateria[s_];
-          p_ := MateriaAProfesor[m_];
-          a_ := FSesionAAulaTipo[s_];
-          Dec(ProfesorPeriodoCant[p_, j_]);
-          Dec(MateriaPeriodoCant[m_, j_]);
-          Dec(AulaTipoPeriodoCant[a_, j_]);
-        end;
-      end;
+      DecCants(APeriodo1, APeriodo2 + Duracion2 - 1);
       RealizarMovimiento;
-      for j_ := APeriodo1 to APeriodo2 + Duracion2 - 1 do
-      begin
-        s_ := PeriodoASesion[j_];
-        if s_ >= 0 then
-        begin
-          m_ := FSesionAMateria[s_];
-          p_ := MateriaAProfesor[m_];
-          a_ := FSesionAAulaTipo[s_];
-          Inc(ProfesorPeriodoCant[p_, j_]);
-          Inc(MateriaPeriodoCant[m_, j_]);
-          Inc(AulaTipoPeriodoCant[a_, j_]);
-        end;
-      end;
+      IncCants(APeriodo1, APeriodo2 + Duracion2 - 1);
     end;
     if FueEvaluado then
     begin
@@ -1254,10 +1235,10 @@ begin
       for l := FAntListaCambios.Count - 1 downto 0 do
       begin
         pd := LongWord(FAntListaCambios.Items[l]);
-        Profesor1 := Smallint(pd);
-        Duracion1 := Smallint(pd shr 16);
-        FDiaProfesorFraccionamiento[Duracion1, Profesor1] :=
-          GetDiaProfesorFraccionamiento(Duracion1, Profesor1);
+        Profesor := Smallint(pd);
+        Duracion := Smallint(pd shr 16);
+        FDiaProfesorFraccionamiento[Duracion, Profesor] :=
+          GetDiaProfesorFraccionamiento(Duracion, Profesor);
       end;
       // UpdateDiaProfesorFraccionamiento;
     end
@@ -1854,8 +1835,7 @@ begin
   UpdateAulaTipoPeriodoCant(0, TimeTableModel.FPeriodoCant - 1);
 end;
 
-function TTimeTable.EvaluateInternalSwap
-  (AParalelo, APeriodo1, APeriodo2: Smallint): Double;
+function TTimeTable.EvaluateInternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint): Double;
 var
   d, d1, s, s1, hl, hl1, m, m1, p, p1: Smallint;
   q, r: PSmallintArray;
@@ -2753,32 +2733,32 @@ end;
 function TTimeTable.InternalDownHillEach
   (AParalelo: Smallint; var Delta: Double): Boolean;
 var
-  j, j1, d: Smallint;
-  dk: Double;
-  p: PSmallintArray;
+  Periodo1, Periodo2, Duracion: Smallint;
+  DValue: Double;
+  PeriodoASesion: PSmallintArray;
 begin
   with FTimeTableModel do
   begin
     Result := True;
-    j := 0;
-    p := @FParaleloPeriodoASesion[AParalelo, 0];
-    while j < FPeriodoCant do
+    Periodo1 := 0;
+    PeriodoASesion := @FParaleloPeriodoASesion[AParalelo, 0];
+    while Periodo1 < FPeriodoCant do
     begin
-      j1 := j + FSesionADuracion[p[j]];
-      while j1 < FPeriodoCant do
+      Periodo2 := Periodo1 + FSesionADuracion[PeriodoASesion[Periodo1]];
+      while Periodo2 < FPeriodoCant do
       begin
-        d := FSesionADuracion[p[j1]];
-        dk := EvaluateInternalSwap(AParalelo, j, j1);
-        if Delta + dk < 0 then
+        Duracion := FSesionADuracion[PeriodoASesion[Periodo2]];
+        DValue := EvaluateInternalSwap(AParalelo, Periodo1, Periodo2);
+        if Delta + DValue < 0 then
         begin
-          InternalSwap(AParalelo, j, j1, True);
-          Delta := Delta + dk;
+          InternalSwap(AParalelo, Periodo1, Periodo2, True);
+          Delta := Delta + DValue;
           Result := False;
           Exit;
         end;
-        Inc(j1, d);
+        Inc(Periodo2, Duracion);
       end;
-      Inc(j, FSesionADuracion[p[j]]);
+      Inc(Periodo1, FSesionADuracion[PeriodoASesion[Periodo1]]);
     end;
   end;
 end;
