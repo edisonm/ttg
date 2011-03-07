@@ -8,7 +8,6 @@ uses
   KerModel;
 
 type
-  TTimeTableArray = array of TTimeTable;
 
   {
     Clase TEvolElitist
@@ -104,7 +103,7 @@ uses
 
 procedure TEvolElitist.Configure(ATamPoblacion: Longint);
 var
-  i: Integer;
+  Individual: Integer;
 begin
   FTamPoblacion := ATamPoblacion;
   SetLength(FPopulation, FTamPoblacion + 4);
@@ -113,10 +112,10 @@ begin
   SetLength(FNuevoAptitudArray, Length(FPopulation));
   SetLength(FRAptitudArray, Length(FPopulation));
   SetLength(FCAptitudArray, Length(FPopulation));
-  for i := 0 to High(FPopulation) do
+  for Individual := 0 to High(FPopulation) do
   begin
-    if not Assigned(FNewPopulation[i]) then
-      FNewPopulation[i] := TTimeTable.Create(FTimeTableModel);
+    if not Assigned(FNewPopulation[Individual]) then
+      FNewPopulation[Individual] := TTimeTable.Create(FTimeTableModel);
   end;
 end;
 
@@ -130,12 +129,12 @@ end;
 
 destructor TEvolElitist.Destroy;
 var
-  i: Integer;
+  Individual: Integer;
 begin
-  for i := 0 to High(FPopulation) do
+  for Individual := 0 to High(FPopulation) do
   begin
-    FPopulation[i].Free;
-    FNewPopulation[i].Free;
+    FPopulation[Individual].Free;
+    FNewPopulation[Individual].Free;
   end;
   FTimeTableModel := nil;
   inherited Destroy;
@@ -143,30 +142,30 @@ end;
 
 procedure TEvolElitist.Initialize;
 var
-  i: Integer;
+  Individual: Integer;
 begin
-  for i := 0 to High(FFixedTimeTables) do
-    LoadFixedFromModel(FPopulation[i], FTimeTableModel,
-      FFixedTimeTables[i]);
-  for i := Length(FFixedTimeTables) to High(FPopulation) do
+  for Individual := 0 to High(FFixedTimeTables) do
+    LoadFixedFromModel(FPopulation[Individual], FTimeTableModel,
+      FFixedTimeTables[Individual]);
+  for Individual := Length(FFixedTimeTables) to High(FPopulation) do
   begin
-    CreateRandomFromModel(FPopulation[i], FTimeTableModel);
+    CreateRandomFromModel(FPopulation[Individual], FTimeTableModel);
   end;
-  for i := Length(FFixedTimeTables) to FTamPoblacion - 1 do
+  for Individual := Length(FFixedTimeTables) to FTamPoblacion - 1 do
   begin
-    FPopulation[i].DownHill;
+    FPopulation[Individual].DownHill;
   end;
 end;
 
 procedure TEvolElitist.Repair;
 var
-  i: Integer;
+  Individual: Integer;
 begin
-  for i := 0 to FTamPoblacion - 1 do
+  for Individual := 0 to FTamPoblacion - 1 do
   begin
     if randl < FProbReparacion then
     begin
-      FPopulation[i].DownHill;
+      FPopulation[Individual].DownHill;
     end;
   end;
 end;
@@ -178,22 +177,22 @@ end;
 
 procedure TEvolElitist.Evaluate;
 var
-  i: Integer;
+  Individual: Integer;
   Value, MaxValue: Double;
 begin
   MaxValue := -1.7E308;
   // ProcThreadPool.DoParallel(DoParallelGetValue, 0, High(FPopulation), nil);
-  for i := 0 to High(FPopulation) do
+  for Individual := 0 to High(FPopulation) do
   begin
-    FPopulation[i].UpdateValue;
-    // DoParallelGetValue(i, nil, nil);
-    Value := FPopulation[i].Value;
+    FPopulation[Individual].UpdateValue;
+    // DoParallelGetValue(Individual, nil, nil);
+    Value := FPopulation[Individual].Value;
     if MaxValue < Value then
       MaxValue := Value;
   end;
-  for i := 0 to High(FPopulation) do
+  for Individual := 0 to High(FPopulation) do
   begin
-    FAptitudArray[i] := 1 + MaxValue - FPopulation[i].Value;
+    FAptitudArray[Individual] := 1 + MaxValue - FPopulation[Individual].Value;
   end;
 end;
 
