@@ -196,49 +196,6 @@ begin
   end;
 end;
 
-{
-procedure TEvolElitist.SelectTheBest;
-var
-  i, Best, BestSesionCortada, BestCruceProfesor,
-    BestCruceAulaTipo: Integer;
-begin
-  Best := 0;
-  BestSesionCortada := 0;
-  BestCruceProfesor := 0;
-  BestCruceAulaTipo := 0;
-  for i := 0 to FTamPoblacion - 1 do
-  with FPopulation[i] do
-  begin
-    if Value < FPopulation[Best].Value then
-    begin
-      Best := i;
-    end;
-    if (SesionCortada < FPopulation[BestSesionCortada].SesionCortada) or
-      ((SesionCortada = FPopulation[BestSesionCortada].SesionCortada) and
-        (Value < FPopulation[BestSesionCortada].Value)) then
-    begin
-      BestSesionCortada := i;
-    end;
-    if (CruceProfesor < FPopulation[BestCruceProfesor].CruceProfesor) or
-      ((CruceProfesor = FPopulation[BestCruceProfesor].CruceProfesor) and
-        (Value < FPopulation[BestCruceProfesor].Value)) then
-    begin
-      BestCruceProfesor := i;
-    end;
-    if (CruceAulaTipo < FPopulation[BestCruceAulaTipo].CruceAulaTipo) or
-      ((CruceAulaTipo = FPopulation[BestCruceAulaTipo].CruceAulaTipo) and
-        (Value < FPopulation[BestCruceAulaTipo].Value)) then
-    begin
-      BestCruceAulaTipo := i;
-    end
-  end;
-  CopyIndividual(FTamPoblacion, Best);
-  CopyIndividual(FTamPoblacion + 1, BestSesionCortada);
-  CopyIndividual(FTamPoblacion + 2, BestCruceProfesor);
-  CopyIndividual(FTamPoblacion + 3, BestCruceAulaTipo);
-end;
-}
-
 procedure TEvolElitist.SelectTheBest;
 var
   Individual, EIndividual, Best: Integer;
@@ -281,7 +238,6 @@ var
   BestValue, WorstValue, EValue: Double;
   Individual, EIndividual, Best, Worst: Longint;
   EBest: TDynamicIntegerArray;
-  // AStream: TStream;
   FindMejor: Boolean;
 begin
   BestValue := FPopulation[0].Value;
