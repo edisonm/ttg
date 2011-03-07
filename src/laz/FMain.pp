@@ -560,7 +560,7 @@ begin
           raise Exception.Create('Operacion cancelada por el usuario');
         end
       end;
-      VEvolElitist.PrefijarHorarios(HorarioIni);
+      VEvolElitist.FixIndividuals(HorarioIni);
       ProgressForm.CancelClick := False;
       FAjustar := False;
       VEvolElitist.OnRecordBest := Self.OnRegistrarMejor;

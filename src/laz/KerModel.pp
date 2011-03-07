@@ -257,7 +257,7 @@ type
     procedure LoadFromDataModule(CodHorario: Integer);
     procedure SaveToStream(Stream: TStream);
     procedure LoadFromStream(Stream: TStream);
-    constructor CreateFromModel(ATimeTableModel: TTimeTableModel);
+    constructor Create(ATimeTableModel: TTimeTableModel);
     destructor Destroy; override;
     procedure MakeRandom;
     procedure Mutate; overload;
@@ -865,7 +865,7 @@ procedure CrearAleatorioDesdeModelo(var ATimeTable: TTimeTable;
   ATimeTableModel: TTimeTableModel);
 begin
   if not Assigned(ATimeTable) then
-    ATimeTable := TTimeTable.CreateFromModel(ATimeTableModel);
+    ATimeTable := TTimeTable.Create(ATimeTableModel);
   ATimeTable.MakeRandom;
 end;
 
@@ -873,7 +873,7 @@ procedure CargarPrefijadoDesdeModelo(var AObjetoTimeTableModel: TTimeTable;
   ATimeTableModel: TTimeTableModel; CodHorario: Integer);
 begin
   if not Assigned(AObjetoTimeTableModel) then
-    AObjetoTimeTableModel := TTimeTable.CreateFromModel(ATimeTableModel);
+    AObjetoTimeTableModel := TTimeTable.Create(ATimeTableModel);
   AObjetoTimeTableModel.LoadFromDataModule(CodHorario);
 end;
 
@@ -961,7 +961,7 @@ begin
   end;
 end;
 
-constructor TTimeTable.CreateFromModel(ATimeTableModel: TTimeTableModel);
+constructor TTimeTable.Create(ATimeTableModel: TTimeTableModel);
 begin
   inherited Create;
   FAntListaCambios := TList.Create;

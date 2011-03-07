@@ -65,7 +65,7 @@ type
     procedure ReportParameters(AInforme: TStrings);
     constructor CreateFromModel(ATimeTableModel: TTimeTableModel;
       ATamPoblacion: Longint);
-    procedure PrefijarHorarios(const Horarios: string);
+    procedure FixIndividuals(const Individuals: string);
     procedure Configure(ATamPoblacion: Integer);
     destructor Destroy; override;
     procedure SaveBestToDatabase(CodHorario: Integer; MomentoInicial,
@@ -116,8 +116,7 @@ begin
   for i := 0 to High(FPoblacion) do
   begin
     if not Assigned(FNuevaPoblacion[i]) then
-      FNuevaPoblacion[i] := TTimeTable.CreateFromModel
-        (FTimeTableModel);
+      FNuevaPoblacion[i] := TTimeTable.Create(FTimeTableModel);
   end;
 end;
 
@@ -568,19 +567,19 @@ begin
   end;
 end;
 
-procedure TEvolElitist.PrefijarHorarios(const Horarios: string);
+procedure TEvolElitist.FixIndividuals(const Individuals: string);
 var
-  iPos, j: Integer;
+  Position, Individual: Integer;
 begin
-  SetLength(FFixedTimeTables, Length(Horarios));
-  iPos := 1;
-  j := 0;
-  while iPos <= Length(Horarios) do
+  SetLength(FFixedTimeTables, Length(Individuals));
+  Position := 1;
+  Individual := 0;
+  while Position <= Length(Individuals) do
   begin
-    FFixedTimeTables[j] := StrToInt(ExtractString(Horarios, iPos, ','));
-    Inc(j);
+    FFixedTimeTables[Individual] := StrToInt(ExtractString(Individuals, Position, ','));
+    Inc(Individual);
   end;
-  SetLength(FFixedTimeTables, j);
+  SetLength(FFixedTimeTables, Individual);
 end;
 
 function TEvolElitist.GetFileName: string;

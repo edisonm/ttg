@@ -342,7 +342,7 @@ begin
     try
       TimeTableModel.OnProgress := ProgressForm.OnProgress;
       MainForm.Step := 1;
-      TimeTable := TTimeTable.CreateFromModel(TimeTableModel);
+      TimeTable := TTimeTable.Create(TimeTableModel);
       ProgressForm.Caption := Format('Mejorando Horario [%d] en [%d]',
          [CodHorarioFuente, CodHorarioDestino]);
       try
