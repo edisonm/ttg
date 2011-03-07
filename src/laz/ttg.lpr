@@ -47,7 +47,7 @@ uses
   ttgcfg in 'ttgcfg.pp',
   DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   FSelPeIn in 'FSelPeIn.pp' {SelPeriodoForm},
-  DBase in 'DBase.pp';
+  DBase in 'DBase.pp', UIndivid;
 
 {$IFNDEF FPC}
 {$R *.res}

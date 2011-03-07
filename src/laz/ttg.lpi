@@ -49,7 +49,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="35">
+    <Units Count="36">
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -296,6 +296,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="TTGCfg"/>
       </Unit34>
+      <Unit35>
+        <Filename Value="uindivid.pp"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UIndivid"/>
+      </Unit35>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

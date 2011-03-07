@@ -146,11 +146,11 @@ var
   i: Integer;
 begin
   for i := 0 to High(FFixedTimeTables) do
-    CargarPrefijadoDesdeModelo(FPoblacion[i], FTimeTableModel,
+    LoadFixedFromModel(FPoblacion[i], FTimeTableModel,
       FFixedTimeTables[i]);
   for i := Length(FFixedTimeTables) to High(FPoblacion) do
   begin
-    CrearAleatorioDesdeModelo(FPoblacion[i], FTimeTableModel);
+    CreateRandomFromModel(FPoblacion[i], FTimeTableModel);
   end;
   for i := Length(FFixedTimeTables) to FTamPoblacion - 1 do
   begin
