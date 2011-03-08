@@ -3348,8 +3348,8 @@ end;
 function TTimeTable.GetDiaProfesorFraccionamiento(Dia, Profesor: Smallint): Smallint;
 var
   Periodo, Max, Min, Count, MaxPeriodo: Smallint;
-  q: TDynamicSmallintArray;
-  r: TDynamicShortintArray;
+  VPeriodoCant: TDynamicSmallintArray;
+  PeriodoAProfesorProhibicionTipo: TDynamicShortintArray;
 begin
   Count := 0;
   Max := -1;
@@ -3357,11 +3357,12 @@ begin
   with TimeTableModel, TablingInfo do
   begin
     MaxPeriodo := FDiaAMaxPeriodo[Dia];
-    q := FProfesorPeriodoCant[Profesor];
-    r := FProfesorPeriodoAProfesorProhibicionTipo[Profesor];
+    VPeriodoCant := FProfesorPeriodoCant[Profesor];
+    PeriodoAProfesorProhibicionTipo := FProfesorPeriodoAProfesorProhibicionTipo[Profesor];
     for Periodo := FDiaHoraAPeriodo[Dia, 0] to MaxPeriodo do
     begin
-      if (q[Periodo] > 0) or (FProfesorProhibicionTipoAValor[r[Periodo]] =
+      if (VPeriodoCant[Periodo] > 0)
+        or (FProfesorProhibicionTipoAValor[PeriodoAProfesorProhibicionTipo[Periodo]] =
           FMaxProfesorProhibicionTipoValor) then
       begin
         Max := FPeriodoAHora[Periodo];
