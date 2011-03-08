@@ -225,7 +225,7 @@ type
       var AMateriaDiaMaxHora: TDynamicSmallintArrayArray): Smallint;
     procedure DoGetProfesorFraccionamiento;
     procedure UpdateDiaProfesorFraccionamiento;
-    function GetDiaProfesorFraccionamiento(di, p: Smallint): Smallint;
+    function GetDiaProfesorFraccionamiento(Dia, Profesor: Smallint): Smallint;
     function InternalDoubleDownHill(Step: Integer): Boolean;
     function InternalDownHillEach(var Delta: Double): Boolean; overload;
     function InternalDownHillEach
@@ -3345,43 +3345,43 @@ begin
   end;
 end;
 
-function TTimeTable.GetDiaProfesorFraccionamiento(di, p: Smallint): Smallint;
+function TTimeTable.GetDiaProfesorFraccionamiento(Dia, Profesor: Smallint): Smallint;
 var
-  h_, iMax, iMin, iCant, n: Smallint;
-  q: PSmallintArray;
-  r: PShortintArray;
+  Periodo, Max, Min, Count, MaxPeriodo: Smallint;
+  q: TDynamicSmallintArray;
+  r: TDynamicShortintArray;
 begin
-  iCant := 0;
-  iMax := -1;
-  iMin := 32767;
+  Count := 0;
+  Max := -1;
+  Min := 32767;
   with TimeTableModel, TablingInfo do
   begin
-    n := FDiaAMaxPeriodo[di];
-    q := @FProfesorPeriodoCant[p, 0];
-    r := @FProfesorPeriodoAProfesorProhibicionTipo[p, 0];
-    for h_ := FDiaHoraAPeriodo[di, 0] to n do
+    MaxPeriodo := FDiaAMaxPeriodo[Dia];
+    q := FProfesorPeriodoCant[Profesor];
+    r := FProfesorPeriodoAProfesorProhibicionTipo[Profesor];
+    for Periodo := FDiaHoraAPeriodo[Dia, 0] to MaxPeriodo do
     begin
-      if (q[h_] > 0) or (FProfesorProhibicionTipoAValor[r[h_]] =
+      if (q[Periodo] > 0) or (FProfesorProhibicionTipoAValor[r[Periodo]] =
           FMaxProfesorProhibicionTipoValor) then
       begin
-        iMax := FPeriodoAHora[h_];
-        Inc(iCant);
-        if iMin > iMax then
-          iMin := iMax;
+        Max := FPeriodoAHora[Periodo];
+        Inc(Count);
+        if Min > Max then
+          Min := Max;
       end;
     end;
   end;
-  if iCant = 0 then
+  if Count = 0 then
     Result := 0
   else
-    Result := iMax - iMin + 1 - iCant;
+    Result := Max - Min + 1 - Count;
 end;
 
 procedure TTimeTable.LoadFromDataModule(CodHorario: Integer);
 var
   FieldNivel, FieldParaleloId, FieldEspecializacion, FieldDia, FieldHora,
     FieldSesion: TLongintField;
-  I, j: Smallint;
+  Paralelo, Periodo: Smallint;
 begin
   with SourceDataModule, TimeTableModel, TbHorarioDetalle do
   begin
@@ -3396,21 +3396,21 @@ begin
       FieldDia := FindField('CodDia') as TLongintField;
       FieldHora := FindField('CodHora') as TLongintField;
       FieldSesion := FindField('Sesion') as TLongintField;
-      for I := 0 to FParaleloCant - 1 do
-        FillChar(FParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint)
+      for Paralelo := 0 to FParaleloCant - 1 do
+        FillChar(FParaleloPeriodoASesion[Paralelo, 0], FPeriodoCant * SizeOf(Smallint)
             , #$FF);
       First;
       while not Eof do
       begin
-        I := FCursoParaleloIdAParalelo[FNivelEspecializacionACurso
+        Paralelo := FCursoParaleloIdAParalelo[FNivelEspecializacionACurso
           [FCodNivelANivel[FieldNivel.AsInteger - FMinCodNivel],
           FCodEspecializacionAEspecializacion[FieldEspecializacion.AsInteger -
           FMinCodEspecializacion]],
           FCodParaleloIdAParaleloId[FieldParaleloId.AsInteger -
           FMinCodParaleloId]];
-        j := FDiaHoraAPeriodo[FCodDiaADia[FieldDia.AsInteger - FMinCodDia],
+        Periodo := FDiaHoraAPeriodo[FCodDiaADia[FieldDia.AsInteger - FMinCodDia],
           FCodHoraAHora[FieldHora.AsInteger - FMinCodHora]];
-        FParaleloPeriodoASesion[I, j] := FieldSesion.AsInteger;
+        FParaleloPeriodoASesion[Paralelo, Periodo] := FieldSesion.AsInteger;
         Next;
       end;
     finally
