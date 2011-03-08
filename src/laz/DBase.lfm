@@ -3,7 +3,7 @@ object BaseDataModule: TBaseDataModule
   OnDestroy = DataModuleDestroy
   OldCreateOrder = False
   Height = 480
-  HorizontalOffset = 0
+  HorizontalOffset = 25
   VerticalOffset = 0
   Width = 928
   object Database: TZConnection

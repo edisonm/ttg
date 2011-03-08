@@ -3250,11 +3250,48 @@ var
   end;
   procedure SaveHorarioDetalle;
   var
+    Paralelo, Periodo, CodNivel, CodParaleloId, CodEspecializacion, Sesion: Integer;
+    {$IFDEF USE_SQL}
+    SQL: TStrings;
+    {$ELSE}
     FieldHorario, FieldNivel, FieldParaleloId, FieldEspecializacion, FieldDia,
       FieldHora, FieldMateria, FieldSesion: TField;
-    I, j, k, l, m, s: Integer;
+    {$ENDIF}
   begin
-    with TimeTableModel, SourceDataModule.TbHorarioDetalle do
+  {$IFDEF USE_SQL}
+    SQL := TStringList.Create;
+    try
+      with TimeTableModel do
+      for Paralelo := 0 to FParaleloCant - 1 do
+      begin
+        CodNivel := FNivelACodNivel[FParaleloANivel[Paralelo]];
+        CodParaleloId := FParaleloIdACodParaleloId[FParaleloAParaleloId[Paralelo]];
+        CodEspecializacion := FEspecializacionACodEspecializacion
+          [FParaleloAEspecializacion[Paralelo]];
+        for Periodo := 0 to FPeriodoCant - 1 do
+        begin
+          Sesion := ParaleloPeriodoASesion[Paralelo, Periodo];
+          if Sesion >= 0 then
+          begin
+            SQL.Add(Format(
+              'INSERT INTO HorarioDetalle' +
+              '(CodHorario,CodNivel,CodParaleloId,CodEspecializacion,CodDia,' +
+              'CodHora,CodMateria,Sesion) VALUES (%d,%d,%d,%d,%d,%d,%d,%d);',
+              [CodHorario, CodNivel, CodParaleloId, CodEspecializacion,
+              FDiaACodDia[FPeriodoADia[Periodo]],
+              FHoraACodHora[FPeriodoAHora[Periodo]],
+              FMateriaACodMateria[FSesionAMateria[Sesion]],
+              Sesion]));
+          end;
+        end;
+      end;
+      SourceDataModule.Database.ExecuteDirect(SQL.Text);
+      SourceDataModule.TbHorarioDetalle.Refresh;
+    finally
+      SQL.Free;
+    end;
+    {$ELSE}
+    with SourceDataModule.TbHorarioDetalle do
     begin
       DisableControls;
       try
@@ -3267,26 +3304,27 @@ var
         FieldHora := FindField('CodHora');
         FieldMateria := FindField('CodMateria');
         FieldSesion := FindField('Sesion');
-        for I := 0 to FParaleloCant - 1 do
+        with TimeTableModel do
+        for Paralelo := 0 to FParaleloCant - 1 do
         begin
-          k := FNivelACodNivel[FParaleloANivel[I]];
-          l := FParaleloIdACodParaleloId[FParaleloAParaleloId[I]];
-          m := FEspecializacionACodEspecializacion
-            [FParaleloAEspecializacion[I]];
-          for j := 0 to FPeriodoCant - 1 do
+          CodNivel := FNivelACodNivel[FParaleloANivel[Paralelo]];
+          CodParaleloId := FParaleloIdACodParaleloId[FParaleloAParaleloId[Paralelo]];
+          CodEspecializacion := FEspecializacionACodEspecializacion
+            [FParaleloAEspecializacion[Paralelo]];
+          for Periodo := 0 to FPeriodoCant - 1 do
           begin
-            s := ParaleloPeriodoASesion[I, j];
-            if s >= 0 then
+            Sesion := ParaleloPeriodoASesion[Paralelo, Periodo];
+            if Sesion >= 0 then
             begin
               Append;
               FieldHorario.AsInteger := CodHorario;
-              FieldNivel.AsInteger := k;
-              FieldParaleloId.AsInteger := l;
-              FieldEspecializacion.AsInteger := m;
-              FieldDia.AsInteger := FDiaACodDia[FPeriodoADia[j]];
-              FieldHora.AsInteger := FHoraACodHora[FPeriodoAHora[j]];
-              FieldMateria.AsInteger := FMateriaACodMateria[FSesionAMateria[s]];
-              FieldSesion.AsInteger := s;
+              FieldNivel.AsInteger := CodNivel;
+              FieldParaleloId.AsInteger := CodParaleloId;
+              FieldEspecializacion.AsInteger := CodEspecializacion;
+              FieldDia.AsInteger := FDiaACodDia[FPeriodoADia[Periodo]];
+              FieldHora.AsInteger := FHoraACodHora[FPeriodoAHora[Periodo]];
+              FieldMateria.AsInteger := FMateriaACodMateria[FSesionAMateria[Sesion]];
+              FieldSesion.AsInteger := Sesion;
               Post;
             end;
           end;
@@ -3295,6 +3333,7 @@ var
         EnableControls;
       end;
     end;
+    {$ENDIF}
   end;
 begin
   SourceDataModule.CheckRelations := False;
