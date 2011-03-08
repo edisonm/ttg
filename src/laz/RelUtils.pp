@@ -278,8 +278,8 @@ end;
 
 // Returns true in case of problems
 
-function CheckRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADetailFields: string;
-  AProblem: TDataSet): Boolean;
+function CheckRelation(AMaster, ADetail: TDataSet;
+  const AMasterFields, ADetailFields: string; AProblem: TDataSet): Boolean;
 var
   v: Variant;
   s: string;
@@ -318,7 +318,8 @@ begin
   end;
 end;
 
-function CheckRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADetailFields: string): Boolean;
+function CheckRelation(AMaster, ADetail: TDataSet;
+  const AMasterFields, ADetailFields: string): Boolean;
 var
   v: Variant;
 begin
@@ -344,7 +345,8 @@ begin
   end;
 end;
 
-procedure doErrorRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADetailFields: string);
+procedure doErrorRelation(AMaster, ADetail: TDataSet;
+  const AMasterFields, ADetailFields: string);
 begin
   if CheckRelation(AMaster, ADetail, AMasterFields, ADetailFields) then
     raise ERelationUtils.CreateFmt('Error verificando relacion entre %s y %s.  Campos detallados no tienen maestro',
