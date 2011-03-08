@@ -5,8 +5,8 @@ unit RelUtils;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics, Forms,
-  Dialogs, Db, ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;
+  {$IFNDEF FPC}Windows, {$ENDIF}SysUtils, Classes, Graphics, Forms,
+  Dialogs, Db, ZConnection, ZDataset;
 
 type
   ERelationUtils = class(Exception);
