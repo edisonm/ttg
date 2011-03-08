@@ -47,7 +47,6 @@ object MainForm: TMainForm
   Menu = MainMenu
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  OnDblClick = FormDblClick
   OnDestroy = FormDestroy
   Position = poScreenCenter
   LCLVersion = '0.9.28.2'

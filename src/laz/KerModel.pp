@@ -6,6 +6,13 @@ interface
 uses
   Classes, DB, Dialogs, Math, Forms, UIndivid;
 
+var
+  SortLongint: procedure(var List1: array of Longint;
+    var List2: array of Smallint; min, max: Longint);
+  SortSmallint: procedure(var List1: array of Smallint;
+    var List2: array of Longint; min, max: Longint);
+  lSort: procedure(var List1: array of Longint; min, max: Longint);
+
 type
   TDynamicWordArray = array of Word;
   TDynamicWordArrayArray = array of TDynamicWordArray;
@@ -52,15 +59,10 @@ type
   TTimeTable = class;
   TTimeTableArray = array of TTimeTable;
 
-  TProgressEvent = procedure(Progress, Step: Integer; Individual: TTimeTable;
-    var Stop: Boolean) of object;
-
-
   { TTimeTableModel }
 
   TTimeTableModel = class(TInterfacedObject, IModel)
   private
-    FOnProgress: TProgressEvent;
     FCruceProfesorValor, FCruceAulaTipoValor, FHoraHuecaDesubicadaValor,
       FSesionCortadaValor, FProfesorFraccionamientoValor,
       FMateriaNoDispersaValor: Double;
@@ -74,6 +76,7 @@ type
       FParaleloAEspecializacion, FProfesorCantHora,
       FParaleloASesionCant: TDynamicSmallintArray;
     FSesionADuracion: array [-1 .. 16382] of Smallint;
+    FPSesionADuracion: PSmallintArray;
     FDiaHoraAPeriodo, FNivelEspecializacionACurso, FCursoParaleloIdAParalelo,
       FParaleloMateriaAProfesor, FParaleloMateriaADistributivo,
       FTimeTableDetailPattern, FDistributivoASesiones: TDynamicSmallintArrayArray;
@@ -102,8 +105,6 @@ type
     property TimeTableDetailPattern: TDynamicSmallintArrayArray read FTimeTableDetailPattern;
     function GetElitistCount: Smallint;
   public
-    procedure DoProgress(Position, RefreshInterval: Integer; Individual: TTimeTable;
-      var Stop: Boolean); dynamic;
     procedure Configure(ACruceProfesorValor, AProfesorFraccionamientoValor,
       ACruceAulaTipoValor, AHoraHuecaDesubicadaValor, ASesionCortadaValor,
       AMateriaNoDispersaValor: Double);
@@ -121,8 +122,8 @@ type
     property HoraHuecaDesubicadaValor: Double read FHoraHuecaDesubicadaValor;
     property SesionCortadaValor: Double read FSesionCortadaValor;
     property MateriaNoDispersaValor: Double read FMateriaNoDispersaValor;
-    property OnProgress: TProgressEvent read FOnProgress write FOnProgress;
     property SesionCantidadDoble: Integer read FSesionCantidadDoble;
+    property SesionADuracion: PSmallintArray read FPSesionADuracion;
   end;
 
   // type
@@ -187,7 +188,6 @@ type
     TablingInfo: TTimeTableTablingInfo;
     FRecalculateValue: Boolean;
     procedure CalculateValue;
-    procedure Normalize(AParalelo: Smallint; var APeriodo: Smallint);
     {
       procedure SetClaveAleatoriaInterno(AParalelo, APeriodo: Smallint;
       AClaveAleatoria: Integer); overload;
@@ -208,10 +208,7 @@ type
     procedure InternalMutate;
     function InternalDownHill(Delta: Double): Boolean; overload;
     function InternalDownHill: Boolean; overload;
-    procedure InternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint;
-      FueEvaluado: Boolean = False);
     procedure Swap(AParalelo, APeriodo1, APeriodo2: Smallint);
-    function EvaluateInternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint): Double;
     property ProfesorPeriodoCant: TDynamicSmallintArrayArray read TablingInfo.FProfesorPeriodoCant;
     property AulaTipoPeriodoCant: TDynamicSmallintArrayArray read TablingInfo.FAulaTipoPeriodoCant;
     procedure DoGetCruceProfesor;
@@ -227,8 +224,6 @@ type
     procedure DoGetProfesorFraccionamiento;
     procedure UpdateDiaProfesorFraccionamiento;
     function GetDiaProfesorFraccionamiento(Dia, Profesor: Smallint): Smallint;
-    function InternalDoubleDownHill(Step: Integer): Boolean;
-    function InternalDownHillEach(var Delta: Double): Boolean; overload;
     function InternalDownHillEach
       (AParalelo: Smallint; var Delta: Double): Boolean; overload;
     function GetElitistValues(Index: Integer): Double;
@@ -249,11 +244,14 @@ type
     procedure Update;
     procedure UpdateValue;
     function DownHill: Boolean;
-    function DoubleDownHill(Step: Integer): Boolean;
     function GetImplementor: TObject;
     property Implementor: TObject;
-    procedure DoubleDownHillForced(Step: Integer);
     procedure DownHillForced;
+    procedure Normalize(AParalelo: Smallint; var APeriodo: Smallint);
+    function InternalDownHillEach(var Delta: Double): Boolean; overload;
+    function EvaluateInternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint): Double;
+    procedure InternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint;
+      FueEvaluado: Boolean = False);
     function InternalDownHillOptimized(Step: Integer): Boolean;
     procedure InternalDownHillOptimizedForced(Step: Integer);
     procedure SaveToFile(const AFileName: string);
@@ -314,13 +312,6 @@ implementation
 
 uses
   SysUtils, SortAlgs, Rand, DSource, HorColCm;
-
-var
-  SortLongint: procedure(var List1: array of Longint;
-    var List2: array of Smallint; min, max: Longint);
-  SortSmallint: procedure(var List1: array of Smallint;
-    var List2: array of Longint; min, max: Longint);
-  lSort: procedure(var List1: array of Longint; min, max: Longint);
 
 constructor TTimeTableModel.CreateFromDataModule(ACruceProfesorValor,
   AProfesorFraccionamientoValor, ACruceAulaTipoValor,
@@ -781,6 +772,7 @@ var
 begin
   inherited Create;
   FElitistCount := 3;
+  FPSesionADuracion := @FSesionADuracion[0];
   with SourceDataModule do
   begin
     Configure(ACruceProfesorValor, AProfesorFraccionamientoValor,
@@ -2853,9 +2845,8 @@ begin
         while Periodo2 < FPeriodoCant do
         begin
           Stop := False;
-          // Max := MaxParalelo * Sqr(FPeriodoCant);
-          DoProgress((Periodo1 + Counter * FPeriodoCant) * FPeriodoCant + Periodo2,
-            Step, Self, Stop);
+          {DoProgress((Periodo1 + Counter * FPeriodoCant) * FPeriodoCant + Periodo2,
+            Step, Self, Stop);}
           if Stop then
             Exit;
           DValue := EvaluateInternalSwap(Paralelo, Periodo1, Periodo2);
@@ -2869,84 +2860,6 @@ begin
           else
           begin
             if InternalDownHillEach(Paralelo, DValue) then
-            begin
-              InternalSwap(Paralelo, Periodo1, Periodo2 + Duracion2 - Duracion1);
-              DValue := 0;
-            end
-            else
-            begin
-              Normalize(Paralelo, Periodo1);
-              Result := False;
-            end;
-          end;
-          Value1 := Value1 + DValue;
-          Normalize(Paralelo, Periodo2);
-          Inc(Periodo2, FSesionADuracion[PeriodoASesion[Periodo2]]);
-        end;
-        Normalize(Paralelo, Periodo1);
-        Inc(Periodo1, FSesionADuracion[PeriodoASesion[Periodo1]]);
-      end;
-      { if Continuar then }
-      Inc(Counter);
-    end;
-  end;
-end;
-
-function TTimeTable.InternalDoubleDownHill(Step: Integer): Boolean;
-var
-  Periodo1, Periodo2, Duracion1, Duracion2, Counter, Paralelo { , k } : Smallint;
-  DValue, Value1: Double;
-  Position: Integer;
-  RandomOrders: array [0 .. 4095] of Smallint;
-  RandomValues: array [0 .. 4095] of Longint;
-  PeriodoASesion: PSmallintArray;
-  Stop: Boolean;
-  { Continuar: Boolean; }
-begin
-  Update;
-  CalculateValue;
-  with TimeTableModel do
-  begin
-    for Counter := 0 to FParaleloCant - 1 do
-    begin
-      RandomOrders[Counter] := Counter;
-      RandomValues[Counter] := rand32;
-    end;
-    SortLongint(RandomValues, RandomOrders, 0, FParaleloCant - 1);
-    Result := True;
-    Counter := 0;
-    Value1 := Value;
-    Position := 0;
-    while Counter < FParaleloCant do
-    begin
-      { Continuar := True; }
-      Paralelo := RandomOrders[Counter];
-      Periodo1 := 0;
-      PeriodoASesion := @FParaleloPeriodoASesion[Paralelo, 0];
-      while Periodo1 < FPeriodoCant do
-      begin
-        Periodo2 := Periodo1 + FSesionADuracion[PeriodoASesion[Periodo1]];
-        // k := Periodo2;
-        while Periodo2 < FPeriodoCant do
-        begin
-          Stop := False;
-          // Position := Counter * FPeriodoCant * (FPeriodoCant - 1) div 2
-          // + Periodo1 * (FPeriodoCant - 1) - Periodo1 * (Periodo1 - 1) div 2 + Periodo2 - k
-          DoProgress(Position, Step, Self, Stop);
-          if Stop then
-            Exit;
-          Inc(Position);
-          DValue := EvaluateInternalSwap(Paralelo, Periodo1, Periodo2);
-          Duracion1 := FSesionADuracion[PeriodoASesion[Periodo1]];
-          Duracion2 := FSesionADuracion[PeriodoASesion[Periodo2]];
-          InternalSwap(Paralelo, Periodo1, Periodo2, True);
-          if DValue < 0 then
-          begin
-            Result := False;
-          end
-          else
-          begin
-            if InternalDownHillEach(DValue) then
             begin
               InternalSwap(Paralelo, Periodo1, Periodo2 + Duracion2 - Duracion1);
               DValue := 0;
@@ -3045,12 +2958,6 @@ begin
   // Check('DescensoRapidoDespues');
 end;
 
-function TTimeTable.DoubleDownHill(Step: Integer): Boolean;
-begin
-  Result := InternalDoubleDownHill(Step);
-  RecalculateValue := True;
-end;
-
 function TTimeTable.GetImplementor: TObject;
 begin
   Result := Self;
@@ -3065,14 +2972,6 @@ begin
     b := b and InternalDownHillOptimized(Step);
   until b;
   RecalculateValue := RecalculateValue or not b;
-end;
-
-procedure TTimeTable.DoubleDownHillForced(Step: Integer);
-begin
-  repeat
-    // Application.ProcessMessages;
-  until InternalDoubleDownHill(Step);
-  RecalculateValue := True;
 end;
 
 procedure TTimeTable.DownHillForced;
@@ -3431,13 +3330,6 @@ procedure TTimeTable.Update;
 begin
   UpdateAulaTipoPeriodoCant;
   PartialUpdate;
-end;
-
-procedure TTimeTableModel.DoProgress(Position, RefreshInterval: Integer;
-  Individual: TTimeTable; var Stop: Boolean);
-begin
-  if Assigned(FOnProgress) then
-    FOnProgress(Position, RefreshInterval, Individual, Stop);
 end;
 
 destructor TTimeTableModel.Destroy;

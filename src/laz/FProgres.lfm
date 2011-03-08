@@ -1,7 +1,7 @@
 object ProgressForm: TProgressForm
-  Left = 433
+  Left = 443
   Height = 350
-  Top = 328
+  Top = 300
   Width = 465
   ActiveControl = pnlProgress
   BorderStyle = bsDialog
@@ -10,6 +10,7 @@ object ProgressForm: TProgressForm
   ClientWidth = 465
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
   Position = poDesktopCenter
   LCLVersion = '0.9.28.2'
   object pnlProgress: TPanel
@@ -56,7 +57,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Cruce de profesores:'
+      Caption = ' Cruce profesores:'
       TabOrder = 1
     end
     object pnlCruceProfesorValor: TPanel
@@ -188,7 +189,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Horas huecas desubicadas'
+      Caption = ' Horas huecas'
       TabOrder = 7
     end
     object pnlHoraHuecaDesubicadaCantidad: TPanel
@@ -535,7 +536,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Materias no dispersas:'
+      Caption = ' Materias juntas:'
       TabOrder = 22
     end
     object Panel28: TPanel
@@ -601,7 +602,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Fracc. del h. de profesores:'
+      Caption = ' Fracc. profesores:'
       TabOrder = 25
     end
     object Panel2: TPanel
@@ -660,22 +661,61 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object Panel5: TPanel
+    object pnlPosition: TPanel
+      Left = 226
+      Height = 21
+      Top = 6
+      Width = 215
+      Alignment = taLeftJustify
+      BevelOuter = bvLowered
+      Caption = ' Iteracion:'
+      ClientHeight = 21
+      ClientWidth = 215
+      TabOrder = 28
+      object lblPosition: TLabel
+        Left = 202
+        Height = 19
+        Top = 1
+        Width = 12
+        Align = alRight
+        Alignment = taRightJustify
+        Caption = '0 '
+        Color = clBtnFace
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        Layout = tlCenter
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+      end
+    end
+    object Panel7: TPanel
       Left = 8
       Height = 21
       Top = 270
-      Width = 117
+      Width = 85
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = 'Importaciones:'
+      Caption = 'Polinización:'
+      TabOrder = 29
+    end
+    object Panel5: TPanel
+      Left = 96
+      Height = 21
+      Top = 270
+      Width = 127
+      Alignment = taLeftJustify
+      BevelOuter = bvLowered
+      Caption = ' Importaciones:'
       ClientHeight = 21
-      ClientWidth = 117
-      TabOrder = 28
-      object lblImportaciones: TLabel
-        Left = 107
+      ClientWidth = 127
+      TabOrder = 30
+      object lblImports: TLabel
+        Left = 114
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -689,21 +729,21 @@ object ProgressForm: TProgressForm
       end
     end
     object Panel6: TPanel
-      Left = 128
+      Left = 226
       Height = 21
       Top = 270
-      Width = 117
+      Width = 107
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = 'Exportaciones:'
+      Caption = ' Exportaciones:'
       ClientHeight = 21
-      ClientWidth = 117
-      TabOrder = 29
-      object lblExportaciones: TLabel
-        Left = 107
+      ClientWidth = 107
+      TabOrder = 31
+      object lblExports: TLabel
+        Left = 94
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -717,46 +757,18 @@ object ProgressForm: TProgressForm
       end
     end
     object Panel4: TPanel
-      Left = 248
+      Left = 336
       Height = 21
       Top = 270
-      Width = 117
+      Width = 105
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = 'Colisiones:'
+      Caption = ' Colisiones:'
       ClientHeight = 21
-      ClientWidth = 117
-      TabOrder = 30
-      object lblColisiones: TLabel
-        Left = 107
-        Height = 19
-        Top = 1
-        Width = 9
-        Align = alRight
-        Alignment = taRightJustify
-        Caption = '0 '
-        Color = clBtnFace
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Layout = tlCenter
-        ParentColor = False
-        ParentFont = False
-        Transparent = False
-      end
-    end
-    object pnlPosition: TPanel
-      Left = 226
-      Height = 21
-      Top = 6
-      Width = 215
-      Alignment = taLeftJustify
-      BevelOuter = bvLowered
-      Caption = ' Iteracion:'
-      ClientHeight = 21
-      ClientWidth = 215
-      TabOrder = 31
-      object lblPosition: TLabel
-        Left = 202
+      ClientWidth = 105
+      TabOrder = 32
+      object lblColision: TLabel
+        Left = 92
         Height = 19
         Top = 1
         Width = 12
@@ -766,7 +778,6 @@ object ProgressForm: TProgressForm
         Color = clBtnFace
         Font.Height = -11
         Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
         Layout = tlCenter
         ParentColor = False
         ParentFont = False

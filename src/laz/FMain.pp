@@ -139,7 +139,6 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure ActContentsExecute(Sender: TObject);
     procedure ActIndexExecute(Sender: TObject);
-    procedure FormDblClick(Sender: TObject);
     procedure ActRegistrationInfoExecute(Sender: TObject);
   private
     { Private declarations }
@@ -443,41 +442,55 @@ procedure TMainForm.ElaborarHorario(s: string);
 var
   VTimeTableModel: TTimeTableModel;
   VEvolElitist: TEvolElitist;
+  DoubleDownHill: TDoubleDownHill;
   FMomentoInicial, FMomentoFinal: TDateTime;
   sProb: string;
   Report: TStrings;
-  procedure ProcesarCodHorario(ACodHorario: Integer);
+  function ProcesarCodHorario(ACodHorario: Integer): Boolean;
+  var
+    ProgressForm: TProgressForm;
   begin
     CodHorario := ACodHorario;
+    Result := False;
     if SourceDataModule.TbHorario.Locate('CodHorario', CodHorario, []) then
       sProb := sProb + ' ' + IntToStr(CodHorario)
     else
     begin
       FMomentoInicial := Now;
-      ProgressForm.Caption := Format('Elaboracion en progreso [%d]', [CodHorario]);
       FLogStrings.Clear;
-      ProgressForm.ProgressMax := vEvolElitist.MaxIteration;
       FLogStrings.BeginUpdate;
-      ProgressForm.ShowProgressForm;
+      ProgressForm := TProgressForm.Create(Application);
+      ProgressForm.Caption := Format('Elaboracion en progreso [%d]', [CodHorario]);
+      ProgressForm.ProgressMax := vEvolElitist.MaxIteration;
+      VEvolElitist.OnProgress := ProgressForm.OnProgress;
       try
         vEvolElitist.Execute(MasterDataModule.ConfigStorage.RefreshInterval);
+        if ProgressForm.CancelClick then
+        begin
+          Result := True;
+          Exit;
+        end;
       finally
-        ProgressForm.CloseProgressForm;
+        ProgressForm.Free;
         FLogStrings.EndUpdate;
       end;
       //FLogStrings.SaveToFile(Format('LogHor_%d.txt', [CodHorario]));
-      if ProgressForm.CancelClick then
-        Exit;
       if MasterDataModule.ConfigStorage.ApplyDoubleDownHill then
       begin
+        DoubleDownHill := TDoubleDownHill.Create(VEvolElitist.BestIndividual);
+        ProgressForm := TProgressForm.Create(Application);
         ProgressForm.Caption := Format('Mejorando Horario [%d]', [CodHorario]);
         ProgressForm.ProgressMax := vTimeTableModel.SesionCantidadDoble;
-        ProgressForm.ShowProgressForm;
+        DoubleDownHill.OnProgress := ProgressForm.OnProgress;
         try
-          VEvolElitist.BestIndividual.DoubleDownHillForced
-            (MasterDataModule.ConfigStorage.RefreshInterval);
+          DoubleDownHill.Execute(MasterDataModule.ConfigStorage.RefreshInterval);
+          if ProgressForm.CancelClick then
+          begin
+            Result := True;
+            Exit;
+          end;
         finally
-          ProgressForm.CloseProgressForm;
+          ProgressForm.Free;
         end;
       end
       else
@@ -517,8 +530,7 @@ var
         raise Exception.Create('El dato ingresado no es valido');
       for iCod := FCodIni to FCodFin do
       begin
-        ProcesarCodHorario(iCod);
-        if ProgressForm.CancelClick then
+        if ProcesarCodHorario(iCod) then
           Exit;
       end;
     end;
@@ -535,7 +547,6 @@ begin
       ProfesorFraccionamiento, CruceAulaTipo, HoraHueca, SesionCortada, MateriaNoDispersa);
     VEvolElitist := TEvolElitist.CreateFromModel(VTimeTableModel, PopulationSize);
     try
-      VTimeTableModel.OnProgress := ProgressForm.OnProgress;
       VEvolElitist.MaxIteration := MaxIteration;
       VEvolElitist.CrossProb := CrossProb;
       VEvolElitist.Mutation1Prob := Mutation1Prob;
@@ -561,7 +572,6 @@ begin
         end
       end;
       VEvolElitist.FixIndividuals(HorarioIni);
-      ProgressForm.CancelClick := False;
       FAjustar := False;
       VEvolElitist.OnRecordBest := Self.OnRegistrarMejor;
       sProb := '';
@@ -860,16 +870,6 @@ procedure TMainForm.ActIndexExecute(Sender: TObject);
 begin
 {$IFNDEF FPC}
   Application.HelpCommand(HELP_FINDER, 0);
-{$ENDIF}
-end;
-
-procedure TMainForm.FormDblClick(Sender: TObject);
-begin
-{$IFNDEF FREEWARE}
-  if FEjecutando
-    and (MessageDlg('Esta seguro de que desea finalizar esta operacion?',
-      mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
-    ProgressForm.CloseClick := True;
 {$ENDIF}
 end;
 

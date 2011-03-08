@@ -29,9 +29,40 @@ type
     se disparan cada cierto numero de generaciones y cuando mejora la solucion.
     }
 
+  TSolver = class;
+
+  TProgressEvent = procedure(Progress, Step: Integer; Self: TSolver;
+    var Stop: Boolean) of object;
+
   { TEvolElitist }
 
-  TEvolElitist = class
+  TSolver = class
+  private
+    FOnProgress: TProgressEvent;
+  protected
+    function GetBestIndividual: TTimeTable; virtual; abstract;
+    procedure DoProgress(Position, RefreshInterval: Integer; Self: TSolver;
+      var Stop: Boolean);
+  public
+    procedure Execute(RefreshInterval: Integer); virtual; abstract;
+    property OnProgress: TProgressEvent read FOnProgress write FOnProgress;
+    property BestIndividual: TTimeTable read GetBestIndividual;
+  end;
+
+  { TDoubleDownHill }
+
+  TDoubleDownHill = class(TSolver)
+  private
+    FBestIndividual: TTimeTable;
+    function DoubleDownHill(Step: Integer): Boolean;
+  protected
+    function GetBestIndividual: TTimeTable; override;
+  public
+    procedure Execute(RefreshInterval: Integer); override;
+    constructor Create(TimeTable: TTimeTable);
+  end;
+
+  TEvolElitist = class(TSolver)
   private
     FModel: TTimeTableModel;
     FSyncDirectory: string;
@@ -57,8 +88,8 @@ type
     procedure InternalCrossIndividuals(Individual1, Individual2: Integer);
     function GetAverageValue: Double;
     procedure CopyIndividual(Target, Source: Integer);
-    function GetBestIndividual: TTimeTable;
   protected
+    function GetBestIndividual: TTimeTable; override;
   public
     procedure ReportParameters(AInforme: TStrings);
     constructor CreateFromModel(AModel: TTimeTableModel; APopulationSize: Longint);
@@ -68,7 +99,7 @@ type
     procedure SaveBestToDatabase(CodHorario: Integer; MomentoInicial,
       MomentoFinal: TDateTime; Report: TStrings);
     procedure SaveBestToStream(AStream: TStream);
-    procedure Execute(RefreshInterval: Integer);
+    procedure Execute(RefreshInterval: Integer); override;
     procedure ForcedDownHill;
     function DownHill: Boolean;
     procedure Repair;
@@ -108,9 +139,9 @@ begin
   for Individual := 0 to High(FPopulation) do
   begin
     if not Assigned(FPopulation[Individual]) then
-      FPopulation[Individual] := TTimeTable.Create(FModel);//.NewIndividual);
+      FPopulation[Individual] := TTimeTable.Create(FModel);
     if not Assigned(FNewPopulation[Individual]) then
-      FNewPopulation[Individual] := TTimeTable.Create(FModel);//.NewIndividual);
+      FNewPopulation[Individual] := TTimeTable.Create(FModel);
   end;
 end;
 
@@ -314,7 +345,7 @@ procedure TEvolElitist.Pollinate;
     SyncStream := TFileStream.Create
       (SyncFileName, fmCreate or fmShareExclusive);
     try
-      Value := FPopulation[FPopulationSize].Value;
+      Value := FPopulation[crand32 mod FPopulationSize].Value;
       SyncStream.write(Value, SizeOf(Double));
       ExportarInterno;
     finally
@@ -371,7 +402,8 @@ begin
   FCAptitudeArray[0] := FRAptitudeArray[0];
   for Individual := 1 to FPopulationSize - 1 do
   begin
-    FCAptitudeArray[Individual] := FCAptitudeArray[Individual - 1] + FRAptitudeArray[Individual];
+    FCAptitudeArray[Individual] := FCAptitudeArray[Individual - 1]
+      + FRAptitudeArray[Individual];
   end;
   for Individual1 := 0 to FPopulationSize - 1 do
   begin
@@ -461,7 +493,7 @@ begin
   Iteration := 0;
   while (Iteration < FMaxIteration) and not Stop do
   begin
-    FModel.DoProgress(Iteration, RefreshInterval, BestIndividual, Stop);
+    DoProgress(Iteration, RefreshInterval, Self, Stop);
     Select;
     Cross;
     Mutate;
@@ -550,12 +582,113 @@ end;
 
 function TEvolElitist.GetFileName: string;
 begin
-  Result := FSyncDirectory + '\ttable.dat';
+  Result := FSyncDirectory + '/ttable.dat';
 end;
 
 function TEvolElitist.GetSyncFileName: string;
 begin
-  Result := FSyncDirectory + '\ttsync.dat';
+  Result := FSyncDirectory + '/ttsync.dat';
+end;
+
+procedure TSolver.DoProgress(Position, RefreshInterval: Integer;
+  Self: TSolver; var Stop: Boolean);
+begin
+  if Assigned(FOnProgress) then
+    FOnProgress(Position, RefreshInterval, Self, Stop);
+end;
+
+{ TDoubleDownHill }
+
+function TDoubleDownHill.GetBestIndividual: TTimeTable;
+begin
+  Result := FBestIndividual;
+end;
+
+procedure TDoubleDownHill.Execute(RefreshInterval: Integer);
+begin
+  repeat
+  until DoubleDownHill(RefreshInterval);
+  FBestIndividual.RecalculateValue := True;
+end;
+
+function TDoubleDownHill.DoubleDownHill(Step: Integer): Boolean;
+var
+  Periodo1, Periodo2, Duracion1, Duracion2, Counter, Paralelo: Smallint;
+  DValue, Value1: Double;
+  Position: Integer;
+  RandomOrders: array [0 .. 4095] of Smallint;
+  RandomValues: array [0 .. 4095] of Longint;
+  PeriodoASesion: TDynamicSmallintArray;
+  Stop: Boolean;
+  { Continuar: Boolean; }
+begin
+  with FBestIndividual, TimeTableModel do
+  begin
+    Update;
+    UpdateValue;
+    for Counter := 0 to ParaleloCant - 1 do
+    begin
+      RandomOrders[Counter] := Counter;
+      RandomValues[Counter] := rand32;
+    end;
+    SortLongint(RandomValues, RandomOrders, 0, ParaleloCant - 1);
+    Result := True;
+    Counter := 0;
+    Value1 := Value;
+    Position := 0;
+    while Counter < ParaleloCant do
+    begin
+      { Continuar := True; }
+      Paralelo := RandomOrders[Counter];
+      Periodo1 := 0;
+      PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
+      while Periodo1 < PeriodoCant do
+      begin
+        Periodo2 := Periodo1 + SesionADuracion[PeriodoASesion[Periodo1]];
+        while Periodo2 < PeriodoCant do
+        begin
+          Stop := False;
+          DoProgress(Position, Step, Self, Stop);
+          if Stop then
+            Exit;
+          Inc(Position);
+          DValue := EvaluateInternalSwap(Paralelo, Periodo1, Periodo2);
+          Duracion1 := SesionADuracion[PeriodoASesion[Periodo1]];
+          Duracion2 := SesionADuracion[PeriodoASesion[Periodo2]];
+          InternalSwap(Paralelo, Periodo1, Periodo2, True);
+          if DValue < 0 then
+          begin
+            Result := False;
+          end
+          else
+          begin
+            if InternalDownHillEach(DValue) then
+            begin
+              InternalSwap(Paralelo, Periodo1, Periodo2 + Duracion2 - Duracion1);
+              DValue := 0;
+            end
+            else
+            begin
+              Normalize(Paralelo, Periodo1);
+              Result := False;
+            end;
+          end;
+          Value1 := Value1 + DValue;
+          Normalize(Paralelo, Periodo2);
+          Inc(Periodo2, SesionADuracion[PeriodoASesion[Periodo2]]);
+        end;
+        Normalize(Paralelo, Periodo1);
+        Inc(Periodo1, SesionADuracion[PeriodoASesion[Periodo1]]);
+      end;
+      { if Continuar then }
+      Inc(Counter);
+    end;
+  end;
+end;
+
+constructor TDoubleDownHill.Create(TimeTable: TTimeTable);
+begin
+  FBestIndividual := TimeTable;
 end;
 
 end.

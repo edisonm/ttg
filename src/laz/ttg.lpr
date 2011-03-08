@@ -67,6 +67,5 @@ begin
   Application.CreateForm(TMasterDataModule, MasterDataModule);
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TMessageViewForm, MessageViewForm);
-  Application.CreateForm(TProgressForm, ProgressForm);
   Application.Run;
 end.

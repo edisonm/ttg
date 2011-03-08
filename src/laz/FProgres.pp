@@ -7,13 +7,20 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls, UIndivid,
-  KerModel;
+  KerModel, KerEvolE;
 
 type
 
   { TProgressForm }
 
   TProgressForm = class(TForm)
+    lblColision: TLabel;
+    lblExports: TLabel;
+    lblImports: TLabel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Panel7: TPanel;
     pnlProgress: TPanel;
     bbtnClose: TBitBtn;
     pnlValorTotal: TPanel;
@@ -66,16 +73,11 @@ type
     lblProfesorFraccionamiento: TLabel;
     Panel3: TPanel;
     lblProfesorFraccionamientoValor: TLabel;
-    Panel5: TPanel;
-    lblImportaciones: TLabel;
-    Panel6: TPanel;
-    lblExportaciones: TLabel;
-    Panel4: TPanel;
-    lblColisiones: TLabel;
     pnlPosition: TPanel;
     lblPosition: TLabel;
     procedure bbtnCancelClick(Sender: TObject);
     procedure bbtnCloseClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     FInit: TDateTime;
     FCloseClick:Boolean;
@@ -87,22 +89,18 @@ type
     procedure SetValues(APosition, ACruceProfesor: Integer;
       AProfesorFraccionamiento: Double; ACruceAulaTipo, AHoraHuecaDesubicada,
       ASesionCortada, AMateriaProhibicion, AProfesorProhibicion,
-      AMateriaNoDispersa, ANumImportacion, ANumExportacion, ANumColision: Integer;
+      AMateriaNoDispersa: Integer;
       ACruceProfesorValor, AProfesorFraccionamientoValor, ACruceAulaTipoValor,
       AHoraHuecaDesubicadaValor, ASesioncortadaValor, AMateriaProhibicionValor,
       AProfesorProhibicionValor, AMateriaNoDispersaValor, AValue: Double);
     { Public declarations }
-    procedure ShowProgressForm;
-    procedure CloseProgressForm;
     property CloseClick: Boolean read FCloseClick write FCloseClick;
     property CancelClick: Boolean read FCancelClick write FCancelClick;
     property ProgressMax: Integer read GetProgressMax write SetProgressMax;
-    procedure OnProgress(Position, Step: Integer; Individual: TTimeTable;
+    procedure OnProgress(Position, Step: Integer; Solver: TSolver;
       var Stop: Boolean);
+    procedure OnPollinate(EvolElitist: TEvolElitist);
   end;
-
-var
-  ProgressForm: TProgressForm;
 
 implementation
 
@@ -118,34 +116,30 @@ begin
 end;
 
 procedure TProgressForm.OnProgress(Position, Step: Integer;
-  Individual: TTimeTable; var Stop: Boolean);
+  Solver: TSolver; var Stop: Boolean);
 begin
-  with Individual do
+  with Solver, BestIndividual do
   begin
     if Position mod Step = 0 then
     begin
-      Application.ProcessMessages;
-      ProgressForm.SetValues(Position,
-                             CruceProfesor,
-                             ProfesorFraccionamiento,
-                             CruceAulaTipo,
-                             HoraHuecaDesubicada,
-                             SesionCortada,
-                             MateriaProhibicion,
-                             ProfesorProhibicion,
-                             MateriaNoDispersa,
-                             0, //NumImportacion,
-                             0, //NumExportacion,
-                             0, //NumColision,
-                             CruceProfesorValor,
-                             ProfesorFraccionamientoValor,
-                             CruceAulaTipoValor,
-                             HoraHuecaDesubicadaValor,
-                             SesionCortadaValor,
-                             MateriaProhibicionValor,
-                             ProfesorProhibicionValor,
-                             MateriaNoDispersaValor,
-                             Value);
+      SetValues(Position,
+                CruceProfesor,
+                ProfesorFraccionamiento,
+                CruceAulaTipo,
+                HoraHuecaDesubicada,
+                SesionCortada,
+                MateriaProhibicion,
+                ProfesorProhibicion,
+                MateriaNoDispersa,
+                CruceProfesorValor,
+                ProfesorFraccionamientoValor,
+                CruceAulaTipoValor,
+                HoraHuecaDesubicadaValor,
+                SesionCortadaValor,
+                MateriaProhibicionValor,
+                ProfesorProhibicionValor,
+                MateriaNoDispersaValor,
+                Value);
       {
       if FAjustar then
       begin
@@ -161,9 +155,26 @@ begin
         FAjustar := False;
       end;
       }
-      if (ProgressForm.CloseClick or ProgressForm.CancelClick) then
+      if Solver is TEvolElitist then
+      begin
+        lblImports.Caption := Format('%d ', [TEvolElitist(Solver).NumImports]);
+        lblExports.Caption := Format('%d ', [TEvolElitist(Solver).NumExports]);
+        lblColision.Caption := Format('%d ', [TEvolElitist(Solver).NumColision]);
+      end;
+      if (CloseClick or CancelClick) then
         Stop := True;
+      Application.ProcessMessages;
     end;
+  end;
+end;
+
+procedure TProgressForm.OnPollinate(EvolElitist: TEvolElitist);
+begin
+  with EvolElitist do
+  begin
+    lblImports.Caption := Format('%d ', [NumImports]);
+    lblExports.Caption := Format('%d ', [NumExports]);
+    lblColision.Caption := Format('%d ', [NumColision]);
   end;
 end;
 
@@ -174,11 +185,11 @@ end;
 
 procedure TProgressForm.SetValues(APosition, ACruceProfesor: Integer;
   AProfesorFraccionamiento: Double; ACruceAulaTipo, AHoraHuecaDesubicada,
-  ASesionCortada, AMateriaProhibicion, AProfesorProhibicion, AMateriaNoDispersa,
-  ANumImportacion, ANumExportacion, ANumColision: Integer; ACruceProfesorValor,
-  AProfesorFraccionamientoValor, ACruceAulaTipoValor, AHoraHuecaDesubicadaValor,
-  ASesioncortadaValor, AMateriaProhibicionValor, AProfesorProhibicionValor,
-  AMateriaNoDispersaValor, AValue: Double);
+  ASesionCortada, AMateriaProhibicion, AProfesorProhibicion,
+  AMateriaNoDispersa: Integer; ACruceProfesorValor, AProfesorFraccionamientoValor,
+  ACruceAulaTipoValor, AHoraHuecaDesubicadaValor, ASesioncortadaValor,
+  AMateriaProhibicionValor, AProfesorProhibicionValor, AMateriaNoDispersaValor,
+  AValue: Double);
 var
   t: TDateTime;
 begin
@@ -213,22 +224,6 @@ begin
   lblProfesorProhibicionValor.Caption := Format('%8.2f ', [AProfesorProhibicionValor]);
   lblMateriaNoDispersaValor.Caption := Format('%8.2f ', [AMateriaNoDispersaValor]);
   lblValorTotal.Caption := Format('%8.2f ', [AValue]);
-  lblImportaciones.Caption := Format('%d ', [ANumImportacion]);
-  lblExportaciones.Caption := Format('%d ', [ANumExportacion]);
-  lblColisiones.Caption := Format('%d ', [ANumColision]);
-end;
-
-
-procedure TProgressForm.ShowProgressForm;
-begin
-  // HelpContext := ActElaborarHorario.HelpContext;
-  FInit := Now;
-  lblInit.Caption := FormatDateTime(Format('%s %s ', [ShortDateFormat,
-    LongTimeFormat]), FInit);
-  FCloseClick := False;
-  FCancelClick := False;
-  Show;
-  Application.ProcessMessages;
 end;
 
 procedure TProgressForm.bbtnCancelClick(Sender: TObject);
@@ -243,9 +238,15 @@ begin
   Close;
 end;
 
-procedure TProgressForm.CloseProgressForm;
+procedure TProgressForm.FormCreate(Sender: TObject);
 begin
-  ProgressForm.Close;
+  // HelpContext := ActElaborarHorario.HelpContext;
+  FInit := Now;
+  lblInit.Caption := FormatDateTime(Format('%s %s ', [ShortDateFormat,
+    LongTimeFormat]), FInit);
+  FCloseClick := False;
+  FCancelClick := False;
+  Show;
 end;
 
 initialization

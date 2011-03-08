@@ -7,7 +7,8 @@ uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, Db, FSingEdt, Grids, Buttons, FEditor, DBCtrls,
   ExtCtrls, ComCtrls, ActnList, ZConnection, ZDataset, FCrsMMER, DMaster, FCrsMME1,
-  FConfig, DSource, FMain, FProgres, FMasDeEd, FHorProf, FHorAulT, FHorPara;
+  FConfig, DSource, FMain, FProgres, FMasDeEd, FHorProf, FHorAulT, FHorPara,
+  KerEvolE;
 
 type
 
@@ -308,41 +309,38 @@ end;
 {$IFNDEF FREEWARE}
 procedure THorarioForm.MejorarHorario;
 var
+  DoubleDownHill: TDoubleDownHill;
   TimeTableModel: TTimeTableModel;
   TimeTable: TTimeTable;
   CodHorarioFuente, CodHorarioDestino: Integer;
   Report: TStrings;
   MomentoInicial, EndTime: TDateTime;
-  d: string;
+  SNewCodHorario: string;
   va: Double;
+  ProgressForm: TProgressForm;
 begin
   CodHorarioFuente := SourceDataModule.TbHorario.FindField('CodHorario').AsInteger;
-  d := IntToStr(MasterDataModule.NewCodHorario);
+  SNewCodHorario := IntToStr(MasterDataModule.NewCodHorario);
   if not InputQuery(Format('Mejorando Horario %d: ', [CodHorarioFuente]),
-    'Codigo del horario mejorado', d) then
+    'Codigo del horario mejorado', SNewCodHorario) then
     Exit;
-  CodHorarioDestino := StrToInt(d);
-  ProgressForm.CloseClick := False;
+  CodHorarioDestino := StrToInt(SNewCodHorario);
   with SourceDataModule, MasterDataModule.ConfigStorage do
   begin
     InitRandom;
     MomentoInicial := Now;
     MainForm.Ejecutando := True;
-    TimeTableModel :=
-      TTimeTableModel.CreateFromDataModule(
-        CruceProfesor,
-        ProfesorFraccionamiento,
-        CruceAulaTipo,
-        HoraHueca,
-        SesionCortada,
-        MateriaNoDispersa);
+    TimeTableModel := TTimeTableModel.CreateFromDataModule(CruceProfesor,
+      ProfesorFraccionamiento, CruceAulaTipo, HoraHueca, SesionCortada,
+      MateriaNoDispersa);
     MainForm.StatusBar.Panels[1].Style := psOwnerDraw;
     MainForm.Progress := 0;
     MainForm.Pasada := 0;
     try
-      TimeTableModel.OnProgress := ProgressForm.OnProgress;
       MainForm.Step := 1;
+      ProgressForm := TProgressForm.Create(Application);
       TimeTable := TTimeTable.Create(TimeTableModel);
+      DoubleDownHill := TDoubleDownHill.Create(TimeTable);
       ProgressForm.Caption := Format('Mejorando Horario [%d] en [%d]',
          [CodHorarioFuente, CodHorarioDestino]);
       try
@@ -353,8 +351,8 @@ begin
         va := TimeTable.Value;
         TimeTable.DownHillForced;
         ProgressForm.ProgressMax := TimeTableModel.SesionCantidadDoble;
-        ProgressForm.ShowProgressForm;
-        TimeTable.DoubleDownHillForced(MasterDataModule.ConfigStorage.RefreshInterval);
+        DoubleDownHill.OnProgress := ProgressForm.OnProgress;
+        DoubleDownHill.Execute(MasterDataModule.ConfigStorage.RefreshInterval);
         if not ProgressForm.CancelClick then
         begin
           EndTime := Now;
@@ -376,7 +374,7 @@ begin
           end;
         end;
       finally
-        ProgressForm.CloseProgressForm;
+        ProgressForm.Free;
         TimeTable.Free;
       end;
     finally
