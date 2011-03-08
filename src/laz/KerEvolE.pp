@@ -61,8 +61,7 @@ type
   protected
   public
     procedure ReportParameters(AInforme: TStrings);
-    constructor CreateFromModel(AModel: TTimeTableModel;
-      ATamPoblacion: Longint);
+    constructor CreateFromModel(AModel: TTimeTableModel; APopulationSize: Longint);
     procedure FixIndividuals(const Individuals: string);
     procedure Configure(ATamPoblacion: Integer);
     destructor Destroy; override;
@@ -116,11 +115,11 @@ begin
 end;
 
 constructor TEvolElitist.CreateFromModel(AModel: TTimeTableModel;
-  ATamPoblacion: Longint);
+  APopulationSize: Longint);
 begin
   inherited Create;
   FModel := AModel;
-  Configure(ATamPoblacion);
+  Configure(APopulationSize);
 end;
 
 destructor TEvolElitist.Destroy;
