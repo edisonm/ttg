@@ -33,15 +33,14 @@ type
 
   TEvolElitist = class
   private
-    FTimeTableModel: TTimeTableModel;
+    FModel: TTimeTableModel;
     FSyncDirectory: string;
-    FSemilla1, FSemilla2, FSemilla3, FSemilla4, FTamPoblacion, FNumGeneracion,
-      FNumMaxGeneracion, FNumImportacion, FNumExportacion, FNumColision,
-      FRangoPolinizacion, FOrdenMutacion1: Longint;
-    FProbCruzamiento, FProbMutacion1, FProbMutacion2, FProbReparacion: Double;
+    FSeed1, FSeed2, FSeed3, FSeed4, FPopulationSize, FMaxIteration, FNumImports,
+      FNumExports, FClashes, FPollinationFreq, FMutation1Order: Longint;
+    FCrossProb, FMutation1Prob, FMutation2Prob, FRepairProb: Double;
     FPopulation, FNewPopulation: TTimeTableArray;
-    FAptitudArray, FNuevoAptitudArray, FRAptitudArray, FCAptitudArray: TDynamicDoubleArray;
-    FFixedTimeTables: TDynamicLongintArray;
+    FAptitudeArray, FNewAptitudeArray, FRAptitudeArray, FCAptitudeArray: TDynamicDoubleArray;
+    FFixedIndividuals: TDynamicLongintArray;
     FOnRecordBest: TNotifyEvent;
     function GetFileName: string;
     function GetSyncFileName: string;
@@ -50,19 +49,19 @@ type
     procedure Initialize;
     procedure Evaluate;
     procedure SelectTheBest;
-    procedure Elitista;
+    procedure Elitist;
     procedure Select;
     procedure Cross;
     procedure Mutate;
     procedure Pollinate;
-    procedure InternalCrossIndividuals(Uno, Dos: Integer);
+    procedure InternalCrossIndividuals(Individual1, Individual2: Integer);
     function GetAverageValue: Double;
     procedure CopyIndividual(Target, Source: Integer);
-    function GetBestTimeTable: TTimeTable;
+    function GetBestIndividual: TTimeTable;
   protected
   public
     procedure ReportParameters(AInforme: TStrings);
-    constructor CreateFromModel(ATimeTableModel: TTimeTableModel;
+    constructor CreateFromModel(AModel: TTimeTableModel;
       ATamPoblacion: Longint);
     procedure FixIndividuals(const Individuals: string);
     procedure Configure(ATamPoblacion: Integer);
@@ -75,25 +74,22 @@ type
     function DownHill: Boolean;
     procedure Repair;
     property OnRecordBest: TNotifyEvent read FOnRecordBest write FOnRecordBest;
-    property NumMaxGeneracion
-      : Longint read FNumMaxGeneracion write FNumMaxGeneracion;
-    property ProbCruzamiento
-      : Double read FProbCruzamiento write FProbCruzamiento;
-    property ProbMutacion1: Double read FProbMutacion1 write FProbMutacion1;
-    property OrdenMutacion1: Integer read FOrdenMutacion1 write FOrdenMutacion1;
-    property ProbMutacion2: Double read FProbMutacion2 write FProbMutacion2;
-    property ProbReparacion: Double read FProbReparacion write FProbReparacion;
-    property NumImportacion: Integer read FNumImportacion;
-    property NumExportacion: Integer read FNumExportacion;
-    property NumColision: Integer read FNumColision;
+    property MaxIteration: Longint read FMaxIteration write FMaxIteration;
+    property CrossProb: Double read FCrossProb write FCrossProb;
+    property Mutation1Prob: Double read FMutation1Prob write FMutation1Prob;
+    property Mutation1Order: Integer read FMutation1Order write FMutation1Order;
+    property Mutation2Prob: Double read FMutation2Prob write FMutation2Prob;
+    property RepairProb: Double read FRepairProb write FRepairProb;
+    property NumImports: Integer read FNumImports;
+    property NumExports: Integer read FNumExports;
+    property NumColision: Integer read FClashes;
     property AverageValue: Double read GetAverageValue;
-    property BestTimeTable: TTimeTable read GetBestTimeTable;
-    property TimeTableModel: TTimeTableModel read FTimeTableModel;
+    property BestIndividual: TTimeTable read GetBestIndividual;
+    property Model: TTimeTableModel read FModel;
     property SyncDirectory: string read FSyncDirectory write FSyncDirectory;
     property FileName: string read GetFileName;
     property SyncFileName: string read GetSyncFileName;
-    property RangoPolinizacion
-      : Integer read FRangoPolinizacion write FRangoPolinizacion;
+    property PollinationFreq: Integer read FPollinationFreq write FPollinationFreq;
   end;
 
 implementation
@@ -105,25 +101,25 @@ procedure TEvolElitist.Configure(ATamPoblacion: Longint);
 var
   Individual: Integer;
 begin
-  FTamPoblacion := ATamPoblacion;
-  SetLength(FPopulation, FTamPoblacion + 1 + FTimeTableModel.ElitistCount);
+  FPopulationSize := ATamPoblacion;
+  SetLength(FPopulation, FPopulationSize + 1 + FModel.ElitistCount);
   SetLength(FNewPopulation, Length(FPopulation));
-  SetLength(FAptitudArray, Length(FPopulation));
-  SetLength(FNuevoAptitudArray, Length(FPopulation));
-  SetLength(FRAptitudArray, Length(FPopulation));
-  SetLength(FCAptitudArray, Length(FPopulation));
+  SetLength(FAptitudeArray, Length(FPopulation));
+  SetLength(FNewAptitudeArray, Length(FPopulation));
+  SetLength(FRAptitudeArray, Length(FPopulation));
+  SetLength(FCAptitudeArray, Length(FPopulation));
   for Individual := 0 to High(FPopulation) do
   begin
     if not Assigned(FNewPopulation[Individual]) then
-      FNewPopulation[Individual] := TTimeTable.Create(FTimeTableModel);
+      FNewPopulation[Individual] := TTimeTable.Create(FModel);
   end;
 end;
 
-constructor TEvolElitist.CreateFromModel(ATimeTableModel: TTimeTableModel;
+constructor TEvolElitist.CreateFromModel(AModel: TTimeTableModel;
   ATamPoblacion: Longint);
 begin
   inherited Create;
-  FTimeTableModel := ATimeTableModel;
+  FModel := AModel;
   Configure(ATamPoblacion);
 end;
 
@@ -136,7 +132,7 @@ begin
     FPopulation[Individual].Free;
     FNewPopulation[Individual].Free;
   end;
-  FTimeTableModel := nil;
+  FModel := nil;
   inherited Destroy;
 end;
 
@@ -144,14 +140,14 @@ procedure TEvolElitist.Initialize;
 var
   Individual: Integer;
 begin
-  for Individual := 0 to High(FFixedTimeTables) do
-    LoadFixedFromModel(FPopulation[Individual], FTimeTableModel,
-      FFixedTimeTables[Individual]);
-  for Individual := Length(FFixedTimeTables) to High(FPopulation) do
+  for Individual := 0 to High(FFixedIndividuals) do
+    LoadFixedFromModel(FPopulation[Individual], FModel,
+      FFixedIndividuals[Individual]);
+  for Individual := Length(FFixedIndividuals) to High(FPopulation) do
   begin
-    CreateRandomFromModel(FPopulation[Individual], FTimeTableModel);
+    CreateRandomFromModel(FPopulation[Individual], FModel);
   end;
-  for Individual := Length(FFixedTimeTables) to FTamPoblacion - 1 do
+  for Individual := Length(FFixedIndividuals) to FPopulationSize - 1 do
   begin
     FPopulation[Individual].DownHill;
   end;
@@ -161,9 +157,9 @@ procedure TEvolElitist.Repair;
 var
   Individual: Integer;
 begin
-  for Individual := 0 to FTamPoblacion - 1 do
+  for Individual := 0 to FPopulationSize - 1 do
   begin
-    if randl < FProbReparacion then
+    if randl < FRepairProb then
     begin
       FPopulation[Individual].DownHill;
     end;
@@ -192,7 +188,7 @@ begin
   end;
   for Individual := 0 to High(FPopulation) do
   begin
-    FAptitudArray[Individual] := 1 + MaxValue - FPopulation[Individual].Value;
+    FAptitudeArray[Individual] := 1 + MaxValue - FPopulation[Individual].Value;
   end;
 end;
 
@@ -203,17 +199,17 @@ var
   EValue: Double;
 begin
   Best := 0;
-  SetLength(EBest, FTimeTableModel.ElitistCount);
-  for EIndividual := 0 to FTimeTableModel.ElitistCount - 1 do
+  SetLength(EBest, FModel.ElitistCount);
+  for EIndividual := 0 to FModel.ElitistCount - 1 do
     EBest[EIndividual] := 0;
-  for Individual := 0 to FTamPoblacion - 1 do
+  for Individual := 0 to FPopulationSize - 1 do
   with FPopulation[Individual] do
   begin
     if Value < FPopulation[Best].Value then
     begin
       Best := Individual;
     end;
-    for EIndividual := 0 to FTimeTableModel.ElitistCount - 1 do
+    for EIndividual := 0 to FModel.ElitistCount - 1 do
     begin
       EValue := FPopulation[EBest[EIndividual]].ElitistValues[EIndividual];
       if (ElitistValues[EIndividual] < EValue) or
@@ -222,18 +218,18 @@ begin
         EBest[EIndividual] := Individual;
     end;
   end;
-  CopyIndividual(FTamPoblacion, Best);
-  for EIndividual := 0 to FTimeTableModel.ElitistCount - 1 do
-    CopyIndividual(FTamPoblacion + 1 + EIndividual, EBest[EIndividual]);
+  CopyIndividual(FPopulationSize, Best);
+  for EIndividual := 0 to FModel.ElitistCount - 1 do
+    CopyIndividual(FPopulationSize + 1 + EIndividual, EBest[EIndividual]);
 end;
 
 procedure TEvolElitist.CopyIndividual(Target, Source: Integer);
 begin
   FPopulation[Target].Assign(FPopulation[Source]);
-  FAptitudArray[Target] := FAptitudArray[Source];
+  FAptitudeArray[Target] := FAptitudeArray[Source];
 end;
 
-procedure TEvolElitist.Elitista;
+procedure TEvolElitist.Elitist;
 var
   BestValue, WorstValue, EValue: Double;
   Individual, EIndividual, Best, Worst: Longint;
@@ -244,15 +240,15 @@ begin
   WorstValue := BestValue;
   Best := 0;
   Worst := 0;
-  SetLength(EBest, FTimeTableModel.ElitistCount);
-  for EIndividual := 0 to FTimeTableModel.ElitistCount - 1 do
+  SetLength(EBest, FModel.ElitistCount);
+  for EIndividual := 0 to FModel.ElitistCount - 1 do
   begin
-    EBest[EIndividual] := FTamPoblacion + 1 + EIndividual;
+    EBest[EIndividual] := FPopulationSize + 1 + EIndividual;
   end;
-  for Individual := 0 to FTamPoblacion - 1 do
+  for Individual := 0 to FPopulationSize - 1 do
   with FPopulation[Individual] do
   begin
-    for EIndividual := 0 to FTimeTableModel.ElitistCount - 1 do
+    for EIndividual := 0 to FModel.ElitistCount - 1 do
     begin
       EValue := FPopulation[EBest[EIndividual]].ElitistValues[EIndividual];
       if (ElitistValues[EIndividual] < EValue) or
@@ -271,21 +267,21 @@ begin
       Worst := Individual;
     end;
   end;
-  for EIndividual := 0 to FTimeTableModel.ElitistCount - 1 do
+  for EIndividual := 0 to FModel.ElitistCount - 1 do
   begin
-    if EBest[EIndividual] <> FTamPoblacion + 1 + EIndividual then
-      CopyIndividual(FTamPoblacion + 1 + EIndividual, EBest[EIndividual]);
+    if EBest[EIndividual] <> FPopulationSize + 1 + EIndividual then
+      CopyIndividual(FPopulationSize + 1 + EIndividual, EBest[EIndividual]);
   end;
-  if BestValue <= FPopulation[FTamPoblacion].Value then
+  if BestValue <= FPopulation[FPopulationSize].Value then
   begin
-    FindMejor := BestValue < FPopulation[FTamPoblacion].Value;
-    CopyIndividual(FTamPoblacion, Best);
+    FindMejor := BestValue < FPopulation[FPopulationSize].Value;
+    CopyIndividual(FPopulationSize, Best);
     if FindMejor and Assigned(OnRecordBest) then
       OnRecordBest(Self);
   end
   else
   begin
-    CopyIndividual(Worst, FTamPoblacion + crand32 mod (1 + FTimeTableModel.ElitistCount));
+    CopyIndividual(Worst, FPopulationSize + crand32 mod (1 + FModel.ElitistCount));
   end;
 end;
 
@@ -297,7 +293,7 @@ procedure TEvolElitist.Pollinate;
     Stream := TFileStream.Create(FileName, fmCreate or fmShareExclusive);
     try
       SaveBestToStream(Stream);
-      Inc(FNumExportacion);
+      Inc(FNumExports);
     finally
       Stream.Free;
     end;
@@ -308,8 +304,8 @@ procedure TEvolElitist.Pollinate;
   begin
     Stream := TFileStream.Create(FileName, fmOpenRead or fmShareDenyWrite);
     try
-      FPopulation[FTamPoblacion].LoadFromStream(Stream);
-      Inc(FNumImportacion);
+      FPopulation[FPopulationSize].LoadFromStream(Stream);
+      Inc(FNumImports);
     finally
       Stream.Free;
     end;
@@ -322,7 +318,7 @@ procedure TEvolElitist.Pollinate;
     SyncStream := TFileStream.Create
       (SyncFileName, fmCreate or fmShareExclusive);
     try
-      Value := FPopulation[FTamPoblacion].Value;
+      Value := FPopulation[FPopulationSize].Value;
       SyncStream.write(Value, SizeOf(Double));
       ExportarInterno;
     finally
@@ -343,9 +339,9 @@ begin
       finally
         SyncStream.Free;
       end;
-      if Value < FPopulation[FTamPoblacion].Value then
+      if Value < FPopulation[FPopulationSize].Value then
         Importar
-      else if Value > FPopulation[FTamPoblacion].Value then
+      else if Value > FPopulation[FPopulationSize].Value then
         Exportar;
     end
     else
@@ -353,7 +349,7 @@ begin
       Exportar;
     end;
   except
-    Inc(FNumColision);
+    Inc(FClashes);
   end;
 end;
 
@@ -366,34 +362,34 @@ var
   VTmpAptitudArray: TDynamicDoubleArray;
 begin
   Sum := 0;
-  for Individual := 0 to FTamPoblacion - 1 do
+  for Individual := 0 to FPopulationSize - 1 do
   begin
-    Sum := Sum + FAptitudArray[Individual];
+    Sum := Sum + FAptitudeArray[Individual];
   end;
-  for Individual := 0 to FTamPoblacion - 1 do
+  for Individual := 0 to FPopulationSize - 1 do
   begin
-    FRAptitudArray[Individual] := FAptitudArray[Individual] / Sum;
+    FRAptitudeArray[Individual] := FAptitudeArray[Individual] / Sum;
   end;
-  FCAptitudArray[0] := FRAptitudArray[0];
-  for Individual := 1 to FTamPoblacion - 1 do
+  FCAptitudeArray[0] := FRAptitudeArray[0];
+  for Individual := 1 to FPopulationSize - 1 do
   begin
-    FCAptitudArray[Individual] := FCAptitudArray[Individual - 1] + FRAptitudArray[Individual];
+    FCAptitudeArray[Individual] := FCAptitudeArray[Individual - 1] + FRAptitudeArray[Individual];
   end;
-  for Individual1 := 0 to FTamPoblacion - 1 do
+  for Individual1 := 0 to FPopulationSize - 1 do
   begin
     p := randl;
-    if p < FCAptitudArray[0] then
+    if p < FCAptitudeArray[0] then
     begin
       FNewPopulation[Individual1].Assign(FPopulation[0]);
-      FNuevoAptitudArray[Individual1] := FAptitudArray[0];
+      FNewAptitudeArray[Individual1] := FAptitudeArray[0];
     end
     else
     begin
-      for Individual2 := 0 to FTamPoblacion - 1 do
-        if (p >= FCAptitudArray[Individual2]) and (p < FCAptitudArray[Individual2 + 1]) then
+      for Individual2 := 0 to FPopulationSize - 1 do
+        if (p >= FCAptitudeArray[Individual2]) and (p < FCAptitudeArray[Individual2 + 1]) then
         begin
           FNewPopulation[Individual1].Assign(FPopulation[Individual2 + 1]);
-          FNuevoAptitudArray[Individual1] := FAptitudArray[Individual2 + 1];
+          FNewAptitudeArray[Individual1] := FAptitudeArray[Individual2 + 1];
         end;
     end;
   end;
@@ -401,14 +397,14 @@ begin
   FPopulation := FNewPopulation;
   FNewPopulation := VTmpPoblacion;
 
-  VTmpAptitudArray := FAptitudArray;
-  FAptitudArray := FNuevoAptitudArray;
-  FNuevoAptitudArray := VTmpAptitudArray;
+  VTmpAptitudArray := FAptitudeArray;
+  FAptitudeArray := FNewAptitudeArray;
+  FNewAptitudeArray := VTmpAptitudArray;
 
-  for Individual1 := FTamPoblacion to High(FPopulation) do
+  for Individual1 := FPopulationSize to High(FPopulation) do
   begin
     FPopulation[Individual1].Assign(FNewPopulation[Individual1]);
-    FAptitudArray[Individual1] := FNuevoAptitudArray[Individual1];
+    FAptitudeArray[Individual1] := FNewAptitudeArray[Individual1];
   end;
 end;
 
@@ -419,10 +415,10 @@ var
 begin
   First := 0;
   One := 0;
-  for Individual := 0 to FTamPoblacion - 1 do
+  for Individual := 0 to FPopulationSize - 1 do
   begin
     x := randl;
-    if x < FProbCruzamiento then
+    if x < FCrossProb then
     begin
       Inc(First);
       if First mod 2 = 0 then
@@ -433,20 +429,20 @@ begin
   end;
 end;
 
-procedure TEvolElitist.InternalCrossIndividuals(Uno, Dos: Integer);
+procedure TEvolElitist.InternalCrossIndividuals(Individual1, Individual2: Integer);
 begin
-  CrossIndividuals(FPopulation[Uno], FPopulation[Dos]);
+  CrossIndividuals(FPopulation[Individual1], FPopulation[Individual2]);
 end;
 
 procedure TEvolElitist.Mutate;
 var
   Individual: Integer;
 begin
-  for Individual := 0 to FTamPoblacion - 1 do
+  for Individual := 0 to FPopulationSize - 1 do
   begin
-    if randl < FProbMutacion1 then
-      FPopulation[Individual].Mutate(FOrdenMutacion1);
-    if randl < FProbMutacion2 then
+    if randl < FMutation1Prob then
+      FPopulation[Individual].Mutate(FMutation1Order);
+    if randl < FMutation2Prob then
       FPopulation[Individual].MutateDia;
   end;
 end;
@@ -456,53 +452,52 @@ var
   Stop: Boolean;
   NumGeneracion: Integer;
 begin
-  getseeds(FSemilla1, FSemilla2, FSemilla3, FSemilla4);
+  getseeds(FSeed1, FSeed2, FSeed3, FSeed4);
   Initialize;
   Evaluate;
   SelectTheBest;
-  FNumGeneracion := 0;
-  FNumImportacion := 0;
-  FNumExportacion := 0;
-  FNumColision := 0;
+  FNumImports := 0;
+  FNumExports := 0;
+  FClashes := 0;
   Stop := False;
   NumGeneracion := 0;
-  while (NumGeneracion < FNumMaxGeneracion) and not Stop do
+  while (NumGeneracion < FMaxIteration) and not Stop do
   begin
-    FTimeTableModel.DoProgress(NumGeneracion, RefreshInterval, BestTimeTable, Stop);
+    FModel.DoProgress(NumGeneracion, RefreshInterval, BestIndividual, Stop);
     Select;
     Cross;
     Mutate;
     Repair;
-    if ((NumGeneracion mod FRangoPolinizacion) = 0) and (FSyncDirectory <> '') then
+    if ((NumGeneracion mod FPollinationFreq) = 0) and (FSyncDirectory <> '') then
       Pollinate;
     Evaluate;
-    Elitista;
+    Elitist;
     Inc(NumGeneracion);
   end;
-  if Stop then FNumMaxGeneracion := NumGeneracion; // Preserve the maximum in case of cancel
+  if Stop then FMaxIteration := NumGeneracion; // Preserve the maximum in case of cancel
 end;
 
 procedure TEvolElitist.ForcedDownHill;
 begin
-  FPopulation[FTamPoblacion].DownHillForced;
+  FPopulation[FPopulationSize].DownHillForced;
   if Assigned(OnRecordBest) then
     OnRecordBest(Self);
 end;
 
 function TEvolElitist.DownHill: Boolean;
 begin
-  Result := FPopulation[FTamPoblacion].DownHill;
+  Result := FPopulation[FPopulationSize].DownHill;
 end;
 
 procedure TEvolElitist.SaveBestToDatabase(CodHorario: Integer;
   MomentoInicial, MomentoFinal: TDateTime; Report: TStrings);
 begin
-  BestTimeTable.SaveToDataModule(CodHorario, MomentoInicial, MomentoFinal, Report);
+  BestIndividual.SaveToDataModule(CodHorario, MomentoInicial, MomentoFinal, Report);
 end;
 
 procedure TEvolElitist.SaveBestToStream(AStream: TStream);
 begin
-  BestTimeTable.SaveToStream(AStream);
+  BestIndividual.SaveToStream(AStream);
 end;
 
 function TEvolElitist.GetAverageValue: Double;
@@ -511,16 +506,16 @@ var
   sum: Double;
 begin
   sum := 0;
-  for Individual := 0 to FTamPoblacion - 1 do
+  for Individual := 0 to FPopulationSize - 1 do
   begin
     sum := sum + FPopulation[Individual].Value;
   end;
-  Result := sum / FTamPoblacion;
+  Result := sum / FPopulationSize;
 end;
 
-function TEvolElitist.GetBestTimeTable: TTimeTable;
+function TEvolElitist.GetBestIndividual: TTimeTable;
 begin
-  Result := FPopulation[FTamPoblacion];
+  Result := FPopulation[FPopulationSize];
 end;
 
 procedure TEvolElitist.ReportParameters(AInforme: TStrings);
@@ -528,15 +523,15 @@ begin
   with AInforme do
   begin
     Add('Semillas del generador de numeros aleatorios:');
-    Add(Format('  %d, %d, %d, %d', [FSemilla1, FSemilla2, FSemilla3, FSemilla4]));
-    Add(Format('Numero de individuos:       %5.d', [FTamPoblacion]));
-    Add(Format('Maximo de generaciones:     %5.d', [FNumMaxGeneracion]));
-    Add(Format('Probabilidad de cruce:      %1.3f', [FProbCruzamiento]));
-    Add(Format('Probabilidad de Mutacion 1: %1.3f', [FProbMutacion1]));
-    Add(Format('Orden de la Mutacion 1:     %5.d', [FOrdenMutacion1]));
-    Add(Format('Probabilidad de Mutacion 1: %1.3f', [FProbMutacion2]));
-    Add(Format('Probabilidad de Reparacion: %1.3f', [FProbReparacion]));
-    Add(Format('Rango de polinizacion:      %5.d', [FRangoPolinizacion]));
+    Add(Format('  %d, %d, %d, %d', [FSeed1, FSeed2, FSeed3, FSeed4]));
+    Add(Format('Numero de individuos:       %5.d', [FPopulationSize]));
+    Add(Format('Maximo de generaciones:     %5.d', [FMaxIteration]));
+    Add(Format('Probabilidad de cruce:      %1.3f', [FCrossProb]));
+    Add(Format('Probabilidad de Mutacion 1: %1.3f', [FMutation1Prob]));
+    Add(Format('Orden de la Mutacion 1:     %5.d', [FMutation1Order]));
+    Add(Format('Probabilidad de Mutacion 1: %1.3f', [FMutation2Prob]));
+    Add(Format('Probabilidad de Reparacion: %1.3f', [FRepairProb]));
+    Add(Format('Rango de polinizacion:      %5.d', [FPollinationFreq]));
   end;
 end;
 
@@ -544,15 +539,15 @@ procedure TEvolElitist.FixIndividuals(const Individuals: string);
 var
   Position, Individual: Integer;
 begin
-  SetLength(FFixedTimeTables, Length(Individuals));
+  SetLength(FFixedIndividuals, Length(Individuals));
   Position := 1;
   Individual := 0;
   while Position <= Length(Individuals) do
   begin
-    FFixedTimeTables[Individual] := StrToInt(ExtractString(Individuals, Position, ','));
+    FFixedIndividuals[Individual] := StrToInt(ExtractString(Individuals, Position, ','));
     Inc(Individual);
   end;
-  SetLength(FFixedTimeTables, Individual);
+  SetLength(FFixedIndividuals, Individual);
 end;
 
 function TEvolElitist.GetFileName: string;

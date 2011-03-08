@@ -39,8 +39,8 @@ type
     procedure SetSeed3(Value: Integer);
     function GetSeed4: Integer;
     procedure SetSeed4(Value: Integer);
-    function GetNumIteraciones: Integer;
-    procedure SetNumIteraciones(Value: Integer);
+    function GetRefreshInterval: Integer;
+    procedure SetRefreshInterval(Value: Integer);
     function GetCruceProfesor: Extended;
     procedure SetCruceProfesor(Value: Extended);
     function GetProfesorFraccionamiento: Extended;
@@ -53,25 +53,25 @@ type
     procedure SetSesionCortada(Value: Extended);
     function GetMateriaNoDispersa: Extended;
     procedure SetMateriaNoDispersa(Value: Extended);
-    function GetTamPoblacion: Integer;
-    procedure SetTamPoblacion(Value: Integer);
+    function GetPopulationSize: Integer;
+    procedure SetPopulationSize(Value: Integer);
     function GetNumMaxGeneracion: Integer;
     procedure SetNumMaxGeneracion(Value: Integer);
     function GetProbCruzamiento: Extended;
     procedure SetProbCruzamiento(Value: Extended);
-    function GetProbMutacion1: Extended;
-    procedure SetProbMutacion1(Value: Extended);
-    function GetOrdenMutacion1: Integer;
-    procedure SetOrdenMutacion1(Value: Integer);
-    function GetProbMutacion2: Extended;
-    procedure SetProbMutacion2(Value: Extended);
-    function GetProbReparacion: Extended;
-    procedure SetProbReparacion(Value: Extended);
+    function GetMutation1Prob: Extended;
+    procedure SetMutation1Prob(Value: Extended);
+    function GetMutation1Order: Integer;
+    procedure SetMutation1Order(Value: Integer);
+    function GetMutation2Prob: Extended;
+    procedure SetMutation2Prob(Value: Extended);
+    function GetRepairProb: Extended;
+    procedure SetRepairProb(Value: Extended);
     function GetHorarioIni: string;
     procedure SetHorarioIni(const Value: string);
     function GetCompartir: string;
     procedure SetCompartir(const Value: string);
-    function GetRangoPolinizacion: Integer;
+    function SetPollinationFreq: Integer;
     procedure SetRangoPolinizacion(Value: Integer);
     function GetApplyDoubleDownHill: Boolean;
     procedure SetApplyDoubleDownHill(Value: Boolean);
@@ -91,23 +91,23 @@ type
     property Seed2: Integer read GetSeed2 write SetSeed2;
     property Seed3: Integer read GetSeed3 write SetSeed3;
     property Seed4: Integer read GetSeed4 write SetSeed4;
-    property NumIteraciones: Integer read GetNumIteraciones write SetNumIteraciones;
+    property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
     property CruceProfesor: Extended read GetCruceProfesor write SetCruceProfesor;
     property ProfesorFraccionamiento: Extended read GetProfesorFraccionamiento write SetProfesorFraccionamiento;
     property CruceAulaTipo: Extended read GetCruceAulaTipo write SetCruceAulaTipo;
     property HoraHueca: Extended read GetHoraHueca write SetHoraHueca;
     property SesionCortada: Extended read GetSesionCortada write SetSesionCortada;
     property MateriaNoDispersa: Extended read GetMateriaNoDispersa write SetMateriaNoDispersa;
-    property TamPoblacion: Integer read GetTamPoblacion write SetTamPoblacion;
-    property NumMaxGeneracion: Integer read GetNumMaxGeneracion write SetNumMaxGeneracion;
-    property ProbCruzamiento: Extended read GetProbCruzamiento write SetProbCruzamiento;
-    property ProbMutacion1: Extended read GetProbMutacion1 write SetProbMutacion1;
-    property OrdenMutacion1: Integer read GetOrdenMutacion1 write SetOrdenMutacion1;
-    property ProbMutacion2: Extended read GetProbMutacion2 write SetProbMutacion2;
-    property ProbReparacion: Extended read GetProbReparacion write SetProbReparacion;
+    property PopulationSize: Integer read GetPopulationSize write SetPopulationSize;
+    property MaxIteration: Integer read GetNumMaxGeneracion write SetNumMaxGeneracion;
+    property CrossProb: Extended read GetProbCruzamiento write SetProbCruzamiento;
+    property Mutation1Prob: Extended read GetMutation1Prob write SetMutation1Prob;
+    property Mutation1Order: Integer read GetMutation1Order write SetMutation1Order;
+    property Mutation2Prob: Extended read GetMutation2Prob write SetMutation2Prob;
+    property RepairProb: Extended read GetRepairProb write SetRepairProb;
     property HorarioIni: string read GetHorarioIni write SetHorarioIni;
     property Compartir: string read GetCompartir write SetCompartir;
-    property RangoPolinizacion: Integer read GetRangoPolinizacion write SetRangoPolinizacion;
+    property PollinationFreq: Integer read SetPollinationFreq write SetRangoPolinizacion;
     property ApplyDoubleDownHill: Boolean read GetApplyDoubleDownHill write SetApplyDoubleDownHill;
   end;
 
@@ -246,12 +246,12 @@ begin
   Integers['Seed4'] := Value;
 end;
 
-function TTTGConfig.GetNumIteraciones: Integer;
+function TTTGConfig.GetRefreshInterval: Integer;
 begin
   Result := Integers['NumIteraciones'];
 end;
 
-procedure TTTGConfig.SetNumIteraciones(Value: Integer);
+procedure TTTGConfig.SetRefreshInterval(Value: Integer);
 begin
   Integers['NumIteraciones'] := Value;
 end;
@@ -316,12 +316,12 @@ begin
   Floats['MateriaNoDispersa'] := Value;
 end;
 
-function TTTGConfig.GetTamPoblacion: Integer;
+function TTTGConfig.GetPopulationSize: Integer;
 begin
   Result := Integers['TamPoblacion'];
 end;
 
-procedure TTTGConfig.SetTamPoblacion(Value: Integer);
+procedure TTTGConfig.SetPopulationSize(Value: Integer);
 begin
   Integers['TamPoblacion'] := Value;
 end;
@@ -346,42 +346,42 @@ begin
   Floats['ProbCruzamiento'] := Value;
 end;
 
-function TTTGConfig.GetProbMutacion1: Extended;
+function TTTGConfig.GetMutation1Prob: Extended;
 begin
   Result := Floats['ProbMutacion1'];
 end;
 
-procedure TTTGConfig.SetProbMutacion1(Value: Extended);
+procedure TTTGConfig.SetMutation1Prob(Value: Extended);
 begin
   Floats['ProbMutacion1'] := Value;
 end;
 
-function TTTGConfig.GetOrdenMutacion1: Integer;
+function TTTGConfig.GetMutation1Order: Integer;
 begin
   Result := Integers['OrdenMutacion1'];
 end;
 
-procedure TTTGConfig.SetOrdenMutacion1(Value: Integer);
+procedure TTTGConfig.SetMutation1Order(Value: Integer);
 begin
   Integers['OrdenMutacion1'] := Value;
 end;
 
-function TTTGConfig.GetProbMutacion2: Extended;
+function TTTGConfig.GetMutation2Prob: Extended;
 begin
   Result := Floats['ProbMutacion2'];
 end;
 
-procedure TTTGConfig.SetProbMutacion2(Value: Extended);
+procedure TTTGConfig.SetMutation2Prob(Value: Extended);
 begin
   Floats['ProbMutacion2'] := Value;
 end;
 
-function TTTGConfig.GetProbReparacion: Extended;
+function TTTGConfig.GetRepairProb: Extended;
 begin
   Result := Floats['ProbReparacion'];
 end;
 
-procedure TTTGConfig.SetProbReparacion(Value: Extended);
+procedure TTTGConfig.SetRepairProb(Value: Extended);
 begin
   Floats['ProbReparacion'] := Value;
 end;
@@ -406,7 +406,7 @@ begin
   Values['dedCompartir_Text'] := Value;
 end;
 
-function TTTGConfig.GetRangoPolinizacion: Integer;
+function TTTGConfig.SetPollinationFreq: Integer;
 begin
   Result := Integers['RangoPolinizacion'];
 end;
@@ -442,24 +442,24 @@ begin
   Seed2 := 1;
   Seed3 := 1;
   Seed4 := 1;
-  NumIteraciones := 1;
+  RefreshInterval := 1;
   CruceProfesor := 200;
   ProfesorFraccionamiento := 50;
   CruceAulaTipo := 200;
   HoraHueca := 100;
   SesionCortada := 150;
   MateriaNoDispersa := 5;
-  TamPoblacion := 10;
-  NumMaxGeneracion := 10000;
-  ProbCruzamiento := 0.3;
-  ProbMutacion1 := 0.2;
-  OrdenMutacion1 := 3;
-  ProbMutacion2 := 0.2;
-  ProbReparacion := 0.2;
+  PopulationSize := 10;
+  MaxIteration := 10000;
+  CrossProb := 0.3;
+  Mutation1Prob := 0.2;
+  Mutation1Order := 3;
+  Mutation2Prob := 0.2;
+  RepairProb := 0.2;
   ApplyDoubleDownHill := False;
   HorarioIni := '';
   Compartir := '';
-  RangoPolinizacion := 1;
+  PollinationFreq := 1;
 end;
 
 procedure TTTGConfig.InitRandom;

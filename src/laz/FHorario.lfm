@@ -1,5 +1,5 @@
 inherited HorarioForm: THorarioForm
-  Left = 300
+  Left = 356
   Height = 440
   Top = 0
   Width = 677

@@ -354,7 +354,7 @@ begin
         TimeTable.DownHillForced;
         ProgressForm.ProgressMax := TimeTableModel.SesionCantidadDoble;
         ProgressForm.ShowProgressForm;
-        TimeTable.DoubleDownHillForced(MasterDataModule.ConfigStorage.NumIteraciones);
+        TimeTable.DoubleDownHillForced(MasterDataModule.ConfigStorage.RefreshInterval);
         if not ProgressForm.CancelClick then
         begin
           EndTime := Now;

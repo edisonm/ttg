@@ -176,7 +176,7 @@ type
 
   TTimeTable = class
   private
-    FTimeTableModel: TTimeTableModel;
+    FModel: TTimeTableModel;
     FParaleloPeriodoASesion,
       FAntMateriaDiaMinHora, FAntMateriaDiaMaxHora, FAntDiaProfesorMinHora,
       FAntDiaProfesorMaxHora: TDynamicSmallintArrayArray;
@@ -300,7 +300,7 @@ type
     property ParaleloPeriodoASesion
       : TDynamicSmallintArrayArray read FParaleloPeriodoASesion write
       FParaleloPeriodoASesion;
-    property TimeTableModel: TTimeTableModel read FTimeTableModel;
+    property TimeTableModel: TTimeTableModel read FModel;
     property ProfesorFraccionamiento: Integer read TablingInfo.FProfesorFraccionamiento;
   end;
 
@@ -973,7 +973,7 @@ constructor TTimeTable.Create(ATimeTableModel: TTimeTableModel);
 begin
   inherited Create;
   FAntListaCambios := TList.Create;
-  FTimeTableModel := ATimeTableModel;
+  FModel := ATimeTableModel;
   FRecalculateValue := True;
   with TimeTableModel do
   begin
@@ -1109,7 +1109,7 @@ procedure TTimeTable.UpdateDiaProfesorFraccionamiento;
 var
   Dia, Profesor: Smallint;
 begin
-  with FTimeTableModel, TablingInfo do
+  with FModel, TablingInfo do
   begin
     for Dia := 0 to FDiaCant - 1 do
     begin
@@ -1850,7 +1850,7 @@ var
   var
     l, di_, di1_: Smallint;
   begin
-    with FTimeTableModel, TablingInfo do
+    with FModel, TablingInfo do
     begin
       Result := 0;
       if Profesor1 <> Profesor2 then
@@ -1902,7 +1902,7 @@ var
   var
     p_, p1_, j_, s_, s1_, di_: Smallint;
   begin
-    with FTimeTableModel do
+    with FModel do
     begin
       Result := 0;
       for j_ := APeriodo1 to APeriodo1 + Duracion2 - 1 do
@@ -2032,7 +2032,7 @@ var
     I: Integer;
   begin
     Result := 0;
-    with FTimeTableModel, TablingInfo do
+    with FModel, TablingInfo do
       for I := FAntListaCambios.Count - 1 downto 0 do
       begin
         pd := LongWord(FAntListaCambios.Items[I]);
@@ -2239,7 +2239,7 @@ var
   var
     a, a1, l, c, c1: Smallint;
   begin
-    with FTimeTableModel do
+    with FModel do
     begin
       if Sesion1 >= 0 then
         a := FSesionAAulaTipo[Sesion1]
@@ -2283,7 +2283,7 @@ var
   var
     a, a1, c, c1, j_, s_, s1_: Smallint;
   begin
-    with FTimeTableModel do
+    with FModel do
     begin
       Result := 0;
       c := 0;
@@ -2416,7 +2416,7 @@ var
   var
     j_, s_: Smallint;
   begin
-    with FTimeTableModel do
+    with FModel do
     begin
       Result := 0;
       for j_ := APeriodo1 to APeriodo2 + Duracion2 - 1 do
@@ -2631,7 +2631,7 @@ var
   end;
 
 begin
-  with FTimeTableModel do
+  with FModel do
   begin
     PeriodoASesion := @ParaleloPeriodoASesion[AParalelo, 0];
     MateriaAProfesor := @FParaleloMateriaAProfesor[AParalelo, 0];
@@ -2734,7 +2734,7 @@ var
   DValue: Double;
   PeriodoASesion: PSmallintArray;
 begin
-  with FTimeTableModel do
+  with FModel do
   begin
     Result := True;
     Periodo1 := 0;
@@ -2768,7 +2768,7 @@ var
   RandomValues: array [0 .. 4095] of Longint;
   p: PSmallintArray;
 begin
-  with FTimeTableModel do
+  with FModel do
   begin
     Result := True;
     for ci := 0 to FParaleloCant - 1 do
@@ -3100,7 +3100,7 @@ end;
 
 destructor TTimeTable.Destroy;
 begin
-  FTimeTableModel := nil;
+  FModel := nil;
   FAntListaCambios.Free;
   inherited Destroy;
 end;
@@ -3199,7 +3199,7 @@ procedure TTimeTable.SaveToStream(Stream: TStream);
 var
   I: Smallint;
 begin
-  with FTimeTableModel do
+  with FModel do
     for I := 0 to FParaleloCant - 1 do
     begin
       Stream.Write(ParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint));
@@ -3210,7 +3210,7 @@ procedure TTimeTable.LoadFromStream(Stream: TStream);
 var
   I: Smallint;
 begin
-  with FTimeTableModel do
+  with FModel do
     for I := 0 to FParaleloCant - 1 do
     begin
       Stream.Read(ParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint));

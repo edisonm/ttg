@@ -203,7 +203,7 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsOpciones: TTabSheet
       Caption = 'Opciones'
-      ClientHeight = 325
+      ClientHeight = 324
       ClientWidth = 465
       ImageIndex = 3
       object Label19: TLabel
@@ -354,7 +354,7 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsPesos: TTabSheet
       Caption = 'Pesos'
-      ClientHeight = 325
+      ClientHeight = 324
       ClientWidth = 465
       object Label1: TLabel
         Left = 8
@@ -595,7 +595,7 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsAlgoritmoEvolutivo: TTabSheet
       Caption = 'Algoritmo Evolutivo'
-      ClientHeight = 325
+      ClientHeight = 324
       ClientWidth = 465
       ImageIndex = 1
       object Label8: TLabel

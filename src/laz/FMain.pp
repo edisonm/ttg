@@ -456,11 +456,11 @@ var
       FMomentoInicial := Now;
       ProgressForm.Caption := Format('Elaboracion en progreso [%d]', [CodHorario]);
       FLogStrings.Clear;
-      ProgressForm.ProgressMax := vEvolElitist.NumMaxGeneracion;
+      ProgressForm.ProgressMax := vEvolElitist.MaxIteration;
       FLogStrings.BeginUpdate;
       ProgressForm.ShowProgressForm;
       try
-        vEvolElitist.Execute(MasterDataModule.ConfigStorage.NumIteraciones);
+        vEvolElitist.Execute(MasterDataModule.ConfigStorage.RefreshInterval);
       finally
         ProgressForm.CloseProgressForm;
         FLogStrings.EndUpdate;
@@ -474,15 +474,15 @@ var
         ProgressForm.ProgressMax := vTimeTableModel.SesionCantidadDoble;
         ProgressForm.ShowProgressForm;
         try
-          VEvolElitist.BestTimeTable.DoubleDownHillForced
-            (MasterDataModule.ConfigStorage.NumIteraciones);
+          VEvolElitist.BestIndividual.DoubleDownHillForced
+            (MasterDataModule.ConfigStorage.RefreshInterval);
         finally
           ProgressForm.CloseProgressForm;
         end;
       end
       else
         VEvolElitist.ForcedDownHill;
-      VEvolElitist.BestTimeTable.UpdateValue;
+      VEvolElitist.BestIndividual.UpdateValue;
       FMomentoFinal := Now;
       Report := TStringList.Create;
       try
@@ -491,7 +491,7 @@ var
         Report.Add(Format('Descenso rapido doble: %s',
           [FBoolToStr[MasterDataModule.ConfigStorage.ApplyDoubleDownHill]]));
         VEvolElitist.ReportParameters(Report);
-        VEvolElitist.BestTimeTable.ReportValues(Report);
+        VEvolElitist.BestIndividual.ReportValues(Report);
         VEvolElitist.SaveBestToDatabase(ACodHorario, FMomentoInicial, FMomentoFinal, Report);
       finally
         Report.Free;
@@ -533,17 +533,17 @@ begin
     FEjecutando := True;
     VTimeTableModel := TTimeTableModel.CreateFromDataModule(CruceProfesor,
       ProfesorFraccionamiento, CruceAulaTipo, HoraHueca, SesionCortada, MateriaNoDispersa);
-    VEvolElitist := TEvolElitist.CreateFromModel(VTimeTableModel, TamPoblacion);
+    VEvolElitist := TEvolElitist.CreateFromModel(VTimeTableModel, PopulationSize);
     try
       VTimeTableModel.OnProgress := ProgressForm.OnProgress;
-      VEvolElitist.NumMaxGeneracion := NumMaxGeneracion;
-      VEvolElitist.ProbCruzamiento := ProbCruzamiento;
-      VEvolElitist.ProbMutacion1 := ProbMutacion1;
-      VEvolElitist.OrdenMutacion1 := OrdenMutacion1;
-      VEvolElitist.ProbMutacion2 := ProbMutacion2;
-      VEvolElitist.ProbReparacion := ProbReparacion;
+      VEvolElitist.MaxIteration := MaxIteration;
+      VEvolElitist.CrossProb := CrossProb;
+      VEvolElitist.Mutation1Prob := Mutation1Prob;
+      VEvolElitist.Mutation1Order := Mutation1Order;
+      VEvolElitist.Mutation2Prob := Mutation2Prob;
+      VEvolElitist.RepairProb := RepairProb;
       VEvolElitist.SyncDirectory := Compartir;
-      VEvolElitist.RangoPolinizacion := RangoPolinizacion;
+      VEvolElitist.PollinationFreq := PollinationFreq;
       if (Compartir <> '')
          and FileExists(VEvolElitist.SyncFileName) then
       begin
@@ -611,7 +611,7 @@ procedure TMainForm.OnRegistrarMejor(Sender: TObject);
 begin
   with Sender as TEvolElitist do
   begin
-    FLogStrings.Add(Format('%g; %g; %g', [Now, BestTimeTable.Value, AverageValue]));
+    FLogStrings.Add(Format('%g; %g; %g', [Now, BestIndividual.Value, AverageValue]));
   end;
 end;
 
