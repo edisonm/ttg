@@ -39,7 +39,7 @@ type
       FNumExports, FClashes, FPollinationFreq, FMutation1Order: Longint;
     FCrossProb, FMutation1Prob, FMutation2Prob, FRepairProb: Double;
     FPopulation, FNewPopulation: TTimeTableArray;
-    FAptitudeArray, FNewAptitudeArray, FRAptitudeArray, FCAptitudeArray: TDynamicDoubleArray;
+    FAptitudeArray, FNewAptitudeArray: TDynamicDoubleArray;
     FFixedIndividuals: TDynamicLongintArray;
     FOnRecordBest: TNotifyEvent;
     function GetFileName: string;
@@ -63,7 +63,7 @@ type
     procedure ReportParameters(AInforme: TStrings);
     constructor CreateFromModel(AModel: TTimeTableModel; APopulationSize: Longint);
     procedure FixIndividuals(const Individuals: string);
-    procedure Configure(ATamPoblacion: Integer);
+    procedure Configure(APopulationSize: Integer);
     destructor Destroy; override;
     procedure SaveBestToDatabase(CodHorario: Integer; MomentoInicial,
       MomentoFinal: TDateTime; Report: TStrings);
@@ -96,21 +96,21 @@ implementation
 uses
   Rand, HorColCm;
 
-procedure TEvolElitist.Configure(ATamPoblacion: Longint);
+procedure TEvolElitist.Configure(APopulationSize: Longint);
 var
   Individual: Integer;
 begin
-  FPopulationSize := ATamPoblacion;
+  FPopulationSize := APopulationSize;
   SetLength(FPopulation, FPopulationSize + 1 + FModel.ElitistCount);
   SetLength(FNewPopulation, Length(FPopulation));
   SetLength(FAptitudeArray, Length(FPopulation));
   SetLength(FNewAptitudeArray, Length(FPopulation));
-  SetLength(FRAptitudeArray, Length(FPopulation));
-  SetLength(FCAptitudeArray, Length(FPopulation));
   for Individual := 0 to High(FPopulation) do
   begin
+    if not Assigned(FPopulation[Individual]) then
+      FPopulation[Individual] := TTimeTable.Create(FModel);//.NewIndividual);
     if not Assigned(FNewPopulation[Individual]) then
-      FNewPopulation[Individual] := TTimeTable.Create(FModel);
+      FNewPopulation[Individual] := TTimeTable.Create(FModel);//.NewIndividual);
   end;
 end;
 
@@ -140,15 +140,12 @@ var
   Individual: Integer;
 begin
   for Individual := 0 to High(FFixedIndividuals) do
-    LoadFixedFromModel(FPopulation[Individual], FModel,
-      FFixedIndividuals[Individual]);
+  begin
+    FPopulation[Individual].LoadFromDataModule(FFixedIndividuals[Individual]);
+  end;
   for Individual := Length(FFixedIndividuals) to High(FPopulation) do
   begin
-    CreateRandomFromModel(FPopulation[Individual], FModel);
-  end;
-  for Individual := Length(FFixedIndividuals) to FPopulationSize - 1 do
-  begin
-    FPopulation[Individual].DownHill;
+    FPopulation[Individual].MakeRandom;
   end;
 end;
 
@@ -358,8 +355,10 @@ var
   Sum: Double;
   p: Extended;
   VTmpPoblacion: TTimeTableArray;
-  VTmpAptitudArray: TDynamicDoubleArray;
+  VTmpAptitudArray, FCAptitudeArray, FRAptitudeArray: TDynamicDoubleArray;
 begin
+  SetLength(FCAptitudeArray, Length(FPopulation));
+  SetLength(FRAptitudeArray, Length(FPopulation));
   Sum := 0;
   for Individual := 0 to FPopulationSize - 1 do
   begin
@@ -449,7 +448,7 @@ end;
 procedure TEvolElitist.Execute(RefreshInterval: Integer);
 var
   Stop: Boolean;
-  NumGeneracion: Integer;
+  Iteration: Integer;
 begin
   getseeds(FSeed1, FSeed2, FSeed3, FSeed4);
   Initialize;
@@ -459,21 +458,21 @@ begin
   FNumExports := 0;
   FClashes := 0;
   Stop := False;
-  NumGeneracion := 0;
-  while (NumGeneracion < FMaxIteration) and not Stop do
+  Iteration := 0;
+  while (Iteration < FMaxIteration) and not Stop do
   begin
-    FModel.DoProgress(NumGeneracion, RefreshInterval, BestIndividual, Stop);
+    FModel.DoProgress(Iteration, RefreshInterval, BestIndividual, Stop);
     Select;
     Cross;
     Mutate;
     Repair;
-    if ((NumGeneracion mod FPollinationFreq) = 0) and (FSyncDirectory <> '') then
+    if ((Iteration mod FPollinationFreq) = 0) and (FSyncDirectory <> '') then
       Pollinate;
     Evaluate;
     Elitist;
-    Inc(NumGeneracion);
+    Inc(Iteration);
   end;
-  if Stop then FMaxIteration := NumGeneracion; // Preserve the maximum in case of cancel
+  if Stop then FMaxIteration := Iteration; // Preserve the maximum in case of cancel
 end;
 
 procedure TEvolElitist.ForcedDownHill;

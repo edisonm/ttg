@@ -50,9 +50,11 @@ type
   }
 
   TTimeTable = class;
-  TProgressEvent = procedure(Progress, Step: Integer; TimeTable: TTimeTable;
-    var Stop: Boolean) of object;
   TTimeTableArray = array of TTimeTable;
+
+  TProgressEvent = procedure(Progress, Step: Integer; Individual: TTimeTable;
+    var Stop: Boolean) of object;
+
 
   { TTimeTableModel }
 
@@ -98,22 +100,21 @@ type
     function GetDiaAMaxPeriodo(Dia: Smallint): Smallint;
   protected
     property TimeTableDetailPattern: TDynamicSmallintArrayArray read FTimeTableDetailPattern;
+    function GetElitistCount: Smallint;
   public
-    property PeriodoCant: Smallint read FPeriodoCant;
-    property ParaleloCant: Smallint read FParaleloCant;
-    property ElitistCount: Smallint read FElitistCount;
-    procedure DoProgress(Position, RefreshInterval: Integer; Horario: TTimeTable;
-      var Stop: Boolean);
-    dynamic;
-    procedure Configurar(ACruceProfesorValor, AProfesorFraccionamientoValor,
+    procedure DoProgress(Position, RefreshInterval: Integer; Individual: TTimeTable;
+      var Stop: Boolean); dynamic;
+    procedure Configure(ACruceProfesorValor, AProfesorFraccionamientoValor,
       ACruceAulaTipoValor, AHoraHuecaDesubicadaValor, ASesionCortadaValor,
       AMateriaNoDispersaValor: Double);
-    constructor CreateFromDataModule(ACruceProfesorValor,
-      AProfesorFraccionamientoValor, ACruceAulaTipoValor,
-      AHoraHuecaDesubicadaValor, ASesionCortadaValor,
-      AMateriaNoDispersaValor: Double);
+    constructor CreateFromDataModule(ACruceProfesorValor, AProfesorFraccionamientoValor,
+      ACruceAulaTipoValor, AHoraHuecaDesubicadaValor, ASesionCortadaValor, AMateriaNoDispersaValor: Double);
     destructor Destroy; override;
     procedure ReportParameters(AReport: TStrings);
+    function NewIndividual: TObject;
+    property PeriodoCant: Smallint read FPeriodoCant;
+    property ParaleloCant: Smallint read FParaleloCant;
+    property ElitistCount: Smallint read GetElitistCount;
     property CruceProfesorValor: Double read FCruceProfesorValor;
     property ProfesorFraccionamientoValor: Double read FProfesorFraccionamientoValor;
     property CruceAulaTipoValor: Double read FCruceAulaTipoValor;
@@ -174,7 +175,7 @@ type
 
   { TTimeTable }
 
-  TTimeTable = class
+  TTimeTable = class(TInterfacedObject, IIndividual)
   private
     FModel: TTimeTableModel;
     FParaleloPeriodoASesion,
@@ -249,6 +250,8 @@ type
     procedure UpdateValue;
     function DownHill: Boolean;
     function DoubleDownHill(Step: Integer): Boolean;
+    function GetImplementor: TObject;
+    property Implementor: TObject;
     procedure DoubleDownHillForced(Step: Integer);
     procedure DownHillForced;
     function InternalDownHillOptimized(Step: Integer): Boolean;
@@ -303,12 +306,6 @@ type
     property TimeTableModel: TTimeTableModel read FModel;
     property ProfesorFraccionamiento: Integer read TablingInfo.FProfesorFraccionamiento;
   end;
-
-  // Procedimiento que crea una solucion aleatoria de un TTimeTableModel
-procedure CreateRandomFromModel(var ATimeTable: TTimeTable;
-  ATimeTableModel: TTimeTableModel);
-procedure LoadFixedFromModel(var ATimeTable: TTimeTable;
-  ATimeTableModel: TTimeTableModel; CodHorario: Integer);
 
 // Procedimiento que aplica el operador de cruzamiento sobre dos TObjetoTimeTableModel
 procedure CrossIndividuals(var TimeTable1, TimeTable2: TTimeTable);
@@ -786,7 +783,7 @@ begin
   FElitistCount := 3;
   with SourceDataModule do
   begin
-    Configurar(ACruceProfesorValor, AProfesorFraccionamientoValor,
+    Configure(ACruceProfesorValor, AProfesorFraccionamientoValor,
       ACruceAulaTipoValor, AHoraHuecaDesubicadaValor, ASesionCortadaValor,
       AMateriaNoDispersaValor);
     Cargar(TbProfesor, 'CodProfesor', FMinCodProfesor, FCodProfesorAProfesor,
@@ -831,7 +828,7 @@ begin
   end;
 end;
 
-procedure TTimeTableModel.Configurar(ACruceProfesorValor,
+procedure TTimeTableModel.Configure(ACruceProfesorValor,
   AProfesorFraccionamientoValor, ACruceAulaTipoValor,
   AHoraHuecaDesubicadaValor, ASesionCortadaValor,
   AMateriaNoDispersaValor: Double);
@@ -852,6 +849,11 @@ begin
     Result := FDiaHoraAPeriodo[Dia + 1, 0] - 1;
 end;
 
+function TTimeTableModel.GetElitistCount: Smallint;
+begin
+  Result := FElitistCount;
+end;
+
 procedure TTimeTableModel.ReportParameters(AReport: TStrings);
 begin
   AReport.Add(Format('Pesos:'#13#10 +
@@ -865,20 +867,9 @@ begin
       HoraHuecaDesubicadaValor, SesionCortadaValor, MateriaNoDispersaValor]));
 end;
 
-procedure CreateRandomFromModel(var ATimeTable: TTimeTable;
-  ATimeTableModel: TTimeTableModel);
+function TTimeTableModel.NewIndividual: TObject;
 begin
-  if not Assigned(ATimeTable) then
-    ATimeTable := TTimeTable.Create(ATimeTableModel);
-  ATimeTable.MakeRandom;
-end;
-
-procedure LoadFixedFromModel(var ATimeTable: TTimeTable;
-  ATimeTableModel: TTimeTableModel; CodHorario: Integer);
-begin
-  if not Assigned(ATimeTable) then
-    ATimeTable := TTimeTable.Create(ATimeTableModel);
-  ATimeTable.LoadFromDataModule(CodHorario);
+  Result := TTimeTable.Create(Self);
 end;
 
 procedure CrossIndividualsParalelo(var TimeTable1, TimeTable2: TTimeTable;
@@ -3060,6 +3051,11 @@ begin
   RecalculateValue := True;
 end;
 
+function TTimeTable.GetImplementor: TObject;
+begin
+  Result := Self;
+end;
+
 procedure TTimeTable.InternalDownHillOptimizedForced(Step: Integer);
 var
   b: Boolean;
@@ -3438,10 +3434,10 @@ begin
 end;
 
 procedure TTimeTableModel.DoProgress(Position, RefreshInterval: Integer;
-  Horario: TTimeTable; var Stop: Boolean);
+  Individual: TTimeTable; var Stop: Boolean);
 begin
   if Assigned(FOnProgress) then
-    FOnProgress(Position, RefreshInterval, Horario, Stop);
+    FOnProgress(Position, RefreshInterval, Individual, Stop);
 end;
 
 destructor TTimeTableModel.Destroy;

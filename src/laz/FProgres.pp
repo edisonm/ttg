@@ -5,8 +5,9 @@ unit FProgres;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
-  Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls, KerModel;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+  Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls, UIndivid,
+  KerModel;
 
 type
 
@@ -96,7 +97,7 @@ type
     property CloseClick: Boolean read FCloseClick write FCloseClick;
     property CancelClick: Boolean read FCancelClick write FCancelClick;
     property ProgressMax: Integer read GetProgressMax write SetProgressMax;
-    procedure OnProgress(Position, Step: Integer; Sender: TTimeTable;
+    procedure OnProgress(Position, Step: Integer; Individual: TTimeTable;
       var Stop: Boolean);
   end;
 
@@ -117,9 +118,9 @@ begin
 end;
 
 procedure TProgressForm.OnProgress(Position, Step: Integer;
-  Sender: TTimeTable; var Stop: Boolean);
+  Individual: TTimeTable; var Stop: Boolean);
 begin
-  with Sender do
+  with Individual do
   begin
     if Position mod Step = 0 then
     begin
@@ -151,7 +152,7 @@ begin
         InvalidarValores;
       	// Update;
         with SourceDataModule do
-	        TimeTableModel.Configurar(CruceProfesor,
+	        TimeTableModel.Configure(CruceProfesor,
                                    ProfesorFraccionamiento,
                                    CruceAulaTipo,
                                    HoraHueca,
