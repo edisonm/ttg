@@ -2727,18 +2727,17 @@ end;
   end;
 }
 
-function TTimeTable.InternalDownHillEach
-  (AParalelo: Smallint; var Delta: Double): Boolean;
+function TTimeTable.InternalDownHillEach(AParalelo: Smallint; var Delta: Double): Boolean;
 var
   Periodo1, Periodo2, Duracion: Smallint;
   DValue: Double;
-  PeriodoASesion: PSmallintArray;
+  PeriodoASesion: TDynamicSmallintArray;
 begin
   with FModel do
   begin
     Result := True;
     Periodo1 := 0;
-    PeriodoASesion := @FParaleloPeriodoASesion[AParalelo, 0];
+    PeriodoASesion := FParaleloPeriodoASesion[AParalelo];
     while Periodo1 < FPeriodoCant do
     begin
       Periodo2 := Periodo1 + FSesionADuracion[PeriodoASesion[Periodo1]];
@@ -2762,46 +2761,46 @@ end;
 
 function TTimeTable.InternalDownHillEach(var Delta: Double): Boolean;
 var
-  ci, I, j, j1, d: Smallint;
-  dk: Double;
-  RandomOrdersi: array [0 .. 4095] of Smallint;
+  Counter, Paralelo, Periodo1, Periodo2, Duracion: Smallint;
+  DValue: Double;
+  RandomOrders: array [0 .. 4095] of Smallint;
   RandomValues: array [0 .. 4095] of Longint;
-  p: PSmallintArray;
+  PeriodoASesion: TDynamicSmallintArray;
 begin
   with FModel do
   begin
     Result := True;
-    for ci := 0 to FParaleloCant - 1 do
+    for Counter := 0 to FParaleloCant - 1 do
     begin
-      RandomOrdersi[ci] := ci;
-      RandomValues[ci] := rand32;
+      RandomOrders[Counter] := Counter;
+      RandomValues[Counter] := rand32;
     end;
-    SortLongint(RandomValues, RandomOrdersi, 0, FParaleloCant - 1);
-    ci := 0;
-    while ci < FParaleloCant do
+    SortLongint(RandomValues, RandomOrders, 0, FParaleloCant - 1);
+    Counter := 0;
+    while Counter < FParaleloCant do
     begin
-      I := RandomOrdersi[ci];
-      j := 0;
-      p := @FParaleloPeriodoASesion[I, 0];
-      while j < FPeriodoCant do
+      Paralelo := RandomOrders[Counter];
+      Periodo1 := 0;
+      PeriodoASesion := FParaleloPeriodoASesion[Paralelo];
+      while Periodo1 < FPeriodoCant do
       begin
-        j1 := j + FSesionADuracion[p[j]];
-        while j1 < FPeriodoCant do
+        Periodo2 := Periodo1 + FSesionADuracion[PeriodoASesion[Periodo1]];
+        while Periodo2 < FPeriodoCant do
         begin
-          d := FSesionADuracion[p[j1]];
-          dk := EvaluateInternalSwap(I, j, j1);
-          if Delta + dk < 0 then
+          Duracion := FSesionADuracion[PeriodoASesion[Periodo2]];
+          DValue := EvaluateInternalSwap(Paralelo, Periodo1, Periodo2);
+          if Delta + DValue < 0 then
           begin
-            InternalSwap(I, j, j1, True);
-            Delta := Delta + dk;
+            InternalSwap(Paralelo, Periodo1, Periodo2, True);
+            Delta := Delta + DValue;
             Result := False;
             Exit;
           end;
-          Inc(j1, d);
+          Inc(Periodo2, Duracion);
         end;
-        Inc(j, FSesionADuracion[p[j]]);
+        Inc(Periodo1, FSesionADuracion[PeriodoASesion[Periodo1]]);
       end;
-      Inc(ci);
+      Inc(Counter);
     end;
   end;
 end;
@@ -2989,60 +2988,60 @@ end;
 
 function TTimeTable.InternalDownHill(Delta: Double): Boolean;
 var
-  ci, I, j, j1, d1: Smallint;
-  dk1 {$IFDEF DEBUG}, v1, v2 {$ENDIF}: Double;
-  RandomOrdersi: array [0 .. 4095] of Smallint;
+  Counter, Paralelo, Periodo1, Periodo2, Duracion2: Smallint;
+  DValue{$IFDEF DEBUG}, Value1, Value2 {$ENDIF}: Double;
+  RandomOrders: array [0 .. 4095] of Smallint;
   RandomValues: array [0 .. 4095] of Longint;
-  p: PSmallintArray;
+  PeriodoASesion: TDynamicSmallintArray;
   { Continuar: Boolean; }
 begin
   with TimeTableModel do
   begin
-    for ci := 0 to FParaleloCant - 1 do
+    for Counter := 0 to FParaleloCant - 1 do
     begin
-      RandomOrdersi[ci] := ci;
-      RandomValues[ci] := rand32;
+      RandomOrders[Counter] := Counter;
+      RandomValues[Counter] := rand32;
     end;
-    SortLongint(RandomValues, RandomOrdersi, 0, FParaleloCant - 1);
+    SortLongint(RandomValues, RandomOrders, 0, FParaleloCant - 1);
     Result := True;
-    ci := 0;
-    while ci < FParaleloCant do
+    Counter := 0;
+    while Counter < FParaleloCant do
     begin
       { Continuar := True; }
-      I := RandomOrdersi[ci];
-      p := @FParaleloPeriodoASesion[I, 0];
-      j := 0;
-      while j < FPeriodoCant do
+      Paralelo := RandomOrders[Counter];
+      PeriodoASesion := FParaleloPeriodoASesion[Paralelo];
+      Periodo1 := 0;
+      while Periodo1 < FPeriodoCant do
       begin
-        j1 := j + FSesionADuracion[p[j]];
-        while j1 < FPeriodoCant do
+        Periodo2 := Periodo1 + FSesionADuracion[PeriodoASesion[Periodo1]];
+        while Periodo2 < FPeriodoCant do
         begin
-          d1 := FSesionADuracion[p[j1]];
+          Duracion2 := FSesionADuracion[PeriodoASesion[Periodo2]];
 {$IFDEF DEBUG}
           Update;
           CalculateValue;
-          v1 := Value;
+          Value1 := Value;
 {$ENDIF}
-          dk1 := EvaluateInternalSwap(I, j, j1);
-          if (dk1 < Delta) { or ((dk1 = 0) and ((rand32 mod 4) = 0)) } then
+          DValue := EvaluateInternalSwap(Paralelo, Periodo1, Periodo2);
+          if (DValue < Delta) { or ((DValue = 0) and ((rand32 mod 4) = 0)) } then
           begin
-            InternalSwap(I, j, j1, True);
+            InternalSwap(Paralelo, Periodo1, Periodo2, True);
 {$IFDEF DEBUG}
             Update;
             CalculateValue;
-            v2 := Value;
-            if Abs((v2 - v1) - dk1) > 0.00001 then
+            Value2 := Value;
+            if Abs((Value2 - Value1) - DValue) > 0.00001 then
               raise Exception.Create('Problemas');
 {$ENDIF}
             Result := False;
           end;
-          { Continuar := Continuar and (dk1 >= 0); }
-          Inc(j1, d1);
+          { Continuar := Continuar and (DValue >= 0); }
+          Inc(Periodo2, Duracion2);
         end;
-        Inc(j, FSesionADuracion[p[j]]);
+        Inc(Periodo1, FSesionADuracion[PeriodoASesion[Periodo1]]);
       end;
       { if Continuar then }
-      Inc(ci);
+      Inc(Counter);
     end;
   end;
 end;
@@ -3170,22 +3169,22 @@ end;
 procedure TTimeTable.SaveToFile(const AFileName: string);
 var
   VStrings: TStrings;
-  I, j: Integer;
+  Paralelo, Periodo: Integer;
 begin
   VStrings := TStringList.Create;
   with TimeTableModel do
     try
-      for I := 0 to FParaleloCant - 1 do
+      for Paralelo := 0 to FParaleloCant - 1 do
       begin
         VStrings.Add(Format('Paralelo %d %d %d',
-            [FNivelACodNivel[FParaleloANivel[I]],
-            FEspecializacionACodEspecializacion[FParaleloAEspecializacion[I]],
-            FParaleloIdACodParaleloId[FParaleloAParaleloId[I]]]));
-        for j := 0 to FPeriodoCant - 1 do
+            [FNivelACodNivel[FParaleloANivel[Paralelo]],
+            FEspecializacionACodEspecializacion[FParaleloAEspecializacion[Paralelo]],
+            FParaleloIdACodParaleloId[FParaleloAParaleloId[Paralelo]]]));
+        for Periodo := 0 to FPeriodoCant - 1 do
         begin
-          VStrings.Add(Format(' Dia %d Hora %d Materia %d', [FPeriodoADia[j],
-              FPeriodoAHora[j],
-              FMateriaACodMateria[FSesionAMateria[ParaleloPeriodoASesion[I, j]]]
+          VStrings.Add(Format(' Dia %d Hora %d Materia %d', [FPeriodoADia[Periodo],
+              FPeriodoAHora[Periodo],
+              FMateriaACodMateria[FSesionAMateria[ParaleloPeriodoASesion[Paralelo, Periodo]]]
                 ]));
         end;
       end;
@@ -3197,23 +3196,23 @@ end;
 
 procedure TTimeTable.SaveToStream(Stream: TStream);
 var
-  I: Smallint;
+  Paralelo: Smallint;
 begin
   with FModel do
-    for I := 0 to FParaleloCant - 1 do
+    for Paralelo := 0 to FParaleloCant - 1 do
     begin
-      Stream.Write(ParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint));
+      Stream.Write(ParaleloPeriodoASesion[Paralelo, 0], FPeriodoCant * SizeOf(Smallint));
     end;
 end;
 
 procedure TTimeTable.LoadFromStream(Stream: TStream);
 var
-  I: Smallint;
+  Paralelo: Smallint;
 begin
   with FModel do
-    for I := 0 to FParaleloCant - 1 do
+    for Paralelo := 0 to FParaleloCant - 1 do
     begin
-      Stream.Read(ParaleloPeriodoASesion[I, 0], FPeriodoCant * SizeOf(Smallint));
+      Stream.Read(ParaleloPeriodoASesion[Paralelo, 0], FPeriodoCant * SizeOf(Smallint));
     end;
   Update;
   FRecalculateValue := True;
