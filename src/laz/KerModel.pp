@@ -4,7 +4,7 @@ unit KerModel;
 interface
 
 uses
-  Classes, DB, Dialogs, Math, Forms, UIndivid;
+  {$IFDEF UNIX}CThreads, CMem, {$ENDIF}Classes, DB, Dialogs, Math, Forms, UIndivid;
 
 var
   SortLongint: procedure(var List1: array of Longint;
@@ -2793,7 +2793,7 @@ var
   DValue, Value1: Double;
   RandomOrders: array [0 .. 4095] of Smallint;
   RandomValues: array [0 .. 4095] of Longint;
-  PeriodoASesion: PSmallintArray;
+  PeriodoASesion: TDynamicSmallintArray;
   Stop: Boolean;
   { Continuar: Boolean; }
 begin
@@ -2836,7 +2836,7 @@ begin
       { Continuar := True; }
       Paralelo := RandomOrders[Counter];
       Periodo1 := 0;
-      PeriodoASesion := @FParaleloPeriodoASesion[Paralelo, 0];
+      PeriodoASesion := FParaleloPeriodoASesion[Paralelo];
       while Periodo1 < FPeriodoCant do
       begin
         Periodo2 := Periodo1 + FSesionADuracion[PeriodoASesion[Periodo1]];
@@ -3136,10 +3136,15 @@ procedure TSyncExecuteSQL.Execute;
 begin
   with SourceDataModule do
   begin
-    Database.ExecuteDirect(SQL.Text);
-    TbHorario.Refresh;
-    TbHorarioDetalle.Refresh;
-    //Application.ProcessMessages;
+    CheckRelations := False;
+    try
+      Database.ExecuteDirect(SQL.Text);
+      TbHorario.Refresh;
+      TbHorarioDetalle.Refresh;
+    finally
+      CheckRelations := true;
+      Application.ProcessMessages;
+    end;
   end;
 end;
 
@@ -3271,9 +3276,10 @@ var
     {$ENDIF}
   end;
 begin
-  SourceDataModule.CheckRelations := False;
   {$IFDEF USE_SQL}
   SQL := TStringList.Create;
+  {$ELSE}
+  SourceDataModule.CheckRelations := False;
   {$ENDIF}
   try
     SaveHorario;
@@ -3289,8 +3295,9 @@ begin
   finally
     {$IFDEF USE_SQL}
     SQL.Free;
-    {$ENDIF};
+    {$ELSE}
     SourceDataModule.CheckRelations := True;
+    {$ENDIF};
   end;
 end;
 

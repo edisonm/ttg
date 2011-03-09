@@ -5,9 +5,9 @@ unit FProgres;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls,
-  KerModel, KerEvolE;
+  {$IFDEF UNIX}CThreads, CMem, {$ENDIF}{$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF},
+  SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons,
+  ExtCtrls, ComCtrls, KerModel, KerEvolE;
 
 type
 
@@ -106,8 +106,9 @@ type
     constructor Create(AMax: Integer; const ACaption: string);
     destructor Destroy; override;
     procedure CreateForm;
+    procedure DestroyForm;
     procedure DoProgress;
-    procedure OnProgress(Position, Step: Integer; ASolver: TSolver;
+    procedure OnProgress(Position: Integer; ASolver: TSolver;
       var Stop: Boolean);
     property CancelClick: Boolean read FProgressForm.FCancelClick;
   end;
@@ -184,7 +185,6 @@ begin
     lblExports.Caption := Format('%d ', [NumExports]);
     lblColision.Caption := Format('%d ', [NumColision]);
   end;
-  Application.ProcessMessages;
 end;
 
 procedure TProgressForm.SetProgressMax(const Value: Integer);
@@ -227,7 +227,7 @@ end;
 
 destructor TProgressFormDrv.Destroy;
 begin
-  FProgressForm.Free;
+  TThread.Synchronize(CurrentThread, DestroyForm);
   inherited Destroy;
 end;
 
@@ -236,23 +236,30 @@ begin
   FProgressForm := TProgressForm.Create(Application);
   FProgressForm.ProgressMax := FMax;
   FProgressForm.Caption := FCaption;
+  Application.ProcessMessages;
+end;
+
+procedure TProgressFormDrv.DestroyForm;
+begin
+  FProgressForm.Free;
+  Application.ProcessMessages;
 end;
 
 procedure TProgressFormDrv.DoProgress;
 begin
   FProgressForm.DoProgress(FPosition, FSolver);
+  Application.ProcessMessages;
 end;
 
-procedure TProgressFormDrv.OnProgress(Position, Step: Integer;
-  ASolver: TSolver; var Stop: Boolean);
+procedure TProgressFormDrv.OnProgress(Position: Integer; ASolver: TSolver;
+    var Stop: Boolean);
 begin
   FPosition := Position;
   FSolver := ASolver;
-  if Position mod Step = 0 then
-    TThread.Synchronize(CurrentThread, DoProgress);
+  TThread.Synchronize(CurrentThread, DoProgress);
   with FProgressForm do
-  if (CloseClick or CancelClick) then
-    Stop := True;
+    if (CloseClick or CancelClick) then
+      Stop := True;
 end;
 
 initialization

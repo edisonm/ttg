@@ -542,7 +542,6 @@ end;
 
 procedure TMainForm.ElaborarHorarios(const SCodHorarios: string);
 var
-  Report: TStrings;
   WrongCodes: TDynamicIntegerArray;
   procedure ProcessCodList(const CodList: string);
   var

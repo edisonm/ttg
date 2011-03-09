@@ -31,7 +31,7 @@ type
 
   TSolver = class;
 
-  TProgressEvent = procedure(Progress, Step: Integer; Self: TSolver;
+  TProgressEvent = procedure(Progress: Integer; Self: TSolver;
     var Stop: Boolean) of object;
 
   { TEvolElitist }
@@ -79,6 +79,7 @@ type
       Item: TMultiThreadProcItem);
     procedure Initialize;
     procedure Evaluate;
+    procedure MakeRandom;
     procedure SelectTheBest;
     procedure Elitist;
     procedure Select;
@@ -174,6 +175,12 @@ begin
   begin
     FPopulation[Individual].LoadFromDataModule(FFixedIndividuals[Individual]);
   end;
+end;
+
+procedure TEvolElitist.MakeRandom;
+var
+  Individual: Integer;
+begin
   for Individual := Length(FFixedIndividuals) to High(FPopulation) do
   begin
     FPopulation[Individual].MakeRandom;
@@ -483,7 +490,8 @@ var
   Iteration: Integer;
 begin
   getseeds(FSeed1, FSeed2, FSeed3, FSeed4);
-  Initialize;
+  TThread.Synchronize(CurrentThread, Initialize);
+  MakeRandom;
   Evaluate;
   SelectTheBest;
   FNumImports := 0;
@@ -601,8 +609,8 @@ end;
 procedure TSolver.DoProgress(Position, RefreshInterval: Integer;
   Solver: TSolver; var Stop: Boolean);
 begin
-  if Assigned(FOnProgress) then
-    FOnProgress(Position, RefreshInterval, Self, Stop);
+  if Assigned(FOnProgress) and (Position mod RefreshInterval = 0) then
+    FOnProgress(Position, Self, Stop);
 end;
 
 { TDoubleDownHill }
