@@ -224,8 +224,8 @@ type
     procedure DoGetProfesorFraccionamiento;
     procedure UpdateDiaProfesorFraccionamiento;
     function GetDiaProfesorFraccionamiento(Dia, Profesor: Smallint): Smallint;
-    function InternalDownHillEach
-      (AParalelo: Smallint; var Delta: Double): Boolean; overload;
+    function InternalDownHillEach(AParalelo: Smallint;
+      var Delta: Double): Boolean; overload;
     function GetElitistValues(Index: Integer): Double;
 {$IFDEF DEBUG}
     procedure ErrorMsgValue(const AMethod: string);
@@ -296,11 +296,9 @@ type
     property CruceAulaTipoValor: Double read GetCruceAulaTipoValor;
     property HoraHuecaDesubicadaValor: Double read GetHoraHuecaDesubicadaValor;
     property SesionCortadaValor: Double read GetSesionCortadaValor;
-    
     property MateriaNoDispersaValor: Double read GetMateriaNoDispersaValor;
-    property ParaleloPeriodoASesion
-      : TDynamicSmallintArrayArray read FParaleloPeriodoASesion write
-      FParaleloPeriodoASesion;
+    property ParaleloPeriodoASesion: TDynamicSmallintArrayArray
+      read FParaleloPeriodoASesion write FParaleloPeriodoASesion;
     property TimeTableModel: TTimeTableModel read FModel;
     property ProfesorFraccionamiento: Integer read TablingInfo.FProfesorFraccionamiento;
   end;
@@ -311,7 +309,7 @@ procedure CrossIndividuals(var TimeTable1, TimeTable2: TTimeTable);
 implementation
 
 uses
-  SysUtils, ZSysUtils, ZConnection, MTProcs, SortAlgs, Rand, RelUtils, DSource, HorColCm;
+  SysUtils, ZSysUtils, ZConnection, MTProcs, SortAlgs, Rand, DSource, HorColCm;
 
 constructor TTimeTableModel.CreateFromDataModule(ACruceProfesorValor,
   AProfesorFraccionamientoValor, ACruceAulaTipoValor,
@@ -430,7 +428,7 @@ var
   end;
   procedure CargarParalelo;
   var
-    I, j, k, l, m: Integer;
+    Paralelo, Curso, ParaleloId, Nivel, Especializacion: Integer;
     VFieldNivel, VFieldEspecializacion, VFieldParaleloId: TField;
   begin
     with SourceDataModule.TbParalelo do
@@ -447,19 +445,19 @@ var
       VFieldNivel := FindField('CodNivel');
       VFieldEspecializacion := FindField('CodEspecializacion');
       VFieldParaleloId := FindField('CodParaleloId');
-      for I := 0 to FParaleloCant - 1 do
+      for Paralelo := 0 to FParaleloCant - 1 do
       begin
-        l := FCodNivelANivel[VFieldNivel.AsInteger - FMinCodNivel];
-        m := FCodEspecializacionAEspecializacion
+        Nivel := FCodNivelANivel[VFieldNivel.AsInteger - FMinCodNivel];
+        Especializacion := FCodEspecializacionAEspecializacion
           [VFieldEspecializacion.AsInteger - FMinCodEspecializacion];
-        j := FNivelEspecializacionACurso[l, m];
-        k := FCodParaleloIdAParaleloId[VFieldParaleloId.AsInteger -
+        Curso := FNivelEspecializacionACurso[Nivel, Especializacion];
+        ParaleloId := FCodParaleloIdAParaleloId[VFieldParaleloId.AsInteger -
           FMinCodParaleloId];
-        FParaleloACurso[I] := j;
-        FParaleloANivel[I] := l;
-        FParaleloAParaleloId[I] := k;
-        FParaleloAEspecializacion[I] := m;
-        FCursoParaleloIdAParalelo[j, k] := I;
+        FParaleloACurso[Paralelo] := Curso;
+        FParaleloANivel[Paralelo] := Nivel;
+        FParaleloAParaleloId[Paralelo] := ParaleloId;
+        FParaleloAEspecializacion[Paralelo] := Especializacion;
+        FCursoParaleloIdAParalelo[Curso, ParaleloId] := Paralelo;
         Next;
       end;
       First;
@@ -467,7 +465,7 @@ var
   end;
   procedure CargarAulaTipo;
   var
-    I: Integer;
+    Cantidad: Integer;
     VFieldCantidad: TField;
   begin
     with SourceDataModule.TbAulaTipo do
@@ -476,9 +474,9 @@ var
       First;
       SetLength(FAulaTipoACantidad, RecordCount);
       VFieldCantidad := FindField('Cantidad');
-      for I := 0 to RecordCount - 1 do
+      for Cantidad := 0 to RecordCount - 1 do
       begin
-        FAulaTipoACantidad[I] := VFieldCantidad.AsInteger;
+        FAulaTipoACantidad[Cantidad] := VFieldCantidad.AsInteger;
         Next;
       end;
       First;
@@ -486,9 +484,9 @@ var
   end;
   procedure CargarMateriaProhibicionTipo;
   var
-    I: Integer;
+    MateriaProhibicionTipo: Integer;
     VFieldValor: TField;
-    dMaxMateriaProhibicionTipoValor: Double;
+    MaxMateriaProhibicionTipoValor: Double;
   begin
     with SourceDataModule.TbMateriaProhibicionTipo do
     begin
@@ -496,16 +494,16 @@ var
       First;
       VFieldValor := FindField('ValMateProhibicionTipo');
       FMaxMateriaProhibicionTipo := -1;
-      dMaxMateriaProhibicionTipoValor := -1.7E308;
+      MaxMateriaProhibicionTipoValor := -1.7E308;
       FMateriaProhibicionTipoAValor[-1] := 0;
-      for I := 0 to RecordCount - 1 do
+      for MateriaProhibicionTipo := 0 to RecordCount - 1 do
       begin
-        FMateriaProhibicionTipoAValor[I] := VFieldValor.AsFloat;
-        if dMaxMateriaProhibicionTipoValor < FMateriaProhibicionTipoAValor[I]
+        FMateriaProhibicionTipoAValor[MateriaProhibicionTipo] := VFieldValor.AsFloat;
+        if MaxMateriaProhibicionTipoValor < FMateriaProhibicionTipoAValor[MateriaProhibicionTipo]
           then
         begin
-          dMaxMateriaProhibicionTipoValor := FMateriaProhibicionTipoAValor[I];
-          FMaxMateriaProhibicionTipo := I;
+          MaxMateriaProhibicionTipoValor := FMateriaProhibicionTipoAValor[MateriaProhibicionTipo];
+          FMaxMateriaProhibicionTipo := MateriaProhibicionTipo;
         end;
         Next;
       end;
@@ -514,7 +512,7 @@ var
   end;
   procedure CargarProfesorProhibicionTipo;
   var
-    I: Integer;
+    ProfesorProhibicionTipo: Integer;
     VFieldValor: TField;
   begin
     with SourceDataModule.TbProfesorProhibicionTipo do
@@ -525,14 +523,14 @@ var
       FMaxProfesorProhibicionTipo := -1;
       FMaxProfesorProhibicionTipoValor := -1.7E308;
       FProfesorProhibicionTipoAValor[-1] := 0;
-      for I := 0 to RecordCount - 1 do
+      for ProfesorProhibicionTipo := 0 to RecordCount - 1 do
       begin
-        FProfesorProhibicionTipoAValor[I] := VFieldValor.AsFloat;
-        if FMaxProfesorProhibicionTipoValor < FProfesorProhibicionTipoAValor[I]
+        FProfesorProhibicionTipoAValor[ProfesorProhibicionTipo] := VFieldValor.AsFloat;
+        if FMaxProfesorProhibicionTipoValor < FProfesorProhibicionTipoAValor[ProfesorProhibicionTipo]
           then
         begin
-          FMaxProfesorProhibicionTipoValor := FProfesorProhibicionTipoAValor[I];
-          FMaxProfesorProhibicionTipo := I;
+          FMaxProfesorProhibicionTipoValor := FProfesorProhibicionTipoAValor[ProfesorProhibicionTipo];
+          FMaxProfesorProhibicionTipo := ProfesorProhibicionTipo;
         end;
         Next;
       end;
@@ -541,7 +539,7 @@ var
   end;
   procedure CargarMateriaProhibicion;
   var
-    I, j, k, l: Integer;
+    Materia, MateriaProhibicion, Periodo, MateriaProhibicionTipo: Integer;
     VFieldMateria, VFieldDia, VFieldHora, VFieldMateriaProhibicionTipo: TField;
   begin
     with SourceDataModule.TbMateriaProhibicion do
@@ -554,25 +552,25 @@ var
       SetLength(FMateriaProhibicionAValor, RecordCount);
       SetLength(FMateriaPeriodoAMateriaProhibicionTipo, FMateriaCant,
         FPeriodoCant);
-      for I := 0 to FMateriaCant - 1 do
-        FillChar(FMateriaPeriodoAMateriaProhibicionTipo[I, 0],
+      for Materia := 0 to FMateriaCant - 1 do
+        FillChar(FMateriaPeriodoAMateriaProhibicionTipo[Materia, 0],
           FPeriodoCant * SizeOf(Shortint), #$FF);
       VFieldMateria := FindField('CodMateria');
       VFieldDia := FindField('CodDia');
       VFieldHora := FindField('CodHora');
       VFieldMateriaProhibicionTipo := FindField('CodMateProhibicionTipo');
-      for I := 0 to RecordCount - 1 do
+      for MateriaProhibicion := 0 to RecordCount - 1 do
       begin
-        j := FCodMateriaAMateria[VFieldMateria.AsInteger - FMinCodMateria];
-        k := FDiaHoraAPeriodo[FCodDiaADia[VFieldDia.AsInteger - FMinCodDia],
+        Materia := FCodMateriaAMateria[VFieldMateria.AsInteger - FMinCodMateria];
+        Periodo := FDiaHoraAPeriodo[FCodDiaADia[VFieldDia.AsInteger - FMinCodDia],
           FCodHoraAHora[VFieldHora.AsInteger - FMinCodHora]];
-        l := FCodMateProhibicionTipoAMateriaProhibicionTipo
+        MateriaProhibicionTipo := FCodMateProhibicionTipoAMateriaProhibicionTipo
           [VFieldMateriaProhibicionTipo.AsInteger - FMinCodMateProhibicionTipo];
-        FMateriaProhibicionAMateria[I] := j;
-        FMateriaProhibicionAPeriodo[I] := k;
-        FMateriaProhibicionAMateriaProhibicionTipo[I] := l;
-        FMateriaProhibicionAValor[I] := FMateriaProhibicionTipoAValor[l];
-        FMateriaPeriodoAMateriaProhibicionTipo[j, k] := l;
+        FMateriaProhibicionAMateria[MateriaProhibicion] := Materia;
+        FMateriaProhibicionAPeriodo[MateriaProhibicion] := Periodo;
+        FMateriaProhibicionAMateriaProhibicionTipo[Materia] := MateriaProhibicionTipo;
+        FMateriaProhibicionAValor[MateriaProhibicion] := FMateriaProhibicionTipoAValor[MateriaProhibicionTipo];
+        FMateriaPeriodoAMateriaProhibicionTipo[Materia, Periodo] := MateriaProhibicionTipo;
         Next;
       end;
       First;
@@ -580,9 +578,9 @@ var
   end;
   procedure CargarProfesorProhibicion;
   var
-    I, j, k, l: Integer;
-    v: Double;
-    p, h, d: Smallint;
+    ProfesorProhibicion, Profesor, Periodo, ProfesorProhibicionTipo: Integer;
+    Valor: Double;
+    Hora, Dia: Smallint;
     VFieldProfesor, VFieldDia, VFieldHora,
       VFieldProfesorProhibicionTipo: TField;
   begin
@@ -596,32 +594,32 @@ var
       SetLength(FProfesorProhibicionAValor, RecordCount);
       SetLength(FProfesorPeriodoAProfesorProhibicionTipo, FProfesorCant,
         FPeriodoCant);
-      for p := 0 to FProfesorCant - 1 do
-        FillChar(FProfesorPeriodoAProfesorProhibicionTipo[p, 0],
+      for Profesor := 0 to FProfesorCant - 1 do
+        FillChar(FProfesorPeriodoAProfesorProhibicionTipo[Profesor, 0],
           FPeriodoCant * SizeOf(Shortint), #$FF);
       VFieldProfesor := FindField('CodProfesor');
       VFieldHora := FindField('CodHora');
       VFieldDia := FindField('CodDia');
       VFieldProfesorProhibicionTipo := FindField('CodProfProhibicionTipo');
-      for I := 0 to RecordCount - 1 do
+      for ProfesorProhibicion := 0 to RecordCount - 1 do
       begin
-        j := FCodProfesorAProfesor[VFieldProfesor.AsInteger - FMinCodProfesor];
-        d := FCodDiaADia[VFieldDia.AsInteger - FMinCodDia];
-        h := FCodHoraAHora[VFieldHora.AsInteger - FMinCodHora];
-        k := FDiaHoraAPeriodo[d, h];
-        l := FCodProfProhibicionTipoAProfesorProhibicionTipo
+        Profesor := FCodProfesorAProfesor[VFieldProfesor.AsInteger - FMinCodProfesor];
+        Dia := FCodDiaADia[VFieldDia.AsInteger - FMinCodDia];
+        Hora := FCodHoraAHora[VFieldHora.AsInteger - FMinCodHora];
+        Periodo := FDiaHoraAPeriodo[Dia, Hora];
+        ProfesorProhibicionTipo := FCodProfProhibicionTipoAProfesorProhibicionTipo
           [VFieldProfesorProhibicionTipo.AsInteger -
           FMinCodProfProhibicionTipo];
-        FProfesorProhibicionAProfesor[I] := j;
-        FProfesorProhibicionAPeriodo[I] := k;
-        FProfesorProhibicionAProfesorProhibicionTipo[I] := l;
-        v := FProfesorProhibicionTipoAValor[l];
-        FProfesorProhibicionAValor[I] := v;
-        if v = FMaxProfesorProhibicionTipoValor then
+        FProfesorProhibicionAProfesor[ProfesorProhibicion] := Profesor;
+        FProfesorProhibicionAPeriodo[ProfesorProhibicion] := Periodo;
+        FProfesorProhibicionAProfesorProhibicionTipo[ProfesorProhibicion] := ProfesorProhibicionTipo;
+        Valor := FProfesorProhibicionTipoAValor[ProfesorProhibicionTipo];
+        FProfesorProhibicionAValor[ProfesorProhibicion] := Valor;
+        if Valor = FMaxProfesorProhibicionTipoValor then
         begin
-          Inc(FProfesorCantHora[j]);
+          Inc(FProfesorCantHora[Profesor]);
         end;
-        FProfesorPeriodoAProfesorProhibicionTipo[j, k] := l;
+        FProfesorPeriodoAProfesorProhibicionTipo[Profesor, Periodo] := ProfesorProhibicionTipo;
         Next;
       end;
       First;
@@ -1341,7 +1339,7 @@ end;
 
 procedure TTimeTable.MutateDia;
 var
-  AulaTipo, Paralelo, Dia1, Dia2, Periodo, MinPeriodo1, MinPeriodo2,
+  AulaTipo, Paralelo, Dia1, Dia2, MinPeriodo1, MinPeriodo2,
     DPeriodo1, DPeriodo2, MaxPeriodo1, MaxPeriodo2: Smallint;
   b: array [0 .. 16383] of Smallint;
   PeriodoASesion: TDynamicSmallintArray;

@@ -80,11 +80,11 @@ unit Rand;
   Recuerde que la pirateria esta penada por la Ley.
 
   Edison Mera.
-  edmera@gmail.com
+  efmera@gmail.com
 
 *******************************************************************************)
 
-{ $DEFINE USEASSEMBLER}
+{.$DEFINE USEASSEMBLER}
 
 interface
 
@@ -120,7 +120,7 @@ procedure FillRandom(var X; Count: Integer);
 
 // Funcion que llena un arreglo de Longint con numeros generados aleatoriamente,
 // de 31 bits.
-procedure Fillcrand32(var X: array of Longint; Count: Integer);
+procedure Fillcrand32(out X: array of Longint; Count: Integer);
 
 // aleatorizador, tomando el tiempo para calcular la semilla:
 procedure srandom;
@@ -133,7 +133,7 @@ const
   MULTIPLIER1: LongInt = 2006575059; //m1
   MULTIPLIER2: LongInt = 1219071924; //m2
 
-var
+threadvar
   Seed1: Longint;
   Seed2: Longint;
   Seed3: Longint;
@@ -319,7 +319,7 @@ begin
     PByteArray(@(PInt64Array(@X)^[i]))^[j] := PByteArray(@k)^[j];
 end;
 
-procedure Fillcrand32(var X: array of Longint; Count: Integer);
+procedure Fillcrand32(out X: array of Longint; Count: Integer);
 type
   PInt64Array = ^TInt64Array;
   TInt64Array = array[0..4095] of Int64;

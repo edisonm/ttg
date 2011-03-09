@@ -317,7 +317,7 @@ var
   MomentoInicial, EndTime: TDateTime;
   SNewCodHorario: string;
   va: Double;
-  ProgressForm: TProgressForm;
+  ProgressFormDrv: TProgressFormDrv;
 begin
   CodHorarioFuente := SourceDataModule.TbHorario.FindField('CodHorario').AsInteger;
   SNewCodHorario := IntToStr(MasterDataModule.NewCodHorario);
@@ -338,11 +338,12 @@ begin
     MainForm.Pasada := 0;
     try
       MainForm.Step := 1;
-      ProgressForm := TProgressForm.Create(Application);
+      ProgressFormDrv := TProgressFormDrv.Create(
+        TimeTableModel.SesionCantidadDoble,
+        Format('Mejorando Horario [%d] en [%d]',
+          [CodHorarioFuente, CodHorarioDestino]));
       TimeTable := TTimeTable.Create(TimeTableModel);
       DoubleDownHill := TDoubleDownHill.Create(TimeTable);
-      ProgressForm.Caption := Format('Mejorando Horario [%d] en [%d]',
-         [CodHorarioFuente, CodHorarioDestino]);
       try
         {if s = '' then
           TimeTable.MakeRandom
@@ -350,10 +351,9 @@ begin
         TimeTable.LoadFromDataModule(CodHorarioFuente);
         va := TimeTable.Value;
         TimeTable.DownHillForced;
-        ProgressForm.ProgressMax := TimeTableModel.SesionCantidadDoble;
-        DoubleDownHill.OnProgress := ProgressForm.OnProgress;
+        DoubleDownHill.OnProgress := ProgressFormDrv.OnProgress;
         DoubleDownHill.Execute(MasterDataModule.ConfigStorage.RefreshInterval);
-        if not ProgressForm.CancelClick then
+        if not ProgressFormDrv.CancelClick then
         begin
           EndTime := Now;
           Report := TStringList.Create;
@@ -374,7 +374,7 @@ begin
           end;
         end;
       finally
-        ProgressForm.Free;
+        ProgressFormDrv.Free;
         TimeTable.Free;
       end;
     finally

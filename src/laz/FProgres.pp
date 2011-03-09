@@ -80,29 +80,36 @@ type
     procedure FormCreate(Sender: TObject);
   private
     FInit: TDateTime;
-    FPosition: Integer;
-    FSolver: TSolver;
     FCloseClick:Boolean;
     FCancelClick: Boolean;
     function GetProgressMax: Integer;
     procedure SetProgressMax(const Value: Integer);
     { Private declarations }
   public
-    procedure SetValues(APosition, ACruceProfesor: Integer;
-      AProfesorFraccionamiento: Double; ACruceAulaTipo, AHoraHuecaDesubicada,
-      ASesionCortada, AMateriaProhibicion, AProfesorProhibicion,
-      AMateriaNoDispersa: Integer;
-      ACruceProfesorValor, AProfesorFraccionamientoValor, ACruceAulaTipoValor,
-      AHoraHuecaDesubicadaValor, ASesioncortadaValor, AMateriaProhibicionValor,
-      AProfesorProhibicionValor, AMateriaNoDispersaValor, AValue: Double);
     { Public declarations }
     property CloseClick: Boolean read FCloseClick write FCloseClick;
     property CancelClick: Boolean read FCancelClick write FCancelClick;
     property ProgressMax: Integer read GetProgressMax write SetProgressMax;
+    procedure DoProgress(APosition: Integer; ASolver: TSolver);
+  end;
+
+  { TProgressFormDrv }
+
+  TProgressFormDrv = class
+  private
+    FProgressForm: TProgressForm;
+    FMax: Integer;
+    FCaption: string;
+    FPosition: Integer;
+    FSolver: TSolver;
+  public
+    constructor Create(AMax: Integer; const ACaption: string);
+    destructor Destroy; override;
+    procedure CreateForm;
+    procedure DoProgress;
     procedure OnProgress(Position, Step: Integer; ASolver: TSolver;
       var Stop: Boolean);
-    procedure DoProgress;
-    procedure OnPollinate(EvolElitist: TEvolElitist);
+    property CancelClick: Boolean read FProgressForm.FCancelClick;
   end;
 
 implementation
@@ -121,21 +128,11 @@ begin
   Result := PBProgress.Max;
 end;
 
-procedure TProgressForm.OnProgress(Position, Step: Integer;
-  ASolver: TSolver; var Stop: Boolean);
-begin
-  FPosition := Position;
-  FSolver := ASolver;
-  if Position mod Step = 0 then
-    TThread.Synchronize(CurrentThread, DoProgress);
-  if (CloseClick or CancelClick) then
-    Stop := True;
-end;
-procedure TProgressForm.DoProgress;
+procedure TProgressForm.DoProgress(APosition: Integer; ASolver: TSolver);
 var
   t: TDateTime;
 begin
-  with FSolver, BestIndividual do
+  with ASolver, BestIndividual do
   begin
       {
       if FAjustar then
@@ -154,15 +151,11 @@ begin
       }
     t := Now - FInit;
     lblElapsedTime.Caption := FormatDateTime('hh:nn:ss ', t);
-    if FPosition <> 0 then
+    if APosition <> 0 then
       lblRemainingTime.Caption := FormatDateTime('hh:nn:ss ',
-        t * (PBProgress.Max - FPosition) / FPosition);
-    lblPosition.Caption := Format('%d ', [FPosition]);
-    with PBProgress do
-    begin
-      Position := FPosition;
-      Hint := Format('%d de %d', [FPosition, Max]);
-    end;
+        t * (PBProgress.Max - APosition) / APosition);
+    lblPosition.Caption := Format('%d/%d', [APosition, PBProgress.Max]);
+    PBProgress.Position := APosition;
     lblCruceProfesor.Caption := Format('%d ', [CruceProfesor]);
     lblProfesorFraccionamiento.Caption :=
       Format('%d ', [ProfesorFraccionamiento]);
@@ -184,41 +177,19 @@ begin
     lblMateriaNoDispersaValor.Caption := Format('%8.2f ', [MateriaNoDispersaValor]);
     lblValorTotal.Caption := Format('%8.2f ', [Value]);
   end;
-  if FSolver is TEvolElitist then
-  with TEvolElitist(FSolver) do
-  begin
-      lblImports.Caption := Format('%d ', [NumImports]);
-      lblExports.Caption := Format('%d ', [NumExports]);
-      lblColision.Caption := Format('%d ', [NumColision]);
-  end;
-  Application.ProcessMessages;
-end;
-
-procedure TProgressForm.OnPollinate(EvolElitist: TEvolElitist);
-begin
-  with EvolElitist do
+  if ASolver is TEvolElitist then
+  with TEvolElitist(ASolver) do
   begin
     lblImports.Caption := Format('%d ', [NumImports]);
     lblExports.Caption := Format('%d ', [NumExports]);
     lblColision.Caption := Format('%d ', [NumColision]);
   end;
+  Application.ProcessMessages;
 end;
 
 procedure TProgressForm.SetProgressMax(const Value: Integer);
 begin
   PBProgress.Max := Value;
-end;
-
-procedure TProgressForm.SetValues(APosition, ACruceProfesor: Integer;
-  AProfesorFraccionamiento: Double; ACruceAulaTipo, AHoraHuecaDesubicada,
-  ASesionCortada, AMateriaProhibicion, AProfesorProhibicion,
-  AMateriaNoDispersa: Integer; ACruceProfesorValor, AProfesorFraccionamientoValor,
-  ACruceAulaTipoValor, AHoraHuecaDesubicadaValor, ASesioncortadaValor,
-  AMateriaProhibicionValor, AProfesorProhibicionValor, AMateriaNoDispersaValor,
-  AValue: Double);
-var
-  t: TDateTime;
-begin
 end;
 
 procedure TProgressForm.bbtnCancelClick(Sender: TObject);
@@ -242,6 +213,46 @@ begin
   FCloseClick := False;
   FCancelClick := False;
   Show;
+end;
+
+{ TProgressFormDrv }
+
+constructor TProgressFormDrv.Create(AMax: Integer; const ACaption: string);
+begin
+  inherited Create;
+  FMax := AMax;
+  FCaption := ACaption;
+  TThread.Synchronize(CurrentThread, CreateForm);
+end;
+
+destructor TProgressFormDrv.Destroy;
+begin
+  FProgressForm.Free;
+  inherited Destroy;
+end;
+
+procedure TProgressFormDrv.CreateForm;
+begin
+  FProgressForm := TProgressForm.Create(Application);
+  FProgressForm.ProgressMax := FMax;
+  FProgressForm.Caption := FCaption;
+end;
+
+procedure TProgressFormDrv.DoProgress;
+begin
+  FProgressForm.DoProgress(FPosition, FSolver);
+end;
+
+procedure TProgressFormDrv.OnProgress(Position, Step: Integer;
+  ASolver: TSolver; var Stop: Boolean);
+begin
+  FPosition := Position;
+  FSolver := ASolver;
+  if Position mod Step = 0 then
+    TThread.Synchronize(CurrentThread, DoProgress);
+  with FProgressForm do
+  if (CloseClick or CancelClick) then
+    Stop := True;
 end;
 
 initialization
