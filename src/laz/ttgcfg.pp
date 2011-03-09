@@ -69,8 +69,8 @@ type
     procedure SetRepairProb(Value: Extended);
     function GetHorarioIni: string;
     procedure SetHorarioIni(const Value: string);
-    function GetCompartir: string;
-    procedure SetCompartir(const Value: string);
+    function GetSharedDirectory: string;
+    procedure SetSharedDirectory(const Value: string);
     function SetPollinationFreq: Integer;
     procedure SetRangoPolinizacion(Value: Integer);
     function GetApplyDoubleDownHill: Boolean;
@@ -106,7 +106,7 @@ type
     property Mutation2Prob: Extended read GetMutation2Prob write SetMutation2Prob;
     property RepairProb: Extended read GetRepairProb write SetRepairProb;
     property HorarioIni: string read GetHorarioIni write SetHorarioIni;
-    property Compartir: string read GetCompartir write SetCompartir;
+    property SharedDirectory: string read GetSharedDirectory write SetSharedDirectory;
     property PollinationFreq: Integer read SetPollinationFreq write SetRangoPolinizacion;
     property ApplyDoubleDownHill: Boolean read GetApplyDoubleDownHill write SetApplyDoubleDownHill;
   end;
@@ -396,12 +396,12 @@ begin
   Values['edtHorarioIni_Text'] := Value;
 end;
 
-function TTTGConfig.GetCompartir: string;
+function TTTGConfig.GetSharedDirectory: string;
 begin
   Result := Values['dedCompartir_Text'];
 end;
 
-procedure TTTGConfig.SetCompartir(const Value: string);
+procedure TTTGConfig.SetSharedDirectory(const Value: string);
 begin
   Values['dedCompartir_Text'] := Value;
 end;
@@ -458,7 +458,7 @@ begin
   RepairProb := 0.2;
   ApplyDoubleDownHill := False;
   HorarioIni := '';
-  Compartir := '';
+  SharedDirectory := '';
   PollinationFreq := 1;
 end;
 

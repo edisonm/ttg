@@ -65,10 +65,10 @@ object ConfiguracionForm: TConfiguracionForm
     Height = 360
     Top = 8
     Width = 473
-    ActivePage = tbsUnidadEducativa
+    ActivePage = tbsOpciones
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
@@ -203,7 +203,7 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsOpciones: TTabSheet
       Caption = 'Opciones'
-      ClientHeight = 324
+      ClientHeight = 325
       ClientWidth = 465
       ImageIndex = 3
       object Label19: TLabel
@@ -344,17 +344,20 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 252
         TabOrder = 6
       end
-      object dedCompartir: TEdit
+      object dedSharedDirectory: TDirectoryEdit
         Left = 205
         Height = 23
-        Top = 175
-        Width = 252
+        Top = 176
+        Width = 229
+        ShowHidden = False
+        ButtonWidth = 23
+        NumGlyphs = 0
         TabOrder = 7
       end
     end
     object tbsPesos: TTabSheet
       Caption = 'Pesos'
-      ClientHeight = 324
+      ClientHeight = 325
       ClientWidth = 465
       object Label1: TLabel
         Left = 8
@@ -595,7 +598,7 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsAlgoritmoEvolutivo: TTabSheet
       Caption = 'Algoritmo Evolutivo'
-      ClientHeight = 324
+      ClientHeight = 325
       ClientWidth = 465
       ImageIndex = 1
       object Label8: TLabel

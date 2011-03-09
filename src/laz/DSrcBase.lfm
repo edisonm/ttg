@@ -2,7 +2,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   OnCreate = DataModuleCreate
   OnDestroy = nil
   Height = 480
-  HorizontalOffset = 25
+  HorizontalOffset = 27
   VerticalOffset = 0
   Width = 928
   object TbAulaTipo: TZTable[1]

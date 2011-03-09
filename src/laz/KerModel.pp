@@ -252,8 +252,8 @@ type
     function EvaluateInternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint): Double;
     procedure InternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint;
       FueEvaluado: Boolean = False);
-    function InternalDownHillOptimized(Step: Integer): Boolean;
-    procedure InternalDownHillOptimizedForced(Step: Integer);
+    function InternalDownHillOptimized: Boolean;
+    procedure InternalDownHillOptimizedForced;
     procedure SaveToFile(const AFileName: string);
     procedure SaveToDataModule(CodHorario: Integer;
       MomentoInicial, MomentoFinal: TDateTime; Informe: TStrings);
@@ -311,7 +311,7 @@ procedure CrossIndividuals(var TimeTable1, TimeTable2: TTimeTable);
 implementation
 
 uses
-  SysUtils, SortAlgs, Rand, DSource, HorColCm;
+  SysUtils, ZSysUtils, ZConnection, MTProcs, SortAlgs, Rand, RelUtils, DSource, HorColCm;
 
 constructor TTimeTableModel.CreateFromDataModule(ACruceProfesorValor,
   AProfesorFraccionamientoValor, ACruceAulaTipoValor,
@@ -2788,7 +2788,7 @@ begin
   end;
 end;
 
-function TTimeTable.InternalDownHillOptimized(Step: Integer): Boolean;
+function TTimeTable.InternalDownHillOptimized: Boolean;
 var
   Periodo, Periodo1, Periodo2, Duracion1, Duracion2, Counter, Profesor,
     Paralelo, Sesion, MaxParalelo: Smallint;
@@ -2963,13 +2963,13 @@ begin
   Result := Self;
 end;
 
-procedure TTimeTable.InternalDownHillOptimizedForced(Step: Integer);
+procedure TTimeTable.InternalDownHillOptimizedForced;
 var
   b: Boolean;
 begin
   b := True;
   repeat
-    b := b and InternalDownHillOptimized(Step);
+    b := b and InternalDownHillOptimized;
   until b;
   RecalculateValue := RecalculateValue or not b;
 end;
@@ -3113,12 +3113,63 @@ begin
   FRecalculateValue := True;
 end;
 
+type
+
+  { TSyncExecuteSQL }
+
+  TSyncExecuteSQL = class
+  private
+    SQL: TStrings;
+  public
+    constructor Create(ASQL: TStrings);
+    procedure Execute;
+    procedure ExecuteSync;
+  end;
+
+{ TSyncExecuteSQL }
+
+constructor TSyncExecuteSQL.Create(ASQL: TStrings);
+begin
+  inherited Create;
+  SQL := ASQL;
+end;
+
+procedure TSyncExecuteSQL.Execute;
+begin
+  with SourceDataModule do
+  begin
+    Database.ExecuteDirect(SQL.Text);
+    TbHorario.Refresh;
+    TbHorarioDetalle.Refresh;
+    //Application.ProcessMessages;
+  end;
+end;
+
+procedure TSyncExecuteSQL.ExecuteSync;
+begin
+  TThread.Synchronize(CurrentThread, Execute);
+end;
+
 procedure TTimeTable.SaveToDataModule(CodHorario: Integer;
   MomentoInicial, MomentoFinal: TDateTime; Informe: TStrings);
 var
-  Stream: TStream;
+  {$IFDEF USE_SQL}
+  SQL: TStrings;
+  {$ENDIF}
   procedure SaveHorario;
+  {$IFNDEF USE_SQL}
+  var
+    Stream: TStream;
+  {$ENDIF}
   begin
+    {$IFDEF USE_SQL}
+    SQL.Add(Format('INSERT INTO Horario(CodHorario,MomentoInicial,MomentoFinal,Informe) ' +
+      'VALUES (%d,"%s","%s","%s");', [
+      CodHorario,
+      DateTimeToAnsiSQLDate(MomentoInicial),
+      DateTimeToAnsiSQLDate(MomentoFinal),
+      Informe.Text]));
+    {$ELSE}
     with SourceDataModule, TbHorario do
     begin
       DisableControls;
@@ -3141,20 +3192,17 @@ var
         EnableControls;
       end;
     end;
+    {$ENDIF}
   end;
   procedure SaveHorarioDetalle;
   var
     Paralelo, Periodo, CodNivel, CodParaleloId, CodEspecializacion, Sesion: Integer;
-    {$IFDEF USE_SQL}
-    SQL: TStrings;
-    {$ELSE}
+    {$IFNDEF USE_SQL}
     FieldHorario, FieldNivel, FieldParaleloId, FieldEspecializacion, FieldDia,
       FieldHora, FieldMateria, FieldSesion: TField;
     {$ENDIF}
   begin
   {$IFDEF USE_SQL}
-    SQL := TStringList.Create;
-    try
       with TimeTableModel do
       for Paralelo := 0 to FParaleloCant - 1 do
       begin
@@ -3179,11 +3227,6 @@ var
           end;
         end;
       end;
-      SourceDataModule.Database.ExecuteDirect(SQL.Text);
-      SourceDataModule.TbHorarioDetalle.Refresh;
-    finally
-      SQL.Free;
-    end;
     {$ELSE}
     with SourceDataModule.TbHorarioDetalle do
     begin
@@ -3231,10 +3274,24 @@ var
   end;
 begin
   SourceDataModule.CheckRelations := False;
+  {$IFDEF USE_SQL}
+  SQL := TStringList.Create;
+  {$ENDIF}
   try
     SaveHorario;
     SaveHorarioDetalle;
+    {$IFDEF USE_SQL}
+    with TSyncExecuteSQL.Create(SQL) do
+    try
+      ExecuteSync;
+    finally
+      Free;
+    end;
+    {$ENDIF}
   finally
+    {$IFDEF USE_SQL}
+    SQL.Free;
+    {$ENDIF};
     SourceDataModule.CheckRelations := True;
   end;
 end;

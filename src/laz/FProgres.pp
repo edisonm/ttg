@@ -6,7 +6,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls, UIndivid,
+  Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls,
   KerModel, KerEvolE;
 
 type
@@ -80,6 +80,8 @@ type
     procedure FormCreate(Sender: TObject);
   private
     FInit: TDateTime;
+    FPosition: Integer;
+    FSolver: TSolver;
     FCloseClick:Boolean;
     FCancelClick: Boolean;
     function GetProgressMax: Integer;
@@ -97,12 +99,16 @@ type
     property CloseClick: Boolean read FCloseClick write FCloseClick;
     property CancelClick: Boolean read FCancelClick write FCancelClick;
     property ProgressMax: Integer read GetProgressMax write SetProgressMax;
-    procedure OnProgress(Position, Step: Integer; Solver: TSolver;
+    procedure OnProgress(Position, Step: Integer; ASolver: TSolver;
       var Stop: Boolean);
+    procedure DoProgress;
     procedure OnPollinate(EvolElitist: TEvolElitist);
   end;
 
 implementation
+
+uses
+  MTProcs;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -116,30 +122,21 @@ begin
 end;
 
 procedure TProgressForm.OnProgress(Position, Step: Integer;
-  Solver: TSolver; var Stop: Boolean);
+  ASolver: TSolver; var Stop: Boolean);
 begin
-  with Solver, BestIndividual do
+  FPosition := Position;
+  FSolver := ASolver;
+  if Position mod Step = 0 then
+    TThread.Synchronize(CurrentThread, DoProgress);
+  if (CloseClick or CancelClick) then
+    Stop := True;
+end;
+procedure TProgressForm.DoProgress;
+var
+  t: TDateTime;
+begin
+  with FSolver, BestIndividual do
   begin
-    if Position mod Step = 0 then
-    begin
-      SetValues(Position,
-                CruceProfesor,
-                ProfesorFraccionamiento,
-                CruceAulaTipo,
-                HoraHuecaDesubicada,
-                SesionCortada,
-                MateriaProhibicion,
-                ProfesorProhibicion,
-                MateriaNoDispersa,
-                CruceProfesorValor,
-                ProfesorFraccionamientoValor,
-                CruceAulaTipoValor,
-                HoraHuecaDesubicadaValor,
-                SesionCortadaValor,
-                MateriaProhibicionValor,
-                ProfesorProhibicionValor,
-                MateriaNoDispersaValor,
-                Value);
       {
       if FAjustar then
       begin
@@ -155,17 +152,46 @@ begin
         FAjustar := False;
       end;
       }
-      if Solver is TEvolElitist then
-      begin
-        lblImports.Caption := Format('%d ', [TEvolElitist(Solver).NumImports]);
-        lblExports.Caption := Format('%d ', [TEvolElitist(Solver).NumExports]);
-        lblColision.Caption := Format('%d ', [TEvolElitist(Solver).NumColision]);
-      end;
-      if (CloseClick or CancelClick) then
-        Stop := True;
-      Application.ProcessMessages;
+    t := Now - FInit;
+    lblElapsedTime.Caption := FormatDateTime('hh:nn:ss ', t);
+    if FPosition <> 0 then
+      lblRemainingTime.Caption := FormatDateTime('hh:nn:ss ',
+        t * (PBProgress.Max - FPosition) / FPosition);
+    lblPosition.Caption := Format('%d ', [FPosition]);
+    with PBProgress do
+    begin
+      Position := FPosition;
+      Hint := Format('%d de %d', [FPosition, Max]);
     end;
+    lblCruceProfesor.Caption := Format('%d ', [CruceProfesor]);
+    lblProfesorFraccionamiento.Caption :=
+      Format('%d ', [ProfesorFraccionamiento]);
+    lblCruceAulaTipo.Caption := Format('%d ', [CruceAulaTipo]);
+    lblHoraHuecaDesubicada.Caption := Format('%d ', [HoraHuecaDesubicada]);
+    lblSesionCortada.Caption := Format('%d ', [SesionCortada]);
+    lblMateriaProhibicion.Caption := Format('%d ', [MateriaProhibicion]);
+    lblProfesorProhibicion.Caption := Format('%d ', [ProfesorProhibicion]);
+    lblMateriaNoDispersa.Caption := Format('%d ', [MateriaNoDispersa]);
+    lblCruceProfesorValor.Caption := Format('%8.2f ', [CruceProfesorValor]);
+    lblProfesorFraccionamientoValor.Caption :=
+      Format('%8.2f ', [ProfesorFraccionamientoValor]);
+    lblCruceAulaTipoValor.Caption := Format('%8.2f ', [CruceAulaTipoValor]);
+    lblHoraHuecaDesubicadaValor.Caption := Format('%8.2f ',
+      [HoraHuecaDesubicadaValor]);
+    lblSesionCortadaValor.Caption := Format('%8.2f ', [SesionCortadaValor]);
+    lblMateriaProhibicionValor.Caption := Format('%8.2f ', [MateriaProhibicionValor]);
+    lblProfesorProhibicionValor.Caption := Format('%8.2f ', [ProfesorProhibicionValor]);
+    lblMateriaNoDispersaValor.Caption := Format('%8.2f ', [MateriaNoDispersaValor]);
+    lblValorTotal.Caption := Format('%8.2f ', [Value]);
   end;
+  if FSolver is TEvolElitist then
+  with TEvolElitist(FSolver) do
+  begin
+      lblImports.Caption := Format('%d ', [NumImports]);
+      lblExports.Caption := Format('%d ', [NumExports]);
+      lblColision.Caption := Format('%d ', [NumColision]);
+  end;
+  Application.ProcessMessages;
 end;
 
 procedure TProgressForm.OnPollinate(EvolElitist: TEvolElitist);
@@ -193,37 +219,6 @@ procedure TProgressForm.SetValues(APosition, ACruceProfesor: Integer;
 var
   t: TDateTime;
 begin
-  t := Now - FInit;
-  lblElapsedTime.Caption := FormatDateTime('hh:nn:ss ', t);
-  if APosition <> 0 then
-    lblRemainingTime.Caption := FormatDateTime('hh:nn:ss ',
-      t * (PBProgress.Max - APosition) / APosition);
-  lblPosition.Caption := Format('%d ', [APosition]);
-  with PBProgress do
-  begin
-    Position := APosition;
-    Hint := Format('%d de %d', [Position, Max]);
-  end;
-  lblCruceProfesor.Caption := Format('%d ', [ACruceProfesor]);
-  lblProfesorFraccionamiento.Caption :=
-    Format('%f ', [AProfesorFraccionamiento]);
-  lblCruceAulaTipo.Caption := Format('%d ', [ACruceAulaTipo]);
-  lblHoraHuecaDesubicada.Caption := Format('%d ', [AHoraHuecaDesubicada]);
-  lblSesionCortada.Caption := Format('%d ', [ASesionCortada]);
-  lblMateriaProhibicion.Caption := Format('%d ', [AMateriaProhibicion]);
-  lblProfesorProhibicion.Caption := Format('%d ', [AProfesorProhibicion]);
-  lblMateriaNoDispersa.Caption := Format('%d ', [AMateriaNoDispersa]);
-  lblCruceProfesorValor.Caption := Format('%8.2f ', [ACruceProfesorValor]);
-  lblProfesorFraccionamientoValor.Caption :=
-    Format('%8.2f ', [AProfesorFraccionamientoValor]);
-  lblCruceAulaTipoValor.Caption := Format('%8.2f ', [ACruceAulaTipoValor]);
-  lblHoraHuecaDesubicadaValor.Caption := Format('%8.2f ',
-    [AHoraHuecaDesubicadaValor]);
-  lblSesionCortadaValor.Caption := Format('%8.2f ', [ASesionCortadaValor]);
-  lblMateriaProhibicionValor.Caption := Format('%8.2f ', [AMateriaProhibicionValor]);
-  lblProfesorProhibicionValor.Caption := Format('%8.2f ', [AProfesorProhibicionValor]);
-  lblMateriaNoDispersaValor.Caption := Format('%8.2f ', [AMateriaNoDispersaValor]);
-  lblValorTotal.Caption := Format('%8.2f ', [AValue]);
 end;
 
 procedure TProgressForm.bbtnCancelClick(Sender: TObject);

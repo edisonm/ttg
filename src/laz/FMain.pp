@@ -13,12 +13,15 @@ TODO:
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, MTProcs, SysUtils, Classes, Graphics,
   Forms, Dialogs, ExtCtrls, Menus, ComCtrls, Buttons, ActnList,
   FSplash, FSingEdt, ZConnection, Controls, FCrsMME0, FEditor, UConfig
 {$IFNDEF FREEWARE}, KerEvolE, KerModel, FProgres{$ENDIF};
 
 type
+
+  { TMainForm }
+
   TMainForm = class(TForm)
     MainMenu: TMainMenu;
     MIProfesor: TMenuItem;
@@ -162,7 +165,13 @@ type
     FStep: Integer;
     FAjustar: Boolean;
     FLogStrings: TStrings;
-    FCodHorario: Integer;
+
+    FTimeTableModel: TTimeTableModel;
+    FValidCodes: TDynamicIntegerArray;
+
+    procedure DoParallelProcesarCodHorario(Index: PtrInt; Data: Pointer;
+      Item: TMultiThreadProcItem);
+    function ProcesarCodHorario(ACodHorario: Integer): Boolean;
     procedure SetProgress(Value: Integer);
     procedure SetMin(Value: Integer);
     procedure SetMax(Value: Integer);
@@ -175,7 +184,7 @@ type
     procedure SaveToFile(const AFileName: string);
     function ConfirmOperation: boolean;
 {$IFNDEF FREEWARE}
-    procedure ElaborarHorario(s: string);
+    procedure ElaborarHorarios(const SCodHorarios: string);
 {$ENDIF}
     procedure PedirRegistrarSoftware;
     procedure ProtegerSoftware;
@@ -194,7 +203,6 @@ type
     property Min: Integer read FMin write SetMin;
     property Max: Integer read FMax write SetMax;
     property Step: Integer read FStep write SetStep;
-    property CodHorario: Integer read FCodHorario write FCodHorario;
     property ConfigStorage: TConfigStorage read FConfigStorage;
   end;
 
@@ -412,21 +420,27 @@ begin
   FAjustar := True;
 end;
 
-
 procedure TMainForm.ActElaborarHorarioExecute(Sender: TObject);
 {$IFNDEF FREEWARE}
 var
-  s: string;
+  SCodHorarios: string;
 {$ENDIF}
 begin
 {$IFNDEF FREEWARE}
   with MasterDataModule do
   try
-    s := IntToStr(NewCodHorario);
+    SCodHorarios := IntToStr(NewCodHorario);
     if not InputQuery('Codigos de los Horarios: ',
-      'Ingrese los codigos de los Horarios a generar', s) then
+        'Ingrese los codigos de los Horarios a generar', SCodHorarios) then
       Exit;
-    ElaborarHorario(s);
+    with MasterDataModule.ConfigStorage do
+      FTimeTableModel := TTimeTableModel.CreateFromDataModule(CruceProfesor,
+        ProfesorFraccionamiento, CruceAulaTipo, HoraHueca, SesionCortada, MateriaNoDispersa);
+    try
+      ElaborarHorarios(SCodHorarios);
+    finally
+      FTimeTableModel.Free;
+    end;
   finally
     ActElaborarHorario.Checked := False;
   end;
@@ -438,33 +452,59 @@ end;
 const
   FBoolToStr: array [Boolean] of string = ('No', 'Sí');
 
-procedure TMainForm.ElaborarHorario(s: string);
+
+function TMainForm.ProcesarCodHorario(ACodHorario: Integer): Boolean;
 var
-  VTimeTableModel: TTimeTableModel;
   VEvolElitist: TEvolElitist;
   DoubleDownHill: TDoubleDownHill;
   FMomentoInicial, FMomentoFinal: TDateTime;
-  sProb: string;
+  ProgressForm: TProgressForm;
   Report: TStrings;
-  function ProcesarCodHorario(ACodHorario: Integer): Boolean;
-  var
-    ProgressForm: TProgressForm;
-  begin
-    CodHorario := ACodHorario;
-    Result := False;
-    if SourceDataModule.TbHorario.Locate('CodHorario', CodHorario, []) then
-      sProb := sProb + ' ' + IntToStr(CodHorario)
-    else
-    begin
-      FMomentoInicial := Now;
-      FLogStrings.Clear;
-      FLogStrings.BeginUpdate;
-      ProgressForm := TProgressForm.Create(Application);
-      ProgressForm.Caption := Format('Elaboracion en progreso [%d]', [CodHorario]);
+begin
+  Result := False;
+  FMomentoInicial := Now;
+  FLogStrings.Clear;
+  FLogStrings.BeginUpdate;
+  VEvolElitist := TEvolElitist.CreateFromModel(FTimeTableModel,
+    MasterDataModule.ConfigStorage.PopulationSize);
+  try
+    ProgressForm := TProgressForm.Create(nil);
+    try
+      ProgressForm.Caption := Format('Elaboracion en progreso [%d]', [ACodHorario]);
       ProgressForm.ProgressMax := vEvolElitist.MaxIteration;
       VEvolElitist.OnProgress := ProgressForm.OnProgress;
+      with MasterDataModule.ConfigStorage do
+      begin
+        VEvolElitist.MaxIteration := MaxIteration;
+        VEvolElitist.CrossProb := CrossProb;
+        VEvolElitist.Mutation1Prob := Mutation1Prob;
+        VEvolElitist.Mutation1Order := Mutation1Order;
+        VEvolElitist.Mutation2Prob := Mutation2Prob;
+        VEvolElitist.RepairProb := RepairProb;
+        VEvolElitist.SharedDirectory := SharedDirectory;
+        VEvolElitist.PollinationFreq := PollinationFreq;
+        VEvolElitist.FixIndividuals(HorarioIni);
+        VEvolElitist.OnRecordBest := Self.OnRegistrarMejor;
+      end;
+      VEvolElitist.Execute(MasterDataModule.ConfigStorage.RefreshInterval);
+      if ProgressForm.CancelClick then
+      begin
+        Result := True;
+        Exit;
+      end;
+    finally
+      ProgressForm.Free;
+      FLogStrings.EndUpdate;
+    end;
+    if MasterDataModule.ConfigStorage.ApplyDoubleDownHill then
+    begin
+      DoubleDownHill := TDoubleDownHill.Create(VEvolElitist.BestIndividual);
+      ProgressForm := TProgressForm.Create(nil);
+      ProgressForm.Caption := Format('Mejorando Horario [%d]', [ACodHorario]);
+      ProgressForm.ProgressMax := FTimeTableModel.SesionCantidadDoble;
+      DoubleDownHill.OnProgress := ProgressForm.OnProgress;
       try
-        vEvolElitist.Execute(MasterDataModule.ConfigStorage.RefreshInterval);
+        DoubleDownHill.Execute(MasterDataModule.ConfigStorage.RefreshInterval);
         if ProgressForm.CancelClick then
         begin
           Result := True;
@@ -472,116 +512,99 @@ var
         end;
       finally
         ProgressForm.Free;
-        FLogStrings.EndUpdate;
       end;
-      //FLogStrings.SaveToFile(Format('LogHor_%d.txt', [CodHorario]));
-      if MasterDataModule.ConfigStorage.ApplyDoubleDownHill then
-      begin
-        DoubleDownHill := TDoubleDownHill.Create(VEvolElitist.BestIndividual);
-        ProgressForm := TProgressForm.Create(Application);
-        ProgressForm.Caption := Format('Mejorando Horario [%d]', [CodHorario]);
-        ProgressForm.ProgressMax := vTimeTableModel.SesionCantidadDoble;
-        DoubleDownHill.OnProgress := ProgressForm.OnProgress;
-        try
-          DoubleDownHill.Execute(MasterDataModule.ConfigStorage.RefreshInterval);
-          if ProgressForm.CancelClick then
-          begin
-            Result := True;
-            Exit;
-          end;
-        finally
-          ProgressForm.Free;
-        end;
-      end
-      else
-        VEvolElitist.ForcedDownHill;
-      VEvolElitist.BestIndividual.UpdateValue;
-      FMomentoFinal := Now;
-      Report := TStringList.Create;
-      try
-        Report.Add('Algoritmo Evolutivo Elitista');
-        Report.Add('============================');
-        Report.Add(Format('Descenso rapido doble: %s',
-          [FBoolToStr[MasterDataModule.ConfigStorage.ApplyDoubleDownHill]]));
-        VEvolElitist.ReportParameters(Report);
-        VEvolElitist.BestIndividual.ReportValues(Report);
-        VEvolElitist.SaveBestToDatabase(ACodHorario, FMomentoInicial, FMomentoFinal, Report);
-      finally
-        Report.Free;
-      end;
+    end
+    else
+      VEvolElitist.ForcedDownHill;
+    VEvolElitist.BestIndividual.UpdateValue;
+    FMomentoFinal := Now;
+    Report := TStringList.Create;
+    try
+      Report.Add('Algoritmo Evolutivo Elitista');
+      Report.Add('============================');
+      Report.Add(Format('Descenso rapido doble: %s',
+        [FBoolToStr[MasterDataModule.ConfigStorage.ApplyDoubleDownHill]]));
+      VEvolElitist.ReportParameters(Report);
+      VEvolElitist.BestIndividual.ReportValues(Report);
+      VEvolElitist.SaveBestToDatabase(ACodHorario, FMomentoInicial, FMomentoFinal, Report);
+    finally
+      Report.Free;
     end;
+  finally
+    VEvolElitist.Free;
   end;
+end;
+
+procedure TMainForm.DoParallelProcesarCodHorario(Index: PtrInt; Data: Pointer;
+    Item: TMultiThreadProcItem);
+begin
+  ProcesarCodHorario(FValidCodes[Index]);
+end;
+
+procedure TMainForm.ElaborarHorarios(const SCodHorarios: string);
+var
+  Report: TStrings;
+  WrongCodes: TDynamicIntegerArray;
   procedure ProcessCodList(const CodList: string);
   var
     d: string;
-    iPos, iPosd, FCodIni, FCodFin, iCod: Integer;
+    Position, Position2, CodHorario1, CodHorario2, CodHorario, Valids, Wrongs: Integer;
   begin
-    iPos := 1;
-    while iPos <= Length(CodList) do
+    Position := 1;
+    Valids := 0;
+    Wrongs := 0;
+    while Position <= Length(CodList) do
     begin
-      d := ExtractString(CodList, iPos, ',');
-      iPosd := 1;
-      FCodIni := StrToInt(ExtractString(d, iPosd, '-'));
-      if iPosd > Length(d) then
-        FCodFin := FCodIni
+      d := ExtractString(CodList, Position, ',');
+      Position2 := 1;
+      CodHorario1 := StrToInt(ExtractString(d, Position2, '-'));
+      if Position2 > Length(d) then
+        CodHorario2 := CodHorario1
       else
-        FCodFin := StrToInt(ExtractString(d, iPosd, '-'));
-      if iPosd <= Length(d) then
+        CodHorario2 := StrToInt(ExtractString(d, Position2, '-'));
+      if Position2 <= Length(d) then
         raise Exception.Create('El dato ingresado no es valido');
-      for iCod := FCodIni to FCodFin do
+      SetLength(FValidCodes, Valids + CodHorario2 - CodHorario1 + 1);
+      SetLength(WrongCodes, Wrongs + CodHorario2 - CodHorario1 + 1);
+      for CodHorario := CodHorario1 to CodHorario2 do
       begin
-        if ProcesarCodHorario(iCod) then
-          Exit;
+        if SourceDataModule.TbHorario.Locate('CodHorario', CodHorario, []) then
+        begin
+          // sProb := sProb + ' ' + IntToStr(ACodHorario)
+          WrongCodes[Wrongs] := CodHorario;
+          Inc(Wrongs);
+        end
+        else
+        begin
+          FValidCodes[Valids] := CodHorario;
+          Inc(Valids);
+        end;
       end;
     end;
+    SetLength(FValidCodes, Valids);
+    SetLength(WrongCodes, Wrongs);
   end;
 var
-  mr: TModalResult;
+  Counter: Integer;
 begin
-  with SourceDataModule, MasterDataModule.ConfigStorage do
+  with SourceDataModule do
   begin
-    InitRandom;
     ActElaborarHorario.Enabled := False;
     FEjecutando := True;
-    VTimeTableModel := TTimeTableModel.CreateFromDataModule(CruceProfesor,
-      ProfesorFraccionamiento, CruceAulaTipo, HoraHueca, SesionCortada, MateriaNoDispersa);
-    VEvolElitist := TEvolElitist.CreateFromModel(VTimeTableModel, PopulationSize);
     try
-      VEvolElitist.MaxIteration := MaxIteration;
-      VEvolElitist.CrossProb := CrossProb;
-      VEvolElitist.Mutation1Prob := Mutation1Prob;
-      VEvolElitist.Mutation1Order := Mutation1Order;
-      VEvolElitist.Mutation2Prob := Mutation2Prob;
-      VEvolElitist.RepairProb := RepairProb;
-      VEvolElitist.SyncDirectory := Compartir;
-      VEvolElitist.PollinationFreq := PollinationFreq;
-      if (Compartir <> '')
-         and FileExists(VEvolElitist.SyncFileName) then
-      begin
-        mr := MessageDlg('El archivo de sincronizacion ya existe.  ' +
-                         'Desea eliminar los archivos relacionados?',
-                         mtWarning, [mbYes, mbNo, mbCancel], 0);
-        if mr = mrYes then
-        begin
-          DeleteFile(VEvolElitist.FileName);
-          DeleteFile(VEvolElitist.SyncFileName);
-        end
-        else if mr = mrCancel then
-        begin
-          raise Exception.Create('Operacion cancelada por el usuario');
-        end
-      end;
-      VEvolElitist.FixIndividuals(HorarioIni);
+      MasterDataModule.ConfigStorage.InitRandom;
       FAjustar := False;
-      VEvolElitist.OnRecordBest := Self.OnRegistrarMejor;
-      sProb := '';
-      ProcessCodList(s);
-      if sProb <> '' then
-        MessageDlg(Format('Los siguientes horarios ya existian: %s', [sProb]),
-          mtError, [mbOK], 0);
+      ProcessCodList(SCodHorarios);
+      for Counter := 0 to High(FValidCodes) do
+      begin
+        //ProcThreadPool.DoParallel(ProcesarCodHorario, 0, High(ValidCodes), nil);
+        if ProcesarCodHorario(FValidCodes[Counter]) then
+          Exit;
+      end;
+      if Length(WrongCodes) > 0 then
+        MessageDlg(Format('Los siguientes horarios ya existian: %s',
+          [VarArrToStr(WrongCodes)]), mtError, [mbOK], 0);
     finally
-      VEvolElitist.Free;
-      VTimeTableModel.Free;
       FEjecutando := False;
       ActElaborarHorario.Enabled := True;
       TbHorarioDetalle.Refresh;

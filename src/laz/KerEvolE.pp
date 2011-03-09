@@ -41,7 +41,7 @@ type
     FOnProgress: TProgressEvent;
   protected
     function GetBestIndividual: TTimeTable; virtual; abstract;
-    procedure DoProgress(Position, RefreshInterval: Integer; Self: TSolver;
+    procedure DoProgress(Position, RefreshInterval: Integer; Solver: TSolver;
       var Stop: Boolean);
   public
     procedure Execute(RefreshInterval: Integer); virtual; abstract;
@@ -65,7 +65,7 @@ type
   TEvolElitist = class(TSolver)
   private
     FModel: TTimeTableModel;
-    FSyncDirectory: string;
+    FSharedDirectory: string;
     FSeed1, FSeed2, FSeed3, FSeed4, FPopulationSize, FMaxIteration, FNumImports,
       FNumExports, FClashes, FPollinationFreq, FMutation1Order: Longint;
     FCrossProb, FMutation1Prob, FMutation2Prob, FRepairProb: Double;
@@ -116,7 +116,7 @@ type
     property AverageValue: Double read GetAverageValue;
     property BestIndividual: TTimeTable read GetBestIndividual;
     property Model: TTimeTableModel read FModel;
-    property SyncDirectory: string read FSyncDirectory write FSyncDirectory;
+    property SharedDirectory: string read FSharedDirectory write FSharedDirectory;
     property FileName: string read GetFileName;
     property SyncFileName: string read GetSyncFileName;
     property PollinationFreq: Integer read FPollinationFreq write FPollinationFreq;
@@ -491,18 +491,26 @@ begin
   FClashes := 0;
   Stop := False;
   Iteration := 0;
-  while (Iteration < FMaxIteration) and not Stop do
-  begin
-    DoProgress(Iteration, RefreshInterval, Self, Stop);
-    Select;
-    Cross;
-    Mutate;
-    Repair;
-    if ((Iteration mod FPollinationFreq) = 0) and (FSyncDirectory <> '') then
-      Pollinate;
-    Evaluate;
-    Elitist;
-    Inc(Iteration);
+  try
+    while (Iteration < FMaxIteration) and not Stop do
+    begin
+      DoProgress(Iteration, RefreshInterval, Self, Stop);
+      Select;
+      Cross;
+      Mutate;
+      Repair;
+      if ((Iteration mod FPollinationFreq) = 0) and (FSharedDirectory <> '') then
+        Pollinate;
+      Evaluate;
+      Elitist;
+      Inc(Iteration);
+    end;
+  finally
+    if (SharedDirectory <> '') then
+    begin
+      if FileExists(FileName) then DeleteFile(FileName);
+      if FileExists(SyncFileName) then DeleteFile(SyncFileName);
+    end;
   end;
   if Stop then FMaxIteration := Iteration; // Preserve the maximum in case of cancel
 end;
@@ -582,16 +590,16 @@ end;
 
 function TEvolElitist.GetFileName: string;
 begin
-  Result := FSyncDirectory + '/ttable.dat';
+  Result := FSharedDirectory + '/ttable.dat';
 end;
 
 function TEvolElitist.GetSyncFileName: string;
 begin
-  Result := FSyncDirectory + '/ttsync.dat';
+  Result := FSharedDirectory + '/ttsync.dat';
 end;
 
 procedure TSolver.DoProgress(Position, RefreshInterval: Integer;
-  Self: TSolver; var Stop: Boolean);
+  Solver: TSolver; var Stop: Boolean);
 begin
   if Assigned(FOnProgress) then
     FOnProgress(Position, RefreshInterval, Self, Stop);

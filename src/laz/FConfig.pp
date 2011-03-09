@@ -7,7 +7,7 @@ interface
 uses
   {$IFDEF FPC}ColorBox, LResources{$ELSE}Mask, Windows{$ENDIF}, SysUtils, Grids,
   Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ComCtrls,
-  Spin, DBGrids, DSource, DMaster, DB, ExtCtrls, DBCtrls;
+  Spin, DBGrids, DSource, DMaster, DB, ExtCtrls, DBCtrls, EditBtn;
 
 type
 
@@ -91,7 +91,7 @@ type
     Label41: TLabel;
     dbeValProfProhibicionTipo: TDBEdit;
     Label42: TLabel;
-    dedCompartir: TEdit;
+    dedSharedDirectory: TDirectoryEdit;
     bbtnCancel: TBitBtn;
     speRangoPolinizacion: TSpinEdit;
     Label43: TLabel;
@@ -207,7 +207,7 @@ begin
       creProbMutacion2.Text := FloatToStr(Mutation2Prob);
       creProbReparacion.Text := FloatToStr(RepairProb);
       edtHorarioIni.Text := HorarioIni;
-      dedCompartir.Text := Compartir;
+      dedSharedDirectory.Text := SharedDirectory;
       speRangoPolinizacion.Value := PollinationFreq;
       CBApplyDoubleDownHill.Checked := ApplyDoubleDownHill;
    end;
@@ -245,14 +245,13 @@ begin
       Mutation2Prob := StrToFloat(creProbMutacion2.Text);
       RepairProb := StrToFloat(creProbReparacion.Text);
       HorarioIni := edtHorarioIni.Text;
-      Compartir := dedCompartir.Text;
+      SharedDirectory := dedSharedDirectory.Text;
       PollinationFreq := speRangoPolinizacion.Value;
       ApplyDoubleDownHill := CBApplyDoubleDownHill.Checked;
    end;
 end;
 
-procedure TConfiguracionForm.DSMateriaProhibicionTipoDataChange(
-  Sender: TObject; Field: TField);
+procedure TConfiguracionForm.DSMateriaProhibicionTipoDataChange(Sender: TObject; Field: TField);
 begin
   CBColMateProhibicionTipo.Selected :=
     SourceDataModule.TbMateriaProhibicionTipo.FindField('ColMateProhibicionTipo').AsInteger;
