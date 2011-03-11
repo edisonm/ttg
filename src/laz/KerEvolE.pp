@@ -4,7 +4,7 @@ unit KerEvolE;
 interface
 
 uses
-  {$IFDEF UNIX}cthreads, cmem, {$ENDIF}MTProcs, Classes, SysUtils, Dialogs,
+  {$IFDEF UNIX}cthreads, cmem, {$ENDIF}MTProcs, Classes, Forms, SysUtils, Dialogs,
   KerModel, UIndivid;
 
 type
@@ -31,7 +31,7 @@ type
 
   TSolver = class;
 
-  TProgressEvent = procedure(Progress: Integer; Self: TSolver;
+  TProgressEvent = procedure(Position: Integer; Solver: TSolver;
     var Stop: Boolean) of object;
 
   { TEvolElitist }
@@ -66,7 +66,8 @@ type
   private
     FModel: TTimeTableModel;
     FSharedDirectory: string;
-    FSeed1, FSeed2, FSeed3, FSeed4, FPopulationSize, FMaxIteration, FNumImports,
+    FRandSeed: Cardinal;
+    FPopulationSize, FMaxIteration, FNumImports,
       FNumExports, FClashes, FPollinationFreq, FMutation1Order: Longint;
     FCrossProb, FMutation1Prob, FMutation2Prob, FRepairProb: Double;
     FPopulation, FNewPopulation: TTimeTableArray;
@@ -97,11 +98,11 @@ type
     procedure FixIndividuals(const Individuals: string);
     procedure Configure(APopulationSize: Integer);
     destructor Destroy; override;
-    procedure SaveBestToDatabase(CodHorario: Integer; MomentoInicial,
-      MomentoFinal: TDateTime; Report: TStrings);
+    procedure SaveBestToDatabase(CodHorario: Integer;
+      ApplyDoubleDownHill: Boolean; MomentoInicial, MomentoFinal: TDateTime);
     procedure SaveBestToStream(AStream: TStream);
     procedure Execute(RefreshInterval: Integer); override;
-    procedure ForcedDownHill;
+    function DownHillForced: Boolean;
     function DownHill: Boolean;
     procedure Repair;
     property OnRecordBest: TNotifyEvent read FOnRecordBest write FOnRecordBest;
@@ -126,7 +127,7 @@ type
 implementation
 
 uses
-  Rand, HorColCm;
+  HorColCm;
 
 procedure TEvolElitist.Configure(APopulationSize: Longint);
 var
@@ -193,7 +194,7 @@ var
 begin
   for Individual := 0 to FPopulationSize - 1 do
   begin
-    if randl < FRepairProb then
+    if Random < FRepairProb then
     begin
       FPopulation[Individual].DownHill;
     end;
@@ -315,7 +316,7 @@ begin
   end
   else
   begin
-    CopyIndividual(Worst, FPopulationSize + crand32 mod (1 + FModel.ElitistCount));
+    CopyIndividual(Worst, FPopulationSize + Random(1 + FModel.ElitistCount));
   end;
 end;
 
@@ -352,7 +353,7 @@ procedure TEvolElitist.Pollinate;
     SyncStream := TFileStream.Create
       (SyncFileName, fmCreate or fmShareExclusive);
     try
-      Value := FPopulation[crand32 mod FPopulationSize].Value;
+      Value := FPopulation[Random(FPopulationSize)].Value;
       SyncStream.write(Value, SizeOf(Double));
       ExportarInterno;
     finally
@@ -414,7 +415,7 @@ begin
   end;
   for Individual1 := 0 to FPopulationSize - 1 do
   begin
-    p := randl;
+    p := Random;
     if p < FCAptitudeArray[0] then
     begin
       FNewPopulation[Individual1].Assign(FPopulation[0]);
@@ -454,7 +455,7 @@ begin
   One := 0;
   for Individual := 0 to FPopulationSize - 1 do
   begin
-    x := randl;
+    x := Random;
     if x < FCrossProb then
     begin
       Inc(First);
@@ -477,9 +478,9 @@ var
 begin
   for Individual := 0 to FPopulationSize - 1 do
   begin
-    if randl < FMutation1Prob then
+    if Random < FMutation1Prob then
       FPopulation[Individual].Mutate(FMutation1Order);
-    if randl < FMutation2Prob then
+    if Random < FMutation2Prob then
       FPopulation[Individual].MutateDia;
   end;
 end;
@@ -489,7 +490,7 @@ var
   Stop: Boolean;
   Iteration: Integer;
 begin
-  getseeds(FSeed1, FSeed2, FSeed3, FSeed4);
+  FRandSeed := RandSeed;
   TThread.Synchronize(CurrentThread, Initialize);
   MakeRandom;
   Evaluate;
@@ -523,9 +524,9 @@ begin
   if Stop then FMaxIteration := Iteration; // Preserve the maximum in case of cancel
 end;
 
-procedure TEvolElitist.ForcedDownHill;
+function TEvolElitist.DownHillForced: Boolean;
 begin
-  FPopulation[FPopulationSize].DownHillForced;
+  Result := FPopulation[FPopulationSize].DownHillForced;
   if Assigned(OnRecordBest) then
     OnRecordBest(Self);
 end;
@@ -535,10 +536,26 @@ begin
   Result := FPopulation[FPopulationSize].DownHill;
 end;
 
+const
+  FBoolToStr: array [Boolean] of string = ('No', 'Sí');
+
 procedure TEvolElitist.SaveBestToDatabase(CodHorario: Integer;
-  MomentoInicial, MomentoFinal: TDateTime; Report: TStrings);
+  ApplyDoubleDownHill: Boolean; MomentoInicial, MomentoFinal: TDateTime);
+var
+  Report: TStrings;
 begin
-  BestIndividual.SaveToDataModule(CodHorario, MomentoInicial, MomentoFinal, Report);
+  Report := TStringList.Create;
+  with Report do
+  try
+    Add('Algoritmo Evolutivo Elitista');
+    Add('============================');
+    Add(Format('Descenso rapido doble: %s', [FBoolToStr[ApplyDoubleDownHill]]));
+    ReportParameters(Report);
+    BestIndividual.ReportValues(Report);
+    BestIndividual.SaveToDataModule(CodHorario, MomentoInicial, MomentoFinal, Report);
+  finally
+    Free;
+  end;
 end;
 
 procedure TEvolElitist.SaveBestToStream(AStream: TStream);
@@ -568,8 +585,7 @@ procedure TEvolElitist.ReportParameters(AInforme: TStrings);
 begin
   with AInforme do
   begin
-    Add('Semillas del generador de numeros aleatorios:');
-    Add(Format('  %d, %d, %d, %d', [FSeed1, FSeed2, FSeed3, FSeed4]));
+    Add(Format('Semilla Numeros aleatorios: %5.u', [FRandSeed]));
     Add(Format('Numero de individuos:       %5.d', [FPopulationSize]));
     Add(Format('Maximo de generaciones:     %5.d', [FMaxIteration]));
     Add(Format('Probabilidad de cruce:      %1.3f', [FCrossProb]));
@@ -638,14 +654,14 @@ var
   Stop: Boolean;
   { Continuar: Boolean; }
 begin
-  with FBestIndividual, TimeTableModel do
+  with FBestIndividual, Model do
   begin
     Update;
     UpdateValue;
     for Counter := 0 to ParaleloCant - 1 do
     begin
       RandomOrders[Counter] := Counter;
-      RandomValues[Counter] := rand32;
+      RandomValues[Counter] := Random($7FFFFFFF);
     end;
     SortLongint(RandomValues, RandomOrders, 0, ParaleloCant - 1);
     Result := True;

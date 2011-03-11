@@ -58,7 +58,7 @@ dbutils:
 
 clean:
 # 	$(DSRCBASE0).lfm $(DSRCBASE0).pp
-	$(RM) $(TTGEXE) $(TTGDIR)/bin/*.o \
+	$(RM) $(TTGEXE) $(TTGDIR)/bin/*.o $(TTGDIR)/bin/*.lrs \
 	  $(TTGDIR)/bin/*.ppu $(TTGDIR)/obj/*.o $(TTGDIR)/obj/*.ppu
 
 test:

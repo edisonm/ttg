@@ -99,16 +99,16 @@ type
   private
     FProgressForm: TProgressForm;
     FMax: Integer;
-    FCaption: string;
+    FCodHorario: Integer;
     FPosition: Integer;
     FSolver: TSolver;
   public
-    constructor Create(AMax: Integer; const ACaption: string);
+    constructor Create(AMax, ACodHorario: Integer);
     destructor Destroy; override;
     procedure CreateForm;
     procedure DestroyForm;
     procedure DoProgress;
-    procedure OnProgress(Position: Integer; ASolver: TSolver;
+    procedure OnProgress(APosition: Integer; ASolver: TSolver;
       var Stop: Boolean);
     property CancelClick: Boolean read FProgressForm.FCancelClick;
   end;
@@ -141,7 +141,7 @@ begin
         InvalidarValores;
       	// Update;
         with SourceDataModule do
-	        TimeTableModel.Configure(CruceProfesor,
+	        Model.Configure(CruceProfesor,
                                    ProfesorFraccionamiento,
                                    CruceAulaTipo,
                                    HoraHueca,
@@ -217,11 +217,11 @@ end;
 
 { TProgressFormDrv }
 
-constructor TProgressFormDrv.Create(AMax: Integer; const ACaption: string);
+constructor TProgressFormDrv.Create(AMax, ACodHorario: Integer);
 begin
   inherited Create;
   FMax := AMax;
-  FCaption := ACaption;
+  FCodHorario := ACodHorario;
   TThread.Synchronize(CurrentThread, CreateForm);
 end;
 
@@ -235,7 +235,7 @@ procedure TProgressFormDrv.CreateForm;
 begin
   FProgressForm := TProgressForm.Create(Application);
   FProgressForm.ProgressMax := FMax;
-  FProgressForm.Caption := FCaption;
+  FProgressForm.Caption := Format('Elaboracion en progreso [%d]', [FCodHorario]);
   Application.ProcessMessages;
 end;
 
@@ -251,10 +251,10 @@ begin
   Application.ProcessMessages;
 end;
 
-procedure TProgressFormDrv.OnProgress(Position: Integer; ASolver: TSolver;
+procedure TProgressFormDrv.OnProgress(APosition: Integer; ASolver: TSolver;
     var Stop: Boolean);
 begin
-  FPosition := Position;
+  FPosition := APosition;
   FSolver := ASolver;
   TThread.Synchronize(CurrentThread, DoProgress);
   with FProgressForm do

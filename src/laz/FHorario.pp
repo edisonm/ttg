@@ -339,9 +339,9 @@ begin
     try
       MainForm.Step := 1;
       ProgressFormDrv := TProgressFormDrv.Create(
-        TimeTableModel.SesionCantidadDoble,
-        Format('Mejorando Horario [%d] en [%d]',
-          [CodHorarioFuente, CodHorarioDestino]));
+        TimeTableModel.SesionCantidadDoble, CodHorarioDestino);
+        {Format('Mejorando Horario [%d] en [%d]',
+          [CodHorarioFuente, CodHorarioDestino]));}
       TimeTable := TTimeTable.Create(TimeTableModel);
       DoubleDownHill := TDoubleDownHill.Create(TimeTable);
       try

@@ -31,14 +31,8 @@ type
     procedure SetComentarios(const Value: string);
     function GetRandomize: Boolean;
     procedure SetRandomize(Value: Boolean);
-    function GetSeed1: Integer;
-    procedure SetSeed1(Value: Integer);
-    function GetSeed2: Integer;
-    procedure SetSeed2(Value: Integer);
-    function GetSeed3: Integer;
-    procedure SetSeed3(Value: Integer);
-    function GetSeed4: Integer;
-    procedure SetSeed4(Value: Integer);
+    function GetSeed: Integer;
+    procedure SetSeed(Value: Integer);
     function GetRefreshInterval: Integer;
     procedure SetRefreshInterval(Value: Integer);
     function GetCruceProfesor: Extended;
@@ -87,10 +81,7 @@ type
     property MaxCargaProfesor: Integer read GetMaxCargaProfesor write SetMaxCargaProfesor;
     property Comentarios: string read GetComentarios write SetComentarios;
     property Randomize: Boolean read GetRandomize write SetRandomize;
-    property Seed1: Integer read GetSeed1 write SetSeed1;
-    property Seed2: Integer read GetSeed2 write SetSeed2;
-    property Seed3: Integer read GetSeed3 write SetSeed3;
-    property Seed4: Integer read GetSeed4 write SetSeed4;
+    property Seed: Integer read GetSeed write SetSeed;
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
     property CruceProfesor: Extended read GetCruceProfesor write SetCruceProfesor;
     property ProfesorFraccionamiento: Extended read GetProfesorFraccionamiento write SetProfesorFraccionamiento;
@@ -112,9 +103,6 @@ type
   end;
 
 implementation
-
-uses
-  Rand;
 
 function TTTGConfig.GetNomColegio: string;
 begin
@@ -206,44 +194,14 @@ begin
   Booleans['Randomize'] := Value;
 end;
 
-function TTTGConfig.GetSeed1: Integer;
+function TTTGConfig.GetSeed: Integer;
 begin
   Result := Integers['Seed1'];
 end;
 
-procedure TTTGConfig.SetSeed1(Value: Integer);
+procedure TTTGConfig.SetSeed(Value: Integer);
 begin
   Integers['Seed1'] := Value;
-end;
-
-function TTTGConfig.GetSeed2: Integer;
-begin
-  Result := Integers['Seed2'];
-end;
-
-procedure TTTGConfig.SetSeed2(Value: Integer);
-begin
-  Integers['Seed2'] := Value;
-end;
-
-function TTTGConfig.GetSeed3: Integer;
-begin
-  Result := Integers['Seed3'];
-end;
-
-procedure TTTGConfig.SetSeed3(Value: Integer);
-begin
-  Integers['Seed3'] := Value;
-end;
-
-function TTTGConfig.GetSeed4: Integer;
-begin
-  Result := Integers['Seed4'];
-end;
-
-procedure TTTGConfig.SetSeed4(Value: Integer);
-begin
-  Integers['Seed4'] := Value;
 end;
 
 function TTTGConfig.GetRefreshInterval: Integer;
@@ -438,10 +396,7 @@ begin
   MaxCargaProfesor := 20;
   Comentarios := '';
   Randomize := True;
-  Seed1 := 1;
-  Seed2 := 1;
-  Seed3 := 1;
-  Seed4 := 1;
+  Self.Seed := 1;
   RefreshInterval := 1;
   CruceProfesor := 200;
   ProfesorFraccionamiento := 50;
@@ -465,9 +420,9 @@ end;
 procedure TTTGConfig.InitRandom;
 begin
   if Randomize then
-    srandom
+    System.Randomize
   else
-    setseeds(Seed1, Seed2, Seed3, Seed4);
+    RandSeed := Seed;
 end;
 
 end.

@@ -55,13 +55,7 @@ type
     tbsOpciones: TTabSheet;
     CBRandomize: TCheckBox;
     Label19: TLabel;
-    speSeed1: TSpinEdit;
-    speSeed2: TSpinEdit;
-    Label20: TLabel;
-    Label21: TLabel;
-    speSeed3: TSpinEdit;
-    speSeed4: TSpinEdit;
-    Label22: TLabel;
+    speSeed: TSpinEdit;
     Label23: TLabel;
     Label4: TLabel;
     edtNomResponsable: TEdit;
@@ -168,10 +162,7 @@ procedure TConfiguracionForm.CBRandomizeClick(Sender: TObject);
 begin
   with (Sender as TCheckbox) do
   begin
-    speSeed1.Enabled := not Checked;
-    speSeed2.Enabled := not Checked;
-    speSeed3.Enabled := not Checked;
-    speSeed4.Enabled := not Checked;
+    speSeed.Enabled := not Checked;
   end;
 end;
 
@@ -188,10 +179,7 @@ begin
       speMaxCargaProfesor.Value := MaxCargaProfesor;
       MemComentarios.Lines.Text := Comentarios;
       CBRandomize.Checked := Randomize;
-      speSeed1.Value := Seed1;
-      speSeed2.Value := Seed2;
-      speSeed3.Value := Seed3;
-      speSeed4.Value := Seed4;
+      speSeed.Value := Seed;
       speNumIteraciones.Value := RefreshInterval;
       creCruceProfesor.Text := FloatToStr(CruceProfesor);
       creProfesorFraccionamiento.Text := FloatToStr(ProfesorFraccionamiento);
@@ -226,10 +214,7 @@ begin
       MaxCargaProfesor := speMaxCargaProfesor.Value;
       Comentarios := MemComentarios.Lines.Text;
       Randomize := CBRandomize.Checked;
-      Seed1 := speSeed1.Value;
-      Seed2 := speSeed2.Value;
-      Seed3 := speSeed3.Value;
-      Seed4 := speSeed4.Value;
+      Seed := speSeed.Value;
       RefreshInterval := speNumIteraciones.Value;
       CruceProfesor := StrToFloat(creCruceProfesor.Text);
       ProfesorFraccionamiento := StrToFloat(creProfesorFraccionamiento.Text);

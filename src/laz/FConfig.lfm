@@ -73,7 +73,7 @@ object ConfiguracionForm: TConfiguracionForm
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
       Caption = 'Institucion'
-      ClientHeight = 325
+      ClientHeight = 324
       ClientWidth = 465
       ImageIndex = 2
       object Label14: TLabel
@@ -210,32 +210,8 @@ object ConfiguracionForm: TConfiguracionForm
         Left = 8
         Height = 14
         Top = 64
-        Width = 58
-        Caption = 'Semilla 1:'
-        ParentColor = False
-      end
-      object Label20: TLabel
-        Left = 237
-        Height = 14
-        Top = 64
-        Width = 58
-        Caption = 'Semilla 2:'
-        ParentColor = False
-      end
-      object Label21: TLabel
-        Left = 8
-        Height = 14
-        Top = 89
-        Width = 58
-        Caption = 'Semilla 3:'
-        ParentColor = False
-      end
-      object Label22: TLabel
-        Left = 237
-        Height = 14
-        Top = 89
-        Width = 58
-        Caption = 'Semilla 4:'
+        Width = 47
+        Caption = 'Semilla:'
         ParentColor = False
       end
       object Label23: TLabel
@@ -287,44 +263,14 @@ object ConfiguracionForm: TConfiguracionForm
         OnClick = CBRandomizeClick
         TabOrder = 0
       end
-      object speSeed1: TSpinEdit
+      object speSeed: TSpinEdit
         Left = 77
         Height = 23
         Top = 55
         Width = 148
         MaxValue = 2147483647
-        MinValue = -2147483648
+        MinValue = 1
         TabOrder = 1
-        Value = 1
-      end
-      object speSeed2: TSpinEdit
-        Left = 310
-        Height = 23
-        Top = 55
-        Width = 147
-        MaxValue = 2147483647
-        MinValue = -2147483648
-        TabOrder = 2
-        Value = 1
-      end
-      object speSeed3: TSpinEdit
-        Left = 77
-        Height = 23
-        Top = 80
-        Width = 148
-        MaxValue = 2147483647
-        MinValue = -2147483648
-        TabOrder = 3
-        Value = 1
-      end
-      object speSeed4: TSpinEdit
-        Left = 310
-        Height = 23
-        Top = 80
-        Width = 147
-        MaxValue = 2147483647
-        MinValue = -2147483648
-        TabOrder = 4
         Value = 1
       end
       object speNumIteraciones: TSpinEdit
@@ -334,7 +280,7 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 252
         MaxValue = 2147483647
         MinValue = 1
-        TabOrder = 5
+        TabOrder = 2
         Value = 10
       end
       object edtHorarioIni: TEdit
@@ -342,7 +288,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 23
         Top = 151
         Width = 252
-        TabOrder = 6
+        TabOrder = 3
       end
       object dedSharedDirectory: TDirectoryEdit
         Left = 205
@@ -352,12 +298,12 @@ object ConfiguracionForm: TConfiguracionForm
         ShowHidden = False
         ButtonWidth = 23
         NumGlyphs = 0
-        TabOrder = 7
+        TabOrder = 4
       end
     end
     object tbsPesos: TTabSheet
       Caption = 'Pesos'
-      ClientHeight = 325
+      ClientHeight = 324
       ClientWidth = 465
       object Label1: TLabel
         Left = 8
@@ -598,7 +544,7 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsAlgoritmoEvolutivo: TTabSheet
       Caption = 'Algoritmo Evolutivo'
-      ClientHeight = 325
+      ClientHeight = 324
       ClientWidth = 465
       ImageIndex = 1
       object Label8: TLabel

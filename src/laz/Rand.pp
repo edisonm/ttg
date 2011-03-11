@@ -125,6 +125,12 @@ procedure Fillcrand32(out X: array of Longint; Count: Integer);
 // aleatorizador, tomando el tiempo para calcular la semilla:
 procedure srandom;
 
+threadvar
+  Seed1: Longint;
+  Seed2: Longint;
+  Seed3: Longint;
+  Seed4: Longint;
+
 //---------------------------------------------------------------------------
 
 implementation
@@ -132,12 +138,6 @@ implementation
 const
   MULTIPLIER1: LongInt = 2006575059; //m1
   MULTIPLIER2: LongInt = 1219071924; //m2
-
-threadvar
-  Seed1: Longint;
-  Seed2: Longint;
-  Seed3: Longint;
-  Seed4: Longint;
 
 (*---------------------------------------------------------------------------- )
 ( Observese que esta funcion se programo en ensamblador, para evitar que el    )

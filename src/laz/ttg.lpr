@@ -20,7 +20,6 @@ uses
   KerEvolE in 'KerEvolE.pp',
   FProgres in 'FProgres.pp' {ProgressForm},
   SortAlgs in 'SortAlgs.pp',
-  Rand in 'Rand.pp',
   About in 'About.pp',
   FCrsMMEd in 'FCrsMMEd.pp' {CrossManyToManyEditorForm},
   FCrsMME0 in 'FCrsMME0.pp' {CrossManyToManyEditor0Form},
@@ -47,7 +46,7 @@ uses
   ttgcfg in 'ttgcfg.pp',
   DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   FSelPeIn in 'FSelPeIn.pp' {SelPeriodoForm},
-  DBase in 'DBase.pp', UIndivid;
+  DBase in 'DBase.pp', UIndivid, UMakeTT;
 
 {$IFNDEF FPC}
 {$R *.res}
