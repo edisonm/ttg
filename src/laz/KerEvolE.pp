@@ -638,8 +638,7 @@ end;
 
 procedure TDoubleDownHill.Execute(RefreshInterval: Integer);
 begin
-  repeat
-  until DoubleDownHill(RefreshInterval);
+  while DoubleDownHill(RefreshInterval) do;
   FBestIndividual.RecalculateValue := True;
 end;
 
@@ -664,7 +663,7 @@ begin
       RandomValues[Counter] := Random($7FFFFFFF);
     end;
     SortLongint(RandomValues, RandomOrders, 0, ParaleloCant - 1);
-    Result := True;
+    Result := False;
     Counter := 0;
     Value1 := Value;
     Position := 0;
@@ -690,19 +689,19 @@ begin
           InternalSwap(Paralelo, Periodo1, Periodo2, True);
           if DValue < 0 then
           begin
-            Result := False;
+            Result := True;
           end
           else
           begin
             if InternalDownHillEach(DValue) then
             begin
-              InternalSwap(Paralelo, Periodo1, Periodo2 + Duracion2 - Duracion1);
-              DValue := 0;
+              Normalize(Paralelo, Periodo1);
+              Result := True;
             end
             else
             begin
-              Normalize(Paralelo, Periodo1);
-              Result := False;
+              InternalSwap(Paralelo, Periodo1, Periodo2 + Duracion2 - Duracion1);
+              DValue := 0;
             end;
           end;
           Value1 := Value1 + DValue;

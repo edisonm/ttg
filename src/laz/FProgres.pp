@@ -236,19 +236,16 @@ begin
   FProgressForm := TProgressForm.Create(Application);
   FProgressForm.ProgressMax := FMax;
   FProgressForm.Caption := Format('Elaboracion en progreso [%d]', [FCodHorario]);
-  Application.ProcessMessages;
 end;
 
 procedure TProgressFormDrv.DestroyForm;
 begin
   FProgressForm.Free;
-  Application.ProcessMessages;
 end;
 
 procedure TProgressFormDrv.DoProgress;
 begin
   FProgressForm.DoProgress(FPosition, FSolver);
-  Application.ProcessMessages;
 end;
 
 procedure TProgressFormDrv.OnProgress(APosition: Integer; ASolver: TSolver;

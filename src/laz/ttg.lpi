@@ -319,7 +319,7 @@
     </CodeGeneration>
     <Linking>
       <Debugging>
-        <StripSymbols Value="True"/>
+        <GenerateDwarf Value="True"/>
       </Debugging>
       <LinkSmart Value="True"/>
       <Options>

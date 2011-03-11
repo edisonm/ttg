@@ -483,7 +483,7 @@ begin
     try
       FAjustar := False;
       ProcessCodList(SCodHorarios);
-      TMakeTTThread.Create(ValidCodes, False);
+      TMakeTimeTableThread.Create(ValidCodes, False);
       if Length(WrongCodes) > 0 then
         MessageDlg(Format('Los siguientes horarios ya existian: %s',
           [VarArrToStr(WrongCodes)]), mtError, [mbOK], 0);

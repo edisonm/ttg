@@ -2715,7 +2715,7 @@ var
 begin
   with FModel do
   begin
-    Result := True;
+    Result := False;
     Periodo1 := 0;
     PeriodoASesion := @FParaleloPeriodoASesion[AParalelo, 0];
     while Periodo1 < FPeriodoCant do
@@ -2729,7 +2729,7 @@ begin
         begin
           InternalSwap(AParalelo, Periodo1, Periodo2, True);
           Delta := Delta + DValue;
-          Result := False;
+          Result := True;
           Exit;
         end;
         Inc(Periodo2, Duracion);
@@ -2749,7 +2749,7 @@ var
 begin
   with FModel do
   begin
-    Result := True;
+    Result := False;
     for Counter := 0 to FParaleloCant - 1 do
     begin
       RandomOrders[Counter] := Counter;
@@ -2773,7 +2773,7 @@ begin
           begin
             InternalSwap(Paralelo, Periodo1, Periodo2, True);
             Delta := Delta + DValue;
-            Result := False;
+            Result := True;
             Exit;
           end;
           Inc(Periodo2, Duracion);
@@ -3030,7 +3030,6 @@ begin
       TbHorarioDetalle.Refresh;
     finally
       CheckRelations := true;
-      Application.ProcessMessages;
     end;
   end;
 end;

@@ -9,9 +9,9 @@ uses
 
 type
 
-  { TMakeTTThread }
+  { TMakeTimeTableThread }
 
-  TMakeTTThread = class(TThread)
+  TMakeTimeTableThread = class(TThread)
   private
     FTimeTableModel: TTimeTableModel;
     FValidCodes: TDynamicIntegerArray;
@@ -100,9 +100,9 @@ begin
   end;
 end;
 
-{ TMakeTTThread }
+{ TMakeTimeTableThread }
 
-procedure TMakeTTThread.Parallel(Index: PtrInt; Data: Pointer;
+procedure TMakeTimeTableThread.Parallel(Index: PtrInt; Data: Pointer;
   Item: TMultiThreadProcItem);
 begin
   MasterDataModule.ConfigStorage.InitRandom;
@@ -110,14 +110,14 @@ begin
     Terminate;
 end;
 
-procedure TMakeTTThread.Execute;
+procedure TMakeTimeTableThread.Execute;
 var
   i: Integer;
 begin
   ProcThreadPool.DoParallel(Parallel, 0, High(FValidCodes), nil);
 end;
 
-constructor TMakeTTThread.Create(const AValidCodes: TDynamicIntegerArray;
+constructor TMakeTimeTableThread.Create(const AValidCodes: TDynamicIntegerArray;
   CreateSuspended: Boolean);
 var
   i: Integer;
@@ -128,12 +128,13 @@ begin
       ProfesorFraccionamiento, CruceAulaTipo, HoraHueca, SesionCortada,
       MateriaNoDispersa);
   SetLength(FValidCodes, Length(AValidCodes));
+  // ProcThreadPool.MaxThreadCount := Length(AValidCodes);
   for i := 0 to High(AValidCodes) do
     FValidCodes[i] := AValidCodes[i];
   inherited Create(CreateSuspended);
 end;
 
-destructor TMakeTTThread.Destroy;
+destructor TMakeTimeTableThread.Destroy;
 begin
   FTimeTableModel.Free;
   inherited Destroy;
