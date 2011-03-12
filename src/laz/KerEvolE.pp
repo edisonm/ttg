@@ -5,7 +5,7 @@ interface
 
 uses
   {$IFDEF UNIX}cthreads, cmem, {$ENDIF}MTProcs, Classes, Forms, SysUtils, Dialogs,
-  KerModel, UIndivid;
+  KerModel;
 
 type
 
@@ -76,8 +76,6 @@ type
     FOnRecordBest: TNotifyEvent;
     function GetFileName: string;
     function GetSyncFileName: string;
-    procedure DoParallelGetValue(Index: PtrInt; Data: Pointer;
-      Item: TMultiThreadProcItem);
     procedure Initialize;
     procedure Evaluate;
     procedure MakeRandom;
@@ -201,22 +199,14 @@ begin
   end;
 end;
 
-procedure TEvolElitist.DoParallelGetValue(Index: PtrInt; Data: Pointer; Item: TMultiThreadProcItem);
-begin
-  FPopulation[Index].UpdateValue;
-end;
-
 procedure TEvolElitist.Evaluate;
 var
   Individual: Integer;
   Value, MaxValue: Double;
 begin
   MaxValue := -1.7E308;
-  // ProcThreadPool.DoParallel(DoParallelGetValue, 0, High(FPopulation), nil);
   for Individual := 0 to High(FPopulation) do
   begin
-    FPopulation[Individual].UpdateValue;
-    // DoParallelGetValue(Individual, nil, nil);
     Value := FPopulation[Individual].Value;
     if MaxValue < Value then
       MaxValue := Value;
@@ -639,13 +629,12 @@ end;
 procedure TDoubleDownHill.Execute(RefreshInterval: Integer);
 begin
   while DoubleDownHill(RefreshInterval) do;
-  FBestIndividual.RecalculateValue := True;
 end;
 
 function TDoubleDownHill.DoubleDownHill(Step: Integer): Boolean;
 var
   Periodo1, Periodo2, Duracion1, Duracion2, Counter, Paralelo: Smallint;
-  DValue, Value1: Double;
+  DValue: Double;
   Position: Integer;
   RandomOrders: array [0 .. 4095] of Smallint;
   RandomValues: array [0 .. 4095] of Longint;
@@ -656,7 +645,6 @@ begin
   with FBestIndividual, Model do
   begin
     Update;
-    UpdateValue;
     for Counter := 0 to ParaleloCant - 1 do
     begin
       RandomOrders[Counter] := Counter;
@@ -665,7 +653,6 @@ begin
     SortLongint(RandomValues, RandomOrders, 0, ParaleloCant - 1);
     Result := False;
     Counter := 0;
-    Value1 := Value;
     Position := 0;
     while Counter < ParaleloCant do
     begin
@@ -675,6 +662,7 @@ begin
       PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
       while Periodo1 < PeriodoCant do
       begin
+        Duracion1 := SesionADuracion[PeriodoASesion[Periodo1]];
         Periodo2 := Periodo1 + SesionADuracion[PeriodoASesion[Periodo1]];
         while Periodo2 < PeriodoCant do
         begin
@@ -683,19 +671,19 @@ begin
           if Stop then
             Exit;
           Inc(Position);
-          DValue := EvaluateInternalSwap(Paralelo, Periodo1, Periodo2);
-          Duracion1 := SesionADuracion[PeriodoASesion[Periodo1]];
           Duracion2 := SesionADuracion[PeriodoASesion[Periodo2]];
-          InternalSwap(Paralelo, Periodo1, Periodo2, True);
+          DValue := InternalSwap(Paralelo, Periodo1, Periodo2);
           if DValue < 0 then
           begin
+            Duracion1 := Duracion2;
             Result := True;
           end
           else
           begin
-            if InternalDownHillEach(DValue) then
+            if InternalDownHill(True, DValue) then
             begin
               Normalize(Paralelo, Periodo1);
+              Duracion1 := Duracion2;
               Result := True;
             end
             else
@@ -704,7 +692,6 @@ begin
               DValue := 0;
             end;
           end;
-          Value1 := Value1 + DValue;
           Normalize(Paralelo, Periodo2);
           Inc(Periodo2, SesionADuracion[PeriodoASesion[Periodo2]]);
         end;

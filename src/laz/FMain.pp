@@ -483,7 +483,16 @@ begin
     try
       FAjustar := False;
       ProcessCodList(SCodHorarios);
+      {$IFDEF DEBUG}
+      with TMakeTimeTableThread.Create(ValidCodes, True) do
+      try
+        Execute;
+      finally
+        Free;
+      end;
+      {$ELSE}
       TMakeTimeTableThread.Create(ValidCodes, False);
+      {$ENDIF}
       if Length(WrongCodes) > 0 then
         MessageDlg(Format('Los siguientes horarios ya existian: %s',
           [VarArrToStr(WrongCodes)]), mtError, [mbOK], 0);
@@ -494,7 +503,7 @@ begin
     end;
   end;
 end;
-
+{$ENDIF}
 {
 procedure TMainForm.ProgressDescensoDoble(I, Max: Integer; Horario: TObjetoTimeTableModel; var Stop: Boolean);
 var
@@ -532,8 +541,6 @@ begin
   end;
 end;
 }
-
-{$ENDIF}
 
 procedure TMainForm.SetMax(Value: Integer);
 begin

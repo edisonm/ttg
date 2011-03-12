@@ -246,6 +246,9 @@ end;
 procedure TProgressFormDrv.DoProgress;
 begin
   FProgressForm.DoProgress(FPosition, FSolver);
+  {$IFDEF DEBUG}
+  Application.ProcessMessages;
+  {$ENDIF}
 end;
 
 procedure TProgressFormDrv.OnProgress(APosition: Integer; ASolver: TSolver;

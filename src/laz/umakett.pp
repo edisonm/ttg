@@ -29,7 +29,6 @@ uses KerEvolE, FProgres;
 
 function ProcesarCodHorario(TimeTableModel: TTimeTableModel; ACodHorario: Integer): Boolean;
 var
-  i: Integer;
   VEvolElitist: TEvolElitist;
   DoubleDownHill: TDoubleDownHill;
   FMomentoInicial: TDateTime;
@@ -39,23 +38,22 @@ begin
   FMomentoInicial := Now;
   with MasterDataModule.ConfigStorage do
   begin
-    VEvolElitist := TEvolElitist.CreateFromModel(TimeTableModel,
-      PopulationSize);
+    VEvolElitist := TEvolElitist.CreateFromModel(TimeTableModel, PopulationSize);
     try
+      VEvolElitist.MaxIteration := MaxIteration;
+      VEvolElitist.CrossProb := CrossProb;
+      VEvolElitist.Mutation1Prob := Mutation1Prob;
+      VEvolElitist.Mutation1Order := Mutation1Order;
+      VEvolElitist.Mutation2Prob := Mutation2Prob;
+      VEvolElitist.RepairProb := RepairProb;
+      VEvolElitist.SharedDirectory := SharedDirectory;
+      VEvolElitist.PollinationFreq := PollinationFreq;
+      VEvolElitist.FixIndividuals(HorarioIni);
       ProgressFormDrv := TProgressFormDrv.Create(MaxIteration, ACodHorario);
       try
-        VEvolElitist.OnProgress := ProgressFormDrv.OnProgress;
-        VEvolElitist.MaxIteration := MaxIteration;
-        VEvolElitist.CrossProb := CrossProb;
-        VEvolElitist.Mutation1Prob := Mutation1Prob;
-        VEvolElitist.Mutation1Order := Mutation1Order;
-        VEvolElitist.Mutation2Prob := Mutation2Prob;
-        VEvolElitist.RepairProb := RepairProb;
-        VEvolElitist.SharedDirectory := SharedDirectory;
-        VEvolElitist.PollinationFreq := PollinationFreq;
-        VEvolElitist.FixIndividuals(HorarioIni);
         {VEvolElitist.OnRecordBest := MainForm.OnRegistrarMejor;}
-        VEvolElitist.Execute(MasterDataModule.ConfigStorage.RefreshInterval);
+        VEvolElitist.OnProgress := ProgressFormDrv.OnProgress;
+        VEvolElitist.Execute(RefreshInterval);
         if ProgressFormDrv.CancelClick then
         begin
           Result := True;
@@ -67,29 +65,32 @@ begin
       if ApplyDoubleDownHill then
       begin
         DoubleDownHill := TDoubleDownHill.Create(VEvolElitist.BestIndividual);
-        ProgressFormDrv := TProgressFormDrv.Create(
-          TimeTableModel.SesionCantidadDoble, ACodHorario);
-        DoubleDownHill.OnProgress := ProgressFormDrv.OnProgress;
         try
-          DoubleDownHill.Execute(MasterDataModule.ConfigStorage.RefreshInterval);
-          if ProgressFormDrv.CancelClick then
-          begin
-            Result := True;
-            Exit;
+          ProgressFormDrv := TProgressFormDrv.Create(
+            TimeTableModel.SesionCantidadDoble, ACodHorario);
+          DoubleDownHill.OnProgress := ProgressFormDrv.OnProgress;
+          try
+            DoubleDownHill.Execute(RefreshInterval);
+            if ProgressFormDrv.CancelClick then
+            begin
+              Result := True;
+              Exit;
+            end;
+          finally
+            ProgressFormDrv.Free;
           end;
         finally
-          ProgressFormDrv.Free;
+          DoubleDownHill.Free;
         end;
       end
       else
       begin
         VEvolElitist.DownHillForced;
       end;
-      VEvolElitist.BestIndividual.UpdateValue;
+      VEvolElitist.BestIndividual.Update;
       ProcThreadPool.EnterPoolCriticalSection;
       try
-        VEvolElitist.SaveBestToDatabase(ACodHorario,
-          MasterDataModule.ConfigStorage.ApplyDoubleDownHill,
+        VEvolElitist.SaveBestToDatabase(ACodHorario, ApplyDoubleDownHill,
           FMomentoInicial, Now);
       finally
         ProcThreadPool.LeavePoolCriticalSection;
@@ -111,8 +112,6 @@ begin
 end;
 
 procedure TMakeTimeTableThread.Execute;
-var
-  i: Integer;
 begin
   ProcThreadPool.DoParallel(Parallel, 0, High(FValidCodes), nil);
 end;

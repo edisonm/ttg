@@ -298,7 +298,7 @@
         <UnitName Value="UIndivid"/>
       </Unit34>
       <Unit35>
-        <Filename Value="umakett.pas"/>
+        <Filename Value="umakett.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UMakeTT"/>
       </Unit35>
@@ -321,7 +321,6 @@
       <Debugging>
         <GenerateDwarf Value="True"/>
       </Debugging>
-      <LinkSmart Value="True"/>
       <Options>
         <Win32>
           <GraphicApplication Value="True"/>

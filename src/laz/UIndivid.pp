@@ -16,8 +16,6 @@ type
   end;
 
   IModel = interface(IUnknown)
-    function GetElitistCount: Smallint;
-    property ElitistCount: Smallint read GetElitistCount;
     function NewIndividual: TObject;
     {procedure DoProgress(Position, RefreshInterval: Integer;
       Individual: IIndividual; var Stop: Boolean);}
