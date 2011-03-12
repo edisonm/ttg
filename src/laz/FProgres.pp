@@ -7,7 +7,7 @@ interface
 uses
   {$IFDEF UNIX}CThreads, CMem, {$ENDIF}{$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF},
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons,
-  ExtCtrls, ComCtrls, KerModel, KerEvolE;
+  ExtCtrls, ComCtrls, KerModel, KerEvolE, HorColCm;
 
 type
 
@@ -163,8 +163,10 @@ begin
     lblCruceAulaTipo.Caption := Format('%d ', [CruceAulaTipo]);
     lblHoraHuecaDesubicada.Caption := Format('%d ', [HoraHuecaDesubicada]);
     lblSesionCortada.Caption := Format('%d ', [SesionCortada]);
-    lblMateriaProhibicion.Caption := Format('%d ', [MateriaProhibicion]);
-    lblProfesorProhibicion.Caption := Format('%d ', [ProfesorProhibicion]);
+    lblMateriaProhibicion.Caption :=
+      Format('%s ', [VarArrToStr(MateriaProhibicionTipoAMateriaCant)]);
+    lblProfesorProhibicion.Caption :=
+      Format('%s ', [VarArrToStr(ProfesorProhibicionTipoAProfesorCant)]);
     lblMateriaNoDispersa.Caption := Format('%d ', [MateriaNoDispersa]);
     lblCruceProfesorValor.Caption := Format('%8.2f ', [CruceProfesorValor]);
     lblProfesorFraccionamientoValor.Caption :=

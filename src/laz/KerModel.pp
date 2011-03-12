@@ -76,8 +76,7 @@ type
       FProfesorProhibicionAProfesor, FProfesorProhibicionAPeriodo,
       FProfesorProhibicionAProfesorProhibicionTipo, FDistributivoAAulaTipo,
       FParaleloACurso, FParaleloANivel, FParaleloAParaleloId,
-      FParaleloAEspecializacion, FProfesorCantHora,
-      FParaleloASesionCant: TDynamicSmallintArray;
+      FParaleloAEspecializacion, FParaleloASesionCant: TDynamicSmallintArray;
     FSesionADuracion: array [-1 .. 16382] of Smallint;
     FPSesionADuracion: PSmallintArray;
     FDiaHoraAPeriodo, FNivelEspecializacionACurso, FCursoParaleloIdAParalelo,
@@ -85,13 +84,12 @@ type
       FTimeTableDetailPattern, FDistributivoASesiones: TDynamicSmallintArrayArray;
     FProfesorPeriodoAProfesorProhibicionTipo,
       FMateriaPeriodoAMateriaProhibicionTipo: TDynamicShortintArrayArray;
-    FMateriaProhibicionTipoAValor,
-      FProfesorProhibicionTipoAValor: array [-1 .. 4094] of Double;
+    FMateriaProhibicionTipoAValor, FProfesorProhibicionTipoAValor: TDynamicDoubleArray;
     FMateriaProhibicionAValor, FProfesorProhibicionAValor: TDynamicDoubleArray;
-    FParaleloCant, FMateriaCant, FDiaCant, FHoraCant, FPeriodoCant,
-      FProfesorCant, FNivelCant, FEspecializacionCant, FCursoCant,
-      FAulaTipoCant, FDistributivoCant, FMaxProfesorProhibicionTipo,
-      FMaxMateriaProhibicionTipo: Smallint;
+    FMateriaCant, FMateriaProhibicionTipoCant, FProfesorProhibicionTipoCant,
+      FParaleloCant, FDiaCant, FHoraCant, FPeriodoCant, FProfesorCant, FCursoCant,
+      FNivelCant, FEspecializacionCant, FAulaTipoCant, FDistributivoCant,
+      FMaxProfesorProhibicionTipo: Smallint;
     FMaxProfesorProhibicionTipoValor: Double;
     FParaleloIdACodParaleloId, FMateriaACodMateria, FDiaACodDia, FHoraACodHora,
       FNivelACodNivel,
@@ -162,6 +160,9 @@ type
     FMateriaPeriodoCant: TDynamicSmallintArrayArray;
     FAulaTipoPeriodoCant: TDynamicSmallintArrayArray;
     FDiaProfesorFraccionamiento: TDynamicSmallintArrayArray;
+    FMateriaProhibicionTipoAMateriaCant: TDynamicSmallintArray;
+    FProfesorProhibicionTipoAProfesorCant: TDynamicSmallintArray;
+    
     FCruceProfesor: Integer;
     FCruceAulaTipo: Integer;
     FProfesorFraccionamiento: Integer;
@@ -170,10 +171,6 @@ type
     FParaleloMateriaDiaMinHora: TDynamicSmallintArrayArrayArray;
     FParaleloMateriaNoDispersa: TDynamicSmallintArray;
     FMateriaNoDispersa: Integer;
-    FMateriaProhibicion: Integer;
-    FMateriaProhibicionValor: Double;
-    FProfesorProhibicion: Integer;
-    FProfesorProhibicionValor: Double;
     FSesionCortada: Integer;
     FValue: Double;
     // Updating
@@ -208,9 +205,12 @@ type
     function GetMateriaNoDispersaValor: Double;
     function GetHoraHuecaDesubicadaValor: Double;
     function GetCruceProfesorValor: Double;
+    function GetMateriaProhibicionValor: Double;
+    function GetProfesorProhibicionValor: Double;
     function GetProfesorFraccionamientoValor: Double;
     function GetSesionCortadaValor: Double;
     function GetCruceAulaTipoValor: Double;
+    function GetValue: Double;
     procedure InternalMutate;
     procedure Swap(AParalelo, APeriodo1, APeriodo2: Smallint);
     procedure DoGetCruceProfesor;
@@ -255,12 +255,12 @@ type
     procedure Assign(ATimeTable: TTimeTable);
     property Value: Double read TablingInfo.FValue;
     property HoraHuecaDesubicada: Integer read TablingInfo.FHoraHuecaDesubicada;
+    property MateriaProhibicionTipoAMateriaCant: TDynamicSmallintArray
+      read TablingInfo.FMateriaProhibicionTipoAMateriaCant;
+    property ProfesorProhibicionTipoAProfesorCant: TDynamicSmallintArray
+      read TablingInfo.FProfesorProhibicionTipoAProfesorCant;
     property MateriaNoDispersa: Integer read TablingInfo.FMateriaNoDispersa;
     property SesionCortada: Integer read TablingInfo.FSesionCortada;
-    property MateriaProhibicion: Integer read TablingInfo.FMateriaProhibicion;
-    property MateriaProhibicionValor: Double read TablingInfo.FMateriaProhibicionValor;
-    property ProfesorProhibicion: Integer read TablingInfo.FProfesorProhibicion;
-    property ProfesorProhibicionValor: Double read TablingInfo.FProfesorProhibicionValor;
     property ElitistValues[Index: Integer]: Double read GetElitistValues;
     property CruceProfesor: Integer read TablingInfo.FCruceProfesor;
     property CruceAulaTipo: Integer read TablingInfo.FCruceAulaTipo;
@@ -270,6 +270,8 @@ type
     property HoraHuecaDesubicadaValor: Double read GetHoraHuecaDesubicadaValor;
     property SesionCortadaValor: Double read GetSesionCortadaValor;
     property MateriaNoDispersaValor: Double read GetMateriaNoDispersaValor;
+    property MateriaProhibicionValor: Double read GetMateriaProhibicionValor;
+    property ProfesorProhibicionValor: Double read GetProfesorProhibicionValor;
     property ParaleloPeriodoASesion: TDynamicSmallintArrayArray
       read FParaleloPeriodoASesion write FParaleloPeriodoASesion;
     property Model: TTimeTableModel read FModel;
@@ -375,9 +377,9 @@ var
       SetLength(FDiaAMaxPeriodo, FDiaCant);
       SetLength(FPeriodoAHora, FPeriodoCant);
       SetLength(FDiaHoraAPeriodo, FDiaCant, FHoraCant);
-      for Periodo := 0 to FDiaCant - 1 do
+      for Dia := 0 to FDiaCant - 1 do
       begin
-        FillChar(FDiaHoraAPeriodo[Periodo, 0], FHoraCant * SizeOf(Smallint), #$FF);
+        FillChar(FDiaHoraAPeriodo[Dia, 0], FHoraCant * SizeOf(Smallint), #$FF);
       end;
       VFieldDia := FindField('CodDia');
       VFieldHora := FindField('CodHora');
@@ -390,9 +392,9 @@ var
         FDiaHoraAPeriodo[Dia, Hora] := Periodo;
         Next;
       end;
-      for Periodo := 0 to FDiaCant - 1 do
+      for Dia := 0 to FDiaCant - 1 do
       begin
-        FDiaAMaxPeriodo[Periodo] := GetDiaAMaxPeriodo(Periodo);
+        FDiaAMaxPeriodo[Dia] := GetDiaAMaxPeriodo(Dia);
       end;
       First;
     end;
@@ -436,7 +438,7 @@ var
   end;
   procedure CargarAulaTipo;
   var
-    Cantidad: Integer;
+    AulaTipo: Integer;
     VFieldCantidad: TField;
   begin
     with SourceDataModule.TbAulaTipo do
@@ -445,9 +447,9 @@ var
       First;
       SetLength(FAulaTipoACantidad, RecordCount);
       VFieldCantidad := FindField('Cantidad');
-      for Cantidad := 0 to RecordCount - 1 do
+      for AulaTipo := 0 to RecordCount - 1 do
       begin
-        FAulaTipoACantidad[Cantidad] := VFieldCantidad.AsInteger;
+        FAulaTipoACantidad[AulaTipo] := VFieldCantidad.AsInteger;
         Next;
       end;
       First;
@@ -457,25 +459,16 @@ var
   var
     MateriaProhibicionTipo: Integer;
     VFieldValor: TField;
-    MaxMateriaProhibicionTipoValor: Double;
   begin
     with SourceDataModule.TbMateriaProhibicionTipo do
     begin
       IndexFieldNames := 'CodMateProhibicionTipo';
       First;
       VFieldValor := FindField('ValMateProhibicionTipo');
-      FMaxMateriaProhibicionTipo := -1;
-      MaxMateriaProhibicionTipoValor := -1.7E308;
-      FMateriaProhibicionTipoAValor[-1] := 0;
+      SetLength(FMateriaProhibicionTipoAValor, RecordCount);
       for MateriaProhibicionTipo := 0 to RecordCount - 1 do
       begin
         FMateriaProhibicionTipoAValor[MateriaProhibicionTipo] := VFieldValor.AsFloat;
-        if MaxMateriaProhibicionTipoValor < FMateriaProhibicionTipoAValor[MateriaProhibicionTipo]
-          then
-        begin
-          MaxMateriaProhibicionTipoValor := FMateriaProhibicionTipoAValor[MateriaProhibicionTipo];
-          FMaxMateriaProhibicionTipo := MateriaProhibicionTipo;
-        end;
         Next;
       end;
       First;
@@ -491,9 +484,9 @@ var
       IndexFieldNames := 'CodProfProhibicionTipo';
       First;
       VFieldValor := FindField('ValProfProhibicionTipo');
+      SetLength(FProfesorProhibicionTipoAValor, RecordCount);
       FMaxProfesorProhibicionTipo := -1;
       FMaxProfesorProhibicionTipoValor := -1.7E308;
-      FProfesorProhibicionTipoAValor[-1] := 0;
       for ProfesorProhibicionTipo := 0 to RecordCount - 1 do
       begin
         FProfesorProhibicionTipoAValor[ProfesorProhibicionTipo] := VFieldValor.AsFloat;
@@ -586,10 +579,6 @@ var
         FProfesorProhibicionAProfesorProhibicionTipo[ProfesorProhibicion] := ProfesorProhibicionTipo;
         Valor := FProfesorProhibicionTipoAValor[ProfesorProhibicionTipo];
         FProfesorProhibicionAValor[ProfesorProhibicion] := Valor;
-        if Valor = FMaxProfesorProhibicionTipoValor then
-        begin
-          Inc(FProfesorCantHora[Profesor]);
-        end;
         FProfesorPeriodoAProfesorProhibicionTipo[Profesor, Periodo] := ProfesorProhibicionTipo;
         Next;
       end;
@@ -727,9 +716,6 @@ var
         d := FSesionADuracion[s];
         Inc(j, d);
         Inc(FParaleloASesionCant[I]);
-        if s >= 0 then
-          Inc(FProfesorCantHora[FParaleloMateriaAProfesor[I, FSesionAMateria[s]]
-              ], d);
       end;
     end;
     FSesionCantidadDoble := 0;
@@ -750,7 +736,6 @@ begin
     Cargar(TbProfesor, 'CodProfesor', FMinCodProfesor, FCodProfesorAProfesor,
       FProfesorACodProfesor);
     FProfesorCant := Length(FProfesorACodProfesor);
-    SetLength(FProfesorCantHora, FProfesorCant);
     Cargar(TbNivel, 'CodNivel', FMinCodNivel, FCodNivelANivel, FNivelACodNivel);
     FNivelCant := Length(FNivelACodNivel);
     Cargar(TbEspecializacion, 'CodEspecializacion', FMinCodEspecializacion,
@@ -770,10 +755,12 @@ begin
       FMinCodMateProhibicionTipo,
       FCodMateProhibicionTipoAMateriaProhibicionTipo,
       FMateriaProhibicionTipoACodMateProhibicionTipo);
+    FMateriaProhibicionTipoCant := Length(FMateriaProhibicionTipoACodMateProhibicionTipo);
     Cargar(TbProfesorProhibicionTipo, 'CodProfProhibicionTipo',
       FMinCodProfProhibicionTipo,
       FCodProfProhibicionTipoAProfesorProhibicionTipo,
       FProfesorProhibicionTipoACodProfProhibicionTipo);
+    FProfesorProhibicionTipoCant := Length(FProfesorProhibicionTipoACodProfProhibicionTipo);
     Cargar(TbAulaTipo, 'CodAulaTipo', FMinCodAulaTipo, FCodAulaTipoAAulaTipo,
       FAulaTipoACodAulaTipo);
     FAulaTipoCant := Length(FAulaTipoACodAulaTipo);
@@ -929,6 +916,8 @@ begin
     SetLength(TablingInfo.FParaleloMateriaDiaMinHora, FParaleloCant, FMateriaCant, FDiaCant);
     SetLength(TablingInfo.FParaleloMateriaDiaMaxHora, FParaleloCant, FMateriaCant, FDiaCant);
     SetLength(TablingInfo.FDiaProfesorFraccionamiento, FDiaCant, FProfesorCant);
+    SetLength(TablingInfo.FMateriaProhibicionTipoAMateriaCant, FMateriaProhibicionTipoCant);
+    SetLength(TablingInfo.FProfesorProhibicionTipoAProfesorCant, FProfesorProhibicionTipoCant);
     SetLength(TablingInfo.FParaleloMateriaNoDispersa, FParaleloCant);
     SetLength(FAntMateriaDiaMinHora, FMateriaCant, FDiaCant);
     SetLength(FAntMateriaDiaMaxHora, FMateriaCant, FDiaCant);
@@ -1077,7 +1066,7 @@ end;
 
 function TTimeTable.InternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint): Double;
 var
-  Materia, Duracion, Duracion1, Duracion2, Sesion1, Sesion2, Intervalo: Smallint;
+  Materia, Duracion1, Duracion2, Sesion1, Sesion2: Smallint;
   PeriodoASesion, MateriaAProfesor: PSmallintArray;
   ActualizarDiaProfesor, ActualizarDiaMateria: TDynamicBooleanArrayArray;
   procedure DoMovement;
@@ -1094,7 +1083,7 @@ var
   procedure DecCants(Periodo1, Periodo2: Smallint);
   var
     MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Dia, Sesion,
-    Profesor, AulaTipo, Corte: Smallint;
+    Profesor, AulaTipo: Smallint;
   begin
     with Model, TablingInfo do
     begin
@@ -1118,18 +1107,10 @@ var
           Dec(FAulaTipoPeriodoCant[AulaTipo, Periodo]);
           MateriaProhibicionTipo := FMateriaPeriodoAMateriaProhibicionTipo[Materia, Periodo];
           if MateriaProhibicionTipo >= 0 then
-          begin
-            FMateriaProhibicionValor := FMateriaProhibicionValor -
-              FMateriaProhibicionTipoAValor[MateriaProhibicionTipo];
-            Dec(FMateriaProhibicion);
-          end;
+            Dec(FMateriaProhibicionTipoAMateriaCant[MateriaProhibicionTipo]);
           ProfesorProhibicionTipo := FProfesorPeriodoAProfesorProhibicionTipo[Profesor, Periodo];
           if ProfesorProhibicionTipo >= 0 then
-          begin
-            FProfesorProhibicionValor := FProfesorProhibicionValor -
-              FProfesorProhibicionTipoAValor[ProfesorProhibicionTipo];
-            Dec(FProfesorProhibicion);
-          end;
+            Dec(FProfesorProhibicionTipoAProfesorCant[ProfesorProhibicionTipo]);
         end
         else if FHoraCant - 1 <> FPeriodoAHora[Periodo] then
         begin
@@ -1141,7 +1122,7 @@ var
   procedure IncCants(Periodo1, Periodo2: Smallint);
   var
     Dia, MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Sesion,
-    Profesor, AulaTipo, Corte: Smallint;
+    Profesor, AulaTipo: Smallint;
   begin
     with Model, TablingInfo do
     begin
@@ -1165,18 +1146,10 @@ var
             Inc(FCruceAulaTipo);
           MateriaProhibicionTipo := FMateriaPeriodoAMateriaProhibicionTipo[Materia, Periodo];
           if MateriaProhibicionTipo >= 0 then
-          begin
-            FMateriaProhibicionValor := FMateriaProhibicionValor +
-              FMateriaProhibicionTipoAValor[MateriaProhibicionTipo];
-            Inc(FMateriaProhibicion);
-          end;
+            Inc(FMateriaProhibicionTipoAMateriaCant[MateriaProhibicionTipo]);
           ProfesorProhibicionTipo := FProfesorPeriodoAProfesorProhibicionTipo[Profesor, Periodo];
           if ProfesorProhibicionTipo >= 0 then
-          begin
-            FProfesorProhibicionValor := FProfesorProhibicionValor +
-              FProfesorProhibicionTipoAValor[ProfesorProhibicionTipo];
-            Inc(FProfesorProhibicion);
-          end;
+            Inc(FProfesorProhibicionTipoAProfesorCant[ProfesorProhibicionTipo]);
         end
         else if FHoraCant - 1 <> FPeriodoAHora[Periodo] then
         begin
@@ -1209,7 +1182,7 @@ var
 
   procedure UpdateParaleloMateria(Periodo1, Periodo2: Smallint);
   var
-    Dia, Hora, Sesion, Profesor, Materia, Periodo: Smallint;
+    Dia, Hora, Sesion, Materia, Periodo: Smallint;
   begin
     with Model, TablingInfo do
     begin
@@ -1309,15 +1282,7 @@ begin
     FParaleloMateriaNoDispersa[AParalelo] := GetParaleloMateriaNoDispersa(AParalelo);
     Inc(FMateriaNoDispersa, FParaleloMateriaNoDispersa[AParalelo]);
     UpdateProfesorFraccionamiento;
-    FValue :=
-      FCruceAulaTipo * FCruceAulaTipoValor +
-      FCruceProfesor * FCruceProfesorValor +
-      FHoraHuecaDesubicada * FHoraHuecaDesubicadaValor +
-      FMateriaNoDispersa * FMateriaNoDispersaValor +
-      FMateriaProhibicionValor +
-      FProfesorFraccionamiento * FProfesorFraccionamientoValor +
-      FProfesorProhibicionValor +
-      FSesionCortada * FSesionCortadaValor;
+    FValue := GetValue;
     {$IFDEF DEBUG}
     CruceAulaTipo2 := FCruceAulaTipo;
     CruceProfesor2 := FCruceProfesor;
@@ -1403,25 +1368,29 @@ begin
     Add('--------------------------------------------------');
     Add('Detalle                     Cant.    Peso    Valor');
     Add('--------------------------------------------------');
-    Add(Format('Cruce de profesores:        %5.d %7.2f %8.2f', [FCruceProfesor,
+    Add(Format('Cruce de profesores:       %6.d %7.2f %8.2f', [FCruceProfesor,
         Model.CruceProfesorValor, CruceProfesorValor]));
-    Add(Format('Fracc. h. profesores:       %5.d %7.2f %8.2f',
+    Add(Format('Fracc. h. profesores:      %6.d %7.2f %8.2f',
         [ProfesorFraccionamiento, Model.ProfesorFraccionamientoValor,
         ProfesorFraccionamientoValor]));
-    Add(Format('Cruce de aulas:             %5.d %7.2f %8.2f', [FCruceAulaTipo,
+    Add(Format('Cruce de aulas:            %6.d %7.2f %8.2f', [FCruceAulaTipo,
         Model.CruceAulaTipoValor, CruceAulaTipoValor]));
-    Add(Format('Horas Huecas desubicadas:   %5.d %7.2f %8.2f',
+    Add(Format('Horas Huecas desubicadas:  %6.d %7.2f %8.2f',
         [HoraHuecaDesubicada, Model.HoraHuecaDesubicadaValor,
         HoraHuecaDesubicadaValor]));
-    Add(Format('Materias cortadas:          %5.d %7.2f %8.2f', [SesionCortada,
+    Add(Format('Materias cortadas:         %6.d %7.2f %8.2f', [SesionCortada,
         Model.SesionCortadaValor, SesionCortadaValor]));
-    Add(Format('Materias no dispersas:      %5.d %7.2f %8.2f',
+    Add(Format('Materias no dispersas:     %6.d %7.2f %8.2f',
         [MateriaNoDispersa, Model.MateriaNoDispersaValor,
         MateriaNoDispersaValor]));
-    Add(Format('Prohibiciones de materia:   %5.d         %8.2f',
-        [MateriaProhibicion, MateriaProhibicionValor]));
-    Add(Format('Prohibiciones de profesor:  %5.d         %8.2f',
-        [ProfesorProhibicion, ProfesorProhibicionValor]));
+    Add(Format('Prohibiciones de materia:  %6s %6s %8.2f',
+        [VarArrToStr(FMateriaProhibicionTipoAMateriaCant),
+         VarArrToStr(Model.FMateriaProhibicionTipoAValor),
+         MateriaProhibicionValor]));
+    Add(Format('Prohibiciones de profesor: %6s %6s %8.2f',
+        [VarArrToStr(FProfesorProhibicionTipoAProfesorCant),
+         VarArrToStr(Model.FProfesorProhibicionTipoAValor),
+         ProfesorProhibicionValor]));
     Add('--------------------------------------------------');
     Add(Format('Valor Total:                              %8.2f', [Value]));
   end;
@@ -1532,100 +1501,35 @@ begin
   Update;
 end;
 
-(*
-{$IFDEF DEBUG}
-procedure TTimeTable.ErrorMsgValue(const AMethod: string);
-begin
-  MessageDlg(Format('TTimeTable.%s:', [AMethod]), 'Value not calculated yet',
-    mtError, [mbOk], 0);
-end;
-
-function TTimeTable.GetValue: Double;
-begin
-  if RecalculateValue then
-  begin
-    ErrorMsgValue('GetValue');
-    CalculateValue;
-  end;
-  Result := TablingInfo.FValue;
-end;
-
-function TTimeTable.GetMateriaNoDispersa: Integer;
-begin
-  if FRecalculateValue then
-  begin
-    ErrorMsgValue('GetMateriaNoDispersa');
-    CalculateValue;
-  end;
-  Result := TablingInfo.FMateriaNoDispersa;
-end;
-
-function TTimeTable.GetHoraHuecaDesubicada: Integer;
-begin
-  if FRecalculateValue then
-  begin
-    ErrorMsgValue('GetHoraHuecaDesubicada');
-    CalculateValue;
-  end;
-  Result := TablingInfo.FHoraHuecaDesubicada;
-end;
-
-function TTimeTable.GetSesionCortada: Integer;
-begin
-  if FRecalculateValue then
-  begin
-    ErrorMsgValue('GetSesionCortada');
-    CalculateValue;
-  end;
-  Result := TablingInfo.FSesionCortada;
-end;
-
-function TTimeTable.GetMateriaProhibicion: Integer;
-begin
-  if FRecalculateValue then
-  begin
-    ErrorMsgValue('GetMateriaProhibicion');
-    CalculateValue;
-  end;
-  Result := TablingInfo.FMateriaProhibicion;
-end;
-
-function TTimeTable.GetMateriaProhibicionValor: Double;
-begin
-  if FRecalculateValue then
-  begin
-    ErrorMsgValue('GetMateriaProhibicionValor');
-    CalculateValue;
-  end;
-  Result := TablingInfo.FMateriaProhibicionValor;
-end;
-
-function TTimeTable.GetProfesorProhibicion: Integer;
-begin
-  if FRecalculateValue then
-  begin
-    ErrorMsgValue('GetProfesorProhibicion');
-    CalculateValue;
-  end;
-  Result := TablingInfo.FProfesorProhibicion;
-end;
-
-function TTimeTable.GetProfesorProhibicionValor: Double;
-begin
-  if FRecalculateValue then
-  begin
-    ErrorMsgValue('GetProfesorProhibicionValor');
-    CalculateValue;
-  end;
-  Result := TablingInfo.FProfesorProhibicionValor;
-end;
-
-{$ENDIF}
-*)
-
 function TTimeTable.GetHoraHuecaDesubicadaValor: Double;
 begin
   Result := Model.FHoraHuecaDesubicadaValor * HoraHuecaDesubicada;
+end;
+
+function TTimeTable.GetMateriaProhibicionValor: Double;
+var
+  MateriaProhibicionTipo: Smallint;
+begin
+  Result := 0;
+  with Model, TablingInfo do
+  for MateriaProhibicionTipo := 0 to FMateriaProhibicionTipoCant - 1 do
+  begin
+    Result := Result + FMateriaProhibicionTipoAMateriaCant[MateriaProhibicionTipo]
+      * FMateriaProhibicionTipoAValor[MateriaProhibicionTipo];
+  end;
+end;
+
+function TTimeTable.GetProfesorProhibicionValor: Double;
+var
+  ProfesorProhibicionTipo: Smallint;
+begin
+  Result := 0;
+  with Model, TablingInfo do
+  for ProfesorProhibicionTipo := 0 to FProfesorProhibicionTipoCant - 1 do
+  begin
+    Result := Result + FProfesorProhibicionTipoAProfesorCant[ProfesorProhibicionTipo]
+      * FProfesorProhibicionTipoAValor[ProfesorProhibicionTipo];
+  end;
 end;
 
 procedure TTimeTable.DoGetHoraHuecaDesubicada;
@@ -1654,6 +1558,11 @@ begin
 end;
 
 {
+// Better function???
+
+// (FPeriodoADia[Periodo2] - FPeriodoADia[Periodo1]) * FHoraCant
+// FPeriodoAHora[Periodo2] - FPeriodoAHora[Periodo1] + 1 - Duracion
+
 function TTimeTable.DeltaSesionCortada(Paralelo, Periodo1, Periodo2: Integer): Integer;
 var
   Periodo, Dia, Sesion: Integer;
@@ -1685,12 +1594,6 @@ begin
     end;
   end;
 end;
-}
-{
-Better function:
-
-(FPeriodoADia[Periodo2] - FPeriodoADia[Periodo1]) * FHoraCant
-FPeriodoAHora[Periodo2] - FPeriodoAHora[Periodo1] + 1 - Duracion
 }
 
 function TTimeTable.DeltaSesionCortada(Paralelo, Periodo1, Periodo2: Integer): Integer;
@@ -1802,20 +1705,21 @@ end;
 
 procedure TTimeTable.DoGetMateriaProhibicionValor;
 var
-  MateriaProhibicion, Materia, Periodo, Cantidad: Integer;
+  MateriaProhibicion, MateriaProhibicionTipo, Materia, Periodo, Cantidad: Integer;
 begin
-  TablingInfo.FMateriaProhibicionValor := 0;
-  TablingInfo.FMateriaProhibicion := 0;
   with Model, TablingInfo do
+  begin
+    for MateriaProhibicionTipo := 0 to FMateriaProhibicionTipoCant - 1 do
+      FMateriaProhibicionTipoAMateriaCant[MateriaProhibicionTipo] := 0;
     for MateriaProhibicion := 0 to High(FMateriaProhibicionAMateria) do
     begin
       Materia := FMateriaProhibicionAMateria[MateriaProhibicion];
       Periodo := FMateriaProhibicionAPeriodo[MateriaProhibicion];
+      MateriaProhibicionTipo := FMateriaProhibicionAMateriaProhibicionTipo[MateriaProhibicion];
       Cantidad := FMateriaPeriodoCant[Materia, Periodo];
-      TablingInfo.FMateriaProhibicionValor := TablingInfo.FMateriaProhibicionValor +
-        Cantidad * FMateriaProhibicionAValor[MateriaProhibicion];
-      Inc(TablingInfo.FMateriaProhibicion, Cantidad);
+      Inc(FMateriaProhibicionTipoAMateriaCant[MateriaProhibicionTipo], Cantidad);
     end;
+  end;
 end;
 
 function TTimeTable.DeltaMateriaProhibicionValor(Paralelo, Periodo1, Periodo2: Integer): Double;
@@ -1827,6 +1731,7 @@ begin
   with Model do
   for Periodo := Periodo1 to Periodo2 do
   begin
+    PeriodoASesion := @FParaleloPeriodoASesion[Paralelo];
     Sesion := PeriodoASesion[Periodo];
     if Sesion >= 0 then
     begin
@@ -1842,21 +1747,20 @@ end;
 
 procedure TTimeTable.DoGetProfesorProhibicionValor;
 var
-  ProfesorProhibicion, Profesor, Periodo, Cantidad: Smallint;
+  ProfesorProhibicion, ProfesorProhibicionTipo, Profesor, Periodo, Cantidad: Smallint;
   d: Double;
 begin
-  with Model do
+  with Model, TablingInfo do
   begin
-    TablingInfo.FProfesorProhibicionValor := 0;
-    TablingInfo.FProfesorProhibicion := 0;
+    for ProfesorProhibicionTipo := 0 to FProfesorProhibicionTipoCant - 1 do
+      FProfesorProhibicionTipoAProfesorCant[ProfesorProhibicionTipo] := 0;
     for ProfesorProhibicion := 0 to High(FProfesorProhibicionAProfesor) do
     begin
       Profesor := FProfesorProhibicionAProfesor[ProfesorProhibicion];
       Periodo := FProfesorProhibicionAPeriodo[ProfesorProhibicion];
-      Cantidad := TablingInfo.FProfesorPeriodoCant[Profesor, Periodo];
-      TablingInfo.FProfesorProhibicionValor := TablingInfo.FProfesorProhibicionValor +
-        Cantidad * FProfesorProhibicionAValor[ProfesorProhibicion];
-      Inc(TablingInfo.FProfesorProhibicion, Cantidad);
+      ProfesorProhibicionTipo := FProfesorProhibicionAProfesorProhibicionTipo[ProfesorProhibicion];
+      Cantidad := FProfesorPeriodoCant[Profesor, Periodo];
+      Inc(FProfesorProhibicionTipoAProfesorCant[ProfesorProhibicionTipo], Cantidad);
     end;
   end;
 end;
@@ -1931,17 +1835,22 @@ begin
     DoGetProfesorFraccionamiento;
     DoGetProfesorProhibicionValor;
     DoGetSesionCortada;
-    with TablingInfo do
-      FValue :=
-        FCruceAulaTipo * FCruceAulaTipoValor +
-        FCruceProfesor * FCruceProfesorValor +
-        FHoraHuecaDesubicada * FHoraHuecaDesubicadaValor +
-        FMateriaNoDispersa * FMateriaNoDispersaValor +
-        FMateriaProhibicionValor +
-        FProfesorFraccionamiento * FProfesorFraccionamientoValor +
-        FProfesorProhibicionValor +
-        FSesionCortada * FSesionCortadaValor;
+    TablingInfo.FValue := GetValue;
   end;
+end;
+
+function TTimeTable.GetValue: Double;
+begin
+  with TablingInfo do
+    Result :=
+      CruceAulaTipoValor +
+      CruceProfesorValor +
+      HoraHuecaDesubicadaValor +
+      MateriaNoDispersaValor +
+      MateriaProhibicionValor +
+      ProfesorFraccionamientoValor +
+      ProfesorProhibicionValor +
+      SesionCortadaValor;
 end;
 
 procedure TTimeTable.UpdateProfesorPeriodoCant;
@@ -2134,12 +2043,12 @@ begin
     FHoraHuecaDesubicada := ATimeTable.TablingInfo.FHoraHuecaDesubicada;
     FSesionCortada := ATimeTable.TablingInfo.FSesionCortada;
     FMateriaNoDispersa := ATimeTable.TablingInfo.FMateriaNoDispersa;
-    FMateriaProhibicion := ATimeTable.TablingInfo.FMateriaProhibicion;
-    FProfesorProhibicion := ATimeTable.TablingInfo.FProfesorProhibicion;
-    FMateriaProhibicionValor := ATimeTable.TablingInfo.FMateriaProhibicionValor;
-    FProfesorProhibicionValor := ATimeTable.TablingInfo.FProfesorProhibicionValor;
     FValue := ATimeTable.TablingInfo.FValue;
     // TablingInfo := ATimeTable.TablingInfo;
+    Move(ATimeTable.TablingInfo.FMateriaProhibicionTipoAMateriaCant[0],
+      FMateriaProhibicionTipoAMateriaCant[0], FMateriaProhibicionTipoCant * SizeOf(Smallint));
+    Move(ATimeTable.TablingInfo.FProfesorProhibicionTipoAProfesorCant[0],
+      FProfesorProhibicionTipoAProfesorCant[0], FProfesorProhibicionTipoCant * SizeOf(Smallint));
     Move(ATimeTable.TablingInfo.FParaleloMateriaNoDispersa[0],
       FParaleloMateriaNoDispersa[0], FParaleloCant * SizeOf(Smallint));
     for Paralelo := 0 to FParaleloCant - 1 do

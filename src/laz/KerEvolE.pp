@@ -616,7 +616,7 @@ procedure TSolver.DoProgress(Position, RefreshInterval: Integer;
   Solver: TSolver; var Stop: Boolean);
 begin
   if Assigned(FOnProgress) and (Position mod RefreshInterval = 0) then
-    FOnProgress(Position, Self, Stop);
+    FOnProgress(Position, Solver, Stop);
 end;
 
 { TDoubleDownHill }
