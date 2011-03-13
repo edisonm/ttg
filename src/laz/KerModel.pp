@@ -1360,8 +1360,6 @@ begin
       FillChar(ActualizarDiaMateria[Dia, 0], FMateriaCant * SizeOf(Boolean), #0);
     end;
     Dec(FMateriaNoDispersa, FParaleloMateriaNoDispersa[AParalelo]);
-    { FDiaHoraAPeriodo[FPeriodoADia[APeriodo1], 0],
-      FDiaAMaxPeriodo[FPeriodoADia[APeriodo2 + Duracion2 - 1]]));}
     if (Duracion1 = Duracion2) then
     begin
       DecCants(AParalelo, APeriodo1, APeriodo1 + Duracion1 - 1,
