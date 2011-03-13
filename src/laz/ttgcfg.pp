@@ -37,6 +37,8 @@ type
     procedure SetRefreshInterval(Value: Integer);
     function GetCruceProfesor: Extended;
     procedure SetCruceProfesor(Value: Extended);
+    function GetCruceMateria: Extended;
+    procedure SetCruceMateria(Value: Extended);
     function GetProfesorFraccionamiento: Extended;
     procedure SetProfesorFraccionamiento(Value: Extended);
     function GetCruceAulaTipo: Extended;
@@ -84,6 +86,7 @@ type
     property Seed: Integer read GetSeed write SetSeed;
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
     property CruceProfesor: Extended read GetCruceProfesor write SetCruceProfesor;
+    property CruceMateria: Extended read GetCruceMateria write SetCruceMateria;
     property ProfesorFraccionamiento: Extended read GetProfesorFraccionamiento write SetProfesorFraccionamiento;
     property CruceAulaTipo: Extended read GetCruceAulaTipo write SetCruceAulaTipo;
     property HoraHueca: Extended read GetHoraHueca write SetHoraHueca;
@@ -222,6 +225,16 @@ end;
 procedure TTTGConfig.SetCruceProfesor(Value: Extended);
 begin
   Floats['CruceProfesor'] := Value;
+end;
+
+function TTTGConfig.GetCruceMateria: Extended;
+begin
+  Result := Floats['CruceMateria'];
+end;
+
+procedure TTTGConfig.SetCruceMateria(Value: Extended);
+begin
+  Floats['CruceMateria'] := Value;
 end;
 
 function TTTGConfig.GetProfesorFraccionamiento: Extended;
@@ -399,6 +412,7 @@ begin
   Self.Seed := 1;
   RefreshInterval := 1;
   CruceProfesor := 200;
+  CruceMateria := 200;
   ProfesorFraccionamiento := 50;
   CruceAulaTipo := 200;
   HoraHueca := 100;

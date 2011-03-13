@@ -331,8 +331,8 @@ begin
     MomentoInicial := Now;
     MainForm.Ejecutando := True;
     TimeTableModel := TTimeTableModel.CreateFromDataModule(CruceProfesor,
-      ProfesorFraccionamiento, CruceAulaTipo, HoraHueca, SesionCortada,
-      MateriaNoDispersa);
+      CruceMateria, CruceAulaTipo, ProfesorFraccionamiento, HoraHueca,
+      SesionCortada, MateriaNoDispersa);
     MainForm.StatusBar.Panels[1].Style := psOwnerDraw;
     MainForm.Progress := 0;
     MainForm.Pasada := 0;

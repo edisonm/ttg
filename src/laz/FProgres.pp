@@ -15,12 +15,17 @@ type
 
   TProgressForm = class(TForm)
     lblColision: TLabel;
+    lblCruceMateria: TLabel;
+    lblCruceMateriaValor: TLabel;
     lblExports: TLabel;
     lblImports: TLabel;
     Panel4: TPanel;
     Panel5: TPanel;
     Panel6: TPanel;
     Panel7: TPanel;
+    pnlCruceMateria: TPanel;
+    pnlCruceMateriaCantidad: TPanel;
+    pnlCruceMateriaValor: TPanel;
     pnlProgress: TPanel;
     bbtnClose: TBitBtn;
     pnlValorTotal: TPanel;
@@ -158,9 +163,10 @@ begin
     lblPosition.Caption := Format('%d/%d', [APosition, PBProgress.Max]);
     PBProgress.Position := APosition;
     lblCruceProfesor.Caption := Format('%d ', [CruceProfesor]);
+    lblCruceMateria.Caption := Format('%d ', [ASolver.BestIndividual.CruceMateria]);
+    lblCruceAulaTipo.Caption := Format('%d ', [CruceAulaTipo]);
     lblProfesorFraccionamiento.Caption :=
       Format('%d ', [ProfesorFraccionamiento]);
-    lblCruceAulaTipo.Caption := Format('%d ', [CruceAulaTipo]);
     lblHoraHuecaDesubicada.Caption := Format('%d ', [HoraHuecaDesubicada]);
     lblSesionCortada.Caption := Format('%d ', [SesionCortada]);
     lblMateriaProhibicion.Caption :=
@@ -169,6 +175,7 @@ begin
       Format('%s ', [VarArrToStr(ProfesorProhibicionTipoAProfesorCant)]);
     lblMateriaNoDispersa.Caption := Format('%d ', [MateriaNoDispersa]);
     lblCruceProfesorValor.Caption := Format('%8.2f ', [CruceProfesorValor]);
+    lblCruceMateriaValor.Caption := Format('%8.2f ', [ASolver.BestIndividual.CruceMateriaValor]);
     lblProfesorFraccionamientoValor.Caption :=
       Format('%8.2f ', [ProfesorFraccionamientoValor]);
     lblCruceAulaTipoValor.Caption := Format('%8.2f ', [CruceAulaTipoValor]);

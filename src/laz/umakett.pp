@@ -124,8 +124,8 @@ begin
   FreeOnTerminate := True;
   with MasterDataModule.ConfigStorage do
     FTimeTableModel := TTimeTableModel.CreateFromDataModule(CruceProfesor,
-      ProfesorFraccionamiento, CruceAulaTipo, HoraHueca, SesionCortada,
-      MateriaNoDispersa);
+      CruceMateria, CruceAulaTipo, ProfesorFraccionamiento, HoraHueca,
+      SesionCortada, MateriaNoDispersa);
   SetLength(FValidCodes, Length(AValidCodes));
   // ProcThreadPool.MaxThreadCount := Length(AValidCodes);
   for i := 0 to High(AValidCodes) do
