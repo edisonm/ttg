@@ -73,7 +73,7 @@ $(TTGEXE): $(BASEDELFILES)
 
 $(DSRCBASE).pas: $(DBUTILS) $(TTGMDB) Makefile
 	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule \
-	  $(DSRCBASE) 'cds;csr;U=ZConnection, ZAbstractRODataset, ZAbstractDataset, ZAbstractTable, ZDataset;DS=ZTable'
+	  $(DSRCBASE) 'cds;csr;U=ZConnection, ZDataset;DS=ZTable'
 
 $(DBUTILS):
 	cd ../.. ; $(MAKE) $(DBUTILS)

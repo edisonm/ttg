@@ -570,8 +570,6 @@ begin
           Add('{$R *.DFM}');
           Add('{$ENDIF}');
           Add('');
-          Add('uses RelUtils;');
-          Add('');
           AddStrings(ProcImpl);
           Add('');
           Add(Format('procedure T%s.DataModuleCreate(Sender: TObject);',
