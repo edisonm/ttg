@@ -80,7 +80,7 @@ type
     FSesionADuracion: array [-1 .. 16382] of Smallint;
     FPSesionADuracion: PSmallintArray;
     FDiaHoraAPeriodo, FNivelEspecializacionACurso, FCursoParaleloIdAParalelo,
-      FParaleloMateriaAProfesor, FParaleloMateriaADistributivo,
+      FParaleloMateriaAProfesor, FParaleloMateriaADistributivo, FParaleloMateriaCant,
       FTimeTableDetailPattern, FDistributivoASesiones: TDynamicSmallintArrayArray;
     FProfesorPeriodoAProfesorProhibicionTipo,
       FMateriaPeriodoAMateriaProhibicionTipo: TDynamicShortintArrayArray;
@@ -170,6 +170,7 @@ type
     FMateriaPeriodoCant: TDynamicSmallintArrayArray;
     FAulaTipoPeriodoCant: TDynamicSmallintArrayArray;
     FParaleloDiaMateriaCant: TDynamicSmallintArrayArrayArray;
+    FParaleloDiaMateriaAcumulacion: TDynamicSmallintArrayArrayArray;
     FDiaProfesorFraccionamiento: TDynamicSmallintArrayArray;
     FMateriaProhibicionTipoAMateriaCant: TDynamicSmallintArray;
     FProfesorProhibicionTipoAProfesorCant: TDynamicSmallintArray;
@@ -587,8 +588,8 @@ var
   end;
   procedure CargarDistributivo;
   var
-    Materia, Nivel, Sesion1, Distributivo, Paralelo, Profesor, Curso,
-      Especializacion, Sesion2, Sesion, AulaTipo, VPos: Integer;
+    Materia, Nivel, Especializacion, ParaleloId, Sesion1, Distributivo,
+      Paralelo, Profesor, Curso, Sesion2, Sesion, AulaTipo, VPos: Integer;
     VFieldMateria, VFieldNivel, VFieldParaleloId, VFieldProfesor,
       VFieldEspecializacion, VFieldAulaTipo, VFieldComposicion: TField;
     VSesionADuracion, VSesionADistributivo: array [0 .. 16383] of Smallint;
@@ -613,34 +614,34 @@ var
       SetLength(FDistributivoASesiones, FDistributivoCant);
       SetLength(FDistributivoAMateria, FDistributivoCant);
       SetLength(FParaleloMateriaAProfesor, FParaleloCant, FMateriaCant);
+      SetLength(FParaleloMateriaCant, FParaleloCant, FMateriaCant);
       SetLength(FParaleloMateriaADistributivo, FParaleloCant, FMateriaCant);
       for Paralelo := 0 to FParaleloCant - 1 do
-        FillChar(FParaleloMateriaADistributivo[Paralelo, 0],
-          FMateriaCant * SizeOf(Smallint), #$FF);
-      for Paralelo := 0 to FParaleloCant - 1 do
-      begin
-        FillChar(FParaleloMateriaAProfesor[Paralelo, 0],
-          FMateriaCant * SizeOf(Smallint), #$FF);
-      end;
+        for Materia := 0 to FMateriaCant - 1 do
+        begin
+          FParaleloMateriaCant[Paralelo, Materia] := 0;
+          FParaleloMateriaADistributivo[Paralelo, Materia] := -1;
+          FParaleloMateriaAProfesor[Paralelo, Materia] := -1;
+        end;
       Sesion2 := 0;
       for Distributivo := 0 to RecordCount - 1 do
       begin
         Materia := FCodMateriaAMateria[VFieldMateria.AsInteger - FMinCodMateria];
         Nivel := FCodNivelANivel[VFieldNivel.AsInteger - FMinCodNivel];
-        Sesion1 := FCodParaleloIdAParaleloId[VFieldParaleloId.AsInteger -
+        ParaleloId := FCodParaleloIdAParaleloId[VFieldParaleloId.AsInteger -
           FMinCodParaleloId];
         Especializacion := FCodEspecializacionAEspecializacion
           [VFieldEspecializacion.AsInteger - FMinCodEspecializacion];
         AulaTipo := FCodAulaTipoAAulaTipo[VFieldAulaTipo.AsInteger - FMinCodAulaTipo];
         Curso := FNivelEspecializacionACurso[Nivel, Especializacion];
-        Paralelo := FCursoParaleloIdAParalelo[Curso, Sesion1];
+        Paralelo := FCursoParaleloIdAParalelo[Curso, ParaleloId];
         Profesor := FCodProfesorAProfesor[VFieldProfesor.AsInteger - FMinCodProfesor];
         FDistributivoAParalelo[Distributivo] := Paralelo;
         FDistributivoAProfesor[Distributivo] := Profesor;
         FDistributivoAAulaTipo[Distributivo] := AulaTipo;
         FDistributivoAMateria[Distributivo] := Materia;
         FParaleloMateriaAProfesor[Paralelo, Materia] := Profesor;
-        FParaleloMateriaADistributivo[Paralelo, Materia] := Paralelo;
+        FParaleloMateriaADistributivo[Paralelo, Materia] := Distributivo;
         Composicion := VFieldComposicion.AsString;
         VPos := 1;
         Sesion1 := Sesion2;
@@ -649,6 +650,7 @@ var
         begin
           VSesionADuracion[Sesion2] := StrToInt(ExtractString(Composicion, VPos, '.'));
           VSesionADistributivo[Sesion2] := Distributivo;
+          Inc(FParaleloMateriaCant[Paralelo, Materia]);
           // Inc(t, VSesionADuracion[Sesion2]);
           Inc(Sesion2);
         end;
@@ -914,6 +916,7 @@ begin
     SetLength(TablingInfo.FProfesorPeriodoCant, FProfesorCant, FPeriodoCant);
     SetLength(TablingInfo.FAulaTipoPeriodoCant, FAulaTipoCant, FPeriodoCant);
     SetLength(TablingInfo.FParaleloDiaMateriaCant, FParaleloCant, FDiaCant, FMateriaCant);
+    SetLength(TablingInfo.FParaleloDiaMateriaAcumulacion, FParaleloCant, FDiaCant, FMateriaCant);
     SetLength(TablingInfo.FParaleloMateriaDiaMinHora, FParaleloCant, FMateriaCant, FDiaCant);
     SetLength(TablingInfo.FParaleloMateriaDiaMaxHora, FParaleloCant, FMateriaCant, FDiaCant);
     SetLength(TablingInfo.FDiaProfesorFraccionamiento, FDiaCant, FProfesorCant);
