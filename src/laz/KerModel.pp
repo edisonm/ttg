@@ -197,22 +197,9 @@ type
       FAntDiaProfesorMaxHora: TDynamicSmallintArrayArray;
     FAntListaCambios: TList;
     TablingInfo: TTimeTableTablingInfo;
-    procedure CalculateValue;
     procedure DecCants(AParalelo, Periodo1, Periodo2: Smallint;
       var ActualizarDiaProfesor, ActualizarDiaMateria: TDynamicBooleanArrayArray);
     function DeltaSesionCortada(Paralelo, Periodo1, Periodo2: Integer): Integer;
-    procedure DoGetCruceMateria;
-    {
-      procedure SetClaveAleatoriaInterno(AParalelo, APeriodo: Smallint;
-      AClaveAleatoria: Integer); overload;
-      procedure SetClaveAleatoriaInterno(AParalelo, APeriodo, ADuracion: Smallint;
-      AClaveAleatoria: Integer); overload;
-    }
-    procedure DoGetMateriaNoDispersa;
-    procedure DoGetHoraHuecaDesubicada;
-    procedure DoGetSesionCortada;
-    procedure DoGetProfesorProhibicionValor;
-    procedure DoGetMateriaProhibicionValor;
     function GetCruceMateriaValor: Double;
     function GetMateriaNoDispersaValor: Double;
     function GetHoraHuecaDesubicadaValor: Double;
@@ -229,8 +216,6 @@ type
     procedure Reset;
     procedure SetImplementor(const AValue: TObject);
     procedure Swap(AParalelo, APeriodo1, APeriodo2: Smallint);
-    procedure DoGetCruceProfesor;
-    procedure DoGetCruceAulaTipo;
     procedure UpdateAulaTipoPeriodoCant(APeriodo1, APeriodo2: Smallint);
     procedure UpdateParaleloDiaMateriaCant; overload;
     procedure UpdateParaleloDiaMateriaCant(AParalelo: Smallint); overload;
@@ -244,7 +229,6 @@ type
     procedure UpdateParaleloMateriaDiaMinMaxHora(AParalelo: Smallint); overload;
     // procedure UpdateParaleloMateriaDiaMinMaxHora(Paralelo, Periodo1, Periodo2: Smallint); overload;
     function GetParaleloMateriaNoDispersa(AParalelo: Smallint): Smallint;
-    procedure DoGetProfesorFraccionamiento;
     procedure UpdateDiaProfesorFraccionamiento;
     function GetDiaProfesorFraccionamiento(Dia, Profesor: Smallint): Smallint;
     function GetElitistValues(Index: Integer): Double;
@@ -1625,26 +1609,6 @@ begin
   end;
 end;
 
-procedure TTimeTable.DoGetHoraHuecaDesubicada;
-var
-  Paralelo, Periodo, Sesion: Integer;
-  PeriodoASesion: PSmallintArray;
-begin
-  TablingInfo.FHoraHuecaDesubicada := 0;
-  with Model do
-    for Paralelo := 0 to FParaleloCant - 1 do
-    begin
-      PeriodoASesion := @ParaleloPeriodoASesion[Paralelo, 0];
-      for Periodo := 0 to FPeriodoCant - 1 do
-      begin
-        Sesion := PeriodoASesion[Periodo];
-        // Is this right??? (If we have more than 1 empty hour???)
-        if (Sesion < 0) and (FHoraCant - 1 <> FPeriodoAHora[Periodo]) then
-          Inc(TablingInfo.FHoraHuecaDesubicada);
-      end;
-    end;
-end;
-
 function TTimeTable.GetSesionCortadaValor: Double;
 begin
   Result := Model.FSesionCortadaValor * SesionCortada;
@@ -1676,18 +1640,6 @@ begin
       Inc(Periodo, Duracion);
     end;
   end;
-end;
-
-procedure TTimeTable.DoGetSesionCortada;
-var
-  Paralelo: Integer;
-begin
-  with Model, TablingInfo do
-  begin
-    FSesionCortada := 0;
-    for Paralelo := 0 to FParaleloCant - 1 do
-      Inc(FSesionCortada, DeltaSesionCortada(Paralelo, 0, FPeriodoCant - 1));
-  end
 end;
 
 function TTimeTable.GetMateriaNoDispersaValor: Double;
@@ -1725,141 +1677,6 @@ begin
     end;
 end;
 
-procedure TTimeTable.DoGetMateriaNoDispersa;
-var
-  I: Smallint;
-begin
-  with Model, TablingInfo do
-  begin
-    FMateriaNoDispersa := 0;
-    for I := 0 to FParaleloCant - 1 do
-    begin
-      Inc(FMateriaNoDispersa, FParaleloMateriaNoDispersa[I]);
-    end;
-  end;
-end;
-
-procedure TTimeTable.DoGetProfesorFraccionamiento;
-var
-  p, d: Smallint;
-begin
-  with Model, TablingInfo do
-  begin
-    TablingInfo.FProfesorFraccionamiento := 0;
-    for d := 0 to FDiaCant - 1 do
-    begin
-      for p := 0 to FProfesorCant - 1 do
-      begin
-        Inc(TablingInfo.FProfesorFraccionamiento, FDiaProfesorFraccionamiento[d, p]);
-      end;
-    end;
-  end;
-end;
-
-procedure TTimeTable.DoGetMateriaProhibicionValor;
-var
-  MateriaProhibicion, MateriaProhibicionTipo, Materia, Periodo, Cantidad: Integer;
-begin
-  with Model, TablingInfo do
-  begin
-    for MateriaProhibicionTipo := 0 to FMateriaProhibicionTipoCant - 1 do
-      FMateriaProhibicionTipoAMateriaCant[MateriaProhibicionTipo] := 0;
-    for MateriaProhibicion := 0 to High(FMateriaProhibicionAMateria) do
-    begin
-      Materia := FMateriaProhibicionAMateria[MateriaProhibicion];
-      Periodo := FMateriaProhibicionAPeriodo[MateriaProhibicion];
-      MateriaProhibicionTipo := FMateriaProhibicionAMateriaProhibicionTipo[MateriaProhibicion];
-      Cantidad := FMateriaPeriodoCant[Materia, Periodo];
-      Inc(FMateriaProhibicionTipoAMateriaCant[MateriaProhibicionTipo], Cantidad);
-    end;
-  end;
-end;
-
-procedure TTimeTable.DoGetProfesorProhibicionValor;
-var
-  ProfesorProhibicion, ProfesorProhibicionTipo, Profesor, Periodo, Cantidad: Smallint;
-begin
-  with Model, TablingInfo do
-  begin
-    for ProfesorProhibicionTipo := 0 to FProfesorProhibicionTipoCant - 1 do
-      FProfesorProhibicionTipoAProfesorCant[ProfesorProhibicionTipo] := 0;
-    for ProfesorProhibicion := 0 to High(FProfesorProhibicionAProfesor) do
-    begin
-      Profesor := FProfesorProhibicionAProfesor[ProfesorProhibicion];
-      Periodo := FProfesorProhibicionAPeriodo[ProfesorProhibicion];
-      ProfesorProhibicionTipo := FProfesorProhibicionAProfesorProhibicionTipo[ProfesorProhibicion];
-      Cantidad := FProfesorPeriodoCant[Profesor, Periodo];
-      Inc(FProfesorProhibicionTipoAProfesorCant[ProfesorProhibicionTipo], Cantidad);
-    end;
-  end;
-end;
-
-procedure TTimeTable.DoGetCruceProfesor;
-var
-  Periodo, Profesor, Cantidad: Smallint;
-  VPeriodoCant: PSmallintArray;
-begin
-  with Model, TablingInfo do
-  begin
-    FCruceProfesor := 0;
-    for Profesor := 0 to FProfesorCant - 1 do
-    begin
-      VPeriodoCant := @FProfesorPeriodoCant[Profesor, 0];
-      for Periodo := 0 to FPeriodoCant - 1 do
-      begin
-        Cantidad := VPeriodoCant[Periodo];
-        if Cantidad > 1 then
-          Inc(FCruceProfesor, Cantidad - 1);
-      end;
-    end;
-  end;
-end;
-
-procedure TTimeTable.DoGetCruceMateria;
-var
-  Paralelo, Dia, Materia, Cantidad: Smallint;
-  MateriaCant: PSmallintArray;
-begin
-  with Model, TablingInfo do
-  begin
-    FCruceMateria := 0;
-    for Paralelo := 0 to FParaleloCant - 1 do
-    begin
-      for Dia := 0 to FDiaCant - 1 do
-      begin
-        MateriaCant := @FParaleloDiaMateriaCant[Paralelo, Dia, 0];
-        for Materia := 0 to FMateriaCant - 1 do
-        begin
-          Cantidad := MateriaCant[Materia];
-          if Cantidad > 1 then
-            Inc(FCruceMateria, Cantidad - 1);
-        end;
-      end;
-    end;
-  end;
-end;
-
-procedure TTimeTable.DoGetCruceAulaTipo;
-var
-  Periodo, AulaTipo, Cruces: Smallint;
-  VPeriodoCant: PSmallintArray;
-begin
-  with Model, TablingInfo do
-  begin
-    FCruceAulaTipo := 0;
-    for AulaTipo := 0 to FAulaTipoCant - 1 do
-    begin
-      VPeriodoCant := @FAulaTipoPeriodoCant[AulaTipo, 0];
-      for Periodo := 0 to FPeriodoCant - 1 do
-      begin
-        Cruces := VPeriodoCant[Periodo] - FAulaTipoACantidad[AulaTipo];
-        if Cruces > 0 then
-          Inc(FCruceAulaTipo, Cruces);
-      end;
-    end;
-  end;
-end;
-
 function TTimeTable.GetCruceProfesorValor: Double;
 begin
   Result := Model.FCruceProfesorValor * TablingInfo.FCruceProfesor;
@@ -1880,23 +1697,6 @@ end;
 function TTimeTable.GetCruceAulaTipoValor: Double;
 begin
   Result := Model.FCruceAulaTipoValor * TablingInfo.FCruceAulaTipo;
-end;
-
-procedure TTimeTable.CalculateValue;
-begin
-  with Model do
-  begin
-    DoGetCruceProfesor;
-    DoGetCruceMateria;
-    DoGetCruceAulaTipo;
-    DoGetHoraHuecaDesubicada;
-    DoGetMateriaNoDispersa;
-    DoGetMateriaProhibicionValor;
-    DoGetProfesorFraccionamiento;
-    DoGetProfesorProhibicionValor;
-    DoGetSesionCortada;
-    TablingInfo.FValue := GetValue;
-  end;
 end;
 
 function TTimeTable.GetValue: Double;
@@ -2563,19 +2363,6 @@ begin
     end;
   end
 end;
-
-{
-procedure TTimeTable.Update;
-begin
-  UpdateAulaTipoPeriodoCant(0, Model.FPeriodoCant - 1);
-  UpdateParaleloDiaMateriaCant;
-  UpdateProfesorPeriodoCant(0, Model.FPeriodoCant - 1);
-  UpdateMateriaPeriodoCant;
-  UpdateParaleloMateriaDiaMinMaxHora;
-  UpdateDiaProfesorFraccionamiento;
-  CalculateValue;
-end;
-}
 
 destructor TTimeTableModel.Destroy;
 begin
