@@ -679,31 +679,32 @@ var
   end;
   procedure CargarMoldeHorarioDetalle;
   var
-    Periodo1, Paralelo, Distributivo, Periodo, Contador, DPeriodo, Cantidad, o: Integer;
+    Periodo1, Paralelo, Distributivo, Periodo, Contador, Duracion, Cantidad: Integer;
   begin
     SetLength(FTimeTableDetailPattern, FParaleloCant, FPeriodoCant);
     SetLength(FParaleloASesionCant, FParaleloCant);
     SetLength(FParaleloADuracion, FParaleloCant);
     for Paralelo := 0 to FParaleloCant - 1 do
-      FillChar(FTimeTableDetailPattern[Paralelo, 0], FPeriodoCant * SizeOf(Smallint), #$FF);
+      for Periodo := 0 to FPeriodoCant - 1 do
+        FTimeTableDetailPattern[Paralelo, Periodo] := -1;
     for Distributivo := FDistributivoCant - 1 downto 0 do
     begin
       Paralelo := FDistributivoAParalelo[Distributivo];
       for Contador := High(FDistributivoASesiones[Distributivo]) downto 0 do
       begin
-        DPeriodo := FSesionADuracion[FDistributivoASesiones[Distributivo, Contador]];
+        Duracion := FSesionADuracion[FDistributivoASesiones[Distributivo, Contador]];
         Periodo1 := FParaleloADuracion[Paralelo];
-        for o := DPeriodo - 1 downto 0 do
+        for Periodo := Periodo1 + Duracion - 1 downto Periodo1 do
         begin
-          Periodo := Periodo1 + o;
           if (Periodo < 0) or (Periodo >= FPeriodoCant) then
             raise Exception.CreateFmt(
               'Se desbordo Molde de ParaleloPeriodoASesion: ' +
                 'Paralelo %d-%d Duracion %d', [FParaleloANivel[Paralelo],
               FParaleloAParaleloId[Paralelo], Periodo]);
-          FTimeTableDetailPattern[Paralelo, FPeriodoCant - 1 - Periodo] := FDistributivoASesiones[Distributivo, Contador];
+          FTimeTableDetailPattern[Paralelo, FPeriodoCant - 1 - Periodo]
+            := FDistributivoASesiones[Distributivo, Contador];
         end;
-        Inc(FParaleloADuracion[Paralelo], DPeriodo);
+        Inc(FParaleloADuracion[Paralelo], Duracion);
       end;
     end;
     for Paralelo := 0 to FParaleloCant - 1 do
