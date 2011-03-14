@@ -139,8 +139,11 @@ var
 begin
   if Assigned(DBGrid.DataSource) and Assigned(DBGrid.SelectedField) then
     with DBGrid.SelectedField do
+    begin
+      s := AsString;
       if InputQuery('Buscar por ' + DisplayLabel, DisplayName, s) then
         SearchInField(DBGrid.SelectedField, s);
+    end;
 end;
 
 procedure SearchInField(AField: TField; AValue: Variant);

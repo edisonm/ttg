@@ -216,20 +216,11 @@ type
     procedure Reset;
     procedure SetImplementor(const AValue: TObject);
     procedure Swap(AParalelo, APeriodo1, APeriodo2: Smallint);
-    procedure UpdateAulaTipoPeriodoCant(APeriodo1, APeriodo2: Smallint);
-    procedure UpdateParaleloDiaMateriaCant; overload;
-    procedure UpdateParaleloDiaMateriaCant(AParalelo: Smallint); overload;
     procedure UpdateParaleloMateria(AParalelo, Periodo1, Periodo2: Smallint;
       var ActualizarDiaMateria: TDynamicBooleanArrayArray);
     procedure UpdateProfesorFraccionamiento(
       ActualizarDiaProfesor: TDynamicBooleanArrayArray);
-    procedure UpdateProfesorPeriodoCant(Periodo1, Periodo2: Smallint);
-    procedure UpdateMateriaPeriodoCant;
-    procedure UpdateParaleloMateriaDiaMinMaxHora; overload;
-    procedure UpdateParaleloMateriaDiaMinMaxHora(AParalelo: Smallint); overload;
-    // procedure UpdateParaleloMateriaDiaMinMaxHora(Paralelo, Periodo1, Periodo2: Smallint); overload;
     function GetParaleloMateriaNoDispersa(AParalelo: Smallint): Smallint;
-    procedure UpdateDiaProfesorFraccionamiento;
     function GetDiaProfesorFraccionamiento(Dia, Profesor: Smallint): Smallint;
     function GetElitistValues(Index: Integer): Double;
   protected
@@ -978,92 +969,6 @@ begin
   Update;
 end;
 
-procedure TTimeTable.UpdateMateriaPeriodoCant;
-var
-  Paralelo, Periodo, Materia, Sesion: Smallint;
-  PeriodoASesion: PSmallintArray;
-begin
-  with Model, TablingInfo do
-  begin
-    for Materia := 0 to FMateriaCant - 1 do
-    begin
-      FillChar(FMateriaPeriodoCant[Materia, 0], FPeriodoCant * SizeOf(Smallint), #0);
-    end;
-    for Paralelo := 0 to FParaleloCant - 1 do
-    begin
-      PeriodoASesion := @ParaleloPeriodoASesion[Paralelo, 0];
-      for Periodo := 0 to FPeriodoCant - 1 do
-      begin
-        Sesion := PeriodoASesion[Periodo];
-        if Sesion >= 0 then
-        begin
-          Materia := FSesionAMateria[Sesion];
-          Inc(FMateriaPeriodoCant[Materia, Periodo]);
-        end;
-      end;
-    end;
-  end;
-end;
-
-procedure TTimeTable.UpdateParaleloMateriaDiaMinMaxHora;
-var
-  Paralelo: Smallint;
-begin
-  with Model do
-    for Paralelo := 0 to FParaleloCant - 1 do
-      UpdateParaleloMateriaDiaMinMaxHora(Paralelo);
-end;
-
-procedure TTimeTable.UpdateParaleloMateriaDiaMinMaxHora(AParalelo: Smallint);
-var
-  Periodo, Dia, Hora, Materia, Sesion: Smallint;
-  PeriodoASesion: PSmallintArray;
-begin
-  with Model, TablingInfo do
-  begin
-    for Materia := 0 to FMateriaCant - 1 do
-    begin
-      FillChar(FParaleloMateriaDiaMaxHora[AParalelo, Materia, 0],
-        FDiaCant * SizeOf(Smallint), #$FF);
-      FillChar(FParaleloMateriaDiaMinHora[AParalelo, Materia, 0],
-        FDiaCant * SizeOf(Smallint), #$3F);
-    end;
-    PeriodoASesion := @ParaleloPeriodoASesion[AParalelo, 0];
-    for Periodo := 0 to FPeriodoCant - 1 do
-    begin
-      Sesion := PeriodoASesion[Periodo];
-      if Sesion >= 0 then
-      begin
-        Materia := FSesionAMateria[Sesion];
-        Dia := FPeriodoADia[Periodo];
-        Hora := FPeriodoAHora[Periodo];
-        if FParaleloMateriaDiaMaxHora[AParalelo, Materia, Dia] < Hora then
-          FParaleloMateriaDiaMaxHora[AParalelo, Materia, Dia] := Hora;
-        if FParaleloMateriaDiaMinHora[AParalelo, Materia, Dia] > Hora then
-          FParaleloMateriaDiaMinHora[AParalelo, Materia, Dia] := Hora;
-      end;
-    end;
-    FParaleloMateriaNoDispersa[AParalelo] := GetParaleloMateriaNoDispersa(AParalelo);
-  end;
-end;
-
-procedure TTimeTable.UpdateDiaProfesorFraccionamiento;
-var
-  Dia, Profesor: Smallint;
-begin
-  with FModel, TablingInfo do
-  begin
-    for Dia := 0 to FDiaCant - 1 do
-    begin
-      for Profesor := 0 to FProfesorCant - 1 do
-      begin
-        FDiaProfesorFraccionamiento[Dia, Profesor] :=
-          GetDiaProfesorFraccionamiento(Dia, Profesor);
-      end;
-    end;
-  end;
-end;
-
 procedure TTimeTable.Swap(AParalelo, APeriodo1, APeriodo2: Smallint);
 begin
   Normalize(AParalelo, APeriodo1);
@@ -1508,11 +1413,11 @@ end;
 
 procedure TTimeTable.MutateDia;
 var
-  AulaTipo, Paralelo, Dia1, Dia2, MinPeriodo1, MinPeriodo2,
+  Paralelo, Dia1, Dia2, MinPeriodo1, MinPeriodo2,
     DPeriodo1, DPeriodo2, MaxPeriodo1, MaxPeriodo2: Smallint;
   b: TSmallintArray;
   PeriodoASesion: PSmallintArray;
-  RecalcSwap: Boolean;
+  DoUpdate: Boolean;
   Count: SizeInt;
 begin
   // Check('MutarDiaAntes');
@@ -1530,52 +1435,34 @@ begin
     DPeriodo2 := MaxPeriodo2 - MinPeriodo2;
     if DPeriodo1 = DPeriodo2 then
     begin
-      RecalcSwap := False;
       Count := (DPeriodo1 + 1) * SizeOf(Smallint);
+      DoUpdate := True;
       for Paralelo := 0 to FParaleloCant - 1 do
       begin
         PeriodoASesion := @ParaleloPeriodoASesion[Paralelo, 0];
-        if (DPeriodo1 = DPeriodo2)
-           and ((MinPeriodo1 = 0)
-                or (PeriodoASesion[MinPeriodo1 - 1] < 0)
-                or (PeriodoASesion[MinPeriodo1 - 1] <> PeriodoASesion[MinPeriodo1]))
-           and ((MinPeriodo2 = 0)
-                or (PeriodoASesion[MinPeriodo2 - 1] < 0)
-                or (PeriodoASesion[MinPeriodo2 - 1] <> PeriodoASesion[MinPeriodo2]))
-           and ((MaxPeriodo1 = FPeriodoCant - 1)
-                or (PeriodoASesion[MaxPeriodo1] < 0)
-                or (PeriodoASesion[MaxPeriodo1] <> PeriodoASesion[MaxPeriodo1 + 1]))
-           and ((MaxPeriodo2 = FPeriodoCant - 1)
-                or (PeriodoASesion[MaxPeriodo2] < 0)
-                or (PeriodoASesion[MaxPeriodo2] <> PeriodoASesion[MaxPeriodo2 + 1])) then
+        if ((MinPeriodo1 = 0)
+            or (PeriodoASesion[MinPeriodo1 - 1] < 0)
+            or (PeriodoASesion[MinPeriodo1 - 1] <> PeriodoASesion[MinPeriodo1]))
+          and ((MinPeriodo2 = 0)
+            or (PeriodoASesion[MinPeriodo2 - 1] < 0)
+            or (PeriodoASesion[MinPeriodo2 - 1] <> PeriodoASesion[MinPeriodo2]))
+          and ((MaxPeriodo1 = FPeriodoCant - 1)
+            or (PeriodoASesion[MaxPeriodo1] < 0)
+            or (PeriodoASesion[MaxPeriodo1] <> PeriodoASesion[MaxPeriodo1 + 1]))
+          and ((MaxPeriodo2 = FPeriodoCant - 1)
+            or (PeriodoASesion[MaxPeriodo2] < 0)
+            or (PeriodoASesion[MaxPeriodo2] <> PeriodoASesion[MaxPeriodo2 + 1])) then
         begin
           Move(PeriodoASesion[MinPeriodo1], b[0], Count);
           Move(PeriodoASesion[MinPeriodo2], PeriodoASesion[MinPeriodo1], Count);
           Move(b[0], PeriodoASesion[MinPeriodo2], Count);
-        end
-        else
-          RecalcSwap := True;
-      end;
-      if RecalcSwap then
-      begin
-        UpdateAulaTipoPeriodoCant(MinPeriodo1, MaxPeriodo1);
-        UpdateAulaTipoPeriodoCant(MinPeriodo2, MaxPeriodo2);
-      end
-      else
-      with TablingInfo do begin
-        for AulaTipo := 0 to FAulaTipoCant - 1 do
-        begin
-          Move(FAulaTipoPeriodoCant[AulaTipo, MinPeriodo1], b[0], Count);
-          Move(FAulaTipoPeriodoCant[AulaTipo, MinPeriodo2],
-               FAulaTipoPeriodoCant[AulaTipo, MinPeriodo1], Count);
-          Move(b[0], FAulaTipoPeriodoCant[AulaTipo, MinPeriodo2], Count);
-          // TODO: DoGetCruceAulaTipo no required here
+          DoUpdate := True;
         end;
       end;
-      //PartialUpdate;
+      if DoUpdate then
+        Update;
     end;
   end;
-  Update;
 end;
 
 function TTimeTable.GetHoraHuecaDesubicadaValor: Double;
@@ -1712,97 +1599,6 @@ begin
       ProfesorFraccionamientoValor +
       ProfesorProhibicionValor +
       SesionCortadaValor;
-end;
-
-procedure TTimeTable.UpdateProfesorPeriodoCant(Periodo1, Periodo2: Smallint);
-var
-  Paralelo, Periodo, Profesor, Sesion: Smallint;
-  PeriodoASesion, MateriaAProfesor: PSmallintArray;
-begin
-  with Model, TablingInfo do
-  begin
-    for Profesor := 0 to FProfesorCant - 1 do
-      for Periodo := Periodo1 to Periodo2 do
-        FProfesorPeriodoCant[Profesor, Periodo] := 0;
-    for Paralelo := 0 to FParaleloCant - 1 do
-    begin
-      PeriodoASesion := @FParaleloPeriodoASesion[Paralelo, 0];
-      MateriaAProfesor := @FParaleloMateriaAProfesor[Paralelo, 0];
-      for Periodo := Periodo1 to Periodo2 do
-      begin
-        Sesion := PeriodoASesion[Periodo];
-        if Sesion >= 0 then
-        begin
-          Profesor := MateriaAProfesor[FSesionAMateria[Sesion]];
-          Inc(FProfesorPeriodoCant[Profesor, Periodo]);
-        end;
-      end;
-    end;
-  end;
-end;
-
-procedure TTimeTable.UpdateAulaTipoPeriodoCant(APeriodo1, APeriodo2: Smallint);
-var
-  AulaTipo, Paralelo, Periodo, Sesion: Smallint;
-  PeriodoASesion: PSmallintArray;
-begin
-  with Model, TablingInfo do
-  begin
-    for AulaTipo := 0 to FAulaTipoCant - 1 do
-      FillChar(FAulaTipoPeriodoCant[AulaTipo, APeriodo1],
-        (APeriodo2 - APeriodo1 + 1) * SizeOf(Smallint), #0);
-    for Paralelo := 0 to FParaleloCant - 1 do
-    begin
-      PeriodoASesion := @ParaleloPeriodoASesion[Paralelo, 0];
-      for Periodo := APeriodo1 to APeriodo2 do
-      begin
-        Sesion := PeriodoASesion[Periodo];
-        if Sesion >= 0 then
-        begin
-          AulaTipo := FSesionAAulaTipo[Sesion];
-          Inc(FAulaTipoPeriodoCant[AulaTipo, Periodo]);
-        end;
-      end;
-    end;
-  end;
-end;
-
-procedure TTimeTable.UpdateParaleloDiaMateriaCant;
-var
-  Paralelo: Smallint;
-begin
-  with Model do
-  for Paralelo := 0 to FParaleloCant - 1 do
-    UpdateParaleloDiaMateriaCant(Paralelo);
-end;
-
-procedure TTimeTable.UpdateParaleloDiaMateriaCant(AParalelo: Smallint);
-var
-  Materia, Dia, Dia1, Dia2, Periodo, Sesion, Duracion: Smallint;
-  PeriodoASesion: PSmallintArray;
-begin
-  with Model, TablingInfo do
-  begin
-    for Dia := 0 to FDiaCant - 1 do
-      for Materia := 0 to FMateriaCant - 1 do
-        FParaleloDiaMateriaCant[AParalelo, Dia, Materia] := 0;
-    PeriodoASesion := @ParaleloPeriodoASesion[AParalelo, 0];
-    Periodo := 0;
-    while Periodo < FPeriodoCant do
-    begin
-      Sesion := PeriodoASesion[Periodo];
-      Duracion := FSesionADuracion[Sesion];
-      if Sesion >= 0 then
-      begin
-        Materia := FSesionAMateria[Sesion];
-        Dia1 := FPeriodoADia[Periodo];
-        Dia2 := FPeriodoADia[Periodo + Duracion - 1];
-        for Dia := Dia1 to Dia2 do
-          Inc(FParaleloDiaMateriaCant[AParalelo, Dia, Materia]);
-      end;
-      Inc(Periodo, Duracion);
-    end;
-  end;
 end;
 
 function TTimeTable.InternalDownHill(AParalelo: Smallint;
@@ -2297,7 +2093,7 @@ end;
 procedure TTimeTable.Reset;
 var
   Profesor, Periodo, Materia, MateriaProhibicionTipo, ProfesorProhibicionTipo,
-    Dia, AulaTipo: Smallint;
+    Paralelo, Dia, AulaTipo: Smallint;
 begin
   with Model, TablingInfo do
   begin
@@ -2309,10 +2105,8 @@ begin
     FSesionCortada := 0;
     FMateriaNoDispersa := 0;
     for Dia := 0 to FDiaCant - 1 do
-    begin
       for Profesor := 0 to FProfesorCant - 1 do
         FDiaProfesorFraccionamiento[Dia, Profesor] := 0;
-    end;
     for MateriaProhibicionTipo := 0 to FMateriaProhibicionTipoCant - 1 do
       FMateriaProhibicionTipoAMateriaCant[MateriaProhibicionTipo] := 0;
     for ProfesorProhibicionTipo := 0 to FProfesorProhibicionTipoCant - 1 do
@@ -2326,6 +2120,10 @@ begin
       for AulaTipo := 0 to FAulaTipoCant - 1 do
         FAulaTipoPeriodoCant[AulaTipo, Periodo] := 0;
     end;
+    for Paralelo := 0 to FParaleloCant - 1 do
+      for Dia := 0 to FDiaCant - 1 do
+        for Materia := 0 to FMateriaCant - 1 do
+          FParaleloDiaMateriaCant[Paralelo, Dia, Materia] := 0;
   end;
 end;
 
@@ -2348,9 +2146,6 @@ begin
     Reset;
     for Paralelo := 0 to FParaleloCant - 1 do
     begin
-      for Dia := 0 to FDiaCant - 1 do
-        for Materia := 0 to FMateriaCant - 1 do
-          FParaleloDiaMateriaCant[Paralelo, Dia, Materia] := 0;
       IncCants(Paralelo, 0, FPeriodoCant - 1,
                ActualizarDiaProfesor, ActualizarDiaMateria);
       UpdateParaleloMateria(Paralelo, 0, FPeriodoCant - 1,
