@@ -667,8 +667,8 @@ var
       SetLength(FSesionAAulaTipo, Sesion2);
       Move(VSesionADuracion[0], FSesionADuracion[0], Sesion2 * SizeOf(Smallint));
       FSesionADuracion[-1] := 1;
-      Move(VSesionADistributivo[0], FSesionADistributivo[0], Sesion2 * SizeOf
-          (Smallint));
+      Move(VSesionADistributivo[0], FSesionADistributivo[0],
+        Sesion2 * SizeOf(Smallint));
       for Sesion := 0 to Sesion2 - 1 do
       begin
         AulaTipo := FSesionADistributivo[Sesion];
@@ -679,49 +679,48 @@ var
   end;
   procedure CargarMoldeHorarioDetalle;
   var
-    d, I, j, k, m, n, o, q, r, s: Integer;
+    d, Paralelo, Distributivo, j, k, m, n, o, q, s: Integer;
   begin
     SetLength(FTimeTableDetailPattern, FParaleloCant, FPeriodoCant);
     SetLength(FParaleloASesionCant, FParaleloCant);
     SetLength(FParaleloADuracion, FParaleloCant);
-    r := FPeriodoCant;
-    for I := 0 to FParaleloCant - 1 do
-      FillChar(FTimeTableDetailPattern[I, 0], r * SizeOf(Smallint), #$FF);
-    for I := FDistributivoCant - 1 downto 0 do
+    for Paralelo := 0 to FParaleloCant - 1 do
+      FillChar(FTimeTableDetailPattern[Paralelo, 0], FPeriodoCant * SizeOf(Smallint), #$FF);
+    for Distributivo := FDistributivoCant - 1 downto 0 do
     begin
-      k := FDistributivoAParalelo[I];
-      for m := High(FDistributivoASesiones[I]) downto 0 do
+      k := FDistributivoAParalelo[Distributivo];
+      for m := High(FDistributivoASesiones[Distributivo]) downto 0 do
       begin
-        n := FSesionADuracion[FDistributivoASesiones[I, m]];
+        n := FSesionADuracion[FDistributivoASesiones[Distributivo, m]];
         d := FParaleloADuracion[k];
         for o := n - 1 downto 0 do
         begin
           q := d + o;
-          if (q < 0) or (q >= r) then
+          if (q < 0) or (q >= FPeriodoCant) then
             raise Exception.CreateFmt(
               'Se desbordo Molde de ParaleloPeriodoASesion: ' +
                 'Paralelo %d-%d Duracion %d', [FParaleloANivel[k],
               FParaleloAParaleloId[k], q]);
-          FTimeTableDetailPattern[k, r - 1 - q] := FDistributivoASesiones[I, m];
+          FTimeTableDetailPattern[k, FPeriodoCant - 1 - q] := FDistributivoASesiones[Distributivo, m];
         end;
         Inc(FParaleloADuracion[k], n);
       end;
     end;
-    for I := 0 to FParaleloCant - 1 do
+    for Paralelo := 0 to FParaleloCant - 1 do
     begin
       j := 0;
       while j < FPeriodoCant do
       begin
-        s := FTimeTableDetailPattern[I, j];
+        s := FTimeTableDetailPattern[Paralelo, j];
         d := FSesionADuracion[s];
         Inc(j, d);
-        Inc(FParaleloASesionCant[I]);
+        Inc(FParaleloASesionCant[Paralelo]);
       end;
     end;
     FSesionCantidadDoble := 0;
-    for I := 0 to FParaleloCant - 1 do
+    for Paralelo := 0 to FParaleloCant - 1 do
     begin
-      j := FParaleloASesionCant[I];
+      j := FParaleloASesionCant[Paralelo];
       Inc(FSesionCantidadDoble, (j * (j - 1)) div 2);
     end;
   end;
