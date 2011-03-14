@@ -190,10 +190,7 @@ type
   private
     FImplementor: TObject;
     FModel: TTimeTableModel;
-    FParaleloPeriodoASesion,
-      FAntMateriaDiaMinHora, FAntMateriaDiaMaxHora, FAntDiaProfesorMinHora,
-      FAntDiaProfesorMaxHora: TDynamicSmallintArrayArray;
-    FAntListaCambios: TList;
+    FParaleloPeriodoASesion: TDynamicSmallintArrayArray;
     TablingInfo: TTimeTableTablingInfo;
     procedure DecCants(AParalelo, Periodo1, Periodo2: Smallint;
       var ActualizarDiaProfesor, ActualizarDiaMateria: TDynamicBooleanArrayArray);
@@ -900,23 +897,21 @@ end;
 constructor TTimeTable.Create(ATimeTableModel: TTimeTableModel);
 begin
   inherited Create;
-  FAntListaCambios := TList.Create;
   FModel := ATimeTableModel;
   with Model do
   begin
     SetLength(FParaleloPeriodoASesion, FParaleloCant, FPeriodoCant);
-    SetLength(TablingInfo.FMateriaPeriodoCant, FMateriaCant, FPeriodoCant);
-    SetLength(TablingInfo.FProfesorPeriodoCant, FProfesorCant, FPeriodoCant);
-    SetLength(TablingInfo.FAulaTipoPeriodoCant, FAulaTipoCant, FPeriodoCant);
-    SetLength(TablingInfo.FParaleloDiaMateriaCant, FParaleloCant, FDiaCant, FMateriaCant);
-    SetLength(TablingInfo.FParaleloDiaMateriaAcumulacion, FParaleloCant, FDiaCant, FMateriaCant);
-    SetLength(TablingInfo.FDiaProfesorFraccionamiento, FDiaCant, FProfesorCant);
-    SetLength(TablingInfo.FMateriaProhibicionTipoAMateriaCant, FMateriaProhibicionTipoCant);
-    SetLength(TablingInfo.FProfesorProhibicionTipoAProfesorCant, FProfesorProhibicionTipoCant);
-    SetLength(FAntMateriaDiaMinHora, FMateriaCant, FDiaCant);
-    SetLength(FAntMateriaDiaMaxHora, FMateriaCant, FDiaCant);
-    SetLength(FAntDiaProfesorMinHora, FDiaCant, FProfesorCant);
-    SetLength(FAntDiaProfesorMaxHora, FDiaCant, FProfesorCant);
+    with TablingInfo do
+    begin
+      SetLength(FMateriaPeriodoCant, FMateriaCant, FPeriodoCant);
+      SetLength(FProfesorPeriodoCant, FProfesorCant, FPeriodoCant);
+      SetLength(FAulaTipoPeriodoCant, FAulaTipoCant, FPeriodoCant);
+      SetLength(FParaleloDiaMateriaCant, FParaleloCant, FDiaCant, FMateriaCant);
+      SetLength(FParaleloDiaMateriaAcumulacion, FParaleloCant, FDiaCant, FMateriaCant);
+      SetLength(FDiaProfesorFraccionamiento, FDiaCant, FProfesorCant);
+      SetLength(FMateriaProhibicionTipoAMateriaCant, FMateriaProhibicionTipoCant);
+      SetLength(FProfesorProhibicionTipoAProfesorCant, FProfesorProhibicionTipoCant);
+    end;
   end;
 end;
 
@@ -1644,7 +1639,6 @@ end;
 destructor TTimeTable.Destroy;
 begin
   FModel := nil;
-  FAntListaCambios.Free;
   inherited Destroy;
 end;
 
