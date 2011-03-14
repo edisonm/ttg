@@ -329,6 +329,9 @@
     </Linking>
     <Other>
       <CompilerPath Value="$(CompPath)"/>
+      <ExecuteAfter>
+        <ShowAllMessages Value="True"/>
+      </ExecuteAfter>
     </Other>
   </CompilerOptions>
 </CONFIG>

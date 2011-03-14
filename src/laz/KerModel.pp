@@ -5,7 +5,7 @@ unit KerModel;
 interface
 
 uses
-  {$IFDEF UNIX}CThreads, CMem, {$ENDIF}Classes, DB, Dialogs, Math, Forms, UIndivid;
+  {$IFDEF UNIX}CThreads, CMem, {$ENDIF}Classes, DB, Dialogs, Forms, UIndivid;
 
 var
   SortLongint: procedure(var List1: array of Longint;
@@ -174,9 +174,6 @@ type
     FDiaProfesorFraccionamiento: TDynamicSmallintArrayArray;
     FMateriaProhibicionTipoAMateriaCant: TDynamicSmallintArray;
     FProfesorProhibicionTipoAProfesorCant: TDynamicSmallintArray;
-    FParaleloMateriaDiaMinHora: TDynamicSmallintArrayArrayArray;
-    FParaleloMateriaDiaMaxHora: TDynamicSmallintArrayArrayArray;
-    FParaleloMateriaNoDispersa: TDynamicSmallintArray;
     FCruceProfesor: Integer;
     FCruceMateria: Integer;
     FCruceAulaTipo: Integer;
@@ -217,11 +214,8 @@ type
     procedure Reset;
     procedure SetImplementor(const AValue: TObject);
     procedure Swap(AParalelo, APeriodo1, APeriodo2: Smallint);
-    procedure UpdateParaleloMateria(AParalelo, Periodo1, Periodo2: Smallint;
-      var ActualizarDiaMateria: TDynamicBooleanArrayArray);
     procedure UpdateProfesorFraccionamiento(
       ActualizarDiaProfesor: TDynamicBooleanArrayArray);
-    function GetParaleloMateriaNoDispersa(AParalelo: Smallint): Smallint;
     function GetDiaProfesorFraccionamiento(Dia, Profesor: Smallint): Smallint;
     function GetElitistValues(Index: Integer): Double;
   protected
@@ -916,12 +910,9 @@ begin
     SetLength(TablingInfo.FAulaTipoPeriodoCant, FAulaTipoCant, FPeriodoCant);
     SetLength(TablingInfo.FParaleloDiaMateriaCant, FParaleloCant, FDiaCant, FMateriaCant);
     SetLength(TablingInfo.FParaleloDiaMateriaAcumulacion, FParaleloCant, FDiaCant, FMateriaCant);
-    SetLength(TablingInfo.FParaleloMateriaDiaMinHora, FParaleloCant, FMateriaCant, FDiaCant);
-    SetLength(TablingInfo.FParaleloMateriaDiaMaxHora, FParaleloCant, FMateriaCant, FDiaCant);
     SetLength(TablingInfo.FDiaProfesorFraccionamiento, FDiaCant, FProfesorCant);
     SetLength(TablingInfo.FMateriaProhibicionTipoAMateriaCant, FMateriaProhibicionTipoCant);
     SetLength(TablingInfo.FProfesorProhibicionTipoAProfesorCant, FProfesorProhibicionTipoCant);
-    SetLength(TablingInfo.FParaleloMateriaNoDispersa, FParaleloCant);
     SetLength(FAntMateriaDiaMinHora, FMateriaCant, FDiaCant);
     SetLength(FAntMateriaDiaMaxHora, FMateriaCant, FDiaCant);
     SetLength(FAntDiaProfesorMinHora, FDiaCant, FProfesorCant);
@@ -1151,45 +1142,6 @@ begin
   end;
 end;
 
-procedure TTimeTable.UpdateParaleloMateria(AParalelo, Periodo1, Periodo2: Smallint;
-  var ActualizarDiaMateria: TDynamicBooleanArrayArray);
-var
-  Dia, Hora, Sesion, Materia, Periodo: Smallint;
-  PeriodoASesion: PSmallintArray;
-begin
-  with Model, TablingInfo do
-  begin
-    for Dia := FPeriodoADia[Periodo1] to FPeriodoADia[Periodo2] do
-    begin
-      for Materia := 0 to FMateriaCant - 1 do
-        if ActualizarDiaMateria[Dia, Materia] then
-        begin
-          FParaleloMateriaDiaMinHora[AParalelo, Materia, Dia] := 32767;
-          FParaleloMateriaDiaMaxHora[AParalelo, Materia, Dia] := -1;
-        end;
-    end;
-    PeriodoASesion := @FParaleloPeriodoASesion[AParalelo, 0];
-    for Periodo := FDiaHoraAPeriodo[FPeriodoADia[Periodo1], 0] to
-          FDiaAMaxPeriodo[FPeriodoADia[Periodo2]] do
-    begin
-      Sesion := PeriodoASesion[Periodo];
-      if Sesion >= 0 then
-      begin
-        Materia := FSesionAMateria[Sesion];
-        Dia := FPeriodoADia[Periodo];
-        if ActualizarDiaMateria[Dia, Materia] then
-        begin
-          Hora := FPeriodoAHora[Periodo];
-          if FParaleloMateriaDiaMaxHora[AParalelo, Materia, Dia] < Hora then
-            FParaleloMateriaDiaMaxHora[AParalelo, Materia, Dia] := Hora;
-          if FParaleloMateriaDiaMinHora[AParalelo, Materia, Dia] > Hora then
-            FParaleloMateriaDiaMinHora[AParalelo, Materia, Dia] := Hora;
-        end;
-      end;
-    end;
-  end;
-end;
-
 function TTimeTable.InternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint): Double;
 var
   Duracion1, Duracion2, Sesion1, Sesion2: Smallint;
@@ -1244,7 +1196,6 @@ begin
       FillChar(ActualizarDiaProfesor[Dia, 0], FProfesorCant * SizeOf(Boolean), #0);
       FillChar(ActualizarDiaMateria[Dia, 0], FMateriaCant * SizeOf(Boolean), #0);
     end;
-    //Dec(FMateriaNoDispersa, FParaleloMateriaNoDispersa[AParalelo]);
     if (Duracion1 = Duracion2) then
     begin
       DecCants(AParalelo, APeriodo1, APeriodo1 + Duracion1 - 1,
@@ -1259,10 +1210,6 @@ begin
         ActualizarDiaProfesor, ActualizarDiaMateria);
       IncCants(AParalelo, APeriodo2, APeriodo2 + Duracion2 - 1,
         ActualizarDiaProfesor, ActualizarDiaMateria);
-      UpdateParaleloMateria(AParalelo, APeriodo1, APeriodo1 + Duracion1 - 1,
-        ActualizarDiaMateria);
-      UpdateParaleloMateria(AParalelo, APeriodo2, APeriodo2 + Duracion2 - 1,
-        ActualizarDiaMateria);
     end
     else
     begin
@@ -1271,11 +1218,7 @@ begin
       DoMovement;
       IncCants(AParalelo, APeriodo1, APeriodo2 + Duracion2 - 1,
         ActualizarDiaProfesor, ActualizarDiaMateria);
-      UpdateParaleloMateria(AParalelo, APeriodo1, APeriodo2 + Duracion2 - 1,
-      ActualizarDiaMateria);
     end;
-    FParaleloMateriaNoDispersa[AParalelo] := GetParaleloMateriaNoDispersa(AParalelo);
-    //Inc(FMateriaNoDispersa, FParaleloMateriaNoDispersa[AParalelo]);
     UpdateProfesorFraccionamiento(ActualizarDiaProfesor);
     FValue := GetValue;
     {$IFDEF DEBUG}
@@ -1558,36 +1501,6 @@ begin
   Result := Model.FMateriaNoDispersaValor * MateriaNoDispersa;
 end;
 
-function TTimeTable.GetParaleloMateriaNoDispersa(AParalelo: Smallint): Smallint;
-var
-  Materia, Distributivo, Dispersiones, Dia, ns, Sesiones: Smallint;
-  DiaMaxHora: PSmallintArray;
-begin
-  Result := 0;
-  with Model, TablingInfo do
-    for Materia := 0 to FMateriaCant - 1 do
-    begin
-      Distributivo := FParaleloMateriaADistributivo[AParalelo, Materia];
-      if Distributivo >= 0 then
-      begin
-        Dispersiones := 0;
-        DiaMaxHora := @FParaleloMateriaDiaMaxHora[AParalelo, Materia, 0];
-        for Dia := 0 to FDiaCant - 2 do
-        begin
-          if (DiaMaxHora[Dia] >= 0) xor (DiaMaxHora[Dia + 1] >= 0) then
-            Inc(Dispersiones);
-        end;
-        if DiaMaxHora[0] >= 0 then
-          Inc(Dispersiones);
-        if DiaMaxHora[FDiaCant - 1] >= 0 then
-          Inc(Dispersiones);
-        Sesiones := Length(FDistributivoASesiones[Distributivo]);
-        ns := 2 * min(Sesiones, FDiaCant + 1 - Sesiones);
-        Inc(Result, Abs(ns - Dispersiones))
-      end;
-    end;
-end;
-
 function TTimeTable.GetCruceProfesorValor: Double;
 begin
   Result := Model.FCruceProfesorValor * TablingInfo.FCruceProfesor;
@@ -1759,18 +1672,6 @@ begin
       FMateriaProhibicionTipoAMateriaCant[0], FMateriaProhibicionTipoCant * SizeOf(Smallint));
     Move(ATimeTable.TablingInfo.FProfesorProhibicionTipoAProfesorCant[0],
       FProfesorProhibicionTipoAProfesorCant[0], FProfesorProhibicionTipoCant * SizeOf(Smallint));
-    Move(ATimeTable.TablingInfo.FParaleloMateriaNoDispersa[0],
-      FParaleloMateriaNoDispersa[0], FParaleloCant * SizeOf(Smallint));
-    for Paralelo := 0 to FParaleloCant - 1 do
-    begin
-      for Materia := 0 to FMateriaCant - 1 do
-      begin
-        Move(ATimeTable.TablingInfo.FParaleloMateriaDiaMinHora[Paralelo, Materia, 0],
-          FParaleloMateriaDiaMinHora[Paralelo, Materia, 0], FDiaCant * SizeOf(Smallint));
-        Move(ATimeTable.TablingInfo.FParaleloMateriaDiaMaxHora[Paralelo, Materia, 0],
-          FParaleloMateriaDiaMaxHora[Paralelo, Materia, 0], FDiaCant * SizeOf(Smallint));
-      end;
-    end;
     for Materia := 0 to FMateriaCant - 1 do
       Move(ATimeTable.TablingInfo.FMateriaPeriodoCant[Materia, 0],
            TablingInfo.FMateriaPeriodoCant[Materia, 0],
@@ -2180,11 +2081,6 @@ begin
     begin
       IncCants(Paralelo, 0, FPeriodoCant - 1,
                ActualizarDiaProfesor, ActualizarDiaMateria);
-      UpdateParaleloMateria(Paralelo, 0, FPeriodoCant - 1,
-        ActualizarDiaMateria);
-      FParaleloMateriaNoDispersa[Paralelo] :=
-        GetParaleloMateriaNoDispersa(Paralelo);
-      Inc(FMateriaNoDispersa, FParaleloMateriaNoDispersa[Paralelo]);
     end;
     UpdateProfesorFraccionamiento(ActualizarDiaProfesor);
     FValue := GetValue;
