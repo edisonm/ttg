@@ -984,7 +984,7 @@ end;
 procedure TTimeTable.DecCants(AParalelo, Periodo1, Periodo2: Smallint;
   var ActualizarDiaProfesor, ActualizarDiaMateria: TDynamicBooleanArrayArray);
 var
-  MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Dia, Dia1, Dia2,
+  MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Dia, DDia, Dia1, Dia2,
   Sesion, Profesor, AulaTipo, Duracion, Materia: Smallint;
   PeriodoASesion, MateriaAProfesor: PSmallintArray;
 begin
@@ -1039,6 +1039,17 @@ begin
             Dec(FCruceMateria);
           Dec(FParaleloDiaMateriaCant[AParalelo, Dia, Materia]);
         end;
+        DDia := FDiaCant div FParaleloMateriaCant[AParalelo, Materia];
+        for Dia2 := Dia1 to Dia1 + DDia - 1 do
+        begin
+          if Dia <> FDiaCant then
+          begin
+            Dia := Dia2 mod FDiaCant;
+            if FParaleloDiaMateriaAcumulacion[AParalelo, Dia, Materia] > 1 then
+              Dec(FMateriaNoDispersa);
+            Dec(FParaleloDiaMateriaAcumulacion[AParalelo, Dia, Materia]);
+          end;
+        end;
       end;
       Inc(Periodo, Duracion);
     end;
@@ -1048,8 +1059,8 @@ end;
 procedure TTimeTable.IncCants(AParalelo, Periodo1, Periodo2: Smallint;
   var ActualizarDiaProfesor, ActualizarDiaMateria: TDynamicBooleanArrayArray);
 var
-  Dia, Dia1, Dia2, MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo,
-  Sesion, Profesor, AulaTipo, Duracion, Materia: Smallint;
+  Dia, DDia, Dia1, Dia2, MateriaProhibicionTipo, ProfesorProhibicionTipo,
+  Periodo, Sesion, Profesor, AulaTipo, Duracion, Materia: Smallint;
   PeriodoASesion, MateriaAProfesor: PSmallintArray;
 begin
   with Model, TablingInfo do
@@ -1102,6 +1113,17 @@ begin
           Inc(FParaleloDiaMateriaCant[AParalelo, Dia, Materia]);
           if FParaleloDiaMateriaCant[AParalelo, Dia, Materia] > 1 then
             Inc(FCruceMateria);
+        end;
+        DDia := FDiaCant div FParaleloMateriaCant[AParalelo, Materia];
+        for Dia2 := Dia1 to Dia1 + DDia - 1 do
+        begin
+          if Dia <> FDiaCant then
+          begin
+            Dia := Dia2 mod FDiaCant;
+            Inc(FParaleloDiaMateriaAcumulacion[AParalelo, Dia, Materia]);
+            if FParaleloDiaMateriaAcumulacion[AParalelo, Dia, Materia] > 1 then
+              Inc(FMateriaNoDispersa);
+          end;
         end;
       end;
       Inc(Periodo, Duracion);
@@ -1222,7 +1244,7 @@ begin
       FillChar(ActualizarDiaProfesor[Dia, 0], FProfesorCant * SizeOf(Boolean), #0);
       FillChar(ActualizarDiaMateria[Dia, 0], FMateriaCant * SizeOf(Boolean), #0);
     end;
-    Dec(FMateriaNoDispersa, FParaleloMateriaNoDispersa[AParalelo]);
+    //Dec(FMateriaNoDispersa, FParaleloMateriaNoDispersa[AParalelo]);
     if (Duracion1 = Duracion2) then
     begin
       DecCants(AParalelo, APeriodo1, APeriodo1 + Duracion1 - 1,
@@ -1253,7 +1275,7 @@ begin
       ActualizarDiaMateria);
     end;
     FParaleloMateriaNoDispersa[AParalelo] := GetParaleloMateriaNoDispersa(AParalelo);
-    Inc(FMateriaNoDispersa, FParaleloMateriaNoDispersa[AParalelo]);
+    //Inc(FMateriaNoDispersa, FParaleloMateriaNoDispersa[AParalelo]);
     UpdateProfesorFraccionamiento(ActualizarDiaProfesor);
     FValue := GetValue;
     {$IFDEF DEBUG}
@@ -1768,9 +1790,14 @@ begin
         FPeriodoCant * SizeOf(Smallint));
     for Paralelo := 0 to FParaleloCant - 1 do
       for Dia := 0 to FDiaCant - 1 do
+      begin
         Move(ATimeTable.TablingInfo.FParaleloDiaMateriaCant[Paralelo, Dia, 0],
           TablingInfo.FParaleloDiaMateriaCant[Paralelo, Dia, 0],
           FMateriaCant * SizeOf(Smallint));
+        Move(ATimeTable.TablingInfo.FParaleloDiaMateriaAcumulacion[Paralelo, Dia, 0],
+          TablingInfo.FParaleloDiaMateriaAcumulacion[Paralelo, Dia, 0],
+          FMateriaCant * SizeOf(Smallint));
+      end;
   end;
 end;
 
@@ -2125,7 +2152,10 @@ begin
     for Paralelo := 0 to FParaleloCant - 1 do
       for Dia := 0 to FDiaCant - 1 do
         for Materia := 0 to FMateriaCant - 1 do
+        begin
           FParaleloDiaMateriaCant[Paralelo, Dia, Materia] := 0;
+          FParaleloDiaMateriaAcumulacion[Paralelo, Dia, Materia] := 0;
+        end;
   end;
 end;
 
