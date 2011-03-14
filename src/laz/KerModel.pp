@@ -193,7 +193,7 @@ type
     FParaleloPeriodoASesion: TDynamicSmallintArrayArray;
     TablingInfo: TTimeTableTablingInfo;
     procedure DecCants(AParalelo, Periodo1, Periodo2: Smallint;
-      var ActualizarDiaProfesor, ActualizarDiaMateria: TDynamicBooleanArrayArray);
+      var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
     function DeltaSesionCortada(Paralelo, Periodo1, Periodo2: Integer): Integer;
     function GetCruceMateriaValor: Double;
     function GetMateriaNoDispersaValor: Double;
@@ -206,7 +206,7 @@ type
     function GetCruceAulaTipoValor: Double;
     function GetValue: Double;
     procedure IncCants(AParalelo, Periodo1, Periodo2: Smallint;
-      var ActualizarDiaProfesor, ActualizarDiaMateria: TDynamicBooleanArrayArray);
+      var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
     procedure InternalMutate;
     procedure Reset;
     procedure SetImplementor(const AValue: TObject);
@@ -968,7 +968,7 @@ begin
 end;
 
 procedure TTimeTable.DecCants(AParalelo, Periodo1, Periodo2: Smallint;
-  var ActualizarDiaProfesor, ActualizarDiaMateria: TDynamicBooleanArrayArray);
+  var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
 var
   MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Dia, DDia, Dia1, Dia2,
   Sesion, Profesor, AulaTipo, Duracion, Materia: Smallint;
@@ -989,7 +989,6 @@ begin
         AulaTipo := FSesionAAulaTipo[Sesion];
         Dia := FPeriodoADia[Periodo];
         ActualizarDiaProfesor[Dia, Profesor] := True;
-        ActualizarDiaMateria[Dia, Materia] := True;
         if FProfesorPeriodoCant[Profesor, Periodo] > 1 then
           Dec(FCruceProfesor);
         Dec(FProfesorPeriodoCant[Profesor, Periodo]);
@@ -1043,7 +1042,7 @@ begin
 end;
 
 procedure TTimeTable.IncCants(AParalelo, Periodo1, Periodo2: Smallint;
-  var ActualizarDiaProfesor, ActualizarDiaMateria: TDynamicBooleanArrayArray);
+  var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
 var
   Dia, DDia, Dia1, Dia2, MateriaProhibicionTipo, ProfesorProhibicionTipo,
   Periodo, Sesion, Profesor, AulaTipo, Duracion, Materia: Smallint;
@@ -1064,7 +1063,6 @@ begin
         AulaTipo := FSesionAAulaTipo[Sesion];
         Dia := FPeriodoADia[Periodo];
         ActualizarDiaProfesor[Dia, Profesor] := True;
-        ActualizarDiaMateria[Dia, Materia] := True;
         Inc(FProfesorPeriodoCant[Profesor, Periodo]);
         if FProfesorPeriodoCant[Profesor, Periodo] > 1 then
           Inc(FCruceProfesor);
@@ -1141,7 +1139,7 @@ function TTimeTable.InternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint): Dou
 var
   Duracion1, Duracion2, Sesion1, Sesion2: Smallint;
   PeriodoASesion: PSmallintArray;
-  ActualizarDiaProfesor, ActualizarDiaMateria: TDynamicBooleanArrayArray;
+  ActualizarDiaProfesor: TDynamicBooleanArrayArray;
   procedure DoMovement;
   var
     Periodo: Smallint;
@@ -1185,34 +1183,32 @@ begin
     Duracion1 := FSesionADuracion[Sesion1];
     Duracion2 := FSesionADuracion[Sesion2];
     SetLength(ActualizarDiaProfesor, FDiaCant, FProfesorCant);
-    SetLength(ActualizarDiaMateria, FDiaCant, FMateriaCant);
     for Dia := 0 to FDiaCant - 1 do
     begin
       FillChar(ActualizarDiaProfesor[Dia, 0], FProfesorCant * SizeOf(Boolean), #0);
-      FillChar(ActualizarDiaMateria[Dia, 0], FMateriaCant * SizeOf(Boolean), #0);
     end;
     if (Duracion1 = Duracion2) then
     begin
       DecCants(AParalelo, APeriodo1, APeriodo1 + Duracion1 - 1,
-        ActualizarDiaProfesor, ActualizarDiaMateria);
+        ActualizarDiaProfesor);
       DecCants(AParalelo, APeriodo2, APeriodo2 + Duracion2 - 1,
-        ActualizarDiaProfesor, ActualizarDiaMateria);
+        ActualizarDiaProfesor);
       for Periodo := APeriodo1 to APeriodo1 + Duracion2 - 1 do
         PeriodoASesion[Periodo] := Sesion2;
       for Periodo := APeriodo2 to APeriodo2 + Duracion2 - 1 do
         PeriodoASesion[Periodo] := Sesion1;
       IncCants(AParalelo, APeriodo1, APeriodo1 + Duracion1 - 1,
-        ActualizarDiaProfesor, ActualizarDiaMateria);
+        ActualizarDiaProfesor);
       IncCants(AParalelo, APeriodo2, APeriodo2 + Duracion2 - 1,
-        ActualizarDiaProfesor, ActualizarDiaMateria);
+        ActualizarDiaProfesor);
     end
     else
     begin
       DecCants(AParalelo, APeriodo1, APeriodo2 + Duracion2 - 1,
-        ActualizarDiaProfesor, ActualizarDiaMateria);
+        ActualizarDiaProfesor);
       DoMovement;
       IncCants(AParalelo, APeriodo1, APeriodo2 + Duracion2 - 1,
-        ActualizarDiaProfesor, ActualizarDiaMateria);
+        ActualizarDiaProfesor);
     end;
     UpdateProfesorFraccionamiento(ActualizarDiaProfesor);
     FValue := GetValue;
@@ -2057,24 +2053,18 @@ end;
 procedure TTimeTable.Update;
 var
   Dia, Paralelo, Profesor, Materia: Smallint;
-  ActualizarDiaProfesor, ActualizarDiaMateria: TDynamicBooleanArrayArray;
+  ActualizarDiaProfesor: TDynamicBooleanArrayArray;
 begin
   with Model, TablingInfo do
   begin
     SetLength(ActualizarDiaProfesor, FDiaCant, FProfesorCant);
-    SetLength(ActualizarDiaMateria, FDiaCant, FMateriaCant);
     for Dia := 0 to FDiaCant - 1 do
-    begin
       for Profesor := 0 to FProfesorCant - 1 do
         ActualizarDiaProfesor[Dia, Profesor] := True;
-      for Materia := 0 to FMateriaCant - 1 do
-        ActualizarDiaMateria[Dia, Materia] := True;
-    end;
     Reset;
     for Paralelo := 0 to FParaleloCant - 1 do
     begin
-      IncCants(Paralelo, 0, FPeriodoCant - 1,
-               ActualizarDiaProfesor, ActualizarDiaMateria);
+      IncCants(Paralelo, 0, FPeriodoCant - 1, ActualizarDiaProfesor);
     end;
     UpdateProfesorFraccionamiento(ActualizarDiaProfesor);
     FValue := GetValue;
