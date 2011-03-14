@@ -2358,9 +2358,9 @@ begin
       FParaleloMateriaNoDispersa[Paralelo] :=
         GetParaleloMateriaNoDispersa(Paralelo);
       Inc(FMateriaNoDispersa, FParaleloMateriaNoDispersa[Paralelo]);
-      UpdateProfesorFraccionamiento(ActualizarDiaProfesor);
-      FValue := GetValue;
     end;
+    UpdateProfesorFraccionamiento(ActualizarDiaProfesor);
+    FValue := GetValue;
   end
 end;
 
