@@ -927,13 +927,13 @@ end;
 procedure TTimeTable.MakeRandom;
 var
   Paralelo, Periodo, Duracion, MaxPeriodo: Smallint;
-  r: Longint;
+  RandomKey: Longint;
   PeriodoASesion: PSmallintArray;
-  ClaveAleatoria: TDynamicLongintArray;
+  RandomKeys: TDynamicLongintArray;
 begin
   with Model do
   begin
-    SetLength(ClaveAleatoria, FPeriodoCant);
+    SetLength(RandomKeys, FPeriodoCant);
     for Paralelo := 0 to FParaleloCant - 1 do
     begin
       PeriodoASesion := @ParaleloPeriodoASesion[Paralelo, 0];
@@ -943,15 +943,15 @@ begin
       while Periodo < FPeriodoCant do
       begin
         Duracion := FSesionADuracion[PeriodoASesion[Periodo]];
-        r := Random($7FFFFFFF);
+        RandomKey := Random($7FFFFFFF);
         MaxPeriodo := Periodo + Duracion;
         while Periodo < MaxPeriodo do
         begin
-          ClaveAleatoria[Periodo] := r;
+          RandomKeys[Periodo] := RandomKey;
           Inc(Periodo);
         end;
       end;
-      SortLongint(ClaveAleatoria, PeriodoASesion^, 0, FPeriodoCant - 1);
+      SortLongint(RandomKeys, PeriodoASesion^, 0, FPeriodoCant - 1);
     end;
   end;
   Update;
@@ -1027,9 +1027,9 @@ begin
         DDia := FDiaCant div FParaleloMateriaCant[AParalelo, Materia];
         for Dia2 := Dia1 to Dia1 + DDia - 1 do
         begin
+          Dia := Dia2 mod (FDiaCant + 1);
           if Dia <> FDiaCant then
           begin
-            Dia := Dia2 mod FDiaCant;
             if FParaleloDiaMateriaAcumulacion[AParalelo, Dia, Materia] > 1 then
               Dec(FMateriaNoDispersa);
             Dec(FParaleloDiaMateriaAcumulacion[AParalelo, Dia, Materia]);
@@ -1101,9 +1101,9 @@ begin
         DDia := FDiaCant div FParaleloMateriaCant[AParalelo, Materia];
         for Dia2 := Dia1 to Dia1 + DDia - 1 do
         begin
+          Dia := Dia2 mod (FDiaCant + 1);
           if Dia <> FDiaCant then
           begin
-            Dia := Dia2 mod FDiaCant;
             Inc(FParaleloDiaMateriaAcumulacion[AParalelo, Dia, Materia]);
             if FParaleloDiaMateriaAcumulacion[AParalelo, Dia, Materia] > 1 then
               Inc(FMateriaNoDispersa);

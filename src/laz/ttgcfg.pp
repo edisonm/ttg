@@ -427,7 +427,7 @@ begin
   RepairProb := 0.2;
   ApplyDoubleDownHill := False;
   HorarioIni := '';
-  SharedDirectory := '';
+  SharedDirectory := GetTempDir;
   PollinationFreq := 1;
 end;
 

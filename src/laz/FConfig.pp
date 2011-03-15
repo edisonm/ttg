@@ -195,7 +195,7 @@ begin
       creProbMutacion2.Text := FloatToStr(Mutation2Prob);
       creProbReparacion.Text := FloatToStr(RepairProb);
       edtHorarioIni.Text := HorarioIni;
-      dedSharedDirectory.Text := SharedDirectory;
+      dedSharedDirectory.Directory := SharedDirectory;
       speRangoPolinizacion.Value := PollinationFreq;
       CBApplyDoubleDownHill.Checked := ApplyDoubleDownHill;
    end;

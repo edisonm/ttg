@@ -1,7 +1,7 @@
 inherited HorarioForm: THorarioForm
-  Left = 327
+  Left = 846
   Height = 440
-  Top = 0
+  Top = 465
   Width = 677
   ActiveControl = DBNavigator
   Caption = 'HorarioForm'
@@ -133,7 +133,7 @@ inherited HorarioForm: THorarioForm
         item
           PickList.Strings = (          )
           ReadOnly = True
-          Width = 93
+          Width = 110
           FieldName = 'MomentoInicial'
         end      
         item
@@ -998,7 +998,7 @@ inherited HorarioForm: THorarioForm
   end
   object QuCruceProfesorDetalle: TZQuery[9]
     Connection = SourceDataModule.Database
-    SortedFields = 'CodHorario;CodProfesor;CodDia;CodHora'
+    SortedFields = 'CodHorario;CodProfesor;CodDia;CodHora;CodNivel;CodEspecializacion;CodParaleloId;NomMateria'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
@@ -1047,7 +1047,7 @@ inherited HorarioForm: THorarioForm
     MasterFields = 'CodHorario;CodProfesor;CodDia;CodHora'
     MasterSource = DSCruceProfesor
     LinkedFields = 'CodHorario;CodProfesor;CodDia;CodHora'
-    IndexFieldNames = 'CodHorario Asc;CodProfesor Asc;CodDia Asc;CodHora Asc'
+    IndexFieldNames = 'CodHorario Asc;CodProfesor Asc;CodDia Asc;CodHora Asc;CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc;NomMateria Asc'
     left = 423
     top = 160
     ParamData = <    
@@ -1395,7 +1395,7 @@ inherited HorarioForm: THorarioForm
   end
   object QuCruceMateria: TZQuery[11]
     Connection = SourceDataModule.Database
-    SortedFields = 'CodHorario'
+    SortedFields = 'CodHorario;NomMateria'
     AutoCalcFields = False
     AfterScroll = QuCruceMateriaAfterScroll
     ReadOnly = True
@@ -1429,7 +1429,7 @@ inherited HorarioForm: THorarioForm
     MasterFields = 'CodHorario'
     MasterSource = SourceDataModule.DSHorario
     LinkedFields = 'CodHorario'
-    IndexFieldNames = 'CodHorario Asc'
+    IndexFieldNames = 'CodHorario Asc;NomMateria Asc'
     left = 541
     top = 64
     ParamData = <    
@@ -1447,6 +1447,7 @@ inherited HorarioForm: THorarioForm
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
       Required = False
+      Visible = False
     end
     object QuCruceMateriaCodMateria: TLongintField
       DisplayWidth = 10
@@ -1473,7 +1474,7 @@ inherited HorarioForm: THorarioForm
   end
   object QuCruceMateriaDetalle: TZQuery[12]
     Connection = SourceDataModule.Database
-    SortedFields = 'CodHorario;CodMateria'
+    SortedFields = 'CodHorario;CodMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
@@ -1513,8 +1514,8 @@ inherited HorarioForm: THorarioForm
     MasterFields = 'CodHorario;CodMateria'
     MasterSource = DSCruceMateria
     LinkedFields = 'CodHorario;CodMateria'
-    IndexFieldNames = 'CodHorario Asc;CodMateria Asc'
-    left = 540
+    IndexFieldNames = 'CodHorario Asc;CodMateria Asc;CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc;CodDia Asc;CodHora Asc'
+    left = 541
     top = 160
     ParamData = <    
       item
@@ -1536,6 +1537,7 @@ inherited HorarioForm: THorarioForm
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
+      Visible = False
     end
     object QuCruceMateriaDetalleCodMateria: TLongintField
       DisplayWidth = 10
@@ -1725,7 +1727,7 @@ inherited HorarioForm: THorarioForm
     MasterSource = SourceDataModule.DSHorario
     LinkedFields = 'CodHorario'
     IndexFieldNames = 'CodHorario Asc'
-    left = 224
+    left = 184
     top = 212
     ParamData = <    
       item
@@ -2170,7 +2172,7 @@ inherited HorarioForm: THorarioForm
   end
   object QuMateriaCortadaDia: TZQuery[15]
     Connection = SourceDataModule.Database
-    SortedFields = 'CodHorario'
+    SortedFields = 'CodHorario;NomMateria;CodNivel;CodEspecializacion;CodParaleloId;CodDia;CodHora'
     AutoCalcFields = False
     AfterScroll = QuCruceMateriaAfterScroll
     ReadOnly = True
@@ -2204,7 +2206,7 @@ inherited HorarioForm: THorarioForm
     MasterFields = 'CodHorario'
     MasterSource = SourceDataModule.DSHorario
     LinkedFields = 'CodHorario'
-    IndexFieldNames = 'CodHorario Asc'
+    IndexFieldNames = 'CodHorario Asc;NomMateria Asc;CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc;CodDia Asc;CodHora Asc'
     left = 544
     top = 212
     ParamData = <    
@@ -2509,7 +2511,7 @@ inherited HorarioForm: THorarioForm
   end
   object QuMateriaCortadaHoraDetalle: TZQuery[17]
     Connection = SourceDataModule.Database
-    SortedFields = 'CodHorario;CodDia;CodHora'
+    SortedFields = 'CodHorario;CodDia;CodHora;CodNivel;CodEspecializacion;CodParaleloId'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
@@ -2582,7 +2584,7 @@ inherited HorarioForm: THorarioForm
     MasterFields = 'CodHorario;CodDia;CodHora'
     MasterSource = DSMateriaCortadaHora
     LinkedFields = 'CodHorario;CodDia;CodHora'
-    IndexFieldNames = 'CodHorario Asc;CodDia Asc;CodHora Asc'
+    IndexFieldNames = 'CodHorario Asc;CodDia Asc;CodHora Asc;CodNivel Asc;CodEspecializacion Asc;CodParaleloId Asc'
     left = 184
     top = 161
     ParamData = <    

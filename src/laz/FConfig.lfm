@@ -1,7 +1,7 @@
 object ConfiguracionForm: TConfiguracionForm
-  Left = 485
+  Left = 512
   Height = 442
-  Top = 139
+  Top = 277
   Width = 487
   ActiveControl = pgcConfig
   BorderStyle = bsDialog
@@ -66,11 +66,11 @@ object ConfiguracionForm: TConfiguracionForm
     Height = 386
     Top = 8
     Width = 470
-    ActivePage = tbsPesos
+    ActivePage = tbsUnidadEducativa
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 1
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
@@ -211,7 +211,7 @@ object ConfiguracionForm: TConfiguracionForm
       object Label19: TLabel
         Left = 237
         Height = 13
-        Top = 17
+        Top = 13
         Width = 41
         Caption = 'Semilla:'
         ParentColor = False
@@ -227,7 +227,7 @@ object ConfiguracionForm: TConfiguracionForm
       object Label36: TLabel
         Left = 8
         Height = 13
-        Top = 156
+        Top = 157
         Width = 89
         Caption = 'Horarios iniciales:'
         ParentColor = False
@@ -344,7 +344,8 @@ object ConfiguracionForm: TConfiguracionForm
         Left = 345
         Height = 22
         Top = 152
-        Width = 112
+        Width = 89
+        Directory = '/tmp'
         ShowHidden = False
         ButtonWidth = 23
         NumGlyphs = 0
@@ -412,7 +413,7 @@ object ConfiguracionForm: TConfiguracionForm
         MaxValue = 2147483647
         MinValue = 1
         TabOrder = 11
-        Value = 1
+        Value = 10
       end
       object creProbMutacion2: TEdit
         Left = 345

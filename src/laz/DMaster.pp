@@ -639,6 +639,7 @@ begin
       PrepareTables;
       OpenTables;
       NewDatabase;
+      ConfigStorage.SetDefaults;
     finally
       Strings.Free;
     end

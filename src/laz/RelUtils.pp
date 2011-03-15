@@ -44,7 +44,7 @@ procedure LoadDataSetsFromStrings(ATables: TDataSetArray; AStrings: TStrings;
 implementation
 
 uses
-  Variants, ZSysUtils;
+  Variants, ZSysUtils, HorColCm;
 
 function GetOldFieldValues(ADataSet: TDataSet; const AFieldNames: string): Variant;
 var
@@ -122,31 +122,70 @@ begin
   end;
 end;
 
+function GetFieldAssignments(const Fields: string; Values: Variant): string;
+var
+  Pos, l: Integer;
+  Field, Assignment: string;
+begin
+  Result := '';
+  if VarIsArray(Values) then
+  begin
+    l := 0;
+    Pos := 2;
+    while True do
+    begin
+      Field := ScapedToString(Fields, Pos);
+      if Field = '' then
+        break;
+      Assignment := Format('%s="%s"', [Field, Values[l]]);
+      if l = 0 then
+        Result := Assignment
+      else
+        Result := Result + ' and ' + Assignment;
+      Inc(l);
+      Inc(Pos, 3);
+    end;
+  end
+  else
+    Result := Format('%s="%s"', [Fields, VarToStr(Values)]);
+end;
+
 procedure CheckMasterRelationUpdate(AMaster, ADetail: TDataSet;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
-  vo, vn: Variant;
+  OldValues, CurValues: Variant;
   bBookmark: TBookmark;
 begin
   with ADetail do
   if not (Eof and Bof) then
   begin
-    vo := GetOldFieldValues(AMaster, AMasterFields);
-    vn := AMaster.FieldValues[AMasterFields];
-    if not CompareVarArray(vo, vn) then
+    OldValues := GetOldFieldValues(AMaster, AMasterFields);
+    CurValues := AMaster.FieldValues[AMasterFields];
+    if not CompareVarArray(OldValues, CurValues) then
     begin
       DisableControls;
       CheckBrowseMode;
       bBookmark := GetBookmark;
       try
-        if Locate(ADetailFields, vo, []) then
+        if Locate(ADetailFields, OldValues, []) then
         begin
           if ACascade then
-          repeat
-            Edit;
-            FieldValues[ADetailFields] := vn;
-            Post;
-          until not Locate(ADetailFields, vo, [])
+          begin
+            {$IFDEF USE_SQL}
+            with TZTable(ADetail) do
+              Connection.ExecuteDirect(
+              Format('UPDATE %s SET %s WHERE %s', [TableName,
+                GetFieldAssignments(ADetailFields, CurValues),
+                GetFieldAssignments(ADetailFields, OldValues)]));
+              Refresh;
+            {$ELSE}
+            repeat
+              Edit;
+              FieldValues[ADetailFields] := CurValues;
+              Post;
+            until not Locate(ADetailFields, OldValues, []);
+            {$ENDIF}
+          end
           else
             raise ERelationUtils.CreateFmt('Ya existen campos relacionados en la tabla %s', [Name]);
         end;
@@ -179,9 +218,18 @@ begin
       if Locate(ADetailFields, MasterValues, []) then
       begin
         if ACascade then
-        repeat
-          Delete;
-        until not Locate(ADetailFields, MasterValues, [])
+        begin
+          {$IFDEF USE_SQL}
+          with TZTable(ADetail) do
+            Connection.ExecuteDirect(Format('DELETE FROM %s WHERE %s;',
+              [TableName, GetFieldAssignments(AMasterFields, MasterValues)]));
+          Refresh;
+          {$ELSE}
+          repeat
+            Delete;
+          until not Locate(ADetailFields, MasterValues, [])
+          {$ENDIF}
+        end
         else
           raise ERelationUtils.CreateFmt('Ya existen registros detalle en la tabla %s', [Name]);
       end;
@@ -582,9 +630,9 @@ var
   Value, Values, Field, Fields: string;
 begin
   s := AStrings.Strings[Position];
-  Pos := 2;
   l := 0;
   Inc(Position);
+  Pos := 2;
   while True do
   begin
     Field := ScapedToString(s, Pos);
