@@ -7,8 +7,7 @@ uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, Db, FSingEdt, Grids, Buttons, FEditor, DBCtrls,
   ExtCtrls, ComCtrls, ActnList, ZConnection, ZDataset, FCrsMMER, DMaster, FCrsMME1,
-  FConfig, DSource, FMain, FProgres, FMasDeEd, FHorProf, FHorAulT, FHorPara,
-  KerEvolE;
+  FConfig, DSource, FMain, FProgres, FMasDeEd, FHorProf, FHorAulT, FHorPara;
 
 type
 

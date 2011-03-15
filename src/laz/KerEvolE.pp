@@ -45,6 +45,8 @@ type
       var Stop: Boolean);
   public
     procedure Execute(RefreshInterval: Integer); virtual; abstract;
+    procedure SaveSolutionToDatabase(ACodHorario: Integer;
+      const AExtraInfo: string; AMomentoInicial, AMomentoFinal: TDateTime); virtual; abstract;
     property OnProgress: TProgressEvent read FOnProgress write FOnProgress;
     property BestIndividual: TTimeTable read GetBestIndividual;
   end;
@@ -60,8 +62,8 @@ type
   public
     procedure Execute(RefreshInterval: Integer); override;
     constructor Create(TimeTable: TTimeTable);
-    procedure SaveSolutionToDatabase(ACodHorarioFuente, ACodHorario: Integer;
-      AMomentoInicial, AMomentoFinal: TDateTime);
+    procedure SaveSolutionToDatabase(ACodHorario: Integer;
+      const AExtraInfo: string; AMomentoInicial, AMomentoFinal: TDateTime); override;
   end;
 
   TEvolElitist = class(TSolver)
@@ -78,7 +80,6 @@ type
     FOnRecordBest: TNotifyEvent;
     function GetFileName: string;
     function GetSyncFileName: string;
-    procedure Initialize;
     procedure Evaluate;
     procedure MakeRandom;
     procedure SelectTheBest;
@@ -93,13 +94,14 @@ type
   protected
     function GetBestIndividual: TTimeTable; override;
   public
+    procedure Initialize;
     procedure ReportParameters(AInforme: TStrings);
     constructor CreateFromModel(AModel: TTimeTableModel; APopulationSize: Longint);
     procedure FixIndividuals(const Individuals: string);
     procedure Configure(APopulationSize: Integer);
     destructor Destroy; override;
-    procedure SaveBestToDatabase(CodHorario: Integer;
-      ApplyDoubleDownHill: Boolean; MomentoInicial, MomentoFinal: TDateTime);
+    procedure SaveSolutionToDatabase(CodHorario: Integer;
+      const AExtraInfo: string; MomentoInicial, MomentoFinal: TDateTime); override;
     procedure SaveBestToStream(AStream: TStream);
     procedure Execute(RefreshInterval: Integer); override;
     function DownHillForced: Boolean;
@@ -483,7 +485,6 @@ var
   Iteration: Integer;
 begin
   FRandSeed := RandSeed;
-  TThread.Synchronize(CurrentThread, Initialize);
   MakeRandom;
   Evaluate;
   SelectTheBest;
@@ -528,11 +529,8 @@ begin
   Result := FPopulation[FPopulationSize].DownHill;
 end;
 
-const
-  FBoolToStr: array [Boolean] of string = ('No', 'Sí');
-
-procedure TEvolElitist.SaveBestToDatabase(CodHorario: Integer;
-  ApplyDoubleDownHill: Boolean; MomentoInicial, MomentoFinal: TDateTime);
+procedure TEvolElitist.SaveSolutionToDatabase(CodHorario: Integer;
+  const AExtraInfo: string; MomentoInicial, MomentoFinal: TDateTime);
 var
   Report: TStrings;
 begin
@@ -541,7 +539,8 @@ begin
   try
     Add('Algoritmo Evolutivo Elitista');
     Add('============================');
-    Add(Format('Descenso rapido doble: %13s', [FBoolToStr[ApplyDoubleDownHill]]));
+    if AExtraInfo <> '' then
+      Add(AExtraInfo);
     ReportParameters(Report);
     BestIndividual.ReportValues(Report);
     BestIndividual.SaveToDataModule(CodHorario, MomentoInicial, MomentoFinal, Report);
@@ -585,7 +584,7 @@ begin
     Add(Format('Orden de la Mutacion 1:     %7.d', [FMutation1Order]));
     Add(Format('Probabilidad de Mutacion 1: %1.5f', [FMutation2Prob]));
     Add(Format('Probabilidad de Reparacion: %1.5f', [FRepairProb]));
-    Add(Format('Rango de polinizacion:      %7.d', [FPollinationFreq]));
+    Add(Format('Frecuencia de polinizacion: %7.d', [FPollinationFreq]));
   end;
 end;
 
@@ -606,12 +605,12 @@ end;
 
 function TEvolElitist.GetFileName: string;
 begin
-  Result := FSharedDirectory + '/ttable.dat';
+  Result := FSharedDirectory + 'ttable.dat';
 end;
 
 function TEvolElitist.GetSyncFileName: string;
 begin
-  Result := FSharedDirectory + '/ttsync.dat';
+  Result := FSharedDirectory + 'ttsync.dat';
 end;
 
 procedure TSolver.DoProgress(Position, Max, RefreshInterval: Integer;
@@ -729,8 +728,8 @@ begin
   FBestIndividual := TimeTable;
 end;
 
-procedure TDoubleDownHill.SaveSolutionToDatabase(ACodHorarioFuente, ACodHorario: Integer;
-  AMomentoInicial, AMomentoFinal: TDateTime);
+procedure TDoubleDownHill.SaveSolutionToDatabase(ACodHorario: Integer;
+  const AExtraInfo: string; AMomentoInicial, AMomentoFinal: TDateTime);
 var
   Report: TStrings;
 begin
@@ -738,7 +737,8 @@ begin
   try
     Report.Add('Algoritmo de Descenso Rapido Doble');
     Report.Add('==================================');
-    Report.Add(Format('Horario base: %d', [ACodHorarioFuente]));
+    if AExtraInfo <> '' then
+      Report.Add(AExtraInfo);
     FBestIndividual.ReportValues(Report);
     FBestIndividual.SaveToDataModule(ACodHorario, AMomentoInicial, AMomentoFinal, Report);
   finally

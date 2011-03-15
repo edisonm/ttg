@@ -16,7 +16,7 @@ uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, MTProcs, SysUtils, Classes, Graphics,
   Forms, Dialogs, ExtCtrls, Menus, ComCtrls, Buttons, ActnList,
   FSplash, FSingEdt, ZConnection, Controls, FCrsMME0, FEditor, UConfig
-{$IFNDEF FREEWARE}, KerEvolE, KerModel, FProgres, UMakeTT{$ENDIF};
+{$IFNDEF FREEWARE}, KerModel, FProgres, UMakeTT{$ENDIF};
 
 type
 

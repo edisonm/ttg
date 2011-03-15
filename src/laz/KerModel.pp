@@ -171,7 +171,7 @@ type
     FMateriaPeriodoCant: TDynamicSmallintArrayArray;
     FAulaTipoPeriodoCant: TDynamicSmallintArrayArray;
     FParaleloDiaMateriaCant: TDynamicSmallintArrayArrayArray;
-    FParaleloDiaMateriaAcumulacion: TDynamicSmallintArrayArrayArray;
+    FParaleloDiaMateriaAcum: TDynamicSmallintArrayArrayArray;
     FDiaProfesorFraccionamiento: TDynamicSmallintArrayArray;
     FMateriaProhibicionTipoAMateriaCant: TDynamicSmallintArray;
     FProfesorProhibicionTipoAProfesorCant: TDynamicSmallintArray;
@@ -195,10 +195,7 @@ type
     TablingInfo: TTimeTableTablingInfo;
     { Required to synchronize threads: }
     FCodHorario: Integer;
-    procedure DecCants(AParalelo, Periodo1, Periodo2: Smallint;
-      var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
-    procedure DeltaDepCants(Delta, AParalelo, Periodo1, Periodo2: Smallint);
-    procedure DeltaIndCants(Delta, AParalelo, Periodo1, Periodo2: Smallint;
+    procedure DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Smallint;
       var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
     function DeltaSesionCortada(Paralelo, Periodo1, Periodo2: Integer): Integer;
     function GetCruceMateriaValor: Double;
@@ -211,8 +208,6 @@ type
     function GetSesionCortadaValor: Double;
     function GetCruceAulaTipoValor: Double;
     function GetValue: Double;
-    procedure IncCants(AParalelo, Periodo1, Periodo2: Smallint;
-      var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
     procedure InternalMutate;
     procedure LoadCurrentFromDataModule;
     procedure Reset;
@@ -914,7 +909,7 @@ begin
       SetLength(FProfesorPeriodoCant, FProfesorCant, FPeriodoCant);
       SetLength(FAulaTipoPeriodoCant, FAulaTipoCant, FPeriodoCant);
       SetLength(FParaleloDiaMateriaCant, FParaleloCant, FDiaCant, FMateriaCant);
-      SetLength(FParaleloDiaMateriaAcumulacion, FParaleloCant, FDiaCant, FMateriaCant);
+      SetLength(FParaleloDiaMateriaAcum, FParaleloCant, FDiaCant, FMateriaCant);
       SetLength(FDiaProfesorFraccionamiento, FDiaCant, FProfesorCant);
       SetLength(FMateriaProhibicionTipoAMateriaCant, FMateriaProhibicionTipoCant);
       SetLength(FProfesorProhibicionTipoAProfesorCant, FProfesorProhibicionTipoCant);
@@ -974,11 +969,11 @@ begin
     InternalSwap(AParalelo, APeriodo2, APeriodo1);
 end;
 
-procedure TTimeTable.DeltaIndCants(Delta, AParalelo, Periodo1, Periodo2: Smallint;
+procedure TTimeTable.DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Smallint;
   var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
 var
-  MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Dia, DDia,
-  Dia1, Dia2, Sesion, Profesor, AulaTipo, Duracion, Materia, Limit: Smallint;
+  MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Dia, DDia, Dia1,
+    Dia2, Sesion, Profesor, AulaTipo, Duracion, Materia, Limit: Smallint;
   PeriodoASesion, MateriaAProfesor: PSmallintArray;
 begin
   with Model, TablingInfo do
@@ -1039,33 +1034,15 @@ begin
           Dia := Dia2 mod (FDiaCant + 1);
           if Dia <> FDiaCant then
           begin
-            if FParaleloDiaMateriaAcumulacion[AParalelo, Dia, Materia] > Limit then
+            if FParaleloDiaMateriaAcum[AParalelo, Dia, Materia] > Limit then
               Inc(FMateriaNoDispersa, Delta);
-            Inc(FParaleloDiaMateriaAcumulacion[AParalelo, Dia, Materia], Delta);
+            Inc(FParaleloDiaMateriaAcum[AParalelo, Dia, Materia], Delta);
           end;
         end;
       end;
       Inc(Periodo, Duracion);
     end;
   end;
-end;
-
-procedure TTimeTable.DeltaDepCants(Delta, AParalelo, Periodo1, Periodo2: Smallint);
-begin
-end;
-
-procedure TTimeTable.DecCants(AParalelo, Periodo1, Periodo2: Smallint;
-  var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
-begin
-  DeltaDepCants(-1, AParalelo, Periodo1, Periodo2);
-  DeltaIndCants(-1, AParalelo, Periodo1, Periodo2, ActualizarDiaProfesor);
-end;
-
-procedure TTimeTable.IncCants(AParalelo, Periodo1, Periodo2: Smallint;
-  var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
-begin
-  DeltaIndCants(1, AParalelo, Periodo1, Periodo2, ActualizarDiaProfesor);
-  DeltaDepCants(1, AParalelo, Periodo1, Periodo2);
 end;
 
 procedure TTimeTable.UpdateProfesorFraccionamiento(ActualizarDiaProfesor: TDynamicBooleanArrayArray);
@@ -1142,25 +1119,25 @@ begin
     end;
     if (Duracion1 = Duracion2) then
     begin
-      DecCants(AParalelo, APeriodo1, APeriodo1 + Duracion1 - 1,
+      DeltaValues(-1, AParalelo, APeriodo1, APeriodo1 + Duracion1 - 1,
         ActualizarDiaProfesor);
-      DecCants(AParalelo, APeriodo2, APeriodo2 + Duracion2 - 1,
+      DeltaValues(-1, AParalelo, APeriodo2, APeriodo2 + Duracion2 - 1,
         ActualizarDiaProfesor);
       for Periodo := APeriodo1 to APeriodo1 + Duracion2 - 1 do
         PeriodoASesion[Periodo] := Sesion2;
       for Periodo := APeriodo2 to APeriodo2 + Duracion2 - 1 do
         PeriodoASesion[Periodo] := Sesion1;
-      IncCants(AParalelo, APeriodo1, APeriodo1 + Duracion1 - 1,
+      DeltaValues(1, AParalelo, APeriodo1, APeriodo1 + Duracion1 - 1,
         ActualizarDiaProfesor);
-      IncCants(AParalelo, APeriodo2, APeriodo2 + Duracion2 - 1,
+      DeltaValues(1, AParalelo, APeriodo2, APeriodo2 + Duracion2 - 1,
         ActualizarDiaProfesor);
     end
     else
     begin
-      DecCants(AParalelo, APeriodo1, APeriodo2 + Duracion2 - 1,
+      DeltaValues(-1, AParalelo, APeriodo1, APeriodo2 + Duracion2 - 1,
         ActualizarDiaProfesor);
       DoMovement;
-      IncCants(AParalelo, APeriodo1, APeriodo2 + Duracion2 - 1,
+      DeltaValues(1, AParalelo, APeriodo1, APeriodo2 + Duracion2 - 1,
         ActualizarDiaProfesor);
     end;
     UpdateProfesorFraccionamiento(ActualizarDiaProfesor);
@@ -1638,8 +1615,8 @@ begin
         Move(ATimeTable.TablingInfo.FParaleloDiaMateriaCant[Paralelo, Dia, 0],
           TablingInfo.FParaleloDiaMateriaCant[Paralelo, Dia, 0],
           FMateriaCant * SizeOf(Smallint));
-        Move(ATimeTable.TablingInfo.FParaleloDiaMateriaAcumulacion[Paralelo, Dia, 0],
-          TablingInfo.FParaleloDiaMateriaAcumulacion[Paralelo, Dia, 0],
+        Move(ATimeTable.TablingInfo.FParaleloDiaMateriaAcum[Paralelo, Dia, 0],
+          TablingInfo.FParaleloDiaMateriaAcum[Paralelo, Dia, 0],
           FMateriaCant * SizeOf(Smallint));
       end;
   end;
@@ -1694,47 +1671,6 @@ begin
       Stream.Read(ParaleloPeriodoASesion[Paralelo, 0], FPeriodoCant * SizeOf(Smallint));
     end;
   Update;
-end;
-
-type
-
-  { TSyncExecuteSQL }
-
-  TSyncExecuteSQL = class
-  private
-    SQL: TStrings;
-  public
-    constructor Create(ASQL: TStrings);
-    procedure Execute;
-    procedure ExecuteSync;
-  end;
-
-{ TSyncExecuteSQL }
-
-constructor TSyncExecuteSQL.Create(ASQL: TStrings);
-begin
-  inherited Create;
-  SQL := ASQL;
-end;
-
-procedure TSyncExecuteSQL.Execute;
-begin
-  with SourceDataModule do
-  begin
-    CheckRelations := False;
-    try
-      Database.ExecuteDirect(SQL.Text);
-      TbHorario.Refresh;
-      TbHorarioDetalle.Refresh;
-    finally
-      CheckRelations := true;
-    end;
-  end;
-end;
-
-procedure TSyncExecuteSQL.ExecuteSync;
-begin
-  TThread.Synchronize(CurrentThread, Execute);
 end;
 
 procedure TTimeTable.SaveToDataModule(CodHorario: Integer;
@@ -1869,11 +1805,11 @@ begin
     SaveHorario;
     SaveHorarioDetalle;
     {$IFDEF USE_SQL}
-    with TSyncExecuteSQL.Create(SQL) do
-    try
-      ExecuteSync;
-    finally
-      Free;
+    with SourceDataModule do
+    begin
+      Database.ExecuteDirect(SQL.Text);
+      TbHorario.Refresh;
+      TbHorarioDetalle.Refresh;
     end;
     {$ENDIF}
   finally
@@ -2005,7 +1941,7 @@ begin
         for Materia := 0 to FMateriaCant - 1 do
         begin
           FParaleloDiaMateriaCant[Paralelo, Dia, Materia] := 0;
-          FParaleloDiaMateriaAcumulacion[Paralelo, Dia, Materia] := 0;
+          FParaleloDiaMateriaAcum[Paralelo, Dia, Materia] := 0;
         end;
   end;
 end;
@@ -2023,9 +1959,7 @@ begin
         ActualizarDiaProfesor[Dia, Profesor] := True;
     Reset;
     for Paralelo := 0 to FParaleloCant - 1 do
-    begin
-      IncCants(Paralelo, 0, FPeriodoCant - 1, ActualizarDiaProfesor);
-    end;
+      DeltaValues(1, Paralelo, 0, FPeriodoCant - 1, ActualizarDiaProfesor);
     UpdateProfesorFraccionamiento(ActualizarDiaProfesor);
     FValue := GetValue;
   end
