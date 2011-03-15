@@ -23,6 +23,18 @@ type
   destructor Destroy; override;
   end;
 
+  { TImproveTimeTableThread }
+
+  TImproveTimeTableThread = class(TThread)
+  private
+    FTimeTableModel: TTimeTableModel;
+    FCodHorarioFuente, FCodHorario: Integer;
+  public
+  procedure Execute; override;
+  constructor Create(ACodHorarioFuente, ACodHorario: Integer; CreateSuspended: Boolean);
+  destructor Destroy; override;
+  end;
+
 implementation
 
 uses KerEvolE, FProgres;
@@ -134,6 +146,83 @@ begin
 end;
 
 destructor TMakeTimeTableThread.Destroy;
+begin
+  FTimeTableModel.Free;
+  inherited Destroy;
+end;
+
+function ImproveTimeTable(ATimeTableModel: TTimeTableModel;
+  ACodHorarioFuente, ACodHorario: Integer): Boolean;
+var
+  ProgressFormDrv: TProgressFormDrv;
+  TimeTable: TTimeTable;
+  MomentoInicial: TDateTime;
+  DoubleDownHill: TDoubleDownHill;
+begin
+  MomentoInicial := Now;
+  with MasterDataModule.ConfigStorage do
+  begin
+    InitRandom;
+    ProgressFormDrv := TProgressFormDrv.Create(
+      ATimeTableModel.SesionCantidadDoble, ACodHorario);
+      {Format('Mejorando Horario [%d] en [%d]',
+        [CodHorarioFuente, CodHorarioDestino]));}
+    TimeTable := TTimeTable.Create(ATimeTableModel);
+    try
+      TimeTable.LoadFromDataModule(ACodHorarioFuente);
+      TimeTable.DownHillForced;
+      DoubleDownHill := TDoubleDownHill.Create(TimeTable);
+      try
+      {if s = '' then
+        TimeTable.MakeRandom
+      else}
+        ProgressFormDrv := TProgressFormDrv.Create(
+          ATimeTableModel.SesionCantidadDoble, ACodHorario);
+        DoubleDownHill.OnProgress := ProgressFormDrv.OnProgress;
+        try
+          DoubleDownHill.Execute(RefreshInterval);
+          if ProgressFormDrv.CancelClick then
+          begin
+            Result := True;
+            Exit;
+          end;
+        finally
+          ProgressFormDrv.Free;
+        end;
+        if not ProgressFormDrv.CancelClick then
+          DoubleDownHill.SaveSolutionToDatabase(ACodHorarioFuente,
+            ACodHorario, MomentoInicial, Now);
+      finally
+        DoubleDownHill.Free;
+      end;
+    finally
+      TimeTable.Free;
+    end;
+  end;
+end;
+
+{ TImproveTimeTableThread }
+
+procedure TImproveTimeTableThread.Execute;
+begin
+  if ImproveTimeTable(FTimeTableModel, FCodHorarioFuente, FCodHorario) then
+    Terminate;
+end;
+
+constructor TImproveTimeTableThread.Create(ACodHorarioFuente, ACodHorario: Integer;
+  CreateSuspended: Boolean);
+begin
+  FreeOnTerminate := True;
+  FCodHorarioFuente := ACodHorarioFuente;
+  FCodHorario := ACodHorario;
+  with MasterDataModule.ConfigStorage do
+    FTimeTableModel := TTimeTableModel.CreateFromDataModule(CruceProfesor,
+      CruceMateria, CruceAulaTipo, ProfesorFraccionamiento, HoraHueca,
+      SesionCortada, MateriaNoDispersa);
+  inherited Create(CreateSuspended);
+end;
+
+destructor TImproveTimeTableThread.Destroy;
 begin
   FTimeTableModel.Free;
   inherited Destroy;

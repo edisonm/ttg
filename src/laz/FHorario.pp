@@ -213,7 +213,7 @@ var
 implementation
 
 uses
-  Variants, KerModel;
+  Variants, KerModel, UMakeTT;
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
@@ -309,15 +309,8 @@ end;
 {$IFNDEF FREEWARE}
 procedure THorarioForm.MejorarHorario;
 var
-  DoubleDownHill: TDoubleDownHill;
-  TimeTableModel: TTimeTableModel;
-  TimeTable: TTimeTable;
   CodHorarioFuente, CodHorarioDestino: Integer;
-  Report: TStrings;
-  MomentoInicial, EndTime: TDateTime;
   SNewCodHorario: string;
-  va: Double;
-  ProgressFormDrv: TProgressFormDrv;
 begin
   CodHorarioFuente := SourceDataModule.TbHorario.FindField('CodHorario').AsInteger;
   SNewCodHorario := IntToStr(MasterDataModule.NewCodHorario);
@@ -325,63 +318,25 @@ begin
     'Codigo del horario mejorado', SNewCodHorario) then
     Exit;
   CodHorarioDestino := StrToInt(SNewCodHorario);
-  with SourceDataModule, MasterDataModule.ConfigStorage do
+  with SourceDataModule do
   begin
-    InitRandom;
-    MomentoInicial := Now;
+    ActMejorarHorario.Enabled := False;
     MainForm.Ejecutando := True;
-    TimeTableModel := TTimeTableModel.CreateFromDataModule(CruceProfesor,
-      CruceMateria, CruceAulaTipo, ProfesorFraccionamiento, HoraHueca,
-      SesionCortada, MateriaNoDispersa);
-    MainForm.StatusBar.Panels[1].Style := psOwnerDraw;
-    MainForm.Progress := 0;
-    MainForm.Pasada := 0;
     try
-      MainForm.Step := 1;
-      ProgressFormDrv := TProgressFormDrv.Create(
-        TimeTableModel.SesionCantidadDoble, CodHorarioDestino);
-        {Format('Mejorando Horario [%d] en [%d]',
-          [CodHorarioFuente, CodHorarioDestino]));}
-      TimeTable := TTimeTable.Create(TimeTableModel);
-      DoubleDownHill := TDoubleDownHill.Create(TimeTable);
+      {$IFDEF DEBUG}
+      with TImproveTimeTableThread.Create(ValidCodes, True) do
       try
-        {if s = '' then
-          TimeTable.MakeRandom
-        else}
-        TimeTable.LoadFromDataModule(CodHorarioFuente);
-        va := TimeTable.Value;
-        TimeTable.DownHillForced;
-        DoubleDownHill.OnProgress := ProgressFormDrv.OnProgress;
-        DoubleDownHill.Execute(MasterDataModule.ConfigStorage.RefreshInterval);
-        if not ProgressFormDrv.CancelClick then
-        begin
-          EndTime := Now;
-          Report := TStringList.Create;
-          try
-            Report.Add('Algoritmo de Descenso Rapido Doble');
-            Report.Add('==================================');
-            Report.Add(Format('Horario base (Peso): %d (%f)',
-              [CodHorarioFuente, va]));
-            Report.Add('----------------------------------');
-            // TimeTableModel.ReportParameters(Report);
-            TimeTable.ReportValues(Report);
-            TimeTable.SaveToDataModule(CodHorarioDestino, MomentoInicial,
-              EndTime, Report);
-            if SourceDataModule.TbHorario.Active then
-              SourceDataModule.TbHorario.Refresh;
-          finally
-            Report.Free;
-          end;
-        end;
+        Execute;
       finally
-        ProgressFormDrv.Free;
-        TimeTable.Free;
+        Free;
       end;
+      {$ELSE}
+      TImproveTimeTableThread.Create(CodHorarioFuente, CodHorarioDestino, False);
+      {$ENDIF}
     finally
-      TimeTableModel.Free;
       MainForm.Ejecutando := False;
-      MainForm.StatusBar.Panels[1].Style := psText;
-      MainForm.StatusBar.Panels[2].Text := 'Listo';
+      ActMejorarHorario.Enabled := True;
+      TbHorarioDetalle.Refresh;
     end;
   end;
 end;

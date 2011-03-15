@@ -2,8 +2,8 @@ inherited SourceDataModule: TSourceDataModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 421
-  HorizontalOffset = 363
-  VerticalOffset = 210
+  HorizontalOffset = 1008
+  VerticalOffset = 34
   Width = 630
   inherited Database: TZConnection
     Connected = True

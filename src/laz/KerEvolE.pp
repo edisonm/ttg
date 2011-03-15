@@ -60,6 +60,8 @@ type
   public
     procedure Execute(RefreshInterval: Integer); override;
     constructor Create(TimeTable: TTimeTable);
+    procedure SaveSolutionToDatabase(ACodHorarioFuente, ACodHorario: Integer;
+      AMomentoInicial, AMomentoFinal: TDateTime);
   end;
 
   TEvolElitist = class(TSolver)
@@ -575,15 +577,15 @@ procedure TEvolElitist.ReportParameters(AInforme: TStrings);
 begin
   with AInforme do
   begin
-    Add(Format('Semilla Numeros aleatorios: %5.u', [FRandSeed]));
-    Add(Format('Numero de individuos:       %5.d', [FPopulationSize]));
-    Add(Format('Maximo de generaciones:     %5.d', [FMaxIteration]));
-    Add(Format('Probabilidad de cruce:      %1.3f', [FCrossProb]));
-    Add(Format('Probabilidad de Mutacion 1: %1.3f', [FMutation1Prob]));
-    Add(Format('Orden de la Mutacion 1:     %5.d', [FMutation1Order]));
-    Add(Format('Probabilidad de Mutacion 1: %1.3f', [FMutation2Prob]));
-    Add(Format('Probabilidad de Reparacion: %1.3f', [FRepairProb]));
-    Add(Format('Rango de polinizacion:      %5.d', [FPollinationFreq]));
+    Add(Format('Semilla Numeros aleatorios: %8.u', [FRandSeed]));
+    Add(Format('Numero de individuos:       %8.d', [FPopulationSize]));
+    Add(Format('Maximo de generaciones:     %8.d', [FMaxIteration]));
+    Add(Format('Probabilidad de cruce:      %1.5f', [FCrossProb]));
+    Add(Format('Probabilidad de Mutacion 1: %1.5f', [FMutation1Prob]));
+    Add(Format('Orden de la Mutacion 1:     %8.d', [FMutation1Order]));
+    Add(Format('Probabilidad de Mutacion 1: %1.5f', [FMutation2Prob]));
+    Add(Format('Probabilidad de Reparacion: %1.5f', [FRepairProb]));
+    Add(Format('Rango de polinizacion:      %8.d', [FPollinationFreq]));
   end;
 end;
 
@@ -707,6 +709,24 @@ end;
 constructor TDoubleDownHill.Create(TimeTable: TTimeTable);
 begin
   FBestIndividual := TimeTable;
+end;
+
+procedure TDoubleDownHill.SaveSolutionToDatabase(ACodHorarioFuente, ACodHorario: Integer;
+  AMomentoInicial, AMomentoFinal: TDateTime);
+var
+  Report: TStrings;
+begin
+  Report := TStringList.Create;
+  try
+    Report.Add('Algoritmo de Descenso Rapido Doble');
+    Report.Add('==================================');
+    Report.Add(Format('Horario base: %d', [ACodHorarioFuente]));
+    Report.Add('----------------------------------');
+    FBestIndividual.ReportValues(Report);
+    FBestIndividual.SaveToDataModule(ACodHorario, AMomentoInicial, AMomentoFinal, Report);
+  finally
+    Report.Free;
+  end;
 end;
 
 end.
