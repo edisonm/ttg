@@ -1034,7 +1034,6 @@ begin
   end;
 end;
 
-
 procedure TTimeTable.DeltaDepCants(Delta, AParalelo, Periodo1, Periodo2: Smallint);
 var
   MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Dia, DDia, Dia1, Dia2,
@@ -1099,7 +1098,7 @@ begin
   DeltaIndCants(1, AParalelo, Periodo1, Periodo2, ActualizarDiaProfesor);
   DeltaDepCants(1, AParalelo, Periodo1, Periodo2);
 end;
-  
+
 procedure TTimeTable.UpdateProfesorFraccionamiento(ActualizarDiaProfesor: TDynamicBooleanArrayArray);
 var
   Dia, Profesor: Smallint;
