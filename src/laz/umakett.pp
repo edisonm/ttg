@@ -61,9 +61,10 @@ begin
       VEvolElitist.SharedDirectory := SharedDirectory;
       VEvolElitist.PollinationFreq := PollinationFreq;
       VEvolElitist.FixIndividuals(HorarioIni);
-      ProgressFormDrv := TProgressFormDrv.Create(MaxIteration, ACodHorario);
+      ProgressFormDrv := TProgressFormDrv.Create;
       try
         {VEvolElitist.OnRecordBest := MainForm.OnRegistrarMejor;}
+        ProgressFormDrv.Caption := Format('Elaboracion en progreso [%d]', [ACodHorario]);
         VEvolElitist.OnProgress := ProgressFormDrv.OnProgress;
         VEvolElitist.Execute(RefreshInterval);
         if ProgressFormDrv.CancelClick then
@@ -71,17 +72,12 @@ begin
           Result := True;
           Exit;
         end;
-      finally
-        ProgressFormDrv.Free;
-      end;
-      if ApplyDoubleDownHill then
-      begin
-        DoubleDownHill := TDoubleDownHill.Create(VEvolElitist.BestIndividual);
-        try
-          ProgressFormDrv := TProgressFormDrv.Create(
-            TimeTableModel.SesionCantidadDoble, ACodHorario);
-          DoubleDownHill.OnProgress := ProgressFormDrv.OnProgress;
+        if ApplyDoubleDownHill then
+        begin
+          DoubleDownHill := TDoubleDownHill.Create(VEvolElitist.BestIndividual);
           try
+            ProgressFormDrv.Caption := Format('Mejorando Horario [%d]', [ACodHorario]);
+            DoubleDownHill.OnProgress := ProgressFormDrv.OnProgress;
             DoubleDownHill.Execute(RefreshInterval);
             if ProgressFormDrv.CancelClick then
             begin
@@ -89,15 +85,15 @@ begin
               Exit;
             end;
           finally
-            ProgressFormDrv.Free;
+            DoubleDownHill.Free;
           end;
-        finally
-          DoubleDownHill.Free;
+        end
+        else
+        begin
+          VEvolElitist.DownHillForced;
         end;
-      end
-      else
-      begin
-        VEvolElitist.DownHillForced;
+      finally
+        ProgressFormDrv.Free;
       end;
       VEvolElitist.BestIndividual.Update;
       ProcThreadPool.EnterPoolCriticalSection;
@@ -172,12 +168,12 @@ begin
       {if s = '' then
         TimeTable.MakeRandom
       else}
-        ProgressFormDrv := TProgressFormDrv.Create(
-          ATimeTableModel.SesionCantidadDoble, ACodHorario);
-        {Format('Mejorando Horario [%d] en [%d]',
-          [CodHorarioFuente, CodHorarioDestino]));}
+        ProgressFormDrv := TProgressFormDrv.Create;
         DoubleDownHill.OnProgress := ProgressFormDrv.OnProgress;
         try
+          ProgressFormDrv.Caption :=
+            Format('Mejorando Horario [%d] en [%d]',
+              [ACodHorarioFuente, ACodHorario]);
           DoubleDownHill.Execute(RefreshInterval);
           if ProgressFormDrv.CancelClick then
           begin

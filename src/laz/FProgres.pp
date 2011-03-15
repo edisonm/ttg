@@ -104,11 +104,13 @@ type
   private
     FProgressForm: TProgressForm;
     FMax: Integer;
-    FCodHorario: Integer;
     FPosition: Integer;
     FSolver: TSolver;
+    FCaption: string;
+    procedure SetCaption(const AValue: string);
+    procedure UpdateCaption;
   public
-    constructor Create(AMax, ACodHorario: Integer);
+    constructor Create;
     destructor Destroy; override;
     procedure CreateForm;
     procedure DestroyForm;
@@ -116,6 +118,7 @@ type
     procedure OnProgress(APosition, AMax: Integer; ASolver: TSolver;
       var Stop: Boolean);
     property CancelClick: Boolean read FProgressForm.FCancelClick;
+    property Caption: string read FCaption write SetCaption;
   end;
 
 implementation
@@ -227,11 +230,20 @@ end;
 
 { TProgressFormDrv }
 
-constructor TProgressFormDrv.Create(AMax, ACodHorario: Integer);
+procedure TProgressFormDrv.SetCaption(const AValue: string);
+begin
+  FCaption := AValue;
+  TThread.Synchronize(CurrentThread, UpdateCaption);
+end;
+
+procedure TProgressFormDrv.UpdateCaption;
+begin
+  FProgressForm.Caption := FCaption;
+end;
+
+constructor TProgressFormDrv.Create;
 begin
   inherited Create;
-  FMax := AMax;
-  FCodHorario := ACodHorario;
   TThread.Synchronize(CurrentThread, CreateForm);
 end;
 
@@ -244,8 +256,6 @@ end;
 procedure TProgressFormDrv.CreateForm;
 begin
   FProgressForm := TProgressForm.Create(Application);
-  FProgressForm.ProgressMax := FMax;
-  FProgressForm.Caption := Format('Elaboracion en progreso [%d]', [FCodHorario]);
 end;
 
 procedure TProgressFormDrv.DestroyForm;

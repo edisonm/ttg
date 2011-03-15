@@ -978,7 +978,7 @@ procedure TTimeTable.DeltaIndCants(Delta, AParalelo, Periodo1, Periodo2: Smallin
   var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
 var
   MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Dia, DDia,
-  Dia1, Dia2, Sesion, Profesor, AulaTipo, Duracion, Materia: Smallint;
+  Dia1, Dia2, Sesion, Profesor, AulaTipo, Duracion, Materia, Limit: Smallint;
   PeriodoASesion, MateriaAProfesor: PSmallintArray;
 begin
   with Model, TablingInfo do
@@ -986,6 +986,10 @@ begin
     Inc(FSesionCortada, Delta * DeltaSesionCortada(AParalelo, Periodo1, Periodo2));
     PeriodoASesion := @FParaleloPeriodoASesion[AParalelo, 0];
     MateriaAProfesor := @FParaleloMateriaAProfesor[AParalelo, 0];
+    if Delta > 0 then
+      Limit := 0
+    else
+      Limit := 1;
     for Periodo := Periodo1 to Periodo2 do
     begin
       Sesion := PeriodoASesion[Periodo];
@@ -996,8 +1000,12 @@ begin
         AulaTipo := FSesionAAulaTipo[Sesion];
         Dia := FPeriodoADia[Periodo];
         ActualizarDiaProfesor[Dia, Profesor] := True;
+        if FProfesorPeriodoCant[Profesor, Periodo] > Limit then
+          Inc(FCruceProfesor, Delta);
         Inc(FProfesorPeriodoCant[Profesor, Periodo], Delta);
         Inc(FMateriaPeriodoCant[Materia, Periodo], Delta);
+        if FAulaTipoPeriodoCant[AulaTipo, Periodo] >= FAulaTipoACantidad[AulaTipo] + Limit then
+          Inc(FCruceAulaTipo, Delta);
         Inc(FAulaTipoPeriodoCant[AulaTipo, Periodo], Delta);
         MateriaProhibicionTipo := FMateriaPeriodoAMateriaProhibicionTipo[Materia, Periodo];
         if MateriaProhibicionTipo >= 0 then
@@ -1020,13 +1028,21 @@ begin
         Dia1 := FPeriodoADia[Periodo];
         Dia2 := FPeriodoADia[Periodo + Duracion - 1];
         for Dia := Dia1 to Dia2 do
+        begin
+          if FParaleloDiaMateriaCant[AParalelo, Dia, Materia] > Limit then
+            Inc(FCruceMateria, Delta);
           Inc(FParaleloDiaMateriaCant[AParalelo, Dia, Materia], Delta);
+        end;
         DDia := FDiaCant div FParaleloMateriaCant[AParalelo, Materia];
         for Dia2 := Dia1 to Dia1 + DDia - 1 do
         begin
           Dia := Dia2 mod (FDiaCant + 1);
           if Dia <> FDiaCant then
+          begin
+            if FParaleloDiaMateriaAcumulacion[AParalelo, Dia, Materia] > Limit then
+              Inc(FMateriaNoDispersa, Delta);
             Inc(FParaleloDiaMateriaAcumulacion[AParalelo, Dia, Materia], Delta);
+          end;
         end;
       end;
       Inc(Periodo, Duracion);
@@ -1035,54 +1051,7 @@ begin
 end;
 
 procedure TTimeTable.DeltaDepCants(Delta, AParalelo, Periodo1, Periodo2: Smallint);
-var
-  MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Dia, DDia, Dia1, Dia2,
-  Sesion, Profesor, AulaTipo, Duracion, Materia: Smallint;
-  PeriodoASesion, MateriaAProfesor: PSmallintArray;
 begin
-  with Model, TablingInfo do
-  begin
-    PeriodoASesion := @FParaleloPeriodoASesion[AParalelo, 0];
-    MateriaAProfesor := @FParaleloMateriaAProfesor[AParalelo, 0];
-    for Periodo := Periodo1 to Periodo2 do
-    begin
-      Sesion := PeriodoASesion[Periodo];
-      if Sesion >= 0 then
-      begin
-        Materia := FSesionAMateria[Sesion];
-        Profesor := MateriaAProfesor[Materia];
-        AulaTipo := FSesionAAulaTipo[Sesion];
-        if FProfesorPeriodoCant[Profesor, Periodo] > 1 then
-          Inc(FCruceProfesor, Delta);
-        if FAulaTipoPeriodoCant[AulaTipo, Periodo] > FAulaTipoACantidad[AulaTipo] then
-          Inc(FCruceAulaTipo, Delta);
-      end;
-    end;
-    Periodo := Periodo1;
-    while Periodo <= Periodo2 do
-    begin
-      Sesion := PeriodoASesion[Periodo];
-      Duracion := FSesionADuracion[Sesion];
-      if Sesion >= 0 then
-      begin
-        Materia := FSesionAMateria[Sesion];
-        Dia1 := FPeriodoADia[Periodo];
-        Dia2 := FPeriodoADia[Periodo + Duracion - 1];
-        for Dia := Dia1 to Dia2 do
-          if FParaleloDiaMateriaCant[AParalelo, Dia, Materia] > 1 then
-            Inc(FCruceMateria, Delta);
-        DDia := FDiaCant div FParaleloMateriaCant[AParalelo, Materia];
-        for Dia2 := Dia1 to Dia1 + DDia - 1 do
-        begin
-          Dia := Dia2 mod (FDiaCant + 1);
-          if Dia <> FDiaCant then
-            if FParaleloDiaMateriaAcumulacion[AParalelo, Dia, Materia] > 1 then
-              Inc(FMateriaNoDispersa, Delta);
-        end;
-      end;
-      Inc(Periodo, Duracion);
-    end;
-  end;
 end;
 
 procedure TTimeTable.DecCants(AParalelo, Periodo1, Periodo2: Smallint;
