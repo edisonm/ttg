@@ -541,7 +541,7 @@ begin
   try
     Add('Algoritmo Evolutivo Elitista');
     Add('============================');
-    Add(Format('Descenso rapido doble: %s', [FBoolToStr[ApplyDoubleDownHill]]));
+    Add(Format('Descenso rapido doble: %13s', [FBoolToStr[ApplyDoubleDownHill]]));
     ReportParameters(Report);
     BestIndividual.ReportValues(Report);
     BestIndividual.SaveToDataModule(CodHorario, MomentoInicial, MomentoFinal, Report);
