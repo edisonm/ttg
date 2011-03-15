@@ -194,7 +194,6 @@ type
     FParaleloPeriodoASesion: TDynamicSmallintArrayArray;
     TablingInfo: TTimeTableTablingInfo;
     { Required to synchronize threads: }
-    FCodHorario: Integer;
     procedure DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Smallint;
       var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
     function DeltaSesionCortada(Paralelo, Periodo1, Periodo2: Integer): Integer;
@@ -209,7 +208,6 @@ type
     function GetCruceAulaTipoValor: Double;
     function GetValue: Double;
     procedure InternalMutate;
-    procedure LoadCurrentFromDataModule;
     procedure Reset;
     procedure SetImplementor(const AValue: TObject);
     procedure Swap(AParalelo, APeriodo1, APeriodo2: Smallint);
@@ -220,14 +218,14 @@ type
   protected
   public
     procedure Update;
-    function DownHill: Boolean;
     function GetImplementor: TObject;
     property Implementor: TObject read FImplementor write SetImplementor;
-    function DownHillForced: Boolean;
-    function InternalDownHill(AParalelo: Smallint; ExitOnFirstDown: Boolean;
-                              var Delta: Double): Boolean; overload;
-    function InternalDownHill(ExitOnFirstDown: Boolean; var Delta: Double): Boolean; overload;
-    function InternalDownHill: Boolean; overload;
+    function DownHill(AParalelo: Smallint; ExitOnFirstDown: Boolean;
+                      Threshold: Double): Double; overload;
+    function DownHill(ExitOnFirstDown, Forced: Boolean;
+                      Threshold: Double): Double; overload;
+    function DownHill: Double; overload;
+    function DownHillForced: Double;
     procedure Normalize(AParalelo: Smallint; var APeriodo: Smallint);
     function InternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint): Double;
     procedure SaveToFile(const AFileName: string);
@@ -1459,20 +1457,20 @@ begin
       SesionCortadaValor;
 end;
 
-function TTimeTable.InternalDownHill(AParalelo: Smallint;
-                                     ExitOnFirstDown: Boolean;
-                                     var Delta: Double): Boolean;
+function TTimeTable.DownHill(AParalelo: Smallint;
+                             ExitOnFirstDown: Boolean;
+                             Threshold: Double): Double;
 var
   Periodo1, Periodo2, Duracion1, Duracion2: Smallint;
-  Delta0, DValue: Double;
+  Delta: Double;
   PeriodoASesion: PSmallintArray;
 begin
   with FModel do
   begin
-    Result := False;
+    Result := 0;
     Periodo1 := 0;
     PeriodoASesion := @FParaleloPeriodoASesion[AParalelo, 0];
-    Delta0 := -Delta;
+    Result := 0;
     while Periodo1 < FPeriodoCant do
     begin
       Duracion1 := SesionADuracion[PeriodoASesion[Periodo1]];
@@ -1480,15 +1478,14 @@ begin
       while Periodo2 < FPeriodoCant do
       begin
         Duracion2 := SesionADuracion[PeriodoASesion[Periodo2]];
-        DValue := InternalSwap(AParalelo, Periodo1, Periodo2);
-        if DValue < Delta0 then
+        Delta := InternalSwap(AParalelo, Periodo1, Periodo2);
+        if Delta < Threshold then
         begin
-          Delta0 := 0;
-          Delta := Delta + DValue;
-          Result := True;
+          Result := Result + Delta;
           if ExitOnFirstDown then
             Exit;
           Duracion1 := Duracion2;
+          Threshold := 0;
         end
         else
         begin
@@ -1501,11 +1498,11 @@ begin
   end;
 end;
 
-function TTimeTable.InternalDownHill(ExitOnFirstDown: Boolean;
-                                     var Delta: Double): Boolean;
+function TTimeTable.DownHill(ExitOnFirstDown, Forced: Boolean;
+  Threshold: Double): Double;
 var
-  Counter, Paralelo: Smallint;
-  Delta0: Double;
+  Counter, Offset, Paralelo: Smallint;
+  Delta: Double;
   RandomOrders: array [0 .. 4095] of Smallint;
   RandomValues: array [0 .. 4095] of Longint;
 begin
@@ -1517,37 +1514,35 @@ begin
       RandomValues[Counter] := Random($7FFFFFFF);
     end;
     SortLongint(RandomValues, RandomOrders, 0, FParaleloCant - 1);
-    Result := False;
     Counter := 0;
-    Delta0 := Delta;
+    Result := 0;
+    Offset := 0;
     while Counter < FParaleloCant do
     begin
-      Paralelo := RandomOrders[Counter];
-      Result := InternalDownHill(Paralelo, ExitOnFirstDown, Delta0);
-      if Result and ExitOnFirstDown then
-      begin
-        Delta := Delta + Delta0;
-        Delta0 := 0;
-        Exit;
-      end;
+      Paralelo := RandomOrders[(Offset + Counter) mod FParaleloCant];
+      Delta := DownHill(Paralelo, ExitOnFirstDown, Threshold);
       Inc(Counter);
+      if Delta < Threshold then
+      begin
+        Result := Result + Delta;
+        if ExitOnFirstDown then
+          Exit;
+        Threshold := 0;
+        if Forced then
+        begin
+          Offset := (Offset + Counter) div FParaleloCant;
+          Counter := 0;
+        end;
+      end;
     end;
   end;
 end;
 
 { Retorna verdadero cuando ha descendido }
 
-function TTimeTable.InternalDownHill: Boolean;
-var
-  Delta: Double;
+function TTimeTable.DownHill: Double;
 begin
-  Delta := 0;
-  Result := InternalDownHill(False, Delta);
-end;
-
-function TTimeTable.DownHill: Boolean;
-begin
-  Result := InternalDownHill;
+  Result := DownHill(False, False, 0);
 end;
 
 function TTimeTable.GetImplementor: TObject;
@@ -1555,11 +1550,9 @@ begin
   Result := Self;
 end;
 
-function TTimeTable.DownHillForced: Boolean;
+function TTimeTable.DownHillForced: Double;
 begin
-  Result := False;
-  while InternalDownHill do
-    Result := True;
+  Result := DownHill(False, True, 0);
 end;
 
 destructor TTimeTable.Destroy;
@@ -1854,8 +1847,7 @@ begin
     Result := Max - Min + 1 - Count;
 end;
 
-
-procedure TTimeTable.LoadCurrentFromDataModule;
+procedure TTimeTable.LoadFromDataModule(CodHorario: Integer);
 var
   FieldNivel, FieldParaleloId, FieldEspecializacion, FieldDia, FieldHora,
     FieldSesion: TLongintField;
@@ -1863,7 +1855,7 @@ var
 begin
   with SourceDataModule, Model, TbHorarioDetalle do
   begin
-    TbHorario.Locate('CodHorario', FCodHorario, []);
+    TbHorario.Locate('CodHorario', CodHorario, []);
     LinkedFields := 'CodHorario';
     MasterFields := 'CodHorario';
     MasterSource := DSHorario;
@@ -1897,12 +1889,6 @@ begin
       LinkedFields := '';
     end;
   end;
-end;
-
-procedure TTimeTable.LoadFromDataModule(CodHorario: Integer);
-begin
-  FCodHorario := CodHorario;
-  TThread.Synchronize(CurrentThread, LoadCurrentFromDataModule);
   Update;
 end;
 

@@ -312,15 +312,16 @@
       <UnitOutputDirectory Value="../../bin"/>
     </SearchPaths>
     <CodeGeneration>
+      <SmartLinkUnit Value="True"/>
       <Optimizations>
         <VariablesInRegisters Value="True"/>
-        <OptimizationLevel Value="2"/>
       </Optimizations>
     </CodeGeneration>
     <Linking>
       <Debugging>
         <GenerateDwarf Value="True"/>
       </Debugging>
+      <LinkSmart Value="True"/>
       <Options>
         <Win32>
           <GraphicApplication Value="True"/>

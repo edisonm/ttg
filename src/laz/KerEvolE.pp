@@ -56,7 +56,7 @@ type
   TDoubleDownHill = class(TSolver)
   private
     FBestIndividual: TTimeTable;
-    function DoubleDownHill(RefreshInterval: Integer): Boolean;
+    function DoubleDownHill(RefreshInterval: Integer): Double;
   protected
     function GetBestIndividual: TTimeTable; override;
   public
@@ -104,8 +104,8 @@ type
       const AExtraInfo: string; MomentoInicial, MomentoFinal: TDateTime); override;
     procedure SaveBestToStream(AStream: TStream);
     procedure Execute(RefreshInterval: Integer); override;
-    function DownHillForced: Boolean;
-    function DownHill: Boolean;
+    function DownHillForced: Double;
+    function DownHill: Double;
     procedure Repair;
     property OnRecordBest: TNotifyEvent read FOnRecordBest write FOnRecordBest;
     property MaxIteration: Longint read FMaxIteration write FMaxIteration;
@@ -517,14 +517,14 @@ begin
   if Stop then FMaxIteration := Iteration; // Preserve the maximum in case of cancel
 end;
 
-function TEvolElitist.DownHillForced: Boolean;
+function TEvolElitist.DownHillForced: Double;
 begin
   Result := FPopulation[FPopulationSize].DownHillForced;
   if Assigned(OnRecordBest) then
     OnRecordBest(Self);
 end;
 
-function TEvolElitist.DownHill: Boolean;
+function TEvolElitist.DownHill: Double;
 begin
   Result := FPopulation[FPopulationSize].DownHill;
 end;
@@ -633,11 +633,14 @@ begin
   DoubleDownHill(RefreshInterval);
 end;
 
-function TDoubleDownHill.DoubleDownHill(RefreshInterval: Integer): Boolean;
+function TDoubleDownHill.DoubleDownHill(RefreshInterval: Integer): Double;
 var
   Periodo1, Periodo2, Duracion1, Duracion2, Cantidad, Counter, Counter2,
     Paralelo: Smallint;
-  DValue: Double;
+  Delta1, Delta2: Double;
+  {$IFDEF DEBUG}
+  Value1, Value2: Double;
+  {$ENDIF}
   Position, Offset, Max: Integer;
   RandomOrders: array [0 .. 4095] of Smallint;
   RandomValues: array [0 .. 4095] of Longint;
@@ -654,18 +657,18 @@ begin
       RandomValues[Counter] := Random($7FFFFFFF);
     end;
     SortLongint(RandomValues, RandomOrders, 0, ParaleloCant - 1);
-    Result := False;
-    Down := False;
     Counter := 0;
     Offset := 0;
     Position := 0;
     Max := SesionCantidadDoble;
+    Result := 0;
     while Counter < ParaleloCant do
     begin
       { Continuar := True; }
       Paralelo := RandomOrders[(Offset + Counter) mod ParaleloCant];
       Periodo1 := 0;
       PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
+      Down := False;
       while Periodo1 < PeriodoCant do
       begin
         Duracion1 := SesionADuracion[PeriodoASesion[Periodo1]];
@@ -678,24 +681,34 @@ begin
             Exit;
           Inc(Position);
           Duracion2 := SesionADuracion[PeriodoASesion[Periodo2]];
-          DValue := InternalSwap(Paralelo, Periodo1, Periodo2);
-          if DValue < 0 then
+          Delta1 := InternalSwap(Paralelo, Periodo1, Periodo2);
+          if Delta1 < 0 then
           begin
             Duracion1 := Duracion2;
+            Result := Result + Delta1;
             Down := True;
           end
           else
           begin
-            if InternalDownHill(True, DValue) then
+            {$IFDEF DEBUG}
+            Value1 := Value;
+            {$ENDIF}
+            Delta2 := DownHill(True, False, -Delta1);
+            {$IFDEF DEBUG}
+            Value2 := Value;
+            if Abs(Value2 - Value1 - Delta2) >= 0.00001 then
+              WriteLn(Format('%f <> %f'#13#10, [Value2 - Value1, Delta2]));
+            {$ENDIF}
+            if Delta2 < 0 then
             begin
               Normalize(Paralelo, Periodo1);
               Duracion1 := Duracion2;
+              Result := Result + Delta2;
               Down := True;
             end
             else
             begin
               InternalSwap(Paralelo, Periodo1, Periodo2 + Duracion2 - Duracion1);
-              DValue := 0;
             end;
           end;
           Normalize(Paralelo, Periodo2);
@@ -716,8 +729,6 @@ begin
         end;
         Offset := (Offset + Counter) mod ParaleloCant;
         Counter := 0;
-        Result := True;
-        Down := False;
       end;
     end;
   end;

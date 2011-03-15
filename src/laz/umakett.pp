@@ -236,7 +236,7 @@ begin
     try
       with TSyncLoader.Create(TimeTable, FCodHorarioFuente) do
       try
-        Execute;
+        TThread.Synchronize(CurrentThread, Execute);
       finally
         Free;
       end;
@@ -262,7 +262,7 @@ begin
             with TSyncSaver.Create(DoubleDownHill, FCodHorario, ExtraInfo,
               MomentoInicial, Now) do
             try
-              Execute;
+              TThread.Synchronize(CurrentThread, Execute);
             finally
               Free;
             end;

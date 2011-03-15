@@ -44,7 +44,7 @@ procedure LoadDataSetsFromStrings(ATables: TDataSetArray; AStrings: TStrings;
 implementation
 
 uses
-  Variants, ZSysUtils, HorColCm;
+  Variants, ZSysUtils;
 
 function GetOldFieldValues(ADataSet: TDataSet; const AFieldNames: string): Variant;
 var
