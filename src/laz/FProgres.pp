@@ -95,7 +95,7 @@ type
     property CloseClick: Boolean read FCloseClick write FCloseClick;
     property CancelClick: Boolean read FCancelClick write FCancelClick;
     property ProgressMax: Integer read GetProgressMax write SetProgressMax;
-    procedure DoProgress(APosition: Integer; ASolver: TSolver);
+    procedure DoProgress(APosition, AMax: Integer; ASolver: TSolver);
   end;
 
   { TProgressFormDrv }
@@ -113,7 +113,7 @@ type
     procedure CreateForm;
     procedure DestroyForm;
     procedure DoProgress;
-    procedure OnProgress(APosition: Integer; ASolver: TSolver;
+    procedure OnProgress(APosition, AMax: Integer; ASolver: TSolver;
       var Stop: Boolean);
     property CancelClick: Boolean read FProgressForm.FCancelClick;
   end;
@@ -134,7 +134,7 @@ begin
   Result := PBProgress.Max;
 end;
 
-procedure TProgressForm.DoProgress(APosition: Integer; ASolver: TSolver);
+procedure TProgressForm.DoProgress(APosition, AMax: Integer; ASolver: TSolver);
 var
   t: TDateTime;
 begin
@@ -157,10 +157,11 @@ begin
       }
     t := Now - FInit;
     lblElapsedTime.Caption := FormatDateTime('hh:nn:ss ', t);
+    PBProgress.Max := AMax;
     if APosition <> 0 then
       lblRemainingTime.Caption := FormatDateTime('hh:nn:ss ',
-        t * (PBProgress.Max - APosition) / APosition);
-    lblPosition.Caption := Format('%d/%d', [APosition, PBProgress.Max]);
+        t * (AMax - APosition) / APosition);
+    lblPosition.Caption := Format('%d/%d', [APosition, AMax]);
     PBProgress.Position := APosition;
     lblCruceProfesor.Caption := Format('%d ', [CruceProfesor]);
     lblCruceMateria.Caption := Format('%d ', [ASolver.BestIndividual.CruceMateria]);
@@ -254,16 +255,17 @@ end;
 
 procedure TProgressFormDrv.DoProgress;
 begin
-  FProgressForm.DoProgress(FPosition, FSolver);
+  FProgressForm.DoProgress(FPosition, FMax, FSolver);
   {$IFDEF DEBUG}
   Application.ProcessMessages;
   {$ENDIF}
 end;
 
-procedure TProgressFormDrv.OnProgress(APosition: Integer; ASolver: TSolver;
+procedure TProgressFormDrv.OnProgress(APosition, AMax: Integer; ASolver: TSolver;
     var Stop: Boolean);
 begin
   FPosition := APosition;
+  FMax := AMax;
   FSolver := ASolver;
   TThread.Synchronize(CurrentThread, DoProgress);
   with FProgressForm do

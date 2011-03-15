@@ -31,7 +31,7 @@ type
 
   TSolver = class;
 
-  TProgressEvent = procedure(Position: Integer; Solver: TSolver;
+  TProgressEvent = procedure(Position, Max: Integer; Solver: TSolver;
     var Stop: Boolean) of object;
 
   { TEvolElitist }
@@ -41,7 +41,7 @@ type
     FOnProgress: TProgressEvent;
   protected
     function GetBestIndividual: TTimeTable; virtual; abstract;
-    procedure DoProgress(Position, RefreshInterval: Integer; Solver: TSolver;
+    procedure DoProgress(Position, Max, RefreshInterval: Integer; Solver: TSolver;
       var Stop: Boolean);
   public
     procedure Execute(RefreshInterval: Integer); virtual; abstract;
@@ -54,7 +54,7 @@ type
   TDoubleDownHill = class(TSolver)
   private
     FBestIndividual: TTimeTable;
-    function DoubleDownHill(Step: Integer): Boolean;
+    function DoubleDownHill(RefreshInterval: Integer): Boolean;
   protected
     function GetBestIndividual: TTimeTable; override;
   public
@@ -495,7 +495,7 @@ begin
   try
     while (Iteration < FMaxIteration) and not Stop do
     begin
-      DoProgress(Iteration, RefreshInterval, Self, Stop);
+      DoProgress(Iteration, FMaxIteration, RefreshInterval, Self, Stop);
       Select;
       Cross;
       Mutate;
@@ -577,15 +577,15 @@ procedure TEvolElitist.ReportParameters(AInforme: TStrings);
 begin
   with AInforme do
   begin
-    Add(Format('Semilla Numeros aleatorios: %8.u', [FRandSeed]));
-    Add(Format('Numero de individuos:       %8.d', [FPopulationSize]));
-    Add(Format('Maximo de generaciones:     %8.d', [FMaxIteration]));
+    Add(Format('Semilla Numeros aleatorios: %7.u', [FRandSeed]));
+    Add(Format('Numero de individuos:       %7.d', [FPopulationSize]));
+    Add(Format('Maximo de generaciones:     %7.d', [FMaxIteration]));
     Add(Format('Probabilidad de cruce:      %1.5f', [FCrossProb]));
     Add(Format('Probabilidad de Mutacion 1: %1.5f', [FMutation1Prob]));
-    Add(Format('Orden de la Mutacion 1:     %8.d', [FMutation1Order]));
+    Add(Format('Orden de la Mutacion 1:     %7.d', [FMutation1Order]));
     Add(Format('Probabilidad de Mutacion 1: %1.5f', [FMutation2Prob]));
     Add(Format('Probabilidad de Reparacion: %1.5f', [FRepairProb]));
-    Add(Format('Rango de polinizacion:      %8.d', [FPollinationFreq]));
+    Add(Format('Rango de polinizacion:      %7.d', [FPollinationFreq]));
   end;
 end;
 
@@ -614,11 +614,11 @@ begin
   Result := FSharedDirectory + '/ttsync.dat';
 end;
 
-procedure TSolver.DoProgress(Position, RefreshInterval: Integer;
+procedure TSolver.DoProgress(Position, Max, RefreshInterval: Integer;
   Solver: TSolver; var Stop: Boolean);
 begin
   if Assigned(FOnProgress) and (Position mod RefreshInterval = 0) then
-    FOnProgress(Position, Solver, Stop);
+    FOnProgress(Position, Max, Solver, Stop);
 end;
 
 { TDoubleDownHill }
@@ -630,18 +630,20 @@ end;
 
 procedure TDoubleDownHill.Execute(RefreshInterval: Integer);
 begin
-  while DoubleDownHill(RefreshInterval) do;
+  // while DoubleDownHill(RefreshInterval) do;
+  DoubleDownHill(RefreshInterval);
 end;
 
-function TDoubleDownHill.DoubleDownHill(Step: Integer): Boolean;
+function TDoubleDownHill.DoubleDownHill(RefreshInterval: Integer): Boolean;
 var
-  Periodo1, Periodo2, Duracion1, Duracion2, Counter, Paralelo: Smallint;
+  Periodo1, Periodo2, Duracion1, Duracion2, Cantidad, Counter, Counter2,
+    Paralelo: Smallint;
   DValue: Double;
-  Position: Integer;
+  Position, Offset, Max: Integer;
   RandomOrders: array [0 .. 4095] of Smallint;
   RandomValues: array [0 .. 4095] of Longint;
   PeriodoASesion: TDynamicSmallintArray;
-  Stop: Boolean;
+  Stop, Down: Boolean;
   { Continuar: Boolean; }
 begin
   with FBestIndividual, Model do
@@ -654,12 +656,15 @@ begin
     end;
     SortLongint(RandomValues, RandomOrders, 0, ParaleloCant - 1);
     Result := False;
+    Down := False;
     Counter := 0;
+    Offset := 0;
     Position := 0;
+    Max := SesionCantidadDoble;
     while Counter < ParaleloCant do
     begin
       { Continuar := True; }
-      Paralelo := RandomOrders[Counter];
+      Paralelo := RandomOrders[(Offset + Counter) mod ParaleloCant];
       Periodo1 := 0;
       PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
       while Periodo1 < PeriodoCant do
@@ -669,7 +674,7 @@ begin
         while Periodo2 < PeriodoCant do
         begin
           Stop := False;
-          DoProgress(Position, Step, Self, Stop);
+          DoProgress(Position, Max, RefreshInterval, Self, Stop);
           if Stop then
             Exit;
           Inc(Position);
@@ -678,7 +683,7 @@ begin
           if DValue < 0 then
           begin
             Duracion1 := Duracion2;
-            Result := True;
+            Down := True;
           end
           else
           begin
@@ -686,7 +691,7 @@ begin
             begin
               Normalize(Paralelo, Periodo1);
               Duracion1 := Duracion2;
-              Result := True;
+              Down := True;
             end
             else
             begin
@@ -702,6 +707,19 @@ begin
       end;
       { if Continuar then }
       Inc(Counter);
+      if Down then
+      begin
+        for Counter2 := 0 to Counter - 1 do
+        begin
+          Paralelo := RandomOrders[Offset + Counter2];
+          Cantidad := ParaleloASesionCant[Paralelo];
+          Inc(Max, (Cantidad * (Cantidad - 1)) div 2);
+        end;
+        Offset := (Offset + Counter) mod ParaleloCant;
+        Counter := 0;
+        Result := True;
+        Down := False;
+      end;
     end;
   end;
 end;
@@ -721,7 +739,6 @@ begin
     Report.Add('Algoritmo de Descenso Rapido Doble');
     Report.Add('==================================');
     Report.Add(Format('Horario base: %d', [ACodHorarioFuente]));
-    Report.Add('----------------------------------');
     FBestIndividual.ReportValues(Report);
     FBestIndividual.SaveToDataModule(ACodHorario, AMomentoInicial, AMomentoFinal, Report);
   finally

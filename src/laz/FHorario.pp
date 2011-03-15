@@ -324,7 +324,7 @@ begin
     MainForm.Ejecutando := True;
     try
       {$IFDEF DEBUG}
-      with TImproveTimeTableThread.Create(ValidCodes, True) do
+      with TImproveTimeTableThread.Create(CodHorarioFuente, CodHorarioDestino, True) do
       try
         Execute;
       finally

@@ -163,10 +163,6 @@ begin
   with MasterDataModule.ConfigStorage do
   begin
     InitRandom;
-    ProgressFormDrv := TProgressFormDrv.Create(
-      ATimeTableModel.SesionCantidadDoble, ACodHorario);
-      {Format('Mejorando Horario [%d] en [%d]',
-        [CodHorarioFuente, CodHorarioDestino]));}
     TimeTable := TTimeTable.Create(ATimeTableModel);
     try
       TimeTable.LoadFromDataModule(ACodHorarioFuente);
@@ -178,6 +174,8 @@ begin
       else}
         ProgressFormDrv := TProgressFormDrv.Create(
           ATimeTableModel.SesionCantidadDoble, ACodHorario);
+        {Format('Mejorando Horario [%d] en [%d]',
+          [CodHorarioFuente, CodHorarioDestino]));}
         DoubleDownHill.OnProgress := ProgressFormDrv.OnProgress;
         try
           DoubleDownHill.Execute(RefreshInterval);
@@ -185,13 +183,13 @@ begin
           begin
             Result := True;
             Exit;
-          end;
+          end
+          else
+            DoubleDownHill.SaveSolutionToDatabase(ACodHorarioFuente,
+              ACodHorario, MomentoInicial, Now);
         finally
           ProgressFormDrv.Free;
         end;
-        if not ProgressFormDrv.CancelClick then
-          DoubleDownHill.SaveSolutionToDatabase(ACodHorarioFuente,
-            ACodHorario, MomentoInicial, Now);
       finally
         DoubleDownHill.Free;
       end;
