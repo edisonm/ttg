@@ -1183,6 +1183,7 @@ begin
   end;
 end;
 
+{WARNING!!! Normalize is a Kludge, avoid its usage!!!}
 procedure TTimeTable.Normalize(AParalelo: Smallint; var APeriodo: Smallint);
 var
   Sesion: Smallint;
@@ -1470,7 +1471,6 @@ begin
     Result := 0;
     Periodo1 := 0;
     PeriodoASesion := @FParaleloPeriodoASesion[AParalelo, 0];
-    Result := 0;
     while Periodo1 < FPeriodoCant do
     begin
       Duracion1 := SesionADuracion[PeriodoASesion[Periodo1]];

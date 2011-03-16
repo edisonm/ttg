@@ -321,7 +321,6 @@
       <Debugging>
         <GenerateDwarf Value="True"/>
       </Debugging>
-      <LinkSmart Value="True"/>
       <Options>
         <Win32>
           <GraphicApplication Value="True"/>

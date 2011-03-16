@@ -635,7 +635,7 @@ end;
 
 function TDoubleDownHill.DoubleDownHill(RefreshInterval: Integer): Double;
 var
-  Paralelo, Periodo1, Periodo2: Smallint;
+  Paralelo, Periodo1, Periodo2, Sesion: Smallint;
   Duracion1, Duracion2, Counter: Integer;
   Delta1, Delta2: Double;
   {$IFDEF DEBUG}
@@ -671,7 +671,6 @@ begin
       Down := False;
       while Periodo1 < PeriodoCant do
       begin
-        Duracion1 := SesionADuracion[PeriodoASesion[Periodo1]];
         Periodo2 := Periodo1 + SesionADuracion[PeriodoASesion[Periodo1]];
         while Periodo2 < PeriodoCant do
         begin
@@ -680,13 +679,14 @@ begin
           if Stop then
             Exit;
           Inc(Position);
+          Duracion1 := SesionADuracion[PeriodoASesion[Periodo1]];
           Duracion2 := SesionADuracion[PeriodoASesion[Periodo2]];
           Delta1 := InternalSwap(Paralelo, Periodo1, Periodo2);
           if Delta1 < 0 then
           begin
-            Duracion1 := Duracion2;
             Result := Result + Delta1;
             Down := True;
+            Inc(Periodo2, Duracion2);
           end
           else
           begin
@@ -701,21 +701,43 @@ begin
             {$ENDIF}
             if Delta2 < 0 then
             begin
-              Normalize(Paralelo, Periodo1);
-              Duracion1 := SesionADuracion[PeriodoASesion[Periodo1]];
+              if Periodo1 > 0 then
+              begin
+                Dec(Periodo1);
+                Sesion := PeriodoASesion[Periodo1];
+                repeat
+                  Inc(Periodo1);
+                until (Sesion = -1)
+                  or (Periodo1 >= PeriodoCant)
+                  or (PeriodoASesion[Periodo1] <> Sesion);
+              end;
               Result := Result + Delta2;
               Down := True;
+              if Periodo2 <= Periodo1 then
+                Periodo2 := Periodo1 + SesionADuracion[PeriodoASesion[Periodo1]]
+              else
+              begin
+                Sesion := PeriodoASesion[Periodo2];
+                repeat
+                  Inc(Periodo2);
+                until (Sesion = -1)
+                  or (Periodo2 >= PeriodoCant)
+                  or (PeriodoASesion[Periodo2] <> Sesion);
+              end;
             end
             else
             begin
               InternalSwap(Paralelo, Periodo1, Periodo2 + Duracion2 - Duracion1);
+              Inc(Periodo2, Duracion2);
             end;
           end;
-          Normalize(Paralelo, Periodo2);
-          Inc(Periodo2, SesionADuracion[PeriodoASesion[Periodo2]]);
         end;
-        Normalize(Paralelo, Periodo1);
-        Inc(Periodo1, SesionADuracion[PeriodoASesion[Periodo1]]);
+        Sesion := PeriodoASesion[Periodo1];
+        repeat
+          Inc(Periodo1);
+        until (Sesion = -1)
+          or (Periodo1 >= PeriodoCant)
+          or (PeriodoASesion[Periodo1] <> Sesion);
       end;
       { if Continuar then }
       Inc(Counter);
