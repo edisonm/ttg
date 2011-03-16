@@ -33,7 +33,7 @@ type
     pgcConfig: TPageControl;
     speNumMaxGeneracion: TSpinEdit;
     speOrdenMutacion1: TSpinEdit;
-    speRangoPolinizacion: TSpinEdit;
+    crePollinationProb: TEdit;
     speTamPoblacion: TSpinEdit;
     tbsPesos: TTabSheet;
     Label1: TLabel;
@@ -196,7 +196,7 @@ begin
       creProbReparacion.Text := FloatToStr(RepairProb);
       edtHorarioIni.Text := HorarioIni;
       dedSharedDirectory.Directory := SharedDirectory;
-      speRangoPolinizacion.Value := PollinationFreq;
+      crePollinationProb.Text := FloatToStr(PollinationProb);
       CBApplyDoubleDownHill.Checked := ApplyDoubleDownHill;
    end;
 end;
@@ -232,7 +232,7 @@ begin
       RepairProb := StrToFloat(creProbReparacion.Text);
       HorarioIni := edtHorarioIni.Text;
       SharedDirectory := dedSharedDirectory.Text;
-      PollinationFreq := speRangoPolinizacion.Value;
+      PollinationProb := StrToFloat(crePollinationProb.Text);
       ApplyDoubleDownHill := CBApplyDoubleDownHill.Checked;
    end;
 end;

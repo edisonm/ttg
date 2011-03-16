@@ -72,17 +72,15 @@ type
     FSharedDirectory: string;
     FRandSeed: Cardinal;
     FPopulationSize, FMaxIteration, FNumImports,
-      FNumExports, FClashes, FPollinationFreq, FMutation1Order: Longint;
-    FCrossProb, FMutation1Prob, FMutation2Prob, FRepairProb: Double;
+      FNumExports, FClashes, FMutation1Order: Longint;
+    FCrossProb, FMutation1Prob, FMutation2Prob, FRepairProb,
+      FPollinationProb: Double;
     FPopulation, FNewPopulation: TTimeTableArray;
-    FAptitudeArray, FNewAptitudeArray: TDynamicDoubleArray;
     FFixedIndividuals: TDynamicLongintArray;
     FOnRecordBest: TNotifyEvent;
     function GetFileName: string;
     function GetSyncFileName: string;
-    procedure Evaluate;
     procedure MakeRandom;
-    procedure SelectTheBest;
     procedure Elitist;
     procedure Select;
     procedure Cross;
@@ -123,7 +121,7 @@ type
     property SharedDirectory: string read FSharedDirectory write FSharedDirectory;
     property FileName: string read GetFileName;
     property SyncFileName: string read GetSyncFileName;
-    property PollinationFreq: Integer read FPollinationFreq write FPollinationFreq;
+    property PollinationProb: Double read FPollinationProb write FPollinationProb;
   end;
 
 implementation
@@ -138,8 +136,6 @@ begin
   FPopulationSize := APopulationSize;
   SetLength(FPopulation, FPopulationSize + 1 + FModel.ElitistCount);
   SetLength(FNewPopulation, Length(FPopulation));
-  SetLength(FAptitudeArray, Length(FPopulation));
-  SetLength(FNewAptitudeArray, Length(FPopulation));
   for Individual := 0 to High(FPopulation) do
   begin
     if not Assigned(FPopulation[Individual]) then
@@ -203,59 +199,9 @@ begin
   end;
 end;
 
-procedure TEvolElitist.Evaluate;
-var
-  Individual: Integer;
-  Value, MaxValue: Double;
-begin
-  MaxValue := -1.7E308;
-  for Individual := 0 to High(FPopulation) do
-  begin
-    Value := FPopulation[Individual].Value;
-    if MaxValue < Value then
-      MaxValue := Value;
-  end;
-  for Individual := 0 to High(FPopulation) do
-  begin
-    FAptitudeArray[Individual] := 1 + MaxValue - FPopulation[Individual].Value;
-  end;
-end;
-
-procedure TEvolElitist.SelectTheBest;
-var
-  Individual, Elitist, Best: Integer;
-  EBest: TDynamicIntegerArray;
-  EValue: Double;
-begin
-  Best := 0;
-  SetLength(EBest, FModel.ElitistCount);
-  for Elitist := 0 to FModel.ElitistCount - 1 do
-    EBest[Elitist] := 0;
-  for Individual := 0 to FPopulationSize - 1 do
-  with FPopulation[Individual] do
-  begin
-    if Value < FPopulation[Best].Value then
-    begin
-      Best := Individual;
-    end;
-    for Elitist := 0 to FModel.ElitistCount - 1 do
-    begin
-      EValue := FPopulation[EBest[Elitist]].ElitistValues[Elitist];
-      if (ElitistValues[Elitist] < EValue) or
-        ((ElitistValues[Elitist] = EValue) and
-        (Value < FPopulation[EBest[Elitist]].Value)) then
-        EBest[Elitist] := Individual;
-    end;
-  end;
-  CopyIndividual(FPopulationSize, Best);
-  for Elitist := 0 to FModel.ElitistCount - 1 do
-    CopyIndividual(FPopulationSize + 1 + Elitist, EBest[Elitist]);
-end;
-
 procedure TEvolElitist.CopyIndividual(Target, Source: Integer);
 begin
   FPopulation[Target].Assign(FPopulation[Source]);
-  FAptitudeArray[Target] := FAptitudeArray[Source];
 end;
 
 procedure TEvolElitist.Elitist;
@@ -352,6 +298,7 @@ var
   SyncStream: TStream;
   Value: Double;
 begin
+  if (FSharedDirectory <> '') and (Random < FPollinationProb) then
   try
     if FileExists(SyncFileName) then
     begin
@@ -379,59 +326,60 @@ end;
 procedure TEvolElitist.Select;
 var
   Individual, Individual1, Individual2: Longint;
+  Value, MaxValue: Double;
   Sum: Double;
   p: Extended;
-  VTmpPoblacion: TTimeTableArray;
-  VTmpAptitudArray, FCAptitudeArray, FRAptitudeArray: TDynamicDoubleArray;
+  TmpPopulation: TTimeTableArray;
+  Aptitudes, CummulatedAptitudes, RelativeAptitudes: TDynamicDoubleArray;
 begin
-  SetLength(FCAptitudeArray, Length(FPopulation));
-  SetLength(FRAptitudeArray, Length(FPopulation));
+  MaxValue := -1.7E308;
+  for Individual := 0 to High(FPopulation) do
+  begin
+    Value := FPopulation[Individual].Value;
+    if MaxValue < Value then
+      MaxValue := Value;
+  end;
+  SetLength(Aptitudes, Length(FPopulation));
+  SetLength(CummulatedAptitudes, Length(FPopulation));
+  SetLength(RelativeAptitudes, Length(FPopulation));
+  for Individual := 0 to High(FPopulation) do
+  begin
+    Aptitudes[Individual] := 1 + MaxValue - FPopulation[Individual].Value;
+  end;
   Sum := 0;
   for Individual := 0 to FPopulationSize - 1 do
   begin
-    Sum := Sum + FAptitudeArray[Individual];
+    Sum := Sum + Aptitudes[Individual];
   end;
   for Individual := 0 to FPopulationSize - 1 do
   begin
-    FRAptitudeArray[Individual] := FAptitudeArray[Individual] / Sum;
+    RelativeAptitudes[Individual] := Aptitudes[Individual] / Sum;
   end;
-  FCAptitudeArray[0] := FRAptitudeArray[0];
+  CummulatedAptitudes[0] := RelativeAptitudes[0];
   for Individual := 1 to FPopulationSize - 1 do
   begin
-    FCAptitudeArray[Individual] := FCAptitudeArray[Individual - 1]
-      + FRAptitudeArray[Individual];
+    CummulatedAptitudes[Individual] := CummulatedAptitudes[Individual - 1]
+      + RelativeAptitudes[Individual];
   end;
   for Individual1 := 0 to FPopulationSize - 1 do
   begin
     p := Random;
-    if p < FCAptitudeArray[0] then
+    if p < CummulatedAptitudes[0] then
     begin
       FNewPopulation[Individual1].Assign(FPopulation[0]);
-      FNewAptitudeArray[Individual1] := FAptitudeArray[0];
     end
     else
     begin
       for Individual2 := 0 to FPopulationSize - 1 do
-        if (p >= FCAptitudeArray[Individual2]) and (p < FCAptitudeArray[Individual2 + 1]) then
-        begin
+        if (p >= CummulatedAptitudes[Individual2]) and (p < CummulatedAptitudes[Individual2 + 1]) then
           FNewPopulation[Individual1].Assign(FPopulation[Individual2 + 1]);
-          FNewAptitudeArray[Individual1] := FAptitudeArray[Individual2 + 1];
-        end;
     end;
   end;
-  VTmpPoblacion := FPopulation;
+  TmpPopulation := FPopulation;
   FPopulation := FNewPopulation;
-  FNewPopulation := VTmpPoblacion;
-
-  VTmpAptitudArray := FAptitudeArray;
-  FAptitudeArray := FNewAptitudeArray;
-  FNewAptitudeArray := VTmpAptitudArray;
-
+  FNewPopulation := TmpPopulation;
   for Individual1 := FPopulationSize to High(FPopulation) do
-  begin
     FPopulation[Individual1].Assign(FNewPopulation[Individual1]);
-    FAptitudeArray[Individual1] := FNewAptitudeArray[Individual1];
-  end;
 end;
 
 procedure TEvolElitist.Cross;
@@ -480,8 +428,6 @@ var
 begin
   FRandSeed := RandSeed;
   MakeRandom;
-  Evaluate;
-  SelectTheBest;
   FNumImports := 0;
   FNumExports := 0;
   FClashes := 0;
@@ -491,14 +437,12 @@ begin
     while (Iteration < FMaxIteration) and not Stop do
     begin
       DoProgress(Iteration, FMaxIteration, RefreshInterval, Self, Stop);
-      Select;
       Cross;
       Mutate;
       Repair;
-      if ((Iteration mod FPollinationFreq) = 0) and (FSharedDirectory <> '') then
-        Pollinate;
-      Evaluate;
+      Pollinate;
       Elitist;
+      Select;
       Inc(Iteration);
     end;
   finally
@@ -570,15 +514,15 @@ procedure TEvolElitist.ReportParameters(AInforme: TStrings);
 begin
   with AInforme do
   begin
-    Add(Format('Semilla Numeros aleatorios: %7.u', [FRandSeed]));
-    Add(Format('Numero de individuos:       %7.d', [FPopulationSize]));
-    Add(Format('Maximo de generaciones:     %7.d', [FMaxIteration]));
-    Add(Format('Probabilidad de cruce:      %1.5f', [FCrossProb]));
-    Add(Format('Probabilidad de Mutacion 1: %1.5f', [FMutation1Prob]));
-    Add(Format('Orden de la Mutacion 1:     %7.d', [FMutation1Order]));
-    Add(Format('Probabilidad de Mutacion 1: %1.5f', [FMutation2Prob]));
-    Add(Format('Probabilidad de Reparacion: %1.5f', [FRepairProb]));
-    Add(Format('Frecuencia de polinizacion: %7.d', [FPollinationFreq]));
+    Add(Format('Semilla Numeros aleatorios:   %7.u', [FRandSeed]));
+    Add(Format('Numero de individuos:         %7.d', [FPopulationSize]));
+    Add(Format('Maximo de generaciones:       %7.d', [FMaxIteration]));
+    Add(Format('Probabilidad de cruce:        %1.5f', [FCrossProb]));
+    Add(Format('Probabilidad de Mutacion 1:   %1.5f', [FMutation1Prob]));
+    Add(Format('Orden de la Mutacion 1:       %7.d', [FMutation1Order]));
+    Add(Format('Probabilidad de Mutacion 1:   %1.5f', [FMutation2Prob]));
+    Add(Format('Probabilidad de Reparacion:   %1.5f', [FRepairProb]));
+    Add(Format('Probabilidad de polinizacion: %1.5f', [FPollinationProb]));
   end;
 end;
 

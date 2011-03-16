@@ -100,7 +100,7 @@ begin
       VEvolElitist.Mutation2Prob := Mutation2Prob;
       VEvolElitist.RepairProb := RepairProb;
       VEvolElitist.SharedDirectory := SharedDirectory;
-      VEvolElitist.PollinationFreq := PollinationFreq;
+      VEvolElitist.PollinationProb := PollinationProb;
       VEvolElitist.FixIndividuals(HorarioIni);
       TThread.Synchronize(CurrentThread, VEvolElitist.Initialize);
       ProgressFormDrv := TProgressFormDrv.Create;

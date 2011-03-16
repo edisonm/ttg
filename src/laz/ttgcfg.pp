@@ -51,8 +51,8 @@ type
     procedure SetMateriaNoDispersa(Value: Extended);
     function GetPopulationSize: Integer;
     procedure SetPopulationSize(Value: Integer);
-    function GetNumMaxGeneracion: Integer;
-    procedure SetNumMaxGeneracion(Value: Integer);
+    function GetMaxIteration: Integer;
+    procedure SetMaxIteration(Value: Integer);
     function GetProbCruzamiento: Extended;
     procedure SetProbCruzamiento(Value: Extended);
     function GetMutation1Prob: Extended;
@@ -67,8 +67,8 @@ type
     procedure SetHorarioIni(const Value: string);
     function GetSharedDirectory: string;
     procedure SetSharedDirectory(const Value: string);
-    function SetPollinationFreq: Integer;
-    procedure SetRangoPolinizacion(Value: Integer);
+    function GetPollinationProb: Extended;
+    procedure SetPollinationProb(Value: Extended);
     function GetApplyDoubleDownHill: Boolean;
     procedure SetApplyDoubleDownHill(Value: Boolean);
   public
@@ -93,7 +93,7 @@ type
     property SesionCortada: Extended read GetSesionCortada write SetSesionCortada;
     property MateriaNoDispersa: Extended read GetMateriaNoDispersa write SetMateriaNoDispersa;
     property PopulationSize: Integer read GetPopulationSize write SetPopulationSize;
-    property MaxIteration: Integer read GetNumMaxGeneracion write SetNumMaxGeneracion;
+    property MaxIteration: Integer read GetMaxIteration write SetMaxIteration;
     property CrossProb: Extended read GetProbCruzamiento write SetProbCruzamiento;
     property Mutation1Prob: Extended read GetMutation1Prob write SetMutation1Prob;
     property Mutation1Order: Integer read GetMutation1Order write SetMutation1Order;
@@ -101,7 +101,7 @@ type
     property RepairProb: Extended read GetRepairProb write SetRepairProb;
     property HorarioIni: string read GetHorarioIni write SetHorarioIni;
     property SharedDirectory: string read GetSharedDirectory write SetSharedDirectory;
-    property PollinationFreq: Integer read SetPollinationFreq write SetRangoPolinizacion;
+    property PollinationProb: Extended read GetPollinationProb write SetPollinationProb;
     property ApplyDoubleDownHill: Boolean read GetApplyDoubleDownHill write SetApplyDoubleDownHill;
   end;
 
@@ -297,12 +297,12 @@ begin
   Integers['TamPoblacion'] := Value;
 end;
 
-function TTTGConfig.GetNumMaxGeneracion: Integer;
+function TTTGConfig.GetMaxIteration: Integer;
 begin
   Result := Integers['NumMaxGeneracion'];
 end;
 
-procedure TTTGConfig.SetNumMaxGeneracion(Value: Integer);
+procedure TTTGConfig.SetMaxIteration(Value: Integer);
 begin
   Integers['NumMaxGeneracion'] := Value;
 end;
@@ -377,14 +377,14 @@ begin
   Values['dedCompartir_Text'] := Value;
 end;
 
-function TTTGConfig.SetPollinationFreq: Integer;
+function TTTGConfig.GetPollinationProb: Extended;
 begin
-  Result := Integers['RangoPolinizacion'];
+  Result := Floats['RangoPolinizacion'];
 end;
 
-procedure TTTGConfig.SetRangoPolinizacion(Value: Integer);
+procedure TTTGConfig.SetPollinationProb(Value: Extended);
 begin
-  Integers['RangoPolinizacion'] := Value;
+  Floats['RangoPolinizacion'] := Value;
 end;
 
 function TTTGConfig.GetApplyDoubleDownHill: Boolean;
@@ -428,7 +428,7 @@ begin
   ApplyDoubleDownHill := False;
   HorarioIni := '';
   SharedDirectory := GetTempDir;
-  PollinationFreq := 1;
+  PollinationProb := 0.1;
 end;
 
 procedure TTTGConfig.InitRandom;
