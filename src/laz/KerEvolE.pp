@@ -321,7 +321,7 @@ procedure TEvolElitist.Pollinate;
   begin
     Stream := TFileStream.Create(FileName, fmCreate or fmShareExclusive);
     try
-      SaveBestToStream(Stream);
+      BestIndividual.SaveToStream(Stream);
       Inc(FNumExports);
     finally
       Stream.Free;
@@ -333,7 +333,7 @@ procedure TEvolElitist.Pollinate;
   begin
     Stream := TFileStream.Create(FileName, fmOpenRead or fmShareDenyWrite);
     try
-      FPopulation[FPopulationSize].LoadFromStream(Stream);
+      BestIndividual.LoadFromStream(Stream);
       Inc(FNumImports);
     finally
       Stream.Free;
@@ -347,7 +347,7 @@ procedure TEvolElitist.Pollinate;
     SyncStream := TFileStream.Create
       (SyncFileName, fmCreate or fmShareExclusive);
     try
-      Value := FPopulation[Random(FPopulationSize)].Value;
+      Value := BestIndividual.Value;
       SyncStream.write(Value, SizeOf(Double));
       ExportarInterno;
     finally
@@ -368,9 +368,9 @@ begin
       finally
         SyncStream.Free;
       end;
-      if Value < FPopulation[FPopulationSize].Value then
+      if Value < BestIndividual.Value then
         Importar
-      else if Value > FPopulation[FPopulationSize].Value then
+      else if Value > BestIndividual.Value then
         Exportar;
     end
     else
@@ -705,11 +705,13 @@ begin
               begin
                 Dec(Periodo1);
                 Sesion := PeriodoASesion[Periodo1];
-                repeat
-                  Inc(Periodo1);
-                until (Sesion = -1)
-                  or (Periodo1 >= PeriodoCant)
-                  or (PeriodoASesion[Periodo1] <> Sesion);
+                if Sesion < 0 then
+                  Inc(Periodo1)
+                else
+                  repeat
+                    Inc(Periodo1);
+                  until (Periodo1 >= PeriodoCant)
+                    or (PeriodoASesion[Periodo1] <> Sesion);
               end;
               Result := Result + Delta2;
               Down := True;
@@ -718,11 +720,13 @@ begin
               else
               begin
                 Sesion := PeriodoASesion[Periodo2];
-                repeat
-                  Inc(Periodo2);
-                until (Sesion = -1)
-                  or (Periodo2 >= PeriodoCant)
-                  or (PeriodoASesion[Periodo2] <> Sesion);
+                if Sesion < 0 then
+                  Inc(Periodo1)
+                else
+                  repeat
+                    Inc(Periodo2);
+                  until (Periodo2 >= PeriodoCant)
+                    or (PeriodoASesion[Periodo2] <> Sesion);
               end;
             end
             else
@@ -733,11 +737,13 @@ begin
           end;
         end;
         Sesion := PeriodoASesion[Periodo1];
-        repeat
-          Inc(Periodo1);
-        until (Sesion = -1)
-          or (Periodo1 >= PeriodoCant)
-          or (PeriodoASesion[Periodo1] <> Sesion);
+        if Sesion < 0 then
+          Inc(Periodo1)
+        else
+          repeat
+            Inc(Periodo1);
+          until (Periodo1 >= PeriodoCant)
+            or (PeriodoASesion[Periodo1] <> Sesion);
       end;
       { if Continuar then }
       Inc(Counter);
