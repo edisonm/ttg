@@ -635,8 +635,8 @@ end;
 
 function TDoubleDownHill.DoubleDownHill(RefreshInterval: Integer): Double;
 var
-  Periodo1, Periodo2, Duracion1, Duracion2, Cantidad, Counter, Counter2,
-    Paralelo: Smallint;
+  Paralelo, Periodo1, Periodo2: Smallint;
+  Duracion1, Duracion2, Counter: Integer;
   Delta1, Delta2: Double;
   {$IFDEF DEBUG}
   Value1, Value2: Double;
@@ -702,7 +702,7 @@ begin
             if Delta2 < 0 then
             begin
               Normalize(Paralelo, Periodo1);
-              Duracion1 := Duracion2;
+              Duracion1 := SesionADuracion[PeriodoASesion[Periodo1]];
               Result := Result + Delta2;
               Down := True;
             end
@@ -721,12 +721,13 @@ begin
       Inc(Counter);
       if Down then
       begin
-        for Counter2 := 0 to Counter - 1 do
+        {for Counter2 := 0 to Counter - 1 do
         begin
           Paralelo := RandomOrders[Offset + Counter2];
           Cantidad := ParaleloASesionCant[Paralelo];
           Inc(Max, (Cantidad * (Cantidad - 1)) div 2);
-        end;
+        end;}
+        Max := Position + SesionCantidadDoble;
         Offset := (Offset + Counter) mod ParaleloCant;
         Counter := 0;
       end;

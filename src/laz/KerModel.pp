@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit KerModel;
 {$I ttg.inc}
 {.$mode objfpc}{.$H+}
@@ -194,6 +195,7 @@ type
     FParaleloPeriodoASesion: TDynamicSmallintArrayArray;
     TablingInfo: TTimeTableTablingInfo;
     { Required to synchronize threads: }
+    procedure CheckIntegrity;
     procedure DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Smallint;
       var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
     function DeltaSesionCortada(Paralelo, Periodo1, Periodo2: Integer): Integer;
@@ -662,9 +664,9 @@ var
         Sesion2 * SizeOf(Smallint));
       for Sesion := 0 to Sesion2 - 1 do
       begin
-        AulaTipo := FSesionADistributivo[Sesion];
-        FSesionAMateria[Sesion] := FDistributivoAMateria[AulaTipo];
-        FSesionAAulaTipo[Sesion] := FDistributivoAAulaTipo[AulaTipo];
+        Distributivo := FSesionADistributivo[Sesion];
+        FSesionAMateria[Sesion] := FDistributivoAMateria[Distributivo];
+        FSesionAAulaTipo[Sesion] := FDistributivoAAulaTipo[Distributivo];
       end;
     end;
   end;
@@ -972,13 +974,13 @@ procedure TTimeTable.DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Smallint;
 var
   MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Dia, DDia, Dia1,
     Dia2, Sesion, Profesor, AulaTipo, Duracion, Materia, Limit: Smallint;
-  PeriodoASesion, MateriaAProfesor: PSmallintArray;
+  PeriodoASesion, MateriaAProfesor: TDynamicSmallintArray;
 begin
   with Model, TablingInfo do
   begin
     Inc(FSesionCortada, Delta * DeltaSesionCortada(AParalelo, Periodo1, Periodo2));
-    PeriodoASesion := @FParaleloPeriodoASesion[AParalelo, 0];
-    MateriaAProfesor := @FParaleloMateriaAProfesor[AParalelo, 0];
+    PeriodoASesion := FParaleloPeriodoASesion[AParalelo];
+    MateriaAProfesor := FParaleloMateriaAProfesor[AParalelo];
     if Delta > 0 then
       Limit := 0
     else
@@ -1090,10 +1092,8 @@ var
   CruceAulaTipo2: Integer;
   ProfesorFraccionamiento2: Integer;
   HoraHuecaDesubicada2: Integer;
-  MateriaProhibicion2: Integer;
   MateriaProhibicionValor2: Double;
   MateriaNoDispersa2: Integer;
-  ProfesorProhibicion2: Integer;
   ProfesorProhibicionValor2: Double;
   SesionCortada2: Integer;
   {$ENDIF}
@@ -1867,15 +1867,16 @@ begin
       FieldHora := FindField('CodHora') as TLongintField;
       FieldSesion := FindField('Sesion') as TLongintField;
       for Paralelo := 0 to FParaleloCant - 1 do
-        FillChar(FParaleloPeriodoASesion[Paralelo, 0],
-          FPeriodoCant * SizeOf(Smallint), #$FF);
+        for Periodo := 0 to FPeriodoCant - 1 do
+          FParaleloPeriodoASesion[Paralelo, Periodo] := -1;
       First;
       while not Eof do
       begin
-        Paralelo := FCursoParaleloIdAParalelo[FNivelEspecializacionACurso
-          [FCodNivelANivel[FieldNivel.AsInteger - FMinCodNivel],
-          FCodEspecializacionAEspecializacion[FieldEspecializacion.AsInteger -
-          FMinCodEspecializacion]],
+        Paralelo := FCursoParaleloIdAParalelo[
+          FNivelEspecializacionACurso[
+            FCodNivelANivel[FieldNivel.AsInteger - FMinCodNivel],
+            FCodEspecializacionAEspecializacion[FieldEspecializacion.AsInteger -
+            FMinCodEspecializacion]],
           FCodParaleloIdAParaleloId[FieldParaleloId.AsInteger -
           FMinCodParaleloId]];
         Periodo := FDiaHoraAPeriodo[FCodDiaADia[FieldDia.AsInteger - FMinCodDia],
@@ -1890,6 +1891,58 @@ begin
     end;
   end;
   Update;
+  CheckIntegrity;
+end;
+
+procedure TTimeTable.CheckIntegrity;
+var
+  Materia, Paralelo, Periodo, AulaTipo, Profesor, Distributivo, Counter,
+    Sesion: Integer;
+  SesionFound: Boolean;
+begin
+  with Model, TablingInfo do
+  begin
+    for Paralelo := 0 to FParaleloCant - 1 do
+      for Periodo := 0 to FPeriodoCant - 1 do
+      begin
+        Sesion := FParaleloPeriodoASesion[Paralelo, Periodo];
+        if Sesion >= 0 then
+        begin
+          Materia := FSesionAMateria[Sesion];
+          Profesor := FParaleloMateriaAProfesor[Paralelo, Materia];
+          if Profesor < 0 then
+            raise Exception.CreateFmt('Paralelo %d(%d,%d,%d), Materia %d(%d) no tiene Profesor', [
+              Paralelo,
+              FNivelACodNivel[FParaleloANivel[Paralelo]],
+              FEspecializacionACodEspecializacion[FParaleloAEspecializacion[Paralelo]],
+              FParaleloIdACodParaleloId[FParaleloAParaleloId[Paralelo]],
+              Materia,
+              FMateriaACodMateria[Materia]]);
+          AulaTipo := FSesionAAulaTipo[Sesion];
+          Distributivo := FParaleloMateriaADistributivo[Paralelo, Materia];
+          // FDistributivoAAulaTipo[Distributivo]
+          SesionFound := False;
+          for Counter := 0 to High(FDistributivoASesiones[Distributivo]) do
+            SesionFound := SesionFound or (FDistributivoASesiones[Distributivo, Counter] = Sesion);
+          if not SesionFound then
+            raise Exception.CreateFmt('Paralelo %d(%d,%d,%d), Materia %d(%d) no aparece en FDistributivoASesiones', [
+              Paralelo,
+              FNivelACodNivel[FParaleloANivel[Paralelo]],
+              FEspecializacionACodEspecializacion[FParaleloAEspecializacion[Paralelo]],
+              FParaleloIdACodParaleloId[FParaleloAParaleloId[Paralelo]],
+              Materia,
+              FMateriaACodMateria[Materia]]);
+          if Distributivo < 0 then
+            raise Exception.CreateFmt('Paralelo %d(%d,%d,%d), Materia %d(%d) no aparece en FParaleloMateriaADistributivo', [
+              Paralelo,
+              FNivelACodNivel[FParaleloANivel[Paralelo]],
+              FEspecializacionACodEspecializacion[FParaleloAEspecializacion[Paralelo]],
+              FParaleloIdACodParaleloId[FParaleloAParaleloId[Paralelo]],
+              Materia,
+              FMateriaACodMateria[Materia]]);
+        end;
+      end;
+  end;
 end;
 
 procedure TTimeTable.Reset;
