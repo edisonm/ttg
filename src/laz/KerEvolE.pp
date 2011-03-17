@@ -544,8 +544,7 @@ end;
 
 function TDoubleDownHill.DoubleDownHill(RefreshInterval: Integer): Double;
 var
-  Paralelo, Periodo1, Periodo2, Sesion: Smallint;
-  Duracion1, Duracion2, Counter: Integer;
+  Paralelo, Periodo1, Periodo2, Sesion, Duracion1, Duracion2, Counter: Integer;
   Delta1, Delta2: Double;
   {$IFDEF DEBUG}
   Value1, Value2: Double;

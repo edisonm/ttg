@@ -89,7 +89,7 @@ type
     FMinCodNivel, FMinCodEspecializacion, FMinCodParaleloId, FMinCodDia,
       FMinCodHora: Integer;
     FSesionCantidadDoble: Integer;
-    function GetDiaAMaxPeriodo(Dia: Smallint): Smallint;
+    function GetDiaAMaxPeriodo(Dia: Integer): Integer;
   protected
     property TimeTableDetailPattern: TDynamicSmallintArrayArray read FTimeTableDetailPattern;
     class function GetElitistCount: Integer;
@@ -184,7 +184,7 @@ type
     TablingInfo: TTimeTableTablingInfo;
     { Required to synchronize threads: }
     procedure CheckIntegrity;
-    procedure DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Smallint;
+    procedure DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Integer;
       var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
     function DeltaSesionCortada(Paralelo, Periodo1, Periodo2: Integer): Integer;
     function GetCruceMateriaValor: Double;
@@ -200,24 +200,24 @@ type
     procedure InternalMutate;
     procedure Reset;
     procedure SetImplementor(const AValue: TObject);
-    procedure Swap(AParalelo, APeriodo1, APeriodo2: Smallint);
+    procedure Swap(AParalelo, APeriodo1, APeriodo2: Integer);
     procedure UpdateProfesorFraccionamiento(
       ActualizarDiaProfesor: TDynamicBooleanArrayArray);
-    function GetDiaProfesorFraccionamiento(Dia, Profesor: Smallint): Smallint;
+    function GetDiaProfesorFraccionamiento(Dia, Profesor: Integer): Integer;
     function GetElitistValues(Index: Integer): Double;
   protected
   public
     procedure Update;
     function GetImplementor: TObject;
     property Implementor: TObject read FImplementor write SetImplementor;
-    function DownHill(AParalelo: Smallint; ExitOnFirstDown: Boolean;
+    function DownHill(AParalelo: Integer; ExitOnFirstDown: Boolean;
                       Threshold: Double): Double; overload;
     function DownHill(ExitOnFirstDown, Forced: Boolean;
                       Threshold: Double): Double; overload;
     function DownHill: Double; overload;
     function DownHillForced: Double;
-    procedure Normalize(AParalelo: Smallint; var APeriodo: Smallint);
-    function InternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint): Double;
+    procedure Normalize(AParalelo: Integer; var APeriodo: Integer);
+    function InternalSwap(AParalelo, APeriodo1, APeriodo2: Integer): Double;
     procedure SaveToFile(const AFileName: string);
     procedure SaveToDataModule(CodHorario: Integer;
       MomentoInicial, MomentoFinal: TDateTime; Informe: TStrings);
@@ -519,9 +519,9 @@ var
   end;
   procedure CargarProfesorProhibicion;
   var
-    ProfesorProhibicion, Profesor, Periodo, ProfesorProhibicionTipo: Integer;
+    ProfesorProhibicion, Profesor, Periodo, Dia, Hora,
+      ProfesorProhibicionTipo: Integer;
     Valor: Double;
-    Hora, Dia: Smallint;
     VFieldProfesor, VFieldDia, VFieldHora,
       VFieldProfesorProhibicionTipo: TField;
   begin
@@ -766,7 +766,7 @@ begin
   FMateriaNoDispersaValor := AMateriaNoDispersaValor;
 end;
 
-function TTimeTableModel.GetDiaAMaxPeriodo(Dia: Smallint): Smallint;
+function TTimeTableModel.GetDiaAMaxPeriodo(Dia: Integer): Integer;
 begin
   if Dia = FDiaCant - 1 then
     Result := FPeriodoCant - 1
@@ -795,10 +795,10 @@ begin
 end;
 
 procedure CrossIndividualsParalelo(var TimeTable1, TimeTable2: TTimeTable;
-    AParalelo: Smallint);
+    AParalelo: Integer);
   procedure RandomizeKey(ATimeTable: TTimeTable; var ARandomKey: TDynamicIntegerArray);
   var
-    Periodo, Duracion, Counter, MaxPeriodo: Smallint;
+    Periodo, Duracion, Counter, MaxPeriodo: Integer;
     PeriodoASesion: TDynamicIntegerArray;
     NumberList: array [0 .. 4095] of Integer;
   begin
@@ -825,8 +825,7 @@ procedure CrossIndividualsParalelo(var TimeTable1, TimeTable2: TTimeTable;
     end;
   end;
 var
-  Sesion, Periodo, Duracion: Smallint;
-  Key1, Key2, MaxPeriodo: Integer;
+  Sesion, Periodo, Duracion, Key1, Key2, MaxPeriodo: Integer;
   RandomKey1, RandomKey2: TDynamicIntegerArray;
 begin
   with TimeTable1.Model do
@@ -868,7 +867,7 @@ end;
 
 procedure CrossIndividuals(var TimeTable1, TimeTable2: TTimeTable);
 var
-  Paralelo: Smallint;
+  Paralelo: Integer;
 begin
   with TimeTable1.Model do
   begin
@@ -913,8 +912,7 @@ end;
 
 procedure TTimeTable.MakeRandom;
 var
-  Paralelo, Periodo, Duracion, MaxPeriodo: Smallint;
-  RandomKey: Integer;
+  Paralelo, Periodo, Duracion, MaxPeriodo, RandomKey: Integer;
   PeriodoASesion: TDynamicIntegerArray;
   RandomKeys: TDynamicIntegerArray;
 begin
@@ -944,7 +942,7 @@ begin
   Update;
 end;
 
-procedure TTimeTable.Swap(AParalelo, APeriodo1, APeriodo2: Smallint);
+procedure TTimeTable.Swap(AParalelo, APeriodo1, APeriodo2: Integer);
 begin
   Normalize(AParalelo, APeriodo1);
   Normalize(AParalelo, APeriodo2);
@@ -954,7 +952,7 @@ begin
     InternalSwap(AParalelo, APeriodo2, APeriodo1);
 end;
 
-procedure TTimeTable.DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Smallint;
+procedure TTimeTable.DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Integer;
   var ActualizarDiaProfesor: TDynamicBooleanArrayArray);
 var
   MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Dia, DDia, Dia1,
@@ -1033,7 +1031,7 @@ end;
 
 procedure TTimeTable.UpdateProfesorFraccionamiento(ActualizarDiaProfesor: TDynamicBooleanArrayArray);
 var
-  Dia, Profesor: Smallint;
+  Dia, Profesor: Integer;
 begin
   with Model, TablingInfo do
   begin
@@ -1051,14 +1049,14 @@ begin
   end;
 end;
 
-function TTimeTable.InternalSwap(AParalelo, APeriodo1, APeriodo2: Smallint): Double;
+function TTimeTable.InternalSwap(AParalelo, APeriodo1, APeriodo2: Integer): Double;
 var
-  Duracion1, Duracion2, Sesion1, Sesion2: Smallint;
+  Duracion1, Duracion2, Sesion1, Sesion2: Integer;
   PeriodoASesion: TDynamicIntegerArray;
   ActualizarDiaProfesor: TDynamicBooleanArrayArray;
   procedure DoMovement;
   var
-    Periodo: Smallint;
+    Periodo: Integer;
   begin
     Move(PeriodoASesion[APeriodo1 + Duracion1], PeriodoASesion[APeriodo1 + Duracion2],
       (APeriodo2 - APeriodo1 - Duracion1) * SizeOf(Integer));
@@ -1069,7 +1067,7 @@ var
   end;
   // Values that requires total recalculation:
 var
-  Dia, Profesor, Periodo: Smallint;
+  Dia, Profesor, Periodo: Integer;
   {$IFDEF DEBUG}
   Value1, Value2: Double;
   CruceProfesor2: Integer;
@@ -1168,9 +1166,9 @@ begin
 end;
 
 {WARNING!!! Normalize is a Kludge, avoid its usage!!!}
-procedure TTimeTable.Normalize(AParalelo: Smallint; var APeriodo: Smallint);
+procedure TTimeTable.Normalize(AParalelo: Integer; var APeriodo: Integer);
 var
-  Sesion: Smallint;
+  Sesion: Integer;
   PeriodoASesion: TDynamicIntegerArray;
 begin
   PeriodoASesion := FParaleloPeriodoASesion[AParalelo];
@@ -1282,7 +1280,7 @@ end;
 procedure TTimeTable.MutateDia;
 var
   Paralelo, Dia1, Dia2, MinPeriodo1, MinPeriodo2,
-    DPeriodo1, DPeriodo2, MaxPeriodo1, MaxPeriodo2: Smallint;
+    DPeriodo1, DPeriodo2, MaxPeriodo1, MaxPeriodo2: Integer;
   b: TSmallintArray;
   PeriodoASesion: TDynamicIntegerArray;
   DoUpdate: Boolean;
@@ -1340,7 +1338,7 @@ end;
 
 function TTimeTable.GetMateriaProhibicionValor: Double;
 var
-  MateriaProhibicionTipo: Smallint;
+  MateriaProhibicionTipo: Integer;
 begin
   Result := 0;
   with Model, TablingInfo do
@@ -1353,7 +1351,7 @@ end;
 
 function TTimeTable.GetProfesorProhibicionValor: Double;
 var
-  ProfesorProhibicionTipo: Smallint;
+  ProfesorProhibicionTipo: Integer;
 begin
   Result := 0;
   with Model, TablingInfo do
@@ -1371,8 +1369,7 @@ end;
 
 function TTimeTable.DeltaSesionCortada(Paralelo, Periodo1, Periodo2: Integer): Integer;
 var
-  Periodo, Hora1, Hora2, Dia1, Dia2, Sesion: Smallint;
-  Duracion: Smallint;
+  Periodo, Hora1, Hora2, Dia1, Dia2, Sesion, Duracion: Integer;
   PeriodoASesion: TDynamicIntegerArray;
 begin
   with Model, TablingInfo do
@@ -1439,11 +1436,10 @@ begin
       SesionCortadaValor;
 end;
 
-function TTimeTable.DownHill(AParalelo: Smallint;
-                             ExitOnFirstDown: Boolean;
-                             Threshold: Double): Double;
+function TTimeTable.DownHill(AParalelo: Integer; ExitOnFirstDown: Boolean;
+  Threshold: Double): Double;
 var
-  Periodo1, Periodo2, Duracion1, Duracion2: Smallint;
+  Periodo1, Periodo2, Duracion1, Duracion2: Integer;
   Delta: Double;
   PeriodoASesion: TDynamicIntegerArray;
 begin
@@ -1482,7 +1478,7 @@ end;
 function TTimeTable.DownHill(ExitOnFirstDown, Forced: Boolean;
   Threshold: Double): Double;
 var
-  Counter, Offset, Paralelo: Smallint;
+  Counter, Offset, Paralelo: Integer;
   Delta: Double;
   RandomOrders: array [0 .. 4095] of Integer;
   RandomValues: array [0 .. 4095] of Integer;
@@ -1544,7 +1540,7 @@ end;
 
 procedure TTimeTable.Assign(ATimeTable: TTimeTable);
 var
-  Paralelo, Materia, Profesor, AulaTipo, Dia: Smallint;
+  Paralelo, Materia, Profesor, AulaTipo, Dia: Integer;
 begin
   with Model, TablingInfo do
   begin
@@ -1626,7 +1622,7 @@ end;
 
 procedure TTimeTable.SaveToStream(Stream: TStream);
 var
-  Paralelo: Smallint;
+  Paralelo: Integer;
 begin
   with FModel do
     for Paralelo := 0 to FParaleloCant - 1 do
@@ -1637,7 +1633,7 @@ end;
 
 procedure TTimeTable.LoadFromStream(Stream: TStream);
 var
-  Paralelo: Smallint;
+  Paralelo: Integer;
 begin
   with FModel do
     for Paralelo := 0 to FParaleloCant - 1 do
@@ -1795,9 +1791,9 @@ begin
   end;
 end;
 
-function TTimeTable.GetDiaProfesorFraccionamiento(Dia, Profesor: Smallint): Smallint;
+function TTimeTable.GetDiaProfesorFraccionamiento(Dia, Profesor: Integer): Integer;
 var
-  Periodo, Max, Min, Count, MaxPeriodo: Smallint;
+  Periodo, Max, Min, Count, MaxPeriodo: Integer;
   VPeriodoCant: TDynamicSmallintArray;
   PeriodoAProfesorProhibicionTipo: TDynamicSmallintArray;
 begin
@@ -1832,7 +1828,7 @@ procedure TTimeTable.LoadFromDataModule(CodHorario: Integer);
 var
   FieldNivel, FieldParaleloId, FieldEspecializacion, FieldDia, FieldHora,
     FieldSesion: TLongintField;
-  Paralelo, Periodo: Smallint;
+  Paralelo, Periodo: Integer;
 begin
   with SourceDataModule, Model, TbHorarioDetalle do
   begin
@@ -1929,7 +1925,7 @@ end;
 procedure TTimeTable.Reset;
 var
   Profesor, Periodo, Materia, MateriaProhibicionTipo, ProfesorProhibicionTipo,
-    Paralelo, Dia, AulaTipo: Smallint;
+    Paralelo, Dia, AulaTipo: Integer;
 begin
   with Model, TablingInfo do
   begin
@@ -1968,7 +1964,7 @@ end;
 
 procedure TTimeTable.Update;
 var
-  Dia, Paralelo, Profesor: Smallint;
+  Dia, Paralelo, Profesor: Integer;
   ActualizarDiaProfesor: TDynamicBooleanArrayArray;
 begin
   with Model, TablingInfo do
