@@ -427,7 +427,6 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 129
         Width = 205
         Caption = 'Aplicar descenso rápido doble (lento)'
-        OnClick = CBRandomizeClick
         TabOrder = 13
       end
     end

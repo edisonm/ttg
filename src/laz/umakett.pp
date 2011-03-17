@@ -138,7 +138,7 @@ begin
         ProgressFormDrv.Free;
       end;
       VEvolElitist.BestIndividual.Update;
-      ExtraInfo := Format('Descenso rapido doble: %12s',
+      ExtraInfo := Format('Descenso rapido doble: %14s',
         [FBoolToStr[ApplyDoubleDownHill]]);
       with TSyncSaver.Create(VEvolElitist, ACodHorario, ExtraInfo,
         FMomentoInicial, Now) do

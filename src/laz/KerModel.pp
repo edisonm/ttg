@@ -1226,36 +1226,35 @@ procedure TTimeTable.ReportValues(AReport: TStrings);
 begin
   with AReport, TablingInfo do
   begin
-    Add('--------------------------------------------------');
-    Add('Detalle                     Cant.    Peso    Valor');
-    Add('--------------------------------------------------');
-    Add(Format('Cruce de profesores:       %6.d %7.2f %8.2f', [FCruceProfesor,
-        Model.CruceProfesorValor, CruceProfesorValor]));
-    Add(Format('Cruce de materias:         %6.d %7.2f %8.2f', [FCruceMateria,
-        Model.CruceMateriaValor, CruceMateriaValor]));
-    Add(Format('Cruce de aulas:            %6.d %7.2f %8.2f', [FCruceAulaTipo,
-        Model.CruceAulaTipoValor, CruceAulaTipoValor]));
-    Add(Format('Fracc. h. profesores:      %6.d %7.2f %8.2f',
+    Add('-----------------------------------------------------------------');
+    Add('Detalle                           Cant.           Peso      Valor');
+    Add('-----------------------------------------------------------------');
+    Add(Format('Cruce de profesores:       %13.d %13.0f %10.0f',
+        [FCruceProfesor, Model.CruceProfesorValor, CruceProfesorValor]));
+    Add(Format('Cruce de materias:         %13.d %13.0f %10.0f',
+        [FCruceMateria, Model.CruceMateriaValor, CruceMateriaValor]));
+    Add(Format('Cruce de aulas:            %13.d %13.0f %10.0f',
+        [FCruceAulaTipo, Model.CruceAulaTipoValor, CruceAulaTipoValor]));
+    Add(Format('Fracc. h. profesores:      %13.d %13.0f %10.0f',
         [ProfesorFraccionamiento, Model.ProfesorFraccionamientoValor,
         ProfesorFraccionamientoValor]));
-    Add(Format('Horas Huecas desubicadas:  %6.d %7.2f %8.2f',
+    Add(Format('Horas Huecas desubicadas:  %13.d %13.0f %10.0f',
         [HoraHuecaDesubicada, Model.HoraHuecaDesubicadaValor,
         HoraHuecaDesubicadaValor]));
-    Add(Format('Materias cortadas:         %6.d %7.2f %8.2f', [SesionCortada,
-        Model.SesionCortadaValor, SesionCortadaValor]));
-    Add(Format('Materias juntas:           %6.d %7.2f %8.2f',
-        [MateriaNoDispersa, Model.MateriaNoDispersaValor,
-        MateriaNoDispersaValor]));
-    Add(Format('Prohibiciones de materia:  %6s %6s %8.2f',
-        [VarArrToStr(FMateriaProhibicionTipoAMateriaCant),
-         VarArrToStr(Model.FMateriaProhibicionTipoAValor),
+    Add(Format('Materias cortadas:         %13.d %13.0f %10.0f',
+        [SesionCortada, Model.SesionCortadaValor, SesionCortadaValor]));
+    Add(Format('Materias juntas:           %13.d %13.0f %10.0f',
+        [MateriaNoDispersa, Model.MateriaNoDispersaValor, MateriaNoDispersaValor]));
+    Add(Format('Prohibiciones de materia:  %13s %13s %10.0f',
+        ['(' + VarArrToStr(FMateriaProhibicionTipoAMateriaCant, ' ') + ')',
+         '(' + VarArrToStr(Model.FMateriaProhibicionTipoAValor, ' ') + ')',
          MateriaProhibicionValor]));
-    Add(Format('Prohibiciones de profesor: %6s %6s %8.2f',
-        [VarArrToStr(FProfesorProhibicionTipoAProfesorCant),
-         VarArrToStr(Model.FProfesorProhibicionTipoAValor),
+    Add(Format('Prohibiciones de profesor: %13s %13s %10.0f',
+        ['(' + VarArrToStr(FProfesorProhibicionTipoAProfesorCant, ' ') + ')',
+         '(' + VarArrToStr(Model.FProfesorProhibicionTipoAValor, ' ') + ')',
          ProfesorProhibicionValor]));
-    Add('--------------------------------------------------');
-    Add(Format('Valor Total:                              %8.2f', [Value]));
+    Add('-----------------------------------------------------------------');
+    Add(Format('Valor Total:                                           %10.0f', [Value]));
   end;
 end;
 
