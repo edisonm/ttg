@@ -328,10 +328,8 @@ var
       FCursoCant := RecordCount;
       SetLength(FNivelEspecializacionACurso, FNivelCant, FEspecializacionCant);
       for Nivel := 0 to FNivelCant - 1 do
-      begin
-        FillChar(FNivelEspecializacionACurso[Nivel, 0],
-          FEspecializacionCant * SizeOf(Smallint), #$FF);
-      end;
+        for Especializacion := 0 to FEspecializacionCant - 1 do
+          FNivelEspecializacionACurso[Nivel, Especializacion] := -1;
       VFieldNivel := FindField('CodNivel');
       VFieldEspecializacion := FindField('CodEspecializacion');
       for Curso := 0 to FCursoCant - 1 do
@@ -360,9 +358,8 @@ var
       SetLength(FPeriodoAHora, FPeriodoCant);
       SetLength(FDiaHoraAPeriodo, FDiaCant, FHoraCant);
       for Dia := 0 to FDiaCant - 1 do
-      begin
-        FillChar(FDiaHoraAPeriodo[Dia, 0], FHoraCant * SizeOf(Smallint), #$FF);
-      end;
+        for Hora := 0 to FHoraCant - 1 do
+          FDiaHoraAPeriodo[Dia, Hora] := -1;
       VFieldDia := FindField('CodDia');
       VFieldHora := FindField('CodHora');
       for Periodo := 0 to FPeriodoCant - 1 do
@@ -499,8 +496,8 @@ var
       SetLength(FMateriaPeriodoAMateriaProhibicionTipo, FMateriaCant,
         FPeriodoCant);
       for Materia := 0 to FMateriaCant - 1 do
-        FillChar(FMateriaPeriodoAMateriaProhibicionTipo[Materia, 0],
-          FPeriodoCant * SizeOf(Smallint), #$FF);
+        for Periodo := 0 to FPeriodoCant - 1 do
+          FMateriaPeriodoAMateriaProhibicionTipo[Materia, Periodo] := -1;
       VFieldMateria := FindField('CodMateria');
       VFieldDia := FindField('CodDia');
       VFieldHora := FindField('CodHora');
@@ -541,8 +538,8 @@ var
       SetLength(FProfesorPeriodoAProfesorProhibicionTipo, FProfesorCant,
         FPeriodoCant);
       for Profesor := 0 to FProfesorCant - 1 do
-        FillChar(FProfesorPeriodoAProfesorProhibicionTipo[Profesor, 0],
-          FPeriodoCant * SizeOf(Smallint), #$FF);
+        for Periodo := 0 to FPeriodoCant - 1 do
+          FProfesorPeriodoAProfesorProhibicionTipo[Profesor, Periodo] := -1;
       VFieldProfesor := FindField('CodProfesor');
       VFieldHora := FindField('CodHora');
       VFieldDia := FindField('CodDia');
@@ -1073,8 +1070,7 @@ var
   end;
   // Values that requires total recalculation:
 var
-  Dia: Smallint;
-  Periodo: Smallint;
+  Dia, Profesor, Periodo: Smallint;
   {$IFDEF DEBUG}
   Value1, Value2: Double;
   CruceProfesor2: Integer;
@@ -1102,9 +1098,8 @@ begin
     Duracion2 := FSesionADuracion[Sesion2];
     SetLength(ActualizarDiaProfesor, FDiaCant, FProfesorCant);
     for Dia := 0 to FDiaCant - 1 do
-    begin
-      FillChar(ActualizarDiaProfesor[Dia, 0], FProfesorCant * SizeOf(Boolean), #0);
-    end;
+      for Profesor := 0 to FProfesorCant - 1 do
+        ActualizarDiaProfesor[Dia, Profesor] := False;
     if (Duracion1 = Duracion2) then
     begin
       DeltaValues(-1, AParalelo, APeriodo1, APeriodo1 + Duracion1 - 1,

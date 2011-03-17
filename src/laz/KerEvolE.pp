@@ -5,7 +5,7 @@ interface
 
 uses
   {$IFDEF UNIX}cthreads, cmem, {$ENDIF}MTProcs, Classes, Forms, SysUtils, Dialogs,
-  KerModel;
+  KerModel, SortAlgs;
 
 type
 
@@ -551,7 +551,7 @@ var
   Value1, Value2: Double;
   {$ENDIF}
   Position, Offset, Max: Integer;
-  RandomOrders: array [0 .. 4095] of Smallint;
+  RandomOrders: array [0 .. 4095] of Integer;
   RandomValues: array [0 .. 4095] of Integer;
   PeriodoASesion: TDynamicSmallintArray;
   Stop, Down: Boolean;
@@ -565,7 +565,7 @@ begin
       RandomOrders[Counter] := Counter;
       RandomValues[Counter] := Random($7FFFFFFF);
     end;
-    SortInteger(RandomValues, RandomOrders, 0, ParaleloCant - 1);
+    SortInteger2(RandomValues, RandomOrders, 0, ParaleloCant - 1);
     Counter := 0;
     Offset := 0;
     Position := 0;
