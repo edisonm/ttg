@@ -39,6 +39,10 @@ type
   TSolver = class
   private
     FOnProgress: TProgressEvent;
+    FSharedDirectory: string;
+    FPollinationProb: Double;
+    FNumImports, FNumExports, FColision: Integer;
+    function GetFileName: string;
   protected
     function GetBestIndividual: TTimeTable; virtual; abstract;
     procedure DoProgress(Position, Max, RefreshInterval: Integer; Solver: TSolver;
@@ -47,8 +51,15 @@ type
     procedure Execute(RefreshInterval: Integer); virtual; abstract;
     procedure SaveSolutionToDatabase(ACodHorario: Integer;
       const AExtraInfo: string; AMomentoInicial, AMomentoFinal: TDateTime); virtual; abstract;
+    function Pollinate: Boolean;
     property OnProgress: TProgressEvent read FOnProgress write FOnProgress;
     property BestIndividual: TTimeTable read GetBestIndividual;
+    property SharedDirectory: string read FSharedDirectory write FSharedDirectory;
+    property FileName: string read GetFileName;
+    property PollinationProb: Double read FPollinationProb write FPollinationProb;
+    property NumImports: Integer read FNumImports;
+    property NumExports: Integer read FNumExports;
+    property NumColision: Integer read FColision;
   end;
 
   { TDoubleDownHill }
@@ -69,23 +80,17 @@ type
   TEvolElitist = class(TSolver)
   private
     FModel: TTimeTableModel;
-    FSharedDirectory: string;
     FRandSeed: Cardinal;
-    FPopulationSize, FMaxIteration, FNumImports,
-      FNumExports, FClashes, FMutation1Order: Longint;
-    FCrossProb, FMutation1Prob, FMutation2Prob, FRepairProb,
-      FPollinationProb: Double;
+    FPopulationSize, FMaxIteration, FMutation1Order: Integer;
+    FCrossProb, FMutation1Prob, FMutation2Prob, FRepairProb: Double;
     FPopulation, FNewPopulation: TTimeTableArray;
-    FFixedIndividuals: TDynamicLongintArray;
+    FFixedIndividuals: TDynamicIntegerArray;
     FOnRecordBest: TNotifyEvent;
-    function GetFileName: string;
-    function GetSyncFileName: string;
     procedure MakeRandom;
     procedure Elitist;
     procedure Select;
     procedure Cross;
     procedure Mutate;
-    procedure Pollinate;
     procedure InternalCrossIndividuals(Individual1, Individual2: Integer);
     function GetAverageValue: Double;
     procedure CopyIndividual(Target, Source: Integer);
@@ -94,7 +99,7 @@ type
   public
     procedure Initialize;
     procedure ReportParameters(AInforme: TStrings);
-    constructor CreateFromModel(AModel: TTimeTableModel; APopulationSize: Longint);
+    constructor CreateFromModel(AModel: TTimeTableModel; APopulationSize: Integer);
     procedure FixIndividuals(const Individuals: string);
     procedure Configure(APopulationSize: Integer);
     destructor Destroy; override;
@@ -106,22 +111,15 @@ type
     function DownHill: Double;
     procedure Repair;
     property OnRecordBest: TNotifyEvent read FOnRecordBest write FOnRecordBest;
-    property MaxIteration: Longint read FMaxIteration write FMaxIteration;
+    property MaxIteration: Integer read FMaxIteration write FMaxIteration;
     property CrossProb: Double read FCrossProb write FCrossProb;
     property Mutation1Prob: Double read FMutation1Prob write FMutation1Prob;
     property Mutation1Order: Integer read FMutation1Order write FMutation1Order;
     property Mutation2Prob: Double read FMutation2Prob write FMutation2Prob;
     property RepairProb: Double read FRepairProb write FRepairProb;
-    property NumImports: Integer read FNumImports;
-    property NumExports: Integer read FNumExports;
-    property NumColision: Integer read FClashes;
     property AverageValue: Double read GetAverageValue;
     property BestIndividual: TTimeTable read GetBestIndividual;
     property Model: TTimeTableModel read FModel;
-    property SharedDirectory: string read FSharedDirectory write FSharedDirectory;
-    property FileName: string read GetFileName;
-    property SyncFileName: string read GetSyncFileName;
-    property PollinationProb: Double read FPollinationProb write FPollinationProb;
   end;
 
 implementation
@@ -129,7 +127,7 @@ implementation
 uses
   HorColCm;
 
-procedure TEvolElitist.Configure(APopulationSize: Longint);
+procedure TEvolElitist.Configure(APopulationSize: Integer);
 var
   Individual: Integer;
 begin
@@ -146,7 +144,7 @@ begin
 end;
 
 constructor TEvolElitist.CreateFromModel(AModel: TTimeTableModel;
-  APopulationSize: Longint);
+  APopulationSize: Integer);
 begin
   inherited Create;
   FModel := AModel;
@@ -207,7 +205,7 @@ end;
 procedure TEvolElitist.Elitist;
 var
   BestValue, WorstValue, EValue: Double;
-  Individual, EIndividual, Best, Worst: Longint;
+  Individual, EIndividual, Best, Worst: Integer;
   EBest: TDynamicIntegerArray;
   FindMejor: Boolean;
 begin
@@ -254,64 +252,45 @@ begin
   end;
 end;
 
-procedure TEvolElitist.Pollinate;
-  procedure ExportarInterno;
+function TSolver.Pollinate: Boolean;
+  procedure Exportar;
   var
     Stream: TStream;
+    Value: Double;
   begin
-    Stream := TFileStream.Create(FileName, fmCreate or fmShareExclusive);
+    Stream := TFileStream.Create
+      (FileName, fmCreate or fmShareExclusive);
     try
+      Value := BestIndividual.Value;
+      Stream.write(Value, SizeOf(Double));
       BestIndividual.SaveToStream(Stream);
       Inc(FNumExports);
     finally
       Stream.Free;
     end;
   end;
-  procedure Importar;
-  var
-    Stream: TStream;
-  begin
-    Stream := TFileStream.Create(FileName, fmOpenRead or fmShareDenyWrite);
-    try
-      BestIndividual.LoadFromStream(Stream);
-      Inc(FNumImports);
-    finally
-      Stream.Free;
-    end;
-  end;
-  procedure Exportar;
-  var
-    SyncStream: TStream;
-    Value: Double;
-  begin
-    SyncStream := TFileStream.Create
-      (SyncFileName, fmCreate or fmShareExclusive);
-    try
-      Value := BestIndividual.Value;
-      SyncStream.write(Value, SizeOf(Double));
-      ExportarInterno;
-    finally
-      SyncStream.Free;
-    end;
-  end;
 var
-  SyncStream: TStream;
+  Stream: TStream;
   Value: Double;
 begin
+  Result := False;
   if (FSharedDirectory <> '') and (Random < FPollinationProb) then
   try
-    if FileExists(SyncFileName) then
+    if FileExists(FileName) then
     begin
-      SyncStream := TFileStream.Create
-        (SyncFileName, fmOpenRead or fmShareDenyWrite);
+      Stream := TFileStream.Create(FileName, fmOpenRead or fmShareDenyWrite);
       try
-        SyncStream.read(Value, SizeOf(Double));
+        Stream.read(Value, SizeOf(Double));
+        if Value < BestIndividual.Value then
+        begin
+          BestIndividual.LoadFromStream(Stream);
+          Inc(FNumImports);
+          Result := True;
+        end;
       finally
-        SyncStream.Free;
+        Stream.Free;
       end;
-      if Value < BestIndividual.Value then
-        Importar
-      else if Value > BestIndividual.Value then
+      if Value > BestIndividual.Value then
         Exportar;
     end
     else
@@ -319,13 +298,13 @@ begin
       Exportar;
     end;
   except
-    Inc(FClashes);
+    Inc(FColision);
   end;
 end;
 
 procedure TEvolElitist.Select;
 var
-  Individual, Individual1, Individual2: Longint;
+  Individual, Individual1, Individual2: Integer;
   Value, MaxValue: Double;
   Sum: Double;
   p: Extended;
@@ -384,7 +363,7 @@ end;
 
 procedure TEvolElitist.Cross;
 var
-  Individual, One, First: Longint;
+  Individual, One, First: Integer;
   x: Double;
 begin
   First := 0;
@@ -430,7 +409,7 @@ begin
   MakeRandom;
   FNumImports := 0;
   FNumExports := 0;
-  FClashes := 0;
+  FColision := 0;
   Stop := False;
   Iteration := 0;
   try
@@ -446,13 +425,10 @@ begin
       Inc(Iteration);
     end;
   finally
-    if (SharedDirectory <> '') then
-    begin
-      if FileExists(FileName) then DeleteFile(FileName);
-      if FileExists(SyncFileName) then DeleteFile(SyncFileName);
-    end;
+    if (SharedDirectory <> '') and FileExists(FileName) then
+      DeleteFile(FileName);
   end;
-  if Stop then FMaxIteration := Iteration; // Preserve the maximum in case of cancel
+  if Stop then FMaxIteration := Iteration; // Preserve the maximum in case of stop
 end;
 
 function TEvolElitist.DownHillForced: Double;
@@ -541,14 +517,9 @@ begin
   SetLength(FFixedIndividuals, Individual);
 end;
 
-function TEvolElitist.GetFileName: string;
+function TSolver.GetFileName: string;
 begin
   Result := FSharedDirectory + 'ttable.dat';
-end;
-
-function TEvolElitist.GetSyncFileName: string;
-begin
-  Result := FSharedDirectory + 'ttsync.dat';
 end;
 
 procedure TSolver.DoProgress(Position, Max, RefreshInterval: Integer;
@@ -581,7 +552,7 @@ var
   {$ENDIF}
   Position, Offset, Max: Integer;
   RandomOrders: array [0 .. 4095] of Smallint;
-  RandomValues: array [0 .. 4095] of Longint;
+  RandomValues: array [0 .. 4095] of Integer;
   PeriodoASesion: TDynamicSmallintArray;
   Stop, Down: Boolean;
   { Continuar: Boolean; }
@@ -594,7 +565,7 @@ begin
       RandomOrders[Counter] := Counter;
       RandomValues[Counter] := Random($7FFFFFFF);
     end;
-    SortLongint(RandomValues, RandomOrders, 0, ParaleloCant - 1);
+    SortInteger(RandomValues, RandomOrders, 0, ParaleloCant - 1);
     Counter := 0;
     Offset := 0;
     Position := 0;

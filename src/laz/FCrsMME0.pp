@@ -188,7 +188,7 @@ end;
 
 procedure TCrossManyToManyEditor0Form.ClearSelection;
 var
-  VCol, VRow: Longint;
+  VCol, VRow: Integer;
 begin
   with DrawGrid do
   begin
@@ -208,7 +208,7 @@ end;
 
 procedure TCrossManyToManyEditor0Form.ListBoxClick(Sender: TObject);
 var
-  VCol, VRow: Longint;
+  VCol, VRow: Integer;
 begin
   inherited;
   with DrawGrid do

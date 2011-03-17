@@ -9,37 +9,27 @@ uses
   {$IFDEF UNIX}CThreads, CMem, {$ENDIF}Classes, DB, Dialogs, Forms, UIndivid;
 
 var
-  SortLongint: procedure(var List1: array of Longint;
-    var List2: array of Smallint; min, max: Longint);
+  SortInteger: procedure(var List1: array of Integer;
+    var List2: array of Smallint; min, max: Integer);
   SortSmallint: procedure(var List1: array of Smallint;
-    var List2: array of Longint; min, max: Longint);
-  lSort: procedure(var List1: array of Longint; min, max: Longint);
+    var List2: array of Integer; min, max: Integer);
+  lSort: procedure(var List1: array of Integer; min, max: Integer);
 
 type
   TDynamicBooleanArray = array of Boolean;
   TDynamicBooleanArrayArray = array of TDynamicBooleanArray;
-  TDynamicWordArray = array of Word;
-  TDynamicWordArrayArray = array of TDynamicWordArray;
   TDynamicSmallintArray = array of Smallint;
   TDynamicSmallintArrayArray = array of TDynamicSmallintArray;
   TDynamicSmallintArrayArrayArray = array of TDynamicSmallintArrayArray;
-  TDynamicShortintArray = array of Shortint;
-  TDynamicShortintArrayArray = array of TDynamicShortintArray;
   TDynamicIntegerArray = array of Integer;
   TDynamicIntegerArrayArray = array of TDynamicIntegerArray;
-  TDynamicLongintArray = array of Longint;
-  TDynamicLongintArrayArray = array of TDynamicLongintArray;
   TDynamicDoubleArray = array of Double;
   TDynamicDoubleArrayArray = array of TDynamicDoubleArray;
   TDynamicStringArray = array of string;
-  PLongintArray = ^TLongintArray;
-  TLongintArray = array [0 .. 16383] of Longint;
   PSmallintArray = ^TSmallintArray;
   TSmallintArray = array [0 .. 16383] of Smallint;
   PSmallintArrayArray = ^TSmallintArrayArray;
   TSmallintArrayArray = array [0 .. 0] of PSmallintArray;
-  PShortintArray = ^TShortintArray;
-  TShortintArray = array [0 .. 32767] of Shortint;
   PDoubleArray = ^TDoubleArray;
   TDoubleArray = array [0 .. 0] of Double;
   PBooleanArray = ^TBooleanArray;
@@ -84,7 +74,7 @@ type
       FParaleloMateriaAProfesor, FParaleloMateriaADistributivo, FParaleloMateriaCant,
       FTimeTableDetailPattern, FDistributivoASesiones: TDynamicSmallintArrayArray;
     FProfesorPeriodoAProfesorProhibicionTipo,
-      FMateriaPeriodoAMateriaProhibicionTipo: TDynamicShortintArrayArray;
+      FMateriaPeriodoAMateriaProhibicionTipo: TDynamicSmallintArrayArray;
     FMateriaProhibicionTipoAValor, FProfesorProhibicionTipoAValor: TDynamicDoubleArray;
     FMateriaProhibicionAValor, FProfesorProhibicionAValor: TDynamicDoubleArray;
     FMateriaCant, FMateriaProhibicionTipoCant, FProfesorProhibicionTipoCant,
@@ -94,12 +84,12 @@ type
     FMaxProfesorProhibicionTipoValor: Double;
     FParaleloIdACodParaleloId, FMateriaACodMateria, FDiaACodDia, FHoraACodHora,
       FNivelACodNivel,
-      FEspecializacionACodEspecializacion: TDynamicLongintArray;
+      FEspecializacionACodEspecializacion: TDynamicIntegerArray;
     FCodNivelANivel, FCodEspecializacionAEspecializacion,
       FCodParaleloIdAParaleloId, FCodDiaADia,
       FCodHoraAHora: TDynamicSmallintArray;
     FMinCodNivel, FMinCodEspecializacion, FMinCodParaleloId, FMinCodDia,
-      FMinCodHora: Longint;
+      FMinCodHora: Integer;
     FSesionCantidadDoble: Integer;
     function GetDiaAMaxPeriodo(Dia: Smallint): Smallint;
   protected
@@ -285,16 +275,16 @@ constructor TTimeTableModel.CreateFromDataModule(ACruceProfesorValor,
 var
   iMax: Integer;
   FMinCodProfesor, FMinCodMateria, FMinCodAulaTipo, FMinCodProfProhibicionTipo,
-    FMinCodMateProhibicionTipo: Longint;
+    FMinCodMateProhibicionTipo: Integer;
   FDistributivoAMateria, FCodMateriaAMateria, FCodProfesorAProfesor,
     FCodAulaTipoAAulaTipo, FCodProfProhibicionTipoAProfesorProhibicionTipo,
     FCodMateProhibicionTipoAMateriaProhibicionTipo, FParaleloADuracion,
     FDistributivoAProfesor, FDistributivoAParalelo: TDynamicSmallintArray;
   FProfesorACodProfesor, FProfesorProhibicionTipoACodProfProhibicionTipo,
-    FAulaTipoACodAulaTipo, FMateriaProhibicionTipoACodMateProhibicionTipo: TDynamicLongintArray;
+    FAulaTipoACodAulaTipo, FMateriaProhibicionTipoACodMateProhibicionTipo: TDynamicIntegerArray;
   procedure Cargar(ATable: TDataSet; ALstName: string; out FMinCodLst: Integer;
     out FCodLstALst: TDynamicSmallintArray;
-    out FLstACodLst: TDynamicLongintArray);
+    out FLstACodLst: TDynamicIntegerArray);
   var
     VField: TField;
     I, v: Integer;
@@ -510,7 +500,7 @@ var
         FPeriodoCant);
       for Materia := 0 to FMateriaCant - 1 do
         FillChar(FMateriaPeriodoAMateriaProhibicionTipo[Materia, 0],
-          FPeriodoCant * SizeOf(Shortint), #$FF);
+          FPeriodoCant * SizeOf(Smallint), #$FF);
       VFieldMateria := FindField('CodMateria');
       VFieldDia := FindField('CodDia');
       VFieldHora := FindField('CodHora');
@@ -552,7 +542,7 @@ var
         FPeriodoCant);
       for Profesor := 0 to FProfesorCant - 1 do
         FillChar(FProfesorPeriodoAProfesorProhibicionTipo[Profesor, 0],
-          FPeriodoCant * SizeOf(Shortint), #$FF);
+          FPeriodoCant * SizeOf(Smallint), #$FF);
       VFieldProfesor := FindField('CodProfesor');
       VFieldHora := FindField('CodHora');
       VFieldDia := FindField('CodDia');
@@ -811,11 +801,11 @@ end;
 
 procedure CrossIndividualsParalelo(var TimeTable1, TimeTable2: TTimeTable;
     AParalelo: Smallint);
-  procedure RandomizeKey(ATimeTable: TTimeTable; var ARandomKey: TDynamicLongintArray);
+  procedure RandomizeKey(ATimeTable: TTimeTable; var ARandomKey: TDynamicIntegerArray);
   var
     Periodo, Duracion, Counter, MaxPeriodo: Smallint;
     PeriodoASesion: PSmallintArray;
-    NumberList: array [0 .. 4095] of Longint;
+    NumberList: array [0 .. 4095] of Integer;
   begin
     with ATimeTable.Model do
     begin
@@ -841,8 +831,8 @@ procedure CrossIndividualsParalelo(var TimeTable1, TimeTable2: TTimeTable;
   end;
 var
   Sesion, Periodo, Duracion: Smallint;
-  Key1, Key2, MaxPeriodo: Longint;
-  RandomKey1, RandomKey2: TDynamicLongintArray;
+  Key1, Key2, MaxPeriodo: Integer;
+  RandomKey1, RandomKey2: TDynamicIntegerArray;
 begin
   with TimeTable1.Model do
   begin
@@ -874,9 +864,9 @@ begin
       else
         Inc(Periodo, Duracion);
     end;
-    SortLongint(RandomKey1, TimeTable1.ParaleloPeriodoASesion[AParalelo], 0,
+    SortInteger(RandomKey1, TimeTable1.ParaleloPeriodoASesion[AParalelo], 0,
       FPeriodoCant - 1);
-    SortLongint(RandomKey2, TimeTable2.ParaleloPeriodoASesion[AParalelo], 0,
+    SortInteger(RandomKey2, TimeTable2.ParaleloPeriodoASesion[AParalelo], 0,
       FPeriodoCant - 1);
   end;
 end;
@@ -929,9 +919,9 @@ end;
 procedure TTimeTable.MakeRandom;
 var
   Paralelo, Periodo, Duracion, MaxPeriodo: Smallint;
-  RandomKey: Longint;
+  RandomKey: Integer;
   PeriodoASesion: PSmallintArray;
-  RandomKeys: TDynamicLongintArray;
+  RandomKeys: TDynamicIntegerArray;
 begin
   with Model do
   begin
@@ -953,7 +943,7 @@ begin
           Inc(Periodo);
         end;
       end;
-      SortLongint(RandomKeys, PeriodoASesion^, 0, FPeriodoCant - 1);
+      SortInteger(RandomKeys, PeriodoASesion^, 0, FPeriodoCant - 1);
     end;
   end;
   Update;
@@ -1260,15 +1250,13 @@ end;
 
 procedure TTimeTable.InternalMutate;
 var
-  RandNum: Longint;
-  Paralelo, Periodo1, Periodo2: Smallint;
+  Paralelo, Periodo1, Periodo2: Integer;
 begin
   with Model do
   begin
-    RandNum := Random($7FFFFFFF);
-    Periodo1 := RandNum mod FPeriodoCant; RandNum := RandNum div FPeriodoCant;
-    Periodo2 := RandNum mod FPeriodoCant; RandNum := RandNum div FPeriodoCant;
-    Paralelo := RandNum mod FParaleloCant;
+    Periodo1 := Random(FPeriodoCant);
+    Periodo2 := Random(FPeriodoCant);
+    Paralelo := Random(FParaleloCant);
     if ParaleloPeriodoASesion[Paralelo, Periodo1]
     <> ParaleloPeriodoASesion[Paralelo, Periodo2] then
       Swap(Paralelo, Periodo1, Periodo2);
@@ -1503,7 +1491,7 @@ var
   Counter, Offset, Paralelo: Smallint;
   Delta: Double;
   RandomOrders: array [0 .. 4095] of Smallint;
-  RandomValues: array [0 .. 4095] of Longint;
+  RandomValues: array [0 .. 4095] of Integer;
 begin
   with FModel do
   begin
@@ -1512,7 +1500,7 @@ begin
       RandomOrders[Counter] := Counter;
       RandomValues[Counter] := Random($7FFFFFFF);
     end;
-    SortLongint(RandomValues, RandomOrders, 0, FParaleloCant - 1);
+    SortInteger(RandomValues, RandomOrders, 0, FParaleloCant - 1);
     Counter := 0;
     Result := 0;
     Offset := 0;
@@ -1817,7 +1805,7 @@ function TTimeTable.GetDiaProfesorFraccionamiento(Dia, Profesor: Smallint): Smal
 var
   Periodo, Max, Min, Count, MaxPeriodo: Smallint;
   VPeriodoCant: TDynamicSmallintArray;
-  PeriodoAProfesorProhibicionTipo: TDynamicShortintArray;
+  PeriodoAProfesorProhibicionTipo: TDynamicSmallintArray;
 begin
   Count := 0;
   Max := -1;
@@ -2015,10 +2003,10 @@ end;
 
 initialization
 
-// SortLongint := QuicksortLongint;
+// SortLongint := QuicksortInteger;
 // SortSmallint := QuicksortSmallint;
 // lSort := lQuicksort;
-SortLongint := BubblesortLongint;
+SortInteger := BubblesortInteger;
 SortSmallint := BubblesortSmallint;
 lSort := lBubblesort;
 

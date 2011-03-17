@@ -53,29 +53,29 @@ interface
 uses
   Dialogs;
 
-procedure BubblesortLongint(var List1: array of Longint; var List2: array of
-  Smallint; min, max: Longint);
+procedure BubblesortInteger(var List1: array of Integer; var List2: array of
+  Smallint; min, max: Integer);
 procedure BubblesortSmallint(var List1: array of Smallint; var List2: array of
-  Longint; min, max: Longint);
-procedure sQuicksort(var List1: array of Smallint; min, max: Longint);
-procedure lQuicksort(var List1: array of Longint; min, max: Longint);
-procedure lBubblesort(var List1: array of Longint; min, max: Longint);
-procedure QuicksortLongint(var List1: array of Longint; var List2: array of
-  Smallint; min, max: Longint);
+  Integer; min, max: Integer);
+procedure sQuicksort(var List1: array of Smallint; min, max: Integer);
+procedure lQuicksort(var List1: array of Integer; min, max: Integer);
+procedure lBubblesort(var List1: array of Integer; min, max: Integer);
+procedure QuicksortInteger(var List1: array of Integer; var List2: array of
+  Integer; min, max: Integer);
 procedure QuicksortSmallint(var List1: array of Smallint; var List2: array of
-  Longint; min, max: Longint);
-procedure SelectionsortLongint(var List1: array of Longint; var List2: array of
-  Smallint; min, max: Longint);
-procedure MySorterLongint(var List1: array of Longint; var List2: array of
-  Smallint; min, max, med: Longint);
+  Integer; min, max: Integer);
+procedure SelectionsortInteger(var List1: array of Integer; var List2: array of
+  Smallint; min, max: Integer);
+procedure MySorterInteger(var List1: array of Integer; var List2: array of
+  Smallint; min, max, med: Integer);
 
 implementation
 
-procedure BubblesortLongint(var List1: array of Longint; var List2: array of
-  Smallint; min, max: Longint);
+procedure BubblesortInteger(var List1: array of Integer; var List2: array of
+  Smallint; min, max: Integer);
 var
-  last_swap, i, j: Longint;
-  tmp1: Longint;
+  last_swap, i, j: Integer;
+  tmp1: Integer;
   tmp2: Smallint;
 begin
   // Repeat until we are done.
@@ -145,11 +145,11 @@ begin
 end;
 
 procedure BubblesortSmallint(var List1: array of Smallint; var List2: array of
-  Longint; min, max: Longint);
+  Integer; min, max: Integer);
 var
-  last_swap, i, j: Longint;
+  last_swap, i, j: Integer;
   tmp1: Smallint;
-  tmp2: Longint;
+  tmp2: Integer;
 begin
   // Repeat until we are done.
   while (min < max) do
@@ -220,12 +220,12 @@ end;
 
 // Run selectionsort.
 
-procedure SelectionsortLongint(var List1: array of Longint; var List2: array of
+procedure SelectionsortInteger(var List1: array of Integer; var List2: array of
   Smallint;
-  min, max: Longint);
+  min, max: Integer);
 var
-  i, j, best_j: Longint;
-  best_value1: Longint;
+  i, j, best_j: Integer;
+  best_value1: Integer;
   best_value2: Smallint;
 begin
   for i := min to max - 1 do
@@ -250,13 +250,13 @@ end;
 
 // Ordena una lista que esta ordenada hasta med:
 
-procedure MySorterLongint(var List1: array of Longint; var List2: array of
+procedure MySorterInteger(var List1: array of Integer; var List2: array of
   Smallint;
-  min, max, med: Longint);
+  min, max, med: Integer);
 var
-  value1: array[0..4095] of Longint;
+  value1: array[0..4095] of Integer;
   value2: array[0..4095] of Smallint;
-  i, j, k: Longint;
+  i, j, k: Integer;
 begin
   // If the list has <= 1 element, it's sorted.
   if (min >= max) then Exit;
@@ -294,14 +294,14 @@ begin
     Inc(j);
     Inc(k);
   end;
-  Move(value1[min], List1[min], (max - min + 1) * SizeOf(Longint));
+  Move(value1[min], List1[min], (max - min + 1) * SizeOf(Integer));
   Move(value2[min], List2[min], (max - min + 1) * SizeOf(Smallint));
 end;
 
-procedure lBubblesort(var List1: array of Longint; min, max: Longint);
+procedure lBubblesort(var List1: array of Integer; min, max: Integer);
 var
-  last_swap, i, j: Longint;
-  tmp1: Longint;
+  last_swap, i, j: Integer;
+  tmp1: Integer;
 begin
   // Repeat until we are done.
   while (min < max) do
@@ -366,10 +366,10 @@ end;
 
 // Run quicksort.
 
-procedure sQuicksort(var List1: array of Smallint; min, max: Longint);
+procedure sQuicksort(var List1: array of Smallint; min, max: Integer);
 var
   med_value1: Smallint;
-  hi, lo, i: Longint;
+  hi, lo, i: Integer;
 begin
     // If the list has <= 1 element, it's sorted.
   if (min >= max) then Exit;
@@ -425,10 +425,10 @@ begin
   sQuicksort(List1, lo + 1, max);
 end;
 
-procedure lQuicksort(var List1: array of Longint; min, max: Longint);
+procedure lQuicksort(var List1: array of Integer; min, max: Integer);
 var
-  med_value1: Longint;
-  hi, lo, i: Longint;
+  med_value1: Integer;
+  hi, lo, i: Integer;
 begin
     // If the list has <= 1 element, it's sorted.
   if (min >= max) then Exit;
@@ -485,11 +485,11 @@ begin
 end;
 
 procedure QuicksortSmallint(var List1: array of Smallint; var List2: array of
-  Longint; min, max: Longint);
+  Integer; min, max: Integer);
 var
   med_value1: Smallint;
-  med_value2: Longint;
-  hi, lo, i: Longint;
+  med_value2: Integer;
+  hi, lo, i: Integer;
 begin
     // If the list has <= 1 element, it's sorted.
   if (min >= max) then Exit;
@@ -552,13 +552,13 @@ begin
   QuicksortSmallint(List1, List2, lo + 1, max);
 end;
 
-procedure QuicksortLongint(var List1: array of Longint; var List2: array of
-  Smallint;
-  min, max: Longint);
+procedure QuicksortInteger(var List1: array of Integer; var List2: array of
+  Integer;
+  min, max: Integer);
 var
-  med_value1: Longint;
-  med_value2: Smallint;
-  hi, lo, i: Longint;
+  med_value1: Integer;
+  med_value2: Integer;
+  hi, lo, i: Integer;
 begin
     // If the list has <= 1 element, it's sorted.
   if (min >= max) then Exit;
@@ -618,8 +618,8 @@ begin
     List2[hi] := List2[lo];
   end; // while (True) do
     // Sort the two sublists.
-  QuicksortLongint(List1, List2, min, lo - 1);
-  QuicksortLongint(List1, List2, lo + 1, max);
+  QuicksortInteger(List1, List2, min, lo - 1);
+  QuicksortInteger(List1, List2, lo + 1, max);
 end;
 
 end.
