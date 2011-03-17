@@ -2,7 +2,7 @@
 
 ABOUT=About
 
-UNITS=KerModel RelUtils HorColCm TTGUtls Rand SortAlgs KerEvolE UConfig ttgcfg
+UNITS=KerModel RelUtils HorColCm TTGUtls SortAlgs KerEvolE UConfig ttgcfg
 
 FORMS=FCrsMMEd FSplash FSingEdt FMasDeEd FHorario FMsgView FCrsMME0	\
 	FCrsMME1 FHorProf FProfesr FMain FEditor DMaster FHorPara	\
