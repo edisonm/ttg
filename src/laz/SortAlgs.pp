@@ -60,12 +60,10 @@ procedure lQuicksort(var List1: array of Integer; min, max: Integer);
 procedure lBubblesort(var List1: array of Integer; min, max: Integer);
 procedure QuicksortInteger(var List1: array of Integer; var List2: array of
   Integer; min, max: Integer);
-procedure QuicksortSmallint(var List1: array of Smallint; var List2: array of
-  Integer; min, max: Integer);
 procedure SelectionsortInteger(var List1: array of Integer; var List2: array of
-  Smallint; min, max: Integer);
-procedure MySorterInteger(var List1: array of Integer; var List2: array of
-  Smallint; min, max, med: Integer);
+  Integer; min, max: Integer);
+procedure PartialSortInteger(var List1: array of Integer; var List2: array of
+  Integer; min, max, med: Integer);
 
 implementation
 
@@ -144,9 +142,8 @@ end;
 
 // Run selectionsort.
 
-procedure SelectionsortInteger(var List1: array of Integer; var List2: array of
-  Smallint;
-  min, max: Integer);
+procedure SelectionsortInteger(var List1: array of Integer;
+  var List2: array of Integer; min, max: Integer);
 var
   i, j, best_j: Integer;
   best_value1: Integer;
@@ -174,12 +171,11 @@ end;
 
 // Ordena una lista que esta ordenada hasta med:
 
-procedure MySorterInteger(var List1: array of Integer; var List2: array of
-  Smallint;
-  min, max, med: Integer);
+procedure PartialSortInteger(var List1: array of Integer;
+  var List2: array of Integer; min, max, med: Integer);
 var
   value1: array[0..4095] of Integer;
-  value2: array[0..4095] of Smallint;
+  value2: array[0..4095] of Integer;
   i, j, k: Integer;
 begin
   // If the list has <= 1 element, it's sorted.
