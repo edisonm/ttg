@@ -553,7 +553,7 @@ var
   Position, Offset, Max: Integer;
   RandomOrders: array [0 .. 4095] of Integer;
   RandomValues: array [0 .. 4095] of Integer;
-  PeriodoASesion: TDynamicSmallintArray;
+  PeriodoASesion: TDynamicIntegerArray;
   Stop, Down: Boolean;
   { Continuar: Boolean; }
 begin
@@ -565,7 +565,7 @@ begin
       RandomOrders[Counter] := Counter;
       RandomValues[Counter] := Random($7FFFFFFF);
     end;
-    SortInteger2(RandomValues, RandomOrders, 0, ParaleloCant - 1);
+    SortInteger(RandomValues, RandomOrders, 0, ParaleloCant - 1);
     Counter := 0;
     Offset := 0;
     Position := 0;

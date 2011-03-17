@@ -53,12 +53,7 @@ interface
 uses
   Dialogs;
 
-procedure SortInteger2(var List1: array of Integer; var List2: array of
-  Integer; min, max: Integer);
-
 procedure BubblesortInteger(var List1: array of Integer; var List2: array of
-  Smallint; min, max: Integer);
-procedure BubblesortSmallint(var List1: array of Smallint; var List2: array of
   Integer; min, max: Integer);
 procedure sQuicksort(var List1: array of Smallint; min, max: Integer);
 procedure lQuicksort(var List1: array of Integer; min, max: Integer);
@@ -74,157 +69,11 @@ procedure MySorterInteger(var List1: array of Integer; var List2: array of
 
 implementation
 
-procedure SortInteger2(var List1: array of Integer; var List2: array of
-  Integer; min, max: Integer);
-var
-  last_swap, i, j: Integer;
-  tmp1: Integer;
-  tmp2: Integer;
-begin
-  // Repeat until we are done.
-  while (min < max) do
-  begin
-    // Bubble up.
-    last_swap := min - 1;
-    // for i := min + 1 to max
-    i := min + 1;
-    while (i <= max) do
-    begin
-      // Find a bubble.
-      if (List1[i - 1] > List1[i]) or ((List1[i - 1] = List1[i]) and (List2[i - 1] > List2[i])) then
-      begin
-        // See where to drop the bubble.
-        tmp1 := List1[i - 1];
-        tmp2 := List2[i - 1];
-        j := i;
-        repeat
-          List1[j - 1] := List1[j];
-          List2[j - 1] := List2[j];
-          j := j + 1;
-          if (j > max) then Break;
-        until (List1[j] >= tmp1) and ((List1[j] <> tmp1) or (List2[j] >= tmp2));
-        List1[j - 1] := tmp1;
-        List2[j - 1] := tmp2;
-        last_swap := j - 1;
-        i := j + 1;
-      end else
-        i := i + 1;
-    end; // while (i <= max) do.
-    // End bubbling up.
-
-    // Update max.
-    max := last_swap - 1;
-
-    // Bubble down.
-    last_swap := max + 1;
-    // for i := max - 1 downto min
-    i := max - 1;
-    while (i >= min) do
-    begin
-    // Find a bubble.
-      if (List1[i + 1] < List1[i]) or ((List1[i + 1] = List1[i]) and (List2[i + 1] < List2[i])) then
-      begin
-        // See where to drop the bubble.
-        tmp1 := List1[i + 1];
-        tmp2 := List2[i + 1];
-        j := i;
-        repeat
-          List1[j + 1] := List1[j];
-          List2[j + 1] := List2[j];
-          j := j - 1;
-          if j < min then Break;
-        until (List1[j] <= tmp1) and ((List1[j] <> tmp1) or (List2[j] <= tmp2));
-        List1[j + 1] := tmp1;
-        List2[j + 1] := tmp2;
-        last_swap := j + 1;
-        i := j - 1;
-      end else
-        i := i - 1;
-    end; // while (i >= min) do
-    // End bubbling down.
-    // Update min.
-    min := last_swap + 1;
-  end; // while (min < max) do
-end;
-
 procedure BubblesortInteger(var List1: array of Integer; var List2: array of
-  Smallint; min, max: Integer);
-var
-  last_swap, i, j: Integer;
-  tmp1: Integer;
-  tmp2: Smallint;
-begin
-  // Repeat until we are done.
-  while (min < max) do
-  begin
-    // Bubble up.
-    last_swap := min - 1;
-    // for i := min + 1 to max
-    i := min + 1;
-    while (i <= max) do
-    begin
-      // Find a bubble.
-      if (List1[i - 1] > List1[i]) or ((List1[i - 1] = List1[i]) and (List2[i - 1] > List2[i])) then
-      begin
-        // See where to drop the bubble.
-        tmp1 := List1[i - 1];
-        tmp2 := List2[i - 1];
-        j := i;
-        repeat
-          List1[j - 1] := List1[j];
-          List2[j - 1] := List2[j];
-          j := j + 1;
-          if (j > max) then Break;
-        until (List1[j] >= tmp1) and ((List1[j] <> tmp1) or (List2[j] >= tmp2));
-        List1[j - 1] := tmp1;
-        List2[j - 1] := tmp2;
-        last_swap := j - 1;
-        i := j + 1;
-      end else
-        i := i + 1;
-    end; // while (i <= max) do.
-    // End bubbling up.
-
-    // Update max.
-    max := last_swap - 1;
-
-    // Bubble down.
-    last_swap := max + 1;
-    // for i := max - 1 downto min
-    i := max - 1;
-    while (i >= min) do
-    begin
-    // Find a bubble.
-      if (List1[i + 1] < List1[i]) or ((List1[i + 1] = List1[i]) and (List2[i + 1] < List2[i])) then
-      begin
-        // See where to drop the bubble.
-        tmp1 := List1[i + 1];
-        tmp2 := List2[i + 1];
-        j := i;
-        repeat
-          List1[j + 1] := List1[j];
-          List2[j + 1] := List2[j];
-          j := j - 1;
-          if j < min then Break;
-        until (List1[j] <= tmp1) and ((List1[j] <> tmp1) or (List2[j] <= tmp2));
-        List1[j + 1] := tmp1;
-        List2[j + 1] := tmp2;
-        last_swap := j + 1;
-        i := j - 1;
-      end else
-        i := i - 1;
-    end; // while (i >= min) do
-    // End bubbling down.
-    // Update min.
-    min := last_swap + 1;
-  end; // while (min < max) do
-end;
-
-procedure BubblesortSmallint(var List1: array of Smallint; var List2: array of
   Integer; min, max: Integer);
 var
   last_swap, i, j: Integer;
-  tmp1: Smallint;
+  tmp1: Integer;
   tmp2: Integer;
 begin
   // Repeat until we are done.
@@ -292,7 +141,6 @@ begin
     min := last_swap + 1;
   end; // while (min < max) do
 end;
-
 
 // Run selectionsort.
 
