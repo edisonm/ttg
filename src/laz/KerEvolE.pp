@@ -5,7 +5,7 @@ interface
 
 uses
   {$IFDEF UNIX}cthreads, cmem, {$ENDIF}MTProcs, Classes, Forms, SysUtils, Dialogs,
-  KerModel, SortAlgs;
+  KerModel;
 
 type
 

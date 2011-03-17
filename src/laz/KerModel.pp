@@ -16,18 +16,16 @@ var
 type
   TDynamicBooleanArray = array of Boolean;
   TDynamicBooleanArrayArray = array of TDynamicBooleanArray;
-  TDynamicSmallintArray = array of Smallint;
-  TDynamicSmallintArrayArray = array of TDynamicSmallintArray;
-  TDynamicSmallintArrayArrayArray = array of TDynamicSmallintArrayArray;
   TDynamicIntegerArray = array of Integer;
   TDynamicIntegerArrayArray = array of TDynamicIntegerArray;
+  TDynamicIntegerArrayArrayArray = array of TDynamicIntegerArrayArray;
   TDynamicDoubleArray = array of Double;
   TDynamicDoubleArrayArray = array of TDynamicDoubleArray;
   TDynamicStringArray = array of string;
-  PSmallintArray = ^TSmallintArray;
-  TSmallintArray = array [0 .. 16383] of Smallint;
-  PSmallintArrayArray = ^TSmallintArrayArray;
-  TSmallintArrayArray = array [0 .. 0] of PSmallintArray;
+  PIntegerArray = ^TIntegerArray;
+  TIntegerArray = array [0 .. 16383] of Integer;
+  PIntegerArrayArray = ^TIntegerArrayArray;
+  TIntegerArrayArray = array [0 .. 0] of PIntegerArray;
   PDoubleArray = ^TDoubleArray;
   TDoubleArray = array [0 .. 0] of Double;
   PBooleanArray = ^TBooleanArray;
@@ -65,33 +63,33 @@ type
       FProfesorProhibicionAProfesor, FProfesorProhibicionAPeriodo,
       FProfesorProhibicionAProfesorProhibicionTipo, FDistributivoAAulaTipo,
       FParaleloACurso, FParaleloANivel, FParaleloAParaleloId,
-      FParaleloAEspecializacion, FParaleloASesionCant: TDynamicSmallintArray;
-    FSesionADuracion: array [-1 .. 16382] of Smallint;
-    FPSesionADuracion: PSmallintArray;
+      FParaleloAEspecializacion, FParaleloASesionCant: TDynamicIntegerArray;
+    FSesionADuracion: array [-1 .. 16382] of Integer;
+    FPSesionADuracion: PIntegerArray;
     FDiaHoraAPeriodo, FNivelEspecializacionACurso, FCursoParaleloIdAParalelo,
       FParaleloMateriaAProfesor, FParaleloMateriaADistributivo, FParaleloMateriaCant,
-      FTimeTableDetailPattern, FDistributivoASesiones: TDynamicSmallintArrayArray;
+      FTimeTableDetailPattern, FDistributivoASesiones: TDynamicIntegerArrayArray;
     FProfesorPeriodoAProfesorProhibicionTipo,
-      FMateriaPeriodoAMateriaProhibicionTipo: TDynamicSmallintArrayArray;
+      FMateriaPeriodoAMateriaProhibicionTipo: TDynamicIntegerArrayArray;
     FMateriaProhibicionTipoAValor, FProfesorProhibicionTipoAValor: TDynamicDoubleArray;
     FMateriaProhibicionAValor, FProfesorProhibicionAValor: TDynamicDoubleArray;
     FMateriaCant, FMateriaProhibicionTipoCant, FProfesorProhibicionTipoCant,
       FParaleloCant, FDiaCant, FHoraCant, FPeriodoCant, FProfesorCant, FCursoCant,
       FNivelCant, FEspecializacionCant, FAulaTipoCant, FDistributivoCant,
-      FMaxProfesorProhibicionTipo: Smallint;
+      FMaxProfesorProhibicionTipo: Integer;
     FMaxProfesorProhibicionTipoValor: Double;
     FParaleloIdACodParaleloId, FMateriaACodMateria, FDiaACodDia, FHoraACodHora,
       FNivelACodNivel,
       FEspecializacionACodEspecializacion: TDynamicIntegerArray;
     FCodNivelANivel, FCodEspecializacionAEspecializacion,
       FCodParaleloIdAParaleloId, FCodDiaADia,
-      FCodHoraAHora: TDynamicSmallintArray;
+      FCodHoraAHora: TDynamicIntegerArray;
     FMinCodNivel, FMinCodEspecializacion, FMinCodParaleloId, FMinCodDia,
       FMinCodHora: Integer;
     FSesionCantidadDoble: Integer;
     function GetDiaAMaxPeriodo(Dia: Integer): Integer;
   protected
-    property TimeTableDetailPattern: TDynamicSmallintArrayArray read FTimeTableDetailPattern;
+    property TimeTableDetailPattern: TDynamicIntegerArrayArray read FTimeTableDetailPattern;
     class function GetElitistCount: Integer;
   public
     procedure Configure(ACruceProfesorValor, ACruceMateriaValor,
@@ -103,8 +101,8 @@ type
     destructor Destroy; override;
     procedure ReportParameters(AReport: TStrings);
     function NewIndividual: TObject;
-    property PeriodoCant: Smallint read FPeriodoCant;
-    property ParaleloCant: Smallint read FParaleloCant;
+    property PeriodoCant: Integer read FPeriodoCant;
+    property ParaleloCant: Integer read FParaleloCant;
     property CruceProfesorValor: Double read FCruceProfesorValor;
     property CruceMateriaValor: Double read FCruceMateriaValor;
     property ProfesorFraccionamientoValor: Double read FProfesorFraccionamientoValor;
@@ -113,8 +111,8 @@ type
     property SesionCortadaValor: Double read FSesionCortadaValor;
     property MateriaNoDispersaValor: Double read FMateriaNoDispersaValor;
     property SesionCantidadDoble: Integer read FSesionCantidadDoble;
-    property SesionADuracion: PSmallintArray read FPSesionADuracion;
-    property ParaleloASesionCant: TDynamicSmallintArray read FParaleloASesionCant;
+    property SesionADuracion: PIntegerArray read FPSesionADuracion;
+    property ParaleloASesionCant: TDynamicIntegerArray read FParaleloASesionCant;
     property ElitistCount: Integer read GetElitistCount;
   end;
 
@@ -156,14 +154,14 @@ type
   *)
   { TTimeTableTablingInfo }
   TTimeTableTablingInfo = record
-    FProfesorPeriodoCant: TDynamicSmallintArrayArray;
-    FMateriaPeriodoCant: TDynamicSmallintArrayArray;
-    FAulaTipoPeriodoCant: TDynamicSmallintArrayArray;
-    FParaleloDiaMateriaCant: TDynamicSmallintArrayArrayArray;
-    FParaleloDiaMateriaAcum: TDynamicSmallintArrayArrayArray;
-    FDiaProfesorFraccionamiento: TDynamicSmallintArrayArray;
-    FMateriaProhibicionTipoAMateriaCant: TDynamicSmallintArray;
-    FProfesorProhibicionTipoAProfesorCant: TDynamicSmallintArray;
+    FProfesorPeriodoCant: TDynamicIntegerArrayArray;
+    FMateriaPeriodoCant: TDynamicIntegerArrayArray;
+    FAulaTipoPeriodoCant: TDynamicIntegerArrayArray;
+    FParaleloDiaMateriaCant: TDynamicIntegerArrayArrayArray;
+    FParaleloDiaMateriaAcum: TDynamicIntegerArrayArrayArray;
+    FDiaProfesorFraccionamiento: TDynamicIntegerArrayArray;
+    FMateriaProhibicionTipoAMateriaCant: TDynamicIntegerArray;
+    FProfesorProhibicionTipoAProfesorCant: TDynamicIntegerArray;
     FCruceProfesor: Integer;
     FCruceMateria: Integer;
     FCruceAulaTipo: Integer;
@@ -234,9 +232,9 @@ type
     procedure Assign(ATimeTable: TTimeTable);
     property Value: Double read TablingInfo.FValue;
     property HoraHuecaDesubicada: Integer read TablingInfo.FHoraHuecaDesubicada;
-    property MateriaProhibicionTipoAMateriaCant: TDynamicSmallintArray
+    property MateriaProhibicionTipoAMateriaCant: TDynamicIntegerArray
       read TablingInfo.FMateriaProhibicionTipoAMateriaCant;
-    property ProfesorProhibicionTipoAProfesorCant: TDynamicSmallintArray
+    property ProfesorProhibicionTipoAProfesorCant: TDynamicIntegerArray
       read TablingInfo.FProfesorProhibicionTipoAProfesorCant;
     property MateriaNoDispersa: Integer read TablingInfo.FMateriaNoDispersa;
     property SesionCortada: Integer read TablingInfo.FSesionCortada;
@@ -277,11 +275,11 @@ var
   FDistributivoAMateria, FCodMateriaAMateria, FCodProfesorAProfesor,
     FCodAulaTipoAAulaTipo, FCodProfProhibicionTipoAProfesorProhibicionTipo,
     FCodMateProhibicionTipoAMateriaProhibicionTipo, FParaleloADuracion,
-    FDistributivoAProfesor, FDistributivoAParalelo: TDynamicSmallintArray;
+    FDistributivoAProfesor, FDistributivoAParalelo: TDynamicIntegerArray;
   FProfesorACodProfesor, FProfesorProhibicionTipoACodProfProhibicionTipo,
     FAulaTipoACodAulaTipo, FMateriaProhibicionTipoACodMateProhibicionTipo: TDynamicIntegerArray;
   procedure Cargar(ATable: TDataSet; ALstName: string; out FMinCodLst: Integer;
-    out FCodLstALst: TDynamicSmallintArray;
+    out FCodLstALst: TDynamicIntegerArray;
     out FLstACodLst: TDynamicIntegerArray);
   var
     VField: TField;
@@ -570,7 +568,7 @@ var
       Paralelo, Profesor, Curso, Sesion2, Sesion, AulaTipo, VPos: Integer;
     VFieldMateria, VFieldNivel, VFieldParaleloId, VFieldProfesor,
       VFieldEspecializacion, VFieldAulaTipo, VFieldComposicion: TField;
-    VSesionADuracion, VSesionADistributivo: array [0 .. 16383] of Smallint;
+    VSesionADuracion, VSesionADistributivo: array [0 .. 16383] of Integer;
     Composicion: string;
   begin
     with SourceDataModule.TbDistributivo do
@@ -643,10 +641,10 @@ var
       SetLength(FSesionADistributivo, Sesion2);
       SetLength(FSesionAMateria, Sesion2);
       SetLength(FSesionAAulaTipo, Sesion2);
-      Move(VSesionADuracion[0], FSesionADuracion[0], Sesion2 * SizeOf(Smallint));
+      Move(VSesionADuracion[0], FSesionADuracion[0], Sesion2 * SizeOf(Integer));
       FSesionADuracion[-1] := 1;
       Move(VSesionADistributivo[0], FSesionADistributivo[0],
-        Sesion2 * SizeOf(Smallint));
+        Sesion2 * SizeOf(Integer));
       for Sesion := 0 to Sesion2 - 1 do
       begin
         Distributivo := FSesionADistributivo[Sesion];
@@ -958,7 +956,7 @@ var
   MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Dia, DDia, Dia1,
     Dia2, Sesion, Profesor, AulaTipo, Duracion, Materia, Limit: Integer;
   PeriodoASesion: TDynamicIntegerArray;
-  MateriaAProfesor: TDynamicSmallintArray;
+  MateriaAProfesor: TDynamicIntegerArray;
 begin
   with Model, TablingInfo do
   begin
@@ -1180,7 +1178,7 @@ end;
 
 {Assembler version of Normalize}
 (*
-  procedure TTimeTable.Normalize(AParalelo: Smallint; var APeriodo: Smallint); assembler;
+  procedure TTimeTable.Normalize(AParalelo: Integer; var APeriodo: Integer); assembler;
   asm
   push    ebx
   mov     eax, [eax + FParaleloPeriodoASesion]
@@ -1281,7 +1279,7 @@ procedure TTimeTable.MutateDia;
 var
   Paralelo, Dia1, Dia2, MinPeriodo1, MinPeriodo2,
     DPeriodo1, DPeriodo2, MaxPeriodo1, MaxPeriodo2: Integer;
-  b: TSmallintArray;
+  b: TIntegerArray;
   PeriodoASesion: TDynamicIntegerArray;
   DoUpdate: Boolean;
   Count: SizeInt;
@@ -1559,35 +1557,35 @@ begin
     FValue := ATimeTable.TablingInfo.FValue;
     // TablingInfo := ATimeTable.TablingInfo;
     Move(ATimeTable.TablingInfo.FMateriaProhibicionTipoAMateriaCant[0],
-      FMateriaProhibicionTipoAMateriaCant[0], FMateriaProhibicionTipoCant * SizeOf(Smallint));
+      FMateriaProhibicionTipoAMateriaCant[0], FMateriaProhibicionTipoCant * SizeOf(Integer));
     Move(ATimeTable.TablingInfo.FProfesorProhibicionTipoAProfesorCant[0],
-      FProfesorProhibicionTipoAProfesorCant[0], FProfesorProhibicionTipoCant * SizeOf(Smallint));
+      FProfesorProhibicionTipoAProfesorCant[0], FProfesorProhibicionTipoCant * SizeOf(Integer));
     for Materia := 0 to FMateriaCant - 1 do
       Move(ATimeTable.TablingInfo.FMateriaPeriodoCant[Materia, 0],
            TablingInfo.FMateriaPeriodoCant[Materia, 0],
-           FPeriodoCant * SizeOf(Smallint));
+           FPeriodoCant * SizeOf(Integer));
     for Profesor := 0 to FProfesorCant - 1 do
       Move(ATimeTable.TablingInfo.FProfesorPeriodoCant[Profesor, 0],
            TablingInfo.FProfesorPeriodoCant[Profesor, 0],
-           FPeriodoCant * SizeOf(Smallint));
+           FPeriodoCant * SizeOf(Integer));
     for Dia := 0 to FDiaCant - 1 do
     begin
       Move(ATimeTable.TablingInfo.FDiaProfesorFraccionamiento[Dia, 0],
-        FDiaProfesorFraccionamiento[Dia, 0], FProfesorCant * SizeOf(Smallint));
+        FDiaProfesorFraccionamiento[Dia, 0], FProfesorCant * SizeOf(Integer));
     end;
     for AulaTipo := 0 to FAulaTipoCant - 1 do
       Move(ATimeTable.TablingInfo.FAulaTipoPeriodoCant[AulaTipo, 0],
         TablingInfo.FAulaTipoPeriodoCant[AulaTipo, 0],
-        FPeriodoCant * SizeOf(Smallint));
+        FPeriodoCant * SizeOf(Integer));
     for Paralelo := 0 to FParaleloCant - 1 do
       for Dia := 0 to FDiaCant - 1 do
       begin
         Move(ATimeTable.TablingInfo.FParaleloDiaMateriaCant[Paralelo, Dia, 0],
           TablingInfo.FParaleloDiaMateriaCant[Paralelo, Dia, 0],
-          FMateriaCant * SizeOf(Smallint));
+          FMateriaCant * SizeOf(Integer));
         Move(ATimeTable.TablingInfo.FParaleloDiaMateriaAcum[Paralelo, Dia, 0],
           TablingInfo.FParaleloDiaMateriaAcum[Paralelo, Dia, 0],
-          FMateriaCant * SizeOf(Smallint));
+          FMateriaCant * SizeOf(Integer));
       end;
   end;
 end;
@@ -1794,8 +1792,8 @@ end;
 function TTimeTable.GetDiaProfesorFraccionamiento(Dia, Profesor: Integer): Integer;
 var
   Periodo, Max, Min, Count, MaxPeriodo: Integer;
-  VPeriodoCant: TDynamicSmallintArray;
-  PeriodoAProfesorProhibicionTipo: TDynamicSmallintArray;
+  VPeriodoCant: TDynamicIntegerArray;
+  PeriodoAProfesorProhibicionTipo: TDynamicIntegerArray;
 begin
   Count := 0;
   Max := -1;
@@ -1994,7 +1992,6 @@ end;
 initialization
 
 // SortLongint := QuicksortInteger;
-// SortSmallint := QuicksortSmallint;
 // lSort := lQuicksort;
 SortInteger := BubblesortInteger;
 lSort := lBubblesort;

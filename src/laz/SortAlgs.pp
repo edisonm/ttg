@@ -55,7 +55,6 @@ uses
 
 procedure BubblesortInteger(var List1: array of Integer; var List2: array of
   Integer; min, max: Integer);
-procedure sQuicksort(var List1: array of Smallint; min, max: Integer);
 procedure lQuicksort(var List1: array of Integer; min, max: Integer);
 procedure lBubblesort(var List1: array of Integer; min, max: Integer);
 procedure QuicksortInteger(var List1: array of Integer; var List2: array of
@@ -147,7 +146,7 @@ procedure SelectionsortInteger(var List1: array of Integer;
 var
   i, j, best_j: Integer;
   best_value1: Integer;
-  best_value2: Smallint;
+  best_value2: Integer;
 begin
   for i := min to max - 1 do
   begin
@@ -215,7 +214,7 @@ begin
     Inc(k);
   end;
   Move(value1[min], List1[min], (max - min + 1) * SizeOf(Integer));
-  Move(value2[min], List2[min], (max - min + 1) * SizeOf(Smallint));
+  Move(value2[min], List2[min], (max - min + 1) * SizeOf(Integer));
 end;
 
 procedure lBubblesort(var List1: array of Integer; min, max: Integer);
@@ -283,67 +282,7 @@ begin
   end; // while (min < max) do
 end;
 
-
 // Run quicksort.
-
-procedure sQuicksort(var List1: array of Smallint; min, max: Integer);
-var
-  med_value1: Smallint;
-  hi, lo, i: Integer;
-begin
-    // If the list has <= 1 element, it's sorted.
-  if (min >= max) then Exit;
-
-    // Pick a dividing item randomly.
-  i := min + Trunc(Random(max - min + 1));
-  med_value1 := List1[i];
-    // Swap it to the front so we can find it easily.
-  List1[i] := List1[min];
-
-    // Move the items smaller than this into the left
-    // half of the list. Move the others into the right.
-  lo := min;
-  hi := max;
-  while (True) do
-  begin
-        // Look down from hi for a value < med_value.
-    while (List1[hi] >= med_value1) do
-    begin
-      hi := hi - 1;
-      if (hi <= lo) then Break;
-    end;
-    if (hi <= lo) then
-    begin
-            // We're done separating the items.
-      List1[lo] := med_value1;
-      Break;
-    end;
-
-        // Swap the lo and hi values.
-    List1[lo] := List1[hi];
-
-        // Look up from lo for a value >= med_value.
-    lo := lo + 1;
-    while (List1[lo] < med_value1) do
-    begin
-      lo := lo + 1;
-      if (lo >= hi) then Break;
-    end;
-    if (lo >= hi) then
-    begin
-            // We're done separating the items.
-      lo := hi;
-      List1[hi] := med_value1;
-      Break;
-    end;
-
-        // Swap the lo and hi values.
-    List1[hi] := List1[lo];
-  end; // while (True) do
-    // Sort the two sublists.
-  sQuicksort(List1, min, lo - 1);
-  sQuicksort(List1, lo + 1, max);
-end;
 
 procedure lQuicksort(var List1: array of Integer; min, max: Integer);
 var
@@ -402,74 +341,6 @@ begin
     // Sort the two sublists.
   lQuicksort(List1, min, lo - 1);
   lQuicksort(List1, lo + 1, max);
-end;
-
-procedure QuicksortSmallint(var List1: array of Smallint; var List2: array of
-  Integer; min, max: Integer);
-var
-  med_value1: Smallint;
-  med_value2: Integer;
-  hi, lo, i: Integer;
-begin
-    // If the list has <= 1 element, it's sorted.
-  if (min >= max) then Exit;
-
-    // Pick a dividing item randomly.
-  i := min + Trunc(Random(max - min + 1));
-  med_value1 := List1[i];
-  med_value2 := List2[i];
-    // Swap it to the front so we can find it easily.
-  List1[i] := List1[min];
-  List2[i] := List2[min];
-
-    // Move the items smaller than this into the left
-    // half of the list. Move the others into the right.
-  lo := min;
-  hi := max;
-  while (True) do
-  begin
-    // Look down from hi for a value < med_value.
-    // while (List1[hi] >= med_value1) do
-    while (List1[hi] >= med_value1) and ((List1[hi] <> med_value1) or (List2[hi]
-      >= med_value2)) do
-    begin
-      hi := hi - 1;
-      if (hi <= lo) then Break;
-    end;
-    if (hi <= lo) then
-    begin
-      // We're done separating the items.
-      List1[lo] := med_value1;
-      List2[lo] := med_value2;
-      Break;
-    end;
-    // Swap the lo and hi values.
-    List1[lo] := List1[hi];
-    List2[lo] := List2[hi];
-
-    // Look up from lo for a value >= med_value.
-    lo := lo + 1;
-    while (List1[lo] < med_value1) or ((List1[lo] = med_value1) and (List2[lo] <
-      med_value2)) do
-    begin
-      lo := lo + 1;
-      if (lo >= hi) then Break;
-    end;
-    if (lo >= hi) then
-    begin
-      // We're done separating the items.
-      lo := hi;
-      List1[hi] := med_value1;
-      List2[hi] := med_value2;
-      Break;
-    end;
-    // Swap the lo and hi values.
-    List1[hi] := List1[lo];
-    List2[hi] := List2[lo];
-  end; // while (True) do
-    // Sort the two sublists.
-  QuicksortSmallint(List1, List2, min, lo - 1);
-  QuicksortSmallint(List1, List2, lo + 1, max);
 end;
 
 procedure QuicksortInteger(var List1: array of Integer; var List2: array of
