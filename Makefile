@@ -19,10 +19,6 @@ TTGSQLITE3=dat/ttg.s3fpc
 
 DBUNITS=Ac2DMUtl Ac2PxUtl Acc2DM Acc2Pdx Acc2SQL AccUtl DBPack PdxUtils
 
-APPVERSION=1.2.2
-APPNAME=Generador Automatico de Horarios
-BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ %Y)
-
 all: $(INSTALLER) $(TTGSQLITE3)
 
 $(INSTALLER): $(ISS) $(TTGEXE)

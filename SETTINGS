@@ -12,3 +12,7 @@ FORMS=FCrsMMEd FSplash FSingEdt FMasDeEd FHorario FMsgView FCrsMME0	\
 DSRCBASE0=DSrcBase
 
 TTGMDBBASE=ttg.mdb
+
+APPVERSION=1.2.2
+APPNAME=Generador Automatico de Horarios
+BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ %Y)

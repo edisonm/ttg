@@ -204,30 +204,28 @@ end;
 
 procedure TEvolElitist.Elitist;
 var
-  BestValue, WorstValue, EValue: Double;
+  ElitistValue: Double;
   Individual, EIndividual, Best, Worst: Integer;
-  EBest: TDynamicIntegerArray;
-  FindMejor: Boolean;
+  ElitistBests: TDynamicIntegerArray;
+  BetterFound: Boolean;
 begin
-  BestValue := FPopulation[0].Value;
-  WorstValue := BestValue;
   Best := 0;
   Worst := 0;
-  SetLength(EBest, FModel.ElitistCount);
+  SetLength(ElitistBests, FModel.ElitistCount);
   for EIndividual := 0 to FModel.ElitistCount - 1 do
   begin
-    EBest[EIndividual] := FPopulationSize + 1 + EIndividual;
+    ElitistBests[EIndividual] := FPopulationSize + 1 + EIndividual;
   end;
   for Individual := 0 to FPopulationSize - 1 do
   with FPopulation[Individual] do
   begin
     for EIndividual := 0 to FModel.ElitistCount - 1 do
     begin
-      EValue := FPopulation[EBest[EIndividual]].ElitistValues[EIndividual];
-      if (ElitistValues[EIndividual] < EValue) or
-        ((ElitistValues[EIndividual] = EValue) and
-         (Value <= FPopulation[EBest[EIndividual]].Value)) then
-        EBest[EIndividual] := Individual;
+      ElitistValue := FPopulation[ElitistBests[EIndividual]].ElitistValues[EIndividual];
+      if (ElitistValues[EIndividual] < ElitistValue) or
+        ((ElitistValues[EIndividual] = ElitistValue) and
+         (Value <= FPopulation[ElitistBests[EIndividual]].Value)) then
+        ElitistBests[EIndividual] := Individual;
     end;
     if Value <= FPopulation[Best].Value then
     begin
@@ -240,11 +238,11 @@ begin
   end;
   for EIndividual := 0 to FModel.ElitistCount - 1 do
   begin
-    if EBest[EIndividual] <> FPopulationSize + 1 + EIndividual then
-      CopyIndividual(FPopulationSize + 1 + EIndividual, EBest[EIndividual]);
+    if ElitistBests[EIndividual] <> FPopulationSize + 1 + EIndividual then
+      CopyIndividual(FPopulationSize + 1 + EIndividual, ElitistBests[EIndividual]);
   end;
-  FindMejor := FPopulation[Best].Value < FPopulation[FPopulationSize].Value;
-  if FindMejor then
+  BetterFound := FPopulation[Best].Value < FPopulation[FPopulationSize].Value;
+  if BetterFound then
   begin
     CopyIndividual(FPopulationSize, Best);
     if Assigned(OnRecordBest) then

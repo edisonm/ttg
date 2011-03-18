@@ -63,11 +63,6 @@ prjlaz: srclaz
 dcchelp:
 	$(DCC32)
 
-$(ABOUT).pas: $(ABOUT).pas.tmpl
-	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
-	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
-	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
-
 $(TTGEXE): $(BASEDELFILES)
 	$(DCC32) $(DCC32OPTS) $(TTGDPR)
 
@@ -79,7 +74,7 @@ $(DBUTILS):
 	cd ../.. ; $(MAKE) $(DBUTILS)
 
 clean:
-	$(RM) $(TTGEXE) $(TTGDIR)/obj/*.dcu \
+	$(RM) $(TTGEXE) $(TTGDIR)/obj/*.dcu $(TTGDIR)/bin/*.a \
 	  $(DSRCBASE0).pas $(DSRCBASE0).dfm *.identcache
 	$(RM) -r src/del/__history
 

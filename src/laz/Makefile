@@ -3,6 +3,7 @@
 # This makefile is used only to generate the lazarus project
 
 TTGDIR:=$(shell cd ../..; pwd)
+
 include ../../SETTINGS
 include ../../COMMON
 
@@ -45,6 +46,11 @@ prjdel: srcdel
 	unix2dos < ttg.inc > ../../src/del/ttg.inc
 	mv $(DELPHIFILES) ../../src/del/
 
+$(ABOUT).pp: $(ABOUT).pp.tmpl
+	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
+	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
+	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
+
 $(TTGEXE): $(BASELAZFILES) ttg.lpi
 	lazbuild ttg.lpi
 
@@ -59,10 +65,13 @@ dbutils:
 clean:
 # 	$(DSRCBASE0).lfm $(DSRCBASE0).pp
 	$(RM) $(TTGEXE) $(TTGDIR)/bin/*.o $(TTGDIR)/bin/*.lrs \
-	  $(TTGDIR)/bin/*.ppu $(TTGDIR)/obj/*.o $(TTGDIR)/obj/*.ppu
+	  $(TTGDIR)/bin/*.ppu $(TTGDIR)/obj/*.o $(TTGDIR)/obj/*.ppu \
+	  $(ABOUT).pp
 
 test:
 	@echo TTGEXE=$(TTGEXE)
 	@echo BASELAZFILES=$(BASELAZFILES)
 	@echo DSRCBASE=$(DSRCBASE)
 
+run:
+	cd $(TTGDIR)/bin ; $(TTGEXE)
