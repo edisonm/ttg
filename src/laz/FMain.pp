@@ -205,7 +205,7 @@ var
 implementation
 
 uses
-  FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd, About,
+  FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd,
   FConfig, FMsgView, FParalel, Printers, DSource, DSrcBase, HorColCm;
 
 {$IFNDEF FPC}
@@ -751,11 +751,12 @@ end;
 
 procedure TMainForm.ActAboutExecute(Sender: TObject);
 begin
-  SplashForm := TSplashForm.Create(Application);
-  SplashForm.Caption := sAppName + ' ' + sAppVersion;
-  SplashForm.lblProductName.Caption := SplashForm.Caption;
-  SplashForm.lblProductVersion.Caption := sAppVersion;
-  SplashForm.ShowModal;
+  with TSplashForm.Create(Application) do
+  try 
+    ShowModal;
+  finally
+    Free;
+  end;
   ActAbout.Checked := False;
 end;
 

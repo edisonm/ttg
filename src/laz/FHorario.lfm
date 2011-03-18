@@ -1,7 +1,7 @@
 inherited HorarioForm: THorarioForm
-  Left = 846
+  Left = 769
   Height = 440
-  Top = 465
+  Top = 210
   Width = 677
   ActiveControl = DBNavigator
   Caption = 'HorarioForm'
@@ -123,7 +123,7 @@ inherited HorarioForm: THorarioForm
     ClientWidth = 677
     inherited DBGrid: TDBGrid
       Height = 394
-      Width = 327
+      Width = 346
       Align = alLeft
       Columns = <      
         item
@@ -146,26 +146,26 @@ inherited HorarioForm: THorarioForm
       OnDblClick = DBGridDblClick
     end
     object Splitter1: TSplitter[1]
-      Left = 328
+      Left = 347
       Height = 394
       Top = 1
       Width = 5
     end
     object Panel2: TPanel[2]
-      Left = 333
+      Left = 352
       Height = 394
       Top = 1
-      Width = 343
+      Width = 324
       Align = alClient
       BevelOuter = bvNone
       ClientHeight = 394
-      ClientWidth = 343
+      ClientWidth = 324
       TabOrder = 1
       object dbmInforme: TDBMemo
         Left = 0
         Height = 394
         Top = 0
-        Width = 343
+        Width = 324
         Align = alClient
         DataField = 'Informe'
         DataSource = DataSource

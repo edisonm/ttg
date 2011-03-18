@@ -48,6 +48,7 @@ prjdel: srcdel
 
 $(ABOUT).pp: $(ABOUT).pp.tmpl
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
+	  -e s:'<v>Revision</v>':'$(REVISION)':g \
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
@@ -69,6 +70,7 @@ clean:
 	  $(ABOUT).pp
 
 test:
+	@echo REVISION=$(REVISION)
 	@echo TTGEXE=$(TTGEXE)
 	@echo BASELAZFILES=$(BASELAZFILES)
 	@echo DSRCBASE=$(DSRCBASE)

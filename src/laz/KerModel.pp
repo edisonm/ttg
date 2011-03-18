@@ -257,7 +257,7 @@ type
     property ProfesorFraccionamiento: Integer read TablingInfo.FProfesorFraccionamiento;
   end;
 
-// Procedimiento que aplica el operador de cruzamiento sobre dos TObjetoTimeTableModel
+// Procedimiento que aplica el operador de cruzamiento sobre dos TTimeTable
 procedure CrossIndividuals(var TimeTable1, TimeTable2: TTimeTable);
 
 implementation

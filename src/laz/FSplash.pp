@@ -27,9 +27,6 @@ type
     { Public declarations }
   end;
 
-var
-  SplashForm: TSplashForm;
-
 implementation
 
 uses
@@ -70,7 +67,10 @@ procedure TSplashForm.FormCreate(Sender: TObject);
   end;
 begin
   UpdBackground;
-  lblYearLabel.Caption := 'Build (' + SBuildDateTime + ')';
+  Caption := sAppName + ' ' + sAppVersion;
+  lblProductName.Caption := Caption;
+  lblProductVersion.Caption := sAppVersion + '-' + sRevision;
+  lblYearLabel.Caption := 'Build (' + sBuildDateTime + ')';
   lblCopyright.Caption := '1999-2011 por Edison Mera';
 end;
 

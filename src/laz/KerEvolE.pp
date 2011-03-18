@@ -36,24 +36,29 @@ type
 
   { TEvolElitist }
 
+  { TSolver }
+
   TSolver = class
   private
+    FModel: TTimeTableModel;
+    FBestIndividual: TTimeTable;
     FOnProgress: TProgressEvent;
     FSharedDirectory: string;
     FPollinationProb: Double;
     FNumImports, FNumExports, FColision: Integer;
     function GetFileName: string;
   protected
-    function GetBestIndividual: TTimeTable; virtual; abstract;
     procedure DoProgress(Position, Max, RefreshInterval: Integer; Solver: TSolver;
       var Stop: Boolean);
   public
+    constructor Create(AModel: TTimeTableModel; const ASharedDirectory: string;
+      APollinationProb: Double);
     procedure Execute(RefreshInterval: Integer); virtual; abstract;
     procedure SaveSolutionToDatabase(ACodHorario: Integer;
       const AExtraInfo: string; AMomentoInicial, AMomentoFinal: TDateTime); virtual; abstract;
     function Pollinate: Boolean;
     property OnProgress: TProgressEvent read FOnProgress write FOnProgress;
-    property BestIndividual: TTimeTable read GetBestIndividual;
+    property BestIndividual: TTimeTable read FBestIndividual;
     property SharedDirectory: string read FSharedDirectory write FSharedDirectory;
     property FileName: string read GetFileName;
     property PollinationProb: Double read FPollinationProb write FPollinationProb;
@@ -66,20 +71,16 @@ type
 
   TDoubleDownHill = class(TSolver)
   private
-    FBestIndividual: TTimeTable;
     function DoubleDownHill(RefreshInterval: Integer): Double;
   protected
-    function GetBestIndividual: TTimeTable; override;
   public
     procedure Execute(RefreshInterval: Integer); override;
-    constructor Create(TimeTable: TTimeTable);
     procedure SaveSolutionToDatabase(ACodHorario: Integer;
       const AExtraInfo: string; AMomentoInicial, AMomentoFinal: TDateTime); override;
   end;
 
   TEvolElitist = class(TSolver)
   private
-    FModel: TTimeTableModel;
     FRandSeed: Cardinal;
     FPopulationSize, FMaxIteration, FMutation1Order: Integer;
     FCrossProb, FMutation1Prob, FMutation2Prob, FRepairProb: Double;
@@ -93,15 +94,16 @@ type
     procedure Mutate;
     procedure InternalCrossIndividuals(Individual1, Individual2: Integer);
     function GetAverageValue: Double;
-    procedure CopyIndividual(Target, Source: Integer);
+    procedure SetPopulationSize(APopulationSize: Integer);
   protected
-    function GetBestIndividual: TTimeTable; override;
   public
     procedure Initialize;
     procedure ReportParameters(AInforme: TStrings);
-    constructor CreateFromModel(AModel: TTimeTableModel; APopulationSize: Integer);
+    constructor Create(AModel: TTimeTableModel; const ASharedDirectory: string;
+      APollinationProb: Double; APopulationSize, AMaxIteration: Integer;
+      ACrossProb, AMutation1Prob: Double; AMutation1Order: Integer;
+      AMutation2Prob, ARepairProb: Double; const AHorarioIni: string);
     procedure FixIndividuals(const Individuals: string);
-    procedure Configure(APopulationSize: Integer);
     destructor Destroy; override;
     procedure SaveSolutionToDatabase(CodHorario: Integer;
       const AExtraInfo: string; MomentoInicial, MomentoFinal: TDateTime); override;
@@ -110,6 +112,7 @@ type
     function DownHillForced: Double;
     function DownHill: Double;
     procedure Repair;
+    property PopulationSize: Integer read FPopulationSize write SetPopulationSize;
     property OnRecordBest: TNotifyEvent read FOnRecordBest write FOnRecordBest;
     property MaxIteration: Integer read FMaxIteration write FMaxIteration;
     property CrossProb: Double read FCrossProb write FCrossProb;
@@ -118,7 +121,6 @@ type
     property Mutation2Prob: Double read FMutation2Prob write FMutation2Prob;
     property RepairProb: Double read FRepairProb write FRepairProb;
     property AverageValue: Double read GetAverageValue;
-    property BestIndividual: TTimeTable read GetBestIndividual;
     property Model: TTimeTableModel read FModel;
   end;
 
@@ -127,12 +129,12 @@ implementation
 uses
   HorColCm;
 
-procedure TEvolElitist.Configure(APopulationSize: Integer);
+procedure TEvolElitist.SetPopulationSize(APopulationSize: Integer);
 var
   Individual: Integer;
 begin
   FPopulationSize := APopulationSize;
-  SetLength(FPopulation, FPopulationSize + 1 + FModel.ElitistCount);
+  SetLength(FPopulation, FPopulationSize + FModel.ElitistCount);
   SetLength(FNewPopulation, Length(FPopulation));
   for Individual := 0 to High(FPopulation) do
   begin
@@ -143,12 +145,20 @@ begin
   end;
 end;
 
-constructor TEvolElitist.CreateFromModel(AModel: TTimeTableModel;
-  APopulationSize: Integer);
+constructor TEvolElitist.Create(AModel: TTimeTableModel; const ASharedDirectory: string;
+  APollinationProb: Double; APopulationSize, AMaxIteration: Integer; ACrossProb,
+  AMutation1Prob: Double; AMutation1Order: Integer; AMutation2Prob,
+  ARepairProb: Double; const AHorarioIni: string);
 begin
-  inherited Create;
-  FModel := AModel;
-  Configure(APopulationSize);
+  inherited Create(AModel, ASharedDirectory, APollinationProb);
+  PopulationSize := APopulationSize;
+  FMaxIteration := AMaxIteration;
+  FCrossProb := ACrossProb;
+  FMutation1Prob := AMutation1Prob;
+  FMutation1Order := AMutation1Order;
+  FMutation2Prob := AMutation2Prob;
+  FRepairProb := ARepairProb;
+  FixIndividuals(AHorarioIni);
 end;
 
 destructor TEvolElitist.Destroy;
@@ -182,6 +192,7 @@ begin
   begin
     FPopulation[Individual].MakeRandom;
   end;
+  BestIndividual.MakeRandom;
 end;
 
 procedure TEvolElitist.Repair;
@@ -197,25 +208,18 @@ begin
   end;
 end;
 
-procedure TEvolElitist.CopyIndividual(Target, Source: Integer);
-begin
-  FPopulation[Target].Assign(FPopulation[Source]);
-end;
 
 procedure TEvolElitist.Elitist;
 var
   ElitistValue: Double;
   Individual, EIndividual, Best, Worst: Integer;
   ElitistBests: TDynamicIntegerArray;
-  BetterFound: Boolean;
 begin
   Best := 0;
   Worst := 0;
   SetLength(ElitistBests, FModel.ElitistCount);
   for EIndividual := 0 to FModel.ElitistCount - 1 do
-  begin
-    ElitistBests[EIndividual] := FPopulationSize + 1 + EIndividual;
-  end;
+    ElitistBests[EIndividual] := FPopulationSize + EIndividual;
   for Individual := 0 to FPopulationSize - 1 do
   with FPopulation[Individual] do
   begin
@@ -228,23 +232,16 @@ begin
         ElitistBests[EIndividual] := Individual;
     end;
     if Value <= FPopulation[Best].Value then
-    begin
       Best := Individual;
-    end;
     if Value >= FPopulation[Worst].Value then
-    begin
       Worst := Individual;
-    end;
   end;
   for EIndividual := 0 to FModel.ElitistCount - 1 do
+    if ElitistBests[EIndividual] <> FPopulationSize + EIndividual then
+      FPopulation[FPopulationSize + EIndividual].Assign(FPopulation[EIndividual]);
+  if FPopulation[Best].Value < BestIndividual.Value then
   begin
-    if ElitistBests[EIndividual] <> FPopulationSize + 1 + EIndividual then
-      CopyIndividual(FPopulationSize + 1 + EIndividual, ElitistBests[EIndividual]);
-  end;
-  BetterFound := FPopulation[Best].Value < FPopulation[FPopulationSize].Value;
-  if BetterFound then
-  begin
-    CopyIndividual(FPopulationSize, Best);
+    BestIndividual.Assign(FPopulation[Best]);
     if Assigned(OnRecordBest) then
       OnRecordBest(Self);
   end;
@@ -309,7 +306,7 @@ var
   TmpPopulation: TTimeTableArray;
   Aptitudes, CummulatedAptitudes, RelativeAptitudes: TDynamicDoubleArray;
 begin
-  MaxValue := -1.7E308;
+  MaxValue := BestIndividual.Value;
   for Individual := 0 to High(FPopulation) do
   begin
     Value := FPopulation[Individual].Value;
@@ -431,14 +428,14 @@ end;
 
 function TEvolElitist.DownHillForced: Double;
 begin
-  Result := FPopulation[FPopulationSize].DownHillForced;
+  Result := BestIndividual.DownHillForced;
   if Assigned(OnRecordBest) then
     OnRecordBest(Self);
 end;
 
 function TEvolElitist.DownHill: Double;
 begin
-  Result := FPopulation[FPopulationSize].DownHill;
+  Result := BestIndividual.DownHill;
 end;
 
 procedure TEvolElitist.SaveSolutionToDatabase(CodHorario: Integer;
@@ -477,11 +474,6 @@ begin
     sum := sum + FPopulation[Individual].Value;
   end;
   Result := sum / FPopulationSize;
-end;
-
-function TEvolElitist.GetBestIndividual: TTimeTable;
-begin
-  Result := FPopulation[FPopulationSize];
 end;
 
 procedure TEvolElitist.ReportParameters(AInforme: TStrings);
@@ -527,26 +519,32 @@ begin
     FOnProgress(Position, Max, Solver, Stop);
 end;
 
-{ TDoubleDownHill }
-
-function TDoubleDownHill.GetBestIndividual: TTimeTable;
+constructor TSolver.Create(AModel: TTimeTableModel; const ASharedDirectory: string;
+  APollinationProb: Double);
 begin
-  Result := FBestIndividual;
+  inherited Create;
+  FModel := AModel;
+  FBestIndividual := TTimeTable.Create(FModel);
+  FSharedDirectory := ASharedDirectory;
+  FPollinationProb := APollinationProb;
 end;
+
+{ TDoubleDownHill }
 
 procedure TDoubleDownHill.Execute(RefreshInterval: Integer);
 begin
-  // while DoubleDownHill(RefreshInterval) do;
-  DoubleDownHill(RefreshInterval);
+  try
+    DoubleDownHill(RefreshInterval);
+  finally
+    if (SharedDirectory <> '') and FileExists(FileName) then
+      DeleteFile(FileName);
+  end;
 end;
 
 function TDoubleDownHill.DoubleDownHill(RefreshInterval: Integer): Double;
 var
   Paralelo, Periodo1, Periodo2, Sesion, Duracion1, Duracion2, Counter: Integer;
-  Delta1, Delta2: Double;
-  {$IFDEF DEBUG}
-  Value1, Value2: Double;
-  {$ENDIF}
+  Delta1, Delta2, Value1{$IFDEF DEBUG}, Value2{$ENDIF}: Double;
   Position, Offset, Max: Integer;
   RandomOrders: array [0 .. 4095] of Integer;
   RandomValues: array [0 .. 4095] of Integer;
@@ -554,7 +552,7 @@ var
   Stop, Down: Boolean;
   { Continuar: Boolean; }
 begin
-  with FBestIndividual, Model do
+  with BestIndividual, Model do
   begin
     Update;
     for Counter := 0 to ParaleloCant - 1 do
@@ -642,6 +640,9 @@ begin
             end;
           end;
         end;
+        Value1 := Value;
+        if Pollinate then
+          Result := Result + Value - Value1;
         Sesion := PeriodoASesion[Periodo1];
         if Sesion < 0 then
           Inc(Periodo1)
@@ -651,27 +652,15 @@ begin
           until (Periodo1 >= PeriodoCant)
             or (PeriodoASesion[Periodo1] <> Sesion);
       end;
-      { if Continuar then }
       Inc(Counter);
       if Down then
       begin
-        {for Counter2 := 0 to Counter - 1 do
-        begin
-          Paralelo := RandomOrders[Offset + Counter2];
-          Cantidad := ParaleloASesionCant[Paralelo];
-          Inc(Max, (Cantidad * (Cantidad - 1)) div 2);
-        end;}
         Max := Position + SesionCantidadDoble;
         Offset := (Offset + Counter) mod ParaleloCant;
         Counter := 0;
       end;
     end;
   end;
-end;
-
-constructor TDoubleDownHill.Create(TimeTable: TTimeTable);
-begin
-  FBestIndividual := TimeTable;
 end;
 
 procedure TDoubleDownHill.SaveSolutionToDatabase(ACodHorario: Integer;
@@ -685,8 +674,8 @@ begin
     Report.Add('==================================');
     if AExtraInfo <> '' then
       Report.Add(AExtraInfo);
-    FBestIndividual.ReportValues(Report);
-    FBestIndividual.SaveToDataModule(ACodHorario, AMomentoInicial, AMomentoFinal, Report);
+    BestIndividual.ReportValues(Report);
+    BestIndividual.SaveToDataModule(ACodHorario, AMomentoInicial, AMomentoFinal, Report);
   finally
     Report.Free;
   end;

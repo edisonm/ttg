@@ -91,17 +91,10 @@ begin
   FMomentoInicial := Now;
   with MasterDataModule.ConfigStorage do
   begin
-    VEvolElitist := TEvolElitist.CreateFromModel(FTimeTableModel, PopulationSize);
+    VEvolElitist := TEvolElitist.Create(FTimeTableModel, SharedDirectory,
+      PollinationProb, PopulationSize, MaxIteration, CrossProb, Mutation1Prob,
+      Mutation1Order, Mutation2Prob, RepairProb, HorarioIni);
     try
-      VEvolElitist.MaxIteration := MaxIteration;
-      VEvolElitist.CrossProb := CrossProb;
-      VEvolElitist.Mutation1Prob := Mutation1Prob;
-      VEvolElitist.Mutation1Order := Mutation1Order;
-      VEvolElitist.Mutation2Prob := Mutation2Prob;
-      VEvolElitist.RepairProb := RepairProb;
-      VEvolElitist.SharedDirectory := SharedDirectory;
-      VEvolElitist.PollinationProb := PollinationProb;
-      VEvolElitist.FixIndividuals(HorarioIni);
       TThread.Synchronize(CurrentThread, VEvolElitist.Initialize);
       ProgressFormDrv := TProgressFormDrv.Create;
       try
@@ -116,8 +109,10 @@ begin
         end;
         if ApplyDoubleDownHill then
         begin
-          DoubleDownHill := TDoubleDownHill.Create(VEvolElitist.BestIndividual);
+          DoubleDownHill := TDoubleDownHill.Create(FTimeTableModel,
+            SharedDirectory, PollinationProb);
           try
+            DoubleDownHill.BestIndividual.Assign(VEvolElitist.BestIndividual);
             ProgressFormDrv.Caption := Format('Mejorando Horario [%d]', [ACodHorario]);
             DoubleDownHill.OnProgress := ProgressFormDrv.OnProgress;
             DoubleDownHill.Execute(RefreshInterval);
@@ -126,6 +121,7 @@ begin
               Result := True;
               Exit;
             end;
+            VEvolElitist.BestIndividual.Assign(DoubleDownHill.BestIndividual);
           finally
             DoubleDownHill.Free;
           end;
@@ -223,7 +219,6 @@ end;
 procedure TImproveTimeTableThread.Execute;
 var
   ProgressFormDrv: TProgressFormDrv;
-  TimeTable: TTimeTable;
   MomentoInicial: TDateTime;
   DoubleDownHill: TDoubleDownHill;
   ExtraInfo: string;
@@ -232,48 +227,44 @@ begin
   with MasterDataModule.ConfigStorage do
   begin
     InitRandom;
-    TimeTable := TTimeTable.Create(FTimeTableModel);
+    DoubleDownHill := TDoubleDownHill.Create(FTimeTableModel,
+      SharedDirectory, PollinationProb);
     try
-      with TSyncLoader.Create(TimeTable, FCodHorarioFuente) do
+      {if s = '' then
+        TimeTable.MakeRandom
+      else}
+      with TSyncLoader.Create(DoubleDownHill.BestIndividual, FCodHorarioFuente) do
       try
         TThread.Synchronize(CurrentThread, Execute);
       finally
         Free;
       end;
-      TimeTable.DownHillForced;
-      DoubleDownHill := TDoubleDownHill.Create(TimeTable);
+      DoubleDownHill.BestIndividual.DownHillForced;
+      ProgressFormDrv := TProgressFormDrv.Create;
       try
-        {if s = '' then
-          TimeTable.MakeRandom
-        else}
-        ProgressFormDrv := TProgressFormDrv.Create;
-        try
-          DoubleDownHill.OnProgress := ProgressFormDrv.OnProgress;
-          ProgressFormDrv.Caption := Format('Mejorando Horario [%d] en [%d]',
-            [FCodHorarioFuente, FCodHorario]);
-          DoubleDownHill.Execute(RefreshInterval);
-          if ProgressFormDrv.CancelClick then
-          begin
-            Terminate;
-            Exit;
-          end
-          else
-            ExtraInfo := Format('Horario base: %d', [FCodHorarioFuente]);
-            with TSyncSaver.Create(DoubleDownHill, FCodHorario, ExtraInfo,
-              MomentoInicial, Now) do
-            try
-              TThread.Synchronize(CurrentThread, Execute);
-            finally
-              Free;
-            end;
-        finally
-          ProgressFormDrv.Free;
-        end;
+        DoubleDownHill.OnProgress := ProgressFormDrv.OnProgress;
+        ProgressFormDrv.Caption := Format('Mejorando Horario [%d] en [%d]',
+          [FCodHorarioFuente, FCodHorario]);
+        DoubleDownHill.Execute(RefreshInterval);
+        if ProgressFormDrv.CancelClick then
+        begin
+          Terminate;
+          Exit;
+        end
+        else
+          ExtraInfo := Format('Horario base: %d', [FCodHorarioFuente]);
+          with TSyncSaver.Create(DoubleDownHill, FCodHorario, ExtraInfo,
+            MomentoInicial, Now) do
+          try
+            TThread.Synchronize(CurrentThread, Execute);
+          finally
+            Free;
+          end;
       finally
-        DoubleDownHill.Free;
+        ProgressFormDrv.Free;
       end;
     finally
-      TimeTable.Free;
+      DoubleDownHill.Free;
     end;
   end;
 end;
