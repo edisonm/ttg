@@ -178,18 +178,18 @@ begin
     lblProfesorProhibicion.Caption :=
       Format('%s ', [VarArrToStr(ProfesorProhibicionTipoAProfesorCant)]);
     lblMateriaNoDispersa.Caption := Format('%d ', [MateriaNoDispersa]);
-    lblCruceProfesorValor.Caption := Format('%8.2f ', [CruceProfesorValor]);
-    lblCruceMateriaValor.Caption := Format('%8.2f ', [ASolver.BestIndividual.CruceMateriaValor]);
+    lblCruceProfesorValor.Caption := Format('%d ', [CruceProfesorValor]);
+    lblCruceMateriaValor.Caption := Format('%d ', [ASolver.BestIndividual.CruceMateriaValor]);
     lblProfesorFraccionamientoValor.Caption :=
-      Format('%8.2f ', [ProfesorFraccionamientoValor]);
-    lblCruceAulaTipoValor.Caption := Format('%8.2f ', [CruceAulaTipoValor]);
-    lblHoraHuecaDesubicadaValor.Caption := Format('%8.2f ',
+      Format('%d ', [ProfesorFraccionamientoValor]);
+    lblCruceAulaTipoValor.Caption := Format('%d ', [CruceAulaTipoValor]);
+    lblHoraHuecaDesubicadaValor.Caption := Format('%d ',
       [HoraHuecaDesubicadaValor]);
-    lblSesionCortadaValor.Caption := Format('%8.2f ', [SesionCortadaValor]);
-    lblMateriaProhibicionValor.Caption := Format('%8.2f ', [MateriaProhibicionValor]);
-    lblProfesorProhibicionValor.Caption := Format('%8.2f ', [ProfesorProhibicionValor]);
-    lblMateriaNoDispersaValor.Caption := Format('%8.2f ', [MateriaNoDispersaValor]);
-    lblValorTotal.Caption := Format('%8.2f ', [Value]);
+    lblSesionCortadaValor.Caption := Format('%d ', [SesionCortadaValor]);
+    lblMateriaProhibicionValor.Caption := Format('%d ', [MateriaProhibicionValor]);
+    lblProfesorProhibicionValor.Caption := Format('%d ', [ProfesorProhibicionValor]);
+    lblMateriaNoDispersaValor.Caption := Format('%d ', [MateriaNoDispersaValor]);
+    lblValorTotal.Caption := Format('%d ', [Value]);
   end;
   if ASolver is TEvolElitist then
   with TEvolElitist(ASolver) do
@@ -266,7 +266,7 @@ end;
 procedure TProgressFormDrv.DoProgress;
 begin
   FProgressForm.DoProgress(FPosition, FMax, FSolver);
-  {$IFDEF DEBUG}
+  {$IFNDEF THREADED}
   Application.ProcessMessages;
   {$ENDIF}
 end;

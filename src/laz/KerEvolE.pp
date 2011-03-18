@@ -85,7 +85,7 @@ type
     FRandSeed: Cardinal;
     FPopulationSize, FMaxIteration, FMutation1Order: Integer;
     FCrossProb, FMutation1Prob, FMutation2Prob, FRepairProb: Double;
-    FPopulation, FNewPopulation, FElitists: TTimeTableArray;
+    FPopulation, FElitists: TTimeTableArray;
     FFixedIndividuals: TDynamicIntegerArray;
     FOnRecordBest: TNotifyEvent;
     procedure MakeRandom;
@@ -137,13 +137,10 @@ begin
   FPopulationSize := APopulationSize;
   SetLength(FPopulation, FPopulationSize);
   SetLength(FElitists, FModel.ElitistCount);
-  SetLength(FNewPopulation, FPopulationSize);
   for Individual := 0 to High(FPopulation) do
   begin
     if not Assigned(FPopulation[Individual]) then
       FPopulation[Individual] := TTimeTable.Create(FModel);
-    if not Assigned(FNewPopulation[Individual]) then
-      FNewPopulation[Individual] := TTimeTable.Create(FModel);
   end;
   for Individual := 0 to FModel.ElitistCount - 1 do
   begin
@@ -174,7 +171,6 @@ begin
   for Individual := 0 to High(FPopulation) do
   begin
     FPopulation[Individual].Free;
-    FNewPopulation[Individual].Free;
   end;
   for Individual := 0 to high(FElitists) do
     FElitists[Individual].Free;
@@ -258,7 +254,7 @@ function TSolver.Pollinate: Boolean;
   procedure Exportar;
   var
     Stream: TStream;
-    Value: Double;
+    Value: Integer;
   begin
     Stream := TFileStream.Create
       (FileName, fmCreate or fmShareExclusive);
@@ -306,12 +302,9 @@ end;
 
 procedure TEvolElitist.Select;
 var
-  Individual, Individual1, Individual2: Integer;
-  Value, MaxValue: Double;
-  Sum: Double;
-  p: Extended;
-  TmpPopulation: TTimeTableArray;
-  Aptitudes, CummulatedAptitudes, RelativeAptitudes: TDynamicDoubleArray;
+  Individual, Individual1, Individual2, Value, MaxValue, Sum, p,
+    Selected, Discarted, Counter: Integer;
+  Selecteds, Discarteds, Aptitudes, Cummulated: TDynamicIntegerArray;
 begin
   MaxValue := BestIndividual.Value;
   for Individual := 0 to High(FPopulation) do
@@ -321,46 +314,48 @@ begin
       MaxValue := Value;
   end;
   SetLength(Aptitudes, Length(FPopulation));
-  SetLength(CummulatedAptitudes, Length(FPopulation));
-  SetLength(RelativeAptitudes, Length(FPopulation));
+  SetLength(Cummulated, Length(FPopulation));
+  SetLength(Selecteds, Length(FPopulation));
   for Individual := 0 to High(FPopulation) do
   begin
+    Selecteds[Individual] := 0;
     Aptitudes[Individual] := 1 + MaxValue - FPopulation[Individual].Value;
   end;
-  Sum := 0;
-  for Individual := 0 to FPopulationSize - 1 do
-  begin
-    Sum := Sum + Aptitudes[Individual];
-  end;
-  for Individual := 0 to FPopulationSize - 1 do
-  begin
-    RelativeAptitudes[Individual] := Aptitudes[Individual] / Sum;
-  end;
-  CummulatedAptitudes[0] := RelativeAptitudes[0];
+  Cummulated[0] := Aptitudes[0];
   for Individual := 1 to FPopulationSize - 1 do
   begin
-    CummulatedAptitudes[Individual] := CummulatedAptitudes[Individual - 1]
-      + RelativeAptitudes[Individual];
+    Cummulated[Individual] := Cummulated[Individual - 1]
+      + Aptitudes[Individual];
   end;
+  Sum := Cummulated[Individual];
   for Individual1 := 0 to FPopulationSize - 1 do
   begin
-    p := Random;
-    if p < CummulatedAptitudes[0] then
+    p := Random(Sum);
+    Selected := 0;
+    while Cummulated[Selected] < p do
     begin
-      FNewPopulation[Individual1].Assign(FPopulation[0]);
-    end
-    else
+      Inc(Selected);
+    end;
+    Inc(Selecteds[Selected]);
+  end;
+  Discarted := 0;
+  SetLength(Discarteds, FPopulationSize);
+  for Individual := 0 to FPopulationSize - 1 do
+  begin
+    if Selecteds[Individual] = 0 then
     begin
-      for Individual2 := 0 to FPopulationSize - 1 do
-        if (p >= CummulatedAptitudes[Individual2]) and (p < CummulatedAptitudes[Individual2 + 1]) then
-          FNewPopulation[Individual1].Assign(FPopulation[Individual2 + 1]);
+      Discarteds[Discarted] := Individual;
+      Inc(Discarted);
     end;
   end;
-  TmpPopulation := FPopulation;
-  FPopulation := FNewPopulation;
-  FNewPopulation := TmpPopulation;
-  for Individual1 := FPopulationSize to High(FPopulation) do
-    FPopulation[Individual1].Assign(FNewPopulation[Individual1]);
+  SetLength(Discarteds, Discarted);
+  Discarted := 0;
+  for Individual := 0 to FPopulationSize - 1 do
+  begin
+    if Selecteds[Individual] > 1 then
+      for Counter := 1 to Selecteds[Individual] - 1 do
+        FPopulation[Discarteds[Discarted]].Assign(FPopulation[Individual]);
+  end;
 end;
 
 procedure TEvolElitist.Cross;
@@ -556,8 +551,8 @@ end;
 
 function TDoubleDownHill.DoubleDownHill(RefreshInterval: Integer): Double;
 var
-  Paralelo, Periodo1, Periodo2, Sesion, Duracion1, Duracion2, Counter: Integer;
-  Delta1, Delta2, Value1{$IFDEF DEBUG}, Value2{$ENDIF}: Double;
+  Paralelo, Periodo1, Periodo2, Sesion, Duracion1, Duracion2, Counter,
+    Delta1, Delta2, Value1{$IFDEF DEBUG}, Value2{$ENDIF}: Integer;
   Position, Offset, Max: Integer;
   RandomOrders: array [0 .. 4095] of Integer;
   RandomValues: array [0 .. 4095] of Integer;

@@ -35,40 +35,40 @@ type
     procedure SetSeed(Value: Integer);
     function GetRefreshInterval: Integer;
     procedure SetRefreshInterval(Value: Integer);
-    function GetCruceProfesor: Extended;
-    procedure SetCruceProfesor(Value: Extended);
-    function GetCruceMateria: Extended;
-    procedure SetCruceMateria(Value: Extended);
-    function GetProfesorFraccionamiento: Extended;
-    procedure SetProfesorFraccionamiento(Value: Extended);
-    function GetCruceAulaTipo: Extended;
-    procedure SetCruceAulaTipo(Value: Extended);
-    function GetHoraHueca: Extended;
-    procedure SetHoraHueca(Value: Extended);
-    function GetSesionCortada: Extended;
-    procedure SetSesionCortada(Value: Extended);
-    function GetMateriaNoDispersa: Extended;
-    procedure SetMateriaNoDispersa(Value: Extended);
+    function GetCruceProfesor: Integer;
+    procedure SetCruceProfesor(Value: Integer);
+    function GetCruceMateria: Integer;
+    procedure SetCruceMateria(Value: Integer);
+    function GetProfesorFraccionamiento: Integer;
+    procedure SetProfesorFraccionamiento(Value: Integer);
+    function GetCruceAulaTipo: Integer;
+    procedure SetCruceAulaTipo(Value: Integer);
+    function GetHoraHueca: Integer;
+    procedure SetHoraHueca(Value: Integer);
+    function GetSesionCortada: Integer;
+    procedure SetSesionCortada(Value: Integer);
+    function GetMateriaNoDispersa: Integer;
+    procedure SetMateriaNoDispersa(Value: Integer);
     function GetPopulationSize: Integer;
     procedure SetPopulationSize(Value: Integer);
     function GetMaxIteration: Integer;
     procedure SetMaxIteration(Value: Integer);
-    function GetProbCruzamiento: Extended;
-    procedure SetProbCruzamiento(Value: Extended);
-    function GetMutation1Prob: Extended;
-    procedure SetMutation1Prob(Value: Extended);
+    function GetProbCruzamiento: Double;
+    procedure SetProbCruzamiento(Value: Double);
+    function GetMutation1Prob: Double;
+    procedure SetMutation1Prob(Value: Double);
     function GetMutation1Order: Integer;
     procedure SetMutation1Order(Value: Integer);
-    function GetMutation2Prob: Extended;
-    procedure SetMutation2Prob(Value: Extended);
-    function GetRepairProb: Extended;
-    procedure SetRepairProb(Value: Extended);
+    function GetMutation2Prob: Double;
+    procedure SetMutation2Prob(Value: Double);
+    function GetRepairProb: Double;
+    procedure SetRepairProb(Value: Double);
     function GetHorarioIni: string;
     procedure SetHorarioIni(const Value: string);
     function GetSharedDirectory: string;
     procedure SetSharedDirectory(const Value: string);
-    function GetPollinationProb: Extended;
-    procedure SetPollinationProb(Value: Extended);
+    function GetPollinationProb: Double;
+    procedure SetPollinationProb(Value: Double);
     function GetApplyDoubleDownHill: Boolean;
     procedure SetApplyDoubleDownHill(Value: Boolean);
   public
@@ -85,23 +85,23 @@ type
     property Randomize: Boolean read GetRandomize write SetRandomize;
     property Seed: Integer read GetSeed write SetSeed;
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
-    property CruceProfesor: Extended read GetCruceProfesor write SetCruceProfesor;
-    property CruceMateria: Extended read GetCruceMateria write SetCruceMateria;
-    property ProfesorFraccionamiento: Extended read GetProfesorFraccionamiento write SetProfesorFraccionamiento;
-    property CruceAulaTipo: Extended read GetCruceAulaTipo write SetCruceAulaTipo;
-    property HoraHueca: Extended read GetHoraHueca write SetHoraHueca;
-    property SesionCortada: Extended read GetSesionCortada write SetSesionCortada;
-    property MateriaNoDispersa: Extended read GetMateriaNoDispersa write SetMateriaNoDispersa;
+    property CruceProfesor: Integer read GetCruceProfesor write SetCruceProfesor;
+    property CruceMateria: Integer read GetCruceMateria write SetCruceMateria;
+    property ProfesorFraccionamiento: Integer read GetProfesorFraccionamiento write SetProfesorFraccionamiento;
+    property CruceAulaTipo: Integer read GetCruceAulaTipo write SetCruceAulaTipo;
+    property HoraHueca: Integer read GetHoraHueca write SetHoraHueca;
+    property SesionCortada: Integer read GetSesionCortada write SetSesionCortada;
+    property MateriaNoDispersa: Integer read GetMateriaNoDispersa write SetMateriaNoDispersa;
     property PopulationSize: Integer read GetPopulationSize write SetPopulationSize;
     property MaxIteration: Integer read GetMaxIteration write SetMaxIteration;
-    property CrossProb: Extended read GetProbCruzamiento write SetProbCruzamiento;
-    property Mutation1Prob: Extended read GetMutation1Prob write SetMutation1Prob;
+    property CrossProb: Double read GetProbCruzamiento write SetProbCruzamiento;
+    property Mutation1Prob: Double read GetMutation1Prob write SetMutation1Prob;
     property Mutation1Order: Integer read GetMutation1Order write SetMutation1Order;
-    property Mutation2Prob: Extended read GetMutation2Prob write SetMutation2Prob;
-    property RepairProb: Extended read GetRepairProb write SetRepairProb;
+    property Mutation2Prob: Double read GetMutation2Prob write SetMutation2Prob;
+    property RepairProb: Double read GetRepairProb write SetRepairProb;
     property HorarioIni: string read GetHorarioIni write SetHorarioIni;
     property SharedDirectory: string read GetSharedDirectory write SetSharedDirectory;
-    property PollinationProb: Extended read GetPollinationProb write SetPollinationProb;
+    property PollinationProb: Double read GetPollinationProb write SetPollinationProb;
     property ApplyDoubleDownHill: Boolean read GetApplyDoubleDownHill write SetApplyDoubleDownHill;
   end;
 
@@ -217,74 +217,74 @@ begin
   Integers['NumIteraciones'] := Value;
 end;
 
-function TTTGConfig.GetCruceProfesor: Extended;
+function TTTGConfig.GetCruceProfesor: Integer;
 begin
-  Result := Floats['CruceProfesor'];
+  Result := Integers['CruceProfesor'];
 end;
 
-procedure TTTGConfig.SetCruceProfesor(Value: Extended);
+procedure TTTGConfig.SetCruceProfesor(Value: Integer);
 begin
-  Floats['CruceProfesor'] := Value;
+  Integers['CruceProfesor'] := Value;
 end;
 
-function TTTGConfig.GetCruceMateria: Extended;
+function TTTGConfig.GetCruceMateria: Integer;
 begin
-  Result := Floats['CruceMateria'];
+  Result := Integers['CruceMateria'];
 end;
 
-procedure TTTGConfig.SetCruceMateria(Value: Extended);
+procedure TTTGConfig.SetCruceMateria(Value: Integer);
 begin
-  Floats['CruceMateria'] := Value;
+  Integers['CruceMateria'] := Value;
 end;
 
-function TTTGConfig.GetProfesorFraccionamiento: Extended;
+function TTTGConfig.GetProfesorFraccionamiento: Integer;
 begin
-  Result := Floats['ProfesorFraccionamiento'];
+  Result := Integers['ProfesorFraccionamiento'];
 end;
 
-procedure TTTGConfig.SetProfesorFraccionamiento(Value: Extended);
+procedure TTTGConfig.SetProfesorFraccionamiento(Value: Integer);
 begin
-  Floats['ProfesorFraccionamiento'] := Value;
+  Integers['ProfesorFraccionamiento'] := Value;
 end;
 
-function TTTGConfig.GetCruceAulaTipo: Extended;
+function TTTGConfig.GetCruceAulaTipo: Integer;
 begin
-  Result := Floats['CruceAulaTipo'];
+  Result := Integers['CruceAulaTipo'];
 end;
 
-procedure TTTGConfig.SetCruceAulaTipo(Value: Extended);
+procedure TTTGConfig.SetCruceAulaTipo(Value: Integer);
 begin
-  Floats['CruceAulaTipo'] := Value;
+  Integers['CruceAulaTipo'] := Value;
 end;
 
-function TTTGConfig.GetHoraHueca: Extended;
+function TTTGConfig.GetHoraHueca: Integer;
 begin
-  Result := Floats['HoraHueca'];
+  Result := Integers['HoraHueca'];
 end;
 
-procedure TTTGConfig.SetHoraHueca(Value: Extended);
+procedure TTTGConfig.SetHoraHueca(Value: Integer);
 begin
-  Floats['HoraHueca'] := Value;
+  Integers['HoraHueca'] := Value;
 end;
 
-function TTTGConfig.GetSesionCortada: Extended;
+function TTTGConfig.GetSesionCortada: Integer;
 begin
-  Result := Floats['SesionCortada'];
+  Result := Integers['SesionCortada'];
 end;
 
-procedure TTTGConfig.SetSesionCortada(Value: Extended);
+procedure TTTGConfig.SetSesionCortada(Value: Integer);
 begin
-  Floats['SesionCortada'] := Value;
+  Integers['SesionCortada'] := Value;
 end;
 
-function TTTGConfig.GetMateriaNoDispersa: Extended;
+function TTTGConfig.GetMateriaNoDispersa: Integer;
 begin
-  Result := Floats['MateriaNoDispersa'];
+  Result := Integers['MateriaNoDispersa'];
 end;
 
-procedure TTTGConfig.SetMateriaNoDispersa(Value: Extended);
+procedure TTTGConfig.SetMateriaNoDispersa(Value: Integer);
 begin
-  Floats['MateriaNoDispersa'] := Value;
+  Integers['MateriaNoDispersa'] := Value;
 end;
 
 function TTTGConfig.GetPopulationSize: Integer;
@@ -307,22 +307,22 @@ begin
   Integers['NumMaxGeneracion'] := Value;
 end;
 
-function TTTGConfig.GetProbCruzamiento: Extended;
+function TTTGConfig.GetProbCruzamiento: Double;
 begin
   Result := Floats['ProbCruzamiento'];
 end;
 
-procedure TTTGConfig.SetProbCruzamiento(Value: Extended);
+procedure TTTGConfig.SetProbCruzamiento(Value: Double);
 begin
   Floats['ProbCruzamiento'] := Value;
 end;
 
-function TTTGConfig.GetMutation1Prob: Extended;
+function TTTGConfig.GetMutation1Prob: Double;
 begin
   Result := Floats['ProbMutacion1'];
 end;
 
-procedure TTTGConfig.SetMutation1Prob(Value: Extended);
+procedure TTTGConfig.SetMutation1Prob(Value: Double);
 begin
   Floats['ProbMutacion1'] := Value;
 end;
@@ -337,22 +337,22 @@ begin
   Integers['OrdenMutacion1'] := Value;
 end;
 
-function TTTGConfig.GetMutation2Prob: Extended;
+function TTTGConfig.GetMutation2Prob: Double;
 begin
   Result := Floats['ProbMutacion2'];
 end;
 
-procedure TTTGConfig.SetMutation2Prob(Value: Extended);
+procedure TTTGConfig.SetMutation2Prob(Value: Double);
 begin
   Floats['ProbMutacion2'] := Value;
 end;
 
-function TTTGConfig.GetRepairProb: Extended;
+function TTTGConfig.GetRepairProb: Double;
 begin
   Result := Floats['ProbReparacion'];
 end;
 
-procedure TTTGConfig.SetRepairProb(Value: Extended);
+procedure TTTGConfig.SetRepairProb(Value: Double);
 begin
   Floats['ProbReparacion'] := Value;
 end;
@@ -377,12 +377,12 @@ begin
   Values['dedCompartir_Text'] := Value;
 end;
 
-function TTTGConfig.GetPollinationProb: Extended;
+function TTTGConfig.GetPollinationProb: Double;
 begin
   Result := Floats['RangoPolinizacion'];
 end;
 
-procedure TTTGConfig.SetPollinationProb(Value: Extended);
+procedure TTTGConfig.SetPollinationProb(Value: Double);
 begin
   Floats['RangoPolinizacion'] := Value;
 end;

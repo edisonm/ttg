@@ -322,15 +322,15 @@ begin
     ActMejorarHorario.Enabled := False;
     MainForm.Ejecutando := True;
     try
-      {$IFDEF DEBUG}
+      {$IFDEF THREADED}
+      TImproveTimeTableThread.Create(CodHorarioFuente, CodHorarioDestino, False);
+      {$ELSE}
       with TImproveTimeTableThread.Create(CodHorarioFuente, CodHorarioDestino, True) do
       try
         Execute;
       finally
         Free;
       end;
-      {$ELSE}
-      TImproveTimeTableThread.Create(CodHorarioFuente, CodHorarioDestino, False);
       {$ENDIF}
     finally
       MainForm.Ejecutando := False;

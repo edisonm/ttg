@@ -112,11 +112,11 @@ const
     clLime,
     clRed
     );
-  EValMateProhibicionTipo: array[0..1] of Double = (
+  EValMateProhibicionTipo: array[0..1] of Integer = (
     50,
     500
     );
-  EValProfProhibicionTipo: array[0..1] of Double = (
+  EValProfProhibicionTipo: array[0..1] of Integer = (
     50,
     500
     );
