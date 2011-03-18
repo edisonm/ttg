@@ -53,6 +53,7 @@ type
   public
     constructor Create(AModel: TTimeTableModel; const ASharedDirectory: string;
       APollinationProb: Double);
+    destructor Destroy; override;
     procedure Execute(RefreshInterval: Integer); virtual; abstract;
     procedure SaveSolutionToDatabase(ACodHorario: Integer;
       const AExtraInfo: string; AMomentoInicial, AMomentoFinal: TDateTime); virtual; abstract;
@@ -84,7 +85,7 @@ type
     FRandSeed: Cardinal;
     FPopulationSize, FMaxIteration, FMutation1Order: Integer;
     FCrossProb, FMutation1Prob, FMutation2Prob, FRepairProb: Double;
-    FPopulation, FNewPopulation: TTimeTableArray;
+    FPopulation, FNewPopulation, FElitists: TTimeTableArray;
     FFixedIndividuals: TDynamicIntegerArray;
     FOnRecordBest: TNotifyEvent;
     procedure MakeRandom;
@@ -134,14 +135,19 @@ var
   Individual: Integer;
 begin
   FPopulationSize := APopulationSize;
-  SetLength(FPopulation, FPopulationSize + FModel.ElitistCount);
-  SetLength(FNewPopulation, Length(FPopulation));
+  SetLength(FPopulation, FPopulationSize);
+  SetLength(FElitists, FModel.ElitistCount);
+  SetLength(FNewPopulation, FPopulationSize);
   for Individual := 0 to High(FPopulation) do
   begin
     if not Assigned(FPopulation[Individual]) then
       FPopulation[Individual] := TTimeTable.Create(FModel);
     if not Assigned(FNewPopulation[Individual]) then
       FNewPopulation[Individual] := TTimeTable.Create(FModel);
+  end;
+  for Individual := 0 to FModel.ElitistCount - 1 do
+  begin
+    FElitists[Individual] := TTimeTable.Create(FModel);
   end;
 end;
 
@@ -170,7 +176,8 @@ begin
     FPopulation[Individual].Free;
     FNewPopulation[Individual].Free;
   end;
-  FModel := nil;
+  for Individual := 0 to high(FElitists) do
+    FElitists[Individual].Free;
   inherited Destroy;
 end;
 
@@ -219,8 +226,8 @@ begin
   Worst := 0;
   SetLength(ElitistBests, FModel.ElitistCount);
   for EIndividual := 0 to FModel.ElitistCount - 1 do
-    ElitistBests[EIndividual] := FPopulationSize + EIndividual;
-  for Individual := 0 to FPopulationSize - 1 do
+    ElitistBests[EIndividual] := 0;
+  for Individual := 1 to FPopulationSize - 1 do
   with FPopulation[Individual] do
   begin
     for EIndividual := 0 to FModel.ElitistCount - 1 do
@@ -237,8 +244,8 @@ begin
       Worst := Individual;
   end;
   for EIndividual := 0 to FModel.ElitistCount - 1 do
-    if ElitistBests[EIndividual] <> FPopulationSize + EIndividual then
-      FPopulation[FPopulationSize + EIndividual].Assign(FPopulation[EIndividual]);
+    if FPopulation[ElitistBests[EIndividual]].Value < FElitists[EIndividual].Value then
+      FElitists[EIndividual].Assign(FPopulation[ElitistBests[EIndividual]]);
   if FPopulation[Best].Value < BestIndividual.Value then
   begin
     BestIndividual.Assign(FPopulation[Best]);
@@ -527,6 +534,12 @@ begin
   FBestIndividual := TTimeTable.Create(FModel);
   FSharedDirectory := ASharedDirectory;
   FPollinationProb := APollinationProb;
+end;
+
+destructor TSolver.Destroy;
+begin
+  FBestIndividual.Free;
+  inherited Destroy;
 end;
 
 { TDoubleDownHill }
