@@ -20,7 +20,6 @@ uses
   UEvolElitist in 'uevolelitist.pp',
   FProgres in 'FProgres.pp' {ProgressForm},
   SortAlgs in 'SortAlgs.pp',
-  About in 'About.pp',
   FCrsMMEd in 'FCrsMMEd.pp' {CrossManyToManyEditorForm},
   FCrsMME0 in 'FCrsMME0.pp' {CrossManyToManyEditor0Form},
   FCrsMME1 in 'FCrsMME1.pp' {CrossManyToManyEditor1Form},
@@ -47,7 +46,7 @@ uses
   DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   FSelPeIn in 'FSelPeIn.pp' {SelPeriodoForm},
   DBase in 'DBase.pp', 
-UModel, UMakeTT, UDoubleDownHill, USolver, UTTGBasics;
+UModel, UMakeTT, UDoubleDownHill, USolver, UTTGBasics, about;
 
 {$IFNDEF FPC}
 {$R *.res}

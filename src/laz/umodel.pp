@@ -23,6 +23,7 @@ type
     procedure Assign(AIndividual: TIndividual); virtual;
     procedure Cross(AIndividual: TIndividual); virtual;
     procedure LoadFromDataModule(Index: Integer); virtual; abstract;
+    procedure Mutate; virtual; abstract;
     procedure Update; virtual; abstract;
     procedure MakeRandom; virtual; abstract;
     function DownHill: Integer; virtual; abstract;

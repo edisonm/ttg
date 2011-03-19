@@ -208,9 +208,7 @@ type
     constructor Create(ATimeTableModel: TTimeTableModel);
     destructor Destroy; override;
     procedure MakeRandom; override;
-    procedure Mutate; overload;
-    procedure Mutate(Order: Integer); overload;
-    procedure MutateDia;
+    procedure Mutate; override;
     procedure ReportValues(AReport: TStrings); override;
     procedure Assign(AIndividual: TIndividual); override;
     procedure Cross(AIndividual: TIndividual); override;
@@ -1228,68 +1226,6 @@ begin
     if ParaleloPeriodoASesion[Paralelo, Periodo1]
     <> ParaleloPeriodoASesion[Paralelo, Periodo2] then
       Swap(Paralelo, Periodo1, Periodo2);
-  end;
-end;
-
-procedure TTimeTable.Mutate(Order: Integer);
-var
-  c: Integer;
-begin
-  for c := Random(Order) downto 0 do
-    Mutate;
-end;
-
-procedure TTimeTable.MutateDia;
-var
-  Paralelo, Dia1, Dia2, MinPeriodo1, MinPeriodo2,
-    DPeriodo1, DPeriodo2, MaxPeriodo1, MaxPeriodo2: Integer;
-  b: TIntegerArray;
-  PeriodoASesion: TDynamicIntegerArray;
-  DoUpdate: Boolean;
-  Count: SizeInt;
-begin
-  // Check('MutarDiaAntes');
-  with TTimeTableModel(Model) do
-  begin
-    Dia1 := Random(FDiaCant);
-    repeat
-      Dia2 := Random(FDiaCant);
-    until Dia1 <> Dia2;
-    MinPeriodo1 := FDiaHoraAPeriodo[Dia1, 0];
-    MinPeriodo2 := FDiaHoraAPeriodo[Dia2, 0];
-    MaxPeriodo1 := FDiaAMaxPeriodo[Dia1];
-    MaxPeriodo2 := FDiaAMaxPeriodo[Dia2];
-    DPeriodo1 := MaxPeriodo1 - MinPeriodo1;
-    DPeriodo2 := MaxPeriodo2 - MinPeriodo2;
-    if DPeriodo1 = DPeriodo2 then
-    begin
-      Count := (DPeriodo1 + 1) * SizeOf(Integer);
-      DoUpdate := True;
-      for Paralelo := 0 to FParaleloCant - 1 do
-      begin
-        PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
-        if ((MinPeriodo1 = 0)
-            or (PeriodoASesion[MinPeriodo1 - 1] < 0)
-            or (PeriodoASesion[MinPeriodo1 - 1] <> PeriodoASesion[MinPeriodo1]))
-          and ((MinPeriodo2 = 0)
-            or (PeriodoASesion[MinPeriodo2 - 1] < 0)
-            or (PeriodoASesion[MinPeriodo2 - 1] <> PeriodoASesion[MinPeriodo2]))
-          and ((MaxPeriodo1 = FPeriodoCant - 1)
-            or (PeriodoASesion[MaxPeriodo1] < 0)
-            or (PeriodoASesion[MaxPeriodo1] <> PeriodoASesion[MaxPeriodo1 + 1]))
-          and ((MaxPeriodo2 = FPeriodoCant - 1)
-            or (PeriodoASesion[MaxPeriodo2] < 0)
-            or (PeriodoASesion[MaxPeriodo2] <> PeriodoASesion[MaxPeriodo2 + 1])) then
-        begin
-          Move(PeriodoASesion[MinPeriodo1], b[0], Count);
-          Move(PeriodoASesion[MinPeriodo2], PeriodoASesion[MinPeriodo1], Count);
-          Move(b[0], PeriodoASesion[MinPeriodo2], Count);
-          DoUpdate := True;
-        end;
-      end;
-      if DoUpdate then
-        Update;
-    end;
   end;
 end;
 

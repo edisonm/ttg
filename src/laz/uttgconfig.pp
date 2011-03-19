@@ -57,10 +57,6 @@ type
     procedure SetProbCruzamiento(Value: Double);
     function GetMutation1Prob: Double;
     procedure SetMutation1Prob(Value: Double);
-    function GetMutation1Order: Integer;
-    procedure SetMutation1Order(Value: Integer);
-    function GetMutation2Prob: Double;
-    procedure SetMutation2Prob(Value: Double);
     function GetRepairProb: Double;
     procedure SetRepairProb(Value: Double);
     function GetHorarioIni: string;
@@ -95,9 +91,7 @@ type
     property PopulationSize: Integer read GetPopulationSize write SetPopulationSize;
     property MaxIteration: Integer read GetMaxIteration write SetMaxIteration;
     property CrossProb: Double read GetProbCruzamiento write SetProbCruzamiento;
-    property Mutation1Prob: Double read GetMutation1Prob write SetMutation1Prob;
-    property Mutation1Order: Integer read GetMutation1Order write SetMutation1Order;
-    property Mutation2Prob: Double read GetMutation2Prob write SetMutation2Prob;
+    property MutationProb: Double read GetMutation1Prob write SetMutation1Prob;
     property RepairProb: Double read GetRepairProb write SetRepairProb;
     property HorarioIni: string read GetHorarioIni write SetHorarioIni;
     property SharedDirectory: string read GetSharedDirectory write SetSharedDirectory;
@@ -327,26 +321,6 @@ begin
   Floats['ProbMutacion1'] := Value;
 end;
 
-function TTTGConfig.GetMutation1Order: Integer;
-begin
-  Result := Integers['OrdenMutacion1'];
-end;
-
-procedure TTTGConfig.SetMutation1Order(Value: Integer);
-begin
-  Integers['OrdenMutacion1'] := Value;
-end;
-
-function TTTGConfig.GetMutation2Prob: Double;
-begin
-  Result := Floats['ProbMutacion2'];
-end;
-
-procedure TTTGConfig.SetMutation2Prob(Value: Double);
-begin
-  Floats['ProbMutacion2'] := Value;
-end;
-
 function TTTGConfig.GetRepairProb: Double;
 begin
   Result := Floats['ProbReparacion'];
@@ -421,9 +395,7 @@ begin
   PopulationSize := 10;
   MaxIteration := 10000;
   CrossProb := 0.3;
-  Mutation1Prob := 0.2;
-  Mutation1Order := 3;
-  Mutation2Prob := 0.2;
+  MutationProb := 0.2;
   RepairProb := 0.2;
   ApplyDoubleDownHill := False;
   HorarioIni := '';

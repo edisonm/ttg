@@ -34,8 +34,8 @@ type
   TEvolElitist = class(TSolver)
   private
     FRandSeed: Cardinal;
-    FPopulationSize, FMaxIteration, FMutation1Order: Integer;
-    FCrossProb, FMutation1Prob, FMutation2Prob, FRepairProb: Double;
+    FPopulationSize, FMaxIteration: Integer;
+    FCrossProb, FMutationProb, FRepairProb: Double;
     FPopulation, FElitists: TIndividualArray;
     FFixedIndividuals: TDynamicIntegerArray;
     FOnRecordBest: TNotifyEvent;
@@ -53,8 +53,7 @@ type
     procedure ReportParameters(AInforme: TStrings);
     constructor Create(AModel: TModel; const ASharedDirectory: string;
       APollinationProb: Double; APopulationSize, AMaxIteration: Integer;
-      ACrossProb, AMutation1Prob: Double; AMutation1Order: Integer;
-      AMutation2Prob, ARepairProb: Double; const AHorarioIni: string);
+      ACrossProb, AMutationProb, ARepairProb: Double; const AHorarioIni: string);
     procedure FixIndividuals(const Individuals: string);
     destructor Destroy; override;
     procedure SaveSolutionToDatabase(CodHorario: Integer;
@@ -68,9 +67,7 @@ type
     property OnRecordBest: TNotifyEvent read FOnRecordBest write FOnRecordBest;
     property MaxIteration: Integer read FMaxIteration write FMaxIteration;
     property CrossProb: Double read FCrossProb write FCrossProb;
-    property Mutation1Prob: Double read FMutation1Prob write FMutation1Prob;
-    property Mutation1Order: Integer read FMutation1Order write FMutation1Order;
-    property Mutation2Prob: Double read FMutation2Prob write FMutation2Prob;
+    property MutationProb: Double read FMutationProb write FMutationProb;
     property RepairProb: Double read FRepairProb write FRepairProb;
     property AverageValue: Double read GetAverageValue;
     property Model: TModel read FModel;
@@ -101,16 +98,13 @@ end;
 
 constructor TEvolElitist.Create(AModel: TModel; const ASharedDirectory: string;
   APollinationProb: Double; APopulationSize, AMaxIteration: Integer; ACrossProb,
-  AMutation1Prob: Double; AMutation1Order: Integer; AMutation2Prob,
-  ARepairProb: Double; const AHorarioIni: string);
+  AMutationProb, ARepairProb: Double; const AHorarioIni: string);
 begin
   inherited Create(AModel, ASharedDirectory, APollinationProb);
   PopulationSize := APopulationSize;
   FMaxIteration := AMaxIteration;
   FCrossProb := ACrossProb;
-  FMutation1Prob := AMutation1Prob;
-  FMutation1Order := AMutation1Order;
-  FMutation2Prob := AMutation2Prob;
+  FMutationProb := AMutationProb;
   FRepairProb := ARepairProb;
   FixIndividuals(AHorarioIni);
 end;
@@ -203,7 +197,7 @@ end;
 
 procedure TEvolElitist.Select;
 var
-  Individual, Individual1, Individual2, Value, MinValue, MaxValue, Offset, Sum,
+  Individual, Individual1, Value, MinValue, MaxValue, Offset, Sum,
     p, Selected, Discarted, Counter: Integer;
   Selecteds, Discarteds, Aptitudes, Cummulated: TDynamicIntegerArray;
 begin
@@ -296,10 +290,8 @@ var
 begin
   for Individual := 0 to FPopulationSize - 1 do
   begin
-    if Random < FMutation1Prob then
-      TTimeTable(FPopulation[Individual]).Mutate(FMutation1Order);
-    if Random < FMutation2Prob then
-      TTimeTable(FPopulation[Individual]).MutateDia;
+    if Random < FMutationProb then
+      FPopulation[Individual].Mutate;
   end;
 end;
 
@@ -390,9 +382,7 @@ begin
     Add(Format('Numero de individuos:         %7.d', [FPopulationSize]));
     Add(Format('Maximo de generaciones:       %7.d', [FMaxIteration]));
     Add(Format('Probabilidad de cruce:        %1.5f', [FCrossProb]));
-    Add(Format('Probabilidad de Mutacion 1:   %1.5f', [FMutation1Prob]));
-    Add(Format('Orden de la Mutacion 1:       %7.d', [FMutation1Order]));
-    Add(Format('Probabilidad de Mutacion 1:   %1.5f', [FMutation2Prob]));
+    Add(Format('Probabilidad de Mutacion:     %1.5f', [FMutationProb]));
     Add(Format('Probabilidad de Reparacion:   %1.5f', [FRepairProb]));
     Add(Format('Probabilidad de polinizacion: %1.5f', [PollinationProb]));
   end;

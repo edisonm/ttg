@@ -93,8 +93,8 @@ begin
   with MasterDataModule.ConfigStorage do
   begin
     VEvolElitist := TEvolElitist.Create(FTimeTableModel, SharedDirectory,
-      PollinationProb, PopulationSize, MaxIteration, CrossProb, Mutation1Prob,
-      Mutation1Order, Mutation2Prob, RepairProb, HorarioIni);
+      PollinationProb, PopulationSize, MaxIteration, CrossProb, MutationProb,
+      RepairProb, HorarioIni);
     try
       TThread.Synchronize(CurrentThread, VEvolElitist.Initialize);
       ProgressFormDrv := TProgressFormDrv.Create;

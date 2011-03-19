@@ -66,11 +66,11 @@ object ConfiguracionForm: TConfiguracionForm
     Height = 386
     Top = 8
     Width = 473
-    ActivePage = tbsOpciones
+    ActivePage = tbsPesos
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 1
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
@@ -219,7 +219,7 @@ object ConfiguracionForm: TConfiguracionForm
       object Label29: TLabel
         Left = 237
         Height = 13
-        Top = 132
+        Top = 110
         Width = 81
         Caption = 'Actualizar cada:'
         ParentColor = False
@@ -227,7 +227,7 @@ object ConfiguracionForm: TConfiguracionForm
       object Label36: TLabel
         Left = 8
         Height = 13
-        Top = 157
+        Top = 134
         Width = 89
         Caption = 'Horarios iniciales:'
         ParentColor = False
@@ -235,7 +235,7 @@ object ConfiguracionForm: TConfiguracionForm
       object Label42: TLabel
         Left = 237
         Height = 13
-        Top = 157
+        Top = 134
         Width = 97
         Caption = 'Dir. de intercambio:'
         ParentColor = False
@@ -249,9 +249,9 @@ object ConfiguracionForm: TConfiguracionForm
         ParentColor = False
       end
       object Label13: TLabel
-        Left = 8
+        Left = 237
         Height = 13
-        Top = 61
+        Top = 36
         Width = 59
         Caption = 'Iteraciones:'
         ParentColor = False
@@ -259,7 +259,7 @@ object ConfiguracionForm: TConfiguracionForm
       object Label10: TLabel
         Left = 8
         Height = 13
-        Top = 85
+        Top = 61
         Width = 60
         Caption = 'Prob. cruce:'
         ParentColor = False
@@ -267,23 +267,15 @@ object ConfiguracionForm: TConfiguracionForm
       object Label11: TLabel
         Left = 8
         Height = 13
-        Top = 109
-        Width = 86
-        Caption = 'Prob. Mutacion 1:'
-        ParentColor = False
-      end
-      object Label9: TLabel
-        Left = 237
-        Height = 13
-        Top = 61
-        Width = 86
-        Caption = 'Prob. Mutacion 2:'
+        Top = 85
+        Width = 77
+        Caption = 'Prob. Mutacion:'
         ParentColor = False
       end
       object Label12: TLabel
         Left = 237
         Height = 13
-        Top = 85
+        Top = 61
         Width = 87
         Caption = 'Prob. Reparacion:'
         ParentColor = False
@@ -291,17 +283,9 @@ object ConfiguracionForm: TConfiguracionForm
       object Label43: TLabel
         Left = 237
         Height = 13
-        Top = 109
+        Top = 85
         Width = 92
         Caption = 'Prob. Polinizacion:'
-        ParentColor = False
-      end
-      object Label7: TLabel
-        Left = 237
-        Height = 13
-        Top = 36
-        Width = 87
-        Caption = 'Orden Mutacion 1'
         ParentColor = False
       end
       object CBRandomize: TCheckBox
@@ -326,7 +310,7 @@ object ConfiguracionForm: TConfiguracionForm
       object speNumIteraciones: TSpinEdit
         Left = 345
         Height = 22
-        Top = 128
+        Top = 105
         Width = 112
         MaxValue = 2147483647
         MinValue = 1
@@ -336,14 +320,14 @@ object ConfiguracionForm: TConfiguracionForm
       object edtHorarioIni: TEdit
         Left = 116
         Height = 22
-        Top = 152
+        Top = 129
         Width = 112
         TabOrder = 3
       end
       object dedSharedDirectory: TDirectoryEdit
         Left = 345
         Height = 22
-        Top = 152
+        Top = 129
         Width = 89
         Directory = '/tmp/'
         ShowHidden = False
@@ -362,9 +346,9 @@ object ConfiguracionForm: TConfiguracionForm
         Value = 1
       end
       object speNumMaxGeneracion: TSpinEdit
-        Left = 117
+        Left = 345
         Height = 22
-        Top = 56
+        Top = 32
         Width = 112
         MaxValue = 2147483647
         MinValue = 1
@@ -373,31 +357,29 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object creProbCruzamiento: TEdit
         Left = 117
-        Height = 21
-        Top = 80
+        Height = 20
+        Top = 57
         Width = 112
         AutoSize = False
         TabOrder = 7
       end
-      object creProbMutacion1: TEdit
+      object creMutationProb: TEdit
         Left = 117
-        Height = 22
-        Top = 104
+        Height = 21
+        Top = 80
         Width = 112
         AutoSize = False
         TabOrder = 8
       end
-      object speOrdenMutacion1: TSpinEdit
-        Left = 345
-        Height = 22
-        Top = 32
-        Width = 112
-        MaxValue = 2147483647
-        MinValue = 1
-        TabOrder = 9
-        Value = 1
-      end
       object creProbReparacion: TEdit
+        Left = 345
+        Height = 20
+        Top = 57
+        Width = 112
+        AutoSize = False
+        TabOrder = 9
+      end
+      object crePollinationProb: TEdit
         Left = 345
         Height = 21
         Top = 80
@@ -405,29 +387,13 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 10
       end
-      object crePollinationProb: TEdit
-        Left = 345
-        Height = 22
-        Top = 104
-        Width = 112
-        AutoSize = False
-        TabOrder = 11
-      end
-      object creProbMutacion2: TEdit
-        Left = 345
-        Height = 22
-        Top = 56
-        Width = 112
-        AutoSize = False
-        TabOrder = 12
-      end
       object CBApplyDoubleDownHill: TCheckBox
         Left = 12
         Height = 20
-        Top = 129
+        Top = 106
         Width = 205
         Caption = 'Aplicar descenso rápido doble (lento)'
-        TabOrder = 13
+        TabOrder = 11
       end
     end
     object tbsPesos: TTabSheet

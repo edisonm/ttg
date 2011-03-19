@@ -18,8 +18,7 @@ type
     CBApplyDoubleDownHill: TCheckBox;
     creCruceMateria: TEdit;
     creProbCruzamiento: TEdit;
-    creProbMutacion1: TEdit;
-    creProbMutacion2: TEdit;
+    creMutationProb: TEdit;
     creProbReparacion: TEdit;
     Label10: TLabel;
     Label11: TLabel;
@@ -27,12 +26,9 @@ type
     Label13: TLabel;
     Label20: TLabel;
     Label43: TLabel;
-    Label7: TLabel;
     Label8: TLabel;
-    Label9: TLabel;
     pgcConfig: TPageControl;
     speNumMaxGeneracion: TSpinEdit;
-    speOrdenMutacion1: TSpinEdit;
     crePollinationProb: TEdit;
     speTamPoblacion: TSpinEdit;
     tbsPesos: TTabSheet;
@@ -190,9 +186,7 @@ begin
       speTamPoblacion.Value := PopulationSize;
       speNumMaxGeneracion.Value := MaxIteration;
       creProbCruzamiento.Text := FloatToStr(CrossProb);
-      creProbMutacion1.Text := FloatToStr(Mutation1Prob);
-      speOrdenMutacion1.Value := Mutation1Order;
-      creProbMutacion2.Text := FloatToStr(Mutation2Prob);
+      creMutationProb.Text := FloatToStr(MutationProb);
       creProbReparacion.Text := FloatToStr(RepairProb);
       edtHorarioIni.Text := HorarioIni;
       dedSharedDirectory.Directory := SharedDirectory;
@@ -226,9 +220,7 @@ begin
       PopulationSize := speTamPoblacion.Value;
       MaxIteration := speNumMaxGeneracion.Value;
       CrossProb := StrToFloat(creProbCruzamiento.Text);
-      Mutation1Prob := StrToFloat(creProbMutacion1.Text);
-      Mutation1Order := speOrdenMutacion1.Value;
-      Mutation2Prob := StrToFloat(creProbMutacion2.Text);
+      MutationProb := StrToFloat(creMutationProb.Text);
       RepairProb := StrToFloat(creProbReparacion.Text);
       HorarioIni := edtHorarioIni.Text;
       SharedDirectory := dedSharedDirectory.Directory;
