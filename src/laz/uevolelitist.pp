@@ -1,11 +1,11 @@
 unit UEvolElitist;
+
 {$I ttg.inc}
 
 interface
 
 uses
-  {$IFDEF UNIX}cthreads, cmem, {$ENDIF}MTProcs, Classes, Forms, SysUtils, Dialogs,
-  UTimeTableModel, UModel, USolver, UTTGBasics;
+  Classes, SysUtils, UModel, USolver, UTTGBasics;
 
 type
 

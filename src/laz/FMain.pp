@@ -16,7 +16,7 @@ uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, MTProcs, SysUtils, Classes, Graphics,
   Forms, Dialogs, ExtCtrls, Menus, ComCtrls, Buttons, ActnList,
   FSplash, FSingEdt, ZConnection, Controls, FCrsMME0, FEditor, UConfig
-{$IFNDEF FREEWARE}, UTimeTableModel, FProgres, UMakeTT{$ENDIF};
+{$IFNDEF FREEWARE}, UTimeTableModel, UMakeTT{$ENDIF};
 
 type
 
@@ -191,6 +191,7 @@ type
     {procedure OnRegistrarMejor(Sender: TObject);}
     property Ejecutando: Boolean read FEjecutando write FEjecutando;
     property Pasada: Integer read FPasada write FPasada;
+    property Ajustar: Boolean read FAjustar write FAjustar;
 {$ENDIF}
     property Progress: Integer read FProgress write SetProgress;
     property Min: Integer read FMin write SetMin;
@@ -422,8 +423,8 @@ begin
 {$IFNDEF FREEWARE}
   try
     SCodHorarios := IntToStr(MasterDataModule.NewCodHorario);
-    if not InputQuery('Codigos de los Horarios: ',
-        'Ingrese los codigos de los Horarios a generar', SCodHorarios) then
+    if not InputQuery('Generar Horarios', 'Codigos de los Horarios a generar',
+        SCodHorarios) then
       Exit;
     ElaborarHorarios(SCodHorarios);
   finally
@@ -718,7 +719,7 @@ begin
         MasterDataModule.ConfigStorage.NomColegio;
       {$IFNDEF FREEWARE}
       if FEjecutando then
-        Self.AjustarPesos;
+        AjustarPesos;
       {$ENDIF}
     end
     else

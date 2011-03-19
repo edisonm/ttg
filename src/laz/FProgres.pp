@@ -5,9 +5,9 @@ unit FProgres;
 interface
 
 uses
-  {$IFDEF UNIX}CThreads, CMem, {$ENDIF}{$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF},
-  SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons,
-  ExtCtrls, ComCtrls, UTimeTableModel, USolver, UTTGCommon;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+    Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls,
+    UTimeTableModel, USolver, UTTGCommon;
 
 type
 
@@ -124,7 +124,7 @@ type
 implementation
 
 uses
-  MTProcs;
+  FMain, DSource, MTProcs;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -143,21 +143,14 @@ var
 begin
   with ASolver, TTimeTable(BestIndividual) do
   begin
-      {
-      if FAjustar then
-      begin
-        InvalidarValores;
-      	// Update;
-        with SourceDataModule do
-	        Model.Configure(CruceProfesor,
-                                   ProfesorFraccionamiento,
-                                   CruceAulaTipo,
-                                   HoraHueca,
-                                   SesionCortada,
-                                   MateriaNoDispersa);
-        FAjustar := False;
-      end;
-      }
+    if MainForm.Ajustar then
+    begin
+      with SourceDataModule do
+        TTimeTableModel(Model).Configure(CruceProfesor, CruceMateria,
+          CruceAulaTipo, ProfesorFraccionamiento, HoraHuecaDesubicada,
+          SesionCortada, MateriaNoDispersa);
+        MainForm.Ajustar := False;
+    end;
     t := Now - FInit;
     lblElapsedTime.Caption := FormatDateTime('hh:nn:ss ', t);
     PBProgress.Max := AMax;

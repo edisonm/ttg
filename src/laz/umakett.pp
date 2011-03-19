@@ -1,6 +1,6 @@
 unit UMakeTT;
 
-{$i ttg.inc}
+{$I ttg.inc}
 
 interface
 
@@ -172,7 +172,7 @@ var
 begin
   FreeOnTerminate := True;
   with MasterDataModule.ConfigStorage do
-    FTimeTableModel := TTimeTableModel.CreateFromDataModule(CruceProfesor,
+    FTimeTableModel := TTimeTableModel.Create(CruceProfesor,
       CruceMateria, CruceAulaTipo, ProfesorFraccionamiento, HoraHueca,
       SesionCortada, MateriaNoDispersa);
   SetLength(FValidCodes, Length(AValidCodes));
@@ -278,7 +278,7 @@ begin
   FCodHorarioFuente := ACodHorarioFuente;
   FCodHorario := ACodHorario;
   with MasterDataModule.ConfigStorage do
-    FTimeTableModel := TTimeTableModel.CreateFromDataModule(CruceProfesor,
+    FTimeTableModel := TTimeTableModel.Create(CruceProfesor,
       CruceMateria, CruceAulaTipo, ProfesorFraccionamiento, HoraHueca,
       SesionCortada, MateriaNoDispersa);
   inherited Create(CreateSuspended);

@@ -1,7 +1,7 @@
 object ConfiguracionForm: TConfiguracionForm
-  Left = 951
+  Left = 893
   Height = 442
-  Top = 347
+  Top = 349
   Width = 490
   ActiveControl = pgcConfig
   BorderStyle = bsDialog
@@ -66,11 +66,11 @@ object ConfiguracionForm: TConfiguracionForm
     Height = 386
     Top = 8
     Width = 473
-    ActivePage = tbsPesos
+    ActivePage = tbsOpciones
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 1
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
@@ -260,8 +260,8 @@ object ConfiguracionForm: TConfiguracionForm
         Left = 8
         Height = 13
         Top = 61
-        Width = 60
-        Caption = 'Prob. cruce:'
+        Width = 61
+        Caption = 'Prob. Cruce:'
         ParentColor = False
       end
       object Label11: TLabel

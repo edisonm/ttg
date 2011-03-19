@@ -1,7 +1,6 @@
 inherited HorarioForm: THorarioForm
-  Left = 550
+  Left = 496
   Height = 440
-  Top = 132
   Width = 677
   ActiveControl = DBNavigator
   Caption = 'HorarioForm'

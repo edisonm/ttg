@@ -80,7 +80,7 @@ type
     procedure Configure(ACruceProfesorValor, ACruceMateriaValor,
       ACruceAulaTipoValor, AProfesorFraccionamientoValor,
       AHoraHuecaDesubicadaValor, ASesionCortadaValor, AMateriaNoDispersaValor: Integer);
-    constructor CreateFromDataModule(ACruceProfesorValor, ACruceMateriaValor,
+    constructor Create(ACruceProfesorValor, ACruceMateriaValor,
       ACruceAulaTipoValor, AProfesorFraccionamientoValor,
       AHoraHuecaDesubicadaValor, ASesionCortadaValor, AMateriaNoDispersaValor: Integer);
     destructor Destroy; override;
@@ -242,7 +242,7 @@ implementation
 uses
   SysUtils, ZSysUtils, ZConnection, MTProcs, SortAlgs, DSource, UTTGCommon;
 
-constructor TTimeTableModel.CreateFromDataModule(ACruceProfesorValor,
+constructor TTimeTableModel.Create(ACruceProfesorValor,
   ACruceMateriaValor, ACruceAulaTipoValor, AProfesorFraccionamientoValor,
   AHoraHuecaDesubicadaValor, ASesionCortadaValor, AMateriaNoDispersaValor: Integer);
 var
