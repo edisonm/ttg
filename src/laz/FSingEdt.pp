@@ -7,7 +7,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
   Graphics, Controls, Forms, Dialogs, Db, StdCtrls, DBCtrls, Grids, DBGrids,
-  Buttons, ExtCtrls, ComCtrls, FEditor, ActnList, ZConnection, UConfig;
+  Buttons, ExtCtrls, ComCtrls, FEditor, ActnList, ZConnection, ZDataset, UConfig;
 
 type
 
@@ -95,40 +95,32 @@ procedure TSingleEditorForm.DBGridCheckButton(Sender: TObject;
   ACol: Integer; Field: TField; var AEnabled: Boolean);
 begin
   inherited;
-  {$IFNDEF FPC}
-{
   Enabled := (TDBGrid(Sender).DataSource.DataSet is TZTable) and
     (Field <> nil) and not (Field is TBlobField)
-    and (TZTable(TDBGrid(Sender).DataSource.DataSet).IndexDefs.Count > 0)
-}
-  {$ENDIF};
 end;
 
 procedure TSingleEditorForm.DBGridTitleBtnClick(Sender: TObject;
   ACol: Integer; Field: TField);
 begin
   inherited;
-  {if TDBGrid(Sender).DataSource.DataSet is TZTable then
+  if TDBGrid(Sender).DataSource.DataSet is TZTable then
     with TZTable(TDBGrid(Sender).DataSource.DataSet) do
     try
       if Field.FieldKind = fkLookup then
-        IndexFieldNames :=IndexDefs.FindIndexForFields(FindField(Field.KeyFields).FieldName).Fields
+        IndexFieldNames := FindField(Field.KeyFields).FieldName
       else
-       IndexFieldNames := IndexDefs.FindIndexForFields(Field.FieldName).Fields;
+       IndexFieldNames := Field.FieldName;
     except
       IndexFieldNames := '';
     end;
-    }
 end;
 
 procedure TSingleEditorForm.DBGridDblClick(Sender: TObject);
 begin
   inherited;
-  {
   if TDBGrid(Sender).DataSource.DataSet is TZTable then
     with TZTable(TDBGrid(Sender).DataSource.DataSet) do
       IndexFieldNames := '';
-  }
 end;
 
 const

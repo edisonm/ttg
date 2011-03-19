@@ -49,7 +49,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="36">
+    <Units Count="39">
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -156,9 +156,9 @@
         <UnitName Value="FProfesr"/>
       </Unit14>
       <Unit15>
-        <Filename Value="TTGUtls.pp"/>
+        <Filename Value="ttgdbutils.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="TTGUtls"/>
+        <UnitName Value="TTGDBUtils"/>
       </Unit15>
       <Unit16>
         <Filename Value="UConfig.pp"/>
@@ -302,6 +302,21 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UMakeTT"/>
       </Unit35>
+      <Unit36>
+        <Filename Value="udoubledownhill.pp"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UDoubleDownHill"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="usolver.pp"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="USolver"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="uttgbasics.pp"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UTTGBasics"/>
+      </Unit38>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

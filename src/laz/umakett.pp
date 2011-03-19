@@ -5,7 +5,8 @@ unit UMakeTT;
 interface
 
 uses
-  Classes, SysUtils, MTProcs, KerModel, DMaster;
+  Classes, SysUtils, MTProcs, KerModel, DMaster, USolver, UIndivid, UTTGBasics,
+    UDoubleDownHill;
 
 type
 
@@ -193,25 +194,25 @@ type
 
   TSyncLoader = class
   private
-    FTimeTable: TTimeTable;
-    FCodHorario: Integer;
+    FIndividual: TIndividual;
+    FIndex: Integer;
   public
-    constructor Create(ATimeTable: TTimeTable; ACodHorario: Integer);
+    constructor Create(AIndividual: TIndividual; AIndex: Integer);
     procedure Execute;
   end;
 
 { TSyncLoader }
 
-constructor TSyncLoader.Create(ATimeTable: TTimeTable; ACodHorario: Integer);
+constructor TSyncLoader.Create(AIndividual: TIndividual; AIndex: Integer);
 begin
   inherited Create;
-  FTimeTable := ATimeTable;
-  FCodHorario := ACodHorario;
+  FIndividual := AIndividual;
+  FIndex := AIndex;
 end;
 
 procedure TSyncLoader.Execute;
 begin
-  FTimeTable.LoadFromDataModule(FCodHorario);
+  FIndividual.LoadFromDataModule(FIndex);
 end;
 
 { TImproveTimeTableThread }
@@ -233,7 +234,8 @@ begin
       {if s = '' then
         TimeTable.MakeRandom
       else}
-      with TSyncLoader.Create(DoubleDownHill.BestIndividual, FCodHorarioFuente) do
+      with TSyncLoader.Create(TTimeTable(DoubleDownHill.BestIndividual),
+        FCodHorarioFuente) do
       try
         TThread.Synchronize(CurrentThread, Execute);
       finally

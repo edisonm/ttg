@@ -7,7 +7,7 @@ interface
 uses
   {$IFDEF UNIX}CThreads, CMem, {$ENDIF}{$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF},
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons,
-  ExtCtrls, ComCtrls, KerModel, KerEvolE, HorColCm;
+  ExtCtrls, ComCtrls, KerModel, KerEvolE, USolver, HorColCm;
 
 type
 
@@ -141,7 +141,7 @@ procedure TProgressForm.DoProgress(APosition, AMax: Integer; ASolver: TSolver);
 var
   t: TDateTime;
 begin
-  with ASolver, BestIndividual do
+  with ASolver, TTimeTable(BestIndividual) do
   begin
       {
       if FAjustar then
@@ -167,7 +167,7 @@ begin
     lblPosition.Caption := Format('%d/%d', [APosition, AMax]);
     PBProgress.Position := APosition;
     lblCruceProfesor.Caption := Format('%d ', [CruceProfesor]);
-    lblCruceMateria.Caption := Format('%d ', [ASolver.BestIndividual.CruceMateria]);
+    lblCruceMateria.Caption := Format('%d ', [CruceMateria]);
     lblCruceAulaTipo.Caption := Format('%d ', [CruceAulaTipo]);
     lblProfesorFraccionamiento.Caption :=
       Format('%d ', [ProfesorFraccionamiento]);
@@ -179,7 +179,7 @@ begin
       Format('%s ', [VarArrToStr(ProfesorProhibicionTipoAProfesorCant)]);
     lblMateriaNoDispersa.Caption := Format('%d ', [MateriaNoDispersa]);
     lblCruceProfesorValor.Caption := Format('%d ', [CruceProfesorValor]);
-    lblCruceMateriaValor.Caption := Format('%d ', [ASolver.BestIndividual.CruceMateriaValor]);
+    lblCruceMateriaValor.Caption := Format('%d ', [CruceMateriaValor]);
     lblProfesorFraccionamientoValor.Caption :=
       Format('%d ', [ProfesorFraccionamientoValor]);
     lblCruceAulaTipoValor.Caption := Format('%d ', [CruceAulaTipoValor]);
@@ -191,8 +191,7 @@ begin
     lblMateriaNoDispersaValor.Caption := Format('%d ', [MateriaNoDispersaValor]);
     lblValorTotal.Caption := Format('%d ', [Value]);
   end;
-  if ASolver is TEvolElitist then
-  with TEvolElitist(ASolver) do
+  with (ASolver) do
   begin
     lblImports.Caption := Format('%d ', [NumImports]);
     lblExports.Caption := Format('%d ', [NumExports]);

@@ -1,6 +1,6 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 350
-  Top = 150
+  Left = 595
+  Top = 0
   ActiveControl = DBNavigator
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
@@ -65,7 +65,6 @@ inherited SingleEditorForm: TSingleEditorForm
     end
   end
   inherited ImageList: TImageList
-    BkColor = clBtnFace
     Bitmap = {
       4C69020000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00

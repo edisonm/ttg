@@ -1,8 +1,8 @@
 inherited HorarioParaleloForm: THorarioParaleloForm
-  Left = 760
+  Left = 595
   Height = 284
-  Top = 388
-  ActiveControl = cbVerParalelo
+  Top = 0
+  ActiveControl = DBNavigator
   ClientHeight = 284
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
@@ -46,7 +46,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     end
     object cbVerParalelo: TComboBox[5]
       Left = 116
-      Height = 23
+      Height = 22
       Hint = 'Ver|Seleccione el parametro a ver en el horario'
       Top = 2
       Width = 185

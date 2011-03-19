@@ -24,7 +24,7 @@ type
     { private declarations }
   public
     { public declarations }
-    class function SeleccionarPeriodo(var ACodDia, ACodHora: Integer): Boolean;
+    class function SeleccionarPeriodo(out ACodDia, ACodHora: Integer): Boolean;
   end;
 
 implementation
@@ -35,7 +35,7 @@ implementation
 
 { TSelPeriodoForm }
 
-class function TSelPeriodoForm.SeleccionarPeriodo(var ACodDia, ACodHora: Integer): Boolean;
+class function TSelPeriodoForm.SeleccionarPeriodo(out ACodDia, ACodHora: Integer): Boolean;
 var
   FSelPeriodoForm: TSelPeriodoForm;
 begin

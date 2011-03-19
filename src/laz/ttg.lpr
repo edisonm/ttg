@@ -28,7 +28,7 @@ uses
   FEditor in 'FEditor.pp' {EditorForm},
   FMateria in 'FMateria.pp' {MateriaForm},
   FProfesr in 'FProfesr.pp' {ProfesorForm},
-  TTGUtls in 'TTGUtls.pp',
+  TTGDBUtils,
   UConfig in 'UConfig.pp',
   FConfig in 'FConfig.pp' {ConfiguracionForm},
   FMsgView in 'FMsgView.pp' {MessageViewForm},
@@ -46,7 +46,7 @@ uses
   ttgcfg in 'ttgcfg.pp',
   DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   FSelPeIn in 'FSelPeIn.pp' {SelPeriodoForm},
-  DBase in 'DBase.pp', UIndivid, UMakeTT;
+  DBase in 'DBase.pp', UIndivid, UMakeTT, UDoubleDownHill, USolver, UTTGBasics;
 
 {$IFNDEF FPC}
 {$R *.res}
