@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit KerModel;
+unit UTimeTableModel;
 {$I ttg.inc}
 {.$mode objfpc}{.$H+}
 {.$DEFINE USE_SQL}
@@ -242,7 +242,7 @@ type
 implementation
 
 uses
-  SysUtils, ZSysUtils, ZConnection, MTProcs, SortAlgs, DSource, HorColCm;
+  SysUtils, ZSysUtils, ZConnection, MTProcs, SortAlgs, DSource, UTTGCommon;
 
 constructor TTimeTableModel.CreateFromDataModule(ACruceProfesorValor,
   ACruceMateriaValor, ACruceAulaTipoValor, AProfesorFraccionamientoValor,

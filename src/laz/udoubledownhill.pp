@@ -4,7 +4,7 @@ unit UDoubleDownHill;
 interface
 
 uses
-  Classes, SysUtils, USolver, UTTGBasics, KerModel;
+  Classes, SysUtils, USolver, UTTGBasics, UTimeTableModel;
 
 type
 

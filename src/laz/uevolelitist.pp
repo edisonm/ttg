@@ -1,11 +1,11 @@
-unit KerEvolE;
+unit UEvolElitist;
 {$I ttg.inc}
 
 interface
 
 uses
   {$IFDEF UNIX}cthreads, cmem, {$ENDIF}MTProcs, Classes, Forms, SysUtils, Dialogs,
-  KerModel, UIndivid, USolver, UTTGBasics;
+  UTimeTableModel, UIndivid, USolver, UTTGBasics;
 
 type
 
@@ -79,7 +79,7 @@ type
 implementation
 
 uses
-  HorColCm;
+  UTTGCommon;
 
 procedure TEvolElitist.SetPopulationSize(APopulationSize: Integer);
 var

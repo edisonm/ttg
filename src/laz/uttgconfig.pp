@@ -1,4 +1,4 @@
-unit TTGCfg;
+unit UTTGConfig;
 
 {$I ttg.inc}
 

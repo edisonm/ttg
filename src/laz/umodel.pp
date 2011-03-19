@@ -1,4 +1,4 @@
-unit UIndivid;
+unit UModel;
 
 {$I ttg.inc}
 

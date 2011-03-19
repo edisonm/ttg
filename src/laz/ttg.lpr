@@ -16,8 +16,8 @@ uses
   SysUtils,
   FMain in 'FMain.pp' {MainForm},
   DMaster in 'DMaster.pp' {MasterDataModule: TDataModule},
-  KerModel in 'KerModel.pp',
-  KerEvolE in 'KerEvolE.pp',
+  UTimeTableModel,
+  UEvolElitist,
   FProgres in 'FProgres.pp' {ProgressForm},
   SortAlgs in 'SortAlgs.pp',
   About in 'About.pp',
@@ -28,7 +28,7 @@ uses
   FEditor in 'FEditor.pp' {EditorForm},
   FMateria in 'FMateria.pp' {MateriaForm},
   FProfesr in 'FProfesr.pp' {ProfesorForm},
-  TTGDBUtils,
+  UTTGDBUtils,
   UConfig in 'UConfig.pp',
   FConfig in 'FConfig.pp' {ConfiguracionForm},
   FMsgView in 'FMsgView.pp' {MessageViewForm},
@@ -39,14 +39,15 @@ uses
   FParalel in 'FParalel.pp' {ParaleloForm},
   FSingEdt in 'FSingEdt.pp' {SingleEditorForm},
   FHorario in 'FHorario.pp' {HorarioForm},
-  HorColCm in 'HorColCm.pp',
+  UTTGCommon,
   FHorProf in 'FHorProf.pp' {HorarioProfesorForm},
   DSrcBase in 'DSrcBase.pp' {SourceBaseDataModule: TDataModule},
   RelUtils in 'RelUtils.pp',
-  ttgcfg in 'ttgcfg.pp',
+  UTTGConfig,
   DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   FSelPeIn in 'FSelPeIn.pp' {SelPeriodoForm},
-  DBase in 'DBase.pp', UIndivid, UMakeTT, UDoubleDownHill, USolver, UTTGBasics;
+  DBase in 'DBase.pp', 
+UModel, UMakeTT, UDoubleDownHill, USolver, UTTGBasics;
 
 {$IFNDEF FPC}
 {$R *.res}

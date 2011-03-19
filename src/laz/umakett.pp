@@ -5,7 +5,7 @@ unit UMakeTT;
 interface
 
 uses
-  Classes, SysUtils, MTProcs, KerModel, DMaster, USolver, UIndivid, UTTGBasics,
+  Classes, SysUtils, MTProcs, UTimeTableModel, DMaster, USolver, UIndivid, UTTGBasics,
     UDoubleDownHill;
 
 type
@@ -39,7 +39,7 @@ type
 
 implementation
 
-uses KerEvolE, FProgres;
+uses UEvolElitist, FProgres;
 
 type
 

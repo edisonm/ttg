@@ -72,14 +72,14 @@
         <UnitName Value="DMaster"/>
       </Unit2>
       <Unit3>
-        <Filename Value="KerModel.pp"/>
+        <Filename Value="utimetablemodel.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="KerModel"/>
+        <UnitName Value="UTimeTableModel"/>
       </Unit3>
       <Unit4>
-        <Filename Value="KerEvolE.pp"/>
+        <Filename Value="uevolelitist.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="KerEvolE"/>
+        <UnitName Value="UEvolElitist"/>
       </Unit4>
       <Unit5>
         <Filename Value="FProgres.pp"/>
@@ -156,9 +156,9 @@
         <UnitName Value="FProfesr"/>
       </Unit14>
       <Unit15>
-        <Filename Value="ttgdbutils.pp"/>
+        <Filename Value="uttgdbutils.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="TTGDBUtils"/>
+        <UnitName Value="UTTGDBUtils"/>
       </Unit15>
       <Unit16>
         <Filename Value="UConfig.pp"/>
@@ -238,9 +238,9 @@
         <UnitName Value="FHorario"/>
       </Unit25>
       <Unit26>
-        <Filename Value="HorColCm.pp"/>
+        <Filename Value="uttgcommon.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="HorColCm"/>
+        <UnitName Value="UTTGCommon"/>
       </Unit26>
       <Unit27>
         <Filename Value="FHorProf.pp"/>
@@ -288,14 +288,14 @@
         <UnitName Value="DBase"/>
       </Unit32>
       <Unit33>
-        <Filename Value="ttgcfg.pp"/>
+        <Filename Value="uttgconfig.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="TTGCfg"/>
+        <UnitName Value="UTTGConfig"/>
       </Unit33>
       <Unit34>
-        <Filename Value="UIndivid.pp"/>
+        <Filename Value="umodel.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="UIndivid"/>
+        <UnitName Value="UModel"/>
       </Unit34>
       <Unit35>
         <Filename Value="umakett.pp"/>

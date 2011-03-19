@@ -1,4 +1,4 @@
-unit HorColCm;
+unit UTTGCommon;
 
 {$I ttg.inc}
 

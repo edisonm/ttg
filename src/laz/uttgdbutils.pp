@@ -1,4 +1,4 @@
-unit TTGDBUtils;
+unit UTTGDBUtils;
 
 {$I ttg.inc}
 

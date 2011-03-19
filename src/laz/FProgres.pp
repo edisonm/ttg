@@ -7,7 +7,7 @@ interface
 uses
   {$IFDEF UNIX}CThreads, CMem, {$ENDIF}{$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF},
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons,
-  ExtCtrls, ComCtrls, KerModel, KerEvolE, USolver, HorColCm;
+  ExtCtrls, ComCtrls, UTimeTableModel, UEvolElitist, USolver, UTTGCommon;
 
 type
 
