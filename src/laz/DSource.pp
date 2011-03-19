@@ -38,7 +38,7 @@ implementation
 {$ENDIF}
 
 uses
-  Variants, FConfig, HorColCm;
+  Variants, FConfig, UTTGCommon;
 
 procedure TSourceDataModule.TbDistributivoBeforePost(DataSet: TDataSet);
 var

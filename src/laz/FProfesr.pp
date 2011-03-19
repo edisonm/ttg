@@ -41,7 +41,7 @@ var
 implementation
 
 uses
-  DMaster, FConfig, DSource, FEditor, HorColCm;
+  DMaster, FConfig, DSource, FEditor, UTTGCommon;
 
 {$IFNDEF FPC}
 {$R *.DFM}

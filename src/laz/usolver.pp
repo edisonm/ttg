@@ -4,7 +4,7 @@ unit USolver;
 interface
 
 uses
-  {$IFDEF UNIX}cthreads, cmem, {$ENDIF}Classes, SysUtils, UIndivid;
+  {$IFDEF UNIX}cthreads, cmem, {$ENDIF}Classes, SysUtils, UModel;
 
 type
 

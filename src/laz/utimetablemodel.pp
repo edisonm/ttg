@@ -6,7 +6,7 @@ unit UTimeTableModel;
 interface
 
 uses
-  {$IFDEF UNIX}CThreads, CMem, {$ENDIF}Classes, DB, Dialogs, Forms, UIndivid,
+  {$IFDEF UNIX}CThreads, CMem, {$ENDIF}Classes, DB, Dialogs, Forms, UModel,
   UTTGBasics;
 
 var

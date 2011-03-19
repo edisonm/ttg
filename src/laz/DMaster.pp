@@ -6,7 +6,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics, DB,
-  Controls, Forms, Dialogs, ZConnection, ZDataset, Variants, TTGCfg;
+  Controls, Forms, Dialogs, ZConnection, ZDataset, Variants, UTTGConfig;
 
 type
 
@@ -73,7 +73,7 @@ var
 implementation
 
 uses
-  HorColCm, DSource;
+  UTTGCommon, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}

@@ -5,7 +5,7 @@ unit UMakeTT;
 interface
 
 uses
-  Classes, SysUtils, MTProcs, UTimeTableModel, DMaster, USolver, UIndivid, UTTGBasics,
+  Classes, SysUtils, MTProcs, UTimeTableModel, DMaster, USolver, UModel, UTTGBasics,
     UDoubleDownHill;
 
 type

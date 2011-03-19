@@ -65,7 +65,7 @@ type
 
 implementation
 uses
-  DMaster, HorColCm, FConfig, DSource;
+  DMaster, UTTGCommon, FConfig, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}

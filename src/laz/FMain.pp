@@ -16,7 +16,7 @@ uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, MTProcs, SysUtils, Classes, Graphics,
   Forms, Dialogs, ExtCtrls, Menus, ComCtrls, Buttons, ActnList,
   FSplash, FSingEdt, ZConnection, Controls, FCrsMME0, FEditor, UConfig
-{$IFNDEF FREEWARE}, KerModel, FProgres, UMakeTT{$ENDIF};
+{$IFNDEF FREEWARE}, UTimeTableModel, FProgres, UMakeTT{$ENDIF};
 
 type
 
@@ -206,7 +206,7 @@ implementation
 
 uses
   FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd,
-  FConfig, FMsgView, FParalel, Printers, DSource, DSrcBase, HorColCm;
+  FConfig, FMsgView, FParalel, Printers, DSource, DSrcBase, UTTGCommon;
 
 {$IFNDEF FPC}
 {$R *.DFM}

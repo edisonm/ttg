@@ -212,7 +212,7 @@ var
 implementation
 
 uses
-  Variants, KerModel, UMakeTT;
+  Variants, UTimeTableModel, UMakeTT;
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}

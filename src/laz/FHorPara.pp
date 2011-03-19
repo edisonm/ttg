@@ -76,7 +76,7 @@ type
 implementation
 
 uses
-  HorColCm;
+  UTTGCommon;
 
 {$IFNDEF FPC}
 {$R *.DFM}

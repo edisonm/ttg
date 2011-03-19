@@ -50,7 +50,7 @@ TSingleEditorForm = class(TEditorForm)
 implementation
 
 uses
-  HorColCm, DMaster;
+  UTTGCommon, DMaster;
 
 {$IFNDEF FPC}
 {$R *.DFM}

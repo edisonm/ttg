@@ -5,7 +5,7 @@ interface
 
 uses
   {$IFDEF UNIX}cthreads, cmem, {$ENDIF}MTProcs, Classes, Forms, SysUtils, Dialogs,
-  UTimeTableModel, UIndivid, USolver, UTTGBasics;
+  UTimeTableModel, UModel, USolver, UTTGBasics;
 
 type
 

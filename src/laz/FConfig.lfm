@@ -1,13 +1,13 @@
 object ConfiguracionForm: TConfiguracionForm
-  Left = 899
+  Left = 951
   Height = 442
-  Top = 252
-  Width = 487
+  Top = 347
+  Width = 490
   ActiveControl = pgcConfig
   BorderStyle = bsDialog
   Caption = 'Configuracion'
   ClientHeight = 442
-  ClientWidth = 487
+  ClientWidth = 490
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Icon.Data = {
@@ -49,7 +49,7 @@ object ConfiguracionForm: TConfiguracionForm
   Position = poDesktopCenter
   LCLVersion = '0.9.28.2'
   object bbtnOk: TBitBtn
-    Left = 261
+    Left = 264
     Height = 31
     Top = 403
     Width = 106
@@ -65,7 +65,7 @@ object ConfiguracionForm: TConfiguracionForm
     Left = 8
     Height = 386
     Top = 8
-    Width = 470
+    Width = 473
     ActivePage = tbsOpciones
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentShowHint = False
@@ -75,8 +75,8 @@ object ConfiguracionForm: TConfiguracionForm
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
       Caption = 'Institucion'
-      ClientHeight = 350
-      ClientWidth = 462
+      ClientHeight = 351
+      ClientWidth = 465
       ImageIndex = 2
       object Label14: TLabel
         Left = 8
@@ -206,7 +206,7 @@ object ConfiguracionForm: TConfiguracionForm
     object tbsOpciones: TTabSheet
       Caption = 'Opciones'
       ClientHeight = 351
-      ClientWidth = 462
+      ClientWidth = 465
       ImageIndex = 3
       object Label19: TLabel
         Left = 237
@@ -432,8 +432,8 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsPesos: TTabSheet
       Caption = 'Pesos'
-      ClientHeight = 350
-      ClientWidth = 462
+      ClientHeight = 351
+      ClientWidth = 465
       object Label1: TLabel
         Left = 8
         Height = 13
@@ -445,7 +445,7 @@ object ConfiguracionForm: TConfiguracionForm
       object Label2: TLabel
         Left = 8
         Height = 13
-        Top = 63
+        Top = 61
         Width = 77
         Caption = 'Cruce de aulas:'
         ParentColor = False
@@ -461,7 +461,7 @@ object ConfiguracionForm: TConfiguracionForm
       object Label5: TLabel
         Left = 8
         Height = 13
-        Top = 88
+        Top = 86
         Width = 92
         Caption = 'Materias cortadas:'
         ParentColor = False
@@ -477,7 +477,7 @@ object ConfiguracionForm: TConfiguracionForm
       object Label15: TLabel
         Left = 8
         Height = 13
-        Top = 115
+        Top = 116
         Width = 126
         Anchors = [akLeft, akBottom]
         Caption = 'Prohibiciones de materia:'
@@ -486,7 +486,7 @@ object ConfiguracionForm: TConfiguracionForm
       object Label18: TLabel
         Left = 8
         Height = 13
-        Top = 235
+        Top = 236
         Width = 128
         Anchors = [akLeft, akBottom]
         Caption = 'Prohibiciones de profesor:'
@@ -501,54 +501,54 @@ object ConfiguracionForm: TConfiguracionForm
         ParentColor = False
       end
       object Label30: TLabel
-        Left = 311
+        Left = 314
         Height = 13
-        Top = 148
+        Top = 149
         Width = 42
         Anchors = [akRight, akBottom]
         Caption = 'Nombre:'
         ParentColor = False
       end
       object Label37: TLabel
-        Left = 311
+        Left = 314
         Height = 13
-        Top = 178
+        Top = 179
         Width = 30
         Anchors = [akRight, akBottom]
         Caption = 'Color:'
         ParentColor = False
       end
       object Label38: TLabel
-        Left = 311
+        Left = 314
         Height = 13
-        Top = 209
+        Top = 210
         Width = 28
         Anchors = [akRight, akBottom]
         Caption = 'Valor:'
         ParentColor = False
       end
       object Label39: TLabel
-        Left = 314
+        Left = 317
         Height = 13
-        Top = 260
+        Top = 261
         Width = 42
         Anchors = [akRight, akBottom]
         Caption = 'Nombre:'
         ParentColor = False
       end
       object Label40: TLabel
-        Left = 311
+        Left = 314
         Height = 13
-        Top = 293
+        Top = 294
         Width = 30
         Anchors = [akRight, akBottom]
         Caption = 'Color:'
         ParentColor = False
       end
       object Label41: TLabel
-        Left = 311
+        Left = 314
         Height = 13
-        Top = 321
+        Top = 322
         Width = 28
         Anchors = [akRight, akBottom]
         Caption = 'Valor:'
@@ -589,7 +589,7 @@ object ConfiguracionForm: TConfiguracionForm
       object creSesionCortada: TEdit
         Left = 117
         Height = 21
-        Top = 81
+        Top = 80
         Width = 112
         AutoSize = False
         TabOrder = 4
@@ -611,9 +611,9 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 1
       end
       object dbeNomMateProhibicionTipo: TDBEdit
-        Left = 361
+        Left = 364
         Height = 22
-        Top = 139
+        Top = 140
         Width = 93
         DataField = 'NomMateProhibicionTipo'
         DataSource = SourceDataModule.DSMateriaProhibicionTipo
@@ -621,9 +621,9 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 8
       end
       object dbeValMateProhibicionTipo: TDBEdit
-        Left = 360
+        Left = 363
         Height = 22
-        Top = 200
+        Top = 201
         Width = 93
         DataField = 'ValMateProhibicionTipo'
         DataSource = SourceDataModule.DSMateriaProhibicionTipo
@@ -631,9 +631,9 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 10
       end
       object dbeNomProfProhibicionTipo: TDBEdit
-        Left = 361
+        Left = 364
         Height = 22
-        Top = 251
+        Top = 252
         Width = 93
         DataField = 'NomProfProhibicionTipo'
         DataSource = SourceDataModule.DSProfesorProhibicionTipo
@@ -641,9 +641,9 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 11
       end
       object dbeValProfProhibicionTipo: TDBEdit
-        Left = 361
+        Left = 364
         Height = 22
-        Top = 311
+        Top = 312
         Width = 93
         DataField = 'ValProfProhibicionTipo'
         DataSource = SourceDataModule.DSProfesorProhibicionTipo
@@ -653,8 +653,8 @@ object ConfiguracionForm: TConfiguracionForm
       object DBGrid1: TDBGrid
         Left = 8
         Height = 96
-        Top = 130
-        Width = 289
+        Top = 131
+        Width = 292
         Anchors = [akLeft, akRight, akBottom]
         DataSource = SourceDataModule.DSMateriaProhibicionTipo
         TabOrder = 6
@@ -664,8 +664,8 @@ object ConfiguracionForm: TConfiguracionForm
       object DBGrid2: TDBGrid
         Left = 8
         Height = 97
-        Top = 250
-        Width = 289
+        Top = 251
+        Width = 292
         Anchors = [akLeft, akRight, akBottom]
         DataSource = SourceDataModule.DSProfesorProhibicionTipo
         TabOrder = 7
@@ -673,9 +673,9 @@ object ConfiguracionForm: TConfiguracionForm
         TitleFont.Name = 'MS Sans Serif'
       end
       object CBColMateProhibicionTipo: TColorBox
-        Left = 361
+        Left = 364
         Height = 31
-        Top = 163
+        Top = 164
         Width = 93
         Anchors = [akRight, akBottom]
         ItemHeight = 16
@@ -684,9 +684,9 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 9
       end
       object CBColProfProhibicionTipo: TColorBox
-        Left = 361
+        Left = 364
         Height = 31
-        Top = 275
+        Top = 276
         Width = 93
         Anchors = [akRight, akBottom]
         ItemHeight = 16
@@ -705,7 +705,7 @@ object ConfiguracionForm: TConfiguracionForm
     end
   end
   object bbtnCancel: TBitBtn
-    Left = 373
+    Left = 376
     Height = 31
     Top = 403
     Width = 106

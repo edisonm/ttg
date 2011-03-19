@@ -23,9 +23,12 @@ procedure CheckMasterRelationDelete(AMaster, ADetail: TDataSet;
 procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TZTable;
   const AMasterFields, ADetailFields: string);
 
-function CheckRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADetailFields: string; AProblem: TDataSet): Boolean; overload;
-function CheckRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADetailFields: string): Boolean; overload;
-procedure doErrorRelation(AMaster, ADetail: TDataSet; const AMasterFields, ADetailFields: string);
+function CheckRelation(AMaster, ADetail: TDataSet; const AMasterFields,
+  ADetailFields: string; AProblem: TDataSet): Boolean; overload;
+function CheckRelation(AMaster, ADetail: TDataSet;
+  const AMasterFields, ADetailFields: string): Boolean; overload;
+procedure doErrorRelation(AMaster, ADetail: TDataSet;
+  const AMasterFields, ADetailFields: string);
 function CompareField(Field: TField; Value: Variant): Boolean;
 function CompareRecord(Fields: TList; KeyValue: Variant): Boolean;
 function CompareVarArray(v1, v2: Variant): Boolean;
