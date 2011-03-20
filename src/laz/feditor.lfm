@@ -1,7 +1,7 @@
 object EditorForm: TEditorForm
-  Left = 434
+  Left = 595
   Height = 299
-  Top = 140
+  Top = 0
   Width = 479
   ActiveControl = Panel1
   Caption = 'EditorForm'

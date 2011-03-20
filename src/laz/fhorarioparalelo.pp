@@ -1,4 +1,4 @@
-unit FHorPara;
+unit FHorarioParalelo;
 
 {$I ttg.inc}
 
@@ -6,9 +6,9 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
-  Graphics, Controls, Forms, Dialogs, Db, FCrsMMER, StdCtrls, Buttons, ExtCtrls,
-  Grids, Variants, FCrsMME1, DBCtrls, ZConnection, DBGrids, ZDataset, ComCtrls,
-  FSelPeIn, DSource, DMaster;
+  Graphics, Controls, Forms, Dialogs, Db, FCrossManytoManyEditorR, StdCtrls, Buttons, ExtCtrls,
+  Grids, Variants, FCrossManyToManyEditor1, DBCtrls, ZConnection, DBGrids, ZDataset, ComCtrls,
+  FSelPeriodo, DSource, DMaster;
 
 type
 
@@ -209,7 +209,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-  {$i FHorPara.lrs}
+  {$i fhorarioparalelo.lrs}
 {$ENDIF}
 
 end.

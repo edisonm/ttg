@@ -1,4 +1,4 @@
-unit SortAlgs;
+unit USortAlgs;
 
 {$I ttg.inc}
 
@@ -27,7 +27,7 @@ unit SortAlgs;
     Delphi 4.0 / Tiene caracteristicas propias del Delphi 4.0, que lo hacen
     dificil de hacer compatible con Delphi 3.0/2.0/1.0
 
-  Últimas revisiones:
+  Ãšltimas revisiones:
     20-04-1999
 
   Lista de cosas por hacer:

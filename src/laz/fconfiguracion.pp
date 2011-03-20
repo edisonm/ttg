@@ -1,4 +1,4 @@
-unit FConfig;
+unit FConfiguracion;
 
 {$I ttg.inc}
 
@@ -116,7 +116,7 @@ function ShowConfiguracionForm(AHelpContext: THelpContext): Integer;
 implementation
 
 uses
-  DSrcBase;
+  DSourceBase;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -290,7 +290,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i FConfig.lrs}
+  {$i fconfiguracion.lrs}
 {$ENDIF}
 
 end.

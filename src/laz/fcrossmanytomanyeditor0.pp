@@ -1,4 +1,4 @@
-unit FCrsMME0;
+unit FCrossManyToManyEditor0;
 
 {$I ttg.inc}
 
@@ -6,7 +6,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, FCrsMMEd, StdCtrls, Buttons, ExtCtrls, ComCtrls, Grids;
+  Controls, Forms, Dialogs, FCrossManyToManyEditor, StdCtrls, Buttons, ExtCtrls, ComCtrls, Grids;
 
 type
 
@@ -235,7 +235,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i FCrsMME0.lrs}
+  {$i fcrossmanytomanyeditor0.lrs}
 {$ENDIF}
 
 end.

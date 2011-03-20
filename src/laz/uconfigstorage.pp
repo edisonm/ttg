@@ -1,4 +1,4 @@
-unit UConfig;
+unit UConfigStorage;
 
 {$I ttg.inc}
 
@@ -45,7 +45,7 @@ type
 implementation
 
 uses
-  RelUtils;
+  URelUtils;
 
 constructor TConfigStorage.Create(AOwner: TComponent);
 begin

@@ -39,7 +39,7 @@ type
 
 implementation
 
-uses UEvolElitist, FProgres;
+uses UEvolElitist, FProgress;
 
 type
 

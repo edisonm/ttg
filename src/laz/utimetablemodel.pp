@@ -1,8 +1,8 @@
 { -*- mode: Delphi -*- }
 unit UTimeTableModel;
+
 {$I ttg.inc}
-{.$mode objfpc}{.$H+}
-{.$DEFINE USE_SQL}
+
 interface
 
 uses
@@ -240,7 +240,7 @@ type
 implementation
 
 uses
-  SysUtils, ZSysUtils, ZConnection, MTProcs, SortAlgs, DSource, UTTGCommon;
+  SysUtils, ZSysUtils, ZConnection, MTProcs, USortAlgs, DSource, UTTGCommon;
 
 constructor TTimeTableModel.Create(ACruceProfesorValor,
   ACruceMateriaValor, ACruceAulaTipoValor, AProfesorFraccionamientoValor,

@@ -1,4 +1,4 @@
-unit FProgres;
+unit FProgress;
 
 {$I ttg.inc}
 
@@ -277,7 +277,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i FProgres.lrs}
+  {$i fprogress.lrs}
 {$ENDIF}
 
 end.

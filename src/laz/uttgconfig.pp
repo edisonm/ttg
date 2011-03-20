@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit UTTGConfig;
 
 {$I ttg.inc}
@@ -5,7 +6,7 @@ unit UTTGConfig;
 interface
 
 uses
-  Classes, SysUtils, UConfig;
+  Classes, SysUtils, UConfigStorage;
 
 type
 

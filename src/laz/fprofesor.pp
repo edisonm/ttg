@@ -1,4 +1,4 @@
-unit FProfesr;
+unit FProfesor;
 
 {$I ttg.inc}
 
@@ -6,8 +6,8 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, Db, Grids, Buttons, DBCtrls, Variants, ExtCtrls, ComCtrls, Printers, ActnList,
-  FMasDeEd, FCrsMMER;
+  Controls, Forms, Dialogs, Db, Grids, Buttons, DBCtrls, Variants, ExtCtrls,
+  ComCtrls, Printers, ActnList, FMasterDetailEditor, FCrossManytoManyEditorR;
 
 type
 
@@ -41,7 +41,7 @@ var
 implementation
 
 uses
-  DMaster, FConfig, DSource, FEditor, UTTGCommon;
+  DMaster, FConfiguracion, DSource, FEditor, UTTGCommon;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -159,7 +159,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-  {$i FProfesr.lrs}
+  {$i fprofesor.lrs}
 {$ENDIF}
 
 end.

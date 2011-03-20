@@ -1,6 +1,8 @@
+{ -*- mode: Delphi -*- }
 unit FMain;
 
 {$I ttg.inc}
+
 {
 TODO:
   - HORARIO POR PARALELOS
@@ -9,13 +11,12 @@ TODO:
   - DISTRIBUTIVO POR PROFESORES
   - DISTRIBUTIVO POR MATERIAS
 }
-
 interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, MTProcs, SysUtils, Classes, Graphics,
   Forms, Dialogs, ExtCtrls, Menus, ComCtrls, Buttons, ActnList,
-  FSplash, FSingEdt, ZConnection, Controls, FCrsMME0, FEditor, UConfig
+  FSplash, FSingleEditor, ZConnection, Controls, FCrossManyToManyEditor0, FEditor, UConfigStorage
 {$IFNDEF FREEWARE}, UTimeTableModel, UMakeTT{$ENDIF};
 
 type
@@ -206,8 +207,8 @@ var
 implementation
 
 uses
-  FCrsMMEd, FCrsMME1, DMaster, FMateria, FProfesr, FHorario, FMasDeEd,
-  FConfig, FMsgView, FParalel, Printers, DSource, DSrcBase, UTTGCommon;
+  FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FMateria, FProfesor, FHorario, FMasterDetailEditor,
+  FConfiguracion, FMsgView, FParalelo, Printers, DSource, DSourceBase, UTTGCommon;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -838,7 +839,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-  {$i FMain.lrs}
+  {$i fmain.lrs}
 {$ENDIF}
 
 end.

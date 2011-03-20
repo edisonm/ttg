@@ -6,7 +6,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics, Controls,
-  Forms, Dialogs, DBCtrls, Buttons, ExtCtrls, ComCtrls, ActnList, UConfig;
+  Forms, Dialogs, DBCtrls, Buttons, ExtCtrls, ComCtrls, ActnList, UConfigStorage;
 
 type
   TEditorForm = class(TForm)
@@ -193,7 +193,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-  {$i FEditor.lrs}
+  {$i feditor.lrs}
 {$ENDIF}
 
 end.

@@ -5,10 +5,8 @@ unit UTTGDBUtils;
 interface
 
 uses
-  Classes, Forms, Db, FCrsMMEd, FCrsMMER, FMasDeEd, DSource, ActnList;
+  Classes, Forms, Db, DSource, ActnList;
 
-{procedure LoadHints(ACrossManyToManyEditorForm: TFCubicalEditor2; AColDataSet,
-  ARowDataSet, ALstDataSet, ARelDataSet: TTable); overload;}
 procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
   TDataSet; const AColFieldKey, AColFieldName, AColField, ARowFieldsKey,
   ARowFieldName, ARowFields, ARelFieldKey: string);
@@ -17,21 +15,6 @@ implementation
 
 uses
   SysUtils, DMaster;
-
-(*
-procedure LoadHints(ACrossManyToManyEditorForm: TFCubicalEditor2; AColDataSet,
-  ARowDataSet, ALstDataSet, ARelDataSet: TTable);
-begin
-  with MasterDataModule, ACrossManyToManyEditorForm do
-  begin
-    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
-      [GetDescription(ARelDataSet), GetDescription(AColDataSet),
-      GetDescription(ARowDataSet)]);
-    CheckListBox.Hint := Format('%s|%s', [ALstDataSet.Name,
-      GetDescription(ALstDataSet)]);
-  end;
-end;
-*)
 
 procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
   TDataSet; const AColFieldKey, AColFieldName, AColField, ARowFieldsKey,

@@ -1,4 +1,4 @@
-unit DSrcBase;
+unit DSourceBase;
 
 (*
   martes, 01 de marzo de 2011 20:57:51
@@ -444,7 +444,7 @@ begin
     Add('TbHorario.MomentoInicial=Momento Inicial');
     Add('TbHorario.MomentoFinal=Momento Final');
     Add('TbCurso.CodNivel=Nivel');
-    Add('TbCurso.CodEspecializacion=Especialización');
+    Add('TbCurso.CodEspecializacion=EspecializaciÃ³n');
     Add('TbParaleloId.CodParaleloId=Codigo');
     Add('TbParaleloId.NomParaleloId=Nombre');
     Add('TbMateriaProhibicionTipo.CodMateProhibicionTipo=Codigo');
@@ -511,7 +511,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i DSrcBase.lrs}
+  {$i dsourcebase.lrs}
 {$ENDIF}
 end.
 

@@ -49,14 +49,14 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="39">
+    <Units Count="38">
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ttg"/>
       </Unit0>
       <Unit1>
-        <Filename Value="FMain.pp"/>
+        <Filename Value="fmain.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MainForm"/>
         <HasResources Value="True"/>
@@ -64,7 +64,7 @@
         <UnitName Value="FMain"/>
       </Unit1>
       <Unit2>
-        <Filename Value="DMaster.pp"/>
+        <Filename Value="dmaster.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MasterDataModule"/>
         <HasResources Value="True"/>
@@ -82,52 +82,52 @@
         <UnitName Value="UEvolElitist"/>
       </Unit4>
       <Unit5>
-        <Filename Value="FProgres.pp"/>
+        <Filename Value="fprogress.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ProgressForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FProgres"/>
+        <UnitName Value="FProgress"/>
       </Unit5>
       <Unit6>
-        <Filename Value="SortAlgs.pp"/>
+        <Filename Value="usortalgs.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="SortAlgs"/>
+        <UnitName Value="USortAlgs"/>
       </Unit6>
       <Unit7>
-        <Filename Value="FCrsMMEd.pp"/>
+        <Filename Value="fcrossmanytomanyeditor.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="CrossManyToManyEditorForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FCrsMMEd"/>
+        <UnitName Value="FCrossManyToManyEditor"/>
       </Unit7>
       <Unit8>
-        <Filename Value="FCrsMME0.pp"/>
+        <Filename Value="fcrossmanytomanyeditor0.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="CrossManyToManyEditor0Form"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FCrsMME0"/>
+        <UnitName Value="FCrossManyToManyEditor0"/>
       </Unit8>
       <Unit9>
-        <Filename Value="FCrsMME1.pp"/>
+        <Filename Value="fcrossmanytomanyeditor1.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="CrossManyToManyEditor1Form"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FCrsMME1"/>
+        <UnitName Value="FCrossManyToManyEditor1"/>
       </Unit9>
       <Unit10>
-        <Filename Value="FCrsMMER.pp"/>
+        <Filename Value="fcrossmanytomanyeditorr.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="CrossManyToManyEditorRForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FCrsMMER"/>
+        <UnitName Value="FCrossManytoManyEditorR"/>
       </Unit10>
       <Unit11>
-        <Filename Value="FEditor.pp"/>
+        <Filename Value="feditor.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="EditorForm"/>
         <HasResources Value="True"/>
@@ -135,7 +135,7 @@
         <UnitName Value="FEditor"/>
       </Unit11>
       <Unit12>
-        <Filename Value="FMateria.pp"/>
+        <Filename Value="fmateria.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MateriaForm"/>
         <HasResources Value="True"/>
@@ -143,12 +143,12 @@
         <UnitName Value="FMateria"/>
       </Unit12>
       <Unit13>
-        <Filename Value="FProfesr.pp"/>
+        <Filename Value="fprofesor.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ProfesorForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FProfesr"/>
+        <UnitName Value="FProfesor"/>
       </Unit13>
       <Unit14>
         <Filename Value="uttgdbutils.pp"/>
@@ -156,167 +156,159 @@
         <UnitName Value="UTTGDBUtils"/>
       </Unit14>
       <Unit15>
-        <Filename Value="UConfig.pp"/>
+        <Filename Value="uconfigstorage.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="UConfig"/>
+        <UnitName Value="UConfigStorage"/>
       </Unit15>
       <Unit16>
-        <Filename Value="FConfig.pp"/>
+        <Filename Value="fconfiguracion.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ConfiguracionForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FConfig"/>
+        <UnitName Value="FConfiguracion"/>
       </Unit16>
       <Unit17>
-        <Filename Value="FMsgView.pp"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="MessageViewForm"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FMsgView"/>
-      </Unit17>
-      <Unit18>
-        <Filename Value="FHorPara.pp"/>
+        <Filename Value="fhorarioparalelo.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="HorarioParaleloForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FHorPara"/>
-      </Unit18>
-      <Unit19>
-        <Filename Value="FMasDeEd.pp"/>
+        <UnitName Value="FHorarioParalelo"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="fmasterdetaileditor.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MasterDetailEditorForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FMasDeEd"/>
-      </Unit19>
-      <Unit20>
-        <Filename Value="FHorAulT.pp"/>
+        <UnitName Value="FMasterDetailEditor"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="fhorarioaulatipo.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="HorarioAulaTipoForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FHorAulT"/>
-      </Unit20>
-      <Unit21>
-        <Filename Value="FSplash.pp"/>
+        <UnitName Value="FHorarioAulaTipo"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="fsplash.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SplashForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FSplash"/>
-      </Unit21>
-      <Unit22>
-        <Filename Value="FParalel.pp"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="fparalelo.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ParaleloForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FParalel"/>
-      </Unit22>
-      <Unit23>
-        <Filename Value="FSingEdt.pp"/>
+        <UnitName Value="FParalelo"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="fsingleeditor.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SingleEditorForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FSingEdt"/>
-      </Unit23>
-      <Unit24>
-        <Filename Value="FHorario.pp"/>
+        <UnitName Value="FSingleEditor"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="fhorario.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="HorarioForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FHorario"/>
-      </Unit24>
-      <Unit25>
+      </Unit23>
+      <Unit24>
         <Filename Value="uttgcommon.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGCommon"/>
-      </Unit25>
-      <Unit26>
-        <Filename Value="FHorProf.pp"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="fhorarioprofesor.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="HorarioProfesorForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FHorProf"/>
-      </Unit26>
-      <Unit27>
-        <Filename Value="DSrcBase.pp"/>
+        <UnitName Value="FHorarioProfesor"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="dsourcebase.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SourceBaseDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
-        <UnitName Value="DSrcBase"/>
+        <UnitName Value="DSourceBase"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="urelutils.pp"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="URelUtils"/>
       </Unit27>
       <Unit28>
-        <Filename Value="RelUtils.pp"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="RelUtils"/>
-      </Unit28>
-      <Unit29>
-        <Filename Value="DSource.pp"/>
+        <Filename Value="dsource.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SourceDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSource"/>
-      </Unit29>
-      <Unit30>
-        <Filename Value="FSelPeIn.pp"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="fselperiodo.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SelPeriodoForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FSelPeIn"/>
-      </Unit30>
-      <Unit31>
-        <Filename Value="DBase.pp"/>
+        <UnitName Value="FSelPeriodo"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="dbase.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="BaseDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DBase"/>
-      </Unit31>
-      <Unit32>
+      </Unit30>
+      <Unit31>
         <Filename Value="uttgconfig.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGConfig"/>
-      </Unit32>
-      <Unit33>
+      </Unit31>
+      <Unit32>
         <Filename Value="umodel.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UModel"/>
-      </Unit33>
-      <Unit34>
+      </Unit32>
+      <Unit33>
         <Filename Value="umakett.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UMakeTT"/>
-      </Unit34>
-      <Unit35>
+      </Unit33>
+      <Unit34>
         <Filename Value="udoubledownhill.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UDoubleDownHill"/>
-      </Unit35>
-      <Unit36>
+      </Unit34>
+      <Unit35>
         <Filename Value="usolver.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="USolver"/>
-      </Unit36>
-      <Unit37>
+      </Unit35>
+      <Unit36>
         <Filename Value="uttgbasics.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGBasics"/>
-      </Unit37>
-      <Unit38>
-        <Filename Value="about.pp"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="uabout.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="About"/>
-      </Unit38>
+        <UnitName Value="UAbout"/>
+      </Unit37>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit UTTGCommon;
 
 {$I ttg.inc}

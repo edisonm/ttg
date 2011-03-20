@@ -1,4 +1,4 @@
-unit FHorProf;
+unit FHorarioProfesor;
 
 {$I ttg.inc}
 
@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
   StdCtrls, Buttons, DBGrids, DbCtrls, ExtCtrls, Grids, Db, ComCtrls, Variants,
-  ZConnection, ZDataset, FConfig, FCrsMME0, FCrsMME1, FCrsMMEd, DMaster, DSource;
+  ZConnection, ZDataset, FConfiguracion, FCrossManyToManyEditor0, FCrossManyToManyEditor1, FCrossManyToManyEditor, DMaster, DSource;
 
 type
 
@@ -99,7 +99,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i FHorProf.lrs}
+  {$i fhorarioprofesor.lrs}
 {$ENDIF}
 
 end.

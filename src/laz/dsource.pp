@@ -6,7 +6,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, DSrcBase, DBase, Db, ZConnection;
+  Controls, Forms, Dialogs, DSourceBase, DBase, Db, ZConnection;
 
 type
 
@@ -38,7 +38,7 @@ implementation
 {$ENDIF}
 
 uses
-  Variants, FConfig, UTTGCommon;
+  Variants, FConfiguracion, UTTGCommon;
 
 procedure TSourceDataModule.TbDistributivoBeforePost(DataSet: TDataSet);
 var
@@ -477,7 +477,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i DSource.lrs}
+  {$i dsource.lrs}
 {$ENDIF}
 
 end.
