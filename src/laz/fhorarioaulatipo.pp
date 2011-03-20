@@ -1,4 +1,4 @@
-unit FHorAulT;
+unit FHorarioAulaTipo;
 
 {$I ttg.inc}
 
@@ -7,7 +7,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
   Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, Grids, Db,
-  FCrsMME0, FCrsMME1, FCrsMMEd, DBGrids, ComCtrls, DBCtrls, Variants,
+  FCrossManyToManyEditor0, FCrossManyToManyEditor1, FCrossManyToManyEditor, DBGrids, ComCtrls, DBCtrls, Variants,
   ZConnection, ZDataset;
 
 type
@@ -65,7 +65,7 @@ type
 
 implementation
 uses
-  DMaster, UTTGCommon, FConfig, DSource;
+  DMaster, UTTGCommon, FConfiguracion, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -162,7 +162,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i FHorAulT.lrs}
+  {$i fhorarioaulatipo.lrs}
 {$ENDIF}
 
 end.

@@ -5,9 +5,9 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, Db, FSingEdt, Grids, Buttons, FEditor, DBCtrls,
-  ExtCtrls, ComCtrls, ActnList, ZConnection, ZDataset, FCrsMMER, DMaster, FCrsMME1,
-  FConfig, DSource, FMain, FMasDeEd, FHorProf, FHorAulT, FHorPara;
+  Controls, Forms, Dialogs, Db, FSingleEditor, Grids, Buttons, FEditor, DBCtrls,
+  ExtCtrls, ComCtrls, ActnList, ZConnection, ZDataset, FCrossManytoManyEditorR, DMaster, FCrossManyToManyEditor1,
+  FConfiguracion, DSource, FMain, FMasterDetailEditor, FHorarioProfesor, FHorarioAulaTipo, FHorarioParalelo;
 
 type
 
@@ -459,7 +459,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-{$I FHorario.lrs}
+{$I fhorario.lrs}
 {$ENDIF}
 
 end.

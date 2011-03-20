@@ -1,11 +1,7 @@
-inherited MateriaForm: TMateriaForm
-  Left = 419
-  Top = 178
+inherited MasterDetailEditorForm: TMasterDetailEditorForm
   ActiveControl = DBNavigator
-  Caption = 'Materias'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
-  OnCreate = FormCreate
   OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
     Images = ImageList
@@ -15,27 +11,44 @@ inherited MateriaForm: TMateriaForm
     inherited BtnFind: TToolButton
       Action = ActFind
     end
-    object BtnMateriaProhibicion: TToolButton[2]
-      Left = 257
-      Top = 2
-      Action = ActMateriaProhibicion
-      ParentShowHint = False
-      ShowHint = True
-    end
-    inherited DBNavigator: TDBNavigator[3]
+    inherited DBNavigator: TDBNavigator
       DataSource = DataSource
       Hints.Strings = (      )
     end
   end
   inherited Panel1: TPanel
     inherited DBGrid: TDBGrid
+      Height = 154
       DataSource = DataSource
+      TabOrder = 1
       OnDblClick = DBGridDblClick
+    end
+    object Splitter1: TSplitter[1]
+      Cursor = crVSplit
+      Left = 1
+      Height = 3
+      Top = 155
+      Width = 477
+      Align = alBottom
+      ResizeAnchor = akBottom
+    end
+    object DBGridDetail: TDBGrid[2]
+      Left = 1
+      Height = 96
+      Top = 158
+      Width = 477
+      Align = alBottom
+      DataSource = DataSourceDetail
+      TabOrder = 0
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
     end
   end
   inherited ImageList: TImageList
+    left = 104
+    top = 72
     Bitmap = {
-      4C69030000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      4C69020000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000FF000000FF0000
       00FF000000FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00FF00
@@ -99,85 +112,25 @@ inherited MateriaForm: TMateriaForm
       80FF008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000808080FF0080
       8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000808000008080000080800000808000008080
-      0000808000008080000080800000808000008080000080800000808000008080
-      0000808000008080000080800000808000008080000080800000808000008080
-      0000808000008080000080800000808000008080000080800000808000008080
-      0000808000008080000080800000808000008080000080800000808000008080
-      0000808000008080000080800000808000008080000080800000808000008080
-      0000808000008080000080800000000000FF808080FF808080FF808080FFFF00
-      00FFFF0000FFFF0000FFFF0000FF808080FF808080FF000000FF808000008080
-      0000808000008080000080800000000000FFFFFFFFFFC0C0C0FFFFFFFFFFFFFF
-      FFFFC0C0C0FFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFF000000FF808000008080
-      0000808000008080000080800000000000FFFFFFFFFFC0C0C0FF0000FFFF0000
-      80FFFFFFFFFF000000FF000000FF000000FF000000FF000000FF000000FF0000
-      00FF808000008080000080800000000000FFC0C0C0FFC0C0C0FF000080FF0000
-      80FF000000FF808080FF000000FFC0C0C0FFC0C0C0FF808080FFC0C0C0FFC0C0
-      C0FF000000FF8080000080800000000000FFFFFFFFFFC0C0C0FFFFFFFFFF0000
-      00FF808080FFC0C0C0FFC0C0C0FF000000FFC0C0C0FFC0C0C0FF808080FFC0C0
-      C0FFC0C0C0FF000000FF80800000000000FFC0C0C0FFC0C0C0FF000000FF0000
-      00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-      00FF000000FF000000FF000000FF000000FFFFFFFFFFC0C0C0FFFFFFFFFF0000
-      00FFC0C0C0FFC0C0C0FFC0C0C0FF808080FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0
-      C0FFC0C0C0FF000000FF808080FF000000FF000000FF000000FF000000FF0000
-      00FFC0C0C0FF808080FF808080FF808080FFC0C0C0FFC0C0C0FF808080FF8080
-      80FFC0C0C0FF000000FF808080FF808000008080000080800000808000000000
-      00FFC0C0C0FFC0C0C0FFC0C0C0FF808080FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0
-      C0FFC0C0C0FF000000FF808080FF808000008080000080800000808000000000
-      00FFC0C0C0FFC0C0C0FFC0C0C0FF808080FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0
-      C0FFC0C0C0FF000000FF808080FF808000008080000080800000000000FF0000
-      00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-      00FF000000FF000000FF000000FF808000008080000080800000808000008080
-      80FF808080FF808080FF808080FF808080FF808080FF808080FF808080FF8080
-      80FF808080FF808080FF808080FF808000008080000080800000808000008080
-      0000808000008080000080800000808000008080000080800000808000008080
-      0000808000008080000080800000
+      8000008080000080800000808000
     }
   end
   inherited DataSource: TDatasource
-    DataSet = SourceDataModule.TbMateria
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
+    left = 280
+    top = 72
   end
   inherited ActionList: TActionList
     Images = ImageList
+    left = 104
+    top = 136
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
-    object ActMateriaProhibicion: TAction[2]
-      AutoCheck = True
-      Caption = 'Prohibiciones de materia'
-      Hint = 'Prohibiciones de materia|Ingresar el horario de prohibiciones de materia'
-      ImageIndex = 2
-      OnExecute = ActMateriaProhibicionExecute
-    end
   end
-  object QuMateriaProhibicion: TZQuery[6]
-    Connection = SourceDataModule.Database
-    SortedFields = 'CodMateria;CodDia;CodHora'
-    AutoCalcFields = False
-    SQL.Strings = (
-      'select * from MateriaProhibicion'
-      'where CodMateria=:CodMateria'
-    )
-    Params = <    
-      item
-        DataType = ftUnknown
-        Name = 'CodMateria'
-        ParamType = ptUnknown
-      end>
-    DataSource = SourceDataModule.DSMateria
-    MasterFields = 'CodMateria'
-    MasterSource = SourceDataModule.DSMateria
-    LinkedFields = 'CodMateria'
-    IndexFieldNames = 'CodMateria Asc;CodDia Asc;CodHora Asc'
-    left = 64
-    top = 152
-    ParamData = <    
-      item
-        DataType = ftUnknown
-        Name = 'CodMateria'
-        ParamType = ptUnknown
-      end>
+  object DataSourceDetail: TDatasource[6]
+    left = 280
+    top = 136
   end
 end

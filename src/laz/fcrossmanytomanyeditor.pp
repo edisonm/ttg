@@ -1,4 +1,5 @@
-unit FCrsMMEd;
+{ -*- mode: Delphi -*- }
+unit FCrossManyToManyEditor;
 
 {$I ttg.inc}
 
@@ -446,7 +447,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i FCrsMMEd.lrs}
+  {$i fcrossmanytomanyeditor.lrs}
 {$ENDIF}
 
 end.

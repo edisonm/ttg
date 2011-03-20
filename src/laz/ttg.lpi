@@ -5,6 +5,7 @@
     <General>
       <Flags>
         <SaveClosedFiles Value="False"/>
+        <AlwaysBuild Value="False"/>
       </Flags>
       <SessionStorage Value="None"/>
       <MainUnit Value="0"/>
@@ -339,6 +340,7 @@
       <ExecuteAfter>
         <ShowAllMessages Value="True"/>
       </ExecuteAfter>
+      <CreateMakefileOnBuild Value="True"/>
     </Other>
   </CompilerOptions>
 </CONFIG>

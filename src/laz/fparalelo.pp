@@ -1,14 +1,13 @@
-unit FParalel;
+unit FParalelo;
 
 {$I ttg.inc}
 
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
-  Graphics, Controls, Forms, Dialogs, Db, FSingEdt, ExtCtrls, DBCtrls,
-  ZConnection,
-  Grids, CheckLst, ComCtrls, ActnList, Variants;
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+  Controls, Forms, Dialogs, Db, FSingleEditor, ExtCtrls, DBCtrls, ZConnection, Grids,
+  CheckLst, ComCtrls, ActnList, Variants;
 
 type
 
@@ -45,7 +44,7 @@ var
 implementation
 
 uses
-  DMaster, FCrsMME1, DSource;
+  DMaster, FCrossManyToManyEditor1, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -184,7 +183,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i FParalel.lrs}
+  {$i fparalelo.lrs}
 {$ENDIF}
 
 end.

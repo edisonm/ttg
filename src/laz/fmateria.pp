@@ -6,8 +6,8 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, FSingEdt, Grids, Buttons, DBCtrls, ExtCtrls,
-  Printers, ComCtrls, ActnList, FCrsMMER, ZDataset, db;
+  Controls, Forms, Dialogs, FSingleEditor, Grids, Buttons, DBCtrls, ExtCtrls,
+  Printers, ComCtrls, ActnList, FCrossManytoManyEditorR, ZDataset, db;
 
 type
 
@@ -39,7 +39,7 @@ var
 
 implementation
 uses
-  DMaster, FCrsMMEd, FConfig, DSource;
+  DMaster, FCrossManyToManyEditor, FConfiguracion, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -124,7 +124,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-{$i FMateria.lrs}
+{$i fmateria.lrs}
 {$ENDIF}
 
 end.

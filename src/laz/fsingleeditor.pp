@@ -1,4 +1,5 @@
-unit FSingEdt;
+{ -*- mode: Delphi -*- }
+unit FSingleEditor;
 
 {$I ttg.inc}
 
@@ -7,7 +8,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
   Graphics, Controls, Forms, Dialogs, Db, StdCtrls, DBCtrls, Grids, DBGrids,
-  Buttons, ExtCtrls, ComCtrls, FEditor, ActnList, ZConnection, ZDataset, UConfig;
+  Buttons, ExtCtrls, ComCtrls, FEditor, ActnList, ZConnection, ZDataset, UConfigStorage;
 
 type
 
@@ -154,7 +155,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i FSingEdt.lrs}
+  {$i fsingleeditor.lrs}
 {$ENDIF}
 
 end.

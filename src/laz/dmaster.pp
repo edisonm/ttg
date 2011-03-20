@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit DMaster;
 
 {$I ttg.inc}
@@ -697,7 +698,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i DMaster.lrs}
+  {$i dmaster.lrs}
 {$ENDIF}
 
 end.

@@ -1,4 +1,4 @@
-unit FSelPeIn;
+unit FSelPeriodo;
 
 {$I ttg.inc}
 
@@ -58,7 +58,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-  {$I FSelPeIn.lrs}
+  {$I fselperiodo.lrs}
 {$ENDIF}
 
 end.

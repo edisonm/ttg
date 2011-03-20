@@ -30,7 +30,7 @@ type
 implementation
 
 uses
-  About;
+  UAbout;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -77,7 +77,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-  {$i FSplash.lrs}
+  {$i fsplash.lrs}
 {$ENDIF}
 
 end.

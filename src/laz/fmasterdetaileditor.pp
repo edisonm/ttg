@@ -1,4 +1,5 @@
-unit FMasDeEd;
+{ -*- mode: Delphi -*- }
+unit FMasterDetailEditor;
 
 {$I ttg.inc}
 
@@ -6,7 +7,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, FSingEdt, Db, Grids, DBGrids, Buttons, UConfig,
+  Controls, Forms, Dialogs, FSingleEditor, Db, Grids, DBGrids, Buttons, UConfigStorage,
   DBCtrls, ExtCtrls, ComCtrls, ActnList;
 
 type
@@ -120,7 +121,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i FMasDeEd.lrs}
+  {$i fmasterdetaileditor.lrs}
 {$ENDIF}
 
 end.

@@ -1,7 +1,5 @@
 inherited HorarioParaleloForm: THorarioParaleloForm
-  Left = 595
   Height = 284
-  Top = 0
   ActiveControl = DBNavigator
   ClientHeight = 284
   OnClose = FormClose
