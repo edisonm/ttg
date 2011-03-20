@@ -83,7 +83,6 @@ begin
     Result := Value;
     while Counter < ParaleloCant do
     begin
-      { Continuar := True; }
       Paralelo := RandomOrders[(Offset + Counter) mod ParaleloCant];
       Periodo1 := 0;
       PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
