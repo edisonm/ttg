@@ -1,8 +1,8 @@
 # -*- mode: Makefile; -*-
 
-ABOUT=About
+ABOUT=uabout
 
-UNITS=KerModel RelUtils HorColCm TTGUtls SortAlgs KerEvolE UConfig ttgcfg
+UNITS=utimetablemodel RelUtils uttgcommon uttgdbutils SortAlgs uevolelitist UConfig uttgconfig
 
 FORMS=FCrsMMEd FSplash FSingEdt FMasDeEd FHorario FMsgView FCrsMME0	\
 	FCrsMME1 FHorProf FProfesr FMain FEditor DMaster FHorPara	\
@@ -16,3 +16,4 @@ TTGMDBBASE=ttg.mdb
 APPVERSION=1.2.2
 APPNAME=Generador Automatico de Horarios
 BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ %Y)
+REVISION=$(shell svnversion)
