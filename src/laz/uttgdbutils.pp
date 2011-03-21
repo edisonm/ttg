@@ -6,7 +6,7 @@ unit UTTGDBUtils;
 interface
 
 uses
-  Classes, Forms, Db, DSource, ActnList, Dialogs, DBGrids, SysUtils, Variants;
+  Classes, Forms, Db, ActnList, Dialogs, DBGrids, SysUtils, Variants;
 
 function ComposicionADuracion(const s: string): Integer;
 procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
@@ -21,7 +21,7 @@ procedure SearchInDBGrid(DBGrid: TDBGrid);
 implementation
 
 uses
-  DMaster, UTTGBasics;
+  UTTGBasics;
 
 function ComposicionADuracion(const s: string): Integer;
 var
