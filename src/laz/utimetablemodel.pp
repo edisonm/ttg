@@ -191,7 +191,6 @@ type
   public
     procedure Update; override;
     procedure UpdateValue; override;
-    function GetImplementor: TObject;
     function DownHill(AParalelo: Integer; ExitOnFirstDown: Boolean;
                       Threshold: Integer): Integer; overload;
     function DownHill(ExitOnFirstDown, Forced: Boolean;
@@ -1423,11 +1422,6 @@ end;
 function TTimeTable.DownHill: Integer;
 begin
   Result := DownHill(False, False, 0);
-end;
-
-function TTimeTable.GetImplementor: TObject;
-begin
-  Result := Self;
 end;
 
 function TTimeTable.DownHillForced: Integer;

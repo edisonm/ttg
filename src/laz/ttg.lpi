@@ -343,7 +343,6 @@
       <ExecuteAfter>
         <ShowAllMessages Value="True"/>
       </ExecuteAfter>
-      <CreateMakefileOnBuild Value="True"/>
     </Other>
   </CompilerOptions>
 </CONFIG>
