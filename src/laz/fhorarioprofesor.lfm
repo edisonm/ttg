@@ -1,5 +1,5 @@
 inherited HorarioProfesorForm: THorarioProfesorForm
-  Left = 494
+  Left = 353
   Height = 443
   Width = 682
   ActiveControl = DBNavigator
@@ -39,7 +39,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
     end
     object cbVerProfesor: TComboBox[4]
       Left = 116
-      Height = 22
+      Height = 23
       Hint = 'Ver|Que ver en el horario del profesor'
       Top = 2
       Width = 193

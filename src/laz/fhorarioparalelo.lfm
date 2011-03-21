@@ -44,7 +44,7 @@ inherited HorarioParaleloForm: THorarioParaleloForm
     end
     object cbVerParalelo: TComboBox[5]
       Left = 116
-      Height = 22
+      Height = 23
       Hint = 'Ver|Seleccione el parametro a ver en el horario'
       Top = 2
       Width = 185

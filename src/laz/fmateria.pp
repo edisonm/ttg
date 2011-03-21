@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit FMateria;
 
 {$I ttg.inc}

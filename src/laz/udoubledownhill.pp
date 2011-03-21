@@ -1,4 +1,6 @@
+{ -*- mode: Delphi -*- }
 unit UDoubleDownHill;
+
 {$I ttg.inc}
 
 interface
@@ -69,7 +71,6 @@ var
 begin
   with TTimeTable(BestIndividual), TTimeTableModel(Model) do
   begin
-    Update;
     for Counter := 0 to ParaleloCant - 1 do
     begin
       RandomOrders[Counter] := Counter;

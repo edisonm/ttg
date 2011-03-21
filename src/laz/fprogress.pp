@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit FProgress;
 
 {$I ttg.inc}
@@ -7,7 +8,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
     Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls,
-    UTimeTableModel, USolver, UTTGCommon;
+    UTimeTableModel, USolver;
 
 type
 
@@ -84,6 +85,7 @@ type
     procedure bbtnCloseClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
+    FUpdateIndex: Integer;
     FInit: TDateTime;
     FCloseClick:Boolean;
     FCancelClick: Boolean;
@@ -124,7 +126,7 @@ type
 implementation
 
 uses
-  FMain, DSource, MTProcs;
+  FMain, DMaster, DSource, MTProcs, UTTGBasics;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -141,16 +143,18 @@ procedure TProgressForm.DoProgress(APosition, AMax: Integer; ASolver: TSolver);
 var
   t: TDateTime;
 begin
+  if MainForm.UpdateIndex <> FUpdateIndex then
+  begin
+    with MasterDataModule.ConfigStorage do
+      TTimeTableModel(ASolver.Model).Configure(CruceProfesor, CruceMateria,
+        CruceAulaTipo, ProfesorFraccionamiento, HoraHuecaDesubicada,
+        SesionCortada, MateriaNoDispersa);
+    //ASolver.Update;
+    ASolver.UpdateValue;
+    FUpdateIndex := MainForm.UpdateIndex;
+  end;
   with ASolver, TTimeTable(BestIndividual) do
   begin
-    if MainForm.Ajustar then
-    begin
-      with SourceDataModule do
-        TTimeTableModel(Model).Configure(CruceProfesor, CruceMateria,
-          CruceAulaTipo, ProfesorFraccionamiento, HoraHuecaDesubicada,
-          SesionCortada, MateriaNoDispersa);
-        MainForm.Ajustar := False;
-    end;
     t := Now - FInit;
     lblElapsedTime.Caption := FormatDateTime('hh:nn:ss ', t);
     PBProgress.Max := AMax;
@@ -184,7 +188,7 @@ begin
     lblMateriaNoDispersaValor.Caption := Format('%d ', [MateriaNoDispersaValor]);
     lblValorTotal.Caption := Format('%d ', [Value]);
   end;
-  with (ASolver) do
+  with ASolver do
   begin
     lblImports.Caption := Format('%d ', [NumImports]);
     lblExports.Caption := Format('%d ', [NumExports]);
@@ -248,6 +252,7 @@ end;
 procedure TProgressFormDrv.CreateForm;
 begin
   FProgressForm := TProgressForm.Create(Application);
+  FProgressForm.FUpdateIndex := MainForm.UpdateIndex;
 end;
 
 procedure TProgressFormDrv.DestroyForm;

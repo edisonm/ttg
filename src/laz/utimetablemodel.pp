@@ -190,11 +190,12 @@ type
     function GetElitistValues(Index: Integer): Integer; override;
   public
     procedure Update; override;
+    procedure UpdateValue; override;
     function GetImplementor: TObject;
     function DownHill(AParalelo: Integer; ExitOnFirstDown: Boolean;
                       Threshold: Integer): Integer; overload;
     function DownHill(ExitOnFirstDown, Forced: Boolean;
-                      Threshold: Integer): Integer; overload;
+                      Threshold: Integer): Integer; override; overload;
     function DownHill: Integer; override; overload;
     function DownHillForced: Integer; override;
     procedure Normalize(AParalelo: Integer; var APeriodo: Integer);
@@ -240,7 +241,7 @@ type
 implementation
 
 uses
-  SysUtils, ZSysUtils, ZConnection, MTProcs, USortAlgs, DSource, UTTGCommon;
+  SysUtils, ZSysUtils, ZConnection, MTProcs, USortAlgs, DSource, UTTGDBUtils;
 
 constructor TTimeTableModel.Create(ACruceProfesorValor,
   ACruceMateriaValor, ACruceAulaTipoValor, AProfesorFraccionamientoValor,
@@ -1778,7 +1779,7 @@ end;
 
 procedure TTimeTable.CheckIntegrity;
 var
-  Materia, Paralelo, Periodo, AulaTipo, Profesor, Distributivo, Counter,
+  Materia, Paralelo, Periodo, Profesor, Distributivo, Counter,
     Sesion: Integer;
   SesionFound: Boolean;
 begin
@@ -1800,9 +1801,7 @@ begin
               FParaleloIdACodParaleloId[FParaleloAParaleloId[Paralelo]],
               Materia,
               FMateriaACodMateria[Materia]]);
-          AulaTipo := FSesionAAulaTipo[Sesion];
           Distributivo := FParaleloMateriaADistributivo[Paralelo, Materia];
-          // FDistributivoAAulaTipo[Distributivo]
           SesionFound := False;
           for Counter := 0 to High(FDistributivoASesiones[Distributivo]) do
             SesionFound := SesionFound or (FDistributivoASesiones[Distributivo, Counter] = Sesion);
@@ -1882,8 +1881,13 @@ begin
     for Paralelo := 0 to FParaleloCant - 1 do
       DeltaValues(1, Paralelo, 0, FPeriodoCant - 1, ActualizarDiaProfesor);
     UpdateProfesorFraccionamiento(ActualizarDiaProfesor);
-    FValue := GetValue;
+    UpdateValue;
   end
+end;
+
+procedure TTimeTable.UpdateValue;
+begin
+  FValue := GetValue;
 end;
 
 destructor TTimeTableModel.Destroy;

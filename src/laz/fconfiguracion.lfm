@@ -1,7 +1,7 @@
 object ConfiguracionForm: TConfiguracionForm
-  Left = 893
+  Left = 874
   Height = 442
-  Top = 349
+  Top = 270
   Width = 490
   ActiveControl = pgcConfig
   BorderStyle = bsDialog
@@ -210,81 +210,81 @@ object ConfiguracionForm: TConfiguracionForm
       ImageIndex = 3
       object Label19: TLabel
         Left = 237
-        Height = 13
+        Height = 14
         Top = 13
-        Width = 41
+        Width = 47
         Caption = 'Semilla:'
         ParentColor = False
       end
       object Label29: TLabel
         Left = 237
-        Height = 13
+        Height = 14
         Top = 110
-        Width = 81
+        Width = 90
         Caption = 'Actualizar cada:'
         ParentColor = False
       end
       object Label36: TLabel
         Left = 8
-        Height = 13
+        Height = 14
         Top = 134
-        Width = 89
+        Width = 104
         Caption = 'Horarios iniciales:'
         ParentColor = False
       end
       object Label42: TLabel
         Left = 237
-        Height = 13
+        Height = 14
         Top = 134
-        Width = 97
+        Width = 113
         Caption = 'Dir. de intercambio:'
         ParentColor = False
       end
       object Label8: TLabel
         Left = 8
-        Height = 13
+        Height = 14
         Top = 36
-        Width = 53
+        Width = 62
         Caption = 'Individuos:'
         ParentColor = False
       end
       object Label13: TLabel
         Left = 237
-        Height = 13
+        Height = 14
         Top = 36
-        Width = 59
+        Width = 68
         Caption = 'Iteraciones:'
         ParentColor = False
       end
       object Label10: TLabel
         Left = 8
-        Height = 13
+        Height = 14
         Top = 61
-        Width = 61
+        Width = 72
         Caption = 'Prob. Cruce:'
         ParentColor = False
       end
       object Label11: TLabel
         Left = 8
-        Height = 13
+        Height = 14
         Top = 85
-        Width = 77
+        Width = 89
         Caption = 'Prob. Mutacion:'
         ParentColor = False
       end
       object Label12: TLabel
         Left = 237
-        Height = 13
+        Height = 14
         Top = 61
-        Width = 87
+        Width = 102
         Caption = 'Prob. Reparacion:'
         ParentColor = False
       end
       object Label43: TLabel
         Left = 237
-        Height = 13
+        Height = 14
         Top = 85
-        Width = 92
+        Width = 104
         Caption = 'Prob. Polinizacion:'
         ParentColor = False
       end
@@ -292,14 +292,14 @@ object ConfiguracionForm: TConfiguracionForm
         Left = 8
         Height = 20
         Top = 8
-        Width = 188
+        Width = 213
         Caption = 'Inicializar con la hora del sistema'
         OnClick = CBRandomizeClick
         TabOrder = 0
       end
       object speSeed: TSpinEdit
         Left = 345
-        Height = 22
+        Height = 23
         Top = 8
         Width = 112
         MaxValue = 2147483647
@@ -309,7 +309,7 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object speNumIteraciones: TSpinEdit
         Left = 345
-        Height = 22
+        Height = 23
         Top = 105
         Width = 112
         MaxValue = 2147483647
@@ -319,14 +319,14 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object edtHorarioIni: TEdit
         Left = 116
-        Height = 22
+        Height = 23
         Top = 129
         Width = 112
         TabOrder = 3
       end
       object dedSharedDirectory: TDirectoryEdit
         Left = 345
-        Height = 22
+        Height = 23
         Top = 129
         Width = 89
         Directory = '/tmp/'
@@ -337,7 +337,7 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object speTamPoblacion: TSpinEdit
         Left = 117
-        Height = 22
+        Height = 23
         Top = 32
         Width = 112
         MaxValue = 2147483647
@@ -347,7 +347,7 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object speNumMaxGeneracion: TSpinEdit
         Left = 345
-        Height = 22
+        Height = 23
         Top = 32
         Width = 112
         MaxValue = 2147483647
@@ -391,8 +391,8 @@ object ConfiguracionForm: TConfiguracionForm
         Left = 12
         Height = 20
         Top = 106
-        Width = 205
-        Caption = 'Aplicar descenso rápido doble (lento)'
+        Width = 194
+        Caption = 'Aplicar descenso doble (lento)'
         TabOrder = 11
       end
     end

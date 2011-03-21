@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit FCrossManyToManyEditor1;
 
 {$I ttg.inc}

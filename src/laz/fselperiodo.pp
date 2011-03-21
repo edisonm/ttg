@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit FSelPeriodo;
 
 {$I ttg.inc}

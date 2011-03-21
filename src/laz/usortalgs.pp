@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit USortAlgs;
 
 {$I ttg.inc}

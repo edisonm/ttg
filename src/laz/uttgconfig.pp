@@ -44,8 +44,8 @@ type
     procedure SetProfesorFraccionamiento(Value: Integer);
     function GetCruceAulaTipo: Integer;
     procedure SetCruceAulaTipo(Value: Integer);
-    function GetHoraHueca: Integer;
-    procedure SetHoraHueca(Value: Integer);
+    function GetHoraHuecaDesubicada: Integer;
+    procedure SetHoraHuecaDesubicada(Value: Integer);
     function GetSesionCortada: Integer;
     procedure SetSesionCortada(Value: Integer);
     function GetMateriaNoDispersa: Integer;
@@ -86,7 +86,7 @@ type
     property CruceMateria: Integer read GetCruceMateria write SetCruceMateria;
     property ProfesorFraccionamiento: Integer read GetProfesorFraccionamiento write SetProfesorFraccionamiento;
     property CruceAulaTipo: Integer read GetCruceAulaTipo write SetCruceAulaTipo;
-    property HoraHueca: Integer read GetHoraHueca write SetHoraHueca;
+    property HoraHuecaDesubicada: Integer read GetHoraHuecaDesubicada write SetHoraHuecaDesubicada;
     property SesionCortada: Integer read GetSesionCortada write SetSesionCortada;
     property MateriaNoDispersa: Integer read GetMateriaNoDispersa write SetMateriaNoDispersa;
     property PopulationSize: Integer read GetPopulationSize write SetPopulationSize;
@@ -252,12 +252,12 @@ begin
   Integers['CruceAulaTipo'] := Value;
 end;
 
-function TTTGConfig.GetHoraHueca: Integer;
+function TTTGConfig.GetHoraHuecaDesubicada: Integer;
 begin
   Result := Integers['HoraHueca'];
 end;
 
-procedure TTTGConfig.SetHoraHueca(Value: Integer);
+procedure TTTGConfig.SetHoraHuecaDesubicada(Value: Integer);
 begin
   Integers['HoraHueca'] := Value;
 end;
@@ -390,7 +390,7 @@ begin
   CruceMateria := 200;
   ProfesorFraccionamiento := 50;
   CruceAulaTipo := 200;
-  HoraHueca := 100;
+  HoraHuecaDesubicada := 100;
   SesionCortada := 150;
   MateriaNoDispersa := 5;
   PopulationSize := 10;

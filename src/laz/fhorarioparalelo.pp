@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit FHorarioParalelo;
 
 {$I ttg.inc}
@@ -76,7 +77,7 @@ type
 implementation
 
 uses
-  UTTGCommon;
+  UTTGDBUtils, UTTGBasics;
 
 {$IFNDEF FPC}
 {$R *.DFM}

@@ -1,4 +1,6 @@
+{ -*- mode: Delphi -*- }
 unit FHorario;
+
 {$I ttg.inc}
 
 interface
@@ -320,7 +322,6 @@ begin
   with SourceDataModule do
   begin
     ActMejorarHorario.Enabled := False;
-    MainForm.Ejecutando := True;
     try
       {$IFDEF THREADED}
       TImproveTimeTableThread.Create(CodHorarioFuente, CodHorarioDestino, False);
@@ -333,7 +334,6 @@ begin
       end;
       {$ENDIF}
     finally
-      MainForm.Ejecutando := False;
       ActMejorarHorario.Enabled := True;
       TbHorarioDetalle.Refresh;
     end;

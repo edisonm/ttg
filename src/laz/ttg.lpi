@@ -226,89 +226,92 @@
         <UnitName Value="FHorario"/>
       </Unit23>
       <Unit24>
-        <Filename Value="uttgcommon.pp"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="UTTGCommon"/>
-      </Unit24>
-      <Unit25>
         <Filename Value="fhorarioprofesor.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="HorarioProfesorForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FHorarioProfesor"/>
-      </Unit25>
-      <Unit26>
+      </Unit24>
+      <Unit25>
         <Filename Value="dsourcebase.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SourceBaseDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSourceBase"/>
-      </Unit26>
-      <Unit27>
+      </Unit25>
+      <Unit26>
         <Filename Value="urelutils.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="URelUtils"/>
-      </Unit27>
-      <Unit28>
+      </Unit26>
+      <Unit27>
         <Filename Value="dsource.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SourceDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSource"/>
-      </Unit28>
-      <Unit29>
+      </Unit27>
+      <Unit28>
         <Filename Value="fselperiodo.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SelPeriodoForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FSelPeriodo"/>
-      </Unit29>
-      <Unit30>
+      </Unit28>
+      <Unit29>
         <Filename Value="dbase.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="BaseDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DBase"/>
-      </Unit30>
-      <Unit31>
+      </Unit29>
+      <Unit30>
         <Filename Value="uttgconfig.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGConfig"/>
-      </Unit31>
-      <Unit32>
+      </Unit30>
+      <Unit31>
         <Filename Value="umodel.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UModel"/>
-      </Unit32>
-      <Unit33>
+      </Unit31>
+      <Unit32>
         <Filename Value="umakett.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UMakeTT"/>
-      </Unit33>
-      <Unit34>
+      </Unit32>
+      <Unit33>
         <Filename Value="udoubledownhill.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UDoubleDownHill"/>
-      </Unit34>
-      <Unit35>
+      </Unit33>
+      <Unit34>
         <Filename Value="usolver.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="USolver"/>
-      </Unit35>
-      <Unit36>
+      </Unit34>
+      <Unit35>
         <Filename Value="uttgbasics.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGBasics"/>
-      </Unit36>
-      <Unit37>
+      </Unit35>
+      <Unit36>
         <Filename Value="uabout.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UAbout"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="fmessageview.pp"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MessageViewForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="FMessageView"/>
       </Unit37>
     </Units>
   </ProjectOptions>

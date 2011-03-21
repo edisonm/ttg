@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit FConfiguracion;
 
 {$I ttg.inc}
@@ -180,7 +181,7 @@ begin
       creCruceMateria.Text := FloatToStr(CruceMateria);
       creCruceAulaTipo.Text := FloatToStr(CruceAulaTipo);
       creProfesorFraccionamiento.Text := FloatToStr(ProfesorFraccionamiento);
-      creHoraHueca.Text := FloatToStr(HoraHueca);
+      creHoraHueca.Text := FloatToStr(HoraHuecaDesubicada);
       creSesionCortada.Text := FloatToStr(SesionCortada);
       creMateriaNoDispersa.Text := FloatToStr(MateriaNoDispersa);
       speTamPoblacion.Value := PopulationSize;
@@ -214,7 +215,7 @@ begin
       CruceMateria := StrToInt(creCruceMateria.Text);
       CruceAulaTipo := StrToInt(creCruceAulaTipo.Text);
       ProfesorFraccionamiento := StrToInt(creProfesorFraccionamiento.Text);
-      HoraHueca := StrToInt(creHoraHueca.Text);
+      HoraHuecaDesubicada := StrToInt(creHoraHueca.Text);
       SesionCortada := StrToInt(creSesionCortada.Text);
       MateriaNoDispersa := StrToInt(creMateriaNoDispersa.Text);
       PopulationSize := speTamPoblacion.Value;

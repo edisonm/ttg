@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit DSource;
 
 {$I ttg.inc}
@@ -38,7 +39,7 @@ implementation
 {$ENDIF}
 
 uses
-  Variants, FConfiguracion, UTTGCommon;
+  Variants, FConfiguracion, UTTGDBUtils;
 
 procedure TSourceDataModule.TbDistributivoBeforePost(DataSet: TDataSet);
 var

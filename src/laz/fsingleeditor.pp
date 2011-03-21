@@ -51,7 +51,7 @@ TSingleEditorForm = class(TEditorForm)
 implementation
 
 uses
-  UTTGCommon, DMaster;
+  UTTGDBUtils, DMaster;
 
 {$IFNDEF FPC}
 {$R *.DFM}

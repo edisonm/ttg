@@ -1,4 +1,4 @@
-unit FMsgView;
+unit FMessageView;
 
 {$I ttg.inc}
 
@@ -37,7 +37,7 @@ implementation
 
 initialization
 {$IFDEF FPC}
-  {$i FMsgView.lrs}
+  {$i fmessageview.lrs}
 {$ENDIF}
 
 end.

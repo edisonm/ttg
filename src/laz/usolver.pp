@@ -1,4 +1,6 @@
+{ -*- mode: Delphi -*- }
 unit USolver;
+
 {$I ttg.inc}
 
 interface
@@ -31,6 +33,8 @@ type
     constructor Create(AModel: TModel; const ASharedDirectory: string;
       APollinationProb: Double);
     destructor Destroy; override;
+    procedure Update; virtual;
+    procedure UpdateValue; virtual;
     procedure Execute(RefreshInterval: Integer); virtual;
     procedure SaveSolutionToDatabase(ACodHorario: Integer;
       const AExtraInfo: string; AMomentoInicial, AMomentoFinal: TDateTime); virtual; abstract;
@@ -43,6 +47,7 @@ type
     property NumImports: Integer read FNumImports;
     property NumExports: Integer read FNumExports;
     property NumColision: Integer read FColision;
+    property Model: TModel read FModel;
   end;
 
 implementation
@@ -75,6 +80,16 @@ destructor TSolver.Destroy;
 begin
   FBestIndividual.Free;
   inherited Destroy;
+end;
+
+procedure TSolver.Update;
+begin
+  BestIndividual.Update;
+end;
+
+procedure TSolver.UpdateValue;
+begin
+  BestIndividual.UpdateValue;
 end;
 
 procedure TSolver.Execute(RefreshInterval: Integer);

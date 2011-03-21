@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit FProfesor;
 
 {$I ttg.inc}
@@ -41,7 +42,7 @@ var
 implementation
 
 uses
-  DMaster, FConfiguracion, DSource, FEditor, UTTGCommon;
+  DMaster, FConfiguracion, DSource, FEditor, UTTGDBUtils;
 
 {$IFNDEF FPC}
 {$R *.DFM}

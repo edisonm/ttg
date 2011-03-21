@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit UEvolElitist;
 
 {$I ttg.inc}
@@ -63,6 +64,8 @@ type
     function DownHillForced: Double;
     function DownHill: Double;
     procedure Repair;
+    procedure Update; override;
+    procedure UpdateValue; override;
     property PopulationSize: Integer read FPopulationSize write SetPopulationSize;
     property OnRecordBest: TNotifyEvent read FOnRecordBest write FOnRecordBest;
     property MaxIteration: Integer read FMaxIteration write FMaxIteration;
@@ -70,13 +73,12 @@ type
     property MutationProb: Double read FMutationProb write FMutationProb;
     property RepairProb: Double read FRepairProb write FRepairProb;
     property AverageValue: Double read GetAverageValue;
-    property Model: TModel read FModel;
   end;
 
 implementation
 
 uses
-  UTTGCommon;
+  UTTGDBUtils;
 
 procedure TEvolElitist.SetPopulationSize(APopulationSize: Integer);
 var
@@ -101,7 +103,7 @@ constructor TEvolElitist.Create(AModel: TModel; const ASharedDirectory: string;
   AMutationProb, ARepairProb: Double; const AHorarioIni: string);
 begin
   inherited Create(AModel, ASharedDirectory, APollinationProb);
-  PopulationSize := APopulationSize;
+  SetPopulationSize(APopulationSize);
   FMaxIteration := AMaxIteration;
   FCrossProb := ACrossProb;
   FMutationProb := AMutationProb;
@@ -151,9 +153,32 @@ begin
   begin
     if Random < FRepairProb then
     begin
-      FPopulation[Individual].DownHill;
+      with FPopulation[Individual] do
+        DownHill(False, False, 0);
     end;
   end;
+end;
+
+procedure TEvolElitist.Update;
+var
+  Individual, EIndivitual: Integer;
+begin
+  inherited Update;
+  for Individual := 0 to FPopulationSize - 1 do
+    FPopulation[Individual].Update;
+  for EIndivitual := 0 to Model.ElitistCount - 1 do
+    FElitists[EIndivitual].Update;
+end;
+
+procedure TEvolElitist.UpdateValue;
+var
+  Individual, EIndivitual: Integer;
+begin
+  inherited UpdateValue;
+  for Individual := 0 to FPopulationSize - 1 do
+    FPopulation[Individual].UpdateValue;
+  for EIndivitual := 0 to Model.ElitistCount - 1 do
+    FElitists[EIndivitual].UpdateValue
 end;
 
 

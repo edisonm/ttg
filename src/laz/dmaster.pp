@@ -74,7 +74,7 @@ var
 implementation
 
 uses
-  UTTGCommon, DSource;
+  UTTGBasics, UTTGDBUtils, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -148,7 +148,8 @@ var
           TbTmpProfesorCarga.Append;
           TbTmpProfesorCargaCodProfesor.Value :=
             TbDistributivo.FindField('CodProfesor').AsInteger;
-          TbTmpProfesorCargaCarga.Value := ComposicionADuracion(TbDistributivo.FindField('Composicion').AsString);
+          TbTmpProfesorCargaCarga.Value :=
+            ComposicionADuracion(TbDistributivo.FindField('Composicion').AsString);
           CodProfesor := CodProfesor1;
         end
         else

@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit FHorarioAulaTipo;
 
 {$I ttg.inc}
@@ -65,7 +66,7 @@ type
 
 implementation
 uses
-  DMaster, UTTGCommon, FConfiguracion, DSource;
+  DMaster, UTTGDBUtils, UTTGBasics, FConfiguracion, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}

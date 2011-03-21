@@ -23,9 +23,9 @@ object SplashForm: TSplashForm
   end
   object lblProductName: TLabel
     Left = 88
-    Height = 20
+    Height = 22
     Top = 24
-    Width = 13
+    Width = 16
     Caption = '...'
     Font.CharSet = ANSI_CHARSET
     Font.Height = -19
@@ -36,7 +36,7 @@ object SplashForm: TSplashForm
   end
   object lblProductVersion: TLabel
     Left = 168
-    Height = 14
+    Height = 18
     Top = 64
     Width = 13
     Caption = '...'
@@ -47,7 +47,7 @@ object SplashForm: TSplashForm
   end
   object lblCopyright: TLabel
     Left = 168
-    Height = 14
+    Height = 18
     Top = 88
     Width = 13
     Caption = '...'
@@ -69,7 +69,7 @@ object SplashForm: TSplashForm
   end
   object lblYearLabel: TLabel
     Left = 168
-    Height = 14
+    Height = 18
     Top = 112
     Width = 13
     Caption = '...'
@@ -80,9 +80,9 @@ object SplashForm: TSplashForm
   end
   object Label1: TLabel
     Left = 88
-    Height = 14
+    Height = 18
     Top = 64
-    Width = 43
+    Width = 48
     Caption = 'Version'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
@@ -91,9 +91,9 @@ object SplashForm: TSplashForm
   end
   object Label2: TLabel
     Left = 88
-    Height = 14
+    Height = 18
     Top = 88
-    Width = 59
+    Width = 67
     Caption = 'Ejecutable'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
@@ -102,9 +102,9 @@ object SplashForm: TSplashForm
   end
   object Label3: TLabel
     Left = 88
-    Height = 14
+    Height = 18
     Top = 112
-    Width = 41
+    Width = 46
     Caption = 'Edicion'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'

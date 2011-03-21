@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit UMakeTT;
 
 {$I ttg.inc}
@@ -20,8 +21,7 @@ type
     function ProcessTimeTable(ACodHorario: Integer): Boolean;
   public
   procedure Execute; override;
-  constructor Create(const AValidCodes: TDynamicIntegerArray;
-    CreateSuspended: Boolean);
+  constructor Create(const AValidCodes: TDynamicIntegerArray; CreateSuspended: Boolean);
   destructor Destroy; override;
   end;
 
@@ -173,7 +173,7 @@ begin
   FreeOnTerminate := True;
   with MasterDataModule.ConfigStorage do
     FTimeTableModel := TTimeTableModel.Create(CruceProfesor,
-      CruceMateria, CruceAulaTipo, ProfesorFraccionamiento, HoraHueca,
+      CruceMateria, CruceAulaTipo, ProfesorFraccionamiento, HoraHuecaDesubicada,
       SesionCortada, MateriaNoDispersa);
   SetLength(FValidCodes, Length(AValidCodes));
   // ProcThreadPool.MaxThreadCount := Length(AValidCodes);
@@ -279,7 +279,7 @@ begin
   FCodHorario := ACodHorario;
   with MasterDataModule.ConfigStorage do
     FTimeTableModel := TTimeTableModel.Create(CruceProfesor,
-      CruceMateria, CruceAulaTipo, ProfesorFraccionamiento, HoraHueca,
+      CruceMateria, CruceAulaTipo, ProfesorFraccionamiento, HoraHuecaDesubicada,
       SesionCortada, MateriaNoDispersa);
   inherited Create(CreateSuspended);
 end;

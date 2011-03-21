@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit FHorarioProfesor;
 
 {$I ttg.inc}
@@ -7,7 +8,8 @@ interface
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
   StdCtrls, Buttons, DBGrids, DbCtrls, ExtCtrls, Grids, Db, ComCtrls, Variants,
-  ZConnection, ZDataset, FConfiguracion, FCrossManyToManyEditor0, FCrossManyToManyEditor1, FCrossManyToManyEditor, DMaster, DSource;
+  ZConnection, ZDataset, FConfiguracion, FCrossManyToManyEditor0,
+  FCrossManyToManyEditor1, FCrossManyToManyEditor, DMaster, DSource;
 
 type
 
@@ -52,7 +54,7 @@ type
 
 implementation
 uses
-  UTTGCommon;
+  UTTGDBUtils, UTTGBasics;
 
 {$IFNDEF FPC}
 {$R *.DFM}

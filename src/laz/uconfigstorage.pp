@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit UConfigStorage;
 
 {$I ttg.inc}

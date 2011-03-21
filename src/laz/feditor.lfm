@@ -1,5 +1,5 @@
 object EditorForm: TEditorForm
-  Left = 595
+  Left = 455
   Height = 299
   Top = 0
   Width = 479

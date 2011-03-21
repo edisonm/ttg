@@ -1,5 +1,5 @@
 inherited ProfesorForm: TProfesorForm
-  Left = 536
+  Left = 395
   Height = 372
   Width = 598
   ActiveControl = DBNavigator

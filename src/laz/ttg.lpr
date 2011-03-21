@@ -37,7 +37,6 @@ uses
   FParalelo {ParaleloForm},
   FSingleEditor {SingleEditorForm},
   FHorario {HorarioForm},
-  UTTGCommon in 'uttgcommon.pp',
   FHorarioProfesor {HorarioProfesorForm},
   DSourceBase {SourceBaseDataModule: TDataModule},
   URelUtils,
@@ -45,7 +44,7 @@ uses
   DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   FSelPeriodo {SelPeriodoForm},
   DBase in 'DBase.pp', 
-UModel, UMakeTT, UDoubleDownHill, USolver, UTTGBasics, UAbout;
+UModel, UMakeTT, UDoubleDownHill, USolver, UTTGBasics, UAbout, FMessageView;
 
 {$IFNDEF FPC}
 {$R *.res}

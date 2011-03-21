@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit UTTGDBUtils;
 
 {$I ttg.inc}
@@ -5,16 +6,37 @@ unit UTTGDBUtils;
 interface
 
 uses
-  Classes, Forms, Db, DSource, ActnList;
+  Classes, Forms, Db, DSource, ActnList, Dialogs, DBGrids, SysUtils, Variants;
 
+function ComposicionADuracion(const s: string): Integer;
 procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
   TDataSet; const AColFieldKey, AColFieldName, AColField, ARowFieldsKey,
   ARowFieldName, ARowFields, ARelFieldKey: string);
+function DisplayLabels(ADataSet: TDataSet; const AFieldNames: string): string;
+procedure LoadStringsFromDataSet(Strings: TStrings; DataSet: TDataSet;
+  FieldNames: string; Title, Column: Boolean);
+procedure SearchInField(AField: TField; AValue: Variant);
+procedure SearchInDBGrid(DBGrid: TDBGrid);
 
 implementation
 
 uses
-  SysUtils, DMaster;
+  DMaster, UTTGBasics;
+
+function ComposicionADuracion(const s: string): Integer;
+var
+  VPos, d: Integer;
+begin
+  VPos := 1;
+  Result := 0;
+  while VPos <= Length(s) do
+  begin
+    d := StrToInt(ExtractString(s, VPos, '.'));
+    if d <= 0 then
+      raise Exception.Create('Composicion Erroea');
+    Inc(Result, d);
+  end;
+end;
 
 procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
   TDataSet; const AColFieldKey, AColFieldName, AColField, ARowFieldsKey,
@@ -125,6 +147,77 @@ begin
     AColDataSet.Active := bColDataSetActive;
     ARowDataSet.Active := bRowDataSetActive;
     ARelDataSet.Active := bRelDataSetActive;
+  end;
+end;
+
+function DisplayLabels(ADataSet: TDataSet; const AFieldNames: string): string;
+var
+  iPos: Integer;
+begin
+  iPos := 1;
+  Result := '';
+  while iPos <= Length(AFieldNames) do
+  begin
+    if Result <> '' then
+      Result := Result + ';';
+    Result := Result + ADataSet.FindField(ExtractFieldName(AFieldNames, iPos)).DisplayLabel;
+  end;
+end;
+
+procedure LoadStringsFromDataSet(Strings: TStrings; DataSet: TDataSet;
+  FieldNames: string; Title, Column: Boolean);
+var
+  k: Variant;
+  VMin, VMax: Integer;
+begin
+  with DataSet do begin
+    First;
+    VMin := Strings.Count;
+    if Title then Strings.Add(DisplayLabels(DataSet, FieldNames));
+    while not EOF do begin
+      k := FieldValues[FieldNames];
+      Strings.Add(VarArrToStr(k));
+      Next;
+    end;
+    First;
+    VMax := Strings.Count - 1;
+  end;
+  if Column then EqualSpaced(Strings, VMin, VMax, ';');
+end;
+
+procedure SearchInDBGrid(DBGrid: TDBGrid);
+var
+  s: string;
+begin
+  if Assigned(DBGrid.DataSource) and Assigned(DBGrid.SelectedField) then
+    with DBGrid.SelectedField do
+    begin
+      s := AsString;
+      if InputQuery('Buscar por ' + DisplayLabel, DisplayName, s) then
+        SearchInField(DBGrid.SelectedField, s);
+    end;
+end;
+
+procedure SearchInField(AField: TField; AValue: Variant);
+var
+  v: Variant;
+begin
+  if Assigned(AField) then
+  begin
+    with AField do
+    begin
+      if FieldKind = fkData then
+        DataSet.Locate(FieldName, AValue, [loCaseInsensitive, loPartialKey])
+      else if FieldKind = fkLookup then
+      begin
+        if LookupDataSet.Locate(LookupResultField, AValue, [loCaseInsensitive,
+          loPartialKey]) then
+        begin
+          v := LookupDataSet.FieldByName(LookupKeyFields).Value;
+          DataSet.Locate(KeyFields, v, []);
+        end;
+      end;
+    end;
   end;
 end;
 

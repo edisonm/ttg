@@ -164,7 +164,7 @@ type
     FMin: Integer;
     FMax: Integer;
     FStep: Integer;
-    FAjustar: Boolean;
+    FUpdateIndex: Integer;
     FLogStrings: TStrings;
     procedure SetProgress(Value: Integer);
     procedure SetMin(Value: Integer);
@@ -187,12 +187,10 @@ type
 
   public
     { Public declarations }
-    procedure AjustarPesos;
 {$IFNDEF FREEWARE}
     {procedure OnRegistrarMejor(Sender: TObject);}
-    property Ejecutando: Boolean read FEjecutando write FEjecutando;
     property Pasada: Integer read FPasada write FPasada;
-    property Ajustar: Boolean read FAjustar write FAjustar;
+    property UpdateIndex: Integer read FUpdateIndex write FUpdateIndex;
 {$ENDIF}
     property Progress: Integer read FProgress write SetProgress;
     property Min: Integer read FMin write SetMin;
@@ -207,8 +205,9 @@ var
 implementation
 
 uses
-  FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FMateria, FProfesor, FHorario, FMasterDetailEditor,
-  FConfiguracion, FMsgView, FParalelo, Printers, DSource, DSourceBase, UTTGCommon;
+  FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FMateria, FProfesor,
+  FHorario, FMasterDetailEditor, FConfiguracion, FParalelo, Printers, DSource,
+  DSourceBase, UTTGDBUtils, UTTGBasics, FMessageView;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -410,11 +409,6 @@ begin
   end;
 end;
 
-procedure TMainForm.AjustarPesos;
-begin
-  FAjustar := True;
-end;
-
 procedure TMainForm.ActElaborarHorarioExecute(Sender: TObject);
 {$IFNDEF FREEWARE}
 var
@@ -481,9 +475,7 @@ begin
   with SourceDataModule do
   begin
     ActElaborarHorario.Enabled := False;
-    FEjecutando := True;
     try
-      FAjustar := False;
       ProcessCodList(SCodHorarios);
       {$IFDEF THREADED}
       TMakeTimeTableThread.Create(ValidCodes, False);
@@ -499,7 +491,6 @@ begin
         MessageDlg(Format('Los siguientes horarios ya existian: %s',
           [VarArrToStr(WrongCodes)]), mtError, [mbOK], 0);
     finally
-      FEjecutando := False;
       ActElaborarHorario.Enabled := True;
       TbHorarioDetalle.Refresh;
     end;
@@ -671,6 +662,7 @@ begin
 {$ENDIF}
   FConfigFileName := GetCurrentDir + '/ttg.cfg';
   FConfigStorage := TConfigStorage.Create(Self);
+  FUpdateIndex := 0;
   try
     if FileExists(FConfigFileName) then
     begin
@@ -682,15 +674,11 @@ begin
     FProgress := 0;
     FRelProgress := 0;
     FStep := 1;
-    FAjustar := False;
     FLogStrings := TStringList.Create;
     {$IFDEF FREEWARE}
     ActElaborarHorario.Enabled := False;
     ActMejorarHorario.Enabled := False;
     Caption := Caption + ' ***Freeware***';
-    {$ENDIF}
-    {$IFNDEF FREEWARE}
-    FEjecutando := False;
     {$ENDIF}
 {    Protect1.DaysExpire := 60;}
 {    with FSProteccion do
@@ -719,8 +707,7 @@ begin
       MainForm.Caption := Application.Title + ' - ' +
         MasterDataModule.ConfigStorage.NomColegio;
       {$IFNDEF FREEWARE}
-      if FEjecutando then
-        AjustarPesos;
+      Inc(FUpdateIndex);
       {$ENDIF}
     end
     else

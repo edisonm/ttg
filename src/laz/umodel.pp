@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit UModel;
 
 {$I ttg.inc}
@@ -21,17 +22,20 @@ type
   public
     procedure ReportValues(AReport: TStrings); virtual; abstract;
     procedure Assign(AIndividual: TIndividual); virtual;
-    procedure Cross(AIndividual: TIndividual); virtual;
+    procedure Cross(AIndividual: TIndividual); virtual; abstract;
     procedure LoadFromDataModule(Index: Integer); virtual; abstract;
     procedure Mutate; virtual; abstract;
     procedure Update; virtual; abstract;
+    procedure UpdateValue; virtual; abstract;
     procedure MakeRandom; virtual; abstract;
-    function DownHill: Integer; virtual; abstract;
+    function DownHill: Integer; overload; virtual; abstract;
+    function DownHill(ExitOnFirstDown, Forced: Boolean;
+                      Threshold: Integer): Integer; overload; virtual; abstract;
     function DownHillForced: Integer; virtual; abstract;
     procedure SaveToStream(Stream: TStream); virtual; abstract;
     procedure LoadFromStream(Stream: TStream); virtual; abstract;
-    procedure SaveToDataModule(CodHorario: Integer;
-      MomentoInicial, MomentoFinal: TDateTime; Informe: TStrings); virtual; abstract;
+    procedure SaveToDataModule(CodHorario: Integer; MomentoInicial,
+      MomentoFinal: TDateTime; Informe: TStrings); virtual; abstract;
     property ElitistValues[Index: Integer]: Integer read GetElitistValues;
     property Model: TModel read FModel;
     property Value: Integer read FValue;
@@ -56,11 +60,6 @@ implementation
 procedure TIndividual.Assign(AIndividual: TIndividual);
 begin
   FValue := AIndividual.FValue;
-end;
-
-procedure TIndividual.Cross(AIndividual: TIndividual);
-begin
-
 end;
 
 end.

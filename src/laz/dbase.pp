@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit DBase;
 
 {$I ttg.inc}
