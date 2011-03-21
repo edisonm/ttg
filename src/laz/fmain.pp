@@ -156,7 +156,6 @@ type
     FEspecializacionForm: TSingleEditorForm;
     FPeriodoForm: TCrossManyToManyEditor0Form;
 {$IFNDEF FREEWARE}
-    FEjecutando: Boolean;
     FPasada: Integer;
 {$ENDIF}
     FProgress: Integer;
@@ -207,7 +206,7 @@ implementation
 uses
   FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FMateria, FProfesor,
   FHorario, FMasterDetailEditor, FConfiguracion, FParalelo, Printers, DSource,
-  DSourceBase, UTTGDBUtils, UTTGBasics, FMessageView;
+  DSourceBase, UTTGBasics, FMessageView;
 
 {$IFNDEF FPC}
 {$R *.DFM}

@@ -29,7 +29,7 @@ implementation
 function TDoubleDownHill.DoubleDownHill(RefreshInterval: Integer): Double;
 var
   Paralelo, Periodo1, Periodo2, Sesion, Duracion1, Duracion2, Counter,
-    Delta1{$IFDEF DEBUG}, Value2{$ENDIF}: Integer;
+    Delta1: Integer;
   Position, Offset, Max: Integer;
   RandomOrders: array [0 .. 4095] of Integer;
   RandomValues: array [0 .. 4095] of Integer;

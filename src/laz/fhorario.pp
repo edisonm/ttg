@@ -9,7 +9,7 @@ uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, Db, FSingleEditor, Grids, Buttons, FEditor, DBCtrls,
   ExtCtrls, ComCtrls, ActnList, ZConnection, ZDataset, FCrossManytoManyEditorR, DMaster, FCrossManyToManyEditor1,
-  FConfiguracion, DSource, FMain, FMasterDetailEditor, FHorarioProfesor, FHorarioAulaTipo, FHorarioParalelo;
+  FConfiguracion, DSource, FMasterDetailEditor, FHorarioProfesor, FHorarioAulaTipo, FHorarioParalelo;
 
 type
 

@@ -42,7 +42,7 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
     end
     object cbVerAulaTipo: TComboBox[4]
       Left = 93
-      Height = 23
+      Height = 22
       Hint = 'Ver|Que ver en el horario del tipo de aula'
       Top = 2
       Width = 193

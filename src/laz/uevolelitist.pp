@@ -77,9 +77,6 @@ type
 
 implementation
 
-uses
-  UTTGDBUtils;
-
 procedure TEvolElitist.SetPopulationSize(APopulationSize: Integer);
 var
   Individual: Integer;

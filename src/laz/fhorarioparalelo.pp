@@ -77,7 +77,7 @@ type
 implementation
 
 uses
-  UTTGDBUtils, UTTGBasics;
+  UTTGBasics;
 
 {$IFNDEF FPC}
 {$R *.DFM}
