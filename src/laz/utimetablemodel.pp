@@ -921,7 +921,7 @@ procedure TTimeTable.DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Integer);
 var
   MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Periodo0, Dia, DDia,
     Dia1, Dia2, Hora, Sesion, Profesor, AulaTipo, Duracion, Materia, Limit,
-    DeltaProfesorFraccionamiento: Integer;
+    DeltaProfesorFraccionamiento, MinPeriodo, MaxPeriodo: Integer;
   PeriodoASesion: TDynamicIntegerArray;
   MateriaAProfesor: TDynamicIntegerArray;
 begin
@@ -984,7 +984,8 @@ begin
               if Hora = FDiaProfesorMinHora[Dia, Profesor] then
               begin
                 Periodo0 := Periodo + 1;
-                while (Periodo0 <= FDiaHoraAPeriodo[Dia, FDiaProfesorMaxHora[Dia, Profesor]])
+                MaxPeriodo := FDiaHoraAPeriodo[Dia, FDiaProfesorMaxHora[Dia, Profesor]];
+                while (Periodo0 <= MaxPeriodo)
                     and (FProfesorPeriodoCant[Profesor, Periodo0] = 0) do
                   Inc(Periodo0);
                 DeltaProfesorFraccionamiento := Hora + 1 - FPeriodoAHora[Periodo0];
@@ -998,7 +999,8 @@ begin
               else // if (FDiaProfesorMaxPeriodo[Dia, Profesor] = Periodo) then
               begin
                 Periodo0 := Periodo - 1;
-                while (Periodo0 >= FDiaHoraAPeriodo[Dia, FDiaProfesorMinHora[Dia, Profesor]])
+                MinPeriodo := FDiaHoraAPeriodo[Dia, FDiaProfesorMinHora[Dia, Profesor]];
+                while (Periodo0 >= MinPeriodo)
                     and (FProfesorPeriodoCant[Profesor, Periodo0] = 0) do
                   Dec(Periodo0);
                 DeltaProfesorFraccionamiento := FPeriodoAHora[Periodo0] + 1 - Hora;

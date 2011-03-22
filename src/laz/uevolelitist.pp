@@ -135,9 +135,13 @@ procedure TEvolElitist.MakeRandom;
 var
   Individual: Integer;
 begin
-  for Individual := Length(FFixedIndividuals) to High(FPopulation) do
+  for Individual := Length(FFixedIndividuals) to FPopulationSize - 1 do
   begin
     FPopulation[Individual].MakeRandom;
+  end;
+  for Individual := 0 to Model.ElitistCount - 1 do
+  begin
+    FElitists[Individual].MakeRandom;
   end;
   BestIndividual.MakeRandom;
 end;
@@ -182,7 +186,7 @@ end;
 procedure TEvolElitist.Elitist;
 var
   ElitistValue: Double;
-  Individual, EIndividual, Best, Worst: Integer;
+  Individual, EIndividual, Best, Worst, Number: Integer;
   ElitistBests: TDynamicIntegerArray;
 begin
   Best := 0;
@@ -191,21 +195,21 @@ begin
   for EIndividual := 0 to Model.ElitistCount - 1 do
     ElitistBests[EIndividual] := 0;
   for Individual := 1 to FPopulationSize - 1 do
-  with FPopulation[Individual] do
-  begin
-    for EIndividual := 0 to Model.ElitistCount - 1 do
+    with FPopulation[Individual] do
     begin
-      ElitistValue := FPopulation[ElitistBests[EIndividual]].ElitistValues[EIndividual];
-      if (ElitistValues[EIndividual] < ElitistValue) or
-        ((ElitistValues[EIndividual] = ElitistValue) and
-         (Value <= FPopulation[ElitistBests[EIndividual]].Value)) then
-        ElitistBests[EIndividual] := Individual;
+      for EIndividual := 0 to Model.ElitistCount - 1 do
+      begin
+        ElitistValue := FPopulation[ElitistBests[EIndividual]].ElitistValues[EIndividual];
+        if (ElitistValues[EIndividual] < ElitistValue) or
+          ((ElitistValues[EIndividual] = ElitistValue) and
+           (Value <= FPopulation[ElitistBests[EIndividual]].Value)) then
+          ElitistBests[EIndividual] := Individual;
+      end;
+      if Value <= FPopulation[Best].Value then
+        Best := Individual;
+      if Value >= FPopulation[Worst].Value then
+        Worst := Individual;
     end;
-    if Value <= FPopulation[Best].Value then
-      Best := Individual;
-    if Value >= FPopulation[Worst].Value then
-      Worst := Individual;
-  end;
   for EIndividual := 0 to Model.ElitistCount - 1 do
     if FPopulation[ElitistBests[EIndividual]].Value < FElitists[EIndividual].Value then
       FElitists[EIndividual].Assign(FPopulation[ElitistBests[EIndividual]]);
@@ -214,6 +218,14 @@ begin
     BestIndividual.Assign(FPopulation[Best]);
     if Assigned(OnRecordBest) then
       OnRecordBest(Self);
+  end
+  else if FPopulation[Best].Value > BestIndividual.Value then
+  begin
+    Number := Random(Model.ElitistCount + 1);
+    if Number >= Model.ElitistCount then
+      FPopulation[Worst].Assign(BestIndividual)
+    else
+      FPopulation[Worst].Assign(FElitists[Random(Model.ElitistCount)]);
   end;
 end;
 
@@ -236,6 +248,7 @@ begin
   SetLength(Aptitudes, FPopulationSize);
   SetLength(Cummulated, FPopulationSize);
   SetLength(Selecteds, FPopulationSize);
+  Offset := MaxValue;
   //Offset := (MaxValue - MinValue) * FPopulationSize + 1;
   Offset := 1;
   for Individual := 0 to High(FPopulation) do
