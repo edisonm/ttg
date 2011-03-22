@@ -31,8 +31,6 @@ var
   Paralelo, Periodo1, Periodo2, Sesion, Duracion1, Duracion2, Counter,
     Delta1: Integer;
   Position, Offset, Max: Integer;
-  RandomOrders: array [0 .. 4095] of Integer;
-  RandomValues: array [0 .. 4095] of Integer;
   PeriodoASesion: TDynamicIntegerArray;
   Stop, Down: Boolean;
   { Continuar: Boolean; }
@@ -68,23 +66,31 @@ var
       end;
     end;
   end;
+var
+  Paralelos: TDynamicIntegerArray;
+  RandomValues: TDynamicIntegerArray;
+  Index: Integer;
 begin
   with TTimeTable(BestIndividual), TTimeTableModel(Model) do
   begin
+    SetLength(Paralelos, ParaleloCant);
+    SetLength(RandomValues, ParaleloCant);
     for Counter := 0 to ParaleloCant - 1 do
     begin
-      RandomOrders[Counter] := Counter;
+      Paralelos[Counter] := Counter;
       RandomValues[Counter] := Random($7FFFFFFF);
     end;
-    SortInteger(RandomValues, RandomOrders, 0, ParaleloCant - 1);
+    SortInteger(RandomValues, Paralelos, 0, ParaleloCant - 1);
     Counter := 0;
     Offset := 0;
+    Index := 0;
     Position := 0;
     Max := SesionCantidadDoble;
     Result := Value;
     while Counter < ParaleloCant do
     begin
-      Paralelo := RandomOrders[(Offset + Counter) mod ParaleloCant];
+      Index := (Offset + Counter) mod ParaleloCant;
+      Paralelo := Paralelos[Index];
       Periodo1 := 0;
       PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
       Down := False;
@@ -115,7 +121,7 @@ begin
           end
           else
           begin
-            if (DownHill(True, False, -Delta1) < 0) then
+            if (DownHill(Paralelos, Index, True, False, -Delta1) < 0) then
               SafeIncPeriodo
             else
             begin

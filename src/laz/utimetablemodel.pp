@@ -40,8 +40,7 @@ type
   private
     FCruceProfesorValor, FCruceMateriaValor, FCruceAulaTipoValor,
       FHoraHuecaDesubicadaValor, FSesionCortadaValor,
-      FProfesorFraccionamientoValor, FMateriaNoDispersaValor,
-      FMaxProfesorProhibicionTipoValor: Integer;
+      FProfesorFraccionamientoValor, FMateriaNoDispersaValor: Integer;
     FPeriodoADia, FPeriodoAHora, FDiaAMaxPeriodo, FSesionADistributivo,
       FSesionAMateria, FSesionAAulaTipo, FAulaTipoACantidad,
       FMateriaProhibicionAMateria, FMateriaProhibicionAPeriodo,
@@ -61,8 +60,7 @@ type
     FMateriaProhibicionAValor, FProfesorProhibicionAValor: TDynamicIntegerArray;
     FMateriaCant, FMateriaProhibicionTipoCant, FProfesorProhibicionTipoCant,
       FParaleloCant, FDiaCant, FHoraCant, FPeriodoCant, FProfesorCant, FCursoCant,
-      FNivelCant, FEspecializacionCant, FAulaTipoCant, FDistributivoCant,
-      FMaxProfesorProhibicionTipo: Integer;
+      FNivelCant, FEspecializacionCant, FAulaTipoCant, FDistributivoCant: Integer;
     FParaleloIdACodParaleloId, FMateriaACodMateria, FDiaACodDia, FHoraACodHora,
       FNivelACodNivel,
       FEspecializacionACodEspecializacion: TDynamicIntegerArray;
@@ -147,8 +145,8 @@ type
     FParaleloDiaMateriaAcum: TDynamicIntegerArrayArrayArray;
     FMateriaProhibicionTipoAMateriaCant: TDynamicIntegerArray;
     FProfesorProhibicionTipoAProfesorCant: TDynamicIntegerArray;
-    FDiaProfesorMinPeriodo: TDynamicIntegerArrayArray;
-    FDiaProfesorMaxPeriodo: TDynamicIntegerArrayArray;
+    FDiaProfesorMinHora: TDynamicIntegerArrayArray;
+    FDiaProfesorMaxHora: TDynamicIntegerArrayArray;
     FDiaProfesorHoraHuecaCant: TDynamicIntegerArrayArray;
     FCruceProfesor: Integer;
     FCruceMateria: Integer;
@@ -189,6 +187,8 @@ type
   public
     procedure Update; override;
     procedure UpdateValue; override;
+    function DownHill(Paralelos: TDynamicIntegerArray; Offset: Integer;
+      ExitOnFirstDown, Forced: Boolean; Threshold: Integer): Integer; overload;
     function DownHill(AParalelo: Integer; ExitOnFirstDown: Boolean;
                       Threshold: Integer): Integer; overload;
     function DownHill(ExitOnFirstDown, Forced: Boolean;
@@ -244,7 +244,6 @@ constructor TTimeTableModel.Create(ACruceProfesorValor,
   ACruceMateriaValor, ACruceAulaTipoValor, AProfesorFraccionamientoValor,
   AHoraHuecaDesubicadaValor, ASesionCortadaValor, AMateriaNoDispersaValor: Integer);
 var
-  iMax: Integer;
   FMinCodProfesor, FMinCodMateria, FMinCodAulaTipo, FMinCodProfProhibicionTipo,
     FMinCodMateProhibicionTipo: Integer;
   FDistributivoAMateria, FCodMateriaAMateria, FCodProfesorAProfesor,
@@ -257,31 +256,31 @@ var
     out FCodLstALst: TDynamicIntegerArray;
     out FLstACodLst: TDynamicIntegerArray);
   var
-    VField: TField;
-    I, v: Integer;
+    Field: TField;
+    Index, Value, MaxCodLst: Integer;
   begin
     with ATable do
     begin
       First;
-      VField := FindField(ALstName);
-      FMinCodLst := VField.AsInteger;
-      iMax := VField.AsInteger;
+      Field := FindField(ALstName);
+      FMinCodLst := Field.AsInteger;
+      MaxCodLst := Field.AsInteger;
       SetLength(FLstACodLst, RecordCount);
-      for I := 0 to RecordCount - 1 do
+      for Index := 0 to RecordCount - 1 do
       begin
-        v := VField.AsInteger;
-        if iMax < v then
-          iMax := v;
-        if FMinCodLst > v then
-          FMinCodLst := v;
-        FLstACodLst[I] := v;
+        Value := Field.AsInteger;
+        if MaxCodLst < Value then
+          MaxCodLst := Value;
+        if FMinCodLst > Value then
+          FMinCodLst := Value;
+        FLstACodLst[Index] := Value;
         Next;
       end;
       First;
-      SetLength(FCodLstALst, iMax - FMinCodLst + 1);
-      for I := 0 to RecordCount - 1 do
+      SetLength(FCodLstALst, MaxCodLst - FMinCodLst + 1);
+      for Index := 0 to RecordCount - 1 do
       begin
-        FCodLstALst[VField.AsInteger - FMinCodLst] := I;
+        FCodLstALst[Field.AsInteger - FMinCodLst] := Index;
         Next;
       end;
       First;
@@ -435,17 +434,9 @@ var
       First;
       VFieldValor := FindField('ValProfProhibicionTipo');
       SetLength(FProfesorProhibicionTipoAValor, RecordCount);
-      FMaxProfesorProhibicionTipo := -1;
-      FMaxProfesorProhibicionTipoValor := -1;
       for ProfesorProhibicionTipo := 0 to RecordCount - 1 do
       begin
         FProfesorProhibicionTipoAValor[ProfesorProhibicionTipo] := VFieldValor.AsInteger;
-        if FMaxProfesorProhibicionTipoValor < FProfesorProhibicionTipoAValor[ProfesorProhibicionTipo]
-          then
-        begin
-          FMaxProfesorProhibicionTipoValor := FProfesorProhibicionTipoAValor[ProfesorProhibicionTipo];
-          FMaxProfesorProhibicionTipo := ProfesorProhibicionTipo;
-        end;
         Next;
       end;
       First;
@@ -866,8 +857,8 @@ begin
       SetLength(FAulaTipoPeriodoCant, FAulaTipoCant, FPeriodoCant);
       SetLength(FParaleloDiaMateriaCant, FParaleloCant, FDiaCant, FMateriaCant);
       SetLength(FParaleloDiaMateriaAcum, FParaleloCant, FDiaCant, FMateriaCant);
-      SetLength(FDiaProfesorMinPeriodo, FDiaCant, FProfesorCant);
-      SetLength(FDiaProfesorMaxPeriodo, FDiaCant, FProfesorCant);
+      SetLength(FDiaProfesorMinHora, FDiaCant, FProfesorCant);
+      SetLength(FDiaProfesorMaxHora, FDiaCant, FProfesorCant);
       SetLength(FDiaProfesorHoraHuecaCant, FDiaCant, FProfesorCant);
       SetLength(FMateriaProhibicionTipoAMateriaCant, FMateriaProhibicionTipoCant);
       SetLength(FProfesorProhibicionTipoAProfesorCant, FProfesorProhibicionTipoCant);
@@ -929,7 +920,7 @@ end;
 procedure TTimeTable.DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Integer);
 var
   MateriaProhibicionTipo, ProfesorProhibicionTipo, Periodo, Periodo0, Dia, DDia,
-    Dia1, Dia2, Sesion, Profesor, AulaTipo, Duracion, Materia, Limit,
+    Dia1, Dia2, Hora, Sesion, Profesor, AulaTipo, Duracion, Materia, Limit,
     DeltaProfesorFraccionamiento: Integer;
   PeriodoASesion: TDynamicIntegerArray;
   MateriaAProfesor: TDynamicIntegerArray;
@@ -952,29 +943,30 @@ begin
         Profesor := MateriaAProfesor[Materia];
         AulaTipo := FSesionAAulaTipo[Sesion];
         Dia := FPeriodoADia[Periodo];
+        Hora := FPeriodoAHora[Periodo];
         if FProfesorPeriodoCant[Profesor, Periodo] = Limit then
         begin
           if Delta > 0 then
           begin
-            if FDiaProfesorMinPeriodo[Dia, Profesor] > FDiaProfesorMaxPeriodo[Dia, Profesor] then
+            if FDiaProfesorMinHora[Dia, Profesor] > FDiaProfesorMaxHora[Dia, Profesor] then
             begin
-              FDiaProfesorMinPeriodo[Dia, Profesor] := Periodo;
-              FDiaProfesorMaxPeriodo[Dia, Profesor] := Periodo;
+              FDiaProfesorMinHora[Dia, Profesor] := Hora;
+              FDiaProfesorMaxHora[Dia, Profesor] := Hora;
             end
             else
             begin
-              if Periodo < FDiaProfesorMinPeriodo[Dia, Profesor] then
+              if Hora < FDiaProfesorMinHora[Dia, Profesor] then
               begin
-                DeltaProfesorFraccionamiento := FDiaProfesorMinPeriodo[Dia, Profesor] - Periodo - 1;
-                FDiaProfesorMinPeriodo[Dia, Profesor] := Periodo
+                DeltaProfesorFraccionamiento := FDiaProfesorMinHora[Dia, Profesor] - Hora - 1;
+                FDiaProfesorMinHora[Dia, Profesor] := Hora;
               end
-              else if (FDiaProfesorMinPeriodo[Dia, Profesor] <= Periodo)
-                  and (Periodo <= FDiaProfesorMaxPeriodo[Dia, Profesor]) then
+              else if (FDiaProfesorMinHora[Dia, Profesor] <= Hora)
+                  and (Hora <= FDiaProfesorMaxHora[Dia, Profesor]) then
                 DeltaProfesorFraccionamiento := -1
               else // if FDiaProfesorMaxPeriodo[Dia, Profesor] < Periodo then
               begin
-                DeltaProfesorFraccionamiento := Periodo - FDiaProfesorMaxPeriodo[Dia, Profesor] - 1;
-                FDiaProfesorMaxPeriodo[Dia, Profesor] := Periodo;
+                DeltaProfesorFraccionamiento := Hora - FDiaProfesorMaxHora[Dia, Profesor] - 1;
+                FDiaProfesorMaxHora[Dia, Profesor] := Hora;
               end;
               Inc(FDiaProfesorHoraHuecaCant[Dia, Profesor], DeltaProfesorFraccionamiento);
               Inc(FProfesorFraccionamiento, DeltaProfesorFraccionamiento);
@@ -982,35 +974,35 @@ begin
           end
           else if Delta < 0 then
           begin
-            if FDiaProfesorMinPeriodo[Dia, Profesor] = FDiaProfesorMaxPeriodo[Dia, Profesor] then
+            if FDiaProfesorMinHora[Dia, Profesor] = FDiaProfesorMaxHora[Dia, Profesor] then
             begin
-              FDiaProfesorMinPeriodo[Dia, Profesor] := 1;
-              FDiaProfesorMaxPeriodo[Dia, Profesor] := 0;
+              FDiaProfesorMinHora[Dia, Profesor] := 1;
+              FDiaProfesorMaxHora[Dia, Profesor] := 0;
             end
             else
             begin
-              if Periodo = FDiaProfesorMinPeriodo[Dia, Profesor] then
+              if Hora = FDiaProfesorMinHora[Dia, Profesor] then
               begin
                 Periodo0 := Periodo + 1;
-                while (Periodo0 <= FDiaProfesorMaxPeriodo[Dia, Profesor])
+                while (Periodo0 <= FDiaHoraAPeriodo[Dia, FDiaProfesorMaxHora[Dia, Profesor]])
                     and (FProfesorPeriodoCant[Profesor, Periodo0] = 0) do
                   Inc(Periodo0);
-                DeltaProfesorFraccionamiento := Periodo + 1 - Periodo0;
-                FDiaProfesorMinPeriodo[Dia, Profesor] := Periodo0;
+                DeltaProfesorFraccionamiento := Hora + 1 - FPeriodoAHora[Periodo0];
+                FDiaProfesorMinHora[Dia, Profesor] := FPeriodoAHora[Periodo0];
               end
-              else if (FDiaProfesorMinPeriodo[Dia, Profesor] < Periodo)
-                  and (Periodo < FDiaProfesorMaxPeriodo[Dia, Profesor]) then
+              else if (FDiaProfesorMinHora[Dia, Profesor] < Hora)
+                  and (Hora < FDiaProfesorMaxHora[Dia, Profesor]) then
               begin
                 DeltaProfesorFraccionamiento := 1;
               end
               else // if (FDiaProfesorMaxPeriodo[Dia, Profesor] = Periodo) then
               begin
                 Periodo0 := Periodo - 1;
-                while (Periodo0 >= FDiaProfesorMinPeriodo[Dia, Profesor])
+                while (Periodo0 >= FDiaHoraAPeriodo[Dia, FDiaProfesorMinHora[Dia, Profesor]])
                     and (FProfesorPeriodoCant[Profesor, Periodo0] = 0) do
                   Dec(Periodo0);
-                DeltaProfesorFraccionamiento := Periodo0 + 1 - Periodo;
-                FDiaProfesorMaxPeriodo[Dia, Profesor] := Periodo0;
+                DeltaProfesorFraccionamiento := FPeriodoAHora[Periodo0] + 1 - Hora;
+                FDiaProfesorMaxHora[Dia, Profesor] := FPeriodoAHora[Periodo0];
               end;
               Inc(FDiaProfesorHoraHuecaCant[Dia, Profesor], DeltaProfesorFraccionamiento);
               Inc(FProfesorFraccionamiento, DeltaProfesorFraccionamiento);
@@ -1409,26 +1401,38 @@ end;
 function TTimeTable.DownHill(ExitOnFirstDown, Forced: Boolean;
   Threshold: Integer): Integer;
 var
-  Counter, Offset, Paralelo: Integer;
-  Delta: Integer;
-  RandomOrders: array [0 .. 4095] of Integer;
-  RandomValues: array [0 .. 4095] of Integer;
+  Counter: Integer;
+  Paralelos: TDynamicIntegerArray;
+  RandomValues: TDynamicIntegerArray;
 begin
   with TTimeTableModel(Model) do
   begin
+    SetLength(Paralelos, FParaleloCant);
+    SetLength(RandomValues, FParaleloCant);
     for Counter := 0 to FParaleloCant - 1 do
     begin
-      RandomOrders[Counter] := Counter;
+      Paralelos[Counter] := Counter;
       RandomValues[Counter] := Random($7FFFFFFF);
     end;
-    SortInteger(RandomValues, RandomOrders, 0, FParaleloCant - 1);
+    SortInteger(RandomValues, Paralelos, 0, FParaleloCant - 1);
+  end;
+  Result := DownHill(Paralelos, 0, ExitOnFirstDown, Forced, Threshold);
+end;
+
+function TTimeTable.DownHill(Paralelos: TDynamicIntegerArray; Offset: Integer;
+  ExitOnFirstDown, Forced: Boolean; Threshold: Integer): Integer;
+var
+  Counter, Paralelo: Integer;
+  Delta: Integer;
+begin
+  with TTimeTableModel(Model) do
+  begin
     Counter := 0;
-    Offset := 0;
     Result := Value;
     try
       while Counter < FParaleloCant do
       begin
-        Paralelo := RandomOrders[(Offset + Counter) mod FParaleloCant];
+        Paralelo := Paralelos[(Offset + Counter) mod FParaleloCant];
         Delta := DownHill(Paralelo, ExitOnFirstDown, Threshold);
         Inc(Counter);
         if Delta < Threshold then
@@ -1502,10 +1506,10 @@ begin
            FPeriodoCant * SizeOf(Integer));
     for Dia := 0 to FDiaCant - 1 do
     begin
-      Move(ATimeTable.TablingInfo.FDiaProfesorMinPeriodo[Dia, 0],
-        FDiaProfesorMinPeriodo[Dia, 0], FProfesorCant * SizeOf(Integer));
-      Move(ATimeTable.TablingInfo.FDiaProfesorMaxPeriodo[Dia, 0],
-        FDiaProfesorMaxPeriodo[Dia, 0], FProfesorCant * SizeOf(Integer));
+      Move(ATimeTable.TablingInfo.FDiaProfesorMinHora[Dia, 0],
+        FDiaProfesorMinHora[Dia, 0], FProfesorCant * SizeOf(Integer));
+      Move(ATimeTable.TablingInfo.FDiaProfesorMaxHora[Dia, 0],
+        FDiaProfesorMaxHora[Dia, 0], FProfesorCant * SizeOf(Integer));
       Move(ATimeTable.TablingInfo.FDiaProfesorHoraHuecaCant[Dia, 0],
         FDiaProfesorHoraHuecaCant[Dia, 0], FProfesorCant * SizeOf(Integer));
     end;
@@ -1841,8 +1845,8 @@ begin
       for Profesor := 0 to FProfesorCant - 1 do
       begin
         FDiaProfesorHoraHuecaCant[Dia, Profesor] := 0;
-        FDiaProfesorMinPeriodo[Dia, Profesor] := 1;
-        FDiaProfesorMaxPeriodo[Dia, Profesor] := 0;
+        FDiaProfesorMinHora[Dia, Profesor] := 1;
+        FDiaProfesorMaxHora[Dia, Profesor] := 0;
       end;
     for MateriaProhibicionTipo := 0 to FMateriaProhibicionTipoCant - 1 do
       FMateriaProhibicionTipoAMateriaCant[MateriaProhibicionTipo] := 0;

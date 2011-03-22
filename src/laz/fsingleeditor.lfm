@@ -1,5 +1,4 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 455
   ActiveControl = DBNavigator
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery

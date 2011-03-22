@@ -325,6 +325,7 @@ begin
   inherited;
   FRandSeed := RandSeed;
   MakeRandom;
+  Elitist;
   Stop := False;
   Iteration := 0;
   try
