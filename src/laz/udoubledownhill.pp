@@ -68,19 +68,11 @@ var
   end;
 var
   Paralelos: TDynamicIntegerArray;
-  RandomValues: TDynamicIntegerArray;
   Index: Integer;
 begin
   with TTimeTable(BestIndividual), TTimeTableModel(Model) do
   begin
-    SetLength(Paralelos, ParaleloCant);
-    SetLength(RandomValues, ParaleloCant);
-    for Counter := 0 to ParaleloCant - 1 do
-    begin
-      Paralelos[Counter] := Counter;
-      RandomValues[Counter] := Random($7FFFFFFF);
-    end;
-    SortInteger(RandomValues, Paralelos, 0, ParaleloCant - 1);
+    Paralelos := RandomIndexes(ParaleloCant);
     Counter := 0;
     Offset := 0;
     Index := 0;

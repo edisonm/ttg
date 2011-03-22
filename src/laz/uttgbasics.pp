@@ -28,6 +28,7 @@ function ExtractString(const Strings: string; var Pos: Integer; Separator:
 procedure LoadNames(Source, Destination: TStrings);
 function NullToZero(A: Variant): Variant;
 function VarArrToStr(v: Variant; Separator: string = '; '): string;
+function RandomIndexes(Length: Integer): TDynamicIntegerArray;
 
 implementation
 
@@ -102,6 +103,25 @@ begin
   end
   else
     Result := VarToStr(v);
+end;
+
+function RandomIndexes(Length: Integer): TDynamicIntegerArray;
+var
+  I, N, Tmp: Integer;
+begin
+  SetLength(Result, Length);
+  for I := 0 to Length - 1 do
+    Result[I] := I;
+  for I := 0 to Length - 1 do
+  begin
+    N := Random(Length - I);
+    if N <> 0 then
+    begin
+      Tmp := Result[I];
+      Result[I] := Result[N + I];
+      Result[N + I] := Tmp;
+    end;
+  end;
 end;
 
 end.

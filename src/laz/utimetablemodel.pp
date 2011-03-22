@@ -238,7 +238,7 @@ type
 implementation
 
 uses
-  SysUtils, ZSysUtils, ZConnection, MTProcs, USortAlgs, DSource;
+  SysUtils, ZSysUtils, ZConnection, MTProcs, DSource, USortAlgs;
 
 constructor TTimeTableModel.Create(ACruceProfesorValor,
   ACruceMateriaValor, ACruceAulaTipoValor, AProfesorFraccionamientoValor,
@@ -626,8 +626,14 @@ var
     SetLength(FParaleloASesionCant, FParaleloCant);
     SetLength(FParaleloADuracion, FParaleloCant);
     for Paralelo := 0 to FParaleloCant - 1 do
+    begin
+      FParaleloADuracion[Paralelo] := 0;
+      FParaleloASesionCant[Paralelo] := 0;
       for Periodo := 0 to FPeriodoCant - 1 do
+      begin
         FTimeTableDetailPattern[Paralelo, Periodo] := -1;
+      end;
+    end;
     for Distributivo := FDistributivoCant - 1 downto 0 do
     begin
       Paralelo := FDistributivoAParalelo[Distributivo];
@@ -635,7 +641,7 @@ var
       begin
         Duracion := FSesionADuracion[FDistributivoASesiones[Distributivo, Contador]];
         Periodo1 := FParaleloADuracion[Paralelo];
-        for Periodo := Periodo1 + Duracion - 1 downto Periodo1 do
+        for Periodo := Periodo1 to Periodo1 + Duracion - 1 do
         begin
           if (Periodo < 0) or (Periodo >= FPeriodoCant) then
             raise Exception.CreateFmt(
@@ -653,8 +659,8 @@ var
       Periodo := 0;
       while Periodo < FPeriodoCant do
       begin
-        Periodo1 := FSesionADuracion[FTimeTableDetailPattern[Paralelo, Periodo]];
-        Inc(Periodo, Periodo1);
+        Duracion := FSesionADuracion[FTimeTableDetailPattern[Paralelo, Periodo]];
+        Inc(Periodo, Duracion);
         Inc(FParaleloASesionCant[Paralelo]);
       end;
     end;
@@ -1402,23 +1408,10 @@ end;
 
 function TTimeTable.DownHill(ExitOnFirstDown, Forced: Boolean;
   Threshold: Integer): Integer;
-var
-  Counter: Integer;
-  Paralelos: TDynamicIntegerArray;
-  RandomValues: TDynamicIntegerArray;
 begin
   with TTimeTableModel(Model) do
-  begin
-    SetLength(Paralelos, FParaleloCant);
-    SetLength(RandomValues, FParaleloCant);
-    for Counter := 0 to FParaleloCant - 1 do
-    begin
-      Paralelos[Counter] := Counter;
-      RandomValues[Counter] := Random($7FFFFFFF);
-    end;
-    SortInteger(RandomValues, Paralelos, 0, FParaleloCant - 1);
-  end;
-  Result := DownHill(Paralelos, 0, ExitOnFirstDown, Forced, Threshold);
+    Result := DownHill(RandomIndexes(FParaleloCant), 0, ExitOnFirstDown,
+      Forced, Threshold);
 end;
 
 function TTimeTable.DownHill(Paralelos: TDynamicIntegerArray; Offset: Integer;
