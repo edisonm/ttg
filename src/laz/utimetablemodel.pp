@@ -34,7 +34,10 @@ type
   TTimeTable = class;
   TTimeTableArray = array of TTimeTable;
 
+  TSesionArray = array [-1 .. 16382] of Integer;
+  PSesionArray = ^TSesionArray;
   { TTimeTableModel }
+
 
   TTimeTableModel = class(TModel)
   private
@@ -49,8 +52,7 @@ type
       FProfesorProhibicionAProfesorProhibicionTipo, FDistributivoAAulaTipo,
       FParaleloACurso, FParaleloANivel, FParaleloAParaleloId,
       FParaleloAEspecializacion, FParaleloASesionCant: TDynamicIntegerArray;
-    FSesionADuracion: array [-1 .. 16382] of Integer;
-    FPSesionADuracion: PIntegerArray;
+    FSesionADuracion: TSesionArray;
     FDiaHoraAPeriodo, FNivelEspecializacionACurso, FCursoParaleloIdAParalelo,
       FParaleloMateriaAProfesor, FParaleloMateriaADistributivo, FParaleloMateriaCant,
       FTimeTableDetailPattern, FDistributivoASesiones: TDynamicIntegerArrayArray;
@@ -94,7 +96,7 @@ type
     property SesionCortadaValor: Integer read FSesionCortadaValor;
     property MateriaNoDispersaValor: Integer read FMateriaNoDispersaValor;
     property SesionCantidadDoble: Integer read FSesionCantidadDoble;
-    property SesionADuracion: PIntegerArray read FPSesionADuracion;
+    property SesionADuracion: TSesionArray read FSesionADuracion;
     property ParaleloASesionCant: TDynamicIntegerArray read FParaleloASesionCant;
     property ElitistCount: Integer read GetElitistCount;
   end;
@@ -181,12 +183,13 @@ type
     procedure RandomizeKey(var ARandomKey: TDynamicIntegerArray;
       AParalelo: Integer);
     procedure Reset;
-    procedure Swap(AParalelo, APeriodo1, APeriodo2: Integer);
   protected
     function GetElitistValues(Index: Integer): Integer; override;
   public
     procedure Update; override;
     procedure UpdateValue; override;
+    function DoMovement(Movement: Integer; out UndoMovement: Integer): Integer; overload; override;
+    function DoMovement(Movement: Integer): Integer; overload; override;
     function DownHill(Paralelos: TDynamicIntegerArray; Offset: Integer;
       ExitOnFirstDown, Forced: Boolean; Threshold: Integer): Integer; overload;
     function DownHill(AParalelo: Integer; ExitOnFirstDown: Boolean;
@@ -197,6 +200,7 @@ type
     function DownHillForced: Integer; override;
     procedure Normalize(AParalelo: Integer; var APeriodo: Integer);
     function InternalSwap(AParalelo, APeriodo1, APeriodo2: Integer): Integer;
+    function Swap(AParalelo, APeriodo1, APeriodo2: Integer): Integer;
     procedure SaveToFile(const AFileName: string);
     procedure SaveToDataModule(CodHorario: Integer;
       MomentoInicial, MomentoFinal: TDateTime; Informe: TStrings); override;
@@ -673,7 +677,6 @@ var
   end;
 begin
   inherited Create;
-  FPSesionADuracion := @FSesionADuracion[0];
   with SourceDataModule do
   begin
     Configure(ACruceProfesorValor, ACruceMateriaValor, ACruceAulaTipoValor,
@@ -913,14 +916,14 @@ begin
   Update;
 end;
 
-procedure TTimeTable.Swap(AParalelo, APeriodo1, APeriodo2: Integer);
+function TTimeTable.Swap(AParalelo, APeriodo1, APeriodo2: Integer): Integer;
 begin
   Normalize(AParalelo, APeriodo1);
   Normalize(AParalelo, APeriodo2);
   if APeriodo1 < APeriodo2 then
-    InternalSwap(AParalelo, APeriodo1, APeriodo2)
+    Result := InternalSwap(AParalelo, APeriodo1, APeriodo2)
   else if APeriodo2 < APeriodo1 then
-    InternalSwap(AParalelo, APeriodo2, APeriodo1);
+    Result := InternalSwap(AParalelo, APeriodo2, APeriodo1);
 end;
 
 procedure TTimeTable.DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Integer);
@@ -1366,11 +1369,63 @@ begin
       SesionCortadaValor;
 end;
 
+
+function TTimeTable.DoMovement(Movement: Integer; out UndoMovement: Integer): Integer;
+var
+  Aux, Paralelo, Periodo1, Periodo2, Duracion1, Duracion2: Integer;
+begin
+  with TTimeTableModel(Model) do
+  begin
+    Paralelo := Movement mod FParaleloCant;
+    Aux := Movement div FParaleloCant;
+    { The inverse of the equation f(i, j) = i + j * (j - 1) / 2, i < j }
+    Periodo2 := Trunc((1 + sqrt(1 + 8 * Aux))/2);
+    Periodo1 := Aux - Periodo2 * (Periodo2 - 1) div 2;
+    Normalize(Paralelo, Periodo1);
+    Normalize(Paralelo, Periodo2);
+    if Periodo1 <> Periodo2 then
+    begin
+      Duracion1 := SesionADuracion[FParaleloPeriodoASesion[Paralelo, Periodo1]];
+      Duracion2 := SesionADuracion[FParaleloPeriodoASesion[Paralelo, Periodo2]];
+      Result := InternalSwap(Paralelo, Periodo1, Periodo2);
+      Periodo2 := Periodo2 + Duracion2 - Duracion1;
+      UndoMovement := Paralelo + FParaleloCant * (Periodo1
+        + Periodo2 * (Periodo2 - 1) div 2);
+    end
+    else
+    begin
+      Result := 0;
+      UndoMovement := Movement;
+    end;
+  end;
+end;
+
+function TTimeTable.DoMovement(Movement: Integer): Integer;
+var
+  Aux, Paralelo, Periodo1, Periodo2: Integer;
+begin
+  with TTimeTableModel(Model) do
+  begin
+    Paralelo := Movement mod FParaleloCant;
+    Aux := Movement div FParaleloCant;
+    { The inverse of the equation f(i, j) = i + j * (j - 1) / 2, i < j }
+    Periodo2 := Trunc((1 + sqrt(1 + 8 * Aux))/2);
+    Periodo1 := Aux - Periodo2 * (Periodo2 - 1) div 2;
+    Normalize(Paralelo, Periodo1);
+    Normalize(Paralelo, Periodo2);
+    if Periodo1 <> Periodo2 then
+    begin
+      Result := InternalSwap(Paralelo, Periodo1, Periodo2);
+    end
+    else
+      Result := 0;
+  end;
+end;
+
 function TTimeTable.DownHill(AParalelo: Integer; ExitOnFirstDown: Boolean;
   Threshold: Integer): Integer;
 var
-  Periodo1, Periodo2, Duracion1, Duracion2: Integer;
-  Delta: Integer;
+  Periodo1, Periodo2, Duracion1, Duracion2, Sesion, Delta: Integer;
   PeriodoASesion: TDynamicIntegerArray;
 begin
   with TTimeTableModel(Model) do
@@ -1385,7 +1440,8 @@ begin
         Periodo2 := Periodo1 + Duracion1;
         while Periodo2 < FPeriodoCant do
         begin
-          Duracion2 := SesionADuracion[PeriodoASesion[Periodo2]];
+          Sesion := PeriodoASesion[Periodo2];
+          Duracion2 := SesionADuracion[Sesion];
           Delta := InternalSwap(AParalelo, Periodo1, Periodo2);
           if Delta < Threshold then
           begin
@@ -1437,7 +1493,7 @@ begin
           Threshold := 0;
           if Forced then
           begin
-            Offset := (Offset + Counter) div FParaleloCant;
+            Offset := (Offset + Counter) mod FParaleloCant;
             Counter := 0;
           end;
         end;
