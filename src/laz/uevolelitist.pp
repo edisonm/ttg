@@ -61,8 +61,8 @@ type
       const AExtraInfo: string; MomentoInicial, MomentoFinal: TDateTime); override;
     procedure SaveBestToStream(AStream: TStream);
     procedure Execute(RefreshInterval: Integer); override;
-    function DownHillForced: Double;
-    function DownHill: Double;
+    function DownHillForced: Integer;
+    function DownHill: Integer;
     procedure Repair;
     procedure Update; override;
     procedure UpdateValue; override;
@@ -360,14 +360,14 @@ begin
   if Stop then FMaxIteration := Iteration; // Preserve the maximum in case of stop
 end;
 
-function TEvolElitist.DownHillForced: Double;
+function TEvolElitist.DownHillForced: Integer;
 begin
   Result := BestIndividual.DownHillForced;
   if Assigned(OnRecordBest) then
     OnRecordBest(Self);
 end;
 
-function TEvolElitist.DownHill: Double;
+function TEvolElitist.DownHill: Integer;
 begin
   Result := BestIndividual.DownHill;
 end;

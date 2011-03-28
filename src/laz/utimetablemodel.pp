@@ -188,8 +188,6 @@ type
   public
     procedure Update; override;
     procedure UpdateValue; override;
-    function DoMovement(Movement: Integer; out UndoMovement: Integer): Integer; overload; override;
-    function DoMovement(Movement: Integer): Integer; overload; override;
     function DownHill(Paralelos: TDynamicIntegerArray; Offset: Integer;
       ExitOnFirstDown, Forced: Boolean; Threshold: Integer): Integer; overload;
     function DownHill(AParalelo: Integer; ExitOnFirstDown: Boolean;
@@ -198,6 +196,7 @@ type
                       Threshold: Integer): Integer; override; overload;
     function DownHill: Integer; override; overload;
     function DownHillForced: Integer; override;
+    function NewBookmark: TBookmark; override;
     procedure Normalize(AParalelo: Integer; var APeriodo: Integer);
     function InternalSwap(AParalelo, APeriodo1, APeriodo2: Integer): Integer;
     function Swap(AParalelo, APeriodo1, APeriodo2: Integer): Integer;
@@ -237,6 +236,31 @@ type
       read FParaleloPeriodoASesion write FParaleloPeriodoASesion;
     property ProfesorFraccionamiento: Integer read FTablingInfo.FProfesorFraccionamiento;
     property TablingInfo: TTimeTableTablingInfo read FTablingInfo;
+  end;
+
+  { TTTBookmark }
+
+  TTTBookmark = class(TBookmark)
+  private
+    FIndividual: TIndividual;
+    FParalelos: TDynamicIntegerArray;
+    FPosition, FOffset, FPeriodo1, FPeriodo2: Integer;
+    function GetParalelo: Integer;
+  protected
+    function GetProgress: Integer; override;
+    function GetMax: Integer; override;
+  public
+    constructor Create(AIndividual: TIndividual; AParalelos: TDynamicIntegerArray); overload;
+    function Clone: TBookmark; override;
+    procedure First; override;
+    procedure Next; override;
+    procedure Rewind; override;
+    function Move: Integer; override;
+    function Undo: Integer; override;
+    function Eof: Boolean; override;
+    property Paralelo: Integer read GetParalelo;
+    property Paralelos: TDynamicIntegerArray read FParalelos;
+    property Offset: Integer read FOffset write FOffset;
   end;
 
 implementation
@@ -1369,59 +1393,6 @@ begin
       SesionCortadaValor;
 end;
 
-
-function TTimeTable.DoMovement(Movement: Integer; out UndoMovement: Integer): Integer;
-var
-  Aux, Paralelo, Periodo1, Periodo2, Duracion1, Duracion2: Integer;
-begin
-  with TTimeTableModel(Model) do
-  begin
-    Paralelo := Movement mod FParaleloCant;
-    Aux := Movement div FParaleloCant;
-    { The inverse of the equation f(i, j) = i + j * (j - 1) / 2, i < j }
-    Periodo2 := Trunc((1 + sqrt(1 + 8 * Aux))/2);
-    Periodo1 := Aux - Periodo2 * (Periodo2 - 1) div 2;
-    Normalize(Paralelo, Periodo1);
-    Normalize(Paralelo, Periodo2);
-    if Periodo1 <> Periodo2 then
-    begin
-      Duracion1 := SesionADuracion[FParaleloPeriodoASesion[Paralelo, Periodo1]];
-      Duracion2 := SesionADuracion[FParaleloPeriodoASesion[Paralelo, Periodo2]];
-      Result := InternalSwap(Paralelo, Periodo1, Periodo2);
-      Periodo2 := Periodo2 + Duracion2 - Duracion1;
-      UndoMovement := Paralelo + FParaleloCant * (Periodo1
-        + Periodo2 * (Periodo2 - 1) div 2);
-    end
-    else
-    begin
-      Result := 0;
-      UndoMovement := Movement;
-    end;
-  end;
-end;
-
-function TTimeTable.DoMovement(Movement: Integer): Integer;
-var
-  Aux, Paralelo, Periodo1, Periodo2: Integer;
-begin
-  with TTimeTableModel(Model) do
-  begin
-    Paralelo := Movement mod FParaleloCant;
-    Aux := Movement div FParaleloCant;
-    { The inverse of the equation f(i, j) = i + j * (j - 1) / 2, i < j }
-    Periodo2 := Trunc((1 + sqrt(1 + 8 * Aux))/2);
-    Periodo1 := Aux - Periodo2 * (Periodo2 - 1) div 2;
-    Normalize(Paralelo, Periodo1);
-    Normalize(Paralelo, Periodo2);
-    if Periodo1 <> Periodo2 then
-    begin
-      Result := InternalSwap(Paralelo, Periodo1, Periodo2);
-    end
-    else
-      Result := 0;
-  end;
-end;
-
 function TTimeTable.DownHill(AParalelo: Integer; ExitOnFirstDown: Boolean;
   Threshold: Integer): Integer;
 var
@@ -1504,8 +1475,6 @@ begin
   end;
 end;
 
-{ Retorna verdadero cuando ha descendido }
-
 function TTimeTable.DownHill: Integer;
 begin
   Result := DownHill(False, False, 0);
@@ -1514,6 +1483,11 @@ end;
 function TTimeTable.DownHillForced: Integer;
 begin
   Result := DownHill(False, True, 0);
+end;
+
+function TTimeTable.NewBookmark: TBookmark;
+begin
+  Result := TTTBookmark.Create(Self, RandomIndexes(TTimeTableModel(Model).ParaleloCant));
 end;
 
 destructor TTimeTable.Destroy;
@@ -1948,6 +1922,138 @@ end;
 class function TTimeTableModel.GetElitistCount: Integer;
 begin
   Result := 3;
+end;
+
+constructor TTTBookmark.Create(AIndividual: TIndividual; AParalelos: TDynamicIntegerArray);
+begin
+  inherited Create;
+  FIndividual := AIndividual;
+  FParalelos := AParalelos;
+end;
+
+function TTTBookmark.Clone: TBookmark;
+begin
+  Result := TTTBookmark.Create(FIndividual, FParalelos);
+  TTTBookmark(Result).FPosition := FPosition;
+  TTTBookmark(Result).FOffset := FOffset;
+  TTTBookmark(Result).FPeriodo1 := FPeriodo1;
+  TTTBookmark(Result).FPeriodo2 := FPeriodo2;
+end;
+
+function TTTBookmark.GetParalelo: Integer;
+var
+  Index: Integer;
+begin
+  Index := (FPosition + FOffset) mod TTimeTableModel(FIndividual.Model).ParaleloCant;
+  Result := FParalelos[Index];
+end;
+
+procedure TTTBookmark.First;
+begin
+  FPosition := 0;
+  FOffset := 0;
+  FPeriodo1 := 0;
+  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
+    FPeriodo2 := SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo1]];
+end;
+
+procedure TTTBookmark.Next;
+var
+  Sesion: Integer;
+  PeriodoASesion: TDynamicIntegerArray;
+begin
+  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
+  begin
+    PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
+    if FPeriodo1 > 0 then
+    begin
+      Dec(FPeriodo1);
+      Sesion := PeriodoASesion[FPeriodo1];
+      if Sesion < 0 then
+        Inc(FPeriodo1)
+      else
+        repeat
+          Inc(FPeriodo1);
+        until (FPeriodo1 >= PeriodoCant)
+          or (PeriodoASesion[FPeriodo1] <> Sesion);
+    end;
+    if FPeriodo1 >= PeriodoCant - SesionADuracion[PeriodoASesion[PeriodoCant - 1]] then
+    begin
+      Inc(FPosition);
+      FPeriodo1 := 0;
+      FPeriodo2 := SesionADuracion[ParaleloPeriodoASesion[Paralelo, 0]];
+    end
+    else
+    begin
+    if (FPeriodo2 <= FPeriodo1) then
+      FPeriodo2 := FPeriodo1 + SesionADuracion[PeriodoASesion[FPeriodo1]]
+    else
+    begin
+      Sesion := PeriodoASesion[FPeriodo2];
+      if Sesion < 0 then
+        Inc(FPeriodo2)
+      else
+        repeat
+          Inc(FPeriodo2);
+        until (FPeriodo2 >= PeriodoCant)
+          or (PeriodoASesion[FPeriodo2] <> Sesion);
+    end;
+    if FPeriodo2 = PeriodoCant then
+    begin
+      Inc(FPeriodo1, SesionADuracion[PeriodoASesion[FPeriodo1]]);
+      if FPeriodo1 = PeriodoCant - SesionADuracion[PeriodoASesion[PeriodoCant - 1]] then
+      begin
+        Inc(FPosition);
+        FPeriodo1 := 0;
+        FPeriodo2 := SesionADuracion[ParaleloPeriodoASesion[Paralelo, 0]];
+      end
+      else
+        FPeriodo2 := FPeriodo1 + SesionADuracion[PeriodoASesion[FPeriodo1]];
+    end;
+    end;
+  end;
+end;
+
+procedure TTTBookmark.Rewind;
+begin
+  Inc(FOffset, FPosition);
+  FPosition := 0;
+end;
+
+function TTTBookmark.GetProgress: Integer;
+begin
+  with TTimeTableModel(FIndividual.Model) do
+    Result := (FOffset + FPosition) * PeriodoCant * (PeriodoCant - 1) div 2 +
+    (FPeriodo1 * PeriodoCant - FPeriodo1 * (FPeriodo1 + 1) div 2 + FPeriodo2 - 1);
+end;
+
+function TTTBookmark.GetMax: Integer;
+begin
+  with TTimeTableModel(FIndividual.Model) do
+    Result := (FOffset + ParaleloCant) * PeriodoCant * (PeriodoCant - 1) div 2;
+end;
+
+function TTTBookmark.Move: Integer;
+var
+  Duracion1, Duracion2: Integer;
+begin
+  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
+  begin
+    Duracion1 := SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo1]];
+    Duracion2 := SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo2]];
+    Result := InternalSwap(Paralelo, FPeriodo1, FPeriodo2);
+    FPeriodo2 := FPeriodo2 + Duracion2 - Duracion1;
+  end;
+end;
+
+function TTTBookmark.Undo: Integer;
+begin
+  Result := Move; // In this case, Move * Move = Identity, so Undo = Move
+end;
+
+function TTTBookmark.Eof: Boolean;
+begin
+  Result := FPosition = TTimeTableModel(FIndividual.Model).ParaleloCant;
 end;
 
 initialization

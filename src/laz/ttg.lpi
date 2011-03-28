@@ -286,9 +286,9 @@
         <UnitName Value="UMakeTT"/>
       </Unit32>
       <Unit33>
-        <Filename Value="udoubledownhill.pp"/>
+        <Filename Value="udownhill.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="UDoubleDownHill"/>
+        <UnitName Value="UDownHill"/>
       </Unit33>
       <Unit34>
         <Filename Value="usolver.pp"/>

@@ -7,7 +7,7 @@ interface
 
 uses
   Classes, SysUtils, MTProcs, UTimeTableModel, DMaster, USolver, UModel, UTTGBasics,
-    UDoubleDownHill;
+    UDownHill;
 
 type
 
@@ -83,7 +83,7 @@ const
 function TMakeTimeTableThread.ProcessTimeTable(ACodHorario: Integer): Boolean;
 var
   VEvolElitist: TEvolElitist;
-  DoubleDownHill: TDoubleDownHill;
+  DoubleDownHill: TDownHill;
   FMomentoInicial: TDateTime;
   ProgressFormDrv: TProgressFormDrv;
   ExtraInfo: string;
@@ -110,7 +110,7 @@ begin
         end;
         if ApplyDoubleDownHill then
         begin
-          DoubleDownHill := TDoubleDownHill.Create(FTimeTableModel,
+          DoubleDownHill := TDownHill.Create(FTimeTableModel,
             SharedDirectory, PollinationProb);
           try
             DoubleDownHill.BestIndividual.Assign(VEvolElitist.BestIndividual);
@@ -221,14 +221,14 @@ procedure TImproveTimeTableThread.Execute;
 var
   ProgressFormDrv: TProgressFormDrv;
   MomentoInicial: TDateTime;
-  DoubleDownHill: TDoubleDownHill;
+  DoubleDownHill: TDownHill;
   ExtraInfo: string;
 begin
   MomentoInicial := Now;
   with MasterDataModule.ConfigStorage do
   begin
     InitRandom;
-    DoubleDownHill := TDoubleDownHill.Create(FTimeTableModel,
+    DoubleDownHill := TDownHill.Create(FTimeTableModel,
       SharedDirectory, PollinationProb);
     try
       {if s = '' then

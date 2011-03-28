@@ -62,7 +62,9 @@ end;
 procedure TSolver.DoProgress(Position, Max, RefreshInterval: Integer;
   Solver: TSolver; var Stop: Boolean);
 begin
-  if Assigned(FOnProgress) and (Position mod RefreshInterval = 0) then
+  if (RefreshInterval <> 0)
+      and Assigned(FOnProgress)
+      and (Position mod RefreshInterval = 0) then
     FOnProgress(Position, Max, Solver, Stop);
 end;
 

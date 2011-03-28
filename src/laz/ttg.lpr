@@ -44,7 +44,7 @@ uses
   DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   FSelPeriodo {SelPeriodoForm},
   DBase in 'DBase.pp', 
-UModel, UMakeTT, UDoubleDownHill, USolver, UTTGBasics, UAbout, FMessageView;
+UModel, UMakeTT, UDownHill, USolver, UTTGBasics, UAbout, FMessageView;
 
 {$IFNDEF FPC}
 {$R *.res}
