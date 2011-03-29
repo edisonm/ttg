@@ -129,7 +129,7 @@ begin
         end
         else
         begin
-          VEvolElitist.DownHillForced;
+          VEvolElitist.DownHill;
         end;
       finally
         ProgressFormDrv.Free;
@@ -221,33 +221,33 @@ procedure TImproveTimeTableThread.Execute;
 var
   ProgressFormDrv: TProgressFormDrv;
   MomentoInicial: TDateTime;
-  DoubleDownHill: TDownHill;
+  DownHill: TDownHill;
   ExtraInfo: string;
 begin
   MomentoInicial := Now;
   with MasterDataModule.ConfigStorage do
   begin
     InitRandom;
-    DoubleDownHill := TDownHill.Create(FTimeTableModel,
+    DownHill := TDownHill.Create(FTimeTableModel,
       SharedDirectory, PollinationProb);
     try
       {if s = '' then
         TimeTable.MakeRandom
       else}
-      with TSyncLoader.Create(TTimeTable(DoubleDownHill.BestIndividual),
+      with TSyncLoader.Create(TTimeTable(DownHill.BestIndividual),
         FCodHorarioFuente) do
       try
         TThread.Synchronize(CurrentThread, Execute);
       finally
         Free;
       end;
-      DoubleDownHill.BestIndividual.DownHillForced;
+      TDownHill.DownHill(DownHill.BestIndividual);
       ProgressFormDrv := TProgressFormDrv.Create;
       try
-        DoubleDownHill.OnProgress := ProgressFormDrv.OnProgress;
+        DownHill.OnProgress := ProgressFormDrv.OnProgress;
         ProgressFormDrv.Caption := Format('Mejorando Horario [%d] en [%d]',
           [FCodHorarioFuente, FCodHorario]);
-        DoubleDownHill.Execute(RefreshInterval);
+        DownHill.Execute(RefreshInterval);
         if ProgressFormDrv.CancelClick then
         begin
           Terminate;
@@ -255,7 +255,7 @@ begin
         end
         else
           ExtraInfo := Format('Horario base: %d', [FCodHorarioFuente]);
-          with TSyncSaver.Create(DoubleDownHill, FCodHorario, ExtraInfo,
+          with TSyncSaver.Create(DownHill, FCodHorario, ExtraInfo,
             MomentoInicial, Now) do
           try
             TThread.Synchronize(CurrentThread, Execute);
@@ -266,7 +266,7 @@ begin
         ProgressFormDrv.Free;
       end;
     finally
-      DoubleDownHill.Free;
+      DownHill.Free;
     end;
   end;
 end;

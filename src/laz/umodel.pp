@@ -48,10 +48,6 @@ type
     procedure UpdateValue; virtual; abstract;
     procedure MakeRandom; virtual; abstract;
     function NewBookmark: TBookmark; virtual; abstract;
-    function DownHill: Integer; overload; virtual; abstract;
-    function DownHill(ExitOnFirstDown, Forced: Boolean;
-                      Threshold: Integer): Integer; overload; virtual; abstract;
-    function DownHillForced: Integer; virtual; abstract;
     procedure SaveToStream(Stream: TStream); virtual; abstract;
     procedure LoadFromStream(Stream: TStream); virtual; abstract;
     procedure SaveToDataModule(CodHorario: Integer; MomentoInicial,

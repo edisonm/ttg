@@ -165,7 +165,6 @@ type
   private
     FTablingInfo: TTimeTableTablingInfo;
     FParaleloPeriodoASesion: TDynamicIntegerArrayArray;
-    { Required to synchronize threads: }
     procedure CheckIntegrity;
     procedure CrossParalelo(TimeTable2: TTimeTable; AParalelo: Integer);
     procedure DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Integer);
@@ -186,33 +185,27 @@ type
   protected
     function GetElitistValues(Index: Integer): Integer; override;
   public
+    constructor Create(ATimeTableModel: TTimeTableModel);
+    destructor Destroy; override;
+    {Implements abstract class TIndividual:}
     procedure Update; override;
     procedure UpdateValue; override;
-    function DownHill(Paralelos: TDynamicIntegerArray; Offset: Integer;
-      ExitOnFirstDown, Forced: Boolean; Threshold: Integer): Integer; overload;
-    function DownHill(AParalelo: Integer; ExitOnFirstDown: Boolean;
-                      Threshold: Integer): Integer; overload;
-    function DownHill(ExitOnFirstDown, Forced: Boolean;
-                      Threshold: Integer): Integer; override; overload;
-    function DownHill: Integer; override; overload;
-    function DownHillForced: Integer; override;
     function NewBookmark: TBookmark; override;
-    procedure Normalize(AParalelo: Integer; var APeriodo: Integer);
-    function InternalSwap(AParalelo, APeriodo1, APeriodo2: Integer): Integer;
-    function Swap(AParalelo, APeriodo1, APeriodo2: Integer): Integer;
-    procedure SaveToFile(const AFileName: string);
     procedure SaveToDataModule(CodHorario: Integer;
       MomentoInicial, MomentoFinal: TDateTime; Informe: TStrings); override;
     procedure LoadFromDataModule(CodHorario: Integer); override;
     procedure SaveToStream(Stream: TStream); override;
     procedure LoadFromStream(Stream: TStream); override;
-    constructor Create(ATimeTableModel: TTimeTableModel);
-    destructor Destroy; override;
     procedure MakeRandom; override;
     procedure Mutate; override;
     procedure ReportValues(AReport: TStrings); override;
     procedure Assign(AIndividual: TIndividual); override;
     procedure Cross(AIndividual: TIndividual); override;
+
+    procedure Normalize(AParalelo: Integer; var APeriodo: Integer);
+    function InternalSwap(AParalelo, APeriodo1, APeriodo2: Integer): Integer;
+    function Swap(AParalelo, APeriodo1, APeriodo2: Integer): Integer;
+    procedure SaveToFile(const AFileName: string);
     property HoraHuecaDesubicada: Integer read FTablingInfo.FHoraHuecaDesubicada;
     property MateriaProhibicionTipoAMateriaCant: TDynamicIntegerArray
       read FTablingInfo.FMateriaProhibicionTipoAMateriaCant;
@@ -1391,98 +1384,6 @@ begin
       ProfesorFraccionamientoValor +
       ProfesorProhibicionValor +
       SesionCortadaValor;
-end;
-
-function TTimeTable.DownHill(AParalelo: Integer; ExitOnFirstDown: Boolean;
-  Threshold: Integer): Integer;
-var
-  Periodo1, Periodo2, Duracion1, Duracion2, Sesion, Delta: Integer;
-  PeriodoASesion: TDynamicIntegerArray;
-begin
-  with TTimeTableModel(Model) do
-  begin
-    Periodo1 := 0;
-    PeriodoASesion := FParaleloPeriodoASesion[AParalelo];
-    Result := Value;
-    try
-      while Periodo1 < FPeriodoCant do
-      begin
-        Duracion1 := SesionADuracion[PeriodoASesion[Periodo1]];
-        Periodo2 := Periodo1 + Duracion1;
-        while Periodo2 < FPeriodoCant do
-        begin
-          Sesion := PeriodoASesion[Periodo2];
-          Duracion2 := SesionADuracion[Sesion];
-          Delta := InternalSwap(AParalelo, Periodo1, Periodo2);
-          if Delta < Threshold then
-          begin
-            if ExitOnFirstDown then
-              Exit;
-            Duracion1 := Duracion2;
-            Threshold := 0;
-          end
-          else
-            InternalSwap(AParalelo, Periodo1, Periodo2 + Duracion2 - Duracion1);
-          Inc(Periodo2, Duracion2);
-        end;
-        Inc(Periodo1, Duracion1);
-      end;
-    finally
-      Result := Value - Result;
-    end;
-  end;
-end;
-
-function TTimeTable.DownHill(ExitOnFirstDown, Forced: Boolean;
-  Threshold: Integer): Integer;
-begin
-  with TTimeTableModel(Model) do
-    Result := DownHill(RandomIndexes(FParaleloCant), 0, ExitOnFirstDown,
-      Forced, Threshold);
-end;
-
-function TTimeTable.DownHill(Paralelos: TDynamicIntegerArray; Offset: Integer;
-  ExitOnFirstDown, Forced: Boolean; Threshold: Integer): Integer;
-var
-  Counter, Paralelo: Integer;
-  Delta: Integer;
-begin
-  with TTimeTableModel(Model) do
-  begin
-    Counter := 0;
-    Result := Value;
-    try
-      while Counter < FParaleloCant do
-      begin
-        Paralelo := Paralelos[(Offset + Counter) mod FParaleloCant];
-        Delta := DownHill(Paralelo, ExitOnFirstDown, Threshold);
-        Inc(Counter);
-        if Delta < Threshold then
-        begin
-          if ExitOnFirstDown then
-            Exit;
-          Threshold := 0;
-          if Forced then
-          begin
-            Offset := (Offset + Counter) mod FParaleloCant;
-            Counter := 0;
-          end;
-        end;
-      end;
-    finally
-      Result := Value - Result;
-    end;
-  end;
-end;
-
-function TTimeTable.DownHill: Integer;
-begin
-  Result := DownHill(False, False, 0);
-end;
-
-function TTimeTable.DownHillForced: Integer;
-begin
-  Result := DownHill(False, True, 0);
 end;
 
 function TTimeTable.NewBookmark: TBookmark;

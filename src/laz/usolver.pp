@@ -27,9 +27,9 @@ type
     FNumImports, FNumExports, FColision: Integer;
     function GetFileName: string;
   protected
+  public
     procedure DoProgress(Position, Max, RefreshInterval: Integer; Solver: TSolver;
       var Stop: Boolean);
-  public
     constructor Create(AModel: TModel; const ASharedDirectory: string;
       APollinationProb: Double);
     destructor Destroy; override;

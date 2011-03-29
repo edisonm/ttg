@@ -14,14 +14,16 @@ type
 
   TDownHill = class(TSolver)
   private
-    function MultiDownHill(Individual: TIndividual;
+    class function MultiDownHill(Sender: TSolver; Individual: TIndividual;
       ABookmark: TBookmark; ExitOnFirstDown: Boolean;
-      Level, MaxLevel, RefreshInterval, Threshold: Integer): Integer;
+      Level, MaxLevel, RefreshInterval, Threshold: Integer): Integer; overload;
+    class function MultiDownHill(Sender: TSolver; Individual: TIndividual;
+      MaxLevel, RefreshInterval: Integer): Integer; overload;
   protected
   public
-    function DownHill: Integer;
+    class function DownHill(Individual: TIndividual): Integer;
     function DoubleDownHill(RefreshInterval: Integer): Integer;
-    function MultiDownHill(MaxLevel, RefreshInterval: Integer): Integer;
+    function MultiDownHill(MaxLevel, RefreshInterval: Integer): Integer; overload;
     procedure Execute(RefreshInterval: Integer); override;
     procedure SaveSolutionToDatabase(ACodHorario: Integer;
       const AExtraInfo: string; AMomentoInicial, AMomentoFinal: TDateTime); override;
@@ -31,23 +33,44 @@ implementation
 
 { TDownHill }
 
+class function TDownHill.DownHill(Individual: TIndividual): Integer;
+begin
+  Result := MultiDownHill(nil, Individual, 0, 0);
+end;
+
+function TDownHill.DoubleDownHill(RefreshInterval: Integer): Integer;
+begin
+  Result := MultiDownHill(1, RefreshInterval);
+end;
+
 function TDownHill.MultiDownHill(MaxLevel, RefreshInterval: Integer): Integer;
 var
   Individual: TIndividual;
-  Bookmark: TBookmark;
 begin
   Individual := Model.NewIndividual;
-  Bookmark := Individual.NewBookmark;
   try
     Individual.Assign(BestIndividual);
-    Result := MultiDownHill(Individual, Bookmark, False, 0, MaxLevel, RefreshInterval, 0);
+    Result := MultiDownHill(Self, Individual, MaxLevel, RefreshInterval);
   finally
-    Bookmark.Free;
     Individual.Free;
   end;
 end;
 
-function TDownHill.MultiDownHill(Individual: TIndividual;
+class function TDownHill.MultiDownHill(Sender: TSolver; Individual: TIndividual;
+    MaxLevel, RefreshInterval: Integer): Integer;
+var
+  Bookmark: TBookmark;
+begin
+  Bookmark := Individual.NewBookmark;
+  try
+    Result := MultiDownHill(Sender, Individual, Bookmark, False, 0, MaxLevel,
+      RefreshInterval, 0);
+  finally
+    Bookmark.Free;
+  end;
+end;
+
+class function TDownHill.MultiDownHill(Sender: TSolver; Individual: TIndividual;
     ABookmark: TBookmark; ExitOnFirstDown: Boolean;
     Level, MaxLevel, RefreshInterval, Threshold: Integer): Integer;
 var
@@ -64,8 +87,8 @@ begin
       try
         while not Bookmark.Eof do
         begin
-          if Level = MaxLevel - 1 then
-            DoProgress(Bookmark.Progress, Bookmark.Max, RefreshInterval, Self, Stop);
+          if Assigned(Sender) and (Level = MaxLevel - 1) then
+            Sender.DoProgress(Bookmark.Progress, Bookmark.Max, RefreshInterval, Sender, Stop);
           if Stop then
             Exit;
           Delta := Bookmark.Move;
@@ -79,8 +102,9 @@ begin
           else
           begin
             if (Level = MaxLevel)
-                or (MultiDownHill(Individual, Bookmark, True, Level + 1, MaxLevel,
-                RefreshInterval, Threshold - Delta) >= 0) then
+                or (MultiDownHill(Sender, Individual, Bookmark,
+                True, Level + 1, MaxLevel, RefreshInterval,
+                Threshold - Delta) >= 0) then
             begin
               Down := False;
               Bookmark.Undo;
@@ -97,7 +121,8 @@ begin
           if Down then
           begin
             Bookmark.Rewind;
-            BestIndividual.Assign(Individual);
+            if Assigned(Sender) then
+              Sender.BestIndividual.Assign(Individual);
           end;
         end;
       finally
@@ -107,16 +132,6 @@ begin
       Result := Value - Result;
     end;
   end;
-end;
-
-function TDownHill.DownHill: Integer;
-begin
-  Result := MultiDownHill(0, 0);
-end;
-
-function TDownHill.DoubleDownHill(RefreshInterval: Integer): Integer;
-begin
-  Result := MultiDownHill(1, RefreshInterval);
 end;
 
 (*

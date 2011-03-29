@@ -6,7 +6,7 @@ unit UEvolElitist;
 interface
 
 uses
-  Classes, SysUtils, UModel, USolver, UTTGBasics;
+  Classes, SysUtils, UModel, USolver, UTTGBasics, UDownHill;
 
 type
 
@@ -61,7 +61,6 @@ type
       const AExtraInfo: string; MomentoInicial, MomentoFinal: TDateTime); override;
     procedure SaveBestToStream(AStream: TStream);
     procedure Execute(RefreshInterval: Integer); override;
-    function DownHillForced: Integer;
     function DownHill: Integer;
     procedure Repair;
     procedure Update; override;
@@ -154,8 +153,7 @@ begin
   begin
     if Random < FRepairProb then
     begin
-      with FPopulation[Individual] do
-        DownHill(False, False, 0);
+      TDownHill.DownHill(FPopulation[Individual]);
     end;
   end;
 end;
@@ -360,16 +358,11 @@ begin
   if Stop then FMaxIteration := Iteration; // Preserve the maximum in case of stop
 end;
 
-function TEvolElitist.DownHillForced: Integer;
-begin
-  Result := BestIndividual.DownHillForced;
-  if Assigned(OnRecordBest) then
-    OnRecordBest(Self);
-end;
-
 function TEvolElitist.DownHill: Integer;
 begin
-  Result := BestIndividual.DownHill;
+  Result := TDownHill.DownHill(BestIndividual);
+  {if Assigned(OnRecordBest) then
+    OnRecordBest(Self);}
 end;
 
 procedure TEvolElitist.SaveSolutionToDatabase(CodHorario: Integer;
