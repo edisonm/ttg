@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit UTimeTableModel;
+unit UTTModel;
 
 {$I ttg.inc}
 

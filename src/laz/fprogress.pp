@@ -8,7 +8,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
     Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls,
-    UTimeTableModel, USolver;
+    UTTModel, USolver;
 
 type
 

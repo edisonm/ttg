@@ -16,7 +16,7 @@ uses
   SysUtils,
   FMain {MainForm},
   DMaster in 'DMaster.pp' {MasterDataModule: TDataModule},
-  UTimeTableModel in 'utimetablemodel.pp',
+  UTTModel,
   UEvolElitist in 'uevolelitist.pp',
   FProgress {ProgressForm},
   USortAlgs,

@@ -73,9 +73,9 @@
         <UnitName Value="DMaster"/>
       </Unit2>
       <Unit3>
-        <Filename Value="utimetablemodel.pp"/>
+        <Filename Value="uttmodel.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="UTimeTableModel"/>
+        <UnitName Value="UTTModel"/>
       </Unit3>
       <Unit4>
         <Filename Value="uevolelitist.pp"/>

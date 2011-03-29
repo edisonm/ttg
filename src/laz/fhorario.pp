@@ -214,7 +214,7 @@ var
 implementation
 
 uses
-  Variants, UTimeTableModel, UMakeTT;
+  Variants, UTTModel, UMakeTT;
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
