@@ -205,6 +205,7 @@ type
     procedure Normalize(AParalelo: Integer; var APeriodo: Integer);
     function InternalSwap(AParalelo, APeriodo1, APeriodo2: Integer): Integer;
     function Swap(AParalelo, APeriodo1, APeriodo2: Integer): Integer;
+    function DoMove(AParalelo, APeriodo1: Integer; var APeriodo2: Integer): Integer;
     procedure SaveToFile(const AFileName: string);
     property HoraHuecaDesubicada: Integer read FTablingInfo.FHoraHuecaDesubicada;
     property MateriaProhibicionTipoAMateriaCant: TDynamicIntegerArray
@@ -238,6 +239,31 @@ type
     FIndividual: TIndividual;
     FParalelos: TDynamicIntegerArray;
     FPosition, FOffset, FPeriodo1, FPeriodo2: Integer;
+    function GetParalelo: Integer;
+  protected
+    function GetProgress: Integer; override;
+    function GetMax: Integer; override;
+  public
+    constructor Create(AIndividual: TIndividual; AParalelos: TDynamicIntegerArray); overload;
+    function Clone: TBookmark; override;
+    procedure First; override;
+    procedure Next; override;
+    procedure Rewind; override;
+    function Move: Integer; override;
+    function Undo: Integer; override;
+    function Eof: Boolean; override;
+    property Paralelo: Integer read GetParalelo;
+    property Paralelos: TDynamicIntegerArray read FParalelos;
+    property Offset: Integer read FOffset write FOffset;
+  end;
+
+  { TTTBookmark2 }
+
+  TTTBookmark2 = class(TBookmark)
+  private
+    FIndividual: TIndividual;
+    FParalelos: TDynamicIntegerArray;
+    FPosition, FOffset, FProgress, FPeriodo1, FPeriodo2, FPeriodo3: Integer;
     function GetParalelo: Integer;
   protected
     function GetProgress: Integer; override;
@@ -941,6 +967,19 @@ begin
     Result := InternalSwap(AParalelo, APeriodo1, APeriodo2)
   else if APeriodo2 < APeriodo1 then
     Result := InternalSwap(AParalelo, APeriodo2, APeriodo1);
+end;
+
+function TTimeTable.DoMove(AParalelo, APeriodo1: Integer; var APeriodo2: Integer): Integer;
+var
+  Duracion1, Duracion2: Integer;
+begin
+  with TTimeTableModel(Model) do
+  begin
+    Duracion1 := SesionADuracion[ParaleloPeriodoASesion[AParalelo, APeriodo1]];
+    Duracion2 := SesionADuracion[ParaleloPeriodoASesion[AParalelo, APeriodo2]];
+  end;
+  Result := InternalSwap(AParalelo, APeriodo1, APeriodo2);
+  APeriodo2 := APeriodo2 + Duracion2 - Duracion1;
 end;
 
 procedure TTimeTable.DeltaValues(Delta, AParalelo, Periodo1, Periodo2: Integer);
@@ -1825,11 +1864,14 @@ begin
   Result := 3;
 end;
 
+{ TTTBookmark }
+
 constructor TTTBookmark.Create(AIndividual: TIndividual; AParalelos: TDynamicIntegerArray);
 begin
   inherited Create;
   FIndividual := AIndividual;
   FParalelos := AParalelos;
+  First;
 end;
 
 function TTTBookmark.Clone: TBookmark;
@@ -1858,26 +1900,40 @@ begin
     FPeriodo2 := SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo1]];
 end;
 
-procedure TTTBookmark.Next;
+procedure NextPeriodo(PeriodoASesion: TDynamicIntegerArray; PeriodoCant: Integer;
+  var Periodo: Integer);
 var
   Sesion: Integer;
+begin
+  Sesion := PeriodoASesion[Periodo];
+  if Sesion < 0 then
+    Inc(Periodo)
+  else
+    repeat
+      Inc(Periodo);
+    until (Periodo >= PeriodoCant)
+      or (PeriodoASesion[Periodo] <> Sesion);
+end;
+
+procedure FixPeriodo(PeriodoASesion: TDynamicIntegerArray; PeriodoCant: Integer;
+  var Periodo: Integer);
+begin
+  if Periodo > 0 then
+  begin
+    Dec(Periodo);
+    NextPeriodo(PeriodoASesion, PeriodoCant, Periodo);
+  end;
+end;
+
+
+procedure TTTBookmark.Next;
+var
   PeriodoASesion: TDynamicIntegerArray;
 begin
   with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
   begin
     PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
-    if FPeriodo1 > 0 then
-    begin
-      Dec(FPeriodo1);
-      Sesion := PeriodoASesion[FPeriodo1];
-      if Sesion < 0 then
-        Inc(FPeriodo1)
-      else
-        repeat
-          Inc(FPeriodo1);
-        until (FPeriodo1 >= PeriodoCant)
-          or (PeriodoASesion[FPeriodo1] <> Sesion);
-    end;
+    FixPeriodo(PeriodoASesion, PeriodoCant, FPeriodo1);
     if FPeriodo1 >= PeriodoCant - SesionADuracion[PeriodoASesion[PeriodoCant - 1]] then
     begin
       Inc(FPosition);
@@ -1890,14 +1946,7 @@ begin
       FPeriodo2 := FPeriodo1 + SesionADuracion[PeriodoASesion[FPeriodo1]]
     else
     begin
-      Sesion := PeriodoASesion[FPeriodo2];
-      if Sesion < 0 then
-        Inc(FPeriodo2)
-      else
-        repeat
-          Inc(FPeriodo2);
-        until (FPeriodo2 >= PeriodoCant)
-          or (PeriodoASesion[FPeriodo2] <> Sesion);
+      NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo2);
     end;
     if FPeriodo2 = PeriodoCant then
     begin
@@ -1935,16 +1984,8 @@ begin
 end;
 
 function TTTBookmark.Move: Integer;
-var
-  Duracion1, Duracion2: Integer;
 begin
-  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
-  begin
-    Duracion1 := SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo1]];
-    Duracion2 := SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo2]];
-    Result := InternalSwap(Paralelo, FPeriodo1, FPeriodo2);
-    FPeriodo2 := FPeriodo2 + Duracion2 - Duracion1;
-  end;
+  Result := TTimeTable(FIndividual).DoMove(Paralelo, FPeriodo1, FPeriodo2);
 end;
 
 function TTTBookmark.Undo: Integer;
@@ -1953,6 +1994,143 @@ begin
 end;
 
 function TTTBookmark.Eof: Boolean;
+begin
+  Result := FPosition = TTimeTableModel(FIndividual.Model).ParaleloCant;
+end;
+
+{ TTTBookmark2 }
+
+constructor TTTBookmark2.Create(AIndividual: TIndividual; AParalelos: TDynamicIntegerArray);
+begin
+  inherited Create;
+  FIndividual := AIndividual;
+  FParalelos := AParalelos;
+  First;
+end;
+
+function TTTBookmark2.Clone: TBookmark;
+begin
+  Result := TTTBookmark2.Create(FIndividual, FParalelos);
+  TTTBookmark2(Result).FPosition := FPosition;
+  TTTBookmark2(Result).FOffset := FOffset;
+  TTTBookmark2(Result).FPeriodo1 := FPeriodo1;
+  TTTBookmark2(Result).FPeriodo2 := FPeriodo2;
+  TTTBookmark2(Result).FPeriodo3 := FPeriodo3;
+end;
+
+function TTTBookmark2.GetParalelo: Integer;
+var
+  Index: Integer;
+begin
+  Index := (FPosition + FOffset) mod TTimeTableModel(FIndividual.Model).ParaleloCant;
+  Result := FParalelos[Index];
+end;
+
+procedure TTTBookmark2.First;
+begin
+  FPosition := 0;
+  FOffset := 0;
+  FProgress := 0;
+  FPeriodo1 := 0;
+  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
+    FPeriodo2 := SesionADuracion[ParaleloPeriodoASesion[Paralelo, 0]];
+  FPeriodo3 := FPeriodo2;
+end;
+
+procedure TTTBookmark2.Next;
+var
+  PeriodoASesion: TDynamicIntegerArray;
+begin
+  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
+  begin
+    PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
+    FixPeriodo(PeriodoASesion, PeriodoCant, FPeriodo1);
+    FixPeriodo(PeriodoASesion, PeriodoCant, FPeriodo2);
+    Dec(FProgress, FPeriodo3);
+    NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo3);
+    Inc(FProgress, FPeriodo3);
+    if (FPeriodo3 = PeriodoCant) then
+    begin
+      NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo2);
+      if FPeriodo2 = PeriodoCant then
+      begin
+        NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo1);
+        if FPeriodo1 >= PeriodoCant - SesionADuracion[PeriodoASesion[PeriodoCant - 1]] then
+        begin
+          Inc(FPosition);
+          FPeriodo1 := 0;
+        end;
+        FPeriodo2 := FPeriodo1 + SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo1]];
+      end
+      else if FPeriodo2 <= FPeriodo1 then
+        FPeriodo2 := FPeriodo1 + SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo1]];
+      FPeriodo3 := FPeriodo1 + SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo1]];
+    end
+    else if FPeriodo3 <= FPeriodo1 then
+      FPeriodo3 := FPeriodo1 + SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo1]];
+  end;
+end;
+
+procedure TTTBookmark2.Rewind;
+begin
+  Inc(FOffset, FPosition);
+  FPosition := 0;
+end;
+
+function TTTBookmark2.GetProgress: Integer;
+begin
+  Result := FProgress;
+  {with TTimeTableModel(FIndividual.Model) do
+    Result := (FOffset + FPosition) * ((PeriodoCant * (PeriodoCant - 1) div 2) *
+      (2 * PeriodoCant - 1) div 3) +
+    (FPeriodo1 * PeriodoCant - FPeriodo1 * (FPeriodo1 + 1) div 2 + FPeriodo2 - 1);}
+end;
+
+function TTTBookmark2.GetMax: Integer;
+begin
+  with TTimeTableModel(FIndividual.Model) do
+    Result := (FOffset + ParaleloCant) * ((PeriodoCant * (PeriodoCant - 1) div 2) *
+      (2 * PeriodoCant - 1) div 3);
+end;
+
+function TTTBookmark2.Move: Integer;
+begin
+  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
+  begin
+    if FPeriodo2 < FPeriodo3 then
+    begin
+      Result := DoMove(Paralelo, FPeriodo1, FPeriodo2) + DoMove(Paralelo, FPeriodo2, FPeriodo3);
+    end
+    else if FPeriodo2 = FPeriodo3 then
+    begin
+      Result := DoMove(Paralelo, FPeriodo1, FPeriodo2);
+      FPeriodo3 := FPeriodo2;
+    end
+    else
+      Result := DoMove(Paralelo, FPeriodo1, FPeriodo3) + DoMove(Paralelo, FPeriodo3, FPeriodo2);
+  end;
+end;
+
+function TTTBookmark2.Undo: Integer;
+begin
+  //Result := Move + Move; // Move^3 = Identity
+  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
+  begin
+    if FPeriodo2 < FPeriodo3 then
+    begin
+      Result := DoMove(Paralelo, FPeriodo2, FPeriodo3) + DoMove(Paralelo, FPeriodo1, FPeriodo2);
+    end
+    else if FPeriodo2 = FPeriodo3 then
+    begin
+      Result := DoMove(Paralelo, FPeriodo1, FPeriodo2);
+      FPeriodo3 := FPeriodo2;
+    end
+    else
+      Result := DoMove(Paralelo, FPeriodo3, FPeriodo2) + DoMove(Paralelo, FPeriodo1, FPeriodo3);
+  end;
+end;
+
+function TTTBookmark2.Eof: Boolean;
 begin
   Result := FPosition = TTimeTableModel(FIndividual.Model).ParaleloCant;
 end;

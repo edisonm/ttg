@@ -6,7 +6,7 @@ unit UDownHill;
 interface
 
 uses
-  Classes, SysUtils, USolver, UModel;
+  Classes, SysUtils, USolver, UModel, UTTModel;
 
 type
 
@@ -15,8 +15,8 @@ type
   TDownHill = class(TSolver)
   private
     class function MultiDownHill(Sender: TSolver; Individual: TIndividual;
-      ABookmark: TBookmark; ExitOnFirstDown: Boolean;
-      Level, MaxLevel, RefreshInterval, Threshold: Integer): Integer; overload;
+      var ABookmarks: TBookmarkArray; ExitOnFirstDown: Boolean;
+      Level, RefreshInterval, Threshold: Integer): Integer; overload;
     class function MultiDownHill(Sender: TSolver; Individual: TIndividual;
       MaxLevel, RefreshInterval: Integer): Integer; overload;
   protected
@@ -31,16 +31,43 @@ type
 
 implementation
 
+uses
+  UTTGBasics;
 { TDownHill }
 
 class function TDownHill.DownHill(Individual: TIndividual): Integer;
 begin
-  Result := MultiDownHill(nil, Individual, 0, 0);
+  Result := MultiDownHill(nil, Individual, 1, 0);
 end;
 
 function TDownHill.DoubleDownHill(RefreshInterval: Integer): Integer;
+{
 begin
-  Result := MultiDownHill(1, RefreshInterval);
+  Result := MultiDownHill(2, RefreshInterval);
+end;
+}
+var
+  Individual: TIndividual;
+  Bookmarks: TBookmarkArray;
+begin
+  Individual := Model.NewIndividual;
+  try
+    Individual.Assign(BestIndividual);
+    SetLength(Bookmarks, 2);
+    Bookmarks[0] := TTTBookmark2.Create(Individual,
+      RandomIndexes(TTimeTableModel(Model).ParaleloCant));
+    Bookmarks[1] := TTTBookmark.Create(Individual,
+      RandomIndexes(TTimeTableModel(Model).ParaleloCant));
+    try
+      Result := MultiDownHill(Self, Individual, Bookmarks, False, 0,
+        RefreshInterval, 0);
+    finally
+      Bookmarks[0].Free;
+      Bookmarks[1].Free;
+    end;
+  finally
+    Individual.Free;
+  end;
 end;
 
 function TDownHill.MultiDownHill(MaxLevel, RefreshInterval: Integer): Integer;
@@ -59,20 +86,24 @@ end;
 class function TDownHill.MultiDownHill(Sender: TSolver; Individual: TIndividual;
     MaxLevel, RefreshInterval: Integer): Integer;
 var
-  Bookmark: TBookmark;
+  Bookmarks: TBookmarkArray;
+  i: Integer;
 begin
-  Bookmark := Individual.NewBookmark;
+  SetLength(Bookmarks, MaxLevel);
+  for i := 0 to MaxLevel - 1 do
+    Bookmarks[i] := Individual.NewBookmark;
   try
-    Result := MultiDownHill(Sender, Individual, Bookmark, False, 0, MaxLevel,
+    Result := MultiDownHill(Sender, Individual, Bookmarks, False, 0,
       RefreshInterval, 0);
   finally
-    Bookmark.Free;
+    for i := 0 to MaxLevel - 1 do
+      Bookmarks[i].Free;
   end;
 end;
 
 class function TDownHill.MultiDownHill(Sender: TSolver; Individual: TIndividual;
-    ABookmark: TBookmark; ExitOnFirstDown: Boolean;
-    Level, MaxLevel, RefreshInterval, Threshold: Integer): Integer;
+    var ABookmarks: TBookmarkArray; ExitOnFirstDown: Boolean;
+    Level, RefreshInterval, Threshold: Integer): Integer;
 var
   Delta: Integer;
   Stop, Down: Boolean;
@@ -83,176 +114,53 @@ begin
     Result := Value;
     try
       Stop := False;
-      Bookmark := ABookmark.Clone;
-      try
-        while not Bookmark.Eof do
+      Bookmark := ABookmarks[Level];
+      Bookmark.First;
+      while not Bookmark.Eof do
+      begin
+        if Assigned(Sender) and (Level = High(ABookmarks) - 1) then
+          Sender.DoProgress(Bookmark.Progress, Bookmark.Max, RefreshInterval,
+                            Sender, Stop);
+        if Stop then
+          Exit;
+        Delta := Bookmark.Move;
+        if Delta < Threshold then
         begin
-          if Assigned(Sender) and (Level = MaxLevel - 1) then
-            Sender.DoProgress(Bookmark.Progress, Bookmark.Max, RefreshInterval, Sender, Stop);
-          if Stop then
+          if ExitOnFirstDown then
             Exit;
-          Delta := Bookmark.Move;
-          if Delta < Threshold then
+          Threshold := 0;
+          Down := True;
+        end
+        else
+        begin
+          if (Level = High(ABookmarks))
+             or (MultiDownHill(Sender, Individual, ABookmarks, True, Level + 1,
+                               RefreshInterval, Threshold - Delta) >= 0) then
+          begin
+            Down := False;
+            Bookmark.Undo;
+          end
+          else
           begin
             if ExitOnFirstDown then
               Exit;
             Threshold := 0;
             Down := True;
-          end
-          else
-          begin
-            if (Level = MaxLevel)
-                or (MultiDownHill(Sender, Individual, Bookmark,
-                True, Level + 1, MaxLevel, RefreshInterval,
-                Threshold - Delta) >= 0) then
-            begin
-              Down := False;
-              Bookmark.Undo;
-            end
-            else
-            begin
-              if ExitOnFirstDown then
-                Exit;
-              Threshold := 0;
-              Down := True;
-            end;
-          end;
-          Bookmark.Next;
-          if Down then
-          begin
-            Bookmark.Rewind;
-            if Assigned(Sender) then
-              Sender.BestIndividual.Assign(Individual);
           end;
         end;
-      finally
-        Bookmark.Free;
+        Bookmark.Next;
+        if Down then
+        begin
+          Bookmark.Rewind;
+          if Assigned(Sender) then
+            Sender.BestIndividual.Assign(Individual);
+        end;
       end;
     finally
       Result := Value - Result;
     end;
   end;
 end;
-
-(*
-function TDownHill.DoubleDownHill(RefreshInterval: Integer): Integer;
-var
-  Paralelo, Periodo1, Periodo2, Sesion, Duracion1, Duracion2, Counter,
-    Delta1: Integer;
-  Position, Offset, Max: Integer;
-  PeriodoASesion: TDynamicIntegerArray;
-  Stop, Down: Boolean;
-  { Continuar: Boolean; }
-  procedure SafeIncPeriodo;
-  begin
-    with TTimeTable(BestIndividual), TTimeTableModel(Model) do
-    begin
-      if Periodo1 > 0 then
-      begin
-        Dec(Periodo1);
-        Sesion := PeriodoASesion[Periodo1];
-        if Sesion < 0 then
-          Inc(Periodo1)
-        else
-          repeat
-            Inc(Periodo1);
-          until (Periodo1 >= PeriodoCant)
-            or (PeriodoASesion[Periodo1] <> Sesion);
-      end;
-      Down := True;
-      if Periodo2 <= Periodo1 then
-        Periodo2 := Periodo1 + SesionADuracion[PeriodoASesion[Periodo1]]
-      else
-      begin
-        Sesion := PeriodoASesion[Periodo2];
-        if Sesion < 0 then
-          Inc(Periodo1)
-        else
-          repeat
-            Inc(Periodo2);
-          until (Periodo2 >= PeriodoCant)
-            or (PeriodoASesion[Periodo2] <> Sesion);
-      end;
-    end;
-  end;
-var
-  Paralelos: TDynamicIntegerArray;
-  Index: Integer;
-begin
-  with TTimeTable(BestIndividual), TTimeTableModel(Model) do
-  begin
-    Paralelos := RandomIndexes(ParaleloCant);
-    Counter := 0;
-    Offset := 0;
-    Index := 0;
-    Position := 0;
-    Max := SesionCantidadDoble;
-    Result := Value;
-    while Counter < ParaleloCant do
-    begin
-      Index := (Offset + Counter) mod ParaleloCant;
-      Paralelo := Paralelos[Index];
-      Periodo1 := 0;
-      PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
-      Down := False;
-      while Periodo1 < PeriodoCant do
-      begin
-        Periodo2 := Periodo1 + SesionADuracion[PeriodoASesion[Periodo1]];
-        while Periodo2 < PeriodoCant do
-        begin
-          Stop := False;
-          DoProgress(Position, Max, RefreshInterval, Self, Stop);
-          if Stop then
-          begin
-            Result := Value - Result;
-            Exit;
-          end;
-          Inc(Position);
-          if Pollinate then
-            SafeIncPeriodo
-          else
-          begin
-          Duracion1 := SesionADuracion[PeriodoASesion[Periodo1]];
-          Duracion2 := SesionADuracion[PeriodoASesion[Periodo2]];
-          Delta1 := InternalSwap(Paralelo, Periodo1, Periodo2);
-          if Delta1 < 0 then
-          begin
-            Down := True;
-            Inc(Periodo2, Duracion2);
-          end
-          else
-          begin
-            if (DownHill(Paralelos, Index, True, False, -Delta1) < 0) then
-              SafeIncPeriodo
-            else
-            begin
-              InternalSwap(Paralelo, Periodo1, Periodo2 + Duracion2 - Duracion1);
-              Inc(Periodo2, Duracion2);
-            end;
-          end;
-          end;
-        end;
-        Sesion := PeriodoASesion[Periodo1];
-        if Sesion < 0 then
-          Inc(Periodo1)
-        else
-          repeat
-            Inc(Periodo1);
-          until (Periodo1 >= PeriodoCant)
-            or (PeriodoASesion[Periodo1] <> Sesion);
-      end;
-      Inc(Counter);
-      if Down then
-      begin
-        Max := Position + SesionCantidadDoble;
-        Offset := (Offset + Counter) mod ParaleloCant;
-        Counter := 0;
-      end;
-    end;
-    Result := Value - Result;
-  end;
-end;
-*)
 
 procedure TDownHill.Execute(RefreshInterval: Integer);
 begin

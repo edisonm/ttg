@@ -31,6 +31,8 @@ type
     property Max: Integer read GetMax;
   end;
 
+  TBookmarkArray = array of TBookmark;
+
   { TIndividual }
 
   TIndividual = class
