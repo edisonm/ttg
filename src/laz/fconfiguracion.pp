@@ -21,11 +21,13 @@ type
     creProbCruzamiento: TEdit;
     creMutationProb: TEdit;
     creProbReparacion: TEdit;
+    edBookmarks: TEdit;
     Label10: TLabel;
     Label11: TLabel;
     Label12: TLabel;
     Label13: TLabel;
     Label20: TLabel;
+    Label21: TLabel;
     Label43: TLabel;
     Label8: TLabel;
     pgcConfig: TPageControl;
@@ -193,6 +195,7 @@ begin
       dedSharedDirectory.Directory := SharedDirectory;
       crePollinationProb.Text := FloatToStr(PollinationProb);
       CBApplyDoubleDownHill.Checked := ApplyDoubleDownHill;
+      edBookmarks.Text := Bookmarks;
    end;
 end;
 
@@ -227,6 +230,7 @@ begin
       SharedDirectory := dedSharedDirectory.Directory;
       PollinationProb := StrToFloat(crePollinationProb.Text);
       ApplyDoubleDownHill := CBApplyDoubleDownHill.Checked;
+      Bookmarks := edBookmarks.Text;
    end;
 end;
 

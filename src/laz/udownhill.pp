@@ -15,14 +15,16 @@ type
   TDownHill = class(TSolver)
   private
     class function MultiDownHill(Sender: TSolver; Individual: TIndividual;
-      var ABookmarks: TBookmarkArray; ExitOnFirstDown: Boolean;
+      ABookmarks: TBookmarkArray; ExitOnFirstDown: Boolean;
       Level, RefreshInterval, Threshold: Integer): Integer; overload;
-    class function MultiDownHill(Sender: TSolver; Individual: TIndividual;
-      MaxLevel, RefreshInterval: Integer): Integer; overload;
   protected
   public
+    class function MultiDownHill(Sender: TSolver; Individual: TIndividual;
+      ABookmarks: TBookmarkArray; ExitOnFirstDown: Boolean;
+      RefreshInterval: Integer): Integer;
+    class function MultiDownHill(Sender: TSolver; Individual: TIndividual;
+      MaxLevel, RefreshInterval: Integer): Integer; overload;
     class function DownHill(Individual: TIndividual): Integer;
-    function DoubleDownHill(RefreshInterval: Integer): Integer;
     function MultiDownHill(MaxLevel, RefreshInterval: Integer): Integer; overload;
     procedure Execute(RefreshInterval: Integer); override;
     procedure SaveSolutionToDatabase(ACodHorario: Integer;
@@ -31,43 +33,11 @@ type
 
 implementation
 
-uses
-  UTTGBasics;
 { TDownHill }
 
 class function TDownHill.DownHill(Individual: TIndividual): Integer;
 begin
   Result := MultiDownHill(nil, Individual, 1, 0);
-end;
-
-function TDownHill.DoubleDownHill(RefreshInterval: Integer): Integer;
-{
-begin
-  Result := MultiDownHill(2, RefreshInterval);
-end;
-}
-var
-  Individual: TIndividual;
-  Bookmarks: TBookmarkArray;
-begin
-  Individual := Model.NewIndividual;
-  try
-    Individual.Assign(BestIndividual);
-    SetLength(Bookmarks, 2);
-    Bookmarks[0] := TTTBookmark2.Create(Individual,
-      RandomIndexes(TTimeTableModel(Model).ParaleloCant));
-    Bookmarks[1] := TTTBookmark.Create(Individual,
-      RandomIndexes(TTimeTableModel(Model).ParaleloCant));
-    try
-      Result := MultiDownHill(Self, Individual, Bookmarks, False, 0,
-        RefreshInterval, 0);
-    finally
-      Bookmarks[0].Free;
-      Bookmarks[1].Free;
-    end;
-  finally
-    Individual.Free;
-  end;
 end;
 
 function TDownHill.MultiDownHill(MaxLevel, RefreshInterval: Integer): Integer;
@@ -102,8 +72,22 @@ begin
 end;
 
 class function TDownHill.MultiDownHill(Sender: TSolver; Individual: TIndividual;
-    var ABookmarks: TBookmarkArray; ExitOnFirstDown: Boolean;
-    Level, RefreshInterval, Threshold: Integer): Integer;
+    ABookmarks: TBookmarkArray; ExitOnFirstDown: Boolean;
+    RefreshInterval: Integer): Integer;
+begin
+  try
+    Result := MultiDownHill(Sender, Individual, ABookmarks, ExitOnFirstDown, 0,
+      RefreshInterval, 0);
+  finally
+    if assigned (Sender) and (Sender.SharedDirectory <> '')
+        and FileExists(Sender.FileName) then
+      DeleteFile(Sender.FileName);
+  end;
+end;
+
+class function TDownHill.MultiDownHill(Sender: TSolver; Individual: TIndividual;
+    ABookmarks: TBookmarkArray; ExitOnFirstDown: Boolean; Level, RefreshInterval,
+    Threshold: Integer): Integer;
 var
   Delta: Integer;
   Stop, Down: Boolean;
@@ -118,34 +102,38 @@ begin
       Bookmark.First;
       while not Bookmark.Eof do
       begin
-        if Assigned(Sender) and (Level = High(ABookmarks) - 1) then
+        Down := False;
+        if Assigned(Sender) and (Level = 0) then
+        begin
           Sender.DoProgress(Bookmark.Progress, Bookmark.Max, RefreshInterval,
                             Sender, Stop);
-        if Stop then
-          Exit;
-        Delta := Bookmark.Move;
-        if Delta < Threshold then
-        begin
-          if ExitOnFirstDown then
+          if Stop then
             Exit;
-          Threshold := 0;
-          Down := True;
-        end
-        else
+          if Sender.Pollinate then
+            Down := True;
+        end;
+        if not Down then
         begin
-          if (Level = High(ABookmarks))
-             or (MultiDownHill(Sender, Individual, ABookmarks, True, Level + 1,
-                               RefreshInterval, Threshold - Delta) >= 0) then
-          begin
-            Down := False;
-            Bookmark.Undo;
-          end
-          else
+          Delta := Bookmark.Move;
+          if Delta < Threshold then
           begin
             if ExitOnFirstDown then
               Exit;
             Threshold := 0;
             Down := True;
+          end
+          else
+          begin
+            if (Level = High(ABookmarks)) or (MultiDownHill(Sender, Individual,
+              ABookmarks, True, Level + 1, RefreshInterval, Threshold - Delta) >= 0) then
+              Bookmark.Undo
+            else
+            begin
+              if ExitOnFirstDown then
+                Exit;
+              Threshold := 0;
+              Down := True;
+            end;
           end;
         end;
         Bookmark.Next;
@@ -165,12 +153,7 @@ end;
 procedure TDownHill.Execute(RefreshInterval: Integer);
 begin
   inherited;
-  try
-    DoubleDownHill(RefreshInterval);
-  finally
-    if (SharedDirectory <> '') and FileExists(FileName) then
-      DeleteFile(FileName);
-  end;
+  MultiDownHill(2, RefreshInterval);
 end;
 
 procedure TDownHill.SaveSolutionToDatabase(ACodHorario: Integer;

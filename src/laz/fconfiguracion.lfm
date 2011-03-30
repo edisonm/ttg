@@ -1,7 +1,7 @@
 object ConfiguracionForm: TConfiguracionForm
-  Left = 874
+  Left = 1088
   Height = 442
-  Top = 270
+  Top = 308
   Width = 490
   ActiveControl = pgcConfig
   BorderStyle = bsDialog
@@ -209,98 +209,106 @@ object ConfiguracionForm: TConfiguracionForm
       ClientWidth = 465
       ImageIndex = 3
       object Label19: TLabel
-        Left = 237
-        Height = 14
-        Top = 13
-        Width = 47
+        Left = 8
+        Height = 13
+        Top = 36
+        Width = 41
         Caption = 'Semilla:'
         ParentColor = False
       end
       object Label29: TLabel
-        Left = 237
-        Height = 14
-        Top = 110
-        Width = 90
+        Left = 235
+        Height = 13
+        Top = 13
+        Width = 81
         Caption = 'Actualizar cada:'
         ParentColor = False
       end
       object Label36: TLabel
-        Left = 8
-        Height = 14
-        Top = 134
-        Width = 104
+        Left = 235
+        Height = 13
+        Top = 132
+        Width = 89
         Caption = 'Horarios iniciales:'
         ParentColor = False
       end
       object Label42: TLabel
-        Left = 237
-        Height = 14
-        Top = 134
-        Width = 113
+        Left = 235
+        Height = 13
+        Top = 109
+        Width = 97
         Caption = 'Dir. de intercambio:'
         ParentColor = False
       end
       object Label8: TLabel
-        Left = 8
-        Height = 14
-        Top = 36
-        Width = 62
+        Left = 235
+        Height = 13
+        Top = 84
+        Width = 53
         Caption = 'Individuos:'
         ParentColor = False
       end
       object Label13: TLabel
-        Left = 237
-        Height = 14
+        Left = 235
+        Height = 13
         Top = 36
-        Width = 68
+        Width = 59
         Caption = 'Iteraciones:'
         ParentColor = False
       end
       object Label10: TLabel
-        Left = 8
-        Height = 14
-        Top = 61
-        Width = 72
+        Left = 9
+        Height = 13
+        Top = 84
+        Width = 61
         Caption = 'Prob. Cruce:'
         ParentColor = False
       end
       object Label11: TLabel
         Left = 8
-        Height = 14
-        Top = 85
-        Width = 89
+        Height = 13
+        Top = 109
+        Width = 77
         Caption = 'Prob. Mutacion:'
         ParentColor = False
       end
       object Label12: TLabel
-        Left = 237
-        Height = 14
-        Top = 61
-        Width = 102
+        Left = 8
+        Height = 13
+        Top = 132
+        Width = 87
         Caption = 'Prob. Reparacion:'
         ParentColor = False
       end
       object Label43: TLabel
-        Left = 237
-        Height = 14
-        Top = 85
-        Width = 104
+        Left = 8
+        Height = 13
+        Top = 156
+        Width = 92
         Caption = 'Prob. Polinizacion:'
+        ParentColor = False
+      end
+      object Label21: TLabel
+        Left = 235
+        Height = 13
+        Top = 62
+        Width = 103
+        Caption = 'Niveles de descenso:'
         ParentColor = False
       end
       object CBRandomize: TCheckBox
         Left = 8
         Height = 20
         Top = 8
-        Width = 213
+        Width = 188
         Caption = 'Inicializar con la hora del sistema'
         OnClick = CBRandomizeClick
         TabOrder = 0
       end
       object speSeed: TSpinEdit
-        Left = 345
-        Height = 23
-        Top = 8
+        Left = 116
+        Height = 22
+        Top = 32
         Width = 112
         MaxValue = 2147483647
         MinValue = 1
@@ -309,8 +317,8 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object speNumIteraciones: TSpinEdit
         Left = 345
-        Height = 23
-        Top = 105
+        Height = 22
+        Top = 8
         Width = 112
         MaxValue = 2147483647
         MinValue = 1
@@ -318,16 +326,16 @@ object ConfiguracionForm: TConfiguracionForm
         Value = 10
       end
       object edtHorarioIni: TEdit
-        Left = 116
-        Height = 23
-        Top = 129
-        Width = 112
+        Left = 344
+        Height = 22
+        Top = 128
+        Width = 113
         TabOrder = 3
       end
       object dedSharedDirectory: TDirectoryEdit
-        Left = 345
-        Height = 23
-        Top = 129
+        Left = 343
+        Height = 22
+        Top = 104
         Width = 89
         Directory = '/tmp/'
         ShowHidden = False
@@ -336,9 +344,9 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 4
       end
       object speTamPoblacion: TSpinEdit
-        Left = 117
-        Height = 23
-        Top = 32
+        Left = 344
+        Height = 22
+        Top = 80
         Width = 112
         MaxValue = 2147483647
         MinValue = 1
@@ -347,7 +355,7 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object speNumMaxGeneracion: TSpinEdit
         Left = 345
-        Height = 23
+        Height = 22
         Top = 32
         Width = 112
         MaxValue = 2147483647
@@ -356,44 +364,48 @@ object ConfiguracionForm: TConfiguracionForm
         Value = 1
       end
       object creProbCruzamiento: TEdit
-        Left = 117
-        Height = 20
-        Top = 57
+        Left = 116
+        Height = 22
+        Top = 80
         Width = 112
-        AutoSize = False
         TabOrder = 7
       end
       object creMutationProb: TEdit
-        Left = 117
-        Height = 21
-        Top = 80
+        Left = 116
+        Height = 22
+        Top = 104
         Width = 112
-        AutoSize = False
         TabOrder = 8
       end
       object creProbReparacion: TEdit
-        Left = 345
-        Height = 20
-        Top = 57
+        Left = 116
+        Height = 22
+        Top = 128
         Width = 112
-        AutoSize = False
         TabOrder = 9
       end
       object crePollinationProb: TEdit
-        Left = 345
-        Height = 21
-        Top = 80
+        Left = 116
+        Height = 22
+        Top = 152
         Width = 112
-        AutoSize = False
         TabOrder = 10
       end
       object CBApplyDoubleDownHill: TCheckBox
-        Left = 12
+        Left = 8
         Height = 20
-        Top = 106
-        Width = 194
-        Caption = 'Aplicar descenso doble (lento)'
+        Top = 57
+        Width = 141
+        Caption = 'Aplicar descenso (lento)'
         TabOrder = 11
+      end
+      object edBookmarks: TEdit
+        Left = 345
+        Height = 22
+        Top = 56
+        Width = 112
+        TabOrder = 12
+        Text = '1,2'
       end
     end
     object tbsPesos: TTabSheet

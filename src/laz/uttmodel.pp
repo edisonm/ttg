@@ -131,9 +131,9 @@ type
 
     TODO:
     2011-03-13:
-    - Change implementation of MateriaNoDispersa for a more compositional formula
-    - Remove FParaleloMateriaDia{Min,Max}Hora
-    - IncCant and DecCant must be methods -DONE
+    - DONE Change implementation of MateriaNoDispersa for a more compositional formula
+    - DONE Remove FParaleloMateriaDia{Min,Max}Hora
+    - DONE IncCant and DecCant must be methods
 
 
   *)
@@ -1934,6 +1934,7 @@ begin
   begin
     PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
     FixPeriodo(PeriodoASesion, PeriodoCant, FPeriodo1);
+    //NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo2);
     if FPeriodo1 >= PeriodoCant - SesionADuracion[PeriodoASesion[PeriodoCant - 1]] then
     begin
       Inc(FPosition);
@@ -2049,7 +2050,7 @@ begin
     Dec(FProgress, FPeriodo3);
     NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo3);
     Inc(FProgress, FPeriodo3);
-    if (FPeriodo3 = PeriodoCant) then
+    if FPeriodo3 = PeriodoCant then
     begin
       NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo2);
       if FPeriodo2 = PeriodoCant then

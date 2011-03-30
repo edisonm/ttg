@@ -38,7 +38,8 @@ type
     procedure Execute(RefreshInterval: Integer); virtual;
     procedure SaveSolutionToDatabase(ACodHorario: Integer;
       const AExtraInfo: string; AMomentoInicial, AMomentoFinal: TDateTime); virtual; abstract;
-    function Pollinate: Boolean;
+    function Pollinate: Boolean; overload;
+    function Pollinate(Individual:TIndividual): Boolean; overload;
     property OnProgress: TProgressEvent read FOnProgress write FOnProgress;
     property BestIndividual: TIndividual read FBestIndividual;
     property SharedDirectory: string read FSharedDirectory write FSharedDirectory;
@@ -102,6 +103,11 @@ begin
 end;
 
 function TSolver.Pollinate: Boolean;
+begin
+  Result := Pollinate(BestIndividual);
+end;
+
+function TSolver.Pollinate(Individual: TIndividual): Boolean;
   procedure Exportar;
   var
     Stream: TStream;
@@ -109,9 +115,9 @@ function TSolver.Pollinate: Boolean;
   begin
     Stream := TFileStream.Create(FileName, fmCreate or fmShareExclusive);
     try
-      Value := BestIndividual.Value;
+      Value := Individual.Value;
       Stream.write(Value, SizeOf(Value));
-      BestIndividual.SaveToStream(Stream);
+      Individual.SaveToStream(Stream);
       Inc(FNumExports);
     finally
       Stream.Free;
@@ -129,16 +135,16 @@ begin
       Stream := TFileStream.Create(FileName, fmOpenRead or fmShareDenyWrite);
       try
         Stream.read(Value, SizeOf(Value));
-        if Value < BestIndividual.Value then
+        if Value < Individual.Value then
         begin
-          BestIndividual.LoadFromStream(Stream);
+          Individual.LoadFromStream(Stream);
           Inc(FNumImports);
           Result := True;
         end;
       finally
         Stream.Free;
       end;
-      if Value > BestIndividual.Value then
+      if Value > Individual.Value then
         Exportar;
     end
     else

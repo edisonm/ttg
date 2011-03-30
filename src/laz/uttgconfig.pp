@@ -14,7 +14,9 @@ type
 
   TTTGConfig = class(TConfigStorage)
   private
+    function GetBookmarks: string;
     function GetNomColegio: string;
+    procedure SetBookmarks(const AValue: string);
     procedure SetNomColegio(const Value: string);
     function GetAnioLectivo: string;
     procedure SetAnioLectivo(const Value: string);
@@ -98,13 +100,24 @@ type
     property SharedDirectory: string read GetSharedDirectory write SetSharedDirectory;
     property PollinationProb: Double read GetPollinationProb write SetPollinationProb;
     property ApplyDoubleDownHill: Boolean read GetApplyDoubleDownHill write SetApplyDoubleDownHill;
+    property Bookmarks: string read GetBookmarks write SetBookmarks;
   end;
 
 implementation
 
+function TTTGConfig.GetBookmarks: string;
+begin
+  Result := Values['Bookmarks'];
+end;
+
 function TTTGConfig.GetNomColegio: string;
 begin
    Result := Values['NomColegio'];
+end;
+
+procedure TTTGConfig.SetBookmarks(const AValue: string);
+begin
+  Values['Bookmarks'] := AValue;
 end;
 
 procedure TTTGConfig.SetNomColegio(const Value: string);
@@ -398,6 +411,7 @@ begin
   CrossProb := 0.3;
   MutationProb := 0.2;
   RepairProb := 0.2;
+  Bookmarks := '1,2';
   ApplyDoubleDownHill := False;
   HorarioIni := '';
   SharedDirectory := GetTempDir;
