@@ -21,7 +21,7 @@ type
   public
     class function MultiDownHill(Sender: TSolver; Individual: TIndividual;
       ABookmarks: TBookmarkArray; ExitOnFirstDown: Boolean;
-      RefreshInterval: Integer): Integer;
+      RefreshInterval: Integer): Integer; overload;
     class function MultiDownHill(Sender: TSolver; Individual: TIndividual;
       MaxLevel, RefreshInterval: Integer): Integer; overload;
     class function DownHill(Individual: TIndividual): Integer;
@@ -109,7 +109,7 @@ begin
                             Sender, Stop);
           if Stop then
             Exit;
-          if Sender.Pollinate then
+          if Sender.Pollinate(Individual) then
             Down := True;
         end;
         if not Down then
@@ -163,8 +163,8 @@ var
 begin
   Report := TStringList.Create;
   try
-    Report.Add('Algoritmo de Descenso Rapido Doble');
-    Report.Add('==================================');
+    Report.Add('Algoritmo de Descenso');
+    Report.Add('=====================');
     if AExtraInfo <> '' then
       Report.Add(AExtraInfo);
     BestIndividual.ReportValues(Report);

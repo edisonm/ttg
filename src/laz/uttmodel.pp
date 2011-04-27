@@ -1928,39 +1928,35 @@ end;
 
 procedure TTTBookmark.Next;
 var
+  d1, d2: Integer;
   PeriodoASesion: TDynamicIntegerArray;
 begin
   with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
   begin
     PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
-    FixPeriodo(PeriodoASesion, PeriodoCant, FPeriodo1);
-    //NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo2);
-    if FPeriodo1 >= PeriodoCant - SesionADuracion[PeriodoASesion[PeriodoCant - 1]] then
+    d1 := PeriodoCant - SesionADuracion[PeriodoASesion[PeriodoCant - 1]];
+    if FPeriodo2 >= d1 then
     begin
-      Inc(FPosition);
-      FPeriodo1 := 0;
-      FPeriodo2 := SesionADuracion[ParaleloPeriodoASesion[Paralelo, 0]];
-    end
-    else
-    begin
-    if (FPeriodo2 <= FPeriodo1) then
-      FPeriodo2 := FPeriodo1 + SesionADuracion[PeriodoASesion[FPeriodo1]]
-    else
-    begin
-      NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo2);
-    end;
-    if FPeriodo2 = PeriodoCant then
-    begin
-      Inc(FPeriodo1, SesionADuracion[PeriodoASesion[FPeriodo1]]);
-      if FPeriodo1 = PeriodoCant - SesionADuracion[PeriodoASesion[PeriodoCant - 1]] then
+      d2 := d1 - SesionADuracion[PeriodoASesion[d1 - 1]];
+      if FPeriodo1 >= d2 then
       begin
         Inc(FPosition);
         FPeriodo1 := 0;
         FPeriodo2 := SesionADuracion[ParaleloPeriodoASesion[Paralelo, 0]];
       end
       else
+      begin
+        NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo1);
         FPeriodo2 := FPeriodo1 + SesionADuracion[PeriodoASesion[FPeriodo1]];
-    end;
+      end
+    end
+    else
+    begin
+      FixPeriodo(PeriodoASesion, PeriodoCant, FPeriodo1);
+      if FPeriodo2 <= FPeriodo1 then
+        FPeriodo2 := FPeriodo1 + SesionADuracion[PeriodoASesion[FPeriodo1]]
+      else
+        NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo2);
     end;
   end;
 end;
@@ -2040,35 +2036,61 @@ end;
 
 procedure TTTBookmark2.Next;
 var
+  d1, d2: Integer;
   PeriodoASesion: TDynamicIntegerArray;
 begin
   with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
   begin
     PeriodoASesion := ParaleloPeriodoASesion[Paralelo];
-    FixPeriodo(PeriodoASesion, PeriodoCant, FPeriodo1);
-    FixPeriodo(PeriodoASesion, PeriodoCant, FPeriodo2);
-    Dec(FProgress, FPeriodo3);
-    NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo3);
-    Inc(FProgress, FPeriodo3);
-    if FPeriodo3 = PeriodoCant then
+    d1 := PeriodoCant - SesionADuracion[PeriodoASesion[PeriodoCant - 1]];
+    if FPeriodo3 >= d1 then
     begin
-      NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo2);
-      if FPeriodo2 = PeriodoCant then
+      if FPeriodo2 >= d1 then
       begin
-        NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo1);
-        if FPeriodo1 >= PeriodoCant - SesionADuracion[PeriodoASesion[PeriodoCant - 1]] then
+        d2 := d1 - SesionADuracion[PeriodoASesion[d1 - 1]];
+        if FPeriodo1 >= d2 then
         begin
           Inc(FPosition);
           FPeriodo1 := 0;
+          FPeriodo2 := SesionADuracion[ParaleloPeriodoASesion[Paralelo, 0]];
+          FPeriodo3 := FPeriodo2;
+        end
+        else
+        begin
+          NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo1);
+          FPeriodo2 := FPeriodo1 + SesionADuracion[PeriodoASesion[FPeriodo1]];
+          FPeriodo3 := FPeriodo2;
         end;
-        FPeriodo2 := FPeriodo1 + SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo1]];
       end
-      else if FPeriodo2 <= FPeriodo1 then
-        FPeriodo2 := FPeriodo1 + SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo1]];
-      FPeriodo3 := FPeriodo1 + SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo1]];
+      else
+      begin
+        FixPeriodo(PeriodoASesion, PeriodoCant, FPeriodo1);
+        if FPeriodo2 <= FPeriodo1 then
+        begin
+          FPeriodo2 := FPeriodo1 + SesionADuracion[PeriodoASesion[FPeriodo1]];
+          FPeriodo3 := FPeriodo2;
+        end
+        else
+        begin
+          NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo2);
+          FPeriodo3 := FPeriodo1 + SesionADuracion[PeriodoASesion[FPeriodo1]];
+        end;
+      end;
     end
-    else if FPeriodo3 <= FPeriodo1 then
-      FPeriodo3 := FPeriodo1 + SesionADuracion[ParaleloPeriodoASesion[Paralelo, FPeriodo1]];
+    else
+    begin
+      FixPeriodo(PeriodoASesion, PeriodoCant, FPeriodo1);
+      if FPeriodo2 <= FPeriodo1 then
+        FPeriodo2 := FPeriodo1 + SesionADuracion[PeriodoASesion[FPeriodo1]]
+      else
+        FixPeriodo(PeriodoASesion, PeriodoCant, FPeriodo2);
+      if FPeriodo3 <= FPeriodo1 then
+        FPeriodo3 := FPeriodo1 + SesionADuracion[PeriodoASesion[FPeriodo1]]
+      else
+      begin
+        NextPeriodo(PeriodoASesion, PeriodoCant, FPeriodo3);
+      end;
+    end;
   end;
 end;
 
@@ -2080,8 +2102,14 @@ end;
 
 function TTTBookmark2.GetProgress: Integer;
 begin
-  Result := FProgress;
-  {with TTimeTableModel(FIndividual.Model) do
+  with TTimeTableModel(FIndividual.Model) do
+    Result := (FOffset + FPosition) * ((PeriodoCant * (PeriodoCant - 1) div 2)
+      * (2 * PeriodoCant - 1) div 3) + PeriodoCant * ( FPeriodo1 * PeriodoCant
+      + FPeriodo2 - (FPeriodo1 + 1) * (FPeriodo1 + 1) )
+      - FPeriodo2 * (FPeriodo1 + 1) + (FPeriodo1 * (FPeriodo1 + 1) div 2)
+      * (2 * FPeriodo1 + 7) div 3 + FPeriodo3;
+  {Result := FProgress;
+  with TTimeTableModel(FIndividual.Model) do
     Result := (FOffset + FPosition) * ((PeriodoCant * (PeriodoCant - 1) div 2) *
       (2 * PeriodoCant - 1) div 3) +
     (FPeriodo1 * PeriodoCant - FPeriodo1 * (FPeriodo1 + 1) div 2 + FPeriodo2 - 1);}
@@ -2114,7 +2142,6 @@ end;
 
 function TTTBookmark2.Undo: Integer;
 begin
-  //Result := Move + Move; // Move^3 = Identity
   with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
   begin
     if FPeriodo2 < FPeriodo3 then

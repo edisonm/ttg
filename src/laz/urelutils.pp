@@ -411,17 +411,26 @@ var
 begin
   Result := '"';
   l := Length(AString);
-  for i := 1 to l do
+  i := 1;
+  while i <= l do
   begin
     case AString[i] of
-      #13 : Result := Result + '\n';
-      #10 : Result := Result + '\r';
+      #13 :
+        if (i < l) and (AString[i+1] = #10) then
+        begin
+          Result := Result + '\n\r';
+          inc(i);
+        end
+        else
+          Result := Result + '\n';
+      #10 : Result := Result + '\n\r';
       '\' : Result := Result + '\\';
       '''': Result := Result + '\''';
       '"' : Result := Result + '\"';
     else
       Result := Result + AString[i]
-    end
+    end;
+    inc(i);
   end;
   Result := Result + '"';
 end;

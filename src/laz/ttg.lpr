@@ -12,7 +12,7 @@ uses
   Interfaces,
 {$ENDIF}
   Forms,
-  Dialogs, MultiThreadProcsLaz,
+  Dialogs, multithreadprocslaz,
   SysUtils,
   FMain {MainForm},
   DMaster in 'DMaster.pp' {MasterDataModule: TDataModule},

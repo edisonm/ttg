@@ -407,13 +407,13 @@ procedure TEvolElitist.ReportParameters(AInforme: TStrings);
 begin
   with AInforme do
   begin
-    Add(Format('Semilla Numeros aleatorios:   %7.u', [FRandSeed]));
-    Add(Format('Numero de individuos:         %7.d', [FPopulationSize]));
-    Add(Format('Maximo de generaciones:       %7.d', [FMaxIteration]));
-    Add(Format('Probabilidad de cruce:        %1.5f', [FCrossProb]));
-    Add(Format('Probabilidad de Mutacion:     %1.5f', [FMutationProb]));
-    Add(Format('Probabilidad de Reparacion:   %1.5f', [FRepairProb]));
-    Add(Format('Probabilidad de polinizacion: %1.5f', [PollinationProb]));
+    Add(Format('Semilla Numeros aleatorios:  %12.u', [FRandSeed]));
+    Add(Format('Numero de individuos:        %12.d', [FPopulationSize]));
+    Add(Format('Maximo de generaciones:      %12.d', [FMaxIteration]));
+    Add(Format('Probabilidad de cruce:             %1.4f', [FCrossProb]));
+    Add(Format('Probabilidad de Mutacion:          %1.4f', [FMutationProb]));
+    Add(Format('Probabilidad de Reparacion:        %1.4f', [FRepairProb]));
+    Add(Format('Probabilidad de polinizacion:      %1.4f', [PollinationProb]));
   end;
 end;
 

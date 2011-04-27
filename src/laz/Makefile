@@ -53,7 +53,7 @@ $(ABOUT).pp: $(ABOUT).pp.tmpl
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
 $(TTGEXE): $(BASELAZFILES) ttg.lpi
-	lazbuild ttg.lpi
+	lazbuild ttg.lpi ; strip --strip-all $(TTGEXE)
 
 $(DSRCBASE).pp $(DSRCBASE).lfm: dbutils $(TTGMDB) Makefile
 	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule \

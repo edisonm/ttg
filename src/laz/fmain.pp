@@ -182,15 +182,9 @@ type
     procedure PedirRegistrarSoftware;
     procedure ProtegerSoftware;
 
-    //procedure MarcarProgreso(Count, Cant: Integer);
-
   public
     { Public declarations }
-{$IFNDEF FREEWARE}
-    {procedure OnRegistrarMejor(Sender: TObject);}
-    property Pasada: Integer read FPasada write FPasada;
     property UpdateIndex: Integer read FUpdateIndex write FUpdateIndex;
-{$ENDIF}
     property Progress: Integer read FProgress write SetProgress;
     property Min: Integer read FMin write SetMin;
     property Max: Integer read FMax write SetMax;
@@ -428,7 +422,6 @@ begin
 end;
 
 {$IFNDEF FREEWARE}
-
 procedure TMainForm.ElaborarHorarios(const SCodHorarios: string);
 var
   ValidCodes, WrongCodes: TDynamicIntegerArray;
@@ -496,43 +489,6 @@ begin
   end;
 end;
 {$ENDIF}
-{
-procedure TMainForm.ProgressDescensoDoble(I, Max: Integer; Horario: TObjetoTimeTableModel; var Stop: Boolean);
-var
-  t, x: TDateTime;
-begin
-  if I = 0 then
-  begin
-    Self.Max := Max;
-    x := 0;
-    Inc(FPasada);
-    MomentoInicialProgress := Now;
-    t := 0;
-  end
-  else
-  begin
-    t := Now - MomentoInicialProgress;
-    x := t * (Max - I) / I;
-  end;
-  Self.Progress := i;
-  StatusBar.Panels[0].Text := Format('Pasada %d - %d de %d %f - van: %d-%s - restan: %d-%s',
-                                     [FPasada, i, max, value, Trunc(t),
-                                      FormatDateTime('hh:mm:ss', t), Trunc(x),
-                                      FormatDateTime('hh:mm:ss', x)]);
-  Application.ProcessMessages;
-  Stop := FCloseClick;
-end;
-}
-
-{
-procedure TMainForm.OnRegistrarMejor(Sender: TObject);
-begin
-  with Sender as TEvolElitist do
-  begin
-    FLogStrings.Add(Format('%g; %g; %g', [Now, BestIndividual.Value, AverageValue]));
-  end;
-end;
-}
 
 procedure TMainForm.SetMax(Value: Integer);
 begin

@@ -86,7 +86,7 @@ type
     procedure FormCreate(Sender: TObject);
   private
     FUpdateIndex: Integer;
-    FInit: TDateTime;
+    FInit, FTimePosition0: TDateTime;
     FCloseClick:Boolean;
     FCancelClick: Boolean;
     function GetProgressMax: Integer;
@@ -155,12 +155,14 @@ begin
   end;
   with ASolver, TTimeTable(BestIndividual) do
   begin
-    t := Now - FInit;
-    lblElapsedTime.Caption := FormatDateTime('hh:nn:ss ', t);
+    t := Now;
+    lblElapsedTime.Caption := FormatDateTime('hh:nn:ss ', t - FInit);
     PBProgress.Max := AMax;
     if APosition <> 0 then
       lblRemainingTime.Caption := FormatDateTime('hh:nn:ss ',
-        t * (AMax - APosition) / APosition);
+        (t - FTimePosition0) * (AMax - APosition) / APosition)
+    else
+      FTimePosition0 := t;
     lblPosition.Caption := Format('%d/%d', [APosition, AMax]);
     PBProgress.Position := APosition;
     lblCruceProfesor.Caption := Format('%d ', [CruceProfesor]);
@@ -217,6 +219,7 @@ procedure TProgressForm.FormCreate(Sender: TObject);
 begin
   // HelpContext := ActElaborarHorario.HelpContext;
   FInit := Now;
+  FTimePosition0 := FInit;
   lblInit.Caption := FormatDateTime(Format('%s %s ', [ShortDateFormat,
     LongTimeFormat]), FInit);
   FCloseClick := False;
