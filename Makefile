@@ -34,7 +34,7 @@ $(ISS): $(ISS).tmpl $(TTGSQL)
 SRCTYPE=laz
 
 $(TTGEXE):
-	cd src/$(SRCTYPE) ; $(MAKE) $(TTGEXE) ; strip --strip-all $(TTGEXE)
+	cd src/$(SRCTYPE) ; $(MAKE) $(TTGEXE)
 
 $(DBUTILS): src/dbutils/$(DBUTILSDPR) $(addprefix src/dbutils/, $(addsuffix .pas, $(DBUNITS)))
 	cd src/dbutils; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)

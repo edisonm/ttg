@@ -2,12 +2,13 @@
 
 ABOUT=uabout
 
-UNITS=utimetablemodel RelUtils uttgcommon uttgdbutils SortAlgs uevolelitist UConfig uttgconfig
+UNITS=uttmodel uttgdbutils usortalgs uevolelitist uconfigstorage uttgconfig
 
-FORMS=FCrsMMEd FSplash FSingEdt FMasDeEd FHorario FMsgView FCrsMME0	\
-	FCrsMME1 FHorProf FProfesr FMain FEditor DMaster FHorPara	\
-	DSource FSelPeIn FConfig FCrsMMER DBase FHorAulT FParalel	\
-	FProgres FMateria 
+FORMS=
+# FCrsMMEd FSplash FSingEdt FMasDeEd FHorario FMsgView FCrsMME0	\
+# 	FCrsMME1 FHorProf FProfesr FMain FEditor DMaster FHorPara	\
+# 	DSource FSelPeIn FConfig FCrsMMER DBase FHorAulT FParalel	\
+# 	FProgres FMateria 
 
 DSRCBASE0=DSrcBase
 
