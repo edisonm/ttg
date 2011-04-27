@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="7"/>
+    <Version Value="9"/>
     <General>
       <Flags>
         <SaveClosedFiles Value="False"/>
@@ -9,22 +9,22 @@
       </Flags>
       <SessionStorage Value="None"/>
       <MainUnit Value="0"/>
-      <TargetFileExt Value=".exe"/>
-      <Icon Value="0"/>
       <UseXPManifest Value="True"/>
+      <Icon Value="0"/>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <CurrentVersionNr Value="1"/>
-      <CurrentMajorRevNr Value="2"/>
-      <CurrentMinorRevNr Value="2"/>
-      <CurrentBuildNr Value="314"/>
-      <ProjectVersion Value="1.2.2.314"/>
+      <MajorVersionNr Value="1"/>
+      <MinorVersionNr Value="2"/>
+      <RevisionNr Value="2"/>
+      <BuildNr Value="314"/>
       <Language Value="040A"/>
       <CharSet Value="04B0"/>
-      <FileDescription Value="Horarios para Colegio"/>
-      <LegalCopyright Value="2011 por Edison Mera"/>
+      <StringTable FileDescription="Horarios para Colegio" LegalCopyright="2011 por Edison Mera"/>
     </VersionInfo>
+    <BuildModes Count="1">
+      <Item1 Name="default" Default="True"/>
+    </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
       <IgnoreBinaries Value="False"/>
@@ -316,12 +316,17 @@
     </Units>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="8"/>
+    <Version Value="9"/>
     <SearchPaths>
-      <IncludeFiles Value="$(ProjOutDir)/"/>
-      <OtherUnitFiles Value="../../../ZEOSDBO-7.0.0-alpha/src/core/;../../../ZEOSDBO-7.0.0-alpha/src/dbc/;../../../ZEOSDBO-7.0.0-alpha/src/parsesql/;../../../ZEOSDBO-7.0.0-alpha/src/plain/;../../../ZEOSDBO-7.0.0-alpha/src/component/;../../../multithreadprocs/"/>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="../../../ZEOSDBO-7.0.0-alpha/src/core;../../../ZEOSDBO-7.0.0-alpha/src/dbc;../../../ZEOSDBO-7.0.0-alpha/src/parsesql;../../../ZEOSDBO-7.0.0-alpha/src/plain;../../../ZEOSDBO-7.0.0-alpha/src/component;../../../multithreadprocs"/>
       <UnitOutputDirectory Value="../../bin"/>
     </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <UseAnsiStrings Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
     <CodeGeneration>
       <SmartLinkUnit Value="True"/>
       <Checks>
