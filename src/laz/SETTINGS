@@ -1,0 +1,18 @@
+# -*- mode: Makefile; -*-
+
+BuildMode?=full
+
+BuildID=$(TargetCPU)-$(TargetOS)-$(BuildMode)
+
+ifeq ($(shell uname -o),Cygwin)
+EXEEXT=.exe
+ISS=$(TTGDIR)/src/iss/ttg-$(BuildID).iss
+ISSTMPL=$(TTGDIR)/src/iss/ttg.iss.tmpl
+INSTALLER=$(TTGDIR)/bin/ttgsetup-$(BuildID).exe
+FILES=$(INSTALLER)
+else
+EXEEXT=
+FILES=$(TTGEXE)
+endif
+
+TTGEXE=$(TTGDIR)/bin/$(BuildID)/ttg$(EXEEXT)

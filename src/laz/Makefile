@@ -6,6 +6,7 @@ TTGDIR:=$(shell cd ../..; pwd)
 
 include ../../SETTINGS
 include ../../COMMON
+include SETTINGS
 
 .PHONY: prjdel srcdel
 
@@ -13,7 +14,17 @@ include ../../COMMON
 
 DELPHIFILES=$(BASEDELFILES)
 
-all: $(TTGEXE)
+all: $(FILES)
+
+iss: $(ISS)
+
+$(INSTALLER): $(ISS) $(TTGEXE) $(TTGSQL)
+	$(INNOIDE) $(ISSWIN)
+
+$(ISS): $(ISSTMPL)
+	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
+	  -e s:'<v>BuildID</v>':'$(BuildID)':g \
+	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
 ##############################################################################
 # Migration options (lazarus-delphi): !!! WARNING VERY BUGGLY

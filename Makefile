@@ -16,26 +16,17 @@ TTGSQLITE3=dat/ttg.s3fpc
 DBUNITS=Ac2DMUtl Ac2PxUtl Acc2DM Acc2Pdx Acc2SQL AccUtl DBPack PdxUtils
 
 all: $(FILES)
-
-$(INSTALLER): $(ISS) $(TTGEXE)
-	$(INNOIDE) $(ISSWIN)
-
-iss: $(ISS)
-
-$(ISS): $(ISS).tmpl $(TTGSQL)
-	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
-	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
+	cd src/$(SRCTYPE) ; for BuildMode in $(BUILDMODES); do \
+	  $(MAKE) BuildMode=$$BuildMode all ; \
+	  done
 
 # SRCTYPE=del
 SRCTYPE=laz
 
-$(TTGEXE):
-	cd src/$(SRCTYPE) ; $(MAKE) $(TTGEXE)
-
 $(DBUTILS): src/dbutils/$(DBUTILSDPR) $(addprefix src/dbutils/, $(addsuffix .pas, $(DBUNITS)))
 	cd src/dbutils; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
 
-ifneq ($(shell uname -s),Linux)
+ifeq ($(shell uname -o),Cygwin)
 $(TTGSQL): $(DBUTILS) $(TTGMDB)
 	$(DBUTILS) /ACC2SQL $(TTGMDB) $@
 endif
@@ -124,4 +115,3 @@ dbutils: $(DBUTILS)
 
 test:
 	@echo BUILDDATETIME="$(BUILDDATETIME)"
-	@echo TTGEXE=$(TTGEXE)
