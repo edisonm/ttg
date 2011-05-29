@@ -11,7 +11,7 @@ CreateUninstallRegKey=1
 UsePreviousAppDir=1
 UsePreviousGroup=1
 AppVersion=<v>AppVersion</v>
-AppVerName=<v>AppName</v> <v>AppVersion</v>
+AppVerName=<v>AppName</v> <v>AppVersion</v> (r<v>Revision</v> <v>BuildID</v>)
 AppCopyright=Edición 30-01-2011. Edison Mera. Quito-Ecuador. Madrid-España
 WindowShowCaption=0
 WindowStartMaximized=0
@@ -28,13 +28,13 @@ DefaultDirName={pf}\TTG\<v>AppVersion</v>
 DefaultGroupName=<v>AppName</v> <v>AppVersion</v>
 LicenseFile=..\..\doc\Licencia.txt
 InfoAfterFile=..\..\doc\Leame.txt
-OutputBaseFilename=ttgsetup-<v>BuildID</v>
+OutputBaseFilename=ttgsetup
 DiskSpanning=0
 DiskClusterSize=512
 ReserveBytes=4096
 UseSetupLdr=1
 SourceDir=.
-OutputDir=..\..\bin
+OutputDir=..\..\bin\<v>BuildID</v>
 
 [Dirs]
 Name: {app}\hlp

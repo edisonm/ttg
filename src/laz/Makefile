@@ -21,10 +21,11 @@ iss: $(ISS)
 $(INSTALLER): $(ISS) $(TTGEXE) $(TTGSQL)
 	$(INNOIDE) $(ISSWIN)
 
-$(ISS): $(ISSTMPL)
-	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
-	  -e s:'<v>BuildID</v>':'$(BuildID)':g \
-	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
+$(ISS): $(ISSTMPL) $(TTGEXE)
+	sed  -e s:'<v>Revision</v>':'$(REVISION)':g \
+	  -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
+	  -e s:'<v>AppName</v>':'$(APPNAME)':g \
+	  -e s:'<v>BuildID</v>':'$(BuildID)':g $< > $@
 
 ##############################################################################
 # Migration options (lazarus-delphi): !!! WARNING VERY BUGGLY

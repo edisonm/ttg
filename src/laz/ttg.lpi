@@ -68,7 +68,14 @@
             <CompilerMessages>
               <UseMsgFile Value="True"/>
             </CompilerMessages>
-            <CustomOptions Value="-dFREEWARE"/>
+            <CustomOptions Value="-dFREEWARE
+-dZEOS_DISABLE_MYSQL
+-dZEOS_DISABLE_POSTGRESQL
+-dZEOS_DISABLE_DBLIB
+-dZEOS_DISABLE_ADO
+-dZEOS_DISABLE_INTERBASE
+-dZEOS_DISABLE_ORACLE
+-dZEOS_DISABLE_ASA"/>
             <CompilerPath Value="$(CompPath)"/>
             <ExecuteAfter>
               <ShowAllMessages Value="True"/>
@@ -402,6 +409,13 @@
       <CompilerMessages>
         <UseMsgFile Value="True"/>
       </CompilerMessages>
+      <CustomOptions Value="-dZEOS_DISABLE_MYSQL
+-dZEOS_DISABLE_POSTGRESQL
+-dZEOS_DISABLE_DBLIB
+-dZEOS_DISABLE_ADO
+-dZEOS_DISABLE_INTERBASE
+-dZEOS_DISABLE_ORACLE
+-dZEOS_DISABLE_ASA"/>
       <CompilerPath Value="$(CompPath)"/>
       <ExecuteAfter>
         <ShowAllMessages Value="True"/>
