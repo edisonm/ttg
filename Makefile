@@ -8,10 +8,6 @@ TTGDIR:=$(shell pwd)
 include SETTINGS
 include COMMON
 
-INNOIDE="c:/archivos de programa/Inno Setup 5/ISCC.exe"
-ISS=$(TTGDIR)/src/iss/ttg.iss
-INSTALLER=$(TTGDIR)/bin/ttgsetup.exe
-
 DBUTILSDPR=dbutils.dpr
 TTGMDB=dat/$(TTGMDBBASE)
 TTGSQL=dat/ttg.sql
@@ -19,10 +15,10 @@ TTGSQLITE3=dat/ttg.s3fpc
 
 DBUNITS=Ac2DMUtl Ac2PxUtl Acc2DM Acc2Pdx Acc2SQL AccUtl DBPack PdxUtils
 
-all: $(INSTALLER) $(TTGSQLITE3)
+all: $(FILES)
 
 $(INSTALLER): $(ISS) $(TTGEXE)
-	$(INNOIDE) '$(shell cygpath -w $(ISS))'
+	$(INNOIDE) $(ISSWIN)
 
 iss: $(ISS)
 
@@ -39,8 +35,10 @@ $(TTGEXE):
 $(DBUTILS): src/dbutils/$(DBUTILSDPR) $(addprefix src/dbutils/, $(addsuffix .pas, $(DBUNITS)))
 	cd src/dbutils; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
 
+ifneq ($(shell uname -s),Linux)
 $(TTGSQL): $(DBUTILS) $(TTGMDB)
 	$(DBUTILS) /ACC2SQL $(TTGMDB) $@
+endif
 
 $(TTGSQLITE3): $(TTGSQL) Makefile
 	$(RM) $@

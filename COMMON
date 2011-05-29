@@ -1,15 +1,13 @@
 # -*- mode: Makefile; -*-
 
-ifneq ($(shell uname -s),Linux)
+ifeq ($(shell uname -o),Cygwin)
 DSRCBASE=$(DSRCBASE0)
 LAZRES="c:/lazarus/tools/lazres"
 EXEEXT=.exe
-else
-LAZRES=lazres
-EXEEXT=
-endif
-TTGEXE=$(TTGDIR)/bin/ttg$(EXEEXT)
-DBUTILS=$(TTGDIR)/bin/dbutils.exe
+INNOIDE="c:/archivos de programa/Inno Setup 5/ISCC.exe"
+ISS=$(TTGDIR)/src/iss/ttg.iss
+INSTALLER=$(TTGDIR)/bin/ttgsetup.exe
+FILES=$(INSTALLER) $(TTGSQLITE3)
 DCC32="c:/archivos de programa/Embarcadero/RAD Studio/7.0/bin/dcc32"
 DCC32OPTS= \
 	-E'$(shell cygpath -w $(TTGDIR)/bin)' \
@@ -19,6 +17,17 @@ DCC32OPTS= \
 	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/parsesql)' \
 	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/plain)' \
 	-N0'$(shell cygpath -w $(TTGDIR)/obj)'
+ISSWIN='$(shell cygpath -w $(ISS))'
+DBUTILS=$(TTGDIR)/bin/dbutils.exe
+else
+LAZRES=lazres
+EXEEXT=
+FILES=$(TTGEXE) $(TTGSQLITE3)
+endif
+FPC=fpc
+TargetCPU=$(shell $(FPC) -iSP)
+TargetOS=$(shell $(FPC) -iSO)
+TTGEXE=$(TTGDIR)/bin/$(TargetCPU)-$(TargetOS)-$(BuildMode)/ttg$(EXEEXT)
 
 TTGDPR=ttg.dpr
 TTGLPR=ttg.lpr
