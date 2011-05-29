@@ -44,7 +44,7 @@ Name: {app}\demos
 Name: {app}\doc
 
 [Files]
-Source: ..\..\bin\<v>BuildID</v>\ttg.exe; DestDir: {app}\bin\; DestName: ttg.exe
+Source: ..\..\bin\<v>BuildID</v>\ttg.exe; DestDir: {app}\bin\<v>BuildID</v>\; DestName: ttg.exe
 Source: ..\..\dat\ttg.sql; DestDir: {app}\dat\; DestName: ttg.sql
 Source: ..\..\hlp\ttg.cnt; DestDir: {app}\hlp\; DestName: ttg.cnt
 Source: ..\..\hlp\ttg.hlp; DestDir: {app}\hlp\; DestName: ttg.hlp
@@ -53,7 +53,7 @@ Source: ..\..\..\sqlite3\sqlite3.dll; DestDir: {sys}; DestName: sqlite3.dll
 Source: ..\..\demos\BritanicoInt2000.ttd; DestDir: {app}\demos\; DestName: britanic.ttd
 Source: ..\..\demos\Salamanca1999.ttd; DestDir: {app}\demos\; DestName: salamanc.ttd
 [Icons]
-Name: {group}\<v>AppName</v> <v>AppVersion</v>; Filename: {app}\bin\ttg.exe; WorkingDir: {app}\bin\; IconIndex: 0
+Name: {group}\<v>AppName</v> <v>AppVersion</v>; Filename: {app}\bin\<v>BuildID</v>\ttg.exe; WorkingDir: {app}\bin\<v>BuildID</v>\; IconIndex: 0
 Name: {group}\Manual del Usuario (doc); Filename: {app}\doc\ttg.doc
 Name: {group}\Manual del Usuario (hlp); Filename: {app}\hlp\ttg.hlp
 Name: {group}\{cm:UninstallProgram, <v>AppName</v> <v>AppVersion</v>}; Filename: {uninstallexe}
