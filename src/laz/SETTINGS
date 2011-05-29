@@ -6,9 +6,9 @@ BuildID=$(TargetCPU)-$(TargetOS)-$(BuildMode)
 
 ifeq ($(shell uname -o),Cygwin)
 EXEEXT=.exe
-ISS=$(TTGDIR)/src/iss/ttg-$(BuildID).iss
 ISSTMPL=$(TTGDIR)/src/iss/ttg.iss.tmpl
-INSTALLER=$(TTGDIR)/bin/ttgsetup-$(BuildID).exe
+ISS=$(TTGDIR)/bin/$(BuildID)/ttg.iss
+INSTALLER=$(TTGDIR)/bin/$(BuildID)/ttgsetup.exe
 FILES=$(INSTALLER)
 else
 EXEEXT=

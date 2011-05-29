@@ -16,12 +16,9 @@ TTGSQLITE3=dat/ttg.s3fpc
 DBUNITS=Ac2DMUtl Ac2PxUtl Acc2DM Acc2Pdx Acc2SQL AccUtl DBPack PdxUtils
 
 all: $(FILES)
-	cd src/$(SRCTYPE) ; for BuildMode in $(BUILDMODES); do \
+	cd src/laz ; for BuildMode in $(BUILDMODES); do \
 	  $(MAKE) BuildMode=$$BuildMode all ; \
 	  done
-
-# SRCTYPE=del
-SRCTYPE=laz
 
 $(DBUTILS): src/dbutils/$(DBUTILSDPR) $(addprefix src/dbutils/, $(addsuffix .pas, $(DBUNITS)))
 	cd src/dbutils; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
@@ -29,6 +26,14 @@ $(DBUTILS): src/dbutils/$(DBUTILSDPR) $(addprefix src/dbutils/, $(addsuffix .pas
 ifeq ($(shell uname -o),Cygwin)
 $(TTGSQL): $(DBUTILS) $(TTGMDB)
 	$(DBUTILS) /ACC2SQL $(TTGMDB) $@
+
+cleansql:
+	$(RM) $(TTGSQL)
+
+else
+
+cleansql:
+
 endif
 
 $(TTGSQLITE3): $(TTGSQL) Makefile
@@ -36,10 +41,9 @@ $(TTGSQLITE3): $(TTGSQL) Makefile
 	sqlite3 $@ "pragma journal_mode=off;pragma foreign_keys=true"
 	sqlite3 $@ ".read $(TTGSQL)"
 
-clean:
-	cd src/del; $(MAKE) clean
+clean: cleansql
 	cd src/laz; $(MAKE) clean
-	$(RM) $(INSTALLER) $(DBUTILS) $(TTGSQL) \
+	$(RM) $(INSTALLER) $(DBUTILS) \
 	  $(TTGSQLITE3) obj/* $(ISS) $(ABOUT).pas src/dbutils/*.identcache
 	$(RM) -r src/dbutils/__history
 
