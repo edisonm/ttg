@@ -20,10 +20,62 @@
       <BuildNr Value="314"/>
       <Language Value="040A"/>
       <CharSet Value="04B0"/>
-      <StringTable FileDescription="Horarios para Colegio" LegalCopyright="2011 por Edison Mera"/>
+      <StringTable FileDescription="Horarios para Colegio" LegalCopyright="2011 por Edison Mera" ProductVersion=""/>
     </VersionInfo>
-    <BuildModes Count="1">
-      <Item1 Name="default" Default="True"/>
+    <BuildModes Count="2">
+      <Item1 Name="full" Default="True"/>
+      <Item2 Name="free">
+        <CompilerOptions>
+          <Version Value="9"/>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir)"/>
+            <OtherUnitFiles Value="../../../ZEOSDBO-7.0.0-alpha/src/core;../../../ZEOSDBO-7.0.0-alpha/src/dbc;../../../ZEOSDBO-7.0.0-alpha/src/parsesql;../../../ZEOSDBO-7.0.0-alpha/src/plain;../../../ZEOSDBO-7.0.0-alpha/src/component;../../../multithreadprocs"/>
+            <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-free"/>
+          </SearchPaths>
+          <Conditionals Value="if undefined(DistType) then
+  DistType := 'free';"/>
+          <BuildMacros>
+            <Count Value="1"/>
+            <Item1>
+              <Identifier Value="DistType"/>
+            </Item1>
+          </BuildMacros>
+          <Parsing>
+            <SyntaxOptions>
+              <UseAnsiStrings Value="False"/>
+            </SyntaxOptions>
+          </Parsing>
+          <CodeGeneration>
+            <SmartLinkUnit Value="True"/>
+            <Checks>
+              <RangeChecks Value="True"/>
+            </Checks>
+            <Optimizations>
+              <VariablesInRegisters Value="True"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDwarf Value="True"/>
+            </Debugging>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+          <Other>
+            <CompilerMessages>
+              <UseMsgFile Value="True"/>
+            </CompilerMessages>
+            <CustomOptions Value="-dFREEWARE"/>
+            <CompilerPath Value="$(CompPath)"/>
+            <ExecuteAfter>
+              <ShowAllMessages Value="True"/>
+            </ExecuteAfter>
+          </Other>
+        </CompilerOptions>
+      </Item2>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -320,7 +372,7 @@
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
       <OtherUnitFiles Value="../../../ZEOSDBO-7.0.0-alpha/src/core;../../../ZEOSDBO-7.0.0-alpha/src/dbc;../../../ZEOSDBO-7.0.0-alpha/src/parsesql;../../../ZEOSDBO-7.0.0-alpha/src/plain;../../../ZEOSDBO-7.0.0-alpha/src/component;../../../multithreadprocs"/>
-      <UnitOutputDirectory Value="../../bin"/>
+      <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-full"/>
     </SearchPaths>
     <Parsing>
       <SyntaxOptions>
@@ -347,6 +399,9 @@
       </Options>
     </Linking>
     <Other>
+      <CompilerMessages>
+        <UseMsgFile Value="True"/>
+      </CompilerMessages>
       <CompilerPath Value="$(CompPath)"/>
       <ExecuteAfter>
         <ShowAllMessages Value="True"/>

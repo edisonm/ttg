@@ -53,7 +53,7 @@ $(ABOUT).pp: $(ABOUT).pp.tmpl
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
 $(TTGEXE): $(BASELAZFILES) ttg.lpi
-	lazbuild ttg.lpi ; strip --strip-all $(TTGEXE)
+	lazbuild --build-mode=$(BuildMode) ttg.lpi ; strip --strip-all $(TTGEXE)
 
 $(DSRCBASE).pp $(DSRCBASE).lfm: dbutils $(TTGMDB) Makefile
 	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule \
@@ -65,9 +65,7 @@ dbutils:
 
 clean:
 # 	$(DSRCBASE0).lfm $(DSRCBASE0).pp
-	$(RM) $(TTGEXE) $(TTGDIR)/bin/*.o $(TTGDIR)/bin/*.lrs \
-	  $(TTGDIR)/bin/*.ppu $(TTGDIR)/obj/*.o $(TTGDIR)/obj/*.ppu \
-	  $(ABOUT).pp
+	$(RM) -r $(TTGEXE) $(TTGDIR)/bin/* $(ABOUT).pp
 
 test:
 	@echo REVISION=$(REVISION)

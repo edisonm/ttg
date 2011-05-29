@@ -7,12 +7,8 @@ uses
   CThreads,
   CMem,
 {$ENDIF}
-{$IFDEF FPC}
-  LResources,
-  Interfaces,
-{$ENDIF}
   Forms,
-  Dialogs, multithreadprocslaz,
+  Dialogs, Interfaces, multithreadprocslaz,
   SysUtils,
   FMain {MainForm},
   DMaster in 'DMaster.pp' {MasterDataModule: TDataModule},
@@ -53,9 +49,7 @@ UModel, UMakeTT, UDownHill, USolver, UTTGBasics, UAbout, FMessageView;
 {$IFDEF WINDOWS}{$R ttg.rc}{$ENDIF}
 
 begin
-  {$IFDEF FPC}
-  {$I ttg.lrs}
-  {$ENDIF}
+  
   DecimalSeparator := ',';
   Application.Initialize;
   Application.Title := sAppName + ' ' + sAppVersion;
