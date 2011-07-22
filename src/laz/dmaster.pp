@@ -74,7 +74,7 @@ var
 implementation
 
 uses
-  UTTGBasics, UTTGDBUtils, DSource;
+  UTTGBasics, UTTGDBUtils, UTTGSQL, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -635,7 +635,8 @@ begin
     Strings := TStringList.Create;
     if Database.Database = ':memory:' then
     try
-      Strings.LoadFromFile('../../dat/ttg.sql');
+      // Strings.LoadFromFile('../../dat/ttg.sql');
+      FillTTGSQL(Strings);
       Database.ExecuteDirect('pragma journal_mode=off');
       Database.ExecuteDirect(Strings.GetText);
       PrepareTables;

@@ -64,6 +64,11 @@ $(ABOUT).pp: $(ABOUT).pp.tmpl
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
+$(TTGSQLINC): $(TTGSQL)
+	cat $< | dos2unix | sed -e s:"'":"''":g -e s:"\(.*\)":"    add(\'\1\');":g > $@
+
+uttgsql.pp: $(TTGSQLINC)
+
 $(TTGEXE): $(BASELAZFILES) ttg.lpi
 	lazbuild --build-mode=$(BuildMode) ttg.lpi ; strip --strip-all $(TTGEXE)
 

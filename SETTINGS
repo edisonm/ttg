@@ -2,7 +2,11 @@
 
 ABOUT=uabout
 
-UNITS=uttmodel uttgdbutils usortalgs uevolelitist uconfigstorage uttgconfig
+TTGSQL=$(TTGDIR)/dat/ttg.sql
+
+TTGSQLINC=ttgsql.inc
+
+UNITS=uttmodel uttgdbutils usortalgs uevolelitist uconfigstorage uttgconfig uttgsql
 
 BUILDMODES=full free
 

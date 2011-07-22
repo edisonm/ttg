@@ -109,7 +109,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="38">
+    <Units Count="39">
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -372,6 +372,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMessageView"/>
       </Unit37>
+      <Unit38>
+        <Filename Value="uttgsql.pp"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UTTGSQL"/>
+      </Unit38>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
