@@ -632,19 +632,21 @@ begin
   with SourceDataModule do
   begin
     Database.Connect;
-    Strings := TStringList.Create;
     if Database.Database = ':memory:' then
-    try
-      // Strings.LoadFromFile('../../dat/ttg.sql');
-      FillTTGSQL(Strings);
+    begin
       Database.ExecuteDirect('pragma journal_mode=off');
-      Database.ExecuteDirect(Strings.GetText);
+      Strings := TStringList.Create;
+      try
+        // Strings.LoadFromFile('../../dat/ttg.sql');
+        FillTTGSQL(Strings);
+        Database.ExecuteDirect(Strings.GetText);
+      finally
+        Strings.Free;
+      end;
       PrepareTables;
       OpenTables;
       NewDatabase;
       ConfigStorage.SetDefaults;
-    finally
-      Strings.Free;
     end
     else
     begin
