@@ -94,7 +94,6 @@
       <local>
         <FormatVersion Value="1"/>
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
-        <WorkingDirectory Value="/home/edison/apps/pascal/TTG/bin"/>
       </local>
     </RunParams>
     <RequiredPackages Count="3">
@@ -393,9 +392,6 @@
     </Parsing>
     <CodeGeneration>
       <SmartLinkUnit Value="True"/>
-      <Checks>
-        <RangeChecks Value="True"/>
-      </Checks>
       <Optimizations>
         <VariablesInRegisters Value="True"/>
       </Optimizations>

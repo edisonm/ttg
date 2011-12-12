@@ -10,19 +10,35 @@ procedure AccessToSQLCommand;
 implementation
 
 uses
-  SysUtils;
+  SysUtils, DB;
 
 procedure AccessToSQLCommand;
 var
   Msgs: TStrings;
+  iPos: Integer;
+  Option, Options: string;
+  SQLFormat: TSQLFormat;
 begin
-  if (ParamCount = 3) then
+  if (ParamCount = 3) or (ParamCount = 4) then
   begin
     CoInitialize(nil);
+    SQLFormat := sfSQLite;
+    if ParamCount = 4 then
+    begin
+      iPos := 1;
+      Options := ParamStr(4);
+      while iPos <= Length(Options) do
+      begin
+        Option := ExtractFieldName(Options, iPos);
+        if Option = 'mysql' then SQLFormat := sfMySQL
+        else if Option = 'sqlite' then SQLFormat := sfSQLite
+        // else invalid option
+      end;
+    end;
     Msgs := TStringList.Create;
     Msgs.BeginUpdate;
     try
-      AccessToSQL(ParamStr(2), ParamStr(3), Msgs);
+      AccessToSQL(ParamStr(2), ParamStr(3), SQLFormat, Msgs);
       if Msgs.Count > 0 then
         Msgs.SaveToFile('ERRORS.TXT');
     finally

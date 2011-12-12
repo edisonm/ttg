@@ -34,7 +34,7 @@
 			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
-			<DCC_DependencyCheckOutputName>..\..\bin\dbutils.exe</DCC_DependencyCheckOutputName>
+			<DCC_DependencyCheckOutputName>..\bin\dbutils.exe</DCC_DependencyCheckOutputName>
 			<Version>7.0</Version>
 			<DCC_WriteableConstants>True</DCC_WriteableConstants>
 			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
@@ -105,13 +105,13 @@
 			<DCCReference Include="AccUtl.pas"/>
 			<DCCReference Include="Ac2DMUtl.pas"/>
 			<DCCReference Include="Acc2DM.pas"/>
-			<DCCReference Include="..\..\arctl\SOURCE\ArDBUtls.pas"/>
-			<DCCReference Include="..\..\arctl\SOURCE\DBPacker.pas"/>
-			<DCCReference Include="..\..\arctl\SOURCE\BZIP2.PAS"/>
-			<DCCReference Include="..\..\arctl\SOURCE\ARCConst.pas"/>
-			<DCCReference Include="C:\Documents and Settings\edison\Mis documentos\RAD Studio\7.0\Imports\DAO_TLB.pas"/>
+			<DCCReference Include="..\..\..\arctl\SOURCE\ArDBUtls.pas"/>
+			<DCCReference Include="..\..\..\arctl\SOURCE\DBPacker.pas"/>
+			<DCCReference Include="..\..\..\arctl\SOURCE\BZIP2.PAS"/>
+			<DCCReference Include="..\..\..\arctl\SOURCE\ARCConst.pas"/>
 			<DCCReference Include="Ac2SQUtl.pas"/>
 			<DCCReference Include="Acc2SQL.pas"/>
+			<DCCReference Include="C:\Documents and Settings\edison\Mis documentos\RAD Studio\7.0\Imports\DAO_TLB.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

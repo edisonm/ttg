@@ -6,7 +6,11 @@ uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Messages, SysUtils, Classes,
   Graphics, Controls, Forms, Dialogs, Db, StdCtrls, DBCtrls, DAO_TLB;
 
-procedure AccessToSQL(AccessFileName, SQLFileName: string; Msgs: TStrings);
+type
+  TSQLFormat = (sfMySQL, sfSQLite);
+
+procedure AccessToSQL(AccessFileName, SQLFileName: string;
+    SQLFormat: TSQLFormat; Msgs: TStrings);
 
 implementation
 
@@ -38,12 +42,14 @@ const
     'datetime' { dbTimeStamp }
   );
 
+  AutoIncrement: array [TSQLFormat] of string = ('AUTO_INCREMENT', 'AUTOINCREMENT');
 
-procedure ConvertAccessToSQL(DBAcc: Database; StringSQL, Msgs: TStrings);
+procedure ConvertAccessToSQL(DBAcc: Database; SQLFormat: TSQLFormat;
+    StringSQL, Msgs: TStrings);
   procedure CreateFields(VTableDef: TableDef);
   var
     j, k: Integer;
-    DataTypeName, S: string;
+    DataTypeName, s: string;
   begin
     with VTableDef.Fields do
       for j := 0 to Count - 1 do
@@ -52,43 +58,45 @@ procedure ConvertAccessToSQL(DBAcc: Database; StringSQL, Msgs: TStrings);
         begin
           if (Attributes and dbAutoIncrField) <> 0 then
             {DataTypeName := 'AUTOINC_INT'}
-            DataTypeName := 'integer'
+            DataTypeName := 'INTEGER'
           else
             DataTypeName := Acc2SQLDataType[type_];
-          S := Format('    ''%s'' %s', [name, DataTypeName]);
+          s := Format('    `%s` %s', [name, DataTypeName]);
           case type_ of
             dbText, dbChar:
               begin
-                S := S + Format('(%d)', [Size]);
+                s := s + Format('(%d)', [Size]);
               end
           end;
           if Required or ((Attributes and dbAutoIncrField) <> 0) then
-            S := S + ' not null';
+            s := s + ' NOT NULL';
           for k := 0 to VTableDef.Indexes.Count - 1 do
           begin
             if (VTableDef.Indexes[k].Fields.Count = 1) and (VTableDef.Indexes[k].Fields.Item[0].Name = Name) then
             begin
               if VTableDef.Indexes[k].Primary then
               begin
-                S := S + ' primary key';
-                if VTableDef.Indexes[j].Fields.Item[0].Attributes = dbDescending then
-                  S := S + ' DESC';
+                s := s + ' PRIMARY KEY';
+                if (VTableDef.Indexes[j].Fields.Item[0].Attributes and dbDescending) <> 0 then
+                  s := s + ' DESC';
                 if (Attributes and dbAutoIncrField) <> 0 then
-                  S := S + ' autoincrement'
+                  s := s + ' ' + AutoIncrement[SQLFormat];
               end
               else if VTableDef.Indexes[k].Unique then
               begin
-                S := S + ' unique';
+                s := s + ' UNIQUE';
               end;
             end;
           end;
+          if (SQLFormat <> sfSQLite) and (Item[j].Properties['Description'].Value <> '') then
+            s := s + ' COMMENT ''' + Item[j].Properties['Description'].Value + '''';
           if j <> Count - 1 then
-            S := S + ',';
-          StringSQL.Add(S);
+            s := s + ',';
+          StringSQL.Add(s);
         end;
       end;
   end;
-  
+
   procedure CreateIndexes(VTableDef: TableDef);
   var
     s, r: string;
@@ -118,6 +126,8 @@ procedure ConvertAccessToSQL(DBAcc: Database; StringSQL, Msgs: TStrings);
                 s := Fields.Item[k].Name
               else
                 s := s + ',' + Fields.Item[k].Name;
+              if (Fields.Item[k].Attributes and dbDescending) <> 0 then
+                s := s + ' DESC';
             end;
             StringSQL[StringSQL.Count-1] := StringSQL[StringSQL.Count-1] + ',';
             StringSQL.Add(r + '(' + s + ')');
@@ -144,7 +154,7 @@ procedure ConvertAccessToSQL(DBAcc: Database; StringSQL, Msgs: TStrings);
 	    d := d + ',' + Fields.Item[k].ForeignName;
 	  end;
 	  r := Format('  CONSTRAINT %s FOREIGN KEY (%s)'#13#10'    REFERENCES %s(%s)',
-		      [Name, s, ForeignTable, d]);
+		      [Name, d, Table, s]);
 	  if Attributes and dbRelationUpdateCascade <> 0 then
 	    r := r + ' ON UPDATE CASCADE'
 	  else
@@ -169,7 +179,7 @@ begin
   // Creando encabezado:
   with StringSQL do
   begin
-    Add('/* Header');
+    Add('/* -*- mode: SQL; -*-');
     Add('');
     Add('  ' + FormatDateTime(LongDateFormat + ' ' + LongTimeFormat, Now));
     Add('');
@@ -208,11 +218,14 @@ begin
           VTableName := VTableList.Strings[i];
           VTableDef := TableDefs.Item[VTableName];
           // StringSQL.Add(Format('DROP TABLE %s;', [VTableName]));
-          StringSQL.Add(Format('CREATE TABLE %s(', [VTableName]));
+          StringSQL.Add(Format('CREATE TABLE IF NOT EXISTS `%s`(', [VTableName]));
           CreateFields(VTableDef);
           CreateIndexes(VTableDef);
           CreateForeignKeys(DBAcc.Relations, DetailRels[i]);
-          StringSQL.Add(');');
+          if (SQLFormat <> sfSQLite) and (VTableDef.Properties['Description'].Value <> '') then
+            StringSQL.Add(') COMMENT ''' + VTableDef.Properties['Description'].Value + ''';')
+          else
+            StringSQL.Add(');');
         end;
       finally
         for i := VTableList.Count - 1 downto 0 do
@@ -229,7 +242,8 @@ begin
   end;
 end;
 
-procedure AccessToSQL(AccessFileName, SQLFileName: string; Msgs: TStrings);
+procedure AccessToSQL(AccessFileName, SQLFileName: string;
+    SQLFormat: TSQLFormat; Msgs: TStrings);
 var
   DBAcc: Database;
   StringSQL: TStrings;
@@ -240,7 +254,7 @@ begin
   try
     DBAcc := Engine.OpenDatabase(AccessFileName, 0, true, '');
     try
-      ConvertAccessToSQL(DBAcc, StringSQL, Msgs);
+      ConvertAccessToSQL(DBAcc, SQLFormat, StringSQL, Msgs);
     finally
       DBAcc.Close;
     end;

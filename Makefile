@@ -11,6 +11,7 @@ include COMMON
 DBUTILSDPR=dbutils.dpr
 TTGMDB=dat/$(TTGMDBBASE)
 TTGSQL=dat/ttg.sql
+TTGMYSQL=dat/ttg.mysql
 TTGSQLITE3=dat/ttg.s3fpc
 
 DBUNITS=Ac2DMUtl Ac2PxUtl Acc2DM Acc2Pdx Acc2SQL AccUtl DBPack PdxUtils
@@ -20,12 +21,18 @@ all: $(FILES)
 	  $(MAKE) BuildMode=$$BuildMode all ; \
 	  done
 
+run:
+	cd src/laz ; $(MAKE) run
+
 $(DBUTILS): src/dbutils/$(DBUTILSDPR) $(addprefix src/dbutils/, $(addsuffix .pas, $(DBUNITS)))
 	cd src/dbutils; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
 
 ifeq ($(shell uname -o),Cygwin)
 $(TTGSQL): $(DBUTILS) $(TTGMDB)
-	$(DBUTILS) /ACC2SQL $(TTGMDB) $@
+	$(DBUTILS) /ACC2SQL $(TTGMDB) $@ sqlite
+
+$(TTGMYSQL): $(DBUTILS) $(TTGMDB)
+	$(DBUTILS) /ACC2SQL $(TTGMDB) $@ mysql
 
 cleansql:
 	$(RM) $(TTGSQL)

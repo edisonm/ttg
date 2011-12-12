@@ -6,7 +6,7 @@ unit UTTGSQL;
 interface
 
 uses
-  Classes, SysUtils, UConfigStorage;
+  Classes, SysUtils;
 
 procedure FillTTGSQL(AStrings: TStrings);
 

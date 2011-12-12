@@ -155,9 +155,6 @@ type
     FHoraForm,
     FEspecializacionForm: TSingleEditorForm;
     FPeriodoForm: TCrossManyToManyEditor0Form;
-{$IFNDEF FREEWARE}
-    FPasada: Integer;
-{$ENDIF}
     FProgress: Integer;
     FRelProgress: Integer;
     FMin: Integer;

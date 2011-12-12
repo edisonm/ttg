@@ -14,9 +14,9 @@ uses
   DBPacker in '..\..\..\arctl\SOURCE\DBPacker.pas',
   BZIP2 in '..\..\..\arctl\SOURCE\BZIP2.PAS',
   ARCConst in '..\..\..\arctl\SOURCE\ARCConst.pas',
-  DAO_TLB in 'C:\Documents and Settings\edison\Mis documentos\RAD Studio\7.0\Imports\DAO_TLB.pas',
   Ac2SQUtl in 'Ac2SQUtl.pas',
-  Acc2SQL in 'Acc2SQL.pas';
+  Acc2SQL in 'Acc2SQL.pas',
+  DAO_TLB in 'C:\Documents and Settings\edison\Mis documentos\RAD Studio\7.0\Imports\DAO_TLB.pas';
 
 begin
   if ParamCount = 0 then
