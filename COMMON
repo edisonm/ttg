@@ -25,6 +25,7 @@ LRSDEP=$(LAZRES)
 else
 FPC=fpc
 LAZRES=lazres
+LAZBUILD=lazbuild
 FILES=
 endif
 
