@@ -1,6 +1,7 @@
 inherited HorarioProfesorForm: THorarioProfesorForm
-  Left = 353
+  Left = 619
   Height = 443
+  Top = 10
   Width = 682
   ActiveControl = DBNavigator
   ClientHeight = 443
@@ -11,23 +12,29 @@ inherited HorarioProfesorForm: THorarioProfesorForm
   OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
     Width = 682
-    Images = ImageList
     inherited BtnOk: TToolButton
       Enabled = False
-      Visible = False
       OnClick = BtnOkClick
+      Visible = False
     end
     inherited BtnCancel: TToolButton
+      Left = 139
       Enabled = False
-      Visible = False
       OnClick = BtnCancelClick
+      Visible = False
     end
     object DBNavigator: TDBNavigator[3]
-      Left = 24
+      Left = 47
       Height = 22
       Top = 2
       Width = 92
       BevelOuter = bvNone
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsScaleChilds
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 100
       ClientHeight = 22
       ClientWidth = 92
       DataSource = DSProfesor
@@ -38,12 +45,12 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
     end
     object cbVerProfesor: TComboBox[4]
-      Left = 116
-      Height = 22
+      Left = 162
+      Height = 21
       Hint = 'Ver|Que ver en el horario del profesor'
       Top = 2
       Width = 193
-      ItemHeight = 0
+      ItemHeight = 13
       OnChange = BtnMostrarClick
       ParentShowHint = False
       ShowHint = True
@@ -81,6 +88,8 @@ inherited HorarioProfesorForm: THorarioProfesorForm
     Top = 25
     Width = 267
     Align = alLeft
+    Color = clWindow
+    Columns = <>
     DataSource = DSProfesor
     TabOrder = 4
     TitleFont.Height = -11

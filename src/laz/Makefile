@@ -25,6 +25,7 @@ $(ISS): $(ISSTMPL) $(TTGEXE)
 	sed  -e s:'<v>Revision</v>':'$(REVISION)':g \
 	  -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g \
+	  -e s/'<v>ProgramFiles<\/v>'/'$(PROGRAMFILES)'/g \
 	  -e s:'<v>BuildID</v>':'$(BuildID)':g $< > $@
 
 ##############################################################################
@@ -70,14 +71,14 @@ $(TTGSQLINC): $(TTGSQL)
 uttgsql.pp: $(TTGSQLINC)
 
 $(TTGEXE): $(BASELAZFILES) ttg.lpi
-	lazbuild --build-mode=$(BuildMode) ttg.lpi ; strip --strip-all $(TTGEXE)
+	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi ; strip --strip-all $(TTGEXE)
 
-$(DSRCBASE).pp $(DSRCBASE).lfm: dbutils $(TTGMDB) Makefile
+$(DSRCBASE).pp $(DSRCBASE).lfm: $(DBUTILS) $(TTGMDB) Makefile
 	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule \
 	  $(DSRCBASE) 'cds;csr;lfm;U=ZConnection, ZDataset;DS=ZTable'
 	dos2unix $(DSRCBASE).pp $(DSRCBASE).lfm
 
-dbutils:
+$(DBUTILS):
 	cd ../.. ; $(MAKE) $(DBUTILS)
 
 clean:

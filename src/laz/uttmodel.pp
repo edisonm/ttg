@@ -299,7 +299,7 @@ var
     FDistributivoAProfesor, FDistributivoAParalelo: TDynamicIntegerArray;
   FProfesorACodProfesor, FProfesorProhibicionTipoACodProfProhibicionTipo,
     FAulaTipoACodAulaTipo, FMateriaProhibicionTipoACodMateProhibicionTipo: TDynamicIntegerArray;
-  procedure Cargar(ATable: TDataSet; ALstName: string; out FMinCodLst: Integer;
+  procedure Load(ATable: TDataSet; const ALstName: string; out FMinCodLst: Integer;
     out FCodLstALst: TDynamicIntegerArray;
     out FLstACodLst: TDynamicIntegerArray);
   var
@@ -333,6 +333,34 @@ var
       First;
     end;
   end;
+  (*
+  procedure Load2(ATable: TDataSet; ALstName1, ALstName2: string;
+    out FLst12ALst: TDynamicIntegerArray);
+  var
+    i, j, k, n: Integer;
+    VField1, VField2: TField;
+  begin
+    with ATable do
+    begin
+      IndexFieldNames := ALstName1 + ';' + ALstName2;
+      First;
+      n := RecordCount;
+      SetLength(FLst12ALst, FLst1Count, FLst2Count);
+      for i := 0 to FLst1Count - 1 do
+        for j := 0 to FLst2Count - 1 do
+          FLst12ALst[i, j] := -1;
+      VField1 := FindField(ALstName1);
+      VField2 := FindField(ALstName2);
+      while not EOF do
+      begin
+        i := FCodALst[VField1.AsInteger - FMinCod1];
+        j := FCodALst[VField2.AsInteger - FMinCod2];
+        FLst12ALst[i, j] := k;
+        Next;
+      end;
+    end;
+  end;
+  *)
   procedure CargarCurso;
   var
     Curso, Nivel, Especializacion: Integer;
@@ -725,35 +753,35 @@ begin
     Configure(ACruceProfesorValor, ACruceMateriaValor, ACruceAulaTipoValor,
       AProfesorFraccionamientoValor, AHoraHuecaDesubicadaValor,
       ASesionCortadaValor, AMateriaNoDispersaValor);
-    Cargar(TbProfesor, 'CodProfesor', FMinCodProfesor, FCodProfesorAProfesor,
+    Load(TbProfesor, 'CodProfesor', FMinCodProfesor, FCodProfesorAProfesor,
       FProfesorACodProfesor);
     FProfesorCant := Length(FProfesorACodProfesor);
-    Cargar(TbNivel, 'CodNivel', FMinCodNivel, FCodNivelANivel, FNivelACodNivel);
+    Load(TbNivel, 'CodNivel', FMinCodNivel, FCodNivelANivel, FNivelACodNivel);
     FNivelCant := Length(FNivelACodNivel);
-    Cargar(TbEspecializacion, 'CodEspecializacion', FMinCodEspecializacion,
+    Load(TbEspecializacion, 'CodEspecializacion', FMinCodEspecializacion,
       FCodEspecializacionAEspecializacion, FEspecializacionACodEspecializacion);
     FEspecializacionCant := Length(FEspecializacionACodEspecializacion);
     CargarCurso;
-    Cargar(TbParaleloId, 'CodParaleloId', FMinCodParaleloId,
+    Load(TbParaleloId, 'CodParaleloId', FMinCodParaleloId,
       FCodParaleloIdAParaleloId, FParaleloIdACodParaleloId);
-    Cargar(TbMateria, 'CodMateria', FMinCodMateria, FCodMateriaAMateria,
+    Load(TbMateria, 'CodMateria', FMinCodMateria, FCodMateriaAMateria,
       FMateriaACodMateria);
     FMateriaCant := Length(FMateriaACodMateria);
-    Cargar(TbDia, 'CodDia', FMinCodDia, FCodDiaADia, FDiaACodDia);
+    Load(TbDia, 'CodDia', FMinCodDia, FCodDiaADia, FDiaACodDia);
     FDiaCant := Length(FDiaACodDia);
-    Cargar(TbHora, 'CodHora', FMinCodHora, FCodHoraAHora, FHoraACodHora);
+    Load(TbHora, 'CodHora', FMinCodHora, FCodHoraAHora, FHoraACodHora);
     FHoraCant := Length(FHoraACodHora);
-    Cargar(TbMateriaProhibicionTipo, 'CodMateProhibicionTipo',
+    Load(TbMateriaProhibicionTipo, 'CodMateProhibicionTipo',
       FMinCodMateProhibicionTipo,
       FCodMateProhibicionTipoAMateriaProhibicionTipo,
       FMateriaProhibicionTipoACodMateProhibicionTipo);
     FMateriaProhibicionTipoCant := Length(FMateriaProhibicionTipoACodMateProhibicionTipo);
-    Cargar(TbProfesorProhibicionTipo, 'CodProfProhibicionTipo',
+    Load(TbProfesorProhibicionTipo, 'CodProfProhibicionTipo',
       FMinCodProfProhibicionTipo,
       FCodProfProhibicionTipoAProfesorProhibicionTipo,
       FProfesorProhibicionTipoACodProfProhibicionTipo);
     FProfesorProhibicionTipoCant := Length(FProfesorProhibicionTipoACodProfProhibicionTipo);
-    Cargar(TbAulaTipo, 'CodAulaTipo', FMinCodAulaTipo, FCodAulaTipoAAulaTipo,
+    Load(TbAulaTipo, 'CodAulaTipo', FMinCodAulaTipo, FCodAulaTipoAAulaTipo,
       FAulaTipoACodAulaTipo);
     FAulaTipoCant := Length(FAulaTipoACodAulaTipo);
     CargarPeriodo;

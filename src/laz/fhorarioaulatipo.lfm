@@ -1,6 +1,7 @@
 inherited HorarioAulaTipoForm: THorarioAulaTipoForm
-  Left = 307
+  Left = 572
   Height = 431
+  Top = 10
   Width = 775
   ActiveControl = DBNavigator
   ClientHeight = 431
@@ -11,26 +12,33 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
   OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
     Width = 775
-    Images = ImageList
     inherited BtnShow: TToolButton
       Visible = False
     end
     inherited BtnOk: TToolButton
+      Left = 116
       Enabled = False
-      Visible = False
       OnClick = BtnOkClick
+      Visible = False
     end
     inherited BtnCancel: TToolButton
+      Left = 139
       Enabled = False
-      Visible = False
       OnClick = BtnCancelClick
+      Visible = False
     end
     object DBNavigator: TDBNavigator[3]
-      Left = 1
+      Left = 24
       Height = 22
       Top = 2
       Width = 92
       BevelOuter = bvNone
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsScaleChilds
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 100
       ClientHeight = 22
       ClientWidth = 92
       DataSource = DSAulaTipo
@@ -41,12 +49,12 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
     end
     object cbVerAulaTipo: TComboBox[4]
-      Left = 93
-      Height = 22
+      Left = 162
+      Height = 21
       Hint = 'Ver|Que ver en el horario del tipo de aula'
       Top = 2
       Width = 193
-      ItemHeight = 0
+      ItemHeight = 13
       OnChange = BtnMostrarClick
       ParentShowHint = False
       ShowHint = True
@@ -84,6 +92,8 @@ inherited HorarioAulaTipoForm: THorarioAulaTipoForm
     Top = 25
     Width = 261
     Align = alLeft
+    Color = clWindow
+    Columns = <>
     DataSource = DSAulaTipo
     TabOrder = 4
     TitleFont.Height = -11

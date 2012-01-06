@@ -2,8 +2,11 @@
 
 ifeq ($(shell uname -o),Cygwin)
 DSRCBASE=$(DSRCBASE0)
-LAZRES="c:/lazarus/tools/lazres"
-INNOIDE="c:/archivos de programa/Inno Setup 5/ISCC.exe"
+LAZBASE="/cygdrive/c/lazarus32"
+LAZBUILD="$(LAZBASE)/lazbuild"
+FPC="$(LAZBASE)/fpc/2.4.4/bin/i386-win32/fpc"
+LAZRES="$(LAZBASE)/tools/lazres"
+INNOIDE="$(PROGRAMFILES)/Inno Setup 5/ISCC.exe"
 DCC32="c:/archivos de programa/Embarcadero/RAD Studio/7.0/bin/dcc32"
 DCC32OPTS= \
 	-E'$(shell cygpath -w $(TTGDIR)/bin)' \
@@ -16,12 +19,18 @@ DCC32OPTS= \
 ISSWIN='$(shell cygpath -w $(ISS))'
 DBUTILS=$(TTGDIR)/bin/dbutils.exe
 FILES=$(TTGSQLITE3)
+
+$(LAZRES):
+	cd "$(LAZBASE)/tools" && $(LAZBUILD) "lazres.lpi"
+
+%.lrs: $(LAZRES)
+
 else
+FPC=fpc
 LAZRES=lazres
 FILES=
 endif
 
-FPC=fpc
 TargetCPU=$(shell $(FPC) -iSP)
 TargetOS=$(shell $(FPC) -iSO)
 

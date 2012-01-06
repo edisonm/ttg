@@ -1,10 +1,10 @@
 object MainForm: TMainForm
   Left = 665
-  Height = 77
+  Height = 45
   Top = 352
   Width = 613
   Caption = 'MainForm'
-  ClientHeight = 54
+  ClientHeight = 45
   ClientWidth = 613
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -49,11 +49,11 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Position = poScreenCenter
-  LCLVersion = '0.9.28.2'
+  LCLVersion = '0.9.30'
   object StatusBar: TStatusBar
     Left = 0
-    Height = 17
-    Top = 37
+    Height = 21
+    Top = 24
     Width = 613
     AutoHint = True
     Panels = <    
