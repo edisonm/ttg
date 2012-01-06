@@ -111,7 +111,7 @@
 			<DCCReference Include="..\..\..\arctl\SOURCE\ARCConst.pas"/>
 			<DCCReference Include="Ac2SQUtl.pas"/>
 			<DCCReference Include="Acc2SQL.pas"/>
-			<DCCReference Include="C:\Documents and Settings\edison\Mis documentos\RAD Studio\7.0\Imports\DAO_TLB.pas"/>
+			<DCCReference Include="DAO_TLB.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

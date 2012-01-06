@@ -7,7 +7,7 @@ LAZBUILD="$(LAZBASE)/lazbuild"
 FPC="$(LAZBASE)/fpc/2.4.4/bin/i386-win32/fpc"
 LAZRES="$(LAZBASE)/tools/lazres"
 INNOIDE="$(PROGRAMFILES)/Inno Setup 5/ISCC.exe"
-DCC32="c:/archivos de programa/Embarcadero/RAD Studio/7.0/bin/dcc32"
+DCC32="$(PROGRAMFILES)/Embarcadero/RAD Studio/7.0/bin/dcc32"
 DCC32OPTS= \
 	-E'$(shell cygpath -w $(TTGDIR)/bin)' \
 	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/component)' \
@@ -20,10 +20,7 @@ ISSWIN='$(shell cygpath -w $(ISS))'
 DBUTILS=$(TTGDIR)/bin/dbutils.exe
 FILES=$(TTGSQLITE3)
 
-$(LAZRES):
-	cd "$(LAZBASE)/tools" && $(LAZBUILD) "lazres.lpi"
-
-%.lrs: $(LAZRES)
+LRSDEP=$(LAZRES)
 
 else
 FPC=fpc
@@ -45,5 +42,5 @@ BASELAZFILES=$(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
 BASEDELFILES=$(addsuffix .pas,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
 	  $(addsuffix .dfm, $(FORMS) $(DSRCBASE)) $(TTGDPR)
 
-%.lrs: %.lfm
+%.lrs: %.lfm $(LRSDEP)
 	$(LAZRES) $@ $<

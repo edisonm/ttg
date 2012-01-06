@@ -18,6 +18,11 @@ all: $(FILES)
 
 iss: $(ISS)
 
+ifeq ($(shell uname -o),Cygwin)
+$(LAZRES):
+	cd "$(LAZBASE)/tools" && $(LAZBUILD) "lazres.lpi"
+endif
+
 $(INSTALLER): $(ISS) $(TTGEXE) $(TTGSQL)
 	$(INNOIDE) $(ISSWIN)
 
