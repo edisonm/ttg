@@ -28,7 +28,7 @@ begin
         CreateDir(ParamStr(3));
       AccessToParadox(ParamStr(2), ParamStr(3), Msgs);
       if Msgs.Count > 0 then
-        Msgs.SaveToFile('ERRORS.TXT');
+        Msgs.SaveToFile('errors.txt');
     finally
       Msgs.EndUpdate;
       Msgs.Free;
@@ -38,18 +38,15 @@ begin
   else
   begin
     WriteLn(
-      'ACC2PDX.  Convertidor de bases de datos de Access a paradox version 1.1'#13#10 +
+      'DBUTILS /ACC2PDX.  Converts Access to Paradox database.'#13#10 +
+      'Usage:'#13#10 +
+      '  DBUTILS /ACC2PDX AccessFileName ParadoxDirectory'#13#10 +
       #13#10 +
-      'Edici¢n 02-26-1999 por Edison Mera.'#13#10 +
-      'Usar:'#13#10 +
-      '  ACC2PDX NombreArchivoAccess DirectorioParadox'#13#10 +
+      '  AccessFileName:        Name of Access File.'#13#10 +
+      '  ParadoxDirectory:      Name of Paradox Directory.'#13#10 +
       #13#10 +
-      '  NombreArchivoAccess:    Nombre del archivo de Access.'#13#10 +
-      '  DirectorioParadox:      Nombre del Directorio de Paradox.'#13#10 +
-      #13#10 +
-      'Ejemplo:'#13#10 +
-      
-      '  ACC2PDX PRUEBA.MDB ..\PRUEBAP\');
+      'Example:'#13#10 +
+      '  DBUTILS /ACC2PDX Test.mdb ..\TestP\');
   end;
 end;
 

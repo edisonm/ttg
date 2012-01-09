@@ -68,7 +68,7 @@ begin
         CreateDataSource, CreateSrcIndexes, CreateIndexDefs, CreateSrcFields,
         CreateFieldDefs, CreateDfmFields, CreateSrcRels, LazarusFrm, Msgs);
       if Msgs.Count > 0 then
-        Msgs.SaveToFile('ERRORS.TXT');
+        Msgs.SaveToFile('errors.txt');
     finally
       Msgs.EndUpdate;
       Msgs.Free;
@@ -78,20 +78,18 @@ begin
   else
   begin
     WriteLn(
-      'ACC2DM.  Access to Data Module Converter version 1.1'#13#10 +
-      #13#10 +
-      'Edition 09-17-2011 by Edison Mera.'#13#10 +
+      'DBUTILS /ACC2DM.  Converts Access database to Data Module.'#13#10 +
       'Usage:'#13#10 +
-      '  ACC2DM AccessFileName NombreDataModule NombreArchivo [Option1;Option2;...]'#13#10 +
+      '  DBUTILS /ACC2DM AccessFileName NombreDataModule NombreArchivo [Option1;Option2;...]'#13#10 +
       #13#10 +
-      '  AccessFileName:        Name of the Access File.'#13#10 +
-      '  DataModuleName:        Name of the Data Module.'#13#10 +
-      '  FileName:              Name of the Data Module File without extension.'#13#10 +
+      '  AccessFileName:        Name of Access File.'#13#10 +
+      '  DataModuleName:        Name of Data Module.'#13#10 +
+      '  FileName:              Name of Data Module File without extension.'#13#10 +
       '  [Option1;Option2;...]: Optional Options separated with semi colon.'#13#10 +
       '  Valid options are cds;csi;cid;csf;cfd;cdf;csr;lfm;DS=DataSetClassName;U=Units'#13#10 +
       #13#10 +
-      'Ejemplo:'#13#10 +
-      '  ACC2DM Test.mdb TestData c:\data\DmTest cds;csi');
+      'Example:'#13#10 +
+      '  DBUTILS /ACC2DM Test.mdb TestData c:\data\DmTest cds;csi');
   end;
 end;
 

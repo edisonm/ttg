@@ -37,17 +37,15 @@ begin
     else
     begin
       WriteLn(
-        'DBPACK.  Empacador de bases de datos de Paradox versi¢n 1.1'#13#10 +
+        'DBUTILS /DBPACK.  Packs Paradox database'#13#10 +
+        'Usage:'#13#10 +
+        '  DBUTILS /DBPACK Directory FileName'#13#10 +
         #13#10 +
-        'Edici¢n 02-26-1999 por Edison Mera.'#13#10 +
-        'Usar:'#13#10 +
-        '  DBPACK Directorio NombreArchivo'#13#10 +
+        '  Directory:   Directory where the database resides.'#13#10 +
+        '  FileName:    Packed File Name.'#13#10 +
         #13#10 +
-        '  Directorio:       Directorio en donde reside la base de datos.'#13#10 +
-        '  NombreArchivo:    Archivo empacado.'#13#10 +
-        #13#10 +
-        'Ejemplo:'#13#10 +
-        '  DBPACK C:\BASE BASE.DBP');
+        'Example:'#13#10 +
+        '  DBUTILS /DBPACK c:\base base.dbp');
     end;
   finally
     VDatabase.Free;
@@ -81,17 +79,15 @@ begin
     else
     begin
       WriteLn(
-        'DBUNPACK.  Desempacador de bases de datos de Paradox versi¢n 1.1'#13#10 +
-        #13#10 +
-        'Edici¢n 11-15-2009 por Edison Mera.'#13#10 +
-        'Usar:'#13#10 +
+        'DBUTILS /DBUNPACK.  Unpacks Paradox database.'#13#10 +
+        'Usage:'#13#10 +
         '  DBUNPACK NombreArchivo Directorio'#13#10 +
         #13#10 +
-        '  Directorio:       Directorio en donde reside la base de datos.'#13#10 +
-        '  NombreArchivo:    Archivo empacado.'#13#10 +
+        '  FileName:    Packed File Name.'#13#10 +
+        '  Directory:   Directory where the database resides.'#13#10 +
         #13#10 +
-        'Ejemplo:'#13#10 +
-        '  DBUNPACK BASE.DBP C:\BASE');
+        'Example:'#13#10 +
+        '  DBUTILS /DBUNPACK base.dbp c:\base');
     end;
   finally
     VDatabase.Free;
