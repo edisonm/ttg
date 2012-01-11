@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit Unit1;
 
 interface
@@ -70,4 +71,3 @@ begin
 end;
 
 end.
-

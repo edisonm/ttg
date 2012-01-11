@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit Acc2SQL;
 
 interface

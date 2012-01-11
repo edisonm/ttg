@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit Ac2SQUtl;
 
 interface

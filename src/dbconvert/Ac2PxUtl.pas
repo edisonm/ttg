@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit Ac2PxUtl;
 {
   Unidad que provee de los métodos esenciales para realizar la conversión de
