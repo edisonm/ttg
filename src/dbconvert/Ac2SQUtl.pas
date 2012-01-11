@@ -176,7 +176,7 @@ var
   VTableList, ProcDefs, ProcImpl: TStrings;
   DetailRels: array of TList; // TList used as Integer list
 begin
-  // Creando encabezado:
+  // Creating header:
   with StringSQL do
   begin
     Add('/* -*- mode: SQL; -*-');
