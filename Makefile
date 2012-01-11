@@ -35,7 +35,7 @@ $(TTGMYSQL): $(DBCONVERT) $(TTGMDB)
 	$(DBCONVERT) /ACC2SQL $(TTGMDB) $@ mysql
 
 cleansql:
-	$(RM) $(TTGSQL)
+	$(RM) $(TTGSQL) $(TTGMYSQL)
 
 else
 

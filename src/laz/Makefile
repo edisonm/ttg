@@ -86,8 +86,18 @@ $(DSRCBASE).pp $(DSRCBASE).lfm: $(DBUTILS) $(TTGMDB) Makefile
 $(DBUTILS):
 	cd ../.. ; $(MAKE) $(DBUTILS)
 
-clean:
-# 	$(DSRCBASE0).lfm $(DSRCBASE0).pp
+ifeq ($(shell uname -o),Cygwin)
+
+cleanlfm:
+	$(RM) $(DSRCBASE0).{lfm,lrs,pp} $(TTGSQLINC)
+
+else
+
+cleanlfm:
+
+endif
+
+clean: cleanlfm
 	$(RM) -r $(TTGEXE) $(TTGDIR)/bin/* $(ABOUT).pp
 
 test:
