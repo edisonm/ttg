@@ -181,7 +181,7 @@ begin
   begin
     Add('/* -*- mode: SQL; -*-');
     Add('');
-    Add('  ' + FormatDateTime(LongDateFormat + ' ' + LongTimeFormat, Now));
+    Add('  ' + FormatDateTime(ShortDateFormat + ' ' + ShortTimeFormat, Now));
     Add('');
     Add('  Warning:');
     Add('');

@@ -49,16 +49,16 @@ begin
   else
   begin
     WriteLn(
-      'DBUTILS /ACC2SQL.  Converts Access database to SQL.'#13#10 +
+      'DBCONVERT /ACC2SQL.  Converts Access database to SQL.'#13#10 +
       'Usage:'#13#10 +
-      '  DBUTILS /ACC2SQL AccessFileName SQLFileName [SQLFormat]'#13#10 +
+      '  DBCONVERT /ACC2SQL AccessFileName SQLFileName [SQLFormat]'#13#10 +
       #13#10 +
       '  AccessFileName:    Name of the Access File.'#13#10 +
       '  SQLFileName:       Name of the SQL File to be generated.'#13#10 +
       '  SQLFormat:         Format of the SQL File, can be mysql or sqlite.'#13#10 +
       #13#10 +
       'Example:'#13#10 +
-      'DBUTILS /ACC2SQL Test.mdb c:\data\test.sql');
+      'DBCONVERT /ACC2SQL Test.mdb c:\data\test.sql');
   end;
 end;
 

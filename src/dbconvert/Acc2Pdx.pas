@@ -38,15 +38,15 @@ begin
   else
   begin
     WriteLn(
-      'DBUTILS /ACC2PDX.  Converts Access to Paradox database.'#13#10 +
+      'DBCONVERT /ACC2PDX.  Converts Access to Paradox database.'#13#10 +
       'Usage:'#13#10 +
-      '  DBUTILS /ACC2PDX AccessFileName ParadoxDirectory'#13#10 +
+      '  DBCONVERT /ACC2PDX AccessFileName ParadoxDirectory'#13#10 +
       #13#10 +
       '  AccessFileName:        Name of Access File.'#13#10 +
       '  ParadoxDirectory:      Name of Paradox Directory.'#13#10 +
       #13#10 +
       'Example:'#13#10 +
-      '  DBUTILS /ACC2PDX Test.mdb ..\TestP\');
+      '  DBCONVERT /ACC2PDX Test.mdb ..\TestP\');
   end;
 end;
 

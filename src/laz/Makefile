@@ -78,13 +78,13 @@ uttgsql.pp: $(TTGSQLINC)
 $(TTGEXE): $(BASELAZFILES) ttg.lpi
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi ; strip --strip-all $(TTGEXE)
 
-$(DSRCBASE).pp $(DSRCBASE).lfm: $(DBUTILS) $(TTGMDB) Makefile
-	$(DBUTILS) /ACC2DM $(TTGMDB) SourceBaseDataModule \
+$(DSRCBASE).pp $(DSRCBASE).lfm: $(DBCONVERT) $(TTGMDB) Makefile
+	$(DBCONVERT) /ACC2DM $(TTGMDB) SourceBaseDataModule \
 	  $(DSRCBASE) 'cds;csr;lfm;U=ZConnection, ZDataset;DS=ZTable'
 	dos2unix $(DSRCBASE).pp $(DSRCBASE).lfm
 
-$(DBUTILS):
-	cd ../.. ; $(MAKE) $(DBUTILS)
+$(DBCONVERT):
+	cd ../.. ; $(MAKE) $(DBCONVERT)
 
 ifeq ($(shell uname -o),Cygwin)
 

@@ -37,15 +37,15 @@ begin
     else
     begin
       WriteLn(
-        'DBUTILS /DBPACK.  Packs Paradox database'#13#10 +
+        'DBCONVERT /DBPACK.  Packs Paradox database'#13#10 +
         'Usage:'#13#10 +
-        '  DBUTILS /DBPACK Directory FileName'#13#10 +
+        '  DBCONVERT /DBPACK Directory FileName'#13#10 +
         #13#10 +
         '  Directory:   Directory where the database resides.'#13#10 +
         '  FileName:    Packed File Name.'#13#10 +
         #13#10 +
         'Example:'#13#10 +
-        '  DBUTILS /DBPACK c:\base base.dbp');
+        '  DBCONVERT /DBPACK c:\base base.dbp');
     end;
   finally
     VDatabase.Free;
@@ -79,7 +79,7 @@ begin
     else
     begin
       WriteLn(
-        'DBUTILS /DBUNPACK.  Unpacks Paradox database.'#13#10 +
+        'DBCONVERT /DBUNPACK.  Unpacks Paradox database.'#13#10 +
         'Usage:'#13#10 +
         '  DBUNPACK NombreArchivo Directorio'#13#10 +
         #13#10 +
@@ -87,7 +87,7 @@ begin
         '  Directory:   Directory where the database resides.'#13#10 +
         #13#10 +
         'Example:'#13#10 +
-        '  DBUTILS /DBUNPACK base.dbp c:\base');
+        '  DBCONVERT /DBUNPACK base.dbp c:\base');
     end;
   finally
     VDatabase.Free;

@@ -78,9 +78,9 @@ begin
   else
   begin
     WriteLn(
-      'DBUTILS /ACC2DM.  Converts Access database to Data Module.'#13#10 +
+      'DBCONVERT /ACC2DM.  Converts Access database to Data Module.'#13#10 +
       'Usage:'#13#10 +
-      '  DBUTILS /ACC2DM AccessFileName NombreDataModule NombreArchivo [Option1;Option2;...]'#13#10 +
+      '  DBCONVERT /ACC2DM AccessFileName NombreDataModule NombreArchivo [Option1;Option2;...]'#13#10 +
       #13#10 +
       '  AccessFileName:        Name of Access File.'#13#10 +
       '  DataModuleName:        Name of Data Module.'#13#10 +
@@ -89,7 +89,7 @@ begin
       '  Valid options are cds;csi;cid;csf;cfd;cdf;csr;lfm;DS=DataSetClassName;U=Units'#13#10 +
       #13#10 +
       'Example:'#13#10 +
-      '  DBUTILS /ACC2DM Test.mdb TestData c:\data\DmTest cds;csi');
+      '  DBCONVERT /ACC2DM Test.mdb TestData c:\data\DmTest cds;csi');
   end;
 end;
 
