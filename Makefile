@@ -8,7 +8,7 @@ TTGDIR:=$(shell pwd)
 include SETTINGS
 include COMMON
 
-DBUTILSDPR=dbutils.dpr
+DBCONVERTDPR=dbconvert.dpr
 TTGMDB=dat/$(TTGMDBBASE)
 TTGSQL=dat/ttg.sql
 TTGMYSQL=dat/ttg.mysql
@@ -24,15 +24,15 @@ all: $(FILES)
 run:
 	cd src/laz ; $(MAKE) run
 
-$(DBUTILS): src/dbutils/$(DBUTILSDPR) $(addprefix src/dbutils/, $(addsuffix .pas, $(DBUNITS)))
-	cd src/dbutils; $(DCC32) $(DCC32OPTS) $(DBUTILSDPR)
+$(DBCONVERT): src/dbconvert/$(DBCONVERTDPR) $(addprefix src/dbconvert/, $(addsuffix .pas, $(DBUNITS)))
+	cd src/dbconvert; $(DCC32) $(DCC32OPTS) $(DBCONVERTDPR)
 
 ifeq ($(shell uname -o),Cygwin)
-$(TTGSQL): $(DBUTILS) $(TTGMDB)
-	$(DBUTILS) /ACC2SQL $(TTGMDB) $@ sqlite
+$(TTGSQL): $(DBCONVERT) $(TTGMDB)
+	$(DBCONVERT) /ACC2SQL $(TTGMDB) $@ sqlite
 
-$(TTGMYSQL): $(DBUTILS) $(TTGMDB)
-	$(DBUTILS) /ACC2SQL $(TTGMDB) $@ mysql
+$(TTGMYSQL): $(DBCONVERT) $(TTGMDB)
+	$(DBCONVERT) /ACC2SQL $(TTGMDB) $@ mysql
 
 cleansql:
 	$(RM) $(TTGSQL)
@@ -50,9 +50,9 @@ $(TTGSQLITE3): $(TTGSQL) Makefile
 
 clean: cleansql
 	cd src/laz; $(MAKE) clean
-	$(RM) $(INSTALLER) $(DBUTILS) \
-	  $(TTGSQLITE3) obj/* $(ISS) $(ABOUT).pas src/dbutils/*.identcache
-	$(RM) -r src/dbutils/__history
+	$(RM) $(INSTALLER) $(DBCONVERT) \
+	  $(TTGSQLITE3) obj/* $(ISS) $(ABOUT).pas src/dbconvert/*.identcache
+	$(RM) -r src/dbconvert/__history
 
 kbmtosq3:
 	for i in $(addprefix src/, $(FORMS) $(DSRCBASE0) $(UNITS) $(ABOUT)) ; do \
@@ -122,7 +122,7 @@ sq3tozeos:
 	  $$i.dfm > $$i.dfm.tmp && \
 	  mv -f $$i.dfm.tmp $$i.dfm ; done
 
-dbutils: $(DBUTILS)
+dbconvert: $(DBCONVERT)
 
 test:
 	@echo BUILDDATETIME="$(BUILDDATETIME)"

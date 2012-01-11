@@ -17,7 +17,7 @@ DCC32OPTS= \
 	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/plain)' \
 	-N0'$(shell cygpath -w $(TTGDIR)/bin)'
 ISSWIN='$(shell cygpath -w $(ISS))'
-DBUTILS=$(TTGDIR)/bin/dbutils.exe
+DBCONVERT=$(TTGDIR)/bin/dbconvert.exe
 FILES=$(TTGSQLITE3) $(TTGMYSQL)
 
 LRSDEP=$(LAZRES)

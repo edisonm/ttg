@@ -1,4 +1,4 @@
-program dbutils;
+program dbconvert;
 {$APPTYPE CONSOLE}
 uses
   Forms,
@@ -22,18 +22,18 @@ begin
   if ParamCount = 0 then
   begin
     WriteLn(
-      'DBUTILS.  Database Utilities version 1.1'#13#10 +
+      'DBCONVERT.  Database Utilities version 1.1'#13#10 +
       #13#10 +
       'Edition 1999-2012 by Edison Mera.'#13#10 +
       'Usage:'#13#10 +
-      '  DBUTILS [OPTION [PARAMETERS]]'#13#10 +
+      '  DBCONVERT [OPTION [PARAMETERS]]'#13#10 +
       #13#10 +
       '  OPTION:      Selected option: /DBPACK, /DBUNPACK, /ACC2PDX, /ACC2DM, /ACC2SQL.'#13#10 +
       '  PARAMETERS:  Parameters for the option.'#13#10 +
       '  The option without parameters shows the help.'#13#10 +
       #13#10 +
       'Example:'#13#10 +
-      '  DBUTILS /ACC2SQL test.mdb test.sql');
+      '  DBCONVERT /ACC2SQL test.mdb test.sql');
   end
   else
   begin
