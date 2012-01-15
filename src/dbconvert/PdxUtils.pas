@@ -9,15 +9,15 @@ type
   TDynamicTblTypeArray = array of TblType;
   TDynamicFLDTypeArray = array of FLDType;
   TDynamicIDXTypeArray = array of IDXType;
-procedure GetTableTypesList(Driver: string; var TblTypes: TDynamicTblTypeArray);
-procedure GetFieldTypesList(DrvType, TblType: string; var FieldTypes: TDynamicFLDTypeArray);
-procedure GetIndexTypesList(DrvType: string; var IDXTypes: TDynamicIDXTypeArray);
+procedure GetTableTypesList(Driver: AnsiString; var TblTypes: TDynamicTblTypeArray);
+procedure GetFieldTypesList(DrvType, TblType: AnsiString; var FieldTypes: TDynamicFLDTypeArray);
+procedure GetIndexTypesList(DrvType: AnsiString; var IDXTypes: TDynamicIDXTypeArray);
 
 implementation
 //uses
 
 
-procedure GetTableTypesList(Driver: string; var TblTypes: TDynamicTblTypeArray);
+procedure GetTableTypesList(Driver: AnsiString; var TblTypes: TDynamicTblTypeArray);
 var
   hTypeCur: hDBICur;
   i, n: Integer;
@@ -33,7 +33,7 @@ begin
   Check(DbiCloseCursor(hTypeCur));
 end;
 
-procedure GetFieldTypesList(DrvType, TblType: string;
+procedure GetFieldTypesList(DrvType, TblType: AnsiString;
   var FieldTypes: TDynamicFLDTypeArray);
 var
   TmpCursor: hDbiCur;
@@ -49,7 +49,7 @@ begin
   Check(DbiCloseCursor(TmpCursor));
 end;
 
-procedure GetIndexTypesList(DrvType: string; var IDXTypes: TDynamicIDXTypeArray);
+procedure GetIndexTypesList(DrvType: AnsiString; var IDXTypes: TDynamicIDXTypeArray);
 var
   TmpCursor: hDBICur;
   i, n: Integer;

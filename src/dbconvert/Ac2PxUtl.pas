@@ -105,7 +105,7 @@ begin
       begin
         iFldNum := j + 1;
         //OrdPos2FldNum[OrdinalPosition] := iFldNum;
-        StrPCopy(szName, Copy(Name, 1, 25));
+        StrPCopy(szName, AnsiString(Copy(Name, 1, 25)));
         t := Type_;
         if (Size = 8) and ((t = dbDate) or (t = dbTime)) then
           iFldType := fldTIMESTAMP
@@ -207,7 +207,7 @@ begin
                 s := Name;
               end;
               s := Copy(s, 1, 25);
-              StrPCopy(szName, s);
+              StrPCopy(szName, AnsiString(s));
               bDescending := (Fields.Item[0].Attributes = dbDescending);
               bCaseInsensitive := True;
             end;
@@ -256,7 +256,7 @@ begin
             if eq then Continue;
             iIndexId := l;
             s := Copy(Name, 1, 25);
-            StrPCopy(szName, s);
+            StrPCopy(szName, AnsiString(s));
             bMaintained := True;
             bUnique := Unique;
             bDescending := (Fields.Item[0].Attributes = dbDescending);
@@ -286,8 +286,8 @@ begin
       begin
         iRintNum := j + 1;
         s := Copy(Name, 1, 31);
-        StrPCopy(szRintName, s);
-        StrPCopy(szTblName, Table);
+        StrPCopy(szRintName, AnsiString(s));
+        StrPCopy(szTblName, AnsiString(Table));
         eType := rintDEPENDENT;
         eModOp := dbModOp[(Attributes and dbRelationUpdateCascade) <> 0];
         if (Attributes and dbRelationDeleteCascade) <> 0 then
@@ -471,7 +471,7 @@ begin
           FillChar(VCRTblDesc, sizeof(CRTblDesc), #0);
           with VCRTblDesc do
           begin
-            StrPCopy(szTblName, VTableDef.Name);
+            StrPCopy(szTblName, AnsiString(VTableDef.Name));
             szTblType := szPARADOX;
             iFLDCount := VTableDef.Fields.Count;
             pFLDDesc := Pointer(VpFLDDesc);
@@ -501,7 +501,7 @@ begin
                     for j := 0 to n - 1 do
                     begin
                       s := s + Format('[%s](%s->)', [VpRINTDesc[j].szRintName,
-                        VpRINTDesc[j].szTblName]); ;
+                        VpRINTDesc[j].szTblName]);
                     end;
                     s := s + ']';
                     Msgs.Add(Format('Table: %s Relations: %s not traslated.' +
@@ -515,8 +515,8 @@ begin
                     s := '[';
                     for j := 0 to VCRTblDesc.iRintCount - 1 do
                     begin
-                      s := s + '[' + VpRINTDesc[j].szRintName + ']('
-                        + VpRINTDesc[j].szTblName + '->)';
+                      s := s + Format('[%s](%s->)', [VpRINTDesc[j].szRintName,
+                        VpRINTDesc[j].szTblName]);
                     end;
                     s := s + ']';
                     Msgs.Add(Format('Table: %s Relations: %s not traslated.' +
@@ -531,13 +531,13 @@ begin
                   begin
                     s := '[';
                     for j := 0 to VCRTblDesc.iRintCount - 1 do
-                      s := s + VpRintDesc[j].szRintName + ' ';
+                      s := s + string(VpRintDesc[j].szRintName) + ' ';
                     s := s + ']';
                     Msgs.Add(Format('Table: %s Relations: %s not traslated' +
                       ' DBIERR_OUTOFRANGE', [VCRTblDesc.szTblName, s]));
                     s := '[';
                     for j := 0 to VCRTblDesc.iIdxCount - 1 do
-                      s := s + VpIDXDesc[j].szName + ' ';
+                      s := s + string(VpIDXDesc[j].szName) + ' ';
                     s := s + ']';
                     Msgs.Add(Format('Table: %s Indexes: %s not traslated ' +
                       'DBIERR_OUTOFRANGE', [VCRTblDesc.szTblName, s]));

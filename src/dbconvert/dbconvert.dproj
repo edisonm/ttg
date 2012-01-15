@@ -107,11 +107,11 @@
 			<DCCReference Include="Acc2DM.pas"/>
 			<DCCReference Include="..\..\..\arctl\SOURCE\ArDBUtls.pas"/>
 			<DCCReference Include="..\..\..\arctl\SOURCE\DBPacker.pas"/>
-			<DCCReference Include="..\..\..\arctl\SOURCE\BZIP2.PAS"/>
 			<DCCReference Include="..\..\..\arctl\SOURCE\ARCConst.pas"/>
 			<DCCReference Include="Ac2SQUtl.pas"/>
 			<DCCReference Include="Acc2SQL.pas"/>
 			<DCCReference Include="DAO_TLB.pas"/>
+			<DCCReference Include="..\..\..\BZip2\BZip2.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>

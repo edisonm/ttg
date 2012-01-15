@@ -12,11 +12,11 @@ uses
   Acc2DM in 'Acc2DM.pas',
   ArDBUtls in '..\..\..\arctl\SOURCE\ArDBUtls.pas',
   DBPacker in '..\..\..\arctl\SOURCE\DBPacker.pas',
-  BZIP2 in '..\..\..\arctl\SOURCE\BZIP2.PAS',
   ARCConst in '..\..\..\arctl\SOURCE\ARCConst.pas',
   Ac2SQUtl in 'Ac2SQUtl.pas',
   Acc2SQL in 'Acc2SQL.pas',
-  DAO_TLB in 'DAO_TLB.pas';
+  DAO_TLB in 'DAO_TLB.pas',
+  BZip2 in '..\..\..\BZip2\BZip2.pas';
 
 begin
   if ParamCount = 0 then
