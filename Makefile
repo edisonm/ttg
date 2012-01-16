@@ -24,8 +24,8 @@ all: $(FILES)
 run:
 	cd src/laz ; $(MAKE) run
 
-$(DBCONVERT): src/dbconvert/$(DBCONVERTDPR) $(addprefix src/dbconvert/, $(addsuffix .pas, $(DBUNITS)))
-	cd src/dbconvert; $(DCC32) $(DCC32OPTS) $(DBCONVERTDPR)
+$(DBCONVERT): ../DBConvert/src/$(DBCONVERTDPR) $(addprefix ../DBConvert/src/, $(addsuffix .pas, $(DBUNITS)))
+	cd ../DBConvert/src; $(DCC32) $(DCC32OPTS) $(DBCONVERTDPR)
 
 ifeq ($(shell uname -o),Cygwin)
 $(TTGSQL): $(DBCONVERT) $(TTGMDB)
@@ -51,8 +51,8 @@ $(TTGSQLITE3): $(TTGSQL) Makefile
 clean: cleansql
 	cd src/laz; $(MAKE) clean
 	$(RM) $(INSTALLER) $(DBCONVERT) \
-	  $(TTGSQLITE3) obj/* $(ISS) $(ABOUT).pas src/dbconvert/*.identcache
-	$(RM) -r src/dbconvert/__history
+	  $(TTGSQLITE3) obj/* $(ISS) $(ABOUT).pas ../DBConvert/src/*.identcache
+	$(RM) -r ../DBConvert/src/__history
 
 kbmtosq3:
 	for i in $(addprefix src/, $(FORMS) $(DSRCBASE0) $(UNITS) $(ABOUT)) ; do \
