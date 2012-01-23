@@ -162,9 +162,9 @@ Class
 "4";"1";"1";
 "5";"1";"1";
 "6";"1";"1";
-Profesor
+Teacher
 19
-"IdProfesor";"CedProfesor";"ApeProfesor";"NaProfesor";
+"IdTeacher";"TeacherNationalId";"LnTeacher";"NaTeacher";
 "1";"1";"Revelo";"Jorge";
 "2";"2";"Bracero";"Jorge";
 "3";"3";"Imbaquingo";"Jorge";
@@ -475,7 +475,7 @@ SubjectRestriction
 "29";"6";"11";"1";
 Distribution
 122
-"IdSubject";"IdLevel";"IdSpecialization";"IdGroupId";"IdProfesor";"IdRoomType";"Composicion";
+"IdSubject";"IdLevel";"IdSpecialization";"IdGroupId";"IdTeacher";"IdRoomType";"Composicion";
 "1";"1";"1";"1";"3";"1";"2.2.2";
 "1";"1";"1";"2";"3";"1";"2.2.2";
 "1";"2";"1";"1";"2";"1";"2.2.2";
@@ -1311,13 +1311,13 @@ TimeTableDetail
 "2";"30";"1";"1";"2";"5";"2";"244";
 TeacherRestrictionType
 3
-"IdProfProhibicionTipo";"NaProfProhibicionTipo";"ColProfProhibicionTipo";"ValProfProhibicionTipo";
+"IdTeacherRestrictionType";"NaTeacherRestrictionType";"ColTeacherRestrictionType";"ValTeacherRestrictionType";
 "0";"No gusta";"65280";"50";
 "1";"No puede";"255";"500";
 "2";"Optativa";"8388736";"500";
 TeacherRestriction
 47
-"IdProfesor";"IdDay";"IdHour";"IdProfProhibicionTipo";
+"IdTeacher";"IdDay";"IdHour";"IdTeacherRestrictionType";
 "1";"2";"10";"1";
 "1";"2";"11";"1";
 "1";"3";"10";"1";
@@ -1372,7 +1372,7 @@ NaAutoridad=Dr. Benjamín Tobar
 CarAutoridad=Rector
 NaResponsable=Comisión
 CarResponsable=Comisión
-MaxCargaProfesor=35
+MaxCargaTeacher=35
 TimeTableSeleccionado=3
 Comentarios=""
 Randomize=-1
@@ -1381,8 +1381,8 @@ Seed2=65165498
 Seed3=16264
 Seed4=65698
 NumIteraciones=25
-CruceProfesor=305
-ProfesorFraccionamiento=15
+CruceTeacher=305
+TeacherFraccionamiento=15
 CruceRoomType=65
 HourHueca=295
 SesionCortada=299
@@ -1394,12 +1394,13 @@ ProbMutacion1=0,2
 OrdenMutacion1=3
 ProbMutacion2=0,2
 ProbReparacion=0,1
-MostrarProfesorTimeTableTexto=AbLevel + " " + NaGroupId + " " + NaSubject
-MostrarProfesorTimeTableLongitud=20
-ProfesorTimeTableExcluirProfProhibicion=(TeacherRestriction.IdProfProhibicionTipo <> 2)AND(TeacherRestriction.IdProfProhibicionTipo <> 3)
+MostrarTeacherTimeTableTexto=AbLevel + " " + NaGroupId + " " + NaSubject
+MostrarTeacherTimeTableLongitud=20
+TeacherTimeTableExcluirProfProhibicion=(TeacherRestriction.IdTeacherRestrictionType <> 2)AND(TeacherRestriction.IdTeacherRestrictionType <> 3)
 RangoPolinizacion=0,1
 CruceSubject=201
 edtTimeTableIni_Text=
 dedCompartir_Text=
 ApplyDoubleDownHill=-1
 Bookmarks=2,1
+
