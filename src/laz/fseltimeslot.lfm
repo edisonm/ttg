@@ -1,10 +1,10 @@
-object SelPeriodoForm: TSelPeriodoForm
+object SelTimeSlotForm: TSelTimeSlotForm
   Left = 459
   Height = 123
   Top = 297
   Width = 295
-  ActiveControl = CBDia
-  Caption = 'Intercambiar Periodo'
+  ActiveControl = CBDay
+  Caption = 'Intercambiar TimeSlot'
   ClientHeight = 123
   ClientWidth = 295
   Position = poDesktopCenter
@@ -22,8 +22,8 @@ object SelPeriodoForm: TSelPeriodoForm
     Height = 18
     Top = 27
     Width = 23
-    Caption = 'Dia'
-    FocusControl = CBDia
+    Caption = 'Day'
+    FocusControl = CBDay
     ParentColor = False
   end
   object Label3: TLabel
@@ -31,31 +31,31 @@ object SelPeriodoForm: TSelPeriodoForm
     Height = 18
     Top = 27
     Width = 35
-    Caption = 'Hora'
-    FocusControl = CBHora
+    Caption = 'Hour'
+    FocusControl = CBHour
     ParentColor = False
   end
-  object CBDia: TDBLookupComboBox
+  object CBDay: TDBLookupComboBox
     Left = 16
     Height = 27
     Top = 48
     Width = 128
-    KeyField = 'CodDia'
-    ListField = 'NomDia'
+    KeyField = 'IdDay'
+    ListField = 'NaDay'
     ListFieldIndex = 0
-    ListSource = SourceDataModule.DSDia
+    ListSource = SourceDataModule.DSDay
     LookupCache = False
     TabOrder = 0
   end
-  object CBHora: TDBLookupComboBox
+  object CBHour: TDBLookupComboBox
     Left = 152
     Height = 27
     Top = 48
     Width = 128
-    KeyField = 'CodHora'
-    ListField = 'NomHora'
+    KeyField = 'IdHour'
+    ListField = 'NaHour'
     ListFieldIndex = 0
-    ListSource = SourceDataModule.DSHora
+    ListSource = SourceDataModule.DSHour
     LookupCache = False
     TabOrder = 1
   end

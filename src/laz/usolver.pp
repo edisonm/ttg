@@ -36,8 +36,8 @@ type
     procedure Update; virtual;
     procedure UpdateValue; virtual;
     procedure Execute(RefreshInterval: Integer); virtual;
-    procedure SaveSolutionToDatabase(ACodHorario: Integer;
-      const AExtraInfo: string; AMomentoInicial, AMomentoFinal: TDateTime); virtual; abstract;
+    procedure SaveSolutionToDatabase(AIdTimeTable: Integer;
+      const AExtraInfo: string; ATimeIni, ATimeEnd: TDateTime); virtual; abstract;
     function Pollinate: Boolean; overload;
     function Pollinate(Individual:TIndividual): Boolean; overload;
     property OnProgress: TProgressEvent read FOnProgress write FOnProgress;

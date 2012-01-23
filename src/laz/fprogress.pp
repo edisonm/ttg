@@ -16,69 +16,69 @@ type
 
   TProgressForm = class(TForm)
     lblColision: TLabel;
-    lblCruceMateria: TLabel;
-    lblCruceMateriaValor: TLabel;
+    lblCruceSubject: TLabel;
+    lblCruceSubjectValor: TLabel;
     lblExports: TLabel;
     lblImports: TLabel;
     Panel4: TPanel;
     Panel5: TPanel;
     Panel6: TPanel;
     Panel7: TPanel;
-    pnlCruceMateria: TPanel;
-    pnlCruceMateriaCantidad: TPanel;
-    pnlCruceMateriaValor: TPanel;
+    pnlCruceSubject: TPanel;
+    pnlCruceSubjectNumber: TPanel;
+    pnlCruceSubjectValor: TPanel;
     pnlProgress: TPanel;
     bbtnClose: TBitBtn;
     pnlValorTotal: TPanel;
-    pnlCruceProfesor: TPanel;
+    pnlCruceTeacher: TPanel;
     lblValorTotal: TLabel;
-    pnlCruceProfesorValor: TPanel;
-    lblCruceProfesorValor: TLabel;
-    pnlCruceAulaTipo: TPanel;
-    pnlCruceAulaTipoValor: TPanel;
-    lblCruceAulaTipoValor: TLabel;
-    pnlCruceProfesorCantidad: TPanel;
-    lblCruceProfesor: TLabel;
-    pnlCruceAulaTipoCantidad: TPanel;
-    lblCruceAulaTipo: TLabel;
-    pnlHoraHuecaDesubicada: TPanel;
-    pnlHoraHuecaDesubicadaCantidad: TPanel;
-    lblHoraHuecaDesubicada: TLabel;
-    pnlHoraHuecaDesubicadaValor: TPanel;
-    lblHoraHuecaDesubicadaValor: TLabel;
-    pnlSesionCortada: TPanel;
-    pnlSesionCortadaCantidad: TPanel;
-    lblSesionCortada: TLabel;
-    pnlSesionCortadaValor: TPanel;
-    lblSesionCortadaValor: TLabel;
+    pnlCruceTeacherValor: TPanel;
+    lblCruceTeacherValor: TLabel;
+    pnlCruceRoomType: TPanel;
+    pnlCruceRoomTypeValor: TPanel;
+    lblCruceRoomTypeValor: TLabel;
+    pnlCruceTeacherNumber: TPanel;
+    lblCruceTeacher: TLabel;
+    pnlCruceRoomTypeNumber: TPanel;
+    lblCruceRoomType: TLabel;
+    pnlHourHuecaDesubicada: TPanel;
+    pnlHourHuecaDesubicadaNumber: TPanel;
+    lblHourHuecaDesubicada: TLabel;
+    pnlHourHuecaDesubicadaValor: TPanel;
+    lblHourHuecaDesubicadaValor: TLabel;
+    pnlSessionCortada: TPanel;
+    pnlSessionCortadaNumber: TPanel;
+    lblSessionCortada: TLabel;
+    pnlSessionCortadaValor: TPanel;
+    lblSessionCortadaValor: TLabel;
     pnlInitDateTime: TPanel;
     lblInit: TLabel;
     pnlElapsedTime: TPanel;
     lblElapsedTime: TLabel;
     pnlEstimatedTime: TPanel;
     lblRemainingTime: TLabel;
-    pnlMateriaProhibicion: TPanel;
-    pnlMateriaProhibicionCantidad: TPanel;
-    lblMateriaProhibicion: TLabel;
-    pnlMateriaProhibicionValor: TPanel;
-    lblMateriaProhibicionValor: TLabel;
-    pnlProfesorProhibicion: TPanel;
-    pnlProfesorProhibicionCantidad: TPanel;
-    lblProfesorProhibicion: TLabel;
+    pnlSubjectRestriction: TPanel;
+    pnlSubjectRestrictionNumber: TPanel;
+    lblSubjectRestriction: TLabel;
+    pnlSubjectRestrictionValor: TPanel;
+    lblSubjectRestrictionValor: TLabel;
+    pnlTeacherRestriction: TPanel;
+    pnlTeacherRestrictionNumber: TPanel;
+    lblTeacherRestriction: TLabel;
     Panel26: TPanel;
-    lblProfesorProhibicionValor: TLabel;
-    pnlMateriaNoDispersa: TPanel;
+    lblTeacherRestrictionValor: TLabel;
+    pnlSubjectNoDispersa: TPanel;
     Panel28: TPanel;
-    lblMateriaNoDispersa: TLabel;
+    lblSubjectNoDispersa: TLabel;
     Panel29: TPanel;
-    lblMateriaNoDispersaValor: TLabel;
+    lblSubjectNoDispersaValor: TLabel;
     bbtnCancel: TBitBtn;
     PBProgress: TProgressBar;
     Panel1: TPanel;
     Panel2: TPanel;
-    lblProfesorFraccionamiento: TLabel;
+    lblTeacherFraccionamiento: TLabel;
     Panel3: TPanel;
-    lblProfesorFraccionamientoValor: TLabel;
+    lblTeacherFraccionamientoValor: TLabel;
     pnlPosition: TPanel;
     lblPosition: TLabel;
     procedure bbtnCancelClick(Sender: TObject);
@@ -146,9 +146,9 @@ begin
   if MainForm.UpdateIndex <> FUpdateIndex then
   begin
     with MasterDataModule.ConfigStorage do
-      TTimeTableModel(ASolver.Model).Configure(CruceProfesor, CruceMateria,
-        CruceAulaTipo, ProfesorFraccionamiento, HoraHuecaDesubicada,
-        SesionCortada, MateriaNoDispersa);
+      TTimeTableModel(ASolver.Model).Configure(CruceTeacher, CruceSubject,
+        CruceRoomType, TeacherFraccionamiento, HourHuecaDesubicada,
+        SessionCortada, SubjectNoDispersa);
     //ASolver.Update;
     ASolver.UpdateValue;
     FUpdateIndex := MainForm.UpdateIndex;
@@ -165,29 +165,29 @@ begin
       FTimePosition0 := t;
     lblPosition.Caption := Format('%d/%d', [APosition, AMax]);
     PBProgress.Position := APosition;
-    lblCruceProfesor.Caption := Format('%d ', [CruceProfesor]);
-    lblCruceMateria.Caption := Format('%d ', [CruceMateria]);
-    lblCruceAulaTipo.Caption := Format('%d ', [CruceAulaTipo]);
-    lblProfesorFraccionamiento.Caption :=
-      Format('%d ', [ProfesorFraccionamiento]);
-    lblHoraHuecaDesubicada.Caption := Format('%d ', [HoraHuecaDesubicada]);
-    lblSesionCortada.Caption := Format('%d ', [SesionCortada]);
-    lblMateriaProhibicion.Caption :=
-      Format('%s ', [VarArrToStr(MateriaProhibicionTipoAMateriaCant)]);
-    lblProfesorProhibicion.Caption :=
-      Format('%s ', [VarArrToStr(ProfesorProhibicionTipoAProfesorCant)]);
-    lblMateriaNoDispersa.Caption := Format('%d ', [MateriaNoDispersa]);
-    lblCruceProfesorValor.Caption := Format('%d ', [CruceProfesorValor]);
-    lblCruceMateriaValor.Caption := Format('%d ', [CruceMateriaValor]);
-    lblProfesorFraccionamientoValor.Caption :=
-      Format('%d ', [ProfesorFraccionamientoValor]);
-    lblCruceAulaTipoValor.Caption := Format('%d ', [CruceAulaTipoValor]);
-    lblHoraHuecaDesubicadaValor.Caption := Format('%d ',
-      [HoraHuecaDesubicadaValor]);
-    lblSesionCortadaValor.Caption := Format('%d ', [SesionCortadaValor]);
-    lblMateriaProhibicionValor.Caption := Format('%d ', [MateriaProhibicionValor]);
-    lblProfesorProhibicionValor.Caption := Format('%d ', [ProfesorProhibicionValor]);
-    lblMateriaNoDispersaValor.Caption := Format('%d ', [MateriaNoDispersaValor]);
+    lblCruceTeacher.Caption := Format('%d ', [CruceTeacher]);
+    lblCruceSubject.Caption := Format('%d ', [CruceSubject]);
+    lblCruceRoomType.Caption := Format('%d ', [CruceRoomType]);
+    lblTeacherFraccionamiento.Caption :=
+      Format('%d ', [TeacherFraccionamiento]);
+    lblHourHuecaDesubicada.Caption := Format('%d ', [HourHuecaDesubicada]);
+    lblSessionCortada.Caption := Format('%d ', [SessionCortada]);
+    lblSubjectRestriction.Caption :=
+      Format('%s ', [VarArrToStr(SubjectRestrictionTypeASubjectCant)]);
+    lblTeacherRestriction.Caption :=
+      Format('%s ', [VarArrToStr(TeacherRestrictionTypeATeacherCant)]);
+    lblSubjectNoDispersa.Caption := Format('%d ', [SubjectNoDispersa]);
+    lblCruceTeacherValor.Caption := Format('%d ', [CruceTeacherValor]);
+    lblCruceSubjectValor.Caption := Format('%d ', [CruceSubjectValor]);
+    lblTeacherFraccionamientoValor.Caption :=
+      Format('%d ', [TeacherFraccionamientoValor]);
+    lblCruceRoomTypeValor.Caption := Format('%d ', [CruceRoomTypeValor]);
+    lblHourHuecaDesubicadaValor.Caption := Format('%d ',
+      [HourHuecaDesubicadaValor]);
+    lblSessionCortadaValor.Caption := Format('%d ', [SessionCortadaValor]);
+    lblSubjectRestrictionValor.Caption := Format('%d ', [SubjectRestrictionValor]);
+    lblTeacherRestrictionValor.Caption := Format('%d ', [TeacherRestrictionValor]);
+    lblSubjectNoDispersaValor.Caption := Format('%d ', [SubjectNoDispersaValor]);
     lblValorTotal.Caption := Format('%d ', [Value]);
   end;
   with ASolver do
@@ -217,7 +217,7 @@ end;
 
 procedure TProgressForm.FormCreate(Sender: TObject);
 begin
-  // HelpContext := ActElaborarHorario.HelpContext;
+  // HelpContext := ActElaborarTimeTable.HelpContext;
   FInit := Now;
   FTimePosition0 := FInit;
   lblInit.Caption := FormatDateTime(Format('%s %s ', [ShortDateFormat,

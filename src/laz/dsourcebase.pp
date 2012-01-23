@@ -24,42 +24,42 @@ uses
 
 type
   TSourceBaseDataModule = class(TBaseDataModule)
-    TbAulaTipo: TZTable;
-    DSAulaTipo: TDataSource;
-    TbEspecializacion: TZTable;
-    DSEspecializacion: TDataSource;
-    TbDia: TZTable;
-    DSDia: TDataSource;
-    TbMateria: TZTable;
-    DSMateria: TDataSource;
-    TbNivel: TZTable;
-    DSNivel: TDataSource;
-    TbHora: TZTable;
-    DSHora: TDataSource;
-    TbHorario: TZTable;
-    DSHorario: TDataSource;
-    TbCurso: TZTable;
-    DSCurso: TDataSource;
-    TbParaleloId: TZTable;
-    DSParaleloId: TDataSource;
-    TbMateriaProhibicionTipo: TZTable;
-    DSMateriaProhibicionTipo: TDataSource;
-    TbPeriodo: TZTable;
-    DSPeriodo: TDataSource;
-    TbParalelo: TZTable;
-    DSParalelo: TDataSource;
-    TbProfesor: TZTable;
-    DSProfesor: TDataSource;
-    TbMateriaProhibicion: TZTable;
-    DSMateriaProhibicion: TDataSource;
-    TbDistributivo: TZTable;
-    DSDistributivo: TDataSource;
-    TbHorarioDetalle: TZTable;
-    DSHorarioDetalle: TDataSource;
-    TbProfesorProhibicionTipo: TZTable;
-    DSProfesorProhibicionTipo: TDataSource;
-    TbProfesorProhibicion: TZTable;
-    DSProfesorProhibicion: TDataSource;
+    TbRoomType: TZTable;
+    DSRoomType: TDataSource;
+    TbSpecialization: TZTable;
+    DSSpecialization: TDataSource;
+    TbDay: TZTable;
+    DSDay: TDataSource;
+    TbSubject: TZTable;
+    DSSubject: TDataSource;
+    TbLevel: TZTable;
+    DSLevel: TDataSource;
+    TbHour: TZTable;
+    DSHour: TDataSource;
+    TbTimeTable: TZTable;
+    DSTimeTable: TDataSource;
+    TbCourse: TZTable;
+    DSCourse: TDataSource;
+    TbGroupId: TZTable;
+    DSGroupId: TDataSource;
+    TbSubjectRestrictionType: TZTable;
+    DSSubjectRestrictionType: TDataSource;
+    TbTimeSlot: TZTable;
+    DSTimeSlot: TDataSource;
+    TbClass: TZTable;
+    DSClass: TDataSource;
+    TbTeacher: TZTable;
+    DSTeacher: TDataSource;
+    TbSubjectRestriction: TZTable;
+    DSSubjectRestriction: TDataSource;
+    TbDistribution: TZTable;
+    DSDistribution: TDataSource;
+    TbTimeTableDetail: TZTable;
+    DSTimeTableDetail: TDataSource;
+    TbTeacherRestrictionType: TZTable;
+    DSTeacherRestrictionType: TDataSource;
+    TbTeacherRestriction: TZTable;
+    DSTeacherRestriction: TDataSource;
 
     procedure DataModuleCreate(Sender: TObject);
   private
@@ -82,430 +82,430 @@ begin
   SetLength(FMasterRels, 18);
   SetLength(FDetailRels, 18);
   SetLength(FBeforePostLocks, 18);
-  Tables[0] := TbAulaTipo;
-  TbAulaTipo.BeforePost := DataSetBeforePost;
-  TbAulaTipo.BeforeDelete := DataSetBeforeDelete;
-  Tables[1] := TbEspecializacion;
-  TbEspecializacion.BeforePost := DataSetBeforePost;
-  TbEspecializacion.BeforeDelete := DataSetBeforeDelete;
-  Tables[2] := TbDia;
-  TbDia.BeforePost := DataSetBeforePost;
-  TbDia.BeforeDelete := DataSetBeforeDelete;
-  Tables[3] := TbMateria;
-  TbMateria.BeforePost := DataSetBeforePost;
-  TbMateria.BeforeDelete := DataSetBeforeDelete;
-  Tables[4] := TbNivel;
-  TbNivel.BeforePost := DataSetBeforePost;
-  TbNivel.BeforeDelete := DataSetBeforeDelete;
-  Tables[5] := TbHora;
-  TbHora.BeforePost := DataSetBeforePost;
-  TbHora.BeforeDelete := DataSetBeforeDelete;
-  Tables[6] := TbHorario;
-  TbHorario.BeforePost := DataSetBeforePost;
-  TbHorario.BeforeDelete := DataSetBeforeDelete;
-  Tables[7] := TbCurso;
-  TbCurso.BeforePost := DataSetBeforePost;
-  TbCurso.BeforeDelete := DataSetBeforeDelete;
-  Tables[8] := TbParaleloId;
-  TbParaleloId.BeforePost := DataSetBeforePost;
-  TbParaleloId.BeforeDelete := DataSetBeforeDelete;
-  Tables[9] := TbMateriaProhibicionTipo;
-  TbMateriaProhibicionTipo.BeforePost := DataSetBeforePost;
-  TbMateriaProhibicionTipo.BeforeDelete := DataSetBeforeDelete;
-  Tables[10] := TbPeriodo;
-  TbPeriodo.BeforePost := DataSetBeforePost;
-  TbPeriodo.BeforeDelete := DataSetBeforeDelete;
-  Tables[11] := TbParalelo;
-  TbParalelo.BeforePost := DataSetBeforePost;
-  TbParalelo.BeforeDelete := DataSetBeforeDelete;
-  Tables[12] := TbProfesor;
-  TbProfesor.BeforePost := DataSetBeforePost;
-  TbProfesor.BeforeDelete := DataSetBeforeDelete;
-  Tables[13] := TbMateriaProhibicion;
-  TbMateriaProhibicion.BeforePost := DataSetBeforePost;
-  Tables[14] := TbDistributivo;
-  TbDistributivo.BeforePost := DataSetBeforePost;
-  TbDistributivo.BeforeDelete := DataSetBeforeDelete;
-  Tables[15] := TbHorarioDetalle;
-  TbHorarioDetalle.BeforePost := DataSetBeforePost;
-  Tables[16] := TbProfesorProhibicionTipo;
-  TbProfesorProhibicionTipo.BeforePost := DataSetBeforePost;
-  TbProfesorProhibicionTipo.BeforeDelete := DataSetBeforeDelete;
-  Tables[17] := TbProfesorProhibicion;
-  TbProfesorProhibicion.BeforePost := DataSetBeforePost;
+  Tables[0] := TbRoomType;
+  TbRoomType.BeforePost := DataSetBeforePost;
+  TbRoomType.BeforeDelete := DataSetBeforeDelete;
+  Tables[1] := TbSpecialization;
+  TbSpecialization.BeforePost := DataSetBeforePost;
+  TbSpecialization.BeforeDelete := DataSetBeforeDelete;
+  Tables[2] := TbDay;
+  TbDay.BeforePost := DataSetBeforePost;
+  TbDay.BeforeDelete := DataSetBeforeDelete;
+  Tables[3] := TbSubject;
+  TbSubject.BeforePost := DataSetBeforePost;
+  TbSubject.BeforeDelete := DataSetBeforeDelete;
+  Tables[4] := TbLevel;
+  TbLevel.BeforePost := DataSetBeforePost;
+  TbLevel.BeforeDelete := DataSetBeforeDelete;
+  Tables[5] := TbHour;
+  TbHour.BeforePost := DataSetBeforePost;
+  TbHour.BeforeDelete := DataSetBeforeDelete;
+  Tables[6] := TbTimeTable;
+  TbTimeTable.BeforePost := DataSetBeforePost;
+  TbTimeTable.BeforeDelete := DataSetBeforeDelete;
+  Tables[7] := TbCourse;
+  TbCourse.BeforePost := DataSetBeforePost;
+  TbCourse.BeforeDelete := DataSetBeforeDelete;
+  Tables[8] := TbGroupId;
+  TbGroupId.BeforePost := DataSetBeforePost;
+  TbGroupId.BeforeDelete := DataSetBeforeDelete;
+  Tables[9] := TbSubjectRestrictionType;
+  TbSubjectRestrictionType.BeforePost := DataSetBeforePost;
+  TbSubjectRestrictionType.BeforeDelete := DataSetBeforeDelete;
+  Tables[10] := TbTimeSlot;
+  TbTimeSlot.BeforePost := DataSetBeforePost;
+  TbTimeSlot.BeforeDelete := DataSetBeforeDelete;
+  Tables[11] := TbClass;
+  TbClass.BeforePost := DataSetBeforePost;
+  TbClass.BeforeDelete := DataSetBeforeDelete;
+  Tables[12] := TbTeacher;
+  TbTeacher.BeforePost := DataSetBeforePost;
+  TbTeacher.BeforeDelete := DataSetBeforeDelete;
+  Tables[13] := TbSubjectRestriction;
+  TbSubjectRestriction.BeforePost := DataSetBeforePost;
+  Tables[14] := TbDistribution;
+  TbDistribution.BeforePost := DataSetBeforePost;
+  TbDistribution.BeforeDelete := DataSetBeforeDelete;
+  Tables[15] := TbTimeTableDetail;
+  TbTimeTableDetail.BeforePost := DataSetBeforePost;
+  Tables[16] := TbTeacherRestrictionType;
+  TbTeacherRestrictionType.BeforePost := DataSetBeforePost;
+  TbTeacherRestrictionType.BeforeDelete := DataSetBeforeDelete;
+  Tables[17] := TbTeacherRestriction;
+  TbTeacherRestriction.BeforePost := DataSetBeforePost;
   SetLength(FMasterRels[0], 1);
   with FMasterRels[0, 0] do
   begin
-    DetailDataSet := TbDistributivo;
-    MasterFields := 'CodAulaTipo';
-    DetailFields := 'CodAulaTipo';
+    DetailDataSet := TbDistribution;
+    MasterFields := 'IdRoomType';
+    DetailFields := 'IdRoomType';
     Cascade := False;
   end;
   SetLength(FMasterRels[1], 1);
   with FMasterRels[1, 0] do
   begin
-    DetailDataSet := TbCurso;
-    MasterFields := 'CodEspecializacion';
-    DetailFields := 'CodEspecializacion';
+    DetailDataSet := TbCourse;
+    MasterFields := 'IdSpecialization';
+    DetailFields := 'IdSpecialization';
     Cascade := False;
   end;
   SetLength(FMasterRels[2], 1);
   with FMasterRels[2, 0] do
   begin
-    DetailDataSet := TbPeriodo;
-    MasterFields := 'CodDia';
-    DetailFields := 'CodDia';
+    DetailDataSet := TbTimeSlot;
+    MasterFields := 'IdDay';
+    DetailFields := 'IdDay';
     Cascade := False;
   end;
   SetLength(FMasterRels[3], 2);
   with FMasterRels[3, 0] do
   begin
-    DetailDataSet := TbDistributivo;
-    MasterFields := 'CodMateria';
-    DetailFields := 'CodMateria';
+    DetailDataSet := TbDistribution;
+    MasterFields := 'IdSubject';
+    DetailFields := 'IdSubject';
     Cascade := False;
   end;
   with FMasterRels[3, 1] do
   begin
-    DetailDataSet := TbMateriaProhibicion;
-    MasterFields := 'CodMateria';
-    DetailFields := 'CodMateria';
+    DetailDataSet := TbSubjectRestriction;
+    MasterFields := 'IdSubject';
+    DetailFields := 'IdSubject';
     Cascade := False;
   end;
   SetLength(FMasterRels[4], 1);
   with FMasterRels[4, 0] do
   begin
-    DetailDataSet := TbCurso;
-    MasterFields := 'CodNivel';
-    DetailFields := 'CodNivel';
+    DetailDataSet := TbCourse;
+    MasterFields := 'IdLevel';
+    DetailFields := 'IdLevel';
     Cascade := False;
   end;
   SetLength(FMasterRels[5], 1);
   with FMasterRels[5, 0] do
   begin
-    DetailDataSet := TbPeriodo;
-    MasterFields := 'CodHora';
-    DetailFields := 'CodHora';
+    DetailDataSet := TbTimeSlot;
+    MasterFields := 'IdHour';
+    DetailFields := 'IdHour';
     Cascade := False;
   end;
   SetLength(FMasterRels[6], 1);
   with FMasterRels[6, 0] do
   begin
-    DetailDataSet := TbHorarioDetalle;
-    MasterFields := 'CodHorario';
-    DetailFields := 'CodHorario';
+    DetailDataSet := TbTimeTableDetail;
+    MasterFields := 'IdTimeTable';
+    DetailFields := 'IdTimeTable';
     Cascade := True;
   end;
   SetLength(FMasterRels[7], 1);
   with FMasterRels[7, 0] do
   begin
-    DetailDataSet := TbParalelo;
-    MasterFields := 'CodNivel;CodEspecializacion';
-    DetailFields := 'CodNivel;CodEspecializacion';
+    DetailDataSet := TbClass;
+    MasterFields := 'IdLevel;IdSpecialization';
+    DetailFields := 'IdLevel;IdSpecialization';
     Cascade := False;
   end;
   SetLength(FDetailRels[7], 2);
   with FDetailRels[7, 0] do
   begin
-    MasterDataSet := TbEspecializacion;
-    MasterFields := 'CodEspecializacion';
-    DetailFields := 'CodEspecializacion';
+    MasterDataSet := TbSpecialization;
+    MasterFields := 'IdSpecialization';
+    DetailFields := 'IdSpecialization';
   end;
   with FDetailRels[7, 1] do
   begin
-    MasterDataSet := TbNivel;
-    MasterFields := 'CodNivel';
-    DetailFields := 'CodNivel';
+    MasterDataSet := TbLevel;
+    MasterFields := 'IdLevel';
+    DetailFields := 'IdLevel';
   end;
   SetLength(FMasterRels[8], 1);
   with FMasterRels[8, 0] do
   begin
-    DetailDataSet := TbParalelo;
-    MasterFields := 'CodParaleloId';
-    DetailFields := 'CodParaleloId';
+    DetailDataSet := TbClass;
+    MasterFields := 'IdGroupId';
+    DetailFields := 'IdGroupId';
     Cascade := False;
   end;
   SetLength(FMasterRels[9], 1);
   with FMasterRels[9, 0] do
   begin
-    DetailDataSet := TbMateriaProhibicion;
-    MasterFields := 'CodMateProhibicionTipo';
-    DetailFields := 'CodMateProhibicionTipo';
+    DetailDataSet := TbSubjectRestriction;
+    MasterFields := 'IdSubjectRestrictionType';
+    DetailFields := 'IdSubjectRestrictionType';
     Cascade := False;
   end;
   SetLength(FMasterRels[10], 3);
   with FMasterRels[10, 0] do
   begin
-    DetailDataSet := TbHorarioDetalle;
-    MasterFields := 'CodDia;CodHora';
-    DetailFields := 'CodDia;CodHora';
+    DetailDataSet := TbTimeTableDetail;
+    MasterFields := 'IdDay;IdHour';
+    DetailFields := 'IdDay;IdHour';
     Cascade := False;
   end;
   with FMasterRels[10, 1] do
   begin
-    DetailDataSet := TbMateriaProhibicion;
-    MasterFields := 'CodDia;CodHora';
-    DetailFields := 'CodDia;CodHora';
+    DetailDataSet := TbSubjectRestriction;
+    MasterFields := 'IdDay;IdHour';
+    DetailFields := 'IdDay;IdHour';
     Cascade := False;
   end;
   with FMasterRels[10, 2] do
   begin
-    DetailDataSet := TbProfesorProhibicion;
-    MasterFields := 'CodDia;CodHora';
-    DetailFields := 'CodDia;CodHora';
+    DetailDataSet := TbTeacherRestriction;
+    MasterFields := 'IdDay;IdHour';
+    DetailFields := 'IdDay;IdHour';
     Cascade := False;
   end;
   SetLength(FDetailRels[10], 2);
   with FDetailRels[10, 0] do
   begin
-    MasterDataSet := TbDia;
-    MasterFields := 'CodDia';
-    DetailFields := 'CodDia';
+    MasterDataSet := TbDay;
+    MasterFields := 'IdDay';
+    DetailFields := 'IdDay';
   end;
   with FDetailRels[10, 1] do
   begin
-    MasterDataSet := TbHora;
-    MasterFields := 'CodHora';
-    DetailFields := 'CodHora';
+    MasterDataSet := TbHour;
+    MasterFields := 'IdHour';
+    DetailFields := 'IdHour';
   end;
   SetLength(FMasterRels[11], 1);
   with FMasterRels[11, 0] do
   begin
-    DetailDataSet := TbDistributivo;
-    MasterFields := 'CodNivel;CodEspecializacion;CodParaleloId';
-    DetailFields := 'CodNivel;CodEspecializacion;CodParaleloId';
+    DetailDataSet := TbDistribution;
+    MasterFields := 'IdLevel;IdSpecialization;IdGroupId';
+    DetailFields := 'IdLevel;IdSpecialization;IdGroupId';
     Cascade := False;
   end;
   SetLength(FDetailRels[11], 2);
   with FDetailRels[11, 0] do
   begin
-    MasterDataSet := TbCurso;
-    MasterFields := 'CodNivel;CodEspecializacion';
-    DetailFields := 'CodNivel;CodEspecializacion';
+    MasterDataSet := TbCourse;
+    MasterFields := 'IdLevel;IdSpecialization';
+    DetailFields := 'IdLevel;IdSpecialization';
   end;
   with FDetailRels[11, 1] do
   begin
-    MasterDataSet := TbParaleloId;
-    MasterFields := 'CodParaleloId';
-    DetailFields := 'CodParaleloId';
+    MasterDataSet := TbGroupId;
+    MasterFields := 'IdGroupId';
+    DetailFields := 'IdGroupId';
   end;
   SetLength(FMasterRels[12], 2);
   with FMasterRels[12, 0] do
   begin
-    DetailDataSet := TbDistributivo;
-    MasterFields := 'CodProfesor';
-    DetailFields := 'CodProfesor';
+    DetailDataSet := TbDistribution;
+    MasterFields := 'IdTeacher';
+    DetailFields := 'IdTeacher';
     Cascade := False;
   end;
   with FMasterRels[12, 1] do
   begin
-    DetailDataSet := TbProfesorProhibicion;
-    MasterFields := 'CodProfesor';
-    DetailFields := 'CodProfesor';
+    DetailDataSet := TbTeacherRestriction;
+    MasterFields := 'IdTeacher';
+    DetailFields := 'IdTeacher';
     Cascade := False;
   end;
   SetLength(FDetailRels[13], 3);
   with FDetailRels[13, 0] do
   begin
-    MasterDataSet := TbMateria;
-    MasterFields := 'CodMateria';
-    DetailFields := 'CodMateria';
+    MasterDataSet := TbSubject;
+    MasterFields := 'IdSubject';
+    DetailFields := 'IdSubject';
   end;
   with FDetailRels[13, 1] do
   begin
-    MasterDataSet := TbMateriaProhibicionTipo;
-    MasterFields := 'CodMateProhibicionTipo';
-    DetailFields := 'CodMateProhibicionTipo';
+    MasterDataSet := TbSubjectRestrictionType;
+    MasterFields := 'IdSubjectRestrictionType';
+    DetailFields := 'IdSubjectRestrictionType';
   end;
   with FDetailRels[13, 2] do
   begin
-    MasterDataSet := TbPeriodo;
-    MasterFields := 'CodDia;CodHora';
-    DetailFields := 'CodDia;CodHora';
+    MasterDataSet := TbTimeSlot;
+    MasterFields := 'IdDay;IdHour';
+    DetailFields := 'IdDay;IdHour';
   end;
   SetLength(FMasterRels[14], 1);
   with FMasterRels[14, 0] do
   begin
-    DetailDataSet := TbHorarioDetalle;
-    MasterFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
-    DetailFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+    DetailDataSet := TbTimeTableDetail;
+    MasterFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
+    DetailFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
     Cascade := False;
   end;
   SetLength(FDetailRels[14], 4);
   with FDetailRels[14, 0] do
   begin
-    MasterDataSet := TbAulaTipo;
-    MasterFields := 'CodAulaTipo';
-    DetailFields := 'CodAulaTipo';
+    MasterDataSet := TbRoomType;
+    MasterFields := 'IdRoomType';
+    DetailFields := 'IdRoomType';
   end;
   with FDetailRels[14, 1] do
   begin
-    MasterDataSet := TbMateria;
-    MasterFields := 'CodMateria';
-    DetailFields := 'CodMateria';
+    MasterDataSet := TbSubject;
+    MasterFields := 'IdSubject';
+    DetailFields := 'IdSubject';
   end;
   with FDetailRels[14, 2] do
   begin
-    MasterDataSet := TbParalelo;
-    MasterFields := 'CodNivel;CodEspecializacion;CodParaleloId';
-    DetailFields := 'CodNivel;CodEspecializacion;CodParaleloId';
+    MasterDataSet := TbClass;
+    MasterFields := 'IdLevel;IdSpecialization;IdGroupId';
+    DetailFields := 'IdLevel;IdSpecialization;IdGroupId';
   end;
   with FDetailRels[14, 3] do
   begin
-    MasterDataSet := TbProfesor;
-    MasterFields := 'CodProfesor';
-    DetailFields := 'CodProfesor';
+    MasterDataSet := TbTeacher;
+    MasterFields := 'IdTeacher';
+    DetailFields := 'IdTeacher';
   end;
   SetLength(FDetailRels[15], 3);
   with FDetailRels[15, 0] do
   begin
-    MasterDataSet := TbDistributivo;
-    MasterFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
-    DetailFields := 'CodMateria;CodNivel;CodEspecializacion;CodParaleloId';
+    MasterDataSet := TbDistribution;
+    MasterFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
+    DetailFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
   end;
   with FDetailRels[15, 1] do
   begin
-    MasterDataSet := TbHorario;
-    MasterFields := 'CodHorario';
-    DetailFields := 'CodHorario';
+    MasterDataSet := TbTimeTable;
+    MasterFields := 'IdTimeTable';
+    DetailFields := 'IdTimeTable';
   end;
   with FDetailRels[15, 2] do
   begin
-    MasterDataSet := TbPeriodo;
-    MasterFields := 'CodDia;CodHora';
-    DetailFields := 'CodDia;CodHora';
+    MasterDataSet := TbTimeSlot;
+    MasterFields := 'IdDay;IdHour';
+    DetailFields := 'IdDay;IdHour';
   end;
   SetLength(FMasterRels[16], 1);
   with FMasterRels[16, 0] do
   begin
-    DetailDataSet := TbProfesorProhibicion;
-    MasterFields := 'CodProfProhibicionTipo';
-    DetailFields := 'CodProfProhibicionTipo';
+    DetailDataSet := TbTeacherRestriction;
+    MasterFields := 'IdTeacherRestrictionType';
+    DetailFields := 'IdTeacherRestrictionType';
     Cascade := False;
   end;
   SetLength(FDetailRels[17], 3);
   with FDetailRels[17, 0] do
   begin
-    MasterDataSet := TbPeriodo;
-    MasterFields := 'CodDia;CodHora';
-    DetailFields := 'CodDia;CodHora';
+    MasterDataSet := TbTimeSlot;
+    MasterFields := 'IdDay;IdHour';
+    DetailFields := 'IdDay;IdHour';
   end;
   with FDetailRels[17, 1] do
   begin
-    MasterDataSet := TbProfesor;
-    MasterFields := 'CodProfesor';
-    DetailFields := 'CodProfesor';
+    MasterDataSet := TbTeacher;
+    MasterFields := 'IdTeacher';
+    DetailFields := 'IdTeacher';
   end;
   with FDetailRels[17, 2] do
   begin
-    MasterDataSet := TbProfesorProhibicionTipo;
-    MasterFields := 'CodProfProhibicionTipo';
-    DetailFields := 'CodProfProhibicionTipo';
+    MasterDataSet := TbTeacherRestrictionType;
+    MasterFields := 'IdTeacherRestrictionType';
+    DetailFields := 'IdTeacherRestrictionType';
   end;
   with DataSetNameList do
   begin
-    Add('TbAulaTipo=AulaTipo');
-    Add('TbEspecializacion=Especializacion');
-    Add('TbDia=Dia');
-    Add('TbMateria=Materia');
-    Add('TbNivel=Nivel');
-    Add('TbHora=Hora');
-    Add('TbHorario=Horario');
-    Add('TbCurso=Curso');
-    Add('TbParaleloId=ParaleloId');
-    Add('TbMateriaProhibicionTipo=MateriaProhibicionTipo');
-    Add('TbPeriodo=Periodo');
-    Add('TbParalelo=Paralelo');
-    Add('TbProfesor=Profesor');
-    Add('TbMateriaProhibicion=MateriaProhibicion');
-    Add('TbDistributivo=Distributivo');
-    Add('TbHorarioDetalle=HorarioDetalle');
-    Add('TbProfesorProhibicionTipo=ProfesorProhibicionTipo');
-    Add('TbProfesorProhibicion=ProfesorProhibicion');
+    Add('TbRoomType=RoomType');
+    Add('TbSpecialization=Specialization');
+    Add('TbDay=Day');
+    Add('TbSubject=Subject');
+    Add('TbLevel=Level');
+    Add('TbHour=Hour');
+    Add('TbTimeTable=TimeTable');
+    Add('TbCourse=Course');
+    Add('TbGroupId=GroupId');
+    Add('TbSubjectRestrictionType=SubjectRestrictionType');
+    Add('TbTimeSlot=TimeSlot');
+    Add('TbClass=Class');
+    Add('TbTeacher=Teacher');
+    Add('TbSubjectRestriction=SubjectRestriction');
+    Add('TbDistribution=Distribution');
+    Add('TbTimeTableDetail=TimeTableDetail');
+    Add('TbTeacherRestrictionType=TeacherRestrictionType');
+    Add('TbTeacherRestriction=TeacherRestriction');
   end;
   with FieldCaptionList do
   begin
-    Add('TbAulaTipo.CodAulaTipo=Codigo');
-    Add('TbAulaTipo.NomAulaTipo=Nombre');
-    Add('TbAulaTipo.AbrAulaTipo=Abreviatura');
-    Add('TbEspecializacion.CodEspecializacion=Codigo');
-    Add('TbEspecializacion.NomEspecializacion=Nombre');
-    Add('TbEspecializacion.AbrEspecializacion=Abreviatura');
-    Add('TbDia.CodDia=Codigo');
-    Add('TbDia.NomDia=Nombre');
-    Add('TbMateria.CodMateria=Codigo');
-    Add('TbMateria.NomMateria=Nombre');
-    Add('TbNivel.CodNivel=Codigo');
-    Add('TbNivel.NomNivel=Nombre');
-    Add('TbNivel.AbrNivel=Abreviatura');
-    Add('TbHora.CodHora=Codigo');
-    Add('TbHora.NomHora=Nombre');
-    Add('TbHorario.CodHorario=Codigo');
-    Add('TbHorario.MomentoInicial=Momento Inicial');
-    Add('TbHorario.MomentoFinal=Momento Final');
-    Add('TbCurso.CodNivel=Nivel');
-    Add('TbCurso.CodEspecializacion=Especialización');
-    Add('TbParaleloId.CodParaleloId=Codigo');
-    Add('TbParaleloId.NomParaleloId=Nombre');
-    Add('TbMateriaProhibicionTipo.CodMateProhibicionTipo=Codigo');
-    Add('TbMateriaProhibicionTipo.NomMateProhibicionTipo=Nombre');
-    Add('TbMateriaProhibicionTipo.ColMateProhibicionTipo=Color');
-    Add('TbMateriaProhibicionTipo.ValMateProhibicionTipo=Valor');
-    Add('TbPeriodo.CodDia=Dia');
-    Add('TbPeriodo.CodHora=Hora');
-    Add('TbParalelo.CodNivel=Nivel');
-    Add('TbParalelo.CodEspecializacion=Especializacion');
-    Add('TbParalelo.CodParaleloId=Paralelo');
-    Add('TbProfesor.CodProfesor=Codigo');
-    Add('TbProfesor.CedProfesor=Cedula');
-    Add('TbProfesor.ApeProfesor=Apellido');
-    Add('TbProfesor.NomProfesor=Nombre');
-    Add('TbMateriaProhibicion.CodMateria=Materia');
-    Add('TbMateriaProhibicion.CodDia=Dia');
-    Add('TbMateriaProhibicion.CodHora=Hora');
-    Add('TbMateriaProhibicion.CodMateProhibicionTipo=Tipo de Prohibicion');
-    Add('TbDistributivo.CodMateria=Materia');
-    Add('TbDistributivo.CodNivel=Nivel');
-    Add('TbDistributivo.CodEspecializacion=Especializacion');
-    Add('TbDistributivo.CodParaleloId=Paralelo');
-    Add('TbDistributivo.CodProfesor=Profesor');
-    Add('TbDistributivo.CodAulaTipo=Tipo de Aula');
-    Add('TbHorarioDetalle.CodHorario=Horario');
-    Add('TbHorarioDetalle.CodMateria=Materia');
-    Add('TbHorarioDetalle.CodNivel=Nivel');
-    Add('TbHorarioDetalle.CodEspecializacion=Especializacion');
-    Add('TbHorarioDetalle.CodParaleloId=Paralelo');
-    Add('TbHorarioDetalle.CodDia=Dia');
-    Add('TbHorarioDetalle.CodHora=Hora');
-    Add('TbProfesorProhibicionTipo.CodProfProhibicionTipo=Codigo');
-    Add('TbProfesorProhibicionTipo.NomProfProhibicionTipo=Nombre');
-    Add('TbProfesorProhibicionTipo.ColProfProhibicionTipo=Color');
-    Add('TbProfesorProhibicionTipo.ValProfProhibicionTipo=Valor');
-    Add('TbProfesorProhibicion.CodProfesor=Profesor');
-    Add('TbProfesorProhibicion.CodDia=Dia');
-    Add('TbProfesorProhibicion.CodHora=Hora');
-    Add('TbProfesorProhibicion.CodProfProhibicionTipo=Tipo de prohibicion');
+    Add('TbRoomType.IdRoomType=Idigo');
+    Add('TbRoomType.NaRoomType=Nombre');
+    Add('TbRoomType.AbRoomType=Abeviatura');
+    Add('TbSpecialization.IdSpecialization=Idigo');
+    Add('TbSpecialization.NaSpecialization=Nombre');
+    Add('TbSpecialization.AbSpecialization=Abeviatura');
+    Add('TbDay.IdDay=Idigo');
+    Add('TbDay.NaDay=Nombre');
+    Add('TbSubject.IdSubject=Idigo');
+    Add('TbSubject.NaSubject=Nombre');
+    Add('TbLevel.IdLevel=Idigo');
+    Add('TbLevel.NaLevel=Nombre');
+    Add('TbLevel.AbLevel=Abeviatura');
+    Add('TbHour.IdHour=Idigo');
+    Add('TbHour.NaHour=Nombre');
+    Add('TbTimeTable.IdTimeTable=Idigo');
+    Add('TbTimeTable.TimeIni=Momento Inicial');
+    Add('TbTimeTable.TimeEnd=Momento Final');
+    Add('TbCourse.IdLevel=Level');
+    Add('TbCourse.IdSpecialization=Especialización');
+    Add('TbGroupId.IdGroupId=Idigo');
+    Add('TbGroupId.NaGroupId=Nombre');
+    Add('TbSubjectRestrictionType.IdSubjectRestrictionType=Idigo');
+    Add('TbSubjectRestrictionType.NaSubjectRestrictionType=Nombre');
+    Add('TbSubjectRestrictionType.ColSubjectRestrictionType=Color');
+    Add('TbSubjectRestrictionType.ValSubjectRestrictionType=Valor');
+    Add('TbTimeSlot.IdDay=Day');
+    Add('TbTimeSlot.IdHour=Hour');
+    Add('TbClass.IdLevel=Level');
+    Add('TbClass.IdSpecialization=Specialization');
+    Add('TbClass.IdGroupId=Class');
+    Add('TbTeacher.IdTeacher=Idigo');
+    Add('TbTeacher.CedTeacher=Cedula');
+    Add('TbTeacher.ApeTeacher=Apellido');
+    Add('TbTeacher.NaTeacher=Nombre');
+    Add('TbSubjectRestriction.IdSubject=Subject');
+    Add('TbSubjectRestriction.IdDay=Day');
+    Add('TbSubjectRestriction.IdHour=Hour');
+    Add('TbSubjectRestriction.IdSubjectRestrictionType=Tipo de Prohibicion');
+    Add('TbDistribution.IdSubject=Subject');
+    Add('TbDistribution.IdLevel=Level');
+    Add('TbDistribution.IdSpecialization=Specialization');
+    Add('TbDistribution.IdGroupId=Class');
+    Add('TbDistribution.IdTeacher=Teacher');
+    Add('TbDistribution.IdRoomType=Tipo de Aula');
+    Add('TbTimeTableDetail.IdTimeTable=TimeTable');
+    Add('TbTimeTableDetail.IdSubject=Subject');
+    Add('TbTimeTableDetail.IdLevel=Level');
+    Add('TbTimeTableDetail.IdSpecialization=Specialization');
+    Add('TbTimeTableDetail.IdGroupId=Class');
+    Add('TbTimeTableDetail.IdDay=Day');
+    Add('TbTimeTableDetail.IdHour=Hour');
+    Add('TbTeacherRestrictionType.IdTeacherRestrictionType=Idigo');
+    Add('TbTeacherRestrictionType.NaTeacherRestrictionType=Nombre');
+    Add('TbTeacherRestrictionType.ColTeacherRestrictionType=Color');
+    Add('TbTeacherRestrictionType.ValTeacherRestrictionType=Valor');
+    Add('TbTeacherRestriction.IdTeacher=Teacher');
+    Add('TbTeacherRestriction.IdDay=Day');
+    Add('TbTeacherRestriction.IdHour=Hour');
+    Add('TbTeacherRestriction.IdTeacherRestrictionType=Tipo de prohibicion');
   end;
   with DataSetDescList do
   begin
-    Add('TbAulaTipo=Tipos de aula');
-    Add('TbEspecializacion=Especializaciones');
-    Add('TbDia=Dias laborables');
-    Add('TbMateria=Materias');
-    Add('TbNivel=Niveles');
-    Add('TbHora=Horas academicas');
-    Add('TbHorario=Horarios del colegio');
-    Add('TbCurso=Cursos');
-    Add('TbParaleloId=Identificadores de paralelo');
-    Add('TbMateriaProhibicionTipo=Tipos de prohibicion de materia');
-    Add('TbPeriodo=Periodos laborables');
-    Add('TbParalelo=Paralelos');
-    Add('TbProfesor=Profesores');
-    Add('TbMateriaProhibicion=Prohibiciones de materia');
-    Add('TbDistributivo=Distributivo');
-    Add('TbHorarioDetalle=Detalle de los horarios');
-    Add('TbProfesorProhibicionTipo=Tipos de prohibicion de profesor');
-    Add('TbProfesorProhibicion=Prohibiciones de profesor');
+    Add('TbRoomType=Tipos de aula');
+    Add('TbSpecialization=Specializationes');
+    Add('TbDay=Days laborables');
+    Add('TbSubject=Subjects');
+    Add('TbLevel=Leveles');
+    Add('TbHour=Hours academicas');
+    Add('TbTimeTable=TimeTables del colegio');
+    Add('TbCourse=Courses');
+    Add('TbGroupId=Identificadores de paralelo');
+    Add('TbSubjectRestrictionType=Tipos de prohibicion de materia');
+    Add('TbTimeSlot=TimeSlots laborables');
+    Add('TbClass=Classs');
+    Add('TbTeacher=Teacheres');
+    Add('TbSubjectRestriction=Prohibiciones de materia');
+    Add('TbDistribution=Distribution');
+    Add('TbTimeTableDetail=Detalle de los horarios');
+    Add('TbTeacherRestrictionType=Tipos de prohibicion de profesor');
+    Add('TbTeacherRestriction=Prohibiciones de profesor');
   end;
 end;
 

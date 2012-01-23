@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit FParalelo;
+unit FClass;
 
 {$I ttg.inc}
 
@@ -12,9 +12,9 @@ uses
 
 type
 
-  { TParaleloForm }
+  { TClassForm }
 
-  TParaleloForm = class(TSingleEditorForm)
+  TClassForm = class(TSingleEditorForm)
     DataSourceList: TDataSource;
     DataSourceDetail: TDataSource;
     Splitter1: TSplitter;
@@ -30,7 +30,7 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    FieldCodParaleloId, FieldNomParaleloId: TField;
+    FieldIdGroupId, FieldNaGroupId: TField;
     PostingData: Boolean;
   protected
     procedure doLoadConfig; override;
@@ -40,7 +40,7 @@ type
   end;
 
 var
-  ParaleloForm: TParaleloForm;
+  ClassForm: TClassForm;
 
 implementation
 
@@ -51,7 +51,7 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-procedure TParaleloForm.FormCreate(Sender: TObject);
+procedure TClassForm.FormCreate(Sender: TObject);
 begin
   inherited;
   PostingData := False;
@@ -62,11 +62,11 @@ begin
     with DataSourceList.DataSet do
     begin
       First;
-      FieldCodParaleloId := FindField('CodParaleloId');
-      FieldNomParaleloId := FindField('NomParaleloId');
+      FieldIdGroupId := FindField('IdGroupId');
+      FieldNaGroupId := FindField('NaGroupId');
       while not Eof do
       begin
-        Items.Add(FindField('NomParaleloId').AsString);
+        Items.Add(FindField('NaGroupId').AsString);
         Next;
       end;
     end;
@@ -74,103 +74,103 @@ begin
   end;
 end;
 
-procedure TParaleloForm.FormClose(Sender: TObject; var CloseAction: TCloseAction
+procedure TClassForm.FormClose(Sender: TObject; var CloseAction: TCloseAction
   );
 begin
   inherited;
 end;
 
-procedure TParaleloForm.ActFindExecute(Sender: TObject);
+procedure TClassForm.ActFindExecute(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TParaleloForm.DBGridDblClick(Sender: TObject);
+procedure TClassForm.DBGridDblClick(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TParaleloForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+procedure TClassForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
   inherited;
 end;
 
-procedure TParaleloForm.doLoadConfig;
+procedure TClassForm.doLoadConfig;
 begin
   inherited;
   CheckListBox.Width := ConfigIntegers['CheckListBox_Width'];
 end;
 
-procedure TParaleloForm.doSaveConfig;
+procedure TClassForm.doSaveConfig;
 begin
   inherited;
   ConfigIntegers['CheckListBox_Width'] := CheckListBox.Width;
 end;
 
-procedure TParaleloForm.DataSourceDataChange(Sender: TObject;
+procedure TClassForm.DataSourceDataChange(Sender: TObject;
   Field: TField);
 var
-  CodNivel, CodEspecializacion: Integer;
+  IdLevel, IdSpecialization: Integer;
 begin
   inherited;
   with CheckListBox do if not PostingData and Assigned(DataSourceList.DataSet) then
   begin
-    CodNivel := DataSource.DataSet.FindField('CodNivel').AsInteger;
-    CodEspecializacion := DataSource.DataSet.FindField('CodEspecializacion').AsInteger;
+    IdLevel := DataSource.DataSet.FindField('IdLevel').AsInteger;
+    IdSpecialization := DataSource.DataSet.FindField('IdSpecialization').AsInteger;
     with DataSourceList.DataSet do
     begin
       First;
       while not Eof do
       begin
-        Checked[Items.IndexOf(FieldNomParaleloId.AsString)] :=
-          DataSourceDetail.DataSet.Locate('CodNivel;CodEspecializacion;CodParaleloId',
-            VarArrayOf([CodNivel, CodEspecializacion, FieldCodParaleloId.AsInteger]), []);
+        Checked[Items.IndexOf(FieldNaGroupId.AsString)] :=
+          DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdGroupId',
+            VarArrayOf([IdLevel, IdSpecialization, FieldIdGroupId.AsInteger]), []);
         Next;
       end;
     end;
   end;
 end;
 
-procedure TParaleloForm.DataSourceStateChange(Sender: TObject);
+procedure TClassForm.DataSourceStateChange(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TParaleloForm.FormDestroy(Sender: TObject);
+procedure TClassForm.FormDestroy(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TParaleloForm.CheckListBoxExit(Sender: TObject);
+procedure TClassForm.CheckListBoxExit(Sender: TObject);
 var
-  CodNivel, CodEspecializacion, CodParaleloId: Integer;
+  IdLevel, IdSpecialization, IdGroupId: Integer;
 begin
   inherited;
   with CheckListBox do if Assigned(DataSourceList.DataSet) then
   begin
-    CodNivel := DataSource.DataSet.FindField('CodNivel').AsInteger;
-    CodEspecializacion := DataSource.DataSet.FindField('CodEspecializacion').AsInteger;
+    IdLevel := DataSource.DataSet.FindField('IdLevel').AsInteger;
+    IdSpecialization := DataSource.DataSet.FindField('IdSpecialization').AsInteger;
     with DataSourceList.DataSet do
     try
       PostingData := True;
       First;
       while not Eof do
       begin
-        CodParaleloId := FieldCodParaleloId.AsInteger;
-        if DataSourceDetail.DataSet.Locate('CodNivel;CodEspecializacion;CodParaleloId',
-          VarArrayOf([CodNivel, CodEspecializacion, CodParaleloId]), []) then
+        IdGroupId := FieldIdGroupId.AsInteger;
+        if DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdGroupId',
+          VarArrayOf([IdLevel, IdSpecialization, IdGroupId]), []) then
         begin
-          if not Checked[Items.IndexOf(FieldNomParaleloId.AsString)] then
+          if not Checked[Items.IndexOf(FieldNaGroupId.AsString)] then
             DataSourceDetail.DataSet.Delete;
         end
         else
         begin
-          if Checked[Items.IndexOf(FieldNomParaleloId.AsString)] then
+          if Checked[Items.IndexOf(FieldNaGroupId.AsString)] then
           begin
             DataSourceDetail.DataSet.Append;
-            DataSourceDetail.DataSet.FindField('CodNivel').Value := CodNivel;
-            DataSourceDetail.DataSet.FindField('CodEspecializacion').Value := CodEspecializacion;
-            DataSourceDetail.DataSet.FindField('CodParaleloId').Value := CodParaleloId;
+            DataSourceDetail.DataSet.FindField('IdLevel').Value := IdLevel;
+            DataSourceDetail.DataSet.FindField('IdSpecialization').Value := IdSpecialization;
+            DataSourceDetail.DataSet.FindField('IdGroupId').Value := IdGroupId;
             DataSourceDetail.DataSet.Post;
           end;
         end;
@@ -184,7 +184,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i fparalelo.lrs}
+  {$i fclass.lrs}
 {$ENDIF}
 
 end.

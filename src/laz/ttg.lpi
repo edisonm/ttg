@@ -194,20 +194,20 @@
         <UnitName Value="FEditor"/>
       </Unit11>
       <Unit12>
-        <Filename Value="fmateria.pp"/>
+        <Filename Value="fsubject.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="MateriaForm"/>
+        <ComponentName Value="SubjectForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FMateria"/>
+        <UnitName Value="FSubject"/>
       </Unit12>
       <Unit13>
-        <Filename Value="fprofesor.pp"/>
+        <Filename Value="fteacher.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="ProfesorForm"/>
+        <ComponentName Value="TeacherForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FProfesor"/>
+        <UnitName Value="FTeacher"/>
       </Unit13>
       <Unit14>
         <Filename Value="uttgdbutils.pp"/>
@@ -228,12 +228,12 @@
         <UnitName Value="FConfiguracion"/>
       </Unit16>
       <Unit17>
-        <Filename Value="fhorarioparalelo.pp"/>
+        <Filename Value="ftimetableclass.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="HorarioParaleloForm"/>
+        <ComponentName Value="TimeTableClassForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FHorarioParalelo"/>
+        <UnitName Value="FTimeTableClass"/>
       </Unit17>
       <Unit18>
         <Filename Value="fmasterdetaileditor.pp"/>
@@ -244,12 +244,12 @@
         <UnitName Value="FMasterDetailEditor"/>
       </Unit18>
       <Unit19>
-        <Filename Value="fhorarioaulatipo.pp"/>
+        <Filename Value="ftimetableroomtype.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="HorarioAulaTipoForm"/>
+        <ComponentName Value="TimeTableRoomTypeForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FHorarioAulaTipo"/>
+        <UnitName Value="FTimeTableRoomType"/>
       </Unit19>
       <Unit20>
         <Filename Value="fsplash.pp"/>
@@ -260,12 +260,12 @@
         <UnitName Value="FSplash"/>
       </Unit20>
       <Unit21>
-        <Filename Value="fparalelo.pp"/>
+        <Filename Value="fclass.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="ParaleloForm"/>
+        <ComponentName Value="ClassForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FParalelo"/>
+        <UnitName Value="FClass"/>
       </Unit21>
       <Unit22>
         <Filename Value="fsingleeditor.pp"/>
@@ -276,20 +276,20 @@
         <UnitName Value="FSingleEditor"/>
       </Unit22>
       <Unit23>
-        <Filename Value="fhorario.pp"/>
+        <Filename Value="ftimetable.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="HorarioForm"/>
+        <ComponentName Value="TimeTableForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FHorario"/>
+        <UnitName Value="FTimeTable"/>
       </Unit23>
       <Unit24>
-        <Filename Value="fhorarioprofesor.pp"/>
+        <Filename Value="ftimetableteacher.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="HorarioProfesorForm"/>
+        <ComponentName Value="TimeTableTeacherForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FHorarioProfesor"/>
+        <UnitName Value="FTimeTableTeacher"/>
       </Unit24>
       <Unit25>
         <Filename Value="dsourcebase.pp"/>
@@ -313,12 +313,12 @@
         <UnitName Value="DSource"/>
       </Unit27>
       <Unit28>
-        <Filename Value="fselperiodo.pp"/>
+        <Filename Value="fseltimeslot.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="SelPeriodoForm"/>
+        <ComponentName Value="SelTimeSlotForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FSelPeriodo"/>
+        <UnitName Value="FSelTimeSlot"/>
       </Unit28>
       <Unit29>
         <Filename Value="dbase.pp"/>

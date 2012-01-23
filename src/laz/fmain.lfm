@@ -129,73 +129,73 @@ object MainForm: TMainForm
         ShowHint = True
         Style = tbsSeparator
       end
-      object SIDia: TToolButton
+      object SIDay: TToolButton
         Left = 101
         Top = 0
-        Action = ActDia
+        Action = ActDay
         ParentShowHint = False
         ShowHint = True
       end
-      object SIHora: TToolButton
+      object SIHour: TToolButton
         Left = 124
         Top = 0
-        Action = ActHora
+        Action = ActHour
         ParentShowHint = False
         ShowHint = True
       end
-      object SIPeriodo: TToolButton
+      object SITimeSlot: TToolButton
         Left = 147
         Top = 0
-        Action = ActPeriodo
+        Action = ActTimeSlot
         ParentShowHint = False
         ShowHint = True
       end
-      object SINivel: TToolButton
+      object SILevel: TToolButton
         Left = 170
         Top = 0
-        Action = ActNivel
+        Action = ActLevel
         ParentShowHint = False
         ShowHint = True
       end
-      object SIEspecializacion: TToolButton
+      object SISpecialization: TToolButton
         Left = 193
         Top = 0
-        Action = ActEspecializacion
+        Action = ActSpecialization
         ParentShowHint = False
         ShowHint = True
       end
-      object SIParaleloId: TToolButton
+      object SIGroupId: TToolButton
         Left = 216
         Top = 0
-        Action = ActParaleloId
+        Action = ActGroupId
         ParentShowHint = False
         ShowHint = True
       end
-      object SIParalelo: TToolButton
+      object SIClass: TToolButton
         Left = 239
         Top = 0
-        Action = ActParalelo
+        Action = ActClass
         ParentShowHint = False
         ShowHint = True
       end
-      object SIMateria: TToolButton
+      object SISubject: TToolButton
         Left = 262
         Top = 0
-        Action = ActMateria
+        Action = ActSubject
         ParentShowHint = False
         ShowHint = True
       end
-      object SIAulaTipo: TToolButton
+      object SIRoomType: TToolButton
         Left = 285
         Top = 0
-        Action = ActAulaTipo
+        Action = ActRoomType
         ParentShowHint = False
         ShowHint = True
       end
-      object SIProfesor: TToolButton
+      object SITeacher: TToolButton
         Left = 308
         Top = 0
-        Action = ActProfesor
+        Action = ActTeacher
         ParentShowHint = False
         ShowHint = True
       end
@@ -219,7 +219,7 @@ object MainForm: TMainForm
       object SIFindMejor: TToolButton
         Left = 362
         Top = 0
-        Action = ActElaborarHorario
+        Action = ActElaborarTimeTable
         ParentShowHint = False
         ShowHint = True
       end
@@ -233,10 +233,10 @@ object MainForm: TMainForm
         ShowHint = True
         Style = tbsSeparator
       end
-      object SIHorario: TToolButton
+      object SITimeTable: TToolButton
         Left = 393
         Top = 0
-        Action = ActHorario
+        Action = ActTimeTable
         ParentShowHint = False
         ShowHint = True
       end
@@ -453,8 +453,8 @@ object MainForm: TMainForm
       Caption = '&Datos'
       HelpContext = 40
       Hint = 'Datos|Ingreso de datos'
-      object MIDia: TMenuItem
-        Action = ActDia
+      object MIDay: TMenuItem
+        Action = ActDay
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -492,10 +492,10 @@ object MainForm: TMainForm
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         }
-        OnClick = ActDiaExecute
+        OnClick = ActDayExecute
       end
-      object MIHora: TMenuItem
-        Action = ActHora
+      object MIHour: TMenuItem
+        Action = ActHour
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -533,10 +533,10 @@ object MainForm: TMainForm
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         }
-        OnClick = ActHoraExecute
+        OnClick = ActHourExecute
       end
-      object MIPeriodo: TMenuItem
-        Action = ActPeriodo
+      object MITimeSlot: TMenuItem
+        Action = ActTimeSlot
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -575,13 +575,13 @@ object MainForm: TMainForm
           0000808000008080000080800000808000008080000080800000
         }
         ShortCut = 49232
-        OnClick = ActPeriodoExecute
+        OnClick = ActTimeSlotExecute
       end
       object N2: TMenuItem
         Caption = '-'
       end
-      object MINivel: TMenuItem
-        Action = ActNivel
+      object MILevel: TMenuItem
+        Action = ActLevel
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -619,10 +619,10 @@ object MainForm: TMainForm
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000FF0000
           00FF000000FFFF00FF00848484FF848484FF848484FF848484FF
         }
-        OnClick = ActNivelExecute
+        OnClick = ActLevelExecute
       end
-      object MIEspecializacion: TMenuItem
-        Action = ActEspecializacion
+      object MISpecialization: TMenuItem
+        Action = ActSpecialization
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -660,10 +660,10 @@ object MainForm: TMainForm
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         }
-        OnClick = ActEspecializacionExecute
+        OnClick = ActSpecializationExecute
       end
-      object MIParaleloId: TMenuItem
-        Action = ActParaleloId
+      object MIGroupId: TMenuItem
+        Action = ActGroupId
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -702,10 +702,10 @@ object MainForm: TMainForm
           00FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00
         }
         ShortCut = 16457
-        OnClick = ActParaleloIdExecute
+        OnClick = ActGroupIdExecute
       end
-      object MIParalelo: TMenuItem
-        Action = ActParalelo
+      object MIClass: TMenuItem
+        Action = ActClass
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -744,13 +744,13 @@ object MainForm: TMainForm
           0000808000008080000080800000808000008080000080800000
         }
         ShortCut = 49234
-        OnClick = ActParaleloExecute
+        OnClick = ActClassExecute
       end
       object N5: TMenuItem
         Caption = '-'
       end
-      object MIMateria: TMenuItem
-        Action = ActMateria
+      object MISubject: TMenuItem
+        Action = ActSubject
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -788,10 +788,10 @@ object MainForm: TMainForm
           0000808000008080000080800000808000008080000080800000808000008080
           0000808000008080000080800000808000008080000080800000
         }
-        OnClick = ActMateriaExecute
+        OnClick = ActSubjectExecute
       end
-      object MIAulaTipo: TMenuItem
-        Action = ActAulaTipo
+      object MIRoomType: TMenuItem
+        Action = ActRoomType
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -829,13 +829,13 @@ object MainForm: TMainForm
           0000808000008080000080800000808000008080000080800000808000008080
           0000808000008080000080800000808000008080000080800000
         }
-        OnClick = ActAulaTipoExecute
+        OnClick = ActRoomTypeExecute
       end
       object N6: TMenuItem
         Caption = '-'
       end
-      object MIProfesor: TMenuItem
-        Action = ActProfesor
+      object MITeacher: TMenuItem
+        Action = ActTeacher
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -873,7 +873,7 @@ object MainForm: TMainForm
           0000808000008080000080800000808000008080000080800000808000008080
           0000808000008080000080800000808000008080000080800000
         }
-        OnClick = ActProfesorExecute
+        OnClick = ActTeacherExecute
       end
     end
     object MITool: TMenuItem
@@ -925,8 +925,8 @@ object MainForm: TMainForm
         Action = ActChequearFactibilidad
         OnClick = ActChequearFactibilidadExecute
       end
-      object MIElaborarHorario: TMenuItem
-        Action = ActElaborarHorario
+      object MIElaborarTimeTable: TMenuItem
+        Action = ActElaborarTimeTable
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -965,18 +965,18 @@ object MainForm: TMainForm
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         }
         Hint = 'Elaborar horario|Elaborar horario'
-        OnClick = ActElaborarHorarioExecute
+        OnClick = ActElaborarTimeTableExecute
       end
-      object MIMejorarHorario: TMenuItem
-        Action = ActMejorarHorario
+      object MIMejorarTimeTable: TMenuItem
+        Action = ActMejorarTimeTable
       end
     end
     object MIView: TMenuItem
       Caption = '&Ver'
       HelpContext = 60
       Hint = 'Ver|Presentacion de resultados'
-      object MIHorario: TMenuItem
-        Action = ActHorario
+      object MITimeTable: TMenuItem
+        Action = ActTimeTable
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -1015,7 +1015,7 @@ object MainForm: TMainForm
           FF00000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         }
         ShortCut = 49224
-        OnClick = ActHorarioExecute
+        OnClick = ActTimeTableExecute
       end
     end
     object MIHelp: TMenuItem
@@ -1122,7 +1122,7 @@ object MainForm: TMainForm
   end
   object OpenDialog: TOpenDialog
     DefaultExt = '.ttd'
-    Filter = 'Horario para colegio (*.ttd)|*.ttd'
+    Filter = 'TimeTable para colegio (*.ttd)|*.ttd'
     Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
     left = 74
     top = 72
@@ -2019,14 +2019,14 @@ object MainForm: TMainForm
       ImageIndex = 25
       OnExecute = ActIndexExecute
     end
-    object ActHorario: TAction
+    object ActTimeTable: TAction
       Category = 'View'
       AutoCheck = True
-      Caption = 'Horarios'
+      Caption = 'TimeTables'
       HelpContext = 280
-      Hint = 'Horarios|Ver los horarios elaborados'
+      Hint = 'TimeTables|Ver los horarios elaborados'
       ImageIndex = 20
-      OnExecute = ActHorarioExecute
+      OnExecute = ActTimeTableExecute
       ShortCut = 49234
     end
     object ActAbout: TAction
@@ -2052,9 +2052,9 @@ object MainForm: TMainForm
     end
     object ActOpen: TAction
       Category = 'File'
-      Caption = 'Abrir'
+      Caption = 'Abir'
       HelpContext = 90
-      Hint = 'Abrir|Abrir colegio previamente guardado'
+      Hint = 'Abir|Abir colegio previamente guardado'
       ImageIndex = 1
       OnExecute = ActOpenExecute
       ShortCut = 16449
@@ -2089,104 +2089,104 @@ object MainForm: TMainForm
       Hint = 'Salir|Salir del programa'
       OnExecute = ActExitExecute
     end
-    object ActDia: TAction
+    object ActDay: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Dias laborables'
+      Caption = 'Days laborables'
       HelpContext = 140
-      Hint = 'Dias laborables|Dias laborables'
+      Hint = 'Days laborables|Days laborables'
       ImageIndex = 4
-      OnExecute = ActDiaExecute
+      OnExecute = ActDayExecute
       ShortCut = 16452
     end
-    object ActHora: TAction
+    object ActHour: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Horas academicas'
+      Caption = 'Hours academicas'
       HelpContext = 150
-      Hint = 'Horas academicas|Horas academicas'
+      Hint = 'Hours academicas|Hours academicas'
       ImageIndex = 5
-      OnExecute = ActHoraExecute
+      OnExecute = ActHourExecute
       ShortCut = 16456
     end
-    object ActPeriodo: TAction
+    object ActTimeSlot: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Periodos laborables'
+      Caption = 'TimeSlots laborables'
       HelpContext = 160
-      Hint = 'Periodos laborables|Periodos laborables'
+      Hint = 'TimeSlots laborables|TimeSlots laborables'
       ImageIndex = 13
-      OnExecute = ActPeriodoExecute
+      OnExecute = ActTimeSlotExecute
       ShortCut = 49225
     end
-    object ActNivel: TAction
+    object ActLevel: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Niveles'
+      Caption = 'Leveles'
       HelpContext = 170
-      Hint = 'Niveles|Niveles'
+      Hint = 'Leveles|Leveles'
       ImageIndex = 7
-      OnExecute = ActNivelExecute
+      OnExecute = ActLevelExecute
       ShortCut = 16462
     end
-    object ActEspecializacion: TAction
+    object ActSpecialization: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Especializaciones'
+      Caption = 'Specializationes'
       HelpContext = 180
-      Hint = 'Especializaciones|Especializaciones'
+      Hint = 'Specializationes|Specializationes'
       ImageIndex = 6
-      OnExecute = ActEspecializacionExecute
+      OnExecute = ActSpecializationExecute
       ShortCut = 16453
     end
-    object ActParaleloId: TAction
+    object ActGroupId: TAction
       Category = 'Data'
       AutoCheck = True
       Caption = 'Identificadores de paralelo'
       HelpContext = 190
       Hint = 'Identificadores de paralelo|Identificadores de paralelo'
       ImageIndex = 8
-      OnExecute = ActParaleloIdExecute
+      OnExecute = ActGroupIdExecute
       ShortCut = 16466
     end
-    object ActParalelo: TAction
+    object ActClass: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Paralelos'
+      Caption = 'Classs'
       HelpContext = 200
-      Hint = 'Paralelos|Cursos con sus respectivos paralelos'
+      Hint = 'Classs|Courses con sus respectivos paralelos'
       ImageIndex = 14
-      OnExecute = ActParaleloExecute
+      OnExecute = ActClassExecute
       ShortCut = 49219
     end
-    object ActMateria: TAction
+    object ActSubject: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Materias'
+      Caption = 'Subjects'
       HelpContext = 210
-      Hint = 'Materias|Materias'
+      Hint = 'Subjects|Subjects'
       ImageIndex = 15
-      OnExecute = ActMateriaExecute
+      OnExecute = ActSubjectExecute
       ShortCut = 49229
     end
-    object ActAulaTipo: TAction
+    object ActRoomType: TAction
       Category = 'Data'
       AutoCheck = True
       Caption = 'Tipos de aula'
       HelpContext = 220
       Hint = 'Tipos de aula|Tipos de aula'
       ImageIndex = 10
-      OnExecute = ActAulaTipoExecute
+      OnExecute = ActRoomTypeExecute
       ShortCut = 49217
     end
-    object ActProfesor: TAction
+    object ActTeacher: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Profesores'
+      Caption = 'Teacheres'
       HelpContext = 240
-      Hint = 'Profesores|Profesores'
+      Hint = 'Teacheres|Teacheres'
       ImageIndex = 9
-      OnExecute = ActProfesorExecute
+      OnExecute = ActTeacherExecute
       ShortCut = 16463
     end
     object ActConfigurar: TAction
@@ -2205,19 +2205,19 @@ object MainForm: TMainForm
       Hint = 'Chequear factibilidad|Chequear la factibilidad de los datos ingresados'
       OnExecute = ActChequearFactibilidadExecute
     end
-    object ActElaborarHorario: TAction
+    object ActElaborarTimeTable: TAction
       Category = 'Tools'
       AutoCheck = True
       Caption = 'Elaborar horario'
       HelpContext = 270
-      Hint = 'Elaborar Horario|Elaborar Horario'
+      Hint = 'Elaborar TimeTable|Elaborar TimeTable'
       ImageIndex = 17
-      OnExecute = ActElaborarHorarioExecute
+      OnExecute = ActElaborarTimeTableExecute
     end
-    object ActMejorarHorario: TAction
+    object ActMejorarTimeTable: TAction
       Category = 'Tools'
-      Caption = 'Mejorar Horario'
-      Hint = 'Mejorar Horario|Mejorar el Horario buscando en doble profundidad'
+      Caption = 'Mejorar TimeTable'
+      Hint = 'Mejorar TimeTable|Mejorar el TimeTable buscando en doble profundidad'
     end
   end
   object SaveDialogCSV: TSaveDialog

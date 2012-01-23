@@ -15,21 +15,21 @@ type
   TTTGConfig = class(TConfigStorage)
   private
     function GetBookmarks: string;
-    function GetNomColegio: string;
+    function GetNaColegio: string;
     procedure SetBookmarks(const AValue: string);
-    procedure SetNomColegio(const Value: string);
+    procedure SetNaColegio(const Value: string);
     function GetAnioLectivo: string;
     procedure SetAnioLectivo(const Value: string);
-    function GetNomAutoridad: string;
-    procedure SetNomAutoridad(const Value: string);
+    function GetNaAutoridad: string;
+    procedure SetNaAutoridad(const Value: string);
     function GetCarAutoridad: string;
     procedure SetCarAutoridad(const Value: string);
-    function GetNomResponsable: string;
-    procedure SetNomResponsable(const Value: string);
+    function GetNaResponsable: string;
+    procedure SetNaResponsable(const Value: string);
     function GetCarResponsable: string;
     procedure SetCarResponsable(const Value: string);
-    function GetMaxCargaProfesor: Integer;
-    procedure SetMaxCargaProfesor(Value: Integer);
+    function GetMaxCargaTeacher: Integer;
+    procedure SetMaxCargaTeacher(Value: Integer);
     function GetComentarios: string;
     procedure SetComentarios(const Value: string);
     function GetRandomize: Boolean;
@@ -38,20 +38,20 @@ type
     procedure SetSeed(Value: Integer);
     function GetRefreshInterval: Integer;
     procedure SetRefreshInterval(Value: Integer);
-    function GetCruceProfesor: Integer;
-    procedure SetCruceProfesor(Value: Integer);
-    function GetCruceMateria: Integer;
-    procedure SetCruceMateria(Value: Integer);
-    function GetProfesorFraccionamiento: Integer;
-    procedure SetProfesorFraccionamiento(Value: Integer);
-    function GetCruceAulaTipo: Integer;
-    procedure SetCruceAulaTipo(Value: Integer);
-    function GetHoraHuecaDesubicada: Integer;
-    procedure SetHoraHuecaDesubicada(Value: Integer);
-    function GetSesionCortada: Integer;
-    procedure SetSesionCortada(Value: Integer);
-    function GetMateriaNoDispersa: Integer;
-    procedure SetMateriaNoDispersa(Value: Integer);
+    function GetCruceTeacher: Integer;
+    procedure SetCruceTeacher(Value: Integer);
+    function GetCruceSubject: Integer;
+    procedure SetCruceSubject(Value: Integer);
+    function GetTeacherFraccionamiento: Integer;
+    procedure SetTeacherFraccionamiento(Value: Integer);
+    function GetCruceRoomType: Integer;
+    procedure SetCruceRoomType(Value: Integer);
+    function GetHourHuecaDesubicada: Integer;
+    procedure SetHourHuecaDesubicada(Value: Integer);
+    function GetSessionCortada: Integer;
+    procedure SetSessionCortada(Value: Integer);
+    function GetSubjectNoDispersa: Integer;
+    procedure SetSubjectNoDispersa(Value: Integer);
     function GetPopulationSize: Integer;
     procedure SetPopulationSize(Value: Integer);
     function GetMaxIteration: Integer;
@@ -62,8 +62,8 @@ type
     procedure SetMutation1Prob(Value: Double);
     function GetRepairProb: Double;
     procedure SetRepairProb(Value: Double);
-    function GetHorarioIni: string;
-    procedure SetHorarioIni(const Value: string);
+    function GetTimeTableIni: string;
+    procedure SetTimeTableIni(const Value: string);
     function GetSharedDirectory: string;
     procedure SetSharedDirectory(const Value: string);
     function GetPollinationProb: Double;
@@ -73,30 +73,30 @@ type
   public
     procedure SetDefaults;
     procedure InitRandom;
-    property NomColegio: string read GetNomColegio write SetNomColegio;
+    property NaColegio: string read GetNaColegio write SetNaColegio;
     property AnioLectivo: string read GetAnioLectivo write SetAnioLectivo;
-    property NomAutoridad: string read GetNomAutoridad write SetNomAutoridad;
+    property NaAutoridad: string read GetNaAutoridad write SetNaAutoridad;
     property CarAutoridad: string read GetCarAutoridad write SetCarAutoridad;
-    property NomResponsable: string read GetNomResponsable write SetNomResponsable;
+    property NaResponsable: string read GetNaResponsable write SetNaResponsable;
     property CarResponsable: string read GetCarResponsable write SetCarResponsable;
-    property MaxCargaProfesor: Integer read GetMaxCargaProfesor write SetMaxCargaProfesor;
+    property MaxCargaTeacher: Integer read GetMaxCargaTeacher write SetMaxCargaTeacher;
     property Comentarios: string read GetComentarios write SetComentarios;
     property Randomize: Boolean read GetRandomize write SetRandomize;
     property Seed: Integer read GetSeed write SetSeed;
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
-    property CruceProfesor: Integer read GetCruceProfesor write SetCruceProfesor;
-    property CruceMateria: Integer read GetCruceMateria write SetCruceMateria;
-    property ProfesorFraccionamiento: Integer read GetProfesorFraccionamiento write SetProfesorFraccionamiento;
-    property CruceAulaTipo: Integer read GetCruceAulaTipo write SetCruceAulaTipo;
-    property HoraHuecaDesubicada: Integer read GetHoraHuecaDesubicada write SetHoraHuecaDesubicada;
-    property SesionCortada: Integer read GetSesionCortada write SetSesionCortada;
-    property MateriaNoDispersa: Integer read GetMateriaNoDispersa write SetMateriaNoDispersa;
+    property CruceTeacher: Integer read GetCruceTeacher write SetCruceTeacher;
+    property CruceSubject: Integer read GetCruceSubject write SetCruceSubject;
+    property TeacherFraccionamiento: Integer read GetTeacherFraccionamiento write SetTeacherFraccionamiento;
+    property CruceRoomType: Integer read GetCruceRoomType write SetCruceRoomType;
+    property HourHuecaDesubicada: Integer read GetHourHuecaDesubicada write SetHourHuecaDesubicada;
+    property SessionCortada: Integer read GetSessionCortada write SetSessionCortada;
+    property SubjectNoDispersa: Integer read GetSubjectNoDispersa write SetSubjectNoDispersa;
     property PopulationSize: Integer read GetPopulationSize write SetPopulationSize;
     property MaxIteration: Integer read GetMaxIteration write SetMaxIteration;
     property CrossProb: Double read GetProbCruzamiento write SetProbCruzamiento;
     property MutationProb: Double read GetMutation1Prob write SetMutation1Prob;
     property RepairProb: Double read GetRepairProb write SetRepairProb;
-    property HorarioIni: string read GetHorarioIni write SetHorarioIni;
+    property TimeTableIni: string read GetTimeTableIni write SetTimeTableIni;
     property SharedDirectory: string read GetSharedDirectory write SetSharedDirectory;
     property PollinationProb: Double read GetPollinationProb write SetPollinationProb;
     property ApplyDoubleDownHill: Boolean read GetApplyDoubleDownHill write SetApplyDoubleDownHill;
@@ -110,9 +110,9 @@ begin
   Result := Values['Bookmarks'];
 end;
 
-function TTTGConfig.GetNomColegio: string;
+function TTTGConfig.GetNaColegio: string;
 begin
-   Result := Values['NomColegio'];
+   Result := Values['NaColegio'];
 end;
 
 procedure TTTGConfig.SetBookmarks(const AValue: string);
@@ -120,9 +120,9 @@ begin
   Values['Bookmarks'] := AValue;
 end;
 
-procedure TTTGConfig.SetNomColegio(const Value: string);
+procedure TTTGConfig.SetNaColegio(const Value: string);
 begin
-   Values['NomColegio'] := Value;
+   Values['NaColegio'] := Value;
 end;
 
 function TTTGConfig.GetAnioLectivo: string;
@@ -135,14 +135,14 @@ begin
    Values['AnioLectivo'] := Value;
 end;
 
-function TTTGConfig.GetNomAutoridad: string;
+function TTTGConfig.GetNaAutoridad: string;
 begin
-   Result := Values['NomAutoridad'];
+   Result := Values['NaAutoridad'];
 end;
 
-procedure TTTGConfig.SetNomAutoridad(const Value: string);
+procedure TTTGConfig.SetNaAutoridad(const Value: string);
 begin
-   Values['NomAutoridad'] := Value;
+   Values['NaAutoridad'] := Value;
 end;
 
 function TTTGConfig.GetCarAutoridad: string;
@@ -155,14 +155,14 @@ begin
    Values['CarAutoridad'] := Value;
 end;
 
-function TTTGConfig.GetNomResponsable: string;
+function TTTGConfig.GetNaResponsable: string;
 begin
-   Result := Values['NomResponsable'];
+   Result := Values['NaResponsable'];
 end;
 
-procedure TTTGConfig.SetNomResponsable(const Value: string);
+procedure TTTGConfig.SetNaResponsable(const Value: string);
 begin
-   Values['NomResponsable'] := Value;
+   Values['NaResponsable'] := Value;
 end;
 
 function TTTGConfig.GetCarResponsable: string;
@@ -175,14 +175,14 @@ begin
    Values['CarResponsable'] := Value;
 end;
 
-function TTTGConfig.GetMaxCargaProfesor: Integer;
+function TTTGConfig.GetMaxCargaTeacher: Integer;
 begin
-   Result := Integers['MaxCargaProfesor'];
+   Result := Integers['MaxCargaTeacher'];
 end;
 
-procedure TTTGConfig.SetMaxCargaProfesor(Value: Integer);
+procedure TTTGConfig.SetMaxCargaTeacher(Value: Integer);
 begin
-   Integers['MaxCargaProfesor'] := Value;
+   Integers['MaxCargaTeacher'] := Value;
 end;
 
 function TTTGConfig.GetComentarios: string;
@@ -225,74 +225,74 @@ begin
   Integers['NumIteraciones'] := Value;
 end;
 
-function TTTGConfig.GetCruceProfesor: Integer;
+function TTTGConfig.GetCruceTeacher: Integer;
 begin
-  Result := Integers['CruceProfesor'];
+  Result := Integers['CruceTeacher'];
 end;
 
-procedure TTTGConfig.SetCruceProfesor(Value: Integer);
+procedure TTTGConfig.SetCruceTeacher(Value: Integer);
 begin
-  Integers['CruceProfesor'] := Value;
+  Integers['CruceTeacher'] := Value;
 end;
 
-function TTTGConfig.GetCruceMateria: Integer;
+function TTTGConfig.GetCruceSubject: Integer;
 begin
-  Result := Integers['CruceMateria'];
+  Result := Integers['CruceSubject'];
 end;
 
-procedure TTTGConfig.SetCruceMateria(Value: Integer);
+procedure TTTGConfig.SetCruceSubject(Value: Integer);
 begin
-  Integers['CruceMateria'] := Value;
+  Integers['CruceSubject'] := Value;
 end;
 
-function TTTGConfig.GetProfesorFraccionamiento: Integer;
+function TTTGConfig.GetTeacherFraccionamiento: Integer;
 begin
-  Result := Integers['ProfesorFraccionamiento'];
+  Result := Integers['TeacherFraccionamiento'];
 end;
 
-procedure TTTGConfig.SetProfesorFraccionamiento(Value: Integer);
+procedure TTTGConfig.SetTeacherFraccionamiento(Value: Integer);
 begin
-  Integers['ProfesorFraccionamiento'] := Value;
+  Integers['TeacherFraccionamiento'] := Value;
 end;
 
-function TTTGConfig.GetCruceAulaTipo: Integer;
+function TTTGConfig.GetCruceRoomType: Integer;
 begin
-  Result := Integers['CruceAulaTipo'];
+  Result := Integers['CruceRoomType'];
 end;
 
-procedure TTTGConfig.SetCruceAulaTipo(Value: Integer);
+procedure TTTGConfig.SetCruceRoomType(Value: Integer);
 begin
-  Integers['CruceAulaTipo'] := Value;
+  Integers['CruceRoomType'] := Value;
 end;
 
-function TTTGConfig.GetHoraHuecaDesubicada: Integer;
+function TTTGConfig.GetHourHuecaDesubicada: Integer;
 begin
-  Result := Integers['HoraHueca'];
+  Result := Integers['HourHueca'];
 end;
 
-procedure TTTGConfig.SetHoraHuecaDesubicada(Value: Integer);
+procedure TTTGConfig.SetHourHuecaDesubicada(Value: Integer);
 begin
-  Integers['HoraHueca'] := Value;
+  Integers['HourHueca'] := Value;
 end;
 
-function TTTGConfig.GetSesionCortada: Integer;
+function TTTGConfig.GetSessionCortada: Integer;
 begin
-  Result := Integers['SesionCortada'];
+  Result := Integers['SessionCortada'];
 end;
 
-procedure TTTGConfig.SetSesionCortada(Value: Integer);
+procedure TTTGConfig.SetSessionCortada(Value: Integer);
 begin
-  Integers['SesionCortada'] := Value;
+  Integers['SessionCortada'] := Value;
 end;
 
-function TTTGConfig.GetMateriaNoDispersa: Integer;
+function TTTGConfig.GetSubjectNoDispersa: Integer;
 begin
-  Result := Integers['MateriaNoDispersa'];
+  Result := Integers['SubjectNoDispersa'];
 end;
 
-procedure TTTGConfig.SetMateriaNoDispersa(Value: Integer);
+procedure TTTGConfig.SetSubjectNoDispersa(Value: Integer);
 begin
-  Integers['MateriaNoDispersa'] := Value;
+  Integers['SubjectNoDispersa'] := Value;
 end;
 
 function TTTGConfig.GetPopulationSize: Integer;
@@ -345,14 +345,14 @@ begin
   Floats['ProbReparacion'] := Value;
 end;
 
-function TTTGConfig.GetHorarioIni: string;
+function TTTGConfig.GetTimeTableIni: string;
 begin
-  Result := Values['edtHorarioIni_Text'];
+  Result := Values['edtTimeTableIni_Text'];
 end;
 
-procedure TTTGConfig.SetHorarioIni(const Value: string);
+procedure TTTGConfig.SetTimeTableIni(const Value: string);
 begin
-  Values['edtHorarioIni_Text'] := Value;
+  Values['edtTimeTableIni_Text'] := Value;
 end;
 
 function TTTGConfig.GetSharedDirectory: string;
@@ -388,24 +388,24 @@ end;
 procedure TTTGConfig.SetDefaults;
 begin
   // Default configuration
-  NomColegio := '';
+  NaColegio := '';
   AnioLectivo := '';
-  NomAutoridad := '';
+  NaAutoridad := '';
   CarAutoridad := '';
-  NomResponsable := '';
+  NaResponsable := '';
   CarResponsable := '';
-  MaxCargaProfesor := 20;
+  MaxCargaTeacher := 20;
   Comentarios := '';
   Randomize := True;
   Self.Seed := 1;
   RefreshInterval := 1;
-  CruceProfesor := 200;
-  CruceMateria := 200;
-  ProfesorFraccionamiento := 50;
-  CruceAulaTipo := 200;
-  HoraHuecaDesubicada := 100;
-  SesionCortada := 150;
-  MateriaNoDispersa := 5;
+  CruceTeacher := 200;
+  CruceSubject := 200;
+  TeacherFraccionamiento := 50;
+  CruceRoomType := 200;
+  HourHuecaDesubicada := 100;
+  SessionCortada := 150;
+  SubjectNoDispersa := 5;
   PopulationSize := 10;
   MaxIteration := 10000;
   CrossProb := 0.3;
@@ -413,7 +413,7 @@ begin
   RepairProb := 0.2;
   Bookmarks := '1,2';
   ApplyDoubleDownHill := False;
-  HorarioIni := '';
+  TimeTableIni := '';
   SharedDirectory := GetTempDir;
   PollinationProb := 0.1;
 end;

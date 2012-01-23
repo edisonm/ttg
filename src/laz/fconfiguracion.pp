@@ -17,7 +17,7 @@ type
   TConfiguracionForm = class(TForm)
     bbtnOk: TBitBtn;
     CBApplyDoubleDownHill: TCheckBox;
-    creCruceMateria: TEdit;
+    creCruceSubject: TEdit;
     creProbCruzamiento: TEdit;
     creMutationProb: TEdit;
     creProbReparacion: TEdit;
@@ -40,18 +40,18 @@ type
     Label3: TLabel;
     Label5: TLabel;
     Label6: TLabel;
-    creCruceProfesor: TEdit;
-    creCruceAulaTipo: TEdit;
-    creHoraHueca: TEdit;
-    creSesionCortada: TEdit;
-    creMateriaNoDispersa: TEdit;
+    creCruceTeacher: TEdit;
+    creCruceRoomType: TEdit;
+    creHourHueca: TEdit;
+    creSessionCortada: TEdit;
+    creSubjectNoDispersa: TEdit;
     tbsUnidadEducativa: TTabSheet;
     Label14: TLabel;
-    speMaxCargaProfesor: TSpinEdit;
+    speMaxCargaTeacher: TSpinEdit;
     MemComentarios: TMemo;
     lblComentarios: TLabel;
     Label17: TLabel;
-    edtNomColegio: TEdit;
+    edtNaColegio: TEdit;
     Label15: TLabel;
     Label18: TLabel;
     tbsOpciones: TTabSheet;
@@ -59,11 +59,11 @@ type
     Label19: TLabel;
     speSeed: TSpinEdit;
     Label4: TLabel;
-    edtNomResponsable: TEdit;
+    edtNaResponsable: TEdit;
     Label25: TLabel;
     edtCarResponsable: TEdit;
     Label26: TLabel;
-    edtNomAutoridad: TEdit;
+    edtNaAutoridad: TEdit;
     edtCarAutoridad: TEdit;
     Label27: TLabel;
     Label29: TLabel;
@@ -71,38 +71,38 @@ type
     Label31: TLabel;
     edtAnioLectivo: TEdit;
     Label16: TLabel;
-    creProfesorFraccionamiento: TEdit;
+    creTeacherFraccionamiento: TEdit;
     Label36: TLabel;
-    edtHorarioIni: TEdit;
-    dbeNomMateProhibicionTipo: TDBEdit;
-    dbeValMateProhibicionTipo: TDBEdit;
+    edtTimeTableIni: TEdit;
+    dbeNaSubjectRestrictionType: TDBEdit;
+    dbeValSubjectRestrictionType: TDBEdit;
     Label30: TLabel;
     Label37: TLabel;
     Label38: TLabel;
     Label39: TLabel;
-    dbeNomProfProhibicionTipo: TDBEdit;
+    dbeNaTeacherRestrictionType: TDBEdit;
     Label40: TLabel;
     Label41: TLabel;
-    dbeValProfProhibicionTipo: TDBEdit;
+    dbeValTeacherRestrictionType: TDBEdit;
     Label42: TLabel;
     dedSharedDirectory: TDirectoryEdit;
     bbtnCancel: TBitBtn;
     DBGrid1: TDBGrid;
     DBGrid2: TDBGrid;
-    CBColMateProhibicionTipo: TColorBox;
-    DSMateriaProhibicionTipo: TDataSource;
-    DSProfesorProhibicionTipo: TDataSource;
-    CBColProfProhibicionTipo: TColorBox;
+    CBColSubjectRestrictionType: TColorBox;
+    DSSubjectRestrictionType: TDataSource;
+    DSTeacherRestrictionType: TDataSource;
+    CBColTeacherRestrictionType: TColorBox;
     procedure CBRandomizeClick(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure DSMateriaProhibicionTipoDataChange(Sender: TObject;
+    procedure DSSubjectRestrictionTypeDataChange(Sender: TObject;
       Field: TField);
-    procedure CBColMateProhibicionTipoExit(Sender: TObject);
-    procedure CBColMateProhibicionTipoChange(Sender: TObject);
-    procedure CBColProfProhibicionTipoChange(Sender: TObject);
-    procedure CBColProfProhibicionTipoExit(Sender: TObject);
-    procedure DSProfesorProhibicionTipoDataChange(Sender: TObject;
+    procedure CBColSubjectRestrictionTypeExit(Sender: TObject);
+    procedure CBColSubjectRestrictionTypeChange(Sender: TObject);
+    procedure CBColTeacherRestrictionTypeChange(Sender: TObject);
+    procedure CBColTeacherRestrictionTypeExit(Sender: TObject);
+    procedure DSTeacherRestrictionTypeDataChange(Sender: TObject;
       Field: TField);
     procedure bbtnOkClick(Sender: TObject);
     procedure bbtnCancelClick(Sender: TObject);
@@ -168,30 +168,30 @@ procedure TConfiguracionForm.LoadFromSourceDataModule;
 begin
    with MasterDataModule.ConfigStorage do
    begin
-      edtNomColegio.Text := NomColegio;
+      edtNaColegio.Text := NaColegio;
       edtAnioLectivo.Text := AnioLectivo;
-      edtNomAutoridad.Text := NomAutoridad;
+      edtNaAutoridad.Text := NaAutoridad;
       edtCarAutoridad.Text := CarAutoridad;
-      edtNomResponsable.Text := NomResponsable;
+      edtNaResponsable.Text := NaResponsable;
       edtCarResponsable.Text := CarResponsable;
-      speMaxCargaProfesor.Value := MaxCargaProfesor;
+      speMaxCargaTeacher.Value := MaxCargaTeacher;
       MemComentarios.Lines.Text := Comentarios;
       CBRandomize.Checked := Randomize;
       speSeed.Value := Seed;
       speNumIteraciones.Value := RefreshInterval;
-      creCruceProfesor.Text := FloatToStr(CruceProfesor);
-      creCruceMateria.Text := FloatToStr(CruceMateria);
-      creCruceAulaTipo.Text := FloatToStr(CruceAulaTipo);
-      creProfesorFraccionamiento.Text := FloatToStr(ProfesorFraccionamiento);
-      creHoraHueca.Text := FloatToStr(HoraHuecaDesubicada);
-      creSesionCortada.Text := FloatToStr(SesionCortada);
-      creMateriaNoDispersa.Text := FloatToStr(MateriaNoDispersa);
+      creCruceTeacher.Text := FloatToStr(CruceTeacher);
+      creCruceSubject.Text := FloatToStr(CruceSubject);
+      creCruceRoomType.Text := FloatToStr(CruceRoomType);
+      creTeacherFraccionamiento.Text := FloatToStr(TeacherFraccionamiento);
+      creHourHueca.Text := FloatToStr(HourHuecaDesubicada);
+      creSessionCortada.Text := FloatToStr(SessionCortada);
+      creSubjectNoDispersa.Text := FloatToStr(SubjectNoDispersa);
       speTamPoblacion.Value := PopulationSize;
       speNumMaxGeneracion.Value := MaxIteration;
       creProbCruzamiento.Text := FloatToStr(CrossProb);
       creMutationProb.Text := FloatToStr(MutationProb);
       creProbReparacion.Text := FloatToStr(RepairProb);
-      edtHorarioIni.Text := HorarioIni;
+      edtTimeTableIni.Text := TimeTableIni;
       dedSharedDirectory.Directory := SharedDirectory;
       crePollinationProb.Text := FloatToStr(PollinationProb);
       CBApplyDoubleDownHill.Checked := ApplyDoubleDownHill;
@@ -203,30 +203,30 @@ procedure TConfiguracionForm.SaveToSourceDataModule;
 begin
    with MasterDataModule.ConfigStorage do
    begin
-      NomColegio := edtNomColegio.Text;
+      NaColegio := edtNaColegio.Text;
       AnioLectivo := edtAnioLectivo.Text;
-      NomAutoridad := edtNomAutoridad.Text;
+      NaAutoridad := edtNaAutoridad.Text;
       CarAutoridad := edtCarAutoridad.Text;
-      NomResponsable := edtNomResponsable.Text;
+      NaResponsable := edtNaResponsable.Text;
       CarResponsable := edtCarResponsable.Text;
-      MaxCargaProfesor := speMaxCargaProfesor.Value;
+      MaxCargaTeacher := speMaxCargaTeacher.Value;
       Comentarios := MemComentarios.Lines.Text;
       Randomize := CBRandomize.Checked;
       Seed := speSeed.Value;
       RefreshInterval := speNumIteraciones.Value;
-      CruceProfesor := StrToInt(creCruceProfesor.Text);
-      CruceMateria := StrToInt(creCruceMateria.Text);
-      CruceAulaTipo := StrToInt(creCruceAulaTipo.Text);
-      ProfesorFraccionamiento := StrToInt(creProfesorFraccionamiento.Text);
-      HoraHuecaDesubicada := StrToInt(creHoraHueca.Text);
-      SesionCortada := StrToInt(creSesionCortada.Text);
-      MateriaNoDispersa := StrToInt(creMateriaNoDispersa.Text);
+      CruceTeacher := StrToInt(creCruceTeacher.Text);
+      CruceSubject := StrToInt(creCruceSubject.Text);
+      CruceRoomType := StrToInt(creCruceRoomType.Text);
+      TeacherFraccionamiento := StrToInt(creTeacherFraccionamiento.Text);
+      HourHuecaDesubicada := StrToInt(creHourHueca.Text);
+      SessionCortada := StrToInt(creSessionCortada.Text);
+      SubjectNoDispersa := StrToInt(creSubjectNoDispersa.Text);
       PopulationSize := speTamPoblacion.Value;
       MaxIteration := speNumMaxGeneracion.Value;
       CrossProb := StrToFloat(creProbCruzamiento.Text);
       MutationProb := StrToFloat(creMutationProb.Text);
       RepairProb := StrToFloat(creProbReparacion.Text);
-      HorarioIni := edtHorarioIni.Text;
+      TimeTableIni := edtTimeTableIni.Text;
       SharedDirectory := dedSharedDirectory.Directory;
       PollinationProb := StrToFloat(crePollinationProb.Text);
       ApplyDoubleDownHill := CBApplyDoubleDownHill.Checked;
@@ -234,18 +234,18 @@ begin
    end;
 end;
 
-procedure TConfiguracionForm.DSMateriaProhibicionTipoDataChange(Sender: TObject; Field: TField);
+procedure TConfiguracionForm.DSSubjectRestrictionTypeDataChange(Sender: TObject; Field: TField);
 begin
-  CBColMateProhibicionTipo.Selected :=
-    SourceDataModule.TbMateriaProhibicionTipo.FindField('ColMateProhibicionTipo').AsInteger;
+  CBColSubjectRestrictionType.Selected :=
+    SourceDataModule.TbSubjectRestrictionType.FindField('ColSubjectRestrictionType').AsInteger;
 end;
 
-procedure TConfiguracionForm.CBColMateProhibicionTipoExit(Sender: TObject);
+procedure TConfiguracionForm.CBColSubjectRestrictionTypeExit(Sender: TObject);
 begin
-  with SourceDataModule.TbMateriaProhibicionTipo.FindField('ColMateProhibicionTipo') do
-    if (DSMateriaProhibicionTipo.State in [dsEdit, dsInsert])
-        and (AsInteger <> CBColMateProhibicionTipo.Selected) then
-      AsInteger := CBColMateProhibicionTipo.Selected;
+  with SourceDataModule.TbSubjectRestrictionType.FindField('ColSubjectRestrictionType') do
+    if (DSSubjectRestrictionType.State in [dsEdit, dsInsert])
+        and (AsInteger <> CBColSubjectRestrictionType.Selected) then
+      AsInteger := CBColSubjectRestrictionType.Selected;
 end;
 
 procedure TConfiguracionForm.bbtnCancelClick(Sender: TObject);
@@ -258,39 +258,39 @@ begin
   ModalResult := mrOk;
 end;
 
-procedure TConfiguracionForm.CBColMateProhibicionTipoChange(Sender: TObject);
+procedure TConfiguracionForm.CBColSubjectRestrictionTypeChange(Sender: TObject);
 begin
-  with DSMateriaProhibicionTipo do
+  with DSSubjectRestrictionType do
   begin
     OnDataChange := nil;
     Edit;
-    OnDataChange := DSMateriaProhibicionTipoDataChange;
+    OnDataChange := DSSubjectRestrictionTypeDataChange;
   end
 end;
 
-procedure TConfiguracionForm.CBColProfProhibicionTipoChange(Sender: TObject);
+procedure TConfiguracionForm.CBColTeacherRestrictionTypeChange(Sender: TObject);
 begin
-  with DSProfesorProhibicionTipo do
+  with DSTeacherRestrictionType do
   begin
     OnDataChange := nil;
     Edit;
-    OnDataChange := DSProfesorProhibicionTipoDataChange;
+    OnDataChange := DSTeacherRestrictionTypeDataChange;
   end
 end;
 
-procedure TConfiguracionForm.CBColProfProhibicionTipoExit(Sender: TObject);
+procedure TConfiguracionForm.CBColTeacherRestrictionTypeExit(Sender: TObject);
 begin
-  with SourceDataModule.TbProfesorProhibicionTipo.FindField('ColProfProhibicionTipo') do
-    if (DSProfesorProhibicionTipo.State in [dsEdit, dsInsert])
-        and (AsInteger <> CBColProfProhibicionTipo.Selected) then
-      AsInteger := CBColProfProhibicionTipo.Selected;
+  with SourceDataModule.TbTeacherRestrictionType.FindField('ColTeacherRestrictionType') do
+    if (DSTeacherRestrictionType.State in [dsEdit, dsInsert])
+        and (AsInteger <> CBColTeacherRestrictionType.Selected) then
+      AsInteger := CBColTeacherRestrictionType.Selected;
 end;
 
-procedure TConfiguracionForm.DSProfesorProhibicionTipoDataChange(
+procedure TConfiguracionForm.DSTeacherRestrictionTypeDataChange(
   Sender: TObject; Field: TField);
 begin
-  CBColProfProhibicionTipo.Selected
-    := SourceDataModule.TbProfesorProhibicionTipo.FindField('ColProfProhibicionTipo').AsInteger;
+  CBColTeacherRestrictionType.Selected
+    := SourceDataModule.TbTeacherRestrictionType.FindField('ColTeacherRestrictionType').AsInteger;
 end;
 
 initialization

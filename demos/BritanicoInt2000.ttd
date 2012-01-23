@@ -1,7 +1,7 @@
 TTD 292
-AulaTipo
+RoomType
 11
-"CodAulaTipo";"NomAulaTipo";"AbrAulaTipo";"Cantidad";
+"IdRoomType";"NaRoomType";"AbRoomType";"Number";
 "1";"Aula normal";"NORM";"8";
 "2";"Lab Fisica y Dibujo Tec.";"FISICADIB";"1";
 "3";"Lab Computac";"COMP";"1";
@@ -9,25 +9,25 @@ AulaTipo
 "5";"Lab Quimica Biologia";"QUIMICA";"1";
 "6";"Aula Frances";"FRANCES";"1";
 "7";"Aula Arte";"ARTE";"1";
-"8";"Aula NivelaciÛn Ingles";"INGLES";"1";
+"8";"Aula LevelaciÛn Ingles";"INGLES";"1";
 "9";"Canchas";"CANCHA";"1";
 "10";"Matematica";"MATE";"1";
 "11";"Dibujo TÈc. Op";"DIBTECOP";"1";
-Especializacion
+Specialization
 1
-"CodEspecializacion";"NomEspecializacion";"AbrEspecializacion";
+"IdSpecialization";"NaSpecialization";"AbSpecialization";
 "1";"Unica";"-";
-Dia
+Day
 5
-"CodDia";"NomDia";
+"IdDay";"NaDay";
 "2";"Lunes";
 "3";"Martes";
 "4";"MiÈrcoles";
 "5";"Jueves";
 "6";"Viernes";
-Materia
+Subject
 28
-"CodMateria";"NomMateria";
+"IdSubject";"NaSubject";
 "1";"Matem·tica";
 "2";"Mat/Ec/Filo_5";
 "3";"FÌsica";
@@ -56,18 +56,18 @@ Materia
 "28";"Matem·tica 6";
 "29";"Mat/Eco/Fil_ 6";
 "30";"Science";
-Nivel
+Level
 6
-"CodNivel";"NomNivel";"AbrNivel";
+"IdLevel";"NaLevel";"AbLevel";
 "1";"Primero";"1";
 "2";"Segundo";"2";
 "3";"Tercero";"3";
 "4";"Cuarto";"4";
 "5";"Quinto";"5";
 "6";"Sexto";"6";
-Hora
+Hour
 11
-"CodHora";"NomHora";"Intervalo";
+"IdHour";"NaHour";"Inverval";
 "1";"Primera";"08:00-08:40";
 "2";"Segunda";"08:40-09:20";
 "3";"Tercera";"09:20-10:00";
@@ -79,33 +79,33 @@ Hora
 "9";"Recreo2";"12:55-13:40";
 "10";"Octava";"13:40-14:20";
 "11";"Novena";"14:20-15:00";
-Horario
+TimeTable
 2
-"CodHorario";"MomentoInicial";"MomentoFinal";"Informe";
-"1";"2000-10-21 21:09:35";"2000-10-21 21:10:13";"Semillas del generador de n√∫meros aleatorios:\n\r  Semilla 1: 1153565110\n\r  Semilla 2: -783600947\n\r  Semilla 3: -971606276\n\r  Semilla 4: -192485375\n\rPesos:\n\r  Cruce de profesores            305,00\n\r  Fracc. h. profesores            15,00\n\r  Cruce de aulas:                 65,00\n\r  Horas Huecas desubicadas:       95,00\n\r  Materias cortadas:             150,00\n\r  Materias no dispersas:           1,00\n\rPar√°metros: 5; 2000; 0,3; 0,2; 3; 0,2; 0,1\n\rN√∫mero de generaciones:        17 \n\rDetalle                     Cant.    Valor\n\rCruce de profesores:            0     0,00\n\rFracc. h. profesores:         138  2070,00\n\rCruce de aulas:                 0     0,00\n\rHoras Huecas desubicadas:       2   190,00\n\rMaterias cortadas:              3   450,00\n\rMaterias no dispersas:         82    82,00\n\rProhibiciones de materia:       5   250,00\n\rProhibiciones de profesor:      1   500,00\n\r\n\rValor Total:                       3542,00\n\r";
-"2";"2012-01-07 00:23:13";"2012-01-07 00:58:11";"Algoritmo Evolutivo Elitista\n\r============================\n\rAplicar Descenso:                      Si\n\rSemilla Numeros aleatorios:    1325892193\n\rNumero de individuos:                  10\n\rMaximo de generaciones:             10000\n\rProbabilidad de cruce:             0,3000\n\rProbabilidad de Mutacion:          0,2000\n\rProbabilidad de Reparacion:        0,1000\n\rProbabilidad de polinizacion:      0,1000\n\r-----------------------------------------------------------------\n\rDetalle                           Cant.         Peso        Valor\n\r-----------------------------------------------------------------\n\rCruce de profesores:                  0          305            0\n\rCruce de materias:                    0          201            0\n\rCruce de aulas:                       0           65            0\n\rFracc. h. profesores:                63           15          945\n\rHoras Huecas desubicadas:             0          295            0\n\rMaterias cortadas:                    0          299            0\n\rMaterias juntas:                     15            1           15\n\rProhibiciones de materia:         (0 0)     (50 500)            0\n\rProhibiciones de profesor:      (0 0 0) (50 500 500)            0\n\r-----------------------------------------------------------------\n\rValor Total:                                                  960\n\r";
-Curso
+"IdTimeTable";"TimeIni";"TimeEnd";"Summary";
+"1";"2000-10-21 21:09:35";"2000-10-21 21:10:13";"Semillas del generador de n√∫meros aleatorios:\n\r  Semilla 1: 1153565110\n\r  Semilla 2: -783600947\n\r  Semilla 3: -971606276\n\r  Semilla 4: -192485375\n\rPesos:\n\r  Cruce de profesores            305,00\n\r  Fracc. h. profesores            15,00\n\r  Cruce de aulas:                 65,00\n\r  Hours Huecas desubicadas:       95,00\n\r  Subjects cortadas:             150,00\n\r  Subjects no dispersas:           1,00\n\rPar√°metros: 5; 2000; 0,3; 0,2; 3; 0,2; 0,1\n\rN√∫mero de generaciones:        17 \n\rDetalle                     Cant.    Valor\n\rCruce de profesores:            0     0,00\n\rFracc. h. profesores:         138  2070,00\n\rCruce de aulas:                 0     0,00\n\rHours Huecas desubicadas:       2   190,00\n\rSubjects cortadas:              3   450,00\n\rSubjects no dispersas:         82    82,00\n\rProhibiciones de materia:       5   250,00\n\rProhibiciones de profesor:      1   500,00\n\r\n\rValor Total:                       3542,00\n\r";
+"2";"2012-01-07 00:23:13";"2012-01-07 00:58:11";"Algoritmo Evolutivo Elitista\n\r============================\n\rAplicar Descenso:                      Si\n\rSemilla Numeros aleatorios:    1325892193\n\rNumero de individuos:                  10\n\rMaximo de generaciones:             10000\n\rProbabilidad de cruce:             0,3000\n\rProbabilidad de Mutacion:          0,2000\n\rProbabilidad de Reparacion:        0,1000\n\rProbabilidad de polinizacion:      0,1000\n\r-----------------------------------------------------------------\n\rDetalle                           Cant.         Peso        Valor\n\r-----------------------------------------------------------------\n\rCruce de profesores:                  0          305            0\n\rCruce de materias:                    0          201            0\n\rCruce de aulas:                       0           65            0\n\rFracc. h. profesores:                63           15          945\n\rHours Huecas desubicadas:             0          295            0\n\rSubjects cortadas:                    0          299            0\n\rSubjects juntas:                     15            1           15\n\rProhibiciones de materia:         (0 0)     (50 500)            0\n\rProhibiciones de profesor:      (0 0 0) (50 500 500)            0\n\r-----------------------------------------------------------------\n\rValor Total:                                                  960\n\r";
+Course
 6
-"CodNivel";"CodEspecializacion";
+"IdLevel";"IdSpecialization";
 "1";"1";
 "2";"1";
 "3";"1";
 "4";"1";
 "5";"1";
 "6";"1";
-ParaleloId
+GroupId
 2
-"CodParaleloId";"NomParaleloId";
+"IdGroupId";"NaGroupId";
 "1";"A";
 "2";"B";
-MateriaProhibicionTipo
+SubjectRestrictionType
 2
-"CodMateProhibicionTipo";"NomMateProhibicionTipo";"ColMateProhibicionTipo";"ValMateProhibicionTipo";
+"IdSubjectRestrictionType";"NaSubjectRestrictionType";"ColSubjectRestrictionType";"ValSubjectRestrictionType";
 "0";"Inadecuado";"65280";"50";
 "1";"Imposible";"255";"500";
-Periodo
+TimeSlot
 45
-"CodDia";"CodHora";
+"IdDay";"IdHour";
 "2";"1";
 "2";"2";
 "2";"3";
@@ -151,9 +151,9 @@ Periodo
 "6";"8";
 "6";"10";
 "6";"11";
-Paralelo
+Class
 8
-"CodNivel";"CodEspecializacion";"CodParaleloId";
+"IdLevel";"IdSpecialization";"IdGroupId";
 "1";"1";"1";
 "1";"1";"2";
 "2";"1";"1";
@@ -164,7 +164,7 @@ Paralelo
 "6";"1";"1";
 Profesor
 19
-"CodProfesor";"CedProfesor";"ApeProfesor";"NomProfesor";
+"IdProfesor";"CedProfesor";"ApeProfesor";"NaProfesor";
 "1";"1";"Revelo";"Jorge";
 "2";"2";"Bracero";"Jorge";
 "3";"3";"Imbaquingo";"Jorge";
@@ -184,9 +184,9 @@ Profesor
 "17";"17";"Velasco/Rodas";"Rosa/Pa˙l";
 "18";"18";"Buchelli";"Clara";
 "19";"19";"Daulon";"Marina";
-MateriaProhibicion
+SubjectRestriction
 286
-"CodMateria";"CodDia";"CodHora";"CodMateProhibicionTipo";
+"IdSubject";"IdDay";"IdHour";"IdSubjectRestrictionType";
 "1";"2";"10";"0";
 "1";"2";"11";"0";
 "1";"3";"10";"0";
@@ -473,9 +473,9 @@ MateriaProhibicion
 "29";"6";"8";"1";
 "29";"6";"10";"1";
 "29";"6";"11";"1";
-Distributivo
+Distribution
 122
-"CodMateria";"CodNivel";"CodEspecializacion";"CodParaleloId";"CodProfesor";"CodAulaTipo";"Composicion";
+"IdSubject";"IdLevel";"IdSpecialization";"IdGroupId";"IdProfesor";"IdRoomType";"Composicion";
 "1";"1";"1";"1";"3";"1";"2.2.2";
 "1";"1";"1";"2";"3";"1";"2.2.2";
 "1";"2";"1";"1";"2";"1";"2.2.2";
@@ -598,9 +598,9 @@ Distributivo
 "29";"6";"1";"1";"1";"10";"2.2";
 "30";"1";"1";"1";"19";"1";"2.1";
 "30";"1";"1";"2";"19";"1";"2.1";
-HorarioDetalle
+TimeTableDetail
 708
-"CodHorario";"CodMateria";"CodNivel";"CodEspecializacion";"CodParaleloId";"CodDia";"CodHora";"Sesion";
+"IdTimeTable";"IdSubject";"IdLevel";"IdSpecialization";"IdGroupId";"IdDay";"IdHour";"Sesion";
 "1";"1";"1";"1";"1";"2";"7";"1";
 "1";"1";"1";"1";"1";"2";"8";"1";
 "1";"1";"1";"1";"1";"5";"3";"0";
@@ -1309,15 +1309,15 @@ HorarioDetalle
 "2";"30";"1";"1";"2";"4";"10";"245";
 "2";"30";"1";"1";"2";"5";"1";"244";
 "2";"30";"1";"1";"2";"5";"2";"244";
-ProfesorProhibicionTipo
+TeacherRestrictionType
 3
-"CodProfProhibicionTipo";"NomProfProhibicionTipo";"ColProfProhibicionTipo";"ValProfProhibicionTipo";
+"IdProfProhibicionTipo";"NaProfProhibicionTipo";"ColProfProhibicionTipo";"ValProfProhibicionTipo";
 "0";"No gusta";"65280";"50";
 "1";"No puede";"255";"500";
 "2";"Optativa";"8388736";"500";
-ProfesorProhibicion
+TeacherRestriction
 47
-"CodProfesor";"CodDia";"CodHora";"CodProfProhibicionTipo";
+"IdProfesor";"IdDay";"IdHour";"IdProfProhibicionTipo";
 "1";"2";"10";"1";
 "1";"2";"11";"1";
 "1";"3";"10";"1";
@@ -1366,14 +1366,14 @@ ProfesorProhibicion
 "12";"6";"3";"1";
 "12";"6";"4";"1";
 37
-NomColegio=Colegio Experimental Brit√°nico Internacional
+NaColegio=Colegio Experimental Brit√°nico Internacional
 AnioLectivo=2000-2001
-NomAutoridad=Dr. Benjam√≠n Tobar
+NaAutoridad=Dr. Benjam√≠n Tobar
 CarAutoridad=Rector
-NomResponsable=Comisi√≥n
+NaResponsable=Comisi√≥n
 CarResponsable=Comisi√≥n
 MaxCargaProfesor=35
-HorarioSeleccionado=3
+TimeTableSeleccionado=3
 Comentarios=""
 Randomize=-1
 Seed1=2591
@@ -1383,10 +1383,10 @@ Seed4=65698
 NumIteraciones=25
 CruceProfesor=305
 ProfesorFraccionamiento=15
-CruceAulaTipo=65
-HoraHueca=295
+CruceRoomType=65
+HourHueca=295
 SesionCortada=299
-MateriaNoDispersa=1
+SubjectNoDispersa=1
 TamPoblacion=10
 NumMaxGeneracion=10000
 ProbCruzamiento=0,3
@@ -1394,12 +1394,12 @@ ProbMutacion1=0,2
 OrdenMutacion1=3
 ProbMutacion2=0,2
 ProbReparacion=0,1
-MostrarProfesorHorarioTexto=AbrNivel + " " + NomParaleloId + " " + NomMateria
-MostrarProfesorHorarioLongitud=20
-ProfesorHorarioExcluirProfProhibicion=(ProfesorProhibicion.CodProfProhibicionTipo <> 2)AND(ProfesorProhibicion.CodProfProhibicionTipo <> 3)
+MostrarProfesorTimeTableTexto=AbLevel + " " + NaGroupId + " " + NaSubject
+MostrarProfesorTimeTableLongitud=20
+ProfesorTimeTableExcluirProfProhibicion=(TeacherRestriction.IdProfProhibicionTipo <> 2)AND(TeacherRestriction.IdProfProhibicionTipo <> 3)
 RangoPolinizacion=0,1
-CruceMateria=201
-edtHorarioIni_Text=
+CruceSubject=201
+edtTimeTableIni_Text=
 dedCompartir_Text=
 ApplyDoubleDownHill=-1
 Bookmarks=2,1

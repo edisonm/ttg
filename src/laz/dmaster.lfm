@@ -6,55 +6,55 @@ object MasterDataModule: TMasterDataModule
   HorizontalOffset = 568
   VerticalOffset = 275
   Width = 748
-  object TbTmpProfesorCarga: TZTable
+  object TbTmpTeacherCarga: TZTable
     Connection = SourceDataModule.Database
     AutoCalcFields = False
     left = 250
     top = 11
-    object TbTmpProfesorCargaCodProfesor: TLongintField
-      DisplayLabel = 'Profesor'
+    object TbTmpTeacherCargaIdTeacher: TLongintField
+      DisplayLabel = 'Teacher'
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodProfesor'
+      FieldName = 'IdTeacher'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
     end
-    object TbTmpProfesorCargaApeProfesor: TStringField
+    object TbTmpTeacherCargaApeTeacher: TStringField
       DisplayLabel = 'Apellido'
       DisplayWidth = 15
       FieldKind = fkLookup
-      FieldName = 'ApeProfesor'
+      FieldName = 'ApeTeacher'
       Index = 1
-      KeyFields = 'CodProfesor'
+      KeyFields = 'IdTeacher'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbProfesor
-      LookupKeyFields = 'CodProfesor'
-      LookupResultField = 'ApeProfesor'
+      LookupDataSet = SourceDataModule.TbTeacher
+      LookupKeyFields = 'IdTeacher'
+      LookupResultField = 'ApeTeacher'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 31
     end
-    object TbTmpProfesorCargaNomProfesor: TStringField
-      DisplayLabel = 'Nombre'
+    object TbTmpTeacherCargaNaTeacher: TStringField
+      DisplayLabel = 'Name'
       DisplayWidth = 15
       FieldKind = fkLookup
-      FieldName = 'NomProfesor'
+      FieldName = 'NaTeacher'
       Index = 2
-      KeyFields = 'CodProfesor'
+      KeyFields = 'IdTeacher'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbProfesor
-      LookupKeyFields = 'CodProfesor'
-      LookupResultField = 'NomProfesor'
+      LookupDataSet = SourceDataModule.TbTeacher
+      LookupKeyFields = 'IdTeacher'
+      LookupResultField = 'NaTeacher'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 31
     end
-    object TbTmpProfesorCargaCarga: TLongintField
+    object TbTmpTeacherCargaCarga: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'Carga'
@@ -65,15 +65,15 @@ object MasterDataModule: TMasterDataModule
       Required = False
     end
   end
-  object QuDistributivoProfesor: TZTable
+  object QuDistributionTeacher: TZTable
     Connection = SourceDataModule.Database
     AutoCalcFields = False
     left = 250
     top = 115
-    object QuDistributivoProfesorCodMateria: TLongintField
+    object QuDistributionTeacherIdSubject: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodMateria'
+      FieldName = 'IdSubject'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -81,10 +81,10 @@ object MasterDataModule: TMasterDataModule
       Required = False
       Visible = False
     end
-    object QuDistributivoProfesorCodNivel: TLongintField
+    object QuDistributionTeacherIdLevel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodNivel'
+      FieldName = 'IdLevel'
       Index = 1
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -92,20 +92,20 @@ object MasterDataModule: TMasterDataModule
       Required = False
       Visible = False
     end
-    object QuDistributivoProfesorCodEspecializacion: TLongintField
+    object QuDistributionTeacherIdSpecialization: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodEspecializacion'
+      FieldName = 'IdSpecialization'
       Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
     end
-    object QuDistributivoProfesorCodParaleloId: TLongintField
+    object QuDistributionTeacherIdGroupId: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodParaleloId'
+      FieldName = 'IdGroupId'
       Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -113,10 +113,10 @@ object MasterDataModule: TMasterDataModule
       Required = False
       Visible = False
     end
-    object QuDistributivoProfesorCodProfesor: TLongintField
+    object QuDistributionTeacherIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodProfesor'
+      FieldName = 'IdTeacher'
       Index = 4
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -124,104 +124,104 @@ object MasterDataModule: TMasterDataModule
       Required = False
       Visible = False
     end
-    object QuDistributivoProfesorNomMateria: TStringField
+    object QuDistributionTeacherNaSubject: TStringField
       Alignment = taRightJustify
-      DisplayLabel = 'Materia'
+      DisplayLabel = 'Subject'
       DisplayWidth = 15
       FieldKind = fkLookup
-      FieldName = 'NomMateria'
+      FieldName = 'NaSubject'
       Index = 5
-      KeyFields = 'CodMateria'
+      KeyFields = 'IdSubject'
       LookupCache = False
-      LookupKeyFields = 'CodMateria'
-      LookupResultField = 'NomMateria'
+      LookupKeyFields = 'IdSubject'
+      LookupResultField = 'NaSubject'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 15
     end
-    object QuDistributivoProfesorAbrNivel: TStringField
+    object QuDistributionTeacherAbLevel: TStringField
       Alignment = taRightJustify
-      DisplayLabel = 'Nivel'
+      DisplayLabel = 'Level'
       DisplayWidth = 10
       FieldKind = fkLookup
-      FieldName = 'AbrNivel'
+      FieldName = 'AbLevel'
       Index = 6
-      KeyFields = 'CodNivel'
+      KeyFields = 'IdLevel'
       LookupCache = False
-      LookupKeyFields = 'CodNivel'
-      LookupResultField = 'AbrNivel'
+      LookupKeyFields = 'IdLevel'
+      LookupResultField = 'AbLevel'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 10
     end
-    object QuDistributivoProfesorAbrEspecializacion: TStringField
+    object QuDistributionTeacherAbSpecialization: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
-      FieldName = 'AbrEspecializacion'
+      FieldName = 'AbSpecialization'
       Index = 7
-      KeyFields = 'CodEspecializacion'
+      KeyFields = 'IdSpecialization'
       LookupCache = False
-      LookupKeyFields = 'CodEspecializacion'
-      LookupResultField = 'AbrEspecializacion'
+      LookupKeyFields = 'IdSpecialization'
+      LookupResultField = 'AbSpecialization'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = True
       Size = 10
     end
-    object QuDistributivoProfesorNomParaleloId: TStringField
+    object QuDistributionTeacherNaGroupId: TStringField
       Alignment = taRightJustify
       DisplayLabel = 'Par.'
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NomParaleloId'
+      FieldName = 'NaGroupId'
       Index = 8
-      KeyFields = 'CodParaleloId'
+      KeyFields = 'IdGroupId'
       LookupCache = False
-      LookupKeyFields = 'CodParaleloId'
-      LookupResultField = 'NomParaleloId'
+      LookupKeyFields = 'IdGroupId'
+      LookupResultField = 'NaGroupId'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 5
     end
-    object QuDistributivoProfesorApeNomProfesor: TStringField
-      DisplayLabel = 'Profesor'
+    object QuDistributionTeacherApeNaTeacher: TStringField
+      DisplayLabel = 'Teacher'
       DisplayWidth = 31
       FieldKind = fkLookup
-      FieldName = 'ApeNomProfesor'
+      FieldName = 'ApeNaTeacher'
       Index = 9
-      KeyFields = 'CodProfesor'
+      KeyFields = 'IdTeacher'
       LookupCache = False
-      LookupKeyFields = 'CodProfesor'
-      LookupResultField = 'ApeNomProfesor'
+      LookupKeyFields = 'IdTeacher'
+      LookupResultField = 'ApeNaTeacher'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 31
     end
   end
-  object QuProfesorProhibicionCant: TZTable
+  object QuTeacherRestrictionCant: TZTable
     Connection = SourceDataModule.Database
     AutoCalcFields = False
     left = 58
     top = 157
-    object QuProfesorProhibicionCantCodProfesor: TLongintField
+    object QuTeacherRestrictionCantIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodProfesor'
+      FieldName = 'IdTeacher'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
     end
-    object QuProfesorProhibicionCantCantidad: TLongintField
+    object QuTeacherRestrictionCantNumber: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'Cantidad'
+      FieldName = 'Number'
       Index = 1
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -229,39 +229,39 @@ object MasterDataModule: TMasterDataModule
       Required = False
     end
   end
-  object TbTmpAulaTipoCarga: TZTable
+  object TbTmpRoomTypeCarga: TZTable
     Connection = SourceDataModule.Database
     AutoCalcFields = False
     left = 250
     top = 62
-    object TbTmpAulaTipoCargaCodAulaTipo: TLongintField
+    object TbTmpRoomTypeCargaIdRoomType: TLongintField
       DisplayLabel = 'Tipo de aula'
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodAulaTipo'
+      FieldName = 'IdRoomType'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
     end
-    object TbTmpAulaTipoCargaAbrAulaTipo: TStringField
-      DisplayLabel = 'Nombre'
+    object TbTmpRoomTypeCargaAbRoomType: TStringField
+      DisplayLabel = 'Name'
       DisplayWidth = 15
       FieldKind = fkLookup
-      FieldName = 'AbrAulaTipo'
+      FieldName = 'AbRoomType'
       Index = 1
-      KeyFields = 'CodAulaTipo'
+      KeyFields = 'IdRoomType'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbAulaTipo
-      LookupKeyFields = 'CodAulaTipo'
-      LookupResultField = 'AbrAulaTipo'
+      LookupDataSet = SourceDataModule.TbRoomType
+      LookupKeyFields = 'IdRoomType'
+      LookupResultField = 'AbRoomType'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 31
     end
-    object TbTmpAulaTipoCargaCarga: TLongintField
+    object TbTmpRoomTypeCargaCarga: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'Carga'
@@ -272,14 +272,14 @@ object MasterDataModule: TMasterDataModule
       Required = False
     end
   end
-  object QuNewCodHorario: TZReadOnlyQuery
+  object QuNewIdTimeTable: TZReadOnlyQuery
     Connection = SourceDataModule.Database
     SQL.Strings = (
-      'SELECT Horario.CodHorario + 1'
-      'FROM Horario left join Horario as Horario1 on'
-      'Horario.CodHorario + 1=Horario1.CodHorario'
+      'SELECT TimeTable.IdTimeTable + 1'
+      'FROM TimeTable left join TimeTable as TimeTable1 on'
+      'TimeTable.IdTimeTable + 1=TimeTable1.IdTimeTable'
       'WHERE'
-      'Horario1.CodHorario is NULL'
+      'TimeTable1.IdTimeTable is NULL'
     )
     Params = <>
     left = 252

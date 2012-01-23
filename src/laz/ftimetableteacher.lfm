@@ -1,4 +1,4 @@
-inherited HorarioProfesorForm: THorarioProfesorForm
+inherited TimeTableTeacherForm: TTimeTableTeacherForm
   Left = 619
   Height = 443
   Top = 10
@@ -37,14 +37,14 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       ChildSizing.ControlsPerLine = 100
       ClientHeight = 22
       ClientWidth = 92
-      DataSource = DSProfesor
+      DataSource = DSTeacher
       Flat = True
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
     end
-    object cbVerProfesor: TComboBox[4]
+    object cbVerTeacher: TComboBox[4]
       Left = 162
       Height = 21
       Hint = 'Ver|Que ver en el horario del profesor'
@@ -90,7 +90,7 @@ inherited HorarioProfesorForm: THorarioProfesorForm
     Align = alLeft
     Color = clWindow
     Columns = <>
-    DataSource = DSProfesor
+    DataSource = DSTeacher
     TabOrder = 4
     TitleFont.Height = -11
     TitleFont.Name = 'MS Sans Serif'
@@ -293,84 +293,84 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       00FF000000FF000000FF000000FF
     }
   end
-  object QuHorarioProfesor: TZQuery[7]
+  object QuTimeTableTeacher: TZQuery[7]
     Connection = SourceDataModule.Database
-    SortedFields = 'CodHorario;CodProfesor'
+    SortedFields = 'IdTimeTable;IdTeacher'
     AutoCalcFields = False
-    OnCalcFields = QuHorarioProfesorCalcFields
+    OnCalcFields = QuTimeTableTeacherCalcFields
     SQL.Strings = (
       'select'
-      ' CodHorario,'
-      ' CodProfesor,'
-      ' Distributivo.CodNivel,'
-      ' Distributivo.CodEspecializacion,'
-      ' Distributivo.CodParaleloId,'
-      ' CodHora,'
-      ' CodDia,'
-      ' Distributivo.CodMateria'
+      ' IdTimeTable,'
+      ' IdTeacher,'
+      ' Distribution.IdLevel,'
+      ' Distribution.IdSpecialization,'
+      ' Distribution.IdGroupId,'
+      ' IdHour,'
+      ' IdDay,'
+      ' Distribution.IdSubject'
       'from'
-      ' HorarioDetalle inner join Distributivo on'
-      ' (HorarioDetalle.CodMateria = Distributivo.CodMateria)'
-      ' and (HorarioDetalle.CodNivel = Distributivo.CodNivel)'
-      ' and (HorarioDetalle.CodEspecializacion = Distributivo.CodEspecializacion)'
-      ' and (HorarioDetalle.CodParaleloId = Distributivo.CodParaleloId)'
-      'where CodHorario=:CodHorario'
-      ' and CodProfesor=:CodProfesor'
+      ' TimeTableDetail inner join Distribution on'
+      ' (TimeTableDetail.IdSubject = Distribution.IdSubject)'
+      ' and (TimeTableDetail.IdLevel = Distribution.IdLevel)'
+      ' and (TimeTableDetail.IdSpecialization = Distribution.IdSpecialization)'
+      ' and (TimeTableDetail.IdGroupId = Distribution.IdGroupId)'
+      'where IdTimeTable=:IdTimeTable'
+      ' and IdTeacher=:IdTeacher'
     )
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'CodHorario'
+        Name = 'IdTimeTable'
         ParamType = ptUnknown
       end    
       item
         DataType = ftUnknown
-        Name = 'CodProfesor'
+        Name = 'IdTeacher'
         ParamType = ptUnknown
       end>
-    DataSource = DSProfesor
-    MasterFields = 'CodHorario;CodProfesor'
-    MasterSource = DSProfesor
-    LinkedFields = 'CodHorario;CodProfesor'
-    IndexFieldNames = 'CodHorario Asc;CodProfesor Asc'
+    DataSource = DSTeacher
+    MasterFields = 'IdTimeTable;IdTeacher'
+    MasterSource = DSTeacher
+    LinkedFields = 'IdTimeTable;IdTeacher'
+    IndexFieldNames = 'IdTimeTable Asc;IdTeacher Asc'
     left = 64
     top = 88
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'CodHorario'
+        Name = 'IdTimeTable'
         ParamType = ptUnknown
       end    
       item
         DataType = ftUnknown
-        Name = 'CodProfesor'
+        Name = 'IdTeacher'
         ParamType = ptUnknown
       end>
-    object QuHorarioProfesorCodHorario: TLongintField
+    object QuTimeTableTeacherIdTimeTable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodHorario'
+      FieldName = 'IdTimeTable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
     end
-    object QuHorarioProfesorCodProfesor: TLongintField
+    object QuTimeTableTeacherIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodProfesor'
+      FieldName = 'IdTeacher'
       Index = 1
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = True
     end
-    object QuHorarioProfesorCodNivel: TLongintField
-      DisplayLabel = 'Nivel'
+    object QuTimeTableTeacherIdLevel: TLongintField
+      DisplayLabel = 'Level'
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodNivel'
+      FieldName = 'IdLevel'
       Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -378,11 +378,11 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodEspecializacion: TLongintField
-      DisplayLabel = 'Especializacion'
+    object QuTimeTableTeacherIdSpecialization: TLongintField
+      DisplayLabel = 'Specialization'
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodEspecializacion'
+      FieldName = 'IdSpecialization'
       Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -390,11 +390,11 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodParaleloId: TLongintField
-      DisplayLabel = 'Paralelo'
+    object QuTimeTableTeacherIdGroupId: TLongintField
+      DisplayLabel = 'Class'
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodParaleloId'
+      FieldName = 'IdGroupId'
       Index = 4
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -402,11 +402,11 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodHora: TLongintField
-      DisplayLabel = 'Hora'
+    object QuTimeTableTeacherIdHour: TLongintField
+      DisplayLabel = 'Hour'
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodHora'
+      FieldName = 'IdHour'
       Index = 5
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -414,11 +414,11 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodDia: TLongintField
-      DisplayLabel = 'Dia'
+    object QuTimeTableTeacherIdDay: TLongintField
+      DisplayLabel = 'Day'
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodDia'
+      FieldName = 'IdDay'
       Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -426,11 +426,11 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorCodMateria: TLongintField
-      DisplayLabel = 'Materia'
+    object QuTimeTableTeacherIdSubject: TLongintField
+      DisplayLabel = 'Subject'
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodMateria'
+      FieldName = 'IdSubject'
       Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -438,74 +438,74 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Required = True
       Visible = False
     end
-    object QuHorarioProfesorAbrNivel: TStringField
-      DisplayLabel = 'Nivel'
+    object QuTimeTableTeacherAbLevel: TStringField
+      DisplayLabel = 'Level'
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'AbrNivel'
+      FieldName = 'AbLevel'
       Index = 8
-      KeyFields = 'CodNivel'
+      KeyFields = 'IdLevel'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbNivel
-      LookupKeyFields = 'CodNivel'
-      LookupResultField = 'AbrNivel'
+      LookupDataSet = SourceDataModule.TbLevel
+      LookupKeyFields = 'IdLevel'
+      LookupResultField = 'AbLevel'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 5
     end
-    object QuHorarioProfesorAbrEspecializacion: TStringField
+    object QuTimeTableTeacherAbSpecialization: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
-      FieldName = 'AbrEspecializacion'
+      FieldName = 'AbSpecialization'
       Index = 9
-      KeyFields = 'CodEspecializacion'
+      KeyFields = 'IdSpecialization'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbEspecializacion
-      LookupKeyFields = 'CodEspecializacion'
-      LookupResultField = 'AbrEspecializacion'
+      LookupDataSet = SourceDataModule.TbSpecialization
+      LookupKeyFields = 'IdSpecialization'
+      LookupResultField = 'AbSpecialization'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 10
     end
-    object QuHorarioProfesorNomParaleloId: TStringField
+    object QuTimeTableTeacherNaGroupId: TStringField
       DisplayLabel = 'Par.'
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NomParaleloId'
+      FieldName = 'NaGroupId'
       Index = 10
-      KeyFields = 'CodParaleloId'
+      KeyFields = 'IdGroupId'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbParaleloId
-      LookupKeyFields = 'CodParaleloId'
-      LookupResultField = 'NomParaleloId'
+      LookupDataSet = SourceDataModule.TbGroupId
+      LookupKeyFields = 'IdGroupId'
+      LookupResultField = 'NaGroupId'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 5
     end
-    object QuHorarioProfesorNomMateria: TStringField
-      DisplayLabel = 'Materia'
+    object QuTimeTableTeacherNaSubject: TStringField
+      DisplayLabel = 'Subject'
       DisplayWidth = 15
       FieldKind = fkLookup
-      FieldName = 'NomMateria'
+      FieldName = 'NaSubject'
       Index = 11
-      KeyFields = 'CodMateria'
+      KeyFields = 'IdSubject'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbMateria
-      LookupKeyFields = 'CodMateria'
-      LookupResultField = 'NomMateria'
+      LookupDataSet = SourceDataModule.TbSubject
+      LookupKeyFields = 'IdSubject'
+      LookupResultField = 'NaSubject'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 15
     end
-    object QuHorarioProfesorNombre: TStringField
+    object QuTimeTableTeacherNombre: TStringField
       DisplayWidth = 40
       FieldKind = fkCalculated
-      FieldName = 'Nombre'
+      FieldName = 'Name'
       Index = 12
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -514,54 +514,54 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Size = 40
     end
   end
-  object DSProfesor: TDatasource[8]
-    DataSet = QuProfesor
-    OnDataChange = DSProfesorDataChange
+  object DSTeacher: TDatasource[8]
+    DataSet = QuTeacher
+    OnDataChange = DSTeacherDataChange
     left = 64
     top = 145
   end
-  object QuProfesor: TZQuery[9]
+  object QuTeacher: TZQuery[9]
     Connection = SourceDataModule.Database
-    SortedFields = 'CodHorario;ApeProfesor;NomProfesor'
+    SortedFields = 'IdTimeTable;ApeTeacher;NaTeacher'
     AutoCalcFields = False
-    OnCalcFields = QuHorarioProfesorCalcFields
+    OnCalcFields = QuTimeTableTeacherCalcFields
     SQL.Strings = (
       'select'
-      '  CodHorario,'
-      '  CodProfesor,'
-      '  ApeProfesor,'
-      '  NomProfesor'
+      '  IdTimeTable,'
+      '  IdTeacher,'
+      '  ApeTeacher,'
+      '  NaTeacher'
       'from'
-      '  Profesor,'
-      '  Horario'
+      '  Teacher,'
+      '  TimeTable'
       'where'
-      '  CodHorario=:CodHorario'
+      '  IdTimeTable=:IdTimeTable'
       'order by'
-      '  CodHorario, ApeProfesor, NomProfesor'
+      '  IdTimeTable, ApeTeacher, NaTeacher'
     )
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'CodHorario'
+        Name = 'IdTimeTable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSHorario
-    MasterFields = 'CodHorario'
-    MasterSource = SourceDataModule.DSHorario
-    LinkedFields = 'CodHorario'
-    IndexFieldNames = 'CodHorario Asc;ApeProfesor Asc;NomProfesor Asc'
+    DataSource = SourceDataModule.DSTimeTable
+    MasterFields = 'IdTimeTable'
+    MasterSource = SourceDataModule.DSTimeTable
+    LinkedFields = 'IdTimeTable'
+    IndexFieldNames = 'IdTimeTable Asc;ApeTeacher Asc;NaTeacher Asc'
     left = 144
     top = 144
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'CodHorario'
+        Name = 'IdTimeTable'
         ParamType = ptUnknown
       end>
-    object QuProfesorCodHorario: TLongintField
+    object QuTeacherIdTimeTable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodHorario'
+      FieldName = 'IdTimeTable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -569,10 +569,10 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Required = False
       Visible = False
     end
-    object QuProfesorCodProfesor: TLongintField
+    object QuTeacherIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'CodProfesor'
+      FieldName = 'IdTeacher'
       Index = 1
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -580,11 +580,11 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Required = False
       Visible = False
     end
-    object QuProfesorApeProfesor: TStringField
+    object QuTeacherApeTeacher: TStringField
       DisplayLabel = 'Apellido'
       DisplayWidth = 15
       FieldKind = fkData
-      FieldName = 'ApeProfesor'
+      FieldName = 'ApeTeacher'
       Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -592,11 +592,11 @@ inherited HorarioProfesorForm: THorarioProfesorForm
       Required = True
       Size = 15
     end
-    object QuProfesorNomProfesor: TStringField
+    object QuTeacherNaTeacher: TStringField
       DisplayLabel = 'Nombre'
       DisplayWidth = 15
       FieldKind = fkData
-      FieldName = 'NomProfesor'
+      FieldName = 'NaTeacher'
       Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

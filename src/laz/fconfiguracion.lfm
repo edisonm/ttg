@@ -83,7 +83,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Top = 109
         Width = 135
-        Caption = 'Carga Maxima por Profesor:'
+        Caption = 'Carga Maxima por Teacher:'
         ParentColor = False
       end
       object lblComentarios: TLabel
@@ -139,10 +139,10 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Top = 36
         Width = 79
-        Caption = 'Periodo Lectivo:'
+        Caption = 'TimeSlot Lectivo:'
         ParentColor = False
       end
-      object speMaxCargaProfesor: TSpinEdit
+      object speMaxCargaTeacher: TSpinEdit
         Left = 180
         Height = 22
         Top = 104
@@ -159,7 +159,7 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 453
         TabOrder = 7
       end
-      object edtNomColegio: TEdit
+      object edtNaColegio: TEdit
         Left = 108
         Height = 22
         Hint = 'Colegio|Nombre del colegio'
@@ -167,7 +167,7 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 353
         TabOrder = 0
       end
-      object edtNomResponsable: TEdit
+      object edtNaResponsable: TEdit
         Left = 108
         Height = 22
         Top = 80
@@ -181,7 +181,7 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 144
         TabOrder = 5
       end
-      object edtNomAutoridad: TEdit
+      object edtNaAutoridad: TEdit
         Left = 108
         Height = 22
         Top = 56
@@ -229,7 +229,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Top = 132
         Width = 89
-        Caption = 'Horarios iniciales:'
+        Caption = 'TimeTables iniciales:'
         ParentColor = False
       end
       object Label42: TLabel
@@ -293,7 +293,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Top = 62
         Width = 103
-        Caption = 'Niveles de descenso:'
+        Caption = 'Leveles de descenso:'
         ParentColor = False
       end
       object CBRandomize: TCheckBox
@@ -325,7 +325,7 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 2
         Value = 10
       end
-      object edtHorarioIni: TEdit
+      object edtTimeTableIni: TEdit
         Left = 344
         Height = 22
         Top = 128
@@ -433,7 +433,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Top = 40
         Width = 70
-        Caption = 'Horas huecas:'
+        Caption = 'Hours huecas:'
         ParentColor = False
       end
       object Label5: TLabel
@@ -441,7 +441,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Top = 86
         Width = 92
-        Caption = 'Materias cortadas:'
+        Caption = 'Subjects cortadas:'
         ParentColor = False
       end
       object Label6: TLabel
@@ -449,7 +449,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Top = 64
         Width = 79
-        Caption = 'Materias juntas:'
+        Caption = 'Subjects juntas:'
         ParentColor = False
       end
       object Label15: TLabel
@@ -540,7 +540,7 @@ object ConfiguracionForm: TConfiguracionForm
         Caption = 'Cruce materias:'
         ParentColor = False
       end
-      object creCruceProfesor: TEdit
+      object creCruceTeacher: TEdit
         Left = 117
         Height = 21
         Top = 8
@@ -548,7 +548,7 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 0
       end
-      object creCruceAulaTipo: TEdit
+      object creCruceRoomType: TEdit
         Left = 117
         Height = 21
         Top = 56
@@ -556,7 +556,7 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 2
       end
-      object creHoraHueca: TEdit
+      object creHourHueca: TEdit
         Left = 345
         Height = 21
         Top = 32
@@ -564,7 +564,7 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 3
       end
-      object creSesionCortada: TEdit
+      object creSessionCortada: TEdit
         Left = 117
         Height = 21
         Top = 80
@@ -572,7 +572,7 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 4
       end
-      object creMateriaNoDispersa: TEdit
+      object creSubjectNoDispersa: TEdit
         Left = 345
         Height = 21
         Top = 57
@@ -580,7 +580,7 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 5
       end
-      object creProfesorFraccionamiento: TEdit
+      object creTeacherFraccionamiento: TEdit
         Left = 345
         Height = 21
         Top = 8
@@ -588,43 +588,43 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 1
       end
-      object dbeNomMateProhibicionTipo: TDBEdit
+      object dbeNaSubjectRestrictionType: TDBEdit
         Left = 364
         Height = 22
         Top = 139
         Width = 93
-        DataField = 'NomMateProhibicionTipo'
-        DataSource = SourceDataModule.DSMateriaProhibicionTipo
+        DataField = 'NaSubjectRestrictionType'
+        DataSource = SourceDataModule.DSSubjectRestrictionType
         Anchors = [akRight, akBottom]
         TabOrder = 8
       end
-      object dbeValMateProhibicionTipo: TDBEdit
+      object dbeValSubjectRestrictionType: TDBEdit
         Left = 363
         Height = 22
         Top = 200
         Width = 93
-        DataField = 'ValMateProhibicionTipo'
-        DataSource = SourceDataModule.DSMateriaProhibicionTipo
+        DataField = 'ValSubjectRestrictionType'
+        DataSource = SourceDataModule.DSSubjectRestrictionType
         Anchors = [akRight, akBottom]
         TabOrder = 10
       end
-      object dbeNomProfProhibicionTipo: TDBEdit
+      object dbeNaTeacherRestrictionType: TDBEdit
         Left = 364
         Height = 22
         Top = 251
         Width = 93
-        DataField = 'NomProfProhibicionTipo'
-        DataSource = SourceDataModule.DSProfesorProhibicionTipo
+        DataField = 'NaTeacherRestrictionType'
+        DataSource = SourceDataModule.DSTeacherRestrictionType
         Anchors = [akRight, akBottom]
         TabOrder = 11
       end
-      object dbeValProfProhibicionTipo: TDBEdit
+      object dbeValTeacherRestrictionType: TDBEdit
         Left = 364
         Height = 22
         Top = 311
         Width = 93
-        DataField = 'ValProfProhibicionTipo'
-        DataSource = SourceDataModule.DSProfesorProhibicionTipo
+        DataField = 'ValTeacherRestrictionType'
+        DataSource = SourceDataModule.DSTeacherRestrictionType
         Anchors = [akRight, akBottom]
         TabOrder = 13
       end
@@ -634,7 +634,7 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 130
         Width = 292
         Anchors = [akLeft, akRight, akBottom]
-        DataSource = SourceDataModule.DSMateriaProhibicionTipo
+        DataSource = SourceDataModule.DSSubjectRestrictionType
         TabOrder = 6
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
@@ -645,34 +645,34 @@ object ConfiguracionForm: TConfiguracionForm
         Top = 250
         Width = 292
         Anchors = [akLeft, akRight, akBottom]
-        DataSource = SourceDataModule.DSProfesorProhibicionTipo
+        DataSource = SourceDataModule.DSTeacherRestrictionType
         TabOrder = 7
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
       end
-      object CBColMateProhibicionTipo: TColorBox
+      object CBColSubjectRestrictionType: TColorBox
         Left = 364
         Height = 31
         Top = 163
         Width = 93
         Anchors = [akRight, akBottom]
         ItemHeight = 16
-        OnChange = CBColMateProhibicionTipoChange
-        OnExit = CBColMateProhibicionTipoExit
+        OnChange = CBColSubjectRestrictionTypeChange
+        OnExit = CBColSubjectRestrictionTypeExit
         TabOrder = 9
       end
-      object CBColProfProhibicionTipo: TColorBox
+      object CBColTeacherRestrictionType: TColorBox
         Left = 364
         Height = 31
         Top = 275
         Width = 93
         Anchors = [akRight, akBottom]
         ItemHeight = 16
-        OnChange = CBColProfProhibicionTipoChange
-        OnExit = CBColProfProhibicionTipoExit
+        OnChange = CBColTeacherRestrictionTypeChange
+        OnExit = CBColTeacherRestrictionTypeExit
         TabOrder = 12
       end
-      object creCruceMateria: TEdit
+      object creCruceSubject: TEdit
         Left = 117
         Height = 21
         Top = 32
@@ -695,15 +695,15 @@ object ConfiguracionForm: TConfiguracionForm
     OnClick = bbtnCancelClick
     TabOrder = 2
   end
-  object DSMateriaProhibicionTipo: TDatasource
-    DataSet = SourceDataModule.TbMateriaProhibicionTipo
-    OnDataChange = DSMateriaProhibicionTipoDataChange
+  object DSSubjectRestrictionType: TDatasource
+    DataSet = SourceDataModule.TbSubjectRestrictionType
+    OnDataChange = DSSubjectRestrictionTypeDataChange
     left = 320
     top = 288
   end
-  object DSProfesorProhibicionTipo: TDatasource
-    DataSet = SourceDataModule.TbProfesorProhibicionTipo
-    OnDataChange = DSProfesorProhibicionTipoDataChange
+  object DSTeacherRestrictionType: TDatasource
+    DataSet = SourceDataModule.TbTeacherRestrictionType
+    OnDataChange = DSTeacherRestrictionTypeDataChange
     left = 128
     top = 288
   end

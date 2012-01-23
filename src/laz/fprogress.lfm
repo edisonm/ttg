@@ -50,7 +50,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlCruceProfesor: TPanel
+    object pnlCruceTeacher: TPanel
       Left = 8
       Height = 21
       Top = 54
@@ -60,7 +60,7 @@ object ProgressForm: TProgressForm
       Caption = ' Cruce profesores:'
       TabOrder = 1
     end
-    object pnlCruceProfesorValor: TPanel
+    object pnlCruceTeacherValor: TPanel
       Left = 312
       Height = 21
       Top = 54
@@ -71,7 +71,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 2
-      object lblCruceProfesorValor: TLabel
+      object lblCruceTeacherValor: TLabel
         Left = 119
         Height = 19
         Top = 1
@@ -88,7 +88,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlCruceAulaTipo: TPanel
+    object pnlCruceRoomType: TPanel
       Left = 8
       Height = 21
       Top = 102
@@ -98,7 +98,7 @@ object ProgressForm: TProgressForm
       Caption = ' Cruce de aulas:'
       TabOrder = 3
     end
-    object pnlCruceAulaTipoValor: TPanel
+    object pnlCruceRoomTypeValor: TPanel
       Left = 312
       Height = 21
       Top = 102
@@ -109,7 +109,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 4
-      object lblCruceAulaTipoValor: TLabel
+      object lblCruceRoomTypeValor: TLabel
         Left = 118
         Height = 19
         Top = 1
@@ -126,18 +126,18 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlCruceProfesorCantidad: TPanel
+    object pnlCruceTeacherNumber: TPanel
       Left = 192
       Height = 21
       Top = 54
       Width = 117
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Cantidad:'
+      Caption = ' Number:'
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 5
-      object lblCruceProfesor: TLabel
+      object lblCruceTeacher: TLabel
         Left = 107
         Height = 19
         Top = 1
@@ -154,18 +154,18 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlCruceAulaTipoCantidad: TPanel
+    object pnlCruceRoomTypeNumber: TPanel
       Left = 192
       Height = 21
       Top = 102
       Width = 117
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Cantidad:'
+      Caption = ' Number:'
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 6
-      object lblCruceAulaTipo: TLabel
+      object lblCruceRoomType: TLabel
         Left = 106
         Height = 19
         Top = 1
@@ -182,28 +182,28 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlHoraHuecaDesubicada: TPanel
+    object pnlHourHuecaDesubicada: TPanel
       Left = 8
       Height = 21
       Top = 150
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Horas huecas'
+      Caption = ' Hours huecas'
       TabOrder = 7
     end
-    object pnlHoraHuecaDesubicadaCantidad: TPanel
+    object pnlHourHuecaDesubicadaNumber: TPanel
       Left = 192
       Height = 21
       Top = 150
       Width = 117
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Cantidad:'
+      Caption = ' Number:'
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 8
-      object lblHoraHuecaDesubicada: TLabel
+      object lblHourHuecaDesubicada: TLabel
         Left = 107
         Height = 19
         Top = 1
@@ -220,7 +220,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlHoraHuecaDesubicadaValor: TPanel
+    object pnlHourHuecaDesubicadaValor: TPanel
       Left = 312
       Height = 21
       Top = 150
@@ -231,7 +231,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 9
-      object lblHoraHuecaDesubicadaValor: TLabel
+      object lblHourHuecaDesubicadaValor: TLabel
         Left = 119
         Height = 19
         Top = 1
@@ -248,28 +248,28 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlSesionCortada: TPanel
+    object pnlSessionCortada: TPanel
       Left = 8
       Height = 21
       Top = 174
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Materias cortadas'
+      Caption = ' Subjects cortadas'
       TabOrder = 10
     end
-    object pnlSesionCortadaCantidad: TPanel
+    object pnlSessionCortadaNumber: TPanel
       Left = 192
       Height = 21
       Top = 174
       Width = 117
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Cantidad:'
+      Caption = ' Number:'
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 11
-      object lblSesionCortada: TLabel
+      object lblSessionCortada: TLabel
         Left = 107
         Height = 19
         Top = 1
@@ -286,7 +286,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlSesionCortadaValor: TPanel
+    object pnlSessionCortadaValor: TPanel
       Left = 312
       Height = 21
       Top = 174
@@ -297,7 +297,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 12
-      object lblSesionCortadaValor: TLabel
+      object lblSessionCortadaValor: TLabel
         Left = 119
         Height = 19
         Top = 1
@@ -397,7 +397,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlMateriaProhibicion: TPanel
+    object pnlSubjectRestriction: TPanel
       Left = 8
       Height = 21
       Top = 222
@@ -407,18 +407,18 @@ object ProgressForm: TProgressForm
       Caption = ' Prohibiciones de materia:'
       TabOrder = 16
     end
-    object pnlMateriaProhibicionCantidad: TPanel
+    object pnlSubjectRestrictionNumber: TPanel
       Left = 192
       Height = 21
       Top = 222
       Width = 117
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Cantidad:'
+      Caption = ' Number:'
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 17
-      object lblMateriaProhibicion: TLabel
+      object lblSubjectRestriction: TLabel
         Left = 107
         Height = 19
         Top = 1
@@ -435,7 +435,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlMateriaProhibicionValor: TPanel
+    object pnlSubjectRestrictionValor: TPanel
       Left = 312
       Height = 21
       Top = 222
@@ -446,7 +446,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 18
-      object lblMateriaProhibicionValor: TLabel
+      object lblSubjectRestrictionValor: TLabel
         Left = 119
         Height = 19
         Top = 1
@@ -463,7 +463,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlProfesorProhibicion: TPanel
+    object pnlTeacherRestriction: TPanel
       Left = 8
       Height = 21
       Top = 246
@@ -473,18 +473,18 @@ object ProgressForm: TProgressForm
       Caption = ' Prohibiciones de profesor:'
       TabOrder = 19
     end
-    object pnlProfesorProhibicionCantidad: TPanel
+    object pnlTeacherRestrictionNumber: TPanel
       Left = 192
       Height = 21
       Top = 246
       Width = 117
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Cantidad:'
+      Caption = ' Number:'
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 20
-      object lblProfesorProhibicion: TLabel
+      object lblTeacherRestriction: TLabel
         Left = 107
         Height = 19
         Top = 1
@@ -512,7 +512,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 21
-      object lblProfesorProhibicionValor: TLabel
+      object lblTeacherRestrictionValor: TLabel
         Left = 119
         Height = 19
         Top = 1
@@ -529,14 +529,14 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlMateriaNoDispersa: TPanel
+    object pnlSubjectNoDispersa: TPanel
       Left = 8
       Height = 21
       Top = 198
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Materias juntas:'
+      Caption = ' Subjects juntas:'
       TabOrder = 22
     end
     object Panel28: TPanel
@@ -546,11 +546,11 @@ object ProgressForm: TProgressForm
       Width = 117
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Cantidad:'
+      Caption = ' Number:'
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 23
-      object lblMateriaNoDispersa: TLabel
+      object lblSubjectNoDispersa: TLabel
         Left = 107
         Height = 19
         Top = 1
@@ -578,7 +578,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 24
-      object lblMateriaNoDispersaValor: TLabel
+      object lblSubjectNoDispersaValor: TLabel
         Left = 119
         Height = 19
         Top = 1
@@ -612,11 +612,11 @@ object ProgressForm: TProgressForm
       Width = 117
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Cantidad:'
+      Caption = ' Number:'
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 26
-      object lblProfesorFraccionamiento: TLabel
+      object lblTeacherFraccionamiento: TLabel
         Left = 106
         Height = 19
         Top = 1
@@ -644,7 +644,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 27
-      object lblProfesorFraccionamientoValor: TLabel
+      object lblTeacherFraccionamientoValor: TLabel
         Left = 118
         Height = 19
         Top = 1
@@ -784,7 +784,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlCruceMateria: TPanel
+    object pnlCruceSubject: TPanel
       Left = 8
       Height = 21
       Top = 78
@@ -794,18 +794,18 @@ object ProgressForm: TProgressForm
       Caption = ' Cruce materias:'
       TabOrder = 33
     end
-    object pnlCruceMateriaCantidad: TPanel
+    object pnlCruceSubjectNumber: TPanel
       Left = 192
       Height = 21
       Top = 78
       Width = 117
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Cantidad:'
+      Caption = ' Number:'
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 34
-      object lblCruceMateria: TLabel
+      object lblCruceSubject: TLabel
         Left = 107
         Height = 19
         Top = 1
@@ -822,7 +822,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlCruceMateriaValor: TPanel
+    object pnlCruceSubjectValor: TPanel
       Left = 312
       Height = 21
       Top = 78
@@ -833,7 +833,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 35
-      object lblCruceMateriaValor: TLabel
+      object lblCruceSubjectValor: TLabel
         Left = 119
         Height = 19
         Top = 1

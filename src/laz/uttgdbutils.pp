@@ -8,7 +8,7 @@ interface
 uses
   Classes, Forms, Db, ActnList, Dialogs, DBGrids, SysUtils, Variants;
 
-function ComposicionADuracion(const s: string): Integer;
+function CompositionADuracion(const s: string): Integer;
 procedure CrossBatchMove(AColDataSet, ARowDataSet, ARelDataSet, ADestination:
   TDataSet; const AColFieldKey, AColFieldName, AColField, ARowFieldsKey,
   ARowFieldName, ARowFields, ARelFieldKey: string);
@@ -23,7 +23,7 @@ implementation
 uses
   UTTGBasics;
 
-function ComposicionADuracion(const s: string): Integer;
+function CompositionADuracion(const s: string): Integer;
 var
   VPos, d: Integer;
 begin
@@ -33,7 +33,7 @@ begin
   begin
     d := StrToInt(ExtractString(s, VPos, '.'));
     if d <= 0 then
-      raise Exception.Create('Composicion Erroea');
+      raise Exception.Create('Composition Erroea');
     Inc(Result, d);
   end;
 end;

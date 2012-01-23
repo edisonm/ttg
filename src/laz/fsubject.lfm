@@ -1,12 +1,10 @@
-inherited ParaleloForm: TParaleloForm
-  Left = 326
-  Top = 262
+inherited SubjectForm: TSubjectForm
   ActiveControl = DBNavigator
+  Caption = 'Subjects'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Position = poDesigned
   inherited TlBShow: TToolBar
     Images = ImageList
     inherited BtnShow: TToolButton
@@ -15,44 +13,27 @@ inherited ParaleloForm: TParaleloForm
     inherited BtnFind: TToolButton
       Action = ActFind
     end
-    inherited DBNavigator: TDBNavigator
+    object BtnSubjectRestriction: TToolButton[2]
+      Left = 257
+      Top = 2
+      Action = ActSubjectRestriction
+      ParentShowHint = False
+      ShowHint = True
+    end
+    inherited DBNavigator: TDBNavigator[3]
       DataSource = DataSource
       Hints.Strings = (      )
     end
   end
   inherited Panel1: TPanel
     inherited DBGrid: TDBGrid
-      Hint = 'Cursos|Cursos disponibles'
-      Width = 323
       DataSource = DataSource
-      ShowHint = True
       OnDblClick = DBGridDblClick
-    end
-    object Splitter1: TSplitter[1]
-      Left = 324
-      Height = 253
-      Top = 1
-      Width = 5
-      Align = alRight
-      ResizeAnchor = akRight
-    end
-    object CheckListBox: TCheckListBox[2]
-      Left = 329
-      Height = 253
-      Top = 1
-      Width = 149
-      Align = alRight
-      ItemHeight = 0
-      OnExit = CheckListBoxExit
-      TabOrder = 1
-      TopIndex = -1
     end
   end
   inherited ImageList: TImageList
-    left = 120
-    top = 72
     Bitmap = {
-      4C69020000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+      4C69030000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000FF000000FF0000
       00FF000000FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00FF00
@@ -116,32 +97,85 @@ inherited ParaleloForm: TParaleloForm
       80FF008080000080800000808000008080000080800000808000008080000080
       8000008080000080800000808000008080000080800000808000808080FF0080
       8000008080000080800000808000008080000080800000808000008080000080
-      8000008080000080800000808000
+      8000008080000080800000808000808000008080000080800000808000008080
+      0000808000008080000080800000808000008080000080800000808000008080
+      0000808000008080000080800000808000008080000080800000808000008080
+      0000808000008080000080800000808000008080000080800000808000008080
+      0000808000008080000080800000808000008080000080800000808000008080
+      0000808000008080000080800000808000008080000080800000808000008080
+      0000808000008080000080800000000000FF808080FF808080FF808080FFFF00
+      00FFFF0000FFFF0000FFFF0000FF808080FF808080FF000000FF808000008080
+      0000808000008080000080800000000000FFFFFFFFFFC0C0C0FFFFFFFFFFFFFF
+      FFFFC0C0C0FFFFFFFFFFFFFFFFFFC0C0C0FFFFFFFFFF000000FF808000008080
+      0000808000008080000080800000000000FFFFFFFFFFC0C0C0FF0000FFFF0000
+      80FFFFFFFFFF000000FF000000FF000000FF000000FF000000FF000000FF0000
+      00FF808000008080000080800000000000FFC0C0C0FFC0C0C0FF000080FF0000
+      80FF000000FF808080FF000000FFC0C0C0FFC0C0C0FF808080FFC0C0C0FFC0C0
+      C0FF000000FF8080000080800000000000FFFFFFFFFFC0C0C0FFFFFFFFFF0000
+      00FF808080FFC0C0C0FFC0C0C0FF000000FFC0C0C0FFC0C0C0FF808080FFC0C0
+      C0FFC0C0C0FF000000FF80800000000000FFC0C0C0FFC0C0C0FF000000FF0000
+      00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+      00FF000000FF000000FF000000FF000000FFFFFFFFFFC0C0C0FFFFFFFFFF0000
+      00FFC0C0C0FFC0C0C0FFC0C0C0FF808080FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0
+      C0FFC0C0C0FF000000FF808080FF000000FF000000FF000000FF000000FF0000
+      00FFC0C0C0FF808080FF808080FF808080FFC0C0C0FFC0C0C0FF808080FF8080
+      80FFC0C0C0FF000000FF808080FF808000008080000080800000808000000000
+      00FFC0C0C0FFC0C0C0FFC0C0C0FF808080FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0
+      C0FFC0C0C0FF000000FF808080FF808000008080000080800000808000000000
+      00FFC0C0C0FFC0C0C0FFC0C0C0FF808080FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0
+      C0FFC0C0C0FF000000FF808080FF808000008080000080800000000000FF0000
+      00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
+      00FF000000FF000000FF000000FF808000008080000080800000808000008080
+      80FF808080FF808080FF808080FF808080FF808080FF808080FF808080FF8080
+      80FF808080FF808080FF808080FF808000008080000080800000808000008080
+      0000808000008080000080800000808000008080000080800000808000008080
+      0000808000008080000080800000
     }
   end
   inherited DataSource: TDatasource
-    DataSet = SourceDataModule.TbCurso
+    DataSet = SourceDataModule.TbSubject
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
-    left = 248
-    top = 72
   end
   inherited ActionList: TActionList
     Images = ImageList
-    left = 24
-    top = 72
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
+    object ActSubjectRestriction: TAction[2]
+      AutoCheck = True
+      Caption = 'Prohibiciones de materia'
+      Hint = 'Prohibiciones de materia|Ingresar el horario de prohibiciones de materia'
+      ImageIndex = 2
+      OnExecute = ActSubjectRestrictionExecute
+    end
   end
-  object DataSourceList: TDatasource[6]
-    DataSet = SourceDataModule.TbParaleloId
-    left = 248
-    top = 136
-  end
-  object DataSourceDetail: TDatasource[7]
-    DataSet = SourceDataModule.TbParalelo
-    left = 120
-    top = 136
+  object QuSubjectRestriction: TZQuery[6]
+    Connection = SourceDataModule.Database
+    SortedFields = 'IdSubject;IdDay;IdHour'
+    AutoCalcFields = False
+    SQL.Strings = (
+      'select * from SubjectRestriction'
+      'where IdSubject=:IdSubject'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'IdSubject'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSSubject
+    MasterFields = 'IdSubject'
+    MasterSource = SourceDataModule.DSSubject
+    LinkedFields = 'IdSubject'
+    IndexFieldNames = 'IdSubject Asc;IdDay Asc;IdHour Asc'
+    left = 64
+    top = 152
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'IdSubject'
+        ParamType = ptUnknown
+      end>
   end
 end

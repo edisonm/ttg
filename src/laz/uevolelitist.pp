@@ -51,14 +51,14 @@ type
   protected
   public
     procedure Initialize;
-    procedure ReportParameters(AInforme: TStrings);
+    procedure ReportParameters(ASummary: TStrings);
     constructor Create(AModel: TModel; const ASharedDirectory: string;
       APollinationProb: Double; APopulationSize, AMaxIteration: Integer;
-      ACrossProb, AMutationProb, ARepairProb: Double; const AHorarioIni: string);
+      ACrossProb, AMutationProb, ARepairProb: Double; const ATimeTableIni: string);
     procedure FixIndividuals(const Individuals: string);
     destructor Destroy; override;
-    procedure SaveSolutionToDatabase(CodHorario: Integer;
-      const AExtraInfo: string; MomentoInicial, MomentoFinal: TDateTime); override;
+    procedure SaveSolutionToDatabase(IdTimeTable: Integer;
+      const AExtraInfo: string; TimeIni, TimeEnd: TDateTime); override;
     procedure SaveBestToStream(AStream: TStream);
     procedure Execute(RefreshInterval: Integer); override;
     function DownHill: Integer;
@@ -96,7 +96,7 @@ end;
 
 constructor TEvolElitist.Create(AModel: TModel; const ASharedDirectory: string;
   APollinationProb: Double; APopulationSize, AMaxIteration: Integer; ACrossProb,
-  AMutationProb, ARepairProb: Double; const AHorarioIni: string);
+  AMutationProb, ARepairProb: Double; const ATimeTableIni: string);
 begin
   inherited Create(AModel, ASharedDirectory, APollinationProb);
   SetPopulationSize(APopulationSize);
@@ -104,7 +104,7 @@ begin
   FCrossProb := ACrossProb;
   FMutationProb := AMutationProb;
   FRepairProb := ARepairProb;
-  FixIndividuals(AHorarioIni);
+  FixIndividuals(ATimeTableIni);
 end;
 
 destructor TEvolElitist.Destroy;
@@ -365,8 +365,8 @@ begin
     OnRecordBest(Self);}
 end;
 
-procedure TEvolElitist.SaveSolutionToDatabase(CodHorario: Integer;
-  const AExtraInfo: string; MomentoInicial, MomentoFinal: TDateTime);
+procedure TEvolElitist.SaveSolutionToDatabase(IdTimeTable: Integer;
+  const AExtraInfo: string; TimeIni, TimeEnd: TDateTime);
 var
   Report: TStrings;
 begin
@@ -379,7 +379,7 @@ begin
       Add(AExtraInfo);
     ReportParameters(Report);
     BestIndividual.ReportValues(Report);
-    BestIndividual.SaveToDataModule(CodHorario, MomentoInicial, MomentoFinal, Report);
+    BestIndividual.SaveToDataModule(IdTimeTable, TimeIni, TimeEnd, Report);
   finally
     Free;
   end;
@@ -403,9 +403,9 @@ begin
   Result := sum / FPopulationSize;
 end;
 
-procedure TEvolElitist.ReportParameters(AInforme: TStrings);
+procedure TEvolElitist.ReportParameters(ASummary: TStrings);
 begin
-  with AInforme do
+  with ASummary do
   begin
     Add(Format('Semilla Numeros aleatorios:  %12.u', [FRandSeed]));
     Add(Format('Numero de individuos:        %12.d', [FPopulationSize]));

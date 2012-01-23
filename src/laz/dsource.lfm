@@ -8,117 +8,117 @@ inherited SourceDataModule: TSourceDataModule
   inherited Database: TZConnection
     Connected = True
   end
-  inherited TbAulaTipo: TZTable
+  inherited TbRoomType: TZTable
     Connection = Database
   end
-  inherited DSAulaTipo: TDatasource
-    DataSet = TbAulaTipo
+  inherited DSRoomType: TDatasource
+    DataSet = TbRoomType
   end
-  inherited TbEspecializacion: TZTable
+  inherited TbSpecialization: TZTable
     Connection = Database
   end
-  inherited DSEspecializacion: TDatasource
-    DataSet = TbEspecializacion
+  inherited DSSpecialization: TDatasource
+    DataSet = TbSpecialization
   end
-  inherited TbDia: TZTable
+  inherited TbDay: TZTable
     Connection = Database
     BeforeDelete = DataSetBeforeDelete
   end
-  inherited DSDia: TDatasource
-    DataSet = TbDia
+  inherited DSDay: TDatasource
+    DataSet = TbDay
   end
-  inherited TbMateria: TZTable
+  inherited TbSubject: TZTable
     Connection = Database
   end
-  inherited DSMateria: TDatasource
-    DataSet = TbMateria
+  inherited DSSubject: TDatasource
+    DataSet = TbSubject
   end
-  inherited TbNivel: TZTable
+  inherited TbLevel: TZTable
     Connection = Database
   end
-  inherited DSNivel: TDatasource
-    DataSet = TbNivel
+  inherited DSLevel: TDatasource
+    DataSet = TbLevel
   end
-  inherited TbHora: TZTable
+  inherited TbHour: TZTable
     Connection = Database
   end
-  inherited DSHora: TDatasource
-    DataSet = TbHora
+  inherited DSHour: TDatasource
+    DataSet = TbHour
   end
-  inherited TbHorario: TZTable
+  inherited TbTimeTable: TZTable
     Connection = Database
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
   end
-  inherited DSHorario: TDatasource
-    DataSet = TbHorario
+  inherited DSTimeTable: TDatasource
+    DataSet = TbTimeTable
   end
-  inherited TbCurso: TZTable
+  inherited TbCourse: TZTable
     Connection = Database
   end
-  inherited DSCurso: TDatasource
-    DataSet = TbCurso
+  inherited DSCourse: TDatasource
+    DataSet = TbCourse
   end
-  inherited TbParaleloId: TZTable
+  inherited TbGroupId: TZTable
     Connection = Database
   end
-  inherited DSParaleloId: TDatasource
-    DataSet = TbParaleloId
+  inherited DSGroupId: TDatasource
+    DataSet = TbGroupId
   end
-  inherited TbMateriaProhibicionTipo: TZTable
+  inherited TbSubjectRestrictionType: TZTable
     Connection = Database
   end
-  inherited DSMateriaProhibicionTipo: TDatasource
-    DataSet = TbMateriaProhibicionTipo
+  inherited DSSubjectRestrictionType: TDatasource
+    DataSet = TbSubjectRestrictionType
   end
-  inherited TbPeriodo: TZTable
+  inherited TbTimeSlot: TZTable
     Connection = Database
   end
-  inherited DSPeriodo: TDatasource
-    DataSet = TbPeriodo
+  inherited DSTimeSlot: TDatasource
+    DataSet = TbTimeSlot
   end
-  inherited TbParalelo: TZTable
+  inherited TbClass: TZTable
     Connection = Database
   end
-  inherited DSParalelo: TDatasource
-    DataSet = TbParalelo
+  inherited DSClass: TDatasource
+    DataSet = TbClass
   end
-  inherited TbProfesor: TZTable
+  inherited TbTeacher: TZTable
     Connection = Database
   end
-  inherited DSProfesor: TDatasource
-    DataSet = TbProfesor
+  inherited DSTeacher: TDatasource
+    DataSet = TbTeacher
   end
-  inherited TbMateriaProhibicion: TZTable
+  inherited TbSubjectRestriction: TZTable
     Connection = Database
   end
-  inherited DSMateriaProhibicion: TDatasource
-    DataSet = TbMateriaProhibicion
+  inherited DSSubjectRestriction: TDatasource
+    DataSet = TbSubjectRestriction
   end
-  inherited TbDistributivo: TZTable
+  inherited TbDistribution: TZTable
     Connection = Database
-    OnCalcFields = TbDistributivoCalcFields
-    BeforePost = TbDistributivoBeforePost
+    OnCalcFields = TbDistributionCalcFields
+    BeforePost = TbDistributionBeforePost
   end
-  inherited DSDistributivo: TDatasource
-    DataSet = TbDistributivo
+  inherited DSDistribution: TDatasource
+    DataSet = TbDistribution
   end
-  inherited TbHorarioDetalle: TZTable
-    Connection = Database
-  end
-  inherited DSHorarioDetalle: TDatasource
-    DataSet = TbHorarioDetalle
-  end
-  inherited TbProfesorProhibicionTipo: TZTable
+  inherited TbTimeTableDetail: TZTable
     Connection = Database
   end
-  inherited DSProfesorProhibicionTipo: TDatasource
-    DataSet = TbProfesorProhibicionTipo
+  inherited DSTimeTableDetail: TDatasource
+    DataSet = TbTimeTableDetail
   end
-  inherited TbProfesorProhibicion: TZTable
+  inherited TbTeacherRestrictionType: TZTable
     Connection = Database
   end
-  inherited DSProfesorProhibicion: TDatasource
-    DataSet = TbProfesorProhibicion
+  inherited DSTeacherRestrictionType: TDatasource
+    DataSet = TbTeacherRestrictionType
+  end
+  inherited TbTeacherRestriction: TZTable
+    Connection = Database
+  end
+  inherited DSTeacherRestriction: TDatasource
+    DataSet = TbTeacherRestriction
   end
 end
