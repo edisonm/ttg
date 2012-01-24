@@ -75,7 +75,7 @@ TimeTable
 "IdTimeTable";"TimeIni";"TimeEnd";"Summary";
 "1";"2000-08-06 11:13:11";"2000-08-06 11:26:56";"Semillas del generador de numeros aleatorios:\n\r  Semilla 1: -2109101231\n\r  Semilla 2: 655293367\n\r  Semilla 3: -1598628723\n\r  Semilla 4: 984621\n\rPesos:\n\r  Cruce de profesores             89,00\n\r  Fracc. h. profesores            15,00\n\r  Cruce de aulas:                 65,00\n\r  Hours Huecas desubicadas:       95,00\n\r  Subjects cortadas:              55,00\n\r  Subjects no dispersas:           1,00\n\rParametros: 8; 100; 0,3; 0,2; 3; 0,2; 0,1\n\rNumero de generaciones:       100 \n\rDetalle                     Cant.    Valor\n\rCruce de profesores:            1    89,00\n\rFracc. h. profesores:         408  6120,00\n\rCruce de aulas:                 0     0,00\n\rHours Huecas desubicadas:       0     0,00\n\rSubjects cortadas:              5   275,00\n\rSubjects no dispersas:         94    94,00\n\rProhibiciones de materia:      38   760,00\n\rProhibiciones de profesor:     77  1540,00\n\r\n\rValor Total:                       8878,00\n\r";
 "2";"2012-01-07 00:21:25";"2012-01-07 03:02:51";"Algoritmo Evolutivo Elitista\n\r============================\n\rAplicar Descenso:                      Si\n\rSemilla Numeros aleatorios:    1325892085\n\rNumero de individuos:                   7\n\rMaximo de generaciones:             10000\n\rProbabilidad de cruce:             0,3000\n\rProbabilidad de Mutacion:          0,2000\n\rProbabilidad de Reparacion:        0,1000\n\rProbabilidad de polinizacion:      0,1000\n\r-----------------------------------------------------------------\n\rDetalle                           Cant.         Peso        Valor\n\r-----------------------------------------------------------------\n\rCruce de profesores:                  1          299          299\n\rCruce de materias:                    0          323            0\n\rCruce de aulas:                       0           65            0\n\rFracc. h. profesores:               138           15         2070\n\rHours Huecas desubicadas:             0          201            0\n\rSubjects cortadas:                    0          255            0\n\rSubjects juntas:                     14            2           28\n\rProhibiciones de materia:        (30 0)     (10 200)          300\n\rProhibiciones de profesor:       (87 0)     (10 300)          870\n\r-----------------------------------------------------------------\n\rValor Total:                                                 3567\n\r";
-Curso
+Course
 12
 "IdLevel";"IdSpecialization";
 "1";"1";
@@ -98,7 +98,7 @@ GroupId
 "3";"C";
 "4";"S";
 "5";"D";
-SubjectProhibicionTipo
+SubjectRestrictionType
 2
 "IdSubjectRestrictionType";"NaSubjectRestrictionType";"ColSubjectRestrictionType";"ValSubjectRestrictionType";
 "2";"Inadecuado";"65280";"10";
@@ -2088,7 +2088,7 @@ TimeTableDetail
 "2";"29";"6";"3";"4";"2";"5";"639";
 "2";"29";"6";"3";"4";"3";"3";"637";
 "2";"29";"6";"3";"4";"4";"2";"638";
-TeacherProhibicionTipo
+TeacherRestrictionType
 2
 "IdTeacherRestrictionType";"NaTeacherRestrictionType";"ColTeacherRestrictionType";"ValTeacherRestrictionType";
 "2";"No Gusta";"65280";"10";
