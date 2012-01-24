@@ -67,7 +67,7 @@ Level
 "6";"Sexto";"6";
 Hour
 11
-"IdHour";"NaHour";"Inverval";
+"IdHour";"NaHour";"Interval";
 "1";"Primera";"08:00-08:40";
 "2";"Segunda";"08:40-09:20";
 "3";"Tercera";"09:20-10:00";
