@@ -2093,7 +2093,7 @@ TeacherRestrictionType
 "IdTeacherRestrictionType";"NaTeacherRestrictionType";"ColTeacherRestrictionType";"ValTeacherRestrictionType";
 "2";"No Gusta";"65280";"10";
 "3";"No Puede";"255";"300";
-TeacherProhibicion
+TeacherRestriction
 338
 "IdTeacher";"IdDay";"IdHour";"IdTeacherRestrictionType";
 "3";"2";"7";"2";
@@ -2465,7 +2465,7 @@ ProbMutacion2=0,2
 ProbReparacion=0,1
 MostrarTeacherTimeTableTexto=AbLevel + " " + NaGroupId + " " + NaSubject
 MostrarTeacherTimeTableLongitud=20
-TeacherTimeTableExcluirProfProhibicion=(TeacherProhibicion.IdTeacherRestrictionType <> 2)AND(TeacherProhibicion.IdTeacherRestrictionType <> 3)
+TeacherTimeTableExcluirProfRestriction=(TeacherRestriction.IdTeacherRestrictionType <> 2)AND(TeacherRestriction.IdTeacherRestrictionType <> 3)
 RangoPolinizacion=0,1
 edtTimeTableIni_Text=
 dedCompartir_Text=/tmp/
