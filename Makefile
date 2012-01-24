@@ -34,12 +34,13 @@ $(TTGSQL): $(DBCONVERT) $(TTGMDB)
 $(TTGMYSQL): $(DBCONVERT) $(TTGMDB)
 	$(DBCONVERT) /ACC2SQL $(TTGMDB) $@ mysql
 
-cleansql:
-	$(RM) $(TTGSQL) $(TTGMYSQL)
+cleanwin:
+	$(RM) $(TTGSQL) $(TTGMYSQL) $(DBCONVERT) $(INSTALLER)
+#	$(RM) -r ../DBConvert/src/__history
 
 else
 
-cleansql:
+cleanwin:
 
 endif
 
@@ -48,11 +49,9 @@ $(TTGSQLITE3): $(TTGSQL) Makefile
 	sqlite3 $@ "pragma journal_mode=off;pragma foreign_keys=true"
 	sqlite3 $@ ".read $(TTGSQL)"
 
-clean: cleansql
+clean: cleanwin
 	cd src/laz; $(MAKE) clean
-	$(RM) $(INSTALLER) $(DBCONVERT) \
-	  $(TTGSQLITE3) obj/* $(ISS) $(ABOUT).pas ../DBConvert/src/*.identcache
-	$(RM) -r ../DBConvert/src/__history
+	$(RM) $(TTGSQLITE3) obj/* $(ISS) $(ABOUT).pas ../DBConvert/src/*.identcache
 
 kbmtosq3:
 	for i in $(addprefix src/, $(FORMS) $(DSRCBASE0) $(UNITS) $(ABOUT)) ; do \
