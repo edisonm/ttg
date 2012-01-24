@@ -258,7 +258,7 @@ SubjectProhibicion
 "23";"6";"2";"2";
 "23";"6";"3";"2";
 "23";"6";"5";"2";
-Distributivo
+Distribution
 268
 "IdSubject";"IdLevel";"IdSpecialization";"IdGroupId";"IdTeacher";"IdRoomType";"Composicion";
 "1";"1";"1";"1";"32";"1";"1";
