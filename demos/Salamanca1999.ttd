@@ -220,7 +220,7 @@ Teacher
 "49";"49";"Beltran";"Irma";
 "50";"50";"Baquero";"Rosario";
 "51";"51";"Mejía";"Rómulo";
-SubjectProhibicion
+SubjectRestriction
 35
 "IdSubject";"IdDay";"IdHour";"IdSubjectRestrictionType";
 "2";"2";"7";"2";
