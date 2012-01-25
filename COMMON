@@ -1,21 +1,11 @@
 # -*- mode: Makefile; -*-
 
 ifeq ($(shell uname -o),Cygwin)
-DSRCBASE=$(DSRCBASE0)
 LAZBASE="/cygdrive/c/lazarus32"
 LAZBUILD="$(LAZBASE)/lazbuild"
 FPC="$(LAZBASE)/fpc/2.4.4/bin/i386-win32/fpc"
 LAZRES="$(LAZBASE)/tools/lazres"
 INNOIDE="$(PROGRAMFILES)/Inno Setup 5/ISCC.exe"
-DCC32="$(PROGRAMFILES)/Embarcadero/RAD Studio/7.0/bin/dcc32"
-DCC32OPTS= \
-	-E'$(shell cygpath -w $(TTGDIR)/bin)' \
-	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/component)' \
-	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/dbc)' \
-	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/core)' \
-	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/parsesql)' \
-	-U'$(shell cygpath -w $(TTGDIR)/../ZEOSDBO-7.0.0-alpha/src/plain)' \
-	-N0'$(shell cygpath -w $(TTGDIR)/bin)'
 ISSWIN='$(shell cygpath -w $(ISS))'
 DBCONVERT=$(TTGDIR)/bin/dbconvert.exe
 FILES=$(TTGSQLITE3) $(TTGMYSQL)

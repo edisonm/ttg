@@ -11,7 +11,10 @@ BASELAZFILES=$(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
 	  $(addsuffix .lfm, $(FORMS) $(DSRCBASE)) \
 	  $(addsuffix .lrs, $(FORMS) $(DSRCBASE)) ttg.lpr
 
+DSRCBASE0=dsourcebase
+
 ifeq ($(shell uname -o),Cygwin)
+DSRCBASE=$(DSRCBASE0)
 EXEEXT=.exe
 ISSTMPL=$(TTGDIR)/src/iss/ttg.iss.tmpl
 ISS=$(TTGDIR)/bin/$(BuildID)/ttg.iss

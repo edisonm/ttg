@@ -8,7 +8,6 @@ TTGSQLINC=ttgsql.inc
 
 BUILDMODES=full free
 
-DSRCBASE0=dsourcebase
 
 TTGMDBBASE=ttg.mdb
 
