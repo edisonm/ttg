@@ -227,7 +227,7 @@ var
               begin
                 if not HuboProblemasInterno then
                 begin
-                  AMainStrings.Add('Numero de prohibiciones de Teacheres con problemas...');
+                  AMainStrings.Add('Numero de prohibiciones de profesores con problemas...');
                   vMainMin := AMainStrings.Count;
                   AMainStrings.Add('Teacher; Prohibiciones');
                 end;
@@ -271,7 +271,7 @@ var
         HuboProblemasInterno := False;
         First;
         s := '%s %s; %d';
-        ASubStrings.Add('Carga horaria de los Teacheres sin problemas...');
+        ASubStrings.Add('Carga horaria de los profesores sin problemas...');
         vSubMin := ASubStrings.Count;
         ASubStrings.Add('Teacher; Carga');
         while not Eof do
@@ -280,7 +280,7 @@ var
           begin
             if not HuboProblemasInterno then
             begin
-              AMainStrings.Add('Carga horaria de los Teacheres con problemas...');
+              AMainStrings.Add('Carga horaria de los profesores con problemas...');
               vMainMin := AMainStrings.Count;
               AMainStrings.Add('Teacher; Carga');
             end;

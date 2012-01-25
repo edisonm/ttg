@@ -255,7 +255,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Subjects cortadas'
+      Caption = ' Materias cortadas'
       TabOrder = 10
     end
     object pnlSessionCortadaNumber: TPanel
@@ -536,7 +536,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Subjects juntas:'
+      Caption = ' Materias juntas:'
       TabOrder = 22
     end
     object Panel28: TPanel

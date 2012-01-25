@@ -1,6 +1,6 @@
 inherited SubjectForm: TSubjectForm
   ActiveControl = DBNavigator
-  Caption = 'Subjects'
+  Caption = 'Materias'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate

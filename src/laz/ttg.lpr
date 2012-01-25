@@ -11,7 +11,7 @@ uses
   Dialogs, Interfaces, multithreadprocslaz,
   SysUtils,
   FMain {MainForm},
-  DMaster in 'DMaster.pp' {MasterDataModule: TDataModule},
+  DMaster in 'dmaster.pp' {MasterDataModule: TDataModule},
   UTTModel,
   UEvolElitist in 'uevolelitist.pp',
   FProgress {ProgressForm},
@@ -37,9 +37,9 @@ uses
   DSourceBase {SourceBaseDataModule: TDataModule},
   URelUtils,
   UTTGConfig in 'uttgconfig.pp',
-  DSource in 'DSource.pp' {SourceDataModule: TDataModule},
+  DSource in 'dsource.pp' {SourceDataModule: TDataModule},
   FSelTimeSlot {SelTimeSlotForm},
-  DBase in 'DBase.pp', 
+  DBase in 'dbase.pp', 
 UModel, UMakeTT, UDownHill, USolver, UTTGBasics, UAbout, FMessageView, uttgsql;
 
 {$IFNDEF FPC}

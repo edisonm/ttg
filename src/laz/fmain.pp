@@ -408,7 +408,7 @@ begin
 {$IFNDEF FREEWARE}
   try
     SIdTimeTables := IntToStr(MasterDataModule.NewIdTimeTable);
-    if not InputQuery('Generar TimeTables', 'Idigos de los TimeTables a generar',
+    if not InputQuery('Generar Horarioss', 'Codigos de los Horarios a generar',
         SIdTimeTables) then
       Exit;
     ElaborarTimeTables(SIdTimeTables);

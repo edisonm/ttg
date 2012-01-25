@@ -55,9 +55,6 @@ $(ISS): $(ISSTMPL) $(TTGEXE)
 %.dpr: %.lpr
 	sed -e s:"\.pp":"\.pas":g $< | dos2unix > $@
 
-# srclazclean:
-# 	$(RM) -r $(addprefix prjlaz/, $(BASEDELFILES) $(DSRCBASE0).pp $(DSRCBASE0).lfm $(DSRCBASE0).lrs ttg.inc)
-
 srcdel: $(DELPHIFILES)
 
 prjdel: srcdel
@@ -88,19 +85,21 @@ $(DBCONVERT):
 
 ifeq ($(shell uname -o),Cygwin)
 
-cleanlfm:
+cleanwin:
 	$(RM) $(DSRCBASE0).{lfm,lrs,pp} $(TTGSQLINC)
 
 else
 
-cleanlfm:
+cleanwin:
+	echo $(RM) $(DSRCBASE0).{lfm,lrs,pp} $(TTGSQLINC)
 
 endif
 
-clean: cleanlfm
+clean: cleanwin
 	$(RM) -r $(TTGEXE) $(TTGDIR)/bin/* $(ABOUT).pp
 
 test:
+	@echo UNITS=$(UNITS)
 	@echo REVISION=$(REVISION)
 	@echo TTGEXE=$(TTGEXE)
 	@echo BASELAZFILES=$(BASELAZFILES)

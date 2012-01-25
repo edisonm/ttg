@@ -523,15 +523,15 @@ inherited TimeTableForm: TTimeTableForm
     end
     object ActTimeTableClass: TAction[2]
       AutoCheck = True
-      Caption = 'TimeTable de paralelos'
-      Hint = 'TimeTable de paralelos|TimeTable de paralelos'
+      Caption = 'Horario de paralelos'
+      Hint = 'Horario de paralelos|Horario de paralelos'
       ImageIndex = 2
       OnExecute = ActTimeTableClassExecute
     end
     object ActTimeTableTeacher: TAction[3]
       AutoCheck = True
-      Caption = 'TimeTable de Teacheres'
-      Hint = 'TimeTable de Teacheres|TimeTable de Teacheres'
+      Caption = 'Horario de profesores'
+      Hint = 'Horario de profesores|Horario de profesores'
       ImageIndex = 3
       OnExecute = ActTimeTableTeacherExecute
     end
@@ -572,22 +572,22 @@ inherited TimeTableForm: TTimeTableForm
     end
     object ActSubjectCortadaDay: TAction[9]
       AutoCheck = True
-      Caption = 'Subjects cortadas por el dia'
-      Hint = 'Subjects cortadas por el dia|Subjects cortadas por el dia'
+      Caption = 'Materias cortadas por el dia'
+      Hint = 'Materias cortadas por el dia|Materias cortadas por el dia'
       ImageIndex = 5
       OnExecute = ActSubjectCortadaDayExecute
     end
     object ActSubjectCortadaHour: TAction[10]
       AutoCheck = True
-      Caption = 'Subjects cortadas por la hora'
-      Hint = 'Subjects cortadas por la hora|Subjects cortadas por la hora'
+      Caption = 'Materias cortadas por la hora'
+      Hint = 'Materias cortadas por la hora|Materias cortadas por la hora'
       ImageIndex = 5
       OnExecute = ActSubjectCortadaHourExecute
     end
     object ActTimeTableRoomType: TAction[11]
       AutoCheck = True
-      Caption = 'TimeTable por tipo de aulas'
-      Hint = 'TimeTable por tipo de aulas|TimeTable por tipo de aulas'
+      Caption = 'Horario por tipo de aulas'
+      Hint = 'Horario por tipo de aulas|Horario por tipo de aulas'
       ImageIndex = 6
       OnExecute = ActTimeTableRoomTypeExecute
     end

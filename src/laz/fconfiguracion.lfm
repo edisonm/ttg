@@ -83,7 +83,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Top = 109
         Width = 135
-        Caption = 'Carga Maxima por Teacher:'
+        Caption = 'Carga Maxima por Profesor:'
         ParentColor = False
       end
       object lblComentarios: TLabel
@@ -139,7 +139,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Top = 36
         Width = 79
-        Caption = 'TimeSlot Lectivo:'
+        Caption = 'Periodo Lectivo:'
         ParentColor = False
       end
       object speMaxCargaTeacher: TSpinEdit
@@ -229,7 +229,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Top = 132
         Width = 89
-        Caption = 'TimeTables iniciales:'
+        Caption = 'Horarios iniciales:'
         ParentColor = False
       end
       object Label42: TLabel
@@ -293,7 +293,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Top = 62
         Width = 103
-        Caption = 'Leveles de descenso:'
+        Caption = 'Niveles de descenso:'
         ParentColor = False
       end
       object CBRandomize: TCheckBox
@@ -441,7 +441,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Top = 86
         Width = 92
-        Caption = 'Subjects cortadas:'
+        Caption = 'Materias cortadas:'
         ParentColor = False
       end
       object Label6: TLabel
@@ -449,7 +449,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 13
         Top = 64
         Width = 79
-        Caption = 'Subjects juntas:'
+        Caption = 'Materias juntas:'
         ParentColor = False
       end
       object Label15: TLabel

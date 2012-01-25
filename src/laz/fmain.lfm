@@ -2024,7 +2024,7 @@ object MainForm: TMainForm
       AutoCheck = True
       Caption = 'TimeTables'
       HelpContext = 280
-      Hint = 'TimeTables|Ver los horarios elaborados'
+      Hint = 'Horarios|Ver los horarios elaborados'
       ImageIndex = 20
       OnExecute = ActTimeTableExecute
       ShortCut = 49234
@@ -2092,9 +2092,9 @@ object MainForm: TMainForm
     object ActDay: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Days laborables'
+      Caption = 'Dias laborables'
       HelpContext = 140
-      Hint = 'Days laborables|Days laborables'
+      Hint = 'Dias laborables|Dias laborables'
       ImageIndex = 4
       OnExecute = ActDayExecute
       ShortCut = 16452
@@ -2102,9 +2102,9 @@ object MainForm: TMainForm
     object ActHour: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Hours academicas'
+      Caption = 'Horas academicas'
       HelpContext = 150
-      Hint = 'Hours academicas|Hours academicas'
+      Hint = 'Horas academicas|Horas academicas'
       ImageIndex = 5
       OnExecute = ActHourExecute
       ShortCut = 16456
@@ -2112,9 +2112,9 @@ object MainForm: TMainForm
     object ActTimeSlot: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'TimeSlots laborables'
+      Caption = 'Periodos laborables'
       HelpContext = 160
-      Hint = 'TimeSlots laborables|TimeSlots laborables'
+      Hint = 'Periodos laborables|Periodos laborables'
       ImageIndex = 13
       OnExecute = ActTimeSlotExecute
       ShortCut = 49225
@@ -2122,9 +2122,9 @@ object MainForm: TMainForm
     object ActLevel: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Leveles'
+      Caption = 'Niveles'
       HelpContext = 170
-      Hint = 'Leveles|Leveles'
+      Hint = 'Niveles|Niveles'
       ImageIndex = 7
       OnExecute = ActLevelExecute
       ShortCut = 16462
@@ -2132,9 +2132,9 @@ object MainForm: TMainForm
     object ActSpecialization: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Specializationes'
+      Caption = 'Especializaciones'
       HelpContext = 180
-      Hint = 'Specializationes|Specializationes'
+      Hint = 'Especializaciones|Especializaciones'
       ImageIndex = 6
       OnExecute = ActSpecializationExecute
       ShortCut = 16453
@@ -2154,7 +2154,7 @@ object MainForm: TMainForm
       AutoCheck = True
       Caption = 'Classs'
       HelpContext = 200
-      Hint = 'Classs|Courses con sus respectivos paralelos'
+      Hint = 'Cursos|Cursos con sus respectivos paralelos'
       ImageIndex = 14
       OnExecute = ActClassExecute
       ShortCut = 49219
@@ -2162,9 +2162,9 @@ object MainForm: TMainForm
     object ActSubject: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Subjects'
+      Caption = 'Materias'
       HelpContext = 210
-      Hint = 'Subjects|Subjects'
+      Hint = 'Materias|Materias'
       ImageIndex = 15
       OnExecute = ActSubjectExecute
       ShortCut = 49229
@@ -2182,9 +2182,9 @@ object MainForm: TMainForm
     object ActTeacher: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Teacheres'
+      Caption = 'Profesores'
       HelpContext = 240
-      Hint = 'Teacheres|Teacheres'
+      Hint = 'Profesores|Profesores'
       ImageIndex = 9
       OnExecute = ActTeacherExecute
       ShortCut = 16463
@@ -2210,14 +2210,14 @@ object MainForm: TMainForm
       AutoCheck = True
       Caption = 'Elaborar horario'
       HelpContext = 270
-      Hint = 'Elaborar TimeTable|Elaborar TimeTable'
+      Hint = 'Elaborar Horario|Elaborar Horario'
       ImageIndex = 17
       OnExecute = ActElaborarTimeTableExecute
     end
     object ActMejorarTimeTable: TAction
       Category = 'Tools'
-      Caption = 'Mejorar TimeTable'
-      Hint = 'Mejorar TimeTable|Mejorar el TimeTable buscando en doble profundidad'
+      Caption = 'Mejorar horario'
+      Hint = 'Mejorar horario|Mejorar horario buscando en doble profundidad'
     end
   end
   object SaveDialogCSV: TSaveDialog

@@ -126,7 +126,6 @@ var
   i: Integer;
   s: string;
 begin
-  // Days laborables por defecto, excepto sabados y domingos:
   CheckRelations := False;
   try
     with TbDay do

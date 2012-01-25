@@ -6,21 +6,14 @@ TTGSQL=$(TTGDIR)/dat/ttg.sql
 
 TTGSQLINC=ttgsql.inc
 
-UNITS=uttmodel uttgdbutils usortalgs uevolelitist uconfigstorage uttgconfig uttgsql
-
 BUILDMODES=full free
 
-FORMS=
-# FCrsMMEd FSplash FSingEdt FMasDeEd FHorario FMsgView FCrsMME0	\
-# 	FCrsMME1 FHorProf FProfesr FMain FEditor DMaster FHorPara	\
-# 	DSource FSelPeIn FConfig FCrsMMER DBase FHorAulT FParalel	\
-# 	FProgres FMateria 
-
-DSRCBASE0=DSrcBase
+DSRCBASE0=dsourcebase
 
 TTGMDBBASE=ttg.mdb
 
 APPVERSION=1.2.2
-APPNAME=Generador Automatico de Horarios
+# APPNAME=Generador Automatico de Horarios
+APPNAME=Automatic Timetable Generator
 BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ %Y)
 REVISION=$(shell svnversion|sed -e s/':'/'_'/g)

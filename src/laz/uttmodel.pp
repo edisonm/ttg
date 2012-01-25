@@ -825,8 +825,8 @@ begin
         '  Cruce de aulas:              %8.2f'#13#10 +
         '  Fracc. h. profesores         %8.2f'#13#10 +
         '  Hours Huecas desubicadas:    %8.2f'#13#10 +
-        '  Subjects cortadas:           %8.2f'#13#10 +
-        '  Subjects juntas:             %8.2f', [
+        '  Materias cortadas:           %8.2f'#13#10 +
+        '  Materias juntas:             %8.2f', [
           CruceTeacherValor, CruceSubjectValor, CruceRoomTypeValor,
           TeacherFraccionamientoValor, HourHuecaDesubicadaValor,
           SessionCortadaValor, SubjectNoDispersaValor]));
@@ -1316,9 +1316,9 @@ begin
     Add(Format('Hours Huecas desubicadas:  %12d %12d %12d',
         [HourHuecaDesubicada, TTimeTableModel(Model).HourHuecaDesubicadaValor,
         HourHuecaDesubicadaValor]));
-    Add(Format('Subjects cortadas:         %12d %12d %12d',
+    Add(Format('Materias cortadas:         %12d %12d %12d',
         [SessionCortada, TTimeTableModel(Model).SessionCortadaValor, SessionCortadaValor]));
-    Add(Format('Subjects juntas:           %12d %12d %12d',
+    Add(Format('Materias juntas:           %12d %12d %12d',
         [SubjectNoDispersa, TTimeTableModel(Model).SubjectNoDispersaValor, SubjectNoDispersaValor]));
     Add(Format('Prohibiciones de materia:  %12s %12s %12d',
         ['(' + VarArrToStr(FSubjectRestrictionTypeASubjectCant, ' ') + ')',

@@ -67,7 +67,7 @@ inherited TeacherForm: TTeacherForm
     inherited DBGridDetail: TDBGrid
       Left = 305
       Height = 326
-      Hint = 'Distribution de Teacheres'
+      Hint = 'Distribution de profesores'
       Top = 1
       Width = 292
       Align = alClient

@@ -36,12 +36,5 @@ TTGDPR=ttg.dpr
 TTGLPR=ttg.lpr
 TTGMDB=../../dat/$(TTGMDBBASE)
 
-BASELAZFILES=$(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
-	  $(addsuffix .lfm, $(FORMS) $(DSRCBASE)) \
-	  $(addsuffix .lrs, $(FORMS) $(DSRCBASE)) ttg.lpr
-
-BASEDELFILES=$(addsuffix .pas,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
-	  $(addsuffix .dfm, $(FORMS) $(DSRCBASE)) $(TTGDPR)
-
 %.lrs: %.lfm $(LRSDEP)
 	$(LAZRES) $@ $<
