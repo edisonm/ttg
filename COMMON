@@ -8,7 +8,7 @@ LAZRES="$(LAZBASE)/tools/lazres"
 INNOIDE="$(PROGRAMFILES)/Inno Setup 5/ISCC.exe"
 ISSWIN='$(shell cygpath -w $(ISS))'
 DBCONVERT=$(TTGDIR)/bin/dbconvert.exe
-FILES=$(TTGSQLITE3) $(TTGMYSQL)
+FILES=$(TTGSQLITE3)
 
 LRSDEP=$(LAZRES)
 
@@ -24,7 +24,6 @@ TargetOS=$(shell $(FPC) -iSO)
 
 TTGDPR=ttg.dpr
 TTGLPR=ttg.lpr
-TTGMDB=../../dat/$(TTGMDBBASE)
 
 %.lrs: %.lfm $(LRSDEP)
 	$(LAZRES) $@ $<

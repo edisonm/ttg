@@ -2,14 +2,11 @@
 
 ABOUT=uabout
 
-TTGSQL=$(TTGDIR)/dat/ttg.sql
+TTGSQL=dat/ttg.sql
 
 TTGSQLINC=ttgsql.inc
 
 BUILDMODES=full free
-
-
-TTGMDBBASE=ttg.mdb
 
 APPVERSION=1.2.2
 # APPNAME=Generador Automatico de Horarios

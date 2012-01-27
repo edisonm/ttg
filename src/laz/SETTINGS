@@ -7,14 +7,12 @@ BuildID=$(TargetCPU)-$(TargetOS)-$(BuildMode)
 UNITS:=$(shell cat ttg.lpi |grep '<Filename Value=".*\.pp"/>'|sed -e s:'^.*<Filename Value="\(.*\)\.pp"/>.*':'\1':g)
 FORMS:=$(shell for i in $(UNITS) ; do if [ -f $$i.pp ] && [ -f $$i.lfm ]; then echo $$i; fi; done)
 
-BASELAZFILES=$(addsuffix .pp,  $(FORMS) $(DSRCBASE) $(UNITS) $(ABOUT)) \
-	  $(addsuffix .lfm, $(FORMS) $(DSRCBASE)) \
-	  $(addsuffix .lrs, $(FORMS) $(DSRCBASE)) ttg.lpr
+BASELAZFILES=$(addsuffix .pp, $(UNITS)) $(addsuffix .lfm, $(FORMS)) \
+	  $(addsuffix .lrs, $(FORMS)) ttg.lpr ttg.lpi
 
-DSRCBASE0=dsourcebase
+DSRCBASE=dsourcebase
 
 ifeq ($(shell uname -o),Cygwin)
-DSRCBASE=$(DSRCBASE0)
 EXEEXT=.exe
 ISSTMPL=$(TTGDIR)/src/iss/ttg.iss.tmpl
 ISS=$(TTGDIR)/bin/$(BuildID)/ttg.iss
@@ -22,7 +20,11 @@ INSTALLER=$(TTGDIR)/bin/$(BuildID)/ttgsetup.exe
 FILES=$(INSTALLER)
 else
 EXEEXT=
-FILES=$(TTGEXE)
+FILES=$(TTGEXE) $(TTGMYSQL)
 endif
+
+TTGMDB=$(RELDIR)/dat/ttg.mdb
+TTGSQL=$(RELDIR)/dat/ttg.sql
+TTGMYSQL=$(RELDIR)/dat/ttg.mysql
 
 TTGEXE=$(TTGDIR)/bin/$(BuildID)/ttg$(EXEEXT)

@@ -2,10 +2,12 @@
 
 # This makefile is used only to generate the lazarus project
 
-TTGDIR:=$(shell cd ../..; pwd)
+RELDIR:=../..
 
-include ../../SETTINGS
-include ../../COMMON
+TTGDIR:=$(shell cd $(RELDIR); pwd)
+
+include $(RELDIR)/SETTINGS
+include $(RELDIR)/COMMON
 include SETTINGS
 
 .PHONY: prjdel srcdel
@@ -72,8 +74,16 @@ $(TTGSQLINC): $(TTGSQL)
 
 uttgsql.pp: $(TTGSQLINC)
 
-$(TTGEXE): $(BASELAZFILES) ttg.lpi
+$(TTGEXE): $(BASELAZFILES)
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi ; strip --strip-all $(TTGEXE)
+
+ifeq ($(shell uname -o),Cygwin)
+
+$(TTGSQL): $(DBCONVERT) $(TTGMDB)
+	$(DBCONVERT) /ACC2SQL $(TTGMDB) $(TTGSQL) sqlite
+
+$(TTGMYSQL): $(DBCONVERT) $(TTGMDB)
+	$(DBCONVERT) /ACC2SQL $(TTGMDB) $(TTGMYSQL) mysql
 
 $(DSRCBASE).pp $(DSRCBASE).lfm: $(DBCONVERT) $(TTGMDB) Makefile
 	$(DBCONVERT) /ACC2DM $(TTGMDB) SourceBaseDataModule \
@@ -83,15 +93,14 @@ $(DSRCBASE).pp $(DSRCBASE).lfm: $(DBCONVERT) $(TTGMDB) Makefile
 $(DBCONVERT):
 	cd ../.. ; $(MAKE) $(DBCONVERT)
 
-ifeq ($(shell uname -o),Cygwin)
-
 cleanwin:
-	$(RM) $(DSRCBASE0).{lfm,lrs,pp} $(TTGSQLINC)
+	$(RM) $(DSRCBASE).{lfm,lrs,pp} $(TTGSQLINC) \
+	   $(TTGSQL) $(TTGMYSQL) $(DBCONVERT) $(INSTALLER)
 
 else
 
 cleanwin:
-	echo $(RM) $(DSRCBASE0).{lfm,lrs,pp} $(TTGSQLINC)
+
 
 endif
 
@@ -107,3 +116,6 @@ test:
 
 run:
 	cd $(TTGDIR)/bin ; $(TTGEXE)
+
+ide:
+	lazarus-ide ttg.lpi
