@@ -1,7 +1,7 @@
 unit dsourcebase;
 
 (*
-  27/01/2012 18:42
+  27/01/2012 19:06
 
   Warning:
 
@@ -429,28 +429,27 @@ begin
     Add('TbLevel.IdLevel=Id');
     Add('TbLevel.NaLevel=Name');
     Add('TbLevel.AbLevel=Abbreviation');
-    Add('TbGroupId.IdGroupId=Codigo');
-    Add('TbGroupId.NaGroupId=Nombre');
-    Add('TbDay.IdDay=Codigo');
-    Add('TbDay.NaDay=Nombre');
+    Add('TbGroupId.IdGroupId=Id');
+    Add('TbGroupId.NaGroupId=Name');
+    Add('TbDay.IdDay=Id');
+    Add('TbDay.NaDay=Name');
     Add('TbSpecialization.IdSpecialization=Id');
     Add('TbSpecialization.NaSpecialization=Name');
     Add('TbSpecialization.AbSpecialization=Abbreviation');
-    Add('TbCourse.IdLevel=Nivel');
-    Add('TbCourse.IdSpecialization=Especialización');
-    Add('TbHour.IdHour=Codigo');
-    Add('TbHour.NaHour=Nombre');
-    Add('TbHour.Interval=Intervalo');
-    Add('TbRoomType.IdRoomType=Codigo');
-    Add('TbRoomType.NaRoomType=Nombre');
+    Add('TbCourse.IdLevel=Level');
+    Add('TbCourse.IdSpecialization=Specialization');
+    Add('TbHour.IdHour=Id');
+    Add('TbHour.NaHour=Name');
+    Add('TbRoomType.IdRoomType=Id');
+    Add('TbRoomType.NaRoomType=Name');
     Add('TbRoomType.AbRoomType=Abbreviation');
     Add('TbRoomType.Number=Cantidad');
-    Add('TbClass.IdLevel=Nivel');
-    Add('TbClass.IdSpecialization=Especializacion');
-    Add('TbClass.IdGroupId=Paralelo');
-    Add('TbSubject.IdSubject=Codigo');
-    Add('TbSubject.NaSubject=Nombre');
-    Add('TbTeacher.IdTeacher=Codigo');
+    Add('TbClass.IdLevel=Level');
+    Add('TbClass.IdSpecialization=Specialization');
+    Add('TbClass.IdGroupId=Group Id');
+    Add('TbSubject.IdSubject=Id');
+    Add('TbSubject.NaSubject=Name');
+    Add('TbTeacher.IdTeacher=Id');
     Add('TbTeacher.TeacherNationalId=National ID');
     Add('TbTeacher.LnTeacher=Last Name');
     Add('TbTeacher.NaTeacher=Name');
@@ -460,43 +459,40 @@ begin
     Add('TbSubjectRestrictionType.ValSubjectRestrictionType=Value');
     Add('TbTimeSlot.IdDay=Dia');
     Add('TbTimeSlot.IdHour=Hora');
-    Add('TbDistribution.IdSubject=Materia');
-    Add('TbDistribution.IdLevel=Nivel');
-    Add('TbDistribution.IdSpecialization=Especializacion');
-    Add('TbDistribution.IdGroupId=Paralelo');
-    Add('TbDistribution.IdTeacher=Profesor');
-    Add('TbDistribution.IdRoomType=Tipo de Aula');
-    Add('TbDistribution.Composition=Composicion');
-    Add('TbTeacherRestrictionType.IdTeacherRestrictionType=Codigo');
-    Add('TbTeacherRestrictionType.NaTeacherRestrictionType=Nombre');
+    Add('TbDistribution.IdSubject=Subject');
+    Add('TbDistribution.IdLevel=Level');
+    Add('TbDistribution.IdSpecialization=Specialization');
+    Add('TbDistribution.IdGroupId=Group Id');
+    Add('TbDistribution.IdTeacher=Teacher');
+    Add('TbDistribution.IdRoomType=Room Type');
+    Add('TbTeacherRestrictionType.IdTeacherRestrictionType=Id');
+    Add('TbTeacherRestrictionType.NaTeacherRestrictionType=Name');
     Add('TbTeacherRestrictionType.ColTeacherRestrictionType=Color');
-    Add('TbTeacherRestrictionType.ValTeacherRestrictionType=Valor');
+    Add('TbTeacherRestrictionType.ValTeacherRestrictionType=Value');
     Add('TbTeacherRestriction.IdTeacher=Teacher');
     Add('TbTeacherRestriction.IdDay=Day');
     Add('TbTeacherRestriction.IdHour=Hour');
     Add('TbTeacherRestriction.IdTeacherRestrictionType=Restriction Type');
-    Add('TbSubjectRestriction.IdSubject=Materia');
-    Add('TbSubjectRestriction.IdDay=Dia');
-    Add('TbSubjectRestriction.IdHour=Hora');
-    Add('TbSubjectRestriction.IdSubjectRestrictionType=Tipo de Prohibicion');
-    Add('TbTimeTable.IdTimeTable=Codigo');
-    Add('TbTimeTable.TimeIni=Momento Inicial');
-    Add('TbTimeTable.TimeEnd=Momento Final');
-    Add('TbTimeTable.Summary=Informe');
-    Add('TbTimeTableDetail.IdTimeTable=Horario');
-    Add('TbTimeTableDetail.IdSubject=Materia');
-    Add('TbTimeTableDetail.IdLevel=Nivel');
-    Add('TbTimeTableDetail.IdSpecialization=Especializacion');
-    Add('TbTimeTableDetail.IdGroupId=Paralelo');
-    Add('TbTimeTableDetail.IdDay=Dia');
-    Add('TbTimeTableDetail.IdHour=Hora');
-    Add('TbTimeTableDetail.Session=Sesion');
+    Add('TbSubjectRestriction.IdSubject=Subject');
+    Add('TbSubjectRestriction.IdDay=Day');
+    Add('TbSubjectRestriction.IdHour=Hour');
+    Add('TbSubjectRestriction.IdSubjectRestrictionType=Restriction Type');
+    Add('TbTimeTable.IdTimeTable=Id');
+    Add('TbTimeTable.TimeIni=Initial Time');
+    Add('TbTimeTable.TimeEnd=End Time');
+    Add('TbTimeTableDetail.IdTimeTable=TimeTable');
+    Add('TbTimeTableDetail.IdSubject=Subject');
+    Add('TbTimeTableDetail.IdLevel=Level');
+    Add('TbTimeTableDetail.IdSpecialization=Specialization');
+    Add('TbTimeTableDetail.IdGroupId=Group');
+    Add('TbTimeTableDetail.IdDay=Day');
+    Add('TbTimeTableDetail.IdHour=Hour');
   end;
   with DataSetDescList do
   begin
     Add('TbLevel=Levels');
     Add('TbGroupId=Group Identifiers');
-    Add('TbDay=Dias laborables');
+    Add('TbDay=Working Days');
     Add('TbSpecialization=Specializations');
     Add('TbCourse=Courses');
     Add('TbHour=Academic Hours');
