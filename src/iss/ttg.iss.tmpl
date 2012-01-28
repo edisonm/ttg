@@ -11,7 +11,7 @@ CreateUninstallRegKey=1
 UsePreviousAppDir=1
 UsePreviousGroup=1
 AppVersion=<v>AppVersion</v>
-AppVerName=<v>AppName</v> <v>AppVersion</v> (r<v>Revision</v> <v>BuildID</v>)
+AppVerName=<v>AppName</v> <v>AppVersion</v> (r<v>Revision</v> <v>BuildId</v>)
 AppCopyright=Edición 30-01-2011. Edison Mera. Quito-Ecuador. Madrid-España
 WindowShowCaption=0
 WindowStartMaximized=0
@@ -34,7 +34,7 @@ DiskClusterSize=512
 ReserveBytes=4096
 UseSetupLdr=1
 SourceDir=.
-OutputDir=..\..\bin\<v>BuildID</v>
+OutputDir=..\..\bin\<v>BuildId</v>
 
 [Dirs]
 Name: {app}\hlp
@@ -44,8 +44,7 @@ Name: {app}\demos
 Name: {app}\doc
 
 [Files]
-Source: ..\..\bin\<v>BuildID</v>\ttg.exe; DestDir: {app}\bin\<v>BuildID</v>\; DestName: ttg.exe
-Source: ..\..\dat\ttg.sql; DestDir: {app}\dat\; DestName: ttg.sql
+Source: ..\..\bin\<v>BuildId</v>\ttg.exe; DestDir: {app}\bin\<v>BuildId</v>\; DestName: ttg.exe
 Source: ..\..\hlp\ttg.cnt; DestDir: {app}\hlp\; DestName: ttg.cnt
 Source: ..\..\hlp\ttg.hlp; DestDir: {app}\hlp\; DestName: ttg.hlp
 Source: ..\..\doc\ttg.doc; DestDir: {app}\doc\; DestName: ttg.doc
@@ -53,7 +52,7 @@ Source: ..\..\..\sqlite3\sqlite3.dll; DestDir: {sys}; DestName: sqlite3.dll
 Source: ..\..\demos\BritanicoInt2000.ttd; DestDir: {app}\demos\; DestName: britanic.ttd
 Source: ..\..\demos\Salamanca1999.ttd; DestDir: {app}\demos\; DestName: salamanc.ttd
 [Icons]
-Name: {group}\<v>AppName</v> <v>AppVersion</v>; Filename: {app}\bin\<v>BuildID</v>\ttg.exe; WorkingDir: {app}\bin\<v>BuildID</v>\; IconIndex: 0
+Name: {group}\<v>AppName</v> <v>AppVersion</v>; Filename: {app}\bin\<v>BuildId</v>\ttg.exe; WorkingDir: {app}\bin\<v>BuildId</v>\; IconIndex: 0
 Name: {group}\Manual del Usuario (doc); Filename: {app}\doc\ttg.doc
 Name: {group}\Manual del Usuario (hlp); Filename: {app}\hlp\ttg.hlp
 Name: {group}\{cm:UninstallProgram, <v>AppName</v> <v>AppVersion</v>}; Filename: {uninstallexe}

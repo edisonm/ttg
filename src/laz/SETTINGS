@@ -2,29 +2,49 @@
 
 BuildMode?=full
 
-BuildID=$(TargetCPU)-$(TargetOS)-$(BuildMode)
-
 UNITS:=$(shell cat ttg.lpi |grep '<Filename Value=".*\.pp"/>'|sed -e s:'^.*<Filename Value="\(.*\)\.pp"/>.*':'\1':g)
 FORMS:=$(shell for i in $(UNITS) ; do if [ -f $$i.pp ] && [ -f $$i.lfm ]; then echo $$i; fi; done)
 
 BASELAZFILES=$(addsuffix .pp, $(UNITS)) $(addsuffix .lfm, $(FORMS)) \
 	  $(addsuffix .lrs, $(FORMS)) ttg.lpr ttg.lpi
 
+ABOUT=uabout
 DSRCBASE=dsourcebase
+REVISION=$(shell svnversion|sed -e s/':'/'_'/g)
 
 ifeq ($(shell uname -o),Cygwin)
 EXEEXT=.exe
-ISSTMPL=$(TTGDIR)/src/iss/ttg.iss.tmpl
-ISS=$(TTGDIR)/bin/$(BuildID)/ttg.iss
-INSTALLER=$(TTGDIR)/bin/$(BuildID)/ttgsetup.exe
-FILES=$(INSTALLER)
+LAZBASE=/cygdrive/c/lazarus32
+FPC=$(LAZBASE)/fpc/2.4.4/bin/i386-win32/fpc
+LAZRES=$(LAZBASE)/tools/lazres
+LAZBUILD=$(LAZBASE)/lazbuild
+FILES=$(TTGMYSQL)
+LRSDEP=$(LAZRES)
+DBCONVERTSRC=../../../DBConvert
+
+# Due to a bug in cygwin, I cannot use (absolute) dirs that contains ':'
+#DBCONVERT=$(shell cd $(DBCONVERTSRC) ; $(MAKE) -s getDBConvert)
+DBCONVERT=$(DBCONVERTSRC)/bin/dbconvert.exe
+
 else
+
 EXEEXT=
-FILES=$(TTGEXE) $(TTGMYSQL)
+FPC=fpc
+LAZRES=lazres
+LAZBUILD=lazbuild
+
 endif
+
+TargetCPU=$(shell $(FPC) -iSP)
+TargetOS=$(shell $(FPC) -iSO)
+BuildId=$(TargetCPU)-$(TargetOS)-$(BuildMode)
 
 TTGMDB=$(RELDIR)/dat/ttg.mdb
 TTGSQL=$(RELDIR)/dat/ttg.sql
 TTGMYSQL=$(RELDIR)/dat/ttg.mysql
 
-TTGEXE=$(TTGDIR)/bin/$(BuildID)/ttg$(EXEEXT)
+TTGEXE=$(TTGDIR)/bin/$(BuildId)/ttg$(EXEEXT)
+
+FILES=$(TTGEXE)
+
+TTGLPR=ttg.lpr

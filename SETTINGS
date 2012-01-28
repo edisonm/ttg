@@ -1,15 +1,26 @@
 # -*- mode: Makefile; -*-
 
-ABOUT=uabout
-
 TTGSQL=dat/ttg.sql
 
 TTGSQLINC=ttgsql.inc
 
 BUILDMODES=full free
 
-APPVERSION=1.2.2
-# APPNAME=Generador Automatico de Horarios
-APPNAME=Automatic Timetable Generator
 BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ %Y)
-REVISION=$(shell svnversion|sed -e s/':'/'_'/g)
+
+ISSSRC=src/iss
+
+TTGSRC=src/laz
+
+ifeq ($(shell uname -o),Cygwin)
+DBCONVERT=$(TTGDIR)/bin/dbconvert.exe
+FILES=$(TTGSQLITE3)
+CHAINSRC=$(ISSSRC)
+else
+FILES=
+CHAINSRC=$(TTGSRC)
+endif
+
+TTGDPR=ttg.dpr
+TTGLPR=ttg.lpr
+

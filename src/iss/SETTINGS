@@ -1,0 +1,16 @@
+# -*- mode: Makefile; -*-
+
+BuildMode?=full
+TTGSRC=../laz
+BuildId?=$(shell cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getBuildId)
+TTGEXE?=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getTTGEXE)
+INNOIDE="$(PROGRAMFILES)/Inno Setup 5/ISCC.exe"
+ISSTMPL=$(TTGDIR)/src/iss/ttg.iss.tmpl
+ISS=$(TTGDIR)/bin/$(BuildId)/ttg.iss
+ISSWIN='$(shell cygpath -w $(ISS))'
+INSTALLER=$(TTGDIR)/bin/$(BuildId)/ttgsetup.exe
+FILES=$(INSTALLER)
+# APPNAME=Generador Automatico de Horarios
+APPNAME=Automatic Timetable Generator
+APPVERSION=1.2.2
+REVISION=$(shell cd $(TTGSRC) ; $(MAKE) -s getREVISION)
