@@ -306,7 +306,7 @@
       <Unit26>
         <Filename Value="../../../DBConvert/auxiliary/urelutils.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="urelutils"/>
+        <UnitName Value="URelUtils"/>
       </Unit26>
       <Unit27>
         <Filename Value="dsource.pp"/>
@@ -330,7 +330,7 @@
         <ComponentName Value="BaseDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
-        <UnitName Value="dbase"/>
+        <UnitName Value="DBase"/>
       </Unit29>
       <Unit30>
         <Filename Value="uttgconfig.pp"/>
