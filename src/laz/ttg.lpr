@@ -35,11 +35,11 @@ uses
   FTimeTable {TimeTableForm},
   FTimeTableTeacher {TimeTableTeacherForm},
   DSourceBase {SourceBaseDataModule: TDataModule},
-  URelUtils,
+  urelutils,
   UTTGConfig in 'uttgconfig.pp',
   DSource in 'dsource.pp' {SourceDataModule: TDataModule},
   FSelTimeSlot {SelTimeSlotForm},
-  DBase in 'dbase.pp', 
+  dbase, 
 UModel, UMakeTT, UDownHill, USolver, UTTGBasics, UAbout, FMessageView, uttgsql;
 
 {$IFNDEF FPC}

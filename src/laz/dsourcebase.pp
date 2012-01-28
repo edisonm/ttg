@@ -20,7 +20,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF},
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
-  DBase, ZConnection, ZDataset;
+  dbase, ZConnection, ZDataset;
 
 type
   TSourceBaseDataModule = class(TBaseDataModule)

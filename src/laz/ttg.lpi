@@ -304,9 +304,9 @@
         <UnitName Value="dsourcebase"/>
       </Unit25>
       <Unit26>
-        <Filename Value="urelutils.pp"/>
+        <Filename Value="../../../DBConvert/auxiliary/urelutils.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="URelUtils"/>
+        <UnitName Value="urelutils"/>
       </Unit26>
       <Unit27>
         <Filename Value="dsource.pp"/>
@@ -325,12 +325,12 @@
         <UnitName Value="FSelTimeSlot"/>
       </Unit28>
       <Unit29>
-        <Filename Value="dbase.pp"/>
+        <Filename Value="../../../DBConvert/auxiliary/dbase.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="BaseDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
-        <UnitName Value="DBase"/>
+        <UnitName Value="dbase"/>
       </Unit29>
       <Unit30>
         <Filename Value="uttgconfig.pp"/>
@@ -386,7 +386,7 @@
     <Version Value="9"/>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../../../ZEOSDBO-7.0.0-alpha/src/core;../../../ZEOSDBO-7.0.0-alpha/src/dbc;../../../ZEOSDBO-7.0.0-alpha/src/parsesql;../../../ZEOSDBO-7.0.0-alpha/src/plain;../../../ZEOSDBO-7.0.0-alpha/src/component;../../../multithreadprocs"/>
+      <OtherUnitFiles Value="../../../ZEOSDBO-7.0.0-alpha/src/core;../../../ZEOSDBO-7.0.0-alpha/src/dbc;../../../ZEOSDBO-7.0.0-alpha/src/parsesql;../../../ZEOSDBO-7.0.0-alpha/src/plain;../../../ZEOSDBO-7.0.0-alpha/src/component;../../../multithreadprocs;../../../DBConvert/auxiliary"/>
       <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-full"/>
     </SearchPaths>
     <Parsing>
