@@ -33,7 +33,7 @@
           <Version Value="9"/>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="../../../ZEOSDBO-7.0.0-alpha/src/core;../../../ZEOSDBO-7.0.0-alpha/src/dbc;../../../ZEOSDBO-7.0.0-alpha/src/parsesql;../../../ZEOSDBO-7.0.0-alpha/src/plain;../../../ZEOSDBO-7.0.0-alpha/src/component;../../../multithreadprocs"/>
+            <OtherUnitFiles Value="../../../ZEOSDBO-7.0.0-alpha/src/core;../../../ZEOSDBO-7.0.0-alpha/src/dbc;../../../ZEOSDBO-7.0.0-alpha/src/parsesql;../../../ZEOSDBO-7.0.0-alpha/src/plain;../../../ZEOSDBO-7.0.0-alpha/src/component;../../../multithreadprocs;../../../DBConvert/auxiliary"/>
             <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-free"/>
           </SearchPaths>
           <Conditionals Value="if undefined(DistType) then
