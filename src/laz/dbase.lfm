@@ -3,8 +3,8 @@ object BaseDataModule: TBaseDataModule
   OnDestroy = DataModuleDestroy
   OldCreateOrder = False
   Height = 480
-  HorizontalOffset = 25
-  VerticalOffset = 0
+  HorizontalOffset = 700
+  VerticalOffset = 227
   Width = 928
   object Database: TZConnection
     Protocol = 'sqlite-3'

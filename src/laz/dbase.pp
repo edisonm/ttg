@@ -7,12 +7,12 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, Db, URelUtils, ZConnection, ZDataset;
+  Controls, Forms, Dialogs, Db, URelUtils, ZConnection;
 
 type
 
   TMasterRel = record
-    DetailDataSet: TZTable;
+    DetailDataSet: TDataSet;
     MasterFields: string;
     DetailFields: string;
     Cascade: Boolean;
@@ -139,9 +139,9 @@ begin
     Database.StartTransaction;
     for i := Low(FTables) to High(FTables) do
     begin
-      with (FTables[i] as TZTable) do
+      with FTables[i] do
       begin
-        Connection.ExecuteDirect(Format('DELETE FROM %s', [TableName]));
+        Database.ExecuteDirect(Format('DELETE FROM %s', [GetNameDataSet(FTables[i])]));
         Refresh;
       end;
     end;
@@ -174,9 +174,14 @@ var
 begin
   for i := Low(FTables) to High(FTables) do
   begin
-    (FTables[i] as TZTable).MasterSource := nil;
-    AStrings.Add(NameDataSet[FTables[i]]);
-    SaveDataSetToStrings(FTables[i], AStrings);
+    FTables[i].DisableControls;
+    try
+      //(FTables[i] as TZTable).MasterSource := nil;
+      AStrings.Add(NameDataSet[FTables[i]]);
+      SaveDataSetToStrings(FTables[i], AStrings);
+    finally
+      FTables[i].EnableControls;
+    end;
   end;
 end;
 
@@ -232,7 +237,7 @@ begin
     try
       for j := Low(FDetailRels[i]) to High(FDetailRels[i]) do
         with FDetailRels[i, j] do
-          CheckDetailRelation(MasterDataSet, DataSet as TZTable, MasterFields, DetailFields);
+          CheckDetailRelation(MasterDataSet, DataSet, MasterFields, DetailFields);
       if DataSet.State = dsEdit then
       begin
 	      for j := Low(FMasterRels[i]) to High(FMasterRels[i]) do

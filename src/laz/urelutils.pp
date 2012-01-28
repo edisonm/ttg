@@ -21,7 +21,7 @@ procedure CheckMasterRelationUpdate(AMaster, ADetail: TDataSet;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 procedure CheckMasterRelationDelete(AMaster, ADetail: TDataSet;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
-procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TZTable;
+procedure CheckDetailRelation(AMaster, ADetail: TDataSet;
   const AMasterFields, ADetailFields: string);
 
 function CheckRelation(AMaster, ADetail: TDataSet; const AMasterFields,
@@ -126,7 +126,7 @@ begin
   end;
 end;
 
-function GetFieldAssignments(const Fields: string; Values: Variant): string;
+function GetFieldAssignments(const Fields: string; const Values: Variant): string;
 var
   Pos, l: Integer;
   Field, Assignment: string;
@@ -154,6 +154,28 @@ begin
     Result := Format('%s="%s"', [Fields, VarToStr(Values)]);
 end;
 
+procedure DeleteDetailFields(AMaster, ADetail: TDataSet; const ADetailFields: string;
+  const OldValues, CurValues: Variant);
+begin
+  {$IFDEF USE_SQL}
+  with TZTable(ADetail) do
+  begin
+    Connection.ExecuteDirect(
+    Format('UPDATE %s SET %s WHERE %s', [TableName,
+      GetFieldAssignments(ADetailFields, CurValues),
+      GetFieldAssignments(ADetailFields, OldValues)]));
+    Refresh;
+  end
+  {$ELSE}
+  while Locate(ADetailFields, OldValues, []) do
+  begin
+    Edit;
+    FieldValues[ADetailFields] := CurValues;
+    Post;
+  end
+  {$ENDIF}
+end;
+
 procedure CheckMasterRelationUpdate(AMaster, ADetail: TDataSet;
   const AMasterFields, ADetailFields: string; ACascade: Boolean);
 var
@@ -171,26 +193,11 @@ begin
       CheckBrowseMode;
       bBookmark := GetBookmark;
       try
-        if Locate(ADetailFields, OldValues, []) then
+        if ACascade then
+          DeleteDetailFields(AMaster, ADetail, ADetailFields, OldValues, CurValues)
+        else
         begin
-          if ACascade then
-          begin
-            {$IFDEF USE_SQL}
-            with TZTable(ADetail) do
-              Connection.ExecuteDirect(
-              Format('UPDATE %s SET %s WHERE %s', [TableName,
-                GetFieldAssignments(ADetailFields, CurValues),
-                GetFieldAssignments(ADetailFields, OldValues)]));
-              Refresh;
-            {$ELSE}
-            repeat
-              Edit;
-              FieldValues[ADetailFields] := CurValues;
-              Post;
-            until not Locate(ADetailFields, OldValues, []);
-            {$ENDIF}
-          end
-          else
+          if Locate(ADetailFields, OldValues, []) then
             raise ERelationUtils.CreateFmt('Ya existen campos relacionados en la tabla %s', [Name]);
         end;
       finally
@@ -280,17 +287,21 @@ begin
     Result := VarToStrDef(Value, '(Null)');
 end;
 
-procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TZTable;
+procedure CheckDetailRelation(AMaster: TDataSet; ADetail: TDataSet;
   const AMasterFields, ADetailFields: string);
 var
   bBookmark: TBookmark;
   Value: Variant;
   s: string;
+  function SkipCheckDetailRelation(ADataSet: TZTable): Boolean;
+  begin
+    Result := Assigned(ADataSet.MasterSource) and ADataSet.MasterSource.Enabled
+      and Assigned(ADataSet.MasterSource.DataSet)
+      and (ADataSet.MasterSource.DataSet = AMaster);
+  end;
 begin
   with AMaster do
-  if not (Assigned(ADetail.MasterSource) and ADetail.MasterSource.Enabled
-        and Assigned(ADetail.MasterSource.DataSet)
-        and (ADetail.MasterSource.DataSet = AMaster))
+  if not SkipCheckDetailRelation(ADetail as TZTable)
     then // this condition avoids an undesirable loop in DoBeforePost
          // that causes a key violation, and also is an optimization:
          // We do not need to verify master-detail relationship if the tables
