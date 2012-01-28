@@ -23,8 +23,12 @@ type
     procedure SetFieldCaption(ADataSet: TDataSet);
     procedure PrepareLookupFields;
     procedure HideFields;
+  protected
+    procedure EmptyDataSet(ADataSet: TDataSet); override;
+    procedure LoadTablesFromStrings(AStrings: TStrings; var APosition: Integer); override;
   public
     { Public declarations }
+    procedure EmptyTables; override;
     procedure PrepareTables;
     procedure FillDefaultData;
   end;
@@ -39,7 +43,7 @@ implementation
 {$ENDIF}
 
 uses
-  Variants, FConfiguracion, UTTGDBUtils;
+  Variants, FConfiguracion, UTTGDBUtils, URelUtils;
 
 procedure TSourceDataModule.TbDistributionBeforePost(DataSet: TDataSet);
 var
@@ -450,6 +454,38 @@ begin
     FindField('IdGroupId').Visible := False;
     FindField('IdTeacher').Visible := False;
     FindField('IdRoomType').Visible := False;
+  end;
+end;
+
+procedure TSourceDataModule.EmptyDataSet(ADataSet: TDataSet);
+begin
+  Database.ExecuteDirect(Format('DELETE FROM %s', [NameDataSet[ADataSet]]));
+  ADataSet.Refresh;
+end;
+
+procedure TSourceDataModule.LoadTablesFromStrings(AStrings: TStrings;
+  var APosition: Integer);
+var
+  i: Integer;
+begin
+  {$IFDEF USE_SQL}
+  LoadDatabaseFromStrings(Database, AStrings, Length(FTables), APosition);
+  for i := Low(FTables) to High(FTables) do
+    FTables[i].Refresh;
+  {$ELSE}
+  inherited LoadTablesFromStrings(AStrings, APosition);
+  {$ENDIF}
+end;
+
+procedure TSourceDataModule.EmptyTables;
+begin
+  try
+    Database.StartTransaction;
+    inherited EmptyTables;
+    Database.Commit;
+  except
+    Database.Rollback;
+    raise;
   end;
 end;
 
