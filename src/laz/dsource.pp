@@ -26,6 +26,14 @@ type
   protected
     procedure EmptyDataSet(ADataSet: TDataSet); override;
     procedure LoadTablesFromStrings(AStrings: TStrings; var APosition: Integer); override;
+    procedure UpdateDetailFields(ADetail: TDataSet;
+                                 const ADetailFields: string;
+                                 const OldValues, CurValues: Variant); override;
+    procedure DeleteDetailFields(ADetail: TDataSet;
+                                 const AMasterFields: string;
+                                 const AMasterValues: Variant); override;
+    procedure CheckDetailRelation(AMaster, ADetail: TDataSet;
+                                  const AMasterFields, ADetailFields: string); override;
   public
     { Public declarations }
     procedure EmptyTables; override;
@@ -43,7 +51,7 @@ implementation
 {$ENDIF}
 
 uses
-  Variants, FConfiguracion, UTTGDBUtils, URelUtils;
+  Variants, FConfiguracion, UTTGDBUtils, URelUtils, ZDataSet, ZSysUtils;
 
 procedure TSourceDataModule.TbDistributionBeforePost(DataSet: TDataSet);
 var
@@ -463,18 +471,89 @@ begin
   ADataSet.Refresh;
 end;
 
+procedure StringsToSQL(const ATableName: string;
+  AStrings, ASQL: TStrings; var Position: Integer; RecordCount: Integer);
+var
+  s: string;
+  j, l, Pos, Limit: Integer;
+  Value, Values, Field, Fields: string;
+begin
+  s := AStrings.Strings[Position];
+  l := 0;
+  Inc(Position);
+  Pos := 2;
+  while True do
+  begin
+    Field := ScapedToString(s, Pos);
+    if Field = '' then
+      break;
+    if l = 0 then
+      Fields := Field
+    else
+      Fields := Fields + ',' + Field;
+    Inc(l);
+    Inc(Pos, 3);
+  end;
+  Limit := Position + RecordCount;
+  while Position < Limit do
+  begin
+    Pos := 2;
+    s := AStrings[Position];
+    for j := 0 to l - 1 do
+    begin
+      Value := ScapedToString(s, Pos);
+      if j = 0 then
+        Values := Value
+      else
+        Values := Values + '","' + Value;
+      Inc(Pos, 3);
+    end;
+    ASQL.Add(Format('INSERT INTO %s (%s) VALUES ("%s");',
+                    [ATableName, Fields, Values]));
+    Inc(Position);
+  end;
+end;
+
 procedure TSourceDataModule.LoadTablesFromStrings(AStrings: TStrings;
-  var APosition: Integer);
+                                                  var APosition: Integer);
 var
   i: Integer;
+  TableName: string;
+  procedure LoadTableFromStrings(const ATableName: string);
+  var
+    RecordCount: Integer;
+    procedure LoadTableFromStrings0;
+    var
+      SQL: TStrings;
+    begin
+      SQL := TStringList.Create;
+      try
+        StringsToSQL(ATableName, AStrings, SQL, APosition, RecordCount);
+        DbZConnection.ExecuteDirect(SQL.Text);
+      finally
+        SQL.Free;
+      end;
+    end;
+  begin
+    RecordCount := StrToInt(AStrings.Strings[APosition]);
+    Inc(APosition);
+    LoadTableFromStrings0;
+  end;
 begin
-  {$IFDEF USE_SQL}
-  LoadDatabaseFromStrings(DbZConnection, AStrings, Length(FTables), APosition);
+  for i := Low(FTables) to High(FTables) do
+  begin
+    TableName := AStrings[APosition];
+    Inc(APosition);
+    try
+      LoadTableFromStrings(TableName);
+    except
+      MessageDlg(Format(SWhenProcessing, [TableName]), mtError, [mbOk], 0);
+      raise;
+    end;
+  end;
   for i := Low(FTables) to High(FTables) do
     FTables[i].Refresh;
-  {$ELSE}
-  inherited LoadTablesFromStrings(AStrings, APosition);
-  {$ENDIF}
+  // inherited LoadTablesFromStrings(AStrings, APosition);
 end;
 
 procedure TSourceDataModule.EmptyTables;
@@ -511,10 +590,81 @@ begin
   end;
 end;
 
+function GetFieldAssignments(const Fields: string; const Values: Variant): string;
+var
+  Pos, l: Integer;
+  Field, Assignment: string;
+begin
+  Result := '';
+  if VarIsArray(Values) then
+  begin
+    l := 0;
+    Pos := 2;
+    while True do
+    begin
+      Field := ScapedToString(Fields, Pos);
+      if Field = '' then
+        break;
+      Assignment := Format('%s="%s"', [Field, Values[l]]);
+      if l = 0 then
+        Result := Assignment
+      else
+        Result := Result + ' and ' + Assignment;
+      Inc(l);
+      Inc(Pos, 3);
+    end;
+  end
+  else
+    Result := Format('%s="%s"', [Fields, VarToStr(Values)]);
+end;
+
+procedure TSourceDataModule.UpdateDetailFields(ADetail: TDataSet;
+                             const ADetailFields: string;
+                             const OldValues, CurValues: Variant);
+begin
+  with TZTable(ADetail) do
+  begin
+    Connection.ExecuteDirect(
+    Format('UPDATE %s SET %s WHERE %s', [TableName,
+      GetFieldAssignments(ADetailFields, CurValues),
+      GetFieldAssignments(ADetailFields, OldValues)]));
+    Refresh;
+  end
+end;
+
+procedure TSourceDataModule.DeleteDetailFields(ADetail: TDataSet;
+                             const AMasterFields: string;
+                             const AMasterValues: Variant);
+begin
+  with TZTable(ADetail) do
+  begin
+    DbZConnection.ExecuteDirect(Format('DELETE FROM %s WHERE %s;',
+      [TableName, GetFieldAssignments(AMasterFields, AMasterValues)]));
+    Refresh;
+  end
+end;
+
+procedure TSourceDataModule.CheckDetailRelation(AMaster, ADetail: TDataSet;
+                                                const AMasterFields, ADetailFields: string);
+  function SkipCheckDetailRelation(ADataSet: TZTable): Boolean;
+  begin
+    Result := Assigned(ADataSet.MasterSource) and ADataSet.MasterSource.Enabled
+      and Assigned(ADataSet.MasterSource.DataSet)
+      and (ADataSet.MasterSource.DataSet = AMaster);
+  end;
+begin
+  if not SkipCheckDetailRelation(ADetail as TZTable)
+  then // this condition avoids an undesirable loop in DoBeforePost
+       // that causes a key violation, and also is an optimization:
+       // We do not need to verify master-detail relationship if the tables
+       // are already linked using the MasterSource property.
+    inherited CheckDetailRelation(AMaster, ADetail,
+                                  AMasterFields, ADetailFields);
+end;
+
 initialization
 {$IFDEF FPC}
   {$i dsource.lrs}
 {$ENDIF}
 
 end.
-

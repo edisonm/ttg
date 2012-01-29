@@ -10,7 +10,6 @@ ISS=$(TTGDIR)/bin/$(BuildId)/ttg.iss
 ISSWIN='$(shell cygpath -w $(ISS))'
 INSTALLER=$(TTGDIR)/bin/$(BuildId)/ttgsetup.exe
 FILES=$(INSTALLER)
-# APPNAME=Generador Automatico de Horarios
-APPNAME=Automatic Timetable Generator
-APPVERSION=1.2.2
+APPNAME=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getAPPNAME)
+APPVERSION=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getAPPVERSION)
 REVISION=$(shell cd $(TTGSRC) ; $(MAKE) -s getREVISION)

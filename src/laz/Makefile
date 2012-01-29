@@ -99,3 +99,9 @@ getTTGEXE:
 
 getREVISION:
 	@echo $(REVISION)
+
+getAPPVERSION:
+	@echo $(APPVERSION)
+
+getAPPNAME:
+	@echo $(APPNAME)
