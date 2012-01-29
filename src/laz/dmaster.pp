@@ -631,15 +631,15 @@ begin
   end;
   with SourceDataModule do
   begin
-    Database.Connect;
-    if Database.Database = ':memory:' then
+    DbZConnection.Connect;
+    if DbZConnection.Database = ':memory:' then
     begin
-      Database.ExecuteDirect('pragma journal_mode=off');
+      DbZConnection.ExecuteDirect('pragma journal_mode=off');
       Strings := TStringList.Create;
       try
         // Strings.LoadFromFile('../../dat/ttg.sql');
         FillTTGSQL(Strings);
-        Database.ExecuteDirect(Strings.GetText);
+        DbZConnection.ExecuteDirect(Strings.GetText);
       finally
         Strings.Free;
       end;
@@ -650,7 +650,7 @@ begin
     end
     else
     begin
-      Database.ExecuteDirect('pragma journal_mode=off');
+      DbZConnection.ExecuteDirect('pragma journal_mode=off');
       PrepareTables;
       OpenTables;
     end;

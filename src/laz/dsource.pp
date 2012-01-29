@@ -459,7 +459,7 @@ end;
 
 procedure TSourceDataModule.EmptyDataSet(ADataSet: TDataSet);
 begin
-  Database.ExecuteDirect(Format('DELETE FROM %s', [NameDataSet[ADataSet]]));
+  DbZConnection.ExecuteDirect(Format('DELETE FROM %s', [NameDataSet[ADataSet]]));
   ADataSet.Refresh;
 end;
 
@@ -469,7 +469,7 @@ var
   i: Integer;
 begin
   {$IFDEF USE_SQL}
-  LoadDatabaseFromStrings(Database, AStrings, Length(FTables), APosition);
+  LoadDatabaseFromStrings(DbZConnection, AStrings, Length(FTables), APosition);
   for i := Low(FTables) to High(FTables) do
     FTables[i].Refresh;
   {$ELSE}
@@ -480,11 +480,11 @@ end;
 procedure TSourceDataModule.EmptyTables;
 begin
   try
-    Database.StartTransaction;
+    DbZConnection.StartTransaction;
     inherited EmptyTables;
-    Database.Commit;
+    DbZConnection.Commit;
   except
-    Database.Rollback;
+    DbZConnection.Rollback;
     raise;
   end;
 end;

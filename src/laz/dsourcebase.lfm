@@ -1,8 +1,10 @@
 inherited SourceBaseDataModule: TSourceBaseDataModule
   OnCreate = DataModuleCreate
   OnDestroy = nil
+  object DbZConnection: TZConnection
+  end
   object TbLevel: TZTable
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'Level'
     IndexFieldNames = 'IdLevel'
     Left = 48
@@ -15,7 +17,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbGroupId: TZTable
     Tag = 1
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'GroupId'
     IndexFieldNames = 'IdGroupId'
     Left = 144
@@ -28,7 +30,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbDay: TZTable
     Tag = 2
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'Day'
     IndexFieldNames = 'IdDay'
     Left = 240
@@ -41,7 +43,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbSpecialization: TZTable
     Tag = 3
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'Specialization'
     IndexFieldNames = 'IdSpecialization'
     Left = 336
@@ -54,7 +56,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbCourse: TZTable
     Tag = 4
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'Course'
     IndexFieldNames = 'IdLevel;IdSpecialization'
     Left = 432
@@ -67,7 +69,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbHour: TZTable
     Tag = 5
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'Hour'
     IndexFieldNames = 'IdHour'
     Left = 48
@@ -80,7 +82,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbRoomType: TZTable
     Tag = 6
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'RoomType'
     IndexFieldNames = 'IdRoomType'
     Left = 144
@@ -93,7 +95,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbClass: TZTable
     Tag = 7
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'Class'
     IndexFieldNames = 'IdLevel;IdSpecialization;IdGroupId'
     Left = 240
@@ -106,7 +108,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbSubject: TZTable
     Tag = 8
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'Subject'
     IndexFieldNames = 'IdSubject'
     Left = 336
@@ -119,7 +121,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbTeacher: TZTable
     Tag = 9
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'Teacher'
     IndexFieldNames = 'IdTeacher'
     Left = 432
@@ -132,7 +134,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbSubjectRestrictionType: TZTable
     Tag = 10
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'SubjectRestrictionType'
     IndexFieldNames = 'IdSubjectRestrictionType'
     Left = 48
@@ -145,7 +147,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbTimeSlot: TZTable
     Tag = 11
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'TimeSlot'
     IndexFieldNames = 'IdDay;IdHour'
     Left = 144
@@ -158,7 +160,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbDistribution: TZTable
     Tag = 12
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'Distribution'
     IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdGroupId'
     Left = 240
@@ -171,7 +173,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbTeacherRestrictionType: TZTable
     Tag = 13
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'TeacherRestrictionType'
     IndexFieldNames = 'IdTeacherRestrictionType'
     Left = 336
@@ -184,7 +186,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbTeacherRestriction: TZTable
     Tag = 14
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'TeacherRestriction'
     IndexFieldNames = 'IdTeacher;IdDay;IdHour'
     Left = 432
@@ -197,7 +199,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbSubjectRestriction: TZTable
     Tag = 15
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'SubjectRestriction'
     IndexFieldNames = 'IdSubject;IdDay;IdHour'
     Left = 48
@@ -210,7 +212,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbTimeTable: TZTable
     Tag = 16
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'TimeTable'
     IndexFieldNames = 'IdTimeTable'
     Left = 144
@@ -223,7 +225,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   end
   object TbTimeTableDetail: TZTable
     Tag = 17
-    Connection = Database
+    Connection = DbZConnection
     TableName = 'TimeTableDetail'
     IndexFieldNames = 'IdTimeTable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
     Left = 240

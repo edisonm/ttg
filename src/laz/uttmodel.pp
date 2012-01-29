@@ -1708,7 +1708,7 @@ begin
     {$IFDEF USE_SQL}
     with SourceDataModule do
     begin
-      Database.ExecuteDirect(SQL.Text);
+      DbZConnection.ExecuteDirect(SQL.Text);
       TbTimeTable.Refresh;
       TbTimeTableDetail.Refresh;
     end;

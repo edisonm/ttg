@@ -1,7 +1,8 @@
+{ -*- mode: Delphi -*- }
 unit dsourcebase;
 
 (*
-  28/01/2012 1:41
+  29/01/2012 0:44
 
   Warning:
 
@@ -24,6 +25,7 @@ uses
 
 type
   TSourceBaseDataModule = class(TBaseDataModule)
+    DbZConnection: TZConnection;
     TbLevel: TZTable;
     DSLevel: TDataSource;
     TbGroupId: TZTable;
