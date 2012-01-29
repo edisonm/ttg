@@ -6,8 +6,6 @@ TTGSQLINC=ttgsql.inc
 
 BUILDMODES=free full
 
-BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ %Y)
-
 ISSSRC=src/iss
 
 TTGSRC=src/laz

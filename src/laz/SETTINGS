@@ -5,6 +5,7 @@ APPNAME=Generador Automatico de Horarios
 # APPNAME=Automatic Timetable Generator
 APPVERSION=1.2.2
 REVISION:=$(shell svnversion|sed -e s/':'/'_'/g)
+BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ %Y)
 
 UNITS:=$(shell cat ttg.lpi |grep '<Filename Value=".*\.pp"/>'|sed -e s:'^.*<Filename Value="\(.*\)\.pp"/>.*':'\1':g)
 FORMS:=$(shell for i in $(UNITS) ; do if [ -f $$i.pp ] && [ -f $$i.lfm ]; then echo $$i; fi; done)

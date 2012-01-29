@@ -39,7 +39,6 @@ clean: cleanthis
 	cd $(CHAINSRC); $(MAKE) clean
 
 test:
-	@echo BUILDDATETIME="$(BUILDDATETIME)"
 	cd $(CHAINSRC) ; for BuildMode in $(BUILDMODES); do \
 	  $(MAKE) BuildMode=$$BuildMode test ; \
 	  done
