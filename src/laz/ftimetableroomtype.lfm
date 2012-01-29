@@ -299,6 +299,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
     }
   end
   object QuTimeTableRoomType: TZQuery[7]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;IdRoomType'
     AutoCalcFields = False
     OnCalcFields = QuTimeTableRoomTypeCalcFields
@@ -525,6 +526,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
     top = 140
   end
   object QuRoomType: TZQuery[9]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable'
     AutoCalcFields = False
     OnCalcFields = QuTimeTableRoomTypeCalcFields

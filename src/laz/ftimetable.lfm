@@ -2375,6 +2375,7 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuSubjectCortadaHour: TZQuery[16]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable'
     AutoCalcFields = False
     ReadOnly = True
