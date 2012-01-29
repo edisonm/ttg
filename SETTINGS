@@ -4,7 +4,7 @@ TTGSQL=dat/ttg.sql
 
 TTGSQLINC=ttgsql.inc
 
-BUILDMODES=full free
+BUILDMODES=free full
 
 BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ %Y)
 
