@@ -294,6 +294,7 @@ inherited TimeTableTeacherForm: TTimeTableTeacherForm
     }
   end
   object QuTimeTableTeacher: TZQuery[7]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;IdTeacher'
     AutoCalcFields = False
     OnCalcFields = QuTimeTableTeacherCalcFields
@@ -520,6 +521,7 @@ inherited TimeTableTeacherForm: TTimeTableTeacherForm
     top = 145
   end
   object QuTeacher: TZQuery[9]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;ApeTeacher;NaTeacher'
     AutoCalcFields = False
     OnCalcFields = QuTimeTableTeacherCalcFields

@@ -1,261 +1,239 @@
 inherited SourceBaseDataModule: TSourceBaseDataModule
   OnCreate = DataModuleCreate
   OnDestroy = nil
-  Height = 480
-  HorizontalOffset = 472
-  VerticalOffset = 243
-  Width = 928
-  object DbZConnection: TZConnection[0]
+  object DbZConnection: TZConnection
   end
-  object TbLevel: TZTable[1]
+  object TbLevel: TZTable
     Connection = DbZConnection
-    SortedFields = 'IdLevel'
     TableName = 'Level'
-    IndexFieldNames = 'IdLevel Asc'
-    left = 48
-    top = 48
+    IndexFieldNames = 'IdLevel'
+    Left = 48
+    Top = 48
   end
-  object DSLevel: TDatasource[2]
+  object DSLevel: TDataSource
     DataSet = TbLevel
-    left = 56
-    top = 40
+    Left = 56
+    Top = 40
   end
-  object TbGroupId: TZTable[3]
+  object TbGroupId: TZTable
     Tag = 1
     Connection = DbZConnection
-    SortedFields = 'IdGroupId'
     TableName = 'GroupId'
-    IndexFieldNames = 'IdGroupId Asc'
-    left = 144
-    top = 60
+    IndexFieldNames = 'IdGroupId'
+    Left = 144
+    Top = 60
   end
-  object DSGroupId: TDatasource[4]
+  object DSGroupId: TDataSource
     DataSet = TbGroupId
-    left = 152
-    top = 52
+    Left = 152
+    Top = 52
   end
-  object TbDay: TZTable[5]
+  object TbDay: TZTable
     Tag = 2
     Connection = DbZConnection
-    SortedFields = 'IdDay'
     TableName = 'Day'
-    IndexFieldNames = 'IdDay Asc'
-    left = 240
-    top = 48
+    IndexFieldNames = 'IdDay'
+    Left = 240
+    Top = 48
   end
-  object DSDay: TDatasource[6]
+  object DSDay: TDataSource
     DataSet = TbDay
-    left = 248
-    top = 40
+    Left = 248
+    Top = 40
   end
-  object TbSpecialization: TZTable[7]
+  object TbSpecialization: TZTable
     Tag = 3
     Connection = DbZConnection
-    SortedFields = 'IdSpecialization'
     TableName = 'Specialization'
-    IndexFieldNames = 'IdSpecialization Asc'
-    left = 336
-    top = 60
+    IndexFieldNames = 'IdSpecialization'
+    Left = 336
+    Top = 60
   end
-  object DSSpecialization: TDatasource[8]
+  object DSSpecialization: TDataSource
     DataSet = TbSpecialization
-    left = 344
-    top = 52
+    Left = 344
+    Top = 52
   end
-  object TbCourse: TZTable[9]
+  object TbCourse: TZTable
     Tag = 4
     Connection = DbZConnection
-    SortedFields = 'IdLevel;IdSpecialization'
     TableName = 'Course'
-    IndexFieldNames = 'IdLevel Asc;IdSpecialization Asc'
-    left = 432
-    top = 48
+    IndexFieldNames = 'IdLevel;IdSpecialization'
+    Left = 432
+    Top = 48
   end
-  object DSCourse: TDatasource[10]
+  object DSCourse: TDataSource
     DataSet = TbCourse
-    left = 440
-    top = 40
+    Left = 440
+    Top = 40
   end
-  object TbHour: TZTable[11]
+  object TbHour: TZTable
     Tag = 5
     Connection = DbZConnection
-    SortedFields = 'IdHour'
     TableName = 'Hour'
-    IndexFieldNames = 'IdHour Asc'
-    left = 48
-    top = 144
+    IndexFieldNames = 'IdHour'
+    Left = 48
+    Top = 144
   end
-  object DSHour: TDatasource[12]
+  object DSHour: TDataSource
     DataSet = TbHour
-    left = 56
-    top = 136
+    Left = 56
+    Top = 136
   end
-  object TbRoomType: TZTable[13]
+  object TbRoomType: TZTable
     Tag = 6
     Connection = DbZConnection
-    SortedFields = 'IdRoomType'
     TableName = 'RoomType'
-    IndexFieldNames = 'IdRoomType Asc'
-    left = 144
-    top = 156
+    IndexFieldNames = 'IdRoomType'
+    Left = 144
+    Top = 156
   end
-  object DSRoomType: TDatasource[14]
+  object DSRoomType: TDataSource
     DataSet = TbRoomType
-    left = 152
-    top = 148
+    Left = 152
+    Top = 148
   end
-  object TbClass: TZTable[15]
+  object TbClass: TZTable
     Tag = 7
     Connection = DbZConnection
-    SortedFields = 'IdLevel;IdSpecialization;IdGroupId'
     TableName = 'Class'
-    IndexFieldNames = 'IdLevel Asc;IdSpecialization Asc;IdGroupId Asc'
-    left = 240
-    top = 144
+    IndexFieldNames = 'IdLevel;IdSpecialization;IdGroupId'
+    Left = 240
+    Top = 144
   end
-  object DSClass: TDatasource[16]
+  object DSClass: TDataSource
     DataSet = TbClass
-    left = 248
-    top = 136
+    Left = 248
+    Top = 136
   end
-  object TbSubject: TZTable[17]
+  object TbSubject: TZTable
     Tag = 8
     Connection = DbZConnection
-    SortedFields = 'IdSubject'
     TableName = 'Subject'
-    IndexFieldNames = 'IdSubject Asc'
-    left = 336
-    top = 156
+    IndexFieldNames = 'IdSubject'
+    Left = 336
+    Top = 156
   end
-  object DSSubject: TDatasource[18]
+  object DSSubject: TDataSource
     DataSet = TbSubject
-    left = 344
-    top = 148
+    Left = 344
+    Top = 148
   end
-  object TbTeacher: TZTable[19]
+  object TbTeacher: TZTable
     Tag = 9
     Connection = DbZConnection
-    SortedFields = 'IdTeacher'
     TableName = 'Teacher'
-    IndexFieldNames = 'IdTeacher Asc'
-    left = 432
-    top = 144
+    IndexFieldNames = 'IdTeacher'
+    Left = 432
+    Top = 144
   end
-  object DSTeacher: TDatasource[20]
+  object DSTeacher: TDataSource
     DataSet = TbTeacher
-    left = 440
-    top = 136
+    Left = 440
+    Top = 136
   end
-  object TbSubjectRestrictionType: TZTable[21]
+  object TbSubjectRestrictionType: TZTable
     Tag = 10
     Connection = DbZConnection
-    SortedFields = 'IdSubjectRestrictionType'
     TableName = 'SubjectRestrictionType'
-    IndexFieldNames = 'IdSubjectRestrictionType Asc'
-    left = 48
-    top = 240
+    IndexFieldNames = 'IdSubjectRestrictionType'
+    Left = 48
+    Top = 240
   end
-  object DSSubjectRestrictionType: TDatasource[22]
+  object DSSubjectRestrictionType: TDataSource
     DataSet = TbSubjectRestrictionType
-    left = 56
-    top = 232
+    Left = 56
+    Top = 232
   end
-  object TbTimeSlot: TZTable[23]
+  object TbTimeSlot: TZTable
     Tag = 11
     Connection = DbZConnection
-    SortedFields = 'IdDay;IdHour'
     TableName = 'TimeSlot'
-    IndexFieldNames = 'IdDay Asc;IdHour Asc'
-    left = 144
-    top = 252
+    IndexFieldNames = 'IdDay;IdHour'
+    Left = 144
+    Top = 252
   end
-  object DSTimeSlot: TDatasource[24]
+  object DSTimeSlot: TDataSource
     DataSet = TbTimeSlot
-    left = 152
-    top = 244
+    Left = 152
+    Top = 244
   end
-  object TbDistribution: TZTable[25]
+  object TbDistribution: TZTable
     Tag = 12
     Connection = DbZConnection
-    SortedFields = 'IdSubject;IdLevel;IdSpecialization;IdGroupId'
     TableName = 'Distribution'
-    IndexFieldNames = 'IdSubject Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc'
-    left = 240
-    top = 240
+    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdGroupId'
+    Left = 240
+    Top = 240
   end
-  object DSDistribution: TDatasource[26]
+  object DSDistribution: TDataSource
     DataSet = TbDistribution
-    left = 248
-    top = 232
+    Left = 248
+    Top = 232
   end
-  object TbTeacherRestrictionType: TZTable[27]
+  object TbTeacherRestrictionType: TZTable
     Tag = 13
     Connection = DbZConnection
-    SortedFields = 'IdTeacherRestrictionType'
     TableName = 'TeacherRestrictionType'
-    IndexFieldNames = 'IdTeacherRestrictionType Asc'
-    left = 336
-    top = 252
+    IndexFieldNames = 'IdTeacherRestrictionType'
+    Left = 336
+    Top = 252
   end
-  object DSTeacherRestrictionType: TDatasource[28]
+  object DSTeacherRestrictionType: TDataSource
     DataSet = TbTeacherRestrictionType
-    left = 344
-    top = 244
+    Left = 344
+    Top = 244
   end
-  object TbTeacherRestriction: TZTable[29]
+  object TbTeacherRestriction: TZTable
     Tag = 14
     Connection = DbZConnection
-    SortedFields = 'IdTeacher;IdDay;IdHour'
     TableName = 'TeacherRestriction'
-    IndexFieldNames = 'IdTeacher Asc;IdDay Asc;IdHour Asc'
-    left = 432
-    top = 240
+    IndexFieldNames = 'IdTeacher;IdDay;IdHour'
+    Left = 432
+    Top = 240
   end
-  object DSTeacherRestriction: TDatasource[30]
+  object DSTeacherRestriction: TDataSource
     DataSet = TbTeacherRestriction
-    left = 440
-    top = 232
+    Left = 440
+    Top = 232
   end
-  object TbSubjectRestriction: TZTable[31]
+  object TbSubjectRestriction: TZTable
     Tag = 15
     Connection = DbZConnection
-    SortedFields = 'IdSubject;IdDay;IdHour'
     TableName = 'SubjectRestriction'
-    IndexFieldNames = 'IdSubject Asc;IdDay Asc;IdHour Asc'
-    left = 48
-    top = 336
+    IndexFieldNames = 'IdSubject;IdDay;IdHour'
+    Left = 48
+    Top = 336
   end
-  object DSSubjectRestriction: TDatasource[32]
+  object DSSubjectRestriction: TDataSource
     DataSet = TbSubjectRestriction
-    left = 56
-    top = 328
+    Left = 56
+    Top = 328
   end
-  object TbTimeTable: TZTable[33]
+  object TbTimeTable: TZTable
     Tag = 16
     Connection = DbZConnection
-    SortedFields = 'IdTimeTable'
     TableName = 'TimeTable'
-    IndexFieldNames = 'IdTimeTable Asc'
-    left = 144
-    top = 348
+    IndexFieldNames = 'IdTimeTable'
+    Left = 144
+    Top = 348
   end
-  object DSTimeTable: TDatasource[34]
+  object DSTimeTable: TDataSource
     DataSet = TbTimeTable
-    left = 152
-    top = 340
+    Left = 152
+    Top = 340
   end
-  object TbTimeTableDetail: TZTable[35]
+  object TbTimeTableDetail: TZTable
     Tag = 17
     Connection = DbZConnection
-    SortedFields = 'IdTimeTable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
     TableName = 'TimeTableDetail'
-    IndexFieldNames = 'IdTimeTable Asc;IdSubject Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc;IdDay Asc;IdHour Asc'
-    left = 240
-    top = 336
+    IndexFieldNames = 'IdTimeTable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
+    Left = 240
+    Top = 336
   end
-  object DSTimeTableDetail: TDatasource[36]
+  object DSTimeTableDetail: TDataSource
     DataSet = TbTimeTableDetail
-    left = 248
-    top = 328
+    Left = 248
+    Top = 328
   end
 end

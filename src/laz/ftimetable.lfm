@@ -585,6 +585,7 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuCruceAula: TZQuery[6]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable'
     AutoCalcFields = False
     ReadOnly = True
@@ -758,6 +759,7 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuCruceAulaDetalle: TZQuery[7]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;IdRoomType;IdDay;IdHour'
     AutoCalcFields = False
     ReadOnly = True
@@ -980,6 +982,7 @@ inherited TimeTableForm: TTimeTableForm
     top = 112
   end
   object QuCruceTeacherDetalle: TZQuery[9]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;IdTeacher;IdDay;IdHour;IdLevel;IdSpecialization;IdGroupId;NaSubject'
     AutoCalcFields = False
     ReadOnly = True
@@ -1211,6 +1214,7 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuCruceTeacher: TZQuery[10]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;ApeTeacher;NaTeacher'
     AutoCalcFields = False
     AfterScroll = QuCruceTeacherAfterScroll
@@ -1375,6 +1379,7 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuCruceSubject: TZQuery[11]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;NaSubject'
     AutoCalcFields = False
     AfterScroll = QuCruceSubjectAfterScroll
@@ -1453,6 +1458,7 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuCruceSubjectDetalle: TZQuery[12]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
     AutoCalcFields = False
     ReadOnly = True
@@ -1667,6 +1673,7 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuTimeTableDetailSubjectRestriction: TZQuery[13]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable'
     AutoCalcFields = False
     ReadOnly = True
@@ -1899,6 +1906,7 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuTimeTableDetailTeacherRestriction: TZQuery[14]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable'
     AutoCalcFields = False
     ReadOnly = True
@@ -2148,6 +2156,7 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuSubjectCortadaDay: TZQuery[15]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;NaSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
     AutoCalcFields = False
     AfterScroll = QuCruceSubjectAfterScroll
@@ -2485,6 +2494,7 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuSubjectCortadaHourDetalle: TZQuery[17]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;IdDay;IdHour;IdLevel;IdSpecialization;IdGroupId'
     AutoCalcFields = False
     ReadOnly = True

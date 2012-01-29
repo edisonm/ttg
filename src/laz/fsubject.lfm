@@ -142,6 +142,7 @@ inherited SubjectForm: TSubjectForm
     end
   end
   object QuSubjectRestriction: TZQuery[6]
+    Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdSubject;IdDay;IdHour'
     AutoCalcFields = False
     SQL.Strings = (
