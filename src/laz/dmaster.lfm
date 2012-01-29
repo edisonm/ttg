@@ -3,11 +3,10 @@ object MasterDataModule: TMasterDataModule
   OnDestroy = DataModuleDestroy
   OldCreateOrder = False
   Height = 404
-  HorizontalOffset = 568
+  HorizontalOffset = 565
   VerticalOffset = 275
   Width = 748
   object TbTmpTeacherCarga: TZTable
-    Connection = SourceDataModule.Database
     AutoCalcFields = False
     left = 250
     top = 11
@@ -66,7 +65,6 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object QuDistributionTeacher: TZTable
-    Connection = SourceDataModule.Database
     AutoCalcFields = False
     left = 250
     top = 115
@@ -204,7 +202,6 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object QuTeacherRestrictionCant: TZTable
-    Connection = SourceDataModule.Database
     AutoCalcFields = False
     left = 58
     top = 157
@@ -230,7 +227,6 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object TbTmpRoomTypeCarga: TZTable
-    Connection = SourceDataModule.Database
     AutoCalcFields = False
     left = 250
     top = 62
@@ -273,7 +269,6 @@ object MasterDataModule: TMasterDataModule
     end
   end
   object QuNewIdTimeTable: TZReadOnlyQuery
-    Connection = SourceDataModule.Database
     SQL.Strings = (
       'SELECT TimeTable.IdTimeTable + 1'
       'FROM TimeTable left join TimeTable as TimeTable1 on'

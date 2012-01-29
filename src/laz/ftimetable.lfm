@@ -1,9 +1,8 @@
 inherited TimeTableForm: TTimeTableForm
-  Left = 781
+  Left = 622
   Height = 440
-  Top = 290
+  Top = 59
   Width = 677
-  ActiveControl = DBNavigator
   Caption = 'TimeTableForm'
   ClientHeight = 440
   ClientWidth = 677
@@ -12,108 +11,96 @@ inherited TimeTableForm: TTimeTableForm
   OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
     Width = 677
-    Images = ImageList
-    inherited BtnShow: TToolButton
-      Action = ActShow
+    inherited DBNavigator: TDBNavigator
+      Width = 154
+      ClientWidth = 154
+      Hints.Strings = (      )
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbPost, nbCancel]
     end
-    inherited BtnFind: TToolButton
-      Action = ActFind
-    end
-    object BtnTimeTableClass: TToolButton[2]
+    object BtnTimeTableClass: TToolButton[3]
       Left = 201
       Top = 2
       Action = ActTimeTableClass
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnTimeTableRoomType: TToolButton[3]
+    object BtnTimeTableRoomType: TToolButton[4]
       Left = 224
       Top = 2
       Action = ActTimeTableRoomType
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnTimeTableTeacher: TToolButton[4]
+    object BtnTimeTableTeacher: TToolButton[5]
       Left = 247
       Top = 2
       Action = ActTimeTableTeacher
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnCruceTeacher: TToolButton[5]
+    object BtnCruceTeacher: TToolButton[6]
       Left = 270
       Top = 2
       Action = ActCruceTeacher
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnCruceSubject: TToolButton[6]
+    object BtnCruceSubject: TToolButton[7]
       Left = 293
       Top = 2
       Action = ActCruceSubject
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnCruceAula: TToolButton[7]
+    object BtnCruceAula: TToolButton[8]
       Left = 316
       Top = 2
       Action = ActCruceAula
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnSubjectRestrictionNoRespetada: TToolButton[8]
+    object BtnSubjectRestrictionNoRespetada: TToolButton[9]
       Left = 339
       Top = 2
       Action = ActSubjectRestrictionNoRespetada
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnTeacherRestrictionNoRespetada: TToolButton[9]
+    object BtnTeacherRestrictionNoRespetada: TToolButton[10]
       Left = 362
       Top = 2
       Action = ActTeacherRestrictionNoRespetada
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnSubjectCortadaDay: TToolButton[10]
+    object BtnSubjectCortadaDay: TToolButton[11]
       Left = 385
       Top = 2
       Action = ActSubjectCortadaDay
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnSubjectCortadaHour: TToolButton[11]
+    object BtnSubjectCortadaHour: TToolButton[12]
       Left = 408
       Top = 2
       Action = ActSubjectCortadaHour
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnMejorarTimeTable: TToolButton[12]
+    object BtnMejorarTimeTable: TToolButton[13]
       Left = 431
       Top = 2
       Action = ActMejorarTimeTable
       ParentShowHint = False
       ShowHint = True
     end
-    inherited DBNavigator: TDBNavigator[13]
-      Width = 154
-      ClientWidth = 154
-      DataSource = DataSource
-      Hints.Strings = (      )
-      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbPost, nbCancel]
-    end
   end
   inherited pnlStatus: TPanel
     Top = 421
     Width = 677
     ClientWidth = 677
-    inherited SLState: TLabel
-      Width = 3
-    end
     inherited SLRecordNo: TLabel
-      Left = 673
-      Width = 3
+      Left = 675
     end
   end
   inherited Panel1: TPanel
@@ -128,21 +115,23 @@ inherited TimeTableForm: TTimeTableForm
       Columns = <      
         item
           PickList.Strings = (          )
+          Title.Caption = 'IdTimeTable'
           FieldName = 'IdTimeTable'
         end      
         item
           PickList.Strings = (          )
           ReadOnly = True
+          Title.Caption = 'TimeIni'
           Width = 110
           FieldName = 'TimeIni'
         end      
         item
           PickList.Strings = (          )
           ReadOnly = True
+          Title.Caption = 'TimeEnd'
           Width = 110
           FieldName = 'TimeEnd'
         end>
-      DataSource = DataSource
       OnDblClick = DBGridDblClick
     end
     object Splitter1: TSplitter[1]
@@ -172,9 +161,6 @@ inherited TimeTableForm: TTimeTableForm
         Font.CharSet = ANSI_CHARSET
         Font.Height = -11
         Font.Name = 'Courier New'
-        Lines.Strings = (
-          'dbmSummary'
-        )
         ParentFont = False
         TabOrder = 0
       end
@@ -515,7 +501,6 @@ inherited TimeTableForm: TTimeTableForm
     top = 60
   end
   inherited ActionList: TActionList
-    Images = ImageList
     left = 60
     top = 112
     inherited ActFind: TAction
@@ -600,7 +585,6 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuCruceAula: TZQuery[6]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable'
     AutoCalcFields = False
     ReadOnly = True
@@ -774,7 +758,6 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuCruceAulaDetalle: TZQuery[7]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable;IdRoomType;IdDay;IdHour'
     AutoCalcFields = False
     ReadOnly = True
@@ -997,7 +980,6 @@ inherited TimeTableForm: TTimeTableForm
     top = 112
   end
   object QuCruceTeacherDetalle: TZQuery[9]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable;IdTeacher;IdDay;IdHour;IdLevel;IdSpecialization;IdGroupId;NaSubject'
     AutoCalcFields = False
     ReadOnly = True
@@ -1229,7 +1211,6 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuCruceTeacher: TZQuery[10]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable;ApeTeacher;NaTeacher'
     AutoCalcFields = False
     AfterScroll = QuCruceTeacherAfterScroll
@@ -1394,7 +1375,6 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuCruceSubject: TZQuery[11]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable;NaSubject'
     AutoCalcFields = False
     AfterScroll = QuCruceSubjectAfterScroll
@@ -1473,7 +1453,6 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuCruceSubjectDetalle: TZQuery[12]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
     AutoCalcFields = False
     ReadOnly = True
@@ -1688,7 +1667,6 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuTimeTableDetailSubjectRestriction: TZQuery[13]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable'
     AutoCalcFields = False
     ReadOnly = True
@@ -1921,7 +1899,6 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuTimeTableDetailTeacherRestriction: TZQuery[14]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable'
     AutoCalcFields = False
     ReadOnly = True
@@ -2171,7 +2148,6 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuSubjectCortadaDay: TZQuery[15]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable;NaSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
     AutoCalcFields = False
     AfterScroll = QuCruceSubjectAfterScroll
@@ -2390,7 +2366,6 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuSubjectCortadaHour: TZQuery[16]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable'
     AutoCalcFields = False
     ReadOnly = True
@@ -2510,7 +2485,6 @@ inherited TimeTableForm: TTimeTableForm
     end
   end
   object QuSubjectCortadaHourDetalle: TZQuery[17]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable;IdDay;IdHour;IdLevel;IdSpecialization;IdGroupId'
     AutoCalcFields = False
     ReadOnly = True

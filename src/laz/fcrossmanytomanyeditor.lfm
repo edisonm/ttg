@@ -1,28 +1,28 @@
 inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
-  ActiveControl = Panel1
+  Left = 634
+  Top = 60
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
-    Images = ImageList
     TabOrder = 3
     object BtnOk: TToolButton[1]
       Left = 24
       Hint = 'Aceptar|Aceptar'
       Top = 2
       ImageIndex = 1
+      OnClick = BtnOkClick
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnOkClick
     end
     object BtnCancel: TToolButton[2]
       Left = 47
       Hint = 'Cancelar|Cancelar'
       Top = 2
       ImageIndex = 2
+      OnClick = BtnCancelClick
       ParentShowHint = False
       ShowHint = True
-      OnClick = BtnCancelClick
     end
   end
   inherited pnlStatus: TPanel

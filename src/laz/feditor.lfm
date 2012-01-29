@@ -1,7 +1,7 @@
 object EditorForm: TEditorForm
-  Left = 883
+  Left = 524
   Height = 299
-  Top = 596
+  Top = 569
   Width = 479
   ActiveControl = Panel1
   Caption = 'EditorForm'
@@ -12,7 +12,7 @@ object EditorForm: TEditorForm
   OnClose = FormClose
   OnDestroy = FormDestroy
   Position = poMainFormCenter
-  LCLVersion = '0.9.30'
+  LCLVersion = '0.9.30.2'
   Visible = True
   object TlBShow: TToolBar
     Left = 0

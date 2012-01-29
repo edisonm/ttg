@@ -1,5 +1,7 @@
 inherited TimeTableClassForm: TTimeTableClassForm
+  Left = 757
   Height = 284
+  Top = 41
   ActiveControl = DBNavigator
   ClientHeight = 284
   OnClose = FormClose
@@ -7,32 +9,38 @@ inherited TimeTableClassForm: TTimeTableClassForm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
-    Images = ImageList
     inherited BtnOk: TToolButton
       Enabled = False
-      Visible = False
       OnClick = BtnOkClick
+      Visible = False
     end
     inherited BtnCancel: TToolButton
+      Left = 139
       Enabled = False
-      Visible = False
       OnClick = BtnCancelClick
+      Visible = False
     end
     object BtnIntercambiarTimeSlots: TToolButton[3]
-      Left = 301
+      Left = 347
       Hint = 'Intercambiar periodos|Intercambiar periodos'
       Top = 2
       ImageIndex = 1
+      OnClick = IntercambiarTimeSlotsClick
       ParentShowHint = False
       ShowHint = True
-      OnClick = IntercambiarTimeSlotsClick
     end
     object DBNavigator: TDBNavigator[4]
-      Left = 24
+      Left = 47
       Height = 22
       Top = 2
       Width = 92
       BevelOuter = bvNone
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsScaleChilds
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 100
       ClientHeight = 22
       ClientWidth = 92
       DataSource = DSClass
@@ -43,8 +51,8 @@ inherited TimeTableClassForm: TTimeTableClassForm
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
     end
     object cbVerClass: TComboBox[5]
-      Left = 116
-      Height = 22
+      Left = 162
+      Height = 27
       Hint = 'Ver|Seleccione el parametro a ver en el horario'
       Top = 2
       Width = 185
@@ -87,6 +95,8 @@ inherited TimeTableClassForm: TTimeTableClassForm
     Top = 25
     Width = 233
     Align = alLeft
+    Color = clWindow
+    Columns = <>
     DataSource = DSClass
     TabOrder = 4
     TitleFont.Height = -11
@@ -164,7 +174,6 @@ inherited TimeTableClassForm: TTimeTableClassForm
     }
   end
   object QuTimeTableClass: TZQuery[7]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable;IdLevel;IdSpecialization;IdGroupId'
     AutoCalcFields = False
     OnCalcFields = QuTimeTableClassCalcFields
@@ -390,7 +399,6 @@ inherited TimeTableClassForm: TTimeTableClassForm
     top = 157
   end
   object QuClass: TZQuery[9]
-    Connection = SourceDataModule.Database
     AutoCalcFields = False
     OnCalcFields = QuClassCalcFields
     ReadOnly = True

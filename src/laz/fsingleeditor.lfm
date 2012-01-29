@@ -1,10 +1,11 @@
 inherited SingleEditorForm: TSingleEditorForm
+  Left = 870
+  Top = 73
   ActiveControl = DBNavigator
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
-    Images = ImageList
     inherited BtnShow: TToolButton
       Action = ActShow
     end
@@ -21,6 +22,12 @@ inherited SingleEditorForm: TSingleEditorForm
       Top = 2
       Width = 210
       BevelOuter = bvNone
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsScaleChilds
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 100
       ClientHeight = 22
       ClientWidth = 210
       DataSource = DataSource
@@ -55,6 +62,8 @@ inherited SingleEditorForm: TSingleEditorForm
       Top = 1
       Width = 477
       Align = alClient
+      Color = clWindow
+      Columns = <>
       DataSource = DataSource
       TabOrder = 0
       TitleFont.Height = -11

@@ -1,5 +1,6 @@
 inherited MasterDetailEditorForm: TMasterDetailEditorForm
-  Top = 10
+  Left = 537
+  Top = 106
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy

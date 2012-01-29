@@ -1,7 +1,7 @@
 inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
-  Left = 572
+  Left = 502
   Height = 431
-  Top = 10
+  Top = 79
   Width = 775
   ActiveControl = DBNavigator
   ClientHeight = 431
@@ -50,11 +50,11 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
     end
     object cbVerRoomType: TComboBox[4]
       Left = 162
-      Height = 21
+      Height = 27
       Hint = 'Ver|Que ver en el horario del tipo de aula'
       Top = 2
       Width = 193
-      ItemHeight = 13
+      ItemHeight = 0
       OnChange = BtnMostrarClick
       ParentShowHint = False
       ShowHint = True
@@ -299,7 +299,6 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
     }
   end
   object QuTimeTableRoomType: TZQuery[7]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable;IdRoomType'
     AutoCalcFields = False
     OnCalcFields = QuTimeTableRoomTypeCalcFields
@@ -526,7 +525,6 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
     top = 140
   end
   object QuRoomType: TZQuery[9]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable'
     AutoCalcFields = False
     OnCalcFields = QuTimeTableRoomTypeCalcFields

@@ -1,7 +1,7 @@
 object ProgressForm: TProgressForm
-  Left = 689
+  Left = 701
   Height = 369
-  Top = 341
+  Top = 363
   Width = 465
   ActiveControl = pnlProgress
   BorderStyle = bsDialog
@@ -12,7 +12,7 @@ object ProgressForm: TProgressForm
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   Position = poDesktopCenter
-  LCLVersion = '0.9.28.2'
+  LCLVersion = '0.9.30.2'
   object pnlProgress: TPanel
     Left = 8
     Height = 320
@@ -33,10 +33,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 433
       TabOrder = 0
       object lblValorTotal: TLabel
-        Left = 420
+        Left = 419
         Height = 19
         Top = 1
-        Width = 12
+        Width = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -72,10 +72,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 129
       TabOrder = 2
       object lblCruceTeacherValor: TLabel
-        Left = 119
+        Left = 116
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -110,10 +110,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 129
       TabOrder = 4
       object lblCruceRoomTypeValor: TLabel
-        Left = 118
+        Left = 116
         Height = 19
         Top = 1
-        Width = 10
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -138,10 +138,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 5
       object lblCruceTeacher: TLabel
-        Left = 107
+        Left = 104
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -166,10 +166,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 6
       object lblCruceRoomType: TLabel
-        Left = 106
+        Left = 104
         Height = 19
         Top = 1
-        Width = 10
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -204,10 +204,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 8
       object lblHourHuecaDesubicada: TLabel
-        Left = 107
+        Left = 104
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -232,10 +232,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 129
       TabOrder = 9
       object lblHourHuecaDesubicadaValor: TLabel
-        Left = 119
+        Left = 116
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -270,10 +270,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 11
       object lblSessionCortada: TLabel
-        Left = 107
+        Left = 104
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -298,10 +298,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 129
       TabOrder = 12
       object lblSessionCortadaValor: TLabel
-        Left = 119
+        Left = 116
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -326,10 +326,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 215
       TabOrder = 13
       object lblInit: TLabel
-        Left = 211
+        Left = 213
         Height = 19
         Top = 1
-        Width = 3
+        Width = 1
         Align = alRight
         Alignment = taRightJustify
         Color = clBtnFace
@@ -353,10 +353,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 215
       TabOrder = 14
       object lblElapsedTime: TLabel
-        Left = 205
+        Left = 202
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -381,10 +381,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 215
       TabOrder = 15
       object lblRemainingTime: TLabel
-        Left = 205
+        Left = 202
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -419,10 +419,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 17
       object lblSubjectRestriction: TLabel
-        Left = 107
+        Left = 104
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -447,10 +447,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 129
       TabOrder = 18
       object lblSubjectRestrictionValor: TLabel
-        Left = 119
+        Left = 116
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -485,10 +485,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 20
       object lblTeacherRestriction: TLabel
-        Left = 107
+        Left = 104
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -513,10 +513,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 129
       TabOrder = 21
       object lblTeacherRestrictionValor: TLabel
-        Left = 119
+        Left = 116
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -551,10 +551,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 23
       object lblSubjectNoDispersa: TLabel
-        Left = 107
+        Left = 104
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -579,10 +579,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 129
       TabOrder = 24
       object lblSubjectNoDispersaValor: TLabel
-        Left = 119
+        Left = 116
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -617,10 +617,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 26
       object lblTeacherFraccionamiento: TLabel
-        Left = 106
+        Left = 104
         Height = 19
         Top = 1
-        Width = 10
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -645,10 +645,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 129
       TabOrder = 27
       object lblTeacherFraccionamientoValor: TLabel
-        Left = 118
+        Left = 116
         Height = 19
         Top = 1
-        Width = 10
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -673,10 +673,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 215
       TabOrder = 28
       object lblPosition: TLabel
-        Left = 202
+        Left = 201
         Height = 19
         Top = 1
-        Width = 12
+        Width = 13
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -806,10 +806,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 34
       object lblCruceSubject: TLabel
-        Left = 107
+        Left = 104
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -834,10 +834,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 129
       TabOrder = 35
       object lblCruceSubjectValor: TLabel
-        Left = 119
+        Left = 116
         Height = 19
         Top = 1
-        Width = 9
+        Width = 12
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '

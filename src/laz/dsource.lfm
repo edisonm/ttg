@@ -2,109 +2,25 @@ inherited SourceDataModule: TSourceDataModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 421
-  HorizontalOffset = 686
-  VerticalOffset = 34
+  HorizontalOffset = 430
+  VerticalOffset = 329
   Width = 630
   inherited DbZConnection: TZConnection
     Protocol = 'sqlite-3'
     Database = ':memory:'
+    Connected = True
     left = 528
     top = 16
-    Connected = True
-  end
-  inherited TbRoomType: TZTable
-  end
-  inherited DSRoomType: TDatasource
-    DataSet = TbRoomType
-  end
-  inherited TbSpecialization: TZTable
-  end
-  inherited DSSpecialization: TDatasource
-    DataSet = TbSpecialization
   end
   inherited TbDay: TZTable
     BeforeDelete = DataSetBeforeDelete
-  end
-  inherited DSDay: TDatasource
-    DataSet = TbDay
-  end
-  inherited TbSubject: TZTable
-  end
-  inherited DSSubject: TDatasource
-    DataSet = TbSubject
-  end
-  inherited TbLevel: TZTable
-  end
-  inherited DSLevel: TDatasource
-    DataSet = TbLevel
-  end
-  inherited TbHour: TZTable
-  end
-  inherited DSHour: TDatasource
-    DataSet = TbHour
-  end
-  inherited TbTimeTable: TZTable
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
-  end
-  inherited DSTimeTable: TDatasource
-    DataSet = TbTimeTable
-  end
-  inherited TbCourse: TZTable
-  end
-  inherited DSCourse: TDatasource
-    DataSet = TbCourse
-  end
-  inherited TbGroupId: TZTable
-  end
-  inherited DSGroupId: TDatasource
-    DataSet = TbGroupId
-  end
-  inherited TbSubjectRestrictionType: TZTable
-  end
-  inherited DSSubjectRestrictionType: TDatasource
-    DataSet = TbSubjectRestrictionType
-  end
-  inherited TbTimeSlot: TZTable
-  end
-  inherited DSTimeSlot: TDatasource
-    DataSet = TbTimeSlot
-  end
-  inherited TbClass: TZTable
-  end
-  inherited DSClass: TDatasource
-    DataSet = TbClass
-  end
-  inherited TbTeacher: TZTable
-  end
-  inherited DSTeacher: TDatasource
-    DataSet = TbTeacher
-  end
-  inherited TbSubjectRestriction: TZTable
-  end
-  inherited DSSubjectRestriction: TDatasource
-    DataSet = TbSubjectRestriction
   end
   inherited TbDistribution: TZTable
     OnCalcFields = TbDistributionCalcFields
     BeforePost = TbDistributionBeforePost
   end
-  inherited DSDistribution: TDatasource
-    DataSet = TbDistribution
-  end
-  inherited TbTimeTableDetail: TZTable
-  end
-  inherited DSTimeTableDetail: TDatasource
-    DataSet = TbTimeTableDetail
-  end
-  inherited TbTeacherRestrictionType: TZTable
-  end
-  inherited DSTeacherRestrictionType: TDatasource
-    DataSet = TbTeacherRestrictionType
-  end
-  inherited TbTeacherRestriction: TZTable
-  end
-  inherited DSTeacherRestriction: TDatasource
-    DataSet = TbTeacherRestriction
+  inherited TbTimeTable: TZTable
+    BeforePost = DataSetBeforePost
+    BeforeDelete = DataSetBeforeDelete
   end
 end

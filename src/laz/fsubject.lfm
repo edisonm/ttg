@@ -1,33 +1,25 @@
 inherited SubjectForm: TSubjectForm
-  ActiveControl = DBNavigator
+  Left = 667
+  Top = 277
   Caption = 'Materias'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
-    Images = ImageList
-    inherited BtnShow: TToolButton
-      Action = ActShow
+    inherited DBNavigator: TDBNavigator
+      Hints.Strings = (      )
     end
-    inherited BtnFind: TToolButton
-      Action = ActFind
-    end
-    object BtnSubjectRestriction: TToolButton[2]
+    object BtnSubjectRestriction: TToolButton[3]
       Left = 257
       Top = 2
       Action = ActSubjectRestriction
       ParentShowHint = False
       ShowHint = True
     end
-    inherited DBNavigator: TDBNavigator[3]
-      DataSource = DataSource
-      Hints.Strings = (      )
-    end
   end
   inherited Panel1: TPanel
     inherited DBGrid: TDBGrid
-      DataSource = DataSource
       OnDblClick = DBGridDblClick
     end
   end
@@ -138,7 +130,6 @@ inherited SubjectForm: TSubjectForm
     OnDataChange = DataSourceDataChange
   end
   inherited ActionList: TActionList
-    Images = ImageList
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
@@ -151,7 +142,6 @@ inherited SubjectForm: TSubjectForm
     end
   end
   object QuSubjectRestriction: TZQuery[6]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdSubject;IdDay;IdHour'
     AutoCalcFields = False
     SQL.Strings = (

@@ -1,19 +1,19 @@
 object SelTimeSlotForm: TSelTimeSlotForm
-  Left = 459
+  Left = 473
   Height = 123
-  Top = 297
+  Top = 315
   Width = 295
   ActiveControl = CBDay
   Caption = 'Intercambiar TimeSlot'
   ClientHeight = 123
   ClientWidth = 295
   Position = poDesktopCenter
-  LCLVersion = '0.9.28.2'
+  LCLVersion = '0.9.30.2'
   object Label1: TLabel
     Left = 16
     Height = 18
     Top = 8
-    Width = 256
+    Width = 245
     Caption = 'Seleccione el periodo a intercambiar'
     ParentColor = False
   end
@@ -21,7 +21,7 @@ object SelTimeSlotForm: TSelTimeSlotForm
     Left = 16
     Height = 18
     Top = 27
-    Width = 23
+    Width = 26
     Caption = 'Day'
     FocusControl = CBDay
     ParentColor = False
@@ -30,14 +30,14 @@ object SelTimeSlotForm: TSelTimeSlotForm
     Left = 143
     Height = 18
     Top = 27
-    Width = 35
+    Width = 34
     Caption = 'Hour'
     FocusControl = CBHour
     ParentColor = False
   end
   object CBDay: TDBLookupComboBox
     Left = 16
-    Height = 27
+    Height = 29
     Top = 48
     Width = 128
     KeyField = 'IdDay'
@@ -49,7 +49,7 @@ object SelTimeSlotForm: TSelTimeSlotForm
   end
   object CBHour: TDBLookupComboBox
     Left = 152
-    Height = 27
+    Height = 29
     Top = 48
     Width = 128
     KeyField = 'IdHour'

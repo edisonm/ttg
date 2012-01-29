@@ -1,7 +1,7 @@
 object SplashForm: TSplashForm
-  Left = 185
+  Left = 217
   Height = 155
-  Top = 223
+  Top = 242
   Width = 509
   BorderStyle = bsNone
   Caption = 'SplashForm'
@@ -11,7 +11,7 @@ object SplashForm: TSplashForm
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   Position = poScreenCenter
-  LCLVersion = '0.9.28.2'
+  LCLVersion = '0.9.30.2'
   object Image1: TImage
     Left = 0
     Height = 155
@@ -23,7 +23,7 @@ object SplashForm: TSplashForm
   end
   object lblProductName: TLabel
     Left = 88
-    Height = 22
+    Height = 24
     Top = 24
     Width = 16
     Caption = '...'
@@ -82,7 +82,7 @@ object SplashForm: TSplashForm
     Left = 88
     Height = 18
     Top = 64
-    Width = 48
+    Width = 49
     Caption = 'Version'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
@@ -93,7 +93,7 @@ object SplashForm: TSplashForm
     Left = 88
     Height = 18
     Top = 88
-    Width = 67
+    Width = 69
     Caption = 'Ejecutable'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
@@ -104,7 +104,7 @@ object SplashForm: TSplashForm
     Left = 88
     Height = 18
     Top = 112
-    Width = 46
+    Width = 48
     Caption = 'Edicion'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'

@@ -1,8 +1,8 @@
 inherited TeacherForm: TTeacherForm
-  Left = 395
+  Left = 660
   Height = 372
+  Top = 59
   Width = 598
-  ActiveControl = DBNavigator
   ClientHeight = 372
   ClientWidth = 598
   OnActivate = FormActivate
@@ -12,35 +12,23 @@ inherited TeacherForm: TTeacherForm
   OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
     Width = 598
-    Images = ImageList
-    inherited BtnShow: TToolButton
-      Action = ActShow
+    inherited DBNavigator: TDBNavigator
+      Hints.Strings = (      )
     end
-    inherited BtnFind: TToolButton
-      Action = ActFind
-    end
-    object BtnTeacherRestriction: TToolButton[2]
+    object BtnTeacherRestriction: TToolButton[3]
       Left = 257
       Top = 2
       Action = ActTeacherRestriction
       ParentShowHint = False
       ShowHint = True
     end
-    inherited DBNavigator: TDBNavigator[3]
-      DataSource = DataSource
-      Hints.Strings = (      )
-    end
   end
   inherited pnlStatus: TPanel
     Top = 353
     Width = 598
     ClientWidth = 598
-    inherited SLState: TLabel
-      Width = 2
-    end
     inherited SLRecordNo: TLabel
-      Left = 595
-      Width = 2
+      Left = 596
     end
   end
   inherited Panel1: TPanel
@@ -52,7 +40,6 @@ inherited TeacherForm: TTeacherForm
       Height = 326
       Width = 301
       Align = alLeft
-      DataSource = DataSource
       OnDblClick = DBGridDblClick
     end
     inherited Splitter1: TSplitter
@@ -71,7 +58,6 @@ inherited TeacherForm: TTeacherForm
       Top = 1
       Width = 292
       Align = alClient
-      DataSource = DataSourceDetail
       ShowHint = True
     end
   end
@@ -218,7 +204,6 @@ inherited TeacherForm: TTeacherForm
     top = 144
   end
   inherited ActionList: TActionList
-    Images = ImageList
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end

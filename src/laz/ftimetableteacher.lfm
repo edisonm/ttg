@@ -1,7 +1,7 @@
 inherited TimeTableTeacherForm: TTimeTableTeacherForm
-  Left = 619
+  Left = 622
   Height = 443
-  Top = 10
+  Top = 24
   Width = 682
   ActiveControl = DBNavigator
   ClientHeight = 443
@@ -46,11 +46,11 @@ inherited TimeTableTeacherForm: TTimeTableTeacherForm
     end
     object cbVerTeacher: TComboBox[4]
       Left = 162
-      Height = 21
+      Height = 27
       Hint = 'Ver|Que ver en el horario del profesor'
       Top = 2
       Width = 193
-      ItemHeight = 13
+      ItemHeight = 0
       OnChange = BtnMostrarClick
       ParentShowHint = False
       ShowHint = True
@@ -294,7 +294,6 @@ inherited TimeTableTeacherForm: TTimeTableTeacherForm
     }
   end
   object QuTimeTableTeacher: TZQuery[7]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable;IdTeacher'
     AutoCalcFields = False
     OnCalcFields = QuTimeTableTeacherCalcFields
@@ -521,7 +520,6 @@ inherited TimeTableTeacherForm: TTimeTableTeacherForm
     top = 145
   end
   object QuTeacher: TZQuery[9]
-    Connection = SourceDataModule.Database
     SortedFields = 'IdTimeTable;ApeTeacher;NaTeacher'
     AutoCalcFields = False
     OnCalcFields = QuTimeTableTeacherCalcFields

@@ -237,7 +237,7 @@ type
   TTTBookmark = class(TBookmark)
   private
     FIndividual: TIndividual;
-    FClasss: TDynamicIntegerArray;
+    FClasses: TDynamicIntegerArray;
     FPosition, FOffset, FTimeSlot1, FTimeSlot2: Integer;
     function GetClass: Integer;
   protected
@@ -253,7 +253,7 @@ type
     function Undo: Integer; override;
     function Eof: Boolean; override;
     property Class_: Integer read GetClass;
-    property Classs: TDynamicIntegerArray read FClasss;
+    property Classes: TDynamicIntegerArray read FClasses;
     property Offset: Integer read FOffset write FOffset;
   end;
 
@@ -1898,13 +1898,13 @@ constructor TTTBookmark.Create(AIndividual: TIndividual; AClasss: TDynamicIntege
 begin
   inherited Create;
   FIndividual := AIndividual;
-  FClasss := AClasss;
+  FClasses := AClasss;
   First;
 end;
 
 function TTTBookmark.Clone: TBookmark;
 begin
-  Result := TTTBookmark.Create(FIndividual, FClasss);
+  Result := TTTBookmark.Create(FIndividual, FClasses);
   TTTBookmark(Result).FPosition := FPosition;
   TTTBookmark(Result).FOffset := FOffset;
   TTTBookmark(Result).FTimeSlot1 := FTimeSlot1;
@@ -1916,7 +1916,7 @@ var
   Index: Integer;
 begin
   Index := (FPosition + FOffset) mod TTimeTableModel(FIndividual.Model).ClassCant;
-  Result := FClasss[Index];
+  Result := FClasses[Index];
 end;
 
 procedure TTTBookmark.First;

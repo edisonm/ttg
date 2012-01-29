@@ -365,7 +365,7 @@
       <Unit36>
         <Filename Value="uabout.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="UAbout"/>
+        <UnitName Value="uabout"/>
       </Unit36>
       <Unit37>
         <Filename Value="fmessageview.pp"/>
