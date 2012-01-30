@@ -159,7 +159,7 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 453
         TabOrder = 7
       end
-      object edtNaColegio: TEdit
+      object edtNaInstitution: TEdit
         Left = 108
         Height = 24
         Hint = 'Colegio|Nombre del colegio'

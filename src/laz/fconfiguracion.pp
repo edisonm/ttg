@@ -51,7 +51,7 @@ type
     MemComentarios: TMemo;
     lblComentarios: TLabel;
     Label17: TLabel;
-    edtNaColegio: TEdit;
+    edtNaInstitution: TEdit;
     Label15: TLabel;
     Label18: TLabel;
     tbsOpciones: TTabSheet;
@@ -168,7 +168,7 @@ procedure TConfiguracionForm.LoadFromSourceDataModule;
 begin
    with MasterDataModule.ConfigStorage do
    begin
-      edtNaColegio.Text := NaColegio;
+      edtNaInstitution.Text := NaInstitution;
       edtAnioLectivo.Text := AnioLectivo;
       edtNaAutoridad.Text := NaAutoridad;
       edtCarAutoridad.Text := CarAutoridad;
@@ -203,7 +203,7 @@ procedure TConfiguracionForm.SaveToSourceDataModule;
 begin
    with MasterDataModule.ConfigStorage do
    begin
-      NaColegio := edtNaColegio.Text;
+      NaInstitution := edtNaInstitution.Text;
       AnioLectivo := edtAnioLectivo.Text;
       NaAutoridad := edtNaAutoridad.Text;
       CarAutoridad := edtCarAutoridad.Text;

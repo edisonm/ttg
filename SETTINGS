@@ -2,8 +2,6 @@
 
 TTGSQL=dat/ttg.sql
 
-TTGSQLINC=ttgsql.inc
-
 BUILDMODES=free full
 
 ISSSRC=src/iss

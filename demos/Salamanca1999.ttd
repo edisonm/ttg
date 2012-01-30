@@ -2435,7 +2435,7 @@ TimeTableDetail
 "2";"29";"6";"3";"4";"3";"3";"637";
 "2";"29";"6";"3";"4";"4";"2";"638";
 43
-NaColegio=Colegio Nacional Mixto Nocturno Salamanca
+NaInstitution=Colegio Nacional Mixto Nocturno Salamanca
 AnioLectivo=1999-2000
 NaAutoridad=Dr. Edgar Velasco
 CarAutoridad=Rector

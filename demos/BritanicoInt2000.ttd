@@ -1366,7 +1366,7 @@ TimeTableDetail
 "2";"30";"1";"1";"2";"5";"1";"244";
 "2";"30";"1";"1";"2";"5";"2";"244";
 37
-NaColegio=Colegio Experimental Británico Internacional
+NaInstitution=Colegio Experimental Británico Internacional
 AnioLectivo=2000-2001
 NaAutoridad=Dr. Benjamín Tobar
 CarAutoridad=Rector

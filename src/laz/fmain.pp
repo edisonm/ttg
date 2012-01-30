@@ -390,7 +390,7 @@ begin
         LoadFromFile(OpenDialog.FileName);
         SaveDialog.FileName := OpenDialog.FileName;
         MainForm.Caption := Application.Title + ' - ' +
-          MasterDataModule.ConfigStorage.NaColegio;
+          MasterDataModule.ConfigStorage.NaInstitution;
       end;
     end;
   finally
@@ -657,7 +657,7 @@ begin
     if ShowConfiguracionForm(ActConfigurar.HelpContext) = mrOK then
     begin
       MainForm.Caption := Application.Title + ' - ' +
-        MasterDataModule.ConfigStorage.NaColegio;
+        MasterDataModule.ConfigStorage.NaInstitution;
       {$IFNDEF FREEWARE}
       Inc(FUpdateIndex);
       {$ENDIF}

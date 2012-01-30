@@ -15,9 +15,9 @@ type
   TTTGConfig = class(TConfigStorage)
   private
     function GetBookmarks: string;
-    function GetNaColegio: string;
+    function GetNaInstitution: string;
     procedure SetBookmarks(const AValue: string);
-    procedure SetNaColegio(const Value: string);
+    procedure SetNaInstitution(const Value: string);
     function GetAnioLectivo: string;
     procedure SetAnioLectivo(const Value: string);
     function GetNaAutoridad: string;
@@ -73,7 +73,7 @@ type
   public
     procedure SetDefaults;
     procedure InitRandom;
-    property NaColegio: string read GetNaColegio write SetNaColegio;
+    property NaInstitution: string read GetNaInstitution write SetNaInstitution;
     property AnioLectivo: string read GetAnioLectivo write SetAnioLectivo;
     property NaAutoridad: string read GetNaAutoridad write SetNaAutoridad;
     property CarAutoridad: string read GetCarAutoridad write SetCarAutoridad;
@@ -110,9 +110,9 @@ begin
   Result := Values['Bookmarks'];
 end;
 
-function TTTGConfig.GetNaColegio: string;
+function TTTGConfig.GetNaInstitution: string;
 begin
-   Result := Values['NaColegio'];
+   Result := Values['NaInstitution'];
 end;
 
 procedure TTTGConfig.SetBookmarks(const AValue: string);
@@ -120,9 +120,9 @@ begin
   Values['Bookmarks'] := AValue;
 end;
 
-procedure TTTGConfig.SetNaColegio(const Value: string);
+procedure TTTGConfig.SetNaInstitution(const Value: string);
 begin
-   Values['NaColegio'] := Value;
+   Values['NaInstitution'] := Value;
 end;
 
 function TTTGConfig.GetAnioLectivo: string;
@@ -388,7 +388,7 @@ end;
 procedure TTTGConfig.SetDefaults;
 begin
   // Default configuration
-  NaColegio := '';
+  NaInstitution := '';
   AnioLectivo := '';
   NaAutoridad := '';
   CarAutoridad := '';
