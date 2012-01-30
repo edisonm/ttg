@@ -510,7 +510,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
     object QuTimeTableRoomTypeName: TStringField
       DisplayWidth = 40
       FieldKind = fkCalculated
-      FieldName = 'Nombre'
+      FieldName = 'Name'
       Index = 12
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

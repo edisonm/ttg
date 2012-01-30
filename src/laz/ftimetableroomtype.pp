@@ -82,7 +82,7 @@ begin
       QuRoomType.FindField('AbRoomType').AsString]);
     FName := StringsShowRoomType.Values[cbVerRoomType.Text];
     ShowEditor(TbDay, TbHour, QuTimeTableRoomType, TbTimeSlot, 'IdDay', 'NaDay',
-      'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Nombre');
+      'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
   end;
 end;
 

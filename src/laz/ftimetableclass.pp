@@ -65,7 +65,7 @@ type
     procedure QuClassCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
-    FNombre: string;
+    FName: string;
     function GetIdDay: Integer;
     function GetIdHour: Integer;
   public
@@ -101,10 +101,10 @@ begin
     QuClass.FindField('AbLevel').AsString,
     QuClass.FindField('AbSpecialization').AsString,
     QuClass.FindField('NaGroupId').AsString]);
-  FNombre := MasterDataModule.StringsShowClass.Values[cbVerClass.Text];
+  FName := MasterDataModule.StringsShowClass.Values[cbVerClass.Text];
   with SourceDataModule do
     ShowEditor(TbDay, TbHour, QuTimeTableClass, TbTimeSlot, 'IdDay', 'NaDay',
-      'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Nombre');
+      'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
 end;
 
 procedure TTimeTableClassForm.BtnCancelClick(Sender: TObject);
@@ -190,8 +190,8 @@ end;
 procedure TTimeTableClassForm.QuTimeTableClassCalcFields(DataSet: TDataSet);
 begin
   inherited;
-  if FNombre <> '' then
-    DataSet['Nombre'] := VarArrToStr(DataSet[FNombre], ' ');
+  if FName <> '' then
+    DataSet['Name'] := VarArrToStr(DataSet[FName], ' ');
 end;
 
 procedure TTimeTableClassForm.QuClassCalcFields(DataSet: TDataSet);
