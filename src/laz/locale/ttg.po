@@ -1047,11 +1047,11 @@ msgid "IdTimeTable"
 msgstr ""
 
 #: TTIMETABLEFORM.DBGRID.COLUMNS[1].TCOLUMNTITLE.CAPTION
-msgid "TimeIni"
+msgid "Inicio"
 msgstr ""
 
 #: TTIMETABLEFORM.DBGRID.COLUMNS[2].TCOLUMNTITLE.CAPTION
-msgid "TimeEnd"
+msgid "Final"
 msgstr ""
 
 #: TTIMETABLEFORM.TIMETABLEFORM.CAPTION

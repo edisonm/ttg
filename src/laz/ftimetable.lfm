@@ -121,14 +121,14 @@ inherited TimeTableForm: TTimeTableForm
         item
           PickList.Strings = (          )
           ReadOnly = True
-          Title.Caption = 'TimeIni'
+          Title.Caption = 'Inicio'
           Width = 110
           FieldName = 'TimeIni'
         end      
         item
           PickList.Strings = (          )
           ReadOnly = True
-          Title.Caption = 'TimeEnd'
+          Title.Caption = 'Final'
           Width = 110
           FieldName = 'TimeEnd'
         end>

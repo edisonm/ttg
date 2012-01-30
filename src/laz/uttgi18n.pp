@@ -30,6 +30,6 @@ begin
 end;
  
 initialization
-  {$I ttg.lrs}
-  TranslateUnitResourceStrings;
+  {.$I ttg.lrs}
+  //TranslateUnitResourceStrings;
 end.
