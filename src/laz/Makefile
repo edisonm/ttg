@@ -23,8 +23,8 @@ endif
 %.lrs: %.lfm $(LRSDEP)
 	$(LAZRES) $@ $<
 
-# ttg.lrs: locale/ttg.es.po
-# 	$(LAZRES) $@ $<
+ttg.lrs: locale/ttg.es.po
+	$(LAZRES) $@ $<
 
 ttgsql.lrs: $(TTGSQL)
 	$(LAZRES) $@ $<
@@ -35,7 +35,7 @@ $(ABOUT).pp: $(ABOUT).pp.tmpl
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-$(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs # ttg.lrs
+$(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi ; strip --strip-all $(TTGEXE)
 
 ifeq ($(shell uname -o),Cygwin)
