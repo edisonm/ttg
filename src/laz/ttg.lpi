@@ -112,7 +112,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="40">
+    <Units Count="39">
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -376,14 +376,10 @@
         <UnitName Value="FMessageView"/>
       </Unit37>
       <Unit38>
-        <Filename Value="locale/ttg.es.po"/>
-        <IsPartOfProject Value="True"/>
-      </Unit38>
-      <Unit39>
         <Filename Value="uttgi18n.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uttgi18n"/>
-      </Unit39>
+      </Unit38>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
