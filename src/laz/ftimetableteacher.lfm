@@ -1,7 +1,7 @@
 inherited TimeTableTeacherForm: TTimeTableTeacherForm
-  Left = 622
+  Left = 619
   Height = 443
-  Top = 24
+  Top = 200
   Width = 682
   ActiveControl = DBNavigator
   ClientHeight = 443
@@ -46,11 +46,11 @@ inherited TimeTableTeacherForm: TTimeTableTeacherForm
     end
     object cbVerTeacher: TComboBox[4]
       Left = 162
-      Height = 27
+      Height = 21
       Hint = 'Ver|Que ver en el horario del profesor'
       Top = 2
       Width = 193
-      ItemHeight = 0
+      ItemHeight = 13
       OnChange = BtnMostrarClick
       ParentShowHint = False
       ShowHint = True

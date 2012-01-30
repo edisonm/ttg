@@ -1,7 +1,7 @@
 inherited TimeTableForm: TTimeTableForm
-  Left = 622
+  Left = 621
   Height = 440
-  Top = 59
+  Top = 100
   Width = 677
   Caption = 'TimeTableForm'
   ClientHeight = 440

@@ -71,7 +71,7 @@ begin
       QuTeacher.FindField('NaTeacher').AsString]);
     FName := MasterDataModule.StringsShowTeacher.Values[cbVerTeacher.Text];
     ShowEditor(TbDay, TbHour, QuTimeTableTeacher, TbTimeSlot, 'IdDay', 'NaDay',
-      'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Nombre');
+      'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
   end;
 end;
 
