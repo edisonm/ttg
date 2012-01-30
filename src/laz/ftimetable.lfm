@@ -597,7 +597,7 @@ inherited TimeTableForm: TTimeTableForm
       '  RoomType.IdRoomType,'
       '  RoomType.AbRoomType,'
       '  COUNT(*) AS Usadas,'
-      '  COUNT(*) - RoomType.Number AS Cruces'
+      '  COUNT(*) - RoomType.Number AS Clashes'
       'FROM'
       '  (TimeTableDetail INNER JOIN Distribution ON'
       '        TimeTableDetail.IdSubject=Distribution.IdSubject'
@@ -613,7 +613,7 @@ inherited TimeTableForm: TTimeTableForm
       '  IdHour,'
       '  RoomType.IdRoomType,'
       '  RoomType.AbRoomType'
-      'HAVING Cruces > 0'
+      'HAVING Clashes > 0'
       'ORDER BY IdDay, IdHour, RoomType.AbRoomType'
     )
     Params = <    
@@ -703,7 +703,7 @@ inherited TimeTableForm: TTimeTableForm
     object QuClashRoomClashes: TStringField
       DisplayWidth = 20
       FieldKind = fkData
-      FieldName = 'Cruces'
+      FieldName = 'Clashes'
       Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1227,7 +1227,7 @@ inherited TimeTableForm: TTimeTableForm
       '  TimeTableDetail.IdHour,'
       '  Teacher.LnTeacher,'
       '  Teacher.NaTeacher,'
-      '  Count(*) - 1 AS Cruces'
+      '  Count(*) - 1 AS Clashes'
       'FROM (Distribution'
       '  INNER JOIN TimeTableDetail ON'
       '       (Distribution.IdSubject = TimeTableDetail.IdSubject)'
@@ -1243,7 +1243,7 @@ inherited TimeTableForm: TTimeTableForm
       '  Teacher.NaTeacher,'
       '  TimeTableDetail.IdDay,'
       '  TimeTableDetail.IdHour'
-      'HAVING Cruces > 0'
+      'HAVING Clashes > 0'
       'ORDER BY TimeTableDetail.IdTimeTable, Teacher.LnTeacher, Teacher.NaTeacher'
     )
     Params = <    
@@ -1366,10 +1366,10 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuClashTeacherCruces: TStringField
+    object QuClashTeacherClashes: TStringField
       DisplayWidth = 5
       FieldKind = fkData
-      FieldName = 'Cruces'
+      FieldName = 'Clashes'
       Index = 8
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

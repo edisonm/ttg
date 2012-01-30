@@ -158,7 +158,7 @@ type
     QuClashRoomAbRoomType: TStringField;
     QuClashTeacherLnTeacher: TStringField;
     QuClashTeacherNaTeacher: TStringField;
-    QuClashTeacherCruces: TStringField;
+    QuClashTeacherClashes: TStringField;
     QuClashRoomDetalleIdTimeTable: TLongintField;
     QuClashRoomDetalleIdRoomType: TLongintField;
     QuClashRoomDetalleIdDay: TLongintField;
