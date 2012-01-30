@@ -541,7 +541,7 @@ object ConfiguracionForm: TConfiguracionForm
         Caption = 'Cruce materias:'
         ParentColor = False
       end
-      object creCruceTeacher: TEdit
+      object creClashTeacher: TEdit
         Left = 117
         Height = 21
         Top = 8
@@ -549,7 +549,7 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 0
       end
-      object creCruceRoomType: TEdit
+      object creClashRoomType: TEdit
         Left = 117
         Height = 21
         Top = 56
@@ -685,7 +685,7 @@ object ConfiguracionForm: TConfiguracionForm
         OnExit = CBColTeacherRestrictionTypeExit
         TabOrder = 12
       end
-      object creCruceSubject: TEdit
+      object creClashSubject: TEdit
         Left = 117
         Height = 21
         Top = 32

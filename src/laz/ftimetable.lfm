@@ -38,24 +38,24 @@ inherited TimeTableForm: TTimeTableForm
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnCruceTeacher: TToolButton[6]
+    object BtnClashTeacher: TToolButton[6]
       Left = 270
       Top = 2
-      Action = ActCruceTeacher
+      Action = ActClashTeacher
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnCruceSubject: TToolButton[7]
+    object BtnClashSubject: TToolButton[7]
       Left = 293
       Top = 2
-      Action = ActCruceSubject
+      Action = ActClashSubject
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnCruceAula: TToolButton[8]
+    object BtnClashRoom: TToolButton[8]
       Left = 316
       Top = 2
-      Action = ActCruceAula
+      Action = ActClashAula
       ParentShowHint = False
       ShowHint = True
     end
@@ -520,26 +520,26 @@ inherited TimeTableForm: TTimeTableForm
       ImageIndex = 3
       OnExecute = ActTimeTableTeacherExecute
     end
-    object ActCruceTeacher: TAction[4]
+    object ActClashTeacher: TAction[4]
       AutoCheck = True
       Caption = 'Cruce de profesores'
       Hint = 'Cruce de profesores|Cruce de profesores'
       ImageIndex = 4
-      OnExecute = ActCruceTeacherExecute
+      OnExecute = ActClashTeacherExecute
     end
-    object ActCruceSubject: TAction[5]
+    object ActClashSubject: TAction[5]
       AutoCheck = True
       Caption = 'Cruce de materias'
       Hint = 'Cruce de materias|Cruce de materias'
       ImageIndex = 5
-      OnExecute = ActCruceSubjectExecute
+      OnExecute = ActClashSubjectExecute
     end
-    object ActCruceAula: TAction[6]
+    object ActClashAula: TAction[6]
       AutoCheck = True
       Caption = 'Cruce de aulas'
       Hint = 'Cruce de aulas|Cruce de aulas del mismo tipo'
       ImageIndex = 6
-      OnExecute = ActCruceAulaExecute
+      OnExecute = ActClashAulaExecute
     end
     object ActSubjectRestrictionNoRespetada: TAction[7]
       AutoCheck = True
@@ -584,7 +584,7 @@ inherited TimeTableForm: TTimeTableForm
       OnExecute = ActMejorarTimeTableExecute
     end
   end
-  object QuCruceAula: TZQuery[6]
+  object QuClashRoom: TZQuery[6]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable'
     AutoCalcFields = False
@@ -635,7 +635,7 @@ inherited TimeTableForm: TTimeTableForm
         Name = 'IdTimeTable'
         ParamType = ptUnknown
       end>
-    object QuCruceAulaIdTimeTable: TLongintField
+    object QuClashRoomIdTimeTable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimeTable'
@@ -646,7 +646,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceAulaIdRoomType: TLongintField
+    object QuClashRoomIdRoomType: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdRoomType'
@@ -657,7 +657,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceAulaIdDay: TLongintField
+    object QuClashRoomIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -668,7 +668,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceAulaIdHour: TLongintField
+    object QuClashRoomIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -679,7 +679,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceAulaAbRoomType: TStringField
+    object QuClashRoomAbRoomType: TStringField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'AbRoomType'
@@ -690,7 +690,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuCruceAulaUsadas: TStringField
+    object QuClashRoomUsadas: TStringField
       DisplayWidth = 20
       FieldKind = fkData
       FieldName = 'Usadas'
@@ -700,7 +700,7 @@ inherited TimeTableForm: TTimeTableForm
       ReadOnly = True
       Required = False
     end
-    object QuCruceAulaCruces: TStringField
+    object QuClashRoomClashes: TStringField
       DisplayWidth = 20
       FieldKind = fkData
       FieldName = 'Cruces'
@@ -710,7 +710,7 @@ inherited TimeTableForm: TTimeTableForm
       ReadOnly = True
       Required = False
     end
-    object QuCruceAulaNumber: TLongintField
+    object QuClashRoomNumber: TLongintField
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'Number'
@@ -725,7 +725,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceAulaNaDay: TStringField
+    object QuClashRoomNaDay: TStringField
       DisplayLabel = 'Day'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -741,7 +741,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuCruceAulaNaHour: TStringField
+    object QuClashRoomNaHour: TStringField
       DisplayLabel = 'Hour'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -758,7 +758,7 @@ inherited TimeTableForm: TTimeTableForm
       Size = 10
     end
   end
-  object QuCruceAulaDetalle: TZQuery[7]
+  object QuClashRoomDetalle: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;IdRoomType;IdDay;IdHour'
     AutoCalcFields = False
@@ -811,9 +811,9 @@ inherited TimeTableForm: TTimeTableForm
         Name = 'IdRoomType'
         ParamType = ptUnknown
       end>
-    DataSource = DSCruceAula
+    DataSource = DSClashRoom
     MasterFields = 'IdTimeTable;IdRoomType;IdDay;IdHour'
-    MasterSource = DSCruceAula
+    MasterSource = DSClashRoom
     LinkedFields = 'IdTimeTable;IdRoomType;IdDay;IdHour'
     IndexFieldNames = 'IdTimeTable Asc;IdRoomType Asc;IdDay Asc;IdHour Asc'
     left = 314
@@ -839,7 +839,7 @@ inherited TimeTableForm: TTimeTableForm
         Name = 'IdRoomType'
         ParamType = ptUnknown
       end>
-    object QuCruceAulaDetalleIdTimeTable: TLongintField
+    object QuClashRoomDetalleIdTimeTable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimeTable'
@@ -850,7 +850,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceAulaDetalleIdRoomType: TLongintField
+    object QuClashRoomDetalleIdRoomType: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdRoomType'
@@ -861,7 +861,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceAulaDetalleIdDay: TLongintField
+    object QuClashRoomDetalleIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -872,7 +872,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceAulaDetalleIdHour: TLongintField
+    object QuClashRoomDetalleIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -883,7 +883,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceAulaDetalleIdLevel: TLongintField
+    object QuClashRoomDetalleIdLevel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdLevel'
@@ -894,7 +894,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceAulaDetalleIdSpecialization: TLongintField
+    object QuClashRoomDetalleIdSpecialization: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSpecialization'
@@ -905,7 +905,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceAulaDetalleIdGroupId: TLongintField
+    object QuClashRoomDetalleIdGroupId: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdGroupId'
@@ -916,7 +916,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceAulaDetalleNaSubject: TStringField
+    object QuClashRoomDetalleNaSubject: TStringField
       DisplayLabel = 'Subject'
       DisplayWidth = 20
       FieldKind = fkData
@@ -927,7 +927,7 @@ inherited TimeTableForm: TTimeTableForm
       ReadOnly = False
       Required = False
     end
-    object QuCruceAulaDetalleAbLevel: TStringField
+    object QuClashRoomDetalleAbLevel: TStringField
       DisplayLabel = 'Level'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -943,7 +943,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Size = 5
     end
-    object QuCruceAulaDetalleAbSpecialization: TStringField
+    object QuClashRoomDetalleAbSpecialization: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -959,7 +959,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuCruceAulaDetalleNaGroupId: TStringField
+    object QuClashRoomDetalleNaGroupId: TStringField
       DisplayLabel = 'Par.'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -976,12 +976,12 @@ inherited TimeTableForm: TTimeTableForm
       Size = 5
     end
   end
-  object DSCruceAula: TDatasource[8]
-    DataSet = QuCruceAula
+  object DSClashRoom: TDatasource[8]
+    DataSet = QuClashRoom
     left = 313
     top = 112
   end
-  object QuCruceTeacherDetalle: TZQuery[9]
+  object QuClashTeacherDetalle: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;IdTeacher;IdDay;IdHour;IdLevel;IdSpecialization;IdGroupId;NaSubject'
     AutoCalcFields = False
@@ -1028,9 +1028,9 @@ inherited TimeTableForm: TTimeTableForm
         Name = 'IdHour'
         ParamType = ptUnknown
       end>
-    DataSource = DSCruceTeacher
+    DataSource = DSClashTeacher
     MasterFields = 'IdTimeTable;IdTeacher;IdDay;IdHour'
-    MasterSource = DSCruceTeacher
+    MasterSource = DSClashTeacher
     LinkedFields = 'IdTimeTable;IdTeacher;IdDay;IdHour'
     IndexFieldNames = 'IdTimeTable Asc;IdTeacher Asc;IdDay Asc;IdHour Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc;NaSubject Asc'
     left = 423
@@ -1056,7 +1056,7 @@ inherited TimeTableForm: TTimeTableForm
         Name = 'IdHour'
         ParamType = ptUnknown
       end>
-    object QuCruceTeacherDetalleIdTimeTable: TLongintField
+    object QuClashTeacherDetalleIdTimeTable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimeTable'
@@ -1067,7 +1067,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceTeacherDetalleIdTeacher: TLongintField
+    object QuClashTeacherDetalleIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTeacher'
@@ -1078,7 +1078,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Visible = False
     end
-    object QuCruceTeacherDetalleIdDay: TLongintField
+    object QuClashTeacherDetalleIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -1089,7 +1089,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceTeacherDetalleIdHour: TLongintField
+    object QuClashTeacherDetalleIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -1100,7 +1100,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceTeacherDetalleIdLevel: TLongintField
+    object QuClashTeacherDetalleIdLevel: TLongintField
       DisplayLabel = 'Level'
       DisplayWidth = 10
       FieldKind = fkData
@@ -1112,7 +1112,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Visible = False
     end
-    object QuCruceTeacherDetalleIdSpecialization: TLongintField
+    object QuClashTeacherDetalleIdSpecialization: TLongintField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkData
@@ -1124,7 +1124,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Visible = False
     end
-    object QuCruceTeacherDetalleIdGroupId: TLongintField
+    object QuClashTeacherDetalleIdGroupId: TLongintField
       DisplayLabel = 'Tipo de paralelo'
       DisplayWidth = 10
       FieldKind = fkData
@@ -1136,7 +1136,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Visible = False
     end
-    object QuCruceTeacherDetalleIdSubject: TLongintField
+    object QuClashTeacherDetalleIdSubject: TLongintField
       DisplayLabel = 'Subject'
       DisplayWidth = 10
       FieldKind = fkData
@@ -1148,7 +1148,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Visible = False
     end
-    object QuCruceTeacherDetalleAbLevel: TStringField
+    object QuClashTeacherDetalleAbLevel: TStringField
       DisplayLabel = 'Level'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1164,7 +1164,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Size = 5
     end
-    object QuCruceTeacherDetalleAbSpecialization: TStringField
+    object QuClashTeacherDetalleAbSpecialization: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1180,7 +1180,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuCruceTeacherDetalleNaGroupId: TStringField
+    object QuClashTeacherDetalleNaGroupId: TStringField
       DisplayLabel = 'Par.'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1196,7 +1196,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Size = 5
     end
-    object QuCruceTeacherDetalleNaSubject: TStringField
+    object QuClashTeacherDetalleNaSubject: TStringField
       DisplayLabel = 'Subject'
       DisplayWidth = 15
       FieldKind = fkLookup
@@ -1213,11 +1213,11 @@ inherited TimeTableForm: TTimeTableForm
       Size = 15
     end
   end
-  object QuCruceTeacher: TZQuery[10]
+  object QuClashTeacher: TZQuery[10]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;LnTeacher;NaTeacher'
     AutoCalcFields = False
-    AfterScroll = QuCruceTeacherAfterScroll
+    AfterScroll = QuClashTeacherAfterScroll
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
@@ -1265,7 +1265,7 @@ inherited TimeTableForm: TTimeTableForm
         Name = 'IdTimeTable'
         ParamType = ptUnknown
       end>
-    object QuCruceTeacherIdTimeTable: TLongintField
+    object QuClashTeacherIdTimeTable: TLongintField
       DisplayLabel = 'TimeTable'
       DisplayWidth = 10
       FieldKind = fkData
@@ -1277,7 +1277,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Visible = False
     end
-    object QuCruceTeacherIdTeacher: TLongintField
+    object QuClashTeacherIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTeacher'
@@ -1288,7 +1288,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceTeacherIdHour: TLongintField
+    object QuClashTeacherIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -1299,7 +1299,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceTeacherIdDay: TLongintField
+    object QuClashTeacherIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -1310,7 +1310,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceTeacherLnTeacher: TStringField
+    object QuClashTeacherLnTeacher: TStringField
       DisplayLabel = 'Apellido'
       DisplayWidth = 15
       FieldKind = fkData
@@ -1322,7 +1322,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 15
     end
-    object QuCruceTeacherNaTeacher: TStringField
+    object QuClashTeacherNaTeacher: TStringField
       DisplayLabel = 'Name'
       DisplayWidth = 15
       FieldKind = fkData
@@ -1334,7 +1334,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 15
     end
-    object QuCruceTeacherNaHour: TStringField
+    object QuClashTeacherNaHour: TStringField
       DisplayLabel = 'Hour'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1350,7 +1350,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuCruceTeacherNaDay: TStringField
+    object QuClashTeacherNaDay: TStringField
       DisplayLabel = 'Day'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1366,7 +1366,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuCruceTeacherCruces: TStringField
+    object QuClashTeacherCruces: TStringField
       DisplayWidth = 5
       FieldKind = fkData
       FieldName = 'Cruces'
@@ -1378,11 +1378,11 @@ inherited TimeTableForm: TTimeTableForm
       Size = 5
     end
   end
-  object QuCruceSubject: TZQuery[11]
+  object QuClashSubject: TZQuery[11]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;NaSubject'
     AutoCalcFields = False
-    AfterScroll = QuCruceSubjectAfterScroll
+    AfterScroll = QuClashSubjectAfterScroll
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
@@ -1423,7 +1423,7 @@ inherited TimeTableForm: TTimeTableForm
         Name = 'IdTimeTable'
         ParamType = ptUnknown
       end>
-    object QuCruceSubjectIdTimeTable: TLongintField
+    object QuClashSubjectIdTimeTable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimeTable'
@@ -1434,7 +1434,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceSubjectIdSubject: TLongintField
+    object QuClashSubjectIdSubject: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSubject'
@@ -1445,7 +1445,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Visible = False
     end
-    object QuCruceSubjectNaSubject: TStringField
+    object QuClashSubjectNaSubject: TStringField
       DisplayLabel = 'Subject'
       DisplayWidth = 20
       FieldKind = fkData
@@ -1457,7 +1457,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
     end
   end
-  object QuCruceSubjectDetalle: TZQuery[12]
+  object QuClashSubjectDetalle: TZQuery[12]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
     AutoCalcFields = False
@@ -1495,9 +1495,9 @@ inherited TimeTableForm: TTimeTableForm
         Name = 'IdSubject'
         ParamType = ptUnknown
       end>
-    DataSource = DSCruceSubject
+    DataSource = DSClashSubject
     MasterFields = 'IdTimeTable;IdSubject'
-    MasterSource = DSCruceSubject
+    MasterSource = DSClashSubject
     LinkedFields = 'IdTimeTable;IdSubject'
     IndexFieldNames = 'IdTimeTable Asc;IdSubject Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc;IdDay Asc;IdHour Asc'
     left = 541
@@ -1513,7 +1513,7 @@ inherited TimeTableForm: TTimeTableForm
         Name = 'IdSubject'
         ParamType = ptUnknown
       end>
-    object QuCruceSubjectDetalleIdTimeTable: TLongintField
+    object QuClashSubjectDetalleIdTimeTable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimeTable'
@@ -1524,7 +1524,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceSubjectDetalleIdSubject: TLongintField
+    object QuClashSubjectDetalleIdSubject: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSubject'
@@ -1535,7 +1535,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Visible = False
     end
-    object QuCruceSubjectDetalleIdLevel: TLongintField
+    object QuClashSubjectDetalleIdLevel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdLevel'
@@ -1546,7 +1546,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceSubjectDetalleIdSpecialization: TLongintField
+    object QuClashSubjectDetalleIdSpecialization: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSpecialization'
@@ -1557,7 +1557,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceSubjectDetalleIdGroupId: TLongintField
+    object QuClashSubjectDetalleIdGroupId: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdGroupId'
@@ -1568,7 +1568,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceSubjectDetalleIdDay: TLongintField
+    object QuClashSubjectDetalleIdDay: TLongintField
       DisplayLabel = 'Day'
       DisplayWidth = 10
       FieldKind = fkData
@@ -1580,7 +1580,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Visible = False
     end
-    object QuCruceSubjectDetalleIdHour: TLongintField
+    object QuClashSubjectDetalleIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -1591,7 +1591,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Visible = False
     end
-    object QuCruceSubjectDetalleAbLevel: TStringField
+    object QuClashSubjectDetalleAbLevel: TStringField
       DisplayLabel = 'Level'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1607,7 +1607,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Size = 5
     end
-    object QuCruceSubjectDetalleAbSpecialization: TStringField
+    object QuClashSubjectDetalleAbSpecialization: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1623,7 +1623,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuCruceSubjectDetalleNaGroupId: TStringField
+    object QuClashSubjectDetalleNaGroupId: TStringField
       DisplayLabel = 'Par.'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1639,7 +1639,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Size = 5
     end
-    object QuCruceSubjectDetalleNaDay: TStringField
+    object QuClashSubjectDetalleNaDay: TStringField
       DisplayLabel = 'Day'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1655,7 +1655,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuCruceSubjectDetalleNaHour: TStringField
+    object QuClashSubjectDetalleNaHour: TStringField
       DisplayLabel = 'Hour'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -2159,7 +2159,7 @@ inherited TimeTableForm: TTimeTableForm
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimeTable;NaSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
     AutoCalcFields = False
-    AfterScroll = QuCruceSubjectAfterScroll
+    AfterScroll = QuClashSubjectAfterScroll
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
@@ -2778,13 +2778,13 @@ inherited TimeTableForm: TTimeTableForm
     left = 185
     top = 113
   end
-  object DSCruceTeacher: TDatasource[19]
-    DataSet = QuCruceTeacher
+  object DSClashTeacher: TDatasource[19]
+    DataSet = QuClashTeacher
     left = 424
     top = 112
   end
-  object DSCruceSubject: TDatasource[20]
-    DataSet = QuCruceSubject
+  object DSClashSubject: TDatasource[20]
+    DataSet = QuClashSubject
     left = 540
     top = 112
   end

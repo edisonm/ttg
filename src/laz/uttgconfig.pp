@@ -38,14 +38,14 @@ type
     procedure SetSeed(Value: Integer);
     function GetRefreshInterval: Integer;
     procedure SetRefreshInterval(Value: Integer);
-    function GetCruceTeacher: Integer;
-    procedure SetCruceTeacher(Value: Integer);
-    function GetCruceSubject: Integer;
-    procedure SetCruceSubject(Value: Integer);
+    function GetClashTeacher: Integer;
+    procedure SetClashTeacher(Value: Integer);
+    function GetClashSubject: Integer;
+    procedure SetClashSubject(Value: Integer);
     function GetTeacherFraccionamiento: Integer;
     procedure SetTeacherFraccionamiento(Value: Integer);
-    function GetCruceRoomType: Integer;
-    procedure SetCruceRoomType(Value: Integer);
+    function GetClashRoomType: Integer;
+    procedure SetClashRoomType(Value: Integer);
     function GetHourHuecaDesubicada: Integer;
     procedure SetHourHuecaDesubicada(Value: Integer);
     function GetSessionCortada: Integer;
@@ -84,10 +84,10 @@ type
     property Randomize: Boolean read GetRandomize write SetRandomize;
     property Seed: Integer read GetSeed write SetSeed;
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
-    property CruceTeacher: Integer read GetCruceTeacher write SetCruceTeacher;
-    property CruceSubject: Integer read GetCruceSubject write SetCruceSubject;
+    property ClashTeacher: Integer read GetClashTeacher write SetClashTeacher;
+    property ClashSubject: Integer read GetClashSubject write SetClashSubject;
     property TeacherFraccionamiento: Integer read GetTeacherFraccionamiento write SetTeacherFraccionamiento;
-    property CruceRoomType: Integer read GetCruceRoomType write SetCruceRoomType;
+    property ClashRoomType: Integer read GetClashRoomType write SetClashRoomType;
     property HourHuecaDesubicada: Integer read GetHourHuecaDesubicada write SetHourHuecaDesubicada;
     property SessionCortada: Integer read GetSessionCortada write SetSessionCortada;
     property SubjectNoDispersa: Integer read GetSubjectNoDispersa write SetSubjectNoDispersa;
@@ -225,24 +225,24 @@ begin
   Integers['NumIteraciones'] := Value;
 end;
 
-function TTTGConfig.GetCruceTeacher: Integer;
+function TTTGConfig.GetClashTeacher: Integer;
 begin
-  Result := Integers['CruceTeacher'];
+  Result := Integers['ClashTeacher'];
 end;
 
-procedure TTTGConfig.SetCruceTeacher(Value: Integer);
+procedure TTTGConfig.SetClashTeacher(Value: Integer);
 begin
-  Integers['CruceTeacher'] := Value;
+  Integers['ClashTeacher'] := Value;
 end;
 
-function TTTGConfig.GetCruceSubject: Integer;
+function TTTGConfig.GetClashSubject: Integer;
 begin
-  Result := Integers['CruceSubject'];
+  Result := Integers['ClashSubject'];
 end;
 
-procedure TTTGConfig.SetCruceSubject(Value: Integer);
+procedure TTTGConfig.SetClashSubject(Value: Integer);
 begin
-  Integers['CruceSubject'] := Value;
+  Integers['ClashSubject'] := Value;
 end;
 
 function TTTGConfig.GetTeacherFraccionamiento: Integer;
@@ -255,14 +255,14 @@ begin
   Integers['TeacherFraccionamiento'] := Value;
 end;
 
-function TTTGConfig.GetCruceRoomType: Integer;
+function TTTGConfig.GetClashRoomType: Integer;
 begin
-  Result := Integers['CruceRoomType'];
+  Result := Integers['ClashRoomType'];
 end;
 
-procedure TTTGConfig.SetCruceRoomType(Value: Integer);
+procedure TTTGConfig.SetClashRoomType(Value: Integer);
 begin
-  Integers['CruceRoomType'] := Value;
+  Integers['ClashRoomType'] := Value;
 end;
 
 function TTTGConfig.GetHourHuecaDesubicada: Integer;
@@ -399,10 +399,10 @@ begin
   Randomize := True;
   Self.Seed := 1;
   RefreshInterval := 1;
-  CruceTeacher := 200;
-  CruceSubject := 200;
+  ClashTeacher := 200;
+  ClashSubject := 200;
   TeacherFraccionamiento := 50;
-  CruceRoomType := 200;
+  ClashRoomType := 200;
   HourHuecaDesubicada := 100;
   SessionCortada := 150;
   SubjectNoDispersa := 5;

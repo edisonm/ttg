@@ -17,7 +17,7 @@ type
   TConfiguracionForm = class(TForm)
     bbtnOk: TBitBtn;
     CBApplyDoubleDownHill: TCheckBox;
-    creCruceSubject: TEdit;
+    creClashSubject: TEdit;
     creProbCruzamiento: TEdit;
     creMutationProb: TEdit;
     creProbReparacion: TEdit;
@@ -40,8 +40,8 @@ type
     Label3: TLabel;
     Label5: TLabel;
     Label6: TLabel;
-    creCruceTeacher: TEdit;
-    creCruceRoomType: TEdit;
+    creClashTeacher: TEdit;
+    creClashRoomType: TEdit;
     creHourHueca: TEdit;
     creSessionCortada: TEdit;
     creSubjectNoDispersa: TEdit;
@@ -179,9 +179,9 @@ begin
       CBRandomize.Checked := Randomize;
       speSeed.Value := Seed;
       speNumIteraciones.Value := RefreshInterval;
-      creCruceTeacher.Text := FloatToStr(CruceTeacher);
-      creCruceSubject.Text := FloatToStr(CruceSubject);
-      creCruceRoomType.Text := FloatToStr(CruceRoomType);
+      creClashTeacher.Text := FloatToStr(ClashTeacher);
+      creClashSubject.Text := FloatToStr(ClashSubject);
+      creClashRoomType.Text := FloatToStr(ClashRoomType);
       creTeacherFraccionamiento.Text := FloatToStr(TeacherFraccionamiento);
       creHourHueca.Text := FloatToStr(HourHuecaDesubicada);
       creSessionCortada.Text := FloatToStr(SessionCortada);
@@ -214,9 +214,9 @@ begin
       Randomize := CBRandomize.Checked;
       Seed := speSeed.Value;
       RefreshInterval := speNumIteraciones.Value;
-      CruceTeacher := StrToInt(creCruceTeacher.Text);
-      CruceSubject := StrToInt(creCruceSubject.Text);
-      CruceRoomType := StrToInt(creCruceRoomType.Text);
+      ClashTeacher := StrToInt(creClashTeacher.Text);
+      ClashSubject := StrToInt(creClashSubject.Text);
+      ClashRoomType := StrToInt(creClashRoomType.Text);
       TeacherFraccionamiento := StrToInt(creTeacherFraccionamiento.Text);
       HourHuecaDesubicada := StrToInt(creHourHueca.Text);
       SessionCortada := StrToInt(creSessionCortada.Text);

@@ -41,7 +41,7 @@ type
 
   TTimeTableModel = class(TModel)
   private
-    FCruceTeacherValor, FCruceSubjectValor, FCruceRoomTypeValor,
+    FClashTeacherValor, FClashSubjectValor, FClashRoomTypeValor,
       FHourHuecaDesubicadaValor, FSessionCortadaValor,
       FTeacherFraccionamientoValor, FSubjectNoDispersaValor: Integer;
     FTimeSlotADay, FTimeSlotAHour, FDayAMaxTimeSlot, FSessionADistribution,
@@ -77,21 +77,21 @@ type
     property TimeTableDetailPattern: TDynamicIntegerArrayArray read FTimeTableDetailPattern;
     class function GetElitistCount: Integer; override;
   public
-    procedure Configure(ACruceTeacherValor, ACruceSubjectValor,
-      ACruceRoomTypeValor, ATeacherFraccionamientoValor,
+    procedure Configure(AClashTeacherValor, AClashSubjectValor,
+      AClashRoomTypeValor, ATeacherFraccionamientoValor,
       AHourHuecaDesubicadaValor, ASessionCortadaValor, ASubjectNoDispersaValor: Integer);
-    constructor Create(ACruceTeacherValor, ACruceSubjectValor,
-      ACruceRoomTypeValor, ATeacherFraccionamientoValor,
+    constructor Create(AClashTeacherValor, AClashSubjectValor,
+      AClashRoomTypeValor, ATeacherFraccionamientoValor,
       AHourHuecaDesubicadaValor, ASessionCortadaValor, ASubjectNoDispersaValor: Integer);
     destructor Destroy; override;
     procedure ReportParameters(AReport: TStrings);
     function NewIndividual: TIndividual; override;
     property TimeSlotCant: Integer read FTimeSlotCant;
     property ClassCant: Integer read FClassCant;
-    property CruceTeacherValor: Integer read FCruceTeacherValor;
-    property CruceSubjectValor: Integer read FCruceSubjectValor;
+    property ClashTeacherValor: Integer read FClashTeacherValor;
+    property ClashSubjectValor: Integer read FClashSubjectValor;
     property TeacherFraccionamientoValor: Integer read FTeacherFraccionamientoValor;
-    property CruceRoomTypeValor: Integer read FCruceRoomTypeValor;
+    property ClashRoomTypeValor: Integer read FClashRoomTypeValor;
     property HourHuecaDesubicadaValor: Integer read FHourHuecaDesubicadaValor;
     property SessionCortadaValor: Integer read FSessionCortadaValor;
     property SubjectNoDispersaValor: Integer read FSubjectNoDispersaValor;
@@ -150,9 +150,9 @@ type
     FDayTeacherMinHour: TDynamicIntegerArrayArray;
     FDayTeacherMaxHour: TDynamicIntegerArrayArray;
     FDayTeacherHourHuecaCant: TDynamicIntegerArrayArray;
-    FCruceTeacher: Integer;
-    FCruceSubject: Integer;
-    FCruceRoomType: Integer;
+    FClashTeacher: Integer;
+    FClashSubject: Integer;
+    FClashRoomType: Integer;
     FTeacherFraccionamiento: Integer;
     FHourHuecaDesubicada: Integer;
     FSubjectNoDispersa: Integer;
@@ -169,15 +169,15 @@ type
     procedure CrossClass(TimeTable2: TTimeTable; AClass: Integer);
     procedure DeltaValues(Delta, AClass, TimeSlot1, TimeSlot2: Integer);
     function DeltaSessionCortada(AClass, TimeSlot1, TimeSlot2: Integer): Integer;
-    function GetCruceSubjectValor: Integer;
+    function GetClashSubjectValor: Integer;
     function GetSubjectNoDispersaValor: Integer;
     function GetHourHuecaDesubicadaValor: Integer;
-    function GetCruceTeacherValor: Integer;
+    function GetClashTeacherValor: Integer;
     function GetSubjectRestrictionValor: Integer;
     function GetTeacherRestrictionValor: Integer;
     function GetTeacherFraccionamientoValor: Integer;
     function GetSessionCortadaValor: Integer;
-    function GetCruceRoomTypeValor: Integer;
+    function GetClashRoomTypeValor: Integer;
     function GetValue: Integer;
     procedure RandomizeKey(var ARandomKey: TDynamicIntegerArray;
       AClass: Integer);
@@ -214,13 +214,13 @@ type
       read FTablingInfo.FTeacherRestrictionTypeATeacherCant;
     property SubjectNoDispersa: Integer read FTablingInfo.FSubjectNoDispersa;
     property SessionCortada: Integer read FTablingInfo.FSessionCortada;
-    property CruceTeacher: Integer read FTablingInfo.FCruceTeacher;
-    property CruceSubject: Integer read FTablingInfo.FCruceSubject;
-    property CruceRoomType: Integer read FTablingInfo.FCruceRoomType;
-    property CruceTeacherValor: Integer read GetCruceTeacherValor;
-    property CruceSubjectValor: Integer read GetCruceSubjectValor;
+    property ClashTeacher: Integer read FTablingInfo.FClashTeacher;
+    property ClashSubject: Integer read FTablingInfo.FClashSubject;
+    property ClashRoomType: Integer read FTablingInfo.FClashRoomType;
+    property ClashTeacherValor: Integer read GetClashTeacherValor;
+    property ClashSubjectValor: Integer read GetClashSubjectValor;
     property TeacherFraccionamientoValor: Integer read GetTeacherFraccionamientoValor;
-    property CruceRoomTypeValor: Integer read GetCruceRoomTypeValor;
+    property ClashRoomTypeValor: Integer read GetClashRoomTypeValor;
     property HourHuecaDesubicadaValor: Integer read GetHourHuecaDesubicadaValor;
     property SessionCortadaValor: Integer read GetSessionCortadaValor;
     property SubjectNoDispersaValor: Integer read GetSubjectNoDispersaValor;
@@ -287,8 +287,8 @@ implementation
 uses
   SysUtils, ZSysUtils, ZConnection, MTProcs, DSource, USortAlgs;
 
-constructor TTimeTableModel.Create(ACruceTeacherValor,
-  ACruceSubjectValor, ACruceRoomTypeValor, ATeacherFraccionamientoValor,
+constructor TTimeTableModel.Create(AClashTeacherValor,
+  AClashSubjectValor, AClashRoomTypeValor, ATeacherFraccionamientoValor,
   AHourHuecaDesubicadaValor, ASessionCortadaValor, ASubjectNoDispersaValor: Integer);
 var
   FMinIdTeacher, FMinIdSubject, FMinIdRoomType, FMinIdTeacherRestrictionType,
@@ -750,7 +750,7 @@ begin
   inherited Create;
   with SourceDataModule do
   begin
-    Configure(ACruceTeacherValor, ACruceSubjectValor, ACruceRoomTypeValor,
+    Configure(AClashTeacherValor, AClashSubjectValor, AClashRoomTypeValor,
       ATeacherFraccionamientoValor, AHourHuecaDesubicadaValor,
       ASessionCortadaValor, ASubjectNoDispersaValor);
     Load(TbTeacher, 'IdTeacher', FMinIdTeacher, FIdTeacherATeacher,
@@ -796,14 +796,14 @@ begin
   end;
 end;
 
-procedure TTimeTableModel.Configure(ACruceTeacherValor, ACruceSubjectValor,
-  ACruceRoomTypeValor, ATeacherFraccionamientoValor, AHourHuecaDesubicadaValor,
+procedure TTimeTableModel.Configure(AClashTeacherValor, AClashSubjectValor,
+  AClashRoomTypeValor, ATeacherFraccionamientoValor, AHourHuecaDesubicadaValor,
   ASessionCortadaValor, ASubjectNoDispersaValor: Integer);
 begin
-  FCruceTeacherValor := ACruceTeacherValor;
-  FCruceSubjectValor := ACruceSubjectValor;
+  FClashTeacherValor := AClashTeacherValor;
+  FClashSubjectValor := AClashSubjectValor;
   FTeacherFraccionamientoValor := ATeacherFraccionamientoValor;
-  FCruceRoomTypeValor := ACruceRoomTypeValor;
+  FClashRoomTypeValor := AClashRoomTypeValor;
   FHourHuecaDesubicadaValor := AHourHuecaDesubicadaValor;
   FSessionCortadaValor := ASessionCortadaValor;
   FSubjectNoDispersaValor := ASubjectNoDispersaValor;
@@ -827,7 +827,7 @@ begin
         '  Hours Huecas desubicadas:    %8.2f'#13#10 +
         '  Materias cortadas:           %8.2f'#13#10 +
         '  Materias juntas:             %8.2f', [
-          CruceTeacherValor, CruceSubjectValor, CruceRoomTypeValor,
+          ClashTeacherValor, ClashSubjectValor, ClashRoomTypeValor,
           TeacherFraccionamientoValor, HourHuecaDesubicadaValor,
           SessionCortadaValor, SubjectNoDispersaValor]));
 end;
@@ -950,8 +950,8 @@ function TTimeTable.GetElitistValues(Index: Integer): Integer;
 begin
   case Index of
     0: Result := SessionCortada;
-    1: Result := CruceTeacher;
-    2: Result := CruceRoomType;
+    1: Result := ClashTeacher;
+    2: Result := ClashRoomType;
   end;
 end;
 
@@ -1105,11 +1105,11 @@ begin
           end;
         end;
         if FTeacherTimeSlotCant[Teacher, TimeSlot] > Limit then
-          Inc(FCruceTeacher, Delta);
+          Inc(FClashTeacher, Delta);
         Inc(FTeacherTimeSlotCant[Teacher, TimeSlot], Delta);
         Inc(FSubjectTimeSlotCant[Subject, TimeSlot], Delta);
         if FRoomTypeTimeSlotCant[RoomType, TimeSlot] >= FRoomTypeANumber[RoomType] + Limit then
-          Inc(FCruceRoomType, Delta);
+          Inc(FClashRoomType, Delta);
         Inc(FRoomTypeTimeSlotCant[RoomType, TimeSlot], Delta);
         SubjectRestrictionType := FSubjectTimeSlotASubjectRestrictionType[Subject, TimeSlot];
         if SubjectRestrictionType >= 0 then
@@ -1134,7 +1134,7 @@ begin
         for Day := Day1 to Day2 do
         begin
           if FClassDaySubjectCant[AClass, Day, Subject] > Limit then
-            Inc(FCruceSubject, Delta);
+            Inc(FClashSubject, Delta);
           Inc(FClassDaySubjectCant[AClass, Day, Subject], Delta);
         end;
         DDay := FDayCant div FClassSubjectCant[AClass, Subject];
@@ -1174,9 +1174,9 @@ var
   TimeSlot: Integer;
   {$IFDEF DEBUG}
   Value1, Value2: Integer;
-  CruceTeacher2: Integer;
-  CruceSubject2: Integer;
-  CruceRoomType2: Integer;
+  ClashTeacher2: Integer;
+  ClashSubject2: Integer;
+  ClashRoomType2: Integer;
   TeacherFraccionamiento2: Integer;
   HourHuecaDesubicada2: Integer;
   SubjectRestrictionValor2: Integer;
@@ -1216,9 +1216,9 @@ begin
     end;
     FValue := GetValue;
     {$IFDEF DEBUG}
-    CruceRoomType2 := FCruceRoomType;
-    CruceTeacher2 := FCruceTeacher;
-    CruceSubject2 := FCruceSubject;
+    ClashRoomType2 := FClashRoomType;
+    ClashTeacher2 := FClashTeacher;
+    ClashSubject2 := FClashSubject;
     HourHuecaDesubicada2 := FHourHuecaDesubicada;
     SubjectNoDispersa2 := FSubjectNoDispersa;
     SubjectRestrictionValor2 := SubjectRestrictionValor;
@@ -1231,9 +1231,9 @@ begin
       raise Exception.CreateFmt(
       'Value1                   %f - %f'#13#10 +
       'Value2                   %f - %f'#13#10 +
-      'CruceTeacher            %d - %d'#13#10 +
-      'CruceSubject             %d - %d'#13#10 +
-      'CruceRoomType            %d - %d'#13#10 +
+      'ClashTeacher            %d - %d'#13#10 +
+      'ClashSubject             %d - %d'#13#10 +
+      'ClashRoomType            %d - %d'#13#10 +
       'HourHuecaDesubicada      %d - %d'#13#10 +
       'SubjectNoDispersa        %d - %d'#13#10 +
       'SubjectRestrictionValor  %f - %f'#13#10 +
@@ -1243,9 +1243,9 @@ begin
       [
         Result, Value1,
         FValue, Value2,
-        FCruceTeacher, CruceTeacher2,
-        FCruceSubject, CruceSubject2,
-        FCruceRoomType, CruceRoomType2,
+        FClashTeacher, ClashTeacher2,
+        FClashSubject, ClashSubject2,
+        FClashRoomType, ClashRoomType2,
         FHourHuecaDesubicada, HourHuecaDesubicada2,
         FSubjectNoDispersa, SubjectNoDispersa2,
         SubjectRestrictionValor, SubjectRestrictionValor2,
@@ -1305,11 +1305,11 @@ begin
     Add('Detalle                           Cant.         Peso        Valor');
     Add('-----------------------------------------------------------------');
     Add(Format('Cruce de profesores:       %12d %12d %12d',
-        [FCruceTeacher, TTimeTableModel(Model).CruceTeacherValor, CruceTeacherValor]));
+        [FClashTeacher, TTimeTableModel(Model).ClashTeacherValor, ClashTeacherValor]));
     Add(Format('Cruce de materias:         %12d %12d %12d',
-        [FCruceSubject, TTimeTableModel(Model).CruceSubjectValor, CruceSubjectValor]));
+        [FClashSubject, TTimeTableModel(Model).ClashSubjectValor, ClashSubjectValor]));
     Add(Format('Cruce de aulas:            %12d %12d %12d',
-        [FCruceRoomType, TTimeTableModel(Model).CruceRoomTypeValor, CruceRoomTypeValor]));
+        [FClashRoomType, TTimeTableModel(Model).ClashRoomTypeValor, ClashRoomTypeValor]));
     Add(Format('Fracc. h. profesores:      %12d %12d %12d',
         [TeacherFraccionamiento, TTimeTableModel(Model).TeacherFraccionamientoValor,
         TeacherFraccionamientoValor]));
@@ -1416,14 +1416,14 @@ begin
   Result := TTimeTableModel(Model).SubjectNoDispersaValor * SubjectNoDispersa;
 end;
 
-function TTimeTable.GetCruceTeacherValor: Integer;
+function TTimeTable.GetClashTeacherValor: Integer;
 begin
-  Result := TTimeTableModel(Model).CruceTeacherValor * TablingInfo.FCruceTeacher;
+  Result := TTimeTableModel(Model).ClashTeacherValor * TablingInfo.FClashTeacher;
 end;
 
-function TTimeTable.GetCruceSubjectValor: Integer;
+function TTimeTable.GetClashSubjectValor: Integer;
 begin
-  Result := TTimeTableModel(Model).CruceSubjectValor * TablingInfo.FCruceSubject;
+  Result := TTimeTableModel(Model).ClashSubjectValor * TablingInfo.FClashSubject;
 end;
 
 
@@ -1433,18 +1433,18 @@ begin
     TablingInfo.FTeacherFraccionamiento;
 end;
 
-function TTimeTable.GetCruceRoomTypeValor: Integer;
+function TTimeTable.GetClashRoomTypeValor: Integer;
 begin
-  Result := TTimeTableModel(Model).CruceRoomTypeValor * TablingInfo.FCruceRoomType;
+  Result := TTimeTableModel(Model).ClashRoomTypeValor * TablingInfo.FClashRoomType;
 end;
 
 function TTimeTable.GetValue: Integer;
 begin
   with TablingInfo do
     Result :=
-      CruceRoomTypeValor +
-      CruceTeacherValor +
-      CruceSubjectValor +
+      ClashRoomTypeValor +
+      ClashTeacherValor +
+      ClashSubjectValor +
       HourHuecaDesubicadaValor +
       SubjectNoDispersaValor +
       SubjectRestrictionValor +
@@ -1476,9 +1476,9 @@ begin
     for VClass := 0 to FClassCant - 1 do
       Move(ATimeTable.ClassTimeSlotASession[VClass, 0],
         ClassTimeSlotASession[VClass, 0], FTimeSlotCant * SizeOf(Integer));
-    FCruceTeacher := ATimeTable.TablingInfo.FCruceTeacher;
-    FCruceSubject := ATimeTable.TablingInfo.FCruceSubject;
-    FCruceRoomType := ATimeTable.TablingInfo.FCruceRoomType;
+    FClashTeacher := ATimeTable.TablingInfo.FClashTeacher;
+    FClashSubject := ATimeTable.TablingInfo.FClashSubject;
+    FClashRoomType := ATimeTable.TablingInfo.FClashRoomType;
     FTeacherFraccionamiento := ATimeTable.TablingInfo.FTeacherFraccionamiento;
     FHourHuecaDesubicada := ATimeTable.TablingInfo.FHourHuecaDesubicada;
     FSessionCortada := ATimeTable.TablingInfo.FSessionCortada;
@@ -1827,9 +1827,9 @@ var
 begin
   with TTimeTableModel(Model), TablingInfo do
   begin
-    FCruceTeacher := 0;
-    FCruceSubject := 0;
-    FCruceRoomType := 0;
+    FClashTeacher := 0;
+    FClashSubject := 0;
+    FClashRoomType := 0;
     FHourHuecaDesubicada := 0;
     FTeacherFraccionamiento := 0;
     FSessionCortada := 0;

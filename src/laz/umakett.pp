@@ -218,8 +218,8 @@ var
 begin
   FreeOnTerminate := True;
   with MasterDataModule.ConfigStorage do
-    FTimeTableModel := TTimeTableModel.Create(CruceTeacher,
-      CruceSubject, CruceRoomType, TeacherFraccionamiento, HourHuecaDesubicada,
+    FTimeTableModel := TTimeTableModel.Create(ClashTeacher,
+      ClashSubject, ClashRoomType, TeacherFraccionamiento, HourHuecaDesubicada,
       SessionCortada, SubjectNoDispersa);
   SetLength(FValidIdes, Length(AValidIdes));
   // ProcThreadPool.MaxThreadCount := Length(AValidIdes);
@@ -324,8 +324,8 @@ begin
   FIdTimeTableFuente := AIdTimeTableFuente;
   FIdTimeTable := AIdTimeTable;
   with MasterDataModule.ConfigStorage do
-    FTimeTableModel := TTimeTableModel.Create(CruceTeacher,
-      CruceSubject, CruceRoomType, TeacherFraccionamiento, HourHuecaDesubicada,
+    FTimeTableModel := TTimeTableModel.Create(ClashTeacher,
+      ClashSubject, ClashRoomType, TeacherFraccionamiento, HourHuecaDesubicada,
       SessionCortada, SubjectNoDispersa);
   inherited Create(CreateSuspended);
 end;

@@ -20,44 +20,44 @@ type
     BtnTeacherRestrictionNoRespetada: TToolButton;
     BtnTimeTableClass: TToolButton;
     BtnTimeTableTeacher: TToolButton;
-    BtnCruceTeacher: TToolButton;
-    BtnCruceSubject: TToolButton;
-    BtnCruceAula: TToolButton;
-    QuCruceAula: TZQuery;
-    QuCruceAulaIdDay: TLongintField;
-    QuCruceAulaIdHour: TLongintField;
-    QuCruceAulaIdRoomType: TLongintField;
-    QuCruceAulaNaDay: TStringField;
-    QuCruceAulaNaHour: TStringField;
-    QuCruceAulaDetalle: TZQuery;
-    QuCruceAulaDetalleIdLevel: TLongintField;
-    QuCruceAulaDetalleIdSpecialization: TLongintField;
-    QuCruceAulaDetalleIdGroupId: TLongintField;
-    QuCruceAulaDetalleNaSubject: TStringField;
-    QuCruceAulaDetalleAbLevel: TStringField;
-    QuCruceAulaDetalleAbSpecialization: TStringField;
-    QuCruceAulaDetalleNaGroupId: TStringField;
-    DSCruceAula: TDataSource;
-    QuCruceTeacherDetalle: TZQuery;
-    QuCruceTeacherDetalleIdTeacher: TLongintField;
-    QuCruceTeacherDetalleIdLevel: TLongintField;
-    QuCruceTeacherDetalleIdSpecialization: TLongintField;
-    QuCruceTeacherDetalleIdGroupId: TLongintField;
-    QuCruceTeacherDetalleIdSubject: TLongintField;
-    QuCruceTeacherDetalleAbLevel: TStringField;
-    QuCruceTeacherDetalleAbSpecialization: TStringField;
-    QuCruceTeacherDetalleNaGroupId: TStringField;
-    QuCruceTeacherDetalleNaSubject: TStringField;
-    QuCruceTeacher: TZQuery;
-    QuCruceTeacherIdTeacher: TLongintField;
-    QuCruceTeacherIdDay: TLongintField;
-    QuCruceTeacherIdHour: TLongintField;
-    QuCruceTeacherNaDay: TStringField;
-    QuCruceTeacherNaHour: TStringField;
-    QuCruceSubject: TZQuery;
-    QuCruceSubjectIdSubject: TLongintField;
-    QuCruceSubjectNaSubject: TStringField;
-    QuCruceSubjectDetalle: TZQuery;
+    BtnClashTeacher: TToolButton;
+    BtnClashSubject: TToolButton;
+    BtnClashRoom: TToolButton;
+    QuClashRoom: TZQuery;
+    QuClashRoomIdDay: TLongintField;
+    QuClashRoomIdHour: TLongintField;
+    QuClashRoomIdRoomType: TLongintField;
+    QuClashRoomNaDay: TStringField;
+    QuClashRoomNaHour: TStringField;
+    QuClashRoomDetalle: TZQuery;
+    QuClashRoomDetalleIdLevel: TLongintField;
+    QuClashRoomDetalleIdSpecialization: TLongintField;
+    QuClashRoomDetalleIdGroupId: TLongintField;
+    QuClashRoomDetalleNaSubject: TStringField;
+    QuClashRoomDetalleAbLevel: TStringField;
+    QuClashRoomDetalleAbSpecialization: TStringField;
+    QuClashRoomDetalleNaGroupId: TStringField;
+    DSClashRoom: TDataSource;
+    QuClashTeacherDetalle: TZQuery;
+    QuClashTeacherDetalleIdTeacher: TLongintField;
+    QuClashTeacherDetalleIdLevel: TLongintField;
+    QuClashTeacherDetalleIdSpecialization: TLongintField;
+    QuClashTeacherDetalleIdGroupId: TLongintField;
+    QuClashTeacherDetalleIdSubject: TLongintField;
+    QuClashTeacherDetalleAbLevel: TStringField;
+    QuClashTeacherDetalleAbSpecialization: TStringField;
+    QuClashTeacherDetalleNaGroupId: TStringField;
+    QuClashTeacherDetalleNaSubject: TStringField;
+    QuClashTeacher: TZQuery;
+    QuClashTeacherIdTeacher: TLongintField;
+    QuClashTeacherIdDay: TLongintField;
+    QuClashTeacherIdHour: TLongintField;
+    QuClashTeacherNaDay: TStringField;
+    QuClashTeacherNaHour: TStringField;
+    QuClashSubject: TZQuery;
+    QuClashSubjectIdSubject: TLongintField;
+    QuClashSubjectNaSubject: TStringField;
+    QuClashSubjectDetalle: TZQuery;
     QuTimeTableDetailSubjectRestriction: TZQuery;
     QuTimeTableDetailSubjectRestrictionNaSubject: TStringField;
     QuTimeTableDetailSubjectRestrictionIdDay: TLongintField;
@@ -108,20 +108,20 @@ type
     QuSubjectCortadaHourDetalle: TZQuery;
     DSSubjectCortadaHour: TDataSource;
     BtnTimeTableRoomType: TToolButton;
-    QuCruceAulaNumber: TLongintField;
+    QuClashRoomNumber: TLongintField;
     QuSubjectCortadaHourNaDay: TStringField;
     QuSubjectCortadaHourNaHour: TStringField;
-    QuCruceSubjectDetalleIdSubject: TLongintField;
-    QuCruceSubjectDetalleIdLevel: TLongintField;
-    QuCruceSubjectDetalleIdSpecialization: TLongintField;
-    QuCruceSubjectDetalleIdGroupId: TLongintField;
-    QuCruceSubjectDetalleIdDay: TLongintField;
-    QuCruceSubjectDetalleIdHour: TLongintField;
-    QuCruceSubjectDetalleAbLevel: TStringField;
-    QuCruceSubjectDetalleAbSpecialization: TStringField;
-    QuCruceSubjectDetalleNaGroupId: TStringField;
-    QuCruceSubjectDetalleNaDay: TStringField;
-    QuCruceSubjectDetalleNaHour: TStringField;
+    QuClashSubjectDetalleIdSubject: TLongintField;
+    QuClashSubjectDetalleIdLevel: TLongintField;
+    QuClashSubjectDetalleIdSpecialization: TLongintField;
+    QuClashSubjectDetalleIdGroupId: TLongintField;
+    QuClashSubjectDetalleIdDay: TLongintField;
+    QuClashSubjectDetalleIdHour: TLongintField;
+    QuClashSubjectDetalleAbLevel: TStringField;
+    QuClashSubjectDetalleAbSpecialization: TStringField;
+    QuClashSubjectDetalleNaGroupId: TStringField;
+    QuClashSubjectDetalleNaDay: TStringField;
+    QuClashSubjectDetalleNaHour: TStringField;
     QuSubjectCortadaHourDetalleIdLevel: TLongintField;
     QuSubjectCortadaHourDetalleIdSpecialization: TLongintField;
     QuSubjectCortadaHourDetalleIdGroupId: TLongintField;
@@ -138,51 +138,51 @@ type
     Splitter1: TSplitter;
     ActTimeTableClass: TAction;
     ActTimeTableTeacher: TAction;
-    ActCruceTeacher: TAction;
-    ActCruceSubject: TAction;
-    ActCruceAula: TAction;
+    ActClashTeacher: TAction;
+    ActClashSubject: TAction;
+    ActClashAula: TAction;
     ActSubjectRestrictionNoRespetada: TAction;
     ActTeacherRestrictionNoRespetada: TAction;
     ActSubjectCortadaDay: TAction;
     ActSubjectCortadaHour: TAction;
     ActTimeTableRoomType: TAction;
-    DSCruceTeacher: TDataSource;
-    QuCruceTeacherIdTimeTable: TLongintField;
+    DSClashTeacher: TDataSource;
+    QuClashTeacherIdTimeTable: TLongintField;
     QuSubjectCortadaDayIdTimeTable: TLongintField;
     QuSubjectCortadaHourIdTimeTable: TLongintField;
     QuTimeTableDetailSubjectRestrictionIdTimeTable: TLongintField;
     QuTimeTableDetailTeacherRestrictionIdTimeTable: TLongintField;
     QuTimeTableDetailTeacherRestrictionLnTeacher: TStringField;
     QuTimeTableDetailTeacherRestrictionNaTeacher: TStringField;
-    QuCruceAulaIdTimeTable: TLongintField;
-    QuCruceAulaAbRoomType: TStringField;
-    QuCruceTeacherLnTeacher: TStringField;
-    QuCruceTeacherNaTeacher: TStringField;
-    QuCruceTeacherCruces: TStringField;
-    QuCruceAulaDetalleIdTimeTable: TLongintField;
-    QuCruceAulaDetalleIdRoomType: TLongintField;
-    QuCruceAulaDetalleIdDay: TLongintField;
-    QuCruceAulaDetalleIdHour: TLongintField;
-    QuCruceTeacherDetalleIdTimeTable: TLongintField;
-    QuCruceSubjectIdTimeTable: TLongintField;
-    DSCruceSubject: TDataSource;
-    QuCruceSubjectDetalleIdTimeTable: TLongintField;
+    QuClashRoomIdTimeTable: TLongintField;
+    QuClashRoomAbRoomType: TStringField;
+    QuClashTeacherLnTeacher: TStringField;
+    QuClashTeacherNaTeacher: TStringField;
+    QuClashTeacherCruces: TStringField;
+    QuClashRoomDetalleIdTimeTable: TLongintField;
+    QuClashRoomDetalleIdRoomType: TLongintField;
+    QuClashRoomDetalleIdDay: TLongintField;
+    QuClashRoomDetalleIdHour: TLongintField;
+    QuClashTeacherDetalleIdTimeTable: TLongintField;
+    QuClashSubjectIdTimeTable: TLongintField;
+    DSClashSubject: TDataSource;
+    QuClashSubjectDetalleIdTimeTable: TLongintField;
     QuSubjectCortadaHourDetalleIdTimeTable: TLongintField;
-    QuCruceAulaCruces: TStringField;
-    QuCruceAulaUsadas: TStringField;
-    QuCruceTeacherDetalleIdDay: TLongintField;
-    QuCruceTeacherDetalleIdHour: TLongintField;
+    QuClashRoomClashes: TStringField;
+    QuClashRoomUsadas: TStringField;
+    QuClashTeacherDetalleIdDay: TLongintField;
+    QuClashTeacherDetalleIdHour: TLongintField;
     BtnMejorarTimeTable: TToolButton;
     ActMejorarTimeTable: TAction;
     procedure ActTimeTableClassExecute(Sender: TObject);
-    procedure ActCruceTeacherExecute(Sender: TObject);
-    procedure ActCruceSubjectExecute(Sender: TObject);
+    procedure ActClashTeacherExecute(Sender: TObject);
+    procedure ActClashSubjectExecute(Sender: TObject);
     procedure ActTimeTableTeacherExecute(Sender: TObject);
     procedure ActSubjectRestrictionNoRespetadaExecute(Sender: TObject);
     procedure ActTeacherRestrictionNoRespetadaExecute(Sender: TObject);
-    procedure ActCruceAulaExecute(Sender: TObject);
-    procedure QuCruceTeacherAfterScroll(DataSet: TDataSet);
-    procedure QuCruceSubjectAfterScroll(DataSet: TDataSet);
+    procedure ActClashAulaExecute(Sender: TObject);
+    procedure QuClashTeacherAfterScroll(DataSet: TDataSet);
+    procedure QuClashSubjectAfterScroll(DataSet: TDataSet);
     procedure ActSubjectCortadaDayExecute(Sender: TObject);
     procedure ActSubjectCortadaHourExecute(Sender: TObject);
     procedure ActTimeTableRoomTypeExecute(Sender: TObject);
@@ -193,8 +193,8 @@ type
     procedure ActMejorarTimeTableExecute(Sender: TObject);
   private
     { Private declarations }
-    FCruceAulaForm, FCruceSubjectForm, FSubjectCortadaHourForm,
-      FSubjectCortadaDayForm, FCruceTeacherForm: TMasterDetailEditorForm;
+    FClashRoomForm, FClashSubjectForm, FSubjectCortadaHourForm,
+      FSubjectCortadaDayForm, FClashTeacherForm: TMasterDetailEditorForm;
     FSubjectRestrictionNoRespetadaForm,
       FTeacherRestrictionNoRespetadaForm: TSingleEditorForm;
     FTimeTableTeacherForm: TTimeTableTeacherForm;
@@ -233,19 +233,19 @@ begin
   end;
 end;
 
-procedure TTimeTableForm.ActCruceTeacherExecute(Sender: TObject);
+procedure TTimeTableForm.ActClashTeacherExecute(Sender: TObject);
 begin
   inherited;
   with SourceDataModule, MasterDataModule do
   begin
     if TMasterDetailEditorForm.ToggleMasterDetailEditor
-      (Self, FCruceTeacherForm, ConfigStorage, ActCruceTeacher,
-      QuCruceTeacher, QuCruceTeacherDetalle) then
+      (Self, FClashTeacherForm, ConfigStorage, ActClashTeacher,
+      QuClashTeacher, QuClashTeacherDetalle) then
     begin
-      QuCruceTeacher.Close;
-      QuCruceTeacherDetalle.Close;
-      QuCruceTeacher.Open;
-      QuCruceTeacherDetalle.Open;
+      QuClashTeacher.Close;
+      QuClashTeacherDetalle.Close;
+      QuClashTeacher.Open;
+      QuClashTeacherDetalle.Open;
     end;
   end;
 end;
@@ -267,19 +267,19 @@ begin
   end
 end;
 
-procedure TTimeTableForm.ActCruceSubjectExecute(Sender: TObject);
+procedure TTimeTableForm.ActClashSubjectExecute(Sender: TObject);
 begin
   inherited;
   with SourceDataModule do
   begin
     if TMasterDetailEditorForm.ToggleMasterDetailEditor
-      (Self, FCruceSubjectForm, ConfigStorage, ActCruceSubject, QuCruceSubject,
-      QuCruceSubjectDetalle) then
+      (Self, FClashSubjectForm, ConfigStorage, ActClashSubject, QuClashSubject,
+      QuClashSubjectDetalle) then
     begin
-      QuCruceSubject.Close;
-      QuCruceSubject.Open;
-      QuCruceSubjectDetalle.Close;
-      QuCruceSubjectDetalle.Open;
+      QuClashSubject.Close;
+      QuClashSubject.Open;
+      QuClashSubjectDetalle.Close;
+      QuClashSubjectDetalle.Open;
     end;
   end;
 end;
@@ -356,37 +356,37 @@ begin
   end;
 end;
 
-procedure TTimeTableForm.ActCruceAulaExecute(Sender: TObject);
+procedure TTimeTableForm.ActClashAulaExecute(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule, QuCruceAula do
+  with SourceDataModule, QuClashRoom do
   begin
     if TMasterDetailEditorForm.ToggleMasterDetailEditor
-      (Self, FCruceAulaForm, ConfigStorage, ActCruceAula, QuCruceAula,
-      QuCruceAulaDetalle) then
+      (Self, FClashRoomForm, ConfigStorage, ActClashAula, QuClashRoom,
+      QuClashRoomDetalle) then
     begin
-      QuCruceAula.Close;
-      QuCruceAula.Open;
-      QuCruceAulaDetalle.Close;
-      QuCruceAulaDetalle.Open;
+      QuClashRoom.Close;
+      QuClashRoom.Open;
+      QuClashRoomDetalle.Close;
+      QuClashRoomDetalle.Open;
     end;
   end;
 end;
 
-procedure TTimeTableForm.QuCruceTeacherAfterScroll(DataSet: TDataSet);
+procedure TTimeTableForm.QuClashTeacherAfterScroll(DataSet: TDataSet);
 begin
   inherited;
-  QuCruceTeacherDetalle.Filter := Format(
+  QuClashTeacherDetalle.Filter := Format(
     'IdDay=%d and IdHour=%d and IdTeacher=%d',
-    [QuCruceTeacherIdDay.Value, QuCruceTeacherIdHour.Value,
-    QuCruceTeacherIdTeacher.Value]);
+    [QuClashTeacherIdDay.Value, QuClashTeacherIdHour.Value,
+    QuClashTeacherIdTeacher.Value]);
 end;
 
-procedure TTimeTableForm.QuCruceSubjectAfterScroll(DataSet: TDataSet);
+procedure TTimeTableForm.QuClashSubjectAfterScroll(DataSet: TDataSet);
 begin
   inherited;
-  QuCruceSubjectDetalle.Filter := Format('IdSubject=%d',
-    [QuCruceSubjectIdSubject.Value]);
+  QuClashSubjectDetalle.Filter := Format('IdSubject=%d',
+    [QuClashSubjectIdSubject.Value]);
 end;
 
 procedure TTimeTableForm.ActSubjectCortadaDayExecute(Sender: TObject);

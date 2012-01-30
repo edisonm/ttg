@@ -16,31 +16,31 @@ type
 
   TProgressForm = class(TForm)
     lblColision: TLabel;
-    lblCruceSubject: TLabel;
-    lblCruceSubjectValor: TLabel;
+    lblClashSubject: TLabel;
+    lblClashSubjectValor: TLabel;
     lblExports: TLabel;
     lblImports: TLabel;
     Panel4: TPanel;
     Panel5: TPanel;
     Panel6: TPanel;
     Panel7: TPanel;
-    pnlCruceSubject: TPanel;
-    pnlCruceSubjectNumber: TPanel;
-    pnlCruceSubjectValor: TPanel;
+    pnlClashSubject: TPanel;
+    pnlClashSubjectNumber: TPanel;
+    pnlClashSubjectValor: TPanel;
     pnlProgress: TPanel;
     bbtnClose: TBitBtn;
     pnlValorTotal: TPanel;
-    pnlCruceTeacher: TPanel;
+    pnlClashTeacher: TPanel;
     lblValorTotal: TLabel;
-    pnlCruceTeacherValor: TPanel;
-    lblCruceTeacherValor: TLabel;
-    pnlCruceRoomType: TPanel;
-    pnlCruceRoomTypeValor: TPanel;
-    lblCruceRoomTypeValor: TLabel;
-    pnlCruceTeacherNumber: TPanel;
-    lblCruceTeacher: TLabel;
-    pnlCruceRoomTypeNumber: TPanel;
-    lblCruceRoomType: TLabel;
+    pnlClashTeacherValor: TPanel;
+    lblClashTeacherValor: TLabel;
+    pnlClashRoomType: TPanel;
+    pnlClashRoomTypeValor: TPanel;
+    lblClashRoomTypeValor: TLabel;
+    pnlClashTeacherNumber: TPanel;
+    lblClashTeacher: TLabel;
+    pnlClashRoomTypeNumber: TPanel;
+    lblClashRoomType: TLabel;
     pnlHourHuecaDesubicada: TPanel;
     pnlHourHuecaDesubicadaNumber: TPanel;
     lblHourHuecaDesubicada: TLabel;
@@ -146,8 +146,8 @@ begin
   if MainForm.UpdateIndex <> FUpdateIndex then
   begin
     with MasterDataModule.ConfigStorage do
-      TTimeTableModel(ASolver.Model).Configure(CruceTeacher, CruceSubject,
-        CruceRoomType, TeacherFraccionamiento, HourHuecaDesubicada,
+      TTimeTableModel(ASolver.Model).Configure(ClashTeacher, ClashSubject,
+        ClashRoomType, TeacherFraccionamiento, HourHuecaDesubicada,
         SessionCortada, SubjectNoDispersa);
     //ASolver.Update;
     ASolver.UpdateValue;
@@ -165,9 +165,9 @@ begin
       FTimePosition0 := t;
     lblPosition.Caption := Format('%d/%d', [APosition, AMax]);
     PBProgress.Position := APosition;
-    lblCruceTeacher.Caption := Format('%d ', [CruceTeacher]);
-    lblCruceSubject.Caption := Format('%d ', [CruceSubject]);
-    lblCruceRoomType.Caption := Format('%d ', [CruceRoomType]);
+    lblClashTeacher.Caption := Format('%d ', [ClashTeacher]);
+    lblClashSubject.Caption := Format('%d ', [ClashSubject]);
+    lblClashRoomType.Caption := Format('%d ', [ClashRoomType]);
     lblTeacherFraccionamiento.Caption :=
       Format('%d ', [TeacherFraccionamiento]);
     lblHourHuecaDesubicada.Caption := Format('%d ', [HourHuecaDesubicada]);
@@ -177,11 +177,11 @@ begin
     lblTeacherRestriction.Caption :=
       Format('%s ', [VarArrToStr(TeacherRestrictionTypeATeacherCant)]);
     lblSubjectNoDispersa.Caption := Format('%d ', [SubjectNoDispersa]);
-    lblCruceTeacherValor.Caption := Format('%d ', [CruceTeacherValor]);
-    lblCruceSubjectValor.Caption := Format('%d ', [CruceSubjectValor]);
+    lblClashTeacherValor.Caption := Format('%d ', [ClashTeacherValor]);
+    lblClashSubjectValor.Caption := Format('%d ', [ClashSubjectValor]);
     lblTeacherFraccionamientoValor.Caption :=
       Format('%d ', [TeacherFraccionamientoValor]);
-    lblCruceRoomTypeValor.Caption := Format('%d ', [CruceRoomTypeValor]);
+    lblClashRoomTypeValor.Caption := Format('%d ', [ClashRoomTypeValor]);
     lblHourHuecaDesubicadaValor.Caption := Format('%d ',
       [HourHuecaDesubicadaValor]);
     lblSessionCortadaValor.Caption := Format('%d ', [SessionCortadaValor]);
