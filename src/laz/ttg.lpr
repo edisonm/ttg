@@ -39,8 +39,8 @@ uses
   UTTGConfig in 'uttgconfig.pp',
   DSource in 'dsource.pp' {SourceDataModule: TDataModule},
   FSelTimeSlot {SelTimeSlotForm},
-  DBase, 
-UModel, UMakeTT, UDownHill, USolver, UTTGBasics, UAbout, FMessageView, uttgsql;
+  DBase, UModel, UMakeTT, UDownHill, USolver, UTTGBasics, UAbout, FMessageView,
+  UTTGSQL, uttgi18n;
 
 {$IFNDEF FPC}
 {$R *.res}
@@ -49,7 +49,6 @@ UModel, UMakeTT, UDownHill, USolver, UTTGBasics, UAbout, FMessageView, uttgsql;
 {$IFDEF WINDOWS}{$R ttg.rc}{$ENDIF}
 
 begin
-  
   DecimalSeparator := ',';
   Application.Initialize;
   Application.Title := sAppName + ' ' + sAppVersion;

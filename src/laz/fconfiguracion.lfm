@@ -5,7 +5,7 @@ object ConfiguracionForm: TConfiguracionForm
   Width = 490
   ActiveControl = pgcConfig
   BorderStyle = bsDialog
-  Caption = 'Configuracion'
+  Caption = 'Configure'
   ClientHeight = 442
   ClientWidth = 490
   Font.Height = -11
@@ -66,11 +66,11 @@ object ConfiguracionForm: TConfiguracionForm
     Height = 386
     Top = 8
     Width = 473
-    ActivePage = tbsOpciones
+    ActivePage = tbsUnidadEducativa
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 1
     object tbsUnidadEducativa: TTabSheet
       Hint = 'Datos del colegio'
@@ -80,71 +80,71 @@ object ConfiguracionForm: TConfiguracionForm
       ImageIndex = 2
       object Label14: TLabel
         Left = 8
-        Height = 13
+        Height = 15
         Top = 109
-        Width = 135
+        Width = 162
         Caption = 'Carga Maxima por Profesor:'
         ParentColor = False
       end
       object lblComentarios: TLabel
         Left = 8
-        Height = 13
+        Height = 15
         Top = 136
-        Width = 66
+        Width = 77
         Caption = 'Comentarios:'
         ParentColor = False
       end
       object Label17: TLabel
         Left = 8
-        Height = 13
+        Height = 15
         Top = 13
-        Width = 42
+        Width = 50
         Caption = 'Nombre:'
         ParentColor = False
       end
       object Label4: TLabel
         Left = 8
-        Height = 13
+        Height = 15
         Top = 85
-        Width = 65
+        Width = 77
         Caption = 'Responsable:'
         ParentColor = False
       end
       object Label25: TLabel
         Left = 269
-        Height = 13
+        Height = 15
         Top = 85
-        Width = 33
+        Width = 39
         Caption = 'Cargo:'
         ParentColor = False
       end
       object Label26: TLabel
         Left = 8
-        Height = 13
+        Height = 15
         Top = 61
-        Width = 51
+        Width = 60
         Caption = 'Autoridad:'
         ParentColor = False
       end
       object Label27: TLabel
         Left = 269
-        Height = 13
+        Height = 15
         Top = 61
-        Width = 33
+        Width = 39
         Caption = 'Cargo:'
         ParentColor = False
       end
       object Label31: TLabel
         Left = 8
-        Height = 13
+        Height = 15
         Top = 36
-        Width = 79
+        Width = 92
         Caption = 'Periodo Lectivo:'
         ParentColor = False
       end
       object speMaxCargaTeacher: TSpinEdit
         Left = 180
-        Height = 22
+        Height = 24
         Top = 104
         Width = 281
         MaxValue = 2147483647
@@ -161,7 +161,7 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object edtNaColegio: TEdit
         Left = 108
-        Height = 22
+        Height = 24
         Hint = 'Colegio|Nombre del colegio'
         Top = 8
         Width = 353
@@ -169,35 +169,35 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object edtNaResponsable: TEdit
         Left = 108
-        Height = 22
+        Height = 24
         Top = 80
         Width = 149
         TabOrder = 4
       end
       object edtCarResponsable: TEdit
         Left = 317
-        Height = 22
+        Height = 24
         Top = 80
         Width = 144
         TabOrder = 5
       end
       object edtNaAutoridad: TEdit
         Left = 108
-        Height = 22
+        Height = 24
         Top = 56
         Width = 149
         TabOrder = 2
       end
       object edtCarAutoridad: TEdit
         Left = 317
-        Height = 22
+        Height = 24
         Top = 56
         Width = 144
         TabOrder = 3
       end
       object edtAnioLectivo: TEdit
         Left = 108
-        Height = 22
+        Height = 24
         Top = 32
         Width = 353
         TabOrder = 1

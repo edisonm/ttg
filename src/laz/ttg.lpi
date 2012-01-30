@@ -381,12 +381,13 @@
         <UnitName Value="UTTGSQL"/>
       </Unit38>
       <Unit39>
-        <Filename Value="locale/ttg.po"/>
+        <Filename Value="locale/ttg.es.po"/>
         <IsPartOfProject Value="True"/>
       </Unit39>
       <Unit40>
-        <Filename Value="locale/ttg.es.po"/>
+        <Filename Value="uttgi18n.pp"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="uttgi18n"/>
       </Unit40>
     </Units>
   </ProjectOptions>
