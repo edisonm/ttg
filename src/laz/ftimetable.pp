@@ -152,11 +152,11 @@ type
     QuSubjectCortadaHourIdTimeTable: TLongintField;
     QuTimeTableDetailSubjectRestrictionIdTimeTable: TLongintField;
     QuTimeTableDetailTeacherRestrictionIdTimeTable: TLongintField;
-    QuTimeTableDetailTeacherRestrictionApeTeacher: TStringField;
+    QuTimeTableDetailTeacherRestrictionLnTeacher: TStringField;
     QuTimeTableDetailTeacherRestrictionNaTeacher: TStringField;
     QuCruceAulaIdTimeTable: TLongintField;
     QuCruceAulaAbRoomType: TStringField;
-    QuCruceTeacherApeTeacher: TStringField;
+    QuCruceTeacherLnTeacher: TStringField;
     QuCruceTeacherNaTeacher: TStringField;
     QuCruceTeacherCruces: TStringField;
     QuCruceAulaDetalleIdTimeTable: TLongintField;

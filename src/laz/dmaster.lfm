@@ -22,17 +22,17 @@ object MasterDataModule: TMasterDataModule
       ReadOnly = False
       Required = False
     end
-    object TbTmpTeacherCargaApeTeacher: TStringField
+    object TbTmpTeacherCargaLnTeacher: TStringField
       DisplayLabel = 'Apellido'
       DisplayWidth = 15
       FieldKind = fkLookup
-      FieldName = 'ApeTeacher'
+      FieldName = 'LnTeacher'
       Index = 1
       KeyFields = 'IdTeacher'
       LookupCache = False
       LookupDataSet = SourceDataModule.TbTeacher
       LookupKeyFields = 'IdTeacher'
-      LookupResultField = 'ApeTeacher'
+      LookupResultField = 'LnTeacher'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
@@ -206,8 +206,8 @@ object MasterDataModule: TMasterDataModule
   object QuTeacherRestrictionCant: TZTable
     Connection = SourceDataModule.DbZConnection
     AutoCalcFields = False
-    left = 58
-    top = 157
+    left = 88
+    top = 168
     object QuTeacherRestrictionCantIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData

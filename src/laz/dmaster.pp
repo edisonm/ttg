@@ -17,7 +17,7 @@ type
     TbTmpTeacherCarga: TZTable;
     TbTmpTeacherCargaIdTeacher: TLongintField;
     TbTmpTeacherCargaNaTeacher: TStringField;
-    TbTmpTeacherCargaApeTeacher: TStringField;
+    TbTmpTeacherCargaLnTeacher: TStringField;
     TbTmpTeacherCargaCarga: TLongintField;
     QuDistributionTeacher: TZTable;
     QuDistributionTeacherIdSubject: TLongintField;
@@ -74,7 +74,7 @@ var
 implementation
 
 uses
-  UTTGBasics, UTTGDBUtils, UTTGSQL, DSource;
+  UTTGBasics, UTTGDBUtils, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -231,14 +231,14 @@ var
                   vMainMin := AMainStrings.Count;
                   AMainStrings.Add('Teacher; Prohibiciones');
                 end;
-                AMainStrings.Add(Format(s, [TbTmpTeacherCargaApeTeacher.Value,
+                AMainStrings.Add(Format(s, [TbTmpTeacherCargaLnTeacher.Value,
                   TbTmpTeacherCargaNaTeacher.Value,
                     QuTeacherRestrictionCantNumber.AsInteger]));
                 HuboProblemasInterno := True;
                 HuboProblemas := True;
               end
               else
-                ASubStrings.Add(Format(s, [TbTmpTeacherCargaApeTeacher.Value,
+                ASubStrings.Add(Format(s, [TbTmpTeacherCargaLnTeacher.Value,
                   TbTmpTeacherCargaNaTeacher.Value,
                     QuTeacherRestrictionCantNumber.AsInteger]));
             end;
@@ -284,7 +284,7 @@ var
               vMainMin := AMainStrings.Count;
               AMainStrings.Add('Teacher; Carga');
             end;
-            AMainStrings.Add(Format(s, [TbTmpTeacherCargaApeTeacher.Value,
+            AMainStrings.Add(Format(s, [TbTmpTeacherCargaLnTeacher.Value,
               TbTmpTeacherCargaNaTeacher.Value,
                 TbTmpTeacherCargaCarga.Value]));
             HuboProblemas := True;
@@ -292,7 +292,7 @@ var
           end
           else
           begin
-            ASubStrings.Add(Format(s, [TbTmpTeacherCargaApeTeacher.Value,
+            ASubStrings.Add(Format(s, [TbTmpTeacherCargaLnTeacher.Value,
               TbTmpTeacherCargaNaTeacher.Value,
                 TbTmpTeacherCargaCarga.Value]));
           end;
@@ -597,7 +597,7 @@ end;
 
 procedure TMasterDataModule.DataModuleCreate(Sender: TObject);
 var
-  Strings: TStrings;
+  LResource: TLResource;
 begin
   FStringsShowRoomType := TStringList.Create;
   FStringsShowTeacher := TStringList.Create;
@@ -626,8 +626,8 @@ begin
   with FStringsShowClass do
   begin
     add('Subject=NaSubject');
-    add('Teacher=ApeTeacher;NaTeacher');
-    add('Subject_Teacher=NaSubject;ApeTeacher;NaTeacher');
+    add('Teacher=LnTeacher;NaTeacher');
+    add('Subject_Teacher=NaSubject;LnTeacher;NaTeacher');
   end;
   with SourceDataModule do
   begin
@@ -635,14 +635,8 @@ begin
     if DbZConnection.Database = ':memory:' then
     begin
       DbZConnection.ExecuteDirect('pragma journal_mode=off');
-      Strings := TStringList.Create;
-      try
-        // Strings.LoadFromFile('../../dat/ttg.sql');
-        FillTTGSQL(Strings);
-        DbZConnection.ExecuteDirect(Strings.GetText);
-      finally
-        Strings.Free;
-      end;
+      with LazarusResources.Find('ttg', 'SQL') do
+        DbZConnection.ExecuteDirect(Value);
       PrepareTables;
       OpenTables;
       NewDatabase;
@@ -704,6 +698,8 @@ initialization
 {$IFDEF FPC}
   {$i dmaster.lrs}
 {$ENDIF}
+  
+{$i ttgsql.lrs}
 
 end.
 

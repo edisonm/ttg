@@ -23,18 +23,19 @@ endif
 %.lrs: %.lfm $(LRSDEP)
 	$(LAZRES) $@ $<
 
+ttg.lrs: locale/ttg.es.po
+	$(LAZRES) $@ $<
+
+ttgsql.lrs: $(TTGSQL)
+	$(LAZRES) $@ $<
+
 $(ABOUT).pp: $(ABOUT).pp.tmpl
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
 	  -e s:'<v>Revision</v>':'$(REVISION)':g \
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-$(TTGSQLINC): $(TTGSQL)
-	cat $< | dos2unix | sed -e s:"'":"''":g -e s:"\(.*\)":"add(\'\1\');":g > $@
-
-uttgsql.pp: $(TTGSQLINC)
-
-$(TTGEXE): $(BASELAZFILES) $(TTGLPR)
+$(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttg.lrs ttgsql.lrs
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi ; strip --strip-all $(TTGEXE)
 
 ifeq ($(shell uname -o),Cygwin)
@@ -53,8 +54,7 @@ $(DSRCBASE).pp $(DSRCBASE).lfm: $(DBCONVERT) $(TTGMDB) Makefile
 	dos2unix $(DSRCBASE).pp $(DSRCBASE).lfm
 
 cleanthisw:
-	$(RM) $(DSRCBASE).{lfm,lrs,pp} $(TTGSQLINC) \
-	   $(TTGSQL) $(TTGMYSQL)
+	$(RM) $(DSRCBASE).{lfm,lrs,pp} $(TTGSQL) $(TTGMYSQL)
 
 $(DBCONVERT):
 	cd $(DBCONVERTSRC) ; $(MAKE) all
@@ -69,7 +69,7 @@ cleanthisw:
 endif
 
 cleanthis: cleanthisw
-	$(RM) -r $(TTGEXE) $(TTGDIR)/bin/* $(ABOUT).pp
+	$(RM) -r $(TTGEXE) $(TTGDIR)/bin/* $(ABOUT).pp *.lrs
 
 clean: cleanthis
 

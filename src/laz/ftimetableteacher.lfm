@@ -502,7 +502,7 @@ inherited TimeTableTeacherForm: TTimeTableTeacherForm
       Required = False
       Size = 15
     end
-    object QuTimeTableTeacherNombre: TStringField
+    object QuTimeTableTeacherName: TStringField
       DisplayWidth = 40
       FieldKind = fkCalculated
       FieldName = 'Name'
@@ -522,14 +522,14 @@ inherited TimeTableTeacherForm: TTimeTableTeacherForm
   end
   object QuTeacher: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable;ApeTeacher;NaTeacher'
+    SortedFields = 'IdTimeTable;LnTeacher;NaTeacher'
     AutoCalcFields = False
     OnCalcFields = QuTimeTableTeacherCalcFields
     SQL.Strings = (
       'select'
       '  IdTimeTable,'
       '  IdTeacher,'
-      '  ApeTeacher,'
+      '  LnTeacher,'
       '  NaTeacher'
       'from'
       '  Teacher,'
@@ -537,7 +537,7 @@ inherited TimeTableTeacherForm: TTimeTableTeacherForm
       'where'
       '  IdTimeTable=:IdTimeTable'
       'order by'
-      '  IdTimeTable, ApeTeacher, NaTeacher'
+      '  IdTimeTable, LnTeacher, NaTeacher'
     )
     Params = <    
       item
@@ -549,7 +549,7 @@ inherited TimeTableTeacherForm: TTimeTableTeacherForm
     MasterFields = 'IdTimeTable'
     MasterSource = SourceDataModule.DSTimeTable
     LinkedFields = 'IdTimeTable'
-    IndexFieldNames = 'IdTimeTable Asc;ApeTeacher Asc;NaTeacher Asc'
+    IndexFieldNames = 'IdTimeTable Asc;LnTeacher Asc;NaTeacher Asc'
     left = 144
     top = 144
     ParamData = <    
@@ -580,11 +580,11 @@ inherited TimeTableTeacherForm: TTimeTableTeacherForm
       Required = False
       Visible = False
     end
-    object QuTeacherApeTeacher: TStringField
+    object QuTeacherLnTeacher: TStringField
       DisplayLabel = 'Apellido'
       DisplayWidth = 15
       FieldKind = fkData
-      FieldName = 'ApeTeacher'
+      FieldName = 'LnTeacher'
       Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

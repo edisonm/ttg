@@ -25,7 +25,7 @@ type
     QuTimeTableTeacherIdDay: TLongintField;
     QuTimeTableTeacherIdSubject: TLongintField;
     QuTimeTableTeacherNaSubject: TStringField;
-    QuTimeTableTeacherNombre: TStringField;
+    QuTimeTableTeacherName: TStringField;
     QuTimeTableTeacherAbLevel: TStringField;
     QuTimeTableTeacherAbSpecialization: TStringField;
     QuTimeTableTeacherNaGroupId: TStringField;
@@ -36,7 +36,7 @@ type
     QuTeacher: TZQuery;
     QuTeacherIdTimeTable: TLongintField;
     QuTeacherIdTeacher: TLongintField;
-    QuTeacherApeTeacher: TStringField;
+    QuTeacherLnTeacher: TStringField;
     QuTeacherNaTeacher: TStringField;
     QuTimeTableTeacherIdTimeTable: TLongintField;
     QuTimeTableTeacherIdTeacher: TLongintField;
@@ -46,7 +46,7 @@ type
     procedure DSTeacherDataChange(Sender: TObject; Field: TField);
   private
     { Private declarations }
-    FNombre: string;
+    FName: string;
   protected
   public
     { Public declarations }
@@ -67,9 +67,9 @@ begin
   begin
     Caption := Format('[%s %d] - %s %s', [SuperTitle,
       QuTeacher.FindField('IdTimeTable').AsInteger,
-      QuTeacher.FindField('ApeTeacher').AsString,
+      QuTeacher.FindField('LnTeacher').AsString,
       QuTeacher.FindField('NaTeacher').AsString]);
-    FNombre := MasterDataModule.StringsShowTeacher.Values[cbVerTeacher.Text];
+    FName := MasterDataModule.StringsShowTeacher.Values[cbVerTeacher.Text];
     ShowEditor(TbDay, TbHour, QuTimeTableTeacher, TbTimeSlot, 'IdDay', 'NaDay',
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Nombre');
   end;
@@ -88,8 +88,8 @@ end;
 procedure TTimeTableTeacherForm.QuTimeTableTeacherCalcFields(DataSet: TDataSet);
 begin
   inherited;
-  if FNombre <> '' then
-    DataSet['Nombre'] := VarArrToStr(DataSet[FNombre], ' ');
+  if FName <> '' then
+    DataSet['Name'] := VarArrToStr(DataSet[FName], ' ');
 end;
 
 procedure TTimeTableTeacherForm.DSTeacherDataChange(Sender: TObject;

@@ -190,7 +190,7 @@ inherited TimeTableClassForm: TTimeTableClassForm
       '  TimeTableDetail.IdSubject,'
       '  Distribution.IdTeacher,'
       '  NaSubject,'
-      '  ApeTeacher,'
+      '  LnTeacher,'
       '  NaTeacher'
       'from'
       '  ((TimeTableDetail inner join Distribution on'
@@ -370,10 +370,10 @@ inherited TimeTableClassForm: TTimeTableClassForm
       ReadOnly = True
       Required = False
     end
-    object QuTimeTableClassApeTeacher: TStringField
+    object QuTimeTableClassLnTeacher: TStringField
       DisplayWidth = 15
       FieldKind = fkData
-      FieldName = 'ApeTeacher'
+      FieldName = 'LnTeacher'
       Index = 10
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

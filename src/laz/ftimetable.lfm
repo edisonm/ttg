@@ -1215,7 +1215,7 @@ inherited TimeTableForm: TTimeTableForm
   end
   object QuCruceTeacher: TZQuery[10]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable;ApeTeacher;NaTeacher'
+    SortedFields = 'IdTimeTable;LnTeacher;NaTeacher'
     AutoCalcFields = False
     AfterScroll = QuCruceTeacherAfterScroll
     ReadOnly = True
@@ -1225,7 +1225,7 @@ inherited TimeTableForm: TTimeTableForm
       '  Distribution.IdTeacher,'
       '  TimeTableDetail.IdDay,'
       '  TimeTableDetail.IdHour,'
-      '  Teacher.ApeTeacher,'
+      '  Teacher.LnTeacher,'
       '  Teacher.NaTeacher,'
       '  Count(*) - 1 AS Cruces'
       'FROM (Distribution'
@@ -1239,12 +1239,12 @@ inherited TimeTableForm: TTimeTableForm
       'GROUP BY'
       '  TimeTableDetail.IdTimeTable,'
       '  Distribution.IdTeacher,'
-      '  Teacher.ApeTeacher,'
+      '  Teacher.LnTeacher,'
       '  Teacher.NaTeacher,'
       '  TimeTableDetail.IdDay,'
       '  TimeTableDetail.IdHour'
       'HAVING Cruces > 0'
-      'ORDER BY TimeTableDetail.IdTimeTable, Teacher.ApeTeacher, Teacher.NaTeacher'
+      'ORDER BY TimeTableDetail.IdTimeTable, Teacher.LnTeacher, Teacher.NaTeacher'
     )
     Params = <    
       item
@@ -1256,7 +1256,7 @@ inherited TimeTableForm: TTimeTableForm
     MasterFields = 'IdTimeTable'
     MasterSource = SourceDataModule.DSTimeTable
     LinkedFields = 'IdTimeTable'
-    IndexFieldNames = 'IdTimeTable Asc;ApeTeacher Asc;NaTeacher Asc'
+    IndexFieldNames = 'IdTimeTable Asc;LnTeacher Asc;NaTeacher Asc'
     left = 424
     top = 63
     ParamData = <    
@@ -1310,11 +1310,11 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuCruceTeacherApeTeacher: TStringField
+    object QuCruceTeacherLnTeacher: TStringField
       DisplayLabel = 'Apellido'
       DisplayWidth = 15
       FieldKind = fkData
-      FieldName = 'ApeTeacher'
+      FieldName = 'LnTeacher'
       Index = 4
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1914,7 +1914,7 @@ inherited TimeTableForm: TTimeTableForm
       'SELECT DISTINCT'
       '  TimeTableDetail.IdTimeTable,'
       '  TeacherRestriction.IdTeacherRestrictionType,'
-      '  Teacher.ApeTeacher,'
+      '  Teacher.LnTeacher,'
       '  Teacher.NaTeacher,'
       '  TeacherRestriction.IdDay,'
       '  TeacherRestriction.IdHour,'
@@ -1936,7 +1936,7 @@ inherited TimeTableForm: TTimeTableForm
       '  TimeTableDetail.IdTimeTable=:IdTimeTable'
       'ORDER BY'
       '  TeacherRestriction.IdTeacherRestrictionType DESC,'
-      '  Teacher.ApeTeacher, Teacher.NaTeacher,'
+      '  Teacher.LnTeacher, Teacher.NaTeacher,'
       '  TeacherRestriction.IdDay,'
       '  TeacherRestriction.IdHour'
     )
@@ -1981,10 +1981,10 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailTeacherRestrictionApeTeacher: TStringField
+    object QuTimeTableDetailTeacherRestrictionLnTeacher: TStringField
       DisplayWidth = 15
       FieldKind = fkData
-      FieldName = 'ApeTeacher'
+      FieldName = 'LnTeacher'
       Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

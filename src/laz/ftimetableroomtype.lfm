@@ -507,7 +507,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       Required = False
       Size = 5
     end
-    object QuTimeTableRoomTypeNombre: TStringField
+    object QuTimeTableRoomTypeName: TStringField
       DisplayWidth = 40
       FieldKind = fkCalculated
       FieldName = 'Nombre'

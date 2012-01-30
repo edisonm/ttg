@@ -24,7 +24,7 @@ msgid "Inicializar con la hora del sistema"
 msgstr ""
 
 #: TCONFIGURACIONFORM.CONFIGURACIONFORM.CAPTION
-msgid "Configuracion"
+msgid "Configure"
 msgstr ""
 
 #: TCONFIGURACIONFORM.EDBOOKMARKS.TEXT

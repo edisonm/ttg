@@ -28,7 +28,7 @@ type
     QuTimeTableRoomTypeAbLevel: TStringField;
     QuTimeTableRoomTypeAbSpecialization: TStringField;
     QuTimeTableRoomTypeNaGroupId: TStringField;
-    QuTimeTableRoomTypeNombre: TStringField;
+    QuTimeTableRoomTypeName: TStringField;
     DSRoomType: TDataSource;
     DBGrid1: TDBGrid;
     Splitter1: TSplitter;
@@ -58,7 +58,7 @@ type
     procedure BtnMostrarClick(Sender: TObject);
   private
     { Private declarations }
-    FNombre: string;
+    FName: string;
   protected
   public
     { Public declarations }
@@ -80,7 +80,7 @@ begin
     Caption := Format('[%s %d] - %s', [SuperTitle,
       QuRoomType.FindField('IdTimeTable').AsInteger,
       QuRoomType.FindField('AbRoomType').AsString]);
-    FNombre := StringsShowRoomType.Values[cbVerRoomType.Text];
+    FName := StringsShowRoomType.Values[cbVerRoomType.Text];
     ShowEditor(TbDay, TbHour, QuTimeTableRoomType, TbTimeSlot, 'IdDay', 'NaDay',
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Nombre');
   end;
@@ -150,8 +150,8 @@ end;
 procedure TTimeTableRoomTypeForm.QuTimeTableRoomTypeCalcFields(DataSet: TDataSet);
 begin
   inherited;
-  if FNombre <> '' then
-    DataSet['Nombre'] := VarArrToStr(DataSet[FNombre], ' ');
+  if FName <> '' then
+    DataSet['Name'] := VarArrToStr(DataSet[FName], ' ');
 end;
 
 procedure TTimeTableRoomTypeForm.DSRoomTypeDataChange(Sender: TObject;

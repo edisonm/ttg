@@ -38,7 +38,7 @@ type
     QuClassAbSpecialization: TStringField;
     QuClassNaGroupId: TStringField;
     QuTimeTableGroupIdTimeTable: TLongintField;
-    QuTimeTableClassApeTeacher: TStringField;
+    QuTimeTableClassLnTeacher: TStringField;
     QuTimeTableClassNaTeacher: TStringField;
     DBGrid1: TDBGrid;
     QuClassNaClass: TStringField;
