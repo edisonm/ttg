@@ -1,10 +1,10 @@
 object MainForm: TMainForm
-  Left = 940
+  Left = 932
   Height = 55
   Top = 140
   Width = 667
   Caption = 'MainForm'
-  ClientHeight = 55
+  ClientHeight = 35
   ClientWidth = 667
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -52,8 +52,8 @@ object MainForm: TMainForm
   LCLVersion = '0.9.30.2'
   object StatusBar: TStatusBar
     Left = 0
-    Height = 21
-    Top = 34
+    Height = 23
+    Top = 12
     Width = 667
     AutoHint = True
     Panels = <    
@@ -1023,7 +1023,6 @@ object MainForm: TMainForm
           Action = ActLangDefault
           AutoCheck = True
           GroupIndex = 1
-          RadioItem = True
         end
         object MILangEnglish: TMenuItem
           Action = ActLangEnglish
@@ -2244,7 +2243,6 @@ object MainForm: TMainForm
     end
     object ActLangDefault: TAction
       Category = 'Tools'
-      AutoCheck = True
       Caption = 'Default Language'
       Checked = True
       GroupIndex = 1
