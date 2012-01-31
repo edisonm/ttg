@@ -459,7 +459,7 @@ msgid "Ayuda|Temas de Ayuda en linea"
 msgstr ""
 
 #: TMAINFORM.MILANGUAGES.CAPTION
-msgid "New Item37"
+msgid "Languages"
 msgstr ""
 
 #: TMAINFORM.MIREOPEN.CAPTION
