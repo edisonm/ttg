@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit uttgi18n; 
+unit UTTGi18n; 
 
 {$I ttg.inc}
 
@@ -116,31 +116,6 @@ begin
   if s <> '' then
     Content := s;
 end;
-
-{var
-  s: string;
-  Section: string;
-begin
-  if not Assigned(FPOFile) then exit;
-  if not Assigned(PropInfo) then exit;
-  if Instance is TComponent then
-    if (csDesigning in TComponent(Instance).ComponentState) then
-      exit;
-  if (UpperCase(PropInfo^.PropType^.Name) <> 'TTRANSLATESTRING') then exit;
-  Section := UpperCase(Section + '.' + Instance.GetNamePath + '.' + PropInfo^.Name);
-  try
-    s := FPOFile.Translate(Section, Content);
-  except
-    on E: Exception do
-    begin
-      WriteLn(E.ToString + ' ' + 'FPOFile.Translate(' + Section + ',' + Content + ')');
-      s := '';
-    end
-  end;
-  if s <> '' then
-    Content := s;
-end;
-}
 
 function TResourceTranslator.TranslateResourceStrings: Boolean;
 begin

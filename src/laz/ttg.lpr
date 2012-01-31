@@ -39,7 +39,8 @@ uses
   UTTGConfig in 'uttgconfig.pp',
   DSource in 'dsource.pp' {SourceDataModule: TDataModule},
   FSelTimeSlot {SelTimeSlotForm},
-  DBase, UModel, UMakeTT, UDownHill, USolver, UTTGBasics, UAbout, FMessageView, uttgi18n;
+  DBase, UModel, UMakeTT, UDownHill, USolver, UTTGBasics, UAbout, FMessageView,
+  UTTGi18n, uttgconsts;
 
 {$IFNDEF FPC}
 {$R *.res}
@@ -67,7 +68,8 @@ begin
   begin
     ResourceTranslator.TranslateUnitResourceStrings('UAbout');
     ResourceTranslator.TranslateUnitResourceStrings('URelUtils');
-    ResourceTranslator.TranslateUnitResourceStrings('uttgi18n');
+    ResourceTranslator.TranslateUnitResourceStrings('UTTGii18n');
+    ResourceTranslator.TranslateUnitResourceStrings('UTTGConsts');
   end;
   DecimalSeparator := ',';
   Application.Initialize;

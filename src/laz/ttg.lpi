@@ -112,7 +112,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="39">
+    <Units Count="40">
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -378,8 +378,13 @@
       <Unit38>
         <Filename Value="uttgi18n.pp"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="uttgi18n"/>
+        <UnitName Value="UTTGi18n"/>
       </Unit38>
+      <Unit39>
+        <Filename Value="uttgconsts.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UTTGConsts"/>
+      </Unit39>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

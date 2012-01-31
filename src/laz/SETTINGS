@@ -1,8 +1,7 @@
 # -*- mode: Makefile; -*-
 
 BuildMode?=full
-APPNAME=Generador Automatico de Horarios
-# APPNAME=Automatic Timetable Generator
+APPNAME=Automatic Timetable Generator
 APPVERSION=1.2.2
 REVISION:=$(shell svnversion|sed -e s/':'/'_'/g)
 BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ %Y)

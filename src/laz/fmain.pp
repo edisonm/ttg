@@ -209,7 +209,7 @@ implementation
 uses
   FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FSubject, FTeacher,
   FTimeTable, FMasterDetailEditor, FConfiguracion, FClass, Printers, DSource,
-  DSourceBase, UTTGBasics, FMessageView, uttgi18n;
+  DSourceBase, UTTGBasics, FMessageView, UTTGi18n;
 
 {$IFNDEF FPC}
 {$R *.DFM}
