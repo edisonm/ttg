@@ -350,11 +350,11 @@ msgid "Nuevo|Nuevo colegio"
 msgstr ""
 
 #: TMAINFORM.ACTOPEN.CAPTION
-msgid "Abir"
+msgid "Open"
 msgstr ""
 
 #: TMAINFORM.ACTOPEN.HINT
-msgid "Abir|Abir colegio previamente guardado"
+msgid "Open|Open saved institution"
 msgstr ""
 
 #: TMAINFORM.ACTPASSWD.CAPTION
@@ -420,7 +420,7 @@ msgstr ""
 
 #: TMAINFORM.ACTTIMETABLE.CAPTION
 msgid "TimeTables"
-msgstr "Horarios..."
+msgstr ""
 
 #: TMAINFORM.ACTTIMETABLE.HINT
 msgid "Horarios|Ver los horarios elaborados"
@@ -1101,9 +1101,3 @@ msgstr ""
 #: urelutils.swhenprocessing
 msgid "Mientras se procesaba %s"
 msgstr ""
-
-#: uttgi18n.patata
-msgctxt "uttgi18n.patata"
-msgid "hello world"
-msgstr ""
-

@@ -1,10 +1,10 @@
 object MainForm: TMainForm
   Left = 859
-  Height = 407
+  Height = 505
   Top = 149
   Width = 667
   Caption = 'MainForm'
-  ClientHeight = 387
+  ClientHeight = 485
   ClientWidth = 667
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -53,7 +53,7 @@ object MainForm: TMainForm
   object StatusBar: TStatusBar
     Left = 0
     Height = 23
-    Top = 364
+    Top = 462
     Width = 667
     AutoHint = True
     Panels = <    
@@ -1021,10 +1021,12 @@ object MainForm: TMainForm
         Caption = 'Languages'
         object MILangEnglish: TMenuItem
           Action = ActLangEnglish
+          RadioItem = True
           ShowAlwaysCheckable = True
         end
         object MILangSpanish: TMenuItem
           Action = ActLangSpanish
+          RadioItem = True
           ShowAlwaysCheckable = True
         end
       end
@@ -2063,9 +2065,9 @@ object MainForm: TMainForm
     end
     object ActOpen: TAction
       Category = 'File'
-      Caption = 'Abir'
+      Caption = 'Open'
       HelpContext = 90
-      Hint = 'Abir|Abir colegio previamente guardado'
+      Hint = 'Open|Open saved institution'
       ImageIndex = 1
       OnExecute = ActOpenExecute
       ShortCut = 16449
@@ -2232,14 +2234,14 @@ object MainForm: TMainForm
     end
     object ActLangEnglish: TAction
       Category = 'Tools'
-      Caption = 'ActLangEnglish'
+      Caption = 'English'
       Checked = True
       GroupIndex = 1
       OnExecute = ActLangEnglishExecute
     end
     object ActLangSpanish: TAction
       Category = 'Tools'
-      Caption = 'actLangSpanish'
+      Caption = 'Spanish'
       GroupIndex = 1
       OnExecute = ActLangSpanishExecute
     end

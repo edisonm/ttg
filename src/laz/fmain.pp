@@ -15,8 +15,8 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, MTProcs, SysUtils, Classes, Graphics,
-  Forms, Dialogs, ExtCtrls, Menus, ComCtrls, Buttons, ActnList,
-  FSplash, FSingleEditor, ZConnection, Controls, FCrossManyToManyEditor0, FEditor, UConfigStorage
+  Forms, Dialogs, ExtCtrls, Menus, ComCtrls, Buttons, ActnList, FSplash, FSingleEditor,
+  ZConnection, Controls, FCrossManyToManyEditor0, FEditor, UConfigStorage
 {$IFNDEF FREEWARE}, UTTModel, UMakeTT{$ENDIF};
 
 type
@@ -229,10 +229,10 @@ end;
 procedure TMainForm.ActTeacherExecute(Sender: TObject);
 begin
   TTeacherForm.ToggleSingleEditor(Self,
-				   TeacherForm,
-				   ConfigStorage,
-				   actTeacher,
-				   SourceDataModule.TbTeacher);
+				  TeacherForm,
+				  ConfigStorage,
+				  actTeacher,
+				  SourceDataModule.TbTeacher);
 end;
 
 procedure TMainForm.ActTimeSlotExecute(Sender: TObject);
