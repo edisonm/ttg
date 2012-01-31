@@ -24,7 +24,12 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    ActLangEnglish: TAction;
+    ActLangSpanish: TAction;
     MainMenu: TMainMenu;
+    MILanguages: TMenuItem;
+    MILangSpanish: TMenuItem;
+    MILangEnglish: TMenuItem;
     MITeacher: TMenuItem;
     MISubject: TMenuItem;
     MISpecialization: TMenuItem;
@@ -118,6 +123,8 @@ type
     MIRegistrationInfo: TMenuItem;
     ToolBar: TToolBar;
     procedure ActExitExecute(Sender: TObject);
+    procedure ActLangEnglishExecute(Sender: TObject);
+    procedure ActLangSpanishExecute(Sender: TObject);
     procedure ActTeacherExecute(Sender: TObject);
     procedure ActSubjectExecute(Sender: TObject);
     procedure ActSpecializationExecute(Sender: TObject);
@@ -197,7 +204,7 @@ implementation
 uses
   FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FSubject, FTeacher,
   FTimeTable, FMasterDetailEditor, FConfiguracion, FClass, Printers, DSource,
-  DSourceBase, UTTGBasics, FMessageView;
+  DSourceBase, UTTGBasics, FMessageView, uttgi18n;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -206,6 +213,17 @@ uses
 procedure TMainForm.ActExitExecute(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TMainForm.ActLangEnglishExecute(Sender: TObject);
+begin
+  DisposeTranslator;
+end;
+
+procedure TMainForm.ActLangSpanishExecute(Sender: TObject);
+begin
+  DisposeTranslator;
+  EnableTranslator(GetLResourceForLanguage('ttg', 'es'));
 end;
 
 procedure TMainForm.ActTeacherExecute(Sender: TObject);
@@ -296,20 +314,20 @@ end;
 
 procedure TMainForm.ActTimeTableExecute(Sender: TObject);
 begin
-   TTimeTableForm.ToggleSingleEditor(Self,
-				   TimeTableForm,
-				   ConfigStorage,
-				   ActTimeTable,
-				   SourceDataModule.TbTimeTable);
+  TTimeTableForm.ToggleSingleEditor(Self,
+                                    TimeTableForm,
+				    ConfigStorage,
+				    ActTimeTable,
+				    SourceDataModule.TbTimeTable);
 end;
 
 procedure TMainForm.ActClassExecute(Sender: TObject);
 begin
    TClassForm.ToggleSingleEditor(Self,
-				    ClassForm,
-				    ConfigStorage,
-				    ActClass,
-				    SourceDataModule.TbCourse);
+				 ClassForm,
+				 ConfigStorage,
+				 ActClass,
+				 SourceDataModule.TbCourse);
 end;
 
 function TMainForm.ConfirmOperation: boolean;

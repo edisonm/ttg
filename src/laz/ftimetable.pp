@@ -8,8 +8,9 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, Db, FSingleEditor, Grids, Buttons, FEditor, DBCtrls,
-  ExtCtrls, ComCtrls, ActnList, ZConnection, ZDataset, FCrossManytoManyEditorR, DMaster, FCrossManyToManyEditor1,
-  FConfiguracion, DSource, FMasterDetailEditor, FTimeTableTeacher, FTimeTableRoomType, FTimeTableClass;
+  ExtCtrls, ComCtrls, ActnList, ZConnection, ZDataset, FCrossManytoManyEditorR,
+  DMaster, FCrossManyToManyEditor1, FConfiguracion, DSource, FMasterDetailEditor,
+  FTimeTableTeacher, FTimeTableRoomType, FTimeTableClass;
 
 type
 

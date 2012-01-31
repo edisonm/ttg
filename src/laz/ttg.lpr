@@ -48,6 +48,12 @@ uses
 {$IFDEF WINDOWS}{$R ttg.rc}{$ENDIF}
 
 begin
+  if Assigned(ResourceTranslator) then
+  begin
+    ResourceTranslator.TranslateUnitResourceStrings('UAbout');
+    ResourceTranslator.TranslateUnitResourceStrings('URelUtils');
+    ResourceTranslator.TranslateUnitResourceStrings('uttgi18n');
+  end;
   DecimalSeparator := ',';
   Application.Initialize;
   Application.Title := sAppName + ' ' + sAppVersion;

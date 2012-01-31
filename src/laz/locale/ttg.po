@@ -317,6 +317,14 @@ msgstr ""
 msgid "Indice|Indice de la Ayuda"
 msgstr ""
 
+#: TMAINFORM.ACTLANGENGLISH.CAPTION
+msgid "ActLangEnglish"
+msgstr ""
+
+#: TMAINFORM.ACTLANGSPANISH.CAPTION
+msgid "actLangSpanish"
+msgstr ""
+
 #: TMAINFORM.ACTLEVEL.CAPTION
 msgid "Niveles"
 msgstr ""
@@ -412,7 +420,7 @@ msgstr ""
 
 #: TMAINFORM.ACTTIMETABLE.CAPTION
 msgid "TimeTables"
-msgstr ""
+msgstr "Horarios..."
 
 #: TMAINFORM.ACTTIMETABLE.HINT
 msgid "Horarios|Ver los horarios elaborados"
@@ -448,6 +456,10 @@ msgstr ""
 
 #: TMAINFORM.MIHELP.HINT
 msgid "Ayuda|Temas de Ayuda en linea"
+msgstr ""
+
+#: TMAINFORM.MILANGUAGES.CAPTION
+msgid "New Item37"
 msgstr ""
 
 #: TMAINFORM.MIREOPEN.CAPTION
@@ -1088,5 +1100,10 @@ msgstr ""
 
 #: urelutils.swhenprocessing
 msgid "Mientras se procesaba %s"
+msgstr ""
+
+#: uttgi18n.patata
+msgctxt "uttgi18n.patata"
+msgid "hello world"
 msgstr ""
 
