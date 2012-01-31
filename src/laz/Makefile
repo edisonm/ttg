@@ -86,7 +86,7 @@ test:
 	@echo $(DBCONVERT) /ACC2SQL $(TTGMDB) $(TTGMYSQL) mysql
 
 run:
-	cd $(TTGDIR)/bin ; $(TTGEXE)
+	cd $(TTGDIR)/bin/$(BuildId) ; $(TTGEXE)
 
 ide:
 	lazarus-ide ttg.lpi

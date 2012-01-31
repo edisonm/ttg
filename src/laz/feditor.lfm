@@ -1,7 +1,7 @@
 object EditorForm: TEditorForm
-  Left = 524
+  Left = 718
   Height = 299
-  Top = 569
+  Top = 24
   Width = 479
   ActiveControl = Panel1
   Caption = 'EditorForm'
@@ -24,7 +24,7 @@ object EditorForm: TEditorForm
     TabOrder = 2
     object BtnShow: TToolButton
       Left = 1
-      Hint = 'Presentar|Presenta el contenido de la cuadricula en un reporte'
+      Hint = 'Show|Show the grid content in a report'
       Top = 2
       ImageIndex = 0
       ParentShowHint = False

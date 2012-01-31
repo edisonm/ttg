@@ -25,11 +25,11 @@ type
   end;
 
   function GetLResourceForLanguage(const Name, Lang: AnsiString): TLResource;
-  function GetLResourceForDefaultLanguage(const Name: AnsiString): TLResource;
+  function GetLResourceForDefaultLanguage(const ResName: AnsiString): TLResource;
 
   procedure DisposeTranslator;
   procedure EnableTranslator(LResource: TLResource); overload;
-  procedure EnableTranslator; overload;
+  procedure EnableTranslator(const ResName: AnsiString); overload;
 
 var
   ResourceTranslator: TResourceTranslator;
@@ -45,20 +45,19 @@ begin
   Result := LazarusResources.Find(Name + '.' + Lang, 'PO');
 end;
 
-function GetLResourceForDefaultLanguage(const Name: AnsiString): TLResource;
+function GetLResourceForDefaultLanguage(const ResName: AnsiString): TLResource;
 var
   Lang, LangShortID, T: string;
 begin
-  //Win32 user may decide to override locale with LANG variable.
-  //if Lang = '' then
   Lang := GetEnvironmentVariableUTF8('LANG');
+  T := '';
   if Lang = '' then
     LCLGetLanguageIDs(Lang, T);
-  Result := GetLResourceForLanguage(Name, Lang);
+  Result := GetLResourceForLanguage(ResName, Lang);
   if Result = nil then
   begin
     LangShortID := copy(Lang, 1, 2);
-    Result := GetLResourceForLanguage(Name, LangShortID);
+    Result := GetLResourceForLanguage(ResName, LangShortID);
   end
 end;
 
@@ -74,9 +73,51 @@ begin
   inherited Destroy;
 end;
 
+type
+  TPersistentAccess = class(TPersistent);
+
 procedure TResourceTranslator.TranslateStringProperty(Sender: TObject;
   const Instance: TPersistent; PropInfo: PPropInfo; var Content: string);
 var
+  s: string;
+  Section: string;
+  Tmp: TPersistent;
+  Component: TComponent;
+begin
+  if not Assigned(FPOFile) then
+    exit;
+  if not Assigned(PropInfo) then
+    exit;
+  if (UpperCase(PropInfo^.PropType^.Name) <> 'TTRANSLATESTRING') then
+    exit;
+  // do not translate at design time
+  // get the component
+  Tmp := Instance;
+  while Assigned(Tmp) and not (Tmp is TComponent) do
+    Tmp := TPersistentAccess(Tmp).GetOwner;
+  if not Assigned(Tmp) then
+    exit;
+  Component := Tmp as TComponent;
+  if (csDesigning in Component.ComponentState) then
+    exit;
+
+  if not (Sender is TReader) then
+    exit;
+  if Component = TReader(Sender).Root then
+    Section := Component.ClassName
+    else
+      if Component.Owner = TReader(Sender).Root then
+        Section := Component.Owner.ClassName
+      else
+        exit;
+  Section := UpperCase(Section + '.' + Instance.GetNamePath + '.' + PropInfo^.Name);
+  s := FPOFile.Translate(Section, Content);
+
+  if s <> '' then
+    Content := s;
+end;
+
+{var
   s: string;
   Section: string;
 begin
@@ -99,6 +140,7 @@ begin
   if s <> '' then
     Content := s;
 end;
+}
 
 function TResourceTranslator.TranslateResourceStrings: Boolean;
 begin
@@ -123,16 +165,17 @@ end;
 
 procedure EnableTranslator(LResource: TLResource); overload;
 begin
-  ResourceTranslator := TResourceTranslator.Create(LResource);
+  if LResource <> nil then
+    ResourceTranslator := TResourceTranslator.Create(LResource);
   if ResourceTranslator <> nil then
     LRSTranslator := ResourceTranslator;
 end;
 
-procedure EnableTranslator; overload;
+procedure EnableTranslator(const ResName: AnsiString); overload;
 var
   LResource: TLResource;
 begin
-  LResource := GetLResourceForDefaultLanguage('ttg');
+  LResource := GetLResourceForDefaultLanguage(ResName);
   if LResource <> nil then
   begin
     EnableTranslator(LResource);
@@ -143,7 +186,6 @@ end;
 
 initialization
   {$I ttg.lrs}
-  EnableTranslator;
 finalization
   DisposeTranslator;
 end.

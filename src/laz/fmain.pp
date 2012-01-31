@@ -24,9 +24,11 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    ActLangDefault: TAction;
     ActLangEnglish: TAction;
     ActLangSpanish: TAction;
     MainMenu: TMainMenu;
+    MILangDefault: TMenuItem;
     MILanguages: TMenuItem;
     MILangSpanish: TMenuItem;
     MILangEnglish: TMenuItem;
@@ -123,6 +125,7 @@ type
     MIRegistrationInfo: TMenuItem;
     ToolBar: TToolBar;
     procedure ActExitExecute(Sender: TObject);
+    procedure ActLangDefaultExecute(Sender: TObject);
     procedure ActLangEnglishExecute(Sender: TObject);
     procedure ActLangSpanishExecute(Sender: TObject);
     procedure ActTeacherExecute(Sender: TObject);
@@ -188,13 +191,15 @@ type
 
   public
     { Public declarations }
+    procedure LoadStoredConfig;
     property UpdateIndex: Integer read FUpdateIndex write FUpdateIndex;
     property Progress: Integer read FProgress write SetProgress;
     property Min: Integer read FMin write SetMin;
     property Max: Integer read FMax write SetMax;
     property Step: Integer read FStep write SetStep;
-    property ConfigStorage: TConfigStorage read FConfigStorage;
-  end;
+    property ConfigStorage: TConfigStorage read FConfigStorage write FConfigStorage;
+    property ConfigFileName: string read FConfigFileName write FConfigFileName;
+end;
 
 var
   MainForm: TMainForm;
@@ -213,6 +218,12 @@ uses
 procedure TMainForm.ActExitExecute(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TMainForm.ActLangDefaultExecute(Sender: TObject);
+begin
+  DisposeTranslator;
+  EnableTranslator('ttg');
 end;
 
 procedure TMainForm.ActLangEnglishExecute(Sender: TObject);
@@ -624,21 +635,19 @@ begin
   end;}
 end;
 
+procedure TMainForm.LoadStoredConfig;
+begin
+  LoadConfig(FConfigStorage.ConfigStrings);
+end;
+
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   MainForm.Caption := Application.Title;
 {$IFDEF DEBUG}
   Caption := Caption + ' - Debug Build';
 {$ENDIF}
-  FConfigFileName := GetCurrentDir + '/ttg.cfg';
-  FConfigStorage := TConfigStorage.Create(Self);
   FUpdateIndex := 0;
   try
-    if FileExists(FConfigFileName) then
-    begin
-      FConfigStorage.ConfigStrings.LoadFromFile(FConfigFileName);
-      LoadConfig(FConfigStorage.ConfigStrings);
-    end;
     FMin := 0;
     FMax := 100;
     FProgress := 0;
@@ -767,6 +776,12 @@ begin
     SaveDialog.FileName := Values['SaveDialog_FileName'];
     SaveDialogCSV.FileName := Values['SaveDialogCSV_FileName'];
     OpenDialog.FileName := Values['OpenDialog_FileName'];
+    if Values['Language'] = 'en' then
+      ActLangEnglish.Checked := True
+    else if Values['Language'] = 'es' then
+      ActLangSpanish.Checked := True
+    else
+      ActLangDefault.Checked := True;
 {
     MessageViewForm.MemSummary.Height :=
       StrToInt(Values['MessageViewForm_MemResumen_Height']);
@@ -786,6 +801,12 @@ begin
     Values['SaveDialog_FileName'] := SaveDialog.FileName;
     Values['SaveDialogCSV_FileName'] := SaveDialogCSV.FileName;
     Values['OpenDialog_FileName'] := OpenDialog.FileName;
+    if ActLangEnglish.Checked = True then
+      Values['Language'] := 'en'
+    else if ActLangSpanish.Checked = True then
+      Values['Language'] := 'es'
+    else
+      Values['Language'] := '';
 {
     Values['MessageViewForm_MemResumen_Height'] :=
       IntToStr(MessageViewForm.MemSummary.Height);

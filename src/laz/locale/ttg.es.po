@@ -210,7 +210,7 @@ msgstr "Aceptar|Aceptar"
 
 #: TEDITORFORM.BTNSHOW.HINT
 msgctxt "TEDITORFORM.BTNSHOW.HINT"
-msgid "Presentar|Presenta el contenido de la cuadricula en un reporte"
+msgid "Show|Show the grid content in a report"
 msgstr "Presentar|Presenta el contenido de la cuadricula en un reporte"
 
 #: TEDITORFORM.EDITORFORM.CAPTION
@@ -317,13 +317,17 @@ msgstr "Indice"
 msgid "Indice|Indice de la Ayuda"
 msgstr "Indice|Indice de la Ayuda"
 
+#: TMAINFORM.ACTLANGDEFAULT.CAPTION
+msgid "Default Language"
+msgstr "Idioma por defecto"
+
 #: TMAINFORM.ACTLANGENGLISH.CAPTION
-msgid "ActLangEnglish"
-msgstr "ActLangEnglish"
+msgid "English"
+msgstr "Inglés"
 
 #: TMAINFORM.ACTLANGSPANISH.CAPTION
-msgid "actLangSpanish"
-msgstr "actLangSpanish"
+msgid "Spanish"
+msgstr "Español"
 
 #: TMAINFORM.ACTLEVEL.CAPTION
 msgid "Niveles"
@@ -355,7 +359,7 @@ msgstr "AbrirOpen"
 
 #: TMAINFORM.ACTOPEN.HINT
 msgid "Open|Open saved institution"
-msgstr "Abrir|Abrir colegio previamente guardadoOpen|Open saved institution"
+msgstr "Abrir|Abrir colegio previamente guardado"
 
 #: TMAINFORM.ACTPASSWD.CAPTION
 msgid "Clave..."

@@ -210,7 +210,7 @@ msgstr ""
 
 #: TEDITORFORM.BTNSHOW.HINT
 msgctxt "TEDITORFORM.BTNSHOW.HINT"
-msgid "Presentar|Presenta el contenido de la cuadricula en un reporte"
+msgid "Show|Show the grid content in a report"
 msgstr ""
 
 #: TEDITORFORM.EDITORFORM.CAPTION
@@ -317,12 +317,16 @@ msgstr ""
 msgid "Indice|Indice de la Ayuda"
 msgstr ""
 
+#: TMAINFORM.ACTLANGDEFAULT.CAPTION
+msgid "Default Language"
+msgstr ""
+
 #: TMAINFORM.ACTLANGENGLISH.CAPTION
-msgid "ActLangEnglish"
+msgid "English"
 msgstr ""
 
 #: TMAINFORM.ACTLANGSPANISH.CAPTION
-msgid "actLangSpanish"
+msgid "Spanish"
 msgstr ""
 
 #: TMAINFORM.ACTLEVEL.CAPTION
@@ -1101,3 +1105,4 @@ msgstr ""
 #: urelutils.swhenprocessing
 msgid "Mientras se procesaba %s"
 msgstr ""
+
