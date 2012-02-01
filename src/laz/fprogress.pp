@@ -17,7 +17,7 @@ type
   TProgressForm = class(TForm)
     lblColision: TLabel;
     lblClashSubject: TLabel;
-    lblClashSubjectValor: TLabel;
+    lblClashSubjectValue: TLabel;
     lblExports: TLabel;
     lblImports: TLabel;
     Panel4: TPanel;
@@ -26,14 +26,14 @@ type
     Panel7: TPanel;
     pnlClashSubject: TPanel;
     pnlClashSubjectNumber: TPanel;
-    pnlClashSubjectValor: TPanel;
+    pnlClashSubjectValue: TPanel;
     pnlProgress: TPanel;
     bbtnClose: TBitBtn;
-    pnlValorTotal: TPanel;
+    pnlTotalValue: TPanel;
     pnlClashTeacher: TPanel;
-    lblValorTotal: TLabel;
-    pnlClashTeacherValor: TPanel;
-    lblClashTeacherValor: TLabel;
+    lblTotalValue: TLabel;
+    pnlClashTeacherValue: TPanel;
+    lblClashTeacherValue: TLabel;
     pnlClashRoomType: TPanel;
     pnlClashRoomTypeValor: TPanel;
     lblClashRoomTypeValor: TLabel;
@@ -60,13 +60,13 @@ type
     pnlSubjectRestriction: TPanel;
     pnlSubjectRestrictionNumber: TPanel;
     lblSubjectRestriction: TLabel;
-    pnlSubjectRestrictionValor: TPanel;
-    lblSubjectRestrictionValor: TLabel;
+    pnlSubjectRestrictionValue: TPanel;
+    lblSubjectRestrictionValue: TLabel;
     pnlTeacherRestriction: TPanel;
     pnlTeacherRestrictionNumber: TPanel;
     lblTeacherRestriction: TLabel;
     Panel26: TPanel;
-    lblTeacherRestrictionValor: TLabel;
+    lblTeacherRestrictionValue: TLabel;
     pnlSubjectNoDispersa: TPanel;
     Panel28: TPanel;
     lblSubjectNoDispersa: TLabel;
@@ -177,18 +177,18 @@ begin
     lblTeacherRestriction.Caption :=
       Format('%s ', [VarArrToStr(TeacherRestrictionTypeATeacherCant)]);
     lblSubjectNoDispersa.Caption := Format('%d ', [SubjectNoDispersa]);
-    lblClashTeacherValor.Caption := Format('%d ', [ClashTeacherValor]);
-    lblClashSubjectValor.Caption := Format('%d ', [ClashSubjectValor]);
+    lblClashTeacherValue.Caption := Format('%d ', [ClashTeacherValue]);
+    lblClashSubjectValue.Caption := Format('%d ', [ClashSubjectValue]);
     lblTeacherFraccionamientoValor.Caption :=
       Format('%d ', [TeacherFraccionamientoValor]);
     lblClashRoomTypeValor.Caption := Format('%d ', [ClashRoomTypeValor]);
     lblHourHuecaDesubicadaValor.Caption := Format('%d ',
       [HourHuecaDesubicadaValor]);
     lblSessionCortadaValor.Caption := Format('%d ', [SessionCortadaValor]);
-    lblSubjectRestrictionValor.Caption := Format('%d ', [SubjectRestrictionValor]);
-    lblTeacherRestrictionValor.Caption := Format('%d ', [TeacherRestrictionValor]);
+    lblSubjectRestrictionValue.Caption := Format('%d ', [SubjectRestrictionValue]);
+    lblTeacherRestrictionValue.Caption := Format('%d ', [TeacherRestrictionValue]);
     lblSubjectNoDispersaValor.Caption := Format('%d ', [SubjectNoDispersaValor]);
-    lblValorTotal.Caption := Format('%d ', [Value]);
+    lblTotalValue.Caption := Format('%d ', [Value]);
   end;
   with ASolver do
   begin

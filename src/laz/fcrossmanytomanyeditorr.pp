@@ -76,7 +76,7 @@ var
 implementation
 
 uses
-  DSource;
+  DSource, UTTGConsts;
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
@@ -243,7 +243,7 @@ procedure TCrossManyToManyEditorRForm.LoadHints(AColDataSet, ARowDataSet,
 begin
   with SourceDataModule do
   begin
-    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
+    DrawGrid.Hint := Format(SRelColsRows,
       [Description[ARelDataSet], Description[AColDataSet],
       Description[ARowDataSet]]);
     ListBox.Hint := Format('%s|%s', [ALstDataSet.Name,

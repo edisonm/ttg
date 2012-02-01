@@ -18,12 +18,6 @@ unit USortAlgs;
   Referencia:
     Delphi Informant Vol. ? No. ?
 
-  Dependencias:
-    Delphi 4.0
-    RxLib
-    Tb97
-    ArCtrls
-
   Compatibilidad:
     Delphi 4.0 / Tiene caracteristicas propias del Delphi 4.0, que lo hacen
     dificil de hacer compatible con Delphi 3.0/2.0/1.0

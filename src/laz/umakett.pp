@@ -39,7 +39,7 @@ type
 
 implementation
 
-uses UEvolElitist, FProgress;
+uses UEvolElitist, FProgress, UTTGConsts;
 
 type
 
@@ -146,7 +146,7 @@ begin
       ProgressFormDrv := TProgressFormDrv.Create;
       try
         {VEvolElitist.OnRecordBest := MainForm.OnRegistrarMejor;}
-        ProgressFormDrv.Caption := Format('Elaboracion en progreso [%d]', [AIdTimeTable]);
+        ProgressFormDrv.Caption := Format(SWorkInProgress, [AIdTimeTable]);
         VEvolElitist.OnProgress := ProgressFormDrv.OnProgress;
         VEvolElitist.Execute(RefreshInterval);
         if ProgressFormDrv.CancelClick then
@@ -160,7 +160,7 @@ begin
             SharedDirectory, PollinationProb);
           try
             DownHill.BestIndividual.Assign(VEvolElitist.BestIndividual);
-            ProgressFormDrv.Caption := Format('Mejorando TimeTable [%d]', [AIdTimeTable]);
+            ProgressFormDrv.Caption := Format(SImprovingTimeTable, [AIdTimeTable]);
             DownHill.OnProgress := ProgressFormDrv.OnProgress;
             ExecuteDownHill(DownHill, Bookmarks, RefreshInterval);
             if ProgressFormDrv.CancelClick then
@@ -181,8 +181,7 @@ begin
         ProgressFormDrv.Free;
       end;
       VEvolElitist.BestIndividual.Update;
-      ExtraInfo := Format('Aplicar Descenso: %23s',
-        [FBoolToStr[ApplyDoubleDownHill]]);
+      ExtraInfo := Format(SApplyDownHill, [FBoolToStr[ApplyDoubleDownHill]]);
       with TSyncSaver.Create(VEvolElitist, AIdTimeTable, ExtraInfo,
         FTimeIni, Now) do
       try
@@ -291,7 +290,7 @@ begin
       ProgressFormDrv := TProgressFormDrv.Create;
       try
         DownHill.OnProgress := ProgressFormDrv.OnProgress;
-        ProgressFormDrv.Caption := Format('Mejorando TimeTable [%d] en [%d]',
+        ProgressFormDrv.Caption := Format(SImprovingTimeTableIn,
           [FIdTimeTableFuente, FIdTimeTable]);
         ExecuteDownHill(DownHill, Bookmarks, RefreshInterval);
         if ProgressFormDrv.CancelClick then
@@ -300,7 +299,7 @@ begin
           Exit;
         end
         else
-          ExtraInfo := Format('TimeTable base: %d', [FIdTimeTableFuente]);
+          ExtraInfo := Format(SBaseTimeTable, [FIdTimeTableFuente]);
           with TSyncSaver.Create(DownHill, FIdTimeTable, ExtraInfo,
             TimeIni, Now) do
           try

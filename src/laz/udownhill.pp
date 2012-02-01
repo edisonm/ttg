@@ -33,6 +33,9 @@ type
 
 implementation
 
+uses
+  UTTGConsts;
+
 { TDownHill }
 
 class function TDownHill.DownHill(Individual: TIndividual): Integer;
@@ -163,7 +166,7 @@ var
 begin
   Report := TStringList.Create;
   try
-    Report.Add('Algoritmo de Descenso');
+    Report.Add(SDownHillAlgorithm);
     Report.Add('=====================');
     if AExtraInfo <> '' then
       Report.Add(AExtraInfo);

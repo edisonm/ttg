@@ -600,6 +600,7 @@ msgid "Opciones"
 msgstr "Opciones"
 
 #: TCONFIGURACIONFORM.TBSPESOS.CAPTION
+msgctxt "TCONFIGURACIONFORM.TBSPESOS.CAPTION"
 msgid "Pesos"
 msgstr "Pesos"
 
@@ -770,7 +771,7 @@ msgstr "Nuevo|Nuevo colegio"
 
 #: TMAINFORM.ACTOPEN.CAPTION
 msgid "Open"
-msgstr "AbrirOpen"
+msgstr "Abrir"
 
 #: TMAINFORM.ACTOPEN.HINT
 msgid "Open|Open saved institution"
@@ -988,8 +989,8 @@ msgctxt "TPROGRESSFORM.LBLCRUCESUBJECT.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLCRUCESUBJECTVALOR.CAPTION
-msgctxt "TPROGRESSFORM.LBLCRUCESUBJECTVALOR.CAPTION"
+#: TPROGRESSFORM.LBLCRUCESUBJECTVALUE.CAPTION
+msgctxt "TPROGRESSFORM.LBLCRUCESUBJECTVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -998,8 +999,8 @@ msgctxt "TPROGRESSFORM.LBLCRUCETEACHER.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLCRUCETEACHERVALOR.CAPTION
-msgctxt "TPROGRESSFORM.LBLCRUCETEACHERVALOR.CAPTION"
+#: TPROGRESSFORM.LBLCRUCETEACHERVALUE.CAPTION
+msgctxt "TPROGRESSFORM.LBLCRUCETEACHERVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1063,8 +1064,8 @@ msgctxt "TPROGRESSFORM.LBLSUBJECTRESTRICTION.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLSUBJECTRESTRICTIONVALOR.CAPTION
-msgctxt "TPROGRESSFORM.LBLSUBJECTRESTRICTIONVALOR.CAPTION"
+#: TPROGRESSFORM.LBLSUBJECTRESTRICTIONVALUE.CAPTION
+msgctxt "TPROGRESSFORM.LBLSUBJECTRESTRICTIONVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1083,13 +1084,13 @@ msgctxt "TPROGRESSFORM.LBLTEACHERRESTRICTION.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLTEACHERRESTRICTIONVALOR.CAPTION
-msgctxt "TPROGRESSFORM.LBLTEACHERRESTRICTIONVALOR.CAPTION"
+#: TPROGRESSFORM.LBLTEACHERRESTRICTIONVALUE.CAPTION
+msgctxt "TPROGRESSFORM.LBLTEACHERRESTRICTIONVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLVALORTOTAL.CAPTION
-msgctxt "TPROGRESSFORM.LBLVALORTOTAL.CAPTION"
+#: TPROGRESSFORM.LBLTOTALVALUE.CAPTION
+msgctxt "TPROGRESSFORM.LBLTOTALVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1161,8 +1162,8 @@ msgctxt "TPROGRESSFORM.PNLCRUCESUBJECTNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLCRUCESUBJECTVALOR.CAPTION
-msgctxt "TPROGRESSFORM.PNLCRUCESUBJECTVALOR.CAPTION"
+#: TPROGRESSFORM.PNLCRUCESUBJECTVALUE.CAPTION
+msgctxt "TPROGRESSFORM.PNLCRUCESUBJECTVALUE.CAPTION"
 msgid " Valor:"
 msgstr " Valor:"
 
@@ -1175,8 +1176,8 @@ msgctxt "TPROGRESSFORM.PNLCRUCETEACHERNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLCRUCETEACHERVALOR.CAPTION
-msgctxt "TPROGRESSFORM.PNLCRUCETEACHERVALOR.CAPTION"
+#: TPROGRESSFORM.PNLCRUCETEACHERVALUE.CAPTION
+msgctxt "TPROGRESSFORM.PNLCRUCETEACHERVALUE.CAPTION"
 msgid " Valor:"
 msgstr " Valor:"
 
@@ -1237,8 +1238,8 @@ msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTIONNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLSUBJECTRESTRICTIONVALOR.CAPTION
-msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTIONVALOR.CAPTION"
+#: TPROGRESSFORM.PNLSUBJECTRESTRICTIONVALUE.CAPTION
+msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTIONVALUE.CAPTION"
 msgid " Valor:"
 msgstr " Valor:"
 
@@ -1251,7 +1252,7 @@ msgctxt "TPROGRESSFORM.PNLTEACHERRESTRICTIONNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLVALORTOTAL.CAPTION
+#: TPROGRESSFORM.PNLTOTALVALUE.CAPTION
 msgid " Valor Total:"
 msgstr " Valor Total:"
 
@@ -1537,6 +1538,45 @@ msgstr "No existe registro maestro en %s para %s.[%s]=%s"
 msgid "When processing %s"
 msgstr "Mientras se procesaba %s"
 
+#: uttgconsts.sapplydownhill
+msgid "Aplicar Descenso: %23s"
+msgstr ""
+
+#: uttgconsts.sbasetimetable
+msgid "TimeTable base: %d"
+msgstr ""
+
+#: uttgconsts.sbrokensession
+msgid "Materias cortadas"
+msgstr ""
+
+#: uttgconsts.sbrokenteacher
+msgid "Fracc. h. profesores"
+msgstr ""
+
+#: uttgconsts.schangeswillbelostwarning
+msgid "Los cambios realizados se perderan, Esta seguro?"
+msgstr ""
+
+#: uttgconsts.sclashroomtype
+msgctxt "uttgconsts.sclashroomtype"
+msgid "Cruce de aulas"
+msgstr "Cruce de aulas"
+
+#: uttgconsts.sclashsubject
+msgctxt "uttgconsts.sclashsubject"
+msgid "Cruce de materias"
+msgstr "Cruce de materias"
+
+#: uttgconsts.sclashteacher
+msgctxt "uttgconsts.sclashteacher"
+msgid "Cruce de profesores"
+msgstr "Cruce de profesores"
+
+#: uttgconsts.sclasstimeslottosessionoverflow
+msgid "Se desbordo Molde de ClassTimeSlotToSession: Class %d-%d Duracion %d"
+msgstr ""
+
 #: uttgconsts.sclassworkloadhead
 msgid "Class; Work Load"
 msgstr "Clase; Carga"
@@ -1549,6 +1589,60 @@ msgstr "Carga horaria de paralelos sin problemas..."
 msgid "Class work load with problems..."
 msgstr "Carga Horaria de paralelos con problemas..."
 
+#: uttgconsts.scopyright
+msgid "1999-2012 by Edison Mera"
+msgstr ""
+
+#: uttgconsts.scrossprob
+msgid "Probabilidad de cruce"
+msgstr ""
+
+#: uttgconsts.sdownhillalgorithm
+msgid "Algoritmo de Descenso"
+msgstr ""
+
+#: uttgconsts.sevolutiveelitistalgorithm
+msgid "Algoritmo Evolutivo Elitista"
+msgstr ""
+
+#: uttgconsts.sgeneratetimetables
+msgid "Generar Horarios"
+msgstr ""
+
+#: uttgconsts.simprovingtimetable
+msgid "Mejorando TimeTable [%d]"
+msgstr ""
+
+#: uttgconsts.simprovingtimetablein
+msgid "Mejorando TimeTable [%d] en [%d]"
+msgstr ""
+
+#: uttgconsts.sinvaliddata
+msgid "El dato ingresado no es valido"
+msgstr ""
+
+#: uttgconsts.sisempty
+msgid "%s esta vacio"
+msgstr ""
+
+#: uttgconsts.smaxiteration
+msgid "Maximo de generaciones"
+msgstr ""
+
+#: uttgconsts.smutationprob
+msgid "Probabilidad de Mutacion"
+msgstr ""
+
+#: uttgconsts.snoerrorreadyforchecksummary
+msgid ""
+"No se encontraron errores, esta listo para generar horario.\n"
+"Desea mostrar el resumen del chequeo del horario?\n"
+msgstr ""
+
+#: uttgconsts.snonscatteredsubject
+msgid "Materias juntas"
+msgstr ""
+
 #: uttgconsts.snumhardteacherrestrictions
 msgid "Number of hard teacher restrictions..."
 msgstr "Numero de prohibiciones de profesores con problemas..."
@@ -1557,9 +1651,44 @@ msgstr "Numero de prohibiciones de profesores con problemas..."
 msgid "Number of soft teacher restrictions..."
 msgstr "Numero de prohibiciones de profesores sin problemas..."
 
+#: uttgconsts.soutofpositionemptyhour
+msgid "Horas Huecas desubicadas:"
+msgstr ""
+
+#: uttgconsts.spendingchangeswillbelostyoureallywanttoquit
+msgid ""
+"Los cambios realizados hasta el momento se perderan.\n"
+"Esta seguro que desea cerrar el programa?\n"
+msgstr ""
+
+#: uttgconsts.spollinationprob
+msgid "Probabilidad de polinizacion"
+msgstr ""
+
+#: uttgconsts.spopulationsize
+msgid "Numero de individuos"
+msgstr ""
+
 #: uttgconsts.sproblems
 msgid "Problems"
 msgstr "Problemas"
+
+#: uttgconsts.srandseed
+msgid "Semilla Numeros aleatorios"
+msgstr ""
+
+#: uttgconsts.sready
+msgid "Listo"
+msgstr ""
+
+#: uttgconsts.srelcolsrows
+msgctxt "uttgconsts.srelcolsrows"
+msgid "%s|Columnas: %s - Filas: %s "
+msgstr ""
+
+#: uttgconsts.srepairprob
+msgid "Probabilidad de Reparacion"
+msgstr ""
 
 #: uttgconsts.sroomtypesloadhead
 msgid "RoomType; Available Hours; Load"
@@ -1572,6 +1701,18 @@ msgstr "Tipos de aulas sin problemas..."
 #: uttgconsts.sroomtypeswithproblems
 msgid "Room types with problems..."
 msgstr "Tipos de aulas con problemas..."
+
+#: uttgconsts.ssavechanges
+msgid "Desea guardar los cambios efectuados?"
+msgstr ""
+
+#: uttgconsts.ssavedialogfilter
+msgid "TimeTable para colegio (*.ttd)|*.ttd"
+msgstr ""
+
+#: uttgconsts.ssearchby
+msgid "Buscar por %s"
+msgstr ""
 
 #: uttgconsts.steacherrestrictionshead
 msgid "Teacher; Restrictions"
@@ -1588,4 +1729,21 @@ msgstr "Carga horaria de los profesores con problemas..."
 #: uttgconsts.steacherworkloadhead
 msgid "Teacher; Work Load"
 msgstr "Profesor; Carga horaria"
+
+#: uttgconsts.sthenexttimetablesalreadyexists
+msgid "Los siguientes horarios ya existian: %s"
+msgstr ""
+
+#: uttgconsts.stimetablecodestogenerate
+msgid "Codigos de los Horarios a generar"
+msgstr ""
+
+#: uttgconsts.sweights
+msgctxt "uttgconsts.sweights"
+msgid "Pesos"
+msgstr "Pesos"
+
+#: uttgconsts.sworkinprogress
+msgid "Elaboracion en progreso [%d]"
+msgstr ""
 

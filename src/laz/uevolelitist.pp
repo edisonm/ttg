@@ -76,6 +76,9 @@ type
 
 implementation
 
+uses
+  UTTGConsts;
+
 procedure TEvolElitist.SetPopulationSize(APopulationSize: Integer);
 var
   Individual: Integer;
@@ -373,7 +376,7 @@ begin
   Report := TStringList.Create;
   with Report do
   try
-    Add('Algoritmo Evolutivo Elitista');
+    Add(SEvolutiveElitistAlgorithm);
     Add('============================');
     if AExtraInfo <> '' then
       Add(AExtraInfo);
@@ -407,13 +410,13 @@ procedure TEvolElitist.ReportParameters(ASummary: TStrings);
 begin
   with ASummary do
   begin
-    Add(Format('Semilla Numeros aleatorios:  %12.u', [FRandSeed]));
-    Add(Format('Numero de individuos:        %12.d', [FPopulationSize]));
-    Add(Format('Maximo de generaciones:      %12.d', [FMaxIteration]));
-    Add(Format('Probabilidad de cruce:             %1.4f', [FCrossProb]));
-    Add(Format('Probabilidad de Mutacion:          %1.4f', [FMutationProb]));
-    Add(Format('Probabilidad de Reparacion:        %1.4f', [FRepairProb]));
-    Add(Format('Probabilidad de polinizacion:      %1.4f', [PollinationProb]));
+    Add(Format('%0:-28s %12.u', [SRandSeed        + ':', FRandSeed]));
+    Add(Format('%0:-28s %12.d', [SPopulationSize  + ':', FPopulationSize]));
+    Add(Format('%0:-28s %12.d', [SMaxIteration    + ':', FMaxIteration]));
+    Add(Format('%0:-34s %1.4f', [SCrossProb       + ':', FCrossProb]));
+    Add(Format('%0:-34s %1.4f', [SMutationProb    + ':', FMutationProb]));
+    Add(Format('%0:-34s %1.4f', [SRepairProb      + ':', FRepairProb]));
+    Add(Format('%0:-34s %1.4f', [SPollinationProb + ':', PollinationProb]));
   end;
 end;
 

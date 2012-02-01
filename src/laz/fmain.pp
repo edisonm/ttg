@@ -5,11 +5,11 @@ unit FMain;
 
 {
 TODO:
-  - HORARIO POR PARALELOS
-  - HORARIO POR PROFESORES
-  - PROHIBICIONES DE PROFESORES
-  - DISTRIBUTIVO POR PROFESORES
-  - DISTRIBUTIVO POR MATERIAS
+  - Timetables by Classes
+  - Timetables by Teachers
+  - Teacher Restrictions
+  - Teacher Distribution
+  - Subject Distribution
 }
 interface
 
@@ -209,7 +209,7 @@ implementation
 uses
   FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FSubject, FTeacher,
   FTimeTable, FMasterDetailEditor, FConfiguracion, FClass, Printers, DSource,
-  DSourceBase, UTTGBasics, FMessageView, UTTGi18n;
+  DSourceBase, UTTGBasics, FMessageView, UTTGi18n, UTTGConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -343,9 +343,7 @@ end;
 
 function TMainForm.ConfirmOperation: boolean;
 begin
-  Result :=
-    MessageDlg('Los cambios realizados hasta el momento se perderan, '#13#10
-    + 'Esta seguro?', mtWarning, [mbYes, mbNo], 0) = mrYes
+  Result := MessageDlg(SChangesWillBeLostWarning, mtWarning, [mbYes, mbNo], 0) = mrYes
 end;
 
 procedure TMainForm.ActNewExecute(Sender: TObject);
@@ -361,7 +359,7 @@ begin
     end;
   finally
     StatusBar.Panels[1].Style := psText;
-    StatusBar.Panels[2].Text := 'Listo';
+    StatusBar.Panels[2].Text := SReady;
   end;
 end;
 
@@ -371,7 +369,7 @@ begin
   Progress := 0;
   Max := 100;
   SaveDialog.DefaultExt := 'ttd'; // Time Tabling Data
-  SaveDialog.Filter := 'TimeTable para colegio (*.ttd)|*.ttd';
+  SaveDialog.Filter := SSaveDialogFilter;
   try
     SaveDialog.HelpContext := ActSave.HelpContext;
     if SaveDialog.Execute then
@@ -381,7 +379,7 @@ begin
     end;
   finally
     StatusBar.Panels[1].Style := psText;
-    StatusBar.Panels[2].Text := 'Listo';
+    StatusBar.Panels[2].Text := SReady;
   end;
 end;
 
@@ -424,7 +422,7 @@ begin
     end;
   finally
     StatusBar.Panels[1].Style := psText;
-    StatusBar.Panels[2].Text := 'Listo';
+    StatusBar.Panels[2].Text := SReady;
   end;
 end;
 
@@ -437,8 +435,7 @@ begin
 {$IFNDEF FREEWARE}
   try
     SIdTimeTables := IntToStr(MasterDataModule.NewIdTimeTable);
-    if not InputQuery('Generar Horarioss', 'Codigos de los Horarios a generar',
-        SIdTimeTables) then
+    if not InputQuery(SGenerateTimeTables, STimeTableCodesToGenerate, SIdTimeTables) then
       Exit;
     ElaborarTimeTables(SIdTimeTables);
   finally
@@ -469,7 +466,7 @@ var
       else
         IdTimeTable2 := StrToInt(ExtractString(d, Position2, '-'));
       if Position2 <= Length(d) then
-        raise Exception.Create('El dato ingresado no es valido');
+        raise Exception.Create(SInvalidData);
       SetLength(ValidIdes, Valids + IdTimeTable2 - IdTimeTable1 + 1);
       SetLength(WrongIdes, Wrongs + IdTimeTable2 - IdTimeTable1 + 1);
       for IdTimeTable := IdTimeTable1 to IdTimeTable2 do
@@ -506,8 +503,8 @@ begin
       end;
       {$ENDIF}
       if Length(WrongIdes) > 0 then
-        MessageDlg(Format('Los siguientes horarios ya existian: %s',
-          [VarArrToStr(WrongIdes)]), mtError, [mbOK], 0);
+        MessageDlg(Format(STheNextTimeTablesAlreadyExists, [VarArrToStr(WrongIdes)]),
+          mtError, [mbOK], 0);
     finally
       ActElaborarTimeTable.Enabled := True;
       TbTimeTableDetail.Refresh;
@@ -710,9 +707,7 @@ begin
   end
   else
   begin
-    if MessageDlg('No se encontraron errores, esta listo para generar horario.'#13#10 +
-                    'Desea mostrar el resumen del chequeo del horario?',
-                  mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    if MessageDlg(SNoErrorReadyForCheckSummary, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
       MessageViewForm.Show;
   end;
 end;
@@ -731,9 +726,8 @@ end;
 procedure TMainForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose :=
-    MessageDlg('Los cambios realizados hasta el momento se perderan.'#13#10 +
-    'Esta seguro que desea cerrar el programa?',
-    mtWarning, [mbYes, mbNo], 0) = mrYes;
+    MessageDlg(SPendingChangesWillBeLostYouReallyWantToQuit,
+      mtWarning, [mbYes, mbNo], 0) = mrYes;
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);

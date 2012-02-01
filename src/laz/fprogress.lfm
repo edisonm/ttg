@@ -21,7 +21,7 @@ object ProgressForm: TProgressForm
     ClientHeight = 320
     ClientWidth = 448
     TabOrder = 0
-    object pnlValorTotal: TPanel
+    object pnlTotalValue: TPanel
       Left = 8
       Height = 21
       Top = 270
@@ -32,7 +32,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 433
       TabOrder = 0
-      object lblValorTotal: TLabel
+      object lblTotalValue: TLabel
         Left = 419
         Height = 19
         Top = 1
@@ -60,7 +60,7 @@ object ProgressForm: TProgressForm
       Caption = ' Cruce profesores:'
       TabOrder = 1
     end
-    object pnlClashTeacherValor: TPanel
+    object pnlClashTeacherValue: TPanel
       Left = 312
       Height = 21
       Top = 54
@@ -71,7 +71,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 2
-      object lblClashTeacherValor: TLabel
+      object lblClashTeacherValue: TLabel
         Left = 116
         Height = 19
         Top = 1
@@ -435,7 +435,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlSubjectRestrictionValor: TPanel
+    object pnlSubjectRestrictionValue: TPanel
       Left = 312
       Height = 21
       Top = 222
@@ -446,7 +446,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 18
-      object lblSubjectRestrictionValor: TLabel
+      object lblSubjectRestrictionValue: TLabel
         Left = 116
         Height = 19
         Top = 1
@@ -512,7 +512,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 21
-      object lblTeacherRestrictionValor: TLabel
+      object lblTeacherRestrictionValue: TLabel
         Left = 116
         Height = 19
         Top = 1
@@ -822,7 +822,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlClashSubjectValor: TPanel
+    object pnlClashSubjectValue: TPanel
       Left = 312
       Height = 21
       Top = 78
@@ -833,7 +833,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 35
-      object lblClashSubjectValor: TLabel
+      object lblClashSubjectValue: TLabel
         Left = 116
         Height = 19
         Top = 1

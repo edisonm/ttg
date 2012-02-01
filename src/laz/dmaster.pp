@@ -311,7 +311,7 @@ var
   end;
 
   // Chequea que existan las aulas suficientes para una materia dada
-  procedure CheckRoomTypeCarga;
+  procedure CheckRoomTypeLoad;
   var
     c: Integer;
     vMainMin, vMainMax, vSubMin, vSubMax: Integer;
@@ -463,7 +463,7 @@ begin
     ObtenerRoomTypeCarga;
     CheckTeacherCarga;
     CheckTeacherRestrictionCant;
-    CheckRoomTypeCarga;
+    CheckRoomTypeLoad;
     CheckCourseCarga;
   finally
     AMainStrings.EndUpdate;

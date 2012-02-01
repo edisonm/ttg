@@ -21,7 +21,7 @@ procedure SearchInDBGrid(DBGrid: TDBGrid);
 implementation
 
 uses
-  UTTGBasics;
+  UTTGBasics, UTTGConsts;
 
 function CompositionADuracion(const s: string): Integer;
 var
@@ -193,7 +193,7 @@ begin
     with DBGrid.SelectedField do
     begin
       s := AsString;
-      if InputQuery('Buscar por ' + DisplayLabel, DisplayName, s) then
+      if InputQuery(Format(SSearchBy, [DisplayLabel]), DisplayName, s) then
         SearchInField(DBGrid.SelectedField, s);
     end;
 end;

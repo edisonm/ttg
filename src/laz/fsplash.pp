@@ -31,7 +31,7 @@ type
 implementation
 
 uses
-  UAbout;
+  UAbout, UTTGConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -72,7 +72,7 @@ begin
   lblProductName.Caption := Caption;
   lblProductVersion.Caption := sAppVersion + '-' + sRevision;
   lblYearLabel.Caption := 'Build (' + sBuildDateTime + ')';
-  lblCopyright.Caption := '1999-2011 por Edison Mera';
+  lblCopyright.Caption := SCopyright;
 end;
 
 initialization

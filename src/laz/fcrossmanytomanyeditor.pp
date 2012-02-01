@@ -117,7 +117,7 @@ var
 implementation
 
 uses
-  DSource;
+  DSource, UTTGConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -128,9 +128,8 @@ procedure TCrossManyToManyEditorForm.LoadHints(AColDataSet, ARowDataSet,
 begin
   with SourceDataModule do
   begin
-    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
-      [Description[ARelDataSet], Description[AColDataSet],
-      Description[ARowDataSet]]);
+    DrawGrid.Hint := Format(SRelColsRows, [Description[ARelDataSet],
+      Description[AColDataSet], Description[ARowDataSet]]);
   end;
 end;
 
@@ -142,7 +141,7 @@ begin
   begin
     Release;
     s := DataSet.Name;
-    raise Exception.CreateFmt('%s esta vacio', [s]);
+    raise Exception.CreateFmt(SIsEmpty, [s]);
   end;
 end;
 
@@ -414,8 +413,7 @@ procedure TCrossManyToManyEditorForm.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
   if Editing then
-    case MessageDlg('Desea guardar los cambios efectuados?', mtConfirmation,
-      [mbYes, mbNo, MbCancel], 0) of
+    case MessageDlg(SSaveChanges, mtConfirmation, [mbYes, mbNo, MbCancel], 0) of
       mrYes: WriteData;
       mrNo: {Nothing to do};
       mrCancel: CanClose := False;
