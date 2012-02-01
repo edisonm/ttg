@@ -1,9 +1,10 @@
 inherited MasterDetailEditorForm: TMasterDetailEditorForm
-  Left = 537
-  Top = 106
+  Left = 697
+  Top = 266
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
+  Visible = True
   inherited TlBShow: TToolBar
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )

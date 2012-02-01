@@ -74,7 +74,7 @@ var
 implementation
 
 uses
-  UTTGBasics, UTTGDBUtils, UTTGConsts, DSource, dsourcebase;
+  UTTGBasics, UTTGDBUtils, UTTGConsts, DSource, dsourcebaseconsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}

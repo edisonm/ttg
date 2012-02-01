@@ -40,7 +40,7 @@ uses
   DSource in 'dsource.pp' {SourceDataModule: TDataModule},
   FSelTimeSlot {SelTimeSlotForm},
   DBase, UModel, UMakeTT, UDownHill, USolver, UTTGBasics, UAbout, FMessageView,
-  UTTGi18n, uttgconsts;
+  UTTGi18n, uttgconsts, dsourcebaseconsts;
 
 {$IFNDEF FPC}
 {$R *.res}
@@ -70,6 +70,7 @@ begin
     ResourceTranslator.TranslateUnitResourceStrings('URelUtils');
     ResourceTranslator.TranslateUnitResourceStrings('UTTGii18n');
     ResourceTranslator.TranslateUnitResourceStrings('UTTGConsts');
+    ResourceTranslator.TranslateUnitResourceStrings('dsourcebaseconsts');
   end;
   DecimalSeparator := ',';
   Application.Initialize;

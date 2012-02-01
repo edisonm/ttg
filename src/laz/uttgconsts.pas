@@ -1,6 +1,6 @@
 unit UTTGConsts;
 
-{$mode objfpc}
+{$I ttg.inc}
 
 interface
 
@@ -8,6 +8,7 @@ uses
   Classes, SysUtils;
 
 resourcestring
+
   SNumSoftTeacherRestrictions = 'Number of soft teacher restrictions...';
   SNumHardTeacherRestrictions = 'Number of hard teacher restrictions...';
   STeacherRestrictionsHead = 'Teacher; Restrictions';

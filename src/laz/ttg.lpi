@@ -112,7 +112,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="40">
+    <Units Count="41">
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -385,6 +385,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGConsts"/>
       </Unit39>
+      <Unit40>
+        <Filename Value="dsourcebaseconsts.pp"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="dsourcebaseconsts"/>
+      </Unit40>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

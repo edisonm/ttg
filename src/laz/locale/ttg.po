@@ -37,6 +37,7 @@ msgid "Name"
 msgstr ""
 
 #: dsourcebase.sfldistribution_composition
+msgctxt "dsourcebase.sfldistribution_composition"
 msgid "Composition"
 msgstr ""
 
@@ -51,6 +52,7 @@ msgid "Level"
 msgstr ""
 
 #: dsourcebase.sfldistribution_idroomtype
+msgctxt "dsourcebase.sfldistribution_idroomtype"
 msgid "Room Type"
 msgstr ""
 
@@ -85,6 +87,7 @@ msgid "Id"
 msgstr ""
 
 #: dsourcebase.sflhour_interval
+msgctxt "dsourcebase.sflhour_interval"
 msgid "Interval"
 msgstr ""
 
@@ -124,6 +127,7 @@ msgid "Name"
 msgstr ""
 
 #: dsourcebase.sflroomtype_number
+msgctxt "dsourcebase.sflroomtype_number"
 msgid "Cantidad"
 msgstr ""
 
@@ -238,6 +242,7 @@ msgid "Id"
 msgstr ""
 
 #: dsourcebase.sflteacher_lnteacher
+msgctxt "dsourcebase.sflteacher_lnteacher"
 msgid "Last Name"
 msgstr ""
 
@@ -247,6 +252,7 @@ msgid "Name"
 msgstr ""
 
 #: dsourcebase.sflteacher_teachernationalid
+msgctxt "dsourcebase.sflteacher_teachernationalid"
 msgid "National ID"
 msgstr ""
 
@@ -264,6 +270,7 @@ msgid "Day"
 msgstr ""
 
 #: dsourcebase.sfltimetabledetail_idgroupid
+msgctxt "dsourcebase.sfltimetabledetail_idgroupid"
 msgid "Group"
 msgstr ""
 
@@ -288,10 +295,12 @@ msgid "Subject"
 msgstr ""
 
 #: dsourcebase.sfltimetabledetail_idtimetable
+msgctxt "dsourcebase.sfltimetabledetail_idtimetable"
 msgid "TimeTable"
 msgstr ""
 
 #: dsourcebase.sfltimetabledetail_session
+msgctxt "dsourcebase.sfltimetabledetail_session"
 msgid "Session"
 msgstr ""
 
@@ -301,86 +310,522 @@ msgid "Id"
 msgstr ""
 
 #: dsourcebase.sfltimetable_summary
+msgctxt "dsourcebase.sfltimetable_summary"
 msgid "Summary"
 msgstr ""
 
 #: dsourcebase.sfltimetable_timeend
+msgctxt "dsourcebase.sfltimetable_timeend"
 msgid "End Time"
 msgstr ""
 
 #: dsourcebase.sfltimetable_timeini
+msgctxt "dsourcebase.sfltimetable_timeini"
 msgid "Initial Time"
 msgstr ""
 
 #: dsourcebase.stbclass
+msgctxt "dsourcebase.stbclass"
 msgid "Groups"
 msgstr ""
 
 #: dsourcebase.stbcourse
+msgctxt "dsourcebase.stbcourse"
 msgid "Courses"
 msgstr ""
 
 #: dsourcebase.stbday
+msgctxt "dsourcebase.stbday"
 msgid "Working Days"
 msgstr ""
 
 #: dsourcebase.stbdistribution
+msgctxt "dsourcebase.stbdistribution"
 msgid "Distribution of Workload"
 msgstr ""
 
 #: dsourcebase.stbgroupid
+msgctxt "dsourcebase.stbgroupid"
 msgid "Group Identifiers"
 msgstr ""
 
 #: dsourcebase.stbhour
+msgctxt "dsourcebase.stbhour"
 msgid "Academic Hours"
 msgstr ""
 
 #: dsourcebase.stblevel
+msgctxt "dsourcebase.stblevel"
 msgid "Levels"
 msgstr ""
 
 #: dsourcebase.stbroomtype
+msgctxt "dsourcebase.stbroomtype"
 msgid "Types of Room"
 msgstr ""
 
 #: dsourcebase.stbspecialization
+msgctxt "dsourcebase.stbspecialization"
 msgid "Specializations"
 msgstr ""
 
 #: dsourcebase.stbsubject
+msgctxt "dsourcebase.stbsubject"
 msgid "Subjects"
 msgstr ""
 
 #: dsourcebase.stbsubjectrestriction
+msgctxt "dsourcebase.stbsubjectrestriction"
 msgid "Subject Restrictions"
 msgstr ""
 
 #: dsourcebase.stbsubjectrestrictiontype
+msgctxt "dsourcebase.stbsubjectrestrictiontype"
 msgid "Types of Subject Restrictions"
 msgstr ""
 
 #: dsourcebase.stbteacher
+msgctxt "dsourcebase.stbteacher"
 msgid "Teachers"
 msgstr ""
 
 #: dsourcebase.stbteacherrestriction
+msgctxt "dsourcebase.stbteacherrestriction"
 msgid "Teacher Restrictions"
 msgstr ""
 
 #: dsourcebase.stbteacherrestrictiontype
+msgctxt "dsourcebase.stbteacherrestrictiontype"
 msgid "Types of Teacher Restrictions"
 msgstr ""
 
 #: dsourcebase.stbtimeslot
+msgctxt "dsourcebase.stbtimeslot"
 msgid "Time Slots"
 msgstr ""
 
 #: dsourcebase.stbtimetable
+msgctxt "dsourcebase.stbtimetable"
 msgid "Timetables"
 msgstr ""
 
 #: dsourcebase.stbtimetabledetail
+msgctxt "dsourcebase.stbtimetabledetail"
+msgid "Detail of Timetables"
+msgstr ""
+
+#: dsourcebaseconsts.sflclass_idgroupid
+msgctxt "dsourcebaseconsts.sflclass_idgroupid"
+msgid "Group Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflclass_idlevel
+msgctxt "dsourcebaseconsts.sflclass_idlevel"
+msgid "Level"
+msgstr ""
+
+#: dsourcebaseconsts.sflclass_idspecialization
+msgctxt "dsourcebaseconsts.sflclass_idspecialization"
+msgid "Specialization"
+msgstr ""
+
+#: dsourcebaseconsts.sflcourse_idlevel
+msgctxt "dsourcebaseconsts.sflcourse_idlevel"
+msgid "Level"
+msgstr ""
+
+#: dsourcebaseconsts.sflcourse_idspecialization
+msgctxt "dsourcebaseconsts.sflcourse_idspecialization"
+msgid "Specialization"
+msgstr ""
+
+#: dsourcebaseconsts.sflday_idday
+msgctxt "dsourcebaseconsts.sflday_idday"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflday_naday
+msgctxt "dsourcebaseconsts.sflday_naday"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sfldistribution_composition
+msgctxt "dsourcebaseconsts.sfldistribution_composition"
+msgid "Composition"
+msgstr ""
+
+#: dsourcebaseconsts.sfldistribution_idgroupid
+msgctxt "dsourcebaseconsts.sfldistribution_idgroupid"
+msgid "Group Id"
+msgstr ""
+
+#: dsourcebaseconsts.sfldistribution_idlevel
+msgctxt "dsourcebaseconsts.sfldistribution_idlevel"
+msgid "Level"
+msgstr ""
+
+#: dsourcebaseconsts.sfldistribution_idroomtype
+msgctxt "dsourcebaseconsts.sfldistribution_idroomtype"
+msgid "Room Type"
+msgstr ""
+
+#: dsourcebaseconsts.sfldistribution_idspecialization
+msgctxt "dsourcebaseconsts.sfldistribution_idspecialization"
+msgid "Specialization"
+msgstr ""
+
+#: dsourcebaseconsts.sfldistribution_idsubject
+msgctxt "dsourcebaseconsts.sfldistribution_idsubject"
+msgid "Subject"
+msgstr ""
+
+#: dsourcebaseconsts.sfldistribution_idteacher
+msgctxt "dsourcebaseconsts.sfldistribution_idteacher"
+msgid "Teacher"
+msgstr ""
+
+#: dsourcebaseconsts.sflgroupid_idgroupid
+msgctxt "dsourcebaseconsts.sflgroupid_idgroupid"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflgroupid_nagroupid
+msgctxt "dsourcebaseconsts.sflgroupid_nagroupid"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflhour_idhour
+msgctxt "dsourcebaseconsts.sflhour_idhour"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflhour_interval
+msgctxt "dsourcebaseconsts.sflhour_interval"
+msgid "Interval"
+msgstr ""
+
+#: dsourcebaseconsts.sflhour_nahour
+msgctxt "dsourcebaseconsts.sflhour_nahour"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sfllevel_ablevel
+msgctxt "dsourcebaseconsts.sfllevel_ablevel"
+msgid "Abbreviation"
+msgstr ""
+
+#: dsourcebaseconsts.sfllevel_idlevel
+msgctxt "dsourcebaseconsts.sfllevel_idlevel"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sfllevel_nalevel
+msgctxt "dsourcebaseconsts.sfllevel_nalevel"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflroomtype_abroomtype
+msgctxt "dsourcebaseconsts.sflroomtype_abroomtype"
+msgid "Abbreviation"
+msgstr ""
+
+#: dsourcebaseconsts.sflroomtype_idroomtype
+msgctxt "dsourcebaseconsts.sflroomtype_idroomtype"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflroomtype_naroomtype
+msgctxt "dsourcebaseconsts.sflroomtype_naroomtype"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflroomtype_number
+msgctxt "dsourcebaseconsts.sflroomtype_number"
+msgid "Cantidad"
+msgstr ""
+
+#: dsourcebaseconsts.sflspecialization_abspecialization
+msgctxt "dsourcebaseconsts.sflspecialization_abspecialization"
+msgid "Abbreviation"
+msgstr ""
+
+#: dsourcebaseconsts.sflspecialization_idspecialization
+msgctxt "dsourcebaseconsts.sflspecialization_idspecialization"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflspecialization_naspecialization
+msgctxt "dsourcebaseconsts.sflspecialization_naspecialization"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflsubjectrestrictiontype_colsubjectrestrictiontype
+msgctxt "dsourcebaseconsts.sflsubjectrestrictiontype_colsubjectrestrictiontype"
+msgid "Color"
+msgstr ""
+
+#: dsourcebaseconsts.sflsubjectrestrictiontype_idsubjectrestrictiontype
+msgctxt "dsourcebaseconsts.sflsubjectrestrictiontype_idsubjectrestrictiontype"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflsubjectrestrictiontype_nasubjectrestrictiontype
+msgctxt "dsourcebaseconsts.sflsubjectrestrictiontype_nasubjectrestrictiontype"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflsubjectrestrictiontype_valsubjectrestrictiontype
+msgctxt "dsourcebaseconsts.sflsubjectrestrictiontype_valsubjectrestrictiontype"
+msgid "Value"
+msgstr ""
+
+#: dsourcebaseconsts.sflsubjectrestriction_idday
+msgctxt "dsourcebaseconsts.sflsubjectrestriction_idday"
+msgid "Day"
+msgstr ""
+
+#: dsourcebaseconsts.sflsubjectrestriction_idhour
+msgctxt "dsourcebaseconsts.sflsubjectrestriction_idhour"
+msgid "Hour"
+msgstr ""
+
+#: dsourcebaseconsts.sflsubjectrestriction_idsubject
+msgctxt "dsourcebaseconsts.sflsubjectrestriction_idsubject"
+msgid "Subject"
+msgstr ""
+
+#: dsourcebaseconsts.sflsubjectrestriction_idsubjectrestrictiontype
+msgctxt "dsourcebaseconsts.sflsubjectrestriction_idsubjectrestrictiontype"
+msgid "Restriction Type"
+msgstr ""
+
+#: dsourcebaseconsts.sflsubject_idsubject
+msgctxt "dsourcebaseconsts.sflsubject_idsubject"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflsubject_nasubject
+msgctxt "dsourcebaseconsts.sflsubject_nasubject"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflteacherrestrictiontype_colteacherrestrictiontype
+msgctxt "dsourcebaseconsts.sflteacherrestrictiontype_colteacherrestrictiontype"
+msgid "Color"
+msgstr ""
+
+#: dsourcebaseconsts.sflteacherrestrictiontype_idteacherrestrictiontype
+msgctxt "dsourcebaseconsts.sflteacherrestrictiontype_idteacherrestrictiontype"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflteacherrestrictiontype_nateacherrestrictiontype
+msgctxt "dsourcebaseconsts.sflteacherrestrictiontype_nateacherrestrictiontype"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflteacherrestrictiontype_valteacherrestrictiontype
+msgctxt "dsourcebaseconsts.sflteacherrestrictiontype_valteacherrestrictiontype"
+msgid "Value"
+msgstr ""
+
+#: dsourcebaseconsts.sflteacherrestriction_idday
+msgctxt "dsourcebaseconsts.sflteacherrestriction_idday"
+msgid "Day"
+msgstr ""
+
+#: dsourcebaseconsts.sflteacherrestriction_idhour
+msgctxt "dsourcebaseconsts.sflteacherrestriction_idhour"
+msgid "Hour"
+msgstr ""
+
+#: dsourcebaseconsts.sflteacherrestriction_idteacher
+msgctxt "dsourcebaseconsts.sflteacherrestriction_idteacher"
+msgid "Teacher"
+msgstr ""
+
+#: dsourcebaseconsts.sflteacherrestriction_idteacherrestrictiontype
+msgctxt "dsourcebaseconsts.sflteacherrestriction_idteacherrestrictiontype"
+msgid "Restriction Type"
+msgstr ""
+
+#: dsourcebaseconsts.sflteacher_idteacher
+msgctxt "dsourcebaseconsts.sflteacher_idteacher"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflteacher_lnteacher
+msgctxt "dsourcebaseconsts.sflteacher_lnteacher"
+msgid "Last Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflteacher_nateacher
+msgctxt "dsourcebaseconsts.sflteacher_nateacher"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflteacher_teachernationalid
+msgctxt "dsourcebaseconsts.sflteacher_teachernationalid"
+msgid "National ID"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimeslot_idday
+msgctxt "dsourcebaseconsts.sfltimeslot_idday"
+msgid "Day"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimeslot_idhour
+msgctxt "dsourcebaseconsts.sfltimeslot_idhour"
+msgid "Hour"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetabledetail_idday
+msgctxt "dsourcebaseconsts.sfltimetabledetail_idday"
+msgid "Day"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetabledetail_idgroupid
+msgctxt "dsourcebaseconsts.sfltimetabledetail_idgroupid"
+msgid "Group"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetabledetail_idhour
+msgctxt "dsourcebaseconsts.sfltimetabledetail_idhour"
+msgid "Hour"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetabledetail_idlevel
+msgctxt "dsourcebaseconsts.sfltimetabledetail_idlevel"
+msgid "Level"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetabledetail_idspecialization
+msgctxt "dsourcebaseconsts.sfltimetabledetail_idspecialization"
+msgid "Specialization"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetabledetail_idsubject
+msgctxt "dsourcebaseconsts.sfltimetabledetail_idsubject"
+msgid "Subject"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetabledetail_idtimetable
+msgctxt "dsourcebaseconsts.sfltimetabledetail_idtimetable"
+msgid "TimeTable"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetabledetail_session
+msgctxt "dsourcebaseconsts.sfltimetabledetail_session"
+msgid "Session"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetable_idtimetable
+msgctxt "dsourcebaseconsts.sfltimetable_idtimetable"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetable_summary
+msgctxt "dsourcebaseconsts.sfltimetable_summary"
+msgid "Summary"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetable_timeend
+msgctxt "dsourcebaseconsts.sfltimetable_timeend"
+msgid "End Time"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetable_timeini
+msgctxt "dsourcebaseconsts.sfltimetable_timeini"
+msgid "Initial Time"
+msgstr ""
+
+#: dsourcebaseconsts.stbclass
+msgctxt "dsourcebaseconsts.stbclass"
+msgid "Groups"
+msgstr ""
+
+#: dsourcebaseconsts.stbcourse
+msgctxt "dsourcebaseconsts.stbcourse"
+msgid "Courses"
+msgstr ""
+
+#: dsourcebaseconsts.stbday
+msgctxt "dsourcebaseconsts.stbday"
+msgid "Working Days"
+msgstr ""
+
+#: dsourcebaseconsts.stbdistribution
+msgctxt "dsourcebaseconsts.stbdistribution"
+msgid "Distribution of Workload"
+msgstr ""
+
+#: dsourcebaseconsts.stbgroupid
+msgctxt "dsourcebaseconsts.stbgroupid"
+msgid "Group Identifiers"
+msgstr ""
+
+#: dsourcebaseconsts.stbhour
+msgctxt "dsourcebaseconsts.stbhour"
+msgid "Academic Hours"
+msgstr ""
+
+#: dsourcebaseconsts.stblevel
+msgctxt "dsourcebaseconsts.stblevel"
+msgid "Levels"
+msgstr ""
+
+#: dsourcebaseconsts.stbroomtype
+msgctxt "dsourcebaseconsts.stbroomtype"
+msgid "Types of Room"
+msgstr ""
+
+#: dsourcebaseconsts.stbspecialization
+msgctxt "dsourcebaseconsts.stbspecialization"
+msgid "Specializations"
+msgstr ""
+
+#: dsourcebaseconsts.stbsubject
+msgctxt "dsourcebaseconsts.stbsubject"
+msgid "Subjects"
+msgstr ""
+
+#: dsourcebaseconsts.stbsubjectrestriction
+msgctxt "dsourcebaseconsts.stbsubjectrestriction"
+msgid "Subject Restrictions"
+msgstr ""
+
+#: dsourcebaseconsts.stbsubjectrestrictiontype
+msgctxt "dsourcebaseconsts.stbsubjectrestrictiontype"
+msgid "Types of Subject Restrictions"
+msgstr ""
+
+#: dsourcebaseconsts.stbteacher
+msgctxt "dsourcebaseconsts.stbteacher"
+msgid "Teachers"
+msgstr ""
+
+#: dsourcebaseconsts.stbteacherrestriction
+msgctxt "dsourcebaseconsts.stbteacherrestriction"
+msgid "Teacher Restrictions"
+msgstr ""
+
+#: dsourcebaseconsts.stbteacherrestrictiontype
+msgctxt "dsourcebaseconsts.stbteacherrestrictiontype"
+msgid "Types of Teacher Restrictions"
+msgstr ""
+
+#: dsourcebaseconsts.stbtimeslot
+msgctxt "dsourcebaseconsts.stbtimeslot"
+msgid "Time Slots"
+msgstr ""
+
+#: dsourcebaseconsts.stbtimetable
+msgctxt "dsourcebaseconsts.stbtimetable"
+msgid "Timetables"
+msgstr ""
+
+#: dsourcebaseconsts.stbtimetabledetail
+msgctxt "dsourcebaseconsts.stbtimetabledetail"
 msgid "Detail of Timetables"
 msgstr ""
 
@@ -1476,11 +1921,11 @@ msgid "1.2.2"
 msgstr ""
 
 #: uabout.sbuilddatetime
-msgid "Wed Feb  1 00:53:59 2012"
+msgid "Wed Feb  1 18:31:20 2012"
 msgstr ""
 
 #: uabout.srevision
-msgid "546M"
+msgid "551M"
 msgstr ""
 
 #: urelutils.sdetailfieldswithoutmasterfields

@@ -48,10 +48,10 @@ $(TTGSQL): $(DBCONVERT) $(TTGMDB)
 $(TTGMYSQL): $(DBCONVERT) $(TTGMDB)
 	$(DBCONVERT) /ACC2SQL $(TTGMDB) $(TTGMYSQL) mysql
 
-$(DSRCBASE).pp $(DSRCBASE).lfm: $(DBCONVERT) $(TTGMDB) Makefile
+$(DSRCBASE).pp $(DSRCBASE)consts.pp $(DSRCBASE).lfm: $(DBCONVERT) $(TTGMDB) Makefile
 	$(DBCONVERT) /ACC2DM $(TTGMDB) SourceBaseDataModule \
 	  $(DSRCBASE) 'cds;csr;lfm;U=ZConnection, ZDataset;DS=ZTable;DB=ZConnection;DP=Connection'
-	dos2unix $(DSRCBASE).pp $(DSRCBASE).lfm
+	dos2unix $(DSRCBASE).pp $(DSRCBASE)consts.pp $(DSRCBASE).lfm
 
 cleanthisw:
 	$(RM) $(DSRCBASE).{lfm,lrs,pp} $(TTGSQL) $(TTGMYSQL)
