@@ -74,7 +74,7 @@ var
 implementation
 
 uses
-  UTTGBasics, UTTGDBUtils, DSource;
+  UTTGBasics, UTTGDBUtils, UTTGConsts, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -214,9 +214,9 @@ var
       if not IsEmpty then
       begin
         try
-          ASubStrings.Add('Numero de prohibiciones de profesores sin problemas...');
+          ASubStrings.Add(SNumSoftTeacherRestrictions);
           vSubMin := ASubStrings.Count;
-          ASubStrings.Add('Teacher; Prohibiciones');
+          ASubStrings.Add(STeacherRestrictionsHead);
           while not Eof do
           begin
             if TbTmpTeacherCarga.Locate('IdTeacher',
@@ -227,9 +227,9 @@ var
               begin
                 if not HuboProblemasInterno then
                 begin
-                  AMainStrings.Add('Numero de prohibiciones de profesores con problemas...');
+                  AMainStrings.Add(SNumHardTeacherRestrictions);
                   vMainMin := AMainStrings.Count;
-                  AMainStrings.Add('Teacher; Prohibiciones');
+                  AMainStrings.Add(STeacherRestrictionsHead);
                 end;
                 AMainStrings.Add(Format(s, [TbTmpTeacherCargaLnTeacher.Value,
                   TbTmpTeacherCargaNaTeacher.Value,
@@ -271,18 +271,18 @@ var
         HuboProblemasInterno := False;
         First;
         s := '%s %s; %d';
-        ASubStrings.Add('Carga horaria de los profesores sin problemas...');
+        ASubStrings.Add(STeachersWorkLoadWithoutProblems);
         vSubMin := ASubStrings.Count;
-        ASubStrings.Add('Teacher; Carga');
+        ASubStrings.Add(STeacherWorkLoadHead);
         while not Eof do
         begin
           if TbTmpTeacherCargaCarga.Value > AMaxCargaTeacher then
           begin
             if not HuboProblemasInterno then
             begin
-              AMainStrings.Add('Carga horaria de los profesores con problemas...');
+              AMainStrings.Add(STeachersWorkLoadWithProblems);
               vMainMin := AMainStrings.Count;
-              AMainStrings.Add('Teacher; Carga');
+              AMainStrings.Add(STeacherWorkLoadHead);
             end;
             AMainStrings.Add(Format(s, [TbTmpTeacherCargaLnTeacher.Value,
               TbTmpTeacherCargaNaTeacher.Value,
@@ -327,9 +327,9 @@ var
           TbRoomType.First;
           First;
           s := '%s; %d; %d';
-          ASubStrings.Add('Tipos de aulas sin problemas...');
+          ASubStrings.Add(SRoomTypesWithoutProblems);
           vSubMin := ASubStrings.Count;
-          ASubStrings.Add('RoomType; Hours disponibles; Carga');
+          ASubStrings.Add(SRoomTypesLoadHead);
           while not Eof do
           begin
             if TbRoomType.Locate('IdRoomType', TbTmpRoomTypeCargaIdRoomType.AsInteger, []) then
@@ -339,9 +339,9 @@ var
               begin
                 if not HuboProblemasInterno then
                 begin
-                  AMainStrings.Add('Tipos de aulas con problemas...');
+                  AMainStrings.Add(SRoomTypesWithProblems);
                   vMainMin := AMainStrings.Count;
-                  AMainStrings.Add('RoomType; Hours disponibles; Carga');
+                  AMainStrings.Add(SRoomTypesLoadHead);
                 end;
                 AMainStrings.Add(Format(s, [TbTmpRoomTypeCargaAbRoomType.Value,
                   c, TbTmpRoomTypeCargaCarga.Value]));
@@ -386,9 +386,9 @@ var
         TbDistribution.First;
         TbTimeSlot.First;
         First;
-        ASubStrings.Add('Carga Hourria de paralelos sin problemas...');
+        ASubStrings.Add(SClassWorkLoadWithoutProblems);
         vSubMin := ASubStrings.Count;
-        ASubStrings.Add('Class; Carga');
+        ASubStrings.Add(SClassWorkLoadHead);
         while not Eof do
         begin
           TbDistribution.Filter :=
@@ -409,9 +409,9 @@ var
             begin
               if not HuboProblemasInterno then
               begin
-                AMainStrings.Add('Carga Hourria de paralelos con problemas...');
+                AMainStrings.Add(SClassWorkLoadWithProblems);
                 vMainMin := AMainStrings.Count;
-                AMainStrings.Add('Class; Carga');
+                AMainStrings.Add(SClassWorkLoadHead);
               end;
               AMainStrings.Add(Format(s, [TbClass.FindField('AbLevel').Value,
                 TbClass.FindField('AbSpecialization').Value,
@@ -424,9 +424,12 @@ var
                 TbClass.FindField('AbSpecialization').Value,
                 TbClass.FindField('NaGroupId').Value, t]));
           except
-            ASubStrings.Add(Format('Problemas: %s %s %s, Subject %s',
-              [TbClass.FindField('AbLevel').AsString, TbClass.FindField('AbSpecialization').AsString,
-              TbClass.FindField('NaGroupId').AsString, TbDistribution.FindField('NaSubject').AsString]));
+            ASubStrings.Add(Format('%s: %s %s %s, %s %s',
+              [SProblems, TbClass.FindField('AbLevel').AsString,
+              TbClass.FindField('AbSpecialization').AsString,
+              TbClass.FindField('NaGroupId').AsString,
+              SSubject,
+              TbDistribution.FindField('NaSubject').AsString]));
             HuboProblemas := True;
           end;
           Next;
