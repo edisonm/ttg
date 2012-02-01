@@ -1506,52 +1506,48 @@ msgid "Class; Work Load"
 msgstr "Clase; Carga"
 
 #: uttgconsts.sclassworkloadwithoutproblems
-msgid "Carga horaria de paralelos sin problemas..."
-msgstr ""
+msgid "Class work load without problems..."
+msgstr "Carga horaria de paralelos sin problemas..."
 
 #: uttgconsts.sclassworkloadwithproblems
-msgid "Carga Hourria de paralelos con problemas..."
-msgstr ""
+msgid "Class work load with problems..."
+msgstr "Carga Horaria de paralelos con problemas..."
 
 #: uttgconsts.snumhardteacherrestrictions
-msgid "Numero de prohibiciones de profesores con problemas..."
-msgstr ""
+msgid "Number of hard teacher restrictions..."
+msgstr "Numero de prohibiciones de profesores con problemas..."
 
 #: uttgconsts.snumsoftteacherrestrictions
-msgid "Numero de prohibiciones de profesores sin problemas..."
-msgstr ""
+msgid "Number of soft teacher restrictions..."
+msgstr "Numero de prohibiciones de profesores sin problemas..."
 
 #: uttgconsts.sproblems
-msgid "Problemas"
-msgstr "Problems"
+msgid "Problems"
+msgstr "Problemas"
 
 #: uttgconsts.sroomtypesloadhead
 msgid "RoomType; Available Hours; Load"
 msgstr "Tipo de Aula; Horas Libres; Carga"
 
 #: uttgconsts.sroomtypeswithoutproblems
-msgid "Tipos de aulas sin problemas..."
-msgstr "Room types without problems"
+msgid "Room types without poblems..."
+msgstr "Tipos de aulas sin problemas..."
 
 #: uttgconsts.sroomtypeswithproblems
-msgid "Tipos de aulas con problemas..."
-msgstr "Room types with problems"
-
-#: uttgconsts.ssubject
-msgid "Materia"
-msgstr "Subjects"
+msgid "Room types with problems..."
+msgstr "Tipos de aulas con problemas..."
 
 #: uttgconsts.steacherrestrictionshead
 msgid "Teacher; Restrictions"
 msgstr "Profesor; Restriccions"
 
 #: uttgconsts.steachersworkloadwithoutproblems
-msgid "Carga horaria de los profesores sin problemas..."
-msgstr "Work load of teachers without problems"
+msgid "Teachers' Work load without problems..."
+msgstr "Carga horaria de los profesores sin problemas..."
 
 #: uttgconsts.steachersworkloadwithproblems
-msgid "Carga horaria de los profesores con problemas..."
-msgstr "Work load of teachers with problems"
+msgid "Teachers' work load with problems..."
+msgstr "Carga horaria de los profesores con problemas..."
 
 #: uttgconsts.steacherworkloadhead
 msgid "Teacher; Work Load"

@@ -8,20 +8,20 @@ uses
   Classes, SysUtils;
 
 resourcestring
-  SNumSoftTeacherRestrictions = 'Numero de prohibiciones de profesores sin problemas...';
-  SNumHardTeacherRestrictions = 'Numero de prohibiciones de profesores con problemas...';
+  SNumSoftTeacherRestrictions = 'Number of soft teacher restrictions...';
+  SNumHardTeacherRestrictions = 'Number of hard teacher restrictions...';
   STeacherRestrictionsHead = 'Teacher; Restrictions';
-  STeachersWorkLoadWithoutProblems = 'Carga horaria de los profesores sin problemas...';
-  STeachersWorkLoadWithProblems = 'Carga horaria de los profesores con problemas...';
+  STeachersWorkLoadWithoutProblems = 'Teachers'' Work load without problems...';
+  STeachersWorkLoadWithProblems = 'Teachers'' work load with problems...';
   STeacherWorkLoadHead = 'Teacher; Work Load';
-  SRoomTypesWithoutProblems = 'Tipos de aulas sin problemas...';
-  SRoomTypesWithProblems = 'Tipos de aulas con problemas...';
+  SRoomTypesWithoutProblems = 'Room types without poblems...';
+  SRoomTypesWithProblems = 'Room types with problems...';
   SRoomTypesLoadHead = 'RoomType; Available Hours; Load';
-  SClassWorkLoadWithoutProblems = 'Carga horaria de paralelos sin problemas...';
-  SClassWorkLoadWithProblems = 'Carga Hourria de paralelos con problemas...';
+  SClassWorkLoadWithoutProblems = 'Class work load without problems...';
+  SClassWorkLoadWithProblems = 'Class work load with problems...';
   SClassWorkLoadHead = 'Class; Work Load';
-  SProblems = 'Problemas';
-  SSubject = 'Materia';
+  SProblems = 'Problems';
+
 implementation
 
 end.

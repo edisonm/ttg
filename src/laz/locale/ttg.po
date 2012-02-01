@@ -1504,23 +1504,23 @@ msgid "Class; Work Load"
 msgstr ""
 
 #: uttgconsts.sclassworkloadwithoutproblems
-msgid "Carga horaria de paralelos sin problemas..."
+msgid "Class work load without problems..."
 msgstr ""
 
 #: uttgconsts.sclassworkloadwithproblems
-msgid "Carga Hourria de paralelos con problemas..."
+msgid "Class work load with problems..."
 msgstr ""
 
 #: uttgconsts.snumhardteacherrestrictions
-msgid "Numero de prohibiciones de profesores con problemas..."
+msgid "Number of hard teacher restrictions..."
 msgstr ""
 
 #: uttgconsts.snumsoftteacherrestrictions
-msgid "Numero de prohibiciones de profesores sin problemas..."
+msgid "Number of soft teacher restrictions..."
 msgstr ""
 
 #: uttgconsts.sproblems
-msgid "Problemas"
+msgid "Problems"
 msgstr ""
 
 #: uttgconsts.sroomtypesloadhead
@@ -1528,15 +1528,11 @@ msgid "RoomType; Available Hours; Load"
 msgstr ""
 
 #: uttgconsts.sroomtypeswithoutproblems
-msgid "Tipos de aulas sin problemas..."
+msgid "Room types without poblems..."
 msgstr ""
 
 #: uttgconsts.sroomtypeswithproblems
-msgid "Tipos de aulas con problemas..."
-msgstr ""
-
-#: uttgconsts.ssubject
-msgid "Materia"
+msgid "Room types with problems..."
 msgstr ""
 
 #: uttgconsts.steacherrestrictionshead
@@ -1544,11 +1540,11 @@ msgid "Teacher; Restrictions"
 msgstr ""
 
 #: uttgconsts.steachersworkloadwithoutproblems
-msgid "Carga horaria de los profesores sin problemas..."
+msgid "Teachers' Work load without problems..."
 msgstr ""
 
 #: uttgconsts.steachersworkloadwithproblems
-msgid "Carga horaria de los profesores con problemas..."
+msgid "Teachers' work load with problems..."
 msgstr ""
 
 #: uttgconsts.steacherworkloadhead

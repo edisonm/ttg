@@ -74,7 +74,7 @@ var
 implementation
 
 uses
-  UTTGBasics, UTTGDBUtils, UTTGConsts, DSource;
+  UTTGBasics, UTTGDBUtils, UTTGConsts, DSource, dsourcebase;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -428,7 +428,7 @@ var
               [SProblems, TbClass.FindField('AbLevel').AsString,
               TbClass.FindField('AbSpecialization').AsString,
               TbClass.FindField('NaGroupId').AsString,
-              SSubject,
+              STbSubject,
               TbDistribution.FindField('NaSubject').AsString]));
             HuboProblemas := True;
           end;
