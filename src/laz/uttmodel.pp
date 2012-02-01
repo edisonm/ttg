@@ -75,7 +75,7 @@ type
     class function GetElitistCount: Integer; override;
   public
     procedure Configure(AClashTeacherValue, AClashSubjectValue, AClashRoomTypeValue,
-      ATeacherFraccionamientoValue, AHourHuecaDesubicadaValue, ASessionCortadaValue,
+      ATeacherFraccionamientoValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
       ANonScatteredSubjectValue: Integer);
     constructor Create(AClashTeacherValue, AClashSubjectValue, AClashRoomTypeValue,
       ABrokenTeacherValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
@@ -128,7 +128,7 @@ type
 
     TODO:
     2011-03-13:
-    - DONE Change implementation of SubjectNoDispersa for a more compositional formula
+    - DONE Change implementation of NonScatteredSubject for a more compositional formula
     - DONE Remove FClassSubjectDay{Min,Max}Hour
     - DONE IncCant and DecCant must be methods
 
@@ -151,9 +151,9 @@ type
     FClashSubject: Integer;
     FClashRoomType: Integer;
     FTeacherFraccionamiento: Integer;
-    FHourHuecaDesubicada: Integer;
-    FSubjectNoDispersa: Integer;
-    FSessionCortada: Integer;
+    FOutOfPositionEmptyHour: Integer;
+    FNonScatteredSubject: Integer;
+    FBrokenSession: Integer;
   end;
 
   { TTimeTable }
@@ -165,16 +165,16 @@ type
     procedure CheckIntegrity;
     procedure CrossClass(TimeTable2: TTimeTable; AClass: Integer);
     procedure DeltaValues(Delta, AClass, TimeSlot1, TimeSlot2: Integer);
-    function DeltaSessionCortada(AClass, TimeSlot1, TimeSlot2: Integer): Integer;
+    function DeltaBrokenSession(AClass, TimeSlot1, TimeSlot2: Integer): Integer;
     function GetClashSubjectValue: Integer;
-    function GetSubjectNoDispersaValor: Integer;
-    function GetHourHuecaDesubicadaValor: Integer;
+    function GetNonScatteredSubjectValue: Integer;
+    function GetOutOfPositionEmptyHourValue: Integer;
     function GetClashTeacherValue: Integer;
     function GetSubjectRestrictionValue: Integer;
     function GetTeacherRestrictionValue: Integer;
-    function GetTeacherFraccionamientoValor: Integer;
-    function GetSessionCortadaValor: Integer;
-    function GetClashRoomTypeValor: Integer;
+    function GetBrokenTeacherValue: Integer;
+    function GetBrokenSessionValue: Integer;
+    function GetClashRoomTypeValue: Integer;
     function GetValue: Integer;
     procedure RandomizeKey(var ARandomKey: TDynamicIntegerArray;
       AClass: Integer);
@@ -204,23 +204,23 @@ type
     function Swap(AClass, ATimeSlot1, ATimeSlot2: Integer): Integer;
     function DoMove(AClass, ATimeSlot1: Integer; var ATimeSlot2: Integer): Integer;
     procedure SaveToFile(const AFileName: string);
-    property HourHuecaDesubicada: Integer read FTablingInfo.FHourHuecaDesubicada;
+    property OutOfPositionEmptyHour: Integer read FTablingInfo.FOutOfPositionEmptyHour;
     property SubjectRestrictionTypeASubjectCant: TDynamicIntegerArray
       read FTablingInfo.FSubjectRestrictionTypeASubjectCant;
     property TeacherRestrictionTypeATeacherCant: TDynamicIntegerArray
       read FTablingInfo.FTeacherRestrictionTypeATeacherCant;
-    property SubjectNoDispersa: Integer read FTablingInfo.FSubjectNoDispersa;
-    property SessionCortada: Integer read FTablingInfo.FSessionCortada;
+    property NonScatteredSubject: Integer read FTablingInfo.FNonScatteredSubject;
+    property BrokenSession: Integer read FTablingInfo.FBrokenSession;
     property ClashTeacher: Integer read FTablingInfo.FClashTeacher;
     property ClashSubject: Integer read FTablingInfo.FClashSubject;
     property ClashRoomType: Integer read FTablingInfo.FClashRoomType;
     property ClashTeacherValue: Integer read GetClashTeacherValue;
     property ClashSubjectValue: Integer read GetClashSubjectValue;
-    property TeacherFraccionamientoValor: Integer read GetTeacherFraccionamientoValor;
-    property ClashRoomTypeValor: Integer read GetClashRoomTypeValor;
-    property HourHuecaDesubicadaValor: Integer read GetHourHuecaDesubicadaValor;
-    property SessionCortadaValor: Integer read GetSessionCortadaValor;
-    property SubjectNoDispersaValor: Integer read GetSubjectNoDispersaValor;
+    property BrokenTeacherValue: Integer read GetBrokenTeacherValue;
+    property ClashRoomTypeValue: Integer read GetClashRoomTypeValue;
+    property OutOfPositionEmptyHourValue: Integer read GetOutOfPositionEmptyHourValue;
+    property BrokenSessionValue: Integer read GetBrokenSessionValue;
+    property NonScatteredSubjectValue: Integer read GetNonScatteredSubjectValue;
     property SubjectRestrictionValue: Integer read GetSubjectRestrictionValue;
     property TeacherRestrictionValue: Integer read GetTeacherRestrictionValue;
     property ClassTimeSlotASession: TDynamicIntegerArrayArray
@@ -479,17 +479,17 @@ var
   procedure CargarSubjectRestrictionType;
   var
     SubjectRestrictionType: Integer;
-    VFieldValor: TField;
+    VFieldValue: TField;
   begin
     with SourceDataModule.TbSubjectRestrictionType do
     begin
       IndexFieldNames := 'IdSubjectRestrictionType';
       First;
-      VFieldValor := FindField('ValSubjectRestrictionType');
+      VFieldValue := FindField('ValSubjectRestrictionType');
       SetLength(FSubjectRestrictionTypeToValue, RecordCount);
       for SubjectRestrictionType := 0 to RecordCount - 1 do
       begin
-        FSubjectRestrictionTypeToValue[SubjectRestrictionType] := VFieldValor.AsInteger;
+        FSubjectRestrictionTypeToValue[SubjectRestrictionType] := VFieldValue.AsInteger;
         Next;
       end;
       First;
@@ -498,17 +498,17 @@ var
   procedure CargarTeacherRestrictionType;
   var
     TeacherRestrictionType: Integer;
-    VFieldValor: TField;
+    VFieldValue: TField;
   begin
     with SourceDataModule.TbTeacherRestrictionType do
     begin
       IndexFieldNames := 'IdTeacherRestrictionType';
       First;
-      VFieldValor := FindField('ValTeacherRestrictionType');
+      VFieldValue := FindField('ValTeacherRestrictionType');
       SetLength(FTeacherRestrictionTypeToValue, RecordCount);
       for TeacherRestrictionType := 0 to RecordCount - 1 do
       begin
-        FTeacherRestrictionTypeToValue[TeacherRestrictionType] := VFieldValor.AsInteger;
+        FTeacherRestrictionTypeToValue[TeacherRestrictionType] := VFieldValue.AsInteger;
         Next;
       end;
       First;
@@ -792,15 +792,15 @@ begin
 end;
 
 procedure TTimeTableModel.Configure(AClashTeacherValue, AClashSubjectValue,
-  AClashRoomTypeValue, ATeacherFraccionamientoValue, AHourHuecaDesubicadaValue,
-  ASessionCortadaValue, ANonScatteredSubjectValue: Integer);
+  AClashRoomTypeValue, ATeacherFraccionamientoValue, AOutOfPositionEmptyHourValue,
+  ABrokenSessionValue, ANonScatteredSubjectValue: Integer);
 begin
   FClashTeacherValue := AClashTeacherValue;
   FClashSubjectValue := AClashSubjectValue;
   FTeacherFraccionamientoValue := ATeacherFraccionamientoValue;
   FClashRoomTypeValue := AClashRoomTypeValue;
-  FOutOfPositionEmptyHourValue := AHourHuecaDesubicadaValue;
-  FBrokenSessionValue := ASessionCortadaValue;
+  FOutOfPositionEmptyHourValue := AOutOfPositionEmptyHourValue;
+  FBrokenSessionValue := ABrokenSessionValue;
   FNonScatteredSubjectValue := ANonScatteredSubjectValue;
 end;
 
@@ -948,7 +948,7 @@ end;
 function TTimeTable.GetElitistValues(Index: Integer): Integer;
 begin
   case Index of
-    0: Result := SessionCortada;
+    0: Result := BrokenSession;
     1: Result := ClashTeacher;
     2: Result := ClashRoomType;
   end;
@@ -1019,7 +1019,7 @@ var
 begin
   with TTimeTableModel(Model), TablingInfo do
   begin
-    Inc(FSessionCortada, Delta * DeltaSessionCortada(AClass, TimeSlot1, TimeSlot2));
+    Inc(FBrokenSession, Delta * DeltaBrokenSession(AClass, TimeSlot1, TimeSlot2));
     TimeSlotASession := FClassTimeSlotASession[AClass];
     SubjectATeacher := FClassSubjectToTeacher[AClass];
     if Delta > 0 then
@@ -1118,7 +1118,7 @@ begin
           Inc(FTeacherRestrictionTypeATeacherCant[TeacherRestrictionType], Delta);
       end
       else if FHourCount - 1 <> FTimeSlotToHour[TimeSlot] then
-        Inc(FHourHuecaDesubicada, Delta);
+        Inc(FOutOfPositionEmptyHour, Delta);
     end;
     TimeSlot := TimeSlot1;
     while TimeSlot <= TimeSlot2 do
@@ -1143,7 +1143,7 @@ begin
           if Day <> FDayCount then
           begin
             if FClassDaySubjectAcum[AClass, Day, Subject] > Limit then
-              Inc(FSubjectNoDispersa, Delta);
+              Inc(FNonScatteredSubject, Delta);
             Inc(FClassDaySubjectAcum[AClass, Day, Subject], Delta);
           end;
         end;
@@ -1177,11 +1177,11 @@ var
   ClashSubject2: Integer;
   ClashRoomType2: Integer;
   TeacherFraccionamiento2: Integer;
-  HourHuecaDesubicada2: Integer;
+  OutOfPositionEmptyHour2: Integer;
   SubjectRestrictionValue2: Integer;
-  SubjectNoDispersa2: Integer;
+  NonScatteredSubject2: Integer;
   TeacherRestrictionValue2: Integer;
-  SessionCortada2: Integer;
+  BrokenSession2: Integer;
   {$ENDIF}
 begin
   with TTimeTableModel(Model), TablingInfo do
@@ -1218,12 +1218,12 @@ begin
     ClashRoomType2 := FClashRoomType;
     ClashTeacher2 := FClashTeacher;
     ClashSubject2 := FClashSubject;
-    HourHuecaDesubicada2 := FHourHuecaDesubicada;
-    SubjectNoDispersa2 := FSubjectNoDispersa;
+    OutOfPositionEmptyHour2 := FOutOfPositionEmptyHour;
+    NonScatteredSubject2 := FNonScatteredSubject;
     SubjectRestrictionValue2 := SubjectRestrictionValue;
     TeacherFraccionamiento2 := FTeacherFraccionamiento;
     TeacherRestrictionValue2 := TeacherRestrictionValue;
-    SessionCortada2 := FSessionCortada;
+    BrokenSession2 := FBrokenSession;
     Value2 := FValue;
     Update;
     if abs(FValue - Result - (Value2 - Value1)) > 0.000001 then
@@ -1233,24 +1233,24 @@ begin
       'ClashTeacher            %d - %d'#13#10 +
       'ClashSubject            %d - %d'#13#10 +
       'ClashRoomType           %d - %d'#13#10 +
-      'HourHuecaDesubicada     %d - %d'#13#10 +
-      'SubjectNoDispersa       %d - %d'#13#10 +
+      'OutOfPositionEmptyHour     %d - %d'#13#10 +
+      'NonScatteredSubject       %d - %d'#13#10 +
       'SubjectRestrictionValue %f - %f'#13#10 +
       'TeacherFraccionamiento  %d - %d'#13#10 +
       'TeacherRestrictionValue %f - %f'#13#10 +
-      'SessionCortada          %d - %d',
+      'BrokenSession          %d - %d',
       [
         Result, Value1,
         FValue, Value2,
         FClashTeacher, ClashTeacher2,
         FClashSubject, ClashSubject2,
         FClashRoomType, ClashRoomType2,
-        FHourHuecaDesubicada, HourHuecaDesubicada2,
-        FSubjectNoDispersa, SubjectNoDispersa2,
+        FOutOfPositionEmptyHour, OutOfPositionEmptyHour2,
+        FNonScatteredSubject, NonScatteredSubject2,
         SubjectRestrictionValue, SubjectRestrictionValue2,
         FTeacherFraccionamiento, TeacherFraccionamiento2,
         TeacherRestrictionValue, TeacherRestrictionValue2,
-        FSessionCortada, SessionCortada2
+        FBrokenSession, BrokenSession2
         ]);
     {$ENDIF}
     Result := FValue - Result;
@@ -1308,17 +1308,17 @@ begin
     Add(Format('Cruce de materias:         %12d %12d %12d',
         [FClashSubject, TTimeTableModel(Model).ClashSubjectValue, ClashSubjectValue]));
     Add(Format('Cruce de aulas:            %12d %12d %12d',
-        [FClashRoomType, TTimeTableModel(Model).ClashRoomTypeValue, ClashRoomTypeValor]));
+        [FClashRoomType, TTimeTableModel(Model).ClashRoomTypeValue, ClashRoomTypeValue]));
     Add(Format('Fracc. h. profesores:      %12d %12d %12d',
         [TeacherFraccionamiento, TTimeTableModel(Model).BrokenTeacherValue,
-        TeacherFraccionamientoValor]));
+        BrokenTeacherValue]));
     Add(Format('Hours Huecas desubicadas:  %12d %12d %12d',
-        [HourHuecaDesubicada, TTimeTableModel(Model).OutOfPositionEmptyHourValue,
-        HourHuecaDesubicadaValor]));
+        [OutOfPositionEmptyHour, TTimeTableModel(Model).OutOfPositionEmptyHourValue,
+        OutOfPositionEmptyHourValue]));
     Add(Format('Materias cortadas:         %12d %12d %12d',
-        [SessionCortada, TTimeTableModel(Model).BrokenSessionValue, SessionCortadaValor]));
+        [BrokenSession, TTimeTableModel(Model).BrokenSessionValue, BrokenSessionValue]));
     Add(Format('Materias juntas:           %12d %12d %12d',
-        [SubjectNoDispersa, TTimeTableModel(Model).NonScatteredSubjectValue, SubjectNoDispersaValor]));
+        [NonScatteredSubject, TTimeTableModel(Model).NonScatteredSubjectValue, NonScatteredSubjectValue]));
     Add(Format('Prohibiciones de materia:  %12s %12s %12d',
         ['(' + VarArrToStr(FSubjectRestrictionTypeASubjectCant, ' ') + ')',
          '(' + VarArrToStr(TTimeTableModel(Model).FSubjectRestrictionTypeToValue, ' ') + ')',
@@ -1347,9 +1347,9 @@ begin
   end;
 end;
 
-function TTimeTable.GetHourHuecaDesubicadaValor: Integer;
+function TTimeTable.GetOutOfPositionEmptyHourValue: Integer;
 begin
-  Result := TTimeTableModel(Model).FOutOfPositionEmptyHourValue * HourHuecaDesubicada;
+  Result := TTimeTableModel(Model).FOutOfPositionEmptyHourValue * OutOfPositionEmptyHour;
 end;
 
 function TTimeTable.GetSubjectRestrictionValue: Integer;
@@ -1378,12 +1378,12 @@ begin
   end;
 end;
 
-function TTimeTable.GetSessionCortadaValor: Integer;
+function TTimeTable.GetBrokenSessionValue: Integer;
 begin
-  Result := TTimeTableModel(Model).BrokenSessionValue * SessionCortada;
+  Result := TTimeTableModel(Model).BrokenSessionValue * BrokenSession;
 end;
 
-function TTimeTable.DeltaSessionCortada(AClass, TimeSlot1, TimeSlot2: Integer): Integer;
+function TTimeTable.DeltaBrokenSession(AClass, TimeSlot1, TimeSlot2: Integer): Integer;
 var
   TimeSlot, Hour1, Hour2, Day1, Day2, Session, Duracion: Integer;
   TimeSlotASession: TDynamicIntegerArray;
@@ -1410,9 +1410,9 @@ begin
   end;
 end;
 
-function TTimeTable.GetSubjectNoDispersaValor: Integer;
+function TTimeTable.GetNonScatteredSubjectValue: Integer;
 begin
-  Result := TTimeTableModel(Model).NonScatteredSubjectValue * SubjectNoDispersa;
+  Result := TTimeTableModel(Model).NonScatteredSubjectValue * NonScatteredSubject;
 end;
 
 function TTimeTable.GetClashTeacherValue: Integer;
@@ -1426,13 +1426,13 @@ begin
 end;
 
 
-function TTimeTable.GetTeacherFraccionamientoValor: Integer;
+function TTimeTable.GetBrokenTeacherValue: Integer;
 begin
   Result := TTimeTableModel(Model).BrokenTeacherValue *
     TablingInfo.FTeacherFraccionamiento;
 end;
 
-function TTimeTable.GetClashRoomTypeValor: Integer;
+function TTimeTable.GetClashRoomTypeValue: Integer;
 begin
   Result := TTimeTableModel(Model).ClashRoomTypeValue * TablingInfo.FClashRoomType;
 end;
@@ -1441,15 +1441,15 @@ function TTimeTable.GetValue: Integer;
 begin
   with TablingInfo do
     Result :=
-      ClashRoomTypeValor +
+      ClashRoomTypeValue +
       ClashTeacherValue +
       ClashSubjectValue +
-      HourHuecaDesubicadaValor +
-      SubjectNoDispersaValor +
+      OutOfPositionEmptyHourValue +
+      NonScatteredSubjectValue +
       SubjectRestrictionValue +
-      TeacherFraccionamientoValor +
+      BrokenTeacherValue +
       TeacherRestrictionValue +
-      SessionCortadaValor;
+      BrokenSessionValue;
 end;
 
 function TTimeTable.NewBookmark: TBookmark;
@@ -1479,9 +1479,9 @@ begin
     FClashSubject := ATimeTable.TablingInfo.FClashSubject;
     FClashRoomType := ATimeTable.TablingInfo.FClashRoomType;
     FTeacherFraccionamiento := ATimeTable.TablingInfo.FTeacherFraccionamiento;
-    FHourHuecaDesubicada := ATimeTable.TablingInfo.FHourHuecaDesubicada;
-    FSessionCortada := ATimeTable.TablingInfo.FSessionCortada;
-    FSubjectNoDispersa := ATimeTable.TablingInfo.FSubjectNoDispersa;
+    FOutOfPositionEmptyHour := ATimeTable.TablingInfo.FOutOfPositionEmptyHour;
+    FBrokenSession := ATimeTable.TablingInfo.FBrokenSession;
+    FNonScatteredSubject := ATimeTable.TablingInfo.FNonScatteredSubject;
     FValue := ATimeTable.FValue;
     // TablingInfo := ATimeTable.TablingInfo;
     Move(ATimeTable.TablingInfo.FSubjectRestrictionTypeASubjectCant[0],
@@ -1829,10 +1829,10 @@ begin
     FClashTeacher := 0;
     FClashSubject := 0;
     FClashRoomType := 0;
-    FHourHuecaDesubicada := 0;
+    FOutOfPositionEmptyHour := 0;
     FTeacherFraccionamiento := 0;
-    FSessionCortada := 0;
-    FSubjectNoDispersa := 0;
+    FBrokenSession := 0;
+    FNonScatteredSubject := 0;
     for Day := 0 to FDayCount - 1 do
       for Teacher := 0 to FTeacherCount - 1 do
       begin

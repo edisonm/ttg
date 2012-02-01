@@ -565,7 +565,7 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 3
       end
-      object creSessionCortada: TEdit
+      object creBrokenSession: TEdit
         Left = 117
         Height = 21
         Top = 80
@@ -573,7 +573,7 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 4
       end
-      object creSubjectNoDispersa: TEdit
+      object creNonScatteredSubject: TEdit
         Left = 345
         Height = 21
         Top = 57

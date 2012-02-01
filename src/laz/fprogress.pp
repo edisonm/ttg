@@ -35,22 +35,22 @@ type
     pnlClashTeacherValue: TPanel;
     lblClashTeacherValue: TLabel;
     pnlClashRoomType: TPanel;
-    pnlClashRoomTypeValor: TPanel;
-    lblClashRoomTypeValor: TLabel;
+    pnlClashRoomTypeValue: TPanel;
+    lblClashRoomTypeValue: TLabel;
     pnlClashTeacherNumber: TPanel;
     lblClashTeacher: TLabel;
     pnlClashRoomTypeNumber: TPanel;
     lblClashRoomType: TLabel;
-    pnlHourHuecaDesubicada: TPanel;
-    pnlHourHuecaDesubicadaNumber: TPanel;
-    lblHourHuecaDesubicada: TLabel;
-    pnlHourHuecaDesubicadaValor: TPanel;
-    lblHourHuecaDesubicadaValor: TLabel;
-    pnlSessionCortada: TPanel;
-    pnlSessionCortadaNumber: TPanel;
-    lblSessionCortada: TLabel;
-    pnlSessionCortadaValor: TPanel;
-    lblSessionCortadaValor: TLabel;
+    pnlOutOfPositionEmptyHour: TPanel;
+    pnlOutOfPositionEmptyHourNumber: TPanel;
+    lblOutOfPositionEmptyHour: TLabel;
+    pnlOutOfPositionEmptyHourValue: TPanel;
+    lblOutOfPositionEmptyHourValue: TLabel;
+    pnlBrokenSession: TPanel;
+    pnlBrokenSessionNumber: TPanel;
+    lblBrokenSession: TLabel;
+    pnlBrokenSessionValue: TPanel;
+    lblBrokenSessionValue: TLabel;
     pnlInitDateTime: TPanel;
     lblInit: TLabel;
     pnlElapsedTime: TPanel;
@@ -67,18 +67,18 @@ type
     lblTeacherRestriction: TLabel;
     Panel26: TPanel;
     lblTeacherRestrictionValue: TLabel;
-    pnlSubjectNoDispersa: TPanel;
+    pnlNonScatteredSubject: TPanel;
     Panel28: TPanel;
-    lblSubjectNoDispersa: TLabel;
+    lblNonScatteredSubject: TLabel;
     Panel29: TPanel;
-    lblSubjectNoDispersaValor: TLabel;
+    lblNonScatteredSubjectValue: TLabel;
     bbtnCancel: TBitBtn;
     PBProgress: TProgressBar;
     Panel1: TPanel;
     Panel2: TPanel;
     lblTeacherFraccionamiento: TLabel;
     Panel3: TPanel;
-    lblTeacherFraccionamientoValor: TLabel;
+    lblBrokenTeacherValue: TLabel;
     pnlPosition: TPanel;
     lblPosition: TLabel;
     procedure bbtnCancelClick(Sender: TObject);
@@ -147,8 +147,8 @@ begin
   begin
     with MasterDataModule.ConfigStorage do
       TTimeTableModel(ASolver.Model).Configure(ClashTeacher, ClashSubject,
-        ClashRoomType, TeacherFraccionamiento, HourHuecaDesubicada,
-        SessionCortada, SubjectNoDispersa);
+        ClashRoomType, TeacherFraccionamiento, OutOfPositionEmptyHour,
+        BrokenSession, NonScatteredSubject);
     //ASolver.Update;
     ASolver.UpdateValue;
     FUpdateIndex := MainForm.UpdateIndex;
@@ -170,24 +170,24 @@ begin
     lblClashRoomType.Caption := Format('%d ', [ClashRoomType]);
     lblTeacherFraccionamiento.Caption :=
       Format('%d ', [TeacherFraccionamiento]);
-    lblHourHuecaDesubicada.Caption := Format('%d ', [HourHuecaDesubicada]);
-    lblSessionCortada.Caption := Format('%d ', [SessionCortada]);
+    lblOutOfPositionEmptyHour.Caption := Format('%d ', [OutOfPositionEmptyHour]);
+    lblBrokenSession.Caption := Format('%d ', [BrokenSession]);
     lblSubjectRestriction.Caption :=
       Format('%s ', [VarArrToStr(SubjectRestrictionTypeASubjectCant)]);
     lblTeacherRestriction.Caption :=
       Format('%s ', [VarArrToStr(TeacherRestrictionTypeATeacherCant)]);
-    lblSubjectNoDispersa.Caption := Format('%d ', [SubjectNoDispersa]);
+    lblNonScatteredSubject.Caption := Format('%d ', [NonScatteredSubject]);
     lblClashTeacherValue.Caption := Format('%d ', [ClashTeacherValue]);
     lblClashSubjectValue.Caption := Format('%d ', [ClashSubjectValue]);
-    lblTeacherFraccionamientoValor.Caption :=
-      Format('%d ', [TeacherFraccionamientoValor]);
-    lblClashRoomTypeValor.Caption := Format('%d ', [ClashRoomTypeValor]);
-    lblHourHuecaDesubicadaValor.Caption := Format('%d ',
-      [HourHuecaDesubicadaValor]);
-    lblSessionCortadaValor.Caption := Format('%d ', [SessionCortadaValor]);
+    lblBrokenTeacherValue.Caption :=
+      Format('%d ', [BrokenTeacherValue]);
+    lblClashRoomTypeValue.Caption := Format('%d ', [ClashRoomTypeValue]);
+    lblOutOfPositionEmptyHourValue.Caption := Format('%d ',
+      [OutOfPositionEmptyHourValue]);
+    lblBrokenSessionValue.Caption := Format('%d ', [BrokenSessionValue]);
     lblSubjectRestrictionValue.Caption := Format('%d ', [SubjectRestrictionValue]);
     lblTeacherRestrictionValue.Caption := Format('%d ', [TeacherRestrictionValue]);
-    lblSubjectNoDispersaValor.Caption := Format('%d ', [SubjectNoDispersaValor]);
+    lblNonScatteredSubjectValue.Caption := Format('%d ', [NonScatteredSubjectValue]);
     lblTotalValue.Caption := Format('%d ', [Value]);
   end;
   with ASolver do

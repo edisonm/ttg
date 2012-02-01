@@ -98,7 +98,7 @@ object ProgressForm: TProgressForm
       Caption = ' Cruce de aulas:'
       TabOrder = 3
     end
-    object pnlClashRoomTypeValor: TPanel
+    object pnlClashRoomTypeValue: TPanel
       Left = 312
       Height = 21
       Top = 102
@@ -109,7 +109,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 4
-      object lblClashRoomTypeValor: TLabel
+      object lblClashRoomTypeValue: TLabel
         Left = 116
         Height = 19
         Top = 1
@@ -182,7 +182,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlHourHuecaDesubicada: TPanel
+    object pnlOutOfPositionEmptyHour: TPanel
       Left = 8
       Height = 21
       Top = 150
@@ -192,7 +192,7 @@ object ProgressForm: TProgressForm
       Caption = ' Hours huecas'
       TabOrder = 7
     end
-    object pnlHourHuecaDesubicadaNumber: TPanel
+    object pnlOutOfPositionEmptyHourNumber: TPanel
       Left = 192
       Height = 21
       Top = 150
@@ -203,7 +203,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 8
-      object lblHourHuecaDesubicada: TLabel
+      object lblOutOfPositionEmptyHour: TLabel
         Left = 104
         Height = 19
         Top = 1
@@ -220,7 +220,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlHourHuecaDesubicadaValor: TPanel
+    object pnlOutOfPositionEmptyHourValue: TPanel
       Left = 312
       Height = 21
       Top = 150
@@ -231,7 +231,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 9
-      object lblHourHuecaDesubicadaValor: TLabel
+      object lblOutOfPositionEmptyHourValue: TLabel
         Left = 116
         Height = 19
         Top = 1
@@ -248,7 +248,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlSessionCortada: TPanel
+    object pnlBrokenSession: TPanel
       Left = 8
       Height = 21
       Top = 174
@@ -258,7 +258,7 @@ object ProgressForm: TProgressForm
       Caption = ' Materias cortadas'
       TabOrder = 10
     end
-    object pnlSessionCortadaNumber: TPanel
+    object pnlBrokenSessionNumber: TPanel
       Left = 192
       Height = 21
       Top = 174
@@ -269,7 +269,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 11
-      object lblSessionCortada: TLabel
+      object lblBrokenSession: TLabel
         Left = 104
         Height = 19
         Top = 1
@@ -286,7 +286,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlSessionCortadaValor: TPanel
+    object pnlBrokenSessionValue: TPanel
       Left = 312
       Height = 21
       Top = 174
@@ -297,7 +297,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 12
-      object lblSessionCortadaValor: TLabel
+      object lblBrokenSessionValue: TLabel
         Left = 116
         Height = 19
         Top = 1
@@ -529,7 +529,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlSubjectNoDispersa: TPanel
+    object pnlNonScatteredSubject: TPanel
       Left = 8
       Height = 21
       Top = 198
@@ -550,7 +550,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 23
-      object lblSubjectNoDispersa: TLabel
+      object lblNonScatteredSubject: TLabel
         Left = 104
         Height = 19
         Top = 1
@@ -578,7 +578,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 24
-      object lblSubjectNoDispersaValor: TLabel
+      object lblNonScatteredSubjectValue: TLabel
         Left = 116
         Height = 19
         Top = 1
@@ -644,7 +644,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 27
-      object lblTeacherFraccionamientoValor: TLabel
+      object lblBrokenTeacherValue: TLabel
         Left = 116
         Height = 19
         Top = 1

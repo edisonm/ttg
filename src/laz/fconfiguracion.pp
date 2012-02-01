@@ -43,8 +43,8 @@ type
     creClashTeacher: TEdit;
     creClashRoomType: TEdit;
     creHourHueca: TEdit;
-    creSessionCortada: TEdit;
-    creSubjectNoDispersa: TEdit;
+    creBrokenSession: TEdit;
+    creNonScatteredSubject: TEdit;
     tbsUnidadEducativa: TTabSheet;
     Label14: TLabel;
     speMaxCargaTeacher: TSpinEdit;
@@ -183,9 +183,9 @@ begin
       creClashSubject.Text := FloatToStr(ClashSubject);
       creClashRoomType.Text := FloatToStr(ClashRoomType);
       creTeacherFraccionamiento.Text := FloatToStr(TeacherFraccionamiento);
-      creHourHueca.Text := FloatToStr(HourHuecaDesubicada);
-      creSessionCortada.Text := FloatToStr(SessionCortada);
-      creSubjectNoDispersa.Text := FloatToStr(SubjectNoDispersa);
+      creHourHueca.Text := FloatToStr(OutOfPositionEmptyHour);
+      creBrokenSession.Text := FloatToStr(BrokenSession);
+      creNonScatteredSubject.Text := FloatToStr(NonScatteredSubject);
       speTamPoblacion.Value := PopulationSize;
       speNumMaxGeneracion.Value := MaxIteration;
       creProbCruzamiento.Text := FloatToStr(CrossProb);
@@ -218,9 +218,9 @@ begin
       ClashSubject := StrToInt(creClashSubject.Text);
       ClashRoomType := StrToInt(creClashRoomType.Text);
       TeacherFraccionamiento := StrToInt(creTeacherFraccionamiento.Text);
-      HourHuecaDesubicada := StrToInt(creHourHueca.Text);
-      SessionCortada := StrToInt(creSessionCortada.Text);
-      SubjectNoDispersa := StrToInt(creSubjectNoDispersa.Text);
+      OutOfPositionEmptyHour := StrToInt(creHourHueca.Text);
+      BrokenSession := StrToInt(creBrokenSession.Text);
+      NonScatteredSubject := StrToInt(creNonScatteredSubject.Text);
       PopulationSize := speTamPoblacion.Value;
       MaxIteration := speNumMaxGeneracion.Value;
       CrossProb := StrToFloat(creProbCruzamiento.Text);

@@ -46,12 +46,12 @@ type
     procedure SetTeacherFraccionamiento(Value: Integer);
     function GetClashRoomType: Integer;
     procedure SetClashRoomType(Value: Integer);
-    function GetHourHuecaDesubicada: Integer;
-    procedure SetHourHuecaDesubicada(Value: Integer);
-    function GetSessionCortada: Integer;
-    procedure SetSessionCortada(Value: Integer);
-    function GetSubjectNoDispersa: Integer;
-    procedure SetSubjectNoDispersa(Value: Integer);
+    function GetOutOfPositionEmptyHour: Integer;
+    procedure SetOutOfPositionEmptyHour(Value: Integer);
+    function GetBrokenSession: Integer;
+    procedure SetBrokenSession(Value: Integer);
+    function GetNonScatteredSubject: Integer;
+    procedure SetNonScatteredSubject(Value: Integer);
     function GetPopulationSize: Integer;
     procedure SetPopulationSize(Value: Integer);
     function GetMaxIteration: Integer;
@@ -88,9 +88,9 @@ type
     property ClashSubject: Integer read GetClashSubject write SetClashSubject;
     property TeacherFraccionamiento: Integer read GetTeacherFraccionamiento write SetTeacherFraccionamiento;
     property ClashRoomType: Integer read GetClashRoomType write SetClashRoomType;
-    property HourHuecaDesubicada: Integer read GetHourHuecaDesubicada write SetHourHuecaDesubicada;
-    property SessionCortada: Integer read GetSessionCortada write SetSessionCortada;
-    property SubjectNoDispersa: Integer read GetSubjectNoDispersa write SetSubjectNoDispersa;
+    property OutOfPositionEmptyHour: Integer read GetOutOfPositionEmptyHour write SetOutOfPositionEmptyHour;
+    property BrokenSession: Integer read GetBrokenSession write SetBrokenSession;
+    property NonScatteredSubject: Integer read GetNonScatteredSubject write SetNonScatteredSubject;
     property PopulationSize: Integer read GetPopulationSize write SetPopulationSize;
     property MaxIteration: Integer read GetMaxIteration write SetMaxIteration;
     property CrossProb: Double read GetProbCruzamiento write SetProbCruzamiento;
@@ -265,34 +265,34 @@ begin
   Integers['ClashRoomType'] := Value;
 end;
 
-function TTTGConfig.GetHourHuecaDesubicada: Integer;
+function TTTGConfig.GetOutOfPositionEmptyHour: Integer;
 begin
   Result := Integers['HourHueca'];
 end;
 
-procedure TTTGConfig.SetHourHuecaDesubicada(Value: Integer);
+procedure TTTGConfig.SetOutOfPositionEmptyHour(Value: Integer);
 begin
   Integers['HourHueca'] := Value;
 end;
 
-function TTTGConfig.GetSessionCortada: Integer;
+function TTTGConfig.GetBrokenSession: Integer;
 begin
-  Result := Integers['SessionCortada'];
+  Result := Integers['BrokenSession'];
 end;
 
-procedure TTTGConfig.SetSessionCortada(Value: Integer);
+procedure TTTGConfig.SetBrokenSession(Value: Integer);
 begin
-  Integers['SessionCortada'] := Value;
+  Integers['BrokenSession'] := Value;
 end;
 
-function TTTGConfig.GetSubjectNoDispersa: Integer;
+function TTTGConfig.GetNonScatteredSubject: Integer;
 begin
-  Result := Integers['SubjectNoDispersa'];
+  Result := Integers['NonScatteredSubject'];
 end;
 
-procedure TTTGConfig.SetSubjectNoDispersa(Value: Integer);
+procedure TTTGConfig.SetNonScatteredSubject(Value: Integer);
 begin
-  Integers['SubjectNoDispersa'] := Value;
+  Integers['NonScatteredSubject'] := Value;
 end;
 
 function TTTGConfig.GetPopulationSize: Integer;
@@ -403,9 +403,9 @@ begin
   ClashSubject := 200;
   TeacherFraccionamiento := 50;
   ClashRoomType := 200;
-  HourHuecaDesubicada := 100;
-  SessionCortada := 150;
-  SubjectNoDispersa := 5;
+  OutOfPositionEmptyHour := 100;
+  BrokenSession := 150;
+  NonScatteredSubject := 5;
   PopulationSize := 10;
   MaxIteration := 10000;
   CrossProb := 0.3;
