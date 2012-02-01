@@ -39,7 +39,8 @@ type
 
 implementation
 
-uses UEvolElitist, FProgress, UTTGConsts;
+uses
+  UEvolElitist, FProgress, UTTGConsts;
 
 type
 

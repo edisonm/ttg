@@ -282,7 +282,7 @@ type
 implementation
 
 uses
-  SysUtils, ZSysUtils, ZConnection, MTProcs, DSource, USortAlgs, UTTGConsts;
+  SysUtils, ZSysUtils, ZConnection, MTProcs, DSource, USortAlgs, UTTGConsts, dsourcebaseconsts;
 
 constructor TTimeTableModel.Create(AClashTeacherValue,
   AClashSubjectValue, AClashRoomTypeValue, ABrokenTeacherValue,
@@ -1297,38 +1297,38 @@ end;
 *)
 
 procedure TTimeTable.ReportValues(AReport: TStrings);
+var
+  SRowFormat: string = '%0:-26s %12d %12d %12d';
 begin
   with AReport, TablingInfo do
   begin
     Add('-----------------------------------------------------------------');
     Add('Detalle                           Cant.         Peso        Valor');
     Add('-----------------------------------------------------------------');
-    Add(Format('Cruce de profesores:       %12d %12d %12d',
-        [FClashTeacher, TTimeTableModel(Model).ClashTeacherValue, ClashTeacherValue]));
-    Add(Format('Cruce de materias:         %12d %12d %12d',
-        [FClashSubject, TTimeTableModel(Model).ClashSubjectValue, ClashSubjectValue]));
-    Add(Format('Cruce de aulas:            %12d %12d %12d',
-        [FClashRoomType, TTimeTableModel(Model).ClashRoomTypeValue, ClashRoomTypeValue]));
-    Add(Format('Fracc. h. profesores:      %12d %12d %12d',
-        [TeacherFraccionamiento, TTimeTableModel(Model).BrokenTeacherValue,
-        BrokenTeacherValue]));
-    Add(Format('Hours Huecas desubicadas:  %12d %12d %12d',
-        [OutOfPositionEmptyHour, TTimeTableModel(Model).OutOfPositionEmptyHourValue,
-        OutOfPositionEmptyHourValue]));
-    Add(Format('Materias cortadas:         %12d %12d %12d',
-        [BrokenSession, TTimeTableModel(Model).BrokenSessionValue, BrokenSessionValue]));
-    Add(Format('Materias juntas:           %12d %12d %12d',
-        [NonScatteredSubject, TTimeTableModel(Model).NonScatteredSubjectValue, NonScatteredSubjectValue]));
-    Add(Format('Prohibiciones de materia:  %12s %12s %12d',
-        ['(' + VarArrToStr(FSubjectRestrictionTypeASubjectCant, ' ') + ')',
+    Add(Format(SRowFormat, [SClashTeacher + ':', FClashTeacher,
+      TTimeTableModel(Model).ClashTeacherValue, ClashTeacherValue]));
+    Add(Format(SRowFormat, [SClashSubject + ':', FClashSubject,
+      TTimeTableModel(Model).ClashSubjectValue, ClashSubjectValue]));
+    Add(Format(SRowFormat, [SClashRoomType + ':', FClashRoomType,
+      TTimeTableModel(Model).ClashRoomTypeValue, ClashRoomTypeValue]));
+    Add(Format(SRowFormat, [SBrokenTeacher + ':', TeacherFraccionamiento,
+      TTimeTableModel(Model).BrokenTeacherValue, BrokenTeacherValue]));
+    Add(Format(SRowFormat, [SOutOfPositionEmptyHour + ':', OutOfPositionEmptyHour,
+      TTimeTableModel(Model).OutOfPositionEmptyHourValue, OutOfPositionEmptyHourValue]));
+    Add(Format(SRowFormat, [SBrokenSession + ':', BrokenSession,
+      TTimeTableModel(Model).BrokenSessionValue, BrokenSessionValue]));
+    Add(Format(SRowFormat, [SNonScatteredSubject + ':', NonScatteredSubject,
+        TTimeTableModel(Model).NonScatteredSubjectValue, NonScatteredSubjectValue]));
+    Add(Format('%0:-26s %12s %12s %12d', [STbSubjectRestriction + ':',
+         '(' + VarArrToStr(FSubjectRestrictionTypeASubjectCant, ' ') + ')',
          '(' + VarArrToStr(TTimeTableModel(Model).FSubjectRestrictionTypeToValue, ' ') + ')',
          SubjectRestrictionValue]));
-    Add(Format('Prohibiciones de profesor: %12s %12s %12d',
-        ['(' + VarArrToStr(FTeacherRestrictionTypeATeacherCant, ' ') + ')',
+    Add(Format('%0:-26s %12s %12s %12d', [STbTeacherRestriction + ':',
+         '(' + VarArrToStr(FTeacherRestrictionTypeATeacherCant, ' ') + ')',
          '(' + VarArrToStr(TTimeTableModel(Model).FTeacherRestrictionTypeToValue, ' ') + ')',
          TeacherRestrictionValue]));
     Add('-----------------------------------------------------------------');
-    Add(Format('Valor Total:                                         %12d', [Value]));
+    Add(Format('%0:-52s %12d', [STotalValue + ':', Value]));
   end;
 end;
 

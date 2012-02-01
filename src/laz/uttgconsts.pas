@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit UTTGConsts;
 
 {$I ttg.inc}
@@ -54,16 +55,17 @@ resourcestring
   SImprovingTimeTableIn =  'Mejorando TimeTable [%d] en [%d]';
   SBaseTimeTable = 'TimeTable base: %d';
   SSearchBy = 'Buscar por %s';
-  SClassTimeSlotToSessionOverflow = 'Se desbordo Molde de ClassTimeSlotToSession: ' +
-    'Class %d-%d Duracion %d';
+  SClassTimeSlotToSessionOverflow =
+    'Se desbordo Molde de ClassTimeSlotToSession: Class %d-%d Duracion %d';
   SWeights = 'Pesos';
   SClashTeacher = 'Cruce de profesores';
   SClashSubject = 'Cruce de materias';
   SClashRoomType = 'Cruce de aulas';
   SBrokenTeacher = 'Fracc. h. profesores';
-  SOutOfPositionEmptyHour = 'Horas Huecas desubicadas:';
+  SOutOfPositionEmptyHour = 'Horas huecas desubicadas';
   SBrokenSession = 'Materias cortadas';
   SNonScatteredSubject = 'Materias juntas';
+  STotalValue = 'Total Value';
 implementation
 
 end.

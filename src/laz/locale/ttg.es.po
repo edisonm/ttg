@@ -969,6 +969,21 @@ msgctxt "TPROGRESSFORM.BBTNCLOSE.CAPTION"
 msgid "Aceptar"
 msgstr "Aceptar"
 
+#: TPROGRESSFORM.LBLBROKENSESSION.CAPTION
+msgctxt "TPROGRESSFORM.LBLBROKENSESSION.CAPTION"
+msgid "0 "
+msgstr "0 "
+
+#: TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION
+msgctxt "TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION"
+msgid "0 "
+msgstr "0 "
+
+#: TPROGRESSFORM.LBLBROKENTEACHERVALUE.CAPTION
+msgctxt "TPROGRESSFORM.LBLBROKENTEACHERVALUE.CAPTION"
+msgid "0 "
+msgstr "0 "
+
 #: TPROGRESSFORM.LBLCOLISION.CAPTION
 msgctxt "TPROGRESSFORM.LBLCOLISION.CAPTION"
 msgid "0 "
@@ -1014,38 +1029,8 @@ msgctxt "TPROGRESSFORM.LBLEXPORTS.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOUR.CAPTION
-msgctxt "TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOUR.CAPTION"
-msgid "0 "
-msgstr "0 "
-
-#: TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION
-msgctxt "TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION"
-msgid "0 "
-msgstr "0 "
-
 #: TPROGRESSFORM.LBLIMPORTS.CAPTION
 msgctxt "TPROGRESSFORM.LBLIMPORTS.CAPTION"
-msgid "0 "
-msgstr "0 "
-
-#: TPROGRESSFORM.LBLPOSITION.CAPTION
-msgctxt "TPROGRESSFORM.LBLPOSITION.CAPTION"
-msgid "0 "
-msgstr "0 "
-
-#: TPROGRESSFORM.LBLREMAININGTIME.CAPTION
-msgctxt "TPROGRESSFORM.LBLREMAININGTIME.CAPTION"
-msgid "0 "
-msgstr "0 "
-
-#: TPROGRESSFORM.LBLBROKENSESSION.CAPTION
-msgctxt "TPROGRESSFORM.LBLBROKENSESSION.CAPTION"
-msgid "0 "
-msgstr "0 "
-
-#: TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION
-msgctxt "TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1056,6 +1041,26 @@ msgstr "0 "
 
 #: TPROGRESSFORM.LBLNONSCATTEREDSUBJECTVALUE.CAPTION
 msgctxt "TPROGRESSFORM.LBLNONSCATTEREDSUBJECTVALUE.CAPTION"
+msgid "0 "
+msgstr "0 "
+
+#: TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOUR.CAPTION
+msgctxt "TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOUR.CAPTION"
+msgid "0 "
+msgstr "0 "
+
+#: TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION
+msgctxt "TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION"
+msgid "0 "
+msgstr "0 "
+
+#: TPROGRESSFORM.LBLPOSITION.CAPTION
+msgctxt "TPROGRESSFORM.LBLPOSITION.CAPTION"
+msgid "0 "
+msgstr "0 "
+
+#: TPROGRESSFORM.LBLREMAININGTIME.CAPTION
+msgctxt "TPROGRESSFORM.LBLREMAININGTIME.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1071,11 +1076,6 @@ msgstr "0 "
 
 #: TPROGRESSFORM.LBLTEACHERFRACCIONAMIENTO.CAPTION
 msgctxt "TPROGRESSFORM.LBLTEACHERFRACCIONAMIENTO.CAPTION"
-msgid "0 "
-msgstr "0 "
-
-#: TPROGRESSFORM.LBLBROKENTEACHERVALUE.CAPTION
-msgctxt "TPROGRESSFORM.LBLBROKENTEACHERVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1139,6 +1139,20 @@ msgstr " Exportaciones:"
 msgid "Polinización:"
 msgstr "Polinización:"
 
+#: TPROGRESSFORM.PNLBROKENSESSION.CAPTION
+msgid " Materias cortadas"
+msgstr " Materias cortadas"
+
+#: TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION
+msgctxt "TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION"
+msgid " Number:"
+msgstr " Number:"
+
+#: TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION
+msgctxt "TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION"
+msgid " Valor:"
+msgstr " Valor:"
+
 #: TPROGRESSFORM.PNLCRUCEROOMTYPE.CAPTION
 msgid " Cruce de aulas:"
 msgstr " Cruce de aulas:"
@@ -1189,6 +1203,14 @@ msgstr " Tiempo transcurrido:"
 msgid "Tiempo restante:"
 msgstr "Tiempo restante:"
 
+#: TPROGRESSFORM.PNLINITDATETIME.CAPTION
+msgid "Iniciado el:"
+msgstr "Iniciado el:"
+
+#: TPROGRESSFORM.PNLNONSCATTEREDSUBJECT.CAPTION
+msgid " Materias juntas:"
+msgstr " Materias juntas:"
+
 #: TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOUR.CAPTION
 msgid " Hours huecas"
 msgstr " Hours huecas"
@@ -1203,31 +1225,9 @@ msgctxt "TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION"
 msgid " Valor:"
 msgstr " Valor:"
 
-#: TPROGRESSFORM.PNLINITDATETIME.CAPTION
-msgid "Iniciado el:"
-msgstr "Iniciado el:"
-
 #: TPROGRESSFORM.PNLPOSITION.CAPTION
 msgid " Iteracion:"
 msgstr " Iteracion:"
-
-#: TPROGRESSFORM.PNLBROKENSESSION.CAPTION
-msgid " Materias cortadas"
-msgstr " Materias cortadas"
-
-#: TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION
-msgctxt "TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION"
-msgid " Number:"
-msgstr " Number:"
-
-#: TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION
-msgctxt "TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION"
-msgid " Valor:"
-msgstr " Valor:"
-
-#: TPROGRESSFORM.PNLNONSCATTEREDSUBJECT.CAPTION
-msgid " Materias juntas:"
-msgstr " Materias juntas:"
 
 #: TPROGRESSFORM.PNLSUBJECTRESTRICTION.CAPTION
 msgid " Prohibiciones de materia:"
@@ -1652,7 +1652,7 @@ msgid "Number of soft teacher restrictions..."
 msgstr "Numero de prohibiciones de profesores sin problemas..."
 
 #: uttgconsts.soutofpositionemptyhour
-msgid "Horas Huecas desubicadas:"
+msgid "Horas huecas desubicadas"
 msgstr ""
 
 #: uttgconsts.spendingchangeswillbelostyoureallywanttoquit
@@ -1736,6 +1736,10 @@ msgstr ""
 
 #: uttgconsts.stimetablecodestogenerate
 msgid "Codigos de los Horarios a generar"
+msgstr ""
+
+#: uttgconsts.stotalvalue
+msgid "Total Value"
 msgstr ""
 
 #: uttgconsts.sweights
