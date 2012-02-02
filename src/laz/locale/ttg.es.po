@@ -452,8 +452,6 @@ msgid "Colegio|Nombre del colegio"
 msgstr "Colegio|Nombre del colegio"
 
 #: TCONFIGURACIONFORM.LABEL1.CAPTION
-#, fuzzy
-#| msgid "Cruce profesores:"
 msgid "Clash Teachers:"
 msgstr "Cruce profesores:"
 
@@ -474,14 +472,10 @@ msgid "Iteraciones:"
 msgstr "Iteraciones:"
 
 #: TCONFIGURACIONFORM.LABEL15.CAPTION
-#, fuzzy
-#| msgid "Prohibiciones de materia:"
 msgid "Subject Restrictions:"
 msgstr "Prohibiciones de materia:"
 
 #: TCONFIGURACIONFORM.LABEL18.CAPTION
-#, fuzzy
-#| msgid "Prohibiciones de profesor:"
 msgid "Teacher Restrictions:"
 msgstr "Prohibiciones de profesor:"
 
@@ -490,14 +484,10 @@ msgid "Semilla:"
 msgstr "Semilla:"
 
 #: TCONFIGURACIONFORM.LABEL2.CAPTION
-#, fuzzy
-#| msgid "Cruce de aulas:"
 msgid "Clash Rooms:"
 msgstr "Cruce de aulas:"
 
 #: TCONFIGURACIONFORM.LABEL20.CAPTION
-#, fuzzy
-#| msgid "Cruce materias:"
 msgid "Clash Subjects:"
 msgstr "Cruce materias:"
 
@@ -1105,8 +1095,6 @@ msgid "0 "
 msgstr "0 "
 
 #: TPROGRESSFORM.PNLBROKENSESSION.CAPTION
-#, fuzzy
-#| msgid " Materias cortadas"
 msgid " Broken Subjects:"
 msgstr " Materias cortadas"
 
@@ -1116,8 +1104,6 @@ msgid " Number:"
 msgstr " Number:"
 
 #: TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION
-#, fuzzy
-#| msgid " Valor:"
 msgctxt "TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
@@ -1235,14 +1221,10 @@ msgid "Pollination:"
 msgstr "Polinizacion:"
 
 #: TPROGRESSFORM.PNLPOSITION.CAPTION
-#, fuzzy
-#| msgid " Iteracion:"
 msgid " Iteration:"
 msgstr " Iteracion:"
 
 #: TPROGRESSFORM.PNLSUBJECTRESTRICTION.CAPTION
-#, fuzzy
-#| msgid " Prohibiciones de materia:"
 msgid " Subject Restrictions:"
 msgstr " Prohibiciones de materia:"
 
@@ -1252,15 +1234,11 @@ msgid " Number:"
 msgstr " Number:"
 
 #: TPROGRESSFORM.PNLSUBJECTRESTRICTIONVALUE.CAPTION
-#, fuzzy
-#| msgid " Valor:"
 msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTIONVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
 #: TPROGRESSFORM.PNLTEACHERRESTRICTION.CAPTION
-#, fuzzy
-#| msgid " Prohibiciones de profesor:"
 msgid " Teacher Restrictions:"
 msgstr " Prohibiciones de profesor:"
 
@@ -1275,8 +1253,6 @@ msgid " Value:"
 msgstr " Valor:"
 
 #: TPROGRESSFORM.PNLTOTALVALUE.CAPTION
-#, fuzzy
-#| msgid " Valor Total:"
 msgid "Total Value:"
 msgstr " Valor Total:"
 
@@ -1525,8 +1501,6 @@ msgid "Ver|Que ver en el horario del profesor"
 msgstr "Ver|Que ver en el horario del profesor"
 
 #: uabout.sappname
-#, fuzzy
-#| msgid "Generador Automatico de Horarios"
 msgid "Automatic Timetable Generator"
 msgstr "Generador Automatico de Horarios"
 
@@ -1535,14 +1509,10 @@ msgid "1.2.2"
 msgstr "1.2.2"
 
 #: uabout.sbuilddatetime
-#, fuzzy
-#| msgid "Wed Feb  1 18:31:20 2012"
 msgid "Wed Feb  1 18:39:38 2012"
 msgstr "Wed Feb  1 00:53:59 2012"
 
 #: uabout.srevision
-#, fuzzy
-#| msgid "551M"
 msgid "551_552"
 msgstr "546M"
 
@@ -1563,42 +1533,42 @@ msgid "When processing %s"
 msgstr "Mientras se procesaba %s"
 
 #: uttgconsts.sapplydownhill
-msgid "Aplicar Descenso: %23s"
+msgid "Applying Downhill: %23s"
 msgstr "Aplicar Descenso: %23s"
 
 #: uttgconsts.sbasetimetable
-msgid "TimeTable base: %d"
+msgid "Base Timetable: %d"
 msgstr "Horario base: %d"
 
 #: uttgconsts.sbrokensession
-msgid "Materias cortadas"
+msgid "Broken Subjects"
 msgstr "Materias cortadas"
 
 #: uttgconsts.sbrokenteacher
-msgid "Fracc. h. profesores"
+msgid "Broken TT. Teachers"
 msgstr "Fracc. h. profesores"
 
 #: uttgconsts.schangeswillbelostwarning
-msgid "Los cambios realizados se perderan, Esta seguro?"
+msgid "Changes will be lost, are you sure?"
 msgstr "Los cambios realizados se perderan, Esta seguro?"
 
 #: uttgconsts.sclashroomtype
 msgctxt "uttgconsts.sclashroomtype"
-msgid "Cruce de aulas"
+msgid "Clash of Classrooms"
 msgstr "Cruce de aulas"
 
 #: uttgconsts.sclashsubject
 msgctxt "uttgconsts.sclashsubject"
-msgid "Cruce de materias"
+msgid "Clash of Subjects"
 msgstr "Cruce de materias"
 
 #: uttgconsts.sclashteacher
 msgctxt "uttgconsts.sclashteacher"
-msgid "Cruce de profesores"
+msgid "Clash of Teachers"
 msgstr "Cruce de profesores"
 
 #: uttgconsts.sclasstimeslottosessionoverflow
-msgid "Se desbordo Molde de ClassTimeSlotToSession: Class %d-%d Duracion %d"
+msgid "Overflow of pattern for ClassTimeSlotToSession: Class %d-%d Duration %d"
 msgstr "Se desbordo Molde de ClassTimeSlotToSession: Class %d-%d Duracion %d"
 
 #: uttgconsts.sclassworkloadhead
@@ -1622,7 +1592,7 @@ msgid "Count"
 msgstr "Cantidad"
 
 #: uttgconsts.scrossprob
-msgid "Probabilidad de cruce"
+msgid "Cross Probability"
 msgstr "Probabilidad de cruce"
 
 #: uttgconsts.sdetail
@@ -1630,51 +1600,51 @@ msgid "Detail"
 msgstr "Detalle"
 
 #: uttgconsts.sdownhillalgorithm
-msgid "Algoritmo de Descenso"
+msgid "Downhill Algorithm"
 msgstr "Algoritmo de Descenso"
 
 #: uttgconsts.sevolutiveelitistalgorithm
-msgid "Algoritmo Evolutivo Elitista"
+msgid "Evolutive Elitist Algorithm"
 msgstr "Algoritmo Evolutivo Elitista"
 
 #: uttgconsts.sgeneratetimetables
-msgid "Generar Horarios"
+msgid "Generate Timetables"
 msgstr "Generar Horarios"
 
 #: uttgconsts.simprovingtimetable
-msgid "Mejorando TimeTable [%d]"
+msgid "Improving Timetable [%d]"
 msgstr "Mejorando TimeTable [%d]"
 
 #: uttgconsts.simprovingtimetablein
-msgid "Mejorando TimeTable [%d] en [%d]"
+msgid "Improving Timetable [%d] in [%d]"
 msgstr "Mejorando TimeTable [%d] en [%d]"
 
 #: uttgconsts.sinvaliddata
-msgid "El dato ingresado no es valido"
+msgid "Invalid input data"
 msgstr "El dato ingresado no es valido"
 
 #: uttgconsts.sisempty
-msgid "%s esta vacio"
+msgid "%s is empty"
 msgstr "%s esta vacio"
 
 #: uttgconsts.smaxiteration
-msgid "Maximo de generaciones"
+msgid "Max number of iterations"
 msgstr "Maximo de generaciones"
 
 #: uttgconsts.smutationprob
-msgid "Probabilidad de Mutacion"
+msgid "Mutation Probability"
 msgstr "Probabilidad de Mutacion"
 
 #: uttgconsts.snoerrorreadyforchecksummary
 msgid ""
-"No se encontraron errores, esta listo para generar horario.\n"
-"Desea mostrar el resumen del chequeo del horario?\n"
+"Not errors found, ready to generate timetable.\n"
+"Do you want to show the timetable check Summary?\n"
 msgstr ""
 "No se encontraron errores, esta listo para generar horario.\n"
 "Desea mostrar el resumen del chequeo del horario?\n"
 
 #: uttgconsts.snonscatteredsubject
-msgid "Materias juntas"
+msgid "Non Scattered Subjects"
 msgstr "Materias juntas"
 
 #: uttgconsts.snumhardteacherrestrictions
@@ -1686,23 +1656,23 @@ msgid "Number of soft teacher restrictions..."
 msgstr "Numero de prohibiciones de profesores sin problemas..."
 
 #: uttgconsts.soutofpositionemptyhour
-msgid "Horas huecas desubicadas"
+msgid "Out of position empty hours"
 msgstr "Horas huecas desubicadas"
 
 #: uttgconsts.spendingchangeswillbelostyoureallywanttoquit
 msgid ""
-"Los cambios realizados hasta el momento se perderan.\n"
-"Esta seguro que desea cerrar el programa?\n"
+"Pending changes will be lost.\n"
+"You really want to quit?\n"
 msgstr ""
 "Los cambios realizados hasta el momento se perderan.\n"
 "Esta seguro que desea cerrar el programa?\n"
 
 #: uttgconsts.spollinationprob
-msgid "Probabilidad de polinizacion"
+msgid "Pollination Probability"
 msgstr "Probabilidad de polinizacion"
 
 #: uttgconsts.spopulationsize
-msgid "Numero de individuos"
+msgid "Population size"
 msgstr "Numero de individuos"
 
 #: uttgconsts.sproblems
@@ -1710,20 +1680,20 @@ msgid "Problems"
 msgstr "Problemas"
 
 #: uttgconsts.srandseed
-msgid "Semilla Numeros aleatorios"
+msgid "Random Generator Seed"
 msgstr "Semilla numeros aleatorios"
 
 #: uttgconsts.sready
-msgid "Listo"
+msgid "Ready"
 msgstr "Listo"
 
 #: uttgconsts.srelcolsrows
 msgctxt "uttgconsts.srelcolsrows"
-msgid "%s|Columnas: %s - Filas: %s "
+msgid "%s|Columns: %s - Rows: %s "
 msgstr "%s|Columnas: %s - Filas: %s "
 
 #: uttgconsts.srepairprob
-msgid "Probabilidad de Reparacion"
+msgid "Repair Probability"
 msgstr "Probabilidad de Reparacion"
 
 #: uttgconsts.sroomtypesloadhead
@@ -1739,15 +1709,15 @@ msgid "Room types with problems..."
 msgstr "Tipos de aulas con problemas..."
 
 #: uttgconsts.ssavechanges
-msgid "Desea guardar los cambios efectuados?"
+msgid "Do you want to save the changes?"
 msgstr "Desea guardar los cambios efectuados?"
 
 #: uttgconsts.ssavedialogfilter
-msgid "TimeTable para colegio (*.ttd)|*.ttd"
+msgid "High School Timetable (*.ttd)|*.ttd"
 msgstr "TimeTable para colegio (*.ttd)|*.ttd"
 
 #: uttgconsts.ssearchby
-msgid "Buscar por %s"
+msgid "Search by %s"
 msgstr "Buscar por %s"
 
 #: uttgconsts.steacherrestrictionshead
@@ -1767,11 +1737,11 @@ msgid "Teacher; Work Load"
 msgstr "Profesor; Carga horaria"
 
 #: uttgconsts.sthenexttimetablesalreadyexists
-msgid "Los siguientes horarios ya existian: %s"
+msgid "The next Timetables already exists: %s"
 msgstr "Los siguientes horarios ya existian: %s"
 
 #: uttgconsts.stimetablecodestogenerate
-msgid "Codigos de los Horarios a generar"
+msgid "Codes of Timetables to generate"
 msgstr "Codigos de los Horarios a generar"
 
 #: uttgconsts.stotalvalue
@@ -1784,19 +1754,18 @@ msgid "Value"
 msgstr "Valor"
 
 #: uttgconsts.sweight
-msgid "Peso"
+msgid "Weight"
 msgstr "Peso"
 
 #: uttgconsts.sweights
 msgctxt "uttgconsts.sweights"
-msgid "Pesos"
+msgid "Weights"
 msgstr "Pesos"
 
 #: uttgconsts.sworkinprogress
-msgid "Elaboracion en progreso [%d]"
+msgid "Work in progress [%d]"
 msgstr "Elaboracion en progreso [%d]"
 
 #: uttgconsts.swrongcomposition
-msgid "Composicion Erroea"
+msgid "Wrong Composition"
 msgstr "Composicion Erroea"
-

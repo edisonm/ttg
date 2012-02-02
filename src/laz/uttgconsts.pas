@@ -23,53 +23,53 @@ resourcestring
   SClassWorkLoadWithProblems = 'Class work load with problems...';
   SClassWorkLoadHead = 'Class; Work Load';
   SProblems = 'Problems';
-  SGenerateTimeTables = 'Generar Horarios';
-  STimeTableCodesToGenerate = 'Codigos de los Horarios a generar';
-  SInvalidData = 'El dato ingresado no es valido';
-  STheNextTimeTablesAlreadyExists = 'Los siguientes horarios ya existian: %s';
+  SGenerateTimeTables = 'Generate Timetables';
+  STimeTableCodesToGenerate = 'Codes of Timetables to generate';
+  SInvalidData = 'Invalid input data';
+  STheNextTimeTablesAlreadyExists = 'The next Timetables already exists: %s';
   SNoErrorReadyForCheckSummary =
-    'No se encontraron errores, esta listo para generar horario.'#13#10
-    + 'Desea mostrar el resumen del chequeo del horario?';
+    'Not errors found, ready to generate timetable.'#13#10
+    + 'Do you want to show the timetable check Summary?';
   SPendingChangesWillBeLostYouReallyWantToQuit =
-    'Los cambios realizados hasta el momento se perderan.'#13#10 +
-    'Esta seguro que desea cerrar el programa?';
-  SReady = 'Listo';
-  SSaveDialogFilter =  'TimeTable para colegio (*.ttd)|*.ttd';
-  SChangesWillBeLostWarning = 'Los cambios realizados se perderan, Esta seguro?';
-  SRelColsRows =  '%s|Columnas: %s - Filas: %s ';
-  SIsEmpty = '%s esta vacio';
-  SSaveChanges = 'Desea guardar los cambios efectuados?';
+    'Pending changes will be lost.'#13#10 +
+    'You really want to quit?';
+  SReady = 'Ready';
+  SSaveDialogFilter =  'High School Timetable (*.ttd)|*.ttd';
+  SChangesWillBeLostWarning = 'Changes will be lost, are you sure?';
+  SRelColsRows =  '%s|Columns: %s - Rows: %s ';
+  SIsEmpty = '%s is empty';
+  SSaveChanges = 'Do you want to save the changes?';
   SCopyright = '1999-2012 by Edison Mera';
-  SDownHillAlgorithm = 'Algoritmo de Descenso';
-  SEvolutiveElitistAlgorithm = 'Algoritmo Evolutivo Elitista';
-  SRandSeed = 'Semilla Numeros aleatorios';
-  SPopulationSize = 'Numero de individuos';
-  SMaxIteration = 'Maximo de generaciones';
-  SCrossProb = 'Probabilidad de cruce';
-  SMutationProb = 'Probabilidad de Mutacion';
-  SRepairProb = 'Probabilidad de Reparacion';
-  SPollinationProb = 'Probabilidad de polinizacion';
-  SWorkInProgress = 'Elaboracion en progreso [%d]';
-  SImprovingTimeTable = 'Mejorando TimeTable [%d]';
-  SApplyDownHill = 'Aplicar Descenso: %23s';
-  SImprovingTimeTableIn =  'Mejorando TimeTable [%d] en [%d]';
-  SBaseTimeTable = 'TimeTable base: %d';
-  SSearchBy = 'Buscar por %s';
+  SDownHillAlgorithm = 'Downhill Algorithm';
+  SEvolutiveElitistAlgorithm = 'Evolutive Elitist Algorithm';
+  SRandSeed = 'Random Generator Seed';
+  SPopulationSize = 'Population size';
+  SMaxIteration = 'Max number of iterations';
+  SCrossProb = 'Cross Probability';
+  SMutationProb = 'Mutation Probability';
+  SRepairProb = 'Repair Probability';
+  SPollinationProb = 'Pollination Probability';
+  SWorkInProgress = 'Work in progress [%d]';
+  SImprovingTimeTable = 'Improving Timetable [%d]';
+  SApplyDownHill = 'Applying Downhill: %23s';
+  SImprovingTimeTableIn =  'Improving Timetable [%d] in [%d]';
+  SBaseTimeTable = 'Base Timetable: %d';
+  SSearchBy = 'Search by %s';
   SClassTimeSlotToSessionOverflow =
-    'Se desbordo Molde de ClassTimeSlotToSession: Class %d-%d Duracion %d';
-  SWeights = 'Pesos';
-  SClashTeacher = 'Cruce de profesores';
-  SClashSubject = 'Cruce de materias';
-  SClashRoomType = 'Cruce de aulas';
-  SBrokenTeacher = 'Fracc. h. profesores';
-  SOutOfPositionEmptyHour = 'Horas huecas desubicadas';
-  SBrokenSession = 'Materias cortadas';
-  SNonScatteredSubject = 'Materias juntas';
+    'Overflow of pattern for ClassTimeSlotToSession: Class %d-%d Duration %d';
+  SWeights = 'Weights';
+  SClashTeacher = 'Clash of Teachers';
+  SClashSubject = 'Clash of Subjects';
+  SClashRoomType = 'Clash of Classrooms';
+  SBrokenTeacher = 'Broken TT. Teachers';
+  SOutOfPositionEmptyHour = 'Out of position empty hours';
+  SBrokenSession = 'Broken Subjects';
+  SNonScatteredSubject = 'Non Scattered Subjects';
   STotalValue = 'Total Value';
-  SWrongComposition = 'Composicion Erroea';
+  SWrongComposition = 'Wrong Composition';
   SDetail = 'Detail';
   SCount = 'Count';
-  SWeight = 'Peso';
+  SWeight = 'Weight';
   SValue = 'Value';
 
 implementation
