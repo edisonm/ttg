@@ -128,7 +128,7 @@ msgstr ""
 
 #: dsourcebaseconsts.sflroomtype_number
 msgctxt "dsourcebaseconsts.sflroomtype_number"
-msgid "Cantidad"
+msgid "Number"
 msgstr ""
 
 #: dsourcebaseconsts.sflspecialization_abspecialization
@@ -477,24 +477,8 @@ msgstr ""
 msgid "Clash Subjects:"
 msgstr ""
 
-#: TCONFIGURACIONFORM.LABEL21.CAPTION
-msgid "Niveles de descenso:"
-msgstr ""
-
 #: TCONFIGURACIONFORM.LABEL29.CAPTION
 msgid "Actualizar cada:"
-msgstr ""
-
-#: TCONFIGURACIONFORM.LABEL36.CAPTION
-msgid "Horarios iniciales:"
-msgstr ""
-
-#: TCONFIGURACIONFORM.LABEL42.CAPTION
-msgid "Dir. de intercambio:"
-msgstr ""
-
-#: TCONFIGURACIONFORM.LABEL8.CAPTION
-msgid "Individuos:"
 msgstr ""
 
 #: TCONFIGURACIONFORM.LBLAUTHORITY.CAPTION
@@ -506,25 +490,35 @@ msgctxt "TCONFIGURACIONFORM.LBLAUTHORITYPOSITION.CAPTION"
 msgid "Position:"
 msgstr ""
 
-#: TCONFIGURACIONFORM.LBLBROKENSUBJECTS.CAPTION
-msgid "Broken Subjects:"
+#: TCONFIGURACIONFORM.LBLBREAKTIMETABLETEACHER.CAPTION
+msgid "Broken teachers:"
 msgstr ""
 
-#: TCONFIGURACIONFORM.LBLBREAKTIMETABLETEACHERS.CAPTION
-msgid "Broken teachers:"
+#: TCONFIGURACIONFORM.LBLBROKENSUBJECTS.CAPTION
+msgid "Broken Subjects:"
 msgstr ""
 
 #: TCONFIGURACIONFORM.LBLCOMMENTS.CAPTION
 msgid "Comments:"
 msgstr ""
 
-#: TCONFIGURACIONFORM.LBLCROSSPROB.CAPTION
-msgctxt "TCONFIGURACIONFORM.LBLCROSSPROB.CAPTION"
+#: TCONFIGURACIONFORM.LBLCROSSPROBABILITY.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLCROSSPROBABILITY.CAPTION"
 msgid "Prob. Cruce:"
+msgstr ""
+
+#: TCONFIGURACIONFORM.LBLDOWNHILLLEVELS.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLDOWNHILLLEVELS.CAPTION"
+msgid "Niveles de descenso:"
 msgstr ""
 
 #: TCONFIGURACIONFORM.LBLEMPTYHOURS.CAPTION
 msgid "Empty hours:"
+msgstr ""
+
+#: TCONFIGURACIONFORM.LBLINITIALTIMETABLES.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLINITIALTIMETABLES.CAPTION"
+msgid "Horarios iniciales:"
 msgstr ""
 
 #: TCONFIGURACIONFORM.LBLINSTITUTIONNAME.CAPTION
@@ -541,18 +535,23 @@ msgstr ""
 msgid "Max work load per teacher:"
 msgstr ""
 
-#: TCONFIGURACIONFORM.LBLMUTATIONPROB.CAPTION
-msgctxt "TCONFIGURACIONFORM.LBLMUTATIONPROB.CAPTION"
+#: TCONFIGURACIONFORM.LBLMUTATIONPROBABILITY.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLMUTATIONPROBABILITY.CAPTION"
 msgid "Prob. Mutacion:"
 msgstr ""
 
-#: TCONFIGURACIONFORM.LBLPOLLINATIONPROB.CAPTION
-msgctxt "TCONFIGURACIONFORM.LBLPOLLINATIONPROB.CAPTION"
+#: TCONFIGURACIONFORM.LBLPOLLINATIONPROBABILITY.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLPOLLINATIONPROBABILITY.CAPTION"
 msgid "Prob. Polinizacion:"
 msgstr ""
 
-#: TCONFIGURACIONFORM.LBLREPAIRPROB.CAPTION
-msgctxt "TCONFIGURACIONFORM.LBLREPAIRPROB.CAPTION"
+#: TCONFIGURACIONFORM.LBLPOPULATIONSIZE.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLPOPULATIONSIZE.CAPTION"
+msgid "Individuos:"
+msgstr ""
+
+#: TCONFIGURACIONFORM.LBLREPARATIONPROBABILITY.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLREPARATIONPROBABILITY.CAPTION"
 msgid "Prob. Reparacion:"
 msgstr ""
 
@@ -572,6 +571,11 @@ msgstr ""
 #: TCONFIGURACIONFORM.LBLSEED.CAPTION
 msgctxt "TCONFIGURACIONFORM.LBLSEED.CAPTION"
 msgid "Semilla:"
+msgstr ""
+
+#: TCONFIGURACIONFORM.LBLSHAREDDIRECTORY.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLSHAREDDIRECTORY.CAPTION"
+msgid "Dir. de intercambio:"
 msgstr ""
 
 #: TCONFIGURACIONFORM.LBLSRCOLOR.CAPTION
@@ -977,16 +981,6 @@ msgctxt "TPROGRESSFORM.BBTCLOSE.CAPTION"
 msgid "Ok"
 msgstr ""
 
-#: TPROGRESSFORM.LBLBROKENSESSION.CAPTION
-msgctxt "TPROGRESSFORM.LBLBROKENSESSION.CAPTION"
-msgid "0 "
-msgstr ""
-
-#: TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION
-msgctxt "TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION"
-msgid "0 "
-msgstr ""
-
 #: TPROGRESSFORM.LBLBREAKTIMETABLETEACHERCOUNT.CAPTION
 msgctxt "TPROGRESSFORM.LBLBREAKTIMETABLETEACHERCOUNT.CAPTION"
 msgid "0 "
@@ -994,6 +988,16 @@ msgstr ""
 
 #: TPROGRESSFORM.LBLBREAKTIMETABLETEACHERVALUE.CAPTION
 msgctxt "TPROGRESSFORM.LBLBREAKTIMETABLETEACHERVALUE.CAPTION"
+msgid "0 "
+msgstr ""
+
+#: TPROGRESSFORM.LBLBROKENSESSION.CAPTION
+msgctxt "TPROGRESSFORM.LBLBROKENSESSION.CAPTION"
+msgid "0 "
+msgstr ""
+
+#: TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION
+msgctxt "TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
@@ -1102,20 +1106,6 @@ msgctxt "TPROGRESSFORM.LBLTOTALVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: TPROGRESSFORM.PNLBROKENSESSION.CAPTION
-msgid " Broken Subjects:"
-msgstr ""
-
-#: TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION
-msgctxt "TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION"
-msgid " Number:"
-msgstr ""
-
-#: TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION
-msgctxt "TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION"
-msgid " Value:"
-msgstr ""
-
 #: TPROGRESSFORM.PNLBREAKTIMETABLETEACHER.CAPTION
 msgid " Broken Teachers:"
 msgstr ""
@@ -1127,6 +1117,20 @@ msgstr ""
 
 #: TPROGRESSFORM.PNLBREAKTIMETABLETEACHERVALUE.CAPTION
 msgctxt "TPROGRESSFORM.PNLBREAKTIMETABLETEACHERVALUE.CAPTION"
+msgid " Value:"
+msgstr ""
+
+#: TPROGRESSFORM.PNLBROKENSESSION.CAPTION
+msgid " Broken Subjects:"
+msgstr ""
+
+#: TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION
+msgctxt "TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION"
+msgid " Number:"
+msgstr ""
+
+#: TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION
+msgctxt "TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
@@ -1512,18 +1516,6 @@ msgstr ""
 msgid "Automatic Timetable Generator"
 msgstr ""
 
-#: uabout.sappversion
-msgid "1.2.2"
-msgstr ""
-
-#: uabout.sbuilddatetime
-msgid "Wed Feb  1 18:39:38 2012"
-msgstr ""
-
-#: uabout.srevision
-msgid "551_552"
-msgstr ""
-
 #: urelutils.sdetailfieldswithoutmasterfields
 msgid "No master fields in %s for the detail table %s"
 msgstr ""
@@ -1548,12 +1540,13 @@ msgstr ""
 msgid "Base Timetable: %d"
 msgstr ""
 
-#: uttgconsts.sbrokensession
-msgid "Broken Subjects"
+#: uttgconsts.sbreaktimetableteacher
+msgctxt "uttgconsts.sbreaktimetableteacher"
+msgid "Broken TT. Teachers"
 msgstr ""
 
-#: uttgconsts.sbrokenteacher
-msgid "Broken TT. Teachers"
+#: uttgconsts.sbrokensession
+msgid "Broken Subjects"
 msgstr ""
 
 #: uttgconsts.schangeswillbelostwarning
@@ -1599,7 +1592,8 @@ msgstr ""
 msgid "Count"
 msgstr ""
 
-#: uttgconsts.scrossprob
+#: uttgconsts.scrossprobability
+msgctxt "uttgconsts.scrossprobability"
 msgid "Cross Probability"
 msgstr ""
 
@@ -1639,7 +1633,8 @@ msgstr ""
 msgid "Max number of iterations"
 msgstr ""
 
-#: uttgconsts.smutationprob
+#: uttgconsts.smutationprobability
+msgctxt "uttgconsts.smutationprobability"
 msgid "Mutation Probability"
 msgstr ""
 
@@ -1667,7 +1662,8 @@ msgstr ""
 msgid "Pending changes will be lost. You really want to quit?"
 msgstr ""
 
-#: uttgconsts.spollinationprob
+#: uttgconsts.spollinationprobability
+msgctxt "uttgconsts.spollinationprobability"
 msgid "Pollination Probability"
 msgstr ""
 
@@ -1692,7 +1688,8 @@ msgctxt "uttgconsts.srelcolsrows"
 msgid "%s|Columns: %s - Rows: %s "
 msgstr ""
 
-#: uttgconsts.srepairprob
+#: uttgconsts.sreparationprobability
+msgctxt "uttgconsts.sreparationprobability"
 msgid "Repair Probability"
 msgstr ""
 

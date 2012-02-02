@@ -36,7 +36,7 @@ type
   private
     FRandSeed: Cardinal;
     FPopulationSize, FMaxIteration: Integer;
-    FCrossProb, FMutationProb, FRepairProb: Double;
+    FCrossProbability, FMutationProbability, FReparationProbability: Double;
     FPopulation, FElitists: TIndividualArray;
     FFixedIndividuals: TDynamicIntegerArray;
     FOnRecordBest: TNotifyEvent;
@@ -53,8 +53,8 @@ type
     procedure Initialize;
     procedure ReportParameters(ASummary: TStrings);
     constructor Create(AModel: TModel; const ASharedDirectory: string;
-      APollinationProb: Double; APopulationSize, AMaxIteration: Integer;
-      ACrossProb, AMutationProb, ARepairProb: Double; const ATimeTableIni: string);
+      APollinationProbability: Double; APopulationSize, AMaxIteration: Integer;
+      ACrossProbability, AMutationProbability, AReparationProbability: Double; const AInitialTimeTables: string);
     procedure FixIndividuals(const Individuals: string);
     destructor Destroy; override;
     procedure SaveSolutionToDatabase(IdTimeTable: Integer;
@@ -68,9 +68,9 @@ type
     property PopulationSize: Integer read FPopulationSize write SetPopulationSize;
     property OnRecordBest: TNotifyEvent read FOnRecordBest write FOnRecordBest;
     property MaxIteration: Integer read FMaxIteration write FMaxIteration;
-    property CrossProb: Double read FCrossProb write FCrossProb;
-    property MutationProb: Double read FMutationProb write FMutationProb;
-    property RepairProb: Double read FRepairProb write FRepairProb;
+    property CrossProbability: Double read FCrossProbability write FCrossProbability;
+    property MutationProbability: Double read FMutationProbability write FMutationProbability;
+    property ReparationProbability: Double read FReparationProbability write FReparationProbability;
     property AverageValue: Double read GetAverageValue;
   end;
 
@@ -98,16 +98,16 @@ begin
 end;
 
 constructor TEvolElitist.Create(AModel: TModel; const ASharedDirectory: string;
-  APollinationProb: Double; APopulationSize, AMaxIteration: Integer; ACrossProb,
-  AMutationProb, ARepairProb: Double; const ATimeTableIni: string);
+  APollinationProbability: Double; APopulationSize, AMaxIteration: Integer; ACrossProbability,
+  AMutationProbability, AReparationProbability: Double; const AInitialTimeTables: string);
 begin
-  inherited Create(AModel, ASharedDirectory, APollinationProb);
+  inherited Create(AModel, ASharedDirectory, APollinationProbability);
   SetPopulationSize(APopulationSize);
   FMaxIteration := AMaxIteration;
-  FCrossProb := ACrossProb;
-  FMutationProb := AMutationProb;
-  FRepairProb := ARepairProb;
-  FixIndividuals(ATimeTableIni);
+  FCrossProbability := ACrossProbability;
+  FMutationProbability := AMutationProbability;
+  FReparationProbability := AReparationProbability;
+  FixIndividuals(AInitialTimeTables);
 end;
 
 destructor TEvolElitist.Destroy;
@@ -154,7 +154,7 @@ var
 begin
   for Individual := 0 to FPopulationSize - 1 do
   begin
-    if Random < FRepairProb then
+    if Random < FReparationProbability then
     begin
       TDownHill.DownHill(FPopulation[Individual]);
     end;
@@ -304,7 +304,7 @@ begin
   One := 0;
   for Individual := 0 to FPopulationSize - 1 do
   begin
-    if Random < FCrossProb then
+    if Random < FCrossProbability then
     begin
       Inc(First);
       if First mod 2 = 0 then
@@ -326,7 +326,7 @@ var
 begin
   for Individual := 0 to FPopulationSize - 1 do
   begin
-    if Random < FMutationProb then
+    if Random < FMutationProbability then
       FPopulation[Individual].Mutate;
   end;
 end;
@@ -410,13 +410,13 @@ procedure TEvolElitist.ReportParameters(ASummary: TStrings);
 begin
   with ASummary do
   begin
-    Add(Format('%0:-28s %12.u', [SRandSeed        + ':', FRandSeed]));
-    Add(Format('%0:-28s %12.d', [SPopulationSize  + ':', FPopulationSize]));
-    Add(Format('%0:-28s %12.d', [SMaxIteration    + ':', FMaxIteration]));
-    Add(Format('%0:-34s %1.4f', [SCrossProb       + ':', FCrossProb]));
-    Add(Format('%0:-34s %1.4f', [SMutationProb    + ':', FMutationProb]));
-    Add(Format('%0:-34s %1.4f', [SRepairProb      + ':', FRepairProb]));
-    Add(Format('%0:-34s %1.4f', [SPollinationProb + ':', PollinationProb]));
+    Add(Format('%0:-28s %12.u', [SRandSeed               + ':', FRandSeed]));
+    Add(Format('%0:-28s %12.d', [SPopulationSize         + ':', FPopulationSize]));
+    Add(Format('%0:-28s %12.d', [SMaxIteration           + ':', FMaxIteration]));
+    Add(Format('%0:-34s %1.4f', [SCrossProbability       + ':', FCrossProbability]));
+    Add(Format('%0:-34s %1.4f', [SMutationProbability    + ':', FMutationProbability]));
+    Add(Format('%0:-34s %1.4f', [SReparationProbability  + ':', FReparationProbability]));
+    Add(Format('%0:-34s %1.4f', [SPollinationProbability + ':', PollinationProbability]));
   end;
 end;
 

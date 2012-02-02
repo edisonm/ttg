@@ -18,16 +18,16 @@ type
     function GetNaInstitution: string;
     procedure SetBookmarks(const AValue: string);
     procedure SetNaInstitution(const Value: string);
-    function GetAnioLectivo: string;
-    procedure SetAnioLectivo(const Value: string);
-    function GetNaAuthority: string;
-    procedure SetNaAuthority(const Value: string);
+    function GetSchoolYear: string;
+    procedure SetSchoolYear(const Value: string);
+    function GetNameAuthority: string;
+    procedure SetNameAuthority(const Value: string);
     function GetPosAuthority: string;
     procedure SetPosAuthority(const Value: string);
-    function GetNaResponsible: string;
-    procedure SetNaResponsible(const Value: string);
-    function GetPosResponsible: string;
-    procedure SetPosResponsible(const Value: string);
+    function GetNameResponsible: string;
+    procedure SetNameResponsible(const Value: string);
+    function GetPositionResponsible: string;
+    procedure SetPositionResponsible(const Value: string);
     function GetMaxTeacherWorkLoad: Integer;
     procedure SetMaxTeacherWorkLoad(Value: Integer);
     function GetComments: string;
@@ -56,29 +56,29 @@ type
     procedure SetPopulationSize(Value: Integer);
     function GetMaxIteration: Integer;
     procedure SetMaxIteration(Value: Integer);
-    function GetCrossProb: Double;
-    procedure SetCrossProb(Value: Double);
-    function GetMutation1Prob: Double;
-    procedure SetMutation1Prob(Value: Double);
-    function GetRepairProb: Double;
-    procedure SetRepairProb(Value: Double);
-    function GetTimeTableIni: string;
-    procedure SetTimeTableIni(const Value: string);
+    function GetCrossProbability: Double;
+    procedure SetCrossProbability(Value: Double);
+    function GetMutationProbability: Double;
+    procedure SetMutationProbability(Value: Double);
+    function GetReparationProbability: Double;
+    procedure SetReparationProbability(Value: Double);
+    function GetInitialTimeTables: string;
+    procedure SetInitialTimeTables(const Value: string);
     function GetSharedDirectory: string;
     procedure SetSharedDirectory(const Value: string);
-    function GetPollinationProb: Double;
-    procedure SetPollinationProb(Value: Double);
+    function GetPollinationProbability: Double;
+    procedure SetPollinationProbability(Value: Double);
     function GetApplyDoubleDownHill: Boolean;
     procedure SetApplyDoubleDownHill(Value: Boolean);
   public
     procedure SetDefaults;
     procedure InitRandom;
     property NaInstitution: string read GetNaInstitution write SetNaInstitution;
-    property AnioLectivo: string read GetAnioLectivo write SetAnioLectivo;
-    property NaAuthority: string read GetNaAuthority write SetNaAuthority;
+    property SchoolYear: string read GetSchoolYear write SetSchoolYear;
+    property NameAuthority: string read GetNameAuthority write SetNameAuthority;
     property PosAuthority: string read GetPosAuthority write SetPosAuthority;
-    property NaResponsible: string read GetNaResponsible write SetNaResponsible;
-    property PosResponsible: string read GetPosResponsible write SetPosResponsible;
+    property NameResponsible: string read GetNameResponsible write SetNameResponsible;
+    property PositionResponsible: string read GetPositionResponsible write SetPositionResponsible;
     property MaxTeacherWorkLoad: Integer read GetMaxTeacherWorkLoad write SetMaxTeacherWorkLoad;
     property Comments: string read GetComments write SetComments;
     property Randomize: Boolean read GetRandomize write SetRandomize;
@@ -93,12 +93,12 @@ type
     property NonScatteredSubject: Integer read GetNonScatteredSubject write SetNonScatteredSubject;
     property PopulationSize: Integer read GetPopulationSize write SetPopulationSize;
     property MaxIteration: Integer read GetMaxIteration write SetMaxIteration;
-    property CrossProb: Double read GetCrossProb write SetCrossProb;
-    property MutationProb: Double read GetMutation1Prob write SetMutation1Prob;
-    property RepairProb: Double read GetRepairProb write SetRepairProb;
-    property TimeTableIni: string read GetTimeTableIni write SetTimeTableIni;
+    property CrossProbability: Double read GetCrossProbability write SetCrossProbability;
+    property MutationProbability: Double read GetMutationProbability write SetMutationProbability;
+    property ReparationProbability: Double read GetReparationProbability write SetReparationProbability;
+    property InitialTimeTables: string read GetInitialTimeTables write SetInitialTimeTables;
     property SharedDirectory: string read GetSharedDirectory write SetSharedDirectory;
-    property PollinationProb: Double read GetPollinationProb write SetPollinationProb;
+    property PollinationProbability: Double read GetPollinationProbability write SetPollinationProbability;
     property ApplyDoubleDownHill: Boolean read GetApplyDoubleDownHill write SetApplyDoubleDownHill;
     property Bookmarks: string read GetBookmarks write SetBookmarks;
   end;
@@ -125,24 +125,24 @@ begin
    Values['NaInstitution'] := Value;
 end;
 
-function TTTGConfig.GetAnioLectivo: string;
+function TTTGConfig.GetSchoolYear: string;
 begin
-   Result := Values['AnioLectivo'];
+   Result := Values['SchoolYear'];
 end;
 
-procedure TTTGConfig.SetAnioLectivo(const Value: string);
+procedure TTTGConfig.SetSchoolYear(const Value: string);
 begin
-   Values['AnioLectivo'] := Value;
+   Values['SchoolYear'] := Value;
 end;
 
-function TTTGConfig.GetNaAuthority: string;
+function TTTGConfig.GetNameAuthority: string;
 begin
-   Result := Values['NaAuthority'];
+   Result := Values['NameAuthority'];
 end;
 
-procedure TTTGConfig.SetNaAuthority(const Value: string);
+procedure TTTGConfig.SetNameAuthority(const Value: string);
 begin
-   Values['NaAuthority'] := Value;
+   Values['NameAuthority'] := Value;
 end;
 
 function TTTGConfig.GetPosAuthority: string;
@@ -155,24 +155,24 @@ begin
    Values['PosAuthority'] := Value;
 end;
 
-function TTTGConfig.GetNaResponsible: string;
+function TTTGConfig.GetNameResponsible: string;
 begin
-   Result := Values['NaResponsible'];
+   Result := Values['NameResponsible'];
 end;
 
-procedure TTTGConfig.SetNaResponsible(const Value: string);
+procedure TTTGConfig.SetNameResponsible(const Value: string);
 begin
-   Values['NaResponsible'] := Value;
+   Values['NameResponsible'] := Value;
 end;
 
-function TTTGConfig.GetPosResponsible: string;
+function TTTGConfig.GetPositionResponsible: string;
 begin
-   Result := Values['PosResponsible'];
+   Result := Values['PositionResponsible'];
 end;
 
-procedure TTTGConfig.SetPosResponsible(const Value: string);
+procedure TTTGConfig.SetPositionResponsible(const Value: string);
 begin
-   Values['PosResponsible'] := Value;
+   Values['PositionResponsible'] := Value;
 end;
 
 function TTTGConfig.GetMaxTeacherWorkLoad: Integer;
@@ -315,44 +315,44 @@ begin
   Integers['MaxIteration'] := Value;
 end;
 
-function TTTGConfig.GetCrossProb: Double;
+function TTTGConfig.GetCrossProbability: Double;
 begin
-  Result := Floats['CrossProb'];
+  Result := Floats['CrossProbability'];
 end;
 
-procedure TTTGConfig.SetCrossProb(Value: Double);
+procedure TTTGConfig.SetCrossProbability(Value: Double);
 begin
-  Floats['CrossProb'] := Value;
+  Floats['CrossProbability'] := Value;
 end;
 
-function TTTGConfig.GetMutation1Prob: Double;
+function TTTGConfig.GetMutationProbability: Double;
 begin
-  Result := Floats['MutationProb1'];
+  Result := Floats['MutationProbability1'];
 end;
 
-procedure TTTGConfig.SetMutation1Prob(Value: Double);
+procedure TTTGConfig.SetMutationProbability(Value: Double);
 begin
-  Floats['MutationProb1'] := Value;
+  Floats['MutationProbability1'] := Value;
 end;
 
-function TTTGConfig.GetRepairProb: Double;
+function TTTGConfig.GetReparationProbability: Double;
 begin
-  Result := Floats['RepairProb'];
+  Result := Floats['ReparationProbability'];
 end;
 
-procedure TTTGConfig.SetRepairProb(Value: Double);
+procedure TTTGConfig.SetReparationProbability(Value: Double);
 begin
-  Floats['RepairProb'] := Value;
+  Floats['ReparationProbability'] := Value;
 end;
 
-function TTTGConfig.GetTimeTableIni: string;
+function TTTGConfig.GetInitialTimeTables: string;
 begin
-  Result := Values['TimeTableIni'];
+  Result := Values['InitialTimeTables'];
 end;
 
-procedure TTTGConfig.SetTimeTableIni(const Value: string);
+procedure TTTGConfig.SetInitialTimeTables(const Value: string);
 begin
-  Values['TimeTableIni'] := Value;
+  Values['InitialTimeTables'] := Value;
 end;
 
 function TTTGConfig.GetSharedDirectory: string;
@@ -365,14 +365,14 @@ begin
   Values['SharedDirectory'] := Value;
 end;
 
-function TTTGConfig.GetPollinationProb: Double;
+function TTTGConfig.GetPollinationProbability: Double;
 begin
-  Result := Floats['PollinationProb'];
+  Result := Floats['PollinationProbability'];
 end;
 
-procedure TTTGConfig.SetPollinationProb(Value: Double);
+procedure TTTGConfig.SetPollinationProbability(Value: Double);
 begin
-  Floats['PollinationProb'] := Value;
+  Floats['PollinationProbability'] := Value;
 end;
 
 function TTTGConfig.GetApplyDoubleDownHill: Boolean;
@@ -389,11 +389,11 @@ procedure TTTGConfig.SetDefaults;
 begin
   // Default configuration
   NaInstitution := '';
-  AnioLectivo := '';
-  NaAuthority := '';
+  SchoolYear := '';
+  NameAuthority := '';
   PosAuthority := '';
-  NaResponsible := '';
-  PosResponsible := '';
+  NameResponsible := '';
+  PositionResponsible := '';
   MaxTeacherWorkLoad := 20;
   Comments := '';
   Randomize := True;
@@ -408,14 +408,14 @@ begin
   NonScatteredSubject := 5;
   PopulationSize := 10;
   MaxIteration := 10000;
-  CrossProb := 0.3;
-  MutationProb := 0.2;
-  RepairProb := 0.2;
+  CrossProbability := 0.3;
+  MutationProbability := 0.2;
+  ReparationProbability := 0.2;
   Bookmarks := '1,2';
   ApplyDoubleDownHill := False;
-  TimeTableIni := '';
+  InitialTimeTables := '';
   SharedDirectory := GetTempDir;
-  PollinationProb := 0.1;
+  PollinationProbability := 0.1;
 end;
 
 procedure TTTGConfig.InitRandom;

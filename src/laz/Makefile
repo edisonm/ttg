@@ -89,7 +89,7 @@ run:
 	cd $(TTGDIR)/bin/$(BuildId) ; $(TTGEXE)
 
 ide:
-	lazarus-ide ttg.lpi
+	$(LAZIDE) ttg.lpi
 
 getBuildId:
 	@echo $(BuildId)

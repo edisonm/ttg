@@ -23,7 +23,7 @@ type
     FBestIndividual: TIndividual;
     FOnProgress: TProgressEvent;
     FSharedDirectory: string;
-    FPollinationProb: Double;
+    FPollinationProbability: Double;
     FNumImports, FNumExports, FColision: Integer;
     function GetFileName: string;
   protected
@@ -31,7 +31,7 @@ type
     procedure DoProgress(Position, Max, RefreshInterval: Integer; Solver: TSolver;
       var Stop: Boolean);
     constructor Create(AModel: TModel; const ASharedDirectory: string;
-      APollinationProb: Double);
+      APollinationProbability: Double);
     destructor Destroy; override;
     procedure Update; virtual;
     procedure UpdateValue; virtual;
@@ -44,7 +44,7 @@ type
     property BestIndividual: TIndividual read FBestIndividual;
     property SharedDirectory: string read FSharedDirectory write FSharedDirectory;
     property FileName: string read GetFileName;
-    property PollinationProb: Double read FPollinationProb write FPollinationProb;
+    property PollinationProbability: Double read FPollinationProbability write FPollinationProbability;
     property NumImports: Integer read FNumImports;
     property NumExports: Integer read FNumExports;
     property NumColision: Integer read FColision;
@@ -70,13 +70,13 @@ begin
 end;
 
 constructor TSolver.Create(AModel: TModel; const ASharedDirectory: string;
-  APollinationProb: Double);
+  APollinationProbability: Double);
 begin
   inherited Create;
   FModel := AModel;
   FBestIndividual := FModel.NewIndividual;
   FSharedDirectory := ASharedDirectory;
-  FPollinationProb := APollinationProb;
+  FPollinationProbability := APollinationProbability;
 end;
 
 destructor TSolver.Destroy;
@@ -128,7 +128,7 @@ var
   Value: Integer;
 begin
   Result := False;
-  if (FSharedDirectory <> '') and (Random < FPollinationProb) then
+  if (FSharedDirectory <> '') and (Random < FPollinationProbability) then
   try
     if FileExists(FileName) then
     begin

@@ -128,7 +128,7 @@ msgstr "Nombre"
 
 #: dsourcebaseconsts.sflroomtype_number
 msgctxt "dsourcebaseconsts.sflroomtype_number"
-msgid "Cantidad"
+msgid "Number"
 msgstr "Cantidad"
 
 #: dsourcebaseconsts.sflspecialization_abspecialization
@@ -477,25 +477,9 @@ msgstr "Cruce de aulas:"
 msgid "Clash Subjects:"
 msgstr "Cruce materias:"
 
-#: TCONFIGURACIONFORM.LABEL21.CAPTION
-msgid "Niveles de descenso:"
-msgstr "Niveles de descenso:"
-
 #: TCONFIGURACIONFORM.LABEL29.CAPTION
 msgid "Actualizar cada:"
 msgstr "Actualizar cada:"
-
-#: TCONFIGURACIONFORM.LABEL36.CAPTION
-msgid "Horarios iniciales:"
-msgstr "Horarios iniciales:"
-
-#: TCONFIGURACIONFORM.LABEL42.CAPTION
-msgid "Dir. de intercambio:"
-msgstr "Dir. de intercambio:"
-
-#: TCONFIGURACIONFORM.LABEL8.CAPTION
-msgid "Individuos:"
-msgstr "Individuos:"
 
 #: TCONFIGURACIONFORM.LBLAUTHORITY.CAPTION
 msgid "Authority:"
@@ -506,26 +490,36 @@ msgctxt "TCONFIGURACIONFORM.LBLAUTHORITYPOSITION.CAPTION"
 msgid "Position:"
 msgstr "Cargo:"
 
+#: TCONFIGURACIONFORM.LBLBREAKTIMETABLETEACHER.CAPTION
+msgid "Broken teachers:"
+msgstr "Fracc. profesores:"
+
 #: TCONFIGURACIONFORM.LBLBROKENSUBJECTS.CAPTION
 msgid "Broken Subjects:"
 msgstr "Materias cortadas:"
-
-#: TCONFIGURACIONFORM.LBLBREAKTIMETABLETEACHERS.CAPTION
-msgid "Broken teachers:"
-msgstr "Fracc. profesores:"
 
 #: TCONFIGURACIONFORM.LBLCOMMENTS.CAPTION
 msgid "Comments:"
 msgstr "Comentarios:"
 
-#: TCONFIGURACIONFORM.LBLCROSSPROB.CAPTION
-msgctxt "TCONFIGURACIONFORM.LBLCROSSPROB.CAPTION"
+#: TCONFIGURACIONFORM.LBLCROSSPROBABILITY.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLCROSSPROBABILITY.CAPTION"
 msgid "Prob. Cruce:"
 msgstr "Prob. Cruce:"
+
+#: TCONFIGURACIONFORM.LBLDOWNHILLLEVELS.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLDOWNHILLLEVELS.CAPTION"
+msgid "Niveles de descenso:"
+msgstr "Niveles de descenso:"
 
 #: TCONFIGURACIONFORM.LBLEMPTYHOURS.CAPTION
 msgid "Empty hours:"
 msgstr "Horas huecas:"
+
+#: TCONFIGURACIONFORM.LBLINITIALTIMETABLES.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLINITIALTIMETABLES.CAPTION"
+msgid "Horarios iniciales:"
+msgstr "Horarios iniciales:"
 
 #: TCONFIGURACIONFORM.LBLINSTITUTIONNAME.CAPTION
 msgctxt "TCONFIGURACIONFORM.LBLINSTITUTIONNAME.CAPTION"
@@ -541,18 +535,23 @@ msgstr "Materias juntas:"
 msgid "Max work load per teacher:"
 msgstr "Carga Maxima por Profesor:"
 
-#: TCONFIGURACIONFORM.LBLMUTATIONPROB.CAPTION
-msgctxt "TCONFIGURACIONFORM.LBLMUTATIONPROB.CAPTION"
+#: TCONFIGURACIONFORM.LBLMUTATIONPROBABILITY.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLMUTATIONPROBABILITY.CAPTION"
 msgid "Prob. Mutacion:"
 msgstr "Prob. Mutacion:"
 
-#: TCONFIGURACIONFORM.LBLPOLLINATIONPROB.CAPTION
-msgctxt "TCONFIGURACIONFORM.LBLPOLLINATIONPROB.CAPTION"
+#: TCONFIGURACIONFORM.LBLPOLLINATIONPROBABILITY.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLPOLLINATIONPROBABILITY.CAPTION"
 msgid "Prob. Polinizacion:"
 msgstr "Prob. Polinizacion:"
 
-#: TCONFIGURACIONFORM.LBLREPAIRPROB.CAPTION
-msgctxt "TCONFIGURACIONFORM.LBLREPAIRPROB.CAPTION"
+#: TCONFIGURACIONFORM.LBLPOPULATIONSIZE.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLPOPULATIONSIZE.CAPTION"
+msgid "Individuos:"
+msgstr "Individuos:"
+
+#: TCONFIGURACIONFORM.LBLREPARATIONPROBABILITY.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLREPARATIONPROBABILITY.CAPTION"
 msgid "Prob. Reparacion:"
 msgstr "Prob. Reparacion:"
 
@@ -573,6 +572,11 @@ msgstr "Periodo Lectivo:"
 msgctxt "TCONFIGURACIONFORM.LBLSEED.CAPTION"
 msgid "Semilla:"
 msgstr "Semilla:"
+
+#: TCONFIGURACIONFORM.LBLSHAREDDIRECTORY.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLSHAREDDIRECTORY.CAPTION"
+msgid "Dir. de intercambio:"
+msgstr "Dir. de intercambio:"
 
 #: TCONFIGURACIONFORM.LBLSRCOLOR.CAPTION
 msgctxt "TCONFIGURACIONFORM.LBLSRCOLOR.CAPTION"
@@ -977,16 +981,6 @@ msgctxt "TPROGRESSFORM.BBTCLOSE.CAPTION"
 msgid "Ok"
 msgstr "Aceptar"
 
-#: TPROGRESSFORM.LBLBROKENSESSION.CAPTION
-msgctxt "TPROGRESSFORM.LBLBROKENSESSION.CAPTION"
-msgid "0 "
-msgstr "0 "
-
-#: TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION
-msgctxt "TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION"
-msgid "0 "
-msgstr "0 "
-
 #: TPROGRESSFORM.LBLBREAKTIMETABLETEACHERCOUNT.CAPTION
 msgctxt "TPROGRESSFORM.LBLBREAKTIMETABLETEACHERCOUNT.CAPTION"
 msgid "0 "
@@ -994,6 +988,16 @@ msgstr "0 "
 
 #: TPROGRESSFORM.LBLBREAKTIMETABLETEACHERVALUE.CAPTION
 msgctxt "TPROGRESSFORM.LBLBREAKTIMETABLETEACHERVALUE.CAPTION"
+msgid "0 "
+msgstr "0 "
+
+#: TPROGRESSFORM.LBLBROKENSESSION.CAPTION
+msgctxt "TPROGRESSFORM.LBLBROKENSESSION.CAPTION"
+msgid "0 "
+msgstr "0 "
+
+#: TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION
+msgctxt "TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1102,20 +1106,6 @@ msgctxt "TPROGRESSFORM.LBLTOTALVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.PNLBROKENSESSION.CAPTION
-msgid " Broken Subjects:"
-msgstr " Materias cortadas"
-
-#: TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION
-msgctxt "TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION"
-msgid " Number:"
-msgstr " Number:"
-
-#: TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION
-msgctxt "TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION"
-msgid " Value:"
-msgstr " Valor:"
-
 #: TPROGRESSFORM.PNLBREAKTIMETABLETEACHER.CAPTION
 msgid " Broken Teachers:"
 msgstr "Fracc. profesores:"
@@ -1127,6 +1117,20 @@ msgstr " Number:"
 
 #: TPROGRESSFORM.PNLBREAKTIMETABLETEACHERVALUE.CAPTION
 msgctxt "TPROGRESSFORM.PNLBREAKTIMETABLETEACHERVALUE.CAPTION"
+msgid " Value:"
+msgstr " Valor:"
+
+#: TPROGRESSFORM.PNLBROKENSESSION.CAPTION
+msgid " Broken Subjects:"
+msgstr " Materias cortadas"
+
+#: TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION
+msgctxt "TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION"
+msgid " Number:"
+msgstr " Number:"
+
+#: TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION
+msgctxt "TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
@@ -1512,18 +1516,6 @@ msgstr "Ver|Que ver en el horario del profesor"
 msgid "Automatic Timetable Generator"
 msgstr "Generador Automatico de Horarios"
 
-#: uabout.sappversion
-msgid "1.2.2"
-msgstr "1.2.2"
-
-#: uabout.sbuilddatetime
-msgid "Wed Feb  1 18:39:38 2012"
-msgstr "Wed Feb  1 00:53:59 2012"
-
-#: uabout.srevision
-msgid "551_552"
-msgstr "546M"
-
 #: urelutils.sdetailfieldswithoutmasterfields
 msgid "No master fields in %s for the detail table %s"
 msgstr "No existe registro maestro en %s para la tabla detalle %s"
@@ -1548,13 +1540,14 @@ msgstr "Aplicar Descenso: %23s"
 msgid "Base Timetable: %d"
 msgstr "Horario base: %d"
 
+#: uttgconsts.sbreaktimetableteacher
+msgctxt "uttgconsts.sbreaktimetableteacher"
+msgid "Broken TT. Teachers"
+msgstr "Fracc. h. profesores"
+
 #: uttgconsts.sbrokensession
 msgid "Broken Subjects"
 msgstr "Materias cortadas"
-
-#: uttgconsts.sbrokenteacher
-msgid "Broken TT. Teachers"
-msgstr "Fracc. h. profesores"
 
 #: uttgconsts.schangeswillbelostwarning
 msgid "Changes will be lost, are you sure?"
@@ -1599,7 +1592,8 @@ msgstr "1999-2012 by Edison Mera"
 msgid "Count"
 msgstr "Cantidad"
 
-#: uttgconsts.scrossprob
+#: uttgconsts.scrossprobability
+msgctxt "uttgconsts.scrossprobability"
 msgid "Cross Probability"
 msgstr "Probabilidad de cruce"
 
@@ -1639,15 +1633,14 @@ msgstr "%s esta vacio"
 msgid "Max number of iterations"
 msgstr "Maximo de generaciones"
 
-#: uttgconsts.smutationprob
+#: uttgconsts.smutationprobability
+msgctxt "uttgconsts.smutationprobability"
 msgid "Mutation Probability"
 msgstr "Probabilidad de Mutacion"
 
 #: uttgconsts.snoerrorreadyforchecksummary
 msgid "Ready to generate timetable. Show timetable check Summary?"
-msgstr ""
-"Listo para generar horario.\n"
-"Muestro el resumen del chequeo del horario?\n"
+msgstr "Listo para generar horario. Mostrar resumen del chequeo del horario?"
 
 #: uttgconsts.snonscatteredsubject
 msgid "Non Scattered Subjects"
@@ -1669,7 +1662,8 @@ msgstr "Horas huecas desubicadas"
 msgid "Pending changes will be lost. You really want to quit?"
 msgstr "Los cambios pendientes se perderan. Seguro que desea salir?"
 
-#: uttgconsts.spollinationprob
+#: uttgconsts.spollinationprobability
+msgctxt "uttgconsts.spollinationprobability"
 msgid "Pollination Probability"
 msgstr "Probabilidad de polinizacion"
 
@@ -1694,7 +1688,8 @@ msgctxt "uttgconsts.srelcolsrows"
 msgid "%s|Columns: %s - Rows: %s "
 msgstr "%s|Columnas: %s - Filas: %s "
 
-#: uttgconsts.srepairprob
+#: uttgconsts.sreparationprobability
+msgctxt "uttgconsts.sreparationprobability"
 msgid "Repair Probability"
 msgstr "Probabilidad de Reparacion"
 

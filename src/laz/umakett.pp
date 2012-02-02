@@ -140,8 +140,8 @@ begin
   with MasterDataModule.ConfigStorage do
   begin
     VEvolElitist := TEvolElitist.Create(FTimeTableModel, SharedDirectory,
-      PollinationProb, PopulationSize, MaxIteration, CrossProb, MutationProb,
-      RepairProb, TimeTableIni);
+      PollinationProbability, PopulationSize, MaxIteration, CrossProbability,
+      MutationProbability, ReparationProbability, InitialTimeTables);
     try
       TThread.Synchronize(CurrentThread, VEvolElitist.Initialize);
       ProgressFormDrv := TProgressFormDrv.Create;
@@ -158,7 +158,7 @@ begin
         if ApplyDoubleDownHill then
         begin
           DownHill := TDownHill.Create(FTimeTableModel,
-            SharedDirectory, PollinationProb);
+            SharedDirectory, PollinationProbability);
           try
             DownHill.BestIndividual.Assign(VEvolElitist.BestIndividual);
             ProgressFormDrv.Caption := Format(SImprovingTimeTable, [AIdTimeTable]);
@@ -275,7 +275,7 @@ begin
   begin
     InitRandom;
     DownHill := TDownHill.Create(FTimeTableModel,
-      SharedDirectory, PollinationProb);
+      SharedDirectory, PollinationProbability);
     try
       {if s = '' then
         TimeTable.MakeRandom

@@ -1,7 +1,7 @@
 object ConfiguracionForm: TConfiguracionForm
-  Left = 611
+  Left = 617
   Height = 442
-  Top = 494
+  Top = 490
   Width = 490
   ActiveControl = pgcConfig
   BorderStyle = bsDialog
@@ -66,85 +66,85 @@ object ConfiguracionForm: TConfiguracionForm
     Height = 386
     Top = 8
     Width = 473
-    ActivePage = tbsOptions
+    ActivePage = tbsWeigths
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 1
+    TabIndex = 2
     TabOrder = 1
     object tbsInstitution: TTabSheet
       Hint = 'Institution Data'
       Caption = 'Institution'
-      ClientHeight = 360
-      ClientWidth = 465
+      ClientHeight = 355
+      ClientWidth = 469
       ImageIndex = 2
       object lblMaxTeacherWorkLoad: TLabel
         Left = 8
-        Height = 14
+        Height = 15
         Top = 109
-        Width = 130
+        Width = 157
         Caption = 'Max work load per teacher:'
         ParentColor = False
       end
       object lblComments: TLabel
         Left = 8
-        Height = 14
+        Height = 15
         Top = 136
-        Width = 53
+        Width = 66
         Caption = 'Comments:'
         ParentColor = False
       end
       object lblInstitutionName: TLabel
         Left = 8
-        Height = 14
+        Height = 15
         Top = 13
-        Width = 32
+        Width = 38
         Caption = 'Name:'
         ParentColor = False
       end
       object lblResponsible: TLabel
         Left = 8
-        Height = 14
+        Height = 15
         Top = 85
-        Width = 62
+        Width = 73
         Caption = 'Responsible:'
         ParentColor = False
       end
       object lblResponsiblePosition: TLabel
         Left = 269
-        Height = 14
+        Height = 15
         Top = 85
-        Width = 41
+        Width = 49
         Caption = 'Position:'
         ParentColor = False
       end
       object lblAuthority: TLabel
         Left = 8
-        Height = 14
+        Height = 15
         Top = 61
-        Width = 45
+        Width = 56
         Caption = 'Authority:'
         ParentColor = False
       end
       object lblAuthorityPosition: TLabel
         Left = 269
-        Height = 14
+        Height = 15
         Top = 61
-        Width = 41
+        Width = 49
         Caption = 'Position:'
         ParentColor = False
       end
       object lblSchoolYear: TLabel
         Left = 8
-        Height = 14
+        Height = 15
         Top = 36
-        Width = 62
+        Width = 71
         Caption = 'School Year:'
         ParentColor = False
       end
       object speMaxTeacherWorkLoad: TSpinEdit
         Left = 180
-        Height = 21
+        Height = 24
         Top = 104
         Width = 281
         MaxValue = 2147483647
@@ -161,43 +161,43 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object edtNaInstitution: TEdit
         Left = 108
-        Height = 21
+        Height = 24
         Hint = 'Colegio|Nombre del colegio'
         Top = 8
         Width = 353
         TabOrder = 0
       end
-      object edtNaResponsible: TEdit
+      object edtNameResponsible: TEdit
         Left = 108
-        Height = 21
+        Height = 24
         Top = 80
         Width = 149
         TabOrder = 4
       end
-      object edtPosResponsible: TEdit
+      object edtPositionResponsible: TEdit
         Left = 317
-        Height = 21
+        Height = 24
         Top = 80
         Width = 144
         TabOrder = 5
       end
-      object edtNaAuthority: TEdit
+      object edtNameAuthority: TEdit
         Left = 108
-        Height = 21
+        Height = 24
         Top = 56
         Width = 149
         TabOrder = 2
       end
-      object edtPosAuthority: TEdit
+      object edtPositionAuthority: TEdit
         Left = 317
-        Height = 21
+        Height = 24
         Top = 56
         Width = 144
         TabOrder = 3
       end
-      object edtAnioLectivo: TEdit
+      object edtSchoolYear: TEdit
         Left = 108
-        Height = 21
+        Height = 24
         Top = 32
         Width = 353
         TabOrder = 1
@@ -205,109 +205,109 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsOptions: TTabSheet
       Caption = 'Options'
-      ClientHeight = 360
-      ClientWidth = 465
+      ClientHeight = 355
+      ClientWidth = 469
       ImageIndex = 3
       object lblSeed: TLabel
         Left = 8
-        Height = 14
+        Height = 15
         Top = 36
-        Width = 37
+        Width = 46
         Caption = 'Semilla:'
         ParentColor = False
       end
       object Label29: TLabel
         Left = 235
-        Height = 14
+        Height = 15
         Top = 13
-        Width = 77
+        Width = 92
         Caption = 'Actualizar cada:'
         ParentColor = False
       end
-      object Label36: TLabel
+      object lblInitialTimeTables: TLabel
         Left = 235
-        Height = 14
+        Height = 15
         Top = 132
-        Width = 83
+        Width = 102
         Caption = 'Horarios iniciales:'
         ParentColor = False
       end
-      object Label42: TLabel
+      object lblSharedDirectory: TLabel
         Left = 235
-        Height = 14
+        Height = 15
         Top = 109
-        Width = 92
+        Width = 113
         Caption = 'Dir. de intercambio:'
         ParentColor = False
       end
-      object Label8: TLabel
+      object lblPopulationSize: TLabel
         Left = 235
-        Height = 14
+        Height = 15
         Top = 84
-        Width = 52
+        Width = 62
         Caption = 'Individuos:'
         ParentColor = False
       end
       object Label13: TLabel
         Left = 235
-        Height = 14
+        Height = 15
         Top = 36
-        Width = 56
+        Width = 67
         Caption = 'Iteraciones:'
         ParentColor = False
       end
-      object lblCrossProb: TLabel
+      object lblCrossProbability: TLabel
         Left = 9
-        Height = 14
+        Height = 15
         Top = 84
-        Width = 60
+        Width = 72
         Caption = 'Prob. Cruce:'
         ParentColor = False
       end
-      object lblMutationProb: TLabel
+      object lblMutationProbability: TLabel
         Left = 9
-        Height = 14
+        Height = 15
         Top = 109
-        Width = 76
+        Width = 89
         Caption = 'Prob. Mutacion:'
         ParentColor = False
       end
-      object lblRepairProb: TLabel
+      object lblReparationProbability: TLabel
         Left = 8
-        Height = 14
+        Height = 15
         Top = 132
-        Width = 87
+        Width = 103
         Caption = 'Prob. Reparacion:'
         ParentColor = False
       end
-      object lblPollinationProb: TLabel
+      object lblPollinationProbability: TLabel
         Left = 8
-        Height = 14
+        Height = 15
         Top = 156
-        Width = 88
+        Width = 105
         Caption = 'Prob. Polinizacion:'
         ParentColor = False
       end
-      object Label21: TLabel
+      object lblDownhillLevels: TLabel
         Left = 235
-        Height = 14
+        Height = 15
         Top = 62
-        Width = 103
+        Width = 121
         Caption = 'Niveles de descenso:'
         ParentColor = False
       end
       object cbxRandomize: TCheckBox
         Left = 8
-        Height = 19
+        Height = 24
         Top = 8
-        Width = 174
+        Width = 216
         Caption = 'Inicializar con la hora del sistema'
         OnClick = cbxRandomizeClick
         TabOrder = 0
       end
       object speSeed: TSpinEdit
         Left = 116
-        Height = 21
+        Height = 24
         Top = 32
         Width = 112
         MaxValue = 2147483647
@@ -317,7 +317,7 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object speNumIterations: TSpinEdit
         Left = 345
-        Height = 21
+        Height = 24
         Top = 8
         Width = 112
         MaxValue = 2147483647
@@ -325,16 +325,16 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 2
         Value = 10
       end
-      object edtTimeTableIni: TEdit
+      object edtInitialTimeTables: TEdit
         Left = 344
-        Height = 21
+        Height = 24
         Top = 128
         Width = 113
         TabOrder = 3
       end
       object dedSharedDirectory: TDirectoryEdit
         Left = 343
-        Height = 21
+        Height = 24
         Top = 104
         Width = 89
         Directory = '/tmp/'
@@ -346,7 +346,7 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object spePopulationSize: TSpinEdit
         Left = 344
-        Height = 21
+        Height = 24
         Top = 80
         Width = 112
         MaxValue = 2147483647
@@ -356,7 +356,7 @@ object ConfiguracionForm: TConfiguracionForm
       end
       object speMaxIteration: TSpinEdit
         Left = 345
-        Height = 21
+        Height = 24
         Top = 32
         Width = 112
         MaxValue = 2147483647
@@ -364,45 +364,45 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 6
         Value = 1
       end
-      object creCrossProb: TEdit
+      object creCrossProbability: TEdit
         Left = 116
-        Height = 21
+        Height = 24
         Top = 80
         Width = 112
         TabOrder = 7
       end
-      object creMutationProb: TEdit
+      object creMutationProbability: TEdit
         Left = 116
-        Height = 21
+        Height = 24
         Top = 104
         Width = 112
         TabOrder = 8
       end
-      object creProbRepair: TEdit
+      object creReparationProbability: TEdit
         Left = 116
-        Height = 21
+        Height = 24
         Top = 128
         Width = 112
         TabOrder = 9
       end
-      object crePollinationProb: TEdit
+      object crePollinationProbability: TEdit
         Left = 116
-        Height = 21
+        Height = 24
         Top = 152
         Width = 112
         TabOrder = 10
       end
       object cbxApplyDoubleDownHill: TCheckBox
         Left = 8
-        Height = 19
+        Height = 24
         Top = 57
-        Width = 133
+        Width = 162
         Caption = 'Aplicar descenso (lento)'
         TabOrder = 11
       end
       object edBookmarks: TEdit
         Left = 345
-        Height = 21
+        Height = 24
         Top = 56
         Width = 112
         TabOrder = 12
@@ -411,133 +411,133 @@ object ConfiguracionForm: TConfiguracionForm
     end
     object tbsWeigths: TTabSheet
       Caption = 'Weights'
-      ClientHeight = 360
-      ClientWidth = 465
+      ClientHeight = 355
+      ClientWidth = 469
       object Label1: TLabel
         Left = 8
-        Height = 14
+        Height = 15
         Top = 12
-        Width = 78
+        Width = 90
         Caption = 'Clash Teachers:'
         ParentColor = False
       end
       object Label2: TLabel
         Left = 8
-        Height = 14
+        Height = 15
         Top = 61
-        Width = 66
+        Width = 79
         Caption = 'Clash Rooms:'
         ParentColor = False
       end
       object lblEmptyHours: TLabel
         Left = 237
-        Height = 14
+        Height = 15
         Top = 36
-        Width = 62
+        Width = 77
         Caption = 'Empty hours:'
         ParentColor = False
       end
       object lblBrokenSubjects: TLabel
         Left = 8
-        Height = 14
+        Height = 15
         Top = 86
-        Width = 82
+        Width = 96
         Caption = 'Broken Subjects:'
         ParentColor = False
       end
       object lblJoinSubjects: TLabel
         Left = 237
-        Height = 14
+        Height = 15
         Top = 61
-        Width = 75
+        Width = 91
         Caption = 'Materias juntas:'
         ParentColor = False
       end
       object Label15: TLabel
         Left = 8
-        Height = 14
-        Top = 119
-        Width = 98
+        Height = 15
+        Top = 113
+        Width = 116
         Anchors = [akLeft, akBottom]
         Caption = 'Subject Restrictions:'
         ParentColor = False
       end
       object Label18: TLabel
         Left = 8
-        Height = 14
-        Top = 239
-        Width = 102
+        Height = 15
+        Top = 233
+        Width = 119
         Anchors = [akLeft, akBottom]
         Caption = 'Teacher Restrictions:'
         ParentColor = False
       end
-      object lblBreakTimeTableTeachers: TLabel
+      object lblBreakTimeTableTeacher: TLabel
         Left = 237
-        Height = 14
+        Height = 15
         Top = 15
-        Width = 82
+        Width = 98
         Caption = 'Broken teachers:'
         ParentColor = False
       end
       object lblSRName: TLabel
-        Left = 312
-        Height = 14
-        Top = 152
-        Width = 32
+        Left = 310
+        Height = 15
+        Top = 146
+        Width = 38
         Anchors = [akRight, akBottom]
         Caption = 'Name:'
         ParentColor = False
       end
       object lblSRColor: TLabel
-        Left = 316
-        Height = 14
-        Top = 185
-        Width = 28
+        Left = 313
+        Height = 15
+        Top = 179
+        Width = 35
         Anchors = [akRight, akBottom]
         Caption = 'Color:'
         ParentColor = False
       end
       object lblSRValue: TLabel
-        Left = 313
-        Height = 14
-        Top = 213
-        Width = 31
+        Left = 312
+        Height = 15
+        Top = 207
+        Width = 36
         Anchors = [akRight, akBottom]
         Caption = 'Value:'
         ParentColor = False
       end
       object lblTRName: TLabel
-        Left = 312
-        Height = 14
-        Top = 264
-        Width = 32
+        Left = 310
+        Height = 15
+        Top = 258
+        Width = 38
         Anchors = [akRight, akBottom]
         Caption = 'Name:'
         ParentColor = False
       end
       object lblTRColor: TLabel
-        Left = 316
-        Height = 14
-        Top = 297
-        Width = 28
+        Left = 313
+        Height = 15
+        Top = 291
+        Width = 35
         Anchors = [akRight, akBottom]
         Caption = 'Color:'
         ParentColor = False
       end
       object lblTRValue: TLabel
-        Left = 313
-        Height = 14
-        Top = 324
-        Width = 31
+        Left = 312
+        Height = 15
+        Top = 318
+        Width = 36
         Anchors = [akRight, akBottom]
         Caption = 'Value:'
         ParentColor = False
       end
       object Label20: TLabel
         Left = 8
-        Height = 14
+        Height = 15
         Top = 36
-        Width = 74
+        Width = 87
         Caption = 'Clash Subjects:'
         ParentColor = False
       end
@@ -590,9 +590,9 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 1
       end
       object dbeNaSubjectRestrictionType: TDBEdit
-        Left = 360
-        Height = 21
-        Top = 145
+        Left = 364
+        Height = 24
+        Top = 137
         Width = 93
         DataField = 'NaSubjectRestrictionType'
         DataSource = SourceDataModule.DSSubjectRestrictionType
@@ -602,9 +602,9 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 8
       end
       object dbeValSubjectRestrictionType: TDBEdit
-        Left = 359
-        Height = 21
-        Top = 206
+        Left = 363
+        Height = 24
+        Top = 198
         Width = 93
         DataField = 'ValSubjectRestrictionType'
         DataSource = SourceDataModule.DSSubjectRestrictionType
@@ -614,9 +614,9 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 10
       end
       object dbeNaTeacherRestrictionType: TDBEdit
-        Left = 360
-        Height = 21
-        Top = 257
+        Left = 364
+        Height = 24
+        Top = 249
         Width = 93
         DataField = 'NaTeacherRestrictionType'
         DataSource = SourceDataModule.DSTeacherRestrictionType
@@ -626,9 +626,9 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 11
       end
       object dbeValTeacherRestrictionType: TDBEdit
-        Left = 360
-        Height = 21
-        Top = 317
+        Left = 364
+        Height = 24
+        Top = 309
         Width = 93
         DataField = 'ValTeacherRestrictionType'
         DataSource = SourceDataModule.DSTeacherRestrictionType
@@ -640,8 +640,8 @@ object ConfiguracionForm: TConfiguracionForm
       object DBGrid1: TDBGrid
         Left = 8
         Height = 96
-        Top = 135
-        Width = 288
+        Top = 130
+        Width = 292
         Anchors = [akLeft, akRight, akBottom]
         Color = clWindow
         Columns = <>
@@ -653,8 +653,8 @@ object ConfiguracionForm: TConfiguracionForm
       object DBGrid2: TDBGrid
         Left = 8
         Height = 97
-        Top = 255
-        Width = 288
+        Top = 250
+        Width = 292
         Anchors = [akLeft, akRight, akBottom]
         Color = clWindow
         Columns = <>
@@ -664,9 +664,9 @@ object ConfiguracionForm: TConfiguracionForm
         TitleFont.Name = 'MS Sans Serif'
       end
       object CBColSubjectRestrictionType: TColorBox
-        Left = 360
-        Height = 22
-        Top = 177
+        Left = 364
+        Height = 28
+        Top = 166
         Width = 93
         Anchors = [akRight, akBottom]
         ItemHeight = 16
@@ -675,9 +675,9 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 9
       end
       object CBColTeacherRestrictionType: TColorBox
-        Left = 360
-        Height = 22
-        Top = 289
+        Left = 364
+        Height = 28
+        Top = 278
         Width = 93
         Anchors = [akRight, akBottom]
         ItemHeight = 16

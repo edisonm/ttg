@@ -43,10 +43,10 @@ resourcestring
   SRandSeed = 'Random Generator Seed';
   SPopulationSize = 'Population size';
   SMaxIteration = 'Max number of iterations';
-  SCrossProb = 'Cross Probability';
-  SMutationProb = 'Mutation Probability';
-  SRepairProb = 'Repair Probability';
-  SPollinationProb = 'Pollination Probability';
+  SCrossProbability = 'Cross Probability';
+  SMutationProbability = 'Mutation Probability';
+  SReparationProbability = 'Repair Probability';
+  SPollinationProbability = 'Pollination Probability';
   SWorkInProgress = 'Work in progress [%d]';
   SImprovingTimeTable = 'Improving Timetable [%d]';
   SApplyDownHill = 'Applying Downhill: %23s';

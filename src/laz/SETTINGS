@@ -21,6 +21,7 @@ LAZBASE=/cygdrive/c/lazarus32
 FPC=$(LAZBASE)/fpc/2.4.4/bin/i386-win32/fpc
 LAZRES=$(LAZBASE)/tools/lazres
 LAZBUILD=$(LAZBASE)/lazbuild
+LAZIDE=$(LAZBASE)/lazarus-ide
 FILES=$(TTGMYSQL)
 LRSDEP=$(LAZRES)
 DBCONVERTSRC=../../../DBConvert
@@ -35,6 +36,7 @@ EXEEXT=
 FPC=fpc
 LAZRES=lazres
 LAZBUILD=lazbuild
+LAZIDE=lazarus-ide
 
 endif
 
