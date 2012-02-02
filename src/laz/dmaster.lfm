@@ -203,12 +203,12 @@ object MasterDataModule: TMasterDataModule
       Size = 31
     end
   end
-  object QuTeacherRestrictionCant: TZTable
+  object QuTeacherRestrictionCount: TZTable
     Connection = SourceDataModule.DbZConnection
     AutoCalcFields = False
     left = 88
     top = 168
-    object QuTeacherRestrictionCantIdTeacher: TLongintField
+    object QuTeacherRestrictionCountIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTeacher'
@@ -218,7 +218,7 @@ object MasterDataModule: TMasterDataModule
       ReadOnly = False
       Required = False
     end
-    object QuTeacherRestrictionCantNumber: TLongintField
+    object QuTeacherRestrictionCountNumber: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'Number'

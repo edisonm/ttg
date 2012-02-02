@@ -42,8 +42,8 @@ type
     procedure SetClashTeacher(Value: Integer);
     function GetClashSubject: Integer;
     procedure SetClashSubject(Value: Integer);
-    function GetBrokenTTTeacher: Integer;
-    procedure SetBrokenTTTeacher(Value: Integer);
+    function GetBreakTimeTableTeacher: Integer;
+    procedure SetBreakTimeTableTeacher(Value: Integer);
     function GetClashRoomType: Integer;
     procedure SetClashRoomType(Value: Integer);
     function GetOutOfPositionEmptyHour: Integer;
@@ -86,7 +86,7 @@ type
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
     property ClashTeacher: Integer read GetClashTeacher write SetClashTeacher;
     property ClashSubject: Integer read GetClashSubject write SetClashSubject;
-    property BrokenTTTeacher: Integer read GetBrokenTTTeacher write SetBrokenTTTeacher;
+    property BreakTimeTableTeacher: Integer read GetBreakTimeTableTeacher write SetBreakTimeTableTeacher;
     property ClashRoomType: Integer read GetClashRoomType write SetClashRoomType;
     property OutOfPositionEmptyHour: Integer read GetOutOfPositionEmptyHour write SetOutOfPositionEmptyHour;
     property BrokenSession: Integer read GetBrokenSession write SetBrokenSession;
@@ -245,14 +245,14 @@ begin
   Integers['ClashSubject'] := Value;
 end;
 
-function TTTGConfig.GetBrokenTTTeacher: Integer;
+function TTTGConfig.GetBreakTimeTableTeacher: Integer;
 begin
-  Result := Integers['BrokenTTTeacher'];
+  Result := Integers['BreakTimeTableTeacher'];
 end;
 
-procedure TTTGConfig.SetBrokenTTTeacher(Value: Integer);
+procedure TTTGConfig.SetBreakTimeTableTeacher(Value: Integer);
 begin
-  Integers['BrokenTTTeacher'] := Value;
+  Integers['BreakTimeTableTeacher'] := Value;
 end;
 
 function TTTGConfig.GetClashRoomType: Integer;
@@ -267,12 +267,12 @@ end;
 
 function TTTGConfig.GetOutOfPositionEmptyHour: Integer;
 begin
-  Result := Integers['HourHueca'];
+  Result := Integers['EmptyHour'];
 end;
 
 procedure TTTGConfig.SetOutOfPositionEmptyHour(Value: Integer);
 begin
-  Integers['HourHueca'] := Value;
+  Integers['EmptyHour'] := Value;
 end;
 
 function TTTGConfig.GetBrokenSession: Integer;
@@ -297,22 +297,22 @@ end;
 
 function TTTGConfig.GetPopulationSize: Integer;
 begin
-  Result := Integers['TamPoblacion'];
+  Result := Integers['PopulationSize'];
 end;
 
 procedure TTTGConfig.SetPopulationSize(Value: Integer);
 begin
-  Integers['TamPoblacion'] := Value;
+  Integers['PopulationSize'] := Value;
 end;
 
 function TTTGConfig.GetMaxIteration: Integer;
 begin
-  Result := Integers['NumMaxGeneracion'];
+  Result := Integers['MaxIteration'];
 end;
 
 procedure TTTGConfig.SetMaxIteration(Value: Integer);
 begin
-  Integers['NumMaxGeneracion'] := Value;
+  Integers['MaxIteration'] := Value;
 end;
 
 function TTTGConfig.GetCrossProb: Double;
@@ -337,42 +337,42 @@ end;
 
 function TTTGConfig.GetRepairProb: Double;
 begin
-  Result := Floats['ProbReparacion'];
+  Result := Floats['RepairProb'];
 end;
 
 procedure TTTGConfig.SetRepairProb(Value: Double);
 begin
-  Floats['ProbReparacion'] := Value;
+  Floats['RepairProb'] := Value;
 end;
 
 function TTTGConfig.GetTimeTableIni: string;
 begin
-  Result := Values['edtTimeTableIni_Text'];
+  Result := Values['TimeTableIni'];
 end;
 
 procedure TTTGConfig.SetTimeTableIni(const Value: string);
 begin
-  Values['edtTimeTableIni_Text'] := Value;
+  Values['TimeTableIni'] := Value;
 end;
 
 function TTTGConfig.GetSharedDirectory: string;
 begin
-  Result := Values['dedCompartir_Text'];
+  Result := Values['SharedDirectory'];
 end;
 
 procedure TTTGConfig.SetSharedDirectory(const Value: string);
 begin
-  Values['dedCompartir_Text'] := Value;
+  Values['SharedDirectory'] := Value;
 end;
 
 function TTTGConfig.GetPollinationProb: Double;
 begin
-  Result := Floats['RangoPolinizacion'];
+  Result := Floats['PollinationProb'];
 end;
 
 procedure TTTGConfig.SetPollinationProb(Value: Double);
 begin
-  Floats['RangoPolinizacion'] := Value;
+  Floats['PollinationProb'] := Value;
 end;
 
 function TTTGConfig.GetApplyDoubleDownHill: Boolean;
@@ -401,7 +401,7 @@ begin
   RefreshInterval := 1;
   ClashTeacher := 200;
   ClashSubject := 200;
-  BrokenTTTeacher := 50;
+  BreakTimeTableTeacher := 50;
   ClashRoomType := 200;
   OutOfPositionEmptyHour := 100;
   BrokenSession := 150;

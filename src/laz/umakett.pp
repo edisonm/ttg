@@ -82,7 +82,7 @@ const
   FBoolToStr: array [Boolean] of string = ('No', 'Si');
 
 procedure LoadBookmarks(s: string; Individual: TIndividual;
-    ClassCant: Integer; out Bookmarks: TBookmarkArray);
+    ClassCount: Integer; out Bookmarks: TBookmarkArray);
 var
   Pos, d, i: Integer;
 begin
@@ -93,8 +93,8 @@ begin
   begin
     d := StrToInt(ExtractString(s, Pos, ','));
     case d of
-    1: Bookmarks[i] := TTTBookmark.Create(Individual, RandomIndexes(ClassCant));
-    2: Bookmarks[i] := TTTBookmark2.Create(Individual, RandomIndexes(ClassCant));
+    1: Bookmarks[i] := TTTBookmark.Create(Individual, RandomIndexes(ClassCount));
+    2: Bookmarks[i] := TTTBookmark2.Create(Individual, RandomIndexes(ClassCount));
     end;
     Inc(i);
   end;
@@ -113,7 +113,7 @@ begin
     Individual := DownHill.Model.NewIndividual;
     try
       Individual.Assign(DownHill.BestIndividual);
-      LoadBookmarks(Bookmarks, Individual, ClassCant, BookmarkArray);
+      LoadBookmarks(Bookmarks, Individual, ClassCount, BookmarkArray);
       try
         TDownHill.MultiDownHill(DownHill, Individual, BookmarkArray,
                                 False, RefreshInterval);
@@ -219,7 +219,7 @@ begin
   FreeOnTerminate := True;
   with MasterDataModule.ConfigStorage do
     FTimeTableModel := TTimeTableModel.Create(ClashTeacher,
-      ClashSubject, ClashRoomType, BrokenTTTeacher, OutOfPositionEmptyHour,
+      ClashSubject, ClashRoomType, BreakTimeTableTeacher, OutOfPositionEmptyHour,
       BrokenSession, NonScatteredSubject);
   SetLength(FValidIdes, Length(AValidIdes));
   // ProcThreadPool.MaxThreadCount := Length(AValidIdes);
@@ -325,7 +325,7 @@ begin
   FIdTimeTable := AIdTimeTable;
   with MasterDataModule.ConfigStorage do
     FTimeTableModel := TTimeTableModel.Create(ClashTeacher,
-      ClashSubject, ClashRoomType, BrokenTTTeacher, OutOfPositionEmptyHour,
+      ClashSubject, ClashRoomType, BreakTimeTableTeacher, OutOfPositionEmptyHour,
       BrokenSession, NonScatteredSubject);
   inherited Create(CreateSuspended);
 end;

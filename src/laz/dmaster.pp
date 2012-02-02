@@ -30,9 +30,9 @@ type
     QuDistributionTeacherApeNaTeacher: TStringField;
     QuDistributionTeacherIdSpecialization: TLongintField;
     QuDistributionTeacherAbSpecialization: TStringField;
-    QuTeacherRestrictionCant: TZTable;
-    QuTeacherRestrictionCantIdTeacher: TLongintField;
-    QuTeacherRestrictionCantNumber: TLongintField;
+    QuTeacherRestrictionCount: TZTable;
+    QuTeacherRestrictionCountIdTeacher: TLongintField;
+    QuTeacherRestrictionCountNumber: TLongintField;
     TbTmpRoomTypeLoad: TZTable;
     TbTmpRoomTypeLoadIdRoomType: TLongintField;
     TbTmpRoomTypeLoadAbRoomType: TStringField;
@@ -46,7 +46,7 @@ type
     FStringsShowTeacher: TStrings;
     FStringsShowClass: TStrings;
     FConfigStorage: TTTGConfig;
-    procedure FillTeacherRestrictionCant;
+    procedure FillTeacherRestrictionCount;
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
   public
     { Public declarations }
@@ -83,12 +83,12 @@ uses
 const
   pfhVersionNumber = 292;
 
-procedure TMasterDataModule.FillTeacherRestrictionCant;
+procedure TMasterDataModule.FillTeacherRestrictionCount;
 var
   IdTeacher, IdTeacher1: Integer;
   s: string;
 begin
-  with SourceDataModule, QuTeacherRestrictionCant do
+  with SourceDataModule, QuTeacherRestrictionCount do
   begin
     Close;
     Open;
@@ -102,14 +102,14 @@ begin
       if IdTeacher <> IdTeacher1 then
       begin
         Append;
-        with QuTeacherRestrictionCantNumber do
+        with QuTeacherRestrictionCountNumber do
           Value := 1;
         IdTeacher := IdTeacher1;
       end
       else
       begin
         Edit;
-        with QuTeacherRestrictionCantNumber do
+        with QuTeacherRestrictionCountNumber do
           Value := Value + 1;
       end;
       Post;
@@ -123,10 +123,10 @@ function TMasterDataModule.PerformAllChecks(AMainStrings, ASubStrings:
   TStrings; AMaxTeacherWorkLoad: Integer): Boolean;
 var
   HuboProblemas: Boolean;
-  iTimeSlotCant: Integer;
-  procedure ObtenerTimeSlotCant;
+  iTimeSlotCount: Integer;
+  procedure ObtenerTimeSlotCount;
   begin
-    iTimeSlotCant := SourceDataModule.TbTimeSlot.RecordCount;
+    iTimeSlotCount := SourceDataModule.TbTimeSlot.RecordCount;
   end;
   procedure ObtenerTeacherWorkLoad;
   var
@@ -200,7 +200,7 @@ var
   end;
   // Comprueba que no hayan asignadas mas horas de materias a profesores de las
   // permitidas
-  procedure CheckTeacherRestrictionCant;
+  procedure CheckTeacherRestrictionCount;
   var
     s: string;
     HuboProblemasInterno: Boolean;
@@ -208,9 +208,9 @@ var
   begin
     HuboProblemasInterno := False;
     s := '%s %s; %d';
-    with QuTeacherRestrictionCant do
+    with QuTeacherRestrictionCount do
     begin
-      FillTeacherRestrictionCant;
+      FillTeacherRestrictionCount;
       if not IsEmpty then
       begin
         try
@@ -220,10 +220,10 @@ var
           while not Eof do
           begin
             if TbTmpTeacherWorkLoad.Locate('IdTeacher',
-              QuTeacherRestrictionCantIdTeacher.AsInteger, []) then
+              QuTeacherRestrictionCountIdTeacher.AsInteger, []) then
             begin
-              if QuTeacherRestrictionCantNumber.AsInteger +
-                TbTmpTeacherWorkLoadWorkLoad.AsInteger > iTimeSlotCant then
+              if QuTeacherRestrictionCountNumber.AsInteger +
+                TbTmpTeacherWorkLoadWorkLoad.AsInteger > iTimeSlotCount then
               begin
                 if not HuboProblemasInterno then
                 begin
@@ -233,14 +233,14 @@ var
                 end;
                 AMainStrings.Add(Format(s, [TbTmpTeacherWorkLoadLnTeacher.Value,
                   TbTmpTeacherWorkLoadNaTeacher.Value,
-                    QuTeacherRestrictionCantNumber.AsInteger]));
+                    QuTeacherRestrictionCountNumber.AsInteger]));
                 HuboProblemasInterno := True;
                 HuboProblemas := True;
               end
               else
                 ASubStrings.Add(Format(s, [TbTmpTeacherWorkLoadLnTeacher.Value,
                   TbTmpTeacherWorkLoadNaTeacher.Value,
-                    QuTeacherRestrictionCantNumber.AsInteger]));
+                    QuTeacherRestrictionCountNumber.AsInteger]));
             end;
             Next;
           end;
@@ -334,7 +334,7 @@ var
           begin
             if TbRoomType.Locate('IdRoomType', TbTmpRoomTypeLoadIdRoomType.AsInteger, []) then
             begin
-              c := iTimeSlotCant * TbRoomType.FindField('Number').AsInteger;
+              c := iTimeSlotCount * TbRoomType.FindField('Number').AsInteger;
               if TbTmpRoomTypeLoadLoad.Value > c then
               begin
                 if not HuboProblemasInterno then
@@ -458,11 +458,11 @@ begin
   ASubStrings.BeginUpdate;
   HuboProblemas := False;
   try
-    ObtenerTimeSlotCant;
+    ObtenerTimeSlotCount;
     ObtenerTeacherWorkLoad;
     ObtenerRoomTypeLoad;
     CheckTeacherWorkLoad;
-    CheckTeacherRestrictionCant;
+    CheckTeacherRestrictionCount;
     CheckRoomTypeLoad;
     CheckCourseCarga;
   finally

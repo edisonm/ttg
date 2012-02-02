@@ -2,7 +2,7 @@
 unit dsourcebaseconsts;
 
 (*
-  01/02/2012 18:34
+  02/02/2012 13:36
 
   Warning:
 
@@ -60,7 +60,7 @@ resourcestring
   SFlRoomType_IdRoomType = 'Id';
   SFlRoomType_NaRoomType = 'Name';
   SFlRoomType_AbRoomType = 'Abbreviation';
-  SFlRoomType_Number = 'Cantidad';
+  SFlRoomType_Number = 'Number';
   SFlClass_IdLevel = 'Level';
   SFlClass_IdSpecialization = 'Specialization';
   SFlClass_IdGroupId = 'Group Id';

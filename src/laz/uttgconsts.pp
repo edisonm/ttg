@@ -59,7 +59,7 @@ resourcestring
   SClashTeacher = 'Clash of Teachers';
   SClashSubject = 'Clash of Subjects';
   SClashRoomType = 'Clash of Classrooms';
-  SBrokenTTTeacher = 'Broken TT. Teachers';
+  SBreakTimeTableTeacher = 'Broken TT. Teachers';
   SOutOfPositionEmptyHour = 'Out of position empty hours';
   SBrokenSession = 'Broken Subjects';
   SNonScatteredSubject = 'Non Scattered Subjects';

@@ -344,7 +344,7 @@ object ConfiguracionForm: TConfiguracionForm
         MaxLength = 0
         TabOrder = 4
       end
-      object speTamPoblacion: TSpinEdit
+      object spePopulationSize: TSpinEdit
         Left = 344
         Height = 21
         Top = 80
@@ -354,7 +354,7 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 5
         Value = 1
       end
-      object speNumMaxGeneracion: TSpinEdit
+      object speMaxIteration: TSpinEdit
         Left = 345
         Height = 21
         Top = 32
@@ -471,7 +471,7 @@ object ConfiguracionForm: TConfiguracionForm
         Caption = 'Teacher Restrictions:'
         ParentColor = False
       end
-      object lblBrokenTTTeachers: TLabel
+      object lblBreakTimeTableTeachers: TLabel
         Left = 237
         Height = 14
         Top = 15
@@ -557,7 +557,7 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 2
       end
-      object creHourHueca: TEdit
+      object creEmptyHour: TEdit
         Left = 345
         Height = 21
         Top = 32
@@ -581,7 +581,7 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 5
       end
-      object creBrokenTTTeacher: TEdit
+      object creBreakTimeTableTeacher: TEdit
         Left = 345
         Height = 21
         Top = 8

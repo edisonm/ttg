@@ -74,11 +74,11 @@ type
     lblNonScatteredSubjectValue: TLabel;
     bbtCancel: TBitBtn;
     prbProgress: TProgressBar;
-    pnlBrokenTTTeacher: TPanel;
-    pnlBrokenTTTeacherCount: TPanel;
-    lblBrokenTTTeacherCount: TLabel;
-    pnlBrokenTTTeacherValue: TPanel;
-    lblBrokenTTTeacherValue: TLabel;
+    pnlBreakTimeTableTeacher: TPanel;
+    pnlBreakTimeTableTeacherCount: TPanel;
+    lblBreakTimeTableTeacherCount: TLabel;
+    pnlBreakTimeTableTeacherValue: TPanel;
+    lblBreakTimeTableTeacherValue: TLabel;
     pnlPosition: TPanel;
     lblPosition: TLabel;
     procedure bbtCancelClick(Sender: TObject);
@@ -147,7 +147,7 @@ begin
   begin
     with MasterDataModule.ConfigStorage do
       TTimeTableModel(ASolver.Model).Configure(ClashTeacher, ClashSubject,
-        ClashRoomType, BrokenTTTeacher, OutOfPositionEmptyHour,
+        ClashRoomType, BreakTimeTableTeacher, OutOfPositionEmptyHour,
         BrokenSession, NonScatteredSubject);
     //ASolver.Update;
     ASolver.UpdateValue;
@@ -168,19 +168,19 @@ begin
     lblClashTeacher.Caption := Format('%d ', [ClashTeacher]);
     lblClashSubject.Caption := Format('%d ', [ClashSubject]);
     lblClashRoomType.Caption := Format('%d ', [ClashRoomType]);
-    lblBrokenTTTeacherCount.Caption :=
-      Format('%d ', [BrokenTTTeacher]);
+    lblBreakTimeTableTeacherCount.Caption :=
+      Format('%d ', [BreakTimeTableTeacher]);
     lblOutOfPositionEmptyHour.Caption := Format('%d ', [OutOfPositionEmptyHour]);
     lblBrokenSession.Caption := Format('%d ', [BrokenSession]);
     lblSubjectRestriction.Caption :=
-      Format('%s ', [VarArrToStr(SubjectRestrictionTypeASubjectCant)]);
+      Format('%s ', [VarArrToStr(SubjectRestrictionTypeASubjectCount)]);
     lblTeacherRestriction.Caption :=
-      Format('%s ', [VarArrToStr(TeacherRestrictionTypeATeacherCant)]);
+      Format('%s ', [VarArrToStr(TeacherRestrictionTypeATeacherCount)]);
     lblNonScatteredSubjectCount.Caption := Format('%d ', [NonScatteredSubject]);
     lblClashTeacherValue.Caption := Format('%d ', [ClashTeacherValue]);
     lblClashSubjectValue.Caption := Format('%d ', [ClashSubjectValue]);
-    lblBrokenTTTeacherValue.Caption :=
-      Format('%d ', [BrokenTTTeacherValue]);
+    lblBreakTimeTableTeacherValue.Caption :=
+      Format('%d ', [BreakTimeTableTeacherValue]);
     lblClashRoomTypeValue.Caption := Format('%d ', [ClashRoomTypeValue]);
     lblOutOfPositionEmptyHourValue.Caption := Format('%d ',
       [OutOfPositionEmptyHourValue]);
