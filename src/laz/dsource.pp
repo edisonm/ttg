@@ -61,7 +61,7 @@ begin
   with DataSet do
   begin
     s := FindField('Composition').AsString;
-    if CompositionADuracion(s) <= 0 then
+    if CompositionToDuration(s) <= 0 then
       raise Exception.CreateFmt('Composition no valida: "%s"', [s]);
     with FindField('IdSubject') do DefaultExpression := AsString;
     with FindField('IdLevel') do DefaultExpression := AsString;
@@ -80,7 +80,7 @@ begin
     if VarIsNull(v) then
       DataSet['Duracion'] := 0
     else
-      DataSet['Duracion'] := CompositionADuracion(v);
+      DataSet['Duracion'] := CompositionToDuration(v);
   except
     DataSet['Duracion'] := 0;
   end

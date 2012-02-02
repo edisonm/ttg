@@ -20,15 +20,15 @@ type
     lblClashSubjectValue: TLabel;
     lblExports: TLabel;
     lblImports: TLabel;
-    Panel4: TPanel;
-    Panel5: TPanel;
-    Panel6: TPanel;
-    Panel7: TPanel;
+    pnlCrashes: TPanel;
+    pnlImports: TPanel;
+    pnlExports: TPanel;
+    pnlPollination: TPanel;
     pnlClashSubject: TPanel;
     pnlClashSubjectNumber: TPanel;
     pnlClashSubjectValue: TPanel;
     pnlProgress: TPanel;
-    bbtnClose: TBitBtn;
+    bbtClose: TBitBtn;
     pnlTotalValue: TPanel;
     pnlClashTeacher: TPanel;
     lblTotalValue: TLabel;
@@ -65,24 +65,24 @@ type
     pnlTeacherRestriction: TPanel;
     pnlTeacherRestrictionNumber: TPanel;
     lblTeacherRestriction: TLabel;
-    Panel26: TPanel;
+    pnlTeacherRestrictionValue: TPanel;
     lblTeacherRestrictionValue: TLabel;
     pnlNonScatteredSubject: TPanel;
-    Panel28: TPanel;
-    lblNonScatteredSubject: TLabel;
-    Panel29: TPanel;
+    pnlNonScatteredSubjectCount: TPanel;
+    lblNonScatteredSubjectCount: TLabel;
+    pnlNonScatteredSubjectValue: TPanel;
     lblNonScatteredSubjectValue: TLabel;
-    bbtnCancel: TBitBtn;
-    PBProgress: TProgressBar;
-    Panel1: TPanel;
-    Panel2: TPanel;
-    lblTeacherFraccionamiento: TLabel;
-    Panel3: TPanel;
+    bbtCancel: TBitBtn;
+    prbProgress: TProgressBar;
+    pnlBrokenTeacher: TPanel;
+    pnlBrokenTeacherCount: TPanel;
+    lblBrokenTeacherCount: TLabel;
+    pnlBrokenTeacherValue: TPanel;
     lblBrokenTeacherValue: TLabel;
     pnlPosition: TPanel;
     lblPosition: TLabel;
-    procedure bbtnCancelClick(Sender: TObject);
-    procedure bbtnCloseClick(Sender: TObject);
+    procedure bbtCancelClick(Sender: TObject);
+    procedure bbtCloseClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     FUpdateIndex: Integer;
@@ -136,7 +136,7 @@ uses
 
 function TProgressForm.GetProgressMax: Integer;
 begin
-  Result := PBProgress.Max;
+  Result := prbProgress.Max;
 end;
 
 procedure TProgressForm.DoProgress(APosition, AMax: Integer; ASolver: TSolver);
@@ -157,18 +157,18 @@ begin
   begin
     t := Now;
     lblElapsedTime.Caption := FormatDateTime('hh:nn:ss ', t - FInit);
-    PBProgress.Max := AMax;
+    prbProgress.Max := AMax;
     if APosition <> 0 then
       lblRemainingTime.Caption := FormatDateTime('hh:nn:ss ',
         (t - FTimePosition0) * (AMax - APosition) / APosition)
     else
       FTimePosition0 := t;
     lblPosition.Caption := Format('%d/%d', [APosition, AMax]);
-    PBProgress.Position := APosition;
+    prbProgress.Position := APosition;
     lblClashTeacher.Caption := Format('%d ', [ClashTeacher]);
     lblClashSubject.Caption := Format('%d ', [ClashSubject]);
     lblClashRoomType.Caption := Format('%d ', [ClashRoomType]);
-    lblTeacherFraccionamiento.Caption :=
+    lblBrokenTeacherCount.Caption :=
       Format('%d ', [TeacherFraccionamiento]);
     lblOutOfPositionEmptyHour.Caption := Format('%d ', [OutOfPositionEmptyHour]);
     lblBrokenSession.Caption := Format('%d ', [BrokenSession]);
@@ -176,7 +176,7 @@ begin
       Format('%s ', [VarArrToStr(SubjectRestrictionTypeASubjectCant)]);
     lblTeacherRestriction.Caption :=
       Format('%s ', [VarArrToStr(TeacherRestrictionTypeATeacherCant)]);
-    lblNonScatteredSubject.Caption := Format('%d ', [NonScatteredSubject]);
+    lblNonScatteredSubjectCount.Caption := Format('%d ', [NonScatteredSubject]);
     lblClashTeacherValue.Caption := Format('%d ', [ClashTeacherValue]);
     lblClashSubjectValue.Caption := Format('%d ', [ClashSubjectValue]);
     lblBrokenTeacherValue.Caption :=
@@ -200,16 +200,16 @@ end;
 
 procedure TProgressForm.SetProgressMax(const Value: Integer);
 begin
-  PBProgress.Max := Value;
+  prbProgress.Max := Value;
 end;
 
-procedure TProgressForm.bbtnCancelClick(Sender: TObject);
+procedure TProgressForm.bbtCancelClick(Sender: TObject);
 begin
   FCancelClick := True;
   Close;
 end;
 
-procedure TProgressForm.bbtnCloseClick(Sender: TObject);
+procedure TProgressForm.bbtCloseClick(Sender: TObject);
 begin
   FCloseClick := True;
   Close;

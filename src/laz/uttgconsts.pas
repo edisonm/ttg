@@ -66,6 +66,12 @@ resourcestring
   SBrokenSession = 'Materias cortadas';
   SNonScatteredSubject = 'Materias juntas';
   STotalValue = 'Total Value';
+  SWrongComposition = 'Composicion Erroea';
+  SDetail = 'Detail';
+  SCount = 'Count';
+  SWeight = 'Peso';
+  SValue = 'Value';
+
 implementation
 
 end.

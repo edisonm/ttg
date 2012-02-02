@@ -129,7 +129,7 @@ begin
       FieldComposition := FindField('Composition');
       while not Eof do
       begin
-        Inc(Result, CompositionADuracion(FieldComposition.AsString));
+        Inc(Result, CompositionToDuration(FieldComposition.AsString));
         Next;
       end;
     finally

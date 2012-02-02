@@ -28,7 +28,7 @@ object ProgressForm: TProgressForm
       Width = 433
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Valor Total:'
+      Caption = 'Total Value:'
       ClientHeight = 21
       ClientWidth = 433
       TabOrder = 0
@@ -57,7 +57,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Cruce profesores:'
+      Caption = ' Clash Teachers:'
       TabOrder = 1
     end
     object pnlClashTeacherValue: TPanel
@@ -67,15 +67,15 @@ object ProgressForm: TProgressForm
       Width = 129
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Valor:'
+      Caption = ' Value:'
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 2
       object lblClashTeacherValue: TLabel
-        Left = 116
+        Left = 118
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -95,7 +95,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Cruce de aulas:'
+      Caption = ' Clash Classrooms:'
       TabOrder = 3
     end
     object pnlClashRoomTypeValue: TPanel
@@ -105,15 +105,15 @@ object ProgressForm: TProgressForm
       Width = 129
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Valor:'
+      Caption = ' Value:'
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 4
       object lblClashRoomTypeValue: TLabel
-        Left = 116
+        Left = 118
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -138,10 +138,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 5
       object lblClashTeacher: TLabel
-        Left = 104
+        Left = 106
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -166,10 +166,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 6
       object lblClashRoomType: TLabel
-        Left = 104
+        Left = 106
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -189,7 +189,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Hours huecas'
+      Caption = ' Empty hours:'
       TabOrder = 7
     end
     object pnlOutOfPositionEmptyHourNumber: TPanel
@@ -204,10 +204,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 8
       object lblOutOfPositionEmptyHour: TLabel
-        Left = 104
+        Left = 106
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -227,15 +227,15 @@ object ProgressForm: TProgressForm
       Width = 129
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Valor:'
+      Caption = ' Value:'
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 9
       object lblOutOfPositionEmptyHourValue: TLabel
-        Left = 116
+        Left = 118
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -255,7 +255,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Materias cortadas'
+      Caption = ' Broken Subjects:'
       TabOrder = 10
     end
     object pnlBrokenSessionNumber: TPanel
@@ -270,10 +270,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 11
       object lblBrokenSession: TLabel
-        Left = 104
+        Left = 106
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -293,15 +293,15 @@ object ProgressForm: TProgressForm
       Width = 129
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Valor:'
+      Caption = ' Value:'
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 12
       object lblBrokenSessionValue: TLabel
-        Left = 116
+        Left = 118
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -321,7 +321,7 @@ object ProgressForm: TProgressForm
       Width = 215
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = 'Iniciado el:'
+      Caption = 'Started at:'
       ClientHeight = 21
       ClientWidth = 215
       TabOrder = 13
@@ -348,15 +348,15 @@ object ProgressForm: TProgressForm
       Width = 215
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Tiempo transcurrido:'
+      Caption = ' Elapsed time:'
       ClientHeight = 21
       ClientWidth = 215
       TabOrder = 14
       object lblElapsedTime: TLabel
-        Left = 202
+        Left = 204
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -376,15 +376,15 @@ object ProgressForm: TProgressForm
       Width = 215
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = 'Tiempo restante:'
+      Caption = 'Remaining time:'
       ClientHeight = 21
       ClientWidth = 215
       TabOrder = 15
       object lblRemainingTime: TLabel
-        Left = 202
+        Left = 204
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -404,7 +404,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Prohibiciones de materia:'
+      Caption = ' Subject Restrictions:'
       TabOrder = 16
     end
     object pnlSubjectRestrictionNumber: TPanel
@@ -419,10 +419,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 17
       object lblSubjectRestriction: TLabel
-        Left = 104
+        Left = 106
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -442,15 +442,15 @@ object ProgressForm: TProgressForm
       Width = 129
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Valor:'
+      Caption = ' Value:'
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 18
       object lblSubjectRestrictionValue: TLabel
-        Left = 116
+        Left = 118
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -470,7 +470,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Prohibiciones de profesor:'
+      Caption = ' Teacher Restrictions:'
       TabOrder = 19
     end
     object pnlTeacherRestrictionNumber: TPanel
@@ -485,10 +485,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 20
       object lblTeacherRestriction: TLabel
-        Left = 104
+        Left = 106
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -501,22 +501,22 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object Panel26: TPanel
+    object pnlTeacherRestrictionValue: TPanel
       Left = 312
       Height = 21
       Top = 246
       Width = 129
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Valor:'
+      Caption = ' Value:'
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 21
       object lblTeacherRestrictionValue: TLabel
-        Left = 116
+        Left = 118
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -536,10 +536,10 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Materias juntas:'
+      Caption = ' Join Subjects:'
       TabOrder = 22
     end
-    object Panel28: TPanel
+    object pnlNonScatteredSubjectCount: TPanel
       Left = 192
       Height = 21
       Top = 198
@@ -550,11 +550,11 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 23
-      object lblNonScatteredSubject: TLabel
-        Left = 104
+      object lblNonScatteredSubjectCount: TLabel
+        Left = 106
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -567,22 +567,22 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object Panel29: TPanel
+    object pnlNonScatteredSubjectValue: TPanel
       Left = 312
       Height = 21
       Top = 198
       Width = 129
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Valor:'
+      Caption = ' Value:'
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 24
       object lblNonScatteredSubjectValue: TLabel
-        Left = 116
+        Left = 118
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -595,17 +595,17 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object Panel1: TPanel
+    object pnlBrokenTeacher: TPanel
       Left = 8
       Height = 21
       Top = 126
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Fracc. profesores:'
+      Caption = ' Broken Teachers:'
       TabOrder = 25
     end
-    object Panel2: TPanel
+    object pnlBrokenTeacherCount: TPanel
       Left = 192
       Height = 21
       Top = 126
@@ -616,11 +616,11 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 26
-      object lblTeacherFraccionamiento: TLabel
-        Left = 104
+      object lblBrokenTeacherCount: TLabel
+        Left = 106
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -633,22 +633,22 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object Panel3: TPanel
+    object pnlBrokenTeacherValue: TPanel
       Left = 312
       Height = 21
       Top = 126
       Width = 129
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Valor:'
+      Caption = ' Value:'
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 27
       object lblBrokenTeacherValue: TLabel
-        Left = 116
+        Left = 118
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -668,7 +668,7 @@ object ProgressForm: TProgressForm
       Width = 215
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Iteracion:'
+      Caption = ' Iteration:'
       ClientHeight = 21
       ClientWidth = 215
       TabOrder = 28
@@ -690,32 +690,32 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object Panel7: TPanel
+    object pnlPollination: TPanel
       Left = 8
       Height = 21
       Top = 294
       Width = 85
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = 'Polinización:'
+      Caption = 'Pollination:'
       TabOrder = 29
     end
-    object Panel5: TPanel
+    object pnlImports: TPanel
       Left = 96
       Height = 21
       Top = 294
       Width = 127
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Importaciones:'
+      Caption = ' Imports:'
       ClientHeight = 21
       ClientWidth = 127
       TabOrder = 30
       object lblImports: TLabel
-        Left = 114
+        Left = 116
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -728,22 +728,22 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object Panel6: TPanel
+    object pnlExports: TPanel
       Left = 226
       Height = 21
       Top = 294
       Width = 107
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Exportaciones:'
+      Caption = ' Exports:'
       ClientHeight = 21
       ClientWidth = 107
       TabOrder = 31
       object lblExports: TLabel
-        Left = 94
+        Left = 96
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -756,22 +756,22 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object Panel4: TPanel
+    object pnlCrashes: TPanel
       Left = 336
       Height = 21
       Top = 294
       Width = 105
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Colisiones:'
+      Caption = ' Crashes:'
       ClientHeight = 21
       ClientWidth = 105
       TabOrder = 32
       object lblColision: TLabel
-        Left = 92
+        Left = 94
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -791,7 +791,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Cruce materias:'
+      Caption = ' Clash Subjects:'
       TabOrder = 33
     end
     object pnlClashSubjectNumber: TPanel
@@ -806,10 +806,10 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 34
       object lblClashSubject: TLabel
-        Left = 104
+        Left = 106
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -829,15 +829,15 @@ object ProgressForm: TProgressForm
       Width = 129
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Valor:'
+      Caption = ' Value:'
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 35
       object lblClashSubjectValue: TLabel
-        Left = 116
+        Left = 118
         Height = 19
         Top = 1
-        Width = 12
+        Width = 10
         Align = alRight
         Alignment = taRightJustify
         Caption = '0 '
@@ -851,143 +851,107 @@ object ProgressForm: TProgressForm
       end
     end
   end
-  object bbtnClose: TBitBtn
-    Left = 360
+  object bbtClose: TBitBtn
+    Left = 248
     Height = 32
     Top = 332
     Width = 96
-    Caption = 'Aceptar'
+    Caption = 'Ok'
     Default = True
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Glyph.Data = {
-      76060000424D7606000000000000360000002800000014000000140000000100
-      2000000000004006000064000000640000000000000000000000000000000000
-      0000000000000000000000000001000000030000000400000006000000070000
-      0007000000060000000400000003000000020000000100000000000000000000
-      000000000000000000000000000200000006000000091717170B1212120E1010
-      10100E0E0E120D0D0D140C0C0C152A6349310D0D0D140D0D0D130F0F0F111111
-      110F1515150C0000000900000006000000030000000000000000000000081717
-      170B1111110F0D0D0D130B0B0B170A0A0A1A0909091D1E3B2A2B349067C43798
-      6DF63289629E1111111E0909091B0B0B0B170D0D0D14101010101515150C0000
-      00090000000500000001000000081717170B1111110F0D0D0D130B0B0B170A0A
-      0A1A22523A3536946ADB40A785F648BEA2FF38986DF4285C423A0909091B0B0B
-      0B170D0D0D14101010101515150C000000090000000500000001000000020000
-      0006000000091717170B1212120E307E594537966CED47B495FB4BC3AAFF46C1
-      A8FF45B392FB36946AB50F0F0F111111110F1515150C00000009000000060000
-      00030000000000000000000000000000000000000000000000003692675E3A9A
-      70EF53BFA6FF50C7B0FF42C2A9FF42C2A9FF56C8B2FF3B9C73F1338F66320000
-      0002000000010000000000000000000000000000000000000000000000000000
-      000055AA550337976E9040A078F25BC9B2FF4EC9B2FF46C6AFFF57CBB6FF49C7
-      B0FF4EC9B2FF54BEA4FE37986EC8000000000000000000000000000000000000
-      00000000000000000000000000004080800437986CC849AD8BF462D1BCFF4FCD
-      B5FF4DCCB5FF63D2BDFF5CC8AFFF5ED1BCFF49CBB3FF61D2BDFF43A57EF03696
-      6950000000000000000000000000000000000000000000000000000000003B93
-      6C1A3C9C71F56DD6C3FF53D1BAFF57D2BCFF69D4C0FF49AA86F236976BF965CC
-      B6FF55D1BBFF55D1BBFF65CCB6FF37996DE34080800400000000000000000000
-      000000000000000000000000000000000000389C6F9A52B596F672DBCAFF6CD3
-      BEFF40A079F237986F8F37986B4F48A985F16EDAC9FF52D3BEFF6BD9C7FF4EAF
-      8DF1379469660000000000000000000000000000000000000000000000000000
-      000040808004399970CB53B594FA3A9A71EE35986B430000000000000000389B
-      71C96ACFB7FE63DBC8FF5CD9C5FF75D9C6FF3A9A70ED3B9D620D000000000000
-      0000000000000000000000000000000000000000000037926D0E379469703792
-      6D1C00000000000000000000000035956A3045A37CF17DE3D3FF5BDCC8FF73E1
-      D0FF5BBDA0F638996E8900000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000399A71B46ECFB7FD70E4D3FF62E1CEFF82E3D4FF3D9B72F03A9768160000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000003392662341A078F189E9DBFF64E4
-      D4FF79E8DAFF69C9AFF938996EA0000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000003B9B71976CCBB1FA7FECDDFF68E8D8FF8FECDFFF419F77F23496
-      6927000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000036946B133E9C74EE91EB
-      DEFF6BE9D8FF7AEBDCFF78D5C1FD399A70BD0000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      00000000000000000000399A707463C1A3F588EDE0FF77EBDBFF9BEFE4FF43A0
-      77F43B936C1A0000000000000000000000000000000000000000000000000000
-      00000000000000000000000000000000000000000000000000002BAA55063B9B
-      72E692E6D9FF89DFCEFF4DAA85F1399B71B355AA550300000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      000000000000000000000000000039976E513E9B73F7399A6FD73696693D0000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000308F70100000000000000000000000000000000000000000
+      36040000424D3604000000000000360000002800000010000000100000000100
+      2000000000000004000064000000640000000000000000000000FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00317A360A2D753207FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF003985400A37833DFF317B37FB2E763307FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF004292490A408E47FF54A35CFF4F9F57FF327C38FE2E773408FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF004B9E530A499A51FF5BAC64FF77CA82FF74C87EFF51A059FF337D39FE2F78
+      3508FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0053A9
+      5C0A51A65AFF63B56DFF7ECE89FF7BCC87FF76CA81FF76C981FF52A25AFF347E
+      3AFE30793508FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF005AB4650959B0
+      63FF6BBD76FF84D290FF7AC985FF60B26AFF63B46DFF78C983FF78CB82FF53A3
+      5CFF347F3AFD317A3608FFFFFF00FFFFFF00FFFFFF00FFFFFF005EB969465BB5
+      66E479C986FF80CE8DFF51A65AFC4DA1566F499C518B5CAD67FF7CCC86FF79CB
+      85FF54A45DFF35803BFC317B3708FFFFFF00FFFFFF00FFFFFF00FFFFFF005FBA
+      6A3C5CB666E66DC079FF55AC5F6FFFFFFF00FFFFFF004A9D52915EAE68FF7DCD
+      89FF7CCD87FF56A55FFF36813CFC327C3808FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF005FBB6A435CB76765FFFFFF00FFFFFF00FFFFFF00FFFFFF004B9E53915FAF
+      69FF7FCE8AFF7ECE89FF57A660FF37823DFC337D3908FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF004B9F
+      549160B06AFF81CF8DFF7FCF8BFF58A761FF398540FF347E3A08FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF004CA0559162B26CFF82D18FFF7AC885FF57A660FF38843F7BFFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF004DA1569163B36DFF5FAF69FF41914979FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF004EA257914A9D527FFFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00
     }
     ModalResult = 1
-    OnClick = bbtnCloseClick
+    OnClick = bbtCloseClick
     ParentFont = False
     TabOrder = 1
   end
-  object bbtnCancel: TBitBtn
-    Left = 248
+  object bbtCancel: TBitBtn
+    Left = 349
     Height = 32
     Top = 332
     Width = 107
     Cancel = True
-    Caption = 'Cancelar'
+    Caption = 'Cancel'
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Glyph.Data = {
-      76060000424D7606000000000000360000002800000014000000140000000100
-      2000000000004006000064000000640000000000000000000000000000000000
-      00000000000000000000000000004000800433127B5535117DB236137CE43412
-      7CEF34127CEF36137BE435117CB1341279544000800400000000000000000000
-      00000000000000000000000000000000000000000000000000003713814F3514
-      80E5381688F03D1790FF411A98FF411B9BFF411B9BFF411A98FF3E1790FF3816
-      87F0351480E33214814D00000000000000000000000000000000000000000000
-      0000000080023317869237188AF13F1F9EFF3E20A4FF3D1EA5FF3B1CA5FF3B1C
-      A6FF3B1CA6FF3B1CA5FF3D1EA5FF3E20A4FF3F1F9FFF361788F13417868F0000
-      80020000000000000000000000000000000032188B95371D94F54128AEFF3922
-      AFFF371FAFFF361FB0FF3620B1FF3620B2FF3620B2FF3620B1FF361FB0FF371F
-      AFFF3922AFFF4128AEFF371E94F433198B91000000000000000000000000301B
-      9055351F96F1412FB8FF3523B8FF3322B9FF3222BBFF3123BCFF3123BDFF3123
-      BEFF3123BEFF3123BDFF3123BCFF3222BBFF3322B9FF3523B8FF412FB9FF3520
-      96F132198F52000000005500AA03311D95E34234BBFF3428C1FF2F25C3FF2E25
-      C5FF5A54D2FF433DCCFF2F27C7FF2F28C7FF2F28C7FF2F27C7FF443ECCFF5A54
-      D2FF2E25C5FF2F25C3FF3428C1FF4234BAFF321D95E25500AA032F1E9A56392B
-      ABF23E37CAFF2F29C7FF302AC8FF5B56D3FFF4F3FBFFE1E0F6FF4843D0FF322E
-      CAFF322ECAFF4843D0FFE1E0F6FFF3F2FBFF5B56D3FF302AC8FF2F29C7FF3E38
-      CAFF382BAAF2311F9A532E21A1B3443CC2FF3933CBFF332ECAFF3430CBFF4C4A
-      CAFFE5E5F4FFFFFFFFFFDCDCF5FF4746D1FF4746D1FFDCDCF5FFFFFFFFFFE5E5
-      F4FF4B49CAFF3430CBFF332ECAFF3933CBFF443CC2FF3022A0AF2F24A6E8524E
-      D0FF3633CCFF3634CDFF3735CEFF3736CCFF4343B6FFDDDDF1FFFFFFFFFFE5E5
-      F8FFE5E5F8FFFFFFFFFFDEDEF1FF4443B6FF3736CCFF3735CEFF3634CDFF3532
-      CCFF524ED0FF3025A5E63028ABF45856D6FF3837CFFF3939D0FF3A3BD1FF3B3D
-      D2FF3B3DD0FF4547B9FFDFE0F2FFFFFFFFFFFFFFFFFFE1E1F3FF4648B9FF3B3D
-      D0FF3B3DD2FF3A3BD1FF3939D0FF3837CFFF5856D6FF3028ABF32F2BB0F45E5E
-      D9FF3B3CD2FF3D3FD3FF3E41D4FF3F42D5FF4044D5FF5055D7FFE0E1F3FFFFFF
-      FFFFFFFFFFFFE2E2F4FF5156D7FF4044D5FF3F42D5FF3E41D4FF3D3FD3FF3B3C
-      D2FF5E5ED9FF2F29AFF32C2BB3E86567DBFF3F43D4FF4044D6FF4146D7FF4248
-      D8FF555BDDFFE1E2F8FFFFFFFFFFE6E7F5FFE7E7F5FFFFFFFFFFE1E2F8FF555C
-      DDFF4248D8FF4146D7FF4044D6FF3F43D4FF6465DAFF2C2BB5E62D2DB9B55E60
-      D5FF4C52D9FF4349D8FF444CDAFF555DDEFFDEE0F8FFFFFFFFFFE8E9F6FF565E
-      C2FF565EC2FFE8E9F6FFFFFFFFFFDEE0F8FF555DDEFF444CDAFF4349D8FF4D53
-      DAFF5D5FD5FF2E2DBAB12C2CBC57484CCBF2646BE0FF464EDBFF4851DCFF6D74
-      E1FFF4F5FBFFE3E4F4FF535CC3FF4B57DCFF4B57DCFF535CC3FFE3E4F4FFF4F4
-      FBFF6D74E1FF4851DCFF464EDBFF656CE1FF484BCAF22B2EBC543333CC0A2C32
-      C2EC7177E2FF535CE0FF4B56DFFF4A55D9FF6871C7FF5560C6FF4E5DE0FF5060
-      E3FF5060E3FF4E5DE0FF5661C6FF6871C7FF4A55D9FF4B56DFFF545DE0FF7177
-      E1FF2C32C2EB3333CC0A000000002C32C7573F46CDF47A84E8FF5360E2FF505E
-      E3FF5161DEFF5468E3FF576CE6FF586EE7FF586EE7FF576CE6FF5468E3FF5161
-      DEFF505EE3FF5360E2FF7B84E8FF3D45CEF42E34C85300000000000000000000
-      00002C36CC964B54D7F6828FEBFF6173E8FF5A70E7FF5C75E9FF5F79EAFF607C
-      EAFF607CEAFF5F79EAFF5C75E9FF5A70E7FF6275E8FF838FEBFF4B54D7F62C36
-      CC92000000000000000000000000000000000000FF022A39D299414FD8F28897
-      ECFF859AEFFF728EEEFF6787EDFF6889EEFF6889EEFF6787EDFF728EEEFF859A
-      EFFF8897ECFF404ED7F22B3AD1950000FF020000000000000000000000000000
-      000000000000000000002A39D5552D3ED7E55669E1F28399EDFF9EB5F4FFA1BB
-      F6FFA1BBF6FF9EB5F4FF8298EDFF5769E0F22D3FD8E32837D453000000000000
-      0000000000000000000000000000000000000000000000000000000000004040
-      BF042739DB552E42DDB32B40DCEB2E43DEF22E43DEF22C40DDEA2E42DDB2273A
-      DB544040BF040000000000000000000000000000000000000000
+      36040000424D3604000000000000360000002800000010000000100000000100
+      2000000000000004000064000000640000000000000000000000FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF003F3DED413B38EB08FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00211FE3081E1CE241FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF004A47F0414F4CF2FF403EEDFD3C39EB08FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF002725E5082422E4FC312FEAFF1F1DE241FFFFFF00FFFFFF00FFFFFF005451
+      F3415856F5FF6361FAFF5855F6FF413FEDFC3D3AEC08FFFFFF00FFFFFF00302D
+      E7082C2AE6FC413FF1FF4C4AF6FF312FEAFF1F1DE241FFFFFF00FFFFFF005956
+      F52B5B58F6FF6562FAFF7170FFFF5956F6FF4240EEFC3E3BEC083937EB083532
+      E9FC4745F2FF6362FFFF4A48F4FF2F2DE9FF2220E32BFFFFFF00FFFFFF00FFFF
+      FF005A57F52B5B59F6FF6663FAFF7471FFFF5A58F6FF4341EEFC3E3CECFD504D
+      F4FF6867FFFF504EF5FF3634EBFF2A27E52BFFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF005B58F62B5C5AF6FF6764FAFF7472FFFF7370FFFF706EFFFF6E6C
+      FFFF5755F7FF3F3DEEFF3230E82BFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF005C59F62B5D5BF7FF7976FFFF5956FFFF5754FFFF7270
+      FFFF4846F0FF3C39EB2BFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00615EF8085D5AF6FD7D79FFFF5E5BFFFF5B58FFFF7674
+      FFFF4643EFFD413FED08FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF006967FB086663F9FC706DFBFF807EFFFF7E7BFFFF7C79FFFF7977
+      FFFF5E5CF7FF4744EFFC4240EE08FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00716EFD086E6BFCFC7774FDFF8682FFFF7673FCFF6462F8FF605DF7FF6D6A
+      FAFF7B79FFFF605DF7FF4845EFFC4341EE08FFFFFF00FFFFFF00FFFFFF007673
+      FF087471FEFD7D7AFEFF8A87FFFF7C79FDFF6C69FBFF6361F92B5F5CF72B615E
+      F8FF6E6CFAFF7D7AFFFF615FF7FF4946F0FC4441EE05FFFFFF00FFFFFF007774
+      FF1F7A77FFFF817EFFFF817EFEFF7471FDFF6C69FB2BFFFFFF00FFFFFF00605D
+      F72B625FF8FF6F6DFBFF7E7CFFFF625FF8FF4A47F06F4542EE02FFFFFF00FFFF
+      FF007774FF1F7A77FFFF7976FEFF726FFD2BFFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00615EF82B6461F8FF6A68F9FF5451F3A84F4DF229FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF007774FF1F7774FF2BFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00625FF82B5D5BF76F5956F53EFFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF006360F80AFFFFFF00FFFFFF00FFFFFF00
     }
     ModalResult = 2
-    OnClick = bbtnCancelClick
+    OnClick = bbtCancelClick
     ParentFont = False
     TabOrder = 2
   end
-  object PBProgress: TProgressBar
+  object prbProgress: TProgressBar
     Left = 8
     Height = 28
     Top = 336

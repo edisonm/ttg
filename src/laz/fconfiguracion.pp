@@ -15,7 +15,7 @@ type
   { TConfiguracionForm }
 
   TConfiguracionForm = class(TForm)
-    bbtnOk: TBitBtn;
+    bbtOk: TBitBtn;
     CBApplyDoubleDownHill: TCheckBox;
     creClashSubject: TEdit;
     creProbCruzamiento: TEdit;
@@ -30,63 +30,64 @@ type
     Label21: TLabel;
     Label43: TLabel;
     Label8: TLabel;
+    lblMaxWorkLoadPerTeacher: TLabel;
     pgcConfig: TPageControl;
     speNumMaxGeneracion: TSpinEdit;
     crePollinationProb: TEdit;
     speTamPoblacion: TSpinEdit;
-    tbsPesos: TTabSheet;
+    tbsWeigths: TTabSheet;
     Label1: TLabel;
     Label2: TLabel;
-    Label3: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
+    lblEmptyHours: TLabel;
+    lblBrokenSubjects: TLabel;
+    lblJoinSubjects: TLabel;
     creClashTeacher: TEdit;
     creClashRoomType: TEdit;
     creHourHueca: TEdit;
     creBrokenSession: TEdit;
     creNonScatteredSubject: TEdit;
-    tbsUnidadEducativa: TTabSheet;
+    tbsInstitution: TTabSheet;
     Label14: TLabel;
     speMaxCargaTeacher: TSpinEdit;
-    MemComentarios: TMemo;
+    memComentarios: TMemo;
     lblComentarios: TLabel;
-    Label17: TLabel;
+    lblInstitutionName: TLabel;
     edtNaInstitution: TEdit;
     Label15: TLabel;
     Label18: TLabel;
-    tbsOpciones: TTabSheet;
+    tbsOptions: TTabSheet;
     CBRandomize: TCheckBox;
     Label19: TLabel;
     speSeed: TSpinEdit;
-    Label4: TLabel;
+    lblResponsible: TLabel;
     edtNaResponsable: TEdit;
-    Label25: TLabel;
+    lblResponsiblePosition: TLabel;
     edtCarResponsable: TEdit;
-    Label26: TLabel;
+    lblAuthority: TLabel;
     edtNaAutoridad: TEdit;
     edtCarAutoridad: TEdit;
-    Label27: TLabel;
+    lblAuthorityPosition: TLabel;
     Label29: TLabel;
     speNumIteraciones: TSpinEdit;
-    Label31: TLabel;
+    lblSchoolYear: TLabel;
     edtAnioLectivo: TEdit;
-    Label16: TLabel;
+    lblBrokenTeachers: TLabel;
     creTeacherFraccionamiento: TEdit;
     Label36: TLabel;
     edtTimeTableIni: TEdit;
     dbeNaSubjectRestrictionType: TDBEdit;
     dbeValSubjectRestrictionType: TDBEdit;
-    Label30: TLabel;
-    Label37: TLabel;
-    Label38: TLabel;
-    Label39: TLabel;
+    lblSRName: TLabel;
+    lblSRColor: TLabel;
+    lblSRValue: TLabel;
+    lblTRName: TLabel;
     dbeNaTeacherRestrictionType: TDBEdit;
-    Label40: TLabel;
-    Label41: TLabel;
+    lblTRColor: TLabel;
+    lblTRValue: TLabel;
     dbeValTeacherRestrictionType: TDBEdit;
     Label42: TLabel;
     dedSharedDirectory: TDirectoryEdit;
-    bbtnCancel: TBitBtn;
+    bbtCancel: TBitBtn;
     DBGrid1: TDBGrid;
     DBGrid2: TDBGrid;
     CBColSubjectRestrictionType: TColorBox;
@@ -104,8 +105,8 @@ type
     procedure CBColTeacherRestrictionTypeExit(Sender: TObject);
     procedure DSTeacherRestrictionTypeDataChange(Sender: TObject;
       Field: TField);
-    procedure bbtnOkClick(Sender: TObject);
-    procedure bbtnCancelClick(Sender: TObject);
+    procedure bbtOkClick(Sender: TObject);
+    procedure bbtCancelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -175,7 +176,7 @@ begin
       edtNaResponsable.Text := NaResponsable;
       edtCarResponsable.Text := CarResponsable;
       speMaxCargaTeacher.Value := MaxCargaTeacher;
-      MemComentarios.Lines.Text := Comentarios;
+      memComentarios.Lines.Text := Comentarios;
       CBRandomize.Checked := Randomize;
       speSeed.Value := Seed;
       speNumIteraciones.Value := RefreshInterval;
@@ -210,7 +211,7 @@ begin
       NaResponsable := edtNaResponsable.Text;
       CarResponsable := edtCarResponsable.Text;
       MaxCargaTeacher := speMaxCargaTeacher.Value;
-      Comentarios := MemComentarios.Lines.Text;
+      Comentarios := memComentarios.Lines.Text;
       Randomize := CBRandomize.Checked;
       Seed := speSeed.Value;
       RefreshInterval := speNumIteraciones.Value;
@@ -248,12 +249,12 @@ begin
       AsInteger := CBColSubjectRestrictionType.Selected;
 end;
 
-procedure TConfiguracionForm.bbtnCancelClick(Sender: TObject);
+procedure TConfiguracionForm.bbtCancelClick(Sender: TObject);
 begin
   ModalResult := mrCancel;
 end;
 
-procedure TConfiguracionForm.bbtnOkClick(Sender: TObject);
+procedure TConfiguracionForm.bbtOkClick(Sender: TObject);
 begin
   ModalResult := mrOk;
 end;

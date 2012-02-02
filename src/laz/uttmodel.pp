@@ -556,7 +556,7 @@ var
   procedure CargarTeacherRestriction;
   var
     TeacherRestriction, Teacher, TimeSlot, Day, Hour,
-      TeacherRestrictionType, Valor: Integer;
+      TeacherRestrictionType, Value: Integer;
     VFieldTeacher, VFieldDay, VFieldHour,
       VFieldTeacherRestrictionType: TField;
   begin
@@ -589,8 +589,8 @@ var
         FTeacherRestrictionToTeacher[TeacherRestriction] := Teacher;
         FTeacherRestrictionToTimeSlot[TeacherRestriction] := TimeSlot;
         FTeacherRestrictionToTeacherRestrictionType[TeacherRestriction] := TeacherRestrictionType;
-        Valor := FTeacherRestrictionTypeToValue[TeacherRestrictionType];
-        FTeacherRestrictionToValue[TeacherRestriction] := Valor;
+        Value := FTeacherRestrictionTypeToValue[TeacherRestrictionType];
+        FTeacherRestrictionToValue[TeacherRestriction] := Value;
         FTeacherTimeSlotToTeacherRestrictionType[Teacher, TimeSlot] := TeacherRestrictionType;
         Next;
       end;
@@ -1303,7 +1303,7 @@ begin
   with AReport, TablingInfo do
   begin
     Add('-----------------------------------------------------------------');
-    Add('Detalle                           Cant.         Peso        Valor');
+    Add(Format('%0:-26s %0:-12s %0:-12s %0:-12s', [SDetail, SCount, SWeight, SValue]));
     Add('-----------------------------------------------------------------');
     Add(Format(SRowFormat, [SClashTeacher + ':', FClashTeacher,
       TTimeTableModel(Model).ClashTeacherValue, ClashTeacherValue]));
@@ -1328,7 +1328,7 @@ begin
          '(' + VarArrToStr(TTimeTableModel(Model).FTeacherRestrictionTypeToValue, ' ') + ')',
          TeacherRestrictionValue]));
     Add('-----------------------------------------------------------------');
-    Add(Format('%0:-52s %12d', [STotalValue + ':', Value]));
+    Add(Format('%0:-52s %12d', [STotalValue]));
   end;
 end;
 

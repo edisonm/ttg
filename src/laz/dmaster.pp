@@ -149,14 +149,14 @@ var
           TbTmpTeacherCargaIdTeacher.Value :=
             TbDistribution.FindField('IdTeacher').AsInteger;
           TbTmpTeacherCargaCarga.Value :=
-            CompositionADuracion(TbDistribution.FindField('Composition').AsString);
+            CompositionToDuration(TbDistribution.FindField('Composition').AsString);
           IdTeacher := IdTeacher1;
         end
         else
         begin
           TbTmpTeacherCarga.Edit;
           with TbTmpTeacherCargaCarga do
-            Value := Value + CompositionADuracion(TbDistribution.FindField('Composition').AsString);
+            Value := Value + CompositionToDuration(TbDistribution.FindField('Composition').AsString);
         end;
         TbTmpTeacherCarga.Post;
         Next;
@@ -183,14 +183,14 @@ var
         begin
           TbTmpRoomTypeCarga.Append;
           TbTmpRoomTypeCargaIdRoomType.Value := TbDistribution.FindField('IdRoomType').AsInteger;
-          TbTmpRoomTypeCargaCarga.Value := CompositionADuracion(TbDistribution.FindField('Composition').AsString);
+          TbTmpRoomTypeCargaCarga.Value := CompositionToDuration(TbDistribution.FindField('Composition').AsString);
           IdRoomType := IdRoomType1;
         end
         else
         begin
           TbTmpRoomTypeCarga.Edit;
           with TbTmpRoomTypeCargaCarga do
-            Value := Value + CompositionADuracion(TbDistribution.FindField('Composition').AsString);
+            Value := Value + CompositionToDuration(TbDistribution.FindField('Composition').AsString);
         end;
         TbTmpRoomTypeCarga.Post;
         Next;
@@ -402,7 +402,7 @@ var
           try
             while not TbDistribution.Eof do
             begin
-              Inc(t, CompositionADuracion(TbDistribution.FindField('Composition').AsString));
+              Inc(t, CompositionToDuration(TbDistribution.FindField('Composition').AsString));
               TbDistribution.Next;
             end;
             if (t <= 0) or (t > TbTimeSlot.RecordCount) then

@@ -420,14 +420,14 @@ msgstr "Detalle de los horarios"
 msgid "Courses|Courses disponibles"
 msgstr "Courses|Courses disponibles"
 
-#: TCONFIGURACIONFORM.BBTNCANCEL.CAPTION
-msgctxt "TCONFIGURACIONFORM.BBTNCANCEL.CAPTION"
+#: TCONFIGURACIONFORM.BBTCANCEL.CAPTION
+msgctxt "TCONFIGURACIONFORM.BBTCANCEL.CAPTION"
 msgid "Cancelar"
 msgstr "Cancelar"
 
-#: TCONFIGURACIONFORM.BBTNOK.CAPTION
-msgctxt "TCONFIGURACIONFORM.BBTNOK.CAPTION"
-msgid "Aceptar"
+#: TCONFIGURACIONFORM.BBTOK.CAPTION
+msgctxt "TCONFIGURACIONFORM.BBTOK.CAPTION"
+msgid "Ok"
 msgstr "Aceptar"
 
 #: TCONFIGURACIONFORM.CBAPPLYDOUBLEDOWNHILL.CAPTION
@@ -446,12 +446,15 @@ msgstr "Configure"
 msgid "1,2"
 msgstr "1,2"
 
-#: TCONFIGURACIONFORM.EDTNACOLEGIO.HINT
+#: TCONFIGURACIONFORM.EDTNAINSTITUTION.HINT
+msgctxt "TCONFIGURACIONFORM.EDTNAINSTITUTION.HINT"
 msgid "Colegio|Nombre del colegio"
 msgstr "Colegio|Nombre del colegio"
 
 #: TCONFIGURACIONFORM.LABEL1.CAPTION
-msgid "Cruce profesores:"
+#, fuzzy
+#| msgid "Cruce profesores:"
+msgid "Clash Teachers:"
 msgstr "Cruce profesores:"
 
 #: TCONFIGURACIONFORM.LABEL10.CAPTION
@@ -470,25 +473,16 @@ msgstr "Prob. Reparacion:"
 msgid "Iteraciones:"
 msgstr "Iteraciones:"
 
-#: TCONFIGURACIONFORM.LABEL14.CAPTION
-msgid "Carga Maxima por Profesor:"
-msgstr "Carga Maxima por Profesor:"
-
 #: TCONFIGURACIONFORM.LABEL15.CAPTION
-msgid "Prohibiciones de materia:"
+#, fuzzy
+#| msgid "Prohibiciones de materia:"
+msgid "Subject Restrictions:"
 msgstr "Prohibiciones de materia:"
 
-#: TCONFIGURACIONFORM.LABEL16.CAPTION
-msgid "Fracc. profesores:"
-msgstr "Fracc. profesores:"
-
-#: TCONFIGURACIONFORM.LABEL17.CAPTION
-msgctxt "TCONFIGURACIONFORM.LABEL17.CAPTION"
-msgid "Nombre:"
-msgstr "Nombre:"
-
 #: TCONFIGURACIONFORM.LABEL18.CAPTION
-msgid "Prohibiciones de profesor:"
+#, fuzzy
+#| msgid "Prohibiciones de profesor:"
+msgid "Teacher Restrictions:"
 msgstr "Prohibiciones de profesor:"
 
 #: TCONFIGURACIONFORM.LABEL19.CAPTION
@@ -496,80 +490,28 @@ msgid "Semilla:"
 msgstr "Semilla:"
 
 #: TCONFIGURACIONFORM.LABEL2.CAPTION
-msgid "Cruce de aulas:"
+#, fuzzy
+#| msgid "Cruce de aulas:"
+msgid "Clash Rooms:"
 msgstr "Cruce de aulas:"
 
 #: TCONFIGURACIONFORM.LABEL20.CAPTION
-msgid "Cruce materias:"
+#, fuzzy
+#| msgid "Cruce materias:"
+msgid "Clash Subjects:"
 msgstr "Cruce materias:"
 
 #: TCONFIGURACIONFORM.LABEL21.CAPTION
 msgid "Niveles de descenso:"
 msgstr "Niveles de descenso:"
 
-#: TCONFIGURACIONFORM.LABEL25.CAPTION
-msgctxt "TCONFIGURACIONFORM.LABEL25.CAPTION"
-msgid "Cargo:"
-msgstr "Cargo:"
-
-#: TCONFIGURACIONFORM.LABEL26.CAPTION
-msgid "Autoridad:"
-msgstr "Autoridad:"
-
-#: TCONFIGURACIONFORM.LABEL27.CAPTION
-msgctxt "TCONFIGURACIONFORM.LABEL27.CAPTION"
-msgid "Cargo:"
-msgstr "Cargo:"
-
 #: TCONFIGURACIONFORM.LABEL29.CAPTION
 msgid "Actualizar cada:"
 msgstr "Actualizar cada:"
 
-#: TCONFIGURACIONFORM.LABEL3.CAPTION
-msgid "Hours huecas:"
-msgstr "Hours huecas:"
-
-#: TCONFIGURACIONFORM.LABEL30.CAPTION
-msgctxt "TCONFIGURACIONFORM.LABEL30.CAPTION"
-msgid "Nombre:"
-msgstr "Nombre:"
-
-#: TCONFIGURACIONFORM.LABEL31.CAPTION
-msgid "Periodo Lectivo:"
-msgstr "Periodo Lectivo:"
-
 #: TCONFIGURACIONFORM.LABEL36.CAPTION
 msgid "Horarios iniciales:"
 msgstr "Horarios iniciales:"
-
-#: TCONFIGURACIONFORM.LABEL37.CAPTION
-msgctxt "TCONFIGURACIONFORM.LABEL37.CAPTION"
-msgid "Color:"
-msgstr "Color:"
-
-#: TCONFIGURACIONFORM.LABEL38.CAPTION
-msgctxt "TCONFIGURACIONFORM.LABEL38.CAPTION"
-msgid "Valor:"
-msgstr "Valor:"
-
-#: TCONFIGURACIONFORM.LABEL39.CAPTION
-msgctxt "TCONFIGURACIONFORM.LABEL39.CAPTION"
-msgid "Nombre:"
-msgstr "Nombre:"
-
-#: TCONFIGURACIONFORM.LABEL4.CAPTION
-msgid "Responsable:"
-msgstr "Responsable:"
-
-#: TCONFIGURACIONFORM.LABEL40.CAPTION
-msgctxt "TCONFIGURACIONFORM.LABEL40.CAPTION"
-msgid "Color:"
-msgstr "Color:"
-
-#: TCONFIGURACIONFORM.LABEL41.CAPTION
-msgctxt "TCONFIGURACIONFORM.LABEL41.CAPTION"
-msgid "Valor:"
-msgstr "Valor:"
 
 #: TCONFIGURACIONFORM.LABEL42.CAPTION
 msgid "Dir. de intercambio:"
@@ -579,38 +521,107 @@ msgstr "Dir. de intercambio:"
 msgid "Prob. Polinizacion:"
 msgstr "Prob. Polinizacion:"
 
-#: TCONFIGURACIONFORM.LABEL5.CAPTION
-msgid "Materias cortadas:"
-msgstr "Materias cortadas:"
-
-#: TCONFIGURACIONFORM.LABEL6.CAPTION
-msgid "Materias juntas:"
-msgstr "Materias juntas:"
-
 #: TCONFIGURACIONFORM.LABEL8.CAPTION
 msgid "Individuos:"
 msgstr "Individuos:"
 
+#: TCONFIGURACIONFORM.LBLAUTHORITY.CAPTION
+msgid "Authority:"
+msgstr "Autoridad:"
+
+#: TCONFIGURACIONFORM.LBLAUTHORITYPOSITION.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLAUTHORITYPOSITION.CAPTION"
+msgid "Position:"
+msgstr "Cargo:"
+
+#: TCONFIGURACIONFORM.LBLBROKENSUBJECTS.CAPTION
+msgid "Broken Subjects:"
+msgstr "Materias cortadas:"
+
+#: TCONFIGURACIONFORM.LBLBROKENTEACHERS.CAPTION
+msgid "Broken teachers:"
+msgstr "Fracc. profesores:"
+
 #: TCONFIGURACIONFORM.LBLCOMENTARIOS.CAPTION
-msgid "Comentarios:"
+msgid "Comments:"
 msgstr "Comentarios:"
 
-#: TCONFIGURACIONFORM.TBSOPCIONES.CAPTION
-msgid "Opciones"
-msgstr "Opciones"
+#: TCONFIGURACIONFORM.LBLEMPTYHOURS.CAPTION
+msgid "Empty hours:"
+msgstr "Horas huecas:"
 
-#: TCONFIGURACIONFORM.TBSPESOS.CAPTION
-msgctxt "TCONFIGURACIONFORM.TBSPESOS.CAPTION"
-msgid "Pesos"
-msgstr "Pesos"
+#: TCONFIGURACIONFORM.LBLINSTITUTIONNAME.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLINSTITUTIONNAME.CAPTION"
+msgid "Name:"
+msgstr "Nombre:"
 
-#: TCONFIGURACIONFORM.TBSUNIDADEDUCATIVA.CAPTION
-msgid "Institucion"
+#: TCONFIGURACIONFORM.LBLJOINSUBJECTS.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLJOINSUBJECTS.CAPTION"
+msgid "Materias juntas:"
+msgstr "Materias juntas:"
+
+#: TCONFIGURACIONFORM.LBLMAXWORKLOADPERTEACHER.CAPTION
+msgid "Max work load per teacher:"
+msgstr "Carga Maxima por Profesor:"
+
+#: TCONFIGURACIONFORM.LBLRESPONSIBLE.CAPTION
+msgid "Responsible:"
+msgstr "Responsable:"
+
+#: TCONFIGURACIONFORM.LBLRESPONSIBLEPOSITION.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLRESPONSIBLEPOSITION.CAPTION"
+msgid "Position:"
+msgstr "Cargo:"
+
+#: TCONFIGURACIONFORM.LBLSCHOOLYEAR.CAPTION
+msgid "School Year:"
+msgstr "Periodo Lectivo:"
+
+#: TCONFIGURACIONFORM.LBLSRCOLOR.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLSRCOLOR.CAPTION"
+msgid "Color:"
+msgstr "Color:"
+
+#: TCONFIGURACIONFORM.LBLSRNAME.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLSRNAME.CAPTION"
+msgid "Name:"
+msgstr "Nombre:"
+
+#: TCONFIGURACIONFORM.LBLSRVALUE.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLSRVALUE.CAPTION"
+msgid "Value:"
+msgstr "Valor:"
+
+#: TCONFIGURACIONFORM.LBLTRCOLOR.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLTRCOLOR.CAPTION"
+msgid "Color:"
+msgstr "Color:"
+
+#: TCONFIGURACIONFORM.LBLTRNAME.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLTRNAME.CAPTION"
+msgid "Name:"
+msgstr "Nombre:"
+
+#: TCONFIGURACIONFORM.LBLTRVALUE.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLTRVALUE.CAPTION"
+msgid "Value:"
+msgstr "Valor:"
+
+#: TCONFIGURACIONFORM.TBSINSTITUTION.CAPTION
+msgid "Institution"
 msgstr "Institucion"
 
-#: TCONFIGURACIONFORM.TBSUNIDADEDUCATIVA.HINT
-msgid "Datos del colegio"
-msgstr "Datos del colegio"
+#: TCONFIGURACIONFORM.TBSINSTITUTION.HINT
+msgid "Institution Data"
+msgstr "Datos del instituto"
+
+#: TCONFIGURACIONFORM.TBSOPTIONS.CAPTION
+msgid "Options"
+msgstr "Opciones"
+
+#: TCONFIGURACIONFORM.TBSWEIGTHS.CAPTION
+msgid "Weights"
+msgstr "Pesos"
 
 #: TCROSSMANYTOMANYEDITOR0FORM.PANEL2.CAPTION
 msgid "Panel2"
@@ -959,14 +970,13 @@ msgstr "Visor de mensajes"
 msgid "Panel1"
 msgstr "Panel1"
 
-#: TPROGRESSFORM.BBTNCANCEL.CAPTION
-msgctxt "TPROGRESSFORM.BBTNCANCEL.CAPTION"
-msgid "Cancelar"
+#: TPROGRESSFORM.BBTCANCEL.CAPTION
+msgid "Cancel"
 msgstr "Cancelar"
 
-#: TPROGRESSFORM.BBTNCLOSE.CAPTION
-msgctxt "TPROGRESSFORM.BBTNCLOSE.CAPTION"
-msgid "Aceptar"
+#: TPROGRESSFORM.BBTCLOSE.CAPTION
+msgctxt "TPROGRESSFORM.BBTCLOSE.CAPTION"
+msgid "Ok"
 msgstr "Aceptar"
 
 #: TPROGRESSFORM.LBLBROKENSESSION.CAPTION
@@ -979,43 +989,48 @@ msgctxt "TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
+#: TPROGRESSFORM.LBLBROKENTEACHERCOUNT.CAPTION
+msgctxt "TPROGRESSFORM.LBLBROKENTEACHERCOUNT.CAPTION"
+msgid "0 "
+msgstr "0 "
+
 #: TPROGRESSFORM.LBLBROKENTEACHERVALUE.CAPTION
 msgctxt "TPROGRESSFORM.LBLBROKENTEACHERVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
+#: TPROGRESSFORM.LBLCLASHROOMTYPE.CAPTION
+msgctxt "TPROGRESSFORM.LBLCLASHROOMTYPE.CAPTION"
+msgid "0 "
+msgstr "0 "
+
+#: TPROGRESSFORM.LBLCLASHROOMTYPEVALUE.CAPTION
+msgctxt "TPROGRESSFORM.LBLCLASHROOMTYPEVALUE.CAPTION"
+msgid "0 "
+msgstr "0 "
+
+#: TPROGRESSFORM.LBLCLASHSUBJECT.CAPTION
+msgctxt "TPROGRESSFORM.LBLCLASHSUBJECT.CAPTION"
+msgid "0 "
+msgstr "0 "
+
+#: TPROGRESSFORM.LBLCLASHSUBJECTVALUE.CAPTION
+msgctxt "TPROGRESSFORM.LBLCLASHSUBJECTVALUE.CAPTION"
+msgid "0 "
+msgstr "0 "
+
+#: TPROGRESSFORM.LBLCLASHTEACHER.CAPTION
+msgctxt "TPROGRESSFORM.LBLCLASHTEACHER.CAPTION"
+msgid "0 "
+msgstr "0 "
+
+#: TPROGRESSFORM.LBLCLASHTEACHERVALUE.CAPTION
+msgctxt "TPROGRESSFORM.LBLCLASHTEACHERVALUE.CAPTION"
+msgid "0 "
+msgstr "0 "
+
 #: TPROGRESSFORM.LBLCOLISION.CAPTION
 msgctxt "TPROGRESSFORM.LBLCOLISION.CAPTION"
-msgid "0 "
-msgstr "0 "
-
-#: TPROGRESSFORM.LBLCRUCEROOMTYPE.CAPTION
-msgctxt "TPROGRESSFORM.LBLCRUCEROOMTYPE.CAPTION"
-msgid "0 "
-msgstr "0 "
-
-#: TPROGRESSFORM.LBLCRUCEROOMTYPEVALUE.CAPTION
-msgctxt "TPROGRESSFORM.LBLCRUCEROOMTYPEVALUE.CAPTION"
-msgid "0 "
-msgstr "0 "
-
-#: TPROGRESSFORM.LBLCRUCESUBJECT.CAPTION
-msgctxt "TPROGRESSFORM.LBLCRUCESUBJECT.CAPTION"
-msgid "0 "
-msgstr "0 "
-
-#: TPROGRESSFORM.LBLCRUCESUBJECTVALUE.CAPTION
-msgctxt "TPROGRESSFORM.LBLCRUCESUBJECTVALUE.CAPTION"
-msgid "0 "
-msgstr "0 "
-
-#: TPROGRESSFORM.LBLCRUCETEACHER.CAPTION
-msgctxt "TPROGRESSFORM.LBLCRUCETEACHER.CAPTION"
-msgid "0 "
-msgstr "0 "
-
-#: TPROGRESSFORM.LBLCRUCETEACHERVALUE.CAPTION
-msgctxt "TPROGRESSFORM.LBLCRUCETEACHERVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1034,8 +1049,8 @@ msgctxt "TPROGRESSFORM.LBLIMPORTS.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLNONSCATTEREDSUBJECT.CAPTION
-msgctxt "TPROGRESSFORM.LBLNONSCATTEREDSUBJECT.CAPTION"
+#: TPROGRESSFORM.LBLNONSCATTEREDSUBJECTCOUNT.CAPTION
+msgctxt "TPROGRESSFORM.LBLNONSCATTEREDSUBJECTCOUNT.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1074,11 +1089,6 @@ msgctxt "TPROGRESSFORM.LBLSUBJECTRESTRICTIONVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLTEACHERFRACCIONAMIENTO.CAPTION
-msgctxt "TPROGRESSFORM.LBLTEACHERFRACCIONAMIENTO.CAPTION"
-msgid "0 "
-msgstr "0 "
-
 #: TPROGRESSFORM.LBLTEACHERRESTRICTION.CAPTION
 msgctxt "TPROGRESSFORM.LBLTEACHERRESTRICTION.CAPTION"
 msgid "0 "
@@ -1094,53 +1104,10 @@ msgctxt "TPROGRESSFORM.LBLTOTALVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.PANEL1.CAPTION
-msgid " Fracc. profesores:"
-msgstr " Fracc. profesores:"
-
-#: TPROGRESSFORM.PANEL2.CAPTION
-msgctxt "TPROGRESSFORM.PANEL2.CAPTION"
-msgid " Number:"
-msgstr " Number:"
-
-#: TPROGRESSFORM.PANEL26.CAPTION
-msgctxt "TPROGRESSFORM.PANEL26.CAPTION"
-msgid " Valor:"
-msgstr " Valor:"
-
-#: TPROGRESSFORM.PANEL28.CAPTION
-msgctxt "TPROGRESSFORM.PANEL28.CAPTION"
-msgid " Number:"
-msgstr " Number:"
-
-#: TPROGRESSFORM.PANEL29.CAPTION
-msgctxt "TPROGRESSFORM.PANEL29.CAPTION"
-msgid " Valor:"
-msgstr " Valor:"
-
-#: TPROGRESSFORM.PANEL3.CAPTION
-msgctxt "TPROGRESSFORM.PANEL3.CAPTION"
-msgid " Valor:"
-msgstr " Valor:"
-
-#: TPROGRESSFORM.PANEL4.CAPTION
-msgid " Colisiones:"
-msgstr " Colisiones:"
-
-#: TPROGRESSFORM.PANEL5.CAPTION
-msgid " Importaciones:"
-msgstr " Importaciones:"
-
-#: TPROGRESSFORM.PANEL6.CAPTION
-msgid " Exportaciones:"
-msgstr " Exportaciones:"
-
-#: TPROGRESSFORM.PANEL7.CAPTION
-msgid "Polinización:"
-msgstr "Polinización:"
-
 #: TPROGRESSFORM.PNLBROKENSESSION.CAPTION
-msgid " Materias cortadas"
+#, fuzzy
+#| msgid " Materias cortadas"
+msgid " Broken Subjects:"
 msgstr " Materias cortadas"
 
 #: TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION
@@ -1149,71 +1116,109 @@ msgid " Number:"
 msgstr " Number:"
 
 #: TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION
+#, fuzzy
+#| msgid " Valor:"
 msgctxt "TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION"
-msgid " Valor:"
+msgid " Value:"
 msgstr " Valor:"
 
-#: TPROGRESSFORM.PNLCRUCEROOMTYPE.CAPTION
-msgid " Cruce de aulas:"
+#: TPROGRESSFORM.PNLBROKENTEACHER.CAPTION
+msgid " Broken Teachers:"
+msgstr "Fracc. profesores:"
+
+#: TPROGRESSFORM.PNLBROKENTEACHERCOUNT.CAPTION
+msgctxt "TPROGRESSFORM.PNLBROKENTEACHERCOUNT.CAPTION"
+msgid " Number:"
+msgstr " Number:"
+
+#: TPROGRESSFORM.PNLBROKENTEACHERVALUE.CAPTION
+msgctxt "TPROGRESSFORM.PNLBROKENTEACHERVALUE.CAPTION"
+msgid " Value:"
+msgstr " Valor:"
+
+#: TPROGRESSFORM.PNLCLASHROOMTYPE.CAPTION
+msgid " Clash Classrooms:"
 msgstr " Cruce de aulas:"
 
-#: TPROGRESSFORM.PNLCRUCEROOMTYPENUMBER.CAPTION
-msgctxt "TPROGRESSFORM.PNLCRUCEROOMTYPENUMBER.CAPTION"
+#: TPROGRESSFORM.PNLCLASHROOMTYPENUMBER.CAPTION
+msgctxt "TPROGRESSFORM.PNLCLASHROOMTYPENUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLCRUCEROOMTYPEVALUE.CAPTION
-msgctxt "TPROGRESSFORM.PNLCRUCEROOMTYPEVALUE.CAPTION"
-msgid " Valor:"
+#: TPROGRESSFORM.PNLCLASHROOMTYPEVALUE.CAPTION
+msgctxt "TPROGRESSFORM.PNLCLASHROOMTYPEVALUE.CAPTION"
+msgid " Value:"
 msgstr " Valor:"
 
-#: TPROGRESSFORM.PNLCRUCESUBJECT.CAPTION
-msgid " Cruce materias:"
+#: TPROGRESSFORM.PNLCLASHSUBJECT.CAPTION
+msgid " Clash Subjects:"
 msgstr " Cruce materias:"
 
-#: TPROGRESSFORM.PNLCRUCESUBJECTNUMBER.CAPTION
-msgctxt "TPROGRESSFORM.PNLCRUCESUBJECTNUMBER.CAPTION"
+#: TPROGRESSFORM.PNLCLASHSUBJECTNUMBER.CAPTION
+msgctxt "TPROGRESSFORM.PNLCLASHSUBJECTNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLCRUCESUBJECTVALUE.CAPTION
-msgctxt "TPROGRESSFORM.PNLCRUCESUBJECTVALUE.CAPTION"
-msgid " Valor:"
+#: TPROGRESSFORM.PNLCLASHSUBJECTVALUE.CAPTION
+msgctxt "TPROGRESSFORM.PNLCLASHSUBJECTVALUE.CAPTION"
+msgid " Value:"
 msgstr " Valor:"
 
-#: TPROGRESSFORM.PNLCRUCETEACHER.CAPTION
-msgid " Cruce profesores:"
+#: TPROGRESSFORM.PNLCLASHTEACHER.CAPTION
+msgid " Clash Teachers:"
 msgstr " Cruce profesores:"
 
-#: TPROGRESSFORM.PNLCRUCETEACHERNUMBER.CAPTION
-msgctxt "TPROGRESSFORM.PNLCRUCETEACHERNUMBER.CAPTION"
+#: TPROGRESSFORM.PNLCLASHTEACHERNUMBER.CAPTION
+msgctxt "TPROGRESSFORM.PNLCLASHTEACHERNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLCRUCETEACHERVALUE.CAPTION
-msgctxt "TPROGRESSFORM.PNLCRUCETEACHERVALUE.CAPTION"
-msgid " Valor:"
+#: TPROGRESSFORM.PNLCLASHTEACHERVALUE.CAPTION
+msgctxt "TPROGRESSFORM.PNLCLASHTEACHERVALUE.CAPTION"
+msgid " Value:"
 msgstr " Valor:"
 
+#: TPROGRESSFORM.PNLCRASHES.CAPTION
+msgid " Crashes:"
+msgstr " Colisiones:"
+
 #: TPROGRESSFORM.PNLELAPSEDTIME.CAPTION
-msgid " Tiempo transcurrido:"
+msgid " Elapsed time:"
 msgstr " Tiempo transcurrido:"
 
 #: TPROGRESSFORM.PNLESTIMATEDTIME.CAPTION
-msgid "Tiempo restante:"
+msgid "Remaining time:"
 msgstr "Tiempo restante:"
 
+#: TPROGRESSFORM.PNLEXPORTS.CAPTION
+msgid " Exports:"
+msgstr " Exportaciones:"
+
+#: TPROGRESSFORM.PNLIMPORTS.CAPTION
+msgid " Imports:"
+msgstr " Importaciones:"
+
 #: TPROGRESSFORM.PNLINITDATETIME.CAPTION
-msgid "Iniciado el:"
+msgid "Started at:"
 msgstr "Iniciado el:"
 
 #: TPROGRESSFORM.PNLNONSCATTEREDSUBJECT.CAPTION
-msgid " Materias juntas:"
+msgid " Join Subjects:"
 msgstr " Materias juntas:"
 
+#: TPROGRESSFORM.PNLNONSCATTEREDSUBJECTCOUNT.CAPTION
+msgctxt "TPROGRESSFORM.PNLNONSCATTEREDSUBJECTCOUNT.CAPTION"
+msgid " Number:"
+msgstr " Numero:"
+
+#: TPROGRESSFORM.PNLNONSCATTEREDSUBJECTVALUE.CAPTION
+msgctxt "TPROGRESSFORM.PNLNONSCATTEREDSUBJECTVALUE.CAPTION"
+msgid " Value:"
+msgstr " Valor:"
+
 #: TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOUR.CAPTION
-msgid " Hours huecas"
-msgstr " Hours huecas"
+msgid " Empty hours:"
+msgstr " Horas huecas"
 
 #: TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURNUMBER.CAPTION
 msgctxt "TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURNUMBER.CAPTION"
@@ -1222,15 +1227,23 @@ msgstr " Number:"
 
 #: TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION
 msgctxt "TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION"
-msgid " Valor:"
+msgid " Value:"
 msgstr " Valor:"
 
+#: TPROGRESSFORM.PNLPOLLINATION.CAPTION
+msgid "Pollination:"
+msgstr "Polinizacion:"
+
 #: TPROGRESSFORM.PNLPOSITION.CAPTION
-msgid " Iteracion:"
+#, fuzzy
+#| msgid " Iteracion:"
+msgid " Iteration:"
 msgstr " Iteracion:"
 
 #: TPROGRESSFORM.PNLSUBJECTRESTRICTION.CAPTION
-msgid " Prohibiciones de materia:"
+#, fuzzy
+#| msgid " Prohibiciones de materia:"
+msgid " Subject Restrictions:"
 msgstr " Prohibiciones de materia:"
 
 #: TPROGRESSFORM.PNLSUBJECTRESTRICTIONNUMBER.CAPTION
@@ -1239,12 +1252,16 @@ msgid " Number:"
 msgstr " Number:"
 
 #: TPROGRESSFORM.PNLSUBJECTRESTRICTIONVALUE.CAPTION
+#, fuzzy
+#| msgid " Valor:"
 msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTIONVALUE.CAPTION"
-msgid " Valor:"
+msgid " Value:"
 msgstr " Valor:"
 
 #: TPROGRESSFORM.PNLTEACHERRESTRICTION.CAPTION
-msgid " Prohibiciones de profesor:"
+#, fuzzy
+#| msgid " Prohibiciones de profesor:"
+msgid " Teacher Restrictions:"
 msgstr " Prohibiciones de profesor:"
 
 #: TPROGRESSFORM.PNLTEACHERRESTRICTIONNUMBER.CAPTION
@@ -1252,8 +1269,15 @@ msgctxt "TPROGRESSFORM.PNLTEACHERRESTRICTIONNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
+#: TPROGRESSFORM.PNLTEACHERRESTRICTIONVALUE.CAPTION
+msgctxt "TPROGRESSFORM.PNLTEACHERRESTRICTIONVALUE.CAPTION"
+msgid " Value:"
+msgstr " Valor:"
+
 #: TPROGRESSFORM.PNLTOTALVALUE.CAPTION
-msgid " Valor Total:"
+#, fuzzy
+#| msgid " Valor Total:"
+msgid "Total Value:"
 msgstr " Valor Total:"
 
 #: TPROGRESSFORM.PROGRESSFORM.CAPTION
@@ -1540,23 +1564,23 @@ msgstr "Mientras se procesaba %s"
 
 #: uttgconsts.sapplydownhill
 msgid "Aplicar Descenso: %23s"
-msgstr ""
+msgstr "Aplicar Descenso: %23s"
 
 #: uttgconsts.sbasetimetable
 msgid "TimeTable base: %d"
-msgstr ""
+msgstr "Horario base: %d"
 
 #: uttgconsts.sbrokensession
 msgid "Materias cortadas"
-msgstr ""
+msgstr "Materias cortadas"
 
 #: uttgconsts.sbrokenteacher
 msgid "Fracc. h. profesores"
-msgstr ""
+msgstr "Fracc. h. profesores"
 
 #: uttgconsts.schangeswillbelostwarning
 msgid "Los cambios realizados se perderan, Esta seguro?"
-msgstr ""
+msgstr "Los cambios realizados se perderan, Esta seguro?"
 
 #: uttgconsts.sclashroomtype
 msgctxt "uttgconsts.sclashroomtype"
@@ -1575,7 +1599,7 @@ msgstr "Cruce de profesores"
 
 #: uttgconsts.sclasstimeslottosessionoverflow
 msgid "Se desbordo Molde de ClassTimeSlotToSession: Class %d-%d Duracion %d"
-msgstr ""
+msgstr "Se desbordo Molde de ClassTimeSlotToSession: Class %d-%d Duracion %d"
 
 #: uttgconsts.sclassworkloadhead
 msgid "Class; Work Load"
@@ -1591,57 +1615,67 @@ msgstr "Carga Horaria de paralelos con problemas..."
 
 #: uttgconsts.scopyright
 msgid "1999-2012 by Edison Mera"
-msgstr ""
+msgstr "1999-2012 by Edison Mera"
+
+#: uttgconsts.scount
+msgid "Count"
+msgstr "Cantidad"
 
 #: uttgconsts.scrossprob
 msgid "Probabilidad de cruce"
-msgstr ""
+msgstr "Probabilidad de cruce"
+
+#: uttgconsts.sdetail
+msgid "Detail"
+msgstr "Detalle"
 
 #: uttgconsts.sdownhillalgorithm
 msgid "Algoritmo de Descenso"
-msgstr ""
+msgstr "Algoritmo de Descenso"
 
 #: uttgconsts.sevolutiveelitistalgorithm
 msgid "Algoritmo Evolutivo Elitista"
-msgstr ""
+msgstr "Algoritmo Evolutivo Elitista"
 
 #: uttgconsts.sgeneratetimetables
 msgid "Generar Horarios"
-msgstr ""
+msgstr "Generar Horarios"
 
 #: uttgconsts.simprovingtimetable
 msgid "Mejorando TimeTable [%d]"
-msgstr ""
+msgstr "Mejorando TimeTable [%d]"
 
 #: uttgconsts.simprovingtimetablein
 msgid "Mejorando TimeTable [%d] en [%d]"
-msgstr ""
+msgstr "Mejorando TimeTable [%d] en [%d]"
 
 #: uttgconsts.sinvaliddata
 msgid "El dato ingresado no es valido"
-msgstr ""
+msgstr "El dato ingresado no es valido"
 
 #: uttgconsts.sisempty
 msgid "%s esta vacio"
-msgstr ""
+msgstr "%s esta vacio"
 
 #: uttgconsts.smaxiteration
 msgid "Maximo de generaciones"
-msgstr ""
+msgstr "Maximo de generaciones"
 
 #: uttgconsts.smutationprob
 msgid "Probabilidad de Mutacion"
-msgstr ""
+msgstr "Probabilidad de Mutacion"
 
 #: uttgconsts.snoerrorreadyforchecksummary
 msgid ""
 "No se encontraron errores, esta listo para generar horario.\n"
 "Desea mostrar el resumen del chequeo del horario?\n"
 msgstr ""
+"No se encontraron errores, esta listo para generar horario.\n"
+"Desea mostrar el resumen del chequeo del horario?\n"
 
 #: uttgconsts.snonscatteredsubject
 msgid "Materias juntas"
-msgstr ""
+msgstr "Materias juntas"
 
 #: uttgconsts.snumhardteacherrestrictions
 msgid "Number of hard teacher restrictions..."
@@ -1653,21 +1687,23 @@ msgstr "Numero de prohibiciones de profesores sin problemas..."
 
 #: uttgconsts.soutofpositionemptyhour
 msgid "Horas huecas desubicadas"
-msgstr ""
+msgstr "Horas huecas desubicadas"
 
 #: uttgconsts.spendingchangeswillbelostyoureallywanttoquit
 msgid ""
 "Los cambios realizados hasta el momento se perderan.\n"
 "Esta seguro que desea cerrar el programa?\n"
 msgstr ""
+"Los cambios realizados hasta el momento se perderan.\n"
+"Esta seguro que desea cerrar el programa?\n"
 
 #: uttgconsts.spollinationprob
 msgid "Probabilidad de polinizacion"
-msgstr ""
+msgstr "Probabilidad de polinizacion"
 
 #: uttgconsts.spopulationsize
 msgid "Numero de individuos"
-msgstr ""
+msgstr "Numero de individuos"
 
 #: uttgconsts.sproblems
 msgid "Problems"
@@ -1675,20 +1711,20 @@ msgstr "Problemas"
 
 #: uttgconsts.srandseed
 msgid "Semilla Numeros aleatorios"
-msgstr ""
+msgstr "Semilla numeros aleatorios"
 
 #: uttgconsts.sready
 msgid "Listo"
-msgstr ""
+msgstr "Listo"
 
 #: uttgconsts.srelcolsrows
 msgctxt "uttgconsts.srelcolsrows"
 msgid "%s|Columnas: %s - Filas: %s "
-msgstr ""
+msgstr "%s|Columnas: %s - Filas: %s "
 
 #: uttgconsts.srepairprob
 msgid "Probabilidad de Reparacion"
-msgstr ""
+msgstr "Probabilidad de Reparacion"
 
 #: uttgconsts.sroomtypesloadhead
 msgid "RoomType; Available Hours; Load"
@@ -1704,15 +1740,15 @@ msgstr "Tipos de aulas con problemas..."
 
 #: uttgconsts.ssavechanges
 msgid "Desea guardar los cambios efectuados?"
-msgstr ""
+msgstr "Desea guardar los cambios efectuados?"
 
 #: uttgconsts.ssavedialogfilter
 msgid "TimeTable para colegio (*.ttd)|*.ttd"
-msgstr ""
+msgstr "TimeTable para colegio (*.ttd)|*.ttd"
 
 #: uttgconsts.ssearchby
 msgid "Buscar por %s"
-msgstr ""
+msgstr "Buscar por %s"
 
 #: uttgconsts.steacherrestrictionshead
 msgid "Teacher; Restrictions"
@@ -1732,15 +1768,24 @@ msgstr "Profesor; Carga horaria"
 
 #: uttgconsts.sthenexttimetablesalreadyexists
 msgid "Los siguientes horarios ya existian: %s"
-msgstr ""
+msgstr "Los siguientes horarios ya existian: %s"
 
 #: uttgconsts.stimetablecodestogenerate
 msgid "Codigos de los Horarios a generar"
-msgstr ""
+msgstr "Codigos de los Horarios a generar"
 
 #: uttgconsts.stotalvalue
 msgid "Total Value"
-msgstr ""
+msgstr "Total Value"
+
+#: uttgconsts.svalue
+msgctxt "uttgconsts.svalue"
+msgid "Value"
+msgstr "Valor"
+
+#: uttgconsts.sweight
+msgid "Peso"
+msgstr "Peso"
 
 #: uttgconsts.sweights
 msgctxt "uttgconsts.sweights"
@@ -1749,5 +1794,9 @@ msgstr "Pesos"
 
 #: uttgconsts.sworkinprogress
 msgid "Elaboracion en progreso [%d]"
-msgstr ""
+msgstr "Elaboracion en progreso [%d]"
+
+#: uttgconsts.swrongcomposition
+msgid "Composicion Erroea"
+msgstr "Composicion Erroea"
 
