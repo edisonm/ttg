@@ -1637,12 +1637,10 @@ msgid "Mutation Probability"
 msgstr "Probabilidad de Mutacion"
 
 #: uttgconsts.snoerrorreadyforchecksummary
-msgid ""
-"Not errors found, ready to generate timetable.\n"
-"Do you want to show the timetable check Summary?\n"
+msgid "Ready to generate timetable. Show timetable check Summary?"
 msgstr ""
-"No se encontraron errores, esta listo para generar horario.\n"
-"Desea mostrar el resumen del chequeo del horario?\n"
+"Listo para generar horario.\n"
+"Muestro el resumen del chequeo del horario?\n"
 
 #: uttgconsts.snonscatteredsubject
 msgid "Non Scattered Subjects"
@@ -1661,12 +1659,8 @@ msgid "Out of position empty hours"
 msgstr "Horas huecas desubicadas"
 
 #: uttgconsts.spendingchangeswillbelostyoureallywanttoquit
-msgid ""
-"Pending changes will be lost.\n"
-"You really want to quit?\n"
-msgstr ""
-"Los cambios realizados hasta el momento se perderan.\n"
-"Esta seguro que desea cerrar el programa?\n"
+msgid "Pending changes will be lost. You really want to quit?"
+msgstr "Los cambios pendientes se perderan. Seguro que desea salir?"
 
 #: uttgconsts.spollinationprob
 msgid "Pollination Probability"

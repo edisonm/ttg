@@ -1637,9 +1637,7 @@ msgid "Mutation Probability"
 msgstr ""
 
 #: uttgconsts.snoerrorreadyforchecksummary
-msgid ""
-"Not errors found, ready to generate timetable.\n"
-"Do you want to show the timetable check Summary?\n"
+msgid "Ready to generate timetable. Show timetable check Summary?"
 msgstr ""
 
 #: uttgconsts.snonscatteredsubject
@@ -1659,9 +1657,7 @@ msgid "Out of position empty hours"
 msgstr ""
 
 #: uttgconsts.spendingchangeswillbelostyoureallywanttoquit
-msgid ""
-"Pending changes will be lost.\n"
-"You really want to quit?\n"
+msgid "Pending changes will be lost. You really want to quit?"
 msgstr ""
 
 #: uttgconsts.spollinationprob

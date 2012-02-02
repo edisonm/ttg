@@ -28,11 +28,9 @@ resourcestring
   SInvalidData = 'Invalid input data';
   STheNextTimeTablesAlreadyExists = 'The next Timetables already exists: %s';
   SNoErrorReadyForCheckSummary =
-    'Not errors found, ready to generate timetable.'#13#10
-    + 'Do you want to show the timetable check Summary?';
+    'Ready to generate timetable. Show timetable check Summary?';
   SPendingChangesWillBeLostYouReallyWantToQuit =
-    'Pending changes will be lost.'#13#10 +
-    'You really want to quit?';
+    'Pending changes will be lost. You really want to quit?';
   SReady = 'Ready';
   SSaveDialogFilter =  'High School Timetable (*.ttd)|*.ttd';
   SChangesWillBeLostWarning = 'Changes will be lost, are you sure?';
