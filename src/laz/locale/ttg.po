@@ -610,6 +610,7 @@ msgid "Options"
 msgstr ""
 
 #: TCONFIGURACIONFORM.TBSWEIGTHS.CAPTION
+msgctxt "TCONFIGURACIONFORM.TBSWEIGTHS.CAPTION"
 msgid "Weights"
 msgstr ""
 

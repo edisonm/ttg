@@ -610,6 +610,7 @@ msgid "Options"
 msgstr "Opciones"
 
 #: TCONFIGURACIONFORM.TBSWEIGTHS.CAPTION
+msgctxt "TCONFIGURACIONFORM.TBSWEIGTHS.CAPTION"
 msgid "Weights"
 msgstr "Pesos"
 
@@ -1769,3 +1770,4 @@ msgstr "Elaboracion en progreso [%d]"
 #: uttgconsts.swrongcomposition
 msgid "Wrong Composition"
 msgstr "Composicion Erroea"
+
