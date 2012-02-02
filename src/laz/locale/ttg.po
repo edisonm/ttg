@@ -430,11 +430,13 @@ msgctxt "TCONFIGURACIONFORM.BBTOK.CAPTION"
 msgid "Ok"
 msgstr ""
 
-#: TCONFIGURACIONFORM.CBAPPLYDOUBLEDOWNHILL.CAPTION
+#: TCONFIGURACIONFORM.CBXAPPLYDOUBLEDOWNHILL.CAPTION
+msgctxt "TCONFIGURACIONFORM.CBXAPPLYDOUBLEDOWNHILL.CAPTION"
 msgid "Aplicar descenso (lento)"
 msgstr ""
 
-#: TCONFIGURACIONFORM.CBRANDOMIZE.CAPTION
+#: TCONFIGURACIONFORM.CBXRANDOMIZE.CAPTION
+msgctxt "TCONFIGURACIONFORM.CBXRANDOMIZE.CAPTION"
 msgid "Inicializar con la hora del sistema"
 msgstr ""
 
@@ -455,18 +457,6 @@ msgstr ""
 msgid "Clash Teachers:"
 msgstr ""
 
-#: TCONFIGURACIONFORM.LABEL10.CAPTION
-msgid "Prob. Cruce:"
-msgstr ""
-
-#: TCONFIGURACIONFORM.LABEL11.CAPTION
-msgid "Prob. Mutacion:"
-msgstr ""
-
-#: TCONFIGURACIONFORM.LABEL12.CAPTION
-msgid "Prob. Reparacion:"
-msgstr ""
-
 #: TCONFIGURACIONFORM.LABEL13.CAPTION
 msgid "Iteraciones:"
 msgstr ""
@@ -477,10 +467,6 @@ msgstr ""
 
 #: TCONFIGURACIONFORM.LABEL18.CAPTION
 msgid "Teacher Restrictions:"
-msgstr ""
-
-#: TCONFIGURACIONFORM.LABEL19.CAPTION
-msgid "Semilla:"
 msgstr ""
 
 #: TCONFIGURACIONFORM.LABEL2.CAPTION
@@ -505,10 +491,6 @@ msgstr ""
 
 #: TCONFIGURACIONFORM.LABEL42.CAPTION
 msgid "Dir. de intercambio:"
-msgstr ""
-
-#: TCONFIGURACIONFORM.LABEL43.CAPTION
-msgid "Prob. Polinizacion:"
 msgstr ""
 
 #: TCONFIGURACIONFORM.LABEL8.CAPTION
@@ -536,6 +518,11 @@ msgstr ""
 msgid "Comments:"
 msgstr ""
 
+#: TCONFIGURACIONFORM.LBLCROSSPROB.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLCROSSPROB.CAPTION"
+msgid "Prob. Cruce:"
+msgstr ""
+
 #: TCONFIGURACIONFORM.LBLEMPTYHOURS.CAPTION
 msgid "Empty hours:"
 msgstr ""
@@ -554,6 +541,21 @@ msgstr ""
 msgid "Max work load per teacher:"
 msgstr ""
 
+#: TCONFIGURACIONFORM.LBLMUTATIONPROB.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLMUTATIONPROB.CAPTION"
+msgid "Prob. Mutacion:"
+msgstr ""
+
+#: TCONFIGURACIONFORM.LBLPOLLINATIONPROB.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLPOLLINATIONPROB.CAPTION"
+msgid "Prob. Polinizacion:"
+msgstr ""
+
+#: TCONFIGURACIONFORM.LBLREPAIRPROB.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLREPAIRPROB.CAPTION"
+msgid "Prob. Reparacion:"
+msgstr ""
+
 #: TCONFIGURACIONFORM.LBLRESPONSIBLE.CAPTION
 msgid "Responsible:"
 msgstr ""
@@ -565,6 +567,11 @@ msgstr ""
 
 #: TCONFIGURACIONFORM.LBLSCHOOLYEAR.CAPTION
 msgid "School Year:"
+msgstr ""
+
+#: TCONFIGURACIONFORM.LBLSEED.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLSEED.CAPTION"
+msgid "Semilla:"
 msgstr ""
 
 #: TCONFIGURACIONFORM.LBLSRCOLOR.CAPTION

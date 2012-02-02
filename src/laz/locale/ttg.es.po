@@ -430,11 +430,13 @@ msgctxt "TCONFIGURACIONFORM.BBTOK.CAPTION"
 msgid "Ok"
 msgstr "Aceptar"
 
-#: TCONFIGURACIONFORM.CBAPPLYDOUBLEDOWNHILL.CAPTION
+#: TCONFIGURACIONFORM.CBXAPPLYDOUBLEDOWNHILL.CAPTION
+msgctxt "TCONFIGURACIONFORM.CBXAPPLYDOUBLEDOWNHILL.CAPTION"
 msgid "Aplicar descenso (lento)"
 msgstr "Aplicar descenso (lento)"
 
-#: TCONFIGURACIONFORM.CBRANDOMIZE.CAPTION
+#: TCONFIGURACIONFORM.CBXRANDOMIZE.CAPTION
+msgctxt "TCONFIGURACIONFORM.CBXRANDOMIZE.CAPTION"
 msgid "Inicializar con la hora del sistema"
 msgstr "Inicializar con la hora del sistema"
 
@@ -455,18 +457,6 @@ msgstr "Colegio|Nombre del colegio"
 msgid "Clash Teachers:"
 msgstr "Cruce profesores:"
 
-#: TCONFIGURACIONFORM.LABEL10.CAPTION
-msgid "Prob. Cruce:"
-msgstr "Prob. Cruce:"
-
-#: TCONFIGURACIONFORM.LABEL11.CAPTION
-msgid "Prob. Mutacion:"
-msgstr "Prob. Mutacion:"
-
-#: TCONFIGURACIONFORM.LABEL12.CAPTION
-msgid "Prob. Reparacion:"
-msgstr "Prob. Reparacion:"
-
 #: TCONFIGURACIONFORM.LABEL13.CAPTION
 msgid "Iteraciones:"
 msgstr "Iteraciones:"
@@ -478,10 +468,6 @@ msgstr "Prohibiciones de materia:"
 #: TCONFIGURACIONFORM.LABEL18.CAPTION
 msgid "Teacher Restrictions:"
 msgstr "Prohibiciones de profesor:"
-
-#: TCONFIGURACIONFORM.LABEL19.CAPTION
-msgid "Semilla:"
-msgstr "Semilla:"
 
 #: TCONFIGURACIONFORM.LABEL2.CAPTION
 msgid "Clash Rooms:"
@@ -506,10 +492,6 @@ msgstr "Horarios iniciales:"
 #: TCONFIGURACIONFORM.LABEL42.CAPTION
 msgid "Dir. de intercambio:"
 msgstr "Dir. de intercambio:"
-
-#: TCONFIGURACIONFORM.LABEL43.CAPTION
-msgid "Prob. Polinizacion:"
-msgstr "Prob. Polinizacion:"
 
 #: TCONFIGURACIONFORM.LABEL8.CAPTION
 msgid "Individuos:"
@@ -536,6 +518,11 @@ msgstr "Fracc. profesores:"
 msgid "Comments:"
 msgstr "Comentarios:"
 
+#: TCONFIGURACIONFORM.LBLCROSSPROB.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLCROSSPROB.CAPTION"
+msgid "Prob. Cruce:"
+msgstr "Prob. Cruce:"
+
 #: TCONFIGURACIONFORM.LBLEMPTYHOURS.CAPTION
 msgid "Empty hours:"
 msgstr "Horas huecas:"
@@ -554,6 +541,21 @@ msgstr "Materias juntas:"
 msgid "Max work load per teacher:"
 msgstr "Carga Maxima por Profesor:"
 
+#: TCONFIGURACIONFORM.LBLMUTATIONPROB.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLMUTATIONPROB.CAPTION"
+msgid "Prob. Mutacion:"
+msgstr "Prob. Mutacion:"
+
+#: TCONFIGURACIONFORM.LBLPOLLINATIONPROB.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLPOLLINATIONPROB.CAPTION"
+msgid "Prob. Polinizacion:"
+msgstr "Prob. Polinizacion:"
+
+#: TCONFIGURACIONFORM.LBLREPAIRPROB.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLREPAIRPROB.CAPTION"
+msgid "Prob. Reparacion:"
+msgstr "Prob. Reparacion:"
+
 #: TCONFIGURACIONFORM.LBLRESPONSIBLE.CAPTION
 msgid "Responsible:"
 msgstr "Responsable:"
@@ -566,6 +568,11 @@ msgstr "Cargo:"
 #: TCONFIGURACIONFORM.LBLSCHOOLYEAR.CAPTION
 msgid "School Year:"
 msgstr "Periodo Lectivo:"
+
+#: TCONFIGURACIONFORM.LBLSEED.CAPTION
+msgctxt "TCONFIGURACIONFORM.LBLSEED.CAPTION"
+msgid "Semilla:"
+msgstr "Semilla:"
 
 #: TCONFIGURACIONFORM.LBLSRCOLOR.CAPTION
 msgctxt "TCONFIGURACIONFORM.LBLSRCOLOR.CAPTION"

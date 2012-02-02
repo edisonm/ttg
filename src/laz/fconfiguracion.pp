@@ -16,19 +16,19 @@ type
 
   TConfiguracionForm = class(TForm)
     bbtOk: TBitBtn;
-    CBApplyDoubleDownHill: TCheckBox;
+    cbxApplyDoubleDownHill: TCheckBox;
     creClashSubject: TEdit;
     creProbCruzamiento: TEdit;
     creMutationProb: TEdit;
-    creProbReparacion: TEdit;
+    creProbRepair: TEdit;
     edBookmarks: TEdit;
-    Label10: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
+    lblCrossProb: TLabel;
+    lblMutationProb: TLabel;
+    lblRepairProb: TLabel;
     Label13: TLabel;
     Label20: TLabel;
     Label21: TLabel;
-    Label43: TLabel;
+    lblPollinationProb: TLabel;
     Label8: TLabel;
     lblMaxWorkLoadPerTeacher: TLabel;
     pgcConfig: TPageControl;
@@ -56,8 +56,8 @@ type
     Label15: TLabel;
     Label18: TLabel;
     tbsOptions: TTabSheet;
-    CBRandomize: TCheckBox;
-    Label19: TLabel;
+    cbxRandomize: TCheckBox;
+    lblSeed: TLabel;
     speSeed: TSpinEdit;
     lblResponsible: TLabel;
     edtNaResponsable: TEdit;
@@ -94,7 +94,7 @@ type
     DSSubjectRestrictionType: TDataSource;
     DSTeacherRestrictionType: TDataSource;
     CBColTeacherRestrictionType: TColorBox;
-    procedure CBRandomizeClick(Sender: TObject);
+    procedure cbxRandomizeClick(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DSSubjectRestrictionTypeDataChange(Sender: TObject;
@@ -157,7 +157,7 @@ begin
   DBGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
-procedure TConfiguracionForm.CBRandomizeClick(Sender: TObject);
+procedure TConfiguracionForm.cbxRandomizeClick(Sender: TObject);
 begin
   with (Sender as TCheckbox) do
   begin
@@ -177,7 +177,7 @@ begin
       edtCarResponsable.Text := CarResponsable;
       speMaxCargaTeacher.Value := MaxCargaTeacher;
       memComentarios.Lines.Text := Comentarios;
-      CBRandomize.Checked := Randomize;
+      cbxRandomize.Checked := Randomize;
       speSeed.Value := Seed;
       speNumIteraciones.Value := RefreshInterval;
       creClashTeacher.Text := FloatToStr(ClashTeacher);
@@ -191,11 +191,11 @@ begin
       speNumMaxGeneracion.Value := MaxIteration;
       creProbCruzamiento.Text := FloatToStr(CrossProb);
       creMutationProb.Text := FloatToStr(MutationProb);
-      creProbReparacion.Text := FloatToStr(RepairProb);
+      creProbRepair.Text := FloatToStr(RepairProb);
       edtTimeTableIni.Text := TimeTableIni;
       dedSharedDirectory.Directory := SharedDirectory;
       crePollinationProb.Text := FloatToStr(PollinationProb);
-      CBApplyDoubleDownHill.Checked := ApplyDoubleDownHill;
+      cbxApplyDoubleDownHill.Checked := ApplyDoubleDownHill;
       edBookmarks.Text := Bookmarks;
    end;
 end;
@@ -212,7 +212,7 @@ begin
       CarResponsable := edtCarResponsable.Text;
       MaxCargaTeacher := speMaxCargaTeacher.Value;
       Comentarios := memComentarios.Lines.Text;
-      Randomize := CBRandomize.Checked;
+      Randomize := cbxRandomize.Checked;
       Seed := speSeed.Value;
       RefreshInterval := speNumIteraciones.Value;
       ClashTeacher := StrToInt(creClashTeacher.Text);
@@ -226,11 +226,11 @@ begin
       MaxIteration := speNumMaxGeneracion.Value;
       CrossProb := StrToFloat(creProbCruzamiento.Text);
       MutationProb := StrToFloat(creMutationProb.Text);
-      RepairProb := StrToFloat(creProbReparacion.Text);
+      RepairProb := StrToFloat(creProbRepair.Text);
       TimeTableIni := edtTimeTableIni.Text;
       SharedDirectory := dedSharedDirectory.Directory;
       PollinationProb := StrToFloat(crePollinationProb.Text);
-      ApplyDoubleDownHill := CBApplyDoubleDownHill.Checked;
+      ApplyDoubleDownHill := cbxApplyDoubleDownHill.Checked;
       Bookmarks := edBookmarks.Text;
    end;
 end;
