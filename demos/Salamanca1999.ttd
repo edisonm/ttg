@@ -2438,7 +2438,7 @@ TimeTableDetail
 NaInstitution=Colegio Nacional Mixto Nocturno Salamanca
 SchoolYear=1999-2000
 NameAuthority=Dr. Edgar Velasco
-PosAuthority=Rector
+PositionAuthority=Rector
 NameResponsible=Ing. Edison Mera
 PositionResponsible=Prof. Suplente
 MaxTeacherWorkLoad=23

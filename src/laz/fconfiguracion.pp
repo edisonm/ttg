@@ -65,7 +65,7 @@ type
     edtPositionResponsible: TEdit;
     lblAuthority: TLabel;
     edtNameAuthority: TEdit;
-    edtPosAuthority: TEdit;
+    edtPositionAuthority: TEdit;
     lblAuthorityPosition: TLabel;
     Label29: TLabel;
     speNumIterations: TSpinEdit;
@@ -172,7 +172,7 @@ begin
       edtNaInstitution.Text := NaInstitution;
       edtSchoolYear.Text := SchoolYear;
       edtNameAuthority.Text := NameAuthority;
-      edtPosAuthority.Text := PosAuthority;
+      edtPositionAuthority.Text := PositionAuthority;
       edtNameResponsible.Text := NameResponsible;
       edtPositionResponsible.Text := PositionResponsible;
       speMaxTeacherWorkLoad.Value := MaxTeacherWorkLoad;
@@ -207,7 +207,7 @@ begin
       NaInstitution := edtNaInstitution.Text;
       SchoolYear := edtSchoolYear.Text;
       NameAuthority := edtNameAuthority.Text;
-      PosAuthority := edtPosAuthority.Text;
+      PositionAuthority := edtPositionAuthority.Text;
       NameResponsible := edtNameResponsible.Text;
       PositionResponsible := edtPositionResponsible.Text;
       MaxTeacherWorkLoad := speMaxTeacherWorkLoad.Value;

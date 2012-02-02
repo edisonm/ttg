@@ -22,8 +22,8 @@ type
     procedure SetSchoolYear(const Value: string);
     function GetNameAuthority: string;
     procedure SetNameAuthority(const Value: string);
-    function GetPosAuthority: string;
-    procedure SetPosAuthority(const Value: string);
+    function GetPositionAuthority: string;
+    procedure SetPositionAuthority(const Value: string);
     function GetNameResponsible: string;
     procedure SetNameResponsible(const Value: string);
     function GetPositionResponsible: string;
@@ -76,7 +76,7 @@ type
     property NaInstitution: string read GetNaInstitution write SetNaInstitution;
     property SchoolYear: string read GetSchoolYear write SetSchoolYear;
     property NameAuthority: string read GetNameAuthority write SetNameAuthority;
-    property PosAuthority: string read GetPosAuthority write SetPosAuthority;
+    property PositionAuthority: string read GetPositionAuthority write SetPositionAuthority;
     property NameResponsible: string read GetNameResponsible write SetNameResponsible;
     property PositionResponsible: string read GetPositionResponsible write SetPositionResponsible;
     property MaxTeacherWorkLoad: Integer read GetMaxTeacherWorkLoad write SetMaxTeacherWorkLoad;
@@ -145,14 +145,14 @@ begin
    Values['NameAuthority'] := Value;
 end;
 
-function TTTGConfig.GetPosAuthority: string;
+function TTTGConfig.GetPositionAuthority: string;
 begin
-   Result := Values['PosAuthority'];
+   Result := Values['PositionAuthority'];
 end;
 
-procedure TTTGConfig.SetPosAuthority(const Value: string);
+procedure TTTGConfig.SetPositionAuthority(const Value: string);
 begin
-   Values['PosAuthority'] := Value;
+   Values['PositionAuthority'] := Value;
 end;
 
 function TTTGConfig.GetNameResponsible: string;
@@ -391,7 +391,7 @@ begin
   NaInstitution := '';
   SchoolYear := '';
   NameAuthority := '';
-  PosAuthority := '';
+  PositionAuthority := '';
   NameResponsible := '';
   PositionResponsible := '';
   MaxTeacherWorkLoad := 20;

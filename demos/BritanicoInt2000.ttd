@@ -1369,7 +1369,7 @@ TimeTableDetail
 NaInstitution=Colegio Experimental Británico Internacional
 SchoolYear=2000-2001
 NameAuthority=Dr. Benjamín Tobar
-PosAuthority=Rector
+PositionAuthority=Rector
 NameResponsible=Comisión
 PositionResponsible=Comisión
 MaxTeacherWorkLoad=35
