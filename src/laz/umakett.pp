@@ -219,7 +219,7 @@ begin
   FreeOnTerminate := True;
   with MasterDataModule.ConfigStorage do
     FTimeTableModel := TTimeTableModel.Create(ClashTeacher,
-      ClashSubject, ClashRoomType, TeacherFraccionamiento, OutOfPositionEmptyHour,
+      ClashSubject, ClashRoomType, BrokenTTTeacher, OutOfPositionEmptyHour,
       BrokenSession, NonScatteredSubject);
   SetLength(FValidIdes, Length(AValidIdes));
   // ProcThreadPool.MaxThreadCount := Length(AValidIdes);
@@ -325,7 +325,7 @@ begin
   FIdTimeTable := AIdTimeTable;
   with MasterDataModule.ConfigStorage do
     FTimeTableModel := TTimeTableModel.Create(ClashTeacher,
-      ClashSubject, ClashRoomType, TeacherFraccionamiento, OutOfPositionEmptyHour,
+      ClashSubject, ClashRoomType, BrokenTTTeacher, OutOfPositionEmptyHour,
       BrokenSession, NonScatteredSubject);
   inherited Create(CreateSuspended);
 end;

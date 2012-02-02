@@ -20,18 +20,18 @@ type
     procedure SetNaInstitution(const Value: string);
     function GetAnioLectivo: string;
     procedure SetAnioLectivo(const Value: string);
-    function GetNaAutoridad: string;
-    procedure SetNaAutoridad(const Value: string);
-    function GetCarAutoridad: string;
-    procedure SetCarAutoridad(const Value: string);
-    function GetNaResponsable: string;
-    procedure SetNaResponsable(const Value: string);
-    function GetCarResponsable: string;
-    procedure SetCarResponsable(const Value: string);
-    function GetMaxCargaTeacher: Integer;
-    procedure SetMaxCargaTeacher(Value: Integer);
-    function GetComentarios: string;
-    procedure SetComentarios(const Value: string);
+    function GetNaAuthority: string;
+    procedure SetNaAuthority(const Value: string);
+    function GetPosAuthority: string;
+    procedure SetPosAuthority(const Value: string);
+    function GetNaResponsible: string;
+    procedure SetNaResponsible(const Value: string);
+    function GetPosResponsible: string;
+    procedure SetPosResponsible(const Value: string);
+    function GetMaxTeacherWorkLoad: Integer;
+    procedure SetMaxTeacherWorkLoad(Value: Integer);
+    function GetComments: string;
+    procedure SetComments(const Value: string);
     function GetRandomize: Boolean;
     procedure SetRandomize(Value: Boolean);
     function GetSeed: Integer;
@@ -42,8 +42,8 @@ type
     procedure SetClashTeacher(Value: Integer);
     function GetClashSubject: Integer;
     procedure SetClashSubject(Value: Integer);
-    function GetTeacherFraccionamiento: Integer;
-    procedure SetTeacherFraccionamiento(Value: Integer);
+    function GetBrokenTTTeacher: Integer;
+    procedure SetBrokenTTTeacher(Value: Integer);
     function GetClashRoomType: Integer;
     procedure SetClashRoomType(Value: Integer);
     function GetOutOfPositionEmptyHour: Integer;
@@ -56,8 +56,8 @@ type
     procedure SetPopulationSize(Value: Integer);
     function GetMaxIteration: Integer;
     procedure SetMaxIteration(Value: Integer);
-    function GetProbCruzamiento: Double;
-    procedure SetProbCruzamiento(Value: Double);
+    function GetCrossProb: Double;
+    procedure SetCrossProb(Value: Double);
     function GetMutation1Prob: Double;
     procedure SetMutation1Prob(Value: Double);
     function GetRepairProb: Double;
@@ -75,25 +75,25 @@ type
     procedure InitRandom;
     property NaInstitution: string read GetNaInstitution write SetNaInstitution;
     property AnioLectivo: string read GetAnioLectivo write SetAnioLectivo;
-    property NaAutoridad: string read GetNaAutoridad write SetNaAutoridad;
-    property CarAutoridad: string read GetCarAutoridad write SetCarAutoridad;
-    property NaResponsable: string read GetNaResponsable write SetNaResponsable;
-    property CarResponsable: string read GetCarResponsable write SetCarResponsable;
-    property MaxCargaTeacher: Integer read GetMaxCargaTeacher write SetMaxCargaTeacher;
-    property Comentarios: string read GetComentarios write SetComentarios;
+    property NaAuthority: string read GetNaAuthority write SetNaAuthority;
+    property PosAuthority: string read GetPosAuthority write SetPosAuthority;
+    property NaResponsible: string read GetNaResponsible write SetNaResponsible;
+    property PosResponsible: string read GetPosResponsible write SetPosResponsible;
+    property MaxTeacherWorkLoad: Integer read GetMaxTeacherWorkLoad write SetMaxTeacherWorkLoad;
+    property Comments: string read GetComments write SetComments;
     property Randomize: Boolean read GetRandomize write SetRandomize;
     property Seed: Integer read GetSeed write SetSeed;
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
     property ClashTeacher: Integer read GetClashTeacher write SetClashTeacher;
     property ClashSubject: Integer read GetClashSubject write SetClashSubject;
-    property TeacherFraccionamiento: Integer read GetTeacherFraccionamiento write SetTeacherFraccionamiento;
+    property BrokenTTTeacher: Integer read GetBrokenTTTeacher write SetBrokenTTTeacher;
     property ClashRoomType: Integer read GetClashRoomType write SetClashRoomType;
     property OutOfPositionEmptyHour: Integer read GetOutOfPositionEmptyHour write SetOutOfPositionEmptyHour;
     property BrokenSession: Integer read GetBrokenSession write SetBrokenSession;
     property NonScatteredSubject: Integer read GetNonScatteredSubject write SetNonScatteredSubject;
     property PopulationSize: Integer read GetPopulationSize write SetPopulationSize;
     property MaxIteration: Integer read GetMaxIteration write SetMaxIteration;
-    property CrossProb: Double read GetProbCruzamiento write SetProbCruzamiento;
+    property CrossProb: Double read GetCrossProb write SetCrossProb;
     property MutationProb: Double read GetMutation1Prob write SetMutation1Prob;
     property RepairProb: Double read GetRepairProb write SetRepairProb;
     property TimeTableIni: string read GetTimeTableIni write SetTimeTableIni;
@@ -135,64 +135,64 @@ begin
    Values['AnioLectivo'] := Value;
 end;
 
-function TTTGConfig.GetNaAutoridad: string;
+function TTTGConfig.GetNaAuthority: string;
 begin
-   Result := Values['NaAutoridad'];
+   Result := Values['NaAuthority'];
 end;
 
-procedure TTTGConfig.SetNaAutoridad(const Value: string);
+procedure TTTGConfig.SetNaAuthority(const Value: string);
 begin
-   Values['NaAutoridad'] := Value;
+   Values['NaAuthority'] := Value;
 end;
 
-function TTTGConfig.GetCarAutoridad: string;
+function TTTGConfig.GetPosAuthority: string;
 begin
-   Result := Values['CarAutoridad'];
+   Result := Values['PosAuthority'];
 end;
 
-procedure TTTGConfig.SetCarAutoridad(const Value: string);
+procedure TTTGConfig.SetPosAuthority(const Value: string);
 begin
-   Values['CarAutoridad'] := Value;
+   Values['PosAuthority'] := Value;
 end;
 
-function TTTGConfig.GetNaResponsable: string;
+function TTTGConfig.GetNaResponsible: string;
 begin
-   Result := Values['NaResponsable'];
+   Result := Values['NaResponsible'];
 end;
 
-procedure TTTGConfig.SetNaResponsable(const Value: string);
+procedure TTTGConfig.SetNaResponsible(const Value: string);
 begin
-   Values['NaResponsable'] := Value;
+   Values['NaResponsible'] := Value;
 end;
 
-function TTTGConfig.GetCarResponsable: string;
+function TTTGConfig.GetPosResponsible: string;
 begin
-   Result := Values['CarResponsable'];
+   Result := Values['PosResponsible'];
 end;
 
-procedure TTTGConfig.SetCarResponsable(const Value: string);
+procedure TTTGConfig.SetPosResponsible(const Value: string);
 begin
-   Values['CarResponsable'] := Value;
+   Values['PosResponsible'] := Value;
 end;
 
-function TTTGConfig.GetMaxCargaTeacher: Integer;
+function TTTGConfig.GetMaxTeacherWorkLoad: Integer;
 begin
-   Result := Integers['MaxCargaTeacher'];
+   Result := Integers['MaxTeacherWorkLoad'];
 end;
 
-procedure TTTGConfig.SetMaxCargaTeacher(Value: Integer);
+procedure TTTGConfig.SetMaxTeacherWorkLoad(Value: Integer);
 begin
-   Integers['MaxCargaTeacher'] := Value;
+   Integers['MaxTeacherWorkLoad'] := Value;
 end;
 
-function TTTGConfig.GetComentarios: string;
+function TTTGConfig.GetComments: string;
 begin
-   Result := Texts['Comentarios'];
+   Result := Texts['Comments'];
 end;
 
-procedure TTTGConfig.SetComentarios(const Value: string);
+procedure TTTGConfig.SetComments(const Value: string);
 begin
-  Texts['Comentarios'] := Value;
+  Texts['Comments'] := Value;
 end;
 
 function TTTGConfig.GetRandomize: Boolean;
@@ -217,12 +217,12 @@ end;
 
 function TTTGConfig.GetRefreshInterval: Integer;
 begin
-  Result := Integers['NumIteraciones'];
+  Result := Integers['NumIterations'];
 end;
 
 procedure TTTGConfig.SetRefreshInterval(Value: Integer);
 begin
-  Integers['NumIteraciones'] := Value;
+  Integers['NumIterations'] := Value;
 end;
 
 function TTTGConfig.GetClashTeacher: Integer;
@@ -245,14 +245,14 @@ begin
   Integers['ClashSubject'] := Value;
 end;
 
-function TTTGConfig.GetTeacherFraccionamiento: Integer;
+function TTTGConfig.GetBrokenTTTeacher: Integer;
 begin
-  Result := Integers['TeacherFraccionamiento'];
+  Result := Integers['BrokenTTTeacher'];
 end;
 
-procedure TTTGConfig.SetTeacherFraccionamiento(Value: Integer);
+procedure TTTGConfig.SetBrokenTTTeacher(Value: Integer);
 begin
-  Integers['TeacherFraccionamiento'] := Value;
+  Integers['BrokenTTTeacher'] := Value;
 end;
 
 function TTTGConfig.GetClashRoomType: Integer;
@@ -315,24 +315,24 @@ begin
   Integers['NumMaxGeneracion'] := Value;
 end;
 
-function TTTGConfig.GetProbCruzamiento: Double;
+function TTTGConfig.GetCrossProb: Double;
 begin
-  Result := Floats['ProbCruzamiento'];
+  Result := Floats['CrossProb'];
 end;
 
-procedure TTTGConfig.SetProbCruzamiento(Value: Double);
+procedure TTTGConfig.SetCrossProb(Value: Double);
 begin
-  Floats['ProbCruzamiento'] := Value;
+  Floats['CrossProb'] := Value;
 end;
 
 function TTTGConfig.GetMutation1Prob: Double;
 begin
-  Result := Floats['ProbMutacion1'];
+  Result := Floats['MutationProb1'];
 end;
 
 procedure TTTGConfig.SetMutation1Prob(Value: Double);
 begin
-  Floats['ProbMutacion1'] := Value;
+  Floats['MutationProb1'] := Value;
 end;
 
 function TTTGConfig.GetRepairProb: Double;
@@ -390,18 +390,18 @@ begin
   // Default configuration
   NaInstitution := '';
   AnioLectivo := '';
-  NaAutoridad := '';
-  CarAutoridad := '';
-  NaResponsable := '';
-  CarResponsable := '';
-  MaxCargaTeacher := 20;
-  Comentarios := '';
+  NaAuthority := '';
+  PosAuthority := '';
+  NaResponsible := '';
+  PosResponsible := '';
+  MaxTeacherWorkLoad := 20;
+  Comments := '';
   Randomize := True;
   Self.Seed := 1;
   RefreshInterval := 1;
   ClashTeacher := 200;
   ClashSubject := 200;
-  TeacherFraccionamiento := 50;
+  BrokenTTTeacher := 50;
   ClashRoomType := 200;
   OutOfPositionEmptyHour := 100;
   BrokenSession := 150;

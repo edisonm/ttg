@@ -701,7 +701,7 @@ begin
   MessageViewForm.HelpContext := ActChequearFactibilidad.HelpContext;
   if MasterDataModule.PerformAllChecks(MessageViewForm.MemLog.Lines,
                                        MessageViewForm.MemSummary.Lines,
-                                       MasterDataModule.ConfigStorage.MaxCargaTeacher) then
+                                       MasterDataModule.ConfigStorage.MaxTeacherWorkLoad) then
   begin
     MessageViewForm.Show;
   end

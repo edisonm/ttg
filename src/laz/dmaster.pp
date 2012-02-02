@@ -14,11 +14,11 @@ type
   { TMasterDataModule }
 
   TMasterDataModule = class(TDataModule)
-    TbTmpTeacherCarga: TZTable;
-    TbTmpTeacherCargaIdTeacher: TLongintField;
-    TbTmpTeacherCargaNaTeacher: TStringField;
-    TbTmpTeacherCargaLnTeacher: TStringField;
-    TbTmpTeacherCargaCarga: TLongintField;
+    TbTmpTeacherWorkLoad: TZTable;
+    TbTmpTeacherWorkLoadIdTeacher: TLongintField;
+    TbTmpTeacherWorkLoadNaTeacher: TStringField;
+    TbTmpTeacherWorkLoadLnTeacher: TStringField;
+    TbTmpTeacherWorkLoadWorkLoad: TLongintField;
     QuDistributionTeacher: TZTable;
     QuDistributionTeacherIdSubject: TLongintField;
     QuDistributionTeacherIdLevel: TLongintField;
@@ -33,10 +33,10 @@ type
     QuTeacherRestrictionCant: TZTable;
     QuTeacherRestrictionCantIdTeacher: TLongintField;
     QuTeacherRestrictionCantNumber: TLongintField;
-    TbTmpRoomTypeCarga: TZTable;
-    TbTmpRoomTypeCargaIdRoomType: TLongintField;
-    TbTmpRoomTypeCargaAbRoomType: TStringField;
-    TbTmpRoomTypeCargaCarga: TLongintField;
+    TbTmpRoomTypeLoad: TZTable;
+    TbTmpRoomTypeLoadIdRoomType: TLongintField;
+    TbTmpRoomTypeLoadAbRoomType: TStringField;
+    TbTmpRoomTypeLoadLoad: TLongintField;
     QuNewIdTimeTable: TZReadOnlyQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
@@ -53,7 +53,7 @@ type
     procedure IntercambiarTimeSlots(AIdTimeTable, AIdLevel, AIdSpecialization,
       AIdGroupId, AIdDay1, AIdHour1, AIdDay2, AIdHour2: Integer);
     function PerformAllChecks(AMainStrings, ASubStrings: TStrings;
-      AMaxCargaTeacher: Integer): Boolean;
+      AMaxTeacherWorkLoad: Integer): Boolean;
     function NewIdTimeTable: Integer;
     procedure SaveToStrings(AStrings: TStrings);
     procedure SaveIniStrings(AStrings: TStrings);
@@ -120,7 +120,7 @@ begin
 end;
 
 function TMasterDataModule.PerformAllChecks(AMainStrings, ASubStrings:
-  TStrings; AMaxCargaTeacher: Integer): Boolean;
+  TStrings; AMaxTeacherWorkLoad: Integer): Boolean;
 var
   HuboProblemas: Boolean;
   iTimeSlotCant: Integer;
@@ -128,7 +128,7 @@ var
   begin
     iTimeSlotCant := SourceDataModule.TbTimeSlot.RecordCount;
   end;
-  procedure ObtenerTeacherCarga;
+  procedure ObtenerTeacherWorkLoad;
   var
     IdTeacher, IdTeacher1: Integer;
     s: string;
@@ -138,40 +138,40 @@ var
       s := IndexFieldNames;
       IndexFieldNames := 'IdTeacher';
       First;
-      TbTmpTeacherCarga.Open;
+      TbTmpTeacherWorkLoad.Open;
       IdTeacher := -$7FFFFFFF;
       while not Eof do
       begin
         IdTeacher1 := TbDistribution.FindField('IdTeacher').AsInteger;
         if IdTeacher <> IdTeacher1 then
         begin
-          TbTmpTeacherCarga.Append;
-          TbTmpTeacherCargaIdTeacher.Value :=
+          TbTmpTeacherWorkLoad.Append;
+          TbTmpTeacherWorkLoadIdTeacher.Value :=
             TbDistribution.FindField('IdTeacher').AsInteger;
-          TbTmpTeacherCargaCarga.Value :=
+          TbTmpTeacherWorkLoadWorkLoad.Value :=
             CompositionToDuration(TbDistribution.FindField('Composition').AsString);
           IdTeacher := IdTeacher1;
         end
         else
         begin
-          TbTmpTeacherCarga.Edit;
-          with TbTmpTeacherCargaCarga do
+          TbTmpTeacherWorkLoad.Edit;
+          with TbTmpTeacherWorkLoadWorkLoad do
             Value := Value + CompositionToDuration(TbDistribution.FindField('Composition').AsString);
         end;
-        TbTmpTeacherCarga.Post;
+        TbTmpTeacherWorkLoad.Post;
         Next;
       end;
       IndexFieldNames := s;
     end;
   end;
-  procedure ObtenerRoomTypeCarga;
+  procedure ObtenerRoomTypeLoad;
   var
     IdRoomType, IdRoomType1: Integer;
     s: string;  
   begin
     with SourceDataModule, TbDistribution do
     begin
-      TbTmpRoomTypeCarga.Open;
+      TbTmpRoomTypeLoad.Open;
       s := IndexFieldNames;
       IndexFieldNames := 'IdRoomType';
       First;
@@ -181,18 +181,18 @@ var
         IdRoomType1 := TbDistribution.FindField('IdRoomType').AsInteger;
         if IdRoomType <> IdRoomType1 then
         begin
-          TbTmpRoomTypeCarga.Append;
-          TbTmpRoomTypeCargaIdRoomType.Value := TbDistribution.FindField('IdRoomType').AsInteger;
-          TbTmpRoomTypeCargaCarga.Value := CompositionToDuration(TbDistribution.FindField('Composition').AsString);
+          TbTmpRoomTypeLoad.Append;
+          TbTmpRoomTypeLoadIdRoomType.Value := TbDistribution.FindField('IdRoomType').AsInteger;
+          TbTmpRoomTypeLoadLoad.Value := CompositionToDuration(TbDistribution.FindField('Composition').AsString);
           IdRoomType := IdRoomType1;
         end
         else
         begin
-          TbTmpRoomTypeCarga.Edit;
-          with TbTmpRoomTypeCargaCarga do
+          TbTmpRoomTypeLoad.Edit;
+          with TbTmpRoomTypeLoadLoad do
             Value := Value + CompositionToDuration(TbDistribution.FindField('Composition').AsString);
         end;
-        TbTmpRoomTypeCarga.Post;
+        TbTmpRoomTypeLoad.Post;
         Next;
       end;
       IndexFieldNames := s;
@@ -219,11 +219,11 @@ var
           ASubStrings.Add(STeacherRestrictionsHead);
           while not Eof do
           begin
-            if TbTmpTeacherCarga.Locate('IdTeacher',
+            if TbTmpTeacherWorkLoad.Locate('IdTeacher',
               QuTeacherRestrictionCantIdTeacher.AsInteger, []) then
             begin
               if QuTeacherRestrictionCantNumber.AsInteger +
-                TbTmpTeacherCargaCarga.AsInteger > iTimeSlotCant then
+                TbTmpTeacherWorkLoadWorkLoad.AsInteger > iTimeSlotCant then
               begin
                 if not HuboProblemasInterno then
                 begin
@@ -231,15 +231,15 @@ var
                   vMainMin := AMainStrings.Count;
                   AMainStrings.Add(STeacherRestrictionsHead);
                 end;
-                AMainStrings.Add(Format(s, [TbTmpTeacherCargaLnTeacher.Value,
-                  TbTmpTeacherCargaNaTeacher.Value,
+                AMainStrings.Add(Format(s, [TbTmpTeacherWorkLoadLnTeacher.Value,
+                  TbTmpTeacherWorkLoadNaTeacher.Value,
                     QuTeacherRestrictionCantNumber.AsInteger]));
                 HuboProblemasInterno := True;
                 HuboProblemas := True;
               end
               else
-                ASubStrings.Add(Format(s, [TbTmpTeacherCargaLnTeacher.Value,
-                  TbTmpTeacherCargaNaTeacher.Value,
+                ASubStrings.Add(Format(s, [TbTmpTeacherWorkLoadLnTeacher.Value,
+                  TbTmpTeacherWorkLoadNaTeacher.Value,
                     QuTeacherRestrictionCantNumber.AsInteger]));
             end;
             Next;
@@ -259,13 +259,13 @@ var
       end;
     end;
   end;
-  procedure CheckTeacherCarga;
+  procedure CheckTeacherWorkLoad;
   var
     s: string;
     vMainMin, vMainMax, vSubMin, vSubMax: Integer;
     HuboProblemasInterno: Boolean;
   begin
-    with TbTmpTeacherCarga do
+    with TbTmpTeacherWorkLoad do
       if not IsEmpty then
       begin
         HuboProblemasInterno := False;
@@ -276,7 +276,7 @@ var
         ASubStrings.Add(STeacherWorkLoadHead);
         while not Eof do
         begin
-          if TbTmpTeacherCargaCarga.Value > AMaxCargaTeacher then
+          if TbTmpTeacherWorkLoadWorkLoad.Value > AMaxTeacherWorkLoad then
           begin
             if not HuboProblemasInterno then
             begin
@@ -284,17 +284,17 @@ var
               vMainMin := AMainStrings.Count;
               AMainStrings.Add(STeacherWorkLoadHead);
             end;
-            AMainStrings.Add(Format(s, [TbTmpTeacherCargaLnTeacher.Value,
-              TbTmpTeacherCargaNaTeacher.Value,
-                TbTmpTeacherCargaCarga.Value]));
+            AMainStrings.Add(Format(s, [TbTmpTeacherWorkLoadLnTeacher.Value,
+              TbTmpTeacherWorkLoadNaTeacher.Value,
+                TbTmpTeacherWorkLoadWorkLoad.Value]));
             HuboProblemas := True;
             HuboProblemasInterno := True;
           end
           else
           begin
-            ASubStrings.Add(Format(s, [TbTmpTeacherCargaLnTeacher.Value,
-              TbTmpTeacherCargaNaTeacher.Value,
-                TbTmpTeacherCargaCarga.Value]));
+            ASubStrings.Add(Format(s, [TbTmpTeacherWorkLoadLnTeacher.Value,
+              TbTmpTeacherWorkLoadNaTeacher.Value,
+                TbTmpTeacherWorkLoadWorkLoad.Value]));
           end;
           Next;
         end;
@@ -318,7 +318,7 @@ var
     s: string;
     bRoomTypeActive, HuboProblemasInterno: Boolean;
   begin
-    with SourceDataModule, TbTmpRoomTypeCarga do
+    with SourceDataModule, TbTmpRoomTypeLoad do
       if not IsEmpty then
       begin
         HuboProblemasInterno := False;
@@ -332,10 +332,10 @@ var
           ASubStrings.Add(SRoomTypesLoadHead);
           while not Eof do
           begin
-            if TbRoomType.Locate('IdRoomType', TbTmpRoomTypeCargaIdRoomType.AsInteger, []) then
+            if TbRoomType.Locate('IdRoomType', TbTmpRoomTypeLoadIdRoomType.AsInteger, []) then
             begin
               c := iTimeSlotCant * TbRoomType.FindField('Number').AsInteger;
-              if TbTmpRoomTypeCargaCarga.Value > c then
+              if TbTmpRoomTypeLoadLoad.Value > c then
               begin
                 if not HuboProblemasInterno then
                 begin
@@ -343,15 +343,15 @@ var
                   vMainMin := AMainStrings.Count;
                   AMainStrings.Add(SRoomTypesLoadHead);
                 end;
-                AMainStrings.Add(Format(s, [TbTmpRoomTypeCargaAbRoomType.Value,
-                  c, TbTmpRoomTypeCargaCarga.Value]));
+                AMainStrings.Add(Format(s, [TbTmpRoomTypeLoadAbRoomType.Value,
+                  c, TbTmpRoomTypeLoadLoad.Value]));
                 HuboProblemas := True;
                 HuboProblemasInterno := True;
               end
               else
               begin
-                ASubStrings.Add(Format(s, [TbTmpRoomTypeCargaAbRoomType.Value,
-                  c, TbTmpRoomTypeCargaCarga.Value]));
+                ASubStrings.Add(Format(s, [TbTmpRoomTypeLoadAbRoomType.Value,
+                  c, TbTmpRoomTypeLoadLoad.Value]));
               end;
             end;
             Next;
@@ -459,17 +459,17 @@ begin
   HuboProblemas := False;
   try
     ObtenerTimeSlotCant;
-    ObtenerTeacherCarga;
-    ObtenerRoomTypeCarga;
-    CheckTeacherCarga;
+    ObtenerTeacherWorkLoad;
+    ObtenerRoomTypeLoad;
+    CheckTeacherWorkLoad;
     CheckTeacherRestrictionCant;
     CheckRoomTypeLoad;
     CheckCourseCarga;
   finally
     AMainStrings.EndUpdate;
     ASubStrings.EndUpdate;
-    TbTmpTeacherCarga.Close;
-    TbTmpRoomTypeCarga.Close;
+    TbTmpTeacherWorkLoad.Close;
+    TbTmpRoomTypeLoad.Close;
     Result := HuboProblemas;
   end;
 end;

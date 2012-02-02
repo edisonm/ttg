@@ -78,7 +78,7 @@ object ConfiguracionForm: TConfiguracionForm
       ClientHeight = 360
       ClientWidth = 465
       ImageIndex = 2
-      object lblMaxWorkLoadPerTeacher: TLabel
+      object lblMaxTeacherWorkLoad: TLabel
         Left = 8
         Height = 14
         Top = 109
@@ -86,7 +86,7 @@ object ConfiguracionForm: TConfiguracionForm
         Caption = 'Max work load per teacher:'
         ParentColor = False
       end
-      object lblComentarios: TLabel
+      object lblComments: TLabel
         Left = 8
         Height = 14
         Top = 136
@@ -142,7 +142,7 @@ object ConfiguracionForm: TConfiguracionForm
         Caption = 'School Year:'
         ParentColor = False
       end
-      object speMaxCargaTeacher: TSpinEdit
+      object speMaxTeacherWorkLoad: TSpinEdit
         Left = 180
         Height = 21
         Top = 104
@@ -152,7 +152,7 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 6
         Value = 20
       end
-      object memComentarios: TMemo
+      object memComments: TMemo
         Left = 8
         Height = 161
         Top = 152
@@ -167,28 +167,28 @@ object ConfiguracionForm: TConfiguracionForm
         Width = 353
         TabOrder = 0
       end
-      object edtNaResponsable: TEdit
+      object edtNaResponsible: TEdit
         Left = 108
         Height = 21
         Top = 80
         Width = 149
         TabOrder = 4
       end
-      object edtCarResponsable: TEdit
+      object edtPosResponsible: TEdit
         Left = 317
         Height = 21
         Top = 80
         Width = 144
         TabOrder = 5
       end
-      object edtNaAutoridad: TEdit
+      object edtNaAuthority: TEdit
         Left = 108
         Height = 21
         Top = 56
         Width = 149
         TabOrder = 2
       end
-      object edtCarAutoridad: TEdit
+      object edtPosAuthority: TEdit
         Left = 317
         Height = 21
         Top = 56
@@ -315,7 +315,7 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 1
         Value = 1
       end
-      object speNumIteraciones: TSpinEdit
+      object speNumIterations: TSpinEdit
         Left = 345
         Height = 21
         Top = 8
@@ -364,7 +364,7 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 6
         Value = 1
       end
-      object creProbCruzamiento: TEdit
+      object creCrossProb: TEdit
         Left = 116
         Height = 21
         Top = 80
@@ -471,7 +471,7 @@ object ConfiguracionForm: TConfiguracionForm
         Caption = 'Teacher Restrictions:'
         ParentColor = False
       end
-      object lblBrokenTeachers: TLabel
+      object lblBrokenTTTeachers: TLabel
         Left = 237
         Height = 14
         Top = 15
@@ -581,7 +581,7 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 5
       end
-      object creTeacherFraccionamiento: TEdit
+      object creBrokenTTTeacher: TEdit
         Left = 345
         Height = 21
         Top = 8

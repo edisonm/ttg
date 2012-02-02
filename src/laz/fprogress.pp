@@ -74,11 +74,11 @@ type
     lblNonScatteredSubjectValue: TLabel;
     bbtCancel: TBitBtn;
     prbProgress: TProgressBar;
-    pnlBrokenTeacher: TPanel;
-    pnlBrokenTeacherCount: TPanel;
-    lblBrokenTeacherCount: TLabel;
-    pnlBrokenTeacherValue: TPanel;
-    lblBrokenTeacherValue: TLabel;
+    pnlBrokenTTTeacher: TPanel;
+    pnlBrokenTTTeacherCount: TPanel;
+    lblBrokenTTTeacherCount: TLabel;
+    pnlBrokenTTTeacherValue: TPanel;
+    lblBrokenTTTeacherValue: TLabel;
     pnlPosition: TPanel;
     lblPosition: TLabel;
     procedure bbtCancelClick(Sender: TObject);
@@ -147,7 +147,7 @@ begin
   begin
     with MasterDataModule.ConfigStorage do
       TTimeTableModel(ASolver.Model).Configure(ClashTeacher, ClashSubject,
-        ClashRoomType, TeacherFraccionamiento, OutOfPositionEmptyHour,
+        ClashRoomType, BrokenTTTeacher, OutOfPositionEmptyHour,
         BrokenSession, NonScatteredSubject);
     //ASolver.Update;
     ASolver.UpdateValue;
@@ -168,8 +168,8 @@ begin
     lblClashTeacher.Caption := Format('%d ', [ClashTeacher]);
     lblClashSubject.Caption := Format('%d ', [ClashSubject]);
     lblClashRoomType.Caption := Format('%d ', [ClashRoomType]);
-    lblBrokenTeacherCount.Caption :=
-      Format('%d ', [TeacherFraccionamiento]);
+    lblBrokenTTTeacherCount.Caption :=
+      Format('%d ', [BrokenTTTeacher]);
     lblOutOfPositionEmptyHour.Caption := Format('%d ', [OutOfPositionEmptyHour]);
     lblBrokenSession.Caption := Format('%d ', [BrokenSession]);
     lblSubjectRestriction.Caption :=
@@ -179,8 +179,8 @@ begin
     lblNonScatteredSubjectCount.Caption := Format('%d ', [NonScatteredSubject]);
     lblClashTeacherValue.Caption := Format('%d ', [ClashTeacherValue]);
     lblClashSubjectValue.Caption := Format('%d ', [ClashSubjectValue]);
-    lblBrokenTeacherValue.Caption :=
-      Format('%d ', [BrokenTeacherValue]);
+    lblBrokenTTTeacherValue.Caption :=
+      Format('%d ', [BrokenTTTeacherValue]);
     lblClashRoomTypeValue.Caption := Format('%d ', [ClashRoomTypeValue]);
     lblOutOfPositionEmptyHourValue.Caption := Format('%d ',
       [OutOfPositionEmptyHourValue]);

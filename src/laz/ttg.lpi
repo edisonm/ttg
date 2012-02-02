@@ -381,7 +381,7 @@
         <UnitName Value="UTTGi18n"/>
       </Unit38>
       <Unit39>
-        <Filename Value="uttgconsts.pas"/>
+        <Filename Value="uttgconsts.pp"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGConsts"/>
       </Unit39>

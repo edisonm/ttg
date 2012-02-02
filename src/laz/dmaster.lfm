@@ -6,12 +6,12 @@ object MasterDataModule: TMasterDataModule
   HorizontalOffset = 565
   VerticalOffset = 275
   Width = 748
-  object TbTmpTeacherCarga: TZTable
+  object TbTmpTeacherWorkLoad: TZTable
     Connection = SourceDataModule.DbZConnection
     AutoCalcFields = False
     left = 250
     top = 11
-    object TbTmpTeacherCargaIdTeacher: TLongintField
+    object TbTmpTeacherWorkLoadIdTeacher: TLongintField
       DisplayLabel = 'Teacher'
       DisplayWidth = 10
       FieldKind = fkData
@@ -22,7 +22,7 @@ object MasterDataModule: TMasterDataModule
       ReadOnly = False
       Required = False
     end
-    object TbTmpTeacherCargaLnTeacher: TStringField
+    object TbTmpTeacherWorkLoadLnTeacher: TStringField
       DisplayLabel = 'Apellido'
       DisplayWidth = 15
       FieldKind = fkLookup
@@ -38,7 +38,7 @@ object MasterDataModule: TMasterDataModule
       Required = False
       Size = 31
     end
-    object TbTmpTeacherCargaNaTeacher: TStringField
+    object TbTmpTeacherWorkLoadNaTeacher: TStringField
       DisplayLabel = 'Name'
       DisplayWidth = 15
       FieldKind = fkLookup
@@ -54,7 +54,7 @@ object MasterDataModule: TMasterDataModule
       Required = False
       Size = 31
     end
-    object TbTmpTeacherCargaCarga: TLongintField
+    object TbTmpTeacherWorkLoadWorkLoad: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'Carga'
@@ -229,12 +229,12 @@ object MasterDataModule: TMasterDataModule
       Required = False
     end
   end
-  object TbTmpRoomTypeCarga: TZTable
+  object TbTmpRoomTypeLoad: TZTable
     Connection = SourceDataModule.DbZConnection
     AutoCalcFields = False
     left = 250
     top = 62
-    object TbTmpRoomTypeCargaIdRoomType: TLongintField
+    object TbTmpRoomTypeLoadIdRoomType: TLongintField
       DisplayLabel = 'Tipo de aula'
       DisplayWidth = 10
       FieldKind = fkData
@@ -245,7 +245,7 @@ object MasterDataModule: TMasterDataModule
       ReadOnly = False
       Required = False
     end
-    object TbTmpRoomTypeCargaAbRoomType: TStringField
+    object TbTmpRoomTypeLoadAbRoomType: TStringField
       DisplayLabel = 'Name'
       DisplayWidth = 15
       FieldKind = fkLookup
@@ -261,7 +261,7 @@ object MasterDataModule: TMasterDataModule
       Required = False
       Size = 31
     end
-    object TbTmpRoomTypeCargaCarga: TLongintField
+    object TbTmpRoomTypeLoadLoad: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'Carga'
