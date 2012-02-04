@@ -13,7 +13,7 @@ inherited ClassForm: TClassForm
   end
   inherited Panel1: TPanel
     inherited DBGrid: TDBGrid
-      Hint = 'Courses|Courses disponibles'
+      Hint = 'Courses|Available courses'
       Width = 323
       ShowHint = True
       OnDblClick = DBGridDblClick

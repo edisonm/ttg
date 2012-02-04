@@ -59,7 +59,7 @@ object SelTimeSlotForm: TSelTimeSlotForm
     LookupCache = False
     TabOrder = 1
   end
-  object BBAceptar: TBitBtn
+  object bbtAceptar: TBitBtn
     Left = 64
     Height = 32
     Top = 80
@@ -70,7 +70,7 @@ object SelTimeSlotForm: TSelTimeSlotForm
     ModalResult = 1
     TabOrder = 2
   end
-  object BBCancelar: TBitBtn
+  object bbtCancel: TBitBtn
     Left = 176
     Height = 32
     Top = 80

@@ -8,8 +8,8 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
   Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, Grids, Db,
-  FCrossManyToManyEditor0, FCrossManyToManyEditor1, FCrossManyToManyEditor, DBGrids, ComCtrls, DBCtrls, Variants,
-  ZConnection, ZDataset;
+  FCrossManyToManyEditor0, FCrossManyToManyEditor1, FCrossManyToManyEditor, DBGrids,
+  DBCtrls, Variants, ZConnection, ZDataset;
 
 type
 

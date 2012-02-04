@@ -1,10 +1,10 @@
 object MainForm: TMainForm
   Left = 932
-  Height = 63
+  Height = 67
   Top = 140
   Width = 667
   Caption = 'MainForm'
-  ClientHeight = 63
+  ClientHeight = 67
   ClientWidth = 667
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -49,11 +49,11 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Position = poScreenCenter
-  LCLVersion = '0.9.30.2'
+  LCLVersion = '0.9.31'
   object StatusBar: TStatusBar
     Left = 0
     Height = 21
-    Top = 42
+    Top = 46
     Width = 667
     AutoHint = True
     Panels = <    
@@ -122,7 +122,7 @@ object MainForm: TMainForm
       object ToolButton1: TToolButton
         Left = 93
         Top = 0
-        Width = 8
+        Width = 10
         Caption = 'ToolButton1'
         ImageIndex = 26
         ParentShowHint = False
@@ -130,86 +130,86 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object SIDay: TToolButton
-        Left = 101
+        Left = 103
         Top = 0
         Action = ActDay
         ParentShowHint = False
         ShowHint = True
       end
       object SIHour: TToolButton
-        Left = 124
+        Left = 126
         Top = 0
         Action = ActHour
         ParentShowHint = False
         ShowHint = True
       end
       object SITimeSlot: TToolButton
-        Left = 147
+        Left = 149
         Top = 0
         Action = ActTimeSlot
         ParentShowHint = False
         ShowHint = True
       end
       object SILevel: TToolButton
-        Left = 170
+        Left = 172
         Top = 0
         Action = ActLevel
         ParentShowHint = False
         ShowHint = True
       end
       object SISpecialization: TToolButton
-        Left = 193
+        Left = 195
         Top = 0
         Action = ActSpecialization
         ParentShowHint = False
         ShowHint = True
       end
       object SIGroupId: TToolButton
-        Left = 216
+        Left = 218
         Top = 0
         Action = ActGroupId
         ParentShowHint = False
         ShowHint = True
       end
       object SIClass: TToolButton
-        Left = 239
+        Left = 241
         Top = 0
         Action = ActClass
         ParentShowHint = False
         ShowHint = True
       end
       object SISubject: TToolButton
-        Left = 262
+        Left = 264
         Top = 0
         Action = ActSubject
         ParentShowHint = False
         ShowHint = True
       end
       object SIRoomType: TToolButton
-        Left = 285
+        Left = 287
         Top = 0
         Action = ActRoomType
         ParentShowHint = False
         ShowHint = True
       end
       object SITeacher: TToolButton
-        Left = 308
+        Left = 310
         Top = 0
         Action = ActTeacher
         ParentShowHint = False
         ShowHint = True
       end
       object SIConfig: TToolButton
-        Left = 331
+        Left = 333
         Top = 0
-        Action = ActConfigurar
+        Action = ActConfigure
         ParentShowHint = False
         ShowHint = True
       end
       object ToolButton3: TToolButton
-        Left = 354
+        Left = 356
         Top = 0
-        Width = 8
+        Width = 10
         Caption = 'ToolButton3'
         ImageIndex = 27
         ParentShowHint = False
@@ -217,16 +217,16 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object SIFindMejor: TToolButton
-        Left = 362
+        Left = 366
         Top = 0
         Action = ActElaborarTimeTable
         ParentShowHint = False
         ShowHint = True
       end
       object ToolButton4: TToolButton
-        Left = 385
+        Left = 389
         Top = 0
-        Width = 8
+        Width = 10
         Caption = 'ToolButton4'
         ImageIndex = 26
         ParentShowHint = False
@@ -234,16 +234,16 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object SITimeTable: TToolButton
-        Left = 393
+        Left = 399
         Top = 0
         Action = ActTimeTable
         ParentShowHint = False
         ShowHint = True
       end
       object ToolButton2: TToolButton
-        Left = 416
+        Left = 422
         Top = 0
-        Width = 8
+        Width = 10
         Caption = 'ToolButton2'
         ImageIndex = 26
         ParentShowHint = False
@@ -251,14 +251,14 @@ object MainForm: TMainForm
         Style = tbsSeparator
       end
       object SIContent: TToolButton
-        Left = 424
+        Left = 432
         Top = 0
         Action = ActContents
         ParentShowHint = False
         ShowHint = True
       end
       object SIIndex: TToolButton
-        Left = 447
+        Left = 455
         Top = 0
         Action = ActIndex
         ParentShowHint = False
@@ -879,7 +879,7 @@ object MainForm: TMainForm
     object MIView: TMenuItem
       Caption = '&Ver'
       HelpContext = 60
-      Hint = 'Ver|Presentacion de resultados'
+      Hint = 'Ver|Show de resultados'
       object MITimeTable: TMenuItem
         Action = ActTimeTable
         AutoCheck = True
@@ -928,7 +928,7 @@ object MainForm: TMainForm
       HelpContext = 50
       Hint = 'Herramientas|Herramientas que permiten elaborar un horario'
       object MIConfig: TMenuItem
-        Action = ActConfigurar
+        Action = ActConfigure
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -966,11 +966,11 @@ object MainForm: TMainForm
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         }
-        OnClick = ActConfigurarExecute
+        OnClick = ActConfigureExecute
       end
       object MICheckFeasibility: TMenuItem
-        Action = ActChequearFactibilidad
-        OnClick = ActChequearFactibilidadExecute
+        Action = ActCheckFeasibility
+        OnClick = ActCheckFeasibilityExecute
       end
       object MIElaborarTimeTable: TMenuItem
         Action = ActElaborarTimeTable
@@ -2054,9 +2054,9 @@ object MainForm: TMainForm
     end
     object ActAbout: TAction
       Category = 'Help'
-      Caption = 'Acerca de...'
+      Caption = 'About...'
       HelpContext = 370
-      Hint = 'Acerca de|Informacion referente a este programa'
+      Hint = 'About|Information about this program'
       OnExecute = ActAboutExecute
     end
     object ActRegistrationInfo: TAction
@@ -2101,7 +2101,7 @@ object MainForm: TMainForm
     end
     object ActChangePasswd: TAction
       Category = 'File'
-      Caption = 'Cambiar clave...'
+      Caption = 'Change password...'
       HelpContext = 120
       Hint = 'Cambiar Clave|Permite cambiar la clave de acceso al sistema'
     end
@@ -2175,9 +2175,9 @@ object MainForm: TMainForm
     object ActClass: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Classs'
+      Caption = 'Classes'
       HelpContext = 200
-      Hint = 'Cursos|Cursos con sus respectivos paralelos'
+      Hint = 'Courses|Courses with its given groups'
       ImageIndex = 14
       OnExecute = ActClassExecute
       ShortCut = 49219
@@ -2212,21 +2212,21 @@ object MainForm: TMainForm
       OnExecute = ActTeacherExecute
       ShortCut = 16463
     end
-    object ActConfigurar: TAction
+    object ActConfigure: TAction
       Category = 'Tools'
       AutoCheck = True
-      Caption = 'Configurar...'
+      Caption = 'Configure...'
       HelpContext = 250
-      Hint = 'Configurar|Cambiar la configuracion del sistema'
+      Hint = 'Configure|Edit the system configuration'
       ImageIndex = 19
-      OnExecute = ActConfigurarExecute
+      OnExecute = ActConfigureExecute
     end
-    object ActChequearFactibilidad: TAction
+    object ActCheckFeasibility: TAction
       Category = 'Tools'
-      Caption = 'Chequear factibilidad'
+      Caption = 'Check feasibility'
       HelpContext = 260
-      Hint = 'Chequear factibilidad|Chequear la factibilidad de los datos ingresados'
-      OnExecute = ActChequearFactibilidadExecute
+      Hint = 'Check feasibility|Check feasibility of input data'
+      OnExecute = ActCheckFeasibilityExecute
     end
     object ActElaborarTimeTable: TAction
       Category = 'Tools'

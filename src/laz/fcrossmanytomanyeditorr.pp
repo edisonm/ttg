@@ -7,8 +7,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, Grids, DB, FCrossManyToManyEditor,
-  ComCtrls;
+  Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, Grids, DB, FCrossManyToManyEditor;
 
 type
   TDynamicColorArray = array of TColor;

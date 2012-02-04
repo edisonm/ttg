@@ -417,8 +417,8 @@ msgid "Detail of Timetables"
 msgstr "Detalle de los horarios"
 
 #: tclassform.dbgrid.hint
-msgid "Courses|Courses disponibles"
-msgstr "Courses|Courses disponibles"
+msgid "Courses|Available courses"
+msgstr "Cursos|Cursos disponibles"
 
 #: tconfiguracionform.bbtcancel.caption
 msgctxt "TCONFIGURACIONFORM.BBTCANCEL.CAPTION"
@@ -450,7 +450,7 @@ msgstr "1,2"
 
 #: tconfiguracionform.edtnainstitution.hint
 msgctxt "TCONFIGURACIONFORM.EDTNAINSTITUTION.HINT"
-msgid "Colegio|Nombre del colegio"
+msgid "High School|High School Name"
 msgstr "Colegio|Nombre del colegio"
 
 #: tconfiguracionform.label1.caption
@@ -458,7 +458,7 @@ msgid "Clash Teachers:"
 msgstr "Cruce profesores:"
 
 #: tconfiguracionform.label13.caption
-msgid "Iteraciones:"
+msgid "Iterations:"
 msgstr "Iteraciones:"
 
 #: tconfiguracionform.label15.caption
@@ -478,7 +478,7 @@ msgid "Clash Subjects:"
 msgstr "Cruce materias:"
 
 #: tconfiguracionform.label29.caption
-msgid "Actualizar cada:"
+msgid "Update each:"
 msgstr "Actualizar cada:"
 
 #: tconfiguracionform.lblauthority.caption
@@ -491,8 +491,8 @@ msgid "Position:"
 msgstr "Cargo:"
 
 #: tconfiguracionform.lblbreaktimetableteacher.caption
-msgid "Broken teachers:"
-msgstr "Fracc. profesores:"
+msgid "Break TT. Teachers:"
+msgstr "Fracc. h. profesores:"
 
 #: tconfiguracionform.lblbrokensubjects.caption
 msgid "Broken Subjects:"
@@ -504,12 +504,12 @@ msgstr "Comentarios:"
 
 #: tconfiguracionform.lblcrossprobability.caption
 msgctxt "TCONFIGURACIONFORM.LBLCROSSPROBABILITY.CAPTION"
-msgid "Prob. Cruce:"
+msgid "Cross Probability:"
 msgstr "Prob. Cruce:"
 
 #: tconfiguracionform.lbldownhilllevels.caption
 msgctxt "TCONFIGURACIONFORM.LBLDOWNHILLLEVELS.CAPTION"
-msgid "Niveles de descenso:"
+msgid "Downhill Levels:"
 msgstr "Niveles de descenso:"
 
 #: tconfiguracionform.lblemptyhours.caption
@@ -518,7 +518,7 @@ msgstr "Horas huecas:"
 
 #: tconfiguracionform.lblinitialtimetables.caption
 msgctxt "TCONFIGURACIONFORM.LBLINITIALTIMETABLES.CAPTION"
-msgid "Horarios iniciales:"
+msgid "Initial Timetables:"
 msgstr "Horarios iniciales:"
 
 #: tconfiguracionform.lblinstitutionname.caption
@@ -526,9 +526,9 @@ msgctxt "TCONFIGURACIONFORM.LBLINSTITUTIONNAME.CAPTION"
 msgid "Name:"
 msgstr "Nombre:"
 
-#: tconfiguracionform.lbljoinsubjects.caption
+#: tconfiguracionform.lbljoinedsubjects.caption
 msgctxt "TCONFIGURACIONFORM.LBLJOINSUBJECTS.CAPTION"
-msgid "Materias juntas:"
+msgid "Joined Subjects:"
 msgstr "Materias juntas:"
 
 #: tconfiguracionform.lblmaxteacherworkload.caption
@@ -537,22 +537,22 @@ msgstr "Carga Maxima por Profesor:"
 
 #: tconfiguracionform.lblmutationprobability.caption
 msgctxt "TCONFIGURACIONFORM.LBLMUTATIONPROBABILITY.CAPTION"
-msgid "Prob. Mutacion:"
-msgstr "Prob. Mutacion:"
+msgid "Mutation Probability:"
+msgstr "Prob. Mutacion"
 
 #: tconfiguracionform.lblpollinationprobability.caption
 msgctxt "TCONFIGURACIONFORM.LBLPOLLINATIONPROBABILITY.CAPTION"
-msgid "Prob. Polinizacion:"
+msgid "Pollination Probability:"
 msgstr "Prob. Polinizacion:"
 
 #: tconfiguracionform.lblpopulationsize.caption
 msgctxt "TCONFIGURACIONFORM.LBLPOPULATIONSIZE.CAPTION"
-msgid "Individuos:"
+msgid "Population Size:"
 msgstr "Individuos:"
 
 #: tconfiguracionform.lblreparationprobability.caption
 msgctxt "TCONFIGURACIONFORM.LBLREPARATIONPROBABILITY.CAPTION"
-msgid "Prob. Reparacion:"
+msgid "Reparation Probability:"
 msgstr "Prob. Reparacion:"
 
 #: tconfiguracionform.lblresponsible.caption
@@ -575,8 +575,8 @@ msgstr "Semilla:"
 
 #: tconfiguracionform.lblshareddirectory.caption
 msgctxt "TCONFIGURACIONFORM.LBLSHAREDDIRECTORY.CAPTION"
-msgid "Dir. de intercambio:"
-msgstr "Dir. de intercambio:"
+msgid "Shared directory:"
+msgstr "Directorio compartido:"
 
 #: tconfiguracionform.lblsrcolor.caption
 msgctxt "TCONFIGURACIONFORM.LBLSRCOLOR.CAPTION"
@@ -630,11 +630,11 @@ msgid "Panel2"
 msgstr "Panel2"
 
 #: tcrossmanytomanyeditorform.btncancel.hint
-msgid "Cancelar|Cancelar"
+msgid "Cancel|Cancel"
 msgstr "Cancelar|Cancelar"
 
 #: tcrossmanytomanyeditorform.btnok.hint
-msgid "Aceptar|Aceptar"
+msgid "Ok|Ok"
 msgstr "Aceptar|Aceptar"
 
 #: teditorform.btnshow.hint
@@ -647,48 +647,48 @@ msgid "EditorForm"
 msgstr "EditorForm"
 
 #: teditorform.tlbshow.caption
-msgid "Presentacion"
-msgstr "Presentacion"
+msgid "Show"
+msgstr "Presentar"
 
 #: tmainform.actabout.caption
-msgid "Acerca de..."
+msgid "About..."
 msgstr "Acerca de..."
 
 #: tmainform.actabout.hint
-msgid "Acerca de|Informacion referente a este programa"
+msgid "About|Information about this program"
 msgstr "Acerca de|Informacion referente a este programa"
 
 #: tmainform.actchangepasswd.caption
-msgid "Cambiar clave..."
+msgid "Change password..."
 msgstr "Cambiar clave..."
 
 #: tmainform.actchangepasswd.hint
-msgid "Cambiar Clave|Permite cambiar la clave de acceso al sistema"
-msgstr "Cambiar Clave|Permite cambiar la clave de acceso al sistema"
+msgid "Change password|Allows to change the system password"
+msgstr "Cambiar clave|Permite cambiar la clave de acceso al sistema"
 
-#: tmainform.actchequearfactibilidad.caption
-msgid "Chequear factibilidad"
+#: tmainform.actcheckfeasibility.caption
+msgid "Check feasibility"
 msgstr "Chequear factibilidad"
 
-#: tmainform.actchequearfactibilidad.hint
-msgid "Chequear factibilidad|Chequear la factibilidad de los datos ingresados"
+#: tmainform.actcheckfeasibility.hint
+msgid "Check feasibility|Check feasibility of input data"
 msgstr "Chequear factibilidad|Chequear la factibilidad de los datos ingresados"
 
 #: tmainform.actclass.caption
-msgid "Classs"
-msgstr "Classs"
+msgid "Classes"
+msgstr "Clases"
 
 #: tmainform.actclass.hint
-msgid "Cursos|Cursos con sus respectivos paralelos"
+msgid "Courses|Courses with its given groups"
 msgstr "Cursos|Cursos con sus respectivos paralelos"
 
-#: tmainform.actconfigurar.caption
-msgid "Configurar..."
+#: tmainform.actconfigure.caption
+msgid "Configure..."
 msgstr "Configurar..."
 
-#: tmainform.actconfigurar.hint
-msgid "Configurar|Cambiar la configuracion del sistema"
-msgstr "Configurar|Cambiar la configuracion del sistema"
+#: tmainform.actconfigure.hint
+msgid "Configure|Edit the system configuration"
+msgstr "Configurar|Editar la configuracion del sistema"
 
 #: tmainform.actcontents.caption
 msgid "Contenido"
@@ -916,8 +916,8 @@ msgid "&Ver"
 msgstr "&Ver"
 
 #: tmainform.miview.hint
-msgid "Ver|Presentacion de resultados"
-msgstr "Ver|Presentacion de resultados"
+msgid "Ver|Show de resultados"
+msgstr "Ver|Show de resultados"
 
 #: tmainform.n1.caption
 msgctxt "TMAINFORM.N1.CAPTION"
@@ -960,7 +960,7 @@ msgstr "ToolButton3"
 msgid "ToolButton4"
 msgstr "ToolButton4"
 
-#: tmessageviewform.bbtnclose.caption
+#: tmessageviewform.bbtclose.caption
 msgid "&Cerrar"
 msgstr "&Cerrar"
 
@@ -1201,8 +1201,8 @@ msgid "Started at:"
 msgstr "Iniciado el:"
 
 #: tprogressform.pnlnonscatteredsubject.caption
-msgid " Join Subjects:"
-msgstr " Materias juntas:"
+msgid " Joined Subjects:"
+msgstr " Joined Subjects:"
 
 #: tprogressform.pnlnonscatteredsubjectcount.caption
 msgctxt "TPROGRESSFORM.PNLNONSCATTEREDSUBJECTCOUNT.CAPTION"
@@ -1272,12 +1272,12 @@ msgstr " Valor Total:"
 msgid "Progreso de la busqueda"
 msgstr "Progreso de la busqueda"
 
-#: tseltimeslotform.bbaceptar.caption
+#: tseltimeslotform.bbtaceptar.caption
 msgctxt "TSELTIMESLOTFORM.BBACEPTAR.CAPTION"
 msgid "Aceptar"
 msgstr "Aceptar"
 
-#: tseltimeslotform.bbcancelar.caption
+#: tseltimeslotform.bbtcancel.caption
 msgctxt "TSELTIMESLOTFORM.BBCANCELAR.CAPTION"
 msgid "Cancelar"
 msgstr "Cancelar"
@@ -1644,7 +1644,7 @@ msgstr "Listo para generar horario. Mostrar resumen del chequeo del horario?"
 
 #: uttgconsts.snonscatteredsubject
 msgid "Non Scattered Subjects"
-msgstr "Materias juntas"
+msgstr "Joined Subjects"
 
 #: uttgconsts.snumhardteacherrestrictions
 msgid "Number of hard teacher restrictions..."

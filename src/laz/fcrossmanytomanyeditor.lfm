@@ -8,7 +8,7 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
     TabOrder = 3
     object BtnOk: TToolButton[1]
       Left = 24
-      Hint = 'Aceptar|Aceptar'
+      Hint = 'Ok|Ok'
       Top = 2
       ImageIndex = 1
       OnClick = BtnOkClick
@@ -17,7 +17,7 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
     end
     object BtnCancel: TToolButton[2]
       Left = 47
-      Hint = 'Cancelar|Cancelar'
+      Hint = 'Cancel|Cancel'
       Top = 2
       ImageIndex = 2
       OnClick = BtnCancelClick

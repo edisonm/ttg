@@ -7,7 +7,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics, Dialogs,
-  Controls, Forms, FCrossManyToManyEditor, Buttons, ExtCtrls, Grids, DB, ComCtrls;
+  Controls, Forms, FCrossManyToManyEditor, Buttons, ExtCtrls, Grids, DB;
 
 type
 

@@ -19,7 +19,7 @@ object EditorForm: TEditorForm
     Height = 25
     Top = 0
     Width = 479
-    Caption = 'Presentacion'
+    Caption = 'Show'
     Images = ImageList
     TabOrder = 2
     object BtnShow: TToolButton

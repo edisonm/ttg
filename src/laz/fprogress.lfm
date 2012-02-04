@@ -536,7 +536,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Join Subjects:'
+      Caption = ' Joined Subjects:'
       TabOrder = 22
     end
     object pnlNonScatteredSubjectCount: TPanel

@@ -7,7 +7,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, Buttons, DBGrids, DbCtrls, ExtCtrls, Db, ComCtrls, Variants,
+  StdCtrls, Buttons, DBGrids, DbCtrls, ExtCtrls, Db, Variants,
   ZConnection, ZDataset, FConfiguracion, FCrossManyToManyEditor0,
   FCrossManyToManyEditor1, FCrossManyToManyEditor, DMaster, DSource;
 

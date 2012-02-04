@@ -40,7 +40,7 @@ type
     Label2: TLabel;
     lblEmptyHours: TLabel;
     lblBrokenSubjects: TLabel;
-    lblJoinSubjects: TLabel;
+    lblJoinedSubjects: TLabel;
     creClashTeacher: TEdit;
     creClashRoomType: TEdit;
     creEmptyHour: TEdit;

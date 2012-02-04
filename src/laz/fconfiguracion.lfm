@@ -162,7 +162,7 @@ object ConfiguracionForm: TConfiguracionForm
       object edtNaInstitution: TEdit
         Left = 108
         Height = 24
-        Hint = 'Colegio|Nombre del colegio'
+        Hint = 'High School|High School Name'
         Top = 8
         Width = 353
         TabOrder = 0
@@ -221,7 +221,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 15
         Top = 13
         Width = 92
-        Caption = 'Actualizar cada:'
+        Caption = 'Update each:'
         ParentColor = False
       end
       object lblInitialTimeTables: TLabel
@@ -229,7 +229,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 15
         Top = 132
         Width = 102
-        Caption = 'Horarios iniciales:'
+        Caption = 'Initial Timetables:'
         ParentColor = False
       end
       object lblSharedDirectory: TLabel
@@ -237,7 +237,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 15
         Top = 109
         Width = 113
-        Caption = 'Dir. de intercambio:'
+        Caption = 'Shared directory:'
         ParentColor = False
       end
       object lblPopulationSize: TLabel
@@ -245,7 +245,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 15
         Top = 84
         Width = 62
-        Caption = 'Individuos:'
+        Caption = 'Population Size:'
         ParentColor = False
       end
       object Label13: TLabel
@@ -253,7 +253,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 15
         Top = 36
         Width = 67
-        Caption = 'Iteraciones:'
+        Caption = 'Iterations:'
         ParentColor = False
       end
       object lblCrossProbability: TLabel
@@ -261,7 +261,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 15
         Top = 84
         Width = 72
-        Caption = 'Prob. Cruce:'
+        Caption = 'Cross Probability:'
         ParentColor = False
       end
       object lblMutationProbability: TLabel
@@ -269,7 +269,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 15
         Top = 109
         Width = 89
-        Caption = 'Prob. Mutacion:'
+        Caption = 'Mutation Probability:'
         ParentColor = False
       end
       object lblReparationProbability: TLabel
@@ -277,7 +277,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 15
         Top = 132
         Width = 103
-        Caption = 'Prob. Reparacion:'
+        Caption = 'Reparation Probability:'
         ParentColor = False
       end
       object lblPollinationProbability: TLabel
@@ -285,7 +285,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 15
         Top = 156
         Width = 105
-        Caption = 'Prob. Polinizacion:'
+        Caption = 'Pollination Probability:'
         ParentColor = False
       end
       object lblDownhillLevels: TLabel
@@ -293,7 +293,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 15
         Top = 62
         Width = 121
-        Caption = 'Niveles de descenso:'
+        Caption = 'Downhill Levels:'
         ParentColor = False
       end
       object cbxRandomize: TCheckBox
@@ -445,12 +445,12 @@ object ConfiguracionForm: TConfiguracionForm
         Caption = 'Broken Subjects:'
         ParentColor = False
       end
-      object lblJoinSubjects: TLabel
+      object lblJoinedSubjects: TLabel
         Left = 237
         Height = 15
         Top = 61
         Width = 91
-        Caption = 'Materias juntas:'
+        Caption = 'Joined Subjects:'
         ParentColor = False
       end
       object Label15: TLabel
@@ -476,7 +476,7 @@ object ConfiguracionForm: TConfiguracionForm
         Height = 15
         Top = 15
         Width = 98
-        Caption = 'Broken teachers:'
+        Caption = 'Break TT. Teachers:'
         ParentColor = False
       end
       object lblSRName: TLabel

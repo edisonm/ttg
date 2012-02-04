@@ -8,7 +8,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, Db, FSingleEditor, ExtCtrls, DBCtrls, ZConnection, Grids,
-  CheckLst, ComCtrls, ActnList, Variants;
+  CheckLst, ActnList, Variants;
 
 type
 

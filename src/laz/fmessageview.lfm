@@ -76,7 +76,7 @@ object MessageViewForm: TMessageViewForm
       ParentColor = False
       Transparent = False
     end
-    object bbtnClose: TBitBtn
+    object bbtClose: TBitBtn
       Left = 328
       Height = 32
       Top = 3

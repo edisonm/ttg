@@ -102,9 +102,9 @@ type
     ActTimeSlot: TAction;
     ActClass: TAction;
     ActSubject: TAction;
-    ActChequearFactibilidad: TAction;
+    ActCheckFeasibility: TAction;
     ActElaborarTimeTable: TAction;
-    ActConfigurar: TAction;
+    ActConfigure: TAction;
     ActTimeTable: TAction;
     ActAbout: TAction;
     ActContents: TAction;
@@ -146,8 +146,8 @@ type
     procedure StatusBarDrawPanel(StatusBar: TStatusBar;
       Panel: TStatusPanel; const Rect: TRect);
     procedure FormCreate(Sender: TObject);
-    procedure ActConfigurarExecute(Sender: TObject);
-    procedure ActChequearFactibilidadExecute(Sender: TObject);
+    procedure ActConfigureExecute(Sender: TObject);
+    procedure ActCheckFeasibilityExecute(Sender: TObject);
     procedure ActAboutExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDestroy(Sender: TObject);
@@ -675,10 +675,10 @@ begin
   end;
 end;
 
-procedure TMainForm.ActConfigurarExecute(Sender: TObject);
+procedure TMainForm.ActConfigureExecute(Sender: TObject);
 begin
   try
-    if ShowConfiguracionForm(ActConfigurar.HelpContext) = mrOK then
+    if ShowConfiguracionForm(ActConfigure.HelpContext) = mrOK then
     begin
       MainForm.Caption := Application.Title + ' - ' +
         MasterDataModule.ConfigStorage.NaInstitution;
@@ -692,13 +692,13 @@ begin
       SourceDataModule.TbTeacherRestrictionType.Refresh;
     end;
   finally
-    ActConfigurar.Checked := False;
+    ActConfigure.Checked := False;
   end;
 end;
 
-procedure TMainForm.ActChequearFactibilidadExecute(Sender: TObject);
+procedure TMainForm.ActCheckFeasibilityExecute(Sender: TObject);
 begin
-  MessageViewForm.HelpContext := ActChequearFactibilidad.HelpContext;
+  MessageViewForm.HelpContext := ActCheckFeasibility.HelpContext;
   if MasterDataModule.PerformAllChecks(MessageViewForm.MemLog.Lines,
                                        MessageViewForm.MemSummary.Lines,
                                        MasterDataModule.ConfigStorage.MaxTeacherWorkLoad) then
