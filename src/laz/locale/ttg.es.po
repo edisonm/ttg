@@ -766,12 +766,12 @@ msgstr "Niveles|Niveles"
 
 #: tmainform.actmaketimetable.caption
 msgid "Make Timetables"
-msgstr "Elaborar Horarios"
+msgstr "Make Timetabless"
 
 #: tmainform.actmaketimetable.hint
 msgctxt "tmainform.actmaketimetable.hint"
 msgid "Make Timetables|Make Timetables"
-msgstr "Elaborar Horarios|Elaborar Horarios"
+msgstr "Make Timetabless|Make Timetabless"
 
 #: tmainform.actmejorartimetable.caption
 msgid "Mejorar horario"

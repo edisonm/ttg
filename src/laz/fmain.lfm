@@ -1,10 +1,10 @@
 object MainForm: TMainForm
   Left = 932
-  Height = 67
+  Height = 642
   Top = 140
   Width = 667
   Caption = 'MainForm'
-  ClientHeight = 67
+  ClientHeight = 642
   ClientWidth = 667
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -53,7 +53,7 @@ object MainForm: TMainForm
   object StatusBar: TStatusBar
     Left = 0
     Height = 21
-    Top = 46
+    Top = 621
     Width = 667
     AutoHint = True
     Panels = <    
@@ -1011,7 +1011,6 @@ object MainForm: TMainForm
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         }
-        Hint = 'Make Timetables|Make Timetables'
         OnClick = ActMakeTimeTableExecute
       end
       object MIMejorarTimeTable: TMenuItem
