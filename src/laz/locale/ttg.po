@@ -691,27 +691,27 @@ msgid "Configure|Edit the system configuration"
 msgstr ""
 
 #: tmainform.actcontents.caption
-msgid "Contenido"
+msgid "Contents"
 msgstr ""
 
 #: tmainform.actcontents.hint
-msgid "Contenido|Contenido de la Ayuda"
+msgid "Contents|Help contents"
 msgstr ""
 
 #: tmainform.actday.caption
-msgid "Dias laborables"
+msgid "Working days"
 msgstr ""
 
 #: tmainform.actday.hint
-msgid "Dias laborables|Dias laborables"
+msgid "Working days|Working days"
 msgstr ""
 
-#: tmainform.actelaborartimetable.caption
-msgid "Elaborar horario"
+#: tmainform.actmaketimetable.caption
+msgid "Make Timetables"
 msgstr ""
 
-#: tmainform.actelaborartimetable.hint
-msgid "Elaborar Horario|Elaborar Horario"
+#: tmainform.actmaketimetable.hint
+msgid "Make Timetables|Make Timetables"
 msgstr ""
 
 #: tmainform.actexit.caption
@@ -872,7 +872,7 @@ msgid "Datos|Ingreso de datos"
 msgstr ""
 
 #: tmainform.mielaborartimetable.hint
-msgid "Elaborar horario|Elaborar horario"
+msgid "Make Timetables|Make Timetables"
 msgstr ""
 
 #: tmainform.mifile.caption

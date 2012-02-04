@@ -219,7 +219,7 @@ object MainForm: TMainForm
       object SIFindMejor: TToolButton
         Left = 366
         Top = 0
-        Action = ActElaborarTimeTable
+        Action = ActMakeTimeTable
         ParentShowHint = False
         ShowHint = True
       end
@@ -973,7 +973,7 @@ object MainForm: TMainForm
         OnClick = ActCheckFeasibilityExecute
       end
       object MIElaborarTimeTable: TMenuItem
-        Action = ActElaborarTimeTable
+        Action = ActMakeTimeTable
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -1011,8 +1011,8 @@ object MainForm: TMainForm
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         }
-        Hint = 'Elaborar horario|Elaborar horario'
-        OnClick = ActElaborarTimeTableExecute
+        Hint = 'Make Timetables|Make Timetables'
+        OnClick = ActMakeTimeTableExecute
       end
       object MIMejorarTimeTable: TMenuItem
         Action = ActMejorarTimeTable
@@ -2028,9 +2028,9 @@ object MainForm: TMainForm
     top = 72
     object ActContents: TAction
       Category = 'Help'
-      Caption = 'Contenido'
+      Caption = 'Contents'
       HelpContext = 350
-      Hint = 'Contenido|Contenido de la Ayuda'
+      Hint = 'Contents|Help contents'
       ImageIndex = 24
       OnExecute = ActContentsExecute
     end
@@ -2115,9 +2115,9 @@ object MainForm: TMainForm
     object ActDay: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Dias laborables'
+      Caption = 'Working days'
       HelpContext = 140
-      Hint = 'Dias laborables|Dias laborables'
+      Hint = 'Working days|Working days'
       ImageIndex = 4
       OnExecute = ActDayExecute
       ShortCut = 16452
@@ -2228,14 +2228,14 @@ object MainForm: TMainForm
       Hint = 'Check feasibility|Check feasibility of input data'
       OnExecute = ActCheckFeasibilityExecute
     end
-    object ActElaborarTimeTable: TAction
+    object ActMakeTimeTable: TAction
       Category = 'Tools'
       AutoCheck = True
-      Caption = 'Elaborar horario'
+      Caption = 'Make Timetables'
       HelpContext = 270
-      Hint = 'Elaborar Horario|Elaborar Horario'
+      Hint = 'Make Timetables|Make Timetables'
       ImageIndex = 17
-      OnExecute = ActElaborarTimeTableExecute
+      OnExecute = ActMakeTimeTableExecute
     end
     object ActMejorarTimeTable: TAction
       Category = 'Tools'

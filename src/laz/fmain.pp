@@ -103,7 +103,7 @@ type
     ActClass: TAction;
     ActSubject: TAction;
     ActCheckFeasibility: TAction;
-    ActElaborarTimeTable: TAction;
+    ActMakeTimeTable: TAction;
     ActConfigure: TAction;
     ActTimeTable: TAction;
     ActAbout: TAction;
@@ -141,7 +141,7 @@ type
     procedure ActSaveExecute(Sender: TObject);
     procedure ActOpenExecute(Sender: TObject);
     procedure ActTimeTableExecute(Sender: TObject);
-    procedure ActElaborarTimeTableExecute(Sender: TObject);
+    procedure ActMakeTimeTableExecute(Sender: TObject);
     procedure ActTimeSlotExecute(Sender: TObject);
     procedure StatusBarDrawPanel(StatusBar: TStatusBar;
       Panel: TStatusPanel; const Rect: TRect);
@@ -426,7 +426,7 @@ begin
   end;
 end;
 
-procedure TMainForm.ActElaborarTimeTableExecute(Sender: TObject);
+procedure TMainForm.ActMakeTimeTableExecute(Sender: TObject);
 {$IFNDEF FREEWARE}
 var
   SIdTimeTables: string;
@@ -439,7 +439,7 @@ begin
       Exit;
     ElaborarTimeTables(SIdTimeTables);
   finally
-    ActElaborarTimeTable.Checked := False;
+    ActMakeTimeTable.Checked := False;
   end;
 {$ENDIF}
 end;
@@ -489,7 +489,7 @@ var
 begin
   with SourceDataModule do
   begin
-    ActElaborarTimeTable.Enabled := False;
+    ActMakeTimeTable.Enabled := False;
     try
       ProcessIdList(SIdTimeTables);
       {$IFDEF THREADED}
@@ -506,7 +506,7 @@ begin
         MessageDlg(Format(STheNextTimeTablesAlreadyExists, [VarArrToStr(WrongIdes)]),
           mtError, [mbOK], 0);
     finally
-      ActElaborarTimeTable.Enabled := True;
+      ActMakeTimeTable.Enabled := True;
       TbTimeTableDetail.Refresh;
     end;
   end;
@@ -615,7 +615,7 @@ begin
         MessageDlg('El tiempo de prueba a concluido'#13#10 +
           ' El sistema se ejecutara sin las opciones que permiten generar el horario',
           mtWarning, [mbOk], 0);
-        ActElaborarTimeTable.Enabled := False;
+        ActMakeTimeTable.Enabled := False;
         ActMejorarTimeTable.Enabled := False;
       end
       else if Protect1.DaysExpire > 0 then
@@ -625,7 +625,7 @@ begin
       end
       else
       begin
-        ActElaborarTimeTable.Enabled := True;
+        ActMakeTimeTable.Enabled := True;
         ActMejorarTimeTable.Enabled := True;
       end;
     end;
@@ -652,7 +652,7 @@ begin
     FStep := 1;
     FLogStrings := TStringList.Create;
     {$IFDEF FREEWARE}
-    ActElaborarTimeTable.Enabled := False;
+    ActMakeTimeTable.Enabled := False;
     ActMejorarTimeTable.Enabled := False;
     Caption := Caption + ' ***Freeware***';
     {$ENDIF}
@@ -669,7 +669,7 @@ begin
       ProtegerSoftware;
     end;}
   except
-    ActElaborarTimeTable.Enabled := False;
+    ActMakeTimeTable.Enabled := False;
     ActMejorarTimeTable.Enabled := False;
     raise;
   end;

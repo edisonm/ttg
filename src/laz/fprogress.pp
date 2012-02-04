@@ -217,7 +217,7 @@ end;
 
 procedure TProgressForm.FormCreate(Sender: TObject);
 begin
-  // HelpContext := ActElaborarTimeTable.HelpContext;
+  // HelpContext := ActMakeTimeTable.HelpContext;
   FInit := Now;
   FTimePosition0 := FInit;
   lblInit.Caption := FormatDateTime(Format('%s %s ', [ShortDateFormat,
