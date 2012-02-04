@@ -416,1099 +416,1099 @@ msgctxt "dsourcebaseconsts.stbtimetabledetail"
 msgid "Detail of Timetables"
 msgstr "Detalle de los horarios"
 
-#: TCLASSFORM.DBGRID.HINT
+#: tclassform.dbgrid.hint
 msgid "Courses|Courses disponibles"
 msgstr "Courses|Courses disponibles"
 
-#: TCONFIGURACIONFORM.BBTCANCEL.CAPTION
+#: tconfiguracionform.bbtcancel.caption
 msgctxt "TCONFIGURACIONFORM.BBTCANCEL.CAPTION"
 msgid "Cancelar"
 msgstr "Cancelar"
 
-#: TCONFIGURACIONFORM.BBTOK.CAPTION
+#: tconfiguracionform.bbtok.caption
 msgctxt "TCONFIGURACIONFORM.BBTOK.CAPTION"
 msgid "Ok"
 msgstr "Aceptar"
 
-#: TCONFIGURACIONFORM.CBXAPPLYDOUBLEDOWNHILL.CAPTION
+#: tconfiguracionform.cbxapplydoubledownhill.caption
 msgctxt "TCONFIGURACIONFORM.CBXAPPLYDOUBLEDOWNHILL.CAPTION"
 msgid "Aplicar descenso (lento)"
 msgstr "Aplicar descenso (lento)"
 
-#: TCONFIGURACIONFORM.CBXRANDOMIZE.CAPTION
+#: tconfiguracionform.cbxrandomize.caption
 msgctxt "TCONFIGURACIONFORM.CBXRANDOMIZE.CAPTION"
 msgid "Inicializar con la hora del sistema"
 msgstr "Inicializar con la hora del sistema"
 
-#: TCONFIGURACIONFORM.CONFIGURACIONFORM.CAPTION
+#: tconfiguracionform.configuracionform.caption
 msgid "Configure"
 msgstr "Configure"
 
-#: TCONFIGURACIONFORM.EDBOOKMARKS.TEXT
+#: tconfiguracionform.edbookmarks.text
 msgid "1,2"
 msgstr "1,2"
 
-#: TCONFIGURACIONFORM.EDTNAINSTITUTION.HINT
+#: tconfiguracionform.edtnainstitution.hint
 msgctxt "TCONFIGURACIONFORM.EDTNAINSTITUTION.HINT"
 msgid "Colegio|Nombre del colegio"
 msgstr "Colegio|Nombre del colegio"
 
-#: TCONFIGURACIONFORM.LABEL1.CAPTION
+#: tconfiguracionform.label1.caption
 msgid "Clash Teachers:"
 msgstr "Cruce profesores:"
 
-#: TCONFIGURACIONFORM.LABEL13.CAPTION
+#: tconfiguracionform.label13.caption
 msgid "Iteraciones:"
 msgstr "Iteraciones:"
 
-#: TCONFIGURACIONFORM.LABEL15.CAPTION
+#: tconfiguracionform.label15.caption
 msgid "Subject Restrictions:"
 msgstr "Prohibiciones de materia:"
 
-#: TCONFIGURACIONFORM.LABEL18.CAPTION
+#: tconfiguracionform.label18.caption
 msgid "Teacher Restrictions:"
 msgstr "Prohibiciones de profesor:"
 
-#: TCONFIGURACIONFORM.LABEL2.CAPTION
+#: tconfiguracionform.label2.caption
 msgid "Clash Rooms:"
 msgstr "Cruce de aulas:"
 
-#: TCONFIGURACIONFORM.LABEL20.CAPTION
+#: tconfiguracionform.label20.caption
 msgid "Clash Subjects:"
 msgstr "Cruce materias:"
 
-#: TCONFIGURACIONFORM.LABEL29.CAPTION
+#: tconfiguracionform.label29.caption
 msgid "Actualizar cada:"
 msgstr "Actualizar cada:"
 
-#: TCONFIGURACIONFORM.LBLAUTHORITY.CAPTION
+#: tconfiguracionform.lblauthority.caption
 msgid "Authority:"
 msgstr "Autoridad:"
 
-#: TCONFIGURACIONFORM.LBLAUTHORITYPOSITION.CAPTION
+#: tconfiguracionform.lblauthorityposition.caption
 msgctxt "TCONFIGURACIONFORM.LBLAUTHORITYPOSITION.CAPTION"
 msgid "Position:"
 msgstr "Cargo:"
 
-#: TCONFIGURACIONFORM.LBLBREAKTIMETABLETEACHER.CAPTION
+#: tconfiguracionform.lblbreaktimetableteacher.caption
 msgid "Broken teachers:"
 msgstr "Fracc. profesores:"
 
-#: TCONFIGURACIONFORM.LBLBROKENSUBJECTS.CAPTION
+#: tconfiguracionform.lblbrokensubjects.caption
 msgid "Broken Subjects:"
 msgstr "Materias cortadas:"
 
-#: TCONFIGURACIONFORM.LBLCOMMENTS.CAPTION
+#: tconfiguracionform.lblcomments.caption
 msgid "Comments:"
 msgstr "Comentarios:"
 
-#: TCONFIGURACIONFORM.LBLCROSSPROBABILITY.CAPTION
+#: tconfiguracionform.lblcrossprobability.caption
 msgctxt "TCONFIGURACIONFORM.LBLCROSSPROBABILITY.CAPTION"
 msgid "Prob. Cruce:"
 msgstr "Prob. Cruce:"
 
-#: TCONFIGURACIONFORM.LBLDOWNHILLLEVELS.CAPTION
+#: tconfiguracionform.lbldownhilllevels.caption
 msgctxt "TCONFIGURACIONFORM.LBLDOWNHILLLEVELS.CAPTION"
 msgid "Niveles de descenso:"
 msgstr "Niveles de descenso:"
 
-#: TCONFIGURACIONFORM.LBLEMPTYHOURS.CAPTION
+#: tconfiguracionform.lblemptyhours.caption
 msgid "Empty hours:"
 msgstr "Horas huecas:"
 
-#: TCONFIGURACIONFORM.LBLINITIALTIMETABLES.CAPTION
+#: tconfiguracionform.lblinitialtimetables.caption
 msgctxt "TCONFIGURACIONFORM.LBLINITIALTIMETABLES.CAPTION"
 msgid "Horarios iniciales:"
 msgstr "Horarios iniciales:"
 
-#: TCONFIGURACIONFORM.LBLINSTITUTIONNAME.CAPTION
+#: tconfiguracionform.lblinstitutionname.caption
 msgctxt "TCONFIGURACIONFORM.LBLINSTITUTIONNAME.CAPTION"
 msgid "Name:"
 msgstr "Nombre:"
 
-#: TCONFIGURACIONFORM.LBLJOINSUBJECTS.CAPTION
+#: tconfiguracionform.lbljoinsubjects.caption
 msgctxt "TCONFIGURACIONFORM.LBLJOINSUBJECTS.CAPTION"
 msgid "Materias juntas:"
 msgstr "Materias juntas:"
 
-#: TCONFIGURACIONFORM.LBLMAXTEACHERWORKLOAD.CAPTION
+#: tconfiguracionform.lblmaxteacherworkload.caption
 msgid "Max work load per teacher:"
 msgstr "Carga Maxima por Profesor:"
 
-#: TCONFIGURACIONFORM.LBLMUTATIONPROBABILITY.CAPTION
+#: tconfiguracionform.lblmutationprobability.caption
 msgctxt "TCONFIGURACIONFORM.LBLMUTATIONPROBABILITY.CAPTION"
 msgid "Prob. Mutacion:"
 msgstr "Prob. Mutacion:"
 
-#: TCONFIGURACIONFORM.LBLPOLLINATIONPROBABILITY.CAPTION
+#: tconfiguracionform.lblpollinationprobability.caption
 msgctxt "TCONFIGURACIONFORM.LBLPOLLINATIONPROBABILITY.CAPTION"
 msgid "Prob. Polinizacion:"
 msgstr "Prob. Polinizacion:"
 
-#: TCONFIGURACIONFORM.LBLPOPULATIONSIZE.CAPTION
+#: tconfiguracionform.lblpopulationsize.caption
 msgctxt "TCONFIGURACIONFORM.LBLPOPULATIONSIZE.CAPTION"
 msgid "Individuos:"
 msgstr "Individuos:"
 
-#: TCONFIGURACIONFORM.LBLREPARATIONPROBABILITY.CAPTION
+#: tconfiguracionform.lblreparationprobability.caption
 msgctxt "TCONFIGURACIONFORM.LBLREPARATIONPROBABILITY.CAPTION"
 msgid "Prob. Reparacion:"
 msgstr "Prob. Reparacion:"
 
-#: TCONFIGURACIONFORM.LBLRESPONSIBLE.CAPTION
+#: tconfiguracionform.lblresponsible.caption
 msgid "Responsible:"
 msgstr "Responsable:"
 
-#: TCONFIGURACIONFORM.LBLRESPONSIBLEPOSITION.CAPTION
+#: tconfiguracionform.lblresponsibleposition.caption
 msgctxt "TCONFIGURACIONFORM.LBLRESPONSIBLEPOSITION.CAPTION"
 msgid "Position:"
 msgstr "Cargo:"
 
-#: TCONFIGURACIONFORM.LBLSCHOOLYEAR.CAPTION
+#: tconfiguracionform.lblschoolyear.caption
 msgid "School Year:"
 msgstr "Periodo Lectivo:"
 
-#: TCONFIGURACIONFORM.LBLSEED.CAPTION
+#: tconfiguracionform.lblseed.caption
 msgctxt "TCONFIGURACIONFORM.LBLSEED.CAPTION"
 msgid "Semilla:"
 msgstr "Semilla:"
 
-#: TCONFIGURACIONFORM.LBLSHAREDDIRECTORY.CAPTION
+#: tconfiguracionform.lblshareddirectory.caption
 msgctxt "TCONFIGURACIONFORM.LBLSHAREDDIRECTORY.CAPTION"
 msgid "Dir. de intercambio:"
 msgstr "Dir. de intercambio:"
 
-#: TCONFIGURACIONFORM.LBLSRCOLOR.CAPTION
+#: tconfiguracionform.lblsrcolor.caption
 msgctxt "TCONFIGURACIONFORM.LBLSRCOLOR.CAPTION"
 msgid "Color:"
 msgstr "Color:"
 
-#: TCONFIGURACIONFORM.LBLSRNAME.CAPTION
+#: tconfiguracionform.lblsrname.caption
 msgctxt "TCONFIGURACIONFORM.LBLSRNAME.CAPTION"
 msgid "Name:"
 msgstr "Nombre:"
 
-#: TCONFIGURACIONFORM.LBLSRVALUE.CAPTION
+#: tconfiguracionform.lblsrvalue.caption
 msgctxt "TCONFIGURACIONFORM.LBLSRVALUE.CAPTION"
 msgid "Value:"
 msgstr "Valor:"
 
-#: TCONFIGURACIONFORM.LBLTRCOLOR.CAPTION
+#: tconfiguracionform.lbltrcolor.caption
 msgctxt "TCONFIGURACIONFORM.LBLTRCOLOR.CAPTION"
 msgid "Color:"
 msgstr "Color:"
 
-#: TCONFIGURACIONFORM.LBLTRNAME.CAPTION
+#: tconfiguracionform.lbltrname.caption
 msgctxt "TCONFIGURACIONFORM.LBLTRNAME.CAPTION"
 msgid "Name:"
 msgstr "Nombre:"
 
-#: TCONFIGURACIONFORM.LBLTRVALUE.CAPTION
+#: tconfiguracionform.lbltrvalue.caption
 msgctxt "TCONFIGURACIONFORM.LBLTRVALUE.CAPTION"
 msgid "Value:"
 msgstr "Valor:"
 
-#: TCONFIGURACIONFORM.TBSINSTITUTION.CAPTION
+#: tconfiguracionform.tbsinstitution.caption
 msgid "Institution"
 msgstr "Institucion"
 
-#: TCONFIGURACIONFORM.TBSINSTITUTION.HINT
+#: tconfiguracionform.tbsinstitution.hint
 msgid "Institution Data"
 msgstr "Datos del instituto"
 
-#: TCONFIGURACIONFORM.TBSOPTIONS.CAPTION
+#: tconfiguracionform.tbsoptions.caption
 msgid "Options"
 msgstr "Opciones"
 
-#: TCONFIGURACIONFORM.TBSWEIGTHS.CAPTION
+#: tconfiguracionform.tbsweigths.caption
 msgctxt "TCONFIGURACIONFORM.TBSWEIGTHS.CAPTION"
 msgid "Weights"
 msgstr "Pesos"
 
-#: TCROSSMANYTOMANYEDITOR0FORM.PANEL2.CAPTION
+#: tcrossmanytomanyeditor0form.panel2.caption
 msgid "Panel2"
 msgstr "Panel2"
 
-#: TCROSSMANYTOMANYEDITORFORM.BTNCANCEL.HINT
+#: tcrossmanytomanyeditorform.btncancel.hint
 msgid "Cancelar|Cancelar"
 msgstr "Cancelar|Cancelar"
 
-#: TCROSSMANYTOMANYEDITORFORM.BTNOK.HINT
+#: tcrossmanytomanyeditorform.btnok.hint
 msgid "Aceptar|Aceptar"
 msgstr "Aceptar|Aceptar"
 
-#: TEDITORFORM.BTNSHOW.HINT
+#: teditorform.btnshow.hint
 msgctxt "TEDITORFORM.BTNSHOW.HINT"
 msgid "Show|Show the grid content in a report"
 msgstr "Presentar|Presenta el contenido de la cuadricula en un reporte"
 
-#: TEDITORFORM.EDITORFORM.CAPTION
+#: teditorform.editorform.caption
 msgid "EditorForm"
 msgstr "EditorForm"
 
-#: TEDITORFORM.TLBSHOW.CAPTION
+#: teditorform.tlbshow.caption
 msgid "Presentacion"
 msgstr "Presentacion"
 
-#: TMAINFORM.ACTABOUT.CAPTION
+#: tmainform.actabout.caption
 msgid "Acerca de..."
 msgstr "Acerca de..."
 
-#: TMAINFORM.ACTABOUT.HINT
+#: tmainform.actabout.hint
 msgid "Acerca de|Informacion referente a este programa"
 msgstr "Acerca de|Informacion referente a este programa"
 
-#: TMAINFORM.ACTCHANGEPASSWD.CAPTION
+#: tmainform.actchangepasswd.caption
 msgid "Cambiar clave..."
 msgstr "Cambiar clave..."
 
-#: TMAINFORM.ACTCHANGEPASSWD.HINT
+#: tmainform.actchangepasswd.hint
 msgid "Cambiar Clave|Permite cambiar la clave de acceso al sistema"
 msgstr "Cambiar Clave|Permite cambiar la clave de acceso al sistema"
 
-#: TMAINFORM.ACTCHEQUEARFACTIBILIDAD.CAPTION
+#: tmainform.actchequearfactibilidad.caption
 msgid "Chequear factibilidad"
 msgstr "Chequear factibilidad"
 
-#: TMAINFORM.ACTCHEQUEARFACTIBILIDAD.HINT
+#: tmainform.actchequearfactibilidad.hint
 msgid "Chequear factibilidad|Chequear la factibilidad de los datos ingresados"
 msgstr "Chequear factibilidad|Chequear la factibilidad de los datos ingresados"
 
-#: TMAINFORM.ACTCLASS.CAPTION
+#: tmainform.actclass.caption
 msgid "Classs"
 msgstr "Classs"
 
-#: TMAINFORM.ACTCLASS.HINT
+#: tmainform.actclass.hint
 msgid "Cursos|Cursos con sus respectivos paralelos"
 msgstr "Cursos|Cursos con sus respectivos paralelos"
 
-#: TMAINFORM.ACTCONFIGURAR.CAPTION
+#: tmainform.actconfigurar.caption
 msgid "Configurar..."
 msgstr "Configurar..."
 
-#: TMAINFORM.ACTCONFIGURAR.HINT
+#: tmainform.actconfigurar.hint
 msgid "Configurar|Cambiar la configuracion del sistema"
 msgstr "Configurar|Cambiar la configuracion del sistema"
 
-#: TMAINFORM.ACTCONTENTS.CAPTION
+#: tmainform.actcontents.caption
 msgid "Contenido"
 msgstr "Contenido"
 
-#: TMAINFORM.ACTCONTENTS.HINT
+#: tmainform.actcontents.hint
 msgid "Contenido|Contenido de la Ayuda"
 msgstr "Contenido|Contenido de la Ayuda"
 
-#: TMAINFORM.ACTDAY.CAPTION
+#: tmainform.actday.caption
 msgid "Dias laborables"
 msgstr "Dias laborables"
 
-#: TMAINFORM.ACTDAY.HINT
+#: tmainform.actday.hint
 msgid "Dias laborables|Dias laborables"
 msgstr "Dias laborables|Dias laborables"
 
-#: TMAINFORM.ACTELABORARTIMETABLE.CAPTION
+#: tmainform.actelaborartimetable.caption
 msgid "Elaborar horario"
 msgstr "Elaborar horario"
 
-#: TMAINFORM.ACTELABORARTIMETABLE.HINT
+#: tmainform.actelaborartimetable.hint
 msgid "Elaborar Horario|Elaborar Horario"
 msgstr "Elaborar Horario|Elaborar Horario"
 
-#: TMAINFORM.ACTEXIT.CAPTION
+#: tmainform.actexit.caption
 msgid "Salir"
 msgstr "Salir"
 
-#: TMAINFORM.ACTEXIT.HINT
+#: tmainform.actexit.hint
 msgid "Salir|Salir del programa"
 msgstr "Salir|Salir del programa"
 
-#: TMAINFORM.ACTGROUPID.CAPTION
+#: tmainform.actgroupid.caption
 msgid "Identificadores de paralelo"
 msgstr "Identificadores de paralelo"
 
-#: TMAINFORM.ACTGROUPID.HINT
+#: tmainform.actgroupid.hint
 msgid "Identificadores de paralelo|Identificadores de paralelo"
 msgstr "Identificadores de paralelo|Identificadores de paralelo"
 
-#: TMAINFORM.ACTHOUR.CAPTION
+#: tmainform.acthour.caption
 msgid "Horas academicas"
 msgstr "Horas academicas"
 
-#: TMAINFORM.ACTHOUR.HINT
+#: tmainform.acthour.hint
 msgid "Horas academicas|Horas academicas"
 msgstr "Horas academicas|Horas academicas"
 
-#: TMAINFORM.ACTINDEX.CAPTION
+#: tmainform.actindex.caption
 msgid "Indice"
 msgstr "Indice"
 
-#: TMAINFORM.ACTINDEX.HINT
+#: tmainform.actindex.hint
 msgid "Indice|Indice de la Ayuda"
 msgstr "Indice|Indice de la Ayuda"
 
-#: TMAINFORM.ACTLANGDEFAULT.CAPTION
+#: tmainform.actlangdefault.caption
 msgid "Default Language"
 msgstr "Idioma por defecto"
 
-#: TMAINFORM.ACTLANGENGLISH.CAPTION
+#: tmainform.actlangenglish.caption
 msgid "English"
 msgstr "Inglés"
 
-#: TMAINFORM.ACTLANGSPANISH.CAPTION
+#: tmainform.actlangspanish.caption
 msgid "Spanish"
 msgstr "Español"
 
-#: TMAINFORM.ACTLEVEL.CAPTION
+#: tmainform.actlevel.caption
 msgid "Niveles"
 msgstr "Niveles"
 
-#: TMAINFORM.ACTLEVEL.HINT
+#: tmainform.actlevel.hint
 msgid "Niveles|Niveles"
 msgstr "Niveles|Niveles"
 
-#: TMAINFORM.ACTMEJORARTIMETABLE.CAPTION
+#: tmainform.actmejorartimetable.caption
 msgid "Mejorar horario"
 msgstr "Mejorar horario"
 
-#: TMAINFORM.ACTMEJORARTIMETABLE.HINT
+#: tmainform.actmejorartimetable.hint
 msgid "Mejorar horario|Mejorar horario buscando en doble profundidad"
 msgstr "Mejorar horario|Mejorar horario buscando en doble profundidad"
 
-#: TMAINFORM.ACTNEW.CAPTION
+#: tmainform.actnew.caption
 msgid "&Nuevo"
 msgstr "&Nuevo"
 
-#: TMAINFORM.ACTNEW.HINT
+#: tmainform.actnew.hint
 msgid "Nuevo|Nuevo colegio"
 msgstr "Nuevo|Nuevo colegio"
 
-#: TMAINFORM.ACTOPEN.CAPTION
+#: tmainform.actopen.caption
 msgid "Open"
 msgstr "Abrir"
 
-#: TMAINFORM.ACTOPEN.HINT
+#: tmainform.actopen.hint
 msgid "Open|Open saved institution"
 msgstr "Abrir|Abrir colegio previamente guardado"
 
-#: TMAINFORM.ACTPASSWD.CAPTION
+#: tmainform.actpasswd.caption
 msgid "Clave..."
 msgstr "Clave..."
 
-#: TMAINFORM.ACTPASSWD.HINT
+#: tmainform.actpasswd.hint
 msgid "Clave|Permite ingresar la clave de acceso al sistema"
 msgstr "Clave|Permite ingresar la clave de acceso al sistema"
 
-#: TMAINFORM.ACTREGISTRATIONINFO.CAPTION
+#: tmainform.actregistrationinfo.caption
 msgid "Informacion de registro"
 msgstr "Informacion de registro"
 
-#: TMAINFORM.ACTROOMTYPE.CAPTION
+#: tmainform.actroomtype.caption
 msgid "Tipos de aula"
 msgstr "Tipos de aula"
 
-#: TMAINFORM.ACTROOMTYPE.HINT
+#: tmainform.actroomtype.hint
 msgid "Tipos de aula|Tipos de aula"
 msgstr "Tipos de aula|Tipos de aula"
 
-#: TMAINFORM.ACTSAVE.CAPTION
+#: tmainform.actsave.caption
 msgid "Guardar..."
 msgstr "Guardar..."
 
-#: TMAINFORM.ACTSAVE.HINT
+#: tmainform.actsave.hint
 msgid "Guardar|Guardar colegio"
 msgstr "Guardar|Guardar colegio"
 
-#: TMAINFORM.ACTSPECIALIZATION.CAPTION
+#: tmainform.actspecialization.caption
 msgid "Especializaciones"
 msgstr "Especializaciones"
 
-#: TMAINFORM.ACTSPECIALIZATION.HINT
+#: tmainform.actspecialization.hint
 msgid "Especializaciones|Especializaciones"
 msgstr "Especializaciones|Especializaciones"
 
-#: TMAINFORM.ACTSUBJECT.CAPTION
+#: tmainform.actsubject.caption
 msgctxt "TMAINFORM.ACTSUBJECT.CAPTION"
 msgid "Materias"
 msgstr "Materias"
 
-#: TMAINFORM.ACTSUBJECT.HINT
+#: tmainform.actsubject.hint
 msgid "Materias|Materias"
 msgstr "Materias|Materias"
 
-#: TMAINFORM.ACTTEACHER.CAPTION
+#: tmainform.actteacher.caption
 msgid "Profesores"
 msgstr "Profesores"
 
-#: TMAINFORM.ACTTEACHER.HINT
+#: tmainform.actteacher.hint
 msgid "Profesores|Profesores"
 msgstr "Profesores|Profesores"
 
-#: TMAINFORM.ACTTIMESLOT.CAPTION
+#: tmainform.acttimeslot.caption
 msgid "Periodos laborables"
 msgstr "Periodos laborables"
 
-#: TMAINFORM.ACTTIMESLOT.HINT
+#: tmainform.acttimeslot.hint
 msgid "Periodos laborables|Periodos laborables"
 msgstr "Periodos laborables|Periodos laborables"
 
-#: TMAINFORM.ACTTIMETABLE.CAPTION
+#: tmainform.acttimetable.caption
 msgid "TimeTables"
 msgstr "Horarios"
 
-#: TMAINFORM.ACTTIMETABLE.HINT
+#: tmainform.acttimetable.hint
 msgid "Horarios|Ver los horarios elaborados"
 msgstr "Horarios|Ver los horarios elaborados"
 
-#: TMAINFORM.MAINFORM.CAPTION
+#: tmainform.mainform.caption
 msgid "MainForm"
 msgstr "MainForm"
 
-#: TMAINFORM.MIDATA.CAPTION
+#: tmainform.midata.caption
 msgid "&Datos"
 msgstr "&Datos"
 
-#: TMAINFORM.MIDATA.HINT
+#: tmainform.midata.hint
 msgid "Datos|Ingreso de datos"
 msgstr "Datos|Ingreso de datos"
 
-#: TMAINFORM.MIELABORARTIMETABLE.HINT
+#: tmainform.mielaborartimetable.hint
 msgid "Elaborar horario|Elaborar horario"
 msgstr "Elaborar horario|Elaborar horario"
 
-#: TMAINFORM.MIFILE.CAPTION
+#: tmainform.mifile.caption
 msgid "&Archivo"
 msgstr "&Archivo"
 
-#: TMAINFORM.MIFILE.HINT
+#: tmainform.mifile.hint
 msgid "Archivo|Utilidades de la base de datos"
 msgstr "Archivo|Utilidades de la base de datos"
 
-#: TMAINFORM.MIHELP.CAPTION
+#: tmainform.mihelp.caption
 msgid "A&yuda"
 msgstr "A&yuda"
 
-#: TMAINFORM.MIHELP.HINT
+#: tmainform.mihelp.hint
 msgid "Ayuda|Temas de Ayuda en linea"
 msgstr "Ayuda|Temas de Ayuda en linea"
 
-#: TMAINFORM.MILANGUAGES.CAPTION
+#: tmainform.milanguages.caption
 msgid "Languages"
 msgstr "Languages"
 
-#: TMAINFORM.MIREOPEN.CAPTION
+#: tmainform.mireopen.caption
 msgid "Volver a abrir"
 msgstr "Volver a abrir"
 
-#: TMAINFORM.MIREOPEN.HINT
+#: tmainform.mireopen.hint
 msgid "Volver a abrir|Volver a abrir un colegio"
 msgstr "Volver a abrir|Volver a abrir un colegio"
 
-#: TMAINFORM.MITOOL.CAPTION
+#: tmainform.mitool.caption
 msgid "&Herramientas"
 msgstr "&Herramientas"
 
-#: TMAINFORM.MITOOL.HINT
+#: tmainform.mitool.hint
 msgid "Herramientas|Herramientas que permiten elaborar un horario"
 msgstr "Herramientas|Herramientas que permiten elaborar un horario"
 
-#: TMAINFORM.MIVIEW.CAPTION
+#: tmainform.miview.caption
 msgid "&Ver"
 msgstr "&Ver"
 
-#: TMAINFORM.MIVIEW.HINT
+#: tmainform.miview.hint
 msgid "Ver|Presentacion de resultados"
 msgstr "Ver|Presentacion de resultados"
 
-#: TMAINFORM.N1.CAPTION
+#: tmainform.n1.caption
 msgctxt "TMAINFORM.N1.CAPTION"
 msgid "-"
 msgstr "-"
 
-#: TMAINFORM.N2.CAPTION
+#: tmainform.n2.caption
 msgctxt "TMAINFORM.N2.CAPTION"
 msgid "-"
 msgstr "-"
 
-#: TMAINFORM.N3.CAPTION
+#: tmainform.n3.caption
 msgctxt "TMAINFORM.N3.CAPTION"
 msgid "-"
 msgstr "-"
 
-#: TMAINFORM.N5.CAPTION
+#: tmainform.n5.caption
 msgctxt "TMAINFORM.N5.CAPTION"
 msgid "-"
 msgstr "-"
 
-#: TMAINFORM.N6.CAPTION
+#: tmainform.n6.caption
 msgctxt "TMAINFORM.N6.CAPTION"
 msgid "-"
 msgstr "-"
 
-#: TMAINFORM.TOOLBUTTON1.CAPTION
+#: tmainform.toolbutton1.caption
 msgid "ToolButton1"
 msgstr "ToolButton1"
 
-#: TMAINFORM.TOOLBUTTON2.CAPTION
+#: tmainform.toolbutton2.caption
 msgid "ToolButton2"
 msgstr "ToolButton2"
 
-#: TMAINFORM.TOOLBUTTON3.CAPTION
+#: tmainform.toolbutton3.caption
 msgid "ToolButton3"
 msgstr "ToolButton3"
 
-#: TMAINFORM.TOOLBUTTON4.CAPTION
+#: tmainform.toolbutton4.caption
 msgid "ToolButton4"
 msgstr "ToolButton4"
 
-#: TMESSAGEVIEWFORM.BBTNCLOSE.CAPTION
+#: tmessageviewform.bbtnclose.caption
 msgid "&Cerrar"
 msgstr "&Cerrar"
 
-#: TMESSAGEVIEWFORM.MESSAGEVIEWFORM.CAPTION
+#: tmessageviewform.messageviewform.caption
 msgid "Visor de mensajes"
 msgstr "Visor de mensajes"
 
-#: TMESSAGEVIEWFORM.PANEL1.CAPTION
+#: tmessageviewform.panel1.caption
 msgid "Panel1"
 msgstr "Panel1"
 
-#: TPROGRESSFORM.BBTCANCEL.CAPTION
+#: tprogressform.bbtcancel.caption
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: TPROGRESSFORM.BBTCLOSE.CAPTION
+#: tprogressform.bbtclose.caption
 msgctxt "TPROGRESSFORM.BBTCLOSE.CAPTION"
 msgid "Ok"
 msgstr "Aceptar"
 
-#: TPROGRESSFORM.LBLBREAKTIMETABLETEACHERCOUNT.CAPTION
+#: tprogressform.lblbreaktimetableteachercount.caption
 msgctxt "TPROGRESSFORM.LBLBREAKTIMETABLETEACHERCOUNT.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLBREAKTIMETABLETEACHERVALUE.CAPTION
+#: tprogressform.lblbreaktimetableteachervalue.caption
 msgctxt "TPROGRESSFORM.LBLBREAKTIMETABLETEACHERVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLBROKENSESSION.CAPTION
+#: tprogressform.lblbrokensession.caption
 msgctxt "TPROGRESSFORM.LBLBROKENSESSION.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION
+#: tprogressform.lblbrokensessionvalue.caption
 msgctxt "TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLCLASHROOMTYPE.CAPTION
+#: tprogressform.lblclashroomtype.caption
 msgctxt "TPROGRESSFORM.LBLCLASHROOMTYPE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLCLASHROOMTYPEVALUE.CAPTION
+#: tprogressform.lblclashroomtypevalue.caption
 msgctxt "TPROGRESSFORM.LBLCLASHROOMTYPEVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLCLASHSUBJECT.CAPTION
+#: tprogressform.lblclashsubject.caption
 msgctxt "TPROGRESSFORM.LBLCLASHSUBJECT.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLCLASHSUBJECTVALUE.CAPTION
+#: tprogressform.lblclashsubjectvalue.caption
 msgctxt "TPROGRESSFORM.LBLCLASHSUBJECTVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLCLASHTEACHER.CAPTION
+#: tprogressform.lblclashteacher.caption
 msgctxt "TPROGRESSFORM.LBLCLASHTEACHER.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLCLASHTEACHERVALUE.CAPTION
+#: tprogressform.lblclashteachervalue.caption
 msgctxt "TPROGRESSFORM.LBLCLASHTEACHERVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLCOLISION.CAPTION
+#: tprogressform.lblcolision.caption
 msgctxt "TPROGRESSFORM.LBLCOLISION.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLELAPSEDTIME.CAPTION
+#: tprogressform.lblelapsedtime.caption
 msgctxt "TPROGRESSFORM.LBLELAPSEDTIME.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLEXPORTS.CAPTION
+#: tprogressform.lblexports.caption
 msgctxt "TPROGRESSFORM.LBLEXPORTS.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLIMPORTS.CAPTION
+#: tprogressform.lblimports.caption
 msgctxt "TPROGRESSFORM.LBLIMPORTS.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLNONSCATTEREDSUBJECTCOUNT.CAPTION
+#: tprogressform.lblnonscatteredsubjectcount.caption
 msgctxt "TPROGRESSFORM.LBLNONSCATTEREDSUBJECTCOUNT.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLNONSCATTEREDSUBJECTVALUE.CAPTION
+#: tprogressform.lblnonscatteredsubjectvalue.caption
 msgctxt "TPROGRESSFORM.LBLNONSCATTEREDSUBJECTVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOUR.CAPTION
+#: tprogressform.lbloutofpositionemptyhour.caption
 msgctxt "TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOUR.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION
+#: tprogressform.lbloutofpositionemptyhourvalue.caption
 msgctxt "TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLPOSITION.CAPTION
+#: tprogressform.lblposition.caption
 msgctxt "TPROGRESSFORM.LBLPOSITION.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLREMAININGTIME.CAPTION
+#: tprogressform.lblremainingtime.caption
 msgctxt "TPROGRESSFORM.LBLREMAININGTIME.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLSUBJECTRESTRICTION.CAPTION
+#: tprogressform.lblsubjectrestriction.caption
 msgctxt "TPROGRESSFORM.LBLSUBJECTRESTRICTION.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLSUBJECTRESTRICTIONVALUE.CAPTION
+#: tprogressform.lblsubjectrestrictionvalue.caption
 msgctxt "TPROGRESSFORM.LBLSUBJECTRESTRICTIONVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLTEACHERRESTRICTION.CAPTION
+#: tprogressform.lblteacherrestriction.caption
 msgctxt "TPROGRESSFORM.LBLTEACHERRESTRICTION.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLTEACHERRESTRICTIONVALUE.CAPTION
+#: tprogressform.lblteacherrestrictionvalue.caption
 msgctxt "TPROGRESSFORM.LBLTEACHERRESTRICTIONVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.LBLTOTALVALUE.CAPTION
+#: tprogressform.lbltotalvalue.caption
 msgctxt "TPROGRESSFORM.LBLTOTALVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: TPROGRESSFORM.PNLBREAKTIMETABLETEACHER.CAPTION
+#: tprogressform.pnlbreaktimetableteacher.caption
 msgid " Broken Teachers:"
 msgstr "Fracc. profesores:"
 
-#: TPROGRESSFORM.PNLBREAKTIMETABLETEACHERCOUNT.CAPTION
+#: tprogressform.pnlbreaktimetableteachercount.caption
 msgctxt "TPROGRESSFORM.PNLBREAKTIMETABLETEACHERCOUNT.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLBREAKTIMETABLETEACHERVALUE.CAPTION
+#: tprogressform.pnlbreaktimetableteachervalue.caption
 msgctxt "TPROGRESSFORM.PNLBREAKTIMETABLETEACHERVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
-#: TPROGRESSFORM.PNLBROKENSESSION.CAPTION
+#: tprogressform.pnlbrokensession.caption
 msgid " Broken Subjects:"
 msgstr " Materias cortadas"
 
-#: TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION
+#: tprogressform.pnlbrokensessionnumber.caption
 msgctxt "TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION
+#: tprogressform.pnlbrokensessionvalue.caption
 msgctxt "TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
-#: TPROGRESSFORM.PNLCLASHROOMTYPE.CAPTION
+#: tprogressform.pnlclashroomtype.caption
 msgid " Clash Classrooms:"
 msgstr " Cruce de aulas:"
 
-#: TPROGRESSFORM.PNLCLASHROOMTYPENUMBER.CAPTION
+#: tprogressform.pnlclashroomtypenumber.caption
 msgctxt "TPROGRESSFORM.PNLCLASHROOMTYPENUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLCLASHROOMTYPEVALUE.CAPTION
+#: tprogressform.pnlclashroomtypevalue.caption
 msgctxt "TPROGRESSFORM.PNLCLASHROOMTYPEVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
-#: TPROGRESSFORM.PNLCLASHSUBJECT.CAPTION
+#: tprogressform.pnlclashsubject.caption
 msgid " Clash Subjects:"
 msgstr " Cruce materias:"
 
-#: TPROGRESSFORM.PNLCLASHSUBJECTNUMBER.CAPTION
+#: tprogressform.pnlclashsubjectnumber.caption
 msgctxt "TPROGRESSFORM.PNLCLASHSUBJECTNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLCLASHSUBJECTVALUE.CAPTION
+#: tprogressform.pnlclashsubjectvalue.caption
 msgctxt "TPROGRESSFORM.PNLCLASHSUBJECTVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
-#: TPROGRESSFORM.PNLCLASHTEACHER.CAPTION
+#: tprogressform.pnlclashteacher.caption
 msgid " Clash Teachers:"
 msgstr " Cruce profesores:"
 
-#: TPROGRESSFORM.PNLCLASHTEACHERNUMBER.CAPTION
+#: tprogressform.pnlclashteachernumber.caption
 msgctxt "TPROGRESSFORM.PNLCLASHTEACHERNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLCLASHTEACHERVALUE.CAPTION
+#: tprogressform.pnlclashteachervalue.caption
 msgctxt "TPROGRESSFORM.PNLCLASHTEACHERVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
-#: TPROGRESSFORM.PNLCRASHES.CAPTION
+#: tprogressform.pnlcrashes.caption
 msgid " Crashes:"
 msgstr " Colisiones:"
 
-#: TPROGRESSFORM.PNLELAPSEDTIME.CAPTION
+#: tprogressform.pnlelapsedtime.caption
 msgid " Elapsed time:"
 msgstr " Tiempo transcurrido:"
 
-#: TPROGRESSFORM.PNLESTIMATEDTIME.CAPTION
+#: tprogressform.pnlestimatedtime.caption
 msgid "Remaining time:"
 msgstr "Tiempo restante:"
 
-#: TPROGRESSFORM.PNLEXPORTS.CAPTION
+#: tprogressform.pnlexports.caption
 msgid " Exports:"
 msgstr " Exportaciones:"
 
-#: TPROGRESSFORM.PNLIMPORTS.CAPTION
+#: tprogressform.pnlimports.caption
 msgid " Imports:"
 msgstr " Importaciones:"
 
-#: TPROGRESSFORM.PNLINITDATETIME.CAPTION
+#: tprogressform.pnlinitdatetime.caption
 msgid "Started at:"
 msgstr "Iniciado el:"
 
-#: TPROGRESSFORM.PNLNONSCATTEREDSUBJECT.CAPTION
+#: tprogressform.pnlnonscatteredsubject.caption
 msgid " Join Subjects:"
 msgstr " Materias juntas:"
 
-#: TPROGRESSFORM.PNLNONSCATTEREDSUBJECTCOUNT.CAPTION
+#: tprogressform.pnlnonscatteredsubjectcount.caption
 msgctxt "TPROGRESSFORM.PNLNONSCATTEREDSUBJECTCOUNT.CAPTION"
 msgid " Number:"
 msgstr " Numero:"
 
-#: TPROGRESSFORM.PNLNONSCATTEREDSUBJECTVALUE.CAPTION
+#: tprogressform.pnlnonscatteredsubjectvalue.caption
 msgctxt "TPROGRESSFORM.PNLNONSCATTEREDSUBJECTVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
-#: TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOUR.CAPTION
+#: tprogressform.pnloutofpositionemptyhour.caption
 msgid " Empty hours:"
 msgstr " Horas huecas"
 
-#: TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURNUMBER.CAPTION
+#: tprogressform.pnloutofpositionemptyhournumber.caption
 msgctxt "TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION
+#: tprogressform.pnloutofpositionemptyhourvalue.caption
 msgctxt "TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
-#: TPROGRESSFORM.PNLPOLLINATION.CAPTION
+#: tprogressform.pnlpollination.caption
 msgid "Pollination:"
 msgstr "Polinizacion:"
 
-#: TPROGRESSFORM.PNLPOSITION.CAPTION
+#: tprogressform.pnlposition.caption
 msgid " Iteration:"
 msgstr " Iteracion:"
 
-#: TPROGRESSFORM.PNLSUBJECTRESTRICTION.CAPTION
+#: tprogressform.pnlsubjectrestriction.caption
 msgid " Subject Restrictions:"
 msgstr " Prohibiciones de materia:"
 
-#: TPROGRESSFORM.PNLSUBJECTRESTRICTIONNUMBER.CAPTION
+#: tprogressform.pnlsubjectrestrictionnumber.caption
 msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTIONNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLSUBJECTRESTRICTIONVALUE.CAPTION
+#: tprogressform.pnlsubjectrestrictionvalue.caption
 msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTIONVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
-#: TPROGRESSFORM.PNLTEACHERRESTRICTION.CAPTION
+#: tprogressform.pnlteacherrestriction.caption
 msgid " Teacher Restrictions:"
 msgstr " Prohibiciones de profesor:"
 
-#: TPROGRESSFORM.PNLTEACHERRESTRICTIONNUMBER.CAPTION
+#: tprogressform.pnlteacherrestrictionnumber.caption
 msgctxt "TPROGRESSFORM.PNLTEACHERRESTRICTIONNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Number:"
 
-#: TPROGRESSFORM.PNLTEACHERRESTRICTIONVALUE.CAPTION
+#: tprogressform.pnlteacherrestrictionvalue.caption
 msgctxt "TPROGRESSFORM.PNLTEACHERRESTRICTIONVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
-#: TPROGRESSFORM.PNLTOTALVALUE.CAPTION
+#: tprogressform.pnltotalvalue.caption
 msgid "Total Value:"
 msgstr " Valor Total:"
 
-#: TPROGRESSFORM.PROGRESSFORM.CAPTION
+#: tprogressform.progressform.caption
 msgid "Progreso de la busqueda"
 msgstr "Progreso de la busqueda"
 
-#: TSELTIMESLOTFORM.BBACEPTAR.CAPTION
+#: tseltimeslotform.bbaceptar.caption
 msgctxt "TSELTIMESLOTFORM.BBACEPTAR.CAPTION"
 msgid "Aceptar"
 msgstr "Aceptar"
 
-#: TSELTIMESLOTFORM.BBCANCELAR.CAPTION
+#: tseltimeslotform.bbcancelar.caption
 msgctxt "TSELTIMESLOTFORM.BBCANCELAR.CAPTION"
 msgid "Cancelar"
 msgstr "Cancelar"
 
-#: TSELTIMESLOTFORM.LABEL1.CAPTION
+#: tseltimeslotform.label1.caption
 msgid "Seleccione el periodo a intercambiar"
 msgstr "Seleccione el periodo a intercambiar"
 
-#: TSELTIMESLOTFORM.LABEL2.CAPTION
+#: tseltimeslotform.label2.caption
 msgctxt "TSELTIMESLOTFORM.LABEL2.CAPTION"
 msgid "Day"
 msgstr "Day"
 
-#: TSELTIMESLOTFORM.LABEL3.CAPTION
+#: tseltimeslotform.label3.caption
 msgctxt "TSELTIMESLOTFORM.LABEL3.CAPTION"
 msgid "Hour"
 msgstr "Hour"
 
-#: TSELTIMESLOTFORM.SELTIMESLOTFORM.CAPTION
+#: tseltimeslotform.seltimeslotform.caption
 msgid "Intercambiar TimeSlot"
 msgstr "Intercambiar TimeSlot"
 
-#: TSINGLEEDITORFORM.ACTFIND.CAPTION
+#: tsingleeditorform.actfind.caption
 msgid "Buscar"
 msgstr "Buscar"
 
-#: TSINGLEEDITORFORM.ACTFIND.HINT
+#: tsingleeditorform.actfind.hint
 msgid "Buscar|Buscar un campo especifico"
 msgstr "Buscar|Buscar un campo especifico"
 
-#: TSINGLEEDITORFORM.ACTSHOW.CAPTION
+#: tsingleeditorform.actshow.caption
 msgid "Mostrar"
 msgstr "Mostrar"
 
-#: TSINGLEEDITORFORM.ACTSHOW.HINT
+#: tsingleeditorform.actshow.hint
 msgctxt "TSINGLEEDITORFORM.ACTSHOW.HINT"
 msgid "Presentar|Presenta el contenido de la cuadricula en un reporte"
 msgstr "Presentar|Presenta el contenido de la cuadricula en un reporte"
 
-#: TSPLASHFORM.LABEL1.CAPTION
+#: tsplashform.label1.caption
 msgid "Version"
 msgstr "Version"
 
-#: TSPLASHFORM.LABEL2.CAPTION
+#: tsplashform.label2.caption
 msgid "Ejecutable"
 msgstr "Ejecutable"
 
-#: TSPLASHFORM.LABEL3.CAPTION
+#: tsplashform.label3.caption
 msgid "Edicion"
 msgstr "Edicion"
 
-#: TSPLASHFORM.LBLCOPYRIGHT.CAPTION
+#: tsplashform.lblcopyright.caption
 msgctxt "TSPLASHFORM.LBLCOPYRIGHT.CAPTION"
 msgid "..."
 msgstr "..."
 
-#: TSPLASHFORM.LBLPRODUCTNAME.CAPTION
+#: tsplashform.lblproductname.caption
 msgctxt "TSPLASHFORM.LBLPRODUCTNAME.CAPTION"
 msgid "..."
 msgstr "..."
 
-#: TSPLASHFORM.LBLPRODUCTVERSION.CAPTION
+#: tsplashform.lblproductversion.caption
 msgctxt "TSPLASHFORM.LBLPRODUCTVERSION.CAPTION"
 msgid "..."
 msgstr "..."
 
-#: TSPLASHFORM.LBLYEARLABEL.CAPTION
+#: tsplashform.lblyearlabel.caption
 msgctxt "TSPLASHFORM.LBLYEARLABEL.CAPTION"
 msgid "..."
 msgstr "..."
 
-#: TSPLASHFORM.SPLASHFORM.CAPTION
+#: tsplashform.splashform.caption
 msgid "SplashForm"
 msgstr "SplashForm"
 
-#: TSUBJECTFORM.ACTSUBJECTRESTRICTION.CAPTION
+#: tsubjectform.actsubjectrestriction.caption
 msgctxt "TSUBJECTFORM.ACTSUBJECTRESTRICTION.CAPTION"
 msgid "Prohibiciones de materia"
 msgstr "Prohibiciones de materia"
 
-#: TSUBJECTFORM.ACTSUBJECTRESTRICTION.HINT
+#: tsubjectform.actsubjectrestriction.hint
 msgid "Prohibiciones de materia|Ingresar el horario de prohibiciones de materia"
 msgstr "Prohibiciones de materia|Ingresar el horario de prohibiciones de materia"
 
-#: TSUBJECTFORM.SUBJECTFORM.CAPTION
+#: tsubjectform.subjectform.caption
 msgctxt "TSUBJECTFORM.SUBJECTFORM.CAPTION"
 msgid "Materias"
 msgstr "Materias"
 
-#: TTEACHERFORM.ACTTEACHERRESTRICTION.CAPTION
+#: tteacherform.actteacherrestriction.caption
 msgctxt "TTEACHERFORM.ACTTEACHERRESTRICTION.CAPTION"
 msgid "Prohibiciones de profesor"
 msgstr "Prohibiciones de profesor"
 
-#: TTEACHERFORM.ACTTEACHERRESTRICTION.HINT
+#: tteacherform.actteacherrestriction.hint
 msgid "Prohibiciones de profesor|Prohibiciones de profesor"
 msgstr "Prohibiciones de profesor|Prohibiciones de profesor"
 
-#: TTEACHERFORM.DBGRIDDETAIL.HINT
+#: tteacherform.dbgriddetail.hint
 msgid "Distribution de profesores"
 msgstr "Distribution de profesores"
 
-#: TTIMETABLECLASSFORM.BTNINTERCAMBIARTIMESLOTS.HINT
+#: ttimetableclassform.btnintercambiartimeslots.hint
 msgid "Intercambiar periodos|Intercambiar periodos"
 msgstr "Intercambiar periodos|Intercambiar periodos"
 
-#: TTIMETABLECLASSFORM.CBVERCLASS.HINT
+#: ttimetableclassform.cbverclass.hint
 msgid "Ver|Seleccione el parametro a ver en el horario"
 msgstr "Ver|Seleccione el parametro a ver en el horario"
 
-#: TTIMETABLECLASSFORM.CBVERCLASS.TEXT
+#: ttimetableclassform.cbverclass.text
 msgid "cbVerClass"
 msgstr "cbVerClass"
 
-#: TTIMETABLEFORM.ACTCLASHAULA.CAPTION
+#: ttimetableform.actclashaula.caption
 msgctxt "TTIMETABLEFORM.ACTCLASHAULA.CAPTION"
 msgid "Cruce de aulas"
 msgstr "Cruce de aulas"
 
-#: TTIMETABLEFORM.ACTCLASHAULA.HINT
+#: ttimetableform.actclashaula.hint
 msgctxt "TTIMETABLEFORM.ACTCLASHAULA.HINT"
 msgid "Cruce de aulas|Cruce de aulas del mismo tipo"
 msgstr "Cruce de aulas|Cruce de aulas del mismo tipo"
 
-#: TTIMETABLEFORM.ACTCLASHSUBJECT.CAPTION
+#: ttimetableform.actclashsubject.caption
 msgctxt "TTIMETABLEFORM.ACTCLASHSUBJECT.CAPTION"
 msgid "Cruce de materias"
 msgstr "Cruce de materias"
 
-#: TTIMETABLEFORM.ACTCLASHSUBJECT.HINT
+#: ttimetableform.actclashsubject.hint
 msgctxt "TTIMETABLEFORM.ACTCLASHSUBJECT.HINT"
 msgid "Cruce de materias|Cruce de materias"
 msgstr "Cruce de materias|Cruce de materias"
 
-#: TTIMETABLEFORM.ACTCLASHTEACHER.CAPTION
+#: ttimetableform.actclashteacher.caption
 msgctxt "TTIMETABLEFORM.ACTCLASHTEACHER.CAPTION"
 msgid "Cruce de profesores"
 msgstr "Cruce de profesores"
 
-#: TTIMETABLEFORM.ACTCLASHTEACHER.HINT
+#: ttimetableform.actclashteacher.hint
 msgctxt "TTIMETABLEFORM.ACTCLASHTEACHER.HINT"
 msgid "Cruce de profesores|Cruce de profesores"
 msgstr "Cruce de profesores|Cruce de profesores"
 
-#: TTIMETABLEFORM.ACTMEJORARTIMETABLE.CAPTION
+#: ttimetableform.actmejorartimetable.caption
 msgid "ActMejorarTimeTable"
 msgstr "ActMejorarTimeTable"
 
-#: TTIMETABLEFORM.ACTMEJORARTIMETABLE.HINT
+#: ttimetableform.actmejorartimetable.hint
 msgid "Mejorar horario|Mejorar horario seleccionado"
 msgstr "Mejorar horario|Mejorar horario seleccionado"
 
-#: TTIMETABLEFORM.ACTSUBJECTCORTADADAY.CAPTION
+#: ttimetableform.actsubjectcortadaday.caption
 msgid "Materias cortadas por el dia"
 msgstr "Materias cortadas por el dia"
 
-#: TTIMETABLEFORM.ACTSUBJECTCORTADADAY.HINT
+#: ttimetableform.actsubjectcortadaday.hint
 msgid "Materias cortadas por el dia|Materias cortadas por el dia"
 msgstr "Materias cortadas por el dia|Materias cortadas por el dia"
 
-#: TTIMETABLEFORM.ACTSUBJECTCORTADAHOUR.CAPTION
+#: ttimetableform.actsubjectcortadahour.caption
 msgid "Materias cortadas por la hora"
 msgstr "Materias cortadas por la hora"
 
-#: TTIMETABLEFORM.ACTSUBJECTCORTADAHOUR.HINT
+#: ttimetableform.actsubjectcortadahour.hint
 msgid "Materias cortadas por la hora|Materias cortadas por la hora"
 msgstr "Materias cortadas por la hora|Materias cortadas por la hora"
 
-#: TTIMETABLEFORM.ACTSUBJECTRESTRICTIONNORESPETADA.CAPTION
+#: ttimetableform.actsubjectrestrictionnorespetada.caption
 msgctxt "TTIMETABLEFORM.ACTSUBJECTRESTRICTIONNORESPETADA.CAPTION"
 msgid "Prohibiciones de materia"
 msgstr "Prohibiciones de materia"
 
-#: TTIMETABLEFORM.ACTSUBJECTRESTRICTIONNORESPETADA.HINT
+#: ttimetableform.actsubjectrestrictionnorespetada.hint
 msgid "Prohibiciones de materia|Prohibiciones de materia no respetadas"
 msgstr "Prohibiciones de materia|Prohibiciones de materia no respetadas"
 
-#: TTIMETABLEFORM.ACTTEACHERRESTRICTIONNORESPETADA.CAPTION
+#: ttimetableform.actteacherrestrictionnorespetada.caption
 msgctxt "TTIMETABLEFORM.ACTTEACHERRESTRICTIONNORESPETADA.CAPTION"
 msgid "Prohibiciones de profesor"
 msgstr "Prohibiciones de profesor"
 
-#: TTIMETABLEFORM.ACTTEACHERRESTRICTIONNORESPETADA.HINT
+#: ttimetableform.actteacherrestrictionnorespetada.hint
 msgid "Prohibiciones de profesor|Prohibiciones de profesor no respetadas"
 msgstr "Prohibiciones de profesor|Prohibiciones de profesor no respetadas"
 
-#: TTIMETABLEFORM.ACTTIMETABLECLASS.CAPTION
+#: ttimetableform.acttimetableclass.caption
 msgid "Horario de paralelos"
 msgstr "Horario de paralelos"
 
-#: TTIMETABLEFORM.ACTTIMETABLECLASS.HINT
+#: ttimetableform.acttimetableclass.hint
 msgid "Horario de paralelos|Horario de paralelos"
 msgstr "Horario de paralelos|Horario de paralelos"
 
-#: TTIMETABLEFORM.ACTTIMETABLEROOMTYPE.CAPTION
+#: ttimetableform.acttimetableroomtype.caption
 msgid "Horario por tipo de aulas"
 msgstr "Horario por tipo de aulas"
 
-#: TTIMETABLEFORM.ACTTIMETABLEROOMTYPE.HINT
+#: ttimetableform.acttimetableroomtype.hint
 msgid "Horario por tipo de aulas|Horario por tipo de aulas"
 msgstr "Horario por tipo de aulas|Horario por tipo de aulas"
 
-#: TTIMETABLEFORM.ACTTIMETABLETEACHER.CAPTION
+#: ttimetableform.acttimetableteacher.caption
 msgid "Horario de profesores"
 msgstr "Horario de profesoresHorario de profesores"
 
-#: TTIMETABLEFORM.ACTTIMETABLETEACHER.HINT
+#: ttimetableform.acttimetableteacher.hint
 msgid "Horario de profesores|Horario de profesores"
 msgstr "Horario de profesores|Horario de profesores"
 
-#: TTIMETABLEFORM.DBGRID.COLUMNS[0].TCOLUMNTITLE.CAPTION
+#: ttimetableform.dbgrid.columns[0].tcolumntitle.caption
 msgid "IdTimeTable"
 msgstr "IdTimeTable"
 
-#: TTIMETABLEFORM.DBGRID.COLUMNS[1].TCOLUMNTITLE.CAPTION
+#: ttimetableform.dbgrid.columns[1].tcolumntitle.caption
 msgid "Inicio"
 msgstr "Inicio"
 
-#: TTIMETABLEFORM.DBGRID.COLUMNS[2].TCOLUMNTITLE.CAPTION
+#: ttimetableform.dbgrid.columns[2].tcolumntitle.caption
 msgid "Final"
 msgstr "Final"
 
-#: TTIMETABLEFORM.TIMETABLEFORM.CAPTION
+#: ttimetableform.timetableform.caption
 msgid "TimeTableForm"
 msgstr "TimeTableForm"
 
-#: TTIMETABLEROOMTYPEFORM.CBVERROOMTYPE.HINT
+#: ttimetableroomtypeform.cbverroomtype.hint
 msgid "Ver|Que ver en el horario del tipo de aula"
 msgstr "Ver|Que ver en el horario del tipo de aula"
 
-#: TTIMETABLETEACHERFORM.CBVERTEACHER.HINT
+#: ttimetableteacherform.cbverteacher.hint
 msgid "Ver|Que ver en el horario del profesor"
 msgstr "Ver|Que ver en el horario del profesor"
 

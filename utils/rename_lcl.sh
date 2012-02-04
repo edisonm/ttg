@@ -9,8 +9,11 @@ if [ $# != 2 ] ; then
     exit 1
 fi
 
-SEARCH_UC="`echo $1|tr '[a-z]' '[A-Z]'`"
-REPLACE_UC="`echo $2|tr '[a-z]' '[A-Z]'`"
+# SEARCH="`echo $1|tr '[a-z]' '[A-Z]'`"
+# REPLACE="`echo $2|tr '[a-z]' '[A-Z]'`"
+
+SEARCH="`echo $1|tr '[A-Z]' '[a-z]'`"
+REPLACE="`echo $2|tr '[A-Z]' '[a-z]'`"
 
 find . \( -name "*.pp" -o -name "*.lfm" -o -name "*.ttd" -o -name "*.pas" -o -name "*.lpr" \) -exec str_replace $1 $2 {} \;
-find . \( -name "*.po" -o -name "*.lrt" \) -exec str_replace $SEARCH_UC $REPLACE_UC {} \;
+find . \( -name "*.po" -o -name "*.lrt" \) -exec str_replace $SEARCH $REPLACE {} \;
