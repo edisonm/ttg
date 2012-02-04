@@ -655,7 +655,7 @@ msgid "About..."
 msgstr ""
 
 #: tmainform.actabout.hint
-msgid "About...formacion referente a este programa"
+msgid "About|Information about this program"
 msgstr ""
 
 #: tmainform.actchangepasswd.caption
@@ -663,7 +663,7 @@ msgid "Change password..."
 msgstr ""
 
 #: tmainform.actchangepasswd.hint
-msgid "Cambiar Clave|Permite cambiar la clave de acceso al sistema"
+msgid "Change password|Change the system password"
 msgstr ""
 
 #: tmainform.actcheckfeasibility.caption
@@ -682,11 +682,13 @@ msgstr ""
 msgid "Courses|Courses with its given groups"
 msgstr ""
 
-#: tmainform.actconfigurar.caption
+#: tmainform.actconfigure.caption
+msgctxt "TMAINFORM.ACTCONFIGURE.CAPTION"
 msgid "Configure..."
 msgstr ""
 
-#: tmainform.actconfigurar.hint
+#: tmainform.actconfigure.hint
+msgctxt "TMAINFORM.ACTCONFIGURE.HINT"
 msgid "Configure|Edit the system configuration"
 msgstr ""
 
@@ -860,7 +862,8 @@ msgstr ""
 msgid "Horarios|Ver los horarios elaborados"
 msgstr ""
 
-#: tmainform.mainform.caption
+#: tmainform.caption
+msgctxt "TMAINFORM.CAPTION"
 msgid "MainForm"
 msgstr ""
 
@@ -870,11 +873,6 @@ msgstr ""
 
 #: tmainform.midata.hint
 msgid "Datos|Ingreso de datos"
-msgstr ""
-
-#: tmainform.mielaborartimetable.hint
-msgctxt "tmainform.mielaborartimetable.hint"
-msgid "Make Timetables|Make Timetables"
 msgstr ""
 
 #: tmainform.mifile.caption

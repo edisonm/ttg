@@ -2102,7 +2102,7 @@ object MainForm: TMainForm
       Category = 'File'
       Caption = 'Change password...'
       HelpContext = 120
-      Hint = 'Cambiar Clave|Permite cambiar la clave de acceso al sistema'
+      Hint = 'Change password|Change the system password'
     end
     object ActExit: TAction
       Category = 'File'
