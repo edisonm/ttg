@@ -27,7 +27,7 @@ type
     class function DownHill(Individual: TIndividual): Integer;
     function MultiDownHill(MaxLevel, RefreshInterval: Integer): Integer; overload;
     procedure Execute(RefreshInterval: Integer); override;
-    procedure SaveSolutionToDatabase(AIdTimeTable: Integer;
+    procedure SaveSolutionToDatabase(AIdTimetable: Integer;
       const AExtraInfo: string; ATimeIni, ATimeEnd: TDateTime); override;
   end;
 
@@ -159,7 +159,7 @@ begin
   MultiDownHill(2, RefreshInterval);
 end;
 
-procedure TDownHill.SaveSolutionToDatabase(AIdTimeTable: Integer;
+procedure TDownHill.SaveSolutionToDatabase(AIdTimetable: Integer;
   const AExtraInfo: string; ATimeIni, ATimeEnd: TDateTime);
 var
   Report: TStrings;
@@ -171,7 +171,7 @@ begin
     if AExtraInfo <> '' then
       Report.Add(AExtraInfo);
     BestIndividual.ReportValues(Report);
-    BestIndividual.SaveToDataModule(AIdTimeTable, ATimeIni, ATimeEnd, Report);
+    BestIndividual.SaveToDataModule(AIdTimetable, ATimeIni, ATimeEnd, Report);
   finally
     Report.Free;
   end;

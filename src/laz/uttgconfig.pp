@@ -42,8 +42,8 @@ type
     procedure SetClashTeacher(Value: Integer);
     function GetClashSubject: Integer;
     procedure SetClashSubject(Value: Integer);
-    function GetBreakTimeTableTeacher: Integer;
-    procedure SetBreakTimeTableTeacher(Value: Integer);
+    function GetBreakTimetableTeacher: Integer;
+    procedure SetBreakTimetableTeacher(Value: Integer);
     function GetClashRoomType: Integer;
     procedure SetClashRoomType(Value: Integer);
     function GetOutOfPositionEmptyHour: Integer;
@@ -62,8 +62,8 @@ type
     procedure SetMutationProbability(Value: Double);
     function GetReparationProbability: Double;
     procedure SetReparationProbability(Value: Double);
-    function GetInitialTimeTables: string;
-    procedure SetInitialTimeTables(const Value: string);
+    function GetInitialTimetables: string;
+    procedure SetInitialTimetables(const Value: string);
     function GetSharedDirectory: string;
     procedure SetSharedDirectory(const Value: string);
     function GetPollinationProbability: Double;
@@ -86,7 +86,7 @@ type
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
     property ClashTeacher: Integer read GetClashTeacher write SetClashTeacher;
     property ClashSubject: Integer read GetClashSubject write SetClashSubject;
-    property BreakTimeTableTeacher: Integer read GetBreakTimeTableTeacher write SetBreakTimeTableTeacher;
+    property BreakTimetableTeacher: Integer read GetBreakTimetableTeacher write SetBreakTimetableTeacher;
     property ClashRoomType: Integer read GetClashRoomType write SetClashRoomType;
     property OutOfPositionEmptyHour: Integer read GetOutOfPositionEmptyHour write SetOutOfPositionEmptyHour;
     property BrokenSession: Integer read GetBrokenSession write SetBrokenSession;
@@ -96,7 +96,7 @@ type
     property CrossProbability: Double read GetCrossProbability write SetCrossProbability;
     property MutationProbability: Double read GetMutationProbability write SetMutationProbability;
     property ReparationProbability: Double read GetReparationProbability write SetReparationProbability;
-    property InitialTimeTables: string read GetInitialTimeTables write SetInitialTimeTables;
+    property InitialTimetables: string read GetInitialTimetables write SetInitialTimetables;
     property SharedDirectory: string read GetSharedDirectory write SetSharedDirectory;
     property PollinationProbability: Double read GetPollinationProbability write SetPollinationProbability;
     property ApplyDoubleDownHill: Boolean read GetApplyDoubleDownHill write SetApplyDoubleDownHill;
@@ -245,14 +245,14 @@ begin
   Integers['ClashSubject'] := Value;
 end;
 
-function TTTGConfig.GetBreakTimeTableTeacher: Integer;
+function TTTGConfig.GetBreakTimetableTeacher: Integer;
 begin
-  Result := Integers['BreakTimeTableTeacher'];
+  Result := Integers['BreakTimetableTeacher'];
 end;
 
-procedure TTTGConfig.SetBreakTimeTableTeacher(Value: Integer);
+procedure TTTGConfig.SetBreakTimetableTeacher(Value: Integer);
 begin
-  Integers['BreakTimeTableTeacher'] := Value;
+  Integers['BreakTimetableTeacher'] := Value;
 end;
 
 function TTTGConfig.GetClashRoomType: Integer;
@@ -345,14 +345,14 @@ begin
   Floats['ReparationProbability'] := Value;
 end;
 
-function TTTGConfig.GetInitialTimeTables: string;
+function TTTGConfig.GetInitialTimetables: string;
 begin
-  Result := Values['InitialTimeTables'];
+  Result := Values['InitialTimetables'];
 end;
 
-procedure TTTGConfig.SetInitialTimeTables(const Value: string);
+procedure TTTGConfig.SetInitialTimetables(const Value: string);
 begin
-  Values['InitialTimeTables'] := Value;
+  Values['InitialTimetables'] := Value;
 end;
 
 function TTTGConfig.GetSharedDirectory: string;
@@ -401,7 +401,7 @@ begin
   RefreshInterval := 1;
   ClashTeacher := 200;
   ClashSubject := 200;
-  BreakTimeTableTeacher := 50;
+  BreakTimetableTeacher := 50;
   ClashRoomType := 200;
   OutOfPositionEmptyHour := 100;
   BrokenSession := 150;
@@ -413,7 +413,7 @@ begin
   ReparationProbability := 0.2;
   Bookmarks := '1,2';
   ApplyDoubleDownHill := False;
-  InitialTimeTables := '';
+  InitialTimetables := '';
   SharedDirectory := GetTempDir;
   PollinationProbability := 0.1;
 end;

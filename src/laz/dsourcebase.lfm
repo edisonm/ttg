@@ -210,29 +210,29 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 56
     Top = 328
   end
-  object TbTimeTable: TZTable
+  object TbTimetable: TZTable
     Tag = 16
     Connection = DbZConnection
-    TableName = 'TimeTable'
-    IndexFieldNames = 'IdTimeTable'
+    TableName = 'Timetable'
+    IndexFieldNames = 'IdTimetable'
     Left = 144
     Top = 348
   end
-  object DSTimeTable: TDataSource
-    DataSet = TbTimeTable
+  object DSTimetable: TDataSource
+    DataSet = TbTimetable
     Left = 152
     Top = 340
   end
-  object TbTimeTableDetail: TZTable
+  object TbTimetableDetail: TZTable
     Tag = 17
     Connection = DbZConnection
-    TableName = 'TimeTableDetail'
-    IndexFieldNames = 'IdTimeTable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
+    TableName = 'TimetableDetail'
+    IndexFieldNames = 'IdTimetable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
     Left = 240
     Top = 336
   end
-  object DSTimeTableDetail: TDataSource
-    DataSet = TbTimeTableDetail
+  object DSTimetableDetail: TDataSource
+    DataSet = TbTimetableDetail
     Left = 248
     Top = 328
   end

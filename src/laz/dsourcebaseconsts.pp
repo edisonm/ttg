@@ -39,8 +39,8 @@ resourcestring
   STbTeacherRestrictionType = 'Types of Teacher Restrictions';
   STbTeacherRestriction = 'Teacher Restrictions';
   STbSubjectRestriction = 'Subject Restrictions';
-  STbTimeTable = 'Timetables';
-  STbTimeTableDetail = 'Detail of Timetables';
+  STbTimetable = 'Timetables';
+  STbTimetableDetail = 'Detail of Timetables';
 
   SFlLevel_IdLevel = 'Id';
   SFlLevel_NaLevel = 'Name';
@@ -95,18 +95,18 @@ resourcestring
   SFlSubjectRestriction_IdDay = 'Day';
   SFlSubjectRestriction_IdHour = 'Hour';
   SFlSubjectRestriction_IdSubjectRestrictionType = 'Restriction Type';
-  SFlTimeTable_IdTimeTable = 'Id';
-  SFlTimeTable_TimeIni = 'Initial Time';
-  SFlTimeTable_TimeEnd = 'End Time';
-  SFlTimeTable_Summary = 'Summary';
-  SFlTimeTableDetail_IdTimeTable = 'TimeTable';
-  SFlTimeTableDetail_IdSubject = 'Subject';
-  SFlTimeTableDetail_IdLevel = 'Level';
-  SFlTimeTableDetail_IdSpecialization = 'Specialization';
-  SFlTimeTableDetail_IdGroupId = 'Group';
-  SFlTimeTableDetail_IdDay = 'Day';
-  SFlTimeTableDetail_IdHour = 'Hour';
-  SFlTimeTableDetail_Session = 'Session';
+  SFlTimetable_IdTimetable = 'Id';
+  SFlTimetable_TimeIni = 'Initial Time';
+  SFlTimetable_TimeEnd = 'End Time';
+  SFlTimetable_Summary = 'Summary';
+  SFlTimetableDetail_IdTimetable = 'Timetable';
+  SFlTimetableDetail_IdSubject = 'Subject';
+  SFlTimetableDetail_IdLevel = 'Level';
+  SFlTimetableDetail_IdSpecialization = 'Specialization';
+  SFlTimetableDetail_IdGroupId = 'Group';
+  SFlTimetableDetail_IdDay = 'Day';
+  SFlTimetableDetail_IdHour = 'Hour';
+  SFlTimetableDetail_Session = 'Session';
 
 implementation
 

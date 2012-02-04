@@ -219,7 +219,7 @@ object MainForm: TMainForm
       object SIFindMejor: TToolButton
         Left = 366
         Top = 0
-        Action = ActMakeTimeTable
+        Action = ActMakeTimetable
         ParentShowHint = False
         ShowHint = True
       end
@@ -233,10 +233,10 @@ object MainForm: TMainForm
         ShowHint = True
         Style = tbsSeparator
       end
-      object SITimeTable: TToolButton
+      object SITimetable: TToolButton
         Left = 399
         Top = 0
-        Action = ActTimeTable
+        Action = ActTimetable
         ParentShowHint = False
         ShowHint = True
       end
@@ -880,8 +880,8 @@ object MainForm: TMainForm
       Caption = '&Ver'
       HelpContext = 60
       Hint = 'Ver|Show de resultados'
-      object MITimeTable: TMenuItem
-        Action = ActTimeTable
+      object MITimetable: TMenuItem
+        Action = ActTimetable
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -920,7 +920,7 @@ object MainForm: TMainForm
           FF00000000FFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         }
         ShortCut = 49224
-        OnClick = ActTimeTableExecute
+        OnClick = ActTimetableExecute
       end
     end
     object MITool: TMenuItem
@@ -972,8 +972,8 @@ object MainForm: TMainForm
         Action = ActCheckFeasibility
         OnClick = ActCheckFeasibilityExecute
       end
-      object MIElaborarTimeTable: TMenuItem
-        Action = ActMakeTimeTable
+      object MIElaborarTimetable: TMenuItem
+        Action = ActMakeTimetable
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -1011,10 +1011,10 @@ object MainForm: TMainForm
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         }
-        OnClick = ActMakeTimeTableExecute
+        OnClick = ActMakeTimetableExecute
       end
-      object MIMejorarTimeTable: TMenuItem
-        Action = ActMejorarTimeTable
+      object MIMejorarTimetable: TMenuItem
+        Action = ActMejorarTimetable
       end
       object MILanguages: TMenuItem
         Caption = 'Languages'
@@ -1144,7 +1144,7 @@ object MainForm: TMainForm
   end
   object OpenDialog: TOpenDialog
     DefaultExt = '.ttd'
-    Filter = 'TimeTable para colegio (*.ttd)|*.ttd'
+    Filter = 'Timetable para colegio (*.ttd)|*.ttd'
     Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
     left = 18
     top = 176
@@ -2041,14 +2041,14 @@ object MainForm: TMainForm
       ImageIndex = 25
       OnExecute = ActIndexExecute
     end
-    object ActTimeTable: TAction
+    object ActTimetable: TAction
       Category = 'View'
       AutoCheck = True
-      Caption = 'TimeTables'
+      Caption = 'Timetables'
       HelpContext = 280
       Hint = 'Horarios|Ver los horarios elaborados'
       ImageIndex = 20
-      OnExecute = ActTimeTableExecute
+      OnExecute = ActTimetableExecute
       ShortCut = 49234
     end
     object ActAbout: TAction
@@ -2227,16 +2227,16 @@ object MainForm: TMainForm
       Hint = 'Check feasibility|Check feasibility of input data'
       OnExecute = ActCheckFeasibilityExecute
     end
-    object ActMakeTimeTable: TAction
+    object ActMakeTimetable: TAction
       Category = 'Tools'
       AutoCheck = True
       Caption = 'Make Timetables'
       HelpContext = 270
       Hint = 'Make Timetables|Make Timetables'
       ImageIndex = 17
-      OnExecute = ActMakeTimeTableExecute
+      OnExecute = ActMakeTimetableExecute
     end
-    object ActMejorarTimeTable: TAction
+    object ActMejorarTimetable: TAction
       Category = 'Tools'
       Caption = 'Mejorar horario'
       Hint = 'Mejorar horario|Mejorar horario buscando en doble profundidad'

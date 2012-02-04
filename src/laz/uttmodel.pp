@@ -16,7 +16,7 @@ var
 
 type
   {
-    Clase TTimeTableModel
+    Clase TTimetableModel
     Descripcion:
     Implementa la carga de la informacion desde la base de datos a la memoria
     RAM.
@@ -31,19 +31,19 @@ type
     de cada restriccion.
   }
 
-  TTimeTable = class;
-  TTimeTableArray = array of TTimeTable;
+  TTimetable = class;
+  TTimetableArray = array of TTimetable;
 
   TSessionArray = array [-1 .. 16382] of Integer;
   PSessionArray = ^TSessionArray;
-  { TTimeTableModel }
+  { TTimetableModel }
 
 
-  TTimeTableModel = class(TModel)
+  TTimetableModel = class(TModel)
   private
     FClashTeacherValue, FClashSubjectValue, FClashRoomTypeValue,
       FOutOfPositionEmptyHourValue, FBrokenSessionValue,
-      FBreakTimeTableTeacherValue, FNonScatteredSubjectValue: Integer;
+      FBreakTimetableTeacherValue, FNonScatteredSubjectValue: Integer;
     FTimeSlotToDay, FTimeSlotToHour, FDayToMaxTimeSlot, FSessionToDistribution,
       FSessionToSubject, FSessionToRoomType, FRoomTypeToNumber,
       FSubjectRestrictionToSubject, FSubjectRestrictionToTimeSlot,
@@ -55,7 +55,7 @@ type
     FSessionToDuration: TSessionArray;
     FDayHourToTimeSlot, FLevelSpecializationToCourse, FCourseGroupIdToClass,
       FClassSubjectToTeacher, FClassSubjectToDistribution, FClassSubjectCount,
-      FTimeTableDetailPattern, FDistributionToSessions: TDynamicIntegerArrayArray;
+      FTimetableDetailPattern, FDistributionToSessions: TDynamicIntegerArrayArray;
     FTeacherTimeSlotToTeacherRestrictionType,
       FSubjectTimeSlotToSubjectRestrictionType: TDynamicIntegerArrayArray;
     FSubjectRestrictionTypeToValue, FTeacherRestrictionTypeToValue: TDynamicIntegerArray;
@@ -71,14 +71,14 @@ type
     FSessionNumberDouble: Integer;
     function GetDayAMaxTimeSlot(Day: Integer): Integer;
   protected
-    property TimeTableDetailPattern: TDynamicIntegerArrayArray read FTimeTableDetailPattern;
+    property TimetableDetailPattern: TDynamicIntegerArrayArray read FTimetableDetailPattern;
     class function GetElitistCount: Integer; override;
   public
     procedure Configure(AClashTeacherValue, AClashSubjectValue, AClashRoomTypeValue,
-      ABreakTimeTableTeacherValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
+      ABreakTimetableTeacherValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
       ANonScatteredSubjectValue: Integer);
     constructor Create(AClashTeacherValue, AClashSubjectValue, AClashRoomTypeValue,
-      ABreakTimeTableTeacherValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
+      ABreakTimetableTeacherValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
       ANonScatteredSubjectValue: Integer);
     destructor Destroy; override;
     procedure ReportParameters(AReport: TStrings);
@@ -87,7 +87,7 @@ type
     property ClassCount: Integer read FClassCount;
     property ClashTeacherValue: Integer read FClashTeacherValue;
     property ClashSubjectValue: Integer read FClashSubjectValue;
-    property BreakTimeTableTeacherValue: Integer read FBreakTimeTableTeacherValue;
+    property BreakTimetableTeacherValue: Integer read FBreakTimetableTeacherValue;
     property ClashRoomTypeValue: Integer read FClashRoomTypeValue;
     property OutOfPositionEmptyHourValue: Integer read FOutOfPositionEmptyHourValue;
     property BrokenSessionValue: Integer read FBrokenSessionValue;
@@ -101,7 +101,7 @@ type
   // type
   // TCountFunc = procedure(Count, Cant: Integer) of object;
   {
-    Clase TTimeTable
+    Clase TTimetable
     Descripcion:
     Implementa una solucion del problema.
     Miembros privados:
@@ -115,13 +115,13 @@ type
     propiedades que devuelven el valor de cada componente de la funcion
     objetivo, el valor de la funcion objetivo, el constructor, funciones que
     permiten guardar el horario en una base de datos, metodos que consisten
-    en los operadores geneticos, como son cruce, mutacion, etc., TimeTableModel
+    en los operadores geneticos, como son cruce, mutacion, etc., TimetableModel
     al que pertenece esta solucion.
   }
 
   { Manual Tabling:
     Here we have information that can be returned recalculating Values of the
-    TTimeTable object, but that are preserved here in order to optimize
+    TTimetable object, but that are preserved here in order to optimize
     computations.
   }
   (*
@@ -134,8 +134,8 @@ type
 
 
   *)
-  { TTimeTableTablingInfo }
-  TTimeTableTablingInfo = class
+  { TTimetableTablingInfo }
+  TTimetableTablingInfo = class
   protected
     FTeacherTimeSlotCount: TDynamicIntegerArrayArray;
     FSubjectTimeSlotCount: TDynamicIntegerArrayArray;
@@ -150,20 +150,20 @@ type
     FClashTeacher: Integer;
     FClashSubject: Integer;
     FClashRoomType: Integer;
-    FBreakTimeTableTeacher: Integer;
+    FBreakTimetableTeacher: Integer;
     FOutOfPositionEmptyHour: Integer;
     FNonScatteredSubject: Integer;
     FBrokenSession: Integer;
   end;
 
-  { TTimeTable }
+  { TTimetable }
 
-  TTimeTable = class(TIndividual)
+  TTimetable = class(TIndividual)
   private
-    FTablingInfo: TTimeTableTablingInfo;
+    FTablingInfo: TTimetableTablingInfo;
     FClassTimeSlotASession: TDynamicIntegerArrayArray;
     procedure CheckIntegrity;
-    procedure CrossClass(TimeTable2: TTimeTable; AClass: Integer);
+    procedure CrossClass(Timetable2: TTimetable; AClass: Integer);
     procedure DeltaValues(Delta, AClass, TimeSlot1, TimeSlot2: Integer);
     function DeltaBrokenSession(AClass, TimeSlot1, TimeSlot2: Integer): Integer;
     function GetClashSubjectValue: Integer;
@@ -172,7 +172,7 @@ type
     function GetClashTeacherValue: Integer;
     function GetSubjectRestrictionValue: Integer;
     function GetTeacherRestrictionValue: Integer;
-    function GetBreakTimeTableTeacherValue: Integer;
+    function GetBreakTimetableTeacherValue: Integer;
     function GetBrokenSessionValue: Integer;
     function GetClashRoomTypeValue: Integer;
     function GetValue: Integer;
@@ -182,15 +182,15 @@ type
   protected
     function GetElitistValues(Index: Integer): Integer; override;
   public
-    constructor Create(ATimeTableModel: TTimeTableModel);
+    constructor Create(ATimetableModel: TTimetableModel);
     destructor Destroy; override;
     {Implements abstract class TIndividual:}
     procedure Update; override;
     procedure UpdateValue; override;
     function NewBookmark: TBookmark; override;
-    procedure SaveToDataModule(IdTimeTable: Integer;
+    procedure SaveToDataModule(IdTimetable: Integer;
       TimeIni, TimeEnd: TDateTime; Summary: TStrings); override;
-    procedure LoadFromDataModule(IdTimeTable: Integer); override;
+    procedure LoadFromDataModule(IdTimetable: Integer); override;
     procedure SaveToStream(Stream: TStream); override;
     procedure LoadFromStream(Stream: TStream); override;
     procedure MakeRandom; override;
@@ -216,7 +216,7 @@ type
     property ClashRoomType: Integer read FTablingInfo.FClashRoomType;
     property ClashTeacherValue: Integer read GetClashTeacherValue;
     property ClashSubjectValue: Integer read GetClashSubjectValue;
-    property BreakTimeTableTeacherValue: Integer read GetBreakTimeTableTeacherValue;
+    property BreakTimetableTeacherValue: Integer read GetBreakTimetableTeacherValue;
     property ClashRoomTypeValue: Integer read GetClashRoomTypeValue;
     property OutOfPositionEmptyHourValue: Integer read GetOutOfPositionEmptyHourValue;
     property BrokenSessionValue: Integer read GetBrokenSessionValue;
@@ -225,8 +225,8 @@ type
     property TeacherRestrictionValue: Integer read GetTeacherRestrictionValue;
     property ClassTimeSlotASession: TDynamicIntegerArrayArray
       read FClassTimeSlotASession write FClassTimeSlotASession;
-    property BreakTimeTableTeacher: Integer read FTablingInfo.FBreakTimeTableTeacher;
-    property TablingInfo: TTimeTableTablingInfo read FTablingInfo;
+    property BreakTimetableTeacher: Integer read FTablingInfo.FBreakTimetableTeacher;
+    property TablingInfo: TTimetableTablingInfo read FTablingInfo;
   end;
 
   { TTTBookmark }
@@ -284,8 +284,8 @@ implementation
 uses
   SysUtils, ZSysUtils, ZConnection, MTProcs, DSource, USortAlgs, UTTGConsts, dsourcebaseconsts;
 
-constructor TTimeTableModel.Create(AClashTeacherValue,
-  AClashSubjectValue, AClashRoomTypeValue, ABreakTimeTableTeacherValue,
+constructor TTimetableModel.Create(AClashTeacherValue,
+  AClashSubjectValue, AClashRoomTypeValue, ABreakTimetableTeacherValue,
   AOutOfPositionEmptyHourValue, ABrokenSessionValue, ANonScatteredSubjectValue: Integer);
 var
   FMinIdTeacher, FMinIdSubject, FMinIdRoomType, FMinIdTeacherRestrictionType,
@@ -690,11 +690,11 @@ var
       end;
     end;
   end;
-  procedure LoadMoldeTimeTableDetail;
+  procedure LoadMoldeTimetableDetail;
   var
     TimeSlot1, VClass, Distribution, TimeSlot, Contador, Duracion, Number: Integer;
   begin
-    SetLength(FTimeTableDetailPattern, FClassCount, FTimeSlotCount);
+    SetLength(FTimetableDetailPattern, FClassCount, FTimeSlotCount);
     SetLength(FClassToSessionCount, FClassCount);
     SetLength(FClassADuracion, FClassCount);
     for VClass := 0 to FClassCount - 1 do
@@ -703,7 +703,7 @@ var
       FClassToSessionCount[VClass] := 0;
       for TimeSlot := 0 to FTimeSlotCount - 1 do
       begin
-        FTimeTableDetailPattern[VClass, TimeSlot] := -1;
+        FTimetableDetailPattern[VClass, TimeSlot] := -1;
       end;
     end;
     for Distribution := FDistributionCount - 1 downto 0 do
@@ -718,7 +718,7 @@ var
           if (TimeSlot < 0) or (TimeSlot >= FTimeSlotCount) then
             raise Exception.CreateFmt(SClassTimeSlotToSessionOverflow,
               [FClassToLevel[VClass], FClassToGroupId[VClass], TimeSlot]);
-          FTimeTableDetailPattern[VClass, FTimeSlotCount - 1 - TimeSlot]
+          FTimetableDetailPattern[VClass, FTimeSlotCount - 1 - TimeSlot]
             := FDistributionToSessions[Distribution, Contador];
         end;
         Inc(FClassADuracion[VClass], Duracion);
@@ -729,7 +729,7 @@ var
       TimeSlot := 0;
       while TimeSlot < FTimeSlotCount do
       begin
-        Duracion := FSessionToDuration[FTimeTableDetailPattern[VClass, TimeSlot]];
+        Duracion := FSessionToDuration[FTimetableDetailPattern[VClass, TimeSlot]];
         Inc(TimeSlot, Duracion);
         Inc(FClassToSessionCount[VClass]);
       end;
@@ -746,7 +746,7 @@ begin
   with SourceDataModule do
   begin
     Configure(AClashTeacherValue, AClashSubjectValue, AClashRoomTypeValue,
-      ABreakTimeTableTeacherValue, AOutOfPositionEmptyHourValue,
+      ABreakTimetableTeacherValue, AOutOfPositionEmptyHourValue,
       ABrokenSessionValue, ANonScatteredSubjectValue);
     Load(TbTeacher, 'IdTeacher', FMinIdTeacher, FIdTeacherATeacher,
       FTeacherAIdTeacher);
@@ -787,24 +787,24 @@ begin
     LoadSubjectRestriction;
     LoadTeacherRestriction;
     LoadDistribution;
-    LoadMoldeTimeTableDetail;
+    LoadMoldeTimetableDetail;
   end;
 end;
 
-procedure TTimeTableModel.Configure(AClashTeacherValue, AClashSubjectValue,
-  AClashRoomTypeValue, ABreakTimeTableTeacherValue, AOutOfPositionEmptyHourValue,
+procedure TTimetableModel.Configure(AClashTeacherValue, AClashSubjectValue,
+  AClashRoomTypeValue, ABreakTimetableTeacherValue, AOutOfPositionEmptyHourValue,
   ABrokenSessionValue, ANonScatteredSubjectValue: Integer);
 begin
   FClashTeacherValue := AClashTeacherValue;
   FClashSubjectValue := AClashSubjectValue;
-  FBreakTimeTableTeacherValue := ABreakTimeTableTeacherValue;
+  FBreakTimetableTeacherValue := ABreakTimetableTeacherValue;
   FClashRoomTypeValue := AClashRoomTypeValue;
   FOutOfPositionEmptyHourValue := AOutOfPositionEmptyHourValue;
   FBrokenSessionValue := ABrokenSessionValue;
   FNonScatteredSubjectValue := ANonScatteredSubjectValue;
 end;
 
-function TTimeTableModel.GetDayAMaxTimeSlot(Day: Integer): Integer;
+function TTimetableModel.GetDayAMaxTimeSlot(Day: Integer): Integer;
 begin
   if Day = FDayCount - 1 then
     Result := FTimeSlotCount - 1
@@ -812,7 +812,7 @@ begin
     Result := FDayHourToTimeSlot[Day + 1, 0] - 1;
 end;
 
-procedure TTimeTableModel.ReportParameters(AReport: TStrings);
+procedure TTimetableModel.ReportParameters(AReport: TStrings);
 begin
   AReport.Add(Format('%s:'#13#10 +
         '  %0:-29s %8.2f'#13#10 +
@@ -825,25 +825,25 @@ begin
           SClashTeacher           + ':', ClashTeacherValue,
           SClashSubject           + ':', ClashSubjectValue,
           SClashRoomType          + ':', ClashRoomTypeValue,
-          SBreakTimeTableTeacher          + ':', BreakTimeTableTeacherValue,
+          SBreakTimetableTeacher          + ':', BreakTimetableTeacherValue,
           SOutOfPositionEmptyHour + ':', OutOfPositionEmptyHourValue,
           SBrokenSession          + ':', BrokenSessionValue,
           SNonScatteredSubject    + ':', NonScatteredSubjectValue]));
 end;
 
-function TTimeTableModel.NewIndividual: TIndividual;
+function TTimetableModel.NewIndividual: TIndividual;
 begin
-  Result := TTimeTable.Create(Self);
+  Result := TTimetable.Create(Self);
 end;
 
-procedure TTimeTable.RandomizeKey(var ARandomKey: TDynamicIntegerArray;
+procedure TTimetable.RandomizeKey(var ARandomKey: TDynamicIntegerArray;
   AClass: Integer);
 var
   TimeSlot, Duracion, Counter, MaxTimeSlot: Integer;
   TimeSlotASession: TDynamicIntegerArray;
   NumberList: array [0 .. 4095] of Integer;
 begin
-  with TTimeTableModel(Model) do
+  with TTimetableModel(Model) do
   begin
     for Counter := 0 to FClassToSessionCount[AClass] - 1 do
       NumberList[Counter] := Random($7FFFFFFF);
@@ -865,25 +865,25 @@ begin
   end;
 end;
 
-procedure TTimeTable.CrossClass(TimeTable2: TTimeTable; AClass: Integer);
+procedure TTimetable.CrossClass(Timetable2: TTimetable; AClass: Integer);
 var
   Session, TimeSlot, Duracion, Key1, Key2, MaxTimeSlot: Integer;
   RandomKey1, RandomKey2: TDynamicIntegerArray;
 begin
-  with TTimeTableModel(Model) do
+  with TTimetableModel(Model) do
   begin
     SetLength(RandomKey1, FTimeSlotCount);
     RandomizeKey(RandomKey1, AClass);
     SortInteger(ClassTimeSlotASession[AClass], RandomKey1, 0, FTimeSlotCount - 1);
 
     SetLength(RandomKey2, FTimeSlotCount);
-    TimeTable2.RandomizeKey(RandomKey2, AClass);
-    SortInteger(TimeTable2.ClassTimeSlotASession[AClass], RandomKey2, 0, FTimeSlotCount - 1);
+    Timetable2.RandomizeKey(RandomKey2, AClass);
+    SortInteger(Timetable2.ClassTimeSlotASession[AClass], RandomKey2, 0, FTimeSlotCount - 1);
 
     TimeSlot := 0;
     while TimeSlot < FTimeSlotCount do
     begin
-      Session := FTimeTableDetailPattern[AClass, TimeSlot];
+      Session := FTimetableDetailPattern[AClass, TimeSlot];
       Duracion := FSessionToDuration[Session];
       if Random(2) = 0 then
       begin
@@ -901,34 +901,34 @@ begin
         Inc(TimeSlot, Duracion);
     end;
     SortInteger(RandomKey1, ClassTimeSlotASession[AClass], 0, FTimeSlotCount - 1);
-    SortInteger(RandomKey2, TimeTable2.ClassTimeSlotASession[AClass], 0,
+    SortInteger(RandomKey2, Timetable2.ClassTimeSlotASession[AClass], 0,
       FTimeSlotCount - 1);
   end;
 end;
 
-procedure TTimeTable.Cross(AIndividual: TIndividual);
+procedure TTimetable.Cross(AIndividual: TIndividual);
 var
   VClass: Integer;
 begin
-  with TTimeTableModel(Model) do
+  with TTimetableModel(Model) do
   begin
     for VClass := 0 to FClassCount - 1 do
     begin
-      CrossClass(TTimeTable(AIndividual), VClass);
+      CrossClass(TTimetable(AIndividual), VClass);
     end;
     Update;
-    TTimeTable(AIndividual).Update;
+    TTimetable(AIndividual).Update;
   end;
 end;
 
-constructor TTimeTable.Create(ATimeTableModel: TTimeTableModel);
+constructor TTimetable.Create(ATimetableModel: TTimetableModel);
 begin
   inherited Create;
-  FModel := ATimeTableModel;
-  with TTimeTableModel(Model) do
+  FModel := ATimetableModel;
+  with TTimetableModel(Model) do
   begin
     SetLength(FClassTimeSlotASession, FClassCount, FTimeSlotCount);
-    FTablingInfo := TTimeTableTablingInfo.Create;
+    FTablingInfo := TTimetableTablingInfo.Create;
     with TablingInfo do
     begin
       SetLength(FSubjectTimeSlotCount, FSubjectCount, FTimeSlotCount);
@@ -945,7 +945,7 @@ begin
   end;
 end;
 
-function TTimeTable.GetElitistValues(Index: Integer): Integer;
+function TTimetable.GetElitistValues(Index: Integer): Integer;
 begin
   case Index of
     0: Result := BrokenSession;
@@ -954,20 +954,20 @@ begin
   end;
 end;
 
-procedure TTimeTable.MakeRandom;
+procedure TTimetable.MakeRandom;
 var
   VClass, TimeSlot, Duracion, MaxTimeSlot, RandomKey: Integer;
   TimeSlotASession: TDynamicIntegerArray;
   RandomKeys: TDynamicIntegerArray;
 begin
-  with TTimeTableModel(Model) do
+  with TTimetableModel(Model) do
   begin
     SetLength(RandomKeys, FTimeSlotCount);
     for VClass := 0 to FClassCount - 1 do
     begin
       TimeSlotASession := ClassTimeSlotASession[VClass];
       for TimeSlot := 0 to FTimeSlotCount - 1 do
-        TimeSlotASession[TimeSlot] := FTimeTableDetailPattern[VClass, TimeSlot];
+        TimeSlotASession[TimeSlot] := FTimetableDetailPattern[VClass, TimeSlot];
       TimeSlot := 0;
       while TimeSlot < FTimeSlotCount do
       begin
@@ -986,7 +986,7 @@ begin
   Update;
 end;
 
-function TTimeTable.Swap(AClass, ATimeSlot1, ATimeSlot2: Integer): Integer;
+function TTimetable.Swap(AClass, ATimeSlot1, ATimeSlot2: Integer): Integer;
 begin
   Normalize(AClass, ATimeSlot1);
   Normalize(AClass, ATimeSlot2);
@@ -996,11 +996,11 @@ begin
     Result := InternalSwap(AClass, ATimeSlot2, ATimeSlot1);
 end;
 
-function TTimeTable.DoMove(AClass, ATimeSlot1: Integer; var ATimeSlot2: Integer): Integer;
+function TTimetable.DoMove(AClass, ATimeSlot1: Integer; var ATimeSlot2: Integer): Integer;
 var
   Duracion1, Duracion2: Integer;
 begin
-  with TTimeTableModel(Model) do
+  with TTimetableModel(Model) do
   begin
     Duracion1 := SessionToDuration[ClassTimeSlotASession[AClass, ATimeSlot1]];
     Duracion2 := SessionToDuration[ClassTimeSlotASession[AClass, ATimeSlot2]];
@@ -1009,15 +1009,15 @@ begin
   ATimeSlot2 := ATimeSlot2 + Duracion2 - Duracion1;
 end;
 
-procedure TTimeTable.DeltaValues(Delta, AClass, TimeSlot1, TimeSlot2: Integer);
+procedure TTimetable.DeltaValues(Delta, AClass, TimeSlot1, TimeSlot2: Integer);
 var
   SubjectRestrictionType, TeacherRestrictionType, TimeSlot, TimeSlot0, Day, DDay,
     Day1, Day2, Hour, Session, Teacher, RoomType, Duracion, Subject, Limit,
-    DeltaBreakTimeTableTeacher, MinTimeSlot, MaxTimeSlot: Integer;
+    DeltaBreakTimetableTeacher, MinTimeSlot, MaxTimeSlot: Integer;
   TimeSlotASession: TDynamicIntegerArray;
   SubjectATeacher: TDynamicIntegerArray;
 begin
-  with TTimeTableModel(Model), TablingInfo do
+  with TTimetableModel(Model), TablingInfo do
   begin
     Inc(FBrokenSession, Delta * DeltaBrokenSession(AClass, TimeSlot1, TimeSlot2));
     TimeSlotASession := FClassTimeSlotASession[AClass];
@@ -1049,19 +1049,19 @@ begin
             begin
               if Hour < FDayTeacherMinHour[Day, Teacher] then
               begin
-                DeltaBreakTimeTableTeacher := FDayTeacherMinHour[Day, Teacher] - Hour - 1;
+                DeltaBreakTimetableTeacher := FDayTeacherMinHour[Day, Teacher] - Hour - 1;
                 FDayTeacherMinHour[Day, Teacher] := Hour;
               end
               else if (FDayTeacherMinHour[Day, Teacher] <= Hour)
                   and (Hour <= FDayTeacherMaxHour[Day, Teacher]) then
-                DeltaBreakTimeTableTeacher := -1
+                DeltaBreakTimetableTeacher := -1
               else // if FDayTeacherMaxTimeSlot[Day, Teacher] < TimeSlot then
               begin
-                DeltaBreakTimeTableTeacher := Hour - FDayTeacherMaxHour[Day, Teacher] - 1;
+                DeltaBreakTimetableTeacher := Hour - FDayTeacherMaxHour[Day, Teacher] - 1;
                 FDayTeacherMaxHour[Day, Teacher] := Hour;
               end;
-              Inc(FDayTeacherEmptyHourCount[Day, Teacher], DeltaBreakTimeTableTeacher);
-              Inc(FBreakTimeTableTeacher, DeltaBreakTimeTableTeacher);
+              Inc(FDayTeacherEmptyHourCount[Day, Teacher], DeltaBreakTimetableTeacher);
+              Inc(FBreakTimetableTeacher, DeltaBreakTimetableTeacher);
             end;
           end
           else if Delta < 0 then
@@ -1080,13 +1080,13 @@ begin
                 while (TimeSlot0 <= MaxTimeSlot)
                     and (FTeacherTimeSlotCount[Teacher, TimeSlot0] = 0) do
                   Inc(TimeSlot0);
-                DeltaBreakTimeTableTeacher := Hour + 1 - FTimeSlotToHour[TimeSlot0];
+                DeltaBreakTimetableTeacher := Hour + 1 - FTimeSlotToHour[TimeSlot0];
                 FDayTeacherMinHour[Day, Teacher] := FTimeSlotToHour[TimeSlot0];
               end
               else if (FDayTeacherMinHour[Day, Teacher] < Hour)
                   and (Hour < FDayTeacherMaxHour[Day, Teacher]) then
               begin
-                DeltaBreakTimeTableTeacher := 1;
+                DeltaBreakTimetableTeacher := 1;
               end
               else // if (FDayTeacherMaxTimeSlot[Day, Teacher] = TimeSlot) then
               begin
@@ -1095,11 +1095,11 @@ begin
                 while (TimeSlot0 >= MinTimeSlot)
                     and (FTeacherTimeSlotCount[Teacher, TimeSlot0] = 0) do
                   Dec(TimeSlot0);
-                DeltaBreakTimeTableTeacher := FTimeSlotToHour[TimeSlot0] + 1 - Hour;
+                DeltaBreakTimetableTeacher := FTimeSlotToHour[TimeSlot0] + 1 - Hour;
                 FDayTeacherMaxHour[Day, Teacher] := FTimeSlotToHour[TimeSlot0];
               end;
-              Inc(FDayTeacherEmptyHourCount[Day, Teacher], DeltaBreakTimeTableTeacher);
-              Inc(FBreakTimeTableTeacher, DeltaBreakTimeTableTeacher);
+              Inc(FDayTeacherEmptyHourCount[Day, Teacher], DeltaBreakTimetableTeacher);
+              Inc(FBreakTimetableTeacher, DeltaBreakTimetableTeacher);
             end;
           end;
         end;
@@ -1153,7 +1153,7 @@ begin
   end;
 end;
 
-function TTimeTable.InternalSwap(AClass, ATimeSlot1, ATimeSlot2: Integer): Integer;
+function TTimetable.InternalSwap(AClass, ATimeSlot1, ATimeSlot2: Integer): Integer;
 var
   Duracion1, Duracion2, Session1, Session2: Integer;
   TimeSlotASession: TDynamicIntegerArray;
@@ -1176,7 +1176,7 @@ var
   ClashTeacher2: Integer;
   ClashSubject2: Integer;
   ClashRoomType2: Integer;
-  BreakTimeTableTeacher2: Integer;
+  BreakTimetableTeacher2: Integer;
   OutOfPositionEmptyHour2: Integer;
   SubjectRestrictionValue2: Integer;
   NonScatteredSubject2: Integer;
@@ -1184,7 +1184,7 @@ var
   BrokenSession2: Integer;
   {$ENDIF}
 begin
-  with TTimeTableModel(Model), TablingInfo do
+  with TTimetableModel(Model), TablingInfo do
   begin
     Result := FValue;
     {$IFDEF DEBUG}
@@ -1221,7 +1221,7 @@ begin
     OutOfPositionEmptyHour2 := FOutOfPositionEmptyHour;
     NonScatteredSubject2 := FNonScatteredSubject;
     SubjectRestrictionValue2 := SubjectRestrictionValue;
-    BreakTimeTableTeacher2 := FBreakTimeTableTeacher;
+    BreakTimetableTeacher2 := FBreakTimetableTeacher;
     TeacherRestrictionValue2 := TeacherRestrictionValue;
     BrokenSession2 := FBrokenSession;
     Value2 := FValue;
@@ -1236,7 +1236,7 @@ begin
       'OutOfPositionEmptyHour     %d - %d'#13#10 +
       'NonScatteredSubject       %d - %d'#13#10 +
       'SubjectRestrictionValue %f - %f'#13#10 +
-      'BreakTimeTableTeacher  %d - %d'#13#10 +
+      'BreakTimetableTeacher  %d - %d'#13#10 +
       'TeacherRestrictionValue %f - %f'#13#10 +
       'BrokenSession          %d - %d',
       [
@@ -1248,7 +1248,7 @@ begin
         FOutOfPositionEmptyHour, OutOfPositionEmptyHour2,
         FNonScatteredSubject, NonScatteredSubject2,
         SubjectRestrictionValue, SubjectRestrictionValue2,
-        FBreakTimeTableTeacher, BreakTimeTableTeacher2,
+        FBreakTimetableTeacher, BreakTimetableTeacher2,
         TeacherRestrictionValue, TeacherRestrictionValue2,
         FBrokenSession, BrokenSession2
         ]);
@@ -1258,7 +1258,7 @@ begin
 end;
 
 {WARNING!!! Normalize is a Kludge, avoid its usage!!!}
-procedure TTimeTable.Normalize(AClass: Integer; var ATimeSlot: Integer);
+procedure TTimetable.Normalize(AClass: Integer; var ATimeSlot: Integer);
 var
   Session: Integer;
   TimeSlotASession: TDynamicIntegerArray;
@@ -1272,7 +1272,7 @@ end;
 
 {Assembler version of Normalize}
 (*
-  procedure TTimeTable.Normalize(AClass: Integer; var ATimeSlot: Integer); assembler;
+  procedure TTimetable.Normalize(AClass: Integer; var ATimeSlot: Integer); assembler;
   asm
   push    ebx
   mov     eax, [eax + FClassTimeSlotASession]
@@ -1296,7 +1296,7 @@ end;
   end;
 *)
 
-procedure TTimeTable.ReportValues(AReport: TStrings);
+procedure TTimetable.ReportValues(AReport: TStrings);
 var
   SRowFormat: string = '%0:-26s %12d %12d %12d';
 begin
@@ -1306,37 +1306,37 @@ begin
     Add(Format('%0:-26s %0:-12s %0:-12s %0:-12s', [SDetail, SCount, SWeight, SValue]));
     Add('-----------------------------------------------------------------');
     Add(Format(SRowFormat, [SClashTeacher + ':', FClashTeacher,
-      TTimeTableModel(Model).ClashTeacherValue, ClashTeacherValue]));
+      TTimetableModel(Model).ClashTeacherValue, ClashTeacherValue]));
     Add(Format(SRowFormat, [SClashSubject + ':', FClashSubject,
-      TTimeTableModel(Model).ClashSubjectValue, ClashSubjectValue]));
+      TTimetableModel(Model).ClashSubjectValue, ClashSubjectValue]));
     Add(Format(SRowFormat, [SClashRoomType + ':', FClashRoomType,
-      TTimeTableModel(Model).ClashRoomTypeValue, ClashRoomTypeValue]));
-    Add(Format(SRowFormat, [SBreakTimeTableTeacher + ':', BreakTimeTableTeacher,
-      TTimeTableModel(Model).BreakTimeTableTeacherValue, BreakTimeTableTeacherValue]));
+      TTimetableModel(Model).ClashRoomTypeValue, ClashRoomTypeValue]));
+    Add(Format(SRowFormat, [SBreakTimetableTeacher + ':', BreakTimetableTeacher,
+      TTimetableModel(Model).BreakTimetableTeacherValue, BreakTimetableTeacherValue]));
     Add(Format(SRowFormat, [SOutOfPositionEmptyHour + ':', OutOfPositionEmptyHour,
-      TTimeTableModel(Model).OutOfPositionEmptyHourValue, OutOfPositionEmptyHourValue]));
+      TTimetableModel(Model).OutOfPositionEmptyHourValue, OutOfPositionEmptyHourValue]));
     Add(Format(SRowFormat, [SBrokenSession + ':', BrokenSession,
-      TTimeTableModel(Model).BrokenSessionValue, BrokenSessionValue]));
+      TTimetableModel(Model).BrokenSessionValue, BrokenSessionValue]));
     Add(Format(SRowFormat, [SNonScatteredSubject + ':', NonScatteredSubject,
-        TTimeTableModel(Model).NonScatteredSubjectValue, NonScatteredSubjectValue]));
+        TTimetableModel(Model).NonScatteredSubjectValue, NonScatteredSubjectValue]));
     Add(Format('%0:-26s %12s %12s %12d', [STbSubjectRestriction + ':',
          '(' + VarArrToStr(FSubjectRestrictionTypeASubjectCount, ' ') + ')',
-         '(' + VarArrToStr(TTimeTableModel(Model).FSubjectRestrictionTypeToValue, ' ') + ')',
+         '(' + VarArrToStr(TTimetableModel(Model).FSubjectRestrictionTypeToValue, ' ') + ')',
          SubjectRestrictionValue]));
     Add(Format('%0:-26s %12s %12s %12d', [STbTeacherRestriction + ':',
          '(' + VarArrToStr(FTeacherRestrictionTypeATeacherCount, ' ') + ')',
-         '(' + VarArrToStr(TTimeTableModel(Model).FTeacherRestrictionTypeToValue, ' ') + ')',
+         '(' + VarArrToStr(TTimetableModel(Model).FTeacherRestrictionTypeToValue, ' ') + ')',
          TeacherRestrictionValue]));
     Add('-----------------------------------------------------------------');
     Add(Format('%0:-52s %12d', [STotalValue]));
   end;
 end;
 
-procedure TTimeTable.Mutate;
+procedure TTimetable.Mutate;
 var
   VClass, TimeSlot1, TimeSlot2: Integer;
 begin
-  with TTimeTableModel(Model) do
+  with TTimetableModel(Model) do
   begin
     TimeSlot1 := Random(FTimeSlotCount);
     TimeSlot2 := Random(FTimeSlotCount);
@@ -1347,17 +1347,17 @@ begin
   end;
 end;
 
-function TTimeTable.GetOutOfPositionEmptyHourValue: Integer;
+function TTimetable.GetOutOfPositionEmptyHourValue: Integer;
 begin
-  Result := TTimeTableModel(Model).FOutOfPositionEmptyHourValue * OutOfPositionEmptyHour;
+  Result := TTimetableModel(Model).FOutOfPositionEmptyHourValue * OutOfPositionEmptyHour;
 end;
 
-function TTimeTable.GetSubjectRestrictionValue: Integer;
+function TTimetable.GetSubjectRestrictionValue: Integer;
 var
   SubjectRestrictionType: Integer;
 begin
   Result := 0;
-  with TTimeTableModel(Model), TablingInfo do
+  with TTimetableModel(Model), TablingInfo do
   for SubjectRestrictionType := 0 to FSubjectRestrictionTypeCount - 1 do
   begin
     Result := Result + FSubjectRestrictionTypeASubjectCount[SubjectRestrictionType]
@@ -1365,12 +1365,12 @@ begin
   end;
 end;
 
-function TTimeTable.GetTeacherRestrictionValue: Integer;
+function TTimetable.GetTeacherRestrictionValue: Integer;
 var
   TeacherRestrictionType: Integer;
 begin
   Result := 0;
-  with TTimeTableModel(Model), TablingInfo do
+  with TTimetableModel(Model), TablingInfo do
   for TeacherRestrictionType := 0 to FTeacherRestrictionTypeCount - 1 do
   begin
     Result := Result + FTeacherRestrictionTypeATeacherCount[TeacherRestrictionType]
@@ -1378,17 +1378,17 @@ begin
   end;
 end;
 
-function TTimeTable.GetBrokenSessionValue: Integer;
+function TTimetable.GetBrokenSessionValue: Integer;
 begin
-  Result := TTimeTableModel(Model).BrokenSessionValue * BrokenSession;
+  Result := TTimetableModel(Model).BrokenSessionValue * BrokenSession;
 end;
 
-function TTimeTable.DeltaBrokenSession(AClass, TimeSlot1, TimeSlot2: Integer): Integer;
+function TTimetable.DeltaBrokenSession(AClass, TimeSlot1, TimeSlot2: Integer): Integer;
 var
   TimeSlot, Hour1, Hour2, Day1, Day2, Session, Duracion: Integer;
   TimeSlotASession: TDynamicIntegerArray;
 begin
-  with TTimeTableModel(Model), TablingInfo do
+  with TTimetableModel(Model), TablingInfo do
   begin
     TimeSlot := TimeSlot1;
     TimeSlotASession := FClassTimeSlotASession[AClass];
@@ -1410,34 +1410,34 @@ begin
   end;
 end;
 
-function TTimeTable.GetNonScatteredSubjectValue: Integer;
+function TTimetable.GetNonScatteredSubjectValue: Integer;
 begin
-  Result := TTimeTableModel(Model).NonScatteredSubjectValue * NonScatteredSubject;
+  Result := TTimetableModel(Model).NonScatteredSubjectValue * NonScatteredSubject;
 end;
 
-function TTimeTable.GetClashTeacherValue: Integer;
+function TTimetable.GetClashTeacherValue: Integer;
 begin
-  Result := TTimeTableModel(Model).ClashTeacherValue * TablingInfo.FClashTeacher;
+  Result := TTimetableModel(Model).ClashTeacherValue * TablingInfo.FClashTeacher;
 end;
 
-function TTimeTable.GetClashSubjectValue: Integer;
+function TTimetable.GetClashSubjectValue: Integer;
 begin
-  Result := TTimeTableModel(Model).ClashSubjectValue * TablingInfo.FClashSubject;
+  Result := TTimetableModel(Model).ClashSubjectValue * TablingInfo.FClashSubject;
 end;
 
 
-function TTimeTable.GetBreakTimeTableTeacherValue: Integer;
+function TTimetable.GetBreakTimetableTeacherValue: Integer;
 begin
-  Result := TTimeTableModel(Model).BreakTimeTableTeacherValue *
-    TablingInfo.FBreakTimeTableTeacher;
+  Result := TTimetableModel(Model).BreakTimetableTeacherValue *
+    TablingInfo.FBreakTimetableTeacher;
 end;
 
-function TTimeTable.GetClashRoomTypeValue: Integer;
+function TTimetable.GetClashRoomTypeValue: Integer;
 begin
-  Result := TTimeTableModel(Model).ClashRoomTypeValue * TablingInfo.FClashRoomType;
+  Result := TTimetableModel(Model).ClashRoomTypeValue * TablingInfo.FClashRoomType;
 end;
 
-function TTimeTable.GetValue: Integer;
+function TTimetable.GetValue: Integer;
 begin
   with TablingInfo do
     Result :=
@@ -1447,88 +1447,88 @@ begin
       OutOfPositionEmptyHourValue +
       NonScatteredSubjectValue +
       SubjectRestrictionValue +
-      BreakTimeTableTeacherValue +
+      BreakTimetableTeacherValue +
       TeacherRestrictionValue +
       BrokenSessionValue;
 end;
 
-function TTimeTable.NewBookmark: TBookmark;
+function TTimetable.NewBookmark: TBookmark;
 begin
-  Result := TTTBookmark.Create(Self, RandomIndexes(TTimeTableModel(Model).ClassCount));
+  Result := TTTBookmark.Create(Self, RandomIndexes(TTimetableModel(Model).ClassCount));
 end;
 
-destructor TTimeTable.Destroy;
+destructor TTimetable.Destroy;
 begin
   TablingInfo.Free;
   inherited Destroy;
 end;
 
-procedure TTimeTable.Assign(AIndividual: TIndividual);
+procedure TTimetable.Assign(AIndividual: TIndividual);
 var
   VClass, Subject, Teacher, RoomType, Day: Integer;
-  ATimeTable: TTimeTable;
+  ATimetable: TTimetable;
 begin
   inherited;
-  ATimeTable := TTimeTable(AIndividual);
-  with TTimeTableModel(Model), TablingInfo do
+  ATimetable := TTimetable(AIndividual);
+  with TTimetableModel(Model), TablingInfo do
   begin
     for VClass := 0 to FClassCount - 1 do
-      Move(ATimeTable.ClassTimeSlotASession[VClass, 0],
+      Move(ATimetable.ClassTimeSlotASession[VClass, 0],
         ClassTimeSlotASession[VClass, 0], FTimeSlotCount * SizeOf(Integer));
-    FClashTeacher := ATimeTable.TablingInfo.FClashTeacher;
-    FClashSubject := ATimeTable.TablingInfo.FClashSubject;
-    FClashRoomType := ATimeTable.TablingInfo.FClashRoomType;
-    FBreakTimeTableTeacher := ATimeTable.TablingInfo.FBreakTimeTableTeacher;
-    FOutOfPositionEmptyHour := ATimeTable.TablingInfo.FOutOfPositionEmptyHour;
-    FBrokenSession := ATimeTable.TablingInfo.FBrokenSession;
-    FNonScatteredSubject := ATimeTable.TablingInfo.FNonScatteredSubject;
-    FValue := ATimeTable.FValue;
-    // TablingInfo := ATimeTable.TablingInfo;
-    Move(ATimeTable.TablingInfo.FSubjectRestrictionTypeASubjectCount[0],
+    FClashTeacher := ATimetable.TablingInfo.FClashTeacher;
+    FClashSubject := ATimetable.TablingInfo.FClashSubject;
+    FClashRoomType := ATimetable.TablingInfo.FClashRoomType;
+    FBreakTimetableTeacher := ATimetable.TablingInfo.FBreakTimetableTeacher;
+    FOutOfPositionEmptyHour := ATimetable.TablingInfo.FOutOfPositionEmptyHour;
+    FBrokenSession := ATimetable.TablingInfo.FBrokenSession;
+    FNonScatteredSubject := ATimetable.TablingInfo.FNonScatteredSubject;
+    FValue := ATimetable.FValue;
+    // TablingInfo := ATimetable.TablingInfo;
+    Move(ATimetable.TablingInfo.FSubjectRestrictionTypeASubjectCount[0],
       FSubjectRestrictionTypeASubjectCount[0], FSubjectRestrictionTypeCount * SizeOf(Integer));
-    Move(ATimeTable.TablingInfo.FTeacherRestrictionTypeATeacherCount[0],
+    Move(ATimetable.TablingInfo.FTeacherRestrictionTypeATeacherCount[0],
       FTeacherRestrictionTypeATeacherCount[0], FTeacherRestrictionTypeCount * SizeOf(Integer));
     for Subject := 0 to FSubjectCount - 1 do
-      Move(ATimeTable.TablingInfo.FSubjectTimeSlotCount[Subject, 0],
+      Move(ATimetable.TablingInfo.FSubjectTimeSlotCount[Subject, 0],
            TablingInfo.FSubjectTimeSlotCount[Subject, 0],
            FTimeSlotCount * SizeOf(Integer));
     for Teacher := 0 to FTeacherCount - 1 do
-      Move(ATimeTable.TablingInfo.FTeacherTimeSlotCount[Teacher, 0],
+      Move(ATimetable.TablingInfo.FTeacherTimeSlotCount[Teacher, 0],
            TablingInfo.FTeacherTimeSlotCount[Teacher, 0],
            FTimeSlotCount * SizeOf(Integer));
     for Day := 0 to FDayCount - 1 do
     begin
-      Move(ATimeTable.TablingInfo.FDayTeacherMinHour[Day, 0],
+      Move(ATimetable.TablingInfo.FDayTeacherMinHour[Day, 0],
         FDayTeacherMinHour[Day, 0], FTeacherCount * SizeOf(Integer));
-      Move(ATimeTable.TablingInfo.FDayTeacherMaxHour[Day, 0],
+      Move(ATimetable.TablingInfo.FDayTeacherMaxHour[Day, 0],
         FDayTeacherMaxHour[Day, 0], FTeacherCount * SizeOf(Integer));
-      Move(ATimeTable.TablingInfo.FDayTeacherEmptyHourCount[Day, 0],
+      Move(ATimetable.TablingInfo.FDayTeacherEmptyHourCount[Day, 0],
         FDayTeacherEmptyHourCount[Day, 0], FTeacherCount * SizeOf(Integer));
     end;
     for RoomType := 0 to FRoomTypeCount - 1 do
-      Move(ATimeTable.TablingInfo.FRoomTypeTimeSlotCount[RoomType, 0],
+      Move(ATimetable.TablingInfo.FRoomTypeTimeSlotCount[RoomType, 0],
         TablingInfo.FRoomTypeTimeSlotCount[RoomType, 0],
         FTimeSlotCount * SizeOf(Integer));
     for VClass := 0 to FClassCount - 1 do
       for Day := 0 to FDayCount - 1 do
       begin
-        Move(ATimeTable.TablingInfo.FClassDaySubjectCount[VClass, Day, 0],
+        Move(ATimetable.TablingInfo.FClassDaySubjectCount[VClass, Day, 0],
           TablingInfo.FClassDaySubjectCount[VClass, Day, 0],
           FSubjectCount * SizeOf(Integer));
-        Move(ATimeTable.TablingInfo.FClassDaySubjectAcum[VClass, Day, 0],
+        Move(ATimetable.TablingInfo.FClassDaySubjectAcum[VClass, Day, 0],
           TablingInfo.FClassDaySubjectAcum[VClass, Day, 0],
           FSubjectCount * SizeOf(Integer));
       end;
   end;
 end;
 
-procedure TTimeTable.SaveToFile(const AFileName: string);
+procedure TTimetable.SaveToFile(const AFileName: string);
 var
   VStrings: TStrings;
   VClass, TimeSlot: Integer;
 begin
   VStrings := TStringList.Create;
-  with TTimeTableModel(Model) do
+  with TTimetableModel(Model) do
     try
       for VClass := 0 to FClassCount - 1 do
       begin
@@ -1550,22 +1550,22 @@ begin
     end;
 end;
 
-procedure TTimeTable.SaveToStream(Stream: TStream);
+procedure TTimetable.SaveToStream(Stream: TStream);
 var
   VClass: Integer;
 begin
-  with TTimeTableModel(Model) do
+  with TTimetableModel(Model) do
     for VClass := 0 to FClassCount - 1 do
     begin
       Stream.Write(ClassTimeSlotASession[VClass, 0], FTimeSlotCount * SizeOf(Integer));
     end;
 end;
 
-procedure TTimeTable.LoadFromStream(Stream: TStream);
+procedure TTimetable.LoadFromStream(Stream: TStream);
 var
   VClass: Integer;
 begin
-  with TTimeTableModel(Model) do
+  with TTimetableModel(Model) do
     for VClass := 0 to FClassCount - 1 do
     begin
       Stream.Read(ClassTimeSlotASession[VClass, 0], FTimeSlotCount * SizeOf(Integer));
@@ -1573,40 +1573,40 @@ begin
   Update;
 end;
 
-procedure TTimeTable.SaveToDataModule(IdTimeTable: Integer;
+procedure TTimetable.SaveToDataModule(IdTimetable: Integer;
   TimeIni, TimeEnd: TDateTime; Summary: TStrings);
   {$IFDEF USE_SQL}
 var
   SQL: TStrings;
   {$ENDIF}
-  procedure SaveTimeTable;
+  procedure SaveTimetable;
   {$IFNDEF USE_SQL}
   var
     Stream: TStream;
   {$ENDIF}
   begin
     {$IFDEF USE_SQL}
-    SQL.Add(Format('INSERT INTO TimeTable(IdTimeTable,TimeIni,TimeEnd,Summary) ' +
+    SQL.Add(Format('INSERT INTO Timetable(IdTimetable,TimeIni,TimeEnd,Summary) ' +
       'VALUES (%d,"%s","%s","%s");', [
-      IdTimeTable,
+      IdTimetable,
       DateTimeToAnsiSQLDate(TimeIni),
       DateTimeToAnsiSQLDate(TimeEnd),
       Summary.Text]));
     {$ELSE}
-    with SourceDataModule, TbTimeTable do
+    with SourceDataModule, TbTimetable do
     begin
       DisableControls;
       try
-        IndexFieldNames := 'IdTimeTable';
+        IndexFieldNames := 'IdTimetable';
         Append;
-        TbTimeTable.FindField('IdTimeTable').AsInteger := IdTimeTable;
-        TbTimeTable.FindField('TimeIni').AsDateTime := TimeIni;
-        TbTimeTable.FindField('TimeEnd').AsDateTime := TimeEnd;
+        TbTimetable.FindField('IdTimetable').AsInteger := IdTimetable;
+        TbTimetable.FindField('TimeIni').AsDateTime := TimeIni;
+        TbTimetable.FindField('TimeEnd').AsDateTime := TimeEnd;
         Stream := TMemoryStream.Create;
         try
           Summary.SaveToStream(Stream);
           Stream.Position := 0;
-          TBlobField(TbTimeTable.FindField('Summary')).LoadFromStream(Stream);
+          TBlobField(TbTimetable.FindField('Summary')).LoadFromStream(Stream);
         finally
           Stream.Free;
         end;
@@ -1617,16 +1617,16 @@ var
     end;
     {$ENDIF}
   end;
-  procedure SaveTimeTableDetail;
+  procedure SaveTimetableDetail;
   var
     VClass, TimeSlot, IdLevel, IdGroupId, IdSpecialization, Session: Integer;
     {$IFNDEF USE_SQL}
-    FieldTimeTable, FieldLevel, FieldGroupId, FieldSpecialization, FieldDay,
+    FieldTimetable, FieldLevel, FieldGroupId, FieldSpecialization, FieldDay,
       FieldHour, FieldSubject, FieldSession: TField;
     {$ENDIF}
   begin
   {$IFDEF USE_SQL}
-      with TTimeTableModel(Model) do
+      with TTimetableModel(Model) do
       for VClass := 0 to FClassCount - 1 do
       begin
         IdLevel := FLevelToIdLevel[FClassToLevel[VClass]];
@@ -1639,10 +1639,10 @@ var
           if Session >= 0 then
           begin
             SQL.Add(Format(
-              'INSERT INTO TimeTableDetail' +
-              '(IdTimeTable,IdLevel,IdGroupId,IdSpecialization,IdDay,' +
+              'INSERT INTO TimetableDetail' +
+              '(IdTimetable,IdLevel,IdGroupId,IdSpecialization,IdDay,' +
               'IdHour,IdSubject,Session) VALUES (%d,%d,%d,%d,%d,%d,%d,%d);',
-              [IdTimeTable, IdLevel, IdGroupId, IdSpecialization,
+              [IdTimetable, IdLevel, IdGroupId, IdSpecialization,
               FDayToIdDay[FTimeSlotToDay[TimeSlot]],
               FHourToIdHour[FTimeSlotToHour[TimeSlot]],
               FSubjectToIdSubject[FSessionToSubject[Session]],
@@ -1651,12 +1651,12 @@ var
         end;
       end;
     {$ELSE}
-    with SourceDataModule.TbTimeTableDetail do
+    with SourceDataModule.TbTimetableDetail do
     begin
       DisableControls;
       try
         Last;
-        FieldTimeTable := FindField('IdTimeTable');
+        FieldTimetable := FindField('IdTimetable');
         FieldLevel := FindField('IdLevel');
         FieldGroupId := FindField('IdGroupId');
         FieldSpecialization := FindField('IdSpecialization');
@@ -1664,7 +1664,7 @@ var
         FieldHour := FindField('IdHour');
         FieldSubject := FindField('IdSubject');
         FieldSession := FindField('Session');
-        with TTimeTableModel(Model) do
+        with TTimetableModel(Model) do
         for VClass := 0 to FClassCount - 1 do
         begin
           IdLevel := FLevelAIdLevel[FClassALevel[VClass]];
@@ -1677,7 +1677,7 @@ var
             if Session >= 0 then
             begin
               Append;
-              FieldTimeTable.AsInteger := IdTimeTable;
+              FieldTimetable.AsInteger := IdTimetable;
               FieldLevel.AsInteger := IdLevel;
               FieldGroupId.AsInteger := IdGroupId;
               FieldSpecialization.AsInteger := IdSpecialization;
@@ -1702,14 +1702,14 @@ begin
   SourceDataModule.CheckRelations := False;
   {$ENDIF}
   try
-    SaveTimeTable;
-    SaveTimeTableDetail;
+    SaveTimetable;
+    SaveTimetableDetail;
     {$IFDEF USE_SQL}
     with SourceDataModule do
     begin
       DbZConnection.ExecuteDirect(SQL.Text);
-      TbTimeTable.Refresh;
-      TbTimeTableDetail.Refresh;
+      TbTimetable.Refresh;
+      TbTimetableDetail.Refresh;
     end;
     {$ENDIF}
   finally
@@ -1721,18 +1721,18 @@ begin
   end;
 end;
 
-procedure TTimeTable.LoadFromDataModule(IdTimeTable: Integer);
+procedure TTimetable.LoadFromDataModule(IdTimetable: Integer);
 var
   FieldLevel, FieldGroupId, FieldSpecialization, FieldDay, FieldHour,
     FieldSession: TLongintField;
   VClass, TimeSlot: Integer;
 begin
-  with SourceDataModule, TTimeTableModel(Model), TbTimeTableDetail do
+  with SourceDataModule, TTimetableModel(Model), TbTimetableDetail do
   begin
-    TbTimeTable.Locate('IdTimeTable', IdTimeTable, []);
-    LinkedFields := 'IdTimeTable';
-    MasterFields := 'IdTimeTable';
-    MasterSource := DSTimeTable;
+    TbTimetable.Locate('IdTimetable', IdTimetable, []);
+    LinkedFields := 'IdTimetable';
+    MasterFields := 'IdTimetable';
+    MasterSource := DSTimetable;
     try
       FieldLevel := FindField('IdLevel') as TLongintField;
       FieldGroupId := FindField('IdGroupId') as TLongintField;
@@ -1770,13 +1770,13 @@ begin
   {$ENDIF}
 end;
 
-procedure TTimeTable.CheckIntegrity;
+procedure TTimetable.CheckIntegrity;
 var
   Subject, VClass, TimeSlot, Teacher, Distribution, Counter,
     Session: Integer;
   SessionFound: Boolean;
 begin
-  with TTimeTableModel(Model), TablingInfo do
+  with TTimetableModel(Model), TablingInfo do
   begin
     for VClass := 0 to FClassCount - 1 do
       for TimeSlot := 0 to FTimeSlotCount - 1 do
@@ -1819,18 +1819,18 @@ begin
   end;
 end;
 
-procedure TTimeTable.Reset;
+procedure TTimetable.Reset;
 var
   Teacher, TimeSlot, Subject, SubjectRestrictionType, TeacherRestrictionType,
     VClass, Day, RoomType: Integer;
 begin
-  with TTimeTableModel(Model), TablingInfo do
+  with TTimetableModel(Model), TablingInfo do
   begin
     FClashTeacher := 0;
     FClashSubject := 0;
     FClashRoomType := 0;
     FOutOfPositionEmptyHour := 0;
-    FBreakTimeTableTeacher := 0;
+    FBreakTimetableTeacher := 0;
     FBrokenSession := 0;
     FNonScatteredSubject := 0;
     for Day := 0 to FDayCount - 1 do
@@ -1863,11 +1863,11 @@ begin
   end;
 end;
 
-procedure TTimeTable.Update;
+procedure TTimetable.Update;
 var
   VClass: Integer;
 begin
-  with TTimeTableModel(Model), TablingInfo do
+  with TTimetableModel(Model), TablingInfo do
   begin
     Reset;
     for VClass := 0 to FClassCount - 1 do
@@ -1876,17 +1876,17 @@ begin
   end
 end;
 
-procedure TTimeTable.UpdateValue;
+procedure TTimetable.UpdateValue;
 begin
   FValue := GetValue;
 end;
 
-destructor TTimeTableModel.Destroy;
+destructor TTimetableModel.Destroy;
 begin
   inherited Destroy;
 end;
 
-class function TTimeTableModel.GetElitistCount: Integer;
+class function TTimetableModel.GetElitistCount: Integer;
 begin
   Result := 3;
 end;
@@ -1914,7 +1914,7 @@ function TTTBookmark.GetClass: Integer;
 var
   Index: Integer;
 begin
-  Index := (FPosition + FOffset) mod TTimeTableModel(FIndividual.Model).ClassCount;
+  Index := (FPosition + FOffset) mod TTimetableModel(FIndividual.Model).ClassCount;
   Result := FClasses[Index];
 end;
 
@@ -1923,7 +1923,7 @@ begin
   FPosition := 0;
   FOffset := 0;
   FTimeSlot1 := 0;
-  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
+  with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
     FTimeSlot2 := SessionToDuration[ClassTimeSlotASession[Class_, FTimeSlot1]];
 end;
 
@@ -1958,7 +1958,7 @@ var
   d1, d2: Integer;
   TimeSlotASession: TDynamicIntegerArray;
 begin
-  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
+  with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
   begin
     TimeSlotASession := ClassTimeSlotASession[Class_];
     d1 := TimeSlotCount - SessionToDuration[TimeSlotASession[TimeSlotCount - 1]];
@@ -1996,20 +1996,20 @@ end;
 
 function TTTBookmark.GetProgress: Integer;
 begin
-  with TTimeTableModel(FIndividual.Model) do
+  with TTimetableModel(FIndividual.Model) do
     Result := (FOffset + FPosition) * TimeSlotCount * (TimeSlotCount - 1) div 2 +
     (FTimeSlot1 * TimeSlotCount - FTimeSlot1 * (FTimeSlot1 + 1) div 2 + FTimeSlot2 - 1);
 end;
 
 function TTTBookmark.GetMax: Integer;
 begin
-  with TTimeTableModel(FIndividual.Model) do
+  with TTimetableModel(FIndividual.Model) do
     Result := (FOffset + ClassCount) * TimeSlotCount * (TimeSlotCount - 1) div 2;
 end;
 
 function TTTBookmark.Move: Integer;
 begin
-  Result := TTimeTable(FIndividual).DoMove(Class_, FTimeSlot1, FTimeSlot2);
+  Result := TTimetable(FIndividual).DoMove(Class_, FTimeSlot1, FTimeSlot2);
 end;
 
 function TTTBookmark.Undo: Integer;
@@ -2019,7 +2019,7 @@ end;
 
 function TTTBookmark.Eof: Boolean;
 begin
-  Result := FPosition = TTimeTableModel(FIndividual.Model).ClassCount;
+  Result := FPosition = TTimetableModel(FIndividual.Model).ClassCount;
 end;
 
 { TTTBookmark2 }
@@ -2046,7 +2046,7 @@ function TTTBookmark2.GetClass: Integer;
 var
   Index: Integer;
 begin
-  Index := (FPosition + FOffset) mod TTimeTableModel(FIndividual.Model).ClassCount;
+  Index := (FPosition + FOffset) mod TTimetableModel(FIndividual.Model).ClassCount;
   Result := FClasss[Index];
 end;
 
@@ -2056,7 +2056,7 @@ begin
   FOffset := 0;
   FProgress := 0;
   FTimeSlot1 := 0;
-  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
+  with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
     FTimeSlot2 := SessionToDuration[ClassTimeSlotASession[Class_, 0]];
   FTimeSlot3 := FTimeSlot2;
 end;
@@ -2066,7 +2066,7 @@ var
   d1, d2: Integer;
   TimeSlotASession: TDynamicIntegerArray;
 begin
-  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
+  with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
   begin
     TimeSlotASession := ClassTimeSlotASession[Class_];
     d1 := TimeSlotCount - SessionToDuration[TimeSlotASession[TimeSlotCount - 1]];
@@ -2129,14 +2129,14 @@ end;
 
 function TTTBookmark2.GetProgress: Integer;
 begin
-  with TTimeTableModel(FIndividual.Model) do
+  with TTimetableModel(FIndividual.Model) do
     Result := (FOffset + FPosition) * ((TimeSlotCount * (TimeSlotCount - 1) div 2)
       * (2 * TimeSlotCount - 1) div 3) + TimeSlotCount * ( FTimeSlot1 * TimeSlotCount
       + FTimeSlot2 - (FTimeSlot1 + 1) * (FTimeSlot1 + 1) )
       - FTimeSlot2 * (FTimeSlot1 + 1) + (FTimeSlot1 * (FTimeSlot1 + 1) div 2)
       * (2 * FTimeSlot1 + 7) div 3 + FTimeSlot3;
   {Result := FProgress;
-  with TTimeTableModel(FIndividual.Model) do
+  with TTimetableModel(FIndividual.Model) do
     Result := (FOffset + FPosition) * ((TimeSlotCount * (TimeSlotCount - 1) div 2) *
       (2 * TimeSlotCount - 1) div 3) +
     (FTimeSlot1 * TimeSlotCount - FTimeSlot1 * (FTimeSlot1 + 1) div 2 + FTimeSlot2 - 1);}
@@ -2144,14 +2144,14 @@ end;
 
 function TTTBookmark2.GetMax: Integer;
 begin
-  with TTimeTableModel(FIndividual.Model) do
+  with TTimetableModel(FIndividual.Model) do
     Result := (FOffset + ClassCount) * ((TimeSlotCount * (TimeSlotCount - 1) div 2) *
       (2 * TimeSlotCount - 1) div 3);
 end;
 
 function TTTBookmark2.Move: Integer;
 begin
-  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
+  with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
   begin
     if FTimeSlot2 < FTimeSlot3 then
     begin
@@ -2169,7 +2169,7 @@ end;
 
 function TTTBookmark2.Undo: Integer;
 begin
-  with TTimeTableModel(FIndividual.Model), TTimeTable(FIndividual) do
+  with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
   begin
     if FTimeSlot2 < FTimeSlot3 then
     begin
@@ -2187,7 +2187,7 @@ end;
 
 function TTTBookmark2.Eof: Boolean;
 begin
-  Result := FPosition = TTimeTableModel(FIndividual.Model).ClassCount;
+  Result := FPosition = TTimetableModel(FIndividual.Model).ClassCount;
 end;
 
 initialization

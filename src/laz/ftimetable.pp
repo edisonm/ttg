@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit FTimeTable;
+unit FTimetable;
 
 {$I ttg.inc}
 
@@ -10,17 +10,17 @@ uses
   Controls, Forms, Dialogs, Db, FSingleEditor, Grids, Buttons, FEditor, DBCtrls,
   ExtCtrls, ComCtrls, ActnList, ZConnection, ZDataset, FCrossManytoManyEditorR,
   DMaster, FCrossManyToManyEditor1, FConfiguracion, DSource, FMasterDetailEditor,
-  FTimeTableTeacher, FTimeTableRoomType, FTimeTableClass;
+  FTimetableTeacher, FTimetableRoomType, FTimetableClass;
 
 type
 
-  { TTimeTableForm }
+  { TTimetableForm }
 
-  TTimeTableForm = class(TSingleEditorForm)
+  TTimetableForm = class(TSingleEditorForm)
     BtnSubjectRestrictionNoRespetada: TToolButton;
     BtnTeacherRestrictionNoRespetada: TToolButton;
-    BtnTimeTableClass: TToolButton;
-    BtnTimeTableTeacher: TToolButton;
+    BtnTimetableClass: TToolButton;
+    BtnTimetableTeacher: TToolButton;
     BtnClashTeacher: TToolButton;
     BtnClashSubject: TToolButton;
     BtnClashRoom: TToolButton;
@@ -59,33 +59,33 @@ type
     QuClashSubjectIdSubject: TLongintField;
     QuClashSubjectNaSubject: TStringField;
     QuClashSubjectDetalle: TZQuery;
-    QuTimeTableDetailSubjectRestriction: TZQuery;
-    QuTimeTableDetailSubjectRestrictionNaSubject: TStringField;
-    QuTimeTableDetailSubjectRestrictionIdDay: TLongintField;
-    QuTimeTableDetailSubjectRestrictionIdHour: TLongintField;
-    QuTimeTableDetailSubjectRestrictionIdSubjectRestrictionType: TLongintField;
-    QuTimeTableDetailSubjectRestrictionIdLevel: TLongintField;
-    QuTimeTableDetailSubjectRestrictionIdSpecialization: TLongintField;
-    QuTimeTableDetailSubjectRestrictionIdGroupId: TLongintField;
-    QuTimeTableDetailSubjectRestrictionNaDay: TStringField;
-    QuTimeTableDetailSubjectRestrictionNaHour: TStringField;
-    QuTimeTableDetailSubjectRestrictionNaSubjectRestrictionType: TStringField;
-    QuTimeTableDetailSubjectRestrictionAbLevel: TStringField;
-    QuTimeTableDetailSubjectRestrictionAbSpecialization: TStringField;
-    QuTimeTableDetailSubjectRestrictionNaGroupId: TStringField;
-    QuTimeTableDetailTeacherRestriction: TZQuery;
-    QuTimeTableDetailTeacherRestrictionIdDay: TLongintField;
-    QuTimeTableDetailTeacherRestrictionIdHour: TLongintField;
-    QuTimeTableDetailTeacherRestrictionIdTeacherRestrictionType: TLongintField;
-    QuTimeTableDetailTeacherRestrictionIdLevel: TLongintField;
-    QuTimeTableDetailTeacherRestrictionIdSpecialization: TLongintField;
-    QuTimeTableDetailTeacherRestrictionIdGroupId: TLongintField;
-    QuTimeTableDetailTeacherRestrictionNaTeacherRestrictionType: TStringField;
-    QuTimeTableDetailTeacherRestrictionNaLevel: TStringField;
-    QuTimeTableDetailTeacherRestrictionNaSpecialization: TStringField;
-    QuTimeTableDetailTeacherRestrictionNaGroupId: TStringField;
-    QuTimeTableDetailTeacherRestrictionNaDay: TStringField;
-    QuTimeTableDetailTeacherRestrictionNaHour: TStringField;
+    QuTimetableDetailSubjectRestriction: TZQuery;
+    QuTimetableDetailSubjectRestrictionNaSubject: TStringField;
+    QuTimetableDetailSubjectRestrictionIdDay: TLongintField;
+    QuTimetableDetailSubjectRestrictionIdHour: TLongintField;
+    QuTimetableDetailSubjectRestrictionIdSubjectRestrictionType: TLongintField;
+    QuTimetableDetailSubjectRestrictionIdLevel: TLongintField;
+    QuTimetableDetailSubjectRestrictionIdSpecialization: TLongintField;
+    QuTimetableDetailSubjectRestrictionIdGroupId: TLongintField;
+    QuTimetableDetailSubjectRestrictionNaDay: TStringField;
+    QuTimetableDetailSubjectRestrictionNaHour: TStringField;
+    QuTimetableDetailSubjectRestrictionNaSubjectRestrictionType: TStringField;
+    QuTimetableDetailSubjectRestrictionAbLevel: TStringField;
+    QuTimetableDetailSubjectRestrictionAbSpecialization: TStringField;
+    QuTimetableDetailSubjectRestrictionNaGroupId: TStringField;
+    QuTimetableDetailTeacherRestriction: TZQuery;
+    QuTimetableDetailTeacherRestrictionIdDay: TLongintField;
+    QuTimetableDetailTeacherRestrictionIdHour: TLongintField;
+    QuTimetableDetailTeacherRestrictionIdTeacherRestrictionType: TLongintField;
+    QuTimetableDetailTeacherRestrictionIdLevel: TLongintField;
+    QuTimetableDetailTeacherRestrictionIdSpecialization: TLongintField;
+    QuTimetableDetailTeacherRestrictionIdGroupId: TLongintField;
+    QuTimetableDetailTeacherRestrictionNaTeacherRestrictionType: TStringField;
+    QuTimetableDetailTeacherRestrictionNaLevel: TStringField;
+    QuTimetableDetailTeacherRestrictionNaSpecialization: TStringField;
+    QuTimetableDetailTeacherRestrictionNaGroupId: TStringField;
+    QuTimetableDetailTeacherRestrictionNaDay: TStringField;
+    QuTimetableDetailTeacherRestrictionNaHour: TStringField;
     Panel2: TPanel;
     dbmSummary: TDBMemo;
     BtnSubjectCortadaDay: TToolButton;
@@ -108,7 +108,7 @@ type
     QuSubjectCortadaHourIdHour: TLongintField;
     QuSubjectCortadaHourDetalle: TZQuery;
     DSSubjectCortadaHour: TDataSource;
-    BtnTimeTableRoomType: TToolButton;
+    BtnTimetableRoomType: TToolButton;
     QuClashRoomNumber: TLongintField;
     QuSubjectCortadaHourNaDay: TStringField;
     QuSubjectCortadaHourNaHour: TStringField;
@@ -137,8 +137,8 @@ type
     QuSubjectCortadaHourDetalleNaSubject: TStringField;
     QuSubjectCortadaHourDetalleIdHour: TLongintField;
     Splitter1: TSplitter;
-    ActTimeTableClass: TAction;
-    ActTimeTableTeacher: TAction;
+    ActTimetableClass: TAction;
+    ActTimetableTeacher: TAction;
     ActClashTeacher: TAction;
     ActClashSubject: TAction;
     ActClashAula: TAction;
@@ -146,39 +146,39 @@ type
     ActTeacherRestrictionNoRespetada: TAction;
     ActSubjectCortadaDay: TAction;
     ActSubjectCortadaHour: TAction;
-    ActTimeTableRoomType: TAction;
+    ActTimetableRoomType: TAction;
     DSClashTeacher: TDataSource;
-    QuClashTeacherIdTimeTable: TLongintField;
-    QuSubjectCortadaDayIdTimeTable: TLongintField;
-    QuSubjectCortadaHourIdTimeTable: TLongintField;
-    QuTimeTableDetailSubjectRestrictionIdTimeTable: TLongintField;
-    QuTimeTableDetailTeacherRestrictionIdTimeTable: TLongintField;
-    QuTimeTableDetailTeacherRestrictionLnTeacher: TStringField;
-    QuTimeTableDetailTeacherRestrictionNaTeacher: TStringField;
-    QuClashRoomIdTimeTable: TLongintField;
+    QuClashTeacherIdTimetable: TLongintField;
+    QuSubjectCortadaDayIdTimetable: TLongintField;
+    QuSubjectCortadaHourIdTimetable: TLongintField;
+    QuTimetableDetailSubjectRestrictionIdTimetable: TLongintField;
+    QuTimetableDetailTeacherRestrictionIdTimetable: TLongintField;
+    QuTimetableDetailTeacherRestrictionLnTeacher: TStringField;
+    QuTimetableDetailTeacherRestrictionNaTeacher: TStringField;
+    QuClashRoomIdTimetable: TLongintField;
     QuClashRoomAbRoomType: TStringField;
     QuClashTeacherLnTeacher: TStringField;
     QuClashTeacherNaTeacher: TStringField;
     QuClashTeacherClashes: TStringField;
-    QuClashRoomDetalleIdTimeTable: TLongintField;
+    QuClashRoomDetalleIdTimetable: TLongintField;
     QuClashRoomDetalleIdRoomType: TLongintField;
     QuClashRoomDetalleIdDay: TLongintField;
     QuClashRoomDetalleIdHour: TLongintField;
-    QuClashTeacherDetalleIdTimeTable: TLongintField;
-    QuClashSubjectIdTimeTable: TLongintField;
+    QuClashTeacherDetalleIdTimetable: TLongintField;
+    QuClashSubjectIdTimetable: TLongintField;
     DSClashSubject: TDataSource;
-    QuClashSubjectDetalleIdTimeTable: TLongintField;
-    QuSubjectCortadaHourDetalleIdTimeTable: TLongintField;
+    QuClashSubjectDetalleIdTimetable: TLongintField;
+    QuSubjectCortadaHourDetalleIdTimetable: TLongintField;
     QuClashRoomClashes: TStringField;
     QuClashRoomUsadas: TStringField;
     QuClashTeacherDetalleIdDay: TLongintField;
     QuClashTeacherDetalleIdHour: TLongintField;
-    BtnMejorarTimeTable: TToolButton;
-    ActMejorarTimeTable: TAction;
-    procedure ActTimeTableClassExecute(Sender: TObject);
+    BtnMejorarTimetable: TToolButton;
+    ActMejorarTimetable: TAction;
+    procedure ActTimetableClassExecute(Sender: TObject);
     procedure ActClashTeacherExecute(Sender: TObject);
     procedure ActClashSubjectExecute(Sender: TObject);
-    procedure ActTimeTableTeacherExecute(Sender: TObject);
+    procedure ActTimetableTeacherExecute(Sender: TObject);
     procedure ActSubjectRestrictionNoRespetadaExecute(Sender: TObject);
     procedure ActTeacherRestrictionNoRespetadaExecute(Sender: TObject);
     procedure ActClashAulaExecute(Sender: TObject);
@@ -186,23 +186,23 @@ type
     procedure QuClashSubjectAfterScroll(DataSet: TDataSet);
     procedure ActSubjectCortadaDayExecute(Sender: TObject);
     procedure ActSubjectCortadaHourExecute(Sender: TObject);
-    procedure ActTimeTableRoomTypeExecute(Sender: TObject);
+    procedure ActTimetableRoomTypeExecute(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure DataSourceStateChange(Sender: TObject);
     procedure ActFindExecute(Sender: TObject);
-    procedure ActMejorarTimeTableExecute(Sender: TObject);
+    procedure ActMejorarTimetableExecute(Sender: TObject);
   private
     { Private declarations }
     FClashRoomForm, FClashSubjectForm, FSubjectCortadaHourForm,
       FSubjectCortadaDayForm, FClashTeacherForm: TMasterDetailEditorForm;
     FSubjectRestrictionNoRespetadaForm,
       FTeacherRestrictionNoRespetadaForm: TSingleEditorForm;
-    FTimeTableTeacherForm: TTimeTableTeacherForm;
-    FTimeTableRoomTypeForm: TTimeTableRoomTypeForm;
-    FTimeTableClassForm: TTimeTableClassForm;
+    FTimetableTeacherForm: TTimetableTeacherForm;
+    FTimetableRoomTypeForm: TTimetableRoomTypeForm;
+    FTimetableClassForm: TTimetableClassForm;
     {$IFNDEF FREEWARE}
-    procedure MejorarTimeTable;
+    procedure MejorarTimetable;
     {$ENDIF}
   protected
     procedure doLoadConfig; override;
@@ -212,7 +212,7 @@ type
   end;
 
 var
-  TimeTableForm: TTimeTableForm;
+  TimetableForm: TTimetableForm;
 
 implementation
 
@@ -222,19 +222,19 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-procedure TTimeTableForm.ActTimeTableClassExecute(Sender: TObject);
+procedure TTimetableForm.ActTimetableClassExecute(Sender: TObject);
 begin
   inherited;
-  if TTimeTableClassForm.ToggleEditor(Self, FTimeTableClassForm,
-    ConfigStorage, ActTimeTableClass) then
+  if TTimetableClassForm.ToggleEditor(Self, FTimetableClassForm,
+    ConfigStorage, ActTimetableClass) then
   begin
     with SourceDataModule do
-      FTimeTableClassForm.LoadHints(TbDay, TbHour, TbSubject);
-    FTimeTableClassForm.BtnMostrarClick(nil);
+      FTimetableClassForm.LoadHints(TbDay, TbHour, TbSubject);
+    FTimetableClassForm.BtnMostrarClick(nil);
   end;
 end;
 
-procedure TTimeTableForm.ActClashTeacherExecute(Sender: TObject);
+procedure TTimetableForm.ActClashTeacherExecute(Sender: TObject);
 begin
   inherited;
   with SourceDataModule, MasterDataModule do
@@ -251,24 +251,24 @@ begin
   end;
 end;
 
-procedure TTimeTableForm.ActFindExecute(Sender: TObject);
+procedure TTimetableForm.ActFindExecute(Sender: TObject);
 begin
   inherited ActFindExecute(Sender);
 end;
 
-procedure TTimeTableForm.ActTimeTableTeacherExecute(Sender: TObject);
+procedure TTimetableForm.ActTimetableTeacherExecute(Sender: TObject);
 begin
   inherited;
-  if TTimeTableTeacherForm.ToggleEditor(Self, FTimeTableTeacherForm,
-    ConfigStorage, ActTimeTableTeacher) then
+  if TTimetableTeacherForm.ToggleEditor(Self, FTimetableTeacherForm,
+    ConfigStorage, ActTimetableTeacher) then
   begin
     with SourceDataModule do
-      FTimeTableTeacherForm.LoadHints(TbDay, TbHour, TbTeacher);
-    FTimeTableTeacherForm.BtnMostrarClick(nil);
+      FTimetableTeacherForm.LoadHints(TbDay, TbHour, TbTeacher);
+    FTimetableTeacherForm.BtnMostrarClick(nil);
   end
 end;
 
-procedure TTimeTableForm.ActClashSubjectExecute(Sender: TObject);
+procedure TTimetableForm.ActClashSubjectExecute(Sender: TObject);
 begin
   inherited;
   with SourceDataModule do
@@ -285,51 +285,51 @@ begin
   end;
 end;
 
-procedure TTimeTableForm.ActSubjectRestrictionNoRespetadaExecute(Sender: TObject);
+procedure TTimetableForm.ActSubjectRestrictionNoRespetadaExecute(Sender: TObject);
 begin
   inherited;
   if TSingleEditorForm.ToggleSingleEditor(Self,
     FSubjectRestrictionNoRespetadaForm, ConfigStorage,
-    ActSubjectRestrictionNoRespetada, QuTimeTableDetailSubjectRestriction) then
+    ActSubjectRestrictionNoRespetada, QuTimetableDetailSubjectRestriction) then
   begin
-    QuTimeTableDetailSubjectRestriction.Close;
-    QuTimeTableDetailSubjectRestriction.Open;
+    QuTimetableDetailSubjectRestriction.Close;
+    QuTimetableDetailSubjectRestriction.Open;
   end;
 end;
 
-procedure TTimeTableForm.ActMejorarTimeTableExecute(Sender: TObject);
+procedure TTimetableForm.ActMejorarTimetableExecute(Sender: TObject);
 begin
-  ActMejorarTimeTable.Enabled := False;
+  ActMejorarTimetable.Enabled := False;
   try
 {$IFNDEF FREEWARE}
-    MejorarTimeTable;
+    MejorarTimetable;
 {$ENDIF}
   finally
-    ActMejorarTimeTable.Enabled := True;
-    ActMejorarTimeTable.Checked := False;
+    ActMejorarTimetable.Enabled := True;
+    ActMejorarTimetable.Checked := False;
   end;
 end;
 
 {$IFNDEF FREEWARE}
-procedure TTimeTableForm.MejorarTimeTable;
+procedure TTimetableForm.MejorarTimetable;
 var
-  IdTimeTableFuente, IdTimeTableDestino: Integer;
-  SNewIdTimeTable: string;
+  IdTimetableFuente, IdTimetableDestino: Integer;
+  SNewIdTimetable: string;
 begin
-  IdTimeTableFuente := SourceDataModule.TbTimeTable.FindField('IdTimeTable').AsInteger;
-  SNewIdTimeTable := IntToStr(MasterDataModule.NewIdTimeTable);
-  if not InputQuery(Format('Mejorando TimeTable %d: ', [IdTimeTableFuente]),
-    'Idigo del horario mejorado', SNewIdTimeTable) then
+  IdTimetableFuente := SourceDataModule.TbTimetable.FindField('IdTimetable').AsInteger;
+  SNewIdTimetable := IntToStr(MasterDataModule.NewIdTimetable);
+  if not InputQuery(Format('Mejorando Timetable %d: ', [IdTimetableFuente]),
+    'Idigo del horario mejorado', SNewIdTimetable) then
     Exit;
-  IdTimeTableDestino := StrToInt(SNewIdTimeTable);
+  IdTimetableDestino := StrToInt(SNewIdTimetable);
   with SourceDataModule do
   begin
-    ActMejorarTimeTable.Enabled := False;
+    ActMejorarTimetable.Enabled := False;
     try
       {$IFDEF THREADED}
-      TImproveTimeTableThread.Create(IdTimeTableFuente, IdTimeTableDestino, False);
+      TImproveTimetableThread.Create(IdTimetableFuente, IdTimetableDestino, False);
       {$ELSE}
-      with TImproveTimeTableThread.Create(IdTimeTableFuente, IdTimeTableDestino, True) do
+      with TImproveTimetableThread.Create(IdTimetableFuente, IdTimetableDestino, True) do
       try
         Execute;
       finally
@@ -337,27 +337,27 @@ begin
       end;
       {$ENDIF}
     finally
-      ActMejorarTimeTable.Enabled := True;
-      TbTimeTableDetail.Refresh;
+      ActMejorarTimetable.Enabled := True;
+      TbTimetableDetail.Refresh;
     end;
   end;
 end;
 {$ENDIF}
 
-procedure TTimeTableForm.ActTeacherRestrictionNoRespetadaExecute
+procedure TTimetableForm.ActTeacherRestrictionNoRespetadaExecute
   (Sender: TObject);
 begin
   inherited;
   if TSingleEditorForm.ToggleSingleEditor(Self,
     FTeacherRestrictionNoRespetadaForm, ConfigStorage,
-    ActTeacherRestrictionNoRespetada, QuTimeTableDetailTeacherRestriction) then
+    ActTeacherRestrictionNoRespetada, QuTimetableDetailTeacherRestriction) then
   begin
-    QuTimeTableDetailTeacherRestriction.Close;
-    QuTimeTableDetailTeacherRestriction.Open;
+    QuTimetableDetailTeacherRestriction.Close;
+    QuTimetableDetailTeacherRestriction.Open;
   end;
 end;
 
-procedure TTimeTableForm.ActClashAulaExecute(Sender: TObject);
+procedure TTimetableForm.ActClashAulaExecute(Sender: TObject);
 begin
   inherited;
   with SourceDataModule, QuClashRoom do
@@ -374,7 +374,7 @@ begin
   end;
 end;
 
-procedure TTimeTableForm.QuClashTeacherAfterScroll(DataSet: TDataSet);
+procedure TTimetableForm.QuClashTeacherAfterScroll(DataSet: TDataSet);
 begin
   inherited;
   QuClashTeacherDetalle.Filter := Format(
@@ -383,14 +383,14 @@ begin
     QuClashTeacherIdTeacher.Value]);
 end;
 
-procedure TTimeTableForm.QuClashSubjectAfterScroll(DataSet: TDataSet);
+procedure TTimetableForm.QuClashSubjectAfterScroll(DataSet: TDataSet);
 begin
   inherited;
   QuClashSubjectDetalle.Filter := Format('IdSubject=%d',
     [QuClashSubjectIdSubject.Value]);
 end;
 
-procedure TTimeTableForm.ActSubjectCortadaDayExecute(Sender: TObject);
+procedure TTimetableForm.ActSubjectCortadaDayExecute(Sender: TObject);
 begin
   inherited;
   if TSingleEditorForm.ToggleSingleEditor(Self, FSubjectCortadaDayForm,
@@ -401,7 +401,7 @@ begin
   end;
 end;
 
-procedure TTimeTableForm.ActSubjectCortadaHourExecute(Sender: TObject);
+procedure TTimetableForm.ActSubjectCortadaHourExecute(Sender: TObject);
 begin
   inherited;
   with SourceDataModule, QuSubjectCortadaHour do
@@ -418,42 +418,42 @@ begin
   end;
 end;
 
-procedure TTimeTableForm.ActTimeTableRoomTypeExecute(Sender: TObject);
+procedure TTimetableForm.ActTimetableRoomTypeExecute(Sender: TObject);
 begin
   inherited;
-  if TTimeTableRoomTypeForm.ToggleEditor(Self, FTimeTableRoomTypeForm,
-    ConfigStorage, ActTimeTableRoomType) then
+  if TTimetableRoomTypeForm.ToggleEditor(Self, FTimetableRoomTypeForm,
+    ConfigStorage, ActTimetableRoomType) then
   begin
     with SourceDataModule do
     begin
-      FTimeTableRoomTypeForm.LoadHints(TbDay, TbHour, TbSubject);
+      FTimetableRoomTypeForm.LoadHints(TbDay, TbHour, TbSubject);
     end;
-    FTimeTableRoomTypeForm.BtnMostrarClick(nil);
+    FTimetableRoomTypeForm.BtnMostrarClick(nil);
   end;
 end;
 
-procedure TTimeTableForm.DataSourceDataChange(Sender: TObject; Field: TField);
+procedure TTimetableForm.DataSourceDataChange(Sender: TObject; Field: TField);
 begin
   inherited DataSourceDataChange(Sender, Field);
 end;
 
-procedure TTimeTableForm.DataSourceStateChange(Sender: TObject);
+procedure TTimetableForm.DataSourceStateChange(Sender: TObject);
 begin
   inherited DataSourceStateChange(Sender);
 end;
 
-procedure TTimeTableForm.DBGridDblClick(Sender: TObject);
+procedure TTimetableForm.DBGridDblClick(Sender: TObject);
 begin
   inherited DBGridDblClick(Sender);
 end;
 
-procedure TTimeTableForm.doLoadConfig;
+procedure TTimetableForm.doLoadConfig;
 begin
   inherited;
   Panel2.Width := ConfigIntegers['Panel2_Width'];
 end;
 
-procedure TTimeTableForm.doSaveConfig;
+procedure TTimetableForm.doSaveConfig;
 begin
   inherited;
   ConfigIntegers['Panel2_Width'] := Panel2.Width;

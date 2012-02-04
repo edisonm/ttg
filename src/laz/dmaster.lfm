@@ -272,14 +272,14 @@ object MasterDataModule: TMasterDataModule
       Required = False
     end
   end
-  object QuNewIdTimeTable: TZReadOnlyQuery
+  object QuNewIdTimetable: TZReadOnlyQuery
     Connection = SourceDataModule.DbZConnection
     SQL.Strings = (
-      'SELECT TimeTable.IdTimeTable + 1'
-      'FROM TimeTable left join TimeTable as TimeTable1 on'
-      'TimeTable.IdTimeTable + 1=TimeTable1.IdTimeTable'
+      'SELECT Timetable.IdTimetable + 1'
+      'FROM Timetable left join Timetable as Timetable1 on'
+      'Timetable.IdTimetable + 1=Timetable1.IdTimetable'
       'WHERE'
-      'TimeTable1.IdTimeTable is NULL'
+      'Timetable1.IdTimetable is NULL'
     )
     Params = <>
     left = 252

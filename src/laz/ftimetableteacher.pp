@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit FTimeTableTeacher;
+unit FTimetableTeacher;
 
 {$I ttg.inc}
 
@@ -13,36 +13,36 @@ uses
 
 type
 
-  { TTimeTableTeacherForm }
+  { TTimetableTeacherForm }
 
-  TTimeTableTeacherForm = class(TCrossManyToManyEditor1Form)
-    QuTimeTableTeacher: TZQuery;
+  TTimetableTeacherForm = class(TCrossManyToManyEditor1Form)
+    QuTimetableTeacher: TZQuery;
     cbVerTeacher: TComboBox;
-    QuTimeTableTeacherIdLevel: TLongintField;
-    QuTimeTableTeacherIdSpecialization: TLongintField;
-    QuTimeTableTeacherIdGroupId: TLongintField;
-    QuTimeTableTeacherIdHour: TLongintField;
-    QuTimeTableTeacherIdDay: TLongintField;
-    QuTimeTableTeacherIdSubject: TLongintField;
-    QuTimeTableTeacherNaSubject: TStringField;
-    QuTimeTableTeacherName: TStringField;
-    QuTimeTableTeacherAbLevel: TStringField;
-    QuTimeTableTeacherAbSpecialization: TStringField;
-    QuTimeTableTeacherNaGroupId: TStringField;
+    QuTimetableTeacherIdLevel: TLongintField;
+    QuTimetableTeacherIdSpecialization: TLongintField;
+    QuTimetableTeacherIdGroupId: TLongintField;
+    QuTimetableTeacherIdHour: TLongintField;
+    QuTimetableTeacherIdDay: TLongintField;
+    QuTimetableTeacherIdSubject: TLongintField;
+    QuTimetableTeacherNaSubject: TStringField;
+    QuTimetableTeacherName: TStringField;
+    QuTimetableTeacherAbLevel: TStringField;
+    QuTimetableTeacherAbSpecialization: TStringField;
+    QuTimetableTeacherNaGroupId: TStringField;
     DSTeacher: TDataSource;
     DBNavigator: TDBNavigator;
     DBGrid1: TDBGrid;
     Splitter1: TSplitter;
     QuTeacher: TZQuery;
-    QuTeacherIdTimeTable: TLongintField;
+    QuTeacherIdTimetable: TLongintField;
     QuTeacherIdTeacher: TLongintField;
     QuTeacherLnTeacher: TStringField;
     QuTeacherNaTeacher: TStringField;
-    QuTimeTableTeacherIdTimeTable: TLongintField;
-    QuTimeTableTeacherIdTeacher: TLongintField;
+    QuTimetableTeacherIdTimetable: TLongintField;
+    QuTimetableTeacherIdTeacher: TLongintField;
     procedure BtnMostrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure QuTimeTableTeacherCalcFields(DataSet: TDataSet);
+    procedure QuTimetableTeacherCalcFields(DataSet: TDataSet);
     procedure DSTeacherDataChange(Sender: TObject; Field: TField);
   private
     { Private declarations }
@@ -60,39 +60,39 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-Procedure TTimeTableTeacherForm.BtnMostrarClick(Sender: TObject);
+Procedure TTimetableTeacherForm.BtnMostrarClick(Sender: TObject);
 begin
   inherited;
   with SourceDataModule do
   begin
     Caption := Format('[%s %d] - %s %s', [SuperTitle,
-      QuTeacher.FindField('IdTimeTable').AsInteger,
+      QuTeacher.FindField('IdTimetable').AsInteger,
       QuTeacher.FindField('LnTeacher').AsString,
       QuTeacher.FindField('NaTeacher').AsString]);
     FName := MasterDataModule.StringsShowTeacher.Values[cbVerTeacher.Text];
-    ShowEditor(TbDay, TbHour, QuTimeTableTeacher, TbTimeSlot, 'IdDay', 'NaDay',
+    ShowEditor(TbDay, TbHour, QuTimetableTeacher, TbTimeSlot, 'IdDay', 'NaDay',
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
   end;
 end;
 
-procedure TTimeTableTeacherForm.FormCreate(Sender: TObject);
+procedure TTimetableTeacherForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuTeacher.Open;
   cbVerTeacher.Items.Clear;
-  QuTimeTableTeacher.Open;
+  QuTimetableTeacher.Open;
   LoadNames(MasterDataModule.StringsShowTeacher, cbVerTeacher.Items);
   cbVerTeacher.Text := cbVerTeacher.Items[0];
 end;
 
-procedure TTimeTableTeacherForm.QuTimeTableTeacherCalcFields(DataSet: TDataSet);
+procedure TTimetableTeacherForm.QuTimetableTeacherCalcFields(DataSet: TDataSet);
 begin
   inherited;
   if FName <> '' then
     DataSet['Name'] := VarArrToStr(DataSet[FName], ' ');
 end;
 
-procedure TTimeTableTeacherForm.DSTeacherDataChange(Sender: TObject;
+procedure TTimetableTeacherForm.DSTeacherDataChange(Sender: TObject;
   Field: TField);
 begin
   inherited;

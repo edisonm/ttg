@@ -47,12 +47,12 @@ type
     MIView: TMenuItem;
     MIHelp: TMenuItem;
     MIAbout: TMenuItem;
-    MIElaborarTimeTable: TMenuItem;
+    MIElaborarTimetable: TMenuItem;
     MINew: TMenuItem;
     MIOpen: TMenuItem;
     StatusBar: TStatusBar;
     MIPasswd: TMenuItem;
-    MITimeTable: TMenuItem;
+    MITimetable: TMenuItem;
     MIDay: TMenuItem;
     MIHour: TMenuItem;
     MIClass: TMenuItem;
@@ -80,7 +80,7 @@ type
     MIIndex: TMenuItem;
     N3: TMenuItem;
     SIFindMejor: TToolButton;
-    SITimeTable: TToolButton;
+    SITimetable: TToolButton;
     SIContent: TToolButton;
     SIIndex: TToolButton;
     MIConfig: TMenuItem;
@@ -103,9 +103,9 @@ type
     ActClass: TAction;
     ActSubject: TAction;
     ActCheckFeasibility: TAction;
-    ActMakeTimeTable: TAction;
+    ActMakeTimetable: TAction;
     ActConfigure: TAction;
-    ActTimeTable: TAction;
+    ActTimetable: TAction;
     ActAbout: TAction;
     ActContents: TAction;
     ActIndex: TAction;
@@ -118,8 +118,8 @@ type
     N2: TMenuItem;
     N5: TMenuItem;
     N6: TMenuItem;
-    ActMejorarTimeTable: TAction;
-    MIMejorarTimeTable: TMenuItem;
+    ActMejorarTimetable: TAction;
+    MIMejorarTimetable: TMenuItem;
     SaveDialogCSV: TSaveDialog;
     ActRegistrationInfo: TAction;
     MIRegistrationInfo: TMenuItem;
@@ -140,8 +140,8 @@ type
     procedure ActNewExecute(Sender: TObject);
     procedure ActSaveExecute(Sender: TObject);
     procedure ActOpenExecute(Sender: TObject);
-    procedure ActTimeTableExecute(Sender: TObject);
-    procedure ActMakeTimeTableExecute(Sender: TObject);
+    procedure ActTimetableExecute(Sender: TObject);
+    procedure ActMakeTimetableExecute(Sender: TObject);
     procedure ActTimeSlotExecute(Sender: TObject);
     procedure StatusBarDrawPanel(StatusBar: TStatusBar;
       Panel: TStatusPanel; const Rect: TRect);
@@ -184,7 +184,7 @@ type
     procedure SaveToFile(const AFileName: string);
     function ConfirmOperation: boolean;
 {$IFNDEF FREEWARE}
-    procedure ElaborarTimeTables(const SIdTimeTables: string);
+    procedure ElaborarTimetables(const SIdTimetables: string);
 {$ENDIF}
     procedure PedirRegistrarSoftware;
     procedure ProtegerSoftware;
@@ -208,7 +208,7 @@ implementation
 
 uses
   FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FSubject, FTeacher,
-  FTimeTable, FMasterDetailEditor, FConfiguracion, FClass, Printers, DSource,
+  FTimetable, FMasterDetailEditor, FConfiguracion, FClass, Printers, DSource,
   DSourceBase, UTTGBasics, FMessageView, UTTGi18n, UTTGConsts;
 
 {$IFNDEF FPC}
@@ -323,13 +323,13 @@ begin
 					SourceDataModule.TbHour);
 end;
 
-procedure TMainForm.ActTimeTableExecute(Sender: TObject);
+procedure TMainForm.ActTimetableExecute(Sender: TObject);
 begin
-  TTimeTableForm.ToggleSingleEditor(Self,
-                                    TimeTableForm,
+  TTimetableForm.ToggleSingleEditor(Self,
+                                    TimetableForm,
 				    ConfigStorage,
-				    ActTimeTable,
-				    SourceDataModule.TbTimeTable);
+				    ActTimetable,
+				    SourceDataModule.TbTimetable);
 end;
 
 procedure TMainForm.ActClassExecute(Sender: TObject);
@@ -426,32 +426,32 @@ begin
   end;
 end;
 
-procedure TMainForm.ActMakeTimeTableExecute(Sender: TObject);
+procedure TMainForm.ActMakeTimetableExecute(Sender: TObject);
 {$IFNDEF FREEWARE}
 var
-  SIdTimeTables: string;
+  SIdTimetables: string;
 {$ENDIF}
 begin
 {$IFNDEF FREEWARE}
   try
-    SIdTimeTables := IntToStr(MasterDataModule.NewIdTimeTable);
-    if not InputQuery(SGenerateTimeTables, STimeTableCodesToGenerate, SIdTimeTables) then
+    SIdTimetables := IntToStr(MasterDataModule.NewIdTimetable);
+    if not InputQuery(SGenerateTimetables, STimetableCodesToGenerate, SIdTimetables) then
       Exit;
-    ElaborarTimeTables(SIdTimeTables);
+    ElaborarTimetables(SIdTimetables);
   finally
-    ActMakeTimeTable.Checked := False;
+    ActMakeTimetable.Checked := False;
   end;
 {$ENDIF}
 end;
 
 {$IFNDEF FREEWARE}
-procedure TMainForm.ElaborarTimeTables(const SIdTimeTables: string);
+procedure TMainForm.ElaborarTimetables(const SIdTimetables: string);
 var
   ValidIdes, WrongIdes: TDynamicIntegerArray;
   procedure ProcessIdList(const IdList: string);
   var
     d: string;
-    Position, Position2, IdTimeTable1, IdTimeTable2, IdTimeTable, Valids, Wrongs: Integer;
+    Position, Position2, IdTimetable1, IdTimetable2, IdTimetable, Valids, Wrongs: Integer;
   begin
     Position := 1;
     Valids := 0;
@@ -460,25 +460,25 @@ var
     begin
       d := ExtractString(IdList, Position, ',');
       Position2 := 1;
-      IdTimeTable1 := StrToInt(ExtractString(d, Position2, '-'));
+      IdTimetable1 := StrToInt(ExtractString(d, Position2, '-'));
       if Position2 > Length(d) then
-        IdTimeTable2 := IdTimeTable1
+        IdTimetable2 := IdTimetable1
       else
-        IdTimeTable2 := StrToInt(ExtractString(d, Position2, '-'));
+        IdTimetable2 := StrToInt(ExtractString(d, Position2, '-'));
       if Position2 <= Length(d) then
         raise Exception.Create(SInvalidData);
-      SetLength(ValidIdes, Valids + IdTimeTable2 - IdTimeTable1 + 1);
-      SetLength(WrongIdes, Wrongs + IdTimeTable2 - IdTimeTable1 + 1);
-      for IdTimeTable := IdTimeTable1 to IdTimeTable2 do
+      SetLength(ValidIdes, Valids + IdTimetable2 - IdTimetable1 + 1);
+      SetLength(WrongIdes, Wrongs + IdTimetable2 - IdTimetable1 + 1);
+      for IdTimetable := IdTimetable1 to IdTimetable2 do
       begin
-        if SourceDataModule.TbTimeTable.Locate('IdTimeTable', IdTimeTable, []) then
+        if SourceDataModule.TbTimetable.Locate('IdTimetable', IdTimetable, []) then
         begin
-          WrongIdes[Wrongs] := IdTimeTable;
+          WrongIdes[Wrongs] := IdTimetable;
           Inc(Wrongs);
         end
         else
         begin
-          ValidIdes[Valids] := IdTimeTable;
+          ValidIdes[Valids] := IdTimetable;
           Inc(Valids);
         end;
       end;
@@ -489,13 +489,13 @@ var
 begin
   with SourceDataModule do
   begin
-    ActMakeTimeTable.Enabled := False;
+    ActMakeTimetable.Enabled := False;
     try
-      ProcessIdList(SIdTimeTables);
+      ProcessIdList(SIdTimetables);
       {$IFDEF THREADED}
-      TMakeTimeTableThread.Create(ValidIdes, False);
+      TMakeTimetableThread.Create(ValidIdes, False);
       {$ELSE}
-      with TMakeTimeTableThread.Create(ValidIdes, True) do
+      with TMakeTimetableThread.Create(ValidIdes, True) do
       try
         Execute;
       finally
@@ -503,11 +503,11 @@ begin
       end;
       {$ENDIF}
       if Length(WrongIdes) > 0 then
-        MessageDlg(Format(STheNextTimeTablesAlreadyExists, [VarArrToStr(WrongIdes)]),
+        MessageDlg(Format(STheNextTimetablesAlreadyExists, [VarArrToStr(WrongIdes)]),
           mtError, [mbOK], 0);
     finally
-      ActMakeTimeTable.Enabled := True;
-      TbTimeTableDetail.Refresh;
+      ActMakeTimetable.Enabled := True;
+      TbTimetableDetail.Refresh;
     end;
   end;
 end;
@@ -615,8 +615,8 @@ begin
         MessageDlg('El tiempo de prueba a concluido'#13#10 +
           ' El sistema se ejecutara sin las opciones que permiten generar el horario',
           mtWarning, [mbOk], 0);
-        ActMakeTimeTable.Enabled := False;
-        ActMejorarTimeTable.Enabled := False;
+        ActMakeTimetable.Enabled := False;
+        ActMejorarTimetable.Enabled := False;
       end
       else if Protect1.DaysExpire > 0 then
       begin
@@ -625,8 +625,8 @@ begin
       end
       else
       begin
-        ActMakeTimeTable.Enabled := True;
-        ActMejorarTimeTable.Enabled := True;
+        ActMakeTimetable.Enabled := True;
+        ActMejorarTimetable.Enabled := True;
       end;
     end;
   end;}
@@ -652,8 +652,8 @@ begin
     FStep := 1;
     FLogStrings := TStringList.Create;
     {$IFDEF FREEWARE}
-    ActMakeTimeTable.Enabled := False;
-    ActMejorarTimeTable.Enabled := False;
+    ActMakeTimetable.Enabled := False;
+    ActMejorarTimetable.Enabled := False;
     Caption := Caption + ' ***Freeware***';
     {$ENDIF}
 {    Protect1.DaysExpire := 60;}
@@ -669,8 +669,8 @@ begin
       ProtegerSoftware;
     end;}
   except
-    ActMakeTimeTable.Enabled := False;
-    ActMejorarTimeTable.Enabled := False;
+    ActMakeTimetable.Enabled := False;
+    ActMejorarTimetable.Enabled := False;
     raise;
   end;
 end;

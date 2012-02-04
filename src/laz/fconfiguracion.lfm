@@ -224,7 +224,7 @@ object ConfiguracionForm: TConfiguracionForm
         Caption = 'Update each:'
         ParentColor = False
       end
-      object lblInitialTimeTables: TLabel
+      object lblInitialTimetables: TLabel
         Left = 235
         Height = 15
         Top = 132
@@ -325,7 +325,7 @@ object ConfiguracionForm: TConfiguracionForm
         TabOrder = 2
         Value = 10
       end
-      object edtInitialTimeTables: TEdit
+      object edtInitialTimetables: TEdit
         Left = 344
         Height = 24
         Top = 128
@@ -471,7 +471,7 @@ object ConfiguracionForm: TConfiguracionForm
         Caption = 'Teacher Restrictions:'
         ParentColor = False
       end
-      object lblBreakTimeTableTeacher: TLabel
+      object lblBreakTimetableTeacher: TLabel
         Left = 237
         Height = 15
         Top = 15
@@ -581,7 +581,7 @@ object ConfiguracionForm: TConfiguracionForm
         AutoSize = False
         TabOrder = 5
       end
-      object creBreakTimeTableTeacher: TEdit
+      object creBreakTimetableTeacher: TEdit
         Left = 345
         Height = 21
         Top = 8

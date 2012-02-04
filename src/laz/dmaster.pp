@@ -37,7 +37,7 @@ type
     TbTmpRoomTypeLoadIdRoomType: TLongintField;
     TbTmpRoomTypeLoadAbRoomType: TStringField;
     TbTmpRoomTypeLoadLoad: TLongintField;
-    QuNewIdTimeTable: TZReadOnlyQuery;
+    QuNewIdTimetable: TZReadOnlyQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
@@ -50,11 +50,11 @@ type
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
   public
     { Public declarations }
-    procedure IntercambiarTimeSlots(AIdTimeTable, AIdLevel, AIdSpecialization,
+    procedure IntercambiarTimeSlots(AIdTimetable, AIdLevel, AIdSpecialization,
       AIdGroupId, AIdDay1, AIdHour1, AIdDay2, AIdHour2: Integer);
     function PerformAllChecks(AMainStrings, ASubStrings: TStrings;
       AMaxTeacherWorkLoad: Integer): Boolean;
-    function NewIdTimeTable: Integer;
+    function NewIdTimetable: Integer;
     procedure SaveToStrings(AStrings: TStrings);
     procedure SaveIniStrings(AStrings: TStrings);
     procedure SaveToTextDir(const ADirName: TFileName);
@@ -474,16 +474,16 @@ begin
   end;
 end;
 
-function TMasterDataModule.NewIdTimeTable: Integer;
+function TMasterDataModule.NewIdTimetable: Integer;
 begin
-  with QuNewIdTimeTable do
+  with QuNewIdTimetable do
   begin
     Open;
     try
       if Eof and Bof then
         Result := 1
       else
-        Result := QuNewIdTimeTable.Fields[0].AsInteger;
+        Result := QuNewIdTimetable.Fields[0].AsInteger;
     finally
       Close;
     end;
@@ -533,7 +533,7 @@ begin
   LoadIniStrings(AStrings, APosition);
 end;
 
-procedure TMasterDataModule.IntercambiarTimeSlots(AIdTimeTable, AIdLevel,
+procedure TMasterDataModule.IntercambiarTimeSlots(AIdTimetable, AIdLevel,
   AIdSpecialization, AIdGroupId, AIdDay1, AIdHour1, AIdDay2,
   AIdHour2: Integer);
 var
@@ -543,57 +543,57 @@ var
 begin
   with SourceDataModule do
   begin
-    Locate1 := TbTimeTableDetail.Locate(
-      'IdTimeTable;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour',
-      VarArrayOf([AIdTimeTable, AIdLevel, AIdSpecialization, AIdGroupId,
+    Locate1 := TbTimetableDetail.Locate(
+      'IdTimetable;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour',
+      VarArrayOf([AIdTimetable, AIdLevel, AIdSpecialization, AIdGroupId,
       AIdDay1, AIdHour1]), []);
-    Bookmark1 := TbTimeTableDetail.GetBookmark;
+    Bookmark1 := TbTimetableDetail.GetBookmark;
     try
-      Locate2 := TbTimeTableDetail.Locate(
-        'IdTimeTable;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour',
-        VarArrayOf([AIdTimeTable, AIdLevel, AIdSpecialization, AIdGroupId,
+      Locate2 := TbTimetableDetail.Locate(
+        'IdTimetable;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour',
+        VarArrayOf([AIdTimetable, AIdLevel, AIdSpecialization, AIdGroupId,
         AIdDay2, AIdHour2]), []);
-      Bookmark2 := TbTimeTableDetail.GetBookmark;
+      Bookmark2 := TbTimetableDetail.GetBookmark;
       try
         if Locate1 and Locate2 then
         begin
-          TbTimeTableDetail.GotoBookmark(Bookmark1);
-          iIdSubject1 := TbTimeTableDetail.FindField('IdSubject').AsInteger;
-          iSession1 := TbTimeTableDetail.FindField('Session').Value;
-          TbTimeTableDetail.GotoBookmark(Bookmark2);
-          iIdSubject2 := TbTimeTableDetail.FindField('IdSubject').AsInteger;
-          iSession2 := TbTimeTableDetail.FindField('Session').Value;
-          TbTimeTableDetail.Edit;
-          TbTimeTableDetail.FindField('IdSubject').AsInteger := iIdSubject1;
-          TbTimeTableDetail.FindField('Session').AsInteger := iSession1;
-          TbTimeTableDetail.Post;
-          TbTimeTableDetail.GotoBookmark(Bookmark1);
-          TbTimeTableDetail.Edit;
-          TbTimeTableDetail.FindField('IdSubject').AsInteger := iIdSubject2;
-          TbTimeTableDetail.FindField('Session').AsInteger := iSession2;
-          TbTimeTableDetail.Post;
+          TbTimetableDetail.GotoBookmark(Bookmark1);
+          iIdSubject1 := TbTimetableDetail.FindField('IdSubject').AsInteger;
+          iSession1 := TbTimetableDetail.FindField('Session').Value;
+          TbTimetableDetail.GotoBookmark(Bookmark2);
+          iIdSubject2 := TbTimetableDetail.FindField('IdSubject').AsInteger;
+          iSession2 := TbTimetableDetail.FindField('Session').Value;
+          TbTimetableDetail.Edit;
+          TbTimetableDetail.FindField('IdSubject').AsInteger := iIdSubject1;
+          TbTimetableDetail.FindField('Session').AsInteger := iSession1;
+          TbTimetableDetail.Post;
+          TbTimetableDetail.GotoBookmark(Bookmark1);
+          TbTimetableDetail.Edit;
+          TbTimetableDetail.FindField('IdSubject').AsInteger := iIdSubject2;
+          TbTimetableDetail.FindField('Session').AsInteger := iSession2;
+          TbTimetableDetail.Post;
         end
         else if Locate1 then
         begin
-          TbTimeTableDetail.GotoBookmark(Bookmark1);
-          TbTimeTableDetail.Edit;
-          TbTimeTableDetail.FindField('IdDay').AsInteger := AIdDay2;
-          TbTimeTableDetail.FindField('IdHour').AsInteger := AIdHour2;
-          TbTimeTableDetail.Post;
+          TbTimetableDetail.GotoBookmark(Bookmark1);
+          TbTimetableDetail.Edit;
+          TbTimetableDetail.FindField('IdDay').AsInteger := AIdDay2;
+          TbTimetableDetail.FindField('IdHour').AsInteger := AIdHour2;
+          TbTimetableDetail.Post;
         end
         else if Locate2 then
         begin
-          TbTimeTableDetail.GotoBookmark(Bookmark2);
-          TbTimeTableDetail.Edit;
-          TbTimeTableDetail.FindField('IdDay').AsInteger := AIdDay1;
-          TbTimeTableDetail.FindField('IdHour').AsInteger := AIdHour1;
-          TbTimeTableDetail.Post;
+          TbTimetableDetail.GotoBookmark(Bookmark2);
+          TbTimetableDetail.Edit;
+          TbTimetableDetail.FindField('IdDay').AsInteger := AIdDay1;
+          TbTimetableDetail.FindField('IdHour').AsInteger := AIdHour1;
+          TbTimetableDetail.Post;
         end;
       finally
-        TbTimeTableDetail.FreeBookmark(Bookmark2);
+        TbTimetableDetail.FreeBookmark(Bookmark2);
       end;
     finally
-      TbTimeTableDetail.FreeBookmark(Bookmark1);
+      TbTimetableDetail.FreeBookmark(Bookmark1);
     end;
   end;
 end;

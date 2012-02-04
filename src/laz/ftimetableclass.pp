@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit FTimeTableClass;
+unit FTimetableClass;
 
 {$I ttg.inc}
 
@@ -13,33 +13,33 @@ uses
 
 type
 
-  { TTimeTableClassForm }
+  { TTimetableClassForm }
 
-  TTimeTableClassForm = class(TCrossManyToManyEditor1Form)
-    QuTimeTableClass: TZQuery;
+  TTimetableClassForm = class(TCrossManyToManyEditor1Form)
+    QuTimetableClass: TZQuery;
     BtnIntercambiarTimeSlots: TToolButton;
     cbVerClass: TComboBox;
-    QuTimeTableGroupIdSubject: TLongintField;
-    QuTimeTableGroupIdLevel: TLongintField;
-    QuTimeTableGroupIdSpecialization: TLongintField;
-    QuTimeTableGroupIdGroupId: TLongintField;
-    QuTimeTableGroupIdHour: TLongintField;
-    QuTimeTableGroupIdDay: TLongintField;
-    QuTimeTableGroupIdTeacher: TLongintField;
-    QuTimeTableClassName: TStringField;
+    QuTimetableGroupIdSubject: TLongintField;
+    QuTimetableGroupIdLevel: TLongintField;
+    QuTimetableGroupIdSpecialization: TLongintField;
+    QuTimetableGroupIdGroupId: TLongintField;
+    QuTimetableGroupIdHour: TLongintField;
+    QuTimetableGroupIdDay: TLongintField;
+    QuTimetableGroupIdTeacher: TLongintField;
+    QuTimetableClassName: TStringField;
     DSClass: TDataSource;
-    QuTimeTableClassNaSubject: TStringField;
+    QuTimetableClassNaSubject: TStringField;
     QuClass: TZQuery;
-    QuGroupIdTimeTable: TLongintField;
+    QuGroupIdTimetable: TLongintField;
     QuGroupIdLevel: TLongintField;
     QuGroupIdSpecialization: TLongintField;
     QuGroupIdGroupId: TLongintField;
     QuClassAbLevel: TStringField;
     QuClassAbSpecialization: TStringField;
     QuClassNaGroupId: TStringField;
-    QuTimeTableGroupIdTimeTable: TLongintField;
-    QuTimeTableClassLnTeacher: TStringField;
-    QuTimeTableClassNaTeacher: TStringField;
+    QuTimetableGroupIdTimetable: TLongintField;
+    QuTimetableClassLnTeacher: TStringField;
+    QuTimetableClassNaTeacher: TStringField;
     DBGrid1: TDBGrid;
     QuClassNaClass: TStringField;
     Splitter1: TSplitter;
@@ -60,7 +60,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure IntercambiarTimeSlotsClick(Sender: TObject);
-    procedure QuTimeTableClassCalcFields(DataSet: TDataSet);
+    procedure QuTimetableClassCalcFields(DataSet: TDataSet);
     procedure DSClassDataChange(Sender: TObject; Field: TField);
     procedure QuClassCalcFields(DataSet: TDataSet);
   private
@@ -83,92 +83,92 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-function TTimeTableClassForm.GetIdDay: Integer;
+function TTimetableClassForm.GetIdDay: Integer;
 begin
   Result := ColKey[DrawGrid.Col - 1];
 end;
 
-function TTimeTableClassForm.GetIdHour: Integer;
+function TTimetableClassForm.GetIdHour: Integer;
 begin
   Result := RowKey[DrawGrid.Row - 1];
 end;
 
-procedure TTimeTableClassForm.BtnMostrarClick(Sender: TObject);
+procedure TTimetableClassForm.BtnMostrarClick(Sender: TObject);
 begin
   inherited;
   Caption := Format('[%s %d] - %s %s %s', [SuperTitle,
-    QuClass.FindField('IdTimeTable').AsInteger,
+    QuClass.FindField('IdTimetable').AsInteger,
     QuClass.FindField('AbLevel').AsString,
     QuClass.FindField('AbSpecialization').AsString,
     QuClass.FindField('NaGroupId').AsString]);
   FName := MasterDataModule.StringsShowClass.Values[cbVerClass.Text];
   with SourceDataModule do
-    ShowEditor(TbDay, TbHour, QuTimeTableClass, TbTimeSlot, 'IdDay', 'NaDay',
+    ShowEditor(TbDay, TbHour, QuTimetableClass, TbTimeSlot, 'IdDay', 'NaDay',
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
 end;
 
-procedure TTimeTableClassForm.BtnCancelClick(Sender: TObject);
+procedure TTimetableClassForm.BtnCancelClick(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TTimeTableClassForm.BtnOkClick(Sender: TObject);
+procedure TTimetableClassForm.BtnOkClick(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TTimeTableClassForm.DrawGridDrawCell(Sender: TObject; aCol,
+procedure TTimetableClassForm.DrawGridDrawCell(Sender: TObject; aCol,
   aRow: Integer; aRect: TRect; aState: TGridDrawState);
 begin
   inherited;
 end;
 
-procedure TTimeTableClassForm.DrawGridGetEditText(Sender: TObject; ACol,
+procedure TTimetableClassForm.DrawGridGetEditText(Sender: TObject; ACol,
   ARow: Integer; var Value: string);
 begin
   inherited;
 end;
 
-procedure TTimeTableClassForm.DrawGridSelectCell(Sender: TObject; aCol,
+procedure TTimetableClassForm.DrawGridSelectCell(Sender: TObject; aCol,
   aRow: Integer; var CanSelect: Boolean);
 begin
   inherited;
 end;
 
-procedure TTimeTableClassForm.DrawGridSetEditText(Sender: TObject; ACol,
+procedure TTimetableClassForm.DrawGridSetEditText(Sender: TObject; ACol,
   ARow: Integer; const Value: string);
 begin
   inherited;
 end;
 
-procedure TTimeTableClassForm.FormClose(Sender: TObject;
+procedure TTimetableClassForm.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   inherited;
 end;
 
-procedure TTimeTableClassForm.FormCloseQuery(Sender: TObject;
+procedure TTimetableClassForm.FormCloseQuery(Sender: TObject;
   var CanClose: boolean);
 begin
   inherited;
 end;
 
-procedure TTimeTableClassForm.FormCreate(Sender: TObject);
+procedure TTimetableClassForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuClass.Open;
   cbVerClass.Items.Clear;
-  QuTimeTableClass.Open;
+  QuTimetableClass.Open;
   LoadNames(MasterDataModule.StringsShowClass, cbVerClass.Items);
   cbVerClass.Text := cbVerClass.Items[0];
 end;
 
-procedure TTimeTableClassForm.FormDestroy(Sender: TObject);
+procedure TTimetableClassForm.FormDestroy(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TTimeTableClassForm.IntercambiarTimeSlotsClick(Sender: TObject);
+procedure TTimetableClassForm.IntercambiarTimeSlotsClick(Sender: TObject);
 var
   iIdDay, iIdHour: Integer;
 begin
@@ -177,30 +177,30 @@ begin
   begin
     with SourceDataModule do
       MasterDataModule.IntercambiarTimeSlots(
-        TbTimeTable.FindField('IdTimeTable').AsInteger,
+        TbTimetable.FindField('IdTimetable').AsInteger,
         QuClass.FindField('IdLevel').AsInteger,
         QuClass.FindField('IdSpecialization').AsInteger,
         QuClass.FindField('IdGroupId').AsInteger,
         IdDay, IdHour, iIdDay, iIdHour);
-    QuTimeTableClass.Refresh;
+    QuTimetableClass.Refresh;
     BtnMostrarClick(nil);
   end;
 end;
 
-procedure TTimeTableClassForm.QuTimeTableClassCalcFields(DataSet: TDataSet);
+procedure TTimetableClassForm.QuTimetableClassCalcFields(DataSet: TDataSet);
 begin
   inherited;
   if FName <> '' then
     DataSet['Name'] := VarArrToStr(DataSet[FName], ' ');
 end;
 
-procedure TTimeTableClassForm.QuClassCalcFields(DataSet: TDataSet);
+procedure TTimetableClassForm.QuClassCalcFields(DataSet: TDataSet);
 begin
   inherited;
   DataSet['NaClass'] := VarArrToStr(DataSet['AbLevel;AbSpecialization;NaGroupId'], ' ');
 end;
 
-procedure TTimeTableClassForm.DSClassDataChange(Sender: TObject;
+procedure TTimetableClassForm.DSClassDataChange(Sender: TObject;
   Field: TField);
 begin
   inherited;

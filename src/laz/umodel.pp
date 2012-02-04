@@ -52,7 +52,7 @@ type
     function NewBookmark: TBookmark; virtual; abstract;
     procedure SaveToStream(Stream: TStream); virtual; abstract;
     procedure LoadFromStream(Stream: TStream); virtual; abstract;
-    procedure SaveToDataModule(IdTimeTable: Integer; TimeIni,
+    procedure SaveToDataModule(IdTimetable: Integer; TimeIni,
       TimeEnd: TDateTime; Summary: TStrings); virtual; abstract;
     property ElitistValues[Index: Integer]: Integer read GetElitistValues;
     property Model: TModel read FModel;

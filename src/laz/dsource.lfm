@@ -19,7 +19,7 @@ inherited SourceDataModule: TSourceDataModule
     OnCalcFields = TbDistributionCalcFields
     BeforePost = TbDistributionBeforePost
   end
-  inherited TbTimeTable: TZTable
+  inherited TbTimetable: TZTable
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
   end

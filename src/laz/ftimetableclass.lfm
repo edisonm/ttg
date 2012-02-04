@@ -1,4 +1,4 @@
-inherited TimeTableClassForm: TTimeTableClassForm
+inherited TimetableClassForm: TTimetableClassForm
   Left = 757
   Height = 284
   Top = 41
@@ -173,43 +173,43 @@ inherited TimeTableClassForm: TTimeTableClassForm
       8000008080000080800000808000
     }
   end
-  object QuTimeTableClass: TZQuery[7]
+  object QuTimetableClass: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable;IdLevel;IdSpecialization;IdGroupId'
+    SortedFields = 'IdTimetable;IdLevel;IdSpecialization;IdGroupId'
     AutoCalcFields = False
-    OnCalcFields = QuTimeTableClassCalcFields
+    OnCalcFields = QuTimetableClassCalcFields
     ReadOnly = True
     SQL.Strings = (
       'select'
-      '  TimeTableDetail.IdTimeTable,'
-      '  TimeTableDetail.IdLevel,'
-      '  TimeTableDetail.IdSpecialization,'
-      '  TimeTableDetail.IdGroupId,'
+      '  TimetableDetail.IdTimetable,'
+      '  TimetableDetail.IdLevel,'
+      '  TimetableDetail.IdSpecialization,'
+      '  TimetableDetail.IdGroupId,'
       '  IdHour,'
       '  IdDay,'
-      '  TimeTableDetail.IdSubject,'
+      '  TimetableDetail.IdSubject,'
       '  Distribution.IdTeacher,'
       '  NaSubject,'
       '  LnTeacher,'
       '  NaTeacher'
       'from'
-      '  ((TimeTableDetail inner join Distribution on'
-      '  (TimeTableDetail.IdSubject = Distribution.IdSubject)'
-      '  and (TimeTableDetail.IdLevel = Distribution.IdLevel)'
-      '  and (TimeTableDetail.IdSpecialization = Distribution.IdSpecialization)'
-      '  and (TimeTableDetail.IdGroupId = Distribution.IdGroupId))'
-      '  inner join Subject on (TimeTableDetail.IdSubject = Subject.IdSubject))'
+      '  ((TimetableDetail inner join Distribution on'
+      '  (TimetableDetail.IdSubject = Distribution.IdSubject)'
+      '  and (TimetableDetail.IdLevel = Distribution.IdLevel)'
+      '  and (TimetableDetail.IdSpecialization = Distribution.IdSpecialization)'
+      '  and (TimetableDetail.IdGroupId = Distribution.IdGroupId))'
+      '  inner join Subject on (TimetableDetail.IdSubject = Subject.IdSubject))'
       '  inner join Teacher on (Distribution.IdTeacher = Teacher.IdTeacher)'
       'where'
-      '  IdTimeTable=:IdTimeTable'
-      'and TimeTableDetail.IdLevel=:IdLevel'
-      'and TimeTableDetail.IdSpecialization=:IdSpecialization'
-      'and TimeTableDetail.IdGroupId=:IdGroupId'
+      '  IdTimetable=:IdTimetable'
+      'and TimetableDetail.IdLevel=:IdLevel'
+      'and TimetableDetail.IdSpecialization=:IdSpecialization'
+      'and TimetableDetail.IdGroupId=:IdGroupId'
     )
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end    
       item
@@ -228,16 +228,16 @@ inherited TimeTableClassForm: TTimeTableClassForm
         ParamType = ptUnknown
       end>
     DataSource = DSClass
-    MasterFields = 'IdTimeTable;IdLevel;IdSpecialization;IdGroupId'
+    MasterFields = 'IdTimetable;IdLevel;IdSpecialization;IdGroupId'
     MasterSource = DSClass
-    LinkedFields = 'IdTimeTable;IdLevel;IdSpecialization;IdGroupId'
-    IndexFieldNames = 'IdTimeTable Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc'
+    LinkedFields = 'IdTimetable;IdLevel;IdSpecialization;IdGroupId'
+    IndexFieldNames = 'IdTimetable Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc'
     left = 60
     top = 104
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end    
       item
@@ -255,17 +255,17 @@ inherited TimeTableClassForm: TTimeTableClassForm
         Name = 'IdGroupId'
         ParamType = ptUnknown
       end>
-    object QuTimeTableGroupIdTimeTable: TLongintField
+    object QuTimetableGroupIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
       Required = False
     end
-    object QuTimeTableGroupIdLevel: TLongintField
+    object QuTimetableGroupIdLevel: TLongintField
       DisplayLabel = 'Level'
       DisplayWidth = 10
       FieldKind = fkData
@@ -277,7 +277,7 @@ inherited TimeTableClassForm: TTimeTableClassForm
       Required = True
       Visible = False
     end
-    object QuTimeTableGroupIdSpecialization: TLongintField
+    object QuTimetableGroupIdSpecialization: TLongintField
       DisplayLabel = 'Specialization'
       DisplayWidth = 10
       FieldKind = fkData
@@ -289,7 +289,7 @@ inherited TimeTableClassForm: TTimeTableClassForm
       Required = True
       Visible = False
     end
-    object QuTimeTableGroupIdGroupId: TLongintField
+    object QuTimetableGroupIdGroupId: TLongintField
       DisplayLabel = 'Class'
       DisplayWidth = 10
       FieldKind = fkData
@@ -301,7 +301,7 @@ inherited TimeTableClassForm: TTimeTableClassForm
       Required = True
       Visible = False
     end
-    object QuTimeTableGroupIdHour: TLongintField
+    object QuTimetableGroupIdHour: TLongintField
       DisplayLabel = 'Hour'
       DisplayWidth = 10
       FieldKind = fkData
@@ -313,7 +313,7 @@ inherited TimeTableClassForm: TTimeTableClassForm
       Required = True
       Visible = False
     end
-    object QuTimeTableGroupIdDay: TLongintField
+    object QuTimetableGroupIdDay: TLongintField
       DisplayLabel = 'Day'
       DisplayWidth = 10
       FieldKind = fkData
@@ -325,7 +325,7 @@ inherited TimeTableClassForm: TTimeTableClassForm
       Required = True
       Visible = False
     end
-    object QuTimeTableGroupIdSubject: TLongintField
+    object QuTimetableGroupIdSubject: TLongintField
       DisplayLabel = 'Subject'
       DisplayWidth = 10
       FieldKind = fkData
@@ -337,7 +337,7 @@ inherited TimeTableClassForm: TTimeTableClassForm
       Required = True
       Visible = False
     end
-    object QuTimeTableGroupIdTeacher: TLongintField
+    object QuTimetableGroupIdTeacher: TLongintField
       DisplayLabel = 'Idigo'
       DisplayWidth = 10
       FieldKind = fkData
@@ -349,7 +349,7 @@ inherited TimeTableClassForm: TTimeTableClassForm
       Required = False
       Visible = False
     end
-    object QuTimeTableClassName: TStringField
+    object QuTimetableClassName: TStringField
       DisplayWidth = 40
       FieldKind = fkCalculated
       FieldName = 'Name'
@@ -360,7 +360,7 @@ inherited TimeTableClassForm: TTimeTableClassForm
       Required = False
       Size = 40
     end
-    object QuTimeTableClassNaSubject: TStringField
+    object QuTimetableClassNaSubject: TStringField
       DisplayWidth = 20
       FieldKind = fkData
       FieldName = 'NaSubject'
@@ -370,7 +370,7 @@ inherited TimeTableClassForm: TTimeTableClassForm
       ReadOnly = True
       Required = False
     end
-    object QuTimeTableClassLnTeacher: TStringField
+    object QuTimetableClassLnTeacher: TStringField
       DisplayWidth = 15
       FieldKind = fkData
       FieldName = 'LnTeacher'
@@ -381,7 +381,7 @@ inherited TimeTableClassForm: TTimeTableClassForm
       Required = True
       Size = 15
     end
-    object QuTimeTableClassNaTeacher: TStringField
+    object QuTimetableClassNaTeacher: TStringField
       DisplayWidth = 15
       FieldKind = fkData
       FieldName = 'NaTeacher'
@@ -406,7 +406,7 @@ inherited TimeTableClassForm: TTimeTableClassForm
     ReadOnly = True
     SQL.Strings = (
       'select'
-      '  TimeTable.IdTimeTable,'
+      '  Timetable.IdTimetable,'
       '  Class.IdLevel,'
       '  Class.IdSpecialization,'
       '  Class.IdGroupId,'
@@ -420,9 +420,9 @@ inherited TimeTableClassForm: TTimeTableClassForm
       '    (Class.IdSpecialization=Specialization.IdSpecialization))'
       '    inner join GroupId on'
       '    (Class.IdGroupId=GroupId.IdGroupId),'
-      '  TimeTable'
+      '  Timetable'
       'where'
-      '  TimeTable.IdTimeTable=:IdTimeTable'
+      '  Timetable.IdTimetable=:IdTimetable'
       'order by'
       '  Class.IdLevel,'
       '  Class.IdSpecialization,'
@@ -431,25 +431,25 @@ inherited TimeTableClassForm: TTimeTableClassForm
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimeTable
-    MasterFields = 'IdTimeTable'
-    MasterSource = SourceDataModule.DSTimeTable
-    LinkedFields = 'IdTimeTable'
+    DataSource = SourceDataModule.DSTimetable
+    MasterFields = 'IdTimetable'
+    MasterSource = SourceDataModule.DSTimetable
+    LinkedFields = 'IdTimetable'
     left = 60
     top = 157
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuGroupIdTimeTable: TLongintField
+    object QuGroupIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

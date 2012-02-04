@@ -11,29 +11,29 @@ uses
 
 type
 
-  { TMakeTimeTableThread }
+  { TMakeTimetableThread }
 
-  TMakeTimeTableThread = class(TThread)
+  TMakeTimetableThread = class(TThread)
   private
-    FTimeTableModel: TTimeTableModel;
+    FTimetableModel: TTimetableModel;
     FValidIdes: TDynamicIntegerArray;
     procedure Parallel(Index: PtrInt; Data: Pointer; Item: TMultiThreadProcItem);
-    function ProcessTimeTable(AIdTimeTable: Integer): Boolean;
+    function ProcessTimetable(AIdTimetable: Integer): Boolean;
   public
   procedure Execute; override;
   constructor Create(const AValidIdes: TDynamicIntegerArray; CreateSuspended: Boolean);
   destructor Destroy; override;
   end;
 
-  { TImproveTimeTableThread }
+  { TImproveTimetableThread }
 
-  TImproveTimeTableThread = class(TThread)
+  TImproveTimetableThread = class(TThread)
   private
-    FTimeTableModel: TTimeTableModel;
-    FIdTimeTableFuente, FIdTimeTable: Integer;
+    FTimetableModel: TTimetableModel;
+    FIdTimetableFuente, FIdTimetable: Integer;
   public
   procedure Execute; override;
-  constructor Create(AIdTimeTableFuente, AIdTimeTable: Integer; CreateSuspended: Boolean);
+  constructor Create(AIdTimetableFuente, AIdTimetable: Integer; CreateSuspended: Boolean);
   destructor Destroy; override;
   end;
 
@@ -49,24 +49,24 @@ type
   TSyncSaver = class
   private
     FSolver: TSolver;
-    FIdTimeTable: Integer;
+    FIdTimetable: Integer;
     FExtraInfo: string;
     FTimeIni: TDateTime;
     FTimeEnd: TDateTime;
   public
-    constructor Create(ASolver: TSolver; AIdTimeTable: Integer;
+    constructor Create(ASolver: TSolver; AIdTimetable: Integer;
       const AExtraInfo: string; ATimeIni, ATimeEnd: TDateTime);
     procedure Execute;
   end;
 
 { TSyncSaver }
 
-constructor TSyncSaver.Create(ASolver: TSolver; AIdTimeTable: Integer;
+constructor TSyncSaver.Create(ASolver: TSolver; AIdTimetable: Integer;
   const AExtraInfo: string; ATimeIni, ATimeEnd: TDateTime);
 begin
   inherited Create;
   FSolver := ASolver;
-  FIdTimeTable := AIdTimeTable;
+  FIdTimetable := AIdTimetable;
   FExtraInfo := AExtraInfo;
   FTimeIni := ATimeIni;
   FTimeEnd := ATimeEnd;
@@ -74,7 +74,7 @@ end;
 
 procedure TSyncSaver.Execute;
 begin
-  FSolver.SaveSolutionToDatabase(FIdTimeTable, FExtraInfo, FTimeIni,
+  FSolver.SaveSolutionToDatabase(FIdTimetable, FExtraInfo, FTimeIni,
     FTimeEnd);
 end;
 
@@ -108,7 +108,7 @@ var
   Individual: TIndividual;
   BookmarkArray: TBookmarkArray;
 begin
-  with TTimeTableModel(DownHill.Model) do
+  with TTimetableModel(DownHill.Model) do
   begin
     Individual := DownHill.Model.NewIndividual;
     try
@@ -127,7 +127,7 @@ begin
   end;
 end;
 
-function TMakeTimeTableThread.ProcessTimeTable(AIdTimeTable: Integer): Boolean;
+function TMakeTimetableThread.ProcessTimetable(AIdTimetable: Integer): Boolean;
 var
   VEvolElitist: TEvolElitist;
   DownHill: TDownHill;
@@ -139,15 +139,15 @@ begin
   FTimeIni := Now;
   with MasterDataModule.ConfigStorage do
   begin
-    VEvolElitist := TEvolElitist.Create(FTimeTableModel, SharedDirectory,
+    VEvolElitist := TEvolElitist.Create(FTimetableModel, SharedDirectory,
       PollinationProbability, PopulationSize, MaxIteration, CrossProbability,
-      MutationProbability, ReparationProbability, InitialTimeTables);
+      MutationProbability, ReparationProbability, InitialTimetables);
     try
       TThread.Synchronize(CurrentThread, VEvolElitist.Initialize);
       ProgressFormDrv := TProgressFormDrv.Create;
       try
         {VEvolElitist.OnRecordBest := MainForm.OnRegistrarMejor;}
-        ProgressFormDrv.Caption := Format(SWorkInProgress, [AIdTimeTable]);
+        ProgressFormDrv.Caption := Format(SWorkInProgress, [AIdTimetable]);
         VEvolElitist.OnProgress := ProgressFormDrv.OnProgress;
         VEvolElitist.Execute(RefreshInterval);
         if ProgressFormDrv.CancelClick then
@@ -157,11 +157,11 @@ begin
         end;
         if ApplyDoubleDownHill then
         begin
-          DownHill := TDownHill.Create(FTimeTableModel,
+          DownHill := TDownHill.Create(FTimetableModel,
             SharedDirectory, PollinationProbability);
           try
             DownHill.BestIndividual.Assign(VEvolElitist.BestIndividual);
-            ProgressFormDrv.Caption := Format(SImprovingTimeTable, [AIdTimeTable]);
+            ProgressFormDrv.Caption := Format(SImprovingTimetable, [AIdTimetable]);
             DownHill.OnProgress := ProgressFormDrv.OnProgress;
             ExecuteDownHill(DownHill, Bookmarks, RefreshInterval);
             if ProgressFormDrv.CancelClick then
@@ -183,7 +183,7 @@ begin
       end;
       VEvolElitist.BestIndividual.Update;
       ExtraInfo := Format(SApplyDownHill, [FBoolToStr[ApplyDoubleDownHill]]);
-      with TSyncSaver.Create(VEvolElitist, AIdTimeTable, ExtraInfo,
+      with TSyncSaver.Create(VEvolElitist, AIdTimetable, ExtraInfo,
         FTimeIni, Now) do
       try
         TThread.Synchronize(CurrentThread, Execute);
@@ -196,30 +196,30 @@ begin
   end;
 end;
 
-{ TMakeTimeTableThread }
+{ TMakeTimetableThread }
 
-procedure TMakeTimeTableThread.Parallel(Index: PtrInt; Data: Pointer;
+procedure TMakeTimetableThread.Parallel(Index: PtrInt; Data: Pointer;
   Item: TMultiThreadProcItem);
 begin
   MasterDataModule.ConfigStorage.InitRandom;
-  if ProcessTimeTable(FValidIdes[Index]) then
+  if ProcessTimetable(FValidIdes[Index]) then
     Terminate;
 end;
 
-procedure TMakeTimeTableThread.Execute;
+procedure TMakeTimetableThread.Execute;
 begin
   ProcThreadPool.DoParallel(Parallel, 0, High(FValidIdes), nil);
 end;
 
-constructor TMakeTimeTableThread.Create(const AValidIdes: TDynamicIntegerArray;
+constructor TMakeTimetableThread.Create(const AValidIdes: TDynamicIntegerArray;
   CreateSuspended: Boolean);
 var
   i: Integer;
 begin
   FreeOnTerminate := True;
   with MasterDataModule.ConfigStorage do
-    FTimeTableModel := TTimeTableModel.Create(ClashTeacher,
-      ClashSubject, ClashRoomType, BreakTimeTableTeacher, OutOfPositionEmptyHour,
+    FTimetableModel := TTimetableModel.Create(ClashTeacher,
+      ClashSubject, ClashRoomType, BreakTimetableTeacher, OutOfPositionEmptyHour,
       BrokenSession, NonScatteredSubject);
   SetLength(FValidIdes, Length(AValidIdes));
   // ProcThreadPool.MaxThreadCount := Length(AValidIdes);
@@ -228,9 +228,9 @@ begin
   inherited Create(CreateSuspended);
 end;
 
-destructor TMakeTimeTableThread.Destroy;
+destructor TMakeTimetableThread.Destroy;
 begin
-  FTimeTableModel.Free;
+  FTimetableModel.Free;
   inherited Destroy;
 end;
 
@@ -261,9 +261,9 @@ begin
   FIndividual.LoadFromDataModule(FIndex);
 end;
 
-{ TImproveTimeTableThread }
+{ TImproveTimetableThread }
 
-procedure TImproveTimeTableThread.Execute;
+procedure TImproveTimetableThread.Execute;
 var
   ProgressFormDrv: TProgressFormDrv;
   TimeIni: TDateTime;
@@ -274,14 +274,14 @@ begin
   with MasterDataModule.ConfigStorage do
   begin
     InitRandom;
-    DownHill := TDownHill.Create(FTimeTableModel,
+    DownHill := TDownHill.Create(FTimetableModel,
       SharedDirectory, PollinationProbability);
     try
       {if s = '' then
-        TimeTable.MakeRandom
+        Timetable.MakeRandom
       else}
-      with TSyncLoader.Create(TTimeTable(DownHill.BestIndividual),
-        FIdTimeTableFuente) do
+      with TSyncLoader.Create(TTimetable(DownHill.BestIndividual),
+        FIdTimetableFuente) do
       try
         TThread.Synchronize(CurrentThread, Execute);
       finally
@@ -291,8 +291,8 @@ begin
       ProgressFormDrv := TProgressFormDrv.Create;
       try
         DownHill.OnProgress := ProgressFormDrv.OnProgress;
-        ProgressFormDrv.Caption := Format(SImprovingTimeTableIn,
-          [FIdTimeTableFuente, FIdTimeTable]);
+        ProgressFormDrv.Caption := Format(SImprovingTimetableIn,
+          [FIdTimetableFuente, FIdTimetable]);
         ExecuteDownHill(DownHill, Bookmarks, RefreshInterval);
         if ProgressFormDrv.CancelClick then
         begin
@@ -300,8 +300,8 @@ begin
           Exit;
         end
         else
-          ExtraInfo := Format(SBaseTimeTable, [FIdTimeTableFuente]);
-          with TSyncSaver.Create(DownHill, FIdTimeTable, ExtraInfo,
+          ExtraInfo := Format(SBaseTimetable, [FIdTimetableFuente]);
+          with TSyncSaver.Create(DownHill, FIdTimetable, ExtraInfo,
             TimeIni, Now) do
           try
             TThread.Synchronize(CurrentThread, Execute);
@@ -317,22 +317,22 @@ begin
   end;
 end;
 
-constructor TImproveTimeTableThread.Create(AIdTimeTableFuente, AIdTimeTable: Integer;
+constructor TImproveTimetableThread.Create(AIdTimetableFuente, AIdTimetable: Integer;
   CreateSuspended: Boolean);
 begin
   FreeOnTerminate := True;
-  FIdTimeTableFuente := AIdTimeTableFuente;
-  FIdTimeTable := AIdTimeTable;
+  FIdTimetableFuente := AIdTimetableFuente;
+  FIdTimetable := AIdTimetable;
   with MasterDataModule.ConfigStorage do
-    FTimeTableModel := TTimeTableModel.Create(ClashTeacher,
-      ClashSubject, ClashRoomType, BreakTimeTableTeacher, OutOfPositionEmptyHour,
+    FTimetableModel := TTimetableModel.Create(ClashTeacher,
+      ClashSubject, ClashRoomType, BreakTimetableTeacher, OutOfPositionEmptyHour,
       BrokenSession, NonScatteredSubject);
   inherited Create(CreateSuspended);
 end;
 
-destructor TImproveTimeTableThread.Destroy;
+destructor TImproveTimetableThread.Destroy;
 begin
-  FTimeTableModel.Free;
+  FTimetableModel.Free;
   inherited Destroy;
 end;
 

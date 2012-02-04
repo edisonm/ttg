@@ -36,7 +36,7 @@ type
     procedure Update; virtual;
     procedure UpdateValue; virtual;
     procedure Execute(RefreshInterval: Integer); virtual;
-    procedure SaveSolutionToDatabase(AIdTimeTable: Integer;
+    procedure SaveSolutionToDatabase(AIdTimetable: Integer;
       const AExtraInfo: string; ATimeIni, ATimeEnd: TDateTime); virtual; abstract;
     function Pollinate: Boolean; overload;
     function Pollinate(Individual:TIndividual): Boolean; overload;

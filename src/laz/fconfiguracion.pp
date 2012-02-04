@@ -71,10 +71,10 @@ type
     speNumIterations: TSpinEdit;
     lblSchoolYear: TLabel;
     edtSchoolYear: TEdit;
-    lblBreakTimeTableTeacher: TLabel;
-    creBreakTimeTableTeacher: TEdit;
-    lblInitialTimeTables: TLabel;
-    edtInitialTimeTables: TEdit;
+    lblBreakTimetableTeacher: TLabel;
+    creBreakTimetableTeacher: TEdit;
+    lblInitialTimetables: TLabel;
+    edtInitialTimetables: TEdit;
     dbeNaSubjectRestrictionType: TDBEdit;
     dbeValSubjectRestrictionType: TDBEdit;
     lblSRName: TLabel;
@@ -183,7 +183,7 @@ begin
       creClashTeacher.Text := FloatToStr(ClashTeacher);
       creClashSubject.Text := FloatToStr(ClashSubject);
       creClashRoomType.Text := FloatToStr(ClashRoomType);
-      creBreakTimeTableTeacher.Text := FloatToStr(BreakTimeTableTeacher);
+      creBreakTimetableTeacher.Text := FloatToStr(BreakTimetableTeacher);
       creEmptyHour.Text := FloatToStr(OutOfPositionEmptyHour);
       creBrokenSession.Text := FloatToStr(BrokenSession);
       creNonScatteredSubject.Text := FloatToStr(NonScatteredSubject);
@@ -192,7 +192,7 @@ begin
       creCrossProbability.Text := FloatToStr(CrossProbability);
       creMutationProbability.Text := FloatToStr(MutationProbability);
       creReparationProbability.Text := FloatToStr(ReparationProbability);
-      edtInitialTimeTables.Text := InitialTimeTables;
+      edtInitialTimetables.Text := InitialTimetables;
       dedSharedDirectory.Directory := SharedDirectory;
       crePollinationProbability.Text := FloatToStr(PollinationProbability);
       cbxApplyDoubleDownHill.Checked := ApplyDoubleDownHill;
@@ -218,7 +218,7 @@ begin
       ClashTeacher := StrToInt(creClashTeacher.Text);
       ClashSubject := StrToInt(creClashSubject.Text);
       ClashRoomType := StrToInt(creClashRoomType.Text);
-      BreakTimeTableTeacher := StrToInt(creBreakTimeTableTeacher.Text);
+      BreakTimetableTeacher := StrToInt(creBreakTimetableTeacher.Text);
       OutOfPositionEmptyHour := StrToInt(creEmptyHour.Text);
       BrokenSession := StrToInt(creBrokenSession.Text);
       NonScatteredSubject := StrToInt(creNonScatteredSubject.Text);
@@ -227,7 +227,7 @@ begin
       CrossProbability := StrToFloat(creCrossProbability.Text);
       MutationProbability := StrToFloat(creMutationProbability.Text);
       ReparationProbability := StrToFloat(creReparationProbability.Text);
-      InitialTimeTables := edtInitialTimeTables.Text;
+      InitialTimetables := edtInitialTimetables.Text;
       SharedDirectory := dedSharedDirectory.Directory;
       PollinationProbability := StrToFloat(crePollinationProbability.Text);
       ApplyDoubleDownHill := cbxApplyDoubleDownHill.Checked;

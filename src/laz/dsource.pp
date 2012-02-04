@@ -310,7 +310,7 @@ begin
     Lookup := True;
     DataSet := TbSubjectRestriction;
   end;
-  Field := TStringField.Create(TbTimeTableDetail);
+  Field := TStringField.Create(TbTimetableDetail);
   with Field do
   begin
     DisplayLabel := 'Subject';
@@ -323,7 +323,7 @@ begin
     KeyFields := 'IdSubject';
     Size := 15;
     Lookup := True;
-    DataSet := TbTimeTableDetail;
+    DataSet := TbTimetableDetail;
   end;
   Field := TStringField.Create(TbTeacherRestriction);
   with Field do
@@ -443,9 +443,9 @@ begin
   TbClass.FindField('IdSpecialization').Visible := False;
   TbClass.FindField('IdGroupId').Visible := False;
   TbTeacher.FindField('IdTeacher').Visible := False;
-  with TbTimeTableDetail do
+  with TbTimetableDetail do
   begin
-    FindField('IdTimeTable').Visible := False;
+    FindField('IdTimetable').Visible := False;
     FindField('IdSubject').Visible := False;
     FindField('IdLevel').Visible := False;
     FindField('IdSpecialization').Visible := False;

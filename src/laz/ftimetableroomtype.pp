@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit FTimeTableRoomType;
+unit FTimetableRoomType;
 
 {$I ttg.inc}
 
@@ -13,31 +13,31 @@ uses
 
 type
 
-  { TTimeTableRoomTypeForm }
+  { TTimetableRoomTypeForm }
 
-  TTimeTableRoomTypeForm = class(TCrossManyToManyEditor1Form)
-    QuTimeTableRoomType: TZQuery;
+  TTimetableRoomTypeForm = class(TCrossManyToManyEditor1Form)
+    QuTimetableRoomType: TZQuery;
     cbVerRoomType: TComboBox;
-    QuTimeTableRoomTypeIdSubject: TLongintField;
-    QuTimeTableRoomTypeIdLevel: TLongintField;
-    QuTimeTableRoomTypeIdSpecialization: TLongintField;
-    QuTimeTableRoomTypeIdGroupId: TLongintField;
-    QuTimeTableRoomTypeIdHour: TLongintField;
-    QuTimeTableRoomTypeIdDay: TLongintField;
-    QuTimeTableRoomTypeNaSubject: TStringField;
-    QuTimeTableRoomTypeAbLevel: TStringField;
-    QuTimeTableRoomTypeAbSpecialization: TStringField;
-    QuTimeTableRoomTypeNaGroupId: TStringField;
-    QuTimeTableRoomTypeName: TStringField;
+    QuTimetableRoomTypeIdSubject: TLongintField;
+    QuTimetableRoomTypeIdLevel: TLongintField;
+    QuTimetableRoomTypeIdSpecialization: TLongintField;
+    QuTimetableRoomTypeIdGroupId: TLongintField;
+    QuTimetableRoomTypeIdHour: TLongintField;
+    QuTimetableRoomTypeIdDay: TLongintField;
+    QuTimetableRoomTypeNaSubject: TStringField;
+    QuTimetableRoomTypeAbLevel: TStringField;
+    QuTimetableRoomTypeAbSpecialization: TStringField;
+    QuTimetableRoomTypeNaGroupId: TStringField;
+    QuTimetableRoomTypeName: TStringField;
     DSRoomType: TDataSource;
     DBGrid1: TDBGrid;
     Splitter1: TSplitter;
     QuRoomType: TZQuery;
-    QuRoomTypeIdTimeTable: TLongintField;
+    QuRoomTypeIdTimetable: TLongintField;
     QuRoomTypeIdRoomType: TLongintField;
     QuRoomTypeAbRoomType: TStringField;
-    QuTimeTableRoomTypeIdTimeTable: TLongintField;
-    QuTimeTableRoomTypeIdRoomType: TLongintField;
+    QuTimetableRoomTypeIdTimetable: TLongintField;
+    QuTimetableRoomTypeIdRoomType: TLongintField;
     DBNavigator: TDBNavigator;
     procedure BtnCancelClick(Sender: TObject);
     procedure BtnOkClick(Sender: TObject);
@@ -53,7 +53,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure QuTimeTableRoomTypeCalcFields(DataSet: TDataSet);
+    procedure QuTimetableRoomTypeCalcFields(DataSet: TDataSet);
     procedure DSRoomTypeDataChange(Sender: TObject; Field: TField);
     procedure BtnMostrarClick(Sender: TObject);
   private
@@ -72,89 +72,89 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-procedure TTimeTableRoomTypeForm.BtnMostrarClick(Sender: TObject);
+procedure TTimetableRoomTypeForm.BtnMostrarClick(Sender: TObject);
 begin
   inherited;
   with SourceDataModule, MasterDataModule do
   begin
     Caption := Format('[%s %d] - %s', [SuperTitle,
-      QuRoomType.FindField('IdTimeTable').AsInteger,
+      QuRoomType.FindField('IdTimetable').AsInteger,
       QuRoomType.FindField('AbRoomType').AsString]);
     FName := StringsShowRoomType.Values[cbVerRoomType.Text];
-    ShowEditor(TbDay, TbHour, QuTimeTableRoomType, TbTimeSlot, 'IdDay', 'NaDay',
+    ShowEditor(TbDay, TbHour, QuTimetableRoomType, TbTimeSlot, 'IdDay', 'NaDay',
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
   end;
 end;
 
-procedure TTimeTableRoomTypeForm.FormCreate(Sender: TObject);
+procedure TTimetableRoomTypeForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuRoomType.Open;
   cbVerRoomType.Items.Clear;
-  QuTimeTableRoomType.Open;
+  QuTimetableRoomType.Open;
   LoadNames(MasterDataModule.StringsShowRoomType, cbVerRoomType.Items);
   cbVerRoomType.Text := cbVerRoomType.Items[0];
 end;
 
-procedure TTimeTableRoomTypeForm.FormDestroy(Sender: TObject);
+procedure TTimetableRoomTypeForm.FormDestroy(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TTimeTableRoomTypeForm.FormClose(Sender: TObject;
+procedure TTimetableRoomTypeForm.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   inherited;
 end;
 
-procedure TTimeTableRoomTypeForm.BtnOkClick(Sender: TObject);
+procedure TTimetableRoomTypeForm.BtnOkClick(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TTimeTableRoomTypeForm.DrawGridDrawCell(Sender: TObject; aCol,
+procedure TTimetableRoomTypeForm.DrawGridDrawCell(Sender: TObject; aCol,
   aRow: Integer; aRect: TRect; aState: TGridDrawState);
 begin
   inherited;
 end;
 
-procedure TTimeTableRoomTypeForm.DrawGridGetEditText(Sender: TObject; ACol,
+procedure TTimetableRoomTypeForm.DrawGridGetEditText(Sender: TObject; ACol,
   ARow: Integer; var Value: string);
 begin
   inherited;
 end;
 
-procedure TTimeTableRoomTypeForm.DrawGridSetEditText(Sender: TObject; ACol,
+procedure TTimetableRoomTypeForm.DrawGridSetEditText(Sender: TObject; ACol,
   ARow: Integer; var Value: string);
 begin
   inherited;
 end;
 
-procedure TTimeTableRoomTypeForm.DrawGridSelectCell(Sender: TObject; aCol,
+procedure TTimetableRoomTypeForm.DrawGridSelectCell(Sender: TObject; aCol,
   aRow: Integer; var CanSelect: Boolean);
 begin
   inherited;
 end;
 
-procedure TTimeTableRoomTypeForm.BtnCancelClick(Sender: TObject);
+procedure TTimetableRoomTypeForm.BtnCancelClick(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TTimeTableRoomTypeForm.FormCloseQuery(Sender: TObject;
+procedure TTimetableRoomTypeForm.FormCloseQuery(Sender: TObject;
   var CanClose: boolean);
 begin
   inherited;
 end;
 
-procedure TTimeTableRoomTypeForm.QuTimeTableRoomTypeCalcFields(DataSet: TDataSet);
+procedure TTimetableRoomTypeForm.QuTimetableRoomTypeCalcFields(DataSet: TDataSet);
 begin
   inherited;
   if FName <> '' then
     DataSet['Name'] := VarArrToStr(DataSet[FName], ' ');
 end;
 
-procedure TTimeTableRoomTypeForm.DSRoomTypeDataChange(Sender: TObject;
+procedure TTimetableRoomTypeForm.DSRoomTypeDataChange(Sender: TObject;
   Field: TField);
 begin
   inherited;

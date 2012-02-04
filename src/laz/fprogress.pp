@@ -74,11 +74,11 @@ type
     lblNonScatteredSubjectValue: TLabel;
     bbtCancel: TBitBtn;
     prbProgress: TProgressBar;
-    pnlBreakTimeTableTeacher: TPanel;
-    pnlBreakTimeTableTeacherCount: TPanel;
-    lblBreakTimeTableTeacherCount: TLabel;
-    pnlBreakTimeTableTeacherValue: TPanel;
-    lblBreakTimeTableTeacherValue: TLabel;
+    pnlBreakTimetableTeacher: TPanel;
+    pnlBreakTimetableTeacherCount: TPanel;
+    lblBreakTimetableTeacherCount: TLabel;
+    pnlBreakTimetableTeacherValue: TPanel;
+    lblBreakTimetableTeacherValue: TLabel;
     pnlPosition: TPanel;
     lblPosition: TLabel;
     procedure bbtCancelClick(Sender: TObject);
@@ -146,14 +146,14 @@ begin
   if MainForm.UpdateIndex <> FUpdateIndex then
   begin
     with MasterDataModule.ConfigStorage do
-      TTimeTableModel(ASolver.Model).Configure(ClashTeacher, ClashSubject,
-        ClashRoomType, BreakTimeTableTeacher, OutOfPositionEmptyHour,
+      TTimetableModel(ASolver.Model).Configure(ClashTeacher, ClashSubject,
+        ClashRoomType, BreakTimetableTeacher, OutOfPositionEmptyHour,
         BrokenSession, NonScatteredSubject);
     //ASolver.Update;
     ASolver.UpdateValue;
     FUpdateIndex := MainForm.UpdateIndex;
   end;
-  with ASolver, TTimeTable(BestIndividual) do
+  with ASolver, TTimetable(BestIndividual) do
   begin
     t := Now;
     lblElapsedTime.Caption := FormatDateTime('hh:nn:ss ', t - FInit);
@@ -168,8 +168,8 @@ begin
     lblClashTeacher.Caption := Format('%d ', [ClashTeacher]);
     lblClashSubject.Caption := Format('%d ', [ClashSubject]);
     lblClashRoomType.Caption := Format('%d ', [ClashRoomType]);
-    lblBreakTimeTableTeacherCount.Caption :=
-      Format('%d ', [BreakTimeTableTeacher]);
+    lblBreakTimetableTeacherCount.Caption :=
+      Format('%d ', [BreakTimetableTeacher]);
     lblOutOfPositionEmptyHour.Caption := Format('%d ', [OutOfPositionEmptyHour]);
     lblBrokenSession.Caption := Format('%d ', [BrokenSession]);
     lblSubjectRestriction.Caption :=
@@ -179,8 +179,8 @@ begin
     lblNonScatteredSubjectCount.Caption := Format('%d ', [NonScatteredSubject]);
     lblClashTeacherValue.Caption := Format('%d ', [ClashTeacherValue]);
     lblClashSubjectValue.Caption := Format('%d ', [ClashSubjectValue]);
-    lblBreakTimeTableTeacherValue.Caption :=
-      Format('%d ', [BreakTimeTableTeacherValue]);
+    lblBreakTimetableTeacherValue.Caption :=
+      Format('%d ', [BreakTimetableTeacherValue]);
     lblClashRoomTypeValue.Caption := Format('%d ', [ClashRoomTypeValue]);
     lblOutOfPositionEmptyHourValue.Caption := Format('%d ',
       [OutOfPositionEmptyHourValue]);
@@ -217,7 +217,7 @@ end;
 
 procedure TProgressForm.FormCreate(Sender: TObject);
 begin
-  // HelpContext := ActMakeTimeTable.HelpContext;
+  // HelpContext := ActMakeTimetable.HelpContext;
   FInit := Now;
   FTimePosition0 := FInit;
   lblInit.Caption := FormatDateTime(Format('%s %s ', [ShortDateFormat,

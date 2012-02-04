@@ -59,10 +59,10 @@ type
     DSTeacherRestriction: TDataSource;
     TbSubjectRestriction: TZTable;
     DSSubjectRestriction: TDataSource;
-    TbTimeTable: TZTable;
-    DSTimeTable: TDataSource;
-    TbTimeTableDetail: TZTable;
-    DSTimeTableDetail: TDataSource;
+    TbTimetable: TZTable;
+    DSTimetable: TDataSource;
+    TbTimetableDetail: TZTable;
+    DSTimetableDetail: TDataSource;
 
     procedure DataModuleCreate(Sender: TObject);
   private
@@ -132,11 +132,11 @@ begin
   TbTeacherRestriction.BeforePost := DataSetBeforePost;
   Tables[15] := TbSubjectRestriction;
   TbSubjectRestriction.BeforePost := DataSetBeforePost;
-  Tables[16] := TbTimeTable;
-  TbTimeTable.BeforePost := DataSetBeforePost;
-  TbTimeTable.BeforeDelete := DataSetBeforeDelete;
-  Tables[17] := TbTimeTableDetail;
-  TbTimeTableDetail.BeforePost := DataSetBeforePost;
+  Tables[16] := TbTimetable;
+  TbTimetable.BeforePost := DataSetBeforePost;
+  TbTimetable.BeforeDelete := DataSetBeforeDelete;
+  Tables[17] := TbTimetableDetail;
+  TbTimetableDetail.BeforePost := DataSetBeforePost;
   SetLength(FMasterRels[0], 1);
   with FMasterRels[0, 0] do
   begin
@@ -282,7 +282,7 @@ begin
   end;
   with FMasterRels[11, 2] do
   begin
-    DetailDataSet := TbTimeTableDetail;
+    DetailDataSet := TbTimetableDetail;
     MasterFields := 'IdDay;IdHour';
     DetailFields := 'IdDay;IdHour';
     Cascade := False;
@@ -303,7 +303,7 @@ begin
   SetLength(FMasterRels[12], 1);
   with FMasterRels[12, 0] do
   begin
-    DetailDataSet := TbTimeTableDetail;
+    DetailDataSet := TbTimetableDetail;
     MasterFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
     DetailFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
     Cascade := False;
@@ -382,9 +382,9 @@ begin
   SetLength(FMasterRels[16], 1);
   with FMasterRels[16, 0] do
   begin
-    DetailDataSet := TbTimeTableDetail;
-    MasterFields := 'IdTimeTable';
-    DetailFields := 'IdTimeTable';
+    DetailDataSet := TbTimetableDetail;
+    MasterFields := 'IdTimetable';
+    DetailFields := 'IdTimetable';
     Cascade := True;
   end;
   SetLength(FDetailRels[17], 3);
@@ -402,9 +402,9 @@ begin
   end;
   with FDetailRels[17, 2] do
   begin
-    MasterDataSet := TbTimeTable;
-    MasterFields := 'IdTimeTable';
-    DetailFields := 'IdTimeTable';
+    MasterDataSet := TbTimetable;
+    MasterFields := 'IdTimetable';
+    DetailFields := 'IdTimetable';
   end;
   with DataSetNameList do
   begin
@@ -424,8 +424,8 @@ begin
     Add('TbTeacherRestrictionType=TeacherRestrictionType');
     Add('TbTeacherRestriction=TeacherRestriction');
     Add('TbSubjectRestriction=SubjectRestriction');
-    Add('TbTimeTable=TimeTable');
-    Add('TbTimeTableDetail=TimeTableDetail');
+    Add('TbTimetable=Timetable');
+    Add('TbTimetableDetail=TimetableDetail');
   end;
   with FieldCaptionList do
   begin
@@ -482,18 +482,18 @@ begin
     Add('TbSubjectRestriction.IdDay=' + SFlSubjectRestriction_IdDay);
     Add('TbSubjectRestriction.IdHour=' + SFlSubjectRestriction_IdHour);
     Add('TbSubjectRestriction.IdSubjectRestrictionType=' + SFlSubjectRestriction_IdSubjectRestrictionType);
-    Add('TbTimeTable.IdTimeTable=' + SFlTimeTable_IdTimeTable);
-    Add('TbTimeTable.TimeIni=' + SFlTimeTable_TimeIni);
-    Add('TbTimeTable.TimeEnd=' + SFlTimeTable_TimeEnd);
-    Add('TbTimeTable.Summary=' + SFlTimeTable_Summary);
-    Add('TbTimeTableDetail.IdTimeTable=' + SFlTimeTableDetail_IdTimeTable);
-    Add('TbTimeTableDetail.IdSubject=' + SFlTimeTableDetail_IdSubject);
-    Add('TbTimeTableDetail.IdLevel=' + SFlTimeTableDetail_IdLevel);
-    Add('TbTimeTableDetail.IdSpecialization=' + SFlTimeTableDetail_IdSpecialization);
-    Add('TbTimeTableDetail.IdGroupId=' + SFlTimeTableDetail_IdGroupId);
-    Add('TbTimeTableDetail.IdDay=' + SFlTimeTableDetail_IdDay);
-    Add('TbTimeTableDetail.IdHour=' + SFlTimeTableDetail_IdHour);
-    Add('TbTimeTableDetail.Session=' + SFlTimeTableDetail_Session);
+    Add('TbTimetable.IdTimetable=' + SFlTimetable_IdTimetable);
+    Add('TbTimetable.TimeIni=' + SFlTimetable_TimeIni);
+    Add('TbTimetable.TimeEnd=' + SFlTimetable_TimeEnd);
+    Add('TbTimetable.Summary=' + SFlTimetable_Summary);
+    Add('TbTimetableDetail.IdTimetable=' + SFlTimetableDetail_IdTimetable);
+    Add('TbTimetableDetail.IdSubject=' + SFlTimetableDetail_IdSubject);
+    Add('TbTimetableDetail.IdLevel=' + SFlTimetableDetail_IdLevel);
+    Add('TbTimetableDetail.IdSpecialization=' + SFlTimetableDetail_IdSpecialization);
+    Add('TbTimetableDetail.IdGroupId=' + SFlTimetableDetail_IdGroupId);
+    Add('TbTimetableDetail.IdDay=' + SFlTimetableDetail_IdDay);
+    Add('TbTimetableDetail.IdHour=' + SFlTimetableDetail_IdHour);
+    Add('TbTimetableDetail.Session=' + SFlTimetableDetail_Session);
   end;
   with DataSetDescList do
   begin
@@ -513,8 +513,8 @@ begin
     Add('TbTeacherRestrictionType=' + STbTeacherRestrictionType);
     Add('TbTeacherRestriction=' + STbTeacherRestriction);
     Add('TbSubjectRestriction=' + STbSubjectRestriction);
-    Add('TbTimeTable=' + STbTimeTable);
-    Add('TbTimeTableDetail=' + STbTimeTableDetail);
+    Add('TbTimetable=' + STbTimetable);
+    Add('TbTimetableDetail=' + STbTimetableDetail);
   end;
 end;
 

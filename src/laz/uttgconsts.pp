@@ -23,10 +23,10 @@ resourcestring
   SClassWorkLoadWithProblems = 'Class work load with problems...';
   SClassWorkLoadHead = 'Class; Work Load';
   SProblems = 'Problems';
-  SGenerateTimeTables = 'Generate Timetables';
-  STimeTableCodesToGenerate = 'Codes of Timetables to generate';
+  SGenerateTimetables = 'Generate Timetables';
+  STimetableCodesToGenerate = 'Codes of Timetables to generate';
   SInvalidData = 'Invalid input data';
-  STheNextTimeTablesAlreadyExists = 'The next Timetables already exists: %s';
+  STheNextTimetablesAlreadyExists = 'The next Timetables already exists: %s';
   SNoErrorReadyForCheckSummary =
     'Ready to generate timetable. Show timetable check Summary?';
   SPendingChangesWillBeLostYouReallyWantToQuit =
@@ -48,10 +48,10 @@ resourcestring
   SReparationProbability = 'Repair Probability';
   SPollinationProbability = 'Pollination Probability';
   SWorkInProgress = 'Work in progress [%d]';
-  SImprovingTimeTable = 'Improving Timetable [%d]';
+  SImprovingTimetable = 'Improving Timetable [%d]';
   SApplyDownHill = 'Applying Downhill: %23s';
-  SImprovingTimeTableIn =  'Improving Timetable [%d] in [%d]';
-  SBaseTimeTable = 'Base Timetable: %d';
+  SImprovingTimetableIn =  'Improving Timetable [%d] in [%d]';
+  SBaseTimetable = 'Base Timetable: %d';
   SSearchBy = 'Search by %s';
   SClassTimeSlotToSessionOverflow =
     'Overflow of pattern for ClassTimeSlotToSession: Class %d-%d Duration %d';
@@ -59,7 +59,7 @@ resourcestring
   SClashTeacher = 'Clash of Teachers';
   SClashSubject = 'Clash of Subjects';
   SClashRoomType = 'Clash of Classrooms';
-  SBreakTimeTableTeacher = 'Broken TT. Teachers';
+  SBreakTimetableTeacher = 'Broken TT. Teachers';
   SOutOfPositionEmptyHour = 'Out of position empty hours';
   SBrokenSession = 'Broken Subjects';
   SNonScatteredSubject = 'Non Scattered Subjects';

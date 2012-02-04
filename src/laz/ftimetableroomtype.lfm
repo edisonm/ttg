@@ -1,4 +1,4 @@
-inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
+inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
   Left = 502
   Height = 431
   Top = 79
@@ -298,19 +298,19 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       00FF000000FF000000FF000000FF
     }
   end
-  object QuTimeTableRoomType: TZQuery[7]
+  object QuTimetableRoomType: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable;IdRoomType'
+    SortedFields = 'IdTimetable;IdRoomType'
     AutoCalcFields = False
-    OnCalcFields = QuTimeTableRoomTypeCalcFields
+    OnCalcFields = QuTimetableRoomTypeCalcFields
     ReadOnly = True
     SQL.Strings = (
       'SELECT'
-      '  TimeTableDetail.IdTimeTable,'
+      '  TimetableDetail.IdTimetable,'
       '  Distribution.IdRoomType,'
-      '  TimeTableDetail.IdSubject,'
-      '  TimeTableDetail.IdDay,'
-      '  TimeTableDetail.IdHour,'
+      '  TimetableDetail.IdSubject,'
+      '  TimetableDetail.IdDay,'
+      '  TimetableDetail.IdHour,'
       '  Level.IdLevel,'
       '  Specialization.IdSpecialization,'
       '  GroupId.IdGroupId,'
@@ -319,20 +319,20 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       '  AbSpecialization,'
       '  NaGroupId'
       'FROM'
-      '  ((((TimeTableDetail'
+      '  ((((TimetableDetail'
       '  INNER JOIN Distribution'
-      '   ON (TimeTableDetail.IdSubject=Distribution.IdSubject)'
-      '  AND (TimeTableDetail.IdLevel=Distribution.IdLevel)'
-      '  AND (TimeTableDetail.IdSpecialization=Distribution.IdSpecialization)'
-      '  AND (TimeTableDetail.IdGroupId=Distribution.IdGroupId))'
-      '  INNER JOIN Level ON TimeTableDetail.IdLevel=Level.IdLevel)'
-      '  INNER JOIN Specialization ON TimeTableDetail.IdSpecialization=Specialization.IdSpecialization)'
+      '   ON (TimetableDetail.IdSubject=Distribution.IdSubject)'
+      '  AND (TimetableDetail.IdLevel=Distribution.IdLevel)'
+      '  AND (TimetableDetail.IdSpecialization=Distribution.IdSpecialization)'
+      '  AND (TimetableDetail.IdGroupId=Distribution.IdGroupId))'
+      '  INNER JOIN Level ON TimetableDetail.IdLevel=Level.IdLevel)'
+      '  INNER JOIN Specialization ON TimetableDetail.IdSpecialization=Specialization.IdSpecialization)'
       '  INNER JOIN GroupId ON Distribution.IdGroupId=GroupId.IdGroupId)'
       '  INNER JOIN Subject ON Distribution.IdSubject=Subject.IdSubject'
       'WHERE (Distribution.IdRoomType=:IdRoomType)'
-      '  AND (TimeTableDetail.IdTimeTable=:IdTimeTable)'
-      'ORDER BY TimeTableDetail.IdDay,'
-      '  TimeTableDetail.IdHour,'
+      '  AND (TimetableDetail.IdTimetable=:IdTimetable)'
+      'ORDER BY TimetableDetail.IdDay,'
+      '  TimetableDetail.IdHour,'
       '  Level.IdLevel,'
       '  Specialization.IdSpecialization,'
       '  GroupId.IdGroupId,'
@@ -346,14 +346,14 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       end    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
     DataSource = DSRoomType
-    MasterFields = 'IdTimeTable;IdRoomType'
+    MasterFields = 'IdTimetable;IdRoomType'
     MasterSource = DSRoomType
-    LinkedFields = 'IdTimeTable;IdRoomType'
-    IndexFieldNames = 'IdTimeTable Asc;IdRoomType Asc'
+    LinkedFields = 'IdTimetable;IdRoomType'
+    IndexFieldNames = 'IdTimetable Asc;IdRoomType Asc'
     left = 84
     top = 80
     ParamData = <    
@@ -364,20 +364,20 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       end    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuTimeTableRoomTypeIdTimeTable: TLongintField
+    object QuTimetableRoomTypeIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
       Required = False
     end
-    object QuTimeTableRoomTypeIdRoomType: TLongintField
+    object QuTimetableRoomTypeIdRoomType: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdRoomType'
@@ -387,7 +387,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       ReadOnly = True
       Required = False
     end
-    object QuTimeTableRoomTypeIdSubject: TLongintField
+    object QuTimetableRoomTypeIdSubject: TLongintField
       DisplayLabel = 'Subject'
       DisplayWidth = 10
       FieldKind = fkData
@@ -399,7 +399,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       Required = True
       Visible = False
     end
-    object QuTimeTableRoomTypeIdDay: TLongintField
+    object QuTimetableRoomTypeIdDay: TLongintField
       DisplayLabel = 'Day'
       DisplayWidth = 10
       FieldKind = fkData
@@ -411,7 +411,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       Required = True
       Visible = False
     end
-    object QuTimeTableRoomTypeIdHour: TLongintField
+    object QuTimetableRoomTypeIdHour: TLongintField
       DisplayLabel = 'Hour'
       DisplayWidth = 10
       FieldKind = fkData
@@ -423,7 +423,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       Required = True
       Visible = False
     end
-    object QuTimeTableRoomTypeIdLevel: TLongintField
+    object QuTimetableRoomTypeIdLevel: TLongintField
       DisplayLabel = 'Level'
       DisplayWidth = 10
       FieldKind = fkData
@@ -435,7 +435,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       Required = True
       Visible = False
     end
-    object QuTimeTableRoomTypeIdSpecialization: TLongintField
+    object QuTimetableRoomTypeIdSpecialization: TLongintField
       DisplayLabel = 'Specialization'
       DisplayWidth = 10
       FieldKind = fkData
@@ -447,7 +447,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       Required = True
       Visible = False
     end
-    object QuTimeTableRoomTypeIdGroupId: TLongintField
+    object QuTimetableRoomTypeIdGroupId: TLongintField
       DisplayLabel = 'Class'
       DisplayWidth = 10
       FieldKind = fkData
@@ -459,7 +459,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       Required = True
       Visible = False
     end
-    object QuTimeTableRoomTypeNaSubject: TStringField
+    object QuTimetableRoomTypeNaSubject: TStringField
       DisplayLabel = 'Subject'
       DisplayWidth = 15
       FieldKind = fkData
@@ -471,7 +471,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       Required = False
       Size = 15
     end
-    object QuTimeTableRoomTypeAbLevel: TStringField
+    object QuTimetableRoomTypeAbLevel: TStringField
       DisplayLabel = 'Level'
       DisplayWidth = 5
       FieldKind = fkData
@@ -483,7 +483,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       Required = False
       Size = 5
     end
-    object QuTimeTableRoomTypeAbSpecialization: TStringField
+    object QuTimetableRoomTypeAbSpecialization: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkData
@@ -495,7 +495,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       Required = False
       Size = 10
     end
-    object QuTimeTableRoomTypeNaGroupId: TStringField
+    object QuTimetableRoomTypeNaGroupId: TStringField
       DisplayLabel = 'Par.'
       DisplayWidth = 5
       FieldKind = fkData
@@ -507,7 +507,7 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
       Required = False
       Size = 5
     end
-    object QuTimeTableRoomTypeName: TStringField
+    object QuTimetableRoomTypeName: TStringField
       DisplayWidth = 40
       FieldKind = fkCalculated
       FieldName = 'Name'
@@ -527,44 +527,44 @@ inherited TimeTableRoomTypeForm: TTimeTableRoomTypeForm
   end
   object QuRoomType: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable'
+    SortedFields = 'IdTimetable'
     AutoCalcFields = False
-    OnCalcFields = QuTimeTableRoomTypeCalcFields
+    OnCalcFields = QuTimetableRoomTypeCalcFields
     ReadOnly = True
     SQL.Strings = (
       'select'
-      '  TimeTable.IdTimeTable,'
+      '  Timetable.IdTimetable,'
       '  RoomType.IdRoomType,'
       '  RoomType.AbRoomType'
       'from'
-      '  TimeTable,'
+      '  Timetable,'
       '  RoomType'
       'where'
-      '  TimeTable.IdTimeTable=:IdTimeTable'
+      '  Timetable.IdTimetable=:IdTimetable'
     )
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimeTable
-    MasterFields = 'IdTimeTable'
-    MasterSource = SourceDataModule.DSTimeTable
-    LinkedFields = 'IdTimeTable'
-    IndexFieldNames = 'IdTimeTable Asc'
+    DataSource = SourceDataModule.DSTimetable
+    MasterFields = 'IdTimetable'
+    MasterSource = SourceDataModule.DSTimetable
+    LinkedFields = 'IdTimetable'
+    IndexFieldNames = 'IdTimetable Asc'
     left = 164
     top = 140
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuRoomTypeIdTimeTable: TLongintField
+    object QuRoomTypeIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

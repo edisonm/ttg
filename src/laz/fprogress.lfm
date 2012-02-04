@@ -595,7 +595,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlBreakTimeTableTeacher: TPanel
+    object pnlBreakTimetableTeacher: TPanel
       Left = 8
       Height = 21
       Top = 126
@@ -605,7 +605,7 @@ object ProgressForm: TProgressForm
       Caption = ' Broken Teachers:'
       TabOrder = 25
     end
-    object pnlBreakTimeTableTeacherCount: TPanel
+    object pnlBreakTimetableTeacherCount: TPanel
       Left = 192
       Height = 21
       Top = 126
@@ -616,7 +616,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 26
-      object lblBreakTimeTableTeacherCount: TLabel
+      object lblBreakTimetableTeacherCount: TLabel
         Left = 106
         Height = 19
         Top = 1
@@ -633,7 +633,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object pnlBreakTimeTableTeacherValue: TPanel
+    object pnlBreakTimetableTeacherValue: TPanel
       Left = 312
       Height = 21
       Top = 126
@@ -644,7 +644,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 27
-      object lblBreakTimeTableTeacherValue: TLabel
+      object lblBreakTimetableTeacherValue: TLabel
         Left = 118
         Height = 19
         Top = 1

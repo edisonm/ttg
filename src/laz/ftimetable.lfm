@@ -1,9 +1,9 @@
-inherited TimeTableForm: TTimeTableForm
+inherited TimetableForm: TTimetableForm
   Left = 621
   Height = 440
   Top = 100
   Width = 677
-  Caption = 'TimeTableForm'
+  Caption = 'TimetableForm'
   ClientHeight = 440
   ClientWidth = 677
   OnClose = FormClose
@@ -17,24 +17,24 @@ inherited TimeTableForm: TTimeTableForm
       Hints.Strings = (      )
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbPost, nbCancel]
     end
-    object BtnTimeTableClass: TToolButton[3]
+    object BtnTimetableClass: TToolButton[3]
       Left = 201
       Top = 2
-      Action = ActTimeTableClass
+      Action = ActTimetableClass
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnTimeTableRoomType: TToolButton[4]
+    object BtnTimetableRoomType: TToolButton[4]
       Left = 224
       Top = 2
-      Action = ActTimeTableRoomType
+      Action = ActTimetableRoomType
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnTimeTableTeacher: TToolButton[5]
+    object BtnTimetableTeacher: TToolButton[5]
       Left = 247
       Top = 2
-      Action = ActTimeTableTeacher
+      Action = ActTimetableTeacher
       ParentShowHint = False
       ShowHint = True
     end
@@ -87,10 +87,10 @@ inherited TimeTableForm: TTimeTableForm
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnMejorarTimeTable: TToolButton[13]
+    object BtnMejorarTimetable: TToolButton[13]
       Left = 431
       Top = 2
-      Action = ActMejorarTimeTable
+      Action = ActMejorarTimetable
       ParentShowHint = False
       ShowHint = True
     end
@@ -115,8 +115,8 @@ inherited TimeTableForm: TTimeTableForm
       Columns = <      
         item
           PickList.Strings = (          )
-          Title.Caption = 'IdTimeTable'
-          FieldName = 'IdTimeTable'
+          Title.Caption = 'IdTimetable'
+          FieldName = 'IdTimetable'
         end      
         item
           PickList.Strings = (          )
@@ -494,7 +494,7 @@ inherited TimeTableForm: TTimeTableForm
     }
   end
   inherited DataSource: TDatasource
-    DataSet = SourceDataModule.TbTimeTable
+    DataSet = SourceDataModule.TbTimetable
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
     left = 84
@@ -506,19 +506,19 @@ inherited TimeTableForm: TTimeTableForm
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
-    object ActTimeTableClass: TAction[2]
+    object ActTimetableClass: TAction[2]
       AutoCheck = True
       Caption = 'Horario de paralelos'
       Hint = 'Horario de paralelos|Horario de paralelos'
       ImageIndex = 2
-      OnExecute = ActTimeTableClassExecute
+      OnExecute = ActTimetableClassExecute
     end
-    object ActTimeTableTeacher: TAction[3]
+    object ActTimetableTeacher: TAction[3]
       AutoCheck = True
       Caption = 'Horario de profesores'
       Hint = 'Horario de profesores|Horario de profesores'
       ImageIndex = 3
-      OnExecute = ActTimeTableTeacherExecute
+      OnExecute = ActTimetableTeacherExecute
     end
     object ActClashTeacher: TAction[4]
       AutoCheck = True
@@ -569,29 +569,29 @@ inherited TimeTableForm: TTimeTableForm
       ImageIndex = 5
       OnExecute = ActSubjectCortadaHourExecute
     end
-    object ActTimeTableRoomType: TAction[11]
+    object ActTimetableRoomType: TAction[11]
       AutoCheck = True
       Caption = 'Horario por tipo de aulas'
       Hint = 'Horario por tipo de aulas|Horario por tipo de aulas'
       ImageIndex = 6
-      OnExecute = ActTimeTableRoomTypeExecute
+      OnExecute = ActTimetableRoomTypeExecute
     end
-    object ActMejorarTimeTable: TAction[12]
+    object ActMejorarTimetable: TAction[12]
       AutoCheck = True
-      Caption = 'ActMejorarTimeTable'
+      Caption = 'ActMejorarTimetable'
       Hint = 'Mejorar horario|Mejorar horario seleccionado'
       ImageIndex = 9
-      OnExecute = ActMejorarTimeTableExecute
+      OnExecute = ActMejorarTimetableExecute
     end
   end
   object QuClashRoom: TZQuery[6]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable'
+    SortedFields = 'IdTimetable'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
       'SELECT'
-      '  IdTimeTable,'
+      '  IdTimetable,'
       '  IdDay,'
       '  IdHour,'
       '  RoomType.IdRoomType,'
@@ -599,16 +599,16 @@ inherited TimeTableForm: TTimeTableForm
       '  COUNT(*) AS Usadas,'
       '  COUNT(*) - RoomType.Number AS Clashes'
       'FROM'
-      '  (TimeTableDetail INNER JOIN Distribution ON'
-      '        TimeTableDetail.IdSubject=Distribution.IdSubject'
-      '    AND TimeTableDetail.IdLevel=Distribution.IdLevel'
-      '    AND TimeTableDetail.IdSpecialization=Distribution.IdSpecialization'
-      '    AND TimeTableDetail.IdGroupId=Distribution.IdGroupId)'
+      '  (TimetableDetail INNER JOIN Distribution ON'
+      '        TimetableDetail.IdSubject=Distribution.IdSubject'
+      '    AND TimetableDetail.IdLevel=Distribution.IdLevel'
+      '    AND TimetableDetail.IdSpecialization=Distribution.IdSpecialization'
+      '    AND TimetableDetail.IdGroupId=Distribution.IdGroupId)'
       '  INNER JOIN RoomType on RoomType.IdRoomType=Distribution.IdRoomType'
       'WHERE'
-      '  TimeTableDetail.IdTimeTable=:IdTimeTable'
+      '  TimetableDetail.IdTimetable=:IdTimetable'
       'GROUP BY'
-      '  TimeTableDetail.IdTimeTable,'
+      '  TimetableDetail.IdTimetable,'
       '  IdDay,'
       '  IdHour,'
       '  RoomType.IdRoomType,'
@@ -619,26 +619,26 @@ inherited TimeTableForm: TTimeTableForm
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimeTable
-    MasterFields = 'IdTimeTable'
-    MasterSource = SourceDataModule.DSTimeTable
-    LinkedFields = 'IdTimeTable'
-    IndexFieldNames = 'IdTimeTable Asc'
+    DataSource = SourceDataModule.DSTimetable
+    MasterFields = 'IdTimetable'
+    MasterSource = SourceDataModule.DSTimetable
+    LinkedFields = 'IdTimetable'
+    IndexFieldNames = 'IdTimetable Asc'
     left = 312
     top = 64
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuClashRoomIdTimeTable: TLongintField
+    object QuClashRoomIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -760,40 +760,40 @@ inherited TimeTableForm: TTimeTableForm
   end
   object QuClashRoomDetalle: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable;IdRoomType;IdDay;IdHour'
+    SortedFields = 'IdTimetable;IdRoomType;IdDay;IdHour'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
       'SELECT'
-      '  TimeTableDetail.IdTimeTable,'
+      '  TimetableDetail.IdTimetable,'
       '  Distribution.IdRoomType,'
-      '  TimeTableDetail.IdDay,'
-      '  TimeTableDetail.IdHour,'
-      '  TimeTableDetail.IdLevel,'
-      '  TimeTableDetail.IdSpecialization,'
-      '  TimeTableDetail.IdGroupId,'
+      '  TimetableDetail.IdDay,'
+      '  TimetableDetail.IdHour,'
+      '  TimetableDetail.IdLevel,'
+      '  TimetableDetail.IdSpecialization,'
+      '  TimetableDetail.IdGroupId,'
       '  Subject.NaSubject'
       'FROM'
-      '  (TimeTableDetail INNER JOIN Distribution ON'
-      '        TimeTableDetail.IdSubject=Distribution.IdSubject'
-      '    AND TimeTableDetail.IdLevel=Distribution.IdLevel'
-      '    AND TimeTableDetail.IdSpecialization=Distribution.IdSpecialization'
-      '    AND TimeTableDetail.IdGroupId=Distribution.IdGroupId)'
-      '  INNER JOIN Subject ON TimeTableDetail.IdSubject=Subject.IdSubject'
-      'WHERE (TimeTableDetail.IdTimeTable=:IdTimeTable)'
-      '  AND (TimeTableDetail.IdDay=:IdDay)'
-      '  AND (TimeTableDetail.IdHour=:IdHour)'
+      '  (TimetableDetail INNER JOIN Distribution ON'
+      '        TimetableDetail.IdSubject=Distribution.IdSubject'
+      '    AND TimetableDetail.IdLevel=Distribution.IdLevel'
+      '    AND TimetableDetail.IdSpecialization=Distribution.IdSpecialization'
+      '    AND TimetableDetail.IdGroupId=Distribution.IdGroupId)'
+      '  INNER JOIN Subject ON TimetableDetail.IdSubject=Subject.IdSubject'
+      'WHERE (TimetableDetail.IdTimetable=:IdTimetable)'
+      '  AND (TimetableDetail.IdDay=:IdDay)'
+      '  AND (TimetableDetail.IdHour=:IdHour)'
       '  AND (Distribution.IdRoomType=:IdRoomType)'
       'ORDER BY'
-      '  TimeTableDetail.IdLevel,'
-      '  TimeTableDetail.IdSpecialization,'
-      '  TimeTableDetail.IdGroupId,'
+      '  TimetableDetail.IdLevel,'
+      '  TimetableDetail.IdSpecialization,'
+      '  TimetableDetail.IdGroupId,'
       '  Subject.NaSubject'
     )
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end    
       item
@@ -812,16 +812,16 @@ inherited TimeTableForm: TTimeTableForm
         ParamType = ptUnknown
       end>
     DataSource = DSClashRoom
-    MasterFields = 'IdTimeTable;IdRoomType;IdDay;IdHour'
+    MasterFields = 'IdTimetable;IdRoomType;IdDay;IdHour'
     MasterSource = DSClashRoom
-    LinkedFields = 'IdTimeTable;IdRoomType;IdDay;IdHour'
-    IndexFieldNames = 'IdTimeTable Asc;IdRoomType Asc;IdDay Asc;IdHour Asc'
+    LinkedFields = 'IdTimetable;IdRoomType;IdDay;IdHour'
+    IndexFieldNames = 'IdTimetable Asc;IdRoomType Asc;IdDay Asc;IdHour Asc'
     left = 314
     top = 160
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end    
       item
@@ -839,10 +839,10 @@ inherited TimeTableForm: TTimeTableForm
         Name = 'IdRoomType'
         ParamType = ptUnknown
       end>
-    object QuClashRoomDetalleIdTimeTable: TLongintField
+    object QuClashRoomDetalleIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -983,34 +983,34 @@ inherited TimeTableForm: TTimeTableForm
   end
   object QuClashTeacherDetalle: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable;IdTeacher;IdDay;IdHour;IdLevel;IdSpecialization;IdGroupId;NaSubject'
+    SortedFields = 'IdTimetable;IdTeacher;IdDay;IdHour;IdLevel;IdSpecialization;IdGroupId;NaSubject'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
-      '  TimeTableDetail.IdTimeTable,'
+      '  TimetableDetail.IdTimetable,'
       '  Distribution.IdTeacher,'
-      '  TimeTableDetail.IdDay,'
-      '  TimeTableDetail.IdHour,'
+      '  TimetableDetail.IdDay,'
+      '  TimetableDetail.IdHour,'
       '  Distribution.IdLevel,'
       '  Distribution.IdSpecialization,'
       '  Distribution.IdGroupId,'
       '  Distribution.IdSubject'
       'FROM Distribution'
-      '  INNER JOIN TimeTableDetail'
-      '   ON (Distribution.IdLevel = TimeTableDetail.IdLevel)'
-      '  AND (Distribution.IdSpecialization = TimeTableDetail.IdSpecialization)'
-      '  AND (Distribution.IdGroupId = TimeTableDetail.IdGroupId)'
-      '  AND (Distribution.IdSubject = TimeTableDetail.IdSubject)'
-      'WHERE TimeTableDetail.IdTimeTable=:IdTimeTable'
+      '  INNER JOIN TimetableDetail'
+      '   ON (Distribution.IdLevel = TimetableDetail.IdLevel)'
+      '  AND (Distribution.IdSpecialization = TimetableDetail.IdSpecialization)'
+      '  AND (Distribution.IdGroupId = TimetableDetail.IdGroupId)'
+      '  AND (Distribution.IdSubject = TimetableDetail.IdSubject)'
+      'WHERE TimetableDetail.IdTimetable=:IdTimetable'
       '  AND Distribution.IdTeacher=:IdTeacher'
-      '  AND TimeTableDetail.IdDay=:IdDay'
-      '  AND TimeTableDetail.IdHour=:IdHour'
+      '  AND TimetableDetail.IdDay=:IdDay'
+      '  AND TimetableDetail.IdHour=:IdHour'
     )
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end    
       item
@@ -1029,16 +1029,16 @@ inherited TimeTableForm: TTimeTableForm
         ParamType = ptUnknown
       end>
     DataSource = DSClashTeacher
-    MasterFields = 'IdTimeTable;IdTeacher;IdDay;IdHour'
+    MasterFields = 'IdTimetable;IdTeacher;IdDay;IdHour'
     MasterSource = DSClashTeacher
-    LinkedFields = 'IdTimeTable;IdTeacher;IdDay;IdHour'
-    IndexFieldNames = 'IdTimeTable Asc;IdTeacher Asc;IdDay Asc;IdHour Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc;NaSubject Asc'
+    LinkedFields = 'IdTimetable;IdTeacher;IdDay;IdHour'
+    IndexFieldNames = 'IdTimetable Asc;IdTeacher Asc;IdDay Asc;IdHour Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc;NaSubject Asc'
     left = 423
     top = 160
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end    
       item
@@ -1056,10 +1056,10 @@ inherited TimeTableForm: TTimeTableForm
         Name = 'IdHour'
         ParamType = ptUnknown
       end>
-    object QuClashTeacherDetalleIdTimeTable: TLongintField
+    object QuClashTeacherDetalleIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1215,61 +1215,61 @@ inherited TimeTableForm: TTimeTableForm
   end
   object QuClashTeacher: TZQuery[10]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable;LnTeacher;NaTeacher'
+    SortedFields = 'IdTimetable;LnTeacher;NaTeacher'
     AutoCalcFields = False
     AfterScroll = QuClashTeacherAfterScroll
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
-      '  TimeTableDetail.IdTimeTable,'
+      '  TimetableDetail.IdTimetable,'
       '  Distribution.IdTeacher,'
-      '  TimeTableDetail.IdDay,'
-      '  TimeTableDetail.IdHour,'
+      '  TimetableDetail.IdDay,'
+      '  TimetableDetail.IdHour,'
       '  Teacher.LnTeacher,'
       '  Teacher.NaTeacher,'
       '  Count(*) - 1 AS Clashes'
       'FROM (Distribution'
-      '  INNER JOIN TimeTableDetail ON'
-      '       (Distribution.IdSubject = TimeTableDetail.IdSubject)'
-      #9' AND (Distribution.IdLevel = TimeTableDetail.IdLevel)'
-      #9' AND (Distribution.IdSpecialization = TimeTableDetail.IdSpecialization)'
-      #9' AND (Distribution.IdGroupId = TimeTableDetail.IdGroupId))'
+      '  INNER JOIN TimetableDetail ON'
+      '       (Distribution.IdSubject = TimetableDetail.IdSubject)'
+      #9' AND (Distribution.IdLevel = TimetableDetail.IdLevel)'
+      #9' AND (Distribution.IdSpecialization = TimetableDetail.IdSpecialization)'
+      #9' AND (Distribution.IdGroupId = TimetableDetail.IdGroupId))'
       '  INNER JOIN Teacher ON Distribution.IdTeacher = Teacher.IdTeacher'
-      'WHERE TimeTableDetail.IdTimeTable=:IdTimeTable'
+      'WHERE TimetableDetail.IdTimetable=:IdTimetable'
       'GROUP BY'
-      '  TimeTableDetail.IdTimeTable,'
+      '  TimetableDetail.IdTimetable,'
       '  Distribution.IdTeacher,'
       '  Teacher.LnTeacher,'
       '  Teacher.NaTeacher,'
-      '  TimeTableDetail.IdDay,'
-      '  TimeTableDetail.IdHour'
+      '  TimetableDetail.IdDay,'
+      '  TimetableDetail.IdHour'
       'HAVING Clashes > 0'
-      'ORDER BY TimeTableDetail.IdTimeTable, Teacher.LnTeacher, Teacher.NaTeacher'
+      'ORDER BY TimetableDetail.IdTimetable, Teacher.LnTeacher, Teacher.NaTeacher'
     )
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimeTable
-    MasterFields = 'IdTimeTable'
-    MasterSource = SourceDataModule.DSTimeTable
-    LinkedFields = 'IdTimeTable'
-    IndexFieldNames = 'IdTimeTable Asc;LnTeacher Asc;NaTeacher Asc'
+    DataSource = SourceDataModule.DSTimetable
+    MasterFields = 'IdTimetable'
+    MasterSource = SourceDataModule.DSTimetable
+    LinkedFields = 'IdTimetable'
+    IndexFieldNames = 'IdTimetable Asc;LnTeacher Asc;NaTeacher Asc'
     left = 424
     top = 63
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuClashTeacherIdTimeTable: TLongintField
-      DisplayLabel = 'TimeTable'
+    object QuClashTeacherIdTimetable: TLongintField
+      DisplayLabel = 'Timetable'
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1380,53 +1380,53 @@ inherited TimeTableForm: TTimeTableForm
   end
   object QuClashSubject: TZQuery[11]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable;NaSubject'
+    SortedFields = 'IdTimetable;NaSubject'
     AutoCalcFields = False
     AfterScroll = QuClashSubjectAfterScroll
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
-      '  TimeTableDetail.IdTimeTable,'
-      '  TimeTableDetail.IdSubject,'
+      '  TimetableDetail.IdTimetable,'
+      '  TimetableDetail.IdSubject,'
       '  Subject.NaSubject'
       'FROM'
-      '  (TimeTableDetail'
-      '  INNER JOIN TimeTableDetail as TimeTableDetail1'
-      '    ON (TimeTableDetail.IdTimeTable=TimeTableDetail1.IdTimeTable)'
-      '    AND (TimeTableDetail.IdLevel=TimeTableDetail1.IdLevel)'
-      '    AND (TimeTableDetail.IdSpecialization=TimeTableDetail1.IdSpecialization)'
-      '    AND (TimeTableDetail.IdGroupId=TimeTableDetail1.IdGroupId)'
-      '    AND (TimeTableDetail.IdDay=TimeTableDetail1.IdDay)'
-      '    AND (TimeTableDetail.IdSubject=TimeTableDetail1.IdSubject))'
+      '  (TimetableDetail'
+      '  INNER JOIN TimetableDetail as TimetableDetail1'
+      '    ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
+      '    AND (TimetableDetail.IdLevel=TimetableDetail1.IdLevel)'
+      '    AND (TimetableDetail.IdSpecialization=TimetableDetail1.IdSpecialization)'
+      '    AND (TimetableDetail.IdGroupId=TimetableDetail1.IdGroupId)'
+      '    AND (TimetableDetail.IdDay=TimetableDetail1.IdDay)'
+      '    AND (TimetableDetail.IdSubject=TimetableDetail1.IdSubject))'
       '  INNER JOIN Subject'
-      '    ON (TimeTableDetail.IdSubject=Subject.IdSubject)'
-      'WHERE (TimeTableDetail.Session<>TimeTableDetail1.Session)'
-      '  AND (TimeTableDetail.IdTimeTable=:IdTimeTable)'
+      '    ON (TimetableDetail.IdSubject=Subject.IdSubject)'
+      'WHERE (TimetableDetail.Session<>TimetableDetail1.Session)'
+      '  AND (TimetableDetail.IdTimetable=:IdTimetable)'
       'ORDER BY Subject.NaSubject'
     )
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimeTable
-    MasterFields = 'IdTimeTable'
-    MasterSource = SourceDataModule.DSTimeTable
-    LinkedFields = 'IdTimeTable'
-    IndexFieldNames = 'IdTimeTable Asc;NaSubject Asc'
+    DataSource = SourceDataModule.DSTimetable
+    MasterFields = 'IdTimetable'
+    MasterSource = SourceDataModule.DSTimetable
+    LinkedFields = 'IdTimetable'
+    IndexFieldNames = 'IdTimetable Asc;NaSubject Asc'
     left = 541
     top = 64
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuClashSubjectIdTimeTable: TLongintField
+    object QuClashSubjectIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1459,35 +1459,35 @@ inherited TimeTableForm: TTimeTableForm
   end
   object QuClashSubjectDetalle: TZQuery[12]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
+    SortedFields = 'IdTimetable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
-      '  TimeTableDetail.IdTimeTable,'
-      '  TimeTableDetail.IdSubject,'
-      '  TimeTableDetail.IdLevel,'
-      '  TimeTableDetail.IdSpecialization,'
-      '  TimeTableDetail.IdGroupId,'
-      '  TimeTableDetail.IdDay,'
-      '  TimeTableDetail.IdHour'
+      '  TimetableDetail.IdTimetable,'
+      '  TimetableDetail.IdSubject,'
+      '  TimetableDetail.IdLevel,'
+      '  TimetableDetail.IdSpecialization,'
+      '  TimetableDetail.IdGroupId,'
+      '  TimetableDetail.IdDay,'
+      '  TimetableDetail.IdHour'
       'FROM'
-      '  TimeTableDetail'
-      '  INNER JOIN TimeTableDetail as TimeTableDetail1'
-      '     ON (TimeTableDetail.IdTimeTable=TimeTableDetail1.IdTimeTable)'
-      '    AND (TimeTableDetail.IdLevel=TimeTableDetail1.IdLevel)'
-      '    AND (TimeTableDetail.IdSpecialization=TimeTableDetail1.IdSpecialization)'
-      '    AND (TimeTableDetail.IdGroupId=TimeTableDetail1.IdGroupId)'
-      '    AND (TimeTableDetail.IdDay=TimeTableDetail1.IdDay)'
-      '    AND (TimeTableDetail.IdSubject=TimeTableDetail1.IdSubject)'
-      'WHERE (TimeTableDetail.Session<>TimeTableDetail1.Session)'
-      '  AND (TimeTableDetail.IdTimeTable=:IdTimeTable)'
-      '  AND (TimeTableDetail.IdSubject=:IdSubject)'
+      '  TimetableDetail'
+      '  INNER JOIN TimetableDetail as TimetableDetail1'
+      '     ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
+      '    AND (TimetableDetail.IdLevel=TimetableDetail1.IdLevel)'
+      '    AND (TimetableDetail.IdSpecialization=TimetableDetail1.IdSpecialization)'
+      '    AND (TimetableDetail.IdGroupId=TimetableDetail1.IdGroupId)'
+      '    AND (TimetableDetail.IdDay=TimetableDetail1.IdDay)'
+      '    AND (TimetableDetail.IdSubject=TimetableDetail1.IdSubject)'
+      'WHERE (TimetableDetail.Session<>TimetableDetail1.Session)'
+      '  AND (TimetableDetail.IdTimetable=:IdTimetable)'
+      '  AND (TimetableDetail.IdSubject=:IdSubject)'
     )
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end    
       item
@@ -1496,16 +1496,16 @@ inherited TimeTableForm: TTimeTableForm
         ParamType = ptUnknown
       end>
     DataSource = DSClashSubject
-    MasterFields = 'IdTimeTable;IdSubject'
+    MasterFields = 'IdTimetable;IdSubject'
     MasterSource = DSClashSubject
-    LinkedFields = 'IdTimeTable;IdSubject'
-    IndexFieldNames = 'IdTimeTable Asc;IdSubject Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc;IdDay Asc;IdHour Asc'
+    LinkedFields = 'IdTimetable;IdSubject'
+    IndexFieldNames = 'IdTimetable Asc;IdSubject Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc;IdDay Asc;IdHour Asc'
     left = 541
     top = 160
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end    
       item
@@ -1513,10 +1513,10 @@ inherited TimeTableForm: TTimeTableForm
         Name = 'IdSubject'
         ParamType = ptUnknown
       end>
-    object QuClashSubjectDetalleIdTimeTable: TLongintField
+    object QuClashSubjectDetalleIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1672,29 +1672,29 @@ inherited TimeTableForm: TTimeTableForm
       Size = 10
     end
   end
-  object QuTimeTableDetailSubjectRestriction: TZQuery[13]
+  object QuTimetableDetailSubjectRestriction: TZQuery[13]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable'
+    SortedFields = 'IdTimetable'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
-      '  TimeTableDetail.IdTimeTable,'
+      '  TimetableDetail.IdTimetable,'
       '  SubjectRestriction.IdSubjectRestrictionType,'
       '  Subject.NaSubject,'
       '  SubjectRestriction.IdDay,'
       '  SubjectRestriction.IdHour,'
-      '  TimeTableDetail.IdLevel,'
-      '  TimeTableDetail.IdSpecialization,'
-      '  TimeTableDetail.IdGroupId'
+      '  TimetableDetail.IdLevel,'
+      '  TimetableDetail.IdSpecialization,'
+      '  TimetableDetail.IdGroupId'
       'FROM'
-      '  ((TimeTableDetail INNER JOIN SubjectRestriction'
-      '  ON (TimeTableDetail.IdSubject=SubjectRestriction.IdSubject)'
-      '  AND (TimeTableDetail.IdDay=SubjectRestriction.IdDay)'
-      '  AND (TimeTableDetail.IdHour=SubjectRestriction.IdHour))'
+      '  ((TimetableDetail INNER JOIN SubjectRestriction'
+      '  ON (TimetableDetail.IdSubject=SubjectRestriction.IdSubject)'
+      '  AND (TimetableDetail.IdDay=SubjectRestriction.IdDay)'
+      '  AND (TimetableDetail.IdHour=SubjectRestriction.IdHour))'
       '  INNER JOIN SubjectRestrictionType ON SubjectRestriction.IdSubjectRestrictionType=SubjectRestrictionType.IdSubjectRestrictionType)'
-      '  INNER JOIN Subject ON Subject.IdSubject=TimeTableDetail.IdSubject'
-      'WHERE TimeTableDetail.IdTimeTable=:IdTimeTable'
+      '  INNER JOIN Subject ON Subject.IdSubject=TimetableDetail.IdSubject'
+      'WHERE TimetableDetail.IdTimetable=:IdTimetable'
       'ORDER BY '
       '  SubjectRestriction.IdSubjectRestrictionType DESC,'
       '  Subject.NaSubject,'
@@ -1704,26 +1704,26 @@ inherited TimeTableForm: TTimeTableForm
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimeTable
-    MasterFields = 'IdTimeTable'
-    MasterSource = SourceDataModule.DSTimeTable
-    LinkedFields = 'IdTimeTable'
-    IndexFieldNames = 'IdTimeTable Asc'
+    DataSource = SourceDataModule.DSTimetable
+    MasterFields = 'IdTimetable'
+    MasterSource = SourceDataModule.DSTimetable
+    LinkedFields = 'IdTimetable'
+    IndexFieldNames = 'IdTimetable Asc'
     left = 184
     top = 212
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuTimeTableDetailSubjectRestrictionIdTimeTable: TLongintField
+    object QuTimetableDetailSubjectRestrictionIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1731,7 +1731,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailSubjectRestrictionNaSubjectRestrictionType: TStringField
+    object QuTimetableDetailSubjectRestrictionNaSubjectRestrictionType: TStringField
       DisplayLabel = 'Tipo prohib. mat.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1747,7 +1747,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuTimeTableDetailSubjectRestrictionNaSubject: TStringField
+    object QuTimetableDetailSubjectRestrictionNaSubject: TStringField
       DisplayLabel = 'Subject'
       DisplayWidth = 20
       FieldKind = fkData
@@ -1758,7 +1758,7 @@ inherited TimeTableForm: TTimeTableForm
       ReadOnly = False
       Required = False
     end
-    object QuTimeTableDetailSubjectRestrictionIdHour: TLongintField
+    object QuTimetableDetailSubjectRestrictionIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -1769,7 +1769,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailSubjectRestrictionIdDay: TLongintField
+    object QuTimetableDetailSubjectRestrictionIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -1780,7 +1780,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailSubjectRestrictionIdSubjectRestrictionType: TLongintField
+    object QuTimetableDetailSubjectRestrictionIdSubjectRestrictionType: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSubjectRestrictionType'
@@ -1791,7 +1791,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailSubjectRestrictionIdLevel: TLongintField
+    object QuTimetableDetailSubjectRestrictionIdLevel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdLevel'
@@ -1802,7 +1802,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailSubjectRestrictionIdSpecialization: TLongintField
+    object QuTimetableDetailSubjectRestrictionIdSpecialization: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSpecialization'
@@ -1813,7 +1813,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailSubjectRestrictionIdGroupId: TLongintField
+    object QuTimetableDetailSubjectRestrictionIdGroupId: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdGroupId'
@@ -1824,7 +1824,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailSubjectRestrictionNaDay: TStringField
+    object QuTimetableDetailSubjectRestrictionNaDay: TStringField
       DisplayLabel = 'Day'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1840,7 +1840,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuTimeTableDetailSubjectRestrictionNaHour: TStringField
+    object QuTimetableDetailSubjectRestrictionNaHour: TStringField
       DisplayLabel = 'Hour'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1856,7 +1856,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuTimeTableDetailSubjectRestrictionAbLevel: TStringField
+    object QuTimetableDetailSubjectRestrictionAbLevel: TStringField
       DisplayLabel = 'Level'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1872,7 +1872,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Size = 5
     end
-    object QuTimeTableDetailSubjectRestrictionAbSpecialization: TStringField
+    object QuTimetableDetailSubjectRestrictionAbSpecialization: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1888,7 +1888,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuTimeTableDetailSubjectRestrictionNaGroupId: TStringField
+    object QuTimetableDetailSubjectRestrictionNaGroupId: TStringField
       DisplayLabel = 'Par.'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1905,14 +1905,14 @@ inherited TimeTableForm: TTimeTableForm
       Size = 5
     end
   end
-  object QuTimeTableDetailTeacherRestriction: TZQuery[14]
+  object QuTimetableDetailTeacherRestriction: TZQuery[14]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable'
+    SortedFields = 'IdTimetable'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
-      '  TimeTableDetail.IdTimeTable,'
+      '  TimetableDetail.IdTimetable,'
       '  TeacherRestriction.IdTeacherRestrictionType,'
       '  Teacher.LnTeacher,'
       '  Teacher.NaTeacher,'
@@ -1922,18 +1922,18 @@ inherited TimeTableForm: TTimeTableForm
       '  Distribution.IdSpecialization,'
       '  Distribution.IdGroupId'
       'FROM'
-      '  ((TimeTableDetail INNER JOIN Distribution'
-      '  ON (TimeTableDetail.IdSubject=Distribution.IdSubject)'
-      '  AND (TimeTableDetail.IdLevel=Distribution.IdLevel)'
-      '  AND (TimeTableDetail.IdSpecialization=Distribution.IdSpecialization)'
-      '  AND (TimeTableDetail.IdGroupId=Distribution.IdGroupId))'
+      '  ((TimetableDetail INNER JOIN Distribution'
+      '  ON (TimetableDetail.IdSubject=Distribution.IdSubject)'
+      '  AND (TimetableDetail.IdLevel=Distribution.IdLevel)'
+      '  AND (TimetableDetail.IdSpecialization=Distribution.IdSpecialization)'
+      '  AND (TimetableDetail.IdGroupId=Distribution.IdGroupId))'
       '  INNER JOIN TeacherRestriction'
-      '  ON (TeacherRestriction.IdDay=TimeTableDetail.IdDay)'
-      '  AND (TeacherRestriction.IdHour=TimeTableDetail.IdHour)'
+      '  ON (TeacherRestriction.IdDay=TimetableDetail.IdDay)'
+      '  AND (TeacherRestriction.IdHour=TimetableDetail.IdHour)'
       '  AND (TeacherRestriction.IdTeacher=Distribution.IdTeacher))'
       '  INNER JOIN Teacher ON Teacher.IdTeacher=TeacherRestriction.IdTeacher'
       'WHERE'
-      '  TimeTableDetail.IdTimeTable=:IdTimeTable'
+      '  TimetableDetail.IdTimetable=:IdTimetable'
       'ORDER BY'
       '  TeacherRestriction.IdTeacherRestrictionType DESC,'
       '  Teacher.LnTeacher, Teacher.NaTeacher,'
@@ -1943,26 +1943,26 @@ inherited TimeTableForm: TTimeTableForm
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimeTable
-    MasterFields = 'IdTimeTable'
-    MasterSource = SourceDataModule.DSTimeTable
-    LinkedFields = 'IdTimeTable'
-    IndexFieldNames = 'IdTimeTable Asc'
+    DataSource = SourceDataModule.DSTimetable
+    MasterFields = 'IdTimetable'
+    MasterSource = SourceDataModule.DSTimetable
+    LinkedFields = 'IdTimetable'
+    IndexFieldNames = 'IdTimetable Asc'
     left = 401
     top = 212
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuTimeTableDetailTeacherRestrictionIdTimeTable: TLongintField
+    object QuTimetableDetailTeacherRestrictionIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1970,7 +1970,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailTeacherRestrictionIdTeacherRestrictionType: TLongintField
+    object QuTimetableDetailTeacherRestrictionIdTeacherRestrictionType: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTeacherRestrictionType'
@@ -1981,7 +1981,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailTeacherRestrictionLnTeacher: TStringField
+    object QuTimetableDetailTeacherRestrictionLnTeacher: TStringField
       DisplayWidth = 15
       FieldKind = fkData
       FieldName = 'LnTeacher'
@@ -1992,7 +1992,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 15
     end
-    object QuTimeTableDetailTeacherRestrictionNaTeacher: TStringField
+    object QuTimetableDetailTeacherRestrictionNaTeacher: TStringField
       DisplayWidth = 15
       FieldKind = fkData
       FieldName = 'NaTeacher'
@@ -2003,7 +2003,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 15
     end
-    object QuTimeTableDetailTeacherRestrictionIdDay: TLongintField
+    object QuTimetableDetailTeacherRestrictionIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -2014,7 +2014,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailTeacherRestrictionIdHour: TLongintField
+    object QuTimetableDetailTeacherRestrictionIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -2025,7 +2025,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailTeacherRestrictionIdLevel: TLongintField
+    object QuTimetableDetailTeacherRestrictionIdLevel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdLevel'
@@ -2036,7 +2036,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailTeacherRestrictionIdSpecialization: TLongintField
+    object QuTimetableDetailTeacherRestrictionIdSpecialization: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSpecialization'
@@ -2047,7 +2047,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailTeacherRestrictionIdGroupId: TLongintField
+    object QuTimetableDetailTeacherRestrictionIdGroupId: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdGroupId'
@@ -2058,7 +2058,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Visible = False
     end
-    object QuTimeTableDetailTeacherRestrictionNaDay: TStringField
+    object QuTimetableDetailTeacherRestrictionNaDay: TStringField
       DisplayLabel = 'Day'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -2074,7 +2074,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuTimeTableDetailTeacherRestrictionNaTeacherRestrictionType: TStringField
+    object QuTimetableDetailTeacherRestrictionNaTeacherRestrictionType: TStringField
       DisplayLabel = 'Tipo prohib. prof.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -2090,7 +2090,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuTimeTableDetailTeacherRestrictionNaHour: TStringField
+    object QuTimetableDetailTeacherRestrictionNaHour: TStringField
       DisplayLabel = 'Hour'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -2106,7 +2106,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuTimeTableDetailTeacherRestrictionNaLevel: TStringField
+    object QuTimetableDetailTeacherRestrictionNaLevel: TStringField
       DisplayLabel = 'Level'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -2122,7 +2122,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = False
       Size = 5
     end
-    object QuTimeTableDetailTeacherRestrictionNaSpecialization: TStringField
+    object QuTimetableDetailTeacherRestrictionNaSpecialization: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -2138,7 +2138,7 @@ inherited TimeTableForm: TTimeTableForm
       Required = True
       Size = 10
     end
-    object QuTimeTableDetailTeacherRestrictionNaGroupId: TStringField
+    object QuTimetableDetailTeacherRestrictionNaGroupId: TStringField
       DisplayLabel = 'Par.'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -2157,54 +2157,54 @@ inherited TimeTableForm: TTimeTableForm
   end
   object QuSubjectCortadaDay: TZQuery[15]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable;NaSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
+    SortedFields = 'IdTimetable;NaSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
     AutoCalcFields = False
     AfterScroll = QuClashSubjectAfterScroll
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
-      '  TimeTableDetail.IdTimeTable,'
-      '  TimeTableDetail.IdLevel,'
-      '  TimeTableDetail.IdSpecialization,'
-      '  TimeTableDetail.IdGroupId,'
-      '  TimeTableDetail.IdDay,'
-      '  TimeTableDetail.IdHour,'
-      '  TimeTableDetail.IdSubject'
+      '  TimetableDetail.IdTimetable,'
+      '  TimetableDetail.IdLevel,'
+      '  TimetableDetail.IdSpecialization,'
+      '  TimetableDetail.IdGroupId,'
+      '  TimetableDetail.IdDay,'
+      '  TimetableDetail.IdHour,'
+      '  TimetableDetail.IdSubject'
       'FROM'
-      '  TimeTableDetail'
-      '  INNER JOIN TimeTableDetail TimeTableDetail1'
-      '    ON (TimeTableDetail.IdTimeTable=TimeTableDetail1.IdTimeTable)'
-      '    AND (TimeTableDetail.IdLevel=TimeTableDetail1.IdLevel)'
-      '    AND (TimeTableDetail.IdGroupId=TimeTableDetail1.IdGroupId)'
-      '    AND (TimeTableDetail.Session=TimeTableDetail1.Session)'
-      '    AND (TimeTableDetail.IdSubject=TimeTableDetail1.IdSubject)'
-      'WHERE (TimeTableDetail.IdTimeTable=:IdTimeTable)'
-      '  AND (TimeTableDetail.IdDay<>TimeTableDetail1.IdDay)'
+      '  TimetableDetail'
+      '  INNER JOIN TimetableDetail TimetableDetail1'
+      '    ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
+      '    AND (TimetableDetail.IdLevel=TimetableDetail1.IdLevel)'
+      '    AND (TimetableDetail.IdGroupId=TimetableDetail1.IdGroupId)'
+      '    AND (TimetableDetail.Session=TimetableDetail1.Session)'
+      '    AND (TimetableDetail.IdSubject=TimetableDetail1.IdSubject)'
+      'WHERE (TimetableDetail.IdTimetable=:IdTimetable)'
+      '  AND (TimetableDetail.IdDay<>TimetableDetail1.IdDay)'
     )
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimeTable
-    MasterFields = 'IdTimeTable'
-    MasterSource = SourceDataModule.DSTimeTable
-    LinkedFields = 'IdTimeTable'
-    IndexFieldNames = 'IdTimeTable Asc;NaSubject Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc;IdDay Asc;IdHour Asc'
+    DataSource = SourceDataModule.DSTimetable
+    MasterFields = 'IdTimetable'
+    MasterSource = SourceDataModule.DSTimetable
+    LinkedFields = 'IdTimetable'
+    IndexFieldNames = 'IdTimetable Asc;NaSubject Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc;IdDay Asc;IdHour Asc'
     left = 544
     top = 212
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuSubjectCortadaDayIdTimeTable: TLongintField
-      DisplayLabel = 'TimeTable'
+    object QuSubjectCortadaDayIdTimetable: TLongintField
+      DisplayLabel = 'Timetable'
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -2376,14 +2376,14 @@ inherited TimeTableForm: TTimeTableForm
   end
   object QuSubjectCortadaHour: TZQuery[16]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable'
+    SortedFields = 'IdTimetable'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
-      'SELECT IdTimeTable, IdDay, IdHour'
-      'FROM TimeTable, Day, Hour'
+      'SELECT IdTimetable, IdDay, IdHour'
+      'FROM Timetable, Day, Hour'
       'WHERE'
-      '  IdTimeTable=:IdTimeTable'
+      '  IdTimetable=:IdTimetable'
       '  AND'
       ' ('
       '  SELECT COUNT(*) FROM TimeSlot'
@@ -2392,46 +2392,46 @@ inherited TimeTableForm: TTimeTableForm
       '  ) IS NULL'
       '  AND ('
       '  SELECT'
-      '    MAX(TimeTableDetail.IdHour)'
+      '    MAX(TimetableDetail.IdHour)'
       '  FROM'
-      '    TimeTableDetail'
-      '    INNER JOIN TimeTableDetail TimeTableDetail1'
-      '      ON (TimeTableDetail.IdTimeTable=TimeTableDetail1.IdTimeTable)'
-      '      AND (TimeTableDetail.IdLevel=TimeTableDetail1.IdLevel)'
-      '      AND (TimeTableDetail.IdGroupId=TimeTableDetail1.IdGroupId)'
-      '      AND (TimeTableDetail.Session=TimeTableDetail1.Session)'
-      '      AND (TimeTableDetail.IdSubject=TimeTableDetail1.IdSubject)'
-      '      AND (TimeTableDetail.IdDay=TimeTableDetail1.IdDay)'
-      '    WHERE (TimeTableDetail.IdTimeTable=TimeTable.IdTimeTable)'
-      '      AND (TimeTableDetail.IdDay=Day.IdDay)'
-      '      AND(TimeTableDetail.IdHour>Hour.IdHour)'
-      '      AND(TimeTableDetail1.IdHour<Hour.IdHour)'
+      '    TimetableDetail'
+      '    INNER JOIN TimetableDetail TimetableDetail1'
+      '      ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
+      '      AND (TimetableDetail.IdLevel=TimetableDetail1.IdLevel)'
+      '      AND (TimetableDetail.IdGroupId=TimetableDetail1.IdGroupId)'
+      '      AND (TimetableDetail.Session=TimetableDetail1.Session)'
+      '      AND (TimetableDetail.IdSubject=TimetableDetail1.IdSubject)'
+      '      AND (TimetableDetail.IdDay=TimetableDetail1.IdDay)'
+      '    WHERE (TimetableDetail.IdTimetable=Timetable.IdTimetable)'
+      '      AND (TimetableDetail.IdDay=Day.IdDay)'
+      '      AND(TimetableDetail.IdHour>Hour.IdHour)'
+      '      AND(TimetableDetail1.IdHour<Hour.IdHour)'
       '  ) IS NOT NULL'
     )
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimeTable
-    MasterFields = 'IdTimeTable'
-    MasterSource = SourceDataModule.DSTimeTable
-    LinkedFields = 'IdTimeTable'
-    IndexFieldNames = 'IdTimeTable Asc'
+    DataSource = SourceDataModule.DSTimetable
+    MasterFields = 'IdTimetable'
+    MasterSource = SourceDataModule.DSTimetable
+    LinkedFields = 'IdTimetable'
+    IndexFieldNames = 'IdTimetable Asc'
     left = 187
     top = 65
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuSubjectCortadaHourIdTimeTable: TLongintField
-      DisplayLabel = 'TimeTable'
+    object QuSubjectCortadaHourIdTimetable: TLongintField
+      DisplayLabel = 'Timetable'
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -2496,40 +2496,40 @@ inherited TimeTableForm: TTimeTableForm
   end
   object QuSubjectCortadaHourDetalle: TZQuery[17]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimeTable;IdDay;IdHour;IdLevel;IdSpecialization;IdGroupId'
+    SortedFields = 'IdTimetable;IdDay;IdHour;IdLevel;IdSpecialization;IdGroupId'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
-      '  TimeTableDetail.IdTimeTable,'
-      '  TimeTableDetail.IdLevel,'
-      '  TimeTableDetail.IdSpecialization,'
-      '  TimeTableDetail.IdGroupId,'
-      '  TimeTableDetail.IdDay,'
-      '  TimeTableDetail.IdHour,'
-      '  TimeTableDetail1.IdHour as IdHour0,'
-      '  TimeTableDetail.IdSubject'
+      '  TimetableDetail.IdTimetable,'
+      '  TimetableDetail.IdLevel,'
+      '  TimetableDetail.IdSpecialization,'
+      '  TimetableDetail.IdGroupId,'
+      '  TimetableDetail.IdDay,'
+      '  TimetableDetail.IdHour,'
+      '  TimetableDetail1.IdHour as IdHour0,'
+      '  TimetableDetail.IdSubject'
       'FROM'
-      '  TimeTableDetail'
-      '  INNER JOIN TimeTableDetail TimeTableDetail1'
-      '    ON (TimeTableDetail.IdTimeTable=TimeTableDetail1.IdTimeTable)'
-      '    AND (TimeTableDetail.IdLevel=TimeTableDetail1.IdLevel)'
-      '    AND (TimeTableDetail.IdGroupId=TimeTableDetail1.IdGroupId)'
-      '    AND (TimeTableDetail.Session=TimeTableDetail1.Session)'
-      '    AND (TimeTableDetail.IdSubject=TimeTableDetail1.IdSubject)'
-      '    AND (TimeTableDetail.IdDay=TimeTableDetail1.IdDay)'
+      '  TimetableDetail'
+      '  INNER JOIN TimetableDetail TimetableDetail1'
+      '    ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
+      '    AND (TimetableDetail.IdLevel=TimetableDetail1.IdLevel)'
+      '    AND (TimetableDetail.IdGroupId=TimetableDetail1.IdGroupId)'
+      '    AND (TimetableDetail.Session=TimetableDetail1.Session)'
+      '    AND (TimetableDetail.IdSubject=TimetableDetail1.IdSubject)'
+      '    AND (TimetableDetail.IdDay=TimetableDetail1.IdDay)'
       'WHERE'
-      '  (TimeTableDetail.IdTimeTable=:IdTimeTable)'
-      '    AND (TimeTableDetail.IdDay=:IdDay)'
-      '    AND ((TimeTableDetail.IdHour>:IdHour)'
-      '     AND (TimeTableDetail1.IdHour<:IdHour)'
-      '     OR  (TimeTableDetail.IdHour<:IdHour)'
-      '     AND (TimeTableDetail1.IdHour>:IdHour))'
+      '  (TimetableDetail.IdTimetable=:IdTimetable)'
+      '    AND (TimetableDetail.IdDay=:IdDay)'
+      '    AND ((TimetableDetail.IdHour>:IdHour)'
+      '     AND (TimetableDetail1.IdHour<:IdHour)'
+      '     OR  (TimetableDetail.IdHour<:IdHour)'
+      '     AND (TimetableDetail1.IdHour>:IdHour))'
     )
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end    
       item
@@ -2544,38 +2544,38 @@ inherited TimeTableForm: TTimeTableForm
       end>
     Properties.Strings = (
       'SELECT DISTINCT'
-      '  TimeTableDetail.IdLevel,'
-      '  TimeTableDetail.IdSpecialization,'
-      '  TimeTableDetail.IdGroupId,'
-      '  TimeTableDetail.IdDay,'
-      '  TimeTableDetail.IdHour,'
-      '  TimeTableDetail.IdSubject'
+      '  TimetableDetail.IdLevel,'
+      '  TimetableDetail.IdSpecialization,'
+      '  TimetableDetail.IdGroupId,'
+      '  TimetableDetail.IdDay,'
+      '  TimetableDetail.IdHour,'
+      '  TimetableDetail.IdSubject'
       'FROM'
-      '  TimeTableDetail'
-      '  INNER JOIN TimeTableDetail TimeTableDetail1'
-      '    ON (TimeTableDetail.IdTimeTable=TimeTableDetail1.IdTimeTable)'
-      '    AND (TimeTableDetail.IdLevel=TimeTableDetail1.IdLevel)'
-      '    AND (TimeTableDetail.IdGroupId=TimeTableDetail1.IdGroupId)'
-      '    AND (TimeTableDetail.Session=TimeTableDetail1.Session)'
-      '    AND (TimeTableDetail.IdSubject=TimeTableDetail1.IdSubject)'
-      '    AND (TimeTableDetail.IdDay=TimeTableDetail1.IdDay)'
+      '  TimetableDetail'
+      '  INNER JOIN TimetableDetail TimetableDetail1'
+      '    ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
+      '    AND (TimetableDetail.IdLevel=TimetableDetail1.IdLevel)'
+      '    AND (TimetableDetail.IdGroupId=TimetableDetail1.IdGroupId)'
+      '    AND (TimetableDetail.Session=TimetableDetail1.Session)'
+      '    AND (TimetableDetail.IdSubject=TimetableDetail1.IdSubject)'
+      '    AND (TimetableDetail.IdDay=TimetableDetail1.IdDay)'
       'WHERE'
-      '  (TimeTableDetail.IdTimeTable=:IdTimeTable)'
-      '    AND(TimeTableDetail.IdDay=:IdDay)'
-      '    AND((TimeTableDetail.IdHour>:IdHour)AND(TimeTableDetail1.IdHour<:IdHour)'
-      '    OR(TimeTableDetail.IdHour<:IdHour)AND(TimeTableDetail1.IdHour>:IdHour))'
+      '  (TimetableDetail.IdTimetable=:IdTimetable)'
+      '    AND(TimetableDetail.IdDay=:IdDay)'
+      '    AND((TimetableDetail.IdHour>:IdHour)AND(TimetableDetail1.IdHour<:IdHour)'
+      '    OR(TimetableDetail.IdHour<:IdHour)AND(TimetableDetail1.IdHour>:IdHour))'
     )
     DataSource = DSSubjectCortadaHour
-    MasterFields = 'IdTimeTable;IdDay;IdHour'
+    MasterFields = 'IdTimetable;IdDay;IdHour'
     MasterSource = DSSubjectCortadaHour
-    LinkedFields = 'IdTimeTable;IdDay;IdHour'
-    IndexFieldNames = 'IdTimeTable Asc;IdDay Asc;IdHour Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc'
+    LinkedFields = 'IdTimetable;IdDay;IdHour'
+    IndexFieldNames = 'IdTimetable Asc;IdDay Asc;IdHour Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc'
     left = 184
     top = 161
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdTimeTable'
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end    
       item
@@ -2588,10 +2588,10 @@ inherited TimeTableForm: TTimeTableForm
         Name = 'IdHour'
         ParamType = ptUnknown
       end>
-    object QuSubjectCortadaHourDetalleIdTimeTable: TLongintField
+    object QuSubjectCortadaHourDetalleIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTimeTable'
+      FieldName = 'IdTimetable'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

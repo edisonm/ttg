@@ -25,7 +25,7 @@ type
     el valor de la funcion objetivo, el constructor, funciones que
     permiten guardar el horario encontrado en una base de datos, metodos que
     consisten en los operadores geneticos aplicados sobre la poblacion, como
-    son cruce, mutacion, etc., TimeTableModel al que se aplica el algoritmo
+    son cruce, mutacion, etc., TimetableModel al que se aplica el algoritmo
     evolutivo, metodo que permite ejecutar el algoritmo evolutivo, Eventos que
     se disparan cada cierto numero de generaciones y cuando mejora la solucion.
     }
@@ -54,10 +54,10 @@ type
     procedure ReportParameters(ASummary: TStrings);
     constructor Create(AModel: TModel; const ASharedDirectory: string;
       APollinationProbability: Double; APopulationSize, AMaxIteration: Integer;
-      ACrossProbability, AMutationProbability, AReparationProbability: Double; const AInitialTimeTables: string);
+      ACrossProbability, AMutationProbability, AReparationProbability: Double; const AInitialTimetables: string);
     procedure FixIndividuals(const Individuals: string);
     destructor Destroy; override;
-    procedure SaveSolutionToDatabase(IdTimeTable: Integer;
+    procedure SaveSolutionToDatabase(IdTimetable: Integer;
       const AExtraInfo: string; TimeIni, TimeEnd: TDateTime); override;
     procedure SaveBestToStream(AStream: TStream);
     procedure Execute(RefreshInterval: Integer); override;
@@ -99,7 +99,7 @@ end;
 
 constructor TEvolElitist.Create(AModel: TModel; const ASharedDirectory: string;
   APollinationProbability: Double; APopulationSize, AMaxIteration: Integer; ACrossProbability,
-  AMutationProbability, AReparationProbability: Double; const AInitialTimeTables: string);
+  AMutationProbability, AReparationProbability: Double; const AInitialTimetables: string);
 begin
   inherited Create(AModel, ASharedDirectory, APollinationProbability);
   SetPopulationSize(APopulationSize);
@@ -107,7 +107,7 @@ begin
   FCrossProbability := ACrossProbability;
   FMutationProbability := AMutationProbability;
   FReparationProbability := AReparationProbability;
-  FixIndividuals(AInitialTimeTables);
+  FixIndividuals(AInitialTimetables);
 end;
 
 destructor TEvolElitist.Destroy;
@@ -368,7 +368,7 @@ begin
     OnRecordBest(Self);}
 end;
 
-procedure TEvolElitist.SaveSolutionToDatabase(IdTimeTable: Integer;
+procedure TEvolElitist.SaveSolutionToDatabase(IdTimetable: Integer;
   const AExtraInfo: string; TimeIni, TimeEnd: TDateTime);
 var
   Report: TStrings;
@@ -382,7 +382,7 @@ begin
       Add(AExtraInfo);
     ReportParameters(Report);
     BestIndividual.ReportValues(Report);
-    BestIndividual.SaveToDataModule(IdTimeTable, TimeIni, TimeEnd, Report);
+    BestIndividual.SaveToDataModule(IdTimetable, TimeIni, TimeEnd, Report);
   finally
     Free;
   end;
