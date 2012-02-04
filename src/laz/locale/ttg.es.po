@@ -655,7 +655,9 @@ msgid "About..."
 msgstr "Acerca de..."
 
 #: tmainform.actabout.hint
-msgid "About|Information about this program"
+#, fuzzy
+#| msgid "About|Information about this program"
+msgid "About...formacion referente a este programa"
 msgstr "Acerca de|Informacion referente a este programa"
 
 #: tmainform.actchangepasswd.caption
@@ -663,7 +665,9 @@ msgid "Change password..."
 msgstr "Cambiar clave..."
 
 #: tmainform.actchangepasswd.hint
-msgid "Change password|Allows to change the system password"
+#, fuzzy
+#| msgid "Change password|Allows to change the system password"
+msgid "Cambiar Clave|Permite cambiar la clave de acceso al sistema"
 msgstr "Cambiar clave|Permite cambiar la clave de acceso al sistema"
 
 #: tmainform.actcheckfeasibility.caption
@@ -682,11 +686,13 @@ msgstr "Clases"
 msgid "Courses|Courses with its given groups"
 msgstr "Cursos|Cursos con sus respectivos paralelos"
 
-#: tmainform.actconfigure.caption
+#: tmainform.actconfigurar.caption
+msgctxt "tmainform.actconfigurar.caption"
 msgid "Configure..."
 msgstr "Configurar..."
 
-#: tmainform.actconfigure.hint
+#: tmainform.actconfigurar.hint
+msgctxt "tmainform.actconfigurar.hint"
 msgid "Configure|Edit the system configuration"
 msgstr "Configurar|Editar la configuracion del sistema"
 
@@ -705,14 +711,6 @@ msgstr "Dias laborables"
 #: tmainform.actday.hint
 msgid "Working days|Working days"
 msgstr "Dias laborables|Dias laborables"
-
-#: tmainform.actmaketimetable.caption
-msgid "Make Timetables"
-msgstr "Elaborar Horarios"
-
-#: tmainform.actmaketimetable.hint
-msgid "Make Timetables|Make Timetables"
-msgstr "Elaborar Horarios|Elaborar Horarios"
 
 #: tmainform.actexit.caption
 msgid "Salir"
@@ -765,6 +763,15 @@ msgstr "Niveles"
 #: tmainform.actlevel.hint
 msgid "Niveles|Niveles"
 msgstr "Niveles|Niveles"
+
+#: tmainform.actmaketimetable.caption
+msgid "Make Timetables"
+msgstr "Elaborar Horarios"
+
+#: tmainform.actmaketimetable.hint
+msgctxt "tmainform.actmaketimetable.hint"
+msgid "Make Timetables|Make Timetables"
+msgstr "Elaborar Horarios|Elaborar Horarios"
 
 #: tmainform.actmejorartimetable.caption
 msgid "Mejorar horario"
@@ -872,6 +879,7 @@ msgid "Datos|Ingreso de datos"
 msgstr "Datos|Ingreso de datos"
 
 #: tmainform.mielaborartimetable.hint
+msgctxt "tmainform.mielaborartimetable.hint"
 msgid "Make Timetables|Make Timetables"
 msgstr "Make Timetables|Make Timetables"
 

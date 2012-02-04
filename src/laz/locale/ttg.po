@@ -706,14 +706,6 @@ msgstr ""
 msgid "Working days|Working days"
 msgstr ""
 
-#: tmainform.actmaketimetable.caption
-msgid "Make Timetables"
-msgstr ""
-
-#: tmainform.actmaketimetable.hint
-msgid "Make Timetables|Make Timetables"
-msgstr ""
-
 #: tmainform.actexit.caption
 msgid "Salir"
 msgstr ""
@@ -764,6 +756,15 @@ msgstr ""
 
 #: tmainform.actlevel.hint
 msgid "Niveles|Niveles"
+msgstr ""
+
+#: tmainform.actmaketimetable.caption
+msgid "Make Timetables"
+msgstr ""
+
+#: tmainform.actmaketimetable.hint
+msgctxt "tmainform.actmaketimetable.hint"
+msgid "Make Timetables|Make Timetables"
 msgstr ""
 
 #: tmainform.actmejorartimetable.caption
@@ -872,6 +873,7 @@ msgid "Datos|Ingreso de datos"
 msgstr ""
 
 #: tmainform.mielaborartimetable.hint
+msgctxt "tmainform.mielaborartimetable.hint"
 msgid "Make Timetables|Make Timetables"
 msgstr ""
 

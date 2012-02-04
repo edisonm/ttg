@@ -19,11 +19,7 @@ ifeq ($(shell uname -o),Cygwin)
 EXEEXT=.exe
 LAZBASE=/cygdrive/c/lazarus32
 FPC=$(LAZBASE)/fpc/2.4.4/bin/i386-win32/fpc
-LAZRES=$(LAZBASE)/tools/lazres
-LAZBUILD=$(LAZBASE)/lazbuild
-LAZIDE=$(LAZBASE)/lazarus
 FILES=$(TTGMYSQL)
-LRSDEP=$(LAZRES)
 DBCONVERTSRC=../../../DBConvert
 
 # Due to a bug in cygwin, I cannot use (absolute) dirs that contains ':'
@@ -32,13 +28,19 @@ DBCONVERT=$(DBCONVERTSRC)/bin/dbconvert.exe
 
 else
 
+LAZBASE=/home/edison/apps/pascal/lazarus
 EXEEXT=
 FPC=fpc
-LAZRES=lazres
-LAZBUILD=lazbuild
-LAZIDE=lazarus-ide
+# LAZRES=lazres
+# LAZBUILD=lazbuild
+# LAZIDE=lazarus-ide
 
 endif
+
+LAZIDE=$(LAZBASE)/lazarus
+LAZBUILD=$(LAZBASE)/lazbuild
+LAZRES=$(LAZBASE)/tools/lazres
+LRSDEP=$(LAZRES)
 
 TargetCPU=$(shell $(FPC) -iSP)
 TargetOS=$(shell $(FPC) -iSO)
