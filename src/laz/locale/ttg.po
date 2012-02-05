@@ -298,7 +298,7 @@ msgstr ""
 
 #: dsourcebaseconsts.sfltimetabledetail_idtimetable
 msgctxt "dsourcebaseconsts.sfltimetabledetail_idtimetable"
-msgid "TimeTable"
+msgid "Timetable"
 msgstr ""
 
 #: dsourcebaseconsts.sfltimetabledetail_session
@@ -855,7 +855,7 @@ msgid "Periodos laborables|Periodos laborables"
 msgstr ""
 
 #: tmainform.acttimetable.caption
-msgid "TimeTables"
+msgid "Timetables"
 msgstr ""
 
 #: tmainform.acttimetable.hint
@@ -1423,7 +1423,7 @@ msgid "Cruce de profesores|Cruce de profesores"
 msgstr ""
 
 #: ttimetableform.actmejorartimetable.caption
-msgid "ActMejorarTimeTable"
+msgid "ActMejorarTimetable"
 msgstr ""
 
 #: ttimetableform.actmejorartimetable.hint
@@ -1489,7 +1489,7 @@ msgid "Horario de profesores|Horario de profesores"
 msgstr ""
 
 #: ttimetableform.dbgrid.columns[0].tcolumntitle.caption
-msgid "IdTimeTable"
+msgid "IdTimetable"
 msgstr ""
 
 #: ttimetableform.dbgrid.columns[1].tcolumntitle.caption
@@ -1501,7 +1501,7 @@ msgid "Final"
 msgstr ""
 
 #: ttimetableform.timetableform.caption
-msgid "TimeTableForm"
+msgid "TimetableForm"
 msgstr ""
 
 #: ttimetableroomtypeform.cbverroomtype.hint

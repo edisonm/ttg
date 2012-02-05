@@ -233,10 +233,10 @@
       <Unit17>
         <Filename Value="ftimetableclass.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="TimeTableClassForm"/>
+        <ComponentName Value="TimetableClassForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FTimeTableClass"/>
+        <UnitName Value="FTimetableClass"/>
       </Unit17>
       <Unit18>
         <Filename Value="fmasterdetaileditor.pp"/>
@@ -249,10 +249,10 @@
       <Unit19>
         <Filename Value="ftimetableroomtype.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="TimeTableRoomTypeForm"/>
+        <ComponentName Value="TimetableRoomTypeForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FTimeTableRoomType"/>
+        <UnitName Value="FTimetableRoomType"/>
       </Unit19>
       <Unit20>
         <Filename Value="fsplash.pp"/>
@@ -281,18 +281,18 @@
       <Unit23>
         <Filename Value="ftimetable.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="TimeTableForm"/>
+        <ComponentName Value="TimetableForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FTimeTable"/>
+        <UnitName Value="FTimetable"/>
       </Unit23>
       <Unit24>
         <Filename Value="ftimetableteacher.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="TimeTableTeacherForm"/>
+        <ComponentName Value="TimetableTeacherForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FTimeTableTeacher"/>
+        <UnitName Value="FTimetableTeacher"/>
       </Unit24>
       <Unit25>
         <Filename Value="dsourcebase.pp"/>

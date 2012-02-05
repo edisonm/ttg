@@ -298,7 +298,7 @@ msgstr "Materia"
 
 #: dsourcebaseconsts.sfltimetabledetail_idtimetable
 msgctxt "dsourcebaseconsts.sfltimetabledetail_idtimetable"
-msgid "TimeTable"
+msgid "Timetable"
 msgstr "Horario"
 
 #: dsourcebaseconsts.sfltimetabledetail_session
@@ -855,7 +855,7 @@ msgid "Periodos laborables|Periodos laborables"
 msgstr "Periodos laborables|Periodos laborables"
 
 #: tmainform.acttimetable.caption
-msgid "TimeTables"
+msgid "Timetables"
 msgstr "Horarios"
 
 #: tmainform.acttimetable.hint
@@ -1423,8 +1423,8 @@ msgid "Cruce de profesores|Cruce de profesores"
 msgstr "Cruce de profesores|Cruce de profesores"
 
 #: ttimetableform.actmejorartimetable.caption
-msgid "ActMejorarTimeTable"
-msgstr "ActMejorarTimeTable"
+msgid "ActMejorarTimetable"
+msgstr "ActMejorarTimetable"
 
 #: ttimetableform.actmejorartimetable.hint
 msgid "Mejorar horario|Mejorar horario seleccionado"
@@ -1489,8 +1489,8 @@ msgid "Horario de profesores|Horario de profesores"
 msgstr "Horario de profesores|Horario de profesores"
 
 #: ttimetableform.dbgrid.columns[0].tcolumntitle.caption
-msgid "IdTimeTable"
-msgstr "IdTimeTable"
+msgid "IdTimetable"
+msgstr "IdTimetable"
 
 #: ttimetableform.dbgrid.columns[1].tcolumntitle.caption
 msgid "Inicio"
@@ -1501,8 +1501,8 @@ msgid "Final"
 msgstr "Final"
 
 #: ttimetableform.timetableform.caption
-msgid "TimeTableForm"
-msgstr "TimeTableForm"
+msgid "TimetableForm"
+msgstr "TimetableForm"
 
 #: ttimetableroomtypeform.cbverroomtype.hint
 msgid "Ver|Que ver en el horario del tipo de aula"
@@ -1615,11 +1615,11 @@ msgstr "Generar Horarios"
 
 #: uttgconsts.simprovingtimetable
 msgid "Improving Timetable [%d]"
-msgstr "Mejorando TimeTable [%d]"
+msgstr "Mejorando Timetable [%d]"
 
 #: uttgconsts.simprovingtimetablein
 msgid "Improving Timetable [%d] in [%d]"
-msgstr "Mejorando TimeTable [%d] en [%d]"
+msgstr "Mejorando Timetable [%d] en [%d]"
 
 #: uttgconsts.sinvaliddata
 msgid "Invalid input data"
@@ -1711,7 +1711,7 @@ msgstr "Desea guardar los cambios efectuados?"
 
 #: uttgconsts.ssavedialogfilter
 msgid "High School Timetable (*.ttd)|*.ttd"
-msgstr "TimeTable para colegio (*.ttd)|*.ttd"
+msgstr "Timetable para colegio (*.ttd)|*.ttd"
 
 #: uttgconsts.ssearchby
 msgid "Search by %s"
