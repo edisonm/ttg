@@ -2,7 +2,7 @@
 unit dsourcebaseconsts;
 
 (*
-  02/02/2012 13:36
+  05/02/2012 1:06
 
   Warning:
 
@@ -99,7 +99,7 @@ resourcestring
   SFlTimetable_TimeIni = 'Initial Time';
   SFlTimetable_TimeEnd = 'End Time';
   SFlTimetable_Summary = 'Summary';
-  SFlTimetableDetail_IdTimetable = 'Timetable';
+  SFlTimetableDetail_IdTimeTable = 'Timetable';
   SFlTimetableDetail_IdSubject = 'Subject';
   SFlTimetableDetail_IdLevel = 'Level';
   SFlTimetableDetail_IdSpecialization = 'Specialization';

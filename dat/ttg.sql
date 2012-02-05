@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  02/02/2012 13:35
+  05/02/2012 1:14
 
   Warning:
 
@@ -134,13 +134,13 @@ CREATE TABLE IF NOT EXISTS `SubjectRestriction`(
   CONSTRAINT TimeSlotSubjectRestriction FOREIGN KEY (IdDay,IdHour)
     REFERENCES TimeSlot(IdDay,IdHour) ON UPDATE RESTRICT ON DELETE RESTRICT
 );
-CREATE TABLE IF NOT EXISTS `TimeTable`(
-    `IdTimeTable` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE IF NOT EXISTS `Timetable`(
+    `IdTimetable` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     `TimeIni` datetime NOT NULL,
     `TimeEnd` datetime NOT NULL,
     `Summary` text
 );
-CREATE TABLE IF NOT EXISTS `TimeTableDetail`(
+CREATE TABLE IF NOT EXISTS `TimetableDetail`(
     `IdTimeTable` integer NOT NULL,
     `IdSubject` integer NOT NULL,
     `IdLevel` integer NOT NULL,
@@ -151,10 +151,10 @@ CREATE TABLE IF NOT EXISTS `TimeTableDetail`(
     `Session` integer NOT NULL,
   CONSTRAINT ixRestrictionSubject UNIQUE(IdTimeTable,IdLevel,IdSpecialization,IdGroupId,IdDay,IdHour),
   CONSTRAINT PrimaryKey PRIMARY KEY(IdTimeTable,IdSubject,IdLevel,IdSpecialization,IdGroupId,IdDay,IdHour),
-  CONSTRAINT DistributionTimeTableDetail FOREIGN KEY (IdSubject,IdLevel,IdSpecialization,IdGroupId)
+  CONSTRAINT DistributionTimetableDetail FOREIGN KEY (IdSubject,IdLevel,IdSpecialization,IdGroupId)
     REFERENCES Distribution(IdSubject,IdLevel,IdSpecialization,IdGroupId) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT TimeSlotTimeTableDetail FOREIGN KEY (IdDay,IdHour)
+  CONSTRAINT TimeSlotTimetableDetail FOREIGN KEY (IdDay,IdHour)
     REFERENCES TimeSlot(IdDay,IdHour) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT TimeTableTimeTableDetail FOREIGN KEY (IdTimeTable)
-    REFERENCES TimeTable(IdTimeTable) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT TimetableTimetableDetail FOREIGN KEY (IdTimeTable)
+    REFERENCES Timetable(IdTimetable) ON UPDATE CASCADE ON DELETE CASCADE
 );

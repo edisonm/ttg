@@ -2,7 +2,7 @@
 unit dsourcebase;
 
 (*
-  02/02/2012 13:36
+  05/02/2012 1:06
 
   Warning:
 
@@ -383,7 +383,7 @@ begin
   with FMasterRels[16, 0] do
   begin
     DetailDataSet := TbTimetableDetail;
-    MasterFields := 'IdTimetable';
+    MasterFields := 'IdTimeTable';
     DetailFields := 'IdTimetable';
     Cascade := True;
   end;
@@ -404,7 +404,7 @@ begin
   begin
     MasterDataSet := TbTimetable;
     MasterFields := 'IdTimetable';
-    DetailFields := 'IdTimetable';
+    DetailFields := 'IdTimeTable';
   end;
   with DataSetNameList do
   begin
@@ -486,7 +486,7 @@ begin
     Add('TbTimetable.TimeIni=' + SFlTimetable_TimeIni);
     Add('TbTimetable.TimeEnd=' + SFlTimetable_TimeEnd);
     Add('TbTimetable.Summary=' + SFlTimetable_Summary);
-    Add('TbTimetableDetail.IdTimetable=' + SFlTimetableDetail_IdTimetable);
+    Add('TbTimetableDetail.IdTimeTable=' + SFlTimetableDetail_IdTimeTable);
     Add('TbTimetableDetail.IdSubject=' + SFlTimetableDetail_IdSubject);
     Add('TbTimetableDetail.IdLevel=' + SFlTimetableDetail_IdLevel);
     Add('TbTimetableDetail.IdSpecialization=' + SFlTimetableDetail_IdSpecialization);
