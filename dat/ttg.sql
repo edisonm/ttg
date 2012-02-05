@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `Timetable`(
     `Summary` text
 );
 CREATE TABLE IF NOT EXISTS `TimetableDetail`(
-    `IdTimeTable` integer NOT NULL,
+    `IdTimetable` integer NOT NULL,
     `IdSubject` integer NOT NULL,
     `IdLevel` integer NOT NULL,
     `IdSpecialization` integer NOT NULL,
@@ -149,12 +149,12 @@ CREATE TABLE IF NOT EXISTS `TimetableDetail`(
     `IdDay` integer NOT NULL,
     `IdHour` integer NOT NULL,
     `Session` integer NOT NULL,
-  CONSTRAINT ixRestrictionSubject UNIQUE(IdTimeTable,IdLevel,IdSpecialization,IdGroupId,IdDay,IdHour),
-  CONSTRAINT PrimaryKey PRIMARY KEY(IdTimeTable,IdSubject,IdLevel,IdSpecialization,IdGroupId,IdDay,IdHour),
+  CONSTRAINT ixRestrictionSubject UNIQUE(IdTimetable,IdLevel,IdSpecialization,IdGroupId,IdDay,IdHour),
+  CONSTRAINT PrimaryKey PRIMARY KEY(IdTimetable,IdSubject,IdLevel,IdSpecialization,IdGroupId,IdDay,IdHour),
   CONSTRAINT DistributionTimetableDetail FOREIGN KEY (IdSubject,IdLevel,IdSpecialization,IdGroupId)
     REFERENCES Distribution(IdSubject,IdLevel,IdSpecialization,IdGroupId) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT TimeSlotTimetableDetail FOREIGN KEY (IdDay,IdHour)
     REFERENCES TimeSlot(IdDay,IdHour) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT TimetableTimetableDetail FOREIGN KEY (IdTimeTable)
+  CONSTRAINT TimetableTimetableDetail FOREIGN KEY (IdTimetable)
     REFERENCES Timetable(IdTimetable) ON UPDATE CASCADE ON DELETE CASCADE
 );
