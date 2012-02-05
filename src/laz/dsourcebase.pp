@@ -383,7 +383,7 @@ begin
   with FMasterRels[16, 0] do
   begin
     DetailDataSet := TbTimetableDetail;
-    MasterFields := 'IdTimeTable';
+    MasterFields := 'IdTimetable';
     DetailFields := 'IdTimetable';
     Cascade := True;
   end;
@@ -404,7 +404,7 @@ begin
   begin
     MasterDataSet := TbTimetable;
     MasterFields := 'IdTimetable';
-    DetailFields := 'IdTimeTable';
+    DetailFields := 'IdTimetable';
   end;
   with DataSetNameList do
   begin
@@ -486,7 +486,7 @@ begin
     Add('TbTimetable.TimeIni=' + SFlTimetable_TimeIni);
     Add('TbTimetable.TimeEnd=' + SFlTimetable_TimeEnd);
     Add('TbTimetable.Summary=' + SFlTimetable_Summary);
-    Add('TbTimetableDetail.IdTimeTable=' + SFlTimetableDetail_IdTimeTable);
+    Add('TbTimetableDetail.IdTimetable=' + SFlTimetableDetail_IdTimetable);
     Add('TbTimetableDetail.IdSubject=' + SFlTimetableDetail_IdSubject);
     Add('TbTimetableDetail.IdLevel=' + SFlTimetableDetail_IdLevel);
     Add('TbTimetableDetail.IdSpecialization=' + SFlTimetableDetail_IdSpecialization);

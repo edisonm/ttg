@@ -99,7 +99,7 @@ resourcestring
   SFlTimetable_TimeIni = 'Initial Time';
   SFlTimetable_TimeEnd = 'End Time';
   SFlTimetable_Summary = 'Summary';
-  SFlTimetableDetail_IdTimeTable = 'Timetable';
+  SFlTimetableDetail_IdTimetable = 'Timetable';
   SFlTimetableDetail_IdSubject = 'Subject';
   SFlTimetableDetail_IdLevel = 'Level';
   SFlTimetableDetail_IdSpecialization = 'Specialization';

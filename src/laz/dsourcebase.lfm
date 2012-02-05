@@ -227,7 +227,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 17
     Connection = DbZConnection
     TableName = 'TimetableDetail'
-    IndexFieldNames = 'IdTimeTable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
+    IndexFieldNames = 'IdTimetable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
     Left = 240
     Top = 336
   end
