@@ -162,7 +162,6 @@ begin
         Post;
       end;
     end;
-    // Generar todos los periodos, exceptuando el sabado, domingo y el recreo:
     with TbTimeSlot do
     begin
       TbDay.First;
