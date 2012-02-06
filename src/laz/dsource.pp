@@ -108,42 +108,24 @@ const
     SHour6,
     SHour7,
     SHour8);
-  (*
-    'Primera',
-    'Segunda',
-    'Tercera',
-    'Cuarta',
-    'Recreo',
-    'Quinta',
-    'Sexta',
-    'Septima',
-    'Octava'
-    );
-    *)
   SNaSubjectRestrictionType: array[0..1] of string = (
-    'Inadecuado',
-    'Imposible'
-    );
+    SInadequate,
+    SImpossible);
   SNaTeacherRestrictionType: array[0..1] of string = (
-    'No gusta',
-    'No puede'
-    );
+    SInadequate,
+    SImpossible);
   EColSubjectRestrictionType: array[0..1] of TColor = (
     clLime,
-    clRed
-    );
+    clRed);
   EColTeacherRestrictionType: array[0..1] of TColor = (
     clLime,
-    clRed
-    );
+    clRed);
   EValSubjectRestrictionType: array[0..1] of Integer = (
     50,
-    500
-    );
+    500);
   EValTeacherRestrictionType: array[0..1] of Integer = (
     50,
-    500
-    );
+    500);
 var
   t: TDateTime;
   i: Integer;

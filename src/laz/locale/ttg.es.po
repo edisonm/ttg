@@ -1635,39 +1635,43 @@ msgstr "Generar Horarios"
 
 #: uttgconsts.shour1
 msgid "First"
-msgstr ""
+msgstr "Primera"
 
 #: uttgconsts.shour2
 msgid "Second"
-msgstr ""
+msgstr "Segunda"
 
 #: uttgconsts.shour3
 msgid "Third"
-msgstr ""
+msgstr "Tercera"
 
 #: uttgconsts.shour4
 msgid "Fourth"
-msgstr ""
+msgstr "Cuarta"
 
 #: uttgconsts.shour5
 msgid "Fiveth"
-msgstr ""
+msgstr "Quinta"
 
 #: uttgconsts.shour6
 msgid "Sixth"
-msgstr ""
+msgstr "Sexta"
 
 #: uttgconsts.shour7
 msgid "Seventh"
-msgstr ""
+msgstr "Septima"
 
 #: uttgconsts.shour8
 msgid "Eighth"
-msgstr ""
+msgstr "Octava"
 
 #: uttgconsts.shourf
 msgid "Free"
-msgstr ""
+msgstr "Libre"
+
+#: uttgconsts.simpossible
+msgid "Impossible"
+msgstr "Imposible"
 
 #: uttgconsts.simprovingtimetable
 msgid "Improving Timetable [%d]"
@@ -1676,6 +1680,10 @@ msgstr "Mejorando Timetable [%d]"
 #: uttgconsts.simprovingtimetablein
 msgid "Improving Timetable [%d] in [%d]"
 msgstr "Mejorando Timetable [%d] en [%d]"
+
+#: uttgconsts.sinadequate
+msgid "Inadequate"
+msgstr "Inadecuado"
 
 #: uttgconsts.sinvaliddata
 msgid "Invalid input data"

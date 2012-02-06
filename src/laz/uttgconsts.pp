@@ -79,6 +79,8 @@ resourcestring
   SHour6 = 'Sixth';
   SHour7 = 'Seventh';
   SHour8 = 'Eighth';
+  SInadequate = 'Inadequate';
+  SImpossible = 'Impossible';
 
 implementation
 
