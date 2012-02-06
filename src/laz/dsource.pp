@@ -51,7 +51,7 @@ implementation
 {$ENDIF}
 
 uses
-  Variants, FConfiguracion, UTTGDBUtils, URelUtils, ZDataSet;
+  Variants, FConfiguracion, UTTGDBUtils, URelUtils, ZDataSet, uttgconsts, dsourcebaseconsts;
 
 procedure TSourceDataModule.TbDistributionBeforePost(DataSet: TDataSet);
 var
@@ -99,6 +99,16 @@ end;
 procedure TSourceDataModule.FillDefaultData;
 const
   SNaHour: array[1..9] of string = (
+    SHour1,
+    SHour2,
+    SHour3,
+    SHour4,
+    SHourF,
+    SHour5,
+    SHour6,
+    SHour7,
+    SHour8);
+  (*
     'Primera',
     'Segunda',
     'Tercera',
@@ -109,6 +119,7 @@ const
     'Septima',
     'Octava'
     );
+    *)
   SNaSubjectRestrictionType: array[0..1] of string = (
     'Inadecuado',
     'Imposible'
@@ -226,7 +237,7 @@ begin
   Field := TStringField.Create(TbCourse);
   with Field do
   begin
-    DisplayLabel := 'Level';
+    DisplayLabel := SFlCourse_IdLevel;
     DisplayWidth := 10;
     FieldKind := fkLookup;
     FieldName := 'AbLevel';
@@ -241,7 +252,7 @@ begin
   Field := TStringField.Create(TbCourse);
   with Field do
   begin
-    DisplayLabel := 'Espec.';
+    DisplayLabel := SFlCourse_IdSpecialization;
     DisplayWidth := 10;
     FieldKind := fkLookup;
     FieldName := 'AbSpecialization';
@@ -256,7 +267,7 @@ begin
   Field := TStringField.Create(TbClass);
   with Field do
   begin
-    DisplayLabel := 'Level';
+    DisplayLabel := SFlClass_IdLevel;
     FieldKind := fkLookup;
     FieldName := 'AbLevel';
     LookupDataSet := TbLevel;
@@ -270,7 +281,7 @@ begin
   Field := TStringField.Create(TbClass);
   with Field do
   begin
-    DisplayLabel := 'Specialization';
+    DisplayLabel := SFlClass_IdSpecialization;
     FieldKind := fkLookup;
     FieldName := 'AbSpecialization';
     LookupDataSet := TbSpecialization;
@@ -284,7 +295,7 @@ begin
   Field := TStringField.Create(TbClass);
   with Field do
   begin
-    DisplayLabel := 'Class';
+    DisplayLabel := SFlClass_IdGroupId;
     FieldKind := fkLookup;
     FieldName := 'NaGroupId';
     LookupDataSet := TbGroupId;
@@ -298,7 +309,7 @@ begin
   Field := TStringField.Create(TbSubjectRestriction);
   with Field do
   begin
-    DisplayLabel := 'Prohibicion';
+    DisplayLabel := SFlSubjectRestriction_IdSubjectRestrictionType;
     DisplayWidth := 10;
     FieldKind := fkLookup;
     FieldName := 'NaSubjectRestrictionType';
@@ -313,7 +324,7 @@ begin
   Field := TStringField.Create(TbTimetableDetail);
   with Field do
   begin
-    DisplayLabel := 'Subject';
+    DisplayLabel := SFlSubjectRestriction_IdSubject;
     DisplayWidth := 15;
     FieldKind := fkLookup;
     FieldName := 'NaSubject';
@@ -328,7 +339,7 @@ begin
   Field := TStringField.Create(TbTeacherRestriction);
   with Field do
   begin
-    DisplayLabel := 'Prohibicion';
+    DisplayLabel := SFlTeacherRestriction_IdTeacherRestrictionType;
     DisplayWidth := 10;
     FieldKind := fkLookup;
     FieldName := 'NaTeacherRestrictionType';
@@ -343,7 +354,7 @@ begin
   Field := TStringField.Create(TbDistribution.Owner);
   with Field do
   begin
-    DisplayLabel := 'Level';
+    DisplayLabel := SFlDistribution_IdLevel;
     DisplayWidth := 4;
     FieldKind := fkLookup;
     FieldName := 'AbLevel';
@@ -358,7 +369,7 @@ begin
   Field := TStringField.Create(TbDistribution.Owner);
   with Field do
   begin
-    DisplayLabel := 'Espec.';
+    DisplayLabel := SFlDistribution_IdSpecialization;
     DisplayWidth := 4;
     FieldKind := fkLookup;
     FieldName := 'AbSpecialization';
@@ -373,7 +384,7 @@ begin
   Field := TStringField.Create(TbDistribution.Owner);
   with Field do
   begin
-    DisplayLabel := 'Par.';
+    DisplayLabel := SFlDistribution_IdGroupId;
     DisplayWidth := 4;
     FieldKind := fkLookup;
     FieldName := 'NaGroupId';
@@ -388,7 +399,7 @@ begin
   Field := TStringField.Create(TbDistribution.Owner);
   with Field do
   begin
-    DisplayLabel := 'Subject';
+    DisplayLabel := SFlDistribution_IdSubject;
     DisplayWidth := 10;
     FieldKind := fkLookup;
     FieldName := 'NaSubject';
@@ -403,7 +414,7 @@ begin
   Field := TStringField.Create(TbDistribution.Owner);
   with Field do
   begin
-    DisplayLabel := 'Aula';
+    DisplayLabel := SFlDistribution_IdRoomType;
     DisplayWidth := 6;
     FieldKind := fkLookup;
     FieldName := 'AbRoomType';

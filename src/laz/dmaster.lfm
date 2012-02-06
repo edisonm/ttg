@@ -157,7 +157,7 @@ object MasterDataModule: TMasterDataModule
       Size = 10
     end
     object QuDistributionTeacherAbSpecialization: TStringField
-      DisplayLabel = 'Espec.'
+      DisplayLabel = 'Spec.'
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'AbSpecialization'
@@ -173,7 +173,7 @@ object MasterDataModule: TMasterDataModule
     end
     object QuDistributionTeacherNaGroupId: TStringField
       Alignment = taRightJustify
-      DisplayLabel = 'Par.'
+      DisplayLabel = 'Group'
       DisplayWidth = 5
       FieldKind = fkLookup
       FieldName = 'NaGroupId'

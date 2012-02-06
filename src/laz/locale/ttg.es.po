@@ -1437,13 +1437,13 @@ msgctxt "TTIMETABLEFORM.ACTCLASHTEACHER.HINT"
 msgid "Clashes of teachers|Clashes of teachers"
 msgstr "Cruce de profesores|Cruce de profesores"
 
-#: ttimetableform.actimprovetimetable.caption
-msgid "Improve timetable"
-msgstr "Mejorar horario"
+#: ttimetableform.actmejorartimetable.caption
+msgid "ActImproveTimeTable"
+msgstr ""
 
-#: ttimetableform.actimprovetimetable.hint
-msgid "Improve timetable|Improve selected timetable"
-msgstr "Mejorar horario|Mejorar horario seleccionado"
+#: ttimetableform.actmejorartimetable.hint
+msgid "ActImproveTimeTable|Improve selected timetable"
+msgstr ""
 
 #: ttimetableform.actsubjectcortadaday.caption
 msgid "Subjects cortadas por el dia"
@@ -1461,12 +1461,13 @@ msgstr "Materias cortadas por la hora"
 msgid "Subjects cut by the hour|Subjects cut by the hour"
 msgstr "Materias cortadas por la hora|Materias cortadas por la hora"
 
-#: ttimetableform.actsubjectrestrictionnonsatisfied.caption
-msgctxt "TTIMETABLEFORM.ACTSUBJECTRESTRICTIONNONSATISFIED.CAPTION"
+#: ttimetableform.actsubjectrestrictionnorespetada.caption
+msgctxt "ttimetableform.actsubjectrestrictionnorespetada.caption"
 msgid "Subject restrictions"
 msgstr "Prohibiciones de materia"
 
-#: ttimetableform.actsubjectrestrictionnonsatisfied.hint
+#: ttimetableform.actsubjectrestrictionnorespetada.hint
+msgctxt "ttimetableform.actsubjectrestrictionnorespetada.hint"
 msgid "Subject restrictions|Subject restrictions non satisfied"
 msgstr "Prohibiciones de materia|Prohibiciones de materia no respetadas"
 
@@ -1631,6 +1632,42 @@ msgstr "Algoritmo Evolutivo Elitista"
 #: uttgconsts.sgeneratetimetables
 msgid "Generate Timetables"
 msgstr "Generar Horarios"
+
+#: uttgconsts.shour1
+msgid "First"
+msgstr ""
+
+#: uttgconsts.shour2
+msgid "Second"
+msgstr ""
+
+#: uttgconsts.shour3
+msgid "Third"
+msgstr ""
+
+#: uttgconsts.shour4
+msgid "Fourth"
+msgstr ""
+
+#: uttgconsts.shour5
+msgid "Fiveth"
+msgstr ""
+
+#: uttgconsts.shour6
+msgid "Sixth"
+msgstr ""
+
+#: uttgconsts.shour7
+msgid "Seventh"
+msgstr ""
+
+#: uttgconsts.shour8
+msgid "Eighth"
+msgstr ""
+
+#: uttgconsts.shourf
+msgid "Free"
+msgstr ""
 
 #: uttgconsts.simprovingtimetable
 msgid "Improving Timetable [%d]"
