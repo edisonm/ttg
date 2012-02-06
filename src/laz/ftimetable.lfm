@@ -578,8 +578,8 @@ inherited TimetableForm: TTimetableForm
     end
     object ActImproveTimeTable: TAction[12]
       AutoCheck = True
-      Caption = 'ActImproveTimeTable'
-      Hint = 'ActImproveTimeTable|Improve selected timetable'
+      Caption = 'Improve timetable'
+      Hint = 'Improve timetable|Improve selected timetable'
       ImageIndex = 9
       OnExecute = ActImproveTimeTableExecute
     end

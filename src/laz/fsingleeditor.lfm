@@ -11,6 +11,7 @@ inherited SingleEditorForm: TSingleEditorForm
     end
     object BtnFind: TToolButton[1]
       Left = 24
+      Hint = 'Search|Search using a specific field'
       Top = 2
       Action = ActFind
       ParentShowHint = False
@@ -32,6 +33,7 @@ inherited SingleEditorForm: TSingleEditorForm
       ClientWidth = 210
       DataSource = DataSource
       Flat = True
+      Options = []
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
@@ -157,7 +159,7 @@ inherited SingleEditorForm: TSingleEditorForm
     end
     object ActFind: TAction
       Caption = 'Search'
-      Hint = 'Search|Search un campo especifico'
+      Hint = 'Search|Search using a specific field'
       ImageIndex = 1
       OnExecute = ActFindExecute
     end

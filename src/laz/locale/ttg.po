@@ -733,6 +733,14 @@ msgstr ""
 msgid "Academic hours|Academic hours"
 msgstr ""
 
+#: tmainform.actimprovetimetable.caption
+msgid "Improve Timetable"
+msgstr ""
+
+#: tmainform.actimprovetimetable.hint
+msgid "Improve Timetable|Improve Timetable searching in double depth"
+msgstr ""
+
 #: tmainform.actindex.caption
 msgid "Index"
 msgstr ""
@@ -769,14 +777,6 @@ msgstr ""
 #: tmainform.actmaketimetable.hint
 msgctxt "tmainform.actmaketimetable.hint"
 msgid "Make Timetables|Make Timetables"
-msgstr ""
-
-#: tmainform.actimprovetimetable.caption
-msgid "Improve Timetable"
-msgstr ""
-
-#: tmainform.actimprovetimetable.hint
-msgid "Improve Timetable|Improve Timetable searching in double depth"
 msgstr ""
 
 #: tmainform.actnew.caption
@@ -1311,6 +1311,7 @@ msgid "Search"
 msgstr ""
 
 #: tsingleeditorform.actfind.hint
+msgctxt "tsingleeditorform.actfind.hint"
 msgid "Search|Search using a specific field"
 msgstr ""
 
@@ -1322,6 +1323,11 @@ msgstr ""
 #: tsingleeditorform.actshow.hint
 msgctxt "TSINGLEEDITORFORM.ACTSHOW.HINT"
 msgid "Show|Show the grid content in a report"
+msgstr ""
+
+#: tsingleeditorform.btnfind.hint
+msgctxt "TSINGLEEDITORFORM.BTNFIND.HINT"
+msgid "Search|Search using a specific field"
 msgstr ""
 
 #: tsplashform.label1.caption
