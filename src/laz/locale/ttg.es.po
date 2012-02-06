@@ -1650,7 +1650,7 @@ msgid "Fourth"
 msgstr "Cuarta"
 
 #: uttgconsts.shour5
-msgid "Fiveth"
+msgid "Fifth"
 msgstr "Quinta"
 
 #: uttgconsts.shour6

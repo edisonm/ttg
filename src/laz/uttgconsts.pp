@@ -75,7 +75,7 @@ resourcestring
   SHour3 = 'Third';
   SHour4 = 'Fourth';
   SHourF = 'Free';
-  SHour5 = 'Fiveth';
+  SHour5 = 'Fifth';
   SHour6 = 'Sixth';
   SHour7 = 'Seventh';
   SHour8 = 'Eighth';

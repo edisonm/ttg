@@ -1648,7 +1648,7 @@ msgid "Fourth"
 msgstr ""
 
 #: uttgconsts.shour5
-msgid "Fiveth"
+msgid "Fifth"
 msgstr ""
 
 #: uttgconsts.shour6
