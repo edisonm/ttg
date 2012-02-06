@@ -115,7 +115,7 @@ inherited TimetableForm: TTimetableForm
       Columns = <      
         item
           PickList.Strings = (          )
-          Title.Caption = 'IdTimetable'
+          Title.Caption = 'Timetable Id'
           FieldName = 'IdTimetable'
         end      
         item

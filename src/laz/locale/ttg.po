@@ -1508,7 +1508,7 @@ msgstr ""
 
 #: ttimetableform.dbgrid.columns[0].title.caption
 msgctxt "TTIMETABLEFORM.DBGRID.COLUMNS[0].TITLE.CAPTION"
-msgid "IdTimetable"
+msgid "Timetable Id"
 msgstr ""
 
 #: ttimetableform.dbgrid.columns[1].title.caption
