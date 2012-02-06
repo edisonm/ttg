@@ -647,6 +647,7 @@ msgid "EditorForm"
 msgstr "EditorForm"
 
 #: teditorform.tlbshow.caption
+msgctxt "teditorform.tlbshow.caption"
 msgid "Show"
 msgstr "Presentar"
 
@@ -753,6 +754,7 @@ msgid "Spanish"
 msgstr "Español"
 
 #: tmainform.actlevel.caption
+msgctxt "tmainform.actlevel.caption"
 msgid "Levels"
 msgstr "Niveles"
 
@@ -1313,6 +1315,7 @@ msgid "Search|Search using a specific field"
 msgstr "Buscar|Buscar un campo especifico"
 
 #: tsingleeditorform.actshow.caption
+msgctxt "tsingleeditorform.actshow.caption"
 msgid "Show"
 msgstr "Mostrar"
 
@@ -1730,11 +1733,11 @@ msgid "Teacher; Restrictions"
 msgstr "Profesor; Restriccions"
 
 #: uttgconsts.steachersworkloadwithoutproblems
-msgid "Work load of Teachers without problems..."
+msgid "Teachers' Work load without problems..."
 msgstr "Carga horaria de los profesores sin problemas..."
 
 #: uttgconsts.steachersworkloadwithproblems
-msgid "Work load of Teachers with problems..."
+msgid "Teachers' work load with problems..."
 msgstr "Carga horaria de los profesores con problemas..."
 
 #: uttgconsts.steacherworkloadhead

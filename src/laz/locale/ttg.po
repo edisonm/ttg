@@ -647,6 +647,7 @@ msgid "EditorForm"
 msgstr ""
 
 #: teditorform.tlbshow.caption
+msgctxt "teditorform.tlbshow.caption"
 msgid "Show"
 msgstr ""
 
@@ -753,6 +754,7 @@ msgid "Spanish"
 msgstr ""
 
 #: tmainform.actlevel.caption
+msgctxt "tmainform.actlevel.caption"
 msgid "Levels"
 msgstr ""
 
@@ -1313,6 +1315,7 @@ msgid "Search|Search using a specific field"
 msgstr ""
 
 #: tsingleeditorform.actshow.caption
+msgctxt "tsingleeditorform.actshow.caption"
 msgid "Show"
 msgstr ""
 
