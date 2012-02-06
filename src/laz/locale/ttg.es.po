@@ -753,24 +753,24 @@ msgid "Spanish"
 msgstr "Español"
 
 #: tmainform.actlevel.caption
-msgid "Niveles"
+msgid "Levels"
 msgstr "Niveles"
 
 #: tmainform.actlevel.hint
-msgid "Niveles|Niveles"
+msgid "Levels|Levels"
 msgstr "Niveles|Niveles"
 
 #: tmainform.actmaketimetable.caption
 msgid "Make Timetables"
-msgstr "Make Timetabless"
+msgstr "Elaborar horarios"
 
 #: tmainform.actmaketimetable.hint
 msgctxt "tmainform.actmaketimetable.hint"
 msgid "Make Timetables|Make Timetables"
-msgstr "Make Timetabless|Make Timetabless"
+msgstr "Elaborar horarios|Elaborar horarios"
 
 #: tmainform.actmejorartimetable.caption
-msgid "Mejorar horario"
+msgid "Improve Timetable"
 msgstr "Mejorar horario"
 
 #: tmainform.actmejorartimetable.hint
@@ -794,7 +794,7 @@ msgid "Open|Open saved institution"
 msgstr "Abrir|Abrir colegio previamente guardado"
 
 #: tmainform.actpasswd.caption
-msgid "Clave..."
+msgid "Password..."
 msgstr "Clave..."
 
 #: tmainform.actpasswd.hint
@@ -802,7 +802,7 @@ msgid "Password|Change system password"
 msgstr "Clave|Cambiar la clave del sistema"
 
 #: tmainform.actregistrationinfo.caption
-msgid "Informacion de registro"
+msgid "Registration Info"
 msgstr "Informacion de registro"
 
 #: tmainform.actroomtype.caption
@@ -814,7 +814,7 @@ msgid "Room Types|Room Types"
 msgstr "Tipos de aula|Tipos de aula"
 
 #: tmainform.actsave.caption
-msgid "Guardar..."
+msgid "Save..."
 msgstr "Guardar..."
 
 #: tmainform.actsave.hint
@@ -1431,7 +1431,7 @@ msgid "ActMejorarTimetable"
 msgstr "ActMejorarTimetable"
 
 #: ttimetableform.actmejorartimetable.hint
-msgid "Mejorar horario|Mejorar horario seleccionado"
+msgid "Improve Timetable|Mejorar horario seleccionado"
 msgstr "Mejorar horario|Mejorar horario seleccionado"
 
 #: ttimetableform.actsubjectcortadaday.caption

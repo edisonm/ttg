@@ -368,8 +368,6 @@ begin
   StatusBar.Panels[1].Style := psOwnerDraw;
   Progress := 0;
   Max := 100;
-  SaveDialog.DefaultExt := 'ttd'; // Time Tabling Data
-  SaveDialog.Filter := SSaveDialogFilter;
   try
     SaveDialog.HelpContext := ActSave.HelpContext;
     if SaveDialog.Execute then
@@ -644,6 +642,10 @@ begin
   Caption := Caption + ' - Debug Build';
 {$ENDIF}
   FUpdateIndex := 0;
+  SaveDialog.DefaultExt := 'ttd';
+  SaveDialog.Filter := SSaveDialogFilter;
+  SaveDialogCSV.DefaultExt := 'csv';
+  SaveDialogCSV.Filter := SSaveDialogCSVFilter;
   try
     FMin := 0;
     FMax := 100;

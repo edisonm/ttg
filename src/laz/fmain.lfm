@@ -2060,7 +2060,7 @@ object MainForm: TMainForm
     end
     object ActRegistrationInfo: TAction
       Category = 'Help'
-      Caption = 'Informacion de registro'
+      Caption = 'Registration Info'
       OnExecute = ActRegistrationInfoExecute
     end
     object ActNew: TAction
@@ -2083,7 +2083,7 @@ object MainForm: TMainForm
     end
     object ActSave: TAction
       Category = 'File'
-      Caption = 'Guardar...'
+      Caption = 'Save...'
       HelpContext = 100
       Hint = 'Save|Save High School'
       ImageIndex = 2
@@ -2092,7 +2092,7 @@ object MainForm: TMainForm
     end
     object ActPasswd: TAction
       Category = 'File'
-      Caption = 'Clave...'
+      Caption = 'Password...'
       HelpContext = 110
       Hint = 'Password|Change system password'
       ImageIndex = 3
@@ -2144,9 +2144,9 @@ object MainForm: TMainForm
     object ActLevel: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Niveles'
+      Caption = 'Levels'
       HelpContext = 170
-      Hint = 'Niveles|Niveles'
+      Hint = 'Levels|Levels'
       ImageIndex = 7
       OnExecute = ActLevelExecute
       ShortCut = 16462
@@ -2238,7 +2238,7 @@ object MainForm: TMainForm
     end
     object ActMejorarTimetable: TAction
       Category = 'Tools'
-      Caption = 'Mejorar horario'
+      Caption = 'Improve Timetable'
       Hint = 'Improve Timetable|Improve Timetable searching in double depth'
     end
     object ActLangDefault: TAction

@@ -579,7 +579,7 @@ inherited TimetableForm: TTimetableForm
     object ActMejorarTimetable: TAction[12]
       AutoCheck = True
       Caption = 'ActMejorarTimetable'
-      Hint = 'Mejorar horario|Mejorar horario seleccionado'
+      Hint = 'Improve Timetable|Improve Timetable seleccionado'
       ImageIndex = 9
       OnExecute = ActMejorarTimetableExecute
     end
