@@ -522,15 +522,15 @@ inherited TimetableForm: TTimetableForm
     end
     object ActClashTeacher: TAction[4]
       AutoCheck = True
-      Caption = 'Cruce de profesores'
-      Hint = 'Cruce de profesores|Cruce de profesores'
+      Caption = 'Clashes of teachers'
+      Hint = 'Clashes of teachers|Clashes of teachers'
       ImageIndex = 4
       OnExecute = ActClashTeacherExecute
     end
     object ActClashSubject: TAction[5]
       AutoCheck = True
-      Caption = 'Cruce de materias'
-      Hint = 'Cruce de materias|Cruce de materias'
+      Caption = 'Clashes of subjects'
+      Hint = 'Clashes of subjects|Clashes of subjects'
       ImageIndex = 5
       OnExecute = ActClashSubjectExecute
     end
@@ -579,7 +579,7 @@ inherited TimetableForm: TTimetableForm
     object ActMejorarTimetable: TAction[12]
       AutoCheck = True
       Caption = 'ActMejorarTimetable'
-      Hint = 'Improve timetable|Improve selected timetable'
+      Hint = 'ActMejorarTimetable|Improve selected timetable'
       ImageIndex = 9
       OnExecute = ActMejorarTimetableExecute
     end

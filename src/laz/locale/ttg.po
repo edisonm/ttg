@@ -1411,22 +1411,22 @@ msgstr ""
 
 #: ttimetableform.actclashsubject.caption
 msgctxt "TTIMETABLEFORM.ACTCLASHSUBJECT.CAPTION"
-msgid "Cruce de materias"
+msgid "Clashes of subjects"
 msgstr ""
 
 #: ttimetableform.actclashsubject.hint
 msgctxt "TTIMETABLEFORM.ACTCLASHSUBJECT.HINT"
-msgid "Cruce de materias|Cruce de materias"
+msgid "Clashes of subjects|Clashes of subjects"
 msgstr ""
 
 #: ttimetableform.actclashteacher.caption
 msgctxt "TTIMETABLEFORM.ACTCLASHTEACHER.CAPTION"
-msgid "Cruce de profesores"
+msgid "Clashes of teachers"
 msgstr ""
 
 #: ttimetableform.actclashteacher.hint
 msgctxt "TTIMETABLEFORM.ACTCLASHTEACHER.HINT"
-msgid "Cruce de profesores|Cruce de profesores"
+msgid "Clashes of teachers|Clashes of teachers"
 msgstr ""
 
 #: ttimetableform.actmejorartimetable.caption
@@ -1434,7 +1434,7 @@ msgid "ActMejorarTimetable"
 msgstr ""
 
 #: ttimetableform.actmejorartimetable.hint
-msgid "Improve timetable|Improve selected timetable"
+msgid "ActMejorarTimetable|Improve selected timetable"
 msgstr ""
 
 #: ttimetableform.actsubjectcortadaday.caption

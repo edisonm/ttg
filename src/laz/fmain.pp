@@ -642,9 +642,9 @@ begin
   Caption := Caption + ' - Debug Build';
 {$ENDIF}
   FUpdateIndex := 0;
-  SaveDialog.DefaultExt := 'ttd';
+  SaveDialog.DefaultExt := '.ttd';
   SaveDialog.Filter := SSaveDialogFilter;
-  SaveDialogCSV.DefaultExt := 'csv';
+  SaveDialogCSV.DefaultExt := '.csv';
   SaveDialogCSV.Filter := SSaveDialogCSVFilter;
   try
     FMin := 0;

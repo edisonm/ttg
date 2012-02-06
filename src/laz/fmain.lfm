@@ -1144,7 +1144,7 @@ object MainForm: TMainForm
   end
   object OpenDialog: TOpenDialog
     DefaultExt = '.ttd'
-    Filter = 'Timetable para colegio (*.ttd)|*.ttd'
+    Filter = 'High School Timetable (*.ttd)|*.ttd'
     Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
     left = 18
     top = 176
