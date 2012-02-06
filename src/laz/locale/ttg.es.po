@@ -1519,20 +1519,10 @@ msgctxt "ttimetableform.dbgrid.columns[2].title.caption"
 msgid "End"
 msgstr "Final"
 
-#: ttimetableroomtypeform.cbverroomtype.hint
-msgctxt "ttimetableroomtypeform.cbverroomtype.hint"
-msgid "Show|What to show in the room type timetable"
-msgstr "Mostrar|Parametro a mostrar en el horario del tipo de aula"
-
 #: ttimetableroomtypeform.cbxshowroomtype.hint
 msgctxt "ttimetableroomtypeform.cbxshowroomtype.hint"
 msgid "Show|What to show in the room type timetable"
 msgstr "Mostrar|Parametro a mostrar en el horario del tipo de aula"
-
-#: ttimetableteacherform.cbverteacher.hint
-msgctxt "ttimetableteacherform.cbverteacher.hint"
-msgid "Show|Param to show in the teacher timetable"
-msgstr "Mostrar|Parametro a mostrar en el horario del profesor"
 
 #: ttimetableteacherform.cbxshowteacher.hint
 msgctxt "ttimetableteacherform.cbxshowteacher.hint"
