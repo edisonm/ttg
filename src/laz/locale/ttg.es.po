@@ -822,6 +822,7 @@ msgid "Save|Save High School"
 msgstr "Guardar|Guardar colegio"
 
 #: tmainform.actspecialization.caption
+msgctxt "tmainform.actspecialization.caption"
 msgid "Specializations"
 msgstr "Especializaciones"
 
@@ -839,6 +840,7 @@ msgid "Subjects|Subjects"
 msgstr "Materias|Materias"
 
 #: tmainform.actteacher.caption
+msgctxt "tmainform.actteacher.caption"
 msgid "Teachers"
 msgstr "Profesores"
 
@@ -855,6 +857,7 @@ msgid "Working Time Slots|Working Time Slots"
 msgstr "Periodos laborables|Periodos laborables"
 
 #: tmainform.acttimetable.caption
+msgctxt "tmainform.acttimetable.caption"
 msgid "Timetables"
 msgstr "Horarios"
 
@@ -973,6 +976,7 @@ msgid "Panel1"
 msgstr "Panel1"
 
 #: tprogressform.bbtcancel.caption
+msgctxt "tprogressform.bbtcancel.caption"
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -1708,6 +1712,10 @@ msgstr "Tipos de aulas con problemas..."
 #: uttgconsts.ssavechanges
 msgid "Do you want to save the changes?"
 msgstr "Desea guardar los cambios efectuados?"
+
+#: uttgconsts.ssavedialogcsvfilter
+msgid "Comma delimited CSV (*.csv)|*.csv"
+msgstr ""
 
 #: uttgconsts.ssavedialogfilter
 msgid "High School Timetable (*.ttd)|*.ttd"
