@@ -702,7 +702,7 @@ object ConfiguracionForm: TConfiguracionForm
     Width = 106
     Anchors = [akRight, akBottom]
     Cancel = True
-    Caption = 'Cancelar'
+    Caption = 'Cancel'
     Kind = bkCancel
     ModalResult = 2
     OnClick = bbtCancelClick

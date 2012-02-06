@@ -422,7 +422,7 @@ msgstr "Cursos|Cursos disponibles"
 
 #: tconfiguracionform.bbtcancel.caption
 msgctxt "TCONFIGURACIONFORM.BBTCANCEL.CAPTION"
-msgid "Cancelar"
+msgid "Cancel"
 msgstr "Cancelar"
 
 #: tconfiguracionform.bbtok.caption
@@ -1279,7 +1279,7 @@ msgstr "Aceptar"
 
 #: tseltimeslotform.bbtcancel.caption
 msgctxt "TSELTIMESLOTFORM.BBCANCELAR.CAPTION"
-msgid "Cancelar"
+msgid "Cancel"
 msgstr "Cancelar"
 
 #: tseltimeslotform.label1.caption

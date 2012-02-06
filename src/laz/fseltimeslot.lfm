@@ -76,7 +76,7 @@ object SelTimeSlotForm: TSelTimeSlotForm
     Top = 80
     Width = 104
     Cancel = True
-    Caption = 'Cancelar'
+    Caption = 'Cancel'
     Kind = bkCancel
     ModalResult = 2
     TabOrder = 3

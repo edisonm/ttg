@@ -422,7 +422,7 @@ msgstr ""
 
 #: tconfiguracionform.bbtcancel.caption
 msgctxt "TCONFIGURACIONFORM.BBTCANCEL.CAPTION"
-msgid "Cancelar"
+msgid "Cancel"
 msgstr ""
 
 #: tconfiguracionform.bbtok.caption
@@ -1279,7 +1279,7 @@ msgstr ""
 
 #: tseltimeslotform.bbtcancel.caption
 msgctxt "TSELTIMESLOTFORM.BBCANCELAR.CAPTION"
-msgid "Cancelar"
+msgid "Cancel"
 msgstr ""
 
 #: tseltimeslotform.label1.caption
