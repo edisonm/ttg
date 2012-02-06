@@ -2035,9 +2035,9 @@ object MainForm: TMainForm
     end
     object ActIndex: TAction
       Category = 'Help'
-      Caption = 'Indice'
+      Caption = 'Index'
       HelpContext = 360
-      Hint = 'Indice|Indice de la Ayuda'
+      Hint = 'Index|Help Index'
       ImageIndex = 25
       OnExecute = ActIndexExecute
     end
@@ -2046,7 +2046,7 @@ object MainForm: TMainForm
       AutoCheck = True
       Caption = 'Timetables'
       HelpContext = 280
-      Hint = 'Horarios|Ver los horarios elaborados'
+      Hint = 'Timetables|Show timetables'
       ImageIndex = 20
       OnExecute = ActTimetableExecute
       ShortCut = 49234

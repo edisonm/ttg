@@ -17,7 +17,7 @@ type
   { TTimetableForm }
 
   TTimetableForm = class(TSingleEditorForm)
-    BtnSubjectRestrictionNoRespetada: TToolButton;
+    BtnSubjectRestrictionNonSatisfied: TToolButton;
     BtnTeacherRestrictionNoRespetada: TToolButton;
     BtnTimetableClass: TToolButton;
     BtnTimetableTeacher: TToolButton;
@@ -142,7 +142,7 @@ type
     ActClashTeacher: TAction;
     ActClashSubject: TAction;
     ActClashRoom: TAction;
-    ActSubjectRestrictionNoRespetada: TAction;
+    ActSubjectRestrictionNonSatisfied: TAction;
     ActTeacherRestrictionNoRespetada: TAction;
     ActSubjectCortadaDay: TAction;
     ActSubjectCortadaHour: TAction;
@@ -179,7 +179,7 @@ type
     procedure ActClashTeacherExecute(Sender: TObject);
     procedure ActClashSubjectExecute(Sender: TObject);
     procedure ActTimetableTeacherExecute(Sender: TObject);
-    procedure ActSubjectRestrictionNoRespetadaExecute(Sender: TObject);
+    procedure ActSubjectRestrictionNonSatisfiedExecute(Sender: TObject);
     procedure ActTeacherRestrictionNoRespetadaExecute(Sender: TObject);
     procedure ActClashRoomExecute(Sender: TObject);
     procedure QuClashTeacherAfterScroll(DataSet: TDataSet);
@@ -196,7 +196,7 @@ type
     { Private declarations }
     FClashRoomForm, FClashSubjectForm, FSubjectCortadaHourForm,
       FSubjectCortadaDayForm, FClashTeacherForm: TMasterDetailEditorForm;
-    FSubjectRestrictionNoRespetadaForm,
+    FSubjectRestrictionNonSatisfiedForm,
       FTeacherRestrictionNoRespetadaForm: TSingleEditorForm;
     FTimetableTeacherForm: TTimetableTeacherForm;
     FTimetableRoomTypeForm: TTimetableRoomTypeForm;
@@ -285,12 +285,12 @@ begin
   end;
 end;
 
-procedure TTimetableForm.ActSubjectRestrictionNoRespetadaExecute(Sender: TObject);
+procedure TTimetableForm.ActSubjectRestrictionNonSatisfiedExecute(Sender: TObject);
 begin
   inherited;
   if TSingleEditorForm.ToggleSingleEditor(Self,
-    FSubjectRestrictionNoRespetadaForm, ConfigStorage,
-    ActSubjectRestrictionNoRespetada, QuTimetableDetailSubjectRestriction) then
+    FSubjectRestrictionNonSatisfiedForm, ConfigStorage,
+    ActSubjectRestrictionNonSatisfied, QuTimetableDetailSubjectRestriction) then
   begin
     QuTimetableDetailSubjectRestriction.Close;
     QuTimetableDetailSubjectRestriction.Open;

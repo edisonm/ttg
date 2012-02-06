@@ -734,11 +734,11 @@ msgid "Academic hours|Academic hours"
 msgstr ""
 
 #: tmainform.actindex.caption
-msgid "Indice"
+msgid "Index"
 msgstr ""
 
 #: tmainform.actindex.hint
-msgid "Indice|Indice de la Ayuda"
+msgid "Index|Help Index"
 msgstr ""
 
 #: tmainform.actlangdefault.caption
@@ -864,7 +864,7 @@ msgid "Timetables"
 msgstr ""
 
 #: tmainform.acttimetable.hint
-msgid "Horarios|Ver los horarios elaborados"
+msgid "Timetables|Show timetables"
 msgstr ""
 
 #: tmainform.caption
@@ -1406,7 +1406,7 @@ msgstr ""
 
 #: ttimetableform.actclashroom.hint
 msgctxt "TTIMETABLEFORM.ACTCLASHAULA.HINT"
-msgid "Clashes of Rooms|Cruce de aulas del mismo tipo"
+msgid "Clashes of rooms|Clashes of rooms of same type"
 msgstr ""
 
 #: ttimetableform.actclashsubject.caption
@@ -1434,7 +1434,7 @@ msgid "ActMejorarTimetable"
 msgstr ""
 
 #: ttimetableform.actmejorartimetable.hint
-msgid "Improve Timetable|Mejorar horario seleccionado"
+msgid "Improve timetable|Improve selected timetable"
 msgstr ""
 
 #: ttimetableform.actsubjectcortadaday.caption
@@ -1442,24 +1442,24 @@ msgid "Subjects cortadas por el dia"
 msgstr ""
 
 #: ttimetableform.actsubjectcortadaday.hint
-msgid "Subjects cortadas por el dia|Materias cortadas por el dia"
+msgid "Subjects cut by the day|Subjects cut by the day"
 msgstr ""
 
 #: ttimetableform.actsubjectcortadahour.caption
-msgid "Subjects cortadas por la hora"
+msgid "Subjects cut by the hour"
 msgstr ""
 
 #: ttimetableform.actsubjectcortadahour.hint
-msgid "Subjects cortadas por la hora|Materias cortadas por la hora"
+msgid "Subjects cut by the hour|Subjects cut by the hour"
 msgstr ""
 
-#: ttimetableform.actsubjectrestrictionnorespetada.caption
-msgctxt "TTIMETABLEFORM.ACTSUBJECTRESTRICTIONNORESPETADA.CAPTION"
+#: ttimetableform.actsubjectrestrictionnonsatisfied.caption
+msgctxt "TTIMETABLEFORM.ACTSUBJECTRESTRICTIONNONSATISFIED.CAPTION"
 msgid "Subject restrictions"
 msgstr ""
 
-#: ttimetableform.actsubjectrestrictionnorespetada.hint
-msgid "Subject restrictions|Prohibiciones de materia no respetadas"
+#: ttimetableform.actsubjectrestrictionnonsatisfied.hint
+msgid "Subject restrictions|Subject restrictions non satisfied"
 msgstr ""
 
 #: ttimetableform.actteacherrestrictionnorespetada.caption
@@ -1468,7 +1468,7 @@ msgid "Teacher retrictions"
 msgstr ""
 
 #: ttimetableform.actteacherrestrictionnorespetada.hint
-msgid "Teacher retrictions|Input Teacher restrictions no respetadas"
+msgid "Teacher retrictions|Teacher restrictions non satisfied"
 msgstr ""
 
 #: ttimetableform.acttimetableclass.caption
@@ -1488,27 +1488,31 @@ msgid "Timetables by room types|Timetables by room types"
 msgstr ""
 
 #: ttimetableform.acttimetableteacher.caption
-msgid "Teachers timetables"
+msgid "Teachers' timetables"
 msgstr ""
 
 #: ttimetableform.acttimetableteacher.hint
-msgid "Teachers timetables|Teachers' timetables"
+msgid "Teachers' timetables|Teachers' timetables"
 msgstr ""
 
-#: ttimetableform.dbgrid.columns[0].tcolumntitle.caption
+#: ttimetableform.caption
+msgctxt "TTIMETABLEFORM.CAPTION"
+msgid "TimetableForm"
+msgstr ""
+
+#: ttimetableform.dbgrid.columns[0].title.caption
+msgctxt "TTIMETABLEFORM.DBGRID.COLUMNS[0].TITLE.CAPTION"
 msgid "IdTimetable"
 msgstr ""
 
-#: ttimetableform.dbgrid.columns[1].tcolumntitle.caption
+#: ttimetableform.dbgrid.columns[1].title.caption
+msgctxt "TTIMETABLEFORM.DBGRID.COLUMNS[1].TITLE.CAPTION"
 msgid "Start"
 msgstr ""
 
-#: ttimetableform.dbgrid.columns[2].tcolumntitle.caption
+#: ttimetableform.dbgrid.columns[2].title.caption
+msgctxt "TTIMETABLEFORM.DBGRID.COLUMNS[2].TITLE.CAPTION"
 msgid "End"
-msgstr ""
-
-#: ttimetableform.timetableform.caption
-msgid "TimetableForm"
 msgstr ""
 
 #: ttimetableroomtypeform.cbverroomtype.hint

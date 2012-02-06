@@ -59,10 +59,10 @@ inherited TimetableForm: TTimetableForm
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnSubjectRestrictionNoRespetada: TToolButton[9]
+    object BtnSubjectRestrictionNonSatisfied: TToolButton[9]
       Left = 339
       Top = 2
-      Action = ActSubjectRestrictionNoRespetada
+      Action = ActSubjectRestrictionNonSatisfied
       ParentShowHint = False
       ShowHint = True
     end
@@ -515,8 +515,8 @@ inherited TimetableForm: TTimetableForm
     end
     object ActTimetableTeacher: TAction[3]
       AutoCheck = True
-      Caption = 'Teachers timetables'
-      Hint = 'Teachers timetables|Teachers timetables'
+      Caption = 'Teachers'' timetables'
+      Hint = 'Teachers'' timetables|Teachers'' timetables'
       ImageIndex = 3
       OnExecute = ActTimetableTeacherExecute
     end
@@ -537,35 +537,35 @@ inherited TimetableForm: TTimetableForm
     object ActClashRoom: TAction[6]
       AutoCheck = True
       Caption = 'Clashes of Rooms'
-      Hint = 'Clashes of Rooms|Clashes of Rooms del mismo tipo'
+      Hint = 'Clashes of rooms|Clashes of rooms of same type'
       ImageIndex = 6
       OnExecute = ActClashRoomExecute
     end
-    object ActSubjectRestrictionNoRespetada: TAction[7]
+    object ActSubjectRestrictionNonSatisfied: TAction[7]
       AutoCheck = True
       Caption = 'Subject restrictions'
-      Hint = 'Subject restrictions|Subject restrictions no respetadas'
+      Hint = 'Subject restrictions|Subject restrictions non satisfied'
       ImageIndex = 7
-      OnExecute = ActSubjectRestrictionNoRespetadaExecute
+      OnExecute = ActSubjectRestrictionNonSatisfiedExecute
     end
     object ActTeacherRestrictionNoRespetada: TAction[8]
       AutoCheck = True
       Caption = 'Teacher retrictions'
-      Hint = 'Teacher retrictions|Input Teacher restrictions no respetadas'
+      Hint = 'Teacher retrictions|Teacher restrictions non satisfied'
       ImageIndex = 8
       OnExecute = ActTeacherRestrictionNoRespetadaExecute
     end
     object ActSubjectCortadaDay: TAction[9]
       AutoCheck = True
       Caption = 'Subjects cortadas por el dia'
-      Hint = 'Subjects cortadas por el dia|Subjects cortadas por el dia'
+      Hint = 'Subjects cut by the day|Subjects cut by the day'
       ImageIndex = 5
       OnExecute = ActSubjectCortadaDayExecute
     end
     object ActSubjectCortadaHour: TAction[10]
       AutoCheck = True
-      Caption = 'Subjects cortadas por la hora'
-      Hint = 'Subjects cortadas por la hora|Subjects cortadas por la hora'
+      Caption = 'Subjects cut by the hour'
+      Hint = 'Subjects cut by the hour|Subjects cut by the hour'
       ImageIndex = 5
       OnExecute = ActSubjectCortadaHourExecute
     end
@@ -579,7 +579,7 @@ inherited TimetableForm: TTimetableForm
     object ActMejorarTimetable: TAction[12]
       AutoCheck = True
       Caption = 'ActMejorarTimetable'
-      Hint = 'Improve Timetable|Improve Timetable seleccionado'
+      Hint = 'Improve timetable|Improve selected timetable'
       ImageIndex = 9
       OnExecute = ActMejorarTimetableExecute
     end
