@@ -12,7 +12,7 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
   OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
     Width = 775
-    inherited BtnShow: TToolButton
+    inherited btnShow: TToolButton
       Visible = False
     end
     inherited BtnOk: TToolButton
@@ -51,11 +51,11 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
     object cbVerRoomType: TComboBox[4]
       Left = 162
       Height = 27
-      Hint = 'Ver|Que ver en el horario del tipo de aula'
+      Hint = 'Show|What to show in the classroom timetable'
       Top = 2
       Width = 193
       ItemHeight = 0
-      OnChange = BtnMostrarClick
+      OnChange = btnShowClick
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0

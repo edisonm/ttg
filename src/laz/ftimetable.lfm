@@ -55,7 +55,7 @@ inherited TimetableForm: TTimetableForm
     object BtnClashRoom: TToolButton[8]
       Left = 316
       Top = 2
-      Action = ActClashAula
+      Action = ActClashRoom
       ParentShowHint = False
       ShowHint = True
     end
@@ -121,14 +121,14 @@ inherited TimetableForm: TTimetableForm
         item
           PickList.Strings = (          )
           ReadOnly = True
-          Title.Caption = 'Inicio'
+          Title.Caption = 'Start'
           Width = 110
           FieldName = 'TimeIni'
         end      
         item
           PickList.Strings = (          )
           ReadOnly = True
-          Title.Caption = 'Final'
+          Title.Caption = 'End'
           Width = 110
           FieldName = 'TimeEnd'
         end>
@@ -508,15 +508,15 @@ inherited TimetableForm: TTimetableForm
     end
     object ActTimetableClass: TAction[2]
       AutoCheck = True
-      Caption = 'Horario de paralelos'
-      Hint = 'Horario de paralelos|Horario de paralelos'
+      Caption = 'Classes timetables'
+      Hint = 'Timetables per classes|Timetables per classes'
       ImageIndex = 2
       OnExecute = ActTimetableClassExecute
     end
     object ActTimetableTeacher: TAction[3]
       AutoCheck = True
-      Caption = 'Horario de profesores'
-      Hint = 'Horario de profesores|Horario de profesores'
+      Caption = 'Teachers timetables'
+      Hint = 'Teachers timetables|Teachers timetables'
       ImageIndex = 3
       OnExecute = ActTimetableTeacherExecute
     end
@@ -534,24 +534,24 @@ inherited TimetableForm: TTimetableForm
       ImageIndex = 5
       OnExecute = ActClashSubjectExecute
     end
-    object ActClashAula: TAction[6]
+    object ActClashRoom: TAction[6]
       AutoCheck = True
-      Caption = 'Cruce de aulas'
-      Hint = 'Cruce de aulas|Cruce de aulas del mismo tipo'
+      Caption = 'Clashes of Rooms'
+      Hint = 'Clashes of Rooms|Clashes of Rooms del mismo tipo'
       ImageIndex = 6
-      OnExecute = ActClashAulaExecute
+      OnExecute = ActClashRoomExecute
     end
     object ActSubjectRestrictionNoRespetada: TAction[7]
       AutoCheck = True
-      Caption = 'Prohibiciones de materia'
-      Hint = 'Prohibiciones de materia|Prohibiciones de materia no respetadas'
+      Caption = 'Subject restrictions'
+      Hint = 'Subject restrictions|Subject restrictions no respetadas'
       ImageIndex = 7
       OnExecute = ActSubjectRestrictionNoRespetadaExecute
     end
     object ActTeacherRestrictionNoRespetada: TAction[8]
       AutoCheck = True
-      Caption = 'Prohibiciones de profesor'
-      Hint = 'Prohibiciones de profesor|Prohibiciones de profesor no respetadas'
+      Caption = 'Teacher retrictions'
+      Hint = 'Teacher retrictions|Input Teacher restrictions no respetadas'
       ImageIndex = 8
       OnExecute = ActTeacherRestrictionNoRespetadaExecute
     end
@@ -571,8 +571,8 @@ inherited TimetableForm: TTimetableForm
     end
     object ActTimetableRoomType: TAction[11]
       AutoCheck = True
-      Caption = 'Horario por tipo de aulas'
-      Hint = 'Horario por tipo de aulas|Horario por tipo de aulas'
+      Caption = 'Timetables by room types'
+      Hint = 'Timetables by room types|Timetables by room types'
       ImageIndex = 6
       OnExecute = ActTimetableRoomTypeExecute
     end

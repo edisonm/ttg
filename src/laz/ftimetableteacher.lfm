@@ -47,11 +47,11 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
     object cbVerTeacher: TComboBox[4]
       Left = 162
       Height = 21
-      Hint = 'Ver|Que ver en el horario del profesor'
+      Hint = 'Show|What to show in the Teacher timetable'
       Top = 2
       Width = 193
       ItemHeight = 13
-      OnChange = BtnMostrarClick
+      OnChange = btnShowClick
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0

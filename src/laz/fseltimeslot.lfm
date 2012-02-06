@@ -14,7 +14,7 @@ object SelTimeSlotForm: TSelTimeSlotForm
     Height = 18
     Top = 8
     Width = 245
-    Caption = 'Seleccione el periodo a intercambiar'
+    Caption = 'Select the time slot to swap'
     ParentColor = False
   end
   object Label2: TLabel
@@ -59,12 +59,12 @@ object SelTimeSlotForm: TSelTimeSlotForm
     LookupCache = False
     TabOrder = 1
   end
-  object bbtAceptar: TBitBtn
+  object bbtOk: TBitBtn
     Left = 64
     Height = 32
     Top = 80
     Width = 99
-    Caption = 'Aceptar'
+    Caption = 'Ok'
     Default = True
     Kind = bkOK
     ModalResult = 1

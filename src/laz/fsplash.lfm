@@ -94,7 +94,7 @@ object SplashForm: TSplashForm
     Height = 18
     Top = 88
     Width = 69
-    Caption = 'Ejecutable'
+    Caption = 'Executable'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     ParentColor = False
@@ -105,7 +105,7 @@ object SplashForm: TSplashForm
     Height = 18
     Top = 112
     Width = 48
-    Caption = 'Edicion'
+    Caption = 'Edition'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     ParentColor = False

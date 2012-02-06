@@ -135,8 +135,8 @@ inherited SubjectForm: TSubjectForm
     end
     object ActSubjectRestriction: TAction[2]
       AutoCheck = True
-      Caption = 'Prohibiciones de materia'
-      Hint = 'Prohibiciones de materia|Ingresar el horario de prohibiciones de materia'
+      Caption = 'Subject restrictions'
+      Hint = 'Subject restrictions|Input subject restrictions'
       ImageIndex = 2
       OnExecute = ActSubjectRestrictionExecute
     end

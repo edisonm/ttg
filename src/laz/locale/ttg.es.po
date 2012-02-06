@@ -871,39 +871,39 @@ msgid "MainForm"
 msgstr "MainForm"
 
 #: tmainform.midata.caption
-msgid "&Datos"
+msgid "&Data"
 msgstr "&Datos"
 
 #: tmainform.midata.hint
-msgid "Datos|Ingreso de datos"
+msgid "Data|Input Data"
 msgstr "Datos|Ingreso de datos"
 
 #: tmainform.mifile.caption
-msgid "&Archivo"
+msgid "&File"
 msgstr "&Archivo"
 
 #: tmainform.mifile.hint
-msgid "Archivo|Utilidades de la base de datos"
-msgstr "Archivo|Utilidades de la base de datos"
+msgid "File|File tools"
+msgstr "Archivo|Herramientas de archivo"
 
 #: tmainform.mihelp.caption
-msgid "A&yuda"
+msgid "&Help"
 msgstr "A&yuda"
 
 #: tmainform.mihelp.hint
-msgid "Ayuda|Temas de Ayuda en linea"
-msgstr "Ayuda|Temas de Ayuda en linea"
+msgid "Help|Online help"
+msgstr "Ayuda|Ayuda en linea"
 
 #: tmainform.milanguages.caption
 msgid "Languages"
-msgstr "Languages"
+msgstr "Lenguajes"
 
 #: tmainform.mireopen.caption
-msgid "Volver a abrir"
+msgid "Reopen"
 msgstr "Volver a abrir"
 
 #: tmainform.mireopen.hint
-msgid "Volver a abrir|Volver a abrir un colegio"
+msgid "Reopen|Reopen High School"
 msgstr "Volver a abrir|Volver a abrir un colegio"
 
 #: tmainform.mitool.caption
@@ -915,12 +915,12 @@ msgid "Herramientas|Herramientas que permiten elaborar un horario"
 msgstr "Herramientas|Herramientas que permiten elaborar un horario"
 
 #: tmainform.miview.caption
-msgid "&Ver"
+msgid "&View"
 msgstr "&Ver"
 
 #: tmainform.miview.hint
-msgid "Ver|Show de resultados"
-msgstr "Ver|Show de resultados"
+msgid "View|View results"
+msgstr "Ver|Ver resultados"
 
 #: tmainform.n1.caption
 msgctxt "TMAINFORM.N1.CAPTION"
@@ -964,11 +964,11 @@ msgid "ToolButton4"
 msgstr "ToolButton4"
 
 #: tmessageviewform.bbtclose.caption
-msgid "&Cerrar"
+msgid "&Close"
 msgstr "&Cerrar"
 
 #: tmessageviewform.messageviewform.caption
-msgid "Visor de mensajes"
+msgid "Message viewer"
 msgstr "Visor de mensajes"
 
 #: tmessageviewform.panel1.caption
@@ -1111,13 +1111,13 @@ msgid "0 "
 msgstr "0 "
 
 #: tprogressform.pnlbreaktimetableteacher.caption
-msgid " Broken Teachers:"
-msgstr "Fracc. profesores:"
+msgid " Break TT. Teacher:"
+msgstr "Fracc. h. profesores:"
 
 #: tprogressform.pnlbreaktimetableteachercount.caption
 msgctxt "TPROGRESSFORM.PNLBREAKTIMETABLETEACHERCOUNT.CAPTION"
 msgid " Number:"
-msgstr " Number:"
+msgstr " Número:"
 
 #: tprogressform.pnlbreaktimetableteachervalue.caption
 msgctxt "TPROGRESSFORM.PNLBREAKTIMETABLETEACHERVALUE.CAPTION"
@@ -1131,7 +1131,7 @@ msgstr " Materias cortadas"
 #: tprogressform.pnlbrokensessionnumber.caption
 msgctxt "TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION"
 msgid " Number:"
-msgstr " Number:"
+msgstr " Numero:"
 
 #: tprogressform.pnlbrokensessionvalue.caption
 msgctxt "TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION"
@@ -1159,7 +1159,7 @@ msgstr " Cruce materias:"
 #: tprogressform.pnlclashsubjectnumber.caption
 msgctxt "TPROGRESSFORM.PNLCLASHSUBJECTNUMBER.CAPTION"
 msgid " Number:"
-msgstr " Number:"
+msgstr " Numero:"
 
 #: tprogressform.pnlclashsubjectvalue.caption
 msgctxt "TPROGRESSFORM.PNLCLASHSUBJECTVALUE.CAPTION"
@@ -1173,7 +1173,7 @@ msgstr " Cruce profesores:"
 #: tprogressform.pnlclashteachernumber.caption
 msgctxt "TPROGRESSFORM.PNLCLASHTEACHERNUMBER.CAPTION"
 msgid " Number:"
-msgstr " Number:"
+msgstr " Numero:"
 
 #: tprogressform.pnlclashteachervalue.caption
 msgctxt "TPROGRESSFORM.PNLCLASHTEACHERVALUE.CAPTION"
@@ -1225,7 +1225,7 @@ msgstr " Horas huecas"
 #: tprogressform.pnloutofpositionemptyhournumber.caption
 msgctxt "TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURNUMBER.CAPTION"
 msgid " Number:"
-msgstr " Number:"
+msgstr " Numero:"
 
 #: tprogressform.pnloutofpositionemptyhourvalue.caption
 msgctxt "TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION"
@@ -1247,7 +1247,7 @@ msgstr " Prohibiciones de materia:"
 #: tprogressform.pnlsubjectrestrictionnumber.caption
 msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTIONNUMBER.CAPTION"
 msgid " Number:"
-msgstr " Number:"
+msgstr " Numero:"
 
 #: tprogressform.pnlsubjectrestrictionvalue.caption
 msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTIONVALUE.CAPTION"
@@ -1261,7 +1261,7 @@ msgstr " Prohibiciones de profesor:"
 #: tprogressform.pnlteacherrestrictionnumber.caption
 msgctxt "TPROGRESSFORM.PNLTEACHERRESTRICTIONNUMBER.CAPTION"
 msgid " Number:"
-msgstr " Number:"
+msgstr " Numero:"
 
 #: tprogressform.pnlteacherrestrictionvalue.caption
 msgctxt "TPROGRESSFORM.PNLTEACHERRESTRICTIONVALUE.CAPTION"
@@ -1273,12 +1273,12 @@ msgid "Total Value:"
 msgstr " Valor Total:"
 
 #: tprogressform.progressform.caption
-msgid "Progreso de la busqueda"
+msgid "Search progress"
 msgstr "Progreso de la busqueda"
 
 #: tseltimeslotform.bbtaceptar.caption
 msgctxt "TSELTIMESLOTFORM.BBACEPTAR.CAPTION"
-msgid "Aceptar"
+msgid "Ok"
 msgstr "Aceptar"
 
 #: tseltimeslotform.bbtcancel.caption
@@ -1287,50 +1287,50 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: tseltimeslotform.label1.caption
-msgid "Seleccione el periodo a intercambiar"
+msgid "Select the time slot to swap"
 msgstr "Seleccione el periodo a intercambiar"
 
 #: tseltimeslotform.label2.caption
 msgctxt "TSELTIMESLOTFORM.LABEL2.CAPTION"
 msgid "Day"
-msgstr "Day"
+msgstr "Dia"
 
 #: tseltimeslotform.label3.caption
 msgctxt "TSELTIMESLOTFORM.LABEL3.CAPTION"
 msgid "Hour"
-msgstr "Hour"
+msgstr "Hora"
 
 #: tseltimeslotform.seltimeslotform.caption
 msgid "Intercambiar TimeSlot"
 msgstr "Intercambiar TimeSlot"
 
 #: tsingleeditorform.actfind.caption
-msgid "Buscar"
+msgid "Search"
 msgstr "Buscar"
 
 #: tsingleeditorform.actfind.hint
-msgid "Buscar|Buscar un campo especifico"
+msgid "Search|Search using a specific field"
 msgstr "Buscar|Buscar un campo especifico"
 
 #: tsingleeditorform.actshow.caption
-msgid "Mostrar"
+msgid "Show"
 msgstr "Mostrar"
 
 #: tsingleeditorform.actshow.hint
 msgctxt "TSINGLEEDITORFORM.ACTSHOW.HINT"
-msgid "Presentar|Presenta el contenido de la cuadricula en un reporte"
-msgstr "Presentar|Presenta el contenido de la cuadricula en un reporte"
+msgid "Show|Show the grid content in a report"
+msgstr "Presentar|Presenta el contenido en un reporte"
 
 #: tsplashform.label1.caption
 msgid "Version"
 msgstr "Version"
 
 #: tsplashform.label2.caption
-msgid "Ejecutable"
+msgid "Executable"
 msgstr "Ejecutable"
 
 #: tsplashform.label3.caption
-msgid "Edicion"
+msgid "Edition"
 msgstr "Edicion"
 
 #: tsplashform.lblcopyright.caption
@@ -1359,12 +1359,12 @@ msgstr "SplashForm"
 
 #: tsubjectform.actsubjectrestriction.caption
 msgctxt "TSUBJECTFORM.ACTSUBJECTRESTRICTION.CAPTION"
-msgid "Prohibiciones de materia"
+msgid "Subject restrictions"
 msgstr "Prohibiciones de materia"
 
 #: tsubjectform.actsubjectrestriction.hint
-msgid "Prohibiciones de materia|Ingresar el horario de prohibiciones de materia"
-msgstr "Prohibiciones de materia|Ingresar el horario de prohibiciones de materia"
+msgid "Subject restrictions|Input subject restrictions"
+msgstr "Prohibiciones de materia|Ingresar las prohibiciones de materia"
 
 #: tsubjectform.subjectform.caption
 msgctxt "TSUBJECTFORM.SUBJECTFORM.CAPTION"
@@ -1373,37 +1373,37 @@ msgstr "Materias"
 
 #: tteacherform.actteacherrestriction.caption
 msgctxt "TTEACHERFORM.ACTTEACHERRESTRICTION.CAPTION"
-msgid "Prohibiciones de profesor"
+msgid "Teacher retrictions"
 msgstr "Prohibiciones de profesor"
 
 #: tteacherform.actteacherrestriction.hint
-msgid "Prohibiciones de profesor|Prohibiciones de profesor"
-msgstr "Prohibiciones de profesor|Prohibiciones de profesor"
+msgid "Teacher retrictions|Input Teacher restrictions"
+msgstr "Prohibiciones de profesor|Ingresar las prohibiciones de profesor"
 
 #: tteacherform.dbgriddetail.hint
-msgid "Distribution de profesores"
+msgid "Distribution of Teachers"
 msgstr "Distribution de profesores"
 
 #: ttimetableclassform.btnintercambiartimeslots.hint
-msgid "Intercambiar periodos|Intercambiar periodos"
+msgid "Swap time slots|Swap time slots"
 msgstr "Intercambiar periodos|Intercambiar periodos"
 
 #: ttimetableclassform.cbverclass.hint
-msgid "Ver|Seleccione el parametro a ver en el horario"
-msgstr "Ver|Seleccione el parametro a ver en el horario"
+msgid "Show|Param to show in the timetable"
+msgstr "Ver|Parametro a ver en el horario"
 
 #: ttimetableclassform.cbverclass.text
 msgid "cbVerClass"
 msgstr "cbVerClass"
 
-#: ttimetableform.actclashaula.caption
+#: ttimetableform.actclashroom.caption
 msgctxt "TTIMETABLEFORM.ACTCLASHAULA.CAPTION"
-msgid "Cruce de aulas"
+msgid "Clashes of Rooms"
 msgstr "Cruce de aulas"
 
-#: ttimetableform.actclashaula.hint
+#: ttimetableform.actclashroom.hint
 msgctxt "TTIMETABLEFORM.ACTCLASHAULA.HINT"
-msgid "Cruce de aulas|Cruce de aulas del mismo tipo"
+msgid "Clashes of Rooms|Cruce de aulas del mismo tipo"
 msgstr "Cruce de aulas|Cruce de aulas del mismo tipo"
 
 #: ttimetableform.actclashsubject.caption
@@ -1452,44 +1452,44 @@ msgstr "Materias cortadas por la hora|Materias cortadas por la hora"
 
 #: ttimetableform.actsubjectrestrictionnorespetada.caption
 msgctxt "TTIMETABLEFORM.ACTSUBJECTRESTRICTIONNORESPETADA.CAPTION"
-msgid "Prohibiciones de materia"
+msgid "Subject restrictions"
 msgstr "Prohibiciones de materia"
 
 #: ttimetableform.actsubjectrestrictionnorespetada.hint
-msgid "Prohibiciones de materia|Prohibiciones de materia no respetadas"
+msgid "Subject restrictions|Prohibiciones de materia no respetadas"
 msgstr "Prohibiciones de materia|Prohibiciones de materia no respetadas"
 
 #: ttimetableform.actteacherrestrictionnorespetada.caption
 msgctxt "TTIMETABLEFORM.ACTTEACHERRESTRICTIONNORESPETADA.CAPTION"
-msgid "Prohibiciones de profesor"
+msgid "Teacher retrictions"
 msgstr "Prohibiciones de profesor"
 
 #: ttimetableform.actteacherrestrictionnorespetada.hint
-msgid "Prohibiciones de profesor|Prohibiciones de profesor no respetadas"
+msgid "Teacher retrictions|Input Teacher restrictions no respetadas"
 msgstr "Prohibiciones de profesor|Prohibiciones de profesor no respetadas"
 
 #: ttimetableform.acttimetableclass.caption
-msgid "Horario de paralelos"
+msgid "Classes timetables"
 msgstr "Horario de paralelos"
 
 #: ttimetableform.acttimetableclass.hint
-msgid "Horario de paralelos|Horario de paralelos"
+msgid "Timetables per classes|Timetables per classes"
 msgstr "Horario de paralelos|Horario de paralelos"
 
 #: ttimetableform.acttimetableroomtype.caption
-msgid "Horario por tipo de aulas"
+msgid "Timetables by room types"
 msgstr "Horario por tipo de aulas"
 
 #: ttimetableform.acttimetableroomtype.hint
-msgid "Horario por tipo de aulas|Horario por tipo de aulas"
+msgid "Timetables by room types|Timetables by room types"
 msgstr "Horario por tipo de aulas|Horario por tipo de aulas"
 
 #: ttimetableform.acttimetableteacher.caption
-msgid "Horario de profesores"
-msgstr "Horario de profesoresHorario de profesores"
+msgid "Teachers timetables"
+msgstr "Horario de profesores"
 
 #: ttimetableform.acttimetableteacher.hint
-msgid "Horario de profesores|Horario de profesores"
+msgid "Teachers timetables|Teachers' timetables"
 msgstr "Horario de profesores|Horario de profesores"
 
 #: ttimetableform.dbgrid.columns[0].tcolumntitle.caption
@@ -1497,11 +1497,11 @@ msgid "IdTimetable"
 msgstr "IdTimetable"
 
 #: ttimetableform.dbgrid.columns[1].tcolumntitle.caption
-msgid "Inicio"
+msgid "Start"
 msgstr "Inicio"
 
 #: ttimetableform.dbgrid.columns[2].tcolumntitle.caption
-msgid "Final"
+msgid "End"
 msgstr "Final"
 
 #: ttimetableform.timetableform.caption
@@ -1509,12 +1509,12 @@ msgid "TimetableForm"
 msgstr "TimetableForm"
 
 #: ttimetableroomtypeform.cbverroomtype.hint
-msgid "Ver|Que ver en el horario del tipo de aula"
-msgstr "Ver|Que ver en el horario del tipo de aula"
+msgid "Show|What to show in the classroom timetable"
+msgstr "Mostrar|Que mostrar en el horario del tipo de aula"
 
 #: ttimetableteacherform.cbverteacher.hint
-msgid "Ver|Que ver en el horario del profesor"
-msgstr "Ver|Que ver en el horario del profesor"
+msgid "Show|What to show in the Teacher timetable"
+msgstr "Mostrar|Que mostrar en el horario del profesor"
 
 #: uabout.sappname
 msgid "Automatic Timetable Generator"
@@ -1730,11 +1730,11 @@ msgid "Teacher; Restrictions"
 msgstr "Profesor; Restriccions"
 
 #: uttgconsts.steachersworkloadwithoutproblems
-msgid "Teachers' Work load without problems..."
+msgid "Work load of Teachers without problems..."
 msgstr "Carga horaria de los profesores sin problemas..."
 
 #: uttgconsts.steachersworkloadwithproblems
-msgid "Teachers' work load with problems..."
+msgid "Work load of Teachers with problems..."
 msgstr "Carga horaria de los profesores con problemas..."
 
 #: uttgconsts.steacherworkloadhead

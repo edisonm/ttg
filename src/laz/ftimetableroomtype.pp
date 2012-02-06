@@ -55,7 +55,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure QuTimetableRoomTypeCalcFields(DataSet: TDataSet);
     procedure DSRoomTypeDataChange(Sender: TObject; Field: TField);
-    procedure BtnMostrarClick(Sender: TObject);
+    procedure btnShowClick(Sender: TObject);
   private
     { Private declarations }
     FName: string;
@@ -72,7 +72,7 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-procedure TTimetableRoomTypeForm.BtnMostrarClick(Sender: TObject);
+procedure TTimetableRoomTypeForm.btnShowClick(Sender: TObject);
 begin
   inherited;
   with SourceDataModule, MasterDataModule do
@@ -158,7 +158,7 @@ procedure TTimetableRoomTypeForm.DSRoomTypeDataChange(Sender: TObject;
   Field: TField);
 begin
   inherited;
-  BtnMostrarClick(nil);
+  btnShowClick(nil);
 end;
 
 initialization

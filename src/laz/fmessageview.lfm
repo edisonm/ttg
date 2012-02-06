@@ -4,7 +4,7 @@ object MessageViewForm: TMessageViewForm
   Top = 387
   Width = 434
   ActiveControl = Panel1
-  Caption = 'Visor de mensajes'
+  Caption = 'Message viewer'
   ClientHeight = 376
   ClientWidth = 434
   Font.Height = -11
@@ -82,7 +82,7 @@ object MessageViewForm: TMessageViewForm
       Top = 3
       Width = 96
       Anchors = [akRight, akBottom]
-      Caption = '&Cerrar'
+      Caption = '&Close'
       Kind = bkClose
       TabOrder = 0
     end

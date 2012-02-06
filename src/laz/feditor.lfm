@@ -22,7 +22,7 @@ object EditorForm: TEditorForm
     Caption = 'Show'
     Images = ImageList
     TabOrder = 2
-    object BtnShow: TToolButton
+    object btnShow: TToolButton
       Left = 1
       Hint = 'Show|Show the grid content in a report'
       Top = 2

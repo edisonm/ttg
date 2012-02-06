@@ -271,9 +271,9 @@ object MainForm: TMainForm
     left = 18
     top = 224
     object MIFile: TMenuItem
-      Caption = '&Archivo'
+      Caption = '&File'
       HelpContext = 30
-      Hint = 'Archivo|Utilidades de la base de datos'
+      Hint = 'File|File tools'
       object MINew: TMenuItem
         Action = ActNew
         Bitmap.Data = {
@@ -395,9 +395,9 @@ object MainForm: TMainForm
         OnClick = ActSaveExecute
       end
       object MIReopen: TMenuItem
-        Caption = 'Volver a abrir'
+        Caption = 'Reopen'
         Enabled = False
-        Hint = 'Volver a abrir|Volver a abrir un colegio'
+        Hint = 'Reopen|Reopen un colegio'
       end
       object MIPasswd: TMenuItem
         Action = ActPasswd
@@ -450,9 +450,9 @@ object MainForm: TMainForm
       end
     end
     object MIData: TMenuItem
-      Caption = '&Datos'
+      Caption = '&Data'
       HelpContext = 40
-      Hint = 'Datos|Ingreso de datos'
+      Hint = 'Data|Input Data'
       object MIDay: TMenuItem
         Action = ActDay
         AutoCheck = True
@@ -877,9 +877,9 @@ object MainForm: TMainForm
       end
     end
     object MIView: TMenuItem
-      Caption = '&Ver'
+      Caption = '&View'
       HelpContext = 60
-      Hint = 'Ver|Show de resultados'
+      Hint = 'View|View results'
       object MITimetable: TMenuItem
         Action = ActTimetable
         AutoCheck = True
@@ -1041,9 +1041,9 @@ object MainForm: TMainForm
       end
     end
     object MIHelp: TMenuItem
-      Caption = 'A&yuda'
+      Caption = '&Help'
       HelpContext = 70
-      Hint = 'Ayuda|Temas de Ayuda en linea'
+      Hint = 'Help|Online help'
       object MIContent: TMenuItem
         Action = ActContents
         Bitmap.Data = {

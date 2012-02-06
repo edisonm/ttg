@@ -6,7 +6,7 @@ inherited SingleEditorForm: TSingleEditorForm
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
-    inherited BtnShow: TToolButton
+    inherited btnShow: TToolButton
       Action = ActShow
     end
     object BtnFind: TToolButton[1]
@@ -151,13 +151,13 @@ inherited SingleEditorForm: TSingleEditorForm
     left = 64
     top = 88
     object ActShow: TAction
-      Caption = 'Mostrar'
-      Hint = 'Presentar|Presenta el contenido de la cuadricula en un reporte'
+      Caption = 'Show'
+      Hint = 'Show|Show the grid content in a report'
       ImageIndex = 0
     end
     object ActFind: TAction
-      Caption = 'Buscar'
-      Hint = 'Buscar|Buscar un campo especifico'
+      Caption = 'Search'
+      Hint = 'Search|Search un campo especifico'
       ImageIndex = 1
       OnExecute = ActFindExecute
     end

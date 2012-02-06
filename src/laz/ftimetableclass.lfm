@@ -22,7 +22,7 @@ inherited TimetableClassForm: TTimetableClassForm
     end
     object BtnIntercambiarTimeSlots: TToolButton[3]
       Left = 347
-      Hint = 'Intercambiar periodos|Intercambiar periodos'
+      Hint = 'Swap time slots|Swap time slots'
       Top = 2
       ImageIndex = 1
       OnClick = IntercambiarTimeSlotsClick
@@ -53,11 +53,11 @@ inherited TimetableClassForm: TTimetableClassForm
     object cbVerClass: TComboBox[5]
       Left = 162
       Height = 27
-      Hint = 'Ver|Seleccione el parametro a ver en el horario'
+      Hint = 'Show|Param to show in the timetable'
       Top = 2
       Width = 185
       ItemHeight = 0
-      OnChange = BtnMostrarClick
+      OnChange = btnShowClick
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0

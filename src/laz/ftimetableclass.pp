@@ -45,7 +45,7 @@ type
     Splitter1: TSplitter;
     DBNavigator: TDBNavigator;
     procedure BtnCancelClick(Sender: TObject);
-    procedure BtnMostrarClick(Sender: TObject);
+    procedure btnShowClick(Sender: TObject);
     procedure BtnOkClick(Sender: TObject);
     procedure DrawGridDrawCell(Sender: TObject; aCol, aRow: Integer;
       aRect: TRect; aState: TGridDrawState);
@@ -93,7 +93,7 @@ begin
   Result := RowKey[DrawGrid.Row - 1];
 end;
 
-procedure TTimetableClassForm.BtnMostrarClick(Sender: TObject);
+procedure TTimetableClassForm.btnShowClick(Sender: TObject);
 begin
   inherited;
   Caption := Format('[%s %d] - %s %s %s', [SuperTitle,
@@ -183,7 +183,7 @@ begin
         QuClass.FindField('IdGroupId').AsInteger,
         IdDay, IdHour, iIdDay, iIdHour);
     QuTimetableClass.Refresh;
-    BtnMostrarClick(nil);
+    btnShowClick(nil);
   end;
 end;
 
@@ -204,7 +204,7 @@ procedure TTimetableClassForm.DSClassDataChange(Sender: TObject;
   Field: TField);
 begin
   inherited;
-  BtnMostrarClick(nil);
+  btnShowClick(nil);
 end;
 
 initialization

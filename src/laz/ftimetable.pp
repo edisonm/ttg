@@ -141,7 +141,7 @@ type
     ActTimetableTeacher: TAction;
     ActClashTeacher: TAction;
     ActClashSubject: TAction;
-    ActClashAula: TAction;
+    ActClashRoom: TAction;
     ActSubjectRestrictionNoRespetada: TAction;
     ActTeacherRestrictionNoRespetada: TAction;
     ActSubjectCortadaDay: TAction;
@@ -181,7 +181,7 @@ type
     procedure ActTimetableTeacherExecute(Sender: TObject);
     procedure ActSubjectRestrictionNoRespetadaExecute(Sender: TObject);
     procedure ActTeacherRestrictionNoRespetadaExecute(Sender: TObject);
-    procedure ActClashAulaExecute(Sender: TObject);
+    procedure ActClashRoomExecute(Sender: TObject);
     procedure QuClashTeacherAfterScroll(DataSet: TDataSet);
     procedure QuClashSubjectAfterScroll(DataSet: TDataSet);
     procedure ActSubjectCortadaDayExecute(Sender: TObject);
@@ -230,7 +230,7 @@ begin
   begin
     with SourceDataModule do
       FTimetableClassForm.LoadHints(TbDay, TbHour, TbSubject);
-    FTimetableClassForm.BtnMostrarClick(nil);
+    FTimetableClassForm.btnShowClick(nil);
   end;
 end;
 
@@ -264,7 +264,7 @@ begin
   begin
     with SourceDataModule do
       FTimetableTeacherForm.LoadHints(TbDay, TbHour, TbTeacher);
-    FTimetableTeacherForm.BtnMostrarClick(nil);
+    FTimetableTeacherForm.btnShowClick(nil);
   end
 end;
 
@@ -357,13 +357,13 @@ begin
   end;
 end;
 
-procedure TTimetableForm.ActClashAulaExecute(Sender: TObject);
+procedure TTimetableForm.ActClashRoomExecute(Sender: TObject);
 begin
   inherited;
   with SourceDataModule, QuClashRoom do
   begin
     if TMasterDetailEditorForm.ToggleMasterDetailEditor
-      (Self, FClashRoomForm, ConfigStorage, ActClashAula, QuClashRoom,
+      (Self, FClashRoomForm, ConfigStorage, ActClashRoom, QuClashRoom,
       QuClashRoomDetalle) then
     begin
       QuClashRoom.Close;
@@ -428,7 +428,7 @@ begin
     begin
       FTimetableRoomTypeForm.LoadHints(TbDay, TbHour, TbSubject);
     end;
-    FTimetableRoomTypeForm.BtnMostrarClick(nil);
+    FTimetableRoomTypeForm.btnShowClick(nil);
   end;
 end;
 

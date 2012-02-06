@@ -54,7 +54,7 @@ inherited TeacherForm: TTeacherForm
     inherited DBGridDetail: TDBGrid
       Left = 305
       Height = 326
-      Hint = 'Distribution de profesores'
+      Hint = 'Distribution of Teachers'
       Top = 1
       Width = 292
       Align = alClient
@@ -209,8 +209,8 @@ inherited TeacherForm: TTeacherForm
     end
     object ActTeacherRestriction: TAction[2]
       AutoCheck = True
-      Caption = 'Prohibiciones de profesor'
-      Hint = 'Prohibiciones de profesor|Prohibiciones de profesor'
+      Caption = 'Teacher retrictions'
+      Hint = 'Teacher retrictions|Input Teacher restrictions'
       ImageIndex = 2
       OnExecute = ActTeacherRestrictionExecute
     end
