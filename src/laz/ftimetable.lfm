@@ -596,7 +596,7 @@ inherited TimetableForm: TTimetableForm
       '  IdHour,'
       '  RoomType.IdRoomType,'
       '  RoomType.AbRoomType,'
-      '  COUNT(*) AS Usadas,'
+      '  COUNT(*) AS Occupied,'
       '  COUNT(*) - RoomType.Number AS Clashes'
       'FROM'
       '  (TimetableDetail INNER JOIN Distribution ON'
@@ -690,10 +690,10 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuClashRoomUsadas: TStringField
+    object QuClashRoomOccupied: TStringField
       DisplayWidth = 20
       FieldKind = fkData
-      FieldName = 'Usadas'
+      FieldName = 'Occupied'
       Index = 5
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

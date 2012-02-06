@@ -170,7 +170,7 @@ type
     QuClashSubjectDetalleIdTimetable: TLongintField;
     QuSubjectCortadaHourDetalleIdTimetable: TLongintField;
     QuClashRoomClashes: TStringField;
-    QuClashRoomUsadas: TStringField;
+    QuClashRoomOccupied: TStringField;
     QuClashTeacherDetalleIdDay: TLongintField;
     QuClashTeacherDetalleIdHour: TLongintField;
     BtnMejorarTimetable: TToolButton;
