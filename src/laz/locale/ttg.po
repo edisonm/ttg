@@ -771,11 +771,11 @@ msgctxt "tmainform.actmaketimetable.hint"
 msgid "Make Timetables|Make Timetables"
 msgstr ""
 
-#: tmainform.actmejorartimetable.caption
+#: tmainform.actimprovetimetable.caption
 msgid "Improve Timetable"
 msgstr ""
 
-#: tmainform.actmejorartimetable.hint
+#: tmainform.actimprovetimetable.hint
 msgid "Improve Timetable|Improve Timetable searching in double depth"
 msgstr ""
 
@@ -1429,11 +1429,11 @@ msgctxt "TTIMETABLEFORM.ACTCLASHTEACHER.HINT"
 msgid "Clashes of teachers|Clashes of teachers"
 msgstr ""
 
-#: ttimetableform.actmejorartimetable.caption
+#: ttimetableform.actimprovetimetable.caption
 msgid "ActMejorarTimetable"
 msgstr ""
 
-#: ttimetableform.actmejorartimetable.hint
+#: ttimetableform.actimprovetimetable.hint
 msgid "ActMejorarTimetable|Improve selected timetable"
 msgstr ""
 

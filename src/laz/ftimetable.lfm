@@ -90,7 +90,7 @@ inherited TimetableForm: TTimetableForm
     object BtnMejorarTimetable: TToolButton[13]
       Left = 431
       Top = 2
-      Action = ActMejorarTimetable
+      Action = ActImproveTimeTable
       ParentShowHint = False
       ShowHint = True
     end
@@ -576,12 +576,12 @@ inherited TimetableForm: TTimetableForm
       ImageIndex = 6
       OnExecute = ActTimetableRoomTypeExecute
     end
-    object ActMejorarTimetable: TAction[12]
+    object ActImproveTimeTable: TAction[12]
       AutoCheck = True
-      Caption = 'ActMejorarTimetable'
-      Hint = 'ActMejorarTimetable|Improve selected timetable'
+      Caption = 'ActImproveTimeTable'
+      Hint = 'ActImproveTimeTable|Improve selected timetable'
       ImageIndex = 9
-      OnExecute = ActMejorarTimetableExecute
+      OnExecute = ActImproveTimeTableExecute
     end
   end
   object QuClashRoom: TZQuery[6]

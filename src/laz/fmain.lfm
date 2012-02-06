@@ -1014,7 +1014,7 @@ object MainForm: TMainForm
         OnClick = ActMakeTimetableExecute
       end
       object MIMejorarTimetable: TMenuItem
-        Action = ActMejorarTimetable
+        Action = ActImproveTimeTable
       end
       object MILanguages: TMenuItem
         Caption = 'Languages'
@@ -2236,7 +2236,7 @@ object MainForm: TMainForm
       ImageIndex = 17
       OnExecute = ActMakeTimetableExecute
     end
-    object ActMejorarTimetable: TAction
+    object ActImproveTimeTable: TAction
       Category = 'Tools'
       Caption = 'Improve Timetable'
       Hint = 'Improve Timetable|Improve Timetable searching in double depth'

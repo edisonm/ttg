@@ -174,7 +174,7 @@ type
     QuClashTeacherDetalleIdDay: TLongintField;
     QuClashTeacherDetalleIdHour: TLongintField;
     BtnMejorarTimetable: TToolButton;
-    ActMejorarTimetable: TAction;
+    ActImproveTimeTable: TAction;
     procedure ActTimetableClassExecute(Sender: TObject);
     procedure ActClashTeacherExecute(Sender: TObject);
     procedure ActClashSubjectExecute(Sender: TObject);
@@ -191,7 +191,7 @@ type
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure DataSourceStateChange(Sender: TObject);
     procedure ActFindExecute(Sender: TObject);
-    procedure ActMejorarTimetableExecute(Sender: TObject);
+    procedure ActImproveTimeTableExecute(Sender: TObject);
   private
     { Private declarations }
     FClashRoomForm, FClashSubjectForm, FSubjectCortadaHourForm,
@@ -297,16 +297,16 @@ begin
   end;
 end;
 
-procedure TTimetableForm.ActMejorarTimetableExecute(Sender: TObject);
+procedure TTimetableForm.ActImproveTimeTableExecute(Sender: TObject);
 begin
-  ActMejorarTimetable.Enabled := False;
+  ActImproveTimeTable.Enabled := False;
   try
 {$IFNDEF FREEWARE}
     MejorarTimetable;
 {$ENDIF}
   finally
-    ActMejorarTimetable.Enabled := True;
-    ActMejorarTimetable.Checked := False;
+    ActImproveTimeTable.Enabled := True;
+    ActImproveTimeTable.Checked := False;
   end;
 end;
 
@@ -324,7 +324,7 @@ begin
   IdTimetableDestino := StrToInt(SNewIdTimetable);
   with SourceDataModule do
   begin
-    ActMejorarTimetable.Enabled := False;
+    ActImproveTimeTable.Enabled := False;
     try
       {$IFDEF THREADED}
       TImproveTimetableThread.Create(IdTimetableFuente, IdTimetableDestino, False);
@@ -337,7 +337,7 @@ begin
       end;
       {$ENDIF}
     finally
-      ActMejorarTimetable.Enabled := True;
+      ActImproveTimeTable.Enabled := True;
       TbTimetableDetail.Refresh;
     end;
   end;

@@ -118,7 +118,7 @@ type
     N2: TMenuItem;
     N5: TMenuItem;
     N6: TMenuItem;
-    ActMejorarTimetable: TAction;
+    ActImproveTimeTable: TAction;
     MIMejorarTimetable: TMenuItem;
     SaveDialogCSV: TSaveDialog;
     ActRegistrationInfo: TAction;
@@ -614,7 +614,7 @@ begin
           ' El sistema se ejecutara sin las opciones que permiten generar el horario',
           mtWarning, [mbOk], 0);
         ActMakeTimetable.Enabled := False;
-        ActMejorarTimetable.Enabled := False;
+        ActImproveTimeTable.Enabled := False;
       end
       else if Protect1.DaysExpire > 0 then
       begin
@@ -624,7 +624,7 @@ begin
       else
       begin
         ActMakeTimetable.Enabled := True;
-        ActMejorarTimetable.Enabled := True;
+        ActImproveTimeTable.Enabled := True;
       end;
     end;
   end;}
@@ -655,7 +655,7 @@ begin
     FLogStrings := TStringList.Create;
     {$IFDEF FREEWARE}
     ActMakeTimetable.Enabled := False;
-    ActMejorarTimetable.Enabled := False;
+    ActImproveTimeTable.Enabled := False;
     Caption := Caption + ' ***Freeware***';
     {$ENDIF}
 {    Protect1.DaysExpire := 60;}
@@ -672,7 +672,7 @@ begin
     end;}
   except
     ActMakeTimetable.Enabled := False;
-    ActMejorarTimetable.Enabled := False;
+    ActImproveTimeTable.Enabled := False;
     raise;
   end;
 end;
