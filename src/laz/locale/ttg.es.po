@@ -1831,4 +1831,3 @@ msgstr "Elaboracion en progreso [%d]"
 #: uttgconsts.swrongcomposition
 msgid "Wrong Composition"
 msgstr "Composicion Erroea"
-
