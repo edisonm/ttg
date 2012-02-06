@@ -338,7 +338,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Visible = False
     end
     object QuTimetableGroupIdTeacher: TLongintField
-      DisplayLabel = 'Idigo'
+      DisplayLabel = 'Codigo'
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTeacher'

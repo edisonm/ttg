@@ -51,6 +51,7 @@ resourcestring
   SWorkInProgress = 'Work in progress [%d]';
   SImprovingTimetable = 'Improving Timetable [%d]';
   SApplyDownHill = 'Applying Downhill: %23s';
+  SImprovedTimetableId = 'Improved Timetable Id';
   SImprovingTimetableIn =  'Improving Timetable [%d] in [%d]';
   SBaseTimetable = 'Base Timetable: %d';
   SSearchBy = 'Search by %s';

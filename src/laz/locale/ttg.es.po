@@ -1432,19 +1432,19 @@ msgctxt "TTIMETABLEFORM.ACTCLASHTEACHER.HINT"
 msgid "Clashes of teachers|Clashes of teachers"
 msgstr "Cruce de profesores|Cruce de profesores"
 
-#: ttimetableform.actmejorartimetable.caption
-msgid "ActImproveTimeTable"
+#: ttimetableform.actimprovetimetable.caption
+msgid "Improve timetable"
 msgstr ""
 
-#: ttimetableform.actmejorartimetable.hint
+#: ttimetableform.actimprovetimetable.hint
 msgid "ActImproveTimeTable|Improve selected timetable"
 msgstr ""
 
-#: ttimetableform.actsubjectcortadaday.caption
-msgid "Subjects cortadas por el dia"
+#: ttimetableform.actsubjectcutday.caption
+msgid "Subjects cut by the day"
 msgstr "Materias cortadas por el dia"
 
-#: ttimetableform.actsubjectcortadaday.hint
+#: ttimetableform.actsubjectcutday.hint
 msgid "Subjects cut by the day|Subjects cut by the day"
 msgstr "Materias cortadas por el dia|Materias cortadas por el dia"
 
@@ -1519,10 +1519,20 @@ msgctxt "ttimetableform.dbgrid.columns[2].title.caption"
 msgid "End"
 msgstr "Final"
 
+#: ttimetableroomtypeform.cbverroomtype.hint
+msgctxt "ttimetableroomtypeform.cbverroomtype.hint"
+msgid "Show|What to show in the room type timetable"
+msgstr "Mostrar|Parametro a mostrar en el horario del tipo de aula"
+
 #: ttimetableroomtypeform.cbxshowroomtype.hint
 msgctxt "ttimetableroomtypeform.cbxshowroomtype.hint"
 msgid "Show|What to show in the room type timetable"
 msgstr "Mostrar|Parametro a mostrar en el horario del tipo de aula"
+
+#: ttimetableteacherform.cbverteacher.hint
+msgctxt "ttimetableteacherform.cbverteacher.hint"
+msgid "Show|Param to show in the teacher timetable"
+msgstr "Mostrar|Parametro a mostrar en el horario del profesor"
 
 #: ttimetableteacherform.cbxshowteacher.hint
 msgctxt "ttimetableteacherform.cbxshowteacher.hint"
@@ -1669,6 +1679,10 @@ msgstr "Libre"
 #: uttgconsts.simpossible
 msgid "Impossible"
 msgstr "Imposible"
+
+#: uttgconsts.simprovedtimetableid
+msgid "Improved Timetable Id"
+msgstr "Codigo del horario mejorado"
 
 #: uttgconsts.simprovingtimetable
 msgid "Improving Timetable [%d]"

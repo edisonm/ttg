@@ -1432,19 +1432,19 @@ msgctxt "TTIMETABLEFORM.ACTCLASHTEACHER.HINT"
 msgid "Clashes of teachers|Clashes of teachers"
 msgstr ""
 
-#: ttimetableform.actmejorartimetable.caption
-msgid "ActImproveTimeTable"
+#: ttimetableform.actimprovetimetable.caption
+msgid "Improve timetable"
 msgstr ""
 
-#: ttimetableform.actmejorartimetable.hint
+#: ttimetableform.actimprovetimetable.hint
 msgid "ActImproveTimeTable|Improve selected timetable"
 msgstr ""
 
-#: ttimetableform.actsubjectcortadaday.caption
-msgid "Subjects cortadas por el dia"
+#: ttimetableform.actsubjectcutday.caption
+msgid "Subjects cut by the day"
 msgstr ""
 
-#: ttimetableform.actsubjectcortadaday.hint
+#: ttimetableform.actsubjectcutday.hint
 msgid "Subjects cut by the day|Subjects cut by the day"
 msgstr ""
 
@@ -1678,6 +1678,10 @@ msgstr ""
 
 #: uttgconsts.simpossible
 msgid "Impossible"
+msgstr ""
+
+#: uttgconsts.simprovedtimetableid
+msgid "Improved Timetable Id"
 msgstr ""
 
 #: uttgconsts.simprovingtimetable

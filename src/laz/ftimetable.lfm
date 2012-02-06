@@ -76,7 +76,7 @@ inherited TimetableForm: TTimetableForm
     object BtnSubjectCortadaDay: TToolButton[11]
       Left = 385
       Top = 2
-      Action = ActSubjectCortadaDay
+      Action = ActSubjectCutDay
       ParentShowHint = False
       ShowHint = True
     end
@@ -555,12 +555,12 @@ inherited TimetableForm: TTimetableForm
       ImageIndex = 8
       OnExecute = ActTeacherRestrictionNoRespetadaExecute
     end
-    object ActSubjectCortadaDay: TAction[9]
+    object ActSubjectCutDay: TAction[9]
       AutoCheck = True
-      Caption = 'Subjects cortadas por el dia'
+      Caption = 'Subjects cut by the day'
       Hint = 'Subjects cut by the day|Subjects cut by the day'
       ImageIndex = 5
-      OnExecute = ActSubjectCortadaDayExecute
+      OnExecute = ActSubjectCutDayExecute
     end
     object ActSubjectCortadaHour: TAction[10]
       AutoCheck = True

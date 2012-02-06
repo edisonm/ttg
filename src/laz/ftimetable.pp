@@ -144,7 +144,7 @@ type
     ActClashRoom: TAction;
     ActSubjectRestrictionNonSatisfied: TAction;
     ActTeacherRestrictionNoRespetada: TAction;
-    ActSubjectCortadaDay: TAction;
+    ActSubjectCutDay: TAction;
     ActSubjectCortadaHour: TAction;
     ActTimetableRoomType: TAction;
     DSClashTeacher: TDataSource;
@@ -184,7 +184,7 @@ type
     procedure ActClashRoomExecute(Sender: TObject);
     procedure QuClashTeacherAfterScroll(DataSet: TDataSet);
     procedure QuClashSubjectAfterScroll(DataSet: TDataSet);
-    procedure ActSubjectCortadaDayExecute(Sender: TObject);
+    procedure ActSubjectCutDayExecute(Sender: TObject);
     procedure ActSubjectCortadaHourExecute(Sender: TObject);
     procedure ActTimetableRoomTypeExecute(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
@@ -217,7 +217,7 @@ var
 implementation
 
 uses
-  Variants, UTTModel, UMakeTT;
+  Variants, UTTModel, UMakeTT, UTTGConsts;
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
@@ -318,8 +318,8 @@ var
 begin
   IdTimetableFuente := SourceDataModule.TbTimetable.FindField('IdTimetable').AsInteger;
   SNewIdTimetable := IntToStr(MasterDataModule.NewIdTimetable);
-  if not InputQuery(Format('Mejorando Timetable %d: ', [IdTimetableFuente]),
-    'Idigo del horario mejorado', SNewIdTimetable) then
+  if not InputQuery(Format(SImprovingTimetable, [IdTimetableFuente]),
+    SImprovedTimetableId, SNewIdTimetable) then
     Exit;
   IdTimetableDestino := StrToInt(SNewIdTimetable);
   with SourceDataModule do
@@ -390,11 +390,11 @@ begin
     [QuClashSubjectIdSubject.Value]);
 end;
 
-procedure TTimetableForm.ActSubjectCortadaDayExecute(Sender: TObject);
+procedure TTimetableForm.ActSubjectCutDayExecute(Sender: TObject);
 begin
   inherited;
   if TSingleEditorForm.ToggleSingleEditor(Self, FSubjectCortadaDayForm,
-    ConfigStorage, ActSubjectCortadaDay, QuSubjectCortadaDay) then
+    ConfigStorage, ActSubjectCutDay, QuSubjectCortadaDay) then
   begin
     QuSubjectCortadaDay.Close;
     QuSubjectCortadaDay.Open;
