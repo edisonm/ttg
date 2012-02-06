@@ -1430,11 +1430,11 @@ msgid "Clashes of teachers|Clashes of teachers"
 msgstr ""
 
 #: ttimetableform.actimprovetimetable.caption
-msgid "ActMejorarTimetable"
+msgid "Improve timetable"
 msgstr ""
 
 #: ttimetableform.actimprovetimetable.hint
-msgid "ActMejorarTimetable|Improve selected timetable"
+msgid "Improve timetable|Improve selected timetable"
 msgstr ""
 
 #: ttimetableform.actsubjectcortadaday.caption
