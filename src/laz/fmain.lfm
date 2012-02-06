@@ -1,10 +1,10 @@
 object MainForm: TMainForm
-  Left = 932
-  Height = 54
-  Top = 140
+  Left = 623
+  Height = 77
+  Top = 216
   Width = 667
   Caption = 'MainForm'
-  ClientHeight = 54
+  ClientHeight = 77
   ClientWidth = 667
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -53,7 +53,7 @@ object MainForm: TMainForm
   object StatusBar: TStatusBar
     Left = 0
     Height = 21
-    Top = 33
+    Top = 56
     Width = 667
     AutoHint = True
     Panels = <    
@@ -397,7 +397,7 @@ object MainForm: TMainForm
       object MIReopen: TMenuItem
         Caption = 'Reopen'
         Enabled = False
-        Hint = 'Reopen|Reopen un colegio'
+        Hint = 'Reopen|Reopen High School'
       end
       object MIPasswd: TMenuItem
         Action = ActPasswd

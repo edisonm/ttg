@@ -867,8 +867,8 @@ msgstr ""
 msgid "Timetables|Show timetables"
 msgstr ""
 
-#: tmainform.caption
-msgctxt "TMAINFORM.CAPTION"
+#: tmainform.mainform.caption
+msgctxt "TMAINFORM.MAINFORM.CAPTION"
 msgid "MainForm"
 msgstr ""
 
@@ -1433,7 +1433,7 @@ msgid "Improve timetable"
 msgstr ""
 
 #: ttimetableform.actimprovetimetable.hint
-msgid "ActImproveTimeTable|Improve selected timetable"
+msgid "Improve timetable|Improve selected timetable"
 msgstr ""
 
 #: ttimetableform.actsubjectcortadahour.caption
@@ -1452,13 +1452,13 @@ msgstr ""
 msgid "Subjects cut by the day|Subjects cut by the day"
 msgstr ""
 
-#: ttimetableform.actsubjectrestrictionnorespetada.caption
-msgctxt "TTIMETABLEFORM.ACTSUBJECTRESTRICTIONNORESPETADA.CAPTION"
+#: ttimetableform.actsubjectrestrictionnonsatisfied.caption
+msgctxt "TTIMETABLEFORM.ACTSUBJECTRESTRICTIONNONSATISFIED.CAPTION"
 msgid "Subject restrictions"
 msgstr ""
 
-#: ttimetableform.actsubjectrestrictionnorespetada.hint
-msgctxt "TTIMETABLEFORM.ACTSUBJECTRESTRICTIONNORESPETADA.HINT"
+#: ttimetableform.actsubjectrestrictionnonsatisfied.hint
+msgctxt "TTIMETABLEFORM.ACTSUBJECTRESTRICTIONNONSATISFIED.HINT"
 msgid "Subject restrictions|Subject restrictions non satisfied"
 msgstr ""
 
@@ -1831,4 +1831,4 @@ msgstr ""
 #: uttgconsts.swrongcomposition
 msgid "Wrong Composition"
 msgstr ""
-
+

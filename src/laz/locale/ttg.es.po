@@ -867,8 +867,8 @@ msgstr "Horarios"
 msgid "Timetables|Show timetables"
 msgstr "Horarios|Mostrar horarios"
 
-#: tmainform.caption
-msgctxt "tmainform.caption"
+#: tmainform.mainform.caption
+msgctxt "TMAINFORM.MAINFORM.CAPTION"
 msgid "MainForm"
 msgstr "MainForm"
 
@@ -1433,7 +1433,7 @@ msgid "Improve timetable"
 msgstr ""
 
 #: ttimetableform.actimprovetimetable.hint
-msgid "ActImproveTimeTable|Improve selected timetable"
+msgid "Improve timetable|Improve selected timetable"
 msgstr ""
 
 #: ttimetableform.actsubjectcortadahour.caption
@@ -1452,13 +1452,13 @@ msgstr "Materias cortadas por el dia"
 msgid "Subjects cut by the day|Subjects cut by the day"
 msgstr "Materias cortadas por el dia|Materias cortadas por el dia"
 
-#: ttimetableform.actsubjectrestrictionnorespetada.caption
-msgctxt "ttimetableform.actsubjectrestrictionnorespetada.caption"
+#: ttimetableform.actsubjectrestrictionnonsatisfied.caption
+msgctxt "ttimetableform.actsubjectrestrictionnonsatisfied.caption"
 msgid "Subject restrictions"
 msgstr "Prohibiciones de materia"
 
-#: ttimetableform.actsubjectrestrictionnorespetada.hint
-msgctxt "ttimetableform.actsubjectrestrictionnorespetada.hint"
+#: ttimetableform.actsubjectrestrictionnonsatisfied.hint
+msgctxt "ttimetableform.actsubjectrestrictionnonsatisfied.hint"
 msgid "Subject restrictions|Subject restrictions non satisfied"
 msgstr "Prohibiciones de materia|Prohibiciones de materia no respetadas"
 
@@ -1831,4 +1831,4 @@ msgstr "Elaboracion en progreso [%d]"
 #: uttgconsts.swrongcomposition
 msgid "Wrong Composition"
 msgstr "Composicion Erroea"
-
+
