@@ -52,7 +52,7 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
     object cbxShowRoomType: TComboBox[4]
       Left = 162
       Height = 27
-      Hint = 'Show|What to show in the classroom timetable'
+      Hint = 'Show|What to show in the room type timetable'
       Top = 2
       Width = 193
       ItemHeight = 0

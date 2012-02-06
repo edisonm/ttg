@@ -1521,22 +1521,22 @@ msgstr ""
 
 #: ttimetableroomtypeform.cbverroomtype.hint
 msgctxt "ttimetableroomtypeform.cbverroomtype.hint"
-msgid "Show|What to show in the classroom timetable"
+msgid "Show|What to show in the room type timetable"
 msgstr ""
 
 #: ttimetableroomtypeform.cbxshowroomtype.hint
 msgctxt "TTIMETABLEROOMTYPEFORM.CBXSHOWROOMTYPE.HINT"
-msgid "Show|What to show in the classroom timetable"
+msgid "Show|What to show in the room type timetable"
 msgstr ""
 
 #: ttimetableteacherform.cbverteacher.hint
 msgctxt "ttimetableteacherform.cbverteacher.hint"
-msgid "Show|What to show in the Teacher timetable"
+msgid "Show|Param to show in the teacher timetable"
 msgstr ""
 
 #: ttimetableteacherform.cbxshowteacher.hint
 msgctxt "TTIMETABLETEACHERFORM.CBXSHOWTEACHER.HINT"
-msgid "Show|What to show in the Teacher timetable"
+msgid "Show|Param to show in the teacher timetable"
 msgstr ""
 
 #: uabout.sappname
