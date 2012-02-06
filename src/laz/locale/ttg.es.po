@@ -1715,7 +1715,7 @@ msgstr "Desea guardar los cambios efectuados?"
 
 #: uttgconsts.ssavedialogcsvfilter
 msgid "Comma delimited CSV (*.csv)|*.csv"
-msgstr ""
+msgstr "CSV delimitado por comas (*.csv)|*.csv"
 
 #: uttgconsts.ssavedialogfilter
 msgid "High School Timetable (*.ttd)|*.ttd"
