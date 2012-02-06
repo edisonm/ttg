@@ -550,7 +550,7 @@ inherited TimetableForm: TTimetableForm
     end
     object ActTeacherRestrictionNoRespetada: TAction[8]
       AutoCheck = True
-      Caption = 'Teacher retrictions'
+      Caption = 'Teacher restrictions'
       Hint = 'Teacher retrictions|Teacher restrictions non satisfied'
       ImageIndex = 8
       OnExecute = ActTeacherRestrictionNoRespetadaExecute

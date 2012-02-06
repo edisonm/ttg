@@ -39,18 +39,19 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       ClientWidth = 92
       DataSource = DSTeacher
       Flat = True
+      Options = []
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
     end
-    object cbVerTeacher: TComboBox[4]
+    object cbxShowTeacher: TComboBox[4]
       Left = 162
-      Height = 21
+      Height = 27
       Hint = 'Show|What to show in the Teacher timetable'
       Top = 2
       Width = 193
-      ItemHeight = 13
+      ItemHeight = 0
       OnChange = btnShowClick
       ParentShowHint = False
       ShowHint = True

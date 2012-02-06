@@ -209,8 +209,8 @@ inherited TeacherForm: TTeacherForm
     end
     object ActTeacherRestriction: TAction[2]
       AutoCheck = True
-      Caption = 'Teacher retrictions'
-      Hint = 'Teacher retrictions|Input Teacher restrictions'
+      Caption = 'Teacher restrictions'
+      Hint = 'Teacher restrictions|Input Teacher restrictions'
       ImageIndex = 2
       OnExecute = ActTeacherRestrictionExecute
     end

@@ -45,12 +45,13 @@ inherited TimetableClassForm: TTimetableClassForm
       ClientWidth = 92
       DataSource = DSClass
       Flat = True
+      Options = []
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
     end
-    object cbVerClass: TComboBox[5]
+    object cbxShowClass: TComboBox[5]
       Left = 162
       Height = 27
       Hint = 'Show|Param to show in the timetable'
@@ -61,7 +62,6 @@ inherited TimetableClassForm: TTimetableClassForm
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      Text = 'cbVerClass'
     end
   end
   inherited pnlStatus: TPanel

@@ -18,7 +18,7 @@ type
   TTimetableClassForm = class(TCrossManyToManyEditor1Form)
     QuTimetableClass: TZQuery;
     BtnIntercambiarTimeSlots: TToolButton;
-    cbVerClass: TComboBox;
+    cbxShowClass: TComboBox;
     QuTimetableGroupIdSubject: TLongintField;
     QuTimetableGroupIdLevel: TLongintField;
     QuTimetableGroupIdSpecialization: TLongintField;
@@ -101,7 +101,7 @@ begin
     QuClass.FindField('AbLevel').AsString,
     QuClass.FindField('AbSpecialization').AsString,
     QuClass.FindField('NaGroupId').AsString]);
-  FName := MasterDataModule.StringsShowClass.Values[cbVerClass.Text];
+  FName := MasterDataModule.StringsShowClass.Values[cbxShowClass.Text];
   with SourceDataModule do
     ShowEditor(TbDay, TbHour, QuTimetableClass, TbTimeSlot, 'IdDay', 'NaDay',
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
@@ -157,10 +157,10 @@ procedure TTimetableClassForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuClass.Open;
-  cbVerClass.Items.Clear;
+  cbxShowClass.Items.Clear;
   QuTimetableClass.Open;
-  LoadNames(MasterDataModule.StringsShowClass, cbVerClass.Items);
-  cbVerClass.Text := cbVerClass.Items[0];
+  LoadNames(MasterDataModule.StringsShowClass, cbxShowClass.Items);
+  cbxShowClass.Text := cbxShowClass.Items[0];
 end;
 
 procedure TTimetableClassForm.FormDestroy(Sender: TObject);

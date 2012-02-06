@@ -710,11 +710,11 @@ msgid "Working days|Working days"
 msgstr ""
 
 #: tmainform.actexit.caption
-msgid "Salir"
+msgid "Exit"
 msgstr ""
 
 #: tmainform.actexit.hint
-msgid "Salir|Salir del programa"
+msgid "Exit|Exit from program"
 msgstr ""
 
 #: tmainform.actgroupid.caption
@@ -909,11 +909,11 @@ msgid "Reopen|Reopen High School"
 msgstr ""
 
 #: tmainform.mitool.caption
-msgid "&Herramientas"
+msgid "&Tools"
 msgstr ""
 
 #: tmainform.mitool.hint
-msgid "Herramientas|Herramientas que permiten elaborar un horario"
+msgid "Tools|Tools that allow to make a timetable"
 msgstr ""
 
 #: tmainform.miview.caption
@@ -1382,11 +1382,11 @@ msgstr ""
 
 #: tteacherform.actteacherrestriction.caption
 msgctxt "TTEACHERFORM.ACTTEACHERRESTRICTION.CAPTION"
-msgid "Teacher retrictions"
+msgid "Teacher restrictions"
 msgstr ""
 
 #: tteacherform.actteacherrestriction.hint
-msgid "Teacher retrictions|Input Teacher restrictions"
+msgid "Teacher restrictions|Input Teacher restrictions"
 msgstr ""
 
 #: tteacherform.dbgriddetail.hint
@@ -1397,12 +1397,9 @@ msgstr ""
 msgid "Swap time slots|Swap time slots"
 msgstr ""
 
-#: ttimetableclassform.cbverclass.hint
+#: ttimetableclassform.cbxshowclass.hint
+msgctxt "TTIMETABLECLASSFORM.CBXSHOWCLASS.HINT"
 msgid "Show|Param to show in the timetable"
-msgstr ""
-
-#: ttimetableclassform.cbverclass.text
-msgid "cbVerClass"
 msgstr ""
 
 #: ttimetableform.actclashroom.caption
@@ -1471,7 +1468,7 @@ msgstr ""
 
 #: ttimetableform.actteacherrestrictionnorespetada.caption
 msgctxt "TTIMETABLEFORM.ACTTEACHERRESTRICTIONNORESPETADA.CAPTION"
-msgid "Teacher retrictions"
+msgid "Teacher restrictions"
 msgstr ""
 
 #: ttimetableform.actteacherrestrictionnorespetada.hint
@@ -1523,10 +1520,22 @@ msgid "End"
 msgstr ""
 
 #: ttimetableroomtypeform.cbverroomtype.hint
+msgctxt "ttimetableroomtypeform.cbverroomtype.hint"
+msgid "Show|What to show in the classroom timetable"
+msgstr ""
+
+#: ttimetableroomtypeform.cbxshowroomtype.hint
+msgctxt "TTIMETABLEROOMTYPEFORM.CBXSHOWROOMTYPE.HINT"
 msgid "Show|What to show in the classroom timetable"
 msgstr ""
 
 #: ttimetableteacherform.cbverteacher.hint
+msgctxt "ttimetableteacherform.cbverteacher.hint"
+msgid "Show|What to show in the Teacher timetable"
+msgstr ""
+
+#: ttimetableteacherform.cbxshowteacher.hint
+msgctxt "TTIMETABLETEACHERFORM.CBXSHOWTEACHER.HINT"
 msgid "Show|What to show in the Teacher timetable"
 msgstr ""
 

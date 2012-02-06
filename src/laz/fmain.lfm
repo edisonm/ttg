@@ -924,9 +924,9 @@ object MainForm: TMainForm
       end
     end
     object MITool: TMenuItem
-      Caption = '&Herramientas'
+      Caption = '&Tools'
       HelpContext = 50
-      Hint = 'Herramientas|Herramientas que permiten elaborar un horario'
+      Hint = 'Tools|Tools that allow to make a timetable'
       object MIConfig: TMenuItem
         Action = ActConfigure
         AutoCheck = True
@@ -2106,9 +2106,9 @@ object MainForm: TMainForm
     end
     object ActExit: TAction
       Category = 'File'
-      Caption = 'Salir'
+      Caption = 'Exit'
       HelpContext = 130
-      Hint = 'Salir|Salir del programa'
+      Hint = 'Exit|Exit from program'
       OnExecute = ActExitExecute
     end
     object ActDay: TAction

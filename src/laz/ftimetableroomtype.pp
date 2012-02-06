@@ -17,7 +17,7 @@ type
 
   TTimetableRoomTypeForm = class(TCrossManyToManyEditor1Form)
     QuTimetableRoomType: TZQuery;
-    cbVerRoomType: TComboBox;
+    cbxShowRoomType: TComboBox;
     QuTimetableRoomTypeIdSubject: TLongintField;
     QuTimetableRoomTypeIdLevel: TLongintField;
     QuTimetableRoomTypeIdSpecialization: TLongintField;
@@ -80,7 +80,7 @@ begin
     Caption := Format('[%s %d] - %s', [SuperTitle,
       QuRoomType.FindField('IdTimetable').AsInteger,
       QuRoomType.FindField('AbRoomType').AsString]);
-    FName := StringsShowRoomType.Values[cbVerRoomType.Text];
+    FName := StringsShowRoomType.Values[cbxShowRoomType.Text];
     ShowEditor(TbDay, TbHour, QuTimetableRoomType, TbTimeSlot, 'IdDay', 'NaDay',
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
   end;
@@ -90,10 +90,10 @@ procedure TTimetableRoomTypeForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuRoomType.Open;
-  cbVerRoomType.Items.Clear;
+  cbxShowRoomType.Items.Clear;
   QuTimetableRoomType.Open;
-  LoadNames(MasterDataModule.StringsShowRoomType, cbVerRoomType.Items);
-  cbVerRoomType.Text := cbVerRoomType.Items[0];
+  LoadNames(MasterDataModule.StringsShowRoomType, cbxShowRoomType.Items);
+  cbxShowRoomType.Text := cbxShowRoomType.Items[0];
 end;
 
 procedure TTimetableRoomTypeForm.FormDestroy(Sender: TObject);
