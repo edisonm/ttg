@@ -987,6 +987,11 @@ msgctxt "TPROGRESSFORM.BBTCLOSE.CAPTION"
 msgid "Ok"
 msgstr "Aceptar"
 
+#: tprogressform.caption
+msgctxt "tprogressform.caption"
+msgid "Search progress"
+msgstr "Progreso de la busqueda"
+
 #: tprogressform.lblbreaktimetableteachercount.caption
 msgctxt "TPROGRESSFORM.LBLBREAKTIMETABLETEACHERCOUNT.CAPTION"
 msgid "0 "
@@ -1274,10 +1279,6 @@ msgstr " Valor:"
 msgid "Total Value:"
 msgstr " Valor Total:"
 
-#: tprogressform.progressform.caption
-msgid "Search progress"
-msgstr "Progreso de la busqueda"
-
 #: tseltimeslotform.bbtaceptar.caption
 msgctxt "TSELTIMESLOTFORM.BBACEPTAR.CAPTION"
 msgid "Ok"
@@ -1324,11 +1325,6 @@ msgstr "Mostrar"
 msgctxt "TSINGLEEDITORFORM.ACTSHOW.HINT"
 msgid "Show|Show the grid content in a report"
 msgstr "Presentar|Presenta el contenido en un reporte"
-
-#: tsingleeditorform.btnfind.hint
-msgctxt "tsingleeditorform.btnfind.hint"
-msgid "Search|Search using a specific field"
-msgstr "Buscar|Buscar un campo especifico"
 
 #: tsplashform.label1.caption
 msgid "Version"
@@ -1440,14 +1436,6 @@ msgstr ""
 msgid "ActImproveTimeTable|Improve selected timetable"
 msgstr ""
 
-#: ttimetableform.actsubjectcutday.caption
-msgid "Subjects cut by the day"
-msgstr "Materias cortadas por el dia"
-
-#: ttimetableform.actsubjectcutday.hint
-msgid "Subjects cut by the day|Subjects cut by the day"
-msgstr "Materias cortadas por el dia|Materias cortadas por el dia"
-
 #: ttimetableform.actsubjectcortadahour.caption
 msgid "Subjects cut by the hour"
 msgstr "Materias cortadas por la hora"
@@ -1455,6 +1443,14 @@ msgstr "Materias cortadas por la hora"
 #: ttimetableform.actsubjectcortadahour.hint
 msgid "Subjects cut by the hour|Subjects cut by the hour"
 msgstr "Materias cortadas por la hora|Materias cortadas por la hora"
+
+#: ttimetableform.actsubjectcutday.caption
+msgid "Subjects cut by the day"
+msgstr "Materias cortadas por el dia"
+
+#: ttimetableform.actsubjectcutday.hint
+msgid "Subjects cut by the day|Subjects cut by the day"
+msgstr "Materias cortadas por el dia|Materias cortadas por el dia"
 
 #: ttimetableform.actsubjectrestrictionnorespetada.caption
 msgctxt "ttimetableform.actsubjectrestrictionnorespetada.caption"

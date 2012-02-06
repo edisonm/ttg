@@ -987,6 +987,11 @@ msgctxt "TPROGRESSFORM.BBTCLOSE.CAPTION"
 msgid "Ok"
 msgstr ""
 
+#: tprogressform.caption
+msgctxt "TPROGRESSFORM.CAPTION"
+msgid "Search progress"
+msgstr ""
+
 #: tprogressform.lblbreaktimetableteachercount.caption
 msgctxt "TPROGRESSFORM.LBLBREAKTIMETABLETEACHERCOUNT.CAPTION"
 msgid "0 "
@@ -1274,10 +1279,6 @@ msgstr ""
 msgid "Total Value:"
 msgstr ""
 
-#: tprogressform.progressform.caption
-msgid "Search progress"
-msgstr ""
-
 #: tseltimeslotform.bbtaceptar.caption
 msgctxt "TSELTIMESLOTFORM.BBACEPTAR.CAPTION"
 msgid "Ok"
@@ -1323,11 +1324,6 @@ msgstr ""
 #: tsingleeditorform.actshow.hint
 msgctxt "TSINGLEEDITORFORM.ACTSHOW.HINT"
 msgid "Show|Show the grid content in a report"
-msgstr ""
-
-#: tsingleeditorform.btnfind.hint
-msgctxt "TSINGLEEDITORFORM.BTNFIND.HINT"
-msgid "Search|Search using a specific field"
 msgstr ""
 
 #: tsplashform.label1.caption
@@ -1440,20 +1436,20 @@ msgstr ""
 msgid "ActImproveTimeTable|Improve selected timetable"
 msgstr ""
 
-#: ttimetableform.actsubjectcutday.caption
-msgid "Subjects cut by the day"
-msgstr ""
-
-#: ttimetableform.actsubjectcutday.hint
-msgid "Subjects cut by the day|Subjects cut by the day"
-msgstr ""
-
 #: ttimetableform.actsubjectcortadahour.caption
 msgid "Subjects cut by the hour"
 msgstr ""
 
 #: ttimetableform.actsubjectcortadahour.hint
 msgid "Subjects cut by the hour|Subjects cut by the hour"
+msgstr ""
+
+#: ttimetableform.actsubjectcutday.caption
+msgid "Subjects cut by the day"
+msgstr ""
+
+#: ttimetableform.actsubjectcutday.hint
+msgid "Subjects cut by the day|Subjects cut by the day"
 msgstr ""
 
 #: ttimetableform.actsubjectrestrictionnorespetada.caption
