@@ -1,17 +1,17 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 870
-  Top = 73
+  Left = 907
+  Top = 71
   ActiveControl = DBNavigator
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
+  Visible = True
   inherited TlBShow: TToolBar
     inherited btnShow: TToolButton
       Action = ActShow
     end
     object BtnFind: TToolButton[1]
       Left = 24
-      Hint = 'Search|Search using a specific field'
       Top = 2
       Action = ActFind
       ParentShowHint = False
