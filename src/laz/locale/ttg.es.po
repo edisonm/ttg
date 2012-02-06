@@ -1431,7 +1431,7 @@ msgstr "Cruce de profesores|Cruce de profesores"
 
 #: ttimetableform.actimprovetimetable.caption
 msgid "Improve timetable"
-msgstr "ActMejorarTimetable"
+msgstr "Mejorar horario"
 
 #: ttimetableform.actimprovetimetable.hint
 msgid "Improve timetable|Improve selected timetable"
