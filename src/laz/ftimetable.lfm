@@ -557,15 +557,15 @@ inherited TimetableForm: TTimetableForm
     end
     object ActSubjectCortadaDay: TAction[9]
       AutoCheck = True
-      Caption = 'Materias cortadas por el dia'
-      Hint = 'Materias cortadas por el dia|Materias cortadas por el dia'
+      Caption = 'Subjects cortadas por el dia'
+      Hint = 'Subjects cortadas por el dia|Subjects cortadas por el dia'
       ImageIndex = 5
       OnExecute = ActSubjectCortadaDayExecute
     end
     object ActSubjectCortadaHour: TAction[10]
       AutoCheck = True
-      Caption = 'Materias cortadas por la hora'
-      Hint = 'Materias cortadas por la hora|Materias cortadas por la hora'
+      Caption = 'Subjects cortadas por la hora'
+      Hint = 'Subjects cortadas por la hora|Subjects cortadas por la hora'
       ImageIndex = 5
       OnExecute = ActSubjectCortadaHourExecute
     end

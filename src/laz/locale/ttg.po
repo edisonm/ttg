@@ -717,19 +717,19 @@ msgid "Salir|Salir del programa"
 msgstr ""
 
 #: tmainform.actgroupid.caption
-msgid "Identificadores de paralelo"
+msgid "Group IDs"
 msgstr ""
 
 #: tmainform.actgroupid.hint
-msgid "Identificadores de paralelo|Identificadores de paralelo"
+msgid "Group IDs|Group IDs"
 msgstr ""
 
 #: tmainform.acthour.caption
-msgid "Horas academicas"
+msgid "Academic hours"
 msgstr ""
 
 #: tmainform.acthour.hint
-msgid "Horas academicas|Horas academicas"
+msgid "Academic hours|Academic hours"
 msgstr ""
 
 #: tmainform.actindex.caption
@@ -774,15 +774,15 @@ msgid "Mejorar horario"
 msgstr ""
 
 #: tmainform.actmejorartimetable.hint
-msgid "Mejorar horario|Mejorar horario buscando en doble profundidad"
+msgid "Improve Timetable|Improve Timetable searching in double depth"
 msgstr ""
 
 #: tmainform.actnew.caption
-msgid "&Nuevo"
+msgid "&New"
 msgstr ""
 
 #: tmainform.actnew.hint
-msgid "Nuevo|Nuevo colegio"
+msgid "New|New High School"
 msgstr ""
 
 #: tmainform.actopen.caption
@@ -798,7 +798,7 @@ msgid "Clave..."
 msgstr ""
 
 #: tmainform.actpasswd.hint
-msgid "Clave|Permite ingresar la clave de acceso al sistema"
+msgid "Password|Change system password"
 msgstr ""
 
 #: tmainform.actregistrationinfo.caption
@@ -806,11 +806,11 @@ msgid "Informacion de registro"
 msgstr ""
 
 #: tmainform.actroomtype.caption
-msgid "Tipos de aula"
+msgid "Room Types"
 msgstr ""
 
 #: tmainform.actroomtype.hint
-msgid "Tipos de aula|Tipos de aula"
+msgid "Room Types|Room Types"
 msgstr ""
 
 #: tmainform.actsave.caption
@@ -818,40 +818,40 @@ msgid "Guardar..."
 msgstr ""
 
 #: tmainform.actsave.hint
-msgid "Guardar|Guardar colegio"
+msgid "Save|Save High School"
 msgstr ""
 
 #: tmainform.actspecialization.caption
-msgid "Especializaciones"
+msgid "Specializations"
 msgstr ""
 
 #: tmainform.actspecialization.hint
-msgid "Especializaciones|Especializaciones"
+msgid "Specializations|Specializations"
 msgstr ""
 
 #: tmainform.actsubject.caption
 msgctxt "TMAINFORM.ACTSUBJECT.CAPTION"
-msgid "Materias"
+msgid "Subjects"
 msgstr ""
 
 #: tmainform.actsubject.hint
-msgid "Materias|Materias"
+msgid "Subjects|Subjects"
 msgstr ""
 
 #: tmainform.actteacher.caption
-msgid "Profesores"
+msgid "Teachers"
 msgstr ""
 
 #: tmainform.actteacher.hint
-msgid "Profesores|Profesores"
+msgid "Teachers|Teachers"
 msgstr ""
 
 #: tmainform.acttimeslot.caption
-msgid "Periodos laborables"
+msgid "Working Time Slots"
 msgstr ""
 
 #: tmainform.acttimeslot.hint
-msgid "Periodos laborables|Periodos laborables"
+msgid "Working Time Slots|Working Time Slots"
 msgstr ""
 
 #: tmainform.acttimetable.caption
@@ -1364,7 +1364,7 @@ msgstr ""
 
 #: tsubjectform.subjectform.caption
 msgctxt "TSUBJECTFORM.SUBJECTFORM.CAPTION"
-msgid "Materias"
+msgid "Subjects"
 msgstr ""
 
 #: tteacherform.actteacherrestriction.caption
@@ -1431,19 +1431,19 @@ msgid "Mejorar horario|Mejorar horario seleccionado"
 msgstr ""
 
 #: ttimetableform.actsubjectcortadaday.caption
-msgid "Materias cortadas por el dia"
+msgid "Subjects cortadas por el dia"
 msgstr ""
 
 #: ttimetableform.actsubjectcortadaday.hint
-msgid "Materias cortadas por el dia|Materias cortadas por el dia"
+msgid "Subjects cortadas por el dia|Materias cortadas por el dia"
 msgstr ""
 
 #: ttimetableform.actsubjectcortadahour.caption
-msgid "Materias cortadas por la hora"
+msgid "Subjects cortadas por la hora"
 msgstr ""
 
 #: ttimetableform.actsubjectcortadahour.hint
-msgid "Materias cortadas por la hora|Materias cortadas por la hora"
+msgid "Subjects cortadas por la hora|Materias cortadas por la hora"
 msgstr ""
 
 #: ttimetableform.actsubjectrestrictionnorespetada.caption

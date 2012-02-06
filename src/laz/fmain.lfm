@@ -2065,9 +2065,9 @@ object MainForm: TMainForm
     end
     object ActNew: TAction
       Category = 'File'
-      Caption = '&Nuevo'
+      Caption = '&New'
       HelpContext = 80
-      Hint = 'Nuevo|Nuevo colegio'
+      Hint = 'New|New High School'
       ImageIndex = 0
       OnExecute = ActNewExecute
       ShortCut = 16462
@@ -2085,7 +2085,7 @@ object MainForm: TMainForm
       Category = 'File'
       Caption = 'Guardar...'
       HelpContext = 100
-      Hint = 'Guardar|Guardar colegio'
+      Hint = 'Save|Save High School'
       ImageIndex = 2
       OnExecute = ActSaveExecute
       ShortCut = 16455
@@ -2094,7 +2094,7 @@ object MainForm: TMainForm
       Category = 'File'
       Caption = 'Clave...'
       HelpContext = 110
-      Hint = 'Clave|Permite ingresar la clave de acceso al sistema'
+      Hint = 'Password|Change system password'
       ImageIndex = 3
       ShortCut = 16459
     end
@@ -2124,9 +2124,9 @@ object MainForm: TMainForm
     object ActHour: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Horas academicas'
+      Caption = 'Academic hours'
       HelpContext = 150
-      Hint = 'Horas academicas|Horas academicas'
+      Hint = 'Academic hours|Academic hours'
       ImageIndex = 5
       OnExecute = ActHourExecute
       ShortCut = 16456
@@ -2134,9 +2134,9 @@ object MainForm: TMainForm
     object ActTimeSlot: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Periodos laborables'
+      Caption = 'Working Time Slots'
       HelpContext = 160
-      Hint = 'Periodos laborables|Periodos laborables'
+      Hint = 'Working Time Slots|Working Time Slots'
       ImageIndex = 13
       OnExecute = ActTimeSlotExecute
       ShortCut = 49225
@@ -2154,9 +2154,9 @@ object MainForm: TMainForm
     object ActSpecialization: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Especializaciones'
+      Caption = 'Specializations'
       HelpContext = 180
-      Hint = 'Especializaciones|Especializaciones'
+      Hint = 'Specializations|Specializations'
       ImageIndex = 6
       OnExecute = ActSpecializationExecute
       ShortCut = 16453
@@ -2164,9 +2164,9 @@ object MainForm: TMainForm
     object ActGroupId: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Identificadores de paralelo'
+      Caption = 'Group IDs'
       HelpContext = 190
-      Hint = 'Identificadores de paralelo|Identificadores de paralelo'
+      Hint = 'Group IDs|Group IDs'
       ImageIndex = 8
       OnExecute = ActGroupIdExecute
       ShortCut = 16466
@@ -2184,9 +2184,9 @@ object MainForm: TMainForm
     object ActSubject: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Materias'
+      Caption = 'Subjects'
       HelpContext = 210
-      Hint = 'Materias|Materias'
+      Hint = 'Subjects|Subjects'
       ImageIndex = 15
       OnExecute = ActSubjectExecute
       ShortCut = 49229
@@ -2194,9 +2194,9 @@ object MainForm: TMainForm
     object ActRoomType: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Tipos de aula'
+      Caption = 'Room Types'
       HelpContext = 220
-      Hint = 'Tipos de aula|Tipos de aula'
+      Hint = 'Room Types|Room Types'
       ImageIndex = 10
       OnExecute = ActRoomTypeExecute
       ShortCut = 49217
@@ -2204,9 +2204,9 @@ object MainForm: TMainForm
     object ActTeacher: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Profesores'
+      Caption = 'Teachers'
       HelpContext = 240
-      Hint = 'Profesores|Profesores'
+      Hint = 'Teachers|Teachers'
       ImageIndex = 9
       OnExecute = ActTeacherExecute
       ShortCut = 16463
@@ -2239,7 +2239,7 @@ object MainForm: TMainForm
     object ActMejorarTimetable: TAction
       Category = 'Tools'
       Caption = 'Mejorar horario'
-      Hint = 'Mejorar horario|Mejorar horario buscando en doble profundidad'
+      Hint = 'Improve Timetable|Improve Timetable searching in double depth'
     end
     object ActLangDefault: TAction
       Category = 'Tools'
@@ -2265,7 +2265,7 @@ object MainForm: TMainForm
   end
   object SaveDialogCSV: TSaveDialog
     DefaultExt = '.csv'
-    Filter = 'CSV delimitado por comas(*.csv)|*.csv'
+    Filter = 'Comma delimited CSV(*.csv)|*.csv'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
     left = 112
     top = 72

@@ -33,6 +33,7 @@ resourcestring
     'Pending changes will be lost. You really want to quit?';
   SReady = 'Ready';
   SSaveDialogFilter =  'High School Timetable (*.ttd)|*.ttd';
+  SSaveDialogCSVFilter = 'Comma delimited CSV (*.csv)|*.csv';
   SChangesWillBeLostWarning = 'Changes will be lost, are you sure?';
   SRelColsRows =  '%s|Columns: %s - Rows: %s ';
   SIsEmpty = '%s is empty';
