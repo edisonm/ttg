@@ -40,7 +40,7 @@ var
 
 implementation
 uses
-  DMaster, FCrossManyToManyEditor, FConfiguracion, DSource;
+  DMaster, FCrossManyToManyEditor, FConfiguracion, DSource, UTTGConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -53,16 +53,17 @@ begin
     FSubjectRestrictionForm, ConfigStorage, ActSubjectRestriction) then
   with FSubjectRestrictionForm do
   begin
-    Caption := Format('%s %s - Editando %s', [
+    Caption := Format('%s %s - %s %s', [
 		      SourceDataModule.NameDataSet[TbSubject],
 		      TbSubject.FindField('NaSubject').AsString,
-		      Description[TbSubjectRestriction]]);
-    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
+                      SEditing, Description[TbSubjectRestriction]]);
+    DrawGrid.Hint := Format(SRelColsRows,
       [Description[TbSubjectRestriction], Description[TbDay],
       Description[TbHour]]);
-    ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda',
+    ListBox.Hint := Format('%s|%s. %s',
       [Description[TbSubjectRestrictionType],
-      Description[TbSubjectRestrictionType]]);
+       Description[TbSubjectRestrictionType],
+       SPressDelToClearCell]);
     ShowEditor(TbDay, TbHour, TbSubjectRestrictionType, QuSubjectRestriction,
       TbTimeSlot, 'IdDay', 'NaDay', 'IdDay', 'IdDay', 'IdHour', 'NaHour',
       'IdHour', 'IdHour', 'IdSubjectRestrictionType', 'NaSubjectRestrictionType',

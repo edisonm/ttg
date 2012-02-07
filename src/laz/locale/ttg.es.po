@@ -866,7 +866,7 @@ msgid "Timetables"
 msgstr "Horarios"
 
 #: tmainform.acttimetable.hint
-msgid "Timetables|Show timetables"
+msgid "Timetables|Show Timetables"
 msgstr "Horarios|Mostrar horarios"
 
 #: tmainform.mainform.caption
@@ -1655,6 +1655,10 @@ msgstr "Detalle"
 msgid "Downhill Algorithm"
 msgstr "Algoritmo de Descenso"
 
+#: uttgconsts.sediting
+msgid "Editing"
+msgstr "Editando"
+
 #: uttgconsts.sevolutiveelitistalgorithm
 msgid "Evolutive Elitist Algorithm"
 msgstr "Algoritmo Evolutivo Elitista"
@@ -1720,8 +1724,8 @@ msgid "Inadequate"
 msgstr "Inadecuado"
 
 #: uttgconsts.sinvalidcomposition
-msgid "Invalid Composition: \"%s\""
-msgstr "Composicion no valida: \"%s\""
+msgid "Invalid Composition: [%s]"
+msgstr "Composicion no valida: [%s]"
 
 #: uttgconsts.sinvaliddata
 msgid "Invalid input data"
@@ -1776,6 +1780,10 @@ msgstr "Probabilidad de polinizacion"
 #: uttgconsts.spopulationsize
 msgid "Population size"
 msgstr "Numero de individuos"
+
+#: uttgconsts.spressdeltoclearcell
+msgid "Press <Del> to clear cell"
+msgstr "Presione <Supr> para borrar la celda"
 
 #: uttgconsts.sproblems
 msgid "Problems"

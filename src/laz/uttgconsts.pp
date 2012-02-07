@@ -35,6 +35,7 @@ resourcestring
   SDay6 = 'Saturday';
   SDetail = 'Detail';
   SDownHillAlgorithm = 'Downhill Algorithm';
+  SEditing = 'Editing';
   SEvolutiveElitistAlgorithm = 'Evolutive Elitist Algorithm';
   SGenerateTimetables = 'Generate Timetables';
   SHour1 = 'First';
@@ -51,7 +52,7 @@ resourcestring
   SImprovingTimetable = 'Improving Timetable [%d]';
   SImprovingTimetableIn =  'Improving Timetable [%d] in [%d]';
   SInadequate = 'Inadequate';
-  SInvalidComposition = 'Invalid Composition: "%s"';
+  SInvalidComposition = 'Invalid Composition: [%s]';
   SInvalidData = 'Invalid input data';
   SIsEmpty = '%s is empty';
   SLoad = 'Load';
@@ -65,6 +66,7 @@ resourcestring
   SPendingChangesWillBeLostYouReallyWantToQuit = 'Pending changes will be lost. You really want to quit?';
   SPollinationProbability = 'Pollination Probability';
   SPopulationSize = 'Population size';
+  SPressDelToClearCell = 'Press <Del> to clear cell';
   SProblems = 'Problems';
   SRandSeed = 'Random Generator Seed';
   SReady = 'Ready';

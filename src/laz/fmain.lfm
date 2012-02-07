@@ -2046,7 +2046,7 @@ object MainForm: TMainForm
       AutoCheck = True
       Caption = 'Timetables'
       HelpContext = 280
-      Hint = 'Timetables|Show timetables'
+      Hint = 'Timetables|Show Timetables'
       ImageIndex = 20
       OnExecute = ActTimetableExecute
       ShortCut = 49234
