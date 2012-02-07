@@ -1549,6 +1549,10 @@ msgstr ""
 msgid "Applying Downhill: %23s"
 msgstr ""
 
+#: uttgconsts.sassign
+msgid "Assign"
+msgstr ""
+
 #: uttgconsts.sbasetimetable
 msgid "Base Timetable: %d"
 msgstr ""
@@ -1747,6 +1751,10 @@ msgstr ""
 #: uttgconsts.srelcolsrows
 msgctxt "uttgconsts.srelcolsrows"
 msgid "%s|Columns: %s - Rows: %s "
+msgstr ""
+
+#: uttgconsts.srelease
+msgid "Release"
 msgstr ""
 
 #: uttgconsts.sreparationprobability

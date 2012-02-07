@@ -1549,6 +1549,10 @@ msgstr "Mientras se procesaba %s"
 msgid "Applying Downhill: %23s"
 msgstr "Aplicar Descenso: %23s"
 
+#: uttgconsts.sassign
+msgid "Assign"
+msgstr "Asignar"
+
 #: uttgconsts.sbasetimetable
 msgid "Base Timetable: %d"
 msgstr "Horario base: %d"
@@ -1748,6 +1752,10 @@ msgstr "Listo"
 msgctxt "uttgconsts.srelcolsrows"
 msgid "%s|Columns: %s - Rows: %s "
 msgstr "%s|Columnas: %s - Filas: %s "
+
+#: uttgconsts.srelease
+msgid "Release"
+msgstr "Liberar"
 
 #: uttgconsts.sreparationprobability
 msgctxt "uttgconsts.sreparationprobability"

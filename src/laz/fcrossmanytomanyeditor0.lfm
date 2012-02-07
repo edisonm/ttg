@@ -1,9 +1,11 @@
 inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
-  Left = 435
-  Top = 166
+  Left = 933
+  Top = 442
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
   OnDestroy = FormDestroy
+  Visible = True
   inherited TlBShow: TToolBar
     inherited BtnOk: TToolButton
       OnClick = BtnOkClick
@@ -46,10 +48,6 @@ inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
       Top = 1
       Width = 111
       Align = alClient
-      Items.Strings = (
-        'No Asignar'
-        'Asignar'
-      )
       ItemHeight = 18
       OnClick = ListBoxClick
       OnDrawItem = ListBoxDrawItem
@@ -57,6 +55,7 @@ inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
       ScrollWidth = 109
       Style = lbOwnerDrawFixed
       TabOrder = 0
+      TopIndex = -1
     end
   end
   inherited ImageList: TImageList[6]

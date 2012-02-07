@@ -82,6 +82,8 @@ resourcestring
   SHour8 = 'Eighth';
   SInadequate = 'Inadequate';
   SImpossible = 'Impossible';
+  SRelease = 'Release';
+  SAssign = 'Assign';
 
 implementation
 

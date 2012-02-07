@@ -19,6 +19,7 @@ type
     Splitter: TSplitter;
     procedure DrawGridSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
+    procedure FormCreate(Sender: TObject);
     procedure ListBoxDrawItem(Control: TWinControl; Index: Integer;
       Rect: TRect; State: TOwnerDrawState);
     procedure DrawGridKeyUp(Sender: TObject; var Key: Word;
@@ -58,6 +59,9 @@ var
   CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form;
 
 implementation
+
+uses
+  UTTGConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -113,6 +117,16 @@ procedure TCrossManyToManyEditor0Form.DrawGridSelectCell(Sender: TObject;
   ACol, ARow: Integer; var CanSelect: Boolean);
 begin
   inherited;
+end;
+
+procedure TCrossManyToManyEditor0Form.FormCreate(Sender: TObject);
+begin
+  with ListBox.Items do
+  begin
+    Clear;
+    Add(SRelease);
+    Add(SAssign);
+  end;
 end;
 
 procedure TCrossManyToManyEditor0Form.FormClose(Sender: TObject;
