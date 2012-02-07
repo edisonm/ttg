@@ -1686,6 +1686,10 @@ msgstr ""
 msgid "Inadequate"
 msgstr ""
 
+#: uttgconsts.sinvalidcomposition
+msgid "Invalid Composition: \"%s\""
+msgstr ""
+
 #: uttgconsts.sinvaliddata
 msgid "Invalid input data"
 msgstr ""

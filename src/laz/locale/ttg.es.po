@@ -1686,6 +1686,10 @@ msgstr "Mejorando Timetable [%d] en [%d]"
 msgid "Inadequate"
 msgstr "Inadecuado"
 
+#: uttgconsts.sinvalidcomposition
+msgid "Invalid Composition: \"%s\""
+msgstr "Composicion no valida: \"%s\""
+
 #: uttgconsts.sinvaliddata
 msgid "Invalid input data"
 msgstr "El dato ingresado no es valido"

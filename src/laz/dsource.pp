@@ -62,7 +62,7 @@ begin
   begin
     s := FindField('Composition').AsString;
     if CompositionToDuration(s) <= 0 then
-      raise Exception.CreateFmt('Composition no valida: "%s"', [s]);
+      raise Exception.CreateFmt(SInvalidComposition, [s]);
     with FindField('IdSubject') do DefaultExpression := AsString;
     with FindField('IdLevel') do DefaultExpression := AsString;
     with FindField('IdSpecialization') do DefaultExpression := AsString;
@@ -170,7 +170,7 @@ begin
         TbHour.First;
         while not TbHour.Eof do
         begin
-          if TbHour.FindField('NaHour').AsString <> 'Recreo' then
+          if TbHour.FindField('NaHour').AsString <> SHourF then
           begin
             Append;
             Fields[0].AsInteger := TbDay.FindField('IdDay').AsInteger;
