@@ -1551,8 +1551,8 @@ msgid "When processing %s"
 msgstr "Mientras se procesaba %s"
 
 #: uttgconsts.sapplydownhill
-msgid "Applying Downhill: %23s"
-msgstr "Aplicar Descenso: %23s"
+msgid "Applying Downhill"
+msgstr "Aplicar Descenso"
 
 #: uttgconsts.sassign
 msgid "Assign"

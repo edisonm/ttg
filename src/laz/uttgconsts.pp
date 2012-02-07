@@ -10,7 +10,7 @@ uses
 
 resourcestring
 
-  SApplyDownHill = 'Applying Downhill: %23s';
+  SApplyDownhill = 'Applying Downhill';
   SAssign = 'Assign';
   SBaseTimetable = 'Base Timetable: %d';
   SBreakTimetableTeacher = 'Broken TT. Teachers';

@@ -182,7 +182,8 @@ begin
         ProgressFormDrv.Free;
       end;
       VEvolElitist.BestIndividual.Update;
-      ExtraInfo := Format(SApplyDownHill, [FBoolToStr[ApplyDoubleDownHill]]);
+      ExtraInfo := Format('%0:-28s %12s',
+        [SApplyDownhill + ':', FBoolToStr[ApplyDoubleDownHill]]);
       with TSyncSaver.Create(VEvolElitist, AIdTimetable, ExtraInfo,
         FTimeIni, Now) do
       try
