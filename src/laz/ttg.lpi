@@ -222,7 +222,7 @@
       <Unit16>
         <Filename Value="fconfig.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="ConfiguracionForm"/>
+        <ComponentName Value="ConfigForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="fconfig"/>
