@@ -642,6 +642,7 @@ begin
   Caption := Caption + ' - Debug Build';
 {$ENDIF}
   FUpdateIndex := 0;
+  Height := Toolbar.Height + StatusBar.Height + 2;
   SaveDialog.DefaultExt := '.ttd';
   SaveDialog.Filter := SSaveDialogFilter;
   SaveDialogCSV.DefaultExt := '.csv';
