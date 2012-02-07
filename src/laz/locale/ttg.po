@@ -1748,6 +1748,11 @@ msgctxt "uttgconsts.smutationprobability"
 msgid "Mutation Probability"
 msgstr ""
 
+#: uttgconsts.sname
+msgctxt "uttgconsts.sname"
+msgid "Name"
+msgstr ""
+
 #: uttgconsts.snoerrorreadyforchecksummary
 msgid "Ready to generate timetable. Show timetable check Summary?"
 msgstr ""

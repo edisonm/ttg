@@ -77,7 +77,7 @@ type
 implementation
 
 uses
-  UTTGBasics;
+  UTTGBasics, UTTGConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -159,6 +159,7 @@ begin
   QuClass.Open;
   cbxShowClass.Items.Clear;
   QuTimetableClass.Open;
+  QuTimetableClassName.DisplayLabel := SName;
   LoadNames(MasterDataModule.StringsShowClass, cbxShowClass.Items);
   cbxShowClass.Text := cbxShowClass.Items[0];
 end;

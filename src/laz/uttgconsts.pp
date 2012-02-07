@@ -58,6 +58,7 @@ resourcestring
   SLoad = 'Load';
   SMaxIteration = 'Max number of iterations';
   SMutationProbability = 'Mutation Probability';
+  SName = 'Name';
   SNoErrorReadyForCheckSummary = 'Ready to generate timetable. Show timetable check Summary?';
   SNonScatteredSubject = 'Non Scattered Subjects';
   SNumHardTeacherRestrictions = 'Number of hard teacher restrictions...';
