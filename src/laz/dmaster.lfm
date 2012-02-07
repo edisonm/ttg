@@ -12,7 +12,6 @@ object MasterDataModule: TMasterDataModule
     left = 250
     top = 11
     object TbTmpTeacherWorkLoadIdTeacher: TLongintField
-      DisplayLabel = 'Teacher'
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTeacher'
@@ -23,7 +22,6 @@ object MasterDataModule: TMasterDataModule
       Required = False
     end
     object TbTmpTeacherWorkLoadLnTeacher: TStringField
-      DisplayLabel = 'Apellido'
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'LnTeacher'
@@ -39,7 +37,6 @@ object MasterDataModule: TMasterDataModule
       Size = 31
     end
     object TbTmpTeacherWorkLoadNaTeacher: TStringField
-      DisplayLabel = 'Name'
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'NaTeacher'
@@ -97,7 +94,6 @@ object MasterDataModule: TMasterDataModule
     left = 250
     top = 62
     object TbTmpRoomTypeLoadIdRoomType: TLongintField
-      DisplayLabel = 'Tipo de aula'
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdRoomType'
@@ -108,7 +104,6 @@ object MasterDataModule: TMasterDataModule
       Required = False
     end
     object TbTmpRoomTypeLoadAbRoomType: TStringField
-      DisplayLabel = 'Name'
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'AbRoomType'
