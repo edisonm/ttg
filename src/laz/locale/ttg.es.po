@@ -1430,11 +1430,11 @@ msgstr "Cruce de profesores|Cruce de profesores"
 
 #: ttimetableform.actimprovetimetable.caption
 msgid "Improve timetable"
-msgstr ""
+msgstr "Mejorar horario"
 
 #: ttimetableform.actimprovetimetable.hint
 msgid "Improve timetable|Improve selected timetable"
-msgstr ""
+msgstr "Mejorar horario|Mejorar horario seleccionado"
 
 #: ttimetableform.actsubjectcortadahour.caption
 msgid "Subjects cut by the hour"
@@ -1831,3 +1831,4 @@ msgstr "Elaboracion en progreso [%d]"
 #: uttgconsts.swrongcomposition
 msgid "Wrong Composition"
 msgstr "Composicion Erroea"
+

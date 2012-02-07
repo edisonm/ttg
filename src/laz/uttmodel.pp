@@ -1328,7 +1328,7 @@ begin
          '(' + VarArrToStr(TTimetableModel(Model).FTeacherRestrictionTypeToValue, ' ') + ')',
          TeacherRestrictionValue]));
     Add('-----------------------------------------------------------------');
-    Add(Format('%0:-52s %12d', [STotalValue]));
+    Add(Format('%0:-52s %12d', [STotalValue, Value]));
   end;
 end;
 
