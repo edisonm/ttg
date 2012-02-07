@@ -25,7 +25,7 @@ uses
   FTeacher {TeacherForm},
   UTTGDBUtils in 'uttgdbutils.pp',
   UConfigStorage,
-  fconfig {ConfiguracionForm},
+  fconfig {ConfigForm},
   FTimetableClass {TimetableClassForm},
   FMasterDetailEditor {MasterDetailEditorForm},
   FTimetableRoomType {TimetableRoomType},

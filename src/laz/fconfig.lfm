@@ -1,4 +1,4 @@
-object ConfiguracionForm: TConfiguracionForm
+object ConfigForm: TConfigForm
   Left = 609
   Height = 442
   Top = 490

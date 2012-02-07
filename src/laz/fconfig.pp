@@ -12,9 +12,9 @@ uses
 
 type
 
-  { TConfiguracionForm }
+  { TConfigForm }
 
-  TConfiguracionForm = class(TForm)
+  TConfigForm = class(TForm)
     bbtOk: TBitBtn;
     cbxApplyDoubleDownHill: TCheckBox;
     creClashSubject: TEdit;
@@ -115,7 +115,7 @@ type
     procedure SaveToSourceDataModule;
   end;
 
-function ShowConfiguracionForm(AHelpContext: THelpContext): Integer;
+function ShowConfigForm(AHelpContext: THelpContext): Integer;
 
 implementation
 
@@ -126,12 +126,12 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-function ShowConfiguracionForm(AHelpContext: THelpContext): Integer;
+function ShowConfigForm(AHelpContext: THelpContext): Integer;
 var
-   ConfiguracionForm: TConfiguracionForm;
+   ConfigForm: TConfigForm;
 begin
-   ConfiguracionForm := TConfiguracionForm.Create(nil);
-   with ConfiguracionForm do
+   ConfigForm := TConfigForm.Create(nil);
+   with ConfigForm do
       try
          HelpContext := AHelpContext;
          LoadFromSourceDataModule;
@@ -143,7 +143,7 @@ begin
       end;
 end;
 
-procedure TConfiguracionForm.DBGridDrawColumnCell(Sender: TObject;
+procedure TConfigForm.DBGridDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 var
@@ -157,7 +157,7 @@ begin
   DBGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
-procedure TConfiguracionForm.cbxRandomizeClick(Sender: TObject);
+procedure TConfigForm.cbxRandomizeClick(Sender: TObject);
 begin
   with (Sender as TCheckbox) do
   begin
@@ -165,7 +165,7 @@ begin
   end;
 end;
 
-procedure TConfiguracionForm.LoadFromSourceDataModule;
+procedure TConfigForm.LoadFromSourceDataModule;
 begin
    with MasterDataModule.ConfigStorage do
    begin
@@ -200,7 +200,7 @@ begin
    end;
 end;
 
-procedure TConfiguracionForm.SaveToSourceDataModule;
+procedure TConfigForm.SaveToSourceDataModule;
 begin
    with MasterDataModule.ConfigStorage do
    begin
@@ -235,13 +235,13 @@ begin
    end;
 end;
 
-procedure TConfiguracionForm.DSSubjectRestrictionTypeDataChange(Sender: TObject; Field: TField);
+procedure TConfigForm.DSSubjectRestrictionTypeDataChange(Sender: TObject; Field: TField);
 begin
   CBColSubjectRestrictionType.Selected :=
     SourceDataModule.TbSubjectRestrictionType.FindField('ColSubjectRestrictionType').AsInteger;
 end;
 
-procedure TConfiguracionForm.CBColSubjectRestrictionTypeExit(Sender: TObject);
+procedure TConfigForm.CBColSubjectRestrictionTypeExit(Sender: TObject);
 begin
   with SourceDataModule.TbSubjectRestrictionType.FindField('ColSubjectRestrictionType') do
     if (DSSubjectRestrictionType.State in [dsEdit, dsInsert])
@@ -249,17 +249,17 @@ begin
       AsInteger := CBColSubjectRestrictionType.Selected;
 end;
 
-procedure TConfiguracionForm.bbtCancelClick(Sender: TObject);
+procedure TConfigForm.bbtCancelClick(Sender: TObject);
 begin
   ModalResult := mrCancel;
 end;
 
-procedure TConfiguracionForm.bbtOkClick(Sender: TObject);
+procedure TConfigForm.bbtOkClick(Sender: TObject);
 begin
   ModalResult := mrOk;
 end;
 
-procedure TConfiguracionForm.CBColSubjectRestrictionTypeChange(Sender: TObject);
+procedure TConfigForm.CBColSubjectRestrictionTypeChange(Sender: TObject);
 begin
   with DSSubjectRestrictionType do
   begin
@@ -269,7 +269,7 @@ begin
   end
 end;
 
-procedure TConfiguracionForm.CBColTeacherRestrictionTypeChange(Sender: TObject);
+procedure TConfigForm.CBColTeacherRestrictionTypeChange(Sender: TObject);
 begin
   with DSTeacherRestrictionType do
   begin
@@ -279,7 +279,7 @@ begin
   end
 end;
 
-procedure TConfiguracionForm.CBColTeacherRestrictionTypeExit(Sender: TObject);
+procedure TConfigForm.CBColTeacherRestrictionTypeExit(Sender: TObject);
 begin
   with SourceDataModule.TbTeacherRestrictionType.FindField('ColTeacherRestrictionType') do
     if (DSTeacherRestrictionType.State in [dsEdit, dsInsert])
@@ -287,7 +287,7 @@ begin
       AsInteger := CBColTeacherRestrictionType.Selected;
 end;
 
-procedure TConfiguracionForm.DSTeacherRestrictionTypeDataChange(
+procedure TConfigForm.DSTeacherRestrictionTypeDataChange(
   Sender: TObject; Field: TField);
 begin
   CBColTeacherRestrictionType.Selected

@@ -420,209 +420,209 @@ msgstr "Detalle de los horarios"
 msgid "Courses|Available courses"
 msgstr "Cursos|Cursos disponibles"
 
-#: tconfiguracionform.bbtcancel.caption
-msgctxt "TCONFIGURACIONFORM.BBTCANCEL.CAPTION"
+#: tconfigform.bbtcancel.caption
+msgctxt "TCONFIGFORM.BBTCANCEL.CAPTION"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: tconfiguracionform.bbtok.caption
-msgctxt "TCONFIGURACIONFORM.BBTOK.CAPTION"
+#: tconfigform.bbtok.caption
+msgctxt "TCONFIGFORM.BBTOK.CAPTION"
 msgid "Ok"
 msgstr "Aceptar"
 
-#: tconfiguracionform.caption
-msgctxt "tconfiguracionform.caption"
+#: tconfigform.caption
+msgctxt "tconfigform.caption"
 msgid "Configure"
 msgstr "Configure"
 
-#: tconfiguracionform.cbxapplydoubledownhill.caption
-msgctxt "TCONFIGURACIONFORM.CBXAPPLYDOUBLEDOWNHILL.CAPTION"
+#: tconfigform.cbxapplydoubledownhill.caption
+msgctxt "TCONFIGFORM.CBXAPPLYDOUBLEDOWNHILL.CAPTION"
 msgid "Aplicar descenso (lento)"
 msgstr "Aplicar descenso (lento)"
 
-#: tconfiguracionform.cbxrandomize.caption
-msgctxt "TCONFIGURACIONFORM.CBXRANDOMIZE.CAPTION"
+#: tconfigform.cbxrandomize.caption
+msgctxt "TCONFIGFORM.CBXRANDOMIZE.CAPTION"
 msgid "Inicializar con la hora del sistema"
 msgstr "Inicializar con la hora del sistema"
 
-#: tconfiguracionform.edbookmarks.text
+#: tconfigform.edbookmarks.text
 msgid "1,2"
 msgstr "1,2"
 
-#: tconfiguracionform.edtnainstitution.hint
-msgctxt "TCONFIGURACIONFORM.EDTNAINSTITUTION.HINT"
+#: tconfigform.edtnainstitution.hint
+msgctxt "TCONFIGFORM.EDTNAINSTITUTION.HINT"
 msgid "High School|High School Name"
 msgstr "Colegio|Nombre del colegio"
 
-#: tconfiguracionform.label1.caption
+#: tconfigform.label1.caption
 msgid "Clash Teachers:"
 msgstr "Cruce profesores:"
 
-#: tconfiguracionform.label13.caption
+#: tconfigform.label13.caption
 msgid "Iterations:"
 msgstr "Iteraciones:"
 
-#: tconfiguracionform.label15.caption
+#: tconfigform.label15.caption
 msgid "Subject Restrictions:"
 msgstr "Prohibiciones de materia:"
 
-#: tconfiguracionform.label18.caption
+#: tconfigform.label18.caption
 msgid "Teacher Restrictions:"
 msgstr "Prohibiciones de profesor:"
 
-#: tconfiguracionform.label2.caption
+#: tconfigform.label2.caption
 msgid "Clash Rooms:"
 msgstr "Cruce de aulas:"
 
-#: tconfiguracionform.label20.caption
+#: tconfigform.label20.caption
 msgid "Clash Subjects:"
 msgstr "Cruce materias:"
 
-#: tconfiguracionform.label29.caption
+#: tconfigform.label29.caption
 msgid "Update each:"
 msgstr "Actualizar cada:"
 
-#: tconfiguracionform.lblauthority.caption
+#: tconfigform.lblauthority.caption
 msgid "Authority:"
 msgstr "Autoridad:"
 
-#: tconfiguracionform.lblauthorityposition.caption
-msgctxt "TCONFIGURACIONFORM.LBLAUTHORITYPOSITION.CAPTION"
+#: tconfigform.lblauthorityposition.caption
+msgctxt "TCONFIGFORM.LBLAUTHORITYPOSITION.CAPTION"
 msgid "Position:"
 msgstr "Cargo:"
 
-#: tconfiguracionform.lblbreaktimetableteacher.caption
+#: tconfigform.lblbreaktimetableteacher.caption
 msgid "Break TT. Teachers:"
 msgstr "Fracc. h. profesores:"
 
-#: tconfiguracionform.lblbrokensubjects.caption
+#: tconfigform.lblbrokensubjects.caption
 msgid "Broken Subjects:"
 msgstr "Materias cortadas:"
 
-#: tconfiguracionform.lblcomments.caption
+#: tconfigform.lblcomments.caption
 msgid "Comments:"
 msgstr "Comentarios:"
 
-#: tconfiguracionform.lblcrossprobability.caption
-msgctxt "TCONFIGURACIONFORM.LBLCROSSPROBABILITY.CAPTION"
+#: tconfigform.lblcrossprobability.caption
+msgctxt "TCONFIGFORM.LBLCROSSPROBABILITY.CAPTION"
 msgid "Cross Probability:"
 msgstr "Prob. Cruce:"
 
-#: tconfiguracionform.lbldownhilllevels.caption
-msgctxt "TCONFIGURACIONFORM.LBLDOWNHILLLEVELS.CAPTION"
+#: tconfigform.lbldownhilllevels.caption
+msgctxt "TCONFIGFORM.LBLDOWNHILLLEVELS.CAPTION"
 msgid "Downhill Levels:"
 msgstr "Niveles de descenso:"
 
-#: tconfiguracionform.lblemptyhours.caption
+#: tconfigform.lblemptyhours.caption
 msgid "Empty hours:"
 msgstr "Horas huecas:"
 
-#: tconfiguracionform.lblinitialtimetables.caption
-msgctxt "TCONFIGURACIONFORM.LBLINITIALTIMETABLES.CAPTION"
+#: tconfigform.lblinitialtimetables.caption
+msgctxt "TCONFIGFORM.LBLINITIALTIMETABLES.CAPTION"
 msgid "Initial Timetables:"
 msgstr "Horarios iniciales:"
 
-#: tconfiguracionform.lblinstitutionname.caption
-msgctxt "TCONFIGURACIONFORM.LBLINSTITUTIONNAME.CAPTION"
+#: tconfigform.lblinstitutionname.caption
+msgctxt "TCONFIGFORM.LBLINSTITUTIONNAME.CAPTION"
 msgid "Name:"
 msgstr "Nombre:"
 
-#: tconfiguracionform.lbljoinedsubjects.caption
-msgctxt "TCONFIGURACIONFORM.LBLJOINSUBJECTS.CAPTION"
+#: tconfigform.lbljoinedsubjects.caption
+msgctxt "TCONFIGFORM.LBLJOINSUBJECTS.CAPTION"
 msgid "Joined Subjects:"
 msgstr "Materias juntas:"
 
-#: tconfiguracionform.lblmaxteacherworkload.caption
+#: tconfigform.lblmaxteacherworkload.caption
 msgid "Max work load per teacher:"
 msgstr "Carga Maxima por Profesor:"
 
-#: tconfiguracionform.lblmutationprobability.caption
-msgctxt "TCONFIGURACIONFORM.LBLMUTATIONPROBABILITY.CAPTION"
+#: tconfigform.lblmutationprobability.caption
+msgctxt "TCONFIGFORM.LBLMUTATIONPROBABILITY.CAPTION"
 msgid "Mutation Probability:"
 msgstr "Prob. Mutacion"
 
-#: tconfiguracionform.lblpollinationprobability.caption
-msgctxt "TCONFIGURACIONFORM.LBLPOLLINATIONPROBABILITY.CAPTION"
+#: tconfigform.lblpollinationprobability.caption
+msgctxt "TCONFIGFORM.LBLPOLLINATIONPROBABILITY.CAPTION"
 msgid "Pollination Probability:"
 msgstr "Prob. Polinizacion:"
 
-#: tconfiguracionform.lblpopulationsize.caption
-msgctxt "TCONFIGURACIONFORM.LBLPOPULATIONSIZE.CAPTION"
+#: tconfigform.lblpopulationsize.caption
+msgctxt "TCONFIGFORM.LBLPOPULATIONSIZE.CAPTION"
 msgid "Population Size:"
 msgstr "Individuos:"
 
-#: tconfiguracionform.lblreparationprobability.caption
-msgctxt "TCONFIGURACIONFORM.LBLREPARATIONPROBABILITY.CAPTION"
+#: tconfigform.lblreparationprobability.caption
+msgctxt "TCONFIGFORM.LBLREPARATIONPROBABILITY.CAPTION"
 msgid "Reparation Probability:"
 msgstr "Prob. Reparacion:"
 
-#: tconfiguracionform.lblresponsible.caption
+#: tconfigform.lblresponsible.caption
 msgid "Responsible:"
 msgstr "Responsable:"
 
-#: tconfiguracionform.lblresponsibleposition.caption
-msgctxt "TCONFIGURACIONFORM.LBLRESPONSIBLEPOSITION.CAPTION"
+#: tconfigform.lblresponsibleposition.caption
+msgctxt "TCONFIGFORM.LBLRESPONSIBLEPOSITION.CAPTION"
 msgid "Position:"
 msgstr "Cargo:"
 
-#: tconfiguracionform.lblschoolyear.caption
+#: tconfigform.lblschoolyear.caption
 msgid "School Year:"
 msgstr "Periodo Lectivo:"
 
-#: tconfiguracionform.lblseed.caption
-msgctxt "TCONFIGURACIONFORM.LBLSEED.CAPTION"
+#: tconfigform.lblseed.caption
+msgctxt "TCONFIGFORM.LBLSEED.CAPTION"
 msgid "Semilla:"
 msgstr "Semilla:"
 
-#: tconfiguracionform.lblshareddirectory.caption
-msgctxt "TCONFIGURACIONFORM.LBLSHAREDDIRECTORY.CAPTION"
+#: tconfigform.lblshareddirectory.caption
+msgctxt "TCONFIGFORM.LBLSHAREDDIRECTORY.CAPTION"
 msgid "Shared directory:"
 msgstr "Directorio compartido:"
 
-#: tconfiguracionform.lblsrcolor.caption
-msgctxt "TCONFIGURACIONFORM.LBLSRCOLOR.CAPTION"
+#: tconfigform.lblsrcolor.caption
+msgctxt "TCONFIGFORM.LBLSRCOLOR.CAPTION"
 msgid "Color:"
 msgstr "Color:"
 
-#: tconfiguracionform.lblsrname.caption
-msgctxt "TCONFIGURACIONFORM.LBLSRNAME.CAPTION"
+#: tconfigform.lblsrname.caption
+msgctxt "TCONFIGFORM.LBLSRNAME.CAPTION"
 msgid "Name:"
 msgstr "Nombre:"
 
-#: tconfiguracionform.lblsrvalue.caption
-msgctxt "TCONFIGURACIONFORM.LBLSRVALUE.CAPTION"
+#: tconfigform.lblsrvalue.caption
+msgctxt "TCONFIGFORM.LBLSRVALUE.CAPTION"
 msgid "Value:"
 msgstr "Valor:"
 
-#: tconfiguracionform.lbltrcolor.caption
-msgctxt "TCONFIGURACIONFORM.LBLTRCOLOR.CAPTION"
+#: tconfigform.lbltrcolor.caption
+msgctxt "TCONFIGFORM.LBLTRCOLOR.CAPTION"
 msgid "Color:"
 msgstr "Color:"
 
-#: tconfiguracionform.lbltrname.caption
-msgctxt "TCONFIGURACIONFORM.LBLTRNAME.CAPTION"
+#: tconfigform.lbltrname.caption
+msgctxt "TCONFIGFORM.LBLTRNAME.CAPTION"
 msgid "Name:"
 msgstr "Nombre:"
 
-#: tconfiguracionform.lbltrvalue.caption
-msgctxt "TCONFIGURACIONFORM.LBLTRVALUE.CAPTION"
+#: tconfigform.lbltrvalue.caption
+msgctxt "TCONFIGFORM.LBLTRVALUE.CAPTION"
 msgid "Value:"
 msgstr "Valor:"
 
-#: tconfiguracionform.tbsinstitution.caption
+#: tconfigform.tbsinstitution.caption
 msgid "Institution"
 msgstr "Institucion"
 
-#: tconfiguracionform.tbsinstitution.hint
+#: tconfigform.tbsinstitution.hint
 msgid "Institution Data"
 msgstr "Datos del instituto"
 
-#: tconfiguracionform.tbsoptions.caption
+#: tconfigform.tbsoptions.caption
 msgid "Options"
 msgstr "Opciones"
 
-#: tconfiguracionform.tbsweigths.caption
-msgctxt "TCONFIGURACIONFORM.TBSWEIGTHS.CAPTION"
+#: tconfigform.tbsweigths.caption
+msgctxt "TCONFIGFORM.TBSWEIGTHS.CAPTION"
 msgid "Weights"
 msgstr "Pesos"
 

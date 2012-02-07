@@ -681,7 +681,7 @@ end;
 procedure TMainForm.ActConfigureExecute(Sender: TObject);
 begin
   try
-    if ShowConfiguracionForm(ActConfigure.HelpContext) = mrOK then
+    if ShowConfigForm(ActConfigure.HelpContext) = mrOK then
     begin
       MainForm.Caption := Application.Title + ' - ' +
         MasterDataModule.ConfigStorage.NaInstitution;
