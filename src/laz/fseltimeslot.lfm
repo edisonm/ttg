@@ -1,19 +1,19 @@
 object SelTimeSlotForm: TSelTimeSlotForm
   Left = 473
   Height = 123
-  Top = 315
+  Top = 316
   Width = 295
   ActiveControl = CBDay
   Caption = 'Intercambiar TimeSlot'
   ClientHeight = 123
   ClientWidth = 295
   Position = poDesktopCenter
-  LCLVersion = '0.9.30.2'
+  LCLVersion = '0.9.31'
   object Label1: TLabel
     Left = 16
     Height = 18
     Top = 8
-    Width = 245
+    Width = 186
     Caption = 'Select the time slot to swap'
     ParentColor = False
   end

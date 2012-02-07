@@ -430,6 +430,11 @@ msgctxt "TCONFIGURACIONFORM.BBTOK.CAPTION"
 msgid "Ok"
 msgstr ""
 
+#: tconfiguracionform.caption
+msgctxt "TCONFIGURACIONFORM.CAPTION"
+msgid "Configure"
+msgstr ""
+
 #: tconfiguracionform.cbxapplydoubledownhill.caption
 msgctxt "TCONFIGURACIONFORM.CBXAPPLYDOUBLEDOWNHILL.CAPTION"
 msgid "Aplicar descenso (lento)"
@@ -438,10 +443,6 @@ msgstr ""
 #: tconfiguracionform.cbxrandomize.caption
 msgctxt "TCONFIGURACIONFORM.CBXRANDOMIZE.CAPTION"
 msgid "Inicializar con la hora del sistema"
-msgstr ""
-
-#: tconfiguracionform.configuracionform.caption
-msgid "Configure"
 msgstr ""
 
 #: tconfiguracionform.edbookmarks.text
@@ -642,7 +643,8 @@ msgctxt "TEDITORFORM.BTNSHOW.HINT"
 msgid "Show|Show the grid content in a report"
 msgstr ""
 
-#: teditorform.editorform.caption
+#: teditorform.caption
+msgctxt "TEDITORFORM.CAPTION"
 msgid "EditorForm"
 msgstr ""
 
@@ -969,7 +971,8 @@ msgstr ""
 msgid "&Close"
 msgstr ""
 
-#: tmessageviewform.messageviewform.caption
+#: tmessageviewform.caption
+msgctxt "TMESSAGEVIEWFORM.CAPTION"
 msgid "Message viewer"
 msgstr ""
 
@@ -1279,14 +1282,19 @@ msgstr ""
 msgid "Total Value:"
 msgstr ""
 
-#: tseltimeslotform.bbtaceptar.caption
-msgctxt "TSELTIMESLOTFORM.BBACEPTAR.CAPTION"
-msgid "Ok"
-msgstr ""
-
 #: tseltimeslotform.bbtcancel.caption
 msgctxt "TSELTIMESLOTFORM.BBCANCELAR.CAPTION"
 msgid "Cancel"
+msgstr ""
+
+#: tseltimeslotform.bbtok.caption
+msgctxt "TSELTIMESLOTFORM.BBTOK.CAPTION"
+msgid "Ok"
+msgstr ""
+
+#: tseltimeslotform.caption
+msgctxt "TSELTIMESLOTFORM.CAPTION"
+msgid "Intercambiar TimeSlot"
 msgstr ""
 
 #: tseltimeslotform.label1.caption
@@ -1301,10 +1309,6 @@ msgstr ""
 #: tseltimeslotform.label3.caption
 msgctxt "TSELTIMESLOTFORM.LABEL3.CAPTION"
 msgid "Hour"
-msgstr ""
-
-#: tseltimeslotform.seltimeslotform.caption
-msgid "Intercambiar TimeSlot"
 msgstr ""
 
 #: tsingleeditorform.actfind.caption
@@ -1324,6 +1328,11 @@ msgstr ""
 #: tsingleeditorform.actshow.hint
 msgctxt "TSINGLEEDITORFORM.ACTSHOW.HINT"
 msgid "Show|Show the grid content in a report"
+msgstr ""
+
+#: tsplashform.caption
+msgctxt "TSPLASHFORM.CAPTION"
+msgid "SplashForm"
 msgstr ""
 
 #: tsplashform.label1.caption
@@ -1356,10 +1365,6 @@ msgstr ""
 #: tsplashform.lblyearlabel.caption
 msgctxt "TSPLASHFORM.LBLYEARLABEL.CAPTION"
 msgid "..."
-msgstr ""
-
-#: tsplashform.splashform.caption
-msgid "SplashForm"
 msgstr ""
 
 #: tsubjectform.actsubjectrestriction.caption

@@ -430,6 +430,11 @@ msgctxt "TCONFIGURACIONFORM.BBTOK.CAPTION"
 msgid "Ok"
 msgstr "Aceptar"
 
+#: tconfiguracionform.caption
+msgctxt "tconfiguracionform.caption"
+msgid "Configure"
+msgstr "Configure"
+
 #: tconfiguracionform.cbxapplydoubledownhill.caption
 msgctxt "TCONFIGURACIONFORM.CBXAPPLYDOUBLEDOWNHILL.CAPTION"
 msgid "Aplicar descenso (lento)"
@@ -439,10 +444,6 @@ msgstr "Aplicar descenso (lento)"
 msgctxt "TCONFIGURACIONFORM.CBXRANDOMIZE.CAPTION"
 msgid "Inicializar con la hora del sistema"
 msgstr "Inicializar con la hora del sistema"
-
-#: tconfiguracionform.configuracionform.caption
-msgid "Configure"
-msgstr "Configure"
 
 #: tconfiguracionform.edbookmarks.text
 msgid "1,2"
@@ -642,7 +643,8 @@ msgctxt "TEDITORFORM.BTNSHOW.HINT"
 msgid "Show|Show the grid content in a report"
 msgstr "Presentar|Presenta el contenido de la cuadricula en un reporte"
 
-#: teditorform.editorform.caption
+#: teditorform.caption
+msgctxt "teditorform.caption"
 msgid "EditorForm"
 msgstr "EditorForm"
 
@@ -969,7 +971,8 @@ msgstr "ToolButton4"
 msgid "&Close"
 msgstr "&Cerrar"
 
-#: tmessageviewform.messageviewform.caption
+#: tmessageviewform.caption
+msgctxt "tmessageviewform.caption"
 msgid "Message viewer"
 msgstr "Visor de mensajes"
 
@@ -1279,15 +1282,20 @@ msgstr " Valor:"
 msgid "Total Value:"
 msgstr " Valor Total:"
 
-#: tseltimeslotform.bbtaceptar.caption
-msgctxt "TSELTIMESLOTFORM.BBACEPTAR.CAPTION"
-msgid "Ok"
-msgstr "Aceptar"
-
 #: tseltimeslotform.bbtcancel.caption
 msgctxt "TSELTIMESLOTFORM.BBCANCELAR.CAPTION"
 msgid "Cancel"
 msgstr "Cancelar"
+
+#: tseltimeslotform.bbtok.caption
+msgctxt "tseltimeslotform.bbtok.caption"
+msgid "Ok"
+msgstr "Aceptar"
+
+#: tseltimeslotform.caption
+msgctxt "tseltimeslotform.caption"
+msgid "Intercambiar TimeSlot"
+msgstr "Intercambiar TimeSlot"
 
 #: tseltimeslotform.label1.caption
 msgid "Select the time slot to swap"
@@ -1302,10 +1310,6 @@ msgstr "Dia"
 msgctxt "TSELTIMESLOTFORM.LABEL3.CAPTION"
 msgid "Hour"
 msgstr "Hora"
-
-#: tseltimeslotform.seltimeslotform.caption
-msgid "Intercambiar TimeSlot"
-msgstr "Intercambiar TimeSlot"
 
 #: tsingleeditorform.actfind.caption
 msgid "Search"
@@ -1325,6 +1329,11 @@ msgstr "Mostrar"
 msgctxt "TSINGLEEDITORFORM.ACTSHOW.HINT"
 msgid "Show|Show the grid content in a report"
 msgstr "Presentar|Presenta el contenido en un reporte"
+
+#: tsplashform.caption
+msgctxt "tsplashform.caption"
+msgid "SplashForm"
+msgstr "SplashForm"
 
 #: tsplashform.label1.caption
 msgid "Version"
@@ -1357,10 +1366,6 @@ msgstr "..."
 msgctxt "TSPLASHFORM.LBLYEARLABEL.CAPTION"
 msgid "..."
 msgstr "..."
-
-#: tsplashform.splashform.caption
-msgid "SplashForm"
-msgstr "SplashForm"
 
 #: tsubjectform.actsubjectrestriction.caption
 msgctxt "TSUBJECTFORM.ACTSUBJECTRESTRICTION.CAPTION"

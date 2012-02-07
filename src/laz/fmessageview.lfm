@@ -1,5 +1,5 @@
 object MessageViewForm: TMessageViewForm
-  Left = 364
+  Left = 368
   Height = 376
   Top = 387
   Width = 434
@@ -11,7 +11,7 @@ object MessageViewForm: TMessageViewForm
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   Position = poScreenCenter
-  LCLVersion = '0.9.30.2'
+  LCLVersion = '0.9.31'
   object Panel1: TPanel
     Left = 0
     Height = 336
