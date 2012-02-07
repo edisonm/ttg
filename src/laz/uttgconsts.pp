@@ -64,7 +64,7 @@ resourcestring
   SNumHardTeacherRestrictions = 'Number of hard teacher restrictions...';
   SNumSoftTeacherRestrictions = 'Number of soft teacher restrictions...';
   SOutOfPositionEmptyHour = 'Out of position empty hours';
-  SPendingChangesWillBeLostYouReallyWantToQuit = 'Pending changes will be lost. You really want to quit?';
+  SPendingChangesWillBeLostYouReallyWantToQuit = 'Pending changes will be lost. Do you really want to quit?';
   SPollinationProbability = 'Pollination Probability';
   SPopulationSize = 'Population size';
   SPressDelToClearCell = 'Press <Del> to clear cell';

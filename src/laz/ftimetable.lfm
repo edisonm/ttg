@@ -758,7 +758,7 @@ inherited TimetableForm: TTimetableForm
       Size = 10
     end
   end
-  object QuClashRoomDetalle: TZQuery[7]
+  object QuClashRoomDetail: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimetable;IdRoomType;IdDay;IdHour'
     AutoCalcFields = False
@@ -839,7 +839,7 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdRoomType'
         ParamType = ptUnknown
       end>
-    object QuClashRoomDetalleIdTimetable: TLongintField
+    object QuClashRoomDetailIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimetable'
@@ -850,7 +850,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashRoomDetalleIdRoomType: TLongintField
+    object QuClashRoomDetailIdRoomType: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdRoomType'
@@ -861,7 +861,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashRoomDetalleIdDay: TLongintField
+    object QuClashRoomDetailIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -872,7 +872,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashRoomDetalleIdHour: TLongintField
+    object QuClashRoomDetailIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -883,7 +883,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashRoomDetalleIdLevel: TLongintField
+    object QuClashRoomDetailIdLevel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdLevel'
@@ -894,7 +894,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashRoomDetalleIdSpecialization: TLongintField
+    object QuClashRoomDetailIdSpecialization: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSpecialization'
@@ -905,7 +905,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashRoomDetalleIdGroupId: TLongintField
+    object QuClashRoomDetailIdGroupId: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdGroupId'
@@ -916,7 +916,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashRoomDetalleNaSubject: TStringField
+    object QuClashRoomDetailNaSubject: TStringField
       DisplayLabel = 'Subject'
       DisplayWidth = 20
       FieldKind = fkData
@@ -927,7 +927,7 @@ inherited TimetableForm: TTimetableForm
       ReadOnly = False
       Required = False
     end
-    object QuClashRoomDetalleAbLevel: TStringField
+    object QuClashRoomDetailAbLevel: TStringField
       DisplayLabel = 'Level'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -943,7 +943,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Size = 5
     end
-    object QuClashRoomDetalleAbSpecialization: TStringField
+    object QuClashRoomDetailAbSpecialization: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -959,7 +959,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuClashRoomDetalleNaGroupId: TStringField
+    object QuClashRoomDetailNaGroupId: TStringField
       DisplayLabel = 'Par.'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -981,7 +981,7 @@ inherited TimetableForm: TTimetableForm
     left = 313
     top = 112
   end
-  object QuClashTeacherDetalle: TZQuery[9]
+  object QuClashTeacherDetail: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimetable;IdTeacher;IdDay;IdHour;IdLevel;IdSpecialization;IdGroupId;NaSubject'
     AutoCalcFields = False
@@ -1056,7 +1056,7 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdHour'
         ParamType = ptUnknown
       end>
-    object QuClashTeacherDetalleIdTimetable: TLongintField
+    object QuClashTeacherDetailIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimetable'
@@ -1067,7 +1067,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashTeacherDetalleIdTeacher: TLongintField
+    object QuClashTeacherDetailIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTeacher'
@@ -1078,7 +1078,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashTeacherDetalleIdDay: TLongintField
+    object QuClashTeacherDetailIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -1089,7 +1089,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashTeacherDetalleIdHour: TLongintField
+    object QuClashTeacherDetailIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -1100,7 +1100,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashTeacherDetalleIdLevel: TLongintField
+    object QuClashTeacherDetailIdLevel: TLongintField
       DisplayLabel = 'Level'
       DisplayWidth = 10
       FieldKind = fkData
@@ -1112,7 +1112,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashTeacherDetalleIdSpecialization: TLongintField
+    object QuClashTeacherDetailIdSpecialization: TLongintField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkData
@@ -1124,7 +1124,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashTeacherDetalleIdGroupId: TLongintField
+    object QuClashTeacherDetailIdGroupId: TLongintField
       DisplayLabel = 'Tipo de paralelo'
       DisplayWidth = 10
       FieldKind = fkData
@@ -1136,7 +1136,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashTeacherDetalleIdSubject: TLongintField
+    object QuClashTeacherDetailIdSubject: TLongintField
       DisplayLabel = 'Subject'
       DisplayWidth = 10
       FieldKind = fkData
@@ -1148,7 +1148,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashTeacherDetalleAbLevel: TStringField
+    object QuClashTeacherDetailAbLevel: TStringField
       DisplayLabel = 'Level'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1164,7 +1164,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Size = 5
     end
-    object QuClashTeacherDetalleAbSpecialization: TStringField
+    object QuClashTeacherDetailAbSpecialization: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1180,7 +1180,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuClashTeacherDetalleNaGroupId: TStringField
+    object QuClashTeacherDetailNaGroupId: TStringField
       DisplayLabel = 'Par.'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1196,7 +1196,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Size = 5
     end
-    object QuClashTeacherDetalleNaSubject: TStringField
+    object QuClashTeacherDetailNaSubject: TStringField
       DisplayLabel = 'Subject'
       DisplayWidth = 15
       FieldKind = fkLookup
@@ -1457,7 +1457,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
     end
   end
-  object QuClashSubjectDetalle: TZQuery[12]
+  object QuClashSubjectDetail: TZQuery[12]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimetable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
     AutoCalcFields = False
@@ -1513,7 +1513,7 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdSubject'
         ParamType = ptUnknown
       end>
-    object QuClashSubjectDetalleIdTimetable: TLongintField
+    object QuClashSubjectDetailIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimetable'
@@ -1524,7 +1524,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashSubjectDetalleIdSubject: TLongintField
+    object QuClashSubjectDetailIdSubject: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSubject'
@@ -1535,7 +1535,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashSubjectDetalleIdLevel: TLongintField
+    object QuClashSubjectDetailIdLevel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdLevel'
@@ -1546,7 +1546,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashSubjectDetalleIdSpecialization: TLongintField
+    object QuClashSubjectDetailIdSpecialization: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSpecialization'
@@ -1557,7 +1557,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashSubjectDetalleIdGroupId: TLongintField
+    object QuClashSubjectDetailIdGroupId: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdGroupId'
@@ -1568,7 +1568,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashSubjectDetalleIdDay: TLongintField
+    object QuClashSubjectDetailIdDay: TLongintField
       DisplayLabel = 'Day'
       DisplayWidth = 10
       FieldKind = fkData
@@ -1580,7 +1580,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashSubjectDetalleIdHour: TLongintField
+    object QuClashSubjectDetailIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -1591,7 +1591,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashSubjectDetalleAbLevel: TStringField
+    object QuClashSubjectDetailAbLevel: TStringField
       DisplayLabel = 'Level'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1607,7 +1607,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Size = 5
     end
-    object QuClashSubjectDetalleAbSpecialization: TStringField
+    object QuClashSubjectDetailAbSpecialization: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1623,7 +1623,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuClashSubjectDetalleNaGroupId: TStringField
+    object QuClashSubjectDetailNaGroupId: TStringField
       DisplayLabel = 'Par.'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -1639,7 +1639,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Size = 5
     end
-    object QuClashSubjectDetalleNaDay: TStringField
+    object QuClashSubjectDetailNaDay: TStringField
       DisplayLabel = 'Day'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -1655,7 +1655,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuClashSubjectDetalleNaHour: TStringField
+    object QuClashSubjectDetailNaHour: TStringField
       DisplayLabel = 'Hour'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -2494,7 +2494,7 @@ inherited TimetableForm: TTimetableForm
       Size = 10
     end
   end
-  object QuSubjectCortadaHourDetalle: TZQuery[17]
+  object QuSubjectCortadaHourDetail: TZQuery[17]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimetable;IdDay;IdHour;IdLevel;IdSpecialization;IdGroupId'
     AutoCalcFields = False
@@ -2588,7 +2588,7 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdHour'
         ParamType = ptUnknown
       end>
-    object QuSubjectCortadaHourDetalleIdTimetable: TLongintField
+    object QuSubjectCortadaHourDetailIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimetable'
@@ -2599,7 +2599,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuSubjectCortadaHourDetalleIdLevel: TLongintField
+    object QuSubjectCortadaHourDetailIdLevel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdLevel'
@@ -2610,7 +2610,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuSubjectCortadaHourDetalleIdSpecialization: TLongintField
+    object QuSubjectCortadaHourDetailIdSpecialization: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSpecialization'
@@ -2621,7 +2621,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuSubjectCortadaHourDetalleIdGroupId: TLongintField
+    object QuSubjectCortadaHourDetailIdGroupId: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdGroupId'
@@ -2632,7 +2632,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuSubjectCortadaHourDetalleIdDay: TLongintField
+    object QuSubjectCortadaHourDetailIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -2643,7 +2643,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuSubjectCortadaHourDetalleIdHour: TLongintField
+    object QuSubjectCortadaHourDetailIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -2654,7 +2654,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuSubjectCortadaHourDetalleIdHour0: TLongintField
+    object QuSubjectCortadaHourDetailIdHour0: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour0'
@@ -2665,7 +2665,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuSubjectCortadaHourDetalleIdSubject: TLongintField
+    object QuSubjectCortadaHourDetailIdSubject: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSubject'
@@ -2676,7 +2676,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuSubjectCortadaHourDetalleAbLevel: TStringField
+    object QuSubjectCortadaHourDetailAbLevel: TStringField
       DisplayLabel = 'Level'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -2692,7 +2692,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Size = 5
     end
-    object QuSubjectCortadaHourDetalleAbSpecialization: TStringField
+    object QuSubjectCortadaHourDetailAbSpecialization: TStringField
       DisplayLabel = 'Espec.'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -2708,7 +2708,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuSubjectCortadaHourDetalleNaGroupId: TStringField
+    object QuSubjectCortadaHourDetailNaGroupId: TStringField
       DisplayLabel = 'Par.'
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -2724,7 +2724,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Size = 5
     end
-    object QuSubjectCortadaHourDetalleNaDay: TStringField
+    object QuSubjectCortadaHourDetailNaDay: TStringField
       DisplayLabel = 'Day'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -2740,7 +2740,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuSubjectCortadaHourDetalleNaHour: TStringField
+    object QuSubjectCortadaHourDetailNaHour: TStringField
       DisplayLabel = 'Hour'
       DisplayWidth = 10
       FieldKind = fkLookup
@@ -2756,7 +2756,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuSubjectCortadaHourDetalleNaSubject: TStringField
+    object QuSubjectCortadaHourDetailNaSubject: TStringField
       DisplayLabel = 'Subject'
       DisplayWidth = 15
       FieldKind = fkLookup

@@ -1774,7 +1774,7 @@ msgid "Out of position empty hours"
 msgstr "Horas huecas desubicadas"
 
 #: uttgconsts.spendingchangeswillbelostyoureallywanttoquit
-msgid "Pending changes will be lost. You really want to quit?"
+msgid "Pending changes will be lost. Do you really want to quit?"
 msgstr "Los cambios pendientes se perderan. Seguro que desea salir?"
 
 #: uttgconsts.spollinationprobability
