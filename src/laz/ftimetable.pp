@@ -182,6 +182,7 @@ type
     procedure ActSubjectRestrictionNonSatisfiedExecute(Sender: TObject);
     procedure ActTeacherRestrictionNoRespetadaExecute(Sender: TObject);
     procedure ActClashRoomExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure QuClashTeacherAfterScroll(DataSet: TDataSet);
     procedure QuClashSubjectAfterScroll(DataSet: TDataSet);
     procedure ActSubjectCutDayExecute(Sender: TObject);
@@ -217,7 +218,8 @@ var
 implementation
 
 uses
-  Variants, UTTModel, UMakeTT, UTTGConsts;
+  Variants, UTTModel, UMakeTT, UTTGConsts, dsourcebaseconsts;
+
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
@@ -372,6 +374,13 @@ begin
       QuClashRoomDetalle.Open;
     end;
   end;
+end;
+
+procedure TTimetableForm.FormCreate(Sender: TObject);
+begin
+  QuClashRoomNaDay.DisplayLabel := SFlTimeSlot_IdDay;
+  QuClashRoomNaHour.DisplayLabel := SFlTimeSlot_IdHour;
+  
 end;
 
 procedure TTimetableForm.QuClashTeacherAfterScroll(DataSet: TDataSet);

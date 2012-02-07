@@ -595,7 +595,7 @@ begin
   TbTmpTeacherWorkLoadLnTeacher.DisplayLabel := SFlTeacher_LnTeacher;
   TbTmpTeacherWorkLoadNaTeacher.DisplayLabel := SFlTeacher_NaTeacher;
   TbTmpTeacherWorkLoadWorkLoad.DisplayLabel := SLoad;
-  TbTmpRoomTypeLoadIdRoomType.DisplayLabel := STbRoomType;
+  TbTmpRoomTypeLoadIdRoomType.DisplayLabel := SFlDistribution_IdRoomType;
   TbTmpRoomTypeLoadAbRoomType.DisplayLabel := SFlRoomType_NaRoomType;
   TbTmpRoomTypeLoadLoad.DisplayLabel := SLoad;
   

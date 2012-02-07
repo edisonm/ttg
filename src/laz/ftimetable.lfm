@@ -1,14 +1,16 @@
 inherited TimetableForm: TTimetableForm
-  Left = 578
+  Left = 679
   Height = 440
-  Top = 182
+  Top = 375
   Width = 677
   Caption = 'TimetableForm'
   ClientHeight = 440
   ClientWidth = 677
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
   OnDestroy = FormDestroy
+  Visible = True
   inherited TlBShow: TToolBar
     Width = 677
     inherited DBNavigator: TDBNavigator
@@ -726,7 +728,6 @@ inherited TimetableForm: TTimetableForm
       Visible = False
     end
     object QuClashRoomNaDay: TStringField
-      DisplayLabel = 'Day'
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'NaDay'
@@ -742,7 +743,6 @@ inherited TimetableForm: TTimetableForm
       Size = 10
     end
     object QuClashRoomNaHour: TStringField
-      DisplayLabel = 'Hour'
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'NaHour'
