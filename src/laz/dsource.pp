@@ -51,7 +51,7 @@ implementation
 {$ENDIF}
 
 uses
-  Variants, FConfiguracion, UTTGDBUtils, URelUtils, ZDataSet, uttgconsts, dsourcebaseconsts;
+  Variants, FConfig, UTTGDBUtils, URelUtils, ZDataSet, uttgconsts, dsourcebaseconsts;
 
 procedure TSourceDataModule.TbDistributionBeforePost(DataSet: TDataSet);
 var

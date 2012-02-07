@@ -66,7 +66,7 @@ type
 
 implementation
 uses
-  DMaster, UTTGBasics, FConfiguracion, DSource;
+  DMaster, UTTGBasics, FConfig, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}

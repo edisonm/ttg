@@ -9,7 +9,7 @@ uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, Db, FSingleEditor, Grids, Buttons, FEditor, DBCtrls,
   ExtCtrls, ComCtrls, ActnList, ZConnection, ZDataset, FCrossManytoManyEditorR,
-  DMaster, FCrossManyToManyEditor1, FConfiguracion, DSource, FMasterDetailEditor,
+  DMaster, FCrossManyToManyEditor1, FConfig, DSource, FMasterDetailEditor,
   FTimetableTeacher, FTimetableRoomType, FTimetableClass;
 
 type

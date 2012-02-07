@@ -208,7 +208,7 @@ implementation
 
 uses
   FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FSubject, FTeacher,
-  FTimetable, FMasterDetailEditor, FConfiguracion, FClass, Printers, DSource,
+  FTimetable, FMasterDetailEditor, FConfig, FClass, Printers, DSource,
   DSourceBase, UTTGBasics, FMessageView, UTTGi18n, UTTGConsts;
 
 {$IFNDEF FPC}

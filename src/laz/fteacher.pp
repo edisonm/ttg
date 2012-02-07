@@ -42,7 +42,7 @@ var
 implementation
 
 uses
-  DMaster, FConfiguracion, DSource, FEditor, UTTGDBUtils, UTTGConsts;
+  DMaster, FConfig, DSource, FEditor, UTTGDBUtils, UTTGConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}

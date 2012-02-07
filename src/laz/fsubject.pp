@@ -40,7 +40,7 @@ var
 
 implementation
 uses
-  DMaster, FCrossManyToManyEditor, FConfiguracion, DSource, UTTGConsts;
+  DMaster, FCrossManyToManyEditor, FConfig, DSource, UTTGConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
