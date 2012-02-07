@@ -59,9 +59,10 @@ begin
     TbTeacherRestriction.MasterSource := DSTeacher;
     TbTeacherRestriction.MasterFields := 'IdTeacher';
     TbTeacherRestriction.LinkedFields := 'IdTeacher';
-    Caption := Format('%s %s %s - Editando %s', [NameDataSet[TbTeacher],
+    Caption := Format('%s %s %s - %s %s', [NameDataSet[TbTeacher],
       TbTeacher.FindField('LnTeacher').AsString,
       TbTeacher.FindField('NaTeacher').AsString,
+      SEditing,
       Description[TbTeacherRestriction]]);
     DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [Description[TbTeacherRestriction], Description[TbDay], Description[TbHour]]);

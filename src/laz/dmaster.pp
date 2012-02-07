@@ -19,17 +19,6 @@ type
     TbTmpTeacherWorkLoadNaTeacher: TStringField;
     TbTmpTeacherWorkLoadLnTeacher: TStringField;
     TbTmpTeacherWorkLoadWorkLoad: TLongintField;
-    QuDistributionTeacher: TZTable;
-    QuDistributionTeacherIdSubject: TLongintField;
-    QuDistributionTeacherIdLevel: TLongintField;
-    QuDistributionTeacherIdGroupId: TLongintField;
-    QuDistributionTeacherNaSubject: TStringField;
-    QuDistributionTeacherAbLevel: TStringField;
-    QuDistributionTeacherNaGroupId: TStringField;
-    QuDistributionTeacherIdTeacher: TLongintField;
-    QuDistributionTeacherApeNaTeacher: TStringField;
-    QuDistributionTeacherIdSpecialization: TLongintField;
-    QuDistributionTeacherAbSpecialization: TStringField;
     QuTeacherRestrictionCount: TZTable;
     QuTeacherRestrictionCountIdTeacher: TLongintField;
     QuTeacherRestrictionCountNumber: TLongintField;
@@ -602,6 +591,10 @@ procedure TMasterDataModule.DataModuleCreate(Sender: TObject);
 var
   LResource: TLResource;
 begin
+  TbTmpTeacherWorkLoadIdTeacher.DisplayLabel := SFlDistribution_IdTeacher;
+  TbTmpTeacherWorkLoadLnTeacher.DisplayLabel := SFlTeacher_LnTeacher;
+  TbTmpTeacherWorkLoadNaTeacher.DisplayLabel := SFlTeacher_NaTeacher;
+  TbTmpTeacherWorkLoadWorkLoad.DisplayLabel := SLoad;
   FStringsShowRoomType := TStringList.Create;
   FStringsShowTeacher := TStringList.Create;
   FStringsShowClass := TStringList.Create;
