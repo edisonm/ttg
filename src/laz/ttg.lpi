@@ -220,12 +220,12 @@
         <UnitName Value="UConfigStorage"/>
       </Unit15>
       <Unit16>
-        <Filename Value="fconfiguracion.pp"/>
+        <Filename Value="fconfig.pp"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ConfiguracionForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FConfiguracion"/>
+        <UnitName Value="fconfig"/>
       </Unit16>
       <Unit17>
         <Filename Value="ftimetableclass.pp"/>

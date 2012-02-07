@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit FConfiguracion;
+unit fconfig;
 
 {$I ttg.inc}
 
@@ -296,7 +296,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i fconfiguracion.lrs}
+  {$i fconfig.lrs}
 {$ENDIF}
 
 end.
