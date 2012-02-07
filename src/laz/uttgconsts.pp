@@ -19,6 +19,7 @@ resourcestring
   SClashRoomType = 'Clash of Classrooms';
   SClashSubject = 'Clash of Subjects';
   SClashTeacher = 'Clash of Teachers';
+  SClashes = 'Clashes';
   SClassTimeSlotToSessionOverflow = 'Overflow of pattern for ClassTimeSlotToSession: Class %d-%d Duration %d';
   SClassWorkLoadHead = 'Class; Work Load';
   SClassWorkLoadWithProblems = 'Class work load with problems...';

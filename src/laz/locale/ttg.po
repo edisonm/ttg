@@ -1441,11 +1441,11 @@ msgstr ""
 msgid "Improve timetable|Improve selected timetable"
 msgstr ""
 
-#: ttimetableform.actsubjectcortadahour.caption
+#: ttimetableform.actsubjectcuthour.caption
 msgid "Subjects cut by the hour"
 msgstr ""
 
-#: ttimetableform.actsubjectcortadahour.hint
+#: ttimetableform.actsubjectcuthour.hint
 msgid "Subjects cut by the hour|Subjects cut by the hour"
 msgstr ""
 

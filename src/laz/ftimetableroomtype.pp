@@ -66,7 +66,7 @@ type
 
 implementation
 uses
-  DMaster, UTTGBasics, FConfig, DSource;
+  DMaster, UTTGBasics, FConfig, DSource, dsourcebaseconsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -89,6 +89,13 @@ end;
 procedure TTimetableRoomTypeForm.FormCreate(Sender: TObject);
 begin
   inherited;
+  QuTimetableRoomTypeNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
+  QuTimetableRoomTypeAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
+  QuTimetableRoomTypeAbSpecialization.DisplayLabel
+    := SFlTimetableDetail_IdSpecialization;
+  QuTimetableRoomTypeNaGroupId.DisplayLabel := SFlTimetableDetail_IdGroupId;
+  QuTimetableRoomTypeName.DisplayLabel := SFlRoomType_NaRoomType;
+  QuRoomTypeAbRoomType.DisplayLabel := SFlDistribution_IdRoomType;
   QuRoomType.Open;
   cbxShowRoomType.Items.Clear;
   QuTimetableRoomType.Open;
