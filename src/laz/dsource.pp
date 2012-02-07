@@ -145,7 +145,6 @@ begin
         Post;
       end;
     end;
-    // Hours por defecto:
     with TbHour do
     begin
       t := 7 / 24;

@@ -186,8 +186,8 @@ type
 {$IFNDEF FREEWARE}
     procedure ElaborarTimetables(const SIdTimetables: string);
 {$ENDIF}
-    procedure PedirRegistrarSoftware;
-    procedure ProtegerSoftware;
+    procedure RegisterSoftware;
+    procedure ProtectSoftware;
 
   public
     { Public declarations }
@@ -576,11 +576,11 @@ begin
     StatusBar.Canvas.FillRect(Rect);
 end;
 
-procedure TMainForm.PedirRegistrarSoftware;
+procedure TMainForm.RegisterSoftware;
 {var
   InitDate: TDateTime;}
 begin
-{  with FSProteccion do
+{  with FSProtection do
     if Protect1.Execute(VarToStr(StoredValue['Password'])) then
     begin
       InitDate := Now;
@@ -590,11 +590,11 @@ begin
     end;}
 end;
 
-procedure TMainForm.ProtegerSoftware;
+procedure TMainForm.ProtectSoftware;
 {var
   LastDate, InitDate: TDateTime;}
 begin
-{  with FSProteccion do
+{  with FSProtection do
   begin
     if VarToStr(StoredValue['LastDate']) = '' then
       StoredValue['LastDate'] := Double(Now);
@@ -607,7 +607,7 @@ begin
         LastDate := Now;
         StoredValue['LastDate'] := Double(LastDate);
       end;
-      if (Protect1.DaysExpire > 0) and ((Protect1.DaysExpire + InitDate < LastDate)
+      if (Protect1.ExpirationDays > 0) and ((Protect1.ExpirationDays + InitDate < LastDate)
         or (LastDate > Now)) then
       begin
         MessageDlg('El tiempo de prueba a concluido'#13#10 +
@@ -616,10 +616,10 @@ begin
         ActMakeTimetable.Enabled := False;
         ActImproveTimeTable.Enabled := False;
       end
-      else if Protect1.DaysExpire > 0 then
+      else if Protect1.ExpirationDays > 0 then
       begin
         StatusBar.Panels[2].Text := Format('Transcurridos %d de %d dias',
-          [Trunc(LastDate - InitDate), Protect1.DaysExpire]);
+          [Trunc(LastDate - InitDate), Protect1.ExpirationDays]);
       end
       else
       begin
@@ -657,10 +657,10 @@ begin
     {$IFDEF FREEWARE}
     ActMakeTimetable.Enabled := False;
     ActImproveTimeTable.Enabled := False;
-    Caption := Caption + ' ***Freeware***';
+    Caption := Caption + ' >>> Freeware <<<';
     {$ENDIF}
-{    Protect1.DaysExpire := 60;}
-{    with FSProteccion do
+{    Protect1.ExpirationDays := 60;}
+{    with FSProtection do
     begin
       //StoredValue['Password'] := '';
       //StoredValue['InitDate'] := '';
@@ -668,8 +668,8 @@ begin
       RestoreFormPlacement;
       Protect1.UserID := Protect1.HardDiskID;
       if StoredValue['Password'] <> Protect1.Password then
-        PedirRegistrarSoftware;
-      ProtegerSoftware;
+        RegisterSoftware;
+      ProtectSoftware;
     end;}
   except
     ActMakeTimetable.Enabled := False;
@@ -756,8 +756,8 @@ end;
 
 procedure TMainForm.ActRegistrationInfoExecute(Sender: TObject);
 begin
-  PedirRegistrarSoftware;
-  ProtegerSoftware;
+  RegisterSoftware;
+  ProtectSoftware;
 end;
 
 procedure TMainForm.LoadConfig(Strings: TStrings);
@@ -781,7 +781,7 @@ begin
       ActLangDefault.Checked := True;
 {
     MessageViewForm.MemSummary.Height :=
-      StrToInt(Values['MessageViewForm_MemResumen_Height']);
+      StrToInt(Values['MessageViewForm_MemSummary_Height']);
 }
   end;
 end;
@@ -805,7 +805,7 @@ begin
     else
       Values['Language'] := '';
 {
-    Values['MessageViewForm_MemResumen_Height'] :=
+    Values['MessageViewForm_MemSummary_Height'] :=
       IntToStr(MessageViewForm.MemSummary.Height);
 }
   end;
