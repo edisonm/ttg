@@ -825,7 +825,7 @@ begin
           SClashTeacher           + ':', ClashTeacherValue,
           SClashSubject           + ':', ClashSubjectValue,
           SClashRoomType          + ':', ClashRoomTypeValue,
-          SBreakTimetableTeacher          + ':', BreakTimetableTeacherValue,
+          SBreakTimetableTeacher  + ':', BreakTimetableTeacherValue,
           SOutOfPositionEmptyHour + ':', OutOfPositionEmptyHourValue,
           SBrokenSession          + ':', BrokenSessionValue,
           SNonScatteredSubject    + ':', NonScatteredSubjectValue]));
@@ -1298,13 +1298,13 @@ end;
 
 procedure TTimetable.ReportValues(AReport: TStrings);
 var
-  SRowFormat: string = '%0:-26s %12d %12d %12d';
+  SRowFormat: string = '%0:-28s %12d %12d %12d';
 begin
   with AReport, TablingInfo do
   begin
-    Add('-----------------------------------------------------------------');
-    Add(Format('%0:-26s %0:-12s %0:-12s %0:-12s', [SDetail, SCount, SWeight, SValue]));
-    Add('-----------------------------------------------------------------');
+    Add('-------------------------------------------------------------------');
+    Add(Format('%0:-28s %12s %12s %12s', [SDetail, SCount, SWeight, SValue]));
+    Add('-------------------------------------------------------------------');
     Add(Format(SRowFormat, [SClashTeacher + ':', FClashTeacher,
       TTimetableModel(Model).ClashTeacherValue, ClashTeacherValue]));
     Add(Format(SRowFormat, [SClashSubject + ':', FClashSubject,
@@ -1319,16 +1319,16 @@ begin
       TTimetableModel(Model).BrokenSessionValue, BrokenSessionValue]));
     Add(Format(SRowFormat, [SNonScatteredSubject + ':', NonScatteredSubject,
         TTimetableModel(Model).NonScatteredSubjectValue, NonScatteredSubjectValue]));
-    Add(Format('%0:-26s %12s %12s %12d', [STbSubjectRestriction + ':',
+    Add(Format('%0:-28s %12s %12s %12d', [STbSubjectRestriction + ':',
          '(' + VarArrToStr(FSubjectRestrictionTypeASubjectCount, ' ') + ')',
          '(' + VarArrToStr(TTimetableModel(Model).FSubjectRestrictionTypeToValue, ' ') + ')',
          SubjectRestrictionValue]));
-    Add(Format('%0:-26s %12s %12s %12d', [STbTeacherRestriction + ':',
+    Add(Format('%0:-28s %12s %12s %12d', [STbTeacherRestriction + ':',
          '(' + VarArrToStr(FTeacherRestrictionTypeATeacherCount, ' ') + ')',
          '(' + VarArrToStr(TTimetableModel(Model).FTeacherRestrictionTypeToValue, ' ') + ')',
          TeacherRestrictionValue]));
-    Add('-----------------------------------------------------------------');
-    Add(Format('%0:-52s %12d', [STotalValue, Value]));
+    Add('-------------------------------------------------------------------');
+    Add(Format('%0:-54s %12d', [STotalValue, Value]));
   end;
 end;
 
