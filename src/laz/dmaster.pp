@@ -371,7 +371,7 @@ var
       end;
   end;
   // Comprueba que no hayan asignadas mas horas de materias a Courses que periodos
-  procedure CheckCourseCarga;
+  procedure CheckCourseLoad;
   var
     t, vMainMin, vMainMax, vSubMin, vSubMax: Integer;
     s: string;
@@ -464,7 +464,7 @@ begin
     CheckTeacherWorkLoad;
     CheckTeacherRestrictionCount;
     CheckRoomTypeLoad;
-    CheckCourseCarga;
+    CheckCourseLoad;
   finally
     AMainStrings.EndUpdate;
     ASubStrings.EndUpdate;

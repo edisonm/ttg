@@ -1694,6 +1694,10 @@ msgstr ""
 msgid "%s is empty"
 msgstr ""
 
+#: uttgconsts.sload
+msgid "Load"
+msgstr ""
+
 #: uttgconsts.smaxiteration
 msgid "Max number of iterations"
 msgstr ""

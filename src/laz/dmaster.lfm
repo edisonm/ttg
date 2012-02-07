@@ -57,7 +57,7 @@ object MasterDataModule: TMasterDataModule
     object TbTmpTeacherWorkLoadWorkLoad: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'Carga'
+      FieldName = 'Load'
       Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -264,7 +264,7 @@ object MasterDataModule: TMasterDataModule
     object TbTmpRoomTypeLoadLoad: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'Carga'
+      FieldName = 'Load'
       Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

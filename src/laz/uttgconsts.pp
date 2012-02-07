@@ -84,6 +84,7 @@ resourcestring
   SImpossible = 'Impossible';
   SRelease = 'Release';
   SAssign = 'Assign';
+  SLoad = 'Load';
 
 implementation
 

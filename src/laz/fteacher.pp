@@ -31,7 +31,7 @@ type
     { Private declarations }
     FSuperTitle: string;
     FTeacherRestrictionForm: TCrossManyToManyEditorRForm;
-    function GetCargaActual: Integer;
+    function GetCurrentLoad: Integer;
   public
     { Public declarations }
   end;
@@ -42,7 +42,7 @@ var
 implementation
 
 uses
-  DMaster, FConfiguracion, DSource, FEditor, UTTGDBUtils;
+  DMaster, FConfiguracion, DSource, FEditor, UTTGDBUtils, UTTGConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -106,7 +106,7 @@ end;
 procedure TTeacherForm.DataSourceDataChange(Sender: TObject; Field: TField);
 begin
   inherited;
-  Caption := FSuperTitle + Format(' - Carga: %d', [GetCargaActual]);
+  Caption := FSuperTitle + Format(' - %s: %d', [SLoad, GetCurrentLoad]);
 end;
 
 procedure TTeacherForm.FormActivate(Sender: TObject);
@@ -114,7 +114,7 @@ begin
   SourceDataModule.TbTeacher.Locate('IdTeacher', (Sender as TCustomForm).Tag, []);
 end;
 
-function TTeacherForm.GetCargaActual: Integer;
+function TTeacherForm.GetCurrentLoad: Integer;
 var
   VBookmark: TBookmark;
   FieldComposition: TField;
