@@ -122,7 +122,7 @@ end;
 function TMasterDataModule.PerformAllChecks(AMainStrings, ASubStrings:
   TStrings; AMaxTeacherWorkLoad: Integer): Boolean;
 var
-  HuboProblemas: Boolean;
+  HaveProblems: Boolean;
   iTimeSlotCount: Integer;
   procedure ObtenerTimeSlotCount;
   begin
@@ -203,10 +203,10 @@ var
   procedure CheckTeacherRestrictionCount;
   var
     s: string;
-    HuboProblemasInterno: Boolean;
+    HaveInternalProblems: Boolean;
     vMainMin, vMainMax, vSubMin, vSubMax: Integer;
   begin
-    HuboProblemasInterno := False;
+    HaveInternalProblems := False;
     s := '%s %s; %d';
     with QuTeacherRestrictionCount do
     begin
@@ -225,7 +225,7 @@ var
               if QuTeacherRestrictionCountNumber.AsInteger +
                 TbTmpTeacherWorkLoadWorkLoad.AsInteger > iTimeSlotCount then
               begin
-                if not HuboProblemasInterno then
+                if not HaveInternalProblems then
                 begin
                   AMainStrings.Add(SNumHardTeacherRestrictions);
                   vMainMin := AMainStrings.Count;
@@ -234,8 +234,8 @@ var
                 AMainStrings.Add(Format(s, [TbTmpTeacherWorkLoadLnTeacher.Value,
                   TbTmpTeacherWorkLoadNaTeacher.Value,
                     QuTeacherRestrictionCountNumber.AsInteger]));
-                HuboProblemasInterno := True;
-                HuboProblemas := True;
+                HaveInternalProblems := True;
+                HaveProblems := True;
               end
               else
                 ASubStrings.Add(Format(s, [TbTmpTeacherWorkLoadLnTeacher.Value,
@@ -247,7 +247,7 @@ var
         finally
           Close;
         end;
-        if HuboProblemasInterno then
+        if HaveInternalProblems then
         begin
           vMainMax := AMainStrings.Count - 1;
           EqualSpaced(AMainStrings, vMainMin, vMainMax, ';');
@@ -263,12 +263,12 @@ var
   var
     s: string;
     vMainMin, vMainMax, vSubMin, vSubMax: Integer;
-    HuboProblemasInterno: Boolean;
+    HaveInternalProblems: Boolean;
   begin
     with TbTmpTeacherWorkLoad do
       if not IsEmpty then
       begin
-        HuboProblemasInterno := False;
+        HaveInternalProblems := False;
         First;
         s := '%s %s; %d';
         ASubStrings.Add(STeachersWorkLoadWithoutProblems);
@@ -278,7 +278,7 @@ var
         begin
           if TbTmpTeacherWorkLoadWorkLoad.Value > AMaxTeacherWorkLoad then
           begin
-            if not HuboProblemasInterno then
+            if not HaveInternalProblems then
             begin
               AMainStrings.Add(STeachersWorkLoadWithProblems);
               vMainMin := AMainStrings.Count;
@@ -287,8 +287,8 @@ var
             AMainStrings.Add(Format(s, [TbTmpTeacherWorkLoadLnTeacher.Value,
               TbTmpTeacherWorkLoadNaTeacher.Value,
                 TbTmpTeacherWorkLoadWorkLoad.Value]));
-            HuboProblemas := True;
-            HuboProblemasInterno := True;
+            HaveProblems := True;
+            HaveInternalProblems := True;
           end
           else
           begin
@@ -298,7 +298,7 @@ var
           end;
           Next;
         end;
-        if HuboProblemas then
+        if HaveProblems then
         begin
           vMainMax := AMainStrings.Count - 1;
           EqualSpaced(AMainStrings, vMainMin, vMainMax, ';');
@@ -316,12 +316,12 @@ var
     c: Integer;
     vMainMin, vMainMax, vSubMin, vSubMax: Integer;
     s: string;
-    bRoomTypeActive, HuboProblemasInterno: Boolean;
+    bRoomTypeActive, HaveInternalProblems: Boolean;
   begin
     with SourceDataModule, TbTmpRoomTypeLoad do
       if not IsEmpty then
       begin
-        HuboProblemasInterno := False;
+        HaveInternalProblems := False;
         bRoomTypeActive := TbRoomType.Active;
         try
           TbRoomType.First;
@@ -337,7 +337,7 @@ var
               c := iTimeSlotCount * TbRoomType.FindField('Number').AsInteger;
               if TbTmpRoomTypeLoadLoad.Value > c then
               begin
-                if not HuboProblemasInterno then
+                if not HaveInternalProblems then
                 begin
                   AMainStrings.Add(SRoomTypesWithProblems);
                   vMainMin := AMainStrings.Count;
@@ -345,8 +345,8 @@ var
                 end;
                 AMainStrings.Add(Format(s, [TbTmpRoomTypeLoadAbRoomType.Value,
                   c, TbTmpRoomTypeLoadLoad.Value]));
-                HuboProblemas := True;
-                HuboProblemasInterno := True;
+                HaveProblems := True;
+                HaveInternalProblems := True;
               end
               else
               begin
@@ -359,7 +359,7 @@ var
         finally
           TbRoomType.Active := bRoomTypeActive;
         end;
-        if HuboProblemas then
+        if HaveProblems then
         begin
           vMainMax := AMainStrings.Count - 1;
           EqualSpaced(AMainStrings, vMainMin, vMainMax, ';');
@@ -375,12 +375,12 @@ var
   var
     t, vMainMin, vMainMax, vSubMin, vSubMax: Integer;
     s: string;
-    HuboProblemasInterno: Boolean;
+    HaveInternalProblems: Boolean;
   begin
     with SourceDataModule, TbClass do
     begin
       s := '%s %s %s; %d';
-      HuboProblemasInterno := False;
+      HaveInternalProblems := False;
       try
         Open;
         TbDistribution.First;
@@ -407,7 +407,7 @@ var
             end;
             if (t <= 0) or (t > TbTimeSlot.RecordCount) then
             begin
-              if not HuboProblemasInterno then
+              if not HaveInternalProblems then
               begin
                 AMainStrings.Add(SClassWorkLoadWithProblems);
                 vMainMin := AMainStrings.Count;
@@ -416,8 +416,8 @@ var
               AMainStrings.Add(Format(s, [TbClass.FindField('AbLevel').Value,
                 TbClass.FindField('AbSpecialization').Value,
                 TbClass.FindField('NaGroupId').Value, t]));
-              HuboProblemas := True;
-              HuboProblemasInterno := True;
+              HaveProblems := True;
+              HaveInternalProblems := True;
             end
             else
               ASubStrings.Add(Format(s, [TbClass.FindField('AbLevel').Value,
@@ -430,11 +430,11 @@ var
               TbClass.FindField('NaGroupId').AsString,
               STbSubject,
               TbDistribution.FindField('NaSubject').AsString]));
-            HuboProblemas := True;
+            HaveProblems := True;
           end;
           Next;
         end;
-        if HuboProblemasInterno then
+        if HaveInternalProblems then
         begin
           vMainMax := AMainStrings.Count - 1;
           EqualSpaced(AMainStrings, vMainMin, vMainMax, ';');
@@ -456,7 +456,7 @@ begin
   ASubStrings.Clear;
   AMainStrings.BeginUpdate;
   ASubStrings.BeginUpdate;
-  HuboProblemas := False;
+  HaveProblems := False;
   try
     ObtenerTimeSlotCount;
     ObtenerTeacherWorkLoad;
@@ -470,7 +470,7 @@ begin
     ASubStrings.EndUpdate;
     TbTmpTeacherWorkLoad.Close;
     TbTmpRoomTypeLoad.Close;
-    Result := HuboProblemas;
+    Result := HaveProblems;
   end;
 end;
 
