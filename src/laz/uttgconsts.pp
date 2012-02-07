@@ -26,6 +26,13 @@ resourcestring
   SCopyright = '1999-2012 by Edison Mera';
   SCount = 'Count';
   SCrossProbability = 'Cross Probability';
+  SDay0 = 'Sunday';
+  SDay1 = 'Monday';
+  SDay2 = 'Tuesday';
+  SDay3 = 'Wednesday';
+  SDay4 = 'Thursday';
+  SDay5 = 'Friday';
+  SDay6 = 'Saturday';
   SDetail = 'Detail';
   SDownHillAlgorithm = 'Downhill Algorithm';
   SEvolutiveElitistAlgorithm = 'Evolutive Elitist Algorithm';

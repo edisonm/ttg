@@ -130,16 +130,18 @@ var
   t: TDateTime;
   i: Integer;
   s: string;
+  DayNames: array[0..6] of string =
+    (SDay0, SDay1, SDay2, SDay3, SDay4, SDay5, SDay6);
 begin
   CheckRelations := False;
   try
     with TbDay do
     begin
-      for i := Low(LongDayNames) + 1 to High(LongDayNames) - 1 do
+      for i := Low(DayNames) + 1 to High(DayNames) - 1 do
       begin
         Append;
         Fields[0].AsInteger := i;
-        Fields[1].AsString := LongDayNames[i];
+        Fields[1].AsString := DayNames[i];
         Post;
       end;
     end;

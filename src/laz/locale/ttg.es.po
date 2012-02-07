@@ -1614,6 +1614,34 @@ msgctxt "uttgconsts.scrossprobability"
 msgid "Cross Probability"
 msgstr "Probabilidad de cruce"
 
+#: uttgconsts.sday0
+msgid "Sunday"
+msgstr "Domingo"
+
+#: uttgconsts.sday1
+msgid "Monday"
+msgstr "Lunes"
+
+#: uttgconsts.sday2
+msgid "Tuesday"
+msgstr "Martes"
+
+#: uttgconsts.sday3
+msgid "Wednesday"
+msgstr "Miercoles"
+
+#: uttgconsts.sday4
+msgid "Thursday"
+msgstr "Jueves"
+
+#: uttgconsts.sday5
+msgid "Friday"
+msgstr "Viernes"
+
+#: uttgconsts.sday6
+msgid "Saturday"
+msgstr "Sabado"
+
 #: uttgconsts.sdetail
 msgid "Detail"
 msgstr "Detalle"
