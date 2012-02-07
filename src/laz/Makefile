@@ -34,7 +34,9 @@ $(ABOUT).pp: $(ABOUT).pp.tmpl
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
 $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs
-	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi ; strip --strip-all $(TTGEXE)
+	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
+	cp $(TTGEXE) $(TTGEXE).bak
+	strip --strip-all $(TTGEXE)
 
 ifeq ($(shell uname -o),Cygwin)
 

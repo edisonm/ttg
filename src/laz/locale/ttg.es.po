@@ -1441,14 +1441,6 @@ msgstr "Mejorar horario"
 msgid "Improve timetable|Improve selected timetable"
 msgstr "Mejorar horario|Mejorar horario seleccionado"
 
-#: ttimetableform.actsubjectcuthour.caption
-msgid "Subjects cut by the hour"
-msgstr "Materias cortadas por la hora"
-
-#: ttimetableform.actsubjectcuthour.hint
-msgid "Subjects cut by the hour|Subjects cut by the hour"
-msgstr "Materias cortadas por la hora|Materias cortadas por la hora"
-
 #: ttimetableform.actsubjectcutday.caption
 msgid "Subjects cut by the day"
 msgstr "Materias cortadas por el dia"
@@ -1456,6 +1448,14 @@ msgstr "Materias cortadas por el dia"
 #: ttimetableform.actsubjectcutday.hint
 msgid "Subjects cut by the day|Subjects cut by the day"
 msgstr "Materias cortadas por el dia|Materias cortadas por el dia"
+
+#: ttimetableform.actsubjectcuthour.caption
+msgid "Subjects cut by the hour"
+msgstr "Materias cortadas por la hora"
+
+#: ttimetableform.actsubjectcuthour.hint
+msgid "Subjects cut by the hour|Subjects cut by the hour"
+msgstr "Materias cortadas por la hora|Materias cortadas por la hora"
 
 #: ttimetableform.actsubjectrestrictionnonsatisfied.caption
 msgctxt "ttimetableform.actsubjectrestrictionnonsatisfied.caption"
@@ -1574,6 +1574,10 @@ msgstr "Materias cortadas"
 #: uttgconsts.schangeswillbelostwarning
 msgid "Changes will be lost, are you sure?"
 msgstr "Los cambios realizados se perderan, Esta seguro?"
+
+#: uttgconsts.sclashes
+msgid "Clashes"
+msgstr "Cruces"
 
 #: uttgconsts.sclashroomtype
 msgctxt "uttgconsts.sclashroomtype"

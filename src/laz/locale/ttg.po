@@ -1441,20 +1441,20 @@ msgstr ""
 msgid "Improve timetable|Improve selected timetable"
 msgstr ""
 
-#: ttimetableform.actsubjectcuthour.caption
-msgid "Subjects cut by the hour"
-msgstr ""
-
-#: ttimetableform.actsubjectcuthour.hint
-msgid "Subjects cut by the hour|Subjects cut by the hour"
-msgstr ""
-
 #: ttimetableform.actsubjectcutday.caption
 msgid "Subjects cut by the day"
 msgstr ""
 
 #: ttimetableform.actsubjectcutday.hint
 msgid "Subjects cut by the day|Subjects cut by the day"
+msgstr ""
+
+#: ttimetableform.actsubjectcuthour.caption
+msgid "Subjects cut by the hour"
+msgstr ""
+
+#: ttimetableform.actsubjectcuthour.hint
+msgid "Subjects cut by the hour|Subjects cut by the hour"
 msgstr ""
 
 #: ttimetableform.actsubjectrestrictionnonsatisfied.caption
@@ -1573,6 +1573,10 @@ msgstr ""
 
 #: uttgconsts.schangeswillbelostwarning
 msgid "Changes will be lost, are you sure?"
+msgstr ""
+
+#: uttgconsts.sclashes
+msgid "Clashes"
 msgstr ""
 
 #: uttgconsts.sclashroomtype
