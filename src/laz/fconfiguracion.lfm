@@ -66,11 +66,11 @@ object ConfiguracionForm: TConfiguracionForm
     Height = 386
     Top = 8
     Width = 473
-    ActivePage = tbsWeigths
+    ActivePage = tbsInstitution
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 1
     object tbsInstitution: TTabSheet
       Hint = 'Institution Data'
