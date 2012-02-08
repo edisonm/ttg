@@ -24,10 +24,12 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    ActDBExplorer: TAction;
     ActLangDefault: TAction;
     ActLangEnglish: TAction;
     ActLangSpanish: TAction;
     MainMenu: TMainMenu;
+    MIDBExplorer: TMenuItem;
     MILangDefault: TMenuItem;
     MILanguages: TMenuItem;
     MILangSpanish: TMenuItem;
@@ -118,12 +120,11 @@ type
     N2: TMenuItem;
     N5: TMenuItem;
     N6: TMenuItem;
-    ActImproveTimeTable: TAction;
-    MIMejorarTimetable: TMenuItem;
     SaveDialogCSV: TSaveDialog;
     ActRegistrationInfo: TAction;
     MIRegistrationInfo: TMenuItem;
     ToolBar: TToolBar;
+    procedure ActDBExplorerExecute(Sender: TObject);
     procedure ActExitExecute(Sender: TObject);
     procedure ActLangDefaultExecute(Sender: TObject);
     procedure ActLangEnglishExecute(Sender: TObject);
@@ -209,7 +210,7 @@ implementation
 uses
   FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FSubject, FTeacher,
   FTimetable, FMasterDetailEditor, FConfig, FClass, Printers, DSource,
-  DSourceBase, UTTGBasics, FMessageView, UTTGi18n, UTTGConsts;
+  DSourceBase, UTTGBasics, FMessageView, UTTGi18n, UTTGConsts, FDBExplorer;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -218,6 +219,12 @@ uses
 procedure TMainForm.ActExitExecute(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TMainForm.ActDBExplorerExecute(Sender: TObject);
+begin
+  with TDBExplorerForm.Create(Self) do
+    Show;
 end;
 
 procedure TMainForm.ActLangDefaultExecute(Sender: TObject);
@@ -673,7 +680,6 @@ begin
     end;}
   except
     ActMakeTimetable.Enabled := False;
-    ActImproveTimeTable.Enabled := False;
     raise;
   end;
 end;

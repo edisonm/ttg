@@ -1,11 +1,11 @@
 object MainForm: TMainForm
-  Left = 623
-  Height = 77
-  Top = 216
-  Width = 667
+  Left = 729
+  Height = 393
+  Top = 179
+  Width = 718
   Caption = 'MainForm'
-  ClientHeight = 77
-  ClientWidth = 667
+  ClientHeight = 393
+  ClientWidth = 718
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Icon.Data = {
@@ -53,8 +53,8 @@ object MainForm: TMainForm
   object StatusBar: TStatusBar
     Left = 0
     Height = 21
-    Top = 56
-    Width = 667
+    Top = 372
+    Width = 718
     AutoHint = True
     Panels = <    
       item
@@ -73,7 +73,7 @@ object MainForm: TMainForm
     Left = 0
     Height = 25
     Top = 0
-    Width = 667
+    Width = 718
     Images = ImageList
     TabOrder = 1
     object SpeedBar: TToolBar
@@ -268,7 +268,7 @@ object MainForm: TMainForm
   end
   object MainMenu: TMainMenu
     Images = ImageList
-    left = 18
+    left = 48
     top = 224
     object MIFile: TMenuItem
       Caption = '&File'
@@ -1013,9 +1013,6 @@ object MainForm: TMainForm
         }
         OnClick = ActMakeTimetableExecute
       end
-      object MIMejorarTimetable: TMenuItem
-        Action = ActImproveTimeTable
-      end
       object MILanguages: TMenuItem
         Caption = 'Languages'
         object MILangDefault: TMenuItem
@@ -1038,6 +1035,9 @@ object MainForm: TMainForm
           RadioItem = True
           ShowAlwaysCheckable = True
         end
+      end
+      object MIDBExplorer: TMenuItem
+        Action = ActDBExplorer
       end
     end
     object MIHelp: TMenuItem
@@ -1139,19 +1139,19 @@ object MainForm: TMainForm
   end
   object SaveDialog: TSaveDialog
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    left = 18
+    left = 48
     top = 272
   end
   object OpenDialog: TOpenDialog
     DefaultExt = '.ttd'
     Filter = 'High School Timetable (*.ttd)|*.ttd'
     Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
-    left = 18
+    left = 48
     top = 176
   end
   object ImageList: TImageList
     BkColor = clBtnFace
-    left = 18
+    left = 48
     top = 128
     Bitmap = {
       4C691B0000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -2023,7 +2023,7 @@ object MainForm: TMainForm
   end
   object ActionList: TActionList
     Images = ImageList
-    left = 18
+    left = 48
     top = 72
     object ActContents: TAction
       Category = 'Help'
@@ -2236,11 +2236,6 @@ object MainForm: TMainForm
       ImageIndex = 17
       OnExecute = ActMakeTimetableExecute
     end
-    object ActImproveTimeTable: TAction
-      Category = 'Tools'
-      Caption = 'Improve Timetable'
-      Hint = 'Improve Timetable|Improve Timetable searching in double depth'
-    end
     object ActLangDefault: TAction
       Category = 'Tools'
       Caption = 'Default Language'
@@ -2262,12 +2257,17 @@ object MainForm: TMainForm
       GroupIndex = 1
       OnExecute = ActLangSpanishExecute
     end
+    object ActDBExplorer: TAction
+      Category = 'Tools'
+      Caption = 'Database Explorer...'
+      OnExecute = ActDBExplorerExecute
+    end
   end
   object SaveDialogCSV: TSaveDialog
     DefaultExt = '.csv'
     Filter = 'Comma delimited CSV(*.csv)|*.csv'
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    left = 112
+    left = 142
     top = 72
   end
 end

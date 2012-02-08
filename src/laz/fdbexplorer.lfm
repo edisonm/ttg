@@ -1,0 +1,196 @@
+object DBExplorerForm: TDBExplorerForm
+  Left = 634
+  Height = 583
+  Top = 320
+  Width = 631
+  Caption = 'Database Explorer'
+  ClientHeight = 583
+  ClientWidth = 631
+  OnCreate = FormCreate
+  LCLVersion = '0.9.31'
+  object Memo1: TMemo
+    Left = 8
+    Height = 89
+    Top = 72
+    Width = 472
+    Anchors = [akTop, akLeft, akRight]
+    TabOrder = 0
+  end
+  object DBGrid1: TDBGrid
+    Left = 8
+    Height = 405
+    Top = 168
+    Width = 614
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Color = clWindow
+    Columns = <>
+    DataSource = Datasource1
+    TabOrder = 1
+  end
+  object btnExecuteQuery: TButton
+    Left = 488
+    Height = 25
+    Top = 72
+    Width = 134
+    Anchors = [akTop, akRight]
+    Caption = 'Execute Query'
+    OnClick = btnExecuteQueryClick
+    TabOrder = 2
+  end
+  object btnShowMetadata: TButton
+    Left = 488
+    Height = 26
+    Top = 8
+    Width = 134
+    Anchors = [akTop, akRight]
+    Caption = 'Show Metadata'
+    OnClick = btnShowMetadataClick
+    TabOrder = 3
+  end
+  object CbxMetadataType: TComboBox
+    Left = 8
+    Height = 29
+    Hint = 'Metadata Type'
+    Top = 8
+    Width = 472
+    Anchors = [akTop, akLeft, akRight]
+    ItemHeight = 0
+    TabOrder = 4
+  end
+  object BtnSaveResults: TButton
+    Left = 488
+    Height = 25
+    Top = 136
+    Width = 134
+    Anchors = [akTop, akRight]
+    Caption = 'Save Results'
+    OnClick = BtnSaveResultsClick
+    TabOrder = 5
+  end
+  object CbxTable: TDBLookupComboBox
+    Left = 8
+    Height = 29
+    Hint = 'Tables'
+    Top = 40
+    Width = 472
+    Anchors = [akTop, akLeft, akRight]
+    KeyField = 'TABLE_NAME'
+    ListField = 'TABLE_NAME'
+    ListFieldIndex = 0
+    LookupCache = False
+    TabOrder = 6
+  end
+  object BtnShowTable: TButton
+    Left = 488
+    Height = 27
+    Top = 40
+    Width = 134
+    Anchors = [akTop, akRight]
+    Caption = 'Show Table'
+    OnClick = BtnShowTableClick
+    TabOrder = 7
+  end
+  object BtnOpenQuery: TButton
+    Left = 488
+    Height = 25
+    Top = 104
+    Width = 134
+    Anchors = [akTop, akRight]
+    Caption = 'Open Query'
+    OnClick = BtnOpenQueryClick
+    TabOrder = 8
+  end
+  object ZTable1: TZTable
+    Connection = SourceDataModule.DbZConnection
+    left = 440
+    top = 168
+  end
+  object ZSQLMetadata1: TZSQLMetadata
+    Connection = SourceDataModule.DbZConnection
+    MetadataType = mdProcedures
+    left = 344
+    top = 168
+  end
+  object Datasource1: TDatasource
+    left = 344
+    top = 96
+  end
+  object ZQuery1: TZQuery
+    Connection = SourceDataModule.DbZConnection
+    Params = <>
+    left = 440
+    top = 96
+  end
+  object SaveDialog1: TSaveDialog
+    DefaultExt = '.csv'
+    Filter = 'Comma delimited file (*.csv)|*.csv'
+    left = 216
+    top = 96
+  end
+  object ZmdTables: TZSQLMetadata
+    Connection = SourceDataModule.DbZConnection
+    MetadataType = mdTables
+    left = 104
+    top = 168
+    object ZmdTablesTABLE_CAT: TStringField
+      DisplayWidth = 255
+      FieldKind = fkData
+      FieldName = 'TABLE_CAT'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 255
+    end
+    object ZmdTablesTABLE_SCHEM: TStringField
+      DisplayWidth = 255
+      FieldKind = fkData
+      FieldName = 'TABLE_SCHEM'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 255
+    end
+    object ZmdTablesTABLE_NAME: TStringField
+      DisplayWidth = 255
+      FieldKind = fkData
+      FieldName = 'TABLE_NAME'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 255
+    end
+    object ZmdTablesTABLE_TYPE: TStringField
+      DisplayWidth = 255
+      FieldKind = fkData
+      FieldName = 'TABLE_TYPE'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 255
+    end
+    object ZmdTablesREMARKS: TStringField
+      DisplayWidth = 255
+      FieldKind = fkData
+      FieldName = 'REMARKS'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      Size = 255
+    end
+  end
+  object DSTables: TDatasource
+    DataSet = ZmdTables
+    left = 216
+    top = 168
+  end
+end

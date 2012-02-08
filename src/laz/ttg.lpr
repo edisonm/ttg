@@ -40,7 +40,7 @@ uses
   DSource in 'dsource.pp' {SourceDataModule: TDataModule},
   FSelTimeSlot {SelTimeSlotForm},
   DBase, UModel, UMakeTT, UDownHill, USolver, UTTGBasics, UAbout, FMessageView,
-  UTTGi18n, uttgconsts, dsourcebaseconsts;
+  UTTGi18n, uttgconsts, dsourcebaseconsts, fdbexplorer;
 
 {$IFNDEF FPC}
 {$R *.res}

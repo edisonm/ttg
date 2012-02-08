@@ -638,6 +638,38 @@ msgstr "Cancelar|Cancelar"
 msgid "Ok|Ok"
 msgstr "Aceptar|Aceptar"
 
+#: tdbexplorerform.btnexecutequery.caption
+msgid "Execute Query"
+msgstr ""
+
+#: tdbexplorerform.btnopenquery.caption
+msgid "Open Query"
+msgstr ""
+
+#: tdbexplorerform.btnsaveresults.caption
+msgid "Save Results"
+msgstr ""
+
+#: tdbexplorerform.btnshowmetadata.caption
+msgid "Show Metadata"
+msgstr ""
+
+#: tdbexplorerform.btnshowtable.caption
+msgid "Show Table"
+msgstr ""
+
+#: tdbexplorerform.caption
+msgid "Database Explorer"
+msgstr ""
+
+#: tdbexplorerform.cbxmetadatatype.hint
+msgid "Metadata Type"
+msgstr ""
+
+#: tdbexplorerform.cbxtable.hint
+msgid "Tables"
+msgstr ""
+
 #: teditorform.btnshow.hint
 msgctxt "TEDITORFORM.BTNSHOW.HINT"
 msgid "Show|Show the grid content in a report"
@@ -652,6 +684,10 @@ msgstr "EditorForm"
 msgctxt "teditorform.tlbshow.caption"
 msgid "Show"
 msgstr "Presentar"
+
+#: tform1.caption
+msgid "Form1"
+msgstr ""
 
 #: tmainform.actabout.caption
 msgid "About..."
@@ -711,6 +747,10 @@ msgstr "Dias laborables"
 msgid "Working days|Working days"
 msgstr "Dias laborables|Dias laborables"
 
+#: tmainform.actdbexplorer.caption
+msgid "Database Explorer..."
+msgstr ""
+
 #: tmainform.actexit.caption
 msgid "Exit"
 msgstr "Salir"
@@ -734,14 +774,6 @@ msgstr "Horas academicas"
 #: tmainform.acthour.hint
 msgid "Academic hours|Academic hours"
 msgstr "Horas academicas|Horas academicas"
-
-#: tmainform.actimprovetimetable.caption
-msgid "Improve Timetable"
-msgstr "Mejorar horario"
-
-#: tmainform.actimprovetimetable.hint
-msgid "Improve Timetable|Improve Timetable searching in double depth"
-msgstr "Mejorar horario|Mejorar horario buscando en doble profundidad"
 
 #: tmainform.actindex.caption
 msgid "Index"
@@ -869,8 +901,8 @@ msgstr "Horarios"
 msgid "Timetables|Show Timetables"
 msgstr "Horarios|Mostrar horarios"
 
-#: tmainform.mainform.caption
-msgctxt "TMAINFORM.MAINFORM.CAPTION"
+#: tmainform.caption
+msgctxt "tmainform.caption"
 msgid "MainForm"
 msgstr "MainForm"
 

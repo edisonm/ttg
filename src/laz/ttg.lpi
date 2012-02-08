@@ -96,19 +96,22 @@
         <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="3">
+    <RequiredPackages Count="4">
       <Item1>
-        <PackageName Value="MultiThreadProcsLaz"/>
+        <PackageName Value="zcomponent"/>
       </Item1>
       <Item2>
-        <PackageName Value="FCL"/>
-        <MinVersion Major="1" Valid="True"/>
+        <PackageName Value="MultiThreadProcsLaz"/>
       </Item2>
       <Item3>
-        <PackageName Value="LCL"/>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
       </Item3>
+      <Item4>
+        <PackageName Value="LCL"/>
+      </Item4>
     </RequiredPackages>
-    <Units Count="41">
+    <Units Count="42">
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -386,6 +389,13 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="dsourcebaseconsts"/>
       </Unit40>
+      <Unit41>
+        <Filename Value="fdbexplorer.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="DBExplorerForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="fdbexplorer"/>
+      </Unit41>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
