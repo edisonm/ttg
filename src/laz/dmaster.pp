@@ -635,8 +635,7 @@ begin
     if DbZConnection.Database = ':memory:' then
     begin
       DbZConnection.ExecuteDirect('pragma journal_mode=off');
-      with LazarusResources.Find('ttg', 'SQL') do
-        DbZConnection.ExecuteDirect(Value);
+      DbZConnection.ExecuteDirect(LazarusResources.Find('ttg', 'SQL').Value);
       PrepareTables;
       OpenTables;
       NewDatabase;

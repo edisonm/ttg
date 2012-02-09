@@ -14,18 +14,22 @@ type
   { TDBExplorerForm }
 
   TDBExplorerForm = class(TForm)
-    btnExecuteQuery: TButton;
+    btnExecuteScript: TButton;
     btnShowMetadata: TButton;
     BtnSaveResults: TButton;
     BtnShowTable: TButton;
     BtnOpenQuery: TButton;
+    BtnOpenScript: TButton;
+    BtnSaveScript: TButton;
     CbxMetadataType: TComboBox;
     Datasource1: TDatasource;
     DSTables: TDatasource;
     DBGrid1: TDBGrid;
     CbxTable: TDBLookupComboBox;
     Memo1: TMemo;
-    SaveDialog1: TSaveDialog;
+    OpenScript: TOpenDialog;
+    SaveScript: TSaveDialog;
+    SaveResults: TSaveDialog;
     ZmdTablesREMARKS: TStringField;
     ZmdTablesTABLE_CAT: TStringField;
     ZmdTablesTABLE_NAME: TStringField;
@@ -35,9 +39,11 @@ type
     ZSQLMetadata1: TZSQLMetadata;
     ZmdTables: TZSQLMetadata;
     ZTable1: TZTable;
+    procedure BtnOpenScriptClick(Sender: TObject);
     procedure BtnOpenQueryClick(Sender: TObject);
+    procedure BtnSaveScriptClick(Sender: TObject);
     procedure btnShowMetadataClick(Sender: TObject);
-    procedure btnExecuteQueryClick(Sender: TObject);
+    procedure btnExecuteScriptClick(Sender: TObject);
     procedure BtnSaveResultsClick(Sender: TObject);
     procedure BtnShowTableClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -103,19 +109,41 @@ begin
   Datasource1.DataSet := ZQuery1;
 end;
 
-procedure TDBExplorerForm.btnExecuteQueryClick(Sender: TObject);
+procedure TDBExplorerForm.BtnSaveScriptClick(Sender: TObject);
 begin
+  if SaveScript.Execute then
+  begin
+    Memo1.Lines.SaveToFile(SaveScript.FileName);
+  end;
+end;
+
+procedure TDBExplorerForm.BtnOpenScriptClick(Sender: TObject);
+begin
+  if OpenScript.Execute then
+  begin
+    Memo1.Lines.LoadFromFile(OpenScript.FileName);
+  end;
+end;
+
+procedure TDBExplorerForm.btnExecuteScriptClick(Sender: TObject);
+begin
+  if not SourceDataModule.DbZConnection.ExecuteDirect(Memo1.Lines.Text) then
+    MessageDlg('Error', 'Error executing SQL', mtError, [mbOk], 0);
+  ZmdTables.Close;
+  ZSQLMetadata1.Close;
+  ZTable1.Close;
   ZQuery1.Close;
-  ZQuery1.SQL.Clear;
-  ZQuery1.SQL.AddStrings(Memo1.Lines);
-  ZQuery1.ExecSQL;
+  ZmdTables.Open;
+  ZmdTables.Refresh;
+  CbxTable.Refresh;
+  CbxMetadataType.Refresh;
 end;
 
 procedure TDBExplorerForm.BtnSaveResultsClick(Sender: TObject);
 begin
-  if SaveDialog1.Execute then
+  if SaveResults.Execute then
   begin
-    SaveDataSetToCSVFile(Datasource1.DataSet, SaveDialog1.FileName);
+    SaveDataSetToCSVFile(Datasource1.DataSet, SaveResults.FileName);
   end;
 end;
 
@@ -132,4 +160,3 @@ initialization
   {$I fdbexplorer.lrs}
 
 end.
-

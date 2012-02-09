@@ -223,8 +223,13 @@ end;
 
 procedure TMainForm.ActDBExplorerExecute(Sender: TObject);
 begin
+  {SourceDataModule.DbZConnection.ExecuteDirect('CREATE TABLE `DistributionLoad2`(`IdDistribution` integer,`IdLevel` integer,`IdSpecialization` integer,`IdGroupId` integer,`IdTeacher` integer)');}
   with TDBExplorerForm.Create(Self) do
-    Show;
+    try
+      ShowModal;
+    finally
+      free;
+    end;
 end;
 
 procedure TMainForm.ActLangDefaultExecute(Sender: TObject);
@@ -663,7 +668,6 @@ begin
     FLogStrings := TStringList.Create;
     {$IFDEF FREEWARE}
     ActMakeTimetable.Enabled := False;
-    ActImproveTimeTable.Enabled := False;
     Caption := Caption + ' >>> Freeware <<<';
     {$ENDIF}
 {    Protect1.ExpirationDays := 60;}

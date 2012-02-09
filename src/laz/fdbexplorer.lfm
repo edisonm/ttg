@@ -1,44 +1,44 @@
 object DBExplorerForm: TDBExplorerForm
-  Left = 634
-  Height = 583
-  Top = 320
-  Width = 631
+  Left = 629
+  Height = 585
+  Top = 318
+  Width = 636
   Caption = 'Database Explorer'
-  ClientHeight = 583
-  ClientWidth = 631
+  ClientHeight = 585
+  ClientWidth = 636
   OnCreate = FormCreate
   LCLVersion = '0.9.31'
   object Memo1: TMemo
     Left = 8
-    Height = 89
+    Height = 152
     Top = 72
-    Width = 472
+    Width = 477
     Anchors = [akTop, akLeft, akRight]
     TabOrder = 0
   end
   object DBGrid1: TDBGrid
     Left = 8
-    Height = 405
-    Top = 168
-    Width = 614
+    Height = 343
+    Top = 232
+    Width = 619
     Anchors = [akTop, akLeft, akRight, akBottom]
     Color = clWindow
     Columns = <>
     DataSource = Datasource1
     TabOrder = 1
   end
-  object btnExecuteQuery: TButton
-    Left = 488
+  object btnExecuteScript: TButton
+    Left = 493
     Height = 25
-    Top = 72
+    Top = 136
     Width = 134
     Anchors = [akTop, akRight]
-    Caption = 'Execute Query'
-    OnClick = btnExecuteQueryClick
+    Caption = 'Execute Script'
+    OnClick = btnExecuteScriptClick
     TabOrder = 2
   end
   object btnShowMetadata: TButton
-    Left = 488
+    Left = 493
     Height = 26
     Top = 8
     Width = 134
@@ -52,15 +52,15 @@ object DBExplorerForm: TDBExplorerForm
     Height = 29
     Hint = 'Metadata Type'
     Top = 8
-    Width = 472
+    Width = 477
     Anchors = [akTop, akLeft, akRight]
     ItemHeight = 0
     TabOrder = 4
   end
   object BtnSaveResults: TButton
-    Left = 488
+    Left = 493
     Height = 25
-    Top = 136
+    Top = 200
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Save Results'
@@ -72,7 +72,7 @@ object DBExplorerForm: TDBExplorerForm
     Height = 29
     Hint = 'Tables'
     Top = 40
-    Width = 472
+    Width = 477
     Anchors = [akTop, akLeft, akRight]
     KeyField = 'TABLE_NAME'
     ListField = 'TABLE_NAME'
@@ -81,7 +81,7 @@ object DBExplorerForm: TDBExplorerForm
     TabOrder = 6
   end
   object BtnShowTable: TButton
-    Left = 488
+    Left = 493
     Height = 27
     Top = 40
     Width = 134
@@ -91,14 +91,34 @@ object DBExplorerForm: TDBExplorerForm
     TabOrder = 7
   end
   object BtnOpenQuery: TButton
-    Left = 488
+    Left = 493
     Height = 25
-    Top = 104
+    Top = 168
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Open Query'
     OnClick = BtnOpenQueryClick
     TabOrder = 8
+  end
+  object BtnOpenScript: TButton
+    Left = 493
+    Height = 25
+    Top = 72
+    Width = 134
+    Anchors = [akTop, akRight]
+    Caption = 'Open Script'
+    OnClick = BtnOpenScriptClick
+    TabOrder = 9
+  end
+  object BtnSaveScript: TButton
+    Left = 493
+    Height = 25
+    Top = 103
+    Width = 134
+    Anchors = [akTop, akRight]
+    Caption = 'Save Script'
+    OnClick = BtnSaveScriptClick
+    TabOrder = 10
   end
   object ZTable1: TZTable
     Connection = SourceDataModule.DbZConnection
@@ -121,11 +141,11 @@ object DBExplorerForm: TDBExplorerForm
     left = 440
     top = 96
   end
-  object SaveDialog1: TSaveDialog
+  object SaveResults: TSaveDialog
     DefaultExt = '.csv'
     Filter = 'Comma delimited file (*.csv)|*.csv'
-    left = 216
-    top = 96
+    left = 368
+    top = 277
   end
   object ZmdTables: TZSQLMetadata
     Connection = SourceDataModule.DbZConnection
@@ -192,5 +212,17 @@ object DBExplorerForm: TDBExplorerForm
     DataSet = ZmdTables
     left = 216
     top = 168
+  end
+  object OpenScript: TOpenDialog
+    DefaultExt = '.sql'
+    Filter = 'SQL Script (*.sql)|*.sql'
+    left = 139
+    top = 277
+  end
+  object SaveScript: TSaveDialog
+    DefaultExt = '.sql'
+    Filter = 'SQL Script (*.sql)|*.sql'
+    left = 248
+    top = 277
   end
 end

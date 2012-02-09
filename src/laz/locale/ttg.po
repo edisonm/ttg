@@ -638,16 +638,24 @@ msgstr ""
 msgid "Ok|Ok"
 msgstr ""
 
-#: tdbexplorerform.btnexecutequery.caption
-msgid "Execute Query"
+#: tdbexplorerform.btnexecutescript.caption
+msgid "Execute Script"
 msgstr ""
 
 #: tdbexplorerform.btnopenquery.caption
 msgid "Open Query"
 msgstr ""
 
+#: tdbexplorerform.btnopenscript.caption
+msgid "Open Script"
+msgstr ""
+
 #: tdbexplorerform.btnsaveresults.caption
 msgid "Save Results"
+msgstr ""
+
+#: tdbexplorerform.btnsavescript.caption
+msgid "Save Script"
 msgstr ""
 
 #: tdbexplorerform.btnshowmetadata.caption
