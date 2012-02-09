@@ -223,12 +223,11 @@ end;
 
 procedure TMainForm.ActDBExplorerExecute(Sender: TObject);
 begin
-  {SourceDataModule.DbZConnection.ExecuteDirect('CREATE TABLE `DistributionLoad2`(`IdDistribution` integer,`IdLevel` integer,`IdSpecialization` integer,`IdGroupId` integer,`IdTeacher` integer)');}
   with TDBExplorerForm.Create(Self) do
     try
-      ShowModal;
+      Show;
     finally
-      free;
+      // free;
     end;
 end;
 

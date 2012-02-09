@@ -46,7 +46,10 @@ type
     procedure btnExecuteScriptClick(Sender: TObject);
     procedure BtnSaveResultsClick(Sender: TObject);
     procedure BtnShowTableClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { private declarations }
   public
@@ -65,8 +68,8 @@ uses
 
 procedure TDBExplorerForm.FormCreate(Sender: TObject);
 begin
-  ZmdTables.Open;
-  CbxTable.ListSource := DSTables;
+  //ZmdTables.Open;
+  //CbxTable.ListSource := DSTables;
   with CbxMetadataType.Items do
   begin
     Clear;
@@ -90,6 +93,12 @@ begin
     Add('mdSequences');
     Add('mdUserDefinedTypes');
   end;
+end;
+
+procedure TDBExplorerForm.FormDestroy(Sender: TObject);
+begin
+  CbxTable.ListSource := nil;
+  ZmdTables.Close;
 end;
 
 procedure TDBExplorerForm.btnShowMetadataClick(Sender: TObject);
@@ -127,7 +136,7 @@ end;
 
 procedure TDBExplorerForm.btnExecuteScriptClick(Sender: TObject);
 begin
-  if not SourceDataModule.DbZConnection.ExecuteDirect(Memo1.Lines.Text) then
+  if not SourceDataModule.DbZConnection.ExecuteDirect(Memo1.Lines.GetText) then
     MessageDlg('Error', 'Error executing SQL', mtError, [mbOk], 0);
   ZmdTables.Close;
   ZSQLMetadata1.Close;
@@ -153,6 +162,18 @@ begin
   ZTable1.TableName := CbxTable.Text;
   ZTable1.Open;
   Datasource1.DataSet := ZTable1;
+end;
+
+procedure TDBExplorerForm.FormClose(Sender: TObject;
+  var CloseAction: TCloseAction);
+begin
+  CloseAction := caFree;
+end;
+
+procedure TDBExplorerForm.FormCloseQuery(Sender: TObject; var CanClose: boolean
+  );
+begin
+  CanClose:=True;
 end;
 
 initialization

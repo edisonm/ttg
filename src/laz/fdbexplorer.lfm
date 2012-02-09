@@ -6,7 +6,10 @@ object DBExplorerForm: TDBExplorerForm
   Caption = 'Database Explorer'
   ClientHeight = 585
   ClientWidth = 636
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   LCLVersion = '0.9.31'
   object Memo1: TMemo
     Left = 8
@@ -71,7 +74,7 @@ object DBExplorerForm: TDBExplorerForm
     Left = 8
     Height = 29
     Hint = 'Tables'
-    Top = 40
+    Top = 38
     Width = 477
     Anchors = [akTop, akLeft, akRight]
     KeyField = 'TABLE_NAME'
