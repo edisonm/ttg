@@ -7,13 +7,14 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, DSourceBase, DBase, Db, ZConnection;
+  Controls, Forms, Dialogs, DSourceBase, DBase, Db, ZConnection, ZDataset;
 
 type
 
   { TSourceDataModule }
 
   TSourceDataModule = class(TSourceBaseDataModule)
+    ZTables: TZQuery;
     procedure TbDistributionBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
@@ -24,8 +25,9 @@ type
     procedure PrepareLookupFields;
     procedure HideFields;
   protected
+    procedure LoadDataSetFromStrings(const ATableName: string;
+                                     AStrings: TStrings; var APosition: Integer); override;
     procedure EmptyDataSet(ADataSet: TDataSet); override;
-    procedure LoadTablesFromStrings(AStrings: TStrings; var APosition: Integer); override;
     procedure UpdateDetailFields(ADetail: TDataSet;
                                  const ADetailFields: string;
                                  const OldValues, CurValues: Variant); override;
@@ -37,6 +39,7 @@ type
   public
     { Public declarations }
     procedure EmptyTables; override;
+    procedure SaveToStrings(AStrings: TStrings); override;
     procedure PrepareTables;
     procedure FillDefaultData;
   end;
@@ -51,7 +54,7 @@ implementation
 {$ENDIF}
 
 uses
-  Variants, FConfig, UTTGDBUtils, URelUtils, ZDataSet, uttgconsts, dsourcebaseconsts;
+  Variants, FConfig, UTTGDBUtils, URelUtils, uttgconsts, dsourcebaseconsts;
 
 procedure TSourceDataModule.TbDistributionBeforePost(DataSet: TDataSet);
 var
@@ -507,46 +510,26 @@ begin
   end;
 end;
 
-procedure TSourceDataModule.LoadTablesFromStrings(AStrings: TStrings;
-                                                  var APosition: Integer);
+procedure TSourceDataModule.LoadDataSetFromStrings(const ATableName: string;
+  AStrings: TStrings; var APosition: Integer);
 var
-  i: Integer;
-  TableName: string;
-  procedure LoadTableFromStrings(const ATableName: string);
+  RecordCount: Integer;
+  procedure LoadTableFromStrings0;
   var
-    RecordCount: Integer;
-    procedure LoadTableFromStrings0;
-    var
-      SQL: TStrings;
-    begin
-      SQL := TStringList.Create;
-      try
-        StringsToSQL(ATableName, AStrings, SQL, APosition, RecordCount);
-        DbZConnection.ExecuteDirect(SQL.Text);
-      finally
-        SQL.Free;
-      end;
-    end;
+    SQL: TStrings;
   begin
-    RecordCount := StrToInt(AStrings.Strings[APosition]);
-    Inc(APosition);
-    LoadTableFromStrings0;
+    SQL := TStringList.Create;
+    try
+      StringsToSQL(ATableName, AStrings, SQL, APosition, RecordCount);
+      DbZConnection.ExecuteDirect(SQL.Text);
+    finally
+      SQL.Free;
+      end;
   end;
 begin
-  for i := Low(FTables) to High(FTables) do
-  begin
-    TableName := AStrings[APosition];
-    Inc(APosition);
-    try
-      LoadTableFromStrings(TableName);
-    except
-      MessageDlg(Format(SWhenProcessing, [TableName]), mtError, [mbOk], 0);
-      raise;
-    end;
-  end;
-  for i := Low(FTables) to High(FTables) do
-    FTables[i].Refresh;
-  // inherited LoadTablesFromStrings(AStrings, APosition);
+  RecordCount := StrToInt(AStrings.Strings[APosition]);
+  Inc(APosition);
+  LoadTableFromStrings0;
 end;
 
 procedure TSourceDataModule.EmptyTables;
@@ -558,6 +541,37 @@ begin
   except
     DbZConnection.Rollback;
     raise;
+  end;
+end;
+
+procedure TSourceDataModule.SaveToStrings(AStrings: TStrings);
+var
+  i: Integer;
+  ZTable: TZTable;
+  Field: TField;
+begin
+  ZTables.Close;
+  ZTables.Open;
+  ZTable := TZTable.Create(nil);
+  try
+    // sqlite_sequence is a system table that must not be saved:
+    AStrings.Add(IntToStr(ZTables.RecordCount - 1));
+    ZTable.Connection := ZTables.Connection;
+    Field := ZTables.Fields[0];
+    while not ZTables.EOF do
+    begin
+      if Field.AsString <> 'sqlite_sequence' then
+      begin
+        ZTable.TableName := Field.AsString;
+        ZTable.Open;
+        AStrings.Add(Field.AsString);
+        SaveDataSetToStrings(ZTable, AStrings);
+        ZTable.Close;
+      end;
+      ZTables.Next;
+    end;
+  finally
+    ZTable.Free;
   end;
 end;
 

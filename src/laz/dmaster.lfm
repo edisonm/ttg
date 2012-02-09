@@ -3,8 +3,8 @@ object MasterDataModule: TMasterDataModule
   OnDestroy = DataModuleDestroy
   OldCreateOrder = False
   Height = 404
-  HorizontalOffset = 565
-  VerticalOffset = 275
+  HorizontalOffset = 1093
+  VerticalOffset = 507
   Width = 748
   object TbTmpTeacherWorkLoad: TZTable
     Connection = SourceDataModule.DbZConnection
@@ -66,7 +66,7 @@ object MasterDataModule: TMasterDataModule
     Connection = SourceDataModule.DbZConnection
     AutoCalcFields = False
     left = 88
-    top = 168
+    top = 120
     object QuTeacherRestrictionCountIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
@@ -139,7 +139,7 @@ object MasterDataModule: TMasterDataModule
       'Timetable1.IdTimetable is NULL'
     )
     Params = <>
-    left = 252
-    top = 168
+    left = 250
+    top = 120
   end
 end

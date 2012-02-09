@@ -2,8 +2,8 @@ inherited SourceDataModule: TSourceDataModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 421
-  HorizontalOffset = 430
-  VerticalOffset = 329
+  HorizontalOffset = 1129
+  VerticalOffset = 225
   Width = 630
   inherited DbZConnection: TZConnection
     Protocol = 'sqlite-3'
@@ -22,5 +22,15 @@ inherited SourceDataModule: TSourceDataModule
   inherited TbTimetable: TZTable
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
+  end
+  object ZTables: TZQuery[37]
+    Connection = DbZConnection
+    SQL.Strings = (
+      'SELECT trim(name) as Name FROM sqlite_master'
+      'WHERE type=''table'''
+    )
+    Params = <>
+    left = 544
+    top = 104
   end
 end
