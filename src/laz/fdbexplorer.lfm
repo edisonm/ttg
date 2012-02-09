@@ -1,15 +1,13 @@
 object DBExplorerForm: TDBExplorerForm
-  Left = 629
+  Left = 617
   Height = 585
-  Top = 318
+  Top = 307
   Width = 636
   Caption = 'Database Explorer'
   ClientHeight = 585
   ClientWidth = 636
   OnClose = FormClose
-  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   LCLVersion = '0.9.31'
   object Memo1: TMemo
     Left = 8
@@ -32,8 +30,8 @@ object DBExplorerForm: TDBExplorerForm
   end
   object btnExecuteScript: TButton
     Left = 493
-    Height = 25
-    Top = 136
+    Height = 27
+    Top = 134
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Execute Script'
@@ -42,7 +40,7 @@ object DBExplorerForm: TDBExplorerForm
   end
   object btnShowMetadata: TButton
     Left = 493
-    Height = 26
+    Height = 27
     Top = 8
     Width = 134
     Anchors = [akTop, akRight]
@@ -62,8 +60,8 @@ object DBExplorerForm: TDBExplorerForm
   end
   object BtnSaveResults: TButton
     Left = 493
-    Height = 25
-    Top = 200
+    Height = 27
+    Top = 197
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Save Results'
@@ -77,8 +75,8 @@ object DBExplorerForm: TDBExplorerForm
     Top = 38
     Width = 477
     Anchors = [akTop, akLeft, akRight]
-    KeyField = 'TABLE_NAME'
-    ListField = 'TABLE_NAME'
+    KeyField = 'Name'
+    ListField = 'Name'
     ListFieldIndex = 0
     LookupCache = False
     TabOrder = 6
@@ -95,8 +93,8 @@ object DBExplorerForm: TDBExplorerForm
   end
   object BtnOpenQuery: TButton
     Left = 493
-    Height = 25
-    Top = 168
+    Height = 27
+    Top = 166
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Open Query'
@@ -105,7 +103,7 @@ object DBExplorerForm: TDBExplorerForm
   end
   object BtnOpenScript: TButton
     Left = 493
-    Height = 25
+    Height = 27
     Top = 72
     Width = 134
     Anchors = [akTop, akRight]
@@ -115,7 +113,7 @@ object DBExplorerForm: TDBExplorerForm
   end
   object BtnSaveScript: TButton
     Left = 493
-    Height = 25
+    Height = 27
     Top = 103
     Width = 134
     Anchors = [akTop, akRight]
@@ -150,69 +148,8 @@ object DBExplorerForm: TDBExplorerForm
     left = 368
     top = 277
   end
-  object ZmdTables: TZSQLMetadata
-    Connection = SourceDataModule.DbZConnection
-    MetadataType = mdTables
-    left = 104
-    top = 168
-    object ZmdTablesTABLE_CAT: TStringField
-      DisplayWidth = 255
-      FieldKind = fkData
-      FieldName = 'TABLE_CAT'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      Size = 255
-    end
-    object ZmdTablesTABLE_SCHEM: TStringField
-      DisplayWidth = 255
-      FieldKind = fkData
-      FieldName = 'TABLE_SCHEM'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      Size = 255
-    end
-    object ZmdTablesTABLE_NAME: TStringField
-      DisplayWidth = 255
-      FieldKind = fkData
-      FieldName = 'TABLE_NAME'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      Size = 255
-    end
-    object ZmdTablesTABLE_TYPE: TStringField
-      DisplayWidth = 255
-      FieldKind = fkData
-      FieldName = 'TABLE_TYPE'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      Size = 255
-    end
-    object ZmdTablesREMARKS: TStringField
-      DisplayWidth = 255
-      FieldKind = fkData
-      FieldName = 'REMARKS'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      Size = 255
-    end
-  end
   object DSTables: TDatasource
-    DataSet = ZmdTables
+    DataSet = ZTables
     left = 216
     top = 168
   end
@@ -227,5 +164,16 @@ object DBExplorerForm: TDBExplorerForm
     Filter = 'SQL Script (*.sql)|*.sql'
     left = 248
     top = 277
+  end
+  object ZTables: TZQuery
+    Connection = SourceDataModule.DbZConnection
+    SQL.Strings = (
+      'SELECT trim(name) as Name FROM sqlite_master'
+      'WHERE type=''table'''
+      'ORDER BY name;'
+    )
+    Params = <>
+    left = 216
+    top = 96
   end
 end

@@ -30,14 +30,9 @@ type
     OpenScript: TOpenDialog;
     SaveScript: TSaveDialog;
     SaveResults: TSaveDialog;
-    ZmdTablesREMARKS: TStringField;
-    ZmdTablesTABLE_CAT: TStringField;
-    ZmdTablesTABLE_NAME: TStringField;
-    ZmdTablesTABLE_SCHEM: TStringField;
-    ZmdTablesTABLE_TYPE: TStringField;
     ZQuery1: TZQuery;
+    ZTables: TZQuery;
     ZSQLMetadata1: TZSQLMetadata;
-    ZmdTables: TZSQLMetadata;
     ZTable1: TZTable;
     procedure BtnOpenScriptClick(Sender: TObject);
     procedure BtnOpenQueryClick(Sender: TObject);
@@ -47,9 +42,7 @@ type
     procedure BtnSaveResultsClick(Sender: TObject);
     procedure BtnShowTableClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
   private
     { private declarations }
   public
@@ -68,8 +61,8 @@ uses
 
 procedure TDBExplorerForm.FormCreate(Sender: TObject);
 begin
-  //ZmdTables.Open;
-  //CbxTable.ListSource := DSTables;
+  ZTables.Open;
+  CbxTable.ListSource := DSTables;
   with CbxMetadataType.Items do
   begin
     Clear;
@@ -93,12 +86,6 @@ begin
     Add('mdSequences');
     Add('mdUserDefinedTypes');
   end;
-end;
-
-procedure TDBExplorerForm.FormDestroy(Sender: TObject);
-begin
-  CbxTable.ListSource := nil;
-  ZmdTables.Close;
 end;
 
 procedure TDBExplorerForm.btnShowMetadataClick(Sender: TObject);
@@ -138,14 +125,11 @@ procedure TDBExplorerForm.btnExecuteScriptClick(Sender: TObject);
 begin
   if not SourceDataModule.DbZConnection.ExecuteDirect(Memo1.Lines.GetText) then
     MessageDlg('Error', 'Error executing SQL', mtError, [mbOk], 0);
-  ZmdTables.Close;
+  ZTables.Close;
   ZSQLMetadata1.Close;
   ZTable1.Close;
   ZQuery1.Close;
-  ZmdTables.Open;
-  ZmdTables.Refresh;
-  CbxTable.Refresh;
-  CbxMetadataType.Refresh;
+  ZTables.Open;
 end;
 
 procedure TDBExplorerForm.BtnSaveResultsClick(Sender: TObject);
@@ -168,12 +152,6 @@ procedure TDBExplorerForm.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   CloseAction := caFree;
-end;
-
-procedure TDBExplorerForm.FormCloseQuery(Sender: TObject; var CanClose: boolean
-  );
-begin
-  CanClose:=True;
 end;
 
 initialization
