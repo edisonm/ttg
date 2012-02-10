@@ -35,6 +35,8 @@ resourcestring
   SDay5 = 'Friday';
   SDay6 = 'Saturday';
   SDetail = 'Detail';
+  SDoNotHaveTeacher = 'do not have teacher';
+  SDoNotAppearsIn = 'do not appears in';
   SDownHillAlgorithm = 'Downhill Algorithm';
   SEditing = 'Editing';
   SEvolutiveElitistAlgorithm = 'Evolutive Elitist Algorithm';
