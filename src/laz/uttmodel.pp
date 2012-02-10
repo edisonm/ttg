@@ -2121,7 +2121,7 @@ begin
         FTimeSlot3 := FTimeSlot1 + SessionToDuration[TimeSlotToSession[FTimeSlot1]]
       else
       begin
-        NextTimeSFClassTimeSlotSession, TimeSlotCount, FTimeSlot3);
+        NextTimeSlot(TimeSlotToSession, TimeSlotCount, FTimeSlot3);
       end;
     end;
   end;
