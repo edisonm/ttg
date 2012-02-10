@@ -1,18 +1,18 @@
 inherited TeacherForm: TTeacherForm
-  Left = 628
-  Height = 372
-  Top = 520
-  Width = 598
-  ClientHeight = 372
-  ClientWidth = 598
+  Left = 527
+  Height = 522
+  Top = 375
+  Width = 888
+  Caption = 'Teacher'
+  ClientHeight = 522
+  ClientWidth = 888
   OnActivate = FormActivate
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Visible = True
   inherited TlBShow: TToolBar
-    Width = 598
+    Width = 888
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
     end
@@ -25,46 +25,73 @@ inherited TeacherForm: TTeacherForm
     end
   end
   inherited pnlStatus: TPanel
-    Top = 353
-    Width = 598
-    ClientWidth = 598
+    Top = 503
+    Width = 888
+    ClientWidth = 888
     inherited SLRecordNo: TLabel
-      Left = 596
+      Left = 886
     end
   end
   inherited Panel1: TPanel
-    Height = 328
-    Width = 598
-    ClientHeight = 328
-    ClientWidth = 598
+    Height = 478
+    Width = 888
+    ClientHeight = 478
+    ClientWidth = 888
     inherited DBGrid: TDBGrid
-      Height = 326
-      Width = 301
+      Height = 476
+      Width = 404
       Align = alLeft
       OnDblClick = DBGridDblClick
     end
     inherited Splitter1: TSplitter
       Cursor = crHSplit
-      Left = 302
-      Height = 326
+      Left = 405
+      Height = 476
       Top = 1
       Width = 3
       Align = alLeft
       ResizeAnchor = akLeft
     end
-    inherited DBGridDetail: TDBGrid
-      Left = 305
-      Height = 326
-      Hint = 'Distribution of Teachers'
+    inherited Panel2: TPanel
+      Left = 408
+      Height = 476
       Top = 1
-      Width = 292
+      Width = 479
       Align = alClient
-      ShowHint = True
+      ClientHeight = 476
+      ClientWidth = 479
+      inherited DBGridDetail: TDBGrid
+        Height = 307
+        Hint = 'Distribution of Teachers'
+        Width = 477
+        ShowHint = True
+      end
+      object DBGrid1: TDBGrid[1]
+        Left = 1
+        Height = 164
+        Top = 311
+        Width = 477
+        Align = alBottom
+        Color = clWindow
+        Columns = <>
+        DataSource = DSAssistance
+        TabOrder = 1
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+      end
+      object Splitter2: TSplitter[2]
+        Cursor = crVSplit
+        Left = 1
+        Height = 3
+        Top = 308
+        Width = 477
+        Align = alBottom
+        ResizeAnchor = akBottom
+      end
     end
   end
   inherited ImageList: TImageList
-    left = 204
-    top = 48
+    top = 216
     Bitmap = {
       4C69040000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -205,6 +232,7 @@ inherited TeacherForm: TTeacherForm
     top = 144
   end
   inherited ActionList: TActionList
+    top = 144
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
@@ -218,7 +246,263 @@ inherited TeacherForm: TTeacherForm
   end
   inherited DataSourceDetail: TDatasource
     DataSet = SourceDataModule.TbDistribution
-    left = 64
+    left = 200
+    top = 216
+  end
+  object DSAssistance: TDatasource[7]
+    DataSet = QuAssistance
+    left = 200
+    top = 280
+  end
+  object QuAssistance: TZQuery[8]
+    Connection = SourceDataModule.DbZConnection
+    SQL.Strings = (
+      'SELECT `IdSubject`, `IdLevel`, `IdSpecialization`, `IdGroupId`, `IdTeacher`'
+      'FROM `Assistance`'
+      'WHERE IdSubject=:IdSubject'
+      '  AND IdLevel=:IdLevel'
+      '  AND IdSpecialization=:IdSpecialization'
+      '  AND IdGroupId=:IdGroupId'
+    )
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'IdSubject'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdLevel'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdSpecialization'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdGroupId'
+        ParamType = ptUnknown
+      end>
+    DataSource = DataSourceDetail
+    MasterSource = DataSourceDetail
+    left = 200
+    top = 344
+    ParamData = <    
+      item
+        DataType = ftInteger
+        Name = 'IdSubject'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdLevel'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdSpecialization'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdGroupId'
+        ParamType = ptUnknown
+      end>
+    object QuAssistanceIdSubject: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'IdSubject'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+    end
+    object QuAssistanceIdLevel: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'IdLevel'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+    end
+    object QuAssistanceIdSpecialization: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'IdSpecialization'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+    end
+    object QuAssistanceIdTeacher: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'IdTeacher'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+    end
+    object QuAssistanceNameTeacher: TStringField
+      DisplayWidth = 5
+      FieldKind = fkLookup
+      FieldName = 'NameTeacher'
+      DisplayLabel = 'Teacher'
+      Index = 8
+      KeyFields = 'IdTeacher'
+      LookupCache = False
+      LookupDataSet = QuTeacher
+      LookupKeyFields = 'IdTeacher'
+      LookupResultField = 'NameTeacher'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 5
+    end
+  end
+  object QuTeacher: TZQuery[9]
+    Connection = SourceDataModule.DbZConnection
+    SortedFields = 'IdTimetable;LnTeacher;NaTeacher'
+    AutoCalcFields = False
+    SQL.Strings = (
+      'SELECT `IdSubject`, `IdLevel`, `IdSpecialization`, `IdGroupId`,'
+      '  `Teacher`.`IdTeacher` AS `IdTeacher`,'
+      '  `LnTeacher` +  " " + `NaTeacher` AS `NameTeacher`'
+      'FROM `Distribution`, `Teacher`'
+      'WHERE IdSubject=:IdSubject'
+      '  AND IdLevel=:IdLevel'
+      '  AND IdSpecialization=:IdSpecialization'
+      '  AND IdGroupId=:IdGroupId'
+      '  AND Distribution.IdTeacher <> Teacher.IdTeacher'
+      'ORDER BY'
+      '  LnTeacher, NaTeacher'
+    )
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'IdSubject'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdLevel'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdSpecialization'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdGroupId'
+        ParamType = ptUnknown
+      end>
+    DataSource = DataSourceDetail
+    MasterFields = 'IdSubject;IdLevel;IdSpecialization;IdGroupId'
+    MasterSource = DataSourceDetail
+    LinkedFields = 'IdSubject;IdLevel;IdSpecialization;IdGroupId'
+    IndexFieldNames = 'IdSubject Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc;NameTeacher Asc'
+    left = 144
     top = 144
+    ParamData = <    
+      item
+        DataType = ftInteger
+        Name = 'IdSubject'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdLevel'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdSpecialization'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdGroupId'
+        ParamType = ptUnknown
+      	end>
+      end
+    object QuTeacherIdSubject: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'IdSubject'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+    end
+    object QuTeacherIdLevel: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'IdLevel'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+    end
+    object QuTeacherIdSpecialization: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'IdSpecialization'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+    end
+    object QuTeacherIdGroupId: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'IdGroupId'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+    end
+    object QuTeacherIdTeacher: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'IdTeacher'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+    end
+    object QuTeacherNameTeacher: TStringField
+      DisplayWidth = 31
+      FieldKind = fkData
+      FieldName = 'NameTeacher'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 31
+    end
   end
 end

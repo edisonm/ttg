@@ -8,7 +8,8 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, Db, Grids, Buttons, DBCtrls, Variants, ExtCtrls,
-  ComCtrls, Printers, ActnList, FMasterDetailEditor, FCrossManytoManyEditorR;
+  ComCtrls, Printers, ActnList, StdCtrls, DBGrids, ZDataset, FMasterDetailEditor,
+  FCrossManytoManyEditorR;
 
 type
 
@@ -17,6 +18,21 @@ type
   TTeacherForm	= class(TMasterDetailEditorForm)
     BtnTeacherRestriction: TToolButton;
     ActTeacherRestriction: TAction;
+    DSAssistance: TDatasource;
+    DBGrid1: TDBGrid;
+    Splitter2: TSplitter;
+    QuAssistance: TZQuery;
+    QuAssistanceIdSubject: TLongintField;
+    QuAssistanceIdLevel: TLongintField;
+    QuAssistanceIdSpecialization: TLongintField;
+    QuAssistanceIdTeacher: TLongintField;
+    QuAssistanceNameTeacher: TStringField;
+    QuTeacher: TZQuery;
+    QuTeacherIdSubject: TLongintField;
+    QuTeacherIdLevel: TLongintField;
+    QuTeacherIdSpecialization: TLongintField;
+    QuTeacherIdTeacher: TLongintField;
+    QuTeacherNameTeacher: TStringField;
     procedure ActFindExecute(Sender: TObject);
     procedure ActTeacherRestrictionExecute(Sender: TObject);
     procedure DataSourceStateChange(Sender: TObject);
@@ -62,8 +78,7 @@ begin
     Caption := Format('%s %s %s - %s %s', [NameDataSet[TbTeacher],
       TbTeacher.FindField('LnTeacher').AsString,
       TbTeacher.FindField('NaTeacher').AsString,
-      SEditing,
-      Description[TbTeacherRestriction]]);
+      SEditing, Description[TbTeacherRestriction]]);
     DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
       [Description[TbTeacherRestriction], Description[TbDay], Description[TbHour]]);
     ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda',
@@ -149,7 +164,8 @@ begin
     TbDistribution.MasterFields := 'IdTeacher';
     TbDistribution.LinkedFields := 'IdTeacher';
     TbDistribution.MasterSource := DSTeacher;
-  end
+  end;
+  QuAssistance.Open;
 end;
 
 procedure TTeacherForm.FormDestroy(Sender: TObject);

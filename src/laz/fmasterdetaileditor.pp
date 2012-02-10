@@ -8,7 +8,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, FSingleEditor, Db, Grids, DBGrids, Buttons, UConfigStorage,
-  DBCtrls, ExtCtrls, ActnList;
+  DBCtrls, ExtCtrls, ActnList, ComCtrls, StdCtrls;
 
 type
 
@@ -17,6 +17,7 @@ type
   TMasterDetailEditorForm = class(TSingleEditorForm)
     DataSourceDetail: TDataSource;
     DBGridDetail: TDBGrid;
+    Panel2: TPanel;
     Splitter1: TSplitter;
     procedure ActFindExecute(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);

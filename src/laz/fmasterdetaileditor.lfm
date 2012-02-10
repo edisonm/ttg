@@ -4,7 +4,6 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
-  Visible = True
   inherited TlBShow: TToolBar
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
@@ -12,7 +11,7 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
   end
   inherited Panel1: TPanel
     inherited DBGrid: TDBGrid
-      Height = 154
+      Height = 144
       TabOrder = 1
       OnDblClick = DBGridDblClick
     end
@@ -20,23 +19,33 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
       Cursor = crVSplit
       Left = 1
       Height = 3
-      Top = 155
+      Top = 145
       Width = 477
       Align = alBottom
       ResizeAnchor = akBottom
     end
-    object DBGridDetail: TDBGrid[2]
+    object Panel2: TPanel[2]
       Left = 1
-      Height = 96
-      Top = 158
+      Height = 106
+      Top = 148
       Width = 477
       Align = alBottom
-      Color = clWindow
-      Columns = <>
-      DataSource = DataSourceDetail
-      TabOrder = 0
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
+      ClientHeight = 106
+      ClientWidth = 477
+      TabOrder = 2
+      object DBGridDetail: TDBGrid
+        Left = 1
+        Height = 104
+        Top = 1
+        Width = 475
+        Align = alClient
+        Color = clWindow
+        Columns = <>
+        DataSource = DataSourceDetail
+        TabOrder = 0
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+      end
     end
   end
   inherited ImageList: TImageList

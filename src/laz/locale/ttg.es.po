@@ -1,6 +1,31 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: dsourcebaseconsts.sflassistance_idgroupid
+msgctxt "dsourcebaseconsts.sflassistance_idgroupid"
+msgid "Group"
+msgstr "Grupo"
+
+#: dsourcebaseconsts.sflassistance_idlevel
+msgctxt "dsourcebaseconsts.sflassistance_idlevel"
+msgid "Level"
+msgstr "Nivel"
+
+#: dsourcebaseconsts.sflassistance_idspecialization
+msgctxt "dsourcebaseconsts.sflassistance_idspecialization"
+msgid "Specialization"
+msgstr "Especializacion"
+
+#: dsourcebaseconsts.sflassistance_idsubject
+msgctxt "dsourcebaseconsts.sflassistance_idsubject"
+msgid "Subject"
+msgstr "Materia"
+
+#: dsourcebaseconsts.sflassistance_idteacher
+msgctxt "dsourcebaseconsts.sflassistance_idteacher"
+msgid "Teacher"
+msgstr "Profesor"
+
 #: dsourcebaseconsts.sflclass_idgroupid
 msgctxt "dsourcebaseconsts.sflclass_idgroupid"
 msgid "Group Id"
@@ -95,6 +120,41 @@ msgstr "Intervalo"
 msgctxt "dsourcebaseconsts.sflhour_nahour"
 msgid "Name"
 msgstr "Nombre"
+
+#: dsourcebaseconsts.sfljoinedclass_idgroupid
+msgctxt "dsourcebaseconsts.sfljoinedclass_idgroupid"
+msgid "Group"
+msgstr "Grupo"
+
+#: dsourcebaseconsts.sfljoinedclass_idgroupid0
+msgctxt "dsourcebaseconsts.sfljoinedclass_idgroupid0"
+msgid "Group"
+msgstr "Grupo"
+
+#: dsourcebaseconsts.sfljoinedclass_idlevel
+msgctxt "dsourcebaseconsts.sfljoinedclass_idlevel"
+msgid "Level"
+msgstr "Nivel"
+
+#: dsourcebaseconsts.sfljoinedclass_idlevel0
+msgctxt "dsourcebaseconsts.sfljoinedclass_idlevel0"
+msgid "Level"
+msgstr "Nivel"
+
+#: dsourcebaseconsts.sfljoinedclass_idspecialization
+msgctxt "dsourcebaseconsts.sfljoinedclass_idspecialization"
+msgid "Specialization"
+msgstr "Especializacion"
+
+#: dsourcebaseconsts.sfljoinedclass_idspecialization0
+msgctxt "dsourcebaseconsts.sfljoinedclass_idspecialization0"
+msgid "Specialization"
+msgstr "Especializacion"
+
+#: dsourcebaseconsts.sfljoinedclass_idsubject
+msgctxt "dsourcebaseconsts.sfljoinedclass_idsubject"
+msgid "Subject"
+msgstr "Materia"
 
 #: dsourcebaseconsts.sfllevel_ablevel
 msgctxt "dsourcebaseconsts.sfllevel_ablevel"
@@ -326,6 +386,10 @@ msgctxt "dsourcebaseconsts.sfltimetable_timeini"
 msgid "Initial Time"
 msgstr "Inicio"
 
+#: dsourcebaseconsts.stbassistance
+msgid "Assistance"
+msgstr ""
+
 #: dsourcebaseconsts.stbclass
 msgctxt "dsourcebaseconsts.stbclass"
 msgid "Groups"
@@ -355,6 +419,10 @@ msgstr "Identificadores de Paralelo"
 msgctxt "dsourcebaseconsts.stbhour"
 msgid "Academic Hours"
 msgstr "Horas academicas"
+
+#: dsourcebaseconsts.stbjoinedclass
+msgid "JoinedClass"
+msgstr ""
 
 #: dsourcebaseconsts.stblevel
 msgctxt "dsourcebaseconsts.stblevel"
@@ -1430,6 +1498,11 @@ msgstr "Prohibiciones de profesor"
 msgid "Teacher restrictions|Input Teacher restrictions"
 msgstr "Prohibiciones de profesor|Ingresar las prohibiciones de profesor"
 
+#: tteacherform.caption
+msgctxt "tteacherform.caption"
+msgid "Teacher"
+msgstr "Profesor"
+
 #: tteacherform.dbgriddetail.hint
 msgid "Distribution of Teachers"
 msgstr "Distribution de profesores"
@@ -1634,6 +1707,10 @@ msgctxt "uttgconsts.sclashteacher"
 msgid "Clash of Teachers"
 msgstr "Cruce de profesores"
 
+#: uttgconsts.sclass
+msgid "Class"
+msgstr ""
+
 #: uttgconsts.sclasstimeslottosessionoverflow
 msgid "Overflow of pattern for ClassTimeSlotToSession: Class %d-%d Duration %d"
 msgstr "Se desbordo Molde de ClassTimeSlotToSession: Class %d-%d Duracion %d"
@@ -1694,6 +1771,14 @@ msgstr "Sabado"
 #: uttgconsts.sdetail
 msgid "Detail"
 msgstr "Detalle"
+
+#: uttgconsts.sdonotappearsin
+msgid "do not appears in"
+msgstr ""
+
+#: uttgconsts.sdonothaveteacher
+msgid "do not have teacher"
+msgstr ""
 
 #: uttgconsts.sdownhillalgorithm
 msgid "Downhill Algorithm"
