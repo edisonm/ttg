@@ -81,11 +81,11 @@ begin
   try
     v := DataSet['Composition'];
     if VarIsNull(v) then
-      DataSet['Duracion'] := 0
+      DataSet['Duration'] := 0
     else
-      DataSet['Duracion'] := CompositionToDuration(v);
+      DataSet['Duration'] := CompositionToDuration(v);
   except
-    DataSet['Duracion'] := 0;
+    DataSet['Duration'] := 0;
   end
 end;
 
@@ -416,7 +416,7 @@ begin
   begin
     FieldKind := fkCalculated;
     DisplayWidth := 5;
-    FieldName := 'Duracion';
+    FieldName := 'Duration';
     DataSet := TbDistribution;
   end;
 end;

@@ -778,7 +778,7 @@ var
   end;
   procedure LoadPatternTimetableDetail;
   var
-    TimeSlot1, VClass, Distribution, TimeSlot, Contador, Duracion, Number: Integer;
+    TimeSlot1, VClass, Distribution, TimeSlot, Contador, Duration, Number: Integer;
   begin
     SetLength(FTimetableDetailPattern, FClassCount, FTimeSlotCount);
     SetLength(FClassToSessionCount, FClassCount);
@@ -797,9 +797,9 @@ var
       VClass := FDistributionAClass[Distribution];
       for Contador := High(FDistributionToSessions[Distribution]) downto 0 do
       begin
-        Duracion := FSessionToDuration[FDistributionToSessions[Distribution, Contador]];
+        Duration := FSessionToDuration[FDistributionToSessions[Distribution, Contador]];
         TimeSlot1 := FClassToDuration[VClass];
-        for TimeSlot := TimeSlot1 to TimeSlot1 + Duracion - 1 do
+        for TimeSlot := TimeSlot1 to TimeSlot1 + Duration - 1 do
         begin
           if (TimeSlot < 0) or (TimeSlot >= FTimeSlotCount) then
             raise Exception.CreateFmt(SClassTimeSlotToSessionOverflow,
@@ -807,7 +807,7 @@ var
           FTimetableDetailPattern[VClass, FTimeSlotCount - 1 - TimeSlot]
             := FDistributionToSessions[Distribution, Contador];
         end;
-        Inc(FClassToDuration[VClass], Duracion);
+        Inc(FClassToDuration[VClass], Duration);
       end;
     end;
     for VClass := 0 to FClassCount - 1 do
@@ -815,8 +815,8 @@ var
       TimeSlot := 0;
       while TimeSlot < FTimeSlotCount do
       begin
-        Duracion := FSessionToDuration[FTimetableDetailPattern[VClass, TimeSlot]];
-        Inc(TimeSlot, Duracion);
+        Duration := FSessionToDuration[FTimetableDetailPattern[VClass, TimeSlot]];
+        Inc(TimeSlot, Duration);
         Inc(FClassToSessionCount[VClass]);
       end;
     end;
@@ -927,7 +927,7 @@ end;
 procedure TTimetable.RandomizeKey(var ARandomKey: TDynamicIntegerArray;
   AClass: Integer);
 var
-  TimeSlot, Duracion, Counter, MaxTimeSlot: Integer;
+  TimeSlot, Duration, Counter, MaxTimeSlot: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
   NumberList: array [0 .. 4095] of Integer;
 begin
@@ -941,8 +941,8 @@ begin
     Counter := 0;
     while TimeSlot < FTimeSlotCount do
     begin
-      Duracion := FSessionToDuration[TimeSlotToSession[TimeSlot]];
-      MaxTimeSlot := TimeSlot + Duracion;
+      Duration := FSessionToDuration[TimeSlotToSession[TimeSlot]];
+      MaxTimeSlot := TimeSlot + Duration;
       while TimeSlot < MaxTimeSlot do
       begin
         ARandomKey[TimeSlot] := NumberList[Counter];
@@ -955,7 +955,7 @@ end;
 
 procedure TTimetable.CrossClass(Timetable2: TTimetable; AClass: Integer);
 var
-  Session, TimeSlot, Duracion, Key1, Key2, MaxTimeSlot: Integer;
+  Session, TimeSlot, Duration, Key1, Key2, MaxTimeSlot: Integer;
   RandomKey1, RandomKey2: TDynamicIntegerArray;
 begin
   with TTimetableModel(Model) do
@@ -972,12 +972,12 @@ begin
     while TimeSlot < FTimeSlotCount do
     begin
       Session := FTimetableDetailPattern[AClass, TimeSlot];
-      Duracion := FSessionToDuration[Session];
+      Duration := FSessionToDuration[Session];
       if Random(2) = 0 then
       begin
         Key1 := RandomKey1[TimeSlot];
         Key2 := RandomKey2[TimeSlot];
-        MaxTimeSlot := TimeSlot + Duracion;
+        MaxTimeSlot := TimeSlot + Duration;
         while TimeSlot < MaxTimeSlot do
         begin
           RandomKey1[TimeSlot] := Key2;
@@ -986,7 +986,7 @@ begin
         end;
       end
       else
-        Inc(TimeSlot, Duracion);
+        Inc(TimeSlot, Duration);
     end;
     SortInteger(RandomKey1, ClassTimeSlotToSession[AClass], 0, FTimeSlotCount - 1);
     SortInteger(RandomKey2, Timetable2.ClassTimeSlotToSession[AClass], 0,
@@ -1044,7 +1044,7 @@ end;
 
 procedure TTimetable.MakeRandom;
 var
-  VClass, TimeSlot, Duracion, MaxTimeSlot, RandomKey: Integer;
+  VClass, TimeSlot, Duration, MaxTimeSlot, RandomKey: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
   RandomKeys: TDynamicIntegerArray;
 begin
@@ -1059,9 +1059,9 @@ begin
       TimeSlot := 0;
       while TimeSlot < FTimeSlotCount do
       begin
-        Duracion := FSessionToDuration[TimeSlotToSession[TimeSlot]];
+        Duration := FSessionToDuration[TimeSlotToSession[TimeSlot]];
         RandomKey := Random($7FFFFFFF);
-        MaxTimeSlot := TimeSlot + Duracion;
+        MaxTimeSlot := TimeSlot + Duration;
         while TimeSlot < MaxTimeSlot do
         begin
           RandomKeys[TimeSlot] := RandomKey;
@@ -1086,21 +1086,21 @@ end;
 
 function TTimetable.DoMove(AClass, ATimeSlot1: Integer; var ATimeSlot2: Integer): Integer;
 var
-  Duracion1, Duracion2: Integer;
+  Duration1, Duration2: Integer;
 begin
   with TTimetableModel(Model) do
   begin
-    Duracion1 := SessionToDuration[ClassTimeSlotToSession[AClass, ATimeSlot1]];
-    Duracion2 := SessionToDuration[ClassTimeSlotToSession[AClass, ATimeSlot2]];
+    Duration1 := SessionToDuration[ClassTimeSlotToSession[AClass, ATimeSlot1]];
+    Duration2 := SessionToDuration[ClassTimeSlotToSession[AClass, ATimeSlot2]];
   end;
   Result := InternalSwap(AClass, ATimeSlot1, ATimeSlot2);
-  ATimeSlot2 := ATimeSlot2 + Duracion2 - Duracion1;
+  ATimeSlot2 := ATimeSlot2 + Duration2 - Duration1;
 end;
 
 procedure TTimetable.DeltaValues(Delta, AClass, TimeSlot1, TimeSlot2: Integer);
 var
   SubjectRestrictionType, TeacherRestrictionType, TimeSlot, TimeSlot0, Day, DDay,
-    Day1, Day2, Hour, Session, Teacher, RoomType, Duracion, Subject, Limit,
+    Day1, Day2, Hour, Session, Teacher, RoomType, Duration, Subject, Limit,
     DeltaBreakTimetableTeacher, MinTimeSlot, MaxTimeSlot: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
   SubjectATeacher: TDynamicIntegerArray;
@@ -1212,12 +1212,12 @@ begin
     while TimeSlot <= TimeSlot2 do
     begin
       Session := TimeSlotToSession[TimeSlot];
-      Duracion := FSessionToDuration[Session];
+      Duration := FSessionToDuration[Session];
       if Session >= 0 then
       begin
         Subject := FSessionToSubject[Session];
         Day1 := FTimeSlotToDay[TimeSlot];
-        Day2 := FTimeSlotToDay[TimeSlot + Duracion - 1];
+        Day2 := FTimeSlotToDay[TimeSlot + Duration - 1];
         for Day := Day1 to Day2 do
         begin
           if FClassDaySubjectCount[AClass, Day, Subject] > Limit then
@@ -1236,24 +1236,24 @@ begin
           end;
         end;
       end;
-      Inc(TimeSlot, Duracion);
+      Inc(TimeSlot, Duration);
     end;
   end;
 end;
 
 function TTimetable.InternalSwap(AClass, ATimeSlot1, ATimeSlot2: Integer): Integer;
 var
-  Duracion1, Duracion2, Session1, Session2: Integer;
+  Duration1, Duration2, Session1, Session2: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
   procedure DoMovement;
   var
     TimeSlot: Integer;
   begin
-    Move(TimeSlotToSession[ATimeSlot1 + Duracion1], TimeSlotToSession[ATimeSlot1 + Duracion2],
-      (ATimeSlot2 - ATimeSlot1 - Duracion1) * SizeOf(Integer));
-    for TimeSlot := ATimeSlot1 to ATimeSlot1 + Duracion2 - 1 do
+    Move(TimeSlotToSession[ATimeSlot1 + Duration1], TimeSlotToSession[ATimeSlot1 + Duration2],
+      (ATimeSlot2 - ATimeSlot1 - Duration1) * SizeOf(Integer));
+    for TimeSlot := ATimeSlot1 to ATimeSlot1 + Duration2 - 1 do
       TimeSlotToSession[TimeSlot] := Session2;
-    for TimeSlot := ATimeSlot2 + Duracion2 - Duracion1 to ATimeSlot2 + Duracion2 - 1 do
+    for TimeSlot := ATimeSlot2 + Duration2 - Duration1 to ATimeSlot2 + Duration2 - 1 do
       TimeSlotToSession[TimeSlot] := Session1;
   end;
   // Values that requires total recalculation:
@@ -1282,24 +1282,24 @@ begin
     TimeSlotToSession := ClassTimeSlotToSession[AClass];
     Session1 := TimeSlotToSession[ATimeSlot1];
     Session2 := TimeSlotToSession[ATimeSlot2];
-    Duracion1 := FSessionToDuration[Session1];
-    Duracion2 := FSessionToDuration[Session2];
-    if (Duracion1 = Duracion2) then
+    Duration1 := FSessionToDuration[Session1];
+    Duration2 := FSessionToDuration[Session2];
+    if (Duration1 = Duration2) then
     begin
-      DeltaValues(-1, AClass, ATimeSlot1, ATimeSlot1 + Duracion1 - 1);
-      DeltaValues(-1, AClass, ATimeSlot2, ATimeSlot2 + Duracion2 - 1);
-      for TimeSlot := ATimeSlot1 to ATimeSlot1 + Duracion2 - 1 do
+      DeltaValues(-1, AClass, ATimeSlot1, ATimeSlot1 + Duration1 - 1);
+      DeltaValues(-1, AClass, ATimeSlot2, ATimeSlot2 + Duration2 - 1);
+      for TimeSlot := ATimeSlot1 to ATimeSlot1 + Duration2 - 1 do
         TimeSlotToSession[TimeSlot] := Session2;
-      for TimeSlot := ATimeSlot2 to ATimeSlot2 + Duracion2 - 1 do
+      for TimeSlot := ATimeSlot2 to ATimeSlot2 + Duration2 - 1 do
         TimeSlotToSession[TimeSlot] := Session1;
-      DeltaValues(1, AClass, ATimeSlot1, ATimeSlot1 + Duracion1 - 1);
-      DeltaValues(1, AClass, ATimeSlot2, ATimeSlot2 + Duracion2 - 1);
+      DeltaValues(1, AClass, ATimeSlot1, ATimeSlot1 + Duration1 - 1);
+      DeltaValues(1, AClass, ATimeSlot2, ATimeSlot2 + Duration2 - 1);
     end
     else
     begin
-      DeltaValues(-1, AClass, ATimeSlot1, ATimeSlot2 + Duracion2 - 1);
+      DeltaValues(-1, AClass, ATimeSlot1, ATimeSlot2 + Duration2 - 1);
       DoMovement;
-      DeltaValues(1, AClass, ATimeSlot1, ATimeSlot2 + Duracion2 - 1);
+      DeltaValues(1, AClass, ATimeSlot1, ATimeSlot2 + Duration2 - 1);
     end;
     FValue := GetValue;
     {$IFDEF DEBUG}
@@ -1473,7 +1473,7 @@ end;
 
 function TTimetable.DeltaBrokenSession(AClass, TimeSlot1, TimeSlot2: Integer): Integer;
 var
-  TimeSlot, Hour1, Hour2, Day1, Day2, Session, Duracion: Integer;
+  TimeSlot, Hour1, Hour2, Day1, Day2, Session, Duration: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
 begin
   with TTimetableModel(Model), TablingInfo do
@@ -1484,16 +1484,16 @@ begin
     while TimeSlot <= TimeSlot2 do
     begin
       Session := TimeSlotToSession[TimeSlot];
-      Duracion := FSessionToDuration[Session];
-      if Duracion > 1 then
+      Duration := FSessionToDuration[Session];
+      if Duration > 1 then
       begin
         Day1 := FTimeSlotToDay[TimeSlot];
-        Day2 := FTimeSlotToDay[TimeSlot + Duracion - 1];
+        Day2 := FTimeSlotToDay[TimeSlot + Duration - 1];
         Hour1 := FTimeSlotToHour[TimeSlot];
-        Hour2 := FTimeSlotToHour[TimeSlot + Duracion - 1];
-        Inc(Result, (Day2 - Day1) * (FHourCount + 1) + Hour2 - Hour1 + 1 - Duracion);
+        Hour2 := FTimeSlotToHour[TimeSlot + Duration - 1];
+        Inc(Result, (Day2 - Day1) * (FHourCount + 1) + Hour2 - Hour1 + 1 - Duration);
       end;
-      Inc(TimeSlot, Duracion);
+      Inc(TimeSlot, Duration);
     end;
   end;
 end;
