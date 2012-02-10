@@ -1321,12 +1321,12 @@ begin
       'ClashTeacher            %d - %d'#13#10 +
       'ClashSubject            %d - %d'#13#10 +
       'ClashRoomType           %d - %d'#13#10 +
-      'OutOfPositionEmptyHour     %d - %d'#13#10 +
-      'NonScatteredSubject       %d - %d'#13#10 +
+      'OutOfPositionEmptyHour  %d - %d'#13#10 +
+      'NonScatteredSubject     %d - %d'#13#10 +
       'SubjectRestrictionValue %f - %f'#13#10 +
-      'BreakTimetableTeacher  %d - %d'#13#10 +
+      'BreakTimetableTeacher   %d - %d'#13#10 +
       'TeacherRestrictionValue %f - %f'#13#10 +
-      'BrokenSession          %d - %d',
+      'BrokenSession           %d - %d',
       [
         Result, Value1,
         FValue, Value2,
