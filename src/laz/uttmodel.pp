@@ -294,7 +294,7 @@ var
     FMinIdSubjectRestrictionType: Integer;
   FDistributionToSubject, FIdSubjectToSubject, FIdTeacherATeacher,
     FIdRoomTypeARoomType, FIdTeacherRestrictionTypeATeacherRestrictionType,
-    FIdSubjectRestrictionTypeToSubjectRestrictionType, FClassADuracion,
+    FIdSubjectRestrictionTypeToSubjectRestrictionType, FClassToDuration,
     FDistributionATeacher, FDistributionAClass: TDynamicIntegerArray;
   FTeacherAIdTeacher, FTeacherRestrictionTypeAIdTeacherRestrictionType,
     FRoomTypeAIdRoomType, FSubjectRestrictionTypeAIdSubjectRestrictionType: TDynamicIntegerArray;
@@ -607,7 +607,7 @@ var
       VClass, Teacher, Course, Session2, Session, RoomType, VPos: Integer;
     VFieldSubject, VFieldLevel, VFieldGroupId, VFieldTeacher,
       VFieldSpecialization, VFieldRoomType, VFieldComposition: TField;
-    VSessionADuracion, VSessionToDistribution: array [0 .. 16383] of Integer;
+    VSessionToDuration, VSessionToDistribution: array [0 .. 16383] of Integer;
     Composition: string;
   begin
     with SourceDataModule.TbDistribution do
@@ -663,10 +663,10 @@ var
         // t := 0;
         while VPos <= Length(Composition) do
         begin
-          VSessionADuracion[Session2] := StrToInt(ExtractString(Composition, VPos, '.'));
+          VSessionToDuration[Session2] := StrToInt(ExtractString(Composition, VPos, '.'));
           VSessionToDistribution[Session2] := Distribution;
           Inc(FClassSubjectCount[VClass, Subject]);
-          // Inc(t, VSessionADuracion[Session2]);
+          // Inc(t, VSessionToDuration[Session2]);
           Inc(Session2);
         end;
         SetLength(FDistributionToSessions[Distribution], Session2 - Session1);
@@ -674,13 +674,13 @@ var
         begin
           FDistributionToSessions[Distribution, Session - Session1] := Session;
         end;
-        // FClassADuracion[VClass] := FClassADuracion[VClass] + t;
+        // FClassToDuration[VClass] := FClassToDuration[VClass] + t;
         Next;
       end;
       SetLength(FSessionToDistribution, Session2);
       SetLength(FSessionToSubject, Session2);
       SetLength(FSessionToRoomType, Session2);
-      Move(VSessionADuracion[0], FSessionToDuration[0], Session2 * SizeOf(Integer));
+      Move(VSessionToDuration[0], FSessionToDuration[0], Session2 * SizeOf(Integer));
       FSessionToDuration[-1] := 1;
       Move(VSessionToDistribution[0], FSessionToDistribution[0],
         Session2 * SizeOf(Integer));
@@ -782,10 +782,10 @@ var
   begin
     SetLength(FTimetableDetailPattern, FClassCount, FTimeSlotCount);
     SetLength(FClassToSessionCount, FClassCount);
-    SetLength(FClassADuracion, FClassCount);
+    SetLength(FClassToDuration, FClassCount);
     for VClass := 0 to FClassCount - 1 do
     begin
-      FClassADuracion[VClass] := 0;
+      FClassToDuration[VClass] := 0;
       FClassToSessionCount[VClass] := 0;
       for TimeSlot := 0 to FTimeSlotCount - 1 do
       begin
@@ -798,7 +798,7 @@ var
       for Contador := High(FDistributionToSessions[Distribution]) downto 0 do
       begin
         Duracion := FSessionToDuration[FDistributionToSessions[Distribution, Contador]];
-        TimeSlot1 := FClassADuracion[VClass];
+        TimeSlot1 := FClassToDuration[VClass];
         for TimeSlot := TimeSlot1 to TimeSlot1 + Duracion - 1 do
         begin
           if (TimeSlot < 0) or (TimeSlot >= FTimeSlotCount) then
@@ -807,7 +807,7 @@ var
           FTimetableDetailPattern[VClass, FTimeSlotCount - 1 - TimeSlot]
             := FDistributionToSessions[Distribution, Contador];
         end;
-        Inc(FClassADuracion[VClass], Duracion);
+        Inc(FClassToDuration[VClass], Duracion);
       end;
     end;
     for VClass := 0 to FClassCount - 1 do
