@@ -51,7 +51,7 @@ type
       FAssistanceToTeacher, FTeacherRestrictionToTeacher, FJoinedClassToDistribution,
       FJoinedClassToClass,  FTeacherRestrictionToTimeSlot,
       FTeacherRestrictionToTeacherRestrictionType, FDistributionToRoomType,
-      FClassToCourse, FClassToLevel, FClassToGroupId,
+      FClassToCourse, FClassToLevel, FClassToGroupId, FDistributionToClass,
       FClassToSpecialization, FClassToSessionCount: TDynamicIntegerArray;
     FSessionToDuration: TSessionArray;
     FDayHourToTimeSlot, FLevelSpecializationToCourse, FCourseGroupIdToClass,
@@ -295,7 +295,7 @@ var
   FDistributionToSubject, FIdSubjectToSubject, FIdTeacherATeacher,
     FIdRoomTypeARoomType, FIdTeacherRestrictionTypeATeacherRestrictionType,
     FIdSubjectRestrictionTypeToSubjectRestrictionType, FClassToDuration,
-    FDistributionATeacher, FDistributionAClass: TDynamicIntegerArray;
+    FDistributionToTeacher: TDynamicIntegerArray;
   FTeacherAIdTeacher, FTeacherRestrictionTypeAIdTeacherRestrictionType,
     FRoomTypeAIdRoomType, FSubjectRestrictionTypeAIdSubjectRestrictionType: TDynamicIntegerArray;
   procedure Load(ATable: TDataSet; const ALstName: string; out FMinIdLst: Integer;
@@ -623,8 +623,8 @@ var
       VFieldComposition := FindField('Composition');
       FDistributionCount := RecordCount;
       // SetLength(FDistributionAAsignatura, RecordCount);
-      SetLength(FDistributionAClass, FDistributionCount);
-      SetLength(FDistributionATeacher, FDistributionCount);
+      SetLength(FDistributionToClass, FDistributionCount);
+      SetLength(FDistributionToTeacher, FDistributionCount);
       SetLength(FDistributionToRoomType, FDistributionCount);
       SetLength(FDistributionToSessions, FDistributionCount);
       SetLength(FDistributionToSubject, FDistributionCount);
@@ -651,8 +651,8 @@ var
         Course := FLevelSpecializationToCourse[Level, Specialization];
         VClass := FCourseGroupIdToClass[Course, GroupId];
         Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
-        FDistributionAClass[Distribution] := VClass;
-        FDistributionATeacher[Distribution] := Teacher;
+        FDistributionToClass[Distribution] := VClass;
+        FDistributionToTeacher[Distribution] := Teacher;
         FDistributionToRoomType[Distribution] := RoomType;
         FDistributionToSubject[Distribution] := Subject;
         FClassSubjectToTeacher[VClass, Subject] := Teacher;
@@ -733,7 +733,7 @@ var
   procedure LoadJoinedClass;
   var
     JoinedClass, VClass0, Course0, GroupId0, Level0, Specialization0, VClass,
-    Course, GroupId, Level, Specialization, Subject,  Distribution, Teacher: Integer;
+    Course, GroupId, Level, Specialization, Subject,  Distribution: Integer;
     VFieldSubject, VFieldLevel0, VFieldSpecialization0, VFieldGroupId0,
     VFieldLevel, VFieldSpecialization, VFieldGroupId: TField;
   begin
@@ -794,7 +794,7 @@ var
     end;
     for Distribution := FDistributionCount - 1 downto 0 do
     begin
-      VClass := FDistributionAClass[Distribution];
+      VClass := FDistributionToClass[Distribution];
       for Contador := High(FDistributionToSessions[Distribution]) downto 0 do
       begin
         Duration := FSessionToDuration[FDistributionToSessions[Distribution, Contador]];
@@ -1100,8 +1100,8 @@ end;
 procedure TTimetable.DeltaValues(Delta, AClass, TimeSlot1, TimeSlot2: Integer);
 var
   SubjectRestrictionType, TeacherRestrictionType, TimeSlot, TimeSlot0, Day, DDay,
-    Day1, Day2, Hour, Session, Teacher, RoomType, Duration, Subject, Limit,
-    DeltaBreakTimetableTeacher, MinTimeSlot, MaxTimeSlot: Integer;
+  Day1, Day2, Hour, Session, Teacher, RoomType, Duration, Subject, Limit,
+  Assistance, Distribution, DeltaBreakTimetableTeacher, MinTimeSlot, MaxTimeSlot: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
   SubjectATeacher: TDynamicIntegerArray;
 begin
@@ -1237,6 +1237,28 @@ begin
         end;
       end;
       Inc(TimeSlot, Duration);
+    end;
+    for Assistance := 0 to FAssistanceCount - 1 do
+    begin
+      Teacher := FAssistanceToTeacher[Assistance];
+      Distribution := FAssistanceToDistribution[Assistance];
+      if AClass = FDistributionToClass[Distribution] then
+      begin
+        TimeSlot := TimeSlot1;
+        while TimeSlot <= TimeSlot2 do
+        begin
+          Session := TimeSlotToSession[TimeSlot];
+          if Session >= 0 then
+          begin
+            if Distribution = FSessionToDistribution[Session] then
+            begin
+              if FTeacherTimeSlotCount[Teacher, TimeSlot] > Limit then
+                Inc(FClashTeacher, Delta);
+              Inc(FTeacherTimeSlotCount[Teacher, TimeSlot], Delta);
+            end;
+          end;
+        end
+      end;
     end;
   end;
 end;
