@@ -156,8 +156,8 @@ msgctxt "dsourcebaseconsts.sflsubjectrestrictiontype_idsubjectrestrictiontype"
 msgid "Id"
 msgstr "Codigo"
 
-#: dsourcebaseconsts.sflsubjectrestrictiontype_nasubjectrestrictiontype
-msgctxt "dsourcebaseconsts.sflsubjectrestrictiontype_nasubjectrestrictiontype"
+#: dsourcebaseconsts.sflsubjectrestrictiontype_ntosubjectrestrictiontype
+msgctxt "dsourcebaseconsts.sflsubjectrestrictiontype_ntosubjectrestrictiontype"
 msgid "Name"
 msgstr "Nombre"
 
@@ -191,8 +191,8 @@ msgctxt "dsourcebaseconsts.sflsubject_idsubject"
 msgid "Id"
 msgstr "Codigo"
 
-#: dsourcebaseconsts.sflsubject_nasubject
-msgctxt "dsourcebaseconsts.sflsubject_nasubject"
+#: dsourcebaseconsts.sflsubject_ntosubject
+msgctxt "dsourcebaseconsts.sflsubject_ntosubject"
 msgid "Name"
 msgstr "Nombre"
 

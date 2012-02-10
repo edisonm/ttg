@@ -173,7 +173,7 @@ begin
     lblOutOfPositionEmptyHour.Caption := Format('%d ', [OutOfPositionEmptyHour]);
     lblBrokenSession.Caption := Format('%d ', [BrokenSession]);
     lblSubjectRestriction.Caption :=
-      Format('%s ', [VarArrToStr(SubjectRestrictionTypeASubjectCount)]);
+      Format('%s ', [VarArrToStr(SubjectRestrictionTypeToSubjectCount)]);
     lblTeacherRestriction.Caption :=
       Format('%s ', [VarArrToStr(TeacherRestrictionTypeATeacherCount)]);
     lblNonScatteredSubjectCount.Caption := Format('%d ', [NonScatteredSubject]);
