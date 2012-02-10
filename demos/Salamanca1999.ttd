@@ -1,5 +1,5 @@
 TTD 292
-18
+20
 Level
 6
 "IdLevel";"NaLevel";"AbLevel";
@@ -17,6 +17,13 @@ GroupId
 "3";"C";
 "4";"S";
 "5";"D";
+Specialization
+4
+"IdSpecialization";"NaSpecialization";"AbSpecialization";
+"1";"Basico";"BASICO";
+"2";"Contabilidad";"CONTA";
+"3";"Secretariado";"SECRE";
+"4";"Informatica";"INFO";
 Day
 5
 "IdDay";"NaDay";
@@ -25,13 +32,6 @@ Day
 "4";"Miercoles";
 "5";"Jueves";
 "6";"Viernes";
-Specialization
-4
-"IdSpecialization";"NaSpecialization";"AbSpecialization";
-"1";"Basico";"BASICO";
-"2";"Contabilidad";"CONTA";
-"3";"Secretariado";"SECRE";
-"4";"Informatica";"INFO";
 Course
 12
 "IdLevel";"IdSpecialization";
@@ -47,6 +47,11 @@ Course
 "6";"2";
 "6";"3";
 "6";"4";
+RoomType
+2
+"IdRoomType";"NaRoomType";"AbRoomType";"Number";
+"1";"Aula Normal";"NORMAL";"27";
+"2";"Lab. de Computacion";"COMPUTAC";"1";
 Hour
 7
 "IdHour";"NaHour";"Interval";
@@ -57,11 +62,6 @@ Hour
 "5";"Cuarta";"09:00 p.m.-09:35 p.m.";
 "6";"Quinta";"09:35 p.m.-10:10 p.m.";
 "7";"Sexta";"10:10 a.m.-10:45 p.m.";
-RoomType
-2
-"IdRoomType";"NaRoomType";"AbRoomType";"Number";
-"1";"Aula Normal";"NORMAL";"27";
-"2";"Lab. de Computacion";"COMPUTAC";"1";
 Class
 27
 "IdLevel";"IdSpecialization";"IdGroupId";
@@ -178,44 +178,6 @@ Teacher
 "49";"49";"Beltran";"Irma";
 "50";"50";"Baquero";"Rosario";
 "51";"51";"Mejía";"Rómulo";
-SubjectRestrictionType
-2
-"IdSubjectRestrictionType";"NaSubjectRestrictionType";"ColSubjectRestrictionType";"ValSubjectRestrictionType";
-"2";"Inadecuado";"65280";"10";
-"3";"Imposible";"255";"200";
-TimeSlot
-30
-"IdDay";"IdHour";
-"2";"1";
-"2";"2";
-"2";"3";
-"2";"5";
-"2";"6";
-"2";"7";
-"3";"1";
-"3";"2";
-"3";"3";
-"3";"5";
-"3";"6";
-"3";"7";
-"4";"1";
-"4";"2";
-"4";"3";
-"4";"5";
-"4";"6";
-"4";"7";
-"5";"1";
-"5";"2";
-"5";"3";
-"5";"5";
-"5";"6";
-"5";"7";
-"6";"1";
-"6";"2";
-"6";"3";
-"6";"5";
-"6";"6";
-"6";"7";
 Distribution
 268
 "IdSubject";"IdLevel";"IdSpecialization";"IdGroupId";"IdTeacher";"IdRoomType";"Composition";
@@ -487,6 +449,50 @@ Distribution
 "29";"4";"3";"4";"8";"1";"1.1.1";
 "29";"5";"3";"4";"8";"1";"1.1.1";
 "29";"6";"3";"4";"8";"1";"1.1.1";
+JoinedClass
+0
+"IdSubject";"IdLevel0";"IdSpecialization0";"IdGroupId0";"IdLevel";"IdSpecialization";"IdGroupId";
+SubjectRestrictionType
+2
+"IdSubjectRestrictionType";"NaSubjectRestrictionType";"ColSubjectRestrictionType";"ValSubjectRestrictionType";
+"2";"Inadecuado";"65280";"10";
+"3";"Imposible";"255";"200";
+TimeSlot
+30
+"IdDay";"IdHour";
+"2";"1";
+"2";"2";
+"2";"3";
+"2";"5";
+"2";"6";
+"2";"7";
+"3";"1";
+"3";"2";
+"3";"3";
+"3";"5";
+"3";"6";
+"3";"7";
+"4";"1";
+"4";"2";
+"4";"3";
+"4";"5";
+"4";"6";
+"4";"7";
+"5";"1";
+"5";"2";
+"5";"3";
+"5";"5";
+"5";"6";
+"5";"7";
+"6";"1";
+"6";"2";
+"6";"3";
+"6";"5";
+"6";"6";
+"6";"7";
+Assistance
+0
+"IdSubject";"IdLevel";"IdSpecialization";"IdGroupId";"IdTeacher";
 TeacherRestrictionType
 2
 "IdTeacherRestrictionType";"NaTeacherRestrictionType";"ColTeacherRestrictionType";"ValTeacherRestrictionType";

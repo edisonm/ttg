@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  08/02/2012 23:23
+  10/02/2012 13:18
 
   Warning:
 
@@ -18,14 +18,14 @@ CREATE TABLE IF NOT EXISTS `GroupId`(
     `IdGroupId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     `NaGroupId` varchar(5) NOT NULL UNIQUE
 );
-CREATE TABLE IF NOT EXISTS `Day`(
-    `IdDay` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    `NaDay` varchar(10) NOT NULL UNIQUE
-);
 CREATE TABLE IF NOT EXISTS `Specialization`(
     `IdSpecialization` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     `NaSpecialization` varchar(20) NOT NULL UNIQUE,
     `AbSpecialization` varchar(10) NOT NULL UNIQUE
+);
+CREATE TABLE IF NOT EXISTS `Day`(
+    `IdDay` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `NaDay` varchar(10) NOT NULL UNIQUE
 );
 CREATE TABLE IF NOT EXISTS `Course`(
     `IdLevel` integer NOT NULL,
@@ -36,16 +36,16 @@ CREATE TABLE IF NOT EXISTS `Course`(
   CONSTRAINT SpecializationCourse FOREIGN KEY (IdSpecialization)
     REFERENCES Specialization(IdSpecialization) ON UPDATE RESTRICT ON DELETE RESTRICT
 );
-CREATE TABLE IF NOT EXISTS `Hour`(
-    `IdHour` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    `NaHour` varchar(10) NOT NULL UNIQUE,
-    `Interval` varchar(21) NOT NULL UNIQUE
-);
 CREATE TABLE IF NOT EXISTS `RoomType`(
     `IdRoomType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     `NaRoomType` varchar(25) NOT NULL UNIQUE,
     `AbRoomType` varchar(10) NOT NULL UNIQUE,
     `Number` integer NOT NULL
+);
+CREATE TABLE IF NOT EXISTS `Hour`(
+    `IdHour` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `NaHour` varchar(10) NOT NULL UNIQUE,
+    `Interval` varchar(21) NOT NULL UNIQUE
 );
 CREATE TABLE IF NOT EXISTS `Class`(
     `IdLevel` integer NOT NULL,
@@ -69,21 +69,6 @@ CREATE TABLE IF NOT EXISTS `Teacher`(
   CONSTRAINT ixLnNaTeacher UNIQUE(LnTeacher,NaTeacher),
   CONSTRAINT ixNaLnTeacher UNIQUE(NaTeacher,LnTeacher)
 );
-CREATE TABLE IF NOT EXISTS `SubjectRestrictionType`(
-    `IdSubjectRestrictionType` integer NOT NULL PRIMARY KEY,
-    `NaSubjectRestrictionType` varchar(10) NOT NULL UNIQUE,
-    `ColSubjectRestrictionType` integer NOT NULL,
-    `ValSubjectRestrictionType` integer NOT NULL
-);
-CREATE TABLE IF NOT EXISTS `TimeSlot`(
-    `IdDay` integer NOT NULL,
-    `IdHour` integer NOT NULL,
-  CONSTRAINT PrimaryKey PRIMARY KEY(IdDay,IdHour),
-  CONSTRAINT DayTimeSlot FOREIGN KEY (IdDay)
-    REFERENCES Day(IdDay) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT HourTimeSlot FOREIGN KEY (IdHour)
-    REFERENCES Hour(IdHour) ON UPDATE RESTRICT ON DELETE RESTRICT
-);
 CREATE TABLE IF NOT EXISTS `Distribution`(
     `IdSubject` integer NOT NULL,
     `IdLevel` integer NOT NULL,
@@ -100,6 +85,48 @@ CREATE TABLE IF NOT EXISTS `Distribution`(
   CONSTRAINT SubjectDistribution FOREIGN KEY (IdSubject)
     REFERENCES Subject(IdSubject) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT TeacherDistribution FOREIGN KEY (IdTeacher)
+    REFERENCES Teacher(IdTeacher) ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+CREATE TABLE IF NOT EXISTS `JoinedClass`(
+    `IdSubject` integer NOT NULL,
+    `IdLevel0` integer NOT NULL,
+    `IdSpecialization0` integer NOT NULL,
+    `IdGroupId0` integer NOT NULL,
+    `IdLevel` integer NOT NULL,
+    `IdSpecialization` integer NOT NULL,
+    `IdGroupId` integer NOT NULL,
+  CONSTRAINT DistributionJoinedClass UNIQUE(IdSubject,IdLevel0,IdSpecialization0,IdGroupId0),
+  CONSTRAINT PrimaryKey PRIMARY KEY(IdSubject,IdLevel0,IdSpecialization0,IdGroupId0),
+  CONSTRAINT ClassJoinedClass FOREIGN KEY (IdLevel,IdSpecialization,IdGroupId)
+    REFERENCES Class(IdLevel,IdSpecialization,IdGroupId) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT DistributionJoinedClass FOREIGN KEY (IdSubject,IdLevel0,IdSpecialization0,IdGroupId0)
+    REFERENCES Distribution(IdSubject,IdLevel,IdSpecialization,IdGroupId) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS `SubjectRestrictionType`(
+    `IdSubjectRestrictionType` integer NOT NULL PRIMARY KEY,
+    `NaSubjectRestrictionType` varchar(10) NOT NULL UNIQUE,
+    `ColSubjectRestrictionType` integer NOT NULL,
+    `ValSubjectRestrictionType` integer NOT NULL
+);
+CREATE TABLE IF NOT EXISTS `TimeSlot`(
+    `IdDay` integer NOT NULL,
+    `IdHour` integer NOT NULL,
+  CONSTRAINT PrimaryKey PRIMARY KEY(IdDay,IdHour),
+  CONSTRAINT DayTimeSlot FOREIGN KEY (IdDay)
+    REFERENCES Day(IdDay) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT HourTimeSlot FOREIGN KEY (IdHour)
+    REFERENCES Hour(IdHour) ON UPDATE RESTRICT ON DELETE RESTRICT
+);
+CREATE TABLE IF NOT EXISTS `Assistance`(
+    `IdSubject` integer NOT NULL,
+    `IdLevel` integer NOT NULL,
+    `IdSpecialization` integer NOT NULL,
+    `IdGroupId` integer NOT NULL,
+    `IdTeacher` integer NOT NULL,
+  CONSTRAINT PrimaryKey PRIMARY KEY(IdSubject,IdLevel,IdSpecialization,IdGroupId,IdTeacher),
+  CONSTRAINT DistributionAssistance FOREIGN KEY (IdSubject,IdLevel,IdSpecialization,IdGroupId)
+    REFERENCES Distribution(IdSubject,IdLevel,IdSpecialization,IdGroupId) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT TeacherAssistance FOREIGN KEY (IdTeacher)
     REFERENCES Teacher(IdTeacher) ON UPDATE RESTRICT ON DELETE RESTRICT
 );
 CREATE TABLE IF NOT EXISTS `TeacherRestrictionType`(

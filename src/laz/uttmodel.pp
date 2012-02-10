@@ -47,8 +47,9 @@ type
     FTimeSlotToDay, FTimeSlotToHour, FDayToMaxTimeSlot, FSessionToDistribution,
       FSessionToSubject, FSessionToRoomType, FRoomTypeToNumber,
       FSubjectRestrictionToSubject, FSubjectRestrictionToTimeSlot,
-      FSubjectRestrictionToSubjectRestrictionType,
-      FTeacherRestrictionToTeacher, FTeacherRestrictionToTimeSlot,
+      FSubjectRestrictionToSubjectRestrictionType, FAssistanceToDistribution,
+      FAssistanceToTeacher, FTeacherRestrictionToTeacher, FJoinedClassToDistribution,
+      FJoinedClassToClass,  FTeacherRestrictionToTimeSlot,
       FTeacherRestrictionToTeacherRestrictionType, FDistributionToRoomType,
       FClassToCourse, FClassToLevel, FClassToGroupId,
       FClassToSpecialization, FClassToSessionCount: TDynamicIntegerArray;
@@ -62,7 +63,8 @@ type
     FSubjectRestrictionToValue, FTeacherRestrictionToValue: TDynamicIntegerArray;
     FSubjectCount, FSubjectRestrictionTypeCount, FTeacherRestrictionTypeCount,
       FClassCount, FDayCount, FHourCount, FTimeSlotCount, FTeacherCount, FCourseCount,
-      FLevelCount, FSpecializationCount, FRoomTypeCount, FDistributionCount: Integer;
+      FLevelCount, FSpecializationCount, FRoomTypeCount, FDistributionCount,
+      FAssistanceCount, FJoinedClassCount: Integer;
     FGroupIdToIdGroupId, FSubjectToIdSubject, FDayToIdDay, FHourToIdHour,
       FLevelToIdLevel, FSpecializationToIdSpecialization: TDynamicIntegerArray;
     FIdLevelToLevel, FIdSpecializationToSpecialization, FIdGroupIdToGroupId, FIdDayToDay,
@@ -690,7 +692,91 @@ var
       end;
     end;
   end;
-  procedure LoadMoldeTimetableDetail;
+  procedure LoadAssistance;
+  var
+    Assistance, VClass, Course, GroupId, Level, Specialization, Subject,
+    Distribution, Teacher: Integer;
+    VFieldSubject, VFieldLevel, VFieldSpecialization, VFieldGroupId,
+    VFieldTeacher: TField;
+  begin
+    with SourceDataModule.TbAssistance do
+    begin
+      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdGroupId;IdTeacher';
+      First;
+      FAssistanceCount := RecordCount;
+      SetLength(FAssistanceToDistribution, FAssistanceCount);
+      SetLength(FAssistanceToTeacher, FAssistanceCount);
+      VFieldSubject := FindField('IdSubject');
+      VFieldLevel := FindField('IdLevel');
+      VFieldSpecialization := FindField('IdSpecialization');
+      VFieldGroupId := FindField('IdGroupId');
+      VFieldTeacher := FindField('IdTeacher');
+      for Assistance := 0 to FAssistanceCount - 1 do
+      begin
+        Subject := FIdSubjectASubject[VFieldSubject.AsInteger - FMinIdSubject];
+        Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
+        Specialization := FIdSpecializationToSpecialization
+          [VFieldSpecialization.AsInteger - FMinIdSpecialization];
+        Course := FLevelSpecializationToCourse[Level, Specialization];
+        GroupId := FIdGroupIdToGroupId[VFieldGroupId.AsInteger -
+          FMinIdGroupId];
+        VClass := FCourseGroupIdToClass[Course, GroupId];
+        Distribution := FClassSubjectToDistribution[VClass, Subject];
+        Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
+        FAssistanceToDistribution[Assistance] := Distribution;
+        FAssistanceToTeacher[Assistance] := Teacher;
+        Next;
+      end;
+      First;
+    end;
+  end;
+  procedure LoadJoinedClass;
+  var
+    JoinedClass, VClass0, Course0, GroupId0, Level0, Specialization0, VClass,
+    Course, GroupId, Level, Specialization, Subject,  Distribution, Teacher: Integer;
+    VFieldSubject, VFieldLevel0, VFieldSpecialization0, VFieldGroupId0,
+    VFieldLevel, VFieldSpecialization, VFieldGroupId: TField;
+  begin
+    with SourceDataModule.TbJoinedClass do
+    begin
+      IndexFieldNames := 'IdSubject;IdLevel0;IdSpecialization0;IdGroupId0;IdLevel;IdSpecialization;IdGroupId';
+      First;
+      FJoinedClassCount := RecordCount;
+      SetLength(FJoinedClassToDistribution, FJoinedClassCount);
+      SetLength(FJoinedClassToClass, FJoinedClassCount);
+      VFieldSubject := FindField('IdSubject');
+      VFieldLevel0 := FindField('IdLevel0');
+      VFieldSpecialization0 := FindField('IdSpecialization0');
+      VFieldGroupId0 := FindField('IdGroupId0');
+      VFieldLevel := FindField('IdLevel');
+      VFieldSpecialization := FindField('IdSpecialization');
+      VFieldGroupId := FindField('IdGroupId');
+      for JoinedClass := 0 to FJoinedClassCount - 1 do
+      begin
+        Subject := FIdSubjectASubject[VFieldSubject.AsInteger - FMinIdSubject];
+        Level0 := FIdLevelToLevel[VFieldLevel0.AsInteger - FMinIdLevel];
+        Specialization0 := FIdSpecializationToSpecialization
+          [VFieldSpecialization0.AsInteger - FMinIdSpecialization];
+        Course0 := FLevelSpecializationToCourse[Level0, Specialization0];
+        GroupId0 := FIdGroupIdToGroupId[VFieldGroupId0.AsInteger -
+          FMinIdGroupId];
+        VClass0 := FCourseGroupIdToClass[Course0, GroupId0];
+        Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
+        Specialization := FIdSpecializationToSpecialization
+          [VFieldSpecialization.AsInteger - FMinIdSpecialization];
+        Course := FLevelSpecializationToCourse[Level, Specialization];
+        GroupId := FIdGroupIdToGroupId[VFieldGroupId.AsInteger -
+          FMinIdGroupId];
+        VClass := FCourseGroupIdToClass[Course, GroupId];
+        Distribution := FClassSubjectToDistribution[VClass0, Subject];
+        FJoinedClassToDistribution[JoinedClass] := Distribution;
+        FJoinedClassToClass[JoinedClass] := VClass;
+        Next;
+      end;
+      First;
+    end;
+  end;
+  procedure LoadPatternTimetableDetail;
   var
     TimeSlot1, VClass, Distribution, TimeSlot, Contador, Duracion, Number: Integer;
   begin
@@ -787,7 +873,9 @@ begin
     LoadSubjectRestriction;
     LoadTeacherRestriction;
     LoadDistribution;
-    LoadMoldeTimetableDetail;
+    LoadAssistance;
+    LoadJoinedClass;
+    LoadPatternTimetableDetail;
   end;
 end;
 
