@@ -36,13 +36,15 @@ inherited SourceDataModule: TSourceDataModule
   object QuTeacher: TZQuery
     Connection = DbZConnection
     SQL.Strings = (
-      'SELECT IdTeacher as IdTeacher1, LnTeacher||" "||NaTeacher AS NameTeacher'
+      'SELECT IdTeacher, LnTeacher||" "||NaTeacher AS NameTeacher'
       'FROM Teacher'
-      'WHERE IdTeacher1<>:IdTeacher'
+      'WHERE IdTeacher<>:IdTeacher'
       'ORDER BY'
       '  LnTeacher, NaTeacher'
     )
     DataSource = DSDistribution
+    MasterFields = 'IdTeacher'
+    LinkedFields = 'IdTeacher'
     Params = <
       item
         DataType = ftInteger
@@ -57,10 +59,10 @@ inherited SourceDataModule: TSourceDataModule
         Name = 'IdTeacher'
         ParamType = ptUnknown
       end>
-    object QuTeacherIdTeacher1: TLongintField
+    object QuTeacherIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTeacher1'
+      FieldName = 'IdTeacher'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

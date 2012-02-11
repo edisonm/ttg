@@ -152,12 +152,11 @@ begin
     FSuperTitle := Description[TbTeacher];
     TbDistribution.MasterFields := 'IdTeacher';
     TbDistribution.LinkedFields := 'IdTeacher';
-    //TbDistribution.MasterSource := DSTeacher;
+    TbDistribution.MasterSource := DSTeacher;
     TbAssistance.MasterFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
     TbAssistance.LinkedFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
     TbAssistance.MasterSource := SourceDataModule.DSDistribution;
     TbAssistance.Close;
-    //DBGrid1.DataSource := DSAssistance;
     QuTeacher.Close;
     QuTeacher.Open;
     WriteLn('*** |QuTeacher|=' + IntToStr(QuTeacher.RecordCount));
