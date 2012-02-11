@@ -15,6 +15,9 @@ type
 
   TSourceDataModule = class(TSourceBaseDataModule)
     ZTables: TZQuery;
+    QuTeacher: TZQuery;
+    QuTeacherIdTeacher1: TLongintField;
+    QuTeacherNameTeacher: TStringField;
     procedure TbDistributionBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
@@ -419,6 +422,21 @@ begin
     FieldName := 'Duration';
     DataSet := TbDistribution;
   end;
+  Field := TStringField.Create(TbAssistance.Owner);
+  with Field do
+  begin
+    DisplayLabel := SFlAssistance_IdTeacher;
+    DisplayWidth := 31;
+    FieldKind := fkLookup;
+    FieldName := 'NameTeacher';
+    LookupDataSet := QuTeacher;
+    LookupKeyFields := 'IdTeacher1';
+    LookupResultField := 'NameTeacher';
+    KeyFields := 'IdTeacher';
+    Size := 31;
+    Lookup := True;
+    DataSet := TbAssistance;
+  end;
 end;
 
 procedure TSourceDataModule.HideFields;
@@ -459,6 +477,7 @@ begin
     FindField('IdTeacher').Visible := False;
     FindField('IdRoomType').Visible := False;
   end;
+  (*
   with TbAssistance do
   begin
     FindField('IdSubject').Visible := False;
@@ -467,6 +486,7 @@ begin
     FindField('IdGroupId').Visible := False;
     FindField('IdTeacher').Visible := False;
   end;
+  *)
 end;
 
 procedure TSourceDataModule.EmptyDataSet(ADataSet: TDataSet);

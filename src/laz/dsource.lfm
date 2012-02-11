@@ -33,4 +33,51 @@ inherited SourceDataModule: TSourceDataModule
     left = 544
     top = 104
   end
+  object QuTeacher: TZQuery
+    Connection = DbZConnection
+    SQL.Strings = (
+      'SELECT IdTeacher as IdTeacher1, LnTeacher||" "||NaTeacher AS NameTeacher'
+      'FROM Teacher'
+      'WHERE IdTeacher1<>:IdTeacher'
+      'ORDER BY'
+      '  LnTeacher, NaTeacher'
+    )
+    DataSource = DSDistribution
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'IdTeacher'
+        ParamType = ptUnknown
+      end>
+    left = 104
+    top = 280
+    ParamData = <    
+      item
+        DataType = ftInteger
+        Name = 'IdTeacher'
+        ParamType = ptUnknown
+      end>
+    object QuTeacherIdTeacher1: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'IdTeacher1'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Visible = False
+    end
+    object QuTeacherNameTeacher: TStringField
+      DisplayWidth = 31
+      FieldKind = fkData
+      FieldName = 'NameTeacher'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = True
+      Size = 31
+    end
+  end
 end

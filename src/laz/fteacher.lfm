@@ -74,7 +74,7 @@ inherited TeacherForm: TTeacherForm
         Align = alBottom
         Color = clWindow
         Columns = <>
-        DataSource = DSAssistance
+        DataSource = SourceDataModule.DSAssistance
         TabOrder = 1
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
@@ -248,66 +248,5 @@ inherited TeacherForm: TTeacherForm
     DataSet = SourceDataModule.TbDistribution
     left = 200
     top = 216
-  end
-  object QuTeacher: TZQuery[7]
-    Connection = SourceDataModule.DbZConnection
-    SQL.Strings = (
-      'SELECT `IdTeacher`, `LnTeacher`||" "||`NaTeacher` AS `NameTeacher`'
-      'FROM `Teacher`'
-      'WHERE IdTeacher<>:IdTeacher'
-      'ORDER BY'
-      '  LnTeacher, NaTeacher'
-    )
-    Params = <    
-      item
-        DataType = ftInteger
-        Name = 'IdTeacher'
-        ParamType = ptUnknown
-      end>
-    DataSource = DataSourceDetail
-    MasterFields = 'IdTeacher'
-    MasterSource = DataSourceDetail
-    LinkedFields = 'IdTeacher'
-    left = 104
-    top = 280
-    ParamData = <    
-      item
-        DataType = ftInteger
-        Name = 'IdTeacher'
-        ParamType = ptUnknown
-      end>
-    object QuTeacherIdTeacher: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdTeacher'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuTeacherNameTeacher: TStringField
-      DisplayWidth = 31
-      FieldKind = fkData
-      FieldName = 'NameTeacher'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 31
-    end
-  end
-  object TbAssistance: TZTable[8]
-    Connection = SourceDataModule.DbZConnection
-    TableName = 'Assistance'
-    left = 208
-    top = 280
-  end
-  object DSAssistance: TDatasource[9]
-    DataSet = TbAssistance
-    left = 206
-    top = 344
   end
 end

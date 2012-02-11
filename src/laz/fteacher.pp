@@ -18,17 +18,8 @@ type
   TTeacherForm	= class(TMasterDetailEditorForm)
     BtnTeacherRestriction: TToolButton;
     ActTeacherRestriction: TAction;
-    DSAssistance: TDatasource;
     DBGrid1: TDBGrid;
-    QuTeacherIdGroupId: TLongintField;
     Splitter2: TSplitter;
-    QuTeacher: TZQuery;
-    QuTeacherIdSubject: TLongintField;
-    QuTeacherIdLevel: TLongintField;
-    QuTeacherIdSpecialization: TLongintField;
-    QuTeacherIdTeacher: TLongintField;
-    QuTeacherNameTeacher: TStringField;
-    TbAssistance: TZTable;
     procedure ActFindExecute(Sender: TObject);
     procedure ActTeacherRestrictionExecute(Sender: TObject);
     procedure DataSourceStateChange(Sender: TObject);
@@ -161,38 +152,17 @@ begin
     FSuperTitle := Description[TbTeacher];
     TbDistribution.MasterFields := 'IdTeacher';
     TbDistribution.LinkedFields := 'IdTeacher';
-    TbDistribution.MasterSource := DSTeacher;
+    //TbDistribution.MasterSource := DSTeacher;
+    TbAssistance.MasterFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
+    TbAssistance.LinkedFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
+    TbAssistance.MasterSource := SourceDataModule.DSDistribution;
+    TbAssistance.Close;
+    //DBGrid1.DataSource := DSAssistance;
+    QuTeacher.Close;
+    QuTeacher.Open;
+    WriteLn('*** |QuTeacher|=' + IntToStr(QuTeacher.RecordCount));
+    TbAssistance.Open;
   end;
-  PrepareDataSetFields(TbAssistance);
-  with TbAssistance do
-  begin
-    FindField('IdSubject').Visible := False;
-    FindField('IdLevel').Visible := False;
-    FindField('IdSpecialization').Visible := False;
-    FindField('IdGroupId').Visible := False;
-    FindField('IdTeacher').Visible := False;
-    MasterFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
-    LinkedFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
-    MasterSource := DataSourceDetail;
-    Close;
-  end;
-  Field := TStringField.Create(TbAssistance.Owner);
-  with Field do
-  begin
-    DisplayLabel := SFlAssistance_IdTeacher;
-    DisplayWidth := 15;
-    FieldKind := fkLookup;
-    FieldName := 'NameTeacher';
-    LookupDataSet := QuTeacher;
-    LookupKeyFields := 'IdTeacher';
-    LookupResultField := 'NameTeacher';
-    KeyFields := 'IdTeacher';
-    Size := 15;
-    Lookup := True;
-    DataSet := TbAssistance;
-  end;
-  QuTeacher.Open;
-  TbAssistance.Open;
 end;
 
 procedure TTeacherForm.FormDestroy(Sender: TObject);
@@ -200,9 +170,8 @@ var
   Field: TField;
 begin
   inherited;
-  TbAssistance.Close;
+  SourceDataModule.TbAssistance.MasterSource := nil;
   SourceDataModule.TbDistribution.MasterSource := nil;
-  QuTeacher.Close;
 end;
 
 initialization
