@@ -1,5 +1,5 @@
 inherited TeacherForm: TTeacherForm
-  Left = 525
+  Left = 754
   Height = 522
   Top = 374
   Width = 888
@@ -249,246 +249,38 @@ inherited TeacherForm: TTeacherForm
     left = 200
     top = 216
   end
-  object DSAssistance: TDatasource[7]
-    DataSet = QuAssistance
-    left = 200
-    top = 280
-  end
-  object QuAssistance: TZQuery[8]
+  object QuTeacher: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdSubject;IdLevel;IdSpecialization;IdGroupId;NameTeacher'
     SQL.Strings = (
-      'SELECT `IdSubject`, `IdLevel`, `IdSpecialization`, `IdGroupId`, `IdTeacher`'
-      'FROM `Assistance`'
-      'WHERE IdSubject=:IdSubject'
-      '  AND IdLevel=:IdLevel'
-      '  AND IdSpecialization=:IdSpecialization'
-      '  AND IdGroupId=:IdGroupId'
-    )
-    Params = <    
-      item
-        DataType = ftInteger
-        Name = 'IdSubject'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdLevel'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdSpecialization'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdGroupId'
-        ParamType = ptUnknown
-      end>
-    DataSource = DataSourceDetail
-    MasterFields = 'IdSubject;IdLevel;IdSpecialization;IdGroupId'
-    MasterSource = DataSourceDetail
-    LinkedFields = 'IdSubject;IdLevel;IdSpecialization;IdGroupId'
-    IndexFieldNames = 'IdSubject Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc;NameTeacher Asc'
-    left = 200
-    top = 344
-    ParamData = <    
-      item
-        DataType = ftInteger
-        Name = 'IdSubject'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdLevel'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdSpecialization'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdGroupId'
-        ParamType = ptUnknown
-      end>
-    object QuAssistanceIdSubject: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdSubject'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuAssistanceIdLevel: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdLevel'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuAssistanceIdSpecialization: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdSpecialization'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuAssistanceIdTeacher: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdTeacher'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuAssistanceNameTeacher: TStringField
-      DisplayLabel = 'Teacher'
-      DisplayWidth = 5
-      FieldKind = fkLookup
-      FieldName = 'NameTeacher'
-      Index = 4
-      KeyFields = 'IdTeacher'
-      LookupCache = False
-      LookupDataSet = QuTeacher
-      LookupKeyFields = 'IdTeacher'
-      LookupResultField = 'NameTeacher'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 5
-    end
-  end
-  object QuTeacher: TZQuery[9]
-    Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdSubject;IdLevel;IdSpecialization;IdGroupId;NameTeacher'
-    SQL.Strings = (
-      'SELECT `IdSubject`, `IdLevel`, `IdSpecialization`, `IdGroupId`,'
-      '  `Teacher`.`IdTeacher` AS `IdTeacher`,'
-      '  `LnTeacher` +  " " + `NaTeacher` AS `NameTeacher`'
-      'FROM `Distribution`, `Teacher`'
-      'WHERE IdSubject=:IdSubject'
-      '  AND IdLevel=:IdLevel'
-      '  AND IdSpecialization=:IdSpecialization'
-      '  AND IdGroupId=:IdGroupId'
-      '  AND Distribution.IdTeacher <> Teacher.IdTeacher'
+      'SELECT `IdTeacher`, `LnTeacher`||" "||`NaTeacher` AS `NameTeacher`'
+      'FROM `Teacher`'
+      'WHERE IdTeacher<>:IdTeacher'
       'ORDER BY'
       '  LnTeacher, NaTeacher'
     )
     Params = <    
       item
         DataType = ftInteger
-        Name = 'IdSubject'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdLevel'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdSpecialization'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdGroupId'
+        Name = 'IdTeacher'
         ParamType = ptUnknown
       end>
     DataSource = DataSourceDetail
-    MasterFields = 'IdSubject;IdLevel;IdSpecialization;IdGroupId'
+    MasterFields = 'IdTeacher'
     MasterSource = DataSourceDetail
-    LinkedFields = 'IdSubject;IdLevel;IdSpecialization;IdGroupId'
-    IndexFieldNames = 'IdSubject Asc;IdLevel Asc;IdSpecialization Asc;IdGroupId Asc;NameTeacher Asc'
+    LinkedFields = 'IdTeacher'
     left = 104
     top = 280
     ParamData = <    
       item
         DataType = ftInteger
-        Name = 'IdSubject'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdLevel'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdSpecialization'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdGroupId'
+        Name = 'IdTeacher'
         ParamType = ptUnknown
       end>
-    object QuTeacherIdSubject: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdSubject'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuTeacherIdLevel: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdLevel'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuTeacherIdSpecialization: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdSpecialization'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuTeacherIdGroupId: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdGroupId'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
     object QuTeacherIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTeacher'
-      Index = 4
+      Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -499,12 +291,23 @@ inherited TeacherForm: TTeacherForm
       DisplayWidth = 31
       FieldKind = fkData
       FieldName = 'NameTeacher'
-      Index = 5
+      Index = 1
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = True
       Size = 31
     end
+  end
+  object TbAssistance: TZTable[8]
+    Connection = SourceDataModule.DbZConnection
+    TableName = 'Assistance'
+    left = 208
+    top = 280
+  end
+  object DSAssistance: TDatasource[9]
+    DataSet = TbAssistance
+    left = 206
+    top = 344
   end
 end

@@ -459,6 +459,14 @@ begin
     FindField('IdTeacher').Visible := False;
     FindField('IdRoomType').Visible := False;
   end;
+  with TbAssistance do
+  begin
+    FindField('IdSubject').Visible := False;
+    FindField('IdLevel').Visible := False;
+    FindField('IdSpecialization').Visible := False;
+    FindField('IdGroupId').Visible := False;
+    FindField('IdTeacher').Visible := False;
+  end;
 end;
 
 procedure TSourceDataModule.EmptyDataSet(ADataSet: TDataSet);

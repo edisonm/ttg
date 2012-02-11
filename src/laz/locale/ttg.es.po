@@ -1499,6 +1499,8 @@ msgid "Teacher restrictions|Input Teacher restrictions"
 msgstr "Prohibiciones de profesor|Ingresar las prohibiciones de profesor"
 
 #: tteacherform.caption
+#, fuzzy
+#| msgid "Teacher*"
 msgctxt "tteacherform.caption"
 msgid "Teacher"
 msgstr "Profesor"
