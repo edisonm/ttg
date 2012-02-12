@@ -66,9 +66,9 @@ begin
   with SourceDataModule do
   begin
     Caption := Format('[%s %d] - %s %s', [SuperTitle,
-      QuTeacher.FindField('IdTimetable').AsInteger,
-      QuTeacher.FindField('LnTeacher').AsString,
-      QuTeacher.FindField('NaTeacher').AsString]);
+      Self.QuTeacher.FindField('IdTimetable').AsInteger,
+      Self.QuTeacher.FindField('LnTeacher').AsString,
+      Self.QuTeacher.FindField('NaTeacher').AsString]);
     FName := MasterDataModule.StringsShowTeacher.Values[cbxShowTeacher.Text];
     ShowEditor(TbDay, TbHour, QuTimetableTeacher, TbTimeSlot, 'IdDay', 'NaDay',
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
