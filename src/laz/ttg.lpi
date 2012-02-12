@@ -25,6 +25,9 @@
       <CharSet Value="04B0"/>
       <StringTable LegalCopyright="2011 por Edison Mera" ProductVersion="" FileDescription="Horarios para Colegio"/>
     </VersionInfo>
+    <MacroValues Count="1">
+      <Macro1 Name="LCLWidgetType" Value="gtk2"/>
+    </MacroValues>
     <BuildModes Count="2">
       <Item1 Name="full" Default="True"/>
       <Item2 Name="free">

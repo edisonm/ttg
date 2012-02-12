@@ -1,16 +1,15 @@
 inherited SourceDataModule: TSourceDataModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Height = 421
-  HorizontalOffset = 1209
-  VerticalOffset = 536
-  Width = 630
+  Height = 440
+  HorizontalOffset = 617
+  VerticalOffset = 459
+  Width = 667
   inherited DbZConnection: TZConnection
     Protocol = 'sqlite-3'
     Database = ':memory:'
-    Connected = True
-    left = 528
-    top = 16
+    left = 544
+    top = 24
   end
   inherited TbDay: TZTable
     BeforeDelete = DataSetBeforeDelete
@@ -42,15 +41,15 @@ inherited SourceDataModule: TSourceDataModule
       'ORDER BY'
       '  LnTeacher, NaTeacher'
     )
-    DataSource = DSDistribution
-    MasterFields = 'IdTeacher'
-    LinkedFields = 'IdTeacher'
-    Params = <
+    Params = <    
       item
         DataType = ftInteger
         Name = 'IdTeacher'
         ParamType = ptUnknown
       end>
+    DataSource = DSDistribution
+    MasterFields = 'IdTeacher'
+    LinkedFields = 'IdTeacher'
     left = 544
     top = 184
     ParamData = <    
