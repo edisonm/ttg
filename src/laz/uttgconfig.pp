@@ -207,12 +207,12 @@ end;
 
 function TTTGConfig.GetSeed: Integer;
 begin
-  Result := Integers['Seed1'];
+  Result := Integers['Seed'];
 end;
 
 procedure TTTGConfig.SetSeed(Value: Integer);
 begin
-  Integers['Seed1'] := Value;
+  Integers['Seed'] := Value;
 end;
 
 function TTTGConfig.GetRefreshInterval: Integer;
