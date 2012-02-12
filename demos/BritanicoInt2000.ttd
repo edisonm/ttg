@@ -23,7 +23,7 @@ Day
 "IdDay";"NaDay";
 "2";"Lunes";
 "3";"Martes";
-"4";"Miércoles";
+"4";"Miercoles";
 "5";"Jueves";
 "6";"Viernes";
 Course
@@ -45,10 +45,10 @@ RoomType
 "5";"Lab Quimica Biologia";"QUIMICA";"1";
 "6";"Aula Frances";"FRANCES";"1";
 "7";"Aula Arte";"ARTE";"1";
-"8";"Aula Levelación Ingles";"INGLES";"1";
+"8";"Aula NivelaciÃ³n Ingles";"INGLES";"1";
 "9";"Canchas";"CANCHA";"1";
 "10";"Matematica";"MATE";"1";
-"11";"Dibujo Téc. Op";"DIBTECOP";"1";
+"11";"Dibujo TÃ©c. Op";"DIBTECOP";"1";
 Hour
 11
 "IdHour";"NaHour";"Interval";
@@ -59,7 +59,7 @@ Hour
 "5";"Recreo1";"10:40-10:55";
 "6";"Quinta";"10:55-11:35";
 "7";"Sexta";"11:35-12:15";
-"8";"Séptima";"12:15-12:55";
+"8";"Septima";"12:15-12:55";
 "9";"Recreo2";"12:55-13:40";
 "10";"Octava";"13:40-14:20";
 "11";"Novena";"14:20-15:00";
@@ -77,32 +77,32 @@ Class
 Subject
 28
 "IdSubject";"NaSubject";
-"1";"Matemática";
+"1";"Matematica";
 "2";"Mat/Ec/Filo_5";
-"3";"Física";
-"4";"Dibujo Técnico";
+"3";"Fisica";
+"4";"Dibujo Tecnico";
 "5";"Historia";
-"6";"Geografía";
-"7";"Investigación";
-"10";"Áreas transversales";
-"11";"Anatomía";
-"12";"Biología";
+"6";"Geografia";
+"7";"Investigacion";
+"10";"Areas transversales";
+"11";"Anatomia";
+"12";"Biologia";
 "13";"CC NN";
-"14";"Ed. Física";
+"14";"Ed. Fisica";
 "15";"Dibujo y Arte";
 "16";"Castellano";
-"17";"Música";
-"18";"Computación";
-"19";"Francés Op";
+"17";"Musica";
+"18";"Computacion";
+"19";"Frances Op";
 "20";"Literature";
-"21";"Química";
+"21";"Quimica";
 "22";"Dib/Filo";
 "23";"Grammar";
 "24";"Aso de Clase";
-"25";"Matemática 5";
+"25";"Matematica 5";
 "26";"Global";
 "27";"Speech";
-"28";"Matemática 6";
+"28";"Matematica 6";
 "29";"Mat/Eco/Fil_ 6";
 "30";"Science";
 Teacher
@@ -112,19 +112,19 @@ Teacher
 "2";"2";"Bracero";"Jorge";
 "3";"3";"Imbaquingo";"Jorge";
 "4";"4";"Salcedo";"Francisco";
-"5";"5";"Calderón";"Edgar";
+"5";"5";"Calderon";"Edgar";
 "6";"6";"Mora";"Daniel";
-"7";"8";"Castro";"María";
+"7";"8";"Castro";"Maria";
 "8";"7";"Tayo/Velasco";"Pablo /Rosa";
 "9";"9";"Eldredge";"Graciela";
 "10";"10";"Andrade";"Fernando";
 "11";"11";"Barba";"Juan";
 "12";"12";"Grignard";"Jacques";
-"13";"13";"Lourdes";"María";
+"13";"13";"Lourdes";"Maria";
 "14";"14";"Naranjo";"Azucena";
 "15";"15";"Enriquez";"Deniss";
-"16";"16";"Núñez";"Guillermo";
-"17";"17";"Velasco/Rodas";"Rosa/Paúl";
+"16";"16";"NuÃ±ez";"Guillermo";
+"17";"17";"Velasco/Rodas";"Rosa/Paul";
 "18";"18";"Buchelli";"Clara";
 "19";"19";"Daulon";"Marina";
 Distribution
@@ -659,7 +659,7 @@ SubjectRestriction
 Timetable
 2
 "IdTimetable";"TimeIni";"TimeEnd";"Summary";
-"1";"2000-10-21 21:09:35";"2000-10-21 21:10:13";"Semillas del generador de nÃºmeros aleatorios:\n\r  Semilla 1: 1153565110\n\r  Semilla 2: -783600947\n\r  Semilla 3: -971606276\n\r  Semilla 4: -192485375\n\rPesos:\n\r  Cruce de profesores            305,00\n\r  Fracc. h. profesores            15,00\n\r  Cruce de aulas:                 65,00\n\r  Hours Huecas desubicadas:       95,00\n\r  Materias cortadas:             150,00\n\r  Materias no dispersas:           1,00\n\rParÃ¡metros: 5; 2000; 0,3; 0,2; 3; 0,2; 0,1\n\rNÃºmero de generaciones:        17 \n\rDetalle                     Cant.    Valor\n\rCruce de profesores:            0     0,00\n\rFracc. h. profesores:         138  2070,00\n\rCruce de aulas:                 0     0,00\n\rHours Huecas desubicadas:       2   190,00\n\rMaterias cortadas:              3   450,00\n\rMaterias no dispersas:         82    82,00\n\rProhibiciones de materia:       5   250,00\n\rProhibiciones de profesor:      1   500,00\n\r\n\rValor Total:                       3542,00\n\r";
+"1";"2000-10-21 21:09:35";"2000-10-21 21:10:13";"Semillas del generador de nÃºmeros aleatorios:\n\r  Semilla 1: 1153565110\n\r  Semilla 2: -783600947\n\r  Semilla 3: -971606276\n\r  Semilla 4: -192485375\n\rPesos:\n\r  Cruce de profesores            305,00\n\r  Fracc. h. profesores            15,00\n\r  Cruce de aulas:                 65,00\n\r  Hours Huecas desubicadas:       95,00\n\r  Materias cortadas:             150,00\n\r  Materias no dispersas:           1,00\n\rParametros: 5; 2000; 0,3; 0,2; 3; 0,2; 0,1\n\rNÃºmero de generaciones:        17 \n\rDetalle                     Cant.    Valor\n\rCruce de profesores:            0     0,00\n\rFracc. h. profesores:         138  2070,00\n\rCruce de aulas:                 0     0,00\n\rHours Huecas desubicadas:       2   190,00\n\rMaterias cortadas:              3   450,00\n\rMaterias no dispersas:         82    82,00\n\rProhibiciones de materia:       5   250,00\n\rProhibiciones de profesor:      1   500,00\n\r\n\rValor Total:                       3542,00\n\r";
 "2";"2012-01-07 00:23:13";"2012-01-07 00:58:11";"Algoritmo Evolutivo Elitista\n\r============================\n\rAplicar Descenso:                      Si\n\rSemilla Numeros aleatorios:    1325892193\n\rNumero de individuos:                  10\n\rMaximo de generaciones:             10000\n\rProbabilidad de cruce:             0,3000\n\rProbabilidad de Mutacion:          0,2000\n\rProbabilidad de Reparacion:        0,1000\n\rProbabilidad de polinizacion:      0,1000\n\r-----------------------------------------------------------------\n\rDetalle                           Cant.         Peso        Valor\n\r-----------------------------------------------------------------\n\rCruce de profesores:                  0          305            0\n\rCruce de materias:                    0          201            0\n\rCruce de aulas:                       0           65            0\n\rFracc. h. profesores:                63           15          945\n\rHours Huecas desubicadas:             0          295            0\n\rMaterias cortadas:                    0          299            0\n\rMaterias juntas:                     15            1           15\n\rProhibiciones de materia:         (0 0)     (50 500)            0\n\rProhibiciones de profesor:      (0 0 0) (50 500 500)            0\n\r-----------------------------------------------------------------\n\rValor Total:                                                  960\n\r";
 TimetableDetail
 708
@@ -1373,7 +1373,7 @@ TimetableDetail
 "2";"30";"1";"1";"2";"5";"1";"244";
 "2";"30";"1";"1";"2";"5";"2";"244";
 37
-NaInstitution=Colegio Experimental BritÃ¡nico Internacional
+NaInstitution=Colegio Experimental Britanico Internacional
 SchoolYear=2000-2001
 NameAuthority=Dr. BenjamÃ­n Tobar
 PositionAuthority=Rector

@@ -129,7 +129,7 @@ Teacher
 "IdTeacher";"TeacherNationalId";"LnTeacher";"NaTeacher";
 "1";"1";"Loza";"Wilson";
 "2";"2";"Fuentes";"Maria";
-"3";"3";"Pazmiño";"Luis";
+"3";"3";"PazmiÃ±o";"Luis";
 "4";"4";"Brito";"Piedad";
 "5";"5";"Noguera";"Patricia";
 "6";"6";"Cordova";"Edgar";
@@ -145,7 +145,7 @@ Teacher
 "16";"16";"Aguas";"Patricio";
 "17";"17";"Sinche";"Denis";
 "18";"18";"Vega";"Pepe";
-"19";"19";"Pazmiño";"Mauro";
+"19";"19";"PazmiÃ±o";"Mauro";
 "20";"20";"Garcia";"America";
 "21";"21";"Sandoval";"Lourdes";
 "22";"22";"Freire";"Magdalena";
@@ -177,7 +177,7 @@ Teacher
 "48";"48";"Menendez";"Rosa";
 "49";"49";"Beltran";"Irma";
 "50";"50";"Baquero";"Rosario";
-"51";"51";"Mejía";"Rómulo";
+"51";"51";"Mejia";"Romulo";
 Distribution
 268
 "IdSubject";"IdLevel";"IdSpecialization";"IdGroupId";"IdTeacher";"IdRoomType";"Composition";
