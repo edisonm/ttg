@@ -1,7 +1,7 @@
 object ConfigForm: TConfigForm
-  Left = 609
+  Left = 602
   Height = 442
-  Top = 490
+  Top = 482
   Width = 490
   ActiveControl = pgcConfig
   BorderStyle = bsDialog
@@ -66,16 +66,16 @@ object ConfigForm: TConfigForm
     Height = 386
     Top = 8
     Width = 473
-    ActivePage = tbsInstitution
+    ActivePage = tbsOptions
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     object tbsInstitution: TTabSheet
       Hint = 'Institution Data'
       Caption = 'Institution'
-      ClientHeight = 358
+      ClientHeight = 356
       ClientWidth = 469
       ImageIndex = 2
       object lblMaxTeacherWorkLoad: TLabel
@@ -205,14 +205,14 @@ object ConfigForm: TConfigForm
     end
     object tbsOptions: TTabSheet
       Caption = 'Options'
-      ClientHeight = 358
+      ClientHeight = 356
       ClientWidth = 469
       ImageIndex = 3
       object lblSeed: TLabel
         Left = 8
         Height = 15
         Top = 36
-        Width = 46
+        Width = 33
         Caption = 'Seed:'
         ParentColor = False
       end
@@ -220,7 +220,7 @@ object ConfigForm: TConfigForm
         Left = 235
         Height = 15
         Top = 13
-        Width = 92
+        Width = 76
         Caption = 'Update each:'
         ParentColor = False
       end
@@ -228,7 +228,7 @@ object ConfigForm: TConfigForm
         Left = 235
         Height = 15
         Top = 132
-        Width = 102
+        Width = 101
         Caption = 'Initial Timetables:'
         ParentColor = False
       end
@@ -236,7 +236,7 @@ object ConfigForm: TConfigForm
         Left = 235
         Height = 15
         Top = 109
-        Width = 113
+        Width = 99
         Caption = 'Shared directory:'
         ParentColor = False
       end
@@ -244,7 +244,7 @@ object ConfigForm: TConfigForm
         Left = 235
         Height = 15
         Top = 84
-        Width = 62
+        Width = 91
         Caption = 'Population Size:'
         ParentColor = False
       end
@@ -252,7 +252,7 @@ object ConfigForm: TConfigForm
         Left = 235
         Height = 15
         Top = 36
-        Width = 67
+        Width = 58
         Caption = 'Iterations:'
         ParentColor = False
       end
@@ -260,7 +260,7 @@ object ConfigForm: TConfigForm
         Left = 9
         Height = 15
         Top = 84
-        Width = 72
+        Width = 100
         Caption = 'Cross Probability:'
         ParentColor = False
       end
@@ -268,7 +268,7 @@ object ConfigForm: TConfigForm
         Left = 9
         Height = 15
         Top = 109
-        Width = 89
+        Width = 116
         Caption = 'Mutation Probability:'
         ParentColor = False
       end
@@ -276,7 +276,7 @@ object ConfigForm: TConfigForm
         Left = 8
         Height = 15
         Top = 132
-        Width = 103
+        Width = 130
         Caption = 'Reparation Probability:'
         ParentColor = False
       end
@@ -284,7 +284,7 @@ object ConfigForm: TConfigForm
         Left = 8
         Height = 15
         Top = 156
-        Width = 105
+        Width = 126
         Caption = 'Pollination Probability:'
         ParentColor = False
       end
@@ -292,16 +292,16 @@ object ConfigForm: TConfigForm
         Left = 235
         Height = 15
         Top = 62
-        Width = 121
+        Width = 92
         Caption = 'Downhill Levels:'
         ParentColor = False
       end
       object cbxRandomize: TCheckBox
         Left = 8
-        Height = 24
+        Height = 21
         Top = 8
-        Width = 216
-        Caption = 'Inicializar con la hora del sistema'
+        Width = 171
+        Caption = 'Init with the system time'
         OnClick = cbxRandomizeClick
         TabOrder = 0
       end
@@ -394,9 +394,9 @@ object ConfigForm: TConfigForm
       end
       object cbxApplyDoubleDownHill: TCheckBox
         Left = 8
-        Height = 24
+        Height = 21
         Top = 57
-        Width = 162
+        Width = 167
         Caption = 'Aplicar descenso (lento)'
         TabOrder = 11
       end
@@ -411,7 +411,7 @@ object ConfigForm: TConfigForm
     end
     object tbsWeigths: TTabSheet
       Caption = 'Weights'
-      ClientHeight = 358
+      ClientHeight = 356
       ClientWidth = 469
       object Label1: TLabel
         Left = 8
@@ -441,7 +441,7 @@ object ConfigForm: TConfigForm
         Left = 8
         Height = 15
         Top = 86
-        Width = 96
+        Width = 98
         Caption = 'Broken Sessions:'
         ParentColor = False
       end
@@ -456,7 +456,7 @@ object ConfigForm: TConfigForm
       object Label15: TLabel
         Left = 8
         Height = 15
-        Top = 116
+        Top = 114
         Width = 116
         Anchors = [akLeft, akBottom]
         Caption = 'Subject Restrictions:'
@@ -465,7 +465,7 @@ object ConfigForm: TConfigForm
       object Label18: TLabel
         Left = 8
         Height = 15
-        Top = 236
+        Top = 234
         Width = 119
         Anchors = [akLeft, akBottom]
         Caption = 'Teacher Restrictions:'
@@ -482,7 +482,7 @@ object ConfigForm: TConfigForm
       object lblSRName: TLabel
         Left = 310
         Height = 15
-        Top = 149
+        Top = 147
         Width = 38
         Anchors = [akRight, akBottom]
         Caption = 'Name:'
@@ -491,7 +491,7 @@ object ConfigForm: TConfigForm
       object lblSRColor: TLabel
         Left = 313
         Height = 15
-        Top = 182
+        Top = 180
         Width = 35
         Anchors = [akRight, akBottom]
         Caption = 'Color:'
@@ -500,7 +500,7 @@ object ConfigForm: TConfigForm
       object lblSRValue: TLabel
         Left = 312
         Height = 15
-        Top = 210
+        Top = 208
         Width = 36
         Anchors = [akRight, akBottom]
         Caption = 'Value:'
@@ -509,7 +509,7 @@ object ConfigForm: TConfigForm
       object lblTRName: TLabel
         Left = 310
         Height = 15
-        Top = 261
+        Top = 259
         Width = 38
         Anchors = [akRight, akBottom]
         Caption = 'Name:'
@@ -518,7 +518,7 @@ object ConfigForm: TConfigForm
       object lblTRColor: TLabel
         Left = 313
         Height = 15
-        Top = 294
+        Top = 292
         Width = 35
         Anchors = [akRight, akBottom]
         Caption = 'Color:'
@@ -527,7 +527,7 @@ object ConfigForm: TConfigForm
       object lblTRValue: TLabel
         Left = 312
         Height = 15
-        Top = 321
+        Top = 319
         Width = 36
         Anchors = [akRight, akBottom]
         Caption = 'Value:'
@@ -592,7 +592,7 @@ object ConfigForm: TConfigForm
       object dbeNaSubjectRestrictionType: TDBEdit
         Left = 364
         Height = 24
-        Top = 140
+        Top = 138
         Width = 93
         DataField = 'NaSubjectRestrictionType'
         DataSource = SourceDataModule.DSSubjectRestrictionType
@@ -604,7 +604,7 @@ object ConfigForm: TConfigForm
       object dbeValSubjectRestrictionType: TDBEdit
         Left = 363
         Height = 24
-        Top = 201
+        Top = 199
         Width = 93
         DataField = 'ValSubjectRestrictionType'
         DataSource = SourceDataModule.DSSubjectRestrictionType
@@ -616,7 +616,7 @@ object ConfigForm: TConfigForm
       object dbeNaTeacherRestrictionType: TDBEdit
         Left = 364
         Height = 24
-        Top = 252
+        Top = 250
         Width = 93
         DataField = 'NaTeacherRestrictionType'
         DataSource = SourceDataModule.DSTeacherRestrictionType
@@ -628,7 +628,7 @@ object ConfigForm: TConfigForm
       object dbeValTeacherRestrictionType: TDBEdit
         Left = 364
         Height = 24
-        Top = 312
+        Top = 310
         Width = 93
         DataField = 'ValTeacherRestrictionType'
         DataSource = SourceDataModule.DSTeacherRestrictionType
@@ -640,7 +640,7 @@ object ConfigForm: TConfigForm
       object DBGrid1: TDBGrid
         Left = 8
         Height = 96
-        Top = 133
+        Top = 131
         Width = 292
         Anchors = [akLeft, akRight, akBottom]
         Color = clWindow
@@ -653,7 +653,7 @@ object ConfigForm: TConfigForm
       object DBGrid2: TDBGrid
         Left = 8
         Height = 97
-        Top = 253
+        Top = 251
         Width = 292
         Anchors = [akLeft, akRight, akBottom]
         Color = clWindow
@@ -665,8 +665,8 @@ object ConfigForm: TConfigForm
       end
       object CBColSubjectRestrictionType: TColorBox
         Left = 364
-        Height = 31
-        Top = 166
+        Height = 24
+        Top = 171
         Width = 93
         Anchors = [akRight, akBottom]
         ItemHeight = 16
@@ -676,8 +676,8 @@ object ConfigForm: TConfigForm
       end
       object CBColTeacherRestrictionType: TColorBox
         Left = 364
-        Height = 31
-        Top = 278
+        Height = 24
+        Top = 283
         Width = 93
         Anchors = [akRight, akBottom]
         ItemHeight = 16

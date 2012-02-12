@@ -510,10 +510,11 @@ msgstr "Aplicar descenso (lento)"
 
 #: tconfigform.cbxrandomize.caption
 msgctxt "TCONFIGFORM.CBXRANDOMIZE.CAPTION"
-msgid "Inicializar con la hora del sistema"
+msgid "Init with the system time"
 msgstr "Inicializar con la hora del sistema"
 
 #: tconfigform.edbookmarks.text
+msgctxt "tconfigform.edbookmarks.text"
 msgid "1,2"
 msgstr "1,2"
 
@@ -523,34 +524,42 @@ msgid "High School|High School Name"
 msgstr "Colegio|Nombre del colegio"
 
 #: tconfigform.label1.caption
+msgctxt "tconfigform.label1.caption"
 msgid "Clash Teachers:"
 msgstr "Cruce profesores:"
 
 #: tconfigform.label13.caption
+msgctxt "tconfigform.label13.caption"
 msgid "Iterations:"
 msgstr "Iteraciones:"
 
 #: tconfigform.label15.caption
+msgctxt "tconfigform.label15.caption"
 msgid "Subject Restrictions:"
 msgstr "Prohibiciones de materia:"
 
 #: tconfigform.label18.caption
+msgctxt "tconfigform.label18.caption"
 msgid "Teacher Restrictions:"
 msgstr "Prohibiciones de profesor:"
 
 #: tconfigform.label2.caption
+msgctxt "tconfigform.label2.caption"
 msgid "Clash Rooms:"
 msgstr "Cruce de aulas:"
 
 #: tconfigform.label20.caption
+msgctxt "tconfigform.label20.caption"
 msgid "Clash Subjects:"
 msgstr "Cruce materias:"
 
 #: tconfigform.label29.caption
+msgctxt "tconfigform.label29.caption"
 msgid "Update each:"
 msgstr "Actualizar cada:"
 
 #: tconfigform.lblauthority.caption
+msgctxt "tconfigform.lblauthority.caption"
 msgid "Authority:"
 msgstr "Autoridad:"
 
@@ -560,14 +569,17 @@ msgid "Position:"
 msgstr "Cargo:"
 
 #: tconfigform.lblbreaktimetableteacher.caption
+msgctxt "tconfigform.lblbreaktimetableteacher.caption"
 msgid "Break TT. Teachers:"
 msgstr "Fracc. h. profesores:"
 
 #: tconfigform.lblbrokensubjects.caption
+msgctxt "tconfigform.lblbrokensubjects.caption"
 msgid "Broken Sessions:"
 msgstr "Materias cortadas:"
 
 #: tconfigform.lblcomments.caption
+msgctxt "tconfigform.lblcomments.caption"
 msgid "Comments:"
 msgstr "Comentarios:"
 
@@ -582,6 +594,7 @@ msgid "Downhill Levels:"
 msgstr "Niveles de descenso:"
 
 #: tconfigform.lblemptyhours.caption
+msgctxt "tconfigform.lblemptyhours.caption"
 msgid "Empty hours:"
 msgstr "Horas huecas:"
 
@@ -601,6 +614,7 @@ msgid "Joined Subjects:"
 msgstr "Materias juntas:"
 
 #: tconfigform.lblmaxteacherworkload.caption
+msgctxt "tconfigform.lblmaxteacherworkload.caption"
 msgid "Max work load per teacher:"
 msgstr "Carga Maxima por Profesor:"
 
@@ -625,6 +639,7 @@ msgid "Reparation Probability:"
 msgstr "Prob. Reparacion:"
 
 #: tconfigform.lblresponsible.caption
+msgctxt "tconfigform.lblresponsible.caption"
 msgid "Responsible:"
 msgstr "Responsable:"
 
@@ -634,6 +649,7 @@ msgid "Position:"
 msgstr "Cargo:"
 
 #: tconfigform.lblschoolyear.caption
+msgctxt "tconfigform.lblschoolyear.caption"
 msgid "School Year:"
 msgstr "Periodo Lectivo:"
 
@@ -678,14 +694,17 @@ msgid "Value:"
 msgstr "Valor:"
 
 #: tconfigform.tbsinstitution.caption
+msgctxt "tconfigform.tbsinstitution.caption"
 msgid "Institution"
 msgstr "Institucion"
 
 #: tconfigform.tbsinstitution.hint
+msgctxt "tconfigform.tbsinstitution.hint"
 msgid "Institution Data"
 msgstr "Datos del instituto"
 
 #: tconfigform.tbsoptions.caption
+msgctxt "tconfigform.tbsoptions.caption"
 msgid "Options"
 msgstr "Opciones"
 
@@ -1495,8 +1514,6 @@ msgid "Teacher restrictions|Input Teacher restrictions"
 msgstr "Prohibiciones de profesor|Ingresar las prohibiciones de profesor"
 
 #: tteacherform.caption
-#, fuzzy
-#| msgid "Teacher*"
 msgctxt "tteacherform.caption"
 msgid "Teacher"
 msgstr "Profesor"
