@@ -71,7 +71,7 @@ uses
 
 function TCrossManyToManyEditor0Form.GetColorHighLight(ACol, ARow: Integer): TColor;
 begin
-  if RelRecordExists(ARow, ARow) then
+  if RelRecordExists(ACol, ARow) then
     Result := clRed
   else
     Result := inherited GetColorHighLight(ACol, ARow);
