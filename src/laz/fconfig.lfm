@@ -476,7 +476,7 @@ object ConfigForm: TConfigForm
         Height = 15
         Top = 15
         Width = 113
-        Caption = 'Break TT. Teachers:'
+        Caption = 'Gap TT. Teachers:'
         ParentColor = False
       end
       object lblSRName: TLabel

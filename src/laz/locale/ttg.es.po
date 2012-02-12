@@ -570,8 +570,8 @@ msgstr "Cargo:"
 
 #: tconfigform.lblbreaktimetableteacher.caption
 msgctxt "tconfigform.lblbreaktimetableteacher.caption"
-msgid "Break TT. Teachers:"
-msgstr "Fracc. h. profesores:"
+msgid "Gap TT. Teachers:"
+msgstr "Huecos h. prof.:"
 
 #: tconfigform.lblbrokensubjects.caption
 msgctxt "tconfigform.lblbrokensubjects.caption"
