@@ -632,9 +632,10 @@ begin
   with SourceDataModule do
   begin
     DbZConnection.Connect;
+    DbZConnection.ExecuteDirect('pragma journal_mode=off');
+    DbZConnection.ExecuteDirect('pragma foreign_keys=on');
     if DbZConnection.Database = ':memory:' then
     begin
-      DbZConnection.ExecuteDirect('pragma journal_mode=off');
       DbZConnection.ExecuteDirect(LazarusResources.Find('ttg', 'SQL').Value);
       PrepareTables;
       OpenTables;
@@ -643,7 +644,6 @@ begin
     end
     else
     begin
-      DbZConnection.ExecuteDirect('pragma journal_mode=off');
       PrepareTables;
       OpenTables;
     end;
