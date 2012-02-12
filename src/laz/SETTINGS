@@ -26,6 +26,8 @@ DBCONVERTSRC=../../../DBConvert
 #DBCONVERT=$(shell cd $(DBCONVERTSRC) ; $(MAKE) -s getDBConvert)
 DBCONVERT=$(DBCONVERTSRC)/bin/dbconvert.exe
 
+LAZBUILD=$(LAZBASE)/lazbuild
+
 else
 
 LAZBASE=/home/edison/apps/pascal/lazarus
@@ -35,10 +37,11 @@ FPC=fpc
 # LAZBUILD=lazbuild
 # LAZIDE=lazarus-ide
 
+LAZBUILD=$(LAZBASE)/lazbuild --ws=qt
+
 endif
 
 LAZIDE=$(LAZBASE)/lazarus
-LAZBUILD=$(LAZBASE)/lazbuild
 LAZRES=$(LAZBASE)/tools/lazres
 LRSDEP=$(LAZRES)
 
