@@ -1,5 +1,5 @@
 inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
-  Left = 502
+  Left = 495
   Height = 431
   Top = 79
   Width = 775
@@ -51,7 +51,7 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
     end
     object cbxShowRoomType: TComboBox[4]
       Left = 162
-      Height = 27
+      Height = 24
       Hint = 'Show|What to show in the room type timetable'
       Top = 2
       Width = 193

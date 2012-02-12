@@ -1,6 +1,6 @@
 inherited SubjectForm: TSubjectForm
-  Left = 667
-  Top = 277
+  Left = -8
+  Top = -29
   Caption = 'Subjects'
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery

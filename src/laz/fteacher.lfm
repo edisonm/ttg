@@ -1,5 +1,5 @@
 inherited TeacherForm: TTeacherForm
-  Left = 733
+  Left = 726
   Height = 522
   Top = 375
   Width = 888
@@ -38,7 +38,6 @@ inherited TeacherForm: TTeacherForm
     ClientHeight = 478
     ClientWidth = 888
     inherited DBGrid: TDBGrid
-      Cursor = crDefault
       Height = 476
       Width = 404
       Align = alLeft

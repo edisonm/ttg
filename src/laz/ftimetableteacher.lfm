@@ -1,5 +1,5 @@
 inherited TimetableTeacherForm: TTimetableTeacherForm
-  Left = 619
+  Left = 612
   Height = 443
   Top = 200
   Width = 682
@@ -47,7 +47,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
     end
     object cbxShowTeacher: TComboBox[4]
       Left = 162
-      Height = 27
+      Height = 24
       Hint = 'Show|Param to show in the teacher timetable'
       Top = 2
       Width = 193

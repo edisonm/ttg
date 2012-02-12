@@ -1,5 +1,5 @@
 inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
-  Left = 774
+  Left = 767
   Top = 59
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
@@ -56,11 +56,9 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
       OnDrawItem = ListBoxDrawItem
       OnKeyUp = ListBoxKeyUp
       ParentShowHint = False
-      ScrollWidth = 109
       ShowHint = True
       Style = lbOwnerDrawFixed
       TabOrder = 0
-      TopIndex = -1
     end
   end
   inherited ImageList: TImageList[6]

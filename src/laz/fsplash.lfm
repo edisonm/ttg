@@ -1,7 +1,7 @@
 object SplashForm: TSplashForm
-  Left = 217
+  Left = 210
   Height = 155
-  Top = 245
+  Top = 281
   Width = 509
   BorderStyle = bsNone
   Caption = 'SplashForm'
@@ -82,7 +82,7 @@ object SplashForm: TSplashForm
     Left = 88
     Height = 18
     Top = 64
-    Width = 49
+    Width = 50
     Caption = 'Version'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
@@ -93,7 +93,7 @@ object SplashForm: TSplashForm
     Left = 88
     Height = 18
     Top = 88
-    Width = 73
+    Width = 74
     Caption = 'Executable'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
@@ -104,7 +104,7 @@ object SplashForm: TSplashForm
     Left = 88
     Height = 18
     Top = 112
-    Width = 46
+    Width = 47
     Caption = 'Edition'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'

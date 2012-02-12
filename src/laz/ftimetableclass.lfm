@@ -1,5 +1,5 @@
 inherited TimetableClassForm: TTimetableClassForm
-  Left = 757
+  Left = 750
   Height = 284
   Top = 41
   ActiveControl = DBNavigator
@@ -8,6 +8,7 @@ inherited TimetableClassForm: TTimetableClassForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  Visible = True
   inherited TlBShow: TToolBar
     inherited BtnOk: TToolButton
       Enabled = False
@@ -53,7 +54,7 @@ inherited TimetableClassForm: TTimetableClassForm
     end
     object cbxShowClass: TComboBox[5]
       Left = 162
-      Height = 27
+      Height = 24
       Hint = 'Show|Param to show in the timetable'
       Top = 2
       Width = 185

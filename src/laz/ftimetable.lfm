@@ -1,5 +1,5 @@
 inherited TimetableForm: TTimetableForm
-  Left = 679
+  Left = 672
   Height = 440
   Top = 375
   Width = 677
@@ -10,7 +10,6 @@ inherited TimetableForm: TTimetableForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Visible = True
   inherited TlBShow: TToolBar
     Width = 677
     inherited DBNavigator: TDBNavigator

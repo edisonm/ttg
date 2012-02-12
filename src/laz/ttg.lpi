@@ -25,9 +25,6 @@
       <CharSet Value="04B0"/>
       <StringTable LegalCopyright="2011 por Edison Mera" ProductVersion="" FileDescription="Horarios para Colegio"/>
     </VersionInfo>
-    <MacroValues Count="1">
-      <Macro1 Name="LCLWidgetType" Value="gtk2"/>
-    </MacroValues>
     <BuildModes Count="2">
       <Item1 Name="full" Default="True"/>
       <Item2 Name="free">
@@ -35,7 +32,7 @@
           <Version Value="11"/>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="../../../ZEOSDBO-7.0.0-alpha/src/core;../../../ZEOSDBO-7.0.0-alpha/src/dbc;../../../ZEOSDBO-7.0.0-alpha/src/parsesql;../../../ZEOSDBO-7.0.0-alpha/src/plain;../../../ZEOSDBO-7.0.0-alpha/src/component;../../../multithreadprocs;../../../DBConvert/auxiliary"/>
+            <OtherUnitFiles Value="../../../zeosdbo/packages/lazarus;../../../zeosdbo/src/core;../../../zeosdbo/src/dbc;../../../zeosdbo/src/parsesql;../../../zeosdbo/src/plain;../../../zeosdbo/src/component;../../../multithreadprocs;../../../DBConvert/auxiliary"/>
             <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-free"/>
           </SearchPaths>
           <Conditionals Value="if undefined(DistType) then
@@ -405,21 +402,10 @@
     <Version Value="11"/>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../../../ZEOSDBO-7.0.0-alpha/src/core;../../../ZEOSDBO-7.0.0-alpha/src/dbc;../../../ZEOSDBO-7.0.0-alpha/src/parsesql;../../../ZEOSDBO-7.0.0-alpha/src/plain;../../../ZEOSDBO-7.0.0-alpha/src/component;../../../multithreadprocs;../../../DBConvert/auxiliary"/>
+      <OtherUnitFiles Value="../../../zeosdbo/packages/lazarus;../../../zeosdbo/src/core;../../../zeosdbo/src/dbc;../../../zeosdbo/src/parsesql;../../../zeosdbo/src/plain;../../../zeosdbo/src/component;../../../multithreadprocs;../../../DBConvert/auxiliary"/>
       <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-full"/>
       <SrcPath Value="../../../GLScene/Source"/>
     </SearchPaths>
-    <Parsing>
-      <SyntaxOptions>
-        <UseAnsiStrings Value="False"/>
-      </SyntaxOptions>
-    </Parsing>
-    <CodeGeneration>
-      <SmartLinkUnit Value="True"/>
-      <Optimizations>
-        <VariablesInRegisters Value="True"/>
-      </Optimizations>
-    </CodeGeneration>
     <Linking>
       <Options>
         <Win32>
@@ -439,9 +425,6 @@
 -dZEOS_DISABLE_ORACLE
 -dZEOS_DISABLE_ASA"/>
       <CompilerPath Value="$(CompPath)"/>
-      <ExecuteAfter>
-        <ShowAllMessages Value="True"/>
-      </ExecuteAfter>
     </Other>
   </CompilerOptions>
 </CONFIG>

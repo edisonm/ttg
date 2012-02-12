@@ -8,7 +8,7 @@ uses
   CMem,
 {$ENDIF}
   Forms,
-  Dialogs, Interfaces, multithreadprocslaz,
+  Dialogs, Interfaces, multithreadprocslaz, zcomponent,
   SysUtils,
   FMain {MainForm},
   DMaster in 'dmaster.pp' {MasterDataModule: TDataModule},
@@ -73,6 +73,7 @@ begin
     ResourceTranslator.TranslateUnitResourceStrings('dsourcebaseconsts');
   end;
   DecimalSeparator := ',';
+  RequireDerivedFormResource := True;
   Application.Initialize;
   Application.Title := sAppName + ' ' + sAppVersion;
   Application.HelpFile := '../hlp/ttg.hlp';
