@@ -2,8 +2,8 @@ inherited SourceDataModule: TSourceDataModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 421
-  HorizontalOffset = 1129
-  VerticalOffset = 225
+  HorizontalOffset = 1209
+  VerticalOffset = 536
   Width = 630
   inherited DbZConnection: TZConnection
     Protocol = 'sqlite-3'
@@ -23,7 +23,7 @@ inherited SourceDataModule: TSourceDataModule
     BeforePost = DataSetBeforePost
     BeforeDelete = DataSetBeforeDelete
   end
-  object ZTables: TZQuery[37]
+  object ZTables: TZReadOnlyQuery[41]
     Connection = DbZConnection
     SQL.Strings = (
       'SELECT trim(name) as Name FROM sqlite_master'
@@ -33,7 +33,7 @@ inherited SourceDataModule: TSourceDataModule
     left = 544
     top = 104
   end
-  object QuTeacher: TZQuery
+  object QuTeacher: TZReadOnlyQuery[42]
     Connection = DbZConnection
     SQL.Strings = (
       'SELECT IdTeacher, LnTeacher||" "||NaTeacher AS NameTeacher'
@@ -45,14 +45,14 @@ inherited SourceDataModule: TSourceDataModule
     DataSource = DSDistribution
     MasterFields = 'IdTeacher'
     LinkedFields = 'IdTeacher'
-    Params = <
+    Params = <    
       item
         DataType = ftInteger
         Name = 'IdTeacher'
         ParamType = ptUnknown
       end>
-    left = 104
-    top = 280
+    left = 544
+    top = 184
     ParamData = <    
       item
         DataType = ftInteger

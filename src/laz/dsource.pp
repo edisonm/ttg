@@ -14,8 +14,8 @@ type
   { TSourceDataModule }
 
   TSourceDataModule = class(TSourceBaseDataModule)
-    ZTables: TZQuery;
-    QuTeacher: TZQuery;
+    ZTables: TZReadOnlyQuery;
+    QuTeacher: TZReadOnlyQuery;
     QuTeacherIdTeacher: TLongintField;
     QuTeacherNameTeacher: TStringField;
     procedure TbDistributionBeforePost(DataSet: TDataSet);
@@ -572,7 +572,6 @@ end;
 
 procedure TSourceDataModule.SaveToStrings(AStrings: TStrings);
 var
-  i: Integer;
   ZTable: TZTable;
   Field: TField;
 begin
