@@ -397,7 +397,7 @@ object ConfigForm: TConfigForm
         Height = 21
         Top = 57
         Width = 167
-        Caption = 'Aplicar descenso (lento)'
+        Caption = 'Apply Downhill - slow'
         TabOrder = 11
       end
       object edBookmarks: TEdit

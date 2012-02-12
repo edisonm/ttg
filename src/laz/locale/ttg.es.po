@@ -505,8 +505,8 @@ msgstr "Configure"
 
 #: tconfigform.cbxapplydoubledownhill.caption
 msgctxt "TCONFIGFORM.CBXAPPLYDOUBLEDOWNHILL.CAPTION"
-msgid "Aplicar descenso (lento)"
-msgstr "Aplicar descenso (lento)"
+msgid "Apply Downhill - slow"
+msgstr "Aplicar descenso  - lento"
 
 #: tconfigform.cbxrandomize.caption
 msgctxt "TCONFIGFORM.CBXRANDOMIZE.CAPTION"
