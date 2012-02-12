@@ -246,7 +246,7 @@ begin
     FSelDataSet.First;
     SetLength(FSel, FColDataSet.RecordCount, FRowDataSet.RecordCount);
     for j := 0 to FColDataSet.RecordCount - 1 do
-      for k := 0 to FColDataSet.RecordCount - 1 do
+      for k := 0 to FRowDataSet.RecordCount - 1 do
         FSel[j, k] := False;
     while not FSelDataSet.Eof do
     begin
@@ -283,28 +283,28 @@ end;
 
 procedure TCrossManyToManyEditorForm.WriteData;
 var
-  i, j: Integer;
+  j, k: Integer;
 begin
   try
-    for i := 0 to FColDataSet.RecordCount - 1 do
-      for j := 0 to FRowDataSet.RecordCount - 1 do
-        if not Assigned(FSelDataSet) or FSel[i, j] then
+    for j := 0 to FColDataSet.RecordCount - 1 do
+      for k := 0 to FRowDataSet.RecordCount - 1 do
+        if not Assigned(FSelDataSet) or FSel[j, k] then
         begin
-          if RelRecordExists(i, j) then
+          if RelRecordExists(j, k) then
           begin
             if not FRelDataSet.Locate(FColField.FieldName + ';' +
               FRowField.FieldName,
-              VarArrayOf([FColKey[i], FRowKey[j]]), []) then
-              WriteRelRecord(i, j)
+              VarArrayOf([FColKey[j], FRowKey[k]]), []) then
+              WriteRelRecord(j, k)
             else
-              UpdateRelRecord(i, j);
+              UpdateRelRecord(j, k);
           end
           else
           begin
             if FRelDataSet.Locate(FColField.FieldName + ';' +
               FRowField.FieldName,
-              VarArrayOf([FColKey[i], FRowKey[j]]), []) then
-              DeleteRelRecord(i, j);
+              VarArrayOf([FColKey[j], FRowKey[k]]), []) then
+              DeleteRelRecord(j, k);
           end;
         end;
     FEditing := False;
