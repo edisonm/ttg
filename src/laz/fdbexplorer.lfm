@@ -1,5 +1,5 @@
 object DBExplorerForm: TDBExplorerForm
-  Left = 617
+  Left = 610
   Height = 585
   Top = 307
   Width = 636
@@ -8,6 +8,7 @@ object DBExplorerForm: TDBExplorerForm
   ClientWidth = 636
   OnClose = FormClose
   OnCreate = FormCreate
+  Position = poDesktopCenter
   LCLVersion = '0.9.31'
   object Memo1: TMemo
     Left = 8
@@ -50,7 +51,7 @@ object DBExplorerForm: TDBExplorerForm
   end
   object CbxMetadataType: TComboBox
     Left = 8
-    Height = 29
+    Height = 27
     Hint = 'Metadata Type'
     Top = 8
     Width = 477
@@ -70,7 +71,7 @@ object DBExplorerForm: TDBExplorerForm
   end
   object CbxTable: TDBLookupComboBox
     Left = 8
-    Height = 29
+    Height = 27
     Hint = 'Tables'
     Top = 38
     Width = 477

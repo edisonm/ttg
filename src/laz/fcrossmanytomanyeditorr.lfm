@@ -1,11 +1,17 @@
 inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
-  Left = 767
-  Top = 59
+  Left = 541
+  Height = 314
+  Top = 470
+  Width = 518
+  ClientHeight = 314
+  ClientWidth = 518
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  Position = poDesktopCenter
   inherited TlBShow: TToolBar
+    Width = 518
     inherited BtnOk: TToolButton
       OnClick = BtnOkClick
     end
@@ -13,43 +19,49 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
       OnClick = BtnCancelClick
     end
   end
+  inherited pnlStatus: TPanel
+    Top = 295
+    Width = 518
+  end
   inherited Panel1: TPanel
-    Width = 361
+    Height = 270
+    Width = 340
   end
   inherited DrawGrid: TDrawGrid
-    Width = 361
+    Height = 270
+    Width = 340
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goColSizing]
     OnDrawCell = DrawGridDrawCell
     OnKeyUp = DrawGridKeyUp
     OnMouseUp = DrawGridMouseUp
-    OnSelectCell = DrawGridSelectCell
+    OnSelectCell = nil
     RowHeights = (
       18
       24
     )
   end
   object Splitter: TSplitter[4]
-    Left = 361
-    Height = 255
+    Left = 340
+    Height = 270
     Top = 25
     Width = 5
     Align = alRight
     ResizeAnchor = akRight
   end
   object Panel2: TPanel[5]
-    Left = 366
-    Height = 255
+    Left = 345
+    Height = 270
     Top = 25
-    Width = 113
+    Width = 173
     Align = alRight
-    ClientHeight = 255
-    ClientWidth = 113
+    ClientHeight = 270
+    ClientWidth = 173
     TabOrder = 4
     object ListBox: TListBox
       Left = 1
-      Height = 253
+      Height = 268
       Top = 1
-      Width = 111
+      Width = 171
       Align = alClient
       ItemHeight = 18
       OnClick = ListBoxClick

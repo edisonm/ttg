@@ -1,9 +1,10 @@
 inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
-  Left = 634
+  Left = 627
   Top = 60
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
+  Position = poDesktopCenter
   inherited TlBShow: TToolBar
     TabOrder = 3
     object BtnOk: TToolButton[1]

@@ -1,5 +1,5 @@
 inherited TeacherForm: TTeacherForm
-  Left = 726
+  Left = 719
   Height = 522
   Top = 375
   Width = 888
@@ -11,6 +11,7 @@ inherited TeacherForm: TTeacherForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  Position = poDesktopCenter
   inherited TlBShow: TToolBar
     Width = 888
     inherited DBNavigator: TDBNavigator

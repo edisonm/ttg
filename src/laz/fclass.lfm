@@ -1,11 +1,11 @@
 inherited ClassForm: TClassForm
-  Left = 329
+  Left = 322
   Top = 273
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Position = poDesigned
+  Position = poDesktopCenter
   inherited TlBShow: TToolBar
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
@@ -14,28 +14,27 @@ inherited ClassForm: TClassForm
   inherited Panel1: TPanel
     inherited DBGrid: TDBGrid
       Hint = 'Courses|Available courses'
-      Width = 323
+      Width = 329
       ShowHint = True
       OnDblClick = DBGridDblClick
     end
     object Splitter1: TSplitter[1]
-      Left = 324
-      Height = 253
+      Left = 330
+      Height = 262
       Top = 1
       Width = 5
       Align = alRight
       ResizeAnchor = akRight
     end
     object CheckListBox: TCheckListBox[2]
-      Left = 329
-      Height = 253
+      Left = 335
+      Height = 262
       Top = 1
       Width = 149
       Align = alRight
       ItemHeight = 0
       OnExit = CheckListBoxExit
       TabOrder = 1
-      TopIndex = -1
     end
   end
   inherited ImageList: TImageList

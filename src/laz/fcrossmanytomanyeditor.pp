@@ -181,11 +181,13 @@ begin
     FRowFieldKey := ARowDataSet.FindField(ARowFieldKey);
     FRowFieldName := ARowDataSet.FindField(ARowFieldName);
     FRowField := ARelDataSet.FindField(ARowField);
-    {$IFDEF FPC}
-    DrawGrid.OnPrepareCanvas := DrawGridPrepareCanvas;
-    {$ENDIF}
-    DrawGrid.OnDrawCell := DrawGridDrawCell;
     ReadData;
+{$IFDEF FPC}
+    DrawGrid.OnPrepareCanvas := DrawGridPrepareCanvas;
+{$ENDIF}
+    DrawGrid.OnDrawCell := DrawGridDrawCell;
+    DrawGrid.OnSelectCell := DrawGridSelectCell;
+    InvalidateData;
     {if not Visible then
       ShowModal;}
   finally
@@ -273,7 +275,6 @@ begin
   FEditing := False;
   DrawGrid.ColCount := FColDataset.RecordCount + 1;
   DrawGrid.RowCount := FRowDataset.RecordCount + 1;
-  InvalidateData;
 end;
 
 procedure TCrossManyToManyEditorForm.InvalidateData;
@@ -322,6 +323,7 @@ end;
 procedure TCrossManyToManyEditorForm.BtnCancelClick(Sender: TObject);
 begin
   ReadData;
+  InvalidateData;
 end;
 
 procedure TCrossManyToManyEditorForm.DrawGridDrawCell(Sender: TObject; aCol,

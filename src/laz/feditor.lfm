@@ -1,5 +1,5 @@
 object EditorForm: TEditorForm
-  Left = 752
+  Left = 745
   Height = 299
   Top = 129
   Width = 479
@@ -11,9 +11,8 @@ object EditorForm: TEditorForm
   Font.Name = 'MS Sans Serif'
   OnClose = FormClose
   OnDestroy = FormDestroy
-  Position = poMainFormCenter
+  Position = poDesktopCenter
   LCLVersion = '0.9.31'
-  Visible = True
   object TlBShow: TToolBar
     Left = 0
     Height = 25

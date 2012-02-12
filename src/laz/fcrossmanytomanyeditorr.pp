@@ -112,7 +112,8 @@ procedure TCrossManyToManyEditorRForm.DrawGridSelectCell(Sender: TObject;
   ACol, ARow: Integer; var CanSelect: Boolean);
 begin
   inherited DrawGridSelectCell(Sender, ACol, ARow, CanSelect);
-  if CanSelect and (ACol < Length(FRel)) and (ARow < Length(FRel[0])) then
+  if CanSelect and (ACol < Length(FRel)) and (ARow < Length(FRel[0]))
+    and (FRel[ACol - 1, ARow - 1] < ListBox.Count) then
   begin
     with DrawGrid do
       ListBox.ItemIndex := FRel[ACol - 1, ARow - 1];
@@ -291,10 +292,11 @@ begin
           FRel[VCol - 1, VRow - 1] := ListBox.ItemIndex;
 {$IFDEF FPC}
 	InvalidateCell(VCol, VRow);
-{$ELSE}
-        Invalidate;
 {$ENDIF}
       end;
+{$IFNDEF FPC}
+    Invalidate;
+{$ENDIF}
   end;
 end;
 
@@ -335,10 +337,11 @@ begin
         FRel[VCol - 1, VRow - 1] := -1;
 {$IFDEF FPC}
 	InvalidateCell(VCol, VRow);
-{$ELSE}
-        Invalidate;
 {$ENDIF}
       end;
+{$IFNDEF FPC}
+    Invalidate;
+{$ENDIF}
     ListBox.ItemIndex := -1;
   end;
 end;
