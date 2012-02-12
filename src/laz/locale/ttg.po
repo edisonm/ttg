@@ -761,10 +761,6 @@ msgctxt "teditorform.tlbshow.caption"
 msgid "Show"
 msgstr ""
 
-#: tform1.caption
-msgid "Form1"
-msgstr ""
-
 #: tmainform.actabout.caption
 msgid "About..."
 msgstr ""

@@ -22,11 +22,9 @@ msgid "Subject"
 msgstr "Materia"
 
 #: dsourcebaseconsts.sflassistance_idteacher
-#, fuzzy
-#| msgid "Teacher"
 msgctxt "dsourcebaseconsts.sflassistance_idteacher"
 msgid "Assistant"
-msgstr "Profesor"
+msgstr "Ayudante"
 
 #: dsourcebaseconsts.sflclass_idgroupid
 msgctxt "dsourcebaseconsts.sflclass_idgroupid"
@@ -390,7 +388,7 @@ msgstr "Inicio"
 
 #: dsourcebaseconsts.stbassistance
 msgid "Assistance"
-msgstr ""
+msgstr "Ayudas"
 
 #: dsourcebaseconsts.stbclass
 msgctxt "dsourcebaseconsts.stbclass"
@@ -424,7 +422,7 @@ msgstr "Horas academicas"
 
 #: dsourcebaseconsts.stbjoinedclass
 msgid "JoinedClass"
-msgstr ""
+msgstr "Clases unidas"
 
 #: dsourcebaseconsts.stblevel
 msgctxt "dsourcebaseconsts.stblevel"
@@ -710,43 +708,43 @@ msgstr "Aceptar|Aceptar"
 
 #: tdbexplorerform.btnexecutescript.caption
 msgid "Execute Script"
-msgstr ""
+msgstr "Ejecutar script"
 
 #: tdbexplorerform.btnopenquery.caption
 msgid "Open Query"
-msgstr ""
+msgstr "Abrir consulta"
 
 #: tdbexplorerform.btnopenscript.caption
 msgid "Open Script"
-msgstr ""
+msgstr "Abrir script"
 
 #: tdbexplorerform.btnsaveresults.caption
 msgid "Save Results"
-msgstr ""
+msgstr "Guardar resultados"
 
 #: tdbexplorerform.btnsavescript.caption
 msgid "Save Script"
-msgstr ""
+msgstr "Guardar script"
 
 #: tdbexplorerform.btnshowmetadata.caption
 msgid "Show Metadata"
-msgstr ""
+msgstr "Mostrar metadatos"
 
 #: tdbexplorerform.btnshowtable.caption
 msgid "Show Table"
-msgstr ""
+msgstr "Mostrar tabla"
 
 #: tdbexplorerform.caption
 msgid "Database Explorer"
-msgstr ""
+msgstr "Base de datos"
 
 #: tdbexplorerform.cbxmetadatatype.hint
 msgid "Metadata Type"
-msgstr ""
+msgstr "Tipo de metadato"
 
 #: tdbexplorerform.cbxtable.hint
 msgid "Tables"
-msgstr ""
+msgstr "Tablas"
 
 #: teditorform.btnshow.hint
 msgctxt "TEDITORFORM.BTNSHOW.HINT"
@@ -762,10 +760,6 @@ msgstr "EditorForm"
 msgctxt "teditorform.tlbshow.caption"
 msgid "Show"
 msgstr "Presentar"
-
-#: tform1.caption
-msgid "Form1"
-msgstr ""
 
 #: tmainform.actabout.caption
 msgid "About..."
@@ -827,7 +821,7 @@ msgstr "Dias laborables|Dias laborables"
 
 #: tmainform.actdbexplorer.caption
 msgid "Database Explorer..."
-msgstr ""
+msgstr "Base de datos..."
 
 #: tmainform.actexit.caption
 msgid "Exit"
@@ -1713,7 +1707,7 @@ msgstr "Cruce de profesores"
 
 #: uttgconsts.sclass
 msgid "Class"
-msgstr ""
+msgstr "Clase"
 
 #: uttgconsts.sclasstimeslottosessionoverflow
 msgid "Overflow of pattern for ClassTimeSlotToSession: Class %d-%d Duration %d"
@@ -1778,11 +1772,11 @@ msgstr "Detalle"
 
 #: uttgconsts.sdonotappearsin
 msgid "do not appears in"
-msgstr ""
+msgstr "no aparece en"
 
 #: uttgconsts.sdonothaveteacher
 msgid "do not have teacher"
-msgstr ""
+msgstr "no tiene profesor"
 
 #: uttgconsts.sdownhillalgorithm
 msgid "Downhill Algorithm"
