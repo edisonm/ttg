@@ -10,7 +10,7 @@ object MessageViewForm: TMessageViewForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
-  Position = poScreenCenter
+  Position = poDesktopCenter
   LCLVersion = '0.9.31'
   object Panel1: TPanel
     Left = 0

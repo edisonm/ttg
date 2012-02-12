@@ -10,7 +10,7 @@ object SplashForm: TSplashForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
-  Position = poScreenCenter
+  Position = poDesktopCenter
   LCLVersion = '0.9.31'
   object Image1: TImage
     Left = 0

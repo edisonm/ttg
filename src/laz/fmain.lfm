@@ -48,7 +48,7 @@ object MainForm: TMainForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Position = poScreenCenter
+  Position = poDesktopCenter
   LCLVersion = '0.9.31'
   object StatusBar: TStatusBar
     Left = 0

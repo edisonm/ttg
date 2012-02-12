@@ -1484,8 +1484,8 @@ msgstr ""
 msgid "Subject restrictions|Input subject restrictions"
 msgstr ""
 
-#: tsubjectform.subjectform.caption
-msgctxt "TSUBJECTFORM.SUBJECTFORM.CAPTION"
+#: tsubjectform.caption
+msgctxt "TSUBJECTFORM.CAPTION"
 msgid "Subjects"
 msgstr ""
 

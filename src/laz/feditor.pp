@@ -108,6 +108,7 @@ begin
     Caption := FAction.Caption;
   end;
   LoadConfig;
+  Show;
 end;
 
 procedure TEditorForm.LoadConfig;

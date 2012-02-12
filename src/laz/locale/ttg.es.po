@@ -1484,8 +1484,8 @@ msgstr "Prohibiciones de materia"
 msgid "Subject restrictions|Input subject restrictions"
 msgstr "Prohibiciones de materia|Ingresar las prohibiciones de materia"
 
-#: tsubjectform.subjectform.caption
-msgctxt "TSUBJECTFORM.SUBJECTFORM.CAPTION"
+#: tsubjectform.caption
+msgctxt "tsubjectform.caption"
 msgid "Subjects"
 msgstr "Materias"
 
