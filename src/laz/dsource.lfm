@@ -45,7 +45,7 @@ inherited SourceDataModule: TSourceDataModule
     DataSource = DSDistribution
     MasterFields = 'IdTeacher'
     LinkedFields = 'IdTeacher'
-    Params = <    
+    Params = <
       item
         DataType = ftInteger
         Name = 'IdTeacher'

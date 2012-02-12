@@ -159,7 +159,6 @@ begin
     TbAssistance.Close;
     QuTeacher.Close;
     QuTeacher.Open;
-    //WriteLn('*** |QuTeacher|=' + IntToStr(QuTeacher.RecordCount));
     TbAssistance.Open;
   end;
 end;
