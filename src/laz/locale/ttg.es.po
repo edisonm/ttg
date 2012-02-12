@@ -564,7 +564,7 @@ msgid "Break TT. Teachers:"
 msgstr "Fracc. h. profesores:"
 
 #: tconfigform.lblbrokensubjects.caption
-msgid "Broken Subjects:"
+msgid "Broken Sessions:"
 msgstr "Materias cortadas:"
 
 #: tconfigform.lblcomments.caption
@@ -1240,7 +1240,7 @@ msgstr " Valor:"
 
 #: tprogressform.pnlbrokensession.caption
 msgid " Broken Subjects:"
-msgstr " Materias cortadas"
+msgstr " Materias cortadas:"
 
 #: tprogressform.pnlbrokensessionnumber.caption
 msgctxt "TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION"
@@ -1679,7 +1679,7 @@ msgid "Broken TT. Teachers"
 msgstr "Fracc. h. profesores"
 
 #: uttgconsts.sbrokensession
-msgid "Broken Subjects"
+msgid "Broken Sessions"
 msgstr "Materias cortadas"
 
 #: uttgconsts.schangeswillbelostwarning

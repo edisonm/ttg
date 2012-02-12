@@ -14,7 +14,7 @@ resourcestring
   SAssign = 'Assign';
   SBaseTimetable = 'Base Timetable: %d';
   SBreakTimetableTeacher = 'Broken TT. Teachers';
-  SBrokenSession = 'Broken Subjects';
+  SBrokenSession = 'Broken Sessions';
   SChangesWillBeLostWarning = 'Changes will be lost, are you sure?';
   SClashRoomType = 'Clash of Classrooms';
   SClashSubject = 'Clash of Subjects';

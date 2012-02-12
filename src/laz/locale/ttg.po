@@ -564,7 +564,7 @@ msgid "Break TT. Teachers:"
 msgstr ""
 
 #: tconfigform.lblbrokensubjects.caption
-msgid "Broken Subjects:"
+msgid "Broken Sessions:"
 msgstr ""
 
 #: tconfigform.lblcomments.caption
@@ -1677,7 +1677,7 @@ msgid "Broken TT. Teachers"
 msgstr ""
 
 #: uttgconsts.sbrokensession
-msgid "Broken Subjects"
+msgid "Broken Sessions"
 msgstr ""
 
 #: uttgconsts.schangeswillbelostwarning

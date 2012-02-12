@@ -442,7 +442,7 @@ object ConfigForm: TConfigForm
         Height = 15
         Top = 86
         Width = 96
-        Caption = 'Broken Subjects:'
+        Caption = 'Broken Sessions:'
         ParentColor = False
       end
       object lblJoinedSubjects: TLabel
