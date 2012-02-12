@@ -2,7 +2,7 @@
 unit dsourcebaseconsts;
 
 (*
-  12/02/2012 1:55
+  12/02/2012 22:41
 
   Warning:
 
@@ -96,7 +96,7 @@ resourcestring
   SFlAssistance_IdLevel = 'Level';
   SFlAssistance_IdSpecialization = 'Specialization';
   SFlAssistance_IdGroupId = 'Group';
-  SFlAssistance_IdTeacher = 'Teacher';
+  SFlAssistance_IdTeacher = 'Assistant';
   SFlTeacherRestrictionType_IdTeacherRestrictionType = 'Id';
   SFlTeacherRestrictionType_NaTeacherRestrictionType = 'Name';
   SFlTeacherRestrictionType_ColTeacherRestrictionType = 'Color';

@@ -22,8 +22,10 @@ msgid "Subject"
 msgstr "Materia"
 
 #: dsourcebaseconsts.sflassistance_idteacher
+#, fuzzy
+#| msgid "Teacher"
 msgctxt "dsourcebaseconsts.sflassistance_idteacher"
-msgid "Teacher"
+msgid "Assistant"
 msgstr "Profesor"
 
 #: dsourcebaseconsts.sflclass_idgroupid

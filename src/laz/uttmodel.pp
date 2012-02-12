@@ -130,7 +130,7 @@ type
 
     TODO:
     2011-03-13:
-    - DONE Change implementation of NonScatteredSubject for a more compositional formula
+    - DONE Change implementation of NonScatteredSubject with a more compositional formula
     - DONE Remove FClassSubjectDay{Min,Max}Hour
     - DONE IncCount and DecCount must be methods
 
@@ -1248,6 +1248,7 @@ begin
         while TimeSlot <= TimeSlot2 do
         begin
           Session := TimeSlotToSession[TimeSlot];
+          Duration := FSessionToDuration[Session];
           if Session >= 0 then
           begin
             if Distribution = FSessionToDistribution[Session] then
@@ -1257,6 +1258,7 @@ begin
               Inc(FTeacherTimeSlotCount[Teacher, TimeSlot], Delta);
             end;
           end;
+          Inc(TimeSlot, Duration);
         end
       end;
     end;

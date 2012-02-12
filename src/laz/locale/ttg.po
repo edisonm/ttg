@@ -23,7 +23,7 @@ msgstr ""
 
 #: dsourcebaseconsts.sflassistance_idteacher
 msgctxt "dsourcebaseconsts.sflassistance_idteacher"
-msgid "Teacher"
+msgid "Assistant"
 msgstr ""
 
 #: dsourcebaseconsts.sflclass_idgroupid

@@ -638,6 +638,7 @@ begin
     begin
       DbZConnection.ExecuteDirect(LazarusResources.Find('ttg', 'SQL').Value);
       PrepareTables;
+      QuTeacher.Open;
       OpenTables;
       NewDatabase;
       ConfigStorage.SetDefaults;
