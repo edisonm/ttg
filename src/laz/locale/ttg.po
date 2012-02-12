@@ -639,7 +639,7 @@ msgstr ""
 
 #: tconfigform.lblseed.caption
 msgctxt "TCONFIGFORM.LBLSEED.CAPTION"
-msgid "Semilla:"
+msgid "Seed:"
 msgstr ""
 
 #: tconfigform.lblshareddirectory.caption

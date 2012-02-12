@@ -639,7 +639,7 @@ msgstr "Periodo Lectivo:"
 
 #: tconfigform.lblseed.caption
 msgctxt "TCONFIGFORM.LBLSEED.CAPTION"
-msgid "Semilla:"
+msgid "Seed:"
 msgstr "Semilla:"
 
 #: tconfigform.lblshareddirectory.caption

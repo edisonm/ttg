@@ -2467,7 +2467,6 @@ PopulationSize=7
 MaxIteration=10000
 CrossProbability=0,3
 MutationProbability1=0,2
-OrdenMutacion1=3
 MutationProbability2=0,2
 ReparationProbability=0,1
 TeacherTimetableShowText=AbLevel + " " + NaGroupId + " " + NaSubject

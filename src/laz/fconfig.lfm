@@ -213,7 +213,7 @@ object ConfigForm: TConfigForm
         Height = 15
         Top = 36
         Width = 46
-        Caption = 'Semilla:'
+        Caption = 'Seed:'
         ParentColor = False
       end
       object Label29: TLabel
