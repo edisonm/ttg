@@ -809,7 +809,7 @@ begin
     Values['MainForm_Top'] := IntToStr(Top);
     Values['MainForm_Left'] := IntToStr(Left);
     Values['MainForm_Width'] := IntToStr(Width);
-    Values['MainForm_Height'] := IntToStr(Height);
+    {Values['MainForm_Height'] := IntToStr(Height);}
     Values['MainForm_WindowState'] := IntToStr(Ord(WindowState));
     Values['SaveDialog_FileName'] := SaveDialog.FileName;
     Values['SaveDialogCSV_FileName'] := SaveDialogCSV.FileName;

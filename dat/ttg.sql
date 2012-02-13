@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  12/02/2012 22:41
+  13/02/2012 2:31
 
   Warning:
 
@@ -89,17 +89,17 @@ CREATE TABLE IF NOT EXISTS `Distribution`(
 );
 CREATE TABLE IF NOT EXISTS `JoinedClass`(
     `IdSubject` integer NOT NULL,
-    `IdLevel0` integer NOT NULL,
-    `IdSpecialization0` integer NOT NULL,
-    `IdGroupId0` integer NOT NULL,
     `IdLevel` integer NOT NULL,
     `IdSpecialization` integer NOT NULL,
     `IdGroupId` integer NOT NULL,
-  CONSTRAINT DistributionJoinedClass UNIQUE(IdSubject,IdLevel0,IdSpecialization0,IdGroupId0),
-  CONSTRAINT PrimaryKey PRIMARY KEY(IdSubject,IdLevel0,IdSpecialization0,IdGroupId0),
-  CONSTRAINT ClassJoinedClass FOREIGN KEY (IdLevel,IdSpecialization,IdGroupId)
+    `IdLevel1` integer NOT NULL,
+    `IdSpecialization1` integer NOT NULL,
+    `IdGroupId1` integer NOT NULL,
+  CONSTRAINT DistributionJoinedClass UNIQUE(IdSubject,IdLevel,IdSpecialization,IdGroupId),
+  CONSTRAINT PrimaryKey PRIMARY KEY(IdSubject,IdLevel,IdSpecialization,IdGroupId),
+  CONSTRAINT ClassJoinedClass FOREIGN KEY (IdLevel1,IdSpecialization1,IdGroupId1)
     REFERENCES Class(IdLevel,IdSpecialization,IdGroupId) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT DistributionJoinedClass FOREIGN KEY (IdSubject,IdLevel0,IdSpecialization0,IdGroupId0)
+  CONSTRAINT DistributionJoinedClass FOREIGN KEY (IdSubject,IdLevel,IdSpecialization,IdGroupId)
     REFERENCES Distribution(IdSubject,IdLevel,IdSpecialization,IdGroupId) ON UPDATE CASCADE ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS `SubjectRestrictionType`(

@@ -732,35 +732,28 @@ var
   end;
   procedure LoadJoinedClass;
   var
-    JoinedClass, VClass0, Course0, GroupId0, Level0, Specialization0, VClass,
+    JoinedClass, VClass1, Course1, GroupId1, Level1, Specialization1, VClass,
     Course, GroupId, Level, Specialization, Subject,  Distribution: Integer;
-    VFieldSubject, VFieldLevel0, VFieldSpecialization0, VFieldGroupId0,
-    VFieldLevel, VFieldSpecialization, VFieldGroupId: TField;
+    VFieldSubject, VFieldLevel, VFieldSpecialization, VFieldGroupId,
+    VFieldLevel1, VFieldSpecialization1, VFieldGroupId1: TField;
   begin
     with SourceDataModule.TbJoinedClass do
     begin
-      IndexFieldNames := 'IdSubject;IdLevel0;IdSpecialization0;IdGroupId0;IdLevel;IdSpecialization;IdGroupId';
+      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdGroupId;IdLevel1;IdSpecialization1;IdGroupId1';
       First;
       FJoinedClassCount := RecordCount;
       SetLength(FJoinedClassToDistribution, FJoinedClassCount);
       SetLength(FJoinedClassToClass, FJoinedClassCount);
       VFieldSubject := FindField('IdSubject');
-      VFieldLevel0 := FindField('IdLevel0');
-      VFieldSpecialization0 := FindField('IdSpecialization0');
-      VFieldGroupId0 := FindField('IdGroupId0');
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
       VFieldGroupId := FindField('IdGroupId');
+      VFieldLevel1 := FindField('IdLevel1');
+      VFieldSpecialization1 := FindField('IdSpecialization1');
+      VFieldGroupId1 := FindField('IdGroupId1');
       for JoinedClass := 0 to FJoinedClassCount - 1 do
       begin
         Subject := FIdSubjectToSubject[VFieldSubject.AsInteger - FMinIdSubject];
-        Level0 := FIdLevelToLevel[VFieldLevel0.AsInteger - FMinIdLevel];
-        Specialization0 := FIdSpecializationToSpecialization
-          [VFieldSpecialization0.AsInteger - FMinIdSpecialization];
-        Course0 := FLevelSpecializationToCourse[Level0, Specialization0];
-        GroupId0 := FIdGroupIdToGroupId[VFieldGroupId0.AsInteger -
-          FMinIdGroupId];
-        VClass0 := FCourseGroupIdToClass[Course0, GroupId0];
         Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
@@ -768,7 +761,14 @@ var
         GroupId := FIdGroupIdToGroupId[VFieldGroupId.AsInteger -
           FMinIdGroupId];
         VClass := FCourseGroupIdToClass[Course, GroupId];
-        Distribution := FClassSubjectToDistribution[VClass0, Subject];
+        Level1 := FIdLevelToLevel[VFieldLevel1.AsInteger - FMinIdLevel];
+        Specialization1 := FIdSpecializationToSpecialization
+          [VFieldSpecialization1.AsInteger - FMinIdSpecialization];
+        Course1 := FLevelSpecializationToCourse[Level1, Specialization1];
+        GroupId1 := FIdGroupIdToGroupId[VFieldGroupId1.AsInteger -
+          FMinIdGroupId];
+        VClass1 := FCourseGroupIdToClass[Course, GroupId];
+        Distribution := FClassSubjectToDistribution[VClass1, Subject];
         FJoinedClassToDistribution[JoinedClass] := Distribution;
         FJoinedClassToClass[JoinedClass] := VClass;
         Next;
@@ -1100,8 +1100,9 @@ end;
 procedure TTimetable.DeltaValues(Delta, AClass, TimeSlot1, TimeSlot2: Integer);
 var
   SubjectRestrictionType, TeacherRestrictionType, TimeSlot, TimeSlot0, Day, DDay,
-  Day1, Day2, Hour, Session, Teacher, RoomType, Duration, Subject, Limit,
-  Assistance, Distribution, DeltaBreakTimetableTeacher, MinTimeSlot, MaxTimeSlot: Integer;
+  Day1, Day2, Hour, Session, Teacher, RoomType, Duration, Subject, Limit, Assistance,
+  JoinedClass, Distribution, DeltaBreakTimetableTeacher, MinTimeSlot, MaxTimeSlot,
+  Class1: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
   SubjectATeacher: TDynamicIntegerArray;
 begin
@@ -1240,12 +1241,11 @@ begin
     end;
     for Assistance := 0 to FAssistanceCount - 1 do
     begin
-      Teacher := FAssistanceToTeacher[Assistance];
       Distribution := FAssistanceToDistribution[Assistance];
       if AClass = FDistributionToClass[Distribution] then
       begin
-        TimeSlot := TimeSlot1;
-        while TimeSlot <= TimeSlot2 do
+        Teacher := FAssistanceToTeacher[Assistance];
+        for TimeSlot := TimeSlot1 to TimeSlot2 do
         begin
           Session := TimeSlotToSession[TimeSlot];
           Duration := FSessionToDuration[Session];
@@ -1258,8 +1258,28 @@ begin
               Inc(FTeacherTimeSlotCount[Teacher, TimeSlot], Delta);
             end;
           end;
-          Inc(TimeSlot, Duration);
         end
+      end;
+    end;
+    for JoinedClass := 0 to FJoinedClassCount - 1 do
+    begin
+      Distribution := FJoinedClassToDistribution[JoinedClass];
+      if AClass = FDistributionToClass[Distribution] then
+      begin
+        Class1 := FJoinedClassToClass[JoinedClass];
+        for TimeSlot := TimeSlot1 to TimeSlot2 do
+        begin
+          Session := TimeSlotToSession[TimeSlot];
+          Duration := FSessionToDuration[Session];
+          if Session >= 0 then
+          begin
+            if Distribution = FSessionToDistribution[Session] then
+            begin
+              if FClassTimeSlotToSession[Class1, TimeSlot] >= 0 then
+                Inc(FClashSubject, Delta);
+            end;
+          end;
+        end;
       end;
     end;
   end;

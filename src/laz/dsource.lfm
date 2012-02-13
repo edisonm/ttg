@@ -12,16 +12,8 @@ inherited SourceDataModule: TSourceDataModule
     left = 544
     top = 24
   end
-  inherited TbDay: TZTable
-    BeforeDelete = DataSetBeforeDelete
-  end
   inherited TbDistribution: TZTable
     OnCalcFields = TbDistributionCalcFields
-    BeforePost = TbDistributionBeforePost
-  end
-  inherited TbTimetable: TZTable
-    BeforePost = DataSetBeforePost
-    BeforeDelete = DataSetBeforeDelete
   end
   object ZTables: TZReadOnlyQuery[41]
     Connection = DbZConnection

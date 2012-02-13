@@ -2,7 +2,7 @@
 unit dsourcebase;
 
 (*
-  12/02/2012 22:41
+  13/02/2012 2:31
 
   Warning:
 
@@ -168,12 +168,12 @@ begin
     Add('TbDistribution.IdRoomType=' + SFlDistribution_IdRoomType);
     Add('TbDistribution.Composition=' + SFlDistribution_Composition);
     Add('TbJoinedClass.IdSubject=' + SFlJoinedClass_IdSubject);
-    Add('TbJoinedClass.IdLevel0=' + SFlJoinedClass_IdLevel0);
-    Add('TbJoinedClass.IdSpecialization0=' + SFlJoinedClass_IdSpecialization0);
-    Add('TbJoinedClass.IdGroupId0=' + SFlJoinedClass_IdGroupId0);
     Add('TbJoinedClass.IdLevel=' + SFlJoinedClass_IdLevel);
     Add('TbJoinedClass.IdSpecialization=' + SFlJoinedClass_IdSpecialization);
     Add('TbJoinedClass.IdGroupId=' + SFlJoinedClass_IdGroupId);
+    Add('TbJoinedClass.IdLevel1=' + SFlJoinedClass_IdLevel1);
+    Add('TbJoinedClass.IdSpecialization1=' + SFlJoinedClass_IdSpecialization1);
+    Add('TbJoinedClass.IdGroupId1=' + SFlJoinedClass_IdGroupId1);
     Add('TbSubjectRestrictionType.IdSubjectRestrictionType=' + SFlSubjectRestrictionType_IdSubjectRestrictionType);
     Add('TbSubjectRestrictionType.NaSubjectRestrictionType=' + SFlSubjectRestrictionType_NaSubjectRestrictionType);
     Add('TbSubjectRestrictionType.ColSubjectRestrictionType=' + SFlSubjectRestrictionType_ColSubjectRestrictionType);

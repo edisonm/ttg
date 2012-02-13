@@ -149,7 +149,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 11
     Connection = DbZConnection
     TableName = 'JoinedClass'
-    IndexFieldNames = 'IdSubject;IdLevel0;IdSpecialization0;IdGroupId0'
+    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdGroupId'
     Left = 144
     Top = 252
   end

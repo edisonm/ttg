@@ -2,7 +2,7 @@
 unit dsourcebaseconsts;
 
 (*
-  12/02/2012 22:41
+  13/02/2012 2:31
 
   Warning:
 
@@ -80,12 +80,12 @@ resourcestring
   SFlDistribution_IdRoomType = 'Room Type';
   SFlDistribution_Composition = 'Composition';
   SFlJoinedClass_IdSubject = 'Subject';
-  SFlJoinedClass_IdLevel0 = 'Level';
-  SFlJoinedClass_IdSpecialization0 = 'Specialization';
-  SFlJoinedClass_IdGroupId0 = 'Group';
   SFlJoinedClass_IdLevel = 'Level';
   SFlJoinedClass_IdSpecialization = 'Specialization';
   SFlJoinedClass_IdGroupId = 'Group';
+  SFlJoinedClass_IdLevel1 = 'Level';
+  SFlJoinedClass_IdSpecialization1 = 'Specialization';
+  SFlJoinedClass_IdGroupId1 = 'Group';
   SFlSubjectRestrictionType_IdSubjectRestrictionType = 'Id';
   SFlSubjectRestrictionType_NaSubjectRestrictionType = 'Name';
   SFlSubjectRestrictionType_ColSubjectRestrictionType = 'Color';
