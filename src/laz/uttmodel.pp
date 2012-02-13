@@ -48,19 +48,18 @@ type
       FSessionToSubject, FSessionToRoomType, FRoomTypeToNumber,
       FSubjectRestrictionToSubject, FSubjectRestrictionToTimeSlot,
       FSubjectRestrictionToSubjectRestrictionType, FAssistanceToDistribution,
-      FAssistanceToTeacher, FTeacherRestrictionToTeacher, FJoinedClassToDistribution,
-      FJoinedClassToClass,  FTeacherRestrictionToTimeSlot,
+      FAssistanceToTeacher, FTeacherRestrictionToTeacher, FTeacherRestrictionToTimeSlot,
       FTeacherRestrictionToTeacherRestrictionType, FDistributionToRoomType,
       FClassToCourse, FClassToLevel, FClassToGroupId, FDistributionToClass,
       FClassToSpecialization, FClassToSessionCount: TDynamicIntegerArray;
+    FSubjectRestrictionTypeToValue, FTeacherRestrictionTypeToValue: TDynamicIntegerArray;
+    FSubjectRestrictionToValue, FTeacherRestrictionToValue: TDynamicIntegerArray;
     FSessionToDuration: TSessionArray;
     FDayHourToTimeSlot, FLevelSpecializationToCourse, FCourseGroupIdToClass,
       FClassSubjectToTeacher, FClassSubjectToDistribution, FClassSubjectCount,
       FTimetableDetailPattern, FDistributionToSessions: TDynamicIntegerArrayArray;
-    FTeacherTimeSlotToTeacherRestrictionType,
-      FSubjectTimeSlotToSubjectRestrictionType: TDynamicIntegerArrayArray;
-    FSubjectRestrictionTypeToValue, FTeacherRestrictionTypeToValue: TDynamicIntegerArray;
-    FSubjectRestrictionToValue, FTeacherRestrictionToValue: TDynamicIntegerArray;
+    FTeacherTimeSlotToTeacherRestrictionType, FClassJoinedClassToDistribution,
+      FClassJoinedClassToClass, FSubjectTimeSlotToSubjectRestrictionType: TDynamicIntegerArrayArray;
     FSubjectCount, FSubjectRestrictionTypeCount, FTeacherRestrictionTypeCount,
       FClassCount, FDayCount, FHourCount, FTimeSlotCount, FTeacherCount, FCourseCount,
       FLevelCount, FSpecializationCount, FRoomTypeCount, FDistributionCount,
@@ -732,7 +731,7 @@ var
   end;
   procedure LoadJoinedClass;
   var
-    JoinedClass, VClass1, Course1, GroupId1, Level1, Specialization1, VClass,
+    JoinedClass, Counter, VClass1, Course1, GroupId1, Level1, Specialization1, VClass,
     Course, GroupId, Level, Specialization, Subject,  Distribution: Integer;
     VFieldSubject, VFieldLevel, VFieldSpecialization, VFieldGroupId,
     VFieldLevel1, VFieldSpecialization1, VFieldGroupId1: TField;
@@ -742,8 +741,8 @@ var
       IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdGroupId;IdLevel1;IdSpecialization1;IdGroupId1';
       First;
       FJoinedClassCount := RecordCount;
-      SetLength(FJoinedClassToDistribution, FJoinedClassCount);
-      SetLength(FJoinedClassToClass, FJoinedClassCount);
+      SetLength(FClassJoinedClassToDistribution, FClassCount, 0);
+      SetLength(FClassJoinedClassToClass, FClassCount, 0);
       VFieldSubject := FindField('IdSubject');
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
@@ -769,8 +768,11 @@ var
         GroupId1 := FIdGroupIdToGroupId[VFieldGroupId1.AsInteger -
           FMinIdGroupId];
         VClass1 := FCourseGroupIdToClass[Course1, GroupId1];
-        FJoinedClassToDistribution[JoinedClass] := Distribution;
-        FJoinedClassToClass[JoinedClass] := VClass1;
+        Counter := Length(FClassJoinedClassToDistribution[VClass]);
+        SetLength(FClassJoinedClassToDistribution[VClass], Counter + 1);
+        SetLength(FClassJoinedClassToClass[VClass], Counter + 1);
+        FClassJoinedClassToDistribution[VClass, Counter] := Distribution;
+        FClassJoinedClassToClass[VClass, Counter] := VClass1;
         Next;
       end;
       First;
@@ -1261,23 +1263,20 @@ begin
         end
       end;
     end;
-    for JoinedClass := 0 to FJoinedClassCount - 1 do
+    for JoinedClass := 0 to High(FClassJoinedClassToDistribution[AClass]) do
     begin
-      Distribution := FJoinedClassToDistribution[JoinedClass];
-      if AClass = FDistributionToClass[Distribution] then
+      Distribution := FClassJoinedClassToDistribution[AClass, JoinedClass];
+      Class1 := FClassJoinedClassToClass[AClass, JoinedClass];
+      for TimeSlot := TimeSlot1 to TimeSlot2 do
       begin
-        Class1 := FJoinedClassToClass[JoinedClass];
-        for TimeSlot := TimeSlot1 to TimeSlot2 do
+        Session := TimeSlotToSession[TimeSlot];
+        Duration := FSessionToDuration[Session];
+        if Session >= 0 then
         begin
-          Session := TimeSlotToSession[TimeSlot];
-          Duration := FSessionToDuration[Session];
-          if Session >= 0 then
+          if Distribution = FSessionToDistribution[Session] then
           begin
-            if Distribution = FSessionToDistribution[Session] then
-            begin
-              if FClassTimeSlotToSession[Class1, TimeSlot] >= 0 then
-                Inc(FClashSubject, Delta);
-            end;
+            if FClassTimeSlotToSession[Class1, TimeSlot] >= 0 then
+              Inc(FClashSubject, Delta);
           end;
         end;
       end;
