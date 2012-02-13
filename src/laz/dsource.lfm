@@ -55,16 +55,16 @@ inherited SourceDataModule: TSourceDataModule
   object QuClass: TZReadOnlyQuery[43]
     Connection = DbZConnection
     SQL.Strings = (
-      'SELECT Class.IdLevel, Class.IdSpecialization, Class.IdGroupId,'
+      'SELECT Class.IdLevel, Class.IdSpecialization, Class.IdGroup,'
       ' AbLevel || " " || AbSpecialization || " " || NaGroupId AS NameClass'
       'FROM'
       ' Class INNER JOIN Level ON Class.IdLevel=Level.IdLevel'
       ' INNER JOIN Specialization ON Class.IdSpecialization=Specialization.IdSpecialization'
-      ' INNER JOIN GroupId ON Class.IdGroupId = GroupId.IdGroupId'
+      ' INNER JOIN GroupId ON Class.IdGroup = GroupId.IdGroup'
       'WHERE'
       ' Class.IdLevel<>:IdLevel OR'
       ' Class.IdSpecialization<>:IdSpecialization OR'
-      ' Class.IdGroupId<>:IdGroupId'
+      ' Class.IdGroup<>:IdGroup'
     )
     Params = <    
       item
@@ -79,12 +79,12 @@ inherited SourceDataModule: TSourceDataModule
       end    
       item
         DataType = ftInteger
-        Name = 'IdGroupId'
+        Name = 'IdGroup'
         ParamType = ptUnknown
       end>
     DataSource = DSDistribution
-    MasterFields = 'IdLevel,IdSpecialization,IdGroupId'
-    LinkedFields = 'IdLevel;IdSpecialization;IdGroupId'
+    MasterFields = 'IdLevel,IdSpecialization,IdGroup'
+    LinkedFields = 'IdLevel;IdSpecialization;IdGroup'
     left = 552
     top = 248
     ParamData = <    
@@ -100,7 +100,7 @@ inherited SourceDataModule: TSourceDataModule
       end    
       item
         DataType = ftInteger
-        Name = 'IdGroupId'
+        Name = 'IdGroup'
         ParamType = ptUnknown
       end>
   end

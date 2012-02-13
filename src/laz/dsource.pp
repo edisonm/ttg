@@ -71,7 +71,7 @@ begin
     with FindField('IdSubject') do DefaultExpression := AsString;
     with FindField('IdLevel') do DefaultExpression := AsString;
     with FindField('IdSpecialization') do DefaultExpression := AsString;
-    with FindField('IdGroupId') do DefaultExpression := AsString;
+    with FindField('IdGroup') do DefaultExpression := AsString;
     with FindField('IdRoomType') do DefaultExpression := AsString;
   end;
 end;
@@ -282,13 +282,13 @@ begin
   Field := TStringField.Create(TbClass);
   with Field do
   begin
-    DisplayLabel := SFlClass_IdGroupId;
+    DisplayLabel := SFlClass_IdGroup;
     FieldKind := fkLookup;
     FieldName := 'NaGroupId';
     LookupDataSet := TbGroupId;
-    LookupKeyFields := 'IdGroupId';
+    LookupKeyFields := 'IdGroup';
     LookupResultField := 'NaGroupId';
-    KeyFields := 'IdGroupId';
+    KeyFields := 'IdGroup';
     Size := 5;
     Lookup := True;
     DataSet := TbClass;
@@ -371,14 +371,14 @@ begin
   Field := TStringField.Create(TbDistribution.Owner);
   with Field do
   begin
-    DisplayLabel := SFlDistribution_IdGroupId;
+    DisplayLabel := SFlDistribution_IdGroup;
     DisplayWidth := 4;
     FieldKind := fkLookup;
     FieldName := 'NaGroupId';
     LookupDataSet := SourceDataModule.TbGroupId;
-    LookupKeyFields := 'IdGroupId';
+    LookupKeyFields := 'IdGroup';
     LookupResultField := 'NaGroupId';
-    KeyFields := 'IdGroupId';
+    KeyFields := 'IdGroup';
     Size := 5;
     Lookup := True;
     DataSet := TbDistribution;
@@ -444,9 +444,9 @@ begin
     FieldKind := fkLookup;
     FieldName := 'NameClass';
     LookupDataSet := SourceDataModule.QuClass;
-    LookupKeyFields := 'IdLevel;IdSpecialization;IdGroupId';
+    LookupKeyFields := 'IdLevel;IdSpecialization;IdGroup';
     LookupResultField := 'NameClass';
-    KeyFields := 'IdLevel1;IdSpecialization1;IdGroupId1';
+    KeyFields := 'IdLevel1;IdSpecialization1;IdGroup1';
     Size := 5;
     Lookup := True;
     DataSet := TbJoinedClass;
@@ -463,13 +463,13 @@ begin
   TbHour.FindField('IdHour').Visible := False;
   TbCourse.FindField('IdLevel').Visible := False;
   TbCourse.FindField('IdSpecialization').Visible := False;
-  TbGroupId.FindField('IdGroupId').Visible := False;
+  TbGroupId.FindField('IdGroup').Visible := False;
   TbSubjectRestrictionType.FindField('IdSubjectRestrictionType').Visible := False;
   TbTimeSlot.FindField('IdDay').Visible := False;
   TbTimeSlot.FindField('IdHour').Visible := False;
   TbClass.FindField('IdLevel').Visible := False;
   TbClass.FindField('IdSpecialization').Visible := False;
-  TbClass.FindField('IdGroupId').Visible := False;
+  TbClass.FindField('IdGroup').Visible := False;
   TbTeacher.FindField('IdTeacher').Visible := False;
   with TbTimetableDetail do
   begin
@@ -477,7 +477,7 @@ begin
     FindField('IdSubject').Visible := False;
     FindField('IdLevel').Visible := False;
     FindField('IdSpecialization').Visible := False;
-    FindField('IdGroupId').Visible := False;
+    FindField('IdGroup').Visible := False;
     FindField('IdDay').Visible := False;
     FindField('IdHour').Visible := False;
   end;
@@ -487,7 +487,7 @@ begin
     FindField('IdSubject').Visible := False;
     FindField('IdLevel').Visible := False;
     FindField('IdSpecialization').Visible := False;
-    FindField('IdGroupId').Visible := False;
+    FindField('IdGroup').Visible := False;
     FindField('IdTeacher').Visible := False;
     FindField('IdRoomType').Visible := False;
   end;
@@ -496,7 +496,7 @@ begin
     FindField('IdSubject').Visible := False;
     FindField('IdLevel').Visible := False;
     FindField('IdSpecialization').Visible := False;
-    FindField('IdGroupId').Visible := False;
+    FindField('IdGroup').Visible := False;
     FindField('IdTeacher').Visible := False;
   end;
   with TbJoinedClass do
@@ -504,10 +504,10 @@ begin
     FindField('IdSubject').Visible := False;
     FindField('IdLevel').Visible := False;
     FindField('IdSpecialization').Visible := False;
-    FindField('IdGroupId').Visible := False;
+    FindField('IdGroup').Visible := False;
     FindField('IdLevel1').Visible := False;
     FindField('IdSpecialization1').Visible := False;
-    FindField('IdGroupId1').Visible := False;
+    FindField('IdGroup1').Visible := False;
   end;
 end;
 

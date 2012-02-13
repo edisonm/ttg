@@ -1,8 +1,8 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: dsourcebaseconsts.sflassistance_idgroupid
-msgctxt "dsourcebaseconsts.sflassistance_idgroupid"
+#: dsourcebaseconsts.sflassistance_idgroup
+msgctxt "dsourcebaseconsts.sflassistance_idgroup"
 msgid "Group"
 msgstr "Grupo"
 
@@ -26,8 +26,8 @@ msgctxt "dsourcebaseconsts.sflassistance_idteacher"
 msgid "Assistant"
 msgstr "Ayudante"
 
-#: dsourcebaseconsts.sflclass_idgroupid
-msgctxt "dsourcebaseconsts.sflclass_idgroupid"
+#: dsourcebaseconsts.sflclass_idgroup
+msgctxt "dsourcebaseconsts.sflclass_idgroup"
 msgid "Group Id"
 msgstr "Paralelo Id"
 
@@ -66,8 +66,8 @@ msgctxt "dsourcebaseconsts.sfldistribution_composition"
 msgid "Composition"
 msgstr "Composicion"
 
-#: dsourcebaseconsts.sfldistribution_idgroupid
-msgctxt "dsourcebaseconsts.sfldistribution_idgroupid"
+#: dsourcebaseconsts.sfldistribution_idgroup
+msgctxt "dsourcebaseconsts.sfldistribution_idgroup"
 msgid "Group Id"
 msgstr "Paralelo Id"
 
@@ -100,8 +100,8 @@ msgstr "Profesor"
 msgid "Room Count"
 msgstr "Numero de Aulas"
 
-#: dsourcebaseconsts.sflgroupid_idgroupid
-msgctxt "dsourcebaseconsts.sflgroupid_idgroupid"
+#: dsourcebaseconsts.sflgroupid_idgroup
+msgctxt "dsourcebaseconsts.sflgroupid_idgroup"
 msgid "Id"
 msgstr "Codigo"
 
@@ -125,13 +125,13 @@ msgctxt "dsourcebaseconsts.sflhour_nahour"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sfljoinedclass_idgroupid
-msgctxt "dsourcebaseconsts.sfljoinedclass_idgroupid"
+#: dsourcebaseconsts.sfljoinedclass_idgroup
+msgctxt "dsourcebaseconsts.sfljoinedclass_idgroup"
 msgid "Group"
 msgstr "Grupo"
 
-#: dsourcebaseconsts.sfljoinedclass_idgroupid1
-msgctxt "dsourcebaseconsts.sfljoinedclass_idgroupid1"
+#: dsourcebaseconsts.sfljoinedclass_idgroup1
+msgctxt "dsourcebaseconsts.sfljoinedclass_idgroup1"
 msgid "Group"
 msgstr "Grupo"
 
@@ -335,8 +335,8 @@ msgctxt "dsourcebaseconsts.sfltimetabledetail_idday"
 msgid "Day"
 msgstr "Day"
 
-#: dsourcebaseconsts.sfltimetabledetail_idgroupid
-msgctxt "dsourcebaseconsts.sfltimetabledetail_idgroupid"
+#: dsourcebaseconsts.sfltimetabledetail_idgroup
+msgctxt "dsourcebaseconsts.sfltimetabledetail_idgroup"
 msgid "Group"
 msgstr "Grupo"
 

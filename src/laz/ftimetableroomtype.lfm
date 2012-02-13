@@ -314,7 +314,7 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       '  TimetableDetail.IdHour,'
       '  Level.IdLevel,'
       '  Specialization.IdSpecialization,'
-      '  GroupId.IdGroupId,'
+      '  GroupId.IdGroup,'
       '  Subject.NaSubject,'
       '  AbLevel,'
       '  AbSpecialization,'
@@ -325,10 +325,10 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       '   ON (TimetableDetail.IdSubject=Distribution.IdSubject)'
       '  AND (TimetableDetail.IdLevel=Distribution.IdLevel)'
       '  AND (TimetableDetail.IdSpecialization=Distribution.IdSpecialization)'
-      '  AND (TimetableDetail.IdGroupId=Distribution.IdGroupId))'
+      '  AND (TimetableDetail.IdGroup=Distribution.IdGroup))'
       '  INNER JOIN Level ON TimetableDetail.IdLevel=Level.IdLevel)'
       '  INNER JOIN Specialization ON TimetableDetail.IdSpecialization=Specialization.IdSpecialization)'
-      '  INNER JOIN GroupId ON Distribution.IdGroupId=GroupId.IdGroupId)'
+      '  INNER JOIN GroupId ON Distribution.IdGroup=GroupId.IdGroup)'
       '  INNER JOIN Subject ON Distribution.IdSubject=Subject.IdSubject'
       'WHERE (Distribution.IdRoomType=:IdRoomType)'
       '  AND (TimetableDetail.IdTimetable=:IdTimetable)'
@@ -336,7 +336,7 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       '  TimetableDetail.IdHour,'
       '  Level.IdLevel,'
       '  Specialization.IdSpecialization,'
-      '  GroupId.IdGroupId,'
+      '  GroupId.IdGroup,'
       '  Subject.NaSubject'
     )
     Params = <    
@@ -443,10 +443,10 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       Required = True
       Visible = False
     end
-    object QuTimetableRoomTypeIdGroupId: TLongintField
+    object QuTimetableRoomTypeIdGroup: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdGroupId'
+      FieldName = 'IdGroup'
       Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

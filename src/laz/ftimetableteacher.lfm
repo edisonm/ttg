@@ -305,7 +305,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       ' IdTeacher,'
       ' Distribution.IdLevel,'
       ' Distribution.IdSpecialization,'
-      ' Distribution.IdGroupId,'
+      ' Distribution.IdGroup,'
       ' IdHour,'
       ' IdDay,'
       ' Distribution.IdSubject,'
@@ -315,7 +315,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       ' (TimetableDetail.IdSubject = Distribution.IdSubject)'
       ' and (TimetableDetail.IdLevel = Distribution.IdLevel)'
       ' and (TimetableDetail.IdSpecialization = Distribution.IdSpecialization)'
-      ' and (TimetableDetail.IdGroupId = Distribution.IdGroupId)'
+      ' and (TimetableDetail.IdGroup = Distribution.IdGroup)'
       'where IdTimetable=:IdTimetable'
       ' and IdTeacher=:IdTeacher'
       'union all'
@@ -324,7 +324,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       ' Assistance.IdTeacher as IdTeacher,'
       ' Distribution.IdLevel,'
       ' Distribution.IdSpecialization,'
-      ' Distribution.IdGroupId,'
+      ' Distribution.IdGroup,'
       ' IdHour,'
       ' IdDay,'
       ' Distribution.IdSubject,'
@@ -334,12 +334,12 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       '  Assistance.IdSubject = Distribution.IdSubject'
       '  and Assistance.IdLevel = Distribution.IdLevel'
       '  and Assistance.IdSpecialization = Distribution.IdSpecialization'
-      '  and Assistance.IdGroupId = Distribution.IdGroupId'
+      '  and Assistance.IdGroup = Distribution.IdGroup'
       ' inner join TimetableDetail on'
       '  TimetableDetail.IdSubject = Distribution.IdSubject'
       '  and TimetableDetail.IdLevel = Distribution.IdLevel'
       '  and TimetableDetail.IdSpecialization = Distribution.IdSpecialization'
-      '  and TimetableDetail.IdGroupId = Distribution.IdGroupId'
+      '  and TimetableDetail.IdGroup = Distribution.IdGroup'
       'where IdTimetable=:IdTimetable'
       ' and Assistance.IdTeacher=:IdTeacher'
     )
@@ -413,10 +413,10 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = True
       Visible = False
     end
-    object QuTimetableTeacherIdGroupId: TLongintField
+    object QuTimetableTeacherIdGroup: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdGroupId'
+      FieldName = 'IdGroup'
       Index = 4
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -503,10 +503,10 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       FieldKind = fkLookup
       FieldName = 'NaGroupId'
       Index = 11
-      KeyFields = 'IdGroupId'
+      KeyFields = 'IdGroup'
       LookupCache = False
       LookupDataSet = SourceDataModule.TbGroupId
-      LookupKeyFields = 'IdGroupId'
+      LookupKeyFields = 'IdGroup'
       LookupResultField = 'NaGroupId'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False

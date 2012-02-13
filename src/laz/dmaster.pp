@@ -40,7 +40,7 @@ type
   public
     { Public declarations }
     procedure IntercambiarTimeSlots(AIdTimetable, AIdLevel, AIdSpecialization,
-      AIdGroupId, AIdDay1, AIdHour1, AIdDay2, AIdHour2: Integer);
+      AIdGroup, AIdDay1, AIdHour1, AIdDay2, AIdHour2: Integer);
     function PerformAllChecks(AMainStrings, ASubStrings: TStrings;
       AMaxTeacherWorkLoad: Integer): Boolean;
     function NewIdTimetable: Integer;
@@ -381,10 +381,10 @@ var
         while not Eof do
         begin
           TbDistribution.Filter :=
-            Format('IdLevel=%d and IdSpecialization=%d and IdGroupId=%d', [
+            Format('IdLevel=%d and IdSpecialization=%d and IdGroup=%d', [
             TbClass.FindField('IdLevel').AsInteger,
               TbClass.FindField('IdSpecialization').AsInteger,
-              TbClass.FindField('IdGroupId').AsInteger]);
+              TbClass.FindField('IdGroup').AsInteger]);
           TbDistribution.Filtered := true;
           TbDistribution.First;
           t := 0;
@@ -523,7 +523,7 @@ begin
 end;
 
 procedure TMasterDataModule.IntercambiarTimeSlots(AIdTimetable, AIdLevel,
-  AIdSpecialization, AIdGroupId, AIdDay1, AIdHour1, AIdDay2,
+  AIdSpecialization, AIdGroup, AIdDay1, AIdHour1, AIdDay2,
   AIdHour2: Integer);
 var
   Locate1, Locate2: Boolean;
@@ -533,14 +533,14 @@ begin
   with SourceDataModule do
   begin
     Locate1 := TbTimetableDetail.Locate(
-      'IdTimetable;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour',
-      VarArrayOf([AIdTimetable, AIdLevel, AIdSpecialization, AIdGroupId,
+      'IdTimetable;IdLevel;IdSpecialization;IdGroup;IdDay;IdHour',
+      VarArrayOf([AIdTimetable, AIdLevel, AIdSpecialization, AIdGroup,
       AIdDay1, AIdHour1]), []);
     Bookmark1 := TbTimetableDetail.GetBookmark;
     try
       Locate2 := TbTimetableDetail.Locate(
-        'IdTimetable;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour',
-        VarArrayOf([AIdTimetable, AIdLevel, AIdSpecialization, AIdGroupId,
+        'IdTimetable;IdLevel;IdSpecialization;IdGroup;IdDay;IdHour',
+        VarArrayOf([AIdTimetable, AIdLevel, AIdSpecialization, AIdGroup,
         AIdDay2, AIdHour2]), []);
       Bookmark2 := TbTimetableDetail.GetBookmark;
       try

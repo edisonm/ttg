@@ -47,7 +47,7 @@ resourcestring
   SFlLevel_IdLevel = 'Id';
   SFlLevel_NaLevel = 'Name';
   SFlLevel_AbLevel = 'Abbreviation';
-  SFlGroupId_IdGroupId = 'Id';
+  SFlGroupId_IdGroup = 'Id';
   SFlGroupId_NaGroupId = 'Name';
   SFlSpecialization_IdSpecialization = 'Id';
   SFlSpecialization_NaSpecialization = 'Name';
@@ -65,7 +65,7 @@ resourcestring
   SFlHour_Interval = 'Interval';
   SFlClass_IdLevel = 'Level';
   SFlClass_IdSpecialization = 'Specialization';
-  SFlClass_IdGroupId = 'Group Id';
+  SFlClass_IdGroup = 'Group Id';
   SFlSubject_IdSubject = 'Id';
   SFlSubject_NaSubject = 'Name';
   SFlTeacher_IdTeacher = 'Id';
@@ -75,7 +75,7 @@ resourcestring
   SFlDistribution_IdSubject = 'Subject';
   SFlDistribution_IdLevel = 'Level';
   SFlDistribution_IdSpecialization = 'Specialization';
-  SFlDistribution_IdGroupId = 'Group Id';
+  SFlDistribution_IdGroup = 'Group Id';
   SFlDistribution_IdTeacher = 'Teacher';
   SFlDistribution_IdRoomType = 'Room Type';
   SFlDistribution_RoomCount = 'Room Count';
@@ -83,10 +83,10 @@ resourcestring
   SFlJoinedClass_IdSubject = 'Subject';
   SFlJoinedClass_IdLevel = 'Level';
   SFlJoinedClass_IdSpecialization = 'Specialization';
-  SFlJoinedClass_IdGroupId = 'Group';
+  SFlJoinedClass_IdGroup = 'Group';
   SFlJoinedClass_IdLevel1 = 'Level';
   SFlJoinedClass_IdSpecialization1 = 'Specialization';
-  SFlJoinedClass_IdGroupId1 = 'Group';
+  SFlJoinedClass_IdGroup1 = 'Group';
   SFlSubjectRestrictionType_IdSubjectRestrictionType = 'Id';
   SFlSubjectRestrictionType_NaSubjectRestrictionType = 'Name';
   SFlSubjectRestrictionType_ColSubjectRestrictionType = 'Color';
@@ -96,7 +96,7 @@ resourcestring
   SFlAssistance_IdSubject = 'Subject';
   SFlAssistance_IdLevel = 'Level';
   SFlAssistance_IdSpecialization = 'Specialization';
-  SFlAssistance_IdGroupId = 'Group';
+  SFlAssistance_IdGroup = 'Group';
   SFlAssistance_IdTeacher = 'Assistant';
   SFlTeacherRestrictionType_IdTeacherRestrictionType = 'Id';
   SFlTeacherRestrictionType_NaTeacherRestrictionType = 'Name';
@@ -118,7 +118,7 @@ resourcestring
   SFlTimetableDetail_IdSubject = 'Subject';
   SFlTimetableDetail_IdLevel = 'Level';
   SFlTimetableDetail_IdSpecialization = 'Specialization';
-  SFlTimetableDetail_IdGroupId = 'Group';
+  SFlTimetableDetail_IdGroup = 'Group';
   SFlTimetableDetail_IdDay = 'Day';
   SFlTimetableDetail_IdHour = 'Hour';
   SFlTimetableDetail_Session = 'Session';

@@ -64,11 +64,11 @@ type
       FClassCount, FDayCount, FHourCount, FTimeSlotCount, FTeacherCount, FCourseCount,
       FLevelCount, FSpecializationCount, FRoomTypeCount, FDistributionCount,
       FAssistanceCount, FJoinedClassCount: Integer;
-    FGroupIdToIdGroupId, FSubjectToIdSubject, FDayToIdDay, FHourToIdHour,
+    FGroupIdToIdGroup, FSubjectToIdSubject, FDayToIdDay, FHourToIdHour,
       FLevelToIdLevel, FSpecializationToIdSpecialization: TDynamicIntegerArray;
-    FIdLevelToLevel, FIdSpecializationToSpecialization, FIdGroupIdToGroupId, FIdDayToDay,
+    FIdLevelToLevel, FIdSpecializationToSpecialization, FIdGroupToGroupId, FIdDayToDay,
       FIdHourToHour: TDynamicIntegerArray;
-    FMinIdLevel, FMinIdSpecialization, FMinIdGroupId, FMinIdDay, FMinIdHour: Integer;
+    FMinIdLevel, FMinIdSpecialization, FMinIdGroup, FMinIdDay, FMinIdHour: Integer;
     FSessionNumberDouble: Integer;
     function GetDayAMaxTimeSlot(Day: Integer): Integer;
   protected
@@ -428,7 +428,7 @@ var
   begin
     with SourceDataModule.TbClass do
     begin
-      IndexFieldNames := 'IdLevel;IdSpecialization;IdGroupId';
+      IndexFieldNames := 'IdLevel;IdSpecialization;IdGroup';
       First;
       FClassCount := RecordCount;
       SetLength(FClassToCourse, FClassCount);
@@ -436,18 +436,18 @@ var
       SetLength(FClassToLevel, FClassCount);
       SetLength(FClassToSpecialization, FClassCount);
       SetLength(FCourseGroupIdToClass, FCourseCount, Length
-          (FGroupIdToIdGroupId));
+          (FGroupIdToIdGroup));
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
-      VFieldGroupId := FindField('IdGroupId');
+      VFieldGroupId := FindField('IdGroup');
       for VClass := 0 to FClassCount - 1 do
       begin
         Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
         Course := FLevelSpecializationToCourse[Level, Specialization];
-        GroupId := FIdGroupIdToGroupId[VFieldGroupId.AsInteger -
-          FMinIdGroupId];
+        GroupId := FIdGroupToGroupId[VFieldGroupId.AsInteger -
+          FMinIdGroup];
         FClassToCourse[VClass] := Course;
         FClassToLevel[VClass] := Level;
         FClassToGroupId[VClass] := GroupId;
@@ -611,12 +611,12 @@ var
   begin
     with SourceDataModule.TbDistribution do
     begin
-      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
+      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdGroup';
       First;
       VFieldSubject := FindField('IdSubject');
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
-      VFieldGroupId := FindField('IdGroupId');
+      VFieldGroupId := FindField('IdGroup');
       VFieldTeacher := FindField('IdTeacher');
       VFieldRoomType := FindField('IdRoomType');
       VFieldRoomCount := FindField('RoomCount');
@@ -644,8 +644,8 @@ var
       begin
         Subject := FIdSubjectToSubject[VFieldSubject.AsInteger - FMinIdSubject];
         Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
-        GroupId := FIdGroupIdToGroupId[VFieldGroupId.AsInteger -
-          FMinIdGroupId];
+        GroupId := FIdGroupToGroupId[VFieldGroupId.AsInteger -
+          FMinIdGroup];
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
         RoomType := FIdRoomTypeARoomType[VFieldRoomType.AsInteger - FMinIdRoomType];
@@ -706,7 +706,7 @@ var
   begin
     with SourceDataModule.TbAssistance do
     begin
-      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdGroupId;IdTeacher';
+      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdGroup;IdTeacher';
       First;
       FAssistanceCount := RecordCount;
       SetLength(FClassAssistanceToDistribution, FClassCount, 0);
@@ -714,7 +714,7 @@ var
       VFieldSubject := FindField('IdSubject');
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
-      VFieldGroupId := FindField('IdGroupId');
+      VFieldGroupId := FindField('IdGroup');
       VFieldTeacher := FindField('IdTeacher');
       for Assistance := 0 to FAssistanceCount - 1 do
       begin
@@ -723,8 +723,8 @@ var
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
         Course := FLevelSpecializationToCourse[Level, Specialization];
-        GroupId := FIdGroupIdToGroupId[VFieldGroupId.AsInteger -
-          FMinIdGroupId];
+        GroupId := FIdGroupToGroupId[VFieldGroupId.AsInteger -
+          FMinIdGroup];
         VClass := FCourseGroupIdToClass[Course, GroupId];
         Distribution := FClassSubjectToDistribution[VClass, Subject];
         Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
@@ -747,7 +747,7 @@ var
   begin
     with SourceDataModule.TbJoinedClass do
     begin
-      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdGroupId;IdLevel1;IdSpecialization1;IdGroupId1';
+      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdGroup;IdLevel1;IdSpecialization1;IdGroup1';
       First;
       FJoinedClassCount := RecordCount;
       SetLength(FClassJoinedClassToDistribution, FClassCount, 0);
@@ -755,10 +755,10 @@ var
       VFieldSubject := FindField('IdSubject');
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
-      VFieldGroupId := FindField('IdGroupId');
+      VFieldGroupId := FindField('IdGroup');
       VFieldLevel1 := FindField('IdLevel1');
       VFieldSpecialization1 := FindField('IdSpecialization1');
-      VFieldGroupId1 := FindField('IdGroupId1');
+      VFieldGroupId1 := FindField('IdGroup1');
       for JoinedClass := 0 to FJoinedClassCount - 1 do
       begin
         Subject := FIdSubjectToSubject[VFieldSubject.AsInteger - FMinIdSubject];
@@ -766,16 +766,16 @@ var
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
         Course := FLevelSpecializationToCourse[Level, Specialization];
-        GroupId := FIdGroupIdToGroupId[VFieldGroupId.AsInteger -
-          FMinIdGroupId];
+        GroupId := FIdGroupToGroupId[VFieldGroupId.AsInteger -
+          FMinIdGroup];
         VClass := FCourseGroupIdToClass[Course, GroupId];
         Distribution := FClassSubjectToDistribution[VClass, Subject];
         Level1 := FIdLevelToLevel[VFieldLevel1.AsInteger - FMinIdLevel];
         Specialization1 := FIdSpecializationToSpecialization
           [VFieldSpecialization1.AsInteger - FMinIdSpecialization];
         Course1 := FLevelSpecializationToCourse[Level1, Specialization1];
-        GroupId1 := FIdGroupIdToGroupId[VFieldGroupId1.AsInteger -
-          FMinIdGroupId];
+        GroupId1 := FIdGroupToGroupId[VFieldGroupId1.AsInteger -
+          FMinIdGroup];
         VClass1 := FCourseGroupIdToClass[Course1, GroupId1];
         Counter := Length(FClassJoinedClassToDistribution[VClass]);
         SetLength(FClassJoinedClassToDistribution[VClass], Counter + 1);
@@ -854,8 +854,8 @@ begin
       FIdSpecializationToSpecialization, FSpecializationToIdSpecialization);
     FSpecializationCount := Length(FSpecializationToIdSpecialization);
     LoadCourse;
-    Load(TbGroupId, 'IdGroupId', FMinIdGroupId,
-      FIdGroupIdToGroupId, FGroupIdToIdGroupId);
+    Load(TbGroupId, 'IdGroup', FMinIdGroup,
+      FIdGroupToGroupId, FGroupIdToIdGroup);
     Load(TbSubject, 'IdSubject', FMinIdSubject, FIdSubjectToSubject,
       FSubjectToIdSubject);
     FSubjectCount := Length(FSubjectToIdSubject);
@@ -1670,7 +1670,7 @@ begin
         VStrings.Add(Format('Class %d %d %d',
             [FLevelToIdLevel[FClassToLevel[VClass]],
             FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
-            FGroupIdToIdGroupId[FClassToGroupId[VClass]]]));
+            FGroupIdToIdGroup[FClassToGroupId[VClass]]]));
         for TimeSlot := 0 to FTimeSlotCount - 1 do
         begin
           VStrings.Add(Format(' Day %d Hour %d Subject %d', [FTimeSlotToDay[TimeSlot],
@@ -1754,7 +1754,7 @@ var
   end;
   procedure SaveTimetableDetail;
   var
-    VClass, TimeSlot, IdLevel, IdGroupId, IdSpecialization, Session: Integer;
+    VClass, TimeSlot, IdLevel, IdGroup, IdSpecialization, Session: Integer;
     {$IFNDEF USE_SQL}
     FieldTimetable, FieldLevel, FieldGroupId, FieldSpecialization, FieldDay,
       FieldHour, FieldSubject, FieldSession: TField;
@@ -1765,7 +1765,7 @@ var
       for VClass := 0 to FClassCount - 1 do
       begin
         IdLevel := FLevelToIdLevel[FClassToLevel[VClass]];
-        IdGroupId := FGroupIdToIdGroupId[FClassToGroupId[VClass]];
+        IdGroup := FGroupIdToIdGroup[FClassToGroupId[VClass]];
         IdSpecialization := FSpecializationToIdSpecialization
           [FClassToSpecialization[VClass]];
         for TimeSlot := 0 to FTimeSlotCount - 1 do
@@ -1775,9 +1775,9 @@ var
           begin
             SQL.Add(Format(
               'INSERT INTO TimetableDetail' +
-              '(IdTimetable,IdLevel,IdGroupId,IdSpecialization,IdDay,' +
+              '(IdTimetable,IdLevel,IdGroup,IdSpecialization,IdDay,' +
               'IdHour,IdSubject,Session) VALUES (%d,%d,%d,%d,%d,%d,%d,%d);',
-              [IdTimetable, IdLevel, IdGroupId, IdSpecialization,
+              [IdTimetable, IdLevel, IdGroup, IdSpecialization,
               FDayToIdDay[FTimeSlotToDay[TimeSlot]],
               FHourToIdHour[FTimeSlotToHour[TimeSlot]],
               FSubjectToIdSubject[FSessionToSubject[Session]],
@@ -1793,7 +1793,7 @@ var
         Last;
         FieldTimetable := FindField('IdTimetable');
         FieldLevel := FindField('IdLevel');
-        FieldGroupId := FindField('IdGroupId');
+        FieldGroupId := FindField('IdGroup');
         FieldSpecialization := FindField('IdSpecialization');
         FieldDay := FindField('IdDay');
         FieldHour := FindField('IdHour');
@@ -1803,7 +1803,7 @@ var
         for VClass := 0 to FClassCount - 1 do
         begin
           IdLevel := FLevelAIdLevel[FClassALevel[VClass]];
-          IdGroupId := FGroupIdAIdGroupId[FClassAGroupId[VClass]];
+          IdGroup := FGroupIdAIdGroup[FClassAGroupId[VClass]];
           IdSpecialization := FSpecializationAIdSpecialization
             [FClassASpecialization[VClass]];
           for TimeSlot := 0 to FTimeSlotCount - 1 do
@@ -1814,7 +1814,7 @@ var
               Append;
               FieldTimetable.AsInteger := IdTimetable;
               FieldLevel.AsInteger := IdLevel;
-              FieldGroupId.AsInteger := IdGroupId;
+              FieldGroupId.AsInteger := IdGroup;
               FieldSpecialization.AsInteger := IdSpecialization;
               FieldDay.AsInteger := FDayAIdDay[FTimeSlotADay[TimeSlot]];
               FieldHour.AsInteger := FHourAIdHour[FTimeSlotAHour[TimeSlot]];
@@ -1870,7 +1870,7 @@ begin
     MasterSource := DSTimetable;
     try
       FieldLevel := FindField('IdLevel') as TLongintField;
-      FieldGroupId := FindField('IdGroupId') as TLongintField;
+      FieldGroupId := FindField('IdGroup') as TLongintField;
       FieldSpecialization := FindField('IdSpecialization') as TLongintField;
       FieldDay := FindField('IdDay') as TLongintField;
       FieldHour := FindField('IdHour') as TLongintField;
@@ -1886,8 +1886,8 @@ begin
             FIdLevelToLevel[FieldLevel.AsInteger - FMinIdLevel],
             FIdSpecializationToSpecialization[FieldSpecialization.AsInteger -
             FMinIdSpecialization]],
-          FIdGroupIdToGroupId[FieldGroupId.AsInteger -
-          FMinIdGroupId]];
+          FIdGroupToGroupId[FieldGroupId.AsInteger -
+          FMinIdGroup]];
         TimeSlot := FDayHourToTimeSlot[FIdDayToDay[FieldDay.AsInteger - FMinIdDay],
           FIdHourToHour[FieldHour.AsInteger - FMinIdHour]];
         FClassTimeSlotToSession[VClass, TimeSlot] := FieldSession.AsInteger;
@@ -1926,7 +1926,7 @@ begin
               SClass, VClass,
               FLevelToIdLevel[FClassToLevel[VClass]],
               FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
-              FGroupIdToIdGroupId[FClassToGroupId[VClass]],
+              FGroupIdToIdGroup[FClassToGroupId[VClass]],
               SFlDistribution_IdSubject,
               Subject,
               FSubjectToIdSubject[Subject],
@@ -1940,7 +1940,7 @@ begin
               SClass, VClass,
               FLevelToIdLevel[FClassToLevel[VClass]],
               FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
-              FGroupIdToIdGroupId[FClassToGroupId[VClass]],
+              FGroupIdToIdGroup[FClassToGroupId[VClass]],
               SFlDistribution_IdSubject,
               Subject,
               FSubjectToIdSubject[Subject],
@@ -1950,7 +1950,7 @@ begin
               SClass, VClass,
               FLevelToIdLevel[FClassToLevel[VClass]],
               FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
-              FGroupIdToIdGroupId[FClassToGroupId[VClass]],
+              FGroupIdToIdGroup[FClassToGroupId[VClass]],
               SFlDistribution_IdSubject,
               Subject,
               FSubjectToIdSubject[Subject],

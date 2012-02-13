@@ -30,7 +30,7 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    FieldIdGroupId, FieldNaGroupId: TField;
+    FieldIdGroup, FieldNaGroupId: TField;
     PostingData: Boolean;
   protected
     procedure doLoadConfig; override;
@@ -62,7 +62,7 @@ begin
     with DataSourceList.DataSet do
     begin
       First;
-      FieldIdGroupId := FindField('IdGroupId');
+      FieldIdGroup := FindField('IdGroup');
       FieldNaGroupId := FindField('NaGroupId');
       while not Eof do
       begin
@@ -123,8 +123,8 @@ begin
       while not Eof do
       begin
         Checked[Items.IndexOf(FieldNaGroupId.AsString)] :=
-          DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdGroupId',
-            VarArrayOf([IdLevel, IdSpecialization, FieldIdGroupId.AsInteger]), []);
+          DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdGroup',
+            VarArrayOf([IdLevel, IdSpecialization, FieldIdGroup.AsInteger]), []);
         Next;
       end;
     end;
@@ -143,7 +143,7 @@ end;
 
 procedure TClassForm.CheckListBoxExit(Sender: TObject);
 var
-  IdLevel, IdSpecialization, IdGroupId: Integer;
+  IdLevel, IdSpecialization, IdGroup: Integer;
 begin
   inherited;
   with CheckListBox do if Assigned(DataSourceList.DataSet) then
@@ -156,9 +156,9 @@ begin
       First;
       while not Eof do
       begin
-        IdGroupId := FieldIdGroupId.AsInteger;
-        if DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdGroupId',
-          VarArrayOf([IdLevel, IdSpecialization, IdGroupId]), []) then
+        IdGroup := FieldIdGroup.AsInteger;
+        if DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdGroup',
+          VarArrayOf([IdLevel, IdSpecialization, IdGroup]), []) then
         begin
           if not Checked[Items.IndexOf(FieldNaGroupId.AsString)] then
             DataSourceDetail.DataSet.Delete;
@@ -170,7 +170,7 @@ begin
             DataSourceDetail.DataSet.Append;
             DataSourceDetail.DataSet.FindField('IdLevel').Value := IdLevel;
             DataSourceDetail.DataSet.FindField('IdSpecialization').Value := IdSpecialization;
-            DataSourceDetail.DataSet.FindField('IdGroupId').Value := IdGroupId;
+            DataSourceDetail.DataSet.FindField('IdGroup').Value := IdGroup;
             DataSourceDetail.DataSet.Post;
           end;
         end;

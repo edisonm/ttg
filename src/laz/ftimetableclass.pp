@@ -22,7 +22,7 @@ type
     QuTimetableGroupIdSubject: TLongintField;
     QuTimetableGroupIdLevel: TLongintField;
     QuTimetableGroupIdSpecialization: TLongintField;
-    QuTimetableGroupIdGroupId: TLongintField;
+    QuTimetableGroupIdGroup: TLongintField;
     QuTimetableGroupIdHour: TLongintField;
     QuTimetableGroupIdDay: TLongintField;
     QuTimetableGroupIdTeacher: TLongintField;
@@ -33,7 +33,7 @@ type
     QuGroupIdTimetable: TLongintField;
     QuGroupIdLevel: TLongintField;
     QuGroupIdSpecialization: TLongintField;
-    QuGroupIdGroupId: TLongintField;
+    QuGroupIdGroup: TLongintField;
     QuClassAbLevel: TStringField;
     QuClassAbSpecialization: TStringField;
     QuClassNaGroupId: TStringField;
@@ -181,7 +181,7 @@ begin
         TbTimetable.FindField('IdTimetable').AsInteger,
         QuClass.FindField('IdLevel').AsInteger,
         QuClass.FindField('IdSpecialization').AsInteger,
-        QuClass.FindField('IdGroupId').AsInteger,
+        QuClass.FindField('IdGroup').AsInteger,
         IdDay, IdHour, iIdDay, iIdHour);
     QuTimetableClass.Refresh;
     btnShowClick(nil);

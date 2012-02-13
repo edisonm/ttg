@@ -135,7 +135,7 @@ begin
     Add('TbLevel.IdLevel=' + SFlLevel_IdLevel);
     Add('TbLevel.NaLevel=' + SFlLevel_NaLevel);
     Add('TbLevel.AbLevel=' + SFlLevel_AbLevel);
-    Add('TbGroupId.IdGroupId=' + SFlGroupId_IdGroupId);
+    Add('TbGroupId.IdGroup=' + SFlGroupId_IdGroup);
     Add('TbGroupId.NaGroupId=' + SFlGroupId_NaGroupId);
     Add('TbSpecialization.IdSpecialization=' + SFlSpecialization_IdSpecialization);
     Add('TbSpecialization.NaSpecialization=' + SFlSpecialization_NaSpecialization);
@@ -153,7 +153,7 @@ begin
     Add('TbHour.Interval=' + SFlHour_Interval);
     Add('TbClass.IdLevel=' + SFlClass_IdLevel);
     Add('TbClass.IdSpecialization=' + SFlClass_IdSpecialization);
-    Add('TbClass.IdGroupId=' + SFlClass_IdGroupId);
+    Add('TbClass.IdGroup=' + SFlClass_IdGroup);
     Add('TbSubject.IdSubject=' + SFlSubject_IdSubject);
     Add('TbSubject.NaSubject=' + SFlSubject_NaSubject);
     Add('TbTeacher.IdTeacher=' + SFlTeacher_IdTeacher);
@@ -163,7 +163,7 @@ begin
     Add('TbDistribution.IdSubject=' + SFlDistribution_IdSubject);
     Add('TbDistribution.IdLevel=' + SFlDistribution_IdLevel);
     Add('TbDistribution.IdSpecialization=' + SFlDistribution_IdSpecialization);
-    Add('TbDistribution.IdGroupId=' + SFlDistribution_IdGroupId);
+    Add('TbDistribution.IdGroup=' + SFlDistribution_IdGroup);
     Add('TbDistribution.IdTeacher=' + SFlDistribution_IdTeacher);
     Add('TbDistribution.IdRoomType=' + SFlDistribution_IdRoomType);
     Add('TbDistribution.RoomCount=' + SFlDistribution_RoomCount);
@@ -171,10 +171,10 @@ begin
     Add('TbJoinedClass.IdSubject=' + SFlJoinedClass_IdSubject);
     Add('TbJoinedClass.IdLevel=' + SFlJoinedClass_IdLevel);
     Add('TbJoinedClass.IdSpecialization=' + SFlJoinedClass_IdSpecialization);
-    Add('TbJoinedClass.IdGroupId=' + SFlJoinedClass_IdGroupId);
+    Add('TbJoinedClass.IdGroup=' + SFlJoinedClass_IdGroup);
     Add('TbJoinedClass.IdLevel1=' + SFlJoinedClass_IdLevel1);
     Add('TbJoinedClass.IdSpecialization1=' + SFlJoinedClass_IdSpecialization1);
-    Add('TbJoinedClass.IdGroupId1=' + SFlJoinedClass_IdGroupId1);
+    Add('TbJoinedClass.IdGroup1=' + SFlJoinedClass_IdGroup1);
     Add('TbSubjectRestrictionType.IdSubjectRestrictionType=' + SFlSubjectRestrictionType_IdSubjectRestrictionType);
     Add('TbSubjectRestrictionType.NaSubjectRestrictionType=' + SFlSubjectRestrictionType_NaSubjectRestrictionType);
     Add('TbSubjectRestrictionType.ColSubjectRestrictionType=' + SFlSubjectRestrictionType_ColSubjectRestrictionType);
@@ -184,7 +184,7 @@ begin
     Add('TbAssistance.IdSubject=' + SFlAssistance_IdSubject);
     Add('TbAssistance.IdLevel=' + SFlAssistance_IdLevel);
     Add('TbAssistance.IdSpecialization=' + SFlAssistance_IdSpecialization);
-    Add('TbAssistance.IdGroupId=' + SFlAssistance_IdGroupId);
+    Add('TbAssistance.IdGroup=' + SFlAssistance_IdGroup);
     Add('TbAssistance.IdTeacher=' + SFlAssistance_IdTeacher);
     Add('TbTeacherRestrictionType.IdTeacherRestrictionType=' + SFlTeacherRestrictionType_IdTeacherRestrictionType);
     Add('TbTeacherRestrictionType.NaTeacherRestrictionType=' + SFlTeacherRestrictionType_NaTeacherRestrictionType);
@@ -206,7 +206,7 @@ begin
     Add('TbTimetableDetail.IdSubject=' + SFlTimetableDetail_IdSubject);
     Add('TbTimetableDetail.IdLevel=' + SFlTimetableDetail_IdLevel);
     Add('TbTimetableDetail.IdSpecialization=' + SFlTimetableDetail_IdSpecialization);
-    Add('TbTimetableDetail.IdGroupId=' + SFlTimetableDetail_IdGroupId);
+    Add('TbTimetableDetail.IdGroup=' + SFlTimetableDetail_IdGroup);
     Add('TbTimetableDetail.IdDay=' + SFlTimetableDetail_IdDay);
     Add('TbTimetableDetail.IdHour=' + SFlTimetableDetail_IdHour);
     Add('TbTimetableDetail.Session=' + SFlTimetableDetail_Session);

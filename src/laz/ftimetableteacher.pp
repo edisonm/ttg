@@ -20,7 +20,7 @@ type
     cbxShowTeacher: TComboBox;
     QuTimetableTeacherIdLevel: TLongintField;
     QuTimetableTeacherIdSpecialization: TLongintField;
-    QuTimetableTeacherIdGroupId: TLongintField;
+    QuTimetableTeacherIdGroup: TLongintField;
     QuTimetableTeacherIdHour: TLongintField;
     QuTimetableTeacherIdDay: TLongintField;
     QuTimetableTeacherIdSubject: TLongintField;
@@ -83,14 +83,14 @@ begin
   cbxShowTeacher.Items.Clear;
   QuTimetableTeacher.Open;
   QuTimetableTeacherAbSpecialization.DisplayLabel := SFlTimetableDetail_IdSpecialization;
-  QuTimetableTeacherNaGroupId.DisplayLabel := SFlTimetableDetail_IdGroupId;
+  QuTimetableTeacherNaGroupId.DisplayLabel := SFlTimetableDetail_IdGroup;
   QuTimetableTeacherNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
   QuTimetableTeacherName.DisplayLabel := SFlTeacher_NaTeacher;
   QuTeacherLnTeacher.DisplayLabel := SFlTeacher_LnTeacher;
   QuTeacherNaTeacher.DisplayLabel := SFlTeacher_NaTeacher;
   QuTimetableTeacherIdLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
   QuTimetableTeacherIdSpecialization.DisplayLabel := SFlTimetableDetail_IdSpecialization;
-  QuTimetableTeacherIdGroupId.DisplayLabel := SFlTimetableDetail_IdGroupId;
+  QuTimetableTeacherIdGroup.DisplayLabel := SFlTimetableDetail_IdGroup;
   QuTimetableTeacherIdHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuTimetableTeacherIdDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuTimetableTeacherIdSubject.DisplayLabel := SFlTimetableDetail_IdSubject;

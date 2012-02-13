@@ -19,7 +19,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 1
     Connection = DbZConnection
     TableName = 'GroupId'
-    IndexFieldNames = 'IdGroupId'
+    IndexFieldNames = 'IdGroup'
     Left = 144
     Top = 60
   end
@@ -97,7 +97,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 7
     Connection = DbZConnection
     TableName = 'Class'
-    IndexFieldNames = 'IdLevel;IdSpecialization;IdGroupId'
+    IndexFieldNames = 'IdLevel;IdSpecialization;IdGroup'
     Left = 240
     Top = 144
   end
@@ -136,7 +136,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 10
     Connection = DbZConnection
     TableName = 'Distribution'
-    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdGroupId'
+    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdGroup'
     Left = 48
     Top = 240
   end
@@ -149,7 +149,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 11
     Connection = DbZConnection
     TableName = 'JoinedClass'
-    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdGroupId'
+    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdGroup'
     Left = 144
     Top = 252
   end
@@ -188,7 +188,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 14
     Connection = DbZConnection
     TableName = 'Assistance'
-    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdGroupId;IdTeacher'
+    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdGroup;IdTeacher'
     Left = 432
     Top = 240
   end
@@ -253,7 +253,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 19
     Connection = DbZConnection
     TableName = 'TimetableDetail'
-    IndexFieldNames = 'IdTimetable;IdSubject;IdLevel;IdSpecialization;IdGroupId;IdDay;IdHour'
+    IndexFieldNames = 'IdTimetable;IdSubject;IdLevel;IdSpecialization;IdGroup;IdDay;IdHour'
     Left = 432
     Top = 336
   end
