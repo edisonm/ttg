@@ -2,10 +2,11 @@ inherited SourceDataModule: TSourceDataModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 440
-  HorizontalOffset = 610
+  HorizontalOffset = 603
   VerticalOffset = 459
   Width = 667
   inherited DbZConnection: TZConnection
+    Connected = True
     Protocol = 'sqlite-3'
     Database = ':memory:'
     left = 544

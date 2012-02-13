@@ -408,6 +408,8 @@ begin
   try
     SourceDataModule.EmptyTables;
     MasterDataModule.LoadFromTextFile(AFileName);
+    MainForm.Caption := Application.Title + ' - ' +
+      MasterDataModule.ConfigStorage.NaInstitution;
   finally
     Cursor := crDefault;
   end;
@@ -425,8 +427,6 @@ begin
       begin
         LoadFromFile(OpenDialog.FileName);
         SaveDialog.FileName := OpenDialog.FileName;
-        MainForm.Caption := Application.Title + ' - ' +
-          MasterDataModule.ConfigStorage.NaInstitution;
       end;
     end;
   finally
@@ -648,16 +648,23 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-  MainForm.Caption := Application.Title;
-{$IFDEF DEBUG}
-  Caption := Caption + ' - Debug Build';
-{$ENDIF}
   FUpdateIndex := 0;
   Height := 10 + Toolbar.Height + StatusBar.Height;
   SaveDialog.DefaultExt := '.ttd';
   SaveDialog.Filter := SSaveDialogFilter;
   SaveDialogCSV.DefaultExt := '.csv';
   SaveDialogCSV.Filter := SSaveDialogCSVFilter;
+  if Paramcount = 1 then
+  begin
+    LoadFromFile(ParamStr(1));
+  end
+  else
+  begin
+    MainForm.Caption := Application.Title;
+{$IFDEF DEBUG}
+    Caption := Caption + ' - Debug Build';
+{$ENDIF}
+  end;
   try
     FMin := 0;
     FMax := 100;

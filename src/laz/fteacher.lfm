@@ -1,7 +1,7 @@
 inherited TeacherForm: TTeacherForm
-  Left = 719
+  Left = 834
   Height = 522
-  Top = 375
+  Top = 470
   Width = 888
   Caption = 'Teacher'
   ClientHeight = 522
@@ -11,7 +11,7 @@ inherited TeacherForm: TTeacherForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Position = poDesktopCenter
+  Visible = True
   inherited TlBShow: TToolBar
     Width = 888
     inherited DBNavigator: TDBNavigator

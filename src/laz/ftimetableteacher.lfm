@@ -1,7 +1,7 @@
 inherited TimetableTeacherForm: TTimetableTeacherForm
-  Left = 612
+  Left = 449
   Height = 443
-  Top = 200
+  Top = 291
   Width = 682
   ActiveControl = DBNavigator
   ClientHeight = 443
@@ -10,6 +10,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  Visible = True
   inherited TlBShow: TToolBar
     Width = 682
     inherited BtnOk: TToolButton
@@ -317,6 +318,29 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       ' and (TimetableDetail.IdGroupId = Distribution.IdGroupId)'
       'where IdTimetable=:IdTimetable'
       ' and IdTeacher=:IdTeacher'
+      'union all'
+      'select'
+      ' IdTimetable,'
+      ' Assistance.IdTeacher as IdTeacher,'
+      ' Distribution.IdLevel,'
+      ' Distribution.IdSpecialization,'
+      ' Distribution.IdGroupId,'
+      ' IdHour,'
+      ' IdDay,'
+      ' Distribution.IdSubject'
+      'from'
+      ' Assistance inner join Distribution on'
+      '  Assistance.IdSubject = Distribution.IdSubject'
+      '  and Assistance.IdLevel = Distribution.IdLevel'
+      '  and Assistance.IdSpecialization = Distribution.IdSpecialization'
+      '  and Assistance.IdGroupId = Distribution.IdGroupId'
+      ' inner join TimetableDetail on'
+      '  TimetableDetail.IdSubject = Distribution.IdSubject'
+      '  and TimetableDetail.IdLevel = Distribution.IdLevel'
+      '  and TimetableDetail.IdSpecialization = Distribution.IdSpecialization'
+      '  and TimetableDetail.IdGroupId = Distribution.IdGroupId'
+      'where IdTimetable=:IdTimetable'
+      ' and Assistance.IdTeacher=:IdTeacher'
     )
     Params = <    
       item
@@ -331,7 +355,6 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       end>
     DataSource = DSTeacher
     MasterFields = 'IdTimetable;IdTeacher'
-    MasterSource = DSTeacher
     LinkedFields = 'IdTimetable;IdTeacher'
     IndexFieldNames = 'IdTimetable Asc;IdTeacher Asc'
     left = 64

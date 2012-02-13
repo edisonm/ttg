@@ -70,7 +70,7 @@ uses
 {$ENDIF}
 
 const
-  pfhVersionNumber = 292;
+  pfhVersionNumber = 293;
 
 procedure TMasterDataModule.FillTeacherRestrictionCount;
 var
@@ -640,12 +640,16 @@ begin
       PrepareTables;
       QuTeacher.Open;
       OpenTables;
-      NewDatabase;
-      ConfigStorage.SetDefaults;
+      if Paramcount <> 1 then
+      begin
+        NewDatabase;
+        ConfigStorage.SetDefaults;
+      end;
     end
     else
     begin
       PrepareTables;
+      QuTeacher.Open;
       OpenTables;
     end;
     TbDistribution.BeforePost := TbDistributionBeforePost;
