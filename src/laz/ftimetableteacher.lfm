@@ -498,16 +498,16 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = False
       Size = 10
     end
-    object QuTimetableTeacherNaGroupId: TStringField
+    object QuTimetableTeacherNaGroup: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroupId'
+      FieldName = 'NaGroup'
       Index = 11
       KeyFields = 'IdGroup'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroupId
+      LookupDataSet = SourceDataModule.TbGroup
       LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroupId'
+      LookupResultField = 'NaGroup'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False

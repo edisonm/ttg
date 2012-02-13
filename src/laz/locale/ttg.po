@@ -100,13 +100,13 @@ msgstr ""
 msgid "Room Count"
 msgstr ""
 
-#: dsourcebaseconsts.sflgroupid_idgroup
-msgctxt "dsourcebaseconsts.sflgroupid_idgroup"
+#: dsourcebaseconsts.sflgroup_idgroup
+msgctxt "dsourcebaseconsts.sflgroup_idgroup"
 msgid "Id"
 msgstr ""
 
-#: dsourcebaseconsts.sflgroupid_nagroupid
-msgctxt "dsourcebaseconsts.sflgroupid_nagroupid"
+#: dsourcebaseconsts.sflgroup_nagroup
+msgctxt "dsourcebaseconsts.sflgroup_nagroup"
 msgid "Name"
 msgstr ""
 
@@ -414,8 +414,8 @@ msgctxt "dsourcebaseconsts.stbdistribution"
 msgid "Distribution of Workload"
 msgstr ""
 
-#: dsourcebaseconsts.stbgroupid
-msgctxt "dsourcebaseconsts.stbgroupid"
+#: dsourcebaseconsts.stbgroup
+msgctxt "dsourcebaseconsts.stbgroup"
 msgid "Group Identifiers"
 msgstr ""
 
@@ -854,11 +854,11 @@ msgstr ""
 msgid "Exit|Exit from program"
 msgstr ""
 
-#: tmainform.actgroupid.caption
+#: tmainform.actgroup.caption
 msgid "Group IDs"
 msgstr ""
 
-#: tmainform.actgroupid.hint
+#: tmainform.actgroup.hint
 msgid "Group IDs|Group IDs"
 msgstr ""
 

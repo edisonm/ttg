@@ -30,7 +30,7 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    FieldIdGroup, FieldNaGroupId: TField;
+    FieldIdGroup, FieldNaGroup: TField;
     PostingData: Boolean;
   protected
     procedure doLoadConfig; override;
@@ -63,10 +63,10 @@ begin
     begin
       First;
       FieldIdGroup := FindField('IdGroup');
-      FieldNaGroupId := FindField('NaGroupId');
+      FieldNaGroup := FindField('NaGroup');
       while not Eof do
       begin
-        Items.Add(FindField('NaGroupId').AsString);
+        Items.Add(FindField('NaGroup').AsString);
         Next;
       end;
     end;
@@ -122,7 +122,7 @@ begin
       First;
       while not Eof do
       begin
-        Checked[Items.IndexOf(FieldNaGroupId.AsString)] :=
+        Checked[Items.IndexOf(FieldNaGroup.AsString)] :=
           DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdGroup',
             VarArrayOf([IdLevel, IdSpecialization, FieldIdGroup.AsInteger]), []);
         Next;
@@ -160,12 +160,12 @@ begin
         if DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdGroup',
           VarArrayOf([IdLevel, IdSpecialization, IdGroup]), []) then
         begin
-          if not Checked[Items.IndexOf(FieldNaGroupId.AsString)] then
+          if not Checked[Items.IndexOf(FieldNaGroup.AsString)] then
             DataSourceDetail.DataSet.Delete;
         end
         else
         begin
-          if Checked[Items.IndexOf(FieldNaGroupId.AsString)] then
+          if Checked[Items.IndexOf(FieldNaGroup.AsString)] then
           begin
             DataSourceDetail.DataSet.Append;
             DataSourceDetail.DataSet.FindField('IdLevel').Value := IdLevel;

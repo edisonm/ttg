@@ -404,19 +404,19 @@ var
               end;
               AMainStrings.Add(Format(s, [TbClass.FindField('AbLevel').Value,
                 TbClass.FindField('AbSpecialization').Value,
-                TbClass.FindField('NaGroupId').Value, t]));
+                TbClass.FindField('NaGroup').Value, t]));
               HaveProblems := True;
               HaveInternalProblems := True;
             end
             else
               ASubStrings.Add(Format(s, [TbClass.FindField('AbLevel').Value,
                 TbClass.FindField('AbSpecialization').Value,
-                TbClass.FindField('NaGroupId').Value, t]));
+                TbClass.FindField('NaGroup').Value, t]));
           except
             ASubStrings.Add(Format('%s: %s %s %s, %s %s',
               [SProblems, TbClass.FindField('AbLevel').AsString,
               TbClass.FindField('AbSpecialization').AsString,
-              TbClass.FindField('NaGroupId').AsString,
+              TbClass.FindField('NaGroup').AsString,
               STbSubject,
               TbDistribution.FindField('NaSubject').AsString]));
             HaveProblems := True;
@@ -603,22 +603,22 @@ begin
   FConfigStorage := TTTGConfig.Create(Self);
   with FStringsShowRoomType do
   begin
-    add('Level_Class=AbLevel;NaGroupId');
-    add('Level_Class_Subject=AbLevel;NaGroupId;NaSubject');
-    add('Level_Class_Specialization=AbLevel;NaGroupId;AbSpecialization');
-    add('Level_Class_Specialization_Subject=AbLevel;NaGroupId;AbSpecialization;NaSubject');
-    add('Level_Specialization_Class=AbLevel;AbSpecialization;NaGroupId');
-    add('Level_Specialization_Class_Subject=AbLevel;AbSpecialization;NaGroupId;NaSubject');
+    add('Level_Class=AbLevel;NaGroup');
+    add('Level_Class_Subject=AbLevel;NaGroup;NaSubject');
+    add('Level_Class_Specialization=AbLevel;NaGroup;AbSpecialization');
+    add('Level_Class_Specialization_Subject=AbLevel;NaGroup;AbSpecialization;NaSubject');
+    add('Level_Specialization_Class=AbLevel;AbSpecialization;NaGroup');
+    add('Level_Specialization_Class_Subject=AbLevel;AbSpecialization;NaGroup;NaSubject');
     add('Subject=NaSubject');
   end;
   with FStringsShowTeacher do
   begin
-    add('Level_Class=AbLevel;NaGroupId');
-    add('Level_Class_Subject=AbLevel;NaGroupId;NaSubject');
-    add('Level_Class_Specialization=AbLevel;NaGroupId;AbSpecialization');
-    add('Level_Class_Specialization_Subject=AbLevel;NaGroupId;AbSpecialization;NaSubject');
-    add('Level_Specialization_Class=AbLevel;AbSpecialization;NaGroupId');
-    add('Level_Specialization_Class_Subject=AbLevel;AbSpecialization;NaGroupId;NaSubject');
+    add('Level_Class=AbLevel;NaGroup');
+    add('Level_Class_Subject=AbLevel;NaGroup;NaSubject');
+    add('Level_Class_Specialization=AbLevel;NaGroup;AbSpecialization');
+    add('Level_Class_Specialization_Subject=AbLevel;NaGroup;AbSpecialization;NaSubject');
+    add('Level_Specialization_Class=AbLevel;AbSpecialization;NaGroup');
+    add('Level_Specialization_Class_Subject=AbLevel;AbSpecialization;NaGroup;NaSubject');
     add('Subject=NaSubject');
   end;
   with FStringsShowClass do

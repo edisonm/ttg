@@ -36,7 +36,7 @@ type
     QuClassIdGroup: TLongintField;
     QuClassAbLevel: TStringField;
     QuClassAbSpecialization: TStringField;
-    QuClassNaGroupId: TStringField;
+    QuClassNaGroup: TStringField;
     QuTimetableClassIdTimetable: TLongintField;
     QuTimetableClassLnTeacher: TStringField;
     QuTimetableClassNaTeacher: TStringField;
@@ -100,7 +100,7 @@ begin
     QuClass.FindField('IdTimetable').AsInteger,
     QuClass.FindField('AbLevel').AsString,
     QuClass.FindField('AbSpecialization').AsString,
-    QuClass.FindField('NaGroupId').AsString]);
+    QuClass.FindField('NaGroup').AsString]);
   FName := MasterDataModule.StringsShowClass.Values[cbxShowClass.Text];
   with SourceDataModule do
     ShowEditor(TbDay, TbHour, QuTimetableClass, TbTimeSlot, 'IdDay', 'NaDay',
@@ -198,7 +198,7 @@ end;
 procedure TTimetableClassForm.QuClassCalcFields(DataSet: TDataSet);
 begin
   inherited;
-  DataSet['NaClass'] := VarArrToStr(DataSet['AbLevel;AbSpecialization;NaGroupId'], ' ');
+  DataSet['NaClass'] := VarArrToStr(DataSet['AbLevel;AbSpecialization;NaGroup'], ' ');
 end;
 
 procedure TTimetableClassForm.DSClassDataChange(Sender: TObject;

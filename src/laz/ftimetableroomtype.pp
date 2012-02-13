@@ -27,7 +27,7 @@ type
     QuTimetableRoomTypeNaSubject: TStringField;
     QuTimetableRoomTypeAbLevel: TStringField;
     QuTimetableRoomTypeAbSpecialization: TStringField;
-    QuTimetableRoomTypeNaGroupId: TStringField;
+    QuTimetableRoomTypeNaGroup: TStringField;
     QuTimetableRoomTypeName: TStringField;
     DSRoomType: TDataSource;
     DBGrid1: TDBGrid;
@@ -93,7 +93,7 @@ begin
   QuTimetableRoomTypeAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
   QuTimetableRoomTypeAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
-  QuTimetableRoomTypeNaGroupId.DisplayLabel := SFlTimetableDetail_IdGroup;
+  QuTimetableRoomTypeNaGroup.DisplayLabel := SFlTimetableDetail_IdGroup;
   QuTimetableRoomTypeName.DisplayLabel := SFlRoomType_NaRoomType;
   QuRoomTypeAbRoomType.DisplayLabel := SFlDistribution_IdRoomType;
   QuRoomType.Open;

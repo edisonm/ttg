@@ -56,11 +56,11 @@ inherited SourceDataModule: TSourceDataModule
     Connection = DbZConnection
     SQL.Strings = (
       'SELECT Class.IdLevel, Class.IdSpecialization, Class.IdGroup,'
-      ' AbLevel || " " || AbSpecialization || " " || NaGroupId AS NameClass'
+      ' AbLevel || " " || AbSpecialization || " " || NaGroup AS NameClass'
       'FROM'
       ' Class INNER JOIN Level ON Class.IdLevel=Level.IdLevel'
       ' INNER JOIN Specialization ON Class.IdSpecialization=Specialization.IdSpecialization'
-      ' INNER JOIN GroupId ON Class.IdGroup = GroupId.IdGroup'
+      ' INNER JOIN Group ON Class.IdGroup = Group.IdGroup'
       'WHERE'
       ' Class.IdLevel<>:IdLevel OR'
       ' Class.IdSpecialization<>:IdSpecialization OR'

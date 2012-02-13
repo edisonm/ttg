@@ -24,7 +24,7 @@ uses
 resourcestring
 
   STbLevel = 'Levels';
-  STbGroupId = 'Group Identifiers';
+  STbGroup = 'Group Identifiers';
   STbSpecialization = 'Specializations';
   STbDay = 'Working Days';
   STbCourse = 'Courses';
@@ -47,8 +47,8 @@ resourcestring
   SFlLevel_IdLevel = 'Id';
   SFlLevel_NaLevel = 'Name';
   SFlLevel_AbLevel = 'Abbreviation';
-  SFlGroupId_IdGroup = 'Id';
-  SFlGroupId_NaGroupId = 'Name';
+  SFlGroup_IdGroup = 'Id';
+  SFlGroup_NaGroup = 'Name';
   SFlSpecialization_IdSpecialization = 'Id';
   SFlSpecialization_NaSpecialization = 'Name';
   SFlSpecialization_AbSpecialization = 'Abbreviation';

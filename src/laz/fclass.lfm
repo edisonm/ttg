@@ -73,7 +73,7 @@ inherited ClassForm: TClassForm
     end
   end
   object DataSourceList: TDatasource[6]
-    DataSet = SourceDataModule.TbGroupId
+    DataSet = SourceDataModule.TbGroup
     left = 248
     top = 136
   end

@@ -406,14 +406,14 @@ inherited TimetableClassForm: TTimetableClassForm
       '  Class.IdGroup,'
       '  AbLevel,'
       '  AbSpecialization,'
-      '  NaGroupId'
+      '  NaGroup'
       'from'
       '  ((Class inner join Level on'
       '    (Class.IdLevel=Level.IdLevel))'
       '    inner join Specialization on'
       '    (Class.IdSpecialization=Specialization.IdSpecialization))'
-      '    inner join GroupId on'
-      '    (Class.IdGroup=GroupId.IdGroup),'
+      '    inner join Group on'
+      '    (Class.IdGroup=Group.IdGroup),'
       '  Timetable'
       'where'
       '  Timetable.IdTimetable=:IdTimetable'
@@ -508,10 +508,10 @@ inherited TimetableClassForm: TTimetableClassForm
       Visible = False
       Size = 10
     end
-    object QuClassNaGroupId: TStringField
+    object QuClassNaGroup: TStringField
       DisplayWidth = 5
       FieldKind = fkData
-      FieldName = 'NaGroupId'
+      FieldName = 'NaGroup'
       Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

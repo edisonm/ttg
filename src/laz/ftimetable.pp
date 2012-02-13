@@ -37,7 +37,7 @@ type
     QuClashRoomDetailNaSubject: TStringField;
     QuClashRoomDetailAbLevel: TStringField;
     QuClashRoomDetailAbSpecialization: TStringField;
-    QuClashRoomDetailNaGroupId: TStringField;
+    QuClashRoomDetailNaGroup: TStringField;
     DSClashRoom: TDataSource;
     QuClashTeacherDetail: TZQuery;
     QuClashTeacherDetailIdTeacher: TLongintField;
@@ -47,7 +47,7 @@ type
     QuClashTeacherDetailIdSubject: TLongintField;
     QuClashTeacherDetailAbLevel: TStringField;
     QuClashTeacherDetailAbSpecialization: TStringField;
-    QuClashTeacherDetailNaGroupId: TStringField;
+    QuClashTeacherDetailNaGroup: TStringField;
     QuClashTeacherDetailNaSubject: TStringField;
     QuClashTeacher: TZQuery;
     QuClashTeacherIdTeacher: TLongintField;
@@ -72,7 +72,7 @@ type
     QuTimetableDetailSubjectRestrictionNaSubjectRestrictionType: TStringField;
     QuTimetableDetailSubjectRestrictionAbLevel: TStringField;
     QuTimetableDetailSubjectRestrictionAbSpecialization: TStringField;
-    QuTimetableDetailSubjectRestrictionNaGroupId: TStringField;
+    QuTimetableDetailSubjectRestrictionNaGroup: TStringField;
     QuTimetableDetailTeacherRestriction: TZQuery;
     QuTimetableDetailTeacherRestrictionIdDay: TLongintField;
     QuTimetableDetailTeacherRestrictionIdHour: TLongintField;
@@ -83,7 +83,7 @@ type
     QuTimetableDetailTeacherRestrictionNaTeacherRestrictionType: TStringField;
     QuTimetableDetailTeacherRestrictionNaLevel: TStringField;
     QuTimetableDetailTeacherRestrictionNaSpecialization: TStringField;
-    QuTimetableDetailTeacherRestrictionNaGroupId: TStringField;
+    QuTimetableDetailTeacherRestrictionNaGroup: TStringField;
     QuTimetableDetailTeacherRestrictionNaDay: TStringField;
     QuTimetableDetailTeacherRestrictionNaHour: TStringField;
     Panel2: TPanel;
@@ -98,7 +98,7 @@ type
     QuSubjectCutDayIdSubject: TLongintField;
     QuSubjectCutDayAbLevel: TStringField;
     QuSubjectCutDayAbSpecialization: TStringField;
-    QuSubjectCutDayNaGroupId: TStringField;
+    QuSubjectCutDayNaGroup: TStringField;
     QuSubjectCutDayNaSubject: TStringField;
     QuSubjectCutDayNaDay: TStringField;
     QuSubjectCutDayNaHour: TStringField;
@@ -120,7 +120,7 @@ type
     QuClashSubjectDetailIdHour: TLongintField;
     QuClashSubjectDetailAbLevel: TStringField;
     QuClashSubjectDetailAbSpecialization: TStringField;
-    QuClashSubjectDetailNaGroupId: TStringField;
+    QuClashSubjectDetailNaGroup: TStringField;
     QuClashSubjectDetailNaDay: TStringField;
     QuClashSubjectDetailNaHour: TStringField;
     QuSubjectCutHourDetailIdLevel: TLongintField;
@@ -131,7 +131,7 @@ type
     QuSubjectCutHourDetailIdSubject: TLongintField;
     QuSubjectCutHourDetailAbLevel: TStringField;
     QuSubjectCutHourDetailAbSpecialization: TStringField;
-    QuSubjectCutHourDetailNaGroupId: TStringField;
+    QuSubjectCutHourDetailNaGroup: TStringField;
     QuSubjectCutHourDetailNaDay: TStringField;
     QuSubjectCutHourDetailNaHour: TStringField;
     QuSubjectCutHourDetailNaSubject: TStringField;
@@ -385,7 +385,7 @@ begin
   QuClashRoomDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
   QuClashRoomDetailAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
-  QuClashRoomDetailNaGroupId.DisplayLabel := SFlTimetableDetail_IdGroup;
+  QuClashRoomDetailNaGroup.DisplayLabel := SFlTimetableDetail_IdGroup;
   QuClashTeacherClashes.DisplayLabel := SClashes;
   QuClashTeacherLnTeacher.DisplayLabel := SFlTeacher_LnTeacher;
   QuClashTeacherNaTeacher.DisplayLabel := SFlTeacher_NaTeacher;
@@ -398,13 +398,13 @@ begin
   QuClashTeacherDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
   QuClashTeacherDetailAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
-  QuClashTeacherDetailNaGroupId.DisplayLabel := SFlTimetableDetail_IdGroup;
+  QuClashTeacherDetailNaGroup.DisplayLabel := SFlTimetableDetail_IdGroup;
   QuClashTeacherDetailNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
   QuClashSubjectNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
   QuClashSubjectDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
   QuClashSubjectDetailAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
-  QuClashSubjectDetailNaGroupId.DisplayLabel := SFlTimetableDetail_IdGroup;
+  QuClashSubjectDetailNaGroup.DisplayLabel := SFlTimetableDetail_IdGroup;
   QuClashSubjectDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuClashSubjectDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuTimetableDetailSubjectRestrictionNaSubjectRestrictionType.DisplayLabel
@@ -419,7 +419,7 @@ begin
     := SFlTimetableDetail_IdLevel;
   QuTimetableDetailSubjectRestrictionAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
-  QuTimetableDetailSubjectRestrictionNaGroupId.DisplayLabel
+  QuTimetableDetailSubjectRestrictionNaGroup.DisplayLabel
     := SFlTimetableDetail_IdGroup;
   QuTimetableDetailTeacherRestrictionNaDay.DisplayLabel
     := SFlTimetableDetail_IdDay;
@@ -431,13 +431,13 @@ begin
     := SFlTimetableDetail_IdLevel;
   QuTimetableDetailTeacherRestrictionNaSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
-  QuTimetableDetailTeacherRestrictionNaGroupId.DisplayLabel
+  QuTimetableDetailTeacherRestrictionNaGroup.DisplayLabel
     := SFlTimetableDetail_IdGroup;
   QuSubjectCutDayIdTimetable.DisplayLabel := SFlTimetableDetail_IdTimeTable;
   QuSubjectCutDayAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
   QuSubjectCutDayAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
-  QuSubjectCutDayNaGroupId.DisplayLabel := SFlTimetableDetail_IdGroup;
+  QuSubjectCutDayNaGroup.DisplayLabel := SFlTimetableDetail_IdGroup;
   QuSubjectCutDayNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuSubjectCutDayNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuSubjectCutDayNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
@@ -446,7 +446,7 @@ begin
   QuSubjectCutHourDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
   QuSubjectCutHourDetailAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
-  QuSubjectCutHourDetailNaGroupId.DisplayLabel := SFlTimetableDetail_IdGroup;
+  QuSubjectCutHourDetailNaGroup.DisplayLabel := SFlTimetableDetail_IdGroup;
   QuSubjectCutHourDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuSubjectCutHourDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuSubjectCutHourDetailNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;

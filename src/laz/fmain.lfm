@@ -164,10 +164,10 @@ object MainForm: TMainForm
         ParentShowHint = False
         ShowHint = True
       end
-      object SIGroupId: TToolButton
+      object SIGroup: TToolButton
         Left = 218
         Top = 0
-        Action = ActGroupId
+        Action = ActGroup
         ParentShowHint = False
         ShowHint = True
       end
@@ -662,8 +662,8 @@ object MainForm: TMainForm
         }
         OnClick = ActSpecializationExecute
       end
-      object MIGroupId: TMenuItem
-        Action = ActGroupId
+      object MIGroup: TMenuItem
+        Action = ActGroup
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -702,7 +702,7 @@ object MainForm: TMainForm
           00FF000000FF000000FF000000FF000000FFFF00FF00FF00FF00
         }
         ShortCut = 16457
-        OnClick = ActGroupIdExecute
+        OnClick = ActGroupExecute
       end
       object MIClass: TMenuItem
         Action = ActClass
@@ -2162,14 +2162,14 @@ object MainForm: TMainForm
       OnExecute = ActSpecializationExecute
       ShortCut = 16453
     end
-    object ActGroupId: TAction
+    object ActGroup: TAction
       Category = 'Data'
       AutoCheck = True
       Caption = 'Group IDs'
       HelpContext = 190
       Hint = 'Group IDs|Group IDs'
       ImageIndex = 8
-      OnExecute = ActGroupIdExecute
+      OnExecute = ActGroupExecute
       ShortCut = 16466
     end
     object ActClass: TAction

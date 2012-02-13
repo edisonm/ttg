@@ -9,9 +9,9 @@ Level
 "4";"Cuarto";"4";
 "5";"Quinto";"5";
 "6";"Sexto";"6";
-GroupId
+Group
 5
-"IdGroup";"NaGroupId";
+"IdGroup";"NaGroup";
 "1";"A";
 "2";"B";
 "3";"C";
@@ -3245,7 +3245,7 @@ CrossProbability=0,3
 MutationProbability1=0,2
 MutationProbability2=0,2
 ReparationProbability=0,1
-TeacherTimetableShowText=AbLevel + " " + NaGroupId + " " + NaSubject
+TeacherTimetableShowText=AbLevel + " " + NaGroup + " " + NaSubject
 TeacherTimetableShowLength=20
 TeacherTimetableExcluirProfRestriction=(TeacherRestriction.IdTeacherRestrictionType <> 2)AND(TeacherRestriction.IdTeacherRestrictionType <> 3)
 PollinationProbability=0,1

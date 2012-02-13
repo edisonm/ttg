@@ -314,11 +314,11 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       '  TimetableDetail.IdHour,'
       '  Level.IdLevel,'
       '  Specialization.IdSpecialization,'
-      '  GroupId.IdGroup,'
+      '  Group.IdGroup,'
       '  Subject.NaSubject,'
       '  AbLevel,'
       '  AbSpecialization,'
-      '  NaGroupId'
+      '  NaGroup'
       'FROM'
       '  ((((TimetableDetail'
       '  INNER JOIN Distribution'
@@ -328,7 +328,7 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       '  AND (TimetableDetail.IdGroup=Distribution.IdGroup))'
       '  INNER JOIN Level ON TimetableDetail.IdLevel=Level.IdLevel)'
       '  INNER JOIN Specialization ON TimetableDetail.IdSpecialization=Specialization.IdSpecialization)'
-      '  INNER JOIN GroupId ON Distribution.IdGroup=GroupId.IdGroup)'
+      '  INNER JOIN Group ON Distribution.IdGroup=Group.IdGroup)'
       '  INNER JOIN Subject ON Distribution.IdSubject=Subject.IdSubject'
       'WHERE (Distribution.IdRoomType=:IdRoomType)'
       '  AND (TimetableDetail.IdTimetable=:IdTimetable)'
@@ -336,7 +336,7 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       '  TimetableDetail.IdHour,'
       '  Level.IdLevel,'
       '  Specialization.IdSpecialization,'
-      '  GroupId.IdGroup,'
+      '  Group.IdGroup,'
       '  Subject.NaSubject'
     )
     Params = <    
@@ -487,10 +487,10 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       Required = False
       Size = 10
     end
-    object QuTimetableRoomTypeNaGroupId: TStringField
+    object QuTimetableRoomTypeNaGroup: TStringField
       DisplayWidth = 5
       FieldKind = fkData
-      FieldName = 'NaGroupId'
+      FieldName = 'NaGroup'
       Index = 11
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

@@ -15,16 +15,16 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 56
     Top = 40
   end
-  object TbGroupId: TZTable
+  object TbGroup: TZTable
     Tag = 1
     Connection = DbZConnection
-    TableName = 'GroupId'
+    TableName = 'Group'
     IndexFieldNames = 'IdGroup'
     Left = 144
     Top = 60
   end
-  object DSGroupId: TDataSource
-    DataSet = TbGroupId
+  object DSGroup: TDataSource
+    DataSet = TbGroup
     Left = 152
     Top = 52
   end

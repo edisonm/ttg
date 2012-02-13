@@ -29,7 +29,7 @@ type
     QuTimetableTeacherName: TStringField;
     QuTimetableTeacherAbLevel: TStringField;
     QuTimetableTeacherAbSpecialization: TStringField;
-    QuTimetableTeacherNaGroupId: TStringField;
+    QuTimetableTeacherNaGroup: TStringField;
     DSTeacher: TDataSource;
     DBNavigator: TDBNavigator;
     DBGrid1: TDBGrid;
@@ -83,7 +83,7 @@ begin
   cbxShowTeacher.Items.Clear;
   QuTimetableTeacher.Open;
   QuTimetableTeacherAbSpecialization.DisplayLabel := SFlTimetableDetail_IdSpecialization;
-  QuTimetableTeacherNaGroupId.DisplayLabel := SFlTimetableDetail_IdGroup;
+  QuTimetableTeacherNaGroup.DisplayLabel := SFlTimetableDetail_IdGroup;
   QuTimetableTeacherNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
   QuTimetableTeacherName.DisplayLabel := SFlTeacher_NaTeacher;
   QuTeacherLnTeacher.DisplayLabel := SFlTeacher_LnTeacher;

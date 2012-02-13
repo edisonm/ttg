@@ -284,10 +284,10 @@ begin
   begin
     DisplayLabel := SFlClass_IdGroup;
     FieldKind := fkLookup;
-    FieldName := 'NaGroupId';
-    LookupDataSet := TbGroupId;
+    FieldName := 'NaGroup';
+    LookupDataSet := TbGroup;
     LookupKeyFields := 'IdGroup';
-    LookupResultField := 'NaGroupId';
+    LookupResultField := 'NaGroup';
     KeyFields := 'IdGroup';
     Size := 5;
     Lookup := True;
@@ -374,10 +374,10 @@ begin
     DisplayLabel := SFlDistribution_IdGroup;
     DisplayWidth := 4;
     FieldKind := fkLookup;
-    FieldName := 'NaGroupId';
-    LookupDataSet := SourceDataModule.TbGroupId;
+    FieldName := 'NaGroup';
+    LookupDataSet := SourceDataModule.TbGroup;
     LookupKeyFields := 'IdGroup';
-    LookupResultField := 'NaGroupId';
+    LookupResultField := 'NaGroup';
     KeyFields := 'IdGroup';
     Size := 5;
     Lookup := True;
@@ -463,7 +463,7 @@ begin
   TbHour.FindField('IdHour').Visible := False;
   TbCourse.FindField('IdLevel').Visible := False;
   TbCourse.FindField('IdSpecialization').Visible := False;
-  TbGroupId.FindField('IdGroup').Visible := False;
+  TbGroup.FindField('IdGroup').Visible := False;
   TbSubjectRestrictionType.FindField('IdSubjectRestrictionType').Visible := False;
   TbTimeSlot.FindField('IdDay').Visible := False;
   TbTimeSlot.FindField('IdHour').Visible := False;

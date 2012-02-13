@@ -29,8 +29,8 @@ type
     DbZConnection: TZConnection;
     TbLevel: TZTable;
     DSLevel: TDataSource;
-    TbGroupId: TZTable;
-    DSGroupId: TDataSource;
+    TbGroup: TZTable;
+    DSGroup: TDataSource;
     TbSpecialization: TZTable;
     DSSpecialization: TDataSource;
     TbDay: TZTable;
@@ -88,7 +88,7 @@ begin
   OnDestroy := DataModuleDestroy;
   SetLength(FTables, 20);
   Tables[0] := TbLevel;
-  Tables[1] := TbGroupId;
+  Tables[1] := TbGroup;
   Tables[2] := TbSpecialization;
   Tables[3] := TbDay;
   Tables[4] := TbCourse;
@@ -110,7 +110,7 @@ begin
   with DataSetNameList do
   begin
     Add('TbLevel=Level');
-    Add('TbGroupId=GroupId');
+    Add('TbGroup=Group');
     Add('TbSpecialization=Specialization');
     Add('TbDay=Day');
     Add('TbCourse=Course');
@@ -135,8 +135,8 @@ begin
     Add('TbLevel.IdLevel=' + SFlLevel_IdLevel);
     Add('TbLevel.NaLevel=' + SFlLevel_NaLevel);
     Add('TbLevel.AbLevel=' + SFlLevel_AbLevel);
-    Add('TbGroupId.IdGroup=' + SFlGroupId_IdGroup);
-    Add('TbGroupId.NaGroupId=' + SFlGroupId_NaGroupId);
+    Add('TbGroup.IdGroup=' + SFlGroup_IdGroup);
+    Add('TbGroup.NaGroup=' + SFlGroup_NaGroup);
     Add('TbSpecialization.IdSpecialization=' + SFlSpecialization_IdSpecialization);
     Add('TbSpecialization.NaSpecialization=' + SFlSpecialization_NaSpecialization);
     Add('TbSpecialization.AbSpecialization=' + SFlSpecialization_AbSpecialization);
@@ -214,7 +214,7 @@ begin
   with DataSetDescList do
   begin
     Add('TbLevel=' + STbLevel);
-    Add('TbGroupId=' + STbGroupId);
+    Add('TbGroup=' + STbGroup);
     Add('TbSpecialization=' + STbSpecialization);
     Add('TbDay=' + STbDay);
     Add('TbCourse=' + STbCourse);

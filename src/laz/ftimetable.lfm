@@ -955,16 +955,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuClashRoomDetailNaGroupId: TStringField
+    object QuClashRoomDetailNaGroup: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroupId'
+      FieldName = 'NaGroup'
       Index = 10
       KeyFields = 'IdGroup'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroupId
+      LookupDataSet = SourceDataModule.TbGroup
       LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroupId'
+      LookupResultField = 'NaGroup'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
@@ -1169,16 +1169,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuClashTeacherDetailNaGroupId: TStringField
+    object QuClashTeacherDetailNaGroup: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroupId'
+      FieldName = 'NaGroup'
       Index = 10
       KeyFields = 'IdGroup'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroupId
+      LookupDataSet = SourceDataModule.TbGroup
       LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroupId'
+      LookupResultField = 'NaGroup'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
@@ -1601,16 +1601,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuClashSubjectDetailNaGroupId: TStringField
+    object QuClashSubjectDetailNaGroup: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroupId'
+      FieldName = 'NaGroup'
       Index = 9
       KeyFields = 'IdGroup'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroupId
+      LookupDataSet = SourceDataModule.TbGroup
       LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroupId'
+      LookupResultField = 'NaGroup'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
@@ -1857,16 +1857,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuTimetableDetailSubjectRestrictionNaGroupId: TStringField
+    object QuTimetableDetailSubjectRestrictionNaGroup: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroupId'
+      FieldName = 'NaGroup'
       Index = 13
       KeyFields = 'IdGroup'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroupId
+      LookupDataSet = SourceDataModule.TbGroup
       LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroupId'
+      LookupResultField = 'NaGroup'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
@@ -2101,16 +2101,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuTimetableDetailTeacherRestrictionNaGroupId: TStringField
+    object QuTimetableDetailTeacherRestrictionNaGroup: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroupId'
+      FieldName = 'NaGroup'
       Index = 14
       KeyFields = 'IdGroup'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroupId
+      LookupDataSet = SourceDataModule.TbGroup
       LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroupId'
+      LookupResultField = 'NaGroup'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
@@ -2268,16 +2268,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuSubjectCutDayNaGroupId: TStringField
+    object QuSubjectCutDayNaGroup: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroupId'
+      FieldName = 'NaGroup'
       Index = 9
       KeyFields = 'IdGroup'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroupId
+      LookupDataSet = SourceDataModule.TbGroup
       LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroupId'
+      LookupResultField = 'NaGroup'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
@@ -2658,16 +2658,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuSubjectCutHourDetailNaGroupId: TStringField
+    object QuSubjectCutHourDetailNaGroup: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroupId'
+      FieldName = 'NaGroup'
       Index = 10
       KeyFields = 'IdGroup'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroupId
+      LookupDataSet = SourceDataModule.TbGroup
       LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroupId'
+      LookupResultField = 'NaGroup'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
