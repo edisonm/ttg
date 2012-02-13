@@ -1909,6 +1909,10 @@ msgctxt "uttgconsts.sname"
 msgid "Name"
 msgstr ""
 
+#: uttgconsts.sno
+msgid "No"
+msgstr ""
+
 #: uttgconsts.snoerrorreadyforchecksummary
 msgid "Ready to generate timetable. Show timetable check Summary?"
 msgstr ""
@@ -2048,5 +2052,9 @@ msgstr ""
 
 #: uttgconsts.swrongcomposition
 msgid "Wrong Composition"
+msgstr ""
+
+#: uttgconsts.syes
+msgid "Yes"
 msgstr ""
 

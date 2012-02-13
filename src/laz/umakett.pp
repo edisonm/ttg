@@ -79,7 +79,7 @@ begin
 end;
 
 const
-  FBoolToStr: array [Boolean] of string = ('No', 'Si');
+  FBoolToStr: array [Boolean] of string = (SNo, SYes);
 
 procedure LoadBookmarks(s: string; Individual: TIndividual;
     ClassCount: Integer; out Bookmarks: TBookmarkArray);

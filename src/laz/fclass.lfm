@@ -1,5 +1,5 @@
 inherited ClassForm: TClassForm
-  Left = 556
+  Left = 549
   Height = 380
   Top = 154
   Width = 635
