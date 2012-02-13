@@ -1,10 +1,10 @@
 object MainForm: TMainForm
-  Left = 658
-  Height = 60
+  Left = 651
+  Height = 362
   Top = 171
   Width = 718
   Caption = 'MainForm'
-  ClientHeight = 60
+  ClientHeight = 362
   ClientWidth = 718
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -53,7 +53,7 @@ object MainForm: TMainForm
   object StatusBar: TStatusBar
     Left = 0
     Height = 19
-    Top = 41
+    Top = 343
     Width = 718
     AutoHint = True
     Panels = <    
@@ -268,8 +268,8 @@ object MainForm: TMainForm
   end
   object MainMenu: TMainMenu
     Images = ImageList
-    left = 48
-    top = 224
+    left = 424
+    top = 72
     object MIFile: TMenuItem
       Caption = '&File'
       HelpContext = 30
@@ -1020,6 +1020,7 @@ object MainForm: TMainForm
           AutoCheck = True
           GroupIndex = 1
           RadioItem = True
+          ShowAlwaysCheckable = True
         end
         object MILangEnglish: TMenuItem
           Action = ActLangEnglish
@@ -1139,20 +1140,20 @@ object MainForm: TMainForm
   end
   object SaveDialog: TSaveDialog
     Options = [ofOverwritePrompt, ofHideReadOnly, ofEnableSizing]
-    left = 48
-    top = 272
+    left = 520
+    top = 72
   end
   object OpenDialog: TOpenDialog
     DefaultExt = '.ttd'
     Filter = 'High School Timetable (*.ttd)|*.ttd'
     Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
-    left = 48
-    top = 176
+    left = 328
+    top = 72
   end
   object ImageList: TImageList
     BkColor = clBtnFace
-    left = 48
-    top = 128
+    left = 240
+    top = 72
     Bitmap = {
       4C691B0000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -2238,6 +2239,7 @@ object MainForm: TMainForm
     end
     object ActLangDefault: TAction
       Category = 'Tools'
+      AutoCheck = True
       Caption = 'Default Language'
       Checked = True
       GroupIndex = 1

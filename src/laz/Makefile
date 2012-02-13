@@ -18,8 +18,8 @@ all: $(FILES)
 $(LAZRES): $(LAZBASE)/tools/lazres.lpi
 	cd "$(LAZBASE)/tools" && $(LAZBUILD) "lazres.lpi"
 
-%.lrs: %.lfm $(LRSDEP)
-	$(LAZRES) $@ $<
+# %.lrs: %.lfm $(LRSDEP)
+# 	$(LAZRES) $@ $<
 
 ttg.lrs: locale/ttg.es.po
 	$(LAZRES) $@ $<
