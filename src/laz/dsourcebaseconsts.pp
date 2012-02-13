@@ -2,7 +2,7 @@
 unit dsourcebaseconsts;
 
 (*
-  13/02/2012 2:31
+  13/02/2012 17:45
 
   Warning:
 
@@ -78,6 +78,7 @@ resourcestring
   SFlDistribution_IdGroupId = 'Group Id';
   SFlDistribution_IdTeacher = 'Teacher';
   SFlDistribution_IdRoomType = 'Room Type';
+  SFlDistribution_RoomCount = 'Room Count';
   SFlDistribution_Composition = 'Composition';
   SFlJoinedClass_IdSubject = 'Subject';
   SFlJoinedClass_IdLevel = 'Level';

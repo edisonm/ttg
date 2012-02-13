@@ -18,7 +18,7 @@ type
     FTimetableModel: TTimetableModel;
     FValidIdes: TDynamicIntegerArray;
     procedure Parallel(Index: PtrInt; Data: Pointer; Item: TMultiThreadProcItem);
-    function ProcessTimetable(AIdTimetable: Integer): Boolean;
+    function ProcessTimetable(AIdTimetable, ATimetable: Integer): Boolean;
   public
   procedure Execute; override;
   constructor Create(const AValidIdes: TDynamicIntegerArray; CreateSuspended: Boolean);
@@ -124,7 +124,7 @@ begin
   end;
 end;
 
-function TMakeTimetableThread.ProcessTimetable(AIdTimetable: Integer): Boolean;
+function TMakeTimetableThread.ProcessTimetable(AIdTimetable, ATimetable: Integer): Boolean;
 var
   VEvolElitist: TEvolElitist;
   DownHill: TDownHill;
@@ -145,9 +145,8 @@ begin
       MutationProbability, ReparationProbability, InitialTimetables);
     try
       TThread.Synchronize(CurrentThread, VEvolElitist.Initialize);
-      ProgressFormDrv := TProgressFormDrv.Create;
+      ProgressFormDrv := TProgressFormDrv.Create(ATimetable);
       try
-        {VEvolElitist.OnRecordBest := MainForm.OnRegistrarMejor;}
         ProgressFormDrv.Caption := Format(SWorkInProgress, [AIdTimetable]);
         VEvolElitist.OnProgress := ProgressFormDrv.OnProgress;
         VEvolElitist.Execute(RefreshInterval);
@@ -204,7 +203,7 @@ procedure TMakeTimetableThread.Parallel(Index: PtrInt; Data: Pointer;
   Item: TMultiThreadProcItem);
 begin
   MasterDataModule.ConfigStorage.InitRandom;
-  if ProcessTimetable(FValidIdes[Index]) then
+  if ProcessTimetable(FValidIdes[Index], Index) then
     Terminate;
 end;
 
@@ -290,7 +289,7 @@ begin
         Free;
       end;
       TDownHill.DownHill(DownHill.BestIndividual);
-      ProgressFormDrv := TProgressFormDrv.Create;
+      ProgressFormDrv := TProgressFormDrv.Create(0);
       try
         DownHill.OnProgress := ProgressFormDrv.OnProgress;
         ProgressFormDrv.Caption := Format(SImprovingTimetableIn,

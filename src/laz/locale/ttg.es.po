@@ -96,6 +96,10 @@ msgctxt "dsourcebaseconsts.sfldistribution_idteacher"
 msgid "Teacher"
 msgstr "Profesor"
 
+#: dsourcebaseconsts.sfldistribution_roomcount
+msgid "Room Count"
+msgstr "Numero de Aulas"
+
 #: dsourcebaseconsts.sflgroupid_idgroupid
 msgctxt "dsourcebaseconsts.sflgroupid_idgroupid"
 msgid "Id"
@@ -462,7 +466,7 @@ msgstr "Profesores"
 #: dsourcebaseconsts.stbteacherrestriction
 msgctxt "dsourcebaseconsts.stbteacherrestriction"
 msgid "Teacher Restrictions"
-msgstr "Restriccions de profesores"
+msgstr "Restricciones de profesores"
 
 #: dsourcebaseconsts.stbteacherrestrictiontype
 msgctxt "dsourcebaseconsts.stbteacherrestrictiontype"
@@ -2012,7 +2016,7 @@ msgstr "Buscar por %s"
 
 #: uttgconsts.steacherrestrictionshead
 msgid "Teacher; Restrictions"
-msgstr "Profesor; Restriccions"
+msgstr "Profesor; Restricciones"
 
 #: uttgconsts.steachersworkloadwithoutproblems
 msgid "Teachers' Work load without problems..."

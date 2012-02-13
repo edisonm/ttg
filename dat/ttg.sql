@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  13/02/2012 2:31
+  13/02/2012 17:45
 
   Warning:
 
@@ -76,6 +76,7 @@ CREATE TABLE IF NOT EXISTS `Distribution`(
     `IdGroupId` integer NOT NULL,
     `IdTeacher` integer NOT NULL,
     `IdRoomType` integer NOT NULL,
+    `RoomCount` integer,
     `Composition` varchar(40) NOT NULL,
   CONSTRAINT PrimaryKey PRIMARY KEY(IdSubject,IdLevel,IdSpecialization,IdGroupId),
   CONSTRAINT ClassDistribution FOREIGN KEY (IdLevel,IdSpecialization,IdGroupId)

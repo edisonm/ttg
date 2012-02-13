@@ -45,14 +45,14 @@ type
       FOutOfPositionEmptyHourValue, FBrokenSessionValue,
       FBreakTimetableTeacherValue, FNonScatteredSubjectValue: Integer;
     FTimeSlotToDay, FTimeSlotToHour, FDayToMaxTimeSlot, FSessionToDistribution,
-      FSessionToSubject, FSessionToRoomType, FRoomTypeToNumber,
+      FSessionToSubject, FSessionToRoomType, FSessionToRoomCount, FRoomTypeToNumber,
       FSubjectRestrictionToSubject, FSubjectRestrictionToTimeSlot,
       FSubjectRestrictionToSubjectRestrictionType, FTeacherRestrictionToTeacher,
       FTeacherRestrictionToTimeSlot, FTeacherRestrictionToTeacherRestrictionType,
-      FDistributionToRoomType, FClassToCourse, FClassToLevel, FClassToGroupId,
-      FDistributionToClass, FClassToSpecialization, FClassToSessionCount,
-      FSubjectRestrictionTypeToValue, FTeacherRestrictionTypeToValue,
-    FSubjectRestrictionToValue, FTeacherRestrictionToValue: TDynamicIntegerArray;
+      FDistributionToRoomType, FDistributionToRoomCount, FClassToCourse,
+      FClassToLevel, FClassToGroupId, FDistributionToClass, FClassToSpecialization,
+      FClassToSessionCount, FSubjectRestrictionTypeToValue, FTeacherRestrictionTypeToValue,
+      FSubjectRestrictionToValue, FTeacherRestrictionToValue: TDynamicIntegerArray;
     FSessionToDuration: TSessionArray;
     FDayHourToTimeSlot, FLevelSpecializationToCourse, FCourseGroupIdToClass,
       FClassSubjectToTeacher, FClassSubjectToDistribution, FClassSubjectCount,
@@ -602,10 +602,10 @@ var
   end;
   procedure LoadDistribution;
   var
-    Subject, Level, Specialization, GroupId, Session1, Distribution,
+    Subject, Level, Specialization, GroupId, Session1, Distribution, RoomCount,
       VClass, Teacher, Course, Session2, Session, RoomType, VPos: Integer;
-    VFieldSubject, VFieldLevel, VFieldGroupId, VFieldTeacher,
-      VFieldSpecialization, VFieldRoomType, VFieldComposition: TField;
+    VFieldSubject, VFieldLevel, VFieldGroupId, VFieldTeacher, VFieldSpecialization,
+      VFieldRoomType, VFieldRoomCount, VFieldComposition: TField;
     VSessionToDuration, VSessionToDistribution: array [0 .. 16383] of Integer;
     Composition: string;
   begin
@@ -619,12 +619,14 @@ var
       VFieldGroupId := FindField('IdGroupId');
       VFieldTeacher := FindField('IdTeacher');
       VFieldRoomType := FindField('IdRoomType');
+      VFieldRoomCount := FindField('RoomCount');
       VFieldComposition := FindField('Composition');
       FDistributionCount := RecordCount;
       // SetLength(FDistributionAAsignatura, RecordCount);
       SetLength(FDistributionToClass, FDistributionCount);
       SetLength(FDistributionToTeacher, FDistributionCount);
       SetLength(FDistributionToRoomType, FDistributionCount);
+      SetLength(FDistributionToRoomCount, FDistributionCount);
       SetLength(FDistributionToSessions, FDistributionCount);
       SetLength(FDistributionToSubject, FDistributionCount);
       SetLength(FClassSubjectToTeacher, FClassCount, FSubjectCount);
@@ -647,12 +649,14 @@ var
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
         RoomType := FIdRoomTypeARoomType[VFieldRoomType.AsInteger - FMinIdRoomType];
+        RoomCount := VFieldRoomCount.AsInteger;
         Course := FLevelSpecializationToCourse[Level, Specialization];
         VClass := FCourseGroupIdToClass[Course, GroupId];
         Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
         FDistributionToClass[Distribution] := VClass;
         FDistributionToTeacher[Distribution] := Teacher;
         FDistributionToRoomType[Distribution] := RoomType;
+        FDistributionToRoomCount[Distribution] := RoomCount;
         FDistributionToSubject[Distribution] := Subject;
         FClassSubjectToTeacher[VClass, Subject] := Teacher;
         FClassSubjectToDistribution[VClass, Subject] := Distribution;
@@ -679,6 +683,7 @@ var
       SetLength(FSessionToDistribution, Session2);
       SetLength(FSessionToSubject, Session2);
       SetLength(FSessionToRoomType, Session2);
+      SetLength(FSessionToRoomCount, Session2);
       Move(VSessionToDuration[0], FSessionToDuration[0], Session2 * SizeOf(Integer));
       FSessionToDuration[-1] := 1;
       Move(VSessionToDistribution[0], FSessionToDistribution[0],
@@ -688,6 +693,7 @@ var
         Distribution := FSessionToDistribution[Session];
         FSessionToSubject[Session] := FDistributionToSubject[Distribution];
         FSessionToRoomType[Session] := FDistributionToRoomType[Distribution];
+        FSessionToRoomCount[Session] := FDistributionToRoomCount[Distribution];
       end;
     end;
   end;
@@ -1202,7 +1208,7 @@ begin
         Inc(FTeacherTimeSlotCount[Teacher, TimeSlot], Delta);
         Inc(FSubjectTimeSlotCount[Subject, TimeSlot], Delta);
         if FRoomTypeTimeSlotCount[RoomType, TimeSlot] >= FRoomTypeToNumber[RoomType] + Limit then
-          Inc(FClashRoomType, Delta);
+          Inc(FClashRoomType, Delta * FSessionToRoomCount[Session]);
         Inc(FRoomTypeTimeSlotCount[RoomType, TimeSlot], Delta);
         SubjectRestrictionType := FSubjectTimeSlotToSubjectRestrictionType[Subject, TimeSlot];
         if SubjectRestrictionType >= 0 then

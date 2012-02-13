@@ -2,7 +2,7 @@
 unit dsourcebase;
 
 (*
-  13/02/2012 2:31
+  13/02/2012 17:45
 
   Warning:
 
@@ -166,6 +166,7 @@ begin
     Add('TbDistribution.IdGroupId=' + SFlDistribution_IdGroupId);
     Add('TbDistribution.IdTeacher=' + SFlDistribution_IdTeacher);
     Add('TbDistribution.IdRoomType=' + SFlDistribution_IdRoomType);
+    Add('TbDistribution.RoomCount=' + SFlDistribution_RoomCount);
     Add('TbDistribution.Composition=' + SFlDistribution_Composition);
     Add('TbJoinedClass.IdSubject=' + SFlJoinedClass_IdSubject);
     Add('TbJoinedClass.IdLevel=' + SFlJoinedClass_IdLevel);

@@ -96,6 +96,10 @@ msgctxt "dsourcebaseconsts.sfldistribution_idteacher"
 msgid "Teacher"
 msgstr ""
 
+#: dsourcebaseconsts.sfldistribution_roomcount
+msgid "Room Count"
+msgstr ""
+
 #: dsourcebaseconsts.sflgroupid_idgroupid
 msgctxt "dsourcebaseconsts.sflgroupid_idgroupid"
 msgid "Id"

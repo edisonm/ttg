@@ -107,12 +107,13 @@ type
     FProgressForm: TProgressForm;
     FMax: Integer;
     FPosition: Integer;
+    FTimetable: Integer;
     FSolver: TSolver;
     FCaption: string;
     procedure SetCaption(const AValue: string);
     procedure UpdateCaption;
   public
-    constructor Create;
+    constructor Create(Timetable: Integer);
     destructor Destroy; override;
     procedure CreateForm;
     procedure DestroyForm;
@@ -240,9 +241,10 @@ begin
   FProgressForm.Caption := FCaption;
 end;
 
-constructor TProgressFormDrv.Create;
+constructor TProgressFormDrv.Create(Timetable: Integer);
 begin
   inherited Create;
+  FTimetable := Timetable;
   TThread.Synchronize(CurrentThread, CreateForm);
 end;
 
@@ -256,6 +258,8 @@ procedure TProgressFormDrv.CreateForm;
 begin
   FProgressForm := TProgressForm.Create(Application);
   FProgressForm.FUpdateIndex := MainForm.UpdateIndex;
+  FProgressForm.Top := FProgressForm.Top + 20 * FTimetable;
+  FProgressForm.Left := FProgressForm.Left + 20 * FTimetable;
 end;
 
 procedure TProgressFormDrv.DestroyForm;
