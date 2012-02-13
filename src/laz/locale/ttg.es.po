@@ -1520,7 +1520,7 @@ msgstr "Profesor"
 
 #: tteacherform.cbjoinedclass.caption
 msgid "Joined Classes"
-msgstr ""
+msgstr "Clases agrupadas"
 
 #: tteacherform.dbgriddetail.hint
 msgid "Distribution of Teachers"
@@ -1528,11 +1528,11 @@ msgstr "Distribution de profesores"
 
 #: tteacherform.grbdetail.caption
 msgid "Distribution"
-msgstr ""
+msgstr "Distribucion"
 
 #: tteacherform.groupbox3.caption
 msgid "Assistances"
-msgstr ""
+msgstr "Ayudantes"
 
 #: ttimetableclassform.btnintercambiartimeslots.hint
 msgid "Swap time slots|Swap time slots"
