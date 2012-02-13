@@ -639,6 +639,7 @@ begin
       DbZConnection.ExecuteDirect(LazarusResources.Find('ttg', 'SQL').Value);
       PrepareTables;
       QuTeacher.Open;
+      QuClass.Open;
       OpenTables;
       if Paramcount <> 1 then
       begin
@@ -650,6 +651,7 @@ begin
     begin
       PrepareTables;
       QuTeacher.Open;
+      QuClass.Open;
       OpenTables;
     end;
     TbDistribution.BeforePost := TbDistributionBeforePost;

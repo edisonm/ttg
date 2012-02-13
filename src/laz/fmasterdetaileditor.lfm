@@ -14,7 +14,7 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
       Hints.Strings = (      )
     end
   end
-  inherited pnlStatus: TPanel
+  inherited PnStatus: TPanel
     Top = 411
     Width = 603
     ClientWidth = 603

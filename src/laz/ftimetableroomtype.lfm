@@ -62,7 +62,7 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       TabOrder = 0
     end
   end
-  inherited pnlStatus: TPanel
+  inherited PnStatus: TPanel
     Top = 412
     Width = 775
   end

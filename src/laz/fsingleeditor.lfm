@@ -43,7 +43,7 @@ inherited SingleEditorForm: TSingleEditorForm
       TabOrder = 0
     end
   end
-  inherited pnlStatus: TPanel
+  inherited PnStatus: TPanel
     Top = 289
     Width = 485
     ClientWidth = 485

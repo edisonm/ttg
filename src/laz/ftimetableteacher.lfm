@@ -59,7 +59,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       TabOrder = 0
     end
   end
-  inherited pnlStatus: TPanel
+  inherited PnStatus: TPanel
     Top = 424
     Width = 682
   end

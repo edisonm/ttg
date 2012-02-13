@@ -31,7 +31,7 @@ object EditorForm: TEditorForm
       ShowHint = True
     end
   end
-  object pnlStatus: TPanel
+  object PnStatus: TPanel
     Left = 0
     Height = 19
     Top = 280

@@ -96,7 +96,7 @@ inherited TimetableForm: TTimetableForm
       ShowHint = True
     end
   end
-  inherited pnlStatus: TPanel
+  inherited PnStatus: TPanel
     Top = 421
     Width = 677
     ClientWidth = 677

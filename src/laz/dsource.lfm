@@ -2,7 +2,7 @@ inherited SourceDataModule: TSourceDataModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 440
-  HorizontalOffset = 596
+  HorizontalOffset = 568
   VerticalOffset = 459
   Width = 667
   inherited DbZConnection: TZConnection
@@ -23,7 +23,7 @@ inherited SourceDataModule: TSourceDataModule
     )
     Params = <>
     left = 544
-    top = 104
+    top = 112
   end
   object QuTeacher: TZReadOnlyQuery[42]
     Connection = DbZConnection
@@ -43,7 +43,7 @@ inherited SourceDataModule: TSourceDataModule
     DataSource = DSDistribution
     MasterFields = 'IdTeacher'
     LinkedFields = 'IdTeacher'
-    left = 544
+    left = 552
     top = 184
     ParamData = <    
       item
@@ -51,27 +51,57 @@ inherited SourceDataModule: TSourceDataModule
         Name = 'IdTeacher'
         ParamType = ptUnknown
       end>
-    object QuTeacherIdTeacher: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdTeacher'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuTeacherNameTeacher: TStringField
-      DisplayWidth = 31
-      FieldKind = fkData
-      FieldName = 'NameTeacher'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = True
-      Size = 31
-    end
+  end
+  object QuClass: TZReadOnlyQuery[43]
+    Connection = DbZConnection
+    SQL.Strings = (
+      'SELECT Class.IdLevel, Class.IdSpecialization, Class.IdGroupId,'
+      ' AbLevel || " " || AbSpecialization || " " || NaGroupId AS NameClass'
+      'FROM'
+      ' Class INNER JOIN Level ON Class.IdLevel=Level.IdLevel'
+      ' INNER JOIN Specialization ON Class.IdSpecialization=Specialization.IdSpecialization'
+      ' INNER JOIN GroupId ON Class.IdGroupId = GroupId.IdGroupId'
+      'WHERE'
+      ' Class.IdLevel<>:IdLevel OR'
+      ' Class.IdSpecialization<>:IdSpecialization OR'
+      ' Class.IdGroupId<>:IdGroupId'
+    )
+    Params = <    
+      item
+        DataType = ftInteger
+        Name = 'IdLevel'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdSpecialization'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdGroupId'
+        ParamType = ptUnknown
+      end>
+    DataSource = DSDistribution
+    MasterFields = 'IdLevel,IdSpecialization,IdGroupId'
+    LinkedFields = 'IdLevel;IdSpecialization;IdGroupId'
+    left = 552
+    top = 248
+    ParamData = <    
+      item
+        DataType = ftInteger
+        Name = 'IdLevel'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdSpecialization'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftInteger
+        Name = 'IdGroupId'
+        ParamType = ptUnknown
+      end>
   end
 end

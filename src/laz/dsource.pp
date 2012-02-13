@@ -14,10 +14,9 @@ type
   { TSourceDataModule }
 
   TSourceDataModule = class(TSourceBaseDataModule)
+    QuClass: TZReadOnlyQuery;
     ZTables: TZReadOnlyQuery;
     QuTeacher: TZReadOnlyQuery;
-    QuTeacherIdTeacher: TLongintField;
-    QuTeacherNameTeacher: TStringField;
     procedure TbDistributionBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
@@ -440,44 +439,14 @@ begin
   Field := TStringField.Create(TbJoinedClass.Owner);
   with Field do
   begin
-    DisplayLabel := SFlJoinedClass_IdLevel;
+    DisplayLabel := 'Class Name';
     DisplayWidth := 4;
     FieldKind := fkLookup;
-    FieldName := 'AbLevel';
-    LookupDataSet := SourceDataModule.TbLevel;
-    LookupKeyFields := 'IdLevel';
-    LookupResultField := 'AbLevel';
-    KeyFields := 'IdLevel1';
-    Size := 5;
-    Lookup := True;
-    DataSet := TbJoinedClass;
-  end;
-  Field := TStringField.Create(TbJoinedClass.Owner);
-  with Field do
-  begin
-    DisplayLabel := SFlJoinedClass_IdSpecialization;
-    DisplayWidth := 4;
-    FieldKind := fkLookup;
-    FieldName := 'AbSpecialization';
-    LookupDataSet := SourceDataModule.TbSpecialization;
-    LookupKeyFields := 'IdSpecialization';
-    LookupResultField := 'AbSpecialization';
-    KeyFields := 'IdSpecialization1';
-    Size := 10;
-    Lookup := True;
-    DataSet := TbJoinedClass;
-  end;
-  Field := TStringField.Create(TbJoinedClass.Owner);
-  with Field do
-  begin
-    DisplayLabel := SFlJoinedClass_IdGroupId;
-    DisplayWidth := 4;
-    FieldKind := fkLookup;
-    FieldName := 'NaGroupId';
-    LookupDataSet := SourceDataModule.TbGroupId;
-    LookupKeyFields := 'IdGroupId';
-    LookupResultField := 'NaGroupId';
-    KeyFields := 'IdGroupId1';
+    FieldName := 'NameClass';
+    LookupDataSet := SourceDataModule.QuClass;
+    LookupKeyFields := 'IdLevel;IdSpecialization;IdGroupId';
+    LookupResultField := 'NameClass';
+    KeyFields := 'IdLevel1;IdSpecialization1;IdGroupId1';
     Size := 5;
     Lookup := True;
     DataSet := TbJoinedClass;

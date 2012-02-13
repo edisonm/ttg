@@ -11,7 +11,7 @@ uses
 
 type
   TEditorForm = class(TForm)
-    pnlStatus: TPanel;
+    PnStatus: TPanel;
     TlBShow: TToolBar;
     btnShow: TToolButton;
     PnEditor: TPanel;

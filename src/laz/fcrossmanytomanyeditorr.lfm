@@ -19,7 +19,7 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
       OnClick = BtnCancelClick
     end
   end
-  inherited pnlStatus: TPanel
+  inherited PnStatus: TPanel
     Top = 295
     Width = 518
   end

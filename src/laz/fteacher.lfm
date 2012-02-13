@@ -24,7 +24,7 @@ inherited TeacherForm: TTeacherForm
       ShowHint = True
     end
   end
-  inherited pnlStatus: TPanel
+  inherited PnStatus: TPanel
     Top = 616
     Width = 1107
     ClientWidth = 1107
