@@ -63,7 +63,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
     Top = 424
     Width = 682
   end
-  inherited Panel1: TPanel
+  inherited PnEditor: TPanel
     Left = 272
     Height = 399
     Width = 410

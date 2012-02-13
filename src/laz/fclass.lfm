@@ -11,7 +11,7 @@ inherited ClassForm: TClassForm
       Hints.Strings = (      )
     end
   end
-  inherited Panel1: TPanel
+  inherited PnEditor: TPanel
     inherited DBGrid: TDBGrid
       Hint = 'Courses|Available courses'
       Width = 329

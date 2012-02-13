@@ -14,7 +14,7 @@ inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
       OnClick = BtnCancelClick
     end
   end
-  inherited Panel1: TPanel
+  inherited PnEditor: TPanel
     Width = 361
   end
   inherited DrawGrid: TDrawGrid

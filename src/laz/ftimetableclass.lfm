@@ -68,7 +68,7 @@ inherited TimetableClassForm: TTimetableClassForm
   inherited pnlStatus: TPanel
     Top = 265
   end
-  inherited Panel1: TPanel
+  inherited PnEditor: TPanel
     Left = 238
     Height = 240
     Width = 241

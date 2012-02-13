@@ -1099,7 +1099,7 @@ msgctxt "TMESSAGEVIEWFORM.CAPTION"
 msgid "Message viewer"
 msgstr ""
 
-#: tmessageviewform.panel1.caption
+#: tmessageviewform.pneditor.caption
 msgid "Panel1"
 msgstr ""
 
@@ -1518,8 +1518,20 @@ msgctxt "TTEACHERFORM.CAPTION"
 msgid "Teacher"
 msgstr ""
 
+#: tteacherform.cbjoinedclass.caption
+msgid "Joined Classes"
+msgstr ""
+
 #: tteacherform.dbgriddetail.hint
 msgid "Distribution of Teachers"
+msgstr ""
+
+#: tteacherform.grbdetail.caption
+msgid "Distribution"
+msgstr ""
+
+#: tteacherform.groupbox3.caption
+msgid "Assistances"
 msgstr ""
 
 #: ttimetableclassform.btnintercambiartimeslots.hint

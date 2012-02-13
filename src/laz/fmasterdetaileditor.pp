@@ -17,7 +17,8 @@ type
   TMasterDetailEditorForm = class(TSingleEditorForm)
     DataSourceDetail: TDataSource;
     DBGridDetail: TDBGrid;
-    Panel2: TPanel;
+    GrBDetail: TGroupBox;
+    PnDetail: TPanel;
     Splitter1: TSplitter;
     procedure ActFindExecute(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);

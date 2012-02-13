@@ -437,6 +437,51 @@ begin
     Lookup := True;
     DataSet := TbAssistance;
   end;
+  Field := TStringField.Create(TbJoinedClass.Owner);
+  with Field do
+  begin
+    DisplayLabel := SFlJoinedClass_IdLevel;
+    DisplayWidth := 4;
+    FieldKind := fkLookup;
+    FieldName := 'AbLevel';
+    LookupDataSet := SourceDataModule.TbLevel;
+    LookupKeyFields := 'IdLevel';
+    LookupResultField := 'AbLevel';
+    KeyFields := 'IdLevel1';
+    Size := 5;
+    Lookup := True;
+    DataSet := TbJoinedClass;
+  end;
+  Field := TStringField.Create(TbJoinedClass.Owner);
+  with Field do
+  begin
+    DisplayLabel := SFlJoinedClass_IdSpecialization;
+    DisplayWidth := 4;
+    FieldKind := fkLookup;
+    FieldName := 'AbSpecialization';
+    LookupDataSet := SourceDataModule.TbSpecialization;
+    LookupKeyFields := 'IdSpecialization';
+    LookupResultField := 'AbSpecialization';
+    KeyFields := 'IdSpecialization1';
+    Size := 10;
+    Lookup := True;
+    DataSet := TbJoinedClass;
+  end;
+  Field := TStringField.Create(TbJoinedClass.Owner);
+  with Field do
+  begin
+    DisplayLabel := SFlJoinedClass_IdGroupId;
+    DisplayWidth := 4;
+    FieldKind := fkLookup;
+    FieldName := 'NaGroupId';
+    LookupDataSet := SourceDataModule.TbGroupId;
+    LookupKeyFields := 'IdGroupId';
+    LookupResultField := 'NaGroupId';
+    KeyFields := 'IdGroupId1';
+    Size := 5;
+    Lookup := True;
+    DataSet := TbJoinedClass;
+  end;
 end;
 
 procedure TSourceDataModule.HideFields;
@@ -484,6 +529,16 @@ begin
     FindField('IdSpecialization').Visible := False;
     FindField('IdGroupId').Visible := False;
     FindField('IdTeacher').Visible := False;
+  end;
+  with TbJoinedClass do
+  begin
+    FindField('IdSubject').Visible := False;
+    FindField('IdLevel').Visible := False;
+    FindField('IdSpecialization').Visible := False;
+    FindField('IdGroupId').Visible := False;
+    FindField('IdLevel1').Visible := False;
+    FindField('IdSpecialization1').Visible := False;
+    FindField('IdGroupId1').Visible := False;
   end;
 end;
 

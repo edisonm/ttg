@@ -23,7 +23,7 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
     Top = 295
     Width = 518
   end
-  inherited Panel1: TPanel
+  inherited PnEditor: TPanel
     Height = 270
     Width = 340
   end

@@ -1,19 +1,18 @@
 inherited TeacherForm: TTeacherForm
-  Left = 834
-  Height = 522
-  Top = 470
-  Width = 888
+  Left = 384
+  Height = 635
+  Top = 243
+  Width = 1107
   Caption = 'Teacher'
-  ClientHeight = 522
-  ClientWidth = 888
+  ClientHeight = 635
+  ClientWidth = 1107
   OnActivate = FormActivate
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Visible = True
   inherited TlBShow: TToolBar
-    Width = 888
+    Width = 1107
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
     end
@@ -26,20 +25,20 @@ inherited TeacherForm: TTeacherForm
     end
   end
   inherited pnlStatus: TPanel
-    Top = 503
-    Width = 888
-    ClientWidth = 888
+    Top = 616
+    Width = 1107
+    ClientWidth = 1107
     inherited SLRecordNo: TLabel
-      Left = 886
+      Left = 1105
     end
   end
-  inherited Panel1: TPanel
-    Height = 478
-    Width = 888
-    ClientHeight = 478
-    ClientWidth = 888
+  inherited PnEditor: TPanel
+    Height = 591
+    Width = 1107
+    ClientHeight = 591
+    ClientWidth = 1107
     inherited DBGrid: TDBGrid
-      Height = 476
+      Height = 589
       Width = 404
       Align = alLeft
       OnDblClick = DBGridDblClick
@@ -47,51 +46,112 @@ inherited TeacherForm: TTeacherForm
     inherited Splitter1: TSplitter
       Cursor = crHSplit
       Left = 405
-      Height = 476
+      Height = 589
       Top = 1
-      Width = 3
+      Width = 6
       Align = alLeft
       ResizeAnchor = akLeft
     end
-    inherited Panel2: TPanel
-      Left = 408
-      Height = 476
+    inherited PnDetail: TPanel
+      Left = 411
+      Height = 589
       Top = 1
-      Width = 479
+      Width = 695
       Align = alClient
-      ClientHeight = 476
-      ClientWidth = 479
-      inherited DBGridDetail: TDBGrid
-        Height = 307
-        Hint = 'Distribution of Teachers'
-        Width = 477
-        ShowHint = True
+      ClientHeight = 589
+      ClientWidth = 695
+      inherited GrBDetail: TGroupBox
+        Height = 355
+        Width = 693
+        Caption = 'Distribution'
+        ClientHeight = 337
+        ClientWidth = 685
+        inherited DBGridDetail: TDBGrid
+          Height = 337
+          Hint = 'Distribution of Teachers'
+          Width = 685
+          ShowHint = True
+        end
       end
-      object DBGrid1: TDBGrid[1]
-        Left = 1
-        Height = 164
-        Top = 311
-        Width = 477
-        Align = alBottom
-        Color = clWindow
-        Columns = <>
-        DataSource = SourceDataModule.DSAssistance
-        TabOrder = 1
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-      end
-      object Splitter2: TSplitter[2]
+      object Splitter2: TSplitter[1]
         Cursor = crVSplit
         Left = 1
-        Height = 3
-        Top = 308
-        Width = 477
+        Height = 6
+        Top = 356
+        Width = 693
         Align = alBottom
         ResizeAnchor = akBottom
+      end
+      object Panel3: TPanel[2]
+        Left = 1
+        Height = 226
+        Top = 362
+        Width = 693
+        Align = alBottom
+        ClientHeight = 226
+        ClientWidth = 693
+        TabOrder = 1
+        object GroupBox3: TGroupBox
+          Left = 1
+          Height = 224
+          Top = 1
+          Width = 287
+          Align = alLeft
+          Caption = 'Assistances'
+          ClientHeight = 206
+          ClientWidth = 279
+          TabOrder = 0
+          object DbGAssistances: TDBGrid
+            Left = 0
+            Height = 206
+            Top = 0
+            Width = 279
+            Align = alClient
+            Color = clWindow
+            Columns = <>
+            DataSource = SourceDataModule.DSAssistance
+            Scrollbars = ssAutoBoth
+            TabOrder = 0
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+          end
+        end
+        object Splitter3: TSplitter
+          Left = 288
+          Height = 224
+          Top = 1
+          Width = 6
+        end
+        object CbJoinedClass: TGroupBox
+          Left = 294
+          Height = 224
+          Top = 1
+          Width = 398
+          Align = alClient
+          Caption = 'Joined Classes'
+          ClientHeight = 206
+          ClientWidth = 390
+          TabOrder = 1
+          object DbGJoinedClass: TDBGrid
+            Left = 0
+            Height = 206
+            Top = 0
+            Width = 390
+            Align = alClient
+            Color = clWindow
+            Columns = <>
+            DataSource = SourceDataModule.DSJoinedClass
+            Scrollbars = ssAutoBoth
+            TabOrder = 0
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+          end
+        end
       end
     end
   end
   inherited ImageList: TImageList
+    left = 96
     top = 216
     Bitmap = {
       4C69040000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00

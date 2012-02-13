@@ -18,8 +18,13 @@ type
   TTeacherForm	= class(TMasterDetailEditorForm)
     BtnTeacherRestriction: TToolButton;
     ActTeacherRestriction: TAction;
-    DBGrid1: TDBGrid;
+    DbGAssistances: TDBGrid;
+    DbGJoinedClass: TDBGrid;
+    GroupBox3: TGroupBox;
+    CbJoinedClass: TGroupBox;
+    Panel3: TPanel;
     Splitter2: TSplitter;
+    Splitter3: TSplitter;
     procedure ActFindExecute(Sender: TObject);
     procedure ActTeacherRestrictionExecute(Sender: TObject);
     procedure DataSourceStateChange(Sender: TObject);
@@ -156,10 +161,13 @@ begin
     TbAssistance.MasterFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
     TbAssistance.LinkedFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
     TbAssistance.MasterSource := SourceDataModule.DSDistribution;
-    TbAssistance.Close;
+    TbJoinedClass.MasterFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
+    TbJoinedClass.LinkedFields := 'IdSubject;IdLevel;IdSpecialization;IdGroupId';
+    TbJoinedClass.MasterSource := SourceDataModule.DSDistribution;
+    {TbAssistance.Close;
     QuTeacher.Close;
     QuTeacher.Open;
-    TbAssistance.Open;
+    TbAssistance.Open;}
   end;
 end;
 

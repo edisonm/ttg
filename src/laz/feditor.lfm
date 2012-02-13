@@ -1,9 +1,9 @@
 object EditorForm: TEditorForm
-  Left = 738
+  Left = 731
   Height = 299
   Top = 129
   Width = 479
-  ActiveControl = Panel1
+  ActiveControl = PnEditor
   Caption = 'EditorForm'
   ClientHeight = 299
   ClientWidth = 479
@@ -40,7 +40,7 @@ object EditorForm: TEditorForm
     BevelOuter = bvLowered
     TabOrder = 0
   end
-  object Panel1: TPanel
+  object PnEditor: TPanel
     Left = 0
     Height = 255
     Top = 25

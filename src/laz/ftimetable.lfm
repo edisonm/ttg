@@ -104,7 +104,7 @@ inherited TimetableForm: TTimetableForm
       Left = 675
     end
   end
-  inherited Panel1: TPanel
+  inherited PnEditor: TPanel
     Height = 396
     Width = 677
     ClientHeight = 396

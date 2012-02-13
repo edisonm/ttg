@@ -14,7 +14,7 @@ type
     pnlStatus: TPanel;
     TlBShow: TToolBar;
     btnShow: TToolButton;
-    Panel1: TPanel;
+    PnEditor: TPanel;
     ImageList: TImageList;
     procedure FormClose(Sender: TObject; var AAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);

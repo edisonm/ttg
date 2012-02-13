@@ -66,7 +66,7 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
     Top = 412
     Width = 775
   end
-  inherited Panel1: TPanel
+  inherited PnEditor: TPanel
     Left = 266
     Height = 387
     Width = 509

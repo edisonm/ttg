@@ -18,7 +18,7 @@ inherited SubjectForm: TSubjectForm
       ShowHint = True
     end
   end
-  inherited Panel1: TPanel
+  inherited PnEditor: TPanel
     inherited DBGrid: TDBGrid
       OnDblClick = DBGridDblClick
     end
