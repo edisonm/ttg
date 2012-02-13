@@ -784,7 +784,7 @@ begin
     Top := StrToInt(Values['MainForm_Top']);
     Left := StrToInt(Values['MainForm_Left']);
     Width := StrToInt(Values['MainForm_Width']);
-    Height := StrToInt(Values['MainForm_Height']);
+    {Height := StrToInt(Values['MainForm_Height']);}
     WindowState := TWindowState(StrToInt(Values['MainForm_WindowState']));
     SaveDialog.FileName := Values['SaveDialog_FileName'];
     SaveDialogCSV.FileName := Values['SaveDialogCSV_FileName'];
