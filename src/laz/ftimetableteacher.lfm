@@ -309,7 +309,8 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       ' Distribution.IdGroupId,'
       ' IdHour,'
       ' IdDay,'
-      ' Distribution.IdSubject'
+      ' Distribution.IdSubject,'
+      ' 0 as IsAssistance'
       'from'
       ' TimetableDetail inner join Distribution on'
       ' (TimetableDetail.IdSubject = Distribution.IdSubject)'
@@ -327,7 +328,8 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       ' Distribution.IdGroupId,'
       ' IdHour,'
       ' IdDay,'
-      ' Distribution.IdSubject'
+      ' Distribution.IdSubject,'
+      ' 1 as IsAssistance'
       'from'
       ' Assistance inner join Distribution on'
       '  Assistance.IdSubject = Distribution.IdSubject'
@@ -449,6 +451,17 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSubject'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Visible = False
+    end
+    object QuTimetableTeacherIsAssistance: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'IsAssistance'
       Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

@@ -24,6 +24,7 @@ type
     QuTimetableTeacherIdHour: TLongintField;
     QuTimetableTeacherIdDay: TLongintField;
     QuTimetableTeacherIdSubject: TLongintField;
+    QuTimetableTeacherIsAssistance: TLongintField;
     QuTimetableTeacherNaSubject: TStringField;
     QuTimetableTeacherName: TStringField;
     QuTimetableTeacherAbLevel: TStringField;
@@ -99,10 +100,18 @@ begin
 end;
 
 procedure TTimetableTeacherForm.QuTimetableTeacherCalcFields(DataSet: TDataSet);
+var
+  IsAssistance: string;
 begin
   inherited;
   if FName <> '' then
-    DataSet['Name'] := VarArrToStr(DataSet[FName], ' ');
+  begin
+    if QuTimeTableTeacherIsAssistance.Value = 1 then
+      IsAssistance := '*'
+    else
+      IsAssistance := '';
+    DataSet['Name'] := VarArrToStr(DataSet[FName], ' ') + ' ' + IsAssistance;
+  end
 end;
 
 procedure TTimetableTeacherForm.DSTeacherDataChange(Sender: TObject;
