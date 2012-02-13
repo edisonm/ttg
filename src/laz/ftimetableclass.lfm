@@ -256,7 +256,7 @@ inherited TimetableClassForm: TTimetableClassForm
         Name = 'IdGroup'
         ParamType = ptUnknown
       end>
-    object QuTimetableGroupIdTimetable: TLongintField
+    object QuTimetableClassIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimetable'
@@ -266,7 +266,7 @@ inherited TimetableClassForm: TTimetableClassForm
       ReadOnly = True
       Required = False
     end
-    object QuTimetableGroupIdLevel: TLongintField
+    object QuTimetableClassIdLevel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdLevel'
@@ -277,7 +277,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableGroupIdSpecialization: TLongintField
+    object QuTimetableClassIdSpecialization: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSpecialization'
@@ -288,7 +288,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableGroupIdGroup: TLongintField
+    object QuTimetableClassIdGroup: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdGroup'
@@ -299,7 +299,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableGroupIdHour: TLongintField
+    object QuTimetableClassIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -310,7 +310,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableGroupIdDay: TLongintField
+    object QuTimetableClassIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -321,7 +321,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableGroupIdSubject: TLongintField
+    object QuTimetableClassIdSubject: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSubject'
@@ -332,7 +332,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableGroupIdTeacher: TLongintField
+    object QuTimetableClassIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTeacher'
@@ -440,7 +440,7 @@ inherited TimetableClassForm: TTimetableClassForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuGroupIdTimetable: TLongintField
+    object QuClassIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimetable'
@@ -451,7 +451,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = False
       Visible = False
     end
-    object QuGroupIdLevel: TLongintField
+    object QuClassIdLevel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdLevel'
@@ -462,7 +462,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = False
       Visible = False
     end
-    object QuGroupIdSpecialization: TLongintField
+    object QuClassIdSpecialization: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSpecialization'
@@ -473,7 +473,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = False
       Visible = False
     end
-    object QuGroupIdGroup: TLongintField
+    object QuClassIdGroup: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdGroup'
