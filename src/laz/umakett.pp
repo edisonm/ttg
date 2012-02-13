@@ -78,9 +78,6 @@ begin
     FTimeEnd);
 end;
 
-const
-  FBoolToStr: array [Boolean] of string = (SNo, SYes);
-
 procedure LoadBookmarks(s: string; Individual: TIndividual;
     ClassCount: Integer; out Bookmarks: TBookmarkArray);
 var
@@ -134,9 +131,13 @@ var
   FTimeIni: TDateTime;
   ProgressFormDrv: TProgressFormDrv;
   ExtraInfo: string;
+  FBoolToStr: array [Boolean] of string;
 begin
   Result := False;
   FTimeIni := Now;
+  // We hav to initialize here due to SNo and SYes are location dependent
+  FBoolToStr[False] := SNo;
+  FBoolToStr[True] := SYes;
   with MasterDataModule.ConfigStorage do
   begin
     VEvolElitist := TEvolElitist.Create(FTimetableModel, SharedDirectory,

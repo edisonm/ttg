@@ -1,5 +1,5 @@
 inherited MasterDetailEditorForm: TMasterDetailEditorForm
-  Left = 766
+  Left = 759
   Height = 430
   Top = 441
   Width = 603
@@ -23,30 +23,17 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
     end
   end
   inherited PnEditor: TPanel
-    Left = 0
     Height = 386
-    Top = 25
     Width = 603
-    Align = alClient
     ClientHeight = 386
     ClientWidth = 603
-    TabOrder = 1
     inherited DBGrid: TDBGrid
-      Left = 1
       Height = 275
-      Top = 1
       Width = 601
-      Align = alClient
-      Color = clWindow
-      Columns = <>
-      DataSource = DataSource
-      Scrollbars = ssAutoBoth
       TabOrder = 1
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
       OnDblClick = DBGridDblClick
     end
-    object Splitter1: TSplitter
+    object Splitter1: TSplitter[1]
       Cursor = crVSplit
       Left = 1
       Height = 3
@@ -55,7 +42,7 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
       Align = alBottom
       ResizeAnchor = akBottom
     end
-    object PnDetail: TPanel
+    object PnDetail: TPanel[2]
       Left = 1
       Height = 106
       Top = 279

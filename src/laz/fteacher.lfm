@@ -1,5 +1,5 @@
 inherited TeacherForm: TTeacherForm
-  Left = 384
+  Left = 377
   Height = 635
   Top = 243
   Width = 1107

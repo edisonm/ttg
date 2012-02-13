@@ -1090,6 +1090,11 @@ msgstr ""
 msgid "ToolButton4"
 msgstr ""
 
+#: tmasterdetaileditorform.grbdetail.caption
+msgctxt "TMASTERDETAILEDITORFORM.GRBDETAIL.CAPTION"
+msgid "Detail"
+msgstr ""
+
 #: tmessageviewform.bbtclose.caption
 msgid "&Close"
 msgstr ""
@@ -1796,6 +1801,7 @@ msgid "Saturday"
 msgstr ""
 
 #: uttgconsts.sdetail
+msgctxt "uttgconsts.sdetail"
 msgid "Detail"
 msgstr ""
 

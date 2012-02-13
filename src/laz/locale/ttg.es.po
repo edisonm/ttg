@@ -1090,6 +1090,11 @@ msgstr "ToolButton3"
 msgid "ToolButton4"
 msgstr "ToolButton4"
 
+#: tmasterdetaileditorform.grbdetail.caption
+msgctxt "tmasterdetaileditorform.grbdetail.caption"
+msgid "Detail"
+msgstr "Detalle"
+
 #: tmessageviewform.bbtclose.caption
 msgid "&Close"
 msgstr "&Cerrar"
@@ -1796,6 +1801,7 @@ msgid "Saturday"
 msgstr "Sabado"
 
 #: uttgconsts.sdetail
+msgctxt "uttgconsts.sdetail"
 msgid "Detail"
 msgstr "Detalle"
 
@@ -1911,7 +1917,7 @@ msgstr "Nombre"
 
 #: uttgconsts.sno
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: uttgconsts.snoerrorreadyforchecksummary
 msgid "Ready to generate timetable. Show timetable check Summary?"

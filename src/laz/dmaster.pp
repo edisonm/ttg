@@ -7,7 +7,7 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics, DB,
-  Controls, Forms, Dialogs, ZConnection, ZDataset, Variants, UTTGConfig;
+  Controls, Forms, Dialogs, ZDataset, Variants, UTTGConfig;
 
 type
 
@@ -588,8 +588,6 @@ begin
 end;
 
 procedure TMasterDataModule.DataModuleCreate(Sender: TObject);
-var
-  LResource: TLResource;
 begin
   TbTmpTeacherWorkLoadIdTeacher.DisplayLabel := SFlDistribution_IdTeacher;
   TbTmpTeacherWorkLoadLnTeacher.DisplayLabel := SFlTeacher_LnTeacher;

@@ -16,7 +16,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, MTProcs, SysUtils, Classes, Graphics,
   Forms, Dialogs, ExtCtrls, Menus, ComCtrls, Buttons, ActnList, FSplash, FSingleEditor,
-  ZConnection, Controls, FCrossManyToManyEditor0, FEditor, UConfigStorage
+  Controls, FCrossManyToManyEditor0, FEditor, UConfigStorage
 {$IFNDEF FREEWARE}, UTTModel, UMakeTT{$ENDIF};
 
 type

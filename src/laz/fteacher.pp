@@ -8,7 +8,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, Db, Grids, Buttons, DBCtrls, Variants, ExtCtrls,
-  ComCtrls, Printers, ActnList, StdCtrls, DBGrids, ZDataset, FMasterDetailEditor,
+  ComCtrls, Printers, ActnList, StdCtrls, DBGrids, FMasterDetailEditor,
   FCrossManytoManyEditorR;
 
 type
@@ -50,7 +50,7 @@ var
 implementation
 
 uses
-  DMaster, FConfig, DSource, FEditor, UTTGDBUtils, UTTGConsts, dsourcebaseconsts, urelutils;
+  DMaster, FConfig, DSource, FEditor, UTTGDBUtils, UTTGConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -148,8 +148,6 @@ begin
 end;
 
 procedure TTeacherForm.FormCreate(Sender: TObject);
-var
-  Field: TField;
 begin
   inherited;
   with SourceDataModule do
@@ -172,8 +170,6 @@ begin
 end;
 
 procedure TTeacherForm.FormDestroy(Sender: TObject);
-var
-  Field: TField;
 begin
   inherited;
   SourceDataModule.TbAssistance.MasterSource := nil;

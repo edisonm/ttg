@@ -284,7 +284,7 @@ type
 implementation
 
 uses
-  SysUtils, ZSysUtils, ZConnection, MTProcs, DSource, USortAlgs, UTTGConsts, dsourcebaseconsts;
+  SysUtils, ZSysUtils, MTProcs, DSource, USortAlgs, UTTGConsts, dsourcebaseconsts;
 
 constructor TTimetableModel.Create(AClashTeacherValue,
   AClashSubjectValue, AClashRoomTypeValue, ABreakTimetableTeacherValue,
@@ -761,16 +761,16 @@ var
         GroupId := FIdGroupIdToGroupId[VFieldGroupId.AsInteger -
           FMinIdGroupId];
         VClass := FCourseGroupIdToClass[Course, GroupId];
+        Distribution := FClassSubjectToDistribution[VClass, Subject];
         Level1 := FIdLevelToLevel[VFieldLevel1.AsInteger - FMinIdLevel];
         Specialization1 := FIdSpecializationToSpecialization
           [VFieldSpecialization1.AsInteger - FMinIdSpecialization];
         Course1 := FLevelSpecializationToCourse[Level1, Specialization1];
         GroupId1 := FIdGroupIdToGroupId[VFieldGroupId1.AsInteger -
           FMinIdGroupId];
-        VClass1 := FCourseGroupIdToClass[Course, GroupId];
-        Distribution := FClassSubjectToDistribution[VClass1, Subject];
+        VClass1 := FCourseGroupIdToClass[Course1, GroupId1];
         FJoinedClassToDistribution[JoinedClass] := Distribution;
-        FJoinedClassToClass[JoinedClass] := VClass;
+        FJoinedClassToClass[JoinedClass] := VClass1;
         Next;
       end;
       First;

@@ -1,5 +1,5 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 893
+  Left = 886
   Height = 308
   Top = 71
   Width = 485
