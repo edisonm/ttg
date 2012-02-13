@@ -2056,5 +2056,5 @@ msgstr "Composicion Erroea"
 
 #: uttgconsts.syes
 msgid "Yes"
-msgstr ""
+msgstr "Si"
 
