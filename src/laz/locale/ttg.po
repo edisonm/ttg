@@ -1254,165 +1254,165 @@ msgctxt "TPROGRESSFORM.LBLTOTALVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.pnlbreaktimetableteacher.caption
+#: tprogressform.pnbreaktimetableteacher.caption
 msgid " Break TT. Teacher:"
 msgstr ""
 
-#: tprogressform.pnlbreaktimetableteachercount.caption
-msgctxt "TPROGRESSFORM.PNLBREAKTIMETABLETEACHERCOUNT.CAPTION"
+#: tprogressform.pnbreaktimetableteachercount.caption
+msgctxt "TPROGRESSFORM.PNBREAKTIMETABLETEACHERCOUNT.CAPTION"
 msgid " Number:"
 msgstr ""
 
-#: tprogressform.pnlbreaktimetableteachervalue.caption
-msgctxt "TPROGRESSFORM.PNLBREAKTIMETABLETEACHERVALUE.CAPTION"
+#: tprogressform.pnbreaktimetableteachervalue.caption
+msgctxt "TPROGRESSFORM.PNBREAKTIMETABLETEACHERVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
-#: tprogressform.pnlbrokensession.caption
+#: tprogressform.pnbrokensession.caption
 msgid " Broken Subjects:"
 msgstr ""
 
-#: tprogressform.pnlbrokensessionnumber.caption
-msgctxt "TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION"
+#: tprogressform.pnbrokensessionnumber.caption
+msgctxt "TPROGRESSFORM.PNBROKENSESSIONNUMBER.CAPTION"
 msgid " Number:"
 msgstr ""
 
-#: tprogressform.pnlbrokensessionvalue.caption
-msgctxt "TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION"
+#: tprogressform.pnbrokensessionvalue.caption
+msgctxt "TPROGRESSFORM.PNBROKENSESSIONVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
-#: tprogressform.pnlclashroomtype.caption
+#: tprogressform.pnclashroomtype.caption
 msgid " Clash Classrooms:"
 msgstr ""
 
-#: tprogressform.pnlclashroomtypenumber.caption
-msgctxt "TPROGRESSFORM.PNLCLASHROOMTYPENUMBER.CAPTION"
+#: tprogressform.pnclashroomtypenumber.caption
+msgctxt "TPROGRESSFORM.PNCLASHROOMTYPENUMBER.CAPTION"
 msgid " Number:"
 msgstr ""
 
-#: tprogressform.pnlclashroomtypevalue.caption
-msgctxt "TPROGRESSFORM.PNLCLASHROOMTYPEVALUE.CAPTION"
+#: tprogressform.pnclashroomtypevalue.caption
+msgctxt "TPROGRESSFORM.PNCLASHROOMTYPEVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
-#: tprogressform.pnlclashsubject.caption
+#: tprogressform.pnclashsubject.caption
 msgid " Clash Subjects:"
 msgstr ""
 
-#: tprogressform.pnlclashsubjectnumber.caption
-msgctxt "TPROGRESSFORM.PNLCLASHSUBJECTNUMBER.CAPTION"
+#: tprogressform.pnclashsubjectnumber.caption
+msgctxt "TPROGRESSFORM.PNCLASHSUBJECTNUMBER.CAPTION"
 msgid " Number:"
 msgstr ""
 
-#: tprogressform.pnlclashsubjectvalue.caption
-msgctxt "TPROGRESSFORM.PNLCLASHSUBJECTVALUE.CAPTION"
+#: tprogressform.pnclashsubjectvalue.caption
+msgctxt "TPROGRESSFORM.PNCLASHSUBJECTVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
-#: tprogressform.pnlclashteacher.caption
+#: tprogressform.pnclashteacher.caption
 msgid " Clash Teachers:"
 msgstr ""
 
-#: tprogressform.pnlclashteachernumber.caption
-msgctxt "TPROGRESSFORM.PNLCLASHTEACHERNUMBER.CAPTION"
+#: tprogressform.pnclashteachernumber.caption
+msgctxt "TPROGRESSFORM.PNCLASHTEACHERNUMBER.CAPTION"
 msgid " Number:"
 msgstr ""
 
-#: tprogressform.pnlclashteachervalue.caption
-msgctxt "TPROGRESSFORM.PNLCLASHTEACHERVALUE.CAPTION"
+#: tprogressform.pnclashteachervalue.caption
+msgctxt "TPROGRESSFORM.PNCLASHTEACHERVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
-#: tprogressform.pnlcrashes.caption
+#: tprogressform.pncrashes.caption
 msgid " Crashes:"
 msgstr ""
 
-#: tprogressform.pnlelapsedtime.caption
+#: tprogressform.pnelapsedtime.caption
 msgid " Elapsed time:"
 msgstr ""
 
-#: tprogressform.pnlestimatedtime.caption
+#: tprogressform.pnestimatedtime.caption
 msgid "Remaining time:"
 msgstr ""
 
-#: tprogressform.pnlexports.caption
+#: tprogressform.pnexports.caption
 msgid " Exports:"
 msgstr ""
 
-#: tprogressform.pnlimports.caption
+#: tprogressform.pnimports.caption
 msgid " Imports:"
 msgstr ""
 
-#: tprogressform.pnlinitdatetime.caption
+#: tprogressform.pninitdatetime.caption
 msgid "Started at:"
 msgstr ""
 
-#: tprogressform.pnlnonscatteredsubject.caption
+#: tprogressform.pnnonscatteredsubject.caption
 msgid " Joined Subjects:"
 msgstr ""
 
-#: tprogressform.pnlnonscatteredsubjectcount.caption
-msgctxt "TPROGRESSFORM.PNLNONSCATTEREDSUBJECTCOUNT.CAPTION"
+#: tprogressform.pnnonscatteredsubjectcount.caption
+msgctxt "TPROGRESSFORM.PNNONSCATTEREDSUBJECTCOUNT.CAPTION"
 msgid " Number:"
 msgstr ""
 
-#: tprogressform.pnlnonscatteredsubjectvalue.caption
-msgctxt "TPROGRESSFORM.PNLNONSCATTEREDSUBJECTVALUE.CAPTION"
+#: tprogressform.pnnonscatteredsubjectvalue.caption
+msgctxt "TPROGRESSFORM.PNNONSCATTEREDSUBJECTVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
-#: tprogressform.pnloutofpositionemptyhour.caption
+#: tprogressform.pnoutofpositionemptyhour.caption
 msgid " Empty hours:"
 msgstr ""
 
-#: tprogressform.pnloutofpositionemptyhournumber.caption
-msgctxt "TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURNUMBER.CAPTION"
+#: tprogressform.pnoutofpositionemptyhournumber.caption
+msgctxt "TPROGRESSFORM.PNOUTOFPOSITIONEMPTYHOURNUMBER.CAPTION"
 msgid " Number:"
 msgstr ""
 
-#: tprogressform.pnloutofpositionemptyhourvalue.caption
-msgctxt "TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION"
+#: tprogressform.pnoutofpositionemptyhourvalue.caption
+msgctxt "TPROGRESSFORM.PNOUTOFPOSITIONEMPTYHOURVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
-#: tprogressform.pnlpollination.caption
+#: tprogressform.pnpollination.caption
 msgid "Pollination:"
 msgstr ""
 
-#: tprogressform.pnlposition.caption
+#: tprogressform.pnposition.caption
 msgid " Iteration:"
 msgstr ""
 
-#: tprogressform.pnlsubjectrestriction.caption
+#: tprogressform.pnsubjectrestriction.caption
 msgid " Subject Restrictions:"
 msgstr ""
 
-#: tprogressform.pnlsubjectrestrictionnumber.caption
-msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTIONNUMBER.CAPTION"
+#: tprogressform.pnsubjectrestrictionnumber.caption
+msgctxt "TPROGRESSFORM.PNSUBJECTRESTRICTIONNUMBER.CAPTION"
 msgid " Number:"
 msgstr ""
 
-#: tprogressform.pnlsubjectrestrictionvalue.caption
-msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTIONVALUE.CAPTION"
+#: tprogressform.pnsubjectrestrictionvalue.caption
+msgctxt "TPROGRESSFORM.PNSUBJECTRESTRICTIONVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
-#: tprogressform.pnlteacherrestriction.caption
+#: tprogressform.pnteacherrestriction.caption
 msgid " Teacher Restrictions:"
 msgstr ""
 
-#: tprogressform.pnlteacherrestrictionnumber.caption
-msgctxt "TPROGRESSFORM.PNLTEACHERRESTRICTIONNUMBER.CAPTION"
+#: tprogressform.pnteacherrestrictionnumber.caption
+msgctxt "TPROGRESSFORM.PNTEACHERRESTRICTIONNUMBER.CAPTION"
 msgid " Number:"
 msgstr ""
 
-#: tprogressform.pnlteacherrestrictionvalue.caption
-msgctxt "TPROGRESSFORM.PNLTEACHERRESTRICTIONVALUE.CAPTION"
+#: tprogressform.pnteacherrestrictionvalue.caption
+msgctxt "TPROGRESSFORM.PNTEACHERRESTRICTIONVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
-#: tprogressform.pnltotalvalue.caption
+#: tprogressform.pntotalvalue.caption
 msgid "Total Value:"
 msgstr ""
 
