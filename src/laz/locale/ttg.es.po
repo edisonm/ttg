@@ -1,15 +1,15 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: dsourcebaseconsts.sflassistance_idparallel
-msgctxt "dsourcebaseconsts.sflassistance_idparallel"
-msgid "Group"
-msgstr "Grupo"
-
 #: dsourcebaseconsts.sflassistance_idlevel
 msgctxt "dsourcebaseconsts.sflassistance_idlevel"
 msgid "Level"
 msgstr "Nivel"
+
+#: dsourcebaseconsts.sflassistance_idparallel
+msgctxt "dsourcebaseconsts.sflassistance_idparallel"
+msgid "Parallel"
+msgstr "Paralelo"
 
 #: dsourcebaseconsts.sflassistance_idspecialization
 msgctxt "dsourcebaseconsts.sflassistance_idspecialization"
@@ -26,17 +26,15 @@ msgctxt "dsourcebaseconsts.sflassistance_idteacher"
 msgid "Assistant"
 msgstr "Ayudante"
 
-#: dsourcebaseconsts.sflclass_idparallel
-#, fuzzy
-#| msgid "Group Id"
-msgctxt "dsourcebaseconsts.sflclass_idparallel"
-msgid "Group"
-msgstr "Paralelo Id"
-
 #: dsourcebaseconsts.sflclass_idlevel
 msgctxt "dsourcebaseconsts.sflclass_idlevel"
 msgid "Level"
 msgstr "Nivel"
+
+#: dsourcebaseconsts.sflclass_idparallel
+msgctxt "dsourcebaseconsts.sflclass_idparallel"
+msgid "Parallel"
+msgstr "Paralelo"
 
 #: dsourcebaseconsts.sflclass_idspecialization
 msgctxt "dsourcebaseconsts.sflclass_idspecialization"
@@ -68,17 +66,15 @@ msgctxt "dsourcebaseconsts.sfldistribution_composition"
 msgid "Composition"
 msgstr "Composicion"
 
-#: dsourcebaseconsts.sfldistribution_idparallel
-#, fuzzy
-#| msgid "Group Id"
-msgctxt "dsourcebaseconsts.sfldistribution_idparallel"
-msgid "Group"
-msgstr "Paralelo Id"
-
 #: dsourcebaseconsts.sfldistribution_idlevel
 msgctxt "dsourcebaseconsts.sfldistribution_idlevel"
 msgid "Level"
 msgstr "Nivel"
+
+#: dsourcebaseconsts.sfldistribution_idparallel
+msgctxt "dsourcebaseconsts.sfldistribution_idparallel"
+msgid "Parallel"
+msgstr "Paralelo"
 
 #: dsourcebaseconsts.sfldistribution_idroomtype
 msgctxt "dsourcebaseconsts.sfldistribution_idroomtype"
@@ -104,16 +100,6 @@ msgstr "Profesor"
 msgid "Room Count"
 msgstr "Numero de Aulas"
 
-#: dsourcebaseconsts.sflparallel_idparallel
-msgctxt "dsourcebaseconsts.sflparallel_idparallel"
-msgid "Id"
-msgstr "Codigo"
-
-#: dsourcebaseconsts.sflparallel_naparallel
-msgctxt "dsourcebaseconsts.sflparallel_naparallel"
-msgid "Name"
-msgstr "Nombre"
-
 #: dsourcebaseconsts.sflhour_idhour
 msgctxt "dsourcebaseconsts.sflhour_idhour"
 msgid "Id"
@@ -129,16 +115,6 @@ msgctxt "dsourcebaseconsts.sflhour_nahour"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sfljoinedclass_idparallel
-msgctxt "dsourcebaseconsts.sfljoinedclass_idparallel"
-msgid "Group"
-msgstr "Grupo"
-
-#: dsourcebaseconsts.sfljoinedclass_idparallel1
-msgctxt "dsourcebaseconsts.sfljoinedclass_idparallel1"
-msgid "Group"
-msgstr "Grupo"
-
 #: dsourcebaseconsts.sfljoinedclass_idlevel
 msgctxt "dsourcebaseconsts.sfljoinedclass_idlevel"
 msgid "Level"
@@ -146,8 +122,18 @@ msgstr "Nivel"
 
 #: dsourcebaseconsts.sfljoinedclass_idlevel1
 msgctxt "dsourcebaseconsts.sfljoinedclass_idlevel1"
-msgid "Level"
-msgstr "Nivel"
+msgid "Joined Level"
+msgstr "Nivel unido"
+
+#: dsourcebaseconsts.sfljoinedclass_idparallel
+msgctxt "dsourcebaseconsts.sfljoinedclass_idparallel"
+msgid "Parallel"
+msgstr "Paralelo"
+
+#: dsourcebaseconsts.sfljoinedclass_idparallel1
+msgctxt "dsourcebaseconsts.sfljoinedclass_idparallel1"
+msgid "Joined Parallel"
+msgstr "Paralelo unido"
 
 #: dsourcebaseconsts.sfljoinedclass_idspecialization
 msgctxt "dsourcebaseconsts.sfljoinedclass_idspecialization"
@@ -156,8 +142,8 @@ msgstr "Especializacion"
 
 #: dsourcebaseconsts.sfljoinedclass_idspecialization1
 msgctxt "dsourcebaseconsts.sfljoinedclass_idspecialization1"
-msgid "Specialization"
-msgstr "Especializacion"
+msgid "Joined Specialization"
+msgstr "Especializacion unida"
 
 #: dsourcebaseconsts.sfljoinedclass_idsubject
 msgctxt "dsourcebaseconsts.sfljoinedclass_idsubject"
@@ -176,6 +162,16 @@ msgstr "Codigo"
 
 #: dsourcebaseconsts.sfllevel_nalevel
 msgctxt "dsourcebaseconsts.sfllevel_nalevel"
+msgid "Name"
+msgstr "Nombre"
+
+#: dsourcebaseconsts.sflparallel_idparallel
+msgctxt "dsourcebaseconsts.sflparallel_idparallel"
+msgid "Id"
+msgstr "Codigo"
+
+#: dsourcebaseconsts.sflparallel_naparallel
+msgctxt "dsourcebaseconsts.sflparallel_naparallel"
 msgid "Name"
 msgstr "Nombre"
 
@@ -339,11 +335,6 @@ msgctxt "dsourcebaseconsts.sfltimetabledetail_idday"
 msgid "Day"
 msgstr "Day"
 
-#: dsourcebaseconsts.sfltimetabledetail_idparallel
-msgctxt "dsourcebaseconsts.sfltimetabledetail_idparallel"
-msgid "Group"
-msgstr "Grupo"
-
 #: dsourcebaseconsts.sfltimetabledetail_idhour
 msgctxt "dsourcebaseconsts.sfltimetabledetail_idhour"
 msgid "Hour"
@@ -353,6 +344,11 @@ msgstr "Hour"
 msgctxt "dsourcebaseconsts.sfltimetabledetail_idlevel"
 msgid "Level"
 msgstr "Nivel"
+
+#: dsourcebaseconsts.sfltimetabledetail_idparallel
+msgctxt "dsourcebaseconsts.sfltimetabledetail_idparallel"
+msgid "Parallel"
+msgstr "Paralelo"
 
 #: dsourcebaseconsts.sfltimetabledetail_idspecialization
 msgctxt "dsourcebaseconsts.sfltimetabledetail_idspecialization"
@@ -395,15 +391,14 @@ msgid "Initial Time"
 msgstr "Inicio"
 
 #: dsourcebaseconsts.stbassistance
-#, fuzzy
-#| msgid "Assistance"
+msgctxt "dsourcebaseconsts.stbassistance"
 msgid "Assistances"
 msgstr "Ayudas"
 
 #: dsourcebaseconsts.stbclass
 msgctxt "dsourcebaseconsts.stbclass"
-msgid "Groups"
-msgstr "Grupos"
+msgid "Classes"
+msgstr "Clases"
 
 #: dsourcebaseconsts.stbcourse
 msgctxt "dsourcebaseconsts.stbcourse"
@@ -420,19 +415,13 @@ msgctxt "dsourcebaseconsts.stbdistribution"
 msgid "Distribution of Workload"
 msgstr "Distribucion de la carga"
 
-#: dsourcebaseconsts.stbparallel
-msgctxt "dsourcebaseconsts.stbparallel"
-msgid "Group Identifiers"
-msgstr "Identificadores de Paralelo"
-
 #: dsourcebaseconsts.stbhour
 msgctxt "dsourcebaseconsts.stbhour"
 msgid "Academic Hours"
 msgstr "Horas academicas"
 
 #: dsourcebaseconsts.stbjoinedclass
-#, fuzzy
-#| msgid "JoinedClass"
+msgctxt "dsourcebaseconsts.stbjoinedclass"
 msgid "Joined Classes"
 msgstr "Clases unidas"
 
@@ -440,6 +429,11 @@ msgstr "Clases unidas"
 msgctxt "dsourcebaseconsts.stblevel"
 msgid "Levels"
 msgstr "Niveles"
+
+#: dsourcebaseconsts.stbparallel
+msgctxt "dsourcebaseconsts.stbparallel"
+msgid "Parallels"
+msgstr "Paralelos"
 
 #: dsourcebaseconsts.stbroomtype
 msgctxt "dsourcebaseconsts.stbroomtype"
@@ -862,14 +856,6 @@ msgstr "Salir"
 msgid "Exit|Exit from program"
 msgstr "Salir|Salir del programa"
 
-#: tmainform.actparallel.caption
-msgid "Group IDs"
-msgstr "Identificadores de paralelo"
-
-#: tmainform.actparallel.hint
-msgid "Group IDs|Group IDs"
-msgstr "Identificadores de paralelo|Identificadores de paralelo"
-
 #: tmainform.acthour.caption
 msgid "Academic hours"
 msgstr "Horas academicas"
@@ -931,6 +917,14 @@ msgstr "Abrir"
 #: tmainform.actopen.hint
 msgid "Open|Open saved institution"
 msgstr "Abrir|Abrir colegio previamente guardado"
+
+#: tmainform.actparallel.caption
+msgid "Group IDs"
+msgstr "Identificadores de paralelo"
+
+#: tmainform.actparallel.hint
+msgid "Group IDs|Group IDs"
+msgstr "Identificadores de paralelo|Identificadores de paralelo"
 
 #: tmainform.actpasswd.caption
 msgid "Password..."
@@ -1536,6 +1530,7 @@ msgid "Teacher"
 msgstr "Profesor"
 
 #: tteacherform.cbjoinedclass.caption
+msgctxt "tteacherform.cbjoinedclass.caption"
 msgid "Joined Classes"
 msgstr "Clases agrupadas"
 
@@ -1548,8 +1543,9 @@ msgid "Distribution"
 msgstr "Distribucion"
 
 #: tteacherform.groupbox3.caption
+msgctxt "tteacherform.groupbox3.caption"
 msgid "Assistances"
-msgstr "Ayudantes"
+msgstr "Ayudas"
 
 #: ttimetableclassform.btnintercambiartimeslots.hint
 msgid "Swap time slots|Swap time slots"

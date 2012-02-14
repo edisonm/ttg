@@ -1,14 +1,14 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: dsourcebaseconsts.sflassistance_idparallel
-msgctxt "dsourcebaseconsts.sflassistance_idparallel"
-msgid "Group"
-msgstr ""
-
 #: dsourcebaseconsts.sflassistance_idlevel
 msgctxt "dsourcebaseconsts.sflassistance_idlevel"
 msgid "Level"
+msgstr ""
+
+#: dsourcebaseconsts.sflassistance_idparallel
+msgctxt "dsourcebaseconsts.sflassistance_idparallel"
+msgid "Parallel"
 msgstr ""
 
 #: dsourcebaseconsts.sflassistance_idspecialization
@@ -26,14 +26,14 @@ msgctxt "dsourcebaseconsts.sflassistance_idteacher"
 msgid "Assistant"
 msgstr ""
 
-#: dsourcebaseconsts.sflclass_idparallel
-msgctxt "dsourcebaseconsts.sflclass_idparallel"
-msgid "Group"
-msgstr ""
-
 #: dsourcebaseconsts.sflclass_idlevel
 msgctxt "dsourcebaseconsts.sflclass_idlevel"
 msgid "Level"
+msgstr ""
+
+#: dsourcebaseconsts.sflclass_idparallel
+msgctxt "dsourcebaseconsts.sflclass_idparallel"
+msgid "Parallel"
 msgstr ""
 
 #: dsourcebaseconsts.sflclass_idspecialization
@@ -66,14 +66,14 @@ msgctxt "dsourcebaseconsts.sfldistribution_composition"
 msgid "Composition"
 msgstr ""
 
-#: dsourcebaseconsts.sfldistribution_idparallel
-msgctxt "dsourcebaseconsts.sfldistribution_idparallel"
-msgid "Group"
-msgstr ""
-
 #: dsourcebaseconsts.sfldistribution_idlevel
 msgctxt "dsourcebaseconsts.sfldistribution_idlevel"
 msgid "Level"
+msgstr ""
+
+#: dsourcebaseconsts.sfldistribution_idparallel
+msgctxt "dsourcebaseconsts.sfldistribution_idparallel"
+msgid "Parallel"
 msgstr ""
 
 #: dsourcebaseconsts.sfldistribution_idroomtype
@@ -100,16 +100,6 @@ msgstr ""
 msgid "Room Count"
 msgstr ""
 
-#: dsourcebaseconsts.sflparallel_idparallel
-msgctxt "dsourcebaseconsts.sflparallel_idparallel"
-msgid "Id"
-msgstr ""
-
-#: dsourcebaseconsts.sflparallel_naparallel
-msgctxt "dsourcebaseconsts.sflparallel_naparallel"
-msgid "Name"
-msgstr ""
-
 #: dsourcebaseconsts.sflhour_idhour
 msgctxt "dsourcebaseconsts.sflhour_idhour"
 msgid "Id"
@@ -125,16 +115,6 @@ msgctxt "dsourcebaseconsts.sflhour_nahour"
 msgid "Name"
 msgstr ""
 
-#: dsourcebaseconsts.sfljoinedclass_idparallel
-msgctxt "dsourcebaseconsts.sfljoinedclass_idparallel"
-msgid "Group"
-msgstr ""
-
-#: dsourcebaseconsts.sfljoinedclass_idparallel1
-msgctxt "dsourcebaseconsts.sfljoinedclass_idparallel1"
-msgid "Group"
-msgstr ""
-
 #: dsourcebaseconsts.sfljoinedclass_idlevel
 msgctxt "dsourcebaseconsts.sfljoinedclass_idlevel"
 msgid "Level"
@@ -142,7 +122,17 @@ msgstr ""
 
 #: dsourcebaseconsts.sfljoinedclass_idlevel1
 msgctxt "dsourcebaseconsts.sfljoinedclass_idlevel1"
-msgid "Level"
+msgid "Joined Level"
+msgstr ""
+
+#: dsourcebaseconsts.sfljoinedclass_idparallel
+msgctxt "dsourcebaseconsts.sfljoinedclass_idparallel"
+msgid "Parallel"
+msgstr ""
+
+#: dsourcebaseconsts.sfljoinedclass_idparallel1
+msgctxt "dsourcebaseconsts.sfljoinedclass_idparallel1"
+msgid "Joined Parallel"
 msgstr ""
 
 #: dsourcebaseconsts.sfljoinedclass_idspecialization
@@ -152,7 +142,7 @@ msgstr ""
 
 #: dsourcebaseconsts.sfljoinedclass_idspecialization1
 msgctxt "dsourcebaseconsts.sfljoinedclass_idspecialization1"
-msgid "Specialization"
+msgid "Joined Specialization"
 msgstr ""
 
 #: dsourcebaseconsts.sfljoinedclass_idsubject
@@ -172,6 +162,16 @@ msgstr ""
 
 #: dsourcebaseconsts.sfllevel_nalevel
 msgctxt "dsourcebaseconsts.sfllevel_nalevel"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflparallel_idparallel
+msgctxt "dsourcebaseconsts.sflparallel_idparallel"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflparallel_naparallel
+msgctxt "dsourcebaseconsts.sflparallel_naparallel"
 msgid "Name"
 msgstr ""
 
@@ -335,11 +335,6 @@ msgctxt "dsourcebaseconsts.sfltimetabledetail_idday"
 msgid "Day"
 msgstr ""
 
-#: dsourcebaseconsts.sfltimetabledetail_idparallel
-msgctxt "dsourcebaseconsts.sfltimetabledetail_idparallel"
-msgid "Group"
-msgstr ""
-
 #: dsourcebaseconsts.sfltimetabledetail_idhour
 msgctxt "dsourcebaseconsts.sfltimetabledetail_idhour"
 msgid "Hour"
@@ -348,6 +343,11 @@ msgstr ""
 #: dsourcebaseconsts.sfltimetabledetail_idlevel
 msgctxt "dsourcebaseconsts.sfltimetabledetail_idlevel"
 msgid "Level"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetabledetail_idparallel
+msgctxt "dsourcebaseconsts.sfltimetabledetail_idparallel"
+msgid "Parallel"
 msgstr ""
 
 #: dsourcebaseconsts.sfltimetabledetail_idspecialization
@@ -391,12 +391,13 @@ msgid "Initial Time"
 msgstr ""
 
 #: dsourcebaseconsts.stbassistance
+msgctxt "dsourcebaseconsts.stbassistance"
 msgid "Assistances"
 msgstr ""
 
 #: dsourcebaseconsts.stbclass
 msgctxt "dsourcebaseconsts.stbclass"
-msgid "Groups"
+msgid "Classes"
 msgstr ""
 
 #: dsourcebaseconsts.stbcourse
@@ -414,23 +415,24 @@ msgctxt "dsourcebaseconsts.stbdistribution"
 msgid "Distribution of Workload"
 msgstr ""
 
-#: dsourcebaseconsts.stbparallel
-msgctxt "dsourcebaseconsts.stbparallel"
-msgid "Group Identifiers"
-msgstr ""
-
 #: dsourcebaseconsts.stbhour
 msgctxt "dsourcebaseconsts.stbhour"
 msgid "Academic Hours"
 msgstr ""
 
 #: dsourcebaseconsts.stbjoinedclass
+msgctxt "dsourcebaseconsts.stbjoinedclass"
 msgid "Joined Classes"
 msgstr ""
 
 #: dsourcebaseconsts.stblevel
 msgctxt "dsourcebaseconsts.stblevel"
 msgid "Levels"
+msgstr ""
+
+#: dsourcebaseconsts.stbparallel
+msgctxt "dsourcebaseconsts.stbparallel"
+msgid "Parallels"
 msgstr ""
 
 #: dsourcebaseconsts.stbroomtype
@@ -854,14 +856,6 @@ msgstr ""
 msgid "Exit|Exit from program"
 msgstr ""
 
-#: tmainform.actparallel.caption
-msgid "Group IDs"
-msgstr ""
-
-#: tmainform.actparallel.hint
-msgid "Group IDs|Group IDs"
-msgstr ""
-
 #: tmainform.acthour.caption
 msgid "Academic hours"
 msgstr ""
@@ -922,6 +916,14 @@ msgstr ""
 
 #: tmainform.actopen.hint
 msgid "Open|Open saved institution"
+msgstr ""
+
+#: tmainform.actparallel.caption
+msgid "Group IDs"
+msgstr ""
+
+#: tmainform.actparallel.hint
+msgid "Group IDs|Group IDs"
 msgstr ""
 
 #: tmainform.actpasswd.caption
@@ -1528,6 +1530,7 @@ msgid "Teacher"
 msgstr ""
 
 #: tteacherform.cbjoinedclass.caption
+msgctxt "tteacherform.cbjoinedclass.caption"
 msgid "Joined Classes"
 msgstr ""
 
@@ -1540,6 +1543,7 @@ msgid "Distribution"
 msgstr ""
 
 #: tteacherform.groupbox3.caption
+msgctxt "tteacherform.groupbox3.caption"
 msgid "Assistances"
 msgstr ""
 
