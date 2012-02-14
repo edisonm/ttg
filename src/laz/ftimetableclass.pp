@@ -23,6 +23,7 @@ type
     QuTimetableClassIdLevel: TLongintField;
     QuTimetableClassIdSpecialization: TLongintField;
     QuTimetableClassIdParallel: TLongintField;
+    QuTimetableClassIsJoinedClass: TLongintField;
     QuTimetableClassIdHour: TLongintField;
     QuTimetableClassIdDay: TLongintField;
     QuTimetableClassIdTeacher: TLongintField;
@@ -189,10 +190,16 @@ begin
 end;
 
 procedure TTimetableClassForm.QuTimetableClassCalcFields(DataSet: TDataSet);
+var
+  IsJoinedClass: string;
 begin
   inherited;
+  if QuTimetableClassIsJoinedClass.Value = 1 then
+    IsJoinedClass := '*'
+  else
+    IsJoinedClass := '';
   if FName <> '' then
-    DataSet['Name'] := VarArrToStr(DataSet[FName], ' ');
+    DataSet['Name'] := VarArrToStr(DataSet[FName], ' ') + ' ' + IsJoinedClass;
 end;
 
 procedure TTimetableClassForm.QuClassCalcFields(DataSet: TDataSet);

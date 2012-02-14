@@ -1,5 +1,5 @@
 inherited TimetableForm: TTimetableForm
-  Left = 665
+  Left = 658
   Height = 440
   Top = 375
   Width = 677
@@ -10,6 +10,7 @@ inherited TimetableForm: TTimetableForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  Visible = True
   inherited TBEditor: TToolBar
     Width = 677
     inherited DBNavigator: TDBNavigator
@@ -597,8 +598,8 @@ inherited TimetableForm: TTimetableForm
       '  IdHour,'
       '  RoomType.IdRoomType,'
       '  RoomType.AbRoomType,'
-      '  COUNT(*) AS Occupied,'
-      '  COUNT(*) - RoomType.Number AS Clashes'
+      '  SUM(Distribution.RoomCount) AS Occupied,'
+      '  SUM(Distribution.RoomCount) - RoomType.Number AS Clashes'
       'FROM'
       '  (TimetableDetail INNER JOIN Distribution ON'
       '        TimetableDetail.IdSubject=Distribution.IdSubject'

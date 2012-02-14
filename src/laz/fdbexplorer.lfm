@@ -1,11 +1,11 @@
 object DBExplorerForm: TDBExplorerForm
-  Left = 610
-  Height = 585
-  Top = 307
-  Width = 636
+  Left = 593
+  Height = 589
+  Top = 303
+  Width = 688
   Caption = 'Database Explorer'
-  ClientHeight = 585
-  ClientWidth = 636
+  ClientHeight = 589
+  ClientWidth = 688
   OnClose = FormClose
   OnCreate = FormCreate
   Position = poDesktopCenter
@@ -14,23 +14,23 @@ object DBExplorerForm: TDBExplorerForm
     Left = 8
     Height = 152
     Top = 72
-    Width = 477
-    Anchors = [akTop, akLeft, akRight]
+    Width = 529
+    Anchors = [akTop, akLeft, akRight, akBottom]
     TabOrder = 0
   end
   object DBGrid1: TDBGrid
     Left = 8
-    Height = 343
+    Height = 347
     Top = 232
-    Width = 619
-    Anchors = [akTop, akLeft, akRight, akBottom]
+    Width = 671
+    Anchors = [akLeft, akRight, akBottom]
     Color = clWindow
     Columns = <>
     DataSource = Datasource1
     TabOrder = 1
   end
   object BtExecuteScript: TButton
-    Left = 493
+    Left = 545
     Height = 27
     Top = 134
     Width = 134
@@ -40,7 +40,7 @@ object DBExplorerForm: TDBExplorerForm
     TabOrder = 2
   end
   object TBShowMetadata: TButton
-    Left = 493
+    Left = 545
     Height = 27
     Top = 8
     Width = 134
@@ -54,13 +54,13 @@ object DBExplorerForm: TDBExplorerForm
     Height = 27
     Hint = 'Metadata Type'
     Top = 8
-    Width = 477
+    Width = 529
     Anchors = [akTop, akLeft, akRight]
     ItemHeight = 0
     TabOrder = 4
   end
   object BtSaveResults: TButton
-    Left = 493
+    Left = 545
     Height = 27
     Top = 197
     Width = 134
@@ -74,7 +74,7 @@ object DBExplorerForm: TDBExplorerForm
     Height = 27
     Hint = 'Tables'
     Top = 38
-    Width = 477
+    Width = 529
     Anchors = [akTop, akLeft, akRight]
     KeyField = 'Name'
     ListField = 'Name'
@@ -83,7 +83,7 @@ object DBExplorerForm: TDBExplorerForm
     TabOrder = 6
   end
   object TBShowTable: TButton
-    Left = 493
+    Left = 545
     Height = 27
     Top = 40
     Width = 134
@@ -93,7 +93,7 @@ object DBExplorerForm: TDBExplorerForm
     TabOrder = 7
   end
   object BtOpenQuery: TButton
-    Left = 493
+    Left = 545
     Height = 27
     Top = 166
     Width = 134
@@ -103,7 +103,7 @@ object DBExplorerForm: TDBExplorerForm
     TabOrder = 8
   end
   object BtOpenScript: TButton
-    Left = 493
+    Left = 545
     Height = 27
     Top = 72
     Width = 134
@@ -113,7 +113,7 @@ object DBExplorerForm: TDBExplorerForm
     TabOrder = 9
   end
   object BtSaveScript: TButton
-    Left = 493
+    Left = 545
     Height = 27
     Top = 103
     Width = 134

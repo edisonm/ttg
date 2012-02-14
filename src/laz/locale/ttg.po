@@ -589,16 +589,6 @@ msgctxt "tconfigform.lbcomments.caption"
 msgid "Comments:"
 msgstr ""
 
-#: tconfigform.lbinitialtimetables.caption
-msgctxt "TCONFIGFORM.LBINITIALTIMETABLES.CAPTION"
-msgid "Initial Timetables:"
-msgstr ""
-
-#: tconfigform.lbinstitutionname.caption
-msgctxt "TCONFIGFORM.LBINSTITUTIONNAME.CAPTION"
-msgid "Name:"
-msgstr ""
-
 #: tconfigform.lbcrossprobability.caption
 msgctxt "TCONFIGFORM.LBCROSSPROBABILITY.CAPTION"
 msgid "Cross Probability:"
@@ -614,9 +604,24 @@ msgctxt "tconfigform.lbemptyhours.caption"
 msgid "Empty hours:"
 msgstr ""
 
+#: tconfigform.lbinitialtimetables.caption
+msgctxt "TCONFIGFORM.LBINITIALTIMETABLES.CAPTION"
+msgid "Initial Timetables:"
+msgstr ""
+
+#: tconfigform.lbinstitutionname.caption
+msgctxt "TCONFIGFORM.LBINSTITUTIONNAME.CAPTION"
+msgid "Name:"
+msgstr ""
+
 #: tconfigform.lbjoinedsubjects.caption
 msgctxt "TCONFIGFORM.LBJOINSUBJECTS.CAPTION"
 msgid "Joined Subjects:"
+msgstr ""
+
+#: tconfigform.lbmaxteacherworkload.caption
+msgctxt "tconfigform.lbmaxteacherworkload.caption"
+msgid "Max work load per teacher:"
 msgstr ""
 
 #: tconfigform.lbmutationprobability.caption
@@ -637,6 +642,21 @@ msgstr ""
 #: tconfigform.lbreparationprobability.caption
 msgctxt "TCONFIGFORM.LBREPARATIONPROBABILITY.CAPTION"
 msgid "Reparation Probability:"
+msgstr ""
+
+#: tconfigform.lbresponsible.caption
+msgctxt "tconfigform.lbresponsible.caption"
+msgid "Responsible:"
+msgstr ""
+
+#: tconfigform.lbresponsibleposition.caption
+msgctxt "TCONFIGFORM.LBRESPONSIBLEPOSITION.CAPTION"
+msgid "Position:"
+msgstr ""
+
+#: tconfigform.lbschoolyear.caption
+msgctxt "tconfigform.lbschoolyear.caption"
+msgid "School Year:"
 msgstr ""
 
 #: tconfigform.lbseed.caption
@@ -677,26 +697,6 @@ msgstr ""
 #: tconfigform.lbtrvalue.caption
 msgctxt "TCONFIGFORM.LBTRVALUE.CAPTION"
 msgid "Value:"
-msgstr ""
-
-#: tconfigform.lbmaxteacherworkload.caption
-msgctxt "tconfigform.lbmaxteacherworkload.caption"
-msgid "Max work load per teacher:"
-msgstr ""
-
-#: tconfigform.lbresponsible.caption
-msgctxt "tconfigform.lbresponsible.caption"
-msgid "Responsible:"
-msgstr ""
-
-#: tconfigform.lbresponsibleposition.caption
-msgctxt "TCONFIGFORM.LBRESPONSIBLEPOSITION.CAPTION"
-msgid "Position:"
-msgstr ""
-
-#: tconfigform.lbschoolyear.caption
-msgctxt "tconfigform.lbschoolyear.caption"
-msgid "School Year:"
 msgstr ""
 
 #: tconfigform.tbsweigths.caption
@@ -1531,13 +1531,13 @@ msgctxt "TTEACHERFORM.CAPTION"
 msgid "Teacher"
 msgstr ""
 
+#: tteacherform.dbgriddetail.hint
+msgid "Distribution of Teachers"
+msgstr ""
+
 #: tteacherform.gbjoinedclass.caption
 msgctxt "tteacherform.gbjoinedclass.caption"
 msgid "Joined Classes"
-msgstr ""
-
-#: tteacherform.dbgriddetail.hint
-msgid "Distribution of Teachers"
 msgstr ""
 
 #: tteacherform.grbdetail.caption

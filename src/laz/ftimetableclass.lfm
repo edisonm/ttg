@@ -1,5 +1,5 @@
 inherited TimetableClassForm: TTimetableClassForm
-  Left = 672
+  Left = 658
   Height = 401
   Top = 292
   Width = 645
@@ -191,6 +191,7 @@ inherited TimetableClassForm: TTimetableClassForm
       '  TimetableDetail.IdLevel,'
       '  TimetableDetail.IdSpecialization,'
       '  TimetableDetail.IdParallel,'
+      '  0 as IsJoinedClass,'
       '  IdHour,'
       '  IdDay,'
       '  TimetableDetail.IdSubject,'
@@ -199,13 +200,45 @@ inherited TimetableClassForm: TTimetableClassForm
       '  LnTeacher,'
       '  NaTeacher'
       'from'
-      '  ((TimetableDetail inner join Distribution on'
-      '  (TimetableDetail.IdSubject = Distribution.IdSubject)'
-      '  and (TimetableDetail.IdLevel = Distribution.IdLevel)'
-      '  and (TimetableDetail.IdSpecialization = Distribution.IdSpecialization)'
-      '  and (TimetableDetail.IdParallel = Distribution.IdParallel))'
-      '  inner join Subject on (TimetableDetail.IdSubject = Subject.IdSubject))'
-      '  inner join Teacher on (Distribution.IdTeacher = Teacher.IdTeacher)'
+      '  TimetableDetail inner join Distribution on'
+      '  TimetableDetail.IdSubject = Distribution.IdSubject'
+      '  and TimetableDetail.IdLevel = Distribution.IdLevel'
+      '  and TimetableDetail.IdSpecialization = Distribution.IdSpecialization'
+      '  and TimetableDetail.IdParallel = Distribution.IdParallel'
+      '  inner join Subject on TimetableDetail.IdSubject = Subject.IdSubject'
+      '  inner join Teacher on Distribution.IdTeacher = Teacher.IdTeacher'
+      'where'
+      '  IdTimetable=:IdTimetable'
+      'and TimetableDetail.IdLevel=:IdLevel'
+      'and TimetableDetail.IdSpecialization=:IdSpecialization'
+      'and TimetableDetail.IdParallel=:IdParallel'
+      'union all'
+      'select'
+      '  TimetableDetail.IdTimetable,'
+      '  JoinedClass.IdLevel1 as IdLevel,'
+      '  JoinedClass.IdSpecialization1 as IdSpecialization,'
+      '  JoinedClass.IdParallel1 as IdParallel,'
+      '  1 as IsJoinedClass,'
+      '  IdHour,'
+      '  IdDay,'
+      '  TimetableDetail.IdSubject,'
+      '  Distribution.IdTeacher,'
+      '  NaSubject,'
+      '  LnTeacher,'
+      '  NaTeacher'
+      'from'
+      '  TimetableDetail inner join Distribution on'
+      '  TimetableDetail.IdSubject = Distribution.IdSubject'
+      '  and TimetableDetail.IdLevel = Distribution.IdLevel'
+      '  and TimetableDetail.IdSpecialization = Distribution.IdSpecialization'
+      '  and TimetableDetail.IdParallel = Distribution.IdParallel'
+      '  inner join Subject on TimetableDetail.IdSubject = Subject.IdSubject'
+      '  inner join Teacher on Distribution.IdTeacher = Teacher.IdTeacher'
+      '  inner join JoinedClass on'
+      '  Distribution.IdSubject = JoinedClass.IdSubject'
+      '  and Distribution.IdLevel=JoinedClass.IdLevel'
+      '  and Distribution.IdSpecialization=JoinedClass.IdSpecialization'
+      '  and Distribution.IdParallel=JoinedClass.IdParallel'
       'where'
       '  IdTimetable=:IdTimetable'
       'and TimetableDetail.IdLevel=:IdLevel'
@@ -304,11 +337,22 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
+    object QuTimetableClassIsJoinedClass: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'IsJoinedClass'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Visible = False
+    end
     object QuTimetableClassIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
-      Index = 4
+      Index = 5
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -319,7 +363,7 @@ inherited TimetableClassForm: TTimetableClassForm
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
-      Index = 5
+      Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -330,7 +374,7 @@ inherited TimetableClassForm: TTimetableClassForm
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSubject'
-      Index = 6
+      Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -341,7 +385,7 @@ inherited TimetableClassForm: TTimetableClassForm
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTeacher'
-      Index = 7
+      Index = 8
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -352,7 +396,7 @@ inherited TimetableClassForm: TTimetableClassForm
       DisplayWidth = 40
       FieldKind = fkCalculated
       FieldName = 'Name'
-      Index = 8
+      Index = 9
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -363,7 +407,7 @@ inherited TimetableClassForm: TTimetableClassForm
       DisplayWidth = 20
       FieldKind = fkData
       FieldName = 'NaSubject'
-      Index = 9
+      Index = 10
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
@@ -373,7 +417,7 @@ inherited TimetableClassForm: TTimetableClassForm
       DisplayWidth = 15
       FieldKind = fkData
       FieldName = 'LnTeacher'
-      Index = 10
+      Index = 11
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -384,7 +428,7 @@ inherited TimetableClassForm: TTimetableClassForm
       DisplayWidth = 15
       FieldKind = fkData
       FieldName = 'NaTeacher'
-      Index = 11
+      Index = 12
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False

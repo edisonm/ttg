@@ -589,16 +589,6 @@ msgctxt "tconfigform.lbcomments.caption"
 msgid "Comments:"
 msgstr "Comentarios:"
 
-#: tconfigform.lbinitialtimetables.caption
-msgctxt "TCONFIGFORM.LBINITIALTIMETABLES.CAPTION"
-msgid "Initial Timetables:"
-msgstr "Horarios iniciales:"
-
-#: tconfigform.lbinstitutionname.caption
-msgctxt "TCONFIGFORM.LBINSTITUTIONNAME.CAPTION"
-msgid "Name:"
-msgstr "Nombre:"
-
 #: tconfigform.lbcrossprobability.caption
 msgctxt "TCONFIGFORM.LBCROSSPROBABILITY.CAPTION"
 msgid "Cross Probability:"
@@ -614,10 +604,25 @@ msgctxt "tconfigform.lbemptyhours.caption"
 msgid "Empty hours:"
 msgstr "Horas huecas:"
 
+#: tconfigform.lbinitialtimetables.caption
+msgctxt "TCONFIGFORM.LBINITIALTIMETABLES.CAPTION"
+msgid "Initial Timetables:"
+msgstr "Horarios iniciales:"
+
+#: tconfigform.lbinstitutionname.caption
+msgctxt "TCONFIGFORM.LBINSTITUTIONNAME.CAPTION"
+msgid "Name:"
+msgstr "Nombre:"
+
 #: tconfigform.lbjoinedsubjects.caption
 msgctxt "TCONFIGFORM.LBJOINSUBJECTS.CAPTION"
 msgid "Joined Subjects:"
 msgstr "Materias juntas:"
+
+#: tconfigform.lbmaxteacherworkload.caption
+msgctxt "tconfigform.lbmaxteacherworkload.caption"
+msgid "Max work load per teacher:"
+msgstr "Carga Maxima por Profesor:"
 
 #: tconfigform.lbmutationprobability.caption
 msgctxt "TCONFIGFORM.LBMUTATIONPROBABILITY.CAPTION"
@@ -638,6 +643,21 @@ msgstr "Individuos:"
 msgctxt "TCONFIGFORM.LBREPARATIONPROBABILITY.CAPTION"
 msgid "Reparation Probability:"
 msgstr "Prob. Reparacion:"
+
+#: tconfigform.lbresponsible.caption
+msgctxt "tconfigform.lbresponsible.caption"
+msgid "Responsible:"
+msgstr "Responsable:"
+
+#: tconfigform.lbresponsibleposition.caption
+msgctxt "TCONFIGFORM.LBRESPONSIBLEPOSITION.CAPTION"
+msgid "Position:"
+msgstr "Cargo:"
+
+#: tconfigform.lbschoolyear.caption
+msgctxt "tconfigform.lbschoolyear.caption"
+msgid "School Year:"
+msgstr "Periodo Lectivo:"
 
 #: tconfigform.lbseed.caption
 msgctxt "TCONFIGFORM.LBSEED.CAPTION"
@@ -678,26 +698,6 @@ msgstr "Nombre:"
 msgctxt "TCONFIGFORM.LBTRVALUE.CAPTION"
 msgid "Value:"
 msgstr "Valor:"
-
-#: tconfigform.lbmaxteacherworkload.caption
-msgctxt "tconfigform.lbmaxteacherworkload.caption"
-msgid "Max work load per teacher:"
-msgstr "Carga Maxima por Profesor:"
-
-#: tconfigform.lbresponsible.caption
-msgctxt "tconfigform.lbresponsible.caption"
-msgid "Responsible:"
-msgstr "Responsable:"
-
-#: tconfigform.lbresponsibleposition.caption
-msgctxt "TCONFIGFORM.LBRESPONSIBLEPOSITION.CAPTION"
-msgid "Position:"
-msgstr "Cargo:"
-
-#: tconfigform.lbschoolyear.caption
-msgctxt "tconfigform.lbschoolyear.caption"
-msgid "School Year:"
-msgstr "Periodo Lectivo:"
 
 #: tconfigform.tbsweigths.caption
 msgctxt "TCONFIGFORM.TBSWEIGTHS.CAPTION"
@@ -1537,14 +1537,14 @@ msgctxt "tteacherform.caption"
 msgid "Teacher"
 msgstr "Profesor"
 
+#: tteacherform.dbgriddetail.hint
+msgid "Distribution of Teachers"
+msgstr "Distribution de profesores"
+
 #: tteacherform.gbjoinedclass.caption
 msgctxt "tteacherform.gbjoinedclass.caption"
 msgid "Joined Classes"
 msgstr "Clases agrupadas"
-
-#: tteacherform.dbgriddetail.hint
-msgid "Distribution of Teachers"
-msgstr "Distribution de profesores"
 
 #: tteacherform.grbdetail.caption
 msgid "Distribution"
