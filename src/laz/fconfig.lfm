@@ -3,7 +3,7 @@ object ConfigForm: TConfigForm
   Height = 442
   Top = 482
   Width = 490
-  ActiveControl = pgcConfig
+  ActiveControl = PCConfig
   BorderStyle = bsDialog
   Caption = 'Configure'
   ClientHeight = 442
@@ -48,7 +48,7 @@ object ConfigForm: TConfigForm
   }
   Position = poDesktopCenter
   LCLVersion = '0.9.31'
-  object bbtOk: TBitBtn
+  object BBOk: TBitBtn
     Left = 264
     Height = 31
     Top = 403
@@ -58,27 +58,27 @@ object ConfigForm: TConfigForm
     Default = True
     Kind = bkOK
     ModalResult = 1
-    OnClick = bbtOkClick
+    OnClick = BBOkClick
     TabOrder = 0
   end
-  object pgcConfig: TPageControl
+  object PCConfig: TPageControl
     Left = 8
     Height = 386
     Top = 8
     Width = 473
-    ActivePage = tbsOptions
+    ActivePage = TSOptions
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentShowHint = False
     ShowHint = True
     TabIndex = 1
     TabOrder = 1
-    object tbsInstitution: TTabSheet
+    object TSInstitution: TTabSheet
       Hint = 'Institution Data'
       Caption = 'Institution'
       ClientHeight = 356
       ClientWidth = 469
       ImageIndex = 2
-      object lblMaxTeacherWorkLoad: TLabel
+      object LbMaxTeacherWorkLoad: TLabel
         Left = 8
         Height = 15
         Top = 109
@@ -86,7 +86,7 @@ object ConfigForm: TConfigForm
         Caption = 'Max work load per teacher:'
         ParentColor = False
       end
-      object lblComments: TLabel
+      object LbComments: TLabel
         Left = 8
         Height = 15
         Top = 136
@@ -94,7 +94,7 @@ object ConfigForm: TConfigForm
         Caption = 'Comments:'
         ParentColor = False
       end
-      object lblInstitutionName: TLabel
+      object LbInstitutionName: TLabel
         Left = 8
         Height = 15
         Top = 13
@@ -102,7 +102,7 @@ object ConfigForm: TConfigForm
         Caption = 'Name:'
         ParentColor = False
       end
-      object lblResponsible: TLabel
+      object LbResponsible: TLabel
         Left = 8
         Height = 15
         Top = 85
@@ -110,7 +110,7 @@ object ConfigForm: TConfigForm
         Caption = 'Responsible:'
         ParentColor = False
       end
-      object lblResponsiblePosition: TLabel
+      object LbResponsiblePosition: TLabel
         Left = 269
         Height = 15
         Top = 85
@@ -118,7 +118,7 @@ object ConfigForm: TConfigForm
         Caption = 'Position:'
         ParentColor = False
       end
-      object lblAuthority: TLabel
+      object LbAuthority: TLabel
         Left = 8
         Height = 15
         Top = 61
@@ -126,7 +126,7 @@ object ConfigForm: TConfigForm
         Caption = 'Authority:'
         ParentColor = False
       end
-      object lblAuthorityPosition: TLabel
+      object LbAuthorityPosition: TLabel
         Left = 269
         Height = 15
         Top = 61
@@ -134,7 +134,7 @@ object ConfigForm: TConfigForm
         Caption = 'Position:'
         ParentColor = False
       end
-      object lblSchoolYear: TLabel
+      object LbSchoolYear: TLabel
         Left = 8
         Height = 15
         Top = 36
@@ -142,7 +142,7 @@ object ConfigForm: TConfigForm
         Caption = 'School Year:'
         ParentColor = False
       end
-      object speMaxTeacherWorkLoad: TSpinEdit
+      object SEMaxTeacherWorkLoad: TSpinEdit
         Left = 180
         Height = 24
         Top = 104
@@ -152,14 +152,14 @@ object ConfigForm: TConfigForm
         TabOrder = 6
         Value = 20
       end
-      object memComments: TMemo
+      object MeComments: TMemo
         Left = 8
         Height = 161
         Top = 152
         Width = 453
         TabOrder = 7
       end
-      object edtNaInstitution: TEdit
+      object EdNaInstitution: TEdit
         Left = 108
         Height = 24
         Hint = 'High School|High School Name'
@@ -167,35 +167,35 @@ object ConfigForm: TConfigForm
         Width = 353
         TabOrder = 0
       end
-      object edtNameResponsible: TEdit
+      object EdNameResponsible: TEdit
         Left = 108
         Height = 24
         Top = 80
         Width = 149
         TabOrder = 4
       end
-      object edtPositionResponsible: TEdit
+      object EdPositionResponsible: TEdit
         Left = 317
         Height = 24
         Top = 80
         Width = 144
         TabOrder = 5
       end
-      object edtNameAuthority: TEdit
+      object EdNameAuthority: TEdit
         Left = 108
         Height = 24
         Top = 56
         Width = 149
         TabOrder = 2
       end
-      object edtPositionAuthority: TEdit
+      object EdPositionAuthority: TEdit
         Left = 317
         Height = 24
         Top = 56
         Width = 144
         TabOrder = 3
       end
-      object edtSchoolYear: TEdit
+      object EdSchoolYear: TEdit
         Left = 108
         Height = 24
         Top = 32
@@ -203,12 +203,12 @@ object ConfigForm: TConfigForm
         TabOrder = 1
       end
     end
-    object tbsOptions: TTabSheet
+    object TSOptions: TTabSheet
       Caption = 'Options'
       ClientHeight = 356
       ClientWidth = 469
       ImageIndex = 3
-      object lblSeed: TLabel
+      object LbSeed: TLabel
         Left = 8
         Height = 15
         Top = 36
@@ -224,7 +224,7 @@ object ConfigForm: TConfigForm
         Caption = 'Update each:'
         ParentColor = False
       end
-      object lblInitialTimetables: TLabel
+      object LbInitialTimetables: TLabel
         Left = 235
         Height = 15
         Top = 132
@@ -232,7 +232,7 @@ object ConfigForm: TConfigForm
         Caption = 'Initial Timetables:'
         ParentColor = False
       end
-      object lblSharedDirectory: TLabel
+      object LbSharedDirectory: TLabel
         Left = 235
         Height = 15
         Top = 109
@@ -240,7 +240,7 @@ object ConfigForm: TConfigForm
         Caption = 'Shared directory:'
         ParentColor = False
       end
-      object lblPopulationSize: TLabel
+      object LbPopulationSize: TLabel
         Left = 235
         Height = 15
         Top = 84
@@ -256,7 +256,7 @@ object ConfigForm: TConfigForm
         Caption = 'Iterations:'
         ParentColor = False
       end
-      object lblCrossProbability: TLabel
+      object LbCrossProbability: TLabel
         Left = 9
         Height = 15
         Top = 84
@@ -264,7 +264,7 @@ object ConfigForm: TConfigForm
         Caption = 'Cross Probability:'
         ParentColor = False
       end
-      object lblMutationProbability: TLabel
+      object LbMutationProbability: TLabel
         Left = 9
         Height = 15
         Top = 109
@@ -272,7 +272,7 @@ object ConfigForm: TConfigForm
         Caption = 'Mutation Probability:'
         ParentColor = False
       end
-      object lblReparationProbability: TLabel
+      object LbReparationProbability: TLabel
         Left = 8
         Height = 15
         Top = 132
@@ -280,7 +280,7 @@ object ConfigForm: TConfigForm
         Caption = 'Reparation Probability:'
         ParentColor = False
       end
-      object lblPollinationProbability: TLabel
+      object LbPollinationProbability: TLabel
         Left = 8
         Height = 15
         Top = 156
@@ -288,7 +288,7 @@ object ConfigForm: TConfigForm
         Caption = 'Pollination Probability:'
         ParentColor = False
       end
-      object lblDownhillLevels: TLabel
+      object LbDownhillLevels: TLabel
         Left = 235
         Height = 15
         Top = 62
@@ -325,7 +325,7 @@ object ConfigForm: TConfigForm
         TabOrder = 2
         Value = 10
       end
-      object edtInitialTimetables: TEdit
+      object EdInitialTimetables: TEdit
         Left = 344
         Height = 24
         Top = 128
@@ -354,7 +354,7 @@ object ConfigForm: TConfigForm
         TabOrder = 5
         Value = 1
       end
-      object speMaxIteration: TSpinEdit
+      object SEMaxIteration: TSpinEdit
         Left = 345
         Height = 24
         Top = 32
@@ -429,7 +429,7 @@ object ConfigForm: TConfigForm
         Caption = 'Clash Rooms:'
         ParentColor = False
       end
-      object lblEmptyHours: TLabel
+      object LbEmptyHours: TLabel
         Left = 237
         Height = 15
         Top = 36
@@ -437,7 +437,7 @@ object ConfigForm: TConfigForm
         Caption = 'Empty hours:'
         ParentColor = False
       end
-      object lblBrokenSubjects: TLabel
+      object LbBrokenSubjects: TLabel
         Left = 8
         Height = 15
         Top = 86
@@ -445,7 +445,7 @@ object ConfigForm: TConfigForm
         Caption = 'Broken Sessions:'
         ParentColor = False
       end
-      object lblJoinedSubjects: TLabel
+      object LbJoinedSubjects: TLabel
         Left = 237
         Height = 15
         Top = 61
@@ -471,7 +471,7 @@ object ConfigForm: TConfigForm
         Caption = 'Teacher Restrictions:'
         ParentColor = False
       end
-      object lblBreakTimetableTeacher: TLabel
+      object LbBreakTimetableTeacher: TLabel
         Left = 237
         Height = 15
         Top = 15
@@ -479,7 +479,7 @@ object ConfigForm: TConfigForm
         Caption = 'Gap TT. Teachers:'
         ParentColor = False
       end
-      object lblSRName: TLabel
+      object LbSRName: TLabel
         Left = 310
         Height = 15
         Top = 147
@@ -488,7 +488,7 @@ object ConfigForm: TConfigForm
         Caption = 'Name:'
         ParentColor = False
       end
-      object lblSRColor: TLabel
+      object LbSRColor: TLabel
         Left = 313
         Height = 15
         Top = 180
@@ -497,7 +497,7 @@ object ConfigForm: TConfigForm
         Caption = 'Color:'
         ParentColor = False
       end
-      object lblSRValue: TLabel
+      object LbSRValue: TLabel
         Left = 312
         Height = 15
         Top = 208
@@ -506,7 +506,7 @@ object ConfigForm: TConfigForm
         Caption = 'Value:'
         ParentColor = False
       end
-      object lblTRName: TLabel
+      object LbTRName: TLabel
         Left = 310
         Height = 15
         Top = 259
@@ -515,7 +515,7 @@ object ConfigForm: TConfigForm
         Caption = 'Name:'
         ParentColor = False
       end
-      object lblTRColor: TLabel
+      object LbTRColor: TLabel
         Left = 313
         Height = 15
         Top = 292
@@ -524,7 +524,7 @@ object ConfigForm: TConfigForm
         Caption = 'Color:'
         ParentColor = False
       end
-      object lblTRValue: TLabel
+      object LbTRValue: TLabel
         Left = 312
         Height = 15
         Top = 319
@@ -695,7 +695,7 @@ object ConfigForm: TConfigForm
       end
     end
   end
-  object bbtCancel: TBitBtn
+  object BBCancel: TBitBtn
     Left = 376
     Height = 31
     Top = 403
@@ -705,7 +705,7 @@ object ConfigForm: TConfigForm
     Caption = 'Cancel'
     Kind = bkCancel
     ModalResult = 2
-    OnClick = bbtCancelClick
+    OnClick = BBCancelClick
     TabOrder = 2
   end
   object DSSubjectRestrictionType: TDatasource

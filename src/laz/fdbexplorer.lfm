@@ -39,14 +39,14 @@ object DBExplorerForm: TDBExplorerForm
     OnClick = BtExecuteScriptClick
     TabOrder = 2
   end
-  object BtShowMetadata: TButton
+  object TBShowMetadata: TButton
     Left = 493
     Height = 27
     Top = 8
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Show Metadata'
-    OnClick = BtShowMetadataClick
+    OnClick = TBShowMetadataClick
     TabOrder = 3
   end
   object CbxMetadataType: TComboBox
@@ -82,14 +82,14 @@ object DBExplorerForm: TDBExplorerForm
     LookupCache = False
     TabOrder = 6
   end
-  object BtShowTable: TButton
+  object TBShowTable: TButton
     Left = 493
     Height = 27
     Top = 40
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Show Table'
-    OnClick = BtShowTableClick
+    OnClick = TBShowTableClick
     TabOrder = 7
   end
   object BtOpenQuery: TButton

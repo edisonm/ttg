@@ -10,7 +10,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  inherited TlBShow: TToolBar
+  inherited TBEditor: TToolBar
     Width = 804
     inherited BtOk: TToolButton
       Enabled = False
@@ -52,7 +52,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Top = 2
       Width = 193
       ItemHeight = 0
-      OnChange = BtShowClick
+      OnChange = TBShowClick
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0

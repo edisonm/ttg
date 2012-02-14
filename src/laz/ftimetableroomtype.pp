@@ -17,7 +17,7 @@ type
 
   TTimetableRoomTypeForm = class(TCrossManyToManyEditor1Form)
     QuTimetableRoomType: TZQuery;
-    cbxShowRoomType: TComboBox;
+    CBShowRoomType: TComboBox;
     QuTimetableRoomTypeIdSubject: TLongintField;
     QuTimetableRoomTypeIdLevel: TLongintField;
     QuTimetableRoomTypeIdSpecialization: TLongintField;
@@ -55,7 +55,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure QuTimetableRoomTypeCalcFields(DataSet: TDataSet);
     procedure DSRoomTypeDataChange(Sender: TObject; Field: TField);
-    procedure BtShowClick(Sender: TObject);
+    procedure TBShowClick(Sender: TObject);
   private
     { Private declarations }
     FName: string;
@@ -72,7 +72,7 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-procedure TTimetableRoomTypeForm.BtShowClick(Sender: TObject);
+procedure TTimetableRoomTypeForm.TBShowClick(Sender: TObject);
 begin
   inherited;
   with SourceDataModule, MasterDataModule do
@@ -80,7 +80,7 @@ begin
     Caption := Format('[%s %d] - %s', [SuperTitle,
       QuRoomType.FindField('IdTimetable').AsInteger,
       QuRoomType.FindField('AbRoomType').AsString]);
-    FName := StringsShowRoomType.Values[cbxShowRoomType.Text];
+    FName := StringsShowRoomType.Values[CBShowRoomType.Text];
     ShowEditor(TbDay, TbHour, QuTimetableRoomType, TbTimeSlot, 'IdDay', 'NaDay',
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
   end;
@@ -97,10 +97,10 @@ begin
   QuTimetableRoomTypeName.DisplayLabel := SFlRoomType_NaRoomType;
   QuRoomTypeAbRoomType.DisplayLabel := SFlDistribution_IdRoomType;
   QuRoomType.Open;
-  cbxShowRoomType.Items.Clear;
+  CBShowRoomType.Items.Clear;
   QuTimetableRoomType.Open;
-  LoadNames(MasterDataModule.StringsShowRoomType, cbxShowRoomType.Items);
-  cbxShowRoomType.Text := cbxShowRoomType.Items[0];
+  LoadNames(MasterDataModule.StringsShowRoomType, CBShowRoomType.Items);
+  CBShowRoomType.Text := CBShowRoomType.Items[0];
 end;
 
 procedure TTimetableRoomTypeForm.FormDestroy(Sender: TObject);
@@ -165,7 +165,7 @@ procedure TTimetableRoomTypeForm.DSRoomTypeDataChange(Sender: TObject;
   Field: TField);
 begin
   inherited;
-  BtShowClick(nil);
+  TBShowClick(nil);
 end;
 
 initialization

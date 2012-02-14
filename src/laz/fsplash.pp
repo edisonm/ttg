@@ -11,11 +11,11 @@ uses
 
 type
   TSplashForm = class(TForm)
-    lblProductName: TLabel;
-    lblProductVersion: TLabel;
-    lblCopyright: TLabel;
-    lblTable: TLabel;
-    lblYearLabel: TLabel;
+    LbProductName: TLabel;
+    LbProductVersion: TLabel;
+    LbCopyright: TLabel;
+    LbTable: TLabel;
+    LbYearLabel: TLabel;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -69,10 +69,10 @@ procedure TSplashForm.FormCreate(Sender: TObject);
 begin
   UpdBackground;
   Caption := sAppName + ' ' + sAppVersion;
-  lblProductName.Caption := Caption;
-  lblProductVersion.Caption := sAppVersion + '-' + sRevision;
-  lblYearLabel.Caption := 'Build (' + sBuildDateTime + ')';
-  lblCopyright.Caption := SCopyright;
+  LbProductName.Caption := Caption;
+  LbProductVersion.Caption := sAppVersion + '-' + sRevision;
+  LbYearLabel.Caption := 'Build (' + sBuildDateTime + ')';
+  LbCopyright.Caption := SCopyright;
 end;
 
 initialization

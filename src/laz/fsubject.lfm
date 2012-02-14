@@ -10,7 +10,7 @@ inherited SubjectForm: TSubjectForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  inherited TlBShow: TToolBar
+  inherited TBEditor: TToolBar
     Width = 588
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
@@ -27,7 +27,7 @@ inherited SubjectForm: TSubjectForm
     Top = 442
     Width = 588
     ClientWidth = 588
-    inherited SLRecordNo: TLabel
+    inherited LbRecordNo: TLabel
       Left = 586
     end
   end

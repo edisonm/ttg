@@ -16,12 +16,12 @@ type
   { TTeacherForm }
 
   TTeacherForm	= class(TMasterDetailEditorForm)
-    BtTeacherRestriction: TToolButton;
+    TBTeacherRestriction: TToolButton;
     ActTeacherRestriction: TAction;
     DbGAssistances: TDBGrid;
     DbGJoinedClass: TDBGrid;
     GroupBox3: TGroupBox;
-    CbJoinedClass: TGroupBox;
+    GBJoinedClass: TGroupBox;
     Panel3: TPanel;
     Splitter2: TSplitter;
     Splitter3: TSplitter;

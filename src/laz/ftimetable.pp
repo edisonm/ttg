@@ -18,7 +18,7 @@ type
 
   TTimetableForm = class(TSingleEditorForm)
     BtSubjectRestrictionNonSatisfied: TToolButton;
-    BtTeacherRestrictionNoRespetada: TToolButton;
+    TBTeacherRestrictionNoRespetada: TToolButton;
     BtTimetableClass: TToolButton;
     BtTimetableTeacher: TToolButton;
     BtClashTeacher: TToolButton;
@@ -232,7 +232,7 @@ begin
   begin
     with SourceDataModule do
       FTimetableClassForm.LoadHints(TbDay, TbHour, TbSubject);
-    FTimetableClassForm.BtShowClick(nil);
+    FTimetableClassForm.TBShowClick(nil);
   end;
 end;
 
@@ -266,7 +266,7 @@ begin
   begin
     with SourceDataModule do
       FTimetableTeacherForm.LoadHints(TbDay, TbHour, TbTeacher);
-    FTimetableTeacherForm.BtShowClick(nil);
+    FTimetableTeacherForm.TBShowClick(nil);
   end
 end;
 
@@ -507,7 +507,7 @@ begin
     begin
       FTimetableRoomTypeForm.LoadHints(TbDay, TbHour, TbSubject);
     end;
-    FTimetableRoomTypeForm.BtShowClick(nil);
+    FTimetableRoomTypeForm.TBShowClick(nil);
   end;
 end;
 

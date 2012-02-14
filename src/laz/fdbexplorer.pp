@@ -15,9 +15,9 @@ type
 
   TDBExplorerForm = class(TForm)
     BtExecuteScript: TButton;
-    BtShowMetadata: TButton;
+    TBShowMetadata: TButton;
     BtSaveResults: TButton;
-    BtShowTable: TButton;
+    TBShowTable: TButton;
     BtOpenQuery: TButton;
     BtOpenScript: TButton;
     BtSaveScript: TButton;
@@ -37,10 +37,10 @@ type
     procedure BtOpenScriptClick(Sender: TObject);
     procedure BtOpenQueryClick(Sender: TObject);
     procedure BtSaveScriptClick(Sender: TObject);
-    procedure BtShowMetadataClick(Sender: TObject);
+    procedure TBShowMetadataClick(Sender: TObject);
     procedure BtExecuteScriptClick(Sender: TObject);
     procedure BtSaveResultsClick(Sender: TObject);
-    procedure BtShowTableClick(Sender: TObject);
+    procedure TBShowTableClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
   private
@@ -88,7 +88,7 @@ begin
   end;
 end;
 
-procedure TDBExplorerForm.BtShowMetadataClick(Sender: TObject);
+procedure TDBExplorerForm.TBShowMetadataClick(Sender: TObject);
 begin
   ZSQLMetadata1.Close;
   ZSQLMetadata1.MetadataType := TZMetadataType(CbxMetadataType.ItemIndex);
@@ -140,7 +140,7 @@ begin
   end;
 end;
 
-procedure TDBExplorerForm.BtShowTableClick(Sender: TObject);
+procedure TDBExplorerForm.TBShowTableClick(Sender: TObject);
 begin
   ZTable1.Close;
   ZTable1.TableName := CbxTable.Text;

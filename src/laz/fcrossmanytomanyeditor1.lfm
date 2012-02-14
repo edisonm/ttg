@@ -3,7 +3,7 @@ inherited CrossManyToManyEditor1Form: TCrossManyToManyEditor1Form
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
-  inherited TlBShow: TToolBar
+  inherited TBEditor: TToolBar
     inherited BtOk: TToolButton
       OnClick = BtOkClick
     end

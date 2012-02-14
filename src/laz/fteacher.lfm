@@ -11,12 +11,12 @@ inherited TeacherForm: TTeacherForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  inherited TlBShow: TToolBar
+  inherited TBEditor: TToolBar
     Width = 1107
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
     end
-    object BtTeacherRestriction: TToolButton[3]
+    object TBTeacherRestriction: TToolButton[3]
       Left = 257
       Top = 2
       Action = ActTeacherRestriction
@@ -28,7 +28,7 @@ inherited TeacherForm: TTeacherForm
     Top = 616
     Width = 1107
     ClientWidth = 1107
-    inherited SLRecordNo: TLabel
+    inherited LbRecordNo: TLabel
       Left = 1105
     end
   end
@@ -122,7 +122,7 @@ inherited TeacherForm: TTeacherForm
           Top = 1
           Width = 6
         end
-        object CbJoinedClass: TGroupBox
+        object GBJoinedClass: TGroupBox
           Left = 294
           Height = 224
           Top = 1

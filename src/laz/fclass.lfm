@@ -9,7 +9,7 @@ inherited ClassForm: TClassForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  inherited TlBShow: TToolBar
+  inherited TBEditor: TToolBar
     Width = 635
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
@@ -19,7 +19,7 @@ inherited ClassForm: TClassForm
     Top = 361
     Width = 635
     ClientWidth = 635
-    inherited SLRecordNo: TLabel
+    inherited LbRecordNo: TLabel
       Left = 633
     end
   end

@@ -16,8 +16,8 @@ type
     MemLog: TMemo;
     MemSummary: TMemo;
     Panel2: TPanel;
-    bbtClose: TBitBtn;
-    lblMsg: TLabel;
+    BBClose: TBitBtn;
+    LbMessage: TLabel;
     Panel1: TPanel;
     Splitter1: TSplitter;
   private

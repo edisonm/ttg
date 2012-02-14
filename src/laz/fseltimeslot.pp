@@ -15,7 +15,7 @@ type
 
   TSelTimeSlotForm = class(TForm)
     bbtAceptar: TBitBtn;
-    bbtCancel: TBitBtn;
+    BBCancel: TBitBtn;
     CBDay: TDBLookupComboBox;
     CBHour: TDBLookupComboBox;
     Label1: TLabel;

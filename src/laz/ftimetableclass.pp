@@ -17,8 +17,8 @@ type
 
   TTimetableClassForm = class(TCrossManyToManyEditor1Form)
     QuTimetableClass: TZQuery;
-    BtIntercambiarTimeSlots: TToolButton;
-    cbxShowClass: TComboBox;
+    TBSwapTimeSlots: TToolButton;
+    CBShowClass: TComboBox;
     QuTimetableClassIdSubject: TLongintField;
     QuTimetableClassIdLevel: TLongintField;
     QuTimetableClassIdSpecialization: TLongintField;
@@ -45,7 +45,7 @@ type
     Splitter1: TSplitter;
     DBNavigator: TDBNavigator;
     procedure BtCancelClick(Sender: TObject);
-    procedure BtShowClick(Sender: TObject);
+    procedure TBShowClick(Sender: TObject);
     procedure BtOkClick(Sender: TObject);
     procedure DrawGridDrawCell(Sender: TObject; aCol, aRow: Integer;
       aRect: TRect; aState: TGridDrawState);
@@ -93,7 +93,7 @@ begin
   Result := RowKey[DrawGrid.Row - 1];
 end;
 
-procedure TTimetableClassForm.BtShowClick(Sender: TObject);
+procedure TTimetableClassForm.TBShowClick(Sender: TObject);
 begin
   inherited;
   Caption := Format('[%s %d] - %s %s %s', [SuperTitle,
@@ -101,7 +101,7 @@ begin
     QuClass.FindField('AbLevel').AsString,
     QuClass.FindField('AbSpecialization').AsString,
     QuClass.FindField('NaParallel').AsString]);
-  FName := MasterDataModule.StringsShowClass.Values[cbxShowClass.Text];
+  FName := MasterDataModule.StringsShowClass.Values[CBShowClass.Text];
   with SourceDataModule do
     ShowEditor(TbDay, TbHour, QuTimetableClass, TbTimeSlot, 'IdDay', 'NaDay',
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
@@ -157,11 +157,11 @@ procedure TTimetableClassForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuClass.Open;
-  cbxShowClass.Items.Clear;
+  CBShowClass.Items.Clear;
   QuTimetableClass.Open;
   QuTimetableClassName.DisplayLabel := SName;
-  LoadNames(MasterDataModule.StringsShowClass, cbxShowClass.Items);
-  cbxShowClass.Text := cbxShowClass.Items[0];
+  LoadNames(MasterDataModule.StringsShowClass, CBShowClass.Items);
+  CBShowClass.Text := CBShowClass.Items[0];
 end;
 
 procedure TTimetableClassForm.FormDestroy(Sender: TObject);
@@ -184,7 +184,7 @@ begin
         QuClass.FindField('IdParallel').AsInteger,
         IdDay, IdHour, iIdDay, iIdHour);
     QuTimetableClass.Refresh;
-    BtShowClick(nil);
+    TBShowClick(nil);
   end;
 end;
 
@@ -205,7 +205,7 @@ procedure TTimetableClassForm.DSClassDataChange(Sender: TObject;
   Field: TField);
 begin
   inherited;
-  BtShowClick(nil);
+  TBShowClick(nil);
 end;
 
 initialization

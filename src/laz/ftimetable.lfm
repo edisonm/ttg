@@ -10,7 +10,7 @@ inherited TimetableForm: TTimetableForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  inherited TlBShow: TToolBar
+  inherited TBEditor: TToolBar
     Width = 677
     inherited DBNavigator: TDBNavigator
       Width = 154
@@ -67,7 +67,7 @@ inherited TimetableForm: TTimetableForm
       ParentShowHint = False
       ShowHint = True
     end
-    object BtTeacherRestrictionNoRespetada: TToolButton[10]
+    object TBTeacherRestrictionNoRespetada: TToolButton[10]
       Left = 362
       Top = 2
       Action = ActTeacherRestrictionNoRespetada
@@ -100,7 +100,7 @@ inherited TimetableForm: TTimetableForm
     Top = 421
     Width = 677
     ClientWidth = 677
-    inherited SLRecordNo: TLabel
+    inherited LbRecordNo: TLabel
       Left = 675
     end
   end

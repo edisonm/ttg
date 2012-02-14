@@ -10,7 +10,7 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Position = poDesktopCenter
-  inherited TlBShow: TToolBar
+  inherited TBEditor: TToolBar
     Width = 518
     inherited BtOk: TToolButton
       OnClick = BtOkClick

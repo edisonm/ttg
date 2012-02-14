@@ -494,13 +494,13 @@ msgstr ""
 msgid "Courses|Available courses"
 msgstr ""
 
-#: tconfigform.bbtcancel.caption
-msgctxt "TCONFIGFORM.BBTCANCEL.CAPTION"
+#: tconfigform.bbcancel.caption
+msgctxt "TCONFIGFORM.BBCANCEL.CAPTION"
 msgid "Cancel"
 msgstr ""
 
-#: tconfigform.bbtok.caption
-msgctxt "TCONFIGFORM.BBTOK.CAPTION"
+#: tconfigform.bbok.caption
+msgctxt "TCONFIGFORM.BBOK.CAPTION"
 msgid "Ok"
 msgstr ""
 
@@ -524,8 +524,8 @@ msgctxt "tconfigform.edbookmarks.text"
 msgid "1,2"
 msgstr ""
 
-#: tconfigform.edtnainstitution.hint
-msgctxt "TCONFIGFORM.EDTNAINSTITUTION.HINT"
+#: tconfigform.ednainstitution.hint
+msgctxt "TCONFIGFORM.EDNAINSTITUTION.HINT"
 msgid "High School|High School Name"
 msgstr ""
 
@@ -564,159 +564,159 @@ msgctxt "tconfigform.label29.caption"
 msgid "Update each:"
 msgstr ""
 
-#: tconfigform.lblauthority.caption
-msgctxt "tconfigform.lblauthority.caption"
+#: tconfigform.lbauthority.caption
+msgctxt "tconfigform.lbauthority.caption"
 msgid "Authority:"
 msgstr ""
 
-#: tconfigform.lblauthorityposition.caption
-msgctxt "TCONFIGFORM.LBLAUTHORITYPOSITION.CAPTION"
+#: tconfigform.lbauthorityposition.caption
+msgctxt "TCONFIGFORM.LBAUTHORITYPOSITION.CAPTION"
 msgid "Position:"
 msgstr ""
 
-#: tconfigform.lblbreaktimetableteacher.caption
-msgctxt "tconfigform.lblbreaktimetableteacher.caption"
+#: tconfigform.lbbreaktimetableteacher.caption
+msgctxt "tconfigform.lbbreaktimetableteacher.caption"
 msgid "Gap TT. Teachers:"
 msgstr ""
 
-#: tconfigform.lblbrokensubjects.caption
-msgctxt "tconfigform.lblbrokensubjects.caption"
+#: tconfigform.lbbrokensubjects.caption
+msgctxt "tconfigform.lbbrokensubjects.caption"
 msgid "Broken Sessions:"
 msgstr ""
 
-#: tconfigform.lblcomments.caption
-msgctxt "tconfigform.lblcomments.caption"
+#: tconfigform.lbcomments.caption
+msgctxt "tconfigform.lbcomments.caption"
 msgid "Comments:"
 msgstr ""
 
-#: tconfigform.lblcrossprobability.caption
-msgctxt "TCONFIGFORM.LBLCROSSPROBABILITY.CAPTION"
-msgid "Cross Probability:"
-msgstr ""
-
-#: tconfigform.lbldownhilllevels.caption
-msgctxt "TCONFIGFORM.LBLDOWNHILLLEVELS.CAPTION"
-msgid "Downhill Levels:"
-msgstr ""
-
-#: tconfigform.lblemptyhours.caption
-msgctxt "tconfigform.lblemptyhours.caption"
-msgid "Empty hours:"
-msgstr ""
-
-#: tconfigform.lblinitialtimetables.caption
-msgctxt "TCONFIGFORM.LBLINITIALTIMETABLES.CAPTION"
+#: tconfigform.lbinitialtimetables.caption
+msgctxt "TCONFIGFORM.LBINITIALTIMETABLES.CAPTION"
 msgid "Initial Timetables:"
 msgstr ""
 
-#: tconfigform.lblinstitutionname.caption
-msgctxt "TCONFIGFORM.LBLINSTITUTIONNAME.CAPTION"
+#: tconfigform.lbinstitutionname.caption
+msgctxt "TCONFIGFORM.LBINSTITUTIONNAME.CAPTION"
 msgid "Name:"
 msgstr ""
 
-#: tconfigform.lbljoinedsubjects.caption
-msgctxt "TCONFIGFORM.LBLJOINSUBJECTS.CAPTION"
+#: tconfigform.lbcrossprobability.caption
+msgctxt "TCONFIGFORM.LBCROSSPROBABILITY.CAPTION"
+msgid "Cross Probability:"
+msgstr ""
+
+#: tconfigform.lbdownhilllevels.caption
+msgctxt "TCONFIGFORM.LBDOWNHILLLEVELS.CAPTION"
+msgid "Downhill Levels:"
+msgstr ""
+
+#: tconfigform.lbemptyhours.caption
+msgctxt "tconfigform.lbemptyhours.caption"
+msgid "Empty hours:"
+msgstr ""
+
+#: tconfigform.lbjoinedsubjects.caption
+msgctxt "TCONFIGFORM.LBJOINSUBJECTS.CAPTION"
 msgid "Joined Subjects:"
 msgstr ""
 
-#: tconfigform.lblmaxteacherworkload.caption
-msgctxt "tconfigform.lblmaxteacherworkload.caption"
-msgid "Max work load per teacher:"
-msgstr ""
-
-#: tconfigform.lblmutationprobability.caption
-msgctxt "TCONFIGFORM.LBLMUTATIONPROBABILITY.CAPTION"
+#: tconfigform.lbmutationprobability.caption
+msgctxt "TCONFIGFORM.LBMUTATIONPROBABILITY.CAPTION"
 msgid "Mutation Probability:"
 msgstr ""
 
-#: tconfigform.lblpollinationprobability.caption
-msgctxt "TCONFIGFORM.LBLPOLLINATIONPROBABILITY.CAPTION"
+#: tconfigform.lbpollinationprobability.caption
+msgctxt "TCONFIGFORM.LBPOLLINATIONPROBABILITY.CAPTION"
 msgid "Pollination Probability:"
 msgstr ""
 
-#: tconfigform.lblpopulationsize.caption
-msgctxt "TCONFIGFORM.LBLPOPULATIONSIZE.CAPTION"
+#: tconfigform.lbpopulationsize.caption
+msgctxt "TCONFIGFORM.LBPOPULATIONSIZE.CAPTION"
 msgid "Population Size:"
 msgstr ""
 
-#: tconfigform.lblreparationprobability.caption
-msgctxt "TCONFIGFORM.LBLREPARATIONPROBABILITY.CAPTION"
+#: tconfigform.lbreparationprobability.caption
+msgctxt "TCONFIGFORM.LBREPARATIONPROBABILITY.CAPTION"
 msgid "Reparation Probability:"
 msgstr ""
 
-#: tconfigform.lblresponsible.caption
-msgctxt "tconfigform.lblresponsible.caption"
-msgid "Responsible:"
-msgstr ""
-
-#: tconfigform.lblresponsibleposition.caption
-msgctxt "TCONFIGFORM.LBLRESPONSIBLEPOSITION.CAPTION"
-msgid "Position:"
-msgstr ""
-
-#: tconfigform.lblschoolyear.caption
-msgctxt "tconfigform.lblschoolyear.caption"
-msgid "School Year:"
-msgstr ""
-
-#: tconfigform.lblseed.caption
-msgctxt "TCONFIGFORM.LBLSEED.CAPTION"
+#: tconfigform.lbseed.caption
+msgctxt "TCONFIGFORM.LBSEED.CAPTION"
 msgid "Seed:"
 msgstr ""
 
-#: tconfigform.lblshareddirectory.caption
-msgctxt "TCONFIGFORM.LBLSHAREDDIRECTORY.CAPTION"
+#: tconfigform.lbshareddirectory.caption
+msgctxt "TCONFIGFORM.LBSHAREDDIRECTORY.CAPTION"
 msgid "Shared directory:"
 msgstr ""
 
-#: tconfigform.lblsrcolor.caption
-msgctxt "TCONFIGFORM.LBLSRCOLOR.CAPTION"
+#: tconfigform.lbsrcolor.caption
+msgctxt "TCONFIGFORM.LBSRCOLOR.CAPTION"
 msgid "Color:"
 msgstr ""
 
-#: tconfigform.lblsrname.caption
-msgctxt "TCONFIGFORM.LBLSRNAME.CAPTION"
+#: tconfigform.lbsrname.caption
+msgctxt "TCONFIGFORM.LBSRNAME.CAPTION"
 msgid "Name:"
 msgstr ""
 
-#: tconfigform.lblsrvalue.caption
-msgctxt "TCONFIGFORM.LBLSRVALUE.CAPTION"
+#: tconfigform.lbsrvalue.caption
+msgctxt "TCONFIGFORM.LBSRVALUE.CAPTION"
 msgid "Value:"
 msgstr ""
 
-#: tconfigform.lbltrcolor.caption
-msgctxt "TCONFIGFORM.LBLTRCOLOR.CAPTION"
+#: tconfigform.lbtrcolor.caption
+msgctxt "TCONFIGFORM.LBTRCOLOR.CAPTION"
 msgid "Color:"
 msgstr ""
 
-#: tconfigform.lbltrname.caption
-msgctxt "TCONFIGFORM.LBLTRNAME.CAPTION"
+#: tconfigform.lbtrname.caption
+msgctxt "TCONFIGFORM.LBTRNAME.CAPTION"
 msgid "Name:"
 msgstr ""
 
-#: tconfigform.lbltrvalue.caption
-msgctxt "TCONFIGFORM.LBLTRVALUE.CAPTION"
+#: tconfigform.lbtrvalue.caption
+msgctxt "TCONFIGFORM.LBTRVALUE.CAPTION"
 msgid "Value:"
 msgstr ""
 
-#: tconfigform.tbsinstitution.caption
-msgctxt "tconfigform.tbsinstitution.caption"
-msgid "Institution"
+#: tconfigform.lbmaxteacherworkload.caption
+msgctxt "tconfigform.lbmaxteacherworkload.caption"
+msgid "Max work load per teacher:"
 msgstr ""
 
-#: tconfigform.tbsinstitution.hint
-msgctxt "tconfigform.tbsinstitution.hint"
-msgid "Institution Data"
+#: tconfigform.lbresponsible.caption
+msgctxt "tconfigform.lbresponsible.caption"
+msgid "Responsible:"
 msgstr ""
 
-#: tconfigform.tbsoptions.caption
-msgctxt "tconfigform.tbsoptions.caption"
-msgid "Options"
+#: tconfigform.lbresponsibleposition.caption
+msgctxt "TCONFIGFORM.LBRESPONSIBLEPOSITION.CAPTION"
+msgid "Position:"
+msgstr ""
+
+#: tconfigform.lbschoolyear.caption
+msgctxt "tconfigform.lbschoolyear.caption"
+msgid "School Year:"
 msgstr ""
 
 #: tconfigform.tbsweigths.caption
 msgctxt "TCONFIGFORM.TBSWEIGTHS.CAPTION"
 msgid "Weights"
+msgstr ""
+
+#: tconfigform.tsinstitution.caption
+msgctxt "tconfigform.tsinstitution.caption"
+msgid "Institution"
+msgstr ""
+
+#: tconfigform.tsinstitution.hint
+msgctxt "tconfigform.tsinstitution.hint"
+msgid "Institution Data"
+msgstr ""
+
+#: tconfigform.tsoptions.caption
+msgctxt "tconfigform.tsoptions.caption"
+msgid "Options"
 msgstr ""
 
 #: tcrossmanytomanyeditor0form.panel2.caption
@@ -751,14 +751,6 @@ msgstr ""
 msgid "Save Script"
 msgstr ""
 
-#: tdbexplorerform.btshowmetadata.caption
-msgid "Show Metadata"
-msgstr ""
-
-#: tdbexplorerform.btshowtable.caption
-msgid "Show Table"
-msgstr ""
-
 #: tdbexplorerform.caption
 msgid "Database Explorer"
 msgstr ""
@@ -771,9 +763,12 @@ msgstr ""
 msgid "Tables"
 msgstr ""
 
-#: teditorform.btshow.hint
-msgctxt "TEDITORFORM.BTSHOW.HINT"
-msgid "Show|Show the grid content in a report"
+#: tdbexplorerform.tbshowmetadata.caption
+msgid "Show Metadata"
+msgstr ""
+
+#: tdbexplorerform.tbshowtable.caption
+msgid "Show Table"
 msgstr ""
 
 #: teditorform.caption
@@ -781,9 +776,14 @@ msgctxt "TEDITORFORM.CAPTION"
 msgid "EditorForm"
 msgstr ""
 
-#: teditorform.tlbshow.caption
-msgctxt "teditorform.tlbshow.caption"
+#: teditorform.tbeditor.caption
+msgctxt "teditorform.tbeditor.caption"
 msgid "Show"
+msgstr ""
+
+#: teditorform.tbshow.hint
+msgctxt "TEDITORFORM.TBSHOW.HINT"
+msgid "Show|Show the grid content in a report"
 msgstr ""
 
 #: tmainform.actabout.caption
@@ -811,11 +811,12 @@ msgid "Check feasibility|Check feasibility of input data"
 msgstr ""
 
 #: tmainform.actclass.caption
+msgctxt "tmainform.actclass.caption"
 msgid "Classes"
 msgstr ""
 
 #: tmainform.actclass.hint
-msgid "Courses|Courses with its given parallels"
+msgid "Courses|Courses with its given groups"
 msgstr ""
 
 #: tmainform.actconfigure.caption
@@ -919,11 +920,12 @@ msgid "Open|Open saved institution"
 msgstr ""
 
 #: tmainform.actparallel.caption
-msgid "Group IDs"
+msgctxt "tmainform.actparallel.caption"
+msgid "Parallels"
 msgstr ""
 
 #: tmainform.actparallel.hint
-msgid "Group IDs|Group IDs"
+msgid "Parallels|Parallels"
 msgstr ""
 
 #: tmainform.actpasswd.caption
@@ -1101,7 +1103,7 @@ msgctxt "TMASTERDETAILEDITORFORM.GRBDETAIL.CAPTION"
 msgid "Detail"
 msgstr ""
 
-#: tmessageviewform.bbtclose.caption
+#: tmessageviewform.bbclose.caption
 msgid "&Close"
 msgstr ""
 
@@ -1114,13 +1116,13 @@ msgstr ""
 msgid "Panel1"
 msgstr ""
 
-#: tprogressform.bbtcancel.caption
-msgctxt "tprogressform.bbtcancel.caption"
+#: tprogressform.bbcancel.caption
+msgctxt "tprogressform.bbcancel.caption"
 msgid "Cancel"
 msgstr ""
 
-#: tprogressform.bbtclose.caption
-msgctxt "TPROGRESSFORM.BBTCLOSE.CAPTION"
+#: tprogressform.bbclose.caption
+msgctxt "TPROGRESSFORM.BBCLOSE.CAPTION"
 msgid "Ok"
 msgstr ""
 
@@ -1129,128 +1131,128 @@ msgctxt "TPROGRESSFORM.CAPTION"
 msgid "Search progress"
 msgstr ""
 
-#: tprogressform.lblbreaktimetableteachercount.caption
-msgctxt "TPROGRESSFORM.LBLBREAKTIMETABLETEACHERCOUNT.CAPTION"
+#: tprogressform.lbbreaktimetableteachercount.caption
+msgctxt "TPROGRESSFORM.LBBREAKTIMETABLETEACHERCOUNT.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblbreaktimetableteachervalue.caption
-msgctxt "TPROGRESSFORM.LBLBREAKTIMETABLETEACHERVALUE.CAPTION"
+#: tprogressform.lbbreaktimetableteachervalue.caption
+msgctxt "TPROGRESSFORM.LBBREAKTIMETABLETEACHERVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblbrokensession.caption
-msgctxt "TPROGRESSFORM.LBLBROKENSESSION.CAPTION"
+#: tprogressform.lbbrokensession.caption
+msgctxt "TPROGRESSFORM.LBBROKENSESSION.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblbrokensessionvalue.caption
-msgctxt "TPROGRESSFORM.LBLBROKENSESSIONVALUE.CAPTION"
+#: tprogressform.lbbrokensessionvalue.caption
+msgctxt "TPROGRESSFORM.LBBROKENSESSIONVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblclashroomtype.caption
-msgctxt "TPROGRESSFORM.LBLCLASHROOMTYPE.CAPTION"
+#: tprogressform.lbclashroomtype.caption
+msgctxt "TPROGRESSFORM.LBCLASHROOMTYPE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblclashroomtypevalue.caption
-msgctxt "TPROGRESSFORM.LBLCLASHROOMTYPEVALUE.CAPTION"
+#: tprogressform.lbclashroomtypevalue.caption
+msgctxt "TPROGRESSFORM.LBCLASHROOMTYPEVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblclashsubject.caption
-msgctxt "TPROGRESSFORM.LBLCLASHSUBJECT.CAPTION"
+#: tprogressform.lbclashsubject.caption
+msgctxt "TPROGRESSFORM.LBCLASHSUBJECT.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblclashsubjectvalue.caption
-msgctxt "TPROGRESSFORM.LBLCLASHSUBJECTVALUE.CAPTION"
+#: tprogressform.lbclashsubjectvalue.caption
+msgctxt "TPROGRESSFORM.LBCLASHSUBJECTVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblclashteacher.caption
-msgctxt "TPROGRESSFORM.LBLCLASHTEACHER.CAPTION"
+#: tprogressform.lbclashteacher.caption
+msgctxt "TPROGRESSFORM.LBCLASHTEACHER.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblclashteachervalue.caption
-msgctxt "TPROGRESSFORM.LBLCLASHTEACHERVALUE.CAPTION"
+#: tprogressform.lbclashteachervalue.caption
+msgctxt "TPROGRESSFORM.LBCLASHTEACHERVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblcolision.caption
-msgctxt "TPROGRESSFORM.LBLCOLISION.CAPTION"
+#: tprogressform.lbcolision.caption
+msgctxt "TPROGRESSFORM.LBCOLISION.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblelapsedtime.caption
-msgctxt "TPROGRESSFORM.LBLELAPSEDTIME.CAPTION"
+#: tprogressform.lbelapsedtime.caption
+msgctxt "TPROGRESSFORM.LBELAPSEDTIME.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblexports.caption
-msgctxt "TPROGRESSFORM.LBLEXPORTS.CAPTION"
+#: tprogressform.lbexports.caption
+msgctxt "TPROGRESSFORM.LBEXPORTS.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblimports.caption
-msgctxt "TPROGRESSFORM.LBLIMPORTS.CAPTION"
+#: tprogressform.lbimports.caption
+msgctxt "TPROGRESSFORM.LBIMPORTS.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblnonscatteredsubjectcount.caption
-msgctxt "TPROGRESSFORM.LBLNONSCATTEREDSUBJECTCOUNT.CAPTION"
+#: tprogressform.lbnonscatteredsubjectcount.caption
+msgctxt "TPROGRESSFORM.LBNONSCATTEREDSUBJECTCOUNT.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblnonscatteredsubjectvalue.caption
-msgctxt "TPROGRESSFORM.LBLNONSCATTEREDSUBJECTVALUE.CAPTION"
+#: tprogressform.lbnonscatteredsubjectvalue.caption
+msgctxt "TPROGRESSFORM.LBNONSCATTEREDSUBJECTVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lbloutofpositionemptyhour.caption
-msgctxt "TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOUR.CAPTION"
+#: tprogressform.lboutofpositionemptyhour.caption
+msgctxt "TPROGRESSFORM.LBOUTOFPOSITIONEMPTYHOUR.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lbloutofpositionemptyhourvalue.caption
-msgctxt "TPROGRESSFORM.LBLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION"
+#: tprogressform.lboutofpositionemptyhourvalue.caption
+msgctxt "TPROGRESSFORM.LBOUTOFPOSITIONEMPTYHOURVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblposition.caption
-msgctxt "TPROGRESSFORM.LBLPOSITION.CAPTION"
+#: tprogressform.lbposition.caption
+msgctxt "TPROGRESSFORM.LBPOSITION.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblremainingtime.caption
-msgctxt "TPROGRESSFORM.LBLREMAININGTIME.CAPTION"
+#: tprogressform.lbremainingtime.caption
+msgctxt "TPROGRESSFORM.LBREMAININGTIME.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblsubjectrestriction.caption
-msgctxt "TPROGRESSFORM.LBLSUBJECTRESTRICTION.CAPTION"
+#: tprogressform.lbsubjectrestriction.caption
+msgctxt "TPROGRESSFORM.LBSUBJECTRESTRICTION.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblsubjectrestrictionvalue.caption
-msgctxt "TPROGRESSFORM.LBLSUBJECTRESTRICTIONVALUE.CAPTION"
+#: tprogressform.lbsubjectrestrictionvalue.caption
+msgctxt "TPROGRESSFORM.LBSUBJECTRESTRICTIONVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblteacherrestriction.caption
-msgctxt "TPROGRESSFORM.LBLTEACHERRESTRICTION.CAPTION"
+#: tprogressform.lbteacherrestriction.caption
+msgctxt "TPROGRESSFORM.LBTEACHERRESTRICTION.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblteacherrestrictionvalue.caption
-msgctxt "TPROGRESSFORM.LBLTEACHERRESTRICTIONVALUE.CAPTION"
+#: tprogressform.lbteacherrestrictionvalue.caption
+msgctxt "TPROGRESSFORM.LBTEACHERRESTRICTIONVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lbltotalvalue.caption
-msgctxt "TPROGRESSFORM.LBLTOTALVALUE.CAPTION"
+#: tprogressform.lbtotalvalue.caption
+msgctxt "TPROGRESSFORM.LBTOTALVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
@@ -1416,13 +1418,13 @@ msgstr ""
 msgid "Total Value:"
 msgstr ""
 
-#: tseltimeslotform.bbtcancel.caption
+#: tseltimeslotform.bbcancel.caption
 msgctxt "TSELTIMESLOTFORM.BBCANCELAR.CAPTION"
 msgid "Cancel"
 msgstr ""
 
-#: tseltimeslotform.bbtok.caption
-msgctxt "TSELTIMESLOTFORM.BBTOK.CAPTION"
+#: tseltimeslotform.bbok.caption
+msgctxt "TSELTIMESLOTFORM.BBOK.CAPTION"
 msgid "Ok"
 msgstr ""
 
@@ -1481,23 +1483,23 @@ msgstr ""
 msgid "Edition"
 msgstr ""
 
-#: tsplashform.lblcopyright.caption
-msgctxt "TSPLASHFORM.LBLCOPYRIGHT.CAPTION"
+#: tsplashform.lbcopyright.caption
+msgctxt "TSPLASHFORM.LBCOPYRIGHT.CAPTION"
 msgid "..."
 msgstr ""
 
-#: tsplashform.lblproductname.caption
-msgctxt "TSPLASHFORM.LBLPRODUCTNAME.CAPTION"
+#: tsplashform.lbproductname.caption
+msgctxt "TSPLASHFORM.LBPRODUCTNAME.CAPTION"
 msgid "..."
 msgstr ""
 
-#: tsplashform.lblproductversion.caption
-msgctxt "TSPLASHFORM.LBLPRODUCTVERSION.CAPTION"
+#: tsplashform.lbproductversion.caption
+msgctxt "TSPLASHFORM.LBPRODUCTVERSION.CAPTION"
 msgid "..."
 msgstr ""
 
-#: tsplashform.lblyearlabel.caption
-msgctxt "TSPLASHFORM.LBLYEARLABEL.CAPTION"
+#: tsplashform.lbyearlabel.caption
+msgctxt "TSPLASHFORM.LBYEARLABEL.CAPTION"
 msgid "..."
 msgstr ""
 
@@ -1529,8 +1531,8 @@ msgctxt "TTEACHERFORM.CAPTION"
 msgid "Teacher"
 msgstr ""
 
-#: tteacherform.cbjoinedclass.caption
-msgctxt "tteacherform.cbjoinedclass.caption"
+#: tteacherform.gbjoinedclass.caption
+msgctxt "tteacherform.gbjoinedclass.caption"
 msgid "Joined Classes"
 msgstr ""
 
@@ -1547,13 +1549,13 @@ msgctxt "tteacherform.groupbox3.caption"
 msgid "Assistances"
 msgstr ""
 
-#: ttimetableclassform.btintercambiartimeslots.hint
-msgid "Swap time slots|Swap time slots"
+#: ttimetableclassform.cbshowclass.hint
+msgctxt "TTIMETABLECLASSFORM.CBSHOWCLASS.HINT"
+msgid "Show|Param to show in the timetable"
 msgstr ""
 
-#: ttimetableclassform.cbxshowclass.hint
-msgctxt "TTIMETABLECLASSFORM.CBXSHOWCLASS.HINT"
-msgid "Show|Param to show in the timetable"
+#: ttimetableclassform.tbswaptimeslots.hint
+msgid "Swap time slots|Swap time slots"
 msgstr ""
 
 #: ttimetableform.actclashroom.caption
@@ -1673,8 +1675,8 @@ msgctxt "TTIMETABLEFORM.DBGRID.COLUMNS[2].TITLE.CAPTION"
 msgid "End"
 msgstr ""
 
-#: ttimetableroomtypeform.cbxshowroomtype.hint
-msgctxt "TTIMETABLEROOMTYPEFORM.CBXSHOWROOMTYPE.HINT"
+#: ttimetableroomtypeform.cbshowroomtype.hint
+msgctxt "TTIMETABLEROOMTYPEFORM.CBSHOWROOMTYPE.HINT"
 msgid "Show|What to show in the room type timetable"
 msgstr ""
 

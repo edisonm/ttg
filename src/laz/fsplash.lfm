@@ -21,7 +21,7 @@ object SplashForm: TSplashForm
     OnClick = Image1Click
     Stretch = True
   end
-  object lblProductName: TLabel
+  object LbProductName: TLabel
     Left = 88
     Height = 24
     Top = 24
@@ -34,7 +34,7 @@ object SplashForm: TSplashForm
     ParentColor = False
     ParentFont = False
   end
-  object lblProductVersion: TLabel
+  object LbProductVersion: TLabel
     Left = 168
     Height = 18
     Top = 64
@@ -45,7 +45,7 @@ object SplashForm: TSplashForm
     ParentColor = False
     ParentFont = False
   end
-  object lblCopyright: TLabel
+  object LbCopyright: TLabel
     Left = 168
     Height = 18
     Top = 88
@@ -56,7 +56,7 @@ object SplashForm: TSplashForm
     ParentColor = False
     ParentFont = False
   end
-  object lblTable: TLabel
+  object LbTable: TLabel
     Left = 104
     Height = 13
     Top = 136
@@ -67,7 +67,7 @@ object SplashForm: TSplashForm
     ParentColor = False
     ParentFont = False
   end
-  object lblYearLabel: TLabel
+  object LbYearLabel: TLabel
     Left = 168
     Height = 18
     Top = 112

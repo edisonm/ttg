@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 651
+  Left = -8
   Height = 362
-  Top = 171
+  Top = -29
   Width = 718
   Caption = 'MainForm'
   ClientHeight = 362
@@ -76,194 +76,178 @@ object MainForm: TMainForm
     Width = 718
     Images = ImageList
     TabOrder = 1
-    object SpeedBar: TToolBar
+    object TBNew: TToolButton
       Left = 1
-      Height = 22
       Top = 2
-      Width = 470
-      Align = alNone
-      AutoSize = True
-      EdgeInner = esNone
-      EdgeOuter = esNone
-      Font.Height = -12
-      Font.Name = 'News Gothic MT'
-      Images = ImageList
-      ParentFont = False
-      TabOrder = 0
-      Wrapable = False
-      object SINew: TToolButton
-        Left = 1
-        Top = 0
-        Action = ActNew
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SIOpen: TToolButton
-        Left = 24
-        Top = 0
-        Action = ActOpen
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SISave: TToolButton
-        Left = 47
-        Top = 0
-        Action = ActSave
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SIPasswd: TToolButton
-        Left = 70
-        Top = 0
-        Action = ActPasswd
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object ToolButton1: TToolButton
-        Left = 93
-        Top = 0
-        Width = 10
-        Caption = 'ToolButton1'
-        ImageIndex = 26
-        ParentShowHint = False
-        ShowHint = True
-        Style = tbsSeparator
-      end
-      object SIDay: TToolButton
-        Left = 103
-        Top = 0
-        Action = ActDay
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SIHour: TToolButton
-        Left = 126
-        Top = 0
-        Action = ActHour
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SITimeSlot: TToolButton
-        Left = 149
-        Top = 0
-        Action = ActTimeSlot
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SILevel: TToolButton
-        Left = 172
-        Top = 0
-        Action = ActLevel
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SISpecialization: TToolButton
-        Left = 195
-        Top = 0
-        Action = ActSpecialization
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SIParallel: TToolButton
-        Left = 218
-        Top = 0
-        Action = ActParallel
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SIClass: TToolButton
-        Left = 241
-        Top = 0
-        Action = ActClass
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SISubject: TToolButton
-        Left = 264
-        Top = 0
-        Action = ActSubject
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SIRoomType: TToolButton
-        Left = 287
-        Top = 0
-        Action = ActRoomType
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SITeacher: TToolButton
-        Left = 310
-        Top = 0
-        Action = ActTeacher
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SIConfig: TToolButton
-        Left = 333
-        Top = 0
-        Action = ActConfigure
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object ToolButton3: TToolButton
-        Left = 356
-        Top = 0
-        Width = 10
-        Caption = 'ToolButton3'
-        ImageIndex = 27
-        ParentShowHint = False
-        ShowHint = True
-        Style = tbsSeparator
-      end
-      object SIFindMejor: TToolButton
-        Left = 366
-        Top = 0
-        Action = ActMakeTimetable
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object ToolButton4: TToolButton
-        Left = 389
-        Top = 0
-        Width = 10
-        Caption = 'ToolButton4'
-        ImageIndex = 26
-        ParentShowHint = False
-        ShowHint = True
-        Style = tbsSeparator
-      end
-      object SITimetable: TToolButton
-        Left = 399
-        Top = 0
-        Action = ActTimetable
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object ToolButton2: TToolButton
-        Left = 422
-        Top = 0
-        Width = 10
-        Caption = 'ToolButton2'
-        ImageIndex = 26
-        ParentShowHint = False
-        ShowHint = True
-        Style = tbsSeparator
-      end
-      object SIContent: TToolButton
-        Left = 432
-        Top = 0
-        Action = ActContents
-        ParentShowHint = False
-        ShowHint = True
-      end
-      object SIIndex: TToolButton
-        Left = 455
-        Top = 0
-        Action = ActIndex
-        ParentShowHint = False
-        ShowHint = True
-      end
+      Action = ActNew
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBOpen: TToolButton
+      Left = 24
+      Top = 2
+      Action = ActOpen
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBSave: TToolButton
+      Left = 47
+      Top = 2
+      Action = ActSave
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBPassword: TToolButton
+      Left = 70
+      Top = 2
+      Action = ActPasswd
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton1: TToolButton
+      Left = 93
+      Top = 2
+      Width = 10
+      Caption = 'ToolButton1'
+      ImageIndex = 26
+      ParentShowHint = False
+      ShowHint = True
+      Style = tbsSeparator
+    end
+    object TBDay: TToolButton
+      Left = 103
+      Top = 2
+      Action = ActDay
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBHour: TToolButton
+      Left = 126
+      Top = 2
+      Action = ActHour
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBTimeSlot: TToolButton
+      Left = 149
+      Top = 2
+      Action = ActTimeSlot
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBLevel: TToolButton
+      Left = 172
+      Top = 2
+      Action = ActLevel
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBSpecialization: TToolButton
+      Left = 195
+      Top = 2
+      Action = ActSpecialization
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBParallel: TToolButton
+      Left = 218
+      Top = 2
+      Action = ActParallel
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBClass: TToolButton
+      Left = 241
+      Top = 2
+      Action = ActClass
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBSubject: TToolButton
+      Left = 264
+      Top = 2
+      Action = ActSubject
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBRoomType: TToolButton
+      Left = 287
+      Top = 2
+      Action = ActRoomType
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBTeacher: TToolButton
+      Left = 310
+      Top = 2
+      Action = ActTeacher
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBConfig: TToolButton
+      Left = 333
+      Top = 2
+      Action = ActConfigure
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton3: TToolButton
+      Left = 356
+      Top = 2
+      Width = 10
+      Caption = 'ToolButton3'
+      ImageIndex = 27
+      ParentShowHint = False
+      ShowHint = True
+      Style = tbsSeparator
+    end
+    object TBFindBetter: TToolButton
+      Left = 366
+      Top = 2
+      Action = ActMakeTimetable
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton4: TToolButton
+      Left = 389
+      Top = 2
+      Width = 10
+      Caption = 'ToolButton4'
+      ImageIndex = 26
+      ParentShowHint = False
+      ShowHint = True
+      Style = tbsSeparator
+    end
+    object TBTimetable: TToolButton
+      Left = 399
+      Top = 2
+      Action = ActTimetable
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton2: TToolButton
+      Left = 422
+      Top = 2
+      Width = 10
+      Caption = 'ToolButton2'
+      ImageIndex = 26
+      ParentShowHint = False
+      ShowHint = True
+      Style = tbsSeparator
+    end
+    object TBContent: TToolButton
+      Left = 432
+      Top = 2
+      Action = ActContents
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBIndex: TToolButton
+      Left = 455
+      Top = 2
+      Action = ActIndex
+      ParentShowHint = False
+      ShowHint = True
     end
   end
   object MainMenu: TMainMenu
@@ -438,7 +422,7 @@ object MainForm: TMainForm
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         }
       end
-      object MIChangePasswd: TMenuItem
+      object MIChangePassword: TMenuItem
         Action = ActChangePasswd
       end
       object N1: TMenuItem
@@ -972,7 +956,7 @@ object MainForm: TMainForm
         Action = ActCheckFeasibility
         OnClick = ActCheckFeasibilityExecute
       end
-      object MIElaborarTimetable: TMenuItem
+      object MIMakeTimetable: TMenuItem
         Action = ActMakeTimetable
         AutoCheck = True
         Bitmap.Data = {

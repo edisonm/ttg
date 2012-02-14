@@ -67,7 +67,7 @@ object MessageViewForm: TMessageViewForm
     ClientHeight = 40
     ClientWidth = 434
     TabOrder = 1
-    object lblMsg: TLabel
+    object LbMessage: TLabel
       Left = 8
       Height = 1
       Top = 16
@@ -76,7 +76,7 @@ object MessageViewForm: TMessageViewForm
       ParentColor = False
       Transparent = False
     end
-    object bbtClose: TBitBtn
+    object BBClose: TBitBtn
       Left = 328
       Height = 32
       Top = 3

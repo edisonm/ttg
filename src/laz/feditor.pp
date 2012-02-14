@@ -12,8 +12,8 @@ uses
 type
   TEditorForm = class(TForm)
     PnStatus: TPanel;
-    TlBShow: TToolBar;
-    BtShow: TToolButton;
+    TBEditor: TToolBar;
+    TBShow: TToolButton;
     PnEditor: TPanel;
     ImageList: TImageList;
     procedure FormClose(Sender: TObject; var AAction: TCloseAction);

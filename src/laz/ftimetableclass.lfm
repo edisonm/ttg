@@ -11,7 +11,7 @@ inherited TimetableClassForm: TTimetableClassForm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Visible = True
-  inherited TlBShow: TToolBar
+  inherited TBEditor: TToolBar
     Width = 645
     inherited BtOk: TToolButton
       Enabled = False
@@ -24,7 +24,7 @@ inherited TimetableClassForm: TTimetableClassForm
       OnClick = BtCancelClick
       Visible = False
     end
-    object BtIntercambiarTimeSlots: TToolButton[3]
+    object TBSwapTimeSlots: TToolButton[3]
       Left = 347
       Hint = 'Swap time slots|Swap time slots'
       Top = 2
@@ -55,14 +55,14 @@ inherited TimetableClassForm: TTimetableClassForm
       TabOrder = 1
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
     end
-    object cbxShowClass: TComboBox[5]
+    object CBShowClass: TComboBox[5]
       Left = 162
       Height = 24
       Hint = 'Show|Param to show in the timetable'
       Top = 2
       Width = 185
       ItemHeight = 0
-      OnChange = BtShowClick
+      OnChange = TBShowClick
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0

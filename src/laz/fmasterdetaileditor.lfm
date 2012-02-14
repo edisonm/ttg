@@ -8,7 +8,7 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
-  inherited TlBShow: TToolBar
+  inherited TBEditor: TToolBar
     Width = 603
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
@@ -18,7 +18,7 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
     Top = 411
     Width = 603
     ClientWidth = 603
-    inherited SLRecordNo: TLabel
+    inherited LbRecordNo: TLabel
       Left = 601
     end
   end

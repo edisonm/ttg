@@ -15,11 +15,11 @@ type
   { TProgressForm }
 
   TProgressForm = class(TForm)
-    lblColision: TLabel;
-    lblClashSubject: TLabel;
-    lblClashSubjectValue: TLabel;
-    lblExports: TLabel;
-    lblImports: TLabel;
+    LbColision: TLabel;
+    LbClashSubject: TLabel;
+    LbClashSubjectValue: TLabel;
+    LbExports: TLabel;
+    LbImports: TLabel;
     PnCrashes: TPanel;
     PnImports: TPanel;
     PnExports: TPanel;
@@ -28,61 +28,61 @@ type
     PnClashSubjectNumber: TPanel;
     PnClashSubjectValue: TPanel;
     PnProgress: TPanel;
-    bbtClose: TBitBtn;
+    BBClose: TBitBtn;
     PnTotalValue: TPanel;
     PnClashTeacher: TPanel;
-    lblTotalValue: TLabel;
+    LbTotalValue: TLabel;
     PnClashTeacherValue: TPanel;
-    lblClashTeacherValue: TLabel;
+    LbClashTeacherValue: TLabel;
     PnClashRoomType: TPanel;
     PnClashRoomTypeValue: TPanel;
-    lblClashRoomTypeValue: TLabel;
+    LbClashRoomTypeValue: TLabel;
     PnClashTeacherNumber: TPanel;
-    lblClashTeacher: TLabel;
+    LbClashTeacher: TLabel;
     PnClashRoomTypeNumber: TPanel;
-    lblClashRoomType: TLabel;
+    LbClashRoomType: TLabel;
     PnOutOfPositionEmptyHour: TPanel;
     PnOutOfPositionEmptyHourNumber: TPanel;
-    lblOutOfPositionEmptyHour: TLabel;
+    LbOutOfPositionEmptyHour: TLabel;
     PnOutOfPositionEmptyHourValue: TPanel;
-    lblOutOfPositionEmptyHourValue: TLabel;
+    LbOutOfPositionEmptyHourValue: TLabel;
     PnBrokenSession: TPanel;
     PnBrokenSessionNumber: TPanel;
-    lblBrokenSession: TLabel;
+    LbBrokenSession: TLabel;
     PnBrokenSessionValue: TPanel;
-    lblBrokenSessionValue: TLabel;
+    LbBrokenSessionValue: TLabel;
     PnInitDateTime: TPanel;
-    lblInit: TLabel;
+    LbInit: TLabel;
     PnElapsedTime: TPanel;
-    lblElapsedTime: TLabel;
+    LbElapsedTime: TLabel;
     PnEstimatedTime: TPanel;
-    lblRemainingTime: TLabel;
+    LbRemainingTime: TLabel;
     PnSubjectRestriction: TPanel;
     PnSubjectRestrictionNumber: TPanel;
-    lblSubjectRestriction: TLabel;
+    LbSubjectRestriction: TLabel;
     PnSubjectRestrictionValue: TPanel;
-    lblSubjectRestrictionValue: TLabel;
+    LbSubjectRestrictionValue: TLabel;
     PnTeacherRestriction: TPanel;
     PnTeacherRestrictionNumber: TPanel;
-    lblTeacherRestriction: TLabel;
+    LbTeacherRestriction: TLabel;
     PnTeacherRestrictionValue: TPanel;
-    lblTeacherRestrictionValue: TLabel;
+    LbTeacherRestrictionValue: TLabel;
     PnNonScatteredSubject: TPanel;
     PnNonScatteredSubjectCount: TPanel;
-    lblNonScatteredSubjectCount: TLabel;
+    LbNonScatteredSubjectCount: TLabel;
     PnNonScatteredSubjectValue: TPanel;
-    lblNonScatteredSubjectValue: TLabel;
-    bbtCancel: TBitBtn;
-    prbProgress: TProgressBar;
+    LbNonScatteredSubjectValue: TLabel;
+    BBCancel: TBitBtn;
+    PBProgress: TProgressBar;
     PnBreakTimetableTeacher: TPanel;
     PnBreakTimetableTeacherCount: TPanel;
-    lblBreakTimetableTeacherCount: TLabel;
+    LbBreakTimetableTeacherCount: TLabel;
     PnBreakTimetableTeacherValue: TPanel;
-    lblBreakTimetableTeacherValue: TLabel;
+    LbBreakTimetableTeacherValue: TLabel;
     PnPosition: TPanel;
-    lblPosition: TLabel;
-    procedure bbtCancelClick(Sender: TObject);
-    procedure bbtCloseClick(Sender: TObject);
+    LbPosition: TLabel;
+    procedure BBCancelClick(Sender: TObject);
+    procedure BBCloseClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     FUpdateIndex: Integer;
@@ -137,7 +137,7 @@ uses
 
 function TProgressForm.GetProgressMax: Integer;
 begin
-  Result := prbProgress.Max;
+  Result := PBProgress.Max;
 end;
 
 procedure TProgressForm.DoProgress(APosition, AMax: Integer; ASolver: TSolver);
@@ -157,60 +157,60 @@ begin
   with ASolver, TTimetable(BestIndividual) do
   begin
     t := Now;
-    lblElapsedTime.Caption := FormatDateTime('hh:nn:ss ', t - FInit);
-    prbProgress.Max := AMax;
+    LbElapsedTime.Caption := FormatDateTime('hh:nn:ss ', t - FInit);
+    PBProgress.Max := AMax;
     if APosition <> 0 then
-      lblRemainingTime.Caption := FormatDateTime('hh:nn:ss ',
+      LbRemainingTime.Caption := FormatDateTime('hh:nn:ss ',
         (t - FTimePosition0) * (AMax - APosition) / APosition)
     else
       FTimePosition0 := t;
-    lblPosition.Caption := Format('%d/%d', [APosition, AMax]);
-    prbProgress.Position := APosition;
-    lblClashTeacher.Caption := Format('%d ', [ClashTeacher]);
-    lblClashSubject.Caption := Format('%d ', [ClashSubject]);
-    lblClashRoomType.Caption := Format('%d ', [ClashRoomType]);
-    lblBreakTimetableTeacherCount.Caption :=
+    LbPosition.Caption := Format('%d/%d', [APosition, AMax]);
+    PBProgress.Position := APosition;
+    LbClashTeacher.Caption := Format('%d ', [ClashTeacher]);
+    LbClashSubject.Caption := Format('%d ', [ClashSubject]);
+    LbClashRoomType.Caption := Format('%d ', [ClashRoomType]);
+    LbBreakTimetableTeacherCount.Caption :=
       Format('%d ', [BreakTimetableTeacher]);
-    lblOutOfPositionEmptyHour.Caption := Format('%d ', [OutOfPositionEmptyHour]);
-    lblBrokenSession.Caption := Format('%d ', [BrokenSession]);
-    lblSubjectRestriction.Caption :=
+    LbOutOfPositionEmptyHour.Caption := Format('%d ', [OutOfPositionEmptyHour]);
+    LbBrokenSession.Caption := Format('%d ', [BrokenSession]);
+    LbSubjectRestriction.Caption :=
       Format('%s ', [VarArrToStr(SubjectRestrictionTypeToSubjectCount)]);
-    lblTeacherRestriction.Caption :=
+    LbTeacherRestriction.Caption :=
       Format('%s ', [VarArrToStr(TeacherRestrictionTypeATeacherCount)]);
-    lblNonScatteredSubjectCount.Caption := Format('%d ', [NonScatteredSubject]);
-    lblClashTeacherValue.Caption := Format('%d ', [ClashTeacherValue]);
-    lblClashSubjectValue.Caption := Format('%d ', [ClashSubjectValue]);
-    lblBreakTimetableTeacherValue.Caption :=
+    LbNonScatteredSubjectCount.Caption := Format('%d ', [NonScatteredSubject]);
+    LbClashTeacherValue.Caption := Format('%d ', [ClashTeacherValue]);
+    LbClashSubjectValue.Caption := Format('%d ', [ClashSubjectValue]);
+    LbBreakTimetableTeacherValue.Caption :=
       Format('%d ', [BreakTimetableTeacherValue]);
-    lblClashRoomTypeValue.Caption := Format('%d ', [ClashRoomTypeValue]);
-    lblOutOfPositionEmptyHourValue.Caption := Format('%d ',
+    LbClashRoomTypeValue.Caption := Format('%d ', [ClashRoomTypeValue]);
+    LbOutOfPositionEmptyHourValue.Caption := Format('%d ',
       [OutOfPositionEmptyHourValue]);
-    lblBrokenSessionValue.Caption := Format('%d ', [BrokenSessionValue]);
-    lblSubjectRestrictionValue.Caption := Format('%d ', [SubjectRestrictionValue]);
-    lblTeacherRestrictionValue.Caption := Format('%d ', [TeacherRestrictionValue]);
-    lblNonScatteredSubjectValue.Caption := Format('%d ', [NonScatteredSubjectValue]);
-    lblTotalValue.Caption := Format('%d ', [Value]);
+    LbBrokenSessionValue.Caption := Format('%d ', [BrokenSessionValue]);
+    LbSubjectRestrictionValue.Caption := Format('%d ', [SubjectRestrictionValue]);
+    LbTeacherRestrictionValue.Caption := Format('%d ', [TeacherRestrictionValue]);
+    LbNonScatteredSubjectValue.Caption := Format('%d ', [NonScatteredSubjectValue]);
+    LbTotalValue.Caption := Format('%d ', [Value]);
   end;
   with ASolver do
   begin
-    lblImports.Caption := Format('%d ', [NumImports]);
-    lblExports.Caption := Format('%d ', [NumExports]);
-    lblColision.Caption := Format('%d ', [NumColision]);
+    LbImports.Caption := Format('%d ', [NumImports]);
+    LbExports.Caption := Format('%d ', [NumExports]);
+    LbColision.Caption := Format('%d ', [NumColision]);
   end;
 end;
 
 procedure TProgressForm.SetProgressMax(const Value: Integer);
 begin
-  prbProgress.Max := Value;
+  PBProgress.Max := Value;
 end;
 
-procedure TProgressForm.bbtCancelClick(Sender: TObject);
+procedure TProgressForm.BBCancelClick(Sender: TObject);
 begin
   FCancelClick := True;
   Close;
 end;
 
-procedure TProgressForm.bbtCloseClick(Sender: TObject);
+procedure TProgressForm.BBCloseClick(Sender: TObject);
 begin
   FCloseClick := True;
   Close;
@@ -221,7 +221,7 @@ begin
   // HelpContext := ActMakeTimetable.HelpContext;
   FInit := Now;
   FTimePosition0 := FInit;
-  lblInit.Caption := FormatDateTime(Format('%s %s ', [ShortDateFormat,
+  LbInit.Caption := FormatDateTime(Format('%s %s ', [ShortDateFormat,
     LongTimeFormat]), FInit);
   FCloseClick := False;
   FCancelClick := False;

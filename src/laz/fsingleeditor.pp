@@ -17,8 +17,8 @@ type
 TSingleEditorForm = class(TEditorForm)
     DBNavigator: TDBNavigator;
     DataSource: TDataSource;
-    SLRecordNo: TLabel;
-    SLState: TLabel;
+    LbRecordNo: TLabel;
+    LbState: TLabel;
     DBGrid: TDBGrid;
     BtFind: TToolButton;
     ActionList: TActionList;
@@ -133,7 +133,7 @@ procedure TSingleEditorForm.DataSourceStateChange(Sender: TObject);
 begin
   inherited;
   if assigned(DataSource.DataSet) then
-    SLState.Caption := DataSource.DataSet.Name + ':'
+    LbState.Caption := DataSource.DataSet.Name + ':'
       + TextState[DataSource.State];
 end;
 
@@ -142,10 +142,10 @@ procedure TSingleEditorForm.DataSourceDataChange(Sender: TObject;
 begin
   inherited;
   if assigned(DataSource.DataSet) and (DataSource.DataSet.State = dsBrowse) then
-    SLRecordNo.Caption := IntToStr(DataSource.DataSet.RecNo) + '/'
+    LbRecordNo.Caption := IntToStr(DataSource.DataSet.RecNo) + '/'
       + IntToStr(DataSource.DataSet.RecordCount)
   else
-    SLRecordNo.Caption := '';
+    LbRecordNo.Caption := '';
 end;
 
 procedure TSingleEditorForm.FormDestroy(Sender: TObject);

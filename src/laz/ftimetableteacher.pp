@@ -41,7 +41,7 @@ type
     QuTeacherNaTeacher: TStringField;
     QuTimetableTeacherIdTimetable: TLongintField;
     QuTimetableTeacherIdTeacher: TLongintField;
-    procedure BtShowClick(Sender: TObject);
+    procedure TBShowClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure QuTimetableTeacherCalcFields(DataSet: TDataSet);
     procedure DSTeacherDataChange(Sender: TObject; Field: TField);
@@ -61,7 +61,7 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-Procedure TTimetableTeacherForm.BtShowClick(Sender: TObject);
+Procedure TTimetableTeacherForm.TBShowClick(Sender: TObject);
 begin
   inherited;
   with SourceDataModule do
@@ -118,7 +118,7 @@ procedure TTimetableTeacherForm.DSTeacherDataChange(Sender: TObject;
   Field: TField);
 begin
   inherited;
-  BtShowClick(nil);
+  TBShowClick(nil);
 end;
 
 initialization
