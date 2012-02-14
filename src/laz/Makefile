@@ -40,6 +40,8 @@ $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs
 
 ifeq ($(shell uname -o),Cygwin)
 
+dbfiles: $(TTGSQL) $(TTGMYSQL) $(DSRCBASE).pp $(DSRCBASE)consts.pp $(DSRCBASE).lfm
+
 ttgsql: $(TTGSQL)
 
 $(TTGSQL): $(DBCONVERT) $(TTGMDB)
@@ -48,6 +50,7 @@ $(TTGSQL): $(DBCONVERT) $(TTGMDB)
 
 $(TTGMYSQL): $(DBCONVERT) $(TTGMDB)
 	$(DBCONVERT) /ACC2SQL $(TTGMDB) $(TTGMYSQL) mysql
+	dos2unix $(TTGSQL)
 
 $(DSRCBASE).pp $(DSRCBASE)consts.pp $(DSRCBASE).lfm: $(DBCONVERT) $(TTGMDB) Makefile
 	$(DBCONVERT) /ACC2DM $(TTGMDB) SourceBaseDataModule \

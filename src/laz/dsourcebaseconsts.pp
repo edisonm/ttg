@@ -2,7 +2,7 @@
 unit dsourcebaseconsts;
 
 (*
-  14/02/2012 0:37
+  14/02/2012 1:23
 
   Warning:
 
@@ -34,10 +34,10 @@ resourcestring
   STbSubject = 'Subjects';
   STbTeacher = 'Teachers';
   STbDistribution = 'Distribution of Workload';
-  STbJoinedClass = 'JoinedClass';
+  STbJoinedClass = 'Joined Classes';
   STbSubjectRestrictionType = 'Types of Subject Restrictions';
   STbTimeSlot = 'Time Slots';
-  STbAssistance = 'Assistance';
+  STbAssistance = 'Assistances';
   STbTeacherRestrictionType = 'Types of Teacher Restrictions';
   STbTeacherRestriction = 'Teacher Restrictions';
   STbSubjectRestriction = 'Subject Restrictions';
@@ -65,7 +65,7 @@ resourcestring
   SFlHour_Interval = 'Interval';
   SFlClass_IdLevel = 'Level';
   SFlClass_IdSpecialization = 'Specialization';
-  SFlClass_IdGroup = 'Group Id';
+  SFlClass_IdGroup = 'Group';
   SFlSubject_IdSubject = 'Id';
   SFlSubject_NaSubject = 'Name';
   SFlTeacher_IdTeacher = 'Id';
