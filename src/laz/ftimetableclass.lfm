@@ -1,15 +1,18 @@
 inherited TimetableClassForm: TTimetableClassForm
-  Left = 750
-  Height = 284
-  Top = 41
+  Left = 672
+  Height = 401
+  Top = 292
+  Width = 645
   ActiveControl = DBNavigator
-  ClientHeight = 284
+  ClientHeight = 401
+  ClientWidth = 645
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Visible = True
   inherited TlBShow: TToolBar
+    Width = 645
     inherited BtnOk: TToolButton
       Enabled = False
       OnClick = BtnOkClick
@@ -66,17 +69,18 @@ inherited TimetableClassForm: TTimetableClassForm
     end
   end
   inherited PnStatus: TPanel
-    Top = 265
+    Top = 382
+    Width = 645
   end
   inherited PnEditor: TPanel
-    Left = 238
-    Height = 240
-    Width = 241
+    Left = 290
+    Height = 357
+    Width = 355
   end
   inherited DrawGrid: TDrawGrid
-    Left = 238
-    Height = 240
-    Width = 241
+    Left = 290
+    Height = 357
+    Width = 355
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
     OnDblClick = IntercambiarTimeSlotsClick
     OnDrawCell = DrawGridDrawCell
@@ -85,27 +89,28 @@ inherited TimetableClassForm: TTimetableClassForm
     OnSetEditText = DrawGridSetEditText
   end
   object Splitter1: TSplitter[4]
-    Left = 233
-    Height = 240
+    Left = 285
+    Height = 357
     Top = 25
     Width = 5
   end
   object DBGrid1: TDBGrid[5]
     Left = 0
-    Height = 240
+    Height = 357
     Top = 25
-    Width = 233
+    Width = 285
     Align = alLeft
     Color = clWindow
     Columns = <>
     DataSource = DSClass
+    Scrollbars = ssAutoBoth
     TabOrder = 4
     TitleFont.Height = -11
     TitleFont.Name = 'MS Sans Serif'
   end
   inherited ImageList: TImageList[6]
-    left = 140
-    top = 104
+    left = 160
+    top = 184
     Bitmap = {
       4C69020000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -233,8 +238,8 @@ inherited TimetableClassForm: TTimetableClassForm
     MasterSource = DSClass
     LinkedFields = 'IdTimetable;IdLevel;IdSpecialization;IdParallel'
     IndexFieldNames = 'IdTimetable Asc;IdLevel Asc;IdSpecialization Asc;IdParallel Asc'
-    left = 60
-    top = 104
+    left = 160
+    top = 256
     ParamData = <    
       item
         DataType = ftUnknown
@@ -390,8 +395,8 @@ inherited TimetableClassForm: TTimetableClassForm
   object DSClass: TDatasource[8]
     DataSet = QuClass
     OnDataChange = DSClassDataChange
-    left = 140
-    top = 157
+    left = 60
+    top = 256
   end
   object QuClass: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
@@ -433,7 +438,7 @@ inherited TimetableClassForm: TTimetableClassForm
     MasterSource = SourceDataModule.DSTimetable
     LinkedFields = 'IdTimetable'
     left = 60
-    top = 157
+    top = 184
     ParamData = <    
       item
         DataType = ftUnknown
