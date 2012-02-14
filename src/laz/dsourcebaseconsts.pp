@@ -2,7 +2,7 @@
 unit dsourcebaseconsts;
 
 (*
-  14/02/2012 2:04
+  14/02/2012 2:13
 
   Warning:
 
@@ -30,7 +30,7 @@ resourcestring
   STbCourse = 'Courses';
   STbHour = 'Academic Hours';
   STbRoomType = 'Types of Room';
-  STbClass = 'Groups';
+  STbClass = 'Classes';
   STbSubject = 'Subjects';
   STbTeacher = 'Teachers';
   STbDistribution = 'Distribution of Workload';
@@ -65,7 +65,7 @@ resourcestring
   SFlRoomType_Number = 'Number';
   SFlClass_IdLevel = 'Level';
   SFlClass_IdSpecialization = 'Specialization';
-  SFlClass_IdParallel = 'Group';
+  SFlClass_IdParallel = 'Parallel';
   SFlSubject_IdSubject = 'Id';
   SFlSubject_NaSubject = 'Name';
   SFlTeacher_IdTeacher = 'Id';

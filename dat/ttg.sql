@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  14/02/2012 2:04
+  14/02/2012 2:13
 
   Warning:
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `Class`(
     REFERENCES `Course`(`IdLevel`,`IdSpecialization`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `ParallelClass` FOREIGN KEY (`IdParallel`)
     REFERENCES `Parallel`(`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT
-); /* Groups */
+); /* Classes */
 CREATE TABLE IF NOT EXISTS `Subject`(
     `IdSubject` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Subject Id */,
     `NaSubject` varchar(20) NOT NULL UNIQUE /* Subject Name */
