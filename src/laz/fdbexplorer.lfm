@@ -59,14 +59,14 @@ object DBExplorerForm: TDBExplorerForm
     ItemHeight = 0
     TabOrder = 4
   end
-  object BtnSaveResults: TButton
+  object BtSaveResults: TButton
     Left = 493
     Height = 27
     Top = 197
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Save Results'
-    OnClick = BtnSaveResultsClick
+    OnClick = BtSaveResultsClick
     TabOrder = 5
   end
   object CbxTable: TDBLookupComboBox
@@ -82,44 +82,44 @@ object DBExplorerForm: TDBExplorerForm
     LookupCache = False
     TabOrder = 6
   end
-  object BtnShowTable: TButton
+  object BtShowTable: TButton
     Left = 493
     Height = 27
     Top = 40
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Show Table'
-    OnClick = BtnShowTableClick
+    OnClick = BtShowTableClick
     TabOrder = 7
   end
-  object BtnOpenQuery: TButton
+  object BtOpenQuery: TButton
     Left = 493
     Height = 27
     Top = 166
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Open Query'
-    OnClick = BtnOpenQueryClick
+    OnClick = BtOpenQueryClick
     TabOrder = 8
   end
-  object BtnOpenScript: TButton
+  object BtOpenScript: TButton
     Left = 493
     Height = 27
     Top = 72
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Open Script'
-    OnClick = BtnOpenScriptClick
+    OnClick = BtOpenScriptClick
     TabOrder = 9
   end
-  object BtnSaveScript: TButton
+  object BtSaveScript: TButton
     Left = 493
     Height = 27
     Top = 103
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Save Script'
-    OnClick = BtnSaveScriptClick
+    OnClick = BtSaveScriptClick
     TabOrder = 10
   end
   object ZTable1: TZTable

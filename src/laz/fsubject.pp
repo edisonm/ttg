@@ -15,7 +15,7 @@ type
   { TSubjectForm }
 
   TSubjectForm = class(TSingleEditorForm)
-    BtnSubjectRestriction: TToolButton;
+    BtSubjectRestriction: TToolButton;
     ActSubjectRestriction: TAction;
     QuSubjectRestriction: TZQuery;
     procedure ActFindExecute(Sender: TObject);

@@ -16,11 +16,11 @@ type
   TDBExplorerForm = class(TForm)
     BtExecuteScript: TButton;
     BtShowMetadata: TButton;
-    BtnSaveResults: TButton;
-    BtnShowTable: TButton;
-    BtnOpenQuery: TButton;
-    BtnOpenScript: TButton;
-    BtnSaveScript: TButton;
+    BtSaveResults: TButton;
+    BtShowTable: TButton;
+    BtOpenQuery: TButton;
+    BtOpenScript: TButton;
+    BtSaveScript: TButton;
     CbxMetadataType: TComboBox;
     Datasource1: TDatasource;
     DSTables: TDatasource;
@@ -34,13 +34,13 @@ type
     ZTables: TZQuery;
     ZSQLMetadata1: TZSQLMetadata;
     ZTable1: TZTable;
-    procedure BtnOpenScriptClick(Sender: TObject);
-    procedure BtnOpenQueryClick(Sender: TObject);
-    procedure BtnSaveScriptClick(Sender: TObject);
+    procedure BtOpenScriptClick(Sender: TObject);
+    procedure BtOpenQueryClick(Sender: TObject);
+    procedure BtSaveScriptClick(Sender: TObject);
     procedure BtShowMetadataClick(Sender: TObject);
     procedure BtExecuteScriptClick(Sender: TObject);
-    procedure BtnSaveResultsClick(Sender: TObject);
-    procedure BtnShowTableClick(Sender: TObject);
+    procedure BtSaveResultsClick(Sender: TObject);
+    procedure BtShowTableClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
   private
@@ -96,7 +96,7 @@ begin
   Datasource1.DataSet := ZSQLMetadata1;
 end;
 
-procedure TDBExplorerForm.BtnOpenQueryClick(Sender: TObject);
+procedure TDBExplorerForm.BtOpenQueryClick(Sender: TObject);
 begin
   ZQuery1.Close;
   ZQuery1.SQL.Clear;
@@ -105,7 +105,7 @@ begin
   Datasource1.DataSet := ZQuery1;
 end;
 
-procedure TDBExplorerForm.BtnSaveScriptClick(Sender: TObject);
+procedure TDBExplorerForm.BtSaveScriptClick(Sender: TObject);
 begin
   if SaveScript.Execute then
   begin
@@ -113,7 +113,7 @@ begin
   end;
 end;
 
-procedure TDBExplorerForm.BtnOpenScriptClick(Sender: TObject);
+procedure TDBExplorerForm.BtOpenScriptClick(Sender: TObject);
 begin
   if OpenScript.Execute then
   begin
@@ -132,7 +132,7 @@ begin
   ZTables.Open;
 end;
 
-procedure TDBExplorerForm.BtnSaveResultsClick(Sender: TObject);
+procedure TDBExplorerForm.BtSaveResultsClick(Sender: TObject);
 begin
   if SaveResults.Execute then
   begin
@@ -140,7 +140,7 @@ begin
   end;
 end;
 
-procedure TDBExplorerForm.BtnShowTableClick(Sender: TObject);
+procedure TDBExplorerForm.BtShowTableClick(Sender: TObject);
 begin
   ZTable1.Close;
   ZTable1.TableName := CbxTable.Text;

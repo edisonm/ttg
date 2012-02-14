@@ -12,15 +12,15 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
   OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
     Width = 804
-    inherited BtnOk: TToolButton
+    inherited BtOk: TToolButton
       Enabled = False
-      OnClick = BtnOkClick
+      OnClick = BtOkClick
       Visible = False
     end
-    inherited BtnCancel: TToolButton
+    inherited BtCancel: TToolButton
       Left = 139
       Enabled = False
-      OnClick = BtnCancelClick
+      OnClick = BtCancelClick
       Visible = False
     end
     object DBNavigator: TDBNavigator[3]

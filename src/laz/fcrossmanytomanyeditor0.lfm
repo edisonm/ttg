@@ -7,11 +7,11 @@ inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
   OnDestroy = FormDestroy
   Visible = True
   inherited TlBShow: TToolBar
-    inherited BtnOk: TToolButton
-      OnClick = BtnOkClick
+    inherited BtOk: TToolButton
+      OnClick = BtOkClick
     end
-    inherited BtnCancel: TToolButton
-      OnClick = BtnCancelClick
+    inherited BtCancel: TToolButton
+      OnClick = BtCancelClick
     end
   end
   inherited PnEditor: TPanel

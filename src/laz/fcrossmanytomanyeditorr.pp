@@ -32,8 +32,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDestroy(Sender: TObject);
-    procedure BtnOkClick(Sender: TObject);
-    procedure BtnCancelClick(Sender: TObject);
+    procedure BtOkClick(Sender: TObject);
+    procedure BtCancelClick(Sender: TObject);
     procedure DrawGridDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure FormCreate(Sender: TObject);
@@ -314,12 +314,12 @@ begin
     ClearSelection;
 end;
 
-procedure TCrossManyToManyEditorRForm.BtnCancelClick(Sender: TObject);
+procedure TCrossManyToManyEditorRForm.BtCancelClick(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TCrossManyToManyEditorRForm.BtnOkClick(Sender: TObject);
+procedure TCrossManyToManyEditorRForm.BtOkClick(Sender: TObject);
 begin
   inherited;
 end;

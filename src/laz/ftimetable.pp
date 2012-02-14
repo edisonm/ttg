@@ -17,13 +17,13 @@ type
   { TTimetableForm }
 
   TTimetableForm = class(TSingleEditorForm)
-    BtnSubjectRestrictionNonSatisfied: TToolButton;
-    BtnTeacherRestrictionNoRespetada: TToolButton;
-    BtnTimetableClass: TToolButton;
-    BtnTimetableTeacher: TToolButton;
-    BtnClashTeacher: TToolButton;
-    BtnClashSubject: TToolButton;
-    BtnClashRoom: TToolButton;
+    BtSubjectRestrictionNonSatisfied: TToolButton;
+    BtTeacherRestrictionNoRespetada: TToolButton;
+    BtTimetableClass: TToolButton;
+    BtTimetableTeacher: TToolButton;
+    BtClashTeacher: TToolButton;
+    BtClashSubject: TToolButton;
+    BtClashRoom: TToolButton;
     QuClashRoom: TZQuery;
     QuClashRoomIdDay: TLongintField;
     QuClashRoomIdHour: TLongintField;
@@ -88,7 +88,7 @@ type
     QuTimetableDetailTeacherRestrictionNaHour: TStringField;
     Panel2: TPanel;
     dbmSummary: TDBMemo;
-    BtnSubjectCutDay: TToolButton;
+    BtSubjectCutDay: TToolButton;
     QuSubjectCutDay: TZQuery;
     QuSubjectCutDayIdLevel: TLongintField;
     QuSubjectCutDayIdSpecialization: TLongintField;
@@ -102,13 +102,13 @@ type
     QuSubjectCutDayNaSubject: TStringField;
     QuSubjectCutDayNaDay: TStringField;
     QuSubjectCutDayNaHour: TStringField;
-    BtnSubjectCutHour: TToolButton;
+    BtSubjectCutHour: TToolButton;
     QuSubjectCutHour: TZQuery;
     QuSubjectCutHourIdDay: TLongintField;
     QuSubjectCutHourIdHour: TLongintField;
     QuSubjectCutHourDetail: TZQuery;
     DSSubjectCutHour: TDataSource;
-    BtnTimetableRoomType: TToolButton;
+    BtTimetableRoomType: TToolButton;
     QuClashRoomNumber: TLongintField;
     QuSubjectCutHourNaDay: TStringField;
     QuSubjectCutHourNaHour: TStringField;
@@ -173,7 +173,7 @@ type
     QuClashRoomOccupied: TStringField;
     QuClashTeacherDetailIdDay: TLongintField;
     QuClashTeacherDetailIdHour: TLongintField;
-    BtnMejorarTimetable: TToolButton;
+    BtMejorarTimetable: TToolButton;
     ActImproveTimeTable: TAction;
     procedure ActTimetableClassExecute(Sender: TObject);
     procedure ActClashTeacherExecute(Sender: TObject);

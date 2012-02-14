@@ -16,7 +16,7 @@ type
   { TTeacherForm }
 
   TTeacherForm	= class(TMasterDetailEditorForm)
-    BtnTeacherRestriction: TToolButton;
+    BtTeacherRestriction: TToolButton;
     ActTeacherRestriction: TAction;
     DbGAssistances: TDBGrid;
     DbGJoinedClass: TDBGrid;

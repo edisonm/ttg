@@ -16,7 +16,7 @@ inherited TeacherForm: TTeacherForm
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
     end
-    object BtnTeacherRestriction: TToolButton[3]
+    object BtTeacherRestriction: TToolButton[3]
       Left = 257
       Top = 2
       Action = ActTeacherRestriction

@@ -14,7 +14,7 @@ inherited SingleEditorForm: TSingleEditorForm
     inherited BtShow: TToolButton
       Action = ActShow
     end
-    object BtnFind: TToolButton[1]
+    object BtFind: TToolButton[1]
       Left = 24
       Top = 2
       Action = ActFind

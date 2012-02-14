@@ -18,77 +18,77 @@ inherited TimetableForm: TTimetableForm
       Hints.Strings = (      )
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbPost, nbCancel]
     end
-    object BtnTimetableClass: TToolButton[3]
+    object BtTimetableClass: TToolButton[3]
       Left = 201
       Top = 2
       Action = ActTimetableClass
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnTimetableRoomType: TToolButton[4]
+    object BtTimetableRoomType: TToolButton[4]
       Left = 224
       Top = 2
       Action = ActTimetableRoomType
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnTimetableTeacher: TToolButton[5]
+    object BtTimetableTeacher: TToolButton[5]
       Left = 247
       Top = 2
       Action = ActTimetableTeacher
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnClashTeacher: TToolButton[6]
+    object BtClashTeacher: TToolButton[6]
       Left = 270
       Top = 2
       Action = ActClashTeacher
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnClashSubject: TToolButton[7]
+    object BtClashSubject: TToolButton[7]
       Left = 293
       Top = 2
       Action = ActClashSubject
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnClashRoom: TToolButton[8]
+    object BtClashRoom: TToolButton[8]
       Left = 316
       Top = 2
       Action = ActClashRoom
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnSubjectRestrictionNonSatisfied: TToolButton[9]
+    object BtSubjectRestrictionNonSatisfied: TToolButton[9]
       Left = 339
       Top = 2
       Action = ActSubjectRestrictionNonSatisfied
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnTeacherRestrictionNoRespetada: TToolButton[10]
+    object BtTeacherRestrictionNoRespetada: TToolButton[10]
       Left = 362
       Top = 2
       Action = ActTeacherRestrictionNoRespetada
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnSubjectCutDay: TToolButton[11]
+    object BtSubjectCutDay: TToolButton[11]
       Left = 385
       Top = 2
       Action = ActSubjectCutDay
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnSubjectCutHour: TToolButton[12]
+    object BtSubjectCutHour: TToolButton[12]
       Left = 408
       Top = 2
       Action = ActSubjectCutHour
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnMejorarTimetable: TToolButton[13]
+    object BtMejorarTimetable: TToolButton[13]
       Left = 431
       Top = 2
       Action = ActImproveTimeTable

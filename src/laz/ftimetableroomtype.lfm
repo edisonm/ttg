@@ -15,16 +15,16 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
     inherited BtShow: TToolButton
       Visible = False
     end
-    inherited BtnOk: TToolButton
+    inherited BtOk: TToolButton
       Left = 116
       Enabled = False
-      OnClick = BtnOkClick
+      OnClick = BtOkClick
       Visible = False
     end
-    inherited BtnCancel: TToolButton
+    inherited BtCancel: TToolButton
       Left = 139
       Enabled = False
-      OnClick = BtnCancelClick
+      OnClick = BtCancelClick
       Visible = False
     end
     object DBNavigator: TDBNavigator[3]

@@ -25,10 +25,10 @@ type
 
   TCrossManyToManyEditorForm = class(TEditorForm)
     DrawGrid: TDrawGrid;
-    BtnOk: TToolButton;
-    BtnCancel: TToolButton;
-    procedure BtnOkClick(Sender: TObject);
-    procedure BtnCancelClick(Sender: TObject);
+    BtOk: TToolButton;
+    BtCancel: TToolButton;
+    procedure BtOkClick(Sender: TObject);
+    procedure BtCancelClick(Sender: TObject);
     procedure DrawGridDrawCell(Sender: TObject; aCol, aRow: Integer;
       aRect: TRect; aState: TGridDrawState);
 {
@@ -315,12 +315,12 @@ begin
   end;
 end;
 
-procedure TCrossManyToManyEditorForm.BtnOkClick(Sender: TObject);
+procedure TCrossManyToManyEditorForm.BtOkClick(Sender: TObject);
 begin
   WriteData;
 end;
 
-procedure TCrossManyToManyEditorForm.BtnCancelClick(Sender: TObject);
+procedure TCrossManyToManyEditorForm.BtCancelClick(Sender: TObject);
 begin
   ReadData;
   InvalidateData;

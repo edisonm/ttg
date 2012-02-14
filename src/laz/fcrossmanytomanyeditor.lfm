@@ -7,21 +7,21 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
   Position = poDesktopCenter
   inherited TlBShow: TToolBar
     TabOrder = 3
-    object BtnOk: TToolButton[1]
+    object BtOk: TToolButton[1]
       Left = 24
       Hint = 'Ok|Ok'
       Top = 2
       ImageIndex = 1
-      OnClick = BtnOkClick
+      OnClick = BtOkClick
       ParentShowHint = False
       ShowHint = True
     end
-    object BtnCancel: TToolButton[2]
+    object BtCancel: TToolButton[2]
       Left = 47
       Hint = 'Cancel|Cancel'
       Top = 2
       ImageIndex = 2
-      OnClick = BtnCancelClick
+      OnClick = BtCancelClick
       ParentShowHint = False
       ShowHint = True
     end

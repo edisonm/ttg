@@ -39,8 +39,8 @@ type
     QuTimetableRoomTypeIdTimetable: TLongintField;
     QuTimetableRoomTypeIdRoomType: TLongintField;
     DBNavigator: TDBNavigator;
-    procedure BtnCancelClick(Sender: TObject);
-    procedure BtnOkClick(Sender: TObject);
+    procedure BtCancelClick(Sender: TObject);
+    procedure BtOkClick(Sender: TObject);
     procedure DrawGridDrawCell(Sender: TObject; aCol, aRow: Integer;
       aRect: TRect; aState: TGridDrawState);
     procedure DrawGridGetEditText(Sender: TObject; ACol, ARow: Integer;
@@ -114,7 +114,7 @@ begin
   inherited;
 end;
 
-procedure TTimetableRoomTypeForm.BtnOkClick(Sender: TObject);
+procedure TTimetableRoomTypeForm.BtOkClick(Sender: TObject);
 begin
   inherited;
 end;
@@ -143,7 +143,7 @@ begin
   inherited;
 end;
 
-procedure TTimetableRoomTypeForm.BtnCancelClick(Sender: TObject);
+procedure TTimetableRoomTypeForm.BtCancelClick(Sender: TObject);
 begin
   inherited;
 end;

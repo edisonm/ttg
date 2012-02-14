@@ -15,7 +15,7 @@ inherited SubjectForm: TSubjectForm
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
     end
-    object BtnSubjectRestriction: TToolButton[3]
+    object BtSubjectRestriction: TToolButton[3]
       Left = 257
       Top = 2
       Action = ActSubjectRestriction

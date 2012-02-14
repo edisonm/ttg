@@ -17,7 +17,7 @@ type
 
   TTimetableClassForm = class(TCrossManyToManyEditor1Form)
     QuTimetableClass: TZQuery;
-    BtnIntercambiarTimeSlots: TToolButton;
+    BtIntercambiarTimeSlots: TToolButton;
     cbxShowClass: TComboBox;
     QuTimetableClassIdSubject: TLongintField;
     QuTimetableClassIdLevel: TLongintField;
@@ -44,9 +44,9 @@ type
     QuClassNaClass: TStringField;
     Splitter1: TSplitter;
     DBNavigator: TDBNavigator;
-    procedure BtnCancelClick(Sender: TObject);
+    procedure BtCancelClick(Sender: TObject);
     procedure BtShowClick(Sender: TObject);
-    procedure BtnOkClick(Sender: TObject);
+    procedure BtOkClick(Sender: TObject);
     procedure DrawGridDrawCell(Sender: TObject; aCol, aRow: Integer;
       aRect: TRect; aState: TGridDrawState);
     procedure DrawGridGetEditText(Sender: TObject; ACol, ARow: Integer;
@@ -107,12 +107,12 @@ begin
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
 end;
 
-procedure TTimetableClassForm.BtnCancelClick(Sender: TObject);
+procedure TTimetableClassForm.BtCancelClick(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TTimetableClassForm.BtnOkClick(Sender: TObject);
+procedure TTimetableClassForm.BtOkClick(Sender: TObject);
 begin
   inherited;
 end;

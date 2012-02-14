@@ -12,11 +12,11 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
   Position = poDesktopCenter
   inherited TlBShow: TToolBar
     Width = 518
-    inherited BtnOk: TToolButton
-      OnClick = BtnOkClick
+    inherited BtOk: TToolButton
+      OnClick = BtOkClick
     end
-    inherited BtnCancel: TToolButton
-      OnClick = BtnCancelClick
+    inherited BtCancel: TToolButton
+      OnClick = BtCancelClick
     end
   end
   inherited PnStatus: TPanel

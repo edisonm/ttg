@@ -20,7 +20,7 @@ TSingleEditorForm = class(TEditorForm)
     SLRecordNo: TLabel;
     SLState: TLabel;
     DBGrid: TDBGrid;
-    BtnFind: TToolButton;
+    BtFind: TToolButton;
     ActionList: TActionList;
     ActShow: TAction;
     ActFind: TAction;
@@ -29,7 +29,7 @@ TSingleEditorForm = class(TEditorForm)
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure DBGridCheckButton(Sender: TObject; ACol: Integer;
       Field: TField; var AEnabled: Boolean);
-    procedure DBGridTitleBtnClick(Sender: TObject; ACol: Integer;
+    procedure DBGridTitleBtClick(Sender: TObject; ACol: Integer;
       Field: TField);
     procedure DBGridDblClick(Sender: TObject);
     procedure DataSourceStateChange(Sender: TObject);
@@ -100,7 +100,7 @@ begin
     (Field <> nil) and not (Field is TBlobField)
 end;
 
-procedure TSingleEditorForm.DBGridTitleBtnClick(Sender: TObject;
+procedure TSingleEditorForm.DBGridTitleBtClick(Sender: TObject;
   ACol: Integer; Field: TField);
 begin
   inherited;

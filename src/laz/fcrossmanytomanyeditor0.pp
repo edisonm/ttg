@@ -32,8 +32,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDestroy(Sender: TObject);
-    procedure BtnOkClick(Sender: TObject);
-    procedure BtnCancelClick(Sender: TObject);
+    procedure BtOkClick(Sender: TObject);
+    procedure BtCancelClick(Sender: TObject);
   private
     { Private declarations }
     FRel: TDynamicBooleanArrayArray;
@@ -191,12 +191,12 @@ begin
     ClearSelection;
 end;
 
-procedure TCrossManyToManyEditor0Form.BtnCancelClick(Sender: TObject);
+procedure TCrossManyToManyEditor0Form.BtCancelClick(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TCrossManyToManyEditor0Form.BtnOkClick(Sender: TObject);
+procedure TCrossManyToManyEditor0Form.BtOkClick(Sender: TObject);
 begin
   inherited;
 end;

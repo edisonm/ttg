@@ -13,18 +13,18 @@ inherited TimetableClassForm: TTimetableClassForm
   Visible = True
   inherited TlBShow: TToolBar
     Width = 645
-    inherited BtnOk: TToolButton
+    inherited BtOk: TToolButton
       Enabled = False
-      OnClick = BtnOkClick
+      OnClick = BtOkClick
       Visible = False
     end
-    inherited BtnCancel: TToolButton
+    inherited BtCancel: TToolButton
       Left = 139
       Enabled = False
-      OnClick = BtnCancelClick
+      OnClick = BtCancelClick
       Visible = False
     end
-    object BtnIntercambiarTimeSlots: TToolButton[3]
+    object BtIntercambiarTimeSlots: TToolButton[3]
       Left = 347
       Hint = 'Swap time slots|Swap time slots'
       Top = 2
