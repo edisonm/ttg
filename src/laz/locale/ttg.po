@@ -1,8 +1,8 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: dsourcebaseconsts.sflassistance_idgroup
-msgctxt "dsourcebaseconsts.sflassistance_idgroup"
+#: dsourcebaseconsts.sflassistance_idparallel
+msgctxt "dsourcebaseconsts.sflassistance_idparallel"
 msgid "Group"
 msgstr ""
 
@@ -26,9 +26,9 @@ msgctxt "dsourcebaseconsts.sflassistance_idteacher"
 msgid "Assistant"
 msgstr ""
 
-#: dsourcebaseconsts.sflclass_idgroup
-msgctxt "dsourcebaseconsts.sflclass_idgroup"
-msgid "Group Id"
+#: dsourcebaseconsts.sflclass_idparallel
+msgctxt "dsourcebaseconsts.sflclass_idparallel"
+msgid "Group"
 msgstr ""
 
 #: dsourcebaseconsts.sflclass_idlevel
@@ -66,9 +66,9 @@ msgctxt "dsourcebaseconsts.sfldistribution_composition"
 msgid "Composition"
 msgstr ""
 
-#: dsourcebaseconsts.sfldistribution_idgroup
-msgctxt "dsourcebaseconsts.sfldistribution_idgroup"
-msgid "Group Id"
+#: dsourcebaseconsts.sfldistribution_idparallel
+msgctxt "dsourcebaseconsts.sfldistribution_idparallel"
+msgid "Group"
 msgstr ""
 
 #: dsourcebaseconsts.sfldistribution_idlevel
@@ -100,13 +100,13 @@ msgstr ""
 msgid "Room Count"
 msgstr ""
 
-#: dsourcebaseconsts.sflgroup_idgroup
-msgctxt "dsourcebaseconsts.sflgroup_idgroup"
+#: dsourcebaseconsts.sflparallel_idparallel
+msgctxt "dsourcebaseconsts.sflparallel_idparallel"
 msgid "Id"
 msgstr ""
 
-#: dsourcebaseconsts.sflgroup_nagroup
-msgctxt "dsourcebaseconsts.sflgroup_nagroup"
+#: dsourcebaseconsts.sflparallel_naparallel
+msgctxt "dsourcebaseconsts.sflparallel_naparallel"
 msgid "Name"
 msgstr ""
 
@@ -125,13 +125,13 @@ msgctxt "dsourcebaseconsts.sflhour_nahour"
 msgid "Name"
 msgstr ""
 
-#: dsourcebaseconsts.sfljoinedclass_idgroup
-msgctxt "dsourcebaseconsts.sfljoinedclass_idgroup"
+#: dsourcebaseconsts.sfljoinedclass_idparallel
+msgctxt "dsourcebaseconsts.sfljoinedclass_idparallel"
 msgid "Group"
 msgstr ""
 
-#: dsourcebaseconsts.sfljoinedclass_idgroup1
-msgctxt "dsourcebaseconsts.sfljoinedclass_idgroup1"
+#: dsourcebaseconsts.sfljoinedclass_idparallel1
+msgctxt "dsourcebaseconsts.sfljoinedclass_idparallel1"
 msgid "Group"
 msgstr ""
 
@@ -335,8 +335,8 @@ msgctxt "dsourcebaseconsts.sfltimetabledetail_idday"
 msgid "Day"
 msgstr ""
 
-#: dsourcebaseconsts.sfltimetabledetail_idgroup
-msgctxt "dsourcebaseconsts.sfltimetabledetail_idgroup"
+#: dsourcebaseconsts.sfltimetabledetail_idparallel
+msgctxt "dsourcebaseconsts.sfltimetabledetail_idparallel"
 msgid "Group"
 msgstr ""
 
@@ -391,7 +391,7 @@ msgid "Initial Time"
 msgstr ""
 
 #: dsourcebaseconsts.stbassistance
-msgid "Assistance"
+msgid "Assistances"
 msgstr ""
 
 #: dsourcebaseconsts.stbclass
@@ -414,8 +414,8 @@ msgctxt "dsourcebaseconsts.stbdistribution"
 msgid "Distribution of Workload"
 msgstr ""
 
-#: dsourcebaseconsts.stbgroup
-msgctxt "dsourcebaseconsts.stbgroup"
+#: dsourcebaseconsts.stbparallel
+msgctxt "dsourcebaseconsts.stbparallel"
 msgid "Group Identifiers"
 msgstr ""
 
@@ -425,7 +425,7 @@ msgid "Academic Hours"
 msgstr ""
 
 #: dsourcebaseconsts.stbjoinedclass
-msgid "JoinedClass"
+msgid "Joined Classes"
 msgstr ""
 
 #: dsourcebaseconsts.stblevel
@@ -813,7 +813,7 @@ msgid "Classes"
 msgstr ""
 
 #: tmainform.actclass.hint
-msgid "Courses|Courses with its given groups"
+msgid "Courses|Courses with its given parallels"
 msgstr ""
 
 #: tmainform.actconfigure.caption
@@ -854,11 +854,11 @@ msgstr ""
 msgid "Exit|Exit from program"
 msgstr ""
 
-#: tmainform.actgroup.caption
+#: tmainform.actparallel.caption
 msgid "Group IDs"
 msgstr ""
 
-#: tmainform.actgroup.hint
+#: tmainform.actparallel.hint
 msgid "Group IDs|Group IDs"
 msgstr ""
 

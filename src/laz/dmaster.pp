@@ -40,7 +40,7 @@ type
   public
     { Public declarations }
     procedure IntercambiarTimeSlots(AIdTimetable, AIdLevel, AIdSpecialization,
-      AIdGroup, AIdDay1, AIdHour1, AIdDay2, AIdHour2: Integer);
+      AIdParallel, AIdDay1, AIdHour1, AIdDay2, AIdHour2: Integer);
     function PerformAllChecks(AMainStrings, ASubStrings: TStrings;
       AMaxTeacherWorkLoad: Integer): Boolean;
     function NewIdTimetable: Integer;
@@ -381,10 +381,10 @@ var
         while not Eof do
         begin
           TbDistribution.Filter :=
-            Format('IdLevel=%d and IdSpecialization=%d and IdGroup=%d', [
+            Format('IdLevel=%d and IdSpecialization=%d and IdParallel=%d', [
             TbClass.FindField('IdLevel').AsInteger,
               TbClass.FindField('IdSpecialization').AsInteger,
-              TbClass.FindField('IdGroup').AsInteger]);
+              TbClass.FindField('IdParallel').AsInteger]);
           TbDistribution.Filtered := true;
           TbDistribution.First;
           t := 0;
@@ -404,19 +404,19 @@ var
               end;
               AMainStrings.Add(Format(s, [TbClass.FindField('AbLevel').Value,
                 TbClass.FindField('AbSpecialization').Value,
-                TbClass.FindField('NaGroup').Value, t]));
+                TbClass.FindField('NaParallel').Value, t]));
               HaveProblems := True;
               HaveInternalProblems := True;
             end
             else
               ASubStrings.Add(Format(s, [TbClass.FindField('AbLevel').Value,
                 TbClass.FindField('AbSpecialization').Value,
-                TbClass.FindField('NaGroup').Value, t]));
+                TbClass.FindField('NaParallel').Value, t]));
           except
             ASubStrings.Add(Format('%s: %s %s %s, %s %s',
               [SProblems, TbClass.FindField('AbLevel').AsString,
               TbClass.FindField('AbSpecialization').AsString,
-              TbClass.FindField('NaGroup').AsString,
+              TbClass.FindField('NaParallel').AsString,
               STbSubject,
               TbDistribution.FindField('NaSubject').AsString]));
             HaveProblems := True;
@@ -523,7 +523,7 @@ begin
 end;
 
 procedure TMasterDataModule.IntercambiarTimeSlots(AIdTimetable, AIdLevel,
-  AIdSpecialization, AIdGroup, AIdDay1, AIdHour1, AIdDay2,
+  AIdSpecialization, AIdParallel, AIdDay1, AIdHour1, AIdDay2,
   AIdHour2: Integer);
 var
   Locate1, Locate2: Boolean;
@@ -533,14 +533,14 @@ begin
   with SourceDataModule do
   begin
     Locate1 := TbTimetableDetail.Locate(
-      'IdTimetable;IdLevel;IdSpecialization;IdGroup;IdDay;IdHour',
-      VarArrayOf([AIdTimetable, AIdLevel, AIdSpecialization, AIdGroup,
+      'IdTimetable;IdLevel;IdSpecialization;IdParallel;IdDay;IdHour',
+      VarArrayOf([AIdTimetable, AIdLevel, AIdSpecialization, AIdParallel,
       AIdDay1, AIdHour1]), []);
     Bookmark1 := TbTimetableDetail.GetBookmark;
     try
       Locate2 := TbTimetableDetail.Locate(
-        'IdTimetable;IdLevel;IdSpecialization;IdGroup;IdDay;IdHour',
-        VarArrayOf([AIdTimetable, AIdLevel, AIdSpecialization, AIdGroup,
+        'IdTimetable;IdLevel;IdSpecialization;IdParallel;IdDay;IdHour',
+        VarArrayOf([AIdTimetable, AIdLevel, AIdSpecialization, AIdParallel,
         AIdDay2, AIdHour2]), []);
       Bookmark2 := TbTimetableDetail.GetBookmark;
       try
@@ -603,22 +603,22 @@ begin
   FConfigStorage := TTTGConfig.Create(Self);
   with FStringsShowRoomType do
   begin
-    add('Level_Class=AbLevel;NaGroup');
-    add('Level_Class_Subject=AbLevel;NaGroup;NaSubject');
-    add('Level_Class_Specialization=AbLevel;NaGroup;AbSpecialization');
-    add('Level_Class_Specialization_Subject=AbLevel;NaGroup;AbSpecialization;NaSubject');
-    add('Level_Specialization_Class=AbLevel;AbSpecialization;NaGroup');
-    add('Level_Specialization_Class_Subject=AbLevel;AbSpecialization;NaGroup;NaSubject');
+    add('Level_Class=AbLevel;NaParallel');
+    add('Level_Class_Subject=AbLevel;NaParallel;NaSubject');
+    add('Level_Class_Specialization=AbLevel;NaParallel;AbSpecialization');
+    add('Level_Class_Specialization_Subject=AbLevel;NaParallel;AbSpecialization;NaSubject');
+    add('Level_Specialization_Class=AbLevel;AbSpecialization;NaParallel');
+    add('Level_Specialization_Class_Subject=AbLevel;AbSpecialization;NaParallel;NaSubject');
     add('Subject=NaSubject');
   end;
   with FStringsShowTeacher do
   begin
-    add('Level_Class=AbLevel;NaGroup');
-    add('Level_Class_Subject=AbLevel;NaGroup;NaSubject');
-    add('Level_Class_Specialization=AbLevel;NaGroup;AbSpecialization');
-    add('Level_Class_Specialization_Subject=AbLevel;NaGroup;AbSpecialization;NaSubject');
-    add('Level_Specialization_Class=AbLevel;AbSpecialization;NaGroup');
-    add('Level_Specialization_Class_Subject=AbLevel;AbSpecialization;NaGroup;NaSubject');
+    add('Level_Class=AbLevel;NaParallel');
+    add('Level_Class_Subject=AbLevel;NaParallel;NaSubject');
+    add('Level_Class_Specialization=AbLevel;NaParallel;AbSpecialization');
+    add('Level_Class_Specialization_Subject=AbLevel;NaParallel;AbSpecialization;NaSubject');
+    add('Level_Specialization_Class=AbLevel;AbSpecialization;NaParallel');
+    add('Level_Specialization_Class_Subject=AbLevel;AbSpecialization;NaParallel;NaSubject');
     add('Subject=NaSubject');
   end;
   with FStringsShowClass do

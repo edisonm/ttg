@@ -50,11 +50,11 @@ type
       FSubjectRestrictionToSubjectRestrictionType, FTeacherRestrictionToTeacher,
       FTeacherRestrictionToTimeSlot, FTeacherRestrictionToTeacherRestrictionType,
       FDistributionToRoomType, FDistributionToRoomCount, FClassToCourse,
-      FClassToLevel, FClassToGroup, FDistributionToClass, FClassToSpecialization,
+      FClassToLevel, FClassToParallel, FDistributionToClass, FClassToSpecialization,
       FClassToSessionCount, FSubjectRestrictionTypeToValue, FTeacherRestrictionTypeToValue,
       FSubjectRestrictionToValue, FTeacherRestrictionToValue: TDynamicIntegerArray;
     FSessionToDuration: TSessionArray;
-    FDayHourToTimeSlot, FLevelSpecializationToCourse, FCourseGroupToClass,
+    FDayHourToTimeSlot, FLevelSpecializationToCourse, FCourseParallelToClass,
       FClassSubjectToTeacher, FClassSubjectToDistribution, FClassSubjectCount,
       FTimetableDetailPattern, FDistributionToSessions, FClassAssistanceToDistribution,
       FClassAssistanceToTeacher, FTeacherTimeSlotToTeacherRestrictionType,
@@ -64,11 +64,11 @@ type
       FClassCount, FDayCount, FHourCount, FTimeSlotCount, FTeacherCount, FCourseCount,
       FLevelCount, FSpecializationCount, FRoomTypeCount, FDistributionCount,
       FAssistanceCount, FJoinedClassCount: Integer;
-    FGroupToIdGroup, FSubjectToIdSubject, FDayToIdDay, FHourToIdHour,
+    FParallelToIdParallel, FSubjectToIdSubject, FDayToIdDay, FHourToIdHour,
       FLevelToIdLevel, FSpecializationToIdSpecialization: TDynamicIntegerArray;
-    FIdLevelToLevel, FIdSpecializationToSpecialization, FIdGroupToGroup, FIdDayToDay,
+    FIdLevelToLevel, FIdSpecializationToSpecialization, FIdParallelToParallel, FIdDayToDay,
       FIdHourToHour: TDynamicIntegerArray;
-    FMinIdLevel, FMinIdSpecialization, FMinIdGroup, FMinIdDay, FMinIdHour: Integer;
+    FMinIdLevel, FMinIdSpecialization, FMinIdParallel, FMinIdDay, FMinIdHour: Integer;
     FSessionNumberDouble: Integer;
     function GetDayAMaxTimeSlot(Day: Integer): Integer;
   protected
@@ -423,36 +423,36 @@ var
   end;
   procedure LoadClass;
   var
-    VClass, Course, Group, Level, Specialization: Integer;
-    VFieldLevel, VFieldSpecialization, VFieldGroup: TField;
+    VClass, Course, Parallel, Level, Specialization: Integer;
+    VFieldLevel, VFieldSpecialization, VFieldParallel: TField;
   begin
     with SourceDataModule.TbClass do
     begin
-      IndexFieldNames := 'IdLevel;IdSpecialization;IdGroup';
+      IndexFieldNames := 'IdLevel;IdSpecialization;IdParallel';
       First;
       FClassCount := RecordCount;
       SetLength(FClassToCourse, FClassCount);
-      SetLength(FClassToGroup, FClassCount);
+      SetLength(FClassToParallel, FClassCount);
       SetLength(FClassToLevel, FClassCount);
       SetLength(FClassToSpecialization, FClassCount);
-      SetLength(FCourseGroupToClass, FCourseCount, Length
-          (FGroupToIdGroup));
+      SetLength(FCourseParallelToClass, FCourseCount, Length
+          (FParallelToIdParallel));
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
-      VFieldGroup := FindField('IdGroup');
+      VFieldParallel := FindField('IdParallel');
       for VClass := 0 to FClassCount - 1 do
       begin
         Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
         Course := FLevelSpecializationToCourse[Level, Specialization];
-        Group := FIdGroupToGroup[VFieldGroup.AsInteger -
-          FMinIdGroup];
+        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
+          FMinIdParallel];
         FClassToCourse[VClass] := Course;
         FClassToLevel[VClass] := Level;
-        FClassToGroup[VClass] := Group;
+        FClassToParallel[VClass] := Parallel;
         FClassToSpecialization[VClass] := Specialization;
-        FCourseGroupToClass[Course, Group] := VClass;
+        FCourseParallelToClass[Course, Parallel] := VClass;
         Next;
       end;
       First;
@@ -602,21 +602,21 @@ var
   end;
   procedure LoadDistribution;
   var
-    Subject, Level, Specialization, Group, Session1, Distribution, RoomCount,
+    Subject, Level, Specialization, Parallel, Session1, Distribution, RoomCount,
       VClass, Teacher, Course, Session2, Session, RoomType, VPos: Integer;
-    VFieldSubject, VFieldLevel, VFieldGroup, VFieldTeacher, VFieldSpecialization,
+    VFieldSubject, VFieldLevel, VFieldParallel, VFieldTeacher, VFieldSpecialization,
       VFieldRoomType, VFieldRoomCount, VFieldComposition: TField;
     VSessionToDuration, VSessionToDistribution: array [0 .. 16383] of Integer;
     Composition: string;
   begin
     with SourceDataModule.TbDistribution do
     begin
-      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdGroup';
+      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdParallel';
       First;
       VFieldSubject := FindField('IdSubject');
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
-      VFieldGroup := FindField('IdGroup');
+      VFieldParallel := FindField('IdParallel');
       VFieldTeacher := FindField('IdTeacher');
       VFieldRoomType := FindField('IdRoomType');
       VFieldRoomCount := FindField('RoomCount');
@@ -644,14 +644,14 @@ var
       begin
         Subject := FIdSubjectToSubject[VFieldSubject.AsInteger - FMinIdSubject];
         Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
-        Group := FIdGroupToGroup[VFieldGroup.AsInteger -
-          FMinIdGroup];
+        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
+          FMinIdParallel];
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
         RoomType := FIdRoomTypeARoomType[VFieldRoomType.AsInteger - FMinIdRoomType];
         RoomCount := VFieldRoomCount.AsInteger;
         Course := FLevelSpecializationToCourse[Level, Specialization];
-        VClass := FCourseGroupToClass[Course, Group];
+        VClass := FCourseParallelToClass[Course, Parallel];
         Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
         FDistributionToClass[Distribution] := VClass;
         FDistributionToTeacher[Distribution] := Teacher;
@@ -699,14 +699,14 @@ var
   end;
   procedure LoadAssistance;
   var
-    Assistance, Counter, VClass, Course, Group, Level, Specialization, Subject,
+    Assistance, Counter, VClass, Course, Parallel, Level, Specialization, Subject,
     Distribution, Teacher: Integer;
-    VFieldSubject, VFieldLevel, VFieldSpecialization, VFieldGroup,
+    VFieldSubject, VFieldLevel, VFieldSpecialization, VFieldParallel,
     VFieldTeacher: TField;
   begin
     with SourceDataModule.TbAssistance do
     begin
-      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdGroup;IdTeacher';
+      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdParallel;IdTeacher';
       First;
       FAssistanceCount := RecordCount;
       SetLength(FClassAssistanceToDistribution, FClassCount, 0);
@@ -714,7 +714,7 @@ var
       VFieldSubject := FindField('IdSubject');
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
-      VFieldGroup := FindField('IdGroup');
+      VFieldParallel := FindField('IdParallel');
       VFieldTeacher := FindField('IdTeacher');
       for Assistance := 0 to FAssistanceCount - 1 do
       begin
@@ -723,9 +723,9 @@ var
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
         Course := FLevelSpecializationToCourse[Level, Specialization];
-        Group := FIdGroupToGroup[VFieldGroup.AsInteger -
-          FMinIdGroup];
-        VClass := FCourseGroupToClass[Course, Group];
+        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
+          FMinIdParallel];
+        VClass := FCourseParallelToClass[Course, Parallel];
         Distribution := FClassSubjectToDistribution[VClass, Subject];
         Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
         Counter := Length(FClassAssistanceToDistribution[VClass]);
@@ -740,14 +740,14 @@ var
   end;
   procedure LoadJoinedClass;
   var
-    JoinedClass, Counter, VClass1, Course1, Group1, Level1, Specialization1, VClass,
-    Course, Group, Level, Specialization, Subject,  Distribution: Integer;
-    VFieldSubject, VFieldLevel, VFieldSpecialization, VFieldGroup,
-    VFieldLevel1, VFieldSpecialization1, VFieldGroup1: TField;
+    JoinedClass, Counter, VClass1, Course1, Parallel1, Level1, Specialization1, VClass,
+    Course, Parallel, Level, Specialization, Subject,  Distribution: Integer;
+    VFieldSubject, VFieldLevel, VFieldSpecialization, VFieldParallel,
+    VFieldLevel1, VFieldSpecialization1, VFieldParallel1: TField;
   begin
     with SourceDataModule.TbJoinedClass do
     begin
-      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdGroup;IdLevel1;IdSpecialization1;IdGroup1';
+      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdParallel;IdLevel1;IdSpecialization1;IdParallel1';
       First;
       FJoinedClassCount := RecordCount;
       SetLength(FClassJoinedClassToDistribution, FClassCount, 0);
@@ -755,10 +755,10 @@ var
       VFieldSubject := FindField('IdSubject');
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
-      VFieldGroup := FindField('IdGroup');
+      VFieldParallel := FindField('IdParallel');
       VFieldLevel1 := FindField('IdLevel1');
       VFieldSpecialization1 := FindField('IdSpecialization1');
-      VFieldGroup1 := FindField('IdGroup1');
+      VFieldParallel1 := FindField('IdParallel1');
       for JoinedClass := 0 to FJoinedClassCount - 1 do
       begin
         Subject := FIdSubjectToSubject[VFieldSubject.AsInteger - FMinIdSubject];
@@ -766,17 +766,17 @@ var
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
         Course := FLevelSpecializationToCourse[Level, Specialization];
-        Group := FIdGroupToGroup[VFieldGroup.AsInteger -
-          FMinIdGroup];
-        VClass := FCourseGroupToClass[Course, Group];
+        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
+          FMinIdParallel];
+        VClass := FCourseParallelToClass[Course, Parallel];
         Distribution := FClassSubjectToDistribution[VClass, Subject];
         Level1 := FIdLevelToLevel[VFieldLevel1.AsInteger - FMinIdLevel];
         Specialization1 := FIdSpecializationToSpecialization
           [VFieldSpecialization1.AsInteger - FMinIdSpecialization];
         Course1 := FLevelSpecializationToCourse[Level1, Specialization1];
-        Group1 := FIdGroupToGroup[VFieldGroup1.AsInteger -
-          FMinIdGroup];
-        VClass1 := FCourseGroupToClass[Course1, Group1];
+        Parallel1 := FIdParallelToParallel[VFieldParallel1.AsInteger -
+          FMinIdParallel];
+        VClass1 := FCourseParallelToClass[Course1, Parallel1];
         Counter := Length(FClassJoinedClassToDistribution[VClass]);
         SetLength(FClassJoinedClassToDistribution[VClass], Counter + 1);
         SetLength(FClassJoinedClassToClass[VClass], Counter + 1);
@@ -814,7 +814,7 @@ var
         begin
           if (TimeSlot < 0) or (TimeSlot >= FTimeSlotCount) then
             raise Exception.CreateFmt(SClassTimeSlotToSessionOverflow,
-              [FClassToLevel[VClass], FClassToGroup[VClass], TimeSlot]);
+              [FClassToLevel[VClass], FClassToParallel[VClass], TimeSlot]);
           FTimetableDetailPattern[VClass, FTimeSlotCount - 1 - TimeSlot]
             := FDistributionToSessions[Distribution, Contador];
         end;
@@ -854,8 +854,8 @@ begin
       FIdSpecializationToSpecialization, FSpecializationToIdSpecialization);
     FSpecializationCount := Length(FSpecializationToIdSpecialization);
     LoadCourse;
-    Load(TbGroup, 'IdGroup', FMinIdGroup,
-      FIdGroupToGroup, FGroupToIdGroup);
+    Load(TbParallel, 'IdParallel', FMinIdParallel,
+      FIdParallelToParallel, FParallelToIdParallel);
     Load(TbSubject, 'IdSubject', FMinIdSubject, FIdSubjectToSubject,
       FSubjectToIdSubject);
     FSubjectCount := Length(FSubjectToIdSubject);
@@ -1670,7 +1670,7 @@ begin
         VStrings.Add(Format('Class %d %d %d',
             [FLevelToIdLevel[FClassToLevel[VClass]],
             FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
-            FGroupToIdGroup[FClassToGroup[VClass]]]));
+            FParallelToIdParallel[FClassToParallel[VClass]]]));
         for TimeSlot := 0 to FTimeSlotCount - 1 do
         begin
           VStrings.Add(Format(' Day %d Hour %d Subject %d', [FTimeSlotToDay[TimeSlot],
@@ -1754,9 +1754,9 @@ var
   end;
   procedure SaveTimetableDetail;
   var
-    VClass, TimeSlot, IdLevel, IdGroup, IdSpecialization, Session: Integer;
+    VClass, TimeSlot, IdLevel, IdParallel, IdSpecialization, Session: Integer;
     {$IFNDEF USE_SQL}
-    FieldTimetable, FieldLevel, FieldGroup, FieldSpecialization, FieldDay,
+    FieldTimetable, FieldLevel, FieldParallel, FieldSpecialization, FieldDay,
       FieldHour, FieldSubject, FieldSession: TField;
     {$ENDIF}
   begin
@@ -1765,7 +1765,7 @@ var
       for VClass := 0 to FClassCount - 1 do
       begin
         IdLevel := FLevelToIdLevel[FClassToLevel[VClass]];
-        IdGroup := FGroupToIdGroup[FClassToGroup[VClass]];
+        IdParallel := FParallelToIdParallel[FClassToParallel[VClass]];
         IdSpecialization := FSpecializationToIdSpecialization
           [FClassToSpecialization[VClass]];
         for TimeSlot := 0 to FTimeSlotCount - 1 do
@@ -1775,9 +1775,9 @@ var
           begin
             SQL.Add(Format(
               'INSERT INTO TimetableDetail' +
-              '(IdTimetable,IdLevel,IdGroup,IdSpecialization,IdDay,' +
+              '(IdTimetable,IdLevel,IdParallel,IdSpecialization,IdDay,' +
               'IdHour,IdSubject,Session) VALUES (%d,%d,%d,%d,%d,%d,%d,%d);',
-              [IdTimetable, IdLevel, IdGroup, IdSpecialization,
+              [IdTimetable, IdLevel, IdParallel, IdSpecialization,
               FDayToIdDay[FTimeSlotToDay[TimeSlot]],
               FHourToIdHour[FTimeSlotToHour[TimeSlot]],
               FSubjectToIdSubject[FSessionToSubject[Session]],
@@ -1793,7 +1793,7 @@ var
         Last;
         FieldTimetable := FindField('IdTimetable');
         FieldLevel := FindField('IdLevel');
-        FieldGroup := FindField('IdGroup');
+        FieldParallel := FindField('IdParallel');
         FieldSpecialization := FindField('IdSpecialization');
         FieldDay := FindField('IdDay');
         FieldHour := FindField('IdHour');
@@ -1803,7 +1803,7 @@ var
         for VClass := 0 to FClassCount - 1 do
         begin
           IdLevel := FLevelAIdLevel[FClassALevel[VClass]];
-          IdGroup := FGroupAIdGroup[FClassAGroup[VClass]];
+          IdParallel := FParallelAIdParallel[FClassAParallel[VClass]];
           IdSpecialization := FSpecializationAIdSpecialization
             [FClassASpecialization[VClass]];
           for TimeSlot := 0 to FTimeSlotCount - 1 do
@@ -1814,7 +1814,7 @@ var
               Append;
               FieldTimetable.AsInteger := IdTimetable;
               FieldLevel.AsInteger := IdLevel;
-              FieldGroup.AsInteger := IdGroup;
+              FieldParallel.AsInteger := IdParallel;
               FieldSpecialization.AsInteger := IdSpecialization;
               FieldDay.AsInteger := FDayAIdDay[FTimeSlotADay[TimeSlot]];
               FieldHour.AsInteger := FHourAIdHour[FTimeSlotAHour[TimeSlot]];
@@ -1858,7 +1858,7 @@ end;
 
 procedure TTimetable.LoadFromDataModule(IdTimetable: Integer);
 var
-  FieldLevel, FieldGroup, FieldSpecialization, FieldDay, FieldHour,
+  FieldLevel, FieldParallel, FieldSpecialization, FieldDay, FieldHour,
     FieldSession: TLongintField;
   VClass, TimeSlot: Integer;
 begin
@@ -1870,7 +1870,7 @@ begin
     MasterSource := DSTimetable;
     try
       FieldLevel := FindField('IdLevel') as TLongintField;
-      FieldGroup := FindField('IdGroup') as TLongintField;
+      FieldParallel := FindField('IdParallel') as TLongintField;
       FieldSpecialization := FindField('IdSpecialization') as TLongintField;
       FieldDay := FindField('IdDay') as TLongintField;
       FieldHour := FindField('IdHour') as TLongintField;
@@ -1881,13 +1881,13 @@ begin
       First;
       while not Eof do
       begin
-        VClass := FCourseGroupToClass[
+        VClass := FCourseParallelToClass[
           FLevelSpecializationToCourse[
             FIdLevelToLevel[FieldLevel.AsInteger - FMinIdLevel],
             FIdSpecializationToSpecialization[FieldSpecialization.AsInteger -
             FMinIdSpecialization]],
-          FIdGroupToGroup[FieldGroup.AsInteger -
-          FMinIdGroup]];
+          FIdParallelToParallel[FieldParallel.AsInteger -
+          FMinIdParallel]];
         TimeSlot := FDayHourToTimeSlot[FIdDayToDay[FieldDay.AsInteger - FMinIdDay],
           FIdHourToHour[FieldHour.AsInteger - FMinIdHour]];
         FClassTimeSlotToSession[VClass, TimeSlot] := FieldSession.AsInteger;
@@ -1926,7 +1926,7 @@ begin
               SClass, VClass,
               FLevelToIdLevel[FClassToLevel[VClass]],
               FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
-              FGroupToIdGroup[FClassToGroup[VClass]],
+              FParallelToIdParallel[FClassToParallel[VClass]],
               SFlDistribution_IdSubject,
               Subject,
               FSubjectToIdSubject[Subject],
@@ -1940,7 +1940,7 @@ begin
               SClass, VClass,
               FLevelToIdLevel[FClassToLevel[VClass]],
               FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
-              FGroupToIdGroup[FClassToGroup[VClass]],
+              FParallelToIdParallel[FClassToParallel[VClass]],
               SFlDistribution_IdSubject,
               Subject,
               FSubjectToIdSubject[Subject],
@@ -1950,7 +1950,7 @@ begin
               SClass, VClass,
               FLevelToIdLevel[FClassToLevel[VClass]],
               FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
-              FGroupToIdGroup[FClassToGroup[VClass]],
+              FParallelToIdParallel[FClassToParallel[VClass]],
               SFlDistribution_IdSubject,
               Subject,
               FSubjectToIdSubject[Subject],

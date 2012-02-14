@@ -55,16 +55,16 @@ inherited SourceDataModule: TSourceDataModule
   object QuClass: TZReadOnlyQuery[43]
     Connection = DbZConnection
     SQL.Strings = (
-      'SELECT Class.IdLevel, Class.IdSpecialization, Class.IdGroup,'
-      ' AbLevel || " " || AbSpecialization || " " || NaGroup AS NameClass'
+      'SELECT Class.IdLevel, Class.IdSpecialization, Class.IdParallel,'
+      ' AbLevel || " " || AbSpecialization || " " || NaParallel AS NameClass'
       'FROM'
       ' Class INNER JOIN Level ON Class.IdLevel=Level.IdLevel'
       ' INNER JOIN Specialization ON Class.IdSpecialization=Specialization.IdSpecialization'
-      ' INNER JOIN Group ON Class.IdGroup = Group.IdGroup'
+      ' INNER JOIN Parallel ON Class.IdParallel = Parallel.IdParallel'
       'WHERE'
       ' Class.IdLevel<>:IdLevel OR'
       ' Class.IdSpecialization<>:IdSpecialization OR'
-      ' Class.IdGroup<>:IdGroup'
+      ' Class.IdParallel<>:IdParallel'
     )
     Params = <    
       item
@@ -79,12 +79,12 @@ inherited SourceDataModule: TSourceDataModule
       end    
       item
         DataType = ftInteger
-        Name = 'IdGroup'
+        Name = 'IdParallel'
         ParamType = ptUnknown
       end>
     DataSource = DSDistribution
-    MasterFields = 'IdLevel,IdSpecialization,IdGroup'
-    LinkedFields = 'IdLevel;IdSpecialization;IdGroup'
+    MasterFields = 'IdLevel,IdSpecialization,IdParallel'
+    LinkedFields = 'IdLevel;IdSpecialization;IdParallel'
     left = 552
     top = 248
     ParamData = <    
@@ -100,7 +100,7 @@ inherited SourceDataModule: TSourceDataModule
       end    
       item
         DataType = ftInteger
-        Name = 'IdGroup'
+        Name = 'IdParallel'
         ParamType = ptUnknown
       end>
   end

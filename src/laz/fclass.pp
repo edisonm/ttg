@@ -30,7 +30,7 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    FieldIdGroup, FieldNaGroup: TField;
+    FieldIdParallel, FieldNaParallel: TField;
     PostingData: Boolean;
   protected
     procedure doLoadConfig; override;
@@ -62,11 +62,11 @@ begin
     with DataSourceList.DataSet do
     begin
       First;
-      FieldIdGroup := FindField('IdGroup');
-      FieldNaGroup := FindField('NaGroup');
+      FieldIdParallel := FindField('IdParallel');
+      FieldNaParallel := FindField('NaParallel');
       while not Eof do
       begin
-        Items.Add(FindField('NaGroup').AsString);
+        Items.Add(FindField('NaParallel').AsString);
         Next;
       end;
     end;
@@ -122,9 +122,9 @@ begin
       First;
       while not Eof do
       begin
-        Checked[Items.IndexOf(FieldNaGroup.AsString)] :=
-          DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdGroup',
-            VarArrayOf([IdLevel, IdSpecialization, FieldIdGroup.AsInteger]), []);
+        Checked[Items.IndexOf(FieldNaParallel.AsString)] :=
+          DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdParallel',
+            VarArrayOf([IdLevel, IdSpecialization, FieldIdParallel.AsInteger]), []);
         Next;
       end;
     end;
@@ -143,7 +143,7 @@ end;
 
 procedure TClassForm.CheckListBoxExit(Sender: TObject);
 var
-  IdLevel, IdSpecialization, IdGroup: Integer;
+  IdLevel, IdSpecialization, IdParallel: Integer;
 begin
   inherited;
   with CheckListBox do if Assigned(DataSourceList.DataSet) then
@@ -156,21 +156,21 @@ begin
       First;
       while not Eof do
       begin
-        IdGroup := FieldIdGroup.AsInteger;
-        if DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdGroup',
-          VarArrayOf([IdLevel, IdSpecialization, IdGroup]), []) then
+        IdParallel := FieldIdParallel.AsInteger;
+        if DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdParallel',
+          VarArrayOf([IdLevel, IdSpecialization, IdParallel]), []) then
         begin
-          if not Checked[Items.IndexOf(FieldNaGroup.AsString)] then
+          if not Checked[Items.IndexOf(FieldNaParallel.AsString)] then
             DataSourceDetail.DataSet.Delete;
         end
         else
         begin
-          if Checked[Items.IndexOf(FieldNaGroup.AsString)] then
+          if Checked[Items.IndexOf(FieldNaParallel.AsString)] then
           begin
             DataSourceDetail.DataSet.Append;
             DataSourceDetail.DataSet.FindField('IdLevel').Value := IdLevel;
             DataSourceDetail.DataSet.FindField('IdSpecialization').Value := IdSpecialization;
-            DataSourceDetail.DataSet.FindField('IdGroup').Value := IdGroup;
+            DataSourceDetail.DataSet.FindField('IdParallel').Value := IdParallel;
             DataSourceDetail.DataSet.Post;
           end;
         end;

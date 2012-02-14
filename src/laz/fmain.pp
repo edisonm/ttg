@@ -37,7 +37,7 @@ type
     MITeacher: TMenuItem;
     MISubject: TMenuItem;
     MISpecialization: TMenuItem;
-    MIGroup: TMenuItem;
+    MIParallel: TMenuItem;
     MILevel: TMenuItem;
     MIRoomType: TMenuItem;
     MIFile: TMenuItem;
@@ -70,7 +70,7 @@ type
     SIHour: TToolButton;
     SISpecialization: TToolButton;
     SILevel: TToolButton;
-    SIGroup: TToolButton;
+    SIParallel: TToolButton;
     SITeacher: TToolButton;
     SIRoomType: TToolButton;
     SITimeSlot: TToolButton;
@@ -98,7 +98,7 @@ type
     ActHour: TAction;
     ActSpecialization: TAction;
     ActLevel: TAction;
-    ActGroup: TAction;
+    ActParallel: TAction;
     ActTeacher: TAction;
     ActRoomType: TAction;
     ActTimeSlot: TAction;
@@ -134,7 +134,7 @@ type
     procedure ActSpecializationExecute(Sender: TObject);
     procedure ActLevelExecute(Sender: TObject);
     procedure ActRoomTypeExecute(Sender: TObject);
-    procedure ActGroupExecute(Sender: TObject);
+    procedure ActParallelExecute(Sender: TObject);
     procedure ActClassExecute(Sender: TObject);
     procedure ActDayExecute(Sender: TObject);
     procedure ActHourExecute(Sender: TObject);
@@ -162,7 +162,7 @@ type
     FDayForm,
     FLevelForm,
     FRoomTypeForm,
-    FGroupForm,
+    FParallelForm,
     FHourForm,
     FSpecializationForm: TSingleEditorForm;
     FTimeSlotForm: TCrossManyToManyEditor0Form;
@@ -307,13 +307,13 @@ begin
 					SourceDataModule.TbRoomType);
 end;
 
-procedure TMainForm.ActGroupExecute(Sender: TObject);
+procedure TMainForm.ActParallelExecute(Sender: TObject);
 begin
    TSingleEditorForm.ToggleSingleEditor(Self,
-					FGroupForm,
+					FParallelForm,
 					ConfigStorage,
-					ActGroup,
-					SourceDataModule.TbGroup);
+					ActParallel,
+					SourceDataModule.TbParallel);
 end;
 
 procedure TMainForm.ActDayExecute(Sender: TObject);

@@ -15,16 +15,16 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 56
     Top = 40
   end
-  object TbGroup: TZTable
+  object TbParallel: TZTable
     Tag = 1
     Connection = DbZConnection
-    TableName = 'Group'
-    IndexFieldNames = 'IdGroup'
+    TableName = 'Parallel'
+    IndexFieldNames = 'IdParallel'
     Left = 144
     Top = 60
   end
-  object DSGroup: TDataSource
-    DataSet = TbGroup
+  object DSParallel: TDataSource
+    DataSet = TbParallel
     Left = 152
     Top = 52
   end
@@ -97,7 +97,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 7
     Connection = DbZConnection
     TableName = 'Class'
-    IndexFieldNames = 'IdLevel;IdSpecialization;IdGroup'
+    IndexFieldNames = 'IdLevel;IdSpecialization;IdParallel'
     Left = 240
     Top = 144
   end
@@ -136,7 +136,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 10
     Connection = DbZConnection
     TableName = 'Distribution'
-    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdGroup'
+    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdParallel'
     Left = 48
     Top = 240
   end
@@ -149,7 +149,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 11
     Connection = DbZConnection
     TableName = 'JoinedClass'
-    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdGroup;IdLevel1;IdSpecialization1;IdGroup1'
+    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdParallel;IdLevel1;IdSpecialization1;IdParallel1'
     Left = 144
     Top = 252
   end
@@ -188,7 +188,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 14
     Connection = DbZConnection
     TableName = 'Assistance'
-    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdGroup;IdTeacher'
+    IndexFieldNames = 'IdSubject;IdLevel;IdSpecialization;IdParallel;IdTeacher'
     Left = 432
     Top = 240
   end
@@ -253,7 +253,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 19
     Connection = DbZConnection
     TableName = 'TimetableDetail'
-    IndexFieldNames = 'IdTimetable;IdSubject;IdLevel;IdSpecialization;IdGroup;IdDay;IdHour'
+    IndexFieldNames = 'IdTimetable;IdSubject;IdLevel;IdSpecialization;IdParallel;IdDay;IdHour'
     Left = 432
     Top = 336
   end

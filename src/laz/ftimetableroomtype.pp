@@ -21,13 +21,13 @@ type
     QuTimetableRoomTypeIdSubject: TLongintField;
     QuTimetableRoomTypeIdLevel: TLongintField;
     QuTimetableRoomTypeIdSpecialization: TLongintField;
-    QuTimetableRoomTypeIdGroup: TLongintField;
+    QuTimetableRoomTypeIdParallel: TLongintField;
     QuTimetableRoomTypeIdHour: TLongintField;
     QuTimetableRoomTypeIdDay: TLongintField;
     QuTimetableRoomTypeNaSubject: TStringField;
     QuTimetableRoomTypeAbLevel: TStringField;
     QuTimetableRoomTypeAbSpecialization: TStringField;
-    QuTimetableRoomTypeNaGroup: TStringField;
+    QuTimetableRoomTypeNaParallel: TStringField;
     QuTimetableRoomTypeName: TStringField;
     DSRoomType: TDataSource;
     DBGrid1: TDBGrid;
@@ -93,7 +93,7 @@ begin
   QuTimetableRoomTypeAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
   QuTimetableRoomTypeAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
-  QuTimetableRoomTypeNaGroup.DisplayLabel := SFlTimetableDetail_IdGroup;
+  QuTimetableRoomTypeNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuTimetableRoomTypeName.DisplayLabel := SFlRoomType_NaRoomType;
   QuRoomTypeAbRoomType.DisplayLabel := SFlDistribution_IdRoomType;
   QuRoomType.Open;

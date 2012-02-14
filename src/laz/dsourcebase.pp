@@ -29,8 +29,8 @@ type
     DbZConnection: TZConnection;
     TbLevel: TZTable;
     DSLevel: TDataSource;
-    TbGroup: TZTable;
-    DSGroup: TDataSource;
+    TbParallel: TZTable;
+    DSParallel: TDataSource;
     TbSpecialization: TZTable;
     DSSpecialization: TDataSource;
     TbDay: TZTable;
@@ -88,7 +88,7 @@ begin
   OnDestroy := DataModuleDestroy;
   SetLength(FTables, 20);
   Tables[0] := TbLevel;
-  Tables[1] := TbGroup;
+  Tables[1] := TbParallel;
   Tables[2] := TbSpecialization;
   Tables[3] := TbDay;
   Tables[4] := TbCourse;
@@ -110,7 +110,7 @@ begin
   with DataSetNameList do
   begin
     Add('TbLevel=Level');
-    Add('TbGroup=Group');
+    Add('TbParallel=Parallel');
     Add('TbSpecialization=Specialization');
     Add('TbDay=Day');
     Add('TbCourse=Course');
@@ -135,8 +135,8 @@ begin
     Add('TbLevel.IdLevel=' + SFlLevel_IdLevel);
     Add('TbLevel.NaLevel=' + SFlLevel_NaLevel);
     Add('TbLevel.AbLevel=' + SFlLevel_AbLevel);
-    Add('TbGroup.IdGroup=' + SFlGroup_IdGroup);
-    Add('TbGroup.NaGroup=' + SFlGroup_NaGroup);
+    Add('TbParallel.IdParallel=' + SFlParallel_IdParallel);
+    Add('TbParallel.NaParallel=' + SFlParallel_NaParallel);
     Add('TbSpecialization.IdSpecialization=' + SFlSpecialization_IdSpecialization);
     Add('TbSpecialization.NaSpecialization=' + SFlSpecialization_NaSpecialization);
     Add('TbSpecialization.AbSpecialization=' + SFlSpecialization_AbSpecialization);
@@ -153,7 +153,7 @@ begin
     Add('TbHour.Interval=' + SFlHour_Interval);
     Add('TbClass.IdLevel=' + SFlClass_IdLevel);
     Add('TbClass.IdSpecialization=' + SFlClass_IdSpecialization);
-    Add('TbClass.IdGroup=' + SFlClass_IdGroup);
+    Add('TbClass.IdParallel=' + SFlClass_IdParallel);
     Add('TbSubject.IdSubject=' + SFlSubject_IdSubject);
     Add('TbSubject.NaSubject=' + SFlSubject_NaSubject);
     Add('TbTeacher.IdTeacher=' + SFlTeacher_IdTeacher);
@@ -163,7 +163,7 @@ begin
     Add('TbDistribution.IdSubject=' + SFlDistribution_IdSubject);
     Add('TbDistribution.IdLevel=' + SFlDistribution_IdLevel);
     Add('TbDistribution.IdSpecialization=' + SFlDistribution_IdSpecialization);
-    Add('TbDistribution.IdGroup=' + SFlDistribution_IdGroup);
+    Add('TbDistribution.IdParallel=' + SFlDistribution_IdParallel);
     Add('TbDistribution.IdTeacher=' + SFlDistribution_IdTeacher);
     Add('TbDistribution.IdRoomType=' + SFlDistribution_IdRoomType);
     Add('TbDistribution.RoomCount=' + SFlDistribution_RoomCount);
@@ -171,10 +171,10 @@ begin
     Add('TbJoinedClass.IdSubject=' + SFlJoinedClass_IdSubject);
     Add('TbJoinedClass.IdLevel=' + SFlJoinedClass_IdLevel);
     Add('TbJoinedClass.IdSpecialization=' + SFlJoinedClass_IdSpecialization);
-    Add('TbJoinedClass.IdGroup=' + SFlJoinedClass_IdGroup);
+    Add('TbJoinedClass.IdParallel=' + SFlJoinedClass_IdParallel);
     Add('TbJoinedClass.IdLevel1=' + SFlJoinedClass_IdLevel1);
     Add('TbJoinedClass.IdSpecialization1=' + SFlJoinedClass_IdSpecialization1);
-    Add('TbJoinedClass.IdGroup1=' + SFlJoinedClass_IdGroup1);
+    Add('TbJoinedClass.IdParallel1=' + SFlJoinedClass_IdParallel1);
     Add('TbSubjectRestrictionType.IdSubjectRestrictionType=' + SFlSubjectRestrictionType_IdSubjectRestrictionType);
     Add('TbSubjectRestrictionType.NaSubjectRestrictionType=' + SFlSubjectRestrictionType_NaSubjectRestrictionType);
     Add('TbSubjectRestrictionType.ColSubjectRestrictionType=' + SFlSubjectRestrictionType_ColSubjectRestrictionType);
@@ -184,7 +184,7 @@ begin
     Add('TbAssistance.IdSubject=' + SFlAssistance_IdSubject);
     Add('TbAssistance.IdLevel=' + SFlAssistance_IdLevel);
     Add('TbAssistance.IdSpecialization=' + SFlAssistance_IdSpecialization);
-    Add('TbAssistance.IdGroup=' + SFlAssistance_IdGroup);
+    Add('TbAssistance.IdParallel=' + SFlAssistance_IdParallel);
     Add('TbAssistance.IdTeacher=' + SFlAssistance_IdTeacher);
     Add('TbTeacherRestrictionType.IdTeacherRestrictionType=' + SFlTeacherRestrictionType_IdTeacherRestrictionType);
     Add('TbTeacherRestrictionType.NaTeacherRestrictionType=' + SFlTeacherRestrictionType_NaTeacherRestrictionType);
@@ -206,7 +206,7 @@ begin
     Add('TbTimetableDetail.IdSubject=' + SFlTimetableDetail_IdSubject);
     Add('TbTimetableDetail.IdLevel=' + SFlTimetableDetail_IdLevel);
     Add('TbTimetableDetail.IdSpecialization=' + SFlTimetableDetail_IdSpecialization);
-    Add('TbTimetableDetail.IdGroup=' + SFlTimetableDetail_IdGroup);
+    Add('TbTimetableDetail.IdParallel=' + SFlTimetableDetail_IdParallel);
     Add('TbTimetableDetail.IdDay=' + SFlTimetableDetail_IdDay);
     Add('TbTimetableDetail.IdHour=' + SFlTimetableDetail_IdHour);
     Add('TbTimetableDetail.Session=' + SFlTimetableDetail_Session);
@@ -214,7 +214,7 @@ begin
   with DataSetDescList do
   begin
     Add('TbLevel=' + STbLevel);
-    Add('TbGroup=' + STbGroup);
+    Add('TbParallel=' + STbParallel);
     Add('TbSpecialization=' + STbSpecialization);
     Add('TbDay=' + STbDay);
     Add('TbCourse=' + STbCourse);

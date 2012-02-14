@@ -176,7 +176,7 @@ inherited TimetableClassForm: TTimetableClassForm
   end
   object QuTimetableClass: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable;IdLevel;IdSpecialization;IdGroup'
+    SortedFields = 'IdTimetable;IdLevel;IdSpecialization;IdParallel'
     AutoCalcFields = False
     OnCalcFields = QuTimetableClassCalcFields
     ReadOnly = True
@@ -185,7 +185,7 @@ inherited TimetableClassForm: TTimetableClassForm
       '  TimetableDetail.IdTimetable,'
       '  TimetableDetail.IdLevel,'
       '  TimetableDetail.IdSpecialization,'
-      '  TimetableDetail.IdGroup,'
+      '  TimetableDetail.IdParallel,'
       '  IdHour,'
       '  IdDay,'
       '  TimetableDetail.IdSubject,'
@@ -198,14 +198,14 @@ inherited TimetableClassForm: TTimetableClassForm
       '  (TimetableDetail.IdSubject = Distribution.IdSubject)'
       '  and (TimetableDetail.IdLevel = Distribution.IdLevel)'
       '  and (TimetableDetail.IdSpecialization = Distribution.IdSpecialization)'
-      '  and (TimetableDetail.IdGroup = Distribution.IdGroup))'
+      '  and (TimetableDetail.IdParallel = Distribution.IdParallel))'
       '  inner join Subject on (TimetableDetail.IdSubject = Subject.IdSubject))'
       '  inner join Teacher on (Distribution.IdTeacher = Teacher.IdTeacher)'
       'where'
       '  IdTimetable=:IdTimetable'
       'and TimetableDetail.IdLevel=:IdLevel'
       'and TimetableDetail.IdSpecialization=:IdSpecialization'
-      'and TimetableDetail.IdGroup=:IdGroup'
+      'and TimetableDetail.IdParallel=:IdParallel'
     )
     Params = <    
       item
@@ -225,14 +225,14 @@ inherited TimetableClassForm: TTimetableClassForm
       end    
       item
         DataType = ftUnknown
-        Name = 'IdGroup'
+        Name = 'IdParallel'
         ParamType = ptUnknown
       end>
     DataSource = DSClass
-    MasterFields = 'IdTimetable;IdLevel;IdSpecialization;IdGroup'
+    MasterFields = 'IdTimetable;IdLevel;IdSpecialization;IdParallel'
     MasterSource = DSClass
-    LinkedFields = 'IdTimetable;IdLevel;IdSpecialization;IdGroup'
-    IndexFieldNames = 'IdTimetable Asc;IdLevel Asc;IdSpecialization Asc;IdGroup Asc'
+    LinkedFields = 'IdTimetable;IdLevel;IdSpecialization;IdParallel'
+    IndexFieldNames = 'IdTimetable Asc;IdLevel Asc;IdSpecialization Asc;IdParallel Asc'
     left = 60
     top = 104
     ParamData = <    
@@ -253,7 +253,7 @@ inherited TimetableClassForm: TTimetableClassForm
       end    
       item
         DataType = ftUnknown
-        Name = 'IdGroup'
+        Name = 'IdParallel'
         ParamType = ptUnknown
       end>
     object QuTimetableClassIdTimetable: TLongintField
@@ -288,10 +288,10 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableClassIdGroup: TLongintField
+    object QuTimetableClassIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdGroup'
+      FieldName = 'IdParallel'
       Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -403,24 +403,24 @@ inherited TimetableClassForm: TTimetableClassForm
       '  Timetable.IdTimetable,'
       '  Class.IdLevel,'
       '  Class.IdSpecialization,'
-      '  Class.IdGroup,'
+      '  Class.IdParallel,'
       '  AbLevel,'
       '  AbSpecialization,'
-      '  NaGroup'
+      '  NaParallel'
       'from'
       '  ((Class inner join Level on'
       '    (Class.IdLevel=Level.IdLevel))'
       '    inner join Specialization on'
       '    (Class.IdSpecialization=Specialization.IdSpecialization))'
-      '    inner join Group on'
-      '    (Class.IdGroup=Group.IdGroup),'
+      '    inner join Parallel on'
+      '    (Class.IdParallel=Parallel.IdParallel),'
       '  Timetable'
       'where'
       '  Timetable.IdTimetable=:IdTimetable'
       'order by'
       '  Class.IdLevel,'
       '  Class.IdSpecialization,'
-      '  Class.IdGroup'
+      '  Class.IdParallel'
     )
     Params = <    
       item
@@ -473,10 +473,10 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = False
       Visible = False
     end
-    object QuClassIdGroup: TLongintField
+    object QuClassIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdGroup'
+      FieldName = 'IdParallel'
       Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -508,10 +508,10 @@ inherited TimetableClassForm: TTimetableClassForm
       Visible = False
       Size = 10
     end
-    object QuClassNaGroup: TStringField
+    object QuClassNaParallel: TStringField
       DisplayWidth = 5
       FieldKind = fkData
-      FieldName = 'NaGroup'
+      FieldName = 'NaParallel'
       Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

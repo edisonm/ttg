@@ -22,7 +22,7 @@ type
     QuTimetableClassIdSubject: TLongintField;
     QuTimetableClassIdLevel: TLongintField;
     QuTimetableClassIdSpecialization: TLongintField;
-    QuTimetableClassIdGroup: TLongintField;
+    QuTimetableClassIdParallel: TLongintField;
     QuTimetableClassIdHour: TLongintField;
     QuTimetableClassIdDay: TLongintField;
     QuTimetableClassIdTeacher: TLongintField;
@@ -33,10 +33,10 @@ type
     QuClassIdTimetable: TLongintField;
     QuClassIdLevel: TLongintField;
     QuClassIdSpecialization: TLongintField;
-    QuClassIdGroup: TLongintField;
+    QuClassIdParallel: TLongintField;
     QuClassAbLevel: TStringField;
     QuClassAbSpecialization: TStringField;
-    QuClassNaGroup: TStringField;
+    QuClassNaParallel: TStringField;
     QuTimetableClassIdTimetable: TLongintField;
     QuTimetableClassLnTeacher: TStringField;
     QuTimetableClassNaTeacher: TStringField;
@@ -100,7 +100,7 @@ begin
     QuClass.FindField('IdTimetable').AsInteger,
     QuClass.FindField('AbLevel').AsString,
     QuClass.FindField('AbSpecialization').AsString,
-    QuClass.FindField('NaGroup').AsString]);
+    QuClass.FindField('NaParallel').AsString]);
   FName := MasterDataModule.StringsShowClass.Values[cbxShowClass.Text];
   with SourceDataModule do
     ShowEditor(TbDay, TbHour, QuTimetableClass, TbTimeSlot, 'IdDay', 'NaDay',
@@ -181,7 +181,7 @@ begin
         TbTimetable.FindField('IdTimetable').AsInteger,
         QuClass.FindField('IdLevel').AsInteger,
         QuClass.FindField('IdSpecialization').AsInteger,
-        QuClass.FindField('IdGroup').AsInteger,
+        QuClass.FindField('IdParallel').AsInteger,
         IdDay, IdHour, iIdDay, iIdHour);
     QuTimetableClass.Refresh;
     btnShowClick(nil);
@@ -198,7 +198,7 @@ end;
 procedure TTimetableClassForm.QuClassCalcFields(DataSet: TDataSet);
 begin
   inherited;
-  DataSet['NaClass'] := VarArrToStr(DataSet['AbLevel;AbSpecialization;NaGroup'], ' ');
+  DataSet['NaClass'] := VarArrToStr(DataSet['AbLevel;AbSpecialization;NaParallel'], ' ');
 end;
 
 procedure TTimetableClassForm.DSClassDataChange(Sender: TObject;

@@ -314,21 +314,21 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       '  TimetableDetail.IdHour,'
       '  Level.IdLevel,'
       '  Specialization.IdSpecialization,'
-      '  Group.IdGroup,'
+      '  Parallel.IdParallel,'
       '  Subject.NaSubject,'
       '  AbLevel,'
       '  AbSpecialization,'
-      '  NaGroup'
+      '  NaParallel'
       'FROM'
       '  ((((TimetableDetail'
       '  INNER JOIN Distribution'
       '   ON (TimetableDetail.IdSubject=Distribution.IdSubject)'
       '  AND (TimetableDetail.IdLevel=Distribution.IdLevel)'
       '  AND (TimetableDetail.IdSpecialization=Distribution.IdSpecialization)'
-      '  AND (TimetableDetail.IdGroup=Distribution.IdGroup))'
+      '  AND (TimetableDetail.IdParallel=Distribution.IdParallel))'
       '  INNER JOIN Level ON TimetableDetail.IdLevel=Level.IdLevel)'
       '  INNER JOIN Specialization ON TimetableDetail.IdSpecialization=Specialization.IdSpecialization)'
-      '  INNER JOIN Group ON Distribution.IdGroup=Group.IdGroup)'
+      '  INNER JOIN Parallel ON Distribution.IdParallel=Parallel.IdParallel)'
       '  INNER JOIN Subject ON Distribution.IdSubject=Subject.IdSubject'
       'WHERE (Distribution.IdRoomType=:IdRoomType)'
       '  AND (TimetableDetail.IdTimetable=:IdTimetable)'
@@ -336,7 +336,7 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       '  TimetableDetail.IdHour,'
       '  Level.IdLevel,'
       '  Specialization.IdSpecialization,'
-      '  Group.IdGroup,'
+      '  Parallel.IdParallel,'
       '  Subject.NaSubject'
     )
     Params = <    
@@ -443,10 +443,10 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       Required = True
       Visible = False
     end
-    object QuTimetableRoomTypeIdGroup: TLongintField
+    object QuTimetableRoomTypeIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdGroup'
+      FieldName = 'IdParallel'
       Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -487,10 +487,10 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       Required = False
       Size = 10
     end
-    object QuTimetableRoomTypeNaGroup: TStringField
+    object QuTimetableRoomTypeNaParallel: TStringField
       DisplayWidth = 5
       FieldKind = fkData
-      FieldName = 'NaGroup'
+      FieldName = 'NaParallel'
       Index = 11
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

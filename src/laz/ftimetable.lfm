@@ -604,7 +604,7 @@ inherited TimetableForm: TTimetableForm
       '        TimetableDetail.IdSubject=Distribution.IdSubject'
       '    AND TimetableDetail.IdLevel=Distribution.IdLevel'
       '    AND TimetableDetail.IdSpecialization=Distribution.IdSpecialization'
-      '    AND TimetableDetail.IdGroup=Distribution.IdGroup)'
+      '    AND TimetableDetail.IdParallel=Distribution.IdParallel)'
       '  INNER JOIN RoomType on RoomType.IdRoomType=Distribution.IdRoomType'
       'WHERE'
       '  TimetableDetail.IdTimetable=:IdTimetable'
@@ -770,14 +770,14 @@ inherited TimetableForm: TTimetableForm
       '  TimetableDetail.IdHour,'
       '  TimetableDetail.IdLevel,'
       '  TimetableDetail.IdSpecialization,'
-      '  TimetableDetail.IdGroup,'
+      '  TimetableDetail.IdParallel,'
       '  Subject.NaSubject'
       'FROM'
       '  (TimetableDetail INNER JOIN Distribution ON'
       '        TimetableDetail.IdSubject=Distribution.IdSubject'
       '    AND TimetableDetail.IdLevel=Distribution.IdLevel'
       '    AND TimetableDetail.IdSpecialization=Distribution.IdSpecialization'
-      '    AND TimetableDetail.IdGroup=Distribution.IdGroup)'
+      '    AND TimetableDetail.IdParallel=Distribution.IdParallel)'
       '  INNER JOIN Subject ON TimetableDetail.IdSubject=Subject.IdSubject'
       'WHERE (TimetableDetail.IdTimetable=:IdTimetable)'
       '  AND (TimetableDetail.IdDay=:IdDay)'
@@ -786,7 +786,7 @@ inherited TimetableForm: TTimetableForm
       'ORDER BY'
       '  TimetableDetail.IdLevel,'
       '  TimetableDetail.IdSpecialization,'
-      '  TimetableDetail.IdGroup,'
+      '  TimetableDetail.IdParallel,'
       '  Subject.NaSubject'
     )
     Params = <    
@@ -904,10 +904,10 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashRoomDetailIdGroup: TLongintField
+    object QuClashRoomDetailIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdGroup'
+      FieldName = 'IdParallel'
       Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -955,16 +955,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuClashRoomDetailNaGroup: TStringField
+    object QuClashRoomDetailNaParallel: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroup'
+      FieldName = 'NaParallel'
       Index = 10
-      KeyFields = 'IdGroup'
+      KeyFields = 'IdParallel'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroup
-      LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroup'
+      LookupDataSet = SourceDataModule.TbParallel
+      LookupKeyFields = 'IdParallel'
+      LookupResultField = 'NaParallel'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
@@ -978,7 +978,7 @@ inherited TimetableForm: TTimetableForm
   end
   object QuClashTeacherDetail: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable;IdTeacher;IdDay;IdHour;IdLevel;IdSpecialization;IdGroup;NaSubject'
+    SortedFields = 'IdTimetable;IdTeacher;IdDay;IdHour;IdLevel;IdSpecialization;IdParallel;NaSubject'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
@@ -989,13 +989,13 @@ inherited TimetableForm: TTimetableForm
       '  TimetableDetail.IdHour,'
       '  Distribution.IdLevel,'
       '  Distribution.IdSpecialization,'
-      '  Distribution.IdGroup,'
+      '  Distribution.IdParallel,'
       '  Distribution.IdSubject'
       'FROM Distribution'
       '  INNER JOIN TimetableDetail'
       '   ON (Distribution.IdLevel = TimetableDetail.IdLevel)'
       '  AND (Distribution.IdSpecialization = TimetableDetail.IdSpecialization)'
-      '  AND (Distribution.IdGroup = TimetableDetail.IdGroup)'
+      '  AND (Distribution.IdParallel = TimetableDetail.IdParallel)'
       '  AND (Distribution.IdSubject = TimetableDetail.IdSubject)'
       'WHERE TimetableDetail.IdTimetable=:IdTimetable'
       '  AND Distribution.IdTeacher=:IdTeacher'
@@ -1027,7 +1027,7 @@ inherited TimetableForm: TTimetableForm
     MasterFields = 'IdTimetable;IdTeacher;IdDay;IdHour'
     MasterSource = DSClashTeacher
     LinkedFields = 'IdTimetable;IdTeacher;IdDay;IdHour'
-    IndexFieldNames = 'IdTimetable Asc;IdTeacher Asc;IdDay Asc;IdHour Asc;IdLevel Asc;IdSpecialization Asc;IdGroup Asc;NaSubject Asc'
+    IndexFieldNames = 'IdTimetable Asc;IdTeacher Asc;IdDay Asc;IdHour Asc;IdLevel Asc;IdSpecialization Asc;IdParallel Asc;NaSubject Asc'
     left = 423
     top = 160
     ParamData = <    
@@ -1117,10 +1117,10 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashTeacherDetailIdGroup: TLongintField
+    object QuClashTeacherDetailIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdGroup'
+      FieldName = 'IdParallel'
       Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1169,16 +1169,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuClashTeacherDetailNaGroup: TStringField
+    object QuClashTeacherDetailNaParallel: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroup'
+      FieldName = 'NaParallel'
       Index = 10
-      KeyFields = 'IdGroup'
+      KeyFields = 'IdParallel'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroup
-      LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroup'
+      LookupDataSet = SourceDataModule.TbParallel
+      LookupKeyFields = 'IdParallel'
+      LookupResultField = 'NaParallel'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
@@ -1220,7 +1220,7 @@ inherited TimetableForm: TTimetableForm
       '       (Distribution.IdSubject = TimetableDetail.IdSubject)'
       #9' AND (Distribution.IdLevel = TimetableDetail.IdLevel)'
       #9' AND (Distribution.IdSpecialization = TimetableDetail.IdSpecialization)'
-      #9' AND (Distribution.IdGroup = TimetableDetail.IdGroup))'
+      #9' AND (Distribution.IdParallel = TimetableDetail.IdParallel))'
       '  INNER JOIN Teacher ON Distribution.IdTeacher = Teacher.IdTeacher'
       'WHERE TimetableDetail.IdTimetable=:IdTimetable'
       'GROUP BY'
@@ -1377,7 +1377,7 @@ inherited TimetableForm: TTimetableForm
       '    ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
       '    AND (TimetableDetail.IdLevel=TimetableDetail1.IdLevel)'
       '    AND (TimetableDetail.IdSpecialization=TimetableDetail1.IdSpecialization)'
-      '    AND (TimetableDetail.IdGroup=TimetableDetail1.IdGroup)'
+      '    AND (TimetableDetail.IdParallel=TimetableDetail1.IdParallel)'
       '    AND (TimetableDetail.IdDay=TimetableDetail1.IdDay)'
       '    AND (TimetableDetail.IdSubject=TimetableDetail1.IdSubject))'
       '  INNER JOIN Subject'
@@ -1440,7 +1440,7 @@ inherited TimetableForm: TTimetableForm
   end
   object QuClashSubjectDetail: TZQuery[12]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable;IdSubject;IdLevel;IdSpecialization;IdGroup;IdDay;IdHour'
+    SortedFields = 'IdTimetable;IdSubject;IdLevel;IdSpecialization;IdParallel;IdDay;IdHour'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
@@ -1449,7 +1449,7 @@ inherited TimetableForm: TTimetableForm
       '  TimetableDetail.IdSubject,'
       '  TimetableDetail.IdLevel,'
       '  TimetableDetail.IdSpecialization,'
-      '  TimetableDetail.IdGroup,'
+      '  TimetableDetail.IdParallel,'
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour'
       'FROM'
@@ -1458,7 +1458,7 @@ inherited TimetableForm: TTimetableForm
       '     ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
       '    AND (TimetableDetail.IdLevel=TimetableDetail1.IdLevel)'
       '    AND (TimetableDetail.IdSpecialization=TimetableDetail1.IdSpecialization)'
-      '    AND (TimetableDetail.IdGroup=TimetableDetail1.IdGroup)'
+      '    AND (TimetableDetail.IdParallel=TimetableDetail1.IdParallel)'
       '    AND (TimetableDetail.IdDay=TimetableDetail1.IdDay)'
       '    AND (TimetableDetail.IdSubject=TimetableDetail1.IdSubject)'
       'WHERE (TimetableDetail.Session<>TimetableDetail1.Session)'
@@ -1480,7 +1480,7 @@ inherited TimetableForm: TTimetableForm
     MasterFields = 'IdTimetable;IdSubject'
     MasterSource = DSClashSubject
     LinkedFields = 'IdTimetable;IdSubject'
-    IndexFieldNames = 'IdTimetable Asc;IdSubject Asc;IdLevel Asc;IdSpecialization Asc;IdGroup Asc;IdDay Asc;IdHour Asc'
+    IndexFieldNames = 'IdTimetable Asc;IdSubject Asc;IdLevel Asc;IdSpecialization Asc;IdParallel Asc;IdDay Asc;IdHour Asc'
     left = 541
     top = 160
     ParamData = <    
@@ -1538,10 +1538,10 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashSubjectDetailIdGroup: TLongintField
+    object QuClashSubjectDetailIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdGroup'
+      FieldName = 'IdParallel'
       Index = 4
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1601,16 +1601,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuClashSubjectDetailNaGroup: TStringField
+    object QuClashSubjectDetailNaParallel: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroup'
+      FieldName = 'NaParallel'
       Index = 9
-      KeyFields = 'IdGroup'
+      KeyFields = 'IdParallel'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroup
-      LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroup'
+      LookupDataSet = SourceDataModule.TbParallel
+      LookupKeyFields = 'IdParallel'
+      LookupResultField = 'NaParallel'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
@@ -1661,7 +1661,7 @@ inherited TimetableForm: TTimetableForm
       '  SubjectRestriction.IdHour,'
       '  TimetableDetail.IdLevel,'
       '  TimetableDetail.IdSpecialization,'
-      '  TimetableDetail.IdGroup'
+      '  TimetableDetail.IdParallel'
       'FROM'
       '  ((TimetableDetail INNER JOIN SubjectRestriction'
       '  ON (TimetableDetail.IdSubject=SubjectRestriction.IdSubject)'
@@ -1786,10 +1786,10 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuTimetableDetailSubjectRestrictionIdGroup: TLongintField
+    object QuTimetableDetailSubjectRestrictionIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdGroup'
+      FieldName = 'IdParallel'
       Index = 8
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1857,16 +1857,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuTimetableDetailSubjectRestrictionNaGroup: TStringField
+    object QuTimetableDetailSubjectRestrictionNaParallel: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroup'
+      FieldName = 'NaParallel'
       Index = 13
-      KeyFields = 'IdGroup'
+      KeyFields = 'IdParallel'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroup
-      LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroup'
+      LookupDataSet = SourceDataModule.TbParallel
+      LookupKeyFields = 'IdParallel'
+      LookupResultField = 'NaParallel'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
@@ -1888,13 +1888,13 @@ inherited TimetableForm: TTimetableForm
       '  TeacherRestriction.IdHour,'
       '  Distribution.IdLevel,'
       '  Distribution.IdSpecialization,'
-      '  Distribution.IdGroup'
+      '  Distribution.IdParallel'
       'FROM'
       '  ((TimetableDetail INNER JOIN Distribution'
       '  ON (TimetableDetail.IdSubject=Distribution.IdSubject)'
       '  AND (TimetableDetail.IdLevel=Distribution.IdLevel)'
       '  AND (TimetableDetail.IdSpecialization=Distribution.IdSpecialization)'
-      '  AND (TimetableDetail.IdGroup=Distribution.IdGroup))'
+      '  AND (TimetableDetail.IdParallel=Distribution.IdParallel))'
       '  INNER JOIN TeacherRestriction'
       '  ON (TeacherRestriction.IdDay=TimetableDetail.IdDay)'
       '  AND (TeacherRestriction.IdHour=TimetableDetail.IdHour)'
@@ -2015,10 +2015,10 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuTimetableDetailTeacherRestrictionIdGroup: TLongintField
+    object QuTimetableDetailTeacherRestrictionIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdGroup'
+      FieldName = 'IdParallel'
       Index = 8
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -2101,16 +2101,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuTimetableDetailTeacherRestrictionNaGroup: TStringField
+    object QuTimetableDetailTeacherRestrictionNaParallel: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroup'
+      FieldName = 'NaParallel'
       Index = 14
-      KeyFields = 'IdGroup'
+      KeyFields = 'IdParallel'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroup
-      LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroup'
+      LookupDataSet = SourceDataModule.TbParallel
+      LookupKeyFields = 'IdParallel'
+      LookupResultField = 'NaParallel'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
@@ -2119,7 +2119,7 @@ inherited TimetableForm: TTimetableForm
   end
   object QuSubjectCutDay: TZQuery[15]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable;NaSubject;IdLevel;IdSpecialization;IdGroup;IdDay;IdHour'
+    SortedFields = 'IdTimetable;NaSubject;IdLevel;IdSpecialization;IdParallel;IdDay;IdHour'
     AutoCalcFields = False
     AfterScroll = QuClashSubjectAfterScroll
     ReadOnly = True
@@ -2128,7 +2128,7 @@ inherited TimetableForm: TTimetableForm
       '  TimetableDetail.IdTimetable,'
       '  TimetableDetail.IdLevel,'
       '  TimetableDetail.IdSpecialization,'
-      '  TimetableDetail.IdGroup,'
+      '  TimetableDetail.IdParallel,'
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour,'
       '  TimetableDetail.IdSubject'
@@ -2137,7 +2137,7 @@ inherited TimetableForm: TTimetableForm
       '  INNER JOIN TimetableDetail TimetableDetail1'
       '    ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
       '    AND (TimetableDetail.IdLevel=TimetableDetail1.IdLevel)'
-      '    AND (TimetableDetail.IdGroup=TimetableDetail1.IdGroup)'
+      '    AND (TimetableDetail.IdParallel=TimetableDetail1.IdParallel)'
       '    AND (TimetableDetail.Session=TimetableDetail1.Session)'
       '    AND (TimetableDetail.IdSubject=TimetableDetail1.IdSubject)'
       'WHERE (TimetableDetail.IdTimetable=:IdTimetable)'
@@ -2153,7 +2153,7 @@ inherited TimetableForm: TTimetableForm
     MasterFields = 'IdTimetable'
     MasterSource = SourceDataModule.DSTimetable
     LinkedFields = 'IdTimetable'
-    IndexFieldNames = 'IdTimetable Asc;NaSubject Asc;IdLevel Asc;IdSpecialization Asc;IdGroup Asc;IdDay Asc;IdHour Asc'
+    IndexFieldNames = 'IdTimetable Asc;NaSubject Asc;IdLevel Asc;IdSpecialization Asc;IdParallel Asc;IdDay Asc;IdHour Asc'
     left = 544
     top = 212
     ParamData = <    
@@ -2194,10 +2194,10 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuSubjectCutDayIdGroup: TLongintField
+    object QuSubjectCutDayIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdGroup'
+      FieldName = 'IdParallel'
       Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -2268,16 +2268,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuSubjectCutDayNaGroup: TStringField
+    object QuSubjectCutDayNaParallel: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroup'
+      FieldName = 'NaParallel'
       Index = 9
-      KeyFields = 'IdGroup'
+      KeyFields = 'IdParallel'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroup
-      LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroup'
+      LookupDataSet = SourceDataModule.TbParallel
+      LookupKeyFields = 'IdParallel'
+      LookupResultField = 'NaParallel'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
@@ -2353,7 +2353,7 @@ inherited TimetableForm: TTimetableForm
       '    INNER JOIN TimetableDetail TimetableDetail1'
       '      ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
       '      AND (TimetableDetail.IdLevel=TimetableDetail1.IdLevel)'
-      '      AND (TimetableDetail.IdGroup=TimetableDetail1.IdGroup)'
+      '      AND (TimetableDetail.IdParallel=TimetableDetail1.IdParallel)'
       '      AND (TimetableDetail.Session=TimetableDetail1.Session)'
       '      AND (TimetableDetail.IdSubject=TimetableDetail1.IdSubject)'
       '      AND (TimetableDetail.IdDay=TimetableDetail1.IdDay)'
@@ -2448,7 +2448,7 @@ inherited TimetableForm: TTimetableForm
   end
   object QuSubjectCutHourDetail: TZQuery[17]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable;IdDay;IdHour;IdLevel;IdSpecialization;IdGroup'
+    SortedFields = 'IdTimetable;IdDay;IdHour;IdLevel;IdSpecialization;IdParallel'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
@@ -2456,7 +2456,7 @@ inherited TimetableForm: TTimetableForm
       '  TimetableDetail.IdTimetable,'
       '  TimetableDetail.IdLevel,'
       '  TimetableDetail.IdSpecialization,'
-      '  TimetableDetail.IdGroup,'
+      '  TimetableDetail.IdParallel,'
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour,'
       '  TimetableDetail1.IdHour as IdHour0,'
@@ -2466,7 +2466,7 @@ inherited TimetableForm: TTimetableForm
       '  INNER JOIN TimetableDetail TimetableDetail1'
       '    ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
       '    AND (TimetableDetail.IdLevel=TimetableDetail1.IdLevel)'
-      '    AND (TimetableDetail.IdGroup=TimetableDetail1.IdGroup)'
+      '    AND (TimetableDetail.IdParallel=TimetableDetail1.IdParallel)'
       '    AND (TimetableDetail.Session=TimetableDetail1.Session)'
       '    AND (TimetableDetail.IdSubject=TimetableDetail1.IdSubject)'
       '    AND (TimetableDetail.IdDay=TimetableDetail1.IdDay)'
@@ -2498,7 +2498,7 @@ inherited TimetableForm: TTimetableForm
       'SELECT DISTINCT'
       '  TimetableDetail.IdLevel,'
       '  TimetableDetail.IdSpecialization,'
-      '  TimetableDetail.IdGroup,'
+      '  TimetableDetail.IdParallel,'
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour,'
       '  TimetableDetail.IdSubject'
@@ -2507,7 +2507,7 @@ inherited TimetableForm: TTimetableForm
       '  INNER JOIN TimetableDetail TimetableDetail1'
       '    ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
       '    AND (TimetableDetail.IdLevel=TimetableDetail1.IdLevel)'
-      '    AND (TimetableDetail.IdGroup=TimetableDetail1.IdGroup)'
+      '    AND (TimetableDetail.IdParallel=TimetableDetail1.IdParallel)'
       '    AND (TimetableDetail.Session=TimetableDetail1.Session)'
       '    AND (TimetableDetail.IdSubject=TimetableDetail1.IdSubject)'
       '    AND (TimetableDetail.IdDay=TimetableDetail1.IdDay)'
@@ -2521,7 +2521,7 @@ inherited TimetableForm: TTimetableForm
     MasterFields = 'IdTimetable;IdDay;IdHour'
     MasterSource = DSSubjectCutHour
     LinkedFields = 'IdTimetable;IdDay;IdHour'
-    IndexFieldNames = 'IdTimetable Asc;IdDay Asc;IdHour Asc;IdLevel Asc;IdSpecialization Asc;IdGroup Asc'
+    IndexFieldNames = 'IdTimetable Asc;IdDay Asc;IdHour Asc;IdLevel Asc;IdSpecialization Asc;IdParallel Asc'
     left = 184
     top = 161
     ParamData = <    
@@ -2573,10 +2573,10 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuSubjectCutHourDetailIdGroup: TLongintField
+    object QuSubjectCutHourDetailIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdGroup'
+      FieldName = 'IdParallel'
       Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -2658,16 +2658,16 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuSubjectCutHourDetailNaGroup: TStringField
+    object QuSubjectCutHourDetailNaParallel: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaGroup'
+      FieldName = 'NaParallel'
       Index = 10
-      KeyFields = 'IdGroup'
+      KeyFields = 'IdParallel'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbGroup
-      LookupKeyFields = 'IdGroup'
-      LookupResultField = 'NaGroup'
+      LookupDataSet = SourceDataModule.TbParallel
+      LookupKeyFields = 'IdParallel'
+      LookupResultField = 'NaParallel'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False

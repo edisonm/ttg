@@ -24,13 +24,13 @@ uses
 resourcestring
 
   STbLevel = 'Levels';
-  STbGroup = 'Group Identifiers';
+  STbParallel = 'Parallel Identifiers';
   STbSpecialization = 'Specializations';
   STbDay = 'Working Days';
   STbCourse = 'Courses';
   STbRoomType = 'Types of Room';
   STbHour = 'Academic Hours';
-  STbClass = 'Groups';
+  STbClass = 'Parallels';
   STbSubject = 'Subjects';
   STbTeacher = 'Teachers';
   STbDistribution = 'Distribution of Workload';
@@ -47,8 +47,8 @@ resourcestring
   SFlLevel_IdLevel = 'Id';
   SFlLevel_NaLevel = 'Name';
   SFlLevel_AbLevel = 'Abbreviation';
-  SFlGroup_IdGroup = 'Id';
-  SFlGroup_NaGroup = 'Name';
+  SFlParallel_IdParallel = 'Id';
+  SFlParallel_NaParallel = 'Name';
   SFlSpecialization_IdSpecialization = 'Id';
   SFlSpecialization_NaSpecialization = 'Name';
   SFlSpecialization_AbSpecialization = 'Abbreviation';
@@ -65,7 +65,7 @@ resourcestring
   SFlHour_Interval = 'Interval';
   SFlClass_IdLevel = 'Level';
   SFlClass_IdSpecialization = 'Specialization';
-  SFlClass_IdGroup = 'Group';
+  SFlClass_IdParallel = 'Parallel';
   SFlSubject_IdSubject = 'Id';
   SFlSubject_NaSubject = 'Name';
   SFlTeacher_IdTeacher = 'Id';
@@ -75,7 +75,7 @@ resourcestring
   SFlDistribution_IdSubject = 'Subject';
   SFlDistribution_IdLevel = 'Level';
   SFlDistribution_IdSpecialization = 'Specialization';
-  SFlDistribution_IdGroup = 'Group';
+  SFlDistribution_IdParallel = 'Parallel';
   SFlDistribution_IdTeacher = 'Teacher';
   SFlDistribution_IdRoomType = 'Room Type';
   SFlDistribution_RoomCount = 'Room Count';
@@ -83,10 +83,10 @@ resourcestring
   SFlJoinedClass_IdSubject = 'Subject';
   SFlJoinedClass_IdLevel = 'Level';
   SFlJoinedClass_IdSpecialization = 'Specialization';
-  SFlJoinedClass_IdGroup = 'Group';
+  SFlJoinedClass_IdParallel = 'Parallel';
   SFlJoinedClass_IdLevel1 = 'Level';
   SFlJoinedClass_IdSpecialization1 = 'Specialization';
-  SFlJoinedClass_IdGroup1 = 'Group';
+  SFlJoinedClass_IdParallel1 = 'Parallel';
   SFlSubjectRestrictionType_IdSubjectRestrictionType = 'Id';
   SFlSubjectRestrictionType_NaSubjectRestrictionType = 'Name';
   SFlSubjectRestrictionType_ColSubjectRestrictionType = 'Color';
@@ -96,7 +96,7 @@ resourcestring
   SFlAssistance_IdSubject = 'Subject';
   SFlAssistance_IdLevel = 'Level';
   SFlAssistance_IdSpecialization = 'Specialization';
-  SFlAssistance_IdGroup = 'Group';
+  SFlAssistance_IdParallel = 'Parallel';
   SFlAssistance_IdTeacher = 'Assistant';
   SFlTeacherRestrictionType_IdTeacherRestrictionType = 'Id';
   SFlTeacherRestrictionType_NaTeacherRestrictionType = 'Name';
@@ -118,7 +118,7 @@ resourcestring
   SFlTimetableDetail_IdSubject = 'Subject';
   SFlTimetableDetail_IdLevel = 'Level';
   SFlTimetableDetail_IdSpecialization = 'Specialization';
-  SFlTimetableDetail_IdGroup = 'Group';
+  SFlTimetableDetail_IdParallel = 'Parallel';
   SFlTimetableDetail_IdDay = 'Day';
   SFlTimetableDetail_IdHour = 'Hour';
   SFlTimetableDetail_Session = 'Session';

@@ -14,10 +14,10 @@ CREATE TABLE IF NOT EXISTS `Level`(
     `NaLevel` varchar(15) NOT NULL UNIQUE /* Level Name */,
     `AbLevel` varchar(5) UNIQUE /* Level Abbreviation */
 ); /* Levels */
-CREATE TABLE IF NOT EXISTS `Group`(
-    `IdGroup` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Group Id */,
-    `NaGroup` varchar(5) NOT NULL UNIQUE /* Name of Group */
-); /* Group Identifiers */
+CREATE TABLE IF NOT EXISTS `Parallel`(
+    `IdParallel` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Parallel Id */,
+    `NaParallel` varchar(5) NOT NULL UNIQUE /* Name of Parallel */
+); /* Parallel Identifiers */
 CREATE TABLE IF NOT EXISTS `Specialization`(
     `IdSpecialization` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Specialization Id */,
     `NaSpecialization` varchar(20) NOT NULL UNIQUE /* Specialization Name */,
@@ -50,13 +50,13 @@ CREATE TABLE IF NOT EXISTS `Hour`(
 CREATE TABLE IF NOT EXISTS `Class`(
     `IdLevel` integer NOT NULL /* Level */,
     `IdSpecialization` integer NOT NULL /* Specialization */,
-    `IdGroup` integer NOT NULL /* Group */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdLevel`,`IdSpecialization`,`IdGroup`),
+    `IdParallel` integer NOT NULL /* Parallel */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdLevel`,`IdSpecialization`,`IdParallel`),
   CONSTRAINT `CourseClass` FOREIGN KEY (`IdLevel`,`IdSpecialization`)
     REFERENCES `Course`(`IdLevel`,`IdSpecialization`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `GroupClass` FOREIGN KEY (`IdGroup`)
-    REFERENCES `Group`(`IdGroup`) ON UPDATE RESTRICT ON DELETE RESTRICT
-); /* Groups */
+  CONSTRAINT `ParallelClass` FOREIGN KEY (`IdParallel`)
+    REFERENCES `Parallel`(`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT
+); /* Parallels */
 CREATE TABLE IF NOT EXISTS `Subject`(
     `IdSubject` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Subject Id */,
     `NaSubject` varchar(20) NOT NULL UNIQUE /* Subject Name */
@@ -73,14 +73,14 @@ CREATE TABLE IF NOT EXISTS `Distribution`(
     `IdSubject` integer NOT NULL /* Subject Id */,
     `IdLevel` integer NOT NULL /* Level Id */,
     `IdSpecialization` integer NOT NULL /* Specialization Id */,
-    `IdGroup` integer NOT NULL /* Group Id */,
+    `IdParallel` integer NOT NULL /* Parallel Id */,
     `IdTeacher` integer NOT NULL /* Teacher Id */,
     `IdRoomType` integer NOT NULL /* Room Type Id */,
     `RoomCount` integer /* Number of classrooms needed */,
     `Composition` varchar(40) NOT NULL /* Composition of the Slots for the Subject */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdSubject`,`IdLevel`,`IdSpecialization`,`IdGroup`),
-  CONSTRAINT `ClassDistribution` FOREIGN KEY (`IdLevel`,`IdSpecialization`,`IdGroup`)
-    REFERENCES `Class`(`IdLevel`,`IdSpecialization`,`IdGroup`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdSubject`,`IdLevel`,`IdSpecialization`,`IdParallel`),
+  CONSTRAINT `ClassDistribution` FOREIGN KEY (`IdLevel`,`IdSpecialization`,`IdParallel`)
+    REFERENCES `Class`(`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `RoomTypeDistribution` FOREIGN KEY (`IdRoomType`)
     REFERENCES `RoomType`(`IdRoomType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `SubjectDistribution` FOREIGN KEY (`IdSubject`)
@@ -92,15 +92,15 @@ CREATE TABLE IF NOT EXISTS `JoinedClass`(
     `IdSubject` integer NOT NULL /* Subject Id */,
     `IdLevel` integer NOT NULL /* Level Id */,
     `IdSpecialization` integer NOT NULL /* Specialization Id */,
-    `IdGroup` integer NOT NULL /* Group Id */,
+    `IdParallel` integer NOT NULL /* Parallel Id */,
     `IdLevel1` integer NOT NULL /* Level Id of Joined Class */,
     `IdSpecialization1` integer NOT NULL /* Specialization Id of Joined Class */,
-    `IdGroup1` integer NOT NULL /* Group Id of Joined Class */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdSubject`,`IdLevel`,`IdSpecialization`,`IdGroup`,`IdLevel1`,`IdSpecialization1`,`IdGroup1`),
-  CONSTRAINT `ClassJoinedClass` FOREIGN KEY (`IdLevel1`,`IdSpecialization1`,`IdGroup1`)
-    REFERENCES `Class`(`IdLevel`,`IdSpecialization`,`IdGroup`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `DistributionJoinedClass` FOREIGN KEY (`IdSubject`,`IdLevel`,`IdSpecialization`,`IdGroup`)
-    REFERENCES `Distribution`(`IdSubject`,`IdLevel`,`IdSpecialization`,`IdGroup`) ON UPDATE CASCADE ON DELETE CASCADE
+    `IdParallel1` integer NOT NULL /* Parallel Id of Joined Class */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdSubject`,`IdLevel`,`IdSpecialization`,`IdParallel`,`IdLevel1`,`IdSpecialization1`,`IdParallel1`),
+  CONSTRAINT `ClassJoinedClass` FOREIGN KEY (`IdLevel1`,`IdSpecialization1`,`IdParallel1`)
+    REFERENCES `Class`(`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `DistributionJoinedClass` FOREIGN KEY (`IdSubject`,`IdLevel`,`IdSpecialization`,`IdParallel`)
+    REFERENCES `Distribution`(`IdSubject`,`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE
 ); /* Joined Classes */
 CREATE TABLE IF NOT EXISTS `SubjectRestrictionType`(
     `IdSubjectRestrictionType` integer NOT NULL PRIMARY KEY /* Subject Restriction Type Id */,
@@ -121,11 +121,11 @@ CREATE TABLE IF NOT EXISTS `Assistance`(
     `IdSubject` integer NOT NULL /* Subject Id */,
     `IdLevel` integer NOT NULL /* Level Id */,
     `IdSpecialization` integer NOT NULL /* Specialization Id */,
-    `IdGroup` integer NOT NULL /* Group Id */,
+    `IdParallel` integer NOT NULL /* Parallel Id */,
     `IdTeacher` integer NOT NULL /* Teacher Id */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdSubject`,`IdLevel`,`IdSpecialization`,`IdGroup`,`IdTeacher`),
-  CONSTRAINT `DistributionAssistance` FOREIGN KEY (`IdSubject`,`IdLevel`,`IdSpecialization`,`IdGroup`)
-    REFERENCES `Distribution`(`IdSubject`,`IdLevel`,`IdSpecialization`,`IdGroup`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdSubject`,`IdLevel`,`IdSpecialization`,`IdParallel`,`IdTeacher`),
+  CONSTRAINT `DistributionAssistance` FOREIGN KEY (`IdSubject`,`IdLevel`,`IdSpecialization`,`IdParallel`)
+    REFERENCES `Distribution`(`IdSubject`,`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT `TeacherAssistance` FOREIGN KEY (`IdTeacher`)
     REFERENCES `Teacher`(`IdTeacher`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Assistances */
@@ -172,14 +172,14 @@ CREATE TABLE IF NOT EXISTS `TimetableDetail`(
     `IdSubject` integer NOT NULL /* Subject Id */,
     `IdLevel` integer NOT NULL /* Level Id */,
     `IdSpecialization` integer NOT NULL /* Specialization Id */,
-    `IdGroup` integer NOT NULL /* Group Id */,
+    `IdParallel` integer NOT NULL /* Parallel Id */,
     `IdDay` integer NOT NULL /* Day Id */,
     `IdHour` integer NOT NULL /* Hour Id */,
     `Session` integer NOT NULL /* Internal Number */,
-  CONSTRAINT `ixRestrictionSubject` UNIQUE(`IdTimetable`,`IdLevel`,`IdSpecialization`,`IdGroup`,`IdDay`,`IdHour`),
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTimetable`,`IdSubject`,`IdLevel`,`IdSpecialization`,`IdGroup`,`IdDay`,`IdHour`),
-  CONSTRAINT `DistributionTimetableDetail` FOREIGN KEY (`IdSubject`,`IdLevel`,`IdSpecialization`,`IdGroup`)
-    REFERENCES `Distribution`(`IdSubject`,`IdLevel`,`IdSpecialization`,`IdGroup`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `ixRestrictionSubject` UNIQUE(`IdTimetable`,`IdLevel`,`IdSpecialization`,`IdParallel`,`IdDay`,`IdHour`),
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTimetable`,`IdSubject`,`IdLevel`,`IdSpecialization`,`IdParallel`,`IdDay`,`IdHour`),
+  CONSTRAINT `DistributionTimetableDetail` FOREIGN KEY (`IdSubject`,`IdLevel`,`IdSpecialization`,`IdParallel`)
+    REFERENCES `Distribution`(`IdSubject`,`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `TimeSlotTimetableDetail` FOREIGN KEY (`IdDay`,`IdHour`)
     REFERENCES `TimeSlot`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `TimetableTimetableDetail` FOREIGN KEY (`IdTimetable`)
