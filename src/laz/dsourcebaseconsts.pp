@@ -2,7 +2,7 @@
 unit dsourcebaseconsts;
 
 (*
-  14/02/2012 1:23
+  14/02/2012 2:04
 
   Warning:
 
@@ -24,13 +24,13 @@ uses
 resourcestring
 
   STbLevel = 'Levels';
-  STbParallel = 'Parallel Identifiers';
   STbSpecialization = 'Specializations';
+  STbParallel = 'Parallels';
   STbDay = 'Working Days';
   STbCourse = 'Courses';
-  STbRoomType = 'Types of Room';
   STbHour = 'Academic Hours';
-  STbClass = 'Parallels';
+  STbRoomType = 'Types of Room';
+  STbClass = 'Groups';
   STbSubject = 'Subjects';
   STbTeacher = 'Teachers';
   STbDistribution = 'Distribution of Workload';
@@ -47,25 +47,25 @@ resourcestring
   SFlLevel_IdLevel = 'Id';
   SFlLevel_NaLevel = 'Name';
   SFlLevel_AbLevel = 'Abbreviation';
-  SFlParallel_IdParallel = 'Id';
-  SFlParallel_NaParallel = 'Name';
   SFlSpecialization_IdSpecialization = 'Id';
   SFlSpecialization_NaSpecialization = 'Name';
   SFlSpecialization_AbSpecialization = 'Abbreviation';
+  SFlParallel_IdParallel = 'Id';
+  SFlParallel_NaParallel = 'Name';
   SFlDay_IdDay = 'Id';
   SFlDay_NaDay = 'Name';
   SFlCourse_IdLevel = 'Level';
   SFlCourse_IdSpecialization = 'Specialization';
+  SFlHour_IdHour = 'Id';
+  SFlHour_NaHour = 'Name';
+  SFlHour_Interval = 'Interval';
   SFlRoomType_IdRoomType = 'Id';
   SFlRoomType_NaRoomType = 'Name';
   SFlRoomType_AbRoomType = 'Abbreviation';
   SFlRoomType_Number = 'Number';
-  SFlHour_IdHour = 'Id';
-  SFlHour_NaHour = 'Name';
-  SFlHour_Interval = 'Interval';
   SFlClass_IdLevel = 'Level';
   SFlClass_IdSpecialization = 'Specialization';
-  SFlClass_IdParallel = 'Parallel';
+  SFlClass_IdParallel = 'Group';
   SFlSubject_IdSubject = 'Id';
   SFlSubject_NaSubject = 'Name';
   SFlTeacher_IdTeacher = 'Id';
@@ -84,9 +84,9 @@ resourcestring
   SFlJoinedClass_IdLevel = 'Level';
   SFlJoinedClass_IdSpecialization = 'Specialization';
   SFlJoinedClass_IdParallel = 'Parallel';
-  SFlJoinedClass_IdLevel1 = 'Level';
-  SFlJoinedClass_IdSpecialization1 = 'Specialization';
-  SFlJoinedClass_IdParallel1 = 'Parallel';
+  SFlJoinedClass_IdLevel1 = 'Joined Level';
+  SFlJoinedClass_IdSpecialization1 = 'Joined Specialization';
+  SFlJoinedClass_IdParallel1 = 'Joined Parallel';
   SFlSubjectRestrictionType_IdSubjectRestrictionType = 'Id';
   SFlSubjectRestrictionType_NaSubjectRestrictionType = 'Name';
   SFlSubjectRestrictionType_ColSubjectRestrictionType = 'Color';

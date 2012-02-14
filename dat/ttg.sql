@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  14/02/2012 1:23
+  14/02/2012 2:04
 
   Warning:
 
@@ -14,15 +14,15 @@ CREATE TABLE IF NOT EXISTS `Level`(
     `NaLevel` varchar(15) NOT NULL UNIQUE /* Level Name */,
     `AbLevel` varchar(5) UNIQUE /* Level Abbreviation */
 ); /* Levels */
-CREATE TABLE IF NOT EXISTS `Parallel`(
-    `IdParallel` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Parallel Id */,
-    `NaParallel` varchar(5) NOT NULL UNIQUE /* Name of Parallel */
-); /* Parallel Identifiers */
 CREATE TABLE IF NOT EXISTS `Specialization`(
     `IdSpecialization` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Specialization Id */,
     `NaSpecialization` varchar(20) NOT NULL UNIQUE /* Specialization Name */,
     `AbSpecialization` varchar(10) NOT NULL UNIQUE /* Specialization Abbreviation */
 ); /* Specializations */
+CREATE TABLE IF NOT EXISTS `Parallel`(
+    `IdParallel` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Parallel Id */,
+    `NaParallel` varchar(5) NOT NULL UNIQUE /* Parallel Name */
+); /* Parallels */
 CREATE TABLE IF NOT EXISTS `Day`(
     `IdDay` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Day Id */,
     `NaDay` varchar(10) NOT NULL UNIQUE /* Name of Day */
@@ -36,17 +36,17 @@ CREATE TABLE IF NOT EXISTS `Course`(
   CONSTRAINT `SpecializationCourse` FOREIGN KEY (`IdSpecialization`)
     REFERENCES `Specialization`(`IdSpecialization`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Courses */
+CREATE TABLE IF NOT EXISTS `Hour`(
+    `IdHour` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Hour Id */,
+    `NaHour` varchar(10) NOT NULL UNIQUE /* Hour Name */,
+    `Interval` varchar(21) NOT NULL UNIQUE /* Hour Interval */
+); /* Academic Hours */
 CREATE TABLE IF NOT EXISTS `RoomType`(
     `IdRoomType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Room Type Id */,
     `NaRoomType` varchar(25) NOT NULL UNIQUE /* Room Type Name */,
     `AbRoomType` varchar(10) NOT NULL UNIQUE /* Room Type Abbreviation */,
     `Number` integer NOT NULL /* Number of Rooms */
 ); /* Types of Room */
-CREATE TABLE IF NOT EXISTS `Hour`(
-    `IdHour` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Hour Id */,
-    `NaHour` varchar(10) NOT NULL UNIQUE /* Hour Name */,
-    `Interval` varchar(21) NOT NULL UNIQUE /* Hour Interval */
-); /* Academic Hours */
 CREATE TABLE IF NOT EXISTS `Class`(
     `IdLevel` integer NOT NULL /* Level */,
     `IdSpecialization` integer NOT NULL /* Specialization */,
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `Class`(
     REFERENCES `Course`(`IdLevel`,`IdSpecialization`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `ParallelClass` FOREIGN KEY (`IdParallel`)
     REFERENCES `Parallel`(`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT
-); /* Parallels */
+); /* Groups */
 CREATE TABLE IF NOT EXISTS `Subject`(
     `IdSubject` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Subject Id */,
     `NaSubject` varchar(20) NOT NULL UNIQUE /* Subject Name */

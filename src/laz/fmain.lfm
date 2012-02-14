@@ -2165,9 +2165,9 @@ object MainForm: TMainForm
     object ActParallel: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Parallel IDs'
+      Caption = 'Parallels'
       HelpContext = 190
-      Hint = 'Parallel IDs|Parallel IDs'
+      Hint = 'Parallels|Parallels'
       ImageIndex = 8
       OnExecute = ActParallelExecute
       ShortCut = 16466

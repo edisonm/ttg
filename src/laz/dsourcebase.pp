@@ -2,7 +2,7 @@
 unit dsourcebase;
 
 (*
-  14/02/2012 1:23
+  14/02/2012 2:04
 
   Warning:
 
@@ -29,18 +29,18 @@ type
     DbZConnection: TZConnection;
     TbLevel: TZTable;
     DSLevel: TDataSource;
-    TbParallel: TZTable;
-    DSParallel: TDataSource;
     TbSpecialization: TZTable;
     DSSpecialization: TDataSource;
+    TbParallel: TZTable;
+    DSParallel: TDataSource;
     TbDay: TZTable;
     DSDay: TDataSource;
     TbCourse: TZTable;
     DSCourse: TDataSource;
-    TbRoomType: TZTable;
-    DSRoomType: TDataSource;
     TbHour: TZTable;
     DSHour: TDataSource;
+    TbRoomType: TZTable;
+    DSRoomType: TDataSource;
     TbClass: TZTable;
     DSClass: TDataSource;
     TbSubject: TZTable;
@@ -88,12 +88,12 @@ begin
   OnDestroy := DataModuleDestroy;
   SetLength(FTables, 20);
   Tables[0] := TbLevel;
-  Tables[1] := TbParallel;
-  Tables[2] := TbSpecialization;
+  Tables[1] := TbSpecialization;
+  Tables[2] := TbParallel;
   Tables[3] := TbDay;
   Tables[4] := TbCourse;
-  Tables[5] := TbRoomType;
-  Tables[6] := TbHour;
+  Tables[5] := TbHour;
+  Tables[6] := TbRoomType;
   Tables[7] := TbClass;
   Tables[8] := TbSubject;
   Tables[9] := TbTeacher;
@@ -110,12 +110,12 @@ begin
   with DataSetNameList do
   begin
     Add('TbLevel=Level');
-    Add('TbParallel=Parallel');
     Add('TbSpecialization=Specialization');
+    Add('TbParallel=Parallel');
     Add('TbDay=Day');
     Add('TbCourse=Course');
-    Add('TbRoomType=RoomType');
     Add('TbHour=Hour');
+    Add('TbRoomType=RoomType');
     Add('TbClass=Class');
     Add('TbSubject=Subject');
     Add('TbTeacher=Teacher');
@@ -135,22 +135,22 @@ begin
     Add('TbLevel.IdLevel=' + SFlLevel_IdLevel);
     Add('TbLevel.NaLevel=' + SFlLevel_NaLevel);
     Add('TbLevel.AbLevel=' + SFlLevel_AbLevel);
-    Add('TbParallel.IdParallel=' + SFlParallel_IdParallel);
-    Add('TbParallel.NaParallel=' + SFlParallel_NaParallel);
     Add('TbSpecialization.IdSpecialization=' + SFlSpecialization_IdSpecialization);
     Add('TbSpecialization.NaSpecialization=' + SFlSpecialization_NaSpecialization);
     Add('TbSpecialization.AbSpecialization=' + SFlSpecialization_AbSpecialization);
+    Add('TbParallel.IdParallel=' + SFlParallel_IdParallel);
+    Add('TbParallel.NaParallel=' + SFlParallel_NaParallel);
     Add('TbDay.IdDay=' + SFlDay_IdDay);
     Add('TbDay.NaDay=' + SFlDay_NaDay);
     Add('TbCourse.IdLevel=' + SFlCourse_IdLevel);
     Add('TbCourse.IdSpecialization=' + SFlCourse_IdSpecialization);
+    Add('TbHour.IdHour=' + SFlHour_IdHour);
+    Add('TbHour.NaHour=' + SFlHour_NaHour);
+    Add('TbHour.Interval=' + SFlHour_Interval);
     Add('TbRoomType.IdRoomType=' + SFlRoomType_IdRoomType);
     Add('TbRoomType.NaRoomType=' + SFlRoomType_NaRoomType);
     Add('TbRoomType.AbRoomType=' + SFlRoomType_AbRoomType);
     Add('TbRoomType.Number=' + SFlRoomType_Number);
-    Add('TbHour.IdHour=' + SFlHour_IdHour);
-    Add('TbHour.NaHour=' + SFlHour_NaHour);
-    Add('TbHour.Interval=' + SFlHour_Interval);
     Add('TbClass.IdLevel=' + SFlClass_IdLevel);
     Add('TbClass.IdSpecialization=' + SFlClass_IdSpecialization);
     Add('TbClass.IdParallel=' + SFlClass_IdParallel);
@@ -214,12 +214,12 @@ begin
   with DataSetDescList do
   begin
     Add('TbLevel=' + STbLevel);
-    Add('TbParallel=' + STbParallel);
     Add('TbSpecialization=' + STbSpecialization);
+    Add('TbParallel=' + STbParallel);
     Add('TbDay=' + STbDay);
     Add('TbCourse=' + STbCourse);
-    Add('TbRoomType=' + STbRoomType);
     Add('TbHour=' + STbHour);
+    Add('TbRoomType=' + STbRoomType);
     Add('TbClass=' + STbClass);
     Add('TbSubject=' + STbSubject);
     Add('TbTeacher=' + STbTeacher);
