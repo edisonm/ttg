@@ -17,7 +17,7 @@ type
 
   TTimetableTeacherForm = class(TCrossManyToManyEditor1Form)
     QuTimetableTeacher: TZQuery;
-    cbxShowTeacher: TComboBox;
+    CBShowTeacher: TComboBox;
     QuTimetableTeacherIdLevel: TLongintField;
     QuTimetableTeacherIdSpecialization: TLongintField;
     QuTimetableTeacherIdParallel: TLongintField;
@@ -70,7 +70,7 @@ begin
       Self.QuTeacher.FindField('IdTimetable').AsInteger,
       Self.QuTeacher.FindField('LnTeacher').AsString,
       Self.QuTeacher.FindField('NaTeacher').AsString]);
-    FName := MasterDataModule.StringsShowTeacher.Values[cbxShowTeacher.Text];
+    FName := MasterDataModule.StringsShowTeacher.Values[CBShowTeacher.Text];
     ShowEditor(TbDay, TbHour, QuTimetableTeacher, TbTimeSlot, 'IdDay', 'NaDay',
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
   end;
@@ -80,7 +80,7 @@ procedure TTimetableTeacherForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuTeacher.Open;
-  cbxShowTeacher.Items.Clear;
+  CBShowTeacher.Items.Clear;
   QuTimetableTeacher.Open;
   QuTimetableTeacherAbSpecialization.DisplayLabel := SFlTimetableDetail_IdSpecialization;
   QuTimetableTeacherNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
@@ -95,8 +95,8 @@ begin
   QuTimetableTeacherIdDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuTimetableTeacherIdSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
   QuTimetableTeacherAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
-  LoadNames(MasterDataModule.StringsShowTeacher, cbxShowTeacher.Items);
-  cbxShowTeacher.Text := cbxShowTeacher.Items[0];
+  LoadNames(MasterDataModule.StringsShowTeacher, CBShowTeacher.Items);
+  CBShowTeacher.Text := CBShowTeacher.Items[0];
 end;
 
 procedure TTimetableTeacherForm.QuTimetableTeacherCalcFields(DataSet: TDataSet);

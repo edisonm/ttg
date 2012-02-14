@@ -21,11 +21,11 @@ type
     BtOpenQuery: TButton;
     BtOpenScript: TButton;
     BtSaveScript: TButton;
-    CbxMetadataType: TComboBox;
+    CBMetadataType: TComboBox;
     Datasource1: TDatasource;
     DSTables: TDatasource;
     DBGrid1: TDBGrid;
-    CbxTable: TDBLookupComboBox;
+    CBTable: TDBLookupComboBox;
     Memo1: TMemo;
     OpenScript: TOpenDialog;
     SaveScript: TSaveDialog;
@@ -62,8 +62,8 @@ uses
 procedure TDBExplorerForm.FormCreate(Sender: TObject);
 begin
   ZTables.Open;
-  CbxTable.ListSource := DSTables;
-  with CbxMetadataType.Items do
+  CBTable.ListSource := DSTables;
+  with CBMetadataType.Items do
   begin
     Clear;
     Add('mdProcedures');
@@ -91,7 +91,7 @@ end;
 procedure TDBExplorerForm.TBShowMetadataClick(Sender: TObject);
 begin
   ZSQLMetadata1.Close;
-  ZSQLMetadata1.MetadataType := TZMetadataType(CbxMetadataType.ItemIndex);
+  ZSQLMetadata1.MetadataType := TZMetadataType(CBMetadataType.ItemIndex);
   ZSQLMetadata1.Open;
   Datasource1.DataSet := ZSQLMetadata1;
 end;
@@ -143,7 +143,7 @@ end;
 procedure TDBExplorerForm.TBShowTableClick(Sender: TObject);
 begin
   ZTable1.Close;
-  ZTable1.TableName := CbxTable.Text;
+  ZTable1.TableName := CBTable.Text;
   ZTable1.Open;
   Datasource1.DataSet := ZTable1;
 end;

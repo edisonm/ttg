@@ -1,5 +1,5 @@
 object ConfigForm: TConfigForm
-  Left = 602
+  Left = 595
   Height = 442
   Top = 482
   Width = 490
@@ -66,11 +66,11 @@ object ConfigForm: TConfigForm
     Height = 386
     Top = 8
     Width = 473
-    ActivePage = TSOptions
+    ActivePage = TSInstitution
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 1
     object TSInstitution: TTabSheet
       Hint = 'Institution Data'
@@ -296,13 +296,13 @@ object ConfigForm: TConfigForm
         Caption = 'Downhill Levels:'
         ParentColor = False
       end
-      object cbxRandomize: TCheckBox
+      object CBRandomize: TCheckBox
         Left = 8
         Height = 21
         Top = 8
         Width = 171
         Caption = 'Init with the system time'
-        OnClick = cbxRandomizeClick
+        OnClick = CBRandomizeClick
         TabOrder = 0
       end
       object speSeed: TSpinEdit
@@ -392,11 +392,11 @@ object ConfigForm: TConfigForm
         Width = 112
         TabOrder = 10
       end
-      object cbxApplyDoubleDownHill: TCheckBox
+      object CBApplyDoubleDownHill: TCheckBox
         Left = 8
         Height = 21
         Top = 57
-        Width = 167
+        Width = 151
         Caption = 'Apply Downhill - slow'
         TabOrder = 11
       end

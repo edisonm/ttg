@@ -16,7 +16,7 @@ type
 
   TConfigForm = class(TForm)
     BBOk: TBitBtn;
-    cbxApplyDoubleDownHill: TCheckBox;
+    CBApplyDoubleDownHill: TCheckBox;
     EdClashSubject: TEdit;
     EdCrossProbability: TEdit;
     EdMutationProbability: TEdit;
@@ -56,7 +56,7 @@ type
     Label15: TLabel;
     Label18: TLabel;
     TSOptions: TTabSheet;
-    cbxRandomize: TCheckBox;
+    CBRandomize: TCheckBox;
     LbSeed: TLabel;
     speSeed: TSpinEdit;
     LbResponsible: TLabel;
@@ -94,7 +94,7 @@ type
     DSSubjectRestrictionType: TDataSource;
     DSTeacherRestrictionType: TDataSource;
     CBColTeacherRestrictionType: TColorBox;
-    procedure cbxRandomizeClick(Sender: TObject);
+    procedure CBRandomizeClick(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DSSubjectRestrictionTypeDataChange(Sender: TObject;
@@ -157,7 +157,7 @@ begin
   DBGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
-procedure TConfigForm.cbxRandomizeClick(Sender: TObject);
+procedure TConfigForm.CBRandomizeClick(Sender: TObject);
 begin
   with (Sender as TCheckbox) do
   begin
@@ -177,7 +177,7 @@ begin
       EdPositionResponsible.Text := PositionResponsible;
       SEMaxTeacherWorkLoad.Value := MaxTeacherWorkLoad;
       MeComments.Lines.Text := Comments;
-      cbxRandomize.Checked := Randomize;
+      CBRandomize.Checked := Randomize;
       speSeed.Value := Seed;
       speNumIterations.Value := RefreshInterval;
       EdClashTeacher.Text := FloatToStr(ClashTeacher);
@@ -195,7 +195,7 @@ begin
       EdInitialTimetables.Text := InitialTimetables;
       dedSharedDirectory.Directory := SharedDirectory;
       EdPollinationProbability.Text := FloatToStr(PollinationProbability);
-      cbxApplyDoubleDownHill.Checked := ApplyDoubleDownHill;
+      CBApplyDoubleDownHill.Checked := ApplyDoubleDownHill;
       edBookmarks.Text := Bookmarks;
    end;
 end;
@@ -212,7 +212,7 @@ begin
       PositionResponsible := EdPositionResponsible.Text;
       MaxTeacherWorkLoad := SEMaxTeacherWorkLoad.Value;
       Comments := MeComments.Lines.Text;
-      Randomize := cbxRandomize.Checked;
+      Randomize := CBRandomize.Checked;
       Seed := speSeed.Value;
       RefreshInterval := speNumIterations.Value;
       ClashTeacher := StrToInt(EdClashTeacher.Text);
@@ -230,7 +230,7 @@ begin
       InitialTimetables := EdInitialTimetables.Text;
       SharedDirectory := dedSharedDirectory.Directory;
       PollinationProbability := StrToFloat(EdPollinationProbability.Text);
-      ApplyDoubleDownHill := cbxApplyDoubleDownHill.Checked;
+      ApplyDoubleDownHill := CBApplyDoubleDownHill.Checked;
       Bookmarks := edBookmarks.Text;
    end;
 end;

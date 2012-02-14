@@ -45,7 +45,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       TabOrder = 1
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
     end
-    object cbxShowTeacher: TComboBox[4]
+    object CBShowTeacher: TComboBox[4]
       Left = 162
       Height = 24
       Hint = 'Show|Param to show in the teacher timetable'

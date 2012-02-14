@@ -49,7 +49,7 @@ object DBExplorerForm: TDBExplorerForm
     OnClick = TBShowMetadataClick
     TabOrder = 3
   end
-  object CbxMetadataType: TComboBox
+  object CBMetadataType: TComboBox
     Left = 8
     Height = 27
     Hint = 'Metadata Type'
@@ -69,7 +69,7 @@ object DBExplorerForm: TDBExplorerForm
     OnClick = BtSaveResultsClick
     TabOrder = 5
   end
-  object CbxTable: TDBLookupComboBox
+  object CBTable: TDBLookupComboBox
     Left = 8
     Height = 27
     Hint = 'Tables'

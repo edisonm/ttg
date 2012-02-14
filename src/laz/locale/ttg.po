@@ -509,13 +509,13 @@ msgctxt "TCONFIGFORM.CAPTION"
 msgid "Configure"
 msgstr ""
 
-#: tconfigform.cbxapplydoubledownhill.caption
-msgctxt "TCONFIGFORM.CBXAPPLYDOUBLEDOWNHILL.CAPTION"
+#: tconfigform.cbapplydoubledownhill.caption
+msgctxt "TCONFIGFORM.CBAPPLYDOUBLEDOWNHILL.CAPTION"
 msgid "Apply Downhill - slow"
 msgstr ""
 
-#: tconfigform.cbxrandomize.caption
-msgctxt "TCONFIGFORM.CBXRANDOMIZE.CAPTION"
+#: tconfigform.cbrandomize.caption
+msgctxt "TCONFIGFORM.CBRANDOMIZE.CAPTION"
 msgid "Init with the system time"
 msgstr ""
 
@@ -755,11 +755,11 @@ msgstr ""
 msgid "Database Explorer"
 msgstr ""
 
-#: tdbexplorerform.cbxmetadatatype.hint
+#: tdbexplorerform.cbmetadatatype.hint
 msgid "Metadata Type"
 msgstr ""
 
-#: tdbexplorerform.cbxtable.hint
+#: tdbexplorerform.cbtable.hint
 msgid "Tables"
 msgstr ""
 
@@ -1680,8 +1680,8 @@ msgctxt "TTIMETABLEROOMTYPEFORM.CBSHOWROOMTYPE.HINT"
 msgid "Show|What to show in the room type timetable"
 msgstr ""
 
-#: ttimetableteacherform.cbxshowteacher.hint
-msgctxt "TTIMETABLETEACHERFORM.CBXSHOWTEACHER.HINT"
+#: ttimetableteacherform.cbshowteacher.hint
+msgctxt "TTIMETABLETEACHERFORM.CBSHOWTEACHER.HINT"
 msgid "Show|Param to show in the teacher timetable"
 msgstr ""
 
