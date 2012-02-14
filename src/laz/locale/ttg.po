@@ -723,39 +723,39 @@ msgstr ""
 msgid "Panel2"
 msgstr ""
 
-#: tcrossmanytomanyeditorform.btncancel.hint
+#: tcrossmanytomanyeditorform.btcancel.hint
 msgid "Cancel|Cancel"
 msgstr ""
 
-#: tcrossmanytomanyeditorform.btnok.hint
+#: tcrossmanytomanyeditorform.btok.hint
 msgid "Ok|Ok"
 msgstr ""
 
-#: tdbexplorerform.btnexecutescript.caption
+#: tdbexplorerform.btexecutescript.caption
 msgid "Execute Script"
 msgstr ""
 
-#: tdbexplorerform.btnopenquery.caption
+#: tdbexplorerform.btopenquery.caption
 msgid "Open Query"
 msgstr ""
 
-#: tdbexplorerform.btnopenscript.caption
+#: tdbexplorerform.btopenscript.caption
 msgid "Open Script"
 msgstr ""
 
-#: tdbexplorerform.btnsaveresults.caption
+#: tdbexplorerform.btsaveresults.caption
 msgid "Save Results"
 msgstr ""
 
-#: tdbexplorerform.btnsavescript.caption
+#: tdbexplorerform.btsavescript.caption
 msgid "Save Script"
 msgstr ""
 
-#: tdbexplorerform.btnshowmetadata.caption
+#: tdbexplorerform.btshowmetadata.caption
 msgid "Show Metadata"
 msgstr ""
 
-#: tdbexplorerform.btnshowtable.caption
+#: tdbexplorerform.btshowtable.caption
 msgid "Show Table"
 msgstr ""
 
@@ -771,8 +771,8 @@ msgstr ""
 msgid "Tables"
 msgstr ""
 
-#: teditorform.btnshow.hint
-msgctxt "TEDITORFORM.BTNSHOW.HINT"
+#: teditorform.btshow.hint
+msgctxt "TEDITORFORM.BTSHOW.HINT"
 msgid "Show|Show the grid content in a report"
 msgstr ""
 
@@ -1547,7 +1547,7 @@ msgctxt "tteacherform.groupbox3.caption"
 msgid "Assistances"
 msgstr ""
 
-#: ttimetableclassform.btnintercambiartimeslots.hint
+#: ttimetableclassform.btintercambiartimeslots.hint
 msgid "Swap time slots|Swap time slots"
 msgstr ""
 

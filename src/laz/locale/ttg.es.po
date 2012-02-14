@@ -723,39 +723,39 @@ msgstr "Pesos"
 msgid "Panel2"
 msgstr "Panel2"
 
-#: tcrossmanytomanyeditorform.btncancel.hint
+#: tcrossmanytomanyeditorform.btcancel.hint
 msgid "Cancel|Cancel"
 msgstr "Cancelar|Cancelar"
 
-#: tcrossmanytomanyeditorform.btnok.hint
+#: tcrossmanytomanyeditorform.btok.hint
 msgid "Ok|Ok"
 msgstr "Aceptar|Aceptar"
 
-#: tdbexplorerform.btnexecutescript.caption
+#: tdbexplorerform.btexecutescript.caption
 msgid "Execute Script"
 msgstr "Ejecutar script"
 
-#: tdbexplorerform.btnopenquery.caption
+#: tdbexplorerform.btopenquery.caption
 msgid "Open Query"
 msgstr "Abrir consulta"
 
-#: tdbexplorerform.btnopenscript.caption
+#: tdbexplorerform.btopenscript.caption
 msgid "Open Script"
 msgstr "Abrir script"
 
-#: tdbexplorerform.btnsaveresults.caption
+#: tdbexplorerform.btsaveresults.caption
 msgid "Save Results"
 msgstr "Guardar resultados"
 
-#: tdbexplorerform.btnsavescript.caption
+#: tdbexplorerform.btsavescript.caption
 msgid "Save Script"
 msgstr "Guardar script"
 
-#: tdbexplorerform.btnshowmetadata.caption
+#: tdbexplorerform.btshowmetadata.caption
 msgid "Show Metadata"
 msgstr "Mostrar metadatos"
 
-#: tdbexplorerform.btnshowtable.caption
+#: tdbexplorerform.btshowtable.caption
 msgid "Show Table"
 msgstr "Mostrar tabla"
 
@@ -771,8 +771,8 @@ msgstr "Tipo de metadato"
 msgid "Tables"
 msgstr "Tablas"
 
-#: teditorform.btnshow.hint
-msgctxt "TEDITORFORM.BTNSHOW.HINT"
+#: teditorform.btshow.hint
+msgctxt "TEDITORFORM.BTSHOW.HINT"
 msgid "Show|Show the grid content in a report"
 msgstr "Presentar|Presenta el contenido de la cuadricula en un reporte"
 
@@ -1547,7 +1547,7 @@ msgctxt "tteacherform.groupbox3.caption"
 msgid "Assistances"
 msgstr "Ayudas"
 
-#: ttimetableclassform.btnintercambiartimeslots.hint
+#: ttimetableclassform.btintercambiartimeslots.hint
 msgid "Swap time slots|Swap time slots"
 msgstr "Intercambiar periodos|Intercambiar periodos"
 

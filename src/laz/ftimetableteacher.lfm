@@ -52,7 +52,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Top = 2
       Width = 193
       ItemHeight = 0
-      OnChange = btnShowClick
+      OnChange = BtShowClick
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0

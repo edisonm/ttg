@@ -13,7 +13,7 @@ type
   TEditorForm = class(TForm)
     PnStatus: TPanel;
     TlBShow: TToolBar;
-    btnShow: TToolButton;
+    BtShow: TToolButton;
     PnEditor: TPanel;
     ImageList: TImageList;
     procedure FormClose(Sender: TObject; var AAction: TCloseAction);

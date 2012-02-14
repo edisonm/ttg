@@ -232,7 +232,7 @@ begin
   begin
     with SourceDataModule do
       FTimetableClassForm.LoadHints(TbDay, TbHour, TbSubject);
-    FTimetableClassForm.btnShowClick(nil);
+    FTimetableClassForm.BtShowClick(nil);
   end;
 end;
 
@@ -266,7 +266,7 @@ begin
   begin
     with SourceDataModule do
       FTimetableTeacherForm.LoadHints(TbDay, TbHour, TbTeacher);
-    FTimetableTeacherForm.btnShowClick(nil);
+    FTimetableTeacherForm.BtShowClick(nil);
   end
 end;
 
@@ -507,7 +507,7 @@ begin
     begin
       FTimetableRoomTypeForm.LoadHints(TbDay, TbHour, TbSubject);
     end;
-    FTimetableRoomTypeForm.btnShowClick(nil);
+    FTimetableRoomTypeForm.BtShowClick(nil);
   end;
 end;
 

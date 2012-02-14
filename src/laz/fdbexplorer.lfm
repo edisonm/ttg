@@ -29,24 +29,24 @@ object DBExplorerForm: TDBExplorerForm
     DataSource = Datasource1
     TabOrder = 1
   end
-  object btnExecuteScript: TButton
+  object BtExecuteScript: TButton
     Left = 493
     Height = 27
     Top = 134
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Execute Script'
-    OnClick = btnExecuteScriptClick
+    OnClick = BtExecuteScriptClick
     TabOrder = 2
   end
-  object btnShowMetadata: TButton
+  object BtShowMetadata: TButton
     Left = 493
     Height = 27
     Top = 8
     Width = 134
     Anchors = [akTop, akRight]
     Caption = 'Show Metadata'
-    OnClick = btnShowMetadataClick
+    OnClick = BtShowMetadataClick
     TabOrder = 3
   end
   object CbxMetadataType: TComboBox

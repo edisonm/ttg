@@ -11,7 +11,7 @@ inherited SingleEditorForm: TSingleEditorForm
   OnDestroy = FormDestroy
   inherited TlBShow: TToolBar
     Width = 485
-    inherited btnShow: TToolButton
+    inherited BtShow: TToolButton
       Action = ActShow
     end
     object BtnFind: TToolButton[1]

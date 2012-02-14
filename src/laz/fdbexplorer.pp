@@ -14,8 +14,8 @@ type
   { TDBExplorerForm }
 
   TDBExplorerForm = class(TForm)
-    btnExecuteScript: TButton;
-    btnShowMetadata: TButton;
+    BtExecuteScript: TButton;
+    BtShowMetadata: TButton;
     BtnSaveResults: TButton;
     BtnShowTable: TButton;
     BtnOpenQuery: TButton;
@@ -37,8 +37,8 @@ type
     procedure BtnOpenScriptClick(Sender: TObject);
     procedure BtnOpenQueryClick(Sender: TObject);
     procedure BtnSaveScriptClick(Sender: TObject);
-    procedure btnShowMetadataClick(Sender: TObject);
-    procedure btnExecuteScriptClick(Sender: TObject);
+    procedure BtShowMetadataClick(Sender: TObject);
+    procedure BtExecuteScriptClick(Sender: TObject);
     procedure BtnSaveResultsClick(Sender: TObject);
     procedure BtnShowTableClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -88,7 +88,7 @@ begin
   end;
 end;
 
-procedure TDBExplorerForm.btnShowMetadataClick(Sender: TObject);
+procedure TDBExplorerForm.BtShowMetadataClick(Sender: TObject);
 begin
   ZSQLMetadata1.Close;
   ZSQLMetadata1.MetadataType := TZMetadataType(CbxMetadataType.ItemIndex);
@@ -121,7 +121,7 @@ begin
   end;
 end;
 
-procedure TDBExplorerForm.btnExecuteScriptClick(Sender: TObject);
+procedure TDBExplorerForm.BtExecuteScriptClick(Sender: TObject);
 begin
   if not SourceDataModule.DbZConnection.ExecuteDirect(Memo1.Lines.GetText) then
     MessageDlg('Error', 'Error executing SQL', mtError, [mbOk], 0);
