@@ -156,10 +156,10 @@ object MainForm: TMainForm
       ParentShowHint = False
       ShowHint = True
     end
-    object TBClass: TToolButton
+    object TBCluster: TToolButton
       Left = 241
       Top = 2
-      Action = ActClass
+      Action = ActCluster
       ParentShowHint = False
       ShowHint = True
     end
@@ -688,8 +688,8 @@ object MainForm: TMainForm
         ShortCut = 16457
         OnClick = ActParallelExecute
       end
-      object MIClass: TMenuItem
-        Action = ActClass
+      object MICluster: TMenuItem
+        Action = ActCluster
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -728,7 +728,7 @@ object MainForm: TMainForm
           0000808000008080000080800000808000008080000080800000
         }
         ShortCut = 49234
-        OnClick = ActClassExecute
+        OnClick = ActClusterExecute
       end
       object N5: TMenuItem
         Caption = '-'
@@ -2156,14 +2156,14 @@ object MainForm: TMainForm
       OnExecute = ActParallelExecute
       ShortCut = 16466
     end
-    object ActClass: TAction
+    object ActCluster: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Classes'
+      Caption = 'Clusters'
       HelpContext = 200
       Hint = 'Categories|Categories with its given groups'
       ImageIndex = 14
-      OnExecute = ActClassExecute
+      OnExecute = ActClusterExecute
       ShortCut = 49219
     end
     object ActTheme: TAction

@@ -93,16 +93,16 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 152
     Top = 148
   end
-  object TbClass: TZTable
+  object TbCluster: TZTable
     Tag = 7
     Connection = DbZConnection
-    TableName = 'Class'
+    TableName = 'Cluster'
     IndexFieldNames = 'IdLevel;IdSpecialization;IdParallel'
     Left = 240
     Top = 144
   end
-  object DSClass: TDataSource
-    DataSet = TbClass
+  object DSCluster: TDataSource
+    DataSet = TbCluster
     Left = 248
     Top = 136
   end
@@ -145,16 +145,16 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 56
     Top = 232
   end
-  object TbJoinedClass: TZTable
+  object TbJoinedCluster: TZTable
     Tag = 11
     Connection = DbZConnection
-    TableName = 'JoinedClass'
+    TableName = 'JoinedCluster'
     IndexFieldNames = 'IdTheme;IdLevel;IdSpecialization;IdParallel;IdLevel1;IdSpecialization1;IdParallel1'
     Left = 144
     Top = 252
   end
-  object DSJoinedClass: TDataSource
-    DataSet = TbJoinedClass
+  object DSJoinedCluster: TDataSource
+    DataSet = TbJoinedCluster
     Left = 152
     Top = 244
   end

@@ -47,16 +47,16 @@ CREATE TABLE IF NOT EXISTS `RoomType`(
     `AbRoomType` varchar(10) NOT NULL UNIQUE /* Room Type Abbreviation */,
     `Number` integer NOT NULL /* Number of Rooms */
 ); /* Types of Room */
-CREATE TABLE IF NOT EXISTS `Class`(
+CREATE TABLE IF NOT EXISTS `Cluster`(
     `IdLevel` integer NOT NULL /* Level */,
     `IdSpecialization` integer NOT NULL /* Specialization */,
     `IdParallel` integer NOT NULL /* Parallel */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdLevel`,`IdSpecialization`,`IdParallel`),
-  CONSTRAINT `CategoryClass` FOREIGN KEY (`IdLevel`,`IdSpecialization`)
+  CONSTRAINT `CategoryCluster` FOREIGN KEY (`IdLevel`,`IdSpecialization`)
     REFERENCES `Category`(`IdLevel`,`IdSpecialization`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `ParallelClass` FOREIGN KEY (`IdParallel`)
+  CONSTRAINT `ParallelCluster` FOREIGN KEY (`IdParallel`)
     REFERENCES `Parallel`(`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT
-); /* Classes */
+); /* Clusters */
 CREATE TABLE IF NOT EXISTS `Theme`(
     `IdTheme` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Theme Id */,
     `NaTheme` varchar(20) NOT NULL UNIQUE /* Theme Name */
@@ -79,8 +79,8 @@ CREATE TABLE IF NOT EXISTS `Distribution`(
     `RoomCount` integer /* Number of classrooms needed */,
     `Composition` varchar(40) NOT NULL /* Composition of the Slots for the Theme */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`),
-  CONSTRAINT `ClassDistribution` FOREIGN KEY (`IdLevel`,`IdSpecialization`,`IdParallel`)
-    REFERENCES `Class`(`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `ClusterDistribution` FOREIGN KEY (`IdLevel`,`IdSpecialization`,`IdParallel`)
+    REFERENCES `Cluster`(`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `RoomTypeDistribution` FOREIGN KEY (`IdRoomType`)
     REFERENCES `RoomType`(`IdRoomType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `ThemeDistribution` FOREIGN KEY (`IdTheme`)
@@ -88,20 +88,20 @@ CREATE TABLE IF NOT EXISTS `Distribution`(
   CONSTRAINT `TeacherDistribution` FOREIGN KEY (`IdTeacher`)
     REFERENCES `Teacher`(`IdTeacher`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Distribution of Workload */
-CREATE TABLE IF NOT EXISTS `JoinedClass`(
+CREATE TABLE IF NOT EXISTS `JoinedCluster`(
     `IdTheme` integer NOT NULL /* Theme Id */,
     `IdLevel` integer NOT NULL /* Level Id */,
     `IdSpecialization` integer NOT NULL /* Specialization Id */,
     `IdParallel` integer NOT NULL /* Parallel Id */,
-    `IdLevel1` integer NOT NULL /* Level Id of Joined Class */,
-    `IdSpecialization1` integer NOT NULL /* Specialization Id of Joined Class */,
-    `IdParallel1` integer NOT NULL /* Parallel Id of Joined Class */,
+    `IdLevel1` integer NOT NULL /* Level Id of Joined Cluster */,
+    `IdSpecialization1` integer NOT NULL /* Specialization Id of Joined Cluster */,
+    `IdParallel1` integer NOT NULL /* Parallel Id of Joined Cluster */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`,`IdLevel1`,`IdSpecialization1`,`IdParallel1`),
-  CONSTRAINT `ClassJoinedClass` FOREIGN KEY (`IdLevel1`,`IdSpecialization1`,`IdParallel1`)
-    REFERENCES `Class`(`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `DistributionJoinedClass` FOREIGN KEY (`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`)
+  CONSTRAINT `ClusterJoinedCluster` FOREIGN KEY (`IdLevel1`,`IdSpecialization1`,`IdParallel1`)
+    REFERENCES `Cluster`(`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `DistributionJoinedCluster` FOREIGN KEY (`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`)
     REFERENCES `Distribution`(`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE
-); /* Joined Classes */
+); /* Joined Clusters */
 CREATE TABLE IF NOT EXISTS `ThemeRestrictionType`(
     `IdThemeRestrictionType` integer NOT NULL PRIMARY KEY /* Theme Restriction Type Id */,
     `NaThemeRestrictionType` varchar(10) NOT NULL UNIQUE /* Restriction Type Name */,

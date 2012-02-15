@@ -62,7 +62,7 @@ Hour
 "5";"Cuarta";"09:00 p.m.-09:35 p.m.";
 "6";"Quinta";"09:35 p.m.-10:10 p.m.";
 "7";"Sexta";"10:10 a.m.-10:45 p.m.";
-Class
+Cluster
 27
 "IdLevel";"IdSpecialization";"IdParallel";
 "1";"1";"1";
@@ -449,7 +449,7 @@ Distribution
 "29";"4";"3";"4";"8";"1";"1";"1.1.1";
 "29";"5";"3";"4";"8";"1";"1";"1.1.1";
 "29";"6";"3";"4";"8";"1";"1";"1.1.1";
-JoinedClass
+JoinedCluster
 0
 "IdTheme";"IdLevel";"IdSpecialization";"IdParallel";"IdLevel1";"IdSpecialization1";"IdParallel1";
 ThemeRestrictionType

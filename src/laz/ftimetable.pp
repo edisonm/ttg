@@ -10,7 +10,7 @@ uses
   Controls, Forms, Dialogs, Db, FSingleEditor, Grids, Buttons, FEditor, DBCtrls,
   ExtCtrls, ComCtrls, ActnList, ZDataset, FCrossManytoManyEditorR,
   DMaster, FCrossManyToManyEditor1, FConfig, DSource, FMasterDetailEditor,
-  FTimetableTeacher, FTimetableRoomType, FTimetableClass;
+  FTimetableTeacher, FTimetableRoomType, FTimetableCluster;
 
 type
 
@@ -19,7 +19,7 @@ type
   TTimetableForm = class(TSingleEditorForm)
     BtThemeRestrictionNonSatisfied: TToolButton;
     TBTeacherRestrictionNoRespetada: TToolButton;
-    BtTimetableClass: TToolButton;
+    BtTimetableCluster: TToolButton;
     BtTimetableTeacher: TToolButton;
     BtClashTeacher: TToolButton;
     BtClashTheme: TToolButton;
@@ -137,7 +137,7 @@ type
     QuThemeCutHourDetailNaTheme: TStringField;
     QuThemeCutHourDetailIdHour: TLongintField;
     Splitter1: TSplitter;
-    ActTimetableClass: TAction;
+    ActTimetableCluster: TAction;
     ActTimetableTeacher: TAction;
     ActClashTeacher: TAction;
     ActClashTheme: TAction;
@@ -175,7 +175,7 @@ type
     QuClashTeacherDetailIdHour: TLongintField;
     BtMejorarTimetable: TToolButton;
     ActImproveTimeTable: TAction;
-    procedure ActTimetableClassExecute(Sender: TObject);
+    procedure ActTimetableClusterExecute(Sender: TObject);
     procedure ActClashTeacherExecute(Sender: TObject);
     procedure ActClashThemeExecute(Sender: TObject);
     procedure ActTimetableTeacherExecute(Sender: TObject);
@@ -201,7 +201,7 @@ type
       FTeacherRestrictionNoRespetadaForm: TSingleEditorForm;
     FTimetableTeacherForm: TTimetableTeacherForm;
     FTimetableRoomTypeForm: TTimetableRoomTypeForm;
-    FTimetableClassForm: TTimetableClassForm;
+    FTimetableClusterForm: TTimetableClusterForm;
     {$IFNDEF FREEWARE}
     procedure MejorarTimetable;
     {$ENDIF}
@@ -224,15 +224,15 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-procedure TTimetableForm.ActTimetableClassExecute(Sender: TObject);
+procedure TTimetableForm.ActTimetableClusterExecute(Sender: TObject);
 begin
   inherited;
-  if TTimetableClassForm.ToggleEditor(Self, FTimetableClassForm,
-    ConfigStorage, ActTimetableClass) then
+  if TTimetableClusterForm.ToggleEditor(Self, FTimetableClusterForm,
+    ConfigStorage, ActTimetableCluster) then
   begin
     with SourceDataModule do
-      FTimetableClassForm.LoadHints(TbDay, TbHour, TbTheme);
-    FTimetableClassForm.TBShowClick(nil);
+      FTimetableClusterForm.LoadHints(TbDay, TbHour, TbTheme);
+    FTimetableClusterForm.TBShowClick(nil);
   end;
 end;
 

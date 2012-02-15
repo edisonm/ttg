@@ -26,18 +26,18 @@ msgctxt "dsourcebaseconsts.sflassistance_idteacher"
 msgid "Assistant"
 msgstr "Ayudante"
 
-#: dsourcebaseconsts.sflclass_idlevel
-msgctxt "dsourcebaseconsts.sflclass_idlevel"
+#: dsourcebaseconsts.sflcluster_idlevel
+msgctxt "dsourcebaseconsts.sflcluster_idlevel"
 msgid "Level"
 msgstr "Nivel"
 
-#: dsourcebaseconsts.sflclass_idparallel
-msgctxt "dsourcebaseconsts.sflclass_idparallel"
+#: dsourcebaseconsts.sflcluster_idparallel
+msgctxt "dsourcebaseconsts.sflcluster_idparallel"
 msgid "Parallel"
 msgstr "Paralelo"
 
-#: dsourcebaseconsts.sflclass_idspecialization
-msgctxt "dsourcebaseconsts.sflclass_idspecialization"
+#: dsourcebaseconsts.sflcluster_idspecialization
+msgctxt "dsourcebaseconsts.sflcluster_idspecialization"
 msgid "Specialization"
 msgstr "Especializacion"
 
@@ -115,38 +115,38 @@ msgctxt "dsourcebaseconsts.sflhour_nahour"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sfljoinedclass_idlevel
-msgctxt "dsourcebaseconsts.sfljoinedclass_idlevel"
+#: dsourcebaseconsts.sfljoinedcluster_idlevel
+msgctxt "dsourcebaseconsts.sfljoinedcluster_idlevel"
 msgid "Level"
 msgstr "Nivel"
 
-#: dsourcebaseconsts.sfljoinedclass_idlevel1
-msgctxt "dsourcebaseconsts.sfljoinedclass_idlevel1"
+#: dsourcebaseconsts.sfljoinedcluster_idlevel1
+msgctxt "dsourcebaseconsts.sfljoinedcluster_idlevel1"
 msgid "Joined Level"
 msgstr "Nivel unido"
 
-#: dsourcebaseconsts.sfljoinedclass_idparallel
-msgctxt "dsourcebaseconsts.sfljoinedclass_idparallel"
+#: dsourcebaseconsts.sfljoinedcluster_idparallel
+msgctxt "dsourcebaseconsts.sfljoinedcluster_idparallel"
 msgid "Parallel"
 msgstr "Paralelo"
 
-#: dsourcebaseconsts.sfljoinedclass_idparallel1
-msgctxt "dsourcebaseconsts.sfljoinedclass_idparallel1"
+#: dsourcebaseconsts.sfljoinedcluster_idparallel1
+msgctxt "dsourcebaseconsts.sfljoinedcluster_idparallel1"
 msgid "Joined Parallel"
 msgstr "Paralelo unido"
 
-#: dsourcebaseconsts.sfljoinedclass_idspecialization
-msgctxt "dsourcebaseconsts.sfljoinedclass_idspecialization"
+#: dsourcebaseconsts.sfljoinedcluster_idspecialization
+msgctxt "dsourcebaseconsts.sfljoinedcluster_idspecialization"
 msgid "Specialization"
 msgstr "Especializacion"
 
-#: dsourcebaseconsts.sfljoinedclass_idspecialization1
-msgctxt "dsourcebaseconsts.sfljoinedclass_idspecialization1"
+#: dsourcebaseconsts.sfljoinedcluster_idspecialization1
+msgctxt "dsourcebaseconsts.sfljoinedcluster_idspecialization1"
 msgid "Joined Specialization"
 msgstr "Especializacion unida"
 
-#: dsourcebaseconsts.sfljoinedclass_idtheme
-msgctxt "dsourcebaseconsts.sfljoinedclass_idtheme"
+#: dsourcebaseconsts.sfljoinedcluster_idtheme
+msgctxt "dsourcebaseconsts.sfljoinedcluster_idtheme"
 msgid "Theme"
 msgstr "Materia"
 
@@ -395,9 +395,9 @@ msgctxt "dsourcebaseconsts.stbassistance"
 msgid "Assistances"
 msgstr "Ayudas"
 
-#: dsourcebaseconsts.stbclass
-msgctxt "dsourcebaseconsts.stbclass"
-msgid "Classes"
+#: dsourcebaseconsts.stbcluster
+msgctxt "dsourcebaseconsts.stbcluster"
+msgid "Clusters"
 msgstr "Clases"
 
 #: dsourcebaseconsts.stbcategory
@@ -420,9 +420,9 @@ msgctxt "dsourcebaseconsts.stbhour"
 msgid "Academic Hours"
 msgstr "Horas academicas"
 
-#: dsourcebaseconsts.stbjoinedclass
-msgctxt "dsourcebaseconsts.stbjoinedclass"
-msgid "Joined Classes"
+#: dsourcebaseconsts.stbjoinedcluster
+msgctxt "dsourcebaseconsts.stbjoinedcluster"
+msgid "Joined Clusters"
 msgstr "Clases unidas"
 
 #: dsourcebaseconsts.stblevel
@@ -490,7 +490,7 @@ msgctxt "dsourcebaseconsts.stbtimetabledetail"
 msgid "Detail of Timetables"
 msgstr "Detalle de los horarios"
 
-#: tclassform.dbgrid.hint
+#: tclusterform.dbgrid.hint
 msgid "Categories|Available categories"
 msgstr "Cursos|Cursos disponibles"
 
@@ -810,12 +810,12 @@ msgstr "Chequear factibilidad"
 msgid "Check feasibility|Check feasibility of input data"
 msgstr "Chequear factibilidad|Chequear la factibilidad de los datos ingresados"
 
-#: tmainform.actclass.caption
-msgctxt "tmainform.actclass.caption"
-msgid "Classes"
+#: tmainform.actcluster.caption
+msgctxt "tmainform.actcluster.caption"
+msgid "Clusters"
 msgstr "Clases"
 
-#: tmainform.actclass.hint
+#: tmainform.actcluster.hint
 #, fuzzy
 #| msgid "Categories|Categories with its given parallels"
 msgid "Categories|Categories with its given groups"
@@ -1541,9 +1541,9 @@ msgstr "Profesor"
 msgid "Distribution of Teachers"
 msgstr "Distribution de profesores"
 
-#: tteacherform.gbjoinedclass.caption
-msgctxt "tteacherform.gbjoinedclass.caption"
-msgid "Joined Classes"
+#: tteacherform.gbjoinedcluster.caption
+msgctxt "tteacherform.gbjoinedcluster.caption"
+msgid "Joined Clusters"
 msgstr "Clases agrupadas"
 
 #: tteacherform.grbdetail.caption
@@ -1555,12 +1555,12 @@ msgctxt "tteacherform.groupbox3.caption"
 msgid "Assistances"
 msgstr "Ayudas"
 
-#: ttimetableclassform.cbshowclass.hint
-msgctxt "ttimetableclassform.cbshowclass.hint"
+#: ttimetableclusterform.cbshowcluster.hint
+msgctxt "ttimetableclusterform.cbshowcluster.hint"
 msgid "Show|Param to show in the timetable"
 msgstr "Mostrar|Parametro a mostrar en el horario"
 
-#: ttimetableclassform.tbswaptimeslots.hint
+#: ttimetableclusterform.tbswaptimeslots.hint
 msgid "Swap time slots|Swap time slots"
 msgstr "Intercambiar periodos|Intercambiar periodos"
 
@@ -1637,12 +1637,12 @@ msgstr "Prohibiciones de profesor"
 msgid "Teacher retrictions|Teacher restrictions non satisfied"
 msgstr "Prohibiciones de profesor|Prohibiciones de profesor no respetadas"
 
-#: ttimetableform.acttimetableclass.caption
-msgid "Classes timetables"
+#: ttimetableform.acttimetablecluster.caption
+msgid "Clusters timetables"
 msgstr "Horario de paralelos"
 
-#: ttimetableform.acttimetableclass.hint
-msgid "Timetables per classes|Timetables per classes"
+#: ttimetableform.acttimetablecluster.hint
+msgid "Timetables per clusters|Timetables per clusters"
 msgstr "Horario de paralelos|Horario de paralelos"
 
 #: ttimetableform.acttimetableroomtype.caption
@@ -1755,24 +1755,24 @@ msgctxt "uttgconsts.sclashteacher"
 msgid "Clash of Teachers"
 msgstr "Cruce de profesores"
 
-#: uttgconsts.sclass
-msgid "Class"
+#: uttgconsts.scluster
+msgid "Cluster"
 msgstr "Clase"
 
-#: uttgconsts.sclasstimeslottosessionoverflow
-msgid "Overflow of pattern for ClassTimeSlotToSession: Class %d-%d Duration %d"
-msgstr "Se desbordo Molde de ClassTimeSlotToSession: Class %d-%d Duracion %d"
+#: uttgconsts.sclustertimeslottosessionoverflow
+msgid "Overflow of pattern for ClassTimeSlotToSession: Cluster %d-%d Duration %d"
+msgstr "Se desbordo Molde de ClassTimeSlotToSession: Cluster %d-%d Duracion %d"
 
-#: uttgconsts.sclassworkloadhead
-msgid "Class; Work Load"
+#: uttgconsts.sclusterworkloadhead
+msgid "Cluster; Work Load"
 msgstr "Clase; Carga"
 
-#: uttgconsts.sclassworkloadwithoutproblems
-msgid "Class work load without problems..."
+#: uttgconsts.sclusterworkloadwithoutproblems
+msgid "Cluster work load without problems..."
 msgstr "Carga horaria de paralelos sin problemas..."
 
-#: uttgconsts.sclassworkloadwithproblems
-msgid "Class work load with problems..."
+#: uttgconsts.sclusterworkloadwithproblems
+msgid "Cluster work load with problems..."
 msgstr "Carga Horaria de paralelos con problemas..."
 
 #: uttgconsts.scopyright

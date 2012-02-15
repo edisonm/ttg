@@ -19,10 +19,10 @@ inherited TimetableForm: TTimetableForm
       Hints.Strings = (      )
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbPost, nbCancel]
     end
-    object BtTimetableClass: TToolButton[3]
+    object BtTimetableCluster: TToolButton[3]
       Left = 201
       Top = 2
-      Action = ActTimetableClass
+      Action = ActTimetableCluster
       ParentShowHint = False
       ShowHint = True
     end
@@ -508,12 +508,12 @@ inherited TimetableForm: TTimetableForm
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
-    object ActTimetableClass: TAction[2]
+    object ActTimetableCluster: TAction[2]
       AutoCheck = True
-      Caption = 'Classes timetables'
+      Caption = 'Clusters timetables'
       Hint = 'Timetables per classes|Timetables per classes'
       ImageIndex = 2
-      OnExecute = ActTimetableClassExecute
+      OnExecute = ActTimetableClusterExecute
     end
     object ActTimetableTeacher: TAction[3]
       AutoCheck = True

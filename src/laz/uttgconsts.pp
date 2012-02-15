@@ -20,11 +20,11 @@ resourcestring
   SClashTheme = 'Clash of Themes';
   SClashTeacher = 'Clash of Teachers';
   SClashes = 'Clashes';
-  SClass = 'Class';
-  SClassTimeSlotToSessionOverflow = 'Overflow of pattern for ClassTimeSlotToSession: Class %d-%d Duration %d';
-  SClassWorkLoadHead = 'Class; Work Load';
-  SClassWorkLoadWithProblems = 'Class work load with problems...';
-  SClassWorkLoadWithoutProblems = 'Class work load without problems...';
+  SCluster = 'Cluster';
+  SClusterTimeSlotToSessionOverflow = 'Overflow of pattern for ClusterTimeSlotToSession: Cluster %d-%d Duration %d';
+  SClusterWorkLoadHead = 'Cluster; Work Load';
+  SClusterWorkLoadWithProblems = 'Cluster work load with problems...';
+  SClusterWorkLoadWithoutProblems = 'Cluster work load without problems...';
   SCopyright = '1999-2012 by Edison Mera';
   SCount = 'Count';
   SCrossProbability = 'Cross Probability';

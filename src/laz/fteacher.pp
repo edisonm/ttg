@@ -19,9 +19,9 @@ type
     TBTeacherRestriction: TToolButton;
     ActTeacherRestriction: TAction;
     DbGAssistances: TDBGrid;
-    DbGJoinedClass: TDBGrid;
+    DbGJoinedCluster: TDBGrid;
     GroupBox3: TGroupBox;
-    GBJoinedClass: TGroupBox;
+    GBJoinedCluster: TGroupBox;
     Panel3: TPanel;
     Splitter2: TSplitter;
     Splitter3: TSplitter;
@@ -159,9 +159,9 @@ begin
     TbAssistance.MasterFields := 'IdTheme;IdLevel;IdSpecialization;IdParallel';
     TbAssistance.LinkedFields := 'IdTheme;IdLevel;IdSpecialization;IdParallel';
     TbAssistance.MasterSource := SourceDataModule.DSDistribution;
-    TbJoinedClass.MasterFields := 'IdTheme;IdLevel;IdSpecialization;IdParallel';
-    TbJoinedClass.LinkedFields := 'IdTheme;IdLevel;IdSpecialization;IdParallel';
-    TbJoinedClass.MasterSource := SourceDataModule.DSDistribution;
+    TbJoinedCluster.MasterFields := 'IdTheme;IdLevel;IdSpecialization;IdParallel';
+    TbJoinedCluster.LinkedFields := 'IdTheme;IdLevel;IdSpecialization;IdParallel';
+    TbJoinedCluster.MasterSource := SourceDataModule.DSDistribution;
     {TbAssistance.Close;
     QuTeacher.Close;
     QuTeacher.Open;

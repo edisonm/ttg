@@ -49,21 +49,21 @@ type
       FThemeRestrictionToTheme, FThemeRestrictionToTimeSlot,
       FThemeRestrictionToThemeRestrictionType, FTeacherRestrictionToTeacher,
       FTeacherRestrictionToTimeSlot, FTeacherRestrictionToTeacherRestrictionType,
-      FDistributionToRoomType, FDistributionToRoomCount, FClassToCategory,
-      FClassToLevel, FClassToParallel, FDistributionToClass, FClassToSpecialization,
-      FClassToSessionCount, FThemeRestrictionTypeToValue, FTeacherRestrictionTypeToValue,
+      FDistributionToRoomType, FDistributionToRoomCount, FClusterToCategory,
+      FClusterToLevel, FClusterToParallel, FDistributionToCluster, FClusterToSpecialization,
+      FClusterToSessionCount, FThemeRestrictionTypeToValue, FTeacherRestrictionTypeToValue,
       FThemeRestrictionToValue, FTeacherRestrictionToValue: TDynamicIntegerArray;
     FSessionToDuration: TSessionArray;
-    FDayHourToTimeSlot, FLevelSpecializationToCategory, FCategoryParallelToClass,
-      FClassThemeToTeacher, FClassThemeToDistribution, FClassThemeCount,
-      FTimetableDetailPattern, FDistributionToSessions, FClassAssistanceToDistribution,
-      FClassAssistanceToTeacher, FTeacherTimeSlotToTeacherRestrictionType,
-      FClassJoinedClassToDistribution, FClassJoinedClassToClass,
+    FDayHourToTimeSlot, FLevelSpecializationToCategory, FCategoryParallelToCluster,
+      FClusterThemeToTeacher, FClusterThemeToDistribution, FClusterThemeCount,
+      FTimetableDetailPattern, FDistributionToSessions, FClusterAssistanceToDistribution,
+      FClusterAssistanceToTeacher, FTeacherTimeSlotToTeacherRestrictionType,
+      FClusterJoinedClusterToDistribution, FClusterJoinedClusterToCluster,
       FThemeTimeSlotToThemeRestrictionType: TDynamicIntegerArrayArray;
     FThemeCount, FThemeRestrictionTypeCount, FTeacherRestrictionTypeCount,
-      FClassCount, FDayCount, FHourCount, FTimeSlotCount, FTeacherCount, FCategoryCount,
+      FClusterCount, FDayCount, FHourCount, FTimeSlotCount, FTeacherCount, FCategoryCount,
       FLevelCount, FSpecializationCount, FRoomTypeCount, FDistributionCount,
-      FAssistanceCount, FJoinedClassCount: Integer;
+      FAssistanceCount, FJoinedClusterCount: Integer;
     FParallelToIdParallel, FThemeToIdTheme, FDayToIdDay, FHourToIdHour,
       FLevelToIdLevel, FSpecializationToIdSpecialization: TDynamicIntegerArray;
     FIdLevelToLevel, FIdSpecializationToSpecialization, FIdParallelToParallel, FIdDayToDay,
@@ -85,7 +85,7 @@ type
     procedure ReportParameters(AReport: TStrings);
     function NewIndividual: TIndividual; override;
     property TimeSlotCount: Integer read FTimeSlotCount;
-    property ClassCount: Integer read FClassCount;
+    property ClusterCount: Integer read FClusterCount;
     property ClashTeacherValue: Integer read FClashTeacherValue;
     property ClashThemeValue: Integer read FClashThemeValue;
     property BreakTimetableTeacherValue: Integer read FBreakTimetableTeacherValue;
@@ -95,7 +95,7 @@ type
     property NonScatteredThemeValue: Integer read FNonScatteredThemeValue;
     property SessionNumberDouble: Integer read FSessionNumberDouble;
     property SessionToDuration: TSessionArray read FSessionToDuration;
-    property ClassToSessionCount: TDynamicIntegerArray read FClassToSessionCount;
+    property ClusterToSessionCount: TDynamicIntegerArray read FClusterToSessionCount;
     property ElitistCount: Integer read GetElitistCount;
   end;
 
@@ -130,7 +130,7 @@ type
     TODO:
     2011-03-13:
     - DONE Change implementation of NonScatteredTheme with a more compositional formula
-    - DONE Remove FClassThemeDay{Min,Max}Hour
+    - DONE Remove FClusterThemeDay{Min,Max}Hour
     - DONE IncCount and DecCount must be methods
 
 
@@ -141,8 +141,8 @@ type
     FTeacherTimeSlotCount: TDynamicIntegerArrayArray;
     FThemeTimeSlotCount: TDynamicIntegerArrayArray;
     FRoomTypeTimeSlotCount: TDynamicIntegerArrayArray;
-    FClassDayThemeCount: TDynamicIntegerArrayArrayArray;
-    FClassDayThemeAccumulated: TDynamicIntegerArrayArrayArray;
+    FClusterDayThemeCount: TDynamicIntegerArrayArrayArray;
+    FClusterDayThemeAccumulated: TDynamicIntegerArrayArrayArray;
     FThemeRestrictionTypeToThemeCount: TDynamicIntegerArray;
     FTeacherRestrictionTypeATeacherCount: TDynamicIntegerArray;
     FDayTeacherMinHour: TDynamicIntegerArrayArray;
@@ -162,11 +162,11 @@ type
   TTimetable = class(TIndividual)
   private
     FTablingInfo: TTimetableTablingInfo;
-    FClassTimeSlotToSession: TDynamicIntegerArrayArray;
+    FClusterTimeSlotToSession: TDynamicIntegerArrayArray;
     procedure CheckIntegrity;
-    procedure CrossClass(Timetable2: TTimetable; AClass: Integer);
-    procedure DeltaValues(Delta, AClass, TimeSlot1, TimeSlot2: Integer);
-    function DeltaBrokenSession(AClass, TimeSlot1, TimeSlot2: Integer): Integer;
+    procedure CrossCluster(Timetable2: TTimetable; ACluster: Integer);
+    procedure DeltaValues(Delta, ACluster, TimeSlot1, TimeSlot2: Integer);
+    function DeltaBrokenSession(ACluster, TimeSlot1, TimeSlot2: Integer): Integer;
     function GetClashThemeValue: Integer;
     function GetNonScatteredThemeValue: Integer;
     function GetOutOfPositionEmptyHourValue: Integer;
@@ -178,7 +178,7 @@ type
     function GetClashRoomTypeValue: Integer;
     function GetValue: Integer;
     procedure RandomizeKey(var ARandomKey: TDynamicIntegerArray;
-      AClass: Integer);
+      ACluster: Integer);
     procedure Reset;
   protected
     function GetElitistValues(Index: Integer): Integer; override;
@@ -200,10 +200,10 @@ type
     procedure Assign(AIndividual: TIndividual); override;
     procedure Cross(AIndividual: TIndividual); override;
 
-    procedure Normalize(AClass: Integer; var ATimeSlot: Integer);
-    function InternalSwap(AClass, ATimeSlot1, ATimeSlot2: Integer): Integer;
-    function Swap(AClass, ATimeSlot1, ATimeSlot2: Integer): Integer;
-    function DoMove(AClass, ATimeSlot1: Integer; var ATimeSlot2: Integer): Integer;
+    procedure Normalize(ACluster: Integer; var ATimeSlot: Integer);
+    function InternalSwap(ACluster, ATimeSlot1, ATimeSlot2: Integer): Integer;
+    function Swap(ACluster, ATimeSlot1, ATimeSlot2: Integer): Integer;
+    function DoMove(ACluster, ATimeSlot1: Integer; var ATimeSlot2: Integer): Integer;
     procedure SaveToFile(const AFileName: string);
     property OutOfPositionEmptyHour: Integer read FTablingInfo.FOutOfPositionEmptyHour;
     property ThemeRestrictionTypeToThemeCount: TDynamicIntegerArray
@@ -224,8 +224,8 @@ type
     property NonScatteredThemeValue: Integer read GetNonScatteredThemeValue;
     property ThemeRestrictionValue: Integer read GetThemeRestrictionValue;
     property TeacherRestrictionValue: Integer read GetTeacherRestrictionValue;
-    property ClassTimeSlotToSession: TDynamicIntegerArrayArray
-      read FClassTimeSlotToSession write FClassTimeSlotToSession;
+    property ClusterTimeSlotToSession: TDynamicIntegerArrayArray
+      read FClusterTimeSlotToSession write FClusterTimeSlotToSession;
     property BreakTimetableTeacher: Integer read FTablingInfo.FBreakTimetableTeacher;
     property TablingInfo: TTimetableTablingInfo read FTablingInfo;
   end;
@@ -235,14 +235,14 @@ type
   TTTBookmark = class(TBookmark)
   private
     FIndividual: TIndividual;
-    FClasses: TDynamicIntegerArray;
+    FClusters: TDynamicIntegerArray;
     FPosition, FOffset, FTimeSlot1, FTimeSlot2: Integer;
-    function GetClass: Integer;
+    function GetCluster: Integer;
   protected
     function GetProgress: Integer; override;
     function GetMax: Integer; override;
   public
-    constructor Create(AIndividual: TIndividual; AClasss: TDynamicIntegerArray); overload;
+    constructor Create(AIndividual: TIndividual; AClusters: TDynamicIntegerArray); overload;
     function Clone: TBookmark; override;
     procedure First; override;
     procedure Next; override;
@@ -250,8 +250,8 @@ type
     function Move: Integer; override;
     function Undo: Integer; override;
     function Eof: Boolean; override;
-    property Class_: Integer read GetClass;
-    property Classes: TDynamicIntegerArray read FClasses;
+    property Cluster_: Integer read GetCluster;
+    property Clusters: TDynamicIntegerArray read FClusters;
     property Offset: Integer read FOffset write FOffset;
   end;
 
@@ -260,14 +260,14 @@ type
   TTTBookmark2 = class(TBookmark)
   private
     FIndividual: TIndividual;
-    FClasss: TDynamicIntegerArray;
+    FClusters: TDynamicIntegerArray;
     FPosition, FOffset, FProgress, FTimeSlot1, FTimeSlot2, FTimeSlot3: Integer;
-    function GetClass: Integer;
+    function GetCluster: Integer;
   protected
     function GetProgress: Integer; override;
     function GetMax: Integer; override;
   public
-    constructor Create(AIndividual: TIndividual; AClasss: TDynamicIntegerArray); overload;
+    constructor Create(AIndividual: TIndividual; AClusters: TDynamicIntegerArray); overload;
     function Clone: TBookmark; override;
     procedure First; override;
     procedure Next; override;
@@ -275,8 +275,8 @@ type
     function Move: Integer; override;
     function Undo: Integer; override;
     function Eof: Boolean; override;
-    property Class_: Integer read GetClass;
-    property Classs: TDynamicIntegerArray read FClasss;
+    property Cluster_: Integer read GetCluster;
+    property Clusters: TDynamicIntegerArray read FClusters;
     property Offset: Integer read FOffset write FOffset;
   end;
 
@@ -293,7 +293,7 @@ var
     FMinIdThemeRestrictionType: Integer;
   FDistributionToTheme, FIdThemeToTheme, FIdTeacherATeacher,
     FIdRoomTypeARoomType, FIdTeacherRestrictionTypeATeacherRestrictionType,
-    FIdThemeRestrictionTypeToThemeRestrictionType, FClassToDuration,
+    FIdThemeRestrictionTypeToThemeRestrictionType, FClusterToDuration,
     FDistributionToTeacher: TDynamicIntegerArray;
   FTeacherAIdTeacher, FTeacherRestrictionTypeAIdTeacherRestrictionType,
     FRoomTypeAIdRoomType, FThemeRestrictionTypeAIdThemeRestrictionType: TDynamicIntegerArray;
@@ -421,26 +421,26 @@ var
       First;
     end;
   end;
-  procedure LoadClass;
+  procedure LoadCluster;
   var
-    VClass, Category, Parallel, Level, Specialization: Integer;
+    VCluster, Category, Parallel, Level, Specialization: Integer;
     VFieldLevel, VFieldSpecialization, VFieldParallel: TField;
   begin
-    with SourceDataModule.TbClass do
+    with SourceDataModule.TbCluster do
     begin
       IndexFieldNames := 'IdLevel;IdSpecialization;IdParallel';
       First;
-      FClassCount := RecordCount;
-      SetLength(FClassToCategory, FClassCount);
-      SetLength(FClassToParallel, FClassCount);
-      SetLength(FClassToLevel, FClassCount);
-      SetLength(FClassToSpecialization, FClassCount);
-      SetLength(FCategoryParallelToClass, FCategoryCount, Length
+      FClusterCount := RecordCount;
+      SetLength(FClusterToCategory, FClusterCount);
+      SetLength(FClusterToParallel, FClusterCount);
+      SetLength(FClusterToLevel, FClusterCount);
+      SetLength(FClusterToSpecialization, FClusterCount);
+      SetLength(FCategoryParallelToCluster, FCategoryCount, Length
           (FParallelToIdParallel));
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
       VFieldParallel := FindField('IdParallel');
-      for VClass := 0 to FClassCount - 1 do
+      for VCluster := 0 to FClusterCount - 1 do
       begin
         Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
         Specialization := FIdSpecializationToSpecialization
@@ -448,11 +448,11 @@ var
         Category := FLevelSpecializationToCategory[Level, Specialization];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
           FMinIdParallel];
-        FClassToCategory[VClass] := Category;
-        FClassToLevel[VClass] := Level;
-        FClassToParallel[VClass] := Parallel;
-        FClassToSpecialization[VClass] := Specialization;
-        FCategoryParallelToClass[Category, Parallel] := VClass;
+        FClusterToCategory[VCluster] := Category;
+        FClusterToLevel[VCluster] := Level;
+        FClusterToParallel[VCluster] := Parallel;
+        FClusterToSpecialization[VCluster] := Specialization;
+        FCategoryParallelToCluster[Category, Parallel] := VCluster;
         Next;
       end;
       First;
@@ -603,7 +603,7 @@ var
   procedure LoadDistribution;
   var
     Theme, Level, Specialization, Parallel, Session1, Distribution, RoomCount,
-      VClass, Teacher, Category, Session2, Session, RoomType, VPos: Integer;
+      VCluster, Teacher, Category, Session2, Session, RoomType, VPos: Integer;
     VFieldTheme, VFieldLevel, VFieldParallel, VFieldTeacher, VFieldSpecialization,
       VFieldRoomType, VFieldRoomCount, VFieldComposition: TField;
     VSessionToDuration, VSessionToDistribution: array [0 .. 16383] of Integer;
@@ -623,21 +623,21 @@ var
       VFieldComposition := FindField('Composition');
       FDistributionCount := RecordCount;
       // SetLength(FDistributionAAsignatura, RecordCount);
-      SetLength(FDistributionToClass, FDistributionCount);
+      SetLength(FDistributionToCluster, FDistributionCount);
       SetLength(FDistributionToTeacher, FDistributionCount);
       SetLength(FDistributionToRoomType, FDistributionCount);
       SetLength(FDistributionToRoomCount, FDistributionCount);
       SetLength(FDistributionToSessions, FDistributionCount);
       SetLength(FDistributionToTheme, FDistributionCount);
-      SetLength(FClassThemeToTeacher, FClassCount, FThemeCount);
-      SetLength(FClassThemeCount, FClassCount, FThemeCount);
-      SetLength(FClassThemeToDistribution, FClassCount, FThemeCount);
-      for VClass := 0 to FClassCount - 1 do
+      SetLength(FClusterThemeToTeacher, FClusterCount, FThemeCount);
+      SetLength(FClusterThemeCount, FClusterCount, FThemeCount);
+      SetLength(FClusterThemeToDistribution, FClusterCount, FThemeCount);
+      for VCluster := 0 to FClusterCount - 1 do
         for Theme := 0 to FThemeCount - 1 do
         begin
-          FClassThemeCount[VClass, Theme] := 0;
-          FClassThemeToDistribution[VClass, Theme] := -1;
-          FClassThemeToTeacher[VClass, Theme] := -1;
+          FClusterThemeCount[VCluster, Theme] := 0;
+          FClusterThemeToDistribution[VCluster, Theme] := -1;
+          FClusterThemeToTeacher[VCluster, Theme] := -1;
         end;
       Session2 := 0;
       for Distribution := 0 to RecordCount - 1 do
@@ -651,15 +651,15 @@ var
         RoomType := FIdRoomTypeARoomType[VFieldRoomType.AsInteger - FMinIdRoomType];
         RoomCount := VFieldRoomCount.AsInteger;
         Category := FLevelSpecializationToCategory[Level, Specialization];
-        VClass := FCategoryParallelToClass[Category, Parallel];
+        VCluster := FCategoryParallelToCluster[Category, Parallel];
         Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
-        FDistributionToClass[Distribution] := VClass;
+        FDistributionToCluster[Distribution] := VCluster;
         FDistributionToTeacher[Distribution] := Teacher;
         FDistributionToRoomType[Distribution] := RoomType;
         FDistributionToRoomCount[Distribution] := RoomCount;
         FDistributionToTheme[Distribution] := Theme;
-        FClassThemeToTeacher[VClass, Theme] := Teacher;
-        FClassThemeToDistribution[VClass, Theme] := Distribution;
+        FClusterThemeToTeacher[VCluster, Theme] := Teacher;
+        FClusterThemeToDistribution[VCluster, Theme] := Distribution;
         Composition := VFieldComposition.AsString;
         VPos := 1;
         Session1 := Session2;
@@ -668,7 +668,7 @@ var
         begin
           VSessionToDuration[Session2] := StrToInt(ExtractString(Composition, VPos, '.'));
           VSessionToDistribution[Session2] := Distribution;
-          Inc(FClassThemeCount[VClass, Theme]);
+          Inc(FClusterThemeCount[VCluster, Theme]);
           // Inc(t, VSessionToDuration[Session2]);
           Inc(Session2);
         end;
@@ -677,7 +677,7 @@ var
         begin
           FDistributionToSessions[Distribution, Session - Session1] := Session;
         end;
-        // FClassToDuration[VClass] := FClassToDuration[VClass] + t;
+        // FClusterToDuration[VCluster] := FClusterToDuration[VCluster] + t;
         Next;
       end;
       SetLength(FSessionToDistribution, Session2);
@@ -699,7 +699,7 @@ var
   end;
   procedure LoadAssistance;
   var
-    Assistance, Counter, VClass, Category, Parallel, Level, Specialization, Theme,
+    Assistance, Counter, VCluster, Category, Parallel, Level, Specialization, Theme,
     Distribution, Teacher: Integer;
     VFieldTheme, VFieldLevel, VFieldSpecialization, VFieldParallel,
     VFieldTeacher: TField;
@@ -709,8 +709,8 @@ var
       IndexFieldNames := 'IdTheme;IdLevel;IdSpecialization;IdParallel;IdTeacher';
       First;
       FAssistanceCount := RecordCount;
-      SetLength(FClassAssistanceToDistribution, FClassCount, 0);
-      SetLength(FClassAssistanceToTeacher, FClassCount, 0);
+      SetLength(FClusterAssistanceToDistribution, FClusterCount, 0);
+      SetLength(FClusterAssistanceToTeacher, FClusterCount, 0);
       VFieldTheme := FindField('IdTheme');
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
@@ -725,33 +725,33 @@ var
         Category := FLevelSpecializationToCategory[Level, Specialization];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
           FMinIdParallel];
-        VClass := FCategoryParallelToClass[Category, Parallel];
-        Distribution := FClassThemeToDistribution[VClass, Theme];
+        VCluster := FCategoryParallelToCluster[Category, Parallel];
+        Distribution := FClusterThemeToDistribution[VCluster, Theme];
         Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
-        Counter := Length(FClassAssistanceToDistribution[VClass]);
-        SetLength(FClassAssistanceToDistribution[VClass], Counter + 1);
-        SetLength(FClassAssistanceToTeacher[VClass], Counter + 1);
-        FClassAssistanceToDistribution[VClass, Counter] := Distribution;
-        FClassAssistanceToTeacher[VClass, Counter] := Teacher;
+        Counter := Length(FClusterAssistanceToDistribution[VCluster]);
+        SetLength(FClusterAssistanceToDistribution[VCluster], Counter + 1);
+        SetLength(FClusterAssistanceToTeacher[VCluster], Counter + 1);
+        FClusterAssistanceToDistribution[VCluster, Counter] := Distribution;
+        FClusterAssistanceToTeacher[VCluster, Counter] := Teacher;
         Next;
       end;
       First;
     end;
   end;
-  procedure LoadJoinedClass;
+  procedure LoadJoinedCluster;
   var
-    JoinedClass, Counter, VClass1, Category1, Parallel1, Level1, Specialization1, VClass,
+    JoinedCluster, Counter, VCluster1, Category1, Parallel1, Level1, Specialization1, VCluster,
     Category, Parallel, Level, Specialization, Theme,  Distribution: Integer;
     VFieldTheme, VFieldLevel, VFieldSpecialization, VFieldParallel,
     VFieldLevel1, VFieldSpecialization1, VFieldParallel1: TField;
   begin
-    with SourceDataModule.TbJoinedClass do
+    with SourceDataModule.TbJoinedCluster do
     begin
       IndexFieldNames := 'IdTheme;IdLevel;IdSpecialization;IdParallel;IdLevel1;IdSpecialization1;IdParallel1';
       First;
-      FJoinedClassCount := RecordCount;
-      SetLength(FClassJoinedClassToDistribution, FClassCount, 0);
-      SetLength(FClassJoinedClassToClass, FClassCount, 0);
+      FJoinedClusterCount := RecordCount;
+      SetLength(FClusterJoinedClusterToDistribution, FClusterCount, 0);
+      SetLength(FClusterJoinedClusterToCluster, FClusterCount, 0);
       VFieldTheme := FindField('IdTheme');
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
@@ -759,7 +759,7 @@ var
       VFieldLevel1 := FindField('IdLevel1');
       VFieldSpecialization1 := FindField('IdSpecialization1');
       VFieldParallel1 := FindField('IdParallel1');
-      for JoinedClass := 0 to FJoinedClassCount - 1 do
+      for JoinedCluster := 0 to FJoinedClusterCount - 1 do
       begin
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
@@ -768,20 +768,20 @@ var
         Category := FLevelSpecializationToCategory[Level, Specialization];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
           FMinIdParallel];
-        VClass := FCategoryParallelToClass[Category, Parallel];
-        Distribution := FClassThemeToDistribution[VClass, Theme];
+        VCluster := FCategoryParallelToCluster[Category, Parallel];
+        Distribution := FClusterThemeToDistribution[VCluster, Theme];
         Level1 := FIdLevelToLevel[VFieldLevel1.AsInteger - FMinIdLevel];
         Specialization1 := FIdSpecializationToSpecialization
           [VFieldSpecialization1.AsInteger - FMinIdSpecialization];
         Category1 := FLevelSpecializationToCategory[Level1, Specialization1];
         Parallel1 := FIdParallelToParallel[VFieldParallel1.AsInteger -
           FMinIdParallel];
-        VClass1 := FCategoryParallelToClass[Category1, Parallel1];
-        Counter := Length(FClassJoinedClassToDistribution[VClass]);
-        SetLength(FClassJoinedClassToDistribution[VClass], Counter + 1);
-        SetLength(FClassJoinedClassToClass[VClass], Counter + 1);
-        FClassJoinedClassToDistribution[VClass, Counter] := Distribution;
-        FClassJoinedClassToClass[VClass, Counter] := VClass1;
+        VCluster1 := FCategoryParallelToCluster[Category1, Parallel1];
+        Counter := Length(FClusterJoinedClusterToDistribution[VCluster]);
+        SetLength(FClusterJoinedClusterToDistribution[VCluster], Counter + 1);
+        SetLength(FClusterJoinedClusterToCluster[VCluster], Counter + 1);
+        FClusterJoinedClusterToDistribution[VCluster, Counter] := Distribution;
+        FClusterJoinedClusterToCluster[VCluster, Counter] := VCluster1;
         Next;
       end;
       First;
@@ -789,52 +789,52 @@ var
   end;
   procedure LoadPatternTimetableDetail;
   var
-    TimeSlot1, VClass, Distribution, TimeSlot, Contador, Duration, Number: Integer;
+    TimeSlot1, VCluster, Distribution, TimeSlot, Contador, Duration, Number: Integer;
   begin
-    SetLength(FTimetableDetailPattern, FClassCount, FTimeSlotCount);
-    SetLength(FClassToSessionCount, FClassCount);
-    SetLength(FClassToDuration, FClassCount);
-    for VClass := 0 to FClassCount - 1 do
+    SetLength(FTimetableDetailPattern, FClusterCount, FTimeSlotCount);
+    SetLength(FClusterToSessionCount, FClusterCount);
+    SetLength(FClusterToDuration, FClusterCount);
+    for VCluster := 0 to FClusterCount - 1 do
     begin
-      FClassToDuration[VClass] := 0;
-      FClassToSessionCount[VClass] := 0;
+      FClusterToDuration[VCluster] := 0;
+      FClusterToSessionCount[VCluster] := 0;
       for TimeSlot := 0 to FTimeSlotCount - 1 do
       begin
-        FTimetableDetailPattern[VClass, TimeSlot] := -1;
+        FTimetableDetailPattern[VCluster, TimeSlot] := -1;
       end;
     end;
     for Distribution := FDistributionCount - 1 downto 0 do
     begin
-      VClass := FDistributionToClass[Distribution];
+      VCluster := FDistributionToCluster[Distribution];
       for Contador := High(FDistributionToSessions[Distribution]) downto 0 do
       begin
         Duration := FSessionToDuration[FDistributionToSessions[Distribution, Contador]];
-        TimeSlot1 := FClassToDuration[VClass];
+        TimeSlot1 := FClusterToDuration[VCluster];
         for TimeSlot := TimeSlot1 to TimeSlot1 + Duration - 1 do
         begin
           if (TimeSlot < 0) or (TimeSlot >= FTimeSlotCount) then
-            raise Exception.CreateFmt(SClassTimeSlotToSessionOverflow,
-              [FClassToLevel[VClass], FClassToParallel[VClass], TimeSlot]);
-          FTimetableDetailPattern[VClass, FTimeSlotCount - 1 - TimeSlot]
+            raise Exception.CreateFmt(SClusterTimeSlotToSessionOverflow,
+              [FClusterToLevel[VCluster], FClusterToParallel[VCluster], TimeSlot]);
+          FTimetableDetailPattern[VCluster, FTimeSlotCount - 1 - TimeSlot]
             := FDistributionToSessions[Distribution, Contador];
         end;
-        Inc(FClassToDuration[VClass], Duration);
+        Inc(FClusterToDuration[VCluster], Duration);
       end;
     end;
-    for VClass := 0 to FClassCount - 1 do
+    for VCluster := 0 to FClusterCount - 1 do
     begin
       TimeSlot := 0;
       while TimeSlot < FTimeSlotCount do
       begin
-        Duration := FSessionToDuration[FTimetableDetailPattern[VClass, TimeSlot]];
+        Duration := FSessionToDuration[FTimetableDetailPattern[VCluster, TimeSlot]];
         Inc(TimeSlot, Duration);
-        Inc(FClassToSessionCount[VClass]);
+        Inc(FClusterToSessionCount[VCluster]);
       end;
     end;
     FSessionNumberDouble := 0;
-    for VClass := 0 to FClassCount - 1 do
+    for VCluster := 0 to FClusterCount - 1 do
     begin
-      Number := FClassToSessionCount[VClass];
+      Number := FClusterToSessionCount[VCluster];
       Inc(FSessionNumberDouble, (Number * (Number - 1)) div 2);
     end;
   end;
@@ -877,7 +877,7 @@ begin
       FRoomTypeAIdRoomType);
     FRoomTypeCount := Length(FRoomTypeAIdRoomType);
     LoadTimeSlot;
-    LoadClass;
+    LoadCluster;
     LoadRoomType;
     LoadThemeRestrictionType;
     LoadTeacherRestrictionType;
@@ -885,7 +885,7 @@ begin
     LoadTeacherRestriction;
     LoadDistribution;
     LoadAssistance;
-    LoadJoinedClass;
+    LoadJoinedCluster;
     LoadPatternTimetableDetail;
   end;
 end;
@@ -936,7 +936,7 @@ begin
 end;
 
 procedure TTimetable.RandomizeKey(var ARandomKey: TDynamicIntegerArray;
-  AClass: Integer);
+  ACluster: Integer);
 var
   TimeSlot, Duration, Counter, MaxTimeSlot: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
@@ -944,10 +944,10 @@ var
 begin
   with TTimetableModel(Model) do
   begin
-    for Counter := 0 to FClassToSessionCount[AClass] - 1 do
+    for Counter := 0 to FClusterToSessionCount[ACluster] - 1 do
       NumberList[Counter] := Random($7FFFFFFF);
-    Sort(NumberList, 0, FClassToSessionCount[AClass] - 1);
-    TimeSlotToSession := ClassTimeSlotToSession[AClass];
+    Sort(NumberList, 0, FClusterToSessionCount[ACluster] - 1);
+    TimeSlotToSession := ClusterTimeSlotToSession[ACluster];
     TimeSlot := 0;
     Counter := 0;
     while TimeSlot < FTimeSlotCount do
@@ -964,7 +964,7 @@ begin
   end;
 end;
 
-procedure TTimetable.CrossClass(Timetable2: TTimetable; AClass: Integer);
+procedure TTimetable.CrossCluster(Timetable2: TTimetable; ACluster: Integer);
 var
   Session, TimeSlot, Duration, Key1, Key2, MaxTimeSlot: Integer;
   RandomKey1, RandomKey2: TDynamicIntegerArray;
@@ -972,17 +972,17 @@ begin
   with TTimetableModel(Model) do
   begin
     SetLength(RandomKey1, FTimeSlotCount);
-    RandomizeKey(RandomKey1, AClass);
-    SortInteger(ClassTimeSlotToSession[AClass], RandomKey1, 0, FTimeSlotCount - 1);
+    RandomizeKey(RandomKey1, ACluster);
+    SortInteger(ClusterTimeSlotToSession[ACluster], RandomKey1, 0, FTimeSlotCount - 1);
 
     SetLength(RandomKey2, FTimeSlotCount);
-    Timetable2.RandomizeKey(RandomKey2, AClass);
-    SortInteger(Timetable2.ClassTimeSlotToSession[AClass], RandomKey2, 0, FTimeSlotCount - 1);
+    Timetable2.RandomizeKey(RandomKey2, ACluster);
+    SortInteger(Timetable2.ClusterTimeSlotToSession[ACluster], RandomKey2, 0, FTimeSlotCount - 1);
 
     TimeSlot := 0;
     while TimeSlot < FTimeSlotCount do
     begin
-      Session := FTimetableDetailPattern[AClass, TimeSlot];
+      Session := FTimetableDetailPattern[ACluster, TimeSlot];
       Duration := FSessionToDuration[Session];
       if Random(2) = 0 then
       begin
@@ -999,21 +999,21 @@ begin
       else
         Inc(TimeSlot, Duration);
     end;
-    SortInteger(RandomKey1, ClassTimeSlotToSession[AClass], 0, FTimeSlotCount - 1);
-    SortInteger(RandomKey2, Timetable2.ClassTimeSlotToSession[AClass], 0,
+    SortInteger(RandomKey1, ClusterTimeSlotToSession[ACluster], 0, FTimeSlotCount - 1);
+    SortInteger(RandomKey2, Timetable2.ClusterTimeSlotToSession[ACluster], 0,
       FTimeSlotCount - 1);
   end;
 end;
 
 procedure TTimetable.Cross(AIndividual: TIndividual);
 var
-  VClass: Integer;
+  VCluster: Integer;
 begin
   with TTimetableModel(Model) do
   begin
-    for VClass := 0 to FClassCount - 1 do
+    for VCluster := 0 to FClusterCount - 1 do
     begin
-      CrossClass(TTimetable(AIndividual), VClass);
+      CrossCluster(TTimetable(AIndividual), VCluster);
     end;
     Update;
     TTimetable(AIndividual).Update;
@@ -1026,15 +1026,15 @@ begin
   FModel := ATimetableModel;
   with TTimetableModel(Model) do
   begin
-    SetLength(FClassTimeSlotToSession, FClassCount, FTimeSlotCount);
+    SetLength(FClusterTimeSlotToSession, FClusterCount, FTimeSlotCount);
     FTablingInfo := TTimetableTablingInfo.Create;
     with TablingInfo do
     begin
       SetLength(FThemeTimeSlotCount, FThemeCount, FTimeSlotCount);
       SetLength(FTeacherTimeSlotCount, FTeacherCount, FTimeSlotCount);
       SetLength(FRoomTypeTimeSlotCount, FRoomTypeCount, FTimeSlotCount);
-      SetLength(FClassDayThemeCount, FClassCount, FDayCount, FThemeCount);
-      SetLength(FClassDayThemeAccumulated, FClassCount, FDayCount, FThemeCount);
+      SetLength(FClusterDayThemeCount, FClusterCount, FDayCount, FThemeCount);
+      SetLength(FClusterDayThemeAccumulated, FClusterCount, FDayCount, FThemeCount);
       SetLength(FDayTeacherMinHour, FDayCount, FTeacherCount);
       SetLength(FDayTeacherMaxHour, FDayCount, FTeacherCount);
       SetLength(FDayTeacherEmptyHourCount, FDayCount, FTeacherCount);
@@ -1055,18 +1055,18 @@ end;
 
 procedure TTimetable.MakeRandom;
 var
-  VClass, TimeSlot, Duration, MaxTimeSlot, RandomKey: Integer;
+  VCluster, TimeSlot, Duration, MaxTimeSlot, RandomKey: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
   RandomKeys: TDynamicIntegerArray;
 begin
   with TTimetableModel(Model) do
   begin
     SetLength(RandomKeys, FTimeSlotCount);
-    for VClass := 0 to FClassCount - 1 do
+    for VCluster := 0 to FClusterCount - 1 do
     begin
-      TimeSlotToSession := ClassTimeSlotToSession[VClass];
+      TimeSlotToSession := ClusterTimeSlotToSession[VCluster];
       for TimeSlot := 0 to FTimeSlotCount - 1 do
-        TimeSlotToSession[TimeSlot] := FTimetableDetailPattern[VClass, TimeSlot];
+        TimeSlotToSession[TimeSlot] := FTimetableDetailPattern[VCluster, TimeSlot];
       TimeSlot := 0;
       while TimeSlot < FTimeSlotCount do
       begin
@@ -1085,43 +1085,43 @@ begin
   Update;
 end;
 
-function TTimetable.Swap(AClass, ATimeSlot1, ATimeSlot2: Integer): Integer;
+function TTimetable.Swap(ACluster, ATimeSlot1, ATimeSlot2: Integer): Integer;
 begin
-  Normalize(AClass, ATimeSlot1);
-  Normalize(AClass, ATimeSlot2);
+  Normalize(ACluster, ATimeSlot1);
+  Normalize(ACluster, ATimeSlot2);
   if ATimeSlot1 < ATimeSlot2 then
-    Result := InternalSwap(AClass, ATimeSlot1, ATimeSlot2)
+    Result := InternalSwap(ACluster, ATimeSlot1, ATimeSlot2)
   else if ATimeSlot2 < ATimeSlot1 then
-    Result := InternalSwap(AClass, ATimeSlot2, ATimeSlot1);
+    Result := InternalSwap(ACluster, ATimeSlot2, ATimeSlot1);
 end;
 
-function TTimetable.DoMove(AClass, ATimeSlot1: Integer; var ATimeSlot2: Integer): Integer;
+function TTimetable.DoMove(ACluster, ATimeSlot1: Integer; var ATimeSlot2: Integer): Integer;
 var
   Duration1, Duration2: Integer;
 begin
   with TTimetableModel(Model) do
   begin
-    Duration1 := SessionToDuration[ClassTimeSlotToSession[AClass, ATimeSlot1]];
-    Duration2 := SessionToDuration[ClassTimeSlotToSession[AClass, ATimeSlot2]];
+    Duration1 := SessionToDuration[ClusterTimeSlotToSession[ACluster, ATimeSlot1]];
+    Duration2 := SessionToDuration[ClusterTimeSlotToSession[ACluster, ATimeSlot2]];
   end;
-  Result := InternalSwap(AClass, ATimeSlot1, ATimeSlot2);
+  Result := InternalSwap(ACluster, ATimeSlot1, ATimeSlot2);
   ATimeSlot2 := ATimeSlot2 + Duration2 - Duration1;
 end;
 
-procedure TTimetable.DeltaValues(Delta, AClass, TimeSlot1, TimeSlot2: Integer);
+procedure TTimetable.DeltaValues(Delta, ACluster, TimeSlot1, TimeSlot2: Integer);
 var
   ThemeRestrictionType, TeacherRestrictionType, TimeSlot, TimeSlot0, Day, DDay,
   Day1, Day2, Hour, Session, Teacher, RoomType, Duration, Theme, Limit, Assistance,
-  JoinedClass, Distribution, DeltaBreakTimetableTeacher, MinTimeSlot, MaxTimeSlot,
-  Class1: Integer;
+  JoinedCluster, Distribution, DeltaBreakTimetableTeacher, MinTimeSlot, MaxTimeSlot,
+  Cluster1: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
   ThemeATeacher: TDynamicIntegerArray;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
-    Inc(FBrokenSession, Delta * DeltaBrokenSession(AClass, TimeSlot1, TimeSlot2));
-    TimeSlotToSession := FClassTimeSlotToSession[AClass];
-    ThemeATeacher := FClassThemeToTeacher[AClass];
+    Inc(FBrokenSession, Delta * DeltaBrokenSession(ACluster, TimeSlot1, TimeSlot2));
+    TimeSlotToSession := FClusterTimeSlotToSession[ACluster];
+    ThemeATeacher := FClusterThemeToTeacher[ACluster];
     if Delta > 0 then
       Limit := 0
     else
@@ -1232,28 +1232,28 @@ begin
         Day2 := FTimeSlotToDay[TimeSlot + Duration - 1];
         for Day := Day1 to Day2 do
         begin
-          if FClassDayThemeCount[AClass, Day, Theme] > Limit then
+          if FClusterDayThemeCount[ACluster, Day, Theme] > Limit then
             Inc(FClashTheme, Delta);
-          Inc(FClassDayThemeCount[AClass, Day, Theme], Delta);
+          Inc(FClusterDayThemeCount[ACluster, Day, Theme], Delta);
         end;
-        DDay := FDayCount div FClassThemeCount[AClass, Theme];
+        DDay := FDayCount div FClusterThemeCount[ACluster, Theme];
         for Day2 := Day1 to Day1 + DDay - 1 do
         begin
           Day := Day2 mod (FDayCount + 1);
           if Day <> FDayCount then
           begin
-            if FClassDayThemeAccumulated[AClass, Day, Theme] > Limit then
+            if FClusterDayThemeAccumulated[ACluster, Day, Theme] > Limit then
               Inc(FNonScatteredTheme, Delta);
-            Inc(FClassDayThemeAccumulated[AClass, Day, Theme], Delta);
+            Inc(FClusterDayThemeAccumulated[ACluster, Day, Theme], Delta);
           end;
         end;
       end;
       Inc(TimeSlot, Duration);
     end;
-    for Assistance := 0 to High(FClassAssistanceToDistribution[AClass]) do
+    for Assistance := 0 to High(FClusterAssistanceToDistribution[ACluster]) do
     begin
-      Distribution := FClassAssistanceToDistribution[AClass, Assistance];
-      Teacher := FClassAssistanceToTeacher[AClass, Assistance];
+      Distribution := FClusterAssistanceToDistribution[ACluster, Assistance];
+      Teacher := FClusterAssistanceToTeacher[ACluster, Assistance];
       for TimeSlot := TimeSlot1 to TimeSlot2 do
       begin
         Session := TimeSlotToSession[TimeSlot];
@@ -1268,10 +1268,10 @@ begin
         end
       end;
     end;
-    for JoinedClass := 0 to High(FClassJoinedClassToDistribution[AClass]) do
+    for JoinedCluster := 0 to High(FClusterJoinedClusterToDistribution[ACluster]) do
     begin
-      Distribution := FClassJoinedClassToDistribution[AClass, JoinedClass];
-      Class1 := FClassJoinedClassToClass[AClass, JoinedClass];
+      Distribution := FClusterJoinedClusterToDistribution[ACluster, JoinedCluster];
+      Cluster1 := FClusterJoinedClusterToCluster[ACluster, JoinedCluster];
       for TimeSlot := TimeSlot1 to TimeSlot2 do
       begin
         Session := TimeSlotToSession[TimeSlot];
@@ -1279,7 +1279,7 @@ begin
         begin
           if Distribution = FSessionToDistribution[Session] then
           begin
-            if FClassTimeSlotToSession[Class1, TimeSlot] >= 0 then
+            if FClusterTimeSlotToSession[Cluster1, TimeSlot] >= 0 then
               Inc(FClashTheme, Delta);
           end;
         end;
@@ -1288,7 +1288,7 @@ begin
   end;
 end;
 
-function TTimetable.InternalSwap(AClass, ATimeSlot1, ATimeSlot2: Integer): Integer;
+function TTimetable.InternalSwap(ACluster, ATimeSlot1, ATimeSlot2: Integer): Integer;
 var
   Duration1, Duration2, Session1, Session2: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
@@ -1326,27 +1326,27 @@ begin
     Update;
     Value1 := FValue;
     {$ENDIF}
-    TimeSlotToSession := ClassTimeSlotToSession[AClass];
+    TimeSlotToSession := ClusterTimeSlotToSession[ACluster];
     Session1 := TimeSlotToSession[ATimeSlot1];
     Session2 := TimeSlotToSession[ATimeSlot2];
     Duration1 := FSessionToDuration[Session1];
     Duration2 := FSessionToDuration[Session2];
     if (Duration1 = Duration2) then
     begin
-      DeltaValues(-1, AClass, ATimeSlot1, ATimeSlot1 + Duration1 - 1);
-      DeltaValues(-1, AClass, ATimeSlot2, ATimeSlot2 + Duration2 - 1);
+      DeltaValues(-1, ACluster, ATimeSlot1, ATimeSlot1 + Duration1 - 1);
+      DeltaValues(-1, ACluster, ATimeSlot2, ATimeSlot2 + Duration2 - 1);
       for TimeSlot := ATimeSlot1 to ATimeSlot1 + Duration2 - 1 do
         TimeSlotToSession[TimeSlot] := Session2;
       for TimeSlot := ATimeSlot2 to ATimeSlot2 + Duration2 - 1 do
         TimeSlotToSession[TimeSlot] := Session1;
-      DeltaValues(1, AClass, ATimeSlot1, ATimeSlot1 + Duration1 - 1);
-      DeltaValues(1, AClass, ATimeSlot2, ATimeSlot2 + Duration2 - 1);
+      DeltaValues(1, ACluster, ATimeSlot1, ATimeSlot1 + Duration1 - 1);
+      DeltaValues(1, ACluster, ATimeSlot2, ATimeSlot2 + Duration2 - 1);
     end
     else
     begin
-      DeltaValues(-1, AClass, ATimeSlot1, ATimeSlot2 + Duration2 - 1);
+      DeltaValues(-1, ACluster, ATimeSlot1, ATimeSlot2 + Duration2 - 1);
       DoMovement;
-      DeltaValues(1, AClass, ATimeSlot1, ATimeSlot2 + Duration2 - 1);
+      DeltaValues(1, ACluster, ATimeSlot1, ATimeSlot2 + Duration2 - 1);
     end;
     FValue := GetValue;
     {$IFDEF DEBUG}
@@ -1393,12 +1393,12 @@ begin
 end;
 
 {WARNING!!! Normalize is a Kludge, avoid its usage!!!}
-procedure TTimetable.Normalize(AClass: Integer; var ATimeSlot: Integer);
+procedure TTimetable.Normalize(ACluster: Integer; var ATimeSlot: Integer);
 var
   Session: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
 begin
-  TimeSlotToSession := FClassTimeSlotToSession[AClass];
+  TimeSlotToSession := FClusterTimeSlotToSession[ACluster];
   Session := TimeSlotToSession[ATimeSlot];
   if Session >= 0 then
     while (ATimeSlot > 0) and (Session = TimeSlotToSession[ATimeSlot - 1]) do
@@ -1407,11 +1407,11 @@ end;
 
 {Assembler version of Normalize}
 (*
-  procedure TTimetable.Normalize(AClass: Integer; var ATimeSlot: Integer); assembler;
+  procedure TTimetable.Normalize(ACluster: Integer; var ATimeSlot: Integer); assembler;
   asm
   push    ebx
-  mov     eax, [eax + FClassTimeSlotToSession]
-  movsx   edx, AClass
+  mov     eax, [eax + FClusterTimeSlotToSession]
+  movsx   edx, ACluster
   mov     eax, [eax + edx * 4]
   movsx   edx, word ptr [ecx]
   mov     bx, [eax + edx * 2]
@@ -1469,16 +1469,16 @@ end;
 
 procedure TTimetable.Mutate;
 var
-  VClass, TimeSlot1, TimeSlot2: Integer;
+  VCluster, TimeSlot1, TimeSlot2: Integer;
 begin
   with TTimetableModel(Model) do
   begin
     TimeSlot1 := Random(FTimeSlotCount);
     TimeSlot2 := Random(FTimeSlotCount);
-    VClass := Random(FClassCount);
-    if ClassTimeSlotToSession[VClass, TimeSlot1]
-    <> ClassTimeSlotToSession[VClass, TimeSlot2] then
-      Swap(VClass, TimeSlot1, TimeSlot2);
+    VCluster := Random(FClusterCount);
+    if ClusterTimeSlotToSession[VCluster, TimeSlot1]
+    <> ClusterTimeSlotToSession[VCluster, TimeSlot2] then
+      Swap(VCluster, TimeSlot1, TimeSlot2);
   end;
 end;
 
@@ -1518,7 +1518,7 @@ begin
   Result := TTimetableModel(Model).BrokenSessionValue * BrokenSession;
 end;
 
-function TTimetable.DeltaBrokenSession(AClass, TimeSlot1, TimeSlot2: Integer): Integer;
+function TTimetable.DeltaBrokenSession(ACluster, TimeSlot1, TimeSlot2: Integer): Integer;
 var
   TimeSlot, Hour1, Hour2, Day1, Day2, Session, Duration: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
@@ -1526,7 +1526,7 @@ begin
   with TTimetableModel(Model), TablingInfo do
   begin
     TimeSlot := TimeSlot1;
-    TimeSlotToSession := FClassTimeSlotToSession[AClass];
+    TimeSlotToSession := FClusterTimeSlotToSession[ACluster];
     Result := 0;
     while TimeSlot <= TimeSlot2 do
     begin
@@ -1589,7 +1589,7 @@ end;
 
 function TTimetable.NewBookmark: TBookmark;
 begin
-  Result := TTTBookmark.Create(Self, RandomIndexes(TTimetableModel(Model).ClassCount));
+  Result := TTTBookmark.Create(Self, RandomIndexes(TTimetableModel(Model).ClusterCount));
 end;
 
 destructor TTimetable.Destroy;
@@ -1600,16 +1600,16 @@ end;
 
 procedure TTimetable.Assign(AIndividual: TIndividual);
 var
-  VClass, Theme, Teacher, RoomType, Day: Integer;
+  VCluster, Theme, Teacher, RoomType, Day: Integer;
   ATimetable: TTimetable;
 begin
   inherited;
   ATimetable := TTimetable(AIndividual);
   with TTimetableModel(Model), TablingInfo do
   begin
-    for VClass := 0 to FClassCount - 1 do
-      Move(ATimetable.ClassTimeSlotToSession[VClass, 0],
-        ClassTimeSlotToSession[VClass, 0], FTimeSlotCount * SizeOf(Integer));
+    for VCluster := 0 to FClusterCount - 1 do
+      Move(ATimetable.ClusterTimeSlotToSession[VCluster, 0],
+        ClusterTimeSlotToSession[VCluster, 0], FTimeSlotCount * SizeOf(Integer));
     FClashTeacher := ATimetable.TablingInfo.FClashTeacher;
     FClashTheme := ATimetable.TablingInfo.FClashTheme;
     FClashRoomType := ATimetable.TablingInfo.FClashRoomType;
@@ -1644,14 +1644,14 @@ begin
       Move(ATimetable.TablingInfo.FRoomTypeTimeSlotCount[RoomType, 0],
         TablingInfo.FRoomTypeTimeSlotCount[RoomType, 0],
         FTimeSlotCount * SizeOf(Integer));
-    for VClass := 0 to FClassCount - 1 do
+    for VCluster := 0 to FClusterCount - 1 do
       for Day := 0 to FDayCount - 1 do
       begin
-        Move(ATimetable.TablingInfo.FClassDayThemeCount[VClass, Day, 0],
-          TablingInfo.FClassDayThemeCount[VClass, Day, 0],
+        Move(ATimetable.TablingInfo.FClusterDayThemeCount[VCluster, Day, 0],
+          TablingInfo.FClusterDayThemeCount[VCluster, Day, 0],
           FThemeCount * SizeOf(Integer));
-        Move(ATimetable.TablingInfo.FClassDayThemeAccumulated[VClass, Day, 0],
-          TablingInfo.FClassDayThemeAccumulated[VClass, Day, 0],
+        Move(ATimetable.TablingInfo.FClusterDayThemeAccumulated[VCluster, Day, 0],
+          TablingInfo.FClusterDayThemeAccumulated[VCluster, Day, 0],
           FThemeCount * SizeOf(Integer));
       end;
   end;
@@ -1660,23 +1660,23 @@ end;
 procedure TTimetable.SaveToFile(const AFileName: string);
 var
   VStrings: TStrings;
-  VClass, TimeSlot: Integer;
+  VCluster, TimeSlot: Integer;
 begin
   VStrings := TStringList.Create;
   with TTimetableModel(Model) do
     try
-      for VClass := 0 to FClassCount - 1 do
+      for VCluster := 0 to FClusterCount - 1 do
       begin
-        VStrings.Add(Format('Class %d %d %d',
-            [FLevelToIdLevel[FClassToLevel[VClass]],
-            FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
-            FParallelToIdParallel[FClassToParallel[VClass]]]));
+        VStrings.Add(Format('Cluster %d %d %d',
+            [FLevelToIdLevel[FClusterToLevel[VCluster]],
+            FSpecializationToIdSpecialization[FClusterToSpecialization[VCluster]],
+            FParallelToIdParallel[FClusterToParallel[VCluster]]]));
         for TimeSlot := 0 to FTimeSlotCount - 1 do
         begin
           VStrings.Add(Format(' Day %d Hour %d Theme %d', [FTimeSlotToDay[TimeSlot],
               FTimeSlotToHour[TimeSlot],
-              FThemeToIdTheme[FSessionToTheme[ClassTimeSlotToSession[
-                VClass, TimeSlot]]]]));
+              FThemeToIdTheme[FSessionToTheme[ClusterTimeSlotToSession[
+                VCluster, TimeSlot]]]]));
         end;
       end;
       VStrings.SaveToFile(AFileName);
@@ -1687,23 +1687,23 @@ end;
 
 procedure TTimetable.SaveToStream(Stream: TStream);
 var
-  VClass: Integer;
+  VCluster: Integer;
 begin
   with TTimetableModel(Model) do
-    for VClass := 0 to FClassCount - 1 do
+    for VCluster := 0 to FClusterCount - 1 do
     begin
-      Stream.Write(ClassTimeSlotToSession[VClass, 0], FTimeSlotCount * SizeOf(Integer));
+      Stream.Write(ClusterTimeSlotToSession[VCluster, 0], FTimeSlotCount * SizeOf(Integer));
     end;
 end;
 
 procedure TTimetable.LoadFromStream(Stream: TStream);
 var
-  VClass: Integer;
+  VCluster: Integer;
 begin
   with TTimetableModel(Model) do
-    for VClass := 0 to FClassCount - 1 do
+    for VCluster := 0 to FClusterCount - 1 do
     begin
-      Stream.Read(ClassTimeSlotToSession[VClass, 0], FTimeSlotCount * SizeOf(Integer));
+      Stream.Read(ClusterTimeSlotToSession[VCluster, 0], FTimeSlotCount * SizeOf(Integer));
     end;
   Update;
 end;
@@ -1754,7 +1754,7 @@ var
   end;
   procedure SaveTimetableDetail;
   var
-    VClass, TimeSlot, IdLevel, IdParallel, IdSpecialization, Session: Integer;
+    VCluster, TimeSlot, IdLevel, IdParallel, IdSpecialization, Session: Integer;
     {$IFNDEF USE_SQL}
     FieldTimetable, FieldLevel, FieldParallel, FieldSpecialization, FieldDay,
       FieldHour, FieldTheme, FieldSession: TField;
@@ -1762,15 +1762,15 @@ var
   begin
   {$IFDEF USE_SQL}
       with TTimetableModel(Model) do
-      for VClass := 0 to FClassCount - 1 do
+      for VCluster := 0 to FClusterCount - 1 do
       begin
-        IdLevel := FLevelToIdLevel[FClassToLevel[VClass]];
-        IdParallel := FParallelToIdParallel[FClassToParallel[VClass]];
+        IdLevel := FLevelToIdLevel[FClusterToLevel[VCluster]];
+        IdParallel := FParallelToIdParallel[FClusterToParallel[VCluster]];
         IdSpecialization := FSpecializationToIdSpecialization
-          [FClassToSpecialization[VClass]];
+          [FClusterToSpecialization[VCluster]];
         for TimeSlot := 0 to FTimeSlotCount - 1 do
         begin
-          Session := ClassTimeSlotToSession[VClass, TimeSlot];
+          Session := ClusterTimeSlotToSession[VCluster, TimeSlot];
           if Session >= 0 then
           begin
             SQL.Add(Format(
@@ -1800,15 +1800,15 @@ var
         FieldTheme := FindField('IdTheme');
         FieldSession := FindField('Session');
         with TTimetableModel(Model) do
-        for VClass := 0 to FClassCount - 1 do
+        for VCluster := 0 to FClusterCount - 1 do
         begin
-          IdLevel := FLevelAIdLevel[FClassALevel[VClass]];
-          IdParallel := FParallelAIdParallel[FClassAParallel[VClass]];
+          IdLevel := FLevelAIdLevel[FClusterALevel[VCluster]];
+          IdParallel := FParallelAIdParallel[FClusterAParallel[VCluster]];
           IdSpecialization := FSpecializationAIdSpecialization
-            [FClassASpecialization[VClass]];
+            [FClusterASpecialization[VCluster]];
           for TimeSlot := 0 to FTimeSlotCount - 1 do
           begin
-            Session := ClassTimeSlotToSession[VClass, TimeSlot];
+            Session := ClusterTimeSlotToSession[VCluster, TimeSlot];
             if Session >= 0 then
             begin
               Append;
@@ -1860,7 +1860,7 @@ procedure TTimetable.LoadFromDataModule(IdTimetable: Integer);
 var
   FieldLevel, FieldParallel, FieldSpecialization, FieldDay, FieldHour,
     FieldSession: TLongintField;
-  VClass, TimeSlot: Integer;
+  VCluster, TimeSlot: Integer;
 begin
   with SourceDataModule, TTimetableModel(Model), TbTimetableDetail do
   begin
@@ -1875,13 +1875,13 @@ begin
       FieldDay := FindField('IdDay') as TLongintField;
       FieldHour := FindField('IdHour') as TLongintField;
       FieldSession := FindField('Session') as TLongintField;
-      for VClass := 0 to FClassCount - 1 do
+      for VCluster := 0 to FClusterCount - 1 do
         for TimeSlot := 0 to FTimeSlotCount - 1 do
-          FClassTimeSlotToSession[VClass, TimeSlot] := -1;
+          FClusterTimeSlotToSession[VCluster, TimeSlot] := -1;
       First;
       while not Eof do
       begin
-        VClass := FCategoryParallelToClass[
+        VCluster := FCategoryParallelToCluster[
           FLevelSpecializationToCategory[
             FIdLevelToLevel[FieldLevel.AsInteger - FMinIdLevel],
             FIdSpecializationToSpecialization[FieldSpecialization.AsInteger -
@@ -1890,7 +1890,7 @@ begin
           FMinIdParallel]];
         TimeSlot := FDayHourToTimeSlot[FIdDayToDay[FieldDay.AsInteger - FMinIdDay],
           FIdHourToHour[FieldHour.AsInteger - FMinIdHour]];
-        FClassTimeSlotToSession[VClass, TimeSlot] := FieldSession.AsInteger;
+        FClusterTimeSlotToSession[VCluster, TimeSlot] := FieldSession.AsInteger;
         Next;
       end;
     finally
@@ -1907,50 +1907,50 @@ end;
 
 procedure TTimetable.CheckIntegrity;
 var
-  Theme, VClass, TimeSlot, Teacher, Distribution, Counter,
+  Theme, VCluster, TimeSlot, Teacher, Distribution, Counter,
     Session: Integer;
   SessionFound: Boolean;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
-    for VClass := 0 to FClassCount - 1 do
+    for VCluster := 0 to FClusterCount - 1 do
       for TimeSlot := 0 to FTimeSlotCount - 1 do
       begin
-        Session := FClassTimeSlotToSession[VClass, TimeSlot];
+        Session := FClusterTimeSlotToSession[VCluster, TimeSlot];
         if Session >= 0 then
         begin
           Theme := FSessionToTheme[Session];
-          Teacher := FClassThemeToTeacher[VClass, Theme];
+          Teacher := FClusterThemeToTeacher[VCluster, Theme];
           if Teacher < 0 then
             raise Exception.CreateFmt('%s %d(%d,%d,%d), %s %d(%d) %s', [
-              SClass, VClass,
-              FLevelToIdLevel[FClassToLevel[VClass]],
-              FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
-              FParallelToIdParallel[FClassToParallel[VClass]],
+              SCluster, VCluster,
+              FLevelToIdLevel[FClusterToLevel[VCluster]],
+              FSpecializationToIdSpecialization[FClusterToSpecialization[VCluster]],
+              FParallelToIdParallel[FClusterToParallel[VCluster]],
               SFlDistribution_IdTheme,
               Theme,
               FThemeToIdTheme[Theme],
               SDoNotHaveTeacher]);
-          Distribution := FClassThemeToDistribution[VClass, Theme];
+          Distribution := FClusterThemeToDistribution[VCluster, Theme];
           SessionFound := False;
           for Counter := 0 to High(FDistributionToSessions[Distribution]) do
             SessionFound := SessionFound or (FDistributionToSessions[Distribution, Counter] = Session);
           if not SessionFound then
             raise Exception.CreateFmt('%s %d(%d,%d,%d), %s %d(%d) %s FDistributionToSessions', [
-              SClass, VClass,
-              FLevelToIdLevel[FClassToLevel[VClass]],
-              FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
-              FParallelToIdParallel[FClassToParallel[VClass]],
+              SCluster, VCluster,
+              FLevelToIdLevel[FClusterToLevel[VCluster]],
+              FSpecializationToIdSpecialization[FClusterToSpecialization[VCluster]],
+              FParallelToIdParallel[FClusterToParallel[VCluster]],
               SFlDistribution_IdTheme,
               Theme,
               FThemeToIdTheme[Theme],
               SDoNotAppearsIn]);
           if Distribution < 0 then
-            raise Exception.CreateFmt('%s %d(%d,%d,%d), %s %d(%d) %s FClassThemeToDistribution', [
-              SClass, VClass,
-              FLevelToIdLevel[FClassToLevel[VClass]],
-              FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
-              FParallelToIdParallel[FClassToParallel[VClass]],
+            raise Exception.CreateFmt('%s %d(%d,%d,%d), %s %d(%d) %s FClusterThemeToDistribution', [
+              SCluster, VCluster,
+              FLevelToIdLevel[FClusterToLevel[VCluster]],
+              FSpecializationToIdSpecialization[FClusterToSpecialization[VCluster]],
+              FParallelToIdParallel[FClusterToParallel[VCluster]],
               SFlDistribution_IdTheme,
               Theme,
               FThemeToIdTheme[Theme],
@@ -1963,7 +1963,7 @@ end;
 procedure TTimetable.Reset;
 var
   Teacher, TimeSlot, Theme, ThemeRestrictionType, TeacherRestrictionType,
-    VClass, Day, RoomType: Integer;
+    VCluster, Day, RoomType: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
@@ -1994,25 +1994,25 @@ begin
       for RoomType := 0 to FRoomTypeCount - 1 do
         FRoomTypeTimeSlotCount[RoomType, TimeSlot] := 0;
     end;
-    for VClass := 0 to FClassCount - 1 do
+    for VCluster := 0 to FClusterCount - 1 do
       for Day := 0 to FDayCount - 1 do
         for Theme := 0 to FThemeCount - 1 do
         begin
-          FClassDayThemeCount[VClass, Day, Theme] := 0;
-          FClassDayThemeAccumulated[VClass, Day, Theme] := 0;
+          FClusterDayThemeCount[VCluster, Day, Theme] := 0;
+          FClusterDayThemeAccumulated[VCluster, Day, Theme] := 0;
         end;
   end;
 end;
 
 procedure TTimetable.Update;
 var
-  VClass: Integer;
+  VCluster: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
     Reset;
-    for VClass := 0 to FClassCount - 1 do
-      DeltaValues(1, VClass, 0, FTimeSlotCount - 1);
+    for VCluster := 0 to FClusterCount - 1 do
+      DeltaValues(1, VCluster, 0, FTimeSlotCount - 1);
     UpdateValue;
   end
 end;
@@ -2034,29 +2034,29 @@ end;
 
 { TTTBookmark }
 
-constructor TTTBookmark.Create(AIndividual: TIndividual; AClasss: TDynamicIntegerArray);
+constructor TTTBookmark.Create(AIndividual: TIndividual; AClusters: TDynamicIntegerArray);
 begin
   inherited Create;
   FIndividual := AIndividual;
-  FClasses := AClasss;
+  FClusters := AClusters;
   First;
 end;
 
 function TTTBookmark.Clone: TBookmark;
 begin
-  Result := TTTBookmark.Create(FIndividual, FClasses);
+  Result := TTTBookmark.Create(FIndividual, FClusters);
   TTTBookmark(Result).FPosition := FPosition;
   TTTBookmark(Result).FOffset := FOffset;
   TTTBookmark(Result).FTimeSlot1 := FTimeSlot1;
   TTTBookmark(Result).FTimeSlot2 := FTimeSlot2;
 end;
 
-function TTTBookmark.GetClass: Integer;
+function TTTBookmark.GetCluster: Integer;
 var
   Index: Integer;
 begin
-  Index := (FPosition + FOffset) mod TTimetableModel(FIndividual.Model).ClassCount;
-  Result := FClasses[Index];
+  Index := (FPosition + FOffset) mod TTimetableModel(FIndividual.Model).ClusterCount;
+  Result := FClusters[Index];
 end;
 
 procedure TTTBookmark.First;
@@ -2065,7 +2065,7 @@ begin
   FOffset := 0;
   FTimeSlot1 := 0;
   with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
-    FTimeSlot2 := SessionToDuration[ClassTimeSlotToSession[Class_, FTimeSlot1]];
+    FTimeSlot2 := SessionToDuration[ClusterTimeSlotToSession[Cluster_, FTimeSlot1]];
 end;
 
 procedure NextTimeSlot(TimeSlotToSession: TDynamicIntegerArray; TimeSlotCount: Integer;
@@ -2101,7 +2101,7 @@ var
 begin
   with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
   begin
-    TimeSlotToSession := ClassTimeSlotToSession[Class_];
+    TimeSlotToSession := ClusterTimeSlotToSession[Cluster_];
     d1 := TimeSlotCount - SessionToDuration[TimeSlotToSession[TimeSlotCount - 1]];
     if FTimeSlot2 >= d1 then
     begin
@@ -2110,7 +2110,7 @@ begin
       begin
         Inc(FPosition);
         FTimeSlot1 := 0;
-        FTimeSlot2 := SessionToDuration[ClassTimeSlotToSession[Class_, 0]];
+        FTimeSlot2 := SessionToDuration[ClusterTimeSlotToSession[Cluster_, 0]];
       end
       else
       begin
@@ -2145,12 +2145,12 @@ end;
 function TTTBookmark.GetMax: Integer;
 begin
   with TTimetableModel(FIndividual.Model) do
-    Result := (FOffset + ClassCount) * TimeSlotCount * (TimeSlotCount - 1) div 2;
+    Result := (FOffset + ClusterCount) * TimeSlotCount * (TimeSlotCount - 1) div 2;
 end;
 
 function TTTBookmark.Move: Integer;
 begin
-  Result := TTimetable(FIndividual).DoMove(Class_, FTimeSlot1, FTimeSlot2);
+  Result := TTimetable(FIndividual).DoMove(Cluster_, FTimeSlot1, FTimeSlot2);
 end;
 
 function TTTBookmark.Undo: Integer;
@@ -2160,22 +2160,22 @@ end;
 
 function TTTBookmark.Eof: Boolean;
 begin
-  Result := FPosition = TTimetableModel(FIndividual.Model).ClassCount;
+  Result := FPosition = TTimetableModel(FIndividual.Model).ClusterCount;
 end;
 
 { TTTBookmark2 }
 
-constructor TTTBookmark2.Create(AIndividual: TIndividual; AClasss: TDynamicIntegerArray);
+constructor TTTBookmark2.Create(AIndividual: TIndividual; AClusters: TDynamicIntegerArray);
 begin
   inherited Create;
   FIndividual := AIndividual;
-  FClasss := AClasss;
+  FClusters := AClusters;
   First;
 end;
 
 function TTTBookmark2.Clone: TBookmark;
 begin
-  Result := TTTBookmark2.Create(FIndividual, FClasss);
+  Result := TTTBookmark2.Create(FIndividual, FClusters);
   TTTBookmark2(Result).FPosition := FPosition;
   TTTBookmark2(Result).FOffset := FOffset;
   TTTBookmark2(Result).FTimeSlot1 := FTimeSlot1;
@@ -2183,12 +2183,12 @@ begin
   TTTBookmark2(Result).FTimeSlot3 := FTimeSlot3;
 end;
 
-function TTTBookmark2.GetClass: Integer;
+function TTTBookmark2.GetCluster: Integer;
 var
   Index: Integer;
 begin
-  Index := (FPosition + FOffset) mod TTimetableModel(FIndividual.Model).ClassCount;
-  Result := FClasss[Index];
+  Index := (FPosition + FOffset) mod TTimetableModel(FIndividual.Model).ClusterCount;
+  Result := FClusters[Index];
 end;
 
 procedure TTTBookmark2.First;
@@ -2198,7 +2198,7 @@ begin
   FProgress := 0;
   FTimeSlot1 := 0;
   with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
-    FTimeSlot2 := SessionToDuration[ClassTimeSlotToSession[Class_, 0]];
+    FTimeSlot2 := SessionToDuration[ClusterTimeSlotToSession[Cluster_, 0]];
   FTimeSlot3 := FTimeSlot2;
 end;
 
@@ -2209,7 +2209,7 @@ var
 begin
   with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
   begin
-    TimeSlotToSession := ClassTimeSlotToSession[Class_];
+    TimeSlotToSession := ClusterTimeSlotToSession[Cluster_];
     d1 := TimeSlotCount - SessionToDuration[TimeSlotToSession[TimeSlotCount - 1]];
     if FTimeSlot3 >= d1 then
     begin
@@ -2220,7 +2220,7 @@ begin
         begin
           Inc(FPosition);
           FTimeSlot1 := 0;
-          FTimeSlot2 := SessionToDuration[ClassTimeSlotToSession[Class_, 0]];
+          FTimeSlot2 := SessionToDuration[ClusterTimeSlotToSession[Cluster_, 0]];
           FTimeSlot3 := FTimeSlot2;
         end
         else
@@ -2286,7 +2286,7 @@ end;
 function TTTBookmark2.GetMax: Integer;
 begin
   with TTimetableModel(FIndividual.Model) do
-    Result := (FOffset + ClassCount) * ((TimeSlotCount * (TimeSlotCount - 1) div 2) *
+    Result := (FOffset + ClusterCount) * ((TimeSlotCount * (TimeSlotCount - 1) div 2) *
       (2 * TimeSlotCount - 1) div 3);
 end;
 
@@ -2296,15 +2296,15 @@ begin
   begin
     if FTimeSlot2 < FTimeSlot3 then
     begin
-      Result := DoMove(Class_, FTimeSlot1, FTimeSlot2) + DoMove(Class_, FTimeSlot2, FTimeSlot3);
+      Result := DoMove(Cluster_, FTimeSlot1, FTimeSlot2) + DoMove(Cluster_, FTimeSlot2, FTimeSlot3);
     end
     else if FTimeSlot2 = FTimeSlot3 then
     begin
-      Result := DoMove(Class_, FTimeSlot1, FTimeSlot2);
+      Result := DoMove(Cluster_, FTimeSlot1, FTimeSlot2);
       FTimeSlot3 := FTimeSlot2;
     end
     else
-      Result := DoMove(Class_, FTimeSlot1, FTimeSlot3) + DoMove(Class_, FTimeSlot3, FTimeSlot2);
+      Result := DoMove(Cluster_, FTimeSlot1, FTimeSlot3) + DoMove(Cluster_, FTimeSlot3, FTimeSlot2);
   end;
 end;
 
@@ -2314,21 +2314,21 @@ begin
   begin
     if FTimeSlot2 < FTimeSlot3 then
     begin
-      Result := DoMove(Class_, FTimeSlot2, FTimeSlot3) + DoMove(Class_, FTimeSlot1, FTimeSlot2);
+      Result := DoMove(Cluster_, FTimeSlot2, FTimeSlot3) + DoMove(Cluster_, FTimeSlot1, FTimeSlot2);
     end
     else if FTimeSlot2 = FTimeSlot3 then
     begin
-      Result := DoMove(Class_, FTimeSlot1, FTimeSlot2);
+      Result := DoMove(Cluster_, FTimeSlot1, FTimeSlot2);
       FTimeSlot3 := FTimeSlot2;
     end
     else
-      Result := DoMove(Class_, FTimeSlot3, FTimeSlot2) + DoMove(Class_, FTimeSlot1, FTimeSlot3);
+      Result := DoMove(Cluster_, FTimeSlot3, FTimeSlot2) + DoMove(Cluster_, FTimeSlot1, FTimeSlot3);
   end;
 end;
 
 function TTTBookmark2.Eof: Boolean;
 begin
-  Result := FPosition = TTimetableModel(FIndividual.Model).ClassCount;
+  Result := FPosition = TTimetableModel(FIndividual.Model).ClusterCount;
 end;
 
 initialization

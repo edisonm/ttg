@@ -1,4 +1,4 @@
-inherited ClassForm: TClassForm
+inherited ClusterForm: TClusterForm
   Left = 549
   Height = 380
   Top = 154
@@ -78,7 +78,7 @@ inherited ClassForm: TClassForm
     top = 136
   end
   object DataSourceDetail: TDatasource[7]
-    DataSet = SourceDataModule.TbClass
+    DataSet = SourceDataModule.TbCluster
     left = 120
     top = 136
   end

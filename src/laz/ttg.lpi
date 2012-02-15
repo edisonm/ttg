@@ -231,12 +231,12 @@
         <UnitName Value="fconfig"/>
       </Unit16>
       <Unit17>
-        <Filename Value="ftimetableclass.pp"/>
+        <Filename Value="ftimetablecluster.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="TimetableClassForm"/>
+        <ComponentName Value="TimetableClusterForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FTimetableClass"/>
+        <UnitName Value="FTimetableCluster"/>
       </Unit17>
       <Unit18>
         <Filename Value="fmasterdetaileditor.pp"/>
@@ -263,12 +263,12 @@
         <UnitName Value="FSplash"/>
       </Unit20>
       <Unit21>
-        <Filename Value="fclass.pp"/>
+        <Filename Value="fcluster.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="ClassForm"/>
+        <ComponentName Value="ClusterForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FClass"/>
+        <UnitName Value="FCluster"/>
       </Unit21>
       <Unit22>
         <Filename Value="fsingleeditor.pp"/>

@@ -14,7 +14,7 @@ type
   { TSourceDataModule }
 
   TSourceDataModule = class(TSourceBaseDataModule)
-    QuClass: TZReadOnlyQuery;
+    QuCluster: TZReadOnlyQuery;
     ZTables: TZReadOnlyQuery;
     QuTeacher: TZReadOnlyQuery;
     procedure TbDistributionBeforePost(DataSet: TDataSet);
@@ -251,10 +251,10 @@ begin
     Lookup := True;
     DataSet := TbCategory;
   end;
-  Field := TStringField.Create(TbClass);
+  Field := TStringField.Create(TbCluster);
   with Field do
   begin
-    DisplayLabel := SFlClass_IdLevel;
+    DisplayLabel := SFlCluster_IdLevel;
     FieldKind := fkLookup;
     FieldName := 'AbLevel';
     LookupDataSet := TbLevel;
@@ -263,12 +263,12 @@ begin
     KeyFields := 'IdLevel';
     Size := 5;
     Lookup := True;
-    DataSet := TbClass;
+    DataSet := TbCluster;
   end;
-  Field := TStringField.Create(TbClass);
+  Field := TStringField.Create(TbCluster);
   with Field do
   begin
-    DisplayLabel := SFlClass_IdSpecialization;
+    DisplayLabel := SFlCluster_IdSpecialization;
     FieldKind := fkLookup;
     FieldName := 'AbSpecialization';
     LookupDataSet := TbSpecialization;
@@ -277,12 +277,12 @@ begin
     KeyFields := 'IdSpecialization';
     Size := 10;
     Lookup := True;
-    DataSet := TbClass;
+    DataSet := TbCluster;
   end;
-  Field := TStringField.Create(TbClass);
+  Field := TStringField.Create(TbCluster);
   with Field do
   begin
-    DisplayLabel := SFlClass_IdParallel;
+    DisplayLabel := SFlCluster_IdParallel;
     FieldKind := fkLookup;
     FieldName := 'NaParallel';
     LookupDataSet := TbParallel;
@@ -291,7 +291,7 @@ begin
     KeyFields := 'IdParallel';
     Size := 5;
     Lookup := True;
-    DataSet := TbClass;
+    DataSet := TbCluster;
   end;
   Field := TStringField.Create(TbThemeRestriction);
   with Field do
@@ -436,20 +436,20 @@ begin
     Lookup := True;
     DataSet := TbAssistance;
   end;
-  Field := TStringField.Create(TbJoinedClass.Owner);
+  Field := TStringField.Create(TbJoinedCluster.Owner);
   with Field do
   begin
-    DisplayLabel := 'Class Name';
+    DisplayLabel := 'Cluster Name';
     DisplayWidth := 4;
     FieldKind := fkLookup;
-    FieldName := 'NameClass';
-    LookupDataSet := SourceDataModule.QuClass;
+    FieldName := 'NameCluster';
+    LookupDataSet := SourceDataModule.QuCluster;
     LookupKeyFields := 'IdLevel;IdSpecialization;IdParallel';
-    LookupResultField := 'NameClass';
+    LookupResultField := 'NameCluster';
     KeyFields := 'IdLevel1;IdSpecialization1;IdParallel1';
     Size := 5;
     Lookup := True;
-    DataSet := TbJoinedClass;
+    DataSet := TbJoinedCluster;
   end;
 end;
 
@@ -467,9 +467,9 @@ begin
   TbThemeRestrictionType.FindField('IdThemeRestrictionType').Visible := False;
   TbTimeSlot.FindField('IdDay').Visible := False;
   TbTimeSlot.FindField('IdHour').Visible := False;
-  TbClass.FindField('IdLevel').Visible := False;
-  TbClass.FindField('IdSpecialization').Visible := False;
-  TbClass.FindField('IdParallel').Visible := False;
+  TbCluster.FindField('IdLevel').Visible := False;
+  TbCluster.FindField('IdSpecialization').Visible := False;
+  TbCluster.FindField('IdParallel').Visible := False;
   TbTeacher.FindField('IdTeacher').Visible := False;
   with TbTimetableDetail do
   begin
@@ -499,7 +499,7 @@ begin
     FindField('IdParallel').Visible := False;
     FindField('IdTeacher').Visible := False;
   end;
-  with TbJoinedClass do
+  with TbJoinedCluster do
   begin
     FindField('IdTheme').Visible := False;
     FindField('IdLevel').Visible := False;

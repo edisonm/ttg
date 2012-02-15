@@ -1,4 +1,4 @@
-inherited TimetableClassForm: TTimetableClassForm
+inherited TimetableClusterForm: TTimetableClusterForm
   Left = 658
   Height = 401
   Top = 292
@@ -47,7 +47,7 @@ inherited TimetableClassForm: TTimetableClassForm
       ChildSizing.ControlsPerLine = 100
       ClientHeight = 22
       ClientWidth = 92
-      DataSource = DSClass
+      DataSource = DSCluster
       Flat = True
       Options = []
       ParentShowHint = False
@@ -55,7 +55,7 @@ inherited TimetableClassForm: TTimetableClassForm
       TabOrder = 1
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
     end
-    object CBShowClass: TComboBox[5]
+    object CBShowCluster: TComboBox[5]
       Left = 162
       Height = 24
       Hint = 'Show|Param to show in the timetable'
@@ -102,7 +102,7 @@ inherited TimetableClassForm: TTimetableClassForm
     Align = alLeft
     Color = clWindow
     Columns = <>
-    DataSource = DSClass
+    DataSource = DSCluster
     Scrollbars = ssAutoBoth
     TabOrder = 4
     TitleFont.Height = -11
@@ -179,11 +179,11 @@ inherited TimetableClassForm: TTimetableClassForm
       8000008080000080800000808000
     }
   end
-  object QuTimetableClass: TZQuery[7]
+  object QuTimetableCluster: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimetable;IdLevel;IdSpecialization;IdParallel'
     AutoCalcFields = False
-    OnCalcFields = QuTimetableClassCalcFields
+    OnCalcFields = QuTimetableClusterCalcFields
     ReadOnly = True
     SQL.Strings = (
       'select'
@@ -191,7 +191,7 @@ inherited TimetableClassForm: TTimetableClassForm
       '  TimetableDetail.IdLevel,'
       '  TimetableDetail.IdSpecialization,'
       '  TimetableDetail.IdParallel,'
-      '  0 as IsJoinedClass,'
+      '  0 as IsJoinedCluster,'
       '  IdHour,'
       '  IdDay,'
       '  TimetableDetail.IdTheme,'
@@ -215,10 +215,10 @@ inherited TimetableClassForm: TTimetableClassForm
       'union all'
       'select'
       '  TimetableDetail.IdTimetable,'
-      '  JoinedClass.IdLevel1 as IdLevel,'
-      '  JoinedClass.IdSpecialization1 as IdSpecialization,'
-      '  JoinedClass.IdParallel1 as IdParallel,'
-      '  1 as IsJoinedClass,'
+      '  JoinedCluster.IdLevel1 as IdLevel,'
+      '  JoinedCluster.IdSpecialization1 as IdSpecialization,'
+      '  JoinedCluster.IdParallel1 as IdParallel,'
+      '  1 as IsJoinedCluster,'
       '  IdHour,'
       '  IdDay,'
       '  TimetableDetail.IdTheme,'
@@ -234,11 +234,11 @@ inherited TimetableClassForm: TTimetableClassForm
       '  and TimetableDetail.IdParallel = Distribution.IdParallel'
       '  inner join Theme on TimetableDetail.IdTheme = Theme.IdTheme'
       '  inner join Teacher on Distribution.IdTeacher = Teacher.IdTeacher'
-      '  inner join JoinedClass on'
-      '  Distribution.IdTheme = JoinedClass.IdTheme'
-      '  and Distribution.IdLevel=JoinedClass.IdLevel'
-      '  and Distribution.IdSpecialization=JoinedClass.IdSpecialization'
-      '  and Distribution.IdParallel=JoinedClass.IdParallel'
+      '  inner join JoinedCluster on'
+      '  Distribution.IdTheme = JoinedCluster.IdTheme'
+      '  and Distribution.IdLevel=JoinedCluster.IdLevel'
+      '  and Distribution.IdSpecialization=JoinedCluster.IdSpecialization'
+      '  and Distribution.IdParallel=JoinedCluster.IdParallel'
       'where'
       '  IdTimetable=:IdTimetable'
       'and TimetableDetail.IdLevel=:IdLevel'
@@ -266,9 +266,9 @@ inherited TimetableClassForm: TTimetableClassForm
         Name = 'IdParallel'
         ParamType = ptUnknown
       end>
-    DataSource = DSClass
+    DataSource = DSCluster
     MasterFields = 'IdTimetable;IdLevel;IdSpecialization;IdParallel'
-    MasterSource = DSClass
+    MasterSource = DSCluster
     LinkedFields = 'IdTimetable;IdLevel;IdSpecialization;IdParallel'
     IndexFieldNames = 'IdTimetable Asc;IdLevel Asc;IdSpecialization Asc;IdParallel Asc'
     left = 160
@@ -294,7 +294,7 @@ inherited TimetableClassForm: TTimetableClassForm
         Name = 'IdParallel'
         ParamType = ptUnknown
       end>
-    object QuTimetableClassIdTimetable: TLongintField
+    object QuTimetableClusterIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimetable'
@@ -304,7 +304,7 @@ inherited TimetableClassForm: TTimetableClassForm
       ReadOnly = True
       Required = False
     end
-    object QuTimetableClassIdLevel: TLongintField
+    object QuTimetableClusterIdLevel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdLevel'
@@ -315,7 +315,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableClassIdSpecialization: TLongintField
+    object QuTimetableClusterIdSpecialization: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSpecialization'
@@ -326,7 +326,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableClassIdParallel: TLongintField
+    object QuTimetableClusterIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdParallel'
@@ -337,10 +337,10 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableClassIsJoinedClass: TLongintField
+    object QuTimetableClusterIsJoinedCluster: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IsJoinedClass'
+      FieldName = 'IsJoinedCluster'
       Index = 4
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -348,7 +348,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableClassIdHour: TLongintField
+    object QuTimetableClusterIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -359,7 +359,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableClassIdDay: TLongintField
+    object QuTimetableClusterIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -370,7 +370,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableClassIdTheme: TLongintField
+    object QuTimetableClusterIdTheme: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTheme'
@@ -381,7 +381,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableClassIdTeacher: TLongintField
+    object QuTimetableClusterIdTeacher: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTeacher'
@@ -392,7 +392,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = False
       Visible = False
     end
-    object QuTimetableClassName: TStringField
+    object QuTimetableClusterName: TStringField
       DisplayWidth = 40
       FieldKind = fkCalculated
       FieldName = 'Name'
@@ -403,7 +403,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = False
       Size = 40
     end
-    object QuTimetableClassNaTheme: TStringField
+    object QuTimetableClusterNaTheme: TStringField
       DisplayWidth = 20
       FieldKind = fkData
       FieldName = 'NaTheme'
@@ -413,7 +413,7 @@ inherited TimetableClassForm: TTimetableClassForm
       ReadOnly = True
       Required = False
     end
-    object QuTimetableClassLnTeacher: TStringField
+    object QuTimetableClusterLnTeacher: TStringField
       DisplayWidth = 15
       FieldKind = fkData
       FieldName = 'LnTeacher'
@@ -424,7 +424,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Size = 15
     end
-    object QuTimetableClassNaTeacher: TStringField
+    object QuTimetableClusterNaTeacher: TStringField
       DisplayWidth = 15
       FieldKind = fkData
       FieldName = 'NaTeacher'
@@ -436,40 +436,40 @@ inherited TimetableClassForm: TTimetableClassForm
       Size = 15
     end
   end
-  object DSClass: TDatasource[8]
-    DataSet = QuClass
-    OnDataChange = DSClassDataChange
+  object DSCluster: TDatasource[8]
+    DataSet = QuCluster
+    OnDataChange = DSClusterDataChange
     left = 60
     top = 256
   end
-  object QuClass: TZQuery[9]
+  object QuCluster: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
     AutoCalcFields = False
-    OnCalcFields = QuClassCalcFields
+    OnCalcFields = QuClusterCalcFields
     ReadOnly = True
     SQL.Strings = (
       'select'
       '  Timetable.IdTimetable,'
-      '  Class.IdLevel,'
-      '  Class.IdSpecialization,'
-      '  Class.IdParallel,'
+      '  Cluster.IdLevel,'
+      '  Cluster.IdSpecialization,'
+      '  Cluster.IdParallel,'
       '  AbLevel,'
       '  AbSpecialization,'
       '  NaParallel'
       'from'
-      '  ((Class inner join Level on'
-      '    (Class.IdLevel=Level.IdLevel))'
+      '  ((Cluster inner join Level on'
+      '    (Cluster.IdLevel=Level.IdLevel))'
       '    inner join Specialization on'
-      '    (Class.IdSpecialization=Specialization.IdSpecialization))'
+      '    (Cluster.IdSpecialization=Specialization.IdSpecialization))'
       '    inner join Parallel on'
-      '    (Class.IdParallel=Parallel.IdParallel),'
+      '    (Cluster.IdParallel=Parallel.IdParallel),'
       '  Timetable'
       'where'
       '  Timetable.IdTimetable=:IdTimetable'
       'order by'
-      '  Class.IdLevel,'
-      '  Class.IdSpecialization,'
-      '  Class.IdParallel'
+      '  Cluster.IdLevel,'
+      '  Cluster.IdSpecialization,'
+      '  Cluster.IdParallel'
     )
     Params = <    
       item
@@ -489,7 +489,7 @@ inherited TimetableClassForm: TTimetableClassForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuClassIdTimetable: TLongintField
+    object QuClusterIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimetable'
@@ -500,7 +500,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = False
       Visible = False
     end
-    object QuClassIdLevel: TLongintField
+    object QuClusterIdLevel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdLevel'
@@ -511,7 +511,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = False
       Visible = False
     end
-    object QuClassIdSpecialization: TLongintField
+    object QuClusterIdSpecialization: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdSpecialization'
@@ -522,7 +522,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = False
       Visible = False
     end
-    object QuClassIdParallel: TLongintField
+    object QuClusterIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdParallel'
@@ -533,7 +533,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = False
       Visible = False
     end
-    object QuClassAbLevel: TStringField
+    object QuClusterAbLevel: TStringField
       DisplayWidth = 5
       FieldKind = fkData
       FieldName = 'AbLevel'
@@ -545,7 +545,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Visible = False
       Size = 5
     end
-    object QuClassAbSpecialization: TStringField
+    object QuClusterAbSpecialization: TStringField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'AbSpecialization'
@@ -557,7 +557,7 @@ inherited TimetableClassForm: TTimetableClassForm
       Visible = False
       Size = 10
     end
-    object QuClassNaParallel: TStringField
+    object QuClusterNaParallel: TStringField
       DisplayWidth = 5
       FieldKind = fkData
       FieldName = 'NaParallel'
@@ -569,10 +569,10 @@ inherited TimetableClassForm: TTimetableClassForm
       Visible = False
       Size = 5
     end
-    object QuClassNaClass: TStringField
+    object QuClusterNaCluster: TStringField
       DisplayWidth = 30
       FieldKind = fkCalculated
-      FieldName = 'NaClass'
+      FieldName = 'NaCluster'
       Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

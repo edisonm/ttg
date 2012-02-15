@@ -52,19 +52,19 @@ inherited SourceDataModule: TSourceDataModule
         ParamType = ptUnknown
       end>
   end
-  object QuClass: TZReadOnlyQuery[43]
+  object QuCluster: TZReadOnlyQuery[43]
     Connection = DbZConnection
     SQL.Strings = (
-      'SELECT Class.IdLevel, Class.IdSpecialization, Class.IdParallel,'
-      ' AbLevel || " " || AbSpecialization || " " || NaParallel AS NameClass'
+      'SELECT Cluster.IdLevel, Cluster.IdSpecialization, Cluster.IdParallel,'
+      ' AbLevel || " " || AbSpecialization || " " || NaParallel AS NameCluster'
       'FROM'
-      ' Class INNER JOIN Level ON Class.IdLevel=Level.IdLevel'
-      ' INNER JOIN Specialization ON Class.IdSpecialization=Specialization.IdSpecialization'
-      ' INNER JOIN Parallel ON Class.IdParallel = Parallel.IdParallel'
+      ' Cluster INNER JOIN Level ON Cluster.IdLevel=Level.IdLevel'
+      ' INNER JOIN Specialization ON Cluster.IdSpecialization=Specialization.IdSpecialization'
+      ' INNER JOIN Parallel ON Cluster.IdParallel = Parallel.IdParallel'
       'WHERE'
-      ' Class.IdLevel<>:IdLevel OR'
-      ' Class.IdSpecialization<>:IdSpecialization OR'
-      ' Class.IdParallel<>:IdParallel'
+      ' Cluster.IdLevel<>:IdLevel OR'
+      ' Cluster.IdSpecialization<>:IdSpecialization OR'
+      ' Cluster.IdParallel<>:IdParallel'
     )
     Params = <    
       item

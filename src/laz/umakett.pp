@@ -79,7 +79,7 @@ begin
 end;
 
 procedure LoadBookmarks(s: string; Individual: TIndividual;
-    ClassCount: Integer; out Bookmarks: TBookmarkArray);
+    ClusterCount: Integer; out Bookmarks: TBookmarkArray);
 var
   Pos, d, i: Integer;
 begin
@@ -90,8 +90,8 @@ begin
   begin
     d := StrToInt(ExtractString(s, Pos, ','));
     case d of
-    1: Bookmarks[i] := TTTBookmark.Create(Individual, RandomIndexes(ClassCount));
-    2: Bookmarks[i] := TTTBookmark2.Create(Individual, RandomIndexes(ClassCount));
+    1: Bookmarks[i] := TTTBookmark.Create(Individual, RandomIndexes(ClusterCount));
+    2: Bookmarks[i] := TTTBookmark2.Create(Individual, RandomIndexes(ClusterCount));
     end;
     Inc(i);
   end;
@@ -110,7 +110,7 @@ begin
     Individual := DownHill.Model.NewIndividual;
     try
       Individual.Assign(DownHill.BestIndividual);
-      LoadBookmarks(Bookmarks, Individual, ClassCount, BookmarkArray);
+      LoadBookmarks(Bookmarks, Individual, ClusterCount, BookmarkArray);
       try
         TDownHill.MultiDownHill(DownHill, Individual, BookmarkArray,
                                 False, RefreshInterval);

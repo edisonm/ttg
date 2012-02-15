@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit FClass;
+unit FCluster;
 
 {$I ttg.inc}
 
@@ -12,9 +12,9 @@ uses
 
 type
 
-  { TClassForm }
+  { TClusterForm }
 
-  TClassForm = class(TSingleEditorForm)
+  TClusterForm = class(TSingleEditorForm)
     DataSourceList: TDataSource;
     DataSourceDetail: TDataSource;
     Splitter1: TSplitter;
@@ -40,7 +40,7 @@ type
   end;
 
 var
-  ClassForm: TClassForm;
+  ClusterForm: TClusterForm;
 
 implementation
 
@@ -51,7 +51,7 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-procedure TClassForm.FormCreate(Sender: TObject);
+procedure TClusterForm.FormCreate(Sender: TObject);
 begin
   inherited;
   PostingData := False;
@@ -74,40 +74,40 @@ begin
   end;
 end;
 
-procedure TClassForm.FormClose(Sender: TObject; var CloseAction: TCloseAction
+procedure TClusterForm.FormClose(Sender: TObject; var CloseAction: TCloseAction
   );
 begin
   inherited;
 end;
 
-procedure TClassForm.ActFindExecute(Sender: TObject);
+procedure TClusterForm.ActFindExecute(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TClassForm.DBGridDblClick(Sender: TObject);
+procedure TClusterForm.DBGridDblClick(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TClassForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+procedure TClusterForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
   inherited;
 end;
 
-procedure TClassForm.doLoadConfig;
+procedure TClusterForm.doLoadConfig;
 begin
   inherited;
   CheckListBox.Width := ConfigIntegers['CheckListBox_Width'];
 end;
 
-procedure TClassForm.doSaveConfig;
+procedure TClusterForm.doSaveConfig;
 begin
   inherited;
   ConfigIntegers['CheckListBox_Width'] := CheckListBox.Width;
 end;
 
-procedure TClassForm.DataSourceDataChange(Sender: TObject;
+procedure TClusterForm.DataSourceDataChange(Sender: TObject;
   Field: TField);
 var
   IdLevel, IdSpecialization: Integer;
@@ -131,17 +131,17 @@ begin
   end;
 end;
 
-procedure TClassForm.DataSourceStateChange(Sender: TObject);
+procedure TClusterForm.DataSourceStateChange(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TClassForm.FormDestroy(Sender: TObject);
+procedure TClusterForm.FormDestroy(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TClassForm.CheckListBoxExit(Sender: TObject);
+procedure TClusterForm.CheckListBoxExit(Sender: TObject);
 var
   IdLevel, IdSpecialization, IdParallel: Integer;
 begin
@@ -184,7 +184,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i fclass.lrs}
+  {$i fcluster.lrs}
 {$ENDIF}
 
 end.

@@ -33,7 +33,7 @@ type
     { Private declarations }
     FStringsShowRoomType: TStrings;
     FStringsShowTeacher: TStrings;
-    FStringsShowClass: TStrings;
+    FStringsShowCluster: TStrings;
     FConfigStorage: TTTGConfig;
     procedure FillTeacherRestrictionCount;
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
@@ -52,7 +52,7 @@ type
     procedure SaveToTextFile(const AFileName: TFileName);
     property StringsShowRoomType: TStrings read FStringsShowRoomType;
     property StringsShowTeacher: TStrings read FStringsShowTeacher;
-    property StringsShowClass: TStrings read FStringsShowClass;
+    property StringsShowCluster: TStrings read FStringsShowCluster;
     property ConfigStorage: TTTGConfig read FConfigStorage;
     procedure NewDatabase;
   end;
@@ -366,7 +366,7 @@ var
     s: string;
     HaveInternalProblems: Boolean;
   begin
-    with SourceDataModule, TbClass do
+    with SourceDataModule, TbCluster do
     begin
       s := '%s %s %s; %d';
       HaveInternalProblems := False;
@@ -375,16 +375,16 @@ var
         TbDistribution.First;
         TbTimeSlot.First;
         First;
-        ASubStrings.Add(SClassWorkLoadWithoutProblems);
+        ASubStrings.Add(SClusterWorkLoadWithoutProblems);
         vSubMin := ASubStrings.Count;
-        ASubStrings.Add(SClassWorkLoadHead);
+        ASubStrings.Add(SClusterWorkLoadHead);
         while not Eof do
         begin
           TbDistribution.Filter :=
             Format('IdLevel=%d and IdSpecialization=%d and IdParallel=%d', [
-            TbClass.FindField('IdLevel').AsInteger,
-              TbClass.FindField('IdSpecialization').AsInteger,
-              TbClass.FindField('IdParallel').AsInteger]);
+            TbCluster.FindField('IdLevel').AsInteger,
+              TbCluster.FindField('IdSpecialization').AsInteger,
+              TbCluster.FindField('IdParallel').AsInteger]);
           TbDistribution.Filtered := true;
           TbDistribution.First;
           t := 0;
@@ -398,25 +398,25 @@ var
             begin
               if not HaveInternalProblems then
               begin
-                AMainStrings.Add(SClassWorkLoadWithProblems);
+                AMainStrings.Add(SClusterWorkLoadWithProblems);
                 vMainMin := AMainStrings.Count;
-                AMainStrings.Add(SClassWorkLoadHead);
+                AMainStrings.Add(SClusterWorkLoadHead);
               end;
-              AMainStrings.Add(Format(s, [TbClass.FindField('AbLevel').Value,
-                TbClass.FindField('AbSpecialization').Value,
-                TbClass.FindField('NaParallel').Value, t]));
+              AMainStrings.Add(Format(s, [TbCluster.FindField('AbLevel').Value,
+                TbCluster.FindField('AbSpecialization').Value,
+                TbCluster.FindField('NaParallel').Value, t]));
               HaveProblems := True;
               HaveInternalProblems := True;
             end
             else
-              ASubStrings.Add(Format(s, [TbClass.FindField('AbLevel').Value,
-                TbClass.FindField('AbSpecialization').Value,
-                TbClass.FindField('NaParallel').Value, t]));
+              ASubStrings.Add(Format(s, [TbCluster.FindField('AbLevel').Value,
+                TbCluster.FindField('AbSpecialization').Value,
+                TbCluster.FindField('NaParallel').Value, t]));
           except
             ASubStrings.Add(Format('%s: %s %s %s, %s %s',
-              [SProblems, TbClass.FindField('AbLevel').AsString,
-              TbClass.FindField('AbSpecialization').AsString,
-              TbClass.FindField('NaParallel').AsString,
+              [SProblems, TbCluster.FindField('AbLevel').AsString,
+              TbCluster.FindField('AbSpecialization').AsString,
+              TbCluster.FindField('NaParallel').AsString,
               STbTheme,
               TbDistribution.FindField('NaTheme').AsString]));
             HaveProblems := True;
@@ -599,29 +599,29 @@ begin
   
   FStringsShowRoomType := TStringList.Create;
   FStringsShowTeacher := TStringList.Create;
-  FStringsShowClass := TStringList.Create;
+  FStringsShowCluster := TStringList.Create;
   FConfigStorage := TTTGConfig.Create(Self);
   with FStringsShowRoomType do
   begin
-    add('Level_Class=AbLevel;NaParallel');
-    add('Level_Class_Theme=AbLevel;NaParallel;NaTheme');
-    add('Level_Class_Specialization=AbLevel;NaParallel;AbSpecialization');
-    add('Level_Class_Specialization_Theme=AbLevel;NaParallel;AbSpecialization;NaTheme');
-    add('Level_Specialization_Class=AbLevel;AbSpecialization;NaParallel');
-    add('Level_Specialization_Class_Theme=AbLevel;AbSpecialization;NaParallel;NaTheme');
+    add('Level_Cluster=AbLevel;NaParallel');
+    add('Level_Cluster_Theme=AbLevel;NaParallel;NaTheme');
+    add('Level_Cluster_Specialization=AbLevel;NaParallel;AbSpecialization');
+    add('Level_Cluster_Specialization_Theme=AbLevel;NaParallel;AbSpecialization;NaTheme');
+    add('Level_Specialization_Cluster=AbLevel;AbSpecialization;NaParallel');
+    add('Level_Specialization_Cluster_Theme=AbLevel;AbSpecialization;NaParallel;NaTheme');
     add('Theme=NaTheme');
   end;
   with FStringsShowTeacher do
   begin
-    add('Level_Class=AbLevel;NaParallel');
-    add('Level_Class_Theme=AbLevel;NaParallel;NaTheme');
-    add('Level_Class_Specialization=AbLevel;NaParallel;AbSpecialization');
-    add('Level_Class_Specialization_Theme=AbLevel;NaParallel;AbSpecialization;NaTheme');
-    add('Level_Specialization_Class=AbLevel;AbSpecialization;NaParallel');
-    add('Level_Specialization_Class_Theme=AbLevel;AbSpecialization;NaParallel;NaTheme');
+    add('Level_Cluster=AbLevel;NaParallel');
+    add('Level_Cluster_Theme=AbLevel;NaParallel;NaTheme');
+    add('Level_Cluster_Specialization=AbLevel;NaParallel;AbSpecialization');
+    add('Level_Cluster_Specialization_Theme=AbLevel;NaParallel;AbSpecialization;NaTheme');
+    add('Level_Specialization_Cluster=AbLevel;AbSpecialization;NaParallel');
+    add('Level_Specialization_Cluster_Theme=AbLevel;AbSpecialization;NaParallel;NaTheme');
     add('Theme=NaTheme');
   end;
-  with FStringsShowClass do
+  with FStringsShowCluster do
   begin
     add('Theme=NaTheme');
     add('Teacher=LnTeacher;NaTeacher');
@@ -637,7 +637,7 @@ begin
       DbZConnection.ExecuteDirect(LazarusResources.Find('ttg', 'SQL').Value);
       PrepareTables;
       QuTeacher.Open;
-      QuClass.Open;
+      QuCluster.Open;
       OpenTables;
       if Paramcount <> 1 then
       begin
@@ -649,7 +649,7 @@ begin
     begin
       PrepareTables;
       QuTeacher.Open;
-      QuClass.Open;
+      QuCluster.Open;
       OpenTables;
     end;
     TbDistribution.BeforePost := TbDistributionBeforePost;
@@ -660,7 +660,7 @@ procedure TMasterDataModule.DataModuleDestroy(Sender: TObject);
 begin
   FStringsShowRoomType.Free;
   FStringsShowTeacher.Free;
-  FStringsShowClass.Free;
+  FStringsShowCluster.Free;
 end;
 
 procedure TMasterDataModule.NewDatabase;

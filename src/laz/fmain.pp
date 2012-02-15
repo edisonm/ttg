@@ -5,7 +5,7 @@ unit FMain;
 
 {
 TODO:
-  - Timetables by Classes
+  - Timetables by Clusters
   - Timetables by Teachers
   - Teacher Restrictions
   - Teacher Distribution
@@ -57,7 +57,7 @@ type
     MITimetable: TMenuItem;
     MIDay: TMenuItem;
     MIHour: TMenuItem;
-    MIClass: TMenuItem;
+    MICluster: TMenuItem;
     SaveDialog: TSaveDialog;
     OpenDialog: TOpenDialog;
     MITimeSlot: TMenuItem;
@@ -73,7 +73,7 @@ type
     TBTeacher: TToolButton;
     TBRoomType: TToolButton;
     TBTimeSlot: TToolButton;
-    TBClass: TToolButton;
+    TBCluster: TToolButton;
     TBTheme: TToolButton;
     MIReopen: TMenuItem;
     ImageList: TImageList;
@@ -101,7 +101,7 @@ type
     ActTeacher: TAction;
     ActRoomType: TAction;
     ActTimeSlot: TAction;
-    ActClass: TAction;
+    ActCluster: TAction;
     ActTheme: TAction;
     ActCheckFeasibility: TAction;
     ActMakeTimetable: TAction;
@@ -134,7 +134,7 @@ type
     procedure ActLevelExecute(Sender: TObject);
     procedure ActRoomTypeExecute(Sender: TObject);
     procedure ActParallelExecute(Sender: TObject);
-    procedure ActClassExecute(Sender: TObject);
+    procedure ActClusterExecute(Sender: TObject);
     procedure ActDayExecute(Sender: TObject);
     procedure ActHourExecute(Sender: TObject);
     procedure ActNewExecute(Sender: TObject);
@@ -208,7 +208,7 @@ implementation
 
 uses
   FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FTheme, FTeacher,
-  FTimetable, FMasterDetailEditor, FConfig, FClass, Printers, DSource,
+  FTimetable, FMasterDetailEditor, FConfig, FCluster, Printers, DSource,
   DSourceBase, UTTGBasics, FMessageView, UTTGi18n, UTTGConsts, FDBExplorer;
 
 {$IFNDEF FPC}
@@ -342,12 +342,12 @@ begin
 				    SourceDataModule.TbTimetable);
 end;
 
-procedure TMainForm.ActClassExecute(Sender: TObject);
+procedure TMainForm.ActClusterExecute(Sender: TObject);
 begin
-   TClassForm.ToggleSingleEditor(Self,
-				 ClassForm,
+   TClusterForm.ToggleSingleEditor(Self,
+				 ClusterForm,
 				 ConfigStorage,
-				 ActClass,
+				 ActCluster,
 				 SourceDataModule.TbCategory);
 end;
 
