@@ -1,9 +1,9 @@
-inherited SubjectForm: TSubjectForm
+inherited ThemeForm: TThemeForm
   Left = 531
   Height = 461
   Top = 340
   Width = 588
-  Caption = 'Subjects'
+  Caption = 'Themes'
   ClientHeight = 461
   ClientWidth = 588
   OnClose = FormClose
@@ -15,10 +15,10 @@ inherited SubjectForm: TSubjectForm
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
     end
-    object BtSubjectRestriction: TToolButton[3]
+    object BtThemeRestriction: TToolButton[3]
       Left = 257
       Top = 2
-      Action = ActSubjectRestriction
+      Action = ActThemeRestriction
       ParentShowHint = False
       ShowHint = True
     end
@@ -144,7 +144,7 @@ inherited SubjectForm: TSubjectForm
     }
   end
   inherited DataSource: TDatasource
-    DataSet = SourceDataModule.TbSubject
+    DataSet = SourceDataModule.TbTheme
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
   end
@@ -152,39 +152,39 @@ inherited SubjectForm: TSubjectForm
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
-    object ActSubjectRestriction: TAction[2]
+    object ActThemeRestriction: TAction[2]
       AutoCheck = True
-      Caption = 'Subject restrictions'
-      Hint = 'Subject restrictions|Input subject restrictions'
+      Caption = 'Theme restrictions'
+      Hint = 'Theme restrictions|Input subject restrictions'
       ImageIndex = 2
-      OnExecute = ActSubjectRestrictionExecute
+      OnExecute = ActThemeRestrictionExecute
     end
   end
-  object QuSubjectRestriction: TZQuery[6]
+  object QuThemeRestriction: TZQuery[6]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdSubject;IdDay;IdHour'
+    SortedFields = 'IdTheme;IdDay;IdHour'
     AutoCalcFields = False
     SQL.Strings = (
-      'select * from SubjectRestriction'
-      'where IdSubject=:IdSubject'
+      'select * from ThemeRestriction'
+      'where IdTheme=:IdTheme'
     )
     Params = <    
       item
         DataType = ftUnknown
-        Name = 'IdSubject'
+        Name = 'IdTheme'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSSubject
-    MasterFields = 'IdSubject'
-    MasterSource = SourceDataModule.DSSubject
-    LinkedFields = 'IdSubject'
-    IndexFieldNames = 'IdSubject Asc;IdDay Asc;IdHour Asc'
+    DataSource = SourceDataModule.DSTheme
+    MasterFields = 'IdTheme'
+    MasterSource = SourceDataModule.DSTheme
+    LinkedFields = 'IdTheme'
+    IndexFieldNames = 'IdTheme Asc;IdDay Asc;IdHour Asc'
     left = 64
     top = 152
     ParamData = <    
       item
         DataType = ftUnknown
-        Name = 'IdSubject'
+        Name = 'IdTheme'
         ParamType = ptUnknown
       end>
   end

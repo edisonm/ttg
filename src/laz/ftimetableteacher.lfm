@@ -308,11 +308,11 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       ' Distribution.IdParallel,'
       ' IdHour,'
       ' IdDay,'
-      ' Distribution.IdSubject,'
+      ' Distribution.IdTheme,'
       ' 0 as IsAssistance'
       'from'
       ' TimetableDetail inner join Distribution on'
-      ' (TimetableDetail.IdSubject = Distribution.IdSubject)'
+      ' (TimetableDetail.IdTheme = Distribution.IdTheme)'
       ' and (TimetableDetail.IdLevel = Distribution.IdLevel)'
       ' and (TimetableDetail.IdSpecialization = Distribution.IdSpecialization)'
       ' and (TimetableDetail.IdParallel = Distribution.IdParallel)'
@@ -327,16 +327,16 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       ' Distribution.IdParallel,'
       ' IdHour,'
       ' IdDay,'
-      ' Distribution.IdSubject,'
+      ' Distribution.IdTheme,'
       ' 1 as IsAssistance'
       'from'
       ' Assistance inner join Distribution on'
-      '  Assistance.IdSubject = Distribution.IdSubject'
+      '  Assistance.IdTheme = Distribution.IdTheme'
       '  and Assistance.IdLevel = Distribution.IdLevel'
       '  and Assistance.IdSpecialization = Distribution.IdSpecialization'
       '  and Assistance.IdParallel = Distribution.IdParallel'
       ' inner join TimetableDetail on'
-      '  TimetableDetail.IdSubject = Distribution.IdSubject'
+      '  TimetableDetail.IdTheme = Distribution.IdTheme'
       '  and TimetableDetail.IdLevel = Distribution.IdLevel'
       '  and TimetableDetail.IdSpecialization = Distribution.IdSpecialization'
       '  and TimetableDetail.IdParallel = Distribution.IdParallel'
@@ -446,10 +446,10 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = True
       Visible = False
     end
-    object QuTimetableTeacherIdSubject: TLongintField
+    object QuTimetableTeacherIdTheme: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdSubject'
+      FieldName = 'IdTheme'
       Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -513,16 +513,16 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = False
       Size = 5
     end
-    object QuTimetableTeacherNaSubject: TStringField
+    object QuTimetableTeacherNaTheme: TStringField
       DisplayWidth = 15
       FieldKind = fkLookup
-      FieldName = 'NaSubject'
+      FieldName = 'NaTheme'
       Index = 12
-      KeyFields = 'IdSubject'
+      KeyFields = 'IdTheme'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbSubject
-      LookupKeyFields = 'IdSubject'
-      LookupResultField = 'NaSubject'
+      LookupDataSet = SourceDataModule.TbTheme
+      LookupKeyFields = 'IdTheme'
+      LookupResultField = 'NaTheme'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False

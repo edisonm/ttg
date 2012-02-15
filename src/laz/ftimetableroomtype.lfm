@@ -309,55 +309,55 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       'SELECT'
       '  TimetableDetail.IdTimetable AS IdTimetable,'
       '  Distribution.IdRoomType AS IdRoomType,'
-      '  TimetableDetail.IdSubject AS IdSubject,'
+      '  TimetableDetail.IdTheme AS IdTheme,'
       '  TimetableDetail.IdDay AS IdDay,'
       '  TimetableDetail.IdHour AS IdHour,'
       '  Level.IdLevel AS IdLevel,'
       '  Specialization.IdSpecialization AS IdSpecialization,'
       '  Parallel.IdParallel AS IdParallel,'
       '  0 AS isJoinedClass,'
-      '  NaSubject,'
+      '  NaTheme,'
       '  AbLevel,'
       '  AbSpecialization,'
       '  NaParallel'
       'FROM'
       '  TimetableDetail'
       '  INNER JOIN Distribution'
-      '   ON TimetableDetail.IdSubject=Distribution.IdSubject'
+      '   ON TimetableDetail.IdTheme=Distribution.IdTheme'
       '  AND TimetableDetail.IdLevel=Distribution.IdLevel'
       '  AND TimetableDetail.IdSpecialization=Distribution.IdSpecialization'
       '  AND TimetableDetail.IdParallel=Distribution.IdParallel'
       '  INNER JOIN Level ON TimetableDetail.IdLevel=Level.IdLevel'
       '  INNER JOIN Specialization ON TimetableDetail.IdSpecialization=Specialization.IdSpecialization'
       '  INNER JOIN Parallel ON Distribution.IdParallel=Parallel.IdParallel'
-      '  INNER JOIN Subject ON Distribution.IdSubject=Subject.IdSubject'
+      '  INNER JOIN Theme ON Distribution.IdTheme=Theme.IdTheme'
       'WHERE Distribution.IdRoomType=:IdRoomType'
       '  AND TimetableDetail.IdTimetable=:IdTimetable'
       'UNION ALL'
       'SELECT'
       '  TimetableDetail.IdTimetable AS IdTimetable,'
       '  Distribution.IdRoomType AS IdRoomType,'
-      '  TimetableDetail.IdSubject AS IdSubject,'
+      '  TimetableDetail.IdTheme AS IdTheme,'
       '  TimetableDetail.IdDay AS IdDay,'
       '  TimetableDetail.IdHour AS IdHour,'
       '  JoinedClass.IdLevel1 AS IdLevel,'
       '  JoinedClass.IdSpecialization1 AS IdSpecialization,'
       '  JoinedClass.IdParallel1 AS IdParallel,'
       '  1 AS isJoinedClass,'
-      '  NaSubject,'
+      '  NaTheme,'
       '  AbLevel,'
       '  AbSpecialization,'
       '  NaParallel'
       'FROM'
       '  TimetableDetail'
       '  INNER JOIN Distribution'
-      '   ON TimetableDetail.IdSubject=Distribution.IdSubject'
+      '   ON TimetableDetail.IdTheme=Distribution.IdTheme'
       '  AND TimetableDetail.IdLevel=Distribution.IdLevel'
       '  AND TimetableDetail.IdSpecialization=Distribution.IdSpecialization'
       '  AND TimetableDetail.IdParallel=Distribution.IdParallel'
-      '  INNER JOIN Subject ON Distribution.IdSubject=Subject.IdSubject'
+      '  INNER JOIN Theme ON Distribution.IdTheme=Theme.IdTheme'
       '  INNER JOIN JoinedClass'
-      '   ON Distribution.IdSubject=JoinedClass.IdSubject'
+      '   ON Distribution.IdTheme=JoinedClass.IdTheme'
       '  AND Distribution.IdLevel=JoinedClass.IdLevel'
       '  AND Distribution.IdSpecialization=JoinedClass.IdSpecialization'
       '  AND Distribution.IdParallel=JoinedClass.IdParallel'
@@ -371,7 +371,7 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       '  IdLevel,'
       '  IdSpecialization,'
       '  IdParallel,'
-      '  NaSubject'
+      '  NaTheme'
     )
     Params = <    
       item
@@ -422,10 +422,10 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       ReadOnly = True
       Required = False
     end
-    object QuTimetableRoomTypeIdSubject: TLongintField
+    object QuTimetableRoomTypeIdTheme: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdSubject'
+      FieldName = 'IdTheme'
       Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -488,10 +488,10 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       Required = True
       Visible = False
     end
-    object QuTimetableRoomTypeNaSubject: TStringField
+    object QuTimetableRoomTypeNaTheme: TStringField
       DisplayWidth = 15
       FieldKind = fkData
-      FieldName = 'NaSubject'
+      FieldName = 'NaTheme'
       Index = 8
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

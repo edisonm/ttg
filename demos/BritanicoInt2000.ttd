@@ -26,7 +26,7 @@ Day
 "4";"Miercoles";
 "5";"Jueves";
 "6";"Viernes";
-Course
+Category
 6
 "IdLevel";"IdSpecialization";
 "1";"1";
@@ -74,9 +74,9 @@ Class
 "4";"1";"1";
 "5";"1";"1";
 "6";"1";"1";
-Subject
+Theme
 28
-"IdSubject";"NaSubject";
+"IdTheme";"NaTheme";
 "1";"Matematica";
 "2";"Mat/Ec/Filo_5";
 "3";"Fisica";
@@ -130,7 +130,7 @@ Teacher
 "20";"20";"Velasco";"Rosa";
 Distribution
 122
-"IdSubject";"IdLevel";"IdSpecialization";"IdParallel";"IdTeacher";"IdRoomType";"RoomCount";"Composition";
+"IdTheme";"IdLevel";"IdSpecialization";"IdParallel";"IdTeacher";"IdRoomType";"RoomCount";"Composition";
 "1";"1";"1";"1";"3";"1";"1";"2.2.2";
 "1";"1";"1";"2";"3";"1";"1";"2.2.2";
 "1";"2";"1";"1";"2";"1";"1";"2.2.2";
@@ -255,10 +255,10 @@ Distribution
 "30";"1";"1";"2";"19";"1";"1";"2.1";
 JoinedClass
 0
-"IdSubject";"IdLevel";"IdSpecialization";"IdParallel";"IdLevel1";"IdSpecialization1";"IdParallel1";
-SubjectRestrictionType
+"IdTheme";"IdLevel";"IdSpecialization";"IdParallel";"IdLevel1";"IdSpecialization1";"IdParallel1";
+ThemeRestrictionType
 2
-"IdSubjectRestrictionType";"NaSubjectRestrictionType";"ColSubjectRestrictionType";"ValSubjectRestrictionType";
+"IdThemeRestrictionType";"NaThemeRestrictionType";"ColThemeRestrictionType";"ValThemeRestrictionType";
 "0";"Inadecuado";"65280";"50";
 "1";"Imposible";"255";"500";
 TimeSlot
@@ -311,7 +311,7 @@ TimeSlot
 "6";"11";
 Assistance
 2
-"IdSubject";"IdLevel";"IdSpecialization";"IdParallel";"IdTeacher";
+"IdTheme";"IdLevel";"IdSpecialization";"IdParallel";"IdTeacher";
 "14";"3";"1";"1";"20";
 "14";"1";"1";"1";"20";
 TeacherRestrictionType
@@ -370,9 +370,9 @@ TeacherRestriction
 "12";"6";"2";"1";
 "12";"6";"3";"1";
 "12";"6";"4";"1";
-SubjectRestriction
+ThemeRestriction
 286
-"IdSubject";"IdDay";"IdHour";"IdSubjectRestrictionType";
+"IdTheme";"IdDay";"IdHour";"IdThemeRestrictionType";
 "1";"2";"10";"0";
 "1";"2";"11";"0";
 "1";"3";"10";"0";
@@ -662,12 +662,12 @@ SubjectRestriction
 Timetable
 3
 "IdTimetable";"TimeIni";"TimeEnd";"Summary";
-"1";"2012-02-13 02:48:31";"2012-02-13 04:06:09";"Evolutive Elitist Algorithm\n\r============================\n\rApplying Downhill:                     Si\n\rRandom Generator Seed:         2965869584\n\rPopulation size:                       10\n\rMax number of iterations:           10000\n\rCross Probability:                 0,3000\n\rMutation Probability:              0,2000\n\rRepair Probability:                0,1000\n\rPollination Probability:           0,1000\n\r-------------------------------------------------------------------\n\rDetail                              Count       Weight        Value\n\r-------------------------------------------------------------------\n\rClash of Teachers:                      0          305            0\n\rClash of Subjects:                      0          201            0\n\rClash of Classrooms:                    0           65            0\n\rBroken TT. Teachers:                   59           15          885\n\rOut of position empty hours:            0          295            0\n\rBroken Sessions:                        0          299            0\n\rNon Scattered Subjects:                 9            1            9\n\rSubject Restrictions:               (0 0)     (50 500)            0\n\rTeacher Restrictions:             (0 0 0) (50 500 500)            0\n\r-------------------------------------------------------------------\n\rTotal Value                                                     894\n\r";
-"2";"2012-02-13 04:07:00";"2012-02-13 06:14:27";"Evolutive Elitist Algorithm\n\r============================\n\rApplying Downhill:                     Si\n\rRandom Generator Seed:         2965864875\n\rPopulation size:                       10\n\rMax number of iterations:           10000\n\rCross Probability:                 0,3000\n\rMutation Probability:              0,2000\n\rRepair Probability:                0,1000\n\rPollination Probability:           0,1000\n\r-------------------------------------------------------------------\n\rDetail                              Count       Weight        Value\n\r-------------------------------------------------------------------\n\rClash of Teachers:                      0          305            0\n\rClash of Subjects:                      0          201            0\n\rClash of Classrooms:                    0           65            0\n\rBroken TT. Teachers:                   59           15          885\n\rOut of position empty hours:            0          295            0\n\rBroken Sessions:                        0          299            0\n\rNon Scattered Subjects:                12            1           12\n\rSubject Restrictions:               (0 0)     (50 500)            0\n\rTeacher Restrictions:             (0 0 0) (50 500 500)            0\n\r-------------------------------------------------------------------\n\rTotal Value                                                     897\n\r";
-"3";"2012-02-13 05:04:50";"2012-02-13 06:33:56";"Evolutive Elitist Algorithm\n\r============================\n\rApplying Downhill:                     Si\n\rRandom Generator Seed:         2965861405\n\rPopulation size:                       10\n\rMax number of iterations:           10000\n\rCross Probability:                 0,3000\n\rMutation Probability:              0,2000\n\rRepair Probability:                0,1000\n\rPollination Probability:           0,1000\n\r-------------------------------------------------------------------\n\rDetail                              Count       Weight        Value\n\r-------------------------------------------------------------------\n\rClash of Teachers:                      0          305            0\n\rClash of Subjects:                      0          201            0\n\rClash of Classrooms:                    0           65            0\n\rBroken TT. Teachers:                   58           15          870\n\rOut of position empty hours:            0          295            0\n\rBroken Sessions:                        0          299            0\n\rNon Scattered Subjects:                18            1           18\n\rSubject Restrictions:               (0 0)     (50 500)            0\n\rTeacher Restrictions:             (0 0 0) (50 500 500)            0\n\r-------------------------------------------------------------------\n\rTotal Value                                                     888\n\r";
+"1";"2012-02-13 02:48:31";"2012-02-13 04:06:09";"Evolutive Elitist Algorithm\n\r============================\n\rApplying Downhill:                     Si\n\rRandom Generator Seed:         2965869584\n\rPopulation size:                       10\n\rMax number of iterations:           10000\n\rCross Probability:                 0,3000\n\rMutation Probability:              0,2000\n\rRepair Probability:                0,1000\n\rPollination Probability:           0,1000\n\r-------------------------------------------------------------------\n\rDetail                              Count       Weight        Value\n\r-------------------------------------------------------------------\n\rClash of Teachers:                      0          305            0\n\rClash of Themes:                      0          201            0\n\rClash of Classrooms:                    0           65            0\n\rBroken TT. Teachers:                   59           15          885\n\rOut of position empty hours:            0          295            0\n\rBroken Sessions:                        0          299            0\n\rNon Scattered Themes:                 9            1            9\n\rTheme Restrictions:               (0 0)     (50 500)            0\n\rTeacher Restrictions:             (0 0 0) (50 500 500)            0\n\r-------------------------------------------------------------------\n\rTotal Value                                                     894\n\r";
+"2";"2012-02-13 04:07:00";"2012-02-13 06:14:27";"Evolutive Elitist Algorithm\n\r============================\n\rApplying Downhill:                     Si\n\rRandom Generator Seed:         2965864875\n\rPopulation size:                       10\n\rMax number of iterations:           10000\n\rCross Probability:                 0,3000\n\rMutation Probability:              0,2000\n\rRepair Probability:                0,1000\n\rPollination Probability:           0,1000\n\r-------------------------------------------------------------------\n\rDetail                              Count       Weight        Value\n\r-------------------------------------------------------------------\n\rClash of Teachers:                      0          305            0\n\rClash of Themes:                      0          201            0\n\rClash of Classrooms:                    0           65            0\n\rBroken TT. Teachers:                   59           15          885\n\rOut of position empty hours:            0          295            0\n\rBroken Sessions:                        0          299            0\n\rNon Scattered Themes:                12            1           12\n\rTheme Restrictions:               (0 0)     (50 500)            0\n\rTeacher Restrictions:             (0 0 0) (50 500 500)            0\n\r-------------------------------------------------------------------\n\rTotal Value                                                     897\n\r";
+"3";"2012-02-13 05:04:50";"2012-02-13 06:33:56";"Evolutive Elitist Algorithm\n\r============================\n\rApplying Downhill:                     Si\n\rRandom Generator Seed:         2965861405\n\rPopulation size:                       10\n\rMax number of iterations:           10000\n\rCross Probability:                 0,3000\n\rMutation Probability:              0,2000\n\rRepair Probability:                0,1000\n\rPollination Probability:           0,1000\n\r-------------------------------------------------------------------\n\rDetail                              Count       Weight        Value\n\r-------------------------------------------------------------------\n\rClash of Teachers:                      0          305            0\n\rClash of Themes:                      0          201            0\n\rClash of Classrooms:                    0           65            0\n\rBroken TT. Teachers:                   58           15          870\n\rOut of position empty hours:            0          295            0\n\rBroken Sessions:                        0          299            0\n\rNon Scattered Themes:                18            1           18\n\rTheme Restrictions:               (0 0)     (50 500)            0\n\rTeacher Restrictions:             (0 0 0) (50 500 500)            0\n\r-------------------------------------------------------------------\n\rTotal Value                                                     888\n\r";
 TimetableDetail
 1062
-"IdTimetable";"IdSubject";"IdLevel";"IdSpecialization";"IdParallel";"IdDay";"IdHour";"Session";
+"IdTimetable";"IdTheme";"IdLevel";"IdSpecialization";"IdParallel";"IdDay";"IdHour";"Session";
 "1";"19";"1";"1";"1";"2";"1";"134";
 "1";"27";"1";"1";"1";"2";"2";"224";
 "1";"16";"1";"1";"1";"2";"3";"94";
@@ -1748,18 +1748,18 @@ BreakTimetableTeacher=15
 ClashRoomType=65
 EmptyHour=295
 BrokenSession=299
-NonScatteredSubject=1
+NonScatteredTheme=1
 PopulationSize=10
 MaxIteration=10000
 CrossProbability=0,3
 MutationProbability1=0,2
 MutationProbability2=0,2
 ReparationProbability=0,1
-TeacherTimetableShowText=AbLevel + " " + NaParallel + " " + NaSubject
+TeacherTimetableShowText=AbLevel + " " + NaParallel + " " + NaTheme
 TeacherTimetableShowLength=20
 TeacherTimetableExcluirProfProhibicion=(TeacherRestriction.IdTeacherRestrictionType <> 2)AND(TeacherRestriction.IdTeacherRestrictionType <> 3)
 PollinationProbability=0,1
-ClashSubject=201
+ClashTheme=201
 InitialTimetables=
 SharedDirectory=
 ApplyDoubleDownHill=-1

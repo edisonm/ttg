@@ -41,30 +41,30 @@ type
 
   TTimetableModel = class(TModel)
   private
-    FClashTeacherValue, FClashSubjectValue, FClashRoomTypeValue,
+    FClashTeacherValue, FClashThemeValue, FClashRoomTypeValue,
       FOutOfPositionEmptyHourValue, FBrokenSessionValue,
-      FBreakTimetableTeacherValue, FNonScatteredSubjectValue: Integer;
+      FBreakTimetableTeacherValue, FNonScatteredThemeValue: Integer;
     FTimeSlotToDay, FTimeSlotToHour, FDayToMaxTimeSlot, FSessionToDistribution,
-      FSessionToSubject, FSessionToRoomType, FSessionToRoomCount, FRoomTypeToNumber,
-      FSubjectRestrictionToSubject, FSubjectRestrictionToTimeSlot,
-      FSubjectRestrictionToSubjectRestrictionType, FTeacherRestrictionToTeacher,
+      FSessionToTheme, FSessionToRoomType, FSessionToRoomCount, FRoomTypeToNumber,
+      FThemeRestrictionToTheme, FThemeRestrictionToTimeSlot,
+      FThemeRestrictionToThemeRestrictionType, FTeacherRestrictionToTeacher,
       FTeacherRestrictionToTimeSlot, FTeacherRestrictionToTeacherRestrictionType,
-      FDistributionToRoomType, FDistributionToRoomCount, FClassToCourse,
+      FDistributionToRoomType, FDistributionToRoomCount, FClassToCategory,
       FClassToLevel, FClassToParallel, FDistributionToClass, FClassToSpecialization,
-      FClassToSessionCount, FSubjectRestrictionTypeToValue, FTeacherRestrictionTypeToValue,
-      FSubjectRestrictionToValue, FTeacherRestrictionToValue: TDynamicIntegerArray;
+      FClassToSessionCount, FThemeRestrictionTypeToValue, FTeacherRestrictionTypeToValue,
+      FThemeRestrictionToValue, FTeacherRestrictionToValue: TDynamicIntegerArray;
     FSessionToDuration: TSessionArray;
-    FDayHourToTimeSlot, FLevelSpecializationToCourse, FCourseParallelToClass,
-      FClassSubjectToTeacher, FClassSubjectToDistribution, FClassSubjectCount,
+    FDayHourToTimeSlot, FLevelSpecializationToCategory, FCategoryParallelToClass,
+      FClassThemeToTeacher, FClassThemeToDistribution, FClassThemeCount,
       FTimetableDetailPattern, FDistributionToSessions, FClassAssistanceToDistribution,
       FClassAssistanceToTeacher, FTeacherTimeSlotToTeacherRestrictionType,
       FClassJoinedClassToDistribution, FClassJoinedClassToClass,
-      FSubjectTimeSlotToSubjectRestrictionType: TDynamicIntegerArrayArray;
-    FSubjectCount, FSubjectRestrictionTypeCount, FTeacherRestrictionTypeCount,
-      FClassCount, FDayCount, FHourCount, FTimeSlotCount, FTeacherCount, FCourseCount,
+      FThemeTimeSlotToThemeRestrictionType: TDynamicIntegerArrayArray;
+    FThemeCount, FThemeRestrictionTypeCount, FTeacherRestrictionTypeCount,
+      FClassCount, FDayCount, FHourCount, FTimeSlotCount, FTeacherCount, FCategoryCount,
       FLevelCount, FSpecializationCount, FRoomTypeCount, FDistributionCount,
       FAssistanceCount, FJoinedClassCount: Integer;
-    FParallelToIdParallel, FSubjectToIdSubject, FDayToIdDay, FHourToIdHour,
+    FParallelToIdParallel, FThemeToIdTheme, FDayToIdDay, FHourToIdHour,
       FLevelToIdLevel, FSpecializationToIdSpecialization: TDynamicIntegerArray;
     FIdLevelToLevel, FIdSpecializationToSpecialization, FIdParallelToParallel, FIdDayToDay,
       FIdHourToHour: TDynamicIntegerArray;
@@ -75,24 +75,24 @@ type
     property TimetableDetailPattern: TDynamicIntegerArrayArray read FTimetableDetailPattern;
     class function GetElitistCount: Integer; override;
   public
-    procedure Configure(AClashTeacherValue, AClashSubjectValue, AClashRoomTypeValue,
+    procedure Configure(AClashTeacherValue, AClashThemeValue, AClashRoomTypeValue,
       ABreakTimetableTeacherValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
-      ANonScatteredSubjectValue: Integer);
-    constructor Create(AClashTeacherValue, AClashSubjectValue, AClashRoomTypeValue,
+      ANonScatteredThemeValue: Integer);
+    constructor Create(AClashTeacherValue, AClashThemeValue, AClashRoomTypeValue,
       ABreakTimetableTeacherValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
-      ANonScatteredSubjectValue: Integer);
+      ANonScatteredThemeValue: Integer);
     destructor Destroy; override;
     procedure ReportParameters(AReport: TStrings);
     function NewIndividual: TIndividual; override;
     property TimeSlotCount: Integer read FTimeSlotCount;
     property ClassCount: Integer read FClassCount;
     property ClashTeacherValue: Integer read FClashTeacherValue;
-    property ClashSubjectValue: Integer read FClashSubjectValue;
+    property ClashThemeValue: Integer read FClashThemeValue;
     property BreakTimetableTeacherValue: Integer read FBreakTimetableTeacherValue;
     property ClashRoomTypeValue: Integer read FClashRoomTypeValue;
     property OutOfPositionEmptyHourValue: Integer read FOutOfPositionEmptyHourValue;
     property BrokenSessionValue: Integer read FBrokenSessionValue;
-    property NonScatteredSubjectValue: Integer read FNonScatteredSubjectValue;
+    property NonScatteredThemeValue: Integer read FNonScatteredThemeValue;
     property SessionNumberDouble: Integer read FSessionNumberDouble;
     property SessionToDuration: TSessionArray read FSessionToDuration;
     property ClassToSessionCount: TDynamicIntegerArray read FClassToSessionCount;
@@ -129,8 +129,8 @@ type
 
     TODO:
     2011-03-13:
-    - DONE Change implementation of NonScatteredSubject with a more compositional formula
-    - DONE Remove FClassSubjectDay{Min,Max}Hour
+    - DONE Change implementation of NonScatteredTheme with a more compositional formula
+    - DONE Remove FClassThemeDay{Min,Max}Hour
     - DONE IncCount and DecCount must be methods
 
 
@@ -139,21 +139,21 @@ type
   TTimetableTablingInfo = class
   protected
     FTeacherTimeSlotCount: TDynamicIntegerArrayArray;
-    FSubjectTimeSlotCount: TDynamicIntegerArrayArray;
+    FThemeTimeSlotCount: TDynamicIntegerArrayArray;
     FRoomTypeTimeSlotCount: TDynamicIntegerArrayArray;
-    FClassDaySubjectCount: TDynamicIntegerArrayArrayArray;
-    FClassDaySubjectAccumulated: TDynamicIntegerArrayArrayArray;
-    FSubjectRestrictionTypeToSubjectCount: TDynamicIntegerArray;
+    FClassDayThemeCount: TDynamicIntegerArrayArrayArray;
+    FClassDayThemeAccumulated: TDynamicIntegerArrayArrayArray;
+    FThemeRestrictionTypeToThemeCount: TDynamicIntegerArray;
     FTeacherRestrictionTypeATeacherCount: TDynamicIntegerArray;
     FDayTeacherMinHour: TDynamicIntegerArrayArray;
     FDayTeacherMaxHour: TDynamicIntegerArrayArray;
     FDayTeacherEmptyHourCount: TDynamicIntegerArrayArray;
     FClashTeacher: Integer;
-    FClashSubject: Integer;
+    FClashTheme: Integer;
     FClashRoomType: Integer;
     FBreakTimetableTeacher: Integer;
     FOutOfPositionEmptyHour: Integer;
-    FNonScatteredSubject: Integer;
+    FNonScatteredTheme: Integer;
     FBrokenSession: Integer;
   end;
 
@@ -167,11 +167,11 @@ type
     procedure CrossClass(Timetable2: TTimetable; AClass: Integer);
     procedure DeltaValues(Delta, AClass, TimeSlot1, TimeSlot2: Integer);
     function DeltaBrokenSession(AClass, TimeSlot1, TimeSlot2: Integer): Integer;
-    function GetClashSubjectValue: Integer;
-    function GetNonScatteredSubjectValue: Integer;
+    function GetClashThemeValue: Integer;
+    function GetNonScatteredThemeValue: Integer;
     function GetOutOfPositionEmptyHourValue: Integer;
     function GetClashTeacherValue: Integer;
-    function GetSubjectRestrictionValue: Integer;
+    function GetThemeRestrictionValue: Integer;
     function GetTeacherRestrictionValue: Integer;
     function GetBreakTimetableTeacherValue: Integer;
     function GetBrokenSessionValue: Integer;
@@ -206,23 +206,23 @@ type
     function DoMove(AClass, ATimeSlot1: Integer; var ATimeSlot2: Integer): Integer;
     procedure SaveToFile(const AFileName: string);
     property OutOfPositionEmptyHour: Integer read FTablingInfo.FOutOfPositionEmptyHour;
-    property SubjectRestrictionTypeToSubjectCount: TDynamicIntegerArray
-      read FTablingInfo.FSubjectRestrictionTypeToSubjectCount;
+    property ThemeRestrictionTypeToThemeCount: TDynamicIntegerArray
+      read FTablingInfo.FThemeRestrictionTypeToThemeCount;
     property TeacherRestrictionTypeATeacherCount: TDynamicIntegerArray
       read FTablingInfo.FTeacherRestrictionTypeATeacherCount;
-    property NonScatteredSubject: Integer read FTablingInfo.FNonScatteredSubject;
+    property NonScatteredTheme: Integer read FTablingInfo.FNonScatteredTheme;
     property BrokenSession: Integer read FTablingInfo.FBrokenSession;
     property ClashTeacher: Integer read FTablingInfo.FClashTeacher;
-    property ClashSubject: Integer read FTablingInfo.FClashSubject;
+    property ClashTheme: Integer read FTablingInfo.FClashTheme;
     property ClashRoomType: Integer read FTablingInfo.FClashRoomType;
     property ClashTeacherValue: Integer read GetClashTeacherValue;
-    property ClashSubjectValue: Integer read GetClashSubjectValue;
+    property ClashThemeValue: Integer read GetClashThemeValue;
     property BreakTimetableTeacherValue: Integer read GetBreakTimetableTeacherValue;
     property ClashRoomTypeValue: Integer read GetClashRoomTypeValue;
     property OutOfPositionEmptyHourValue: Integer read GetOutOfPositionEmptyHourValue;
     property BrokenSessionValue: Integer read GetBrokenSessionValue;
-    property NonScatteredSubjectValue: Integer read GetNonScatteredSubjectValue;
-    property SubjectRestrictionValue: Integer read GetSubjectRestrictionValue;
+    property NonScatteredThemeValue: Integer read GetNonScatteredThemeValue;
+    property ThemeRestrictionValue: Integer read GetThemeRestrictionValue;
     property TeacherRestrictionValue: Integer read GetTeacherRestrictionValue;
     property ClassTimeSlotToSession: TDynamicIntegerArrayArray
       read FClassTimeSlotToSession write FClassTimeSlotToSession;
@@ -286,17 +286,17 @@ uses
   SysUtils, ZSysUtils, MTProcs, DSource, USortAlgs, UTTGConsts, dsourcebaseconsts;
 
 constructor TTimetableModel.Create(AClashTeacherValue,
-  AClashSubjectValue, AClashRoomTypeValue, ABreakTimetableTeacherValue,
-  AOutOfPositionEmptyHourValue, ABrokenSessionValue, ANonScatteredSubjectValue: Integer);
+  AClashThemeValue, AClashRoomTypeValue, ABreakTimetableTeacherValue,
+  AOutOfPositionEmptyHourValue, ABrokenSessionValue, ANonScatteredThemeValue: Integer);
 var
-  FMinIdTeacher, FMinIdSubject, FMinIdRoomType, FMinIdTeacherRestrictionType,
-    FMinIdSubjectRestrictionType: Integer;
-  FDistributionToSubject, FIdSubjectToSubject, FIdTeacherATeacher,
+  FMinIdTeacher, FMinIdTheme, FMinIdRoomType, FMinIdTeacherRestrictionType,
+    FMinIdThemeRestrictionType: Integer;
+  FDistributionToTheme, FIdThemeToTheme, FIdTeacherATeacher,
     FIdRoomTypeARoomType, FIdTeacherRestrictionTypeATeacherRestrictionType,
-    FIdSubjectRestrictionTypeToSubjectRestrictionType, FClassToDuration,
+    FIdThemeRestrictionTypeToThemeRestrictionType, FClassToDuration,
     FDistributionToTeacher: TDynamicIntegerArray;
   FTeacherAIdTeacher, FTeacherRestrictionTypeAIdTeacherRestrictionType,
-    FRoomTypeAIdRoomType, FSubjectRestrictionTypeAIdSubjectRestrictionType: TDynamicIntegerArray;
+    FRoomTypeAIdRoomType, FThemeRestrictionTypeAIdThemeRestrictionType: TDynamicIntegerArray;
   procedure Load(ATable: TDataSet; const ALstName: string; out FMinIdLst: Integer;
     out FIdLstALst: TDynamicIntegerArray;
     out FLstAIdLst: TDynamicIntegerArray);
@@ -359,28 +359,28 @@ var
     end;
   end;
   *)
-  procedure LoadCourse;
+  procedure LoadCategory;
   var
-    Course, Level, Specialization: Integer;
+    Category, Level, Specialization: Integer;
     VFieldLevel, VFieldSpecialization: TField;
   begin
-    with SourceDataModule.TbCourse do
+    with SourceDataModule.TbCategory do
     begin
       IndexFieldNames := 'IdLevel;IdSpecialization';
       First;
-      FCourseCount := RecordCount;
-      SetLength(FLevelSpecializationToCourse, FLevelCount, FSpecializationCount);
+      FCategoryCount := RecordCount;
+      SetLength(FLevelSpecializationToCategory, FLevelCount, FSpecializationCount);
       for Level := 0 to FLevelCount - 1 do
         for Specialization := 0 to FSpecializationCount - 1 do
-          FLevelSpecializationToCourse[Level, Specialization] := -1;
+          FLevelSpecializationToCategory[Level, Specialization] := -1;
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
-      for Course := 0 to FCourseCount - 1 do
+      for Category := 0 to FCategoryCount - 1 do
       begin
         Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
-        FLevelSpecializationToCourse[Level, Specialization] := Course;
+        FLevelSpecializationToCategory[Level, Specialization] := Category;
         Next;
       end;
       First;
@@ -423,7 +423,7 @@ var
   end;
   procedure LoadClass;
   var
-    VClass, Course, Parallel, Level, Specialization: Integer;
+    VClass, Category, Parallel, Level, Specialization: Integer;
     VFieldLevel, VFieldSpecialization, VFieldParallel: TField;
   begin
     with SourceDataModule.TbClass do
@@ -431,11 +431,11 @@ var
       IndexFieldNames := 'IdLevel;IdSpecialization;IdParallel';
       First;
       FClassCount := RecordCount;
-      SetLength(FClassToCourse, FClassCount);
+      SetLength(FClassToCategory, FClassCount);
       SetLength(FClassToParallel, FClassCount);
       SetLength(FClassToLevel, FClassCount);
       SetLength(FClassToSpecialization, FClassCount);
-      SetLength(FCourseParallelToClass, FCourseCount, Length
+      SetLength(FCategoryParallelToClass, FCategoryCount, Length
           (FParallelToIdParallel));
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
@@ -445,14 +445,14 @@ var
         Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
-        Course := FLevelSpecializationToCourse[Level, Specialization];
+        Category := FLevelSpecializationToCategory[Level, Specialization];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
           FMinIdParallel];
-        FClassToCourse[VClass] := Course;
+        FClassToCategory[VClass] := Category;
         FClassToLevel[VClass] := Level;
         FClassToParallel[VClass] := Parallel;
         FClassToSpecialization[VClass] := Specialization;
-        FCourseParallelToClass[Course, Parallel] := VClass;
+        FCategoryParallelToClass[Category, Parallel] := VClass;
         Next;
       end;
       First;
@@ -477,20 +477,20 @@ var
       First;
     end;
   end;
-  procedure LoadSubjectRestrictionType;
+  procedure LoadThemeRestrictionType;
   var
-    SubjectRestrictionType: Integer;
+    ThemeRestrictionType: Integer;
     VFieldValue: TField;
   begin
-    with SourceDataModule.TbSubjectRestrictionType do
+    with SourceDataModule.TbThemeRestrictionType do
     begin
-      IndexFieldNames := 'IdSubjectRestrictionType';
+      IndexFieldNames := 'IdThemeRestrictionType';
       First;
-      VFieldValue := FindField('ValSubjectRestrictionType');
-      SetLength(FSubjectRestrictionTypeToValue, RecordCount);
-      for SubjectRestrictionType := 0 to RecordCount - 1 do
+      VFieldValue := FindField('ValThemeRestrictionType');
+      SetLength(FThemeRestrictionTypeToValue, RecordCount);
+      for ThemeRestrictionType := 0 to RecordCount - 1 do
       begin
-        FSubjectRestrictionTypeToValue[SubjectRestrictionType] := VFieldValue.AsInteger;
+        FThemeRestrictionTypeToValue[ThemeRestrictionType] := VFieldValue.AsInteger;
         Next;
       end;
       First;
@@ -515,40 +515,40 @@ var
       First;
     end;
   end;
-  procedure LoadSubjectRestriction;
+  procedure LoadThemeRestriction;
   var
-    Subject, SubjectRestriction, TimeSlot, SubjectRestrictionType: Integer;
-    VFieldSubject, VFieldDay, VFieldHour, VFieldSubjectRestrictionType: TField;
+    Theme, ThemeRestriction, TimeSlot, ThemeRestrictionType: Integer;
+    VFieldTheme, VFieldDay, VFieldHour, VFieldThemeRestrictionType: TField;
   begin
-    with SourceDataModule.TbSubjectRestriction do
+    with SourceDataModule.TbThemeRestriction do
     begin
-      IndexFieldNames := 'IdSubject;IdDay;IdHour';
+      IndexFieldNames := 'IdTheme;IdDay;IdHour';
       First;
-      SetLength(FSubjectRestrictionToSubject, RecordCount);
-      SetLength(FSubjectRestrictionToTimeSlot, RecordCount);
-      SetLength(FSubjectRestrictionToSubjectRestrictionType, RecordCount);
-      SetLength(FSubjectRestrictionToValue, RecordCount);
-      SetLength(FSubjectTimeSlotToSubjectRestrictionType, FSubjectCount,
+      SetLength(FThemeRestrictionToTheme, RecordCount);
+      SetLength(FThemeRestrictionToTimeSlot, RecordCount);
+      SetLength(FThemeRestrictionToThemeRestrictionType, RecordCount);
+      SetLength(FThemeRestrictionToValue, RecordCount);
+      SetLength(FThemeTimeSlotToThemeRestrictionType, FThemeCount,
         FTimeSlotCount);
-      for Subject := 0 to FSubjectCount - 1 do
+      for Theme := 0 to FThemeCount - 1 do
         for TimeSlot := 0 to FTimeSlotCount - 1 do
-          FSubjectTimeSlotToSubjectRestrictionType[Subject, TimeSlot] := -1;
-      VFieldSubject := FindField('IdSubject');
+          FThemeTimeSlotToThemeRestrictionType[Theme, TimeSlot] := -1;
+      VFieldTheme := FindField('IdTheme');
       VFieldDay := FindField('IdDay');
       VFieldHour := FindField('IdHour');
-      VFieldSubjectRestrictionType := FindField('IdSubjectRestrictionType');
-      for SubjectRestriction := 0 to RecordCount - 1 do
+      VFieldThemeRestrictionType := FindField('IdThemeRestrictionType');
+      for ThemeRestriction := 0 to RecordCount - 1 do
       begin
-        Subject := FIdSubjectToSubject[VFieldSubject.AsInteger - FMinIdSubject];
+        Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         TimeSlot := FDayHourToTimeSlot[FIdDayToDay[VFieldDay.AsInteger - FMinIdDay],
           FIdHourToHour[VFieldHour.AsInteger - FMinIdHour]];
-        SubjectRestrictionType := FIdSubjectRestrictionTypeToSubjectRestrictionType
-          [VFieldSubjectRestrictionType.AsInteger - FMinIdSubjectRestrictionType];
-        FSubjectRestrictionToSubject[SubjectRestriction] := Subject;
-        FSubjectRestrictionToTimeSlot[SubjectRestriction] := TimeSlot;
-        FSubjectRestrictionToSubjectRestrictionType[Subject] := SubjectRestrictionType;
-        FSubjectRestrictionToValue[SubjectRestriction] := FSubjectRestrictionTypeToValue[SubjectRestrictionType];
-        FSubjectTimeSlotToSubjectRestrictionType[Subject, TimeSlot] := SubjectRestrictionType;
+        ThemeRestrictionType := FIdThemeRestrictionTypeToThemeRestrictionType
+          [VFieldThemeRestrictionType.AsInteger - FMinIdThemeRestrictionType];
+        FThemeRestrictionToTheme[ThemeRestriction] := Theme;
+        FThemeRestrictionToTimeSlot[ThemeRestriction] := TimeSlot;
+        FThemeRestrictionToThemeRestrictionType[Theme] := ThemeRestrictionType;
+        FThemeRestrictionToValue[ThemeRestriction] := FThemeRestrictionTypeToValue[ThemeRestrictionType];
+        FThemeTimeSlotToThemeRestrictionType[Theme, TimeSlot] := ThemeRestrictionType;
         Next;
       end;
       First;
@@ -602,18 +602,18 @@ var
   end;
   procedure LoadDistribution;
   var
-    Subject, Level, Specialization, Parallel, Session1, Distribution, RoomCount,
-      VClass, Teacher, Course, Session2, Session, RoomType, VPos: Integer;
-    VFieldSubject, VFieldLevel, VFieldParallel, VFieldTeacher, VFieldSpecialization,
+    Theme, Level, Specialization, Parallel, Session1, Distribution, RoomCount,
+      VClass, Teacher, Category, Session2, Session, RoomType, VPos: Integer;
+    VFieldTheme, VFieldLevel, VFieldParallel, VFieldTeacher, VFieldSpecialization,
       VFieldRoomType, VFieldRoomCount, VFieldComposition: TField;
     VSessionToDuration, VSessionToDistribution: array [0 .. 16383] of Integer;
     Composition: string;
   begin
     with SourceDataModule.TbDistribution do
     begin
-      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdParallel';
+      IndexFieldNames := 'IdTheme;IdLevel;IdSpecialization;IdParallel';
       First;
-      VFieldSubject := FindField('IdSubject');
+      VFieldTheme := FindField('IdTheme');
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
       VFieldParallel := FindField('IdParallel');
@@ -628,21 +628,21 @@ var
       SetLength(FDistributionToRoomType, FDistributionCount);
       SetLength(FDistributionToRoomCount, FDistributionCount);
       SetLength(FDistributionToSessions, FDistributionCount);
-      SetLength(FDistributionToSubject, FDistributionCount);
-      SetLength(FClassSubjectToTeacher, FClassCount, FSubjectCount);
-      SetLength(FClassSubjectCount, FClassCount, FSubjectCount);
-      SetLength(FClassSubjectToDistribution, FClassCount, FSubjectCount);
+      SetLength(FDistributionToTheme, FDistributionCount);
+      SetLength(FClassThemeToTeacher, FClassCount, FThemeCount);
+      SetLength(FClassThemeCount, FClassCount, FThemeCount);
+      SetLength(FClassThemeToDistribution, FClassCount, FThemeCount);
       for VClass := 0 to FClassCount - 1 do
-        for Subject := 0 to FSubjectCount - 1 do
+        for Theme := 0 to FThemeCount - 1 do
         begin
-          FClassSubjectCount[VClass, Subject] := 0;
-          FClassSubjectToDistribution[VClass, Subject] := -1;
-          FClassSubjectToTeacher[VClass, Subject] := -1;
+          FClassThemeCount[VClass, Theme] := 0;
+          FClassThemeToDistribution[VClass, Theme] := -1;
+          FClassThemeToTeacher[VClass, Theme] := -1;
         end;
       Session2 := 0;
       for Distribution := 0 to RecordCount - 1 do
       begin
-        Subject := FIdSubjectToSubject[VFieldSubject.AsInteger - FMinIdSubject];
+        Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
           FMinIdParallel];
@@ -650,16 +650,16 @@ var
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
         RoomType := FIdRoomTypeARoomType[VFieldRoomType.AsInteger - FMinIdRoomType];
         RoomCount := VFieldRoomCount.AsInteger;
-        Course := FLevelSpecializationToCourse[Level, Specialization];
-        VClass := FCourseParallelToClass[Course, Parallel];
+        Category := FLevelSpecializationToCategory[Level, Specialization];
+        VClass := FCategoryParallelToClass[Category, Parallel];
         Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
         FDistributionToClass[Distribution] := VClass;
         FDistributionToTeacher[Distribution] := Teacher;
         FDistributionToRoomType[Distribution] := RoomType;
         FDistributionToRoomCount[Distribution] := RoomCount;
-        FDistributionToSubject[Distribution] := Subject;
-        FClassSubjectToTeacher[VClass, Subject] := Teacher;
-        FClassSubjectToDistribution[VClass, Subject] := Distribution;
+        FDistributionToTheme[Distribution] := Theme;
+        FClassThemeToTeacher[VClass, Theme] := Teacher;
+        FClassThemeToDistribution[VClass, Theme] := Distribution;
         Composition := VFieldComposition.AsString;
         VPos := 1;
         Session1 := Session2;
@@ -668,7 +668,7 @@ var
         begin
           VSessionToDuration[Session2] := StrToInt(ExtractString(Composition, VPos, '.'));
           VSessionToDistribution[Session2] := Distribution;
-          Inc(FClassSubjectCount[VClass, Subject]);
+          Inc(FClassThemeCount[VClass, Theme]);
           // Inc(t, VSessionToDuration[Session2]);
           Inc(Session2);
         end;
@@ -681,7 +681,7 @@ var
         Next;
       end;
       SetLength(FSessionToDistribution, Session2);
-      SetLength(FSessionToSubject, Session2);
+      SetLength(FSessionToTheme, Session2);
       SetLength(FSessionToRoomType, Session2);
       SetLength(FSessionToRoomCount, Session2);
       Move(VSessionToDuration[0], FSessionToDuration[0], Session2 * SizeOf(Integer));
@@ -691,7 +691,7 @@ var
       for Session := 0 to Session2 - 1 do
       begin
         Distribution := FSessionToDistribution[Session];
-        FSessionToSubject[Session] := FDistributionToSubject[Distribution];
+        FSessionToTheme[Session] := FDistributionToTheme[Distribution];
         FSessionToRoomType[Session] := FDistributionToRoomType[Distribution];
         FSessionToRoomCount[Session] := FDistributionToRoomCount[Distribution];
       end;
@@ -699,34 +699,34 @@ var
   end;
   procedure LoadAssistance;
   var
-    Assistance, Counter, VClass, Course, Parallel, Level, Specialization, Subject,
+    Assistance, Counter, VClass, Category, Parallel, Level, Specialization, Theme,
     Distribution, Teacher: Integer;
-    VFieldSubject, VFieldLevel, VFieldSpecialization, VFieldParallel,
+    VFieldTheme, VFieldLevel, VFieldSpecialization, VFieldParallel,
     VFieldTeacher: TField;
   begin
     with SourceDataModule.TbAssistance do
     begin
-      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdParallel;IdTeacher';
+      IndexFieldNames := 'IdTheme;IdLevel;IdSpecialization;IdParallel;IdTeacher';
       First;
       FAssistanceCount := RecordCount;
       SetLength(FClassAssistanceToDistribution, FClassCount, 0);
       SetLength(FClassAssistanceToTeacher, FClassCount, 0);
-      VFieldSubject := FindField('IdSubject');
+      VFieldTheme := FindField('IdTheme');
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
       VFieldParallel := FindField('IdParallel');
       VFieldTeacher := FindField('IdTeacher');
       for Assistance := 0 to FAssistanceCount - 1 do
       begin
-        Subject := FIdSubjectToSubject[VFieldSubject.AsInteger - FMinIdSubject];
+        Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
-        Course := FLevelSpecializationToCourse[Level, Specialization];
+        Category := FLevelSpecializationToCategory[Level, Specialization];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
           FMinIdParallel];
-        VClass := FCourseParallelToClass[Course, Parallel];
-        Distribution := FClassSubjectToDistribution[VClass, Subject];
+        VClass := FCategoryParallelToClass[Category, Parallel];
+        Distribution := FClassThemeToDistribution[VClass, Theme];
         Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
         Counter := Length(FClassAssistanceToDistribution[VClass]);
         SetLength(FClassAssistanceToDistribution[VClass], Counter + 1);
@@ -740,19 +740,19 @@ var
   end;
   procedure LoadJoinedClass;
   var
-    JoinedClass, Counter, VClass1, Course1, Parallel1, Level1, Specialization1, VClass,
-    Course, Parallel, Level, Specialization, Subject,  Distribution: Integer;
-    VFieldSubject, VFieldLevel, VFieldSpecialization, VFieldParallel,
+    JoinedClass, Counter, VClass1, Category1, Parallel1, Level1, Specialization1, VClass,
+    Category, Parallel, Level, Specialization, Theme,  Distribution: Integer;
+    VFieldTheme, VFieldLevel, VFieldSpecialization, VFieldParallel,
     VFieldLevel1, VFieldSpecialization1, VFieldParallel1: TField;
   begin
     with SourceDataModule.TbJoinedClass do
     begin
-      IndexFieldNames := 'IdSubject;IdLevel;IdSpecialization;IdParallel;IdLevel1;IdSpecialization1;IdParallel1';
+      IndexFieldNames := 'IdTheme;IdLevel;IdSpecialization;IdParallel;IdLevel1;IdSpecialization1;IdParallel1';
       First;
       FJoinedClassCount := RecordCount;
       SetLength(FClassJoinedClassToDistribution, FClassCount, 0);
       SetLength(FClassJoinedClassToClass, FClassCount, 0);
-      VFieldSubject := FindField('IdSubject');
+      VFieldTheme := FindField('IdTheme');
       VFieldLevel := FindField('IdLevel');
       VFieldSpecialization := FindField('IdSpecialization');
       VFieldParallel := FindField('IdParallel');
@@ -761,22 +761,22 @@ var
       VFieldParallel1 := FindField('IdParallel1');
       for JoinedClass := 0 to FJoinedClassCount - 1 do
       begin
-        Subject := FIdSubjectToSubject[VFieldSubject.AsInteger - FMinIdSubject];
+        Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
         Specialization := FIdSpecializationToSpecialization
           [VFieldSpecialization.AsInteger - FMinIdSpecialization];
-        Course := FLevelSpecializationToCourse[Level, Specialization];
+        Category := FLevelSpecializationToCategory[Level, Specialization];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
           FMinIdParallel];
-        VClass := FCourseParallelToClass[Course, Parallel];
-        Distribution := FClassSubjectToDistribution[VClass, Subject];
+        VClass := FCategoryParallelToClass[Category, Parallel];
+        Distribution := FClassThemeToDistribution[VClass, Theme];
         Level1 := FIdLevelToLevel[VFieldLevel1.AsInteger - FMinIdLevel];
         Specialization1 := FIdSpecializationToSpecialization
           [VFieldSpecialization1.AsInteger - FMinIdSpecialization];
-        Course1 := FLevelSpecializationToCourse[Level1, Specialization1];
+        Category1 := FLevelSpecializationToCategory[Level1, Specialization1];
         Parallel1 := FIdParallelToParallel[VFieldParallel1.AsInteger -
           FMinIdParallel];
-        VClass1 := FCourseParallelToClass[Course1, Parallel1];
+        VClass1 := FCategoryParallelToClass[Category1, Parallel1];
         Counter := Length(FClassJoinedClassToDistribution[VClass]);
         SetLength(FClassJoinedClassToDistribution[VClass], Counter + 1);
         SetLength(FClassJoinedClassToClass[VClass], Counter + 1);
@@ -842,9 +842,9 @@ begin
   inherited Create;
   with SourceDataModule do
   begin
-    Configure(AClashTeacherValue, AClashSubjectValue, AClashRoomTypeValue,
+    Configure(AClashTeacherValue, AClashThemeValue, AClashRoomTypeValue,
       ABreakTimetableTeacherValue, AOutOfPositionEmptyHourValue,
-      ABrokenSessionValue, ANonScatteredSubjectValue);
+      ABrokenSessionValue, ANonScatteredThemeValue);
     Load(TbTeacher, 'IdTeacher', FMinIdTeacher, FIdTeacherATeacher,
       FTeacherAIdTeacher);
     FTeacherCount := Length(FTeacherAIdTeacher);
@@ -853,21 +853,21 @@ begin
     Load(TbSpecialization, 'IdSpecialization', FMinIdSpecialization,
       FIdSpecializationToSpecialization, FSpecializationToIdSpecialization);
     FSpecializationCount := Length(FSpecializationToIdSpecialization);
-    LoadCourse;
+    LoadCategory;
     Load(TbParallel, 'IdParallel', FMinIdParallel,
       FIdParallelToParallel, FParallelToIdParallel);
-    Load(TbSubject, 'IdSubject', FMinIdSubject, FIdSubjectToSubject,
-      FSubjectToIdSubject);
-    FSubjectCount := Length(FSubjectToIdSubject);
+    Load(TbTheme, 'IdTheme', FMinIdTheme, FIdThemeToTheme,
+      FThemeToIdTheme);
+    FThemeCount := Length(FThemeToIdTheme);
     Load(TbDay, 'IdDay', FMinIdDay, FIdDayToDay, FDayToIdDay);
     FDayCount := Length(FDayToIdDay);
     Load(TbHour, 'IdHour', FMinIdHour, FIdHourToHour, FHourToIdHour);
     FHourCount := Length(FHourToIdHour);
-    Load(TbSubjectRestrictionType, 'IdSubjectRestrictionType',
-      FMinIdSubjectRestrictionType,
-      FIdSubjectRestrictionTypeToSubjectRestrictionType,
-      FSubjectRestrictionTypeAIdSubjectRestrictionType);
-    FSubjectRestrictionTypeCount := Length(FSubjectRestrictionTypeAIdSubjectRestrictionType);
+    Load(TbThemeRestrictionType, 'IdThemeRestrictionType',
+      FMinIdThemeRestrictionType,
+      FIdThemeRestrictionTypeToThemeRestrictionType,
+      FThemeRestrictionTypeAIdThemeRestrictionType);
+    FThemeRestrictionTypeCount := Length(FThemeRestrictionTypeAIdThemeRestrictionType);
     Load(TbTeacherRestrictionType, 'IdTeacherRestrictionType',
       FMinIdTeacherRestrictionType,
       FIdTeacherRestrictionTypeATeacherRestrictionType,
@@ -879,9 +879,9 @@ begin
     LoadTimeSlot;
     LoadClass;
     LoadRoomType;
-    LoadSubjectRestrictionType;
+    LoadThemeRestrictionType;
     LoadTeacherRestrictionType;
-    LoadSubjectRestriction;
+    LoadThemeRestriction;
     LoadTeacherRestriction;
     LoadDistribution;
     LoadAssistance;
@@ -890,17 +890,17 @@ begin
   end;
 end;
 
-procedure TTimetableModel.Configure(AClashTeacherValue, AClashSubjectValue,
+procedure TTimetableModel.Configure(AClashTeacherValue, AClashThemeValue,
   AClashRoomTypeValue, ABreakTimetableTeacherValue, AOutOfPositionEmptyHourValue,
-  ABrokenSessionValue, ANonScatteredSubjectValue: Integer);
+  ABrokenSessionValue, ANonScatteredThemeValue: Integer);
 begin
   FClashTeacherValue := AClashTeacherValue;
-  FClashSubjectValue := AClashSubjectValue;
+  FClashThemeValue := AClashThemeValue;
   FBreakTimetableTeacherValue := ABreakTimetableTeacherValue;
   FClashRoomTypeValue := AClashRoomTypeValue;
   FOutOfPositionEmptyHourValue := AOutOfPositionEmptyHourValue;
   FBrokenSessionValue := ABrokenSessionValue;
-  FNonScatteredSubjectValue := ANonScatteredSubjectValue;
+  FNonScatteredThemeValue := ANonScatteredThemeValue;
 end;
 
 function TTimetableModel.GetDayAMaxTimeSlot(Day: Integer): Integer;
@@ -922,12 +922,12 @@ begin
         '  %0:-29s %8.2f'#13#10 +
         '  %0:-29s %8.2f', [SWeights,
           SClashTeacher           + ':', ClashTeacherValue,
-          SClashSubject           + ':', ClashSubjectValue,
+          SClashTheme           + ':', ClashThemeValue,
           SClashRoomType          + ':', ClashRoomTypeValue,
           SBreakTimetableTeacher  + ':', BreakTimetableTeacherValue,
           SOutOfPositionEmptyHour + ':', OutOfPositionEmptyHourValue,
           SBrokenSession          + ':', BrokenSessionValue,
-          SNonScatteredSubject    + ':', NonScatteredSubjectValue]));
+          SNonScatteredTheme    + ':', NonScatteredThemeValue]));
 end;
 
 function TTimetableModel.NewIndividual: TIndividual;
@@ -1030,15 +1030,15 @@ begin
     FTablingInfo := TTimetableTablingInfo.Create;
     with TablingInfo do
     begin
-      SetLength(FSubjectTimeSlotCount, FSubjectCount, FTimeSlotCount);
+      SetLength(FThemeTimeSlotCount, FThemeCount, FTimeSlotCount);
       SetLength(FTeacherTimeSlotCount, FTeacherCount, FTimeSlotCount);
       SetLength(FRoomTypeTimeSlotCount, FRoomTypeCount, FTimeSlotCount);
-      SetLength(FClassDaySubjectCount, FClassCount, FDayCount, FSubjectCount);
-      SetLength(FClassDaySubjectAccumulated, FClassCount, FDayCount, FSubjectCount);
+      SetLength(FClassDayThemeCount, FClassCount, FDayCount, FThemeCount);
+      SetLength(FClassDayThemeAccumulated, FClassCount, FDayCount, FThemeCount);
       SetLength(FDayTeacherMinHour, FDayCount, FTeacherCount);
       SetLength(FDayTeacherMaxHour, FDayCount, FTeacherCount);
       SetLength(FDayTeacherEmptyHourCount, FDayCount, FTeacherCount);
-      SetLength(FSubjectRestrictionTypeToSubjectCount, FSubjectRestrictionTypeCount);
+      SetLength(FThemeRestrictionTypeToThemeCount, FThemeRestrictionTypeCount);
       SetLength(FTeacherRestrictionTypeATeacherCount, FTeacherRestrictionTypeCount);
     end;
   end;
@@ -1110,18 +1110,18 @@ end;
 
 procedure TTimetable.DeltaValues(Delta, AClass, TimeSlot1, TimeSlot2: Integer);
 var
-  SubjectRestrictionType, TeacherRestrictionType, TimeSlot, TimeSlot0, Day, DDay,
-  Day1, Day2, Hour, Session, Teacher, RoomType, Duration, Subject, Limit, Assistance,
+  ThemeRestrictionType, TeacherRestrictionType, TimeSlot, TimeSlot0, Day, DDay,
+  Day1, Day2, Hour, Session, Teacher, RoomType, Duration, Theme, Limit, Assistance,
   JoinedClass, Distribution, DeltaBreakTimetableTeacher, MinTimeSlot, MaxTimeSlot,
   Class1: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
-  SubjectATeacher: TDynamicIntegerArray;
+  ThemeATeacher: TDynamicIntegerArray;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
     Inc(FBrokenSession, Delta * DeltaBrokenSession(AClass, TimeSlot1, TimeSlot2));
     TimeSlotToSession := FClassTimeSlotToSession[AClass];
-    SubjectATeacher := FClassSubjectToTeacher[AClass];
+    ThemeATeacher := FClassThemeToTeacher[AClass];
     if Delta > 0 then
       Limit := 0
     else
@@ -1131,8 +1131,8 @@ begin
       Session := TimeSlotToSession[TimeSlot];
       if Session >= 0 then
       begin
-        Subject := FSessionToSubject[Session];
-        Teacher := SubjectATeacher[Subject];
+        Theme := FSessionToTheme[Session];
+        Teacher := ThemeATeacher[Theme];
         RoomType := FSessionToRoomType[Session];
         Day := FTimeSlotToDay[TimeSlot];
         Hour := FTimeSlotToHour[TimeSlot];
@@ -1206,13 +1206,13 @@ begin
         if FTeacherTimeSlotCount[Teacher, TimeSlot] > Limit then
           Inc(FClashTeacher, Delta);
         Inc(FTeacherTimeSlotCount[Teacher, TimeSlot], Delta);
-        Inc(FSubjectTimeSlotCount[Subject, TimeSlot], Delta);
+        Inc(FThemeTimeSlotCount[Theme, TimeSlot], Delta);
         if FRoomTypeTimeSlotCount[RoomType, TimeSlot] >= FRoomTypeToNumber[RoomType] + Limit then
           Inc(FClashRoomType, Delta * FSessionToRoomCount[Session]);
         Inc(FRoomTypeTimeSlotCount[RoomType, TimeSlot], Delta);
-        SubjectRestrictionType := FSubjectTimeSlotToSubjectRestrictionType[Subject, TimeSlot];
-        if SubjectRestrictionType >= 0 then
-          Inc(FSubjectRestrictionTypeToSubjectCount[SubjectRestrictionType], Delta);
+        ThemeRestrictionType := FThemeTimeSlotToThemeRestrictionType[Theme, TimeSlot];
+        if ThemeRestrictionType >= 0 then
+          Inc(FThemeRestrictionTypeToThemeCount[ThemeRestrictionType], Delta);
         TeacherRestrictionType := FTeacherTimeSlotToTeacherRestrictionType[Teacher, TimeSlot];
         if TeacherRestrictionType >= 0 then
           Inc(FTeacherRestrictionTypeATeacherCount[TeacherRestrictionType], Delta);
@@ -1227,24 +1227,24 @@ begin
       Duration := FSessionToDuration[Session];
       if Session >= 0 then
       begin
-        Subject := FSessionToSubject[Session];
+        Theme := FSessionToTheme[Session];
         Day1 := FTimeSlotToDay[TimeSlot];
         Day2 := FTimeSlotToDay[TimeSlot + Duration - 1];
         for Day := Day1 to Day2 do
         begin
-          if FClassDaySubjectCount[AClass, Day, Subject] > Limit then
-            Inc(FClashSubject, Delta);
-          Inc(FClassDaySubjectCount[AClass, Day, Subject], Delta);
+          if FClassDayThemeCount[AClass, Day, Theme] > Limit then
+            Inc(FClashTheme, Delta);
+          Inc(FClassDayThemeCount[AClass, Day, Theme], Delta);
         end;
-        DDay := FDayCount div FClassSubjectCount[AClass, Subject];
+        DDay := FDayCount div FClassThemeCount[AClass, Theme];
         for Day2 := Day1 to Day1 + DDay - 1 do
         begin
           Day := Day2 mod (FDayCount + 1);
           if Day <> FDayCount then
           begin
-            if FClassDaySubjectAccumulated[AClass, Day, Subject] > Limit then
-              Inc(FNonScatteredSubject, Delta);
-            Inc(FClassDaySubjectAccumulated[AClass, Day, Subject], Delta);
+            if FClassDayThemeAccumulated[AClass, Day, Theme] > Limit then
+              Inc(FNonScatteredTheme, Delta);
+            Inc(FClassDayThemeAccumulated[AClass, Day, Theme], Delta);
           end;
         end;
       end;
@@ -1280,7 +1280,7 @@ begin
           if Distribution = FSessionToDistribution[Session] then
           begin
             if FClassTimeSlotToSession[Class1, TimeSlot] >= 0 then
-              Inc(FClashSubject, Delta);
+              Inc(FClashTheme, Delta);
           end;
         end;
       end;
@@ -1309,12 +1309,12 @@ var
   {$IFDEF DEBUG}
   Value1, Value2: Integer;
   ClashTeacher2: Integer;
-  ClashSubject2: Integer;
+  ClashTheme2: Integer;
   ClashRoomType2: Integer;
   BreakTimetableTeacher2: Integer;
   OutOfPositionEmptyHour2: Integer;
-  SubjectRestrictionValue2: Integer;
-  NonScatteredSubject2: Integer;
+  ThemeRestrictionValue2: Integer;
+  NonScatteredTheme2: Integer;
   TeacherRestrictionValue2: Integer;
   BrokenSession2: Integer;
   {$ENDIF}
@@ -1352,10 +1352,10 @@ begin
     {$IFDEF DEBUG}
     ClashRoomType2 := FClashRoomType;
     ClashTeacher2 := FClashTeacher;
-    ClashSubject2 := FClashSubject;
+    ClashTheme2 := FClashTheme;
     OutOfPositionEmptyHour2 := FOutOfPositionEmptyHour;
-    NonScatteredSubject2 := FNonScatteredSubject;
-    SubjectRestrictionValue2 := SubjectRestrictionValue;
+    NonScatteredTheme2 := FNonScatteredTheme;
+    ThemeRestrictionValue2 := ThemeRestrictionValue;
     BreakTimetableTeacher2 := FBreakTimetableTeacher;
     TeacherRestrictionValue2 := TeacherRestrictionValue;
     BrokenSession2 := FBrokenSession;
@@ -1366,11 +1366,11 @@ begin
       'Value1                  %f - %f'#13#10 +
       'Value2                  %f - %f'#13#10 +
       'ClashTeacher            %d - %d'#13#10 +
-      'ClashSubject            %d - %d'#13#10 +
+      'ClashTheme            %d - %d'#13#10 +
       'ClashRoomType           %d - %d'#13#10 +
       'OutOfPositionEmptyHour  %d - %d'#13#10 +
-      'NonScatteredSubject     %d - %d'#13#10 +
-      'SubjectRestrictionValue %f - %f'#13#10 +
+      'NonScatteredTheme     %d - %d'#13#10 +
+      'ThemeRestrictionValue %f - %f'#13#10 +
       'BreakTimetableTeacher   %d - %d'#13#10 +
       'TeacherRestrictionValue %f - %f'#13#10 +
       'BrokenSession           %d - %d',
@@ -1378,11 +1378,11 @@ begin
         Result, Value1,
         FValue, Value2,
         FClashTeacher, ClashTeacher2,
-        FClashSubject, ClashSubject2,
+        FClashTheme, ClashTheme2,
         FClashRoomType, ClashRoomType2,
         FOutOfPositionEmptyHour, OutOfPositionEmptyHour2,
-        FNonScatteredSubject, NonScatteredSubject2,
-        SubjectRestrictionValue, SubjectRestrictionValue2,
+        FNonScatteredTheme, NonScatteredTheme2,
+        ThemeRestrictionValue, ThemeRestrictionValue2,
         FBreakTimetableTeacher, BreakTimetableTeacher2,
         TeacherRestrictionValue, TeacherRestrictionValue2,
         FBrokenSession, BrokenSession2
@@ -1442,8 +1442,8 @@ begin
     Add('-------------------------------------------------------------------');
     Add(Format(SRowFormat, [SClashTeacher + ':', FClashTeacher,
       TTimetableModel(Model).ClashTeacherValue, ClashTeacherValue]));
-    Add(Format(SRowFormat, [SClashSubject + ':', FClashSubject,
-      TTimetableModel(Model).ClashSubjectValue, ClashSubjectValue]));
+    Add(Format(SRowFormat, [SClashTheme + ':', FClashTheme,
+      TTimetableModel(Model).ClashThemeValue, ClashThemeValue]));
     Add(Format(SRowFormat, [SClashRoomType + ':', FClashRoomType,
       TTimetableModel(Model).ClashRoomTypeValue, ClashRoomTypeValue]));
     Add(Format(SRowFormat, [SBreakTimetableTeacher + ':', BreakTimetableTeacher,
@@ -1452,12 +1452,12 @@ begin
       TTimetableModel(Model).OutOfPositionEmptyHourValue, OutOfPositionEmptyHourValue]));
     Add(Format(SRowFormat, [SBrokenSession + ':', BrokenSession,
       TTimetableModel(Model).BrokenSessionValue, BrokenSessionValue]));
-    Add(Format(SRowFormat, [SNonScatteredSubject + ':', NonScatteredSubject,
-        TTimetableModel(Model).NonScatteredSubjectValue, NonScatteredSubjectValue]));
-    Add(Format('%0:-28s %12s %12s %12d', [STbSubjectRestriction + ':',
-         '(' + VarArrToStr(FSubjectRestrictionTypeToSubjectCount, ' ') + ')',
-         '(' + VarArrToStr(TTimetableModel(Model).FSubjectRestrictionTypeToValue, ' ') + ')',
-         SubjectRestrictionValue]));
+    Add(Format(SRowFormat, [SNonScatteredTheme + ':', NonScatteredTheme,
+        TTimetableModel(Model).NonScatteredThemeValue, NonScatteredThemeValue]));
+    Add(Format('%0:-28s %12s %12s %12d', [STbThemeRestriction + ':',
+         '(' + VarArrToStr(FThemeRestrictionTypeToThemeCount, ' ') + ')',
+         '(' + VarArrToStr(TTimetableModel(Model).FThemeRestrictionTypeToValue, ' ') + ')',
+         ThemeRestrictionValue]));
     Add(Format('%0:-28s %12s %12s %12d', [STbTeacherRestriction + ':',
          '(' + VarArrToStr(FTeacherRestrictionTypeATeacherCount, ' ') + ')',
          '(' + VarArrToStr(TTimetableModel(Model).FTeacherRestrictionTypeToValue, ' ') + ')',
@@ -1487,16 +1487,16 @@ begin
   Result := TTimetableModel(Model).FOutOfPositionEmptyHourValue * OutOfPositionEmptyHour;
 end;
 
-function TTimetable.GetSubjectRestrictionValue: Integer;
+function TTimetable.GetThemeRestrictionValue: Integer;
 var
-  SubjectRestrictionType: Integer;
+  ThemeRestrictionType: Integer;
 begin
   Result := 0;
   with TTimetableModel(Model), TablingInfo do
-  for SubjectRestrictionType := 0 to FSubjectRestrictionTypeCount - 1 do
+  for ThemeRestrictionType := 0 to FThemeRestrictionTypeCount - 1 do
   begin
-    Result := Result + FSubjectRestrictionTypeToSubjectCount[SubjectRestrictionType]
-      * FSubjectRestrictionTypeToValue[SubjectRestrictionType];
+    Result := Result + FThemeRestrictionTypeToThemeCount[ThemeRestrictionType]
+      * FThemeRestrictionTypeToValue[ThemeRestrictionType];
   end;
 end;
 
@@ -1545,9 +1545,9 @@ begin
   end;
 end;
 
-function TTimetable.GetNonScatteredSubjectValue: Integer;
+function TTimetable.GetNonScatteredThemeValue: Integer;
 begin
-  Result := TTimetableModel(Model).NonScatteredSubjectValue * NonScatteredSubject;
+  Result := TTimetableModel(Model).NonScatteredThemeValue * NonScatteredTheme;
 end;
 
 function TTimetable.GetClashTeacherValue: Integer;
@@ -1555,9 +1555,9 @@ begin
   Result := TTimetableModel(Model).ClashTeacherValue * TablingInfo.FClashTeacher;
 end;
 
-function TTimetable.GetClashSubjectValue: Integer;
+function TTimetable.GetClashThemeValue: Integer;
 begin
-  Result := TTimetableModel(Model).ClashSubjectValue * TablingInfo.FClashSubject;
+  Result := TTimetableModel(Model).ClashThemeValue * TablingInfo.FClashTheme;
 end;
 
 
@@ -1578,10 +1578,10 @@ begin
     Result :=
       ClashRoomTypeValue +
       ClashTeacherValue +
-      ClashSubjectValue +
+      ClashThemeValue +
       OutOfPositionEmptyHourValue +
-      NonScatteredSubjectValue +
-      SubjectRestrictionValue +
+      NonScatteredThemeValue +
+      ThemeRestrictionValue +
       BreakTimetableTeacherValue +
       TeacherRestrictionValue +
       BrokenSessionValue;
@@ -1600,7 +1600,7 @@ end;
 
 procedure TTimetable.Assign(AIndividual: TIndividual);
 var
-  VClass, Subject, Teacher, RoomType, Day: Integer;
+  VClass, Theme, Teacher, RoomType, Day: Integer;
   ATimetable: TTimetable;
 begin
   inherited;
@@ -1611,21 +1611,21 @@ begin
       Move(ATimetable.ClassTimeSlotToSession[VClass, 0],
         ClassTimeSlotToSession[VClass, 0], FTimeSlotCount * SizeOf(Integer));
     FClashTeacher := ATimetable.TablingInfo.FClashTeacher;
-    FClashSubject := ATimetable.TablingInfo.FClashSubject;
+    FClashTheme := ATimetable.TablingInfo.FClashTheme;
     FClashRoomType := ATimetable.TablingInfo.FClashRoomType;
     FBreakTimetableTeacher := ATimetable.TablingInfo.FBreakTimetableTeacher;
     FOutOfPositionEmptyHour := ATimetable.TablingInfo.FOutOfPositionEmptyHour;
     FBrokenSession := ATimetable.TablingInfo.FBrokenSession;
-    FNonScatteredSubject := ATimetable.TablingInfo.FNonScatteredSubject;
+    FNonScatteredTheme := ATimetable.TablingInfo.FNonScatteredTheme;
     FValue := ATimetable.FValue;
     // TablingInfo := ATimetable.TablingInfo;
-    Move(ATimetable.TablingInfo.FSubjectRestrictionTypeToSubjectCount[0],
-      FSubjectRestrictionTypeToSubjectCount[0], FSubjectRestrictionTypeCount * SizeOf(Integer));
+    Move(ATimetable.TablingInfo.FThemeRestrictionTypeToThemeCount[0],
+      FThemeRestrictionTypeToThemeCount[0], FThemeRestrictionTypeCount * SizeOf(Integer));
     Move(ATimetable.TablingInfo.FTeacherRestrictionTypeATeacherCount[0],
       FTeacherRestrictionTypeATeacherCount[0], FTeacherRestrictionTypeCount * SizeOf(Integer));
-    for Subject := 0 to FSubjectCount - 1 do
-      Move(ATimetable.TablingInfo.FSubjectTimeSlotCount[Subject, 0],
-           TablingInfo.FSubjectTimeSlotCount[Subject, 0],
+    for Theme := 0 to FThemeCount - 1 do
+      Move(ATimetable.TablingInfo.FThemeTimeSlotCount[Theme, 0],
+           TablingInfo.FThemeTimeSlotCount[Theme, 0],
            FTimeSlotCount * SizeOf(Integer));
     for Teacher := 0 to FTeacherCount - 1 do
       Move(ATimetable.TablingInfo.FTeacherTimeSlotCount[Teacher, 0],
@@ -1647,12 +1647,12 @@ begin
     for VClass := 0 to FClassCount - 1 do
       for Day := 0 to FDayCount - 1 do
       begin
-        Move(ATimetable.TablingInfo.FClassDaySubjectCount[VClass, Day, 0],
-          TablingInfo.FClassDaySubjectCount[VClass, Day, 0],
-          FSubjectCount * SizeOf(Integer));
-        Move(ATimetable.TablingInfo.FClassDaySubjectAccumulated[VClass, Day, 0],
-          TablingInfo.FClassDaySubjectAccumulated[VClass, Day, 0],
-          FSubjectCount * SizeOf(Integer));
+        Move(ATimetable.TablingInfo.FClassDayThemeCount[VClass, Day, 0],
+          TablingInfo.FClassDayThemeCount[VClass, Day, 0],
+          FThemeCount * SizeOf(Integer));
+        Move(ATimetable.TablingInfo.FClassDayThemeAccumulated[VClass, Day, 0],
+          TablingInfo.FClassDayThemeAccumulated[VClass, Day, 0],
+          FThemeCount * SizeOf(Integer));
       end;
   end;
 end;
@@ -1673,9 +1673,9 @@ begin
             FParallelToIdParallel[FClassToParallel[VClass]]]));
         for TimeSlot := 0 to FTimeSlotCount - 1 do
         begin
-          VStrings.Add(Format(' Day %d Hour %d Subject %d', [FTimeSlotToDay[TimeSlot],
+          VStrings.Add(Format(' Day %d Hour %d Theme %d', [FTimeSlotToDay[TimeSlot],
               FTimeSlotToHour[TimeSlot],
-              FSubjectToIdSubject[FSessionToSubject[ClassTimeSlotToSession[
+              FThemeToIdTheme[FSessionToTheme[ClassTimeSlotToSession[
                 VClass, TimeSlot]]]]));
         end;
       end;
@@ -1757,7 +1757,7 @@ var
     VClass, TimeSlot, IdLevel, IdParallel, IdSpecialization, Session: Integer;
     {$IFNDEF USE_SQL}
     FieldTimetable, FieldLevel, FieldParallel, FieldSpecialization, FieldDay,
-      FieldHour, FieldSubject, FieldSession: TField;
+      FieldHour, FieldTheme, FieldSession: TField;
     {$ENDIF}
   begin
   {$IFDEF USE_SQL}
@@ -1776,11 +1776,11 @@ var
             SQL.Add(Format(
               'INSERT INTO TimetableDetail' +
               '(IdTimetable,IdLevel,IdParallel,IdSpecialization,IdDay,' +
-              'IdHour,IdSubject,Session) VALUES (%d,%d,%d,%d,%d,%d,%d,%d);',
+              'IdHour,IdTheme,Session) VALUES (%d,%d,%d,%d,%d,%d,%d,%d);',
               [IdTimetable, IdLevel, IdParallel, IdSpecialization,
               FDayToIdDay[FTimeSlotToDay[TimeSlot]],
               FHourToIdHour[FTimeSlotToHour[TimeSlot]],
-              FSubjectToIdSubject[FSessionToSubject[Session]],
+              FThemeToIdTheme[FSessionToTheme[Session]],
               Session]));
           end;
         end;
@@ -1797,7 +1797,7 @@ var
         FieldSpecialization := FindField('IdSpecialization');
         FieldDay := FindField('IdDay');
         FieldHour := FindField('IdHour');
-        FieldSubject := FindField('IdSubject');
+        FieldTheme := FindField('IdTheme');
         FieldSession := FindField('Session');
         with TTimetableModel(Model) do
         for VClass := 0 to FClassCount - 1 do
@@ -1818,7 +1818,7 @@ var
               FieldSpecialization.AsInteger := IdSpecialization;
               FieldDay.AsInteger := FDayAIdDay[FTimeSlotADay[TimeSlot]];
               FieldHour.AsInteger := FHourAIdHour[FTimeSlotAHour[TimeSlot]];
-              FieldSubject.AsInteger := FSubjectAIdSubject[FSessionToSubject[Session]];
+              FieldTheme.AsInteger := FThemeAIdTheme[FSessionToTheme[Session]];
               FieldSession.AsInteger := Session;
               Post;
             end;
@@ -1881,8 +1881,8 @@ begin
       First;
       while not Eof do
       begin
-        VClass := FCourseParallelToClass[
-          FLevelSpecializationToCourse[
+        VClass := FCategoryParallelToClass[
+          FLevelSpecializationToCategory[
             FIdLevelToLevel[FieldLevel.AsInteger - FMinIdLevel],
             FIdSpecializationToSpecialization[FieldSpecialization.AsInteger -
             FMinIdSpecialization]],
@@ -1907,7 +1907,7 @@ end;
 
 procedure TTimetable.CheckIntegrity;
 var
-  Subject, VClass, TimeSlot, Teacher, Distribution, Counter,
+  Theme, VClass, TimeSlot, Teacher, Distribution, Counter,
     Session: Integer;
   SessionFound: Boolean;
 begin
@@ -1919,19 +1919,19 @@ begin
         Session := FClassTimeSlotToSession[VClass, TimeSlot];
         if Session >= 0 then
         begin
-          Subject := FSessionToSubject[Session];
-          Teacher := FClassSubjectToTeacher[VClass, Subject];
+          Theme := FSessionToTheme[Session];
+          Teacher := FClassThemeToTeacher[VClass, Theme];
           if Teacher < 0 then
             raise Exception.CreateFmt('%s %d(%d,%d,%d), %s %d(%d) %s', [
               SClass, VClass,
               FLevelToIdLevel[FClassToLevel[VClass]],
               FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
               FParallelToIdParallel[FClassToParallel[VClass]],
-              SFlDistribution_IdSubject,
-              Subject,
-              FSubjectToIdSubject[Subject],
+              SFlDistribution_IdTheme,
+              Theme,
+              FThemeToIdTheme[Theme],
               SDoNotHaveTeacher]);
-          Distribution := FClassSubjectToDistribution[VClass, Subject];
+          Distribution := FClassThemeToDistribution[VClass, Theme];
           SessionFound := False;
           for Counter := 0 to High(FDistributionToSessions[Distribution]) do
             SessionFound := SessionFound or (FDistributionToSessions[Distribution, Counter] = Session);
@@ -1941,19 +1941,19 @@ begin
               FLevelToIdLevel[FClassToLevel[VClass]],
               FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
               FParallelToIdParallel[FClassToParallel[VClass]],
-              SFlDistribution_IdSubject,
-              Subject,
-              FSubjectToIdSubject[Subject],
+              SFlDistribution_IdTheme,
+              Theme,
+              FThemeToIdTheme[Theme],
               SDoNotAppearsIn]);
           if Distribution < 0 then
-            raise Exception.CreateFmt('%s %d(%d,%d,%d), %s %d(%d) %s FClassSubjectToDistribution', [
+            raise Exception.CreateFmt('%s %d(%d,%d,%d), %s %d(%d) %s FClassThemeToDistribution', [
               SClass, VClass,
               FLevelToIdLevel[FClassToLevel[VClass]],
               FSpecializationToIdSpecialization[FClassToSpecialization[VClass]],
               FParallelToIdParallel[FClassToParallel[VClass]],
-              SFlDistribution_IdSubject,
-              Subject,
-              FSubjectToIdSubject[Subject],
+              SFlDistribution_IdTheme,
+              Theme,
+              FThemeToIdTheme[Theme],
               SDoNotAppearsIn]);
         end;
       end;
@@ -1962,18 +1962,18 @@ end;
 
 procedure TTimetable.Reset;
 var
-  Teacher, TimeSlot, Subject, SubjectRestrictionType, TeacherRestrictionType,
+  Teacher, TimeSlot, Theme, ThemeRestrictionType, TeacherRestrictionType,
     VClass, Day, RoomType: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
     FClashTeacher := 0;
-    FClashSubject := 0;
+    FClashTheme := 0;
     FClashRoomType := 0;
     FOutOfPositionEmptyHour := 0;
     FBreakTimetableTeacher := 0;
     FBrokenSession := 0;
-    FNonScatteredSubject := 0;
+    FNonScatteredTheme := 0;
     for Day := 0 to FDayCount - 1 do
       for Teacher := 0 to FTeacherCount - 1 do
       begin
@@ -1981,25 +1981,25 @@ begin
         FDayTeacherMinHour[Day, Teacher] := 1;
         FDayTeacherMaxHour[Day, Teacher] := 0;
       end;
-    for SubjectRestrictionType := 0 to FSubjectRestrictionTypeCount - 1 do
-      FSubjectRestrictionTypeToSubjectCount[SubjectRestrictionType] := 0;
+    for ThemeRestrictionType := 0 to FThemeRestrictionTypeCount - 1 do
+      FThemeRestrictionTypeToThemeCount[ThemeRestrictionType] := 0;
     for TeacherRestrictionType := 0 to FTeacherRestrictionTypeCount - 1 do
       FTeacherRestrictionTypeATeacherCount[TeacherRestrictionType] := 0;
     for TimeSlot := 0 to FTimeSlotCount - 1 do
     begin
       for Teacher := 0 to FTeacherCount - 1 do
         FTeacherTimeSlotCount[Teacher, TimeSlot] := 0;
-      for Subject := 0 to FSubjectCount - 1 do
-        FSubjectTimeSlotCount[Subject, TimeSlot] := 0;
+      for Theme := 0 to FThemeCount - 1 do
+        FThemeTimeSlotCount[Theme, TimeSlot] := 0;
       for RoomType := 0 to FRoomTypeCount - 1 do
         FRoomTypeTimeSlotCount[RoomType, TimeSlot] := 0;
     end;
     for VClass := 0 to FClassCount - 1 do
       for Day := 0 to FDayCount - 1 do
-        for Subject := 0 to FSubjectCount - 1 do
+        for Theme := 0 to FThemeCount - 1 do
         begin
-          FClassDaySubjectCount[VClass, Day, Subject] := 0;
-          FClassDaySubjectAccumulated[VClass, Day, Subject] := 0;
+          FClassDayThemeCount[VClass, Day, Theme] := 0;
+          FClassDayThemeAccumulated[VClass, Day, Theme] := 0;
         end;
   end;
 end;

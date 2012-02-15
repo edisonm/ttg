@@ -220,8 +220,8 @@ begin
   FreeOnTerminate := True;
   with MasterDataModule.ConfigStorage do
     FTimetableModel := TTimetableModel.Create(ClashTeacher,
-      ClashSubject, ClashRoomType, BreakTimetableTeacher, OutOfPositionEmptyHour,
-      BrokenSession, NonScatteredSubject);
+      ClashTheme, ClashRoomType, BreakTimetableTeacher, OutOfPositionEmptyHour,
+      BrokenSession, NonScatteredTheme);
   SetLength(FValidIdes, Length(AValidIdes));
   // ProcThreadPool.MaxThreadCount := Length(AValidIdes);
   for i := 0 to High(AValidIdes) do
@@ -326,8 +326,8 @@ begin
   FIdTimetable := AIdTimetable;
   with MasterDataModule.ConfigStorage do
     FTimetableModel := TTimetableModel.Create(ClashTeacher,
-      ClashSubject, ClashRoomType, BreakTimetableTeacher, OutOfPositionEmptyHour,
-      BrokenSession, NonScatteredSubject);
+      ClashTheme, ClashRoomType, BreakTimetableTeacher, OutOfPositionEmptyHour,
+      BrokenSession, NonScatteredTheme);
   inherited Create(CreateSuspended);
 end;
 

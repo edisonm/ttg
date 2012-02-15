@@ -16,17 +16,17 @@ type
 
   TProgressForm = class(TForm)
     LbColision: TLabel;
-    LbClashSubject: TLabel;
-    LbClashSubjectValue: TLabel;
+    LbClashTheme: TLabel;
+    LbClashThemeValue: TLabel;
     LbExports: TLabel;
     LbImports: TLabel;
     PnCrashes: TPanel;
     PnImports: TPanel;
     PnExports: TPanel;
     PnPollination: TPanel;
-    PnClashSubject: TPanel;
-    PnClashSubjectNumber: TPanel;
-    PnClashSubjectValue: TPanel;
+    PnClashTheme: TPanel;
+    PnClashThemeNumber: TPanel;
+    PnClashThemeValue: TPanel;
     PnProgress: TPanel;
     BBClose: TBitBtn;
     PnTotalValue: TPanel;
@@ -57,21 +57,21 @@ type
     LbElapsedTime: TLabel;
     PnEstimatedTime: TPanel;
     LbRemainingTime: TLabel;
-    PnSubjectRestriction: TPanel;
-    PnSubjectRestrictionNumber: TPanel;
-    LbSubjectRestriction: TLabel;
-    PnSubjectRestrictionValue: TPanel;
-    LbSubjectRestrictionValue: TLabel;
+    PnThemeRestriction: TPanel;
+    PnThemeRestrictionNumber: TPanel;
+    LbThemeRestriction: TLabel;
+    PnThemeRestrictionValue: TPanel;
+    LbThemeRestrictionValue: TLabel;
     PnTeacherRestriction: TPanel;
     PnTeacherRestrictionNumber: TPanel;
     LbTeacherRestriction: TLabel;
     PnTeacherRestrictionValue: TPanel;
     LbTeacherRestrictionValue: TLabel;
-    PnNonScatteredSubject: TPanel;
-    PnNonScatteredSubjectCount: TPanel;
-    LbNonScatteredSubjectCount: TLabel;
-    PnNonScatteredSubjectValue: TPanel;
-    LbNonScatteredSubjectValue: TLabel;
+    PnNonScatteredTheme: TPanel;
+    PnNonScatteredThemeCount: TPanel;
+    LbNonScatteredThemeCount: TLabel;
+    PnNonScatteredThemeValue: TPanel;
+    LbNonScatteredThemeValue: TLabel;
     BBCancel: TBitBtn;
     PBProgress: TProgressBar;
     PnBreakTimetableTeacher: TPanel;
@@ -147,9 +147,9 @@ begin
   if MainForm.UpdateIndex <> FUpdateIndex then
   begin
     with MasterDataModule.ConfigStorage do
-      TTimetableModel(ASolver.Model).Configure(ClashTeacher, ClashSubject,
+      TTimetableModel(ASolver.Model).Configure(ClashTeacher, ClashTheme,
         ClashRoomType, BreakTimetableTeacher, OutOfPositionEmptyHour,
-        BrokenSession, NonScatteredSubject);
+        BrokenSession, NonScatteredTheme);
     //ASolver.Update;
     ASolver.UpdateValue;
     FUpdateIndex := MainForm.UpdateIndex;
@@ -167,28 +167,28 @@ begin
     LbPosition.Caption := Format('%d/%d', [APosition, AMax]);
     PBProgress.Position := APosition;
     LbClashTeacher.Caption := Format('%d ', [ClashTeacher]);
-    LbClashSubject.Caption := Format('%d ', [ClashSubject]);
+    LbClashTheme.Caption := Format('%d ', [ClashTheme]);
     LbClashRoomType.Caption := Format('%d ', [ClashRoomType]);
     LbBreakTimetableTeacherCount.Caption :=
       Format('%d ', [BreakTimetableTeacher]);
     LbOutOfPositionEmptyHour.Caption := Format('%d ', [OutOfPositionEmptyHour]);
     LbBrokenSession.Caption := Format('%d ', [BrokenSession]);
-    LbSubjectRestriction.Caption :=
-      Format('%s ', [VarArrToStr(SubjectRestrictionTypeToSubjectCount)]);
+    LbThemeRestriction.Caption :=
+      Format('%s ', [VarArrToStr(ThemeRestrictionTypeToThemeCount)]);
     LbTeacherRestriction.Caption :=
       Format('%s ', [VarArrToStr(TeacherRestrictionTypeATeacherCount)]);
-    LbNonScatteredSubjectCount.Caption := Format('%d ', [NonScatteredSubject]);
+    LbNonScatteredThemeCount.Caption := Format('%d ', [NonScatteredTheme]);
     LbClashTeacherValue.Caption := Format('%d ', [ClashTeacherValue]);
-    LbClashSubjectValue.Caption := Format('%d ', [ClashSubjectValue]);
+    LbClashThemeValue.Caption := Format('%d ', [ClashThemeValue]);
     LbBreakTimetableTeacherValue.Caption :=
       Format('%d ', [BreakTimetableTeacherValue]);
     LbClashRoomTypeValue.Caption := Format('%d ', [ClashRoomTypeValue]);
     LbOutOfPositionEmptyHourValue.Caption := Format('%d ',
       [OutOfPositionEmptyHourValue]);
     LbBrokenSessionValue.Caption := Format('%d ', [BrokenSessionValue]);
-    LbSubjectRestrictionValue.Caption := Format('%d ', [SubjectRestrictionValue]);
+    LbThemeRestrictionValue.Caption := Format('%d ', [ThemeRestrictionValue]);
     LbTeacherRestrictionValue.Caption := Format('%d ', [TeacherRestrictionValue]);
-    LbNonScatteredSubjectValue.Caption := Format('%d ', [NonScatteredSubjectValue]);
+    LbNonScatteredThemeValue.Caption := Format('%d ', [NonScatteredThemeValue]);
     LbTotalValue.Caption := Format('%d ', [Value]);
   end;
   with ASolver do

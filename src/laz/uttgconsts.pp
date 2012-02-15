@@ -17,7 +17,7 @@ resourcestring
   SBrokenSession = 'Broken Sessions';
   SChangesWillBeLostWarning = 'Changes will be lost, are you sure?';
   SClashRoomType = 'Clash of Classrooms';
-  SClashSubject = 'Clash of Subjects';
+  SClashTheme = 'Clash of Themes';
   SClashTeacher = 'Clash of Teachers';
   SClashes = 'Clashes';
   SClass = 'Class';
@@ -65,7 +65,7 @@ resourcestring
   SName = 'Name';
   SNo = 'No';
   SNoErrorReadyForCheckSummary = 'Ready to generate timetable. Show timetable check Summary?';
-  SNonScatteredSubject = 'Non Scattered Subjects';
+  SNonScatteredTheme = 'Non Scattered Themes';
   SNumHardTeacherRestrictions = 'Number of hard teacher restrictions...';
   SNumSoftTeacherRestrictions = 'Number of soft teacher restrictions...';
   SOutOfPositionEmptyHour = 'Out of position empty hours';

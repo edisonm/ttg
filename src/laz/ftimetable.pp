@@ -17,12 +17,12 @@ type
   { TTimetableForm }
 
   TTimetableForm = class(TSingleEditorForm)
-    BtSubjectRestrictionNonSatisfied: TToolButton;
+    BtThemeRestrictionNonSatisfied: TToolButton;
     TBTeacherRestrictionNoRespetada: TToolButton;
     BtTimetableClass: TToolButton;
     BtTimetableTeacher: TToolButton;
     BtClashTeacher: TToolButton;
-    BtClashSubject: TToolButton;
+    BtClashTheme: TToolButton;
     BtClashRoom: TToolButton;
     QuClashRoom: TZQuery;
     QuClashRoomIdDay: TLongintField;
@@ -34,7 +34,7 @@ type
     QuClashRoomDetailIdLevel: TLongintField;
     QuClashRoomDetailIdSpecialization: TLongintField;
     QuClashRoomDetailIdParallel: TLongintField;
-    QuClashRoomDetailNaSubject: TStringField;
+    QuClashRoomDetailNaTheme: TStringField;
     QuClashRoomDetailAbLevel: TStringField;
     QuClashRoomDetailAbSpecialization: TStringField;
     QuClashRoomDetailNaParallel: TStringField;
@@ -44,35 +44,35 @@ type
     QuClashTeacherDetailIdLevel: TLongintField;
     QuClashTeacherDetailIdSpecialization: TLongintField;
     QuClashTeacherDetailIdParallel: TLongintField;
-    QuClashTeacherDetailIdSubject: TLongintField;
+    QuClashTeacherDetailIdTheme: TLongintField;
     QuClashTeacherDetailAbLevel: TStringField;
     QuClashTeacherDetailAbSpecialization: TStringField;
     QuClashTeacherDetailNaParallel: TStringField;
-    QuClashTeacherDetailNaSubject: TStringField;
+    QuClashTeacherDetailNaTheme: TStringField;
     QuClashTeacher: TZQuery;
     QuClashTeacherIdTeacher: TLongintField;
     QuClashTeacherIdDay: TLongintField;
     QuClashTeacherIdHour: TLongintField;
     QuClashTeacherNaDay: TStringField;
     QuClashTeacherNaHour: TStringField;
-    QuClashSubject: TZQuery;
-    QuClashSubjectIdSubject: TLongintField;
-    QuClashSubjectNaSubject: TStringField;
-    QuClashSubjectDetail: TZQuery;
-    QuTimetableDetailSubjectRestriction: TZQuery;
-    QuTimetableDetailSubjectRestrictionNaSubject: TStringField;
-    QuTimetableDetailSubjectRestrictionIdDay: TLongintField;
-    QuTimetableDetailSubjectRestrictionIdHour: TLongintField;
-    QuTimetableDetailSubjectRestrictionIdSubjectRestrictionType: TLongintField;
-    QuTimetableDetailSubjectRestrictionIdLevel: TLongintField;
-    QuTimetableDetailSubjectRestrictionIdSpecialization: TLongintField;
-    QuTimetableDetailSubjectRestrictionIdParallel: TLongintField;
-    QuTimetableDetailSubjectRestrictionNaDay: TStringField;
-    QuTimetableDetailSubjectRestrictionNaHour: TStringField;
-    QuTimetableDetailSubjectRestrictionNaSubjectRestrictionType: TStringField;
-    QuTimetableDetailSubjectRestrictionAbLevel: TStringField;
-    QuTimetableDetailSubjectRestrictionAbSpecialization: TStringField;
-    QuTimetableDetailSubjectRestrictionNaParallel: TStringField;
+    QuClashTheme: TZQuery;
+    QuClashThemeIdTheme: TLongintField;
+    QuClashThemeNaTheme: TStringField;
+    QuClashThemeDetail: TZQuery;
+    QuTimetableDetailThemeRestriction: TZQuery;
+    QuTimetableDetailThemeRestrictionNaTheme: TStringField;
+    QuTimetableDetailThemeRestrictionIdDay: TLongintField;
+    QuTimetableDetailThemeRestrictionIdHour: TLongintField;
+    QuTimetableDetailThemeRestrictionIdThemeRestrictionType: TLongintField;
+    QuTimetableDetailThemeRestrictionIdLevel: TLongintField;
+    QuTimetableDetailThemeRestrictionIdSpecialization: TLongintField;
+    QuTimetableDetailThemeRestrictionIdParallel: TLongintField;
+    QuTimetableDetailThemeRestrictionNaDay: TStringField;
+    QuTimetableDetailThemeRestrictionNaHour: TStringField;
+    QuTimetableDetailThemeRestrictionNaThemeRestrictionType: TStringField;
+    QuTimetableDetailThemeRestrictionAbLevel: TStringField;
+    QuTimetableDetailThemeRestrictionAbSpecialization: TStringField;
+    QuTimetableDetailThemeRestrictionNaParallel: TStringField;
     QuTimetableDetailTeacherRestriction: TZQuery;
     QuTimetableDetailTeacherRestrictionIdDay: TLongintField;
     QuTimetableDetailTeacherRestrictionIdHour: TLongintField;
@@ -88,70 +88,70 @@ type
     QuTimetableDetailTeacherRestrictionNaHour: TStringField;
     Panel2: TPanel;
     dbmSummary: TDBMemo;
-    BtSubjectCutDay: TToolButton;
-    QuSubjectCutDay: TZQuery;
-    QuSubjectCutDayIdLevel: TLongintField;
-    QuSubjectCutDayIdSpecialization: TLongintField;
-    QuSubjectCutDayIdParallel: TLongintField;
-    QuSubjectCutDayIdDay: TLongintField;
-    QuSubjectCutDayIdHour: TLongintField;
-    QuSubjectCutDayIdSubject: TLongintField;
-    QuSubjectCutDayAbLevel: TStringField;
-    QuSubjectCutDayAbSpecialization: TStringField;
-    QuSubjectCutDayNaParallel: TStringField;
-    QuSubjectCutDayNaSubject: TStringField;
-    QuSubjectCutDayNaDay: TStringField;
-    QuSubjectCutDayNaHour: TStringField;
-    BtSubjectCutHour: TToolButton;
-    QuSubjectCutHour: TZQuery;
-    QuSubjectCutHourIdDay: TLongintField;
-    QuSubjectCutHourIdHour: TLongintField;
-    QuSubjectCutHourDetail: TZQuery;
-    DSSubjectCutHour: TDataSource;
+    BtThemeCutDay: TToolButton;
+    QuThemeCutDay: TZQuery;
+    QuThemeCutDayIdLevel: TLongintField;
+    QuThemeCutDayIdSpecialization: TLongintField;
+    QuThemeCutDayIdParallel: TLongintField;
+    QuThemeCutDayIdDay: TLongintField;
+    QuThemeCutDayIdHour: TLongintField;
+    QuThemeCutDayIdTheme: TLongintField;
+    QuThemeCutDayAbLevel: TStringField;
+    QuThemeCutDayAbSpecialization: TStringField;
+    QuThemeCutDayNaParallel: TStringField;
+    QuThemeCutDayNaTheme: TStringField;
+    QuThemeCutDayNaDay: TStringField;
+    QuThemeCutDayNaHour: TStringField;
+    BtThemeCutHour: TToolButton;
+    QuThemeCutHour: TZQuery;
+    QuThemeCutHourIdDay: TLongintField;
+    QuThemeCutHourIdHour: TLongintField;
+    QuThemeCutHourDetail: TZQuery;
+    DSThemeCutHour: TDataSource;
     BtTimetableRoomType: TToolButton;
     QuClashRoomNumber: TLongintField;
-    QuSubjectCutHourNaDay: TStringField;
-    QuSubjectCutHourNaHour: TStringField;
-    QuClashSubjectDetailIdSubject: TLongintField;
-    QuClashSubjectDetailIdLevel: TLongintField;
-    QuClashSubjectDetailIdSpecialization: TLongintField;
-    QuClashSubjectDetailIdParallel: TLongintField;
-    QuClashSubjectDetailIdDay: TLongintField;
-    QuClashSubjectDetailIdHour: TLongintField;
-    QuClashSubjectDetailAbLevel: TStringField;
-    QuClashSubjectDetailAbSpecialization: TStringField;
-    QuClashSubjectDetailNaParallel: TStringField;
-    QuClashSubjectDetailNaDay: TStringField;
-    QuClashSubjectDetailNaHour: TStringField;
-    QuSubjectCutHourDetailIdLevel: TLongintField;
-    QuSubjectCutHourDetailIdSpecialization: TLongintField;
-    QuSubjectCutHourDetailIdParallel: TLongintField;
-    QuSubjectCutHourDetailIdDay: TLongintField;
-    QuSubjectCutHourDetailIdHour0: TLongintField;
-    QuSubjectCutHourDetailIdSubject: TLongintField;
-    QuSubjectCutHourDetailAbLevel: TStringField;
-    QuSubjectCutHourDetailAbSpecialization: TStringField;
-    QuSubjectCutHourDetailNaParallel: TStringField;
-    QuSubjectCutHourDetailNaDay: TStringField;
-    QuSubjectCutHourDetailNaHour: TStringField;
-    QuSubjectCutHourDetailNaSubject: TStringField;
-    QuSubjectCutHourDetailIdHour: TLongintField;
+    QuThemeCutHourNaDay: TStringField;
+    QuThemeCutHourNaHour: TStringField;
+    QuClashThemeDetailIdTheme: TLongintField;
+    QuClashThemeDetailIdLevel: TLongintField;
+    QuClashThemeDetailIdSpecialization: TLongintField;
+    QuClashThemeDetailIdParallel: TLongintField;
+    QuClashThemeDetailIdDay: TLongintField;
+    QuClashThemeDetailIdHour: TLongintField;
+    QuClashThemeDetailAbLevel: TStringField;
+    QuClashThemeDetailAbSpecialization: TStringField;
+    QuClashThemeDetailNaParallel: TStringField;
+    QuClashThemeDetailNaDay: TStringField;
+    QuClashThemeDetailNaHour: TStringField;
+    QuThemeCutHourDetailIdLevel: TLongintField;
+    QuThemeCutHourDetailIdSpecialization: TLongintField;
+    QuThemeCutHourDetailIdParallel: TLongintField;
+    QuThemeCutHourDetailIdDay: TLongintField;
+    QuThemeCutHourDetailIdHour0: TLongintField;
+    QuThemeCutHourDetailIdTheme: TLongintField;
+    QuThemeCutHourDetailAbLevel: TStringField;
+    QuThemeCutHourDetailAbSpecialization: TStringField;
+    QuThemeCutHourDetailNaParallel: TStringField;
+    QuThemeCutHourDetailNaDay: TStringField;
+    QuThemeCutHourDetailNaHour: TStringField;
+    QuThemeCutHourDetailNaTheme: TStringField;
+    QuThemeCutHourDetailIdHour: TLongintField;
     Splitter1: TSplitter;
     ActTimetableClass: TAction;
     ActTimetableTeacher: TAction;
     ActClashTeacher: TAction;
-    ActClashSubject: TAction;
+    ActClashTheme: TAction;
     ActClashRoom: TAction;
-    ActSubjectRestrictionNonSatisfied: TAction;
+    ActThemeRestrictionNonSatisfied: TAction;
     ActTeacherRestrictionNoRespetada: TAction;
-    ActSubjectCutDay: TAction;
-    ActSubjectCutHour: TAction;
+    ActThemeCutDay: TAction;
+    ActThemeCutHour: TAction;
     ActTimetableRoomType: TAction;
     DSClashTeacher: TDataSource;
     QuClashTeacherIdTimetable: TLongintField;
-    QuSubjectCutDayIdTimetable: TLongintField;
-    QuSubjectCutHourIdTimetable: TLongintField;
-    QuTimetableDetailSubjectRestrictionIdTimetable: TLongintField;
+    QuThemeCutDayIdTimetable: TLongintField;
+    QuThemeCutHourIdTimetable: TLongintField;
+    QuTimetableDetailThemeRestrictionIdTimetable: TLongintField;
     QuTimetableDetailTeacherRestrictionIdTimetable: TLongintField;
     QuTimetableDetailTeacherRestrictionLnTeacher: TStringField;
     QuTimetableDetailTeacherRestrictionNaTeacher: TStringField;
@@ -165,10 +165,10 @@ type
     QuClashRoomDetailIdDay: TLongintField;
     QuClashRoomDetailIdHour: TLongintField;
     QuClashTeacherDetailIdTimetable: TLongintField;
-    QuClashSubjectIdTimetable: TLongintField;
-    DSClashSubject: TDataSource;
-    QuClashSubjectDetailIdTimetable: TLongintField;
-    QuSubjectCutHourDetailIdTimetable: TLongintField;
+    QuClashThemeIdTimetable: TLongintField;
+    DSClashTheme: TDataSource;
+    QuClashThemeDetailIdTimetable: TLongintField;
+    QuThemeCutHourDetailIdTimetable: TLongintField;
     QuClashRoomClashes: TStringField;
     QuClashRoomOccupied: TStringField;
     QuClashTeacherDetailIdDay: TLongintField;
@@ -177,16 +177,16 @@ type
     ActImproveTimeTable: TAction;
     procedure ActTimetableClassExecute(Sender: TObject);
     procedure ActClashTeacherExecute(Sender: TObject);
-    procedure ActClashSubjectExecute(Sender: TObject);
+    procedure ActClashThemeExecute(Sender: TObject);
     procedure ActTimetableTeacherExecute(Sender: TObject);
-    procedure ActSubjectRestrictionNonSatisfiedExecute(Sender: TObject);
+    procedure ActThemeRestrictionNonSatisfiedExecute(Sender: TObject);
     procedure ActTeacherRestrictionNoRespetadaExecute(Sender: TObject);
     procedure ActClashRoomExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure QuClashTeacherAfterScroll(DataSet: TDataSet);
-    procedure QuClashSubjectAfterScroll(DataSet: TDataSet);
-    procedure ActSubjectCutDayExecute(Sender: TObject);
-    procedure ActSubjectCutHourExecute(Sender: TObject);
+    procedure QuClashThemeAfterScroll(DataSet: TDataSet);
+    procedure ActThemeCutDayExecute(Sender: TObject);
+    procedure ActThemeCutHourExecute(Sender: TObject);
     procedure ActTimetableRoomTypeExecute(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
@@ -195,9 +195,9 @@ type
     procedure ActImproveTimeTableExecute(Sender: TObject);
   private
     { Private declarations }
-    FClashRoomForm, FClashSubjectForm, FSubjectCutHourForm,
-      FSubjectCutDayForm, FClashTeacherForm: TMasterDetailEditorForm;
-    FSubjectRestrictionNonSatisfiedForm,
+    FClashRoomForm, FClashThemeForm, FThemeCutHourForm,
+      FThemeCutDayForm, FClashTeacherForm: TMasterDetailEditorForm;
+    FThemeRestrictionNonSatisfiedForm,
       FTeacherRestrictionNoRespetadaForm: TSingleEditorForm;
     FTimetableTeacherForm: TTimetableTeacherForm;
     FTimetableRoomTypeForm: TTimetableRoomTypeForm;
@@ -231,7 +231,7 @@ begin
     ConfigStorage, ActTimetableClass) then
   begin
     with SourceDataModule do
-      FTimetableClassForm.LoadHints(TbDay, TbHour, TbSubject);
+      FTimetableClassForm.LoadHints(TbDay, TbHour, TbTheme);
     FTimetableClassForm.TBShowClick(nil);
   end;
 end;
@@ -270,32 +270,32 @@ begin
   end
 end;
 
-procedure TTimetableForm.ActClashSubjectExecute(Sender: TObject);
+procedure TTimetableForm.ActClashThemeExecute(Sender: TObject);
 begin
   inherited;
   with SourceDataModule do
   begin
     if TMasterDetailEditorForm.ToggleMasterDetailEditor
-      (Self, FClashSubjectForm, ConfigStorage, ActClashSubject, QuClashSubject,
-      QuClashSubjectDetail) then
+      (Self, FClashThemeForm, ConfigStorage, ActClashTheme, QuClashTheme,
+      QuClashThemeDetail) then
     begin
-      QuClashSubject.Close;
-      QuClashSubject.Open;
-      QuClashSubjectDetail.Close;
-      QuClashSubjectDetail.Open;
+      QuClashTheme.Close;
+      QuClashTheme.Open;
+      QuClashThemeDetail.Close;
+      QuClashThemeDetail.Open;
     end;
   end;
 end;
 
-procedure TTimetableForm.ActSubjectRestrictionNonSatisfiedExecute(Sender: TObject);
+procedure TTimetableForm.ActThemeRestrictionNonSatisfiedExecute(Sender: TObject);
 begin
   inherited;
   if TSingleEditorForm.ToggleSingleEditor(Self,
-    FSubjectRestrictionNonSatisfiedForm, ConfigStorage,
-    ActSubjectRestrictionNonSatisfied, QuTimetableDetailSubjectRestriction) then
+    FThemeRestrictionNonSatisfiedForm, ConfigStorage,
+    ActThemeRestrictionNonSatisfied, QuTimetableDetailThemeRestriction) then
   begin
-    QuTimetableDetailSubjectRestriction.Close;
-    QuTimetableDetailSubjectRestriction.Open;
+    QuTimetableDetailThemeRestriction.Close;
+    QuTimetableDetailThemeRestriction.Open;
   end;
 end;
 
@@ -381,7 +381,7 @@ begin
   QuClashRoomClashes.DisplayLabel := SClashes;
   QuClashRoomNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuClashRoomNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuClashRoomDetailNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
+  QuClashRoomDetailNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
   QuClashRoomDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
   QuClashRoomDetailAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
@@ -394,32 +394,32 @@ begin
   QuClashTeacherDetailIdSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
   QuClashTeacherDetailIdParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
-  QuClashTeacherDetailIdSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
+  QuClashTeacherDetailIdTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
   QuClashTeacherDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
   QuClashTeacherDetailAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
   QuClashTeacherDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
-  QuClashTeacherDetailNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
-  QuClashSubjectNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
-  QuClashSubjectDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
-  QuClashSubjectDetailAbSpecialization.DisplayLabel
+  QuClashTeacherDetailNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
+  QuClashThemeNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
+  QuClashThemeDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
+  QuClashThemeDetailAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
-  QuClashSubjectDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
-  QuClashSubjectDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuClashSubjectDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuTimetableDetailSubjectRestrictionNaSubjectRestrictionType.DisplayLabel
-    := SFlSubjectRestriction_IdSubjectRestrictionType;
-  QuTimetableDetailSubjectRestrictionNaSubject.DisplayLabel
-    := SFlTimetableDetail_IdSubject;
-  QuTimetableDetailSubjectRestrictionNaDay.DisplayLabel
+  QuClashThemeDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
+  QuClashThemeDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
+  QuClashThemeDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
+  QuTimetableDetailThemeRestrictionNaThemeRestrictionType.DisplayLabel
+    := SFlThemeRestriction_IdThemeRestrictionType;
+  QuTimetableDetailThemeRestrictionNaTheme.DisplayLabel
+    := SFlTimetableDetail_IdTheme;
+  QuTimetableDetailThemeRestrictionNaDay.DisplayLabel
     := SFlTimetableDetail_IdDay;
-  QuTimetableDetailSubjectRestrictionNaHour.DisplayLabel
+  QuTimetableDetailThemeRestrictionNaHour.DisplayLabel
     := SFlTimetableDetail_IdHour;
-  QuTimetableDetailSubjectRestrictionAbLevel.DisplayLabel
+  QuTimetableDetailThemeRestrictionAbLevel.DisplayLabel
     := SFlTimetableDetail_IdLevel;
-  QuTimetableDetailSubjectRestrictionAbSpecialization.DisplayLabel
+  QuTimetableDetailThemeRestrictionAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
-  QuTimetableDetailSubjectRestrictionNaParallel.DisplayLabel
+  QuTimetableDetailThemeRestrictionNaParallel.DisplayLabel
     := SFlTimetableDetail_IdParallel;
   QuTimetableDetailTeacherRestrictionNaDay.DisplayLabel
     := SFlTimetableDetail_IdDay;
@@ -433,23 +433,23 @@ begin
     := SFlTimetableDetail_IdSpecialization;
   QuTimetableDetailTeacherRestrictionNaParallel.DisplayLabel
     := SFlTimetableDetail_IdParallel;
-  QuSubjectCutDayIdTimetable.DisplayLabel := SFlTimetableDetail_IdTimeTable;
-  QuSubjectCutDayAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
-  QuSubjectCutDayAbSpecialization.DisplayLabel
+  QuThemeCutDayIdTimetable.DisplayLabel := SFlTimetableDetail_IdTimeTable;
+  QuThemeCutDayAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
+  QuThemeCutDayAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
-  QuSubjectCutDayNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
-  QuSubjectCutDayNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuSubjectCutDayNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuSubjectCutDayNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
-  QuSubjectCutHourNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuSubjectCutHourNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuSubjectCutHourDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
-  QuSubjectCutHourDetailAbSpecialization.DisplayLabel
+  QuThemeCutDayNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
+  QuThemeCutDayNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
+  QuThemeCutDayNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
+  QuThemeCutDayNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
+  QuThemeCutHourNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
+  QuThemeCutHourNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
+  QuThemeCutHourDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
+  QuThemeCutHourDetailAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;
-  QuSubjectCutHourDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
-  QuSubjectCutHourDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuSubjectCutHourDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuSubjectCutHourDetailNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
+  QuThemeCutHourDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
+  QuThemeCutHourDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
+  QuThemeCutHourDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
+  QuThemeCutHourDetailNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
   
 end;
 
@@ -462,37 +462,37 @@ begin
     QuClashTeacherIdTeacher.Value]);
 end;
 
-procedure TTimetableForm.QuClashSubjectAfterScroll(DataSet: TDataSet);
+procedure TTimetableForm.QuClashThemeAfterScroll(DataSet: TDataSet);
 begin
   inherited;
-  QuClashSubjectDetail.Filter := Format('IdSubject=%d',
-    [QuClashSubjectIdSubject.Value]);
+  QuClashThemeDetail.Filter := Format('IdTheme=%d',
+    [QuClashThemeIdTheme.Value]);
 end;
 
-procedure TTimetableForm.ActSubjectCutDayExecute(Sender: TObject);
+procedure TTimetableForm.ActThemeCutDayExecute(Sender: TObject);
 begin
   inherited;
-  if TSingleEditorForm.ToggleSingleEditor(Self, FSubjectCutDayForm,
-    ConfigStorage, ActSubjectCutDay, QuSubjectCutDay) then
+  if TSingleEditorForm.ToggleSingleEditor(Self, FThemeCutDayForm,
+    ConfigStorage, ActThemeCutDay, QuThemeCutDay) then
   begin
-    QuSubjectCutDay.Close;
-    QuSubjectCutDay.Open;
+    QuThemeCutDay.Close;
+    QuThemeCutDay.Open;
   end;
 end;
 
-procedure TTimetableForm.ActSubjectCutHourExecute(Sender: TObject);
+procedure TTimetableForm.ActThemeCutHourExecute(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule, QuSubjectCutHour do
+  with SourceDataModule, QuThemeCutHour do
   begin
     if TMasterDetailEditorForm.ToggleMasterDetailEditor
-      (Self, FSubjectCutHourForm, ConfigStorage, ActSubjectCutHour,
-      QuSubjectCutHour, QuSubjectCutHourDetail) then
+      (Self, FThemeCutHourForm, ConfigStorage, ActThemeCutHour,
+      QuThemeCutHour, QuThemeCutHourDetail) then
     begin
-      QuSubjectCutHour.Close;
-      QuSubjectCutHour.Open;
-      QuSubjectCutHourDetail.Close;
-      QuSubjectCutHourDetail.Open;
+      QuThemeCutHour.Close;
+      QuThemeCutHour.Open;
+      QuThemeCutHourDetail.Close;
+      QuThemeCutHourDetail.Open;
     end;
   end;
 end;
@@ -505,7 +505,7 @@ begin
   begin
     with SourceDataModule do
     begin
-      FTimetableRoomTypeForm.LoadHints(TbDay, TbHour, TbSubject);
+      FTimetableRoomTypeForm.LoadHints(TbDay, TbHour, TbTheme);
     end;
     FTimetableRoomTypeForm.TBShowClick(nil);
   end;

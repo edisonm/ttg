@@ -16,9 +16,9 @@ msgctxt "dsourcebaseconsts.sflassistance_idspecialization"
 msgid "Specialization"
 msgstr "Especializacion"
 
-#: dsourcebaseconsts.sflassistance_idsubject
-msgctxt "dsourcebaseconsts.sflassistance_idsubject"
-msgid "Subject"
+#: dsourcebaseconsts.sflassistance_idtheme
+msgctxt "dsourcebaseconsts.sflassistance_idtheme"
+msgid "Theme"
 msgstr "Materia"
 
 #: dsourcebaseconsts.sflassistance_idteacher
@@ -41,13 +41,13 @@ msgctxt "dsourcebaseconsts.sflclass_idspecialization"
 msgid "Specialization"
 msgstr "Especializacion"
 
-#: dsourcebaseconsts.sflcourse_idlevel
-msgctxt "dsourcebaseconsts.sflcourse_idlevel"
+#: dsourcebaseconsts.sflcategory_idlevel
+msgctxt "dsourcebaseconsts.sflcategory_idlevel"
 msgid "Level"
 msgstr "Nivel"
 
-#: dsourcebaseconsts.sflcourse_idspecialization
-msgctxt "dsourcebaseconsts.sflcourse_idspecialization"
+#: dsourcebaseconsts.sflcategory_idspecialization
+msgctxt "dsourcebaseconsts.sflcategory_idspecialization"
 msgid "Specialization"
 msgstr "Especializacion"
 
@@ -86,9 +86,9 @@ msgctxt "dsourcebaseconsts.sfldistribution_idspecialization"
 msgid "Specialization"
 msgstr "Especializacion"
 
-#: dsourcebaseconsts.sfldistribution_idsubject
-msgctxt "dsourcebaseconsts.sfldistribution_idsubject"
-msgid "Subject"
+#: dsourcebaseconsts.sfldistribution_idtheme
+msgctxt "dsourcebaseconsts.sfldistribution_idtheme"
+msgid "Theme"
 msgstr "Materia"
 
 #: dsourcebaseconsts.sfldistribution_idteacher
@@ -145,9 +145,9 @@ msgctxt "dsourcebaseconsts.sfljoinedclass_idspecialization1"
 msgid "Joined Specialization"
 msgstr "Especializacion unida"
 
-#: dsourcebaseconsts.sfljoinedclass_idsubject
-msgctxt "dsourcebaseconsts.sfljoinedclass_idsubject"
-msgid "Subject"
+#: dsourcebaseconsts.sfljoinedclass_idtheme
+msgctxt "dsourcebaseconsts.sfljoinedclass_idtheme"
+msgid "Theme"
 msgstr "Materia"
 
 #: dsourcebaseconsts.sfllevel_ablevel
@@ -210,53 +210,53 @@ msgctxt "dsourcebaseconsts.sflspecialization_naspecialization"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sflsubjectrestrictiontype_colsubjectrestrictiontype
-msgctxt "dsourcebaseconsts.sflsubjectrestrictiontype_colsubjectrestrictiontype"
+#: dsourcebaseconsts.sflthemerestrictiontype_colthemerestrictiontype
+msgctxt "dsourcebaseconsts.sflthemerestrictiontype_colthemerestrictiontype"
 msgid "Color"
 msgstr "Color"
 
-#: dsourcebaseconsts.sflsubjectrestrictiontype_idsubjectrestrictiontype
-msgctxt "dsourcebaseconsts.sflsubjectrestrictiontype_idsubjectrestrictiontype"
+#: dsourcebaseconsts.sflthemerestrictiontype_idthemerestrictiontype
+msgctxt "dsourcebaseconsts.sflthemerestrictiontype_idthemerestrictiontype"
 msgid "Id"
 msgstr "Codigo"
 
-#: dsourcebaseconsts.sflsubjectrestrictiontype_nasubjectrestrictiontype
-msgctxt "dsourcebaseconsts.sflsubjectrestrictiontype_nasubjectrestrictiontype"
+#: dsourcebaseconsts.sflthemerestrictiontype_nathemerestrictiontype
+msgctxt "dsourcebaseconsts.sflthemerestrictiontype_nathemerestrictiontype"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sflsubjectrestrictiontype_valsubjectrestrictiontype
-msgctxt "dsourcebaseconsts.sflsubjectrestrictiontype_valsubjectrestrictiontype"
+#: dsourcebaseconsts.sflthemerestrictiontype_valthemerestrictiontype
+msgctxt "dsourcebaseconsts.sflthemerestrictiontype_valthemerestrictiontype"
 msgid "Value"
 msgstr "Valor"
 
-#: dsourcebaseconsts.sflsubjectrestriction_idday
-msgctxt "dsourcebaseconsts.sflsubjectrestriction_idday"
+#: dsourcebaseconsts.sflthemerestriction_idday
+msgctxt "dsourcebaseconsts.sflthemerestriction_idday"
 msgid "Day"
 msgstr "Day"
 
-#: dsourcebaseconsts.sflsubjectrestriction_idhour
-msgctxt "dsourcebaseconsts.sflsubjectrestriction_idhour"
+#: dsourcebaseconsts.sflthemerestriction_idhour
+msgctxt "dsourcebaseconsts.sflthemerestriction_idhour"
 msgid "Hour"
 msgstr "Hour"
 
-#: dsourcebaseconsts.sflsubjectrestriction_idsubject
-msgctxt "dsourcebaseconsts.sflsubjectrestriction_idsubject"
-msgid "Subject"
+#: dsourcebaseconsts.sflthemerestriction_idtheme
+msgctxt "dsourcebaseconsts.sflthemerestriction_idtheme"
+msgid "Theme"
 msgstr "Materia"
 
-#: dsourcebaseconsts.sflsubjectrestriction_idsubjectrestrictiontype
-msgctxt "dsourcebaseconsts.sflsubjectrestriction_idsubjectrestrictiontype"
+#: dsourcebaseconsts.sflthemerestriction_idthemerestrictiontype
+msgctxt "dsourcebaseconsts.sflthemerestriction_idthemerestrictiontype"
 msgid "Restriction Type"
 msgstr "Tipo de Restriccion"
 
-#: dsourcebaseconsts.sflsubject_idsubject
-msgctxt "dsourcebaseconsts.sflsubject_idsubject"
+#: dsourcebaseconsts.sfltheme_idtheme
+msgctxt "dsourcebaseconsts.sfltheme_idtheme"
 msgid "Id"
 msgstr "Codigo"
 
-#: dsourcebaseconsts.sflsubject_nasubject
-msgctxt "dsourcebaseconsts.sflsubject_nasubject"
+#: dsourcebaseconsts.sfltheme_natheme
+msgctxt "dsourcebaseconsts.sfltheme_natheme"
 msgid "Name"
 msgstr "Nombre"
 
@@ -355,9 +355,9 @@ msgctxt "dsourcebaseconsts.sfltimetabledetail_idspecialization"
 msgid "Specialization"
 msgstr "Especializacion"
 
-#: dsourcebaseconsts.sfltimetabledetail_idsubject
-msgctxt "dsourcebaseconsts.sfltimetabledetail_idsubject"
-msgid "Subject"
+#: dsourcebaseconsts.sfltimetabledetail_idtheme
+msgctxt "dsourcebaseconsts.sfltimetabledetail_idtheme"
+msgid "Theme"
 msgstr "Materia"
 
 #: dsourcebaseconsts.sfltimetabledetail_idtimetable
@@ -400,9 +400,9 @@ msgctxt "dsourcebaseconsts.stbclass"
 msgid "Classes"
 msgstr "Clases"
 
-#: dsourcebaseconsts.stbcourse
-msgctxt "dsourcebaseconsts.stbcourse"
-msgid "Courses"
+#: dsourcebaseconsts.stbcategory
+msgctxt "dsourcebaseconsts.stbcategory"
+msgid "Categories"
 msgstr "Cursos"
 
 #: dsourcebaseconsts.stbday
@@ -445,19 +445,19 @@ msgctxt "dsourcebaseconsts.stbspecialization"
 msgid "Specializations"
 msgstr "Especializaciones"
 
-#: dsourcebaseconsts.stbsubject
-msgctxt "dsourcebaseconsts.stbsubject"
-msgid "Subjects"
+#: dsourcebaseconsts.stbtheme
+msgctxt "dsourcebaseconsts.stbtheme"
+msgid "Themes"
 msgstr "Materias"
 
-#: dsourcebaseconsts.stbsubjectrestriction
-msgctxt "dsourcebaseconsts.stbsubjectrestriction"
-msgid "Subject Restrictions"
+#: dsourcebaseconsts.stbthemerestriction
+msgctxt "dsourcebaseconsts.stbthemerestriction"
+msgid "Theme Restrictions"
 msgstr "Restricciones"
 
-#: dsourcebaseconsts.stbsubjectrestrictiontype
-msgctxt "dsourcebaseconsts.stbsubjectrestrictiontype"
-msgid "Types of Subject Restrictions"
+#: dsourcebaseconsts.stbthemerestrictiontype
+msgctxt "dsourcebaseconsts.stbthemerestrictiontype"
+msgid "Types of Theme Restrictions"
 msgstr "Tipos de restricciones de materia"
 
 #: dsourcebaseconsts.stbteacher
@@ -491,7 +491,7 @@ msgid "Detail of Timetables"
 msgstr "Detalle de los horarios"
 
 #: tclassform.dbgrid.hint
-msgid "Courses|Available courses"
+msgid "Categories|Available categories"
 msgstr "Cursos|Cursos disponibles"
 
 #: tconfigform.bbcancel.caption
@@ -541,7 +541,7 @@ msgstr "Iteraciones:"
 
 #: tconfigform.label15.caption
 msgctxt "tconfigform.label15.caption"
-msgid "Subject Restrictions:"
+msgid "Theme Restrictions:"
 msgstr "Prohibiciones de materia:"
 
 #: tconfigform.label18.caption
@@ -556,7 +556,7 @@ msgstr "Cruce de aulas:"
 
 #: tconfigform.label20.caption
 msgctxt "tconfigform.label20.caption"
-msgid "Clash Subjects:"
+msgid "Clash Themes:"
 msgstr "Cruce materias:"
 
 #: tconfigform.label29.caption
@@ -579,8 +579,8 @@ msgctxt "tconfigform.lbbreaktimetableteacher.caption"
 msgid "Gap TT. Teachers:"
 msgstr "Huecos h. prof.:"
 
-#: tconfigform.lbbrokensubjects.caption
-msgctxt "tconfigform.lbbrokensubjects.caption"
+#: tconfigform.lbbrokenthemes.caption
+msgctxt "tconfigform.lbbrokenthemes.caption"
 msgid "Broken Sessions:"
 msgstr "Materias cortadas:"
 
@@ -614,9 +614,9 @@ msgctxt "TCONFIGFORM.LBINSTITUTIONNAME.CAPTION"
 msgid "Name:"
 msgstr "Nombre:"
 
-#: tconfigform.lbjoinedsubjects.caption
-msgctxt "TCONFIGFORM.LBJOINSUBJECTS.CAPTION"
-msgid "Joined Subjects:"
+#: tconfigform.lbjoinedthemes.caption
+msgctxt "TCONFIGFORM.LBJOINTHEMES.CAPTION"
+msgid "Joined Themes:"
 msgstr "Materias juntas:"
 
 #: tconfigform.lbmaxteacherworkload.caption
@@ -817,8 +817,8 @@ msgstr "Clases"
 
 #: tmainform.actclass.hint
 #, fuzzy
-#| msgid "Courses|Courses with its given parallels"
-msgid "Courses|Courses with its given groups"
+#| msgid "Categories|Categories with its given parallels"
+msgid "Categories|Categories with its given groups"
 msgstr "Cursos|Cursos con sus respectivos paralelos"
 
 #: tmainform.actconfigure.caption
@@ -971,13 +971,13 @@ msgstr "Especializaciones"
 msgid "Specializations|Specializations"
 msgstr "Especializaciones|Especializaciones"
 
-#: tmainform.actsubject.caption
-msgctxt "TMAINFORM.ACTSUBJECT.CAPTION"
-msgid "Subjects"
+#: tmainform.acttheme.caption
+msgctxt "TMAINFORM.ACTTHEME.CAPTION"
+msgid "Themes"
 msgstr "Materias"
 
-#: tmainform.actsubject.hint
-msgid "Subjects|Subjects"
+#: tmainform.acttheme.hint
+msgid "Themes|Themes"
 msgstr "Materias|Materias"
 
 #: tmainform.actteacher.caption
@@ -1167,13 +1167,13 @@ msgctxt "TPROGRESSFORM.LBCLASHROOMTYPEVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lbclashsubject.caption
-msgctxt "TPROGRESSFORM.LBCLASHSUBJECT.CAPTION"
+#: tprogressform.lbclashtheme.caption
+msgctxt "TPROGRESSFORM.LBCLASHTHEME.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lbclashsubjectvalue.caption
-msgctxt "TPROGRESSFORM.LBCLASHSUBJECTVALUE.CAPTION"
+#: tprogressform.lbclashthemevalue.caption
+msgctxt "TPROGRESSFORM.LBCLASHTHEMEVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1207,13 +1207,13 @@ msgctxt "TPROGRESSFORM.LBIMPORTS.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lbnonscatteredsubjectcount.caption
-msgctxt "TPROGRESSFORM.LBNONSCATTEREDSUBJECTCOUNT.CAPTION"
+#: tprogressform.lbnonscatteredthemecount.caption
+msgctxt "TPROGRESSFORM.LBNONSCATTEREDTHEMECOUNT.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lbnonscatteredsubjectvalue.caption
-msgctxt "TPROGRESSFORM.LBNONSCATTEREDSUBJECTVALUE.CAPTION"
+#: tprogressform.lbnonscatteredthemevalue.caption
+msgctxt "TPROGRESSFORM.LBNONSCATTEREDTHEMEVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1237,13 +1237,13 @@ msgctxt "TPROGRESSFORM.LBREMAININGTIME.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lbsubjectrestriction.caption
-msgctxt "TPROGRESSFORM.LBSUBJECTRESTRICTION.CAPTION"
+#: tprogressform.lbthemerestriction.caption
+msgctxt "TPROGRESSFORM.LBTHEMERESTRICTION.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lbsubjectrestrictionvalue.caption
-msgctxt "TPROGRESSFORM.LBSUBJECTRESTRICTIONVALUE.CAPTION"
+#: tprogressform.lbthemerestrictionvalue.caption
+msgctxt "TPROGRESSFORM.LBTHEMERESTRICTIONVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1277,7 +1277,7 @@ msgid " Value:"
 msgstr " Valor:"
 
 #: tprogressform.pnbrokensession.caption
-msgid " Broken Subjects:"
+msgid " Broken Themes:"
 msgstr " Materias cortadas:"
 
 #: tprogressform.pnbrokensessionnumber.caption
@@ -1304,17 +1304,17 @@ msgctxt "TPROGRESSFORM.PNCLASHROOMTYPEVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
-#: tprogressform.pnclashsubject.caption
-msgid " Clash Subjects:"
+#: tprogressform.pnclashtheme.caption
+msgid " Clash Themes:"
 msgstr " Cruce materias:"
 
-#: tprogressform.pnclashsubjectnumber.caption
-msgctxt "TPROGRESSFORM.PNCLASHSUBJECTNUMBER.CAPTION"
+#: tprogressform.pnclashthemenumber.caption
+msgctxt "TPROGRESSFORM.PNCLASHTHEMENUMBER.CAPTION"
 msgid " Number:"
 msgstr " Numero:"
 
-#: tprogressform.pnclashsubjectvalue.caption
-msgctxt "TPROGRESSFORM.PNCLASHSUBJECTVALUE.CAPTION"
+#: tprogressform.pnclashthemevalue.caption
+msgctxt "TPROGRESSFORM.PNCLASHTHEMEVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
@@ -1356,17 +1356,17 @@ msgstr " Importaciones:"
 msgid "Started at:"
 msgstr "Iniciado el:"
 
-#: tprogressform.pnnonscatteredsubject.caption
-msgid " Joined Subjects:"
-msgstr " Joined Subjects:"
+#: tprogressform.pnnonscatteredtheme.caption
+msgid " Joined Themes:"
+msgstr " Joined Themes:"
 
-#: tprogressform.pnnonscatteredsubjectcount.caption
-msgctxt "TPROGRESSFORM.PNNONSCATTEREDSUBJECTCOUNT.CAPTION"
+#: tprogressform.pnnonscatteredthemecount.caption
+msgctxt "TPROGRESSFORM.PNNONSCATTEREDTHEMECOUNT.CAPTION"
 msgid " Number:"
 msgstr " Numero:"
 
-#: tprogressform.pnnonscatteredsubjectvalue.caption
-msgctxt "TPROGRESSFORM.PNNONSCATTEREDSUBJECTVALUE.CAPTION"
+#: tprogressform.pnnonscatteredthemevalue.caption
+msgctxt "TPROGRESSFORM.PNNONSCATTEREDTHEMEVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
@@ -1392,17 +1392,17 @@ msgstr "Polinizacion:"
 msgid " Iteration:"
 msgstr " Iteracion:"
 
-#: tprogressform.pnsubjectrestriction.caption
-msgid " Subject Restrictions:"
+#: tprogressform.pnthemerestriction.caption
+msgid " Theme Restrictions:"
 msgstr " Prohibiciones de materia:"
 
-#: tprogressform.pnsubjectrestrictionnumber.caption
-msgctxt "TPROGRESSFORM.PNSUBJECTRESTRICTIONNUMBER.CAPTION"
+#: tprogressform.pnthemerestrictionnumber.caption
+msgctxt "TPROGRESSFORM.PNTHEMERESTRICTIONNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Numero:"
 
-#: tprogressform.pnsubjectrestrictionvalue.caption
-msgctxt "TPROGRESSFORM.PNSUBJECTRESTRICTIONVALUE.CAPTION"
+#: tprogressform.pnthemerestrictionvalue.caption
+msgctxt "TPROGRESSFORM.PNTHEMERESTRICTIONVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
@@ -1509,18 +1509,18 @@ msgctxt "TSPLASHFORM.LBYEARLABEL.CAPTION"
 msgid "..."
 msgstr "..."
 
-#: tsubjectform.actsubjectrestriction.caption
-msgctxt "TSUBJECTFORM.ACTSUBJECTRESTRICTION.CAPTION"
-msgid "Subject restrictions"
+#: tthemeform.actthemerestriction.caption
+msgctxt "TTHEMEFORM.ACTTHEMERESTRICTION.CAPTION"
+msgid "Theme restrictions"
 msgstr "Prohibiciones de materia"
 
-#: tsubjectform.actsubjectrestriction.hint
-msgid "Subject restrictions|Input subject restrictions"
+#: tthemeform.actthemerestriction.hint
+msgid "Theme restrictions|Input theme restrictions"
 msgstr "Prohibiciones de materia|Ingresar las prohibiciones de materia"
 
-#: tsubjectform.caption
-msgctxt "tsubjectform.caption"
-msgid "Subjects"
+#: tthemeform.caption
+msgctxt "tthemeform.caption"
+msgid "Themes"
 msgstr "Materias"
 
 #: tteacherform.actteacherrestriction.caption
@@ -1574,14 +1574,14 @@ msgctxt "TTIMETABLEFORM.ACTCLASHAULA.HINT"
 msgid "Clashes of rooms|Clashes of rooms of same type"
 msgstr "Cruce de aulas|Cruce de aulas del mismo tipo"
 
-#: ttimetableform.actclashsubject.caption
-msgctxt "TTIMETABLEFORM.ACTCLASHSUBJECT.CAPTION"
-msgid "Clashes of subjects"
+#: ttimetableform.actclashtheme.caption
+msgctxt "TTIMETABLEFORM.ACTCLASHTHEME.CAPTION"
+msgid "Clashes of themes"
 msgstr "Cruce de materias"
 
-#: ttimetableform.actclashsubject.hint
-msgctxt "TTIMETABLEFORM.ACTCLASHSUBJECT.HINT"
-msgid "Clashes of subjects|Clashes of subjects"
+#: ttimetableform.actclashtheme.hint
+msgctxt "TTIMETABLEFORM.ACTCLASHTHEME.HINT"
+msgid "Clashes of themes|Clashes of themes"
 msgstr "Cruce de materias|Cruce de materias"
 
 #: ttimetableform.actclashteacher.caption
@@ -1602,30 +1602,30 @@ msgstr "Mejorar horario"
 msgid "Improve timetable|Improve selected timetable"
 msgstr "Mejorar horario|Mejorar horario seleccionado"
 
-#: ttimetableform.actsubjectcutday.caption
-msgid "Subjects cut by the day"
+#: ttimetableform.actthemecutday.caption
+msgid "Themes cut by the day"
 msgstr "Materias cortadas por el dia"
 
-#: ttimetableform.actsubjectcutday.hint
-msgid "Subjects cut by the day|Subjects cut by the day"
+#: ttimetableform.actthemecutday.hint
+msgid "Themes cut by the day|Themes cut by the day"
 msgstr "Materias cortadas por el dia|Materias cortadas por el dia"
 
-#: ttimetableform.actsubjectcuthour.caption
-msgid "Subjects cut by the hour"
+#: ttimetableform.actthemecuthour.caption
+msgid "Themes cut by the hour"
 msgstr "Materias cortadas por la hora"
 
-#: ttimetableform.actsubjectcuthour.hint
-msgid "Subjects cut by the hour|Subjects cut by the hour"
+#: ttimetableform.actthemecuthour.hint
+msgid "Themes cut by the hour|Themes cut by the hour"
 msgstr "Materias cortadas por la hora|Materias cortadas por la hora"
 
-#: ttimetableform.actsubjectrestrictionnonsatisfied.caption
-msgctxt "ttimetableform.actsubjectrestrictionnonsatisfied.caption"
-msgid "Subject restrictions"
+#: ttimetableform.actthemerestrictionnonsatisfied.caption
+msgctxt "ttimetableform.actthemerestrictionnonsatisfied.caption"
+msgid "Theme restrictions"
 msgstr "Prohibiciones de materia"
 
-#: ttimetableform.actsubjectrestrictionnonsatisfied.hint
-msgctxt "ttimetableform.actsubjectrestrictionnonsatisfied.hint"
-msgid "Subject restrictions|Subject restrictions non satisfied"
+#: ttimetableform.actthemerestrictionnonsatisfied.hint
+msgctxt "ttimetableform.actthemerestrictionnonsatisfied.hint"
+msgid "Theme restrictions|Theme restrictions non satisfied"
 msgstr "Prohibiciones de materia|Prohibiciones de materia no respetadas"
 
 #: ttimetableform.actteacherrestrictionnorespetada.caption
@@ -1745,9 +1745,9 @@ msgctxt "uttgconsts.sclashroomtype"
 msgid "Clash of Classrooms"
 msgstr "Cruce de aulas"
 
-#: uttgconsts.sclashsubject
-msgctxt "uttgconsts.sclashsubject"
-msgid "Clash of Subjects"
+#: uttgconsts.sclashtheme
+msgctxt "uttgconsts.sclashtheme"
+msgid "Clash of Themes"
 msgstr "Cruce de materias"
 
 #: uttgconsts.sclashteacher
@@ -1939,8 +1939,8 @@ msgstr "No"
 msgid "Ready to generate timetable. Show timetable check Summary?"
 msgstr "Listo para generar horario. Mostrar resumen del chequeo del horario?"
 
-#: uttgconsts.snonscatteredsubject
-msgid "Non Scattered Subjects"
+#: uttgconsts.snonscatteredtheme
+msgid "Non Scattered Themes"
 msgstr "Materias no dispersas"
 
 #: uttgconsts.snumhardteacherrestrictions

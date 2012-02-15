@@ -19,7 +19,7 @@ type
     QuTimetableClass: TZQuery;
     TBSwapTimeSlots: TToolButton;
     CBShowClass: TComboBox;
-    QuTimetableClassIdSubject: TLongintField;
+    QuTimetableClassIdTheme: TLongintField;
     QuTimetableClassIdLevel: TLongintField;
     QuTimetableClassIdSpecialization: TLongintField;
     QuTimetableClassIdParallel: TLongintField;
@@ -29,7 +29,7 @@ type
     QuTimetableClassIdTeacher: TLongintField;
     QuTimetableClassName: TStringField;
     DSClass: TDataSource;
-    QuTimetableClassNaSubject: TStringField;
+    QuTimetableClassNaTheme: TStringField;
     QuClass: TZQuery;
     QuClassIdTimetable: TLongintField;
     QuClassIdLevel: TLongintField;

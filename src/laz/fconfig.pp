@@ -17,7 +17,7 @@ type
   TConfigForm = class(TForm)
     BBOk: TBitBtn;
     CBApplyDoubleDownHill: TCheckBox;
-    EdClashSubject: TEdit;
+    EdClashTheme: TEdit;
     EdCrossProbability: TEdit;
     EdMutationProbability: TEdit;
     EdReparationProbability: TEdit;
@@ -39,13 +39,13 @@ type
     Label1: TLabel;
     Label2: TLabel;
     LbEmptyHours: TLabel;
-    LbBrokenSubjects: TLabel;
-    LbJoinedSubjects: TLabel;
+    LbBrokenThemes: TLabel;
+    LbJoinedThemes: TLabel;
     EdClashTeacher: TEdit;
     EdClashRoomType: TEdit;
     EdEmptyHour: TEdit;
     EdBrokenSession: TEdit;
-    EdNonScatteredSubject: TEdit;
+    EdNonScatteredTheme: TEdit;
     TSInstitution: TTabSheet;
     Label14: TLabel;
     SEMaxTeacherWorkLoad: TSpinEdit;
@@ -75,8 +75,8 @@ type
     EdBreakTimetableTeacher: TEdit;
     LbInitialTimetables: TLabel;
     EdInitialTimetables: TEdit;
-    dbeNaSubjectRestrictionType: TDBEdit;
-    dbeValSubjectRestrictionType: TDBEdit;
+    dbeNaThemeRestrictionType: TDBEdit;
+    dbeValThemeRestrictionType: TDBEdit;
     LbSRName: TLabel;
     LbSRColor: TLabel;
     LbSRValue: TLabel;
@@ -90,17 +90,17 @@ type
     BBCancel: TBitBtn;
     DBGrid1: TDBGrid;
     DBGrid2: TDBGrid;
-    CBColSubjectRestrictionType: TColorBox;
-    DSSubjectRestrictionType: TDataSource;
+    CBColThemeRestrictionType: TColorBox;
+    DSThemeRestrictionType: TDataSource;
     DSTeacherRestrictionType: TDataSource;
     CBColTeacherRestrictionType: TColorBox;
     procedure CBRandomizeClick(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure DSSubjectRestrictionTypeDataChange(Sender: TObject;
+    procedure DSThemeRestrictionTypeDataChange(Sender: TObject;
       Field: TField);
-    procedure CBColSubjectRestrictionTypeExit(Sender: TObject);
-    procedure CBColSubjectRestrictionTypeChange(Sender: TObject);
+    procedure CBColThemeRestrictionTypeExit(Sender: TObject);
+    procedure CBColThemeRestrictionTypeChange(Sender: TObject);
     procedure CBColTeacherRestrictionTypeChange(Sender: TObject);
     procedure CBColTeacherRestrictionTypeExit(Sender: TObject);
     procedure DSTeacherRestrictionTypeDataChange(Sender: TObject;
@@ -181,12 +181,12 @@ begin
       speSeed.Value := Seed;
       speNumIterations.Value := RefreshInterval;
       EdClashTeacher.Text := FloatToStr(ClashTeacher);
-      EdClashSubject.Text := FloatToStr(ClashSubject);
+      EdClashTheme.Text := FloatToStr(ClashTheme);
       EdClashRoomType.Text := FloatToStr(ClashRoomType);
       EdBreakTimetableTeacher.Text := FloatToStr(BreakTimetableTeacher);
       EdEmptyHour.Text := FloatToStr(OutOfPositionEmptyHour);
       EdBrokenSession.Text := FloatToStr(BrokenSession);
-      EdNonScatteredSubject.Text := FloatToStr(NonScatteredSubject);
+      EdNonScatteredTheme.Text := FloatToStr(NonScatteredTheme);
       spePopulationSize.Value := PopulationSize;
       SEMaxIteration.Value := MaxIteration;
       EdCrossProbability.Text := FloatToStr(CrossProbability);
@@ -216,12 +216,12 @@ begin
       Seed := speSeed.Value;
       RefreshInterval := speNumIterations.Value;
       ClashTeacher := StrToInt(EdClashTeacher.Text);
-      ClashSubject := StrToInt(EdClashSubject.Text);
+      ClashTheme := StrToInt(EdClashTheme.Text);
       ClashRoomType := StrToInt(EdClashRoomType.Text);
       BreakTimetableTeacher := StrToInt(EdBreakTimetableTeacher.Text);
       OutOfPositionEmptyHour := StrToInt(EdEmptyHour.Text);
       BrokenSession := StrToInt(EdBrokenSession.Text);
-      NonScatteredSubject := StrToInt(EdNonScatteredSubject.Text);
+      NonScatteredTheme := StrToInt(EdNonScatteredTheme.Text);
       PopulationSize := spePopulationSize.Value;
       MaxIteration := SEMaxIteration.Value;
       CrossProbability := StrToFloat(EdCrossProbability.Text);
@@ -235,18 +235,18 @@ begin
    end;
 end;
 
-procedure TConfigForm.DSSubjectRestrictionTypeDataChange(Sender: TObject; Field: TField);
+procedure TConfigForm.DSThemeRestrictionTypeDataChange(Sender: TObject; Field: TField);
 begin
-  CBColSubjectRestrictionType.Selected :=
-    SourceDataModule.TbSubjectRestrictionType.FindField('ColSubjectRestrictionType').AsInteger;
+  CBColThemeRestrictionType.Selected :=
+    SourceDataModule.TbThemeRestrictionType.FindField('ColThemeRestrictionType').AsInteger;
 end;
 
-procedure TConfigForm.CBColSubjectRestrictionTypeExit(Sender: TObject);
+procedure TConfigForm.CBColThemeRestrictionTypeExit(Sender: TObject);
 begin
-  with SourceDataModule.TbSubjectRestrictionType.FindField('ColSubjectRestrictionType') do
-    if (DSSubjectRestrictionType.State in [dsEdit, dsInsert])
-        and (AsInteger <> CBColSubjectRestrictionType.Selected) then
-      AsInteger := CBColSubjectRestrictionType.Selected;
+  with SourceDataModule.TbThemeRestrictionType.FindField('ColThemeRestrictionType') do
+    if (DSThemeRestrictionType.State in [dsEdit, dsInsert])
+        and (AsInteger <> CBColThemeRestrictionType.Selected) then
+      AsInteger := CBColThemeRestrictionType.Selected;
 end;
 
 procedure TConfigForm.BBCancelClick(Sender: TObject);
@@ -259,13 +259,13 @@ begin
   ModalResult := mrOk;
 end;
 
-procedure TConfigForm.CBColSubjectRestrictionTypeChange(Sender: TObject);
+procedure TConfigForm.CBColThemeRestrictionTypeChange(Sender: TObject);
 begin
-  with DSSubjectRestrictionType do
+  with DSThemeRestrictionType do
   begin
     OnDataChange := nil;
     Edit;
-    OnDataChange := DSSubjectRestrictionTypeDataChange;
+    OnDataChange := DSThemeRestrictionTypeDataChange;
   end
 end;
 

@@ -255,7 +255,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Broken Subjects:'
+      Caption = ' Broken Themes:'
       TabOrder = 10
     end
     object PnBrokenSessionNumber: TPanel
@@ -397,17 +397,17 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object PnSubjectRestriction: TPanel
+    object PnThemeRestriction: TPanel
       Left = 8
       Height = 21
       Top = 222
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Subject Restrictions:'
+      Caption = ' Theme Restrictions:'
       TabOrder = 16
     end
-    object PnSubjectRestrictionNumber: TPanel
+    object PnThemeRestrictionNumber: TPanel
       Left = 192
       Height = 21
       Top = 222
@@ -418,7 +418,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 17
-      object LbSubjectRestriction: TLabel
+      object LbThemeRestriction: TLabel
         Left = 104
         Height = 19
         Top = 1
@@ -435,7 +435,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object PnSubjectRestrictionValue: TPanel
+    object PnThemeRestrictionValue: TPanel
       Left = 312
       Height = 21
       Top = 222
@@ -446,7 +446,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 18
-      object LbSubjectRestrictionValue: TLabel
+      object LbThemeRestrictionValue: TLabel
         Left = 116
         Height = 19
         Top = 1
@@ -529,17 +529,17 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object PnNonScatteredSubject: TPanel
+    object PnNonScatteredTheme: TPanel
       Left = 8
       Height = 21
       Top = 198
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Joined Subjects:'
+      Caption = ' Joined Themes:'
       TabOrder = 22
     end
-    object PnNonScatteredSubjectCount: TPanel
+    object PnNonScatteredThemeCount: TPanel
       Left = 192
       Height = 21
       Top = 198
@@ -550,7 +550,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 23
-      object LbNonScatteredSubjectCount: TLabel
+      object LbNonScatteredThemeCount: TLabel
         Left = 104
         Height = 19
         Top = 1
@@ -567,7 +567,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object PnNonScatteredSubjectValue: TPanel
+    object PnNonScatteredThemeValue: TPanel
       Left = 312
       Height = 21
       Top = 198
@@ -578,7 +578,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 24
-      object LbNonScatteredSubjectValue: TLabel
+      object LbNonScatteredThemeValue: TLabel
         Left = 116
         Height = 19
         Top = 1
@@ -784,17 +784,17 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object PnClashSubject: TPanel
+    object PnClashTheme: TPanel
       Left = 8
       Height = 21
       Top = 78
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Clash Subjects:'
+      Caption = ' Clash Themes:'
       TabOrder = 33
     end
-    object PnClashSubjectNumber: TPanel
+    object PnClashThemeNumber: TPanel
       Left = 192
       Height = 21
       Top = 78
@@ -805,7 +805,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 34
-      object LbClashSubject: TLabel
+      object LbClashTheme: TLabel
         Left = 104
         Height = 19
         Top = 1
@@ -822,7 +822,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object PnClashSubjectValue: TPanel
+    object PnClashThemeValue: TPanel
       Left = 312
       Height = 21
       Top = 78
@@ -833,7 +833,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 35
-      object LbClashSubjectValue: TLabel
+      object LbClashThemeValue: TLabel
         Left = 116
         Height = 19
         Top = 1

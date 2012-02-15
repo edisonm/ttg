@@ -21,7 +21,7 @@ uses
   FCrossManyToManyEditor1 {CrossManyToManyEditor1Form},
   FCrossManytoManyEditorR {CrossManyToManyEditorRForm},
   FEditor {EditorForm},
-  FSubject {SubjectForm},
+  FTheme {ThemeForm},
   FTeacher {TeacherForm},
   UTTGDBUtils in 'uttgdbutils.pp',
   UConfigStorage,

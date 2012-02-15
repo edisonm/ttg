@@ -437,7 +437,7 @@ object ConfigForm: TConfigForm
         Caption = 'Empty hours:'
         ParentColor = False
       end
-      object LbBrokenSubjects: TLabel
+      object LbBrokenThemes: TLabel
         Left = 8
         Height = 15
         Top = 86
@@ -445,12 +445,12 @@ object ConfigForm: TConfigForm
         Caption = 'Broken Sessions:'
         ParentColor = False
       end
-      object LbJoinedSubjects: TLabel
+      object LbJoinedThemes: TLabel
         Left = 237
         Height = 15
         Top = 61
         Width = 90
-        Caption = 'Joined Subjects:'
+        Caption = 'Joined Themes:'
         ParentColor = False
       end
       object Label15: TLabel
@@ -459,7 +459,7 @@ object ConfigForm: TConfigForm
         Top = 114
         Width = 116
         Anchors = [akLeft, akBottom]
-        Caption = 'Subject Restrictions:'
+        Caption = 'Theme Restrictions:'
         ParentColor = False
       end
       object Label18: TLabel
@@ -538,7 +538,7 @@ object ConfigForm: TConfigForm
         Height = 15
         Top = 36
         Width = 87
-        Caption = 'Clash Subjects:'
+        Caption = 'Clash Themes:'
         ParentColor = False
       end
       object EdClashTeacher: TEdit
@@ -573,7 +573,7 @@ object ConfigForm: TConfigForm
         AutoSize = False
         TabOrder = 4
       end
-      object EdNonScatteredSubject: TEdit
+      object EdNonScatteredTheme: TEdit
         Left = 345
         Height = 21
         Top = 56
@@ -589,25 +589,25 @@ object ConfigForm: TConfigForm
         AutoSize = False
         TabOrder = 1
       end
-      object dbeNaSubjectRestrictionType: TDBEdit
+      object dbeNaThemeRestrictionType: TDBEdit
         Left = 364
         Height = 24
         Top = 138
         Width = 93
-        DataField = 'NaSubjectRestrictionType'
-        DataSource = SourceDataModule.DSSubjectRestrictionType
+        DataField = 'NaThemeRestrictionType'
+        DataSource = SourceDataModule.DSThemeRestrictionType
         Anchors = [akRight, akBottom]
         CharCase = ecNormal
         MaxLength = 0
         TabOrder = 8
       end
-      object dbeValSubjectRestrictionType: TDBEdit
+      object dbeValThemeRestrictionType: TDBEdit
         Left = 363
         Height = 24
         Top = 199
         Width = 93
-        DataField = 'ValSubjectRestrictionType'
-        DataSource = SourceDataModule.DSSubjectRestrictionType
+        DataField = 'ValThemeRestrictionType'
+        DataSource = SourceDataModule.DSThemeRestrictionType
         Anchors = [akRight, akBottom]
         CharCase = ecNormal
         MaxLength = 0
@@ -645,7 +645,7 @@ object ConfigForm: TConfigForm
         Anchors = [akLeft, akRight, akBottom]
         Color = clWindow
         Columns = <>
-        DataSource = SourceDataModule.DSSubjectRestrictionType
+        DataSource = SourceDataModule.DSThemeRestrictionType
         TabOrder = 6
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
@@ -663,15 +663,15 @@ object ConfigForm: TConfigForm
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
       end
-      object CBColSubjectRestrictionType: TColorBox
+      object CBColThemeRestrictionType: TColorBox
         Left = 364
         Height = 24
         Top = 171
         Width = 93
         Anchors = [akRight, akBottom]
         ItemHeight = 16
-        OnChange = CBColSubjectRestrictionTypeChange
-        OnExit = CBColSubjectRestrictionTypeExit
+        OnChange = CBColThemeRestrictionTypeChange
+        OnExit = CBColThemeRestrictionTypeExit
         TabOrder = 9
       end
       object CBColTeacherRestrictionType: TColorBox
@@ -685,7 +685,7 @@ object ConfigForm: TConfigForm
         OnExit = CBColTeacherRestrictionTypeExit
         TabOrder = 12
       end
-      object EdClashSubject: TEdit
+      object EdClashTheme: TEdit
         Left = 117
         Height = 21
         Top = 32
@@ -708,9 +708,9 @@ object ConfigForm: TConfigForm
     OnClick = BBCancelClick
     TabOrder = 2
   end
-  object DSSubjectRestrictionType: TDatasource
-    DataSet = SourceDataModule.TbSubjectRestrictionType
-    OnDataChange = DSSubjectRestrictionTypeDataChange
+  object DSThemeRestrictionType: TDatasource
+    DataSet = SourceDataModule.TbThemeRestrictionType
+    OnDataChange = DSThemeRestrictionTypeDataChange
     left = 128
     top = 200
   end

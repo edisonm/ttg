@@ -30,7 +30,7 @@ inherited ClassForm: TClassForm
     ClientWidth = 635
     inherited DBGrid: TDBGrid
       Height = 334
-      Hint = 'Courses|Available courses'
+      Hint = 'Categories|Available courses'
       Width = 479
       ShowHint = True
       OnDblClick = DBGridDblClick
@@ -59,7 +59,7 @@ inherited ClassForm: TClassForm
     top = 72
   end
   inherited DataSource: TDatasource
-    DataSet = SourceDataModule.TbCourse
+    DataSet = SourceDataModule.TbCategory
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
     left = 248

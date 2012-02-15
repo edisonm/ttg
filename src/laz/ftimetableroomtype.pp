@@ -18,13 +18,13 @@ type
   TTimetableRoomTypeForm = class(TCrossManyToManyEditor1Form)
     QuTimetableRoomType: TZQuery;
     CBShowRoomType: TComboBox;
-    QuTimetableRoomTypeIdSubject: TLongintField;
+    QuTimetableRoomTypeIdTheme: TLongintField;
     QuTimetableRoomTypeIdLevel: TLongintField;
     QuTimetableRoomTypeIdSpecialization: TLongintField;
     QuTimetableRoomTypeIdParallel: TLongintField;
     QuTimetableRoomTypeIdHour: TLongintField;
     QuTimetableRoomTypeIdDay: TLongintField;
-    QuTimetableRoomTypeNaSubject: TStringField;
+    QuTimetableRoomTypeNaTheme: TStringField;
     QuTimetableRoomTypeAbLevel: TStringField;
     QuTimetableRoomTypeAbSpecialization: TStringField;
     QuTimetableRoomTypeNaParallel: TStringField;
@@ -89,7 +89,7 @@ end;
 procedure TTimetableRoomTypeForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  QuTimetableRoomTypeNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
+  QuTimetableRoomTypeNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
   QuTimetableRoomTypeAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
   QuTimetableRoomTypeAbSpecialization.DisplayLabel
     := SFlTimetableDetail_IdSpecialization;

@@ -194,18 +194,18 @@ inherited TimetableClassForm: TTimetableClassForm
       '  0 as IsJoinedClass,'
       '  IdHour,'
       '  IdDay,'
-      '  TimetableDetail.IdSubject,'
+      '  TimetableDetail.IdTheme,'
       '  Distribution.IdTeacher,'
-      '  NaSubject,'
+      '  NaTheme,'
       '  LnTeacher,'
       '  NaTeacher'
       'from'
       '  TimetableDetail inner join Distribution on'
-      '  TimetableDetail.IdSubject = Distribution.IdSubject'
+      '  TimetableDetail.IdTheme = Distribution.IdTheme'
       '  and TimetableDetail.IdLevel = Distribution.IdLevel'
       '  and TimetableDetail.IdSpecialization = Distribution.IdSpecialization'
       '  and TimetableDetail.IdParallel = Distribution.IdParallel'
-      '  inner join Subject on TimetableDetail.IdSubject = Subject.IdSubject'
+      '  inner join Theme on TimetableDetail.IdTheme = Theme.IdTheme'
       '  inner join Teacher on Distribution.IdTeacher = Teacher.IdTeacher'
       'where'
       '  IdTimetable=:IdTimetable'
@@ -221,21 +221,21 @@ inherited TimetableClassForm: TTimetableClassForm
       '  1 as IsJoinedClass,'
       '  IdHour,'
       '  IdDay,'
-      '  TimetableDetail.IdSubject,'
+      '  TimetableDetail.IdTheme,'
       '  Distribution.IdTeacher,'
-      '  NaSubject,'
+      '  NaTheme,'
       '  LnTeacher,'
       '  NaTeacher'
       'from'
       '  TimetableDetail inner join Distribution on'
-      '  TimetableDetail.IdSubject = Distribution.IdSubject'
+      '  TimetableDetail.IdTheme = Distribution.IdTheme'
       '  and TimetableDetail.IdLevel = Distribution.IdLevel'
       '  and TimetableDetail.IdSpecialization = Distribution.IdSpecialization'
       '  and TimetableDetail.IdParallel = Distribution.IdParallel'
-      '  inner join Subject on TimetableDetail.IdSubject = Subject.IdSubject'
+      '  inner join Theme on TimetableDetail.IdTheme = Theme.IdTheme'
       '  inner join Teacher on Distribution.IdTeacher = Teacher.IdTeacher'
       '  inner join JoinedClass on'
-      '  Distribution.IdSubject = JoinedClass.IdSubject'
+      '  Distribution.IdTheme = JoinedClass.IdTheme'
       '  and Distribution.IdLevel=JoinedClass.IdLevel'
       '  and Distribution.IdSpecialization=JoinedClass.IdSpecialization'
       '  and Distribution.IdParallel=JoinedClass.IdParallel'
@@ -370,10 +370,10 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = True
       Visible = False
     end
-    object QuTimetableClassIdSubject: TLongintField
+    object QuTimetableClassIdTheme: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdSubject'
+      FieldName = 'IdTheme'
       Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -403,10 +403,10 @@ inherited TimetableClassForm: TTimetableClassForm
       Required = False
       Size = 40
     end
-    object QuTimetableClassNaSubject: TStringField
+    object QuTimetableClassNaTheme: TStringField
       DisplayWidth = 20
       FieldKind = fkData
-      FieldName = 'NaSubject'
+      FieldName = 'NaTheme'
       Index = 10
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

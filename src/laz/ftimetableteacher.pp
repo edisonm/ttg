@@ -23,9 +23,9 @@ type
     QuTimetableTeacherIdParallel: TLongintField;
     QuTimetableTeacherIdHour: TLongintField;
     QuTimetableTeacherIdDay: TLongintField;
-    QuTimetableTeacherIdSubject: TLongintField;
+    QuTimetableTeacherIdTheme: TLongintField;
     QuTimetableTeacherIsAssistance: TLongintField;
-    QuTimetableTeacherNaSubject: TStringField;
+    QuTimetableTeacherNaTheme: TStringField;
     QuTimetableTeacherName: TStringField;
     QuTimetableTeacherAbLevel: TStringField;
     QuTimetableTeacherAbSpecialization: TStringField;
@@ -84,7 +84,7 @@ begin
   QuTimetableTeacher.Open;
   QuTimetableTeacherAbSpecialization.DisplayLabel := SFlTimetableDetail_IdSpecialization;
   QuTimetableTeacherNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
-  QuTimetableTeacherNaSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
+  QuTimetableTeacherNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
   QuTimetableTeacherName.DisplayLabel := SFlTeacher_NaTeacher;
   QuTeacherLnTeacher.DisplayLabel := SFlTeacher_LnTeacher;
   QuTeacherNaTeacher.DisplayLabel := SFlTeacher_NaTeacher;
@@ -93,7 +93,7 @@ begin
   QuTimetableTeacherIdParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuTimetableTeacherIdHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuTimetableTeacherIdDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuTimetableTeacherIdSubject.DisplayLabel := SFlTimetableDetail_IdSubject;
+  QuTimetableTeacherIdTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
   QuTimetableTeacherAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
   LoadNames(MasterDataModule.StringsShowTeacher, CBShowTeacher.Items);
   CBShowTeacher.Text := CBShowTeacher.Items[0];

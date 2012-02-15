@@ -40,8 +40,8 @@ type
     procedure SetRefreshInterval(Value: Integer);
     function GetClashTeacher: Integer;
     procedure SetClashTeacher(Value: Integer);
-    function GetClashSubject: Integer;
-    procedure SetClashSubject(Value: Integer);
+    function GetClashTheme: Integer;
+    procedure SetClashTheme(Value: Integer);
     function GetBreakTimetableTeacher: Integer;
     procedure SetBreakTimetableTeacher(Value: Integer);
     function GetClashRoomType: Integer;
@@ -50,8 +50,8 @@ type
     procedure SetOutOfPositionEmptyHour(Value: Integer);
     function GetBrokenSession: Integer;
     procedure SetBrokenSession(Value: Integer);
-    function GetNonScatteredSubject: Integer;
-    procedure SetNonScatteredSubject(Value: Integer);
+    function GetNonScatteredTheme: Integer;
+    procedure SetNonScatteredTheme(Value: Integer);
     function GetPopulationSize: Integer;
     procedure SetPopulationSize(Value: Integer);
     function GetMaxIteration: Integer;
@@ -85,12 +85,12 @@ type
     property Seed: Integer read GetSeed write SetSeed;
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
     property ClashTeacher: Integer read GetClashTeacher write SetClashTeacher;
-    property ClashSubject: Integer read GetClashSubject write SetClashSubject;
+    property ClashTheme: Integer read GetClashTheme write SetClashTheme;
     property BreakTimetableTeacher: Integer read GetBreakTimetableTeacher write SetBreakTimetableTeacher;
     property ClashRoomType: Integer read GetClashRoomType write SetClashRoomType;
     property OutOfPositionEmptyHour: Integer read GetOutOfPositionEmptyHour write SetOutOfPositionEmptyHour;
     property BrokenSession: Integer read GetBrokenSession write SetBrokenSession;
-    property NonScatteredSubject: Integer read GetNonScatteredSubject write SetNonScatteredSubject;
+    property NonScatteredTheme: Integer read GetNonScatteredTheme write SetNonScatteredTheme;
     property PopulationSize: Integer read GetPopulationSize write SetPopulationSize;
     property MaxIteration: Integer read GetMaxIteration write SetMaxIteration;
     property CrossProbability: Double read GetCrossProbability write SetCrossProbability;
@@ -235,14 +235,14 @@ begin
   Integers['ClashTeacher'] := Value;
 end;
 
-function TTTGConfig.GetClashSubject: Integer;
+function TTTGConfig.GetClashTheme: Integer;
 begin
-  Result := Integers['ClashSubject'];
+  Result := Integers['ClashTheme'];
 end;
 
-procedure TTTGConfig.SetClashSubject(Value: Integer);
+procedure TTTGConfig.SetClashTheme(Value: Integer);
 begin
-  Integers['ClashSubject'] := Value;
+  Integers['ClashTheme'] := Value;
 end;
 
 function TTTGConfig.GetBreakTimetableTeacher: Integer;
@@ -285,14 +285,14 @@ begin
   Integers['BrokenSession'] := Value;
 end;
 
-function TTTGConfig.GetNonScatteredSubject: Integer;
+function TTTGConfig.GetNonScatteredTheme: Integer;
 begin
-  Result := Integers['NonScatteredSubject'];
+  Result := Integers['NonScatteredTheme'];
 end;
 
-procedure TTTGConfig.SetNonScatteredSubject(Value: Integer);
+procedure TTTGConfig.SetNonScatteredTheme(Value: Integer);
 begin
-  Integers['NonScatteredSubject'] := Value;
+  Integers['NonScatteredTheme'] := Value;
 end;
 
 function TTTGConfig.GetPopulationSize: Integer;
@@ -400,12 +400,12 @@ begin
   Self.Seed := 1;
   RefreshInterval := 1;
   ClashTeacher := 200;
-  ClashSubject := 200;
+  ClashTheme := 200;
   BreakTimetableTeacher := 50;
   ClashRoomType := 200;
   OutOfPositionEmptyHour := 100;
   BrokenSession := 150;
-  NonScatteredSubject := 5;
+  NonScatteredTheme := 5;
   PopulationSize := 10;
   MaxIteration := 10000;
   CrossProbability := 0.3;

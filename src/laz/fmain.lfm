@@ -163,10 +163,10 @@ object MainForm: TMainForm
       ParentShowHint = False
       ShowHint = True
     end
-    object TBSubject: TToolButton
+    object TBTheme: TToolButton
       Left = 264
       Top = 2
-      Action = ActSubject
+      Action = ActTheme
       ParentShowHint = False
       ShowHint = True
     end
@@ -733,8 +733,8 @@ object MainForm: TMainForm
       object N5: TMenuItem
         Caption = '-'
       end
-      object MISubject: TMenuItem
-        Action = ActSubject
+      object MITheme: TMenuItem
+        Action = ActTheme
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -772,7 +772,7 @@ object MainForm: TMainForm
           0000808000008080000080800000808000008080000080800000808000008080
           0000808000008080000080800000808000008080000080800000
         }
-        OnClick = ActSubjectExecute
+        OnClick = ActThemeExecute
       end
       object MIRoomType: TMenuItem
         Action = ActRoomType
@@ -2161,19 +2161,19 @@ object MainForm: TMainForm
       AutoCheck = True
       Caption = 'Classes'
       HelpContext = 200
-      Hint = 'Courses|Courses with its given groups'
+      Hint = 'Categories|Categories with its given groups'
       ImageIndex = 14
       OnExecute = ActClassExecute
       ShortCut = 49219
     end
-    object ActSubject: TAction
+    object ActTheme: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Subjects'
+      Caption = 'Themes'
       HelpContext = 210
-      Hint = 'Subjects|Subjects'
+      Hint = 'Themes|Themes'
       ImageIndex = 15
-      OnExecute = ActSubjectExecute
+      OnExecute = ActThemeExecute
       ShortCut = 49229
     end
     object ActRoomType: TAction

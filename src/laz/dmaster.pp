@@ -359,8 +359,8 @@ var
         ASubStrings.Add('');
       end;
   end;
-  // Comprueba que no hayan asignadas mas horas de materias a Courses que periodos
-  procedure CheckCourseLoad;
+  // Comprueba que no hayan asignadas mas horas de materias a Categories que periodos
+  procedure CheckCategoryLoad;
   var
     t, vMainMin, vMainMax, vSubMin, vSubMax: Integer;
     s: string;
@@ -417,8 +417,8 @@ var
               [SProblems, TbClass.FindField('AbLevel').AsString,
               TbClass.FindField('AbSpecialization').AsString,
               TbClass.FindField('NaParallel').AsString,
-              STbSubject,
-              TbDistribution.FindField('NaSubject').AsString]));
+              STbTheme,
+              TbDistribution.FindField('NaTheme').AsString]));
             HaveProblems := True;
           end;
           Next;
@@ -453,7 +453,7 @@ begin
     CheckTeacherWorkLoad;
     CheckTeacherRestrictionCount;
     CheckRoomTypeLoad;
-    CheckCourseLoad;
+    CheckCategoryLoad;
   finally
     AMainStrings.EndUpdate;
     ASubStrings.EndUpdate;
@@ -528,7 +528,7 @@ procedure TMasterDataModule.IntercambiarTimeSlots(AIdTimetable, AIdLevel,
 var
   Locate1, Locate2: Boolean;
   Bookmark1, Bookmark2: TBookmark;
-  iIdSubject1, iSession1, iIdSubject2, iSession2: Integer;
+  iIdTheme1, iSession1, iIdTheme2, iSession2: Integer;
 begin
   with SourceDataModule do
   begin
@@ -547,18 +547,18 @@ begin
         if Locate1 and Locate2 then
         begin
           TbTimetableDetail.GotoBookmark(Bookmark1);
-          iIdSubject1 := TbTimetableDetail.FindField('IdSubject').AsInteger;
+          iIdTheme1 := TbTimetableDetail.FindField('IdTheme').AsInteger;
           iSession1 := TbTimetableDetail.FindField('Session').Value;
           TbTimetableDetail.GotoBookmark(Bookmark2);
-          iIdSubject2 := TbTimetableDetail.FindField('IdSubject').AsInteger;
+          iIdTheme2 := TbTimetableDetail.FindField('IdTheme').AsInteger;
           iSession2 := TbTimetableDetail.FindField('Session').Value;
           TbTimetableDetail.Edit;
-          TbTimetableDetail.FindField('IdSubject').AsInteger := iIdSubject1;
+          TbTimetableDetail.FindField('IdTheme').AsInteger := iIdTheme1;
           TbTimetableDetail.FindField('Session').AsInteger := iSession1;
           TbTimetableDetail.Post;
           TbTimetableDetail.GotoBookmark(Bookmark1);
           TbTimetableDetail.Edit;
-          TbTimetableDetail.FindField('IdSubject').AsInteger := iIdSubject2;
+          TbTimetableDetail.FindField('IdTheme').AsInteger := iIdTheme2;
           TbTimetableDetail.FindField('Session').AsInteger := iSession2;
           TbTimetableDetail.Post;
         end
@@ -604,28 +604,28 @@ begin
   with FStringsShowRoomType do
   begin
     add('Level_Class=AbLevel;NaParallel');
-    add('Level_Class_Subject=AbLevel;NaParallel;NaSubject');
+    add('Level_Class_Theme=AbLevel;NaParallel;NaTheme');
     add('Level_Class_Specialization=AbLevel;NaParallel;AbSpecialization');
-    add('Level_Class_Specialization_Subject=AbLevel;NaParallel;AbSpecialization;NaSubject');
+    add('Level_Class_Specialization_Theme=AbLevel;NaParallel;AbSpecialization;NaTheme');
     add('Level_Specialization_Class=AbLevel;AbSpecialization;NaParallel');
-    add('Level_Specialization_Class_Subject=AbLevel;AbSpecialization;NaParallel;NaSubject');
-    add('Subject=NaSubject');
+    add('Level_Specialization_Class_Theme=AbLevel;AbSpecialization;NaParallel;NaTheme');
+    add('Theme=NaTheme');
   end;
   with FStringsShowTeacher do
   begin
     add('Level_Class=AbLevel;NaParallel');
-    add('Level_Class_Subject=AbLevel;NaParallel;NaSubject');
+    add('Level_Class_Theme=AbLevel;NaParallel;NaTheme');
     add('Level_Class_Specialization=AbLevel;NaParallel;AbSpecialization');
-    add('Level_Class_Specialization_Subject=AbLevel;NaParallel;AbSpecialization;NaSubject');
+    add('Level_Class_Specialization_Theme=AbLevel;NaParallel;AbSpecialization;NaTheme');
     add('Level_Specialization_Class=AbLevel;AbSpecialization;NaParallel');
-    add('Level_Specialization_Class_Subject=AbLevel;AbSpecialization;NaParallel;NaSubject');
-    add('Subject=NaSubject');
+    add('Level_Specialization_Class_Theme=AbLevel;AbSpecialization;NaParallel;NaTheme');
+    add('Theme=NaTheme');
   end;
   with FStringsShowClass do
   begin
-    add('Subject=NaSubject');
+    add('Theme=NaTheme');
     add('Teacher=LnTeacher;NaTeacher');
-    add('Subject_Teacher=NaSubject;LnTeacher;NaTeacher');
+    add('Theme_Teacher=NaTheme;LnTeacher;NaTeacher');
   end;
   with SourceDataModule do
   begin

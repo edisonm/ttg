@@ -9,7 +9,7 @@ TODO:
   - Timetables by Teachers
   - Teacher Restrictions
   - Teacher Distribution
-  - Subject Distribution
+  - Theme Distribution
 }
 interface
 
@@ -35,7 +35,7 @@ type
     MILangSpanish: TMenuItem;
     MILangEnglish: TMenuItem;
     MITeacher: TMenuItem;
-    MISubject: TMenuItem;
+    MITheme: TMenuItem;
     MISpecialization: TMenuItem;
     MIParallel: TMenuItem;
     MILevel: TMenuItem;
@@ -74,7 +74,7 @@ type
     TBRoomType: TToolButton;
     TBTimeSlot: TToolButton;
     TBClass: TToolButton;
-    TBSubject: TToolButton;
+    TBTheme: TToolButton;
     MIReopen: TMenuItem;
     ImageList: TImageList;
     MIContent: TMenuItem;
@@ -102,7 +102,7 @@ type
     ActRoomType: TAction;
     ActTimeSlot: TAction;
     ActClass: TAction;
-    ActSubject: TAction;
+    ActTheme: TAction;
     ActCheckFeasibility: TAction;
     ActMakeTimetable: TAction;
     ActConfigure: TAction;
@@ -129,7 +129,7 @@ type
     procedure ActLangEnglishExecute(Sender: TObject);
     procedure ActLangSpanishExecute(Sender: TObject);
     procedure ActTeacherExecute(Sender: TObject);
-    procedure ActSubjectExecute(Sender: TObject);
+    procedure ActThemeExecute(Sender: TObject);
     procedure ActSpecializationExecute(Sender: TObject);
     procedure ActLevelExecute(Sender: TObject);
     procedure ActRoomTypeExecute(Sender: TObject);
@@ -207,7 +207,7 @@ var
 implementation
 
 uses
-  FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FSubject, FTeacher,
+  FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FTheme, FTeacher,
   FTimetable, FMasterDetailEditor, FConfig, FClass, Printers, DSource,
   DSourceBase, UTTGBasics, FMessageView, UTTGi18n, UTTGConsts, FDBExplorer;
 
@@ -270,13 +270,13 @@ begin
   end;
 end;
 
-procedure TMainForm.ActSubjectExecute(Sender: TObject);
+procedure TMainForm.ActThemeExecute(Sender: TObject);
 begin
-   TSubjectForm.ToggleSingleEditor(Self,
-				   SubjectForm,
+   TThemeForm.ToggleSingleEditor(Self,
+				   ThemeForm,
 				   ConfigStorage,
-				   ActSubject,
-				   SourceDataModule.TbSubject);
+				   ActTheme,
+				   SourceDataModule.TbTheme);
 end;
 
 procedure TMainForm.ActSpecializationExecute(Sender: TObject);
@@ -348,7 +348,7 @@ begin
 				 ClassForm,
 				 ConfigStorage,
 				 ActClass,
-				 SourceDataModule.TbCourse);
+				 SourceDataModule.TbCategory);
 end;
 
 function TMainForm.ConfirmOperation: boolean;
@@ -706,7 +706,7 @@ begin
     end
     else
     begin
-      SourceDataModule.TbSubjectRestrictionType.Refresh;
+      SourceDataModule.TbThemeRestrictionType.Refresh;
       SourceDataModule.TbTeacherRestrictionType.Refresh;
     end;
   finally

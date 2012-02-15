@@ -68,7 +68,7 @@ begin
     s := FindField('Composition').AsString;
     if CompositionToDuration(s) <= 0 then
       raise Exception.CreateFmt(SInvalidComposition, [s]);
-    with FindField('IdSubject') do DefaultExpression := AsString;
+    with FindField('IdTheme') do DefaultExpression := AsString;
     with FindField('IdLevel') do DefaultExpression := AsString;
     with FindField('IdSpecialization') do DefaultExpression := AsString;
     with FindField('IdParallel') do DefaultExpression := AsString;
@@ -113,19 +113,19 @@ const
     SHour6,
     SHour7,
     SHour8);
-  SNaSubjectRestrictionType: array[0..1] of string = (
+  SNaThemeRestrictionType: array[0..1] of string = (
     SInadequate,
     SImpossible);
   SNaTeacherRestrictionType: array[0..1] of string = (
     SInadequate,
     SImpossible);
-  EColSubjectRestrictionType: array[0..1] of TColor = (
+  EColThemeRestrictionType: array[0..1] of TColor = (
     clLime,
     clRed);
   EColTeacherRestrictionType: array[0..1] of TColor = (
     clLime,
     clRed);
-  EValSubjectRestrictionType: array[0..1] of Integer = (
+  EValThemeRestrictionType: array[0..1] of Integer = (
     50,
     500);
   EValTeacherRestrictionType: array[0..1] of Integer = (
@@ -188,15 +188,15 @@ begin
         TbDay.Next;
       end;
     end;
-    with TbSubjectRestrictionType do
+    with TbThemeRestrictionType do
     begin
-      for i := Low(SNaSubjectRestrictionType) to High(SNaSubjectRestrictionType) do
+      for i := Low(SNaThemeRestrictionType) to High(SNaThemeRestrictionType) do
       begin
         Append;
         Fields[0].AsInteger := i;
-        Fields[1].AsString := SNaSubjectRestrictionType[i];
-        Fields[2].AsInteger := EColSubjectRestrictionType[i];
-        Fields[3].AsFloat := EValSubjectRestrictionType[i];
+        Fields[1].AsString := SNaThemeRestrictionType[i];
+        Fields[2].AsInteger := EColThemeRestrictionType[i];
+        Fields[3].AsFloat := EValThemeRestrictionType[i];
         Post;
       end;
     end;
@@ -221,10 +221,10 @@ procedure TSourceDataModule.PrepareLookupFields;
 var
   Field: TField;
 begin
-  Field := TStringField.Create(TbCourse);
+  Field := TStringField.Create(TbCategory);
   with Field do
   begin
-    DisplayLabel := SFlCourse_IdLevel;
+    DisplayLabel := SFlCategory_IdLevel;
     DisplayWidth := 10;
     FieldKind := fkLookup;
     FieldName := 'AbLevel';
@@ -234,12 +234,12 @@ begin
     KeyFields := 'IdLevel';
     Size := 10;
     Lookup := True;
-    DataSet := TbCourse;
+    DataSet := TbCategory;
   end;
-  Field := TStringField.Create(TbCourse);
+  Field := TStringField.Create(TbCategory);
   with Field do
   begin
-    DisplayLabel := SFlCourse_IdSpecialization;
+    DisplayLabel := SFlCategory_IdSpecialization;
     DisplayWidth := 10;
     FieldKind := fkLookup;
     FieldName := 'AbSpecialization';
@@ -249,7 +249,7 @@ begin
     KeyFields := 'IdSpecialization';
     Size := 10;
     Lookup := True;
-    DataSet := TbCourse;
+    DataSet := TbCategory;
   end;
   Field := TStringField.Create(TbClass);
   with Field do
@@ -293,32 +293,32 @@ begin
     Lookup := True;
     DataSet := TbClass;
   end;
-  Field := TStringField.Create(TbSubjectRestriction);
+  Field := TStringField.Create(TbThemeRestriction);
   with Field do
   begin
-    DisplayLabel := SFlSubjectRestriction_IdSubjectRestrictionType;
+    DisplayLabel := SFlThemeRestriction_IdThemeRestrictionType;
     DisplayWidth := 10;
     FieldKind := fkLookup;
-    FieldName := 'NaSubjectRestrictionType';
-    LookupDataSet := TbSubjectRestrictionType;
-    LookupKeyFields := 'IdSubjectRestrictionType';
-    LookupResultField := 'NaSubjectRestrictionType';
-    KeyFields := 'IdSubjectRestrictionType';
+    FieldName := 'NaThemeRestrictionType';
+    LookupDataSet := TbThemeRestrictionType;
+    LookupKeyFields := 'IdThemeRestrictionType';
+    LookupResultField := 'NaThemeRestrictionType';
+    KeyFields := 'IdThemeRestrictionType';
     Size := 10;
     Lookup := True;
-    DataSet := TbSubjectRestriction;
+    DataSet := TbThemeRestriction;
   end;
   Field := TStringField.Create(TbTimetableDetail);
   with Field do
   begin
-    DisplayLabel := SFlSubjectRestriction_IdSubject;
+    DisplayLabel := SFlThemeRestriction_IdTheme;
     DisplayWidth := 15;
     FieldKind := fkLookup;
-    FieldName := 'NaSubject';
-    LookupDataSet := TbSubject;
-    LookupKeyFields := 'IdSubject';
-    LookupResultField := 'NaSubject';
-    KeyFields := 'IdSubject';
+    FieldName := 'NaTheme';
+    LookupDataSet := TbTheme;
+    LookupKeyFields := 'IdTheme';
+    LookupResultField := 'NaTheme';
+    KeyFields := 'IdTheme';
     Size := 15;
     Lookup := True;
     DataSet := TbTimetableDetail;
@@ -386,14 +386,14 @@ begin
   Field := TStringField.Create(TbDistribution.Owner);
   with Field do
   begin
-    DisplayLabel := SFlDistribution_IdSubject;
+    DisplayLabel := SFlDistribution_IdTheme;
     DisplayWidth := 10;
     FieldKind := fkLookup;
-    FieldName := 'NaSubject';
-    LookupDataSet := SourceDataModule.TbSubject;
-    LookupKeyFields := 'IdSubject';
-    LookupResultField := 'NaSubject';
-    KeyFields := 'IdSubject';
+    FieldName := 'NaTheme';
+    LookupDataSet := SourceDataModule.TbTheme;
+    LookupKeyFields := 'IdTheme';
+    LookupResultField := 'NaTheme';
+    KeyFields := 'IdTheme';
     Size := 15;
     Lookup := True;
     DataSet := TbDistribution;
@@ -458,13 +458,13 @@ begin
   TbRoomType.FindField('IdRoomType').Visible := False;
   TbSpecialization.FindField('IdSpecialization').Visible := False;
   TbDay.FindField('IdDay').Visible := False;
-  TbSubject.FindField('IdSubject').Visible := False;
+  TbTheme.FindField('IdTheme').Visible := False;
   TbLevel.FindField('IdLevel').Visible := False;
   TbHour.FindField('IdHour').Visible := False;
-  TbCourse.FindField('IdLevel').Visible := False;
-  TbCourse.FindField('IdSpecialization').Visible := False;
+  TbCategory.FindField('IdLevel').Visible := False;
+  TbCategory.FindField('IdSpecialization').Visible := False;
   TbParallel.FindField('IdParallel').Visible := False;
-  TbSubjectRestrictionType.FindField('IdSubjectRestrictionType').Visible := False;
+  TbThemeRestrictionType.FindField('IdThemeRestrictionType').Visible := False;
   TbTimeSlot.FindField('IdDay').Visible := False;
   TbTimeSlot.FindField('IdHour').Visible := False;
   TbClass.FindField('IdLevel').Visible := False;
@@ -474,7 +474,7 @@ begin
   with TbTimetableDetail do
   begin
     FindField('IdTimetable').Visible := False;
-    FindField('IdSubject').Visible := False;
+    FindField('IdTheme').Visible := False;
     FindField('IdLevel').Visible := False;
     FindField('IdSpecialization').Visible := False;
     FindField('IdParallel').Visible := False;
@@ -484,7 +484,7 @@ begin
   TbTeacherRestrictionType.FindField('IdTeacherRestrictionType').Visible := False;
   with TbDistribution do
   begin
-    FindField('IdSubject').Visible := False;
+    FindField('IdTheme').Visible := False;
     FindField('IdLevel').Visible := False;
     FindField('IdSpecialization').Visible := False;
     FindField('IdParallel').Visible := False;
@@ -493,7 +493,7 @@ begin
   end;
   with TbAssistance do
   begin
-    FindField('IdSubject').Visible := False;
+    FindField('IdTheme').Visible := False;
     FindField('IdLevel').Visible := False;
     FindField('IdSpecialization').Visible := False;
     FindField('IdParallel').Visible := False;
@@ -501,7 +501,7 @@ begin
   end;
   with TbJoinedClass do
   begin
-    FindField('IdSubject').Visible := False;
+    FindField('IdTheme').Visible := False;
     FindField('IdLevel').Visible := False;
     FindField('IdSpecialization').Visible := False;
     FindField('IdParallel').Visible := False;
