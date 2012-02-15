@@ -511,7 +511,7 @@ inherited TimetableForm: TTimetableForm
     object ActTimetableCluster: TAction[2]
       AutoCheck = True
       Caption = 'Clusters timetables'
-      Hint = 'Timetables per classes|Timetables per classes'
+      Hint = 'Timetables per clusters|Timetables per clusters'
       ImageIndex = 2
       OnExecute = ActTimetableClusterExecute
     end
