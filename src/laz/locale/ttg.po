@@ -28,7 +28,7 @@ msgstr ""
 
 #: dsourcebaseconsts.sflcategory_idcategory
 msgctxt "dsourcebaseconsts.sflcategory_idcategory"
-msgid "Category"
+msgid "Id"
 msgstr ""
 
 #: dsourcebaseconsts.sflcategory_nacategory
@@ -127,21 +127,6 @@ msgstr ""
 #: dsourcebaseconsts.sfljoinedcluster_idtheme
 msgctxt "dsourcebaseconsts.sfljoinedcluster_idtheme"
 msgid "Theme"
-msgstr ""
-
-#: dsourcebaseconsts.sflcategory_abcategory
-msgctxt "dsourcebaseconsts.sflcategory_abcategory"
-msgid "Abbreviation"
-msgstr ""
-
-#: dsourcebaseconsts.sflcategory_idcategory
-msgctxt "dsourcebaseconsts.sflcategory_idcategory"
-msgid "Id"
-msgstr ""
-
-#: dsourcebaseconsts.sflcategory_nacategory
-msgctxt "dsourcebaseconsts.sflcategory_nacategory"
-msgid "Name"
 msgstr ""
 
 #: dsourcebaseconsts.sflparallel_idparallel
@@ -407,10 +392,6 @@ msgstr ""
 #: dsourcebaseconsts.stbroomtype
 msgctxt "dsourcebaseconsts.stbroomtype"
 msgid "Types of Room"
-msgstr ""
-
-#: dsourcebaseconsts.stbspecialization
-msgid "Specializations"
 msgstr ""
 
 #: dsourcebaseconsts.stbteacher
@@ -762,6 +743,15 @@ msgstr ""
 msgid "About|Information about this program"
 msgstr ""
 
+#: tmainform.actcategory.caption
+msgctxt "tmainform.actcategory.caption"
+msgid "Categories"
+msgstr ""
+
+#: tmainform.actcategory.hint
+msgid "Categories|Categories"
+msgstr ""
+
 #: tmainform.actchangepasswd.caption
 msgid "Change password..."
 msgstr ""
@@ -784,7 +774,7 @@ msgstr ""
 
 #: tmainform.actclass.hint
 msgctxt "TMAINFORM.ACTCLASS.HINT"
-msgid "Categories|Categories with its given groups"
+msgid "Categories|Categories with its parallels"
 msgstr ""
 
 #: tmainform.actconfigure.caption
@@ -851,15 +841,6 @@ msgstr ""
 
 #: tmainform.actlangspanish.caption
 msgid "Spanish"
-msgstr ""
-
-#: tmainform.actcategory.caption
-msgctxt "tmainform.actcategory.caption"
-msgid "Categories"
-msgstr ""
-
-#: tmainform.actcategory.hint
-msgid "Categories|Categories"
 msgstr ""
 
 #: tmainform.actmaketimetable.caption

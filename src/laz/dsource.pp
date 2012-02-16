@@ -27,8 +27,8 @@ type
     procedure PrepareLookupFields;
     procedure HideFields;
   protected
-    {procedure LoadDataSetFromStrings(const ATableName: string;
-                                     AStrings: TStrings; var APosition: Integer); override;}
+    procedure LoadDataSetFromStrings(const ATableName: string;
+                                     AStrings: TStrings; var APosition: Integer); override;
     procedure EmptyDataSet(ADataSet: TDataSet); override;
     procedure UpdateDetailFields(ADetail: TDataSet;
                                  const ADetailFields: string;
@@ -447,58 +447,68 @@ begin
   ADataSet.Refresh;
 end;
 
-{procedure TSourceDataModule.LoadDataSetFromStrings(const ATableName: string;
+procedure TSourceDataModule.LoadDataSetFromStrings(const ATableName: string;
   AStrings: TStrings; var APosition: Integer);
 var
   RecordCount: Integer;
   procedure StringsToSQL(ASQL: TStrings; var Position: Integer; RecordCount: Integer);
   var
-    s: string;
-    j, l, Pos, Limit: Integer;
-    Value, Values, Field, Fields: string;
+    FieldNames, FieldValues: string;
+    j, Pos, Limit: Integer;
+    Value, Values, Fields: string;
     ZTable: TZTable;
-    Field: TField;
+    FieldArray: TFieldArray;
   begin
     ZTable := TZTable.Create(nil);
     try
       ZTable.Connection := DbZConnection;
       ZTable.TableName := ATableName;
+      PrepareDataSetFields(ZTable);
+      FieldNames := AStrings.Strings[Position];
+      Inc(Position);
+      FieldArray := FieldNamesToFieldArray(ZTable, FieldNames);
+      Fields := '';
+      for j := 0 to High(FieldArray) do
+      begin
+        if Assigned(FieldArray[j]) then
+        begin
+          if Fields = '' then
+            Fields := FieldArray[j].FieldName
+          else
+            Fields := Fields + ',' + FieldArray[j].FieldName;
+        end;
+      end;
+      if Fields = '' then
+      begin
+        Inc(Position, RecordCount);
+      end
+      else
+      begin
+        Limit := Position + RecordCount;
+        while Position < Limit do
+        begin
+          Pos := 2;
+          FieldValues := AStrings[Position];
+          Values := '';
+          for j := 0 to High(FieldArray) do
+          begin
+            if Assigned(FieldArray[j]) then
+            begin
+              Value := ScapedToString(FieldValues, Pos);
+              if Values = '' then
+                Values := '"' + Value + '"'
+              else
+                Values := Values + ',"' + Value + '"';
+            end;
+            Inc(Pos, 3);
+          end;
+          ASQL.Add(Format('INSERT INTO %s (%s) VALUES (%s);',
+                          [ATableName, Fields, Values]));
+          Inc(Position);
+        end;
+      end;
     finally
       ZTable.Free;
-    end;
-    s := AStrings.Strings[Position];
-    l := 0;
-    Inc(Position);
-    Pos := 2;
-    while True do
-    begin
-      Field := ScapedToString(s, Pos);
-      if Field = '' then
-        break;
-      if l = 0 then
-        Fields := Field
-      else
-        Fields := Fields + ',' + Field;
-      Inc(l);
-      Inc(Pos, 3);
-    end;
-    Limit := Position + RecordCount;
-    while Position < Limit do
-    begin
-      Pos := 2;
-      s := AStrings[Position];
-      for j := 0 to l - 1 do
-      begin
-        Value := ScapedToString(s, Pos);
-        if j = 0 then
-          Values := Value
-        else
-          Values := Values + '","' + Value;
-        Inc(Pos, 3);
-      end;
-      ASQL.Add(Format('INSERT INTO %s (%s) VALUES ("%s");',
-                      [ATableName, Fields, Values]));
-      Inc(Position);
     end;
   end;
   procedure LoadTableFromStrings0;
@@ -508,7 +518,7 @@ var
     SQL := TStringList.Create;
     DbZConnection.ExecuteDirect('pragma foreign_keys=off');
     try
-      StringsToSQL(ATableName, AStrings, SQL, APosition, RecordCount);
+      StringsToSQL(SQL, APosition, RecordCount);
       DbZConnection.ExecuteDirect(SQL.Text);
     finally
       SQL.Free;
@@ -519,7 +529,7 @@ begin
   RecordCount := StrToInt(AStrings.Strings[APosition]);
   Inc(APosition);
   LoadTableFromStrings0;
-end;}
+end;
 
 procedure TSourceDataModule.EmptyTables;
 begin

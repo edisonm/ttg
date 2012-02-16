@@ -28,8 +28,8 @@ msgstr "Abreviatura"
 
 #: dsourcebaseconsts.sflcategory_idcategory
 msgctxt "dsourcebaseconsts.sflcategory_idcategory"
-msgid "Category"
-msgstr ""
+msgid "Id"
+msgstr "Codigo"
 
 #: dsourcebaseconsts.sflcategory_nacategory
 msgctxt "dsourcebaseconsts.sflcategory_nacategory"
@@ -128,21 +128,6 @@ msgstr "Paralelo unido"
 msgctxt "dsourcebaseconsts.sfljoinedcluster_idtheme"
 msgid "Theme"
 msgstr "Materia"
-
-#: dsourcebaseconsts.sflcategory_abcategory
-msgctxt "dsourcebaseconsts.sflcategory_abcategory"
-msgid "Abbreviation"
-msgstr "Abreviatura"
-
-#: dsourcebaseconsts.sflcategory_idcategory
-msgctxt "dsourcebaseconsts.sflcategory_idcategory"
-msgid "Id"
-msgstr "Codigo"
-
-#: dsourcebaseconsts.sflcategory_nacategory
-msgctxt "dsourcebaseconsts.sflcategory_nacategory"
-msgid "Name"
-msgstr "Nombre"
 
 #: dsourcebaseconsts.sflparallel_idparallel
 msgctxt "dsourcebaseconsts.sflparallel_idparallel"
@@ -408,10 +393,6 @@ msgstr "Paralelos"
 msgctxt "dsourcebaseconsts.stbroomtype"
 msgid "Types of Room"
 msgstr "Tipos de Aula"
-
-#: dsourcebaseconsts.stbspecialization
-msgid "Specializations"
-msgstr ""
 
 #: dsourcebaseconsts.stbteacher
 msgctxt "dsourcebaseconsts.stbteacher"
@@ -762,6 +743,15 @@ msgstr "Acerca de..."
 msgid "About|Information about this program"
 msgstr "Acerca de|Informacion referente a este programa"
 
+#: tmainform.actcategory.caption
+msgctxt "tmainform.actcategory.caption"
+msgid "Categories"
+msgstr "Categorias"
+
+#: tmainform.actcategory.hint
+msgid "Categories|Categories"
+msgstr "Categorias|Categorias"
+
 #: tmainform.actchangepasswd.caption
 msgid "Change password..."
 msgstr "Cambiar clave..."
@@ -784,9 +774,9 @@ msgstr ""
 
 #: tmainform.actclass.hint
 #, fuzzy
-#| msgid "Categories|Categories with its given parallels"
+#| msgid "Categories|Categories with its given groups"
 msgctxt "tmainform.actclass.hint"
-msgid "Categories|Categories with its given groups"
+msgid "Categories|Categories with its parallels"
 msgstr "Cursos|Cursos con sus respectivos paralelos"
 
 #: tmainform.actconfigure.caption
@@ -854,15 +844,6 @@ msgstr "Inglés"
 #: tmainform.actlangspanish.caption
 msgid "Spanish"
 msgstr "Español"
-
-#: tmainform.actcategory.caption
-msgctxt "tmainform.actcategory.caption"
-msgid "Categories"
-msgstr "Categorias"
-
-#: tmainform.actcategory.hint
-msgid "Categories|Categories"
-msgstr "Categorias|Categorias"
 
 #: tmainform.actmaketimetable.caption
 msgid "Make Timetables"
