@@ -9,16 +9,6 @@
 
 
 */
-CREATE TABLE IF NOT EXISTS `Level`(
-    `IdLevel` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Level Id */,
-    `NaLevel` varchar(15) NOT NULL UNIQUE /* Level Name */,
-    `AbLevel` varchar(5) UNIQUE /* Level Abbreviation */
-); /* Levels */
-CREATE TABLE IF NOT EXISTS `Specialization`(
-    `IdSpecialization` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Specialization Id */,
-    `NaSpecialization` varchar(20) NOT NULL UNIQUE /* Specialization Name */,
-    `AbSpecialization` varchar(10) NOT NULL UNIQUE /* Specialization Abbreviation */
-); /* Specializations */
 CREATE TABLE IF NOT EXISTS `Parallel`(
     `IdParallel` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Parallel Id */,
     `NaParallel` varchar(5) NOT NULL UNIQUE /* Parallel Name */
@@ -29,14 +19,8 @@ CREATE TABLE IF NOT EXISTS `Day`(
 ); /* Working Days */
 CREATE TABLE IF NOT EXISTS `Category`(
     `IdCategory` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Category Id */,
-    `IdLevel` integer NOT NULL /* Level Id */,
-    `IdSpecialization` integer NOT NULL /* Specialization Id */,
-    `NaCategory` varchar(15) /* NOT NULL UNIQUE Category Name */,
-    `AbCategory` varchar(5) /* NOT NULL UNIQUE Category Abbreviation */,
-  CONSTRAINT `LevelCategory` FOREIGN KEY (`IdLevel`)
-    REFERENCES `Level`(`IdLevel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `SpecializationCategory` FOREIGN KEY (`IdSpecialization`)
-    REFERENCES `Specialization`(`IdSpecialization`) ON UPDATE RESTRICT ON DELETE RESTRICT
+    `NaCategory` varchar(25) NOT NULL UNIQUE /* Category Name */,
+    `AbCategory` varchar(5) NOT NULL UNIQUE /* Category Abbreviation */
 ); /* Categories */
 CREATE TABLE IF NOT EXISTS `Hour`(
     `IdHour` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Hour Id */,

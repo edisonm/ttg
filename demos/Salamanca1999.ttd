@@ -35,18 +35,18 @@ Day
 Category
 12
 "IdCategory";"IdLevel";"IdSpecialization";"NaCategory";"AbCategory";
-"1";"1";"1";"";"";
-"2";"2";"1";"";"";
-"3";"3";"1";"";"";
-"4";"4";"2";"";"";
-"5";"4";"3";"";"";
-"6";"4";"4";"";"";
-"7";"5";"2";"";"";
-"8";"5";"3";"";"";
-"9";"5";"4";"";"";
-"10";"6";"2";"";"";
-"11";"6";"3";"";"";
-"12";"6";"4";"";"";
+"1";"1";"1";"Primero Basico";"1 BAS";
+"2";"2";"1";"Segundo Basico";"2 BAS";
+"3";"3";"1";"Tercero Basico";"3 BAS";
+"4";"4";"2";"Cuarto Contabilidad";"4 CON";
+"5";"4";"3";"Cuarto Secretariado";"4 SEC";
+"6";"4";"4";"Cuarto Informatica";"4 INF";
+"7";"5";"2";"Quinto Contabilidad";"5 CON";
+"8";"5";"3";"Quinto Secretariado";"5 SEC";
+"9";"5";"4";"Quinto Informatica";"5 INF";
+"10";"6";"2";"Sexto Contabilidad";"6 CON";
+"11";"6";"3";"Sexto Secretariado";"6 SEC";
+"12";"6";"4";"Sexto Informatica";"6 INF";
 Hour
 7
 "IdHour";"NaHour";"Interval";
