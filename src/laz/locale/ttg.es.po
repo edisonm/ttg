@@ -129,18 +129,18 @@ msgctxt "dsourcebaseconsts.sfljoinedcluster_idtheme"
 msgid "Theme"
 msgstr "Materia"
 
-#: dsourcebaseconsts.sfllevel_ablevel
-msgctxt "dsourcebaseconsts.sfllevel_ablevel"
+#: dsourcebaseconsts.sflcategory_abcategory
+msgctxt "dsourcebaseconsts.sflcategory_abcategory"
 msgid "Abbreviation"
 msgstr "Abreviatura"
 
-#: dsourcebaseconsts.sfllevel_idlevel
-msgctxt "dsourcebaseconsts.sfllevel_idlevel"
+#: dsourcebaseconsts.sflcategory_idcategory
+msgctxt "dsourcebaseconsts.sflcategory_idcategory"
 msgid "Id"
 msgstr "Codigo"
 
-#: dsourcebaseconsts.sfllevel_nalevel
-msgctxt "dsourcebaseconsts.sfllevel_nalevel"
+#: dsourcebaseconsts.sflcategory_nacategory
+msgctxt "dsourcebaseconsts.sflcategory_nacategory"
 msgid "Name"
 msgstr "Nombre"
 
@@ -398,11 +398,6 @@ msgstr "Horas academicas"
 msgctxt "dsourcebaseconsts.stbjoinedcluster"
 msgid "Joined Clusters"
 msgstr "Clases unidas"
-
-#: dsourcebaseconsts.stblevel
-msgctxt "dsourcebaseconsts.stblevel"
-msgid "Levels"
-msgstr "Niveles"
 
 #: dsourcebaseconsts.stbparallel
 msgctxt "dsourcebaseconsts.stbparallel"
@@ -860,14 +855,14 @@ msgstr "Inglés"
 msgid "Spanish"
 msgstr "Español"
 
-#: tmainform.actlevel.caption
-msgctxt "tmainform.actlevel.caption"
-msgid "Levels"
-msgstr "Niveles"
+#: tmainform.actcategory.caption
+msgctxt "tmainform.actcategory.caption"
+msgid "Categories"
+msgstr "Categorias"
 
-#: tmainform.actlevel.hint
-msgid "Levels|Levels"
-msgstr "Niveles|Niveles"
+#: tmainform.actcategory.hint
+msgid "Categories|Categories"
+msgstr "Categorias|Categorias"
 
 #: tmainform.actmaketimetable.caption
 msgid "Make Timetables"

@@ -23,11 +23,9 @@ uses
 
 resourcestring
 
-  STbLevel = 'Levels';
-  STbSpecialization = 'Specializations';
+  STbCategory = 'Categories';
   STbParallel = 'Parallels';
   STbDay = 'Working Days';
-  STbCategory = 'Categories';
   STbHour = 'Academic Hours';
   STbRoomType = 'Types of Room';
   STbCluster = 'Clusters';
@@ -44,9 +42,9 @@ resourcestring
   STbTimetable = 'Timetables';
   STbTimetableDetail = 'Detail of Timetables';
 
-  SFlLevel_IdLevel = 'Id';
-  SFlLevel_NaLevel = 'Name';
-  SFlLevel_AbLevel = 'Abbreviation';
+  SFlCategory_IdCategory = 'Id';
+  SFlCategory_NaCategory = 'Name';
+  SFlCategory_AbCategory = 'Abbreviation';
   SFlSpecialization_IdSpecialization = 'Id';
   SFlSpecialization_NaSpecialization = 'Name';
   SFlSpecialization_AbSpecialization = 'Abbreviation';
@@ -54,9 +52,6 @@ resourcestring
   SFlParallel_NaParallel = 'Name';
   SFlDay_IdDay = 'Id';
   SFlDay_NaDay = 'Name';
-  SFlCategory_IdCategory = 'Category';
-  SFlCategory_NaCategory = 'Name';
-  SFlCategory_AbCategory = 'Abbreviation';
   SFlHour_IdHour = 'Id';
   SFlHour_NaHour = 'Name';
   SFlHour_Interval = 'Interval';

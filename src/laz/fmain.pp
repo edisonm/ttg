@@ -37,7 +37,7 @@ type
     MITeacher: TMenuItem;
     MITheme: TMenuItem;
     MIParallel: TMenuItem;
-    MILevel: TMenuItem;
+    MICategory: TMenuItem;
     MIRoomType: TMenuItem;
     MIFile: TMenuItem;
     MISave: TMenuItem;
@@ -66,7 +66,7 @@ type
     TBPassword: TToolButton;
     TBDay: TToolButton;
     TBHour: TToolButton;
-    TBLevel: TToolButton;
+    TBCategory: TToolButton;
     TBParallel: TToolButton;
     TBTeacher: TToolButton;
     TBRoomType: TToolButton;
@@ -93,7 +93,7 @@ type
     ActExit: TAction;
     ActDay: TAction;
     ActHour: TAction;
-    ActLevel: TAction;
+    ActCategory: TAction;
     ActParallel: TAction;
     ActTeacher: TAction;
     ActRoomType: TAction;
@@ -127,7 +127,7 @@ type
     procedure ActLangSpanishExecute(Sender: TObject);
     procedure ActTeacherExecute(Sender: TObject);
     procedure ActThemeExecute(Sender: TObject);
-    procedure ActLevelExecute(Sender: TObject);
+    procedure ActCategoryExecute(Sender: TObject);
     procedure ActRoomTypeExecute(Sender: TObject);
     procedure ActParallelExecute(Sender: TObject);
     procedure ActClusterExecute(Sender: TObject);
@@ -155,7 +155,7 @@ type
     FConfigFileName: string;
     FConfigStorage: TConfigStorage;
     FDayForm,
-    FLevelForm,
+    FCategoryForm,
     FRoomTypeForm,
     FParallelForm,
     FHourForm,
@@ -274,13 +274,13 @@ begin
 				   SourceDataModule.TbTheme);
 end;
 
-procedure TMainForm.ActLevelExecute(Sender: TObject);
+procedure TMainForm.ActCategoryExecute(Sender: TObject);
 begin
    TSingleEditorForm.ToggleSingleEditor(Self,
-					FLevelForm,
+					FCategoryForm,
 					ConfigStorage,
-					ActLevel,
-					SourceDataModule.TbLevel);
+					ActCategory,
+					SourceDataModule.TbCategory);
 end;
 
 procedure TMainForm.ActRoomTypeExecute(Sender: TObject);

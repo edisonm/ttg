@@ -398,7 +398,6 @@ begin
   TbRoomType.FindField('IdRoomType').Visible := False;
   TbDay.FindField('IdDay').Visible := False;
   TbTheme.FindField('IdTheme').Visible := False;
-  TbLevel.FindField('IdLevel').Visible := False;
   TbHour.FindField('IdHour').Visible := False;
   TbCategory.FindField('IdCategory').Visible := False;
   TbParallel.FindField('IdParallel').Visible := False;

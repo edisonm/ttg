@@ -135,10 +135,10 @@ object MainForm: TMainForm
       ParentShowHint = False
       ShowHint = True
     end
-    object TBLevel: TToolButton
+    object TBCategory: TToolButton
       Left = 172
       Top = 2
-      Action = ActLevel
+      Action = ActCategory
       ParentShowHint = False
       ShowHint = True
     end
@@ -557,8 +557,8 @@ object MainForm: TMainForm
       object N2: TMenuItem
         Caption = '-'
       end
-      object MILevel: TMenuItem
-        Action = ActLevel
+      object MICategory: TMenuItem
+        Action = ActCategory
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -596,7 +596,7 @@ object MainForm: TMainForm
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00000000FF0000
           00FF000000FFFF00FF00848484FF848484FF848484FF848484FF
         }
-        OnClick = ActLevelExecute
+        OnClick = ActCategoryExecute
       end
       object MIParallel: TMenuItem
         Action = ActParallel
@@ -2078,14 +2078,14 @@ object MainForm: TMainForm
       OnExecute = ActTimeSlotExecute
       ShortCut = 49225
     end
-    object ActLevel: TAction
+    object ActCategory: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Levels'
+      Caption = 'Categories'
       HelpContext = 170
-      Hint = 'Levels|Levels'
+      Hint = 'Categories|Categories'
       ImageIndex = 7
-      OnExecute = ActLevelExecute
+      OnExecute = ActCategoryExecute
       ShortCut = 16462
     end
     object ActParallel: TAction
@@ -2103,7 +2103,7 @@ object MainForm: TMainForm
       AutoCheck = True
       Caption = 'Clusters'
       HelpContext = 200
-      Hint = 'Categories|Categories with its given groups'
+      Hint = 'Categories|Categories with its parallels'
       ImageIndex = 14
       OnExecute = ActClusterExecute
       ShortCut = 49219

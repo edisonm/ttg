@@ -1,21 +1,5 @@
 TTD 293
-20
-Level
-6
-"IdLevel";"NaLevel";"AbLevel";
-"1";"Primero";"1";
-"2";"Segundo";"2";
-"3";"Tercero";"3";
-"4";"Cuarto";"4";
-"5";"Quinto";"5";
-"6";"Sexto";"6";
-Specialization
-4
-"IdSpecialization";"NaSpecialization";"AbSpecialization";
-"1";"Basico";"BASICO";
-"2";"Contabilidad";"CONTA";
-"3";"Secretariado";"SECRE";
-"4";"Informatica";"INFO";
+18
 Parallel
 5
 "IdParallel";"NaParallel";
@@ -34,19 +18,19 @@ Day
 "6";"Viernes";
 Category
 12
-"IdCategory";"IdLevel";"IdSpecialization";"NaCategory";"AbCategory";
-"1";"1";"1";"Primero Basico";"1 BAS";
-"2";"2";"1";"Segundo Basico";"2 BAS";
-"3";"3";"1";"Tercero Basico";"3 BAS";
-"4";"4";"2";"Cuarto Contabilidad";"4 CON";
-"5";"4";"3";"Cuarto Secretariado";"4 SEC";
-"6";"4";"4";"Cuarto Informatica";"4 INF";
-"7";"5";"2";"Quinto Contabilidad";"5 CON";
-"8";"5";"3";"Quinto Secretariado";"5 SEC";
-"9";"5";"4";"Quinto Informatica";"5 INF";
-"10";"6";"2";"Sexto Contabilidad";"6 CON";
-"11";"6";"3";"Sexto Secretariado";"6 SEC";
-"12";"6";"4";"Sexto Informatica";"6 INF";
+"IdCategory";"NaCategory";"AbCategory";
+"1";"Primero Basico";"1 BAS";
+"2";"Segundo Basico";"2 BAS";
+"3";"Tercero Basico";"3 BAS";
+"4";"Cuarto Contabilidad";"4 CON";
+"5";"Cuarto Secretariado";"4 SEC";
+"6";"Cuarto Informatica";"4 INF";
+"7";"Quinto Contabilidad";"5 CON";
+"8";"Quinto Secretariado";"5 SEC";
+"9";"Quinto Informatica";"5 INF";
+"10";"Sexto Contabilidad";"6 CON";
+"11";"Sexto Secretariado";"6 SEC";
+"12";"Sexto Informatica";"6 INF";
 Hour
 7
 "IdHour";"NaHour";"Interval";

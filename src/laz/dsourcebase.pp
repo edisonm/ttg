@@ -27,16 +27,12 @@ uses
 type
   TSourceBaseDataModule = class(TBaseDataModule)
     DbZConnection: TZConnection;
-    TbLevel: TZTable;
-    DSLevel: TDataSource;
-    TbSpecialization: TZTable;
-    DSSpecialization: TDataSource;
+    TbCategory: TZTable;
+    DSCategory: TDataSource;
     TbParallel: TZTable;
     DSParallel: TDataSource;
     TbDay: TZTable;
     DSDay: TDataSource;
-    TbCategory: TZTable;
-    DSCategory: TDataSource;
     TbHour: TZTable;
     DSHour: TDataSource;
     TbRoomType: TZTable;
@@ -86,34 +82,30 @@ procedure TSourceBaseDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
   OnDestroy := DataModuleDestroy;
-  SetLength(FTables, 20);
-  Tables[0] := TbLevel;
-  Tables[1] := TbSpecialization;
-  Tables[2] := TbParallel;
-  Tables[3] := TbDay;
-  Tables[4] := TbCategory;
-  Tables[5] := TbHour;
-  Tables[6] := TbRoomType;
-  Tables[7] := TbCluster;
-  Tables[8] := TbTheme;
-  Tables[9] := TbTeacher;
-  Tables[10] := TbDistribution;
-  Tables[11] := TbJoinedCluster;
-  Tables[12] := TbThemeRestrictionType;
-  Tables[13] := TbTimeSlot;
-  Tables[14] := TbAssistance;
-  Tables[15] := TbTeacherRestrictionType;
-  Tables[16] := TbTeacherRestriction;
-  Tables[17] := TbThemeRestriction;
-  Tables[18] := TbTimetable;
-  Tables[19] := TbTimetableDetail;
+  SetLength(FTables, 18);
+  Tables[0] := TbCategory;
+  Tables[1] := TbParallel;
+  Tables[2] := TbDay;
+  Tables[3] := TbHour;
+  Tables[4] := TbRoomType;
+  Tables[5] := TbCluster;
+  Tables[6] := TbTheme;
+  Tables[7] := TbTeacher;
+  Tables[8] := TbDistribution;
+  Tables[9] := TbJoinedCluster;
+  Tables[10] := TbThemeRestrictionType;
+  Tables[11] := TbTimeSlot;
+  Tables[12] := TbAssistance;
+  Tables[13] := TbTeacherRestrictionType;
+  Tables[14] := TbTeacherRestriction;
+  Tables[15] := TbThemeRestriction;
+  Tables[16] := TbTimetable;
+  Tables[17] := TbTimetableDetail;
   with DataSetNameList do
   begin
-    Add('TbLevel=Level');
-    Add('TbSpecialization=Specialization');
+    Add('TbCategory=Category');
     Add('TbParallel=Parallel');
     Add('TbDay=Day');
-    Add('TbCategory=Category');
     Add('TbHour=Hour');
     Add('TbRoomType=RoomType');
     Add('TbCluster=Cluster');
@@ -132,19 +124,13 @@ begin
   end;
   with FieldCaptionList do
   begin
-    Add('TbLevel.IdLevel=' + SFlLevel_IdLevel);
-    Add('TbLevel.NaLevel=' + SFlLevel_NaLevel);
-    Add('TbLevel.AbLevel=' + SFlLevel_AbLevel);
-    Add('TbSpecialization.IdSpecialization=' + SFlSpecialization_IdSpecialization);
-    Add('TbSpecialization.NaSpecialization=' + SFlSpecialization_NaSpecialization);
-    Add('TbSpecialization.AbSpecialization=' + SFlSpecialization_AbSpecialization);
+    Add('TbCategory.IdCategory=' + SFlCategory_IdCategory);
+    Add('TbCategory.NaCategory=' + SFlCategory_NaCategory);
+    Add('TbCategory.AbCategory=' + SFlCategory_AbCategory);
     Add('TbParallel.IdParallel=' + SFlParallel_IdParallel);
     Add('TbParallel.NaParallel=' + SFlParallel_NaParallel);
     Add('TbDay.IdDay=' + SFlDay_IdDay);
     Add('TbDay.NaDay=' + SFlDay_NaDay);
-    Add('TbCategory.IdCategory=' + SFlCategory_IdCategory);
-    Add('TbCategory.NaCategory=' + SFlCategory_NaCategory);
-    Add('TbCategory.AbCategory=' + SFlCategory_AbCategory);
     Add('TbHour.IdHour=' + SFlHour_IdHour);
     Add('TbHour.NaHour=' + SFlHour_NaHour);
     Add('TbHour.Interval=' + SFlHour_Interval);
@@ -208,11 +194,9 @@ begin
   end;
   with DataSetDescList do
   begin
-    Add('TbLevel=' + STbLevel);
-    Add('TbSpecialization=' + STbSpecialization);
+    Add('TbCategory=' + STbCategory);
     Add('TbParallel=' + STbParallel);
     Add('TbDay=' + STbDay);
-    Add('TbCategory=' + STbCategory);
     Add('TbHour=' + STbHour);
     Add('TbRoomType=' + STbRoomType);
     Add('TbCluster=' + STbCluster);

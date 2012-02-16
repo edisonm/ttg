@@ -3,30 +3,17 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
   OnDestroy = nil
   object DbZConnection: TZConnection
   end
-  object TbLevel: TZTable
+  object TbCategory: TZTable
     Connection = DbZConnection
-    TableName = 'Level'
-    IndexFieldNames = 'IdLevel'
+    TableName = 'Category'
+    IndexFieldNames = 'IdCategory'
     Left = 48
     Top = 48
   end
-  object DSLevel: TDataSource
-    DataSet = TbLevel
+  object DSCategory: TDataSource
+    DataSet = TbCategory
     Left = 56
     Top = 40
-  end
-  object TbSpecialization: TZTable
-    Tag = 1
-    Connection = DbZConnection
-    TableName = 'Specialization'
-    IndexFieldNames = 'IdSpecialization'
-    Left = 144
-    Top = 60
-  end
-  object DSSpecialization: TDataSource
-    DataSet = TbSpecialization
-    Left = 152
-    Top = 52
   end
   object TbParallel: TZTable
     Tag = 2
@@ -53,19 +40,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     DataSet = TbDay
     Left = 344
     Top = 52
-  end
-  object TbCategory: TZTable
-    Tag = 4
-    Connection = DbZConnection
-    TableName = 'Category'
-    IndexFieldNames = 'IdCategory'
-    Left = 432
-    Top = 48
-  end
-  object DSCategory: TDataSource
-    DataSet = TbCategory
-    Left = 440
-    Top = 40
   end
   object TbHour: TZTable
     Tag = 5

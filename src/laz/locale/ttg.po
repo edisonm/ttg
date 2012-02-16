@@ -129,18 +129,18 @@ msgctxt "dsourcebaseconsts.sfljoinedcluster_idtheme"
 msgid "Theme"
 msgstr ""
 
-#: dsourcebaseconsts.sfllevel_ablevel
-msgctxt "dsourcebaseconsts.sfllevel_ablevel"
+#: dsourcebaseconsts.sflcategory_abcategory
+msgctxt "dsourcebaseconsts.sflcategory_abcategory"
 msgid "Abbreviation"
 msgstr ""
 
-#: dsourcebaseconsts.sfllevel_idlevel
-msgctxt "dsourcebaseconsts.sfllevel_idlevel"
+#: dsourcebaseconsts.sflcategory_idcategory
+msgctxt "dsourcebaseconsts.sflcategory_idcategory"
 msgid "Id"
 msgstr ""
 
-#: dsourcebaseconsts.sfllevel_nalevel
-msgctxt "dsourcebaseconsts.sfllevel_nalevel"
+#: dsourcebaseconsts.sflcategory_nacategory
+msgctxt "dsourcebaseconsts.sflcategory_nacategory"
 msgid "Name"
 msgstr ""
 
@@ -397,11 +397,6 @@ msgstr ""
 #: dsourcebaseconsts.stbjoinedcluster
 msgctxt "dsourcebaseconsts.stbjoinedcluster"
 msgid "Joined Clusters"
-msgstr ""
-
-#: dsourcebaseconsts.stblevel
-msgctxt "dsourcebaseconsts.stblevel"
-msgid "Levels"
 msgstr ""
 
 #: dsourcebaseconsts.stbparallel
@@ -858,13 +853,13 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
-#: tmainform.actlevel.caption
-msgctxt "tmainform.actlevel.caption"
-msgid "Levels"
+#: tmainform.actcategory.caption
+msgctxt "tmainform.actcategory.caption"
+msgid "Categories"
 msgstr ""
 
-#: tmainform.actlevel.hint
-msgid "Levels|Levels"
+#: tmainform.actcategory.hint
+msgid "Categories|Categories"
 msgstr ""
 
 #: tmainform.actmaketimetable.caption
