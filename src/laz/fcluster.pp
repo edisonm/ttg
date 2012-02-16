@@ -110,21 +110,20 @@ end;
 procedure TClusterForm.DataSourceDataChange(Sender: TObject;
   Field: TField);
 var
-  IdLevel, IdSpecialization: Integer;
+  IdCategory: Integer;
 begin
   inherited;
   with CheckListBox do if not PostingData and Assigned(DataSourceList.DataSet) then
   begin
-    IdLevel := DataSource.DataSet.FindField('IdLevel').AsInteger;
-    IdSpecialization := DataSource.DataSet.FindField('IdSpecialization').AsInteger;
+    IdCategory := DataSource.DataSet.FindField('IdCategory').AsInteger;
     with DataSourceList.DataSet do
     begin
       First;
       while not Eof do
       begin
         Checked[Items.IndexOf(FieldNaParallel.AsString)] :=
-          DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdParallel',
-            VarArrayOf([IdLevel, IdSpecialization, FieldIdParallel.AsInteger]), []);
+          DataSourceDetail.DataSet.Locate('IdCategory;IdParallel',
+            VarArrayOf([IdCategory, FieldIdParallel.AsInteger]), []);
         Next;
       end;
     end;
@@ -143,13 +142,12 @@ end;
 
 procedure TClusterForm.CheckListBoxExit(Sender: TObject);
 var
-  IdLevel, IdSpecialization, IdParallel: Integer;
+  IdCategory, IdParallel: Integer;
 begin
   inherited;
   with CheckListBox do if Assigned(DataSourceList.DataSet) then
   begin
-    IdLevel := DataSource.DataSet.FindField('IdLevel').AsInteger;
-    IdSpecialization := DataSource.DataSet.FindField('IdSpecialization').AsInteger;
+    IdCategory := DataSource.DataSet.FindField('IdCategory').AsInteger;
     with DataSourceList.DataSet do
     try
       PostingData := True;
@@ -157,8 +155,8 @@ begin
       while not Eof do
       begin
         IdParallel := FieldIdParallel.AsInteger;
-        if DataSourceDetail.DataSet.Locate('IdLevel;IdSpecialization;IdParallel',
-          VarArrayOf([IdLevel, IdSpecialization, IdParallel]), []) then
+        if DataSourceDetail.DataSet.Locate('IdCategory;IdParallel',
+          VarArrayOf([IdCategory, IdParallel]), []) then
         begin
           if not Checked[Items.IndexOf(FieldNaParallel.AsString)] then
             DataSourceDetail.DataSet.Delete;
@@ -168,8 +166,7 @@ begin
           if Checked[Items.IndexOf(FieldNaParallel.AsString)] then
           begin
             DataSourceDetail.DataSet.Append;
-            DataSourceDetail.DataSet.FindField('IdLevel').Value := IdLevel;
-            DataSourceDetail.DataSet.FindField('IdSpecialization').Value := IdSpecialization;
+            DataSourceDetail.DataSet.FindField('IdCategory').Value := IdCategory;
             DataSourceDetail.DataSet.FindField('IdParallel').Value := IdParallel;
             DataSourceDetail.DataSet.Post;
           end;

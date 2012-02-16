@@ -303,8 +303,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       'select'
       ' IdTimetable,'
       ' IdTeacher,'
-      ' Distribution.IdLevel,'
-      ' Distribution.IdSpecialization,'
+      ' Distribution.IdCategory,'
       ' Distribution.IdParallel,'
       ' IdHour,'
       ' IdDay,'
@@ -313,8 +312,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       'from'
       ' TimetableDetail inner join Distribution on'
       ' (TimetableDetail.IdTheme = Distribution.IdTheme)'
-      ' and (TimetableDetail.IdLevel = Distribution.IdLevel)'
-      ' and (TimetableDetail.IdSpecialization = Distribution.IdSpecialization)'
+      ' and (TimetableDetail.IdCategory = Distribution.IdCategory)'
       ' and (TimetableDetail.IdParallel = Distribution.IdParallel)'
       'where IdTimetable=:IdTimetable'
       ' and IdTeacher=:IdTeacher'
@@ -322,8 +320,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       'select'
       ' IdTimetable,'
       ' Assistance.IdTeacher as IdTeacher,'
-      ' Distribution.IdLevel,'
-      ' Distribution.IdSpecialization,'
+      ' Distribution.IdCategory,'
       ' Distribution.IdParallel,'
       ' IdHour,'
       ' IdDay,'
@@ -332,13 +329,11 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       'from'
       ' Assistance inner join Distribution on'
       '  Assistance.IdTheme = Distribution.IdTheme'
-      '  and Assistance.IdLevel = Distribution.IdLevel'
-      '  and Assistance.IdSpecialization = Distribution.IdSpecialization'
+      '  and Assistance.IdCategory = Distribution.IdCategory'
       '  and Assistance.IdParallel = Distribution.IdParallel'
       ' inner join TimetableDetail on'
       '  TimetableDetail.IdTheme = Distribution.IdTheme'
-      '  and TimetableDetail.IdLevel = Distribution.IdLevel'
-      '  and TimetableDetail.IdSpecialization = Distribution.IdSpecialization'
+      '  and TimetableDetail.IdCategory = Distribution.IdCategory'
       '  and TimetableDetail.IdParallel = Distribution.IdParallel'
       'where IdTimetable=:IdTimetable'
       ' and Assistance.IdTeacher=:IdTeacher'
@@ -391,22 +386,11 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       ReadOnly = False
       Required = True
     end
-    object QuTimetableTeacherIdLevel: TLongintField
+    object QuTimetableTeacherIdCategory: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdLevel'
+      FieldName = 'IdCategory'
       Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Visible = False
-    end
-    object QuTimetableTeacherIdSpecialization: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdSpecialization'
-      Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -468,35 +452,20 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = True
       Visible = False
     end
-    object QuTimetableTeacherAbLevel: TStringField
+    object QuTimetableTeacherAbCategory: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'AbLevel'
+      FieldName = 'AbCategory'
       Index = 9
-      KeyFields = 'IdLevel'
+      KeyFields = 'IdCategory'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbLevel
-      LookupKeyFields = 'IdLevel'
-      LookupResultField = 'AbLevel'
+      LookupDataSet = SourceDataModule.TbCategory
+      LookupKeyFields = 'IdCategory'
+      LookupResultField = 'AbCategory'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 5
-    end
-    object QuTimetableTeacherAbSpecialization: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'AbSpecialization'
-      Index = 10
-      KeyFields = 'IdSpecialization'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbSpecialization
-      LookupKeyFields = 'IdSpecialization'
-      LookupResultField = 'AbSpecialization'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 10
     end
     object QuTimetableTeacherNaParallel: TStringField
       DisplayWidth = 5

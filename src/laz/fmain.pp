@@ -36,7 +36,6 @@ type
     MILangEnglish: TMenuItem;
     MITeacher: TMenuItem;
     MITheme: TMenuItem;
-    MISpecialization: TMenuItem;
     MIParallel: TMenuItem;
     MILevel: TMenuItem;
     MIRoomType: TMenuItem;
@@ -67,7 +66,6 @@ type
     TBPassword: TToolButton;
     TBDay: TToolButton;
     TBHour: TToolButton;
-    TBSpecialization: TToolButton;
     TBLevel: TToolButton;
     TBParallel: TToolButton;
     TBTeacher: TToolButton;
@@ -95,7 +93,6 @@ type
     ActExit: TAction;
     ActDay: TAction;
     ActHour: TAction;
-    ActSpecialization: TAction;
     ActLevel: TAction;
     ActParallel: TAction;
     ActTeacher: TAction;
@@ -130,7 +127,6 @@ type
     procedure ActLangSpanishExecute(Sender: TObject);
     procedure ActTeacherExecute(Sender: TObject);
     procedure ActThemeExecute(Sender: TObject);
-    procedure ActSpecializationExecute(Sender: TObject);
     procedure ActLevelExecute(Sender: TObject);
     procedure ActRoomTypeExecute(Sender: TObject);
     procedure ActParallelExecute(Sender: TObject);
@@ -163,7 +159,6 @@ type
     FRoomTypeForm,
     FParallelForm,
     FHourForm,
-    FSpecializationForm: TSingleEditorForm;
     FTimeSlotForm: TCrossManyToManyEditor0Form;
     FProgress: Integer;
     FRelProgress: Integer;
@@ -277,15 +272,6 @@ begin
 				   ConfigStorage,
 				   ActTheme,
 				   SourceDataModule.TbTheme);
-end;
-
-procedure TMainForm.ActSpecializationExecute(Sender: TObject);
-begin
-   TSingleEditorForm.ToggleSingleEditor(Self,
-					FSpecializationForm,
-					ConfigStorage,
-					ActSpecialization,
-					SourceDataModule.TbSpecialization);
 end;
 
 procedure TMainForm.ActLevelExecute(Sender: TObject);

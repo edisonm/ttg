@@ -312,23 +312,19 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       '  TimetableDetail.IdTheme AS IdTheme,'
       '  TimetableDetail.IdDay AS IdDay,'
       '  TimetableDetail.IdHour AS IdHour,'
-      '  Level.IdLevel AS IdLevel,'
-      '  Specialization.IdSpecialization AS IdSpecialization,'
+      '  Category.IdCategory AS IdCategory,'
       '  Parallel.IdParallel AS IdParallel,'
       '  0 AS isJoinedCluster,'
       '  NaTheme,'
-      '  AbLevel,'
-      '  AbSpecialization,'
+      '  AbCategory,'
       '  NaParallel'
       'FROM'
       '  TimetableDetail'
       '  INNER JOIN Distribution'
       '   ON TimetableDetail.IdTheme=Distribution.IdTheme'
-      '  AND TimetableDetail.IdLevel=Distribution.IdLevel'
-      '  AND TimetableDetail.IdSpecialization=Distribution.IdSpecialization'
+      '  AND TimetableDetail.IdCategory=Distribution.IdCategory'
       '  AND TimetableDetail.IdParallel=Distribution.IdParallel'
-      '  INNER JOIN Level ON TimetableDetail.IdLevel=Level.IdLevel'
-      '  INNER JOIN Specialization ON TimetableDetail.IdSpecialization=Specialization.IdSpecialization'
+      '  INNER JOIN Category ON TimetableDetail.IdCategory=Category.IdCategory'
       '  INNER JOIN Parallel ON Distribution.IdParallel=Parallel.IdParallel'
       '  INNER JOIN Theme ON Distribution.IdTheme=Theme.IdTheme'
       'WHERE Distribution.IdRoomType=:IdRoomType'
@@ -340,36 +336,30 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       '  TimetableDetail.IdTheme AS IdTheme,'
       '  TimetableDetail.IdDay AS IdDay,'
       '  TimetableDetail.IdHour AS IdHour,'
-      '  JoinedCluster.IdLevel1 AS IdLevel,'
-      '  JoinedCluster.IdSpecialization1 AS IdSpecialization,'
+      '  JoinedCluster.IdCategory1 AS IdCategory,'
       '  JoinedCluster.IdParallel1 AS IdParallel,'
       '  1 AS isJoinedCluster,'
       '  NaTheme,'
-      '  AbLevel,'
-      '  AbSpecialization,'
+      '  AbCategory,'
       '  NaParallel'
       'FROM'
       '  TimetableDetail'
       '  INNER JOIN Distribution'
       '   ON TimetableDetail.IdTheme=Distribution.IdTheme'
-      '  AND TimetableDetail.IdLevel=Distribution.IdLevel'
-      '  AND TimetableDetail.IdSpecialization=Distribution.IdSpecialization'
+      '  AND TimetableDetail.IdCategory=Distribution.IdCategory'
       '  AND TimetableDetail.IdParallel=Distribution.IdParallel'
       '  INNER JOIN Theme ON Distribution.IdTheme=Theme.IdTheme'
       '  INNER JOIN JoinedCluster'
       '   ON Distribution.IdTheme=JoinedCluster.IdTheme'
-      '  AND Distribution.IdLevel=JoinedCluster.IdLevel'
-      '  AND Distribution.IdSpecialization=JoinedCluster.IdSpecialization'
+      '  AND Distribution.IdCategory=JoinedCluster.IdCategory'
       '  AND Distribution.IdParallel=JoinedCluster.IdParallel'
-      '  INNER JOIN Level ON JoinedCluster.IdLevel1=Level.IdLevel'
-      '  INNER JOIN Specialization ON JoinedCluster.IdSpecialization1=Specialization.IdSpecialization'
+      '  INNER JOIN Category ON JoinedCluster.IdCategory1=Category.IdCategory'
       '  INNER JOIN Parallel ON JoinedCluster.IdParallel1=Parallel.IdParallel'
       'WHERE Distribution.IdRoomType=:IdRoomType'
       '  AND TimetableDetail.IdTimetable=:IdTimetable'
       'ORDER BY IdDay,'
       '  IdHour,'
-      '  IdLevel,'
-      '  IdSpecialization,'
+      '  IdCategory,'
       '  IdParallel,'
       '  NaTheme'
     )
@@ -455,22 +445,11 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       Required = True
       Visible = False
     end
-    object QuTimetableRoomTypeIdLevel: TLongintField
+    object QuTimetableRoomTypeIdCategory: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdLevel'
+      FieldName = 'IdCategory'
       Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Visible = False
-    end
-    object QuTimetableRoomTypeIdSpecialization: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdSpecialization'
-      Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -499,27 +478,16 @@ inherited TimetableRoomTypeForm: TTimetableRoomTypeForm
       Required = False
       Size = 15
     end
-    object QuTimetableRoomTypeAbLevel: TStringField
+    object QuTimetableRoomTypeAbCategory: TStringField
       DisplayWidth = 5
       FieldKind = fkData
-      FieldName = 'AbLevel'
+      FieldName = 'AbCategory'
       Index = 9
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 5
-    end
-    object QuTimetableRoomTypeAbSpecialization: TStringField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'AbSpecialization'
-      Index = 10
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 10
     end
     object QuTimetableRoomTypeNaParallel: TStringField
       DisplayWidth = 5

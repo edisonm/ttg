@@ -31,22 +31,18 @@ type
     QuClashRoomNaDay: TStringField;
     QuClashRoomNaHour: TStringField;
     QuClashRoomDetail: TZQuery;
-    QuClashRoomDetailIdLevel: TLongintField;
-    QuClashRoomDetailIdSpecialization: TLongintField;
+    QuClashRoomDetailIdCategory: TLongintField;
     QuClashRoomDetailIdParallel: TLongintField;
     QuClashRoomDetailNaTheme: TStringField;
-    QuClashRoomDetailAbLevel: TStringField;
-    QuClashRoomDetailAbSpecialization: TStringField;
+    QuClashRoomDetailAbCategory: TStringField;
     QuClashRoomDetailNaParallel: TStringField;
     DSClashRoom: TDataSource;
     QuClashTeacherDetail: TZQuery;
     QuClashTeacherDetailIdTeacher: TLongintField;
-    QuClashTeacherDetailIdLevel: TLongintField;
-    QuClashTeacherDetailIdSpecialization: TLongintField;
+    QuClashTeacherDetailIdCategory: TLongintField;
     QuClashTeacherDetailIdParallel: TLongintField;
     QuClashTeacherDetailIdTheme: TLongintField;
-    QuClashTeacherDetailAbLevel: TStringField;
-    QuClashTeacherDetailAbSpecialization: TStringField;
+    QuClashTeacherDetailAbCategory: TStringField;
     QuClashTeacherDetailNaParallel: TStringField;
     QuClashTeacherDetailNaTheme: TStringField;
     QuClashTeacher: TZQuery;
@@ -64,25 +60,21 @@ type
     QuTimetableDetailThemeRestrictionIdDay: TLongintField;
     QuTimetableDetailThemeRestrictionIdHour: TLongintField;
     QuTimetableDetailThemeRestrictionIdThemeRestrictionType: TLongintField;
-    QuTimetableDetailThemeRestrictionIdLevel: TLongintField;
-    QuTimetableDetailThemeRestrictionIdSpecialization: TLongintField;
+    QuTimetableDetailThemeRestrictionIdCategory: TLongintField;
     QuTimetableDetailThemeRestrictionIdParallel: TLongintField;
     QuTimetableDetailThemeRestrictionNaDay: TStringField;
     QuTimetableDetailThemeRestrictionNaHour: TStringField;
     QuTimetableDetailThemeRestrictionNaThemeRestrictionType: TStringField;
-    QuTimetableDetailThemeRestrictionAbLevel: TStringField;
-    QuTimetableDetailThemeRestrictionAbSpecialization: TStringField;
+    QuTimetableDetailThemeRestrictionAbCategory: TStringField;
     QuTimetableDetailThemeRestrictionNaParallel: TStringField;
     QuTimetableDetailTeacherRestriction: TZQuery;
     QuTimetableDetailTeacherRestrictionIdDay: TLongintField;
     QuTimetableDetailTeacherRestrictionIdHour: TLongintField;
     QuTimetableDetailTeacherRestrictionIdTeacherRestrictionType: TLongintField;
-    QuTimetableDetailTeacherRestrictionIdLevel: TLongintField;
-    QuTimetableDetailTeacherRestrictionIdSpecialization: TLongintField;
+    QuTimetableDetailTeacherRestrictionIdCategory: TLongintField;
     QuTimetableDetailTeacherRestrictionIdParallel: TLongintField;
     QuTimetableDetailTeacherRestrictionNaTeacherRestrictionType: TStringField;
-    QuTimetableDetailTeacherRestrictionNaLevel: TStringField;
-    QuTimetableDetailTeacherRestrictionNaSpecialization: TStringField;
+    QuTimetableDetailTeacherRestrictionNaCategory: TStringField;
     QuTimetableDetailTeacherRestrictionNaParallel: TStringField;
     QuTimetableDetailTeacherRestrictionNaDay: TStringField;
     QuTimetableDetailTeacherRestrictionNaHour: TStringField;
@@ -90,14 +82,12 @@ type
     dbmSummary: TDBMemo;
     BtThemeCutDay: TToolButton;
     QuThemeCutDay: TZQuery;
-    QuThemeCutDayIdLevel: TLongintField;
-    QuThemeCutDayIdSpecialization: TLongintField;
+    QuThemeCutDayIdCategory: TLongintField;
     QuThemeCutDayIdParallel: TLongintField;
     QuThemeCutDayIdDay: TLongintField;
     QuThemeCutDayIdHour: TLongintField;
     QuThemeCutDayIdTheme: TLongintField;
-    QuThemeCutDayAbLevel: TStringField;
-    QuThemeCutDayAbSpecialization: TStringField;
+    QuThemeCutDayAbCategory: TStringField;
     QuThemeCutDayNaParallel: TStringField;
     QuThemeCutDayNaTheme: TStringField;
     QuThemeCutDayNaDay: TStringField;
@@ -113,24 +103,20 @@ type
     QuThemeCutHourNaDay: TStringField;
     QuThemeCutHourNaHour: TStringField;
     QuClashThemeDetailIdTheme: TLongintField;
-    QuClashThemeDetailIdLevel: TLongintField;
-    QuClashThemeDetailIdSpecialization: TLongintField;
+    QuClashThemeDetailIdCategory: TLongintField;
     QuClashThemeDetailIdParallel: TLongintField;
     QuClashThemeDetailIdDay: TLongintField;
     QuClashThemeDetailIdHour: TLongintField;
-    QuClashThemeDetailAbLevel: TStringField;
-    QuClashThemeDetailAbSpecialization: TStringField;
+    QuClashThemeDetailAbCategory: TStringField;
     QuClashThemeDetailNaParallel: TStringField;
     QuClashThemeDetailNaDay: TStringField;
     QuClashThemeDetailNaHour: TStringField;
-    QuThemeCutHourDetailIdLevel: TLongintField;
-    QuThemeCutHourDetailIdSpecialization: TLongintField;
+    QuThemeCutHourDetailIdCategory: TLongintField;
     QuThemeCutHourDetailIdParallel: TLongintField;
     QuThemeCutHourDetailIdDay: TLongintField;
     QuThemeCutHourDetailIdHour0: TLongintField;
     QuThemeCutHourDetailIdTheme: TLongintField;
-    QuThemeCutHourDetailAbLevel: TStringField;
-    QuThemeCutHourDetailAbSpecialization: TStringField;
+    QuThemeCutHourDetailAbCategory: TStringField;
     QuThemeCutHourDetailNaParallel: TStringField;
     QuThemeCutHourDetailNaDay: TStringField;
     QuThemeCutHourDetailNaHour: TStringField;
@@ -382,28 +368,20 @@ begin
   QuClashRoomNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuClashRoomNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuClashRoomDetailNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
-  QuClashRoomDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
-  QuClashRoomDetailAbSpecialization.DisplayLabel
-    := SFlTimetableDetail_IdSpecialization;
+  QuClashRoomDetailAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
   QuClashRoomDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuClashTeacherClashes.DisplayLabel := SClashes;
   QuClashTeacherLnTeacher.DisplayLabel := SFlTeacher_LnTeacher;
   QuClashTeacherNaTeacher.DisplayLabel := SFlTeacher_NaTeacher;
   QuClashTeacherNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuClashTeacherNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuClashTeacherDetailIdSpecialization.DisplayLabel
-    := SFlTimetableDetail_IdSpecialization;
   QuClashTeacherDetailIdParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuClashTeacherDetailIdTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
-  QuClashTeacherDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
-  QuClashTeacherDetailAbSpecialization.DisplayLabel
-    := SFlTimetableDetail_IdSpecialization;
+  QuClashTeacherDetailAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
   QuClashTeacherDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuClashTeacherDetailNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
   QuClashThemeNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
-  QuClashThemeDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
-  QuClashThemeDetailAbSpecialization.DisplayLabel
-    := SFlTimetableDetail_IdSpecialization;
+  QuClashThemeDetailAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
   QuClashThemeDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuClashThemeDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuClashThemeDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
@@ -415,10 +393,8 @@ begin
     := SFlTimetableDetail_IdDay;
   QuTimetableDetailThemeRestrictionNaHour.DisplayLabel
     := SFlTimetableDetail_IdHour;
-  QuTimetableDetailThemeRestrictionAbLevel.DisplayLabel
-    := SFlTimetableDetail_IdLevel;
-  QuTimetableDetailThemeRestrictionAbSpecialization.DisplayLabel
-    := SFlTimetableDetail_IdSpecialization;
+  QuTimetableDetailThemeRestrictionAbCategory.DisplayLabel
+    := SFlTimetableDetail_IdCategory;
   QuTimetableDetailThemeRestrictionNaParallel.DisplayLabel
     := SFlTimetableDetail_IdParallel;
   QuTimetableDetailTeacherRestrictionNaDay.DisplayLabel
@@ -427,25 +403,19 @@ begin
     := SFlTeacherRestriction_IdTeacherRestrictionType;
   QuTimetableDetailTeacherRestrictionNaHour.DisplayLabel
     := SFlTimetableDetail_IdHour;
-  QuTimetableDetailTeacherRestrictionNaLevel.DisplayLabel
-    := SFlTimetableDetail_IdLevel;
-  QuTimetableDetailTeacherRestrictionNaSpecialization.DisplayLabel
-    := SFlTimetableDetail_IdSpecialization;
+  QuTimetableDetailTeacherRestrictionNaCategory.DisplayLabel
+    := SFlTimetableDetail_IdCategory;
   QuTimetableDetailTeacherRestrictionNaParallel.DisplayLabel
     := SFlTimetableDetail_IdParallel;
   QuThemeCutDayIdTimetable.DisplayLabel := SFlTimetableDetail_IdTimeTable;
-  QuThemeCutDayAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
-  QuThemeCutDayAbSpecialization.DisplayLabel
-    := SFlTimetableDetail_IdSpecialization;
+  QuThemeCutDayAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
   QuThemeCutDayNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuThemeCutDayNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuThemeCutDayNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuThemeCutDayNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
   QuThemeCutHourNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuThemeCutHourNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuThemeCutHourDetailAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
-  QuThemeCutHourDetailAbSpecialization.DisplayLabel
-    := SFlTimetableDetail_IdSpecialization;
+  QuThemeCutHourDetailAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
   QuThemeCutHourDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuThemeCutHourDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuThemeCutHourDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;

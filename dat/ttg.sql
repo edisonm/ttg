@@ -28,9 +28,11 @@ CREATE TABLE IF NOT EXISTS `Day`(
     `NaDay` varchar(10) NOT NULL UNIQUE /* Name of Day */
 ); /* Working Days */
 CREATE TABLE IF NOT EXISTS `Category`(
+    `IdCategory` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Category Id */,
     `IdLevel` integer NOT NULL /* Level Id */,
     `IdSpecialization` integer NOT NULL /* Specialization Id */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdLevel`,`IdSpecialization`),
+    `NaCategory` varchar(15) /* NOT NULL UNIQUE Category Name */,
+    `AbCategory` varchar(5) /* NOT NULL UNIQUE Category Abbreviation */,
   CONSTRAINT `LevelCategory` FOREIGN KEY (`IdLevel`)
     REFERENCES `Level`(`IdLevel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `SpecializationCategory` FOREIGN KEY (`IdSpecialization`)
@@ -48,12 +50,11 @@ CREATE TABLE IF NOT EXISTS `RoomType`(
     `Number` integer NOT NULL /* Number of Rooms */
 ); /* Types of Room */
 CREATE TABLE IF NOT EXISTS `Cluster`(
-    `IdLevel` integer NOT NULL /* Level */,
-    `IdSpecialization` integer NOT NULL /* Specialization */,
+    `IdCategory` INTEGER NOT NULL /* Category */,
     `IdParallel` integer NOT NULL /* Parallel */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdLevel`,`IdSpecialization`,`IdParallel`),
-  CONSTRAINT `CategoryCluster` FOREIGN KEY (`IdLevel`,`IdSpecialization`)
-    REFERENCES `Category`(`IdLevel`,`IdSpecialization`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdCategory`,`IdParallel`),
+  CONSTRAINT `CategoryCluster` FOREIGN KEY (`IdCategory`)
+    REFERENCES `Category`(`IdCategory`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `ParallelCluster` FOREIGN KEY (`IdParallel`)
     REFERENCES `Parallel`(`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Clusters */
@@ -71,16 +72,15 @@ CREATE TABLE IF NOT EXISTS `Teacher`(
 ); /* Teachers */
 CREATE TABLE IF NOT EXISTS `Distribution`(
     `IdTheme` integer NOT NULL /* Theme Id */,
-    `IdLevel` integer NOT NULL /* Level Id */,
-    `IdSpecialization` integer NOT NULL /* Specialization Id */,
+    `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` integer NOT NULL /* Parallel Id */,
     `IdTeacher` integer NOT NULL /* Teacher Id */,
     `IdRoomType` integer NOT NULL /* Room Type Id */,
     `RoomCount` integer /* Number of classrooms needed */,
     `Composition` varchar(40) NOT NULL /* Composition of the Slots for the Theme */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`),
-  CONSTRAINT `ClusterDistribution` FOREIGN KEY (`IdLevel`,`IdSpecialization`,`IdParallel`)
-    REFERENCES `Cluster`(`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`),
+  CONSTRAINT `ClusterDistribution` FOREIGN KEY (`IdCategory`,`IdParallel`)
+    REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `RoomTypeDistribution` FOREIGN KEY (`IdRoomType`)
     REFERENCES `RoomType`(`IdRoomType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `ThemeDistribution` FOREIGN KEY (`IdTheme`)
@@ -90,17 +90,15 @@ CREATE TABLE IF NOT EXISTS `Distribution`(
 ); /* Distribution of Workload */
 CREATE TABLE IF NOT EXISTS `JoinedCluster`(
     `IdTheme` integer NOT NULL /* Theme Id */,
-    `IdLevel` integer NOT NULL /* Level Id */,
-    `IdSpecialization` integer NOT NULL /* Specialization Id */,
+    `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` integer NOT NULL /* Parallel Id */,
-    `IdLevel1` integer NOT NULL /* Level Id of Joined Cluster */,
-    `IdSpecialization1` integer NOT NULL /* Specialization Id of Joined Cluster */,
+    `IdCategory1` INTEGER NOT NULL /* Category Id of Joined Cluster */,
     `IdParallel1` integer NOT NULL /* Parallel Id of Joined Cluster */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`,`IdLevel1`,`IdSpecialization1`,`IdParallel1`),
-  CONSTRAINT `ClusterJoinedCluster` FOREIGN KEY (`IdLevel1`,`IdSpecialization1`,`IdParallel1`)
-    REFERENCES `Cluster`(`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `DistributionJoinedCluster` FOREIGN KEY (`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`)
-    REFERENCES `Distribution`(`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`,`IdCategory1`,`IdParallel1`),
+  CONSTRAINT `ClusterJoinedCluster` FOREIGN KEY (`IdCategory1`,`IdParallel1`)
+    REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `DistributionJoinedCluster` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
+    REFERENCES `Distribution`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE
 ); /* Joined Clusters */
 CREATE TABLE IF NOT EXISTS `ThemeRestrictionType`(
     `IdThemeRestrictionType` integer NOT NULL PRIMARY KEY /* Theme Restriction Type Id */,
@@ -119,13 +117,12 @@ CREATE TABLE IF NOT EXISTS `TimeSlot`(
 ); /* Time Slots */
 CREATE TABLE IF NOT EXISTS `Assistance`(
     `IdTheme` integer NOT NULL /* Theme Id */,
-    `IdLevel` integer NOT NULL /* Level Id */,
-    `IdSpecialization` integer NOT NULL /* Specialization Id */,
+    `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` integer NOT NULL /* Parallel Id */,
     `IdTeacher` integer NOT NULL /* Teacher Id */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`,`IdTeacher`),
-  CONSTRAINT `DistributionAssistance` FOREIGN KEY (`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`)
-    REFERENCES `Distribution`(`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`,`IdTeacher`),
+  CONSTRAINT `DistributionAssistance` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
+    REFERENCES `Distribution`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT `TeacherAssistance` FOREIGN KEY (`IdTeacher`)
     REFERENCES `Teacher`(`IdTeacher`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Assistances */
@@ -170,16 +167,15 @@ CREATE TABLE IF NOT EXISTS `Timetable`(
 CREATE TABLE IF NOT EXISTS `TimetableDetail`(
     `IdTimetable` integer NOT NULL /* Timetable Id */,
     `IdTheme` integer NOT NULL /* Theme Id */,
-    `IdLevel` integer NOT NULL /* Level Id */,
-    `IdSpecialization` integer NOT NULL /* Specialization Id */,
+    `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` integer NOT NULL /* Parallel Id */,
     `IdDay` integer NOT NULL /* Day Id */,
     `IdHour` integer NOT NULL /* Hour Id */,
     `Session` integer NOT NULL /* Internal Number */,
-  CONSTRAINT `ixRestrictionTheme` UNIQUE(`IdTimetable`,`IdLevel`,`IdSpecialization`,`IdParallel`,`IdDay`,`IdHour`),
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTimetable`,`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`,`IdDay`,`IdHour`),
-  CONSTRAINT `DistributionTimetableDetail` FOREIGN KEY (`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`)
-    REFERENCES `Distribution`(`IdTheme`,`IdLevel`,`IdSpecialization`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `ixRestrictionTheme` UNIQUE(`IdTimetable`,`IdCategory`,`IdParallel`,`IdDay`,`IdHour`),
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTimetable`,`IdTheme`,`IdCategory`,`IdParallel`,`IdDay`,`IdHour`),
+  CONSTRAINT `DistributionTimetableDetail` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
+    REFERENCES `Distribution`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `TimeSlotTimetableDetail` FOREIGN KEY (`IdDay`,`IdHour`)
     REFERENCES `TimeSlot`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `TimetableTimetableDetail` FOREIGN KEY (`IdTimetable`)

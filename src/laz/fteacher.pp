@@ -156,11 +156,11 @@ begin
     TbDistribution.MasterFields := 'IdTeacher';
     TbDistribution.LinkedFields := 'IdTeacher';
     TbDistribution.MasterSource := DSTeacher;
-    TbAssistance.MasterFields := 'IdTheme;IdLevel;IdSpecialization;IdParallel';
-    TbAssistance.LinkedFields := 'IdTheme;IdLevel;IdSpecialization;IdParallel';
+    TbAssistance.MasterFields := 'IdTheme;IdCategory;IdParallel';
+    TbAssistance.LinkedFields := 'IdTheme;IdCategory;IdParallel';
     TbAssistance.MasterSource := SourceDataModule.DSDistribution;
-    TbJoinedCluster.MasterFields := 'IdTheme;IdLevel;IdSpecialization;IdParallel';
-    TbJoinedCluster.LinkedFields := 'IdTheme;IdLevel;IdSpecialization;IdParallel';
+    TbJoinedCluster.MasterFields := 'IdTheme;IdCategory;IdParallel';
+    TbJoinedCluster.LinkedFields := 'IdTheme;IdCategory;IdParallel';
     TbJoinedCluster.MasterSource := SourceDataModule.DSDistribution;
     {TbAssistance.Close;
     QuTeacher.Close;

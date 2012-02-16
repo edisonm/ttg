@@ -55,26 +55,19 @@ inherited SourceDataModule: TSourceDataModule
   object QuCluster: TZReadOnlyQuery[43]
     Connection = DbZConnection
     SQL.Strings = (
-      'SELECT Cluster.IdLevel, Cluster.IdSpecialization, Cluster.IdParallel,'
-      ' AbLevel || " " || AbSpecialization || " " || NaParallel AS NameCluster'
+      'SELECT Cluster.IdCategory, Cluster.IdParallel,'
+      ' AbCategory || " " || NaParallel AS NameCluster'
       'FROM'
-      ' Cluster INNER JOIN Level ON Cluster.IdLevel=Level.IdLevel'
-      ' INNER JOIN Specialization ON Cluster.IdSpecialization=Specialization.IdSpecialization'
+      ' Cluster INNER JOIN Category ON Cluster.IdCategory=Category.IdCategory'
       ' INNER JOIN Parallel ON Cluster.IdParallel = Parallel.IdParallel'
       'WHERE'
-      ' Cluster.IdLevel<>:IdLevel OR'
-      ' Cluster.IdSpecialization<>:IdSpecialization OR'
+      ' Cluster.IdCategory<>:IdCategory OR'
       ' Cluster.IdParallel<>:IdParallel'
     )
     Params = <    
       item
         DataType = ftInteger
-        Name = 'IdLevel'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdSpecialization'
+        Name = 'IdCategory'
         ParamType = ptUnknown
       end    
       item
@@ -83,19 +76,14 @@ inherited SourceDataModule: TSourceDataModule
         ParamType = ptUnknown
       end>
     DataSource = DSDistribution
-    MasterFields = 'IdLevel,IdSpecialization,IdParallel'
-    LinkedFields = 'IdLevel;IdSpecialization;IdParallel'
+    MasterFields = 'IdCategory,IdParallel'
+    LinkedFields = 'IdCategory;IdParallel'
     left = 552
     top = 248
     ParamData = <    
       item
         DataType = ftInteger
-        Name = 'IdLevel'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdSpecialization'
+        Name = 'IdCategory'
         ParamType = ptUnknown
       end    
       item

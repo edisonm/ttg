@@ -27,8 +27,8 @@ type
     procedure PrepareLookupFields;
     procedure HideFields;
   protected
-    procedure LoadDataSetFromStrings(const ATableName: string;
-                                     AStrings: TStrings; var APosition: Integer); override;
+    {procedure LoadDataSetFromStrings(const ATableName: string;
+                                     AStrings: TStrings; var APosition: Integer); override;}
     procedure EmptyDataSet(ADataSet: TDataSet); override;
     procedure UpdateDetailFields(ADetail: TDataSet;
                                  const ADetailFields: string;
@@ -69,8 +69,7 @@ begin
     if CompositionToDuration(s) <= 0 then
       raise Exception.CreateFmt(SInvalidComposition, [s]);
     with FindField('IdTheme') do DefaultExpression := AsString;
-    with FindField('IdLevel') do DefaultExpression := AsString;
-    with FindField('IdSpecialization') do DefaultExpression := AsString;
+    with FindField('IdCategory') do DefaultExpression := AsString;
     with FindField('IdParallel') do DefaultExpression := AsString;
     with FindField('IdRoomType') do DefaultExpression := AsString;
   end;
@@ -221,61 +220,17 @@ procedure TSourceDataModule.PrepareLookupFields;
 var
   Field: TField;
 begin
-  Field := TStringField.Create(TbCategory);
-  with Field do
-  begin
-    DisplayLabel := SFlCategory_IdLevel;
-    DisplayWidth := 10;
-    FieldKind := fkLookup;
-    FieldName := 'AbLevel';
-    LookupDataSet := TbLevel;
-    LookupKeyFields := 'IdLevel';
-    LookupResultField := 'AbLevel';
-    KeyFields := 'IdLevel';
-    Size := 10;
-    Lookup := True;
-    DataSet := TbCategory;
-  end;
-  Field := TStringField.Create(TbCategory);
-  with Field do
-  begin
-    DisplayLabel := SFlCategory_IdSpecialization;
-    DisplayWidth := 10;
-    FieldKind := fkLookup;
-    FieldName := 'AbSpecialization';
-    LookupDataSet := TbSpecialization;
-    LookupKeyFields := 'IdSpecialization';
-    LookupResultField := 'AbSpecialization';
-    KeyFields := 'IdSpecialization';
-    Size := 10;
-    Lookup := True;
-    DataSet := TbCategory;
-  end;
   Field := TStringField.Create(TbCluster);
   with Field do
   begin
-    DisplayLabel := SFlCluster_IdLevel;
+    DisplayLabel := SFlCluster_IdCategory;
     FieldKind := fkLookup;
-    FieldName := 'AbLevel';
-    LookupDataSet := TbLevel;
-    LookupKeyFields := 'IdLevel';
-    LookupResultField := 'AbLevel';
-    KeyFields := 'IdLevel';
+    FieldName := 'AbCategory';
+    LookupDataSet := TbCategory;
+    LookupKeyFields := 'IdCategory';
+    LookupResultField := 'AbCategory';
+    KeyFields := 'IdCategory';
     Size := 5;
-    Lookup := True;
-    DataSet := TbCluster;
-  end;
-  Field := TStringField.Create(TbCluster);
-  with Field do
-  begin
-    DisplayLabel := SFlCluster_IdSpecialization;
-    FieldKind := fkLookup;
-    FieldName := 'AbSpecialization';
-    LookupDataSet := TbSpecialization;
-    LookupKeyFields := 'IdSpecialization';
-    LookupResultField := 'AbSpecialization';
-    KeyFields := 'IdSpecialization';
-    Size := 10;
     Lookup := True;
     DataSet := TbCluster;
   end;
@@ -341,30 +296,15 @@ begin
   Field := TStringField.Create(TbDistribution.Owner);
   with Field do
   begin
-    DisplayLabel := SFlDistribution_IdLevel;
+    DisplayLabel := SFlDistribution_IdCategory;
     DisplayWidth := 4;
     FieldKind := fkLookup;
-    FieldName := 'AbLevel';
-    LookupDataSet := SourceDataModule.TbLevel;
-    LookupKeyFields := 'IdLevel';
-    LookupResultField := 'AbLevel';
-    KeyFields := 'IdLevel';
+    FieldName := 'AbCategory';
+    LookupDataSet := SourceDataModule.TbCategory;
+    LookupKeyFields := 'IdCategory';
+    LookupResultField := 'AbCategory';
+    KeyFields := 'IdCategory';
     Size := 5;
-    Lookup := True;
-    DataSet := TbDistribution;
-  end;
-  Field := TStringField.Create(TbDistribution.Owner);
-  with Field do
-  begin
-    DisplayLabel := SFlDistribution_IdSpecialization;
-    DisplayWidth := 4;
-    FieldKind := fkLookup;
-    FieldName := 'AbSpecialization';
-    LookupDataSet := SourceDataModule.TbSpecialization;
-    LookupKeyFields := 'IdSpecialization';
-    LookupResultField := 'AbSpecialization';
-    KeyFields := 'IdSpecialization';
-    Size := 10;
     Lookup := True;
     DataSet := TbDistribution;
   end;
@@ -444,9 +384,9 @@ begin
     FieldKind := fkLookup;
     FieldName := 'NameCluster';
     LookupDataSet := SourceDataModule.QuCluster;
-    LookupKeyFields := 'IdLevel;IdSpecialization;IdParallel';
+    LookupKeyFields := 'IdCategory;IdParallel';
     LookupResultField := 'NameCluster';
-    KeyFields := 'IdLevel1;IdSpecialization1;IdParallel1';
+    KeyFields := 'IdCategory;IdParallel1';
     Size := 5;
     Lookup := True;
     DataSet := TbJoinedCluster;
@@ -456,27 +396,23 @@ end;
 procedure TSourceDataModule.HideFields;
 begin
   TbRoomType.FindField('IdRoomType').Visible := False;
-  TbSpecialization.FindField('IdSpecialization').Visible := False;
   TbDay.FindField('IdDay').Visible := False;
   TbTheme.FindField('IdTheme').Visible := False;
   TbLevel.FindField('IdLevel').Visible := False;
   TbHour.FindField('IdHour').Visible := False;
-  TbCategory.FindField('IdLevel').Visible := False;
-  TbCategory.FindField('IdSpecialization').Visible := False;
+  TbCategory.FindField('IdCategory').Visible := False;
   TbParallel.FindField('IdParallel').Visible := False;
   TbThemeRestrictionType.FindField('IdThemeRestrictionType').Visible := False;
   TbTimeSlot.FindField('IdDay').Visible := False;
   TbTimeSlot.FindField('IdHour').Visible := False;
-  TbCluster.FindField('IdLevel').Visible := False;
-  TbCluster.FindField('IdSpecialization').Visible := False;
+  TbCluster.FindField('IdCategory').Visible := False;
   TbCluster.FindField('IdParallel').Visible := False;
   TbTeacher.FindField('IdTeacher').Visible := False;
   with TbTimetableDetail do
   begin
     FindField('IdTimetable').Visible := False;
     FindField('IdTheme').Visible := False;
-    FindField('IdLevel').Visible := False;
-    FindField('IdSpecialization').Visible := False;
+    FindField('IdCategory').Visible := False;
     FindField('IdParallel').Visible := False;
     FindField('IdDay').Visible := False;
     FindField('IdHour').Visible := False;
@@ -485,28 +421,23 @@ begin
   with TbDistribution do
   begin
     FindField('IdTheme').Visible := False;
-    FindField('IdLevel').Visible := False;
-    FindField('IdSpecialization').Visible := False;
-    FindField('IdParallel').Visible := False;
+    FindField('IdCategory').Visible := False;
     FindField('IdTeacher').Visible := False;
     FindField('IdRoomType').Visible := False;
   end;
   with TbAssistance do
   begin
     FindField('IdTheme').Visible := False;
-    FindField('IdLevel').Visible := False;
-    FindField('IdSpecialization').Visible := False;
+    FindField('IdCategory').Visible := False;
     FindField('IdParallel').Visible := False;
     FindField('IdTeacher').Visible := False;
   end;
   with TbJoinedCluster do
   begin
     FindField('IdTheme').Visible := False;
-    FindField('IdLevel').Visible := False;
-    FindField('IdSpecialization').Visible := False;
+    FindField('IdCategory').Visible := False;
     FindField('IdParallel').Visible := False;
-    FindField('IdLevel1').Visible := False;
-    FindField('IdSpecialization1').Visible := False;
+    FindField('IdCategory1').Visible := False;
     FindField('IdParallel1').Visible := False;
   end;
 end;
@@ -517,70 +448,79 @@ begin
   ADataSet.Refresh;
 end;
 
-procedure StringsToSQL(const ATableName: string;
-  AStrings, ASQL: TStrings; var Position: Integer; RecordCount: Integer);
-var
-  s: string;
-  j, l, Pos, Limit: Integer;
-  Value, Values, Field, Fields: string;
-begin
-  s := AStrings.Strings[Position];
-  l := 0;
-  Inc(Position);
-  Pos := 2;
-  while True do
-  begin
-    Field := ScapedToString(s, Pos);
-    if Field = '' then
-      break;
-    if l = 0 then
-      Fields := Field
-    else
-      Fields := Fields + ',' + Field;
-    Inc(l);
-    Inc(Pos, 3);
-  end;
-  Limit := Position + RecordCount;
-  while Position < Limit do
-  begin
-    Pos := 2;
-    s := AStrings[Position];
-    for j := 0 to l - 1 do
-    begin
-      Value := ScapedToString(s, Pos);
-      if j = 0 then
-        Values := Value
-      else
-        Values := Values + '","' + Value;
-      Inc(Pos, 3);
-    end;
-    ASQL.Add(Format('INSERT INTO %s (%s) VALUES ("%s");',
-                    [ATableName, Fields, Values]));
-    Inc(Position);
-  end;
-end;
-
-procedure TSourceDataModule.LoadDataSetFromStrings(const ATableName: string;
+{procedure TSourceDataModule.LoadDataSetFromStrings(const ATableName: string;
   AStrings: TStrings; var APosition: Integer);
 var
   RecordCount: Integer;
+  procedure StringsToSQL(ASQL: TStrings; var Position: Integer; RecordCount: Integer);
+  var
+    s: string;
+    j, l, Pos, Limit: Integer;
+    Value, Values, Field, Fields: string;
+    ZTable: TZTable;
+    Field: TField;
+  begin
+    ZTable := TZTable.Create(nil);
+    try
+      ZTable.Connection := DbZConnection;
+      ZTable.TableName := ATableName;
+    finally
+      ZTable.Free;
+    end;
+    s := AStrings.Strings[Position];
+    l := 0;
+    Inc(Position);
+    Pos := 2;
+    while True do
+    begin
+      Field := ScapedToString(s, Pos);
+      if Field = '' then
+        break;
+      if l = 0 then
+        Fields := Field
+      else
+        Fields := Fields + ',' + Field;
+      Inc(l);
+      Inc(Pos, 3);
+    end;
+    Limit := Position + RecordCount;
+    while Position < Limit do
+    begin
+      Pos := 2;
+      s := AStrings[Position];
+      for j := 0 to l - 1 do
+      begin
+        Value := ScapedToString(s, Pos);
+        if j = 0 then
+          Values := Value
+        else
+          Values := Values + '","' + Value;
+        Inc(Pos, 3);
+      end;
+      ASQL.Add(Format('INSERT INTO %s (%s) VALUES ("%s");',
+                      [ATableName, Fields, Values]));
+      Inc(Position);
+    end;
+  end;
   procedure LoadTableFromStrings0;
   var
     SQL: TStrings;
   begin
     SQL := TStringList.Create;
+    DbZConnection.ExecuteDirect('pragma foreign_keys=off');
     try
       StringsToSQL(ATableName, AStrings, SQL, APosition, RecordCount);
       DbZConnection.ExecuteDirect(SQL.Text);
     finally
       SQL.Free;
-      end;
+      DbZConnection.ExecuteDirect('pragma foreign_keys=off');
+    end;
   end;
 begin
   RecordCount := StrToInt(AStrings.Strings[APosition]);
   Inc(APosition);
   LoadTableFromStrings0;
-end;
+end;}
 
 procedure TSourceDataModule.EmptyTables;
 begin

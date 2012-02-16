@@ -19,14 +19,12 @@ type
     QuTimetableRoomType: TZQuery;
     CBShowRoomType: TComboBox;
     QuTimetableRoomTypeIdTheme: TLongintField;
-    QuTimetableRoomTypeIdLevel: TLongintField;
-    QuTimetableRoomTypeIdSpecialization: TLongintField;
+    QuTimetableRoomTypeIdCategory: TLongintField;
     QuTimetableRoomTypeIdParallel: TLongintField;
     QuTimetableRoomTypeIdHour: TLongintField;
     QuTimetableRoomTypeIdDay: TLongintField;
     QuTimetableRoomTypeNaTheme: TStringField;
-    QuTimetableRoomTypeAbLevel: TStringField;
-    QuTimetableRoomTypeAbSpecialization: TStringField;
+    QuTimetableRoomTypeAbCategory: TStringField;
     QuTimetableRoomTypeNaParallel: TStringField;
     QuTimetableRoomTypeName: TStringField;
     DSRoomType: TDataSource;
@@ -90,9 +88,7 @@ procedure TTimetableRoomTypeForm.FormCreate(Sender: TObject);
 begin
   inherited;
   QuTimetableRoomTypeNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
-  QuTimetableRoomTypeAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
-  QuTimetableRoomTypeAbSpecialization.DisplayLabel
-    := SFlTimetableDetail_IdSpecialization;
+  QuTimetableRoomTypeAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
   QuTimetableRoomTypeNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuTimetableRoomTypeName.DisplayLabel := SFlRoomType_NaRoomType;
   QuRoomTypeAbRoomType.DisplayLabel := SFlDistribution_IdRoomType;

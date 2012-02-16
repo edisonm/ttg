@@ -18,8 +18,7 @@ type
   TTimetableTeacherForm = class(TCrossManyToManyEditor1Form)
     QuTimetableTeacher: TZQuery;
     CBShowTeacher: TComboBox;
-    QuTimetableTeacherIdLevel: TLongintField;
-    QuTimetableTeacherIdSpecialization: TLongintField;
+    QuTimetableTeacherIdCategory: TLongintField;
     QuTimetableTeacherIdParallel: TLongintField;
     QuTimetableTeacherIdHour: TLongintField;
     QuTimetableTeacherIdDay: TLongintField;
@@ -27,8 +26,7 @@ type
     QuTimetableTeacherIsAssistance: TLongintField;
     QuTimetableTeacherNaTheme: TStringField;
     QuTimetableTeacherName: TStringField;
-    QuTimetableTeacherAbLevel: TStringField;
-    QuTimetableTeacherAbSpecialization: TStringField;
+    QuTimetableTeacherAbCategory: TStringField;
     QuTimetableTeacherNaParallel: TStringField;
     DSTeacher: TDataSource;
     DBNavigator: TDBNavigator;
@@ -82,19 +80,17 @@ begin
   QuTeacher.Open;
   CBShowTeacher.Items.Clear;
   QuTimetableTeacher.Open;
-  QuTimetableTeacherAbSpecialization.DisplayLabel := SFlTimetableDetail_IdSpecialization;
   QuTimetableTeacherNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuTimetableTeacherNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
   QuTimetableTeacherName.DisplayLabel := SFlTeacher_NaTeacher;
   QuTeacherLnTeacher.DisplayLabel := SFlTeacher_LnTeacher;
   QuTeacherNaTeacher.DisplayLabel := SFlTeacher_NaTeacher;
-  QuTimetableTeacherIdLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
-  QuTimetableTeacherIdSpecialization.DisplayLabel := SFlTimetableDetail_IdSpecialization;
+  QuTimetableTeacherIdCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
   QuTimetableTeacherIdParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuTimetableTeacherIdHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuTimetableTeacherIdDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuTimetableTeacherIdTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
-  QuTimetableTeacherAbLevel.DisplayLabel := SFlTimetableDetail_IdLevel;
+  QuTimetableTeacherAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
   LoadNames(MasterDataModule.StringsShowTeacher, CBShowTeacher.Items);
   CBShowTeacher.Text := CBShowTeacher.Items[0];
 end;

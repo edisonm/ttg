@@ -39,7 +39,7 @@ type
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
   public
     { Public declarations }
-    procedure IntercambiarTimeSlots(AIdTimetable, AIdLevel, AIdSpecialization,
+    procedure IntercambiarTimeSlots(AIdTimetable, AIdCategory,
       AIdParallel, AIdDay1, AIdHour1, AIdDay2, AIdHour2: Integer);
     function PerformAllChecks(AMainStrings, ASubStrings: TStrings;
       AMaxTeacherWorkLoad: Integer): Boolean;
@@ -368,7 +368,7 @@ var
   begin
     with SourceDataModule, TbCluster do
     begin
-      s := '%s %s %s; %d';
+      s := '%s %s; %d';
       HaveInternalProblems := False;
       try
         Open;
@@ -381,9 +381,8 @@ var
         while not Eof do
         begin
           TbDistribution.Filter :=
-            Format('IdLevel=%d and IdSpecialization=%d and IdParallel=%d', [
-            TbCluster.FindField('IdLevel').AsInteger,
-              TbCluster.FindField('IdSpecialization').AsInteger,
+            Format('IdCategory=%d and IdParallel=%d', [
+              TbCluster.FindField('IdCategory').AsInteger,
               TbCluster.FindField('IdParallel').AsInteger]);
           TbDistribution.Filtered := true;
           TbDistribution.First;
@@ -402,20 +401,17 @@ var
                 vMainMin := AMainStrings.Count;
                 AMainStrings.Add(SClusterWorkLoadHead);
               end;
-              AMainStrings.Add(Format(s, [TbCluster.FindField('AbLevel').Value,
-                TbCluster.FindField('AbSpecialization').Value,
+              AMainStrings.Add(Format(s, [TbCluster.FindField('AbCategory').Value,
                 TbCluster.FindField('NaParallel').Value, t]));
               HaveProblems := True;
               HaveInternalProblems := True;
             end
             else
-              ASubStrings.Add(Format(s, [TbCluster.FindField('AbLevel').Value,
-                TbCluster.FindField('AbSpecialization').Value,
+              ASubStrings.Add(Format(s, [TbCluster.FindField('AbCategory').Value,
                 TbCluster.FindField('NaParallel').Value, t]));
           except
             ASubStrings.Add(Format('%s: %s %s %s, %s %s',
-              [SProblems, TbCluster.FindField('AbLevel').AsString,
-              TbCluster.FindField('AbSpecialization').AsString,
+              [SProblems, TbCluster.FindField('AbCategory').AsString,
               TbCluster.FindField('NaParallel').AsString,
               STbTheme,
               TbDistribution.FindField('NaTheme').AsString]));
@@ -522,9 +518,8 @@ begin
   LoadIniStrings(AStrings, APosition);
 end;
 
-procedure TMasterDataModule.IntercambiarTimeSlots(AIdTimetable, AIdLevel,
-  AIdSpecialization, AIdParallel, AIdDay1, AIdHour1, AIdDay2,
-  AIdHour2: Integer);
+procedure TMasterDataModule.IntercambiarTimeSlots(AIdTimetable, AIdCategory,
+  AIdParallel, AIdDay1, AIdHour1, AIdDay2, AIdHour2: Integer);
 var
   Locate1, Locate2: Boolean;
   Bookmark1, Bookmark2: TBookmark;
@@ -533,15 +528,13 @@ begin
   with SourceDataModule do
   begin
     Locate1 := TbTimetableDetail.Locate(
-      'IdTimetable;IdLevel;IdSpecialization;IdParallel;IdDay;IdHour',
-      VarArrayOf([AIdTimetable, AIdLevel, AIdSpecialization, AIdParallel,
-      AIdDay1, AIdHour1]), []);
+      'IdTimetable;IdCategory;IdParallel;IdDay;IdHour',
+      VarArrayOf([AIdTimetable, AIdCategory, AIdParallel, AIdDay1, AIdHour1]), []);
     Bookmark1 := TbTimetableDetail.GetBookmark;
     try
       Locate2 := TbTimetableDetail.Locate(
-        'IdTimetable;IdLevel;IdSpecialization;IdParallel;IdDay;IdHour',
-        VarArrayOf([AIdTimetable, AIdLevel, AIdSpecialization, AIdParallel,
-        AIdDay2, AIdHour2]), []);
+        'IdTimetable;IdCategory;IdParallel;IdDay;IdHour',
+        VarArrayOf([AIdTimetable, AIdCategory, AIdParallel, AIdDay2, AIdHour2]), []);
       Bookmark2 := TbTimetableDetail.GetBookmark;
       try
         if Locate1 and Locate2 then
@@ -603,22 +596,14 @@ begin
   FConfigStorage := TTTGConfig.Create(Self);
   with FStringsShowRoomType do
   begin
-    add('Level_Cluster=AbLevel;NaParallel');
-    add('Level_Cluster_Theme=AbLevel;NaParallel;NaTheme');
-    add('Level_Cluster_Specialization=AbLevel;NaParallel;AbSpecialization');
-    add('Level_Cluster_Specialization_Theme=AbLevel;NaParallel;AbSpecialization;NaTheme');
-    add('Level_Specialization_Cluster=AbLevel;AbSpecialization;NaParallel');
-    add('Level_Specialization_Cluster_Theme=AbLevel;AbSpecialization;NaParallel;NaTheme');
+    add('Cluster=AbCategory;NaParallel');
+    add('Cluster_Theme=AbCategory;NaParallel;NaTheme');
     add('Theme=NaTheme');
   end;
   with FStringsShowTeacher do
   begin
-    add('Level_Cluster=AbLevel;NaParallel');
-    add('Level_Cluster_Theme=AbLevel;NaParallel;NaTheme');
-    add('Level_Cluster_Specialization=AbLevel;NaParallel;AbSpecialization');
-    add('Level_Cluster_Specialization_Theme=AbLevel;NaParallel;AbSpecialization;NaTheme');
-    add('Level_Specialization_Cluster=AbLevel;AbSpecialization;NaParallel');
-    add('Level_Specialization_Cluster_Theme=AbLevel;AbSpecialization;NaParallel;NaTheme');
+    add('Cluster=AbCategory;NaParallel');
+    add('Cluster_Theme=AbCategory;NaParallel;NaTheme');
     add('Theme=NaTheme');
   end;
   with FStringsShowCluster do

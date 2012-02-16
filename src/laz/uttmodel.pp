@@ -50,25 +50,25 @@ type
       FThemeRestrictionToThemeRestrictionType, FTeacherRestrictionToTeacher,
       FTeacherRestrictionToTimeSlot, FTeacherRestrictionToTeacherRestrictionType,
       FDistributionToRoomType, FDistributionToRoomCount, FClusterToCategory,
-      FClusterToLevel, FClusterToParallel, FDistributionToCluster, FClusterToSpecialization,
-      FClusterToSessionCount, FThemeRestrictionTypeToValue, FTeacherRestrictionTypeToValue,
+      FClusterToParallel, FDistributionToCluster, FClusterToSessionCount,
+      FThemeRestrictionTypeToValue, FTeacherRestrictionTypeToValue,
       FThemeRestrictionToValue, FTeacherRestrictionToValue: TDynamicIntegerArray;
     FSessionToDuration: TSessionArray;
-    FDayHourToTimeSlot, FLevelSpecializationToCategory, FCategoryParallelToCluster,
+    FDayHourToTimeSlot, FCategoryParallelToCluster,
       FClusterThemeToTeacher, FClusterThemeToDistribution, FClusterThemeCount,
       FTimetableDetailPattern, FDistributionToSessions, FClusterAssistanceToDistribution,
       FClusterAssistanceToTeacher, FTeacherTimeSlotToTeacherRestrictionType,
       FClusterJoinedClusterToDistribution, FClusterJoinedClusterToCluster,
       FThemeTimeSlotToThemeRestrictionType: TDynamicIntegerArrayArray;
     FThemeCount, FThemeRestrictionTypeCount, FTeacherRestrictionTypeCount,
-      FClusterCount, FDayCount, FHourCount, FTimeSlotCount, FTeacherCount, FCategoryCount,
-      FLevelCount, FSpecializationCount, FRoomTypeCount, FDistributionCount,
+      FClusterCount, FDayCount, FHourCount, FTimeSlotCount, FTeacherCount,
+      FCategoryCount, FRoomTypeCount, FDistributionCount,
       FAssistanceCount, FJoinedClusterCount: Integer;
     FParallelToIdParallel, FThemeToIdTheme, FDayToIdDay, FHourToIdHour,
-      FLevelToIdLevel, FSpecializationToIdSpecialization: TDynamicIntegerArray;
-    FIdLevelToLevel, FIdSpecializationToSpecialization, FIdParallelToParallel, FIdDayToDay,
+      FCategoryToIdCategory: TDynamicIntegerArray;
+    FIdCategoryToCategory, FIdParallelToParallel, FIdDayToDay,
       FIdHourToHour: TDynamicIntegerArray;
-    FMinIdLevel, FMinIdSpecialization, FMinIdParallel, FMinIdDay, FMinIdHour: Integer;
+    FMinIdCategory, FMinIdParallel, FMinIdDay, FMinIdHour: Integer;
     FSessionNumberDouble: Integer;
     function GetDayAMaxTimeSlot(Day: Integer): Integer;
   protected
@@ -359,33 +359,6 @@ var
     end;
   end;
   *)
-  procedure LoadCategory;
-  var
-    Category, Level, Specialization: Integer;
-    VFieldLevel, VFieldSpecialization: TField;
-  begin
-    with SourceDataModule.TbCategory do
-    begin
-      IndexFieldNames := 'IdLevel;IdSpecialization';
-      First;
-      FCategoryCount := RecordCount;
-      SetLength(FLevelSpecializationToCategory, FLevelCount, FSpecializationCount);
-      for Level := 0 to FLevelCount - 1 do
-        for Specialization := 0 to FSpecializationCount - 1 do
-          FLevelSpecializationToCategory[Level, Specialization] := -1;
-      VFieldLevel := FindField('IdLevel');
-      VFieldSpecialization := FindField('IdSpecialization');
-      for Category := 0 to FCategoryCount - 1 do
-      begin
-        Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
-        Specialization := FIdSpecializationToSpecialization
-          [VFieldSpecialization.AsInteger - FMinIdSpecialization];
-        FLevelSpecializationToCategory[Level, Specialization] := Category;
-        Next;
-      end;
-      First;
-    end;
-  end;
   procedure LoadTimeSlot;
   var
     TimeSlot, Day, Hour: Integer;
@@ -423,35 +396,29 @@ var
   end;
   procedure LoadCluster;
   var
-    VCluster, Category, Parallel, Level, Specialization: Integer;
-    VFieldLevel, VFieldSpecialization, VFieldParallel: TField;
+    VCluster, Category, Parallel: Integer;
+    VFieldCategory, VFieldParallel: TField;
   begin
     with SourceDataModule.TbCluster do
     begin
-      IndexFieldNames := 'IdLevel;IdSpecialization;IdParallel';
+      IndexFieldNames := 'IdCategory;IdParallel';
       First;
       FClusterCount := RecordCount;
       SetLength(FClusterToCategory, FClusterCount);
       SetLength(FClusterToParallel, FClusterCount);
-      SetLength(FClusterToLevel, FClusterCount);
-      SetLength(FClusterToSpecialization, FClusterCount);
+      SetLength(FClusterToCategory, FClusterCount);
       SetLength(FCategoryParallelToCluster, FCategoryCount, Length
           (FParallelToIdParallel));
-      VFieldLevel := FindField('IdLevel');
-      VFieldSpecialization := FindField('IdSpecialization');
+      VFieldCategory := FindField('IdCategory');
       VFieldParallel := FindField('IdParallel');
       for VCluster := 0 to FClusterCount - 1 do
       begin
-        Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
-        Specialization := FIdSpecializationToSpecialization
-          [VFieldSpecialization.AsInteger - FMinIdSpecialization];
-        Category := FLevelSpecializationToCategory[Level, Specialization];
+        Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
           FMinIdParallel];
         FClusterToCategory[VCluster] := Category;
-        FClusterToLevel[VCluster] := Level;
+        FClusterToCategory[VCluster] := Category;
         FClusterToParallel[VCluster] := Parallel;
-        FClusterToSpecialization[VCluster] := Specialization;
         FCategoryParallelToCluster[Category, Parallel] := VCluster;
         Next;
       end;
@@ -602,20 +569,19 @@ var
   end;
   procedure LoadDistribution;
   var
-    Theme, Level, Specialization, Parallel, Session1, Distribution, RoomCount,
-      VCluster, Teacher, Category, Session2, Session, RoomType, VPos: Integer;
-    VFieldTheme, VFieldLevel, VFieldParallel, VFieldTeacher, VFieldSpecialization,
+    Theme, Category, Parallel, Session1, Distribution, RoomCount,
+      VCluster, Teacher, Session2, Session, RoomType, VPos: Integer;
+    VFieldTheme, VFieldCategory, VFieldParallel, VFieldTeacher,
       VFieldRoomType, VFieldRoomCount, VFieldComposition: TField;
     VSessionToDuration, VSessionToDistribution: array [0 .. 16383] of Integer;
     Composition: string;
   begin
     with SourceDataModule.TbDistribution do
     begin
-      IndexFieldNames := 'IdTheme;IdLevel;IdSpecialization;IdParallel';
+      IndexFieldNames := 'IdTheme;IdCategory;IdParallel';
       First;
       VFieldTheme := FindField('IdTheme');
-      VFieldLevel := FindField('IdLevel');
-      VFieldSpecialization := FindField('IdSpecialization');
+      VFieldCategory := FindField('IdCategory');
       VFieldParallel := FindField('IdParallel');
       VFieldTeacher := FindField('IdTeacher');
       VFieldRoomType := FindField('IdRoomType');
@@ -643,14 +609,11 @@ var
       for Distribution := 0 to RecordCount - 1 do
       begin
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
-        Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
+        Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
           FMinIdParallel];
-        Specialization := FIdSpecializationToSpecialization
-          [VFieldSpecialization.AsInteger - FMinIdSpecialization];
         RoomType := FIdRoomTypeARoomType[VFieldRoomType.AsInteger - FMinIdRoomType];
         RoomCount := VFieldRoomCount.AsInteger;
-        Category := FLevelSpecializationToCategory[Level, Specialization];
         VCluster := FCategoryParallelToCluster[Category, Parallel];
         Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
         FDistributionToCluster[Distribution] := VCluster;
@@ -699,30 +662,26 @@ var
   end;
   procedure LoadAssistance;
   var
-    Assistance, Counter, VCluster, Category, Parallel, Level, Specialization, Theme,
+    Assistance, Counter, VCluster, Parallel, Category, Theme,
     Distribution, Teacher: Integer;
-    VFieldTheme, VFieldLevel, VFieldSpecialization, VFieldParallel,
+    VFieldTheme, VFieldCategory, VFieldParallel,
     VFieldTeacher: TField;
   begin
     with SourceDataModule.TbAssistance do
     begin
-      IndexFieldNames := 'IdTheme;IdLevel;IdSpecialization;IdParallel;IdTeacher';
+      IndexFieldNames := 'IdTheme;IdCategory;IdParallel;IdTeacher';
       First;
       FAssistanceCount := RecordCount;
       SetLength(FClusterAssistanceToDistribution, FClusterCount, 0);
       SetLength(FClusterAssistanceToTeacher, FClusterCount, 0);
       VFieldTheme := FindField('IdTheme');
-      VFieldLevel := FindField('IdLevel');
-      VFieldSpecialization := FindField('IdSpecialization');
+      VFieldCategory := FindField('IdCategory');
       VFieldParallel := FindField('IdParallel');
       VFieldTeacher := FindField('IdTeacher');
       for Assistance := 0 to FAssistanceCount - 1 do
       begin
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
-        Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
-        Specialization := FIdSpecializationToSpecialization
-          [VFieldSpecialization.AsInteger - FMinIdSpecialization];
-        Category := FLevelSpecializationToCategory[Level, Specialization];
+        Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
           FMinIdParallel];
         VCluster := FCategoryParallelToCluster[Category, Parallel];
@@ -740,40 +699,31 @@ var
   end;
   procedure LoadJoinedCluster;
   var
-    JoinedCluster, Counter, VCluster1, Category1, Parallel1, Level1, Specialization1, VCluster,
-    Category, Parallel, Level, Specialization, Theme,  Distribution: Integer;
-    VFieldTheme, VFieldLevel, VFieldSpecialization, VFieldParallel,
-    VFieldLevel1, VFieldSpecialization1, VFieldParallel1: TField;
+    JoinedCluster, Counter, VCluster1, Category1, Parallel1,
+      VCluster, Category, Parallel, Theme,  Distribution: Integer;
+    VFieldTheme, VFieldCategory, VFieldParallel, VFieldCategory1,
+      VFieldParallel1: TField;
   begin
     with SourceDataModule.TbJoinedCluster do
     begin
-      IndexFieldNames := 'IdTheme;IdLevel;IdSpecialization;IdParallel;IdLevel1;IdSpecialization1;IdParallel1';
+      IndexFieldNames := 'IdTheme;IdCategory;IdParallel;IdCategory1;IdParallel1';
       First;
       FJoinedClusterCount := RecordCount;
       SetLength(FClusterJoinedClusterToDistribution, FClusterCount, 0);
       SetLength(FClusterJoinedClusterToCluster, FClusterCount, 0);
       VFieldTheme := FindField('IdTheme');
-      VFieldLevel := FindField('IdLevel');
-      VFieldSpecialization := FindField('IdSpecialization');
+      VFieldCategory := FindField('IdCategory');
       VFieldParallel := FindField('IdParallel');
-      VFieldLevel1 := FindField('IdLevel1');
-      VFieldSpecialization1 := FindField('IdSpecialization1');
+      VFieldCategory1 := FindField('IdCategory1');
       VFieldParallel1 := FindField('IdParallel1');
       for JoinedCluster := 0 to FJoinedClusterCount - 1 do
       begin
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
-        Level := FIdLevelToLevel[VFieldLevel.AsInteger - FMinIdLevel];
-        Specialization := FIdSpecializationToSpecialization
-          [VFieldSpecialization.AsInteger - FMinIdSpecialization];
-        Category := FLevelSpecializationToCategory[Level, Specialization];
-        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
-          FMinIdParallel];
+        Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
+        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
         VCluster := FCategoryParallelToCluster[Category, Parallel];
         Distribution := FClusterThemeToDistribution[VCluster, Theme];
-        Level1 := FIdLevelToLevel[VFieldLevel1.AsInteger - FMinIdLevel];
-        Specialization1 := FIdSpecializationToSpecialization
-          [VFieldSpecialization1.AsInteger - FMinIdSpecialization];
-        Category1 := FLevelSpecializationToCategory[Level1, Specialization1];
+        Category1 := FIdCategoryToCategory[VFieldCategory1.AsInteger - FMinIdCategory];
         Parallel1 := FIdParallelToParallel[VFieldParallel1.AsInteger -
           FMinIdParallel];
         VCluster1 := FCategoryParallelToCluster[Category1, Parallel1];
@@ -814,7 +764,7 @@ var
         begin
           if (TimeSlot < 0) or (TimeSlot >= FTimeSlotCount) then
             raise Exception.CreateFmt(SClusterTimeSlotToSessionOverflow,
-              [FClusterToLevel[VCluster], FClusterToParallel[VCluster], TimeSlot]);
+              [FClusterToCategory[VCluster], FClusterToParallel[VCluster], TimeSlot]);
           FTimetableDetailPattern[VCluster, FTimeSlotCount - 1 - TimeSlot]
             := FDistributionToSessions[Distribution, Contador];
         end;
@@ -848,12 +798,8 @@ begin
     Load(TbTeacher, 'IdTeacher', FMinIdTeacher, FIdTeacherATeacher,
       FTeacherAIdTeacher);
     FTeacherCount := Length(FTeacherAIdTeacher);
-    Load(TbLevel, 'IdLevel', FMinIdLevel, FIdLevelToLevel, FLevelToIdLevel);
-    FLevelCount := Length(FLevelToIdLevel);
-    Load(TbSpecialization, 'IdSpecialization', FMinIdSpecialization,
-      FIdSpecializationToSpecialization, FSpecializationToIdSpecialization);
-    FSpecializationCount := Length(FSpecializationToIdSpecialization);
-    LoadCategory;
+    Load(TbCategory, 'IdCategory', FMinIdCategory, FIdCategoryToCategory, FCategoryToIdCategory);
+    FCategoryCount := Length(FCategoryToIdCategory);
     Load(TbParallel, 'IdParallel', FMinIdParallel,
       FIdParallelToParallel, FParallelToIdParallel);
     Load(TbTheme, 'IdTheme', FMinIdTheme, FIdThemeToTheme,
@@ -1667,9 +1613,8 @@ begin
     try
       for VCluster := 0 to FClusterCount - 1 do
       begin
-        VStrings.Add(Format('Cluster %d %d %d',
-            [FLevelToIdLevel[FClusterToLevel[VCluster]],
-            FSpecializationToIdSpecialization[FClusterToSpecialization[VCluster]],
+        VStrings.Add(Format('Cluster %d %d',
+            [FCategoryToIdCategory[FClusterToCategory[VCluster]],
             FParallelToIdParallel[FClusterToParallel[VCluster]]]));
         for TimeSlot := 0 to FTimeSlotCount - 1 do
         begin
@@ -1754,20 +1699,18 @@ var
   end;
   procedure SaveTimetableDetail;
   var
-    VCluster, TimeSlot, IdLevel, IdParallel, IdSpecialization, Session: Integer;
+    VCluster, TimeSlot, IdCategory, IdParallel, Session: Integer;
     {$IFNDEF USE_SQL}
-    FieldTimetable, FieldLevel, FieldParallel, FieldSpecialization, FieldDay,
-      FieldHour, FieldTheme, FieldSession: TField;
+    FieldTimetable, FieldCategory, FieldParallel, FieldDay, FieldHour,
+      FieldTheme, FieldSession: TField;
     {$ENDIF}
   begin
   {$IFDEF USE_SQL}
       with TTimetableModel(Model) do
       for VCluster := 0 to FClusterCount - 1 do
       begin
-        IdLevel := FLevelToIdLevel[FClusterToLevel[VCluster]];
+        IdCategory := FCategoryToIdCategory[FClusterToCategory[VCluster]];
         IdParallel := FParallelToIdParallel[FClusterToParallel[VCluster]];
-        IdSpecialization := FSpecializationToIdSpecialization
-          [FClusterToSpecialization[VCluster]];
         for TimeSlot := 0 to FTimeSlotCount - 1 do
         begin
           Session := ClusterTimeSlotToSession[VCluster, TimeSlot];
@@ -1775,9 +1718,9 @@ var
           begin
             SQL.Add(Format(
               'INSERT INTO TimetableDetail' +
-              '(IdTimetable,IdLevel,IdParallel,IdSpecialization,IdDay,' +
-              'IdHour,IdTheme,Session) VALUES (%d,%d,%d,%d,%d,%d,%d,%d);',
-              [IdTimetable, IdLevel, IdParallel, IdSpecialization,
+              '(IdTimetable,IdCategory,IdParallel,IdDay,' +
+              'IdHour,IdTheme,Session) VALUES (%d,%d,%d,%d,%d,%d,%d);',
+              [IdTimetable, IdCategory, IdParallel,
               FDayToIdDay[FTimeSlotToDay[TimeSlot]],
               FHourToIdHour[FTimeSlotToHour[TimeSlot]],
               FThemeToIdTheme[FSessionToTheme[Session]],
@@ -1792,9 +1735,8 @@ var
       try
         Last;
         FieldTimetable := FindField('IdTimetable');
-        FieldLevel := FindField('IdLevel');
+        FieldCategory := FindField('IdCategory');
         FieldParallel := FindField('IdParallel');
-        FieldSpecialization := FindField('IdSpecialization');
         FieldDay := FindField('IdDay');
         FieldHour := FindField('IdHour');
         FieldTheme := FindField('IdTheme');
@@ -1802,10 +1744,8 @@ var
         with TTimetableModel(Model) do
         for VCluster := 0 to FClusterCount - 1 do
         begin
-          IdLevel := FLevelAIdLevel[FClusterALevel[VCluster]];
+          IdCategory := FCategoryAIdCategory[FClusterACategory[VCluster]];
           IdParallel := FParallelAIdParallel[FClusterAParallel[VCluster]];
-          IdSpecialization := FSpecializationAIdSpecialization
-            [FClusterASpecialization[VCluster]];
           for TimeSlot := 0 to FTimeSlotCount - 1 do
           begin
             Session := ClusterTimeSlotToSession[VCluster, TimeSlot];
@@ -1813,9 +1753,8 @@ var
             begin
               Append;
               FieldTimetable.AsInteger := IdTimetable;
-              FieldLevel.AsInteger := IdLevel;
+              FieldCategory.AsInteger := IdCategory;
               FieldParallel.AsInteger := IdParallel;
-              FieldSpecialization.AsInteger := IdSpecialization;
               FieldDay.AsInteger := FDayAIdDay[FTimeSlotADay[TimeSlot]];
               FieldHour.AsInteger := FHourAIdHour[FTimeSlotAHour[TimeSlot]];
               FieldTheme.AsInteger := FThemeAIdTheme[FSessionToTheme[Session]];
@@ -1858,8 +1797,7 @@ end;
 
 procedure TTimetable.LoadFromDataModule(IdTimetable: Integer);
 var
-  FieldLevel, FieldParallel, FieldSpecialization, FieldDay, FieldHour,
-    FieldSession: TLongintField;
+  FieldCategory, FieldParallel, FieldDay, FieldHour, FieldSession: TLongintField;
   VCluster, TimeSlot: Integer;
 begin
   with SourceDataModule, TTimetableModel(Model), TbTimetableDetail do
@@ -1869,9 +1807,8 @@ begin
     MasterFields := 'IdTimetable';
     MasterSource := DSTimetable;
     try
-      FieldLevel := FindField('IdLevel') as TLongintField;
+      FieldCategory := FindField('IdCategory') as TLongintField;
       FieldParallel := FindField('IdParallel') as TLongintField;
-      FieldSpecialization := FindField('IdSpecialization') as TLongintField;
       FieldDay := FindField('IdDay') as TLongintField;
       FieldHour := FindField('IdHour') as TLongintField;
       FieldSession := FindField('Session') as TLongintField;
@@ -1882,12 +1819,8 @@ begin
       while not Eof do
       begin
         VCluster := FCategoryParallelToCluster[
-          FLevelSpecializationToCategory[
-            FIdLevelToLevel[FieldLevel.AsInteger - FMinIdLevel],
-            FIdSpecializationToSpecialization[FieldSpecialization.AsInteger -
-            FMinIdSpecialization]],
-          FIdParallelToParallel[FieldParallel.AsInteger -
-          FMinIdParallel]];
+          FIdCategoryToCategory[FieldCategory.AsInteger - FMinIdCategory],
+          FIdParallelToParallel[FieldParallel.AsInteger - FMinIdParallel]];
         TimeSlot := FDayHourToTimeSlot[FIdDayToDay[FieldDay.AsInteger - FMinIdDay],
           FIdHourToHour[FieldHour.AsInteger - FMinIdHour]];
         FClusterTimeSlotToSession[VCluster, TimeSlot] := FieldSession.AsInteger;
@@ -1922,10 +1855,9 @@ begin
           Theme := FSessionToTheme[Session];
           Teacher := FClusterThemeToTeacher[VCluster, Theme];
           if Teacher < 0 then
-            raise Exception.CreateFmt('%s %d(%d,%d,%d), %s %d(%d) %s', [
+            raise Exception.CreateFmt('%s %d(%d,%d), %s %d(%d) %s', [
               SCluster, VCluster,
-              FLevelToIdLevel[FClusterToLevel[VCluster]],
-              FSpecializationToIdSpecialization[FClusterToSpecialization[VCluster]],
+              FCategoryToIdCategory[FClusterToCategory[VCluster]],
               FParallelToIdParallel[FClusterToParallel[VCluster]],
               SFlDistribution_IdTheme,
               Theme,
@@ -1936,20 +1868,18 @@ begin
           for Counter := 0 to High(FDistributionToSessions[Distribution]) do
             SessionFound := SessionFound or (FDistributionToSessions[Distribution, Counter] = Session);
           if not SessionFound then
-            raise Exception.CreateFmt('%s %d(%d,%d,%d), %s %d(%d) %s FDistributionToSessions', [
+            raise Exception.CreateFmt('%s %d(%d,%d), %s %d(%d) %s FDistributionToSessions', [
               SCluster, VCluster,
-              FLevelToIdLevel[FClusterToLevel[VCluster]],
-              FSpecializationToIdSpecialization[FClusterToSpecialization[VCluster]],
+              FCategoryToIdCategory[FClusterToCategory[VCluster]],
               FParallelToIdParallel[FClusterToParallel[VCluster]],
               SFlDistribution_IdTheme,
               Theme,
               FThemeToIdTheme[Theme],
               SDoNotAppearsIn]);
           if Distribution < 0 then
-            raise Exception.CreateFmt('%s %d(%d,%d,%d), %s %d(%d) %s FClusterThemeToDistribution', [
+            raise Exception.CreateFmt('%s %d(%d,%d), %s %d(%d) %s FClusterThemeToDistribution', [
               SCluster, VCluster,
-              FLevelToIdLevel[FClusterToLevel[VCluster]],
-              FSpecializationToIdSpecialization[FClusterToSpecialization[VCluster]],
+              FCategoryToIdCategory[FClusterToCategory[VCluster]],
               FParallelToIdParallel[FClusterToParallel[VCluster]],
               SFlDistribution_IdTheme,
               Theme,

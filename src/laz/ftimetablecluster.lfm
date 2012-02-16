@@ -181,15 +181,14 @@ inherited TimetableClusterForm: TTimetableClusterForm
   end
   object QuTimetableCluster: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable;IdLevel;IdSpecialization;IdParallel'
+    SortedFields = 'IdTimetable;IdCategory;IdParallel'
     AutoCalcFields = False
     OnCalcFields = QuTimetableClusterCalcFields
     ReadOnly = True
     SQL.Strings = (
       'select'
       '  TimetableDetail.IdTimetable,'
-      '  TimetableDetail.IdLevel,'
-      '  TimetableDetail.IdSpecialization,'
+      '  TimetableDetail.IdCategory,'
       '  TimetableDetail.IdParallel,'
       '  0 as IsJoinedCluster,'
       '  IdHour,'
@@ -202,21 +201,18 @@ inherited TimetableClusterForm: TTimetableClusterForm
       'from'
       '  TimetableDetail inner join Distribution on'
       '  TimetableDetail.IdTheme = Distribution.IdTheme'
-      '  and TimetableDetail.IdLevel = Distribution.IdLevel'
-      '  and TimetableDetail.IdSpecialization = Distribution.IdSpecialization'
+      '  and TimetableDetail.IdCategory = Distribution.IdCategory'
       '  and TimetableDetail.IdParallel = Distribution.IdParallel'
       '  inner join Theme on TimetableDetail.IdTheme = Theme.IdTheme'
       '  inner join Teacher on Distribution.IdTeacher = Teacher.IdTeacher'
       'where'
       '  IdTimetable=:IdTimetable'
-      'and TimetableDetail.IdLevel=:IdLevel'
-      'and TimetableDetail.IdSpecialization=:IdSpecialization'
+      'and TimetableDetail.IdCategory=:IdCategory'
       'and TimetableDetail.IdParallel=:IdParallel'
       'union all'
       'select'
       '  TimetableDetail.IdTimetable,'
-      '  JoinedCluster.IdLevel1 as IdLevel,'
-      '  JoinedCluster.IdSpecialization1 as IdSpecialization,'
+      '  JoinedCluster.IdCategory1 as IdCategory,'
       '  JoinedCluster.IdParallel1 as IdParallel,'
       '  1 as IsJoinedCluster,'
       '  IdHour,'
@@ -229,20 +225,17 @@ inherited TimetableClusterForm: TTimetableClusterForm
       'from'
       '  TimetableDetail inner join Distribution on'
       '  TimetableDetail.IdTheme = Distribution.IdTheme'
-      '  and TimetableDetail.IdLevel = Distribution.IdLevel'
-      '  and TimetableDetail.IdSpecialization = Distribution.IdSpecialization'
+      '  and TimetableDetail.IdCategory = Distribution.IdCategory'
       '  and TimetableDetail.IdParallel = Distribution.IdParallel'
       '  inner join Theme on TimetableDetail.IdTheme = Theme.IdTheme'
       '  inner join Teacher on Distribution.IdTeacher = Teacher.IdTeacher'
       '  inner join JoinedCluster on'
       '  Distribution.IdTheme = JoinedCluster.IdTheme'
-      '  and Distribution.IdLevel=JoinedCluster.IdLevel'
-      '  and Distribution.IdSpecialization=JoinedCluster.IdSpecialization'
+      '  and Distribution.IdCategory=JoinedCluster.IdCategory'
       '  and Distribution.IdParallel=JoinedCluster.IdParallel'
       'where'
       '  IdTimetable=:IdTimetable'
-      'and TimetableDetail.IdLevel=:IdLevel'
-      'and TimetableDetail.IdSpecialization=:IdSpecialization'
+      'and TimetableDetail.IdCategory=:IdCategory'
       'and TimetableDetail.IdParallel=:IdParallel'
     )
     Params = <    
@@ -253,12 +246,7 @@ inherited TimetableClusterForm: TTimetableClusterForm
       end    
       item
         DataType = ftUnknown
-        Name = 'IdLevel'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftUnknown
-        Name = 'IdSpecialization'
+        Name = 'IdCategory'
         ParamType = ptUnknown
       end    
       item
@@ -267,10 +255,10 @@ inherited TimetableClusterForm: TTimetableClusterForm
         ParamType = ptUnknown
       end>
     DataSource = DSCluster
-    MasterFields = 'IdTimetable;IdLevel;IdSpecialization;IdParallel'
+    MasterFields = 'IdTimetable;IdCategory;IdParallel'
     MasterSource = DSCluster
-    LinkedFields = 'IdTimetable;IdLevel;IdSpecialization;IdParallel'
-    IndexFieldNames = 'IdTimetable Asc;IdLevel Asc;IdSpecialization Asc;IdParallel Asc'
+    LinkedFields = 'IdTimetable;IdCategory;IdParallel'
+    IndexFieldNames = 'IdTimetable Asc;IdCategory Asc;IdParallel Asc'
     left = 160
     top = 256
     ParamData = <    
@@ -281,12 +269,7 @@ inherited TimetableClusterForm: TTimetableClusterForm
       end    
       item
         DataType = ftUnknown
-        Name = 'IdLevel'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftUnknown
-        Name = 'IdSpecialization'
+        Name = 'IdCategory'
         ParamType = ptUnknown
       end    
       item
@@ -304,22 +287,11 @@ inherited TimetableClusterForm: TTimetableClusterForm
       ReadOnly = True
       Required = False
     end
-    object QuTimetableClusterIdLevel: TLongintField
+    object QuTimetableClusterIdCategory: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdLevel'
+      FieldName = 'IdCategory'
       Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Visible = False
-    end
-    object QuTimetableClusterIdSpecialization: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdSpecialization'
-      Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -450,25 +422,20 @@ inherited TimetableClusterForm: TTimetableClusterForm
     SQL.Strings = (
       'select'
       '  Timetable.IdTimetable,'
-      '  Cluster.IdLevel,'
-      '  Cluster.IdSpecialization,'
+      '  Cluster.IdCategory,'
       '  Cluster.IdParallel,'
-      '  AbLevel,'
-      '  AbSpecialization,'
+      '  AbCategory,'
       '  NaParallel'
       'from'
-      '  ((Cluster inner join Level on'
-      '    (Cluster.IdLevel=Level.IdLevel))'
-      '    inner join Specialization on'
-      '    (Cluster.IdSpecialization=Specialization.IdSpecialization))'
+      '  Cluster inner join Category on'
+      '    Cluster.IdCategory=Category.IdCategory'
       '    inner join Parallel on'
-      '    (Cluster.IdParallel=Parallel.IdParallel),'
+      '    Cluster.IdParallel=Parallel.IdParallel,'
       '  Timetable'
       'where'
       '  Timetable.IdTimetable=:IdTimetable'
       'order by'
-      '  Cluster.IdLevel,'
-      '  Cluster.IdSpecialization,'
+      '  Cluster.IdCategory,'
       '  Cluster.IdParallel'
     )
     Params = <    
@@ -500,22 +467,11 @@ inherited TimetableClusterForm: TTimetableClusterForm
       Required = False
       Visible = False
     end
-    object QuClusterIdLevel: TLongintField
+    object QuClusterIdCategory: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdLevel'
+      FieldName = 'IdCategory'
       Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      Visible = False
-    end
-    object QuClusterIdSpecialization: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdSpecialization'
-      Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
@@ -533,10 +489,10 @@ inherited TimetableClusterForm: TTimetableClusterForm
       Required = False
       Visible = False
     end
-    object QuClusterAbLevel: TStringField
+    object QuClusterAbCategory: TStringField
       DisplayWidth = 5
       FieldKind = fkData
-      FieldName = 'AbLevel'
+      FieldName = 'AbCategory'
       Index = 4
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -544,18 +500,6 @@ inherited TimetableClusterForm: TTimetableClusterForm
       Required = False
       Visible = False
       Size = 5
-    end
-    object QuClusterAbSpecialization: TStringField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'AbSpecialization'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      Visible = False
-      Size = 10
     end
     object QuClusterNaParallel: TStringField
       DisplayWidth = 5

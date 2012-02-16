@@ -20,8 +20,7 @@ type
     TBSwapTimeSlots: TToolButton;
     CBShowCluster: TComboBox;
     QuTimetableClusterIdTheme: TLongintField;
-    QuTimetableClusterIdLevel: TLongintField;
-    QuTimetableClusterIdSpecialization: TLongintField;
+    QuTimetableClusterIdCategory: TLongintField;
     QuTimetableClusterIdParallel: TLongintField;
     QuTimetableClusterIsJoinedCluster: TLongintField;
     QuTimetableClusterIdHour: TLongintField;
@@ -32,11 +31,9 @@ type
     QuTimetableClusterNaTheme: TStringField;
     QuCluster: TZQuery;
     QuClusterIdTimetable: TLongintField;
-    QuClusterIdLevel: TLongintField;
-    QuClusterIdSpecialization: TLongintField;
+    QuClusterIdCategory: TLongintField;
     QuClusterIdParallel: TLongintField;
-    QuClusterAbLevel: TStringField;
-    QuClusterAbSpecialization: TStringField;
+    QuClusterAbCategory: TStringField;
     QuClusterNaParallel: TStringField;
     QuTimetableClusterIdTimetable: TLongintField;
     QuTimetableClusterLnTeacher: TStringField;
@@ -97,10 +94,9 @@ end;
 procedure TTimetableClusterForm.TBShowClick(Sender: TObject);
 begin
   inherited;
-  Caption := Format('[%s %d] - %s %s %s', [SuperTitle,
+  Caption := Format('[%s %d] - %s %s', [SuperTitle,
     QuCluster.FindField('IdTimetable').AsInteger,
-    QuCluster.FindField('AbLevel').AsString,
-    QuCluster.FindField('AbSpecialization').AsString,
+    QuCluster.FindField('AbCategory').AsString,
     QuCluster.FindField('NaParallel').AsString]);
   FName := MasterDataModule.StringsShowCluster.Values[CBShowCluster.Text];
   with SourceDataModule do
@@ -180,8 +176,7 @@ begin
     with SourceDataModule do
       MasterDataModule.IntercambiarTimeSlots(
         TbTimetable.FindField('IdTimetable').AsInteger,
-        QuCluster.FindField('IdLevel').AsInteger,
-        QuCluster.FindField('IdSpecialization').AsInteger,
+        QuCluster.FindField('IdCategory').AsInteger,
         QuCluster.FindField('IdParallel').AsInteger,
         IdDay, IdHour, iIdDay, iIdHour);
     QuTimetableCluster.Refresh;
@@ -205,7 +200,7 @@ end;
 procedure TTimetableClusterForm.QuClusterCalcFields(DataSet: TDataSet);
 begin
   inherited;
-  DataSet['NaCluster'] := VarArrToStr(DataSet['AbLevel;AbSpecialization;NaParallel'], ' ');
+  DataSet['NaCluster'] := VarArrToStr(DataSet['AbCategory;NaParallel'], ' ');
 end;
 
 procedure TTimetableClusterForm.DSClusterDataChange(Sender: TObject;
