@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `Day`(
 CREATE TABLE IF NOT EXISTS `Category`(
     `IdCategory` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Category Id */,
     `NaCategory` VARCHAR(25) NOT NULL UNIQUE /* Category Name */,
-    `AbCategory` VARCHAR(5) NOT NULL UNIQUE /* Category Abbreviation */
+    `AbCategory` VARCHAR(10) NOT NULL UNIQUE /* Category Abbreviation */
 ); /* Categories */
 CREATE TABLE IF NOT EXISTS `Hour`(
     `IdHour` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Hour Id */,
