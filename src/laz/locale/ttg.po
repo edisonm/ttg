@@ -78,7 +78,7 @@ msgstr ""
 
 #: dsourcebaseconsts.sfldistribution_idresource
 msgctxt "dsourcebaseconsts.sfldistribution_idresource"
-msgid "Teacher"
+msgid "Resource"
 msgstr ""
 
 #: dsourcebaseconsts.sfldistribution_idtheme
@@ -206,7 +206,7 @@ msgstr ""
 
 #: dsourcebaseconsts.sflresourcerestriction_idresource
 msgctxt "dsourcebaseconsts.sflresourcerestriction_idresource"
-msgid "Teacher"
+msgid "Resource"
 msgstr ""
 
 #: dsourcebaseconsts.sflresourcerestriction_idresourcerestrictiontype
@@ -396,17 +396,17 @@ msgstr ""
 
 #: dsourcebaseconsts.stbresource
 msgctxt "dsourcebaseconsts.stbresource"
-msgid "Teachers"
+msgid "Resources"
 msgstr ""
 
 #: dsourcebaseconsts.stbresourcerestriction
 msgctxt "dsourcebaseconsts.stbresourcerestriction"
-msgid "Teacher Restrictions"
+msgid "Resource Restrictions"
 msgstr ""
 
 #: dsourcebaseconsts.stbresourcerestrictiontype
 msgctxt "dsourcebaseconsts.stbresourcerestrictiontype"
-msgid "Types of Teacher Restrictions"
+msgid "Types of Resource Restrictions"
 msgstr ""
 
 #: dsourcebaseconsts.stbtheme
@@ -480,7 +480,7 @@ msgstr ""
 
 #: tconfigform.label1.caption
 msgctxt "tconfigform.label1.caption"
-msgid "Clash Teachers:"
+msgid "Clash Resources:"
 msgstr ""
 
 #: tconfigform.label13.caption
@@ -495,7 +495,7 @@ msgstr ""
 
 #: tconfigform.label18.caption
 msgctxt "tconfigform.label18.caption"
-msgid "Teacher Restrictions:"
+msgid "Resource Restrictions:"
 msgstr ""
 
 #: tconfigform.label2.caption
@@ -525,7 +525,7 @@ msgstr ""
 
 #: tconfigform.lbbreaktimetableresource.caption
 msgctxt "tconfigform.lbbreaktimetableresource.caption"
-msgid "Gap TT. Teachers:"
+msgid "Gap TT. Resources:"
 msgstr ""
 
 #: tconfigform.lbbrokenthemes.caption
@@ -917,11 +917,11 @@ msgstr ""
 
 #: tmainform.actresource.caption
 msgctxt "tmainform.actresource.caption"
-msgid "Teachers"
+msgid "Resources"
 msgstr ""
 
 #: tmainform.actresource.hint
-msgid "Teachers|Teachers"
+msgid "Resources|Resources"
 msgstr ""
 
 #: tmainform.acttimeslot.caption
@@ -1198,7 +1198,7 @@ msgid "0 "
 msgstr ""
 
 #: tprogressform.pnbreaktimetableresource.caption
-msgid " Break TT. Teacher:"
+msgid " Break TT. Resource:"
 msgstr ""
 
 #: tprogressform.pnbreaktimetableresourcecount.caption
@@ -1240,7 +1240,7 @@ msgid " Value:"
 msgstr ""
 
 #: tprogressform.pnclashresource.caption
-msgid " Clash Teachers:"
+msgid " Clash Resources:"
 msgstr ""
 
 #: tprogressform.pnclashresourcenumber.caption
@@ -1328,7 +1328,7 @@ msgid " Iteration:"
 msgstr ""
 
 #: tprogressform.pnresourcerestriction.caption
-msgid " Teacher Restrictions:"
+msgid " Resource Restrictions:"
 msgstr ""
 
 #: tprogressform.pnresourcerestrictionnumber.caption
@@ -1446,20 +1446,20 @@ msgstr ""
 
 #: tresourceform.actresourcerestriction.caption
 msgctxt "TRESOURCEFORM.ACTRESOURCERESTRICTION.CAPTION"
-msgid "Teacher restrictions"
+msgid "Resource restrictions"
 msgstr ""
 
 #: tresourceform.actresourcerestriction.hint
-msgid "Teacher restrictions|Input Teacher restrictions"
+msgid "Resource restrictions|Input Resource restrictions"
 msgstr ""
 
 #: tresourceform.caption
 msgctxt "TRESOURCEFORM.CAPTION"
-msgid "Teacher"
+msgid "Resource"
 msgstr ""
 
 #: tresourceform.dbgriddetail.hint
-msgid "Distribution of Teachers"
+msgid "Distribution of Resources"
 msgstr ""
 
 #: tresourceform.gbjoinedcluster.caption
@@ -1539,11 +1539,11 @@ msgstr ""
 
 #: ttimetableform.actresourcerestrictionnorespetada.caption
 msgctxt "TTIMETABLEFORM.ACTRESOURCERESTRICTIONNORESPETADA.CAPTION"
-msgid "Teacher restrictions"
+msgid "Resource restrictions"
 msgstr ""
 
 #: ttimetableform.actresourcerestrictionnorespetada.hint
-msgid "Teacher retrictions|Teacher restrictions non satisfied"
+msgid "Resource retrictions|Resource restrictions non satisfied"
 msgstr ""
 
 #: ttimetableform.actthemecutday.caption
@@ -1589,11 +1589,11 @@ msgid "Timetables by room types|Timetables by room types"
 msgstr ""
 
 #: ttimetableform.acttimetableresource.caption
-msgid "Teachers' timetables"
+msgid "Resources' timetables"
 msgstr ""
 
 #: ttimetableform.acttimetableresource.hint
-msgid "Teachers' timetables|Teachers' timetables"
+msgid "Resources' timetables|Resources' timetables"
 msgstr ""
 
 #: ttimetableform.caption
@@ -1660,7 +1660,7 @@ msgstr ""
 
 #: uttgconsts.sbreaktimetableresource
 msgctxt "uttgconsts.sbreaktimetableresource"
-msgid "Broken TT. Teachers"
+msgid "Broken TT. Resources"
 msgstr ""
 
 #: uttgconsts.sbrokensession
@@ -1682,7 +1682,7 @@ msgstr ""
 
 #: uttgconsts.sclashresource
 msgctxt "uttgconsts.sclashresource"
-msgid "Clash of Teachers"
+msgid "Clash of Resources"
 msgstr ""
 
 #: uttgconsts.sclashtheme
@@ -1962,19 +1962,19 @@ msgid "Search by %s"
 msgstr ""
 
 #: uttgconsts.sresourcerestrictionshead
-msgid "Teacher; Restrictions"
+msgid "Resource; Restrictions"
 msgstr ""
 
 #: uttgconsts.sresourcesworkloadwithoutproblems
-msgid "Teachers' Work load without problems..."
+msgid "Resources' Work load without problems..."
 msgstr ""
 
 #: uttgconsts.sresourcesworkloadwithproblems
-msgid "Teachers' work load with problems..."
+msgid "Resources' work load with problems..."
 msgstr ""
 
 #: uttgconsts.sresourceworkloadhead
-msgid "Teacher; Work Load"
+msgid "Resource; Work Load"
 msgstr ""
 
 #: uttgconsts.sthenexttimetablesalreadyexists
