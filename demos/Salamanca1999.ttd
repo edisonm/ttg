@@ -19,18 +19,18 @@ Day
 Category
 12
 "IdCategory";"NaCategory";"AbCategory";
-"1";"Primero Basico";"1 BAS";
-"2";"Segundo Basico";"2 BAS";
-"3";"Tercero Basico";"3 BAS";
-"4";"Cuarto Contabilidad";"4 CON";
-"5";"Cuarto Secretariado";"4 SEC";
-"6";"Cuarto Informatica";"4 INF";
-"7";"Quinto Contabilidad";"5 CON";
-"8";"Quinto Secretariado";"5 SEC";
-"9";"Quinto Informatica";"5 INF";
-"10";"Sexto Contabilidad";"6 CON";
-"11";"Sexto Secretariado";"6 SEC";
-"12";"Sexto Informatica";"6 INF";
+"1";"Primero Basico";"1 BASICO";
+"2";"Segundo Basico";"2 BASICO";
+"3";"Tercero Basico";"3 BASICO";
+"4";"Cuarto Contabilidad";"4 CONTA";
+"5";"Cuarto Secretariado";"4 SECRE";
+"6";"Cuarto Informatica";"4 INFO";
+"7";"Quinto Contabilidad";"5 CONTA";
+"8";"Quinto Secretariado";"5 SECRE";
+"9";"Quinto Informatica";"5 INFO";
+"10";"Sexto Contabilidad";"6 CONTA";
+"11";"Sexto Secretariado";"6 SECRE";
+"12";"Sexto Informatica";"6 INFO";
 Hour
 7
 "IdHour";"NaHour";"Interval";
