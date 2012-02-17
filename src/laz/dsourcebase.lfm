@@ -93,16 +93,16 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 344
     Top = 148
   end
-  object TbTeacher: TZTable
+  object TbResource: TZTable
     Tag = 9
     Connection = DbZConnection
-    TableName = 'Teacher'
-    IndexFieldNames = 'IdTeacher'
+    TableName = 'Resource'
+    IndexFieldNames = 'IdResource'
     Left = 432
     Top = 144
   end
-  object DSTeacher: TDataSource
-    DataSet = TbTeacher
+  object DSResource: TDataSource
+    DataSet = TbResource
     Left = 440
     Top = 136
   end
@@ -162,7 +162,7 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Tag = 14
     Connection = DbZConnection
     TableName = 'Assistance'
-    IndexFieldNames = 'IdTheme;IdCategory;IdParallel;IdTeacher'
+    IndexFieldNames = 'IdTheme;IdCategory;IdParallel;IdResource'
     Left = 432
     Top = 240
   end
@@ -171,29 +171,29 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 440
     Top = 232
   end
-  object TbTeacherRestrictionType: TZTable
+  object TbResourceRestrictionType: TZTable
     Tag = 15
     Connection = DbZConnection
-    TableName = 'TeacherRestrictionType'
-    IndexFieldNames = 'IdTeacherRestrictionType'
+    TableName = 'ResourceRestrictionType'
+    IndexFieldNames = 'IdResourceRestrictionType'
     Left = 48
     Top = 336
   end
-  object DSTeacherRestrictionType: TDataSource
-    DataSet = TbTeacherRestrictionType
+  object DSResourceRestrictionType: TDataSource
+    DataSet = TbResourceRestrictionType
     Left = 56
     Top = 328
   end
-  object TbTeacherRestriction: TZTable
+  object TbResourceRestriction: TZTable
     Tag = 16
     Connection = DbZConnection
-    TableName = 'TeacherRestriction'
-    IndexFieldNames = 'IdTeacher;IdDay;IdHour'
+    TableName = 'ResourceRestriction'
+    IndexFieldNames = 'IdResource;IdDay;IdHour'
     Left = 144
     Top = 348
   end
-  object DSTeacherRestriction: TDataSource
-    DataSet = TbTeacherRestriction
+  object DSResourceRestriction: TDataSource
+    DataSet = TbResourceRestriction
     Left = 152
     Top = 340
   end

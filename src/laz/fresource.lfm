@@ -1,9 +1,9 @@
-inherited TeacherForm: TTeacherForm
+inherited ResourceForm: TResourceForm
   Left = 377
   Height = 635
   Top = 243
   Width = 1107
-  Caption = 'Teacher'
+  Caption = 'Resource'
   ClientHeight = 635
   ClientWidth = 1107
   OnActivate = FormActivate
@@ -16,10 +16,10 @@ inherited TeacherForm: TTeacherForm
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
     end
-    object TBTeacherRestriction: TToolButton[3]
+    object TBResourceRestriction: TToolButton[3]
       Left = 257
       Top = 2
-      Action = ActTeacherRestriction
+      Action = ActResourceRestriction
       ParentShowHint = False
       ShowHint = True
     end
@@ -68,7 +68,7 @@ inherited TeacherForm: TTeacherForm
         ClientWidth = 685
         inherited DBGridDetail: TDBGrid
           Height = 337
-          Hint = 'Distribution of Teachers'
+          Hint = 'Distribution of Resources'
           Width = 685
           ShowHint = True
         end
@@ -286,7 +286,7 @@ inherited TeacherForm: TTeacherForm
     }
   end
   inherited DataSource: TDatasource
-    DataSet = SourceDataModule.TbTeacher
+    DataSet = SourceDataModule.TbResource
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
     left = 200
@@ -297,12 +297,12 @@ inherited TeacherForm: TTeacherForm
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
-    object ActTeacherRestriction: TAction[2]
+    object ActResourceRestriction: TAction[2]
       AutoCheck = True
-      Caption = 'Teacher restrictions'
-      Hint = 'Teacher restrictions|Input Teacher restrictions'
+      Caption = 'Resource restrictions'
+      Hint = 'Resource restrictions|Input Resource restrictions'
       ImageIndex = 2
-      OnExecute = ActTeacherRestrictionExecute
+      OnExecute = ActResourceRestrictionExecute
     end
   end
   inherited DataSourceDetail: TDatasource

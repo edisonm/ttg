@@ -92,9 +92,9 @@ Theme
 "28";"Matematica 6";
 "29";"Mat/Eco/Fil_ 6";
 "30";"Science";
-Teacher
+Resource
 20
-"IdTeacher";"TeacherNationalId";"LnTeacher";"NaTeacher";
+"IdResource";"AbResource";"LnResource";"NaResource";
 "1";"1";"Revelo";"Jorge";
 "2";"2";"Bracero";"Jorge";
 "3";"3";"Imbaquingo";"Jorge";
@@ -117,7 +117,7 @@ Teacher
 "20";"20";"Velasco";"Rosa";
 Distribution
 122
-"IdTheme";"IdCategory";"IdParallel";"IdTeacher";"IdRoomType";"RoomCount";"Composition";
+"IdTheme";"IdCategory";"IdParallel";"IdResource";"IdRoomType";"RoomCount";"Composition";
 "1";"1";"1";"3";"1";"1";"2.2.2";
 "1";"1";"2";"3";"1";"1";"2.2.2";
 "1";"2";"1";"2";"1";"1";"2.2.2";
@@ -298,18 +298,18 @@ TimeSlot
 "6";"11";
 Assistance
 2
-"IdTheme";"IdCategory";"IdParallel";"IdTeacher";
+"IdTheme";"IdCategory";"IdParallel";"IdResource";
 "14";"3";"1";"20";
 "14";"1";"1";"20";
-TeacherRestrictionType
+ResourceRestrictionType
 3
-"IdTeacherRestrictionType";"NaTeacherRestrictionType";"ColTeacherRestrictionType";"ValTeacherRestrictionType";
+"IdResourceRestrictionType";"NaResourceRestrictionType";"ColResourceRestrictionType";"ValResourceRestrictionType";
 "0";"No gusta";"65280";"50";
 "1";"No puede";"255";"500";
 "2";"Optativa";"8388736";"500";
-TeacherRestriction
+ResourceRestriction
 47
-"IdTeacher";"IdDay";"IdHour";"IdTeacherRestrictionType";
+"IdResource";"IdDay";"IdHour";"IdResourceRestrictionType";
 "1";"2";"10";"1";
 "1";"2";"11";"1";
 "1";"3";"10";"1";
@@ -649,9 +649,9 @@ ThemeRestriction
 Timetable
 3
 "IdTimetable";"TimeIni";"TimeEnd";"Summary";
-"1";"2012-02-13 02:48:31";"2012-02-13 04:06:09";"Evolutive Elitist Algorithm\n\r============================\n\rApplying Downhill:                     Si\n\rRandom Generator Seed:         2965869584\n\rPopulation size:                       10\n\rMax number of iterations:           10000\n\rCross Probability:                 0,3000\n\rMutation Probability:              0,2000\n\rRepair Probability:                0,1000\n\rPollination Probability:           0,1000\n\r-------------------------------------------------------------------\n\rDetail                              Count       Weight        Value\n\r-------------------------------------------------------------------\n\rClash of Teachers:                      0          305            0\n\rClash of Themes:                      0          201            0\n\rClash of Clashrooms:                    0           65            0\n\rBroken TT. Teachers:                   59           15          885\n\rOut of position empty hours:            0          295            0\n\rBroken Sessions:                        0          299            0\n\rNon Scattered Themes:                 9            1            9\n\rTheme Restrictions:               (0 0)     (50 500)            0\n\rTeacher Restrictions:             (0 0 0) (50 500 500)            0\n\r-------------------------------------------------------------------\n\rTotal Value                                                     894\n\r";
-"2";"2012-02-13 04:07:00";"2012-02-13 06:14:27";"Evolutive Elitist Algorithm\n\r============================\n\rApplying Downhill:                     Si\n\rRandom Generator Seed:         2965864875\n\rPopulation size:                       10\n\rMax number of iterations:           10000\n\rCross Probability:                 0,3000\n\rMutation Probability:              0,2000\n\rRepair Probability:                0,1000\n\rPollination Probability:           0,1000\n\r-------------------------------------------------------------------\n\rDetail                              Count       Weight        Value\n\r-------------------------------------------------------------------\n\rClash of Teachers:                      0          305            0\n\rClash of Themes:                      0          201            0\n\rClash of Clashrooms:                    0           65            0\n\rBroken TT. Teachers:                   59           15          885\n\rOut of position empty hours:            0          295            0\n\rBroken Sessions:                        0          299            0\n\rNon Scattered Themes:                12            1           12\n\rTheme Restrictions:               (0 0)     (50 500)            0\n\rTeacher Restrictions:             (0 0 0) (50 500 500)            0\n\r-------------------------------------------------------------------\n\rTotal Value                                                     897\n\r";
-"3";"2012-02-13 05:04:50";"2012-02-13 06:33:56";"Evolutive Elitist Algorithm\n\r============================\n\rApplying Downhill:                     Si\n\rRandom Generator Seed:         2965861405\n\rPopulation size:                       10\n\rMax number of iterations:           10000\n\rCross Probability:                 0,3000\n\rMutation Probability:              0,2000\n\rRepair Probability:                0,1000\n\rPollination Probability:           0,1000\n\r-------------------------------------------------------------------\n\rDetail                              Count       Weight        Value\n\r-------------------------------------------------------------------\n\rClash of Teachers:                      0          305            0\n\rClash of Themes:                      0          201            0\n\rClash of Clashrooms:                    0           65            0\n\rBroken TT. Teachers:                   58           15          870\n\rOut of position empty hours:            0          295            0\n\rBroken Sessions:                        0          299            0\n\rNon Scattered Themes:                18            1           18\n\rTheme Restrictions:               (0 0)     (50 500)            0\n\rTeacher Restrictions:             (0 0 0) (50 500 500)            0\n\r-------------------------------------------------------------------\n\rTotal Value                                                     888\n\r";
+"1";"2012-02-13 02:48:31";"2012-02-13 04:06:09";"Evolutive Elitist Algorithm\n\r============================\n\rApplying Downhill:                     Si\n\rRandom Generator Seed:         2965869584\n\rPopulation size:                       10\n\rMax number of iterations:           10000\n\rCross Probability:                 0,3000\n\rMutation Probability:              0,2000\n\rRepair Probability:                0,1000\n\rPollination Probability:           0,1000\n\r-------------------------------------------------------------------\n\rDetail                              Count       Weight        Value\n\r-------------------------------------------------------------------\n\rClash of Resources:                      0          305            0\n\rClash of Themes:                      0          201            0\n\rClash of Clashrooms:                    0           65            0\n\rBroken TT. Resources:                   59           15          885\n\rOut of position empty hours:            0          295            0\n\rBroken Sessions:                        0          299            0\n\rNon Scattered Themes:                 9            1            9\n\rTheme Restrictions:               (0 0)     (50 500)            0\n\rResource Restrictions:             (0 0 0) (50 500 500)            0\n\r-------------------------------------------------------------------\n\rTotal Value                                                     894\n\r";
+"2";"2012-02-13 04:07:00";"2012-02-13 06:14:27";"Evolutive Elitist Algorithm\n\r============================\n\rApplying Downhill:                     Si\n\rRandom Generator Seed:         2965864875\n\rPopulation size:                       10\n\rMax number of iterations:           10000\n\rCross Probability:                 0,3000\n\rMutation Probability:              0,2000\n\rRepair Probability:                0,1000\n\rPollination Probability:           0,1000\n\r-------------------------------------------------------------------\n\rDetail                              Count       Weight        Value\n\r-------------------------------------------------------------------\n\rClash of Resources:                      0          305            0\n\rClash of Themes:                      0          201            0\n\rClash of Clashrooms:                    0           65            0\n\rBroken TT. Resources:                   59           15          885\n\rOut of position empty hours:            0          295            0\n\rBroken Sessions:                        0          299            0\n\rNon Scattered Themes:                12            1           12\n\rTheme Restrictions:               (0 0)     (50 500)            0\n\rResource Restrictions:             (0 0 0) (50 500 500)            0\n\r-------------------------------------------------------------------\n\rTotal Value                                                     897\n\r";
+"3";"2012-02-13 05:04:50";"2012-02-13 06:33:56";"Evolutive Elitist Algorithm\n\r============================\n\rApplying Downhill:                     Si\n\rRandom Generator Seed:         2965861405\n\rPopulation size:                       10\n\rMax number of iterations:           10000\n\rCross Probability:                 0,3000\n\rMutation Probability:              0,2000\n\rRepair Probability:                0,1000\n\rPollination Probability:           0,1000\n\r-------------------------------------------------------------------\n\rDetail                              Count       Weight        Value\n\r-------------------------------------------------------------------\n\rClash of Resources:                      0          305            0\n\rClash of Themes:                      0          201            0\n\rClash of Clashrooms:                    0           65            0\n\rBroken TT. Resources:                   58           15          870\n\rOut of position empty hours:            0          295            0\n\rBroken Sessions:                        0          299            0\n\rNon Scattered Themes:                18            1           18\n\rTheme Restrictions:               (0 0)     (50 500)            0\n\rResource Restrictions:             (0 0 0) (50 500 500)            0\n\r-------------------------------------------------------------------\n\rTotal Value                                                     888\n\r";
 TimetableDetail
 1062
 "IdTimetable";"IdTheme";"IdCategory";"IdParallel";"IdDay";"IdHour";"Session";
@@ -1724,14 +1724,14 @@ NameAuthority=Dr. Benjamín Tobar
 PositionAuthority=Rector
 NameResponsible=Comisión
 PositionResponsible=Comisión
-MaxTeacherWorkLoad=35
+MaxResourceWorkLoad=35
 TimetableSeleccionado=3
 Comments=""
 Randomize=-1
 Seed=2591
 NumIterations=25
-ClashTeacher=305
-BreakTimetableTeacher=15
+ClashResource=305
+BreakTimetableResource=15
 ClashRoomType=65
 EmptyHour=295
 BrokenSession=299
@@ -1742,9 +1742,9 @@ CrossProbability=0,3
 MutationProbability1=0,2
 MutationProbability2=0,2
 ReparationProbability=0,1
-TeacherTimetableShowText=AbCategory + " " + NaParallel + " " + NaTheme
-TeacherTimetableShowLength=20
-TeacherTimetableExcluirProfProhibicion=(TeacherRestriction.IdTeacherRestrictionType <> 2)AND(TeacherRestriction.IdTeacherRestrictionType <> 3)
+ResourceTimetableShowText=AbCategory + " " + NaParallel + " " + NaTheme
+ResourceTimetableShowLength=20
+ResourceTimetableExcluirProfProhibicion=(ResourceRestriction.IdResourceRestrictionType <> 2)AND(ResourceRestriction.IdResourceRestrictionType <> 3)
 PollinationProbability=0,1
 ClashTheme=201
 InitialTimetables=

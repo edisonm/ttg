@@ -30,15 +30,15 @@ type
     PnProgress: TPanel;
     BBClose: TBitBtn;
     PnTotalValue: TPanel;
-    PnClashTeacher: TPanel;
+    PnClashResource: TPanel;
     LbTotalValue: TLabel;
-    PnClashTeacherValue: TPanel;
-    LbClashTeacherValue: TLabel;
+    PnClashResourceValue: TPanel;
+    LbClashResourceValue: TLabel;
     PnClashRoomType: TPanel;
     PnClashRoomTypeValue: TPanel;
     LbClashRoomTypeValue: TLabel;
-    PnClashTeacherNumber: TPanel;
-    LbClashTeacher: TLabel;
+    PnClashResourceNumber: TPanel;
+    LbClashResource: TLabel;
     PnClashRoomTypeNumber: TPanel;
     LbClashRoomType: TLabel;
     PnOutOfPositionEmptyHour: TPanel;
@@ -62,11 +62,11 @@ type
     LbThemeRestriction: TLabel;
     PnThemeRestrictionValue: TPanel;
     LbThemeRestrictionValue: TLabel;
-    PnTeacherRestriction: TPanel;
-    PnTeacherRestrictionNumber: TPanel;
-    LbTeacherRestriction: TLabel;
-    PnTeacherRestrictionValue: TPanel;
-    LbTeacherRestrictionValue: TLabel;
+    PnResourceRestriction: TPanel;
+    PnResourceRestrictionNumber: TPanel;
+    LbResourceRestriction: TLabel;
+    PnResourceRestrictionValue: TPanel;
+    LbResourceRestrictionValue: TLabel;
     PnNonScatteredTheme: TPanel;
     PnNonScatteredThemeCount: TPanel;
     LbNonScatteredThemeCount: TLabel;
@@ -74,11 +74,11 @@ type
     LbNonScatteredThemeValue: TLabel;
     BBCancel: TBitBtn;
     PBProgress: TProgressBar;
-    PnBreakTimetableTeacher: TPanel;
-    PnBreakTimetableTeacherCount: TPanel;
-    LbBreakTimetableTeacherCount: TLabel;
-    PnBreakTimetableTeacherValue: TPanel;
-    LbBreakTimetableTeacherValue: TLabel;
+    PnBreakTimetableResource: TPanel;
+    PnBreakTimetableResourceCount: TPanel;
+    LbBreakTimetableResourceCount: TLabel;
+    PnBreakTimetableResourceValue: TPanel;
+    LbBreakTimetableResourceValue: TLabel;
     PnPosition: TPanel;
     LbPosition: TLabel;
     procedure BBCancelClick(Sender: TObject);
@@ -147,8 +147,8 @@ begin
   if MainForm.UpdateIndex <> FUpdateIndex then
   begin
     with MasterDataModule.ConfigStorage do
-      TTimetableModel(ASolver.Model).Configure(ClashTeacher, ClashTheme,
-        ClashRoomType, BreakTimetableTeacher, OutOfPositionEmptyHour,
+      TTimetableModel(ASolver.Model).Configure(ClashResource, ClashTheme,
+        ClashRoomType, BreakTimetableResource, OutOfPositionEmptyHour,
         BrokenSession, NonScatteredTheme);
     //ASolver.Update;
     ASolver.UpdateValue;
@@ -166,28 +166,28 @@ begin
       FTimePosition0 := t;
     LbPosition.Caption := Format('%d/%d', [APosition, AMax]);
     PBProgress.Position := APosition;
-    LbClashTeacher.Caption := Format('%d ', [ClashTeacher]);
+    LbClashResource.Caption := Format('%d ', [ClashResource]);
     LbClashTheme.Caption := Format('%d ', [ClashTheme]);
     LbClashRoomType.Caption := Format('%d ', [ClashRoomType]);
-    LbBreakTimetableTeacherCount.Caption :=
-      Format('%d ', [BreakTimetableTeacher]);
+    LbBreakTimetableResourceCount.Caption :=
+      Format('%d ', [BreakTimetableResource]);
     LbOutOfPositionEmptyHour.Caption := Format('%d ', [OutOfPositionEmptyHour]);
     LbBrokenSession.Caption := Format('%d ', [BrokenSession]);
     LbThemeRestriction.Caption :=
       Format('%s ', [VarArrToStr(ThemeRestrictionTypeToThemeCount)]);
-    LbTeacherRestriction.Caption :=
-      Format('%s ', [VarArrToStr(TeacherRestrictionTypeATeacherCount)]);
+    LbResourceRestriction.Caption :=
+      Format('%s ', [VarArrToStr(ResourceRestrictionTypeAResourceCount)]);
     LbNonScatteredThemeCount.Caption := Format('%d ', [NonScatteredTheme]);
-    LbClashTeacherValue.Caption := Format('%d ', [ClashTeacherValue]);
+    LbClashResourceValue.Caption := Format('%d ', [ClashResourceValue]);
     LbClashThemeValue.Caption := Format('%d ', [ClashThemeValue]);
-    LbBreakTimetableTeacherValue.Caption :=
-      Format('%d ', [BreakTimetableTeacherValue]);
+    LbBreakTimetableResourceValue.Caption :=
+      Format('%d ', [BreakTimetableResourceValue]);
     LbClashRoomTypeValue.Caption := Format('%d ', [ClashRoomTypeValue]);
     LbOutOfPositionEmptyHourValue.Caption := Format('%d ',
       [OutOfPositionEmptyHourValue]);
     LbBrokenSessionValue.Caption := Format('%d ', [BrokenSessionValue]);
     LbThemeRestrictionValue.Caption := Format('%d ', [ThemeRestrictionValue]);
-    LbTeacherRestrictionValue.Caption := Format('%d ', [TeacherRestrictionValue]);
+    LbResourceRestrictionValue.Caption := Format('%d ', [ResourceRestrictionValue]);
     LbNonScatteredThemeValue.Caption := Format('%d ', [NonScatteredThemeValue]);
     LbTotalValue.Caption := Format('%d ', [Value]);
   end;

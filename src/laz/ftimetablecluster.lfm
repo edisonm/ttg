@@ -194,17 +194,17 @@ inherited TimetableClusterForm: TTimetableClusterForm
       '  IdHour,'
       '  IdDay,'
       '  TimetableDetail.IdTheme,'
-      '  Distribution.IdTeacher,'
+      '  Distribution.IdResource,'
       '  NaTheme,'
-      '  LnTeacher,'
-      '  NaTeacher'
+      '  LnResource,'
+      '  NaResource'
       'from'
       '  TimetableDetail inner join Distribution on'
       '  TimetableDetail.IdTheme = Distribution.IdTheme'
       '  and TimetableDetail.IdCategory = Distribution.IdCategory'
       '  and TimetableDetail.IdParallel = Distribution.IdParallel'
       '  inner join Theme on TimetableDetail.IdTheme = Theme.IdTheme'
-      '  inner join Teacher on Distribution.IdTeacher = Teacher.IdTeacher'
+      '  inner join Resource on Distribution.IdResource = Resource.IdResource'
       'where'
       '  IdTimetable=:IdTimetable'
       'and TimetableDetail.IdCategory=:IdCategory'
@@ -218,17 +218,17 @@ inherited TimetableClusterForm: TTimetableClusterForm
       '  IdHour,'
       '  IdDay,'
       '  TimetableDetail.IdTheme,'
-      '  Distribution.IdTeacher,'
+      '  Distribution.IdResource,'
       '  NaTheme,'
-      '  LnTeacher,'
-      '  NaTeacher'
+      '  LnResource,'
+      '  NaResource'
       'from'
       '  TimetableDetail inner join Distribution on'
       '  TimetableDetail.IdTheme = Distribution.IdTheme'
       '  and TimetableDetail.IdCategory = Distribution.IdCategory'
       '  and TimetableDetail.IdParallel = Distribution.IdParallel'
       '  inner join Theme on TimetableDetail.IdTheme = Theme.IdTheme'
-      '  inner join Teacher on Distribution.IdTeacher = Teacher.IdTeacher'
+      '  inner join Resource on Distribution.IdResource = Resource.IdResource'
       '  inner join JoinedCluster on'
       '  Distribution.IdTheme = JoinedCluster.IdTheme'
       '  and Distribution.IdCategory=JoinedCluster.IdCategory'
@@ -353,10 +353,10 @@ inherited TimetableClusterForm: TTimetableClusterForm
       Required = True
       Visible = False
     end
-    object QuTimetableClusterIdTeacher: TLongintField
+    object QuTimetableClusterIdResource: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTeacher'
+      FieldName = 'IdResource'
       Index = 8
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -385,10 +385,10 @@ inherited TimetableClusterForm: TTimetableClusterForm
       ReadOnly = True
       Required = False
     end
-    object QuTimetableClusterLnTeacher: TStringField
+    object QuTimetableClusterLnResource: TStringField
       DisplayWidth = 15
       FieldKind = fkData
-      FieldName = 'LnTeacher'
+      FieldName = 'LnResource'
       Index = 11
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -396,10 +396,10 @@ inherited TimetableClusterForm: TTimetableClusterForm
       Required = True
       Size = 15
     end
-    object QuTimetableClusterNaTeacher: TStringField
+    object QuTimetableClusterNaResource: TStringField
       DisplayWidth = 15
       FieldKind = fkData
-      FieldName = 'NaTeacher'
+      FieldName = 'NaResource'
       Index = 12
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]

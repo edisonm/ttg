@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit FTeacher;
+unit FResource;
 
 {$I ttg.inc}
 
@@ -13,11 +13,11 @@ uses
 
 type
 
-  { TTeacherForm }
+  { TResourceForm }
 
-  TTeacherForm	= class(TMasterDetailEditorForm)
-    TBTeacherRestriction: TToolButton;
-    ActTeacherRestriction: TAction;
+  TResourceForm	= class(TMasterDetailEditorForm)
+    TBResourceRestriction: TToolButton;
+    ActResourceRestriction: TAction;
     DbGAssistances: TDBGrid;
     DbGJoinedCluster: TDBGrid;
     GroupBox3: TGroupBox;
@@ -26,7 +26,7 @@ type
     Splitter2: TSplitter;
     Splitter3: TSplitter;
     procedure ActFindExecute(Sender: TObject);
-    procedure ActTeacherRestrictionExecute(Sender: TObject);
+    procedure ActResourceRestrictionExecute(Sender: TObject);
     procedure DataSourceStateChange(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -38,14 +38,14 @@ type
   private
     { Private declarations }
     FSuperTitle: string;
-    FTeacherRestrictionForm: TCrossManyToManyEditorRForm;
+    FResourceRestrictionForm: TCrossManyToManyEditorRForm;
     function GetCurrentLoad: Integer;
   public
     { Public declarations }
   end;
 
 var
-  TeacherForm: TTeacherForm;
+  ResourceForm: TResourceForm;
 
 implementation
 
@@ -56,73 +56,73 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-procedure TTeacherForm.ActTeacherRestrictionExecute(Sender: TObject);
+procedure TResourceForm.ActResourceRestrictionExecute(Sender: TObject);
 begin
   with SourceDataModule do
-  if TCrossManyToManyEditorRForm.ToggleEditor(Self, FTeacherRestrictionForm,
-    ConfigStorage, ActTeacherRestriction) then
-  with FTeacherRestrictionForm do
+  if TCrossManyToManyEditorRForm.ToggleEditor(Self, FResourceRestrictionForm,
+    ConfigStorage, ActResourceRestriction) then
+  with FResourceRestrictionForm do
   begin
-    Tag := TbTeacher.FindField('IdTeacher').AsInteger;
-    TbTeacherRestriction.MasterSource := DSTeacher;
-    TbTeacherRestriction.MasterFields := 'IdTeacher';
-    TbTeacherRestriction.LinkedFields := 'IdTeacher';
-    Caption := Format('%s %s %s - %s %s', [NameDataSet[TbTeacher],
-      TbTeacher.FindField('LnTeacher').AsString,
-      TbTeacher.FindField('NaTeacher').AsString,
-      SEditing, Description[TbTeacherRestriction]]);
+    Tag := TbResource.FindField('IdResource').AsInteger;
+    TbResourceRestriction.MasterSource := DSResource;
+    TbResourceRestriction.MasterFields := 'IdResource';
+    TbResourceRestriction.LinkedFields := 'IdResource';
+    Caption := Format('%s %s %s - %s %s', [NameDataSet[TbResource],
+      TbResource.FindField('LnResource').AsString,
+      TbResource.FindField('NaResource').AsString,
+      SEditing, Description[TbResourceRestriction]]);
     DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
-      [Description[TbTeacherRestriction], Description[TbDay], Description[TbHour]]);
+      [Description[TbResourceRestriction], Description[TbDay], Description[TbHour]]);
     ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda',
-      [NameDataSet[TbTeacherRestrictionType], Description[TbTeacherRestrictionType]]);
-    ShowEditor(TbDay, TbHour, TbTeacherRestrictionType, TbTeacherRestriction,
+      [NameDataSet[TbResourceRestrictionType], Description[TbResourceRestrictionType]]);
+    ShowEditor(TbDay, TbHour, TbResourceRestrictionType, TbResourceRestriction,
 	    TbTimeSlot, 'IdDay', 'NaDay', 'IdDay', 'IdDay', 'IdHour', 'NaHour',
-      'IdHour', 'IdHour', 'IdTeacherRestrictionType', 'NaTeacherRestrictionType',
-      'ColTeacherRestrictionType', 'IdTeacherRestrictionType');
+      'IdHour', 'IdHour', 'IdResourceRestrictionType', 'NaResourceRestrictionType',
+      'ColResourceRestrictionType', 'IdResourceRestrictionType');
   end
   else
   begin
-    TbTeacherRestriction.MasterSource := nil;
+    TbResourceRestriction.MasterSource := nil;
   end;
 end;
 
-procedure TTeacherForm.DataSourceStateChange(Sender: TObject);
+procedure TResourceForm.DataSourceStateChange(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TTeacherForm.DBGridDblClick(Sender: TObject);
+procedure TResourceForm.DBGridDblClick(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TTeacherForm.ActFindExecute(Sender: TObject);
+procedure TResourceForm.ActFindExecute(Sender: TObject);
 begin
   inherited;
 end;
 
-procedure TTeacherForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+procedure TResourceForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   inherited;
 end;
 
-procedure TTeacherForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+procedure TResourceForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
   inherited;
 end;
 
-procedure TTeacherForm.DataSourceDataChange(Sender: TObject; Field: TField);
+procedure TResourceForm.DataSourceDataChange(Sender: TObject; Field: TField);
 begin
   inherited;
   Caption := FSuperTitle + Format(' - %s: %d', [SLoad, GetCurrentLoad]);
 end;
 
-procedure TTeacherForm.FormActivate(Sender: TObject);
+procedure TResourceForm.FormActivate(Sender: TObject);
 begin
-  SourceDataModule.TbTeacher.Locate('IdTeacher', (Sender as TCustomForm).Tag, []);
+  SourceDataModule.TbResource.Locate('IdResource', (Sender as TCustomForm).Tag, []);
 end;
 
-function TTeacherForm.GetCurrentLoad: Integer;
+function TResourceForm.GetCurrentLoad: Integer;
 var
   VBookmark: TBookmark;
   FieldComposition: TField;
@@ -147,15 +147,15 @@ begin
   end;
 end;
 
-procedure TTeacherForm.FormCreate(Sender: TObject);
+procedure TResourceForm.FormCreate(Sender: TObject);
 begin
   inherited;
   with SourceDataModule do
   begin
-    FSuperTitle := Description[TbTeacher];
-    TbDistribution.MasterFields := 'IdTeacher';
-    TbDistribution.LinkedFields := 'IdTeacher';
-    TbDistribution.MasterSource := DSTeacher;
+    FSuperTitle := Description[TbResource];
+    TbDistribution.MasterFields := 'IdResource';
+    TbDistribution.LinkedFields := 'IdResource';
+    TbDistribution.MasterSource := DSResource;
     TbAssistance.MasterFields := 'IdTheme;IdCategory;IdParallel';
     TbAssistance.LinkedFields := 'IdTheme;IdCategory;IdParallel';
     TbAssistance.MasterSource := SourceDataModule.DSDistribution;
@@ -163,13 +163,13 @@ begin
     TbJoinedCluster.LinkedFields := 'IdTheme;IdCategory;IdParallel';
     TbJoinedCluster.MasterSource := SourceDataModule.DSDistribution;
     {TbAssistance.Close;
-    QuTeacher.Close;
-    QuTeacher.Open;
+    QuResource.Close;
+    QuResource.Open;
     TbAssistance.Open;}
   end;
 end;
 
-procedure TTeacherForm.FormDestroy(Sender: TObject);
+procedure TResourceForm.FormDestroy(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbAssistance.MasterSource := nil;

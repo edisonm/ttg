@@ -6,9 +6,9 @@ unit FMain;
 {
 TODO:
   - Timetables by Clusters
-  - Timetables by Teachers
-  - Teacher Restrictions
-  - Teacher Distribution
+  - Timetables by Resources
+  - Resource Restrictions
+  - Resource Distribution
   - Theme Distribution
 }
 interface
@@ -34,7 +34,7 @@ type
     MILanguages: TMenuItem;
     MILangSpanish: TMenuItem;
     MILangEnglish: TMenuItem;
-    MITeacher: TMenuItem;
+    MIResource: TMenuItem;
     MITheme: TMenuItem;
     MIParallel: TMenuItem;
     MICategory: TMenuItem;
@@ -68,7 +68,7 @@ type
     TBHour: TToolButton;
     TBCategory: TToolButton;
     TBParallel: TToolButton;
-    TBTeacher: TToolButton;
+    TBResource: TToolButton;
     TBRoomType: TToolButton;
     TBTimeSlot: TToolButton;
     TBCluster: TToolButton;
@@ -95,7 +95,7 @@ type
     ActHour: TAction;
     ActCategory: TAction;
     ActParallel: TAction;
-    ActTeacher: TAction;
+    ActResource: TAction;
     ActRoomType: TAction;
     ActTimeSlot: TAction;
     ActCluster: TAction;
@@ -125,7 +125,7 @@ type
     procedure ActLangDefaultExecute(Sender: TObject);
     procedure ActLangEnglishExecute(Sender: TObject);
     procedure ActLangSpanishExecute(Sender: TObject);
-    procedure ActTeacherExecute(Sender: TObject);
+    procedure ActResourceExecute(Sender: TObject);
     procedure ActThemeExecute(Sender: TObject);
     procedure ActCategoryExecute(Sender: TObject);
     procedure ActRoomTypeExecute(Sender: TObject);
@@ -202,7 +202,7 @@ var
 implementation
 
 uses
-  FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FTheme, FTeacher,
+  FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FTheme, FResource,
   FTimetable, FMasterDetailEditor, FConfig, FCluster, Printers, DSource,
   DSourceBase, UTTGBasics, FMessageView, UTTGi18n, UTTGConsts, FDBExplorer;
 
@@ -242,13 +242,13 @@ begin
   EnableTranslator(GetLResourceForLanguage('ttg', 'es'));
 end;
 
-procedure TMainForm.ActTeacherExecute(Sender: TObject);
+procedure TMainForm.ActResourceExecute(Sender: TObject);
 begin
-  TTeacherForm.ToggleSingleEditor(Self,
-				  TeacherForm,
+  TResourceForm.ToggleSingleEditor(Self,
+				  ResourceForm,
 				  ConfigStorage,
-				  actTeacher,
-				  SourceDataModule.TbTeacher);
+				  actResource,
+				  SourceDataModule.TbResource);
 end;
 
 procedure TMainForm.ActTimeSlotExecute(Sender: TObject);
@@ -693,7 +693,7 @@ begin
     else
     begin
       SourceDataModule.TbThemeRestrictionType.Refresh;
-      SourceDataModule.TbTeacherRestrictionType.Refresh;
+      SourceDataModule.TbResourceRestrictionType.Refresh;
     end;
   finally
     ActConfigure.Checked := False;
@@ -705,7 +705,7 @@ begin
   MessageViewForm.HelpContext := ActCheckFeasibility.HelpContext;
   if MasterDataModule.PerformAllChecks(MessageViewForm.MemLog.Lines,
                                        MessageViewForm.MemSummary.Lines,
-                                       MasterDataModule.ConfigStorage.MaxTeacherWorkLoad) then
+                                       MasterDataModule.ConfigStorage.MaxResourceWorkLoad) then
   begin
     MessageViewForm.Show;
   end

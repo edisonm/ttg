@@ -205,12 +205,12 @@
         <UnitName Value="FTheme"/>
       </Unit12>
       <Unit13>
-        <Filename Value="fteacher.pp"/>
+        <Filename Value="fresource.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="TeacherForm"/>
+        <ComponentName Value="ResourceForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FTeacher"/>
+        <UnitName Value="FResource"/>
       </Unit13>
       <Unit14>
         <Filename Value="uttgdbutils.pp"/>
@@ -287,12 +287,12 @@
         <UnitName Value="FTimetable"/>
       </Unit23>
       <Unit24>
-        <Filename Value="ftimetableteacher.pp"/>
+        <Filename Value="ftimetableresource.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="TimetableTeacherForm"/>
+        <ComponentName Value="TimetableResourceForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FTimetableTeacher"/>
+        <UnitName Value="FTimetableResource"/>
       </Unit24>
       <Unit25>
         <Filename Value="dsourcebase.pp"/>

@@ -11,8 +11,8 @@ msgctxt "dsourcebaseconsts.sflassistance_idparallel"
 msgid "Parallel"
 msgstr "Paralelo"
 
-#: dsourcebaseconsts.sflassistance_idteacher
-msgctxt "dsourcebaseconsts.sflassistance_idteacher"
+#: dsourcebaseconsts.sflassistance_idresource
+msgctxt "dsourcebaseconsts.sflassistance_idresource"
 msgid "Assistant"
 msgstr "Ayudante"
 
@@ -76,8 +76,8 @@ msgctxt "dsourcebaseconsts.sfldistribution_idroomtype"
 msgid "Room Type"
 msgstr "Tipo de Aula"
 
-#: dsourcebaseconsts.sfldistribution_idteacher
-msgctxt "dsourcebaseconsts.sfldistribution_idteacher"
+#: dsourcebaseconsts.sfldistribution_idresource
+msgctxt "dsourcebaseconsts.sfldistribution_idresource"
 msgid "Teacher"
 msgstr "Profesor"
 
@@ -174,64 +174,64 @@ msgctxt "dsourcebaseconsts.sflspecialization_naspecialization"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sflteacherrestrictiontype_colteacherrestrictiontype
-msgctxt "dsourcebaseconsts.sflteacherrestrictiontype_colteacherrestrictiontype"
+#: dsourcebaseconsts.sflresourcerestrictiontype_colresourcerestrictiontype
+msgctxt "dsourcebaseconsts.sflresourcerestrictiontype_colresourcerestrictiontype"
 msgid "Color"
 msgstr "Color"
 
-#: dsourcebaseconsts.sflteacherrestrictiontype_idteacherrestrictiontype
-msgctxt "dsourcebaseconsts.sflteacherrestrictiontype_idteacherrestrictiontype"
+#: dsourcebaseconsts.sflresourcerestrictiontype_idresourcerestrictiontype
+msgctxt "dsourcebaseconsts.sflresourcerestrictiontype_idresourcerestrictiontype"
 msgid "Id"
 msgstr "Codigo"
 
-#: dsourcebaseconsts.sflteacherrestrictiontype_nateacherrestrictiontype
-msgctxt "dsourcebaseconsts.sflteacherrestrictiontype_nateacherrestrictiontype"
+#: dsourcebaseconsts.sflresourcerestrictiontype_naresourcerestrictiontype
+msgctxt "dsourcebaseconsts.sflresourcerestrictiontype_naresourcerestrictiontype"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sflteacherrestrictiontype_valteacherrestrictiontype
-msgctxt "dsourcebaseconsts.sflteacherrestrictiontype_valteacherrestrictiontype"
+#: dsourcebaseconsts.sflresourcerestrictiontype_valresourcerestrictiontype
+msgctxt "dsourcebaseconsts.sflresourcerestrictiontype_valresourcerestrictiontype"
 msgid "Value"
 msgstr "Valor"
 
-#: dsourcebaseconsts.sflteacherrestriction_idday
-msgctxt "dsourcebaseconsts.sflteacherrestriction_idday"
+#: dsourcebaseconsts.sflresourcerestriction_idday
+msgctxt "dsourcebaseconsts.sflresourcerestriction_idday"
 msgid "Day"
 msgstr "Day"
 
-#: dsourcebaseconsts.sflteacherrestriction_idhour
-msgctxt "dsourcebaseconsts.sflteacherrestriction_idhour"
+#: dsourcebaseconsts.sflresourcerestriction_idhour
+msgctxt "dsourcebaseconsts.sflresourcerestriction_idhour"
 msgid "Hour"
 msgstr "Hour"
 
-#: dsourcebaseconsts.sflteacherrestriction_idteacher
-msgctxt "dsourcebaseconsts.sflteacherrestriction_idteacher"
+#: dsourcebaseconsts.sflresourcerestriction_idresource
+msgctxt "dsourcebaseconsts.sflresourcerestriction_idresource"
 msgid "Teacher"
 msgstr "Profesor"
 
-#: dsourcebaseconsts.sflteacherrestriction_idteacherrestrictiontype
-msgctxt "dsourcebaseconsts.sflteacherrestriction_idteacherrestrictiontype"
+#: dsourcebaseconsts.sflresourcerestriction_idresourcerestrictiontype
+msgctxt "dsourcebaseconsts.sflresourcerestriction_idresourcerestrictiontype"
 msgid "Restriction Type"
 msgstr "Tipo de Restriccion"
 
-#: dsourcebaseconsts.sflteacher_idteacher
-msgctxt "dsourcebaseconsts.sflteacher_idteacher"
+#: dsourcebaseconsts.sflresource_idresource
+msgctxt "dsourcebaseconsts.sflresource_idresource"
 msgid "Id"
 msgstr "Codigo"
 
-#: dsourcebaseconsts.sflteacher_lnteacher
-msgctxt "dsourcebaseconsts.sflteacher_lnteacher"
+#: dsourcebaseconsts.sflresource_lnresource
+msgctxt "dsourcebaseconsts.sflresource_lnresource"
 msgid "Last Name"
 msgstr "Apellido"
 
-#: dsourcebaseconsts.sflteacher_nateacher
-msgctxt "dsourcebaseconsts.sflteacher_nateacher"
+#: dsourcebaseconsts.sflresource_naresource
+msgctxt "dsourcebaseconsts.sflresource_naresource"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sflteacher_teachernationalid
-msgctxt "dsourcebaseconsts.sflteacher_teachernationalid"
-msgid "National ID"
+#: dsourcebaseconsts.sflresource_abresource
+msgctxt "dsourcebaseconsts.sflresource_abresource"
+msgid "Abbreviation"
 msgstr "Identificacion"
 
 #: dsourcebaseconsts.sflthemerestrictiontype_colthemerestrictiontype
@@ -394,18 +394,18 @@ msgctxt "dsourcebaseconsts.stbroomtype"
 msgid "Types of Room"
 msgstr "Tipos de Aula"
 
-#: dsourcebaseconsts.stbteacher
-msgctxt "dsourcebaseconsts.stbteacher"
+#: dsourcebaseconsts.stbresource
+msgctxt "dsourcebaseconsts.stbresource"
 msgid "Teachers"
 msgstr "Profesores"
 
-#: dsourcebaseconsts.stbteacherrestriction
-msgctxt "dsourcebaseconsts.stbteacherrestriction"
+#: dsourcebaseconsts.stbresourcerestriction
+msgctxt "dsourcebaseconsts.stbresourcerestriction"
 msgid "Teacher Restrictions"
 msgstr "Restricciones de profesores"
 
-#: dsourcebaseconsts.stbteacherrestrictiontype
-msgctxt "dsourcebaseconsts.stbteacherrestrictiontype"
+#: dsourcebaseconsts.stbresourcerestrictiontype
+msgctxt "dsourcebaseconsts.stbresourcerestrictiontype"
 msgid "Types of Teacher Restrictions"
 msgstr "Tipos de restricciones de profesores"
 
@@ -523,8 +523,8 @@ msgctxt "TCONFIGFORM.LBAUTHORITYPOSITION.CAPTION"
 msgid "Position:"
 msgstr "Cargo:"
 
-#: tconfigform.lbbreaktimetableteacher.caption
-msgctxt "tconfigform.lbbreaktimetableteacher.caption"
+#: tconfigform.lbbreaktimetableresource.caption
+msgctxt "tconfigform.lbbreaktimetableresource.caption"
 msgid "Gap TT. Teachers:"
 msgstr "Huecos h. prof.:"
 
@@ -568,9 +568,9 @@ msgctxt "TCONFIGFORM.LBJOINTHEMES.CAPTION"
 msgid "Joined Themes:"
 msgstr "Materias juntas:"
 
-#: tconfigform.lbmaxteacherworkload.caption
-msgctxt "tconfigform.lbmaxteacherworkload.caption"
-msgid "Max work load per teacher:"
+#: tconfigform.lbmaxresourceworkload.caption
+msgctxt "tconfigform.lbmaxresourceworkload.caption"
+msgid "Max work load per resource:"
 msgstr "Carga Maxima por Profesor:"
 
 #: tconfigform.lbmutationprobability.caption
@@ -921,12 +921,12 @@ msgctxt "tmainform.actsubject.hint"
 msgid "Themes|Themes"
 msgstr "Materias|Materias"
 
-#: tmainform.actteacher.caption
-msgctxt "tmainform.actteacher.caption"
+#: tmainform.actresource.caption
+msgctxt "tmainform.actresource.caption"
 msgid "Teachers"
 msgstr "Profesores"
 
-#: tmainform.actteacher.hint
+#: tmainform.actresource.hint
 msgid "Teachers|Teachers"
 msgstr "Profesores|Profesores"
 
@@ -1078,13 +1078,13 @@ msgctxt "tprogressform.caption"
 msgid "Search progress"
 msgstr "Progreso de la busqueda"
 
-#: tprogressform.lbbreaktimetableteachercount.caption
-msgctxt "TPROGRESSFORM.LBBREAKTIMETABLETEACHERCOUNT.CAPTION"
+#: tprogressform.lbbreaktimetableresourcecount.caption
+msgctxt "TPROGRESSFORM.LBBREAKTIMETABLERESOURCECOUNT.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lbbreaktimetableteachervalue.caption
-msgctxt "TPROGRESSFORM.LBBREAKTIMETABLETEACHERVALUE.CAPTION"
+#: tprogressform.lbbreaktimetableresourcevalue.caption
+msgctxt "TPROGRESSFORM.LBBREAKTIMETABLERESOURCEVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1108,13 +1108,13 @@ msgctxt "TPROGRESSFORM.LBCLASHROOMTYPEVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lbclashteacher.caption
-msgctxt "TPROGRESSFORM.LBCLASHTEACHER.CAPTION"
+#: tprogressform.lbclashresource.caption
+msgctxt "TPROGRESSFORM.LBCLASHRESOURCE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lbclashteachervalue.caption
-msgctxt "TPROGRESSFORM.LBCLASHTEACHERVALUE.CAPTION"
+#: tprogressform.lbclashresourcevalue.caption
+msgctxt "TPROGRESSFORM.LBCLASHRESOURCEVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1178,13 +1178,13 @@ msgctxt "TPROGRESSFORM.LBREMAININGTIME.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lbteacherrestriction.caption
-msgctxt "TPROGRESSFORM.LBTEACHERRESTRICTION.CAPTION"
+#: tprogressform.lbresourcerestriction.caption
+msgctxt "TPROGRESSFORM.LBRESOURCERESTRICTION.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lbteacherrestrictionvalue.caption
-msgctxt "TPROGRESSFORM.LBTEACHERRESTRICTIONVALUE.CAPTION"
+#: tprogressform.lbresourcerestrictionvalue.caption
+msgctxt "TPROGRESSFORM.LBRESOURCERESTRICTIONVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
@@ -1203,17 +1203,17 @@ msgctxt "TPROGRESSFORM.LBTOTALVALUE.CAPTION"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.pnbreaktimetableteacher.caption
+#: tprogressform.pnbreaktimetableresource.caption
 msgid " Break TT. Teacher:"
 msgstr "Fracc. h. profesores:"
 
-#: tprogressform.pnbreaktimetableteachercount.caption
-msgctxt "TPROGRESSFORM.PNBREAKTIMETABLETEACHERCOUNT.CAPTION"
+#: tprogressform.pnbreaktimetableresourcecount.caption
+msgctxt "TPROGRESSFORM.PNBREAKTIMETABLERESOURCECOUNT.CAPTION"
 msgid " Number:"
 msgstr " Numero:"
 
-#: tprogressform.pnbreaktimetableteachervalue.caption
-msgctxt "TPROGRESSFORM.PNBREAKTIMETABLETEACHERVALUE.CAPTION"
+#: tprogressform.pnbreaktimetableresourcevalue.caption
+msgctxt "TPROGRESSFORM.PNBREAKTIMETABLERESOURCEVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
@@ -1245,17 +1245,17 @@ msgctxt "TPROGRESSFORM.PNCLASHROOMTYPEVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
-#: tprogressform.pnclashteacher.caption
+#: tprogressform.pnclashresource.caption
 msgid " Clash Teachers:"
 msgstr " Cruce profesores:"
 
-#: tprogressform.pnclashteachernumber.caption
-msgctxt "TPROGRESSFORM.PNCLASHTEACHERNUMBER.CAPTION"
+#: tprogressform.pnclashresourcenumber.caption
+msgctxt "TPROGRESSFORM.PNCLASHRESOURCENUMBER.CAPTION"
 msgid " Number:"
 msgstr " Numero:"
 
-#: tprogressform.pnclashteachervalue.caption
-msgctxt "TPROGRESSFORM.PNCLASHTEACHERVALUE.CAPTION"
+#: tprogressform.pnclashresourcevalue.caption
+msgctxt "TPROGRESSFORM.PNCLASHRESOURCEVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
@@ -1333,17 +1333,17 @@ msgstr "Polinizacion:"
 msgid " Iteration:"
 msgstr " Iteracion:"
 
-#: tprogressform.pnteacherrestriction.caption
+#: tprogressform.pnresourcerestriction.caption
 msgid " Teacher Restrictions:"
 msgstr " Prohibiciones de profesor:"
 
-#: tprogressform.pnteacherrestrictionnumber.caption
-msgctxt "TPROGRESSFORM.PNTEACHERRESTRICTIONNUMBER.CAPTION"
+#: tprogressform.pnresourcerestrictionnumber.caption
+msgctxt "TPROGRESSFORM.PNRESOURCERESTRICTIONNUMBER.CAPTION"
 msgid " Number:"
 msgstr " Numero:"
 
-#: tprogressform.pnteacherrestrictionvalue.caption
-msgctxt "TPROGRESSFORM.PNTEACHERRESTRICTIONVALUE.CAPTION"
+#: tprogressform.pnresourcerestrictionvalue.caption
+msgctxt "TPROGRESSFORM.PNRESOURCERESTRICTIONVALUE.CAPTION"
 msgid " Value:"
 msgstr " Valor:"
 
@@ -1450,35 +1450,35 @@ msgctxt "TSPLASHFORM.LBYEARLABEL.CAPTION"
 msgid "..."
 msgstr "..."
 
-#: tteacherform.actteacherrestriction.caption
-msgctxt "TTEACHERFORM.ACTTEACHERRESTRICTION.CAPTION"
+#: tresourceform.actresourcerestriction.caption
+msgctxt "TRESOURCEFORM.ACTRESOURCERESTRICTION.CAPTION"
 msgid "Teacher restrictions"
 msgstr "Prohibiciones de profesor"
 
-#: tteacherform.actteacherrestriction.hint
+#: tresourceform.actresourcerestriction.hint
 msgid "Teacher restrictions|Input Teacher restrictions"
 msgstr "Prohibiciones de profesor|Ingresar las prohibiciones de profesor"
 
-#: tteacherform.caption
-msgctxt "tteacherform.caption"
+#: tresourceform.caption
+msgctxt "tresourceform.caption"
 msgid "Teacher"
 msgstr "Profesor"
 
-#: tteacherform.dbgriddetail.hint
+#: tresourceform.dbgriddetail.hint
 msgid "Distribution of Teachers"
 msgstr "Distribution de profesores"
 
-#: tteacherform.gbjoinedcluster.caption
-msgctxt "tteacherform.gbjoinedcluster.caption"
+#: tresourceform.gbjoinedcluster.caption
+msgctxt "tresourceform.gbjoinedcluster.caption"
 msgid "Joined Clusters"
 msgstr "Clases agrupadas"
 
-#: tteacherform.grbdetail.caption
+#: tresourceform.grbdetail.caption
 msgid "Distribution"
 msgstr "Distribucion"
 
-#: tteacherform.groupbox3.caption
-msgctxt "tteacherform.groupbox3.caption"
+#: tresourceform.groupbox3.caption
+msgctxt "tresourceform.groupbox3.caption"
 msgid "Assistances"
 msgstr "Ayudas"
 
@@ -1515,14 +1515,14 @@ msgctxt "TTIMETABLEFORM.ACTCLASHAULA.HINT"
 msgid "Clashes of rooms|Clashes of rooms of same type"
 msgstr "Cruce de aulas|Cruce de aulas del mismo tipo"
 
-#: ttimetableform.actclashteacher.caption
-msgctxt "TTIMETABLEFORM.ACTCLASHTEACHER.CAPTION"
-msgid "Clashes of teachers"
+#: ttimetableform.actclashresource.caption
+msgctxt "TTIMETABLEFORM.ACTCLASHRESOURCE.CAPTION"
+msgid "Clashes of resources"
 msgstr "Cruce de profesores"
 
-#: ttimetableform.actclashteacher.hint
-msgctxt "TTIMETABLEFORM.ACTCLASHTEACHER.HINT"
-msgid "Clashes of teachers|Clashes of teachers"
+#: ttimetableform.actclashresource.hint
+msgctxt "TTIMETABLEFORM.ACTCLASHRESOURCE.HINT"
+msgid "Clashes of resources|Clashes of resources"
 msgstr "Cruce de profesores|Cruce de profesores"
 
 #: ttimetableform.actclashtheme.caption
@@ -1543,12 +1543,12 @@ msgstr "Mejorar horario"
 msgid "Improve timetable|Improve selected timetable"
 msgstr "Mejorar horario|Mejorar horario seleccionado"
 
-#: ttimetableform.actteacherrestrictionnorespetada.caption
-msgctxt "TTIMETABLEFORM.ACTTEACHERRESTRICTIONNORESPETADA.CAPTION"
+#: ttimetableform.actresourcerestrictionnorespetada.caption
+msgctxt "TTIMETABLEFORM.ACTRESOURCERESTRICTIONNORESPETADA.CAPTION"
 msgid "Teacher restrictions"
 msgstr "Prohibiciones de profesor"
 
-#: ttimetableform.actteacherrestrictionnorespetada.hint
+#: ttimetableform.actresourcerestrictionnorespetada.hint
 msgid "Teacher retrictions|Teacher restrictions non satisfied"
 msgstr "Prohibiciones de profesor|Prohibiciones de profesor no respetadas"
 
@@ -1594,11 +1594,11 @@ msgstr "Horario por tipo de aulas"
 msgid "Timetables by room types|Timetables by room types"
 msgstr "Horario por tipo de aulas|Horario por tipo de aulas"
 
-#: ttimetableform.acttimetableteacher.caption
+#: ttimetableform.acttimetableresource.caption
 msgid "Teachers' timetables"
 msgstr "Horario de profesores"
 
-#: ttimetableform.acttimetableteacher.hint
+#: ttimetableform.acttimetableresource.hint
 msgid "Teachers' timetables|Teachers' timetables"
 msgstr "Horario de profesores|Horario de profesores"
 
@@ -1627,9 +1627,9 @@ msgctxt "ttimetableroomtypeform.cbshowroomtype.hint"
 msgid "Show|What to show in the room type timetable"
 msgstr "Mostrar|Parametro a mostrar en el horario del tipo de aula"
 
-#: ttimetableteacherform.cbshowteacher.hint
-msgctxt "ttimetableteacherform.cbshowteacher.hint"
-msgid "Show|Param to show in the teacher timetable"
+#: ttimetableresourceform.cbshowresource.hint
+msgctxt "ttimetableresourceform.cbshowresource.hint"
+msgid "Show|Param to show in the resource timetable"
 msgstr "Mostrar|Parametro a mostrar en el horario del profesor"
 
 #: uabout.sappname
@@ -1664,8 +1664,8 @@ msgstr "Asignar"
 msgid "Base Timetable: %d"
 msgstr "Horario base: %d"
 
-#: uttgconsts.sbreaktimetableteacher
-msgctxt "uttgconsts.sbreaktimetableteacher"
+#: uttgconsts.sbreaktimetableresource
+msgctxt "uttgconsts.sbreaktimetableresource"
 msgid "Broken TT. Teachers"
 msgstr "Fracc. h. profesores"
 
@@ -1686,8 +1686,8 @@ msgctxt "uttgconsts.sclashroomtype"
 msgid "Clash of Classrooms"
 msgstr "Cruce de aulas"
 
-#: uttgconsts.sclashteacher
-msgctxt "uttgconsts.sclashteacher"
+#: uttgconsts.sclashresource
+msgctxt "uttgconsts.sclashresource"
 msgid "Clash of Teachers"
 msgstr "Cruce de profesores"
 
@@ -1768,8 +1768,8 @@ msgstr "Detalle"
 msgid "do not appears in"
 msgstr "no aparece en"
 
-#: uttgconsts.sdonothaveteacher
-msgid "do not have teacher"
+#: uttgconsts.sdonothaveresource
+msgid "do not have resource"
 msgstr "no tiene profesor"
 
 #: uttgconsts.sdownhillalgorithm
@@ -1886,12 +1886,12 @@ msgstr "Listo para generar horario. Mostrar resumen del chequeo del horario?"
 msgid "Non Scattered Themes"
 msgstr "Materias no dispersas"
 
-#: uttgconsts.snumhardteacherrestrictions
-msgid "Number of hard teacher restrictions..."
+#: uttgconsts.snumhardresourcerestrictions
+msgid "Number of hard resource restrictions..."
 msgstr "Numero de prohibiciones de profesores con problemas..."
 
-#: uttgconsts.snumsoftteacherrestrictions
-msgid "Number of soft teacher restrictions..."
+#: uttgconsts.snumsoftresourcerestrictions
+msgid "Number of soft resource restrictions..."
 msgstr "Numero de prohibiciones de profesores sin problemas..."
 
 #: uttgconsts.soutofpositionemptyhour
@@ -1969,19 +1969,19 @@ msgstr "Timetable para colegio (*.ttd)|*.ttd"
 msgid "Search by %s"
 msgstr "Buscar por %s"
 
-#: uttgconsts.steacherrestrictionshead
+#: uttgconsts.sresourcerestrictionshead
 msgid "Teacher; Restrictions"
 msgstr "Profesor; Restricciones"
 
-#: uttgconsts.steachersworkloadwithoutproblems
+#: uttgconsts.sresourcesworkloadwithoutproblems
 msgid "Teachers' Work load without problems..."
 msgstr "Carga horaria de los profesores sin problemas..."
 
-#: uttgconsts.steachersworkloadwithproblems
+#: uttgconsts.sresourcesworkloadwithproblems
 msgid "Teachers' work load with problems..."
 msgstr "Carga horaria de los profesores con problemas..."
 
-#: uttgconsts.steacherworkloadhead
+#: uttgconsts.sresourceworkloadhead
 msgid "Teacher; Work Load"
 msgstr "Profesor; Carga horaria"
 

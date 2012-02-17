@@ -108,9 +108,9 @@ Theme
 "27";"Dibujo";
 "28";"In. Tecnologica";
 "29";"Org. Archivo";
-Teacher
+Resource
 51
-"IdTeacher";"TeacherNationalId";"LnTeacher";"NaTeacher";
+"IdResource";"AbResource";"LnResource";"NaResource";
 "1";"1";"Loza";"Wilson";
 "2";"2";"Fuentes";"Maria";
 "3";"3";"Pazmiño";"Luis";
@@ -164,7 +164,7 @@ Teacher
 "51";"51";"Mejia";"Romulo";
 Distribution
 268
-"IdTheme";"IdCategory";"IdParallel";"IdTeacher";"IdRoomType";"RoomCount";"Composition";
+"IdTheme";"IdCategory";"IdParallel";"IdResource";"IdRoomType";"RoomCount";"Composition";
 "1";"1";"1";"32";"1";"1";"1";
 "1";"1";"2";"21";"1";"1";"1";
 "1";"1";"3";"29";"1";"1";"1";
@@ -476,15 +476,15 @@ TimeSlot
 "6";"7";
 Assistance
 0
-"IdTheme";"IdCategory";"IdParallel";"IdTeacher";
-TeacherRestrictionType
+"IdTheme";"IdCategory";"IdParallel";"IdResource";
+ResourceRestrictionType
 2
-"IdTeacherRestrictionType";"NaTeacherRestrictionType";"ColTeacherRestrictionType";"ValTeacherRestrictionType";
+"IdResourceRestrictionType";"NaResourceRestrictionType";"ColResourceRestrictionType";"ValResourceRestrictionType";
 "2";"No Gusta";"65280";"10";
 "3";"No Puede";"255";"300";
-TeacherRestriction
+ResourceRestriction
 338
-"IdTeacher";"IdDay";"IdHour";"IdTeacherRestrictionType";
+"IdResource";"IdDay";"IdHour";"IdResourceRestrictionType";
 "3";"2";"7";"2";
 "3";"3";"7";"2";
 "3";"4";"7";"2";
@@ -3211,14 +3211,14 @@ NameAuthority=Dr. Edgar Velasco
 PositionAuthority=Rector
 NameResponsible=Ing. Edison Mera
 PositionResponsible=Prof. Suplente
-MaxTeacherWorkLoad=23
+MaxResourceWorkLoad=23
 TimetableSeleccionado=8
 Comments="Pruebas realizadas.\n\r\n\rDatos necesarios para la realizacion del horario definitivo.\n\r"
 Randomize=-1
 Seed=11558
 NumIterations=25
-ClashTeacher=299
-BreakTimetableTeacher=15
+ClashResource=299
+BreakTimetableResource=15
 ClashRoomType=65
 EmptyHour=201
 BrokenSession=255
@@ -3229,18 +3229,18 @@ CrossProbability=0,3
 MutationProbability1=0,2
 MutationProbability2=0,2
 ReparationProbability=0,1
-TeacherTimetableShowText=AbCategory + " " + NaParallel + " " + NaTheme
-TeacherTimetableShowLength=20
-TeacherTimetableExcluirProfRestriction=(TeacherRestriction.IdTeacherRestrictionType <> 2)AND(TeacherRestriction.IdTeacherRestrictionType <> 3)
+ResourceTimetableShowText=AbCategory + " " + NaParallel + " " + NaTheme
+ResourceTimetableShowLength=20
+ResourceTimetableExcluirProfRestriction=(ResourceRestriction.IdResourceRestrictionType <> 2)AND(ResourceRestriction.IdResourceRestrictionType <> 3)
 PollinationProbability=0,1
 InitialTimetables=
 SharedDirectory=
 ApplyDoubleDownHill=-1
-ActClashTeacherForm=1
-ActClashTeacherForm_Top=355
-ActClashTeacherForm_Left=714
-ActClashTeacherForm_Width=479
-ActClashTeacherForm_Height=299
-ActClashTeacherForm_DBGridDetail_Height=86
+ActClashResourceForm=1
+ActClashResourceForm_Top=355
+ActClashResourceForm_Left=714
+ActClashResourceForm_Width=479
+ActClashResourceForm_Height=299
+ActClashResourceForm_DBGridDetail_Height=86
 ClashTheme=323
 Bookmarks=2,1

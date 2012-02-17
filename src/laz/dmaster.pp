@@ -14,14 +14,14 @@ type
   { TMasterDataModule }
 
   TMasterDataModule = class(TDataModule)
-    TbTmpTeacherWorkLoad: TZTable;
-    TbTmpTeacherWorkLoadIdTeacher: TLongintField;
-    TbTmpTeacherWorkLoadNaTeacher: TStringField;
-    TbTmpTeacherWorkLoadLnTeacher: TStringField;
-    TbTmpTeacherWorkLoadWorkLoad: TLongintField;
-    QuTeacherRestrictionCount: TZTable;
-    QuTeacherRestrictionCountIdTeacher: TLongintField;
-    QuTeacherRestrictionCountNumber: TLongintField;
+    TbTmpResourceWorkLoad: TZTable;
+    TbTmpResourceWorkLoadIdResource: TLongintField;
+    TbTmpResourceWorkLoadNaResource: TStringField;
+    TbTmpResourceWorkLoadLnResource: TStringField;
+    TbTmpResourceWorkLoadWorkLoad: TLongintField;
+    QuResourceRestrictionCount: TZTable;
+    QuResourceRestrictionCountIdResource: TLongintField;
+    QuResourceRestrictionCountNumber: TLongintField;
     TbTmpRoomTypeLoad: TZTable;
     TbTmpRoomTypeLoadIdRoomType: TLongintField;
     TbTmpRoomTypeLoadAbRoomType: TStringField;
@@ -32,17 +32,17 @@ type
   private
     { Private declarations }
     FStringsShowRoomType: TStrings;
-    FStringsShowTeacher: TStrings;
+    FStringsShowResource: TStrings;
     FStringsShowCluster: TStrings;
     FConfigStorage: TTTGConfig;
-    procedure FillTeacherRestrictionCount;
+    procedure FillResourceRestrictionCount;
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
   public
     { Public declarations }
     procedure IntercambiarTimeSlots(AIdTimetable, AIdCategory,
       AIdParallel, AIdDay1, AIdHour1, AIdDay2, AIdHour2: Integer);
     function PerformAllChecks(AMainStrings, ASubStrings: TStrings;
-      AMaxTeacherWorkLoad: Integer): Boolean;
+      AMaxResourceWorkLoad: Integer): Boolean;
     function NewIdTimetable: Integer;
     procedure SaveToStrings(AStrings: TStrings);
     procedure SaveIniStrings(AStrings: TStrings);
@@ -51,7 +51,7 @@ type
     procedure LoadFromTextFile(const AFileName: TFileName);
     procedure SaveToTextFile(const AFileName: TFileName);
     property StringsShowRoomType: TStrings read FStringsShowRoomType;
-    property StringsShowTeacher: TStrings read FStringsShowTeacher;
+    property StringsShowResource: TStrings read FStringsShowResource;
     property StringsShowCluster: TStrings read FStringsShowCluster;
     property ConfigStorage: TTTGConfig read FConfigStorage;
     procedure NewDatabase;
@@ -72,44 +72,44 @@ uses
 const
   pfhVersionNumber = 293;
 
-procedure TMasterDataModule.FillTeacherRestrictionCount;
+procedure TMasterDataModule.FillResourceRestrictionCount;
 var
-  IdTeacher, IdTeacher1: Integer;
+  IdResource, IdResource1: Integer;
   s: string;
 begin
-  with SourceDataModule, QuTeacherRestrictionCount do
+  with SourceDataModule, QuResourceRestrictionCount do
   begin
     Close;
     Open;
-    s := TbTeacherRestriction.IndexFieldNames;
-    TbTeacherRestriction.IndexFieldNames := 'IdTeacher';
-    TbTeacherRestriction.First;
-    IdTeacher := -$7FFFFFFF;
-    while not TbTeacherRestriction.Eof do
+    s := TbResourceRestriction.IndexFieldNames;
+    TbResourceRestriction.IndexFieldNames := 'IdResource';
+    TbResourceRestriction.First;
+    IdResource := -$7FFFFFFF;
+    while not TbResourceRestriction.Eof do
     begin
-      IdTeacher1 := TbTeacherRestriction.FindField('IdTeacher').AsInteger;
-      if IdTeacher <> IdTeacher1 then
+      IdResource1 := TbResourceRestriction.FindField('IdResource').AsInteger;
+      if IdResource <> IdResource1 then
       begin
         Append;
-        with QuTeacherRestrictionCountNumber do
+        with QuResourceRestrictionCountNumber do
           Value := 1;
-        IdTeacher := IdTeacher1;
+        IdResource := IdResource1;
       end
       else
       begin
         Edit;
-        with QuTeacherRestrictionCountNumber do
+        with QuResourceRestrictionCountNumber do
           Value := Value + 1;
       end;
       Post;
-      TbTeacherRestriction.Next;
+      TbResourceRestriction.Next;
     end;
-    TbTeacherRestriction.IndexFieldNames := s;
+    TbResourceRestriction.IndexFieldNames := s;
   end;
 end;
 
 function TMasterDataModule.PerformAllChecks(AMainStrings, ASubStrings:
-  TStrings; AMaxTeacherWorkLoad: Integer): Boolean;
+  TStrings; AMaxResourceWorkLoad: Integer): Boolean;
 var
   HaveProblems: Boolean;
   iTimeSlotCount: Integer;
@@ -117,37 +117,37 @@ var
   begin
     iTimeSlotCount := SourceDataModule.TbTimeSlot.RecordCount;
   end;
-  procedure ObtenerTeacherWorkLoad;
+  procedure ObtenerResourceWorkLoad;
   var
-    IdTeacher, IdTeacher1: Integer;
+    IdResource, IdResource1: Integer;
     s: string;
   begin
     with SourceDataModule, TbDistribution do
     begin
       s := IndexFieldNames;
-      IndexFieldNames := 'IdTeacher';
+      IndexFieldNames := 'IdResource';
       First;
-      TbTmpTeacherWorkLoad.Open;
-      IdTeacher := -$7FFFFFFF;
+      TbTmpResourceWorkLoad.Open;
+      IdResource := -$7FFFFFFF;
       while not Eof do
       begin
-        IdTeacher1 := TbDistribution.FindField('IdTeacher').AsInteger;
-        if IdTeacher <> IdTeacher1 then
+        IdResource1 := TbDistribution.FindField('IdResource').AsInteger;
+        if IdResource <> IdResource1 then
         begin
-          TbTmpTeacherWorkLoad.Append;
-          TbTmpTeacherWorkLoadIdTeacher.Value :=
-            TbDistribution.FindField('IdTeacher').AsInteger;
-          TbTmpTeacherWorkLoadWorkLoad.Value :=
+          TbTmpResourceWorkLoad.Append;
+          TbTmpResourceWorkLoadIdResource.Value :=
+            TbDistribution.FindField('IdResource').AsInteger;
+          TbTmpResourceWorkLoadWorkLoad.Value :=
             CompositionToDuration(TbDistribution.FindField('Composition').AsString);
-          IdTeacher := IdTeacher1;
+          IdResource := IdResource1;
         end
         else
         begin
-          TbTmpTeacherWorkLoad.Edit;
-          with TbTmpTeacherWorkLoadWorkLoad do
+          TbTmpResourceWorkLoad.Edit;
+          with TbTmpResourceWorkLoadWorkLoad do
             Value := Value + CompositionToDuration(TbDistribution.FindField('Composition').AsString);
         end;
-        TbTmpTeacherWorkLoad.Post;
+        TbTmpResourceWorkLoad.Post;
         Next;
       end;
       IndexFieldNames := s;
@@ -189,7 +189,7 @@ var
   end;
   // Comprueba que no hayan asignadas mas horas de materias a profesores de las
   // permitidas
-  procedure CheckTeacherRestrictionCount;
+  procedure CheckResourceRestrictionCount;
   var
     s: string;
     HaveInternalProblems: Boolean;
@@ -197,39 +197,39 @@ var
   begin
     HaveInternalProblems := False;
     s := '%s %s; %d';
-    with QuTeacherRestrictionCount do
+    with QuResourceRestrictionCount do
     begin
-      FillTeacherRestrictionCount;
+      FillResourceRestrictionCount;
       if not IsEmpty then
       begin
         try
-          ASubStrings.Add(SNumSoftTeacherRestrictions);
+          ASubStrings.Add(SNumSoftResourceRestrictions);
           vSubMin := ASubStrings.Count;
-          ASubStrings.Add(STeacherRestrictionsHead);
+          ASubStrings.Add(SResourceRestrictionsHead);
           while not Eof do
           begin
-            if TbTmpTeacherWorkLoad.Locate('IdTeacher',
-              QuTeacherRestrictionCountIdTeacher.AsInteger, []) then
+            if TbTmpResourceWorkLoad.Locate('IdResource',
+              QuResourceRestrictionCountIdResource.AsInteger, []) then
             begin
-              if QuTeacherRestrictionCountNumber.AsInteger +
-                TbTmpTeacherWorkLoadWorkLoad.AsInteger > iTimeSlotCount then
+              if QuResourceRestrictionCountNumber.AsInteger +
+                TbTmpResourceWorkLoadWorkLoad.AsInteger > iTimeSlotCount then
               begin
                 if not HaveInternalProblems then
                 begin
-                  AMainStrings.Add(SNumHardTeacherRestrictions);
+                  AMainStrings.Add(SNumHardResourceRestrictions);
                   vMainMin := AMainStrings.Count;
-                  AMainStrings.Add(STeacherRestrictionsHead);
+                  AMainStrings.Add(SResourceRestrictionsHead);
                 end;
-                AMainStrings.Add(Format(s, [TbTmpTeacherWorkLoadLnTeacher.Value,
-                  TbTmpTeacherWorkLoadNaTeacher.Value,
-                    QuTeacherRestrictionCountNumber.AsInteger]));
+                AMainStrings.Add(Format(s, [TbTmpResourceWorkLoadLnResource.Value,
+                  TbTmpResourceWorkLoadNaResource.Value,
+                    QuResourceRestrictionCountNumber.AsInteger]));
                 HaveInternalProblems := True;
                 HaveProblems := True;
               end
               else
-                ASubStrings.Add(Format(s, [TbTmpTeacherWorkLoadLnTeacher.Value,
-                  TbTmpTeacherWorkLoadNaTeacher.Value,
-                    QuTeacherRestrictionCountNumber.AsInteger]));
+                ASubStrings.Add(Format(s, [TbTmpResourceWorkLoadLnResource.Value,
+                  TbTmpResourceWorkLoadNaResource.Value,
+                    QuResourceRestrictionCountNumber.AsInteger]));
             end;
             Next;
           end;
@@ -248,42 +248,42 @@ var
       end;
     end;
   end;
-  procedure CheckTeacherWorkLoad;
+  procedure CheckResourceWorkLoad;
   var
     s: string;
     vMainMin, vMainMax, vSubMin, vSubMax: Integer;
     HaveInternalProblems: Boolean;
   begin
-    with TbTmpTeacherWorkLoad do
+    with TbTmpResourceWorkLoad do
       if not IsEmpty then
       begin
         HaveInternalProblems := False;
         First;
         s := '%s %s; %d';
-        ASubStrings.Add(STeachersWorkLoadWithoutProblems);
+        ASubStrings.Add(SResourcesWorkLoadWithoutProblems);
         vSubMin := ASubStrings.Count;
-        ASubStrings.Add(STeacherWorkLoadHead);
+        ASubStrings.Add(SResourceWorkLoadHead);
         while not Eof do
         begin
-          if TbTmpTeacherWorkLoadWorkLoad.Value > AMaxTeacherWorkLoad then
+          if TbTmpResourceWorkLoadWorkLoad.Value > AMaxResourceWorkLoad then
           begin
             if not HaveInternalProblems then
             begin
-              AMainStrings.Add(STeachersWorkLoadWithProblems);
+              AMainStrings.Add(SResourcesWorkLoadWithProblems);
               vMainMin := AMainStrings.Count;
-              AMainStrings.Add(STeacherWorkLoadHead);
+              AMainStrings.Add(SResourceWorkLoadHead);
             end;
-            AMainStrings.Add(Format(s, [TbTmpTeacherWorkLoadLnTeacher.Value,
-              TbTmpTeacherWorkLoadNaTeacher.Value,
-                TbTmpTeacherWorkLoadWorkLoad.Value]));
+            AMainStrings.Add(Format(s, [TbTmpResourceWorkLoadLnResource.Value,
+              TbTmpResourceWorkLoadNaResource.Value,
+                TbTmpResourceWorkLoadWorkLoad.Value]));
             HaveProblems := True;
             HaveInternalProblems := True;
           end
           else
           begin
-            ASubStrings.Add(Format(s, [TbTmpTeacherWorkLoadLnTeacher.Value,
-              TbTmpTeacherWorkLoadNaTeacher.Value,
-                TbTmpTeacherWorkLoadWorkLoad.Value]));
+            ASubStrings.Add(Format(s, [TbTmpResourceWorkLoadLnResource.Value,
+              TbTmpResourceWorkLoadNaResource.Value,
+                TbTmpResourceWorkLoadWorkLoad.Value]));
           end;
           Next;
         end;
@@ -444,16 +444,16 @@ begin
   HaveProblems := False;
   try
     ObtenerTimeSlotCount;
-    ObtenerTeacherWorkLoad;
+    ObtenerResourceWorkLoad;
     ObtenerRoomTypeLoad;
-    CheckTeacherWorkLoad;
-    CheckTeacherRestrictionCount;
+    CheckResourceWorkLoad;
+    CheckResourceRestrictionCount;
     CheckRoomTypeLoad;
     CheckCategoryLoad;
   finally
     AMainStrings.EndUpdate;
     ASubStrings.EndUpdate;
-    TbTmpTeacherWorkLoad.Close;
+    TbTmpResourceWorkLoad.Close;
     TbTmpRoomTypeLoad.Close;
     Result := HaveProblems;
   end;
@@ -582,16 +582,16 @@ end;
 
 procedure TMasterDataModule.DataModuleCreate(Sender: TObject);
 begin
-  TbTmpTeacherWorkLoadIdTeacher.DisplayLabel := SFlDistribution_IdTeacher;
-  TbTmpTeacherWorkLoadLnTeacher.DisplayLabel := SFlTeacher_LnTeacher;
-  TbTmpTeacherWorkLoadNaTeacher.DisplayLabel := SFlTeacher_NaTeacher;
-  TbTmpTeacherWorkLoadWorkLoad.DisplayLabel := SLoad;
+  TbTmpResourceWorkLoadIdResource.DisplayLabel := SFlDistribution_IdResource;
+  TbTmpResourceWorkLoadLnResource.DisplayLabel := SFlResource_LnResource;
+  TbTmpResourceWorkLoadNaResource.DisplayLabel := SFlResource_NaResource;
+  TbTmpResourceWorkLoadWorkLoad.DisplayLabel := SLoad;
   TbTmpRoomTypeLoadIdRoomType.DisplayLabel := SFlDistribution_IdRoomType;
   TbTmpRoomTypeLoadAbRoomType.DisplayLabel := SFlRoomType_NaRoomType;
   TbTmpRoomTypeLoadLoad.DisplayLabel := SLoad;
   
   FStringsShowRoomType := TStringList.Create;
-  FStringsShowTeacher := TStringList.Create;
+  FStringsShowResource := TStringList.Create;
   FStringsShowCluster := TStringList.Create;
   FConfigStorage := TTTGConfig.Create(Self);
   with FStringsShowRoomType do
@@ -600,7 +600,7 @@ begin
     add('Cluster_Theme=AbCategory;NaParallel;NaTheme');
     add('Theme=NaTheme');
   end;
-  with FStringsShowTeacher do
+  with FStringsShowResource do
   begin
     add('Cluster=AbCategory;NaParallel');
     add('Cluster_Theme=AbCategory;NaParallel;NaTheme');
@@ -609,8 +609,8 @@ begin
   with FStringsShowCluster do
   begin
     add('Theme=NaTheme');
-    add('Teacher=LnTeacher;NaTeacher');
-    add('Theme_Teacher=NaTheme;LnTeacher;NaTeacher');
+    add('Resource=LnResource;NaResource');
+    add('Theme_Resource=NaTheme;LnResource;NaResource');
   end;
   with SourceDataModule do
   begin
@@ -621,7 +621,7 @@ begin
     begin
       DbZConnection.ExecuteDirect(LazarusResources.Find('ttg', 'SQL').Value);
       PrepareTables;
-      QuTeacher.Open;
+      QuResource.Open;
       QuCluster.Open;
       OpenTables;
       if Paramcount <> 1 then
@@ -633,7 +633,7 @@ begin
     else
     begin
       PrepareTables;
-      QuTeacher.Open;
+      QuResource.Open;
       QuCluster.Open;
       OpenTables;
     end;
@@ -644,7 +644,7 @@ end;
 procedure TMasterDataModule.DataModuleDestroy(Sender: TObject);
 begin
   FStringsShowRoomType.Free;
-  FStringsShowTeacher.Free;
+  FStringsShowResource.Free;
   FStringsShowCluster.Free;
 end;
 

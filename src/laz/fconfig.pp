@@ -30,7 +30,7 @@ type
     LbDownhillLevels: TLabel;
     LbPollinationProbability: TLabel;
     LbPopulationSize: TLabel;
-    LbMaxTeacherWorkLoad: TLabel;
+    LbMaxResourceWorkLoad: TLabel;
     PCConfig: TPageControl;
     SEMaxIteration: TSpinEdit;
     EdPollinationProbability: TEdit;
@@ -41,14 +41,14 @@ type
     LbEmptyHours: TLabel;
     LbBrokenThemes: TLabel;
     LbJoinedThemes: TLabel;
-    EdClashTeacher: TEdit;
+    EdClashResource: TEdit;
     EdClashRoomType: TEdit;
     EdEmptyHour: TEdit;
     EdBrokenSession: TEdit;
     EdNonScatteredTheme: TEdit;
     TSInstitution: TTabSheet;
     Label14: TLabel;
-    SEMaxTeacherWorkLoad: TSpinEdit;
+    SEMaxResourceWorkLoad: TSpinEdit;
     MeComments: TMemo;
     LbComments: TLabel;
     LbInstitutionName: TLabel;
@@ -71,8 +71,8 @@ type
     speNumIterations: TSpinEdit;
     LbSchoolYear: TLabel;
     EdSchoolYear: TEdit;
-    LbBreakTimetableTeacher: TLabel;
-    EdBreakTimetableTeacher: TEdit;
+    LbBreakTimetableResource: TLabel;
+    EdBreakTimetableResource: TEdit;
     LbInitialTimetables: TLabel;
     EdInitialTimetables: TEdit;
     dbeNaThemeRestrictionType: TDBEdit;
@@ -81,10 +81,10 @@ type
     LbSRColor: TLabel;
     LbSRValue: TLabel;
     LbTRName: TLabel;
-    dbeNaTeacherRestrictionType: TDBEdit;
+    dbeNaResourceRestrictionType: TDBEdit;
     LbTRColor: TLabel;
     LbTRValue: TLabel;
-    dbeValTeacherRestrictionType: TDBEdit;
+    dbeValResourceRestrictionType: TDBEdit;
     LbSharedDirectory: TLabel;
     dedSharedDirectory: TDirectoryEdit;
     BBCancel: TBitBtn;
@@ -92,8 +92,8 @@ type
     DBGrid2: TDBGrid;
     CBColThemeRestrictionType: TColorBox;
     DSThemeRestrictionType: TDataSource;
-    DSTeacherRestrictionType: TDataSource;
-    CBColTeacherRestrictionType: TColorBox;
+    DSResourceRestrictionType: TDataSource;
+    CBColResourceRestrictionType: TColorBox;
     procedure CBRandomizeClick(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -101,9 +101,9 @@ type
       Field: TField);
     procedure CBColThemeRestrictionTypeExit(Sender: TObject);
     procedure CBColThemeRestrictionTypeChange(Sender: TObject);
-    procedure CBColTeacherRestrictionTypeChange(Sender: TObject);
-    procedure CBColTeacherRestrictionTypeExit(Sender: TObject);
-    procedure DSTeacherRestrictionTypeDataChange(Sender: TObject;
+    procedure CBColResourceRestrictionTypeChange(Sender: TObject);
+    procedure CBColResourceRestrictionTypeExit(Sender: TObject);
+    procedure DSResourceRestrictionTypeDataChange(Sender: TObject;
       Field: TField);
     procedure BBOkClick(Sender: TObject);
     procedure BBCancelClick(Sender: TObject);
@@ -175,15 +175,15 @@ begin
       EdPositionAuthority.Text := PositionAuthority;
       EdNameResponsible.Text := NameResponsible;
       EdPositionResponsible.Text := PositionResponsible;
-      SEMaxTeacherWorkLoad.Value := MaxTeacherWorkLoad;
+      SEMaxResourceWorkLoad.Value := MaxResourceWorkLoad;
       MeComments.Lines.Text := Comments;
       CBRandomize.Checked := Randomize;
       speSeed.Value := Seed;
       speNumIterations.Value := RefreshInterval;
-      EdClashTeacher.Text := FloatToStr(ClashTeacher);
+      EdClashResource.Text := FloatToStr(ClashResource);
       EdClashTheme.Text := FloatToStr(ClashTheme);
       EdClashRoomType.Text := FloatToStr(ClashRoomType);
-      EdBreakTimetableTeacher.Text := FloatToStr(BreakTimetableTeacher);
+      EdBreakTimetableResource.Text := FloatToStr(BreakTimetableResource);
       EdEmptyHour.Text := FloatToStr(OutOfPositionEmptyHour);
       EdBrokenSession.Text := FloatToStr(BrokenSession);
       EdNonScatteredTheme.Text := FloatToStr(NonScatteredTheme);
@@ -210,15 +210,15 @@ begin
       PositionAuthority := EdPositionAuthority.Text;
       NameResponsible := EdNameResponsible.Text;
       PositionResponsible := EdPositionResponsible.Text;
-      MaxTeacherWorkLoad := SEMaxTeacherWorkLoad.Value;
+      MaxResourceWorkLoad := SEMaxResourceWorkLoad.Value;
       Comments := MeComments.Lines.Text;
       Randomize := CBRandomize.Checked;
       Seed := speSeed.Value;
       RefreshInterval := speNumIterations.Value;
-      ClashTeacher := StrToInt(EdClashTeacher.Text);
+      ClashResource := StrToInt(EdClashResource.Text);
       ClashTheme := StrToInt(EdClashTheme.Text);
       ClashRoomType := StrToInt(EdClashRoomType.Text);
-      BreakTimetableTeacher := StrToInt(EdBreakTimetableTeacher.Text);
+      BreakTimetableResource := StrToInt(EdBreakTimetableResource.Text);
       OutOfPositionEmptyHour := StrToInt(EdEmptyHour.Text);
       BrokenSession := StrToInt(EdBrokenSession.Text);
       NonScatteredTheme := StrToInt(EdNonScatteredTheme.Text);
@@ -269,29 +269,29 @@ begin
   end
 end;
 
-procedure TConfigForm.CBColTeacherRestrictionTypeChange(Sender: TObject);
+procedure TConfigForm.CBColResourceRestrictionTypeChange(Sender: TObject);
 begin
-  with DSTeacherRestrictionType do
+  with DSResourceRestrictionType do
   begin
     OnDataChange := nil;
     Edit;
-    OnDataChange := DSTeacherRestrictionTypeDataChange;
+    OnDataChange := DSResourceRestrictionTypeDataChange;
   end
 end;
 
-procedure TConfigForm.CBColTeacherRestrictionTypeExit(Sender: TObject);
+procedure TConfigForm.CBColResourceRestrictionTypeExit(Sender: TObject);
 begin
-  with SourceDataModule.TbTeacherRestrictionType.FindField('ColTeacherRestrictionType') do
-    if (DSTeacherRestrictionType.State in [dsEdit, dsInsert])
-        and (AsInteger <> CBColTeacherRestrictionType.Selected) then
-      AsInteger := CBColTeacherRestrictionType.Selected;
+  with SourceDataModule.TbResourceRestrictionType.FindField('ColResourceRestrictionType') do
+    if (DSResourceRestrictionType.State in [dsEdit, dsInsert])
+        and (AsInteger <> CBColResourceRestrictionType.Selected) then
+      AsInteger := CBColResourceRestrictionType.Selected;
 end;
 
-procedure TConfigForm.DSTeacherRestrictionTypeDataChange(
+procedure TConfigForm.DSResourceRestrictionTypeDataChange(
   Sender: TObject; Field: TField);
 begin
-  CBColTeacherRestrictionType.Selected
-    := SourceDataModule.TbTeacherRestrictionType.FindField('ColTeacherRestrictionType').AsInteger;
+  CBColResourceRestrictionType.Selected
+    := SourceDataModule.TbResourceRestrictionType.FindField('ColResourceRestrictionType').AsInteger;
 end;
 
 initialization

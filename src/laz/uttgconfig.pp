@@ -28,8 +28,8 @@ type
     procedure SetNameResponsible(const Value: string);
     function GetPositionResponsible: string;
     procedure SetPositionResponsible(const Value: string);
-    function GetMaxTeacherWorkLoad: Integer;
-    procedure SetMaxTeacherWorkLoad(Value: Integer);
+    function GetMaxResourceWorkLoad: Integer;
+    procedure SetMaxResourceWorkLoad(Value: Integer);
     function GetComments: string;
     procedure SetComments(const Value: string);
     function GetRandomize: Boolean;
@@ -38,12 +38,12 @@ type
     procedure SetSeed(Value: Integer);
     function GetRefreshInterval: Integer;
     procedure SetRefreshInterval(Value: Integer);
-    function GetClashTeacher: Integer;
-    procedure SetClashTeacher(Value: Integer);
+    function GetClashResource: Integer;
+    procedure SetClashResource(Value: Integer);
     function GetClashTheme: Integer;
     procedure SetClashTheme(Value: Integer);
-    function GetBreakTimetableTeacher: Integer;
-    procedure SetBreakTimetableTeacher(Value: Integer);
+    function GetBreakTimetableResource: Integer;
+    procedure SetBreakTimetableResource(Value: Integer);
     function GetClashRoomType: Integer;
     procedure SetClashRoomType(Value: Integer);
     function GetOutOfPositionEmptyHour: Integer;
@@ -79,14 +79,14 @@ type
     property PositionAuthority: string read GetPositionAuthority write SetPositionAuthority;
     property NameResponsible: string read GetNameResponsible write SetNameResponsible;
     property PositionResponsible: string read GetPositionResponsible write SetPositionResponsible;
-    property MaxTeacherWorkLoad: Integer read GetMaxTeacherWorkLoad write SetMaxTeacherWorkLoad;
+    property MaxResourceWorkLoad: Integer read GetMaxResourceWorkLoad write SetMaxResourceWorkLoad;
     property Comments: string read GetComments write SetComments;
     property Randomize: Boolean read GetRandomize write SetRandomize;
     property Seed: Integer read GetSeed write SetSeed;
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
-    property ClashTeacher: Integer read GetClashTeacher write SetClashTeacher;
+    property ClashResource: Integer read GetClashResource write SetClashResource;
     property ClashTheme: Integer read GetClashTheme write SetClashTheme;
-    property BreakTimetableTeacher: Integer read GetBreakTimetableTeacher write SetBreakTimetableTeacher;
+    property BreakTimetableResource: Integer read GetBreakTimetableResource write SetBreakTimetableResource;
     property ClashRoomType: Integer read GetClashRoomType write SetClashRoomType;
     property OutOfPositionEmptyHour: Integer read GetOutOfPositionEmptyHour write SetOutOfPositionEmptyHour;
     property BrokenSession: Integer read GetBrokenSession write SetBrokenSession;
@@ -175,14 +175,14 @@ begin
    Values['PositionResponsible'] := Value;
 end;
 
-function TTTGConfig.GetMaxTeacherWorkLoad: Integer;
+function TTTGConfig.GetMaxResourceWorkLoad: Integer;
 begin
-   Result := Integers['MaxTeacherWorkLoad'];
+   Result := Integers['MaxResourceWorkLoad'];
 end;
 
-procedure TTTGConfig.SetMaxTeacherWorkLoad(Value: Integer);
+procedure TTTGConfig.SetMaxResourceWorkLoad(Value: Integer);
 begin
-   Integers['MaxTeacherWorkLoad'] := Value;
+   Integers['MaxResourceWorkLoad'] := Value;
 end;
 
 function TTTGConfig.GetComments: string;
@@ -225,14 +225,14 @@ begin
   Integers['NumIterations'] := Value;
 end;
 
-function TTTGConfig.GetClashTeacher: Integer;
+function TTTGConfig.GetClashResource: Integer;
 begin
-  Result := Integers['ClashTeacher'];
+  Result := Integers['ClashResource'];
 end;
 
-procedure TTTGConfig.SetClashTeacher(Value: Integer);
+procedure TTTGConfig.SetClashResource(Value: Integer);
 begin
-  Integers['ClashTeacher'] := Value;
+  Integers['ClashResource'] := Value;
 end;
 
 function TTTGConfig.GetClashTheme: Integer;
@@ -245,14 +245,14 @@ begin
   Integers['ClashTheme'] := Value;
 end;
 
-function TTTGConfig.GetBreakTimetableTeacher: Integer;
+function TTTGConfig.GetBreakTimetableResource: Integer;
 begin
-  Result := Integers['BreakTimetableTeacher'];
+  Result := Integers['BreakTimetableResource'];
 end;
 
-procedure TTTGConfig.SetBreakTimetableTeacher(Value: Integer);
+procedure TTTGConfig.SetBreakTimetableResource(Value: Integer);
 begin
-  Integers['BreakTimetableTeacher'] := Value;
+  Integers['BreakTimetableResource'] := Value;
 end;
 
 function TTTGConfig.GetClashRoomType: Integer;
@@ -394,14 +394,14 @@ begin
   PositionAuthority := '';
   NameResponsible := '';
   PositionResponsible := '';
-  MaxTeacherWorkLoad := 20;
+  MaxResourceWorkLoad := 20;
   Comments := '';
   Randomize := True;
   Self.Seed := 1;
   RefreshInterval := 1;
-  ClashTeacher := 200;
+  ClashResource := 200;
   ClashTheme := 200;
-  BreakTimetableTeacher := 50;
+  BreakTimetableResource := 50;
   ClashRoomType := 200;
   OutOfPositionEmptyHour := 100;
   BrokenSession := 150;

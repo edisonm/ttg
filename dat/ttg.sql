@@ -46,19 +46,19 @@ CREATE TABLE IF NOT EXISTS `Theme`(
     `IdTheme` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Theme Id */,
     `NaTheme` VARCHAR(20) NOT NULL UNIQUE /* Theme Name */
 ); /* Themes */
-CREATE TABLE IF NOT EXISTS `Teacher`(
-    `IdTeacher` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Teacher Id */,
-    `TeacherNationalId` VARCHAR(11) NOT NULL /* Teacher National Id */,
-    `LnTeacher` VARCHAR(15) NOT NULL /* Teacher Last Name */,
-    `NaTeacher` VARCHAR(15) NOT NULL /* Teacher Name */,
-  CONSTRAINT `ixLnNaTeacher` UNIQUE(`LnTeacher`,`NaTeacher`),
-  CONSTRAINT `ixNaLnTeacher` UNIQUE(`NaTeacher`,`LnTeacher`)
-); /* Teachers */
+CREATE TABLE IF NOT EXISTS `Resource`(
+    `IdResource` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Id */,
+    `AbResource` VARCHAR(11) NOT NULL /* Resource National Id */,
+    `LnResource` VARCHAR(15) NOT NULL /* Resource Last Name */,
+    `NaResource` VARCHAR(15) NOT NULL /* Resource Name */,
+  CONSTRAINT `ixLnNaResource` UNIQUE(`LnResource`,`NaResource`),
+  CONSTRAINT `ixNaLnResource` UNIQUE(`NaResource`,`LnResource`)
+); /* Resources */
 CREATE TABLE IF NOT EXISTS `Distribution`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER NOT NULL /* Parallel Id */,
-    `IdTeacher` INTEGER NOT NULL /* Teacher Id */,
+    `IdResource` INTEGER NOT NULL /* Resource Id */,
     `IdRoomType` INTEGER NOT NULL /* Room Type Id */,
     `RoomCount` INTEGER /* Number of classrooms needed */,
     `Composition` VARCHAR(40) NOT NULL /* Composition of the Slots for the Theme */,
@@ -69,8 +69,8 @@ CREATE TABLE IF NOT EXISTS `Distribution`(
     REFERENCES `RoomType`(`IdRoomType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `ThemeDistribution` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `TeacherDistribution` FOREIGN KEY (`IdTeacher`)
-    REFERENCES `Teacher`(`IdTeacher`) ON UPDATE RESTRICT ON DELETE RESTRICT
+  CONSTRAINT `ResourceDistribution` FOREIGN KEY (`IdResource`)
+    REFERENCES `Resource`(`IdResource`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Distribution of Workload */
 CREATE TABLE IF NOT EXISTS `JoinedCluster`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
@@ -103,32 +103,32 @@ CREATE TABLE IF NOT EXISTS `Assistance`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER NOT NULL /* Parallel Id */,
-    `IdTeacher` INTEGER NOT NULL /* Teacher Id */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`,`IdTeacher`),
+    `IdResource` INTEGER NOT NULL /* Resource Id */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`,`IdResource`),
   CONSTRAINT `DistributionAssistance` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
     REFERENCES `Distribution`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `TeacherAssistance` FOREIGN KEY (`IdTeacher`)
-    REFERENCES `Teacher`(`IdTeacher`) ON UPDATE RESTRICT ON DELETE RESTRICT
+  CONSTRAINT `ResourceAssistance` FOREIGN KEY (`IdResource`)
+    REFERENCES `Resource`(`IdResource`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Assistances */
-CREATE TABLE IF NOT EXISTS `TeacherRestrictionType`(
-    `IdTeacherRestrictionType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Teacher Restriction Type Id */,
-    `NaTeacherRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
-    `ColTeacherRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
-    `ValTeacherRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
-); /* Types of Teacher Restrictions */
-CREATE TABLE IF NOT EXISTS `TeacherRestriction`(
-    `IdTeacher` INTEGER NOT NULL /* Teacher Id */,
+CREATE TABLE IF NOT EXISTS `ResourceRestrictionType`(
+    `IdResourceRestrictionType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Restriction Type Id */,
+    `NaResourceRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
+    `ColResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
+    `ValResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
+); /* Types of Resource Restrictions */
+CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
+    `IdResource` INTEGER NOT NULL /* Resource Id */,
     `IdDay` INTEGER NOT NULL /* Day Id */,
     `IdHour` INTEGER NOT NULL /* Hour Id */,
-    `IdTeacherRestrictionType` INTEGER NOT NULL /* Teacher Restriction Type Id */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTeacher`,`IdDay`,`IdHour`),
-  CONSTRAINT `TeacherRestrictionTypeTeacherRestriction` FOREIGN KEY (`IdTeacherRestrictionType`)
-    REFERENCES `TeacherRestrictionType`(`IdTeacherRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `TeacherTeacherRestriction` FOREIGN KEY (`IdTeacher`)
-    REFERENCES `Teacher`(`IdTeacher`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `TimeSlotTeacherRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
+    `IdResourceRestrictionType` INTEGER NOT NULL /* Resource Restriction Type Id */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdResource`,`IdDay`,`IdHour`),
+  CONSTRAINT `ResourceRestrictionTypeResourceRestriction` FOREIGN KEY (`IdResourceRestrictionType`)
+    REFERENCES `ResourceRestrictionType`(`IdResourceRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `ResourceResourceRestriction` FOREIGN KEY (`IdResource`)
+    REFERENCES `Resource`(`IdResource`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `TimeSlotResourceRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
     REFERENCES `TimeSlot`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT
-); /* Teacher Restrictions */
+); /* Resource Restrictions */
 CREATE TABLE IF NOT EXISTS `ThemeRestriction`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdDay` INTEGER NOT NULL /* Day Id */,

@@ -78,7 +78,7 @@ object ConfigForm: TConfigForm
       ClientHeight = 356
       ClientWidth = 469
       ImageIndex = 2
-      object LbMaxTeacherWorkLoad: TLabel
+      object LbMaxResourceWorkLoad: TLabel
         Left = 8
         Height = 15
         Top = 109
@@ -142,7 +142,7 @@ object ConfigForm: TConfigForm
         Caption = 'School Year:'
         ParentColor = False
       end
-      object SEMaxTeacherWorkLoad: TSpinEdit
+      object SEMaxResourceWorkLoad: TSpinEdit
         Left = 180
         Height = 24
         Top = 104
@@ -418,7 +418,7 @@ object ConfigForm: TConfigForm
         Height = 15
         Top = 12
         Width = 90
-        Caption = 'Clash Teachers:'
+        Caption = 'Clash Resources:'
         ParentColor = False
       end
       object Label2: TLabel
@@ -468,15 +468,15 @@ object ConfigForm: TConfigForm
         Top = 234
         Width = 119
         Anchors = [akLeft, akBottom]
-        Caption = 'Teacher Restrictions:'
+        Caption = 'Resource Restrictions:'
         ParentColor = False
       end
-      object LbBreakTimetableTeacher: TLabel
+      object LbBreakTimetableResource: TLabel
         Left = 237
         Height = 15
         Top = 15
         Width = 113
-        Caption = 'Gap TT. Teachers:'
+        Caption = 'Gap TT. Resources:'
         ParentColor = False
       end
       object LbSRName: TLabel
@@ -541,7 +541,7 @@ object ConfigForm: TConfigForm
         Caption = 'Clash Themes:'
         ParentColor = False
       end
-      object EdClashTeacher: TEdit
+      object EdClashResource: TEdit
         Left = 117
         Height = 21
         Top = 8
@@ -581,7 +581,7 @@ object ConfigForm: TConfigForm
         AutoSize = False
         TabOrder = 5
       end
-      object EdBreakTimetableTeacher: TEdit
+      object EdBreakTimetableResource: TEdit
         Left = 345
         Height = 21
         Top = 8
@@ -613,25 +613,25 @@ object ConfigForm: TConfigForm
         MaxLength = 0
         TabOrder = 10
       end
-      object dbeNaTeacherRestrictionType: TDBEdit
+      object dbeNaResourceRestrictionType: TDBEdit
         Left = 364
         Height = 24
         Top = 250
         Width = 93
-        DataField = 'NaTeacherRestrictionType'
-        DataSource = SourceDataModule.DSTeacherRestrictionType
+        DataField = 'NaResourceRestrictionType'
+        DataSource = SourceDataModule.DSResourceRestrictionType
         Anchors = [akRight, akBottom]
         CharCase = ecNormal
         MaxLength = 0
         TabOrder = 11
       end
-      object dbeValTeacherRestrictionType: TDBEdit
+      object dbeValResourceRestrictionType: TDBEdit
         Left = 364
         Height = 24
         Top = 310
         Width = 93
-        DataField = 'ValTeacherRestrictionType'
-        DataSource = SourceDataModule.DSTeacherRestrictionType
+        DataField = 'ValResourceRestrictionType'
+        DataSource = SourceDataModule.DSResourceRestrictionType
         Anchors = [akRight, akBottom]
         CharCase = ecNormal
         MaxLength = 0
@@ -658,7 +658,7 @@ object ConfigForm: TConfigForm
         Anchors = [akLeft, akRight, akBottom]
         Color = clWindow
         Columns = <>
-        DataSource = SourceDataModule.DSTeacherRestrictionType
+        DataSource = SourceDataModule.DSResourceRestrictionType
         TabOrder = 7
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
@@ -674,15 +674,15 @@ object ConfigForm: TConfigForm
         OnExit = CBColThemeRestrictionTypeExit
         TabOrder = 9
       end
-      object CBColTeacherRestrictionType: TColorBox
+      object CBColResourceRestrictionType: TColorBox
         Left = 364
         Height = 24
         Top = 283
         Width = 93
         Anchors = [akRight, akBottom]
         ItemHeight = 16
-        OnChange = CBColTeacherRestrictionTypeChange
-        OnExit = CBColTeacherRestrictionTypeExit
+        OnChange = CBColResourceRestrictionTypeChange
+        OnExit = CBColResourceRestrictionTypeExit
         TabOrder = 12
       end
       object EdClashTheme: TEdit
@@ -714,9 +714,9 @@ object ConfigForm: TConfigForm
     left = 128
     top = 200
   end
-  object DSTeacherRestrictionType: TDatasource
-    DataSet = SourceDataModule.TbTeacherRestrictionType
-    OnDataChange = DSTeacherRestrictionTypeDataChange
+  object DSResourceRestrictionType: TDatasource
+    DataSet = SourceDataModule.TbResourceRestrictionType
+    OnDataChange = DSResourceRestrictionTypeDataChange
     left = 128
     top = 288
   end

@@ -25,7 +25,7 @@ type
     QuTimetableClusterIsJoinedCluster: TLongintField;
     QuTimetableClusterIdHour: TLongintField;
     QuTimetableClusterIdDay: TLongintField;
-    QuTimetableClusterIdTeacher: TLongintField;
+    QuTimetableClusterIdResource: TLongintField;
     QuTimetableClusterName: TStringField;
     DSCluster: TDataSource;
     QuTimetableClusterNaTheme: TStringField;
@@ -36,8 +36,8 @@ type
     QuClusterAbCategory: TStringField;
     QuClusterNaParallel: TStringField;
     QuTimetableClusterIdTimetable: TLongintField;
-    QuTimetableClusterLnTeacher: TStringField;
-    QuTimetableClusterNaTeacher: TStringField;
+    QuTimetableClusterLnResource: TStringField;
+    QuTimetableClusterNaResource: TStringField;
     DBGrid1: TDBGrid;
     QuClusterNaCluster: TStringField;
     Splitter1: TSplitter;

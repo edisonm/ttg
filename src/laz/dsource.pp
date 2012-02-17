@@ -16,7 +16,7 @@ type
   TSourceDataModule = class(TSourceBaseDataModule)
     QuCluster: TZReadOnlyQuery;
     ZTables: TZReadOnlyQuery;
-    QuTeacher: TZReadOnlyQuery;
+    QuResource: TZReadOnlyQuery;
     procedure TbDistributionBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
@@ -115,19 +115,19 @@ const
   SNaThemeRestrictionType: array[0..1] of string = (
     SInadequate,
     SImpossible);
-  SNaTeacherRestrictionType: array[0..1] of string = (
+  SNaResourceRestrictionType: array[0..1] of string = (
     SInadequate,
     SImpossible);
   EColThemeRestrictionType: array[0..1] of TColor = (
     clLime,
     clRed);
-  EColTeacherRestrictionType: array[0..1] of TColor = (
+  EColResourceRestrictionType: array[0..1] of TColor = (
     clLime,
     clRed);
   EValThemeRestrictionType: array[0..1] of Integer = (
     50,
     500);
-  EValTeacherRestrictionType: array[0..1] of Integer = (
+  EValResourceRestrictionType: array[0..1] of Integer = (
     50,
     500);
 var
@@ -199,15 +199,15 @@ begin
         Post;
       end;
     end;
-    with TbTeacherRestrictionType do
+    with TbResourceRestrictionType do
     begin
-      for i := Low(SNaTeacherRestrictionType) to High(SNaTeacherRestrictionType) do
+      for i := Low(SNaResourceRestrictionType) to High(SNaResourceRestrictionType) do
       begin
         Append;
         Fields[0].AsInteger := i;
-        Fields[1].AsString := SNaTeacherRestrictionType[i];
-        Fields[2].AsInteger := EColTeacherRestrictionType[i];
-        Fields[3].AsFloat := EValTeacherRestrictionType[i];
+        Fields[1].AsString := SNaResourceRestrictionType[i];
+        Fields[2].AsInteger := EColResourceRestrictionType[i];
+        Fields[3].AsFloat := EValResourceRestrictionType[i];
         Post;
       end;
     end;
@@ -278,20 +278,20 @@ begin
     Lookup := True;
     DataSet := TbTimetableDetail;
   end;
-  Field := TStringField.Create(TbTeacherRestriction);
+  Field := TStringField.Create(TbResourceRestriction);
   with Field do
   begin
-    DisplayLabel := SFlTeacherRestriction_IdTeacherRestrictionType;
+    DisplayLabel := SFlResourceRestriction_IdResourceRestrictionType;
     DisplayWidth := 10;
     FieldKind := fkLookup;
-    FieldName := 'NaTeacherRestrictionType';
-    LookupDataSet := TbTeacherRestrictionType;
-    LookupKeyFields := 'IdTeacherRestrictionType';
-    LookupResultField := 'NaTeacherRestrictionType';
-    KeyFields := 'IdTeacherRestrictionType';
+    FieldName := 'NaResourceRestrictionType';
+    LookupDataSet := TbResourceRestrictionType;
+    LookupKeyFields := 'IdResourceRestrictionType';
+    LookupResultField := 'NaResourceRestrictionType';
+    KeyFields := 'IdResourceRestrictionType';
     Size := 10;
     Lookup := True;
-    DataSet := TbTeacherRestriction;
+    DataSet := TbResourceRestriction;
   end;
   Field := TStringField.Create(TbDistribution.Owner);
   with Field do
@@ -364,14 +364,14 @@ begin
   Field := TStringField.Create(TbAssistance.Owner);
   with Field do
   begin
-    DisplayLabel := SFlAssistance_IdTeacher;
+    DisplayLabel := SFlAssistance_IdResource;
     DisplayWidth := 31;
     FieldKind := fkLookup;
-    FieldName := 'NameTeacher';
-    LookupDataSet := QuTeacher;
-    LookupKeyFields := 'IdTeacher';
-    LookupResultField := 'NameTeacher';
-    KeyFields := 'IdTeacher';
+    FieldName := 'NameResource';
+    LookupDataSet := QuResource;
+    LookupKeyFields := 'IdResource';
+    LookupResultField := 'NameResource';
+    KeyFields := 'IdResource';
     Size := 31;
     Lookup := True;
     DataSet := TbAssistance;
@@ -406,7 +406,7 @@ begin
   TbTimeSlot.FindField('IdHour').Visible := False;
   TbCluster.FindField('IdCategory').Visible := False;
   TbCluster.FindField('IdParallel').Visible := False;
-  TbTeacher.FindField('IdTeacher').Visible := False;
+  TbResource.FindField('IdResource').Visible := False;
   with TbTimetableDetail do
   begin
     FindField('IdTimetable').Visible := False;
@@ -416,12 +416,12 @@ begin
     FindField('IdDay').Visible := False;
     FindField('IdHour').Visible := False;
   end;
-  TbTeacherRestrictionType.FindField('IdTeacherRestrictionType').Visible := False;
+  TbResourceRestrictionType.FindField('IdResourceRestrictionType').Visible := False;
   with TbDistribution do
   begin
     FindField('IdTheme').Visible := False;
     FindField('IdCategory').Visible := False;
-    FindField('IdTeacher').Visible := False;
+    FindField('IdResource').Visible := False;
     FindField('IdRoomType').Visible := False;
   end;
   with TbAssistance do
@@ -429,7 +429,7 @@ begin
     FindField('IdTheme').Visible := False;
     FindField('IdCategory').Visible := False;
     FindField('IdParallel').Visible := False;
-    FindField('IdTeacher').Visible := False;
+    FindField('IdResource').Visible := False;
   end;
   with TbJoinedCluster do
   begin

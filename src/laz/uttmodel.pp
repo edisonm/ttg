@@ -41,27 +41,27 @@ type
 
   TTimetableModel = class(TModel)
   private
-    FClashTeacherValue, FClashThemeValue, FClashRoomTypeValue,
+    FClashResourceValue, FClashThemeValue, FClashRoomTypeValue,
       FOutOfPositionEmptyHourValue, FBrokenSessionValue,
-      FBreakTimetableTeacherValue, FNonScatteredThemeValue: Integer;
+      FBreakTimetableResourceValue, FNonScatteredThemeValue: Integer;
     FTimeSlotToDay, FTimeSlotToHour, FDayToMaxTimeSlot, FSessionToDistribution,
       FSessionToTheme, FSessionToRoomType, FSessionToRoomCount, FRoomTypeToNumber,
       FThemeRestrictionToTheme, FThemeRestrictionToTimeSlot,
-      FThemeRestrictionToThemeRestrictionType, FTeacherRestrictionToTeacher,
-      FTeacherRestrictionToTimeSlot, FTeacherRestrictionToTeacherRestrictionType,
+      FThemeRestrictionToThemeRestrictionType, FResourceRestrictionToResource,
+      FResourceRestrictionToTimeSlot, FResourceRestrictionToResourceRestrictionType,
       FDistributionToRoomType, FDistributionToRoomCount, FClusterToCategory,
       FClusterToParallel, FDistributionToCluster, FClusterToSessionCount,
-      FThemeRestrictionTypeToValue, FTeacherRestrictionTypeToValue,
-      FThemeRestrictionToValue, FTeacherRestrictionToValue: TDynamicIntegerArray;
+      FThemeRestrictionTypeToValue, FResourceRestrictionTypeToValue,
+      FThemeRestrictionToValue, FResourceRestrictionToValue: TDynamicIntegerArray;
     FSessionToDuration: TSessionArray;
     FDayHourToTimeSlot, FCategoryParallelToCluster,
-      FClusterThemeToTeacher, FClusterThemeToDistribution, FClusterThemeCount,
+      FClusterThemeToResource, FClusterThemeToDistribution, FClusterThemeCount,
       FTimetableDetailPattern, FDistributionToSessions, FClusterAssistanceToDistribution,
-      FClusterAssistanceToTeacher, FTeacherTimeSlotToTeacherRestrictionType,
+      FClusterAssistanceToResource, FResourceTimeSlotToResourceRestrictionType,
       FClusterJoinedClusterToDistribution, FClusterJoinedClusterToCluster,
       FThemeTimeSlotToThemeRestrictionType: TDynamicIntegerArrayArray;
-    FThemeCount, FThemeRestrictionTypeCount, FTeacherRestrictionTypeCount,
-      FClusterCount, FDayCount, FHourCount, FTimeSlotCount, FTeacherCount,
+    FThemeCount, FThemeRestrictionTypeCount, FResourceRestrictionTypeCount,
+      FClusterCount, FDayCount, FHourCount, FTimeSlotCount, FResourceCount,
       FCategoryCount, FRoomTypeCount, FDistributionCount,
       FAssistanceCount, FJoinedClusterCount: Integer;
     FParallelToIdParallel, FThemeToIdTheme, FDayToIdDay, FHourToIdHour,
@@ -75,20 +75,20 @@ type
     property TimetableDetailPattern: TDynamicIntegerArrayArray read FTimetableDetailPattern;
     class function GetElitistCount: Integer; override;
   public
-    procedure Configure(AClashTeacherValue, AClashThemeValue, AClashRoomTypeValue,
-      ABreakTimetableTeacherValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
+    procedure Configure(AClashResourceValue, AClashThemeValue, AClashRoomTypeValue,
+      ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
       ANonScatteredThemeValue: Integer);
-    constructor Create(AClashTeacherValue, AClashThemeValue, AClashRoomTypeValue,
-      ABreakTimetableTeacherValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
+    constructor Create(AClashResourceValue, AClashThemeValue, AClashRoomTypeValue,
+      ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
       ANonScatteredThemeValue: Integer);
     destructor Destroy; override;
     procedure ReportParameters(AReport: TStrings);
     function NewIndividual: TIndividual; override;
     property TimeSlotCount: Integer read FTimeSlotCount;
     property ClusterCount: Integer read FClusterCount;
-    property ClashTeacherValue: Integer read FClashTeacherValue;
+    property ClashResourceValue: Integer read FClashResourceValue;
     property ClashThemeValue: Integer read FClashThemeValue;
-    property BreakTimetableTeacherValue: Integer read FBreakTimetableTeacherValue;
+    property BreakTimetableResourceValue: Integer read FBreakTimetableResourceValue;
     property ClashRoomTypeValue: Integer read FClashRoomTypeValue;
     property OutOfPositionEmptyHourValue: Integer read FOutOfPositionEmptyHourValue;
     property BrokenSessionValue: Integer read FBrokenSessionValue;
@@ -138,20 +138,20 @@ type
   { TTimetableTablingInfo }
   TTimetableTablingInfo = class
   protected
-    FTeacherTimeSlotCount: TDynamicIntegerArrayArray;
+    FResourceTimeSlotCount: TDynamicIntegerArrayArray;
     FThemeTimeSlotCount: TDynamicIntegerArrayArray;
     FRoomTypeTimeSlotCount: TDynamicIntegerArrayArray;
     FClusterDayThemeCount: TDynamicIntegerArrayArrayArray;
     FClusterDayThemeAccumulated: TDynamicIntegerArrayArrayArray;
     FThemeRestrictionTypeToThemeCount: TDynamicIntegerArray;
-    FTeacherRestrictionTypeATeacherCount: TDynamicIntegerArray;
-    FDayTeacherMinHour: TDynamicIntegerArrayArray;
-    FDayTeacherMaxHour: TDynamicIntegerArrayArray;
-    FDayTeacherEmptyHourCount: TDynamicIntegerArrayArray;
-    FClashTeacher: Integer;
+    FResourceRestrictionTypeAResourceCount: TDynamicIntegerArray;
+    FDayResourceMinHour: TDynamicIntegerArrayArray;
+    FDayResourceMaxHour: TDynamicIntegerArrayArray;
+    FDayResourceEmptyHourCount: TDynamicIntegerArrayArray;
+    FClashResource: Integer;
     FClashTheme: Integer;
     FClashRoomType: Integer;
-    FBreakTimetableTeacher: Integer;
+    FBreakTimetableResource: Integer;
     FOutOfPositionEmptyHour: Integer;
     FNonScatteredTheme: Integer;
     FBrokenSession: Integer;
@@ -170,10 +170,10 @@ type
     function GetClashThemeValue: Integer;
     function GetNonScatteredThemeValue: Integer;
     function GetOutOfPositionEmptyHourValue: Integer;
-    function GetClashTeacherValue: Integer;
+    function GetClashResourceValue: Integer;
     function GetThemeRestrictionValue: Integer;
-    function GetTeacherRestrictionValue: Integer;
-    function GetBreakTimetableTeacherValue: Integer;
+    function GetResourceRestrictionValue: Integer;
+    function GetBreakTimetableResourceValue: Integer;
     function GetBrokenSessionValue: Integer;
     function GetClashRoomTypeValue: Integer;
     function GetValue: Integer;
@@ -208,25 +208,25 @@ type
     property OutOfPositionEmptyHour: Integer read FTablingInfo.FOutOfPositionEmptyHour;
     property ThemeRestrictionTypeToThemeCount: TDynamicIntegerArray
       read FTablingInfo.FThemeRestrictionTypeToThemeCount;
-    property TeacherRestrictionTypeATeacherCount: TDynamicIntegerArray
-      read FTablingInfo.FTeacherRestrictionTypeATeacherCount;
+    property ResourceRestrictionTypeAResourceCount: TDynamicIntegerArray
+      read FTablingInfo.FResourceRestrictionTypeAResourceCount;
     property NonScatteredTheme: Integer read FTablingInfo.FNonScatteredTheme;
     property BrokenSession: Integer read FTablingInfo.FBrokenSession;
-    property ClashTeacher: Integer read FTablingInfo.FClashTeacher;
+    property ClashResource: Integer read FTablingInfo.FClashResource;
     property ClashTheme: Integer read FTablingInfo.FClashTheme;
     property ClashRoomType: Integer read FTablingInfo.FClashRoomType;
-    property ClashTeacherValue: Integer read GetClashTeacherValue;
+    property ClashResourceValue: Integer read GetClashResourceValue;
     property ClashThemeValue: Integer read GetClashThemeValue;
-    property BreakTimetableTeacherValue: Integer read GetBreakTimetableTeacherValue;
+    property BreakTimetableResourceValue: Integer read GetBreakTimetableResourceValue;
     property ClashRoomTypeValue: Integer read GetClashRoomTypeValue;
     property OutOfPositionEmptyHourValue: Integer read GetOutOfPositionEmptyHourValue;
     property BrokenSessionValue: Integer read GetBrokenSessionValue;
     property NonScatteredThemeValue: Integer read GetNonScatteredThemeValue;
     property ThemeRestrictionValue: Integer read GetThemeRestrictionValue;
-    property TeacherRestrictionValue: Integer read GetTeacherRestrictionValue;
+    property ResourceRestrictionValue: Integer read GetResourceRestrictionValue;
     property ClusterTimeSlotToSession: TDynamicIntegerArrayArray
       read FClusterTimeSlotToSession write FClusterTimeSlotToSession;
-    property BreakTimetableTeacher: Integer read FTablingInfo.FBreakTimetableTeacher;
+    property BreakTimetableResource: Integer read FTablingInfo.FBreakTimetableResource;
     property TablingInfo: TTimetableTablingInfo read FTablingInfo;
   end;
 
@@ -285,17 +285,17 @@ implementation
 uses
   SysUtils, ZSysUtils, MTProcs, DSource, USortAlgs, UTTGConsts, dsourcebaseconsts;
 
-constructor TTimetableModel.Create(AClashTeacherValue,
-  AClashThemeValue, AClashRoomTypeValue, ABreakTimetableTeacherValue,
+constructor TTimetableModel.Create(AClashResourceValue,
+  AClashThemeValue, AClashRoomTypeValue, ABreakTimetableResourceValue,
   AOutOfPositionEmptyHourValue, ABrokenSessionValue, ANonScatteredThemeValue: Integer);
 var
-  FMinIdTeacher, FMinIdTheme, FMinIdRoomType, FMinIdTeacherRestrictionType,
+  FMinIdResource, FMinIdTheme, FMinIdRoomType, FMinIdResourceRestrictionType,
     FMinIdThemeRestrictionType: Integer;
-  FDistributionToTheme, FIdThemeToTheme, FIdTeacherATeacher,
-    FIdRoomTypeARoomType, FIdTeacherRestrictionTypeATeacherRestrictionType,
+  FDistributionToTheme, FIdThemeToTheme, FIdResourceAResource,
+    FIdRoomTypeARoomType, FIdResourceRestrictionTypeAResourceRestrictionType,
     FIdThemeRestrictionTypeToThemeRestrictionType, FClusterToDuration,
-    FDistributionToTeacher: TDynamicIntegerArray;
-  FTeacherAIdTeacher, FTeacherRestrictionTypeAIdTeacherRestrictionType,
+    FDistributionToResource: TDynamicIntegerArray;
+  FResourceAIdResource, FResourceRestrictionTypeAIdResourceRestrictionType,
     FRoomTypeAIdRoomType, FThemeRestrictionTypeAIdThemeRestrictionType: TDynamicIntegerArray;
   procedure Load(ATable: TDataSet; const ALstName: string; out FMinIdLst: Integer;
     out FIdLstALst: TDynamicIntegerArray;
@@ -463,20 +463,20 @@ var
       First;
     end;
   end;
-  procedure LoadTeacherRestrictionType;
+  procedure LoadResourceRestrictionType;
   var
-    TeacherRestrictionType: Integer;
+    ResourceRestrictionType: Integer;
     VFieldValue: TField;
   begin
-    with SourceDataModule.TbTeacherRestrictionType do
+    with SourceDataModule.TbResourceRestrictionType do
     begin
-      IndexFieldNames := 'IdTeacherRestrictionType';
+      IndexFieldNames := 'IdResourceRestrictionType';
       First;
-      VFieldValue := FindField('ValTeacherRestrictionType');
-      SetLength(FTeacherRestrictionTypeToValue, RecordCount);
-      for TeacherRestrictionType := 0 to RecordCount - 1 do
+      VFieldValue := FindField('ValResourceRestrictionType');
+      SetLength(FResourceRestrictionTypeToValue, RecordCount);
+      for ResourceRestrictionType := 0 to RecordCount - 1 do
       begin
-        FTeacherRestrictionTypeToValue[TeacherRestrictionType] := VFieldValue.AsInteger;
+        FResourceRestrictionTypeToValue[ResourceRestrictionType] := VFieldValue.AsInteger;
         Next;
       end;
       First;
@@ -521,45 +521,45 @@ var
       First;
     end;
   end;
-  procedure LoadTeacherRestriction;
+  procedure LoadResourceRestriction;
   var
-    TeacherRestriction, Teacher, TimeSlot, Day, Hour,
-      TeacherRestrictionType, Value: Integer;
-    VFieldTeacher, VFieldDay, VFieldHour,
-      VFieldTeacherRestrictionType: TField;
+    ResourceRestriction, Resource, TimeSlot, Day, Hour,
+      ResourceRestrictionType, Value: Integer;
+    VFieldResource, VFieldDay, VFieldHour,
+      VFieldResourceRestrictionType: TField;
   begin
-    with SourceDataModule.TbTeacherRestriction do
+    with SourceDataModule.TbResourceRestriction do
     begin
-      IndexFieldNames := 'IdTeacher;IdDay;IdHour';
+      IndexFieldNames := 'IdResource;IdDay;IdHour';
       First;
-      SetLength(FTeacherRestrictionToTeacher, RecordCount);
-      SetLength(FTeacherRestrictionToTimeSlot, RecordCount);
-      SetLength(FTeacherRestrictionToTeacherRestrictionType, RecordCount);
-      SetLength(FTeacherRestrictionToValue, RecordCount);
-      SetLength(FTeacherTimeSlotToTeacherRestrictionType, FTeacherCount,
+      SetLength(FResourceRestrictionToResource, RecordCount);
+      SetLength(FResourceRestrictionToTimeSlot, RecordCount);
+      SetLength(FResourceRestrictionToResourceRestrictionType, RecordCount);
+      SetLength(FResourceRestrictionToValue, RecordCount);
+      SetLength(FResourceTimeSlotToResourceRestrictionType, FResourceCount,
         FTimeSlotCount);
-      for Teacher := 0 to FTeacherCount - 1 do
+      for Resource := 0 to FResourceCount - 1 do
         for TimeSlot := 0 to FTimeSlotCount - 1 do
-          FTeacherTimeSlotToTeacherRestrictionType[Teacher, TimeSlot] := -1;
-      VFieldTeacher := FindField('IdTeacher');
+          FResourceTimeSlotToResourceRestrictionType[Resource, TimeSlot] := -1;
+      VFieldResource := FindField('IdResource');
       VFieldHour := FindField('IdHour');
       VFieldDay := FindField('IdDay');
-      VFieldTeacherRestrictionType := FindField('IdTeacherRestrictionType');
-      for TeacherRestriction := 0 to RecordCount - 1 do
+      VFieldResourceRestrictionType := FindField('IdResourceRestrictionType');
+      for ResourceRestriction := 0 to RecordCount - 1 do
       begin
-        Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
+        Resource := FIdResourceAResource[VFieldResource.AsInteger - FMinIdResource];
         Day := FIdDayToDay[VFieldDay.AsInteger - FMinIdDay];
         Hour := FIdHourToHour[VFieldHour.AsInteger - FMinIdHour];
         TimeSlot := FDayHourToTimeSlot[Day, Hour];
-        TeacherRestrictionType := FIdTeacherRestrictionTypeATeacherRestrictionType
-          [VFieldTeacherRestrictionType.AsInteger -
-          FMinIdTeacherRestrictionType];
-        FTeacherRestrictionToTeacher[TeacherRestriction] := Teacher;
-        FTeacherRestrictionToTimeSlot[TeacherRestriction] := TimeSlot;
-        FTeacherRestrictionToTeacherRestrictionType[TeacherRestriction] := TeacherRestrictionType;
-        Value := FTeacherRestrictionTypeToValue[TeacherRestrictionType];
-        FTeacherRestrictionToValue[TeacherRestriction] := Value;
-        FTeacherTimeSlotToTeacherRestrictionType[Teacher, TimeSlot] := TeacherRestrictionType;
+        ResourceRestrictionType := FIdResourceRestrictionTypeAResourceRestrictionType
+          [VFieldResourceRestrictionType.AsInteger -
+          FMinIdResourceRestrictionType];
+        FResourceRestrictionToResource[ResourceRestriction] := Resource;
+        FResourceRestrictionToTimeSlot[ResourceRestriction] := TimeSlot;
+        FResourceRestrictionToResourceRestrictionType[ResourceRestriction] := ResourceRestrictionType;
+        Value := FResourceRestrictionTypeToValue[ResourceRestrictionType];
+        FResourceRestrictionToValue[ResourceRestriction] := Value;
+        FResourceTimeSlotToResourceRestrictionType[Resource, TimeSlot] := ResourceRestrictionType;
         Next;
       end;
       First;
@@ -570,8 +570,8 @@ var
   procedure LoadDistribution;
   var
     Theme, Category, Parallel, Session1, Distribution, RoomCount,
-      VCluster, Teacher, Session2, Session, RoomType, VPos: Integer;
-    VFieldTheme, VFieldCategory, VFieldParallel, VFieldTeacher,
+      VCluster, Resource, Session2, Session, RoomType, VPos: Integer;
+    VFieldTheme, VFieldCategory, VFieldParallel, VFieldResource,
       VFieldRoomType, VFieldRoomCount, VFieldComposition: TField;
     VSessionToDuration, VSessionToDistribution: array [0 .. 16383] of Integer;
     Composition: string;
@@ -583,19 +583,19 @@ var
       VFieldTheme := FindField('IdTheme');
       VFieldCategory := FindField('IdCategory');
       VFieldParallel := FindField('IdParallel');
-      VFieldTeacher := FindField('IdTeacher');
+      VFieldResource := FindField('IdResource');
       VFieldRoomType := FindField('IdRoomType');
       VFieldRoomCount := FindField('RoomCount');
       VFieldComposition := FindField('Composition');
       FDistributionCount := RecordCount;
       // SetLength(FDistributionAAsignatura, RecordCount);
       SetLength(FDistributionToCluster, FDistributionCount);
-      SetLength(FDistributionToTeacher, FDistributionCount);
+      SetLength(FDistributionToResource, FDistributionCount);
       SetLength(FDistributionToRoomType, FDistributionCount);
       SetLength(FDistributionToRoomCount, FDistributionCount);
       SetLength(FDistributionToSessions, FDistributionCount);
       SetLength(FDistributionToTheme, FDistributionCount);
-      SetLength(FClusterThemeToTeacher, FClusterCount, FThemeCount);
+      SetLength(FClusterThemeToResource, FClusterCount, FThemeCount);
       SetLength(FClusterThemeCount, FClusterCount, FThemeCount);
       SetLength(FClusterThemeToDistribution, FClusterCount, FThemeCount);
       for VCluster := 0 to FClusterCount - 1 do
@@ -603,7 +603,7 @@ var
         begin
           FClusterThemeCount[VCluster, Theme] := 0;
           FClusterThemeToDistribution[VCluster, Theme] := -1;
-          FClusterThemeToTeacher[VCluster, Theme] := -1;
+          FClusterThemeToResource[VCluster, Theme] := -1;
         end;
       Session2 := 0;
       for Distribution := 0 to RecordCount - 1 do
@@ -615,13 +615,13 @@ var
         RoomType := FIdRoomTypeARoomType[VFieldRoomType.AsInteger - FMinIdRoomType];
         RoomCount := VFieldRoomCount.AsInteger;
         VCluster := FCategoryParallelToCluster[Category, Parallel];
-        Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
+        Resource := FIdResourceAResource[VFieldResource.AsInteger - FMinIdResource];
         FDistributionToCluster[Distribution] := VCluster;
-        FDistributionToTeacher[Distribution] := Teacher;
+        FDistributionToResource[Distribution] := Resource;
         FDistributionToRoomType[Distribution] := RoomType;
         FDistributionToRoomCount[Distribution] := RoomCount;
         FDistributionToTheme[Distribution] := Theme;
-        FClusterThemeToTeacher[VCluster, Theme] := Teacher;
+        FClusterThemeToResource[VCluster, Theme] := Resource;
         FClusterThemeToDistribution[VCluster, Theme] := Distribution;
         Composition := VFieldComposition.AsString;
         VPos := 1;
@@ -663,21 +663,21 @@ var
   procedure LoadAssistance;
   var
     Assistance, Counter, VCluster, Parallel, Category, Theme,
-    Distribution, Teacher: Integer;
+    Distribution, Resource: Integer;
     VFieldTheme, VFieldCategory, VFieldParallel,
-    VFieldTeacher: TField;
+    VFieldResource: TField;
   begin
     with SourceDataModule.TbAssistance do
     begin
-      IndexFieldNames := 'IdTheme;IdCategory;IdParallel;IdTeacher';
+      IndexFieldNames := 'IdTheme;IdCategory;IdParallel;IdResource';
       First;
       FAssistanceCount := RecordCount;
       SetLength(FClusterAssistanceToDistribution, FClusterCount, 0);
-      SetLength(FClusterAssistanceToTeacher, FClusterCount, 0);
+      SetLength(FClusterAssistanceToResource, FClusterCount, 0);
       VFieldTheme := FindField('IdTheme');
       VFieldCategory := FindField('IdCategory');
       VFieldParallel := FindField('IdParallel');
-      VFieldTeacher := FindField('IdTeacher');
+      VFieldResource := FindField('IdResource');
       for Assistance := 0 to FAssistanceCount - 1 do
       begin
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
@@ -686,12 +686,12 @@ var
           FMinIdParallel];
         VCluster := FCategoryParallelToCluster[Category, Parallel];
         Distribution := FClusterThemeToDistribution[VCluster, Theme];
-        Teacher := FIdTeacherATeacher[VFieldTeacher.AsInteger - FMinIdTeacher];
+        Resource := FIdResourceAResource[VFieldResource.AsInteger - FMinIdResource];
         Counter := Length(FClusterAssistanceToDistribution[VCluster]);
         SetLength(FClusterAssistanceToDistribution[VCluster], Counter + 1);
-        SetLength(FClusterAssistanceToTeacher[VCluster], Counter + 1);
+        SetLength(FClusterAssistanceToResource[VCluster], Counter + 1);
         FClusterAssistanceToDistribution[VCluster, Counter] := Distribution;
-        FClusterAssistanceToTeacher[VCluster, Counter] := Teacher;
+        FClusterAssistanceToResource[VCluster, Counter] := Resource;
         Next;
       end;
       First;
@@ -792,12 +792,12 @@ begin
   inherited Create;
   with SourceDataModule do
   begin
-    Configure(AClashTeacherValue, AClashThemeValue, AClashRoomTypeValue,
-      ABreakTimetableTeacherValue, AOutOfPositionEmptyHourValue,
+    Configure(AClashResourceValue, AClashThemeValue, AClashRoomTypeValue,
+      ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue,
       ABrokenSessionValue, ANonScatteredThemeValue);
-    Load(TbTeacher, 'IdTeacher', FMinIdTeacher, FIdTeacherATeacher,
-      FTeacherAIdTeacher);
-    FTeacherCount := Length(FTeacherAIdTeacher);
+    Load(TbResource, 'IdResource', FMinIdResource, FIdResourceAResource,
+      FResourceAIdResource);
+    FResourceCount := Length(FResourceAIdResource);
     Load(TbCategory, 'IdCategory', FMinIdCategory, FIdCategoryToCategory, FCategoryToIdCategory);
     FCategoryCount := Length(FCategoryToIdCategory);
     Load(TbParallel, 'IdParallel', FMinIdParallel,
@@ -814,11 +814,11 @@ begin
       FIdThemeRestrictionTypeToThemeRestrictionType,
       FThemeRestrictionTypeAIdThemeRestrictionType);
     FThemeRestrictionTypeCount := Length(FThemeRestrictionTypeAIdThemeRestrictionType);
-    Load(TbTeacherRestrictionType, 'IdTeacherRestrictionType',
-      FMinIdTeacherRestrictionType,
-      FIdTeacherRestrictionTypeATeacherRestrictionType,
-      FTeacherRestrictionTypeAIdTeacherRestrictionType);
-    FTeacherRestrictionTypeCount := Length(FTeacherRestrictionTypeAIdTeacherRestrictionType);
+    Load(TbResourceRestrictionType, 'IdResourceRestrictionType',
+      FMinIdResourceRestrictionType,
+      FIdResourceRestrictionTypeAResourceRestrictionType,
+      FResourceRestrictionTypeAIdResourceRestrictionType);
+    FResourceRestrictionTypeCount := Length(FResourceRestrictionTypeAIdResourceRestrictionType);
     Load(TbRoomType, 'IdRoomType', FMinIdRoomType, FIdRoomTypeARoomType,
       FRoomTypeAIdRoomType);
     FRoomTypeCount := Length(FRoomTypeAIdRoomType);
@@ -826,9 +826,9 @@ begin
     LoadCluster;
     LoadRoomType;
     LoadThemeRestrictionType;
-    LoadTeacherRestrictionType;
+    LoadResourceRestrictionType;
     LoadThemeRestriction;
-    LoadTeacherRestriction;
+    LoadResourceRestriction;
     LoadDistribution;
     LoadAssistance;
     LoadJoinedCluster;
@@ -836,13 +836,13 @@ begin
   end;
 end;
 
-procedure TTimetableModel.Configure(AClashTeacherValue, AClashThemeValue,
-  AClashRoomTypeValue, ABreakTimetableTeacherValue, AOutOfPositionEmptyHourValue,
+procedure TTimetableModel.Configure(AClashResourceValue, AClashThemeValue,
+  AClashRoomTypeValue, ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue,
   ABrokenSessionValue, ANonScatteredThemeValue: Integer);
 begin
-  FClashTeacherValue := AClashTeacherValue;
+  FClashResourceValue := AClashResourceValue;
   FClashThemeValue := AClashThemeValue;
-  FBreakTimetableTeacherValue := ABreakTimetableTeacherValue;
+  FBreakTimetableResourceValue := ABreakTimetableResourceValue;
   FClashRoomTypeValue := AClashRoomTypeValue;
   FOutOfPositionEmptyHourValue := AOutOfPositionEmptyHourValue;
   FBrokenSessionValue := ABrokenSessionValue;
@@ -867,10 +867,10 @@ begin
         '  %0:-29s %8.2f'#13#10 +
         '  %0:-29s %8.2f'#13#10 +
         '  %0:-29s %8.2f', [SWeights,
-          SClashTeacher           + ':', ClashTeacherValue,
+          SClashResource           + ':', ClashResourceValue,
           SClashTheme           + ':', ClashThemeValue,
           SClashRoomType          + ':', ClashRoomTypeValue,
-          SBreakTimetableTeacher  + ':', BreakTimetableTeacherValue,
+          SBreakTimetableResource  + ':', BreakTimetableResourceValue,
           SOutOfPositionEmptyHour + ':', OutOfPositionEmptyHourValue,
           SBrokenSession          + ':', BrokenSessionValue,
           SNonScatteredTheme    + ':', NonScatteredThemeValue]));
@@ -977,15 +977,15 @@ begin
     with TablingInfo do
     begin
       SetLength(FThemeTimeSlotCount, FThemeCount, FTimeSlotCount);
-      SetLength(FTeacherTimeSlotCount, FTeacherCount, FTimeSlotCount);
+      SetLength(FResourceTimeSlotCount, FResourceCount, FTimeSlotCount);
       SetLength(FRoomTypeTimeSlotCount, FRoomTypeCount, FTimeSlotCount);
       SetLength(FClusterDayThemeCount, FClusterCount, FDayCount, FThemeCount);
       SetLength(FClusterDayThemeAccumulated, FClusterCount, FDayCount, FThemeCount);
-      SetLength(FDayTeacherMinHour, FDayCount, FTeacherCount);
-      SetLength(FDayTeacherMaxHour, FDayCount, FTeacherCount);
-      SetLength(FDayTeacherEmptyHourCount, FDayCount, FTeacherCount);
+      SetLength(FDayResourceMinHour, FDayCount, FResourceCount);
+      SetLength(FDayResourceMaxHour, FDayCount, FResourceCount);
+      SetLength(FDayResourceEmptyHourCount, FDayCount, FResourceCount);
       SetLength(FThemeRestrictionTypeToThemeCount, FThemeRestrictionTypeCount);
-      SetLength(FTeacherRestrictionTypeATeacherCount, FTeacherRestrictionTypeCount);
+      SetLength(FResourceRestrictionTypeAResourceCount, FResourceRestrictionTypeCount);
     end;
   end;
 end;
@@ -994,7 +994,7 @@ function TTimetable.GetElitistValues(Index: Integer): Integer;
 begin
   case Index of
     0: Result := BrokenSession;
-    1: Result := ClashTeacher;
+    1: Result := ClashResource;
     2: Result := ClashRoomType;
   end;
 end;
@@ -1056,18 +1056,18 @@ end;
 
 procedure TTimetable.DeltaValues(Delta, ACluster, TimeSlot1, TimeSlot2: Integer);
 var
-  ThemeRestrictionType, TeacherRestrictionType, TimeSlot, TimeSlot0, Day, DDay,
-  Day1, Day2, Hour, Session, Teacher, RoomType, Duration, Theme, Limit, Assistance,
-  JoinedCluster, Distribution, DeltaBreakTimetableTeacher, MinTimeSlot, MaxTimeSlot,
+  ThemeRestrictionType, ResourceRestrictionType, TimeSlot, TimeSlot0, Day, DDay,
+  Day1, Day2, Hour, Session, Resource, RoomType, Duration, Theme, Limit, Assistance,
+  JoinedCluster, Distribution, DeltaBreakTimetableResource, MinTimeSlot, MaxTimeSlot,
   Cluster1: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
-  ThemeATeacher: TDynamicIntegerArray;
+  ThemeAResource: TDynamicIntegerArray;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
     Inc(FBrokenSession, Delta * DeltaBrokenSession(ACluster, TimeSlot1, TimeSlot2));
     TimeSlotToSession := FClusterTimeSlotToSession[ACluster];
-    ThemeATeacher := FClusterThemeToTeacher[ACluster];
+    ThemeAResource := FClusterThemeToResource[ACluster];
     if Delta > 0 then
       Limit := 0
     else
@@ -1078,80 +1078,80 @@ begin
       if Session >= 0 then
       begin
         Theme := FSessionToTheme[Session];
-        Teacher := ThemeATeacher[Theme];
+        Resource := ThemeAResource[Theme];
         RoomType := FSessionToRoomType[Session];
         Day := FTimeSlotToDay[TimeSlot];
         Hour := FTimeSlotToHour[TimeSlot];
-        if FTeacherTimeSlotCount[Teacher, TimeSlot] = Limit then
+        if FResourceTimeSlotCount[Resource, TimeSlot] = Limit then
         begin
           if Delta > 0 then
           begin
-            if FDayTeacherMinHour[Day, Teacher] > FDayTeacherMaxHour[Day, Teacher] then
+            if FDayResourceMinHour[Day, Resource] > FDayResourceMaxHour[Day, Resource] then
             begin
-              FDayTeacherMinHour[Day, Teacher] := Hour;
-              FDayTeacherMaxHour[Day, Teacher] := Hour;
+              FDayResourceMinHour[Day, Resource] := Hour;
+              FDayResourceMaxHour[Day, Resource] := Hour;
             end
             else
             begin
-              if Hour < FDayTeacherMinHour[Day, Teacher] then
+              if Hour < FDayResourceMinHour[Day, Resource] then
               begin
-                DeltaBreakTimetableTeacher := FDayTeacherMinHour[Day, Teacher] - Hour - 1;
-                FDayTeacherMinHour[Day, Teacher] := Hour;
+                DeltaBreakTimetableResource := FDayResourceMinHour[Day, Resource] - Hour - 1;
+                FDayResourceMinHour[Day, Resource] := Hour;
               end
-              else if (FDayTeacherMinHour[Day, Teacher] <= Hour)
-                  and (Hour <= FDayTeacherMaxHour[Day, Teacher]) then
-                DeltaBreakTimetableTeacher := -1
-              else // if FDayTeacherMaxTimeSlot[Day, Teacher] < TimeSlot then
+              else if (FDayResourceMinHour[Day, Resource] <= Hour)
+                  and (Hour <= FDayResourceMaxHour[Day, Resource]) then
+                DeltaBreakTimetableResource := -1
+              else // if FDayResourceMaxTimeSlot[Day, Resource] < TimeSlot then
               begin
-                DeltaBreakTimetableTeacher := Hour - FDayTeacherMaxHour[Day, Teacher] - 1;
-                FDayTeacherMaxHour[Day, Teacher] := Hour;
+                DeltaBreakTimetableResource := Hour - FDayResourceMaxHour[Day, Resource] - 1;
+                FDayResourceMaxHour[Day, Resource] := Hour;
               end;
-              Inc(FDayTeacherEmptyHourCount[Day, Teacher], DeltaBreakTimetableTeacher);
-              Inc(FBreakTimetableTeacher, DeltaBreakTimetableTeacher);
+              Inc(FDayResourceEmptyHourCount[Day, Resource], DeltaBreakTimetableResource);
+              Inc(FBreakTimetableResource, DeltaBreakTimetableResource);
             end;
           end
           else if Delta < 0 then
           begin
-            if FDayTeacherMinHour[Day, Teacher] = FDayTeacherMaxHour[Day, Teacher] then
+            if FDayResourceMinHour[Day, Resource] = FDayResourceMaxHour[Day, Resource] then
             begin
-              FDayTeacherMinHour[Day, Teacher] := 1;
-              FDayTeacherMaxHour[Day, Teacher] := 0;
+              FDayResourceMinHour[Day, Resource] := 1;
+              FDayResourceMaxHour[Day, Resource] := 0;
             end
             else
             begin
-              if Hour = FDayTeacherMinHour[Day, Teacher] then
+              if Hour = FDayResourceMinHour[Day, Resource] then
               begin
                 TimeSlot0 := TimeSlot + 1;
-                MaxTimeSlot := FDayHourToTimeSlot[Day, FDayTeacherMaxHour[Day, Teacher]];
+                MaxTimeSlot := FDayHourToTimeSlot[Day, FDayResourceMaxHour[Day, Resource]];
                 while (TimeSlot0 <= MaxTimeSlot)
-                    and (FTeacherTimeSlotCount[Teacher, TimeSlot0] = 0) do
+                    and (FResourceTimeSlotCount[Resource, TimeSlot0] = 0) do
                   Inc(TimeSlot0);
-                DeltaBreakTimetableTeacher := Hour + 1 - FTimeSlotToHour[TimeSlot0];
-                FDayTeacherMinHour[Day, Teacher] := FTimeSlotToHour[TimeSlot0];
+                DeltaBreakTimetableResource := Hour + 1 - FTimeSlotToHour[TimeSlot0];
+                FDayResourceMinHour[Day, Resource] := FTimeSlotToHour[TimeSlot0];
               end
-              else if (FDayTeacherMinHour[Day, Teacher] < Hour)
-                  and (Hour < FDayTeacherMaxHour[Day, Teacher]) then
+              else if (FDayResourceMinHour[Day, Resource] < Hour)
+                  and (Hour < FDayResourceMaxHour[Day, Resource]) then
               begin
-                DeltaBreakTimetableTeacher := 1;
+                DeltaBreakTimetableResource := 1;
               end
-              else // if (FDayTeacherMaxTimeSlot[Day, Teacher] = TimeSlot) then
+              else // if (FDayResourceMaxTimeSlot[Day, Resource] = TimeSlot) then
               begin
                 TimeSlot0 := TimeSlot - 1;
-                MinTimeSlot := FDayHourToTimeSlot[Day, FDayTeacherMinHour[Day, Teacher]];
+                MinTimeSlot := FDayHourToTimeSlot[Day, FDayResourceMinHour[Day, Resource]];
                 while (TimeSlot0 >= MinTimeSlot)
-                    and (FTeacherTimeSlotCount[Teacher, TimeSlot0] = 0) do
+                    and (FResourceTimeSlotCount[Resource, TimeSlot0] = 0) do
                   Dec(TimeSlot0);
-                DeltaBreakTimetableTeacher := FTimeSlotToHour[TimeSlot0] + 1 - Hour;
-                FDayTeacherMaxHour[Day, Teacher] := FTimeSlotToHour[TimeSlot0];
+                DeltaBreakTimetableResource := FTimeSlotToHour[TimeSlot0] + 1 - Hour;
+                FDayResourceMaxHour[Day, Resource] := FTimeSlotToHour[TimeSlot0];
               end;
-              Inc(FDayTeacherEmptyHourCount[Day, Teacher], DeltaBreakTimetableTeacher);
-              Inc(FBreakTimetableTeacher, DeltaBreakTimetableTeacher);
+              Inc(FDayResourceEmptyHourCount[Day, Resource], DeltaBreakTimetableResource);
+              Inc(FBreakTimetableResource, DeltaBreakTimetableResource);
             end;
           end;
         end;
-        if FTeacherTimeSlotCount[Teacher, TimeSlot] > Limit then
-          Inc(FClashTeacher, Delta);
-        Inc(FTeacherTimeSlotCount[Teacher, TimeSlot], Delta);
+        if FResourceTimeSlotCount[Resource, TimeSlot] > Limit then
+          Inc(FClashResource, Delta);
+        Inc(FResourceTimeSlotCount[Resource, TimeSlot], Delta);
         Inc(FThemeTimeSlotCount[Theme, TimeSlot], Delta);
         if FRoomTypeTimeSlotCount[RoomType, TimeSlot] >= FRoomTypeToNumber[RoomType] + Limit then
           Inc(FClashRoomType, Delta * FSessionToRoomCount[Session]);
@@ -1159,9 +1159,9 @@ begin
         ThemeRestrictionType := FThemeTimeSlotToThemeRestrictionType[Theme, TimeSlot];
         if ThemeRestrictionType >= 0 then
           Inc(FThemeRestrictionTypeToThemeCount[ThemeRestrictionType], Delta);
-        TeacherRestrictionType := FTeacherTimeSlotToTeacherRestrictionType[Teacher, TimeSlot];
-        if TeacherRestrictionType >= 0 then
-          Inc(FTeacherRestrictionTypeATeacherCount[TeacherRestrictionType], Delta);
+        ResourceRestrictionType := FResourceTimeSlotToResourceRestrictionType[Resource, TimeSlot];
+        if ResourceRestrictionType >= 0 then
+          Inc(FResourceRestrictionTypeAResourceCount[ResourceRestrictionType], Delta);
       end
       else if FHourCount - 1 <> FTimeSlotToHour[TimeSlot] then
         Inc(FOutOfPositionEmptyHour, Delta);
@@ -1199,7 +1199,7 @@ begin
     for Assistance := 0 to High(FClusterAssistanceToDistribution[ACluster]) do
     begin
       Distribution := FClusterAssistanceToDistribution[ACluster, Assistance];
-      Teacher := FClusterAssistanceToTeacher[ACluster, Assistance];
+      Resource := FClusterAssistanceToResource[ACluster, Assistance];
       for TimeSlot := TimeSlot1 to TimeSlot2 do
       begin
         Session := TimeSlotToSession[TimeSlot];
@@ -1207,9 +1207,9 @@ begin
         begin
           if Distribution = FSessionToDistribution[Session] then
           begin
-            if FTeacherTimeSlotCount[Teacher, TimeSlot] > Limit then
-              Inc(FClashTeacher, Delta);
-            Inc(FTeacherTimeSlotCount[Teacher, TimeSlot], Delta);
+            if FResourceTimeSlotCount[Resource, TimeSlot] > Limit then
+              Inc(FClashResource, Delta);
+            Inc(FResourceTimeSlotCount[Resource, TimeSlot], Delta);
           end;
         end
       end;
@@ -1254,14 +1254,14 @@ var
   TimeSlot: Integer;
   {$IFDEF DEBUG}
   Value1, Value2: Integer;
-  ClashTeacher2: Integer;
+  ClashResource2: Integer;
   ClashTheme2: Integer;
   ClashRoomType2: Integer;
-  BreakTimetableTeacher2: Integer;
+  BreakTimetableResource2: Integer;
   OutOfPositionEmptyHour2: Integer;
   ThemeRestrictionValue2: Integer;
   NonScatteredTheme2: Integer;
-  TeacherRestrictionValue2: Integer;
+  ResourceRestrictionValue2: Integer;
   BrokenSession2: Integer;
   {$ENDIF}
 begin
@@ -1297,13 +1297,13 @@ begin
     FValue := GetValue;
     {$IFDEF DEBUG}
     ClashRoomType2 := FClashRoomType;
-    ClashTeacher2 := FClashTeacher;
+    ClashResource2 := FClashResource;
     ClashTheme2 := FClashTheme;
     OutOfPositionEmptyHour2 := FOutOfPositionEmptyHour;
     NonScatteredTheme2 := FNonScatteredTheme;
     ThemeRestrictionValue2 := ThemeRestrictionValue;
-    BreakTimetableTeacher2 := FBreakTimetableTeacher;
-    TeacherRestrictionValue2 := TeacherRestrictionValue;
+    BreakTimetableResource2 := FBreakTimetableResource;
+    ResourceRestrictionValue2 := ResourceRestrictionValue;
     BrokenSession2 := FBrokenSession;
     Value2 := FValue;
     Update;
@@ -1311,26 +1311,26 @@ begin
       raise Exception.CreateFmt(
       'Value1                  %f - %f'#13#10 +
       'Value2                  %f - %f'#13#10 +
-      'ClashTeacher            %d - %d'#13#10 +
+      'ClashResource            %d - %d'#13#10 +
       'ClashTheme            %d - %d'#13#10 +
       'ClashRoomType           %d - %d'#13#10 +
       'OutOfPositionEmptyHour  %d - %d'#13#10 +
       'NonScatteredTheme     %d - %d'#13#10 +
       'ThemeRestrictionValue %f - %f'#13#10 +
-      'BreakTimetableTeacher   %d - %d'#13#10 +
-      'TeacherRestrictionValue %f - %f'#13#10 +
+      'BreakTimetableResource   %d - %d'#13#10 +
+      'ResourceRestrictionValue %f - %f'#13#10 +
       'BrokenSession           %d - %d',
       [
         Result, Value1,
         FValue, Value2,
-        FClashTeacher, ClashTeacher2,
+        FClashResource, ClashResource2,
         FClashTheme, ClashTheme2,
         FClashRoomType, ClashRoomType2,
         FOutOfPositionEmptyHour, OutOfPositionEmptyHour2,
         FNonScatteredTheme, NonScatteredTheme2,
         ThemeRestrictionValue, ThemeRestrictionValue2,
-        FBreakTimetableTeacher, BreakTimetableTeacher2,
-        TeacherRestrictionValue, TeacherRestrictionValue2,
+        FBreakTimetableResource, BreakTimetableResource2,
+        ResourceRestrictionValue, ResourceRestrictionValue2,
         FBrokenSession, BrokenSession2
         ]);
     {$ENDIF}
@@ -1386,14 +1386,14 @@ begin
     Add('-------------------------------------------------------------------');
     Add(Format('%0:-28s %12s %12s %12s', [SDetail, SCount, SWeight, SValue]));
     Add('-------------------------------------------------------------------');
-    Add(Format(SRowFormat, [SClashTeacher + ':', FClashTeacher,
-      TTimetableModel(Model).ClashTeacherValue, ClashTeacherValue]));
+    Add(Format(SRowFormat, [SClashResource + ':', FClashResource,
+      TTimetableModel(Model).ClashResourceValue, ClashResourceValue]));
     Add(Format(SRowFormat, [SClashTheme + ':', FClashTheme,
       TTimetableModel(Model).ClashThemeValue, ClashThemeValue]));
     Add(Format(SRowFormat, [SClashRoomType + ':', FClashRoomType,
       TTimetableModel(Model).ClashRoomTypeValue, ClashRoomTypeValue]));
-    Add(Format(SRowFormat, [SBreakTimetableTeacher + ':', BreakTimetableTeacher,
-      TTimetableModel(Model).BreakTimetableTeacherValue, BreakTimetableTeacherValue]));
+    Add(Format(SRowFormat, [SBreakTimetableResource + ':', BreakTimetableResource,
+      TTimetableModel(Model).BreakTimetableResourceValue, BreakTimetableResourceValue]));
     Add(Format(SRowFormat, [SOutOfPositionEmptyHour + ':', OutOfPositionEmptyHour,
       TTimetableModel(Model).OutOfPositionEmptyHourValue, OutOfPositionEmptyHourValue]));
     Add(Format(SRowFormat, [SBrokenSession + ':', BrokenSession,
@@ -1404,10 +1404,10 @@ begin
          '(' + VarArrToStr(FThemeRestrictionTypeToThemeCount, ' ') + ')',
          '(' + VarArrToStr(TTimetableModel(Model).FThemeRestrictionTypeToValue, ' ') + ')',
          ThemeRestrictionValue]));
-    Add(Format('%0:-28s %12s %12s %12d', [STbTeacherRestriction + ':',
-         '(' + VarArrToStr(FTeacherRestrictionTypeATeacherCount, ' ') + ')',
-         '(' + VarArrToStr(TTimetableModel(Model).FTeacherRestrictionTypeToValue, ' ') + ')',
-         TeacherRestrictionValue]));
+    Add(Format('%0:-28s %12s %12s %12d', [STbResourceRestriction + ':',
+         '(' + VarArrToStr(FResourceRestrictionTypeAResourceCount, ' ') + ')',
+         '(' + VarArrToStr(TTimetableModel(Model).FResourceRestrictionTypeToValue, ' ') + ')',
+         ResourceRestrictionValue]));
     Add('-------------------------------------------------------------------');
     Add(Format('%0:-54s %12d', [STotalValue, Value]));
   end;
@@ -1446,16 +1446,16 @@ begin
   end;
 end;
 
-function TTimetable.GetTeacherRestrictionValue: Integer;
+function TTimetable.GetResourceRestrictionValue: Integer;
 var
-  TeacherRestrictionType: Integer;
+  ResourceRestrictionType: Integer;
 begin
   Result := 0;
   with TTimetableModel(Model), TablingInfo do
-  for TeacherRestrictionType := 0 to FTeacherRestrictionTypeCount - 1 do
+  for ResourceRestrictionType := 0 to FResourceRestrictionTypeCount - 1 do
   begin
-    Result := Result + FTeacherRestrictionTypeATeacherCount[TeacherRestrictionType]
-      * FTeacherRestrictionTypeToValue[TeacherRestrictionType];
+    Result := Result + FResourceRestrictionTypeAResourceCount[ResourceRestrictionType]
+      * FResourceRestrictionTypeToValue[ResourceRestrictionType];
   end;
 end;
 
@@ -1496,9 +1496,9 @@ begin
   Result := TTimetableModel(Model).NonScatteredThemeValue * NonScatteredTheme;
 end;
 
-function TTimetable.GetClashTeacherValue: Integer;
+function TTimetable.GetClashResourceValue: Integer;
 begin
-  Result := TTimetableModel(Model).ClashTeacherValue * TablingInfo.FClashTeacher;
+  Result := TTimetableModel(Model).ClashResourceValue * TablingInfo.FClashResource;
 end;
 
 function TTimetable.GetClashThemeValue: Integer;
@@ -1507,10 +1507,10 @@ begin
 end;
 
 
-function TTimetable.GetBreakTimetableTeacherValue: Integer;
+function TTimetable.GetBreakTimetableResourceValue: Integer;
 begin
-  Result := TTimetableModel(Model).BreakTimetableTeacherValue *
-    TablingInfo.FBreakTimetableTeacher;
+  Result := TTimetableModel(Model).BreakTimetableResourceValue *
+    TablingInfo.FBreakTimetableResource;
 end;
 
 function TTimetable.GetClashRoomTypeValue: Integer;
@@ -1523,13 +1523,13 @@ begin
   with TablingInfo do
     Result :=
       ClashRoomTypeValue +
-      ClashTeacherValue +
+      ClashResourceValue +
       ClashThemeValue +
       OutOfPositionEmptyHourValue +
       NonScatteredThemeValue +
       ThemeRestrictionValue +
-      BreakTimetableTeacherValue +
-      TeacherRestrictionValue +
+      BreakTimetableResourceValue +
+      ResourceRestrictionValue +
       BrokenSessionValue;
 end;
 
@@ -1546,7 +1546,7 @@ end;
 
 procedure TTimetable.Assign(AIndividual: TIndividual);
 var
-  VCluster, Theme, Teacher, RoomType, Day: Integer;
+  VCluster, Theme, Resource, RoomType, Day: Integer;
   ATimetable: TTimetable;
 begin
   inherited;
@@ -1556,10 +1556,10 @@ begin
     for VCluster := 0 to FClusterCount - 1 do
       Move(ATimetable.ClusterTimeSlotToSession[VCluster, 0],
         ClusterTimeSlotToSession[VCluster, 0], FTimeSlotCount * SizeOf(Integer));
-    FClashTeacher := ATimetable.TablingInfo.FClashTeacher;
+    FClashResource := ATimetable.TablingInfo.FClashResource;
     FClashTheme := ATimetable.TablingInfo.FClashTheme;
     FClashRoomType := ATimetable.TablingInfo.FClashRoomType;
-    FBreakTimetableTeacher := ATimetable.TablingInfo.FBreakTimetableTeacher;
+    FBreakTimetableResource := ATimetable.TablingInfo.FBreakTimetableResource;
     FOutOfPositionEmptyHour := ATimetable.TablingInfo.FOutOfPositionEmptyHour;
     FBrokenSession := ATimetable.TablingInfo.FBrokenSession;
     FNonScatteredTheme := ATimetable.TablingInfo.FNonScatteredTheme;
@@ -1567,24 +1567,24 @@ begin
     // TablingInfo := ATimetable.TablingInfo;
     Move(ATimetable.TablingInfo.FThemeRestrictionTypeToThemeCount[0],
       FThemeRestrictionTypeToThemeCount[0], FThemeRestrictionTypeCount * SizeOf(Integer));
-    Move(ATimetable.TablingInfo.FTeacherRestrictionTypeATeacherCount[0],
-      FTeacherRestrictionTypeATeacherCount[0], FTeacherRestrictionTypeCount * SizeOf(Integer));
+    Move(ATimetable.TablingInfo.FResourceRestrictionTypeAResourceCount[0],
+      FResourceRestrictionTypeAResourceCount[0], FResourceRestrictionTypeCount * SizeOf(Integer));
     for Theme := 0 to FThemeCount - 1 do
       Move(ATimetable.TablingInfo.FThemeTimeSlotCount[Theme, 0],
            TablingInfo.FThemeTimeSlotCount[Theme, 0],
            FTimeSlotCount * SizeOf(Integer));
-    for Teacher := 0 to FTeacherCount - 1 do
-      Move(ATimetable.TablingInfo.FTeacherTimeSlotCount[Teacher, 0],
-           TablingInfo.FTeacherTimeSlotCount[Teacher, 0],
+    for Resource := 0 to FResourceCount - 1 do
+      Move(ATimetable.TablingInfo.FResourceTimeSlotCount[Resource, 0],
+           TablingInfo.FResourceTimeSlotCount[Resource, 0],
            FTimeSlotCount * SizeOf(Integer));
     for Day := 0 to FDayCount - 1 do
     begin
-      Move(ATimetable.TablingInfo.FDayTeacherMinHour[Day, 0],
-        FDayTeacherMinHour[Day, 0], FTeacherCount * SizeOf(Integer));
-      Move(ATimetable.TablingInfo.FDayTeacherMaxHour[Day, 0],
-        FDayTeacherMaxHour[Day, 0], FTeacherCount * SizeOf(Integer));
-      Move(ATimetable.TablingInfo.FDayTeacherEmptyHourCount[Day, 0],
-        FDayTeacherEmptyHourCount[Day, 0], FTeacherCount * SizeOf(Integer));
+      Move(ATimetable.TablingInfo.FDayResourceMinHour[Day, 0],
+        FDayResourceMinHour[Day, 0], FResourceCount * SizeOf(Integer));
+      Move(ATimetable.TablingInfo.FDayResourceMaxHour[Day, 0],
+        FDayResourceMaxHour[Day, 0], FResourceCount * SizeOf(Integer));
+      Move(ATimetable.TablingInfo.FDayResourceEmptyHourCount[Day, 0],
+        FDayResourceEmptyHourCount[Day, 0], FResourceCount * SizeOf(Integer));
     end;
     for RoomType := 0 to FRoomTypeCount - 1 do
       Move(ATimetable.TablingInfo.FRoomTypeTimeSlotCount[RoomType, 0],
@@ -1840,7 +1840,7 @@ end;
 
 procedure TTimetable.CheckIntegrity;
 var
-  Theme, VCluster, TimeSlot, Teacher, Distribution, Counter,
+  Theme, VCluster, TimeSlot, Resource, Distribution, Counter,
     Session: Integer;
   SessionFound: Boolean;
 begin
@@ -1853,8 +1853,8 @@ begin
         if Session >= 0 then
         begin
           Theme := FSessionToTheme[Session];
-          Teacher := FClusterThemeToTeacher[VCluster, Theme];
-          if Teacher < 0 then
+          Resource := FClusterThemeToResource[VCluster, Theme];
+          if Resource < 0 then
             raise Exception.CreateFmt('%s %d(%d,%d), %s %d(%d) %s', [
               SCluster, VCluster,
               FCategoryToIdCategory[FClusterToCategory[VCluster]],
@@ -1862,7 +1862,7 @@ begin
               SFlDistribution_IdTheme,
               Theme,
               FThemeToIdTheme[Theme],
-              SDoNotHaveTeacher]);
+              SDoNotHaveResource]);
           Distribution := FClusterThemeToDistribution[VCluster, Theme];
           SessionFound := False;
           for Counter := 0 to High(FDistributionToSessions[Distribution]) do
@@ -1892,33 +1892,33 @@ end;
 
 procedure TTimetable.Reset;
 var
-  Teacher, TimeSlot, Theme, ThemeRestrictionType, TeacherRestrictionType,
+  Resource, TimeSlot, Theme, ThemeRestrictionType, ResourceRestrictionType,
     VCluster, Day, RoomType: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
-    FClashTeacher := 0;
+    FClashResource := 0;
     FClashTheme := 0;
     FClashRoomType := 0;
     FOutOfPositionEmptyHour := 0;
-    FBreakTimetableTeacher := 0;
+    FBreakTimetableResource := 0;
     FBrokenSession := 0;
     FNonScatteredTheme := 0;
     for Day := 0 to FDayCount - 1 do
-      for Teacher := 0 to FTeacherCount - 1 do
+      for Resource := 0 to FResourceCount - 1 do
       begin
-        FDayTeacherEmptyHourCount[Day, Teacher] := 0;
-        FDayTeacherMinHour[Day, Teacher] := 1;
-        FDayTeacherMaxHour[Day, Teacher] := 0;
+        FDayResourceEmptyHourCount[Day, Resource] := 0;
+        FDayResourceMinHour[Day, Resource] := 1;
+        FDayResourceMaxHour[Day, Resource] := 0;
       end;
     for ThemeRestrictionType := 0 to FThemeRestrictionTypeCount - 1 do
       FThemeRestrictionTypeToThemeCount[ThemeRestrictionType] := 0;
-    for TeacherRestrictionType := 0 to FTeacherRestrictionTypeCount - 1 do
-      FTeacherRestrictionTypeATeacherCount[TeacherRestrictionType] := 0;
+    for ResourceRestrictionType := 0 to FResourceRestrictionTypeCount - 1 do
+      FResourceRestrictionTypeAResourceCount[ResourceRestrictionType] := 0;
     for TimeSlot := 0 to FTimeSlotCount - 1 do
     begin
-      for Teacher := 0 to FTeacherCount - 1 do
-        FTeacherTimeSlotCount[Teacher, TimeSlot] := 0;
+      for Resource := 0 to FResourceCount - 1 do
+        FResourceTimeSlotCount[Resource, TimeSlot] := 0;
       for Theme := 0 to FThemeCount - 1 do
         FThemeTimeSlotCount[Theme, TimeSlot] := 0;
       for RoomType := 0 to FRoomTypeCount - 1 do

@@ -6,52 +6,52 @@ object MasterDataModule: TMasterDataModule
   HorizontalOffset = 1079
   VerticalOffset = 507
   Width = 748
-  object TbTmpTeacherWorkLoad: TZTable
+  object TbTmpResourceWorkLoad: TZTable
     Connection = SourceDataModule.DbZConnection
     AutoCalcFields = False
     left = 250
     top = 11
-    object TbTmpTeacherWorkLoadIdTeacher: TLongintField
+    object TbTmpResourceWorkLoadIdResource: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTeacher'
+      FieldName = 'IdResource'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
     end
-    object TbTmpTeacherWorkLoadLnTeacher: TStringField
+    object TbTmpResourceWorkLoadLnResource: TStringField
       DisplayWidth = 15
       FieldKind = fkLookup
-      FieldName = 'LnTeacher'
+      FieldName = 'LnResource'
       Index = 1
-      KeyFields = 'IdTeacher'
+      KeyFields = 'IdResource'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbTeacher
-      LookupKeyFields = 'IdTeacher'
-      LookupResultField = 'LnTeacher'
+      LookupDataSet = SourceDataModule.TbResource
+      LookupKeyFields = 'IdResource'
+      LookupResultField = 'LnResource'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 31
     end
-    object TbTmpTeacherWorkLoadNaTeacher: TStringField
+    object TbTmpResourceWorkLoadNaResource: TStringField
       DisplayWidth = 15
       FieldKind = fkLookup
-      FieldName = 'NaTeacher'
+      FieldName = 'NaResource'
       Index = 2
-      KeyFields = 'IdTeacher'
+      KeyFields = 'IdResource'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbTeacher
-      LookupKeyFields = 'IdTeacher'
-      LookupResultField = 'NaTeacher'
+      LookupDataSet = SourceDataModule.TbResource
+      LookupKeyFields = 'IdResource'
+      LookupResultField = 'NaResource'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 31
     end
-    object TbTmpTeacherWorkLoadWorkLoad: TLongintField
+    object TbTmpResourceWorkLoadWorkLoad: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'Load'
@@ -62,22 +62,22 @@ object MasterDataModule: TMasterDataModule
       Required = False
     end
   end
-  object QuTeacherRestrictionCount: TZTable
+  object QuResourceRestrictionCount: TZTable
     Connection = SourceDataModule.DbZConnection
     AutoCalcFields = False
     left = 88
     top = 120
-    object QuTeacherRestrictionCountIdTeacher: TLongintField
+    object QuResourceRestrictionCountIdResource: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTeacher'
+      FieldName = 'IdResource'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
     end
-    object QuTeacherRestrictionCountNumber: TLongintField
+    object QuResourceRestrictionCountNumber: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'Number'

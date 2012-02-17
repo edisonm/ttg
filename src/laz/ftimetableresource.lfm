@@ -1,4 +1,4 @@
-inherited TimetableTeacherForm: TTimetableTeacherForm
+inherited TimetableResourceForm: TTimetableResourceForm
   Left = 442
   Height = 462
   Top = 291
@@ -37,7 +37,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       ChildSizing.ControlsPerLine = 100
       ClientHeight = 22
       ClientWidth = 92
-      DataSource = DSTeacher
+      DataSource = DSResource
       Flat = True
       Options = []
       ParentShowHint = False
@@ -45,7 +45,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       TabOrder = 1
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
     end
-    object CBShowTeacher: TComboBox[4]
+    object CBShowResource: TComboBox[4]
       Left = 162
       Height = 24
       Hint = 'Show|Param to show in the teacher timetable'
@@ -91,7 +91,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
     Align = alLeft
     Color = clWindow
     Columns = <>
-    DataSource = DSTeacher
+    DataSource = DSResource
     TabOrder = 4
     TitleFont.Height = -11
     TitleFont.Name = 'MS Sans Serif'
@@ -294,15 +294,15 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       00FF000000FF000000FF000000FF
     }
   end
-  object QuTimetableTeacher: TZQuery[7]
+  object QuTimetableResource: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable;IdTeacher'
+    SortedFields = 'IdTimetable;IdResource'
     AutoCalcFields = False
-    OnCalcFields = QuTimetableTeacherCalcFields
+    OnCalcFields = QuTimetableResourceCalcFields
     SQL.Strings = (
       'select'
       ' IdTimetable,'
-      ' IdTeacher,'
+      ' IdResource,'
       ' Distribution.IdCategory,'
       ' Distribution.IdParallel,'
       ' IdHour,'
@@ -315,11 +315,11 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       ' and (TimetableDetail.IdCategory = Distribution.IdCategory)'
       ' and (TimetableDetail.IdParallel = Distribution.IdParallel)'
       'where IdTimetable=:IdTimetable'
-      ' and IdTeacher=:IdTeacher'
+      ' and IdResource=:IdResource'
       'union all'
       'select'
       ' IdTimetable,'
-      ' Assistance.IdTeacher as IdTeacher,'
+      ' Assistance.IdResource as IdResource,'
       ' Distribution.IdCategory,'
       ' Distribution.IdParallel,'
       ' IdHour,'
@@ -336,7 +336,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       '  and TimetableDetail.IdCategory = Distribution.IdCategory'
       '  and TimetableDetail.IdParallel = Distribution.IdParallel'
       'where IdTimetable=:IdTimetable'
-      ' and Assistance.IdTeacher=:IdTeacher'
+      ' and Assistance.IdResource=:IdResource'
     )
     Params = <    
       item
@@ -346,13 +346,13 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       end    
       item
         DataType = ftUnknown
-        Name = 'IdTeacher'
+        Name = 'IdResource'
         ParamType = ptUnknown
       end>
-    DataSource = DSTeacher
-    MasterFields = 'IdTimetable;IdTeacher'
-    LinkedFields = 'IdTimetable;IdTeacher'
-    IndexFieldNames = 'IdTimetable Asc;IdTeacher Asc'
+    DataSource = DSResource
+    MasterFields = 'IdTimetable;IdResource'
+    LinkedFields = 'IdTimetable;IdResource'
+    IndexFieldNames = 'IdTimetable Asc;IdResource Asc'
     left = 64
     top = 88
     ParamData = <    
@@ -363,10 +363,10 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       end    
       item
         DataType = ftUnknown
-        Name = 'IdTeacher'
+        Name = 'IdResource'
         ParamType = ptUnknown
       end>
-    object QuTimetableTeacherIdTimetable: TLongintField
+    object QuTimetableResourceIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimetable'
@@ -376,17 +376,17 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       ReadOnly = False
       Required = False
     end
-    object QuTimetableTeacherIdTeacher: TLongintField
+    object QuTimetableResourceIdResource: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTeacher'
+      FieldName = 'IdResource'
       Index = 1
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = True
     end
-    object QuTimetableTeacherIdCategory: TLongintField
+    object QuTimetableResourceIdCategory: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdCategory'
@@ -397,7 +397,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = True
       Visible = False
     end
-    object QuTimetableTeacherIdParallel: TLongintField
+    object QuTimetableResourceIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdParallel'
@@ -408,7 +408,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = True
       Visible = False
     end
-    object QuTimetableTeacherIdHour: TLongintField
+    object QuTimetableResourceIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -419,7 +419,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = True
       Visible = False
     end
-    object QuTimetableTeacherIdDay: TLongintField
+    object QuTimetableResourceIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -430,7 +430,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = True
       Visible = False
     end
-    object QuTimetableTeacherIdTheme: TLongintField
+    object QuTimetableResourceIdTheme: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTheme'
@@ -441,7 +441,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = True
       Visible = False
     end
-    object QuTimetableTeacherIsAssistance: TLongintField
+    object QuTimetableResourceIsAssistance: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IsAssistance'
@@ -452,7 +452,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = True
       Visible = False
     end
-    object QuTimetableTeacherAbCategory: TStringField
+    object QuTimetableResourceAbCategory: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
       FieldName = 'AbCategory'
@@ -467,7 +467,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = False
       Size = 5
     end
-    object QuTimetableTeacherNaParallel: TStringField
+    object QuTimetableResourceNaParallel: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
       FieldName = 'NaParallel'
@@ -482,7 +482,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = False
       Size = 5
     end
-    object QuTimetableTeacherNaTheme: TStringField
+    object QuTimetableResourceNaTheme: TStringField
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'NaTheme'
@@ -497,7 +497,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = False
       Size = 15
     end
-    object QuTimetableTeacherName: TStringField
+    object QuTimetableResourceName: TStringField
       DisplayWidth = 40
       FieldKind = fkCalculated
       FieldName = 'Name'
@@ -509,30 +509,30 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Size = 40
     end
   end
-  object DSTeacher: TDatasource[8]
-    DataSet = QuTeacher
-    OnDataChange = DSTeacherDataChange
+  object DSResource: TDatasource[8]
+    DataSet = QuResource
+    OnDataChange = DSResourceDataChange
     left = 64
     top = 145
   end
-  object QuTeacher: TZQuery[9]
+  object QuResource: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable;LnTeacher;NaTeacher'
+    SortedFields = 'IdTimetable;LnResource;NaResource'
     AutoCalcFields = False
-    OnCalcFields = QuTimetableTeacherCalcFields
+    OnCalcFields = QuTimetableResourceCalcFields
     SQL.Strings = (
       'select'
       '  IdTimetable,'
-      '  IdTeacher,'
-      '  LnTeacher,'
-      '  NaTeacher'
+      '  IdResource,'
+      '  LnResource,'
+      '  NaResource'
       'from'
-      '  Teacher,'
+      '  Resource,'
       '  Timetable'
       'where'
       '  IdTimetable=:IdTimetable'
       'order by'
-      '  IdTimetable, LnTeacher, NaTeacher'
+      '  IdTimetable, LnResource, NaResource'
     )
     Params = <    
       item
@@ -544,7 +544,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
     MasterFields = 'IdTimetable'
     MasterSource = SourceDataModule.DSTimetable
     LinkedFields = 'IdTimetable'
-    IndexFieldNames = 'IdTimetable Asc;LnTeacher Asc;NaTeacher Asc'
+    IndexFieldNames = 'IdTimetable Asc;LnResource Asc;NaResource Asc'
     left = 144
     top = 144
     ParamData = <    
@@ -553,7 +553,7 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuTeacherIdTimetable: TLongintField
+    object QuResourceIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimetable'
@@ -564,10 +564,10 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = False
       Visible = False
     end
-    object QuTeacherIdTeacher: TLongintField
+    object QuResourceIdResource: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTeacher'
+      FieldName = 'IdResource'
       Index = 1
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -575,10 +575,10 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = False
       Visible = False
     end
-    object QuTeacherLnTeacher: TStringField
+    object QuResourceLnResource: TStringField
       DisplayWidth = 15
       FieldKind = fkData
-      FieldName = 'LnTeacher'
+      FieldName = 'LnResource'
       Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -586,10 +586,10 @@ inherited TimetableTeacherForm: TTimetableTeacherForm
       Required = True
       Size = 15
     end
-    object QuTeacherNaTeacher: TStringField
+    object QuResourceNaResource: TStringField
       DisplayWidth = 15
       FieldKind = fkData
-      FieldName = 'NaTeacher'
+      FieldName = 'NaResource'
       Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
