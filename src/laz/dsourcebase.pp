@@ -144,7 +144,7 @@ begin
     Add('TbTheme.NaTheme=' + SFlTheme_NaTheme);
     Add('TbResource.IdResource=' + SFlResource_IdResource);
     Add('TbResource.AbResource=' + SFlResource_AbResource);
-    Add('TbResource.LnResource=' + SFlResource_LnResource);
+    Add('TbResource.NumResource=' + SFlResource_NumResource);
     Add('TbResource.NaResource=' + SFlResource_NaResource);
     Add('TbDistribution.IdTheme=' + SFlDistribution_IdTheme);
     Add('TbDistribution.IdCategory=' + SFlDistribution_IdCategory);

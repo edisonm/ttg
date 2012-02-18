@@ -219,8 +219,8 @@ msgctxt "dsourcebaseconsts.sflresource_idresource"
 msgid "Id"
 msgstr "Codigo"
 
-#: dsourcebaseconsts.sflresource_lnresource
-msgctxt "dsourcebaseconsts.sflresource_lnresource"
+#: dsourcebaseconsts.sflresource_numresource
+msgctxt "dsourcebaseconsts.sflresource_numresource"
 msgid "Last Name"
 msgstr "Apellido"
 

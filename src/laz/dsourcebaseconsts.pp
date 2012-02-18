@@ -65,7 +65,7 @@ resourcestring
   SFlTheme_NaTheme = 'Name';
   SFlResource_IdResource = 'Id';
   SFlResource_AbResource = 'Abbreviation';
-  SFlResource_LnResource = 'Last Name';
+  SFlResource_NumResource = 'Last Name';
   SFlResource_NaResource = 'Name';
   SFlDistribution_IdTheme = 'Theme';
   SFlDistribution_IdCategory = 'Category';

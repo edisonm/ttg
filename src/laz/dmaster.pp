@@ -17,7 +17,7 @@ type
     TbTmpResourceWorkLoad: TZTable;
     TbTmpResourceWorkLoadIdResource: TLongintField;
     TbTmpResourceWorkLoadNaResource: TStringField;
-    TbTmpResourceWorkLoadLnResource: TStringField;
+    TbTmpResourceWorkLoadNumResource: TStringField;
     TbTmpResourceWorkLoadWorkLoad: TLongintField;
     QuResourceRestrictionCount: TZTable;
     QuResourceRestrictionCountIdResource: TLongintField;
@@ -220,14 +220,14 @@ var
                   vMainMin := AMainStrings.Count;
                   AMainStrings.Add(SResourceRestrictionsHead);
                 end;
-                AMainStrings.Add(Format(s, [TbTmpResourceWorkLoadLnResource.Value,
+                AMainStrings.Add(Format(s, [TbTmpResourceWorkLoadNumResource.Value,
                   TbTmpResourceWorkLoadNaResource.Value,
                     QuResourceRestrictionCountNumber.AsInteger]));
                 HaveInternalProblems := True;
                 HaveProblems := True;
               end
               else
-                ASubStrings.Add(Format(s, [TbTmpResourceWorkLoadLnResource.Value,
+                ASubStrings.Add(Format(s, [TbTmpResourceWorkLoadNumResource.Value,
                   TbTmpResourceWorkLoadNaResource.Value,
                     QuResourceRestrictionCountNumber.AsInteger]));
             end;
@@ -273,7 +273,7 @@ var
               vMainMin := AMainStrings.Count;
               AMainStrings.Add(SResourceWorkLoadHead);
             end;
-            AMainStrings.Add(Format(s, [TbTmpResourceWorkLoadLnResource.Value,
+            AMainStrings.Add(Format(s, [TbTmpResourceWorkLoadNumResource.Value,
               TbTmpResourceWorkLoadNaResource.Value,
                 TbTmpResourceWorkLoadWorkLoad.Value]));
             HaveProblems := True;
@@ -281,7 +281,7 @@ var
           end
           else
           begin
-            ASubStrings.Add(Format(s, [TbTmpResourceWorkLoadLnResource.Value,
+            ASubStrings.Add(Format(s, [TbTmpResourceWorkLoadNumResource.Value,
               TbTmpResourceWorkLoadNaResource.Value,
                 TbTmpResourceWorkLoadWorkLoad.Value]));
           end;
@@ -583,7 +583,7 @@ end;
 procedure TMasterDataModule.DataModuleCreate(Sender: TObject);
 begin
   TbTmpResourceWorkLoadIdResource.DisplayLabel := SFlDistribution_IdResource;
-  TbTmpResourceWorkLoadLnResource.DisplayLabel := SFlResource_LnResource;
+  TbTmpResourceWorkLoadNumResource.DisplayLabel := SFlResource_NumResource;
   TbTmpResourceWorkLoadNaResource.DisplayLabel := SFlResource_NaResource;
   TbTmpResourceWorkLoadWorkLoad.DisplayLabel := SLoad;
   TbTmpRoomTypeLoadIdRoomType.DisplayLabel := SFlDistribution_IdRoomType;
@@ -609,8 +609,8 @@ begin
   with FStringsShowCluster do
   begin
     add('Theme=NaTheme');
-    add('Resource=LnResource;NaResource');
-    add('Theme_Resource=NaTheme;LnResource;NaResource');
+    add('Resource=NumResource;NaResource');
+    add('Theme_Resource=NaTheme;NumResource;NaResource');
   end;
   with SourceDataModule do
   begin

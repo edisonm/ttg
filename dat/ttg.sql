@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `Resource`(
     `IdResourceType` INTEGER /* NOT NULL Resource Type Id */,
     `NaResource` VARCHAR(25) NOT NULL /* UNIQUE Resource Name */,
     `AbResource` VARCHAR(11) NOT NULL /* UNIQUE Abbreviation */,
-    `LnResource` VARCHAR(25) NOT NULL /* UNIQUE Resource Name */
+    `NumResource` VARCHAR(25) NOT NULL /* UNIQUE Resource Name */
 ); /* Resources */
 CREATE TABLE IF NOT EXISTS `Distribution`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,

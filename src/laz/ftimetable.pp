@@ -139,11 +139,11 @@ type
     QuThemeCutHourIdTimetable: TLongintField;
     QuTimetableDetailThemeRestrictionIdTimetable: TLongintField;
     QuTimetableDetailResourceRestrictionIdTimetable: TLongintField;
-    QuTimetableDetailResourceRestrictionLnResource: TStringField;
+    QuTimetableDetailResourceRestrictionNumResource: TStringField;
     QuTimetableDetailResourceRestrictionNaResource: TStringField;
     QuClashRoomIdTimetable: TLongintField;
     QuClashRoomAbRoomType: TStringField;
-    QuClashResourceLnResource: TStringField;
+    QuClashResourceNumResource: TStringField;
     QuClashResourceNaResource: TStringField;
     QuClashResourceClashes: TStringField;
     QuClashRoomDetailIdTimetable: TLongintField;
@@ -371,7 +371,7 @@ begin
   QuClashRoomDetailAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
   QuClashRoomDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuClashResourceClashes.DisplayLabel := SClashes;
-  QuClashResourceLnResource.DisplayLabel := SFlResource_LnResource;
+  QuClashResourceNumResource.DisplayLabel := SFlResource_NumResource;
   QuClashResourceNaResource.DisplayLabel := SFlResource_NaResource;
   QuClashResourceNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuClashResourceNaDay.DisplayLabel := SFlTimetableDetail_IdDay;

@@ -94,27 +94,27 @@ Theme
 "30";"Science";
 Resource
 20
-"IdResource";"IdResourceType";"NaResource";"AbResource";"LnResource";
-"1";"1";"Revelo Jorge";"1";"Revelo";
-"2";"1";"Bracero Jorge";"2";"Bracero";
-"3";"1";"Imbaquingo Jorge";"3";"Imbaquingo";
-"4";"1";"Salcedo Francisco";"4";"Salcedo";
-"5";"1";"Calderon Edgar";"5";"Calderon";
-"6";"1";"Mora Daniel";"6";"Mora";
-"7";"1";"Castro Maria";"8";"Castro";
-"8";"1";"Tayo Pablo";"7";"Tayo";
-"9";"1";"Eldredge Graciela";"9";"Eldredge";
-"10";"1";"Andrade Fernando";"10";"Andrade";
-"11";"1";"Barba Juan";"11";"Barba";
-"12";"1";"Grignard Jacques";"12";"Grignard";
-"13";"1";"Lourdes Maria";"13";"Lourdes";
-"14";"1";"Naranjo Azucena";"14";"Naranjo";
-"15";"1";"Enriquez Deniss";"15";"Enriquez";
-"16";"1";"Nuñez Guillermo";"16";"Nuñez";
-"17";"1";"Rodas Paul";"17";"Rodas";
-"18";"1";"Buchelli Clara";"18";"Buchelli";
-"19";"1";"Daulon Marina";"19";"Daulon";
-"20";"1";"Velasco Rosa";"20";"Velasco";
+"IdResource";"IdResourceType";"NaResource";"AbResource";"NumResource";
+"1";"1";"Revelo Jorge";"1";"1";
+"2";"1";"Bracero Jorge";"2";"1";
+"3";"1";"Imbaquingo Jorge";"3";"1";
+"4";"1";"Salcedo Francisco";"4";"1";
+"5";"1";"Calderon Edgar";"5";"1";
+"6";"1";"Mora Daniel";"6";"1";
+"7";"1";"Castro Maria";"8";"1";
+"8";"1";"Tayo Pablo";"7";"1";
+"9";"1";"Eldredge Graciela";"9";"1";
+"10";"1";"Andrade Fernando";"10";"1";
+"11";"1";"Barba Juan";"11";"1";
+"12";"1";"Grignard Jacques";"12";"1";
+"13";"1";"Lourdes Maria";"13";"1";
+"14";"1";"Naranjo Azucena";"14";"1";
+"15";"1";"Enriquez Deniss";"15";"1";
+"16";"1";"Nuñez Guillermo";"16";"1";
+"17";"1";"Rodas Paul";"17";"1";
+"18";"1";"Buchelli Clara";"18";"1";
+"19";"1";"Daulon Marina";"19";"1";
+"20";"1";"Velasco Rosa";"20";"1";
 Distribution
 122
 "IdTheme";"IdCategory";"IdParallel";"IdResource";"IdRoomType";"RoomCount";"Composition";
