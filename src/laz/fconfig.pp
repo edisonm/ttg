@@ -41,7 +41,6 @@ type
     LbEmptyHours: TLabel;
     LbBrokenThemes: TLabel;
     LbJoinedThemes: TLabel;
-    EdClashResource: TEdit;
     EdClashRoomType: TEdit;
     EdEmptyHour: TEdit;
     EdBrokenSession: TEdit;
@@ -180,7 +179,6 @@ begin
       CBRandomize.Checked := Randomize;
       speSeed.Value := Seed;
       speNumIterations.Value := RefreshInterval;
-      EdClashResource.Text := FloatToStr(ClashResource);
       EdClashTheme.Text := FloatToStr(ClashTheme);
       EdClashRoomType.Text := FloatToStr(ClashRoomType);
       EdBreakTimetableResource.Text := FloatToStr(BreakTimetableResource);
@@ -215,7 +213,6 @@ begin
       Randomize := CBRandomize.Checked;
       Seed := speSeed.Value;
       RefreshInterval := speNumIterations.Value;
-      ClashResource := StrToInt(EdClashResource.Text);
       ClashTheme := StrToInt(EdClashTheme.Text);
       ClashRoomType := StrToInt(EdClashRoomType.Text);
       BreakTimetableResource := StrToInt(EdBreakTimetableResource.Text);

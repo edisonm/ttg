@@ -116,7 +116,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i ftimetableteacher.lrs}
+  {$i ftimetableresource.lrs}
 {$ENDIF}
 
 end.

@@ -541,14 +541,6 @@ object ConfigForm: TConfigForm
         Caption = 'Clash Themes:'
         ParentColor = False
       end
-      object EdClashResource: TEdit
-        Left = 117
-        Height = 21
-        Top = 8
-        Width = 112
-        AutoSize = False
-        TabOrder = 0
-      end
       object EdClashRoomType: TEdit
         Left = 117
         Height = 21

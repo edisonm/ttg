@@ -7,8 +7,8 @@
     This module has been created automatically.
     Do not modify it manually or the changes will be lost the next update
 
-
 */
+
 CREATE TABLE IF NOT EXISTS `Parallel`(
     `IdParallel` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Parallel Id */,
     `NaParallel` VARCHAR(5) NOT NULL UNIQUE /* Parallel Name */
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `ResourceType`(
     `IdResourceType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Type Id */,
     `NaResourceType` VARCHAR(15) NOT NULL UNIQUE /* Name */,
     `DefaultLimit` INTEGER NOT NULL /* Default Limit */,
-    `ClashValueResourceType` INTEGER /* NOT NULL Clash Value */
+    `ValResourceType` INTEGER /* NOT NULL Clash Value */
 );
 CREATE TABLE IF NOT EXISTS `Resource`(
     `IdResource` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Id */,

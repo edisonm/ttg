@@ -178,7 +178,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-  {$i fteacher.lrs}
+  {$i fresource.lrs}
 {$ENDIF}
 
 end.

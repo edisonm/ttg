@@ -191,7 +191,6 @@ var
   // permitidas
   procedure CheckResourceRestrictionCount;
   var
-    s: string;
     HaveInternalProblems: Boolean;
     vMainMin, vMainMax, vSubMin, vSubMax: Integer;
   begin
@@ -249,7 +248,6 @@ var
   end;
   procedure CheckResourceWorkLoad;
   var
-    s: string;
     vMainMin, vMainMax, vSubMin, vSubMax: Integer;
     HaveInternalProblems: Boolean;
   begin

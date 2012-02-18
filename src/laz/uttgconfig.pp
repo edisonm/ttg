@@ -38,8 +38,6 @@ type
     procedure SetSeed(Value: Integer);
     function GetRefreshInterval: Integer;
     procedure SetRefreshInterval(Value: Integer);
-    function GetClashResource: Integer;
-    procedure SetClashResource(Value: Integer);
     function GetClashTheme: Integer;
     procedure SetClashTheme(Value: Integer);
     function GetBreakTimetableResource: Integer;
@@ -84,7 +82,6 @@ type
     property Randomize: Boolean read GetRandomize write SetRandomize;
     property Seed: Integer read GetSeed write SetSeed;
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
-    property ClashResource: Integer read GetClashResource write SetClashResource;
     property ClashTheme: Integer read GetClashTheme write SetClashTheme;
     property BreakTimetableResource: Integer read GetBreakTimetableResource write SetBreakTimetableResource;
     property ClashRoomType: Integer read GetClashRoomType write SetClashRoomType;
@@ -223,16 +220,6 @@ end;
 procedure TTTGConfig.SetRefreshInterval(Value: Integer);
 begin
   Integers['NumIterations'] := Value;
-end;
-
-function TTTGConfig.GetClashResource: Integer;
-begin
-  Result := Integers['ClashResource'];
-end;
-
-procedure TTTGConfig.SetClashResource(Value: Integer);
-begin
-  Integers['ClashResource'] := Value;
 end;
 
 function TTTGConfig.GetClashTheme: Integer;
@@ -399,7 +386,6 @@ begin
   Randomize := True;
   Self.Seed := 1;
   RefreshInterval := 1;
-  ClashResource := 200;
   ClashTheme := 200;
   BreakTimetableResource := 50;
   ClashRoomType := 200;

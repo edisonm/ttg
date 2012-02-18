@@ -63,7 +63,7 @@ type
 
   TModel = class
   protected
-    class function GetElitistCount: Integer; virtual; abstract;
+    function GetElitistCount: Integer; virtual; abstract;
   public
     function NewIndividual: TIndividual; virtual; abstract;
     property ElitistCount: Integer read GetElitistCount;
