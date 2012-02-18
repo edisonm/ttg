@@ -56,14 +56,13 @@ type
     FSessionToDuration: TSessionArray;
     FDayHourToTimeSlot, FCategoryParallelToCluster,
       FDistributionToResources, FClusterThemeToDistribution, FClusterThemeCount,
-      FTimetableDetailPattern, FDistributionToSessions, FClusterRequirementToDistribution,
-      FClusterRequirementToResource, FResourceTimeSlotToResourceRestrictionType,
+      FTimetableDetailPattern, FDistributionToSessions,
+      FResourceTimeSlotToResourceRestrictionType,
       FClusterJoinedClusterToDistribution, FClusterJoinedClusterToCluster,
       FThemeTimeSlotToThemeRestrictionType: TDynamicIntegerArrayArray;
     FThemeCount, FThemeRestrictionTypeCount, FResourceRestrictionTypeCount,
       FClusterCount, FDayCount, FHourCount, FTimeSlotCount, FResourceCount,
-      FCategoryCount, FRoomTypeCount, FDistributionCount,
-      FRequirementCount, FJoinedClusterCount: Integer;
+      FCategoryCount, FRoomTypeCount, FDistributionCount, FJoinedClusterCount: Integer;
     FParallelToIdParallel, FThemeToIdTheme, FDayToIdDay, FHourToIdHour,
       FCategoryToIdCategory: TDynamicIntegerArray;
     FIdCategoryToCategory, FIdParallelToParallel, FIdDayToDay,
@@ -655,7 +654,7 @@ var
   procedure LoadRequirement;
   var
     Requirement, Counter, Cluster, Parallel, Category, Theme,
-    Distribution, Resource: Integer;
+    RequirementCount, Distribution, Resource: Integer;
     VFieldTheme, VFieldCategory, VFieldParallel,
     VFieldResource: TField;
   begin
@@ -663,17 +662,13 @@ var
     begin
       IndexFieldNames := 'IdTheme;IdCategory;IdParallel;IdResource';
       First;
-      FRequirementCount := RecordCount;
-      SetLength(FClusterRequirementToDistribution, FClusterCount, 0);
-      SetLength(FClusterRequirementToResource, FClusterCount, 0);
-      
+      RequirementCount := RecordCount;
       SetLength(FDistributionToResources, FDistributionCount, 0);
-      
       VFieldTheme := FindField('IdTheme');
       VFieldCategory := FindField('IdCategory');
       VFieldParallel := FindField('IdParallel');
       VFieldResource := FindField('IdResource');
-      for Requirement := 0 to FRequirementCount - 1 do
+      for Requirement := 0 to RequirementCount - 1 do
       begin
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
@@ -681,16 +676,9 @@ var
         Cluster := FCategoryParallelToCluster[Category, Parallel];
         Distribution := FClusterThemeToDistribution[Cluster, Theme];
         Resource := FIdResourceAResource[VFieldResource.AsInteger - FMinIdResource];
-        
         Counter := Length(FDistributionToResources[Distribution]);
         SetLength(FDistributionToResources[Distribution], Counter + 1);
         FDistributionToResources[Distribution, Counter] := Resource;
-        
-        Counter := Length(FClusterRequirementToDistribution[Cluster]);
-        SetLength(FClusterRequirementToDistribution[Cluster], Counter + 1);
-        SetLength(FClusterRequirementToResource[Cluster], Counter + 1);
-        FClusterRequirementToDistribution[Cluster, Counter] := Distribution;
-        FClusterRequirementToResource[Cluster, Counter] := Resource;
         Next;
       end;
       First;
@@ -1082,79 +1070,79 @@ begin
         for Requirement := 0 to High(FDistributionToResources[Distribution]) do
         begin
           Resource := FDistributionToResources[Distribution, Requirement];
-        if FResourceTimeSlotCount[Resource, TimeSlot] = Limit then
-        begin
-          if Delta > 0 then
+          if FResourceTimeSlotCount[Resource, TimeSlot] = Limit then
           begin
-            if FDayResourceMinHour[Day, Resource] > FDayResourceMaxHour[Day, Resource] then
+            if Delta > 0 then
             begin
-              FDayResourceMinHour[Day, Resource] := Hour;
-              FDayResourceMaxHour[Day, Resource] := Hour;
-            end
-            else
-            begin
-              if Hour < FDayResourceMinHour[Day, Resource] then
+              if FDayResourceMinHour[Day, Resource] > FDayResourceMaxHour[Day, Resource] then
               begin
-                DeltaBreakTimetableResource := FDayResourceMinHour[Day, Resource] - Hour - 1;
                 FDayResourceMinHour[Day, Resource] := Hour;
-              end
-              else if (FDayResourceMinHour[Day, Resource] <= Hour)
-                  and (Hour <= FDayResourceMaxHour[Day, Resource]) then
-                DeltaBreakTimetableResource := -1
-              else // if FDayResourceMaxTimeSlot[Day, Resource] < TimeSlot then
-              begin
-                DeltaBreakTimetableResource := Hour - FDayResourceMaxHour[Day, Resource] - 1;
                 FDayResourceMaxHour[Day, Resource] := Hour;
+              end
+              else
+              begin
+                if Hour < FDayResourceMinHour[Day, Resource] then
+                begin
+                  DeltaBreakTimetableResource := FDayResourceMinHour[Day, Resource] - Hour - 1;
+                FDayResourceMinHour[Day, Resource] := Hour;
+                end
+                else if (FDayResourceMinHour[Day, Resource] <= Hour)
+                        and (Hour <= FDayResourceMaxHour[Day, Resource]) then
+                  DeltaBreakTimetableResource := -1
+                else // if FDayResourceMaxTimeSlot[Day, Resource] < TimeSlot then
+                begin
+                  DeltaBreakTimetableResource := Hour - FDayResourceMaxHour[Day, Resource] - 1;
+                  FDayResourceMaxHour[Day, Resource] := Hour;
+                end;
+                Inc(FDayResourceEmptyHourCount[Day, Resource], DeltaBreakTimetableResource);
+                Inc(FBreakTimetableResource, DeltaBreakTimetableResource);
               end;
-              Inc(FDayResourceEmptyHourCount[Day, Resource], DeltaBreakTimetableResource);
-              Inc(FBreakTimetableResource, DeltaBreakTimetableResource);
-            end;
-          end
-          else if Delta < 0 then
-          begin
-            if FDayResourceMinHour[Day, Resource] = FDayResourceMaxHour[Day, Resource] then
-            begin
-              FDayResourceMinHour[Day, Resource] := 1;
-              FDayResourceMaxHour[Day, Resource] := 0;
             end
-            else
+            else if Delta < 0 then
             begin
-              if Hour = FDayResourceMinHour[Day, Resource] then
+              if FDayResourceMinHour[Day, Resource] = FDayResourceMaxHour[Day, Resource] then
               begin
-                TimeSlot0 := TimeSlot + 1;
-                MaxTimeSlot := FDayHourToTimeSlot[Day, FDayResourceMaxHour[Day, Resource]];
-                while (TimeSlot0 <= MaxTimeSlot)
-                    and (FResourceTimeSlotCount[Resource, TimeSlot0] = 0) do
-                  Inc(TimeSlot0);
-                DeltaBreakTimetableResource := Hour + 1 - FTimeSlotToHour[TimeSlot0];
-                FDayResourceMinHour[Day, Resource] := FTimeSlotToHour[TimeSlot0];
+                FDayResourceMinHour[Day, Resource] := 1;
+                FDayResourceMaxHour[Day, Resource] := 0;
               end
-              else if (FDayResourceMinHour[Day, Resource] < Hour)
-                  and (Hour < FDayResourceMaxHour[Day, Resource]) then
+              else
               begin
-                DeltaBreakTimetableResource := 1;
-              end
-              else // if (FDayResourceMaxTimeSlot[Day, Resource] = TimeSlot) then
-              begin
-                TimeSlot0 := TimeSlot - 1;
-                MinTimeSlot := FDayHourToTimeSlot[Day, FDayResourceMinHour[Day, Resource]];
-                while (TimeSlot0 >= MinTimeSlot)
-                    and (FResourceTimeSlotCount[Resource, TimeSlot0] = 0) do
-                  Dec(TimeSlot0);
-                DeltaBreakTimetableResource := FTimeSlotToHour[TimeSlot0] + 1 - Hour;
-                FDayResourceMaxHour[Day, Resource] := FTimeSlotToHour[TimeSlot0];
+                if Hour = FDayResourceMinHour[Day, Resource] then
+                begin
+                  TimeSlot0 := TimeSlot + 1;
+                  MaxTimeSlot := FDayHourToTimeSlot[Day, FDayResourceMaxHour[Day, Resource]];
+                  while (TimeSlot0 <= MaxTimeSlot)
+                        and (FResourceTimeSlotCount[Resource, TimeSlot0] = 0) do
+                    Inc(TimeSlot0);
+                  DeltaBreakTimetableResource := Hour + 1 - FTimeSlotToHour[TimeSlot0];
+                  FDayResourceMinHour[Day, Resource] := FTimeSlotToHour[TimeSlot0];
+                end
+                else if (FDayResourceMinHour[Day, Resource] < Hour)
+                        and (Hour < FDayResourceMaxHour[Day, Resource]) then
+                begin
+                  DeltaBreakTimetableResource := 1;
+                end
+                else // if (FDayResourceMaxTimeSlot[Day, Resource] = TimeSlot) then
+                begin
+                  TimeSlot0 := TimeSlot - 1;
+                  MinTimeSlot := FDayHourToTimeSlot[Day, FDayResourceMinHour[Day, Resource]];
+                  while (TimeSlot0 >= MinTimeSlot)
+                        and (FResourceTimeSlotCount[Resource, TimeSlot0] = 0) do
+                    Dec(TimeSlot0);
+                  DeltaBreakTimetableResource := FTimeSlotToHour[TimeSlot0] + 1 - Hour;
+                  FDayResourceMaxHour[Day, Resource] := FTimeSlotToHour[TimeSlot0];
+                end;
+                Inc(FDayResourceEmptyHourCount[Day, Resource], DeltaBreakTimetableResource);
+                Inc(FBreakTimetableResource, DeltaBreakTimetableResource);
               end;
-              Inc(FDayResourceEmptyHourCount[Day, Resource], DeltaBreakTimetableResource);
-              Inc(FBreakTimetableResource, DeltaBreakTimetableResource);
             end;
           end;
-        end;
-        if FResourceTimeSlotCount[Resource, TimeSlot] > Limit then
-          Inc(FClashResource, Delta);
-        Inc(FResourceTimeSlotCount[Resource, TimeSlot], Delta);
-        ResourceRestrictionType := FResourceTimeSlotToResourceRestrictionType[Resource, TimeSlot];
-        if ResourceRestrictionType >= 0 then
-          Inc(FResourceRestrictionTypeAResourceCount[ResourceRestrictionType], Delta);
+          if FResourceTimeSlotCount[Resource, TimeSlot] > Limit then
+            Inc(FClashResource, Delta);
+          Inc(FResourceTimeSlotCount[Resource, TimeSlot], Delta);
+          ResourceRestrictionType := FResourceTimeSlotToResourceRestrictionType[Resource, TimeSlot];
+          if ResourceRestrictionType >= 0 then
+            Inc(FResourceRestrictionTypeAResourceCount[ResourceRestrictionType], Delta);
         end;
         Inc(FThemeTimeSlotCount[Theme, TimeSlot], Delta);
         if FRoomTypeTimeSlotCount[RoomType, TimeSlot] >= FRoomTypeToNumber[RoomType] + Limit then
@@ -1197,24 +1185,6 @@ begin
       end;
       Inc(TimeSlot, Duration);
     end;
-    {for Requirement := 0 to High(FClusterRequirementToDistribution[ACluster]) do
-    begin
-      Distribution := FClusterRequirementToDistribution[ACluster, Requirement];
-      Resource := FClusterRequirementToResource[ACluster, Requirement];
-      for TimeSlot := TimeSlot1 to TimeSlot2 do
-      begin
-        Session := TimeSlotToSession[TimeSlot];
-        if Session >= 0 then
-        begin
-          if Distribution = FSessionToDistribution[Session] then
-          begin
-            if FResourceTimeSlotCount[Resource, TimeSlot] > Limit then
-              Inc(FClashResource, Delta);
-            Inc(FResourceTimeSlotCount[Resource, TimeSlot], Delta);
-          end;
-        end
-      end;
-    end;}
     for JoinedCluster := 0 to High(FClusterJoinedClusterToDistribution[ACluster]) do
     begin
       Distribution := FClusterJoinedClusterToDistribution[ACluster, JoinedCluster];

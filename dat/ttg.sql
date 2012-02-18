@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `Timetable`(
     `IdTimetable` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Timetable Id */,
     `TimeIni` DATETIME NOT NULL /* Initial Time */,
     `TimeEnd` DATETIME NOT NULL /* End Time */,
-    `Summary` text /* Summary of Timetable Generation */
+    `Summary` TEXT /* Summary of Timetable Generation */
 ); /* Timetables */
 CREATE TABLE IF NOT EXISTS `TimetableDetail`(
     `IdTimetable` INTEGER NOT NULL /* Timetable Id */,
