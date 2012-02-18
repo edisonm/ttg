@@ -95,26 +95,26 @@ Theme
 Resource
 20
 "IdResource";"IdResourceType";"FnResource";"LnResource";"NaResource";"AbResource";
-"1";"1";"Revelo Jorge";"Revelo";"Jorge";"1";
-"2";"1";"Bracero Jorge";"Bracero";"Jorge";"2";
-"3";"1";"Imbaquingo Jorge";"Imbaquingo";"Jorge";"3";
-"4";"1";"Salcedo Francisco";"Salcedo";"Francisco";"4";
-"5";"1";"Calderon Edgar";"Calderon";"Edgar";"5";
-"6";"1";"Mora Daniel";"Mora";"Daniel";"6";
-"7";"1";"Castro Maria";"Castro";"Maria";"8";
-"8";"1";"Tayo Pablo";"Tayo";"Pablo";"7";
-"9";"1";"Eldredge Graciela";"Eldredge";"Graciela";"9";
-"10";"1";"Andrade Fernando";"Andrade";"Fernando";"10";
-"11";"1";"Barba Juan";"Barba";"Juan";"11";
-"12";"1";"Grignard Jacques";"Grignard";"Jacques";"12";
-"13";"1";"Lourdes Maria";"Lourdes";"Maria";"13";
-"14";"1";"Naranjo Azucena";"Naranjo";"Azucena";"14";
-"15";"1";"Enriquez Deniss";"Enriquez";"Deniss";"15";
-"16";"1";"Nuñez Guillermo";"Nuñez";"Guillermo";"16";
-"17";"1";"Rodas Paul";"Rodas";"Paul";"17";
-"18";"1";"Buchelli Clara";"Buchelli";"Clara";"18";
-"19";"1";"Daulon Marina";"Daulon";"Marina";"19";
-"20";"1";"Velasco Rosa";"Velasco";"Rosa";"20";
+"1";"1";"Jorge";"Revelo";"Revelo Jorge";"1";
+"2";"1";"Jorge";"Bracero";"Bracero Jorge";"2";
+"3";"1";"Jorge";"Imbaquingo";"Imbaquingo Jorge";"3";
+"4";"1";"Francisco";"Salcedo";"Salcedo Francisco";"4";
+"5";"1";"Edgar";"Calderon";"Calderon Edgar";"5";
+"6";"1";"Daniel";"Mora";"Mora Daniel";"6";
+"7";"1";"Maria";"Castro";"Castro Maria";"8";
+"8";"1";"Pablo";"Tayo";"Tayo Pablo";"7";
+"9";"1";"Graciela";"Eldredge";"Eldredge Graciela";"9";
+"10";"1";"Fernando";"Andrade";"Andrade Fernando";"10";
+"11";"1";"Juan";"Barba";"Barba Juan";"11";
+"12";"1";"Jacques";"Grignard";"Grignard Jacques";"12";
+"13";"1";"Maria";"Lourdes";"Lourdes Maria";"13";
+"14";"1";"Azucena";"Naranjo";"Naranjo Azucena";"14";
+"15";"1";"Deniss";"Enriquez";"Enriquez Deniss";"15";
+"16";"1";"Guillermo";"Nuñez";"Nuñez Guillermo";"16";
+"17";"1";"Paul";"Rodas";"Rodas Paul";"17";
+"18";"1";"Clara";"Buchelli";"Buchelli Clara";"18";
+"19";"1";"Marina";"Daulon";"Daulon Marina";"19";
+"20";"1";"Rosa";"Velasco";"Velasco Rosa";"20";
 Distribution
 122
 "IdTheme";"IdCategory";"IdParallel";"IdResource";"IdRoomType";"RoomCount";"Composition";
