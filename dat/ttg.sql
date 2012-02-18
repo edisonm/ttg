@@ -48,11 +48,11 @@ CREATE TABLE IF NOT EXISTS `Theme`(
 ); /* Themes */
 CREATE TABLE IF NOT EXISTS `Resource`(
     `IdResource` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Id */,
-    `AbResource` VARCHAR(11) NOT NULL /* Resource National Id */,
-    `LnResource` VARCHAR(15) NOT NULL /* Resource Last Name */,
-    `NaResource` VARCHAR(15) NOT NULL /* Resource Name */,
-  CONSTRAINT `ixLnNaResource` UNIQUE(`LnResource`,`NaResource`),
-  CONSTRAINT `ixNaLnResource` UNIQUE(`NaResource`,`LnResource`)
+    `IdResourceType` INTEGER /* NOT NULL Resource Type Id */,
+    `FnResource` VARCHAR(25) /* NOT NULL UNIQUE Resource Name */,
+    `LnResource` VARCHAR(25) NOT NULL /* UNIQUE Resource Name */,
+    `NaResource` VARCHAR(25) NOT NULL /* UNIQUE Resource Name */,
+    `AbResource` VARCHAR(11) NOT NULL /* UNIQUE Abbreviation */
 ); /* Resources */
 CREATE TABLE IF NOT EXISTS `Distribution`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
