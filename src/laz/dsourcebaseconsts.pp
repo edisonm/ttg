@@ -74,7 +74,6 @@ resourcestring
   SFlDistribution_IdTheme = 'Theme';
   SFlDistribution_IdCategory = 'Category';
   SFlDistribution_IdParallel = 'Parallel';
-  SFlDistribution_IdResource = 'Resource';
   SFlDistribution_IdRoomType = 'Room Type';
   SFlDistribution_RoomCount = 'Room Count';
   SFlDistribution_Composition = 'Composition';

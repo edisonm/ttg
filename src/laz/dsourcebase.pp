@@ -156,7 +156,6 @@ begin
     Add('TbDistribution.IdTheme=' + SFlDistribution_IdTheme);
     Add('TbDistribution.IdCategory=' + SFlDistribution_IdCategory);
     Add('TbDistribution.IdParallel=' + SFlDistribution_IdParallel);
-    Add('TbDistribution.IdResource=' + SFlDistribution_IdResource);
     Add('TbDistribution.IdRoomType=' + SFlDistribution_IdRoomType);
     Add('TbDistribution.RoomCount=' + SFlDistribution_RoomCount);
     Add('TbDistribution.Composition=' + SFlDistribution_Composition);

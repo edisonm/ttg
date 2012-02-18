@@ -65,7 +65,6 @@ CREATE TABLE IF NOT EXISTS `Distribution`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER NOT NULL /* Parallel Id */,
-    `IdResource` INTEGER NOT NULL /* Resource Id */,
     `IdRoomType` INTEGER NOT NULL /* Room Type Id */,
     `RoomCount` INTEGER /* Number of classrooms needed */,
     `Composition` VARCHAR(40) NOT NULL /* Composition of the Slots for the Theme */,
@@ -75,9 +74,7 @@ CREATE TABLE IF NOT EXISTS `Distribution`(
   CONSTRAINT `RoomTypeDistribution` FOREIGN KEY (`IdRoomType`)
     REFERENCES `RoomType`(`IdRoomType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `ThemeDistribution` FOREIGN KEY (`IdTheme`)
-    REFERENCES `Theme`(`IdTheme`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `ResourceDistribution` FOREIGN KEY (`IdResource`)
-    REFERENCES `Resource`(`IdResource`) ON UPDATE RESTRICT ON DELETE RESTRICT
+    REFERENCES `Theme`(`IdTheme`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Distribution of Workload */
 CREATE TABLE IF NOT EXISTS `JoinedCluster`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,

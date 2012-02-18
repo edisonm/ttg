@@ -421,7 +421,6 @@ begin
   begin
     FindField('IdTheme').Visible := False;
     FindField('IdCategory').Visible := False;
-    FindField('IdResource').Visible := False;
     FindField('IdRoomType').Visible := False;
   end;
   with TbRequirement do

@@ -1,26 +1,6 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: dsourcebaseconsts.sflrequirement_idcategory
-msgctxt "dsourcebaseconsts.sflrequirement_idcategory"
-msgid "Category"
-msgstr ""
-
-#: dsourcebaseconsts.sflrequirement_idparallel
-msgctxt "dsourcebaseconsts.sflrequirement_idparallel"
-msgid "Parallel"
-msgstr ""
-
-#: dsourcebaseconsts.sflrequirement_idresource
-msgctxt "dsourcebaseconsts.sflrequirement_idresource"
-msgid "Assistant"
-msgstr ""
-
-#: dsourcebaseconsts.sflrequirement_idtheme
-msgctxt "dsourcebaseconsts.sflrequirement_idtheme"
-msgid "Theme"
-msgstr ""
-
 #: dsourcebaseconsts.sflcategory_abcategory
 msgctxt "dsourcebaseconsts.sflcategory_abcategory"
 msgid "Abbreviation"
@@ -74,11 +54,6 @@ msgstr ""
 #: dsourcebaseconsts.sfldistribution_idroomtype
 msgctxt "dsourcebaseconsts.sfldistribution_idroomtype"
 msgid "Room Type"
-msgstr ""
-
-#: dsourcebaseconsts.sfldistribution_idresource
-msgctxt "dsourcebaseconsts.sfldistribution_idresource"
-msgid "Resource"
 msgstr ""
 
 #: dsourcebaseconsts.sfldistribution_idtheme
@@ -139,39 +114,24 @@ msgctxt "dsourcebaseconsts.sflparallel_naparallel"
 msgid "Name"
 msgstr ""
 
-#: dsourcebaseconsts.sflroomtype_abroomtype
-msgctxt "dsourcebaseconsts.sflroomtype_abroomtype"
-msgid "Abbreviation"
+#: dsourcebaseconsts.sflrequirement_idcategory
+msgctxt "dsourcebaseconsts.sflrequirement_idcategory"
+msgid "Category"
 msgstr ""
 
-#: dsourcebaseconsts.sflroomtype_idroomtype
-msgctxt "dsourcebaseconsts.sflroomtype_idroomtype"
-msgid "Id"
+#: dsourcebaseconsts.sflrequirement_idparallel
+msgctxt "dsourcebaseconsts.sflrequirement_idparallel"
+msgid "Parallel"
 msgstr ""
 
-#: dsourcebaseconsts.sflroomtype_naroomtype
-msgctxt "dsourcebaseconsts.sflroomtype_naroomtype"
-msgid "Name"
+#: dsourcebaseconsts.sflrequirement_idresource
+msgctxt "dsourcebaseconsts.sflrequirement_idresource"
+msgid "Assistant"
 msgstr ""
 
-#: dsourcebaseconsts.sflroomtype_number
-msgctxt "dsourcebaseconsts.sflroomtype_number"
-msgid "Number"
-msgstr ""
-
-#: dsourcebaseconsts.sflspecialization_abspecialization
-msgctxt "dsourcebaseconsts.sflspecialization_abspecialization"
-msgid "Abbreviation"
-msgstr ""
-
-#: dsourcebaseconsts.sflspecialization_idspecialization
-msgctxt "dsourcebaseconsts.sflspecialization_idspecialization"
-msgid "Id"
-msgstr ""
-
-#: dsourcebaseconsts.sflspecialization_naspecialization
-msgctxt "dsourcebaseconsts.sflspecialization_naspecialization"
-msgid "Name"
+#: dsourcebaseconsts.sflrequirement_idtheme
+msgctxt "dsourcebaseconsts.sflrequirement_idtheme"
+msgid "Theme"
 msgstr ""
 
 #: dsourcebaseconsts.sflresourcerestrictiontype_colresourcerestrictiontype
@@ -214,14 +174,27 @@ msgctxt "dsourcebaseconsts.sflresourcerestriction_idresourcerestrictiontype"
 msgid "Restriction Type"
 msgstr ""
 
+#: dsourcebaseconsts.sflresourcetype_defaultlimit
+msgid "Default Limit"
+msgstr ""
+
+#: dsourcebaseconsts.sflresourcetype_idresourcetype
+msgid "IdResourceType"
+msgstr ""
+
+#: dsourcebaseconsts.sflresourcetype_naresourcetype
+msgctxt "dsourcebaseconsts.sflresourcetype_naresourcetype"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflresource_abresource
+msgctxt "dsourcebaseconsts.sflresource_abresource"
+msgid "Abbreviation"
+msgstr ""
+
 #: dsourcebaseconsts.sflresource_idresource
 msgctxt "dsourcebaseconsts.sflresource_idresource"
 msgid "Id"
-msgstr ""
-
-#: dsourcebaseconsts.sflresource_numresource
-msgctxt "dsourcebaseconsts.sflresource_numresource"
-msgid "Number"
 msgstr ""
 
 #: dsourcebaseconsts.sflresource_naresource
@@ -229,9 +202,44 @@ msgctxt "dsourcebaseconsts.sflresource_naresource"
 msgid "Name"
 msgstr ""
 
-#: dsourcebaseconsts.sflresource_abresource
-msgctxt "dsourcebaseconsts.sflresource_abresource"
+#: dsourcebaseconsts.sflresource_numresource
+msgctxt "dsourcebaseconsts.sflresource_numresource"
+msgid "Number"
+msgstr ""
+
+#: dsourcebaseconsts.sflroomtype_abroomtype
+msgctxt "dsourcebaseconsts.sflroomtype_abroomtype"
 msgid "Abbreviation"
+msgstr ""
+
+#: dsourcebaseconsts.sflroomtype_idroomtype
+msgctxt "dsourcebaseconsts.sflroomtype_idroomtype"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflroomtype_naroomtype
+msgctxt "dsourcebaseconsts.sflroomtype_naroomtype"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflroomtype_number
+msgctxt "dsourcebaseconsts.sflroomtype_number"
+msgid "Number"
+msgstr ""
+
+#: dsourcebaseconsts.sflspecialization_abspecialization
+msgctxt "dsourcebaseconsts.sflspecialization_abspecialization"
+msgid "Abbreviation"
+msgstr ""
+
+#: dsourcebaseconsts.sflspecialization_idspecialization
+msgctxt "dsourcebaseconsts.sflspecialization_idspecialization"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflspecialization_naspecialization
+msgctxt "dsourcebaseconsts.sflspecialization_naspecialization"
+msgid "Name"
 msgstr ""
 
 #: dsourcebaseconsts.sflthemerestrictiontype_colthemerestrictiontype
@@ -349,11 +357,6 @@ msgctxt "dsourcebaseconsts.sfltimetable_timeini"
 msgid "Initial Time"
 msgstr ""
 
-#: dsourcebaseconsts.stbrequirement
-msgctxt "dsourcebaseconsts.stbrequirement"
-msgid "Requirements"
-msgstr ""
-
 #: dsourcebaseconsts.stbcategory
 msgctxt "dsourcebaseconsts.stbcategory"
 msgid "Categories"
@@ -389,9 +392,9 @@ msgctxt "dsourcebaseconsts.stbparallel"
 msgid "Parallels"
 msgstr ""
 
-#: dsourcebaseconsts.stbroomtype
-msgctxt "dsourcebaseconsts.stbroomtype"
-msgid "Types of Room"
+#: dsourcebaseconsts.stbrequirement
+msgctxt "dsourcebaseconsts.stbrequirement"
+msgid "Requirements"
 msgstr ""
 
 #: dsourcebaseconsts.stbresource
@@ -407,6 +410,15 @@ msgstr ""
 #: dsourcebaseconsts.stbresourcerestrictiontype
 msgctxt "dsourcebaseconsts.stbresourcerestrictiontype"
 msgid "Types of Resource Restrictions"
+msgstr ""
+
+#: dsourcebaseconsts.stbresourcetype
+msgid "ResourceType"
+msgstr ""
+
+#: dsourcebaseconsts.stbroomtype
+msgctxt "dsourcebaseconsts.stbroomtype"
+msgid "Types of Room"
 msgstr ""
 
 #: dsourcebaseconsts.stbtheme
@@ -889,6 +901,15 @@ msgstr ""
 msgid "Registration Info"
 msgstr ""
 
+#: tmainform.actresource.caption
+msgctxt "tmainform.actresource.caption"
+msgid "Resources"
+msgstr ""
+
+#: tmainform.actresource.hint
+msgid "Resources|Resources"
+msgstr ""
+
 #: tmainform.actroomtype.caption
 msgid "Room Types"
 msgstr ""
@@ -913,15 +934,6 @@ msgstr ""
 #: tmainform.actsubject.hint
 msgctxt "TMAINFORM.ACTSUBJECT.HINT"
 msgid "Themes|Themes"
-msgstr ""
-
-#: tmainform.actresource.caption
-msgctxt "tmainform.actresource.caption"
-msgid "Resources"
-msgstr ""
-
-#: tmainform.actresource.hint
-msgid "Resources|Resources"
 msgstr ""
 
 #: tmainform.acttimeslot.caption
@@ -1092,16 +1104,6 @@ msgctxt "TPROGRESSFORM.LBBROKENSESSIONVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lbclashroomtype.caption
-msgctxt "TPROGRESSFORM.LBCLASHROOMTYPE.CAPTION"
-msgid "0 "
-msgstr ""
-
-#: tprogressform.lbclashroomtypevalue.caption
-msgctxt "TPROGRESSFORM.LBCLASHROOMTYPEVALUE.CAPTION"
-msgid "0 "
-msgstr ""
-
 #: tprogressform.lbclashresource.caption
 msgctxt "TPROGRESSFORM.LBCLASHRESOURCE.CAPTION"
 msgid "0 "
@@ -1109,6 +1111,16 @@ msgstr ""
 
 #: tprogressform.lbclashresourcevalue.caption
 msgctxt "TPROGRESSFORM.LBCLASHRESOURCEVALUE.CAPTION"
+msgid "0 "
+msgstr ""
+
+#: tprogressform.lbclashroomtype.caption
+msgctxt "TPROGRESSFORM.LBCLASHROOMTYPE.CAPTION"
+msgid "0 "
+msgstr ""
+
+#: tprogressform.lbclashroomtypevalue.caption
+msgctxt "TPROGRESSFORM.LBCLASHROOMTYPEVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
@@ -1225,20 +1237,6 @@ msgctxt "TPROGRESSFORM.PNBROKENSESSIONVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
-#: tprogressform.pnclashroomtype.caption
-msgid " Clash Classrooms:"
-msgstr ""
-
-#: tprogressform.pnclashroomtypenumber.caption
-msgctxt "TPROGRESSFORM.PNCLASHROOMTYPENUMBER.CAPTION"
-msgid " Number:"
-msgstr ""
-
-#: tprogressform.pnclashroomtypevalue.caption
-msgctxt "TPROGRESSFORM.PNCLASHROOMTYPEVALUE.CAPTION"
-msgid " Value:"
-msgstr ""
-
 #: tprogressform.pnclashresource.caption
 msgid " Clash Resources:"
 msgstr ""
@@ -1250,6 +1248,20 @@ msgstr ""
 
 #: tprogressform.pnclashresourcevalue.caption
 msgctxt "TPROGRESSFORM.PNCLASHRESOURCEVALUE.CAPTION"
+msgid " Value:"
+msgstr ""
+
+#: tprogressform.pnclashroomtype.caption
+msgid " Clash Classrooms:"
+msgstr ""
+
+#: tprogressform.pnclashroomtypenumber.caption
+msgctxt "TPROGRESSFORM.PNCLASHROOMTYPENUMBER.CAPTION"
+msgid " Number:"
+msgstr ""
+
+#: tprogressform.pnclashroomtypevalue.caption
+msgctxt "TPROGRESSFORM.PNCLASHROOMTYPEVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
@@ -1359,6 +1371,38 @@ msgstr ""
 msgid "Total Value:"
 msgstr ""
 
+#: tresourceform.actresourcerestriction.caption
+msgctxt "TRESOURCEFORM.ACTRESOURCERESTRICTION.CAPTION"
+msgid "Resource restrictions"
+msgstr ""
+
+#: tresourceform.actresourcerestriction.hint
+msgid "Resource restrictions|Input Resource restrictions"
+msgstr ""
+
+#: tresourceform.caption
+msgctxt "TRESOURCEFORM.CAPTION"
+msgid "Resource"
+msgstr ""
+
+#: tresourceform.dbgriddetail.hint
+msgid "Distribution of Resources"
+msgstr ""
+
+#: tresourceform.gbjoinedcluster.caption
+msgctxt "tresourceform.gbjoinedcluster.caption"
+msgid "Joined Clusters"
+msgstr ""
+
+#: tresourceform.grbdetail.caption
+msgid "Distribution"
+msgstr ""
+
+#: tresourceform.groupbox3.caption
+msgctxt "tresourceform.groupbox3.caption"
+msgid "Requirements"
+msgstr ""
+
 #: tseltimeslotform.bbcancel.caption
 msgctxt "TSELTIMESLOTFORM.BBCANCELAR.CAPTION"
 msgid "Cancel"
@@ -1444,38 +1488,6 @@ msgctxt "TSPLASHFORM.LBYEARLABEL.CAPTION"
 msgid "..."
 msgstr ""
 
-#: tresourceform.actresourcerestriction.caption
-msgctxt "TRESOURCEFORM.ACTRESOURCERESTRICTION.CAPTION"
-msgid "Resource restrictions"
-msgstr ""
-
-#: tresourceform.actresourcerestriction.hint
-msgid "Resource restrictions|Input Resource restrictions"
-msgstr ""
-
-#: tresourceform.caption
-msgctxt "TRESOURCEFORM.CAPTION"
-msgid "Resource"
-msgstr ""
-
-#: tresourceform.dbgriddetail.hint
-msgid "Distribution of Resources"
-msgstr ""
-
-#: tresourceform.gbjoinedcluster.caption
-msgctxt "tresourceform.gbjoinedcluster.caption"
-msgid "Joined Clusters"
-msgstr ""
-
-#: tresourceform.grbdetail.caption
-msgid "Distribution"
-msgstr ""
-
-#: tresourceform.groupbox3.caption
-msgctxt "tresourceform.groupbox3.caption"
-msgid "Requirements"
-msgstr ""
-
 #: tthemeform.actthemerestriction.caption
 msgctxt "TTHEMEFORM.ACTTHEMERESTRICTION.CAPTION"
 msgid "Theme restrictions"
@@ -1499,16 +1511,6 @@ msgstr ""
 msgid "Swap time slots|Swap time slots"
 msgstr ""
 
-#: ttimetableform.actclashroom.caption
-msgctxt "TTIMETABLEFORM.ACTCLASHAULA.CAPTION"
-msgid "Clashes of Rooms"
-msgstr ""
-
-#: ttimetableform.actclashroom.hint
-msgctxt "TTIMETABLEFORM.ACTCLASHAULA.HINT"
-msgid "Clashes of rooms|Clashes of rooms of same type"
-msgstr ""
-
 #: ttimetableform.actclashresource.caption
 msgctxt "TTIMETABLEFORM.ACTCLASHRESOURCE.CAPTION"
 msgid "Clashes of resources"
@@ -1517,6 +1519,16 @@ msgstr ""
 #: ttimetableform.actclashresource.hint
 msgctxt "TTIMETABLEFORM.ACTCLASHRESOURCE.HINT"
 msgid "Clashes of resources|Clashes of resources"
+msgstr ""
+
+#: ttimetableform.actclashroom.caption
+msgctxt "TTIMETABLEFORM.ACTCLASHAULA.CAPTION"
+msgid "Clashes of Rooms"
+msgstr ""
+
+#: ttimetableform.actclashroom.hint
+msgctxt "TTIMETABLEFORM.ACTCLASHAULA.HINT"
+msgid "Clashes of rooms|Clashes of rooms of same type"
 msgstr ""
 
 #: ttimetableform.actclashtheme.caption
@@ -1580,20 +1592,20 @@ msgstr ""
 msgid "Timetables per clusters|Timetables per clusters"
 msgstr ""
 
-#: ttimetableform.acttimetableroomtype.caption
-msgid "Timetables by room types"
-msgstr ""
-
-#: ttimetableform.acttimetableroomtype.hint
-msgid "Timetables by room types|Timetables by room types"
-msgstr ""
-
 #: ttimetableform.acttimetableresource.caption
 msgid "Resources' timetables"
 msgstr ""
 
 #: ttimetableform.acttimetableresource.hint
 msgid "Resources' timetables|Resources' timetables"
+msgstr ""
+
+#: ttimetableform.acttimetableroomtype.caption
+msgid "Timetables by room types"
+msgstr ""
+
+#: ttimetableform.acttimetableroomtype.hint
+msgid "Timetables by room types|Timetables by room types"
 msgstr ""
 
 #: ttimetableform.caption
@@ -1616,14 +1628,14 @@ msgctxt "TTIMETABLEFORM.DBGRID.COLUMNS[2].TITLE.CAPTION"
 msgid "End"
 msgstr ""
 
-#: ttimetableroomtypeform.cbshowroomtype.hint
-msgctxt "TTIMETABLEROOMTYPEFORM.CBSHOWROOMTYPE.HINT"
-msgid "Show|What to show in the room type timetable"
-msgstr ""
-
 #: ttimetableresourceform.cbshowresource.hint
 msgctxt "TTIMETABLERESOURCEFORM.CBSHOWRESOURCE.HINT"
 msgid "Show|Param to show in the resource timetable"
+msgstr ""
+
+#: ttimetableroomtypeform.cbshowroomtype.hint
+msgctxt "TTIMETABLEROOMTYPEFORM.CBSHOWROOMTYPE.HINT"
+msgid "Show|What to show in the room type timetable"
 msgstr ""
 
 #: uabout.sappname
@@ -1675,14 +1687,14 @@ msgstr ""
 msgid "Clashes"
 msgstr ""
 
-#: uttgconsts.sclashroomtype
-msgctxt "uttgconsts.sclashroomtype"
-msgid "Clash of Classrooms"
-msgstr ""
-
 #: uttgconsts.sclashresource
 msgctxt "uttgconsts.sclashresource"
 msgid "Clash of Resources"
+msgstr ""
+
+#: uttgconsts.sclashroomtype
+msgctxt "uttgconsts.sclashroomtype"
+msgid "Clash of Classrooms"
 msgstr ""
 
 #: uttgconsts.sclashtheme
@@ -1761,7 +1773,7 @@ msgid "do not appears in"
 msgstr ""
 
 #: uttgconsts.sdonothaveresource
-msgid "do not have resource"
+msgid "do not have teacher"
 msgstr ""
 
 #: uttgconsts.sdownhillalgorithm
@@ -1879,11 +1891,11 @@ msgid "Non Scattered Themes"
 msgstr ""
 
 #: uttgconsts.snumhardresourcerestrictions
-msgid "Number of hard resource restrictions..."
+msgid "Number of hard teacher restrictions..."
 msgstr ""
 
 #: uttgconsts.snumsoftresourcerestrictions
-msgid "Number of soft resource restrictions..."
+msgid "Number of soft teacher restrictions..."
 msgstr ""
 
 #: uttgconsts.soutofpositionemptyhour
@@ -1933,6 +1945,22 @@ msgctxt "uttgconsts.sreparationprobability"
 msgid "Repair Probability"
 msgstr ""
 
+#: uttgconsts.sresourcerestrictionshead
+msgid "Resource; Restrictions"
+msgstr ""
+
+#: uttgconsts.sresourcesworkloadwithoutproblems
+msgid "Resources' Work load without problems..."
+msgstr ""
+
+#: uttgconsts.sresourcesworkloadwithproblems
+msgid "Resources' work load with problems..."
+msgstr ""
+
+#: uttgconsts.sresourceworkloadhead
+msgid "Resource; Work Load"
+msgstr ""
+
 #: uttgconsts.sroomtypesloadhead
 msgid "RoomType; Available Hours; Load"
 msgstr ""
@@ -1959,22 +1987,6 @@ msgstr ""
 
 #: uttgconsts.ssearchby
 msgid "Search by %s"
-msgstr ""
-
-#: uttgconsts.sresourcerestrictionshead
-msgid "Resource; Restrictions"
-msgstr ""
-
-#: uttgconsts.sresourcesworkloadwithoutproblems
-msgid "Resources' Work load without problems..."
-msgstr ""
-
-#: uttgconsts.sresourcesworkloadwithproblems
-msgid "Resources' work load with problems..."
-msgstr ""
-
-#: uttgconsts.sresourceworkloadhead
-msgid "Resource; Work Load"
 msgstr ""
 
 #: uttgconsts.sthenexttimetablesalreadyexists

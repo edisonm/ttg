@@ -121,6 +121,7 @@ var
     IdResource, IdResource1: Integer;
     s: string;
   begin
+    (* ********************* THIS WILL ABORT **********************)
     with SourceDataModule, TbDistribution do
     begin
       s := IndexFieldNames;
@@ -579,7 +580,7 @@ end;
 
 procedure TMasterDataModule.DataModuleCreate(Sender: TObject);
 begin
-  TbTmpResourceWorkLoadIdResource.DisplayLabel := SFlDistribution_IdResource;
+  TbTmpResourceWorkLoadIdResource.DisplayLabel := SFlRequirement_IdResource;
   TbTmpResourceWorkLoadNaResource.DisplayLabel := SFlResource_NaResource;
   TbTmpResourceWorkLoadWorkLoad.DisplayLabel := SLoad;
   TbTmpRoomTypeLoadIdRoomType.DisplayLabel := SFlDistribution_IdRoomType;
