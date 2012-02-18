@@ -110,9 +110,9 @@ Theme
 "29";"Org. Archivo";
 ResourceType
 2
-"IdResourceType";"NaResourceType";"DefaultLimit";
-"1";"Profesor";"1";
-"2";"Aula";"0";
+"IdResourceType";"NaResourceType";"DefaultLimit";"ClashValueResourceType";
+"1";"Profesor";"1";"299";
+"2";"Aula";"0";"65";
 Resource
 51
 "IdResource";"IdResourceType";"NaResource";"AbResource";"NumResource";

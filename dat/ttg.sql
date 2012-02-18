@@ -49,7 +49,8 @@ CREATE TABLE IF NOT EXISTS `Theme`(
 CREATE TABLE IF NOT EXISTS `ResourceType`(
     `IdResourceType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Type Id */,
     `NaResourceType` VARCHAR(15) NOT NULL UNIQUE /* Name */,
-    `DefaultLimit` INTEGER NOT NULL /* Default Limit */
+    `DefaultLimit` INTEGER NOT NULL /* Default Limit */,
+    `ClashValueResourceType` INTEGER /* NOT NULL Clash Value */
 );
 CREATE TABLE IF NOT EXISTS `Resource`(
     `IdResource` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Id */,

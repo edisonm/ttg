@@ -94,9 +94,9 @@ Theme
 "30";"Science";
 ResourceType
 2
-"IdResourceType";"NaResourceType";"DefaultLimit";
-"1";"Profesor";"1";
-"2";"Aula";"0";
+"IdResourceType";"NaResourceType";"DefaultLimit";"ClashValueResourceType";
+"1";"Profesor";"1";"305";
+"2";"Aula";"0";"65";
 Resource
 20
 "IdResource";"IdResourceType";"NaResource";"AbResource";"NumResource";
