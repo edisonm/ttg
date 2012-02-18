@@ -50,8 +50,8 @@ CREATE TABLE IF NOT EXISTS `ResourceType`(
     `IdResourceType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Type Id */,
     `NaResourceType` VARCHAR(15) NOT NULL UNIQUE /* Name */,
     `DefaultLimit` INTEGER NOT NULL /* Default Limit */,
-    `ValResourceType` INTEGER /* NOT NULL Clash Value */
-);
+    `ValResourceType` INTEGER NOT NULL /* Clash Value */
+); /* Resource Types */
 CREATE TABLE IF NOT EXISTS `Resource`(
     `IdResource` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Id */,
     `IdResourceType` INTEGER NOT NULL /* Resource Type Id */,
