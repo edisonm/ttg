@@ -94,27 +94,27 @@ Theme
 "30";"Science";
 Resource
 20
-"IdResource";"IdResourceType";"FnResource";"LnResource";"NaResource";"AbResource";
-"1";"1";"Jorge";"Revelo";"Revelo Jorge";"1";
-"2";"1";"Jorge";"Bracero";"Bracero Jorge";"2";
-"3";"1";"Jorge";"Imbaquingo";"Imbaquingo Jorge";"3";
-"4";"1";"Francisco";"Salcedo";"Salcedo Francisco";"4";
-"5";"1";"Edgar";"Calderon";"Calderon Edgar";"5";
-"6";"1";"Daniel";"Mora";"Mora Daniel";"6";
-"7";"1";"Maria";"Castro";"Castro Maria";"8";
-"8";"1";"Pablo";"Tayo";"Tayo Pablo";"7";
-"9";"1";"Graciela";"Eldredge";"Eldredge Graciela";"9";
-"10";"1";"Fernando";"Andrade";"Andrade Fernando";"10";
-"11";"1";"Juan";"Barba";"Barba Juan";"11";
-"12";"1";"Jacques";"Grignard";"Grignard Jacques";"12";
-"13";"1";"Maria";"Lourdes";"Lourdes Maria";"13";
-"14";"1";"Azucena";"Naranjo";"Naranjo Azucena";"14";
-"15";"1";"Deniss";"Enriquez";"Enriquez Deniss";"15";
-"16";"1";"Guillermo";"Nuñez";"Nuñez Guillermo";"16";
-"17";"1";"Paul";"Rodas";"Rodas Paul";"17";
-"18";"1";"Clara";"Buchelli";"Buchelli Clara";"18";
-"19";"1";"Marina";"Daulon";"Daulon Marina";"19";
-"20";"1";"Rosa";"Velasco";"Velasco Rosa";"20";
+"IdResource";"IdResourceType";"NaResource";"AbResource";"LnResource";
+"1";"1";"Revelo Jorge";"1";"Revelo";
+"2";"1";"Bracero Jorge";"2";"Bracero";
+"3";"1";"Imbaquingo Jorge";"3";"Imbaquingo";
+"4";"1";"Salcedo Francisco";"4";"Salcedo";
+"5";"1";"Calderon Edgar";"5";"Calderon";
+"6";"1";"Mora Daniel";"6";"Mora";
+"7";"1";"Castro Maria";"8";"Castro";
+"8";"1";"Tayo Pablo";"7";"Tayo";
+"9";"1";"Eldredge Graciela";"9";"Eldredge";
+"10";"1";"Andrade Fernando";"10";"Andrade";
+"11";"1";"Barba Juan";"11";"Barba";
+"12";"1";"Grignard Jacques";"12";"Grignard";
+"13";"1";"Lourdes Maria";"13";"Lourdes";
+"14";"1";"Naranjo Azucena";"14";"Naranjo";
+"15";"1";"Enriquez Deniss";"15";"Enriquez";
+"16";"1";"Nuñez Guillermo";"16";"Nuñez";
+"17";"1";"Rodas Paul";"17";"Rodas";
+"18";"1";"Buchelli Clara";"18";"Buchelli";
+"19";"1";"Daulon Marina";"19";"Daulon";
+"20";"1";"Velasco Rosa";"20";"Velasco";
 Distribution
 122
 "IdTheme";"IdCategory";"IdParallel";"IdResource";"IdRoomType";"RoomCount";"Composition";

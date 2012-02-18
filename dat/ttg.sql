@@ -49,10 +49,9 @@ CREATE TABLE IF NOT EXISTS `Theme`(
 CREATE TABLE IF NOT EXISTS `Resource`(
     `IdResource` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Id */,
     `IdResourceType` INTEGER /* NOT NULL Resource Type Id */,
-    `FnResource` VARCHAR(25) /* NOT NULL UNIQUE Resource Name */,
-    `LnResource` VARCHAR(25) NOT NULL /* UNIQUE Resource Name */,
     `NaResource` VARCHAR(25) NOT NULL /* UNIQUE Resource Name */,
-    `AbResource` VARCHAR(11) NOT NULL /* UNIQUE Abbreviation */
+    `AbResource` VARCHAR(11) NOT NULL /* UNIQUE Abbreviation */,
+    `LnResource` VARCHAR(25) NOT NULL /* UNIQUE Resource Name */
 ); /* Resources */
 CREATE TABLE IF NOT EXISTS `Distribution`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,

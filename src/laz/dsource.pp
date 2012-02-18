@@ -492,9 +492,9 @@ var
           Values := '';
           for j := 0 to High(FieldArray) do
           begin
+            Value := ScapedToString(FieldValues, Pos);
             if Assigned(FieldArray[j]) then
             begin
-              Value := ScapedToString(FieldValues, Pos);
               if Values = '' then
                 Values := '"' + Value + '"'
               else
