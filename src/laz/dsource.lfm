@@ -28,11 +28,11 @@ inherited SourceDataModule: TSourceDataModule
   object QuResource: TZReadOnlyQuery[42]
     Connection = DbZConnection
     SQL.Strings = (
-      'SELECT IdResource, NumResource||" "||NaResource AS NameResource'
+      'SELECT IdResource, NaResource AS NameResource'
       'FROM Resource'
       'WHERE IdResource<>:IdResource'
       'ORDER BY'
-      '  NumResource, NaResource'
+      '  NaResource'
     )
     Params = <    
       item

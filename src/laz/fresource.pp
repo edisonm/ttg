@@ -67,8 +67,7 @@ begin
     TbResourceRestriction.MasterSource := DSResource;
     TbResourceRestriction.MasterFields := 'IdResource';
     TbResourceRestriction.LinkedFields := 'IdResource';
-    Caption := Format('%s %s %s - %s %s', [NameDataSet[TbResource],
-      TbResource.FindField('NumResource').AsString,
+    Caption := Format('%s %s  - %s %s', [NameDataSet[TbResource],
       TbResource.FindField('NaResource').AsString,
       SEditing, Description[TbResourceRestriction]]);
     DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',

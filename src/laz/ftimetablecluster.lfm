@@ -196,7 +196,6 @@ inherited TimetableClusterForm: TTimetableClusterForm
       '  TimetableDetail.IdTheme,'
       '  Distribution.IdResource,'
       '  NaTheme,'
-      '  NumResource,'
       '  NaResource'
       'from'
       '  TimetableDetail inner join Distribution on'
@@ -220,7 +219,6 @@ inherited TimetableClusterForm: TTimetableClusterForm
       '  TimetableDetail.IdTheme,'
       '  Distribution.IdResource,'
       '  NaTheme,'
-      '  NumResource,'
       '  NaResource'
       'from'
       '  TimetableDetail inner join Distribution on'
@@ -384,17 +382,6 @@ inherited TimetableClusterForm: TTimetableClusterForm
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
       Required = False
-    end
-    object QuTimetableClusterNumResource: TStringField
-      DisplayWidth = 15
-      FieldKind = fkData
-      FieldName = 'NumResource'
-      Index = 11
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 15
     end
     object QuTimetableClusterNaResource: TStringField
       DisplayWidth = 15

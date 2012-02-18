@@ -36,7 +36,6 @@ type
     QuClusterAbCategory: TStringField;
     QuClusterNaParallel: TStringField;
     QuTimetableClusterIdTimetable: TLongintField;
-    QuTimetableClusterNumResource: TStringField;
     QuTimetableClusterNaResource: TStringField;
     DBGrid1: TDBGrid;
     QuClusterNaCluster: TStringField;

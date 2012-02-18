@@ -517,14 +517,13 @@ inherited TimetableResourceForm: TTimetableResourceForm
   end
   object QuResource: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable;NumResource;NaResource'
+    SortedFields = 'IdTimetable;NaResource'
     AutoCalcFields = False
     OnCalcFields = QuTimetableResourceCalcFields
     SQL.Strings = (
       'select'
       '  IdTimetable,'
       '  IdResource,'
-      '  NumResource,'
       '  NaResource'
       'from'
       '  Resource,'
@@ -532,7 +531,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       'where'
       '  IdTimetable=:IdTimetable'
       'order by'
-      '  IdTimetable, NumResource, NaResource'
+      '  IdTimetable, NaResource'
     )
     Params = <    
       item
@@ -544,7 +543,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
     MasterFields = 'IdTimetable'
     MasterSource = SourceDataModule.DSTimetable
     LinkedFields = 'IdTimetable'
-    IndexFieldNames = 'IdTimetable Asc;NumResource Asc;NaResource Asc'
+    IndexFieldNames = 'IdTimetable Asc;NaResource Asc'
     left = 144
     top = 144
     ParamData = <    
@@ -574,17 +573,6 @@ inherited TimetableResourceForm: TTimetableResourceForm
       ReadOnly = False
       Required = False
       Visible = False
-    end
-    object QuResourceNumResource: TStringField
-      DisplayWidth = 15
-      FieldKind = fkData
-      FieldName = 'NumResource'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 15
     end
     object QuResourceNaResource: TStringField
       DisplayWidth = 15

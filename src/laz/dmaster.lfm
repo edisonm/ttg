@@ -21,21 +21,6 @@ object MasterDataModule: TMasterDataModule
       ReadOnly = False
       Required = False
     end
-    object TbTmpResourceWorkLoadNumResource: TStringField
-      DisplayWidth = 15
-      FieldKind = fkLookup
-      FieldName = 'NumResource'
-      Index = 1
-      KeyFields = 'IdResource'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbResource
-      LookupKeyFields = 'IdResource'
-      LookupResultField = 'NumResource'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 31
-    end
     object TbTmpResourceWorkLoadNaResource: TStringField
       DisplayWidth = 15
       FieldKind = fkLookup

@@ -221,7 +221,7 @@ msgstr "Codigo"
 
 #: dsourcebaseconsts.sflresource_numresource
 msgctxt "dsourcebaseconsts.sflresource_numresource"
-msgid "Last Name"
+msgid "Number"
 msgstr "Apellido"
 
 #: dsourcebaseconsts.sflresource_naresource

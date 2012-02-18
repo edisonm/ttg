@@ -35,7 +35,6 @@ type
     QuResource: TZQuery;
     QuResourceIdTimetable: TLongintField;
     QuResourceIdResource: TLongintField;
-    QuResourceNumResource: TStringField;
     QuResourceNaResource: TStringField;
     QuTimetableResourceIdTimetable: TLongintField;
     QuTimetableResourceIdResource: TLongintField;
@@ -64,9 +63,8 @@ begin
   inherited;
   with SourceDataModule do
   begin
-    Caption := Format('[%s %d] - %s %s', [SuperTitle,
+    Caption := Format('[%s %d] - %s', [SuperTitle,
       Self.QuResource.FindField('IdTimetable').AsInteger,
-      Self.QuResource.FindField('NumResource').AsString,
       Self.QuResource.FindField('NaResource').AsString]);
     FName := MasterDataModule.StringsShowResource.Values[CBShowResource.Text];
     ShowEditor(TbDay, TbHour, QuTimetableResource, TbTimeSlot, 'IdDay', 'NaDay',
@@ -83,7 +81,6 @@ begin
   QuTimetableResourceNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuTimetableResourceNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
   QuTimetableResourceName.DisplayLabel := SFlResource_NaResource;
-  QuResourceNumResource.DisplayLabel := SFlResource_NumResource;
   QuResourceNaResource.DisplayLabel := SFlResource_NaResource;
   QuTimetableResourceIdCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
   QuTimetableResourceIdParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
