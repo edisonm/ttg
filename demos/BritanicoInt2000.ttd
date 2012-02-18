@@ -1,5 +1,5 @@
 TTD 293
-18
+19
 Parallel
 2
 "IdParallel";"NaParallel";
@@ -92,6 +92,11 @@ Theme
 "28";"Matematica 6";
 "29";"Mat/Eco/Fil_ 6";
 "30";"Science";
+ResourceType
+2
+"IdResourceType";"NaResourceType";"DefaultLimit";
+"1";"Profesor";"1";
+"2";"Aula";"0";
 Resource
 20
 "IdResource";"IdResourceType";"NaResource";"AbResource";"NumResource";

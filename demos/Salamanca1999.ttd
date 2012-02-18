@@ -1,5 +1,5 @@
 TTD 293
-18
+19
 Parallel
 5
 "IdParallel";"NaParallel";
@@ -108,6 +108,11 @@ Theme
 "27";"Dibujo";
 "28";"In. Tecnologica";
 "29";"Org. Archivo";
+ResourceType
+2
+"IdResourceType";"NaResourceType";"DefaultLimit";
+"1";"Profesor";"1";
+"2";"Aula";"0";
 Resource
 51
 "IdResource";"IdResourceType";"NaResource";"AbResource";"NumResource";

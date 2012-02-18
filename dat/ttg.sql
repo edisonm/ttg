@@ -46,12 +46,17 @@ CREATE TABLE IF NOT EXISTS `Theme`(
     `IdTheme` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Theme Id */,
     `NaTheme` VARCHAR(20) NOT NULL UNIQUE /* Theme Name */
 ); /* Themes */
+CREATE TABLE IF NOT EXISTS `ResourceType`(
+    `IdResourceType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Type Id */,
+    `NaResourceType` VARCHAR(15) NOT NULL UNIQUE /* Name */,
+    `DefaultLimit` INTEGER NOT NULL /* Default Limit */
+);
 CREATE TABLE IF NOT EXISTS `Resource`(
     `IdResource` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Id */,
     `IdResourceType` INTEGER /* NOT NULL Resource Type Id */,
     `NaResource` VARCHAR(25) NOT NULL /* UNIQUE Resource Name */,
     `AbResource` VARCHAR(11) NOT NULL /* UNIQUE Abbreviation */,
-    `NumResource` VARCHAR(25) NOT NULL /* UNIQUE Resource Name */
+    `NumResource` INTEGER NOT NULL /* Number of resources */
 ); /* Resources */
 CREATE TABLE IF NOT EXISTS `Distribution`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,

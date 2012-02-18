@@ -41,6 +41,8 @@ type
     DSCluster: TDataSource;
     TbTheme: TZTable;
     DSTheme: TDataSource;
+    TbResourceType: TZTable;
+    DSResourceType: TDataSource;
     TbResource: TZTable;
     DSResource: TDataSource;
     TbDistribution: TZTable;
@@ -82,7 +84,7 @@ procedure TSourceBaseDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
   OnDestroy := DataModuleDestroy;
-  SetLength(FTables, 18);
+  SetLength(FTables, 19);
   Tables[0] := TbCategory;
   Tables[1] := TbParallel;
   Tables[2] := TbDay;
@@ -90,17 +92,18 @@ begin
   Tables[4] := TbRoomType;
   Tables[5] := TbCluster;
   Tables[6] := TbTheme;
-  Tables[7] := TbResource;
-  Tables[8] := TbDistribution;
-  Tables[9] := TbJoinedCluster;
-  Tables[10] := TbThemeRestrictionType;
-  Tables[11] := TbTimeSlot;
-  Tables[12] := TbAssistance;
-  Tables[13] := TbResourceRestrictionType;
-  Tables[14] := TbResourceRestriction;
-  Tables[15] := TbThemeRestriction;
-  Tables[16] := TbTimetable;
-  Tables[17] := TbTimetableDetail;
+  Tables[7] := TbResourceType;
+  Tables[8] := TbResource;
+  Tables[9] := TbDistribution;
+  Tables[10] := TbJoinedCluster;
+  Tables[11] := TbThemeRestrictionType;
+  Tables[12] := TbTimeSlot;
+  Tables[13] := TbAssistance;
+  Tables[14] := TbResourceRestrictionType;
+  Tables[15] := TbResourceRestriction;
+  Tables[16] := TbThemeRestriction;
+  Tables[17] := TbTimetable;
+  Tables[18] := TbTimetableDetail;
   with DataSetNameList do
   begin
     Add('TbCategory=Category');
@@ -110,6 +113,7 @@ begin
     Add('TbRoomType=RoomType');
     Add('TbCluster=Cluster');
     Add('TbTheme=Theme');
+    Add('TbResourceType=ResourceType');
     Add('TbResource=Resource');
     Add('TbDistribution=Distribution');
     Add('TbJoinedCluster=JoinedCluster');
@@ -142,9 +146,12 @@ begin
     Add('TbCluster.IdParallel=' + SFlCluster_IdParallel);
     Add('TbTheme.IdTheme=' + SFlTheme_IdTheme);
     Add('TbTheme.NaTheme=' + SFlTheme_NaTheme);
+    Add('TbResourceType.IdResourceType=' + SFlResourceType_IdResourceType);
+    Add('TbResourceType.NaResourceType=' + SFlResourceType_NaResourceType);
+    Add('TbResourceType.DefaultLimit=' + SFlResourceType_DefaultLimit);
     Add('TbResource.IdResource=' + SFlResource_IdResource);
-    Add('TbResource.AbResource=' + SFlResource_AbResource);
     Add('TbResource.NaResource=' + SFlResource_NaResource);
+    Add('TbResource.AbResource=' + SFlResource_AbResource);
     Add('TbResource.NumResource=' + SFlResource_NumResource);
     Add('TbDistribution.IdTheme=' + SFlDistribution_IdTheme);
     Add('TbDistribution.IdCategory=' + SFlDistribution_IdCategory);
@@ -201,6 +208,7 @@ begin
     Add('TbRoomType=' + STbRoomType);
     Add('TbCluster=' + STbCluster);
     Add('TbTheme=' + STbTheme);
+    Add('TbResourceType=' + STbResourceType);
     Add('TbResource=' + STbResource);
     Add('TbDistribution=' + STbDistribution);
     Add('TbJoinedCluster=' + STbJoinedCluster);

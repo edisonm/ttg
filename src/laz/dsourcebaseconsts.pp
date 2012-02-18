@@ -30,6 +30,7 @@ resourcestring
   STbRoomType = 'Types of Room';
   STbCluster = 'Clusters';
   STbTheme = 'Themes';
+  STbResourceType = 'ResourceType';
   STbResource = 'Resources';
   STbDistribution = 'Distribution of Workload';
   STbJoinedCluster = 'Joined Clusters';
@@ -63,10 +64,13 @@ resourcestring
   SFlCluster_IdParallel = 'Parallel';
   SFlTheme_IdTheme = 'Id';
   SFlTheme_NaTheme = 'Name';
+  SFlResourceType_IdResourceType = 'IdResourceType';
+  SFlResourceType_NaResourceType = 'Name';
+  SFlResourceType_DefaultLimit = 'Default Limit';
   SFlResource_IdResource = 'Id';
+  SFlResource_NaResource = 'Name';
   SFlResource_AbResource = 'Abbreviation';
   SFlResource_NumResource = 'Number';
-  SFlResource_NaResource = 'Name';
   SFlDistribution_IdTheme = 'Theme';
   SFlDistribution_IdCategory = 'Category';
   SFlDistribution_IdParallel = 'Parallel';

@@ -93,6 +93,19 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 344
     Top = 148
   end
+  object TbResourceType: TZTable
+    Tag = 7
+    Connection = DbZConnection
+    TableName = 'ResourceType'
+    IndexFieldNames = 'IdResourceType'
+    Left = 240
+    Top = 144
+  end
+  object DSResourceType: TDataSource
+    DataSet = TbResourceType
+    Left = 248
+    Top = 136
+  end
   object TbResource: TZTable
     Tag = 9
     Connection = DbZConnection
