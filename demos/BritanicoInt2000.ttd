@@ -301,7 +301,7 @@ TimeSlot
 "6";"8";
 "6";"10";
 "6";"11";
-Assistance
+Requirement
 2
 "IdTheme";"IdCategory";"IdParallel";"IdResource";
 "14";"3";"1";"20";

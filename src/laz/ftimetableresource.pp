@@ -23,7 +23,7 @@ type
     QuTimetableResourceIdHour: TLongintField;
     QuTimetableResourceIdDay: TLongintField;
     QuTimetableResourceIdTheme: TLongintField;
-    QuTimetableResourceIsAssistance: TLongintField;
+    QuTimetableResourceIsRequirement: TLongintField;
     QuTimetableResourceNaTheme: TStringField;
     QuTimetableResourceName: TStringField;
     QuTimetableResourceAbCategory: TStringField;
@@ -94,16 +94,16 @@ end;
 
 procedure TTimetableResourceForm.QuTimetableResourceCalcFields(DataSet: TDataSet);
 var
-  IsAssistance: string;
+  IsRequirement: string;
 begin
   inherited;
   if FName <> '' then
   begin
-    if QuTimeTableResourceIsAssistance.Value = 1 then
-      IsAssistance := '*'
+    if QuTimeTableResourceIsRequirement.Value = 1 then
+      IsRequirement := '*'
     else
-      IsAssistance := '';
-    DataSet['Name'] := VarArrToStr(DataSet[FName], ' ') + ' ' + IsAssistance;
+      IsRequirement := '';
+    DataSet['Name'] := VarArrToStr(DataSet[FName], ' ') + ' ' + IsRequirement;
   end
 end;
 

@@ -171,16 +171,16 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 344
     Top = 244
   end
-  object TbAssistance: TZTable
+  object TbRequirement: TZTable
     Tag = 14
     Connection = DbZConnection
-    TableName = 'Assistance'
+    TableName = 'Requirement'
     IndexFieldNames = 'IdTheme;IdCategory;IdParallel;IdResource'
     Left = 432
     Top = 240
   end
-  object DSAssistance: TDataSource
-    DataSet = TbAssistance
+  object DSRequirement: TDataSource
+    DataSet = TbRequirement
     Left = 440
     Top = 232
   end

@@ -1,23 +1,23 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: dsourcebaseconsts.sflassistance_idcategory
-msgctxt "dsourcebaseconsts.sflassistance_idcategory"
+#: dsourcebaseconsts.sflrequirement_idcategory
+msgctxt "dsourcebaseconsts.sflrequirement_idcategory"
 msgid "Category"
 msgstr ""
 
-#: dsourcebaseconsts.sflassistance_idparallel
-msgctxt "dsourcebaseconsts.sflassistance_idparallel"
+#: dsourcebaseconsts.sflrequirement_idparallel
+msgctxt "dsourcebaseconsts.sflrequirement_idparallel"
 msgid "Parallel"
 msgstr ""
 
-#: dsourcebaseconsts.sflassistance_idresource
-msgctxt "dsourcebaseconsts.sflassistance_idresource"
+#: dsourcebaseconsts.sflrequirement_idresource
+msgctxt "dsourcebaseconsts.sflrequirement_idresource"
 msgid "Assistant"
 msgstr ""
 
-#: dsourcebaseconsts.sflassistance_idtheme
-msgctxt "dsourcebaseconsts.sflassistance_idtheme"
+#: dsourcebaseconsts.sflrequirement_idtheme
+msgctxt "dsourcebaseconsts.sflrequirement_idtheme"
 msgid "Theme"
 msgstr ""
 
@@ -349,9 +349,9 @@ msgctxt "dsourcebaseconsts.sfltimetable_timeini"
 msgid "Initial Time"
 msgstr ""
 
-#: dsourcebaseconsts.stbassistance
-msgctxt "dsourcebaseconsts.stbassistance"
-msgid "Assistances"
+#: dsourcebaseconsts.stbrequirement
+msgctxt "dsourcebaseconsts.stbrequirement"
+msgid "Requirements"
 msgstr ""
 
 #: dsourcebaseconsts.stbcategory
@@ -1473,7 +1473,7 @@ msgstr ""
 
 #: tresourceform.groupbox3.caption
 msgctxt "tresourceform.groupbox3.caption"
-msgid "Assistances"
+msgid "Requirements"
 msgstr ""
 
 #: tthemeform.actthemerestriction.caption

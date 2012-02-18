@@ -106,17 +106,17 @@ CREATE TABLE IF NOT EXISTS `TimeSlot`(
   CONSTRAINT `HourTimeSlot` FOREIGN KEY (`IdHour`)
     REFERENCES `Hour`(`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Time Slots */
-CREATE TABLE IF NOT EXISTS `Assistance`(
+CREATE TABLE IF NOT EXISTS `Requirement`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER NOT NULL /* Parallel Id */,
     `IdResource` INTEGER NOT NULL /* Resource Id */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`,`IdResource`),
-  CONSTRAINT `DistributionAssistance` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
+  CONSTRAINT `DistributionRequirement` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
     REFERENCES `Distribution`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `ResourceAssistance` FOREIGN KEY (`IdResource`)
+  CONSTRAINT `ResourceRequirement` FOREIGN KEY (`IdResource`)
     REFERENCES `Resource`(`IdResource`) ON UPDATE RESTRICT ON DELETE RESTRICT
-); /* Assistances */
+); /* Requirements */
 CREATE TABLE IF NOT EXISTS `ResourceRestrictionType`(
     `IdResourceRestrictionType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Restriction Type Id */,
     `NaResourceRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,

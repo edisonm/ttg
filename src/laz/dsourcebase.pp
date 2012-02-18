@@ -53,8 +53,8 @@ type
     DSThemeRestrictionType: TDataSource;
     TbTimeSlot: TZTable;
     DSTimeSlot: TDataSource;
-    TbAssistance: TZTable;
-    DSAssistance: TDataSource;
+    TbRequirement: TZTable;
+    DSRequirement: TDataSource;
     TbResourceRestrictionType: TZTable;
     DSResourceRestrictionType: TDataSource;
     TbResourceRestriction: TZTable;
@@ -98,7 +98,7 @@ begin
   Tables[10] := TbJoinedCluster;
   Tables[11] := TbThemeRestrictionType;
   Tables[12] := TbTimeSlot;
-  Tables[13] := TbAssistance;
+  Tables[13] := TbRequirement;
   Tables[14] := TbResourceRestrictionType;
   Tables[15] := TbResourceRestriction;
   Tables[16] := TbThemeRestriction;
@@ -119,7 +119,7 @@ begin
     Add('TbJoinedCluster=JoinedCluster');
     Add('TbThemeRestrictionType=ThemeRestrictionType');
     Add('TbTimeSlot=TimeSlot');
-    Add('TbAssistance=Assistance');
+    Add('TbRequirement=Requirement');
     Add('TbResourceRestrictionType=ResourceRestrictionType');
     Add('TbResourceRestriction=ResourceRestriction');
     Add('TbThemeRestriction=ThemeRestriction');
@@ -171,10 +171,10 @@ begin
     Add('TbThemeRestrictionType.ValThemeRestrictionType=' + SFlThemeRestrictionType_ValThemeRestrictionType);
     Add('TbTimeSlot.IdDay=' + SFlTimeSlot_IdDay);
     Add('TbTimeSlot.IdHour=' + SFlTimeSlot_IdHour);
-    Add('TbAssistance.IdTheme=' + SFlAssistance_IdTheme);
-    Add('TbAssistance.IdCategory=' + SFlAssistance_IdCategory);
-    Add('TbAssistance.IdParallel=' + SFlAssistance_IdParallel);
-    Add('TbAssistance.IdResource=' + SFlAssistance_IdResource);
+    Add('TbRequirement.IdTheme=' + SFlRequirement_IdTheme);
+    Add('TbRequirement.IdCategory=' + SFlRequirement_IdCategory);
+    Add('TbRequirement.IdParallel=' + SFlRequirement_IdParallel);
+    Add('TbRequirement.IdResource=' + SFlRequirement_IdResource);
     Add('TbResourceRestrictionType.IdResourceRestrictionType=' + SFlResourceRestrictionType_IdResourceRestrictionType);
     Add('TbResourceRestrictionType.NaResourceRestrictionType=' + SFlResourceRestrictionType_NaResourceRestrictionType);
     Add('TbResourceRestrictionType.ColResourceRestrictionType=' + SFlResourceRestrictionType_ColResourceRestrictionType);
@@ -214,7 +214,7 @@ begin
     Add('TbJoinedCluster=' + STbJoinedCluster);
     Add('TbThemeRestrictionType=' + STbThemeRestrictionType);
     Add('TbTimeSlot=' + STbTimeSlot);
-    Add('TbAssistance=' + STbAssistance);
+    Add('TbRequirement=' + STbRequirement);
     Add('TbResourceRestrictionType=' + STbResourceRestrictionType);
     Add('TbResourceRestriction=' + STbResourceRestriction);
     Add('TbThemeRestriction=' + STbThemeRestriction);

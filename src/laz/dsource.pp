@@ -361,10 +361,10 @@ begin
     FieldName := 'Duration';
     DataSet := TbDistribution;
   end;
-  Field := TStringField.Create(TbAssistance.Owner);
+  Field := TStringField.Create(TbRequirement.Owner);
   with Field do
   begin
-    DisplayLabel := SFlAssistance_IdResource;
+    DisplayLabel := SFlRequirement_IdResource;
     DisplayWidth := 31;
     FieldKind := fkLookup;
     FieldName := 'NameResource';
@@ -374,7 +374,7 @@ begin
     KeyFields := 'IdResource';
     Size := 31;
     Lookup := True;
-    DataSet := TbAssistance;
+    DataSet := TbRequirement;
   end;
   Field := TStringField.Create(TbJoinedCluster.Owner);
   with Field do
@@ -424,7 +424,7 @@ begin
     FindField('IdResource').Visible := False;
     FindField('IdRoomType').Visible := False;
   end;
-  with TbAssistance do
+  with TbRequirement do
   begin
     FindField('IdTheme').Visible := False;
     FindField('IdCategory').Visible := False;

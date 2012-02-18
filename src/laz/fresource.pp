@@ -18,7 +18,7 @@ type
   TResourceForm	= class(TMasterDetailEditorForm)
     TBResourceRestriction: TToolButton;
     ActResourceRestriction: TAction;
-    DbGAssistances: TDBGrid;
+    DbGRequirements: TDBGrid;
     DbGJoinedCluster: TDBGrid;
     GroupBox3: TGroupBox;
     GBJoinedCluster: TGroupBox;
@@ -155,23 +155,23 @@ begin
     TbDistribution.MasterFields := 'IdResource';
     TbDistribution.LinkedFields := 'IdResource';
     TbDistribution.MasterSource := DSResource;
-    TbAssistance.MasterFields := 'IdTheme;IdCategory;IdParallel';
-    TbAssistance.LinkedFields := 'IdTheme;IdCategory;IdParallel';
-    TbAssistance.MasterSource := SourceDataModule.DSDistribution;
+    TbRequirement.MasterFields := 'IdTheme;IdCategory;IdParallel';
+    TbRequirement.LinkedFields := 'IdTheme;IdCategory;IdParallel';
+    TbRequirement.MasterSource := SourceDataModule.DSDistribution;
     TbJoinedCluster.MasterFields := 'IdTheme;IdCategory;IdParallel';
     TbJoinedCluster.LinkedFields := 'IdTheme;IdCategory;IdParallel';
     TbJoinedCluster.MasterSource := SourceDataModule.DSDistribution;
-    {TbAssistance.Close;
+    {TbRequirement.Close;
     QuResource.Close;
     QuResource.Open;
-    TbAssistance.Open;}
+    TbRequirement.Open;}
   end;
 end;
 
 procedure TResourceForm.FormDestroy(Sender: TObject);
 begin
   inherited;
-  SourceDataModule.TbAssistance.MasterSource := nil;
+  SourceDataModule.TbRequirement.MasterSource := nil;
   SourceDataModule.TbDistribution.MasterSource := nil;
 end;
 

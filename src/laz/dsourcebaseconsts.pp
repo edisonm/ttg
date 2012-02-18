@@ -36,7 +36,7 @@ resourcestring
   STbJoinedCluster = 'Joined Clusters';
   STbThemeRestrictionType = 'Types of Theme Restrictions';
   STbTimeSlot = 'Time Slots';
-  STbAssistance = 'Assistances';
+  STbRequirement = 'Requirements';
   STbResourceRestrictionType = 'Types of Resource Restrictions';
   STbResourceRestriction = 'Resource Restrictions';
   STbThemeRestriction = 'Theme Restrictions';
@@ -89,10 +89,10 @@ resourcestring
   SFlThemeRestrictionType_ValThemeRestrictionType = 'Value';
   SFlTimeSlot_IdDay = 'Day';
   SFlTimeSlot_IdHour = 'Hour';
-  SFlAssistance_IdTheme = 'Theme';
-  SFlAssistance_IdCategory = 'Category';
-  SFlAssistance_IdParallel = 'Parallel';
-  SFlAssistance_IdResource = 'Assistant';
+  SFlRequirement_IdTheme = 'Theme';
+  SFlRequirement_IdCategory = 'Category';
+  SFlRequirement_IdParallel = 'Parallel';
+  SFlRequirement_IdResource = 'Assistant';
   SFlResourceRestrictionType_IdResourceRestrictionType = 'Id';
   SFlResourceRestrictionType_NaResourceRestrictionType = 'Name';
   SFlResourceRestrictionType_ColResourceRestrictionType = 'Color';

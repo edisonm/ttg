@@ -479,7 +479,7 @@ TimeSlot
 "6";"5";
 "6";"6";
 "6";"7";
-Assistance
+Requirement
 0
 "IdTheme";"IdCategory";"IdParallel";"IdResource";
 ResourceRestrictionType

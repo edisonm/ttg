@@ -56,14 +56,14 @@ type
     FSessionToDuration: TSessionArray;
     FDayHourToTimeSlot, FCategoryParallelToCluster,
       FClusterThemeToResource, FClusterThemeToDistribution, FClusterThemeCount,
-      FTimetableDetailPattern, FDistributionToSessions, FClusterAssistanceToDistribution,
-      FClusterAssistanceToResource, FResourceTimeSlotToResourceRestrictionType,
+      FTimetableDetailPattern, FDistributionToSessions, FClusterRequirementToDistribution,
+      FClusterRequirementToResource, FResourceTimeSlotToResourceRestrictionType,
       FClusterJoinedClusterToDistribution, FClusterJoinedClusterToCluster,
       FThemeTimeSlotToThemeRestrictionType: TDynamicIntegerArrayArray;
     FThemeCount, FThemeRestrictionTypeCount, FResourceRestrictionTypeCount,
       FClusterCount, FDayCount, FHourCount, FTimeSlotCount, FResourceCount,
       FCategoryCount, FRoomTypeCount, FDistributionCount,
-      FAssistanceCount, FJoinedClusterCount: Integer;
+      FRequirementCount, FJoinedClusterCount: Integer;
     FParallelToIdParallel, FThemeToIdTheme, FDayToIdDay, FHourToIdHour,
       FCategoryToIdCategory: TDynamicIntegerArray;
     FIdCategoryToCategory, FIdParallelToParallel, FIdDayToDay,
@@ -660,25 +660,25 @@ var
       end;
     end;
   end;
-  procedure LoadAssistance;
+  procedure LoadRequirement;
   var
-    Assistance, Counter, VCluster, Parallel, Category, Theme,
+    Requirement, Counter, VCluster, Parallel, Category, Theme,
     Distribution, Resource: Integer;
     VFieldTheme, VFieldCategory, VFieldParallel,
     VFieldResource: TField;
   begin
-    with SourceDataModule.TbAssistance do
+    with SourceDataModule.TbRequirement do
     begin
       IndexFieldNames := 'IdTheme;IdCategory;IdParallel;IdResource';
       First;
-      FAssistanceCount := RecordCount;
-      SetLength(FClusterAssistanceToDistribution, FClusterCount, 0);
-      SetLength(FClusterAssistanceToResource, FClusterCount, 0);
+      FRequirementCount := RecordCount;
+      SetLength(FClusterRequirementToDistribution, FClusterCount, 0);
+      SetLength(FClusterRequirementToResource, FClusterCount, 0);
       VFieldTheme := FindField('IdTheme');
       VFieldCategory := FindField('IdCategory');
       VFieldParallel := FindField('IdParallel');
       VFieldResource := FindField('IdResource');
-      for Assistance := 0 to FAssistanceCount - 1 do
+      for Requirement := 0 to FRequirementCount - 1 do
       begin
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
@@ -687,11 +687,11 @@ var
         VCluster := FCategoryParallelToCluster[Category, Parallel];
         Distribution := FClusterThemeToDistribution[VCluster, Theme];
         Resource := FIdResourceAResource[VFieldResource.AsInteger - FMinIdResource];
-        Counter := Length(FClusterAssistanceToDistribution[VCluster]);
-        SetLength(FClusterAssistanceToDistribution[VCluster], Counter + 1);
-        SetLength(FClusterAssistanceToResource[VCluster], Counter + 1);
-        FClusterAssistanceToDistribution[VCluster, Counter] := Distribution;
-        FClusterAssistanceToResource[VCluster, Counter] := Resource;
+        Counter := Length(FClusterRequirementToDistribution[VCluster]);
+        SetLength(FClusterRequirementToDistribution[VCluster], Counter + 1);
+        SetLength(FClusterRequirementToResource[VCluster], Counter + 1);
+        FClusterRequirementToDistribution[VCluster, Counter] := Distribution;
+        FClusterRequirementToResource[VCluster, Counter] := Resource;
         Next;
       end;
       First;
@@ -830,7 +830,7 @@ begin
     LoadThemeRestriction;
     LoadResourceRestriction;
     LoadDistribution;
-    LoadAssistance;
+    LoadRequirement;
     LoadJoinedCluster;
     LoadPatternTimetableDetail;
   end;
@@ -1057,7 +1057,7 @@ end;
 procedure TTimetable.DeltaValues(Delta, ACluster, TimeSlot1, TimeSlot2: Integer);
 var
   ThemeRestrictionType, ResourceRestrictionType, TimeSlot, TimeSlot0, Day, DDay,
-  Day1, Day2, Hour, Session, Resource, RoomType, Duration, Theme, Limit, Assistance,
+  Day1, Day2, Hour, Session, Resource, RoomType, Duration, Theme, Limit, Requirement,
   JoinedCluster, Distribution, DeltaBreakTimetableResource, MinTimeSlot, MaxTimeSlot,
   Cluster1: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
@@ -1196,10 +1196,10 @@ begin
       end;
       Inc(TimeSlot, Duration);
     end;
-    for Assistance := 0 to High(FClusterAssistanceToDistribution[ACluster]) do
+    for Requirement := 0 to High(FClusterRequirementToDistribution[ACluster]) do
     begin
-      Distribution := FClusterAssistanceToDistribution[ACluster, Assistance];
-      Resource := FClusterAssistanceToResource[ACluster, Assistance];
+      Distribution := FClusterRequirementToDistribution[ACluster, Requirement];
+      Resource := FClusterRequirementToResource[ACluster, Requirement];
       for TimeSlot := TimeSlot1 to TimeSlot2 do
       begin
         Session := TimeSlotToSession[TimeSlot];

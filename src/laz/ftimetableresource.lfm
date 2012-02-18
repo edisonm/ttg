@@ -308,7 +308,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       ' IdHour,'
       ' IdDay,'
       ' Distribution.IdTheme,'
-      ' 0 as IsAssistance'
+      ' 0 as IsRequirement'
       'from'
       ' TimetableDetail inner join Distribution on'
       ' (TimetableDetail.IdTheme = Distribution.IdTheme)'
@@ -319,24 +319,24 @@ inherited TimetableResourceForm: TTimetableResourceForm
       'union all'
       'select'
       ' IdTimetable,'
-      ' Assistance.IdResource as IdResource,'
+      ' Requirement.IdResource as IdResource,'
       ' Distribution.IdCategory,'
       ' Distribution.IdParallel,'
       ' IdHour,'
       ' IdDay,'
       ' Distribution.IdTheme,'
-      ' 1 as IsAssistance'
+      ' 1 as IsRequirement'
       'from'
-      ' Assistance inner join Distribution on'
-      '  Assistance.IdTheme = Distribution.IdTheme'
-      '  and Assistance.IdCategory = Distribution.IdCategory'
-      '  and Assistance.IdParallel = Distribution.IdParallel'
+      ' Requirement inner join Distribution on'
+      '  Requirement.IdTheme = Distribution.IdTheme'
+      '  and Requirement.IdCategory = Distribution.IdCategory'
+      '  and Requirement.IdParallel = Distribution.IdParallel'
       ' inner join TimetableDetail on'
       '  TimetableDetail.IdTheme = Distribution.IdTheme'
       '  and TimetableDetail.IdCategory = Distribution.IdCategory'
       '  and TimetableDetail.IdParallel = Distribution.IdParallel'
       'where IdTimetable=:IdTimetable'
-      ' and Assistance.IdResource=:IdResource'
+      ' and Requirement.IdResource=:IdResource'
     )
     Params = <    
       item
@@ -441,10 +441,10 @@ inherited TimetableResourceForm: TTimetableResourceForm
       Required = True
       Visible = False
     end
-    object QuTimetableResourceIsAssistance: TLongintField
+    object QuTimetableResourceIsRequirement: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IsAssistance'
+      FieldName = 'IsRequirement'
       Index = 8
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
