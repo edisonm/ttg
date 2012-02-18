@@ -38,7 +38,7 @@ type
     MITheme: TMenuItem;
     MIParallel: TMenuItem;
     MICategory: TMenuItem;
-    MIRoomType: TMenuItem;
+    MIResourceType: TMenuItem;
     MIFile: TMenuItem;
     MISave: TMenuItem;
     N1: TMenuItem;
@@ -68,8 +68,8 @@ type
     TBHour: TToolButton;
     TBCategory: TToolButton;
     TBParallel: TToolButton;
+    TBResourceType: TToolButton;
     TBResource: TToolButton;
-    TBRoomType: TToolButton;
     TBTimeSlot: TToolButton;
     TBCluster: TToolButton;
     TBTheme: TToolButton;
@@ -96,7 +96,7 @@ type
     ActCategory: TAction;
     ActParallel: TAction;
     ActResource: TAction;
-    ActRoomType: TAction;
+    ActResourceType: TAction;
     ActTimeSlot: TAction;
     ActCluster: TAction;
     ActTheme: TAction;
@@ -128,7 +128,7 @@ type
     procedure ActResourceExecute(Sender: TObject);
     procedure ActThemeExecute(Sender: TObject);
     procedure ActCategoryExecute(Sender: TObject);
-    procedure ActRoomTypeExecute(Sender: TObject);
+    procedure ActResourceTypeExecute(Sender: TObject);
     procedure ActParallelExecute(Sender: TObject);
     procedure ActClusterExecute(Sender: TObject);
     procedure ActDayExecute(Sender: TObject);
@@ -156,7 +156,7 @@ type
     FConfigStorage: TConfigStorage;
     FDayForm,
     FCategoryForm,
-    FRoomTypeForm,
+    FResourceTypeForm,
     FParallelForm,
     FHourForm,
     FTimeSlotForm: TCrossManyToManyEditor0Form;
@@ -283,13 +283,13 @@ begin
 					SourceDataModule.TbCategory);
 end;
 
-procedure TMainForm.ActRoomTypeExecute(Sender: TObject);
+procedure TMainForm.ActResourceTypeExecute(Sender: TObject);
 begin
    TSingleEditorForm.ToggleSingleEditor(Self,
-					FRoomTypeForm,
+					FResourceTypeForm,
 					ConfigStorage,
-					ActRoomType,
-					SourceDataModule.TbRoomType);
+					ActResourceType,
+					SourceDataModule.TbResourceType);
 end;
 
 procedure TMainForm.ActParallelExecute(Sender: TObject);

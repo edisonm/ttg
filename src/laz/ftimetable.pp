@@ -10,7 +10,7 @@ uses
   Controls, Forms, Dialogs, Db, FSingleEditor, Grids, Buttons, FEditor, DBCtrls,
   ExtCtrls, ComCtrls, ActnList, ZDataset, FCrossManytoManyEditorR,
   DMaster, FCrossManyToManyEditor1, FConfig, DSource, FMasterDetailEditor,
-  FTimetableResource, FTimetableRoomType, FTimetableCluster;
+  FTimetableResource, FTimetableCluster;
 
 type
 
@@ -23,20 +23,6 @@ type
     BtTimetableResource: TToolButton;
     BtClashResource: TToolButton;
     BtClashTheme: TToolButton;
-    BtClashRoom: TToolButton;
-    QuClashRoom: TZQuery;
-    QuClashRoomIdDay: TLongintField;
-    QuClashRoomIdHour: TLongintField;
-    QuClashRoomIdRoomType: TLongintField;
-    QuClashRoomNaDay: TStringField;
-    QuClashRoomNaHour: TStringField;
-    QuClashRoomDetail: TZQuery;
-    QuClashRoomDetailIdCategory: TLongintField;
-    QuClashRoomDetailIdParallel: TLongintField;
-    QuClashRoomDetailNaTheme: TStringField;
-    QuClashRoomDetailAbCategory: TStringField;
-    QuClashRoomDetailNaParallel: TStringField;
-    DSClashRoom: TDataSource;
     QuClashResourceDetail: TZQuery;
     QuClashResourceDetailIdResource: TLongintField;
     QuClashResourceDetailIdCategory: TLongintField;
@@ -98,8 +84,6 @@ type
     QuThemeCutHourIdHour: TLongintField;
     QuThemeCutHourDetail: TZQuery;
     DSThemeCutHour: TDataSource;
-    BtTimetableRoomType: TToolButton;
-    QuClashRoomNumber: TLongintField;
     QuThemeCutHourNaDay: TStringField;
     QuThemeCutHourNaHour: TStringField;
     QuClashThemeDetailIdTheme: TLongintField;
@@ -127,12 +111,10 @@ type
     ActTimetableResource: TAction;
     ActClashResource: TAction;
     ActClashTheme: TAction;
-    ActClashRoom: TAction;
     ActThemeRestrictionNonSatisfied: TAction;
     ActResourceRestrictionNoRespetada: TAction;
     ActThemeCutDay: TAction;
     ActThemeCutHour: TAction;
-    ActTimetableRoomType: TAction;
     DSClashResource: TDataSource;
     QuClashResourceIdTimetable: TLongintField;
     QuThemeCutDayIdTimetable: TLongintField;
@@ -140,21 +122,14 @@ type
     QuTimetableDetailThemeRestrictionIdTimetable: TLongintField;
     QuTimetableDetailResourceRestrictionIdTimetable: TLongintField;
     QuTimetableDetailResourceRestrictionNaResource: TStringField;
-    QuClashRoomIdTimetable: TLongintField;
-    QuClashRoomAbRoomType: TStringField;
     QuClashResourceNaResource: TStringField;
-    QuClashResourceClashes: TStringField;
-    QuClashRoomDetailIdTimetable: TLongintField;
-    QuClashRoomDetailIdRoomType: TLongintField;
-    QuClashRoomDetailIdDay: TLongintField;
-    QuClashRoomDetailIdHour: TLongintField;
+    QuClashResourceOccupied: TLongintField;
+    QuClashResourceClashes: TLongintField;
     QuClashResourceDetailIdTimetable: TLongintField;
     QuClashThemeIdTimetable: TLongintField;
     DSClashTheme: TDataSource;
     QuClashThemeDetailIdTimetable: TLongintField;
     QuThemeCutHourDetailIdTimetable: TLongintField;
-    QuClashRoomClashes: TStringField;
-    QuClashRoomOccupied: TStringField;
     QuClashResourceDetailIdDay: TLongintField;
     QuClashResourceDetailIdHour: TLongintField;
     BtMejorarTimetable: TToolButton;
@@ -165,13 +140,11 @@ type
     procedure ActTimetableResourceExecute(Sender: TObject);
     procedure ActThemeRestrictionNonSatisfiedExecute(Sender: TObject);
     procedure ActResourceRestrictionNoRespetadaExecute(Sender: TObject);
-    procedure ActClashRoomExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure QuClashResourceAfterScroll(DataSet: TDataSet);
     procedure QuClashThemeAfterScroll(DataSet: TDataSet);
     procedure ActThemeCutDayExecute(Sender: TObject);
     procedure ActThemeCutHourExecute(Sender: TObject);
-    procedure ActTimetableRoomTypeExecute(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure DataSourceStateChange(Sender: TObject);
@@ -179,12 +152,11 @@ type
     procedure ActImproveTimeTableExecute(Sender: TObject);
   private
     { Private declarations }
-    FClashRoomForm, FClashThemeForm, FThemeCutHourForm,
+    FClashThemeForm, FThemeCutHourForm,
       FThemeCutDayForm, FClashResourceForm: TMasterDetailEditorForm;
     FThemeRestrictionNonSatisfiedForm,
       FResourceRestrictionNoRespetadaForm: TSingleEditorForm;
     FTimetableResourceForm: TTimetableResourceForm;
-    FTimetableRoomTypeForm: TTimetableRoomTypeForm;
     FTimetableClusterForm: TTimetableClusterForm;
     {$IFNDEF FREEWARE}
     procedure MejorarTimetable;
@@ -343,31 +315,8 @@ begin
   end;
 end;
 
-procedure TTimetableForm.ActClashRoomExecute(Sender: TObject);
-begin
-  inherited;
-  with SourceDataModule, QuClashRoom do
-  begin
-    if TMasterDetailEditorForm.ToggleMasterDetailEditor
-      (Self, FClashRoomForm, ConfigStorage, ActClashRoom, QuClashRoom,
-      QuClashRoomDetail) then
-    begin
-      QuClashRoom.Close;
-      QuClashRoom.Open;
-      QuClashRoomDetail.Close;
-      QuClashRoomDetail.Open;
-    end;
-  end;
-end;
-
 procedure TTimetableForm.FormCreate(Sender: TObject);
 begin
-  QuClashRoomClashes.DisplayLabel := SClashes;
-  QuClashRoomNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuClashRoomNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuClashRoomDetailNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
-  QuClashRoomDetailAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
-  QuClashRoomDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuClashResourceClashes.DisplayLabel := SClashes;
   QuClashResourceNaResource.DisplayLabel := SFlResource_NaResource;
   QuClashResourceNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
@@ -461,20 +410,6 @@ begin
       QuThemeCutHourDetail.Close;
       QuThemeCutHourDetail.Open;
     end;
-  end;
-end;
-
-procedure TTimetableForm.ActTimetableRoomTypeExecute(Sender: TObject);
-begin
-  inherited;
-  if TTimetableRoomTypeForm.ToggleEditor(Self, FTimetableRoomTypeForm,
-    ConfigStorage, ActTimetableRoomType) then
-  begin
-    with SourceDataModule do
-    begin
-      FTimetableRoomTypeForm.LoadHints(TbDay, TbHour, TbTheme);
-    end;
-    FTimetableRoomTypeForm.TBShowClick(nil);
   end;
 end;
 

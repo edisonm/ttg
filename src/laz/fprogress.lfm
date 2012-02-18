@@ -88,44 +88,6 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object PnClashRoomType: TPanel
-      Left = 8
-      Height = 21
-      Top = 102
-      Width = 181
-      Alignment = taLeftJustify
-      BevelOuter = bvLowered
-      Caption = ' Clash Classrooms:'
-      TabOrder = 3
-    end
-    object PnClashRoomTypeValue: TPanel
-      Left = 312
-      Height = 21
-      Top = 102
-      Width = 129
-      Alignment = taLeftJustify
-      BevelOuter = bvLowered
-      Caption = ' Value:'
-      ClientHeight = 21
-      ClientWidth = 129
-      TabOrder = 4
-      object LbClashRoomTypeValue: TLabel
-        Left = 116
-        Height = 19
-        Top = 1
-        Width = 12
-        Align = alRight
-        Alignment = taRightJustify
-        Caption = '0 '
-        Color = clBtnFace
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Layout = tlCenter
-        ParentColor = False
-        ParentFont = False
-        Transparent = False
-      end
-    end
     object PnClashResourceNumber: TPanel
       Left = 192
       Height = 21
@@ -138,34 +100,6 @@ object ProgressForm: TProgressForm
       ClientWidth = 117
       TabOrder = 5
       object LbClashResource: TLabel
-        Left = 104
-        Height = 19
-        Top = 1
-        Width = 12
-        Align = alRight
-        Alignment = taRightJustify
-        Caption = '0 '
-        Color = clBtnFace
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Layout = tlCenter
-        ParentColor = False
-        ParentFont = False
-        Transparent = False
-      end
-    end
-    object PnClashRoomTypeNumber: TPanel
-      Left = 192
-      Height = 21
-      Top = 102
-      Width = 117
-      Alignment = taLeftJustify
-      BevelOuter = bvLowered
-      Caption = ' Number:'
-      ClientHeight = 21
-      ClientWidth = 117
-      TabOrder = 6
-      object LbClashRoomType: TLabel
         Left = 104
         Height = 19
         Top = 1

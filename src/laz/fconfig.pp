@@ -37,11 +37,9 @@ type
     spePopulationSize: TSpinEdit;
     tbsWeigths: TTabSheet;
     Label1: TLabel;
-    Label2: TLabel;
     LbEmptyHours: TLabel;
     LbBrokenThemes: TLabel;
     LbJoinedThemes: TLabel;
-    EdClashRoomType: TEdit;
     EdEmptyHour: TEdit;
     EdBrokenSession: TEdit;
     EdNonScatteredTheme: TEdit;
@@ -180,7 +178,6 @@ begin
       speSeed.Value := Seed;
       speNumIterations.Value := RefreshInterval;
       EdClashTheme.Text := FloatToStr(ClashTheme);
-      EdClashRoomType.Text := FloatToStr(ClashRoomType);
       EdBreakTimetableResource.Text := FloatToStr(BreakTimetableResource);
       EdEmptyHour.Text := FloatToStr(OutOfPositionEmptyHour);
       EdBrokenSession.Text := FloatToStr(BrokenSession);
@@ -214,7 +211,6 @@ begin
       Seed := speSeed.Value;
       RefreshInterval := speNumIterations.Value;
       ClashTheme := StrToInt(EdClashTheme.Text);
-      ClashRoomType := StrToInt(EdClashRoomType.Text);
       BreakTimetableResource := StrToInt(EdBreakTimetableResource.Text);
       OutOfPositionEmptyHour := StrToInt(EdEmptyHour.Text);
       BrokenSession := StrToInt(EdBrokenSession.Text);

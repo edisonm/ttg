@@ -421,14 +421,6 @@ object ConfigForm: TConfigForm
         Caption = 'Clash Resources:'
         ParentColor = False
       end
-      object Label2: TLabel
-        Left = 8
-        Height = 15
-        Top = 61
-        Width = 79
-        Caption = 'Clash Rooms:'
-        ParentColor = False
-      end
       object LbEmptyHours: TLabel
         Left = 237
         Height = 15
@@ -540,14 +532,6 @@ object ConfigForm: TConfigForm
         Width = 87
         Caption = 'Clash Themes:'
         ParentColor = False
-      end
-      object EdClashRoomType: TEdit
-        Left = 117
-        Height = 21
-        Top = 56
-        Width = 112
-        AutoSize = False
-        TabOrder = 2
       end
       object EdEmptyHour: TEdit
         Left = 345

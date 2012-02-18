@@ -42,8 +42,6 @@ type
     procedure SetClashTheme(Value: Integer);
     function GetBreakTimetableResource: Integer;
     procedure SetBreakTimetableResource(Value: Integer);
-    function GetClashRoomType: Integer;
-    procedure SetClashRoomType(Value: Integer);
     function GetOutOfPositionEmptyHour: Integer;
     procedure SetOutOfPositionEmptyHour(Value: Integer);
     function GetBrokenSession: Integer;
@@ -84,7 +82,6 @@ type
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
     property ClashTheme: Integer read GetClashTheme write SetClashTheme;
     property BreakTimetableResource: Integer read GetBreakTimetableResource write SetBreakTimetableResource;
-    property ClashRoomType: Integer read GetClashRoomType write SetClashRoomType;
     property OutOfPositionEmptyHour: Integer read GetOutOfPositionEmptyHour write SetOutOfPositionEmptyHour;
     property BrokenSession: Integer read GetBrokenSession write SetBrokenSession;
     property NonScatteredTheme: Integer read GetNonScatteredTheme write SetNonScatteredTheme;
@@ -242,16 +239,6 @@ begin
   Integers['BreakTimetableResource'] := Value;
 end;
 
-function TTTGConfig.GetClashRoomType: Integer;
-begin
-  Result := Integers['ClashRoomType'];
-end;
-
-procedure TTTGConfig.SetClashRoomType(Value: Integer);
-begin
-  Integers['ClashRoomType'] := Value;
-end;
-
 function TTTGConfig.GetOutOfPositionEmptyHour: Integer;
 begin
   Result := Integers['EmptyHour'];
@@ -388,7 +375,6 @@ begin
   RefreshInterval := 1;
   ClashTheme := 200;
   BreakTimetableResource := 50;
-  ClashRoomType := 200;
   OutOfPositionEmptyHour := 100;
   BrokenSession := 150;
   NonScatteredTheme := 5;

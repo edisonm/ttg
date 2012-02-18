@@ -163,10 +163,10 @@ object MainForm: TMainForm
       ParentShowHint = False
       ShowHint = True
     end
-    object TBRoomType: TToolButton
+    object TBResourceType: TToolButton
       Left = 287
       Top = 2
-      Action = ActRoomType
+      Action = ActResourceType
       ParentShowHint = False
       ShowHint = True
     end
@@ -726,8 +726,8 @@ object MainForm: TMainForm
         }
         OnClick = ActThemeExecute
       end
-      object MIRoomType: TMenuItem
-        Action = ActRoomType
+      object MIResourceType: TMenuItem
+        Action = ActResourceType
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -765,7 +765,7 @@ object MainForm: TMainForm
           0000808000008080000080800000808000008080000080800000808000008080
           0000808000008080000080800000808000008080000080800000
         }
-        OnClick = ActRoomTypeExecute
+        OnClick = ActResourceTypeExecute
       end
       object N6: TMenuItem
         Caption = '-'
@@ -2118,14 +2118,14 @@ object MainForm: TMainForm
       OnExecute = ActThemeExecute
       ShortCut = 49229
     end
-    object ActRoomType: TAction
+    object ActResourceType: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Room Types'
+      Caption = 'Resource Types'
       HelpContext = 220
-      Hint = 'Room Types|Room Types'
+      Hint = 'Resource Types|Resource Types'
       ImageIndex = 10
-      OnExecute = ActRoomTypeExecute
+      OnExecute = ActResourceTypeExecute
       ShortCut = 49217
     end
     object ActResource: TAction

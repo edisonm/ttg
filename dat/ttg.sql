@@ -27,12 +27,6 @@ CREATE TABLE IF NOT EXISTS `Hour`(
     `NaHour` VARCHAR(10) NOT NULL UNIQUE /* Hour Name */,
     `Interval` VARCHAR(21) NOT NULL UNIQUE /* Hour Interval */
 ); /* Academic Hours */
-CREATE TABLE IF NOT EXISTS `RoomType`(
-    `IdRoomType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Room Type Id */,
-    `NaRoomType` VARCHAR(25) NOT NULL UNIQUE /* Room Type Name */,
-    `AbRoomType` VARCHAR(10) NOT NULL UNIQUE /* Room Type Abbreviation */,
-    `Number` INTEGER NOT NULL /* Number of Rooms */
-); /* Types of Room */
 CREATE TABLE IF NOT EXISTS `Cluster`(
     `IdCategory` INTEGER NOT NULL /* Category */,
     `IdParallel` INTEGER NOT NULL /* Parallel */,
@@ -65,14 +59,10 @@ CREATE TABLE IF NOT EXISTS `Distribution`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER NOT NULL /* Parallel Id */,
-    `IdRoomType` INTEGER NOT NULL /* Room Type Id */,
-    `RoomCount` INTEGER /* Number of classrooms needed */,
     `Composition` VARCHAR(40) NOT NULL /* Composition of the Slots for the Theme */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`),
   CONSTRAINT `ClusterDistribution` FOREIGN KEY (`IdCategory`,`IdParallel`)
     REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `RoomTypeDistribution` FOREIGN KEY (`IdRoomType`)
-    REFERENCES `RoomType`(`IdRoomType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `ThemeDistribution` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Distribution of Workload */

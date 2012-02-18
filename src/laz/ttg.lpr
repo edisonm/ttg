@@ -28,7 +28,6 @@ uses
   fconfig {ConfigForm},
   FTimetableCluster {TimetableClusterForm},
   FMasterDetailEditor {MasterDetailEditorForm},
-  FTimetableRoomType {TimetableRoomType},
   FSplash {SplashForm},
   FCluster {ClusterForm},
   FSingleEditor {SingleEditorForm},

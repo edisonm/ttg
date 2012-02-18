@@ -1,5 +1,5 @@
 inherited TimetableResourceForm: TTimetableResourceForm
-  Left = 442
+  Left = 435
   Height = 462
   Top = 291
   Width = 804
@@ -10,6 +10,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  Visible = True
   inherited TBEditor: TToolBar
     Width = 804
     inherited BtOk: TToolButton
@@ -302,30 +303,12 @@ inherited TimetableResourceForm: TTimetableResourceForm
     SQL.Strings = (
       'select'
       ' IdTimetable,'
-      ' IdResource,'
-      ' Distribution.IdCategory,'
-      ' Distribution.IdParallel,'
-      ' IdHour,'
-      ' IdDay,'
-      ' Distribution.IdTheme,'
-      ' 0 as IsRequirement'
-      'from'
-      ' TimetableDetail inner join Distribution on'
-      ' (TimetableDetail.IdTheme = Distribution.IdTheme)'
-      ' and (TimetableDetail.IdCategory = Distribution.IdCategory)'
-      ' and (TimetableDetail.IdParallel = Distribution.IdParallel)'
-      'where IdTimetable=:IdTimetable'
-      ' and IdResource=:IdResource'
-      'union all'
-      'select'
-      ' IdTimetable,'
       ' Requirement.IdResource as IdResource,'
       ' Distribution.IdCategory,'
       ' Distribution.IdParallel,'
       ' IdHour,'
       ' IdDay,'
-      ' Distribution.IdTheme,'
-      ' 1 as IsRequirement'
+      ' Distribution.IdTheme'
       'from'
       ' Requirement inner join Distribution on'
       '  Requirement.IdTheme = Distribution.IdTheme'
@@ -401,7 +384,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdParallel'
-      Index = 4
+      Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -412,7 +395,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
-      Index = 5
+      Index = 4
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -423,7 +406,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
-      Index = 6
+      Index = 5
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -434,18 +417,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTheme'
-      Index = 7
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Visible = False
-    end
-    object QuTimetableResourceIsRequirement: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IsRequirement'
-      Index = 8
+      Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -456,7 +428,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       DisplayWidth = 5
       FieldKind = fkLookup
       FieldName = 'AbCategory'
-      Index = 9
+      Index = 7
       KeyFields = 'IdCategory'
       LookupCache = False
       LookupDataSet = SourceDataModule.TbCategory
@@ -471,7 +443,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       DisplayWidth = 5
       FieldKind = fkLookup
       FieldName = 'NaParallel'
-      Index = 11
+      Index = 8
       KeyFields = 'IdParallel'
       LookupCache = False
       LookupDataSet = SourceDataModule.TbParallel
@@ -486,7 +458,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       DisplayWidth = 15
       FieldKind = fkLookup
       FieldName = 'NaTheme'
-      Index = 12
+      Index = 9
       KeyFields = 'IdTheme'
       LookupCache = False
       LookupDataSet = SourceDataModule.TbTheme
@@ -501,7 +473,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       DisplayWidth = 40
       FieldKind = fkCalculated
       FieldName = 'Name'
-      Index = 13
+      Index = 10
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -578,7 +550,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       DisplayWidth = 15
       FieldKind = fkData
       FieldName = 'NaResource'
-      Index = 3
+      Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False

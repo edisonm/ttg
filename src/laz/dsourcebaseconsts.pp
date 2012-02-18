@@ -27,7 +27,6 @@ resourcestring
   STbParallel = 'Parallels';
   STbDay = 'Working Days';
   STbHour = 'Academic Hours';
-  STbRoomType = 'Types of Room';
   STbCluster = 'Clusters';
   STbTheme = 'Themes';
   STbResourceType = 'ResourceType';
@@ -56,10 +55,6 @@ resourcestring
   SFlHour_IdHour = 'Id';
   SFlHour_NaHour = 'Name';
   SFlHour_Interval = 'Interval';
-  SFlRoomType_IdRoomType = 'Id';
-  SFlRoomType_NaRoomType = 'Name';
-  SFlRoomType_AbRoomType = 'Abbreviation';
-  SFlRoomType_Number = 'Number';
   SFlCluster_IdCategory = 'Category';
   SFlCluster_IdParallel = 'Parallel';
   SFlTheme_IdTheme = 'Id';
@@ -74,8 +69,6 @@ resourcestring
   SFlDistribution_IdTheme = 'Theme';
   SFlDistribution_IdCategory = 'Category';
   SFlDistribution_IdParallel = 'Parallel';
-  SFlDistribution_IdRoomType = 'Room Type';
-  SFlDistribution_RoomCount = 'Room Count';
   SFlDistribution_Composition = 'Composition';
   SFlJoinedCluster_IdTheme = 'Theme';
   SFlJoinedCluster_IdCategory = 'Category';

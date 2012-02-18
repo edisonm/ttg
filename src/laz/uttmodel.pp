@@ -41,15 +41,13 @@ type
 
   TTimetableModel = class(TModel)
   private
-    FClashThemeValue, FClashRoomTypeValue,
-      FOutOfPositionEmptyHourValue, FBrokenSessionValue,
+    FClashThemeValue, FOutOfPositionEmptyHourValue, FBrokenSessionValue,
       FBreakTimetableResourceValue, FNonScatteredThemeValue: Integer;
     FTimeSlotToDay, FTimeSlotToHour, FDayToMaxTimeSlot, FSessionToDistribution,
-      FSessionToTheme, FSessionToRoomType, FSessionToRoomCount, FRoomTypeToNumber,
+      FSessionToTheme, FClusterToCategory, FResourceToNumber,
       FThemeRestrictionToTheme, FThemeRestrictionToTimeSlot, FResourceToResourceType,
       FThemeRestrictionToThemeRestrictionType, FResourceRestrictionToResource,
       FResourceRestrictionToTimeSlot, FResourceRestrictionToResourceRestrictionType,
-      FDistributionToRoomType, FDistributionToRoomCount, FClusterToCategory,
       FClusterToParallel, FDistributionToCluster, FClusterToSessionCount,
       FThemeRestrictionTypeToValue, FResourceRestrictionTypeToValue, FResourceTypeToValue,
       FThemeRestrictionToValue, FResourceRestrictionToValue: TDynamicIntegerArray;
@@ -57,12 +55,12 @@ type
     FDayHourToTimeSlot, FCategoryParallelToCluster,
       FDistributionToResources, FClusterThemeToDistribution, FClusterThemeCount,
       FTimetableDetailPattern, FDistributionToSessions,
-      FResourceTimeSlotToResourceRestrictionType,
+      FResourceTimeSlotToResourceRestrictionType, FDistributionResourceCount,
       FClusterJoinedClusterToDistribution, FClusterJoinedClusterToCluster,
       FThemeTimeSlotToThemeRestrictionType: TDynamicIntegerArrayArray;
     FThemeCount, FThemeRestrictionTypeCount, FResourceTypeCount, FResourceRestrictionTypeCount,
       FClusterCount, FDayCount, FHourCount, FTimeSlotCount, FResourceCount,
-      FCategoryCount, FRoomTypeCount, FDistributionCount, FJoinedClusterCount: Integer;
+      FCategoryCount, FDistributionCount, FJoinedClusterCount: Integer;
     FParallelToIdParallel, FThemeToIdTheme, FDayToIdDay, FHourToIdHour,
       FCategoryToIdCategory: TDynamicIntegerArray;
     FIdCategoryToCategory, FIdParallelToParallel, FIdDayToDay,
@@ -74,12 +72,12 @@ type
     property TimetableDetailPattern: TDynamicIntegerArrayArray read FTimetableDetailPattern;
     function GetElitistCount: Integer; override;
   public
-    procedure Configure(AClashThemeValue, AClashRoomTypeValue,
-      ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
-      ANonScatteredThemeValue: Integer);
-    constructor Create(AClashThemeValue, AClashRoomTypeValue,
-      ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue, ABrokenSessionValue,
-      ANonScatteredThemeValue: Integer);
+    procedure Configure(AClashThemeValue, ABreakTimetableResourceValue,
+                        AOutOfPositionEmptyHourValue, ABrokenSessionValue,
+                        ANonScatteredThemeValue: Integer);
+    constructor Create(AClashThemeValue, ABreakTimetableResourceValue,
+                       AOutOfPositionEmptyHourValue, ABrokenSessionValue,
+                       ANonScatteredThemeValue: Integer);
     destructor Destroy; override;
     procedure ReportParameters(AReport: TStrings);
     function NewIndividual: TIndividual; override;
@@ -87,7 +85,6 @@ type
     property ClusterCount: Integer read FClusterCount;
     property ClashThemeValue: Integer read FClashThemeValue;
     property BreakTimetableResourceValue: Integer read FBreakTimetableResourceValue;
-    property ClashRoomTypeValue: Integer read FClashRoomTypeValue;
     property OutOfPositionEmptyHourValue: Integer read FOutOfPositionEmptyHourValue;
     property BrokenSessionValue: Integer read FBrokenSessionValue;
     property NonScatteredThemeValue: Integer read FNonScatteredThemeValue;
@@ -138,7 +135,6 @@ type
   protected
     FResourceTimeSlotCount: TDynamicIntegerArrayArray;
     FThemeTimeSlotCount: TDynamicIntegerArrayArray;
-    FRoomTypeTimeSlotCount: TDynamicIntegerArrayArray;
     FClusterDayThemeCount: TDynamicIntegerArrayArrayArray;
     FClusterDayThemeAccumulated: TDynamicIntegerArrayArrayArray;
     FThemeRestrictionTypeToThemeCount: TDynamicIntegerArray;
@@ -148,7 +144,6 @@ type
     FDayResourceMaxHour: TDynamicIntegerArrayArray;
     FDayResourceEmptyHourCount: TDynamicIntegerArrayArray;
     FClashTheme: Integer;
-    FClashRoomType: Integer;
     FBreakTimetableResource: Integer;
     FOutOfPositionEmptyHour: Integer;
     FNonScatteredTheme: Integer;
@@ -173,7 +168,6 @@ type
     function GetResourceRestrictionValue: Integer;
     function GetBreakTimetableResourceValue: Integer;
     function GetBrokenSessionValue: Integer;
-    function GetClashRoomTypeValue: Integer;
     function GetValue: Integer;
     procedure RandomizeKey(var ARandomKey: TDynamicIntegerArray;
       ACluster: Integer);
@@ -212,11 +206,9 @@ type
     property NonScatteredTheme: Integer read FTablingInfo.FNonScatteredTheme;
     property BrokenSession: Integer read FTablingInfo.FBrokenSession;
     property ClashTheme: Integer read FTablingInfo.FClashTheme;
-    property ClashRoomType: Integer read FTablingInfo.FClashRoomType;
     property ClashResourceValue: Integer read GetClashResourceValue;
     property ClashThemeValue: Integer read GetClashThemeValue;
     property BreakTimetableResourceValue: Integer read GetBreakTimetableResourceValue;
-    property ClashRoomTypeValue: Integer read GetClashRoomTypeValue;
     property OutOfPositionEmptyHourValue: Integer read GetOutOfPositionEmptyHourValue;
     property BrokenSessionValue: Integer read GetBrokenSessionValue;
     property NonScatteredThemeValue: Integer read GetNonScatteredThemeValue;
@@ -284,20 +276,19 @@ uses
   SysUtils, ZSysUtils, MTProcs, DSource, USortAlgs, UTTGConsts, dsourcebaseconsts;
 
 constructor TTimetableModel.Create(AClashThemeValue,
-                                   AClashRoomTypeValue,
                                    ABreakTimetableResourceValue,
                                    AOutOfPositionEmptyHourValue,
                                    ABrokenSessionValue,
                                    ANonScatteredThemeValue: Integer);
 var
-  FMinIdResource, FMinIdResourceType, FMinIdTheme, FMinIdRoomType,
+  FMinIdResource, FMinIdResourceType, FMinIdTheme,
   FMinIdResourceRestrictionType, FMinIdThemeRestrictionType: Integer;
   FDistributionToTheme, FIdThemeToTheme, FIdResourceToResource,
   FIdResourceTypeToResourceType, FResourceTypeToIdResourceType,
-  FIdRoomTypeARoomType, FIdResourceRestrictionTypeToResourceRestrictionType,
+  FIdResourceRestrictionTypeToResourceRestrictionType,
   FIdThemeRestrictionTypeToThemeRestrictionType, FClusterToDuration,
   FResourceToIdResource, FResourceRestrictionTypeAIdResourceRestrictionType,
-  FRoomTypeAIdRoomType, FThemeRestrictionTypeAIdThemeRestrictionType: TDynamicIntegerArray;
+  FThemeRestrictionTypeAIdThemeRestrictionType: TDynamicIntegerArray;
   
   procedure Load(ATable: TDataSet; const ALstName: string; out FMinIdLst: Integer;
     out FIdLstALst: TDynamicIntegerArray;
@@ -427,25 +418,6 @@ var
       First;
     end;
   end;
-  procedure LoadRoomType;
-  var
-    RoomType: Integer;
-    VFieldNumber: TField;
-  begin
-    with SourceDataModule.TbRoomType do
-    begin
-      IndexFieldNames := 'IdRoomType';
-      First;
-      SetLength(FRoomTypeToNumber, RecordCount);
-      VFieldNumber := FindField('Number');
-      for RoomType := 0 to RecordCount - 1 do
-      begin
-        FRoomTypeToNumber[RoomType] := VFieldNumber.AsInteger;
-        Next;
-      end;
-      First;
-    end;
-  end;
   procedure LoadThemeRestrictionType;
   var
     ThemeRestrictionType: Integer;
@@ -487,17 +459,20 @@ var
   procedure LoadResource;
   var
     Resource: Integer;
-    FieldResourceType: TField;
+    FieldResourceType, FieldResourceNumber: TField;
   begin
     with SourceDataModule.TbResource do
     begin
       IndexFieldNames := 'IdResource';
       First;
       FieldResourceType := FindField('IdResourceType');
+      FieldResourceNumber := FindField('NumResource');
       SetLength(FResourceToResourceType, FResourceCount);
+      SetLength(FResourceToNumber, FResourceCount);
       for Resource := 0 to FResourceCount - 1 do
       begin
         FResourceToResourceType[Resource] := FieldResourceType.AsInteger;
+        FResourceToNumber[Resource] := FieldResourceNumber.AsInteger;
         Next;
       end;
       First;
@@ -609,10 +584,9 @@ var
   end;
   procedure LoadDistribution;
   var
-    Theme, Category, Parallel, Session1, Distribution, RoomCount,
-      VCluster, Session2, Session, RoomType, VPos: Integer;
-    VFieldTheme, VFieldCategory, VFieldParallel,
-      VFieldRoomType, VFieldRoomCount, VFieldComposition: TField;
+    Theme, Category, Parallel, Session1, Distribution, VCluster,
+      Session2, Session, VPos: Integer;
+    VFieldTheme, VFieldCategory, VFieldParallel, VFieldComposition: TField;
     VSessionToDuration, VSessionToDistribution: array [0 .. 16383] of Integer;
     Composition: string;
   begin
@@ -623,14 +597,10 @@ var
       VFieldTheme := FindField('IdTheme');
       VFieldCategory := FindField('IdCategory');
       VFieldParallel := FindField('IdParallel');
-      VFieldRoomType := FindField('IdRoomType');
-      VFieldRoomCount := FindField('RoomCount');
       VFieldComposition := FindField('Composition');
       FDistributionCount := RecordCount;
       // SetLength(FDistributionAAsignatura, RecordCount);
       SetLength(FDistributionToCluster, FDistributionCount);
-      SetLength(FDistributionToRoomType, FDistributionCount);
-      SetLength(FDistributionToRoomCount, FDistributionCount);
       SetLength(FDistributionToSessions, FDistributionCount);
       SetLength(FDistributionToTheme, FDistributionCount);
       SetLength(FClusterThemeCount, FClusterCount, FThemeCount);
@@ -648,12 +618,8 @@ var
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
           FMinIdParallel];
-        RoomType := FIdRoomTypeARoomType[VFieldRoomType.AsInteger - FMinIdRoomType];
-        RoomCount := VFieldRoomCount.AsInteger;
         VCluster := FCategoryParallelToCluster[Category, Parallel];
         FDistributionToCluster[Distribution] := VCluster;
-        FDistributionToRoomType[Distribution] := RoomType;
-        FDistributionToRoomCount[Distribution] := RoomCount;
         FDistributionToTheme[Distribution] := Theme;
         FClusterThemeToDistribution[VCluster, Theme] := Distribution;
         Composition := VFieldComposition.AsString;
@@ -678,8 +644,6 @@ var
       end;
       SetLength(FSessionToDistribution, Session2);
       SetLength(FSessionToTheme, Session2);
-      SetLength(FSessionToRoomType, Session2);
-      SetLength(FSessionToRoomCount, Session2);
       Move(VSessionToDuration[0], FSessionToDuration[0], Session2 * SizeOf(Integer));
       FSessionToDuration[-1] := 1;
       Move(VSessionToDistribution[0], FSessionToDistribution[0],
@@ -688,8 +652,6 @@ var
       begin
         Distribution := FSessionToDistribution[Session];
         FSessionToTheme[Session] := FDistributionToTheme[Distribution];
-        FSessionToRoomType[Session] := FDistributionToRoomType[Distribution];
-        FSessionToRoomCount[Session] := FDistributionToRoomCount[Distribution];
       end;
     end;
   end;
@@ -698,7 +660,7 @@ var
     Requirement, Counter, Cluster, Parallel, Category, Theme,
     RequirementCount, Distribution, Resource: Integer;
     VFieldTheme, VFieldCategory, VFieldParallel,
-    VFieldResource: TField;
+    VFieldResource, VFieldNumRequirement: TField;
   begin
     with SourceDataModule.TbRequirement do
     begin
@@ -706,10 +668,15 @@ var
       First;
       RequirementCount := RecordCount;
       SetLength(FDistributionToResources, FDistributionCount, 0);
+      SetLength(FDistributionResourceCount, FDistributionCount, FResourceCount);
+      for Distribution := 0 to FDistributionCount - 1 do
+        for Resource := 0 to FResourceCount - 1 do
+          FDistributionResourceCount[Distribution, Resource] := 0;
       VFieldTheme := FindField('IdTheme');
       VFieldCategory := FindField('IdCategory');
       VFieldParallel := FindField('IdParallel');
       VFieldResource := FindField('IdResource');
+      VFieldNumRequirement := FindField('NumRequirement');
       for Requirement := 0 to RequirementCount - 1 do
       begin
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
@@ -721,6 +688,7 @@ var
         Counter := Length(FDistributionToResources[Distribution]);
         SetLength(FDistributionToResources[Distribution], Counter + 1);
         FDistributionToResources[Distribution, Counter] := Resource;
+        FDistributionResourceCount[Distribution, Resource] := VFieldNumRequirement.AsInteger;
         Next;
       end;
       First;
@@ -821,7 +789,7 @@ begin
   inherited Create;
   with SourceDataModule do
   begin
-    Configure(AClashThemeValue, AClashRoomTypeValue,
+    Configure(AClashThemeValue,
       ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue,
       ABrokenSessionValue, ANonScatteredThemeValue);
     Load(TbResourceType, 'IdResourceType', FMinIdResourceType,
@@ -851,12 +819,8 @@ begin
       FIdResourceRestrictionTypeToResourceRestrictionType,
       FResourceRestrictionTypeAIdResourceRestrictionType);
     FResourceRestrictionTypeCount := Length(FResourceRestrictionTypeAIdResourceRestrictionType);
-    Load(TbRoomType, 'IdRoomType', FMinIdRoomType, FIdRoomTypeARoomType,
-      FRoomTypeAIdRoomType);
-    FRoomTypeCount := Length(FRoomTypeAIdRoomType);
     LoadTimeSlot;
     LoadCluster;
-    LoadRoomType;
     LoadResourceType;
     LoadResource;
     LoadResourceRestrictionType;
@@ -871,12 +835,11 @@ begin
 end;
 
 procedure TTimetableModel.Configure(AClashThemeValue,
-  AClashRoomTypeValue, ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue,
+  ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue,
   ABrokenSessionValue, ANonScatteredThemeValue: Integer);
 begin
   FClashThemeValue := AClashThemeValue;
   FBreakTimetableResourceValue := ABreakTimetableResourceValue;
-  FClashRoomTypeValue := AClashRoomTypeValue;
   FOutOfPositionEmptyHourValue := AOutOfPositionEmptyHourValue;
   FBrokenSessionValue := ABrokenSessionValue;
   FNonScatteredThemeValue := ANonScatteredThemeValue;
@@ -898,10 +861,8 @@ begin
         '  %0:-29s %8.2f'#13#10 +
         '  %0:-29s %8.2f'#13#10 +
         '  %0:-29s %8.2f'#13#10 +
-        '  %0:-29s %8.2f'#13#10 +
         '  %0:-29s %8.2f', [SWeights,
           SClashTheme              + ':', ClashThemeValue,
-          SClashRoomType           + ':', ClashRoomTypeValue,
           SBreakTimetableResource  + ':', BreakTimetableResourceValue,
           SOutOfPositionEmptyHour  + ':', OutOfPositionEmptyHourValue,
           SBrokenSession           + ':', BrokenSessionValue,
@@ -1010,7 +971,6 @@ begin
     begin
       SetLength(FThemeTimeSlotCount, FThemeCount, FTimeSlotCount);
       SetLength(FResourceTimeSlotCount, FResourceCount, FTimeSlotCount);
-      SetLength(FRoomTypeTimeSlotCount, FRoomTypeCount, FTimeSlotCount);
       SetLength(FClusterDayThemeCount, FClusterCount, FDayCount, FThemeCount);
       SetLength(FClusterDayThemeAccumulated, FClusterCount, FDayCount, FThemeCount);
       SetLength(FDayResourceMinHour, FDayCount, FResourceCount);
@@ -1028,10 +988,8 @@ begin
   case Index of
     0:
       Result := BrokenSession;
-    1:
-      Result := ClashRoomType;
     else
-      Result := ClashResourceType[Index - 2];
+      Result := ClashResourceType[Index - 1];
   end;
 end;
 
@@ -1093,7 +1051,7 @@ end;
 procedure TTimetable.DeltaValues(Delta, ACluster, TimeSlot1, TimeSlot2: Integer);
 var
   ThemeRestrictionType, ResourceRestrictionType, TimeSlot, TimeSlot0, Day, DDay,
-  Day1, Day2, Hour, Session, Resource, RoomType, Duration, Theme, Limit, Requirement,
+  Day1, Day2, Hour, Session, Resource, Duration, Theme, Limit, Requirement, Count,
   JoinedCluster, Distribution, DeltaBreakTimetableResource, MinTimeSlot, MaxTimeSlot,
   Cluster1: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
@@ -1112,14 +1070,14 @@ begin
       if Session >= 0 then
       begin
         Theme := FSessionToTheme[Session];
-        RoomType := FSessionToRoomType[Session];
         Day := FTimeSlotToDay[TimeSlot];
         Hour := FTimeSlotToHour[TimeSlot];
         Distribution := FSessionToDistribution[Session];
         for Requirement := 0 to High(FDistributionToResources[Distribution]) do
         begin
           Resource := FDistributionToResources[Distribution, Requirement];
-          if FResourceTimeSlotCount[Resource, TimeSlot] = Limit then
+          Count := FDistributionResourceCount[Distribution, Resource];
+          if FResourceTimeSlotCount[Resource, TimeSlot] = Limit * Count then
           begin
             if Delta > 0 then
             begin
@@ -1186,17 +1144,15 @@ begin
               end;
             end;
           end;
-          if FResourceTimeSlotCount[Resource, TimeSlot] > Limit then
-            Inc(FClashResourceType[FResourceToResourceType[Resource]], Delta);
-          Inc(FResourceTimeSlotCount[Resource, TimeSlot], Delta);
+          if FResourceTimeSlotCount[Resource, TimeSlot]
+               >= FResourceToNumber[Resource] + Limit * Count then
+            Inc(FClashResourceType[FResourceToResourceType[Resource]], Delta * Count);
+          Inc(FResourceTimeSlotCount[Resource, TimeSlot], Delta * Count);
           ResourceRestrictionType := FResourceTimeSlotToResourceRestrictionType[Resource, TimeSlot];
           if ResourceRestrictionType >= 0 then
             Inc(FResourceRestrictionTypeToResourceCount[ResourceRestrictionType], Delta);
         end;
         Inc(FThemeTimeSlotCount[Theme, TimeSlot], Delta);
-        if FRoomTypeTimeSlotCount[RoomType, TimeSlot] >= FRoomTypeToNumber[RoomType] + Limit then
-          Inc(FClashRoomType, Delta * FSessionToRoomCount[Session]);
-        Inc(FRoomTypeTimeSlotCount[RoomType, TimeSlot], Delta);
         ThemeRestrictionType := FThemeTimeSlotToThemeRestrictionType[Theme, TimeSlot];
         if ThemeRestrictionType >= 0 then
           Inc(FThemeRestrictionTypeToThemeCount[ThemeRestrictionType], Delta);
@@ -1275,7 +1231,6 @@ var
   {$IFDEF DEBUG}
   Value1, Value2: Integer;
   ClashTheme2: Integer;
-  ClashRoomType2: Integer;
   BreakTimetableResource2: Integer;
   OutOfPositionEmptyHour2: Integer;
   ThemeRestrictionValue2: Integer;
@@ -1316,7 +1271,6 @@ begin
     end;
     FValue := GetValue;
     {$IFDEF DEBUG}
-    ClashRoomType2 := FClashRoomType;
     ClashTheme2 := FClashTheme;
     OutOfPositionEmptyHour2 := FOutOfPositionEmptyHour;
     NonScatteredTheme2 := FNonScatteredTheme;
@@ -1332,7 +1286,6 @@ begin
       'Value1                   %f - %f'#13#10 +
       'Value2                   %f - %f'#13#10 +
       'ClashTheme               %d - %d'#13#10 +
-      'ClashRoomType            %d - %d'#13#10 +
       'OutOfPositionEmptyHour   %d - %d'#13#10 +
       'NonScatteredTheme        %d - %d'#13#10 +
       'ThemeRestrictionValue    %f - %f'#13#10 +
@@ -1344,7 +1297,6 @@ begin
         Result, Value1,
         FValue, Value2,
         FClashTheme, ClashTheme2,
-        FClashRoomType, ClashRoomType2,
         FOutOfPositionEmptyHour, OutOfPositionEmptyHour2,
         FNonScatteredTheme, NonScatteredTheme2,
         ThemeRestrictionValue, ThemeRestrictionValue2,
@@ -1408,8 +1360,6 @@ begin
     Add('-------------------------------------------------------------------');
     Add(Format(SRowFormat, [SClashTheme + ':', FClashTheme,
       TTimetableModel(Model).ClashThemeValue, ClashThemeValue]));
-    Add(Format(SRowFormat, [SClashRoomType + ':', FClashRoomType,
-      TTimetableModel(Model).ClashRoomTypeValue, ClashRoomTypeValue]));
     Add(Format(SRowFormat, [SBreakTimetableResource + ':', BreakTimetableResource,
       TTimetableModel(Model).BreakTimetableResourceValue, BreakTimetableResourceValue]));
     Add(Format(SRowFormat, [SOutOfPositionEmptyHour + ':', OutOfPositionEmptyHour,
@@ -1543,16 +1493,10 @@ begin
     TablingInfo.FBreakTimetableResource;
 end;
 
-function TTimetable.GetClashRoomTypeValue: Integer;
-begin
-  Result := TTimetableModel(Model).ClashRoomTypeValue * TablingInfo.FClashRoomType;
-end;
-
 function TTimetable.GetValue: Integer;
 begin
   with TablingInfo do
     Result :=
-      ClashRoomTypeValue +
       ClashResourceValue +
       ClashThemeValue +
       OutOfPositionEmptyHourValue +
@@ -1576,7 +1520,7 @@ end;
 
 procedure TTimetable.Assign(AIndividual: TIndividual);
 var
-  VCluster, Theme, Resource, RoomType, Day: Integer;
+  VCluster, Theme, Resource, Day: Integer;
   ATimetable: TTimetable;
 begin
   inherited;
@@ -1587,7 +1531,6 @@ begin
       Move(ATimetable.ClusterTimeSlotToSession[VCluster, 0],
         ClusterTimeSlotToSession[VCluster, 0], FTimeSlotCount * SizeOf(Integer));
     FClashTheme := ATimetable.TablingInfo.FClashTheme;
-    FClashRoomType := ATimetable.TablingInfo.FClashRoomType;
     FBreakTimetableResource := ATimetable.TablingInfo.FBreakTimetableResource;
     FOutOfPositionEmptyHour := ATimetable.TablingInfo.FOutOfPositionEmptyHour;
     FBrokenSession := ATimetable.TablingInfo.FBrokenSession;
@@ -1617,9 +1560,9 @@ begin
       Move(ATimetable.TablingInfo.FDayResourceEmptyHourCount[Day, 0],
         FDayResourceEmptyHourCount[Day, 0], FResourceCount * SizeOf(Integer));
     end;
-    for RoomType := 0 to FRoomTypeCount - 1 do
-      Move(ATimetable.TablingInfo.FRoomTypeTimeSlotCount[RoomType, 0],
-        TablingInfo.FRoomTypeTimeSlotCount[RoomType, 0],
+    for Resource := 0 to FResourceCount - 1 do
+      Move(ATimetable.TablingInfo.FResourceTimeSlotCount[Resource, 0],
+        TablingInfo.FResourceTimeSlotCount[Resource, 0],
         FTimeSlotCount * SizeOf(Integer));
     for VCluster := 0 to FClusterCount - 1 do
       for Day := 0 to FDayCount - 1 do
@@ -1914,12 +1857,11 @@ end;
 procedure TTimetable.Reset;
 var
   Resource, ResourceType, TimeSlot, Theme, ThemeRestrictionType,
-    ResourceRestrictionType, VCluster, Day, RoomType: Integer;
+    ResourceRestrictionType, VCluster, Day: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
     FClashTheme := 0;
-    FClashRoomType := 0;
     FOutOfPositionEmptyHour := 0;
     FBreakTimetableResource := 0;
     FBrokenSession := 0;
@@ -1943,8 +1885,6 @@ begin
         FResourceTimeSlotCount[Resource, TimeSlot] := 0;
       for Theme := 0 to FThemeCount - 1 do
         FThemeTimeSlotCount[Theme, TimeSlot] := 0;
-      for RoomType := 0 to FRoomTypeCount - 1 do
-        FRoomTypeTimeSlotCount[RoomType, TimeSlot] := 0;
     end;
     for VCluster := 0 to FClusterCount - 1 do
       for Day := 0 to FDayCount - 1 do

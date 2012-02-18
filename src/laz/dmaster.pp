@@ -21,16 +21,11 @@ type
     QuResourceRestrictionCount: TZTable;
     QuResourceRestrictionCountIdResource: TLongintField;
     QuResourceRestrictionCountNumber: TLongintField;
-    TbTmpRoomTypeLoad: TZTable;
-    TbTmpRoomTypeLoadIdRoomType: TLongintField;
-    TbTmpRoomTypeLoadAbRoomType: TStringField;
-    TbTmpRoomTypeLoadLoad: TLongintField;
     QuNewIdTimetable: TZReadOnlyQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   private
     { Private declarations }
-    FStringsShowRoomType: TStrings;
     FStringsShowResource: TStrings;
     FStringsShowCluster: TStrings;
     FConfigStorage: TTTGConfig;
@@ -49,7 +44,6 @@ type
     procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer);
     procedure LoadFromTextFile(const AFileName: TFileName);
     procedure SaveToTextFile(const AFileName: TFileName);
-    property StringsShowRoomType: TStrings read FStringsShowRoomType;
     property StringsShowResource: TStrings read FStringsShowResource;
     property StringsShowCluster: TStrings read FStringsShowCluster;
     property ConfigStorage: TTTGConfig read FConfigStorage;
@@ -112,11 +106,11 @@ function TMasterDataModule.PerformAllChecks(AMainStrings, ASubStrings:
 var
   HaveProblems: Boolean;
   iTimeSlotCount: Integer;
-  procedure ObtenerTimeSlotCount;
+  procedure GetTimeSlotCount;
   begin
     iTimeSlotCount := SourceDataModule.TbTimeSlot.RecordCount;
   end;
-  procedure ObtenerResourceWorkLoad;
+  procedure GetResourceWorkLoad;
   var
     IdResource, IdResource1: Integer;
     s: string;
@@ -148,40 +142,6 @@ var
             Value := Value + CompositionToDuration(TbDistribution.FindField('Composition').AsString);
         end;
         TbTmpResourceWorkLoad.Post;
-        Next;
-      end;
-      IndexFieldNames := s;
-    end;
-  end;
-  procedure ObtenerRoomTypeLoad;
-  var
-    IdRoomType, IdRoomType1: Integer;
-    s: string;  
-  begin
-    with SourceDataModule, TbDistribution do
-    begin
-      TbTmpRoomTypeLoad.Open;
-      s := IndexFieldNames;
-      IndexFieldNames := 'IdRoomType';
-      First;
-      IdRoomType := -$7FFFFFFF;
-      while not Eof do
-      begin
-        IdRoomType1 := TbDistribution.FindField('IdRoomType').AsInteger;
-        if IdRoomType <> IdRoomType1 then
-        begin
-          TbTmpRoomTypeLoad.Append;
-          TbTmpRoomTypeLoadIdRoomType.Value := TbDistribution.FindField('IdRoomType').AsInteger;
-          TbTmpRoomTypeLoadLoad.Value := CompositionToDuration(TbDistribution.FindField('Composition').AsString);
-          IdRoomType := IdRoomType1;
-        end
-        else
-        begin
-          TbTmpRoomTypeLoad.Edit;
-          with TbTmpRoomTypeLoadLoad do
-            Value := Value + CompositionToDuration(TbDistribution.FindField('Composition').AsString);
-        end;
-        TbTmpRoomTypeLoad.Post;
         Next;
       end;
       IndexFieldNames := s;
@@ -295,66 +255,6 @@ var
       end;
   end;
 
-  // Chequea que existan las aulas suficientes para una materia dada
-  procedure CheckRoomTypeLoad;
-  var
-    c: Integer;
-    vMainMin, vMainMax, vSubMin, vSubMax: Integer;
-    s: string;
-    bRoomTypeActive, HaveInternalProblems: Boolean;
-  begin
-    with SourceDataModule, TbTmpRoomTypeLoad do
-      if not IsEmpty then
-      begin
-        HaveInternalProblems := False;
-        bRoomTypeActive := TbRoomType.Active;
-        try
-          TbRoomType.First;
-          First;
-          s := '%s; %d; %d';
-          ASubStrings.Add(SRoomTypesWithoutProblems);
-          vSubMin := ASubStrings.Count;
-          ASubStrings.Add(SRoomTypesLoadHead);
-          while not Eof do
-          begin
-            if TbRoomType.Locate('IdRoomType', TbTmpRoomTypeLoadIdRoomType.AsInteger, []) then
-            begin
-              c := iTimeSlotCount * TbRoomType.FindField('Number').AsInteger;
-              if TbTmpRoomTypeLoadLoad.Value > c then
-              begin
-                if not HaveInternalProblems then
-                begin
-                  AMainStrings.Add(SRoomTypesWithProblems);
-                  vMainMin := AMainStrings.Count;
-                  AMainStrings.Add(SRoomTypesLoadHead);
-                end;
-                AMainStrings.Add(Format(s, [TbTmpRoomTypeLoadAbRoomType.Value,
-                  c, TbTmpRoomTypeLoadLoad.Value]));
-                HaveProblems := True;
-                HaveInternalProblems := True;
-              end
-              else
-              begin
-                ASubStrings.Add(Format(s, [TbTmpRoomTypeLoadAbRoomType.Value,
-                  c, TbTmpRoomTypeLoadLoad.Value]));
-              end;
-            end;
-            Next;
-          end;
-        finally
-          TbRoomType.Active := bRoomTypeActive;
-        end;
-        if HaveProblems then
-        begin
-          vMainMax := AMainStrings.Count - 1;
-          EqualSpaced(AMainStrings, vMainMin, vMainMax, ';');
-          AMainStrings.Add('');
-        end;
-        vSubMax := ASubStrings.Count - 1;
-        EqualSpaced(ASubStrings, vSubMin, vSubMax, ';');
-        ASubStrings.Add('');
-      end;
-  end;
   // Comprueba que no hayan asignadas mas horas de materias a Categories que periodos
   procedure CheckCategoryLoad;
   var
@@ -439,18 +339,15 @@ begin
   ASubStrings.BeginUpdate;
   HaveProblems := False;
   try
-    ObtenerTimeSlotCount;
-    ObtenerResourceWorkLoad;
-    ObtenerRoomTypeLoad;
+    GetTimeSlotCount;
+    GetResourceWorkLoad;
     CheckResourceWorkLoad;
     CheckResourceRestrictionCount;
-    CheckRoomTypeLoad;
     CheckCategoryLoad;
   finally
     AMainStrings.EndUpdate;
     ASubStrings.EndUpdate;
     TbTmpResourceWorkLoad.Close;
-    TbTmpRoomTypeLoad.Close;
     Result := HaveProblems;
   end;
 end;
@@ -581,20 +478,10 @@ begin
   TbTmpResourceWorkLoadIdResource.DisplayLabel := SFlRequirement_IdResource;
   TbTmpResourceWorkLoadNaResource.DisplayLabel := SFlResource_NaResource;
   TbTmpResourceWorkLoadWorkLoad.DisplayLabel := SLoad;
-  TbTmpRoomTypeLoadIdRoomType.DisplayLabel := SFlDistribution_IdRoomType;
-  TbTmpRoomTypeLoadAbRoomType.DisplayLabel := SFlRoomType_NaRoomType;
-  TbTmpRoomTypeLoadLoad.DisplayLabel := SLoad;
   
-  FStringsShowRoomType := TStringList.Create;
   FStringsShowResource := TStringList.Create;
   FStringsShowCluster := TStringList.Create;
   FConfigStorage := TTTGConfig.Create(Self);
-  with FStringsShowRoomType do
-  begin
-    add('Cluster=AbCategory;NaParallel');
-    add('Cluster_Theme=AbCategory;NaParallel;NaTheme');
-    add('Theme=NaTheme');
-  end;
   with FStringsShowResource do
   begin
     add('Cluster=AbCategory;NaParallel');
@@ -638,7 +525,6 @@ end;
 
 procedure TMasterDataModule.DataModuleDestroy(Sender: TObject);
 begin
-  FStringsShowRoomType.Free;
   FStringsShowResource.Free;
   FStringsShowCluster.Free;
 end;

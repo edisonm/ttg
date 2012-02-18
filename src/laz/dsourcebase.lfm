@@ -54,19 +54,6 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 56
     Top = 136
   end
-  object TbRoomType: TZTable
-    Tag = 6
-    Connection = DbZConnection
-    TableName = 'RoomType'
-    IndexFieldNames = 'IdRoomType'
-    Left = 144
-    Top = 156
-  end
-  object DSRoomType: TDataSource
-    DataSet = TbRoomType
-    Left = 152
-    Top = 148
-  end
   object TbCluster: TZTable
     Tag = 7
     Connection = DbZConnection

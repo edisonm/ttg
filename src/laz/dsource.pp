@@ -71,7 +71,6 @@ begin
     with FindField('IdTheme') do DefaultExpression := AsString;
     with FindField('IdCategory') do DefaultExpression := AsString;
     with FindField('IdParallel') do DefaultExpression := AsString;
-    with FindField('IdRoomType') do DefaultExpression := AsString;
   end;
 end;
 
@@ -338,21 +337,6 @@ begin
     Lookup := True;
     DataSet := TbDistribution;
   end;
-  Field := TStringField.Create(TbDistribution.Owner);
-  with Field do
-  begin
-    DisplayLabel := SFlDistribution_IdRoomType;
-    DisplayWidth := 6;
-    FieldKind := fkLookup;
-    FieldName := 'AbRoomType';
-    LookupDataSet := SourceDataModule.TbRoomType;
-    LookupKeyFields := 'IdRoomType';
-    LookupResultField := 'AbRoomType';
-    KeyFields := 'IdRoomType';
-    Size := 10;
-    Lookup := True;
-    DataSet := TbDistribution;
-  end;
   Field := TLongintField.Create(TbDistribution.Owner);
   with Field do
   begin
@@ -395,7 +379,6 @@ end;
 
 procedure TSourceDataModule.HideFields;
 begin
-  TbRoomType.FindField('IdRoomType').Visible := False;
   TbDay.FindField('IdDay').Visible := False;
   TbTheme.FindField('IdTheme').Visible := False;
   TbHour.FindField('IdHour').Visible := False;
@@ -421,7 +404,6 @@ begin
   begin
     FindField('IdTheme').Visible := False;
     FindField('IdCategory').Visible := False;
-    FindField('IdRoomType').Visible := False;
   end;
   with TbRequirement do
   begin
@@ -462,49 +444,56 @@ var
     try
       ZTable.Connection := DbZConnection;
       ZTable.TableName := ATableName;
-      PrepareDataSetFields(ZTable);
-      FieldNames := AStrings.Strings[Position];
-      Inc(Position);
-      FieldArray := FieldNamesToFieldArray(ZTable, FieldNames);
-      Fields := '';
-      for j := 0 to High(FieldArray) do
+      if ZTable.Exists then
       begin
-        if Assigned(FieldArray[j]) then
+        PrepareDataSetFields(ZTable);
+        FieldNames := AStrings.Strings[Position];
+        Inc(Position);
+        FieldArray := FieldNamesToFieldArray(ZTable, FieldNames);
+        Fields := '';
+        for j := 0 to High(FieldArray) do
         begin
-          if Fields = '' then
-            Fields := FieldArray[j].FieldName
-          else
-            Fields := Fields + ',' + FieldArray[j].FieldName;
+          if Assigned(FieldArray[j]) then
+          begin
+            if Fields = '' then
+              Fields := FieldArray[j].FieldName
+            else
+              Fields := Fields + ',' + FieldArray[j].FieldName;
+          end;
         end;
-      end;
-      if Fields = '' then
-      begin
-        Inc(Position, RecordCount);
+        if Fields = '' then
+        begin
+          Inc(Position, RecordCount);
+        end
+        else
+        begin
+          Limit := Position + RecordCount;
+          while Position < Limit do
+          begin
+            Pos := 2;
+            FieldValues := AStrings[Position];
+            Values := '';
+            for j := 0 to High(FieldArray) do
+            begin
+              Value := ScapedToString(FieldValues, Pos);
+              if Assigned(FieldArray[j]) then
+              begin
+                if Values = '' then
+                  Values := '"' + Value + '"'
+                else
+                  Values := Values + ',"' + Value + '"';
+              end;
+              Inc(Pos, 3);
+            end;
+            ASQL.Add(Format('INSERT INTO %s (%s) VALUES (%s);',
+                            [ATableName, Fields, Values]));
+            Inc(Position);
+          end;
+        end;
       end
       else
       begin
-        Limit := Position + RecordCount;
-        while Position < Limit do
-        begin
-          Pos := 2;
-          FieldValues := AStrings[Position];
-          Values := '';
-          for j := 0 to High(FieldArray) do
-          begin
-            Value := ScapedToString(FieldValues, Pos);
-            if Assigned(FieldArray[j]) then
-            begin
-              if Values = '' then
-                Values := '"' + Value + '"'
-              else
-                Values := Values + ',"' + Value + '"';
-            end;
-            Inc(Pos, 3);
-          end;
-          ASQL.Add(Format('INSERT INTO %s (%s) VALUES (%s);',
-                          [ATableName, Fields, Values]));
-          Inc(Position);
-        end;
+        Inc(Position, RecordCount + 1);
       end;
     finally
       ZTable.Free;

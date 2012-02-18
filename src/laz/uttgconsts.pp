@@ -16,7 +16,6 @@ resourcestring
   SBreakTimetableResource = 'Broken TT. Resources';
   SBrokenSession = 'Broken Sessions';
   SChangesWillBeLostWarning = 'Changes will be lost, are you sure?';
-  SClashRoomType = 'Clash of Classrooms';
   SClashTheme = 'Clash of Themes';
   SClashResource = 'Clash of Resources';
   SClashes = 'Clashes';
@@ -79,9 +78,6 @@ resourcestring
   SRelColsRows =  '%s|Columns: %s - Rows: %s ';
   SRelease = 'Release';
   SReparationProbability = 'Repair Probability';
-  SRoomTypesLoadHead = 'RoomType; Available Hours; Load';
-  SRoomTypesWithProblems = 'Room types with problems...';
-  SRoomTypesWithoutProblems = 'Room types without poblems...';
   SSaveChanges = 'Do you want to save the changes?';
   SSaveDialogCSVFilter = 'Comma delimited CSV (*.csv)|*.csv';
   SSaveDialogFilter =  'High School Timetable (*.ttd)|*.ttd';

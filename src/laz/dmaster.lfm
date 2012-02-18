@@ -73,47 +73,6 @@ object MasterDataModule: TMasterDataModule
       Required = False
     end
   end
-  object TbTmpRoomTypeLoad: TZTable
-    Connection = SourceDataModule.DbZConnection
-    AutoCalcFields = False
-    left = 250
-    top = 62
-    object TbTmpRoomTypeLoadIdRoomType: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdRoomType'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object TbTmpRoomTypeLoadAbRoomType: TStringField
-      DisplayWidth = 15
-      FieldKind = fkLookup
-      FieldName = 'AbRoomType'
-      Index = 1
-      KeyFields = 'IdRoomType'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbRoomType
-      LookupKeyFields = 'IdRoomType'
-      LookupResultField = 'AbRoomType'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 31
-    end
-    object TbTmpRoomTypeLoadLoad: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'Load'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-  end
   object QuNewIdTimetable: TZReadOnlyQuery
     Connection = SourceDataModule.DbZConnection
     SQL.Strings = (
