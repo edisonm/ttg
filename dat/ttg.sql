@@ -53,10 +53,12 @@ CREATE TABLE IF NOT EXISTS `ResourceType`(
 );
 CREATE TABLE IF NOT EXISTS `Resource`(
     `IdResource` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Id */,
-    `IdResourceType` INTEGER /* NOT NULL Resource Type Id */,
+    `IdResourceType` INTEGER NOT NULL /* Resource Type Id */,
     `NaResource` VARCHAR(25) NOT NULL /* UNIQUE Resource Name */,
     `AbResource` VARCHAR(11) NOT NULL /* UNIQUE Abbreviation */,
-    `NumResource` INTEGER NOT NULL /* Number of resources */
+    `NumResource` INTEGER NOT NULL /* Number of resources */,
+  CONSTRAINT `ResourceTypeResource` FOREIGN KEY (`IdResourceType`)
+    REFERENCES `ResourceType`(`IdResourceType`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Resources */
 CREATE TABLE IF NOT EXISTS `Distribution`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
