@@ -30,15 +30,15 @@ resourcestring
   STbHour = 'Academic Hours';
   STbCluster = 'Clusters';
   STbJoinedCluster = 'Joined Clusters';
-  STbResourceType = 'ResourceType';
+  STbResourceType = 'Resource types';
   STbResource = 'Resources';
+  STbResourceRestrictionType = 'Types of Resource Restrictions';
   STbActivity = 'Activities';
   STbTimeSlot = 'Time Slots';
   STbRequirement = 'Requirements';
   STbThemeRestrictionType = 'Types of Theme Restrictions';
-  STbResourceRestrictionType = 'Types of Resource Restrictions';
-  STbResourceRestriction = 'Resource Restrictions';
   STbThemeRestriction = 'Theme Restrictions';
+  STbResourceRestriction = 'Resource Restrictions';
   STbTimetable = 'Timetables';
   STbTimetableDetail = 'Detail of Timetables';
 
@@ -47,9 +47,6 @@ resourcestring
   SFlCategory_IdCategory = 'Id';
   SFlCategory_NaCategory = 'Name';
   SFlCategory_AbCategory = 'Abbreviation';
-  SFlSpecialization_IdSpecialization = 'Id';
-  SFlSpecialization_NaSpecialization = 'Name';
-  SFlSpecialization_AbSpecialization = 'Abbreviation';
   SFlParallel_IdParallel = 'Id';
   SFlParallel_NaParallel = 'Name';
   SFlDay_IdDay = 'Id';
