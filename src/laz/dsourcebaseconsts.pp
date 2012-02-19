@@ -23,25 +23,27 @@ uses
 
 resourcestring
 
+  STbTheme = 'Themes';
   STbCategory = 'Categories';
   STbParallel = 'Parallels';
   STbDay = 'Working Days';
   STbHour = 'Academic Hours';
   STbCluster = 'Clusters';
-  STbTheme = 'Themes';
+  STbJoinedCluster = 'Joined Clusters';
   STbResourceType = 'ResourceType';
   STbResource = 'Resources';
-  STbActivity = 'Activity of Workload';
-  STbJoinedCluster = 'Joined Clusters';
-  STbThemeRestrictionType = 'Types of Theme Restrictions';
+  STbActivity = 'Activities';
   STbTimeSlot = 'Time Slots';
   STbRequirement = 'Requirements';
+  STbThemeRestrictionType = 'Types of Theme Restrictions';
   STbResourceRestrictionType = 'Types of Resource Restrictions';
   STbResourceRestriction = 'Resource Restrictions';
   STbThemeRestriction = 'Theme Restrictions';
   STbTimetable = 'Timetables';
   STbTimetableDetail = 'Detail of Timetables';
 
+  SFlTheme_IdTheme = 'Id';
+  SFlTheme_NaTheme = 'Name';
   SFlCategory_IdCategory = 'Id';
   SFlCategory_NaCategory = 'Name';
   SFlCategory_AbCategory = 'Abbreviation';
@@ -57,8 +59,6 @@ resourcestring
   SFlHour_Interval = 'Interval';
   SFlCluster_IdCategory = 'Category';
   SFlCluster_IdParallel = 'Parallel';
-  SFlTheme_IdTheme = 'Id';
-  SFlTheme_NaTheme = 'Name';
   SFlResourceType_IdResourceType = 'IdResourceType';
   SFlResourceType_NaResourceType = 'Name';
   SFlResourceType_DefaultLimit = 'Default Limit';
