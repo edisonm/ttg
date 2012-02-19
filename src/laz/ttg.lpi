@@ -398,11 +398,6 @@
       <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-full"/>
       <SrcPath Value="../../../GLScene/Source"/>
     </SearchPaths>
-    <CodeGeneration>
-      <Checks>
-        <RangeChecks Value="True"/>
-      </Checks>
-    </CodeGeneration>
     <Linking>
       <Options>
         <Win32>
