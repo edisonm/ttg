@@ -9,6 +9,15 @@
 
 */
 
+CREATE TABLE IF NOT EXISTS `Theme`(
+    `IdTheme` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Theme Id */,
+    `NaTheme` VARCHAR(20) NOT NULL UNIQUE /* Theme Name */
+); /* Themes */
+CREATE TABLE IF NOT EXISTS `Category`(
+    `IdCategory` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Id */,
+    `NaCategory` VARCHAR(25) NOT NULL UNIQUE /* Name */,
+    `AbCategory` VARCHAR(10) NOT NULL UNIQUE /* Abbreviation */
+); /* Categories */
 CREATE TABLE IF NOT EXISTS `Parallel`(
     `IdParallel` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Parallel Id */,
     `NaParallel` VARCHAR(5) NOT NULL UNIQUE /* Parallel Name */
@@ -17,11 +26,6 @@ CREATE TABLE IF NOT EXISTS `Day`(
     `IdDay` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Day Id */,
     `NaDay` VARCHAR(10) NOT NULL UNIQUE /* Name of Day */
 ); /* Working Days */
-CREATE TABLE IF NOT EXISTS `Category`(
-    `IdCategory` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Category Id */,
-    `NaCategory` VARCHAR(25) NOT NULL UNIQUE /* Category Name */,
-    `AbCategory` VARCHAR(10) NOT NULL UNIQUE /* Category Abbreviation */
-); /* Categories */
 CREATE TABLE IF NOT EXISTS `Hour`(
     `IdHour` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Hour Id */,
     `NaHour` VARCHAR(10) NOT NULL UNIQUE /* Hour Name */,
@@ -36,36 +40,6 @@ CREATE TABLE IF NOT EXISTS `Cluster`(
   CONSTRAINT `ParallelCluster` FOREIGN KEY (`IdParallel`)
     REFERENCES `Parallel`(`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Clusters */
-CREATE TABLE IF NOT EXISTS `Theme`(
-    `IdTheme` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Theme Id */,
-    `NaTheme` VARCHAR(20) NOT NULL UNIQUE /* Theme Name */
-); /* Themes */
-CREATE TABLE IF NOT EXISTS `ResourceType`(
-    `IdResourceType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Type Id */,
-    `NaResourceType` VARCHAR(15) NOT NULL UNIQUE /* Name */,
-    `DefaultLimit` INTEGER NOT NULL /* Default Limit */,
-    `ValResourceType` INTEGER NOT NULL /* Clash Value */
-); /* Resource Types */
-CREATE TABLE IF NOT EXISTS `Resource`(
-    `IdResource` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Id */,
-    `IdResourceType` INTEGER NOT NULL /* Resource Type Id */,
-    `NaResource` VARCHAR(25) NOT NULL /* UNIQUE Resource Name */,
-    `AbResource` VARCHAR(11) NOT NULL /* UNIQUE Abbreviation */,
-    `NumResource` INTEGER NOT NULL /* Number of resources */,
-  CONSTRAINT `ResourceTypeResource` FOREIGN KEY (`IdResourceType`)
-    REFERENCES `ResourceType`(`IdResourceType`) ON UPDATE RESTRICT ON DELETE RESTRICT
-); /* Resources */
-CREATE TABLE IF NOT EXISTS `Activity`(
-    `IdTheme` INTEGER NOT NULL /* Theme Id */,
-    `IdCategory` INTEGER NOT NULL /* Category Id */,
-    `IdParallel` INTEGER NOT NULL /* Parallel Id */,
-    `Composition` VARCHAR(40) NOT NULL /* Composition of the Slots for the Theme */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`),
-  CONSTRAINT `ClusterActivity` FOREIGN KEY (`IdCategory`,`IdParallel`)
-    REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
-    REFERENCES `Theme`(`IdTheme`) ON UPDATE RESTRICT ON DELETE RESTRICT
-); /* Activity of Workload */
 CREATE TABLE IF NOT EXISTS `JoinedCluster`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
@@ -78,12 +52,27 @@ CREATE TABLE IF NOT EXISTS `JoinedCluster`(
   CONSTRAINT `ActivityJoinedCluster` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
     REFERENCES `Activity`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE
 ); /* Joined Clusters */
-CREATE TABLE IF NOT EXISTS `ThemeRestrictionType`(
-    `IdThemeRestrictionType` INTEGER NOT NULL PRIMARY KEY /* Theme Restriction Type Id */,
-    `NaThemeRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
-    `ColThemeRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
-    `ValThemeRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
-); /* Types of Theme Restrictions */
+CREATE TABLE IF NOT EXISTS `ResourceType`(
+    `IdResourceType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Type Id */,
+    `NaResourceType` VARCHAR(15) NOT NULL UNIQUE /* Name */,
+    `DefaultLimit` INTEGER NOT NULL /* Default Limit */,
+    `ValResourceType` INTEGER NOT NULL /* Clash Value */
+); /* Resource Types */
+CREATE TABLE IF NOT EXISTS `Resource`(
+    `IdResource` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Id */,
+    `IdResourceType` INTEGER NOT NULL /* Resource Type Id */,
+    `NaResource` VARCHAR(25) NOT NULL UNIQUE /* Resource Name */,
+    `AbResource` VARCHAR(11) NOT NULL UNIQUE /* Resource Abbreviation */,
+    `NumResource` INTEGER NOT NULL /* Number of resources */,
+  CONSTRAINT `ResourceTypeResource` FOREIGN KEY (`IdResourceType`)
+    REFERENCES `ResourceType`(`IdResourceType`) ON UPDATE RESTRICT ON DELETE RESTRICT
+); /* Resources */
+CREATE TABLE IF NOT EXISTS `ResourceRestrictionType`(
+    `IdResourceRestrictionType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Restriction Type Id */,
+    `NaResourceRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
+    `ColResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
+    `ValResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
+); /* Types of Resource Restrictions */
 CREATE TABLE IF NOT EXISTS `TimeSlot`(
     `IdDay` INTEGER NOT NULL /* Day Id */,
     `IdHour` INTEGER NOT NULL /* Hour Id */,
@@ -93,6 +82,17 @@ CREATE TABLE IF NOT EXISTS `TimeSlot`(
   CONSTRAINT `HourTimeSlot` FOREIGN KEY (`IdHour`)
     REFERENCES `Hour`(`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Time Slots */
+CREATE TABLE IF NOT EXISTS `Activity`(
+    `IdTheme` INTEGER NOT NULL /* Theme Id */,
+    `IdCategory` INTEGER NOT NULL /* Category Id */,
+    `IdParallel` INTEGER NOT NULL /* Parallel Id */,
+    `Composition` VARCHAR(40) NOT NULL /* Composition of the Slots for the Theme */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`),
+  CONSTRAINT `ClusterActivity` FOREIGN KEY (`IdCategory`,`IdParallel`)
+    REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
+    REFERENCES `Theme`(`IdTheme`) ON UPDATE RESTRICT ON DELETE RESTRICT
+); /* Activity of Workload */
 CREATE TABLE IF NOT EXISTS `Requirement`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
@@ -105,25 +105,12 @@ CREATE TABLE IF NOT EXISTS `Requirement`(
   CONSTRAINT `ResourceRequirement` FOREIGN KEY (`IdResource`)
     REFERENCES `Resource`(`IdResource`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Requirements */
-CREATE TABLE IF NOT EXISTS `ResourceRestrictionType`(
-    `IdResourceRestrictionType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Restriction Type Id */,
-    `NaResourceRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
-    `ColResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
-    `ValResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
-); /* Types of Resource Restrictions */
-CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
-    `IdResource` INTEGER NOT NULL /* Resource Id */,
-    `IdDay` INTEGER NOT NULL /* Day Id */,
-    `IdHour` INTEGER NOT NULL /* Hour Id */,
-    `IdResourceRestrictionType` INTEGER NOT NULL /* Resource Restriction Type Id */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdResource`,`IdDay`,`IdHour`),
-  CONSTRAINT `ResourceRestrictionTypeResourceRestriction` FOREIGN KEY (`IdResourceRestrictionType`)
-    REFERENCES `ResourceRestrictionType`(`IdResourceRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `ResourceResourceRestriction` FOREIGN KEY (`IdResource`)
-    REFERENCES `Resource`(`IdResource`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `TimeSlotResourceRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
-    REFERENCES `TimeSlot`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT
-); /* Resource Restrictions */
+CREATE TABLE IF NOT EXISTS `ThemeRestrictionType`(
+    `IdThemeRestrictionType` INTEGER NOT NULL PRIMARY KEY /* Theme Restriction Type Id */,
+    `NaThemeRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
+    `ColThemeRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
+    `ValThemeRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
+); /* Types of Theme Restrictions */
 CREATE TABLE IF NOT EXISTS `ThemeRestriction`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdDay` INTEGER NOT NULL /* Day Id */,
@@ -137,6 +124,19 @@ CREATE TABLE IF NOT EXISTS `ThemeRestriction`(
   CONSTRAINT `TimeSlotThemeRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
     REFERENCES `TimeSlot`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Theme Restrictions */
+CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
+    `IdResource` INTEGER NOT NULL /* Resource Id */,
+    `IdDay` INTEGER NOT NULL /* Day Id */,
+    `IdHour` INTEGER NOT NULL /* Hour Id */,
+    `IdResourceRestrictionType` INTEGER NOT NULL /* Resource Restriction Type Id */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdResource`,`IdDay`,`IdHour`),
+  CONSTRAINT `ResourceRestrictionTypeResourceRestriction` FOREIGN KEY (`IdResourceRestrictionType`)
+    REFERENCES `ResourceRestrictionType`(`IdResourceRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `ResourceResourceRestriction` FOREIGN KEY (`IdResource`)
+    REFERENCES `Resource`(`IdResource`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `TimeSlotResourceRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
+    REFERENCES `TimeSlot`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT
+); /* Resource Restrictions */
 CREATE TABLE IF NOT EXISTS `Timetable`(
     `IdTimetable` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Timetable Id */,
     `TimeIni` DATETIME NOT NULL /* Initial Time */,
