@@ -407,9 +407,7 @@ var
       for VCluster := 0 to FClusterCount - 1 do
       begin
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
-        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
-          FMinIdParallel];
-        FClusterToCategory[VCluster] := Category;
+        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
         FClusterToCategory[VCluster] := Category;
         FClusterToParallel[VCluster] := Parallel;
         FCategoryParallelToCluster[Category, Parallel] := VCluster;
@@ -471,7 +469,8 @@ var
       SetLength(FResourceToNumber, FResourceCount);
       for Resource := 0 to FResourceCount - 1 do
       begin
-        FResourceToResourceType[Resource] := FieldResourceType.AsInteger;
+        FResourceToResourceType[Resource] :=
+          FIdResourceTypeToResourceType[FieldResourceType.AsInteger - FMinIdResourceType];
         FResourceToNumber[Resource] := FieldResourceNumber.AsInteger;
         Next;
       end;
@@ -567,8 +566,7 @@ var
         Hour := FIdHourToHour[VFieldHour.AsInteger - FMinIdHour];
         TimeSlot := FDayHourToTimeSlot[Day, Hour];
         ResourceRestrictionType := FIdResourceRestrictionTypeToResourceRestrictionType
-          [VFieldResourceRestrictionType.AsInteger -
-          FMinIdResourceRestrictionType];
+          [VFieldResourceRestrictionType.AsInteger - FMinIdResourceRestrictionType];
         FResourceRestrictionToResource[ResourceRestriction] := Resource;
         FResourceRestrictionToTimeSlot[ResourceRestriction] := TimeSlot;
         FResourceRestrictionToResourceRestrictionType[ResourceRestriction] := ResourceRestrictionType;
@@ -616,8 +614,7 @@ var
       begin
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
-        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger -
-          FMinIdParallel];
+        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
         VCluster := FCategoryParallelToCluster[Category, Parallel];
         FDistributionToCluster[Distribution] := VCluster;
         FDistributionToTheme[Distribution] := Theme;
@@ -721,8 +718,7 @@ var
         VCluster := FCategoryParallelToCluster[Category, Parallel];
         Distribution := FClusterThemeToDistribution[VCluster, Theme];
         Category1 := FIdCategoryToCategory[VFieldCategory1.AsInteger - FMinIdCategory];
-        Parallel1 := FIdParallelToParallel[VFieldParallel1.AsInteger -
-          FMinIdParallel];
+        Parallel1 := FIdParallelToParallel[VFieldParallel1.AsInteger - FMinIdParallel];
         VCluster1 := FCategoryParallelToCluster[Category1, Parallel1];
         Counter := Length(FClusterJoinedClusterToDistribution[VCluster]);
         SetLength(FClusterJoinedClusterToDistribution[VCluster], Counter + 1);
@@ -1144,8 +1140,7 @@ begin
               end;
             end;
           end;
-          if FResourceTimeSlotCount[Resource, TimeSlot]
-               >= FResourceToNumber[Resource] + Limit * Count then
+          if FResourceTimeSlotCount[Resource, TimeSlot] >= FResourceToNumber[Resource] + Limit * Count then
             Inc(FClashResourceType[FResourceToResourceType[Resource]], Delta * Count);
           Inc(FResourceTimeSlotCount[Resource, TimeSlot], Delta * Count);
           ResourceRestrictionType := FResourceTimeSlotToResourceRestrictionType[Resource, TimeSlot];

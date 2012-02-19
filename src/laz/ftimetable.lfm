@@ -770,7 +770,7 @@ inherited TimetableForm: TTimetableForm
       '  TimetableDetail.IdTimetable,'
       '  Requirement.IdResource,'
       '  Resource.NaResource,'
-      '  Resource.IdResourceType'
+      '  Resource.IdResourceType,'
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour'
       'HAVING Clashes > 0'
