@@ -2,7 +2,7 @@
 unit dsourcebase;
 
 (*
-  19/02/2012 19:58
+  19/02/2012 20:35
 
   Warning:
 
@@ -89,10 +89,8 @@ begin
   Tables[0] := TbCategory;
   Tables[1] := TbParallel;
   TbParallel.AfterPost := DataSetAfterPost;
-  TbParallel.AfterDelete := DataSetAfterDelete;
   Tables[2] := TbCluster;
   TbCluster.AfterPost := DataSetAfterPost;
-  TbCluster.AfterDelete := DataSetAfterDelete;
   Tables[3] := TbDay;
   Tables[4] := TbHour;
   Tables[5] := TbTheme;
@@ -102,7 +100,6 @@ begin
   Tables[7] := TbResourceType;
   Tables[8] := TbResource;
   TbResource.AfterPost := DataSetAfterPost;
-  TbResource.AfterDelete := DataSetAfterDelete;
   Tables[9] := TbResourceRestrictionType;
   Tables[10] := TbTimeSlot;
   Tables[11] := TbRequirement;
