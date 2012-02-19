@@ -98,7 +98,6 @@ CREATE TABLE IF NOT EXISTS `Requirement`(
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER NOT NULL /* Parallel Id */,
     `IdResource` INTEGER NOT NULL /* Resource Id */,
-    `FixRequirement` BOOL_INT /* Is Fixed */,
     `NumRequirement` INTEGER /* Number of Resources */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`,`IdResource`),
   CONSTRAINT `ActivityRequirement` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
