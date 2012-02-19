@@ -524,13 +524,13 @@ var
     SQL: TStrings;
   begin
     SQL := TStringList.Create;
-    DbZConnection.ExecuteDirect('pragma foreign_keys=off');
+    // DbZConnection.ExecuteDirect('pragma foreign_keys=off');
     try
       StringsToSQL(SQL, APosition, RecordCount);
       DbZConnection.ExecuteDirect(SQL.Text);
     finally
       SQL.Free;
-      DbZConnection.ExecuteDirect('pragma foreign_keys=off');
+      // DbZConnection.ExecuteDirect('pragma foreign_keys=on');
     end;
   end;
 begin
