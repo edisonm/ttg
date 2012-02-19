@@ -2,7 +2,7 @@
 unit dsourcebaseconsts;
 
 (*
-  19/02/2012 18:09
+  19/02/2012 19:58
 
   Warning:
 
@@ -23,19 +23,19 @@ uses
 
 resourcestring
 
-  STbTheme = 'Themes';
   STbCategory = 'Categories';
   STbParallel = 'Parallels';
+  STbCluster = 'Clusters';
   STbDay = 'Working Days';
   STbHour = 'Academic Hours';
-  STbCluster = 'Clusters';
-  STbJoinedCluster = 'Joined Clusters';
+  STbTheme = 'Themes';
+  STbActivity = 'Activities';
   STbResourceType = 'Resource types';
   STbResource = 'Resources';
   STbResourceRestrictionType = 'Types of Resource Restrictions';
   STbTimeSlot = 'Time Slots';
-  STbActivity = 'Activities';
   STbRequirement = 'Requirements';
+  STbJoinedCluster = 'Joined Clusters';
   STbThemeRestrictionType = 'Types of Theme Restrictions';
   STbThemeRestriction = 'Theme Restrictions';
   STbResourceRestriction = 'Resource Restrictions';
@@ -43,49 +43,49 @@ resourcestring
   STbTimetableDetail = 'Detail of Timetables';
   STbTimetableResource = 'Resources of Timetables';
 
-  SFlTheme_IdTheme = 'Id';
-  SFlTheme_NaTheme = 'Name';
   SFlCategory_IdCategory = 'Id';
   SFlCategory_NaCategory = 'Name';
   SFlCategory_AbCategory = 'Abbreviation';
   SFlParallel_IdParallel = 'Id';
   SFlParallel_NaParallel = 'Name';
+  SFlCluster_IdCategory = 'Category';
+  SFlCluster_IdParallel = 'Parallel';
   SFlDay_IdDay = 'Id';
   SFlDay_NaDay = 'Name';
   SFlHour_IdHour = 'Id';
   SFlHour_NaHour = 'Name';
   SFlHour_Interval = 'Interval';
-  SFlCluster_IdCategory = 'Category';
-  SFlCluster_IdParallel = 'Parallel';
-  SFlJoinedCluster_IdTheme = 'Theme';
-  SFlJoinedCluster_IdCategory = 'Category';
-  SFlJoinedCluster_IdParallel = 'Parallel';
-  SFlJoinedCluster_IdCategory1 = 'Joined Category';
-  SFlJoinedCluster_IdParallel1 = 'Joined Parallel';
+  SFlTheme_IdTheme = 'Id';
+  SFlTheme_NaTheme = 'Name';
+  SFlActivity_IdTheme = 'Theme';
+  SFlActivity_IdCategory = 'Category';
+  SFlActivity_IdParallel = 'Parallel';
+  SFlActivity_Composition = 'Composition';
   SFlResourceType_IdResourceType = 'IdResourceType';
   SFlResourceType_NaResourceType = 'Name';
   SFlResourceType_DefaultLimit = 'Default Limit';
+  SFlResourceType_ValResourceType = 'Value';
   SFlResource_IdResource = 'Id';
   SFlResource_IdResourceType = 'Type';
   SFlResource_NaResource = 'Name';
   SFlResource_AbResource = 'Abbreviation';
   SFlResource_NumResource = 'Number';
   SFlResourceRestrictionType_IdResourceRestrictionType = 'Id';
-  SFlResourceRestrictionType_IdResourceType = 'Resource Type';
   SFlResourceRestrictionType_NaResourceRestrictionType = 'Name';
   SFlResourceRestrictionType_ColResourceRestrictionType = 'Color';
   SFlResourceRestrictionType_ValResourceRestrictionType = 'Value';
   SFlTimeSlot_IdDay = 'Day';
   SFlTimeSlot_IdHour = 'Hour';
-  SFlActivity_IdTheme = 'Theme';
-  SFlActivity_IdCategory = 'Category';
-  SFlActivity_IdParallel = 'Parallel';
-  SFlActivity_Composition = 'Composition';
   SFlRequirement_IdTheme = 'Theme';
   SFlRequirement_IdCategory = 'Category';
   SFlRequirement_IdParallel = 'Parallel';
   SFlRequirement_IdResource = 'Resource';
   SFlRequirement_NumRequirement = 'Number';
+  SFlJoinedCluster_IdTheme = 'Theme';
+  SFlJoinedCluster_IdCategory = 'Category';
+  SFlJoinedCluster_IdParallel = 'Parallel';
+  SFlJoinedCluster_IdCategory1 = 'Joined Category';
+  SFlJoinedCluster_IdParallel1 = 'Joined Parallel';
   SFlThemeRestrictionType_IdThemeRestrictionType = 'Id';
   SFlThemeRestrictionType_NaThemeRestrictionType = 'Name';
   SFlThemeRestrictionType_ColThemeRestrictionType = 'Color';

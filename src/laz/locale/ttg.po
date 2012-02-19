@@ -1,6 +1,26 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: dsourcebaseconsts.sflactivity_composition
+msgctxt "dsourcebaseconsts.sflactivity_composition"
+msgid "Composition"
+msgstr ""
+
+#: dsourcebaseconsts.sflactivity_idcategory
+msgctxt "dsourcebaseconsts.sflactivity_idcategory"
+msgid "Category"
+msgstr ""
+
+#: dsourcebaseconsts.sflactivity_idparallel
+msgctxt "dsourcebaseconsts.sflactivity_idparallel"
+msgid "Parallel"
+msgstr ""
+
+#: dsourcebaseconsts.sflactivity_idtheme
+msgctxt "dsourcebaseconsts.sflactivity_idtheme"
+msgid "Theme"
+msgstr ""
+
 #: dsourcebaseconsts.sflcategory_abcategory
 msgctxt "dsourcebaseconsts.sflcategory_abcategory"
 msgid "Abbreviation"
@@ -34,26 +54,6 @@ msgstr ""
 #: dsourcebaseconsts.sflday_naday
 msgctxt "dsourcebaseconsts.sflday_naday"
 msgid "Name"
-msgstr ""
-
-#: dsourcebaseconsts.sflactivity_composition
-msgctxt "dsourcebaseconsts.sflactivity_composition"
-msgid "Composition"
-msgstr ""
-
-#: dsourcebaseconsts.sflactivity_idcategory
-msgctxt "dsourcebaseconsts.sflactivity_idcategory"
-msgid "Category"
-msgstr ""
-
-#: dsourcebaseconsts.sflactivity_idparallel
-msgctxt "dsourcebaseconsts.sflactivity_idparallel"
-msgid "Parallel"
-msgstr ""
-
-#: dsourcebaseconsts.sflactivity_idtheme
-msgctxt "dsourcebaseconsts.sflactivity_idtheme"
-msgid "Theme"
 msgstr ""
 
 #: dsourcebaseconsts.sflhour_idhour
@@ -117,12 +117,17 @@ msgstr ""
 
 #: dsourcebaseconsts.sflrequirement_idresource
 msgctxt "dsourcebaseconsts.sflrequirement_idresource"
-msgid "Assistant"
+msgid "Resource"
 msgstr ""
 
 #: dsourcebaseconsts.sflrequirement_idtheme
 msgctxt "dsourcebaseconsts.sflrequirement_idtheme"
 msgid "Theme"
+msgstr ""
+
+#: dsourcebaseconsts.sflrequirement_numrequirement
+msgctxt "dsourcebaseconsts.sflrequirement_numrequirement"
+msgid "Number"
 msgstr ""
 
 #: dsourcebaseconsts.sflresourcerestrictiontype_colresourcerestrictiontype
@@ -178,6 +183,11 @@ msgctxt "dsourcebaseconsts.sflresourcetype_naresourcetype"
 msgid "Name"
 msgstr ""
 
+#: dsourcebaseconsts.sflresourcetype_valresourcetype
+msgctxt "dsourcebaseconsts.sflresourcetype_valresourcetype"
+msgid "Value"
+msgstr ""
+
 #: dsourcebaseconsts.sflresource_abresource
 msgctxt "dsourcebaseconsts.sflresource_abresource"
 msgid "Abbreviation"
@@ -188,6 +198,10 @@ msgctxt "dsourcebaseconsts.sflresource_idresource"
 msgid "Id"
 msgstr ""
 
+#: dsourcebaseconsts.sflresource_idresourcetype
+msgid "Type"
+msgstr ""
+
 #: dsourcebaseconsts.sflresource_naresource
 msgctxt "dsourcebaseconsts.sflresource_naresource"
 msgid "Name"
@@ -196,21 +210,6 @@ msgstr ""
 #: dsourcebaseconsts.sflresource_numresource
 msgctxt "dsourcebaseconsts.sflresource_numresource"
 msgid "Number"
-msgstr ""
-
-#: dsourcebaseconsts.sflspecialization_abspecialization
-msgctxt "dsourcebaseconsts.sflspecialization_abspecialization"
-msgid "Abbreviation"
-msgstr ""
-
-#: dsourcebaseconsts.sflspecialization_idspecialization
-msgctxt "dsourcebaseconsts.sflspecialization_idspecialization"
-msgid "Id"
-msgstr ""
-
-#: dsourcebaseconsts.sflspecialization_naspecialization
-msgctxt "dsourcebaseconsts.sflspecialization_naspecialization"
-msgid "Name"
 msgstr ""
 
 #: dsourcebaseconsts.sflthemerestrictiontype_colthemerestrictiontype
@@ -308,6 +307,31 @@ msgctxt "dsourcebaseconsts.sfltimetabledetail_session"
 msgid "Session"
 msgstr ""
 
+#: dsourcebaseconsts.sfltimetableresource_idcategory
+msgctxt "dsourcebaseconsts.sfltimetableresource_idcategory"
+msgid "Category"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetableresource_idparallel
+msgctxt "dsourcebaseconsts.sfltimetableresource_idparallel"
+msgid "Parallel"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetableresource_idresource
+msgctxt "dsourcebaseconsts.sfltimetableresource_idresource"
+msgid "Resource"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetableresource_idtheme
+msgctxt "dsourcebaseconsts.sfltimetableresource_idtheme"
+msgid "Theme"
+msgstr ""
+
+#: dsourcebaseconsts.sfltimetableresource_idtimetable
+msgctxt "dsourcebaseconsts.sfltimetableresource_idtimetable"
+msgid "Timetable"
+msgstr ""
+
 #: dsourcebaseconsts.sfltimetable_idtimetable
 msgctxt "dsourcebaseconsts.sfltimetable_idtimetable"
 msgid "Id"
@@ -328,6 +352,11 @@ msgctxt "dsourcebaseconsts.sfltimetable_timeini"
 msgid "Initial Time"
 msgstr ""
 
+#: dsourcebaseconsts.stbactivity
+msgctxt "dsourcebaseconsts.stbactivity"
+msgid "Activities"
+msgstr ""
+
 #: dsourcebaseconsts.stbcategory
 msgctxt "dsourcebaseconsts.stbcategory"
 msgid "Categories"
@@ -341,11 +370,6 @@ msgstr ""
 #: dsourcebaseconsts.stbday
 msgctxt "dsourcebaseconsts.stbday"
 msgid "Working Days"
-msgstr ""
-
-#: dsourcebaseconsts.stbactivity
-msgctxt "dsourcebaseconsts.stbactivity"
-msgid "Activities"
 msgstr ""
 
 #: dsourcebaseconsts.stbhour
@@ -384,7 +408,7 @@ msgid "Types of Resource Restrictions"
 msgstr ""
 
 #: dsourcebaseconsts.stbresourcetype
-msgid "ResourceType"
+msgid "Resource types"
 msgstr ""
 
 #: dsourcebaseconsts.stbtheme
@@ -415,6 +439,10 @@ msgstr ""
 #: dsourcebaseconsts.stbtimetabledetail
 msgctxt "dsourcebaseconsts.stbtimetabledetail"
 msgid "Detail of Timetables"
+msgstr ""
+
+#: dsourcebaseconsts.stbtimetableresource
+msgid "Resources of Timetables"
 msgstr ""
 
 #: tclusterform.dbgrid.hint
@@ -1323,7 +1351,7 @@ msgid "Resource restrictions"
 msgstr ""
 
 #: tresourceform.actresourcerestriction.hint
-msgid "Resource restrictions|Input Resource restrictions"
+msgid "Resource restrictions|Input resource restrictions"
 msgstr ""
 
 #: tresourceform.caption
@@ -1331,13 +1359,12 @@ msgctxt "TRESOURCEFORM.CAPTION"
 msgid "Resource"
 msgstr ""
 
-#: tresourceform.dbgriddetail.hint
-msgid "Distribution of Resources"
+#: tresourceform.cbjoinedclass.caption
+msgid "Joined Classes"
 msgstr ""
 
-#: tresourceform.gbjoinedcluster.caption
-msgctxt "tresourceform.gbjoinedcluster.caption"
-msgid "Joined Clusters"
+#: tresourceform.dbgriddetail.hint
+msgid "Activities"
 msgstr ""
 
 #: tresourceform.grbdetail.caption
@@ -1591,6 +1618,10 @@ msgstr ""
 
 #: uttgconsts.sassign
 msgid "Assign"
+msgstr ""
+
+#: uttgconsts.sattendant
+msgid "Attendant"
 msgstr ""
 
 #: uttgconsts.sbasetimetable
@@ -1883,6 +1914,10 @@ msgstr ""
 msgid "Resource; Work Load"
 msgstr ""
 
+#: uttgconsts.sroom
+msgid "Room"
+msgstr ""
+
 #: uttgconsts.ssavechanges
 msgid "Do you want to save the changes?"
 msgstr ""
@@ -1897,6 +1932,10 @@ msgstr ""
 
 #: uttgconsts.ssearchby
 msgid "Search by %s"
+msgstr ""
+
+#: uttgconsts.ssupervisor
+msgid "Supervisor"
 msgstr ""
 
 #: uttgconsts.sthenexttimetablesalreadyexists

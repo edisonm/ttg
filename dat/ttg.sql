@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  19/02/2012 19:21
+  19/02/2012 19:58
 
   Warning:
 
@@ -68,12 +68,9 @@ CREATE TABLE IF NOT EXISTS `Resource`(
 ); /* Resources */
 CREATE TABLE IF NOT EXISTS `ResourceRestrictionType`(
     `IdResourceRestrictionType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Restriction Type Id */,
-    `IdResourceType` INTEGER NOT NULL /* Resource Type */,
     `NaResourceRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
     `ColResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
-    `ValResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Value */,
-  CONSTRAINT `ResourceTypeResourceRestrictionType` FOREIGN KEY (`IdResourceType`)
-    REFERENCES `ResourceType`(`IdResourceType`) ON UPDATE RESTRICT ON DELETE RESTRICT
+    `ValResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
 ); /* Types of Resource Restrictions */
 CREATE TABLE IF NOT EXISTS `TimeSlot`(
     `IdDay` INTEGER NOT NULL /* Day Id */,

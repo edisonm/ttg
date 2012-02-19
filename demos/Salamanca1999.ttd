@@ -1,21 +1,5 @@
 TTD 293
-18
-Parallel
-5
-"IdParallel";"NaParallel";
-"1";"A";
-"2";"B";
-"3";"C";
-"4";"S";
-"5";"D";
-Day
-5
-"IdDay";"NaDay";
-"2";"Lunes";
-"3";"Martes";
-"4";"Miercoles";
-"5";"Jueves";
-"6";"Viernes";
+19
 Category
 12
 "IdCategory";"NaCategory";"AbCategory";
@@ -31,16 +15,14 @@ Category
 "10";"Sexto Contabilidad";"6 CONTA";
 "11";"Sexto Secretariado";"6 SECRE";
 "12";"Sexto Informatica";"6 INFO";
-Hour
-7
-"IdHour";"NaHour";"Interval";
-"1";"Primera";"07:00 p.m.-07:35 p.m.";
-"2";"Segunda";"07:35 p.m.-08:10 p.m.";
-"3";"Tercera";"08:10 p.m.-08:45 p.m.";
-"4";"Recreo";"08:45 p.m.-09:00 p.m.";
-"5";"Cuarta";"09:00 p.m.-09:35 p.m.";
-"6";"Quinta";"09:35 p.m.-10:10 p.m.";
-"7";"Sexta";"10:10 a.m.-10:45 p.m.";
+Parallel
+5
+"IdParallel";"NaParallel";
+"1";"A";
+"2";"B";
+"3";"C";
+"4";"S";
+"5";"D";
 Cluster
 27
 "IdCategory";"IdParallel";
@@ -71,6 +53,24 @@ Cluster
 "10";"3";
 "11";"4";
 "12";"5";
+Day
+5
+"IdDay";"NaDay";
+"2";"Lunes";
+"3";"Martes";
+"4";"Miercoles";
+"5";"Jueves";
+"6";"Viernes";
+Hour
+7
+"IdHour";"NaHour";"Interval";
+"1";"Primera";"07:00 p.m.-07:35 p.m.";
+"2";"Segunda";"07:35 p.m.-08:10 p.m.";
+"3";"Tercera";"08:10 p.m.-08:45 p.m.";
+"4";"Recreo";"08:45 p.m.-09:00 p.m.";
+"5";"Cuarta";"09:00 p.m.-09:35 p.m.";
+"6";"Quinta";"09:35 p.m.-10:10 p.m.";
+"7";"Sexta";"10:10 a.m.-10:45 p.m.";
 Theme
 29
 "IdTheme";"NaTheme";
@@ -103,67 +103,6 @@ Theme
 "27";"Dibujo";
 "28";"In. Tecnologica";
 "29";"Org. Archivo";
-ResourceType
-2
-"IdResourceType";"NaResourceType";"DefaultLimit";"ValResourceType";
-"1";"Profesor";"1";"299";
-"2";"Aula";"0";"65";
-Resource
-53
-"IdResource";"IdResourceType";"NaResource";"AbResource";"NumResource";
-"1";"1";"Loza Wilson";"1";"1";
-"2";"1";"Fuentes Maria";"2";"1";
-"3";"1";"Pazmiño Luis";"3";"1";
-"4";"1";"Brito Piedad";"4";"1";
-"5";"1";"Noguera Patricia";"5";"1";
-"6";"1";"Cordova Edgar";"6";"1";
-"7";"1";"Cedeño Edith";"7";"1";
-"8";"1";"Tamayo Margarita";"8";"1";
-"9";"1";"Deley Pedro";"9";"1";
-"10";"1";"Barragan Miriam";"10";"1";
-"11";"1";"Boada Diego";"11";"1";
-"12";"1";"Ortega Gonzalo";"12";"1";
-"13";"1";"Jacome Galo";"13";"1";
-"14";"1";"Gallardo Ramiro";"14";"1";
-"15";"1";"Rueda Hugo";"15";"1";
-"16";"1";"Aguas Patricio";"16";"1";
-"17";"1";"Sinche Denis";"17";"1";
-"18";"1";"Vega Pepe";"18";"1";
-"19";"1";"Pazmiño Mauro";"19";"1";
-"20";"1";"Garcia America";"20";"1";
-"21";"1";"Sandoval Lourdes";"21";"1";
-"22";"1";"Freire Magdalena";"22";"1";
-"23";"1";"Escobar Elias";"23";"1";
-"24";"1";"Tirado Mario";"24";"1";
-"25";"1";"Enriquez Carlos";"25";"1";
-"26";"1";"Albuja Ramiro";"26";"1";
-"27";"1";"Guaman Carlos";"27";"1";
-"28";"1";"Proaño Isabel";"28";"1";
-"29";"1";"Ruiz Lucia";"29";"1";
-"30";"1";"Chavez Piedad";"30";"1";
-"31";"1";"Becerra Susana";"31";"1";
-"32";"1";"Burbano Milton";"32";"1";
-"33";"1";"Verdesoto Marcelo";"33";"1";
-"34";"1";"Baquero Zuly";"34";"1";
-"35";"1";"Vasquez Jose";"35";"1";
-"36";"1";"Espinoza Fabian";"36";"1";
-"37";"1";"Montenegro Efren";"37";"1";
-"38";"1";"Mejia Oswaldo";"38";"1";
-"39";"1";"Jimenez Victoria";"39";"1";
-"40";"1";"Silva Rocio";"40";"1";
-"41";"1";"Guerrero Edwin";"41";"1";
-"42";"1";"Idrobo Victor";"42";"1";
-"43";"1";"Montenegro Fredy";"43";"1";
-"44";"1";"Montenegro Beatriz";"44";"1";
-"45";"1";"Esquivel Mercy";"45";"1";
-"46";"1";"Baca Patricio";"46";"1";
-"47";"1";"Salgado Rosario";"47";"1";
-"48";"1";"Menendez Rosa";"48";"1";
-"49";"1";"Beltran Irma";"49";"1";
-"50";"1";"Baquero Rosario";"50";"1";
-"51";"1";"Mejia Romulo";"51";"1";
-"52";"2";"Aula Normal";"NORMAL";"27";
-"53";"2";"Lab. de Computacion";"COMPUTAC";"1";
 Activity
 268
 "IdTheme";"IdCategory";"IdParallel";"Composition";
@@ -435,14 +374,72 @@ Activity
 "29";"5";"4";"1.1.1";
 "29";"8";"4";"1.1.1";
 "29";"11";"4";"1.1.1";
-JoinedCluster
-0
-"IdTheme";"IdCategory";"IdParallel";"IdCategory1";"IdParallel1";
-ThemeRestrictionType
+ResourceType
 2
-"IdThemeRestrictionType";"NaThemeRestrictionType";"ColThemeRestrictionType";"ValThemeRestrictionType";
-"2";"Inadecuado";"65280";"10";
-"3";"Imposible";"255";"200";
+"IdResourceType";"NaResourceType";"DefaultLimit";"ValResourceType";
+"1";"Profesor";"1";"299";
+"2";"Aula";"0";"65";
+Resource
+53
+"IdResource";"IdResourceType";"NaResource";"AbResource";"NumResource";
+"1";"1";"Loza Wilson";"1";"1";
+"2";"1";"Fuentes Maria";"2";"1";
+"3";"1";"Pazmiño Luis";"3";"1";
+"4";"1";"Brito Piedad";"4";"1";
+"5";"1";"Noguera Patricia";"5";"1";
+"6";"1";"Cordova Edgar";"6";"1";
+"7";"1";"Cedeño Edith";"7";"1";
+"8";"1";"Tamayo Margarita";"8";"1";
+"9";"1";"Deley Pedro";"9";"1";
+"10";"1";"Barragan Miriam";"10";"1";
+"11";"1";"Boada Diego";"11";"1";
+"12";"1";"Ortega Gonzalo";"12";"1";
+"13";"1";"Jacome Galo";"13";"1";
+"14";"1";"Gallardo Ramiro";"14";"1";
+"15";"1";"Rueda Hugo";"15";"1";
+"16";"1";"Aguas Patricio";"16";"1";
+"17";"1";"Sinche Denis";"17";"1";
+"18";"1";"Vega Pepe";"18";"1";
+"19";"1";"Pazmiño Mauro";"19";"1";
+"20";"1";"Garcia America";"20";"1";
+"21";"1";"Sandoval Lourdes";"21";"1";
+"22";"1";"Freire Magdalena";"22";"1";
+"23";"1";"Escobar Elias";"23";"1";
+"24";"1";"Tirado Mario";"24";"1";
+"25";"1";"Enriquez Carlos";"25";"1";
+"26";"1";"Albuja Ramiro";"26";"1";
+"27";"1";"Guaman Carlos";"27";"1";
+"28";"1";"Proaño Isabel";"28";"1";
+"29";"1";"Ruiz Lucia";"29";"1";
+"30";"1";"Chavez Piedad";"30";"1";
+"31";"1";"Becerra Susana";"31";"1";
+"32";"1";"Burbano Milton";"32";"1";
+"33";"1";"Verdesoto Marcelo";"33";"1";
+"34";"1";"Baquero Zuly";"34";"1";
+"35";"1";"Vasquez Jose";"35";"1";
+"36";"1";"Espinoza Fabian";"36";"1";
+"37";"1";"Montenegro Efren";"37";"1";
+"38";"1";"Mejia Oswaldo";"38";"1";
+"39";"1";"Jimenez Victoria";"39";"1";
+"40";"1";"Silva Rocio";"40";"1";
+"41";"1";"Guerrero Edwin";"41";"1";
+"42";"1";"Idrobo Victor";"42";"1";
+"43";"1";"Montenegro Fredy";"43";"1";
+"44";"1";"Montenegro Beatriz";"44";"1";
+"45";"1";"Esquivel Mercy";"45";"1";
+"46";"1";"Baca Patricio";"46";"1";
+"47";"1";"Salgado Rosario";"47";"1";
+"48";"1";"Menendez Rosa";"48";"1";
+"49";"1";"Beltran Irma";"49";"1";
+"50";"1";"Baquero Rosario";"50";"1";
+"51";"1";"Mejia Romulo";"51";"1";
+"52";"2";"Aula Normal";"NORMAL";"27";
+"53";"2";"Lab. de Computacion";"COMPUTAC";"1";
+ResourceRestrictionType
+2
+"IdResourceRestrictionType";"NaResourceRestrictionType";"ColResourceRestrictionType";"ValResourceRestrictionType";
+"2";"No Gusta";"65280";"10";
+"3";"No Puede";"255";"300";
 TimeSlot
 30
 "IdDay";"IdHour";
@@ -1015,11 +1012,52 @@ Requirement
 "23";"6";"5";"53";"1";
 "23";"9";"5";"53";"1";
 "23";"12";"5";"53";"1";
-ResourceRestrictionType
+JoinedCluster
+0
+"IdTheme";"IdCategory";"IdParallel";"IdCategory1";"IdParallel1";
+ThemeRestrictionType
 2
-"IdResourceRestrictionType";"NaResourceRestrictionType";"ColResourceRestrictionType";"ValResourceRestrictionType";
-"2";"No Gusta";"65280";"10";
-"3";"No Puede";"255";"300";
+"IdThemeRestrictionType";"NaThemeRestrictionType";"ColThemeRestrictionType";"ValThemeRestrictionType";
+"2";"Inadecuado";"65280";"10";
+"3";"Imposible";"255";"200";
+ThemeRestriction
+35
+"IdTheme";"IdDay";"IdHour";"IdThemeRestrictionType";
+"2";"2";"7";"2";
+"2";"3";"7";"2";
+"2";"4";"7";"2";
+"2";"5";"7";"2";
+"2";"6";"7";"2";
+"7";"2";"6";"2";
+"7";"2";"7";"2";
+"7";"3";"6";"2";
+"7";"3";"7";"2";
+"7";"4";"6";"2";
+"7";"4";"7";"2";
+"7";"5";"6";"2";
+"7";"5";"7";"2";
+"7";"6";"6";"2";
+"7";"6";"7";"2";
+"23";"2";"1";"2";
+"23";"2";"2";"2";
+"23";"2";"3";"2";
+"23";"2";"5";"2";
+"23";"3";"1";"2";
+"23";"3";"2";"2";
+"23";"3";"3";"2";
+"23";"3";"5";"2";
+"23";"4";"1";"2";
+"23";"4";"2";"2";
+"23";"4";"3";"2";
+"23";"4";"5";"2";
+"23";"5";"1";"2";
+"23";"5";"2";"2";
+"23";"5";"3";"2";
+"23";"5";"5";"2";
+"23";"6";"1";"2";
+"23";"6";"2";"2";
+"23";"6";"3";"2";
+"23";"6";"5";"2";
 ResourceRestriction
 338
 "IdResource";"IdDay";"IdHour";"IdResourceRestrictionType";
@@ -1361,44 +1399,6 @@ ResourceRestriction
 "51";"6";"2";"2";
 "51";"6";"3";"2";
 "51";"6";"5";"2";
-ThemeRestriction
-35
-"IdTheme";"IdDay";"IdHour";"IdThemeRestrictionType";
-"2";"2";"7";"2";
-"2";"3";"7";"2";
-"2";"4";"7";"2";
-"2";"5";"7";"2";
-"2";"6";"7";"2";
-"7";"2";"6";"2";
-"7";"2";"7";"2";
-"7";"3";"6";"2";
-"7";"3";"7";"2";
-"7";"4";"6";"2";
-"7";"4";"7";"2";
-"7";"5";"6";"2";
-"7";"5";"7";"2";
-"7";"6";"6";"2";
-"7";"6";"7";"2";
-"23";"2";"1";"2";
-"23";"2";"2";"2";
-"23";"2";"3";"2";
-"23";"2";"5";"2";
-"23";"3";"1";"2";
-"23";"3";"2";"2";
-"23";"3";"3";"2";
-"23";"3";"5";"2";
-"23";"4";"1";"2";
-"23";"4";"2";"2";
-"23";"4";"3";"2";
-"23";"4";"5";"2";
-"23";"5";"1";"2";
-"23";"5";"2";"2";
-"23";"5";"3";"2";
-"23";"5";"5";"2";
-"23";"6";"1";"2";
-"23";"6";"2";"2";
-"23";"6";"3";"2";
-"23";"6";"5";"2";
 Timetable
 3
 "IdTimetable";"TimeIni";"TimeEnd";"Summary";
@@ -7632,6 +7632,9 @@ TimetableDetail
 "6";"23";"12";"5";"6";"5";"599";
 "6";"14";"12";"5";"6";"6";"464";
 "6";"14";"12";"5";"6";"7";"464";
+TimetableResource
+0
+"IdTimetable";"IdTheme";"IdCategory";"IdParallel";"IdResource";
 39
 NaInstitution=Colegio Nacional Mixto Nocturno Salamanca
 SchoolYear=1999-2000

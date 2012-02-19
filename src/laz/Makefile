@@ -42,6 +42,9 @@ ifeq ($(shell uname -o),Cygwin)
 
 dbfiles: $(TTGSQL) $(TTGMYSQL) $(DSRCBASE).pp $(DSRCBASE)consts.pp $(DSRCBASE).lfm
 
+dbclean:
+	$(RM) $(TTGSQL) $(TTGMYSQL) $(DSRCBASE).pp $(DSRCBASE)consts.pp $(DSRCBASE).lfm
+
 ttgsql: $(TTGSQL)
 
 $(TTGSQL): $(DBCONVERT) $(TTGMDB)
@@ -58,7 +61,7 @@ $(DSRCBASE).pp $(DSRCBASE)consts.pp $(DSRCBASE).lfm: $(DBCONVERT) $(TTGMDB) Make
 	dos2unix $(DSRCBASE).pp $(DSRCBASE)consts.pp $(DSRCBASE).lfm
 
 cleanthisw:
-	$(RM) $(DSRCBASE).{lfm,lrs,pp} $(TTGSQL) $(TTGMYSQL)
+	$(RM) $(DSRCBASE).{lfm,lrs,pp} $(DSRCBASE)consts.pp $(TTGSQL) $(TTGMYSQL)
 
 $(DBCONVERT):
 	cd $(DBCONVERTSRC) ; $(MAKE) all

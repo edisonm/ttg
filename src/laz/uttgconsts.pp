@@ -11,6 +11,7 @@ uses
 resourcestring
 
   SApplyDownhill = 'Applying Downhill';
+  SAttendant = 'Attendant';
   SAssign = 'Assign';
   SBaseTimetable = 'Base Timetable: %d';
   SBreakTimetableResource = 'Broken TT. Resources';
@@ -82,10 +83,12 @@ resourcestring
   SSaveDialogCSVFilter = 'Comma delimited CSV (*.csv)|*.csv';
   SSaveDialogFilter =  'High School Timetable (*.ttd)|*.ttd';
   SSearchBy = 'Search by %s';
+  SSupervisor = 'Supervisor';
   SResourceRestrictionsHead = 'Resource; Restrictions';
   SResourceWorkLoadHead = 'Resource; Work Load';
   SResourcesWorkLoadWithProblems = 'Resources'' work load with problems...';
   SResourcesWorkLoadWithoutProblems = 'Resources'' Work load without problems...';
+  SRoom = 'Room';
   STheNextTimetablesAlreadyExists = 'The next Timetables already exists: %s';
   STimetableCodesToGenerate = 'Codes of Timetables to generate';
   STotalValue = 'Total Value';

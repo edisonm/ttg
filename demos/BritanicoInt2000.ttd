@@ -1,18 +1,5 @@
 TTD 293
-18
-Parallel
-2
-"IdParallel";"NaParallel";
-"1";"A";
-"2";"B";
-Day
-5
-"IdDay";"NaDay";
-"2";"Lunes";
-"3";"Martes";
-"4";"Miercoles";
-"5";"Jueves";
-"6";"Viernes";
+19
 Category
 6
 "IdCategory";"NaCategory";"AbCategory";
@@ -22,6 +9,30 @@ Category
 "4";"Cuarto";"4";
 "5";"Quinto";"5";
 "6";"Sexto";"6";
+Parallel
+2
+"IdParallel";"NaParallel";
+"1";"A";
+"2";"B";
+Cluster
+8
+"IdCategory";"IdParallel";
+"1";"1";
+"1";"2";
+"2";"1";
+"2";"2";
+"3";"1";
+"4";"1";
+"5";"1";
+"6";"1";
+Day
+5
+"IdDay";"NaDay";
+"2";"Lunes";
+"3";"Martes";
+"4";"Miercoles";
+"5";"Jueves";
+"6";"Viernes";
 Hour
 11
 "IdHour";"NaHour";"Interval";
@@ -36,17 +47,6 @@ Hour
 "9";"Recreo2";"12:55-13:40";
 "10";"Octava";"13:40-14:20";
 "11";"Novena";"14:20-15:00";
-Cluster
-8
-"IdCategory";"IdParallel";
-"1";"1";
-"1";"2";
-"2";"1";
-"2";"2";
-"3";"1";
-"4";"1";
-"5";"1";
-"6";"1";
 Theme
 28
 "IdTheme";"NaTheme";
@@ -78,45 +78,6 @@ Theme
 "28";"Matematica 6";
 "29";"Mat/Eco/Fil_ 6";
 "30";"Science";
-ResourceType
-2
-"IdResourceType";"NaResourceType";"DefaultLimit";"ValResourceType";
-"1";"Profesor";"1";"305";
-"2";"Aula";"0";"65";
-Resource
-31
-"IdResource";"IdResourceType";"NaResource";"AbResource";"NumResource";
-"1";"1";"Revelo Jorge";"1";"1";
-"2";"1";"Bracero Jorge";"2";"1";
-"3";"1";"Imbaquingo Jorge";"3";"1";
-"4";"1";"Salcedo Francisco";"4";"1";
-"5";"1";"Calderon Edgar";"5";"1";
-"6";"1";"Mora Daniel";"6";"1";
-"7";"1";"Castro Maria";"8";"1";
-"8";"1";"Tayo Pablo";"7";"1";
-"9";"1";"Eldredge Graciela";"9";"1";
-"10";"1";"Andrade Fernando";"10";"1";
-"11";"1";"Barba Juan";"11";"1";
-"12";"1";"Grignard Jacques";"12";"1";
-"13";"1";"Lourdes Maria";"13";"1";
-"14";"1";"Naranjo Azucena";"14";"1";
-"15";"1";"Enriquez Deniss";"15";"1";
-"16";"1";"Nuñez Guillermo";"16";"1";
-"17";"1";"Rodas Paul";"17";"1";
-"18";"1";"Buchelli Clara";"18";"1";
-"19";"1";"Daulon Marina";"19";"1";
-"20";"1";"Velasco Rosa";"20";"1";
-"21";"2";"Aula normal";"NORM";"8";
-"22";"2";"Lab Fisica y Dibujo Tec.";"FISICADIB";"1";
-"23";"2";"Lab Computac";"COMP";"1";
-"24";"2";"Aula Musica";"MUSICA";"1";
-"25";"2";"Lab Quimica Biologia";"QUIMICA";"1";
-"26";"2";"Aula Frances";"FRANCES";"1";
-"27";"2";"Aula Arte";"ARTE";"1";
-"28";"2";"Aula Nivelación Ingles";"INGLES";"1";
-"29";"2";"Canchas";"CANCHA";"1";
-"30";"2";"Matematica";"MATE";"1";
-"31";"2";"Dibujo Téc. Op";"DIBTECOP";"1";
 Activity
 122
 "IdTheme";"IdCategory";"IdParallel";"Composition";
@@ -242,14 +203,51 @@ Activity
 "29";"6";"1";"2.2";
 "30";"1";"1";"2.1";
 "30";"1";"2";"2.1";
-JoinedCluster
-0
-"IdTheme";"IdCategory";"IdParallel";"IdCategory1";"IdParallel1";
-ThemeRestrictionType
+ResourceType
 2
-"IdThemeRestrictionType";"NaThemeRestrictionType";"ColThemeRestrictionType";"ValThemeRestrictionType";
-"0";"Inadecuado";"65280";"50";
-"1";"Imposible";"255";"500";
+"IdResourceType";"NaResourceType";"DefaultLimit";"ValResourceType";
+"1";"Profesor";"1";"305";
+"2";"Aula";"0";"65";
+Resource
+31
+"IdResource";"IdResourceType";"NaResource";"AbResource";"NumResource";
+"1";"1";"Revelo Jorge";"1";"1";
+"2";"1";"Bracero Jorge";"2";"1";
+"3";"1";"Imbaquingo Jorge";"3";"1";
+"4";"1";"Salcedo Francisco";"4";"1";
+"5";"1";"Calderon Edgar";"5";"1";
+"6";"1";"Mora Daniel";"6";"1";
+"7";"1";"Castro Maria";"8";"1";
+"8";"1";"Tayo Pablo";"7";"1";
+"9";"1";"Eldredge Graciela";"9";"1";
+"10";"1";"Andrade Fernando";"10";"1";
+"11";"1";"Barba Juan";"11";"1";
+"12";"1";"Grignard Jacques";"12";"1";
+"13";"1";"Lourdes Maria";"13";"1";
+"14";"1";"Naranjo Azucena";"14";"1";
+"15";"1";"Enriquez Deniss";"15";"1";
+"16";"1";"Nuñez Guillermo";"16";"1";
+"17";"1";"Rodas Paul";"17";"1";
+"18";"1";"Buchelli Clara";"18";"1";
+"19";"1";"Daulon Marina";"19";"1";
+"20";"1";"Velasco Rosa";"20";"1";
+"21";"2";"Aula normal";"NORM";"8";
+"22";"2";"Lab Fisica y Dibujo Tec.";"FISICADIB";"1";
+"23";"2";"Lab Computac";"COMP";"1";
+"24";"2";"Aula Musica";"MUSICA";"1";
+"25";"2";"Lab Quimica Biologia";"QUIMICA";"1";
+"26";"2";"Aula Frances";"FRANCES";"1";
+"27";"2";"Aula Arte";"ARTE";"1";
+"28";"2";"Aula Nivelación Ingles";"INGLES";"1";
+"29";"2";"Canchas";"CANCHA";"1";
+"30";"2";"Matematica";"MATE";"1";
+"31";"2";"Dibujo Téc. Op";"DIBTECOP";"1";
+ResourceRestrictionType
+3
+"IdResourceRestrictionType";"NaResourceRestrictionType";"ColResourceRestrictionType";"ValResourceRestrictionType";
+"0";"No gusta";"65280";"50";
+"1";"No puede";"255";"500";
+"2";"Optativa";"8388736";"500";
 TimeSlot
 45
 "IdDay";"IdHour";
@@ -547,62 +545,14 @@ Requirement
 "29";"6";"1";"30";"1";
 "22";"5";"1";"31";"1";
 "22";"6";"1";"31";"1";
-ResourceRestrictionType
-3
-"IdResourceRestrictionType";"NaResourceRestrictionType";"ColResourceRestrictionType";"ValResourceRestrictionType";
-"0";"No gusta";"65280";"50";
-"1";"No puede";"255";"500";
-"2";"Optativa";"8388736";"500";
-ResourceRestriction
-47
-"IdResource";"IdDay";"IdHour";"IdResourceRestrictionType";
-"1";"2";"10";"1";
-"1";"2";"11";"1";
-"1";"3";"10";"1";
-"1";"3";"11";"1";
-"1";"4";"10";"1";
-"1";"4";"11";"1";
-"1";"5";"10";"1";
-"1";"5";"11";"1";
-"1";"6";"10";"1";
-"1";"6";"11";"1";
-"4";"3";"1";"2";
-"4";"3";"2";"2";
-"4";"3";"3";"2";
-"4";"3";"4";"2";
-"4";"3";"6";"2";
-"4";"4";"6";"2";
-"4";"5";"1";"2";
-"4";"5";"2";"2";
-"4";"5";"3";"2";
-"4";"5";"4";"2";
-"4";"5";"6";"2";
-"4";"6";"6";"2";
-"6";"2";"1";"1";
-"6";"3";"1";"1";
-"6";"4";"1";"1";
-"6";"5";"1";"1";
-"6";"6";"1";"1";
-"12";"2";"1";"1";
-"12";"2";"2";"1";
-"12";"2";"3";"1";
-"12";"2";"4";"1";
-"12";"3";"1";"1";
-"12";"3";"2";"1";
-"12";"3";"3";"1";
-"12";"3";"4";"1";
-"12";"4";"1";"1";
-"12";"4";"2";"1";
-"12";"4";"3";"1";
-"12";"4";"4";"1";
-"12";"5";"1";"1";
-"12";"5";"2";"1";
-"12";"5";"3";"1";
-"12";"5";"4";"1";
-"12";"6";"1";"1";
-"12";"6";"2";"1";
-"12";"6";"3";"1";
-"12";"6";"4";"1";
+JoinedCluster
+0
+"IdTheme";"IdCategory";"IdParallel";"IdCategory1";"IdParallel1";
+ThemeRestrictionType
+2
+"IdThemeRestrictionType";"NaThemeRestrictionType";"ColThemeRestrictionType";"ValThemeRestrictionType";
+"0";"Inadecuado";"65280";"50";
+"1";"Imposible";"255";"500";
 ThemeRestriction
 286
 "IdTheme";"IdDay";"IdHour";"IdThemeRestrictionType";
@@ -892,6 +842,56 @@ ThemeRestriction
 "29";"6";"8";"1";
 "29";"6";"10";"1";
 "29";"6";"11";"1";
+ResourceRestriction
+47
+"IdResource";"IdDay";"IdHour";"IdResourceRestrictionType";
+"1";"2";"10";"1";
+"1";"2";"11";"1";
+"1";"3";"10";"1";
+"1";"3";"11";"1";
+"1";"4";"10";"1";
+"1";"4";"11";"1";
+"1";"5";"10";"1";
+"1";"5";"11";"1";
+"1";"6";"10";"1";
+"1";"6";"11";"1";
+"4";"3";"1";"2";
+"4";"3";"2";"2";
+"4";"3";"3";"2";
+"4";"3";"4";"2";
+"4";"3";"6";"2";
+"4";"4";"6";"2";
+"4";"5";"1";"2";
+"4";"5";"2";"2";
+"4";"5";"3";"2";
+"4";"5";"4";"2";
+"4";"5";"6";"2";
+"4";"6";"6";"2";
+"6";"2";"1";"1";
+"6";"3";"1";"1";
+"6";"4";"1";"1";
+"6";"5";"1";"1";
+"6";"6";"1";"1";
+"12";"2";"1";"1";
+"12";"2";"2";"1";
+"12";"2";"3";"1";
+"12";"2";"4";"1";
+"12";"3";"1";"1";
+"12";"3";"2";"1";
+"12";"3";"3";"1";
+"12";"3";"4";"1";
+"12";"4";"1";"1";
+"12";"4";"2";"1";
+"12";"4";"3";"1";
+"12";"4";"4";"1";
+"12";"5";"1";"1";
+"12";"5";"2";"1";
+"12";"5";"3";"1";
+"12";"5";"4";"1";
+"12";"6";"1";"1";
+"12";"6";"2";"1";
+"12";"6";"3";"1";
+"12";"6";"4";"1";
 Timetable
 3
 "IdTimetable";"TimeIni";"TimeEnd";"Summary";
@@ -3733,6 +3733,9 @@ TimetableDetail
 "9";"19";"6";"1";"6";"8";"148";
 "9";"21";"6";"1";"6";"10";"169";
 "9";"21";"6";"1";"6";"11";"169";
+TimetableResource
+0
+"IdTimetable";"IdTheme";"IdCategory";"IdParallel";"IdResource";
 33
 NaInstitution=Colegio Experimental Britanico Internacional
 SchoolYear=2000-2001

@@ -111,6 +111,14 @@ const
     SHour6,
     SHour7,
     SHour8);
+  SNaResourceType: array[0..2] of string = (
+    SSupervisor,
+    SRoom,
+    SAttendant);
+  EValResourceType: array[0..2] of Integer = (
+    300,
+    120,
+    50);
   SNaThemeRestrictionType: array[0..1] of string = (
     SInadequate,
     SImpossible);
@@ -143,8 +151,8 @@ begin
       for i := Low(DayNames) + 1 to High(DayNames) - 1 do
       begin
         Append;
-        Fields[0].AsInteger := i;
-        Fields[1].AsString := DayNames[i];
+        FindField('IdDay').AsInteger := i;
+        FindField('NaDay').AsString := DayNames[i];
         Post;
       end;
     end;
@@ -160,9 +168,9 @@ begin
           t := t + 1 / 32;
         s := s + '-' + FormatDateTime(ShortTimeFormat, t);
         Append;
-        Fields[0].AsInteger := i;
-        Fields[1].AsString := SNaHour[i];
-        Fields[2].AsString := s;
+        FindField('IdHour').AsInteger := i;
+        FindField('NaHour').AsString := SNaHour[i];
+        FindField('Interval').AsString := s;
         Post;
       end;
     end;
@@ -177,8 +185,8 @@ begin
           if TbHour.FindField('NaHour').AsString <> SHourF then
           begin
             Append;
-            Fields[0].AsInteger := TbDay.FindField('IdDay').AsInteger;
-            Fields[1].AsInteger := TbHour.FindField('IdHour').AsInteger;
+            FindField('IdDay').AsInteger := TbDay.FindField('IdDay').AsInteger;
+            FindField('IdHour').AsInteger := TbHour.FindField('IdHour').AsInteger;
             Post;
           end;
           TbHour.Next;
@@ -195,6 +203,18 @@ begin
         Fields[1].AsString := SNaThemeRestrictionType[i];
         Fields[2].AsInteger := EColThemeRestrictionType[i];
         Fields[3].AsFloat := EValThemeRestrictionType[i];
+        Post;
+      end;
+    end;
+    with TbResourceType do
+    begin
+      for i := Low(SNaResourceType) to High(SNaResourceType) do
+      begin
+        Append;
+        FindField('IdResourceType').AsInteger := i;
+        FindField('NaResourceType').AsString := SNaResourceType[i];
+        FindField('DefaultLimit').AsInteger := 1;
+        FindField('ValResourceType').AsFloat := EValResourceType[i];
         Post;
       end;
     end;
