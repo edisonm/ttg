@@ -1150,7 +1150,7 @@ begin
           Inc(FResourceTimeSlotCount[Resource, TimeSlot], Delta * Count);
           ResourceRestrictionType := FResourceTimeSlotToResourceRestrictionType[Resource, TimeSlot];
           if ResourceRestrictionType >= 0 then
-            Inc(FResourceRestrictionTypeToResourceCount[ResourceRestrictionType], Delta);
+            Inc(FResourceRestrictionTypeToResourceCount[ResourceRestrictionType], Delta * Count);
         end;
         Inc(FThemeTimeSlotCount[Theme, TimeSlot], Delta);
         ThemeRestrictionType := FThemeTimeSlotToThemeRestrictionType[Theme, TimeSlot];
@@ -1371,7 +1371,7 @@ begin
     Add(Format('%0:-28s %12s %12s %12d', [SClashResource + ':',
          '(' + VarArrToStr(FClashResourceType, ' ') + ')',
          '(' + VarArrToStr(TTimetableModel(Model).FResourceTypeToValue, ' ') + ')',
-         ResourceRestrictionValue]));
+         ClashResourceValue]));
     Add(Format('%0:-28s %12s %12s %12d', [STbResourceRestriction + ':',
          '(' + VarArrToStr(FResourceRestrictionTypeToResourceCount, ' ') + ')',
          '(' + VarArrToStr(TTimetableModel(Model).FResourceRestrictionTypeToValue, ' ') + ')',
@@ -1426,8 +1426,7 @@ begin
   with TTimetableModel(Model), TablingInfo do
   for ResourceType := 0 to FResourceTypeCount - 1 do
   begin
-    Result := Result + FClashResourceType[ResourceType]
-      * FResourceTypeToValue[ResourceType];
+    Inc(Result, FClashResourceType[ResourceType] * FResourceTypeToValue[ResourceType]);
   end;
 end;
 
@@ -1921,7 +1920,7 @@ end;
 
 function TTimetableModel.GetElitistCount: Integer;
 begin
-  Result := 2 + FResourceTypeCount;
+  Result := 1 + FResourceTypeCount;
 end;
 
 { TTTBookmark }

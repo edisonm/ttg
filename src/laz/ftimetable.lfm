@@ -1,5 +1,5 @@
 inherited TimetableForm: TTimetableForm
-  Left = 611
+  Left = 604
   Height = 545
   Top = 293
   Width = 899
@@ -568,19 +568,15 @@ inherited TimetableForm: TTimetableForm
       '  Requirement.IdResource,'
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour,'
-      '  Distribution.IdCategory,'
-      '  Distribution.IdParallel,'
+      '  TimetableDetail.IdCategory,'
+      '  TimetableDetail.IdParallel,'
       '  Theme.NaTheme'
-      'FROM Distribution'
-      '  INNER JOIN TimetableDetail'
-      '   ON Distribution.IdCategory = TimetableDetail.IdCategory'
-      '  AND Distribution.IdParallel = TimetableDetail.IdParallel'
-      '  AND Distribution.IdTheme = TimetableDetail.IdTheme'
+      'FROM TimetableDetail'
       '  INNER JOIN Requirement'
-      '   ON Distribution.IdCategory = Requirement.IdCategory'
-      '  AND Distribution.IdParallel = Requirement.IdParallel'
-      '  AND Distribution.IdTheme = Requirement.IdTheme'
-      '  INNER JOIN Theme ON Distribution.IdTheme=Theme.IdTheme'
+      '   ON TimetableDetail.IdCategory = Requirement.IdCategory'
+      '  AND TimetableDetail.IdParallel = Requirement.IdParallel'
+      '  AND TimetableDetail.IdTheme = Requirement.IdTheme'
+      '  INNER JOIN Theme ON TimetableDetail.IdTheme=Theme.IdTheme'
       'WHERE TimetableDetail.IdTimetable=:IdTimetable'
       '  AND Requirement.IdResource=:IdResource'
       '  AND TimetableDetail.IdDay=:IdDay'
@@ -704,17 +700,6 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashResourceDetailIdTheme: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdTheme'
-      Index = 6
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Visible = False
-    end
     object QuClashResourceDetailAbCategory: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
@@ -768,28 +753,28 @@ inherited TimetableForm: TTimetableForm
       '  Requirement.IdResource,'
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour,'
+      '  Resource.IdResourceType,'
+      '  ResourceType.NaResourceType,'
       '  Resource.NaResource,'
       '  SUM(Requirement.NumRequirement) AS Occupied,'
       '  SUM(Requirement.NumRequirement) - Resource.NumResource AS Clashes'
-      'FROM (Distribution'
-      '  INNER JOIN TimetableDetail ON'
-      '       (Distribution.IdTheme = TimetableDetail.IdTheme)'
-      '  AND (Distribution.IdCategory = TimetableDetail.IdCategory)'
-      '  AND (Distribution.IdParallel = TimetableDetail.IdParallel))'
+      'FROM TimetableDetail'
       '  INNER JOIN Requirement'
-      '   ON Distribution.IdCategory = Requirement.IdCategory'
-      '  AND Distribution.IdParallel = Requirement.IdParallel'
-      '  AND Distribution.IdTheme = Requirement.IdTheme'
-      '  INNER JOIN Resource ON Requirement.IdResource = Resource.IdResource'
+      '   ON TimetableDetail.IdCategory=Requirement.IdCategory'
+      '  AND TimetableDetail.IdParallel=Requirement.IdParallel'
+      '  AND TimetableDetail.IdTheme=Requirement.IdTheme'
+      '  INNER JOIN Resource ON Requirement.IdResource=Resource.IdResource'
+      '  INNER JOIN ResourceType ON Resource.IdResourceType=ResourceType.IdResourceType'
       'WHERE TimetableDetail.IdTimetable=:IdTimetable'
       'GROUP BY'
       '  TimetableDetail.IdTimetable,'
       '  Requirement.IdResource,'
       '  Resource.NaResource,'
+      '  Resource.IdResourceType'
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour'
       'HAVING Clashes > 0'
-      'ORDER BY TimetableDetail.IdTimetable, Resource.NaResource'
+      'ORDER BY TimetableDetail.IdTimetable, ResourceType.NaResourceType, Resource.NaResource'
     )
     Params = <    
       item
@@ -800,7 +785,6 @@ inherited TimetableForm: TTimetableForm
     DataSource = SourceDataModule.DSTimetable
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
-    IndexFieldNames = 'IdTimetable Asc;NaResource Asc'
     left = 112
     top = 336
     ParamData = <    
@@ -853,14 +837,36 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
+    object QuClashResourceIdResourceType: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'IdResourceType'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = True
+      Visible = False
+    end
+    object QuClashResourceNaResourceType: TStringField
+      DisplayWidth = 15
+      FieldKind = fkData
+      FieldName = 'NaResourceType'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = True
+      Size = 15
+    end
     object QuClashResourceNaResource: TStringField
       DisplayWidth = 25
       FieldKind = fkData
       FieldName = 'NaResource'
-      Index = 4
+      Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
+      ReadOnly = True
       Required = True
       Size = 25
     end
@@ -868,7 +874,7 @@ inherited TimetableForm: TTimetableForm
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'NaHour'
-      Index = 5
+      Index = 7
       KeyFields = 'IdHour'
       LookupCache = False
       LookupDataSet = SourceDataModule.TbHour
@@ -883,7 +889,7 @@ inherited TimetableForm: TTimetableForm
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'NaDay'
-      Index = 6
+      Index = 8
       KeyFields = 'IdDay'
       LookupCache = False
       LookupDataSet = SourceDataModule.TbDay
@@ -898,7 +904,7 @@ inherited TimetableForm: TTimetableForm
       DisplayWidth = 5
       FieldKind = fkData
       FieldName = 'Occupied'
-      Index = 7
+      Index = 9
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
@@ -908,7 +914,7 @@ inherited TimetableForm: TTimetableForm
       DisplayWidth = 5
       FieldKind = fkData
       FieldName = 'Clashes'
-      Index = 7
+      Index = 10
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = True
@@ -1384,21 +1390,16 @@ inherited TimetableForm: TTimetableForm
       '  Resource.NaResource,'
       '  ResourceRestriction.IdDay,'
       '  ResourceRestriction.IdHour,'
-      '  Distribution.IdCategory,'
-      '  Distribution.IdParallel'
-      'FROM'
-      '  ((TimetableDetail INNER JOIN Distribution'
-      '  ON (TimetableDetail.IdTheme=Distribution.IdTheme)'
-      '  AND (TimetableDetail.IdCategory=Distribution.IdCategory)'
-      '  AND (TimetableDetail.IdParallel=Distribution.IdParallel))'
-      '  INNER JOIN Requirement'
-      '   ON Distribution.IdCategory = Requirement.IdCategory'
-      '  AND Distribution.IdParallel = Requirement.IdParallel'
-      '  AND Distribution.IdTheme = Requirement.IdTheme'
+      '  TimetableDetail.IdCategory,'
+      '  TimetableDetail.IdParallel'
+      'FROM TimetableDetail INNER JOIN Requirement'
+      '   ON TimetableDetail.IdCategory = Requirement.IdCategory'
+      '  AND TimetableDetail.IdParallel = Requirement.IdParallel'
+      '  AND TimetableDetail.IdTheme = Requirement.IdTheme'
       '  INNER JOIN ResourceRestriction'
-      '  ON (ResourceRestriction.IdDay=TimetableDetail.IdDay)'
-      '  AND (ResourceRestriction.IdHour=TimetableDetail.IdHour)'
-      '  AND (ResourceRestriction.IdResource=Requirement.IdResource))'
+      '   ON ResourceRestriction.IdDay=TimetableDetail.IdDay'
+      '  AND ResourceRestriction.IdHour=TimetableDetail.IdHour'
+      '  AND ResourceRestriction.IdResource=Requirement.IdResource'
       '  INNER JOIN Resource ON Resource.IdResource=ResourceRestriction.IdResource'
       'WHERE'
       '  TimetableDetail.IdTimetable=:IdTimetable'
@@ -1449,7 +1450,7 @@ inherited TimetableForm: TTimetableForm
       Visible = False
     end
     object QuTimetableDetailResourceRestrictionNaResource: TStringField
-      DisplayWidth = 15
+      DisplayWidth = 25
       FieldKind = fkData
       FieldName = 'NaResource'
       Index = 2
@@ -1457,7 +1458,7 @@ inherited TimetableForm: TTimetableForm
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = True
-      Size = 15
+      Size = 25
     end
     object QuTimetableDetailResourceRestrictionIdDay: TLongintField
       DisplayWidth = 10

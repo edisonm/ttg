@@ -27,7 +27,6 @@ type
     QuClashResourceDetailIdResource: TLongintField;
     QuClashResourceDetailIdCategory: TLongintField;
     QuClashResourceDetailIdParallel: TLongintField;
-    QuClashResourceDetailIdTheme: TLongintField;
     QuClashResourceDetailAbCategory: TStringField;
     QuClashResourceDetailNaParallel: TStringField;
     QuClashResourceDetailNaTheme: TStringField;
@@ -35,6 +34,7 @@ type
     QuClashResourceIdResource: TLongintField;
     QuClashResourceIdDay: TLongintField;
     QuClashResourceIdHour: TLongintField;
+    QuClashResourceIdResourceType: TLongintField;
     QuClashResourceNaDay: TStringField;
     QuClashResourceNaHour: TStringField;
     QuClashTheme: TZQuery;
@@ -122,6 +122,7 @@ type
     QuTimetableDetailThemeRestrictionIdTimetable: TLongintField;
     QuTimetableDetailResourceRestrictionIdTimetable: TLongintField;
     QuTimetableDetailResourceRestrictionNaResource: TStringField;
+    QuClashResourceNaResourceType: TStringField;
     QuClashResourceNaResource: TStringField;
     QuClashResourceOccupied: TLongintField;
     QuClashResourceClashes: TLongintField;
@@ -322,7 +323,6 @@ begin
   QuClashResourceNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuClashResourceNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuClashResourceDetailIdParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
-  QuClashResourceDetailIdTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
   QuClashResourceDetailAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
   QuClashResourceDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuClashResourceDetailNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
