@@ -116,7 +116,7 @@ var
     s: string;
   begin
     (* ********************* THIS WILL ABORT **********************)
-    with SourceDataModule, TbDistribution do
+    with SourceDataModule, TbActivity do
     begin
       s := IndexFieldNames;
       IndexFieldNames := 'IdResource';
@@ -125,21 +125,21 @@ var
       IdResource := -$7FFFFFFF;
       while not Eof do
       begin
-        IdResource1 := TbDistribution.FindField('IdResource').AsInteger;
+        IdResource1 := TbActivity.FindField('IdResource').AsInteger;
         if IdResource <> IdResource1 then
         begin
           TbTmpResourceWorkLoad.Append;
           TbTmpResourceWorkLoadIdResource.Value :=
-            TbDistribution.FindField('IdResource').AsInteger;
+            TbActivity.FindField('IdResource').AsInteger;
           TbTmpResourceWorkLoadWorkLoad.Value :=
-            CompositionToDuration(TbDistribution.FindField('Composition').AsString);
+            CompositionToDuration(TbActivity.FindField('Composition').AsString);
           IdResource := IdResource1;
         end
         else
         begin
           TbTmpResourceWorkLoad.Edit;
           with TbTmpResourceWorkLoadWorkLoad do
-            Value := Value + CompositionToDuration(TbDistribution.FindField('Composition').AsString);
+            Value := Value + CompositionToDuration(TbActivity.FindField('Composition').AsString);
         end;
         TbTmpResourceWorkLoad.Post;
         Next;
@@ -268,7 +268,7 @@ var
       HaveInternalProblems := False;
       try
         Open;
-        TbDistribution.First;
+        TbActivity.First;
         TbTimeSlot.First;
         First;
         ASubStrings.Add(SClusterWorkLoadWithoutProblems);
@@ -276,18 +276,18 @@ var
         ASubStrings.Add(SClusterWorkLoadHead);
         while not Eof do
         begin
-          TbDistribution.Filter :=
+          TbActivity.Filter :=
             Format('IdCategory=%d and IdParallel=%d', [
               TbCluster.FindField('IdCategory').AsInteger,
               TbCluster.FindField('IdParallel').AsInteger]);
-          TbDistribution.Filtered := true;
-          TbDistribution.First;
+          TbActivity.Filtered := true;
+          TbActivity.First;
           t := 0;
           try
-            while not TbDistribution.Eof do
+            while not TbActivity.Eof do
             begin
-              Inc(t, CompositionToDuration(TbDistribution.FindField('Composition').AsString));
-              TbDistribution.Next;
+              Inc(t, CompositionToDuration(TbActivity.FindField('Composition').AsString));
+              TbActivity.Next;
             end;
             if (t <= 0) or (t > TbTimeSlot.RecordCount) then
             begin
@@ -310,7 +310,7 @@ var
               [SProblems, TbCluster.FindField('AbCategory').AsString,
               TbCluster.FindField('NaParallel').AsString,
               STbTheme,
-              TbDistribution.FindField('NaTheme').AsString]));
+              TbActivity.FindField('NaTheme').AsString]));
             HaveProblems := True;
           end;
           Next;
@@ -325,10 +325,10 @@ var
         EqualSpaced(ASubStrings, vSubMin, vSubMax, ';');
         ASubStrings.Add('');
       finally
-        TbDistribution.Filter := '';
-        TbDistribution.Filtered := false;
+        TbActivity.Filter := '';
+        TbActivity.Filtered := false;
         First;
-        TbDistribution.First;
+        TbActivity.First;
       end;
     end;
   end;
@@ -519,7 +519,7 @@ begin
       QuCluster.Open;
       OpenTables;
     end;
-    TbDistribution.BeforePost := TbDistributionBeforePost;
+    TbActivity.BeforePost := TbActivityBeforePost;
   end;
 end;
 

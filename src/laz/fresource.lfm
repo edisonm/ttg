@@ -63,12 +63,12 @@ inherited ResourceForm: TResourceForm
       inherited GrBDetail: TGroupBox
         Height = 355
         Width = 693
-        Caption = 'Distribution'
+        Caption = 'Activity'
         ClientHeight = 337
         ClientWidth = 685
         inherited DBGridDetail: TDBGrid
           Height = 337
-          Hint = 'Distribution of Resources'
+          Hint = 'Activity of Resources'
           Width = 685
           ShowHint = True
         end
@@ -306,7 +306,7 @@ inherited ResourceForm: TResourceForm
     end
   end
   inherited DataSourceDetail: TDatasource
-    DataSet = SourceDataModule.TbDistribution
+    DataSet = SourceDataModule.TbActivity
     left = 200
     top = 216
   end

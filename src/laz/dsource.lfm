@@ -12,8 +12,8 @@ inherited SourceDataModule: TSourceDataModule
     left = 544
     top = 24
   end
-  inherited TbDistribution: TZTable
-    OnCalcFields = TbDistributionCalcFields
+  inherited TbActivity: TZTable
+    OnCalcFields = TbActivityCalcFields
   end
   object ZTables: TZReadOnlyQuery[41]
     Connection = DbZConnection
@@ -40,7 +40,7 @@ inherited SourceDataModule: TSourceDataModule
         Name = 'IdResource'
         ParamType = ptUnknown
       end>
-    DataSource = DSDistribution
+    DataSource = DSActivity
     MasterFields = 'IdResource'
     LinkedFields = 'IdResource'
     left = 552
@@ -75,7 +75,7 @@ inherited SourceDataModule: TSourceDataModule
         Name = 'IdParallel'
         ParamType = ptUnknown
       end>
-    DataSource = DSDistribution
+    DataSource = DSActivity
     MasterFields = 'IdCategory,IdParallel'
     LinkedFields = 'IdCategory;IdParallel'
     left = 552

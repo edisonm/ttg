@@ -8,8 +8,8 @@ TODO:
   - Timetables by Clusters
   - Timetables by Resources
   - Resource Restrictions
-  - Resource Distribution
-  - Theme Distribution
+  - Resource Activity
+  - Theme Activity
 }
 interface
 

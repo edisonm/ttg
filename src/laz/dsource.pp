@@ -17,10 +17,10 @@ type
     QuCluster: TZReadOnlyQuery;
     ZTables: TZReadOnlyQuery;
     QuResource: TZReadOnlyQuery;
-    procedure TbDistributionBeforePost(DataSet: TDataSet);
+    procedure TbActivityBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
-    procedure TbDistributionCalcFields(DataSet: TDataSet);
+    procedure TbActivityCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     procedure SetFieldCaption(ADataSet: TDataSet);
@@ -58,7 +58,7 @@ implementation
 uses
   Variants, FConfig, UTTGDBUtils, URelUtils, uttgconsts, dsourcebaseconsts;
 
-procedure TSourceDataModule.TbDistributionBeforePost(DataSet: TDataSet);
+procedure TSourceDataModule.TbActivityBeforePost(DataSet: TDataSet);
 var
   s: string;
 begin
@@ -74,7 +74,7 @@ begin
   end;
 end;
 
-procedure TSourceDataModule.TbDistributionCalcFields(DataSet: TDataSet);
+procedure TSourceDataModule.TbActivityCalcFields(DataSet: TDataSet);
 var
   v: Variant;
 begin
@@ -292,10 +292,10 @@ begin
     Lookup := True;
     DataSet := TbResourceRestriction;
   end;
-  Field := TStringField.Create(TbDistribution.Owner);
+  Field := TStringField.Create(TbActivity.Owner);
   with Field do
   begin
-    DisplayLabel := SFlDistribution_IdCategory;
+    DisplayLabel := SFlActivity_IdCategory;
     DisplayWidth := 4;
     FieldKind := fkLookup;
     FieldName := 'AbCategory';
@@ -305,12 +305,12 @@ begin
     KeyFields := 'IdCategory';
     Size := 5;
     Lookup := True;
-    DataSet := TbDistribution;
+    DataSet := TbActivity;
   end;
-  Field := TStringField.Create(TbDistribution.Owner);
+  Field := TStringField.Create(TbActivity.Owner);
   with Field do
   begin
-    DisplayLabel := SFlDistribution_IdParallel;
+    DisplayLabel := SFlActivity_IdParallel;
     DisplayWidth := 4;
     FieldKind := fkLookup;
     FieldName := 'NaParallel';
@@ -320,12 +320,12 @@ begin
     KeyFields := 'IdParallel';
     Size := 5;
     Lookup := True;
-    DataSet := TbDistribution;
+    DataSet := TbActivity;
   end;
-  Field := TStringField.Create(TbDistribution.Owner);
+  Field := TStringField.Create(TbActivity.Owner);
   with Field do
   begin
-    DisplayLabel := SFlDistribution_IdTheme;
+    DisplayLabel := SFlActivity_IdTheme;
     DisplayWidth := 10;
     FieldKind := fkLookup;
     FieldName := 'NaTheme';
@@ -335,15 +335,15 @@ begin
     KeyFields := 'IdTheme';
     Size := 15;
     Lookup := True;
-    DataSet := TbDistribution;
+    DataSet := TbActivity;
   end;
-  Field := TLongintField.Create(TbDistribution.Owner);
+  Field := TLongintField.Create(TbActivity.Owner);
   with Field do
   begin
     FieldKind := fkCalculated;
     DisplayWidth := 5;
     FieldName := 'Duration';
-    DataSet := TbDistribution;
+    DataSet := TbActivity;
   end;
   Field := TStringField.Create(TbRequirement.Owner);
   with Field do
@@ -400,7 +400,7 @@ begin
     FindField('IdHour').Visible := False;
   end;
   TbResourceRestrictionType.FindField('IdResourceRestrictionType').Visible := False;
-  with TbDistribution do
+  with TbActivity do
   begin
     FindField('IdTheme').Visible := False;
     FindField('IdCategory').Visible := False;
@@ -564,7 +564,7 @@ end;
 procedure TSourceDataModule.PrepareTables;
 begin
   PrepareFields;
-  TbDistribution.FindField('Composition').DisplayWidth := 10;
+  TbActivity.FindField('Composition').DisplayWidth := 10;
   ApplyOnTables(SetFieldCaption);
   PrepareLookupFields;
   HideFields;

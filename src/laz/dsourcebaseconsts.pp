@@ -31,7 +31,7 @@ resourcestring
   STbTheme = 'Themes';
   STbResourceType = 'ResourceType';
   STbResource = 'Resources';
-  STbDistribution = 'Distribution of Workload';
+  STbActivity = 'Activity of Workload';
   STbJoinedCluster = 'Joined Clusters';
   STbThemeRestrictionType = 'Types of Theme Restrictions';
   STbTimeSlot = 'Time Slots';
@@ -66,10 +66,10 @@ resourcestring
   SFlResource_NaResource = 'Name';
   SFlResource_AbResource = 'Abbreviation';
   SFlResource_NumResource = 'Number';
-  SFlDistribution_IdTheme = 'Theme';
-  SFlDistribution_IdCategory = 'Category';
-  SFlDistribution_IdParallel = 'Parallel';
-  SFlDistribution_Composition = 'Composition';
+  SFlActivity_IdTheme = 'Theme';
+  SFlActivity_IdCategory = 'Category';
+  SFlActivity_IdParallel = 'Parallel';
+  SFlActivity_Composition = 'Composition';
   SFlJoinedCluster_IdTheme = 'Theme';
   SFlJoinedCluster_IdCategory = 'Category';
   SFlJoinedCluster_IdParallel = 'Parallel';

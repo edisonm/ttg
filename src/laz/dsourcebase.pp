@@ -43,8 +43,8 @@ type
     DSResourceType: TDataSource;
     TbResource: TZTable;
     DSResource: TDataSource;
-    TbDistribution: TZTable;
-    DSDistribution: TDataSource;
+    TbActivity: TZTable;
+    DSActivity: TDataSource;
     TbJoinedCluster: TZTable;
     DSJoinedCluster: TDataSource;
     TbThemeRestrictionType: TZTable;
@@ -91,7 +91,7 @@ begin
   Tables[5] := TbTheme;
   Tables[6] := TbResourceType;
   Tables[7] := TbResource;
-  Tables[8] := TbDistribution;
+  Tables[8] := TbActivity;
   Tables[9] := TbJoinedCluster;
   Tables[10] := TbThemeRestrictionType;
   Tables[11] := TbTimeSlot;
@@ -111,7 +111,7 @@ begin
     Add('TbTheme=Theme');
     Add('TbResourceType=ResourceType');
     Add('TbResource=Resource');
-    Add('TbDistribution=Distribution');
+    Add('TbActivity=Activity');
     Add('TbJoinedCluster=JoinedCluster');
     Add('TbThemeRestrictionType=ThemeRestrictionType');
     Add('TbTimeSlot=TimeSlot');
@@ -145,10 +145,10 @@ begin
     Add('TbResource.NaResource=' + SFlResource_NaResource);
     Add('TbResource.AbResource=' + SFlResource_AbResource);
     Add('TbResource.NumResource=' + SFlResource_NumResource);
-    Add('TbDistribution.IdTheme=' + SFlDistribution_IdTheme);
-    Add('TbDistribution.IdCategory=' + SFlDistribution_IdCategory);
-    Add('TbDistribution.IdParallel=' + SFlDistribution_IdParallel);
-    Add('TbDistribution.Composition=' + SFlDistribution_Composition);
+    Add('TbActivity.IdTheme=' + SFlActivity_IdTheme);
+    Add('TbActivity.IdCategory=' + SFlActivity_IdCategory);
+    Add('TbActivity.IdParallel=' + SFlActivity_IdParallel);
+    Add('TbActivity.Composition=' + SFlActivity_Composition);
     Add('TbJoinedCluster.IdTheme=' + SFlJoinedCluster_IdTheme);
     Add('TbJoinedCluster.IdCategory=' + SFlJoinedCluster_IdCategory);
     Add('TbJoinedCluster.IdParallel=' + SFlJoinedCluster_IdParallel);
@@ -198,7 +198,7 @@ begin
     Add('TbTheme=' + STbTheme);
     Add('TbResourceType=' + STbResourceType);
     Add('TbResource=' + STbResource);
-    Add('TbDistribution=' + STbDistribution);
+    Add('TbActivity=' + STbActivity);
     Add('TbJoinedCluster=' + STbJoinedCluster);
     Add('TbThemeRestrictionType=' + STbThemeRestrictionType);
     Add('TbTimeSlot=' + STbTimeSlot);

@@ -127,7 +127,7 @@ var
   FieldComposition: TField;
 begin
   Result := 0;
-  with SourceDataModule, TbDistribution do
+  with SourceDataModule, TbActivity do
   begin
     VBookmark := GetBookmark;
     DisableControls;
@@ -152,15 +152,15 @@ begin
   with SourceDataModule do
   begin
     FSuperTitle := Description[TbResource];
-    TbDistribution.MasterFields := 'IdResource';
-    TbDistribution.LinkedFields := 'IdResource';
-    TbDistribution.MasterSource := DSResource;
+    TbActivity.MasterFields := 'IdResource';
+    TbActivity.LinkedFields := 'IdResource';
+    TbActivity.MasterSource := DSResource;
     TbRequirement.MasterFields := 'IdTheme;IdCategory;IdParallel';
     TbRequirement.LinkedFields := 'IdTheme;IdCategory;IdParallel';
-    TbRequirement.MasterSource := SourceDataModule.DSDistribution;
+    TbRequirement.MasterSource := SourceDataModule.DSActivity;
     TbJoinedCluster.MasterFields := 'IdTheme;IdCategory;IdParallel';
     TbJoinedCluster.LinkedFields := 'IdTheme;IdCategory;IdParallel';
-    TbJoinedCluster.MasterSource := SourceDataModule.DSDistribution;
+    TbJoinedCluster.MasterSource := SourceDataModule.DSActivity;
     {TbRequirement.Close;
     QuResource.Close;
     QuResource.Open;
@@ -172,7 +172,7 @@ procedure TResourceForm.FormDestroy(Sender: TObject);
 begin
   inherited;
   SourceDataModule.TbRequirement.MasterSource := nil;
-  SourceDataModule.TbDistribution.MasterSource := nil;
+  SourceDataModule.TbActivity.MasterSource := nil;
 end;
 
 initialization

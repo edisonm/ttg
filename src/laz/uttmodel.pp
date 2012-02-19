@@ -43,24 +43,24 @@ type
   private
     FClashThemeValue, FOutOfPositionEmptyHourValue, FBrokenSessionValue,
       FBreakTimetableResourceValue, FNonScatteredThemeValue: Integer;
-    FTimeSlotToDay, FTimeSlotToHour, FDayToMaxTimeSlot, FSessionToDistribution,
+    FTimeSlotToDay, FTimeSlotToHour, FDayToMaxTimeSlot, FSessionToActivity,
       FSessionToTheme, FClusterToCategory, FResourceToNumber,
       FThemeRestrictionToTheme, FThemeRestrictionToTimeSlot, FResourceToResourceType,
       FThemeRestrictionToThemeRestrictionType, FResourceRestrictionToResource,
       FResourceRestrictionToTimeSlot, FResourceRestrictionToResourceRestrictionType,
-      FClusterToParallel, FDistributionToCluster, FClusterToSessionCount,
+      FClusterToParallel, FActivityToCluster, FClusterToSessionCount,
       FThemeRestrictionTypeToValue, FResourceRestrictionTypeToValue, FResourceTypeToValue,
       FThemeRestrictionToValue, FResourceRestrictionToValue: TDynamicIntegerArray;
     FSessionToDuration: TSessionArray;
     FDayHourToTimeSlot, FCategoryParallelToCluster,
-      FDistributionToResources, FClusterThemeToDistribution, FClusterThemeCount,
-      FTimetableDetailPattern, FDistributionToSessions,
-      FResourceTimeSlotToResourceRestrictionType, FDistributionResourceCount,
-      FClusterJoinedClusterToDistribution, FClusterJoinedClusterToCluster,
+      FActivityToResources, FClusterThemeToActivity, FClusterThemeCount,
+      FTimetableDetailPattern, FActivityToSessions,
+      FResourceTimeSlotToResourceRestrictionType, FActivityResourceCount,
+      FClusterJoinedClusterToActivity, FClusterJoinedClusterToCluster,
       FThemeTimeSlotToThemeRestrictionType: TDynamicIntegerArrayArray;
     FThemeCount, FThemeRestrictionTypeCount, FResourceTypeCount, FResourceRestrictionTypeCount,
       FClusterCount, FDayCount, FHourCount, FTimeSlotCount, FResourceCount,
-      FCategoryCount, FDistributionCount, FJoinedClusterCount: Integer;
+      FCategoryCount, FActivityCount, FJoinedClusterCount: Integer;
     FParallelToIdParallel, FThemeToIdTheme, FDayToIdDay, FHourToIdHour,
       FCategoryToIdCategory: TDynamicIntegerArray;
     FIdCategoryToCategory, FIdParallelToParallel, FIdDayToDay,
@@ -283,7 +283,7 @@ constructor TTimetableModel.Create(AClashThemeValue,
 var
   FMinIdResource, FMinIdResourceType, FMinIdTheme,
   FMinIdResourceRestrictionType, FMinIdThemeRestrictionType: Integer;
-  FDistributionToTheme, FIdThemeToTheme, FIdResourceToResource,
+  FActivityToTheme, FIdThemeToTheme, FIdResourceToResource,
   FIdResourceTypeToResourceType, FResourceTypeToIdResourceType,
   FIdResourceRestrictionTypeToResourceRestrictionType,
   FIdThemeRestrictionTypeToThemeRestrictionType, FClusterToDuration,
@@ -580,15 +580,15 @@ var
       Filtered := False;
     end;
   end;
-  procedure LoadDistribution;
+  procedure LoadActivity;
   var
-    Theme, Category, Parallel, Session1, Distribution, VCluster,
+    Theme, Category, Parallel, Session1, Activity, VCluster,
       Session2, Session, VPos: Integer;
     VFieldTheme, VFieldCategory, VFieldParallel, VFieldComposition: TField;
-    VSessionToDuration, VSessionToDistribution: array [0 .. 16383] of Integer;
+    VSessionToDuration, VSessionToActivity: array [0 .. 16383] of Integer;
     Composition: string;
   begin
-    with SourceDataModule.TbDistribution do
+    with SourceDataModule.TbActivity do
     begin
       IndexFieldNames := 'IdTheme;IdCategory;IdParallel';
       First;
@@ -596,29 +596,29 @@ var
       VFieldCategory := FindField('IdCategory');
       VFieldParallel := FindField('IdParallel');
       VFieldComposition := FindField('Composition');
-      FDistributionCount := RecordCount;
-      // SetLength(FDistributionAAsignatura, RecordCount);
-      SetLength(FDistributionToCluster, FDistributionCount);
-      SetLength(FDistributionToSessions, FDistributionCount);
-      SetLength(FDistributionToTheme, FDistributionCount);
+      FActivityCount := RecordCount;
+      // SetLength(FActivityAAsignatura, RecordCount);
+      SetLength(FActivityToCluster, FActivityCount);
+      SetLength(FActivityToSessions, FActivityCount);
+      SetLength(FActivityToTheme, FActivityCount);
       SetLength(FClusterThemeCount, FClusterCount, FThemeCount);
-      SetLength(FClusterThemeToDistribution, FClusterCount, FThemeCount);
+      SetLength(FClusterThemeToActivity, FClusterCount, FThemeCount);
       for VCluster := 0 to FClusterCount - 1 do
         for Theme := 0 to FThemeCount - 1 do
         begin
           FClusterThemeCount[VCluster, Theme] := 0;
-          FClusterThemeToDistribution[VCluster, Theme] := -1;
+          FClusterThemeToActivity[VCluster, Theme] := -1;
         end;
       Session2 := 0;
-      for Distribution := 0 to RecordCount - 1 do
+      for Activity := 0 to RecordCount - 1 do
       begin
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
         VCluster := FCategoryParallelToCluster[Category, Parallel];
-        FDistributionToCluster[Distribution] := VCluster;
-        FDistributionToTheme[Distribution] := Theme;
-        FClusterThemeToDistribution[VCluster, Theme] := Distribution;
+        FActivityToCluster[Activity] := VCluster;
+        FActivityToTheme[Activity] := Theme;
+        FClusterThemeToActivity[VCluster, Theme] := Activity;
         Composition := VFieldComposition.AsString;
         VPos := 1;
         Session1 := Session2;
@@ -626,36 +626,36 @@ var
         while VPos <= Length(Composition) do
         begin
           VSessionToDuration[Session2] := StrToInt(ExtractString(Composition, VPos, '.'));
-          VSessionToDistribution[Session2] := Distribution;
+          VSessionToActivity[Session2] := Activity;
           Inc(FClusterThemeCount[VCluster, Theme]);
           // Inc(t, VSessionToDuration[Session2]);
           Inc(Session2);
         end;
-        SetLength(FDistributionToSessions[Distribution], Session2 - Session1);
+        SetLength(FActivityToSessions[Activity], Session2 - Session1);
         for Session := Session1 to Session2 - 1 do
         begin
-          FDistributionToSessions[Distribution, Session - Session1] := Session;
+          FActivityToSessions[Activity, Session - Session1] := Session;
         end;
         // FClusterToDuration[VCluster] := FClusterToDuration[VCluster] + t;
         Next;
       end;
-      SetLength(FSessionToDistribution, Session2);
+      SetLength(FSessionToActivity, Session2);
       SetLength(FSessionToTheme, Session2);
       Move(VSessionToDuration[0], FSessionToDuration[0], Session2 * SizeOf(Integer));
       FSessionToDuration[-1] := 1;
-      Move(VSessionToDistribution[0], FSessionToDistribution[0],
+      Move(VSessionToActivity[0], FSessionToActivity[0],
         Session2 * SizeOf(Integer));
       for Session := 0 to Session2 - 1 do
       begin
-        Distribution := FSessionToDistribution[Session];
-        FSessionToTheme[Session] := FDistributionToTheme[Distribution];
+        Activity := FSessionToActivity[Session];
+        FSessionToTheme[Session] := FActivityToTheme[Activity];
       end;
     end;
   end;
   procedure LoadRequirement;
   var
     Requirement, Counter, Cluster, Parallel, Category, Theme,
-    RequirementCount, Distribution, Resource: Integer;
+    RequirementCount, Activity, Resource: Integer;
     VFieldTheme, VFieldCategory, VFieldParallel,
     VFieldResource, VFieldNumRequirement: TField;
   begin
@@ -664,11 +664,11 @@ var
       IndexFieldNames := 'IdTheme;IdCategory;IdParallel;IdResource';
       First;
       RequirementCount := RecordCount;
-      SetLength(FDistributionToResources, FDistributionCount, 0);
-      SetLength(FDistributionResourceCount, FDistributionCount, FResourceCount);
-      for Distribution := 0 to FDistributionCount - 1 do
+      SetLength(FActivityToResources, FActivityCount, 0);
+      SetLength(FActivityResourceCount, FActivityCount, FResourceCount);
+      for Activity := 0 to FActivityCount - 1 do
         for Resource := 0 to FResourceCount - 1 do
-          FDistributionResourceCount[Distribution, Resource] := 0;
+          FActivityResourceCount[Activity, Resource] := 0;
       VFieldTheme := FindField('IdTheme');
       VFieldCategory := FindField('IdCategory');
       VFieldParallel := FindField('IdParallel');
@@ -680,12 +680,12 @@ var
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
         Cluster := FCategoryParallelToCluster[Category, Parallel];
-        Distribution := FClusterThemeToDistribution[Cluster, Theme];
+        Activity := FClusterThemeToActivity[Cluster, Theme];
         Resource := FIdResourceToResource[VFieldResource.AsInteger - FMinIdResource];
-        Counter := Length(FDistributionToResources[Distribution]);
-        SetLength(FDistributionToResources[Distribution], Counter + 1);
-        FDistributionToResources[Distribution, Counter] := Resource;
-        FDistributionResourceCount[Distribution, Resource] := VFieldNumRequirement.AsInteger;
+        Counter := Length(FActivityToResources[Activity]);
+        SetLength(FActivityToResources[Activity], Counter + 1);
+        FActivityToResources[Activity, Counter] := Resource;
+        FActivityResourceCount[Activity, Resource] := VFieldNumRequirement.AsInteger;
         Next;
       end;
       First;
@@ -694,7 +694,7 @@ var
   procedure LoadJoinedCluster;
   var
     JoinedCluster, Counter, VCluster1, Category1, Parallel1,
-      VCluster, Category, Parallel, Theme,  Distribution: Integer;
+      VCluster, Category, Parallel, Theme,  Activity: Integer;
     VFieldTheme, VFieldCategory, VFieldParallel, VFieldCategory1,
       VFieldParallel1: TField;
   begin
@@ -703,7 +703,7 @@ var
       IndexFieldNames := 'IdTheme;IdCategory;IdParallel;IdCategory1;IdParallel1';
       First;
       FJoinedClusterCount := RecordCount;
-      SetLength(FClusterJoinedClusterToDistribution, FClusterCount, 0);
+      SetLength(FClusterJoinedClusterToActivity, FClusterCount, 0);
       SetLength(FClusterJoinedClusterToCluster, FClusterCount, 0);
       VFieldTheme := FindField('IdTheme');
       VFieldCategory := FindField('IdCategory');
@@ -716,14 +716,14 @@ var
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
         VCluster := FCategoryParallelToCluster[Category, Parallel];
-        Distribution := FClusterThemeToDistribution[VCluster, Theme];
+        Activity := FClusterThemeToActivity[VCluster, Theme];
         Category1 := FIdCategoryToCategory[VFieldCategory1.AsInteger - FMinIdCategory];
         Parallel1 := FIdParallelToParallel[VFieldParallel1.AsInteger - FMinIdParallel];
         VCluster1 := FCategoryParallelToCluster[Category1, Parallel1];
-        Counter := Length(FClusterJoinedClusterToDistribution[VCluster]);
-        SetLength(FClusterJoinedClusterToDistribution[VCluster], Counter + 1);
+        Counter := Length(FClusterJoinedClusterToActivity[VCluster]);
+        SetLength(FClusterJoinedClusterToActivity[VCluster], Counter + 1);
         SetLength(FClusterJoinedClusterToCluster[VCluster], Counter + 1);
-        FClusterJoinedClusterToDistribution[VCluster, Counter] := Distribution;
+        FClusterJoinedClusterToActivity[VCluster, Counter] := Activity;
         FClusterJoinedClusterToCluster[VCluster, Counter] := VCluster1;
         Next;
       end;
@@ -732,7 +732,7 @@ var
   end;
   procedure LoadPatternTimetableDetail;
   var
-    TimeSlot1, VCluster, Distribution, TimeSlot, Contador, Duration, Number: Integer;
+    TimeSlot1, VCluster, Activity, TimeSlot, Contador, Duration, Number: Integer;
   begin
     SetLength(FTimetableDetailPattern, FClusterCount, FTimeSlotCount);
     SetLength(FClusterToSessionCount, FClusterCount);
@@ -746,12 +746,12 @@ var
         FTimetableDetailPattern[VCluster, TimeSlot] := -1;
       end;
     end;
-    for Distribution := FDistributionCount - 1 downto 0 do
+    for Activity := FActivityCount - 1 downto 0 do
     begin
-      VCluster := FDistributionToCluster[Distribution];
-      for Contador := High(FDistributionToSessions[Distribution]) downto 0 do
+      VCluster := FActivityToCluster[Activity];
+      for Contador := High(FActivityToSessions[Activity]) downto 0 do
       begin
-        Duration := FSessionToDuration[FDistributionToSessions[Distribution, Contador]];
+        Duration := FSessionToDuration[FActivityToSessions[Activity, Contador]];
         TimeSlot1 := FClusterToDuration[VCluster];
         for TimeSlot := TimeSlot1 to TimeSlot1 + Duration - 1 do
         begin
@@ -759,7 +759,7 @@ var
             raise Exception.CreateFmt(SClusterTimeSlotToSessionOverflow,
               [FClusterToCategory[VCluster], FClusterToParallel[VCluster], TimeSlot]);
           FTimetableDetailPattern[VCluster, FTimeSlotCount - 1 - TimeSlot]
-            := FDistributionToSessions[Distribution, Contador];
+            := FActivityToSessions[Activity, Contador];
         end;
         Inc(FClusterToDuration[VCluster], Duration);
       end;
@@ -823,7 +823,7 @@ begin
     LoadResourceRestriction;
     LoadThemeRestrictionType;
     LoadThemeRestriction;
-    LoadDistribution;
+    LoadActivity;
     LoadRequirement;
     LoadJoinedCluster;
     LoadPatternTimetableDetail;
@@ -1048,7 +1048,7 @@ procedure TTimetable.DeltaValues(Delta, ACluster, TimeSlot1, TimeSlot2: Integer)
 var
   ThemeRestrictionType, ResourceRestrictionType, TimeSlot, TimeSlot0, Day, DDay,
   Day1, Day2, Hour, Session, Resource, Duration, Theme, Limit, Requirement, Count,
-  JoinedCluster, Distribution, DeltaBreakTimetableResource, MinTimeSlot, MaxTimeSlot,
+  JoinedCluster, Activity, DeltaBreakTimetableResource, MinTimeSlot, MaxTimeSlot,
   Cluster1: Integer;
   TimeSlotToSession: TDynamicIntegerArray;
 begin
@@ -1068,11 +1068,11 @@ begin
         Theme := FSessionToTheme[Session];
         Day := FTimeSlotToDay[TimeSlot];
         Hour := FTimeSlotToHour[TimeSlot];
-        Distribution := FSessionToDistribution[Session];
-        for Requirement := 0 to High(FDistributionToResources[Distribution]) do
+        Activity := FSessionToActivity[Session];
+        for Requirement := 0 to High(FActivityToResources[Activity]) do
         begin
-          Resource := FDistributionToResources[Distribution, Requirement];
-          Count := FDistributionResourceCount[Distribution, Resource];
+          Resource := FActivityToResources[Activity, Requirement];
+          Count := FActivityResourceCount[Activity, Resource];
           if FResourceTimeSlotCount[Resource, TimeSlot] = Limit * Count then
           begin
             if Delta > 0 then
@@ -1185,16 +1185,16 @@ begin
       end;
       Inc(TimeSlot, Duration);
     end;
-    for JoinedCluster := 0 to High(FClusterJoinedClusterToDistribution[ACluster]) do
+    for JoinedCluster := 0 to High(FClusterJoinedClusterToActivity[ACluster]) do
     begin
-      Distribution := FClusterJoinedClusterToDistribution[ACluster, JoinedCluster];
+      Activity := FClusterJoinedClusterToActivity[ACluster, JoinedCluster];
       Cluster1 := FClusterJoinedClusterToCluster[ACluster, JoinedCluster];
       for TimeSlot := TimeSlot1 to TimeSlot2 do
       begin
         Session := TimeSlotToSession[TimeSlot];
         if Session >= 0 then
         begin
-          if Distribution = FSessionToDistribution[Session] then
+          if Activity = FSessionToActivity[Session] then
           begin
             if FClusterTimeSlotToSession[Cluster1, TimeSlot] >= 0 then
               Inc(FClashTheme, Delta);
@@ -1808,7 +1808,7 @@ end;
 
 procedure TTimetable.CheckIntegrity;
 var
-  Theme, VCluster, TimeSlot, Distribution, Counter,
+  Theme, VCluster, TimeSlot, Activity, Counter,
     Session: Integer;
   SessionFound: Boolean;
 begin
@@ -1821,25 +1821,25 @@ begin
         if Session >= 0 then
         begin
           Theme := FSessionToTheme[Session];
-          Distribution := FClusterThemeToDistribution[VCluster, Theme];
+          Activity := FClusterThemeToActivity[VCluster, Theme];
           SessionFound := False;
-          for Counter := 0 to High(FDistributionToSessions[Distribution]) do
-            SessionFound := SessionFound or (FDistributionToSessions[Distribution, Counter] = Session);
+          for Counter := 0 to High(FActivityToSessions[Activity]) do
+            SessionFound := SessionFound or (FActivityToSessions[Activity, Counter] = Session);
           if not SessionFound then
-            raise Exception.CreateFmt('%s %d(%d,%d), %s %d(%d) %s FDistributionToSessions', [
+            raise Exception.CreateFmt('%s %d(%d,%d), %s %d(%d) %s FActivityToSessions', [
               SCluster, VCluster,
               FCategoryToIdCategory[FClusterToCategory[VCluster]],
               FParallelToIdParallel[FClusterToParallel[VCluster]],
-              SFlDistribution_IdTheme,
+              SFlActivity_IdTheme,
               Theme,
               FThemeToIdTheme[Theme],
               SDoNotAppearsIn]);
-          if Distribution < 0 then
-            raise Exception.CreateFmt('%s %d(%d,%d), %s %d(%d) %s FClusterThemeToDistribution', [
+          if Activity < 0 then
+            raise Exception.CreateFmt('%s %d(%d,%d), %s %d(%d) %s FClusterThemeToActivity', [
               SCluster, VCluster,
               FCategoryToIdCategory[FClusterToCategory[VCluster]],
               FParallelToIdParallel[FClusterToParallel[VCluster]],
-              SFlDistribution_IdTheme,
+              SFlActivity_IdTheme,
               Theme,
               FThemeToIdTheme[Theme],
               SDoNotAppearsIn]);

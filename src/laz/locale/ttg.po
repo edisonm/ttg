@@ -36,23 +36,23 @@ msgctxt "dsourcebaseconsts.sflday_naday"
 msgid "Name"
 msgstr ""
 
-#: dsourcebaseconsts.sfldistribution_composition
-msgctxt "dsourcebaseconsts.sfldistribution_composition"
+#: dsourcebaseconsts.sflactivity_composition
+msgctxt "dsourcebaseconsts.sflactivity_composition"
 msgid "Composition"
 msgstr ""
 
-#: dsourcebaseconsts.sfldistribution_idcategory
-msgctxt "dsourcebaseconsts.sfldistribution_idcategory"
+#: dsourcebaseconsts.sflactivity_idcategory
+msgctxt "dsourcebaseconsts.sflactivity_idcategory"
 msgid "Category"
 msgstr ""
 
-#: dsourcebaseconsts.sfldistribution_idparallel
-msgctxt "dsourcebaseconsts.sfldistribution_idparallel"
+#: dsourcebaseconsts.sflactivity_idparallel
+msgctxt "dsourcebaseconsts.sflactivity_idparallel"
 msgid "Parallel"
 msgstr ""
 
-#: dsourcebaseconsts.sfldistribution_idtheme
-msgctxt "dsourcebaseconsts.sfldistribution_idtheme"
+#: dsourcebaseconsts.sflactivity_idtheme
+msgctxt "dsourcebaseconsts.sflactivity_idtheme"
 msgid "Theme"
 msgstr ""
 
@@ -343,9 +343,9 @@ msgctxt "dsourcebaseconsts.stbday"
 msgid "Working Days"
 msgstr ""
 
-#: dsourcebaseconsts.stbdistribution
-msgctxt "dsourcebaseconsts.stbdistribution"
-msgid "Distribution of Workload"
+#: dsourcebaseconsts.stbactivity
+msgctxt "dsourcebaseconsts.stbactivity"
+msgid "Activities"
 msgstr ""
 
 #: dsourcebaseconsts.stbhour
@@ -1341,7 +1341,7 @@ msgid "Joined Clusters"
 msgstr ""
 
 #: tresourceform.grbdetail.caption
-msgid "Distribution"
+msgid "Activity"
 msgstr ""
 
 #: tresourceform.groupbox3.caption

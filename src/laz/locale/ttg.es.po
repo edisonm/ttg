@@ -36,23 +36,23 @@ msgctxt "dsourcebaseconsts.sflday_naday"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sfldistribution_composition
-msgctxt "dsourcebaseconsts.sfldistribution_composition"
+#: dsourcebaseconsts.sflactivity_composition
+msgctxt "dsourcebaseconsts.sflactivity_composition"
 msgid "Composition"
 msgstr "Composicion"
 
-#: dsourcebaseconsts.sfldistribution_idcategory
-msgctxt "dsourcebaseconsts.sfldistribution_idcategory"
+#: dsourcebaseconsts.sflactivity_idcategory
+msgctxt "dsourcebaseconsts.sflactivity_idcategory"
 msgid "Category"
 msgstr ""
 
-#: dsourcebaseconsts.sfldistribution_idparallel
-msgctxt "dsourcebaseconsts.sfldistribution_idparallel"
+#: dsourcebaseconsts.sflactivity_idparallel
+msgctxt "dsourcebaseconsts.sflactivity_idparallel"
 msgid "Parallel"
 msgstr "Paralelo"
 
-#: dsourcebaseconsts.sfldistribution_idtheme
-msgctxt "dsourcebaseconsts.sfldistribution_idtheme"
+#: dsourcebaseconsts.sflactivity_idtheme
+msgctxt "dsourcebaseconsts.sflactivity_idtheme"
 msgid "Theme"
 msgstr "Materia"
 
@@ -343,9 +343,9 @@ msgctxt "dsourcebaseconsts.stbday"
 msgid "Working Days"
 msgstr "Dias Laborables"
 
-#: dsourcebaseconsts.stbdistribution
-msgctxt "dsourcebaseconsts.stbdistribution"
-msgid "Distribution of Workload"
+#: dsourcebaseconsts.stbactivity
+msgctxt "dsourcebaseconsts.stbactivity"
+msgid "Activities"
 msgstr "Distribucion de la carga"
 
 #: dsourcebaseconsts.stbhour
@@ -1347,7 +1347,7 @@ msgid "Joined Clusters"
 msgstr "Clases agrupadas"
 
 #: tresourceform.grbdetail.caption
-msgid "Distribution"
+msgid "Activity"
 msgstr "Distribucion"
 
 #: tresourceform.groupbox3.caption

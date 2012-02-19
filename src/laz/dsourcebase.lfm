@@ -106,16 +106,16 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 440
     Top = 136
   end
-  object TbDistribution: TZTable
+  object TbActivity: TZTable
     Tag = 10
     Connection = DbZConnection
-    TableName = 'Distribution'
+    TableName = 'Activity'
     IndexFieldNames = 'IdTheme;IdCategory;IdParallel'
     Left = 48
     Top = 240
   end
-  object DSDistribution: TDataSource
-    DataSet = TbDistribution
+  object DSActivity: TDataSource
+    DataSet = TbActivity
     Left = 56
     Top = 232
   end
