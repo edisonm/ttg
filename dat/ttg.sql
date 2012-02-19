@@ -38,40 +38,42 @@ CREATE TABLE IF NOT EXISTS `Cluster`(
   CONSTRAINT `CategoryCluster` FOREIGN KEY (`IdCategory`)
     REFERENCES `Category`(`IdCategory`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `ParallelCluster` FOREIGN KEY (`IdParallel`)
-    REFERENCES `Parallel`(`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT
+    REFERENCES `Parallel`(`IdParallel`) ON UPDATE CASCADE ON DELETE RESTRICT
 ); /* Clusters */
-CREATE TABLE IF NOT EXISTS `JoinedCluster`(
+CREATE TABLE IF NOT EXISTS `Activity`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER NOT NULL /* Parallel Id */,
-    `IdCategory1` INTEGER NOT NULL /* Category Id of Joined Cluster */,
-    `IdParallel1` INTEGER NOT NULL /* Parallel Id of Joined Cluster */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`,`IdCategory1`,`IdParallel1`),
-  CONSTRAINT `ClusterJoinedCluster` FOREIGN KEY (`IdCategory1`,`IdParallel1`)
+    `Composition` VARCHAR(40) NOT NULL /* Configuration of periods */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`),
+  CONSTRAINT `ClusterActivity` FOREIGN KEY (`IdCategory`,`IdParallel`)
     REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `ActivityJoinedCluster` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
-    REFERENCES `Activity`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE
-); /* Joined Clusters */
+  CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
+    REFERENCES `Theme`(`IdTheme`) ON UPDATE RESTRICT ON DELETE RESTRICT
+); /* Activities */
 CREATE TABLE IF NOT EXISTS `ResourceType`(
     `IdResourceType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Type Id */,
     `NaResourceType` VARCHAR(15) NOT NULL UNIQUE /* Name */,
     `DefaultLimit` INTEGER NOT NULL /* Default Limit */,
-    `ValResourceType` INTEGER NOT NULL /* Clash Value */
+    `ValResourceType` INTEGER NOT NULL /* Value of Clashes */
 ); /* Resource Types */
 CREATE TABLE IF NOT EXISTS `Resource`(
     `IdResource` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Id */,
     `IdResourceType` INTEGER NOT NULL /* Resource Type Id */,
     `NaResource` VARCHAR(25) NOT NULL UNIQUE /* Resource Name */,
-    `AbResource` VARCHAR(11) NOT NULL UNIQUE /* Resource Abbreviation */,
+    `AbResource` VARCHAR(10) NOT NULL UNIQUE /* Resource Abbreviation */,
     `NumResource` INTEGER NOT NULL /* Number of resources */,
   CONSTRAINT `ResourceTypeResource` FOREIGN KEY (`IdResourceType`)
     REFERENCES `ResourceType`(`IdResourceType`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Resources */
 CREATE TABLE IF NOT EXISTS `ResourceRestrictionType`(
     `IdResourceRestrictionType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Restriction Type Id */,
+    `IdResourceType` INTEGER NOT NULL /* Resource Type */,
     `NaResourceRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
     `ColResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
-    `ValResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
+    `ValResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Value */,
+  CONSTRAINT `ResourceTypeResourceRestrictionType` FOREIGN KEY (`IdResourceType`)
+    REFERENCES `ResourceType`(`IdResourceType`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Types of Resource Restrictions */
 CREATE TABLE IF NOT EXISTS `TimeSlot`(
     `IdDay` INTEGER NOT NULL /* Day Id */,
@@ -82,17 +84,6 @@ CREATE TABLE IF NOT EXISTS `TimeSlot`(
   CONSTRAINT `HourTimeSlot` FOREIGN KEY (`IdHour`)
     REFERENCES `Hour`(`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Time Slots */
-CREATE TABLE IF NOT EXISTS `Activity`(
-    `IdTheme` INTEGER NOT NULL /* Theme Id */,
-    `IdCategory` INTEGER NOT NULL /* Category Id */,
-    `IdParallel` INTEGER NOT NULL /* Parallel Id */,
-    `Composition` VARCHAR(40) NOT NULL /* Composition of the Slots for the Theme */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`),
-  CONSTRAINT `ClusterActivity` FOREIGN KEY (`IdCategory`,`IdParallel`)
-    REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
-    REFERENCES `Theme`(`IdTheme`) ON UPDATE RESTRICT ON DELETE RESTRICT
-); /* Activity of Workload */
 CREATE TABLE IF NOT EXISTS `Requirement`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
@@ -105,6 +96,18 @@ CREATE TABLE IF NOT EXISTS `Requirement`(
   CONSTRAINT `ResourceRequirement` FOREIGN KEY (`IdResource`)
     REFERENCES `Resource`(`IdResource`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Requirements */
+CREATE TABLE IF NOT EXISTS `JoinedCluster`(
+    `IdTheme` INTEGER NOT NULL /* Theme Id */,
+    `IdCategory` INTEGER NOT NULL /* Category Id */,
+    `IdParallel` INTEGER NOT NULL /* Parallel Id */,
+    `IdCategory1` INTEGER NOT NULL /* Category Id of Joined Cluster */,
+    `IdParallel1` INTEGER NOT NULL /* Parallel Id of Joined Cluster */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`,`IdCategory1`,`IdParallel1`),
+  CONSTRAINT `ActivityJoinedCluster` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
+    REFERENCES `Activity`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `ClusterJoinedCluster` FOREIGN KEY (`IdCategory1`,`IdParallel1`)
+    REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT
+); /* Joined Clusters */
 CREATE TABLE IF NOT EXISTS `ThemeRestrictionType`(
     `IdThemeRestrictionType` INTEGER NOT NULL PRIMARY KEY /* Theme Restriction Type Id */,
     `NaThemeRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
@@ -130,10 +133,10 @@ CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
     `IdHour` INTEGER NOT NULL /* Hour Id */,
     `IdResourceRestrictionType` INTEGER NOT NULL /* Resource Restriction Type Id */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdResource`,`IdDay`,`IdHour`),
-  CONSTRAINT `ResourceRestrictionTypeResourceRestriction` FOREIGN KEY (`IdResourceRestrictionType`)
-    REFERENCES `ResourceRestrictionType`(`IdResourceRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `ResourceResourceRestriction` FOREIGN KEY (`IdResource`)
     REFERENCES `Resource`(`IdResource`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `ResourceRestrictionTypeResourceRestriction` FOREIGN KEY (`IdResourceRestrictionType`)
+    REFERENCES `ResourceRestrictionType`(`IdResourceRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `TimeSlotResourceRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
     REFERENCES `TimeSlot`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Resource Restrictions */
@@ -151,7 +154,6 @@ CREATE TABLE IF NOT EXISTS `TimetableDetail`(
     `IdDay` INTEGER NOT NULL /* Day Id */,
     `IdHour` INTEGER NOT NULL /* Hour Id */,
     `Session` INTEGER NOT NULL /* Internal Number */,
-  CONSTRAINT `ixRestrictionTheme` UNIQUE(`IdTimetable`,`IdCategory`,`IdParallel`,`IdDay`,`IdHour`),
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTimetable`,`IdTheme`,`IdCategory`,`IdParallel`,`IdDay`,`IdHour`),
   CONSTRAINT `ActivityTimetableDetail` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
     REFERENCES `Activity`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
