@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  14/02/2012 2:13
+  19/02/2012 19:21
 
   Warning:
 
@@ -9,10 +9,6 @@
 
 */
 
-CREATE TABLE IF NOT EXISTS `Theme`(
-    `IdTheme` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Theme Id */,
-    `NaTheme` VARCHAR(20) NOT NULL UNIQUE /* Theme Name */
-); /* Themes */
 CREATE TABLE IF NOT EXISTS `Category`(
     `IdCategory` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Id */,
     `NaCategory` VARCHAR(25) NOT NULL UNIQUE /* Name */,
@@ -22,15 +18,6 @@ CREATE TABLE IF NOT EXISTS `Parallel`(
     `IdParallel` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Parallel Id */,
     `NaParallel` VARCHAR(5) NOT NULL UNIQUE /* Parallel Name */
 ); /* Parallels */
-CREATE TABLE IF NOT EXISTS `Day`(
-    `IdDay` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Day Id */,
-    `NaDay` VARCHAR(10) NOT NULL UNIQUE /* Name of Day */
-); /* Working Days */
-CREATE TABLE IF NOT EXISTS `Hour`(
-    `IdHour` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Hour Id */,
-    `NaHour` VARCHAR(10) NOT NULL UNIQUE /* Hour Name */,
-    `Interval` VARCHAR(21) NOT NULL UNIQUE /* Hour Interval */
-); /* Academic Hours */
 CREATE TABLE IF NOT EXISTS `Cluster`(
     `IdCategory` INTEGER NOT NULL /* Category */,
     `IdParallel` INTEGER NOT NULL /* Parallel */,
@@ -40,6 +27,19 @@ CREATE TABLE IF NOT EXISTS `Cluster`(
   CONSTRAINT `ParallelCluster` FOREIGN KEY (`IdParallel`)
     REFERENCES `Parallel`(`IdParallel`) ON UPDATE CASCADE ON DELETE RESTRICT
 ); /* Clusters */
+CREATE TABLE IF NOT EXISTS `Day`(
+    `IdDay` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Day Id */,
+    `NaDay` VARCHAR(10) NOT NULL UNIQUE /* Name of Day */
+); /* Working Days */
+CREATE TABLE IF NOT EXISTS `Hour`(
+    `IdHour` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Hour Id */,
+    `NaHour` VARCHAR(10) NOT NULL UNIQUE /* Hour Name */,
+    `Interval` VARCHAR(21) NOT NULL UNIQUE /* Hour Interval */
+); /* Academic Hours */
+CREATE TABLE IF NOT EXISTS `Theme`(
+    `IdTheme` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Theme Id */,
+    `NaTheme` VARCHAR(20) NOT NULL UNIQUE /* Theme Name */
+); /* Themes */
 CREATE TABLE IF NOT EXISTS `Activity`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `Activity`(
     `Composition` VARCHAR(40) NOT NULL /* Configuration of periods */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`),
   CONSTRAINT `ClusterActivity` FOREIGN KEY (`IdCategory`,`IdParallel`)
-    REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+    REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Activities */
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `ResourceType`(
     `NaResourceType` VARCHAR(15) NOT NULL UNIQUE /* Name */,
     `DefaultLimit` INTEGER NOT NULL /* Default Limit */,
     `ValResourceType` INTEGER NOT NULL /* Value of Clashes */
-); /* Resource Types */
+); /* Resource types */
 CREATE TABLE IF NOT EXISTS `Resource`(
     `IdResource` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Id */,
     `IdResourceType` INTEGER NOT NULL /* Resource Type Id */,
@@ -87,14 +87,14 @@ CREATE TABLE IF NOT EXISTS `TimeSlot`(
 CREATE TABLE IF NOT EXISTS `Requirement`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
-    `IdParallel` INTEGER NOT NULL /* Parallel Id */,
+    `IdParallel` INTEGER /* Parallel Id */,
     `IdResource` INTEGER NOT NULL /* Resource Id */,
-    `NumRequirement` INTEGER /* Number of Resources */,
+    `NumRequirement` INTEGER NOT NULL /* Number of Resources */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`,`IdResource`),
   CONSTRAINT `ActivityRequirement` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
     REFERENCES `Activity`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT `ResourceRequirement` FOREIGN KEY (`IdResource`)
-    REFERENCES `Resource`(`IdResource`) ON UPDATE RESTRICT ON DELETE RESTRICT
+    REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE RESTRICT
 ); /* Requirements */
 CREATE TABLE IF NOT EXISTS `JoinedCluster`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
     `IdResourceRestrictionType` INTEGER NOT NULL /* Resource Restriction Type Id */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdResource`,`IdDay`,`IdHour`),
   CONSTRAINT `ResourceResourceRestriction` FOREIGN KEY (`IdResource`)
-    REFERENCES `Resource`(`IdResource`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+    REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `ResourceRestrictionTypeResourceRestriction` FOREIGN KEY (`IdResourceRestrictionType`)
     REFERENCES `ResourceRestrictionType`(`IdResourceRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `TimeSlotResourceRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
@@ -156,9 +156,23 @@ CREATE TABLE IF NOT EXISTS `TimetableDetail`(
     `Session` INTEGER NOT NULL /* Internal Number */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTimetable`,`IdTheme`,`IdCategory`,`IdParallel`,`IdDay`,`IdHour`),
   CONSTRAINT `ActivityTimetableDetail` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
-    REFERENCES `Activity`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+    REFERENCES `Activity`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `TimeSlotTimetableDetail` FOREIGN KEY (`IdDay`,`IdHour`)
     REFERENCES `TimeSlot`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `TimetableTimetableDetail` FOREIGN KEY (`IdTimetable`)
     REFERENCES `Timetable`(`IdTimetable`) ON UPDATE CASCADE ON DELETE CASCADE
 ); /* Detail of Timetables */
+CREATE TABLE IF NOT EXISTS `TimetableResource`(
+    `IdTimetable` INTEGER NOT NULL /* Timetable Id */,
+    `IdTheme` INTEGER NOT NULL /* Theme Id */,
+    `IdCategory` INTEGER NOT NULL /* Category Id */,
+    `IdParallel` INTEGER NOT NULL /* Parallel Id */,
+    `IdResource` INTEGER NOT NULL /* Resource Id */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTimetable`,`IdTheme`,`IdCategory`,`IdParallel`,`IdResource`),
+  CONSTRAINT `ClusterTimetableResource` FOREIGN KEY (`IdCategory`,`IdParallel`)
+    REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `ResourceTimetableResource` FOREIGN KEY (`IdResource`)
+    REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT `TimetableTimetableResource` FOREIGN KEY (`IdTimetable`)
+    REFERENCES `Timetable`(`IdTimetable`) ON UPDATE CASCADE ON DELETE CASCADE
+); /* Resources of Timetables */
