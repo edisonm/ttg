@@ -41,32 +41,76 @@ type
 
   TTimetableModel = class(TModel)
   private
-    FClashThemeValue, FOutOfPositionEmptyHourValue, FBrokenSessionValue,
-      FBreakTimetableResourceValue, FNonScatteredThemeValue: Integer;
-    FTimeSlotToDay, FTimeSlotToHour, FDayToMaxTimeSlot, FSessionToActivity,
-      FSessionToTheme, FClusterToCategory, FResourceToNumber,
-      FThemeRestrictionToTheme, FThemeRestrictionToTimeSlot, FResourceToResourceType,
-      FThemeRestrictionToThemeRestrictionType, FResourceRestrictionToResource,
-      FResourceRestrictionToTimeSlot, FResourceRestrictionToResourceRestrictionType,
-      FClusterToParallel, FActivityToCluster, FClusterToSessionCount,
-      FThemeRestrictionTypeToValue, FResourceRestrictionTypeToValue, FResourceTypeToValue,
-      FThemeRestrictionToValue, FResourceRestrictionToValue: TDynamicIntegerArray;
-    FSessionToDuration: TSessionArray;
-    FDayHourToTimeSlot, FCategoryParallelToCluster,
-      FActivityToResources, FClusterThemeToActivity, FClusterThemeCount,
-      FTimetableDetailPattern, FActivityToSessions,
-      FResourceTimeSlotToResourceRestrictionType, FActivityResourceCount,
-      FClusterJoinedClusterToActivity, FClusterJoinedClusterToCluster,
-      FThemeTimeSlotToThemeRestrictionType: TDynamicIntegerArrayArray;
-    FThemeCount, FThemeRestrictionTypeCount, FResourceTypeCount, FResourceRestrictionTypeCount,
-      FClusterCount, FDayCount, FHourCount, FTimeSlotCount, FResourceCount,
-      FCategoryCount, FActivityCount, FJoinedClusterCount: Integer;
-    FParallelToIdParallel, FThemeToIdTheme, FDayToIdDay, FHourToIdHour,
-      FCategoryToIdCategory: TDynamicIntegerArray;
-    FIdCategoryToCategory, FIdParallelToParallel, FIdDayToDay,
-      FIdHourToHour: TDynamicIntegerArray;
-    FMinIdCategory, FMinIdParallel, FMinIdDay, FMinIdHour: Integer;
+    FClashThemeValue: Integer;
+    FOutOfPositionEmptyHourValue: Integer;
+    FBrokenSessionValue: Integer;
+    FBreakTimetableResourceValue: Integer;
+    FNonScatteredThemeValue: Integer;
+    FThemeCount: Integer;
+    FThemeRestrictionTypeCount: Integer;
+    FResourceTypeCount: Integer;
+    FResourceRestrictionTypeCount: Integer;
+    FClusterCount: Integer;
+    FDayCount: Integer;
+    FHourCount: Integer;
+    FTimeSlotCount: Integer;
+    FResourceCount: Integer;
+    FCategoryCount: Integer;
+    FActivityCount: Integer;
+    FJoinedClusterCount: Integer;
+    FMinIdCategory: Integer;
+    FMinIdParallel: Integer;
+    FMinIdDay: Integer;
+    FMinIdHour: Integer;
     FSessionNumberDouble: Integer;
+    
+    FTimeSlotToDay: TDynamicIntegerArray;
+    FTimeSlotToHour: TDynamicIntegerArray;
+    FDayToMaxTimeSlot: TDynamicIntegerArray;
+    FSessionToActivity: TDynamicIntegerArray;
+    FSessionToTheme: TDynamicIntegerArray;
+    FClusterToCategory: TDynamicIntegerArray;
+    FResourceToNumber: TDynamicIntegerArray;
+    FThemeRestrictionToTheme: TDynamicIntegerArray;
+    FThemeRestrictionToTimeSlot: TDynamicIntegerArray;
+    FResourceToResourceType: TDynamicIntegerArray;
+    FThemeRestrictionToThemeRestrictionType: TDynamicIntegerArray;
+    FResourceRestrictionToResource: TDynamicIntegerArray;
+    FResourceRestrictionToTimeSlot: TDynamicIntegerArray;
+    FResourceRestrictionToResourceRestrictionType: TDynamicIntegerArray;
+    FClusterToParallel: TDynamicIntegerArray;
+    FActivityToCluster: TDynamicIntegerArray;
+    FClusterToSessionCount: TDynamicIntegerArray;
+    FThemeRestrictionTypeToValue: TDynamicIntegerArray;
+    FResourceRestrictionTypeToValue: TDynamicIntegerArray;
+    FResourceTypeToValue: TDynamicIntegerArray;
+    FThemeRestrictionToValue: TDynamicIntegerArray;
+    FResourceRestrictionToValue: TDynamicIntegerArray;
+    FParallelToIdParallel: TDynamicIntegerArray;
+    FThemeToIdTheme: TDynamicIntegerArray;
+    FDayToIdDay: TDynamicIntegerArray;
+    FHourToIdHour: TDynamicIntegerArray;
+    FCategoryToIdCategory: TDynamicIntegerArray;
+    FIdCategoryToCategory: TDynamicIntegerArray;
+    FIdParallelToParallel: TDynamicIntegerArray;
+    FIdDayToDay: TDynamicIntegerArray;
+    FIdHourToHour: TDynamicIntegerArray;
+    
+    FSessionToDuration: TSessionArray;
+    
+    FDayHourToTimeSlot: TDynamicIntegerArrayArray;
+    FCategoryParallelToCluster: TDynamicIntegerArrayArray;
+    FActivityToResources: TDynamicIntegerArrayArray;
+    FClusterThemeToActivity: TDynamicIntegerArrayArray;
+    FClusterThemeCount: TDynamicIntegerArrayArray;
+    FTimetableDetailPattern: TDynamicIntegerArrayArray;
+    FActivityToSessions: TDynamicIntegerArrayArray;
+    FResourceTimeSlotToResourceRestrictionType: TDynamicIntegerArrayArray;
+    FActivityResourceCount: TDynamicIntegerArrayArray;
+    FClusterJoinedClusterToActivity: TDynamicIntegerArrayArray;
+    FClusterJoinedClusterToCluster: TDynamicIntegerArrayArray;
+    FThemeTimeSlotToThemeRestrictionType: TDynamicIntegerArrayArray;
+    
     function GetDayAMaxTimeSlot(Day: Integer): Integer;
   protected
     property TimetableDetailPattern: TDynamicIntegerArrayArray read FTimetableDetailPattern;
