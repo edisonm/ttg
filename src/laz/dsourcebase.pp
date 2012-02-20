@@ -47,8 +47,8 @@ type
     DSResource: TDataSource;
     TbResourceRestrictionType: TZTable;
     DSResourceRestrictionType: TDataSource;
-    TbTimeSlot: TZTable;
-    DSTimeSlot: TDataSource;
+    TbPeriod: TZTable;
+    DSPeriod: TDataSource;
     TbRequirement: TZTable;
     DSRequirement: TDataSource;
     TbJoinedCluster: TZTable;
@@ -101,7 +101,7 @@ begin
   Tables[8] := TbResource;
   TbResource.AfterPost := DataSetAfterPost;
   Tables[9] := TbResourceRestrictionType;
-  Tables[10] := TbTimeSlot;
+  Tables[10] := TbPeriod;
   Tables[11] := TbRequirement;
   Tables[12] := TbJoinedCluster;
   Tables[13] := TbThemeRestrictionType;
@@ -209,7 +209,7 @@ begin
     Add('TbResourceType=ResourceType');
     Add('TbResource=Resource');
     Add('TbResourceRestrictionType=ResourceRestrictionType');
-    Add('TbTimeSlot=TimeSlot');
+    Add('TbPeriod=Period');
     Add('TbRequirement=Requirement');
     Add('TbJoinedCluster=JoinedCluster');
     Add('TbThemeRestrictionType=ThemeRestrictionType');
@@ -252,8 +252,8 @@ begin
     Add('TbResourceRestrictionType.NaResourceRestrictionType=' + SFlResourceRestrictionType_NaResourceRestrictionType);
     Add('TbResourceRestrictionType.ColResourceRestrictionType=' + SFlResourceRestrictionType_ColResourceRestrictionType);
     Add('TbResourceRestrictionType.ValResourceRestrictionType=' + SFlResourceRestrictionType_ValResourceRestrictionType);
-    Add('TbTimeSlot.IdDay=' + SFlTimeSlot_IdDay);
-    Add('TbTimeSlot.IdHour=' + SFlTimeSlot_IdHour);
+    Add('TbPeriod.IdDay=' + SFlPeriod_IdDay);
+    Add('TbPeriod.IdHour=' + SFlPeriod_IdHour);
     Add('TbRequirement.IdTheme=' + SFlRequirement_IdTheme);
     Add('TbRequirement.IdCategory=' + SFlRequirement_IdCategory);
     Add('TbRequirement.IdParallel=' + SFlRequirement_IdParallel);
@@ -305,7 +305,7 @@ begin
     Add('TbResourceType=' + STbResourceType);
     Add('TbResource=' + STbResource);
     Add('TbResourceRestrictionType=' + STbResourceRestrictionType);
-    Add('TbTimeSlot=' + STbTimeSlot);
+    Add('TbPeriod=' + STbPeriod);
     Add('TbRequirement=' + STbRequirement);
     Add('TbJoinedCluster=' + STbJoinedCluster);
     Add('TbThemeRestrictionType=' + STbThemeRestrictionType);

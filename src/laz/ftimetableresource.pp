@@ -66,7 +66,7 @@ begin
       Self.QuResource.FindField('IdTimetable').AsInteger,
       Self.QuResource.FindField('NaResource').AsString]);
     FName := MasterDataModule.StringsShowResource.Values[CBShowResource.Text];
-    ShowEditor(TbDay, TbHour, QuTimetableResource, TbTimeSlot, 'IdDay', 'NaDay',
+    ShowEditor(TbDay, TbHour, QuTimetableResource, TbPeriod, 'IdDay', 'NaDay',
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
   end;
 end;

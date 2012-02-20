@@ -37,7 +37,7 @@ uses
   URelUtils,
   UTTGConfig in 'uttgconfig.pp',
   DSource in 'dsource.pp' {SourceDataModule: TDataModule},
-  FSelTimeSlot {SelTimeSlotForm},
+  FSelPeriod {SelPeriodForm},
   DBase, UModel, UMakeTT, UDownHill, USolver, UTTGBasics, UAbout, FMessageView,
   UTTGi18n, uttgconsts, dsourcebaseconsts, fdbexplorer;
 

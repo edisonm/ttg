@@ -132,16 +132,16 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 440
     Top = 136
   end
-  object TbTimeSlot: TZTable
+  object TbPeriod: TZTable
     Tag = 10
     Connection = DbZConnection
-    TableName = 'TimeSlot'
+    TableName = 'Period'
     IndexFieldNames = 'IdDay;IdHour'
     Left = 48
     Top = 240
   end
-  object DSTimeSlot: TDataSource
-    DataSet = TbTimeSlot
+  object DSPeriod: TDataSource
+    DataSet = TbPeriod
     Left = 56
     Top = 232
   end

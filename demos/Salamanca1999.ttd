@@ -440,7 +440,7 @@ ResourceRestrictionType
 "IdResourceRestrictionType";"NaResourceRestrictionType";"ColResourceRestrictionType";"ValResourceRestrictionType";
 "2";"No Gusta";"65280";"10";
 "3";"No Puede";"255";"300";
-TimeSlot
+Period
 30
 "IdDay";"IdHour";
 "2";"1";

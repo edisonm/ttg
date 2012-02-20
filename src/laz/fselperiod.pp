@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit FSelTimeSlot;
+unit FSelPeriod;
 
 {$I ttg.inc}
 
@@ -11,9 +11,9 @@ uses
 
 type
 
-  { TSelTimeSlotForm }
+  { TSelPeriodForm }
 
-  TSelTimeSlotForm = class(TForm)
+  TSelPeriodForm = class(TForm)
     bbtAceptar: TBitBtn;
     BBCancel: TBitBtn;
     CBDay: TDBLookupComboBox;
@@ -25,7 +25,7 @@ type
     { private declarations }
   public
     { public declarations }
-    class function SeleccionarTimeSlot(out AIdDay, AIdHour: Integer): Boolean;
+    class function SeleccionarPeriod(out AIdDay, AIdHour: Integer): Boolean;
   end;
 
 implementation
@@ -34,32 +34,32 @@ implementation
 {$R *.DFM}
 {$ENDIF}
 
-{ TSelTimeSlotForm }
+{ TSelPeriodForm }
 
-class function TSelTimeSlotForm.SeleccionarTimeSlot(out AIdDay, AIdHour: Integer): Boolean;
+class function TSelPeriodForm.SeleccionarPeriod(out AIdDay, AIdHour: Integer): Boolean;
 var
-  FSelTimeSlotForm: TSelTimeSlotForm;
+  FSelPeriodForm: TSelPeriodForm;
 begin
-  FSelTimeSlotForm := TSelTimeSlotForm.Create(Application);
+  FSelPeriodForm := TSelPeriodForm.Create(Application);
   try
-    Result := FSelTimeSlotForm.ShowModal = mrOk;
+    Result := FSelPeriodForm.ShowModal = mrOk;
     if Result then
     begin
-      with FSelTimeSlotForm do
+      with FSelPeriodForm do
       begin
         AIdDay := CbDay.ListSource.DataSet.FindField('IdDay').AsInteger;
         AIdHour := CbHour.ListSource.DataSet.FindField('IdHour').AsInteger;
       end;
     end;
   finally
-    FSelTimeSlotForm.Release;
+    FSelPeriodForm.Release;
   end;
 end;
 
 initialization
 
 {$IFDEF FPC}
-  {$I fseltimeslot.lrs}
+  {$I fselperiod.lrs}
 {$ENDIF}
 
 end.

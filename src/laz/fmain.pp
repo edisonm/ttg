@@ -59,7 +59,7 @@ type
     MICluster: TMenuItem;
     SaveDialog: TSaveDialog;
     OpenDialog: TOpenDialog;
-    MITimeSlot: TMenuItem;
+    MIPeriod: TMenuItem;
     TBNew: TToolButton;
     TBSave: TToolButton;
     TBOpen: TToolButton;
@@ -70,7 +70,7 @@ type
     TBParallel: TToolButton;
     TBResourceType: TToolButton;
     TBResource: TToolButton;
-    TBTimeSlot: TToolButton;
+    TBPeriod: TToolButton;
     TBCluster: TToolButton;
     TBTheme: TToolButton;
     MIReopen: TMenuItem;
@@ -97,7 +97,7 @@ type
     ActParallel: TAction;
     ActResource: TAction;
     ActResourceType: TAction;
-    ActTimeSlot: TAction;
+    ActPeriod: TAction;
     ActCluster: TAction;
     ActTheme: TAction;
     ActCheckFeasibility: TAction;
@@ -138,7 +138,7 @@ type
     procedure ActOpenExecute(Sender: TObject);
     procedure ActTimetableExecute(Sender: TObject);
     procedure ActMakeTimetableExecute(Sender: TObject);
-    procedure ActTimeSlotExecute(Sender: TObject);
+    procedure ActPeriodExecute(Sender: TObject);
     procedure StatusBarDrawPanel(StatusBar: TStatusBar;
       Panel: TStatusPanel; const Rect: TRect);
     procedure FormCreate(Sender: TObject);
@@ -159,7 +159,7 @@ type
     FResourceTypeForm,
     FParallelForm,
     FHourForm,
-    FTimeSlotForm: TCrossManyToManyEditor0Form;
+    FPeriodForm: TCrossManyToManyEditor0Form;
     FProgress: Integer;
     FRelProgress: Integer;
     FMin: Integer;
@@ -251,16 +251,16 @@ begin
 				  SourceDataModule.TbResource);
 end;
 
-procedure TMainForm.ActTimeSlotExecute(Sender: TObject);
+procedure TMainForm.ActPeriodExecute(Sender: TObject);
 begin
-  if TCrossManyToManyEditor0Form.ToggleEditor(Self, FTimeSlotForm,
-    ConfigStorage, ActTimeSlot) then
+  if TCrossManyToManyEditor0Form.ToggleEditor(Self, FPeriodForm,
+    ConfigStorage, ActPeriod) then
   with SourceDataModule do
   begin
     {$IFDEF FPC}
-    FTimeSlotForm.DrawGrid.OnPrepareCanvas := FTimeSlotForm.DrawGridPrepareCanvas;
+    FPeriodForm.DrawGrid.OnPrepareCanvas := FPeriodForm.DrawGridPrepareCanvas;
     {$ENDIF}
-    FTimeSlotForm.ShowEditor(TbDay, TbHour, TbTimeSlot, nil, 'IdDay', 'NaDay',
+    FPeriodForm.ShowEditor(TbDay, TbHour, TbPeriod, nil, 'IdDay', 'NaDay',
       'IdDay', '', 'IdHour', 'NaHour', 'IdHour', '');
   end;
 end;

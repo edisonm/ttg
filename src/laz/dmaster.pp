@@ -33,7 +33,7 @@ type
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
   public
     { Public declarations }
-    procedure IntercambiarTimeSlots(AIdTimetable, AIdCategory,
+    procedure IntercambiarPeriods(AIdTimetable, AIdCategory,
       AIdParallel, AIdDay1, AIdHour1, AIdDay2, AIdHour2: Integer);
     function PerformAllChecks(AMainStrings, ASubStrings: TStrings;
       AMaxResourceWorkLoad: Integer): Boolean;
@@ -105,10 +105,10 @@ function TMasterDataModule.PerformAllChecks(AMainStrings, ASubStrings:
   TStrings; AMaxResourceWorkLoad: Integer): Boolean;
 var
   HaveProblems: Boolean;
-  iTimeSlotCount: Integer;
-  procedure GetTimeSlotCount;
+  iPeriodCount: Integer;
+  procedure GetPeriodCount;
   begin
-    iTimeSlotCount := SourceDataModule.TbTimeSlot.RecordCount;
+    iPeriodCount := SourceDataModule.TbPeriod.RecordCount;
   end;
   procedure GetResourceWorkLoad;
   var
@@ -170,7 +170,7 @@ var
               QuResourceRestrictionCountIdResource.AsInteger, []) then
             begin
               if QuResourceRestrictionCountNumber.AsInteger +
-                TbTmpResourceWorkLoadWorkLoad.AsInteger > iTimeSlotCount then
+                TbTmpResourceWorkLoadWorkLoad.AsInteger > iPeriodCount then
               begin
                 if not HaveInternalProblems then
                 begin
@@ -269,7 +269,7 @@ var
       try
         Open;
         TbActivity.First;
-        TbTimeSlot.First;
+        TbPeriod.First;
         First;
         ASubStrings.Add(SClusterWorkLoadWithoutProblems);
         vSubMin := ASubStrings.Count;
@@ -289,7 +289,7 @@ var
               Inc(t, CompositionToDuration(TbActivity.FindField('Composition').AsString));
               TbActivity.Next;
             end;
-            if (t <= 0) or (t > TbTimeSlot.RecordCount) then
+            if (t <= 0) or (t > TbPeriod.RecordCount) then
             begin
               if not HaveInternalProblems then
               begin
@@ -339,7 +339,7 @@ begin
   ASubStrings.BeginUpdate;
   HaveProblems := False;
   try
-    GetTimeSlotCount;
+    GetPeriodCount;
     GetResourceWorkLoad;
     CheckResourceWorkLoad;
     CheckResourceRestrictionCount;
@@ -411,7 +411,7 @@ begin
   LoadIniStrings(AStrings, APosition);
 end;
 
-procedure TMasterDataModule.IntercambiarTimeSlots(AIdTimetable, AIdCategory,
+procedure TMasterDataModule.IntercambiarPeriods(AIdTimetable, AIdCategory,
   AIdParallel, AIdDay1, AIdHour1, AIdDay2, AIdHour2: Integer);
 var
   Locate1, Locate2: Boolean;

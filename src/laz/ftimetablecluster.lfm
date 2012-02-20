@@ -24,12 +24,12 @@ inherited TimetableClusterForm: TTimetableClusterForm
       OnClick = BtCancelClick
       Visible = False
     end
-    object TBSwapTimeSlots: TToolButton[3]
+    object TBSwapPeriods: TToolButton[3]
       Left = 347
       Hint = 'Swap time slots|Swap time slots'
       Top = 2
       ImageIndex = 1
-      OnClick = IntercambiarTimeSlotsClick
+      OnClick = IntercambiarPeriodsClick
       ParentShowHint = False
       ShowHint = True
     end
@@ -82,7 +82,7 @@ inherited TimetableClusterForm: TTimetableClusterForm
     Height = 357
     Width = 355
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
-    OnDblClick = IntercambiarTimeSlotsClick
+    OnDblClick = IntercambiarPeriodsClick
     OnDrawCell = DrawGridDrawCell
     OnGetEditText = DrawGridGetEditText
     OnSelectCell = DrawGridSelectCell

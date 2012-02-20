@@ -9,7 +9,7 @@ uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
   Graphics, Controls, Forms, Dialogs, Db, FCrossManytoManyEditorR, StdCtrls, Buttons, ExtCtrls,
   Grids, Variants, FCrossManyToManyEditor1, DBCtrls, DBGrids, ZDataset, ComCtrls,
-  FSelTimeSlot, DSource, DMaster;
+  FSelPeriod, DSource, DMaster;
 
 type
 
@@ -17,7 +17,7 @@ type
 
   TTimetableClusterForm = class(TCrossManyToManyEditor1Form)
     QuTimetableCluster: TZQuery;
-    TBSwapTimeSlots: TToolButton;
+    TBSwapPeriods: TToolButton;
     CBShowCluster: TComboBox;
     QuTimetableClusterIdTheme: TLongintField;
     QuTimetableClusterIdCategory: TLongintField;
@@ -56,7 +56,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure IntercambiarTimeSlotsClick(Sender: TObject);
+    procedure IntercambiarPeriodsClick(Sender: TObject);
     procedure QuTimetableClusterCalcFields(DataSet: TDataSet);
     procedure DSClusterDataChange(Sender: TObject; Field: TField);
     procedure QuClusterCalcFields(DataSet: TDataSet);
@@ -99,7 +99,7 @@ begin
     QuCluster.FindField('NaParallel').AsString]);
   FName := MasterDataModule.StringsShowCluster.Values[CBShowCluster.Text];
   with SourceDataModule do
-    ShowEditor(TbDay, TbHour, QuTimetableCluster, TbTimeSlot, 'IdDay', 'NaDay',
+    ShowEditor(TbDay, TbHour, QuTimetableCluster, TbPeriod, 'IdDay', 'NaDay',
       'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
 end;
 
@@ -165,15 +165,15 @@ begin
   inherited;
 end;
 
-procedure TTimetableClusterForm.IntercambiarTimeSlotsClick(Sender: TObject);
+procedure TTimetableClusterForm.IntercambiarPeriodsClick(Sender: TObject);
 var
   iIdDay, iIdHour: Integer;
 begin
   inherited;
-  if TSelTimeSlotForm.SeleccionarTimeSlot(iIdDay, iIdHour) then
+  if TSelPeriodForm.SeleccionarPeriod(iIdDay, iIdHour) then
   begin
     with SourceDataModule do
-      MasterDataModule.IntercambiarTimeSlots(
+      MasterDataModule.IntercambiarPeriods(
         TbTimetable.FindField('IdTimetable').AsInteger,
         QuCluster.FindField('IdCategory').AsInteger,
         QuCluster.FindField('IdParallel').AsInteger,

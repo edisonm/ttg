@@ -128,10 +128,10 @@ object MainForm: TMainForm
       ParentShowHint = False
       ShowHint = True
     end
-    object TBTimeSlot: TToolButton
+    object TBPeriod: TToolButton
       Left = 149
       Top = 2
-      Action = ActTimeSlot
+      Action = ActPeriod
       ParentShowHint = False
       ShowHint = True
     end
@@ -512,8 +512,8 @@ object MainForm: TMainForm
         }
         OnClick = ActHourExecute
       end
-      object MITimeSlot: TMenuItem
-        Action = ActTimeSlot
+      object MIPeriod: TMenuItem
+        Action = ActPeriod
         AutoCheck = True
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
@@ -552,7 +552,7 @@ object MainForm: TMainForm
           0000808000008080000080800000808000008080000080800000
         }
         ShortCut = 49232
-        OnClick = ActTimeSlotExecute
+        OnClick = ActPeriodExecute
       end
       object N2: TMenuItem
         Caption = '-'
@@ -2068,14 +2068,14 @@ object MainForm: TMainForm
       OnExecute = ActHourExecute
       ShortCut = 16456
     end
-    object ActTimeSlot: TAction
+    object ActPeriod: TAction
       Category = 'Data'
       AutoCheck = True
       Caption = 'Working Time Slots'
       HelpContext = 160
       Hint = 'Working Time Slots|Working Time Slots'
       ImageIndex = 13
-      OnExecute = ActTimeSlotExecute
+      OnExecute = ActPeriodExecute
       ShortCut = 49225
     end
     object ActCategory: TAction

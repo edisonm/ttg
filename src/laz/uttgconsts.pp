@@ -21,7 +21,7 @@ resourcestring
   SClashResource = 'Clash of Resources';
   SClashes = 'Clashes';
   SCluster = 'Cluster';
-  SClusterTimeSlotToSessionOverflow = 'Overflow of pattern for ClusterTimeSlotToSession: Cluster %d-%d Duration %d';
+  SClusterPeriodToSessionOverflow = 'Overflow of pattern for ClusterPeriodToSession: Cluster %d-%d Duration %d';
   SClusterWorkLoadHead = 'Cluster; Work Load';
   SClusterWorkLoadWithProblems = 'Cluster work load with problems...';
   SClusterWorkLoadWithoutProblems = 'Cluster work load without problems...';

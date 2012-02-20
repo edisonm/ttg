@@ -174,7 +174,7 @@ begin
         Post;
       end;
     end;
-    with TbTimeSlot do
+    with TbPeriod do
     begin
       TbDay.First;
       while not TbDay.Eof do
@@ -405,8 +405,8 @@ begin
   TbCategory.FindField('IdCategory').Visible := False;
   TbParallel.FindField('IdParallel').Visible := False;
   TbThemeRestrictionType.FindField('IdThemeRestrictionType').Visible := False;
-  TbTimeSlot.FindField('IdDay').Visible := False;
-  TbTimeSlot.FindField('IdHour').Visible := False;
+  TbPeriod.FindField('IdDay').Visible := False;
+  TbPeriod.FindField('IdHour').Visible := False;
   TbCluster.FindField('IdCategory').Visible := False;
   TbCluster.FindField('IdParallel').Visible := False;
   TbResource.FindField('IdResource').Visible := False;

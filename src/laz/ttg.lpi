@@ -308,12 +308,12 @@
         <UnitName Value="DSource"/>
       </Unit26>
       <Unit27>
-        <Filename Value="fseltimeslot.pp"/>
+        <Filename Value="fselperiod.pp"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="SelTimeSlotForm"/>
+        <ComponentName Value="SelPeriodForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="FSelTimeSlot"/>
+        <UnitName Value="FSelPeriod"/>
       </Unit27>
       <Unit28>
         <Filename Value="../../../DBConvert/auxiliary/dbase.pp"/>

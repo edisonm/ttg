@@ -1,10 +1,10 @@
-object SelTimeSlotForm: TSelTimeSlotForm
+object SelPeriodForm: TSelPeriodForm
   Left = 473
   Height = 123
   Top = 316
   Width = 295
   ActiveControl = CBDay
-  Caption = 'Intercambiar TimeSlot'
+  Caption = 'Intercambiar Period'
   ClientHeight = 123
   ClientWidth = 295
   Position = poDesktopCenter

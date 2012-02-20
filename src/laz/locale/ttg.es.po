@@ -264,13 +264,13 @@ msgctxt "dsourcebaseconsts.sfltheme_natheme"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sfltimeslot_idday
-msgctxt "dsourcebaseconsts.sfltimeslot_idday"
+#: dsourcebaseconsts.sflperiod_idday
+msgctxt "dsourcebaseconsts.sflperiod_idday"
 msgid "Day"
 msgstr "Day"
 
-#: dsourcebaseconsts.sfltimeslot_idhour
-msgctxt "dsourcebaseconsts.sfltimeslot_idhour"
+#: dsourcebaseconsts.sflperiod_idhour
+msgctxt "dsourcebaseconsts.sflperiod_idhour"
 msgid "Hour"
 msgstr "Hour"
 
@@ -428,8 +428,8 @@ msgctxt "dsourcebaseconsts.stbthemerestrictiontype"
 msgid "Types of Theme Restrictions"
 msgstr "Tipos de restricciones de materia"
 
-#: dsourcebaseconsts.stbtimeslot
-msgctxt "dsourcebaseconsts.stbtimeslot"
+#: dsourcebaseconsts.stbperiod
+msgctxt "dsourcebaseconsts.stbperiod"
 msgid "Time Slots"
 msgstr "Periodos"
 
@@ -925,11 +925,11 @@ msgstr "Profesores"
 msgid "Resources|Resources"
 msgstr ""
 
-#: tmainform.acttimeslot.caption
+#: tmainform.actperiod.caption
 msgid "Working Time Slots"
 msgstr "Periodos laborables"
 
-#: tmainform.acttimeslot.hint
+#: tmainform.actperiod.hint
 msgid "Working Time Slots|Working Time Slots"
 msgstr "Periodos laborables|Periodos laborables"
 
@@ -1388,32 +1388,32 @@ msgctxt "tresourceform.groupbox3.caption"
 msgid "Requirements"
 msgstr "Ayudas"
 
-#: tseltimeslotform.bbcancel.caption
-msgctxt "TSELTIMESLOTFORM.BBCANCELAR.CAPTION"
+#: tselperiodform.bbcancel.caption
+msgctxt "TSELPERIODFORM.BBCANCELAR.CAPTION"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: tseltimeslotform.bbok.caption
-msgctxt "tseltimeslotform.bbok.caption"
+#: tselperiodform.bbok.caption
+msgctxt "tselperiodform.bbok.caption"
 msgid "Ok"
 msgstr "Aceptar"
 
-#: tseltimeslotform.caption
-msgctxt "tseltimeslotform.caption"
-msgid "Intercambiar TimeSlot"
-msgstr "Intercambiar TimeSlot"
+#: tselperiodform.caption
+msgctxt "tselperiodform.caption"
+msgid "Swap periods"
+msgstr "Intercambiar periodos"
 
-#: tseltimeslotform.label1.caption
+#: tselperiodform.label1.caption
 msgid "Select the time slot to swap"
 msgstr "Seleccione el periodo a intercambiar"
 
-#: tseltimeslotform.label2.caption
-msgctxt "TSELTIMESLOTFORM.LABEL2.CAPTION"
+#: tselperiodform.label2.caption
+msgctxt "TSELPERIODFORM.LABEL2.CAPTION"
 msgid "Day"
 msgstr "Dia"
 
-#: tseltimeslotform.label3.caption
-msgctxt "TSELTIMESLOTFORM.LABEL3.CAPTION"
+#: tselperiodform.label3.caption
+msgctxt "TSELPERIODFORM.LABEL3.CAPTION"
 msgid "Hour"
 msgstr "Hora"
 
@@ -1492,7 +1492,7 @@ msgctxt "ttimetableclusterform.cbshowcluster.hint"
 msgid "Show|Param to show in the timetable"
 msgstr "Mostrar|Parametro a mostrar en el horario"
 
-#: ttimetableclusterform.tbswaptimeslots.hint
+#: ttimetableclusterform.tbswapperiods.hint
 msgid "Swap time slots|Swap time slots"
 msgstr "Intercambiar periodos|Intercambiar periodos"
 
@@ -1677,11 +1677,9 @@ msgstr "Cruce de materias"
 msgid "Cluster"
 msgstr "Clase"
 
-#: uttgconsts.sclustertimeslottosessionoverflow
-#, fuzzy
-#| msgid "Overflow of pattern for ClassTimeSlotToSession: Cluster %d-%d Duration %d"
-msgid "Overflow of pattern for ClusterTimeSlotToSession: Cluster %d-%d Duration %d"
-msgstr "Se desbordo Molde de ClassTimeSlotToSession: Cluster %d-%d Duracion %d"
+#: uttgconsts.sclusterperiodtosessionoverflow
+msgid "Overflow of pattern for ClusterPeriodToSession: Cluster %d-%d Duration %d"
+msgstr "Se desbordo Molde de ClusterPeriodToSession: Cluster %d-%d Duracion %d"
 
 #: uttgconsts.sclusterworkloadhead
 msgid "Cluster; Work Load"

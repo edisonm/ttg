@@ -75,7 +75,7 @@ begin
     ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda',
       [NameDataSet[TbResourceRestrictionType], Description[TbResourceRestrictionType]]);
     ShowEditor(TbDay, TbHour, TbResourceRestrictionType, TbResourceRestriction,
-	    TbTimeSlot, 'IdDay', 'NaDay', 'IdDay', 'IdDay', 'IdHour', 'NaHour',
+	    TbPeriod, 'IdDay', 'NaDay', 'IdDay', 'IdDay', 'IdHour', 'NaHour',
       'IdHour', 'IdHour', 'IdResourceRestrictionType', 'NaResourceRestrictionType',
       'ColResourceRestrictionType', 'IdResourceRestrictionType');
   end

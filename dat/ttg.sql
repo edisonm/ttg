@@ -72,13 +72,13 @@ CREATE TABLE IF NOT EXISTS `ResourceRestrictionType`(
     `ColResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
     `ValResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
 ); /* Types of Resource Restrictions */
-CREATE TABLE IF NOT EXISTS `TimeSlot`(
+CREATE TABLE IF NOT EXISTS `Period`(
     `IdDay` INTEGER NOT NULL /* Day Id */,
     `IdHour` INTEGER NOT NULL /* Hour Id */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdDay`,`IdHour`),
-  CONSTRAINT `DayTimeSlot` FOREIGN KEY (`IdDay`)
+  CONSTRAINT `DayPeriod` FOREIGN KEY (`IdDay`)
     REFERENCES `Day`(`IdDay`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `HourTimeSlot` FOREIGN KEY (`IdHour`)
+  CONSTRAINT `HourPeriod` FOREIGN KEY (`IdHour`)
     REFERENCES `Hour`(`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Time Slots */
 CREATE TABLE IF NOT EXISTS `Requirement`(
@@ -121,8 +121,8 @@ CREATE TABLE IF NOT EXISTS `ThemeRestriction`(
     REFERENCES `ThemeRestrictionType`(`IdThemeRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `ThemeThemeRestriction` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `TimeSlotThemeRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
-    REFERENCES `TimeSlot`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT
+  CONSTRAINT `PeriodThemeRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
+    REFERENCES `Period`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Theme Restrictions */
 CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
     `IdResource` INTEGER NOT NULL /* Resource Id */,
@@ -134,8 +134,8 @@ CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
     REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `ResourceRestrictionTypeResourceRestriction` FOREIGN KEY (`IdResourceRestrictionType`)
     REFERENCES `ResourceRestrictionType`(`IdResourceRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `TimeSlotResourceRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
-    REFERENCES `TimeSlot`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT
+  CONSTRAINT `PeriodResourceRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
+    REFERENCES `Period`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Resource Restrictions */
 CREATE TABLE IF NOT EXISTS `Timetable`(
     `IdTimetable` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Timetable Id */,
@@ -154,8 +154,8 @@ CREATE TABLE IF NOT EXISTS `TimetableDetail`(
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTimetable`,`IdTheme`,`IdCategory`,`IdParallel`,`IdDay`,`IdHour`),
   CONSTRAINT `ActivityTimetableDetail` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
     REFERENCES `Activity`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT `TimeSlotTimetableDetail` FOREIGN KEY (`IdDay`,`IdHour`)
-    REFERENCES `TimeSlot`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `PeriodTimetableDetail` FOREIGN KEY (`IdDay`,`IdHour`)
+    REFERENCES `Period`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `TimetableTimetableDetail` FOREIGN KEY (`IdTimetable`)
     REFERENCES `Timetable`(`IdTimetable`) ON UPDATE CASCADE ON DELETE CASCADE
 ); /* Detail of Timetables */

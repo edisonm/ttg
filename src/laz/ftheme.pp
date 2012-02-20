@@ -65,7 +65,7 @@ begin
        Description[TbThemeRestrictionType],
        SPressDelToClearCell]);
     ShowEditor(TbDay, TbHour, TbThemeRestrictionType, QuThemeRestriction,
-      TbTimeSlot, 'IdDay', 'NaDay', 'IdDay', 'IdDay', 'IdHour', 'NaHour',
+      TbPeriod, 'IdDay', 'NaDay', 'IdDay', 'IdDay', 'IdHour', 'NaHour',
       'IdHour', 'IdHour', 'IdThemeRestrictionType', 'NaThemeRestrictionType',
       'ColThemeRestrictionType', 'IdThemeRestrictionType');
     Tag := TbTheme.FindField('IdTheme').AsInteger;

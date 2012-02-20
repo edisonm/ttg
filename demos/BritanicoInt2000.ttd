@@ -248,7 +248,7 @@ ResourceRestrictionType
 "0";"No gusta";"65280";"50";
 "1";"No puede";"255";"500";
 "2";"Optativa";"8388736";"500";
-TimeSlot
+Period
 45
 "IdDay";"IdHour";
 "2";"1";
