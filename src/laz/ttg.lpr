@@ -13,9 +13,7 @@ uses
   FMain {MainForm},
   DMaster in 'dmaster.pp' {MasterDataModule: TDataModule},
   UTTModel,
-  UEvolElitist in 'uevolelitist.pp',
   FProgress {ProgressForm},
-  USortAlgs,
   FCrossManyToManyEditor {CrossManyToManyEditorForm},
   FCrossManyToManyEditor0 {CrossManyToManyEditor0Form},
   FCrossManyToManyEditor1 {CrossManyToManyEditor1Form},
@@ -23,7 +21,6 @@ uses
   FEditor {EditorForm},
   FTheme {ThemeForm},
   FResource {ResourceForm},
-  UTTGDBUtils in 'uttgdbutils.pp',
   UConfigStorage,
   fconfig {ConfigForm},
   FTimetableCluster {TimetableClusterForm},
@@ -34,12 +31,10 @@ uses
   FTimetable {TimetableForm},
   FTimetableResource {TimetableResourceForm},
   DSourceBase {SourceBaseDataModule: TDataModule},
-  URelUtils,
-  UTTGConfig in 'uttgconfig.pp',
   DSource in 'dsource.pp' {SourceDataModule: TDataModule},
   FSelPeriod {SelPeriodForm},
-  DBase, UModel, UMakeTT, UDownHill, USolver, UTTGBasics, UAbout, FMessageView,
-  UTTGi18n, uttgconsts, dsourcebaseconsts, fdbexplorer;
+  DBase, UAbout,
+  UTTGi18n, fdbexplorer;
 
 {$IFNDEF FPC}
 {$R *.res}

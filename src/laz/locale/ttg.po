@@ -105,6 +105,16 @@ msgctxt "dsourcebaseconsts.sflparallel_naparallel"
 msgid "Name"
 msgstr ""
 
+#: dsourcebaseconsts.sflperiod_idday
+msgctxt "dsourcebaseconsts.sflperiod_idday"
+msgid "Day"
+msgstr ""
+
+#: dsourcebaseconsts.sflperiod_idhour
+msgctxt "dsourcebaseconsts.sflperiod_idhour"
+msgid "Hour"
+msgstr ""
+
 #: dsourcebaseconsts.sflrequirement_idcategory
 msgctxt "dsourcebaseconsts.sflrequirement_idcategory"
 msgid "Category"
@@ -262,16 +272,6 @@ msgctxt "dsourcebaseconsts.sfltheme_natheme"
 msgid "Name"
 msgstr ""
 
-#: dsourcebaseconsts.sflperiod_idday
-msgctxt "dsourcebaseconsts.sflperiod_idday"
-msgid "Day"
-msgstr ""
-
-#: dsourcebaseconsts.sflperiod_idhour
-msgctxt "dsourcebaseconsts.sflperiod_idhour"
-msgid "Hour"
-msgstr ""
-
 #: dsourcebaseconsts.sfltimetabledetail_idcategory
 msgctxt "dsourcebaseconsts.sfltimetabledetail_idcategory"
 msgid "Category"
@@ -387,6 +387,11 @@ msgctxt "dsourcebaseconsts.stbparallel"
 msgid "Parallels"
 msgstr ""
 
+#: dsourcebaseconsts.stbperiod
+msgctxt "dsourcebaseconsts.stbperiod"
+msgid "Periods"
+msgstr ""
+
 #: dsourcebaseconsts.stbrequirement
 msgctxt "dsourcebaseconsts.stbrequirement"
 msgid "Requirements"
@@ -424,11 +429,6 @@ msgstr ""
 #: dsourcebaseconsts.stbthemerestrictiontype
 msgctxt "dsourcebaseconsts.stbthemerestrictiontype"
 msgid "Types of Theme Restrictions"
-msgstr ""
-
-#: dsourcebaseconsts.stbperiod
-msgctxt "dsourcebaseconsts.stbperiod"
-msgid "Time Slots"
 msgstr ""
 
 #: dsourcebaseconsts.stbtimetable
@@ -886,6 +886,14 @@ msgstr ""
 msgid "Password|Change system password"
 msgstr ""
 
+#: tmainform.actperiod.caption
+msgid "Working Time Slots"
+msgstr ""
+
+#: tmainform.actperiod.hint
+msgid "Working Time Slots|Working Time Slots"
+msgstr ""
+
 #: tmainform.actregistrationinfo.caption
 msgid "Registration Info"
 msgstr ""
@@ -915,14 +923,6 @@ msgstr ""
 
 #: tmainform.actteacher.hint
 msgid "Resources|Resources"
-msgstr ""
-
-#: tmainform.actperiod.caption
-msgid "Working Time Slots"
-msgstr ""
-
-#: tmainform.actperiod.hint
-msgid "Working Time Slots|Working Time Slots"
 msgstr ""
 
 #: tmainform.acttimetable.caption
@@ -1182,7 +1182,7 @@ msgstr ""
 
 #: tprogressform.pnlbreaktimetableresource.caption
 msgctxt "TPROGRESSFORM.PNLBREAKTIMETABLERESOURCE.CAPTION"
-msgid " Break TT. Resource:"
+msgid " Gap TT. Resources:"
 msgstr ""
 
 #: tprogressform.pnlbreaktimetableresourcecount.caption
@@ -1364,6 +1364,7 @@ msgid "Joined Classes"
 msgstr ""
 
 #: tresourceform.dbgriddetail.hint
+msgctxt "tresourceform.dbgriddetail.hint"
 msgid "Activities"
 msgstr ""
 

@@ -536,7 +536,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Break TT. Resource:'
+      Caption = ' Gap TT. Resources:'
       TabOrder = 25
     end
     object PnBreakTimetableResourceCount: TPanel

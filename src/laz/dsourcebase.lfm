@@ -93,120 +93,120 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 152
     Top = 148
   end
-  object TbResourceType: TZTable
-    Tag = 7
-    Connection = DbZConnection
-    TableName = 'ResourceType'
-    IndexFieldNames = 'IdResourceType'
-    Left = 240
-    Top = 144
-  end
-  object DSResourceType: TDataSource
-    DataSet = TbResourceType
-    Left = 248
-    Top = 136
-  end
-  object TbResource: TZTable
-    Tag = 8
-    Connection = DbZConnection
-    TableName = 'Resource'
-    IndexFieldNames = 'IdResource'
-    Left = 336
-    Top = 156
-  end
-  object DSResource: TDataSource
-    DataSet = TbResource
-    Left = 344
-    Top = 148
-  end
-  object TbResourceRestrictionType: TZTable
-    Tag = 9
-    Connection = DbZConnection
-    TableName = 'ResourceRestrictionType'
-    IndexFieldNames = 'IdResourceRestrictionType'
-    Left = 432
-    Top = 144
-  end
-  object DSResourceRestrictionType: TDataSource
-    DataSet = TbResourceRestrictionType
-    Left = 440
-    Top = 136
-  end
   object TbPeriod: TZTable
-    Tag = 10
+    Tag = 7
     Connection = DbZConnection
     TableName = 'Period'
     IndexFieldNames = 'IdDay;IdHour'
-    Left = 48
-    Top = 240
+    Left = 240
+    Top = 144
   end
   object DSPeriod: TDataSource
     DataSet = TbPeriod
+    Left = 248
+    Top = 136
+  end
+  object TbResourceType: TZTable
+    Tag = 8
+    Connection = DbZConnection
+    TableName = 'ResourceType'
+    IndexFieldNames = 'IdResourceType'
+    Left = 336
+    Top = 156
+  end
+  object DSResourceType: TDataSource
+    DataSet = TbResourceType
+    Left = 344
+    Top = 148
+  end
+  object TbResource: TZTable
+    Tag = 9
+    Connection = DbZConnection
+    TableName = 'Resource'
+    IndexFieldNames = 'IdResource'
+    Left = 432
+    Top = 144
+  end
+  object DSResource: TDataSource
+    DataSet = TbResource
+    Left = 440
+    Top = 136
+  end
+  object TbResourceRestrictionType: TZTable
+    Tag = 10
+    Connection = DbZConnection
+    TableName = 'ResourceRestrictionType'
+    IndexFieldNames = 'IdResourceRestrictionType'
+    Left = 48
+    Top = 240
+  end
+  object DSResourceRestrictionType: TDataSource
+    DataSet = TbResourceRestrictionType
     Left = 56
     Top = 232
   end
-  object TbRequirement: TZTable
-    Tag = 11
-    Connection = DbZConnection
-    TableName = 'Requirement'
-    IndexFieldNames = 'IdTheme;IdCategory;IdParallel;IdResource'
-    Left = 144
-    Top = 252
-  end
-  object DSRequirement: TDataSource
-    DataSet = TbRequirement
-    Left = 152
-    Top = 244
-  end
-  object TbJoinedCluster: TZTable
-    Tag = 12
-    Connection = DbZConnection
-    TableName = 'JoinedCluster'
-    IndexFieldNames = 'IdTheme;IdCategory;IdParallel;IdCategory1;IdParallel1'
-    Left = 240
-    Top = 240
-  end
-  object DSJoinedCluster: TDataSource
-    DataSet = TbJoinedCluster
-    Left = 248
-    Top = 232
-  end
-  object TbThemeRestrictionType: TZTable
-    Tag = 13
-    Connection = DbZConnection
-    TableName = 'ThemeRestrictionType'
-    IndexFieldNames = 'IdThemeRestrictionType'
-    Left = 336
-    Top = 252
-  end
-  object DSThemeRestrictionType: TDataSource
-    DataSet = TbThemeRestrictionType
-    Left = 344
-    Top = 244
-  end
-  object TbThemeRestriction: TZTable
-    Tag = 14
-    Connection = DbZConnection
-    TableName = 'ThemeRestriction'
-    IndexFieldNames = 'IdTheme;IdDay;IdHour'
-    Left = 432
-    Top = 240
-  end
-  object DSThemeRestriction: TDataSource
-    DataSet = TbThemeRestriction
-    Left = 440
-    Top = 232
-  end
   object TbResourceRestriction: TZTable
-    Tag = 15
+    Tag = 11
     Connection = DbZConnection
     TableName = 'ResourceRestriction'
     IndexFieldNames = 'IdResource;IdDay;IdHour'
-    Left = 48
-    Top = 336
+    Left = 144
+    Top = 252
   end
   object DSResourceRestriction: TDataSource
     DataSet = TbResourceRestriction
+    Left = 152
+    Top = 244
+  end
+  object TbRequirement: TZTable
+    Tag = 12
+    Connection = DbZConnection
+    TableName = 'Requirement'
+    IndexFieldNames = 'IdTheme;IdCategory;IdParallel;IdResource'
+    Left = 240
+    Top = 240
+  end
+  object DSRequirement: TDataSource
+    DataSet = TbRequirement
+    Left = 248
+    Top = 232
+  end
+  object TbJoinedCluster: TZTable
+    Tag = 13
+    Connection = DbZConnection
+    TableName = 'JoinedCluster'
+    IndexFieldNames = 'IdTheme;IdCategory;IdParallel;IdCategory1;IdParallel1'
+    Left = 336
+    Top = 252
+  end
+  object DSJoinedCluster: TDataSource
+    DataSet = TbJoinedCluster
+    Left = 344
+    Top = 244
+  end
+  object TbThemeRestrictionType: TZTable
+    Tag = 14
+    Connection = DbZConnection
+    TableName = 'ThemeRestrictionType'
+    IndexFieldNames = 'IdThemeRestrictionType'
+    Left = 432
+    Top = 240
+  end
+  object DSThemeRestrictionType: TDataSource
+    DataSet = TbThemeRestrictionType
+    Left = 440
+    Top = 232
+  end
+  object TbThemeRestriction: TZTable
+    Tag = 15
+    Connection = DbZConnection
+    TableName = 'ThemeRestriction'
+    IndexFieldNames = 'IdTheme;IdDay;IdHour'
+    Left = 48
+    Top = 336
+  end
+  object DSThemeRestriction: TDataSource
+    DataSet = TbThemeRestriction
     Left = 56
     Top = 328
   end

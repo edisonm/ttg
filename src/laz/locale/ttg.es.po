@@ -105,6 +105,16 @@ msgctxt "dsourcebaseconsts.sflparallel_naparallel"
 msgid "Name"
 msgstr "Nombre"
 
+#: dsourcebaseconsts.sflperiod_idday
+msgctxt "dsourcebaseconsts.sflperiod_idday"
+msgid "Day"
+msgstr "Day"
+
+#: dsourcebaseconsts.sflperiod_idhour
+msgctxt "dsourcebaseconsts.sflperiod_idhour"
+msgid "Hour"
+msgstr "Hour"
+
 #: dsourcebaseconsts.sflrequirement_idcategory
 msgctxt "dsourcebaseconsts.sflrequirement_idcategory"
 msgid "Category"
@@ -264,16 +274,6 @@ msgctxt "dsourcebaseconsts.sfltheme_natheme"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sflperiod_idday
-msgctxt "dsourcebaseconsts.sflperiod_idday"
-msgid "Day"
-msgstr "Day"
-
-#: dsourcebaseconsts.sflperiod_idhour
-msgctxt "dsourcebaseconsts.sflperiod_idhour"
-msgid "Hour"
-msgstr "Hour"
-
 #: dsourcebaseconsts.sfltimetabledetail_idcategory
 msgctxt "dsourcebaseconsts.sfltimetabledetail_idcategory"
 msgid "Category"
@@ -389,6 +389,13 @@ msgctxt "dsourcebaseconsts.stbparallel"
 msgid "Parallels"
 msgstr "Paralelos"
 
+#: dsourcebaseconsts.stbperiod
+#, fuzzy
+#| msgid "Time Slots"
+msgctxt "dsourcebaseconsts.stbperiod"
+msgid "Periods"
+msgstr "Periodos"
+
 #: dsourcebaseconsts.stbrequirement
 msgctxt "dsourcebaseconsts.stbrequirement"
 msgid "Requirements"
@@ -427,11 +434,6 @@ msgstr "Restricciones"
 msgctxt "dsourcebaseconsts.stbthemerestrictiontype"
 msgid "Types of Theme Restrictions"
 msgstr "Tipos de restricciones de materia"
-
-#: dsourcebaseconsts.stbperiod
-msgctxt "dsourcebaseconsts.stbperiod"
-msgid "Time Slots"
-msgstr "Periodos"
 
 #: dsourcebaseconsts.stbtimetable
 msgctxt "dsourcebaseconsts.stbtimetable"
@@ -894,6 +896,14 @@ msgstr "Clave..."
 msgid "Password|Change system password"
 msgstr "Clave|Cambiar la clave del sistema"
 
+#: tmainform.actperiod.caption
+msgid "Working Time Slots"
+msgstr "Periodos laborables"
+
+#: tmainform.actperiod.hint
+msgid "Working Time Slots|Working Time Slots"
+msgstr "Periodos laborables|Periodos laborables"
+
 #: tmainform.actregistrationinfo.caption
 msgid "Registration Info"
 msgstr "Informacion de registro"
@@ -924,14 +934,6 @@ msgstr "Profesores"
 #: tmainform.actteacher.hint
 msgid "Resources|Resources"
 msgstr ""
-
-#: tmainform.actperiod.caption
-msgid "Working Time Slots"
-msgstr "Periodos laborables"
-
-#: tmainform.actperiod.hint
-msgid "Working Time Slots|Working Time Slots"
-msgstr "Periodos laborables|Periodos laborables"
 
 #: tmainform.acttimetable.caption
 msgctxt "tmainform.acttimetable.caption"
@@ -1190,7 +1192,7 @@ msgstr "0 "
 
 #: tprogressform.pnlbreaktimetableresource.caption
 msgctxt "tprogressform.pnlbreaktimetableresource.caption"
-msgid " Break TT. Resource:"
+msgid " Gap TT. Resources:"
 msgstr "Fracc. h. profesores:"
 
 #: tprogressform.pnlbreaktimetableresourcecount.caption
@@ -1376,6 +1378,7 @@ msgstr ""
 #: tresourceform.dbgriddetail.hint
 #, fuzzy
 #| msgid "Distribution of Resources"
+msgctxt "tresourceform.dbgriddetail.hint"
 msgid "Activities"
 msgstr "Distribution de profesores"
 

@@ -2,7 +2,7 @@
 unit dsourcebaseconsts;
 
 (*
-  19/02/2012 20:35
+  20/02/2012 16:11
 
   Warning:
 
@@ -30,15 +30,15 @@ resourcestring
   STbHour = 'Academic Hours';
   STbTheme = 'Themes';
   STbActivity = 'Activities';
+  STbPeriod = 'Periods';
   STbResourceType = 'Resource types';
   STbResource = 'Resources';
   STbResourceRestrictionType = 'Types of Resource Restrictions';
-  STbPeriod = 'Time Slots';
+  STbResourceRestriction = 'Resource Restrictions';
   STbRequirement = 'Requirements';
   STbJoinedCluster = 'Joined Clusters';
   STbThemeRestrictionType = 'Types of Theme Restrictions';
   STbThemeRestriction = 'Theme Restrictions';
-  STbResourceRestriction = 'Resource Restrictions';
   STbTimetable = 'Timetables';
   STbTimetableDetail = 'Detail of Timetables';
   STbTimetableResource = 'Resources of Timetables';
@@ -61,6 +61,8 @@ resourcestring
   SFlActivity_IdCategory = 'Category';
   SFlActivity_IdParallel = 'Parallel';
   SFlActivity_Composition = 'Composition';
+  SFlPeriod_IdDay = 'Day';
+  SFlPeriod_IdHour = 'Hour';
   SFlResourceType_IdResourceType = 'IdResourceType';
   SFlResourceType_NaResourceType = 'Name';
   SFlResourceType_DefaultLimit = 'Default Limit';
@@ -74,8 +76,10 @@ resourcestring
   SFlResourceRestrictionType_NaResourceRestrictionType = 'Name';
   SFlResourceRestrictionType_ColResourceRestrictionType = 'Color';
   SFlResourceRestrictionType_ValResourceRestrictionType = 'Value';
-  SFlPeriod_IdDay = 'Day';
-  SFlPeriod_IdHour = 'Hour';
+  SFlResourceRestriction_IdResource = 'Resource';
+  SFlResourceRestriction_IdDay = 'Day';
+  SFlResourceRestriction_IdHour = 'Hour';
+  SFlResourceRestriction_IdResourceRestrictionType = 'Restriction Type';
   SFlRequirement_IdTheme = 'Theme';
   SFlRequirement_IdCategory = 'Category';
   SFlRequirement_IdParallel = 'Parallel';
@@ -94,10 +98,6 @@ resourcestring
   SFlThemeRestriction_IdDay = 'Day';
   SFlThemeRestriction_IdHour = 'Hour';
   SFlThemeRestriction_IdThemeRestrictionType = 'Restriction Type';
-  SFlResourceRestriction_IdResource = 'Resource';
-  SFlResourceRestriction_IdDay = 'Day';
-  SFlResourceRestriction_IdHour = 'Hour';
-  SFlResourceRestriction_IdResourceRestrictionType = 'Restriction Type';
   SFlTimetable_IdTimetable = 'Id';
   SFlTimetable_TimeIni = 'Initial Time';
   SFlTimetable_TimeEnd = 'End Time';
