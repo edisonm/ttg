@@ -268,9 +268,12 @@ type
 
   TTTBookmark = class(TBookmark)
   private
+    FPosition: Integer;
+    FOffset: Integer;
+    FTimeSlot1: Integer;
+    FTimeSlot2: Integer;
     FIndividual: TIndividual;
     FClusters: TDynamicIntegerArray;
-    FPosition, FOffset, FTimeSlot1, FTimeSlot2: Integer;
     function GetCluster: Integer;
   protected
     function GetProgress: Integer; override;
@@ -284,7 +287,7 @@ type
     function Move: Integer; override;
     function Undo: Integer; override;
     function Eof: Boolean; override;
-    property Cluster_: Integer read GetCluster;
+    property Cluster: Integer read GetCluster;
     property Clusters: TDynamicIntegerArray read FClusters;
     property Offset: Integer read FOffset write FOffset;
   end;
@@ -293,9 +296,14 @@ type
 
   TTTBookmark2 = class(TBookmark)
   private
+    FPosition: Integer;
+    FOffset: Integer;
+    FProgress: Integer;
+    FTimeSlot1: Integer;
+    FTimeSlot2: Integer;
+    FTimeSlot3: Integer;
     FIndividual: TIndividual;
     FClusters: TDynamicIntegerArray;
-    FPosition, FOffset, FProgress, FTimeSlot1, FTimeSlot2, FTimeSlot3: Integer;
     function GetCluster: Integer;
   protected
     function GetProgress: Integer; override;
@@ -309,7 +317,7 @@ type
     function Move: Integer; override;
     function Undo: Integer; override;
     function Eof: Boolean; override;
-    property Cluster_: Integer read GetCluster;
+    property Cluster: Integer read GetCluster;
     property Clusters: TDynamicIntegerArray read FClusters;
     property Offset: Integer read FOffset write FOffset;
   end;
@@ -1995,7 +2003,7 @@ begin
   FOffset := 0;
   FTimeSlot1 := 0;
   with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
-    FTimeSlot2 := SessionToDuration[ClusterTimeSlotToSession[Cluster_, FTimeSlot1]];
+    FTimeSlot2 := SessionToDuration[ClusterTimeSlotToSession[Cluster, FTimeSlot1]];
 end;
 
 procedure NextTimeSlot(TimeSlotToSession: TDynamicIntegerArray; TimeSlotCount: Integer;
@@ -2031,7 +2039,7 @@ var
 begin
   with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
   begin
-    TimeSlotToSession := ClusterTimeSlotToSession[Cluster_];
+    TimeSlotToSession := ClusterTimeSlotToSession[Cluster];
     d1 := TimeSlotCount - SessionToDuration[TimeSlotToSession[TimeSlotCount - 1]];
     if FTimeSlot2 >= d1 then
     begin
@@ -2040,7 +2048,7 @@ begin
       begin
         Inc(FPosition);
         FTimeSlot1 := 0;
-        FTimeSlot2 := SessionToDuration[ClusterTimeSlotToSession[Cluster_, 0]];
+        FTimeSlot2 := SessionToDuration[ClusterTimeSlotToSession[Cluster, 0]];
       end
       else
       begin
@@ -2080,7 +2088,7 @@ end;
 
 function TTTBookmark.Move: Integer;
 begin
-  Result := TTimetable(FIndividual).DoMove(Cluster_, FTimeSlot1, FTimeSlot2);
+  Result := TTimetable(FIndividual).DoMove(Cluster, FTimeSlot1, FTimeSlot2);
 end;
 
 function TTTBookmark.Undo: Integer;
@@ -2128,7 +2136,7 @@ begin
   FProgress := 0;
   FTimeSlot1 := 0;
   with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
-    FTimeSlot2 := SessionToDuration[ClusterTimeSlotToSession[Cluster_, 0]];
+    FTimeSlot2 := SessionToDuration[ClusterTimeSlotToSession[Cluster, 0]];
   FTimeSlot3 := FTimeSlot2;
 end;
 
@@ -2139,7 +2147,7 @@ var
 begin
   with TTimetableModel(FIndividual.Model), TTimetable(FIndividual) do
   begin
-    TimeSlotToSession := ClusterTimeSlotToSession[Cluster_];
+    TimeSlotToSession := ClusterTimeSlotToSession[Cluster];
     d1 := TimeSlotCount - SessionToDuration[TimeSlotToSession[TimeSlotCount - 1]];
     if FTimeSlot3 >= d1 then
     begin
@@ -2150,7 +2158,7 @@ begin
         begin
           Inc(FPosition);
           FTimeSlot1 := 0;
-          FTimeSlot2 := SessionToDuration[ClusterTimeSlotToSession[Cluster_, 0]];
+          FTimeSlot2 := SessionToDuration[ClusterTimeSlotToSession[Cluster, 0]];
           FTimeSlot3 := FTimeSlot2;
         end
         else
@@ -2226,15 +2234,15 @@ begin
   begin
     if FTimeSlot2 < FTimeSlot3 then
     begin
-      Result := DoMove(Cluster_, FTimeSlot1, FTimeSlot2) + DoMove(Cluster_, FTimeSlot2, FTimeSlot3);
+      Result := DoMove(Cluster, FTimeSlot1, FTimeSlot2) + DoMove(Cluster, FTimeSlot2, FTimeSlot3);
     end
     else if FTimeSlot2 = FTimeSlot3 then
     begin
-      Result := DoMove(Cluster_, FTimeSlot1, FTimeSlot2);
+      Result := DoMove(Cluster, FTimeSlot1, FTimeSlot2);
       FTimeSlot3 := FTimeSlot2;
     end
     else
-      Result := DoMove(Cluster_, FTimeSlot1, FTimeSlot3) + DoMove(Cluster_, FTimeSlot3, FTimeSlot2);
+      Result := DoMove(Cluster, FTimeSlot1, FTimeSlot3) + DoMove(Cluster, FTimeSlot3, FTimeSlot2);
   end;
 end;
 
@@ -2244,15 +2252,15 @@ begin
   begin
     if FTimeSlot2 < FTimeSlot3 then
     begin
-      Result := DoMove(Cluster_, FTimeSlot2, FTimeSlot3) + DoMove(Cluster_, FTimeSlot1, FTimeSlot2);
+      Result := DoMove(Cluster, FTimeSlot2, FTimeSlot3) + DoMove(Cluster, FTimeSlot1, FTimeSlot2);
     end
     else if FTimeSlot2 = FTimeSlot3 then
     begin
-      Result := DoMove(Cluster_, FTimeSlot1, FTimeSlot2);
+      Result := DoMove(Cluster, FTimeSlot1, FTimeSlot2);
       FTimeSlot3 := FTimeSlot2;
     end
     else
-      Result := DoMove(Cluster_, FTimeSlot3, FTimeSlot2) + DoMove(Cluster_, FTimeSlot1, FTimeSlot3);
+      Result := DoMove(Cluster, FTimeSlot3, FTimeSlot2) + DoMove(Cluster, FTimeSlot1, FTimeSlot3);
   end;
 end;
 
