@@ -481,7 +481,7 @@ msgstr ""
 
 #: tconfigform.ednainstitution.hint
 msgctxt "TCONFIGFORM.EDNAINSTITUTION.HINT"
-msgid "Timetable|Timetable Name"
+msgid "Institution|Institution Name"
 msgstr ""
 
 #: tconfigform.label1.caption

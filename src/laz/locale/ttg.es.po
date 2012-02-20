@@ -483,8 +483,8 @@ msgstr "1,2"
 
 #: tconfigform.ednainstitution.hint
 msgctxt "TCONFIGFORM.EDNAINSTITUTION.HINT"
-msgid "Timetable|Timetable Name"
-msgstr "Colegio|Nombre del colegio"
+msgid "Institution|Institution Name"
+msgstr "Institucion|Nombre de la Institucion"
 
 #: tconfigform.label1.caption
 msgctxt "tconfigform.label1.caption"
@@ -863,7 +863,7 @@ msgstr "&Nuevo"
 
 #: tmainform.actnew.hint
 msgid "New|New Timetable"
-msgstr "Nuevo|Nuevo colegio"
+msgstr "Nuevo|Nuevo horario"
 
 #: tmainform.actopen.caption
 msgid "Open"
@@ -871,7 +871,7 @@ msgstr "Abrir"
 
 #: tmainform.actopen.hint
 msgid "Open|Open saved institution"
-msgstr "Abrir|Abrir colegio previamente guardado"
+msgstr "Abrir|Abrir horario guardado"
 
 #: tmainform.actparallel.caption
 #, fuzzy
@@ -904,7 +904,7 @@ msgstr "Guardar..."
 
 #: tmainform.actsave.hint
 msgid "Save|Save Timetable"
-msgstr "Guardar|Guardar colegio"
+msgstr "Guardar|Guardar horario"
 
 #: tmainform.actsubject.caption
 msgctxt "tmainform.actsubject.caption"
@@ -981,7 +981,7 @@ msgstr "Volver a abrir"
 
 #: tmainform.mireopen.hint
 msgid "Reopen|Reopen Timetable"
-msgstr "Volver a abrir|Volver a abrir un colegio"
+msgstr "Volver a abrir|Volver a abrir el horario"
 
 #: tmainform.mitool.caption
 msgid "&Tools"
@@ -1952,7 +1952,7 @@ msgstr "CSV delimitado por comas (*.csv)|*.csv"
 
 #: uttgconsts.ssavedialogfilter
 msgid "Timetable (*.ttd)|*.ttd"
-msgstr "Timetable para colegio (*.ttd)|*.ttd"
+msgstr "Horario (*.ttd)|*.ttd"
 
 #: uttgconsts.ssearchby
 msgid "Search by %s"
