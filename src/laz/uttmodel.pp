@@ -730,7 +730,7 @@ var
       First;
     end;
   end;
-  procedure LoadPatternTimetableDetail;
+  procedure LoadTimetableDetailPattern;
   var
     TimeSlot1, VCluster, Activity, TimeSlot, Contador, Duration, Number: Integer;
   begin
@@ -826,7 +826,7 @@ begin
     LoadActivity;
     LoadRequirement;
     LoadJoinedCluster;
-    LoadPatternTimetableDetail;
+    LoadTimetableDetailPattern;
   end;
 end;
 
