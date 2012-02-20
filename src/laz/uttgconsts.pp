@@ -81,7 +81,7 @@ resourcestring
   SReparationProbability = 'Repair Probability';
   SSaveChanges = 'Do you want to save the changes?';
   SSaveDialogCSVFilter = 'Comma delimited CSV (*.csv)|*.csv';
-  SSaveDialogFilter =  'High School Timetable (*.ttd)|*.ttd';
+  SSaveDialogFilter = 'Timetable (*.ttd)|*.ttd';
   SSearchBy = 'Search by %s';
   SSupervisor = 'Supervisor';
   SResourceRestrictionsHead = 'Resource; Restrictions';

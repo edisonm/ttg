@@ -162,7 +162,7 @@ object ConfigForm: TConfigForm
       object EdNaInstitution: TEdit
         Left = 108
         Height = 24
-        Hint = 'High School|High School Name'
+        Hint = 'Timetable|Timetable Name'
         Top = 8
         Width = 353
         TabOrder = 0

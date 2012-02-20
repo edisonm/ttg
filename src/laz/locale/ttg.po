@@ -481,7 +481,7 @@ msgstr ""
 
 #: tconfigform.ednainstitution.hint
 msgctxt "TCONFIGFORM.EDNAINSTITUTION.HINT"
-msgid "High School|High School Name"
+msgid "Timetable|Timetable Name"
 msgstr ""
 
 #: tconfigform.label1.caption
@@ -858,7 +858,7 @@ msgid "&New"
 msgstr ""
 
 #: tmainform.actnew.hint
-msgid "New|New High School"
+msgid "New|New Timetable"
 msgstr ""
 
 #: tmainform.actopen.caption
@@ -895,7 +895,7 @@ msgid "Save..."
 msgstr ""
 
 #: tmainform.actsave.hint
-msgid "Save|Save High School"
+msgid "Save|Save Timetable"
 msgstr ""
 
 #: tmainform.actsubject.caption
@@ -972,7 +972,7 @@ msgid "Reopen"
 msgstr ""
 
 #: tmainform.mireopen.hint
-msgid "Reopen|Reopen High School"
+msgid "Reopen|Reopen Timetable"
 msgstr ""
 
 #: tmainform.mitool.caption
@@ -1927,7 +1927,7 @@ msgid "Comma delimited CSV (*.csv)|*.csv"
 msgstr ""
 
 #: uttgconsts.ssavedialogfilter
-msgid "High School Timetable (*.ttd)|*.ttd"
+msgid "Timetable (*.ttd)|*.ttd"
 msgstr ""
 
 #: uttgconsts.ssearchby

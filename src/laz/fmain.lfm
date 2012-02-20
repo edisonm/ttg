@@ -374,7 +374,7 @@ object MainForm: TMainForm
       object MIReopen: TMenuItem
         Caption = 'Reopen'
         Enabled = False
-        Hint = 'Reopen|Reopen High School'
+        Hint = 'Reopen|Reopen Timetable'
       end
       object MIPasswd: TMenuItem
         Action = ActPasswd
@@ -1081,7 +1081,7 @@ object MainForm: TMainForm
   end
   object OpenDialog: TOpenDialog
     DefaultExt = '.ttd'
-    Filter = 'High School Timetable (*.ttd)|*.ttd'
+    Filter = 'Timetable (*.ttd)|*.ttd'
     Options = [ofHideReadOnly, ofFileMustExist, ofEnableSizing]
     left = 328
     top = 72
@@ -2004,7 +2004,7 @@ object MainForm: TMainForm
       Category = 'File'
       Caption = '&New'
       HelpContext = 80
-      Hint = 'New|New High School'
+      Hint = 'New|New Timetable'
       ImageIndex = 0
       OnExecute = ActNewExecute
       ShortCut = 16462
@@ -2022,7 +2022,7 @@ object MainForm: TMainForm
       Category = 'File'
       Caption = 'Save...'
       HelpContext = 100
-      Hint = 'Save|Save High School'
+      Hint = 'Save|Save Timetable'
       ImageIndex = 2
       OnExecute = ActSaveExecute
       ShortCut = 16455
