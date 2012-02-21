@@ -391,13 +391,14 @@
       <SrcPath Value="../../../GLScene/Source"/>
     </SearchPaths>
     <CodeGeneration>
+      <SmartLinkUnit Value="True"/>
       <SmallerCode Value="True"/>
     </CodeGeneration>
     <Linking>
       <Debugging>
         <GenerateDebugInfo Value="False"/>
-        <StripSymbols Value="True"/>
       </Debugging>
+      <LinkSmart Value="True"/>
     </Linking>
     <Other>
       <CompilerMessages>
@@ -409,7 +410,8 @@
 -dZEOS_DISABLE_ADO
 -dZEOS_DISABLE_INTERBASE
 -dZEOS_DISABLE_ORACLE
--dZEOS_DISABLE_ASA"/>
+-dZEOS_DISABLE_ASA
+-Xs- -FW../../bin/$(TargetCPU)-$(TargetOS)-full/ttg.wpo -OWall"/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>
