@@ -815,7 +815,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-  {$i fmain.lrs}
+  {$i FMain.lrs}
 {$ENDIF}
 
 end.

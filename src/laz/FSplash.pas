@@ -78,7 +78,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-  {$i fsplash.lrs}
+  {$i FSplash.lrs}
 {$ENDIF}
 
 end.

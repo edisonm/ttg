@@ -126,7 +126,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-{$i ftheme.lrs}
+{$i FTheme.lrs}
 {$ENDIF}
 
 end.

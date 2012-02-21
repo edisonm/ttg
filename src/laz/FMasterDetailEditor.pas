@@ -123,7 +123,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i fmasterdetaileditor.lrs}
+  {$i FMasterDetailEditor.lrs}
 {$ENDIF}
 
 end.

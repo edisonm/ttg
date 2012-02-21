@@ -155,7 +155,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i fsingleeditor.lrs}
+  {$i FSingleEditor.lrs}
 {$ENDIF}
 
 end.

@@ -37,7 +37,7 @@ implementation
 
 initialization
 {$IFDEF FPC}
-  {$i fmessageview.lrs}
+  {$i FMessageView.lrs}
 {$ENDIF}
 
 end.

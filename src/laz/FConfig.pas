@@ -289,7 +289,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i fconfig.lrs}
+  {$i FConfig.lrs}
 {$ENDIF}
 
 end.

@@ -195,7 +195,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i fcrossmanytomanyeditor1.lrs}
+  {$i FCrossManyToManyEditor1.lrs}
 {$ENDIF}
 
 end.

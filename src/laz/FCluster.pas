@@ -181,7 +181,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i fcluster.lrs}
+  {$i FCluster.lrs}
 {$ENDIF}
 
 end.

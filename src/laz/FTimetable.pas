@@ -443,7 +443,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-{$I ftimetable.lrs}
+{$I FTimetable.lrs}
 {$ENDIF}
 
 end.

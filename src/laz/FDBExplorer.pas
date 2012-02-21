@@ -156,6 +156,6 @@ end;
 
 initialization
 
-  {$I fdbexplorer.lrs}
+  {$I FDBExplorer.lrs}
 
 end.

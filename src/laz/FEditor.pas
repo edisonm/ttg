@@ -195,7 +195,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-  {$i feditor.lrs}
+  {$i FEditor.lrs}
 {$ENDIF}
 
 end.

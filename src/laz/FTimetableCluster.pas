@@ -212,7 +212,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-  {$i ftimetablecluster.lrs}
+  {$i FTimetableCluster.lrs}
 {$ENDIF}
 
 end.

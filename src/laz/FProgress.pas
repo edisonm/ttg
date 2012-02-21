@@ -285,7 +285,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i fprogress.lrs}
+  {$i FProgress.lrs}
 {$ENDIF}
 
 end.

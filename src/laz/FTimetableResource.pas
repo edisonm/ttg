@@ -109,7 +109,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i ftimetableresource.lrs}
+  {$i FTimetableResource.lrs}
 {$ENDIF}
 
 end.

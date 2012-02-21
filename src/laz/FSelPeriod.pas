@@ -59,7 +59,7 @@ end;
 initialization
 
 {$IFDEF FPC}
-  {$I fselperiod.lrs}
+  {$I FSelPeriod.lrs}
 {$ENDIF}
 
 end.

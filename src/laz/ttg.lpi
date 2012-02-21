@@ -118,7 +118,7 @@
         <UnitName Value="ttg"/>
       </Unit0>
       <Unit1>
-        <Filename Value="fmain.pp"/>
+        <Filename Value="FMain.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MainForm"/>
         <HasResources Value="True"/>
@@ -144,7 +144,7 @@
         <UnitName Value="UEvolElitist"/>
       </Unit4>
       <Unit5>
-        <Filename Value="fprogress.pp"/>
+        <Filename Value="FProgress.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ProgressForm"/>
         <HasResources Value="True"/>
@@ -157,7 +157,7 @@
         <UnitName Value="USortAlgs"/>
       </Unit6>
       <Unit7>
-        <Filename Value="fcrossmanytomanyeditor.pp"/>
+        <Filename Value="FCrossManyToManyEditor.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="CrossManyToManyEditorForm"/>
         <HasResources Value="True"/>
@@ -165,7 +165,7 @@
         <UnitName Value="FCrossManyToManyEditor"/>
       </Unit7>
       <Unit8>
-        <Filename Value="fcrossmanytomanyeditor0.pp"/>
+        <Filename Value="FCrossManyToManyEditor0.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="CrossManyToManyEditor0Form"/>
         <HasResources Value="True"/>
@@ -173,7 +173,7 @@
         <UnitName Value="FCrossManyToManyEditor0"/>
       </Unit8>
       <Unit9>
-        <Filename Value="fcrossmanytomanyeditor1.pp"/>
+        <Filename Value="FCrossManyToManyEditor1.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="CrossManyToManyEditor1Form"/>
         <HasResources Value="True"/>
@@ -181,7 +181,7 @@
         <UnitName Value="FCrossManyToManyEditor1"/>
       </Unit9>
       <Unit10>
-        <Filename Value="fcrossmanytomanyeditorr.pp"/>
+        <Filename Value="FCrossManytoManyEditorR.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="CrossManyToManyEditorRForm"/>
         <HasResources Value="True"/>
@@ -189,7 +189,7 @@
         <UnitName Value="FCrossManytoManyEditorR"/>
       </Unit10>
       <Unit11>
-        <Filename Value="feditor.pp"/>
+        <Filename Value="FEditor.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="EditorForm"/>
         <HasResources Value="True"/>
@@ -197,7 +197,7 @@
         <UnitName Value="FEditor"/>
       </Unit11>
       <Unit12>
-        <Filename Value="ftheme.pp"/>
+        <Filename Value="FTheme.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ThemeForm"/>
         <HasResources Value="True"/>
@@ -205,7 +205,7 @@
         <UnitName Value="FTheme"/>
       </Unit12>
       <Unit13>
-        <Filename Value="fresource.pp"/>
+        <Filename Value="FResource.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ResourceForm"/>
         <HasResources Value="True"/>
@@ -223,7 +223,7 @@
         <UnitName Value="UConfigStorage"/>
       </Unit15>
       <Unit16>
-        <Filename Value="fconfig.pp"/>
+        <Filename Value="FConfig.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ConfigForm"/>
         <HasResources Value="True"/>
@@ -231,7 +231,7 @@
         <UnitName Value="fconfig"/>
       </Unit16>
       <Unit17>
-        <Filename Value="ftimetablecluster.pp"/>
+        <Filename Value="FTimetableCluster.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="TimetableClusterForm"/>
         <HasResources Value="True"/>
@@ -239,7 +239,7 @@
         <UnitName Value="FTimetableCluster"/>
       </Unit17>
       <Unit18>
-        <Filename Value="fmasterdetaileditor.pp"/>
+        <Filename Value="FMasterDetailEditor.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MasterDetailEditorForm"/>
         <HasResources Value="True"/>
@@ -247,7 +247,7 @@
         <UnitName Value="FMasterDetailEditor"/>
       </Unit18>
       <Unit19>
-        <Filename Value="fsplash.pp"/>
+        <Filename Value="FSplash.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SplashForm"/>
         <HasResources Value="True"/>
@@ -255,7 +255,7 @@
         <UnitName Value="FSplash"/>
       </Unit19>
       <Unit20>
-        <Filename Value="fcluster.pp"/>
+        <Filename Value="FCluster.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ClusterForm"/>
         <HasResources Value="True"/>
@@ -263,7 +263,7 @@
         <UnitName Value="FCluster"/>
       </Unit20>
       <Unit21>
-        <Filename Value="fsingleeditor.pp"/>
+        <Filename Value="FSingleEditor.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SingleEditorForm"/>
         <HasResources Value="True"/>
@@ -271,7 +271,7 @@
         <UnitName Value="FSingleEditor"/>
       </Unit21>
       <Unit22>
-        <Filename Value="ftimetable.pp"/>
+        <Filename Value="FTimetable.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="TimetableForm"/>
         <HasResources Value="True"/>
@@ -279,7 +279,7 @@
         <UnitName Value="FTimetable"/>
       </Unit22>
       <Unit23>
-        <Filename Value="ftimetableresource.pp"/>
+        <Filename Value="FTimetableResource.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="TimetableResourceForm"/>
         <HasResources Value="True"/>
@@ -308,7 +308,7 @@
         <UnitName Value="DSource"/>
       </Unit26>
       <Unit27>
-        <Filename Value="fselperiod.pp"/>
+        <Filename Value="FSelPeriod.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SelPeriodForm"/>
         <HasResources Value="True"/>
@@ -359,7 +359,7 @@
         <UnitName Value="uabout"/>
       </Unit35>
       <Unit36>
-        <Filename Value="fmessageview.pp"/>
+        <Filename Value="FMessageView.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MessageViewForm"/>
         <HasResources Value="True"/>
@@ -382,7 +382,7 @@
         <UnitName Value="dsourcebaseconsts"/>
       </Unit39>
       <Unit40>
-        <Filename Value="fdbexplorer.pp"/>
+        <Filename Value="FDBExplorer.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="DBExplorerForm"/>
         <ResourceBaseClass Value="Form"/>
