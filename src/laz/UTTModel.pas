@@ -1248,7 +1248,7 @@ begin
         begin
           if Activity = FSessionToActivity[Session] then
           begin
-            if FClusterPeriodToSession[Cluster1, Period] >= 0 then
+            if FClusterPeriodToSession[Cluster1, Period] >= Limit then
               Inc(FClashTheme, Delta);
           end;
         end;
