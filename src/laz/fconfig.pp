@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit fconfig;
+unit FConfig;
 
 {$I ttg.inc}
 

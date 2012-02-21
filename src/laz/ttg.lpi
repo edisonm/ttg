@@ -295,7 +295,7 @@
         <UnitName Value="dsourcebase"/>
       </Unit24>
       <Unit25>
-        <Filename Value="../../../DBConvert/auxiliary/urelutils.pp"/>
+        <Filename Value="../../../DBConvert/auxiliary/URelUtils.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="URelUtils"/>
       </Unit25>
@@ -316,7 +316,7 @@
         <UnitName Value="FSelPeriod"/>
       </Unit27>
       <Unit28>
-        <Filename Value="../../../DBConvert/auxiliary/dbase.pp"/>
+        <Filename Value="../../../DBConvert/auxiliary/DBase.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="BaseDataModule"/>
         <HasResources Value="True"/>
@@ -386,7 +386,7 @@
         <IsPartOfProject Value="True"/>
         <ComponentName Value="DBExplorerForm"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="fdbexplorer"/>
+        <UnitName Value="FDBExplorer"/>
       </Unit40>
     </Units>
   </ProjectOptions>

@@ -34,7 +34,7 @@ uses
   DSource in 'dsource.pp' {SourceDataModule: TDataModule},
   FSelPeriod {SelPeriodForm},
   DBase, UAbout,
-  UTTGi18n, fdbexplorer;
+  UTTGi18n;
 
 {$IFNDEF FPC}
 {$R *.res}

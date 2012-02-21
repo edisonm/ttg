@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit fdbexplorer;
+unit FDBExplorer;
 
 {$I ttg.inc}
 
