@@ -56,7 +56,7 @@ var
 implementation
 
 uses
-  UTTGBasics, UTTGDBUtils, UTTGConsts, DSource, dsourcebaseconsts;
+  UTTGBasics, UTTGDBUtils, UTTGConsts, DSource, DSourceBaseConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -566,7 +566,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i dmaster.lrs}
+  {$i DMaster.lrs}
 {$ENDIF}
   
 {$i ttgsql.lrs}

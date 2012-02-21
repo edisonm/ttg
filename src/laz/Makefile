@@ -9,7 +9,7 @@ include SETTINGS
 
 .PHONY: prjdel srcdel
 
-.SUFFIXES: .lrs .lfm .dfm .pas .pp .lpr .dpr
+.SUFFIXES: .lrs .lfm .dfm .pas .lpr .dpr
 
 #.PRECIOUS: ttg.iss
 
@@ -27,7 +27,7 @@ ttg.lrs: locale/ttg.es.po
 ttgsql.lrs: $(TTGSQL)
 	$(LAZRES) $@ $<
 
-$(ABOUT).pp: $(ABOUT).pp.tmpl
+$(ABOUT).pas: $(ABOUT).pas.tmpl
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
 	  -e s:'<v>Revision</v>':'$(REVISION)':g \
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
@@ -40,10 +40,10 @@ $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs
 
 ifeq ($(shell uname -o),Cygwin)
 
-dbfiles: $(TTGSQL) $(TTGMYSQL) $(DSRCBASE).pp $(DSRCBASE)consts.pp $(DSRCBASE).lfm
+dbfiles: $(TTGSQL) $(TTGMYSQL) $(DSRCBASE).pas $(DSRCBASE)consts.pas $(DSRCBASE).lfm
 
 dbclean:
-	$(RM) $(TTGSQL) $(TTGMYSQL) $(DSRCBASE).pp $(DSRCBASE)consts.pp $(DSRCBASE).lfm
+	$(RM) $(TTGSQL) $(TTGMYSQL) $(DSRCBASE).pas $(DSRCBASE)consts.pas $(DSRCBASE).lfm
 
 ttgsql: $(TTGSQL)
 
@@ -55,13 +55,13 @@ $(TTGMYSQL): $(DBCONVERT) $(TTGMDB)
 	$(DBCONVERT) /ACC2SQL $(TTGMDB) $(TTGMYSQL) mysql
 	dos2unix $(TTGSQL)
 
-$(DSRCBASE).pp $(DSRCBASE)consts.pp $(DSRCBASE).lfm: $(DBCONVERT) $(TTGMDB) Makefile
+$(DSRCBASE).pas $(DSRCBASE)consts.pas $(DSRCBASE).lfm: $(DBCONVERT) $(TTGMDB) Makefile
 	$(DBCONVERT) /ACC2DM $(TTGMDB) SourceBaseDataModule \
 	  $(DSRCBASE) 'cds;urt;lfm;U=ZConnection, ZDataset;DS=ZTable;DB=ZConnection;DP=Connection'
-	dos2unix $(DSRCBASE).pp $(DSRCBASE)consts.pp $(DSRCBASE).lfm
+	dos2unix $(DSRCBASE).pas $(DSRCBASE)consts.pas $(DSRCBASE).lfm
 
 cleanthisw:
-	$(RM) $(DSRCBASE).{lfm,lrs,pp} $(DSRCBASE)consts.pp $(TTGSQL) $(TTGMYSQL)
+	$(RM) $(DSRCBASE).{lfm,lrs,pas} $(DSRCBASE)consts.pas $(TTGSQL) $(TTGMYSQL)
 
 $(DBCONVERT):
 	cd $(DBCONVERTSRC) ; $(MAKE) all
@@ -76,7 +76,7 @@ cleanthisw:
 endif
 
 cleanthis: cleanthisw
-	$(RM) -r $(TTGEXE) $(TTGDIR)/bin/* $(ABOUT).pp *.lrs
+	$(RM) -r $(TTGEXE) $(TTGDIR)/bin/* $(ABOUT).pas *.lrs
 
 clean: cleanthis
 

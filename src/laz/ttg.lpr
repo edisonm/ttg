@@ -22,7 +22,6 @@ uses
   FTheme {ThemeForm},
   FResource {ResourceForm},
   UConfigStorage,
-  fconfig {ConfigForm},
   FTimetableCluster {TimetableClusterForm},
   FMasterDetailEditor {MasterDetailEditorForm},
   FSplash {SplashForm},

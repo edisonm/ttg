@@ -677,7 +677,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i dsource.lrs}
+  {$i DSource.lrs}
 {$ENDIF}
 
 end.

@@ -12,8 +12,8 @@ FORMS:=$(shell for i in $(UNITS) ; do if [ -f $$i.pp ] && [ -f $$i.lfm ]; then e
 BASELAZFILES=$(addsuffix .pp, $(UNITS)) $(addsuffix .lfm, $(FORMS)) ttg.lpr ttg.lpi
 #	  $(addsuffix .lrs, $(FORMS))
 
-ABOUT=uabout
-DSRCBASE=dsourcebase
+ABOUT=UAbout
+DSRCBASE=DSourceBase
 
 ifeq ($(shell uname -o),Cygwin)
 EXEEXT=.exe

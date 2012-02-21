@@ -60,7 +60,7 @@
           <Linking>
             <Options>
               <Win32>
-                <GraphicApplication Value="True"/>
+                <Graphic.paslication Value="True"/>
               </Win32>
             </Options>
           </Linking>
@@ -87,13 +87,13 @@
     <PublishOptions>
       <Version Value="2"/>
       <IgnoreBinaries Value="False"/>
-      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
-      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+      <IncludeFileFilter Value="*.(pas.pas|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak.pasu.pasw|o|so);*~;backup"/>
     </PublishOptions>
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+        <Launching.paslication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
     <RequiredPackages Count="4">
@@ -126,7 +126,7 @@
         <UnitName Value="FMain"/>
       </Unit1>
       <Unit2>
-        <Filename Value="dmaster.pp"/>
+        <Filename Value="dmaster.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MasterDataModule"/>
         <HasResources Value="True"/>
@@ -134,12 +134,12 @@
         <UnitName Value="DMaster"/>
       </Unit2>
       <Unit3>
-        <Filename Value="uttmodel.pp"/>
+        <Filename Value="uttmodel.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTModel"/>
       </Unit3>
       <Unit4>
-        <Filename Value="uevolelitist.pp"/>
+        <Filename Value="uevolelitist.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UEvolElitist"/>
       </Unit4>
@@ -152,7 +152,7 @@
         <UnitName Value="FProgress"/>
       </Unit5>
       <Unit6>
-        <Filename Value="usortalgs.pp"/>
+        <Filename Value="usortalgs.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="USortAlgs"/>
       </Unit6>
@@ -213,12 +213,12 @@
         <UnitName Value="FResource"/>
       </Unit13>
       <Unit14>
-        <Filename Value="uttgdbutils.pp"/>
+        <Filename Value="uttgdbutils.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGDBUtils"/>
       </Unit14>
       <Unit15>
-        <Filename Value="uconfigstorage.pp"/>
+        <Filename Value="uconfigstorage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UConfigStorage"/>
       </Unit15>
@@ -228,7 +228,7 @@
         <ComponentName Value="ConfigForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="fconfig"/>
+        <UnitName Value="FConfig"/>
       </Unit16>
       <Unit17>
         <Filename Value="FTimetableCluster.pas"/>
@@ -287,7 +287,7 @@
         <UnitName Value="FTimetableResource"/>
       </Unit23>
       <Unit24>
-        <Filename Value="dsourcebase.pp"/>
+        <Filename Value="dsourcebase.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SourceBaseDataModule"/>
         <HasResources Value="True"/>
@@ -300,7 +300,7 @@
         <UnitName Value="URelUtils"/>
       </Unit25>
       <Unit26>
-        <Filename Value="dsource.pp"/>
+        <Filename Value="dsource.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SourceDataModule"/>
         <HasResources Value="True"/>
@@ -324,39 +324,39 @@
         <UnitName Value="DBase"/>
       </Unit28>
       <Unit29>
-        <Filename Value="uttgconfig.pp"/>
+        <Filename Value="uttgconfig.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGConfig"/>
       </Unit29>
       <Unit30>
-        <Filename Value="umodel.pp"/>
+        <Filename Value="umodel.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UModel"/>
       </Unit30>
       <Unit31>
-        <Filename Value="umakett.pp"/>
+        <Filename Value="umakett.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UMakeTT"/>
       </Unit31>
       <Unit32>
-        <Filename Value="udownhill.pp"/>
+        <Filename Value="udownhill.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UDownHill"/>
       </Unit32>
       <Unit33>
-        <Filename Value="usolver.pp"/>
+        <Filename Value="usolver.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="USolver"/>
       </Unit33>
       <Unit34>
-        <Filename Value="uttgbasics.pp"/>
+        <Filename Value="uttgbasics.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGBasics"/>
       </Unit34>
       <Unit35>
-        <Filename Value="uabout.pp"/>
+        <Filename Value="UAbout.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="uabout"/>
+        <UnitName Value="UAbout"/>
       </Unit35>
       <Unit36>
         <Filename Value="FMessageView.pas"/>
@@ -367,17 +367,17 @@
         <UnitName Value="FMessageView"/>
       </Unit36>
       <Unit37>
-        <Filename Value="uttgi18n.pp"/>
+        <Filename Value="uttgi18n.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGi18n"/>
       </Unit37>
       <Unit38>
-        <Filename Value="uttgconsts.pp"/>
+        <Filename Value="uttgconsts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGConsts"/>
       </Unit38>
       <Unit39>
-        <Filename Value="dsourcebaseconsts.pp"/>
+        <Filename Value="dsourcebaseconsts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="dsourcebaseconsts"/>
       </Unit39>
@@ -409,7 +409,7 @@
       <LinkSmart Value="True"/>
       <Options>
         <Win32>
-          <GraphicApplication Value="True"/>
+          <Graphic.paslication Value="True"/>
         </Win32>
       </Options>
     </Linking>
