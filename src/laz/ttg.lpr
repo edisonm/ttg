@@ -11,7 +11,7 @@ uses
   Dialogs, Interfaces, multithreadprocslaz, zcomponent,
   SysUtils,
   FMain {MainForm},
-  DMaster in 'dmaster.pp' {MasterDataModule: TDataModule},
+  DMaster in 'DMaster.pas' {MasterDataModule: TDataModule},
   UTTModel,
   FProgress {ProgressForm},
   FCrossManyToManyEditor {CrossManyToManyEditorForm},
@@ -30,7 +30,7 @@ uses
   FTimetable {TimetableForm},
   FTimetableResource {TimetableResourceForm},
   DSourceBase {SourceBaseDataModule: TDataModule},
-  DSource in 'dsource.pp' {SourceDataModule: TDataModule},
+  DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   FSelPeriod {SelPeriodForm},
   DBase, UAbout,
   UTTGi18n;

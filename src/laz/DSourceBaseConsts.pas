@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit dsourcebaseconsts;
+unit DSourceBaseConsts;
 
 (*
   20/02/2012 16:11

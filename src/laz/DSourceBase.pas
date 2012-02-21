@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit dsourcebase;
+unit DSourceBase;
 
 (*
   20/02/2012 16:11
@@ -319,7 +319,7 @@ end;
 
 initialization
 {$IFDEF FPC}
-  {$i dsourcebase.lrs}
+  {$i DSourceBase.lrs}
 {$ENDIF}
 end.
 

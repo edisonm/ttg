@@ -126,7 +126,7 @@
         <UnitName Value="FMain"/>
       </Unit1>
       <Unit2>
-        <Filename Value="dmaster.pas"/>
+        <Filename Value="DMaster.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MasterDataModule"/>
         <HasResources Value="True"/>
@@ -134,12 +134,12 @@
         <UnitName Value="DMaster"/>
       </Unit2>
       <Unit3>
-        <Filename Value="uttmodel.pas"/>
+        <Filename Value="UTTModel.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTModel"/>
       </Unit3>
       <Unit4>
-        <Filename Value="uevolelitist.pas"/>
+        <Filename Value="UEvolElitist.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UEvolElitist"/>
       </Unit4>
@@ -152,7 +152,7 @@
         <UnitName Value="FProgress"/>
       </Unit5>
       <Unit6>
-        <Filename Value="usortalgs.pas"/>
+        <Filename Value="USortAlgs.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="USortAlgs"/>
       </Unit6>
@@ -213,12 +213,12 @@
         <UnitName Value="FResource"/>
       </Unit13>
       <Unit14>
-        <Filename Value="uttgdbutils.pas"/>
+        <Filename Value="UTTGDBUtils.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGDBUtils"/>
       </Unit14>
       <Unit15>
-        <Filename Value="uconfigstorage.pas"/>
+        <Filename Value="UConfigStorage.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UConfigStorage"/>
       </Unit15>
@@ -287,12 +287,12 @@
         <UnitName Value="FTimetableResource"/>
       </Unit23>
       <Unit24>
-        <Filename Value="dsourcebase.pas"/>
+        <Filename Value="DSourceBase.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SourceBaseDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
-        <UnitName Value="dsourcebase"/>
+        <UnitName Value="DSourceBase"/>
       </Unit24>
       <Unit25>
         <Filename Value="../../../DBConvert/auxiliary/URelUtils.pas"/>
@@ -300,7 +300,7 @@
         <UnitName Value="URelUtils"/>
       </Unit25>
       <Unit26>
-        <Filename Value="dsource.pas"/>
+        <Filename Value="DSource.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SourceDataModule"/>
         <HasResources Value="True"/>
@@ -324,32 +324,32 @@
         <UnitName Value="DBase"/>
       </Unit28>
       <Unit29>
-        <Filename Value="uttgconfig.pas"/>
+        <Filename Value="UTTGConfig.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGConfig"/>
       </Unit29>
       <Unit30>
-        <Filename Value="umodel.pas"/>
+        <Filename Value="UModel.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UModel"/>
       </Unit30>
       <Unit31>
-        <Filename Value="umakett.pas"/>
+        <Filename Value="UMakeTT.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UMakeTT"/>
       </Unit31>
       <Unit32>
-        <Filename Value="udownhill.pas"/>
+        <Filename Value="UDownHill.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UDownHill"/>
       </Unit32>
       <Unit33>
-        <Filename Value="usolver.pas"/>
+        <Filename Value="USolver.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="USolver"/>
       </Unit33>
       <Unit34>
-        <Filename Value="uttgbasics.pas"/>
+        <Filename Value="UTTGBasics.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGBasics"/>
       </Unit34>
@@ -367,19 +367,19 @@
         <UnitName Value="FMessageView"/>
       </Unit36>
       <Unit37>
-        <Filename Value="uttgi18n.pas"/>
+        <Filename Value="UTTGi18n.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGi18n"/>
       </Unit37>
       <Unit38>
-        <Filename Value="uttgconsts.pas"/>
+        <Filename Value="UTTGConsts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGConsts"/>
       </Unit38>
       <Unit39>
-        <Filename Value="dsourcebaseconsts.pas"/>
+        <Filename Value="DSourceBaseConsts.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="dsourcebaseconsts"/>
+        <UnitName Value="DSourceBaseConsts"/>
       </Unit39>
       <Unit40>
         <Filename Value="FDBExplorer.pas"/>
