@@ -50,13 +50,16 @@
           </Parsing>
           <CodeGeneration>
             <SmartLinkUnit Value="True"/>
-            <Checks>
-              <RangeChecks Value="True"/>
-            </Checks>
             <Optimizations>
               <VariablesInRegisters Value="True"/>
             </Optimizations>
           </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+            </Debugging>
+            <LinkSmart Value="True"/>
+          </Linking>
           <Other>
             <CompilerMessages>
               <UseMsgFile Value="True"/>
@@ -68,7 +71,8 @@
 -dZEOS_DISABLE_ADO
 -dZEOS_DISABLE_INTERBASE
 -dZEOS_DISABLE_ORACLE
--dZEOS_DISABLE_ASA"/>
+-dZEOS_DISABLE_ASA
+-Xs- -FW../../bin/$(TargetCPU)-$(TargetOS)-free/ttg.wpo -OWall"/>
             <CompilerPath Value="$(CompPath)"/>
             <ExecuteAfter>
               <ShowAllMessages Value="True"/>
