@@ -784,7 +784,7 @@ var
   end;
   procedure LoadTimetableDetailPattern;
   var
-    Period1, Cluster, Activity, Period, Contador, Duration, Number: Integer;
+    Period1, Cluster, Activity, Period, Counter, Duration, Number: Integer;
   begin
     SetLength(FTimetableDetailPattern, FClusterCount, FPeriodCount);
     SetLength(FClusterToSessionCount, FClusterCount);
@@ -801,9 +801,9 @@ var
     for Activity := FActivityCount - 1 downto 0 do
     begin
       Cluster := FActivityToCluster[Activity];
-      for Contador := High(FActivityToSessions[Activity]) downto 0 do
+      for Counter := High(FActivityToSessions[Activity]) downto 0 do
       begin
-        Duration := FSessionToDuration[FActivityToSessions[Activity, Contador]];
+        Duration := FSessionToDuration[FActivityToSessions[Activity, Counter]];
         Period1 := FClusterToDuration[Cluster];
         for Period := Period1 to Period1 + Duration - 1 do
         begin
@@ -811,7 +811,7 @@ var
             raise Exception.CreateFmt(SClusterPeriodToSessionOverflow,
               [FClusterToCategory[Cluster], FClusterToParallel[Cluster], Period]);
           FTimetableDetailPattern[Cluster, FPeriodCount - 1 - Period]
-            := FActivityToSessions[Activity, Contador];
+            := FActivityToSessions[Activity, Counter];
         end;
         Inc(FClusterToDuration[Cluster], Duration);
       end;
