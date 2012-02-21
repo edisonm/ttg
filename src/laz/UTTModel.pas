@@ -441,7 +441,7 @@ var
   end;
   procedure LoadCluster;
   var
-    VCluster, Category, Parallel: Integer;
+    Cluster, Category, Parallel: Integer;
     VFieldCategory, VFieldParallel: TField;
   begin
     with SourceDataModule.TbCluster do
@@ -456,13 +456,13 @@ var
           (FParallelToIdParallel));
       VFieldCategory := FindField('IdCategory');
       VFieldParallel := FindField('IdParallel');
-      for VCluster := 0 to FClusterCount - 1 do
+      for Cluster := 0 to FClusterCount - 1 do
       begin
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
-        FClusterToCategory[VCluster] := Category;
-        FClusterToParallel[VCluster] := Parallel;
-        FCategoryParallelToCluster[Category, Parallel] := VCluster;
+        FClusterToCategory[Cluster] := Category;
+        FClusterToParallel[Cluster] := Parallel;
+        FCategoryParallelToCluster[Category, Parallel] := Cluster;
         Next;
       end;
       First;
@@ -634,7 +634,7 @@ var
   end;
   procedure LoadActivity;
   var
-    Theme, Category, Parallel, Session1, Activity, VCluster,
+    Theme, Category, Parallel, Session1, Activity, Cluster,
       Session2, Session, VPos: Integer;
     VFieldTheme, VFieldCategory, VFieldParallel, VFieldComposition: TField;
     VSessionToDuration, VSessionToActivity: array [0 .. 16383] of Integer;
@@ -655,11 +655,11 @@ var
       SetLength(FActivityToTheme, FActivityCount);
       SetLength(FClusterThemeCount, FClusterCount, FThemeCount);
       SetLength(FClusterThemeToActivity, FClusterCount, FThemeCount);
-      for VCluster := 0 to FClusterCount - 1 do
+      for Cluster := 0 to FClusterCount - 1 do
         for Theme := 0 to FThemeCount - 1 do
         begin
-          FClusterThemeCount[VCluster, Theme] := 0;
-          FClusterThemeToActivity[VCluster, Theme] := -1;
+          FClusterThemeCount[Cluster, Theme] := 0;
+          FClusterThemeToActivity[Cluster, Theme] := -1;
         end;
       Session2 := 0;
       for Activity := 0 to RecordCount - 1 do
@@ -667,10 +667,10 @@ var
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
-        VCluster := FCategoryParallelToCluster[Category, Parallel];
-        FActivityToCluster[Activity] := VCluster;
+        Cluster := FCategoryParallelToCluster[Category, Parallel];
+        FActivityToCluster[Activity] := Cluster;
         FActivityToTheme[Activity] := Theme;
-        FClusterThemeToActivity[VCluster, Theme] := Activity;
+        FClusterThemeToActivity[Cluster, Theme] := Activity;
         Composition := VFieldComposition.AsString;
         VPos := 1;
         Session1 := Session2;
@@ -679,7 +679,7 @@ var
         begin
           VSessionToDuration[Session2] := StrToInt(ExtractString(Composition, VPos, '.'));
           VSessionToActivity[Session2] := Activity;
-          Inc(FClusterThemeCount[VCluster, Theme]);
+          Inc(FClusterThemeCount[Cluster, Theme]);
           // Inc(t, VSessionToDuration[Session2]);
           Inc(Session2);
         end;
@@ -688,7 +688,7 @@ var
         begin
           FActivityToSessions[Activity, Session - Session1] := Session;
         end;
-        // FClusterToDuration[VCluster] := FClusterToDuration[VCluster] + t;
+        // FClusterToDuration[Cluster] := FClusterToDuration[Cluster] + t;
         Next;
       end;
       SetLength(FSessionToActivity, Session2);
@@ -745,8 +745,8 @@ var
   end;
   procedure LoadJoinedCluster;
   var
-    JoinedCluster, Counter, VCluster1, Category1, Parallel1,
-      VCluster, Category, Parallel, Theme,  Activity: Integer;
+    JoinedCluster, Counter, Cluster1, Category1, Parallel1,
+      Cluster, Category, Parallel, Theme,  Activity: Integer;
     VFieldTheme, VFieldCategory, VFieldParallel, VFieldCategory1,
       VFieldParallel1: TField;
   begin
@@ -767,16 +767,16 @@ var
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
-        VCluster := FCategoryParallelToCluster[Category, Parallel];
-        Activity := FClusterThemeToActivity[VCluster, Theme];
+        Cluster := FCategoryParallelToCluster[Category, Parallel];
+        Activity := FClusterThemeToActivity[Cluster, Theme];
         Category1 := FIdCategoryToCategory[VFieldCategory1.AsInteger - FMinIdCategory];
         Parallel1 := FIdParallelToParallel[VFieldParallel1.AsInteger - FMinIdParallel];
-        VCluster1 := FCategoryParallelToCluster[Category1, Parallel1];
-        Counter := Length(FClusterJoinedClusterToActivity[VCluster]);
-        SetLength(FClusterJoinedClusterToActivity[VCluster], Counter + 1);
-        SetLength(FClusterJoinedClusterToCluster[VCluster], Counter + 1);
-        FClusterJoinedClusterToActivity[VCluster, Counter] := Activity;
-        FClusterJoinedClusterToCluster[VCluster, Counter] := VCluster1;
+        Cluster1 := FCategoryParallelToCluster[Category1, Parallel1];
+        Counter := Length(FClusterJoinedClusterToActivity[Cluster]);
+        SetLength(FClusterJoinedClusterToActivity[Cluster], Counter + 1);
+        SetLength(FClusterJoinedClusterToCluster[Cluster], Counter + 1);
+        FClusterJoinedClusterToActivity[Cluster, Counter] := Activity;
+        FClusterJoinedClusterToCluster[Cluster, Counter] := Cluster1;
         Next;
       end;
       First;
@@ -784,52 +784,52 @@ var
   end;
   procedure LoadTimetableDetailPattern;
   var
-    Period1, VCluster, Activity, Period, Contador, Duration, Number: Integer;
+    Period1, Cluster, Activity, Period, Contador, Duration, Number: Integer;
   begin
     SetLength(FTimetableDetailPattern, FClusterCount, FPeriodCount);
     SetLength(FClusterToSessionCount, FClusterCount);
     SetLength(FClusterToDuration, FClusterCount);
-    for VCluster := 0 to FClusterCount - 1 do
+    for Cluster := 0 to FClusterCount - 1 do
     begin
-      FClusterToDuration[VCluster] := 0;
-      FClusterToSessionCount[VCluster] := 0;
+      FClusterToDuration[Cluster] := 0;
+      FClusterToSessionCount[Cluster] := 0;
       for Period := 0 to FPeriodCount - 1 do
       begin
-        FTimetableDetailPattern[VCluster, Period] := -1;
+        FTimetableDetailPattern[Cluster, Period] := -1;
       end;
     end;
     for Activity := FActivityCount - 1 downto 0 do
     begin
-      VCluster := FActivityToCluster[Activity];
+      Cluster := FActivityToCluster[Activity];
       for Contador := High(FActivityToSessions[Activity]) downto 0 do
       begin
         Duration := FSessionToDuration[FActivityToSessions[Activity, Contador]];
-        Period1 := FClusterToDuration[VCluster];
+        Period1 := FClusterToDuration[Cluster];
         for Period := Period1 to Period1 + Duration - 1 do
         begin
           if (Period < 0) or (Period >= FPeriodCount) then
             raise Exception.CreateFmt(SClusterPeriodToSessionOverflow,
-              [FClusterToCategory[VCluster], FClusterToParallel[VCluster], Period]);
-          FTimetableDetailPattern[VCluster, FPeriodCount - 1 - Period]
+              [FClusterToCategory[Cluster], FClusterToParallel[Cluster], Period]);
+          FTimetableDetailPattern[Cluster, FPeriodCount - 1 - Period]
             := FActivityToSessions[Activity, Contador];
         end;
-        Inc(FClusterToDuration[VCluster], Duration);
+        Inc(FClusterToDuration[Cluster], Duration);
       end;
     end;
-    for VCluster := 0 to FClusterCount - 1 do
+    for Cluster := 0 to FClusterCount - 1 do
     begin
       Period := 0;
       while Period < FPeriodCount do
       begin
-        Duration := FSessionToDuration[FTimetableDetailPattern[VCluster, Period]];
+        Duration := FSessionToDuration[FTimetableDetailPattern[Cluster, Period]];
         Inc(Period, Duration);
-        Inc(FClusterToSessionCount[VCluster]);
+        Inc(FClusterToSessionCount[Cluster]);
       end;
     end;
     FSessionNumberDouble := 0;
-    for VCluster := 0 to FClusterCount - 1 do
+    for Cluster := 0 to FClusterCount - 1 do
     begin
-      Number := FClusterToSessionCount[VCluster];
+      Number := FClusterToSessionCount[Cluster];
       Inc(FSessionNumberDouble, (Number * (Number - 1)) div 2);
     end;
   end;
@@ -994,13 +994,13 @@ end;
 
 procedure TTimetable.Cross(AIndividual: TIndividual);
 var
-  VCluster: Integer;
+  Cluster: Integer;
 begin
   with TTimetableModel(Model) do
   begin
-    for VCluster := 0 to FClusterCount - 1 do
+    for Cluster := 0 to FClusterCount - 1 do
     begin
-      CrossCluster(TTimetable(AIndividual), VCluster);
+      CrossCluster(TTimetable(AIndividual), Cluster);
     end;
     Update;
     TTimetable(AIndividual).Update;
@@ -1043,18 +1043,18 @@ end;
 
 procedure TTimetable.MakeRandom;
 var
-  VCluster, Period, Duration, MaxPeriod, RandomKey: Integer;
+  Cluster, Period, Duration, MaxPeriod, RandomKey: Integer;
   PeriodToSession: TDynamicIntegerArray;
   RandomKeys: TDynamicIntegerArray;
 begin
   with TTimetableModel(Model) do
   begin
     SetLength(RandomKeys, FPeriodCount);
-    for VCluster := 0 to FClusterCount - 1 do
+    for Cluster := 0 to FClusterCount - 1 do
     begin
-      PeriodToSession := ClusterPeriodToSession[VCluster];
+      PeriodToSession := ClusterPeriodToSession[Cluster];
       for Period := 0 to FPeriodCount - 1 do
-        PeriodToSession[Period] := FTimetableDetailPattern[VCluster, Period];
+        PeriodToSession[Period] := FTimetableDetailPattern[Cluster, Period];
       Period := 0;
       while Period < FPeriodCount do
       begin
@@ -1434,16 +1434,16 @@ end;
 
 procedure TTimetable.Mutate;
 var
-  VCluster, Period1, Period2: Integer;
+  Cluster, Period1, Period2: Integer;
 begin
   with TTimetableModel(Model) do
   begin
     Period1 := Random(FPeriodCount);
     Period2 := Random(FPeriodCount);
-    VCluster := Random(FClusterCount);
-    if ClusterPeriodToSession[VCluster, Period1]
-    <> ClusterPeriodToSession[VCluster, Period2] then
-      Swap(VCluster, Period1, Period2);
+    Cluster := Random(FClusterCount);
+    if ClusterPeriodToSession[Cluster, Period1]
+    <> ClusterPeriodToSession[Cluster, Period2] then
+      Swap(Cluster, Period1, Period2);
   end;
 end;
 
@@ -1566,16 +1566,16 @@ end;
 
 procedure TTimetable.Assign(AIndividual: TIndividual);
 var
-  VCluster, Theme, Resource, Day: Integer;
+  Cluster, Theme, Resource, Day: Integer;
   ATimetable: TTimetable;
 begin
   inherited;
   ATimetable := TTimetable(AIndividual);
   with TTimetableModel(Model), TablingInfo do
   begin
-    for VCluster := 0 to FClusterCount - 1 do
-      Move(ATimetable.ClusterPeriodToSession[VCluster, 0],
-        ClusterPeriodToSession[VCluster, 0], FPeriodCount * SizeOf(Integer));
+    for Cluster := 0 to FClusterCount - 1 do
+      Move(ATimetable.ClusterPeriodToSession[Cluster, 0],
+        ClusterPeriodToSession[Cluster, 0], FPeriodCount * SizeOf(Integer));
     FClashTheme := ATimetable.TablingInfo.FClashTheme;
     FBreakTimetableResource := ATimetable.TablingInfo.FBreakTimetableResource;
     FOutOfPositionEmptyHour := ATimetable.TablingInfo.FOutOfPositionEmptyHour;
@@ -1610,14 +1610,14 @@ begin
       Move(ATimetable.TablingInfo.FResourcePeriodCount[Resource, 0],
         TablingInfo.FResourcePeriodCount[Resource, 0],
         FPeriodCount * SizeOf(Integer));
-    for VCluster := 0 to FClusterCount - 1 do
+    for Cluster := 0 to FClusterCount - 1 do
       for Day := 0 to FDayCount - 1 do
       begin
-        Move(ATimetable.TablingInfo.FClusterDayThemeCount[VCluster, Day, 0],
-          TablingInfo.FClusterDayThemeCount[VCluster, Day, 0],
+        Move(ATimetable.TablingInfo.FClusterDayThemeCount[Cluster, Day, 0],
+          TablingInfo.FClusterDayThemeCount[Cluster, Day, 0],
           FThemeCount * SizeOf(Integer));
-        Move(ATimetable.TablingInfo.FClusterDayThemeAccumulated[VCluster, Day, 0],
-          TablingInfo.FClusterDayThemeAccumulated[VCluster, Day, 0],
+        Move(ATimetable.TablingInfo.FClusterDayThemeAccumulated[Cluster, Day, 0],
+          TablingInfo.FClusterDayThemeAccumulated[Cluster, Day, 0],
           FThemeCount * SizeOf(Integer));
       end;
   end;
@@ -1626,22 +1626,22 @@ end;
 procedure TTimetable.SaveToFile(const AFileName: string);
 var
   VStrings: TStrings;
-  VCluster, Period: Integer;
+  Cluster, Period: Integer;
 begin
   VStrings := TStringList.Create;
   with TTimetableModel(Model) do
     try
-      for VCluster := 0 to FClusterCount - 1 do
+      for Cluster := 0 to FClusterCount - 1 do
       begin
         VStrings.Add(Format('Cluster %d %d',
-            [FCategoryToIdCategory[FClusterToCategory[VCluster]],
-            FParallelToIdParallel[FClusterToParallel[VCluster]]]));
+            [FCategoryToIdCategory[FClusterToCategory[Cluster]],
+            FParallelToIdParallel[FClusterToParallel[Cluster]]]));
         for Period := 0 to FPeriodCount - 1 do
         begin
           VStrings.Add(Format(' Day %d Hour %d Theme %d', [FPeriodToDay[Period],
               FPeriodToHour[Period],
               FThemeToIdTheme[FSessionToTheme[ClusterPeriodToSession[
-                VCluster, Period]]]]));
+                Cluster, Period]]]]));
         end;
       end;
       VStrings.SaveToFile(AFileName);
@@ -1652,23 +1652,23 @@ end;
 
 procedure TTimetable.SaveToStream(Stream: TStream);
 var
-  VCluster: Integer;
+  Cluster: Integer;
 begin
   with TTimetableModel(Model) do
-    for VCluster := 0 to FClusterCount - 1 do
+    for Cluster := 0 to FClusterCount - 1 do
     begin
-      Stream.Write(ClusterPeriodToSession[VCluster, 0], FPeriodCount * SizeOf(Integer));
+      Stream.Write(ClusterPeriodToSession[Cluster, 0], FPeriodCount * SizeOf(Integer));
     end;
 end;
 
 procedure TTimetable.LoadFromStream(Stream: TStream);
 var
-  VCluster: Integer;
+  Cluster: Integer;
 begin
   with TTimetableModel(Model) do
-    for VCluster := 0 to FClusterCount - 1 do
+    for Cluster := 0 to FClusterCount - 1 do
     begin
-      Stream.Read(ClusterPeriodToSession[VCluster, 0], FPeriodCount * SizeOf(Integer));
+      Stream.Read(ClusterPeriodToSession[Cluster, 0], FPeriodCount * SizeOf(Integer));
     end;
   Update;
 end;
@@ -1719,7 +1719,7 @@ var
   end;
   procedure SaveTimetableDetail;
   var
-    VCluster, Period, IdCategory, IdParallel, Session: Integer;
+    Cluster, Period, IdCategory, IdParallel, Session: Integer;
     {$IFNDEF USE_SQL}
     FieldTimetable, FieldCategory, FieldParallel, FieldDay, FieldHour,
       FieldTheme, FieldSession: TField;
@@ -1727,13 +1727,13 @@ var
   begin
   {$IFDEF USE_SQL}
       with TTimetableModel(Model) do
-      for VCluster := 0 to FClusterCount - 1 do
+      for Cluster := 0 to FClusterCount - 1 do
       begin
-        IdCategory := FCategoryToIdCategory[FClusterToCategory[VCluster]];
-        IdParallel := FParallelToIdParallel[FClusterToParallel[VCluster]];
+        IdCategory := FCategoryToIdCategory[FClusterToCategory[Cluster]];
+        IdParallel := FParallelToIdParallel[FClusterToParallel[Cluster]];
         for Period := 0 to FPeriodCount - 1 do
         begin
-          Session := ClusterPeriodToSession[VCluster, Period];
+          Session := ClusterPeriodToSession[Cluster, Period];
           if Session >= 0 then
           begin
             SQL.Add(Format(
@@ -1762,13 +1762,13 @@ var
         FieldTheme := FindField('IdTheme');
         FieldSession := FindField('Session');
         with TTimetableModel(Model) do
-        for VCluster := 0 to FClusterCount - 1 do
+        for Cluster := 0 to FClusterCount - 1 do
         begin
-          IdCategory := FCategoryAIdCategory[FClusterACategory[VCluster]];
-          IdParallel := FParallelAIdParallel[FClusterAParallel[VCluster]];
+          IdCategory := FCategoryAIdCategory[FClusterACategory[Cluster]];
+          IdParallel := FParallelAIdParallel[FClusterAParallel[Cluster]];
           for Period := 0 to FPeriodCount - 1 do
           begin
-            Session := ClusterPeriodToSession[VCluster, Period];
+            Session := ClusterPeriodToSession[Cluster, Period];
             if Session >= 0 then
             begin
               Append;
@@ -1818,7 +1818,7 @@ end;
 procedure TTimetable.LoadFromDataModule(IdTimetable: Integer);
 var
   FieldCategory, FieldParallel, FieldDay, FieldHour, FieldSession: TLongintField;
-  VCluster, Period: Integer;
+  Cluster, Period: Integer;
 begin
   with SourceDataModule, TTimetableModel(Model), TbTimetableDetail do
   begin
@@ -1832,18 +1832,18 @@ begin
       FieldDay := FindField('IdDay') as TLongintField;
       FieldHour := FindField('IdHour') as TLongintField;
       FieldSession := FindField('Session') as TLongintField;
-      for VCluster := 0 to FClusterCount - 1 do
+      for Cluster := 0 to FClusterCount - 1 do
         for Period := 0 to FPeriodCount - 1 do
-          FClusterPeriodToSession[VCluster, Period] := -1;
+          FClusterPeriodToSession[Cluster, Period] := -1;
       First;
       while not Eof do
       begin
-        VCluster := FCategoryParallelToCluster[
+        Cluster := FCategoryParallelToCluster[
           FIdCategoryToCategory[FieldCategory.AsInteger - FMinIdCategory],
           FIdParallelToParallel[FieldParallel.AsInteger - FMinIdParallel]];
         Period := FDayHourToPeriod[FIdDayToDay[FieldDay.AsInteger - FMinIdDay],
           FIdHourToHour[FieldHour.AsInteger - FMinIdHour]];
-        FClusterPeriodToSession[VCluster, Period] := FieldSession.AsInteger;
+        FClusterPeriodToSession[Cluster, Period] := FieldSession.AsInteger;
         Next;
       end;
     finally
@@ -1860,37 +1860,37 @@ end;
 
 procedure TTimetable.CheckIntegrity;
 var
-  Theme, VCluster, Period, Activity, Counter,
+  Theme, Cluster, Period, Activity, Counter,
     Session: Integer;
   SessionFound: Boolean;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
-    for VCluster := 0 to FClusterCount - 1 do
+    for Cluster := 0 to FClusterCount - 1 do
       for Period := 0 to FPeriodCount - 1 do
       begin
-        Session := FClusterPeriodToSession[VCluster, Period];
+        Session := FClusterPeriodToSession[Cluster, Period];
         if Session >= 0 then
         begin
           Theme := FSessionToTheme[Session];
-          Activity := FClusterThemeToActivity[VCluster, Theme];
+          Activity := FClusterThemeToActivity[Cluster, Theme];
           SessionFound := False;
           for Counter := 0 to High(FActivityToSessions[Activity]) do
             SessionFound := SessionFound or (FActivityToSessions[Activity, Counter] = Session);
           if not SessionFound then
             raise Exception.CreateFmt('%s %d(%d,%d), %s %d(%d) %s FActivityToSessions', [
-              SCluster, VCluster,
-              FCategoryToIdCategory[FClusterToCategory[VCluster]],
-              FParallelToIdParallel[FClusterToParallel[VCluster]],
+              SCluster, Cluster,
+              FCategoryToIdCategory[FClusterToCategory[Cluster]],
+              FParallelToIdParallel[FClusterToParallel[Cluster]],
               SFlActivity_IdTheme,
               Theme,
               FThemeToIdTheme[Theme],
               SDoNotAppearsIn]);
           if Activity < 0 then
             raise Exception.CreateFmt('%s %d(%d,%d), %s %d(%d) %s FClusterThemeToActivity', [
-              SCluster, VCluster,
-              FCategoryToIdCategory[FClusterToCategory[VCluster]],
-              FParallelToIdParallel[FClusterToParallel[VCluster]],
+              SCluster, Cluster,
+              FCategoryToIdCategory[FClusterToCategory[Cluster]],
+              FParallelToIdParallel[FClusterToParallel[Cluster]],
               SFlActivity_IdTheme,
               Theme,
               FThemeToIdTheme[Theme],
@@ -1903,7 +1903,7 @@ end;
 procedure TTimetable.Reset;
 var
   Resource, ResourceType, Period, Theme, ThemeRestrictionType,
-    ResourceRestrictionType, VCluster, Day: Integer;
+    ResourceRestrictionType, Cluster, Day: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
@@ -1932,25 +1932,25 @@ begin
       for Theme := 0 to FThemeCount - 1 do
         FThemePeriodCount[Theme, Period] := 0;
     end;
-    for VCluster := 0 to FClusterCount - 1 do
+    for Cluster := 0 to FClusterCount - 1 do
       for Day := 0 to FDayCount - 1 do
         for Theme := 0 to FThemeCount - 1 do
         begin
-          FClusterDayThemeCount[VCluster, Day, Theme] := 0;
-          FClusterDayThemeAccumulated[VCluster, Day, Theme] := 0;
+          FClusterDayThemeCount[Cluster, Day, Theme] := 0;
+          FClusterDayThemeAccumulated[Cluster, Day, Theme] := 0;
         end;
   end;
 end;
 
 procedure TTimetable.Update;
 var
-  VCluster: Integer;
+  Cluster: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
     Reset;
-    for VCluster := 0 to FClusterCount - 1 do
-      DeltaValues(1, VCluster, 0, FPeriodCount - 1);
+    for Cluster := 0 to FClusterCount - 1 do
+      DeltaValues(1, Cluster, 0, FPeriodCount - 1);
     UpdateValue;
   end
 end;
