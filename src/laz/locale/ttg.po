@@ -445,7 +445,13 @@ msgstr ""
 msgid "Resources of Timetables"
 msgstr ""
 
+#: tclassform.dbgrid.hint
+msgctxt "TCLASSFORM.DBGRID.HINT"
+msgid "Categories|Available categories"
+msgstr ""
+
 #: tclusterform.dbgrid.hint
+msgctxt "tclusterform.dbgrid.hint"
 msgid "Categories|Available categories"
 msgstr ""
 
@@ -674,10 +680,22 @@ msgid "Panel2"
 msgstr ""
 
 #: tcrossmanytomanyeditorform.btcancel.hint
+msgctxt "tcrossmanytomanyeditorform.btcancel.hint"
 msgid "Cancel|Cancel"
 msgstr ""
 
+#: tcrossmanytomanyeditorform.btncancel.hint
+msgctxt "TCROSSMANYTOMANYEDITORFORM.BTNCANCEL.HINT"
+msgid "Cancel|Cancel"
+msgstr ""
+
+#: tcrossmanytomanyeditorform.btnok.hint
+msgctxt "TCROSSMANYTOMANYEDITORFORM.BTNOK.HINT"
+msgid "Ok|Ok"
+msgstr ""
+
 #: tcrossmanytomanyeditorform.btok.hint
+msgctxt "tcrossmanytomanyeditorform.btok.hint"
 msgid "Ok|Ok"
 msgstr ""
 
@@ -721,19 +739,19 @@ msgstr ""
 msgid "Show Table"
 msgstr ""
 
+#: teditorform.btnshow.hint
+msgctxt "TEDITORFORM.BTNSHOW.HINT"
+msgid "Show|Show the grid content in a report"
+msgstr ""
+
 #: teditorform.caption
 msgctxt "TEDITORFORM.CAPTION"
 msgid "EditorForm"
 msgstr ""
 
-#: teditorform.tbeditor.caption
-msgctxt "teditorform.tbeditor.caption"
+#: teditorform.tlbshow.caption
+msgctxt "TEDITORFORM.TLBSHOW.CAPTION"
 msgid "Show"
-msgstr ""
-
-#: teditorform.tbshow.hint
-msgctxt "TEDITORFORM.TBSHOW.HINT"
-msgid "Show|Show the grid content in a report"
 msgstr ""
 
 #: tmainform.actabout.caption
@@ -886,16 +904,18 @@ msgstr ""
 msgid "Password|Change system password"
 msgstr ""
 
-#: tmainform.actperiod.caption
-msgid "Working Time Slots"
-msgstr ""
-
-#: tmainform.actperiod.hint
-msgid "Working Time Slots|Working Time Slots"
-msgstr ""
-
 #: tmainform.actregistrationinfo.caption
 msgid "Registration Info"
+msgstr ""
+
+#: tmainform.actresource.caption
+msgctxt "TMAINFORM.ACTRESOURCE.CAPTION"
+msgid "Resources"
+msgstr ""
+
+#: tmainform.actresource.hint
+msgctxt "TMAINFORM.ACTRESOURCE.HINT"
+msgid "Resources|Resources"
 msgstr ""
 
 #: tmainform.actsave.caption
@@ -916,13 +936,14 @@ msgctxt "TMAINFORM.ACTSUBJECT.HINT"
 msgid "Themes|Themes"
 msgstr ""
 
-#: tmainform.actteacher.caption
-msgctxt "tmainform.actteacher.caption"
-msgid "Resources"
+#: tmainform.acttimeslot.caption
+msgctxt "TMAINFORM.ACTTIMESLOT.CAPTION"
+msgid "Working Time Slots"
 msgstr ""
 
-#: tmainform.actteacher.hint
-msgid "Resources|Resources"
+#: tmainform.acttimeslot.hint
+msgctxt "TMAINFORM.ACTTIMESLOT.HINT"
+msgid "Working Time Slots|Working Time Slots"
 msgstr ""
 
 #: tmainform.acttimetable.caption
@@ -1037,7 +1058,8 @@ msgctxt "TMASTERDETAILEDITORFORM.GRBDETAIL.CAPTION"
 msgid "Detail"
 msgstr ""
 
-#: tmessageviewform.bbclose.caption
+#: tmessageviewform.bbtclose.caption
+msgctxt "TMESSAGEVIEWFORM.BBTCLOSE.CAPTION"
 msgid "&Close"
 msgstr ""
 
@@ -1046,7 +1068,8 @@ msgctxt "TMESSAGEVIEWFORM.CAPTION"
 msgid "Message viewer"
 msgstr ""
 
-#: tmessageviewform.pneditor.caption
+#: tmessageviewform.panel1.caption
+msgctxt "TMESSAGEVIEWFORM.PANEL1.CAPTION"
 msgid "Panel1"
 msgstr ""
 
@@ -1393,6 +1416,7 @@ msgid "Swap periods"
 msgstr ""
 
 #: tselperiodform.label1.caption
+msgctxt "tselperiodform.label1.caption"
 msgid "Select the time slot to swap"
 msgstr ""
 
@@ -1403,6 +1427,36 @@ msgstr ""
 
 #: tselperiodform.label3.caption
 msgctxt "TSELPERIODFORM.LABEL3.CAPTION"
+msgid "Hour"
+msgstr ""
+
+#: tseltimeslotform.bbtcancel.caption
+msgctxt "TSELTIMESLOTFORM.BBTCANCEL.CAPTION"
+msgid "Cancel"
+msgstr ""
+
+#: tseltimeslotform.bbtok.caption
+msgctxt "TSELTIMESLOTFORM.BBTOK.CAPTION"
+msgid "Ok"
+msgstr ""
+
+#: tseltimeslotform.caption
+msgctxt "TSELTIMESLOTFORM.CAPTION"
+msgid "Swap periods"
+msgstr ""
+
+#: tseltimeslotform.label1.caption
+msgctxt "TSELTIMESLOTFORM.LABEL1.CAPTION"
+msgid "Select the time slot to swap"
+msgstr ""
+
+#: tseltimeslotform.label2.caption
+msgctxt "TSELTIMESLOTFORM.LABEL2.CAPTION"
+msgid "Day"
+msgstr ""
+
+#: tseltimeslotform.label3.caption
+msgctxt "TSELTIMESLOTFORM.LABEL3.CAPTION"
 msgid "Hour"
 msgstr ""
 
@@ -1442,24 +1496,39 @@ msgstr ""
 msgid "Edition"
 msgstr ""
 
-#: tsplashform.lbcopyright.caption
-msgctxt "TSPLASHFORM.LBCOPYRIGHT.CAPTION"
+#: tsplashform.lblcopyright.caption
+msgctxt "TSPLASHFORM.LBLCOPYRIGHT.CAPTION"
 msgid "..."
 msgstr ""
 
-#: tsplashform.lbproductname.caption
-msgctxt "TSPLASHFORM.LBPRODUCTNAME.CAPTION"
+#: tsplashform.lblproductname.caption
+msgctxt "TSPLASHFORM.LBLPRODUCTNAME.CAPTION"
 msgid "..."
 msgstr ""
 
-#: tsplashform.lbproductversion.caption
-msgctxt "TSPLASHFORM.LBPRODUCTVERSION.CAPTION"
+#: tsplashform.lblproductversion.caption
+msgctxt "TSPLASHFORM.LBLPRODUCTVERSION.CAPTION"
 msgid "..."
 msgstr ""
 
-#: tsplashform.lbyearlabel.caption
-msgctxt "TSPLASHFORM.LBYEARLABEL.CAPTION"
+#: tsplashform.lblyearlabel.caption
+msgctxt "TSPLASHFORM.LBLYEARLABEL.CAPTION"
 msgid "..."
+msgstr ""
+
+#: tsubjectform.actsubjectrestriction.caption
+msgctxt "TSUBJECTFORM.ACTSUBJECTRESTRICTION.CAPTION"
+msgid "Theme restrictions"
+msgstr ""
+
+#: tsubjectform.actsubjectrestriction.hint
+msgctxt "TSUBJECTFORM.ACTSUBJECTRESTRICTION.HINT"
+msgid "Theme restrictions|Input theme restrictions"
+msgstr ""
+
+#: tsubjectform.caption
+msgctxt "TSUBJECTFORM.CAPTION"
+msgid "Themes"
 msgstr ""
 
 #: tthemeform.actthemerestriction.caption
@@ -1468,6 +1537,7 @@ msgid "Theme restrictions"
 msgstr ""
 
 #: tthemeform.actthemerestriction.hint
+msgctxt "tthemeform.actthemerestriction.hint"
 msgid "Theme restrictions|Input theme restrictions"
 msgstr ""
 
@@ -1476,12 +1546,23 @@ msgctxt "TTHEMEFORM.CAPTION"
 msgid "Themes"
 msgstr ""
 
+#: ttimetableclassform.cbshowclass.hint
+msgctxt "TTIMETABLECLASSFORM.CBSHOWCLASS.HINT"
+msgid "Show|Param to show in the timetable"
+msgstr ""
+
+#: ttimetableclassform.tbswaptimeslots.hint
+msgctxt "TTIMETABLECLASSFORM.TBSWAPTIMESLOTS.HINT"
+msgid "Swap time slots|Swap time slots"
+msgstr ""
+
 #: ttimetableclusterform.cbshowcluster.hint
 msgctxt "TTIMETABLECLUSTERFORM.CBSHOWCLUSTER.HINT"
 msgid "Show|Param to show in the timetable"
 msgstr ""
 
 #: ttimetableclusterform.tbswapperiods.hint
+msgctxt "ttimetableclusterform.tbswapperiods.hint"
 msgid "Swap time slots|Swap time slots"
 msgstr ""
 
