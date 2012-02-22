@@ -111,7 +111,7 @@ type
     FClusterJoinedClusterToCluster: TDynamicIntegerArrayArray;
     FThemePeriodToThemeRestrictionType: TDynamicIntegerArrayArray;
     
-    function GetDayAMaxPeriod(Day: Integer): Integer;
+    function GetDayToMaxPeriod(Day: Integer): Integer;
   protected
     property TimetableDetailPattern: TDynamicIntegerArrayArray read FTimetableDetailPattern;
     function GetElitistCount: Integer; override;
@@ -434,7 +434,7 @@ var
       end;
       for Day := 0 to FDayCount - 1 do
       begin
-        FDayToMaxPeriod[Day] := GetDayAMaxPeriod(Day);
+        FDayToMaxPeriod[Day] := GetDayToMaxPeriod(Day);
       end;
       First;
     end;
@@ -893,7 +893,7 @@ begin
   FNonScatteredActivityValue := ANonScatteredActivityValue;
 end;
 
-function TTimetableModel.GetDayAMaxPeriod(Day: Integer): Integer;
+function TTimetableModel.GetDayToMaxPeriod(Day: Integer): Integer;
 begin
   if Day = FDayCount - 1 then
     Result := FPeriodCount - 1
