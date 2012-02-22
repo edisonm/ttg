@@ -221,7 +221,7 @@ begin
   with MasterDataModule.ConfigStorage do
     FTimetableModel := TTimetableModel.Create(
       ClashTheme, BreakTimetableResource, OutOfPositionEmptyHour,
-      BrokenSession, NonScatteredTheme);
+      BrokenSession, NonScatteredActivity);
   SetLength(FValidIdes, Length(AValidIdes));
   // ProcThreadPool.MaxThreadCount := Length(AValidIdes);
   for i := 0 to High(AValidIdes) do
@@ -327,7 +327,7 @@ begin
   with MasterDataModule.ConfigStorage do
     FTimetableModel := TTimetableModel.Create(
       ClashTheme, BreakTimetableResource, OutOfPositionEmptyHour,
-      BrokenSession, NonScatteredTheme);
+      BrokenSession, NonScatteredActivity);
   inherited Create(CreateSuspended);
 end;
 

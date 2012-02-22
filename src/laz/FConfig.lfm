@@ -429,23 +429,23 @@ object ConfigForm: TConfigForm
         Caption = 'Empty hours:'
         ParentColor = False
       end
-      object LbBrokenThemes: TLabel
+      object LbBrokenActivities: TLabel
         Left = 8
         Height = 15
         Top = 86
         Width = 98
-        Caption = 'Broken Sessions:'
+        Caption = 'Broken Activities:'
         ParentColor = False
       end
-      object LbJoinedThemes: TLabel
+      object LbNonScatteredActivities: TLabel
         Left = 237
         Height = 15
         Top = 61
         Width = 90
-        Caption = 'Joined Themes:'
+        Caption = 'Non Scattered Activities:'
         ParentColor = False
       end
-      object Label15: TLabel
+      object LbThemeRestrictions: TLabel
         Left = 8
         Height = 15
         Top = 114
@@ -454,7 +454,7 @@ object ConfigForm: TConfigForm
         Caption = 'Theme Restrictions:'
         ParentColor = False
       end
-      object Label18: TLabel
+      object LbResourceRestrictions: TLabel
         Left = 8
         Height = 15
         Top = 234
@@ -525,7 +525,7 @@ object ConfigForm: TConfigForm
         Caption = 'Value:'
         ParentColor = False
       end
-      object Label20: TLabel
+      object LbClashThemes: TLabel
         Left = 8
         Height = 15
         Top = 36
@@ -549,7 +549,7 @@ object ConfigForm: TConfigForm
         AutoSize = False
         TabOrder = 4
       end
-      object EdNonScatteredTheme: TEdit
+      object EdNonScatteredActivity: TEdit
         Left = 345
         Height = 21
         Top = 56
@@ -565,7 +565,7 @@ object ConfigForm: TConfigForm
         AutoSize = False
         TabOrder = 1
       end
-      object dbeNaThemeRestrictionType: TDBEdit
+      object EdNaThemeRestrictionType: TDBEdit
         Left = 364
         Height = 24
         Top = 138
@@ -577,7 +577,7 @@ object ConfigForm: TConfigForm
         MaxLength = 0
         TabOrder = 8
       end
-      object dbeValThemeRestrictionType: TDBEdit
+      object EdValThemeRestrictionType: TDBEdit
         Left = 363
         Height = 24
         Top = 199
@@ -589,7 +589,7 @@ object ConfigForm: TConfigForm
         MaxLength = 0
         TabOrder = 10
       end
-      object dbeNaResourceRestrictionType: TDBEdit
+      object EdNaResourceRestrictionType: TDBEdit
         Left = 364
         Height = 24
         Top = 250
@@ -601,7 +601,7 @@ object ConfigForm: TConfigForm
         MaxLength = 0
         TabOrder = 11
       end
-      object dbeValResourceRestrictionType: TDBEdit
+      object EdValResourceRestrictionType: TDBEdit
         Left = 364
         Height = 24
         Top = 310

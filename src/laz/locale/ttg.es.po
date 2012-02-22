@@ -504,18 +504,18 @@ msgctxt "tconfigform.label13.caption"
 msgid "Iterations:"
 msgstr "Iteraciones:"
 
-#: tconfigform.label15.caption
-msgctxt "tconfigform.label15.caption"
+#: tconfigform.lbthemerestrictions.caption
+msgctxt "tconfigform.lbthemerestrictions.caption"
 msgid "Theme Restrictions:"
 msgstr "Prohibiciones de materia:"
 
-#: tconfigform.label18.caption
-msgctxt "tconfigform.label18.caption"
+#: tconfigform.lbresourcerestrictions.caption
+msgctxt "tconfigform.lbresourcerestrictions.caption"
 msgid "Resource Restrictions:"
 msgstr "Prohibiciones de profesor:"
 
-#: tconfigform.label20.caption
-msgctxt "tconfigform.label20.caption"
+#: tconfigform.lbclashthemes.caption
+msgctxt "tconfigform.lbclashthemes.caption"
 msgid "Clash Themes:"
 msgstr "Cruce materias:"
 
@@ -541,7 +541,7 @@ msgstr "Huecos h. prof.:"
 
 #: tconfigform.lbbrokensubjects.caption
 msgctxt "tconfigform.lbbrokensubjects.caption"
-msgid "Broken Sessions:"
+msgid "Broken Activities:"
 msgstr "Materias cortadas:"
 
 #: tconfigform.lbcomments.caption
@@ -576,7 +576,7 @@ msgstr "Nombre:"
 
 #: tconfigform.lbjoinedsubjects.caption
 msgctxt "tconfigform.lbjoinedsubjects.caption"
-msgid "Joined Themes:"
+msgid "Non Scattered Activities:"
 msgstr "Materias juntas:"
 
 #: tconfigform.lbmaxresourceworkload.caption
@@ -1305,7 +1305,7 @@ msgstr "Iniciado el:"
 
 #: tprogressform.pnlnonscatteredsubject.caption
 msgctxt "tprogressform.pnlnonscatteredsubject.caption"
-msgid " Joined Themes:"
+msgid " Non Scattered Activities:"
 msgstr " Joined Themes:"
 
 #: tprogressform.pnlnonscatteredsubjectcount.caption
@@ -1943,7 +1943,7 @@ msgstr "No"
 msgid "Ready to generate timetable. Show timetable check Summary?"
 msgstr "Listo para generar horario. Mostrar resumen del chequeo del horario?"
 
-#: uttgconsts.snonscatteredtheme
+#: uttgconsts.snonscatteredactivity
 msgid "Non Scattered Themes"
 msgstr "Materias no dispersas"
 

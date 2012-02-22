@@ -463,17 +463,17 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object PnNonScatteredTheme: TPanel
+    object PnNonScatteredActivity: TPanel
       Left = 8
       Height = 21
       Top = 198
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Joined Themes:'
+      Caption = ' Non Scattered Activities:'
       TabOrder = 22
     end
-    object PnNonScatteredThemeCount: TPanel
+    object PnNonScatteredActivityCount: TPanel
       Left = 192
       Height = 21
       Top = 198
@@ -484,7 +484,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 23
-      object LbNonScatteredThemeCount: TLabel
+      object LbNonScatteredActivityCount: TLabel
         Left = 104
         Height = 19
         Top = 1
@@ -501,7 +501,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object PnNonScatteredThemeValue: TPanel
+    object PnNonScatteredActivityValue: TPanel
       Left = 312
       Height = 21
       Top = 198
@@ -512,7 +512,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 24
-      object LbNonScatteredThemeValue: TLabel
+      object LbNonScatteredActivityValue: TLabel
         Left = 116
         Height = 19
         Top = 1

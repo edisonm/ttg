@@ -65,7 +65,7 @@ resourcestring
   SName = 'Name';
   SNo = 'No';
   SNoErrorReadyForCheckSummary = 'Ready to generate timetable. Show timetable check Summary?';
-  SNonScatteredTheme = 'Non Scattered Themes';
+  SNonScatteredActivity = 'Non Scattered Themes';
   SNumHardResourceRestrictions = 'Number of hard teacher restrictions...';
   SNumSoftResourceRestrictions = 'Number of soft teacher restrictions...';
   SOutOfPositionEmptyHour = 'Out of position empty hours';

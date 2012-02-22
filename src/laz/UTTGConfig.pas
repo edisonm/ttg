@@ -46,8 +46,8 @@ type
     procedure SetOutOfPositionEmptyHour(Value: Integer);
     function GetBrokenSession: Integer;
     procedure SetBrokenSession(Value: Integer);
-    function GetNonScatteredTheme: Integer;
-    procedure SetNonScatteredTheme(Value: Integer);
+    function GetNonScatteredActivity: Integer;
+    procedure SetNonScatteredActivity(Value: Integer);
     function GetPopulationSize: Integer;
     procedure SetPopulationSize(Value: Integer);
     function GetMaxIteration: Integer;
@@ -84,7 +84,7 @@ type
     property BreakTimetableResource: Integer read GetBreakTimetableResource write SetBreakTimetableResource;
     property OutOfPositionEmptyHour: Integer read GetOutOfPositionEmptyHour write SetOutOfPositionEmptyHour;
     property BrokenSession: Integer read GetBrokenSession write SetBrokenSession;
-    property NonScatteredTheme: Integer read GetNonScatteredTheme write SetNonScatteredTheme;
+    property NonScatteredActivity: Integer read GetNonScatteredActivity write SetNonScatteredActivity;
     property PopulationSize: Integer read GetPopulationSize write SetPopulationSize;
     property MaxIteration: Integer read GetMaxIteration write SetMaxIteration;
     property CrossProbability: Double read GetCrossProbability write SetCrossProbability;
@@ -259,14 +259,14 @@ begin
   Integers['BrokenSession'] := Value;
 end;
 
-function TTTGConfig.GetNonScatteredTheme: Integer;
+function TTTGConfig.GetNonScatteredActivity: Integer;
 begin
-  Result := Integers['NonScatteredTheme'];
+  Result := Integers['NonScatteredActivity'];
 end;
 
-procedure TTTGConfig.SetNonScatteredTheme(Value: Integer);
+procedure TTTGConfig.SetNonScatteredActivity(Value: Integer);
 begin
-  Integers['NonScatteredTheme'] := Value;
+  Integers['NonScatteredActivity'] := Value;
 end;
 
 function TTTGConfig.GetPopulationSize: Integer;
@@ -377,7 +377,7 @@ begin
   BreakTimetableResource := 50;
   OutOfPositionEmptyHour := 100;
   BrokenSession := 150;
-  NonScatteredTheme := 5;
+  NonScatteredActivity := 5;
   PopulationSize := 10;
   MaxIteration := 10000;
   CrossProbability := 0.3;

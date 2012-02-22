@@ -500,18 +500,18 @@ msgctxt "tconfigform.label13.caption"
 msgid "Iterations:"
 msgstr ""
 
-#: tconfigform.label15.caption
-msgctxt "tconfigform.label15.caption"
+#: tconfigform.lbthemerestrictions.caption
+msgctxt "tconfigform.lbthemerestrictions.caption"
 msgid "Theme Restrictions:"
 msgstr ""
 
-#: tconfigform.label18.caption
-msgctxt "tconfigform.label18.caption"
+#: tconfigform.lbresourcerestrictions.caption
+msgctxt "tconfigform.lbresourcerestrictions.caption"
 msgid "Resource Restrictions:"
 msgstr ""
 
-#: tconfigform.label20.caption
-msgctxt "tconfigform.label20.caption"
+#: tconfigform.lbclashthemes.caption
+msgctxt "tconfigform.lbclashthemes.caption"
 msgid "Clash Themes:"
 msgstr ""
 
@@ -537,7 +537,7 @@ msgstr ""
 
 #: tconfigform.lbbrokensubjects.caption
 msgctxt "TCONFIGFORM.LBBROKENSUBJECTS.CAPTION"
-msgid "Broken Sessions:"
+msgid "Broken Activities:"
 msgstr ""
 
 #: tconfigform.lbcomments.caption
@@ -572,7 +572,7 @@ msgstr ""
 
 #: tconfigform.lbjoinedsubjects.caption
 msgctxt "TCONFIGFORM.LBJOINEDSUBJECTS.CAPTION"
-msgid "Joined Themes:"
+msgid "Non Scattered Activities:"
 msgstr ""
 
 #: tconfigform.lbmaxresourceworkload.caption
@@ -1295,7 +1295,7 @@ msgstr ""
 
 #: tprogressform.pnlnonscatteredsubject.caption
 msgctxt "TPROGRESSFORM.PNLNONSCATTEREDSUBJECT.CAPTION"
-msgid " Joined Themes:"
+msgid " Non Scattered Activities:"
 msgstr ""
 
 #: tprogressform.pnlnonscatteredsubjectcount.caption
@@ -1921,7 +1921,7 @@ msgstr ""
 msgid "Ready to generate timetable. Show timetable check Summary?"
 msgstr ""
 
-#: uttgconsts.snonscatteredtheme
+#: uttgconsts.snonscatteredactivity
 msgid "Non Scattered Themes"
 msgstr ""
 

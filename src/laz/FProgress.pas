@@ -62,11 +62,11 @@ type
     LbResourceRestriction: TLabel;
     PnResourceRestrictionValue: TPanel;
     LbResourceRestrictionValue: TLabel;
-    PnNonScatteredTheme: TPanel;
-    PnNonScatteredThemeCount: TPanel;
-    LbNonScatteredThemeCount: TLabel;
-    PnNonScatteredThemeValue: TPanel;
-    LbNonScatteredThemeValue: TLabel;
+    PnNonScatteredActivity: TPanel;
+    PnNonScatteredActivityCount: TPanel;
+    LbNonScatteredActivityCount: TLabel;
+    PnNonScatteredActivityValue: TPanel;
+    LbNonScatteredActivityValue: TLabel;
     BBCancel: TBitBtn;
     PBProgress: TProgressBar;
     PnBreakTimetableResource: TPanel;
@@ -146,7 +146,7 @@ begin
                                                BreakTimetableResource,
                                                OutOfPositionEmptyHour,
                                                BrokenSession,
-                                               NonScatteredTheme);
+                                               NonScatteredActivity);
     //ASolver.Update;
     ASolver.UpdateValue;
     FUpdateIndex := MainForm.UpdateIndex;
@@ -174,7 +174,7 @@ begin
       Format('%s ', [VarArrToStr(ClashResourceType)]);
     LbResourceRestriction.Caption :=
       Format('%s ', [VarArrToStr(ResourceRestrictionTypeToResourceCount)]);
-    LbNonScatteredThemeCount.Caption := Format('%d ', [NonScatteredTheme]);
+    LbNonScatteredActivityCount.Caption := Format('%d ', [NonScatteredActivity]);
     LbClashThemeValue.Caption := Format('%d ', [ClashThemeValue]);
     LbBreakTimetableResourceValue.Caption :=
       Format('%d ', [BreakTimetableResourceValue]);
@@ -184,7 +184,7 @@ begin
     LbClashResourceValue.Caption := Format('%d ', [ClashResourceValue]);
     LbResourceRestrictionValue.Caption := Format('%d ', [ResourceRestrictionValue]);
     LbThemeRestrictionValue.Caption := Format('%d ', [ThemeRestrictionValue]);
-    LbNonScatteredThemeValue.Caption := Format('%d ', [NonScatteredThemeValue]);
+    LbNonScatteredActivityValue.Caption := Format('%d ', [NonScatteredActivityValue]);
     LbTotalValue.Caption := Format('%d ', [Value]);
   end;
   with ASolver do
