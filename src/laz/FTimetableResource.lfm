@@ -547,7 +547,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       Visible = False
     end
     object QuResourceNaResource: TStringField
-      DisplayWidth = 15
+      DisplayWidth = 25
       FieldKind = fkData
       FieldName = 'NaResource'
       Index = 2
@@ -555,7 +555,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = True
-      Size = 15
+      Size = 25
     end
   end
 end

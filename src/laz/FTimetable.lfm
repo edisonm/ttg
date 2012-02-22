@@ -39,10 +39,10 @@ inherited TimetableForm: TTimetableForm
       ParentShowHint = False
       ShowHint = True
     end
-    object BtClashTheme: TToolButton[6]
+    object BtClashActivity: TToolButton[6]
       Left = 270
       Top = 2
-      Action = ActClashTheme
+      Action = ActClashActivity
       ParentShowHint = False
       ShowHint = True
     end
@@ -514,12 +514,12 @@ inherited TimetableForm: TTimetableForm
       ImageIndex = 4
       OnExecute = ActClashResourceExecute
     end
-    object ActClashTheme: TAction[5]
+    object ActClashActivity: TAction[5]
       AutoCheck = True
       Caption = 'Clashes of subjects'
       Hint = 'Clashes of subjects|Clashes of subjects'
       ImageIndex = 5
-      OnExecute = ActClashThemeExecute
+      OnExecute = ActClashActivityExecute
     end
     object ActThemeRestrictionNonSatisfied: TAction[6]
       AutoCheck = True
@@ -921,11 +921,11 @@ inherited TimetableForm: TTimetableForm
       Required = False
     end
   end
-  object QuClashTheme: TZQuery[8]
+  object QuClashActivity: TZQuery[8]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimetable;NaTheme'
     AutoCalcFields = False
-    AfterScroll = QuClashThemeAfterScroll
+    AfterScroll = QuClashActivityAfterScroll
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
@@ -965,7 +965,7 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuClashThemeIdTimetable: TLongintField
+    object QuClashActivityIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimetable'
@@ -976,7 +976,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashThemeIdTheme: TLongintField
+    object QuClashActivityIdTheme: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTheme'
@@ -987,7 +987,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashThemeNaTheme: TStringField
+    object QuClashActivityNaTheme: TStringField
       DisplayWidth = 20
       FieldKind = fkData
       FieldName = 'NaTheme'
@@ -998,7 +998,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
     end
   end
-  object QuClashThemeDetail: TZQuery[9]
+  object QuClashActivityDetail: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimetable;IdTheme;IdCategory;IdParallel;IdDay;IdHour'
     AutoCalcFields = False
@@ -1034,9 +1034,9 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTheme'
         ParamType = ptUnknown
       end>
-    DataSource = DSClashTheme
+    DataSource = DSClashActivity
     MasterFields = 'IdTimetable;IdTheme'
-    MasterSource = DSClashTheme
+    MasterSource = DSClashActivity
     LinkedFields = 'IdTimetable;IdTheme'
     IndexFieldNames = 'IdTimetable Asc;IdTheme Asc;IdCategory Asc;IdParallel Asc;IdDay Asc;IdHour Asc'
     left = 312
@@ -1052,7 +1052,7 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTheme'
         ParamType = ptUnknown
       end>
-    object QuClashThemeDetailIdTimetable: TLongintField
+    object QuClashActivityDetailIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimetable'
@@ -1063,7 +1063,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashThemeDetailIdTheme: TLongintField
+    object QuClashActivityDetailIdTheme: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTheme'
@@ -1074,7 +1074,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashThemeDetailIdCategory: TLongintField
+    object QuClashActivityDetailIdCategory: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdCategory'
@@ -1085,7 +1085,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashThemeDetailIdParallel: TLongintField
+    object QuClashActivityDetailIdParallel: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdParallel'
@@ -1096,7 +1096,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuClashThemeDetailIdDay: TLongintField
+    object QuClashActivityDetailIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -1107,7 +1107,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashThemeDetailIdHour: TLongintField
+    object QuClashActivityDetailIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -1118,7 +1118,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Visible = False
     end
-    object QuClashThemeDetailAbCategory: TStringField
+    object QuClashActivityDetailAbCategory: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
       FieldName = 'AbCategory'
@@ -1133,7 +1133,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Size = 5
     end
-    object QuClashThemeDetailNaParallel: TStringField
+    object QuClashActivityDetailNaParallel: TStringField
       DisplayWidth = 5
       FieldKind = fkLookup
       FieldName = 'NaParallel'
@@ -1148,7 +1148,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Size = 5
     end
-    object QuClashThemeDetailNaDay: TStringField
+    object QuClashActivityDetailNaDay: TStringField
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'NaDay'
@@ -1163,7 +1163,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuClashThemeDetailNaHour: TStringField
+    object QuClashActivityDetailNaHour: TStringField
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'NaHour'
@@ -1584,7 +1584,7 @@ inherited TimetableForm: TTimetableForm
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimetable;NaTheme;IdCategory;IdParallel;IdDay;IdHour'
     AutoCalcFields = False
-    AfterScroll = QuClashThemeAfterScroll
+    AfterScroll = QuClashActivityAfterScroll
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
@@ -2137,8 +2137,8 @@ inherited TimetableForm: TTimetableForm
     left = 312
     top = 336
   end
-  object DSClashTheme: TDatasource[17]
-    DataSet = QuClashTheme
+  object DSClashActivity: TDatasource[17]
+    DataSet = QuClashActivity
     left = 312
     top = 168
   end

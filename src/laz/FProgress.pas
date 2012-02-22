@@ -16,17 +16,17 @@ type
 
   TProgressForm = class(TForm)
     LbColision: TLabel;
-    LbClashTheme: TLabel;
-    LbClashThemeValue: TLabel;
+    LbClashActivity: TLabel;
+    LbClashActivityValue: TLabel;
     LbExports: TLabel;
     LbImports: TLabel;
     PnCrashes: TPanel;
     PnImports: TPanel;
     PnExports: TPanel;
     PnPollination: TPanel;
-    PnClashTheme: TPanel;
-    PnClashThemeNumber: TPanel;
-    PnClashThemeValue: TPanel;
+    PnClashActivity: TPanel;
+    PnClashActivityNumber: TPanel;
+    PnClashActivityValue: TPanel;
     PnProgress: TPanel;
     BBClose: TBitBtn;
     PnTotalValue: TPanel;
@@ -142,7 +142,7 @@ begin
   if MainForm.UpdateIndex <> FUpdateIndex then
   begin
     with MasterDataModule.ConfigStorage do
-      TTimetableModel(ASolver.Model).Configure(ClashTheme,
+      TTimetableModel(ASolver.Model).Configure(ClashActivity,
                                                BreakTimetableResource,
                                                OutOfPositionEmptyHour,
                                                BrokenSession,
@@ -163,7 +163,7 @@ begin
       FTimePosition0 := t;
     LbPosition.Caption := Format('%d/%d', [APosition, AMax]);
     PBProgress.Position := APosition;
-    LbClashTheme.Caption := Format('%d ', [ClashTheme]);
+    LbClashActivity.Caption := Format('%d ', [ClashActivity]);
     LbBreakTimetableResourceCount.Caption :=
       Format('%d ', [BreakTimetableResource]);
     LbOutOfPositionEmptyHour.Caption := Format('%d ', [OutOfPositionEmptyHour]);
@@ -175,7 +175,7 @@ begin
     LbResourceRestriction.Caption :=
       Format('%s ', [VarArrToStr(ResourceRestrictionTypeToResourceCount)]);
     LbNonScatteredActivityCount.Caption := Format('%d ', [NonScatteredActivity]);
-    LbClashThemeValue.Caption := Format('%d ', [ClashThemeValue]);
+    LbClashActivityValue.Caption := Format('%d ', [ClashActivityValue]);
     LbBreakTimetableResourceValue.Caption :=
       Format('%d ', [BreakTimetableResourceValue]);
     LbOutOfPositionEmptyHourValue.Caption := Format('%d ',

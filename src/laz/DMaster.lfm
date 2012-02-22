@@ -22,7 +22,7 @@ object MasterDataModule: TMasterDataModule
       Required = False
     end
     object TbTmpResourceWorkLoadNaResource: TStringField
-      DisplayWidth = 15
+      DisplayWidth = 25
       FieldKind = fkLookup
       FieldName = 'NaResource'
       Index = 2
@@ -34,7 +34,7 @@ object MasterDataModule: TMasterDataModule
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-      Size = 31
+      Size = 25
     end
     object TbTmpResourceWorkLoadWorkLoad: TLongintField
       DisplayWidth = 10

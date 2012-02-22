@@ -525,7 +525,7 @@ object ConfigForm: TConfigForm
         Caption = 'Value:'
         ParentColor = False
       end
-      object LbClashThemes: TLabel
+      object LbClashActivitys: TLabel
         Left = 8
         Height = 15
         Top = 36
@@ -661,7 +661,7 @@ object ConfigForm: TConfigForm
         OnExit = CBColResourceRestrictionTypeExit
         TabOrder = 12
       end
-      object EdClashTheme: TEdit
+      object EdClashActivity: TEdit
         Left = 117
         Height = 21
         Top = 32

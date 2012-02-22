@@ -22,7 +22,7 @@ type
     BtTimetableCluster: TToolButton;
     BtTimetableResource: TToolButton;
     BtClashResource: TToolButton;
-    BtClashTheme: TToolButton;
+    BtClashActivity: TToolButton;
     QuClashResourceDetail: TZQuery;
     QuClashResourceDetailIdResource: TLongintField;
     QuClashResourceDetailIdCategory: TLongintField;
@@ -37,10 +37,10 @@ type
     QuClashResourceIdResourceType: TLongintField;
     QuClashResourceNaDay: TStringField;
     QuClashResourceNaHour: TStringField;
-    QuClashTheme: TZQuery;
-    QuClashThemeIdTheme: TLongintField;
-    QuClashThemeNaTheme: TStringField;
-    QuClashThemeDetail: TZQuery;
+    QuClashActivity: TZQuery;
+    QuClashActivityIdTheme: TLongintField;
+    QuClashActivityNaTheme: TStringField;
+    QuClashActivityDetail: TZQuery;
     QuTimetableDetailThemeRestriction: TZQuery;
     QuTimetableDetailThemeRestrictionNaTheme: TStringField;
     QuTimetableDetailThemeRestrictionIdDay: TLongintField;
@@ -86,15 +86,15 @@ type
     DSThemeCutHour: TDataSource;
     QuThemeCutHourNaDay: TStringField;
     QuThemeCutHourNaHour: TStringField;
-    QuClashThemeDetailIdTheme: TLongintField;
-    QuClashThemeDetailIdCategory: TLongintField;
-    QuClashThemeDetailIdParallel: TLongintField;
-    QuClashThemeDetailIdDay: TLongintField;
-    QuClashThemeDetailIdHour: TLongintField;
-    QuClashThemeDetailAbCategory: TStringField;
-    QuClashThemeDetailNaParallel: TStringField;
-    QuClashThemeDetailNaDay: TStringField;
-    QuClashThemeDetailNaHour: TStringField;
+    QuClashActivityDetailIdTheme: TLongintField;
+    QuClashActivityDetailIdCategory: TLongintField;
+    QuClashActivityDetailIdParallel: TLongintField;
+    QuClashActivityDetailIdDay: TLongintField;
+    QuClashActivityDetailIdHour: TLongintField;
+    QuClashActivityDetailAbCategory: TStringField;
+    QuClashActivityDetailNaParallel: TStringField;
+    QuClashActivityDetailNaDay: TStringField;
+    QuClashActivityDetailNaHour: TStringField;
     QuThemeCutHourDetailIdCategory: TLongintField;
     QuThemeCutHourDetailIdParallel: TLongintField;
     QuThemeCutHourDetailIdDay: TLongintField;
@@ -110,7 +110,7 @@ type
     ActTimetableCluster: TAction;
     ActTimetableResource: TAction;
     ActClashResource: TAction;
-    ActClashTheme: TAction;
+    ActClashActivity: TAction;
     ActThemeRestrictionNonSatisfied: TAction;
     ActResourceRestrictionNoRespetada: TAction;
     ActThemeCutDay: TAction;
@@ -127,9 +127,9 @@ type
     QuClashResourceOccupied: TLongintField;
     QuClashResourceClashes: TLongintField;
     QuClashResourceDetailIdTimetable: TLongintField;
-    QuClashThemeIdTimetable: TLongintField;
-    DSClashTheme: TDataSource;
-    QuClashThemeDetailIdTimetable: TLongintField;
+    QuClashActivityIdTimetable: TLongintField;
+    DSClashActivity: TDataSource;
+    QuClashActivityDetailIdTimetable: TLongintField;
     QuThemeCutHourDetailIdTimetable: TLongintField;
     QuClashResourceDetailIdDay: TLongintField;
     QuClashResourceDetailIdHour: TLongintField;
@@ -137,13 +137,13 @@ type
     ActImproveTimeTable: TAction;
     procedure ActTimetableClusterExecute(Sender: TObject);
     procedure ActClashResourceExecute(Sender: TObject);
-    procedure ActClashThemeExecute(Sender: TObject);
+    procedure ActClashActivityExecute(Sender: TObject);
     procedure ActTimetableResourceExecute(Sender: TObject);
     procedure ActThemeRestrictionNonSatisfiedExecute(Sender: TObject);
     procedure ActResourceRestrictionNoRespetadaExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure QuClashResourceAfterScroll(DataSet: TDataSet);
-    procedure QuClashThemeAfterScroll(DataSet: TDataSet);
+    procedure QuClashActivityAfterScroll(DataSet: TDataSet);
     procedure ActThemeCutDayExecute(Sender: TObject);
     procedure ActThemeCutHourExecute(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
@@ -153,7 +153,7 @@ type
     procedure ActImproveTimeTableExecute(Sender: TObject);
   private
     { Private declarations }
-    FClashThemeForm, FThemeCutHourForm,
+    FClashActivityForm, FThemeCutHourForm,
       FThemeCutDayForm, FClashResourceForm: TMasterDetailEditorForm;
     FThemeRestrictionNonSatisfiedForm,
       FResourceRestrictionNoRespetadaForm: TSingleEditorForm;
@@ -227,19 +227,19 @@ begin
   end
 end;
 
-procedure TTimetableForm.ActClashThemeExecute(Sender: TObject);
+procedure TTimetableForm.ActClashActivityExecute(Sender: TObject);
 begin
   inherited;
   with SourceDataModule do
   begin
     if TMasterDetailEditorForm.ToggleMasterDetailEditor
-      (Self, FClashThemeForm, ConfigStorage, ActClashTheme, QuClashTheme,
-      QuClashThemeDetail) then
+      (Self, FClashActivityForm, ConfigStorage, ActClashActivity, QuClashActivity,
+      QuClashActivityDetail) then
     begin
-      QuClashTheme.Close;
-      QuClashTheme.Open;
-      QuClashThemeDetail.Close;
-      QuClashThemeDetail.Open;
+      QuClashActivity.Close;
+      QuClashActivity.Open;
+      QuClashActivityDetail.Close;
+      QuClashActivityDetail.Open;
     end;
   end;
 end;
@@ -326,11 +326,11 @@ begin
   QuClashResourceDetailAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
   QuClashResourceDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuClashResourceDetailNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
-  QuClashThemeNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
-  QuClashThemeDetailAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
-  QuClashThemeDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
-  QuClashThemeDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuClashThemeDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
+  QuClashActivityNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
+  QuClashActivityDetailAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
+  QuClashActivityDetailNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
+  QuClashActivityDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
+  QuClashActivityDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuTimetableDetailThemeRestrictionNaThemeRestrictionType.DisplayLabel
     := SFlThemeRestriction_IdThemeRestrictionType;
   QuTimetableDetailThemeRestrictionNaTheme.DisplayLabel
@@ -378,11 +378,11 @@ begin
     QuClashResourceIdResource.Value]);
 end;
 
-procedure TTimetableForm.QuClashThemeAfterScroll(DataSet: TDataSet);
+procedure TTimetableForm.QuClashActivityAfterScroll(DataSet: TDataSet);
 begin
   inherited;
-  QuClashThemeDetail.Filter := Format('IdTheme=%d',
-    [QuClashThemeIdTheme.Value]);
+  QuClashActivityDetail.Filter := Format('IdTheme=%d',
+    [QuClashActivityIdTheme.Value]);
 end;
 
 procedure TTimetableForm.ActThemeCutDayExecute(Sender: TObject);

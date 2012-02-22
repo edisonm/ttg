@@ -17,7 +17,7 @@ resourcestring
   SBreakTimetableResource = 'Broken TT. Resources';
   SBrokenSession = 'Broken Sessions';
   SChangesWillBeLostWarning = 'Changes will be lost, are you sure?';
-  SClashTheme = 'Clash of Themes';
+  SClashActivity = 'Clash of Themes';
   SClashResource = 'Clash of Resources';
   SClashes = 'Clashes';
   SCluster = 'Cluster';

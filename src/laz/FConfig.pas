@@ -17,7 +17,7 @@ type
   TConfigForm = class(TForm)
     BBOk: TBitBtn;
     CBApplyDoubleDownHill: TCheckBox;
-    EdClashTheme: TEdit;
+    EdClashActivity: TEdit;
     EdCrossProbability: TEdit;
     EdMutationProbability: TEdit;
     EdReparationProbability: TEdit;
@@ -26,7 +26,7 @@ type
     LbMutationProbability: TLabel;
     LbReparationProbability: TLabel;
     Label13: TLabel;
-    LbClashThemes: TLabel;
+    LbClashActivitys: TLabel;
     LbDownhillLevels: TLabel;
     LbPollinationProbability: TLabel;
     LbPopulationSize: TLabel;
@@ -177,7 +177,7 @@ begin
       CBRandomize.Checked := Randomize;
       speSeed.Value := Seed;
       speNumIterations.Value := RefreshInterval;
-      EdClashTheme.Text := FloatToStr(ClashTheme);
+      EdClashActivity.Text := FloatToStr(ClashActivity);
       EdBreakTimetableResource.Text := FloatToStr(BreakTimetableResource);
       EdEmptyHour.Text := FloatToStr(OutOfPositionEmptyHour);
       EdBrokenSession.Text := FloatToStr(BrokenSession);
@@ -210,7 +210,7 @@ begin
       Randomize := CBRandomize.Checked;
       Seed := speSeed.Value;
       RefreshInterval := speNumIterations.Value;
-      ClashTheme := StrToInt(EdClashTheme.Text);
+      ClashActivity := StrToInt(EdClashActivity.Text);
       BreakTimetableResource := StrToInt(EdBreakTimetableResource.Text);
       OutOfPositionEmptyHour := StrToInt(EdEmptyHour.Text);
       BrokenSession := StrToInt(EdBrokenSession.Text);

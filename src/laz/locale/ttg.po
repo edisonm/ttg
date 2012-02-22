@@ -510,8 +510,8 @@ msgctxt "tconfigform.lbresourcerestrictions.caption"
 msgid "Resource Restrictions:"
 msgstr ""
 
-#: tconfigform.lbclashthemes.caption
-msgctxt "tconfigform.lbclashthemes.caption"
+#: tconfigform.lbclashactivitys.caption
+msgctxt "tconfigform.lbclashactivitys.caption"
 msgid "Clash Themes:"
 msgstr ""
 
@@ -1576,11 +1576,11 @@ msgctxt "TTIMETABLEFORM.ACTCLASHRESOURCE.HINT"
 msgid "Clashes of teachers|Clashes of teachers"
 msgstr ""
 
-#: ttimetableform.actclashtheme.caption
+#: ttimetableform.actclashactivity.caption
 msgid "Clashes of subjects"
 msgstr ""
 
-#: ttimetableform.actclashtheme.hint
+#: ttimetableform.actclashactivity.hint
 msgid "Clashes of subjects|Clashes of subjects"
 msgstr ""
 
@@ -1732,8 +1732,8 @@ msgctxt "uttgconsts.sclashresource"
 msgid "Clash of Resources"
 msgstr ""
 
-#: uttgconsts.sclashtheme
-msgctxt "uttgconsts.sclashtheme"
+#: uttgconsts.sclashactivity
+msgctxt "uttgconsts.sclashactivity"
 msgid "Clash of Themes"
 msgstr ""
 

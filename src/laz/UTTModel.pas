@@ -41,7 +41,7 @@ type
 
   TTimetableModel = class(TModel)
   private
-    FClashThemeValue: Integer;
+    FClashActivityValue: Integer;
     FOutOfPositionEmptyHourValue: Integer;
     FBrokenSessionValue: Integer;
     FBreakTimetableResourceValue: Integer;
@@ -102,7 +102,7 @@ type
     FCategoryParallelToCluster: TDynamicIntegerArrayArray;
     FActivityToResources: TDynamicIntegerArrayArray;
     FClusterThemeToActivity: TDynamicIntegerArrayArray;
-    FClusterThemeCount: TDynamicIntegerArrayArray;
+    FActivityDuration: TDynamicIntegerArray;
     FTimetableDetailPattern: TDynamicIntegerArrayArray;
     FActivityToSessions: TDynamicIntegerArrayArray;
     FResourcePeriodToResourceRestrictionType: TDynamicIntegerArrayArray;
@@ -116,10 +116,10 @@ type
     property TimetableDetailPattern: TDynamicIntegerArrayArray read FTimetableDetailPattern;
     function GetElitistCount: Integer; override;
   public
-    procedure Configure(AClashThemeValue, ABreakTimetableResourceValue,
+    procedure Configure(AClashActivityValue, ABreakTimetableResourceValue,
                         AOutOfPositionEmptyHourValue, ABrokenSessionValue,
                         ANonScatteredActivityValue: Integer);
-    constructor Create(AClashThemeValue, ABreakTimetableResourceValue,
+    constructor Create(AClashActivityValue, ABreakTimetableResourceValue,
                        AOutOfPositionEmptyHourValue, ABrokenSessionValue,
                        ANonScatteredActivityValue: Integer);
     destructor Destroy; override;
@@ -127,7 +127,7 @@ type
     function NewIndividual: TIndividual; override;
     property PeriodCount: Integer read FPeriodCount;
     property ClusterCount: Integer read FClusterCount;
-    property ClashThemeValue: Integer read FClashThemeValue;
+    property ClashActivityValue: Integer read FClashActivityValue;
     property BreakTimetableResourceValue: Integer read FBreakTimetableResourceValue;
     property OutOfPositionEmptyHourValue: Integer read FOutOfPositionEmptyHourValue;
     property BrokenSessionValue: Integer read FBrokenSessionValue;
@@ -179,15 +179,15 @@ type
   protected
     FResourcePeriodCount: TDynamicIntegerArrayArray;
     FThemePeriodCount: TDynamicIntegerArrayArray;
-    FClusterDayThemeCount: TDynamicIntegerArrayArrayArray;
-    FClusterDayThemeAccumulated: TDynamicIntegerArrayArrayArray;
+    FDayActivityCount: TDynamicIntegerArrayArray;
+    FDayActivityAccumulated: TDynamicIntegerArrayArray;
     FThemeRestrictionTypeToThemeCount: TDynamicIntegerArray;
     FClashResourceType: TDynamicIntegerArray;
     FResourceRestrictionTypeToResourceCount: TDynamicIntegerArray;
     FDayResourceMinHour: TDynamicIntegerArrayArray;
     FDayResourceMaxHour: TDynamicIntegerArrayArray;
     FDayResourceEmptyHourCount: TDynamicIntegerArrayArray;
-    FClashTheme: Integer;
+    FClashActivity: Integer;
     FBreakTimetableResource: Integer;
     FOutOfPositionEmptyHour: Integer;
     FNonScatteredActivity: Integer;
@@ -204,7 +204,7 @@ type
     procedure CrossCluster(Timetable2: TTimetable; ACluster: Integer);
     procedure DeltaValues(Delta, ACluster, Period1, Period2: Integer);
     function DeltaBrokenSession(ACluster, Period1, Period2: Integer): Integer;
-    function GetClashThemeValue: Integer;
+    function GetClashActivityValue: Integer;
     function GetNonScatteredActivityValue: Integer;
     function GetOutOfPositionEmptyHourValue: Integer;
     function GetClashResourceValue: Integer;
@@ -249,9 +249,9 @@ type
     property ClashResourceType: TDynamicIntegerArray read FTablingInfo.FClashResourceType;
     property NonScatteredActivity: Integer read FTablingInfo.FNonScatteredActivity;
     property BrokenSession: Integer read FTablingInfo.FBrokenSession;
-    property ClashTheme: Integer read FTablingInfo.FClashTheme;
+    property ClashActivity: Integer read FTablingInfo.FClashActivity;
     property ClashResourceValue: Integer read GetClashResourceValue;
-    property ClashThemeValue: Integer read GetClashThemeValue;
+    property ClashActivityValue: Integer read GetClashActivityValue;
     property BreakTimetableResourceValue: Integer read GetBreakTimetableResourceValue;
     property OutOfPositionEmptyHourValue: Integer read GetOutOfPositionEmptyHourValue;
     property BrokenSessionValue: Integer read GetBrokenSessionValue;
@@ -327,7 +327,7 @@ implementation
 uses
   SysUtils, ZSysUtils, MTProcs, DSource, USortAlgs, UTTGConsts, dsourcebaseconsts;
 
-constructor TTimetableModel.Create(AClashThemeValue,
+constructor TTimetableModel.Create(AClashActivityValue,
                                    ABreakTimetableResourceValue,
                                    AOutOfPositionEmptyHourValue,
                                    ABrokenSessionValue,
@@ -653,17 +653,17 @@ var
       SetLength(FActivityToCluster, FActivityCount);
       SetLength(FActivityToSessions, FActivityCount);
       SetLength(FActivityToTheme, FActivityCount);
-      SetLength(FClusterThemeCount, FClusterCount, FThemeCount);
+      SetLength(FActivityDuration, FActivityCount);
       SetLength(FClusterThemeToActivity, FClusterCount, FThemeCount);
       for Cluster := 0 to FClusterCount - 1 do
         for Theme := 0 to FThemeCount - 1 do
         begin
-          FClusterThemeCount[Cluster, Theme] := 0;
           FClusterThemeToActivity[Cluster, Theme] := -1;
         end;
       Session2 := 0;
       for Activity := 0 to RecordCount - 1 do
       begin
+        FActivityDuration[Activity] := 0;
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
@@ -679,7 +679,7 @@ var
         begin
           VSessionToDuration[Session2] := StrToInt(ExtractString(Composition, VPos, '.'));
           VSessionToActivity[Session2] := Activity;
-          Inc(FClusterThemeCount[Cluster, Theme]);
+          Inc(FActivityDuration[Activity]);
           // Inc(t, VSessionToDuration[Session2]);
           Inc(Session2);
         end;
@@ -837,7 +837,7 @@ begin
   inherited Create;
   with SourceDataModule do
   begin
-    Configure(AClashThemeValue,
+    Configure(AClashActivityValue,
       ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue,
       ABrokenSessionValue, ANonScatteredActivityValue);
     Load(TbResourceType, 'IdResourceType', FMinIdResourceType,
@@ -882,11 +882,11 @@ begin
   end;
 end;
 
-procedure TTimetableModel.Configure(AClashThemeValue,
+procedure TTimetableModel.Configure(AClashActivityValue,
   ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue,
   ABrokenSessionValue, ANonScatteredActivityValue: Integer);
 begin
-  FClashThemeValue := AClashThemeValue;
+  FClashActivityValue := AClashActivityValue;
   FBreakTimetableResourceValue := ABreakTimetableResourceValue;
   FOutOfPositionEmptyHourValue := AOutOfPositionEmptyHourValue;
   FBrokenSessionValue := ABrokenSessionValue;
@@ -910,7 +910,7 @@ begin
         '  %0:-29s %8.2f'#13#10 +
         '  %0:-29s %8.2f'#13#10 +
         '  %0:-29s %8.2f', [SWeights,
-          SClashTheme              + ':', ClashThemeValue,
+          SClashActivity              + ':', ClashActivityValue,
           SBreakTimetableResource  + ':', BreakTimetableResourceValue,
           SOutOfPositionEmptyHour  + ':', OutOfPositionEmptyHourValue,
           SBrokenSession           + ':', BrokenSessionValue,
@@ -1019,8 +1019,8 @@ begin
     begin
       SetLength(FThemePeriodCount, FThemeCount, FPeriodCount);
       SetLength(FResourcePeriodCount, FResourceCount, FPeriodCount);
-      SetLength(FClusterDayThemeCount, FClusterCount, FDayCount, FThemeCount);
-      SetLength(FClusterDayThemeAccumulated, FClusterCount, FDayCount, FThemeCount);
+      SetLength(FDayActivityCount, FDayCount, FActivityCount);
+      SetLength(FDayActivityAccumulated, FDayCount, FActivityCount);
       SetLength(FDayResourceMinHour, FDayCount, FResourceCount);
       SetLength(FDayResourceMaxHour, FDayCount, FResourceCount);
       SetLength(FDayResourceEmptyHourCount, FDayCount, FResourceCount);
@@ -1214,24 +1214,24 @@ begin
       Duration := FSessionToDuration[Session];
       if Session >= 0 then
       begin
-        Theme := FSessionToTheme[Session];
+        Activity := FSessionToActivity[Session];
         Day1 := FPeriodToDay[Period];
         Day2 := FPeriodToDay[Period + Duration - 1];
         for Day := Day1 to Day2 do
         begin
-          if FClusterDayThemeCount[ACluster, Day, Theme] > Limit then
-            Inc(FClashTheme, Delta);
-          Inc(FClusterDayThemeCount[ACluster, Day, Theme], Delta);
+          if FDayActivityCount[Day, Activity] > Limit then
+            Inc(FClashActivity, Delta);
+          Inc(FDayActivityCount[Day, Activity], Delta);
         end;
-        DDay := FDayCount div FClusterThemeCount[ACluster, Theme];
+        DDay := FDayCount div FActivityDuration[Activity];
         for Day2 := Day1 to Day1 + DDay - 1 do
         begin
           Day := Day2 mod (FDayCount + 1);
           if Day <> FDayCount then
           begin
-            if FClusterDayThemeAccumulated[ACluster, Day, Theme] > Limit then
+            if FDayActivityAccumulated[Day, Activity] > Limit then
               Inc(FNonScatteredActivity, Delta);
-            Inc(FClusterDayThemeAccumulated[ACluster, Day, Theme], Delta);
+            Inc(FDayActivityAccumulated[Day, Activity], Delta);
           end;
         end;
       end;
@@ -1249,7 +1249,7 @@ begin
           if Activity = FSessionToActivity[Session] then
           begin
             if FClusterPeriodToSession[Cluster1, Period] >= Limit then
-              Inc(FClashTheme, Delta);
+              Inc(FClashActivity, Delta);
           end;
         end;
       end;
@@ -1277,7 +1277,7 @@ var
   Period: Integer;
   {$IFDEF DEBUG}
   Value1, Value2: Integer;
-  ClashTheme2: Integer;
+  ClashActivity2: Integer;
   BreakTimetableResource2: Integer;
   OutOfPositionEmptyHour2: Integer;
   ThemeRestrictionValue2: Integer;
@@ -1318,7 +1318,7 @@ begin
     end;
     FValue := GetValue;
     {$IFDEF DEBUG}
-    ClashTheme2 := FClashTheme;
+    ClashActivity2 := FClashActivity;
     OutOfPositionEmptyHour2 := FOutOfPositionEmptyHour;
     NonScatteredActivity2 := FNonScatteredActivity;
     ThemeRestrictionValue2 := ThemeRestrictionValue;
@@ -1332,9 +1332,9 @@ begin
       raise Exception.CreateFmt(
       'Value1                   %f - %f'#13#10 +
       'Value2                   %f - %f'#13#10 +
-      'ClashTheme               %d - %d'#13#10 +
+      'ClashActivity            %d - %d'#13#10 +
       'OutOfPositionEmptyHour   %d - %d'#13#10 +
-      'NonScatteredActivity        %d - %d'#13#10 +
+      'NonScatteredActivity     %d - %d'#13#10 +
       'ThemeRestrictionValue    %f - %f'#13#10 +
       'BreakTimetableResource   %d - %d'#13#10 +
       'ClashResourceValue       %f - %f'#13#10 +
@@ -1343,7 +1343,7 @@ begin
       [
         Result, Value1,
         FValue, Value2,
-        FClashTheme, ClashTheme2,
+        FClashActivity, ClashActivity2,
         FOutOfPositionEmptyHour, OutOfPositionEmptyHour2,
         FNonScatteredActivity, NonScatteredActivity2,
         ThemeRestrictionValue, ThemeRestrictionValue2,
@@ -1405,8 +1405,8 @@ begin
     Add('-------------------------------------------------------------------');
     Add(Format('%0:-28s %12s %12s %12s', [SDetail, SCount, SWeight, SValue]));
     Add('-------------------------------------------------------------------');
-    Add(Format(SRowFormat, [SClashTheme + ':', FClashTheme,
-      TTimetableModel(Model).ClashThemeValue, ClashThemeValue]));
+    Add(Format(SRowFormat, [SClashActivity + ':', FClashActivity,
+      TTimetableModel(Model).ClashActivityValue, ClashActivityValue]));
     Add(Format(SRowFormat, [SBreakTimetableResource + ':', BreakTimetableResource,
       TTimetableModel(Model).BreakTimetableResourceValue, BreakTimetableResourceValue]));
     Add(Format(SRowFormat, [SOutOfPositionEmptyHour + ':', OutOfPositionEmptyHour,
@@ -1527,9 +1527,9 @@ begin
   Result := TTimetableModel(Model).NonScatteredActivityValue * NonScatteredActivity;
 end;
 
-function TTimetable.GetClashThemeValue: Integer;
+function TTimetable.GetClashActivityValue: Integer;
 begin
-  Result := TTimetableModel(Model).ClashThemeValue * TablingInfo.FClashTheme;
+  Result := TTimetableModel(Model).ClashActivityValue * TablingInfo.FClashActivity;
 end;
 
 
@@ -1544,7 +1544,7 @@ begin
   with TablingInfo do
     Result :=
       ClashResourceValue +
-      ClashThemeValue +
+      ClashActivityValue +
       OutOfPositionEmptyHourValue +
       NonScatteredActivityValue +
       ThemeRestrictionValue +
@@ -1576,7 +1576,7 @@ begin
     for Cluster := 0 to FClusterCount - 1 do
       Move(ATimetable.ClusterPeriodToSession[Cluster, 0],
         ClusterPeriodToSession[Cluster, 0], FPeriodCount * SizeOf(Integer));
-    FClashTheme := ATimetable.TablingInfo.FClashTheme;
+    FClashActivity := ATimetable.TablingInfo.FClashActivity;
     FBreakTimetableResource := ATimetable.TablingInfo.FBreakTimetableResource;
     FOutOfPositionEmptyHour := ATimetable.TablingInfo.FOutOfPositionEmptyHour;
     FBrokenSession := ATimetable.TablingInfo.FBrokenSession;
@@ -1610,16 +1610,15 @@ begin
       Move(ATimetable.TablingInfo.FResourcePeriodCount[Resource, 0],
         TablingInfo.FResourcePeriodCount[Resource, 0],
         FPeriodCount * SizeOf(Integer));
-    for Cluster := 0 to FClusterCount - 1 do
-      for Day := 0 to FDayCount - 1 do
-      begin
-        Move(ATimetable.TablingInfo.FClusterDayThemeCount[Cluster, Day, 0],
-          TablingInfo.FClusterDayThemeCount[Cluster, Day, 0],
-          FThemeCount * SizeOf(Integer));
-        Move(ATimetable.TablingInfo.FClusterDayThemeAccumulated[Cluster, Day, 0],
-          TablingInfo.FClusterDayThemeAccumulated[Cluster, Day, 0],
-          FThemeCount * SizeOf(Integer));
-      end;
+    for Day := 0 to FDayCount - 1 do
+    begin
+      Move(ATimetable.TablingInfo.FDayActivityCount[Day, 0],
+           TablingInfo.FDayActivityCount[Day, 0],
+           FActivityCount * SizeOf(Integer));
+      Move(ATimetable.TablingInfo.FDayActivityAccumulated[Day, 0],
+           TablingInfo.FDayActivityAccumulated[Day, 0],
+           FActivityCount * SizeOf(Integer));
+    end;
   end;
 end;
 
@@ -1903,11 +1902,11 @@ end;
 procedure TTimetable.Reset;
 var
   Resource, ResourceType, Period, Theme, ThemeRestrictionType,
-    ResourceRestrictionType, Cluster, Day: Integer;
+    ResourceRestrictionType, Day, Activity: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
-    FClashTheme := 0;
+    FClashActivity := 0;
     FOutOfPositionEmptyHour := 0;
     FBreakTimetableResource := 0;
     FBrokenSession := 0;
@@ -1932,13 +1931,14 @@ begin
       for Theme := 0 to FThemeCount - 1 do
         FThemePeriodCount[Theme, Period] := 0;
     end;
-    for Cluster := 0 to FClusterCount - 1 do
-      for Day := 0 to FDayCount - 1 do
-        for Theme := 0 to FThemeCount - 1 do
-        begin
-          FClusterDayThemeCount[Cluster, Day, Theme] := 0;
-          FClusterDayThemeAccumulated[Cluster, Day, Theme] := 0;
-        end;
+    for Day := 0 to FDayCount - 1 do
+    begin
+      for Activity := 0 to FActivityCount - 1 do
+      begin
+        FDayActivityAccumulated[Day, Activity] := 0;
+        FDayActivityCount[Day, Activity] := 0;
+      end;
+    end;
   end;
 end;
 

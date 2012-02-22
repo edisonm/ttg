@@ -38,8 +38,8 @@ type
     procedure SetSeed(Value: Integer);
     function GetRefreshInterval: Integer;
     procedure SetRefreshInterval(Value: Integer);
-    function GetClashTheme: Integer;
-    procedure SetClashTheme(Value: Integer);
+    function GetClashActivity: Integer;
+    procedure SetClashActivity(Value: Integer);
     function GetBreakTimetableResource: Integer;
     procedure SetBreakTimetableResource(Value: Integer);
     function GetOutOfPositionEmptyHour: Integer;
@@ -80,7 +80,7 @@ type
     property Randomize: Boolean read GetRandomize write SetRandomize;
     property Seed: Integer read GetSeed write SetSeed;
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
-    property ClashTheme: Integer read GetClashTheme write SetClashTheme;
+    property ClashActivity: Integer read GetClashActivity write SetClashActivity;
     property BreakTimetableResource: Integer read GetBreakTimetableResource write SetBreakTimetableResource;
     property OutOfPositionEmptyHour: Integer read GetOutOfPositionEmptyHour write SetOutOfPositionEmptyHour;
     property BrokenSession: Integer read GetBrokenSession write SetBrokenSession;
@@ -219,14 +219,14 @@ begin
   Integers['NumIterations'] := Value;
 end;
 
-function TTTGConfig.GetClashTheme: Integer;
+function TTTGConfig.GetClashActivity: Integer;
 begin
-  Result := Integers['ClashTheme'];
+  Result := Integers['ClashActivity'];
 end;
 
-procedure TTTGConfig.SetClashTheme(Value: Integer);
+procedure TTTGConfig.SetClashActivity(Value: Integer);
 begin
-  Integers['ClashTheme'] := Value;
+  Integers['ClashActivity'] := Value;
 end;
 
 function TTTGConfig.GetBreakTimetableResource: Integer;
@@ -373,7 +373,7 @@ begin
   Randomize := True;
   Self.Seed := 1;
   RefreshInterval := 1;
-  ClashTheme := 200;
+  ClashActivity := 200;
   BreakTimetableResource := 50;
   OutOfPositionEmptyHour := 100;
   BrokenSession := 150;
