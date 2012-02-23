@@ -637,7 +637,6 @@ var
     Theme, Category, Parallel, Session1, Activity, Cluster,
       Session2, Session, VPos: Integer;
     VFieldTheme, VFieldCategory, VFieldParallel, VFieldComposition: TField;
-    VSessionToDuration, VSessionToActivity: array [0 .. 16383] of Integer;
     Composition: string;
   begin
     with SourceDataModule.TbActivity do
@@ -649,7 +648,6 @@ var
       VFieldParallel := FindField('IdParallel');
       VFieldComposition := FindField('Composition');
       FActivityCount := RecordCount;
-      // SetLength(FActivityAAsignatura, RecordCount);
       SetLength(FActivityToCluster, FActivityCount);
       SetLength(FActivityToSessions, FActivityCount);
       SetLength(FActivityToTheme, FActivityCount);
@@ -674,13 +672,13 @@ var
         Composition := VFieldComposition.AsString;
         VPos := 1;
         Session1 := Session2;
-        // t := 0;
         while VPos <= Length(Composition) do
         begin
-          VSessionToDuration[Session2] := StrToInt(ExtractString(Composition, VPos, '.'));
-          VSessionToActivity[Session2] := Activity;
+          // SetLength(FSessionToDuration, Session2 + 1);
+          SetLength(FSessionToActivity, Session2 + 1);
+          FSessionToDuration[Session2] := StrToInt(ExtractString(Composition, VPos, '.'));
+          FSessionToActivity[Session2] := Activity;
           Inc(FActivityDuration[Activity]);
-          // Inc(t, VSessionToDuration[Session2]);
           Inc(Session2);
         end;
         SetLength(FActivityToSessions[Activity], Session2 - Session1);
@@ -688,15 +686,10 @@ var
         begin
           FActivityToSessions[Activity, Session - Session1] := Session;
         end;
-        // FClusterToDuration[Cluster] := FClusterToDuration[Cluster] + t;
         Next;
       end;
-      SetLength(FSessionToActivity, Session2);
       SetLength(FSessionToTheme, Session2);
-      Move(VSessionToDuration[0], FSessionToDuration[0], Session2 * SizeOf(Integer));
       FSessionToDuration[-1] := 1;
-      Move(VSessionToActivity[0], FSessionToActivity[0],
-        Session2 * SizeOf(Integer));
       for Session := 0 to Session2 - 1 do
       begin
         Activity := FSessionToActivity[Session];
