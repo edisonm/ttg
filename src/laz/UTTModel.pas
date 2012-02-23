@@ -102,7 +102,6 @@ type
     FCategoryParallelToCluster: TDynamicIntegerArrayArray;
     FActivityToResources: TDynamicIntegerArrayArray;
     FClusterThemeToActivity: TDynamicIntegerArrayArray;
-    FActivityDuration: TDynamicIntegerArray;
     FTimetableDetailPattern: TDynamicIntegerArrayArray;
     FActivityToSessions: TDynamicIntegerArrayArray;
     FResourcePeriodToResourceRestrictionType: TDynamicIntegerArrayArray;
@@ -651,7 +650,6 @@ var
       SetLength(FActivityToCluster, FActivityCount);
       SetLength(FActivityToSessions, FActivityCount);
       SetLength(FActivityToTheme, FActivityCount);
-      SetLength(FActivityDuration, FActivityCount);
       SetLength(FClusterThemeToActivity, FClusterCount, FThemeCount);
       for Cluster := 0 to FClusterCount - 1 do
         for Theme := 0 to FThemeCount - 1 do
@@ -661,7 +659,6 @@ var
       Session2 := 0;
       for Activity := 0 to RecordCount - 1 do
       begin
-        FActivityDuration[Activity] := 0;
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
@@ -675,15 +672,14 @@ var
         while VPos <= Length(Composition) do
         begin
           // SetLength(FSessionToDuration, Session2 + 1);
-          SetLength(FSessionToActivity, Session2 + 1);
           FSessionToDuration[Session2] := StrToInt(ExtractString(Composition, VPos, '.'));
-          FSessionToActivity[Session2] := Activity;
-          Inc(FActivityDuration[Activity]);
           Inc(Session2);
         end;
+        SetLength(FSessionToActivity, Session2);
         SetLength(FActivityToSessions[Activity], Session2 - Session1);
         for Session := Session1 to Session2 - 1 do
         begin
+          FSessionToActivity[Session] := Activity;
           FActivityToSessions[Activity, Session - Session1] := Session;
         end;
         Next;
@@ -1216,7 +1212,7 @@ begin
             Inc(FClashActivity, Delta);
           Inc(FDayActivityCount[Day, Activity], Delta);
         end;
-        DDay := FDayCount div FActivityDuration[Activity];
+        DDay := FDayCount div Length(FActivityToSessions[Activity]);
         for Day2 := Day1 to Day1 + DDay - 1 do
         begin
           Day := Day2 mod (FDayCount + 1);
