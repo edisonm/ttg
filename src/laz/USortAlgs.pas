@@ -52,7 +52,7 @@ type
   generic TSortAlgorithm<K,T> = class
     class procedure Quicksort(var KeyList: array of K; var ValueList: array of T; min, max: Integer); overload;
     class procedure BubbleSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer); overload;
-    procedure Selectionsort(var KeyList: array of K; var ValueList: array of T; min, max: Integer);
+    procedure SelectionSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer);
     procedure PartialSort(var KeyList: array of K; var ValueList: array of T; min, max, med: Integer);
 
     class procedure Quicksort(var KeyList: array of K; min, max: Integer); overload;
@@ -205,7 +205,7 @@ end;
 
 // Run selectionsort.
 
-procedure TSortAlgorithm.Selectionsort(var KeyList: array of K;
+procedure TSortAlgorithm.SelectionSort(var KeyList: array of K;
                                        var ValueList: array of T;
                                        min, max: Integer);
 var
