@@ -71,6 +71,8 @@ type
     FSessionToTheme: TDynamicIntegerArray;
     FClusterToCategory: TDynamicIntegerArray;
     FResourceToNumber: TDynamicIntegerArray;
+    FResourceToName: TDynamicStringArray;
+    FResourceToFreedomDegrees: TDynamicDoubleArray;
     FThemeRestrictionToTheme: TDynamicIntegerArray;
     FThemeRestrictionToPeriod: TDynamicIntegerArray;
     FResourceToResourceType: TDynamicIntegerArray;
@@ -101,6 +103,7 @@ type
     FDayHourToPeriod: TDynamicIntegerArrayArray;
     FCategoryParallelToCluster: TDynamicIntegerArrayArray;
     FActivityToResources: TDynamicIntegerArrayArray;
+    FResourceToActivities: TDynamicIntegerArrayArray;
     FClusterThemeToActivity: TDynamicIntegerArrayArray;
     FTimetableDetailPattern: TDynamicIntegerArrayArray;
     FActivityToSessions: TDynamicIntegerArrayArray;
@@ -324,7 +327,7 @@ type
 implementation
 
 uses
-  SysUtils, ZSysUtils, MTProcs, DSource, USortAlgs, UTTGConsts, dsourcebaseconsts;
+  SysUtils, ZSysUtils, MTProcs, DSource, USortAlgs, UTTGConsts, DSourceBaseConsts;
 
 constructor TTimetableModel.Create(AClashActivityValue,
                                    ABreakTimetableResourceValue,
@@ -508,7 +511,7 @@ var
   procedure LoadResource;
   var
     Resource: Integer;
-    FieldResourceType, FieldResourceNumber: TField;
+    FieldResourceType, FieldResourceNumber, FieldResourceName: TField;
   begin
     with SourceDataModule.TbResource do
     begin
@@ -516,13 +519,16 @@ var
       First;
       FieldResourceType := FindField('IdResourceType');
       FieldResourceNumber := FindField('NumResource');
+      FieldResourceName := FindField('NaResource');
       SetLength(FResourceToResourceType, FResourceCount);
       SetLength(FResourceToNumber, FResourceCount);
+      SetLength(FResourceToName, FResourceCount);
       for Resource := 0 to FResourceCount - 1 do
       begin
         FResourceToResourceType[Resource] :=
           FIdResourceTypeToResourceType[FieldResourceType.AsInteger - FMinIdResourceType];
         FResourceToNumber[Resource] := FieldResourceNumber.AsInteger;
+        FResourceToName[Resource] := FieldResourceName.AsString;
         Next;
       end;
       First;
@@ -706,6 +712,7 @@ var
       First;
       RequirementCount := RecordCount;
       SetLength(FActivityToResources, FActivityCount, 0);
+      SetLength(FResourceToActivities, FResourceCount, 0);
       SetLength(FActivityResourceCount, FActivityCount, FResourceCount);
       for Activity := 0 to FActivityCount - 1 do
         for Resource := 0 to FResourceCount - 1 do
@@ -721,11 +728,18 @@ var
         Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
         Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
         Cluster := FCategoryParallelToCluster[Category, Parallel];
+        
         Activity := FClusterThemeToActivity[Cluster, Theme];
         Resource := FIdResourceToResource[VFieldResource.AsInteger - FMinIdResource];
+        
         Counter := Length(FActivityToResources[Activity]);
         SetLength(FActivityToResources[Activity], Counter + 1);
         FActivityToResources[Activity, Counter] := Resource;
+        
+        Counter := Length(FResourceToActivities[Resource]);
+        SetLength(FResourceToActivities[Resource], Counter + 1);
+        FResourceToActivities[Resource, Counter] := Activity;
+        
         FActivityResourceCount[Activity, Resource] := VFieldNumRequirement.AsInteger;
         Next;
       end;
@@ -769,6 +783,81 @@ var
         Next;
       end;
       First;
+    end;
+  end;
+  procedure LoadTimetableDetailPattern2;
+    {
+    // The number of possible combinations of Pieces in Positions,
+    // considering that no more than Max Pieces can be in one position
+    function Combinatory(Positions, Pieces, Max: Integer): Double;
+    var
+      k: Integer;
+      f: Double;
+    begin
+      if Pieces = 0 then
+        Result := 1
+      else if Positions = 0 then
+        Result := 0
+      else
+      begin
+        Result := 0;
+        f := 1;
+        for k := 0 to Max do
+        begin
+          Inc(Result, f * Combinatory(Positions - 1, Pieces - k, Max));
+          f := f * (Pieces - K) / (k + 1);
+        end;
+      end;
+    end;
+    }
+    //ff[p,d,k]:=if d <= k then p^k else p*ff[p,d-1,k]-p!/(p-d+k)!;
+    //g[p,d]:=if d = 0 then 1 else if d = 1 then p else if p = 0 then 0 else g[p-1,d] + d*g[p-1,d-1]+d*(d-1)/2*g[p-1,d-2];
+  var
+    Number, SessionNumber, Rest, Duration, Activity, Count,
+    Resource, ResourceActivity, ActivitySession: Integer;
+    FreedomDegrees: Double; // Logaritmic to prevent overfloat
+  begin
+    {FSessionToDay
+     FSessionToHour}
+    SetLength(FResourceToFreedomDegrees, FResourceCount);
+    for Resource := 0 to FResourceCount -1 do
+    begin
+      FreedomDegrees := 0;
+      SessionNumber := 0;
+      Duration := 0;
+      for ResourceActivity := 0 to High(FResourceToActivities[Resource]) do
+      begin
+        Activity := FResourceToActivities[Resource, ResourceActivity];
+        // Upper bound, not exact due to that, for example, there is
+        // not overlapping between session of the same activity:
+        Number := FResourceToNumber[Resource] * FPeriodCount;
+        {
+        for Duration := 1 to FActivityToDuration[Activity] do
+        begin
+          FreedomDegrees := FreedomDegrees * (Number - Load);
+          Inc(Load);
+          FreedomDegrees := (FreedomDegrees * Load) / Duration;
+         end;
+         }
+        for ActivitySession := 1 to Length(FActivityToSessions[Activity]) do
+        begin
+          Inc(SessionNumber);
+          Inc(Duration, FSessionToDuration[ActivitySession]);
+          FreedomDegrees := FreedomDegrees + Ln(SessionNumber/ActivitySession);
+        end;
+      end;
+      Rest := Number - Duration;
+      if Rest < 0 then
+        raise Exception.CreateFmt(SResourceOverflow, [FResourceToName[Resource]]);
+      for Count := 1 to Rest do
+      begin
+        FreedomDegrees := FreedomDegrees + Ln(1 + SessionNumber/Count);
+      end;
+      // FreedomDegrees := Combinatory(FPeriodCount, Duration, FResourceToNumber[Resource]);
+      FResourceToFreedomDegrees[Resource] := FreedomDegrees;
+      WriteLn(Format('Resource %d, FreedomDegrees=%g',
+                     [FResourceToIdResource[Resource],
+                      FResourceToFreedomDegrees[Resource]]));
     end;
   end;
   procedure LoadTimetableDetailPattern;
@@ -868,6 +957,7 @@ begin
     LoadRequirement;
     LoadJoinedCluster;
     LoadTimetableDetailPattern;
+    LoadTimetableDetailPattern2;
   end;
 end;
 

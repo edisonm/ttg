@@ -19,6 +19,12 @@ all: $(FILES)
 run:
 	cd $(TTGSRC) ; $(MAKE) run
 
+ex1:
+	cd $(TTGSRC) ; $(MAKE) ex1
+
+ex2:
+	cd $(TTGSRC) ; $(MAKE) ex2
+
 ide:
 	cd $(TTGSRC) ; $(MAKE) ide
 

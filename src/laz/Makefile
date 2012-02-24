@@ -95,6 +95,13 @@ test:
 run:
 	cd $(TTGDIR)/bin/$(BuildId) ; $(TTGEXE)
 
+ex1:
+	cd $(TTGDIR)/bin/$(BuildId) ; $(TTGEXE) $(TTGDIR)/demos/BritanicoInt2000.ttd
+
+ex2:
+	cd $(TTGDIR)/bin/$(BuildId) ; $(TTGEXE) $(TTGDIR)/demos/Salamanca1999.ttd
+
+
 ide:
 	$(LAZIDE) ttg.lpi
 

@@ -504,21 +504,6 @@ msgctxt "tconfigform.label13.caption"
 msgid "Iterations:"
 msgstr "Iteraciones:"
 
-#: tconfigform.lbthemerestrictions.caption
-msgctxt "tconfigform.lbthemerestrictions.caption"
-msgid "Theme Restrictions:"
-msgstr "Prohibiciones de materia:"
-
-#: tconfigform.lbresourcerestrictions.caption
-msgctxt "tconfigform.lbresourcerestrictions.caption"
-msgid "Resource Restrictions:"
-msgstr "Prohibiciones de profesor:"
-
-#: tconfigform.lbclashactivitys.caption
-msgctxt "tconfigform.lbclashactivitys.caption"
-msgid "Clash Themes:"
-msgstr "Cruce materias:"
-
 #: tconfigform.label29.caption
 msgctxt "tconfigform.label29.caption"
 msgid "Update each:"
@@ -543,6 +528,11 @@ msgstr "Huecos h. prof.:"
 msgctxt "tconfigform.lbbrokensubjects.caption"
 msgid "Broken Activities:"
 msgstr "Materias cortadas:"
+
+#: tconfigform.lbclashactivitys.caption
+msgctxt "tconfigform.lbclashactivitys.caption"
+msgid "Clash Themes:"
+msgstr "Cruce materias:"
 
 #: tconfigform.lbcomments.caption
 msgctxt "tconfigform.lbcomments.caption"
@@ -604,6 +594,11 @@ msgctxt "TCONFIGFORM.LBREPARATIONPROBABILITY.CAPTION"
 msgid "Reparation Probability:"
 msgstr "Prob. Reparacion:"
 
+#: tconfigform.lbresourcerestrictions.caption
+msgctxt "tconfigform.lbresourcerestrictions.caption"
+msgid "Resource Restrictions:"
+msgstr "Prohibiciones de profesor:"
+
 #: tconfigform.lbresponsible.caption
 msgctxt "tconfigform.lbresponsible.caption"
 msgid "Responsible:"
@@ -643,6 +638,11 @@ msgstr "Nombre:"
 msgctxt "TCONFIGFORM.LBSRVALUE.CAPTION"
 msgid "Value:"
 msgstr "Valor:"
+
+#: tconfigform.lbthemerestrictions.caption
+msgctxt "tconfigform.lbthemerestrictions.caption"
+msgid "Theme Restrictions:"
+msgstr "Prohibiciones de materia:"
 
 #: tconfigform.lbtrcolor.caption
 msgctxt "TCONFIGFORM.LBTRCOLOR.CAPTION"
@@ -1580,6 +1580,14 @@ msgctxt "ttimetableclusterform.tbswapperiods.hint"
 msgid "Swap time slots|Swap time slots"
 msgstr "Intercambiar periodos|Intercambiar periodos"
 
+#: ttimetableform.actclashactivity.caption
+msgid "Clashes of subjects"
+msgstr ""
+
+#: ttimetableform.actclashactivity.hint
+msgid "Clashes of subjects|Clashes of subjects"
+msgstr ""
+
 #: ttimetableform.actclashresource.caption
 #, fuzzy
 #| msgid "Clashes of resources"
@@ -1593,14 +1601,6 @@ msgstr "Cruce de profesores"
 msgctxt "TTIMETABLEFORM.ACTCLASHRESOURCE.HINT"
 msgid "Clashes of teachers|Clashes of teachers"
 msgstr "Cruce de profesores|Cruce de profesores"
-
-#: ttimetableform.actclashactivity.caption
-msgid "Clashes of subjects"
-msgstr ""
-
-#: ttimetableform.actclashactivity.hint
-msgid "Clashes of subjects|Clashes of subjects"
-msgstr ""
 
 #: ttimetableform.actimprovetimetable.caption
 msgid "Improve timetable"
@@ -1743,6 +1743,11 @@ msgstr "Materias cortadas"
 msgid "Changes will be lost, are you sure?"
 msgstr "Los cambios realizados se perderan, Esta seguro?"
 
+#: uttgconsts.sclashactivity
+msgctxt "uttgconsts.sclashactivity"
+msgid "Clash of Themes"
+msgstr "Cruce de materias"
+
 #: uttgconsts.sclashes
 msgid "Clashes"
 msgstr "Cruces"
@@ -1751,11 +1756,6 @@ msgstr "Cruces"
 msgctxt "uttgconsts.sclashresource"
 msgid "Clash of Resources"
 msgstr "Cruce de profesores"
-
-#: uttgconsts.sclashactivity
-msgctxt "uttgconsts.sclashactivity"
-msgid "Clash of Themes"
-msgstr "Cruce de materias"
 
 #: uttgconsts.scluster
 msgid "Cluster"
@@ -2005,6 +2005,10 @@ msgstr "Liberar"
 msgctxt "uttgconsts.sreparationprobability"
 msgid "Repair Probability"
 msgstr "Probabilidad de Reparacion"
+
+#: uttgconsts.sresourceoverflow
+msgid "Activities of Resource %s exceed its capacity"
+msgstr ""
 
 #: uttgconsts.sresourcerestrictionshead
 msgid "Resource; Restrictions"

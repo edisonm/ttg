@@ -11,6 +11,7 @@ uses
 type
   TDynamicBooleanArray = array of Boolean;
   TDynamicBooleanArrayArray = array of TDynamicBooleanArray;
+  TDynamicDoubleArray = array of Double;
   TDynamicIntegerArray = array of Integer;
   TDynamicIntegerArrayArray = array of TDynamicIntegerArray;
   TDynamicIntegerArrayArrayArray = array of TDynamicIntegerArrayArray;
