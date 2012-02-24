@@ -48,25 +48,94 @@ interface
 uses
   Dialogs;
 
-procedure BubblesortInteger(var List1: array of Integer; var List2: array of
-  Integer; min, max: Integer);
-procedure lQuicksort(var List1: array of Integer; min, max: Integer);
-procedure lBubblesort(var List1: array of Integer; min, max: Integer);
-procedure QuicksortInteger(var List1: array of Integer; var List2: array of
-  Integer; min, max: Integer);
-procedure SelectionsortInteger(var List1: array of Integer; var List2: array of
-  Integer; min, max: Integer);
-procedure PartialSortInteger(var List1: array of Integer; var List2: array of
-  Integer; min, max, med: Integer);
+type
+  generic TSortAlgorithm<K,T> = class
+    class procedure Quicksort(var KeyList: array of K; var ValueList: array of T; min, max: Integer); overload;
+    class procedure BubbleSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer); overload;
+    procedure Selectionsort(var KeyList: array of K; var ValueList: array of T; min, max: Integer);
+    procedure PartialSort(var KeyList: array of K; var ValueList: array of T; min, max, med: Integer);
+
+    class procedure Quicksort(var KeyList: array of K; min, max: Integer); overload;
+    class procedure BubbleSort(var KeyList: array of K; min, max: Integer); overload;
+  end;
 
 implementation
 
-procedure BubblesortInteger(var List1: array of Integer; var List2: array of
-  Integer; min, max: Integer);
+class procedure TSortAlgorithm.Quicksort(var KeyList: array of K; var ValueList: array of T; min, max: Integer);
+var
+  med_value1: K;
+  med_value2: T;
+  hi, lo, i: Integer;
+begin
+    // If the list has <= 1 element, it's sorted.
+  if (min >= max) then Exit;
+
+    // Pick a dividing item randomly.
+  i := min + Trunc(Random(max - min + 1));
+  med_value1 := KeyList[i];
+  med_value2 := ValueList[i];
+    // Swap it to the front so we can find it easily.
+  KeyList[i] := KeyList[min];
+  ValueList[i] := ValueList[min];
+
+    // Move the items smaller than this into the left
+    // half of the list. Move the others into the right.
+  lo := min;
+  hi := max;
+  while (True) do
+  begin
+        // Look down from hi for a value < med_value.
+    while (KeyList[hi] >= med_value1) and ((KeyList[hi] <> med_value1) or (ValueList[hi]
+      >= med_value2)) do
+    begin
+      hi := hi - 1;
+      if (hi <= lo) then Break;
+    end;
+    if (hi <= lo) then
+    begin
+            // We're done separating the items.
+      KeyList[lo] := med_value1;
+      ValueList[lo] := med_value2;
+      Break;
+    end;
+
+        // Swap the lo and hi values.
+    KeyList[lo] := KeyList[hi];
+    ValueList[lo] := ValueList[hi];
+
+        // Look up from lo for a value >= med_value.
+    lo := lo + 1;
+    while (KeyList[lo] < med_value1) or ((KeyList[lo] = med_value1) and (ValueList[lo] <
+      med_value2)) do
+    begin
+      lo := lo + 1;
+      if (lo >= hi) then Break;
+    end;
+    if (lo >= hi) then
+    begin
+            // We're done separating the items.
+      lo := hi;
+      KeyList[hi] := med_value1;
+      ValueList[hi] := med_value2;
+      Break;
+    end;
+
+        // Swap the lo and hi values.
+    KeyList[hi] := KeyList[lo];
+    ValueList[hi] := ValueList[lo];
+  end; // while (True) do
+    // Sort the two sublists.
+  Quicksort(KeyList, ValueList, min, lo - 1);
+  Quicksort(KeyList, ValueList, lo + 1, max);
+end;
+
+class procedure TSortAlgorithm.BubbleSort(var KeyList: array of K;
+                                          var ValueList: array of T;
+                                          min, max: Integer);
 var
   last_swap, i, j: Integer;
-  tmp1: Integer;
-  tmp2: Integer;
+  tmp1: K;
+  tmp2: T;
 begin
   // Repeat until we are done.
   while (min < max) do
@@ -78,20 +147,20 @@ begin
     while (i <= max) do
     begin
       // Find a bubble.
-      if (List1[i - 1] > List1[i]) or ((List1[i - 1] = List1[i]) and (List2[i - 1] > List2[i])) then
+      if (KeyList[i - 1] > KeyList[i]) or ((KeyList[i - 1] = KeyList[i]) and (ValueList[i - 1] > ValueList[i])) then
       begin
         // See where to drop the bubble.
-        tmp1 := List1[i - 1];
-        tmp2 := List2[i - 1];
+        tmp1 := KeyList[i - 1];
+        tmp2 := ValueList[i - 1];
         j := i;
         repeat
-          List1[j - 1] := List1[j];
-          List2[j - 1] := List2[j];
+          KeyList[j - 1] := KeyList[j];
+          ValueList[j - 1] := ValueList[j];
           j := j + 1;
           if (j > max) then Break;
-        until (List1[j] >= tmp1) and ((List1[j] <> tmp1) or (List2[j] >= tmp2));
-        List1[j - 1] := tmp1;
-        List2[j - 1] := tmp2;
+        until (KeyList[j] >= tmp1) and ((KeyList[j] <> tmp1) or (ValueList[j] >= tmp2));
+        KeyList[j - 1] := tmp1;
+        ValueList[j - 1] := tmp2;
         last_swap := j - 1;
         i := j + 1;
       end else
@@ -109,20 +178,20 @@ begin
     while (i >= min) do
     begin
     // Find a bubble.
-      if (List1[i + 1] < List1[i]) or ((List1[i + 1] = List1[i]) and (List2[i + 1] < List2[i])) then
+      if (KeyList[i + 1] < KeyList[i]) or ((KeyList[i + 1] = KeyList[i]) and (ValueList[i + 1] < ValueList[i])) then
       begin
         // See where to drop the bubble.
-        tmp1 := List1[i + 1];
-        tmp2 := List2[i + 1];
+        tmp1 := KeyList[i + 1];
+        tmp2 := ValueList[i + 1];
         j := i;
         repeat
-          List1[j + 1] := List1[j];
-          List2[j + 1] := List2[j];
+          KeyList[j + 1] := KeyList[j];
+          ValueList[j + 1] := ValueList[j];
           j := j - 1;
           if j < min then Break;
-        until (List1[j] <= tmp1) and ((List1[j] <> tmp1) or (List2[j] <= tmp2));
-        List1[j + 1] := tmp1;
-        List2[j + 1] := tmp2;
+        until (KeyList[j] <= tmp1) and ((KeyList[j] <> tmp1) or (ValueList[j] <= tmp2));
+        KeyList[j + 1] := tmp1;
+        ValueList[j + 1] := tmp2;
         last_swap := j + 1;
         i := j - 1;
       end else
@@ -136,86 +205,88 @@ end;
 
 // Run selectionsort.
 
-procedure SelectionsortInteger(var List1: array of Integer;
-  var List2: array of Integer; min, max: Integer);
+procedure TSortAlgorithm.Selectionsort(var KeyList: array of K;
+                                       var ValueList: array of T;
+                                       min, max: Integer);
 var
   i, j, best_j: Integer;
-  best_value1: Integer;
-  best_value2: Integer;
+  best_value1: K;
+  best_value2: T;
 begin
   for i := min to max - 1 do
   begin
-    best_value1 := List1[i];
+    best_value1 := KeyList[i];
     best_j := i;
     for j := i + 1 to max do
     begin
-      if (List1[j] < best_value1) then
+      if (KeyList[j] < best_value1) then
       begin
-        best_value1 := List1[j];
+        best_value1 := KeyList[j];
         best_j := j;
       end;
     end; // for j := i + 1 to max do
-    best_value2 := List2[best_j];
-    List1[best_j] := List1[i];
-    List2[best_j] := List2[i];
-    List1[i] := best_value1;
-    List2[i] := best_value2;
+    best_value2 := ValueList[best_j];
+    KeyList[best_j] := KeyList[i];
+    ValueList[best_j] := ValueList[i];
+    KeyList[i] := best_value1;
+    ValueList[i] := best_value2;
   end; // for i := min to max - 1 do
 end;
 
 // Ordena una lista que esta ordenada hasta med:
 
-procedure PartialSortInteger(var List1: array of Integer;
-  var List2: array of Integer; min, max, med: Integer);
+procedure TSortAlgorithm.PartialSort(var KeyList: array of K;
+                                     var ValueList: array of T;
+                                     min, max, med: Integer);
 var
-  value1: array[0..4095] of Integer;
-  value2: array[0..4095] of Integer;
-  i, j, k: Integer;
+  value1: array[0..4095] of K;
+  value2: array[0..4095] of T;
+  i, j, l: Integer;
 begin
   // If the list has <= 1 element, it's sorted.
   if (min >= max) then Exit;
   i := min;
   j := med;
-  k := min;
+  l := min;
   while (i < med) and (j <= max) do
   begin
-    if List1[i] < List1[j] then
+    if KeyList[i] < KeyList[j] then
     begin
-      value1[k] := List1[i];
-      value2[k] := List2[i];
+      value1[l] := KeyList[i];
+      value2[l] := ValueList[i];
       Inc(i);
-      Inc(k);
+      Inc(l);
     end
     else
     begin
-      value1[k] := List1[j];
-      value2[k] := List2[j];
+      value1[l] := KeyList[j];
+      value2[l] := ValueList[j];
       Inc(j);
-      Inc(k);
+      Inc(l);
     end;
   end;
   while (i < med) do
   begin
-    value1[k] := List1[i];
-    value2[k] := List2[i];
+    value1[l] := KeyList[i];
+    value2[l] := ValueList[i];
     Inc(i);
-    Inc(k);
+    Inc(l);
   end;
   while (j <= max) do
   begin
-    value1[k] := List1[j];
-    value2[k] := List2[j];
+    value1[l] := KeyList[j];
+    value2[l] := ValueList[j];
     Inc(j);
-    Inc(k);
+    Inc(l);
   end;
-  Move(value1[min], List1[min], (max - min + 1) * SizeOf(Integer));
-  Move(value2[min], List2[min], (max - min + 1) * SizeOf(Integer));
+  Move(value1[min], KeyList[min], (max - min + 1) * SizeOf(Integer));
+  Move(value2[min], ValueList[min], (max - min + 1) * SizeOf(Integer));
 end;
 
-procedure lBubblesort(var List1: array of Integer; min, max: Integer);
+class procedure TSortAlgorithm.BubbleSort(var KeyList: array of K; min, max: Integer);
 var
   last_swap, i, j: Integer;
-  tmp1: Integer;
+  tmp1: K;
 begin
   // Repeat until we are done.
   while (min < max) do
@@ -227,17 +298,17 @@ begin
     while (i <= max) do
     begin
             // Find a bubble.
-      if List1[i - 1] > List1[i] then
+      if KeyList[i - 1] > KeyList[i] then
       begin
         // See where to drop the bubble.
-        tmp1 := List1[i - 1];
+        tmp1 := KeyList[i - 1];
         j := i;
         repeat
-          List1[j - 1] := List1[j];
+          KeyList[j - 1] := KeyList[j];
           j := j + 1;
           if (j > max) then Break;
-        until (List1[j] >= tmp1);
-        List1[j - 1] := tmp1;
+        until (KeyList[j] >= tmp1);
+        KeyList[j - 1] := tmp1;
         last_swap := j - 1;
         i := j + 1;
       end else
@@ -255,17 +326,17 @@ begin
     while (i >= min) do
     begin
     // Find a bubble.
-      if (List1[i + 1] < List1[i]) then
+      if (KeyList[i + 1] < KeyList[i]) then
       begin
         // See where to drop the bubble.
-        tmp1 := List1[i + 1];
+        tmp1 := KeyList[i + 1];
         j := i;
         repeat
-          List1[j + 1] := List1[j];
+          KeyList[j + 1] := KeyList[j];
           j := j - 1;
           if j < min then Break;
-        until (List1[j] <= tmp1);
-        List1[j + 1] := tmp1;
+        until (KeyList[j] <= tmp1);
+        KeyList[j + 1] := tmp1;
         last_swap := j + 1;
         i := j - 1;
       end else
@@ -279,9 +350,9 @@ end;
 
 // Run quicksort.
 
-procedure lQuicksort(var List1: array of Integer; min, max: Integer);
+class procedure TSortAlgorithm.Quicksort(var KeyList: array of K; min, max: Integer);
 var
-  med_value1: Integer;
+  med_value1: K;
   hi, lo, i: Integer;
 begin
     // If the list has <= 1 element, it's sorted.
@@ -289,9 +360,9 @@ begin
 
     // Pick a dividing item randomly.
   i := min + Trunc(Random(max - min + 1));
-  med_value1 := List1[i];
+  med_value1 := KeyList[i];
     // Swap it to the front so we can find it easily.
-  List1[i] := List1[min];
+  KeyList[i] := KeyList[min];
 
     // Move the items smaller than this into the left
     // half of the list. Move the others into the right.
@@ -300,7 +371,7 @@ begin
   while (True) do
   begin
         // Look down from hi for a value < med_value.
-    while (List1[hi] >= med_value1) do
+    while (KeyList[hi] >= med_value1) do
     begin
       hi := hi - 1;
       if (hi <= lo) then Break;
@@ -308,16 +379,16 @@ begin
     if (hi <= lo) then
     begin
             // We're done separating the items.
-      List1[lo] := med_value1;
+      KeyList[lo] := med_value1;
       Break;
     end;
 
         // Swap the lo and hi values.
-    List1[lo] := List1[hi];
+    KeyList[lo] := KeyList[hi];
 
         // Look up from lo for a value >= med_value.
     lo := lo + 1;
-    while (List1[lo] < med_value1) do
+    while (KeyList[lo] < med_value1) do
     begin
       lo := lo + 1;
       if (lo >= hi) then Break;
@@ -326,87 +397,16 @@ begin
     begin
             // We're done separating the items.
       lo := hi;
-      List1[hi] := med_value1;
+      KeyList[hi] := med_value1;
       Break;
     end;
 
         // Swap the lo and hi values.
-    List1[hi] := List1[lo];
+    KeyList[hi] := KeyList[lo];
   end; // while (True) do
     // Sort the two sublists.
-  lQuicksort(List1, min, lo - 1);
-  lQuicksort(List1, lo + 1, max);
-end;
-
-procedure QuicksortInteger(var List1: array of Integer; var List2: array of
-  Integer;
-  min, max: Integer);
-var
-  med_value1: Integer;
-  med_value2: Integer;
-  hi, lo, i: Integer;
-begin
-    // If the list has <= 1 element, it's sorted.
-  if (min >= max) then Exit;
-
-    // Pick a dividing item randomly.
-  i := min + Trunc(Random(max - min + 1));
-  med_value1 := List1[i];
-  med_value2 := List2[i];
-    // Swap it to the front so we can find it easily.
-  List1[i] := List1[min];
-  List2[i] := List2[min];
-
-    // Move the items smaller than this into the left
-    // half of the list. Move the others into the right.
-  lo := min;
-  hi := max;
-  while (True) do
-  begin
-        // Look down from hi for a value < med_value.
-    while (List1[hi] >= med_value1) and ((List1[hi] <> med_value1) or (List2[hi]
-      >= med_value2)) do
-    begin
-      hi := hi - 1;
-      if (hi <= lo) then Break;
-    end;
-    if (hi <= lo) then
-    begin
-            // We're done separating the items.
-      List1[lo] := med_value1;
-      List2[lo] := med_value2;
-      Break;
-    end;
-
-        // Swap the lo and hi values.
-    List1[lo] := List1[hi];
-    List2[lo] := List2[hi];
-
-        // Look up from lo for a value >= med_value.
-    lo := lo + 1;
-    while (List1[lo] < med_value1) or ((List1[lo] = med_value1) and (List2[lo] <
-      med_value2)) do
-    begin
-      lo := lo + 1;
-      if (lo >= hi) then Break;
-    end;
-    if (lo >= hi) then
-    begin
-            // We're done separating the items.
-      lo := hi;
-      List1[hi] := med_value1;
-      List2[hi] := med_value2;
-      Break;
-    end;
-
-        // Swap the lo and hi values.
-    List1[hi] := List1[lo];
-    List2[hi] := List2[lo];
-  end; // while (True) do
-    // Sort the two sublists.
-  QuicksortInteger(List1, List2, min, lo - 1);
-  QuicksortInteger(List1, List2, lo + 1, max);
+  Quicksort(KeyList, min, lo - 1);
+  Quicksort(KeyList, lo + 1, max);
 end;
 
 end.
-
