@@ -279,8 +279,8 @@ begin
     Inc(j);
     Inc(l);
   end;
-  Move(value1[min], KeyList[min], (max - min + 1) * SizeOf(Integer));
-  Move(value2[min], ValueList[min], (max - min + 1) * SizeOf(Integer));
+  Move(value1[min], KeyList[min], (max - min + 1) * SizeOf(K));
+  Move(value2[min], ValueList[min], (max - min + 1) * SizeOf(T));
 end;
 
 class procedure TSortAlgorithm.BubbleSort(var KeyList: array of K; min, max: Integer);
