@@ -332,6 +332,9 @@ implementation
 uses
   SysUtils, ZSysUtils, MTProcs, DSource, UTTGConsts, DSourceBaseConsts;
 
+type
+  TSortDoubleInt = specialize TSortAlgorithm<Double, Integer>;
+
 constructor TTimetableModel.Create(AClashActivityValue,
                                    ABreakTimetableResourceValue,
                                    AOutOfPositionEmptyHourValue,
@@ -793,29 +796,32 @@ var
     Number, SessionNumber, Rest, Duration, Activity, Count,
     Resource, ResourceActivity, ActivitySession: Integer;
     FreedomDegrees: Double; // Logaritmic to prevent overfloat
+    FResourceSorted: TDynamicIntegerArray;
   begin
     {FSessionToDay
      FSessionToHour}
     SetLength(FResourceToFreedomDegrees, FResourceCount);
+    SetLength(FResourceSorted, FResourceCount);
     for Resource := 0 to FResourceCount -1 do
     begin
       FreedomDegrees := 0;
       SessionNumber := 0;
       Duration := 0;
+      // Upper bound, not exact due to there is not overlapping
+      // between session of the same activity (for example):
+      Number := FResourceToNumber[Resource] * FPeriodCount;
       for ResourceActivity := 0 to High(FResourceToActivities[Resource]) do
       begin
         Activity := FResourceToActivities[Resource, ResourceActivity];
-        // Upper bound, not exact due to there is not overlapping
-        // between session of the same activity (for example):
-        Number := FResourceToNumber[Resource] * FPeriodCount;
-        for ActivitySession := 1 to Length(FActivityToSessions[Activity]) do
+        for ActivitySession := 0 to High(FActivityToSessions[Activity]) do
         begin
           Inc(SessionNumber);
           Inc(Duration, FSessionToDuration[ActivitySession]);
-          FreedomDegrees := FreedomDegrees + Ln(SessionNumber/ActivitySession);
+          FreedomDegrees := FreedomDegrees + Ln(SessionNumber/(1 + ActivitySession));
         end;
       end;
       Rest := Number - Duration;
+      WriteLn(Rest);
       if Rest < 0 then
         raise Exception.CreateFmt(SResourceOverflow, [FResourceToName[Resource]]);
       for Count := 1 to Rest do
@@ -823,10 +829,22 @@ var
         FreedomDegrees := FreedomDegrees + Ln(1 + SessionNumber/Count);
       end;
       FResourceToFreedomDegrees[Resource] := FreedomDegrees;
-      WriteLn(Format('Resource %d, FreedomDegrees=%g',
-                     [FResourceToIdResource[Resource],
+      FResourceSorted[Resource] := Resource;
+      WriteLn(Format('Resource %s(%d), FreedomDegrees=%g',
+                     [FResourceToName[Resource],
+                      FResourceToIdResource[Resource],
                       FResourceToFreedomDegrees[Resource]]));
     end;
+    TSortDoubleInt.QuickSort(FResourceToFreedomDegrees, FResourceSorted, 0, FResourceCount - 1);
+    WriteLn;
+    for Resource := 0 to FResourceCount -1 do
+    begin
+      WriteLn(Format('Resource %s(%d), FreedomDegrees=%g',
+                     [FResourceToName[FResourceSorted[Resource]],
+                      FResourceToIdResource[FResourceSorted[Resource]],
+                      FResourceToFreedomDegrees[Resource]]));
+    end;
+    WriteLn;
   end;
   procedure LoadTimetableDetailPattern;
   var
