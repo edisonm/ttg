@@ -490,11 +490,6 @@ msgctxt "TCONFIGFORM.EDNAINSTITUTION.HINT"
 msgid "Institution|Institution Name"
 msgstr ""
 
-#: tconfigform.lbupdateeach.caption
-msgctxt "tconfigform.lbupdateeach.caption"
-msgid "Update each:"
-msgstr ""
-
 #: tconfigform.lbauthority.caption
 msgctxt "tconfigform.lbauthority.caption"
 msgid "Authority:"
@@ -540,11 +535,6 @@ msgctxt "TCONFIGFORM.LBDOWNHILLLEVELS.CAPTION"
 msgid "Downhill Levels:"
 msgstr ""
 
-#: tconfigform.lboutofpositionemptyhour.caption
-msgctxt "tconfigform.lboutofpositionemptyhour.caption"
-msgid "Out of Position Empty Hours:"
-msgstr ""
-
 #: tconfigform.lbinitialtimetables.caption
 msgctxt "TCONFIGFORM.LBINITIALTIMETABLES.CAPTION"
 msgid "Initial Timetables:"
@@ -560,11 +550,6 @@ msgctxt "tconfigform.lbiterations.caption"
 msgid "Iterations:"
 msgstr ""
 
-#: tconfigform.lbnonscatteredactivity.caption
-msgctxt "TCONFIGFORM.LBNONSCATTEREDACTIVITY.CAPTION"
-msgid "Non Scattered Activities:"
-msgstr ""
-
 #: tconfigform.lbmaxresourceworkload.caption
 msgctxt "tconfigform.lbmaxresourceworkload.caption"
 msgid "Max work load per resource:"
@@ -573,6 +558,16 @@ msgstr ""
 #: tconfigform.lbmutationprobability.caption
 msgctxt "TCONFIGFORM.LBMUTATIONPROBABILITY.CAPTION"
 msgid "Mutation Probability:"
+msgstr ""
+
+#: tconfigform.lbnonscatteredactivity.caption
+msgctxt "TCONFIGFORM.LBNONSCATTEREDACTIVITY.CAPTION"
+msgid "Non Scattered Activities:"
+msgstr ""
+
+#: tconfigform.lboutofpositionemptyhour.caption
+msgctxt "tconfigform.lboutofpositionemptyhour.caption"
+msgid "Out of Position Empty Hours:"
 msgstr ""
 
 #: tconfigform.lbpollinationprobability.caption
@@ -653,6 +648,11 @@ msgstr ""
 #: tconfigform.lbtrvalue.caption
 msgctxt "TCONFIGFORM.LBTRVALUE.CAPTION"
 msgid "Value:"
+msgstr ""
+
+#: tconfigform.lbupdateeach.caption
+msgctxt "tconfigform.lbupdateeach.caption"
+msgid "Update each:"
 msgstr ""
 
 #: tconfigform.tsinstitution.caption
@@ -1454,16 +1454,12 @@ msgctxt "TSPLASHFORM.CAPTION"
 msgid "SplashForm"
 msgstr ""
 
-#: tsplashform.lbversion.caption
-msgid "Version"
+#: tsplashform.lbedition.caption
+msgid "Edition"
 msgstr ""
 
 #: tsplashform.lbexecutable.caption
 msgid "Executable"
-msgstr ""
-
-#: tsplashform.lbedition.caption
-msgid "Edition"
 msgstr ""
 
 #: tsplashform.lblcopyright.caption
@@ -1486,9 +1482,8 @@ msgctxt "TSPLASHFORM.LBLYEARLABEL.CAPTION"
 msgid "..."
 msgstr ""
 
-#: tthemeform.actthemerestriction.caption
-msgctxt "TTHEMEFORM.ACTTHEMERESTRICTION.CAPTION"
-msgid "Theme restrictions"
+#: tsplashform.lbversion.caption
+msgid "Version"
 msgstr ""
 
 #: tthemeform.actthemerestriction.caption
@@ -1496,13 +1491,18 @@ msgctxt "TTHEMEFORM.ACTTHEMERESTRICTION.CAPTION"
 msgid "Theme restrictions"
 msgstr ""
 
-#: tthemeform.actthemerestriction.hint
-msgctxt "tthemeform.actthemerestriction.hint"
-msgid "Theme restrictions|Input theme restrictions"
+#: tthemeform.actthemerestriction.caption
+msgctxt "TTHEMEFORM.ACTTHEMERESTRICTION.CAPTION"
+msgid "Theme restrictions"
 msgstr ""
 
 #: tthemeform.actthemerestriction.hint
 msgctxt "TTHEMEFORM.ACTTHEMERESTRICTION.HINT"
+msgid "Theme restrictions|Input theme restrictions"
+msgstr ""
+
+#: tthemeform.actthemerestriction.hint
+msgctxt "tthemeform.actthemerestriction.hint"
 msgid "Theme restrictions|Input theme restrictions"
 msgstr ""
 

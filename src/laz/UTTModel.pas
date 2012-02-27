@@ -1630,12 +1630,14 @@ begin
     FNonScatteredActivity := ATimetable.TablingInfo.FNonScatteredActivity;
     FValue := ATimetable.FValue;
     // TablingInfo := ATimetable.TablingInfo;
-    Move(ATimetable.TablingInfo.FClashResourceType[0],
-         FClashResourceType[0], FResourceTypeCount * SizeOf(Integer));
-    Move(ATimetable.TablingInfo.FResourceRestrictionTypeToResourceCount[0],
-         FResourceRestrictionTypeToResourceCount[0], FResourceRestrictionTypeCount * SizeOf(Integer));
-    Move(ATimetable.TablingInfo.FThemeRestrictionTypeToThemeCount[0],
-         FThemeRestrictionTypeToThemeCount[0], FThemeRestrictionTypeCount * SizeOf(Integer));
+      Move(ATimetable.TablingInfo.FClashResourceType[0],
+           FClashResourceType[0], FResourceTypeCount * SizeOf(Integer));
+    if FResourceRestrictionTypeCount <> 0 then
+      Move(ATimetable.TablingInfo.FResourceRestrictionTypeToResourceCount[0],
+           FResourceRestrictionTypeToResourceCount[0], FResourceRestrictionTypeCount * SizeOf(Integer));
+    if FThemeRestrictionTypeCount <> 0 then
+      Move(ATimetable.TablingInfo.FThemeRestrictionTypeToThemeCount[0],
+           FThemeRestrictionTypeToThemeCount[0], FThemeRestrictionTypeCount * SizeOf(Integer));
     for Theme := 0 to FThemeCount - 1 do
       Move(ATimetable.TablingInfo.FThemePeriodCount[Theme, 0],
            TablingInfo.FThemePeriodCount[Theme, 0],

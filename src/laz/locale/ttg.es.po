@@ -494,11 +494,6 @@ msgctxt "TCONFIGFORM.EDNAINSTITUTION.HINT"
 msgid "Institution|Institution Name"
 msgstr "Institucion|Nombre de la Institucion"
 
-#: tconfigform.lbupdateeach.caption
-msgctxt "tconfigform.lbupdateeach.caption"
-msgid "Update each:"
-msgstr "Actualizar cada:"
-
 #: tconfigform.lbauthority.caption
 msgctxt "tconfigform.lbauthority.caption"
 msgid "Authority:"
@@ -544,11 +539,6 @@ msgctxt "TCONFIGFORM.LBDOWNHILLLEVELS.CAPTION"
 msgid "Downhill Levels:"
 msgstr "Niveles de descenso:"
 
-#: tconfigform.lboutofpositionemptyhour.caption
-msgctxt "tconfigform.lboutofpositionemptyhour.caption"
-msgid "Out of Position Empty Hours:"
-msgstr "Horas huecas:"
-
 #: tconfigform.lbinitialtimetables.caption
 msgctxt "TCONFIGFORM.LBINITIALTIMETABLES.CAPTION"
 msgid "Initial Timetables:"
@@ -564,11 +554,6 @@ msgctxt "tconfigform.lbiterations.caption"
 msgid "Iterations:"
 msgstr "Iteraciones:"
 
-#: tconfigform.lbnonscatteredactivity.caption
-msgctxt "tconfigform.lbnonscatteredactivity.caption"
-msgid "Non Scattered Activities:"
-msgstr "Materias juntas:"
-
 #: tconfigform.lbmaxresourceworkload.caption
 msgctxt "tconfigform.lbmaxresourceworkload.caption"
 msgid "Max work load per resource:"
@@ -578,6 +563,16 @@ msgstr "Carga Maxima por Profesor:"
 msgctxt "TCONFIGFORM.LBMUTATIONPROBABILITY.CAPTION"
 msgid "Mutation Probability:"
 msgstr "Prob. Mutacion"
+
+#: tconfigform.lbnonscatteredactivity.caption
+msgctxt "tconfigform.lbnonscatteredactivity.caption"
+msgid "Non Scattered Activities:"
+msgstr "Materias juntas:"
+
+#: tconfigform.lboutofpositionemptyhour.caption
+msgctxt "tconfigform.lboutofpositionemptyhour.caption"
+msgid "Out of Position Empty Hours:"
+msgstr "Horas huecas:"
 
 #: tconfigform.lbpollinationprobability.caption
 msgctxt "TCONFIGFORM.LBPOLLINATIONPROBABILITY.CAPTION"
@@ -658,6 +653,11 @@ msgstr "Nombre:"
 msgctxt "TCONFIGFORM.LBTRVALUE.CAPTION"
 msgid "Value:"
 msgstr "Valor:"
+
+#: tconfigform.lbupdateeach.caption
+msgctxt "tconfigform.lbupdateeach.caption"
+msgid "Update each:"
+msgstr "Actualizar cada:"
 
 #: tconfigform.tsinstitution.caption
 msgctxt "tconfigform.tsinstitution.caption"
@@ -1470,17 +1470,13 @@ msgctxt "tsplashform.caption"
 msgid "SplashForm"
 msgstr "SplashForm"
 
-#: tsplashform.lbversion.caption
-msgid "Version"
-msgstr "Version"
+#: tsplashform.lbedition.caption
+msgid "Edition"
+msgstr "Edicion"
 
 #: tsplashform.lbexecutable.caption
 msgid "Executable"
 msgstr "Ejecutable"
-
-#: tsplashform.lbedition.caption
-msgid "Edition"
-msgstr "Edicion"
 
 #: tsplashform.lblcopyright.caption
 msgctxt "tsplashform.lblcopyright.caption"
@@ -1501,6 +1497,10 @@ msgstr "..."
 msgctxt "tsplashform.lblyearlabel.caption"
 msgid "..."
 msgstr "..."
+
+#: tsplashform.lbversion.caption
+msgid "Version"
+msgstr "Version"
 
 #: tthemeform.actthemerestriction.caption
 msgctxt "TTHEMEFORM.ACTTHEMERESTRICTION.CAPTION"
