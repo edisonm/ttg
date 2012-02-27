@@ -542,7 +542,7 @@ msgstr ""
 
 #: tconfigform.lbemptyhours.caption
 msgctxt "tconfigform.lbemptyhours.caption"
-msgid "Empty hours:"
+msgid "Empty Hours:"
 msgstr ""
 
 #: tconfigform.lbinitialtimetables.caption
@@ -1220,7 +1220,7 @@ msgstr ""
 
 #: tprogressform.pnlbrokensession.caption
 msgctxt "TPROGRESSFORM.PNLBROKENSESSION.CAPTION"
-msgid " Broken Sessions:"
+msgid "Broken Sessions:"
 msgstr ""
 
 #: tprogressform.pnlbrokensessionnumber.caption
@@ -1270,7 +1270,7 @@ msgstr ""
 
 #: tprogressform.pnlelapsedtime.caption
 msgctxt "TPROGRESSFORM.PNLELAPSEDTIME.CAPTION"
-msgid " Elapsed time:"
+msgid "Elapsed Time:"
 msgstr ""
 
 #: tprogressform.pnlestimatedtime.caption
@@ -1310,7 +1310,7 @@ msgstr ""
 
 #: tprogressform.pnloutofpositionemptyhour.caption
 msgctxt "TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOUR.CAPTION"
-msgid " Empty hours:"
+msgid "Empty Hours:"
 msgstr ""
 
 #: tprogressform.pnloutofpositionemptyhournumber.caption

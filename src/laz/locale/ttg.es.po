@@ -546,7 +546,7 @@ msgstr "Niveles de descenso:"
 
 #: tconfigform.lbemptyhours.caption
 msgctxt "tconfigform.lbemptyhours.caption"
-msgid "Empty hours:"
+msgid "Empty Hours:"
 msgstr "Horas huecas:"
 
 #: tconfigform.lbinitialtimetables.caption
@@ -1230,7 +1230,7 @@ msgstr " Valor:"
 
 #: tprogressform.pnlbrokensession.caption
 msgctxt "tprogressform.pnlbrokensession.caption"
-msgid " Broken Sessions:"
+msgid "Broken Sessions:"
 msgstr " Materias cortadas:"
 
 #: tprogressform.pnlbrokensessionnumber.caption
@@ -1280,7 +1280,7 @@ msgstr " Colisiones:"
 
 #: tprogressform.pnlelapsedtime.caption
 msgctxt "tprogressform.pnlelapsedtime.caption"
-msgid " Elapsed time:"
+msgid "Elapsed Time:"
 msgstr " Tiempo transcurrido:"
 
 #: tprogressform.pnlestimatedtime.caption
@@ -1320,7 +1320,7 @@ msgstr " Valor:"
 
 #: tprogressform.pnloutofpositionemptyhour.caption
 msgctxt "tprogressform.pnloutofpositionemptyhour.caption"
-msgid " Empty hours:"
+msgid "Empty Hours:"
 msgstr " Horas huecas"
 
 #: tprogressform.pnloutofpositionemptyhournumber.caption

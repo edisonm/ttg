@@ -426,7 +426,7 @@ object ConfigForm: TConfigForm
         Height = 15
         Top = 36
         Width = 77
-        Caption = 'Empty hours:'
+        Caption = 'Empty Hours:'
         ParentColor = False
       end
       object LbBrokenActivities: TLabel

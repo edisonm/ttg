@@ -123,7 +123,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Empty hours:'
+      Caption = 'Empty Hours:'
       TabOrder = 7
     end
     object PnOutOfPositionEmptyHourNumber: TPanel
@@ -189,7 +189,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Broken Sessions:'
+      Caption = 'Broken Sessions:'
       TabOrder = 10
     end
     object PnBrokenSessionNumber: TPanel
@@ -282,7 +282,7 @@ object ProgressForm: TProgressForm
       Width = 215
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Elapsed time:'
+      Caption = 'Elapsed Time:'
       ClientHeight = 21
       ClientWidth = 215
       TabOrder = 14
