@@ -41,11 +41,12 @@ CREATE TABLE IF NOT EXISTS `Theme`(
     `NaTheme` VARCHAR(20) NOT NULL UNIQUE /* Theme Name */
 ); /* Themes */
 CREATE TABLE IF NOT EXISTS `Activity`(
+    `IdActivity` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Activity Id */,
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER NOT NULL /* Parallel Id */,
     `Composition` VARCHAR(40) NOT NULL /* Configuration of periods */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`),
+  CONSTRAINT `PrimaryKey2` UNIQUE(`IdTheme`,`IdCategory`,`IdParallel`),
   CONSTRAINT `ClusterActivity` FOREIGN KEY (`IdCategory`,`IdParallel`)
     REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
@@ -95,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
     REFERENCES `ResourceRestrictionType`(`IdResourceRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Resource Restrictions */
 CREATE TABLE IF NOT EXISTS `Requirement`(
+    `IdActivity` INTEGER /* NOT NULL Activity Id */,
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER /* Parallel Id */,
@@ -145,6 +147,7 @@ CREATE TABLE IF NOT EXISTS `Timetable`(
 ); /* Timetables */
 CREATE TABLE IF NOT EXISTS `TimetableDetail`(
     `IdTimetable` INTEGER NOT NULL /* Timetable Id */,
+    `IdActivity` INTEGER /* NOT NULL Activity Id */,
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER NOT NULL /* Parallel Id */,
@@ -161,6 +164,7 @@ CREATE TABLE IF NOT EXISTS `TimetableDetail`(
 ); /* Detail of Timetables */
 CREATE TABLE IF NOT EXISTS `TimetableResource`(
     `IdTimetable` INTEGER NOT NULL /* Timetable Id */,
+    `IdActivity` INTEGER /* NOT NULL Activity Id */,
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER NOT NULL /* Parallel Id */,
