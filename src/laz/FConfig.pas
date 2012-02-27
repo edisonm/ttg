@@ -37,7 +37,7 @@ type
     spePopulationSize: TSpinEdit;
     TSWeights: TTabSheet;
     LbClashResource: TLabel;
-    LbEmptyHours: TLabel;
+    LbOutOfPositionEmptyHour: TLabel;
     LbBrokenActivities: TLabel;
     LbNonScatteredActivities: TLabel;
     EdEmptyHour: TEdit;

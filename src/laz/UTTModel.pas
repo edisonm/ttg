@@ -1406,6 +1406,10 @@ begin
     Add('-------------------------------------------------------------------');
     Add(Format('%0:-28s %12s %12s %12s', [SDetail, SCount, SWeight, SValue]));
     Add('-------------------------------------------------------------------');
+    Add(Format('%0:-28s %12s %12s %12d', [SClashResource + ':',
+         '(' + VarArrToStr(FClashResourceType, ' ') + ')',
+         '(' + VarArrToStr(TTimetableModel(Model).FResourceTypeToValue, ' ') + ')',
+         ClashResourceValue]));
     Add(Format(SRowFormat, [SClashActivity + ':', FClashActivity,
       TTimetableModel(Model).ClashActivityValue, ClashActivityValue]));
     Add(Format(SRowFormat, [SBreakTimetableResource + ':', BreakTimetableResource,
@@ -1416,18 +1420,14 @@ begin
       TTimetableModel(Model).BrokenSessionValue, BrokenSessionValue]));
     Add(Format(SRowFormat, [SNonScatteredActivity + ':', NonScatteredActivity,
         TTimetableModel(Model).NonScatteredActivityValue, NonScatteredActivityValue]));
-    Add(Format('%0:-28s %12s %12s %12d', [SClashResource + ':',
-         '(' + VarArrToStr(FClashResourceType, ' ') + ')',
-         '(' + VarArrToStr(TTimetableModel(Model).FResourceTypeToValue, ' ') + ')',
-         ClashResourceValue]));
-    Add(Format('%0:-28s %12s %12s %12d', [STbResourceRestriction + ':',
-         '(' + VarArrToStr(FResourceRestrictionTypeToResourceCount, ' ') + ')',
-         '(' + VarArrToStr(TTimetableModel(Model).FResourceRestrictionTypeToValue, ' ') + ')',
-         ResourceRestrictionValue]));
     Add(Format('%0:-28s %12s %12s %12d', [STbThemeRestriction + ':',
          '(' + VarArrToStr(FThemeRestrictionTypeToThemeCount, ' ') + ')',
          '(' + VarArrToStr(TTimetableModel(Model).FThemeRestrictionTypeToValue, ' ') + ')',
          ThemeRestrictionValue]));
+    Add(Format('%0:-28s %12s %12s %12d', [STbResourceRestriction + ':',
+         '(' + VarArrToStr(FResourceRestrictionTypeToResourceCount, ' ') + ')',
+         '(' + VarArrToStr(TTimetableModel(Model).FResourceRestrictionTypeToValue, ' ') + ')',
+         ResourceRestrictionValue]));
     Add('-------------------------------------------------------------------');
     Add(Format('%0:-54s %12d', [STotalValue, Value]));
   end;

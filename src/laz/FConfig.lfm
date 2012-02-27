@@ -421,12 +421,12 @@ object ConfigForm: TConfigForm
         Caption = 'Clash of Resources:'
         ParentColor = False
       end
-      object LbEmptyHours: TLabel
+      object LbOutOfPositionEmptyHour: TLabel
         Left = 237
         Height = 15
         Top = 36
         Width = 77
-        Caption = 'Empty Hours:'
+        Caption = 'Out of Position Empty Hours:'
         ParentColor = False
       end
       object LbBrokenActivities: TLabel

@@ -544,9 +544,9 @@ msgctxt "TCONFIGFORM.LBDOWNHILLLEVELS.CAPTION"
 msgid "Downhill Levels:"
 msgstr "Niveles de descenso:"
 
-#: tconfigform.lbemptyhours.caption
-msgctxt "tconfigform.lbemptyhours.caption"
-msgid "Empty Hours:"
+#: tconfigform.lboutofpositionemptyhour.caption
+msgctxt "tconfigform.lboutofpositionemptyhour.caption"
+msgid "Out of Position Empty Hours:"
 msgstr "Horas huecas:"
 
 #: tconfigform.lbinitialtimetables.caption
@@ -1220,12 +1220,12 @@ msgstr "Fracc. h. profesores:"
 
 #: tprogressform.pnlbreaktimetableresourcecount.caption
 msgctxt "tprogressform.pnlbreaktimetableresourcecount.caption"
-msgid " Number:"
+msgid "Number:"
 msgstr " Numero:"
 
 #: tprogressform.pnlbreaktimetableresourcevalue.caption
 msgctxt "tprogressform.pnlbreaktimetableresourcevalue.caption"
-msgid " Value:"
+msgid "Value:"
 msgstr " Valor:"
 
 #: tprogressform.pnlbrokensession.caption
@@ -1235,12 +1235,12 @@ msgstr " Materias cortadas:"
 
 #: tprogressform.pnlbrokensessionnumber.caption
 msgctxt "tprogressform.pnlbrokensessionnumber.caption"
-msgid " Number:"
+msgid "Number:"
 msgstr " Numero:"
 
 #: tprogressform.pnlbrokensessionvalue.caption
 msgctxt "tprogressform.pnlbrokensessionvalue.caption"
-msgid " Value:"
+msgid "Value:"
 msgstr " Valor:"
 
 #: tprogressform.pnlclashresource.caption
@@ -1250,12 +1250,12 @@ msgstr " Cruce profesores:"
 
 #: tprogressform.pnlclashresourcenumber.caption
 msgctxt "tprogressform.pnlclashresourcenumber.caption"
-msgid " Number:"
+msgid "Number:"
 msgstr " Numero:"
 
 #: tprogressform.pnlclashresourcevalue.caption
 msgctxt "tprogressform.pnlclashresourcevalue.caption"
-msgid " Value:"
+msgid "Value:"
 msgstr " Valor:"
 
 #: tprogressform.pnlclashtheme.caption
@@ -1265,12 +1265,12 @@ msgstr " Cruce materias:"
 
 #: tprogressform.pnlclashthemenumber.caption
 msgctxt "tprogressform.pnlclashthemenumber.caption"
-msgid " Number:"
+msgid "Number:"
 msgstr " Numero:"
 
 #: tprogressform.pnlclashthemevalue.caption
 msgctxt "tprogressform.pnlclashthemevalue.caption"
-msgid " Value:"
+msgid "Value:"
 msgstr " Valor:"
 
 #: tprogressform.pnlcrashes.caption
@@ -1305,32 +1305,32 @@ msgstr "Iniciado el:"
 
 #: tprogressform.pnlnonscatteredtheme.caption
 msgctxt "tprogressform.pnlnonscatteredtheme.caption"
-msgid " Non Scattered Activities:"
+msgid "Non Scattered Activities:"
 msgstr " Joined Themes:"
 
 #: tprogressform.pnlnonscatteredthemecount.caption
 msgctxt "tprogressform.pnlnonscatteredthemecount.caption"
-msgid " Number:"
+msgid "Number:"
 msgstr " Numero:"
 
 #: tprogressform.pnlnonscatteredthemevalue.caption
 msgctxt "tprogressform.pnlnonscatteredthemevalue.caption"
-msgid " Value:"
+msgid "Value:"
 msgstr " Valor:"
 
 #: tprogressform.pnloutofpositionemptyhour.caption
 msgctxt "tprogressform.pnloutofpositionemptyhour.caption"
-msgid "Empty Hours:"
+msgid "Out of Position Empty Hours:"
 msgstr " Horas huecas"
 
 #: tprogressform.pnloutofpositionemptyhournumber.caption
 msgctxt "tprogressform.pnloutofpositionemptyhournumber.caption"
-msgid " Number:"
+msgid "Number:"
 msgstr " Numero:"
 
 #: tprogressform.pnloutofpositionemptyhourvalue.caption
 msgctxt "tprogressform.pnloutofpositionemptyhourvalue.caption"
-msgid " Value:"
+msgid "Value:"
 msgstr " Valor:"
 
 #: tprogressform.pnlpollination.caption
@@ -1345,32 +1345,32 @@ msgstr " Iteracion:"
 
 #: tprogressform.pnlresourcerestriction.caption
 msgctxt "tprogressform.pnlresourcerestriction.caption"
-msgid " Resource Restrictions:"
+msgid "Resource Restrictions:"
 msgstr " Prohibiciones de profesor:"
 
 #: tprogressform.pnlresourcerestrictionnumber.caption
 msgctxt "tprogressform.pnlresourcerestrictionnumber.caption"
-msgid " Number:"
+msgid "Number:"
 msgstr " Numero:"
 
 #: tprogressform.pnlresourcerestrictionvalue.caption
 msgctxt "tprogressform.pnlresourcerestrictionvalue.caption"
-msgid " Value:"
+msgid "Value:"
 msgstr " Valor:"
 
 #: tprogressform.pnlthemerestriction.caption
 msgctxt "tprogressform.pnlthemerestriction.caption"
-msgid " Theme Restrictions:"
+msgid "Theme Restrictions:"
 msgstr " Prohibiciones de materia:"
 
 #: tprogressform.pnlthemerestrictionnumber.caption
 msgctxt "tprogressform.pnlthemerestrictionnumber.caption"
-msgid " Number:"
+msgid "Number:"
 msgstr " Numero:"
 
 #: tprogressform.pnlthemerestrictionvalue.caption
 msgctxt "tprogressform.pnlthemerestrictionvalue.caption"
-msgid " Value:"
+msgid "Value:"
 msgstr " Valor:"
 
 #: tprogressform.pnltotalvalue.caption
@@ -1501,21 +1501,6 @@ msgstr "..."
 msgctxt "tsplashform.lblyearlabel.caption"
 msgid "..."
 msgstr "..."
-
-#: tthemeform.actthemerestriction.caption
-msgctxt "tthemeform.actthemerestriction.caption"
-msgid "Theme restrictions"
-msgstr "Prohibiciones de materia"
-
-#: tthemeform.actthemerestriction.hint
-msgctxt "tthemeform.actthemerestriction.hint"
-msgid "Theme restrictions|Input theme restrictions"
-msgstr "Prohibiciones de materia|Ingresar las prohibiciones de materia"
-
-#: tthemeform.caption
-msgctxt "tthemeform.caption"
-msgid "Themes"
-msgstr "Materias"
 
 #: tthemeform.actthemerestriction.caption
 msgctxt "TTHEMEFORM.ACTTHEMERESTRICTION.CAPTION"
