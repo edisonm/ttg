@@ -1568,35 +1568,6 @@ begin
   Result := TTimetableModel(Model).BrokenSessionValue * BrokenSession;
 end;
 
-{
-function TTimetable.DeltaBrokenSession(ACluster, Period1, Period2: Integer): Integer;
-var
-  Period, Hour1, Hour2, Day1, Day2, Session, Duration: Integer;
-  PeriodToSession: TDynamicIntegerArray;
-begin
-  with TTimetableModel(Model), TablingInfo do
-  begin
-    Period := Period1;
-    PeriodToSession := FClusterPeriodToSession[ACluster];
-    Result := 0;
-    while Period <= Period2 do
-    begin
-      Session := PeriodToSession[Period];
-      Duration := FSessionToDuration[Session];
-      if Duration > 1 then
-      begin
-        Day1 := FPeriodToDay[Period];
-        Day2 := FPeriodToDay[Period + Duration - 1];
-        Hour1 := FPeriodToHour[Period];
-        Hour2 := FPeriodToHour[Period + Duration - 1];
-        Inc(Result, (Day2 - Day1) * (FHourCount + 1) + Hour2 - Hour1 + 1 - Duration);
-      end;
-      Inc(Period, Duration);
-    end;
-  end;
-end;
-}
-
 function TTimetable.GetNonScatteredActivityValue: Integer;
 begin
   Result := TTimetableModel(Model).NonScatteredActivityValue * NonScatteredActivity;
