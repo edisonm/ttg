@@ -19,8 +19,8 @@ type
     CBDay: TDBLookupComboBox;
     CBHour: TDBLookupComboBox;
     LbPeriod: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
+    LbDay: TLabel;
+    LbHour: TLabel;
   private
     { private declarations }
   public

@@ -494,16 +494,6 @@ msgctxt "TCONFIGFORM.EDNAINSTITUTION.HINT"
 msgid "Institution|Institution Name"
 msgstr "Institucion|Nombre de la Institucion"
 
-#: tconfigform.lbclashresource.caption
-msgctxt "tconfigform.lbclashresource.caption"
-msgid "Clash of Resources:"
-msgstr "Cruce profesores:"
-
-#: tconfigform.lbiterations.caption
-msgctxt "tconfigform.lbiterations.caption"
-msgid "Iterations:"
-msgstr "Iteraciones:"
-
 #: tconfigform.label29.caption
 msgctxt "tconfigform.label29.caption"
 msgid "Update each:"
@@ -534,6 +524,11 @@ msgctxt "tconfigform.lbclashactivity.caption"
 msgid "Clash of Activities:"
 msgstr "Cruce materias:"
 
+#: tconfigform.lbclashresource.caption
+msgctxt "tconfigform.lbclashresource.caption"
+msgid "Clash of Resources:"
+msgstr "Cruce profesores:"
+
 #: tconfigform.lbcomments.caption
 msgctxt "tconfigform.lbcomments.caption"
 msgid "Comments:"
@@ -563,6 +558,11 @@ msgstr "Horarios iniciales:"
 msgctxt "TCONFIGFORM.LBINSTITUTIONNAME.CAPTION"
 msgid "Name:"
 msgstr "Nombre:"
+
+#: tconfigform.lbiterations.caption
+msgctxt "tconfigform.lbiterations.caption"
+msgid "Iterations:"
+msgstr "Iteraciones:"
 
 #: tconfigform.lbjoinedsubjects.caption
 msgctxt "tconfigform.lbjoinedsubjects.caption"
@@ -659,11 +659,6 @@ msgctxt "TCONFIGFORM.LBTRVALUE.CAPTION"
 msgid "Value:"
 msgstr "Valor:"
 
-#: tconfigform.tsweights.caption
-msgctxt "TCONFIGFORM.TSWEIGHTS.CAPTION"
-msgid "Weights"
-msgstr "Pesos"
-
 #: tconfigform.tsinstitution.caption
 msgctxt "tconfigform.tsinstitution.caption"
 msgid "Institution"
@@ -678,6 +673,11 @@ msgstr "Datos del instituto"
 msgctxt "tconfigform.tsoptions.caption"
 msgid "Options"
 msgstr "Opciones"
+
+#: tconfigform.tsweights.caption
+msgctxt "TCONFIGFORM.TSWEIGHTS.CAPTION"
+msgid "Weights"
+msgstr "Pesos"
 
 #: tcrossmanytomanyeditor0form.panel2.caption
 msgid "Panel2"
@@ -1425,54 +1425,26 @@ msgid "Ok"
 msgstr "Aceptar"
 
 #: tselperiodform.caption
+#, fuzzy
+#| msgid "Swap periods"
 msgctxt "tselperiodform.caption"
-msgid "Swap periods"
+msgid "Intercambiar Period"
 msgstr "Intercambiar periodos"
 
-#: tselperiodform.lbclashresource.caption
-msgctxt "tselperiodform.lbclashresource.caption"
-msgid "Select the time slot to swap"
-msgstr "Seleccione el periodo a intercambiar"
-
-#: tselperiodform.label2.caption
-msgctxt "TSELPERIODFORM.LABEL2.CAPTION"
+#: tselperiodform.lbday.caption
+msgctxt "tselperiodform.lbday.caption"
 msgid "Day"
-msgstr "Dia"
+msgstr "Day"
 
-#: tselperiodform.label3.caption
-msgctxt "TSELPERIODFORM.LABEL3.CAPTION"
+#: tselperiodform.lbhour.caption
+msgctxt "tselperiodform.lbhour.caption"
 msgid "Hour"
-msgstr "Hora"
-
-#: tselperiodform.bbtcancel.caption
-msgctxt "tselperiodform.bbtcancel.caption"
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: tselperiodform.bbtok.caption
-msgctxt "tselperiodform.bbtok.caption"
-msgid "Ok"
-msgstr "Aceptar"
-
-#: tselperiodform.caption
-msgctxt "tselperiodform.caption"
-msgid "Swap periods"
-msgstr "Intercambiar periodos"
+msgstr "Hour"
 
 #: tselperiodform.lbperiod.caption
 msgctxt "tselperiodform.lbperiod.caption"
 msgid "Select the time slot to swap"
 msgstr "Seleccione el periodo a intercambiar"
-
-#: tselperiodform.label2.caption
-msgctxt "tselperiodform.label2.caption"
-msgid "Day"
-msgstr "Day"
-
-#: tselperiodform.label3.caption
-msgctxt "tselperiodform.label3.caption"
-msgid "Hour"
-msgstr "Hour"
 
 #: tsingleeditorform.actfind.caption
 msgid "Search"
