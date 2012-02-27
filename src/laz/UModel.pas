@@ -11,15 +11,19 @@ uses
 type
 
   TModel = class;
+  TIndividual = class;
 
   { TBookmark }
 
   TBookmark = class
   private
+    FIndividual: TIndividual;
   protected
     function GetProgress: Integer; virtual; abstract;
     function GetMax: Integer; virtual; abstract;
+    property Individual: TIndividual read FIndividual;
   public
+    constructor Create(AIndividual: TIndividual); overload;
     function Clone: TBookmark; virtual; abstract;
     procedure First; virtual; abstract;
     procedure Next; virtual; abstract;
@@ -96,6 +100,13 @@ type
 
 implementation
 
+{ TBookmark }
+
+constructor TBookmark.Create(AIndividual: TIndividual);
+begin
+  FIndividual := AIndividual;
+end;
+
 { TIndividual }
 
 procedure TIndividual.Assign(AIndividual: TIndividual);
@@ -119,7 +130,7 @@ end;
 
 constructor TMultiBookmark.Create(ABookmark1, ABookmark2: TBookmark);
 begin
-  inherited Create;
+  inherited Create(ABookmark1.Individual);
   FBookmark1 := ABookmark1;
   FBookmark2 := ABookmark2;
 end;
@@ -183,4 +194,3 @@ begin
 end;
 
 end.
-

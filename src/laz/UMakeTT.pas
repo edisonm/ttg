@@ -90,8 +90,9 @@ begin
   begin
     d := StrToInt(ExtractString(s, Pos, ','));
     case d of
-    1: Bookmarks[i] := TTTBookmark.Create(Individual, RandomIndexes(ClusterCount));
-    2: Bookmarks[i] := TTTBookmark2.Create(Individual, RandomIndexes(ClusterCount));
+    1: Bookmarks[i] := TTTBookmark1.Create(Individual);
+    2: Bookmarks[i] := TTTBookmark2.Create(Individual);
+    3: Bookmarks[i] := TTTBookmark3.Create(Individual);
     end;
     Inc(i);
   end;

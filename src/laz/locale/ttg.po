@@ -1981,7 +1981,7 @@ msgid "Repair Probability"
 msgstr ""
 
 #: uttgconsts.sresourceoverflow
-msgid "Activities of Resource %s exceed its capacity"
+msgid "For Resource [%s], the number of activities (%d)  exceed its capacity(%d)"
 msgstr ""
 
 #: uttgconsts.sresourcerestrictionshead

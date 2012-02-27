@@ -22,7 +22,7 @@ resourcestring
   SClashes = 'Clashes';
   SCluster = 'Cluster';
   SClusterPeriodToSessionOverflow = 'Overflow of pattern for ClusterPeriodToSession: Cluster %d-%d Duration %d';
-  SResourceOverflow = 'Activities of Resource %s exceed its capacity';
+  SResourceOverflow = 'For Resource [%s], the number of activities (%d)  exceed its capacity(%d)';
   SClusterWorkLoadHead = 'Cluster; Work Load';
   SClusterWorkLoadWithProblems = 'Cluster work load with problems...';
   SClusterWorkLoadWithoutProblems = 'Cluster work load without problems...';
