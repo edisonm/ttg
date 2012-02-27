@@ -726,9 +726,6 @@ Requirement
 "388";"29";"6";"1";"88";"1";
 "389";"30";"1";"1";"81";"1";
 "390";"30";"1";"2";"82";"1";
-JoinedCluster
-0
-"IdTheme";"IdCategory";"IdParallel";"IdCategory1";"IdParallel1";
 ThemeRestrictionType
 2
 "IdThemeRestrictionType";"NaThemeRestrictionType";"ColThemeRestrictionType";"ValThemeRestrictionType";
@@ -1032,6 +1029,9 @@ TimetableDetail
 TimetableResource
 0
 "IdTimetable";"IdActivity";"IdTheme";"IdCategory";"IdParallel";"IdResource";
+JoinedCluster
+0
+"IdTheme";"IdCategory";"IdParallel";"IdCategory1";"IdParallel1";
 33
 NaInstitution=Colegio Experimental Britanico Internacional
 SchoolYear=2000-2001

@@ -46,11 +46,10 @@ CREATE TABLE IF NOT EXISTS `Activity`(
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER NOT NULL /* Parallel Id */,
     `Composition` VARCHAR(40) NOT NULL /* Configuration of periods */,
-  CONSTRAINT `PrimaryKey2` UNIQUE(`IdTheme`,`IdCategory`,`IdParallel`),
   CONSTRAINT `ClusterActivity` FOREIGN KEY (`IdCategory`,`IdParallel`)
     REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
-    REFERENCES `Theme`(`IdTheme`) ON UPDATE RESTRICT ON DELETE RESTRICT
+    REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE RESTRICT
 ); /* Activities */
 CREATE TABLE IF NOT EXISTS `Period`(
     `IdDay` INTEGER NOT NULL /* Day Id */,
@@ -96,30 +95,18 @@ CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
     REFERENCES `ResourceRestrictionType`(`IdResourceRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Resource Restrictions */
 CREATE TABLE IF NOT EXISTS `Requirement`(
-    `IdActivity` INTEGER /* NOT NULL Activity Id */,
+    `IdActivity` INTEGER NOT NULL /* Activity Id */,
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER /* Parallel Id */,
     `IdResource` INTEGER NOT NULL /* Resource Id */,
     `NumRequirement` INTEGER NOT NULL /* Number of Resources */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`,`IdResource`),
-  CONSTRAINT `ActivityRequirement` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
-    REFERENCES `Activity`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdActivity`,`IdResource`),
+  CONSTRAINT `ActivityRequirement` FOREIGN KEY (`IdActivity`)
+    REFERENCES `Activity`(`IdActivity`) ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT `ResourceRequirement` FOREIGN KEY (`IdResource`)
     REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE RESTRICT
 ); /* Requirements */
-CREATE TABLE IF NOT EXISTS `JoinedCluster`(
-    `IdTheme` INTEGER NOT NULL /* Theme Id */,
-    `IdCategory` INTEGER NOT NULL /* Category Id */,
-    `IdParallel` INTEGER NOT NULL /* Parallel Id */,
-    `IdCategory1` INTEGER NOT NULL /* Category Id of Joined Cluster */,
-    `IdParallel1` INTEGER NOT NULL /* Parallel Id of Joined Cluster */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`,`IdCategory1`,`IdParallel1`),
-  CONSTRAINT `ActivityJoinedCluster` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
-    REFERENCES `Activity`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `ClusterJoinedCluster` FOREIGN KEY (`IdCategory1`,`IdParallel1`)
-    REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT
-); /* Joined Clusters */
 CREATE TABLE IF NOT EXISTS `ThemeRestrictionType`(
     `IdThemeRestrictionType` INTEGER NOT NULL PRIMARY KEY /* Theme Restriction Type Id */,
     `NaThemeRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
@@ -147,16 +134,16 @@ CREATE TABLE IF NOT EXISTS `Timetable`(
 ); /* Timetables */
 CREATE TABLE IF NOT EXISTS `TimetableDetail`(
     `IdTimetable` INTEGER NOT NULL /* Timetable Id */,
-    `IdActivity` INTEGER /* NOT NULL Activity Id */,
+    `IdActivity` INTEGER NOT NULL /* Activity Id */,
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER NOT NULL /* Parallel Id */,
     `IdDay` INTEGER NOT NULL /* Day Id */,
     `IdHour` INTEGER NOT NULL /* Hour Id */,
     `Session` INTEGER NOT NULL /* Internal Number */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTimetable`,`IdTheme`,`IdCategory`,`IdParallel`,`IdDay`,`IdHour`),
-  CONSTRAINT `ActivityTimetableDetail` FOREIGN KEY (`IdTheme`,`IdCategory`,`IdParallel`)
-    REFERENCES `Activity`(`IdTheme`,`IdCategory`,`IdParallel`) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTimetable`,`IdActivity`,`IdDay`,`IdHour`),
+  CONSTRAINT `ActivityTimetableDetail` FOREIGN KEY (`IdActivity`)
+    REFERENCES `Activity`(`IdActivity`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `PeriodTimetableDetail` FOREIGN KEY (`IdDay`,`IdHour`)
     REFERENCES `Period`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `TimetableTimetableDetail` FOREIGN KEY (`IdTimetable`)
@@ -164,16 +151,26 @@ CREATE TABLE IF NOT EXISTS `TimetableDetail`(
 ); /* Detail of Timetables */
 CREATE TABLE IF NOT EXISTS `TimetableResource`(
     `IdTimetable` INTEGER NOT NULL /* Timetable Id */,
-    `IdActivity` INTEGER /* NOT NULL Activity Id */,
+    `IdActivity` INTEGER NOT NULL /* Activity Id */,
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category Id */,
     `IdParallel` INTEGER NOT NULL /* Parallel Id */,
     `IdResource` INTEGER NOT NULL /* Resource Id */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTimetable`,`IdTheme`,`IdCategory`,`IdParallel`,`IdResource`),
-  CONSTRAINT `ClusterTimetableResource` FOREIGN KEY (`IdCategory`,`IdParallel`)
-    REFERENCES `Cluster`(`IdCategory`,`IdParallel`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTimetable`,`IdActivity`,`IdResource`),
+  CONSTRAINT `ActivityTimetableResource` FOREIGN KEY (`IdActivity`)
+    REFERENCES `Activity`(`IdActivity`) ON UPDATE RESTRICT ON DELETE RESTRICT,
   CONSTRAINT `ResourceTimetableResource` FOREIGN KEY (`IdResource`)
     REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `TimetableTimetableResource` FOREIGN KEY (`IdTimetable`)
     REFERENCES `Timetable`(`IdTimetable`) ON UPDATE CASCADE ON DELETE CASCADE
 ); /* Resources of Timetables */
+
+/* ************ TO DELETE: ************* */
+CREATE TABLE IF NOT EXISTS `JoinedCluster`(
+    `IdTheme` INTEGER NOT NULL /* Theme Id */,
+    `IdCategory` INTEGER NOT NULL /* Category Id */,
+    `IdParallel` INTEGER NOT NULL /* Parallel Id */,
+    `IdCategory1` INTEGER NOT NULL /* Category Id of Joined Cluster */,
+    `IdParallel1` INTEGER NOT NULL /* Parallel Id of Joined Cluster */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdCategory`,`IdParallel`,`IdCategory1`,`IdParallel1`)
+); /* Joined Clusters */
