@@ -16,9 +16,9 @@ type
     LbCopyright: TLabel;
     LbTable: TLabel;
     LbYearLabel: TLabel;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
+    LbVersion: TLabel;
+    LbExecutable: TLabel;
+    LbEdition: TLabel;
     Image1: TImage;
     procedure FormCreate(Sender: TObject);
     procedure Image1Click(Sender: TObject);

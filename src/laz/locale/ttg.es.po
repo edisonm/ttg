@@ -494,8 +494,8 @@ msgctxt "TCONFIGFORM.EDNAINSTITUTION.HINT"
 msgid "Institution|Institution Name"
 msgstr "Institucion|Nombre de la Institucion"
 
-#: tconfigform.label29.caption
-msgctxt "tconfigform.label29.caption"
+#: tconfigform.lbupdateeach.caption
+msgctxt "tconfigform.lbupdateeach.caption"
 msgid "Update each:"
 msgstr "Actualizar cada:"
 
@@ -1470,15 +1470,15 @@ msgctxt "tsplashform.caption"
 msgid "SplashForm"
 msgstr "SplashForm"
 
-#: tsplashform.label1.caption
+#: tsplashform.lbversion.caption
 msgid "Version"
 msgstr "Version"
 
-#: tsplashform.label2.caption
+#: tsplashform.lbexecutable.caption
 msgid "Executable"
 msgstr "Ejecutable"
 
-#: tsplashform.label3.caption
+#: tsplashform.lbedition.caption
 msgid "Edition"
 msgstr "Edicion"
 

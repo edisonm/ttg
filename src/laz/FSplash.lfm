@@ -78,7 +78,7 @@ object SplashForm: TSplashForm
     ParentColor = False
     ParentFont = False
   end
-  object Label1: TLabel
+  object LbVersion: TLabel
     Left = 88
     Height = 18
     Top = 64
@@ -89,7 +89,7 @@ object SplashForm: TSplashForm
     ParentColor = False
     ParentFont = False
   end
-  object Label2: TLabel
+  object LbExecutable: TLabel
     Left = 88
     Height = 18
     Top = 88
@@ -100,7 +100,7 @@ object SplashForm: TSplashForm
     ParentColor = False
     ParentFont = False
   end
-  object Label3: TLabel
+  object LbEdition: TLabel
     Left = 88
     Height = 18
     Top = 112

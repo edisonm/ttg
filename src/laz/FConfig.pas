@@ -64,7 +64,7 @@ type
     EdNameAuthority: TEdit;
     EdPositionAuthority: TEdit;
     LbAuthorityPosition: TLabel;
-    Label29: TLabel;
+    LbUpdateEach: TLabel;
     speNumIterations: TSpinEdit;
     LbSchoolYear: TLabel;
     EdSchoolYear: TEdit;

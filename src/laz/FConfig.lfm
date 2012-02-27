@@ -216,7 +216,7 @@ object ConfigForm: TConfigForm
         Caption = 'Seed:'
         ParentColor = False
       end
-      object Label29: TLabel
+      object LbUpdateEach: TLabel
         Left = 235
         Height = 15
         Top = 13
