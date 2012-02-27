@@ -510,8 +510,8 @@ msgctxt "tconfigform.lbbreaktimetableresource.caption"
 msgid "Break TT. Resources:"
 msgstr ""
 
-#: tconfigform.lbbrokenthemes.caption
-msgctxt "TCONFIGFORM.LBBROKENTHEMES.CAPTION"
+#: tconfigform.lbbrokenactivity.caption
+msgctxt "TCONFIGFORM.LBBROKENACTIVITY.CAPTION"
 msgid "Broken Activities:"
 msgstr ""
 
@@ -560,8 +560,8 @@ msgctxt "tconfigform.lbiterations.caption"
 msgid "Iterations:"
 msgstr ""
 
-#: tconfigform.lbjoinedthemes.caption
-msgctxt "TCONFIGFORM.LBJOINEDTHEMES.CAPTION"
+#: tconfigform.lbnonscatteredactivity.caption
+msgctxt "TCONFIGFORM.LBNONSCATTEREDACTIVITY.CAPTION"
 msgid "Non Scattered Activities:"
 msgstr ""
 

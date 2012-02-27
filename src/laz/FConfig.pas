@@ -38,8 +38,8 @@ type
     TSWeights: TTabSheet;
     LbClashResource: TLabel;
     LbOutOfPositionEmptyHour: TLabel;
-    LbBrokenActivities: TLabel;
-    LbNonScatteredActivities: TLabel;
+    LbBrokenActivity: TLabel;
+    LbNonScatteredActivity: TLabel;
     EdEmptyHour: TEdit;
     EdBrokenSession: TEdit;
     EdNonScatteredActivity: TEdit;

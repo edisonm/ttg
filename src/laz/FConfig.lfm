@@ -429,7 +429,7 @@ object ConfigForm: TConfigForm
         Caption = 'Out of Position Empty Hours:'
         ParentColor = False
       end
-      object LbBrokenActivities: TLabel
+      object LbBrokenActivity: TLabel
         Left = 8
         Height = 15
         Top = 86
@@ -437,7 +437,7 @@ object ConfigForm: TConfigForm
         Caption = 'Broken Activities:'
         ParentColor = False
       end
-      object LbNonScatteredActivities: TLabel
+      object LbNonScatteredActivity: TLabel
         Left = 237
         Height = 15
         Top = 61

@@ -514,8 +514,8 @@ msgctxt "tconfigform.lbbreaktimetableresource.caption"
 msgid "Break TT. Resources:"
 msgstr "Huecos h. prof.:"
 
-#: tconfigform.lbbrokenthemes.caption
-msgctxt "tconfigform.lbbrokenthemes.caption"
+#: tconfigform.lbbrokenactivity.caption
+msgctxt "tconfigform.lbbrokenactivity.caption"
 msgid "Broken Activities:"
 msgstr "Materias cortadas:"
 
@@ -564,8 +564,8 @@ msgctxt "tconfigform.lbiterations.caption"
 msgid "Iterations:"
 msgstr "Iteraciones:"
 
-#: tconfigform.lbjoinedthemes.caption
-msgctxt "tconfigform.lbjoinedthemes.caption"
+#: tconfigform.lbnonscatteredactivity.caption
+msgctxt "tconfigform.lbnonscatteredactivity.caption"
 msgid "Non Scattered Activities:"
 msgstr "Materias juntas:"
 
