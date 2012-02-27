@@ -25,8 +25,8 @@ type
     LbCrossProbability: TLabel;
     LbMutationProbability: TLabel;
     LbReparationProbability: TLabel;
-    Label13: TLabel;
-    LbClashActivitys: TLabel;
+    LbIterations: TLabel;
+    LbClashActivity: TLabel;
     LbDownhillLevels: TLabel;
     LbPollinationProbability: TLabel;
     LbPopulationSize: TLabel;
@@ -35,8 +35,8 @@ type
     SEMaxIteration: TSpinEdit;
     EdPollinationProbability: TEdit;
     spePopulationSize: TSpinEdit;
-    tbsWeigths: TTabSheet;
-    Label1: TLabel;
+    TSWeights: TTabSheet;
+    LbClashResource: TLabel;
     LbEmptyHours: TLabel;
     LbBrokenActivities: TLabel;
     LbNonScatteredActivities: TLabel;
@@ -44,7 +44,7 @@ type
     EdBrokenSession: TEdit;
     EdNonScatteredActivity: TEdit;
     TSInstitution: TTabSheet;
-    Label14: TLabel;
+    LbClashResource4: TLabel;
     SEMaxResourceWorkLoad: TSpinEdit;
     MeComments: TMemo;
     LbComments: TLabel;

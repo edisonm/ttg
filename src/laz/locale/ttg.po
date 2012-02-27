@@ -490,13 +490,13 @@ msgctxt "TCONFIGFORM.EDNAINSTITUTION.HINT"
 msgid "Institution|Institution Name"
 msgstr ""
 
-#: tconfigform.label1.caption
-msgctxt "tconfigform.label1.caption"
-msgid "Clash Resources:"
+#: tconfigform.lbclashresource.caption
+msgctxt "tconfigform.lbclashresource.caption"
+msgid "Clash of Resources:"
 msgstr ""
 
-#: tconfigform.label13.caption
-msgctxt "tconfigform.label13.caption"
+#: tconfigform.lbiterations.caption
+msgctxt "tconfigform.lbiterations.caption"
 msgid "Iterations:"
 msgstr ""
 
@@ -525,9 +525,9 @@ msgctxt "TCONFIGFORM.LBBROKENSUBJECTS.CAPTION"
 msgid "Broken Activities:"
 msgstr ""
 
-#: tconfigform.lbclashactivitys.caption
-msgctxt "tconfigform.lbclashactivitys.caption"
-msgid "Clash Themes:"
+#: tconfigform.lbclashactivity.caption
+msgctxt "tconfigform.lbclashactivity.caption"
+msgid "Clash of Activities:"
 msgstr ""
 
 #: tconfigform.lbcomments.caption
@@ -655,8 +655,8 @@ msgctxt "TCONFIGFORM.LBTRVALUE.CAPTION"
 msgid "Value:"
 msgstr ""
 
-#: tconfigform.tbsweigths.caption
-msgctxt "TCONFIGFORM.TBSWEIGTHS.CAPTION"
+#: tconfigform.tsweights.caption
+msgctxt "TCONFIGFORM.TSWEIGHTS.CAPTION"
 msgid "Weights"
 msgstr ""
 
@@ -1235,7 +1235,7 @@ msgstr ""
 
 #: tprogressform.pnlclashresource.caption
 msgctxt "TPROGRESSFORM.PNLCLASHRESOURCE.CAPTION"
-msgid " Clash Resources:"
+msgid "Clash of Resources:"
 msgstr ""
 
 #: tprogressform.pnlclashresourcenumber.caption
@@ -1250,7 +1250,7 @@ msgstr ""
 
 #: tprogressform.pnlclashsubject.caption
 msgctxt "TPROGRESSFORM.PNLCLASHSUBJECT.CAPTION"
-msgid " Clash Themes:"
+msgid "Clash of Activities:"
 msgstr ""
 
 #: tprogressform.pnlclashsubjectnumber.caption
@@ -1430,33 +1430,33 @@ msgctxt "TSELPERIODFORM.LABEL3.CAPTION"
 msgid "Hour"
 msgstr ""
 
-#: tseltimeslotform.bbtcancel.caption
-msgctxt "TSELTIMESLOTFORM.BBTCANCEL.CAPTION"
+#: tselperiodform.bbtcancel.caption
+msgctxt "TSELPERIODFORM.BBTCANCEL.CAPTION"
 msgid "Cancel"
 msgstr ""
 
-#: tseltimeslotform.bbtok.caption
-msgctxt "TSELTIMESLOTFORM.BBTOK.CAPTION"
+#: tselperiodform.bbtok.caption
+msgctxt "TSELPERIODFORM.BBTOK.CAPTION"
 msgid "Ok"
 msgstr ""
 
-#: tseltimeslotform.caption
-msgctxt "TSELTIMESLOTFORM.CAPTION"
+#: tselperiodform.caption
+msgctxt "TSELPERIODFORM.CAPTION"
 msgid "Swap periods"
 msgstr ""
 
-#: tseltimeslotform.label1.caption
-msgctxt "TSELTIMESLOTFORM.LABEL1.CAPTION"
+#: tselperiodform.lbperiod.caption
+msgctxt "TSELPERIODFORM.LBPERIOD.CAPTION"
 msgid "Select the time slot to swap"
 msgstr ""
 
-#: tseltimeslotform.label2.caption
-msgctxt "TSELTIMESLOTFORM.LABEL2.CAPTION"
+#: tselperiodform.label2.caption
+msgctxt "TSELPERIODFORM.LABEL2.CAPTION"
 msgid "Day"
 msgstr ""
 
-#: tseltimeslotform.label3.caption
-msgctxt "TSELTIMESLOTFORM.LABEL3.CAPTION"
+#: tselperiodform.label3.caption
+msgctxt "TSELPERIODFORM.LABEL3.CAPTION"
 msgid "Hour"
 msgstr ""
 

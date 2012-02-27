@@ -9,7 +9,7 @@ object SelPeriodForm: TSelPeriodForm
   ClientWidth = 295
   Position = poDesktopCenter
   LCLVersion = '0.9.31'
-  object Label1: TLabel
+  object LbPeriod: TLabel
     Left = 16
     Height = 18
     Top = 8

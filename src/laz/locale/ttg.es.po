@@ -494,13 +494,13 @@ msgctxt "TCONFIGFORM.EDNAINSTITUTION.HINT"
 msgid "Institution|Institution Name"
 msgstr "Institucion|Nombre de la Institucion"
 
-#: tconfigform.label1.caption
-msgctxt "tconfigform.label1.caption"
-msgid "Clash Resources:"
+#: tconfigform.lbclashresource.caption
+msgctxt "tconfigform.lbclashresource.caption"
+msgid "Clash of Resources:"
 msgstr "Cruce profesores:"
 
-#: tconfigform.label13.caption
-msgctxt "tconfigform.label13.caption"
+#: tconfigform.lbiterations.caption
+msgctxt "tconfigform.lbiterations.caption"
 msgid "Iterations:"
 msgstr "Iteraciones:"
 
@@ -529,9 +529,9 @@ msgctxt "tconfigform.lbbrokensubjects.caption"
 msgid "Broken Activities:"
 msgstr "Materias cortadas:"
 
-#: tconfigform.lbclashactivitys.caption
-msgctxt "tconfigform.lbclashactivitys.caption"
-msgid "Clash Themes:"
+#: tconfigform.lbclashactivity.caption
+msgctxt "tconfigform.lbclashactivity.caption"
+msgid "Clash of Activities:"
 msgstr "Cruce materias:"
 
 #: tconfigform.lbcomments.caption
@@ -659,8 +659,8 @@ msgctxt "TCONFIGFORM.LBTRVALUE.CAPTION"
 msgid "Value:"
 msgstr "Valor:"
 
-#: tconfigform.tbsweigths.caption
-msgctxt "TCONFIGFORM.TBSWEIGTHS.CAPTION"
+#: tconfigform.tsweights.caption
+msgctxt "TCONFIGFORM.TSWEIGHTS.CAPTION"
 msgid "Weights"
 msgstr "Pesos"
 
@@ -1245,7 +1245,7 @@ msgstr " Valor:"
 
 #: tprogressform.pnlclashresource.caption
 msgctxt "tprogressform.pnlclashresource.caption"
-msgid " Clash Resources:"
+msgid "Clash of Resources:"
 msgstr " Cruce profesores:"
 
 #: tprogressform.pnlclashresourcenumber.caption
@@ -1260,7 +1260,7 @@ msgstr " Valor:"
 
 #: tprogressform.pnlclashsubject.caption
 msgctxt "tprogressform.pnlclashsubject.caption"
-msgid " Clash Themes:"
+msgid "Clash of Activities:"
 msgstr " Cruce materias:"
 
 #: tprogressform.pnlclashsubjectnumber.caption
@@ -1429,8 +1429,8 @@ msgctxt "tselperiodform.caption"
 msgid "Swap periods"
 msgstr "Intercambiar periodos"
 
-#: tselperiodform.label1.caption
-msgctxt "tselperiodform.label1.caption"
+#: tselperiodform.lbclashresource.caption
+msgctxt "tselperiodform.lbclashresource.caption"
 msgid "Select the time slot to swap"
 msgstr "Seleccione el periodo a intercambiar"
 
@@ -1444,33 +1444,33 @@ msgctxt "TSELPERIODFORM.LABEL3.CAPTION"
 msgid "Hour"
 msgstr "Hora"
 
-#: tseltimeslotform.bbtcancel.caption
-msgctxt "tseltimeslotform.bbtcancel.caption"
+#: tselperiodform.bbtcancel.caption
+msgctxt "tselperiodform.bbtcancel.caption"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: tseltimeslotform.bbtok.caption
-msgctxt "tseltimeslotform.bbtok.caption"
+#: tselperiodform.bbtok.caption
+msgctxt "tselperiodform.bbtok.caption"
 msgid "Ok"
 msgstr "Aceptar"
 
-#: tseltimeslotform.caption
-msgctxt "tseltimeslotform.caption"
+#: tselperiodform.caption
+msgctxt "tselperiodform.caption"
 msgid "Swap periods"
 msgstr "Intercambiar periodos"
 
-#: tseltimeslotform.label1.caption
-msgctxt "tseltimeslotform.label1.caption"
+#: tselperiodform.lbperiod.caption
+msgctxt "tselperiodform.lbperiod.caption"
 msgid "Select the time slot to swap"
 msgstr "Seleccione el periodo a intercambiar"
 
-#: tseltimeslotform.label2.caption
-msgctxt "tseltimeslotform.label2.caption"
+#: tselperiodform.label2.caption
+msgctxt "tselperiodform.label2.caption"
 msgid "Day"
 msgstr "Day"
 
-#: tseltimeslotform.label3.caption
-msgctxt "tseltimeslotform.label3.caption"
+#: tselperiodform.label3.caption
+msgctxt "tselperiodform.label3.caption"
 msgid "Hour"
 msgstr "Hour"
 

@@ -248,7 +248,7 @@ object ConfigForm: TConfigForm
         Caption = 'Population Size:'
         ParentColor = False
       end
-      object Label13: TLabel
+      object LbIterations: TLabel
         Left = 235
         Height = 15
         Top = 36
@@ -409,16 +409,16 @@ object ConfigForm: TConfigForm
         Text = '1,2'
       end
     end
-    object tbsWeigths: TTabSheet
+    object TSWeights: TTabSheet
       Caption = 'Weights'
       ClientHeight = 356
       ClientWidth = 469
-      object Label1: TLabel
+      object LbClashResource: TLabel
         Left = 8
         Height = 15
         Top = 12
         Width = 90
-        Caption = 'Clash Resources:'
+        Caption = 'Clash of Resources:'
         ParentColor = False
       end
       object LbEmptyHours: TLabel
@@ -525,12 +525,12 @@ object ConfigForm: TConfigForm
         Caption = 'Value:'
         ParentColor = False
       end
-      object LbClashActivitys: TLabel
+      object LbClashActivity: TLabel
         Left = 8
         Height = 15
         Top = 36
         Width = 87
-        Caption = 'Clash Themes:'
+        Caption = 'Clash of Activities:'
         ParentColor = False
       end
       object EdEmptyHour: TEdit

@@ -18,7 +18,7 @@ type
     BBCancel: TBitBtn;
     CBDay: TDBLookupComboBox;
     CBHour: TDBLookupComboBox;
-    Label1: TLabel;
+    LbPeriod: TLabel;
     Label2: TLabel;
     Label3: TLabel;
   private
