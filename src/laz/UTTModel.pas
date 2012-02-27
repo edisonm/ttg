@@ -422,8 +422,8 @@ var
   FIdResourceTypeToResourceType, FResourceTypeToIdResourceType,
   FIdResourceRestrictionTypeToResourceRestrictionType,
   FIdThemeRestrictionTypeToThemeRestrictionType,
-  FResourceToIdResource, FResourceRestrictionTypeAIdResourceRestrictionType,
-  FThemeRestrictionTypeAIdThemeRestrictionType: TDynamicIntegerArray;
+  FResourceToIdResource, FResourceRestrictionTypeToIdResourceRestrictionType,
+  FThemeRestrictionTypeToIdThemeRestrictionType: TDynamicIntegerArray;
   
   procedure Load(ATable: TDataSet; const ALstName: string; out FMinIdLst: Integer;
     out FIdLstALst: TDynamicIntegerArray;
@@ -1036,13 +1036,13 @@ begin
     Load(TbThemeRestrictionType, 'IdThemeRestrictionType',
       FMinIdThemeRestrictionType,
       FIdThemeRestrictionTypeToThemeRestrictionType,
-      FThemeRestrictionTypeAIdThemeRestrictionType);
-    FThemeRestrictionTypeCount := Length(FThemeRestrictionTypeAIdThemeRestrictionType);
+      FThemeRestrictionTypeToIdThemeRestrictionType);
+    FThemeRestrictionTypeCount := Length(FThemeRestrictionTypeToIdThemeRestrictionType);
     Load(TbResourceRestrictionType, 'IdResourceRestrictionType',
       FMinIdResourceRestrictionType,
       FIdResourceRestrictionTypeToResourceRestrictionType,
-      FResourceRestrictionTypeAIdResourceRestrictionType);
-    FResourceRestrictionTypeCount := Length(FResourceRestrictionTypeAIdResourceRestrictionType);
+      FResourceRestrictionTypeToIdResourceRestrictionType);
+    FResourceRestrictionTypeCount := Length(FResourceRestrictionTypeToIdResourceRestrictionType);
     LoadPeriod;
     LoadCluster;
     LoadResourceType;
