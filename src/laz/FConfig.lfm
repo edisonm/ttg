@@ -468,7 +468,7 @@ object ConfigForm: TConfigForm
         Height = 15
         Top = 15
         Width = 113
-        Caption = 'Gap TT. Resources:'
+        Caption = 'Break TT. Resources:'
         ParentColor = False
       end
       object LbSRName: TLabel

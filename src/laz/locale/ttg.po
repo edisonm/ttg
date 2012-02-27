@@ -517,7 +517,7 @@ msgstr ""
 
 #: tconfigform.lbbreaktimetableresource.caption
 msgctxt "tconfigform.lbbreaktimetableresource.caption"
-msgid "Gap TT. Resources:"
+msgid "Break TT. Resources:"
 msgstr ""
 
 #: tconfigform.lbbrokensubjects.caption
@@ -1205,7 +1205,7 @@ msgstr ""
 
 #: tprogressform.pnlbreaktimetableresource.caption
 msgctxt "TPROGRESSFORM.PNLBREAKTIMETABLERESOURCE.CAPTION"
-msgid " Gap TT. Resources:"
+msgid "Break TT. Resources:"
 msgstr ""
 
 #: tprogressform.pnlbreaktimetableresourcecount.caption
@@ -1220,7 +1220,7 @@ msgstr ""
 
 #: tprogressform.pnlbrokensession.caption
 msgctxt "TPROGRESSFORM.PNLBROKENSESSION.CAPTION"
-msgid " Broken Themes:"
+msgid " Broken Sessions:"
 msgstr ""
 
 #: tprogressform.pnlbrokensessionnumber.caption
@@ -1712,7 +1712,7 @@ msgstr ""
 
 #: uttgconsts.sbreaktimetableresource
 msgctxt "uttgconsts.sbreaktimetableresource"
-msgid "Broken TT. Resources"
+msgid "Break TT. Resources"
 msgstr ""
 
 #: uttgconsts.sbrokensession
@@ -1725,7 +1725,7 @@ msgstr ""
 
 #: uttgconsts.sclashactivity
 msgctxt "uttgconsts.sclashactivity"
-msgid "Clash of Themes"
+msgid "Clash of Activities"
 msgstr ""
 
 #: uttgconsts.sclashes
@@ -1922,7 +1922,7 @@ msgid "Ready to generate timetable. Show timetable check Summary?"
 msgstr ""
 
 #: uttgconsts.snonscatteredactivity
-msgid "Non Scattered Themes"
+msgid "Non Scattered Activities"
 msgstr ""
 
 #: uttgconsts.snumhardresourcerestrictions

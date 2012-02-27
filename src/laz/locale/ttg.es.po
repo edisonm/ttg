@@ -521,7 +521,7 @@ msgstr "Cargo:"
 
 #: tconfigform.lbbreaktimetableresource.caption
 msgctxt "tconfigform.lbbreaktimetableresource.caption"
-msgid "Gap TT. Resources:"
+msgid "Break TT. Resources:"
 msgstr "Huecos h. prof.:"
 
 #: tconfigform.lbbrokensubjects.caption
@@ -1215,7 +1215,7 @@ msgstr "0 "
 
 #: tprogressform.pnlbreaktimetableresource.caption
 msgctxt "tprogressform.pnlbreaktimetableresource.caption"
-msgid " Gap TT. Resources:"
+msgid "Break TT. Resources:"
 msgstr "Fracc. h. profesores:"
 
 #: tprogressform.pnlbreaktimetableresourcecount.caption
@@ -1230,7 +1230,7 @@ msgstr " Valor:"
 
 #: tprogressform.pnlbrokensession.caption
 msgctxt "tprogressform.pnlbrokensession.caption"
-msgid " Broken Themes:"
+msgid " Broken Sessions:"
 msgstr " Materias cortadas:"
 
 #: tprogressform.pnlbrokensessionnumber.caption
@@ -1732,7 +1732,7 @@ msgstr "Horario base: %d"
 
 #: uttgconsts.sbreaktimetableresource
 msgctxt "uttgconsts.sbreaktimetableresource"
-msgid "Broken TT. Resources"
+msgid "Break TT. Resources"
 msgstr "Fracc. h. profesores"
 
 #: uttgconsts.sbrokensession
@@ -1745,7 +1745,7 @@ msgstr "Los cambios realizados se perderan, Esta seguro?"
 
 #: uttgconsts.sclashactivity
 msgctxt "uttgconsts.sclashactivity"
-msgid "Clash of Themes"
+msgid "Clash of Activities"
 msgstr "Cruce de materias"
 
 #: uttgconsts.sclashes
@@ -1944,7 +1944,7 @@ msgid "Ready to generate timetable. Show timetable check Summary?"
 msgstr "Listo para generar horario. Mostrar resumen del chequeo del horario?"
 
 #: uttgconsts.snonscatteredactivity
-msgid "Non Scattered Themes"
+msgid "Non Scattered Activities"
 msgstr "Materias no dispersas"
 
 #: uttgconsts.snumhardresourcerestrictions

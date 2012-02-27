@@ -189,7 +189,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Broken Themes:'
+      Caption = ' Broken Sessions:'
       TabOrder = 10
     end
     object PnBrokenSessionNumber: TPanel
@@ -536,7 +536,7 @@ object ProgressForm: TProgressForm
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
-      Caption = ' Gap TT. Resources:'
+      Caption = 'Break TT. Resources:'
       TabOrder = 25
     end
     object PnBreakTimetableResourceCount: TPanel

@@ -14,10 +14,10 @@ resourcestring
   SAttendant = 'Attendant';
   SAssign = 'Assign';
   SBaseTimetable = 'Base Timetable: %d';
-  SBreakTimetableResource = 'Broken TT. Resources';
+  SBreakTimetableResource = 'Break TT. Resources';
   SBrokenSession = 'Broken Sessions';
   SChangesWillBeLostWarning = 'Changes will be lost, are you sure?';
-  SClashActivity = 'Clash of Themes';
+  SClashActivity = 'Clash of Activities';
   SClashResource = 'Clash of Resources';
   SClashes = 'Clashes';
   SCluster = 'Cluster';
@@ -66,7 +66,7 @@ resourcestring
   SName = 'Name';
   SNo = 'No';
   SNoErrorReadyForCheckSummary = 'Ready to generate timetable. Show timetable check Summary?';
-  SNonScatteredActivity = 'Non Scattered Themes';
+  SNonScatteredActivity = 'Non Scattered Activities';
   SNumHardResourceRestrictions = 'Number of hard teacher restrictions...';
   SNumSoftResourceRestrictions = 'Number of soft teacher restrictions...';
   SOutOfPositionEmptyHour = 'Out of position empty hours';
