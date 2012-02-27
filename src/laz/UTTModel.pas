@@ -1499,13 +1499,15 @@ begin
       DeltaValues(-1, Session1);
       DeltaValues(-1, Session2);
       if (Period1 < Period2)
-         and (Period2 + Duration2 < FPeriodCount)
-         and (Period1 + Duration2 < FPeriodCount) then
+              and (Duration1 <= Period2 + Duration2)
+              and (Period2 + Duration2 < FPeriodCount)
+              and (Period1 + Duration2 < FPeriodCount) then
       begin
         FSessionToPeriod[Session1] := Period2 - Duration1 + Duration2;
         FSessionToPeriod[Session2] := Period1;
       end
       else if (Period1 > Period2)
+              and (Duration1 <= Period1 + Duration1)
               and (Period1 + Duration1 < FPeriodCount)
               and (Period2 + Duration1 < FPeriodCount) then
       begin
