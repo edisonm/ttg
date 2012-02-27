@@ -510,8 +510,8 @@ msgctxt "tconfigform.lbbreaktimetableresource.caption"
 msgid "Break TT. Resources:"
 msgstr ""
 
-#: tconfigform.lbbrokensubjects.caption
-msgctxt "TCONFIGFORM.LBBROKENSUBJECTS.CAPTION"
+#: tconfigform.lbbrokenthemes.caption
+msgctxt "TCONFIGFORM.LBBROKENTHEMES.CAPTION"
 msgid "Broken Activities:"
 msgstr ""
 
@@ -560,8 +560,8 @@ msgctxt "tconfigform.lbiterations.caption"
 msgid "Iterations:"
 msgstr ""
 
-#: tconfigform.lbjoinedsubjects.caption
-msgctxt "TCONFIGFORM.LBJOINEDSUBJECTS.CAPTION"
+#: tconfigform.lbjoinedthemes.caption
+msgctxt "TCONFIGFORM.LBJOINEDTHEMES.CAPTION"
 msgid "Non Scattered Activities:"
 msgstr ""
 
@@ -926,13 +926,13 @@ msgstr ""
 msgid "Save|Save Timetable"
 msgstr ""
 
-#: tmainform.actsubject.caption
-msgctxt "TMAINFORM.ACTSUBJECT.CAPTION"
+#: tmainform.acttheme.caption
+msgctxt "TMAINFORM.ACTTHEME.CAPTION"
 msgid "Themes"
 msgstr ""
 
-#: tmainform.actsubject.hint
-msgctxt "TMAINFORM.ACTSUBJECT.HINT"
+#: tmainform.acttheme.hint
+msgctxt "TMAINFORM.ACTTHEME.HINT"
 msgid "Themes|Themes"
 msgstr ""
 
@@ -1118,13 +1118,13 @@ msgctxt "TPROGRESSFORM.LBLCLASHRESOURCEVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblclashsubject.caption
-msgctxt "TPROGRESSFORM.LBLCLASHSUBJECT.CAPTION"
+#: tprogressform.lblclashtheme.caption
+msgctxt "TPROGRESSFORM.LBLCLASHTHEME.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblclashsubjectvalue.caption
-msgctxt "TPROGRESSFORM.LBLCLASHSUBJECTVALUE.CAPTION"
+#: tprogressform.lblclashthemevalue.caption
+msgctxt "TPROGRESSFORM.LBLCLASHTHEMEVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
@@ -1148,13 +1148,13 @@ msgctxt "TPROGRESSFORM.LBLIMPORTS.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblnonscatteredsubjectcount.caption
-msgctxt "TPROGRESSFORM.LBLNONSCATTEREDSUBJECTCOUNT.CAPTION"
+#: tprogressform.lblnonscatteredthemecount.caption
+msgctxt "TPROGRESSFORM.LBLNONSCATTEREDTHEMECOUNT.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblnonscatteredsubjectvalue.caption
-msgctxt "TPROGRESSFORM.LBLNONSCATTEREDSUBJECTVALUE.CAPTION"
+#: tprogressform.lblnonscatteredthemevalue.caption
+msgctxt "TPROGRESSFORM.LBLNONSCATTEREDTHEMEVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
@@ -1188,13 +1188,13 @@ msgctxt "TPROGRESSFORM.LBLRESOURCERESTRICTIONVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblsubjectrestriction.caption
-msgctxt "TPROGRESSFORM.LBLSUBJECTRESTRICTION.CAPTION"
+#: tprogressform.lblthemerestriction.caption
+msgctxt "TPROGRESSFORM.LBLTHEMERESTRICTION.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lblsubjectrestrictionvalue.caption
-msgctxt "TPROGRESSFORM.LBLSUBJECTRESTRICTIONVALUE.CAPTION"
+#: tprogressform.lblthemerestrictionvalue.caption
+msgctxt "TPROGRESSFORM.LBLTHEMERESTRICTIONVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
@@ -1248,18 +1248,18 @@ msgctxt "TPROGRESSFORM.PNLCLASHRESOURCEVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
-#: tprogressform.pnlclashsubject.caption
-msgctxt "TPROGRESSFORM.PNLCLASHSUBJECT.CAPTION"
+#: tprogressform.pnlclashtheme.caption
+msgctxt "TPROGRESSFORM.PNLCLASHTHEME.CAPTION"
 msgid "Clash of Activities:"
 msgstr ""
 
-#: tprogressform.pnlclashsubjectnumber.caption
-msgctxt "TPROGRESSFORM.PNLCLASHSUBJECTNUMBER.CAPTION"
+#: tprogressform.pnlclashthemenumber.caption
+msgctxt "TPROGRESSFORM.PNLCLASHTHEMENUMBER.CAPTION"
 msgid " Number:"
 msgstr ""
 
-#: tprogressform.pnlclashsubjectvalue.caption
-msgctxt "TPROGRESSFORM.PNLCLASHSUBJECTVALUE.CAPTION"
+#: tprogressform.pnlclashthemevalue.caption
+msgctxt "TPROGRESSFORM.PNLCLASHTHEMEVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
@@ -1293,18 +1293,18 @@ msgctxt "TPROGRESSFORM.PNLINITDATETIME.CAPTION"
 msgid "Started at:"
 msgstr ""
 
-#: tprogressform.pnlnonscatteredsubject.caption
-msgctxt "TPROGRESSFORM.PNLNONSCATTEREDSUBJECT.CAPTION"
+#: tprogressform.pnlnonscatteredtheme.caption
+msgctxt "TPROGRESSFORM.PNLNONSCATTEREDTHEME.CAPTION"
 msgid " Non Scattered Activities:"
 msgstr ""
 
-#: tprogressform.pnlnonscatteredsubjectcount.caption
-msgctxt "TPROGRESSFORM.PNLNONSCATTEREDSUBJECTCOUNT.CAPTION"
+#: tprogressform.pnlnonscatteredthemecount.caption
+msgctxt "TPROGRESSFORM.PNLNONSCATTEREDTHEMECOUNT.CAPTION"
 msgid " Number:"
 msgstr ""
 
-#: tprogressform.pnlnonscatteredsubjectvalue.caption
-msgctxt "TPROGRESSFORM.PNLNONSCATTEREDSUBJECTVALUE.CAPTION"
+#: tprogressform.pnlnonscatteredthemevalue.caption
+msgctxt "TPROGRESSFORM.PNLNONSCATTEREDTHEMEVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
@@ -1348,18 +1348,18 @@ msgctxt "TPROGRESSFORM.PNLRESOURCERESTRICTIONVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
-#: tprogressform.pnlsubjectrestriction.caption
-msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTION.CAPTION"
+#: tprogressform.pnlthemerestriction.caption
+msgctxt "TPROGRESSFORM.PNLTHEMERESTRICTION.CAPTION"
 msgid " Theme Restrictions:"
 msgstr ""
 
-#: tprogressform.pnlsubjectrestrictionnumber.caption
-msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTIONNUMBER.CAPTION"
+#: tprogressform.pnlthemerestrictionnumber.caption
+msgctxt "TPROGRESSFORM.PNLTHEMERESTRICTIONNUMBER.CAPTION"
 msgid " Number:"
 msgstr ""
 
-#: tprogressform.pnlsubjectrestrictionvalue.caption
-msgctxt "TPROGRESSFORM.PNLSUBJECTRESTRICTIONVALUE.CAPTION"
+#: tprogressform.pnlthemerestrictionvalue.caption
+msgctxt "TPROGRESSFORM.PNLTHEMERESTRICTIONVALUE.CAPTION"
 msgid " Value:"
 msgstr ""
 
@@ -1486,18 +1486,18 @@ msgctxt "TSPLASHFORM.LBLYEARLABEL.CAPTION"
 msgid "..."
 msgstr ""
 
-#: tsubjectform.actsubjectrestriction.caption
-msgctxt "TSUBJECTFORM.ACTSUBJECTRESTRICTION.CAPTION"
+#: tthemeform.actthemerestriction.caption
+msgctxt "TTHEMEFORM.ACTTHEMERESTRICTION.CAPTION"
 msgid "Theme restrictions"
 msgstr ""
 
-#: tsubjectform.actsubjectrestriction.hint
-msgctxt "TSUBJECTFORM.ACTSUBJECTRESTRICTION.HINT"
+#: tthemeform.actthemerestriction.hint
+msgctxt "TTHEMEFORM.ACTTHEMERESTRICTION.HINT"
 msgid "Theme restrictions|Input theme restrictions"
 msgstr ""
 
-#: tsubjectform.caption
-msgctxt "TSUBJECTFORM.CAPTION"
+#: tthemeform.caption
+msgctxt "TTHEMEFORM.CAPTION"
 msgid "Themes"
 msgstr ""
 
@@ -1537,11 +1537,11 @@ msgid "Swap time slots|Swap time slots"
 msgstr ""
 
 #: ttimetableform.actclashactivity.caption
-msgid "Clashes of subjects"
+msgid "Clashes of themes"
 msgstr ""
 
 #: ttimetableform.actclashactivity.hint
-msgid "Clashes of subjects|Clashes of subjects"
+msgid "Clashes of themes|Clashes of themes"
 msgstr ""
 
 #: ttimetableform.actclashresource.caption
