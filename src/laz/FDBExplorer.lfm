@@ -1,172 +1,194 @@
-object DBExplorerForm: TDBExplorerForm
-  Left = 593
-  Height = 589
-  Top = 303
-  Width = 688
+inherited DBExplorerForm: TDBExplorerForm
+  Left = 931
+  Height = 586
+  Top = 316
+  Width = 711
   Caption = 'Database Explorer'
-  ClientHeight = 589
-  ClientWidth = 688
+  ClientHeight = 586
+  ClientWidth = 711
   OnClose = FormClose
   OnCreate = FormCreate
-  Position = poDesktopCenter
-  LCLVersion = '0.9.31'
-  object Memo1: TMemo
-    Left = 8
-    Height = 152
-    Top = 72
-    Width = 529
-    Anchors = [akTop, akLeft, akRight, akBottom]
-    TabOrder = 0
+  inherited TBEditor: TToolBar
+    Width = 711
+    inherited DBNavigator: TDBNavigator
+      Hints.Strings = (      )
+    end
   end
-  object DBGrid1: TDBGrid
-    Left = 8
-    Height = 347
-    Top = 232
-    Width = 671
-    Anchors = [akLeft, akRight, akBottom]
-    Color = clWindow
-    Columns = <>
-    DataSource = Datasource1
-    TabOrder = 1
+  inherited PnStatus: TPanel
+    Top = 567
+    Width = 711
+    ClientWidth = 711
+    inherited LbRecordNo: TLabel
+      Left = 709
+    end
   end
-  object BtExecuteScript: TButton
-    Left = 545
-    Height = 27
-    Top = 134
-    Width = 134
-    Anchors = [akTop, akRight]
-    Caption = 'Execute Script'
-    OnClick = BtExecuteScriptClick
-    TabOrder = 2
+  inherited PnEditor: TPanel
+    Height = 542
+    Width = 711
+    Anchors = [akTop, akLeft]
+    ClientHeight = 542
+    ClientWidth = 711
+    inherited DBGrid: TDBGrid
+      Left = 8
+      Height = 304
+      Top = 231
+      Width = 696
+      Align = alNone
+      Anchors = [akLeft, akRight, akBottom]
+      TabOrder = 1
+    end
+    object Memo1: TMemo[1]
+      Left = 8
+      Height = 162
+      Top = 64
+      Width = 554
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      TabOrder = 0
+    end
+    object BtExecuteScript: TButton[2]
+      Left = 570
+      Height = 27
+      Top = 135
+      Width = 134
+      Anchors = [akTop, akRight]
+      Caption = 'Execute Script'
+      OnClick = BtExecuteScriptClick
+      TabOrder = 2
+    end
+    object TBShowMetadata: TButton[3]
+      Left = 570
+      Height = 27
+      Top = 7
+      Width = 134
+      Anchors = [akTop, akRight]
+      Caption = 'Show Metadata'
+      OnClick = TBShowMetadataClick
+      TabOrder = 3
+    end
+    object CBMetadataType: TComboBox[4]
+      Left = 8
+      Height = 24
+      Hint = 'Metadata Type'
+      Top = 7
+      Width = 554
+      Anchors = [akTop, akLeft, akRight]
+      ItemHeight = 0
+      TabOrder = 4
+    end
+    object BtSaveResults: TButton[5]
+      Left = 570
+      Height = 27
+      Top = 199
+      Width = 134
+      Anchors = [akTop, akRight]
+      Caption = 'Save Results'
+      OnClick = BtSaveResultsClick
+      TabOrder = 5
+    end
+    object CBTable: TDBLookupComboBox[6]
+      Left = 8
+      Height = 24
+      Hint = 'Tables'
+      Top = 35
+      Width = 554
+      Anchors = [akTop, akLeft, akRight]
+      KeyField = 'Name'
+      ListField = 'Name'
+      ListFieldIndex = 0
+      LookupCache = False
+      TabOrder = 6
+    end
+    object TBShowTable: TButton[7]
+      Left = 570
+      Height = 27
+      Top = 39
+      Width = 134
+      Anchors = [akTop, akRight]
+      Caption = 'Show Table'
+      OnClick = TBShowTableClick
+      TabOrder = 7
+    end
+    object BtOpenQuery: TButton[8]
+      Left = 570
+      Height = 27
+      Top = 167
+      Width = 134
+      Anchors = [akTop, akRight]
+      Caption = 'Open Query'
+      OnClick = BtOpenQueryClick
+      TabOrder = 8
+    end
+    object BtOpenScript: TButton[9]
+      Left = 570
+      Height = 27
+      Top = 71
+      Width = 134
+      Anchors = [akTop, akRight]
+      Caption = 'Open Script'
+      OnClick = BtOpenScriptClick
+      TabOrder = 9
+    end
+    object BtSaveScript: TButton[10]
+      Left = 570
+      Height = 27
+      Top = 103
+      Width = 134
+      Anchors = [akTop, akRight]
+      Caption = 'Save Script'
+      OnClick = BtSaveScriptClick
+      TabOrder = 10
+    end
   end
-  object TBShowMetadata: TButton
-    Left = 545
-    Height = 27
-    Top = 8
-    Width = 134
-    Anchors = [akTop, akRight]
-    Caption = 'Show Metadata'
-    OnClick = TBShowMetadataClick
-    TabOrder = 3
+  inherited ImageList: TImageList
+    top = 81
   end
-  object CBMetadataType: TComboBox
-    Left = 8
-    Height = 27
-    Hint = 'Metadata Type'
-    Top = 8
-    Width = 529
-    Anchors = [akTop, akLeft, akRight]
-    ItemHeight = 0
-    TabOrder = 4
+  inherited DataSource: TDatasource
+    top = 81
   end
-  object BtSaveResults: TButton
-    Left = 545
-    Height = 27
-    Top = 197
-    Width = 134
-    Anchors = [akTop, akRight]
-    Caption = 'Save Results'
-    OnClick = BtSaveResultsClick
-    TabOrder = 5
+  inherited ActionList: TActionList
+    top = 81
   end
-  object CBTable: TDBLookupComboBox
-    Left = 8
-    Height = 27
-    Hint = 'Tables'
-    Top = 38
-    Width = 529
-    Anchors = [akTop, akLeft, akRight]
-    KeyField = 'Name'
-    ListField = 'Name'
-    ListFieldIndex = 0
-    LookupCache = False
-    TabOrder = 6
-  end
-  object TBShowTable: TButton
-    Left = 545
-    Height = 27
-    Top = 40
-    Width = 134
-    Anchors = [akTop, akRight]
-    Caption = 'Show Table'
-    OnClick = TBShowTableClick
-    TabOrder = 7
-  end
-  object BtOpenQuery: TButton
-    Left = 545
-    Height = 27
-    Top = 166
-    Width = 134
-    Anchors = [akTop, akRight]
-    Caption = 'Open Query'
-    OnClick = BtOpenQueryClick
-    TabOrder = 8
-  end
-  object BtOpenScript: TButton
-    Left = 545
-    Height = 27
-    Top = 72
-    Width = 134
-    Anchors = [akTop, akRight]
-    Caption = 'Open Script'
-    OnClick = BtOpenScriptClick
-    TabOrder = 9
-  end
-  object BtSaveScript: TButton
-    Left = 545
-    Height = 27
-    Top = 103
-    Width = 134
-    Anchors = [akTop, akRight]
-    Caption = 'Save Script'
-    OnClick = BtSaveScriptClick
-    TabOrder = 10
-  end
-  object ZTable1: TZTable
+  object ZTable1: TZTable[6]
     Connection = SourceDataModule.DbZConnection
     left = 440
-    top = 168
+    top = 161
   end
-  object ZSQLMetadata1: TZSQLMetadata
+  object ZSQLMetadata1: TZSQLMetadata[7]
     Connection = SourceDataModule.DbZConnection
     MetadataType = mdProcedures
     left = 344
-    top = 168
+    top = 161
   end
-  object Datasource1: TDatasource
-    left = 344
-    top = 96
-  end
-  object ZQuery1: TZQuery
+  object ZQuery1: TZQuery[8]
     Connection = SourceDataModule.DbZConnection
     Params = <>
     left = 440
-    top = 96
+    top = 89
   end
-  object SaveResults: TSaveDialog
+  object SaveResults: TSaveDialog[9]
     DefaultExt = '.csv'
     Filter = 'Comma delimited file (*.csv)|*.csv'
     left = 368
     top = 277
   end
-  object DSTables: TDatasource
+  object DSTables: TDatasource[10]
     DataSet = ZTables
     left = 216
-    top = 168
+    top = 161
   end
-  object OpenScript: TOpenDialog
+  object OpenScript: TOpenDialog[11]
     DefaultExt = '.sql'
     Filter = 'SQL Script (*.sql)|*.sql'
     left = 139
     top = 277
   end
-  object SaveScript: TSaveDialog
+  object SaveScript: TSaveDialog[12]
     DefaultExt = '.sql'
     Filter = 'SQL Script (*.sql)|*.sql'
     left = 248
     top = 277
   end
-  object ZTables: TZQuery
+  object ZTables: TZQuery[13]
     Connection = SourceDataModule.DbZConnection
     SQL.Strings = (
       'SELECT trim(name) as Name FROM sqlite_master'
@@ -175,6 +197,6 @@ object DBExplorerForm: TDBExplorerForm
     )
     Params = <>
     left = 216
-    top = 96
+    top = 89
   end
 end

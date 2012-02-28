@@ -2104,6 +2104,12 @@ object MainForm: TMainForm
       ImageIndex = 17
       OnExecute = ActMakeTimetableExecute
     end
+    object ActDBExplorer: TAction
+      Category = 'Tools'
+      AutoCheck = True
+      Caption = 'Database Explorer...'
+      OnExecute = ActDBExplorerExecute
+    end
     object ActLangDefault: TAction
       Category = 'Tools'
       AutoCheck = True
@@ -2125,11 +2131,6 @@ object MainForm: TMainForm
       Caption = 'Spanish'
       GroupIndex = 1
       OnExecute = ActLangSpanishExecute
-    end
-    object ActDBExplorer: TAction
-      Category = 'Tools'
-      Caption = 'Database Explorer...'
-      OnExecute = ActDBExplorerExecute
     end
   end
   object SaveDialogCSV: TSaveDialog

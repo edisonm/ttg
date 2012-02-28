@@ -6,14 +6,14 @@ unit FDBExplorer;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, DBGrids, Menus, DbCtrls, ZDataset, ZSqlMetadata, DSource, db;
+  Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs, db,
+  StdCtrls, DBGrids, Menus, DbCtrls, ZDataset, ZSqlMetadata, DSource, FSingleEditor;
 
 type
 
   { TDBExplorerForm }
 
-  TDBExplorerForm = class(TForm)
+  TDBExplorerForm = class(TSingleEditorForm)
     BtExecuteScript: TButton;
     TBShowMetadata: TButton;
     BtSaveResults: TButton;
@@ -22,9 +22,7 @@ type
     BtOpenScript: TButton;
     BtSaveScript: TButton;
     CBMetadataType: TComboBox;
-    Datasource1: TDatasource;
     DSTables: TDatasource;
-    DBGrid1: TDBGrid;
     CBTable: TDBLookupComboBox;
     Memo1: TMemo;
     OpenScript: TOpenDialog;
@@ -93,7 +91,7 @@ begin
   ZSQLMetadata1.Close;
   ZSQLMetadata1.MetadataType := TZMetadataType(CBMetadataType.ItemIndex);
   ZSQLMetadata1.Open;
-  Datasource1.DataSet := ZSQLMetadata1;
+  DataSource.DataSet := ZSQLMetadata1;
 end;
 
 procedure TDBExplorerForm.BtOpenQueryClick(Sender: TObject);
@@ -102,7 +100,7 @@ begin
   ZQuery1.SQL.Clear;
   ZQuery1.SQL.AddStrings(Memo1.Lines);
   ZQuery1.Open;
-  Datasource1.DataSet := ZQuery1;
+  DataSource.DataSet := ZQuery1;
 end;
 
 procedure TDBExplorerForm.BtSaveScriptClick(Sender: TObject);
@@ -137,7 +135,7 @@ procedure TDBExplorerForm.BtSaveResultsClick(Sender: TObject);
 begin
   if SaveResults.Execute then
   begin
-    SaveDataSetToCSVFile(Datasource1.DataSet, SaveResults.FileName);
+    SaveDataSetToCSVFile(DataSource.DataSet, SaveResults.FileName);
   end;
 end;
 
@@ -146,7 +144,7 @@ begin
   ZTable1.Close;
   ZTable1.TableName := CBTable.Text;
   ZTable1.Open;
-  Datasource1.DataSet := ZTable1;
+  DataSource.DataSet := ZTable1;
 end;
 
 procedure TDBExplorerForm.FormClose(Sender: TObject;

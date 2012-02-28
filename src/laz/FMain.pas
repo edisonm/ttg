@@ -155,6 +155,7 @@ type
     FResourceTypeForm,
     FParallelForm,
     FHourForm,
+    FDBExplorerForm,
     FPeriodForm: TCrossManyToManyEditor0Form;
     FProgress: Integer;
     FRelProgress: Integer;
@@ -213,12 +214,11 @@ end;
 
 procedure TMainForm.ActDBExplorerExecute(Sender: TObject);
 begin
-  with TDBExplorerForm.Create(Self) do
-    try
-      Show;
-    finally
-      // free;
-    end;
+   TDBExplorerForm.ToggleSingleEditor(Self,
+                                      FDBExplorerForm,
+                                      ConfigStorage,
+                                      ActDBExplorer,
+                                      nil);
 end;
 
 procedure TMainForm.ActLangDefaultExecute(Sender: TObject);

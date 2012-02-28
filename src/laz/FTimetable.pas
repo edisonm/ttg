@@ -290,7 +290,6 @@ begin
   QuBrokenSessionHourDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuBrokenSessionHourDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuBrokenSessionHourDetailNaTheme.DisplayLabel := SFlActivity_IdTheme;
-  
 end;
 
 procedure TTimetableForm.QuClashResourceAfterScroll(DataSet: TDataSet);
