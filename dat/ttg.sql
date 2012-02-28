@@ -13,6 +13,12 @@ CREATE TABLE IF NOT EXISTS `Theme`(
     `IdTheme` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Theme Id */,
     `NaTheme` VARCHAR(20) NOT NULL UNIQUE /* Theme Name */
 ); /* Themes */
+CREATE TABLE IF NOT EXISTS `Theme_`(
+    `IdTheme_` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Theme Id */,
+    `IdTheme` INTEGER,
+    `IdCategory` INTEGER,
+    `NaTheme` VARCHAR(30) NOT NULL UNIQUE /* Theme Name */
+); /* Themes */
 CREATE TABLE IF NOT EXISTS `Category`(
     `IdCategory` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Id */,
     `NaCategory` VARCHAR(25) NOT NULL UNIQUE /* Name */,
@@ -86,6 +92,7 @@ CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
 CREATE TABLE IF NOT EXISTS `Activity`(
     `IdActivity` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Activity Id */,
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
+    `IdTheme_` INTEGER /*  NOT NULL Theme Id */,
     `IdCategory` INTEGER NOT NULL /* Category */,
     `IdParallel` INTEGER NOT NULL /* Parallel */,
     `Composition` VARCHAR(40) NOT NULL /* Configuration of periods */,
