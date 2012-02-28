@@ -344,69 +344,41 @@ var
   FIdResourceTypeToResourceType, FResourceTypeToIdResourceType,
   FIdResourceRestrictionTypeToResourceRestrictionType, FResourceToIdResource,
   FResourceRestrictionTypeToIdResourceRestrictionType: TDynamicIntegerArray;
-  FThemeToComposition: TDynamicIntegerArrayArray;  
-  procedure Load(ATable: TDataSet; const ALstName: string; out FMinIdLst: Integer;
-    out FIdLstALst: TDynamicIntegerArray;
-    out FLstAIdLst: TDynamicIntegerArray);
+  FThemeToComposition: TDynamicIntegerArrayArray;
+  procedure Load(ATable: TDataSet; const AListName: string; out FMinIdList: Integer;
+    out FIdListToList: TDynamicIntegerArray;
+    out FListToIdList: TDynamicIntegerArray);
   var
     Field: TField;
-    Index, Value, MaxIdLst: Integer;
+    Index, Value, MaxIdList: Integer;
   begin
     with ATable do
     begin
       First;
-      Field := FindField(ALstName);
-      FMinIdLst := Field.AsInteger;
-      MaxIdLst := Field.AsInteger;
-      SetLength(FLstAIdLst, RecordCount);
+      Field := FindField(AListName);
+      FMinIdList := Field.AsInteger;
+      MaxIdList := Field.AsInteger;
+      SetLength(FListToIdList, RecordCount);
       for Index := 0 to RecordCount - 1 do
       begin
         Value := Field.AsInteger;
-        if MaxIdLst < Value then
-          MaxIdLst := Value;
-        if FMinIdLst > Value then
-          FMinIdLst := Value;
-        FLstAIdLst[Index] := Value;
+        if MaxIdList < Value then
+          MaxIdList := Value;
+        if FMinIdList > Value then
+          FMinIdList := Value;
+        FListToIdList[Index] := Value;
         Next;
       end;
       First;
-      SetLength(FIdLstALst, MaxIdLst - FMinIdLst + 1);
+      SetLength(FIdListToList, MaxIdList - FMinIdList + 1);
       for Index := 0 to RecordCount - 1 do
       begin
-        FIdLstALst[Field.AsInteger - FMinIdLst] := Index;
+        FIdListToList[Field.AsInteger - FMinIdList] := Index;
         Next;
       end;
       First;
     end;
   end;
-  (*
-  procedure Load2(ATable: TDataSet; ALstName1, ALstName2: string;
-    out FLst12ALst: TDynamicIntegerArray);
-  var
-    i, j, k, n: Integer;
-    VField1, VField2: TField;
-  begin
-    with ATable do
-    begin
-      IndexFieldNames := ALstName1 + ';' + ALstName2;
-      First;
-      n := RecordCount;
-      SetLength(FLst12ALst, FLst1Count, FLst2Count);
-      for i := 0 to FLst1Count - 1 do
-        for j := 0 to FLst2Count - 1 do
-          FLst12ALst[i, j] := -1;
-      VField1 := FindField(ALstName1);
-      VField2 := FindField(ALstName2);
-      while not EOF do
-      begin
-        i := FIdALst[VField1.AsInteger - FMinId1];
-        j := FIdALst[VField2.AsInteger - FMinId2];
-        FLst12ALst[i, j] := k;
-        Next;
-      end;
-    end;
-  end;
-  *)
   procedure LoadPeriod;
   var
     Period, Day, Hour: Integer;
