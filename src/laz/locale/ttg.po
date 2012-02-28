@@ -245,7 +245,7 @@ msgstr ""
 
 #: dsourcebaseconsts.stbparticipant
 msgctxt "dsourcebaseconsts.stbparticipant"
-msgid "Requirements"
+msgid "Participants"
 msgstr ""
 
 #: dsourcebaseconsts.stbresource
@@ -1210,7 +1210,7 @@ msgstr ""
 
 #: tresourceform.groupbox3.caption
 msgctxt "tresourceform.groupbox3.caption"
-msgid "Requirements"
+msgid "Participants"
 msgstr ""
 
 #: tselperiodform.bbcancel.caption

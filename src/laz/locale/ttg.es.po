@@ -249,7 +249,7 @@ msgstr "Periodos"
 
 #: dsourcebaseconsts.stbparticipant
 msgctxt "dsourcebaseconsts.stbparticipant"
-msgid "Requirements"
+msgid "Participants"
 msgstr "Ayudas"
 
 #: dsourcebaseconsts.stbresource
@@ -1223,7 +1223,7 @@ msgstr "Distribucion"
 
 #: tresourceform.groupbox3.caption
 msgctxt "tresourceform.groupbox3.caption"
-msgid "Requirements"
+msgid "Participants"
 msgstr "Ayudas"
 
 #: tselperiodform.bbcancel.caption
