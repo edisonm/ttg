@@ -2,7 +2,7 @@
 unit DSourceBase;
 
 (*
-  28/02/2012 14:52
+  28/02/2012 16:43
 
   Warning:
 
@@ -189,6 +189,7 @@ begin
   begin
     Add('TbTheme.IdTheme=' + SFlTheme_IdTheme);
     Add('TbTheme.NaTheme=' + SFlTheme_NaTheme);
+    Add('TbTheme.Composition=' + SFlTheme_Composition);
     Add('TbDay.IdDay=' + SFlDay_IdDay);
     Add('TbDay.NaDay=' + SFlDay_NaDay);
     Add('TbHour.IdHour=' + SFlHour_IdHour);

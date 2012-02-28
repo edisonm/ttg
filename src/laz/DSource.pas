@@ -16,10 +16,10 @@ type
   TSourceDataModule = class(TSourceBaseDataModule)
     ZTables: TZReadOnlyQuery;
     QuResource: TZReadOnlyQuery;
-    procedure TbActivityBeforePost(DataSet: TDataSet);
+    procedure TbThemeBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
-    procedure TbActivityCalcFields(DataSet: TDataSet);
+    procedure TbThemeCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     procedure SetFieldCaption(ADataSet: TDataSet);
@@ -57,7 +57,7 @@ implementation
 uses
   Variants, FConfig, UTTGDBUtils, URelUtils, uttgconsts, dsourcebaseconsts;
 
-procedure TSourceDataModule.TbActivityBeforePost(DataSet: TDataSet);
+procedure TSourceDataModule.TbThemeBeforePost(DataSet: TDataSet);
 var
   s: string;
 begin
@@ -67,13 +67,13 @@ begin
     s := FindField('Composition').AsString;
     if CompositionToDuration(s) <= 0 then
       raise Exception.CreateFmt(SInvalidComposition, [s]);
-    with FindField('IdTheme') do DefaultExpression := AsString;
-    with FindField('IdCategory') do DefaultExpression := AsString;
-    with FindField('IdParallel') do DefaultExpression := AsString;
+    // with FindField('IdTheme') do DefaultExpression := AsString;
+    // with FindField('IdCategory') do DefaultExpression := AsString;
+    // with FindField('IdParallel') do DefaultExpression := AsString;
   end;
 end;
 
-procedure TSourceDataModule.TbActivityCalcFields(DataSet: TDataSet);
+procedure TSourceDataModule.TbThemeCalcFields(DataSet: TDataSet);
 var
   v: Variant;
 begin
@@ -442,7 +442,7 @@ end;
 procedure TSourceDataModule.PrepareTables;
 begin
   PrepareFields;
-  TbActivity.FindField('Composition').DisplayWidth := 10;
+  TbTheme.FindField('Composition').DisplayWidth := 10;
   ApplyOnTables(SetFieldCaption);
   PrepareLookupFields;
   HideFields;

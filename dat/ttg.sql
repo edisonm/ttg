@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  28/02/2012 14:51
+  28/02/2012 16:43
 
   Warning:
 
@@ -11,7 +11,8 @@
 
 CREATE TABLE IF NOT EXISTS `Theme`(
     `IdTheme` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Theme Id */,
-    `NaTheme` VARCHAR(30) NOT NULL UNIQUE /* Theme Name */
+    `NaTheme` VARCHAR(30) NOT NULL UNIQUE /* Theme Name */,
+    `Composition` VARCHAR(40) NOT NULL /* Configuration of periods */
 ); /* Themes */
 CREATE TABLE IF NOT EXISTS `Day`(
     `IdDay` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Day Id */,
@@ -69,7 +70,6 @@ CREATE TABLE IF NOT EXISTS `Activity`(
     `IdActivity` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Activity Id */,
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `NaActivity` VARCHAR(25) NOT NULL /* Activity Name */,
-    `Composition` VARCHAR(40) NOT NULL /* Configuration of periods */,
   CONSTRAINT `ixThemeActivity` UNIQUE(`IdTheme`,`NaActivity`),
   CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE RESTRICT

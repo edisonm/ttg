@@ -13,7 +13,7 @@ inherited SourceDataModule: TSourceDataModule
     top = 24
   end
   inherited TbActivity: TZTable
-    OnCalcFields = TbActivityCalcFields
+    OnCalcFields = TbThemeCalcFields
   end
   object ZTables: TZReadOnlyQuery[41]
     Connection = DbZConnection

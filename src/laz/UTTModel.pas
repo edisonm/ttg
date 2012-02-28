@@ -344,7 +344,7 @@ var
   FIdResourceTypeToResourceType, FResourceTypeToIdResourceType,
   FIdResourceRestrictionTypeToResourceRestrictionType, FResourceToIdResource,
   FResourceRestrictionTypeToIdResourceRestrictionType: TDynamicIntegerArray;
-  
+  FThemeToComposition: TDynamicIntegerArrayArray;  
   procedure Load(ATable: TDataSet; const ALstName: string; out FMinIdLst: Integer;
     out FIdLstALst: TDynamicIntegerArray;
     out FLstAIdLst: TDynamicIntegerArray);
@@ -509,7 +509,7 @@ var
   procedure LoadResourceRestriction;
   var
     ResourceRestriction, Resource, Period, Day, Hour,
-      ResourceRestrictionType, Value: Integer;
+      ResourceRestrictionType: Integer;
     VFieldResource, VFieldDay, VFieldHour,
       VFieldResourceRestrictionType: TField;
   begin
@@ -541,18 +541,42 @@ var
       Filtered := False;
     end;
   end;
+  procedure LoadTheme;
+  var
+    Theme, CompositionCount, VPos: Integer;
+    VFieldComposition: TField;
+    Composition: string;
+  begin
+    with SourceDataModule.TbTheme do
+    begin
+      IndexFieldNames := 'IdTheme';
+      VFieldComposition := FindField('Composition');
+      SetLength(FThemeToComposition, FThemeCount, 0);
+      for Theme := 0 to FThemeCount - 1 do
+      begin
+        Composition := VFieldComposition.AsString;
+        VPos := 1;
+        CompositionCount := 0;
+        while VPos <= Length(Composition) do
+        begin
+          Inc(CompositionCount);
+          SetLength(FThemeToComposition, CompositionCount);
+          FThemeToComposition[Theme, CompositionCount]
+            := StrToInt(ExtractString(Composition, VPos, '.'));
+        end;
+      end;
+    end;
+  end;
   procedure LoadActivity;
   var
-    Theme, Session1, Activity, Session2, Session, VPos: Integer;
-    VFieldActivity, VFieldTheme, VFieldComposition: TField;
-    Composition: string;
+    Theme, Session1, Activity, Session2, Session: Integer;
+    VFieldTheme: TField;
   begin
     with SourceDataModule.TbActivity do
     begin
       IndexFieldNames := 'IdActivity';
       First;
       VFieldTheme := FindField('IdTheme');
-      VFieldComposition := FindField('Composition');
       FActivityCount := RecordCount;
       SetLength(FActivityToSessions, FActivityCount);
       SetLength(FActivityToTheme, FActivityCount);
@@ -561,15 +585,10 @@ var
       begin
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         FActivityToTheme[Activity] := Theme;
-        Composition := VFieldComposition.AsString;
-        VPos := 1;
         Session1 := Session2;
-        while VPos <= Length(Composition) do
-        begin
-          // SetLength(FSessionToDuration, Session2 + 1);
-          FSessionToDuration[Session2] := StrToInt(ExtractString(Composition, VPos, '.'));
-          Inc(Session2);
-        end;
+        Move(FThemeToComposition[Theme, 0], FSessionToDuration[Session1],
+             Length(FThemeToComposition[Theme]));
+        Inc(Session2, Length(FThemeToComposition[Theme]));
         SetLength(FSessionToActivity, Session2);
         SetLength(FActivityToSessions[Activity], Session2 - Session1);
         for Session := Session1 to Session2 - 1 do
@@ -592,7 +611,7 @@ var
   procedure LoadRequirement;
   var
     Requirement, Counter, RequirementCount, Activity, Resource: Integer;
-    VFieldTheme, VFieldActivity, VFieldResource, VFieldNumRequirement: TField;
+    VFieldActivity, VFieldResource, VFieldNumRequirement: TField;
   begin
     with SourceDataModule.TbRequirement do
     begin
@@ -745,6 +764,7 @@ begin
     LoadResource;
     LoadResourceRestrictionType;
     LoadResourceRestriction;
+    LoadTheme;
     LoadActivity;
     LoadRequirement;
     LoadGreedyData;
@@ -921,7 +941,7 @@ end;
 procedure TTimetable.DeltaValues(Delta, Session: Integer);
 var
   ResourceRestrictionType, Period1, Period2, Period, Period0, DeltaBrokenSession,
-  Day, DDay, Day1, Day2, Hour, Hour1, Hour2, Resource, Duration, Theme, Limit,
+  Day, DDay, Day1, Day2, Hour, Hour1, Hour2, Resource, Duration, Limit,
   Requirement, Count, Activity, DeltaBreakTimetableResource, MinPeriod, MaxPeriod: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
@@ -940,7 +960,6 @@ begin
       Limit := 0
     else
       Limit := 1;
-    Theme := FSessionToTheme[Session];
     Activity := FSessionToActivity[Session];
     for Requirement := 0 to High(FActivityToResources[Activity]) do
     begin
@@ -1473,7 +1492,7 @@ end;
 
 procedure TTimetable.Reset;
 var
-  Resource, ResourceType, Period, Theme, ResourceRestrictionType, Day, Activity: Integer;
+  Resource, ResourceType, Period, ResourceRestrictionType, Day, Activity: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin

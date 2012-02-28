@@ -125,7 +125,7 @@ var
   FieldComposition: TField;
 begin
   Result := 0;
-  with SourceDataModule, TbActivity do
+  with SourceDataModule, TbTheme do
   begin
     VBookmark := GetBookmark;
     DisableControls;

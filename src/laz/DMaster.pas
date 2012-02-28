@@ -363,7 +363,7 @@ begin
       QuResource.Open;
       OpenTables;
     end;
-    TbActivity.BeforePost := TbActivityBeforePost;
+    TbTheme.BeforePost := TbThemeBeforePost;
   end;
 end;
 

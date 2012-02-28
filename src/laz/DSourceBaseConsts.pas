@@ -2,7 +2,7 @@
 unit DSourceBaseConsts;
 
 (*
-  28/02/2012 14:52
+  28/02/2012 16:43
 
   Warning:
 
@@ -39,6 +39,7 @@ resourcestring
 
   SFlTheme_IdTheme = 'Id';
   SFlTheme_NaTheme = 'Name';
+  SFlTheme_Composition = 'Composition';
   SFlDay_IdDay = 'Id';
   SFlDay_NaDay = 'Name';
   SFlHour_IdHour = 'Id';
