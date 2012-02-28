@@ -931,7 +931,7 @@ Activity
 "266";"44";"S";
 "267";"81";"S";
 "268";"118";"S";
-Requirement
+Participant
 849
 "IdActivity";"IdResource";"NumResource";
 "13";"1";"1";

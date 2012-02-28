@@ -330,7 +330,7 @@ end;
 
 procedure TMasterDataModule.DataModuleCreate(Sender: TObject);
 begin
-  TbTmpResourceWorkLoadIdResource.DisplayLabel := SFlRequirement_IdResource;
+  TbTmpResourceWorkLoadIdResource.DisplayLabel := SFlParticipant_IdResource;
   TbTmpResourceWorkLoadNaResource.DisplayLabel := SFlResource_NaResource;
   TbTmpResourceWorkLoadWorkLoad.DisplayLabel := SLoad;
   

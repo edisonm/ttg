@@ -255,10 +255,10 @@ begin
     FieldName := 'Duration';
     DataSet := TbActivity;
   end;
-  Field := TStringField.Create(TbRequirement.Owner);
+  Field := TStringField.Create(TbParticipant.Owner);
   with Field do
   begin
-    DisplayLabel := SFlRequirement_IdResource;
+    DisplayLabel := SFlParticipant_IdResource;
     DisplayWidth := 31;
     FieldKind := fkLookup;
     FieldName := 'NameResource';
@@ -268,7 +268,7 @@ begin
     KeyFields := 'IdResource';
     Size := 31;
     Lookup := True;
-    DataSet := TbRequirement;
+    DataSet := TbParticipant;
   end;
 end;
 
@@ -293,7 +293,7 @@ begin
     FindField('IdActivity').Visible := False;
     FindField('IdTheme').Visible := False;
   end;
-  with TbRequirement do
+  with TbParticipant do
   begin
     FindField('IdActivity').Visible := False;
     FindField('IdResource').Visible := False;

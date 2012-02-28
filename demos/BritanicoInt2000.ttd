@@ -168,8 +168,8 @@ Period
 ResourceType
 4
 "IdResourceType";"NaResourceType";"DefaultLimit";"ValResourceType";
-"1";"Profesor";"1";"305";
-"2";"Aula";"0";"65";
+"1";"Profesor";"1";"345";
+"2";"Aula";"0";"413";
 "3";"Curso";"1";"902";
 "4";"Campo";"1000";"0";
 Resource
@@ -692,7 +692,7 @@ Activity
 "388";"92";"A";
 "389";"15";"A";
 "390";"15";"B";
-Requirement
+Participant
 396
 "IdActivity";"IdResource";"NumResource";
 "312";"20";"1";

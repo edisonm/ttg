@@ -51,20 +51,20 @@ msgctxt "dsourcebaseconsts.sflperiod_idhour"
 msgid "Hour"
 msgstr "Hour"
 
-#: dsourcebaseconsts.sflrequirement_idactivity
-msgctxt "dsourcebaseconsts.sflrequirement_idactivity"
+#: dsourcebaseconsts.sflparticipant_idactivity
+msgctxt "dsourcebaseconsts.sflparticipant_idactivity"
 msgid "Category"
 msgstr ""
 
-#: dsourcebaseconsts.sflrequirement_idresource
+#: dsourcebaseconsts.sflparticipant_idresource
 #, fuzzy
 #| msgid "Assistant"
-msgctxt "dsourcebaseconsts.sflrequirement_idresource"
+msgctxt "dsourcebaseconsts.sflparticipant_idresource"
 msgid "Resource"
 msgstr "Ayudante"
 
-#: dsourcebaseconsts.sflrequirement_numresource
-msgctxt "dsourcebaseconsts.sflrequirement_numresource"
+#: dsourcebaseconsts.sflparticipant_numresource
+msgctxt "dsourcebaseconsts.sflparticipant_numresource"
 msgid "Number"
 msgstr "Apellido"
 
@@ -247,8 +247,8 @@ msgctxt "dsourcebaseconsts.stbperiod"
 msgid "Periods"
 msgstr "Periodos"
 
-#: dsourcebaseconsts.stbrequirement
-msgctxt "dsourcebaseconsts.stbrequirement"
+#: dsourcebaseconsts.stbparticipant
+msgctxt "dsourcebaseconsts.stbparticipant"
 msgid "Requirements"
 msgstr "Ayudas"
 

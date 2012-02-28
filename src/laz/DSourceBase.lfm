@@ -119,16 +119,16 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 344
     Top = 148
   end
-  object TbRequirement: TZTable
+  object TbParticipant: TZTable
     Tag = 9
     Connection = DbZConnection
-    TableName = 'Requirement'
+    TableName = 'Participant'
     IndexFieldNames = 'IdActivity;IdResource'
     Left = 432
     Top = 144
   end
-  object DSRequirement: TDataSource
-    DataSet = TbRequirement
+  object DSParticipant: TDataSource
+    DataSet = TbParticipant
     Left = 440
     Top = 136
   end

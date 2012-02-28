@@ -51,18 +51,18 @@ msgctxt "dsourcebaseconsts.sflperiod_idhour"
 msgid "Hour"
 msgstr ""
 
-#: dsourcebaseconsts.sflrequirement_idactivity
-msgctxt "dsourcebaseconsts.sflrequirement_idactivity"
+#: dsourcebaseconsts.sflparticipant_idactivity
+msgctxt "dsourcebaseconsts.sflparticipant_idactivity"
 msgid "Category"
 msgstr ""
 
-#: dsourcebaseconsts.sflrequirement_idresource
-msgctxt "dsourcebaseconsts.sflrequirement_idresource"
+#: dsourcebaseconsts.sflparticipant_idresource
+msgctxt "dsourcebaseconsts.sflparticipant_idresource"
 msgid "Resource"
 msgstr ""
 
-#: dsourcebaseconsts.sflrequirement_numresource
-msgctxt "dsourcebaseconsts.sflrequirement_numresource"
+#: dsourcebaseconsts.sflparticipant_numresource
+msgctxt "dsourcebaseconsts.sflparticipant_numresource"
 msgid "Number"
 msgstr ""
 
@@ -243,8 +243,8 @@ msgctxt "dsourcebaseconsts.stbperiod"
 msgid "Periods"
 msgstr ""
 
-#: dsourcebaseconsts.stbrequirement
-msgctxt "dsourcebaseconsts.stbrequirement"
+#: dsourcebaseconsts.stbparticipant
+msgctxt "dsourcebaseconsts.stbparticipant"
 msgid "Requirements"
 msgstr ""
 

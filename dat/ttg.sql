@@ -74,16 +74,16 @@ CREATE TABLE IF NOT EXISTS `Activity`(
   CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE RESTRICT
 ); /* Activities */
-CREATE TABLE IF NOT EXISTS `Requirement`(
+CREATE TABLE IF NOT EXISTS `Participant`(
     `IdActivity` INTEGER NOT NULL /* Category Id */,
     `IdResource` INTEGER NOT NULL /* Resource Id */,
     `NumResource` INTEGER NOT NULL /* Number of Resources */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdActivity`,`IdResource`),
-  CONSTRAINT `ActivityRequirement` FOREIGN KEY (`IdActivity`)
+  CONSTRAINT `ActivityParticipant` FOREIGN KEY (`IdActivity`)
     REFERENCES `Activity`(`IdActivity`) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `ResourceRequirement` FOREIGN KEY (`IdResource`)
+  CONSTRAINT `ResourceParticipant` FOREIGN KEY (`IdResource`)
     REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE RESTRICT
-); /* Requirements */
+); /* Participants */
 CREATE TABLE IF NOT EXISTS `Timetable`(
     `IdTimetable` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Timetable Id */,
     `TimeIni` DATETIME NOT NULL /* Initial Time */,

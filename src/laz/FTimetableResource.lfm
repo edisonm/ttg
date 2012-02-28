@@ -301,17 +301,17 @@ inherited TimetableResourceForm: TTimetableResourceForm
     SQL.Strings = (
       'SELECT'
       ' IdTimetable,'
-      ' Requirement.IdResource as IdResource,'
+      ' Participant.IdResource as IdResource,'
       ' Activity.IdActivity,'
       ' IdHour,'
       ' IdDay,'
       ' Activity.IdTheme'
       'FROM'
-      'Activity INNER JOIN Requirement ON Activity.IdActivity=Requirement.IdActivity'
+      'Activity INNER JOIN Participant ON Activity.IdActivity=Participant.IdActivity'
       'INNER JOIN TimetableDetail ON Activity.IdActivity = TimetableDetail.IdActivity'
       'INNER JOIN Theme ON Activity.IdTheme=Theme.IdTheme'
       'WHERE IdTimetable=:IdTimetable'
-      '  AND Requirement.IdResource=:IdResource'
+      '  AND Participant.IdResource=:IdResource'
     )
     Params = <    
       item

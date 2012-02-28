@@ -616,16 +616,16 @@ var
       end;
     end;
   end;
-  procedure LoadRequirement;
+  procedure LoadParticipant;
   var
-    Requirement, Counter, RequirementCount, Activity, Resource: Integer;
+    Participant, Counter, ParticipantCount, Activity, Resource: Integer;
     VFieldActivity, VFieldResource, VFieldNumResource: TField;
   begin
-    with SourceDataModule.TbRequirement do
+    with SourceDataModule.TbParticipant do
     begin
       IndexFieldNames := 'IdActivity;IdResource';
       First;
-      RequirementCount := RecordCount;
+      ParticipantCount := RecordCount;
       SetLength(FActivityToResources, FActivityCount, 0);
       SetLength(FResourceToActivities, FResourceCount, 0);
       SetLength(FActivityResourceCount, FActivityCount, FResourceCount);
@@ -635,7 +635,7 @@ var
       VFieldActivity := FindField('IdActivity');
       VFieldResource := FindField('IdResource');
       VFieldNumResource := FindField('NumResource');
-      for Requirement := 0 to RequirementCount - 1 do
+      for Participant := 0 to ParticipantCount - 1 do
       begin
         Activity := FIdActivityToActivity[VFieldActivity.AsInteger - FMinIdActivity];
         Resource := FIdResourceToResource[VFieldResource.AsInteger - FMinIdResource];
@@ -774,7 +774,7 @@ begin
     LoadResourceRestriction;
     LoadTheme;
     LoadActivity;
-    LoadRequirement;
+    LoadParticipant;
     LoadGreedyData;
   end;
 end;
@@ -950,7 +950,7 @@ procedure TTimetable.DeltaValues(Delta, Session: Integer);
 var
   ResourceRestrictionType, Period1, Period2, Period, Period0, DeltaBrokenSession,
   Day, DDay, Day1, Day2, Hour, Hour1, Hour2, Resource, Duration, Limit,
-  Requirement, Count, Activity, DeltaBreakTimetableResource, MinPeriod, MaxPeriod: Integer;
+  Participant, Count, Activity, DeltaBreakTimetableResource, MinPeriod, MaxPeriod: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
@@ -969,9 +969,9 @@ begin
     else
       Limit := 1;
     Activity := FSessionToActivity[Session];
-    for Requirement := 0 to High(FActivityToResources[Activity]) do
+    for Participant := 0 to High(FActivityToResources[Activity]) do
     begin
-      Resource := FActivityToResources[Activity, Requirement];
+      Resource := FActivityToResources[Activity, Participant];
       Count := FActivityResourceCount[Activity, Resource];
       for Period := Period1 to Period2 do
       begin

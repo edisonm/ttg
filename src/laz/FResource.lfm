@@ -97,11 +97,11 @@ inherited ResourceForm: TResourceForm
           Top = 1
           Width = 287
           Align = alLeft
-          Caption = 'Requirements'
+          Caption = 'Participants'
           ClientHeight = 206
           ClientWidth = 279
           TabOrder = 0
-          object DbGRequirements: TDBGrid
+          object DbGParticipants: TDBGrid
             Left = 0
             Height = 206
             Top = 0
@@ -109,7 +109,7 @@ inherited ResourceForm: TResourceForm
             Align = alClient
             Color = clWindow
             Columns = <>
-            DataSource = SourceDataModule.DSRequirement
+            DataSource = SourceDataModule.DSParticipant
             Scrollbars = ssAutoBoth
             TabOrder = 0
             TitleFont.Height = -11

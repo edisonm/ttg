@@ -18,7 +18,7 @@ type
   TResourceForm	= class(TMasterDetailEditorForm)
     TBResourceRestriction: TToolButton;
     ActResourceRestriction: TAction;
-    DbGRequirements: TDBGrid;
+    DbGParticipants: TDBGrid;
     GroupBox3: TGroupBox;
     Panel3: TPanel;
     Splitter2: TSplitter;
@@ -153,16 +153,16 @@ begin
     TbActivity.MasterFields := 'IdResource';
     TbActivity.LinkedFields := 'IdResource';
     TbActivity.MasterSource := DSResource;
-    TbRequirement.MasterFields := 'IdTheme;IdCategory;IdParallel';
-    TbRequirement.LinkedFields := 'IdTheme;IdCategory;IdParallel';
-    TbRequirement.MasterSource := SourceDataModule.DSActivity;
+    TbParticipant.MasterFields := 'IdTheme;IdCategory;IdParallel';
+    TbParticipant.LinkedFields := 'IdTheme;IdCategory;IdParallel';
+    TbParticipant.MasterSource := SourceDataModule.DSActivity;
   end;
 end;
 
 procedure TResourceForm.FormDestroy(Sender: TObject);
 begin
   inherited;
-  SourceDataModule.TbRequirement.MasterSource := nil;
+  SourceDataModule.TbParticipant.MasterSource := nil;
   SourceDataModule.TbActivity.MasterSource := nil;
 end;
 

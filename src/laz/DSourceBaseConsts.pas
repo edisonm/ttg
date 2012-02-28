@@ -32,7 +32,7 @@ resourcestring
   STbResourceRestrictionType = 'Types of Resource Restrictions';
   STbResourceRestriction = 'Resource Restrictions';
   STbActivity = 'Activities';
-  STbRequirement = 'Requirements';
+  STbParticipant = 'Participants';
   STbTimetable = 'Timetables';
   STbTimetableDetail = 'Detail of Timetables';
   STbTimetableResource = 'Resources of Timetables';
@@ -67,9 +67,9 @@ resourcestring
   SFlActivity_IdActivity = 'Id';
   SFlActivity_IdTheme = 'Theme';
   SFlActivity_NaActivity = 'Category';
-  SFlRequirement_IdActivity = 'Category';
-  SFlRequirement_IdResource = 'Resource';
-  SFlRequirement_NumResource = 'Number';
+  SFlParticipant_IdActivity = 'Category';
+  SFlParticipant_IdResource = 'Resource';
+  SFlParticipant_NumResource = 'Number';
   SFlTimetable_IdTimetable = 'Id';
   SFlTimetable_TimeIni = 'Initial Time';
   SFlTimetable_TimeEnd = 'End Time';
