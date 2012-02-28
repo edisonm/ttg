@@ -36,8 +36,6 @@ type
     MILangEnglish: TMenuItem;
     MIResource: TMenuItem;
     MITheme: TMenuItem;
-    MIParallel: TMenuItem;
-    MICategory: TMenuItem;
     MIResourceType: TMenuItem;
     MIFile: TMenuItem;
     MISave: TMenuItem;
@@ -65,8 +63,6 @@ type
     TBPassword: TToolButton;
     TBDay: TToolButton;
     TBHour: TToolButton;
-    TBCategory: TToolButton;
-    TBParallel: TToolButton;
     TBResourceType: TToolButton;
     TBResource: TToolButton;
     TBPeriod: TToolButton;
@@ -91,8 +87,6 @@ type
     ActExit: TAction;
     ActDay: TAction;
     ActHour: TAction;
-    ActCategory: TAction;
-    ActParallel: TAction;
     ActResource: TAction;
     ActResourceType: TAction;
     ActPeriod: TAction;
@@ -124,9 +118,7 @@ type
     procedure ActLangSpanishExecute(Sender: TObject);
     procedure ActResourceExecute(Sender: TObject);
     procedure ActThemeExecute(Sender: TObject);
-    procedure ActCategoryExecute(Sender: TObject);
     procedure ActResourceTypeExecute(Sender: TObject);
-    procedure ActParallelExecute(Sender: TObject);
     procedure ActDayExecute(Sender: TObject);
     procedure ActHourExecute(Sender: TObject);
     procedure ActNewExecute(Sender: TObject);
@@ -151,9 +143,7 @@ type
     FConfigFileName: string;
     FConfigStorage: TConfigStorage;
     FDayForm,
-    FCategoryForm,
     FResourceTypeForm,
-    FParallelForm,
     FHourForm,
     FDBExplorerForm,
     FPeriodForm: TCrossManyToManyEditor0Form;
@@ -270,15 +260,6 @@ begin
 				   SourceDataModule.TbTheme);
 end;
 
-procedure TMainForm.ActCategoryExecute(Sender: TObject);
-begin
-   TSingleEditorForm.ToggleSingleEditor(Self,
-					FCategoryForm,
-					ConfigStorage,
-					ActCategory,
-					SourceDataModule.TbCategory);
-end;
-
 procedure TMainForm.ActResourceTypeExecute(Sender: TObject);
 begin
    TSingleEditorForm.ToggleSingleEditor(Self,
@@ -286,15 +267,6 @@ begin
 					ConfigStorage,
 					ActResourceType,
 					SourceDataModule.TbResourceType);
-end;
-
-procedure TMainForm.ActParallelExecute(Sender: TObject);
-begin
-   TSingleEditorForm.ToggleSingleEditor(Self,
-					FParallelForm,
-					ConfigStorage,
-					ActParallel,
-					SourceDataModule.TbParallel);
 end;
 
 procedure TMainForm.ActDayExecute(Sender: TObject);

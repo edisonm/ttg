@@ -1420,23 +1420,23 @@ msgctxt "TTIMETABLEFORM.ACTRESOURCERESTRICTIONNONSATISFIED.HINT"
 msgid "Resource retrictions|Resource restrictions non satisfied"
 msgstr ""
 
-#: ttimetableform.actthemecutday.caption
-msgctxt "TTIMETABLEFORM.ACTTHEMECUTDAY.CAPTION"
+#: ttimetableform.actbrokensessionday.caption
+msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONDAY.CAPTION"
 msgid "Themes cut by the day"
 msgstr ""
 
-#: ttimetableform.actthemecutday.hint
-msgctxt "TTIMETABLEFORM.ACTTHEMECUTDAY.HINT"
+#: ttimetableform.actbrokensessionday.hint
+msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONDAY.HINT"
 msgid "Themes cut by the day|Themes cut by the day"
 msgstr ""
 
-#: ttimetableform.actthemecuthour.caption
-msgctxt "TTIMETABLEFORM.ACTTHEMECUTHOUR.CAPTION"
+#: ttimetableform.actbrokensessionhour.caption
+msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONHOUR.CAPTION"
 msgid "Themes cut by the hour"
 msgstr ""
 
-#: ttimetableform.actthemecuthour.hint
-msgctxt "TTIMETABLEFORM.ACTTHEMECUTHOUR.HINT"
+#: ttimetableform.actbrokensessionhour.hint
+msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONHOUR.HINT"
 msgid "Themes cut by the hour|Themes cut by the hour"
 msgstr ""
 

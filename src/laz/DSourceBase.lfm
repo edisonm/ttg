@@ -15,199 +15,160 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 56
     Top = 40
   end
-  object TbCategory: TZTable
-    Tag = 1
-    Connection = DbZConnection
-    TableName = 'Category'
-    IndexFieldNames = 'IdCategory'
-    Left = 144
-    Top = 60
-  end
-  object DSCategory: TDataSource
-    DataSet = TbCategory
-    Left = 152
-    Top = 52
-  end
-  object TbParallel: TZTable
-    Tag = 2
-    Connection = DbZConnection
-    TableName = 'Parallel'
-    IndexFieldNames = 'IdParallel'
-    Left = 240
-    Top = 48
-  end
-  object DSParallel: TDataSource
-    DataSet = TbParallel
-    Left = 248
-    Top = 40
-  end
   object TbDay: TZTable
-    Tag = 3
+    Tag = 1
     Connection = DbZConnection
     TableName = 'Day'
     IndexFieldNames = 'IdDay'
-    Left = 336
+    Left = 144
     Top = 60
   end
   object DSDay: TDataSource
     DataSet = TbDay
-    Left = 344
+    Left = 152
     Top = 52
   end
   object TbHour: TZTable
-    Tag = 4
+    Tag = 2
     Connection = DbZConnection
     TableName = 'Hour'
     IndexFieldNames = 'IdHour'
-    Left = 432
+    Left = 240
     Top = 48
   end
   object DSHour: TDataSource
     DataSet = TbHour
-    Left = 440
+    Left = 248
     Top = 40
   end
-  object TbCluster: TZTable
-    Tag = 5
-    Connection = DbZConnection
-    TableName = 'Cluster'
-    IndexFieldNames = 'IdCategory;IdParallel'
-    Left = 48
-    Top = 144
-  end
-  object DSCluster: TDataSource
-    DataSet = TbCluster
-    Left = 56
-    Top = 136
-  end
   object TbPeriod: TZTable
-    Tag = 6
+    Tag = 3
     Connection = DbZConnection
     TableName = 'Period'
     IndexFieldNames = 'IdDay;IdHour'
-    Left = 144
-    Top = 156
+    Left = 336
+    Top = 60
   end
   object DSPeriod: TDataSource
     DataSet = TbPeriod
-    Left = 152
-    Top = 148
+    Left = 344
+    Top = 52
   end
   object TbResourceType: TZTable
-    Tag = 7
+    Tag = 4
     Connection = DbZConnection
     TableName = 'ResourceType'
     IndexFieldNames = 'IdResourceType'
-    Left = 240
-    Top = 144
+    Left = 432
+    Top = 48
   end
   object DSResourceType: TDataSource
     DataSet = TbResourceType
-    Left = 248
-    Top = 136
+    Left = 440
+    Top = 40
   end
   object TbResource: TZTable
-    Tag = 8
+    Tag = 5
     Connection = DbZConnection
     TableName = 'Resource'
     IndexFieldNames = 'IdResource'
-    Left = 336
-    Top = 156
+    Left = 48
+    Top = 144
   end
   object DSResource: TDataSource
     DataSet = TbResource
-    Left = 344
-    Top = 148
+    Left = 56
+    Top = 136
   end
   object TbResourceRestrictionType: TZTable
-    Tag = 9
+    Tag = 6
     Connection = DbZConnection
     TableName = 'ResourceRestrictionType'
     IndexFieldNames = 'IdResourceRestrictionType'
-    Left = 432
-    Top = 144
+    Left = 144
+    Top = 156
   end
   object DSResourceRestrictionType: TDataSource
     DataSet = TbResourceRestrictionType
-    Left = 440
-    Top = 136
+    Left = 152
+    Top = 148
   end
   object TbResourceRestriction: TZTable
-    Tag = 10
+    Tag = 7
     Connection = DbZConnection
     TableName = 'ResourceRestriction'
     IndexFieldNames = 'IdResource;IdDay;IdHour'
-    Left = 48
-    Top = 240
+    Left = 240
+    Top = 144
   end
   object DSResourceRestriction: TDataSource
     DataSet = TbResourceRestriction
-    Left = 56
-    Top = 232
+    Left = 248
+    Top = 136
   end
   object TbActivity: TZTable
-    Tag = 11
+    Tag = 8
     Connection = DbZConnection
     TableName = 'Activity'
     IndexFieldNames = 'IdActivity'
-    Left = 144
-    Top = 252
+    Left = 336
+    Top = 156
   end
   object DSActivity: TDataSource
     DataSet = TbActivity
-    Left = 152
-    Top = 244
+    Left = 344
+    Top = 148
   end
   object TbRequirement: TZTable
-    Tag = 12
+    Tag = 9
     Connection = DbZConnection
     TableName = 'Requirement'
     IndexFieldNames = 'IdActivity;IdResource'
-    Left = 240
-    Top = 240
+    Left = 432
+    Top = 144
   end
   object DSRequirement: TDataSource
     DataSet = TbRequirement
-    Left = 248
-    Top = 232
+    Left = 440
+    Top = 136
   end
   object TbTimetable: TZTable
-    Tag = 13
+    Tag = 10
     Connection = DbZConnection
     TableName = 'Timetable'
     IndexFieldNames = 'IdTimetable'
-    Left = 336
-    Top = 252
+    Left = 48
+    Top = 240
   end
   object DSTimetable: TDataSource
     DataSet = TbTimetable
-    Left = 344
-    Top = 244
+    Left = 56
+    Top = 232
   end
   object TbTimetableDetail: TZTable
-    Tag = 14
+    Tag = 11
     Connection = DbZConnection
     TableName = 'TimetableDetail'
     IndexFieldNames = 'IdTimetable;IdActivity;IdDay;IdHour'
-    Left = 432
-    Top = 240
+    Left = 144
+    Top = 252
   end
   object DSTimetableDetail: TDataSource
     DataSet = TbTimetableDetail
-    Left = 440
-    Top = 232
+    Left = 152
+    Top = 244
   end
   object TbTimetableResource: TZTable
-    Tag = 15
+    Tag = 12
     Connection = DbZConnection
     TableName = 'TimetableResource'
     IndexFieldNames = 'IdTimetable;IdActivity;IdResource'
-    Left = 48
-    Top = 336
+    Left = 240
+    Top = 240
   end
   object DSTimetableResource: TDataSource
     DataSet = TbTimetableResource
-    Left = 56
-    Top = 328
+    Left = 248
+    Top = 232
   end
 end

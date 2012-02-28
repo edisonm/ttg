@@ -46,17 +46,17 @@ inherited TimetableForm: TTimetableForm
       ParentShowHint = False
       ShowHint = True
     end
-    object BtThemeCutDay: TToolButton[7]
+    object TBBrokenSessionDay: TToolButton[7]
       Left = 293
       Top = 2
-      Action = ActThemeCutDay
+      Action = ActBrokenSessionDay
       ParentShowHint = False
       ShowHint = True
     end
-    object BtThemeCutHour: TToolButton[8]
+    object TBBrokenSessionHour: TToolButton[8]
       Left = 316
       Top = 2
-      Action = ActThemeCutHour
+      Action = ActBrokenSessionHour
       ParentShowHint = False
       ShowHint = True
     end
@@ -123,7 +123,7 @@ inherited TimetableForm: TTimetableForm
       ClientHeight = 499
       ClientWidth = 481
       TabOrder = 1
-      object dbmSummary: TDBMemo
+      object DBMSummary: TDBMemo
         Left = 0
         Height = 499
         Top = 0
@@ -507,19 +507,19 @@ inherited TimetableForm: TTimetableForm
       ImageIndex = 8
       OnExecute = ActResourceRestrictionNonSatisfiedExecute
     end
-    object ActThemeCutDay: TAction[6]
+    object ActBrokenSessionDay: TAction[6]
       AutoCheck = True
       Caption = 'Themes cut by the day'
       Hint = 'Themes cut by the day|Themes cut by the day'
       ImageIndex = 5
-      OnExecute = ActThemeCutDayExecute
+      OnExecute = ActBrokenSessionDayExecute
     end
-    object ActThemeCutHour: TAction[7]
+    object ActBrokenSessionHour: TAction[7]
       AutoCheck = True
       Caption = 'Themes cut by the hour'
       Hint = 'Themes cut by the hour|Themes cut by the hour'
       ImageIndex = 5
-      OnExecute = ActThemeCutHourExecute
+      OnExecute = ActBrokenSessionHourExecute
     end
     object ActImproveTimeTable: TAction[8]
       AutoCheck = True
@@ -1580,7 +1580,7 @@ inherited TimetableForm: TTimetableForm
       '    AND((TimetableDetail.IdHour>:IdHour)AND(TimetableDetail1.IdHour<:IdHour)'
       '    OR(TimetableDetail.IdHour<:IdHour)AND(TimetableDetail1.IdHour>:IdHour))'
     )
-    DataSource = DSThemeCutHour
+    DataSource = DSBrokenSessionHour
     MasterFields = 'IdTimetable;IdDay;IdHour'
     LinkedFields = 'IdTimetable;IdDay;IdHour'
     IndexFieldNames = 'IdTimetable Asc;IdDay Asc;IdHour Asc;IdCategory Asc;IdParallel Asc'
@@ -1755,7 +1755,7 @@ inherited TimetableForm: TTimetableForm
       Size = 15
     end
   end
-  object DSThemeCutHour: TDatasource[14]
+  object DSBrokenSessionHour: TDatasource[14]
     DataSet = QuBrokenSessionHour
     left = 112
     top = 112

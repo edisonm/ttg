@@ -2,7 +2,7 @@
 unit DSourceBaseConsts;
 
 (*
-  28/02/2012 3:15
+  28/02/2012 14:52
 
   Warning:
 
@@ -24,11 +24,8 @@ uses
 resourcestring
 
   STbTheme = 'Themes';
-  STbCategory = 'Categories';
-  STbParallel = 'Parallels';
   STbDay = 'Working Days';
   STbHour = 'Academic Hours';
-  STbCluster = 'Clusters';
   STbPeriod = 'Periods';
   STbResourceType = 'Resource types';
   STbResource = 'Resources';
@@ -42,18 +39,11 @@ resourcestring
 
   SFlTheme_IdTheme = 'Id';
   SFlTheme_NaTheme = 'Name';
-  SFlCategory_IdCategory = 'Id';
-  SFlCategory_NaCategory = 'Name';
-  SFlCategory_AbCategory = 'Abbreviation';
-  SFlParallel_IdParallel = 'Id';
-  SFlParallel_NaParallel = 'Name';
   SFlDay_IdDay = 'Id';
   SFlDay_NaDay = 'Name';
   SFlHour_IdHour = 'Id';
   SFlHour_NaHour = 'Name';
   SFlHour_Interval = 'Interval';
-  SFlCluster_IdCategory = 'Category';
-  SFlCluster_IdParallel = 'Parallel';
   SFlPeriod_IdDay = 'Day';
   SFlPeriod_IdHour = 'Hour';
   SFlResourceType_IdResourceType = 'IdResourceType';
@@ -75,8 +65,7 @@ resourcestring
   SFlResourceRestriction_IdResourceRestrictionType = 'Restriction Type';
   SFlActivity_IdActivity = 'Id';
   SFlActivity_IdTheme = 'Theme';
-  SFlActivity_IdCategory = 'Category';
-  SFlActivity_IdParallel = 'Parallel';
+  SFlActivity_NaActivity = 'Category';
   SFlActivity_Composition = 'Composition';
   SFlRequirement_IdActivity = 'Category';
   SFlRequirement_IdResource = 'Resource';

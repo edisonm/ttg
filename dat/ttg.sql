@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  28/02/2012 3:15
+  28/02/2012 14:51
 
   Warning:
 
@@ -13,15 +13,6 @@ CREATE TABLE IF NOT EXISTS `Theme`(
     `IdTheme` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Theme Id */,
     `NaTheme` VARCHAR(30) NOT NULL UNIQUE /* Theme Name */
 ); /* Themes */
-CREATE TABLE IF NOT EXISTS `Category`(
-    `IdCategory` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Id */,
-    `NaCategory` VARCHAR(25) NOT NULL UNIQUE /* Name */,
-    `AbCategory` VARCHAR(10) NOT NULL UNIQUE /* Abbreviation */
-); /* Categories */
-CREATE TABLE IF NOT EXISTS `Parallel`(
-    `IdParallel` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Parallel Id */,
-    `NaParallel` VARCHAR(5) NOT NULL UNIQUE /* Parallel Name */
-); /* Parallels */
 CREATE TABLE IF NOT EXISTS `Day`(
     `IdDay` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Day Id */,
     `NaDay` VARCHAR(10) NOT NULL UNIQUE /* Name of Day */
@@ -31,15 +22,6 @@ CREATE TABLE IF NOT EXISTS `Hour`(
     `NaHour` VARCHAR(10) NOT NULL UNIQUE /* Hour Name */,
     `Interval` VARCHAR(21) NOT NULL UNIQUE /* Hour Interval */
 ); /* Academic Hours */
-CREATE TABLE IF NOT EXISTS `Cluster`(
-    `IdCategory` INTEGER NOT NULL /* Category */,
-    `IdParallel` INTEGER NOT NULL /* Parallel */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdCategory`,`IdParallel`),
-  CONSTRAINT `CategoryCluster` FOREIGN KEY (`IdCategory`)
-    REFERENCES `Category`(`IdCategory`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `ParallelCluster` FOREIGN KEY (`IdParallel`)
-    REFERENCES `Parallel`(`IdParallel`) ON UPDATE CASCADE ON DELETE RESTRICT
-); /* Clusters */
 CREATE TABLE IF NOT EXISTS `Period`(
     `IdDay` INTEGER NOT NULL /* Day Id */,
     `IdHour` INTEGER NOT NULL /* Hour Id */,
@@ -86,8 +68,9 @@ CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
 CREATE TABLE IF NOT EXISTS `Activity`(
     `IdActivity` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Activity Id */,
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
-    `NaActivity` VARCHAR(25), /* NOT NULL */
+    `NaActivity` VARCHAR(25) NOT NULL /* Activity Name */,
     `Composition` VARCHAR(40) NOT NULL /* Configuration of periods */,
+  CONSTRAINT `ixThemeActivity` UNIQUE(`IdTheme`,`NaActivity`),
   CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE RESTRICT
 ); /* Activities */

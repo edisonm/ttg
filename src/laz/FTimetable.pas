@@ -58,8 +58,8 @@ type
     QuTimetableDetailResourceRestrictionNaHour: TStringField;
     
     Panel2: TPanel;
-    dbmSummary: TDBMemo;
-    BtThemeCutDay: TToolButton;
+    DBMSummary: TDBMemo;
+    TBBrokenSessionDay: TToolButton;
     QuBrokenSessionDay: TZQuery;
     QuBrokenSessionDayIdCategory: TLongintField;
     QuBrokenSessionDayIdParallel: TLongintField;
@@ -71,12 +71,12 @@ type
     QuBrokenSessionDayNaTheme: TStringField;
     QuBrokenSessionDayNaDay: TStringField;
     QuBrokenSessionDayNaHour: TStringField;
-    BtThemeCutHour: TToolButton;
+    TBBrokenSessionHour: TToolButton;
     QuBrokenSessionHour: TZQuery;
     QuBrokenSessionHourIdDay: TLongintField;
     QuBrokenSessionHourIdHour: TLongintField;
     QuBrokenSessionHourDetail: TZQuery;
-    DSThemeCutHour: TDataSource;
+    DSBrokenSessionHour: TDataSource;
     QuBrokenSessionHourNaDay: TStringField;
     QuBrokenSessionHourNaHour: TStringField;
     QuBrokenSessionHourDetailIdCategory: TLongintField;
@@ -95,8 +95,8 @@ type
     ActClashResource: TAction;
     ActClashActivity: TAction;
     ActResourceRestrictionNonSatisfied: TAction;
-    ActThemeCutDay: TAction;
-    ActThemeCutHour: TAction;
+    ActBrokenSessionDay: TAction;
+    ActBrokenSessionHour: TAction;
     DSClashResource: TDataSource;
     QuClashResourceIdTimetable: TLongintField;
     QuBrokenSessionDayIdTimetable: TLongintField;
@@ -119,8 +119,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure QuClashResourceAfterScroll(DataSet: TDataSet);
     procedure QuClashActivityAfterScroll(DataSet: TDataSet);
-    procedure ActThemeCutDayExecute(Sender: TObject);
-    procedure ActThemeCutHourExecute(Sender: TObject);
+    procedure ActBrokenSessionDayExecute(Sender: TObject);
+    procedure ActBrokenSessionHourExecute(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure DataSourceStateChange(Sender: TObject);
@@ -128,8 +128,8 @@ type
     procedure ActImproveTimeTableExecute(Sender: TObject);
   private
     { Private declarations }
-    FClashActivityForm, FThemeCutHourForm,
-      FThemeCutDayForm, FClashResourceForm: TMasterDetailEditorForm;
+    FClashActivityForm, FBrokenSessionHourForm,
+      FBrokenSessionDayForm, FClashResourceForm: TMasterDetailEditorForm;
     FResourceRestrictionNonSatisfiedForm: TSingleEditorForm;
     FTimetableResourceForm: TTimetableResourceForm;
     {$IFNDEF FREEWARE}
@@ -308,24 +308,24 @@ begin
     [QuClashActivityIdTheme.Value]);
 end;
 
-procedure TTimetableForm.ActThemeCutDayExecute(Sender: TObject);
+procedure TTimetableForm.ActBrokenSessionDayExecute(Sender: TObject);
 begin
   inherited;
-  if TSingleEditorForm.ToggleSingleEditor(Self, FThemeCutDayForm,
-    ConfigStorage, ActThemeCutDay, QuBrokenSessionDay) then
+  if TSingleEditorForm.ToggleSingleEditor(Self, FBrokenSessionDayForm,
+    ConfigStorage, ActBrokenSessionDay, QuBrokenSessionDay) then
   begin
     QuBrokenSessionDay.Close;
     QuBrokenSessionDay.Open;
   end;
 end;
 
-procedure TTimetableForm.ActThemeCutHourExecute(Sender: TObject);
+procedure TTimetableForm.ActBrokenSessionHourExecute(Sender: TObject);
 begin
   inherited;
   with SourceDataModule, QuBrokenSessionHour do
   begin
     if TMasterDetailEditorForm.ToggleMasterDetailEditor
-      (Self, FThemeCutHourForm, ConfigStorage, ActThemeCutHour,
+      (Self, FBrokenSessionHourForm, ConfigStorage, ActBrokenSessionHour,
       QuBrokenSessionHour, QuBrokenSessionHourDetail) then
     begin
       QuBrokenSessionHour.Close;

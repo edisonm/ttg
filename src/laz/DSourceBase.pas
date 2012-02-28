@@ -2,7 +2,7 @@
 unit DSourceBase;
 
 (*
-  28/02/2012 3:15
+  28/02/2012 14:52
 
   Warning:
 
@@ -29,16 +29,10 @@ type
     DbZConnection: TZConnection;
     TbTheme: TZTable;
     DSTheme: TDataSource;
-    TbCategory: TZTable;
-    DSCategory: TDataSource;
-    TbParallel: TZTable;
-    DSParallel: TDataSource;
     TbDay: TZTable;
     DSDay: TDataSource;
     TbHour: TZTable;
     DSHour: TDataSource;
-    TbCluster: TZTable;
-    DSCluster: TDataSource;
     TbPeriod: TZTable;
     DSPeriod: TDataSource;
     TbResourceType: TZTable;
@@ -78,31 +72,27 @@ procedure TSourceBaseDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
   OnDestroy := DataModuleDestroy;
-  SetLength(FTables, 16);
-  SetLength(FMasterRels, 16);
+  SetLength(FTables, 13);
+  SetLength(FMasterRels, 13);
   Tables[0] := TbTheme;
   TbTheme.AfterPost := DataSetAfterPost;
-  Tables[1] := TbCategory;
-  Tables[2] := TbParallel;
-  TbParallel.AfterPost := DataSetAfterPost;
-  Tables[3] := TbDay;
-  Tables[4] := TbHour;
-  Tables[5] := TbCluster;
-  Tables[6] := TbPeriod;
-  Tables[7] := TbResourceType;
-  Tables[8] := TbResource;
+  Tables[1] := TbDay;
+  Tables[2] := TbHour;
+  Tables[3] := TbPeriod;
+  Tables[4] := TbResourceType;
+  Tables[5] := TbResource;
   TbResource.AfterPost := DataSetAfterPost;
-  Tables[9] := TbResourceRestrictionType;
-  Tables[10] := TbResourceRestriction;
-  Tables[11] := TbActivity;
+  Tables[6] := TbResourceRestrictionType;
+  Tables[7] := TbResourceRestriction;
+  Tables[8] := TbActivity;
   TbActivity.AfterPost := DataSetAfterPost;
   TbActivity.AfterDelete := DataSetAfterDelete;
-  Tables[12] := TbRequirement;
-  Tables[13] := TbTimetable;
+  Tables[9] := TbRequirement;
+  Tables[10] := TbTimetable;
   TbTimetable.AfterPost := DataSetAfterPost;
   TbTimetable.AfterDelete := DataSetAfterDelete;
-  Tables[14] := TbTimetableDetail;
-  Tables[15] := TbTimetableResource;
+  Tables[11] := TbTimetableDetail;
+  Tables[12] := TbTimetableResource;
   SetLength(FMasterRels[0], 1);
   with FMasterRels[0, 0] do
   begin
@@ -112,17 +102,8 @@ begin
     UpdateCascade := True;
     DeleteCascade := False;
   end;
-  SetLength(FMasterRels[2], 1);
-  with FMasterRels[2, 0] do
-  begin
-    DetailDataSet := TbCluster;
-    MasterFields := 'IdParallel';
-    DetailFields := 'IdParallel';
-    UpdateCascade := True;
-    DeleteCascade := False;
-  end;
-  SetLength(FMasterRels[8], 3);
-  with FMasterRels[8, 0] do
+  SetLength(FMasterRels[5], 3);
+  with FMasterRels[5, 0] do
   begin
     DetailDataSet := TbRequirement;
     MasterFields := 'IdResource';
@@ -130,7 +111,7 @@ begin
     UpdateCascade := True;
     DeleteCascade := False;
   end;
-  with FMasterRels[8, 1] do
+  with FMasterRels[5, 1] do
   begin
     DetailDataSet := TbResourceRestriction;
     MasterFields := 'IdResource';
@@ -138,7 +119,7 @@ begin
     UpdateCascade := True;
     DeleteCascade := False;
   end;
-  with FMasterRels[8, 2] do
+  with FMasterRels[5, 2] do
   begin
     DetailDataSet := TbTimetableResource;
     MasterFields := 'IdResource';
@@ -146,8 +127,8 @@ begin
     UpdateCascade := True;
     DeleteCascade := False;
   end;
-  SetLength(FMasterRels[11], 3);
-  with FMasterRels[11, 0] do
+  SetLength(FMasterRels[8], 3);
+  with FMasterRels[8, 0] do
   begin
     DetailDataSet := TbRequirement;
     MasterFields := 'IdActivity';
@@ -155,7 +136,7 @@ begin
     UpdateCascade := True;
     DeleteCascade := True;
   end;
-  with FMasterRels[11, 1] do
+  with FMasterRels[8, 1] do
   begin
     DetailDataSet := TbTimetableDetail;
     MasterFields := 'IdActivity';
@@ -163,7 +144,7 @@ begin
     UpdateCascade := True;
     DeleteCascade := True;
   end;
-  with FMasterRels[11, 2] do
+  with FMasterRels[8, 2] do
   begin
     DetailDataSet := TbTimetableResource;
     MasterFields := 'IdActivity';
@@ -171,8 +152,8 @@ begin
     UpdateCascade := True;
     DeleteCascade := False;
   end;
-  SetLength(FMasterRels[13], 2);
-  with FMasterRels[13, 0] do
+  SetLength(FMasterRels[10], 2);
+  with FMasterRels[10, 0] do
   begin
     DetailDataSet := TbTimetableDetail;
     MasterFields := 'IdTimetable';
@@ -180,7 +161,7 @@ begin
     UpdateCascade := True;
     DeleteCascade := True;
   end;
-  with FMasterRels[13, 1] do
+  with FMasterRels[10, 1] do
   begin
     DetailDataSet := TbTimetableResource;
     MasterFields := 'IdTimetable';
@@ -191,11 +172,8 @@ begin
   with DataSetNameList do
   begin
     Add('TbTheme=Theme');
-    Add('TbCategory=Category');
-    Add('TbParallel=Parallel');
     Add('TbDay=Day');
     Add('TbHour=Hour');
-    Add('TbCluster=Cluster');
     Add('TbPeriod=Period');
     Add('TbResourceType=ResourceType');
     Add('TbResource=Resource');
@@ -211,18 +189,11 @@ begin
   begin
     Add('TbTheme.IdTheme=' + SFlTheme_IdTheme);
     Add('TbTheme.NaTheme=' + SFlTheme_NaTheme);
-    Add('TbCategory.IdCategory=' + SFlCategory_IdCategory);
-    Add('TbCategory.NaCategory=' + SFlCategory_NaCategory);
-    Add('TbCategory.AbCategory=' + SFlCategory_AbCategory);
-    Add('TbParallel.IdParallel=' + SFlParallel_IdParallel);
-    Add('TbParallel.NaParallel=' + SFlParallel_NaParallel);
     Add('TbDay.IdDay=' + SFlDay_IdDay);
     Add('TbDay.NaDay=' + SFlDay_NaDay);
     Add('TbHour.IdHour=' + SFlHour_IdHour);
     Add('TbHour.NaHour=' + SFlHour_NaHour);
     Add('TbHour.Interval=' + SFlHour_Interval);
-    Add('TbCluster.IdCategory=' + SFlCluster_IdCategory);
-    Add('TbCluster.IdParallel=' + SFlCluster_IdParallel);
     Add('TbPeriod.IdDay=' + SFlPeriod_IdDay);
     Add('TbPeriod.IdHour=' + SFlPeriod_IdHour);
     Add('TbResourceType.IdResourceType=' + SFlResourceType_IdResourceType);
@@ -244,8 +215,7 @@ begin
     Add('TbResourceRestriction.IdResourceRestrictionType=' + SFlResourceRestriction_IdResourceRestrictionType);
     Add('TbActivity.IdActivity=' + SFlActivity_IdActivity);
     Add('TbActivity.IdTheme=' + SFlActivity_IdTheme);
-    Add('TbActivity.IdCategory=' + SFlActivity_IdCategory);
-    Add('TbActivity.IdParallel=' + SFlActivity_IdParallel);
+    Add('TbActivity.NaActivity=' + SFlActivity_NaActivity);
     Add('TbActivity.Composition=' + SFlActivity_Composition);
     Add('TbRequirement.IdActivity=' + SFlRequirement_IdActivity);
     Add('TbRequirement.IdResource=' + SFlRequirement_IdResource);
@@ -266,11 +236,8 @@ begin
   with DataSetDescList do
   begin
     Add('TbTheme=' + STbTheme);
-    Add('TbCategory=' + STbCategory);
-    Add('TbParallel=' + STbParallel);
     Add('TbDay=' + STbDay);
     Add('TbHour=' + STbHour);
-    Add('TbCluster=' + STbCluster);
     Add('TbPeriod=' + STbPeriod);
     Add('TbResourceType=' + STbResourceType);
     Add('TbResource=' + STbResource);
