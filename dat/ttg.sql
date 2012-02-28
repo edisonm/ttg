@@ -86,8 +86,7 @@ CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
 CREATE TABLE IF NOT EXISTS `Activity`(
     `IdActivity` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Activity Id */,
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
-    `IdCategory` INTEGER NOT NULL /* Category */,
-    `IdParallel` INTEGER NOT NULL /* Parallel */,
+    `NaActivity` VARCHAR(25), /* NOT NULL */
     `Composition` VARCHAR(40) NOT NULL /* Configuration of periods */,
   CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE RESTRICT
