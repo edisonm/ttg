@@ -2,7 +2,7 @@
 unit DSourceBaseConsts;
 
 (*
-  28/02/2012 16:43
+  28/02/2012 16:59
 
   Warning:
 
@@ -67,7 +67,6 @@ resourcestring
   SFlActivity_IdActivity = 'Id';
   SFlActivity_IdTheme = 'Theme';
   SFlActivity_NaActivity = 'Category';
-  SFlActivity_Composition = 'Composition';
   SFlRequirement_IdActivity = 'Category';
   SFlRequirement_IdResource = 'Resource';
   SFlRequirement_NumRequirement = 'Number';

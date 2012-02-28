@@ -2,7 +2,7 @@
 unit DSourceBase;
 
 (*
-  28/02/2012 16:43
+  28/02/2012 16:59
 
   Warning:
 
@@ -217,7 +217,6 @@ begin
     Add('TbActivity.IdActivity=' + SFlActivity_IdActivity);
     Add('TbActivity.IdTheme=' + SFlActivity_IdTheme);
     Add('TbActivity.NaActivity=' + SFlActivity_NaActivity);
-    Add('TbActivity.Composition=' + SFlActivity_Composition);
     Add('TbRequirement.IdActivity=' + SFlRequirement_IdActivity);
     Add('TbRequirement.IdResource=' + SFlRequirement_IdResource);
     Add('TbRequirement.NumRequirement=' + SFlRequirement_NumRequirement);
