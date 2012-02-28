@@ -193,46 +193,6 @@ msgctxt "dsourcebaseconsts.sflresource_numresource"
 msgid "Number"
 msgstr ""
 
-#: dsourcebaseconsts.sflthemerestrictiontype_colthemerestrictiontype
-msgctxt "dsourcebaseconsts.sflthemerestrictiontype_colthemerestrictiontype"
-msgid "Color"
-msgstr ""
-
-#: dsourcebaseconsts.sflthemerestrictiontype_idthemerestrictiontype
-msgctxt "dsourcebaseconsts.sflthemerestrictiontype_idthemerestrictiontype"
-msgid "Id"
-msgstr ""
-
-#: dsourcebaseconsts.sflthemerestrictiontype_nathemerestrictiontype
-msgctxt "dsourcebaseconsts.sflthemerestrictiontype_nathemerestrictiontype"
-msgid "Name"
-msgstr ""
-
-#: dsourcebaseconsts.sflthemerestrictiontype_valthemerestrictiontype
-msgctxt "dsourcebaseconsts.sflthemerestrictiontype_valthemerestrictiontype"
-msgid "Value"
-msgstr ""
-
-#: dsourcebaseconsts.sflthemerestriction_idday
-msgctxt "dsourcebaseconsts.sflthemerestriction_idday"
-msgid "Day"
-msgstr ""
-
-#: dsourcebaseconsts.sflthemerestriction_idhour
-msgctxt "dsourcebaseconsts.sflthemerestriction_idhour"
-msgid "Hour"
-msgstr ""
-
-#: dsourcebaseconsts.sflthemerestriction_idtheme
-msgctxt "dsourcebaseconsts.sflthemerestriction_idtheme"
-msgid "Theme"
-msgstr ""
-
-#: dsourcebaseconsts.sflthemerestriction_idthemerestrictiontype
-msgctxt "dsourcebaseconsts.sflthemerestriction_idthemerestrictiontype"
-msgid "Restriction Type"
-msgstr ""
-
 #: dsourcebaseconsts.sfltheme_idtheme
 msgctxt "dsourcebaseconsts.sfltheme_idtheme"
 msgid "Id"
@@ -365,16 +325,6 @@ msgstr ""
 #: dsourcebaseconsts.stbtheme
 msgctxt "dsourcebaseconsts.stbtheme"
 msgid "Themes"
-msgstr ""
-
-#: dsourcebaseconsts.stbthemerestriction
-msgctxt "dsourcebaseconsts.stbthemerestriction"
-msgid "Theme Restrictions"
-msgstr ""
-
-#: dsourcebaseconsts.stbthemerestrictiontype
-msgctxt "dsourcebaseconsts.stbthemerestrictiontype"
-msgid "Types of Theme Restrictions"
 msgstr ""
 
 #: dsourcebaseconsts.stbtimetable
