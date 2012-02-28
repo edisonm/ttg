@@ -13,7 +13,7 @@ var
   SortInteger: procedure(var KeyList: array of Integer;
     var ValueList: array of Integer; min, max: Integer) of object;
   Sort: procedure(var KeyList: array of Integer; min, max: Integer) of object;
-  
+
 type
   TSortInteger = specialize TSortAlgorithm<Integer,Integer>;
 
@@ -62,7 +62,7 @@ type
     FMinIdDay: Integer;
     FMinIdHour: Integer;
     FSessionNumberDouble: Integer;
-    
+
     FPeriodToDay: TDynamicIntegerArray;
     FPeriodToHour: TDynamicIntegerArray;
     FDayToMaxPeriod: TDynamicIntegerArray;
@@ -83,7 +83,7 @@ type
     FIdActivityToActivity: TDynamicIntegerArray;
     FIdDayToDay: TDynamicIntegerArray;
     FIdHourToHour: TDynamicIntegerArray;
-    
+
     // Sessions are grouped to facilitate mutations.
     // Swap of sessions only have sense in elements of the same group
     // FLastResourceWithNewActivities: Integer;
@@ -91,9 +91,9 @@ type
     // FResourceSorted[Group] == Resource with New Activities
     FGroupCount: Integer;
     FGroupSessions: TDynamicIntegerArrayArray;
-    
+
     FSessionToDuration: TSessionArray;
-    
+
     FDayHourToPeriod: TDynamicIntegerArrayArray;
     FActivityToResources: TDynamicIntegerArrayArray;
     FResourceToActivities: TDynamicIntegerArrayArray;
@@ -101,7 +101,7 @@ type
     FActivityToSessions: TDynamicIntegerArrayArray;
     FResourcePeriodToResourceRestrictionType: TDynamicIntegerArrayArray;
     FActivityResourceCount: TDynamicIntegerArrayArray;
-    
+
     function GetDayToMaxPeriod(Day: Integer): Integer;
   protected
     //property TimetableDetailPattern: TDynamicIntegerArrayArray read FTimetableDetailPattern;
@@ -235,7 +235,7 @@ type
   end;
 
   { TTTBookmark1 }
-  
+
   // Move one Session to one Period
   TTTBookmark1 = class(TBookmark)
   private
@@ -260,9 +260,9 @@ type
     function Eof: Boolean; override;
     property Offset: Integer read FOffset write FOffset;
   end;
-  
+
   { TTTBookmark2 }
-  
+
   TTTBookmark2 = class(TBookmark)
   private
     FPosition: Integer;
@@ -290,9 +290,9 @@ type
     function Eof: Boolean; override;
     property Offset: Integer read FOffset write FOffset;
   end;
-  
+
   { TTTBookmark3 }
-  
+
   TTTBookmark3 = class(TBookmark)
   private
     FPosition: Integer;
@@ -323,7 +323,7 @@ type
     function Eof: Boolean; override;
     property Offset: Integer read FOffset write FOffset;
   end;
-  
+
 implementation
 
 uses
