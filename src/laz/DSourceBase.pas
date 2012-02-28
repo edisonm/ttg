@@ -219,7 +219,7 @@ begin
     Add('TbActivity.NaActivity=' + SFlActivity_NaActivity);
     Add('TbRequirement.IdActivity=' + SFlRequirement_IdActivity);
     Add('TbRequirement.IdResource=' + SFlRequirement_IdResource);
-    Add('TbRequirement.NumRequirement=' + SFlRequirement_NumRequirement);
+    Add('TbRequirement.NumResource=' + SFlRequirement_NumResource);
     Add('TbTimetable.IdTimetable=' + SFlTimetable_IdTimetable);
     Add('TbTimetable.TimeIni=' + SFlTimetable_TimeIni);
     Add('TbTimetable.TimeEnd=' + SFlTimetable_TimeEnd);

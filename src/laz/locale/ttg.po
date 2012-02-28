@@ -1,24 +1,9 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: dsourcebaseconsts.sflactivity_composition
-msgctxt "dsourcebaseconsts.sflactivity_composition"
-msgid "Composition"
-msgstr ""
-
 #: dsourcebaseconsts.sflactivity_idactivity
 msgctxt "dsourcebaseconsts.sflactivity_idactivity"
 msgid "Id"
-msgstr ""
-
-#: dsourcebaseconsts.sflactivity_idcategory
-msgctxt "dsourcebaseconsts.sflactivity_idcategory"
-msgid "Category"
-msgstr ""
-
-#: dsourcebaseconsts.sflactivity_idparallel
-msgctxt "dsourcebaseconsts.sflactivity_idparallel"
-msgid "Parallel"
 msgstr ""
 
 #: dsourcebaseconsts.sflactivity_idtheme
@@ -26,29 +11,9 @@ msgctxt "dsourcebaseconsts.sflactivity_idtheme"
 msgid "Theme"
 msgstr ""
 
-#: dsourcebaseconsts.sflcategory_abcategory
-msgctxt "dsourcebaseconsts.sflcategory_abcategory"
-msgid "Abbreviation"
-msgstr ""
-
-#: dsourcebaseconsts.sflcategory_idcategory
-msgctxt "dsourcebaseconsts.sflcategory_idcategory"
-msgid "Id"
-msgstr ""
-
-#: dsourcebaseconsts.sflcategory_nacategory
-msgctxt "dsourcebaseconsts.sflcategory_nacategory"
-msgid "Name"
-msgstr ""
-
-#: dsourcebaseconsts.sflcluster_idcategory
-msgctxt "dsourcebaseconsts.sflcluster_idcategory"
+#: dsourcebaseconsts.sflactivity_naactivity
+msgctxt "dsourcebaseconsts.sflactivity_naactivity"
 msgid "Category"
-msgstr ""
-
-#: dsourcebaseconsts.sflcluster_idparallel
-msgctxt "dsourcebaseconsts.sflcluster_idparallel"
-msgid "Parallel"
 msgstr ""
 
 #: dsourcebaseconsts.sflday_idday
@@ -76,16 +41,6 @@ msgctxt "dsourcebaseconsts.sflhour_nahour"
 msgid "Name"
 msgstr ""
 
-#: dsourcebaseconsts.sflparallel_idparallel
-msgctxt "dsourcebaseconsts.sflparallel_idparallel"
-msgid "Id"
-msgstr ""
-
-#: dsourcebaseconsts.sflparallel_naparallel
-msgctxt "dsourcebaseconsts.sflparallel_naparallel"
-msgid "Name"
-msgstr ""
-
 #: dsourcebaseconsts.sflperiod_idday
 msgctxt "dsourcebaseconsts.sflperiod_idday"
 msgid "Day"
@@ -106,8 +61,8 @@ msgctxt "dsourcebaseconsts.sflrequirement_idresource"
 msgid "Resource"
 msgstr ""
 
-#: dsourcebaseconsts.sflrequirement_numrequirement
-msgctxt "dsourcebaseconsts.sflrequirement_numrequirement"
+#: dsourcebaseconsts.sflrequirement_numresource
+msgctxt "dsourcebaseconsts.sflrequirement_numresource"
 msgid "Number"
 msgstr ""
 
@@ -193,6 +148,11 @@ msgctxt "dsourcebaseconsts.sflresource_numresource"
 msgid "Number"
 msgstr ""
 
+#: dsourcebaseconsts.sfltheme_composition
+msgctxt "dsourcebaseconsts.sfltheme_composition"
+msgid "Composition"
+msgstr ""
+
 #: dsourcebaseconsts.sfltheme_idtheme
 msgctxt "dsourcebaseconsts.sfltheme_idtheme"
 msgid "Id"
@@ -268,16 +228,6 @@ msgctxt "dsourcebaseconsts.stbactivity"
 msgid "Activities"
 msgstr ""
 
-#: dsourcebaseconsts.stbcategory
-msgctxt "dsourcebaseconsts.stbcategory"
-msgid "Categories"
-msgstr ""
-
-#: dsourcebaseconsts.stbcluster
-msgctxt "dsourcebaseconsts.stbcluster"
-msgid "Clusters"
-msgstr ""
-
 #: dsourcebaseconsts.stbday
 msgctxt "dsourcebaseconsts.stbday"
 msgid "Working Days"
@@ -286,11 +236,6 @@ msgstr ""
 #: dsourcebaseconsts.stbhour
 msgctxt "dsourcebaseconsts.stbhour"
 msgid "Academic Hours"
-msgstr ""
-
-#: dsourcebaseconsts.stbparallel
-msgctxt "dsourcebaseconsts.stbparallel"
-msgid "Parallels"
 msgstr ""
 
 #: dsourcebaseconsts.stbperiod
@@ -1384,6 +1329,26 @@ msgctxt "ttimetableclusterform.tbswapperiods.hint"
 msgid "Swap time slots|Swap time slots"
 msgstr ""
 
+#: ttimetableform.actbrokensessionday.caption
+msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONDAY.CAPTION"
+msgid "Themes cut by the day"
+msgstr ""
+
+#: ttimetableform.actbrokensessionday.hint
+msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONDAY.HINT"
+msgid "Themes cut by the day|Themes cut by the day"
+msgstr ""
+
+#: ttimetableform.actbrokensessionhour.caption
+msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONHOUR.CAPTION"
+msgid "Themes cut by the hour"
+msgstr ""
+
+#: ttimetableform.actbrokensessionhour.hint
+msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONHOUR.HINT"
+msgid "Themes cut by the hour|Themes cut by the hour"
+msgstr ""
+
 #: ttimetableform.actclashactivity.caption
 msgid "Clashes of subjects"
 msgstr ""
@@ -1418,26 +1383,6 @@ msgstr ""
 #: ttimetableform.actresourcerestrictionnonsatisfied.hint
 msgctxt "TTIMETABLEFORM.ACTRESOURCERESTRICTIONNONSATISFIED.HINT"
 msgid "Resource retrictions|Resource restrictions non satisfied"
-msgstr ""
-
-#: ttimetableform.actbrokensessionday.caption
-msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONDAY.CAPTION"
-msgid "Themes cut by the day"
-msgstr ""
-
-#: ttimetableform.actbrokensessionday.hint
-msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONDAY.HINT"
-msgid "Themes cut by the day|Themes cut by the day"
-msgstr ""
-
-#: ttimetableform.actbrokensessionhour.caption
-msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONHOUR.CAPTION"
-msgid "Themes cut by the hour"
-msgstr ""
-
-#: ttimetableform.actbrokensessionhour.hint
-msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONHOUR.HINT"
-msgid "Themes cut by the hour|Themes cut by the hour"
 msgstr ""
 
 #: ttimetableform.acttimetableresource.caption

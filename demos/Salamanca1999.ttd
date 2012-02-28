@@ -933,7 +933,7 @@ Activity
 "268";"118";"S";
 Requirement
 849
-"IdActivity";"IdResource";"NumRequirement";
+"IdActivity";"IdResource";"NumResource";
 "13";"1";"1";
 "14";"1";"1";
 "15";"2";"1";

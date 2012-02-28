@@ -69,7 +69,7 @@ resourcestring
   SFlActivity_NaActivity = 'Category';
   SFlRequirement_IdActivity = 'Category';
   SFlRequirement_IdResource = 'Resource';
-  SFlRequirement_NumRequirement = 'Number';
+  SFlRequirement_NumResource = 'Number';
   SFlTimetable_IdTimetable = 'Id';
   SFlTimetable_TimeIni = 'Initial Time';
   SFlTimetable_TimeEnd = 'End Time';

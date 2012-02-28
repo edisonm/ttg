@@ -694,7 +694,7 @@ Activity
 "390";"15";"B";
 Requirement
 396
-"IdActivity";"IdResource";"NumRequirement";
+"IdActivity";"IdResource";"NumResource";
 "312";"20";"1";
 "308";"20";"1";
 "274";"1";"1";

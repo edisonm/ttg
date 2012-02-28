@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `Activity`(
 CREATE TABLE IF NOT EXISTS `Requirement`(
     `IdActivity` INTEGER NOT NULL /* Category Id */,
     `IdResource` INTEGER NOT NULL /* Resource Id */,
-    `NumRequirement` INTEGER NOT NULL /* Number of Resources */,
+    `NumResource` INTEGER NOT NULL /* Number of Resources */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdActivity`,`IdResource`),
   CONSTRAINT `ActivityRequirement` FOREIGN KEY (`IdActivity`)
     REFERENCES `Activity`(`IdActivity`) ON UPDATE CASCADE ON DELETE CASCADE,

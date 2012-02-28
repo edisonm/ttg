@@ -2,7 +2,7 @@ inherited SourceDataModule: TSourceDataModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 440
-  HorizontalOffset = 568
+  HorizontalOffset = 561
   VerticalOffset = 459
   Width = 667
   inherited DbZConnection: TZConnection
@@ -12,10 +12,10 @@ inherited SourceDataModule: TSourceDataModule
     left = 544
     top = 24
   end
-  inherited TbActivity: TZTable
+  inherited TbTheme: TZTable
     OnCalcFields = TbThemeCalcFields
   end
-  object ZTables: TZReadOnlyQuery[41]
+  object ZTables: TZReadOnlyQuery[27]
     Connection = DbZConnection
     SQL.Strings = (
       'SELECT trim(name) as Name FROM sqlite_master'
@@ -25,7 +25,7 @@ inherited SourceDataModule: TSourceDataModule
     left = 544
     top = 112
   end
-  object QuResource: TZReadOnlyQuery[42]
+  object QuResource: TZReadOnlyQuery[28]
     Connection = DbZConnection
     SQL.Strings = (
       'SELECT IdResource, NaResource AS NameResource'

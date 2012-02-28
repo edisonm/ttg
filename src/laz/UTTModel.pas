@@ -550,6 +550,7 @@ var
     with SourceDataModule.TbTheme do
     begin
       IndexFieldNames := 'IdTheme';
+      First;
       VFieldComposition := FindField('Composition');
       SetLength(FThemeToComposition, FThemeCount, 0);
       for Theme := 0 to FThemeCount - 1 do
@@ -559,12 +560,14 @@ var
         CompositionCount := 0;
         while VPos <= Length(Composition) do
         begin
-          Inc(CompositionCount);
-          SetLength(FThemeToComposition, CompositionCount);
+          SetLength(FThemeToComposition[Theme], CompositionCount + 1);
           FThemeToComposition[Theme, CompositionCount]
             := StrToInt(ExtractString(Composition, VPos, '.'));
+          Inc(CompositionCount);
         end;
+        Next;
       end;
+      First;
     end;
   end;
   procedure LoadActivity;
@@ -586,9 +589,14 @@ var
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
         FActivityToTheme[Activity] := Theme;
         Session1 := Session2;
-        Move(FThemeToComposition[Theme, 0], FSessionToDuration[Session1],
-             Length(FThemeToComposition[Theme]));
-        Inc(Session2, Length(FThemeToComposition[Theme]));
+        while Session2 < Session1 + Length(FThemeToComposition[Theme]) do
+        begin
+          FSessionToDuration[Session2] := FThemeToComposition[Theme, Session2 - Session1];
+          Inc(Session2);
+        end;
+        {Move(FThemeToComposition[Theme, 0], FSessionToDuration[Session1],
+             Length(FThemeToComposition[Theme]) * SizeOf(Integer));
+        Inc(Session2, Length(FThemeToComposition[Theme]));}
         SetLength(FSessionToActivity, Session2);
         SetLength(FActivityToSessions[Activity], Session2 - Session1);
         for Session := Session1 to Session2 - 1 do
@@ -611,7 +619,7 @@ var
   procedure LoadRequirement;
   var
     Requirement, Counter, RequirementCount, Activity, Resource: Integer;
-    VFieldActivity, VFieldResource, VFieldNumRequirement: TField;
+    VFieldActivity, VFieldResource, VFieldNumResource: TField;
   begin
     with SourceDataModule.TbRequirement do
     begin
@@ -626,7 +634,7 @@ var
           FActivityResourceCount[Activity, Resource] := 0;
       VFieldActivity := FindField('IdActivity');
       VFieldResource := FindField('IdResource');
-      VFieldNumRequirement := FindField('NumRequirement');
+      VFieldNumResource := FindField('NumResource');
       for Requirement := 0 to RequirementCount - 1 do
       begin
         Activity := FIdActivityToActivity[VFieldActivity.AsInteger - FMinIdActivity];
@@ -637,7 +645,7 @@ var
         Counter := Length(FResourceToActivities[Resource]);
         SetLength(FResourceToActivities[Resource], Counter + 1);
         FResourceToActivities[Resource, Counter] := Activity;
-        FActivityResourceCount[Activity, Resource] := VFieldNumRequirement.AsInteger;
+        FActivityResourceCount[Activity, Resource] := VFieldNumResource.AsInteger;
         Next;
       end;
       First;
