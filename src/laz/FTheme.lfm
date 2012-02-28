@@ -15,13 +15,6 @@ inherited ThemeForm: TThemeForm
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
     end
-    object BtThemeRestriction: TToolButton[3]
-      Left = 257
-      Top = 2
-      Action = ActThemeRestriction
-      ParentShowHint = False
-      ShowHint = True
-    end
   end
   inherited PnStatus: TPanel
     Top = 442
@@ -152,40 +145,5 @@ inherited ThemeForm: TThemeForm
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
-    object ActThemeRestriction: TAction[2]
-      AutoCheck = True
-      Caption = 'Theme restrictions'
-      Hint = 'Theme restrictions|Input subject restrictions'
-      ImageIndex = 2
-      OnExecute = ActThemeRestrictionExecute
-    end
-  end
-  object QuThemeRestriction: TZQuery[6]
-    Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTheme;IdDay;IdHour'
-    AutoCalcFields = False
-    SQL.Strings = (
-      'select * from ThemeRestriction'
-      'where IdTheme=:IdTheme'
-    )
-    Params = <    
-      item
-        DataType = ftUnknown
-        Name = 'IdTheme'
-        ParamType = ptUnknown
-      end>
-    DataSource = SourceDataModule.DSTheme
-    MasterFields = 'IdTheme'
-    MasterSource = SourceDataModule.DSTheme
-    LinkedFields = 'IdTheme'
-    IndexFieldNames = 'IdTheme Asc;IdDay Asc;IdHour Asc'
-    left = 64
-    top = 152
-    ParamData = <    
-      item
-        DataType = ftUnknown
-        Name = 'IdTheme'
-        ParamType = ptUnknown
-      end>
   end
 end

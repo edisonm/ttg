@@ -78,8 +78,7 @@ begin
     FTimeEnd);
 end;
 
-procedure LoadBookmarks(s: string; Individual: TIndividual;
-    ClusterCount: Integer; out Bookmarks: TBookmarkArray);
+procedure LoadBookmarks(s: string; Individual: TIndividual; out Bookmarks: TBookmarkArray);
 var
   Pos, d, i: Integer;
 begin
@@ -111,7 +110,7 @@ begin
     Individual := DownHill.Model.NewIndividual;
     try
       Individual.Assign(DownHill.BestIndividual);
-      LoadBookmarks(Bookmarks, Individual, ClusterCount, BookmarkArray);
+      LoadBookmarks(Bookmarks, Individual, BookmarkArray);
       try
         TDownHill.MultiDownHill(DownHill, Individual, BookmarkArray,
                                 False, RefreshInterval);

@@ -19,9 +19,7 @@ type
     TBResourceRestriction: TToolButton;
     ActResourceRestriction: TAction;
     DbGRequirements: TDBGrid;
-    DbGJoinedCluster: TDBGrid;
     GroupBox3: TGroupBox;
-    GBJoinedCluster: TGroupBox;
     Panel3: TPanel;
     Splitter2: TSplitter;
     Splitter3: TSplitter;
@@ -158,13 +156,6 @@ begin
     TbRequirement.MasterFields := 'IdTheme;IdCategory;IdParallel';
     TbRequirement.LinkedFields := 'IdTheme;IdCategory;IdParallel';
     TbRequirement.MasterSource := SourceDataModule.DSActivity;
-    TbJoinedCluster.MasterFields := 'IdTheme;IdCategory;IdParallel';
-    TbJoinedCluster.LinkedFields := 'IdTheme;IdCategory;IdParallel';
-    TbJoinedCluster.MasterSource := SourceDataModule.DSActivity;
-    {TbRequirement.Close;
-    QuResource.Close;
-    QuResource.Open;
-    TbRequirement.Open;}
   end;
 end;
 

@@ -27,14 +27,11 @@ type
   private
     { Private declarations }
     FStringsShowResource: TStrings;
-    FStringsShowCluster: TStrings;
     FConfigStorage: TTTGConfig;
     procedure FillResourceRestrictionCount;
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
   public
     { Public declarations }
-    procedure IntercambiarPeriods(AIdTimetable, AIdCategory,
-      AIdParallel, AIdDay1, AIdHour1, AIdDay2, AIdHour2: Integer);
     function PerformAllChecks(AMainStrings, ASubStrings: TStrings;
       AMaxResourceWorkLoad: Integer): Boolean;
     function NewIdTimetable: Integer;
@@ -45,7 +42,6 @@ type
     procedure LoadFromTextFile(const AFileName: TFileName);
     procedure SaveToTextFile(const AFileName: TFileName);
     property StringsShowResource: TStrings read FStringsShowResource;
-    property StringsShowCluster: TStrings read FStringsShowCluster;
     property ConfigStorage: TTTGConfig read FConfigStorage;
     procedure NewDatabase;
   end;
@@ -254,84 +250,6 @@ var
         ASubStrings.Add('');
       end;
   end;
-
-  // Comprueba que no hayan asignadas mas horas de materias a Categories que periodos
-  procedure CheckCategoryLoad;
-  var
-    t, vMainMin, vMainMax, vSubMin, vSubMax: Integer;
-    s: string;
-    HaveInternalProblems: Boolean;
-  begin
-    with SourceDataModule, TbCluster do
-    begin
-      s := '%s %s; %d';
-      HaveInternalProblems := False;
-      try
-        Open;
-        TbActivity.First;
-        TbPeriod.First;
-        First;
-        ASubStrings.Add(SClusterWorkLoadWithoutProblems);
-        vSubMin := ASubStrings.Count;
-        ASubStrings.Add(SClusterWorkLoadHead);
-        while not Eof do
-        begin
-          TbActivity.Filter :=
-            Format('IdCategory=%d and IdParallel=%d', [
-              TbCluster.FindField('IdCategory').AsInteger,
-              TbCluster.FindField('IdParallel').AsInteger]);
-          TbActivity.Filtered := true;
-          TbActivity.First;
-          t := 0;
-          try
-            while not TbActivity.Eof do
-            begin
-              Inc(t, CompositionToDuration(TbActivity.FindField('Composition').AsString));
-              TbActivity.Next;
-            end;
-            if (t <= 0) or (t > TbPeriod.RecordCount) then
-            begin
-              if not HaveInternalProblems then
-              begin
-                AMainStrings.Add(SClusterWorkLoadWithProblems);
-                vMainMin := AMainStrings.Count;
-                AMainStrings.Add(SClusterWorkLoadHead);
-              end;
-              AMainStrings.Add(Format(s, [TbCluster.FindField('AbCategory').Value,
-                TbCluster.FindField('NaParallel').Value, t]));
-              HaveProblems := True;
-              HaveInternalProblems := True;
-            end
-            else
-              ASubStrings.Add(Format(s, [TbCluster.FindField('AbCategory').Value,
-                TbCluster.FindField('NaParallel').Value, t]));
-          except
-            ASubStrings.Add(Format('%s: %s %s %s, %s %s',
-              [SProblems, TbCluster.FindField('AbCategory').AsString,
-              TbCluster.FindField('NaParallel').AsString,
-              STbTheme,
-              TbActivity.FindField('NaTheme').AsString]));
-            HaveProblems := True;
-          end;
-          Next;
-        end;
-        if HaveInternalProblems then
-        begin
-          vMainMax := AMainStrings.Count - 1;
-          EqualSpaced(AMainStrings, vMainMin, vMainMax, ';');
-          AMainStrings.Add('');
-        end;
-        vSubMax := ASubStrings.Count - 1;
-        EqualSpaced(ASubStrings, vSubMin, vSubMax, ';');
-        ASubStrings.Add('');
-      finally
-        TbActivity.Filter := '';
-        TbActivity.Filtered := false;
-        First;
-        TbActivity.First;
-      end;
-    end;
-  end;
 begin
   AMainStrings.Clear;
   ASubStrings.Clear;
@@ -343,7 +261,6 @@ begin
     GetResourceWorkLoad;
     CheckResourceWorkLoad;
     CheckResourceRestrictionCount;
-    CheckCategoryLoad;
   finally
     AMainStrings.EndUpdate;
     ASubStrings.EndUpdate;
@@ -411,68 +328,6 @@ begin
   LoadIniStrings(AStrings, APosition);
 end;
 
-procedure TMasterDataModule.IntercambiarPeriods(AIdTimetable, AIdCategory,
-  AIdParallel, AIdDay1, AIdHour1, AIdDay2, AIdHour2: Integer);
-var
-  Locate1, Locate2: Boolean;
-  Bookmark1, Bookmark2: TBookmark;
-  iIdTheme1, iSession1, iIdTheme2, iSession2: Integer;
-begin
-  with SourceDataModule do
-  begin
-    Locate1 := TbTimetableDetail.Locate(
-      'IdTimetable;IdCategory;IdParallel;IdDay;IdHour',
-      VarArrayOf([AIdTimetable, AIdCategory, AIdParallel, AIdDay1, AIdHour1]), []);
-    Bookmark1 := TbTimetableDetail.GetBookmark;
-    try
-      Locate2 := TbTimetableDetail.Locate(
-        'IdTimetable;IdCategory;IdParallel;IdDay;IdHour',
-        VarArrayOf([AIdTimetable, AIdCategory, AIdParallel, AIdDay2, AIdHour2]), []);
-      Bookmark2 := TbTimetableDetail.GetBookmark;
-      try
-        if Locate1 and Locate2 then
-        begin
-          TbTimetableDetail.GotoBookmark(Bookmark1);
-          iIdTheme1 := TbTimetableDetail.FindField('IdTheme').AsInteger;
-          iSession1 := TbTimetableDetail.FindField('Session').Value;
-          TbTimetableDetail.GotoBookmark(Bookmark2);
-          iIdTheme2 := TbTimetableDetail.FindField('IdTheme').AsInteger;
-          iSession2 := TbTimetableDetail.FindField('Session').Value;
-          TbTimetableDetail.Edit;
-          TbTimetableDetail.FindField('IdTheme').AsInteger := iIdTheme1;
-          TbTimetableDetail.FindField('Session').AsInteger := iSession1;
-          TbTimetableDetail.Post;
-          TbTimetableDetail.GotoBookmark(Bookmark1);
-          TbTimetableDetail.Edit;
-          TbTimetableDetail.FindField('IdTheme').AsInteger := iIdTheme2;
-          TbTimetableDetail.FindField('Session').AsInteger := iSession2;
-          TbTimetableDetail.Post;
-        end
-        else if Locate1 then
-        begin
-          TbTimetableDetail.GotoBookmark(Bookmark1);
-          TbTimetableDetail.Edit;
-          TbTimetableDetail.FindField('IdDay').AsInteger := AIdDay2;
-          TbTimetableDetail.FindField('IdHour').AsInteger := AIdHour2;
-          TbTimetableDetail.Post;
-        end
-        else if Locate2 then
-        begin
-          TbTimetableDetail.GotoBookmark(Bookmark2);
-          TbTimetableDetail.Edit;
-          TbTimetableDetail.FindField('IdDay').AsInteger := AIdDay1;
-          TbTimetableDetail.FindField('IdHour').AsInteger := AIdHour1;
-          TbTimetableDetail.Post;
-        end;
-      finally
-        TbTimetableDetail.FreeBookmark(Bookmark2);
-      end;
-    finally
-      TbTimetableDetail.FreeBookmark(Bookmark1);
-    end;
-  end;
-end;
-
 procedure TMasterDataModule.DataModuleCreate(Sender: TObject);
 begin
   TbTmpResourceWorkLoadIdResource.DisplayLabel := SFlRequirement_IdResource;
@@ -480,19 +335,10 @@ begin
   TbTmpResourceWorkLoadWorkLoad.DisplayLabel := SLoad;
   
   FStringsShowResource := TStringList.Create;
-  FStringsShowCluster := TStringList.Create;
   FConfigStorage := TTTGConfig.Create(Self);
   with FStringsShowResource do
   begin
-    add('Cluster=AbCategory;NaParallel');
-    add('Cluster_Theme=AbCategory;NaParallel;NaTheme');
     add('Theme=NaTheme');
-  end;
-  with FStringsShowCluster do
-  begin
-    add('Theme=NaTheme');
-    add('Resource=NaResource');
-    add('Theme_Resource=NaTheme;NaResource');
   end;
   with SourceDataModule do
   begin
@@ -504,7 +350,6 @@ begin
       DbZConnection.ExecuteDirect(LazarusResources.Find('ttg', 'SQL').Value);
       PrepareTables;
       QuResource.Open;
-      QuCluster.Open;
       OpenTables;
       if Paramcount <> 1 then
       begin
@@ -516,7 +361,6 @@ begin
     begin
       PrepareTables;
       QuResource.Open;
-      QuCluster.Open;
       OpenTables;
     end;
     TbActivity.BeforePost := TbActivityBeforePost;
@@ -526,7 +370,6 @@ end;
 procedure TMasterDataModule.DataModuleDestroy(Sender: TObject);
 begin
   FStringsShowResource.Free;
-  FStringsShowCluster.Free;
 end;
 
 procedure TMasterDataModule.NewDatabase;

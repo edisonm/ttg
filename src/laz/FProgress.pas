@@ -52,11 +52,6 @@ type
     LbElapsedTime: TLabel;
     PnEstimatedTime: TPanel;
     LbRemainingTime: TLabel;
-    PnThemeRestriction: TPanel;
-    PnThemeRestrictionNumber: TPanel;
-    LbThemeRestriction: TLabel;
-    PnThemeRestrictionValue: TPanel;
-    LbThemeRestrictionValue: TLabel;
     PnResourceRestriction: TPanel;
     PnResourceRestrictionNumber: TPanel;
     LbResourceRestriction: TLabel;
@@ -168,8 +163,6 @@ begin
       Format('%d ', [BreakTimetableResource]);
     LbOutOfPositionEmptyHour.Caption := Format('%d ', [OutOfPositionEmptyHour]);
     LbBrokenSession.Caption := Format('%d ', [BrokenSession]);
-    LbThemeRestriction.Caption :=
-      Format('%s ', [VarArrToStr(ThemeRestrictionTypeToThemeCount)]);
     LbClashResource.Caption :=
       Format('%s ', [VarArrToStr(ClashResourceType)]);
     LbResourceRestriction.Caption :=
@@ -183,7 +176,6 @@ begin
     LbBrokenSessionValue.Caption := Format('%d ', [BrokenSessionValue]);
     LbClashResourceValue.Caption := Format('%d ', [ClashResourceValue]);
     LbResourceRestrictionValue.Caption := Format('%d ', [ResourceRestrictionValue]);
-    LbThemeRestrictionValue.Caption := Format('%d ', [ThemeRestrictionValue]);
     LbNonScatteredActivityValue.Caption := Format('%d ', [NonScatteredActivityValue]);
     LbTotalValue.Caption := Format('%d ', [Value]);
   end;

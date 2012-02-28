@@ -50,20 +50,15 @@ type
     FBreakTimetableResourceValue: Integer;
     FNonScatteredActivityValue: Integer;
     FThemeCount: Integer;
-    FThemeRestrictionTypeCount: Integer;
     FResourceTypeCount: Integer;
     FResourceRestrictionTypeCount: Integer;
-    FClusterCount: Integer;
     FDayCount: Integer;
     FHourCount: Integer;
     FPeriodCount: Integer;
     FResourceCount: Integer;
-    FCategoryCount: Integer;
     FActivityCount: Integer;
     FSessionCount: Integer;
-    FJoinedClusterCount: Integer;
-    FMinIdCategory: Integer;
-    FMinIdParallel: Integer;
+    FMinIdActivity: Integer;
     FMinIdDay: Integer;
     FMinIdHour: Integer;
     FSessionNumberDouble: Integer;
@@ -73,34 +68,19 @@ type
     FDayToMaxPeriod: TDynamicIntegerArray;
     FSessionToActivity: TDynamicIntegerArray;
     FSessionToTheme: TDynamicIntegerArray;
-    FClusterToCategory: TDynamicIntegerArray;
     FResourceToNumber: TDynamicIntegerArray;
     FResourceToName: TDynamicStringArray;
     FResourceSorted: TDynamicIntegerArray;
     FActivitySorted: TDynamicIntegerArray;
     FSessionSorted: TDynamicIntegerArray;
-    FThemeRestrictionToTheme: TDynamicIntegerArray;
-    FThemeRestrictionToPeriod: TDynamicIntegerArray;
     FResourceToResourceType: TDynamicIntegerArray;
-    FThemeRestrictionToThemeRestrictionType: TDynamicIntegerArray;
-    FResourceRestrictionToResource: TDynamicIntegerArray;
-    FResourceRestrictionToPeriod: TDynamicIntegerArray;
-    FResourceRestrictionToResourceRestrictionType: TDynamicIntegerArray;
-    FClusterToParallel: TDynamicIntegerArray;
-    FActivityToCluster: TDynamicIntegerArray;
-    FClusterToSessionCount: TDynamicIntegerArray;
-    FThemeRestrictionTypeToValue: TDynamicIntegerArray;
     FResourceRestrictionTypeToValue: TDynamicIntegerArray;
     FResourceTypeToValue: TDynamicIntegerArray;
-    FThemeRestrictionToValue: TDynamicIntegerArray;
-    FResourceRestrictionToValue: TDynamicIntegerArray;
-    FParallelToIdParallel: TDynamicIntegerArray;
     FThemeToIdTheme: TDynamicIntegerArray;
     FDayToIdDay: TDynamicIntegerArray;
     FHourToIdHour: TDynamicIntegerArray;
-    FCategoryToIdCategory: TDynamicIntegerArray;
-    FIdCategoryToCategory: TDynamicIntegerArray;
-    FIdParallelToParallel: TDynamicIntegerArray;
+    FActivityToIdActivity: TDynamicIntegerArray;
+    FIdActivityToActivity: TDynamicIntegerArray;
     FIdDayToDay: TDynamicIntegerArray;
     FIdHourToHour: TDynamicIntegerArray;
     
@@ -115,17 +95,12 @@ type
     FSessionToDuration: TSessionArray;
     
     FDayHourToPeriod: TDynamicIntegerArrayArray;
-    FCategoryParallelToCluster: TDynamicIntegerArrayArray;
     FActivityToResources: TDynamicIntegerArrayArray;
     FResourceToActivities: TDynamicIntegerArrayArray;
-    FClusterThemeToActivity: TDynamicIntegerArrayArray;
     //FTimetableDetailPattern: TDynamicIntegerArrayArray;
     FActivityToSessions: TDynamicIntegerArrayArray;
     FResourcePeriodToResourceRestrictionType: TDynamicIntegerArrayArray;
     FActivityResourceCount: TDynamicIntegerArrayArray;
-    FClusterJoinedClusterToActivity: TDynamicIntegerArrayArray;
-    FClusterJoinedClusterToCluster: TDynamicIntegerArrayArray;
-    FThemePeriodToThemeRestrictionType: TDynamicIntegerArrayArray;
     
     function GetDayToMaxPeriod(Day: Integer): Integer;
   protected
@@ -143,7 +118,6 @@ type
     function NewIndividual: TIndividual; override;
     property PeriodCount: Integer read FPeriodCount;
     property SessionCount: Integer read FSessionCount;
-    property ClusterCount: Integer read FClusterCount;
     property ClashActivityValue: Integer read FClashActivityValue;
     property BreakTimetableResourceValue: Integer read FBreakTimetableResourceValue;
     property OutOfPositionEmptyHourValue: Integer read FOutOfPositionEmptyHourValue;
@@ -151,7 +125,6 @@ type
     property NonScatteredActivityValue: Integer read FNonScatteredActivityValue;
     property SessionNumberDouble: Integer read FSessionNumberDouble;
     property SessionToDuration: TSessionArray read FSessionToDuration;
-    property ClusterToSessionCount: TDynamicIntegerArray read FClusterToSessionCount;
     property ElitistCount: Integer read GetElitistCount;
   end;
 
@@ -181,24 +154,12 @@ type
     TTimetable object, but that are preserved here in order to optimize
     computations.
   }
-  (*
-
-    TODO:
-    2011-03-13:
-    - DONE Change implementation of NonScatteredActivity with a more compositional formula
-    - DONE Remove FClusterThemeDay{Min,Max}Hour
-    - DONE IncCount and DecCount must be methods
-
-
-  *)
   { TTimetableTablingInfo }
   TTimetableTablingInfo = class
   protected
     FResourcePeriodCount: TDynamicIntegerArrayArray;
-    FThemePeriodCount: TDynamicIntegerArrayArray;
     FDayActivityCount: TDynamicIntegerArrayArray;
     FDayActivityAccumulated: TDynamicIntegerArrayArray;
-    FThemeRestrictionTypeToThemeCount: TDynamicIntegerArray;
     FClashResourceType: TDynamicIntegerArray;
     FResourceRestrictionTypeToResourceCount: TDynamicIntegerArray;
     FDayResourceMinHour: TDynamicIntegerArrayArray;
@@ -223,7 +184,6 @@ type
     function GetNonScatteredActivityValue: Integer;
     function GetOutOfPositionEmptyHourValue: Integer;
     function GetClashResourceValue: Integer;
-    function GetThemeRestrictionValue: Integer;
     function GetResourceRestrictionValue: Integer;
     function GetBreakTimetableResourceValue: Integer;
     function GetBrokenSessionValue: Integer;
@@ -255,8 +215,6 @@ type
     procedure DoMoveSession(Session, Period: Integer);
     {procedure SaveToFile(const AFileName: string);}
     property OutOfPositionEmptyHour: Integer read FTablingInfo.FOutOfPositionEmptyHour;
-    property ThemeRestrictionTypeToThemeCount: TDynamicIntegerArray
-      read FTablingInfo.FThemeRestrictionTypeToThemeCount;
     property ResourceRestrictionTypeToResourceCount: TDynamicIntegerArray
       read FTablingInfo.FResourceRestrictionTypeToResourceCount;
     property ClashResourceType: TDynamicIntegerArray read FTablingInfo.FClashResourceType;
@@ -269,13 +227,9 @@ type
     property OutOfPositionEmptyHourValue: Integer read GetOutOfPositionEmptyHourValue;
     property BrokenSessionValue: Integer read GetBrokenSessionValue;
     property NonScatteredActivityValue: Integer read GetNonScatteredActivityValue;
-    property ThemeRestrictionValue: Integer read GetThemeRestrictionValue;
     property ResourceRestrictionValue: Integer read GetResourceRestrictionValue;
     property SessionToPeriod: TDynamicIntegerArray
                                 read FSessionToPeriod write FSessionToPeriod;
-    {property ClusterPeriodToSession: TDynamicIntegerArrayArray
-                                       read FClusterPeriodToSession
-                                       write FClusterPeriodToSession;}
     property BreakTimetableResource: Integer read FTablingInfo.FBreakTimetableResource;
     property TablingInfo: TTimetableTablingInfo read FTablingInfo;
   end;
@@ -370,38 +324,6 @@ type
     property Offset: Integer read FOffset write FOffset;
   end;
   
-(*
-  { TTTBookmark3 }
-  
-  TTTBookmark3 = class(TBookmark)
-  private
-    FPosition: Integer;
-    FOffset: Integer;
-    FProgress: Integer;
-    FPeriod1: Integer;
-    FPeriod2: Integer;
-    FPeriod3: Integer;
-    FTimetable: TTimetable;
-    FClusters: TDynamicIntegerArray;
-    function GetCluster: Integer;
-  protected
-    function GetProgress: Integer; override;
-    function GetMax: Integer; override;
-  public
-    constructor Create(ATimetable: TTimetable; AClusters: TDynamicIntegerArray); overload;
-    function Clone: TBookmark; override;
-    procedure First; override;
-    procedure Next; override;
-    procedure Rewind; override;
-    function Move: Integer; override;
-    function Undo: Integer; override;
-    function Eof: Boolean; override;
-    property Cluster: Integer read GetCluster;
-    property Clusters: TDynamicIntegerArray read FClusters;
-    property Offset: Integer read FOffset write FOffset;
-  end;
-*)
-
 implementation
 
 uses
@@ -417,13 +339,11 @@ constructor TTimetableModel.Create(AClashActivityValue,
                                    ANonScatteredActivityValue: Integer);
 var
   FMinIdResource, FMinIdResourceType, FMinIdTheme,
-  FMinIdResourceRestrictionType, FMinIdThemeRestrictionType: Integer;
+  FMinIdResourceRestrictionType: Integer;
   FActivityToTheme, FIdThemeToTheme, FIdResourceToResource,
   FIdResourceTypeToResourceType, FResourceTypeToIdResourceType,
-  FIdResourceRestrictionTypeToResourceRestrictionType,
-  FIdThemeRestrictionTypeToThemeRestrictionType,
-  FResourceToIdResource, FResourceRestrictionTypeToIdResourceRestrictionType,
-  FThemeRestrictionTypeToIdThemeRestrictionType: TDynamicIntegerArray;
+  FIdResourceRestrictionTypeToResourceRestrictionType, FResourceToIdResource,
+  FResourceRestrictionTypeToIdResourceRestrictionType: TDynamicIntegerArray;
   
   procedure Load(ATable: TDataSet; const ALstName: string; out FMinIdLst: Integer;
     out FIdLstALst: TDynamicIntegerArray;
@@ -522,54 +442,6 @@ var
       First;
     end;
   end;
-  procedure LoadCluster;
-  var
-    Cluster, Category, Parallel: Integer;
-    VFieldCategory, VFieldParallel: TField;
-  begin
-    with SourceDataModule.TbCluster do
-    begin
-      IndexFieldNames := 'IdCategory;IdParallel';
-      First;
-      FClusterCount := RecordCount;
-      SetLength(FClusterToCategory, FClusterCount);
-      SetLength(FClusterToParallel, FClusterCount);
-      SetLength(FClusterToCategory, FClusterCount);
-      SetLength(FCategoryParallelToCluster, FCategoryCount, Length
-          (FParallelToIdParallel));
-      VFieldCategory := FindField('IdCategory');
-      VFieldParallel := FindField('IdParallel');
-      for Cluster := 0 to FClusterCount - 1 do
-      begin
-        Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
-        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
-        FClusterToCategory[Cluster] := Category;
-        FClusterToParallel[Cluster] := Parallel;
-        FCategoryParallelToCluster[Category, Parallel] := Cluster;
-        Next;
-      end;
-      First;
-    end;
-  end;
-  procedure LoadThemeRestrictionType;
-  var
-    ThemeRestrictionType: Integer;
-    VFieldValue: TField;
-  begin
-    with SourceDataModule.TbThemeRestrictionType do
-    begin
-      IndexFieldNames := 'IdThemeRestrictionType';
-      First;
-      VFieldValue := FindField('ValThemeRestrictionType');
-      SetLength(FThemeRestrictionTypeToValue, RecordCount);
-      for ThemeRestrictionType := 0 to RecordCount - 1 do
-      begin
-        FThemeRestrictionTypeToValue[ThemeRestrictionType] := VFieldValue.AsInteger;
-        Next;
-      end;
-      First;
-    end;
-  end;
   procedure LoadResourceType;
   var
     ResourceType: Integer;
@@ -634,45 +506,6 @@ var
       First;
     end;
   end;
-  procedure LoadThemeRestriction;
-  var
-    Theme, ThemeRestriction, Period, ThemeRestrictionType: Integer;
-    VFieldTheme, VFieldDay, VFieldHour, VFieldThemeRestrictionType: TField;
-  begin
-    with SourceDataModule.TbThemeRestriction do
-    begin
-      IndexFieldNames := 'IdTheme;IdDay;IdHour';
-      First;
-      SetLength(FThemeRestrictionToTheme, RecordCount);
-      SetLength(FThemeRestrictionToPeriod, RecordCount);
-      SetLength(FThemeRestrictionToThemeRestrictionType, RecordCount);
-      SetLength(FThemeRestrictionToValue, RecordCount);
-      SetLength(FThemePeriodToThemeRestrictionType, FThemeCount,
-        FPeriodCount);
-      for Theme := 0 to FThemeCount - 1 do
-        for Period := 0 to FPeriodCount - 1 do
-          FThemePeriodToThemeRestrictionType[Theme, Period] := -1;
-      VFieldTheme := FindField('IdTheme');
-      VFieldDay := FindField('IdDay');
-      VFieldHour := FindField('IdHour');
-      VFieldThemeRestrictionType := FindField('IdThemeRestrictionType');
-      for ThemeRestriction := 0 to RecordCount - 1 do
-      begin
-        Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
-        Period := FDayHourToPeriod[FIdDayToDay[VFieldDay.AsInteger - FMinIdDay],
-          FIdHourToHour[VFieldHour.AsInteger - FMinIdHour]];
-        ThemeRestrictionType := FIdThemeRestrictionTypeToThemeRestrictionType
-          [VFieldThemeRestrictionType.AsInteger - FMinIdThemeRestrictionType];
-        FThemeRestrictionToTheme[ThemeRestriction] := Theme;
-        FThemeRestrictionToPeriod[ThemeRestriction] := Period;
-        FThemeRestrictionToThemeRestrictionType[Theme] := ThemeRestrictionType;
-        FThemeRestrictionToValue[ThemeRestriction] := FThemeRestrictionTypeToValue[ThemeRestrictionType];
-        FThemePeriodToThemeRestrictionType[Theme, Period] := ThemeRestrictionType;
-        Next;
-      end;
-      First;
-    end;
-  end;
   procedure LoadResourceRestriction;
   var
     ResourceRestriction, Resource, Period, Day, Hour,
@@ -682,14 +515,9 @@ var
   begin
     with SourceDataModule.TbResourceRestriction do
     begin
-      IndexFieldNames := 'IdResource;IdDay;IdHour';
+      IndexFieldNames := 'IdResource;IdDay;IdHour;IdResourceRestrictionType';
       First;
-      SetLength(FResourceRestrictionToResource, RecordCount);
-      SetLength(FResourceRestrictionToPeriod, RecordCount);
-      SetLength(FResourceRestrictionToResourceRestrictionType, RecordCount);
-      SetLength(FResourceRestrictionToValue, RecordCount);
-      SetLength(FResourcePeriodToResourceRestrictionType, FResourceCount,
-        FPeriodCount);
+      SetLength(FResourcePeriodToResourceRestrictionType, FResourceCount, FPeriodCount);
       for Resource := 0 to FResourceCount - 1 do
         for Period := 0 to FPeriodCount - 1 do
           FResourcePeriodToResourceRestrictionType[Resource, Period] := -1;
@@ -705,11 +533,6 @@ var
         Period := FDayHourToPeriod[Day, Hour];
         ResourceRestrictionType := FIdResourceRestrictionTypeToResourceRestrictionType
           [VFieldResourceRestrictionType.AsInteger - FMinIdResourceRestrictionType];
-        FResourceRestrictionToResource[ResourceRestriction] := Resource;
-        FResourceRestrictionToPeriod[ResourceRestriction] := Period;
-        FResourceRestrictionToResourceRestrictionType[ResourceRestriction] := ResourceRestrictionType;
-        Value := FResourceRestrictionTypeToValue[ResourceRestrictionType];
-        FResourceRestrictionToValue[ResourceRestriction] := Value;
         FResourcePeriodToResourceRestrictionType[Resource, Period] := ResourceRestrictionType;
         Next;
       end;
@@ -720,39 +543,24 @@ var
   end;
   procedure LoadActivity;
   var
-    Theme, Category, Parallel, Session1, Activity, Cluster,
-      Session2, Session, VPos: Integer;
-    VFieldTheme, VFieldCategory, VFieldParallel, VFieldComposition: TField;
+    Theme, Session1, Activity, Session2, Session, VPos: Integer;
+    VFieldActivity, VFieldTheme, VFieldComposition: TField;
     Composition: string;
   begin
     with SourceDataModule.TbActivity do
     begin
-      IndexFieldNames := 'IdTheme;IdCategory;IdParallel';
+      IndexFieldNames := 'IdActivity';
       First;
       VFieldTheme := FindField('IdTheme');
-      VFieldCategory := FindField('IdCategory');
-      VFieldParallel := FindField('IdParallel');
       VFieldComposition := FindField('Composition');
       FActivityCount := RecordCount;
-      SetLength(FActivityToCluster, FActivityCount);
       SetLength(FActivityToSessions, FActivityCount);
       SetLength(FActivityToTheme, FActivityCount);
-      SetLength(FClusterThemeToActivity, FClusterCount, FThemeCount);
-      for Cluster := 0 to FClusterCount - 1 do
-        for Theme := 0 to FThemeCount - 1 do
-        begin
-          FClusterThemeToActivity[Cluster, Theme] := -1;
-        end;
       Session2 := 0;
-      for Activity := 0 to RecordCount - 1 do
+      for Activity := 0 to FActivityCount - 1 do
       begin
         Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
-        Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
-        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
-        Cluster := FCategoryParallelToCluster[Category, Parallel];
-        FActivityToCluster[Activity] := Cluster;
         FActivityToTheme[Activity] := Theme;
-        FClusterThemeToActivity[Cluster, Theme] := Activity;
         Composition := VFieldComposition.AsString;
         VPos := 1;
         Session1 := Session2;
@@ -783,14 +591,12 @@ var
   end;
   procedure LoadRequirement;
   var
-    Requirement, Counter, Cluster, Parallel, Category, Theme,
-    RequirementCount, Activity, Resource: Integer;
-    VFieldTheme, VFieldCategory, VFieldParallel,
-    VFieldResource, VFieldNumRequirement: TField;
+    Requirement, Counter, RequirementCount, Activity, Resource: Integer;
+    VFieldTheme, VFieldActivity, VFieldResource, VFieldNumRequirement: TField;
   begin
     with SourceDataModule.TbRequirement do
     begin
-      IndexFieldNames := 'IdTheme;IdCategory;IdParallel;IdResource';
+      IndexFieldNames := 'IdActivity;IdResource';
       First;
       RequirementCount := RecordCount;
       SetLength(FActivityToResources, FActivityCount, 0);
@@ -799,75 +605,26 @@ var
       for Activity := 0 to FActivityCount - 1 do
         for Resource := 0 to FResourceCount - 1 do
           FActivityResourceCount[Activity, Resource] := 0;
-      VFieldTheme := FindField('IdTheme');
-      VFieldCategory := FindField('IdCategory');
-      VFieldParallel := FindField('IdParallel');
+      VFieldActivity := FindField('IdActivity');
       VFieldResource := FindField('IdResource');
       VFieldNumRequirement := FindField('NumRequirement');
       for Requirement := 0 to RequirementCount - 1 do
       begin
-        Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
-        Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
-        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
-        Cluster := FCategoryParallelToCluster[Category, Parallel];
-        
-        Activity := FClusterThemeToActivity[Cluster, Theme];
+        Activity := FIdActivityToActivity[VFieldActivity.AsInteger - FMinIdActivity];
         Resource := FIdResourceToResource[VFieldResource.AsInteger - FMinIdResource];
-        
         Counter := Length(FActivityToResources[Activity]);
         SetLength(FActivityToResources[Activity], Counter + 1);
         FActivityToResources[Activity, Counter] := Resource;
-        
         Counter := Length(FResourceToActivities[Resource]);
         SetLength(FResourceToActivities[Resource], Counter + 1);
         FResourceToActivities[Resource, Counter] := Activity;
-        
         FActivityResourceCount[Activity, Resource] := VFieldNumRequirement.AsInteger;
         Next;
       end;
       First;
     end;
   end;
-  procedure LoadJoinedCluster;
-  var
-    JoinedCluster, Counter, Cluster1, Category1, Parallel1,
-      Cluster, Category, Parallel, Theme,  Activity: Integer;
-    VFieldTheme, VFieldCategory, VFieldParallel, VFieldCategory1,
-      VFieldParallel1: TField;
-  begin
-    with SourceDataModule.TbJoinedCluster do
-    begin
-      IndexFieldNames := 'IdTheme;IdCategory;IdParallel;IdCategory1;IdParallel1';
-      First;
-      FJoinedClusterCount := RecordCount;
-      SetLength(FClusterJoinedClusterToActivity, FClusterCount, 0);
-      SetLength(FClusterJoinedClusterToCluster, FClusterCount, 0);
-      VFieldTheme := FindField('IdTheme');
-      VFieldCategory := FindField('IdCategory');
-      VFieldParallel := FindField('IdParallel');
-      VFieldCategory1 := FindField('IdCategory1');
-      VFieldParallel1 := FindField('IdParallel1');
-      for JoinedCluster := 0 to FJoinedClusterCount - 1 do
-      begin
-        Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
-        Category := FIdCategoryToCategory[VFieldCategory.AsInteger - FMinIdCategory];
-        Parallel := FIdParallelToParallel[VFieldParallel.AsInteger - FMinIdParallel];
-        Cluster := FCategoryParallelToCluster[Category, Parallel];
-        Activity := FClusterThemeToActivity[Cluster, Theme];
-        Category1 := FIdCategoryToCategory[VFieldCategory1.AsInteger - FMinIdCategory];
-        Parallel1 := FIdParallelToParallel[VFieldParallel1.AsInteger - FMinIdParallel];
-        Cluster1 := FCategoryParallelToCluster[Category1, Parallel1];
-        Counter := Length(FClusterJoinedClusterToActivity[Cluster]);
-        SetLength(FClusterJoinedClusterToActivity[Cluster], Counter + 1);
-        SetLength(FClusterJoinedClusterToCluster[Cluster], Counter + 1);
-        FClusterJoinedClusterToActivity[Cluster, Counter] := Activity;
-        FClusterJoinedClusterToCluster[Cluster, Counter] := Cluster1;
-        Next;
-      end;
-      First;
-    end;
-  end;
-  procedure LoadTimetableDetailPattern2;
+  procedure LoadGreedyData;
   var
     Number, Duration, Activity, ActivityResource, Resource, Count, Group, Session,
     HighActivitySorted, HighSessionSorted, ResourceActivity, ActivitySession: Integer;
@@ -956,59 +713,6 @@ var
     SetLength(FGroupSessions, FGroupCount);
     WriteLn;
   end;
-  {
-  procedure LoadTimetableDetailPattern;
-  var
-    Period1, Cluster, Activity, Period, Counter, Duration, Number: Integer;
-  begin
-    SetLength(FTimetableDetailPattern, FClusterCount, FPeriodCount);
-    SetLength(FClusterToSessionCount, FClusterCount);
-    SetLength(FClusterToDuration, FClusterCount);
-    for Cluster := 0 to FClusterCount - 1 do
-    begin
-      FClusterToDuration[Cluster] := 0;
-      FClusterToSessionCount[Cluster] := 0;
-      for Period := 0 to FPeriodCount - 1 do
-      begin
-        FTimetableDetailPattern[Cluster, Period] := -1;
-      end;
-    end;
-    for Activity := FActivityCount - 1 downto 0 do
-    begin
-      Cluster := FActivityToCluster[Activity];
-      for Counter := High(FActivityToSessions[Activity]) downto 0 do
-      begin
-        Duration := FSessionToDuration[FActivityToSessions[Activity, Counter]];
-        Period1 := FClusterToDuration[Cluster];
-        for Period := Period1 to Period1 + Duration - 1 do
-        begin
-          if (Period < 0) or (Period >= FPeriodCount) then
-            raise Exception.CreateFmt(SClusterPeriodToSessionOverflow,
-              [FClusterToCategory[Cluster], FClusterToParallel[Cluster], Period]);
-          FTimetableDetailPattern[Cluster, FPeriodCount - 1 - Period]
-            := FActivityToSessions[Activity, Counter];
-        end;
-        Inc(FClusterToDuration[Cluster], Duration);
-      end;
-    end;
-    for Cluster := 0 to FClusterCount - 1 do
-    begin
-      Period := 0;
-      while Period < FPeriodCount do
-      begin
-        Duration := FSessionToDuration[FTimetableDetailPattern[Cluster, Period]];
-        Inc(Period, Duration);
-        Inc(FClusterToSessionCount[Cluster]);
-      end;
-    end;
-    FSessionNumberDouble := 0;
-    for Cluster := 0 to FClusterCount - 1 do
-    begin
-      Number := FClusterToSessionCount[Cluster];
-      Inc(FSessionNumberDouble, (Number * (Number - 1)) div 2);
-    end;
-  end;
-  }
 begin
   inherited Create;
   with SourceDataModule do
@@ -1022,40 +726,28 @@ begin
     Load(TbResource, 'IdResource', FMinIdResource, FIdResourceToResource,
          FResourceToIdResource);
     FResourceCount := Length(FResourceToIdResource);
-    Load(TbCategory, 'IdCategory', FMinIdCategory, FIdCategoryToCategory, FCategoryToIdCategory);
-    FCategoryCount := Length(FCategoryToIdCategory);
-    Load(TbParallel, 'IdParallel', FMinIdParallel,
-      FIdParallelToParallel, FParallelToIdParallel);
-    Load(TbTheme, 'IdTheme', FMinIdTheme, FIdThemeToTheme,
-      FThemeToIdTheme);
+    Load(TbTheme, 'IdTheme', FMinIdTheme, FIdThemeToTheme, FThemeToIdTheme);
     FThemeCount := Length(FThemeToIdTheme);
+    Load(TbActivity, 'IdActivity', FMinIdActivity, FIdActivityToActivity,
+         FActivityToIdActivity);
+    FActivityCount := Length(FActivityToIdActivity);
     Load(TbDay, 'IdDay', FMinIdDay, FIdDayToDay, FDayToIdDay);
     FDayCount := Length(FDayToIdDay);
     Load(TbHour, 'IdHour', FMinIdHour, FIdHourToHour, FHourToIdHour);
     FHourCount := Length(FHourToIdHour);
-    Load(TbThemeRestrictionType, 'IdThemeRestrictionType',
-      FMinIdThemeRestrictionType,
-      FIdThemeRestrictionTypeToThemeRestrictionType,
-      FThemeRestrictionTypeToIdThemeRestrictionType);
-    FThemeRestrictionTypeCount := Length(FThemeRestrictionTypeToIdThemeRestrictionType);
     Load(TbResourceRestrictionType, 'IdResourceRestrictionType',
       FMinIdResourceRestrictionType,
       FIdResourceRestrictionTypeToResourceRestrictionType,
       FResourceRestrictionTypeToIdResourceRestrictionType);
     FResourceRestrictionTypeCount := Length(FResourceRestrictionTypeToIdResourceRestrictionType);
     LoadPeriod;
-    LoadCluster;
     LoadResourceType;
     LoadResource;
     LoadResourceRestrictionType;
     LoadResourceRestriction;
-    LoadThemeRestrictionType;
-    LoadThemeRestriction;
     LoadActivity;
     LoadRequirement;
-    LoadJoinedCluster;
-    {LoadTimetableDetailPattern;}
-    LoadTimetableDetailPattern2;
+    LoadGreedyData;
   end;
 end;
 
@@ -1098,37 +790,6 @@ function TTimetableModel.NewIndividual: TIndividual;
 begin
   Result := TTimetable.Create(Self);
 end;
-
-{
-procedure TTimetable.RandomizeKey(var ARandomKey: TDynamicIntegerArray;
-  ACluster: Integer);
-var
-  Period, Duration, Counter, MaxPeriod: Integer;
-  PeriodToSession: TDynamicIntegerArray;
-  NumberList: array [0 .. 4095] of Integer;
-begin
-  with TTimetableModel(Model) do
-  begin
-    for Counter := 0 to FClusterToSessionCount[ACluster] - 1 do
-      NumberList[Counter] := Random($7FFFFFFF);
-    Sort(NumberList, 0, FClusterToSessionCount[ACluster] - 1);
-    PeriodToSession := ClusterPeriodToSession[ACluster];
-    Period := 0;
-    Counter := 0;
-    while Period < FPeriodCount do
-    begin
-      Duration := FSessionToDuration[PeriodToSession[Period]];
-      MaxPeriod := Period + Duration;
-      while Period < MaxPeriod do
-      begin
-        ARandomKey[Period] := NumberList[Counter];
-        Inc(Period);
-      end;
-      Inc(Counter);
-    end;
-  end;
-end;
-}
 
 procedure TTimetable.CrossGroup(Timetable2: TTimetable; AGroup: Integer);
 var
@@ -1185,19 +846,16 @@ begin
   FModel := ATimetableModel;
   with TTimetableModel(Model) do
   begin
-    {SetLength(FClusterPeriodToSession, FClusterCount, FPeriodCount);}
     SetLength(FSessionToPeriod, FSessionCount);
     FTablingInfo := TTimetableTablingInfo.Create;
     with TablingInfo do
     begin
-      SetLength(FThemePeriodCount, FThemeCount, FPeriodCount);
       SetLength(FResourcePeriodCount, FResourceCount, FPeriodCount);
       SetLength(FDayActivityCount, FDayCount, FActivityCount);
       SetLength(FDayActivityAccumulated, FDayCount, FActivityCount);
       SetLength(FDayResourceMinHour, FDayCount, FResourceCount);
       SetLength(FDayResourceMaxHour, FDayCount, FResourceCount);
       SetLength(FDayResourceEmptyHourCount, FDayCount, FResourceCount);
-      SetLength(FThemeRestrictionTypeToThemeCount, FThemeRestrictionTypeCount);
       SetLength(FClashResourceType, FResourceTypeCount);
       SetLength(FResourceRestrictionTypeToResourceCount, FResourceRestrictionTypeCount);
     end;
@@ -1262,10 +920,9 @@ end;
 
 procedure TTimetable.DeltaValues(Delta, Session: Integer);
 var
-  ThemeRestrictionType, ResourceRestrictionType, Period1, Period2, Period,
-  Period0, DeltaBrokenSession, Day, DDay, Day1, Day2, Hour, Hour1, Hour2,
-  Resource, Duration, Theme, Limit, Requirement, Count, Activity,
-  DeltaBreakTimetableResource, MinPeriod, MaxPeriod: Integer;
+  ResourceRestrictionType, Period1, Period2, Period, Period0, DeltaBrokenSession,
+  Day, DDay, Day1, Day2, Hour, Hour1, Hour2, Resource, Duration, Theme, Limit,
+  Requirement, Count, Activity, DeltaBreakTimetableResource, MinPeriod, MaxPeriod: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
@@ -1368,13 +1025,6 @@ begin
           Inc(FResourceRestrictionTypeToResourceCount[ResourceRestrictionType], Delta * Count);
       end;
     end;
-    for Period := Period1 to Period2 do
-    begin
-      Inc(FThemePeriodCount[Theme, Period], Delta);
-      ThemeRestrictionType := FThemePeriodToThemeRestrictionType[Theme, Period];
-      if ThemeRestrictionType >= 0 then
-        Inc(FThemeRestrictionTypeToThemeCount[ThemeRestrictionType], Delta);
-    end;
     {else if FHourCount - 1 <> FPeriodToHour[Period] then
       Inc(FOutOfPositionEmptyHour, Delta);}
     for Day := Day1 to Day2 do
@@ -1420,10 +1070,6 @@ begin
       TTimetableModel(Model).BrokenSessionValue, BrokenSessionValue]));
     Add(Format(SRowFormat, [SNonScatteredActivity + ':', NonScatteredActivity,
         TTimetableModel(Model).NonScatteredActivityValue, NonScatteredActivityValue]));
-    Add(Format('%0:-28s %12s %12s %12d', [STbThemeRestriction + ':',
-         '(' + VarArrToStr(FThemeRestrictionTypeToThemeCount, ' ') + ')',
-         '(' + VarArrToStr(TTimetableModel(Model).FThemeRestrictionTypeToValue, ' ') + ')',
-         ThemeRestrictionValue]));
     Add(Format('%0:-28s %12s %12s %12d', [STbResourceRestriction + ':',
          '(' + VarArrToStr(FResourceRestrictionTypeToResourceCount, ' ') + ')',
          '(' + VarArrToStr(TTimetableModel(Model).FResourceRestrictionTypeToValue, ' ') + ')',
@@ -1525,19 +1171,6 @@ begin
   Result := TTimetableModel(Model).FOutOfPositionEmptyHourValue * OutOfPositionEmptyHour;
 end;
 
-function TTimetable.GetThemeRestrictionValue: Integer;
-var
-  ThemeRestrictionType: Integer;
-begin
-  Result := 0;
-  with TTimetableModel(Model), TablingInfo do
-  for ThemeRestrictionType := 0 to FThemeRestrictionTypeCount - 1 do
-  begin
-    Result := Result + FThemeRestrictionTypeToThemeCount[ThemeRestrictionType]
-      * FThemeRestrictionTypeToValue[ThemeRestrictionType];
-  end;
-end;
-
 function TTimetable.GetClashResourceValue: Integer;
 var
   ResourceType: Integer;
@@ -1593,7 +1226,6 @@ begin
       ClashActivityValue +
       OutOfPositionEmptyHourValue +
       NonScatteredActivityValue +
-      ThemeRestrictionValue +
       BreakTimetableResourceValue +
       ResourceRestrictionValue +
       BrokenSessionValue;
@@ -1635,13 +1267,7 @@ begin
     if FResourceRestrictionTypeCount <> 0 then
       Move(ATimetable.TablingInfo.FResourceRestrictionTypeToResourceCount[0],
            FResourceRestrictionTypeToResourceCount[0], FResourceRestrictionTypeCount * SizeOf(Integer));
-    if FThemeRestrictionTypeCount <> 0 then
-      Move(ATimetable.TablingInfo.FThemeRestrictionTypeToThemeCount[0],
-           FThemeRestrictionTypeToThemeCount[0], FThemeRestrictionTypeCount * SizeOf(Integer));
     for Theme := 0 to FThemeCount - 1 do
-      Move(ATimetable.TablingInfo.FThemePeriodCount[Theme, 0],
-           TablingInfo.FThemePeriodCount[Theme, 0],
-           FPeriodCount * SizeOf(Integer));
     for Resource := 0 to FResourceCount - 1 do
       Move(ATimetable.TablingInfo.FResourcePeriodCount[Resource, 0],
            TablingInfo.FResourcePeriodCount[Resource, 0],
@@ -1670,34 +1296,6 @@ begin
     end;
   end;
 end;
-
-{
-procedure TTimetable.SaveToFile(const AFileName: string);
-var
-  VStrings: TStrings;
-  Cluster, Period: Integer;
-begin
-  VStrings := TStringList.Create;
-  with TTimetableModel(Model) do
-    try
-      for Cluster := 0 to FClusterCount - 1 do
-      begin
-        VStrings.Add(Format('Cluster %d %d',
-            [FCategoryToIdCategory[FClusterToCategory[Cluster]],
-            FParallelToIdParallel[FClusterToParallel[Cluster]]]));
-        for Period := 0 to FPeriodCount - 1 do
-        begin
-          VStrings.Add(Format(' Day %d Hour %d Theme %d', [FPeriodToDay[Period],
-              FPeriodToHour[Period],
-              FThemeToIdTheme[FSessionToTheme[ClusterPeriodToSession[Cluster, Period]]]]));
-        end;
-      end;
-      VStrings.SaveToFile(AFileName);
-    finally
-      VStrings.Free;
-    end;
-end;
-}
 
 procedure TTimetable.SaveToStream(Stream: TStream);
 begin
@@ -1758,11 +1356,9 @@ var
   end;
   procedure SaveTimetableDetail;
   var
-    Activity, Cluster, Period1, Period2, Period, IdCategory, IdParallel,
-      Session: Integer;
+    Activity, Period1, Period2, Period, IdActivity, Session: Integer;
     {$IFNDEF USE_SQL}
-    FieldTimetable, FieldCategory, FieldParallel, FieldDay, FieldHour,
-      FieldTheme, FieldSession: TField;
+    FieldTimetable, FieldActivity, FieldDay, FieldHour, FieldSession: TField;
     {$ENDIF}
   begin
     {$IFNDEF USE_SQL}
@@ -1772,20 +1368,16 @@ var
       try
         Last;
         FieldTimetable := FindField('IdTimetable');
-        FieldCategory := FindField('IdCategory');
-        FieldParallel := FindField('IdParallel');
+        FieldActivity := FindField('IdActivity');
         FieldDay := FindField('IdDay');
         FieldHour := FindField('IdHour');
-        FieldTheme := FindField('IdTheme');
         FieldSession := FindField('Session');
     {$ENDIF}
         with TTimetableModel(Model) do
         for Session := 0 to FSessionCount - 1 do
         begin
           Activity := FSessionToActivity[Session];
-          Cluster := FActivityToCluster[Activity];
-          IdCategory := FCategoryToIdCategory[FClusterToCategory[Cluster]];
-          IdParallel := FParallelToIdParallel[FClusterToParallel[Cluster]];
+          IdActivity := FActivityToIdActivity[Activity];
           Period1 := FSessionToPeriod[Session];
           Period2 := Period1 + FSessionToDuration[Session] - 1;
           for Period := Period1 to Period2 do
@@ -1793,20 +1385,15 @@ var
             {$IFDEF USE_SQL}
             SQL.Add(Format(
                       'INSERT INTO TimetableDetail' +
-                        '(IdTimetable,IdCategory,IdParallel,IdDay,' +
-                        'IdHour,IdTheme,Session) VALUES (%d,%d,%d,%d,%d,%d,%d);',
-                      [IdTimetable, IdCategory, IdParallel,
-                       FDayToIdDay[FPeriodToDay[Period]],
-                       FHourToIdHour[FPeriodToHour[Period]],
-                       FThemeToIdTheme[FSessionToTheme[Session]], Session]));
+                        '(IdTimetable,IdActivity,IdDay,IdHour,Session) VALUES (%d,%d,%d,%d,%d);',
+                      [IdTimetable, IdActivity, FDayToIdDay[FPeriodToDay[Period]],
+                       FHourToIdHour[FPeriodToHour[Period]], Session]));
             {$ELSE}
             Append;
             FieldTimetable.AsInteger := IdTimetable;
-            FieldCategory.AsInteger := IdCategory;
-            FieldParallel.AsInteger := IdParallel;
+            FieldActivity.AsInteger := IdActivity;
             FieldDay.AsInteger := FDayAIdDay[FPeriodADay[Period]];
             FieldHour.AsInteger := FHourAIdHour[FPeriodAHour[Period]];
-            FieldTheme.AsInteger := FThemeAIdTheme[FSessionToTheme[Session]];
             FieldSession.AsInteger := Session;
             Post;
             {$ENDIF}
@@ -1847,7 +1434,6 @@ end;
 
 procedure TTimetable.LoadFromDataModule(IdTimetable: Integer);
 var
-  //FieldCategory, FieldParallel,
   Session, Period: Integer;
   FieldDay, FieldHour, FieldSession: TLongintField;
 begin
@@ -1860,8 +1446,6 @@ begin
     for Session := 0 to FSessionCount - 1 do
       FSessionToPeriod[Session] := MaxInt;
     try
-      //FieldCategory := FindField('IdCategory') as TLongintField;
-      //FieldParallel := FindField('IdParallel') as TLongintField;
       FieldDay := FindField('IdDay') as TLongintField;
       FieldHour := FindField('IdHour') as TLongintField;
       FieldSession := FindField('Session') as TLongintField;
@@ -1887,54 +1471,9 @@ begin
   {$ENDIF}
 end;
 
-{
-procedure TTimetable.CheckIntegrity;
-var
-  Theme, Cluster, Period, Activity, Counter,
-    Session: Integer;
-  SessionFound: Boolean;
-begin
-  with TTimetableModel(Model), TablingInfo do
-  begin
-    for Cluster := 0 to FClusterCount - 1 do
-      for Period := 0 to FPeriodCount - 1 do
-      begin
-        Session := FClusterPeriodToSession[Cluster, Period];
-        if Session >= 0 then
-        begin
-          Theme := FSessionToTheme[Session];
-          Activity := FClusterThemeToActivity[Cluster, Theme];
-          SessionFound := False;
-          for Counter := 0 to High(FActivityToSessions[Activity]) do
-            SessionFound := SessionFound or (FActivityToSessions[Activity, Counter] = Session);
-          if not SessionFound then
-            raise Exception.CreateFmt('%s %d(%d,%d), %s %d(%d) %s FActivityToSessions', [
-              SCluster, Cluster,
-              FCategoryToIdCategory[FClusterToCategory[Cluster]],
-              FParallelToIdParallel[FClusterToParallel[Cluster]],
-              SFlActivity_IdTheme,
-              Theme,
-              FThemeToIdTheme[Theme],
-              SDoNotAppearsIn]);
-          if Activity < 0 then
-            raise Exception.CreateFmt('%s %d(%d,%d), %s %d(%d) %s FClusterThemeToActivity', [
-              SCluster, Cluster,
-              FCategoryToIdCategory[FClusterToCategory[Cluster]],
-              FParallelToIdParallel[FClusterToParallel[Cluster]],
-              SFlActivity_IdTheme,
-              Theme,
-              FThemeToIdTheme[Theme],
-              SDoNotAppearsIn]);
-        end;
-      end;
-  end;
-end;
-}
-
 procedure TTimetable.Reset;
 var
-  Resource, ResourceType, Period, Theme, ThemeRestrictionType,
-    ResourceRestrictionType, Day, Activity: Integer;
+  Resource, ResourceType, Period, Theme, ResourceRestrictionType, Day, Activity: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
@@ -1954,14 +1493,10 @@ begin
       FClashResourceType[ResourceType] := 0;
     for ResourceRestrictionType := 0 to FResourceRestrictionTypeCount - 1 do
       FResourceRestrictionTypeToResourceCount[ResourceRestrictionType] := 0;
-    for ThemeRestrictionType := 0 to FThemeRestrictionTypeCount - 1 do
-      FThemeRestrictionTypeToThemeCount[ThemeRestrictionType] := 0;
     for Period := 0 to FPeriodCount - 1 do
     begin
       for Resource := 0 to FResourceCount - 1 do
         FResourcePeriodCount[Resource, Period] := 0;
-      for Theme := 0 to FThemeCount - 1 do
-        FThemePeriodCount[Theme, Period] := 0;
     end;
     for Day := 0 to FDayCount - 1 do
     begin
@@ -2348,201 +1883,6 @@ function TTTBookmark3.Eof: Boolean;
 begin
   Result := FPosition = FMaxPosition;
 end;
-
-(*
-procedure NextPeriod(PeriodToSession: TDynamicIntegerArray; PeriodCount: Integer;
-  var Period: Integer);
-var
-  Session: Integer;
-begin
-  Session := PeriodToSession[Period];
-  if Session < 0 then
-    Inc(Period)
-  else
-    repeat
-      Inc(Period);
-    until (Period >= PeriodCount)
-      or (PeriodToSession[Period] <> Session);
-end;
-
-procedure FixPeriod(PeriodToSession: TDynamicIntegerArray; PeriodCount: Integer;
-  var Period: Integer);
-begin
-  if Period > 0 then
-  begin
-    Dec(Period);
-    NextPeriod(PeriodToSession, PeriodCount, Period);
-  end;
-end;
-
-{ TTTBookmark3 }
-
-constructor TTTBookmark3.Create(ATimetable: TTimetable; AClusters: TDynamicIntegerArray);
-begin
-  inherited Create;
-  TTimetable(Individual) := ATimetable;
-  FClusters := AClusters;
-  First;
-end;
-
-function TTTBookmark3.Clone: TBookmark;
-begin
-  Result := TTTBookmark3.Create(TTimetable(Individual), FClusters);
-  TTTBookmark3(Result).FPosition := FPosition;
-  TTTBookmark3(Result).FOffset := FOffset;
-  TTTBookmark3(Result).FPeriod1 := FPeriod1;
-  TTTBookmark3(Result).FPeriod2 := FPeriod2;
-  TTTBookmark3(Result).FPeriod3 := FPeriod3;
-end;
-
-function TTTBookmark3.GetCluster: Integer;
-var
-  Index: Integer;
-begin
-  Index := (FPosition + FOffset) mod Individual.Model.ClusterCount;
-  Result := FClusters[Index];
-end;
-
-procedure TTTBookmark3.First;
-begin
-  FPosition := 0;
-  FOffset := 0;
-  FProgress := 0;
-  FPeriod1 := 0;
-  with Individual.Model, TTimetable(Individual) do
-    FPeriod2 := SessionToDuration[ClusterPeriodToSession[Cluster, 0]];
-  FPeriod3 := FPeriod2;
-end;
-
-procedure TTTBookmark3.Next;
-var
-  d1, d2: Integer;
-  PeriodToSession: TDynamicIntegerArray;
-begin
-  with Individual.Model, TTimetable(Individual) do
-  begin
-    PeriodToSession := ClusterPeriodToSession[Cluster];
-    d1 := PeriodCount - SessionToDuration[PeriodToSession[PeriodCount - 1]];
-    if FPeriod3 >= d1 then
-    begin
-      if FPeriod2 >= d1 then
-      begin
-        d2 := d1 - SessionToDuration[PeriodToSession[d1 - 1]];
-        if FPeriod1 >= d2 then
-        begin
-          Inc(FPosition);
-          FPeriod1 := 0;
-          FPeriod2 := SessionToDuration[ClusterPeriodToSession[Cluster, 0]];
-          FPeriod3 := FPeriod2;
-        end
-        else
-        begin
-          NextPeriod(PeriodToSession, PeriodCount, FPeriod1);
-          FPeriod2 := FPeriod1 + SessionToDuration[PeriodToSession[FPeriod1]];
-          FPeriod3 := FPeriod2;
-        end;
-      end
-      else
-      begin
-        FixPeriod(PeriodToSession, PeriodCount, FPeriod1);
-        if FPeriod2 <= FPeriod1 then
-        begin
-          FPeriod2 := FPeriod1 + SessionToDuration[PeriodToSession[FPeriod1]];
-          FPeriod3 := FPeriod2;
-        end
-        else
-        begin
-          NextPeriod(PeriodToSession, PeriodCount, FPeriod2);
-          FPeriod3 := FPeriod1 + SessionToDuration[PeriodToSession[FPeriod1]];
-        end;
-      end;
-    end
-    else
-    begin
-      FixPeriod(PeriodToSession, PeriodCount, FPeriod1);
-      if FPeriod2 <= FPeriod1 then
-        FPeriod2 := FPeriod1 + SessionToDuration[PeriodToSession[FPeriod1]]
-      else
-        FixPeriod(PeriodToSession, PeriodCount, FPeriod2);
-      if FPeriod3 <= FPeriod1 then
-        FPeriod3 := FPeriod1 + SessionToDuration[PeriodToSession[FPeriod1]]
-      else
-      begin
-        NextPeriod(PeriodToSession, PeriodCount, FPeriod3);
-      end;
-    end;
-  end;
-end;
-
-procedure TTTBookmark3.Rewind;
-begin
-  Inc(FOffset, FPosition);
-  FPosition := 0;
-end;
-
-function TTTBookmark3.GetProgress: Integer;
-begin
-  with Individual.Model do
-    Result := (FOffset + FPosition) * ((PeriodCount * (PeriodCount - 1) div 2)
-      * (2 * PeriodCount - 1) div 3) + PeriodCount * ( FPeriod1 * PeriodCount
-      + FPeriod2 - (FPeriod1 + 1) * (FPeriod1 + 1) )
-      - FPeriod2 * (FPeriod1 + 1) + (FPeriod1 * (FPeriod1 + 1) div 2)
-      * (2 * FPeriod1 + 7) div 3 + FPeriod3;
-  {Result := FProgress;
-  with Individual.Model do
-    Result := (FOffset + FPosition) * ((PeriodCount * (PeriodCount - 1) div 2) *
-      (2 * PeriodCount - 1) div 3) +
-    (FPeriod1 * PeriodCount - FPeriod1 * (FPeriod1 + 1) div 2 + FPeriod2 - 1);}
-end;
-
-function TTTBookmark3.GetMax: Integer;
-begin
-  with Individual.Model do
-    Result := (FOffset + ClusterCount) * ((PeriodCount * (PeriodCount - 1) div 2) *
-      (2 * PeriodCount - 1) div 3);
-end;
-
-function TTTBookmark3.Move: Integer;
-begin
-  with Individual.Model, TTimetable(Individual) do
-  begin
-    if FPeriod2 < FPeriod3 then
-    begin
-      Result := DoMove(Cluster, FPeriod1, FPeriod2) + DoMove(Cluster, FPeriod2, FPeriod3);
-    end
-    else if FPeriod2 = FPeriod3 then
-    begin
-      Result := DoMove(Cluster, FPeriod1, FPeriod2);
-      FPeriod3 := FPeriod2;
-    end
-    else
-      Result := DoMove(Cluster, FPeriod1, FPeriod3) + DoMove(Cluster, FPeriod3, FPeriod2);
-  end;
-end;
-
-function TTTBookmark3.Undo: Integer;
-begin
-  with Individual.Model, TTimetable(Individual) do
-  begin
-    if FPeriod2 < FPeriod3 then
-    begin
-      Result := DoMove(Cluster, FPeriod2, FPeriod3) + DoMove(Cluster, FPeriod1, FPeriod2);
-    end
-    else if FPeriod2 = FPeriod3 then
-    begin
-      Result := DoMove(Cluster, FPeriod1, FPeriod2);
-      FPeriod3 := FPeriod2;
-    end
-    else
-      Result := DoMove(Cluster, FPeriod3, FPeriod2) + DoMove(Cluster, FPeriod1, FPeriod3);
-  end;
-end;
-
-function TTTBookmark3.Eof: Boolean;
-begin
-  Result := FPosition = Individual.Model.ClusterCount;
-end;
-*)
 
 initialization
 

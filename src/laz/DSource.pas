@@ -14,7 +14,6 @@ type
   { TSourceDataModule }
 
   TSourceDataModule = class(TSourceBaseDataModule)
-    QuCluster: TZReadOnlyQuery;
     ZTables: TZReadOnlyQuery;
     QuResource: TZReadOnlyQuery;
     procedure TbActivityBeforePost(DataSet: TDataSet);
@@ -119,21 +118,12 @@ const
     300,
     120,
     50);
-  SNaThemeRestrictionType: array[0..1] of string = (
-    SInadequate,
-    SImpossible);
   SNaResourceRestrictionType: array[0..1] of string = (
     SInadequate,
     SImpossible);
-  EColThemeRestrictionType: array[0..1] of TColor = (
-    clLime,
-    clRed);
   EColResourceRestrictionType: array[0..1] of TColor = (
     clLime,
     clRed);
-  EValThemeRestrictionType: array[0..1] of Integer = (
-    50,
-    500);
   EValResourceRestrictionType: array[0..1] of Integer = (
     50,
     500);
@@ -194,18 +184,6 @@ begin
         TbDay.Next;
       end;
     end;
-    with TbThemeRestrictionType do
-    begin
-      for i := Low(SNaThemeRestrictionType) to High(SNaThemeRestrictionType) do
-      begin
-        Append;
-        Fields[0].AsInteger := i;
-        Fields[1].AsString := SNaThemeRestrictionType[i];
-        Fields[2].AsInteger := EColThemeRestrictionType[i];
-        Fields[3].AsFloat := EValThemeRestrictionType[i];
-        Post;
-      end;
-    end;
     with TbResourceType do
     begin
       for i := Low(SNaResourceType) to High(SNaResourceType) do
@@ -239,64 +217,6 @@ procedure TSourceDataModule.PrepareLookupFields;
 var
   Field: TField;
 begin
-  Field := TStringField.Create(TbCluster);
-  with Field do
-  begin
-    DisplayLabel := SFlCluster_IdCategory;
-    FieldKind := fkLookup;
-    FieldName := 'AbCategory';
-    LookupDataSet := TbCategory;
-    LookupKeyFields := 'IdCategory';
-    LookupResultField := 'AbCategory';
-    KeyFields := 'IdCategory';
-    Size := 5;
-    Lookup := True;
-    DataSet := TbCluster;
-  end;
-  Field := TStringField.Create(TbCluster);
-  with Field do
-  begin
-    DisplayLabel := SFlCluster_IdParallel;
-    FieldKind := fkLookup;
-    FieldName := 'NaParallel';
-    LookupDataSet := TbParallel;
-    LookupKeyFields := 'IdParallel';
-    LookupResultField := 'NaParallel';
-    KeyFields := 'IdParallel';
-    Size := 5;
-    Lookup := True;
-    DataSet := TbCluster;
-  end;
-  Field := TStringField.Create(TbThemeRestriction);
-  with Field do
-  begin
-    DisplayLabel := SFlThemeRestriction_IdThemeRestrictionType;
-    DisplayWidth := 10;
-    FieldKind := fkLookup;
-    FieldName := 'NaThemeRestrictionType';
-    LookupDataSet := TbThemeRestrictionType;
-    LookupKeyFields := 'IdThemeRestrictionType';
-    LookupResultField := 'NaThemeRestrictionType';
-    KeyFields := 'IdThemeRestrictionType';
-    Size := 10;
-    Lookup := True;
-    DataSet := TbThemeRestriction;
-  end;
-  Field := TStringField.Create(TbTimetableDetail);
-  with Field do
-  begin
-    DisplayLabel := SFlThemeRestriction_IdTheme;
-    DisplayWidth := 15;
-    FieldKind := fkLookup;
-    FieldName := 'NaTheme';
-    LookupDataSet := TbTheme;
-    LookupKeyFields := 'IdTheme';
-    LookupResultField := 'NaTheme';
-    KeyFields := 'IdTheme';
-    Size := 15;
-    Lookup := True;
-    DataSet := TbTimetableDetail;
-  end;
   Field := TStringField.Create(TbResourceRestriction);
   with Field do
   begin
@@ -311,36 +231,6 @@ begin
     Size := 10;
     Lookup := True;
     DataSet := TbResourceRestriction;
-  end;
-  Field := TStringField.Create(TbActivity.Owner);
-  with Field do
-  begin
-    DisplayLabel := SFlActivity_IdCategory;
-    DisplayWidth := 4;
-    FieldKind := fkLookup;
-    FieldName := 'AbCategory';
-    LookupDataSet := SourceDataModule.TbCategory;
-    LookupKeyFields := 'IdCategory';
-    LookupResultField := 'AbCategory';
-    KeyFields := 'IdCategory';
-    Size := 5;
-    Lookup := True;
-    DataSet := TbActivity;
-  end;
-  Field := TStringField.Create(TbActivity.Owner);
-  with Field do
-  begin
-    DisplayLabel := SFlActivity_IdParallel;
-    DisplayWidth := 4;
-    FieldKind := fkLookup;
-    FieldName := 'NaParallel';
-    LookupDataSet := SourceDataModule.TbParallel;
-    LookupKeyFields := 'IdParallel';
-    LookupResultField := 'NaParallel';
-    KeyFields := 'IdParallel';
-    Size := 5;
-    Lookup := True;
-    DataSet := TbActivity;
   end;
   Field := TStringField.Create(TbActivity.Owner);
   with Field do
@@ -380,21 +270,6 @@ begin
     Lookup := True;
     DataSet := TbRequirement;
   end;
-  Field := TStringField.Create(TbJoinedCluster.Owner);
-  with Field do
-  begin
-    DisplayLabel := 'Cluster Name';
-    DisplayWidth := 4;
-    FieldKind := fkLookup;
-    FieldName := 'NameCluster';
-    LookupDataSet := SourceDataModule.QuCluster;
-    LookupKeyFields := 'IdCategory;IdParallel';
-    LookupResultField := 'NameCluster';
-    KeyFields := 'IdCategory;IdParallel1';
-    Size := 5;
-    Lookup := True;
-    DataSet := TbJoinedCluster;
-  end;
 end;
 
 procedure TSourceDataModule.HideFields;
@@ -402,43 +277,26 @@ begin
   TbDay.FindField('IdDay').Visible := False;
   TbTheme.FindField('IdTheme').Visible := False;
   TbHour.FindField('IdHour').Visible := False;
-  TbCategory.FindField('IdCategory').Visible := False;
-  TbParallel.FindField('IdParallel').Visible := False;
-  TbThemeRestrictionType.FindField('IdThemeRestrictionType').Visible := False;
   TbPeriod.FindField('IdDay').Visible := False;
   TbPeriod.FindField('IdHour').Visible := False;
-  TbCluster.FindField('IdCategory').Visible := False;
-  TbCluster.FindField('IdParallel').Visible := False;
   TbResource.FindField('IdResource').Visible := False;
   with TbTimetableDetail do
   begin
     FindField('IdTimetable').Visible := False;
-    FindField('IdTheme').Visible := False;
-    FindField('IdCategory').Visible := False;
-    FindField('IdParallel').Visible := False;
+    FindField('IdActivity').Visible := False;
     FindField('IdDay').Visible := False;
     FindField('IdHour').Visible := False;
   end;
   TbResourceRestrictionType.FindField('IdResourceRestrictionType').Visible := False;
   with TbActivity do
   begin
+    FindField('IdActivity').Visible := False;
     FindField('IdTheme').Visible := False;
-    FindField('IdCategory').Visible := False;
   end;
   with TbRequirement do
   begin
-    FindField('IdTheme').Visible := False;
-    FindField('IdCategory').Visible := False;
-    FindField('IdParallel').Visible := False;
+    FindField('IdActivity').Visible := False;
     FindField('IdResource').Visible := False;
-  end;
-  with TbJoinedCluster do
-  begin
-    FindField('IdTheme').Visible := False;
-    FindField('IdCategory').Visible := False;
-    FindField('IdParallel').Visible := False;
-    FindField('IdCategory1').Visible := False;
-    FindField('IdParallel1').Visible := False;
   end;
 end;
 

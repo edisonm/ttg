@@ -44,13 +44,11 @@ type
     EdBrokenSession: TEdit;
     EdNonScatteredActivity: TEdit;
     TSInstitution: TTabSheet;
-    LbClashResource4: TLabel;
     SEMaxResourceWorkLoad: TSpinEdit;
     MeComments: TMemo;
     LbComments: TLabel;
     LbInstitutionName: TLabel;
     EdNaInstitution: TEdit;
-    LbThemeRestrictions: TLabel;
     LbResourceRestrictions: TLabel;
     TSOptions: TTabSheet;
     CBRandomize: TCheckBox;
@@ -72,8 +70,6 @@ type
     EdBreakTimetableResource: TEdit;
     LbInitialTimetables: TLabel;
     EdInitialTimetables: TEdit;
-    EdNaThemeRestrictionType: TDBEdit;
-    EdValThemeRestrictionType: TDBEdit;
     LbSRName: TLabel;
     LbSRColor: TLabel;
     LbSRValue: TLabel;
@@ -87,17 +83,11 @@ type
     BBCancel: TBitBtn;
     DBGrid1: TDBGrid;
     DBGrid2: TDBGrid;
-    CBColThemeRestrictionType: TColorBox;
-    DSThemeRestrictionType: TDataSource;
     DSResourceRestrictionType: TDataSource;
     CBColResourceRestrictionType: TColorBox;
     procedure CBRandomizeClick(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure DSThemeRestrictionTypeDataChange(Sender: TObject;
-      Field: TField);
-    procedure CBColThemeRestrictionTypeExit(Sender: TObject);
-    procedure CBColThemeRestrictionTypeChange(Sender: TObject);
     procedure CBColResourceRestrictionTypeChange(Sender: TObject);
     procedure CBColResourceRestrictionTypeExit(Sender: TObject);
     procedure DSResourceRestrictionTypeDataChange(Sender: TObject;
@@ -228,20 +218,6 @@ begin
    end;
 end;
 
-procedure TConfigForm.DSThemeRestrictionTypeDataChange(Sender: TObject; Field: TField);
-begin
-  CBColThemeRestrictionType.Selected :=
-    SourceDataModule.TbThemeRestrictionType.FindField('ColThemeRestrictionType').AsInteger;
-end;
-
-procedure TConfigForm.CBColThemeRestrictionTypeExit(Sender: TObject);
-begin
-  with SourceDataModule.TbThemeRestrictionType.FindField('ColThemeRestrictionType') do
-    if (DSThemeRestrictionType.State in [dsEdit, dsInsert])
-        and (AsInteger <> CBColThemeRestrictionType.Selected) then
-      AsInteger := CBColThemeRestrictionType.Selected;
-end;
-
 procedure TConfigForm.BBCancelClick(Sender: TObject);
 begin
   ModalResult := mrCancel;
@@ -250,16 +226,6 @@ end;
 procedure TConfigForm.BBOkClick(Sender: TObject);
 begin
   ModalResult := mrOk;
-end;
-
-procedure TConfigForm.CBColThemeRestrictionTypeChange(Sender: TObject);
-begin
-  with DSThemeRestrictionType do
-  begin
-    OnDataChange := nil;
-    Edit;
-    OnDataChange := DSThemeRestrictionTypeDataChange;
-  end
 end;
 
 procedure TConfigForm.CBColResourceRestrictionTypeChange(Sender: TObject);

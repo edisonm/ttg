@@ -20,12 +20,7 @@ resourcestring
   SClashActivity = 'Clash of Activities';
   SClashResource = 'Clash of Resources';
   SClashes = 'Clashes';
-  SCluster = 'Cluster';
-  SClusterPeriodToSessionOverflow = 'Overflow of pattern for ClusterPeriodToSession: Cluster %d-%d Duration %d';
   SResourceOverflow = 'For Resource [%s], the number of activities (%d)  exceed its capacity(%d)';
-  SClusterWorkLoadHead = 'Cluster; Work Load';
-  SClusterWorkLoadWithProblems = 'Cluster work load with problems...';
-  SClusterWorkLoadWithoutProblems = 'Cluster work load without problems...';
   SCopyright = '1999-2012 by Edison Mera';
   SCount = 'Count';
   SCrossProbability = 'Cross Probability';

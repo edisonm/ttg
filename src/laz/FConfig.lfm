@@ -445,15 +445,6 @@ object ConfigForm: TConfigForm
         Caption = 'Non Scattered Activities:'
         ParentColor = False
       end
-      object LbThemeRestrictions: TLabel
-        Left = 8
-        Height = 15
-        Top = 114
-        Width = 116
-        Anchors = [akLeft, akBottom]
-        Caption = 'Theme Restrictions:'
-        ParentColor = False
-      end
       object LbResourceRestrictions: TLabel
         Left = 8
         Height = 15
@@ -565,30 +556,6 @@ object ConfigForm: TConfigForm
         AutoSize = False
         TabOrder = 1
       end
-      object EdNaThemeRestrictionType: TDBEdit
-        Left = 364
-        Height = 24
-        Top = 138
-        Width = 93
-        DataField = 'NaThemeRestrictionType'
-        DataSource = SourceDataModule.DSThemeRestrictionType
-        Anchors = [akRight, akBottom]
-        CharCase = ecNormal
-        MaxLength = 0
-        TabOrder = 8
-      end
-      object EdValThemeRestrictionType: TDBEdit
-        Left = 363
-        Height = 24
-        Top = 199
-        Width = 93
-        DataField = 'ValThemeRestrictionType'
-        DataSource = SourceDataModule.DSThemeRestrictionType
-        Anchors = [akRight, akBottom]
-        CharCase = ecNormal
-        MaxLength = 0
-        TabOrder = 10
-      end
       object EdNaResourceRestrictionType: TDBEdit
         Left = 364
         Height = 24
@@ -613,19 +580,6 @@ object ConfigForm: TConfigForm
         MaxLength = 0
         TabOrder = 13
       end
-      object DBGrid1: TDBGrid
-        Left = 8
-        Height = 96
-        Top = 131
-        Width = 292
-        Anchors = [akLeft, akRight, akBottom]
-        Color = clWindow
-        Columns = <>
-        DataSource = SourceDataModule.DSThemeRestrictionType
-        TabOrder = 6
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-      end
       object DBGrid2: TDBGrid
         Left = 8
         Height = 97
@@ -638,17 +592,6 @@ object ConfigForm: TConfigForm
         TabOrder = 7
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
-      end
-      object CBColThemeRestrictionType: TColorBox
-        Left = 364
-        Height = 24
-        Top = 171
-        Width = 93
-        Anchors = [akRight, akBottom]
-        ItemHeight = 16
-        OnChange = CBColThemeRestrictionTypeChange
-        OnExit = CBColThemeRestrictionTypeExit
-        TabOrder = 9
       end
       object CBColResourceRestrictionType: TColorBox
         Left = 364
@@ -683,12 +626,6 @@ object ConfigForm: TConfigForm
     ModalResult = 2
     OnClick = BBCancelClick
     TabOrder = 2
-  end
-  object DSThemeRestrictionType: TDatasource
-    DataSet = SourceDataModule.TbThemeRestrictionType
-    OnDataChange = DSThemeRestrictionTypeDataChange
-    left = 128
-    top = 200
   end
   object DSResourceRestrictionType: TDatasource
     DataSet = SourceDataModule.TbResourceRestrictionType

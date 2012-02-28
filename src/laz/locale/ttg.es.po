@@ -6,6 +6,11 @@ msgctxt "dsourcebaseconsts.sflactivity_composition"
 msgid "Composition"
 msgstr "Composicion"
 
+#: dsourcebaseconsts.sflactivity_idactivity
+msgctxt "dsourcebaseconsts.sflactivity_idactivity"
+msgid "Id"
+msgstr "Codigo"
+
 #: dsourcebaseconsts.sflactivity_idcategory
 msgctxt "dsourcebaseconsts.sflactivity_idcategory"
 msgid "Category"
@@ -71,30 +76,6 @@ msgctxt "dsourcebaseconsts.sflhour_nahour"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sfljoinedcluster_idcategory
-msgctxt "dsourcebaseconsts.sfljoinedcluster_idcategory"
-msgid "Category"
-msgstr ""
-
-#: dsourcebaseconsts.sfljoinedcluster_idcategory1
-msgid "Joined Category"
-msgstr ""
-
-#: dsourcebaseconsts.sfljoinedcluster_idparallel
-msgctxt "dsourcebaseconsts.sfljoinedcluster_idparallel"
-msgid "Parallel"
-msgstr "Paralelo"
-
-#: dsourcebaseconsts.sfljoinedcluster_idparallel1
-msgctxt "dsourcebaseconsts.sfljoinedcluster_idparallel1"
-msgid "Joined Parallel"
-msgstr "Paralelo unido"
-
-#: dsourcebaseconsts.sfljoinedcluster_idtheme
-msgctxt "dsourcebaseconsts.sfljoinedcluster_idtheme"
-msgid "Theme"
-msgstr "Materia"
-
 #: dsourcebaseconsts.sflparallel_idparallel
 msgctxt "dsourcebaseconsts.sflparallel_idparallel"
 msgid "Id"
@@ -115,15 +96,10 @@ msgctxt "dsourcebaseconsts.sflperiod_idhour"
 msgid "Hour"
 msgstr "Hour"
 
-#: dsourcebaseconsts.sflrequirement_idcategory
-msgctxt "dsourcebaseconsts.sflrequirement_idcategory"
+#: dsourcebaseconsts.sflrequirement_idactivity
+msgctxt "dsourcebaseconsts.sflrequirement_idactivity"
 msgid "Category"
 msgstr ""
-
-#: dsourcebaseconsts.sflrequirement_idparallel
-msgctxt "dsourcebaseconsts.sflrequirement_idparallel"
-msgid "Parallel"
-msgstr "Paralelo"
 
 #: dsourcebaseconsts.sflrequirement_idresource
 #, fuzzy
@@ -131,11 +107,6 @@ msgstr "Paralelo"
 msgctxt "dsourcebaseconsts.sflrequirement_idresource"
 msgid "Resource"
 msgstr "Ayudante"
-
-#: dsourcebaseconsts.sflrequirement_idtheme
-msgctxt "dsourcebaseconsts.sflrequirement_idtheme"
-msgid "Theme"
-msgstr "Materia"
 
 #: dsourcebaseconsts.sflrequirement_numrequirement
 msgctxt "dsourcebaseconsts.sflrequirement_numrequirement"
@@ -274,10 +245,10 @@ msgctxt "dsourcebaseconsts.sfltheme_natheme"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sfltimetabledetail_idcategory
-msgctxt "dsourcebaseconsts.sfltimetabledetail_idcategory"
-msgid "Category"
-msgstr ""
+#: dsourcebaseconsts.sfltimetabledetail_idactivity
+msgctxt "dsourcebaseconsts.sfltimetabledetail_idactivity"
+msgid "Activity"
+msgstr "Distribucion"
 
 #: dsourcebaseconsts.sfltimetabledetail_idday
 msgctxt "dsourcebaseconsts.sfltimetabledetail_idday"
@@ -289,16 +260,6 @@ msgctxt "dsourcebaseconsts.sfltimetabledetail_idhour"
 msgid "Hour"
 msgstr "Hour"
 
-#: dsourcebaseconsts.sfltimetabledetail_idparallel
-msgctxt "dsourcebaseconsts.sfltimetabledetail_idparallel"
-msgid "Parallel"
-msgstr "Paralelo"
-
-#: dsourcebaseconsts.sfltimetabledetail_idtheme
-msgctxt "dsourcebaseconsts.sfltimetabledetail_idtheme"
-msgid "Theme"
-msgstr "Materia"
-
 #: dsourcebaseconsts.sfltimetabledetail_idtimetable
 msgctxt "dsourcebaseconsts.sfltimetabledetail_idtimetable"
 msgid "Timetable"
@@ -309,25 +270,15 @@ msgctxt "dsourcebaseconsts.sfltimetabledetail_session"
 msgid "Session"
 msgstr "Sesion"
 
-#: dsourcebaseconsts.sfltimetableresource_idcategory
-msgctxt "dsourcebaseconsts.sfltimetableresource_idcategory"
-msgid "Category"
-msgstr ""
-
-#: dsourcebaseconsts.sfltimetableresource_idparallel
-msgctxt "dsourcebaseconsts.sfltimetableresource_idparallel"
-msgid "Parallel"
-msgstr "Paralelo"
+#: dsourcebaseconsts.sfltimetableresource_idactivity
+msgctxt "dsourcebaseconsts.sfltimetableresource_idactivity"
+msgid "Activity"
+msgstr "Distribucion"
 
 #: dsourcebaseconsts.sfltimetableresource_idresource
 msgctxt "dsourcebaseconsts.sfltimetableresource_idresource"
 msgid "Resource"
 msgstr "Profesor"
-
-#: dsourcebaseconsts.sfltimetableresource_idtheme
-msgctxt "dsourcebaseconsts.sfltimetableresource_idtheme"
-msgid "Theme"
-msgstr "Materia"
 
 #: dsourcebaseconsts.sfltimetableresource_idtimetable
 msgctxt "dsourcebaseconsts.sfltimetableresource_idtimetable"
@@ -378,11 +329,6 @@ msgstr "Dias Laborables"
 msgctxt "dsourcebaseconsts.stbhour"
 msgid "Academic Hours"
 msgstr "Horas academicas"
-
-#: dsourcebaseconsts.stbjoinedcluster
-msgctxt "dsourcebaseconsts.stbjoinedcluster"
-msgid "Joined Clusters"
-msgstr "Clases unidas"
 
 #: dsourcebaseconsts.stbparallel
 msgctxt "dsourcebaseconsts.stbparallel"
@@ -635,9 +581,8 @@ msgid "Value:"
 msgstr "Valor:"
 
 #: tconfigform.lbthemerestrictions.caption
-msgctxt "tconfigform.lbthemerestrictions.caption"
 msgid "Theme Restrictions:"
-msgstr "Prohibiciones de materia:"
+msgstr ""
 
 #: tconfigform.lbtrcolor.caption
 msgctxt "TCONFIGFORM.LBTRCOLOR.CAPTION"
@@ -1098,118 +1043,108 @@ msgctxt "tprogressform.caption"
 msgid "Search progress"
 msgstr "Progreso de la busqueda"
 
-#: tprogressform.lblbreaktimetableresourcecount.caption
-msgctxt "tprogressform.lblbreaktimetableresourcecount.caption"
+#: tprogressform.lbbreaktimetableresourcecount.caption
+msgctxt "tprogressform.lbbreaktimetableresourcecount.caption"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lblbreaktimetableresourcevalue.caption
-msgctxt "tprogressform.lblbreaktimetableresourcevalue.caption"
+#: tprogressform.lbbreaktimetableresourcevalue.caption
+msgctxt "tprogressform.lbbreaktimetableresourcevalue.caption"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lblbrokensession.caption
-msgctxt "tprogressform.lblbrokensession.caption"
+#: tprogressform.lbbrokensession.caption
+msgctxt "tprogressform.lbbrokensession.caption"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lblbrokensessionvalue.caption
-msgctxt "tprogressform.lblbrokensessionvalue.caption"
+#: tprogressform.lbbrokensessionvalue.caption
+msgctxt "tprogressform.lbbrokensessionvalue.caption"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lblclashresource.caption
-msgctxt "tprogressform.lblclashresource.caption"
+#: tprogressform.lbclashresource.caption
+msgctxt "tprogressform.lbclashresource.caption"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lblclashresourcevalue.caption
-msgctxt "tprogressform.lblclashresourcevalue.caption"
+#: tprogressform.lbclashresourcevalue.caption
+msgctxt "tprogressform.lbclashresourcevalue.caption"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lblclashtheme.caption
-msgctxt "tprogressform.lblclashtheme.caption"
+#: tprogressform.lbclashtheme.caption
+msgctxt "tprogressform.lbclashtheme.caption"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lblclashthemevalue.caption
-msgctxt "tprogressform.lblclashthemevalue.caption"
+#: tprogressform.lbclashthemevalue.caption
+msgctxt "tprogressform.lbclashthemevalue.caption"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lblcolision.caption
-msgctxt "tprogressform.lblcolision.caption"
+#: tprogressform.lbcolision.caption
+msgctxt "tprogressform.lbcolision.caption"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lblelapsedtime.caption
-msgctxt "tprogressform.lblelapsedtime.caption"
+#: tprogressform.lbelapsedtime.caption
+msgctxt "tprogressform.lbelapsedtime.caption"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lblexports.caption
-msgctxt "tprogressform.lblexports.caption"
+#: tprogressform.lbexports.caption
+msgctxt "tprogressform.lbexports.caption"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lblimports.caption
-msgctxt "tprogressform.lblimports.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lblnonscatteredthemecount.caption
-msgctxt "tprogressform.lblnonscatteredthemecount.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lblnonscatteredthemevalue.caption
-msgctxt "tprogressform.lblnonscatteredthemevalue.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbloutofpositionemptyhour.caption
-msgctxt "tprogressform.lbloutofpositionemptyhour.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbloutofpositionemptyhourvalue.caption
-msgctxt "tprogressform.lbloutofpositionemptyhourvalue.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lblposition.caption
-msgctxt "tprogressform.lblposition.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lblremainingtime.caption
-msgctxt "tprogressform.lblremainingtime.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lblresourcerestriction.caption
-msgctxt "tprogressform.lblresourcerestriction.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lblresourcerestrictionvalue.caption
-msgctxt "tprogressform.lblresourcerestrictionvalue.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lblthemerestriction.caption
-msgctxt "tprogressform.lblthemerestriction.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lblthemerestrictionvalue.caption
-msgctxt "tprogressform.lblthemerestrictionvalue.caption"
+#: tprogressform.lbimports.caption
+msgctxt "tprogressform.lbimports.caption"
 msgid "0 "
 msgstr "0 "
 
 #: tprogressform.lbltotalvalue.caption
 msgctxt "tprogressform.lbltotalvalue.caption"
+msgid "0 "
+msgstr "0 "
+
+#: tprogressform.lbnonscatteredthemecount.caption
+msgctxt "tprogressform.lbnonscatteredthemecount.caption"
+msgid "0 "
+msgstr "0 "
+
+#: tprogressform.lbnonscatteredthemevalue.caption
+msgctxt "tprogressform.lbnonscatteredthemevalue.caption"
+msgid "0 "
+msgstr "0 "
+
+#: tprogressform.lboutofpositionemptyhour.caption
+msgctxt "tprogressform.lboutofpositionemptyhour.caption"
+msgid "0 "
+msgstr "0 "
+
+#: tprogressform.lboutofpositionemptyhourvalue.caption
+msgctxt "tprogressform.lboutofpositionemptyhourvalue.caption"
+msgid "0 "
+msgstr "0 "
+
+#: tprogressform.lbposition.caption
+msgctxt "tprogressform.lbposition.caption"
+msgid "0 "
+msgstr "0 "
+
+#: tprogressform.lbremainingtime.caption
+msgctxt "tprogressform.lbremainingtime.caption"
+msgid "0 "
+msgstr "0 "
+
+#: tprogressform.lbresourcerestriction.caption
+msgctxt "tprogressform.lbresourcerestriction.caption"
+msgid "0 "
+msgstr "0 "
+
+#: tprogressform.lbresourcerestrictionvalue.caption
+msgctxt "tprogressform.lbresourcerestrictionvalue.caption"
 msgid "0 "
 msgstr "0 "
 
@@ -1306,7 +1241,7 @@ msgstr "Iniciado el:"
 #: tprogressform.pnlnonscatteredtheme.caption
 msgctxt "tprogressform.pnlnonscatteredtheme.caption"
 msgid "Non Scattered Activities:"
-msgstr " Joined Themes:"
+msgstr "Actividades no dispersas:"
 
 #: tprogressform.pnlnonscatteredthemecount.caption
 msgctxt "tprogressform.pnlnonscatteredthemecount.caption"
@@ -1358,21 +1293,6 @@ msgctxt "tprogressform.pnlresourcerestrictionvalue.caption"
 msgid "Value:"
 msgstr " Valor:"
 
-#: tprogressform.pnlthemerestriction.caption
-msgctxt "tprogressform.pnlthemerestriction.caption"
-msgid "Theme Restrictions:"
-msgstr " Prohibiciones de materia:"
-
-#: tprogressform.pnlthemerestrictionnumber.caption
-msgctxt "tprogressform.pnlthemerestrictionnumber.caption"
-msgid "Number:"
-msgstr " Numero:"
-
-#: tprogressform.pnlthemerestrictionvalue.caption
-msgctxt "tprogressform.pnlthemerestrictionvalue.caption"
-msgid "Value:"
-msgstr " Valor:"
-
 #: tprogressform.pnltotalvalue.caption
 msgctxt "tprogressform.pnltotalvalue.caption"
 msgid "Total Value:"
@@ -1394,10 +1314,6 @@ msgctxt "tresourceform.caption"
 msgid "Resource"
 msgstr "Profesor"
 
-#: tresourceform.cbjoinedclass.caption
-msgid "Joined Classes"
-msgstr ""
-
 #: tresourceform.dbgriddetail.hint
 #, fuzzy
 #| msgid "Distribution of Resources"
@@ -1406,6 +1322,7 @@ msgid "Activities"
 msgstr "Distribution de profesores"
 
 #: tresourceform.grbdetail.caption
+msgctxt "tresourceform.grbdetail.caption"
 msgid "Activity"
 msgstr "Distribucion"
 
@@ -1502,16 +1419,6 @@ msgstr "..."
 msgid "Version"
 msgstr "Version"
 
-#: tthemeform.actthemerestriction.caption
-msgctxt "TTHEMEFORM.ACTTHEMERESTRICTION.CAPTION"
-msgid "Theme restrictions"
-msgstr "Prohibiciones de materia"
-
-#: tthemeform.actthemerestriction.hint
-msgctxt "tthemeform.actthemerestriction.hint"
-msgid "Theme restrictions|Input theme restrictions"
-msgstr "Prohibiciones de materia|Ingresar las prohibiciones de materia"
-
 #: tthemeform.caption
 msgctxt "tthemeform.caption"
 msgid "Themes"
@@ -1538,25 +1445,25 @@ msgid "Swap time slots|Swap time slots"
 msgstr "Intercambiar periodos|Intercambiar periodos"
 
 #: ttimetableform.actclashactivity.caption
-msgid "Clashes of themes"
+msgid "Clashes of subjects"
 msgstr ""
 
 #: ttimetableform.actclashactivity.hint
-msgid "Clashes of themes|Clashes of themes"
+msgid "Clashes of subjects|Clashes of subjects"
 msgstr ""
 
 #: ttimetableform.actclashresource.caption
 #, fuzzy
 #| msgid "Clashes of resources"
 msgctxt "TTIMETABLEFORM.ACTCLASHRESOURCE.CAPTION"
-msgid "Clashes of teachers"
+msgid "Clashes of Resources"
 msgstr "Cruce de profesores"
 
 #: ttimetableform.actclashresource.hint
 #, fuzzy
 #| msgid "Clashes of resources|Clashes of resources"
 msgctxt "TTIMETABLEFORM.ACTCLASHRESOURCE.HINT"
-msgid "Clashes of teachers|Clashes of teachers"
+msgid "Clashes of Resources|Clashes of Resources"
 msgstr "Cruce de profesores|Cruce de profesores"
 
 #: ttimetableform.actimprovetimetable.caption
@@ -1567,12 +1474,13 @@ msgstr "Mejorar horario"
 msgid "Improve timetable|Improve selected timetable"
 msgstr "Mejorar horario|Mejorar horario seleccionado"
 
-#: ttimetableform.actresourcerestrictionnorespetada.caption
-msgctxt "TTIMETABLEFORM.ACTRESOURCERESTRICTIONNORESPETADA.CAPTION"
+#: ttimetableform.actresourcerestrictionnonsatisfied.caption
+msgctxt "ttimetableform.actresourcerestrictionnonsatisfied.caption"
 msgid "Resource restrictions"
 msgstr "Prohibiciones de profesor"
 
-#: ttimetableform.actresourcerestrictionnorespetada.hint
+#: ttimetableform.actresourcerestrictionnonsatisfied.hint
+msgctxt "ttimetableform.actresourcerestrictionnonsatisfied.hint"
 msgid "Resource retrictions|Resource restrictions non satisfied"
 msgstr "Prohibiciones de profesor|Prohibiciones de profesor no respetadas"
 
@@ -1595,25 +1503,6 @@ msgstr "Materias cortadas por la hora"
 msgctxt "ttimetableform.actthemecuthour.hint"
 msgid "Themes cut by the hour|Themes cut by the hour"
 msgstr "Materias cortadas por la hora|Materias cortadas por la hora"
-
-#: ttimetableform.actthemerestrictionnonsatisfied.caption
-msgctxt "ttimetableform.actthemerestrictionnonsatisfied.caption"
-msgid "Theme restrictions"
-msgstr "Prohibiciones de materia"
-
-#: ttimetableform.actthemerestrictionnonsatisfied.hint
-msgctxt "ttimetableform.actthemerestrictionnonsatisfied.hint"
-msgid "Theme restrictions|Theme restrictions non satisfied"
-msgstr "Prohibiciones de materia|Prohibiciones de materia no respetadas"
-
-#: ttimetableform.acttimetablecluster.caption
-msgid "Clusters timetables"
-msgstr ""
-
-#: ttimetableform.acttimetablecluster.hint
-msgctxt "ttimetableform.acttimetablecluster.hint"
-msgid "Timetables per clusters|Timetables per clusters"
-msgstr "Horario de paralelos|Horario de paralelos"
 
 #: ttimetableform.acttimetableresource.caption
 msgctxt "ttimetableform.acttimetableresource.caption"
@@ -1713,26 +1602,6 @@ msgstr "Cruces"
 msgctxt "uttgconsts.sclashresource"
 msgid "Clash of Resources"
 msgstr "Cruce de profesores"
-
-#: uttgconsts.scluster
-msgid "Cluster"
-msgstr "Clase"
-
-#: uttgconsts.sclusterperiodtosessionoverflow
-msgid "Overflow of pattern for ClusterPeriodToSession: Cluster %d-%d Duration %d"
-msgstr "Se desbordo Molde de ClusterPeriodToSession: Cluster %d-%d Duracion %d"
-
-#: uttgconsts.sclusterworkloadhead
-msgid "Cluster; Work Load"
-msgstr "Clase; Carga"
-
-#: uttgconsts.sclusterworkloadwithoutproblems
-msgid "Cluster work load without problems..."
-msgstr "Carga horaria de paralelos sin problemas..."
-
-#: uttgconsts.sclusterworkloadwithproblems
-msgid "Cluster work load with problems..."
-msgstr "Carga Horaria de paralelos con problemas..."
 
 #: uttgconsts.scopyright
 msgid "1999-2012 by Edison Mera"

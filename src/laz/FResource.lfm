@@ -122,31 +122,6 @@ inherited ResourceForm: TResourceForm
           Top = 1
           Width = 6
         end
-        object GBJoinedCluster: TGroupBox
-          Left = 294
-          Height = 224
-          Top = 1
-          Width = 398
-          Align = alClient
-          Caption = 'Joined Clusters'
-          ClientHeight = 206
-          ClientWidth = 390
-          TabOrder = 1
-          object DbGJoinedCluster: TDBGrid
-            Left = 0
-            Height = 206
-            Top = 0
-            Width = 390
-            Align = alClient
-            Color = clWindow
-            Columns = <>
-            DataSource = SourceDataModule.DSJoinedCluster
-            Scrollbars = ssAutoBoth
-            TabOrder = 0
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-          end
-        end
       end
     end
   end

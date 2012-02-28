@@ -58,10 +58,10 @@ $(TTGMYSQL): $(DBCONVERT) $(TTGMDB)
 $(DSRCBASE).pas $(DSRCBASE)consts.pas $(DSRCBASE).lfm: $(DBCONVERT) $(TTGMDB) Makefile
 	$(DBCONVERT) /ACC2DM $(TTGMDB) SourceBaseDataModule \
 	  $(DSRCBASE) 'cds;urt;lfm;U=ZConnection, ZDataset;DS=ZTable;DB=ZConnection;DP=Connection'
-	dos2unix $(DSRCBASE).pas $(DSRCBASE)consts.pas $(DSRCBASE).lfm
+	dos2unix $(DSRCBASE).pas $(DSRCBASE)Consts.pas $(DSRCBASE).lfm
 
 cleanthisw:
-	$(RM) $(DSRCBASE).{lfm,lrs,pas} $(DSRCBASE)consts.pas $(TTGSQL) $(TTGMYSQL)
+	$(RM) $(DSRCBASE).{lfm,lrs,pas} $(DSRCBASE)Consts.pas $(TTGSQL) $(TTGMYSQL)
 
 $(DBCONVERT):
 	cd $(DBCONVERTSRC) ; $(MAKE) all

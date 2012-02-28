@@ -2,7 +2,7 @@
 unit DSourceBaseConsts;
 
 (*
-  20/02/2012 16:11
+  27/02/2012 18:16
 
   Warning:
 
@@ -23,44 +23,39 @@ uses
 
 resourcestring
 
+  STbTheme = 'Themes';
   STbCategory = 'Categories';
   STbParallel = 'Parallels';
-  STbCluster = 'Clusters';
   STbDay = 'Working Days';
   STbHour = 'Academic Hours';
-  STbTheme = 'Themes';
-  STbActivity = 'Activities';
+  STbCluster = 'Clusters';
   STbPeriod = 'Periods';
   STbResourceType = 'Resource types';
   STbResource = 'Resources';
   STbResourceRestrictionType = 'Types of Resource Restrictions';
   STbResourceRestriction = 'Resource Restrictions';
+  STbActivity = 'Activities';
   STbRequirement = 'Requirements';
-  STbJoinedCluster = 'Joined Clusters';
   STbThemeRestrictionType = 'Types of Theme Restrictions';
   STbThemeRestriction = 'Theme Restrictions';
   STbTimetable = 'Timetables';
   STbTimetableDetail = 'Detail of Timetables';
   STbTimetableResource = 'Resources of Timetables';
 
+  SFlTheme_IdTheme = 'Id';
+  SFlTheme_NaTheme = 'Name';
   SFlCategory_IdCategory = 'Id';
   SFlCategory_NaCategory = 'Name';
   SFlCategory_AbCategory = 'Abbreviation';
   SFlParallel_IdParallel = 'Id';
   SFlParallel_NaParallel = 'Name';
-  SFlCluster_IdCategory = 'Category';
-  SFlCluster_IdParallel = 'Parallel';
   SFlDay_IdDay = 'Id';
   SFlDay_NaDay = 'Name';
   SFlHour_IdHour = 'Id';
   SFlHour_NaHour = 'Name';
   SFlHour_Interval = 'Interval';
-  SFlTheme_IdTheme = 'Id';
-  SFlTheme_NaTheme = 'Name';
-  SFlActivity_IdTheme = 'Theme';
-  SFlActivity_IdCategory = 'Category';
-  SFlActivity_IdParallel = 'Parallel';
-  SFlActivity_Composition = 'Composition';
+  SFlCluster_IdCategory = 'Category';
+  SFlCluster_IdParallel = 'Parallel';
   SFlPeriod_IdDay = 'Day';
   SFlPeriod_IdHour = 'Hour';
   SFlResourceType_IdResourceType = 'IdResourceType';
@@ -80,16 +75,14 @@ resourcestring
   SFlResourceRestriction_IdDay = 'Day';
   SFlResourceRestriction_IdHour = 'Hour';
   SFlResourceRestriction_IdResourceRestrictionType = 'Restriction Type';
-  SFlRequirement_IdTheme = 'Theme';
-  SFlRequirement_IdCategory = 'Category';
-  SFlRequirement_IdParallel = 'Parallel';
+  SFlActivity_IdActivity = 'Id';
+  SFlActivity_IdTheme = 'Theme';
+  SFlActivity_IdCategory = 'Category';
+  SFlActivity_IdParallel = 'Parallel';
+  SFlActivity_Composition = 'Composition';
+  SFlRequirement_IdActivity = 'Category';
   SFlRequirement_IdResource = 'Resource';
   SFlRequirement_NumRequirement = 'Number';
-  SFlJoinedCluster_IdTheme = 'Theme';
-  SFlJoinedCluster_IdCategory = 'Category';
-  SFlJoinedCluster_IdParallel = 'Parallel';
-  SFlJoinedCluster_IdCategory1 = 'Joined Category';
-  SFlJoinedCluster_IdParallel1 = 'Joined Parallel';
   SFlThemeRestrictionType_IdThemeRestrictionType = 'Id';
   SFlThemeRestrictionType_NaThemeRestrictionType = 'Name';
   SFlThemeRestrictionType_ColThemeRestrictionType = 'Color';
@@ -103,16 +96,12 @@ resourcestring
   SFlTimetable_TimeEnd = 'End Time';
   SFlTimetable_Summary = 'Summary';
   SFlTimetableDetail_IdTimetable = 'Timetable';
-  SFlTimetableDetail_IdTheme = 'Theme';
-  SFlTimetableDetail_IdCategory = 'Category';
-  SFlTimetableDetail_IdParallel = 'Parallel';
+  SFlTimetableDetail_IdActivity = 'Activity';
   SFlTimetableDetail_IdDay = 'Day';
   SFlTimetableDetail_IdHour = 'Hour';
   SFlTimetableDetail_Session = 'Session';
   SFlTimetableResource_IdTimetable = 'Timetable';
-  SFlTimetableResource_IdTheme = 'Theme';
-  SFlTimetableResource_IdCategory = 'Category';
-  SFlTimetableResource_IdParallel = 'Parallel';
+  SFlTimetableResource_IdActivity = 'Activity';
   SFlTimetableResource_IdResource = 'Resource';
 
 implementation

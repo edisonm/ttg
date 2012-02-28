@@ -77,16 +77,12 @@ begin
   QuResource.Open;
   CBShowResource.Items.Clear;
   QuTimetableResource.Open;
-  QuTimetableResourceNaParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
-  QuTimetableResourceNaTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
+  QuTimetableResourceNaTheme.DisplayLabel := SFlActivity_IdTheme;
   QuTimetableResourceName.DisplayLabel := SFlResource_NaResource;
   QuResourceNaResource.DisplayLabel := SFlResource_NaResource;
-  QuTimetableResourceIdCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
-  QuTimetableResourceIdParallel.DisplayLabel := SFlTimetableDetail_IdParallel;
   QuTimetableResourceIdHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuTimetableResourceIdDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuTimetableResourceIdTheme.DisplayLabel := SFlTimetableDetail_IdTheme;
-  QuTimetableResourceAbCategory.DisplayLabel := SFlTimetableDetail_IdCategory;
+  QuTimetableResourceIdTheme.DisplayLabel := SFlActivity_IdTheme;
   LoadNames(MasterDataModule.StringsShowResource, CBShowResource.Items);
   CBShowResource.Text := CBShowResource.Items[0];
 end;

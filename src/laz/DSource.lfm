@@ -52,44 +52,4 @@ inherited SourceDataModule: TSourceDataModule
         ParamType = ptUnknown
       end>
   end
-  object QuCluster: TZReadOnlyQuery[43]
-    Connection = DbZConnection
-    SQL.Strings = (
-      'SELECT Cluster.IdCategory, Cluster.IdParallel,'
-      ' AbCategory || " " || NaParallel AS NameCluster'
-      'FROM'
-      ' Cluster INNER JOIN Category ON Cluster.IdCategory=Category.IdCategory'
-      ' INNER JOIN Parallel ON Cluster.IdParallel = Parallel.IdParallel'
-      'WHERE'
-      ' Cluster.IdCategory<>:IdCategory OR'
-      ' Cluster.IdParallel<>:IdParallel'
-    )
-    Params = <    
-      item
-        DataType = ftInteger
-        Name = 'IdCategory'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdParallel'
-        ParamType = ptUnknown
-      end>
-    DataSource = DSActivity
-    MasterFields = 'IdCategory,IdParallel'
-    LinkedFields = 'IdCategory;IdParallel'
-    left = 552
-    top = 248
-    ParamData = <    
-      item
-        DataType = ftInteger
-        Name = 'IdCategory'
-        ParamType = ptUnknown
-      end    
-      item
-        DataType = ftInteger
-        Name = 'IdParallel'
-        ParamType = ptUnknown
-      end>
-  end
 end

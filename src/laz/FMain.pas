@@ -56,7 +56,6 @@ type
     MITimetable: TMenuItem;
     MIDay: TMenuItem;
     MIHour: TMenuItem;
-    MICluster: TMenuItem;
     SaveDialog: TSaveDialog;
     OpenDialog: TOpenDialog;
     MIPeriod: TMenuItem;
@@ -71,7 +70,6 @@ type
     TBResourceType: TToolButton;
     TBResource: TToolButton;
     TBPeriod: TToolButton;
-    TBCluster: TToolButton;
     TBTheme: TToolButton;
     MIReopen: TMenuItem;
     ImageList: TImageList;
@@ -98,7 +96,6 @@ type
     ActResource: TAction;
     ActResourceType: TAction;
     ActPeriod: TAction;
-    ActCluster: TAction;
     ActTheme: TAction;
     ActCheckFeasibility: TAction;
     ActMakeTimetable: TAction;
@@ -130,7 +127,6 @@ type
     procedure ActCategoryExecute(Sender: TObject);
     procedure ActResourceTypeExecute(Sender: TObject);
     procedure ActParallelExecute(Sender: TObject);
-    procedure ActClusterExecute(Sender: TObject);
     procedure ActDayExecute(Sender: TObject);
     procedure ActHourExecute(Sender: TObject);
     procedure ActNewExecute(Sender: TObject);
@@ -203,8 +199,8 @@ implementation
 
 uses
   FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FTheme, FResource,
-  FTimetable, FMasterDetailEditor, FConfig, FCluster, Printers, DSource,
-  DSourceBase, UTTGBasics, FMessageView, UTTGi18n, UTTGConsts, FDBExplorer;
+  FTimetable, FMasterDetailEditor, FConfig, Printers, DSource, DSourceBase,
+  UTTGBasics, FMessageView, UTTGi18n, UTTGConsts, FDBExplorer;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -326,15 +322,6 @@ begin
 				    ConfigStorage,
 				    ActTimetable,
 				    SourceDataModule.TbTimetable);
-end;
-
-procedure TMainForm.ActClusterExecute(Sender: TObject);
-begin
-   TClusterForm.ToggleSingleEditor(Self,
-				 ClusterForm,
-				 ConfigStorage,
-				 ActCluster,
-				 SourceDataModule.TbCategory);
 end;
 
 function TMainForm.ConfirmOperation: boolean;
@@ -692,7 +679,6 @@ begin
     end
     else
     begin
-      SourceDataModule.TbThemeRestrictionType.Refresh;
       SourceDataModule.TbResourceRestrictionType.Refresh;
     end;
   finally
