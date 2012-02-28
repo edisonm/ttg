@@ -2,7 +2,7 @@
 unit DSourceBase;
 
 (*
-  27/02/2012 18:16
+  28/02/2012 3:15
 
   Warning:
 
@@ -53,10 +53,6 @@ type
     DSActivity: TDataSource;
     TbRequirement: TZTable;
     DSRequirement: TDataSource;
-    TbThemeRestrictionType: TZTable;
-    DSThemeRestrictionType: TDataSource;
-    TbThemeRestriction: TZTable;
-    DSThemeRestriction: TDataSource;
     TbTimetable: TZTable;
     DSTimetable: TDataSource;
     TbTimetableDetail: TZTable;
@@ -82,8 +78,8 @@ procedure TSourceBaseDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
   OnDestroy := DataModuleDestroy;
-  SetLength(FTables, 18);
-  SetLength(FMasterRels, 18);
+  SetLength(FTables, 16);
+  SetLength(FMasterRels, 16);
   Tables[0] := TbTheme;
   TbTheme.AfterPost := DataSetAfterPost;
   Tables[1] := TbCategory;
@@ -102,25 +98,15 @@ begin
   TbActivity.AfterPost := DataSetAfterPost;
   TbActivity.AfterDelete := DataSetAfterDelete;
   Tables[12] := TbRequirement;
-  Tables[13] := TbThemeRestrictionType;
-  Tables[14] := TbThemeRestriction;
-  Tables[15] := TbTimetable;
+  Tables[13] := TbTimetable;
   TbTimetable.AfterPost := DataSetAfterPost;
   TbTimetable.AfterDelete := DataSetAfterDelete;
-  Tables[16] := TbTimetableDetail;
-  Tables[17] := TbTimetableResource;
-  SetLength(FMasterRels[0], 2);
+  Tables[14] := TbTimetableDetail;
+  Tables[15] := TbTimetableResource;
+  SetLength(FMasterRels[0], 1);
   with FMasterRels[0, 0] do
   begin
     DetailDataSet := TbActivity;
-    MasterFields := 'IdTheme';
-    DetailFields := 'IdTheme';
-    UpdateCascade := True;
-    DeleteCascade := False;
-  end;
-  with FMasterRels[0, 1] do
-  begin
-    DetailDataSet := TbThemeRestriction;
     MasterFields := 'IdTheme';
     DetailFields := 'IdTheme';
     UpdateCascade := True;
@@ -185,8 +171,8 @@ begin
     UpdateCascade := True;
     DeleteCascade := False;
   end;
-  SetLength(FMasterRels[15], 2);
-  with FMasterRels[15, 0] do
+  SetLength(FMasterRels[13], 2);
+  with FMasterRels[13, 0] do
   begin
     DetailDataSet := TbTimetableDetail;
     MasterFields := 'IdTimetable';
@@ -194,7 +180,7 @@ begin
     UpdateCascade := True;
     DeleteCascade := True;
   end;
-  with FMasterRels[15, 1] do
+  with FMasterRels[13, 1] do
   begin
     DetailDataSet := TbTimetableResource;
     MasterFields := 'IdTimetable';
@@ -217,8 +203,6 @@ begin
     Add('TbResourceRestriction=ResourceRestriction');
     Add('TbActivity=Activity');
     Add('TbRequirement=Requirement');
-    Add('TbThemeRestrictionType=ThemeRestrictionType');
-    Add('TbThemeRestriction=ThemeRestriction');
     Add('TbTimetable=Timetable');
     Add('TbTimetableDetail=TimetableDetail');
     Add('TbTimetableResource=TimetableResource');
@@ -266,14 +250,6 @@ begin
     Add('TbRequirement.IdActivity=' + SFlRequirement_IdActivity);
     Add('TbRequirement.IdResource=' + SFlRequirement_IdResource);
     Add('TbRequirement.NumRequirement=' + SFlRequirement_NumRequirement);
-    Add('TbThemeRestrictionType.IdThemeRestrictionType=' + SFlThemeRestrictionType_IdThemeRestrictionType);
-    Add('TbThemeRestrictionType.NaThemeRestrictionType=' + SFlThemeRestrictionType_NaThemeRestrictionType);
-    Add('TbThemeRestrictionType.ColThemeRestrictionType=' + SFlThemeRestrictionType_ColThemeRestrictionType);
-    Add('TbThemeRestrictionType.ValThemeRestrictionType=' + SFlThemeRestrictionType_ValThemeRestrictionType);
-    Add('TbThemeRestriction.IdTheme=' + SFlThemeRestriction_IdTheme);
-    Add('TbThemeRestriction.IdDay=' + SFlThemeRestriction_IdDay);
-    Add('TbThemeRestriction.IdHour=' + SFlThemeRestriction_IdHour);
-    Add('TbThemeRestriction.IdThemeRestrictionType=' + SFlThemeRestriction_IdThemeRestrictionType);
     Add('TbTimetable.IdTimetable=' + SFlTimetable_IdTimetable);
     Add('TbTimetable.TimeIni=' + SFlTimetable_TimeIni);
     Add('TbTimetable.TimeEnd=' + SFlTimetable_TimeEnd);
@@ -302,8 +278,6 @@ begin
     Add('TbResourceRestriction=' + STbResourceRestriction);
     Add('TbActivity=' + STbActivity);
     Add('TbRequirement=' + STbRequirement);
-    Add('TbThemeRestrictionType=' + STbThemeRestrictionType);
-    Add('TbThemeRestriction=' + STbThemeRestriction);
     Add('TbTimetable=' + STbTimetable);
     Add('TbTimetableDetail=' + STbTimetableDetail);
     Add('TbTimetableResource=' + STbTimetableResource);

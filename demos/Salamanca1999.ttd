@@ -1,5 +1,5 @@
 TTD 293
-18
+16
 Theme
 29
 "IdTheme";"NaTheme";
@@ -1735,12 +1735,6 @@ Requirement
 "232";"82";"1";
 "233";"82";"1";
 "234";"82";"1";
-ThemeRestrictionType
-0
-"IdThemeRestrictionType";"NaThemeRestrictionType";"ColThemeRestrictionType";"ValThemeRestrictionType";
-ThemeRestriction
-0
-"IdTheme";"IdDay";"IdHour";"IdThemeRestrictionType";
 Timetable
 0
 "IdTimetable";"TimeIni";"TimeEnd";"Summary";

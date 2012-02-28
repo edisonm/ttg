@@ -2,7 +2,7 @@
 unit DSourceBaseConsts;
 
 (*
-  27/02/2012 18:16
+  28/02/2012 3:15
 
   Warning:
 
@@ -36,8 +36,6 @@ resourcestring
   STbResourceRestriction = 'Resource Restrictions';
   STbActivity = 'Activities';
   STbRequirement = 'Requirements';
-  STbThemeRestrictionType = 'Types of Theme Restrictions';
-  STbThemeRestriction = 'Theme Restrictions';
   STbTimetable = 'Timetables';
   STbTimetableDetail = 'Detail of Timetables';
   STbTimetableResource = 'Resources of Timetables';
@@ -83,14 +81,6 @@ resourcestring
   SFlRequirement_IdActivity = 'Category';
   SFlRequirement_IdResource = 'Resource';
   SFlRequirement_NumRequirement = 'Number';
-  SFlThemeRestrictionType_IdThemeRestrictionType = 'Id';
-  SFlThemeRestrictionType_NaThemeRestrictionType = 'Name';
-  SFlThemeRestrictionType_ColThemeRestrictionType = 'Color';
-  SFlThemeRestrictionType_ValThemeRestrictionType = 'Value';
-  SFlThemeRestriction_IdTheme = 'Theme';
-  SFlThemeRestriction_IdDay = 'Day';
-  SFlThemeRestriction_IdHour = 'Hour';
-  SFlThemeRestriction_IdThemeRestrictionType = 'Restriction Type';
   SFlTimetable_IdTimetable = 'Id';
   SFlTimetable_TimeIni = 'Initial Time';
   SFlTimetable_TimeEnd = 'End Time';

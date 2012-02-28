@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  27/02/2012 18:15
+  28/02/2012 3:15
 
   Warning:
 
@@ -102,25 +102,6 @@ CREATE TABLE IF NOT EXISTS `Requirement`(
   CONSTRAINT `ResourceRequirement` FOREIGN KEY (`IdResource`)
     REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE RESTRICT
 ); /* Requirements */
-CREATE TABLE IF NOT EXISTS `ThemeRestrictionType`(
-    `IdThemeRestrictionType` INTEGER NOT NULL PRIMARY KEY /* Theme Restriction Type Id */,
-    `NaThemeRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
-    `ColThemeRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
-    `ValThemeRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
-); /* Types of Theme Restrictions */
-CREATE TABLE IF NOT EXISTS `ThemeRestriction`(
-    `IdTheme` INTEGER NOT NULL /* Theme Id */,
-    `IdDay` INTEGER NOT NULL /* Day Id */,
-    `IdHour` INTEGER NOT NULL /* Hour Id */,
-    `IdThemeRestrictionType` INTEGER NOT NULL /* Theme Restriction Type Id */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdDay`,`IdHour`),
-  CONSTRAINT `PeriodThemeRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
-    REFERENCES `Period`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `ThemeRestrictionTypeThemeRestriction` FOREIGN KEY (`IdThemeRestrictionType`)
-    REFERENCES `ThemeRestrictionType`(`IdThemeRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `ThemeThemeRestriction` FOREIGN KEY (`IdTheme`)
-    REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE RESTRICT
-); /* Theme Restrictions */
 CREATE TABLE IF NOT EXISTS `Timetable`(
     `IdTimetable` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Timetable Id */,
     `TimeIni` DATETIME NOT NULL /* Initial Time */,

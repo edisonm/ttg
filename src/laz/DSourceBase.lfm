@@ -171,69 +171,43 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 248
     Top = 232
   end
-  object TbThemeRestrictionType: TZTable
-    Tag = 13
-    Connection = DbZConnection
-    TableName = 'ThemeRestrictionType'
-    IndexFieldNames = 'IdThemeRestrictionType'
-    Left = 336
-    Top = 252
-  end
-  object DSThemeRestrictionType: TDataSource
-    DataSet = TbThemeRestrictionType
-    Left = 344
-    Top = 244
-  end
-  object TbThemeRestriction: TZTable
-    Tag = 14
-    Connection = DbZConnection
-    TableName = 'ThemeRestriction'
-    IndexFieldNames = 'IdTheme;IdDay;IdHour'
-    Left = 432
-    Top = 240
-  end
-  object DSThemeRestriction: TDataSource
-    DataSet = TbThemeRestriction
-    Left = 440
-    Top = 232
-  end
   object TbTimetable: TZTable
-    Tag = 15
+    Tag = 13
     Connection = DbZConnection
     TableName = 'Timetable'
     IndexFieldNames = 'IdTimetable'
-    Left = 48
-    Top = 336
+    Left = 336
+    Top = 252
   end
   object DSTimetable: TDataSource
     DataSet = TbTimetable
-    Left = 56
-    Top = 328
+    Left = 344
+    Top = 244
   end
   object TbTimetableDetail: TZTable
-    Tag = 16
+    Tag = 14
     Connection = DbZConnection
     TableName = 'TimetableDetail'
     IndexFieldNames = 'IdTimetable;IdActivity;IdDay;IdHour'
-    Left = 144
-    Top = 348
+    Left = 432
+    Top = 240
   end
   object DSTimetableDetail: TDataSource
     DataSet = TbTimetableDetail
-    Left = 152
-    Top = 340
+    Left = 440
+    Top = 232
   end
   object TbTimetableResource: TZTable
-    Tag = 17
+    Tag = 15
     Connection = DbZConnection
     TableName = 'TimetableResource'
     IndexFieldNames = 'IdTimetable;IdActivity;IdResource'
-    Left = 240
+    Left = 48
     Top = 336
   end
   object DSTimetableResource: TDataSource
     DataSet = TbTimetableResource
-    Left = 248
+    Left = 56
     Top = 328
   end
 end
