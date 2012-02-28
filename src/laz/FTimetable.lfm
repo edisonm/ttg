@@ -60,7 +60,7 @@ inherited TimetableForm: TTimetableForm
       ParentShowHint = False
       ShowHint = True
     end
-    object BtMejorarTimetable: TToolButton[9]
+    object BtImproveTimetable: TToolButton[9]
       Left = 339
       Top = 2
       Action = ActImproveTimeTable

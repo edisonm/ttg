@@ -110,7 +110,7 @@ type
     QuBrokenSessionHourDetailIdTimetable: TLongintField;
     QuClashResourceDetailIdDay: TLongintField;
     QuClashResourceDetailIdHour: TLongintField;
-    BtMejorarTimetable: TToolButton;
+    BtImproveTimetable: TToolButton;
     ActImproveTimeTable: TAction;
     procedure ActClashResourceExecute(Sender: TObject);
     procedure ActClashActivityExecute(Sender: TObject);
@@ -133,7 +133,7 @@ type
     FResourceRestrictionNonSatisfiedForm: TSingleEditorForm;
     FTimetableResourceForm: TTimetableResourceForm;
     {$IFNDEF FREEWARE}
-    procedure MejorarTimetable;
+    procedure ImproveTimetable;
     {$ENDIF}
   protected
     procedure doLoadConfig; override;
@@ -157,17 +157,14 @@ uses
 procedure TTimetableForm.ActClashResourceExecute(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule, MasterDataModule do
+  if TMasterDetailEditorForm.ToggleMasterDetailEditor
+       (Self, FClashResourceForm, ConfigStorage, ActClashResource,
+        QuClashResource, QuClashResourceDetail) then
   begin
-    if TMasterDetailEditorForm.ToggleMasterDetailEditor
-      (Self, FClashResourceForm, ConfigStorage, ActClashResource,
-      QuClashResource, QuClashResourceDetail) then
-    begin
-      QuClashResource.Close;
-      QuClashResourceDetail.Close;
-      QuClashResource.Open;
-      QuClashResourceDetail.Open;
-    end;
+    QuClashResource.Close;
+    QuClashResourceDetail.Close;
+    QuClashResource.Open;
+    QuClashResourceDetail.Open;
   end;
 end;
 
@@ -191,17 +188,14 @@ end;
 procedure TTimetableForm.ActClashActivityExecute(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule do
+  if TMasterDetailEditorForm.ToggleMasterDetailEditor
+       (Self, FClashActivityForm, ConfigStorage, ActClashActivity, QuClashActivity,
+        QuClashActivityDetail) then
   begin
-    if TMasterDetailEditorForm.ToggleMasterDetailEditor
-      (Self, FClashActivityForm, ConfigStorage, ActClashActivity, QuClashActivity,
-      QuClashActivityDetail) then
-    begin
-      QuClashActivity.Close;
-      QuClashActivity.Open;
-      QuClashActivityDetail.Close;
-      QuClashActivityDetail.Open;
-    end;
+    QuClashActivity.Close;
+    QuClashActivity.Open;
+    QuClashActivityDetail.Close;
+    QuClashActivityDetail.Open;
   end;
 end;
 
@@ -210,7 +204,7 @@ begin
   ActImproveTimeTable.Enabled := False;
   try
 {$IFNDEF FREEWARE}
-    MejorarTimetable;
+    ImproveTimetable;
 {$ENDIF}
   finally
     ActImproveTimeTable.Enabled := True;
@@ -219,25 +213,24 @@ begin
 end;
 
 {$IFNDEF FREEWARE}
-procedure TTimetableForm.MejorarTimetable;
+procedure TTimetableForm.ImproveTimetable;
 var
-  IdTimetableFuente, IdTimetableDestino: Integer;
+  IdTimetableSource, IdTimetableTarget: Integer;
   SNewIdTimetable: string;
 begin
-  IdTimetableFuente := SourceDataModule.TbTimetable.FindField('IdTimetable').AsInteger;
+  IdTimetableSource := SourceDataModule.TbTimetable.FindField('IdTimetable').AsInteger;
   SNewIdTimetable := IntToStr(MasterDataModule.NewIdTimetable);
-  if not InputQuery(Format(SImprovingTimetable, [IdTimetableFuente]),
+  if not InputQuery(Format(SImprovingTimetable, [IdTimetableSource]),
     SImprovedTimetableId, SNewIdTimetable) then
     Exit;
-  IdTimetableDestino := StrToInt(SNewIdTimetable);
-  with SourceDataModule do
+  IdTimetableTarget := StrToInt(SNewIdTimetable);
   begin
     ActImproveTimeTable.Enabled := False;
     try
       {$IFDEF THREADED}
-      TImproveTimetableThread.Create(IdTimetableFuente, IdTimetableDestino, False);
+      TImproveTimetableThread.Create(IdTimetableSource, IdTimetableTarget, False);
       {$ELSE}
-      with TImproveTimetableThread.Create(IdTimetableFuente, IdTimetableDestino, True) do
+      with TImproveTimetableThread.Create(IdTimetableSource, IdTimetableTarget, True) do
       try
         Execute;
       finally
@@ -246,7 +239,7 @@ begin
       {$ENDIF}
     finally
       ActImproveTimeTable.Enabled := True;
-      TbTimetableDetail.Refresh;
+      SourceDataModule.TbTimetableDetail.Refresh;
     end;
   end;
 end;
@@ -322,17 +315,14 @@ end;
 procedure TTimetableForm.ActBrokenSessionHourExecute(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule, QuBrokenSessionHour do
+  if TMasterDetailEditorForm.ToggleMasterDetailEditor
+       (Self, FBrokenSessionHourForm, ConfigStorage, ActBrokenSessionHour,
+        QuBrokenSessionHour, QuBrokenSessionHourDetail) then
   begin
-    if TMasterDetailEditorForm.ToggleMasterDetailEditor
-      (Self, FBrokenSessionHourForm, ConfigStorage, ActBrokenSessionHour,
-      QuBrokenSessionHour, QuBrokenSessionHourDetail) then
-    begin
-      QuBrokenSessionHour.Close;
-      QuBrokenSessionHour.Open;
-      QuBrokenSessionHourDetail.Close;
-      QuBrokenSessionHourDetail.Open;
-    end;
+    QuBrokenSessionHour.Close;
+    QuBrokenSessionHour.Open;
+    QuBrokenSessionHourDetail.Close;
+    QuBrokenSessionHourDetail.Open;
   end;
 end;
 
