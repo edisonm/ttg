@@ -1065,11 +1065,11 @@ var
 begin
   with AReport, TablingInfo do
   begin
-    Add('-------------------------------------------------------------------');
+    Add('___________________________________________________________________');
     Add(Format('%0:-28s %12s %12s %12s', [SDetail, SCount, SWeight, SValue]));
-    Add('-------------------------------------------------------------------');
+    Add('___________________________________________________________________');
     Add(Format('%0:-28s %12s %12s %12s)', [SClashResource + ':', '', '',
-                                          '(' + IntToStr(ClashResourceValue)]));
+                                           '(' + IntToStr(ClashResourceValue)]));
     for ResourceType := 0 to TTimetableModel(Model).FResourceTypeCount - 1 do
     begin
       Add(Format('%0:-28s %12d %12d %12d',
@@ -1077,8 +1077,9 @@ begin
                   FClashResourceType[ResourceType],
                   TTimetableModel(Model).FResourceTypeToValue[ResourceType],
                   FClashResourceType[ResourceType]
-                   * TTimetableModel(Model).FResourceTypeToValue[ResourceType]]));
+                  * TTimetableModel(Model).FResourceTypeToValue[ResourceType]]));
     end;
+    Add('-------------------------------------------------------------------');
     Add(Format(SRowFormat, [SClashActivity + ':', FClashActivity,
       TTimetableModel(Model).ClashActivityValue, ClashActivityValue]));
     Add(Format(SRowFormat, [SBreakTimetableResource + ':', BreakTimetableResource,
@@ -1089,7 +1090,9 @@ begin
       TTimetableModel(Model).BrokenSessionValue, BrokenSessionValue]));
     Add(Format(SRowFormat, [SNonScatteredActivity + ':', NonScatteredActivity,
         TTimetableModel(Model).NonScatteredActivityValue, NonScatteredActivityValue]));
-    Add(Format('%0:-28s', [STbResourceRestriction + ':']));
+    Add('-------------------------------------------------------------------');
+    Add(Format('%0:-28s %12s %12s %12s)', [STbResourceRestriction + ':', '', '',
+                                          '(' + IntToStr(ResourceRestrictionValue)]));
     for ResourceRestrictionType := 0 to TTimetableModel(Model).FResourceRestrictionTypeCount - 1 do
     begin
       Add(Format('%0:-28s %12d %12d %12d',
@@ -1098,9 +1101,8 @@ begin
                   TTimetableModel(Model).FResourceRestrictionTypeToValue[ResourceRestrictionType],
                   FResourceRestrictionTypeToResourceCount[ResourceRestrictionType]
                   * TTimetableModel(Model).FResourceRestrictionTypeToValue[ResourceRestrictionType]]));
-      //ResourceRestrictionValue
     end;
-    Add('-------------------------------------------------------------------');
+    Add('___________________________________________________________________');
     Add(Format('%0:-54s %12d', [STotalValue, Value]));
   end;
 end;
