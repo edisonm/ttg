@@ -72,24 +72,24 @@ type
     QuBrokenSessionDayNaDay: TStringField;
     QuBrokenSessionDayNaHour: TStringField;
     BtThemeCutHour: TToolButton;
-    QuThemeCutHour: TZQuery;
-    QuThemeCutHourIdDay: TLongintField;
-    QuThemeCutHourIdHour: TLongintField;
-    QuThemeCutHourDetail: TZQuery;
+    QuBrokenSessionHour: TZQuery;
+    QuBrokenSessionHourIdDay: TLongintField;
+    QuBrokenSessionHourIdHour: TLongintField;
+    QuBrokenSessionHourDetail: TZQuery;
     DSThemeCutHour: TDataSource;
-    QuThemeCutHourNaDay: TStringField;
-    QuThemeCutHourNaHour: TStringField;
-    QuThemeCutHourDetailIdCategory: TLongintField;
-    QuThemeCutHourDetailIdParallel: TLongintField;
-    QuThemeCutHourDetailIdDay: TLongintField;
-    QuThemeCutHourDetailIdHour0: TLongintField;
-    QuThemeCutHourDetailIdTheme: TLongintField;
-    QuThemeCutHourDetailAbCategory: TStringField;
-    QuThemeCutHourDetailNaParallel: TStringField;
-    QuThemeCutHourDetailNaDay: TStringField;
-    QuThemeCutHourDetailNaHour: TStringField;
-    QuThemeCutHourDetailNaTheme: TStringField;
-    QuThemeCutHourDetailIdHour: TLongintField;
+    QuBrokenSessionHourNaDay: TStringField;
+    QuBrokenSessionHourNaHour: TStringField;
+    QuBrokenSessionHourDetailIdCategory: TLongintField;
+    QuBrokenSessionHourDetailIdParallel: TLongintField;
+    QuBrokenSessionHourDetailIdDay: TLongintField;
+    QuBrokenSessionHourDetailIdHour0: TLongintField;
+    QuBrokenSessionHourDetailIdTheme: TLongintField;
+    QuBrokenSessionHourDetailAbCategory: TStringField;
+    QuBrokenSessionHourDetailNaParallel: TStringField;
+    QuBrokenSessionHourDetailNaDay: TStringField;
+    QuBrokenSessionHourDetailNaHour: TStringField;
+    QuBrokenSessionHourDetailNaTheme: TStringField;
+    QuBrokenSessionHourDetailIdHour: TLongintField;
     Splitter1: TSplitter;
     ActTimetableResource: TAction;
     ActClashResource: TAction;
@@ -100,14 +100,14 @@ type
     DSClashResource: TDataSource;
     QuClashResourceIdTimetable: TLongintField;
     QuBrokenSessionDayIdTimetable: TLongintField;
-    QuThemeCutHourIdTimetable: TLongintField;
+    QuBrokenSessionHourIdTimetable: TLongintField;
     QuClashResourceNaResourceType: TStringField;
     QuClashResourceNaResource: TStringField;
     QuClashResourceOccupied: TLongintField;
     QuClashResourceClashes: TLongintField;
     QuClashResourceDetailIdTimetable: TLongintField;
     DSClashActivity: TDataSource;
-    QuThemeCutHourDetailIdTimetable: TLongintField;
+    QuBrokenSessionHourDetailIdTimetable: TLongintField;
     QuClashResourceDetailIdDay: TLongintField;
     QuClashResourceDetailIdHour: TLongintField;
     BtMejorarTimetable: TToolButton;
@@ -285,11 +285,11 @@ begin
   QuBrokenSessionDayNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuBrokenSessionDayNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuBrokenSessionDayNaTheme.DisplayLabel := SFlActivity_IdTheme;
-  QuThemeCutHourNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuThemeCutHourNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuThemeCutHourDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuThemeCutHourDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuThemeCutHourDetailNaTheme.DisplayLabel := SFlActivity_IdTheme;
+  QuBrokenSessionHourNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
+  QuBrokenSessionHourNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
+  QuBrokenSessionHourDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
+  QuBrokenSessionHourDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
+  QuBrokenSessionHourDetailNaTheme.DisplayLabel := SFlActivity_IdTheme;
   
 end;
 
@@ -323,16 +323,16 @@ end;
 procedure TTimetableForm.ActThemeCutHourExecute(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule, QuThemeCutHour do
+  with SourceDataModule, QuBrokenSessionHour do
   begin
     if TMasterDetailEditorForm.ToggleMasterDetailEditor
       (Self, FThemeCutHourForm, ConfigStorage, ActThemeCutHour,
-      QuThemeCutHour, QuThemeCutHourDetail) then
+      QuBrokenSessionHour, QuBrokenSessionHourDetail) then
     begin
-      QuThemeCutHour.Close;
-      QuThemeCutHour.Open;
-      QuThemeCutHourDetail.Close;
-      QuThemeCutHourDetail.Open;
+      QuBrokenSessionHour.Close;
+      QuBrokenSessionHour.Open;
+      QuBrokenSessionHourDetail.Close;
+      QuBrokenSessionHourDetail.Open;
     end;
   end;
 end;

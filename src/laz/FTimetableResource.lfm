@@ -1,7 +1,7 @@
 inherited TimetableResourceForm: TTimetableResourceForm
-  Left = 435
+  Left = 813
   Height = 462
-  Top = 291
+  Top = 324
   Width = 804
   ActiveControl = DBNavigator
   ClientHeight = 462
@@ -10,7 +10,6 @@ inherited TimetableResourceForm: TTimetableResourceForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Visible = True
   inherited TBEditor: TToolBar
     Width = 804
     inherited BtOk: TToolButton
@@ -98,7 +97,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
     TitleFont.Name = 'MS Sans Serif'
   end
   inherited ImageList: TImageList[6]
-    left = 148
+    left = 184
     Bitmap = {
       4C69060000001000000010000000000000FF000000FF000000FF000000FF0000
       00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
@@ -297,29 +296,22 @@ inherited TimetableResourceForm: TTimetableResourceForm
   end
   object QuTimetableResource: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable;IdResource'
     AutoCalcFields = False
     OnCalcFields = QuTimetableResourceCalcFields
     SQL.Strings = (
-      'select'
+      'SELECT'
       ' IdTimetable,'
       ' Requirement.IdResource as IdResource,'
-      ' Activity.IdCategory,'
-      ' Activity.IdParallel,'
+      ' Activity.IdActivity,'
       ' IdHour,'
       ' IdDay,'
       ' Activity.IdTheme'
-      'from'
-      ' Requirement inner join Activity on'
-      '  Requirement.IdTheme = Activity.IdTheme'
-      '  and Requirement.IdCategory = Activity.IdCategory'
-      '  and Requirement.IdParallel = Activity.IdParallel'
-      ' inner join TimetableDetail on'
-      '  TimetableDetail.IdTheme = Activity.IdTheme'
-      '  and TimetableDetail.IdCategory = Activity.IdCategory'
-      '  and TimetableDetail.IdParallel = Activity.IdParallel'
-      'where IdTimetable=:IdTimetable'
-      ' and Requirement.IdResource=:IdResource'
+      'FROM'
+      'Activity INNER JOIN Requirement ON Activity.IdActivity=Requirement.IdActivity'
+      'INNER JOIN TimetableDetail ON Activity.IdActivity = TimetableDetail.IdActivity'
+      'INNER JOIN Theme ON Activity.IdTheme=Theme.IdTheme'
+      'WHERE IdTimetable=:IdTimetable'
+      '  AND Requirement.IdResource=:IdResource'
     )
     Params = <    
       item
@@ -335,7 +327,6 @@ inherited TimetableResourceForm: TTimetableResourceForm
     DataSource = DSResource
     MasterFields = 'IdTimetable;IdResource'
     LinkedFields = 'IdTimetable;IdResource'
-    IndexFieldNames = 'IdTimetable Asc;IdResource Asc'
     left = 64
     top = 88
     ParamData = <    
@@ -369,22 +360,11 @@ inherited TimetableResourceForm: TTimetableResourceForm
       ReadOnly = False
       Required = True
     end
-    object QuTimetableResourceIdCategory: TLongintField
+    object QuTimetableResourceIdActivity: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdCategory'
+      FieldName = 'IdActivity'
       Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Visible = False
-    end
-    object QuTimetableResourceIdParallel: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdParallel'
-      Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -424,36 +404,6 @@ inherited TimetableResourceForm: TTimetableResourceForm
       Required = True
       Visible = False
     end
-    object QuTimetableResourceAbCategory: TStringField
-      DisplayWidth = 5
-      FieldKind = fkLookup
-      FieldName = 'AbCategory'
-      Index = 7
-      KeyFields = 'IdCategory'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbCategory
-      LookupKeyFields = 'IdCategory'
-      LookupResultField = 'AbCategory'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 5
-    end
-    object QuTimetableResourceNaParallel: TStringField
-      DisplayWidth = 5
-      FieldKind = fkLookup
-      FieldName = 'NaParallel'
-      Index = 8
-      KeyFields = 'IdParallel'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbParallel
-      LookupKeyFields = 'IdParallel'
-      LookupResultField = 'NaParallel'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 5
-    end
     object QuTimetableResourceNaTheme: TStringField
       DisplayWidth = 15
       FieldKind = fkLookup
@@ -489,20 +439,19 @@ inherited TimetableResourceForm: TTimetableResourceForm
   end
   object QuResource: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable;NaResource'
     AutoCalcFields = False
     OnCalcFields = QuTimetableResourceCalcFields
     SQL.Strings = (
-      'select'
+      'SELECT'
       '  IdTimetable,'
       '  IdResource,'
       '  NaResource'
-      'from'
+      'FROM'
       '  Resource,'
       '  Timetable'
-      'where'
+      'WHERE'
       '  IdTimetable=:IdTimetable'
-      'order by'
+      'ORDER BY'
       '  IdTimetable, NaResource'
     )
     Params = <    
@@ -515,9 +464,8 @@ inherited TimetableResourceForm: TTimetableResourceForm
     MasterFields = 'IdTimetable'
     MasterSource = SourceDataModule.DSTimetable
     LinkedFields = 'IdTimetable'
-    IndexFieldNames = 'IdTimetable Asc;NaResource Asc'
-    left = 144
-    top = 144
+    left = 184
+    top = 145
     ParamData = <    
       item
         DataType = ftUnknown
