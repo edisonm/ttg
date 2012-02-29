@@ -175,7 +175,9 @@ type
   TTimetable = class(TIndividual)
   private
     FTablingInfo: TTimetableTablingInfo;
-    FSessionToPeriod: TDynamicIntegerArray;
+    FTTSessionToPeriod: TDynamicIntegerArray;
+    FTTActivityToResources: TDynamicIntegerArray;
+    FTTActivityToNumResources: TDynamicIntegerArray;
     procedure CrossGroup(Timetable2: TTimetable; AGroup: Integer);
     procedure DeltaValues(Delta, Session: Integer);
     function GetClashActivityValue: Integer;
@@ -226,8 +228,8 @@ type
     property BrokenSessionValue: Integer read GetBrokenSessionValue;
     property NonScatteredActivityValue: Integer read GetNonScatteredActivityValue;
     property ResourceRestrictionValue: Integer read GetResourceRestrictionValue;
-    property SessionToPeriod: TDynamicIntegerArray
-                                read FSessionToPeriod write FSessionToPeriod;
+    property TTSessionToPeriod: TDynamicIntegerArray
+                                read FTTSessionToPeriod write FTTSessionToPeriod;
     property BreakTimetableResource: Integer read FTablingInfo.FBreakTimetableResource;
     property TablingInfo: TTimetableTablingInfo read FTablingInfo;
   end;
@@ -625,6 +627,76 @@ var
       First;
     end;
   end;
+  {
+  procedure LoadRequirement;
+  var
+    Requirement, Counter, Activity, Resource, RequirementCount: Integer;
+    VFieldTheme, VFieldResourceType, VFieldLimit: TField;
+  begin
+    with SourceDataModule.TbRequirement do
+    begin
+      IndexFieldNames := 'IdTheme;IdResourceType';
+      First;
+      RequirementCount := RecordCount;
+      SetLength(FThemeToResourceTypes, FThemeCount, 0);
+      SetLength(FThemeToLimits, FThemeCount, 0);
+      SetLength(FResourceTypeToActivities, FResourceTypeCount, 0);
+      VFieldTheme := FindField('IdTheme');
+      VFieldResourceType := FindField('IdResourceType');
+      VFieldLimit := FindField('Limit');
+      for Requirement := 0 to RequirementCount - 1 do
+      begin
+        Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
+        ResourceType := FIdResourceTypeToResourceType[VFieldResourceType.AsInteger - FMinIdResourceType];
+        Counter := Length(FThemeToResourceTypes[Theme]);
+        SetLength(FThemeToResourceTypes[Theme], Counter + 1);
+        SetLength(FThemeToLimits[Theme], Counter + 1);
+        FThemeToResourceTypes[Theme, Counter] := ResourceType;
+        FThemeToLimits[Theme, Counter] := VFieldLimit.AsInteger;
+        Counter := Length(FResourceTypeToActivities[ResourceType]);
+        SetLength(FResourceTypeToActivities[ResourceType], Counter + 1);
+        FResourceTypeToActivities[ResourceType, Counter] := Theme;
+        Next;
+      end;
+      First;
+    end;
+  end;
+  procedure LoadFillRequirement;
+  var
+    Participant, Counter, FillRequirementCount, Activity, Resource: Integer;
+    VFieldTheme, VFieldResource, VFieldNumResource: TField;
+  begin
+    with SourceDataModule.TbFillRequirement do
+    begin
+      IndexFieldNames := 'IdTheme;IdResourceType;IdResource';
+      First;
+      FillRequirementCount := RecordCount;
+      SetLength(FThemeToResources, FThemeCount, 0);
+      SetLength(FThemeToNumResources, FThemeCount, 0);
+      SetLength(FResourceToActivities, FResourceCount, 0);
+      VFieldTheme := FindField('IdTheme');
+      VFieldResource := FindField('IdResource');
+      VFieldResourceType := FindField('IdResourceType');
+      VFieldNumResource := FindField('NumResource');
+      for Participant := 0 to FillRequirementCount - 1 do
+      begin
+        Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
+        ResourceType := FIdResourceTypeToResourceType[VFieldResourceType.AsInteger - FMinIdResourceType];
+        Resource := FIdResourceToResource[VFieldResource.AsInteger - FMinIdResource];
+        Counter := Length(FThemeToResources[Theme]);
+        SetLength(FThemeToResources[Theme], Counter + 1);
+        SetLength(FThemeToNumResources[Theme], Counter + 1);
+        FThemeToResources[Theme, Counter] := Resource;
+        FThemeToNumResources[Theme, Counter] := VFieldNumResource.AsInteger;
+        Counter := Length(FResourceToActivities[Resource]);
+        SetLength(FResourceToActivities[Resource], Counter + 1);
+        FResourceToActivities[Resource, Counter] := Theme;
+        Next;
+      end;
+      First;
+    end;
+  end;
+  }
   procedure LoadGreedyData;
   var
     Number, Duration, Activity, ActivityResource, Resource, Count, Group, Session,
@@ -749,6 +821,8 @@ begin
     LoadTheme;
     LoadActivity;
     LoadParticipant;
+    {LoadRequirement;
+    LoadFillRequirement;}
     LoadGreedyData;
   end;
 end;
@@ -809,10 +883,10 @@ begin
     begin
       Session := FGroupSessions[AGroup, Counter];
       SortKey1[Counter] := FSessionToDuration[Session] * $10000
-        + FSessionToPeriod[Session];
+        + FTTSessionToPeriod[Session];
       Sessions1[Counter] := Session;
       SortKey2[Counter] := FSessionToDuration[Session] * $10000
-        + Timetable2.FSessionToPeriod[Session];
+        + Timetable2.FTTSessionToPeriod[Session];
       Sessions2[Counter] := Session;
     end;
     SortInteger(SortKey1, Sessions1, 0, GroupSessionsCount - 1);
@@ -821,8 +895,8 @@ begin
     begin
       Session1 := Sessions1[Counter];
       Session2 := Sessions2[Counter];
-      FSessionToPeriod[Session2] := SortKey1[Counter] and $FFFF;
-      Timetable2.FSessionToPeriod[Session1] := SortKey2[Counter] and $FFFF;
+      FTTSessionToPeriod[Session2] := SortKey1[Counter] and $FFFF;
+      Timetable2.FTTSessionToPeriod[Session1] := SortKey2[Counter] and $FFFF;
     end;
   end;
 end;
@@ -848,7 +922,7 @@ begin
   FModel := ATimetableModel;
   with TTimetableModel(Model) do
   begin
-    SetLength(FSessionToPeriod, FSessionCount);
+    SetLength(FTTSessionToPeriod, FSessionCount);
     FTablingInfo := TTimetableTablingInfo.Create;
     with TablingInfo do
     begin
@@ -896,7 +970,7 @@ begin
         Duration := FSessionToDuration[Session];
         for Period := 0 to FPeriodCount - Duration do
         begin
-          FSessionToPeriod[Session] := Period;
+          FTTSessionToPeriod[Session] := Period;
           DeltaValues(1, Session);
           UpdateValue;
           if MinValue > Value then
@@ -912,7 +986,7 @@ begin
           end;
           DeltaValues(-1, Session);
         end;
-        FSessionToPeriod[Session] := SelectedPeriod[Random(SelectedPeriodCount)];
+        FTTSessionToPeriod[Session] := SelectedPeriod[Random(SelectedPeriodCount)];
         DeltaValues(1, Session);
       end;
     end;
@@ -1022,7 +1096,7 @@ begin
   with TTimetableModel(Model), TablingInfo do
   begin
     Duration := FSessionToDuration[Session];
-    Period1 := SessionToPeriod[Session];
+    Period1 := FTTSessionToPeriod[Session];
     Period2 := Period1 + Duration - 1;
     Day1 := FPeriodToDay[Period1];
     Day2 := FPeriodToDay[Period2];
@@ -1123,7 +1197,7 @@ begin
     else
     begin
       Period := Round(PeriodCount - FSessionToDuration[Session1]);
-      if Period <> FSessionToPeriod[Session1] then
+      if Period <> FTTSessionToPeriod[Session1] then
         MoveSession(Session1, Period);
     end;
   end;
@@ -1141,10 +1215,10 @@ procedure TTimetable.DoMoveSession(Session, Period: Integer);
 begin
   with TTimetableModel(Model) do
   begin
-    if Period <> FSessionToPeriod[Session] then
+    if Period <> FTTSessionToPeriod[Session] then
     begin
       DeltaValues(-1, Session);
-      FSessionToPeriod[Session] := Period;
+      FTTSessionToPeriod[Session] := Period;
       DeltaValues(1, Session);
     end;
   end;
@@ -1164,8 +1238,8 @@ var
 begin
   with TTimetableModel(Model) do
   begin
-    Period1 := FSessionToPeriod[Session1];
-    Period2 := FSessionToPeriod[Session2];
+    Period1 := FTTSessionToPeriod[Session1];
+    Period2 := FTTSessionToPeriod[Session2];
     if Period1 <> Period2 then
     begin
       Duration1 := FSessionToDuration[Session1];
@@ -1177,16 +1251,16 @@ begin
               and (Period2 + Duration2 < FPeriodCount)
               and (Period1 + Duration2 < FPeriodCount) then
       begin
-        FSessionToPeriod[Session1] := Period2 - Duration1 + Duration2;
-        FSessionToPeriod[Session2] := Period1;
+        FTTSessionToPeriod[Session1] := Period2 - Duration1 + Duration2;
+        FTTSessionToPeriod[Session2] := Period1;
       end
       else if (Period1 > Period2)
               and (Duration1 <= Period1 + Duration1)
               and (Period1 + Duration1 < FPeriodCount)
               and (Period2 + Duration1 < FPeriodCount) then
       begin
-        FSessionToPeriod[Session1] := Period2;
-        FSessionToPeriod[Session2] := Period1 - Duration2 + Duration1;
+        FTTSessionToPeriod[Session1] := Period2;
+        FTTSessionToPeriod[Session2] := Period1 - Duration2 + Duration1;
       end;
       DeltaValues(1, Session2);
       DeltaValues(1, Session1);
@@ -1282,7 +1356,7 @@ begin
   ATimetable := TTimetable(AIndividual);
   with TTimetableModel(Model), TablingInfo do
   begin
-    Move(ATimetable.FSessionToPeriod[0], FSessionToPeriod[0], FSessionCount * SizeOf(Integer));
+    Move(ATimetable.FTTSessionToPeriod[0], FTTSessionToPeriod[0], FSessionCount * SizeOf(Integer));
     FClashActivity := ATimetable.TablingInfo.FClashActivity;
     FBreakTimetableResource := ATimetable.TablingInfo.FBreakTimetableResource;
     FOutOfPositionEmptyHour := ATimetable.TablingInfo.FOutOfPositionEmptyHour;
@@ -1328,13 +1402,13 @@ end;
 procedure TTimetable.SaveToStream(Stream: TStream);
 begin
   with TTimetableModel(Model) do
-    Stream.Write(SessionToPeriod[0], FSessionCount * SizeOf(Integer));
+    Stream.Write(FTTSessionToPeriod[0], FSessionCount * SizeOf(Integer));
 end;
 
 procedure TTimetable.LoadFromStream(Stream: TStream);
 begin
   with TTimetableModel(Model) do
-    Stream.Read(SessionToPeriod[0], FSessionCount * SizeOf(Integer));
+    Stream.Read(FTTSessionToPeriod[0], FSessionCount * SizeOf(Integer));
   Update;
 end;
 
@@ -1406,7 +1480,7 @@ var
         begin
           Activity := FSessionToActivity[Session];
           IdActivity := FActivityToIdActivity[Activity];
-          Period1 := FSessionToPeriod[Session];
+          Period1 := FTTSessionToPeriod[Session];
           Period2 := Period1 + FSessionToDuration[Session] - 1;
           for Period := Period1 to Period2 do
           begin
@@ -1472,7 +1546,7 @@ begin
     MasterFields := 'IdTimetable';
     MasterSource := DSTimetable;
     for Session := 0 to FSessionCount - 1 do
-      FSessionToPeriod[Session] := MaxInt;
+      FTTSessionToPeriod[Session] := MaxInt;
     try
       FieldDay := FindField('IdDay') as TLongintField;
       FieldHour := FindField('IdHour') as TLongintField;
@@ -1483,8 +1557,8 @@ begin
         Session := FieldSession.AsInteger;
         Period := FDayHourToPeriod[FIdDayToDay[FieldDay.AsInteger - FMinIdDay],
                                    FIdHourToHour[FieldHour.AsInteger - FMinIdHour]];
-        if Period < FSessionToPeriod[Session] then
-          FSessionToPeriod[Session] := Period;
+        if Period < FTTSessionToPeriod[Session] then
+          FTTSessionToPeriod[Session] := Period;
         Next;
       end;
     finally
@@ -1632,7 +1706,7 @@ end;
 
 function TTTBookmark1.Move: Integer;
 begin
-  FPreviousPeriod := TTimetable(Individual).SessionToPeriod[FSession];
+  FPreviousPeriod := TTimetable(Individual).FTTSessionToPeriod[FSession];
   Result := TTimetable(Individual).MoveSession(FSession, FPeriod);
 end;
 
@@ -1746,8 +1820,8 @@ begin
   begin
     Session1 := FGroupSessions[FGroup, FGroupSession1];
     Session2 := FGroupSessions[FGroup, FGroupSession2];
-    FPreviousPeriod1 := SessionToPeriod[Session1];
-    FPreviousPeriod2 := SessionToPeriod[Session2];
+    FPreviousPeriod1 := FTTSessionToPeriod[Session1];
+    FPreviousPeriod2 := FTTSessionToPeriod[Session2];
     Result := TTimetable(Individual).Swap(Session1, Session2);
   end;
 end;
@@ -1882,9 +1956,9 @@ begin
   end;
   with TTimetable(Individual) do
   begin
-    FPreviousPeriod1 := SessionToPeriod[Session1];
-    FPreviousPeriod2 := SessionToPeriod[Session2];
-    FPreviousPeriod3 := SessionToPeriod[Session3];
+    FPreviousPeriod1 := FTTSessionToPeriod[Session1];
+    FPreviousPeriod2 := FTTSessionToPeriod[Session2];
+    FPreviousPeriod3 := FTTSessionToPeriod[Session3];
     Result := Swap(Session1, Session2) + Swap(Session2, Session3);
   end;
 end;
