@@ -26,6 +26,26 @@ msgctxt "dsourcebaseconsts.sflday_naday"
 msgid "Name"
 msgstr ""
 
+#: dsourcebaseconsts.sflfillrequirement_idresource
+msgctxt "dsourcebaseconsts.sflfillrequirement_idresource"
+msgid "Resource"
+msgstr ""
+
+#: dsourcebaseconsts.sflfillrequirement_idresourcetype
+msgctxt "dsourcebaseconsts.sflfillrequirement_idresourcetype"
+msgid "Resource Type"
+msgstr ""
+
+#: dsourcebaseconsts.sflfillrequirement_idtheme
+msgctxt "dsourcebaseconsts.sflfillrequirement_idtheme"
+msgid "Theme"
+msgstr ""
+
+#: dsourcebaseconsts.sflfillrequirement_numresource
+msgctxt "dsourcebaseconsts.sflfillrequirement_numresource"
+msgid "Number"
+msgstr ""
+
 #: dsourcebaseconsts.sflhour_idhour
 msgctxt "dsourcebaseconsts.sflhour_idhour"
 msgid "Id"
@@ -41,16 +61,6 @@ msgctxt "dsourcebaseconsts.sflhour_nahour"
 msgid "Name"
 msgstr ""
 
-#: dsourcebaseconsts.sflperiod_idday
-msgctxt "dsourcebaseconsts.sflperiod_idday"
-msgid "Day"
-msgstr ""
-
-#: dsourcebaseconsts.sflperiod_idhour
-msgctxt "dsourcebaseconsts.sflperiod_idhour"
-msgid "Hour"
-msgstr ""
-
 #: dsourcebaseconsts.sflparticipant_idactivity
 msgctxt "dsourcebaseconsts.sflparticipant_idactivity"
 msgid "Category"
@@ -64,6 +74,30 @@ msgstr ""
 #: dsourcebaseconsts.sflparticipant_numresource
 msgctxt "dsourcebaseconsts.sflparticipant_numresource"
 msgid "Number"
+msgstr ""
+
+#: dsourcebaseconsts.sflperiod_idday
+msgctxt "dsourcebaseconsts.sflperiod_idday"
+msgid "Day"
+msgstr ""
+
+#: dsourcebaseconsts.sflperiod_idhour
+msgctxt "dsourcebaseconsts.sflperiod_idhour"
+msgid "Hour"
+msgstr ""
+
+#: dsourcebaseconsts.sflrequirement_idresourcetype
+msgctxt "dsourcebaseconsts.sflrequirement_idresourcetype"
+msgid "Resource Type"
+msgstr ""
+
+#: dsourcebaseconsts.sflrequirement_idtheme
+msgctxt "dsourcebaseconsts.sflrequirement_idtheme"
+msgid "Theme"
+msgstr ""
+
+#: dsourcebaseconsts.sflrequirement_limit
+msgid "Limit"
 msgstr ""
 
 #: dsourcebaseconsts.sflresourcerestrictiontype_colresourcerestrictiontype
@@ -203,6 +237,11 @@ msgctxt "dsourcebaseconsts.sfltimetableresource_idtimetable"
 msgid "Timetable"
 msgstr ""
 
+#: dsourcebaseconsts.sfltimetableresource_numresource
+msgctxt "dsourcebaseconsts.sfltimetableresource_numresource"
+msgid "Number"
+msgstr ""
+
 #: dsourcebaseconsts.sfltimetable_idtimetable
 msgctxt "dsourcebaseconsts.sfltimetable_idtimetable"
 msgid "Id"
@@ -233,9 +272,19 @@ msgctxt "dsourcebaseconsts.stbday"
 msgid "Working Days"
 msgstr ""
 
+#: dsourcebaseconsts.stbfillrequirement
+msgctxt "dsourcebaseconsts.stbfillrequirement"
+msgid "Participants"
+msgstr ""
+
 #: dsourcebaseconsts.stbhour
 msgctxt "dsourcebaseconsts.stbhour"
 msgid "Academic Hours"
+msgstr ""
+
+#: dsourcebaseconsts.stbparticipant
+msgctxt "dsourcebaseconsts.stbparticipant"
+msgid "Participants"
 msgstr ""
 
 #: dsourcebaseconsts.stbperiod
@@ -243,8 +292,8 @@ msgctxt "dsourcebaseconsts.stbperiod"
 msgid "Periods"
 msgstr ""
 
-#: dsourcebaseconsts.stbparticipant
-msgctxt "dsourcebaseconsts.stbparticipant"
+#: dsourcebaseconsts.stbrequirement
+msgctxt "dsourcebaseconsts.stbrequirement"
 msgid "Participants"
 msgstr ""
 
@@ -914,13 +963,13 @@ msgctxt "TMESSAGEVIEWFORM.PANEL1.CAPTION"
 msgid "Panel1"
 msgstr ""
 
-#: tprogressform.bbtcancel.caption
-msgctxt "TPROGRESSFORM.BBTCANCEL.CAPTION"
+#: tprogressform.bbcancel.caption
+msgctxt "TPROGRESSFORM.BBCANCEL.CAPTION"
 msgid "Cancel"
 msgstr ""
 
-#: tprogressform.bbtclose.caption
-msgctxt "TPROGRESSFORM.BBTCLOSE.CAPTION"
+#: tprogressform.bbclose.caption
+msgctxt "TPROGRESSFORM.BBCLOSE.CAPTION"
 msgid "Ok"
 msgstr ""
 
@@ -949,6 +998,16 @@ msgctxt "TPROGRESSFORM.LBBROKENSESSIONVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
+#: tprogressform.lbclashactivity.caption
+msgctxt "TPROGRESSFORM.LBCLASHACTIVITY.CAPTION"
+msgid "0 "
+msgstr ""
+
+#: tprogressform.lbclashactivityvalue.caption
+msgctxt "TPROGRESSFORM.LBCLASHACTIVITYVALUE.CAPTION"
+msgid "0 "
+msgstr ""
+
 #: tprogressform.lbclashresource.caption
 msgctxt "TPROGRESSFORM.LBCLASHRESOURCE.CAPTION"
 msgid "0 "
@@ -956,16 +1015,6 @@ msgstr ""
 
 #: tprogressform.lbclashresourcevalue.caption
 msgctxt "TPROGRESSFORM.LBCLASHRESOURCEVALUE.CAPTION"
-msgid "0 "
-msgstr ""
-
-#: tprogressform.lbclashtheme.caption
-msgctxt "TPROGRESSFORM.LBCLASHTHEME.CAPTION"
-msgid "0 "
-msgstr ""
-
-#: tprogressform.lbclashthemevalue.caption
-msgctxt "TPROGRESSFORM.LBCLASHTHEMEVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
@@ -989,18 +1038,13 @@ msgctxt "TPROGRESSFORM.LBIMPORTS.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lbltotalvalue.caption
-msgctxt "TPROGRESSFORM.LBLTOTALVALUE.CAPTION"
+#: tprogressform.lbnonscatteredactivitycount.caption
+msgctxt "TPROGRESSFORM.LBNONSCATTEREDACTIVITYCOUNT.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.lbnonscatteredthemecount.caption
-msgctxt "TPROGRESSFORM.LBNONSCATTEREDTHEMECOUNT.CAPTION"
-msgid "0 "
-msgstr ""
-
-#: tprogressform.lbnonscatteredthemevalue.caption
-msgctxt "TPROGRESSFORM.LBNONSCATTEREDTHEMEVALUE.CAPTION"
+#: tprogressform.lbnonscatteredactivityvalue.caption
+msgctxt "TPROGRESSFORM.LBNONSCATTEREDACTIVITYVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
@@ -1034,154 +1078,103 @@ msgctxt "TPROGRESSFORM.LBRESOURCERESTRICTIONVALUE.CAPTION"
 msgid "0 "
 msgstr ""
 
-#: tprogressform.pnlbreaktimetableresource.caption
-msgctxt "TPROGRESSFORM.PNLBREAKTIMETABLERESOURCE.CAPTION"
+#: tprogressform.lbtotalvalue.caption
+msgctxt "TPROGRESSFORM.LBTOTALVALUE.CAPTION"
+msgid "0 "
+msgstr ""
+
+#: tprogressform.pnbreaktimetableresource.caption
+msgctxt "TPROGRESSFORM.PNBREAKTIMETABLERESOURCE.CAPTION"
 msgid "Break TT. Resources:"
 msgstr ""
 
-#: tprogressform.pnlbreaktimetableresourcecount.caption
-msgctxt "TPROGRESSFORM.PNLBREAKTIMETABLERESOURCECOUNT.CAPTION"
-msgid "Number:"
-msgstr ""
-
-#: tprogressform.pnlbreaktimetableresourcevalue.caption
-msgctxt "TPROGRESSFORM.PNLBREAKTIMETABLERESOURCEVALUE.CAPTION"
-msgid "Value:"
-msgstr ""
-
-#: tprogressform.pnlbrokensession.caption
-msgctxt "TPROGRESSFORM.PNLBROKENSESSION.CAPTION"
+#: tprogressform.pnbrokensession.caption
+msgctxt "TPROGRESSFORM.PNBROKENSESSION.CAPTION"
 msgid "Broken Sessions:"
 msgstr ""
 
-#: tprogressform.pnlbrokensessionnumber.caption
-msgctxt "TPROGRESSFORM.PNLBROKENSESSIONNUMBER.CAPTION"
-msgid "Number:"
-msgstr ""
-
-#: tprogressform.pnlbrokensessionvalue.caption
-msgctxt "TPROGRESSFORM.PNLBROKENSESSIONVALUE.CAPTION"
-msgid "Value:"
-msgstr ""
-
-#: tprogressform.pnlclashresource.caption
-msgctxt "TPROGRESSFORM.PNLCLASHRESOURCE.CAPTION"
-msgid "Clash of Resources:"
-msgstr ""
-
-#: tprogressform.pnlclashresourcenumber.caption
-msgctxt "TPROGRESSFORM.PNLCLASHRESOURCENUMBER.CAPTION"
-msgid "Number:"
-msgstr ""
-
-#: tprogressform.pnlclashresourcevalue.caption
-msgctxt "TPROGRESSFORM.PNLCLASHRESOURCEVALUE.CAPTION"
-msgid "Value:"
-msgstr ""
-
-#: tprogressform.pnlclashtheme.caption
-msgctxt "TPROGRESSFORM.PNLCLASHTHEME.CAPTION"
+#: tprogressform.pnclashactivity.caption
+msgctxt "TPROGRESSFORM.PNCLASHACTIVITY.CAPTION"
 msgid "Clash of Activities:"
 msgstr ""
 
-#: tprogressform.pnlclashthemenumber.caption
-msgctxt "TPROGRESSFORM.PNLCLASHTHEMENUMBER.CAPTION"
-msgid "Number:"
+#: tprogressform.pnclashresource.caption
+msgctxt "TPROGRESSFORM.PNCLASHRESOURCE.CAPTION"
+msgid "Clash of Resources:"
 msgstr ""
 
-#: tprogressform.pnlclashthemevalue.caption
-msgctxt "TPROGRESSFORM.PNLCLASHTHEMEVALUE.CAPTION"
-msgid "Value:"
-msgstr ""
-
-#: tprogressform.pnlcrashes.caption
-msgctxt "TPROGRESSFORM.PNLCRASHES.CAPTION"
+#: tprogressform.pncrashes.caption
+msgctxt "TPROGRESSFORM.PNCRASHES.CAPTION"
 msgid " Crashes:"
 msgstr ""
 
-#: tprogressform.pnlelapsedtime.caption
-msgctxt "TPROGRESSFORM.PNLELAPSEDTIME.CAPTION"
+#: tprogressform.pndescription.caption
+msgid "Description:"
+msgstr ""
+
+#: tprogressform.pnelapsedtime.caption
+msgctxt "TPROGRESSFORM.PNELAPSEDTIME.CAPTION"
 msgid "Elapsed Time:"
 msgstr ""
 
-#: tprogressform.pnlestimatedtime.caption
-msgctxt "TPROGRESSFORM.PNLESTIMATEDTIME.CAPTION"
+#: tprogressform.pnestimatedtime.caption
+msgctxt "TPROGRESSFORM.PNESTIMATEDTIME.CAPTION"
 msgid "Remaining time:"
 msgstr ""
 
-#: tprogressform.pnlexports.caption
-msgctxt "TPROGRESSFORM.PNLEXPORTS.CAPTION"
+#: tprogressform.pnexports.caption
+msgctxt "TPROGRESSFORM.PNEXPORTS.CAPTION"
 msgid " Exports:"
 msgstr ""
 
-#: tprogressform.pnlimports.caption
-msgctxt "TPROGRESSFORM.PNLIMPORTS.CAPTION"
+#: tprogressform.pnimports.caption
+msgctxt "TPROGRESSFORM.PNIMPORTS.CAPTION"
 msgid " Imports:"
 msgstr ""
 
-#: tprogressform.pnlinitdatetime.caption
-msgctxt "TPROGRESSFORM.PNLINITDATETIME.CAPTION"
+#: tprogressform.pninitdatetime.caption
+msgctxt "TPROGRESSFORM.PNINITDATETIME.CAPTION"
 msgid "Started at:"
 msgstr ""
 
-#: tprogressform.pnlnonscatteredtheme.caption
-msgctxt "TPROGRESSFORM.PNLNONSCATTEREDTHEME.CAPTION"
+#: tprogressform.pnnonscatteredactivity.caption
+msgctxt "TPROGRESSFORM.PNNONSCATTEREDACTIVITY.CAPTION"
 msgid "Non Scattered Activities:"
 msgstr ""
 
-#: tprogressform.pnlnonscatteredthemecount.caption
-msgctxt "TPROGRESSFORM.PNLNONSCATTEREDTHEMECOUNT.CAPTION"
+#: tprogressform.pnnumber.caption
+msgctxt "TPROGRESSFORM.PNNUMBER.CAPTION"
 msgid "Number:"
 msgstr ""
 
-#: tprogressform.pnlnonscatteredthemevalue.caption
-msgctxt "TPROGRESSFORM.PNLNONSCATTEREDTHEMEVALUE.CAPTION"
-msgid "Value:"
-msgstr ""
-
-#: tprogressform.pnloutofpositionemptyhour.caption
-msgctxt "TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOUR.CAPTION"
+#: tprogressform.pnoutofpositionemptyhour.caption
+msgctxt "TPROGRESSFORM.PNOUTOFPOSITIONEMPTYHOUR.CAPTION"
 msgid "Out of Position Empty Hours:"
 msgstr ""
 
-#: tprogressform.pnloutofpositionemptyhournumber.caption
-msgctxt "TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURNUMBER.CAPTION"
-msgid "Number:"
-msgstr ""
-
-#: tprogressform.pnloutofpositionemptyhourvalue.caption
-msgctxt "TPROGRESSFORM.PNLOUTOFPOSITIONEMPTYHOURVALUE.CAPTION"
-msgid "Value:"
-msgstr ""
-
-#: tprogressform.pnlpollination.caption
-msgctxt "TPROGRESSFORM.PNLPOLLINATION.CAPTION"
+#: tprogressform.pnpollination.caption
+msgctxt "TPROGRESSFORM.PNPOLLINATION.CAPTION"
 msgid "Pollination:"
 msgstr ""
 
-#: tprogressform.pnlposition.caption
-msgctxt "TPROGRESSFORM.PNLPOSITION.CAPTION"
+#: tprogressform.pnposition.caption
+msgctxt "TPROGRESSFORM.PNPOSITION.CAPTION"
 msgid " Iteration:"
 msgstr ""
 
-#: tprogressform.pnlresourcerestriction.caption
-msgctxt "TPROGRESSFORM.PNLRESOURCERESTRICTION.CAPTION"
+#: tprogressform.pnresourcerestriction.caption
+msgctxt "TPROGRESSFORM.PNRESOURCERESTRICTION.CAPTION"
 msgid "Resource Restrictions:"
 msgstr ""
 
-#: tprogressform.pnlresourcerestrictionnumber.caption
-msgctxt "TPROGRESSFORM.PNLRESOURCERESTRICTIONNUMBER.CAPTION"
-msgid "Number:"
-msgstr ""
-
-#: tprogressform.pnlresourcerestrictionvalue.caption
-msgctxt "TPROGRESSFORM.PNLRESOURCERESTRICTIONVALUE.CAPTION"
-msgid "Value:"
-msgstr ""
-
-#: tprogressform.pnltotalvalue.caption
-msgctxt "TPROGRESSFORM.PNLTOTALVALUE.CAPTION"
+#: tprogressform.pntotalvalue.caption
+msgctxt "TPROGRESSFORM.PNTOTALVALUE.CAPTION"
 msgid "Total Value:"
+msgstr ""
+
+#: tprogressform.pnvalue.caption
+msgctxt "TPROGRESSFORM.PNVALUE.CAPTION"
+msgid "Value:"
 msgstr ""
 
 #: tresourceform.actresourcerestriction.caption

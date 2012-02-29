@@ -52,6 +52,9 @@ type
     LbElapsedTime: TLabel;
     PnEstimatedTime: TPanel;
     LbRemainingTime: TLabel;
+    PnDescription: TPanel;
+    PnNumber: TPanel;
+    PnValue: TPanel;
     PnResourceRestriction: TPanel;
     PnResourceRestrictionNumber: TPanel;
     LbResourceRestriction: TLabel;
