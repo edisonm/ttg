@@ -1184,38 +1184,12 @@ msgctxt "tprogressform.pnvalue.caption"
 msgid "Value:"
 msgstr " Valor:"
 
-#: tresourceform.actresourcerestriction.caption
-msgctxt "TRESOURCEFORM.ACTRESOURCERESTRICTION.CAPTION"
-msgid "Resource restrictions"
-msgstr "Prohibiciones de profesor"
-
-#: tresourceform.actresourcerestriction.hint
-#, fuzzy
-#| msgid "Resource restrictions|Input Resource restrictions"
-msgid "Resource restrictions|Input resource restrictions"
-msgstr "Prohibiciones de profesor|Ingresar las prohibiciones de profesor"
-
 #: tresourceform.caption
-msgctxt "tresourceform.caption"
-msgid "Resource"
-msgstr "Profesor"
-
-#: tresourceform.dbgriddetail.hint
 #, fuzzy
-#| msgid "Distribution of Resources"
-msgctxt "tresourceform.dbgriddetail.hint"
-msgid "Activities"
-msgstr "Distribution de profesores"
-
-#: tresourceform.grbdetail.caption
-msgctxt "tresourceform.grbdetail.caption"
-msgid "Activity"
-msgstr "Distribucion"
-
-#: tresourceform.groupbox3.caption
-msgctxt "tresourceform.groupbox3.caption"
-msgid "Participants"
-msgstr "Ayudas"
+#| msgid "Resource"
+msgctxt "tresourceform.caption"
+msgid "Themes"
+msgstr "Profesor"
 
 #: tselperiodform.bbcancel.caption
 msgctxt "TSELPERIODFORM.BBCANCELAR.CAPTION"
@@ -1306,9 +1280,28 @@ msgid "Version"
 msgstr "Version"
 
 #: tthemeform.caption
+#, fuzzy
+#| msgid "Resource"
 msgctxt "tthemeform.caption"
-msgid "Themes"
+msgid "Theme"
 msgstr "Materias"
+
+#: tthemeform.dbgriddetail.hint
+#, fuzzy
+#| msgid "Activities"
+msgctxt "tthemeform.dbgriddetail.hint"
+msgid "Activity of Themes"
+msgstr "Distribucion de la carga"
+
+#: tthemeform.grbdetail.caption
+msgctxt "tthemeform.grbdetail.caption"
+msgid "Activity"
+msgstr "Distribucion"
+
+#: tthemeform.groupbox3.caption
+msgctxt "tthemeform.groupbox3.caption"
+msgid "Participants"
+msgstr "Ayudas"
 
 #: ttimetableclassform.cbshowclass.hint
 msgctxt "ttimetableclassform.cbshowclass.hint"

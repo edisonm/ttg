@@ -7,37 +7,29 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, Db, Grids, Buttons, DBCtrls, Variants, ExtCtrls,
-  ComCtrls, Printers, ActnList, StdCtrls, DBGrids, FMasterDetailEditor,
-  FCrossManytoManyEditorR;
+  Controls, Forms, Dialogs, FSingleEditor, Grids, Buttons, DBCtrls, ExtCtrls,
+  Printers, ComCtrls, ActnList, FCrossManytoManyEditorR, ZDataset, db;
 
 type
 
   { TResourceForm }
 
-  TResourceForm	= class(TMasterDetailEditorForm)
+  TResourceForm = class(TSingleEditorForm)
     TBResourceRestriction: TToolButton;
     ActResourceRestriction: TAction;
-    DbGParticipants: TDBGrid;
-    GroupBox3: TGroupBox;
-    Panel3: TPanel;
-    Splitter2: TSplitter;
-    Splitter3: TSplitter;
     procedure ActFindExecute(Sender: TObject);
     procedure ActResourceRestrictionExecute(Sender: TObject);
-    procedure DataSourceStateChange(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
+    procedure DataSourceDataChange(Sender: TObject; Field: TField);
+    procedure DataSourceStateChange(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
-    procedure DataSourceDataChange(Sender: TObject; Field: TField);
-    procedure FormActivate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    FSuperTitle: string;
     FResourceRestrictionForm: TCrossManyToManyEditorRForm;
-    function GetCurrentLoad: Integer;
   public
     { Public declarations }
   end;
@@ -46,9 +38,8 @@ var
   ResourceForm: TResourceForm;
 
 implementation
-
 uses
-  DMaster, FConfig, DSource, FEditor, UTTGDBUtils, UTTGConsts;
+  DMaster, FCrossManyToManyEditor, FConfig, DSource, UTTGConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -83,6 +74,11 @@ begin
   end;
 end;
 
+procedure TResourceForm.DataSourceDataChange(Sender: TObject; Field: TField);
+begin
+  inherited;
+end;
+
 procedure TResourceForm.DataSourceStateChange(Sender: TObject);
 begin
   inherited;
@@ -98,7 +94,8 @@ begin
   inherited;
 end;
 
-procedure TResourceForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+procedure TResourceForm.FormClose(Sender: TObject; var CloseAction: TCloseAction
+  );
 begin
   inherited;
 end;
@@ -108,68 +105,28 @@ begin
   inherited;
 end;
 
-procedure TResourceForm.DataSourceDataChange(Sender: TObject; Field: TField);
-begin
-  inherited;
-  Caption := FSuperTitle + Format(' - %s: %d', [SLoad, GetCurrentLoad]);
-end;
-
 procedure TResourceForm.FormActivate(Sender: TObject);
 begin
-  SourceDataModule.TbResource.Locate('IdResource', (Sender as TCustomForm).Tag, []);
-end;
-
-function TResourceForm.GetCurrentLoad: Integer;
-var
-  VBookmark: TBookmark;
-  FieldComposition: TField;
-begin
-  Result := 0;
-  with SourceDataModule, TbTheme do
+  with SourceDataModule do
   begin
-    VBookmark := GetBookmark;
-    DisableControls;
-    try
-      First;
-      FieldComposition := FindField('Composition');
-      while not Eof do
-      begin
-        Inc(Result, CompositionToDuration(FieldComposition.AsString));
-        Next;
-      end;
-    finally
-      GotoBookmark(VBookmark);
-      EnableControls;
-    end;
+    TbResource.Locate('IdResource', (Sender as TCustomForm).Tag, []);
   end;
 end;
 
 procedure TResourceForm.FormCreate(Sender: TObject);
 begin
   inherited;
-  with SourceDataModule do
-  begin
-    FSuperTitle := Description[TbResource];
-    TbActivity.MasterFields := 'IdResource';
-    TbActivity.LinkedFields := 'IdResource';
-    TbActivity.MasterSource := DSResource;
-    TbParticipant.MasterFields := 'IdTheme;IdCategory;IdParallel';
-    TbParticipant.LinkedFields := 'IdTheme;IdCategory;IdParallel';
-    TbParticipant.MasterSource := SourceDataModule.DSActivity;
-  end;
 end;
 
 procedure TResourceForm.FormDestroy(Sender: TObject);
 begin
   inherited;
-  SourceDataModule.TbParticipant.MasterSource := nil;
-  SourceDataModule.TbActivity.MasterSource := nil;
 end;
 
 initialization
 
 {$IFDEF FPC}
-  {$i FResource.lrs}
+{$i FResource.lrs}
 {$ENDIF}
 
 end.

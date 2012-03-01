@@ -1220,7 +1220,7 @@ inherited TimetableForm: TTimetableForm
   end
   object QuBrokenSessionDay: TZQuery[11]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable;NaTheme;IdCategory;IdParallel;IdDay;IdHour'
+    SortedFields = 'IdTimetable;IdDay;IdHour'
     AutoCalcFields = False
     AfterScroll = QuClashActivityAfterScroll
     ReadOnly = True
@@ -1234,10 +1234,8 @@ inherited TimetableForm: TTimetableForm
       '  TimetableDetail'
       '  INNER JOIN TimetableDetail TimetableDetail1'
       '     ON TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable'
-      '    AND TimetableDetail.IdCategory=TimetableDetail1.IdCategory'
-      '    AND TimetableDetail.IdParallel=TimetableDetail1.IdParallel'
+      '    AND TimetableDetail.IdActivity=TimetableDetail1.IdActivity'
       '    AND TimetableDetail.Session=TimetableDetail1.Session'
-      '    AND TimetableDetail.IdTheme=TimetableDetail1.IdTheme'
       'WHERE TimetableDetail.IdTimetable=:IdTimetable'
       '  AND TimetableDetail.IdDay<>TimetableDetail1.IdDay'
     )
@@ -1250,7 +1248,6 @@ inherited TimetableForm: TTimetableForm
     DataSource = SourceDataModule.DSTimetable
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
-    IndexFieldNames = 'IdTimetable Asc;NaTheme Asc;IdCategory Asc;IdParallel Asc;IdDay Asc;IdHour Asc'
     left = 312
     top = 280
     ParamData = <    

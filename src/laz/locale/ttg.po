@@ -1173,33 +1173,9 @@ msgctxt "TPROGRESSFORM.PNVALUE.CAPTION"
 msgid "Value:"
 msgstr ""
 
-#: tresourceform.actresourcerestriction.caption
-msgctxt "TRESOURCEFORM.ACTRESOURCERESTRICTION.CAPTION"
-msgid "Resource restrictions"
-msgstr ""
-
-#: tresourceform.actresourcerestriction.hint
-msgid "Resource restrictions|Input resource restrictions"
-msgstr ""
-
 #: tresourceform.caption
 msgctxt "TRESOURCEFORM.CAPTION"
-msgid "Resource"
-msgstr ""
-
-#: tresourceform.dbgriddetail.hint
-msgctxt "tresourceform.dbgriddetail.hint"
-msgid "Activities"
-msgstr ""
-
-#: tresourceform.grbdetail.caption
-msgctxt "tresourceform.grbdetail.caption"
-msgid "Activity"
-msgstr ""
-
-#: tresourceform.groupbox3.caption
-msgctxt "tresourceform.groupbox3.caption"
-msgid "Participants"
+msgid "Themes"
 msgstr ""
 
 #: tselperiodform.bbcancel.caption
@@ -1290,12 +1266,22 @@ msgstr ""
 
 #: tthemeform.caption
 msgctxt "TTHEMEFORM.CAPTION"
-msgid "Themes"
+msgid "Theme"
 msgstr ""
 
-#: tthemeform.caption
-msgctxt "TTHEMEFORM.CAPTION"
-msgid "Themes"
+#: tthemeform.dbgriddetail.hint
+msgctxt "TTHEMEFORM.DBGRIDDETAIL.HINT"
+msgid "Activity of Themes"
+msgstr ""
+
+#: tthemeform.grbdetail.caption
+msgctxt "TTHEMEFORM.GRBDETAIL.CAPTION"
+msgid "Activity"
+msgstr ""
+
+#: tthemeform.groupbox3.caption
+msgctxt "TTHEMEFORM.GROUPBOX3.CAPTION"
+msgid "Participants"
 msgstr ""
 
 #: ttimetableclassform.cbshowclass.hint
