@@ -105,7 +105,7 @@ Day
 "6";"Viernes";
 ResourceType
 4
-"IdResourceType";"NaResourceType";"DefaultLimit";"ValResourceType";
+"IdResourceType";"NaResourceType";"DefaultMaxNumResource";"ValResourceType";
 "1";"Profesor";"1";"345";
 "2";"Aula";"1";"413";
 "3";"Curso";"1";"902";
