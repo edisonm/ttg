@@ -714,6 +714,7 @@ var
         Counter := Length(FThemeToResources[Theme]);
         SetLength(FThemeToResources[Theme], Counter + 1);
         SetLength(FThemeToNumResources[Theme], Counter + 1);
+        SetLength(FThemeToLimits[Theme], Counter + 1);
         FThemeToResources[Theme, Counter] := Resource;
         FThemeToNumResources[Theme, Counter] := NumResource;
         FThemeToLimits[Theme, Counter] := FThemeResourceTypeToLimit[Theme, ResourceType];
