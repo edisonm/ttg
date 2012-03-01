@@ -300,18 +300,21 @@ inherited TimetableResourceForm: TTimetableResourceForm
     OnCalcFields = QuTimetableResourceCalcFields
     SQL.Strings = (
       'SELECT'
-      ' IdTimetable,'
-      ' Participant.IdResource as IdResource,'
+      ' TimetableDetail.IdTimetable,'
+      ' TimetableResource.IdResource as IdResource,'
       ' Activity.IdActivity,'
       ' IdHour,'
       ' IdDay,'
       ' Activity.IdTheme'
       'FROM'
-      'Activity INNER JOIN Participant ON Activity.IdActivity=Participant.IdActivity'
-      'INNER JOIN TimetableDetail ON Activity.IdActivity = TimetableDetail.IdActivity'
+      'TimetableDetail INNER JOIN TimetableResource'
+      '   ON TimetableDetail.IdTimetable=TimetableResource.IdTimetable'
+      '  AND TimetableDetail.IdActivity=TimetableResource.IdActivity'
+      'INNER JOIN Activity'
+      '  ON Activity.IdActivity=TimetableResource.IdActivity'
       'INNER JOIN Theme ON Activity.IdTheme=Theme.IdTheme'
-      'WHERE IdTimetable=:IdTimetable'
-      '  AND Participant.IdResource=:IdResource'
+      'WHERE TimetableDetail.IdTimetable=:IdTimetable'
+      '  AND TimetableResource.IdResource=:IdResource'
     )
     Params = <    
       item

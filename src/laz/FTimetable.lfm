@@ -1,5 +1,5 @@
 inherited TimetableForm: TTimetableForm
-  Left = 590
+  Left = 583
   Height = 545
   Top = 293
   Width = 899
@@ -536,22 +536,26 @@ inherited TimetableForm: TTimetableForm
     SQL.Strings = (
       'SELECT DISTINCT'
       '  TimetableDetail.IdTimetable,'
-      '  Participant.IdResource,'
+      '  TimetableResource.IdResource,'
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour,'
       '  TimetableDetail.IdActivity,'
-      '  Theme.NaTheme'
+      '  Theme.NaTheme,'
+      '  Activity.NaActivity'
       'FROM TimetableDetail'
-      '  INNER JOIN Participant ON TimetableDetail.IdActivity = Participant.IdActivity'
-      '  INNER JOIN Activity ON Participant.IdActivity=Activity.IdActivity'
+      '  INNER JOIN TimetableResource'
+      '    ON TimetableDetail.IdTimetable=TimetableResource.IdTimetable'
+      '    AND TimetableDetail.IdActivity=TimetableResource.IdActivity'
+      '  INNER JOIN Activity ON TimetableDetail.IdActivity=Activity.IdActivity'
       '  INNER JOIN Theme ON Activity.IdTheme=Theme.IdTheme'
       'WHERE TimetableDetail.IdTimetable=:IdTimetable'
-      '  AND Participant.IdResource=:IdResource'
+      '  AND TimetableResource.IdResource=:IdResource'
       '  AND TimetableDetail.IdDay=:IdDay'
       '  AND TimetableDetail.IdHour=:IdHour'
       'ORDER BY'
       '  TimetableDetail.IdActivity,'
-      '  Theme.NaTheme'
+      '  Theme.NaTheme,'
+      '  Activity.NaActivity'
     )
     Params = <    
       item
@@ -577,8 +581,8 @@ inherited TimetableForm: TTimetableForm
     DataSource = DSClashResource
     MasterFields = 'IdTimetable;IdResource;IdDay;IdHour'
     LinkedFields = 'IdTimetable;IdResource;IdDay;IdHour'
-    left = 312
-    top = 56
+    left = 136
+    top = 416
     ParamData = <    
       item
         DataType = ftUnknown
@@ -674,22 +678,24 @@ inherited TimetableForm: TTimetableForm
     SQL.Strings = (
       'SELECT DISTINCT'
       '  TimetableDetail.IdTimetable,'
-      '  Participant.IdResource,'
+      '  TimetableResource.IdResource,'
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour,'
       '  Resource.IdResourceType,'
       '  ResourceType.NaResourceType,'
       '  Resource.NaResource,'
-      '  SUM(Participant.NumResource) AS Occupied,'
-      '  SUM(Participant.NumResource) - Resource.NumResource AS Clashes'
+      '  SUM(TimetableResource.NumResource) AS Occupied,'
+      '  SUM(TimetableResource.NumResource) - Resource.NumResource AS Clashes'
       'FROM TimetableDetail'
-      '  INNER JOIN Participant ON TimetableDetail.IdActivity=Participant.IdActivity'
-      '  INNER JOIN Resource ON Participant.IdResource=Resource.IdResource'
+      '  INNER JOIN TimetableResource'
+      '   ON TimetableDetail.IdTimetable=TimetableResource.IdTimetable'
+      '  AND TimetableDetail.IdActivity=TimetableResource.IdActivity'
+      '  INNER JOIN Resource ON TimetableResource.IdResource=Resource.IdResource'
       '  INNER JOIN ResourceType ON Resource.IdResourceType=ResourceType.IdResourceType'
       'WHERE TimetableDetail.IdTimetable=:IdTimetable'
       'GROUP BY'
       '  TimetableDetail.IdTimetable,'
-      '  Participant.IdResource,'
+      '  TimetableResource.IdResource,'
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour,'
       '  Resource.IdResourceType,'
@@ -707,8 +713,8 @@ inherited TimetableForm: TTimetableForm
     DataSource = SourceDataModule.DSTimetable
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
-    left = 112
-    top = 336
+    left = 136
+    top = 352
     ParamData = <    
       item
         DataType = ftUnknown
@@ -1053,12 +1059,13 @@ inherited TimetableForm: TTimetableForm
       '  Resource.NaResource,'
       '  ResourceRestriction.IdDay,'
       '  ResourceRestriction.IdHour'
-      'FROM TimetableDetail INNER JOIN Participant'
-      '   ON TimetableDetail.IdActivity = Participant.IdActivity'
+      'FROM TimetableDetail INNER JOIN TimetableResource'
+      '   ON TimetableDetail.IdTimetable=TimetableResource.IdTimetable'
+      '  AND TimetableDetail.IdActivity=TimetableResource.IdActivity'
       '  INNER JOIN ResourceRestriction'
       '   ON ResourceRestriction.IdDay=TimetableDetail.IdDay'
       '  AND ResourceRestriction.IdHour=TimetableDetail.IdHour'
-      '  AND ResourceRestriction.IdResource=Participant.IdResource'
+      '  AND ResourceRestriction.IdResource=TimetableResource.IdResource'
       '  INNER JOIN Resource ON ResourceRestriction.IdResource=Resource.IdResource'
       '  INNER JOIN ResourceType ON Resource.IdResourceType=ResourceType.IdResourceType'
       'WHERE'
@@ -1326,7 +1333,6 @@ inherited TimetableForm: TTimetableForm
       Index = 6
       KeyFields = 'IdCategory'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbCategory
       LookupKeyFields = 'IdCategory'
       LookupResultField = 'AbCategory'
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1341,7 +1347,6 @@ inherited TimetableForm: TTimetableForm
       Index = 7
       KeyFields = 'IdParallel'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbParallel
       LookupKeyFields = 'IdParallel'
       LookupResultField = 'NaParallel'
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1405,11 +1410,10 @@ inherited TimetableForm: TTimetableForm
       'FROM Timetable, Day, Hour'
       'WHERE'
       '  IdTimetable=:IdTimetable'
-      '  AND'
-      ' ('
+      '  AND ('
       '  SELECT COUNT(*) FROM Period'
-      '  WHERE (Period.IdDay=Day.IdDay)'
-      '    AND (Period.IdHour=Hour.IdHour)'
+      '  WHERE Period.IdDay=Day.IdDay'
+      '    AND Period.IdHour=Hour.IdHour'
       '  ) IS NULL'
       '  AND ('
       '  SELECT'
@@ -1417,16 +1421,16 @@ inherited TimetableForm: TTimetableForm
       '  FROM'
       '    TimetableDetail'
       '    INNER JOIN TimetableDetail TimetableDetail1'
-      '      ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
-      '      AND (TimetableDetail.IdCategory=TimetableDetail1.IdCategory)'
-      '      AND (TimetableDetail.IdParallel=TimetableDetail1.IdParallel)'
-      '      AND (TimetableDetail.Session=TimetableDetail1.Session)'
-      '      AND (TimetableDetail.IdTheme=TimetableDetail1.IdTheme)'
-      '      AND (TimetableDetail.IdDay=TimetableDetail1.IdDay)'
-      '    WHERE (TimetableDetail.IdTimetable=Timetable.IdTimetable)'
-      '      AND (TimetableDetail.IdDay=Day.IdDay)'
-      '      AND(TimetableDetail.IdHour>Hour.IdHour)'
-      '      AND(TimetableDetail1.IdHour<Hour.IdHour)'
+      '      ON TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable'
+      '      AND TimetableDetail.IdActivity=TimetableDetail1.IdActivity'
+      '      AND TimetableDetail.IdParallel=TimetableDetail1.IdParallel'
+      '      AND TimetableDetail.Session=TimetableDetail1.Session'
+      '      AND TimetableDetail.IdTheme=TimetableDetail1.IdTheme'
+      '      AND TimetableDetail.IdDay=TimetableDetail1.IdDay'
+      '    WHERE TimetableDetail.IdTimetable=Timetable.IdTimetable'
+      '      AND TimetableDetail.IdDay=Day.IdDay'
+      '      AND TimetableDetail.IdHour>Hour.IdHour'
+      '      AND TimetableDetail1.IdHour<Hour.IdHour'
       '  ) IS NOT NULL'
     )
     Params = <    
@@ -1686,7 +1690,6 @@ inherited TimetableForm: TTimetableForm
       Index = 7
       KeyFields = 'IdCategory'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbCategory
       LookupKeyFields = 'IdCategory'
       LookupResultField = 'AbCategory'
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1701,7 +1704,6 @@ inherited TimetableForm: TTimetableForm
       Index = 8
       KeyFields = 'IdParallel'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbParallel
       LookupKeyFields = 'IdParallel'
       LookupResultField = 'NaParallel'
       ProviderFlags = [pfInUpdate, pfInWhere]
