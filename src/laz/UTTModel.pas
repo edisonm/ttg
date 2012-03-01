@@ -80,6 +80,7 @@ type
     FHourToIdHour: TDynamicIntegerArray;
     FActivityToIdActivity: TDynamicIntegerArray;
     FIdActivityToActivity: TDynamicIntegerArray;
+    FActivityToTheme: TDynamicIntegerArray;
     FIdDayToDay: TDynamicIntegerArray;
     FIdHourToHour: TDynamicIntegerArray;
 
@@ -96,7 +97,13 @@ type
     FDayHourToPeriod: TDynamicIntegerArrayArray;
     FActivityToResources: TDynamicIntegerArrayArray;
     FActivityToNumResources: TDynamicIntegerArrayArray;
+    FActivityResourceTypeToNumber: TDynamicIntegerArrayArray;
     FResourceToActivities: TDynamicIntegerArrayArray;
+    FThemeResourceTypeToLimit: TDynamicIntegerArrayArray;
+    FThemeToResources: TDynamicIntegerArrayArray;
+    FResourceToThemes: TDynamicIntegerArrayArray;
+    FThemeToNumResources: TDynamicIntegerArrayArray;
+    FThemeToLimits: TDynamicIntegerArrayArray;
     //FTimetableDetailPattern: TDynamicIntegerArrayArray;
     FActivityToSessions: TDynamicIntegerArrayArray;
     FResourcePeriodToResourceRestrictionType: TDynamicIntegerArrayArray;
@@ -155,7 +162,7 @@ type
   { TTimetableTablingInfo }
   TTimetableTablingInfo = class
   protected
-    FResourcePeriodCount: TDynamicIntegerArrayArray;
+    FResourcePeriodNumber: TDynamicIntegerArrayArray;
     FDayActivityCount: TDynamicIntegerArrayArray;
     FDayActivityAccumulated: TDynamicIntegerArrayArray;
     FClashResourceType: TDynamicIntegerArray;
@@ -176,10 +183,14 @@ type
   private
     FTablingInfo: TTimetableTablingInfo;
     FTTSessionToPeriod: TDynamicIntegerArray;
-    FTTActivityToResources: TDynamicIntegerArray;
-    FTTActivityToNumResources: TDynamicIntegerArray;
+    FTTActivityToNumResources: TDynamicIntegerArrayArray;
     procedure CrossGroup(Timetable2: TTimetable; AGroup: Integer);
-    procedure DeltaValues(Delta, Session: Integer);
+    procedure DeltaResourceValue(Delta, Limit, Period1, Period2,
+                                 Resource, NumResource: Integer);
+    procedure DeltaResourcesValue(Delta, Limit, Period1, Period2: Integer;
+                                  Resources, NumResources: TDynamicIntegerArray);
+    procedure DeltaPeriodsValue(Delta, Limit, Period1, Period2, Activity: Integer);
+    procedure DeltaValue(Delta, Session: Integer);
     function GetClashActivityValue: Integer;
     function GetNonScatteredActivityValue: Integer;
     function GetOutOfPositionEmptyHourValue: Integer;
@@ -229,7 +240,9 @@ type
     property NonScatteredActivityValue: Integer read GetNonScatteredActivityValue;
     property ResourceRestrictionValue: Integer read GetResourceRestrictionValue;
     property TTSessionToPeriod: TDynamicIntegerArray
-                                read FTTSessionToPeriod write FTTSessionToPeriod;
+                                  read FTTSessionToPeriod;
+    property TTTActivityToNumResources: TDynamicIntegerArrayArray
+                                          read FTTActivityToNumResources;
     property BreakTimetableResource: Integer read FTablingInfo.FBreakTimetableResource;
     property TablingInfo: TTimetableTablingInfo read FTablingInfo;
   end;
@@ -327,7 +340,7 @@ type
 implementation
 
 uses
-  SysUtils, ZSysUtils, MTProcs, DSource, UTTGConsts, DSourceBaseConsts;
+  SysUtils, ZSysUtils, MTProcs, DSource, UTTGConsts, DSourceBaseConsts, Math;
 
 type
   TSortDoubleInt = specialize TSortAlgorithm<Double, Integer>;
@@ -338,13 +351,14 @@ constructor TTimetableModel.Create(AClashActivityValue,
                                    ABrokenSessionValue,
                                    ANonScatteredActivityValue: Integer);
 var
-  FMinIdResource, FMinIdResourceType, FMinIdTheme,
-  FMinIdResourceRestrictionType: Integer;
-  FActivityToTheme, FIdThemeToTheme, FIdResourceToResource,
-  FIdResourceTypeToResourceType, FResourceTypeToIdResourceType,
-  FIdResourceRestrictionTypeToResourceRestrictionType, FResourceToIdResource,
-  FResourceRestrictionTypeToIdResourceRestrictionType: TDynamicIntegerArray;
-  FThemeToComposition: TDynamicIntegerArrayArray;
+  FMinIdResourceRestrictionType, FMinIdTheme,
+    FMinIdResource, FMinIdResourceType: Integer;
+  FIdThemeToTheme, FIdResourceToResource, FIdResourceTypeToResourceType,
+    FResourceTypeToIdResourceType, FResourceToIdResource,
+    FIdResourceRestrictionTypeToResourceRestrictionType,
+    FResourceRestrictionTypeToIdResourceRestrictionType: TDynamicIntegerArray;
+  FResourceActivityToNumResources, FResourceThemeToNumResources,
+    FThemeToComposition: TDynamicIntegerArrayArray;
   procedure Load(ATable: TDataSet; const AListName: string; out FMinIdList: Integer;
     out FIdListToList: TDynamicIntegerArray;
     out FListToIdList: TDynamicIntegerArray);
@@ -382,7 +396,7 @@ var
   procedure LoadPeriod;
   var
     Period, Day, Hour: Integer;
-    VFieldDay, VFieldHour: TField;
+    FieldDay, FieldHour: TField;
   begin
     with SourceDataModule.TbPeriod do
     begin
@@ -396,12 +410,12 @@ var
       for Day := 0 to FDayCount - 1 do
         for Hour := 0 to FHourCount - 1 do
           FDayHourToPeriod[Day, Hour] := -1;
-      VFieldDay := FindField('IdDay');
-      VFieldHour := FindField('IdHour');
+      FieldDay := FindField('IdDay');
+      FieldHour := FindField('IdHour');
       for Period := 0 to FPeriodCount - 1 do
       begin
-        Day := FIdDayToDay[VFieldDay.AsInteger - FMinIdDay];
-        Hour := FIdHourToHour[VFieldHour.AsInteger - FMinIdHour];
+        Day := FIdDayToDay[FieldDay.AsInteger - FMinIdDay];
+        Hour := FIdHourToHour[FieldHour.AsInteger - FMinIdHour];
         FPeriodToDay[Period] := Day;
         FPeriodToHour[Period] := Hour;
         FDayHourToPeriod[Day, Hour] := Period;
@@ -417,20 +431,20 @@ var
   procedure LoadResourceType;
   var
     ResourceType: Integer;
-    VFieldValue, VFieldName: TField;
+    FieldValue, FieldName: TField;
   begin
     with SourceDataModule.TbResourceType do
     begin
       IndexFieldNames := 'IdResourceType';
       First;
-      VFieldValue := FindField('ValResourceType');
-      VFieldName := FindField('NaResourceType');
+      FieldValue := FindField('ValResourceType');
+      FieldName := FindField('NaResourceType');
       SetLength(FResourceTypeToValue, FResourceTypeCount);
       SetLength(FResourceTypeToName, FResourceTypeCount);
       for ResourceType := 0 to FResourceTypeCount - 1 do
       begin
-        FResourceTypeToValue[ResourceType] := VFieldValue.AsInteger;
-        FResourceTypeToName[ResourceType] := VFieldName.AsString;
+        FResourceTypeToValue[ResourceType] := FieldValue.AsInteger;
+        FResourceTypeToName[ResourceType] := FieldName.AsString;
         Next;
       end;
       First;
@@ -465,20 +479,20 @@ var
   procedure LoadResourceRestrictionType;
   var
     ResourceRestrictionType: Integer;
-    VFieldValue, VFieldName: TField;
+    FieldValue, FieldName: TField;
   begin
     with SourceDataModule.TbResourceRestrictionType do
     begin
       IndexFieldNames := 'IdResourceRestrictionType';
       First;
-      VFieldValue := FindField('ValResourceRestrictionType');
-      VFieldName := FindField('NaResourceRestrictionType');
+      FieldValue := FindField('ValResourceRestrictionType');
+      FieldName := FindField('NaResourceRestrictionType');
       SetLength(FResourceRestrictionTypeToValue, RecordCount);
       SetLength(FResourceRestrictionTypeToName, RecordCount);
       for ResourceRestrictionType := 0 to RecordCount - 1 do
       begin
-        FResourceRestrictionTypeToValue[ResourceRestrictionType] := VFieldValue.AsInteger;
-        FResourceRestrictionTypeToName[ResourceRestrictionType] := VFieldName.AsString;
+        FResourceRestrictionTypeToValue[ResourceRestrictionType] := FieldValue.AsInteger;
+        FResourceRestrictionTypeToName[ResourceRestrictionType] := FieldName.AsString;
         Next;
       end;
       First;
@@ -488,8 +502,8 @@ var
   var
     ResourceRestriction, Resource, Period, Day, Hour,
       ResourceRestrictionType: Integer;
-    VFieldResource, VFieldDay, VFieldHour,
-      VFieldResourceRestrictionType: TField;
+    FieldResource, FieldDay, FieldHour,
+      FieldResourceRestrictionType: TField;
   begin
     with SourceDataModule.TbResourceRestriction do
     begin
@@ -499,18 +513,18 @@ var
       for Resource := 0 to FResourceCount - 1 do
         for Period := 0 to FPeriodCount - 1 do
           FResourcePeriodToResourceRestrictionType[Resource, Period] := -1;
-      VFieldResource := FindField('IdResource');
-      VFieldHour := FindField('IdHour');
-      VFieldDay := FindField('IdDay');
-      VFieldResourceRestrictionType := FindField('IdResourceRestrictionType');
+      FieldResource := FindField('IdResource');
+      FieldHour := FindField('IdHour');
+      FieldDay := FindField('IdDay');
+      FieldResourceRestrictionType := FindField('IdResourceRestrictionType');
       for ResourceRestriction := 0 to RecordCount - 1 do
       begin
-        Resource := FIdResourceToResource[VFieldResource.AsInteger - FMinIdResource];
-        Day := FIdDayToDay[VFieldDay.AsInteger - FMinIdDay];
-        Hour := FIdHourToHour[VFieldHour.AsInteger - FMinIdHour];
+        Resource := FIdResourceToResource[FieldResource.AsInteger - FMinIdResource];
+        Day := FIdDayToDay[FieldDay.AsInteger - FMinIdDay];
+        Hour := FIdHourToHour[FieldHour.AsInteger - FMinIdHour];
         Period := FDayHourToPeriod[Day, Hour];
         ResourceRestrictionType := FIdResourceRestrictionTypeToResourceRestrictionType
-          [VFieldResourceRestrictionType.AsInteger - FMinIdResourceRestrictionType];
+          [FieldResourceRestrictionType.AsInteger - FMinIdResourceRestrictionType];
         FResourcePeriodToResourceRestrictionType[Resource, Period] := ResourceRestrictionType;
         Next;
       end;
@@ -522,18 +536,18 @@ var
   procedure LoadTheme;
   var
     Theme, CompositionCount, VPos: Integer;
-    VFieldComposition: TField;
+    FieldComposition: TField;
     Composition: string;
   begin
     with SourceDataModule.TbTheme do
     begin
       IndexFieldNames := 'IdTheme';
       First;
-      VFieldComposition := FindField('Composition');
+      FieldComposition := FindField('Composition');
       SetLength(FThemeToComposition, FThemeCount, 0);
       for Theme := 0 to FThemeCount - 1 do
       begin
-        Composition := VFieldComposition.AsString;
+        Composition := FieldComposition.AsString;
         VPos := 1;
         CompositionCount := 0;
         while VPos <= Length(Composition) do
@@ -551,20 +565,20 @@ var
   procedure LoadActivity;
   var
     Theme, Session1, Activity, Session2, Session: Integer;
-    VFieldTheme: TField;
+    FieldTheme: TField;
   begin
     with SourceDataModule.TbActivity do
     begin
       IndexFieldNames := 'IdActivity';
       First;
-      VFieldTheme := FindField('IdTheme');
+      FieldTheme := FindField('IdTheme');
       FActivityCount := RecordCount;
       SetLength(FActivityToSessions, FActivityCount);
       SetLength(FActivityToTheme, FActivityCount);
       Session2 := 0;
       for Activity := 0 to FActivityCount - 1 do
       begin
-        Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
+        Theme := FIdThemeToTheme[FieldTheme.AsInteger - FMinIdTheme];
         FActivityToTheme[Activity] := Theme;
         Session1 := Session2;
         SetLength(FSessionToDuration, Session1 + Length(FThemeToComposition[Theme]));
@@ -573,9 +587,6 @@ var
           FSessionToDuration[Session2] := FThemeToComposition[Theme, Session2 - Session1];
           Inc(Session2);
         end;
-        {Move(FThemeToComposition[Theme, 0], FSessionToDuration[Session1],
-             Length(FThemeToComposition[Theme]) * SizeOf(Integer));
-        Inc(Session2, Length(FThemeToComposition[Theme]));}
         SetLength(FSessionToActivity, Session2);
         SetLength(FActivityToSessions[Activity], Session2 - Session1);
         for Session := Session1 to Session2 - 1 do
@@ -596,8 +607,9 @@ var
   end;
   procedure LoadParticipant;
   var
-    Participant, Counter, ParticipantCount, Activity, Resource: Integer;
-    VFieldActivity, VFieldResource, VFieldNumResource: TField;
+    Participant, Counter, ParticipantCount, Activity, Resource, Number,
+      ResourceType: Integer;
+    FieldActivity, FieldResource, FieldNumResource: TField;
   begin
     with SourceDataModule.TbParticipant do
     begin
@@ -607,55 +619,67 @@ var
       SetLength(FActivityToResources, FActivityCount, 0);
       SetLength(FActivityToNumResources, FActivityCount, 0);
       SetLength(FResourceToActivities, FResourceCount, 0);
-      VFieldActivity := FindField('IdActivity');
-      VFieldResource := FindField('IdResource');
-      VFieldNumResource := FindField('NumResource');
+      SetLength(FResourceActivityToNumResources, FResourceCount, 0);
+      SetLength(FActivityResourceTypeToNumber, FActivityCount, FResourceTypeCount);
+      for Activity := 0 to FActivityCount - 1 do
+        for ResourceType := 0 to FResourceTypeCount - 1 do
+          FActivityResourceTypeToNumber[Activity, ResourceType] := 0;
+      FieldActivity := FindField('IdActivity');
+      FieldResource := FindField('IdResource');
+      FieldNumResource := FindField('NumResource');
       for Participant := 0 to ParticipantCount - 1 do
       begin
-        Activity := FIdActivityToActivity[VFieldActivity.AsInteger - FMinIdActivity];
-        Resource := FIdResourceToResource[VFieldResource.AsInteger - FMinIdResource];
+        Activity := FIdActivityToActivity[FieldActivity.AsInteger - FMinIdActivity];
+        Resource := FIdResourceToResource[FieldResource.AsInteger - FMinIdResource];
         Counter := Length(FActivityToResources[Activity]);
         SetLength(FActivityToResources[Activity], Counter + 1);
         SetLength(FActivityToNumResources[Activity], Counter + 1);
         FActivityToResources[Activity, Counter] := Resource;
-        FActivityToNumResources[Activity, Counter] := VFieldNumResource.AsInteger;
+        Number := FieldNumResource.AsInteger;
+        FActivityToNumResources[Activity, Counter] := Number;
         Counter := Length(FResourceToActivities[Resource]);
         SetLength(FResourceToActivities[Resource], Counter + 1);
         FResourceToActivities[Resource, Counter] := Activity;
+        SetLength(FResourceActivityToNumResources[Resource], Counter + 1);
+        FResourceActivityToNumResources[Resource, Counter] := Number;
+        Inc(FActivityResourceTypeToNumber[Activity, FResourceToResourceType[Resource]], Number);
         Next;
       end;
       First;
     end;
   end;
-  {
   procedure LoadRequirement;
   var
-    Requirement, Counter, Activity, Resource, RequirementCount: Integer;
-    VFieldTheme, VFieldResourceType, VFieldLimit: TField;
+    Requirement, RequirementCount, Theme, ResourceType: Integer;
+    FieldTheme, FieldResourceType, FieldLimit: TField;
   begin
     with SourceDataModule.TbRequirement do
     begin
       IndexFieldNames := 'IdTheme;IdResourceType';
       First;
       RequirementCount := RecordCount;
-      SetLength(FThemeToResourceTypes, FThemeCount, 0);
-      SetLength(FThemeToLimits, FThemeCount, 0);
-      SetLength(FResourceTypeToActivities, FResourceTypeCount, 0);
-      VFieldTheme := FindField('IdTheme');
-      VFieldResourceType := FindField('IdResourceType');
-      VFieldLimit := FindField('Limit');
+      SetLength(FThemeResourceTypeToLimit, FThemeCount, FResourceTypeCount);
+      FieldTheme := FindField('IdTheme');
+      FieldResourceType := FindField('IdResourceType');
+      FieldLimit := FindField('Limit');
+      for Theme := 0 to FThemeCount - 1 do
+        for ResourceType := 0 to FResourceTypeCount - 1 do
+          FThemeResourceTypeToLimit[Theme, ResourceType] := MaxInt;
       for Requirement := 0 to RequirementCount - 1 do
       begin
-        Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
-        ResourceType := FIdResourceTypeToResourceType[VFieldResourceType.AsInteger - FMinIdResourceType];
-        Counter := Length(FThemeToResourceTypes[Theme]);
-        SetLength(FThemeToResourceTypes[Theme], Counter + 1);
-        SetLength(FThemeToLimits[Theme], Counter + 1);
-        FThemeToResourceTypes[Theme, Counter] := ResourceType;
-        FThemeToLimits[Theme, Counter] := VFieldLimit.AsInteger;
-        Counter := Length(FResourceTypeToActivities[ResourceType]);
-        SetLength(FResourceTypeToActivities[ResourceType], Counter + 1);
-        FResourceTypeToActivities[ResourceType, Counter] := Theme;
+        Theme := FIdThemeToTheme[FieldTheme.AsInteger - FMinIdTheme];
+        ResourceType := FIdResourceTypeToResourceType[FieldResourceType.AsInteger - FMinIdResourceType];
+        FThemeResourceTypeToLimit[Theme, ResourceType] := FieldLimit.AsInteger;
+        {
+         Counter := Length(FThemeToResourceTypes[Theme]);
+         SetLength(FThemeToResourceTypes[Theme], Counter + 1);
+         SetLength(FThemeToLimits[Theme], Counter + 1);
+         FThemeToResourceTypes[Theme, Counter] := ResourceType;
+         FThemeToLimits[Theme, Counter] := FieldLimit.AsInteger;
+         Counter := Length(FResourceTypeToActivities[ResourceType]);
+         SetLength(FResourceTypeToActivities[ResourceType], Counter + 1);
+         FResourceTypeToActivities[ResourceType, Counter] := Theme;
+        }
         Next;
       end;
       First;
@@ -663,8 +687,9 @@ var
   end;
   procedure LoadFillRequirement;
   var
-    Participant, Counter, FillRequirementCount, Activity, Resource: Integer;
-    VFieldTheme, VFieldResource, VFieldNumResource: TField;
+    NumResource, FillRequirement, Counter, FillRequirementCount, Resource,
+      Theme, ResourceType: Integer;
+    FieldTheme, FieldResourceType, FieldResource, FieldNumResource: TField;
   begin
     with SourceDataModule.TbFillRequirement do
     begin
@@ -673,37 +698,44 @@ var
       FillRequirementCount := RecordCount;
       SetLength(FThemeToResources, FThemeCount, 0);
       SetLength(FThemeToNumResources, FThemeCount, 0);
-      SetLength(FResourceToActivities, FResourceCount, 0);
-      VFieldTheme := FindField('IdTheme');
-      VFieldResource := FindField('IdResource');
-      VFieldResourceType := FindField('IdResourceType');
-      VFieldNumResource := FindField('NumResource');
-      for Participant := 0 to FillRequirementCount - 1 do
+      SetLength(FThemeToLimits, FThemeCount, 0);
+      SetLength(FResourceToThemes, FResourceCount, 0);
+      SetLength(FResourceThemeToNumResources, FResourceCount, 0);
+      FieldTheme := FindField('IdTheme');
+      FieldResource := FindField('IdResource');
+      FieldResourceType := FindField('IdResourceType');
+      FieldNumResource := FindField('NumResource');
+      NumResource := FieldNumResource.AsInteger;
+      for FillRequirement := 0 to FillRequirementCount - 1 do
       begin
-        Theme := FIdThemeToTheme[VFieldTheme.AsInteger - FMinIdTheme];
-        ResourceType := FIdResourceTypeToResourceType[VFieldResourceType.AsInteger - FMinIdResourceType];
-        Resource := FIdResourceToResource[VFieldResource.AsInteger - FMinIdResource];
+        Theme := FIdThemeToTheme[FieldTheme.AsInteger - FMinIdTheme];
+        ResourceType := FIdResourceTypeToResourceType[FieldResourceType.AsInteger - FMinIdResourceType];
+        Resource := FIdResourceToResource[FieldResource.AsInteger - FMinIdResource];
         Counter := Length(FThemeToResources[Theme]);
         SetLength(FThemeToResources[Theme], Counter + 1);
         SetLength(FThemeToNumResources[Theme], Counter + 1);
         FThemeToResources[Theme, Counter] := Resource;
-        FThemeToNumResources[Theme, Counter] := VFieldNumResource.AsInteger;
-        Counter := Length(FResourceToActivities[Resource]);
-        SetLength(FResourceToActivities[Resource], Counter + 1);
-        FResourceToActivities[Resource, Counter] := Theme;
+        FThemeToNumResources[Theme, Counter] := NumResource;
+        FThemeToLimits[Theme, Counter] := FThemeResourceTypeToLimit[Theme, ResourceType];
+        Counter := Length(FResourceToThemes[Resource]);
+        SetLength(FResourceToThemes[Resource], Counter + 1);
+        FResourceToThemes[Resource, Counter] := Theme;
+        SetLength(FResourceThemeToNumResources[Resource], Counter + 1);
+        FResourceThemeToNumResources[Resource, Counter] := NumResource;
         Next;
       end;
       First;
     end;
   end;
-  }
   procedure LoadGreedyData;
   var
-    Number, Duration, Activity, ActivityResource, Resource, Count, Group, Session,
-    HighActivitySorted, HighSessionSorted, ResourceActivity, ActivitySession: Integer;
+    Number, Duration, Activity, ActivityResource, Theme, ResourceTheme, Resource,
+    Count, Group, Session, HighActivitySorted, HighSessionSorted, ResourceActivity,
+    ThemeResource, Component, ActivitySession, UBound: Integer;
     FreedomDegrees: Double; // Logaritmic to prevent overfloat
     ActivityIsPlaced: TDynamicBooleanArray;
-    ActivityResourceToFreedomDegrees, ResourceToFreedomDegrees: TDynamicDoubleArray;
+    ThemeResourceToFreedomDegrees, ActivityResourceToFreedomDegrees,
+      ResourceToFreedomDegrees: TDynamicDoubleArray;
   begin
     SetLength(ResourceToFreedomDegrees, FResourceCount);
     SetLength(FResourceSorted, FResourceCount);
@@ -718,7 +750,19 @@ var
         Activity := FResourceToActivities[Resource, ResourceActivity];
         for ActivitySession := 0 to High(FActivityToSessions[Activity]) do
         begin
-          Inc(Duration, FSessionToDuration[FActivityToSessions[Activity, ActivitySession]]);
+          Inc(Duration, FResourceActivityToNumResources[Resource, ResourceActivity]
+                        * FSessionToDuration[FActivityToSessions[Activity, ActivitySession]]);
+        end;
+      end;
+      // Upper bound
+      for ResourceTheme := 0 to High(FResourceToThemes[Resource]) do
+      begin
+        Theme := FResourceToThemes[Resource, ResourceTheme];
+        for Component := 0 to High(FThemeToComposition[Theme]) do
+        begin
+          UBound := Min(FThemeResourceTypeToLimit[Theme, FResourceToResourceType[Resource]],
+                        FResourceThemeToNumResources[Resource, ResourceTheme]);
+          Inc(Duration, UBound * FThemeToComposition[Theme, Component]);
         end;
       end;
       FreedomDegrees := Number - Duration;
@@ -741,6 +785,17 @@ var
       end;
       TSortDoubleInt.QuickSort(ActivityResourceToFreedomDegrees, FActivityToResources[Activity],
                                0, High(FActivityToResources[Activity]));
+    end;
+    for Theme := 0 to FThemeCount - 1 do
+    begin
+      SetLength(ThemeResourceToFreedomDegrees, Length(FThemeToResources[Theme]));
+      for ThemeResource := 0 to High(FThemeToResources[Theme]) do
+      begin
+        ThemeResourceToFreedomDegrees[ThemeResource] :=
+          ResourceToFreedomDegrees[FThemeToResources[Theme, ThemeResource]];
+      end;
+      TSortDoubleInt.QuickSort(ThemeResourceToFreedomDegrees, FThemeToResources[Theme],
+                               0, High(FThemeToResources[Theme]));
     end;
     TSortDoubleInt.QuickSort(ResourceToFreedomDegrees, FResourceSorted, 0, FResourceCount - 1);
     WriteLn;
@@ -821,8 +876,8 @@ begin
     LoadTheme;
     LoadActivity;
     LoadParticipant;
-    {LoadRequirement;
-    LoadFillRequirement;}
+    LoadRequirement;
+    LoadFillRequirement;
     LoadGreedyData;
   end;
 end;
@@ -917,16 +972,24 @@ begin
 end;
 
 constructor TTimetable.Create(ATimetableModel: TTimetableModel);
+var
+  Activity: Integer;
 begin
   inherited Create;
   FModel := ATimetableModel;
   with TTimetableModel(Model) do
   begin
     SetLength(FTTSessionToPeriod, FSessionCount);
+    SetLength(FTTActivityToNumResources, FActivityCount);
+    for Activity := 0 to FActivityCount - 1 do
+    begin
+      SetLength(FTTActivityToNumResources[Activity],
+                Length(FThemeToResources[FActivityToTheme[Activity]]));
+    end;
     FTablingInfo := TTimetableTablingInfo.Create;
     with TablingInfo do
     begin
-      SetLength(FResourcePeriodCount, FResourceCount, FPeriodCount);
+      SetLength(FResourcePeriodNumber, FResourceCount, FPeriodCount);
       SetLength(FDayActivityCount, FDayCount, FActivityCount);
       SetLength(FDayActivityAccumulated, FDayCount, FActivityCount);
       SetLength(FDayResourceMinHour, FDayCount, FResourceCount);
@@ -951,14 +1014,54 @@ end;
 
 procedure TTimetable.MakeRandom;
 var
-  Count, Activity, Period, ActivitySession, Duration, MinValue, Session,
-    SelectedPeriodCount: Integer;
+  Count, Activity, Period, ActivitySession, Duration, FillRequirement,
+    SelectedPeriodCount, Resource, ResourceType, Limit, Session, Theme,
+    MinValue, NumResource, NumAssigned, Remaining: Integer;
   SelectedPeriod: TDynamicIntegerArray;
+  ActivityResourceTypeToNumber: TDynamicIntegerArrayArray;
+  ThemeToRemainings: TDynamicIntegerArrayArray;
 begin
   with TTimetableModel(Model) do
   begin
     Reset;
     SetLength(SelectedPeriod, FPeriodCount);
+    SetLength(ThemeToRemainings, FThemeCount);
+    for Theme := 0 to FThemeCount - 1 do
+    begin
+      SetLength(ThemeToRemainings[Theme], Length(FThemeToNumResources[Theme]));
+      for FillRequirement := 0 to High(ThemeToRemainings[Theme]) do
+        ThemeToRemainings[Theme, FillRequirement]
+          := FThemeToNumResources[Theme, FillRequirement];
+    end;
+    SetLength(ActivityResourceTypeToNumber, Length(FActivityResourceTypeToNumber));
+    for Activity := 0 to FActivityCount - 1 do
+    begin
+      SetLength(ActivityResourceTypeToNumber[Activity],
+                Length(FActivityResourceTypeToNumber[Activity]));
+      for ResourceType := 0 to High(ActivityResourceTypeToNumber[Activity]) do
+        ActivityResourceTypeToNumber[Activity, ResourceType]
+          := FActivityResourceTypeToNumber[Activity, ResourceType];
+    end;
+    for Count := 0 to FActivityCount - 1 do
+    begin
+      Activity := FActivitySorted[Count];
+      Theme := FActivityToTheme[Activity];
+      for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+      begin
+        Resource := FThemeToResources[Theme, FillRequirement];
+        ResourceType := FResourceToResourceType[Resource];
+        Limit := FThemeToLimits[Theme, FillRequirement];
+        Remaining := ThemeToRemainings[Theme, FillRequirement];
+        NumResource := ActivityResourceTypeToNumber[Activity, ResourceType];
+        if (Remaining > 0) and (NumResource < Limit) then
+        begin
+          NumAssigned := Min(Remaining, Limit - NumResource);
+          Dec(ThemeToRemainings[Theme, FillRequirement], NumAssigned);
+          Inc(ActivityResourceTypeToNumber[Activity, ResourceType], NumAssigned);
+          Inc(FTTActivityToNumResources[Activity, FillRequirement], NumAssigned);
+        end
+      end;
+    end;
     for Count := 0 to FActivityCount - 1 do
     begin
       Activity := FActivitySorted[Count];
@@ -971,7 +1074,7 @@ begin
         for Period := 0 to FPeriodCount - Duration do
         begin
           FTTSessionToPeriod[Session] := Period;
-          DeltaValues(1, Session);
+          DeltaValue(1, Session);
           UpdateValue;
           if MinValue > Value then
           begin
@@ -984,134 +1087,155 @@ begin
             SelectedPeriod[SelectedPeriodCount] := Period;
             Inc(SelectedPeriodCount);
           end;
-          DeltaValues(-1, Session);
+          DeltaValue(-1, Session);
         end;
         FTTSessionToPeriod[Session] := SelectedPeriod[Random(SelectedPeriodCount)];
-        DeltaValues(1, Session);
+        DeltaValue(1, Session);
       end;
     end;
   end;
   // Update;
 end;
 
-procedure TTimetable.DeltaValues(Delta, Session: Integer);
+
+procedure TTimetable.DeltaResourceValue(Delta, Limit, Period1, Period2,
+                                        Resource, NumResource: Integer);
 var
-  ResourceRestrictionType, Period1, Period2, Period0, DeltaBrokenSession,
-  Day, DDay, Day1, Day2, Hour, Hour1, Hour2, Resource, Duration, Limit,
-  Number, Activity, DeltaBreakTimetableResource, MinPeriod, MaxPeriod: Integer;
-  procedure DeltaResourcesValues(Resources, NumResources: TDynamicIntegerArray);
-  var
-    Participant, Period: Integer;
-  begin
-    with TTimetableModel(Model), TablingInfo do
-    begin
-      for Participant := 0 to High(Resources) do
-      begin
-        Resource := Resources[Participant];
-        Number := NumResources[Participant];
-        for Period := Period1 to Period2 do
-        begin
-          Day := FPeriodToDay[Period];
-          Hour := FPeriodToHour[Period];
-          if FResourcePeriodCount[Resource, Period] = Limit * Number then
-          begin
-            if Delta > 0 then
-            begin
-              if FDayResourceMinHour[Day, Resource] > FDayResourceMaxHour[Day, Resource] then
-              begin
-                FDayResourceMinHour[Day, Resource] := Hour;
-                FDayResourceMaxHour[Day, Resource] := Hour;
-              end
-              else
-              begin
-                if Hour < FDayResourceMinHour[Day, Resource] then
-                begin
-                  DeltaBreakTimetableResource := FDayResourceMinHour[Day, Resource] - Hour - 1;
-                  FDayResourceMinHour[Day, Resource] := Hour;
-                end
-                else if (FDayResourceMinHour[Day, Resource] <= Hour)
-                        and (Hour <= FDayResourceMaxHour[Day, Resource]) then
-                  DeltaBreakTimetableResource := -1
-                else // if FDayResourceMaxPeriod[Day, Resource] < Period then
-                begin
-                  DeltaBreakTimetableResource := Hour - FDayResourceMaxHour[Day, Resource] - 1;
-                  FDayResourceMaxHour[Day, Resource] := Hour;
-                end;
-                Inc(FDayResourceEmptyHourCount[Day, Resource], DeltaBreakTimetableResource);
-                Inc(FBreakTimetableResource, DeltaBreakTimetableResource);
-              end;
-            end
-            else if Delta < 0 then
-            begin
-              if FDayResourceMinHour[Day, Resource] = FDayResourceMaxHour[Day, Resource] then
-              begin
-                FDayResourceMinHour[Day, Resource] := 1;
-                FDayResourceMaxHour[Day, Resource] := 0;
-              end
-              else
-              begin
-                if Hour = FDayResourceMinHour[Day, Resource] then
-                begin
-                  Period0 := Period + 1;
-                  MaxPeriod := FDayHourToPeriod[Day, FDayResourceMaxHour[Day, Resource]];
-                  while (Period0 <= MaxPeriod)
-                        and (FResourcePeriodCount[Resource, Period0] = 0) do
-                    Inc(Period0);
-                  DeltaBreakTimetableResource := Hour + 1 - FPeriodToHour[Period0];
-                  FDayResourceMinHour[Day, Resource] := FPeriodToHour[Period0];
-                end
-                else if (FDayResourceMinHour[Day, Resource] < Hour)
-                        and (Hour < FDayResourceMaxHour[Day, Resource]) then
-                begin
-                  DeltaBreakTimetableResource := 1;
-                end
-                else // if (FDayResourceMaxPeriod[Day, Resource] = Period) then
-                begin
-                  Period0 := Period - 1;
-                  MinPeriod := FDayHourToPeriod[Day, FDayResourceMinHour[Day, Resource]];
-                  while (Period0 >= MinPeriod)
-                        and (FResourcePeriodCount[Resource, Period0] = 0) do
-                    Dec(Period0);
-                  DeltaBreakTimetableResource := FPeriodToHour[Period0] + 1 - Hour;
-                  FDayResourceMaxHour[Day, Resource] := FPeriodToHour[Period0];
-                end;
-                Inc(FDayResourceEmptyHourCount[Day, Resource], DeltaBreakTimetableResource);
-                Inc(FBreakTimetableResource, DeltaBreakTimetableResource);
-              end;
-            end;
-          end;
-          if FResourcePeriodCount[Resource, Period] >= FResourceToNumber[Resource] + Limit * Number then
-            Inc(FClashResourceType[FResourceToResourceType[Resource]], Delta * Number);
-          Inc(FResourcePeriodCount[Resource, Period], Delta * Number);
-          ResourceRestrictionType := FResourcePeriodToResourceRestrictionType[Resource, Period];
-          if ResourceRestrictionType >= 0 then
-            Inc(FResourceRestrictionTypeToResourceCount[ResourceRestrictionType], Delta * Number);
-        end;
-      end;
-      {else if FHourCount - 1 <> FPeriodToHour[Period] then
-       Inc(FOutOfPositionEmptyHour, Delta);}
-    end;
-  end;
+  DeltaBreakTimetableResource, ResourceRestrictionType,
+  Day, Hour, Period, Period0, MinPeriod, MaxPeriod: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
-    Duration := FSessionToDuration[Session];
-    Period1 := FTTSessionToPeriod[Session];
-    Period2 := Period1 + Duration - 1;
+    for Period := Period1 to Period2 do
+    begin
+      if FResourcePeriodNumber[Resource, Period] = Limit * NumResource then
+      begin
+        Day := FPeriodToDay[Period];
+        Hour := FPeriodToHour[Period];
+        if Delta > 0 then
+        begin
+          if FDayResourceMinHour[Day, Resource] > FDayResourceMaxHour[Day, Resource] then
+          begin
+            FDayResourceMinHour[Day, Resource] := Hour;
+            FDayResourceMaxHour[Day, Resource] := Hour;
+          end
+          else
+          begin
+            if Hour < FDayResourceMinHour[Day, Resource] then
+            begin
+              DeltaBreakTimetableResource := FDayResourceMinHour[Day, Resource] - Hour - 1;
+              FDayResourceMinHour[Day, Resource] := Hour;
+            end
+            else if (FDayResourceMinHour[Day, Resource] <= Hour)
+                    and (Hour <= FDayResourceMaxHour[Day, Resource]) then
+              DeltaBreakTimetableResource := -1
+            else // if FDayResourceMaxPeriod[Day, Resource] < Period then
+            begin
+              DeltaBreakTimetableResource := Hour - FDayResourceMaxHour[Day, Resource] - 1;
+              FDayResourceMaxHour[Day, Resource] := Hour;
+            end;
+            Inc(FDayResourceEmptyHourCount[Day, Resource], DeltaBreakTimetableResource);
+            Inc(FBreakTimetableResource, DeltaBreakTimetableResource);
+          end;
+        end
+        else if Delta < 0 then
+        begin
+          if FDayResourceMinHour[Day, Resource] = FDayResourceMaxHour[Day, Resource] then
+          begin
+            FDayResourceMinHour[Day, Resource] := 1;
+            FDayResourceMaxHour[Day, Resource] := 0;
+          end
+          else
+          begin
+            if Hour = FDayResourceMinHour[Day, Resource] then
+            begin
+              Period0 := Period + 1;
+              MaxPeriod := FDayHourToPeriod[Day, FDayResourceMaxHour[Day, Resource]];
+              while (Period0 <= MaxPeriod)
+                    and (FResourcePeriodNumber[Resource, Period0] = 0) do
+                Inc(Period0);
+              DeltaBreakTimetableResource := Hour + 1 - FPeriodToHour[Period0];
+              FDayResourceMinHour[Day, Resource] := FPeriodToHour[Period0];
+            end
+            else if (FDayResourceMinHour[Day, Resource] < Hour)
+                    and (Hour < FDayResourceMaxHour[Day, Resource]) then
+            begin
+              DeltaBreakTimetableResource := 1;
+            end
+            else // if (FDayResourceMaxPeriod[Day, Resource] = Period) then
+            begin
+              Period0 := Period - 1;
+              MinPeriod := FDayHourToPeriod[Day, FDayResourceMinHour[Day, Resource]];
+              while (Period0 >= MinPeriod)
+                    and (FResourcePeriodNumber[Resource, Period0] = 0) do
+                Dec(Period0);
+              DeltaBreakTimetableResource := FPeriodToHour[Period0] + 1 - Hour;
+              FDayResourceMaxHour[Day, Resource] := FPeriodToHour[Period0];
+            end;
+            Inc(FDayResourceEmptyHourCount[Day, Resource], DeltaBreakTimetableResource);
+            Inc(FBreakTimetableResource, DeltaBreakTimetableResource);
+          end;
+        end;
+      end;
+      {
+      //Delta > 0:
+      if FResourcePeriodNumber[Resource, Period] >= FResourceToNumber[Resource] then
+        Inc(FClashResourceType[FResourceToResourceType[Resource]], Number)
+      else if FResourcePeriodNumber[Resource, Period] + Number > FResourceToNumber[Resource] then
+        Inc(FClashResourceType[FResourceToResourceType[Resource]],
+            FResourcePeriodNumber[Resource, Period] + Number - FResourceToNumber[Resource]);
+      //Delta < 0:
+      if FResourcePeriodNumber[Resource, Period] - Number >= FResourceToNumber[Resource] then
+        Dec(FClashResourceType[FResourceToResourceType[Resource]], Number)
+      else if FResourcePeriodNumber[Resource, Period] > FResourceToNumber[Resource] then
+        Dec(FClashResourceType[FResourceToResourceType[Resource]],
+          FResourcePeriodNumber[Resource, Period] - FResourceToNumber[Resource]);
+      }
+      // Unified Deltas:
+      if FResourcePeriodNumber[Resource, Period] >= FResourceToNumber[Resource] + Limit * NumResource then
+        Inc(FClashResourceType[FResourceToResourceType[Resource]], Delta * NumResource)
+      else if FResourcePeriodNumber[Resource, Period] + (1 - Limit) * NumResource > FResourceToNumber[Resource] then
+        Inc(FClashResourceType[FResourceToResourceType[Resource]],
+            Delta * (FResourcePeriodNumber[Resource, Period] + Limit * NumResource - FResourceToNumber[Resource]));
+      Inc(FResourcePeriodNumber[Resource, Period], Delta * NumResource);
+      ResourceRestrictionType := FResourcePeriodToResourceRestrictionType[Resource, Period];
+      if ResourceRestrictionType >= 0 then
+        Inc(FResourceRestrictionTypeToResourceCount[ResourceRestrictionType], Delta * NumResource);
+    end;
+  end;
+  {else if FHourCount - 1 <> FPeriodToHour[Period] then
+   Inc(FOutOfPositionEmptyHour, Delta);}
+end;
+
+procedure TTimetable.DeltaResourcesValue(Delta, Limit, Period1, Period2: Integer;
+                                         Resources, NumResources: TDynamicIntegerArray);
+var
+  Participant,  Resource, NumResource: Integer;
+begin
+  for Participant := 0 to High(Resources) do
+  begin
+    with TTimetableModel(Model), TablingInfo do
+    begin
+      Resource := Resources[Participant];
+      NumResource := NumResources[Participant];
+      DeltaResourceValue(Delta, Limit, Period1, Period2, Resource, NumResource);
+    end
+  end
+end;
+
+procedure TTimetable.DeltaPeriodsValue(Delta, Limit, Period1, Period2, Activity: Integer);
+var
+  Day, DDay, Day1, Day2, Hour1, Hour2, DeltaBrokenSession: Integer;
+begin
+  with TTimetableModel(Model), TablingInfo do
+  begin
     Day1 := FPeriodToDay[Period1];
     Day2 := FPeriodToDay[Period2];
     Hour1 := FPeriodToHour[Period1];
     Hour2 := FPeriodToHour[Period2];
     DeltaBrokenSession := (Day2 - Day1) * (FHourCount + 1)
-      + Hour2 - Hour1 + 1 - Duration;
+      + Hour2 - Hour1 + Period1 - Period2;
     Inc(FBrokenSession, Delta * DeltaBrokenSession);
-    if Delta > 0 then
-      Limit := 0
-    else
-      Limit := 1;
-    Activity := FSessionToActivity[Session];
-    DeltaResourcesValues(FActivityToResources[Activity],
-                         FActivityToNumResources[Activity]);
     for Day := Day1 to Day2 do
     begin
       if FDayActivityCount[Day, Activity] > Limit then
@@ -1129,6 +1253,30 @@ begin
         Inc(FDayActivityAccumulated[Day, Activity], Delta);
       end;
     end;
+  end;
+end;
+
+procedure TTimetable.DeltaValue(Delta, Session: Integer);
+var
+  Period1, Period2, Activity, Duration, Limit: Integer;
+begin
+  with TTimetableModel(Model), TablingInfo do
+  begin
+    Duration := FSessionToDuration[Session];
+    Period1 := FTTSessionToPeriod[Session];
+    Period2 := Period1 + Duration - 1;
+    if Delta > 0 then
+      Limit := 0
+    else
+      Limit := 1;
+    Activity := FSessionToActivity[Session];
+    DeltaResourcesValue(Delta, Limit, Period1, Period2,
+                        FActivityToResources[Activity],
+                        FActivityToNumResources[Activity]);
+    DeltaResourcesValue(Delta, Limit, Period1, Period2,
+                        FThemeToResources[FActivityToTheme[Activity]],
+                        FTTActivityToNumResources[Activity]);
+    DeltaPeriodsValue(Delta, Limit, Period1, Period2, Activity);
   end;
 end;
 
@@ -1217,9 +1365,9 @@ begin
   begin
     if Period <> FTTSessionToPeriod[Session] then
     begin
-      DeltaValues(-1, Session);
+      DeltaValue(-1, Session);
       FTTSessionToPeriod[Session] := Period;
-      DeltaValues(1, Session);
+      DeltaValue(1, Session);
     end;
   end;
 end;
@@ -1244,8 +1392,8 @@ begin
     begin
       Duration1 := FSessionToDuration[Session1];
       Duration2 := FSessionToDuration[Session2];
-      DeltaValues(-1, Session1);
-      DeltaValues(-1, Session2);
+      DeltaValue(-1, Session1);
+      DeltaValue(-1, Session2);
       if (Period1 < Period2)
               and (Duration1 <= Period2 + Duration2)
               and (Period2 + Duration2 < FPeriodCount)
@@ -1262,8 +1410,8 @@ begin
         FTTSessionToPeriod[Session1] := Period2;
         FTTSessionToPeriod[Session2] := Period1 - Duration2 + Duration1;
       end;
-      DeltaValues(1, Session2);
-      DeltaValues(1, Session1);
+      DeltaValue(1, Session2);
+      DeltaValue(1, Session1);
     end
   end;
 end;
@@ -1371,8 +1519,8 @@ begin
            FResourceRestrictionTypeToResourceCount[0], FResourceRestrictionTypeCount * SizeOf(Integer));
     for Theme := 0 to FThemeCount - 1 do
     for Resource := 0 to FResourceCount - 1 do
-      Move(ATimetable.TablingInfo.FResourcePeriodCount[Resource, 0],
-           TablingInfo.FResourcePeriodCount[Resource, 0],
+      Move(ATimetable.TablingInfo.FResourcePeriodNumber[Resource, 0],
+           TablingInfo.FResourcePeriodNumber[Resource, 0],
            FPeriodCount * SizeOf(Integer));
     for Day := 0 to FDayCount - 1 do
     begin
@@ -1384,8 +1532,8 @@ begin
         FDayResourceEmptyHourCount[Day, 0], FResourceCount * SizeOf(Integer));
     end;
     for Resource := 0 to FResourceCount - 1 do
-      Move(ATimetable.TablingInfo.FResourcePeriodCount[Resource, 0],
-        TablingInfo.FResourcePeriodCount[Resource, 0],
+      Move(ATimetable.TablingInfo.FResourcePeriodNumber[Resource, 0],
+        TablingInfo.FResourcePeriodNumber[Resource, 0],
         FPeriodCount * SizeOf(Integer));
     for Day := 0 to FDayCount - 1 do
     begin
@@ -1598,7 +1746,7 @@ begin
     for Period := 0 to FPeriodCount - 1 do
     begin
       for Resource := 0 to FResourceCount - 1 do
-        FResourcePeriodCount[Resource, Period] := 0;
+        FResourcePeriodNumber[Resource, Period] := 0;
     end;
     for Day := 0 to FDayCount - 1 do
     begin
@@ -1619,7 +1767,7 @@ begin
   begin
     Reset;
     for Session := 0 to FSessionCount - 1 do
-      DeltaValues(1, Session);
+      DeltaValue(1, Session);
     UpdateValue;
   end
 end;
