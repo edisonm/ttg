@@ -11,22 +11,16 @@ include COMMON
 TTGMDB=dat/$(TTGMDBBASE)
 TTGSQLITE3=dat/ttg.s3fpc
 
-all: $(FILES)
+
+all test:
 	cd $(CHAINSRC) ; for BuildMode in $(BUILDMODES); do \
-	  $(MAKE) BuildMode=$$BuildMode all ; \
+	  $(MAKE) BuildMode=$$BuildMode $@ ; \
 	  done
 
-run:
-	cd $(TTGSRC) ; $(MAKE) run
+run ex1 ex2 ex3 ex4 ide clean:
+	cd $(TTGSRC) ; $(MAKE) $@
 
-ex1:
-	cd $(TTGSRC) ; $(MAKE) ex1
-
-ex2:
-	cd $(TTGSRC) ; $(MAKE) ex2
-
-ide:
-	cd $(TTGSRC) ; $(MAKE) ide
+all: $(FILES)
 
 $(TTGSQLITE3): $(TTGSQL)
 	$(RM) $@
@@ -39,12 +33,6 @@ $(TTGSQL):
 endif
 
 cleanthis:
-	$(RM) $(TTGSQLITE3) obj/*
+	$(RM) $(TTGSQLITE3)
 
 clean: cleanthis
-	cd $(CHAINSRC); $(MAKE) clean
-
-test:
-	cd $(CHAINSRC) ; for BuildMode in $(BUILDMODES); do \
-	  $(MAKE) BuildMode=$$BuildMode test ; \
-	  done

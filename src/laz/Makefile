@@ -101,6 +101,11 @@ ex1:
 ex2:
 	cd $(TTGDIR)/bin/$(BuildId) ; $(TTGEXE) $(TTGDIR)/demos/Salamanca1999.ttd
 
+ex3:
+	cd $(TTGDIR)/bin/$(BuildId) ; $(TTGEXE) $(TTGDIR)/demos/BritanicoInt2000_2.ttd
+
+ex4:
+	cd $(TTGDIR)/bin/$(BuildId) ; $(TTGEXE) $(TTGDIR)/demos/Salamanca1999_2.ttd
 
 ide:
 	$(LAZIDE) ttg.lpi
