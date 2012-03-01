@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  28/02/2012 22:21
+  01/03/2012 12:05
 
   Warning:
 
@@ -56,14 +56,14 @@ CREATE TABLE IF NOT EXISTS `Activity`(
   CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE RESTRICT
 ); /* Activities */
-CREATE TABLE IF NOT EXISTS `Requirement`(
+CREATE TABLE IF NOT EXISTS `FillRequirement`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
-    `IdResourceType` INTEGER NOT NULL /* Resource Type Id */,
-    `Limit` INTEGER NOT NULL /* Max Number of Resource */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdResourceType`),
-  CONSTRAINT `ResourceTypeRequirement` FOREIGN KEY (`IdResourceType`)
-    REFERENCES `ResourceType`(`IdResourceType`) ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT `ThemeRequirement` FOREIGN KEY (`IdTheme`)
+    `IdResource` INTEGER NOT NULL /* Resource Id */,
+    `NumResource` INTEGER NOT NULL /* Number of Resource */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdResource`),
+  CONSTRAINT `ResourceFillRequirement` FOREIGN KEY (`IdResource`)
+    REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT `ThemeFillRequirement` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE CASCADE
 ); /* Participants */
 CREATE TABLE IF NOT EXISTS `ResourceRestrictionType`(
@@ -85,16 +85,15 @@ CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
   CONSTRAINT `ResourceRestrictionTypeResourceRestriction` FOREIGN KEY (`IdResourceRestrictionType`)
     REFERENCES `ResourceRestrictionType`(`IdResourceRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Resource Restrictions */
-CREATE TABLE IF NOT EXISTS `FillRequirement`(
+CREATE TABLE IF NOT EXISTS `Requirement`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdResourceType` INTEGER NOT NULL /* Resource Type Id */,
-    `IdResource` INTEGER NOT NULL /* Resource Id */,
-    `NumResource` INTEGER NOT NULL /* Number of Resource */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdResourceType`,`IdResource`),
-  CONSTRAINT `RequirementFillRequirement` FOREIGN KEY (`IdTheme`,`IdResourceType`)
-    REFERENCES `Requirement`(`IdTheme`,`IdResourceType`) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `ResourceFillRequirement` FOREIGN KEY (`IdResourceType`,`IdResource`)
-    REFERENCES `Resource`(`IdResourceType`,`IdResource`) ON UPDATE CASCADE ON DELETE RESTRICT
+    `Limit` INTEGER NOT NULL /* Max Number of Resource */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdResourceType`),
+  CONSTRAINT `ResourceTypeRequirement` FOREIGN KEY (`IdResourceType`)
+    REFERENCES `ResourceType`(`IdResourceType`) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT `ThemeRequirement` FOREIGN KEY (`IdTheme`)
+    REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE CASCADE
 ); /* Participants */
 CREATE TABLE IF NOT EXISTS `Participant`(
     `IdActivity` INTEGER NOT NULL /* Category Id */,
