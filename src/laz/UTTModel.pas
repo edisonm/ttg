@@ -689,11 +689,11 @@ var
   var
     NumResource, FillRequirement, Counter, FillRequirementCount, Resource,
       Theme, ResourceType: Integer;
-    FieldTheme, FieldResourceType, FieldResource, FieldNumResource: TField;
+    FieldTheme, FieldResource, FieldNumResource: TField;
   begin
     with SourceDataModule.TbFillRequirement do
     begin
-      IndexFieldNames := 'IdTheme;IdResourceType;IdResource';
+      IndexFieldNames := 'IdTheme;IdResource';
       First;
       FillRequirementCount := RecordCount;
       SetLength(FThemeToResources, FThemeCount, 0);
@@ -703,14 +703,13 @@ var
       SetLength(FResourceThemeToNumResources, FResourceCount, 0);
       FieldTheme := FindField('IdTheme');
       FieldResource := FindField('IdResource');
-      FieldResourceType := FindField('IdResourceType');
       FieldNumResource := FindField('NumResource');
       NumResource := FieldNumResource.AsInteger;
       for FillRequirement := 0 to FillRequirementCount - 1 do
       begin
         Theme := FIdThemeToTheme[FieldTheme.AsInteger - FMinIdTheme];
-        ResourceType := FIdResourceTypeToResourceType[FieldResourceType.AsInteger - FMinIdResourceType];
         Resource := FIdResourceToResource[FieldResource.AsInteger - FMinIdResource];
+        ResourceType := FResourceToResourceType[Resource];
         Counter := Length(FThemeToResources[Theme]);
         SetLength(FThemeToResources[Theme], Counter + 1);
         SetLength(FThemeToNumResources[Theme], Counter + 1);

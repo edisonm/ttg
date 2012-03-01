@@ -2,7 +2,7 @@
 unit DSourceBaseConsts;
 
 (*
-  28/02/2012 22:21
+  01/03/2012 12:05
 
   Warning:
 
@@ -30,10 +30,10 @@ resourcestring
   STbResource = 'Resources';
   STbPeriod = 'Periods';
   STbActivity = 'Activities';
-  STbRequirement = 'Participants';
+  STbFillRequirement = 'Participants';
   STbResourceRestrictionType = 'Types of Resource Restrictions';
   STbResourceRestriction = 'Resource Restrictions';
-  STbFillRequirement = 'Participants';
+  STbRequirement = 'Participants';
   STbParticipant = 'Participants';
   STbTimetable = 'Timetables';
   STbTimetableDetail = 'Detail of Timetables';
@@ -61,9 +61,9 @@ resourcestring
   SFlActivity_IdActivity = 'Id';
   SFlActivity_IdTheme = 'Theme';
   SFlActivity_NaActivity = 'Category';
-  SFlRequirement_IdTheme = 'Theme';
-  SFlRequirement_IdResourceType = 'Resource Type';
-  SFlRequirement_Limit = 'Limit';
+  SFlFillRequirement_IdTheme = 'Theme';
+  SFlFillRequirement_IdResource = 'Resource';
+  SFlFillRequirement_NumResource = 'Number';
   SFlResourceRestrictionType_IdResourceRestrictionType = 'Id';
   SFlResourceRestrictionType_NaResourceRestrictionType = 'Name';
   SFlResourceRestrictionType_ColResourceRestrictionType = 'Color';
@@ -72,10 +72,9 @@ resourcestring
   SFlResourceRestriction_IdDay = 'Day';
   SFlResourceRestriction_IdHour = 'Hour';
   SFlResourceRestriction_IdResourceRestrictionType = 'Restriction Type';
-  SFlFillRequirement_IdTheme = 'Theme';
-  SFlFillRequirement_IdResourceType = 'Resource Type';
-  SFlFillRequirement_IdResource = 'Resource';
-  SFlFillRequirement_NumResource = 'Number';
+  SFlRequirement_IdTheme = 'Theme';
+  SFlRequirement_IdResourceType = 'Resource Type';
+  SFlRequirement_Limit = 'Limit';
   SFlParticipant_IdActivity = 'Category';
   SFlParticipant_IdResource = 'Resource';
   SFlParticipant_NumResource = 'Number';

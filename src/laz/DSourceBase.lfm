@@ -93,16 +93,16 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 152
     Top = 148
   end
-  object TbRequirement: TZTable
+  object TbFillRequirement: TZTable
     Tag = 7
     Connection = DbZConnection
-    TableName = 'Requirement'
-    IndexFieldNames = 'IdTheme;IdResourceType'
+    TableName = 'FillRequirement'
+    IndexFieldNames = 'IdTheme;IdResource'
     Left = 240
     Top = 144
   end
-  object DSRequirement: TDataSource
-    DataSet = TbRequirement
+  object DSFillRequirement: TDataSource
+    DataSet = TbFillRequirement
     Left = 248
     Top = 136
   end
@@ -132,16 +132,16 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 440
     Top = 136
   end
-  object TbFillRequirement: TZTable
+  object TbRequirement: TZTable
     Tag = 10
     Connection = DbZConnection
-    TableName = 'FillRequirement'
-    IndexFieldNames = 'IdTheme;IdResourceType;IdResource'
+    TableName = 'Requirement'
+    IndexFieldNames = 'IdTheme;IdResourceType'
     Left = 48
     Top = 240
   end
-  object DSFillRequirement: TDataSource
-    DataSet = TbFillRequirement
+  object DSRequirement: TDataSource
+    DataSet = TbRequirement
     Left = 56
     Top = 232
   end

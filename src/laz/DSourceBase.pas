@@ -2,7 +2,7 @@
 unit DSourceBase;
 
 (*
-  28/02/2012 22:21
+  01/03/2012 12:05
 
   Warning:
 
@@ -41,14 +41,14 @@ type
     DSPeriod: TDataSource;
     TbActivity: TZTable;
     DSActivity: TDataSource;
-    TbRequirement: TZTable;
-    DSRequirement: TDataSource;
+    TbFillRequirement: TZTable;
+    DSFillRequirement: TDataSource;
     TbResourceRestrictionType: TZTable;
     DSResourceRestrictionType: TDataSource;
     TbResourceRestriction: TZTable;
     DSResourceRestriction: TDataSource;
-    TbFillRequirement: TZTable;
-    DSFillRequirement: TDataSource;
+    TbRequirement: TZTable;
+    DSRequirement: TDataSource;
     TbParticipant: TZTable;
     DSParticipant: TDataSource;
     TbTimetable: TZTable;
@@ -91,19 +91,17 @@ begin
   Tables[6] := TbActivity;
   TbActivity.AfterPost := DataSetAfterPost;
   TbActivity.AfterDelete := DataSetAfterDelete;
-  Tables[7] := TbRequirement;
-  TbRequirement.AfterPost := DataSetAfterPost;
-  TbRequirement.AfterDelete := DataSetAfterDelete;
+  Tables[7] := TbFillRequirement;
   Tables[8] := TbResourceRestrictionType;
   Tables[9] := TbResourceRestriction;
-  Tables[10] := TbFillRequirement;
+  Tables[10] := TbRequirement;
   Tables[11] := TbParticipant;
   Tables[12] := TbTimetable;
   TbTimetable.AfterPost := DataSetAfterPost;
   TbTimetable.AfterDelete := DataSetAfterDelete;
   Tables[13] := TbTimetableDetail;
   Tables[14] := TbTimetableResource;
-  SetLength(FMasterRels[0], 2);
+  SetLength(FMasterRels[0], 3);
   with FMasterRels[0, 0] do
   begin
     DetailDataSet := TbActivity;
@@ -113,6 +111,14 @@ begin
     DeleteCascade := False;
   end;
   with FMasterRels[0, 1] do
+  begin
+    DetailDataSet := TbFillRequirement;
+    MasterFields := 'IdTheme';
+    DetailFields := 'IdTheme';
+    UpdateCascade := True;
+    DeleteCascade := True;
+  end;
+  with FMasterRels[0, 2] do
   begin
     DetailDataSet := TbRequirement;
     MasterFields := 'IdTheme';
@@ -133,8 +139,8 @@ begin
   with FMasterRels[4, 0] do
   begin
     DetailDataSet := TbFillRequirement;
-    MasterFields := 'IdResourceType;IdResource';
-    DetailFields := 'IdResourceType;IdResource';
+    MasterFields := 'IdResource';
+    DetailFields := 'IdResource';
     UpdateCascade := True;
     DeleteCascade := False;
   end;
@@ -187,15 +193,6 @@ begin
     UpdateCascade := True;
     DeleteCascade := False;
   end;
-  SetLength(FMasterRels[7], 1);
-  with FMasterRels[7, 0] do
-  begin
-    DetailDataSet := TbFillRequirement;
-    MasterFields := 'IdTheme;IdResourceType';
-    DetailFields := 'IdTheme;IdResourceType';
-    UpdateCascade := True;
-    DeleteCascade := True;
-  end;
   SetLength(FMasterRels[12], 2);
   with FMasterRels[12, 0] do
   begin
@@ -222,10 +219,10 @@ begin
     Add('TbResource=Resource');
     Add('TbPeriod=Period');
     Add('TbActivity=Activity');
-    Add('TbRequirement=Requirement');
+    Add('TbFillRequirement=FillRequirement');
     Add('TbResourceRestrictionType=ResourceRestrictionType');
     Add('TbResourceRestriction=ResourceRestriction');
-    Add('TbFillRequirement=FillRequirement');
+    Add('TbRequirement=Requirement');
     Add('TbParticipant=Participant');
     Add('TbTimetable=Timetable');
     Add('TbTimetableDetail=TimetableDetail');
@@ -255,9 +252,9 @@ begin
     Add('TbActivity.IdActivity=' + SFlActivity_IdActivity);
     Add('TbActivity.IdTheme=' + SFlActivity_IdTheme);
     Add('TbActivity.NaActivity=' + SFlActivity_NaActivity);
-    Add('TbRequirement.IdTheme=' + SFlRequirement_IdTheme);
-    Add('TbRequirement.IdResourceType=' + SFlRequirement_IdResourceType);
-    Add('TbRequirement.Limit=' + SFlRequirement_Limit);
+    Add('TbFillRequirement.IdTheme=' + SFlFillRequirement_IdTheme);
+    Add('TbFillRequirement.IdResource=' + SFlFillRequirement_IdResource);
+    Add('TbFillRequirement.NumResource=' + SFlFillRequirement_NumResource);
     Add('TbResourceRestrictionType.IdResourceRestrictionType=' + SFlResourceRestrictionType_IdResourceRestrictionType);
     Add('TbResourceRestrictionType.NaResourceRestrictionType=' + SFlResourceRestrictionType_NaResourceRestrictionType);
     Add('TbResourceRestrictionType.ColResourceRestrictionType=' + SFlResourceRestrictionType_ColResourceRestrictionType);
@@ -266,10 +263,9 @@ begin
     Add('TbResourceRestriction.IdDay=' + SFlResourceRestriction_IdDay);
     Add('TbResourceRestriction.IdHour=' + SFlResourceRestriction_IdHour);
     Add('TbResourceRestriction.IdResourceRestrictionType=' + SFlResourceRestriction_IdResourceRestrictionType);
-    Add('TbFillRequirement.IdTheme=' + SFlFillRequirement_IdTheme);
-    Add('TbFillRequirement.IdResourceType=' + SFlFillRequirement_IdResourceType);
-    Add('TbFillRequirement.IdResource=' + SFlFillRequirement_IdResource);
-    Add('TbFillRequirement.NumResource=' + SFlFillRequirement_NumResource);
+    Add('TbRequirement.IdTheme=' + SFlRequirement_IdTheme);
+    Add('TbRequirement.IdResourceType=' + SFlRequirement_IdResourceType);
+    Add('TbRequirement.Limit=' + SFlRequirement_Limit);
     Add('TbParticipant.IdActivity=' + SFlParticipant_IdActivity);
     Add('TbParticipant.IdResource=' + SFlParticipant_IdResource);
     Add('TbParticipant.NumResource=' + SFlParticipant_NumResource);
@@ -296,10 +292,10 @@ begin
     Add('TbResource=' + STbResource);
     Add('TbPeriod=' + STbPeriod);
     Add('TbActivity=' + STbActivity);
-    Add('TbRequirement=' + STbRequirement);
+    Add('TbFillRequirement=' + STbFillRequirement);
     Add('TbResourceRestrictionType=' + STbResourceRestrictionType);
     Add('TbResourceRestriction=' + STbResourceRestriction);
-    Add('TbFillRequirement=' + STbFillRequirement);
+    Add('TbRequirement=' + STbRequirement);
     Add('TbParticipant=' + STbParticipant);
     Add('TbTimetable=' + STbTimetable);
     Add('TbTimetableDetail=' + STbTimetableDetail);
