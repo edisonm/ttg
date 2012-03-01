@@ -1764,6 +1764,41 @@ var
     end;
     {$ENDIF}
   end;
+  procedure SaveTimetableResource;
+  var
+    FActivityResourceToNumResource: TDynamicIntegerArrayArray;
+  begin
+    with TTimetableModel(Model) do
+    begin
+      SetLength(FActivityResourceToNumResource, FActivityCount, FResourceCount);
+      for Activity := 0 to FActivityCount - 1 do
+        for Resource := 0 to FResourceCount - 1 do
+          FActivityResourceToNumResource[Activity, Resource] := 0;
+      for Activity := 0 to FActivityCount - 1 do
+        for Participant := 0 to High(FTTActivityToResources[Activity]) do
+        begin
+          Resource := FTTActivityToResources[Activity, Participant];
+          NumResource := FTTActivityToNumResources[Activity, Participant];
+          Inc(FActivityResourceToNumResource[Activity, Resource], NumResource);
+        end;
+      for Activity := 0 to FActivityCount - 1 do
+      begin
+        IdActivity := FActivityToIdActivity[Activity];
+        for Resource := 0 to FResourceCount - 1 do
+        begin
+          NumResource := FActivityResourceToNumResource[Activity, Resource];
+          if NumResource > 0 then
+          begin
+          IdResource := FResourceToIdResource[Resource];
+          SQL.Add(Format(
+                    'INSERT INTO TimetableResource' +
+                      '(IdTimetable,IdActivity,IdResource,NumResource) VALUES (%d,%d,%d,%d);',
+                    [IdTimetable,IdActivity,IdResource,NumResource]));
+          end;
+        end;
+      end;
+    end;
+  end;
 begin
   {$IFDEF USE_SQL}
   SQL := TStringList.Create;
@@ -1773,6 +1808,7 @@ begin
   try
     SaveTimetable;
     SaveTimetableDetail;
+    SaveTimetableResource;
     {$IFDEF USE_SQL}
     with SourceDataModule do
     begin
