@@ -81,6 +81,7 @@ type
     FHourToIdHour: TDynamicIntegerArray;
     FActivityToIdActivity: TDynamicIntegerArray;
     FIdActivityToActivity: TDynamicIntegerArray;
+    FResourceToIdResource: TDynamicIntegerArray;
     FActivityToTheme: TDynamicIntegerArray;
     FIdDayToDay: TDynamicIntegerArray;
     FIdHourToHour: TDynamicIntegerArray;
@@ -359,7 +360,7 @@ var
   FMinIdResourceRestrictionType, FMinIdTheme,
     FMinIdResource, FMinIdResourceType: Integer;
   FIdThemeToTheme, FIdResourceToResource, FIdResourceTypeToResourceType,
-    FResourceTypeToIdResourceType, FResourceToIdResource,
+    FResourceTypeToIdResourceType,
     FIdResourceRestrictionTypeToResourceRestrictionType,
     FResourceRestrictionTypeToIdResourceRestrictionType: TDynamicIntegerArray;
   FResourceActivityToNumResources, FResourceThemeToNumResources,
@@ -1399,7 +1400,7 @@ end;
 procedure TTimetable.Mutate;
 var
   ResourceActivity, ResourceActivities, Themes, ThemeActivities, Theme2,
-  Session1, Session2, Activity, Activity1, Activity2, Counter, Activity21,
+  Session1, Session2, Activity, Activity1, Activity2, Activity21,
   Activity22, Participant, NumResource, Resource, Period: Integer;
 begin
   with TTimetableModel(Model) do
@@ -1766,6 +1767,7 @@ var
   end;
   procedure SaveTimetableResource;
   var
+    Activity, IdActivity, Resource, IdResource, NumResource, Participant: Integer;
     FActivityResourceToNumResource: TDynamicIntegerArrayArray;
   begin
     with TTimetableModel(Model) do
