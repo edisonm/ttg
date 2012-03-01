@@ -75,6 +75,7 @@ type
     FResourceRestrictionTypeToName: TDynamicStringArray;
     FResourceTypeToValue: TDynamicIntegerArray;
     FResourceTypeToName: TDynamicStringArray;
+    FResourceTypeToDefaultLimit: TDynamicIntegerArray;
     FThemeToIdTheme: TDynamicIntegerArray;
     FDayToIdDay: TDynamicIntegerArray;
     FHourToIdHour: TDynamicIntegerArray;
@@ -431,20 +432,23 @@ var
   procedure LoadResourceType;
   var
     ResourceType: Integer;
-    FieldValue, FieldName: TField;
+    FieldValue, FieldName, FieldDefaultLimit: TField;
   begin
     with SourceDataModule.TbResourceType do
     begin
       IndexFieldNames := 'IdResourceType';
       First;
-      FieldValue := FindField('ValResourceType');
       FieldName := FindField('NaResourceType');
-      SetLength(FResourceTypeToValue, FResourceTypeCount);
+      FieldValue := FindField('ValResourceType');
+      FieldDefaultLimit := FindField('DefaultLimit');
       SetLength(FResourceTypeToName, FResourceTypeCount);
+      SetLength(FResourceTypeToValue, FResourceTypeCount);
+      SetLength(FResourceTypeToDefaultLimit, FResourceTypeCount);
       for ResourceType := 0 to FResourceTypeCount - 1 do
       begin
-        FResourceTypeToValue[ResourceType] := FieldValue.AsInteger;
         FResourceTypeToName[ResourceType] := FieldName.AsString;
+        FResourceTypeToValue[ResourceType] := FieldValue.AsInteger;
+        FResourceTypeToDefaultLimit[ResourceType] := FieldDefaultLimit.AsInteger;
         Next;
       end;
       First;
@@ -664,7 +668,9 @@ var
       FieldLimit := FindField('Limit');
       for Theme := 0 to FThemeCount - 1 do
         for ResourceType := 0 to FResourceTypeCount - 1 do
-          FThemeResourceTypeToLimit[Theme, ResourceType] := MaxInt;
+        begin
+          FThemeResourceTypeToLimit[Theme, ResourceType] := FResourceTypeToDefaultLimit[ResourceType];
+        end;
       for Requirement := 0 to RequirementCount - 1 do
       begin
         Theme := FIdThemeToTheme[FieldTheme.AsInteger - FMinIdTheme];
