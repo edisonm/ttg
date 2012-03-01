@@ -1411,21 +1411,18 @@ inherited TimetableForm: TTimetableForm
       'WHERE'
       '  IdTimetable=:IdTimetable'
       '  AND ('
-      '  SELECT COUNT(*) FROM Period'
-      '  WHERE Period.IdDay=Day.IdDay'
-      '    AND Period.IdHour=Hour.IdHour'
+      '    SELECT COUNT(*) FROM Period'
+      '    WHERE Period.IdDay=Day.IdDay'
+      '      AND Period.IdHour=Hour.IdHour'
       '  ) IS NULL'
       '  AND ('
       '  SELECT'
       '    MAX(TimetableDetail.IdHour)'
       '  FROM'
-      '    TimetableDetail'
-      '    INNER JOIN TimetableDetail TimetableDetail1'
-      '      ON TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable'
+      '    TimetableDetail INNER JOIN TimetableDetail TimetableDetail1'
+      '       ON TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable'
       '      AND TimetableDetail.IdActivity=TimetableDetail1.IdActivity'
-      '      AND TimetableDetail.IdParallel=TimetableDetail1.IdParallel'
       '      AND TimetableDetail.Session=TimetableDetail1.Session'
-      '      AND TimetableDetail.IdTheme=TimetableDetail1.IdTheme'
       '      AND TimetableDetail.IdDay=TimetableDetail1.IdDay'
       '    WHERE TimetableDetail.IdTimetable=Timetable.IdTimetable'
       '      AND TimetableDetail.IdDay=Day.IdDay'
@@ -1517,34 +1514,29 @@ inherited TimetableForm: TTimetableForm
   end
   object QuBrokenSessionHourDetail: TZQuery[13]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable;IdDay;IdHour;IdCategory;IdParallel'
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
       '  TimetableDetail.IdTimetable,'
-      '  TimetableDetail.IdCategory,'
-      '  TimetableDetail.IdParallel,'
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour,'
-      '  TimetableDetail1.IdHour as IdHour0,'
-      '  TimetableDetail.IdTheme'
+      '  TimetableDetail1.IdHour AS IdHour0,'
+      '  TimetableDetail.IdActivity'
       'FROM'
       '  TimetableDetail'
       '  INNER JOIN TimetableDetail TimetableDetail1'
-      '    ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
-      '    AND (TimetableDetail.IdCategory=TimetableDetail1.IdCategory)'
-      '    AND (TimetableDetail.IdParallel=TimetableDetail1.IdParallel)'
-      '    AND (TimetableDetail.Session=TimetableDetail1.Session)'
-      '    AND (TimetableDetail.IdTheme=TimetableDetail1.IdTheme)'
-      '    AND (TimetableDetail.IdDay=TimetableDetail1.IdDay)'
+      '    ON TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable'
+      '   AND TimetableDetail.IdActivity=TimetableDetail1.IdActivity'
+      '   AND TimetableDetail.Session=TimetableDetail1.Session'
+      '   AND TimetableDetail.IdDay=TimetableDetail1.IdDay'
       'WHERE'
-      '  (TimetableDetail.IdTimetable=:IdTimetable)'
-      '    AND (TimetableDetail.IdDay=:IdDay)'
-      '    AND ((TimetableDetail.IdHour>:IdHour)'
-      '     AND (TimetableDetail1.IdHour<:IdHour)'
-      '     OR  (TimetableDetail.IdHour<:IdHour)'
-      '     AND (TimetableDetail1.IdHour>:IdHour))'
+      '  TimetableDetail.IdTimetable=:IdTimetable'
+      '   AND TimetableDetail.IdDay=:IdDay'
+      '   AND TimetableDetail.IdHour>:IdHour'
+      '   AND TimetableDetail1.IdHour<:IdHour'
+      '    OR TimetableDetail.IdHour<:IdHour'
+      '   AND TimetableDetail1.IdHour>:IdHour'
     )
     Params = <    
       item
@@ -1562,32 +1554,9 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdHour'
         ParamType = ptUnknown
       end>
-    Properties.Strings = (
-      'SELECT DISTINCT'
-      '  TimetableDetail.IdCategory,'
-      '  TimetableDetail.IdParallel,'
-      '  TimetableDetail.IdDay,'
-      '  TimetableDetail.IdHour,'
-      '  TimetableDetail.IdTheme'
-      'FROM'
-      '  TimetableDetail'
-      '  INNER JOIN TimetableDetail TimetableDetail1'
-      '    ON (TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable)'
-      '    AND (TimetableDetail.IdCategory=TimetableDetail1.IdCategory)'
-      '    AND (TimetableDetail.IdParallel=TimetableDetail1.IdParallel)'
-      '    AND (TimetableDetail.Session=TimetableDetail1.Session)'
-      '    AND (TimetableDetail.IdTheme=TimetableDetail1.IdTheme)'
-      '    AND (TimetableDetail.IdDay=TimetableDetail1.IdDay)'
-      'WHERE'
-      '  (TimetableDetail.IdTimetable=:IdTimetable)'
-      '    AND(TimetableDetail.IdDay=:IdDay)'
-      '    AND((TimetableDetail.IdHour>:IdHour)AND(TimetableDetail1.IdHour<:IdHour)'
-      '    OR(TimetableDetail.IdHour<:IdHour)AND(TimetableDetail1.IdHour>:IdHour))'
-    )
     DataSource = DSBrokenSessionHour
     MasterFields = 'IdTimetable;IdDay;IdHour'
     LinkedFields = 'IdTimetable;IdDay;IdHour'
-    IndexFieldNames = 'IdTimetable Asc;IdDay Asc;IdHour Asc;IdCategory Asc;IdParallel Asc'
     left = 112
     top = 168
     ParamData = <    
@@ -1617,33 +1586,11 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuBrokenSessionHourDetailIdCategory: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdCategory'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuBrokenSessionHourDetailIdParallel: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdParallel'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
     object QuBrokenSessionHourDetailIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
-      Index = 3
+      Index = 1
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1654,7 +1601,7 @@ inherited TimetableForm: TTimetableForm
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
-      Index = 4
+      Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1665,57 +1612,29 @@ inherited TimetableForm: TTimetableForm
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour0'
-      Index = 5
+      Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Visible = False
     end
-    object QuBrokenSessionHourDetailIdTheme: TLongintField
+    object QuBrokenSessionHourDetailIdActivity: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdTheme'
-      Index = 6
+      FieldName = 'IdActivity'
+      Index = 4
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Visible = False
-    end
-    object QuBrokenSessionHourDetailAbCategory: TStringField
-      DisplayWidth = 5
-      FieldKind = fkLookup
-      FieldName = 'AbCategory'
-      Index = 7
-      KeyFields = 'IdCategory'
-      LookupCache = False
-      LookupKeyFields = 'IdCategory'
-      LookupResultField = 'AbCategory'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 5
-    end
-    object QuBrokenSessionHourDetailNaParallel: TStringField
-      DisplayWidth = 5
-      FieldKind = fkLookup
-      FieldName = 'NaParallel'
-      Index = 8
-      KeyFields = 'IdParallel'
-      LookupCache = False
-      LookupKeyFields = 'IdParallel'
-      LookupResultField = 'NaParallel'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 5
     end
     object QuBrokenSessionHourDetailNaDay: TStringField
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'NaDay'
-      Index = 9
+      Index = 5
       KeyFields = 'IdDay'
       LookupCache = False
       LookupDataSet = SourceDataModule.TbDay
@@ -1730,7 +1649,7 @@ inherited TimetableForm: TTimetableForm
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'NaHour'
-      Index = 10
+      Index = 6
       KeyFields = 'IdHour0'
       LookupCache = False
       LookupDataSet = SourceDataModule.TbHour
@@ -1741,20 +1660,19 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuBrokenSessionHourDetailNaTheme: TStringField
-      DisplayWidth = 15
+    object QuBrokenSessionHourDetailNaActivity: TStringField
+      DisplayWidth = 5
       FieldKind = fkLookup
-      FieldName = 'NaTheme'
-      Index = 11
-      KeyFields = 'IdTheme'
+      FieldName = 'NaActivity'
+      Index = 7
+      KeyFields = 'IdActivity'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbTheme
-      LookupKeyFields = 'IdTheme'
-      LookupResultField = 'NaTheme'
+      LookupKeyFields = 'IdActivity'
+      LookupResultField = 'NaActivity'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-      Size = 15
+      Size = 5
     end
   end
   object DSBrokenSessionHour: TDatasource[14]
