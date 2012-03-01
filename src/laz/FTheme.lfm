@@ -1,68 +1,143 @@
 inherited ThemeForm: TThemeForm
-  Left = 534
-  Height = 635
-  Top = 239
-  Width = 1107
+  Left = 812
+  Height = 703
+  Top = 274
+  Width = 1009
   Caption = 'Theme'
-  ClientHeight = 635
-  ClientWidth = 1107
+  ClientHeight = 703
+  ClientWidth = 1009
   OnActivate = FormActivate
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   inherited TBEditor: TToolBar
-    Width = 1107
+    Width = 1009
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
     end
   end
   inherited PnStatus: TPanel
-    Top = 616
-    Width = 1107
-    ClientWidth = 1107
+    Top = 684
+    Width = 1009
+    ClientWidth = 1009
     inherited LbRecordNo: TLabel
-      Left = 1105
+      Left = 1007
     end
   end
   inherited PnEditor: TPanel
-    Height = 591
-    Width = 1107
-    ClientHeight = 591
-    ClientWidth = 1107
-    inherited DBGrid: TDBGrid
-      Height = 589
-      Width = 404
-      Align = alLeft
-      OnDblClick = DBGridDblClick
+    Height = 659
+    Width = 1009
+    ClientHeight = 659
+    ClientWidth = 1009
+    inherited GroupBox: TGroupBox
+      Height = 657
+      Width = 497
+      Caption = 'Themes'
+      ClientHeight = 639
+      ClientWidth = 489
+      inherited DBGrid: TDBGrid
+        Height = 376
+        Width = 489
+        OnDblClick = DBGridDblClick
+      end
+      object Splitter3: TSplitter[1]
+        Cursor = crVSplit
+        Left = 0
+        Height = 6
+        Top = 376
+        Width = 489
+        Align = alBottom
+        ResizeAnchor = akBottom
+      end
+      object Panel1: TPanel[2]
+        Left = 0
+        Height = 257
+        Top = 382
+        Width = 489
+        Align = alBottom
+        ClientHeight = 257
+        ClientWidth = 489
+        TabOrder = 1
+        object GroupBox4: TGroupBox
+          Left = 1
+          Height = 255
+          Top = 1
+          Width = 238
+          Align = alClient
+          Caption = 'Available Resources'
+          ClientHeight = 237
+          ClientWidth = 230
+          TabOrder = 0
+          object DbGParticipants1: TDBGrid
+            Left = 0
+            Height = 237
+            Top = 0
+            Width = 230
+            Align = alClient
+            Color = clWindow
+            Columns = <>
+            DataSource = SourceDataModule.DSFillRequirement
+            Scrollbars = ssAutoBoth
+            TabOrder = 0
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+          end
+        end
+        object GroupBox5: TGroupBox
+          Left = 239
+          Height = 255
+          Top = 1
+          Width = 249
+          Align = alRight
+          Caption = 'Resource Type Limits'
+          ClientHeight = 237
+          ClientWidth = 241
+          TabOrder = 1
+          object DbGParticipants2: TDBGrid
+            Left = 0
+            Height = 237
+            Top = 0
+            Width = 241
+            Align = alClient
+            Color = clWindow
+            Columns = <>
+            DataSource = SourceDataModule.DSRequirement
+            Scrollbars = ssAutoBoth
+            TabOrder = 0
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+          end
+        end
+      end
     end
     inherited Splitter1: TSplitter
       Cursor = crHSplit
-      Left = 405
-      Height = 589
+      Left = 498
+      Height = 657
       Top = 1
       Width = 6
-      Align = alLeft
-      ResizeAnchor = akLeft
+      Align = alRight
+      ResizeAnchor = akRight
     end
     inherited PnDetail: TPanel
-      Left = 411
-      Height = 589
+      Left = 504
+      Height = 657
       Top = 1
-      Width = 695
-      Align = alClient
-      ClientHeight = 589
-      ClientWidth = 695
+      Width = 504
+      Align = alRight
+      ClientHeight = 657
+      ClientWidth = 504
       inherited GrBDetail: TGroupBox
-        Height = 355
-        Width = 693
+        Height = 393
+        Width = 502
         Caption = 'Activity'
-        ClientHeight = 337
-        ClientWidth = 685
+        ClientHeight = 375
+        ClientWidth = 494
         inherited DBGridDetail: TDBGrid
-          Height = 337
+          Height = 375
           Hint = 'Activity of Themes'
-          Width = 685
+          Width = 494
           ShowHint = True
         end
       end
@@ -70,50 +145,34 @@ inherited ThemeForm: TThemeForm
         Cursor = crVSplit
         Left = 1
         Height = 6
-        Top = 356
-        Width = 693
+        Top = 394
+        Width = 502
         Align = alBottom
         ResizeAnchor = akBottom
       end
-      object Panel3: TPanel[2]
+      object GroupBox3: TGroupBox[2]
         Left = 1
-        Height = 226
-        Top = 362
-        Width = 693
+        Height = 256
+        Top = 400
+        Width = 502
         Align = alBottom
-        ClientHeight = 226
-        ClientWidth = 693
-        TabOrder = 1
-        object GroupBox3: TGroupBox
-          Left = 1
-          Height = 224
-          Top = 1
-          Width = 287
-          Align = alLeft
-          Caption = 'Participants'
-          ClientHeight = 206
-          ClientWidth = 279
+        Caption = 'Participants'
+        ClientHeight = 238
+        ClientWidth = 494
+        TabOrder = 2
+        object DbGParticipants: TDBGrid
+          Left = 0
+          Height = 238
+          Top = 0
+          Width = 494
+          Align = alClient
+          Color = clWindow
+          Columns = <>
+          DataSource = SourceDataModule.DSParticipant
+          Scrollbars = ssAutoBoth
           TabOrder = 0
-          object DbGParticipants: TDBGrid
-            Left = 0
-            Height = 206
-            Top = 0
-            Width = 279
-            Align = alClient
-            Color = clWindow
-            Columns = <>
-            DataSource = SourceDataModule.DSParticipant
-            Scrollbars = ssAutoBoth
-            TabOrder = 0
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-          end
-        end
-        object Splitter3: TSplitter
-          Left = 288
-          Height = 224
-          Top = 1
-          Width = 6
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
         end
       end
     end

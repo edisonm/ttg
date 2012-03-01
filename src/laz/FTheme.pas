@@ -17,8 +17,12 @@ type
 
   TThemeForm	= class(TMasterDetailEditorForm)
     DbGParticipants: TDBGrid;
+    DbGParticipants1: TDBGrid;
+    DbGParticipants2: TDBGrid;
     GroupBox3: TGroupBox;
-    Panel3: TPanel;
+    GroupBox4: TGroupBox;
+    GroupBox5: TGroupBox;
+    Panel1: TPanel;
     Splitter2: TSplitter;
     Splitter3: TSplitter;
     procedure ActFindExecute(Sender: TObject);
@@ -119,6 +123,9 @@ begin
   with SourceDataModule do
   begin
     FSuperTitle := Description[TbTheme];
+    TbRequirement.MasterFields := 'IdTheme';
+    TbRequirement.LinkedFields := 'IdTheme';
+    TbRequirement.MasterSource := DSTheme;
     TbFillRequirement.MasterFields := 'IdTheme';
     TbFillRequirement.LinkedFields := 'IdTheme';
     TbFillRequirement.MasterSource := DSTheme;
@@ -134,6 +141,7 @@ end;
 procedure TThemeForm.FormDestroy(Sender: TObject);
 begin
   inherited;
+  SourceDataModule.TbRequirement.MasterSource := nil;
   SourceDataModule.TbFillRequirement.MasterSource := nil;
   SourceDataModule.TbParticipant.MasterSource := nil;
   SourceDataModule.TbActivity.MasterSource := nil;

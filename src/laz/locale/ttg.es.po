@@ -1184,12 +1184,26 @@ msgctxt "tprogressform.pnvalue.caption"
 msgid "Value:"
 msgstr " Valor:"
 
+#: tresourceform.actresourcerestriction.caption
+msgctxt "tresourceform.actresourcerestriction.caption"
+msgid "Resource restrictions"
+msgstr "Prohibiciones de profesor"
+
+#: tresourceform.actresourcerestriction.hint
+msgid "Resource restrictions|Input Resource restrictions"
+msgstr ""
+
 #: tresourceform.caption
 #, fuzzy
-#| msgid "Resource"
+#| msgid "Themes"
 msgctxt "tresourceform.caption"
-msgid "Themes"
+msgid "Resources"
 msgstr "Profesor"
+
+#: tresourceform.groupbox.caption
+msgctxt "tresourceform.groupbox.caption"
+msgid "Resources"
+msgstr "Profesores"
 
 #: tselperiodform.bbcancel.caption
 msgctxt "TSELPERIODFORM.BBCANCELAR.CAPTION"
@@ -1298,10 +1312,23 @@ msgctxt "tthemeform.grbdetail.caption"
 msgid "Activity"
 msgstr "Distribucion"
 
+#: tthemeform.groupbox.caption
+msgctxt "tthemeform.groupbox.caption"
+msgid "Themes"
+msgstr "Materias"
+
 #: tthemeform.groupbox3.caption
 msgctxt "tthemeform.groupbox3.caption"
 msgid "Participants"
 msgstr "Ayudas"
+
+#: tthemeform.groupbox4.caption
+msgid "Available Resources"
+msgstr ""
+
+#: tthemeform.groupbox5.caption
+msgid "Resource Type Limits"
+msgstr ""
 
 #: ttimetableclassform.cbshowclass.hint
 msgctxt "ttimetableclassform.cbshowclass.hint"

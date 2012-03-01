@@ -1173,9 +1173,23 @@ msgctxt "TPROGRESSFORM.PNVALUE.CAPTION"
 msgid "Value:"
 msgstr ""
 
+#: tresourceform.actresourcerestriction.caption
+msgctxt "TRESOURCEFORM.ACTRESOURCERESTRICTION.CAPTION"
+msgid "Resource restrictions"
+msgstr ""
+
+#: tresourceform.actresourcerestriction.hint
+msgid "Resource restrictions|Input Resource restrictions"
+msgstr ""
+
 #: tresourceform.caption
 msgctxt "TRESOURCEFORM.CAPTION"
-msgid "Themes"
+msgid "Resources"
+msgstr ""
+
+#: tresourceform.groupbox.caption
+msgctxt "TRESOURCEFORM.GROUPBOX.CAPTION"
+msgid "Resources"
 msgstr ""
 
 #: tselperiodform.bbcancel.caption
@@ -1279,9 +1293,22 @@ msgctxt "TTHEMEFORM.GRBDETAIL.CAPTION"
 msgid "Activity"
 msgstr ""
 
+#: tthemeform.groupbox.caption
+msgctxt "TTHEMEFORM.GROUPBOX.CAPTION"
+msgid "Themes"
+msgstr ""
+
 #: tthemeform.groupbox3.caption
 msgctxt "TTHEMEFORM.GROUPBOX3.CAPTION"
 msgid "Participants"
+msgstr ""
+
+#: tthemeform.groupbox4.caption
+msgid "Available Resources"
+msgstr ""
+
+#: tthemeform.groupbox5.caption
+msgid "Resource Type Limits"
 msgstr ""
 
 #: ttimetableclassform.cbshowclass.hint

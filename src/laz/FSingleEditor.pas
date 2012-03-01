@@ -17,6 +17,7 @@ type
 TSingleEditorForm = class(TEditorForm)
     DBNavigator: TDBNavigator;
     DataSource: TDataSource;
+    GroupBox: TGroupBox;
     LbRecordNo: TLabel;
     LbState: TLabel;
     DBGrid: TDBGrid;

@@ -247,7 +247,7 @@ begin
     Lookup := True;
     DataSet := TbActivity;
   end;
-  Field := TLongintField.Create(TbActivity.Owner);
+  Field := TLongintField.Create(TbTheme.Owner);
   with Field do
   begin
     FieldKind := fkCalculated;

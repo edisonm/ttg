@@ -1,5 +1,5 @@
 inherited ResourceForm: TResourceForm
-  Left = 531
+  Left = 524
   Height = 461
   Top = 340
   Width = 588
@@ -36,10 +36,17 @@ inherited ResourceForm: TResourceForm
     Width = 588
     ClientHeight = 417
     ClientWidth = 588
-    inherited DBGrid: TDBGrid
+    inherited GroupBox: TGroupBox
       Height = 415
       Width = 586
-      OnDblClick = DBGridDblClick
+      Caption = 'Resources'
+      ClientHeight = 397
+      ClientWidth = 578
+      inherited DBGrid: TDBGrid
+        Height = 397
+        Width = 578
+        OnDblClick = DBGridDblClick
+      end
     end
   end
   inherited ImageList: TImageList
