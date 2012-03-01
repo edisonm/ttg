@@ -25,6 +25,7 @@ type
     Panel1: TPanel;
     Splitter2: TSplitter;
     Splitter3: TSplitter;
+    Splitter4: TSplitter;
     procedure ActFindExecute(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);

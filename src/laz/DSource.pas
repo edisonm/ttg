@@ -24,6 +24,7 @@ type
     { Private declarations }
     procedure SetFieldCaption(ADataSet: TDataSet);
     procedure PrepareLookupFields;
+    procedure PrepareCalcFields;
     procedure HideFields;
   protected
     procedure LoadDataSetFromStrings(const ATableName: string;
@@ -55,7 +56,7 @@ implementation
 {$ENDIF}
 
 uses
-  Variants, FConfig, UTTGDBUtils, URelUtils, uttgconsts, dsourcebaseconsts;
+  Variants, FConfig, UTTGDBUtils, URelUtils, UTTGConsts, DSourceBaseConsts;
 
 procedure TSourceDataModule.TbThemeBeforePost(DataSet: TDataSet);
 var
@@ -214,61 +215,48 @@ begin
 end;
 
 procedure TSourceDataModule.PrepareLookupFields;
+  procedure NewLookupField(ADataSet, ALookupDataSet: TDataSet;
+                            const AKeyFields, AFieldName: string);
+  var
+    Field: TField;
+  begin
+    Field := TStringField.Create(ADataSet.Owner);
+    with Field do
+    begin
+      DisplayLabel := FieldCaptionList.Values[ADataSet.Name + '.' + AKeyFields];
+      DisplayWidth := ALookupDataSet.FindField(AFieldName).DisplayWidth;
+      FieldKind := fkLookup;
+      FieldName := AFieldName;
+      LookupDataSet := ALookupDataSet;
+      LookupKeyFields := AKeyFields;
+      LookupResultField := AFieldName;
+      KeyFields := AKeyFields;
+      Size := ALookupDataSet.FindField(AFieldName).Size;
+      Lookup := True;
+      DataSet := ADataSet;
+      Index := ADataSet.FindField(AKeyFields).Index;
+    end;
+    ADataSet.FindField(AKeyFields).Index := ADataSet.FieldCount - 1;
+  end;
+begin
+  NewLookupField(TbResourceRestriction, TbResourceRestrictionType,
+                  'IdResourceRestrictionType', 'NaResourceRestrictionType');
+  NewLookupField(TbParticipant, TbResource, 'IdResource', 'NaResource');
+  NewLookupField(TbRequirement, TbResourceType, 'IdResourceType', 'NaResourceType');
+  NewLookupField(TbFillRequirement, TbResource, 'IdResource', 'NaResource');
+end;
+
+procedure TSourceDataModule.PrepareCalcFields;
 var
   Field: TField;
 begin
-  Field := TStringField.Create(TbResourceRestriction);
-  with Field do
-  begin
-    DisplayLabel := SFlResourceRestriction_IdResourceRestrictionType;
-    DisplayWidth := 10;
-    FieldKind := fkLookup;
-    FieldName := 'NaResourceRestrictionType';
-    LookupDataSet := TbResourceRestrictionType;
-    LookupKeyFields := 'IdResourceRestrictionType';
-    LookupResultField := 'NaResourceRestrictionType';
-    KeyFields := 'IdResourceRestrictionType';
-    Size := 10;
-    Lookup := True;
-    DataSet := TbResourceRestriction;
-  end;
-  Field := TStringField.Create(TbActivity.Owner);
-  with Field do
-  begin
-    DisplayLabel := SFlActivity_IdTheme;
-    DisplayWidth := 10;
-    FieldKind := fkLookup;
-    FieldName := 'NaTheme';
-    LookupDataSet := SourceDataModule.TbTheme;
-    LookupKeyFields := 'IdTheme';
-    LookupResultField := 'NaTheme';
-    KeyFields := 'IdTheme';
-    Size := 15;
-    Lookup := True;
-    DataSet := TbActivity;
-  end;
   Field := TLongintField.Create(TbTheme.Owner);
   with Field do
   begin
     FieldKind := fkCalculated;
     DisplayWidth := 5;
     FieldName := 'Duration';
-    DataSet := TbActivity;
-  end;
-  Field := TStringField.Create(TbParticipant.Owner);
-  with Field do
-  begin
-    DisplayLabel := SFlParticipant_IdResource;
-    DisplayWidth := 31;
-    FieldKind := fkLookup;
-    FieldName := 'NameResource';
-    LookupDataSet := QuResource;
-    LookupKeyFields := 'IdResource';
-    LookupResultField := 'NameResource';
-    KeyFields := 'IdResource';
-    Size := 31;
-    Lookup := True;
-    DataSet := TbParticipant;
+    DataSet := TbTheme;
   end;
 end;
 
@@ -296,6 +284,16 @@ begin
   with TbParticipant do
   begin
     FindField('IdActivity').Visible := False;
+    FindField('IdResource').Visible := False;
+  end;
+  with TbRequirement do
+  begin
+    FindField('IdTheme').Visible := False;
+    FindField('IdResourceType').Visible := False;
+  end;
+  with TbFillRequirement do
+  begin
+    FindField('IdTheme').Visible := False;
     FindField('IdResource').Visible := False;
   end;
 end;
@@ -445,6 +443,7 @@ begin
   TbTheme.FindField('Composition').DisplayWidth := 10;
   ApplyOnTables(SetFieldCaption);
   PrepareLookupFields;
+  PrepareCalcFields;
   HideFields;
 end;
 

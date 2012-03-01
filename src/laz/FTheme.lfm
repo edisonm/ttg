@@ -1,79 +1,79 @@
 inherited ThemeForm: TThemeForm
-  Left = 812
-  Height = 703
-  Top = 274
-  Width = 1009
+  Left = 382
+  Height = 706
+  Top = 228
+  Width = 1024
   Caption = 'Theme'
-  ClientHeight = 703
-  ClientWidth = 1009
+  ClientHeight = 706
+  ClientWidth = 1024
   OnActivate = FormActivate
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   inherited TBEditor: TToolBar
-    Width = 1009
+    Width = 1024
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
     end
   end
   inherited PnStatus: TPanel
-    Top = 684
-    Width = 1009
-    ClientWidth = 1009
+    Top = 687
+    Width = 1024
+    ClientWidth = 1024
     inherited LbRecordNo: TLabel
-      Left = 1007
+      Left = 1022
     end
   end
   inherited PnEditor: TPanel
-    Height = 659
-    Width = 1009
-    ClientHeight = 659
-    ClientWidth = 1009
+    Height = 662
+    Width = 1024
+    ClientHeight = 662
+    ClientWidth = 1024
     inherited GroupBox: TGroupBox
-      Height = 657
-      Width = 497
+      Height = 660
+      Width = 638
       Caption = 'Themes'
-      ClientHeight = 639
-      ClientWidth = 489
+      ClientHeight = 642
+      ClientWidth = 630
       inherited DBGrid: TDBGrid
-        Height = 376
-        Width = 489
+        Height = 379
+        Width = 630
         OnDblClick = DBGridDblClick
       end
       object Splitter3: TSplitter[1]
         Cursor = crVSplit
         Left = 0
         Height = 6
-        Top = 376
-        Width = 489
+        Top = 379
+        Width = 630
         Align = alBottom
         ResizeAnchor = akBottom
       end
       object Panel1: TPanel[2]
         Left = 0
         Height = 257
-        Top = 382
-        Width = 489
+        Top = 385
+        Width = 630
         Align = alBottom
         ClientHeight = 257
-        ClientWidth = 489
+        ClientWidth = 630
         TabOrder = 1
         object GroupBox4: TGroupBox
           Left = 1
           Height = 255
           Top = 1
-          Width = 238
+          Width = 318
           Align = alClient
           Caption = 'Available Resources'
           ClientHeight = 237
-          ClientWidth = 230
+          ClientWidth = 310
           TabOrder = 0
           object DbGParticipants1: TDBGrid
             Left = 0
             Height = 237
             Top = 0
-            Width = 230
+            Width = 310
             Align = alClient
             Color = clWindow
             Columns = <>
@@ -85,20 +85,20 @@ inherited ThemeForm: TThemeForm
           end
         end
         object GroupBox5: TGroupBox
-          Left = 239
+          Left = 324
           Height = 255
           Top = 1
-          Width = 249
+          Width = 305
           Align = alRight
           Caption = 'Resource Type Limits'
           ClientHeight = 237
-          ClientWidth = 241
+          ClientWidth = 297
           TabOrder = 1
           object DbGParticipants2: TDBGrid
             Left = 0
             Height = 237
             Top = 0
-            Width = 241
+            Width = 297
             Align = alClient
             Color = clWindow
             Columns = <>
@@ -109,35 +109,43 @@ inherited ThemeForm: TThemeForm
             TitleFont.Name = 'MS Sans Serif'
           end
         end
+        object Splitter4: TSplitter
+          Left = 319
+          Height = 255
+          Top = 1
+          Width = 5
+          Align = alRight
+          ResizeAnchor = akRight
+        end
       end
     end
     inherited Splitter1: TSplitter
       Cursor = crHSplit
-      Left = 498
-      Height = 657
+      Left = 639
+      Height = 660
       Top = 1
       Width = 6
       Align = alRight
       ResizeAnchor = akRight
     end
     inherited PnDetail: TPanel
-      Left = 504
-      Height = 657
+      Left = 645
+      Height = 660
       Top = 1
-      Width = 504
+      Width = 378
       Align = alRight
-      ClientHeight = 657
-      ClientWidth = 504
+      ClientHeight = 660
+      ClientWidth = 378
       inherited GrBDetail: TGroupBox
-        Height = 393
-        Width = 502
+        Height = 396
+        Width = 376
         Caption = 'Activity'
-        ClientHeight = 375
-        ClientWidth = 494
+        ClientHeight = 378
+        ClientWidth = 368
         inherited DBGridDetail: TDBGrid
-          Height = 375
+          Height = 378
           Hint = 'Activity of Themes'
-          Width = 494
+          Width = 368
           ShowHint = True
         end
       end
@@ -145,26 +153,26 @@ inherited ThemeForm: TThemeForm
         Cursor = crVSplit
         Left = 1
         Height = 6
-        Top = 394
-        Width = 502
+        Top = 397
+        Width = 376
         Align = alBottom
         ResizeAnchor = akBottom
       end
       object GroupBox3: TGroupBox[2]
         Left = 1
         Height = 256
-        Top = 400
-        Width = 502
+        Top = 403
+        Width = 376
         Align = alBottom
         Caption = 'Participants'
         ClientHeight = 238
-        ClientWidth = 494
+        ClientWidth = 368
         TabOrder = 2
         object DbGParticipants: TDBGrid
           Left = 0
           Height = 238
           Top = 0
-          Width = 494
+          Width = 368
           Align = alClient
           Color = clWindow
           Columns = <>
