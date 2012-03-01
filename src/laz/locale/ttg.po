@@ -31,11 +31,6 @@ msgctxt "dsourcebaseconsts.sflfillrequirement_idresource"
 msgid "Resource"
 msgstr ""
 
-#: dsourcebaseconsts.sflfillrequirement_idresourcetype
-msgctxt "dsourcebaseconsts.sflfillrequirement_idresourcetype"
-msgid "Resource Type"
-msgstr ""
-
 #: dsourcebaseconsts.sflfillrequirement_idtheme
 msgctxt "dsourcebaseconsts.sflfillrequirement_idtheme"
 msgid "Theme"

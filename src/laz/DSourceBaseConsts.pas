@@ -2,7 +2,7 @@
 unit DSourceBaseConsts;
 
 (*
-  01/03/2012 12:05
+  01/03/2012 13:02
 
   Warning:
 
@@ -46,7 +46,7 @@ resourcestring
   SFlDay_NaDay = 'Name';
   SFlResourceType_IdResourceType = 'IdResourceType';
   SFlResourceType_NaResourceType = 'Name';
-  SFlResourceType_DefaultLimit = 'Default Limit';
+  SFlResourceType_DefaultMaxNumResource = 'Default Max Number';
   SFlResourceType_ValResourceType = 'Value';
   SFlHour_IdHour = 'Id';
   SFlHour_NaHour = 'Name';
@@ -74,7 +74,7 @@ resourcestring
   SFlResourceRestriction_IdResourceRestrictionType = 'Restriction Type';
   SFlRequirement_IdTheme = 'Theme';
   SFlRequirement_IdResourceType = 'Resource Type';
-  SFlRequirement_Limit = 'Limit';
+  SFlRequirement_MaxNumResource = 'Limit';
   SFlParticipant_IdActivity = 'Category';
   SFlParticipant_IdResource = 'Resource';
   SFlParticipant_NumResource = 'Number';

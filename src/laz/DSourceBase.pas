@@ -2,7 +2,7 @@
 unit DSourceBase;
 
 (*
-  01/03/2012 12:05
+  01/03/2012 13:02
 
   Warning:
 
@@ -237,7 +237,7 @@ begin
     Add('TbDay.NaDay=' + SFlDay_NaDay);
     Add('TbResourceType.IdResourceType=' + SFlResourceType_IdResourceType);
     Add('TbResourceType.NaResourceType=' + SFlResourceType_NaResourceType);
-    Add('TbResourceType.DefaultLimit=' + SFlResourceType_DefaultLimit);
+    Add('TbResourceType.DefaultMaxNumResource=' + SFlResourceType_DefaultMaxNumResource);
     Add('TbResourceType.ValResourceType=' + SFlResourceType_ValResourceType);
     Add('TbHour.IdHour=' + SFlHour_IdHour);
     Add('TbHour.NaHour=' + SFlHour_NaHour);
@@ -265,7 +265,7 @@ begin
     Add('TbResourceRestriction.IdResourceRestrictionType=' + SFlResourceRestriction_IdResourceRestrictionType);
     Add('TbRequirement.IdTheme=' + SFlRequirement_IdTheme);
     Add('TbRequirement.IdResourceType=' + SFlRequirement_IdResourceType);
-    Add('TbRequirement.Limit=' + SFlRequirement_Limit);
+    Add('TbRequirement.MaxNumResource=' + SFlRequirement_MaxNumResource);
     Add('TbParticipant.IdActivity=' + SFlParticipant_IdActivity);
     Add('TbParticipant.IdResource=' + SFlParticipant_IdResource);
     Add('TbParticipant.NumResource=' + SFlParticipant_NumResource);

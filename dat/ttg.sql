@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  01/03/2012 12:05
+  01/03/2012 13:02
 
   Warning:
 
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `Day`(
 CREATE TABLE IF NOT EXISTS `ResourceType`(
     `IdResourceType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Type Id */,
     `NaResourceType` VARCHAR(15) NOT NULL UNIQUE /* Name */,
-    `DefaultLimit` INTEGER NOT NULL /* Default Limit */,
+    `DefaultMaxNumResource` INTEGER NOT NULL /* Default Max Number of Resources */,
     `ValResourceType` INTEGER NOT NULL /* Value of Clashes */
 ); /* Resource types */
 CREATE TABLE IF NOT EXISTS `Hour`(
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
 CREATE TABLE IF NOT EXISTS `Requirement`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdResourceType` INTEGER NOT NULL /* Resource Type Id */,
-    `Limit` INTEGER NOT NULL /* Max Number of Resource */,
+    `MaxNumResource` INTEGER NOT NULL /* Max Number of Resource */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdResourceType`),
   CONSTRAINT `ResourceTypeRequirement` FOREIGN KEY (`IdResourceType`)
     REFERENCES `ResourceType`(`IdResourceType`) ON UPDATE CASCADE ON DELETE RESTRICT,
