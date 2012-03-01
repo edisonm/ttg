@@ -95,7 +95,8 @@ msgctxt "dsourcebaseconsts.sflrequirement_idtheme"
 msgid "Theme"
 msgstr "Materia"
 
-#: dsourcebaseconsts.sflrequirement_limit
+#: dsourcebaseconsts.sflrequirement_maxnumresource
+msgctxt "dsourcebaseconsts.sflrequirement_maxnumresource"
 msgid "Limit"
 msgstr ""
 
@@ -139,8 +140,8 @@ msgctxt "dsourcebaseconsts.sflresourcerestriction_idresourcerestrictiontype"
 msgid "Restriction Type"
 msgstr "Tipo de Restriccion"
 
-#: dsourcebaseconsts.sflresourcetype_defaultlimit
-msgid "Default Limit"
+#: dsourcebaseconsts.sflresourcetype_defaultmaxnumresource
+msgid "Default Max Number"
 msgstr ""
 
 #: dsourcebaseconsts.sflresourcetype_idresourcetype

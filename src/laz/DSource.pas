@@ -191,7 +191,7 @@ begin
         Append;
         FindField('IdResourceType').AsInteger := i;
         FindField('NaResourceType').AsString := SNaResourceType[i];
-        FindField('DefaultLimit').AsInteger := 1;
+        FindField('DefaultMaxNumResource').AsInteger := 1;
         FindField('ValResourceType').AsFloat := EValResourceType[i];
         Post;
       end;
