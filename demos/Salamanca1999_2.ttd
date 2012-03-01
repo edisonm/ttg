@@ -1541,7 +1541,7 @@ ResourceRestriction
 "83";"6";"7";"4";
 Requirement
 414
-"IdTheme";"IdResourceType";"Limit";
+"IdTheme";"IdResourceType";"MaxNumResource";
 "1";"1";"1";
 "1";"2";"1";
 "1";"3";"1";

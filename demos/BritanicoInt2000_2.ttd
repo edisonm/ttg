@@ -1025,7 +1025,7 @@ ResourceRestriction
 "97";"6";"7";"3";
 Requirement
 296
-"IdTheme";"IdResourceType";"Limit";
+"IdTheme";"IdResourceType";"MaxNumResource";
 "1";"1";"1";
 "1";"2";"1";
 "1";"3";"1";

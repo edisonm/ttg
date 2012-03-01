@@ -936,7 +936,7 @@ ResourceRestriction
 "83";"6";"7";"4";
 Requirement
 0
-"IdTheme";"IdResourceType";"Limit";
+"IdTheme";"IdResourceType";"MaxNumResource";
 Participant
 849
 "IdActivity";"IdResource";"NumResource";
