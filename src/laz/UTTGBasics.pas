@@ -22,10 +22,23 @@ type
   TIntegerArrayArray = array [0 .. 0] of PIntegerArray;
   PBooleanArray = ^TBooleanArray;
   TBooleanArray = array [0 .. 16383] of Boolean;
+  
+type
+  generic TArrayToString<T,E> = class
+  public
+    class function ValueToString(const Value: array of T; const Separator: string = ' '): string;
+  end;
+  
+  TIntToString = class
+  public
+    class function ValueToString(const Value: Integer; const Separator: string): string;
+  end;
+  
+  TIntArrayToString = specialize TArrayToString<Integer,TIntToString>;
+  TIntArrayArrayToString = specialize TArrayToString<TDynamicIntegerArray,TIntArrayToString>;
 
 procedure EqualSpaced(Strings: TStrings; ini, fin: Integer; const delim: string);
-function ExtractString(const Strings: string; var Pos: Integer; Separator:
-  Char): string;
+function ExtractString(const Strings: string; var Pos: Integer; Separator: Char): string;
 procedure LoadNames(Source, Destination: TStrings);
 function NullToZero(A: Variant): Variant;
 function VarArrToStr(v: Variant; Separator: string = '; '): string;
@@ -88,19 +101,46 @@ begin
   else
     Result := A;
 end;
+  
+class function TIntToString.ValueToString(const Value: Integer; const Separator: string): string;
+begin
+  Result := IntToStr(Value);
+end;
+
+class function TArrayToString.ValueToString(const Value: array of T; const Separator: string = ' '): string;
+var
+  i: Integer;
+  SElement: string;
+begin
+  Result := '';
+  begin
+    for i := Low(Value) to High(Value) do
+    begin
+      SElement := E.ValueToString(Value[i], Separator);
+      if Result = '' then
+        Result := SElement
+      else
+        Result := Result + Separator + SElement;
+    end;
+    Result := '[' + Result + ']';
+  end
+end;
 
 function VarArrToStr(v: Variant; Separator: string = '; '): string;
 var
   i: Integer;
 begin
   Result := '';
-  if VarIsArray(v) then begin
-    for i := VarArrayLowBound(v, 1) to VarArrayHighBound(v, 1) do begin
+  if VarIsArray(v) then
+  begin
+    for i := VarArrayLowBound(v, 1) to VarArrayHighBound(v, 1) do
+    begin
       if Result = '' then
-        Result := v[i]
+        Result := VarArrToStr(v[i])
       else
-        Result := Result + Separator + VarToStr(v[i]);
+        Result := Result + Separator + VarArrToStr(v[i]);
     end;
+    Result := '[' + Result + ']';
   end
   else
     Result := VarToStr(v);

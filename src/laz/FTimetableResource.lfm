@@ -305,7 +305,8 @@ inherited TimetableResourceForm: TTimetableResourceForm
       ' Activity.IdActivity,'
       ' IdHour,'
       ' IdDay,'
-      ' Activity.IdTheme'
+      ' Activity.IdTheme,'
+      ' Activity.NaActivity'
       'FROM'
       'TimetableDetail INNER JOIN TimetableResource'
       '   ON TimetableDetail.IdTimetable=TimetableResource.IdTimetable'
@@ -417,6 +418,21 @@ inherited TimetableResourceForm: TTimetableResourceForm
       LookupDataSet = SourceDataModule.TbTheme
       LookupKeyFields = 'IdTheme'
       LookupResultField = 'NaTheme'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 15
+    end
+    object QuTimetableResourceNaActivity: TStringField
+      DisplayWidth = 15
+      FieldKind = fkLookup
+      FieldName = 'NaActivity'
+      Index = 9
+      KeyFields = 'IdActivity'
+      LookupCache = False
+      LookupDataSet = SourceDataModule.TbActivity
+      LookupKeyFields = 'IdActivity'
+      LookupResultField = 'NaActivity'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False

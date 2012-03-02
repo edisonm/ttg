@@ -1293,6 +1293,10 @@ msgstr "..."
 msgid "Version"
 msgstr "Version"
 
+#: tthemeform.actfilterbyresourcetype.caption
+msgid "Filter by Resource Type"
+msgstr ""
+
 #: tthemeform.caption
 #, fuzzy
 #| msgid "Resource"

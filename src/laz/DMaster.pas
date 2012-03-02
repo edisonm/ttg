@@ -338,7 +338,9 @@ begin
   FConfigStorage := TTTGConfig.Create(Self);
   with FStringsShowResource do
   begin
-    add('Theme=NaTheme');
+    Add('Theme=NaTheme');
+    Add('Activity=NaActivity');
+    Add('Theme_Activity=NaTheme;NaActivity');
   end;
   with SourceDataModule do
   begin

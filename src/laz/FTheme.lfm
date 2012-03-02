@@ -1,10 +1,10 @@
 inherited ThemeForm: TThemeForm
-  Left = 382
-  Height = 629
+  Left = 375
+  Height = 644
   Top = 283
   Width = 1024
   Caption = 'Theme'
-  ClientHeight = 629
+  ClientHeight = 644
   ClientWidth = 1024
   OnActivate = FormActivate
   OnClose = FormClose
@@ -16,9 +16,29 @@ inherited ThemeForm: TThemeForm
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
     end
+    object DBLResourceType: TDBLookupComboBox[3]
+      Left = 420
+      Height = 24
+      Top = 2
+      Width = 231
+      KeyField = 'IdResourceType'
+      ListField = 'NaResourceType'
+      ListFieldIndex = 0
+      ListSource = SourceDataModule.DSResourceType
+      LookupCache = False
+      TabOrder = 1
+    end
+    object CBFilterByResourceType: TCheckBox[4]
+      Left = 257
+      Height = 21
+      Top = 2
+      Width = 163
+      Action = ActFilterByResourceType
+      TabOrder = 2
+    end
   end
   inherited PnStatus: TPanel
-    Top = 610
+    Top = 625
     Width = 1024
     ClientWidth = 1024
     inherited LbRecordNo: TLabel
@@ -26,18 +46,18 @@ inherited ThemeForm: TThemeForm
     end
   end
   inherited PnEditor: TPanel
-    Height = 585
+    Height = 600
     Width = 1024
-    ClientHeight = 585
+    ClientHeight = 600
     ClientWidth = 1024
     inherited GroupBox: TGroupBox
-      Height = 583
+      Height = 598
       Width = 638
       Caption = 'Themes'
-      ClientHeight = 565
+      ClientHeight = 580
       ClientWidth = 630
       inherited DBGrid: TDBGrid
-        Height = 288
+        Height = 303
         Width = 630
         OnDblClick = DBGridDblClick
       end
@@ -45,7 +65,7 @@ inherited ThemeForm: TThemeForm
         Cursor = crVSplit
         Left = 0
         Height = 6
-        Top = 288
+        Top = 303
         Width = 630
         Align = alBottom
         ResizeAnchor = akBottom
@@ -53,7 +73,7 @@ inherited ThemeForm: TThemeForm
       object Panel1: TPanel[2]
         Left = 0
         Height = 271
-        Top = 294
+        Top = 309
         Width = 630
         Align = alBottom
         ClientHeight = 271
@@ -122,7 +142,7 @@ inherited ThemeForm: TThemeForm
     inherited Splitter1: TSplitter
       Cursor = crHSplit
       Left = 639
-      Height = 583
+      Height = 598
       Top = 1
       Width = 6
       Align = alRight
@@ -130,20 +150,20 @@ inherited ThemeForm: TThemeForm
     end
     inherited PnDetail: TPanel
       Left = 645
-      Height = 583
+      Height = 598
       Top = 1
       Width = 378
       Align = alRight
-      ClientHeight = 583
+      ClientHeight = 598
       ClientWidth = 378
       inherited GrBDetail: TGroupBox
-        Height = 319
+        Height = 321
         Width = 376
         Caption = 'Activity'
-        ClientHeight = 301
+        ClientHeight = 303
         ClientWidth = 368
         inherited DBGridDetail: TDBGrid
-          Height = 301
+          Height = 303
           Hint = 'Activity of Themes'
           Width = 368
           ShowHint = True
@@ -153,24 +173,24 @@ inherited ThemeForm: TThemeForm
         Cursor = crVSplit
         Left = 1
         Height = 6
-        Top = 320
+        Top = 322
         Width = 376
         Align = alBottom
         ResizeAnchor = akBottom
       end
       object GroupBox3: TGroupBox[2]
         Left = 1
-        Height = 256
-        Top = 326
+        Height = 269
+        Top = 328
         Width = 376
         Align = alBottom
         Caption = 'Participants'
-        ClientHeight = 238
+        ClientHeight = 251
         ClientWidth = 368
         TabOrder = 2
         object DbGParticipants: TDBGrid
           Left = 0
-          Height = 238
+          Height = 251
           Top = 0
           Width = 368
           Align = alClient
@@ -331,6 +351,10 @@ inherited ThemeForm: TThemeForm
     top = 144
     inherited ActFind: TAction
       OnExecute = ActFindExecute
+    end
+    object ActFilterByResourceType: TAction[2]
+      Caption = 'Filter by Resource Type'
+      OnExecute = ActFilterByResourceTypeExecute
     end
   end
   inherited DataSourceDetail: TDatasource

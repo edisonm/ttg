@@ -52,9 +52,8 @@ type
   generic TSortAlgorithm<K,T> = class
     class procedure Quicksort(var KeyList: array of K; var ValueList: array of T; min, max: Integer); overload;
     class procedure BubbleSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer); overload;
-    procedure SelectionSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer);
-    procedure PartialSort(var KeyList: array of K; var ValueList: array of T; min, max, med: Integer);
-
+    class procedure SelectionSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer);
+    class procedure PartialSort(var KeyList: array of K; var ValueList: array of T; min, max, med: Integer);
     class procedure Quicksort(var KeyList: array of K; min, max: Integer); overload;
     class procedure BubbleSort(var KeyList: array of K; min, max: Integer); overload;
   end;
@@ -205,9 +204,9 @@ end;
 
 // Run selectionsort.
 
-procedure TSortAlgorithm.SelectionSort(var KeyList: array of K;
-                                       var ValueList: array of T;
-                                       min, max: Integer);
+class procedure TSortAlgorithm.SelectionSort(var KeyList: array of K;
+                                             var ValueList: array of T;
+                                             min, max: Integer);
 var
   i, j, best_j: Integer;
   best_value1: K;
@@ -235,9 +234,9 @@ end;
 
 // Ordena una lista que esta ordenada hasta med:
 
-procedure TSortAlgorithm.PartialSort(var KeyList: array of K;
-                                     var ValueList: array of T;
-                                     min, max, med: Integer);
+class procedure TSortAlgorithm.PartialSort(var KeyList: array of K;
+                                           var ValueList: array of T;
+                                           min, max, med: Integer);
 var
   value1: array[0..4095] of K;
   value2: array[0..4095] of T;

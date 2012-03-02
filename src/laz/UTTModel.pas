@@ -756,7 +756,6 @@ var
         FActivitySorted[HighActivitySorted] := Activity;
         Inc(HighActivitySorted);
         ActivityIsPlaced[Activity] := True;
-        FGroupCount := Group;
         Count := Length(FGroupSessions[Group]);
         SetLength(FGroupSessions[Group], Count + Length(FActivityToSessions[Activity]));
         for ActivitySession := 0 to High(FActivityToSessions[Activity]) do
@@ -797,10 +796,10 @@ var
       for ResourceTheme := 0 to High(FResourceToThemes[Resource]) do
       begin
         Theme := FResourceToThemes[Resource, ResourceTheme];
+        UBound := Min(FThemeResourceTypeToLimit[Theme, FResourceToResourceType[Resource]],
+                      FResourceThemeToNumResources[Resource, ResourceTheme]);
         for Component := 0 to High(FThemeToComposition[Theme]) do
         begin
-          UBound := Min(FThemeResourceTypeToLimit[Theme, FResourceToResourceType[Resource]],
-                        FResourceThemeToNumResources[Resource, ResourceTheme]);
           Inc(Duration, UBound * FThemeToComposition[Theme, Component]);
         end;
       end;
@@ -881,10 +880,11 @@ var
       if Length(FGroupSessions[Group]) > 0 then
       begin
         Inc(Group);
+        SetLength(FGroupSessions, Group + 1);
       end;
     end;
     FGRoupCount := Group;
-    SetLength(FGroupSessions, Group);
+    SetLength(FGroupSessions, FGroupCount);
     WriteLn;
   end;
 begin
@@ -1084,12 +1084,10 @@ begin
         ThemeToRemainings[Theme, FillRequirement]
           := FThemeToNumResources[Theme, FillRequirement];
     end;
-    SetLength(ActivityResourceTypeToNumber, Length(FActivityResourceTypeToNumber));
+    SetLength(ActivityResourceTypeToNumber, FActivityCount, FResourceTypeCount);
     for Activity := 0 to FActivityCount - 1 do
     begin
-      SetLength(ActivityResourceTypeToNumber[Activity],
-                Length(FActivityResourceTypeToNumber[Activity]));
-      for ResourceType := 0 to High(ActivityResourceTypeToNumber[Activity]) do
+      for ResourceType := 0 to FResourceTypeCount -1 do
         ActivityResourceTypeToNumber[Activity, ResourceType]
           := FActivityResourceTypeToNumber[Activity, ResourceType];
       for Participant := 0 to High(FActivityToResources[Activity]) do
@@ -1110,7 +1108,8 @@ begin
     end;
     for Count := 0 to FActivityCount - 1 do
     begin
-      Activity := FActivitySorted[Count];
+      //Activity := FActivitySorted[Count];
+      Activity := Count;
       Theme := FActivityToTheme[Activity];
       for FillRequirement := 0 to High(FThemeToResources[Theme]) do
       begin
@@ -1126,12 +1125,12 @@ begin
           Dec(ThemeToRemainings[Theme, FillRequirement], NumAssigned);
           Inc(ActivityResourceTypeToNumber[Activity, ResourceType], NumAssigned);
           Inc(FTTActivityToNumResources[Activity, Participant], NumAssigned);
-          {WriteLn(Format('FTTActivityToNumResources[%d,%d]=%d', [Activity, Participant,
-            FTTActivityToNumResources[Activity, Participant]]));}
-          
         end
       end;
+      WriteLn(Format('Count=%d/%d', [Count, FActivityCount]));
     end;
+    WriteLn(Format('ActivityResourceTypeToNumber=%s', [TIntArrayArrayToString.ValueToString(ActivityResourceTypeToNumber)]));
+    WriteLn(Format('ActivityResourceTypeToNumber=%s', [VarArrToStr(ActivityResourceTypeToNumber)]));
     for Count := 0 to FActivityCount - 1 do
     begin
       Activity := FActivitySorted[Count];

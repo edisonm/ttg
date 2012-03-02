@@ -1278,6 +1278,10 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
+#: tthemeform.actfilterbyresourcetype.caption
+msgid "Filter by Resource Type"
+msgstr ""
+
 #: tthemeform.caption
 msgctxt "TTHEMEFORM.CAPTION"
 msgid "Theme"

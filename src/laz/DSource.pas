@@ -16,6 +16,7 @@ type
   TSourceDataModule = class(TSourceBaseDataModule)
     ZTables: TZReadOnlyQuery;
     QuResource: TZReadOnlyQuery;
+    procedure DSResourceTypeDataChange(Sender: TObject; Field: TField);
     procedure TbThemeBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
@@ -56,7 +57,7 @@ implementation
 {$ENDIF}
 
 uses
-  Variants, FConfig, UTTGDBUtils, URelUtils, UTTGConsts, DSourceBaseConsts;
+  Variants, FConfig, UTTGDBUtils, URelUtils, UTTGConsts;
 
 procedure TSourceDataModule.TbThemeBeforePost(DataSet: TDataSet);
 var
@@ -72,6 +73,14 @@ begin
     // with FindField('IdCategory') do DefaultExpression := AsString;
     // with FindField('IdParallel') do DefaultExpression := AsString;
   end;
+end;
+
+procedure TSourceDataModule.DSResourceTypeDataChange(Sender: TObject;
+  Field: TField);
+begin
+  TbParticipant.Filter := 'IdResourceType='
+    + IntToStr(TbResourceType.FindField('IdResourceType').AsInteger);
+  TbFillRequirement.Filter := TbParticipant.Filter;
 end;
 
 procedure TSourceDataModule.TbThemeCalcFields(DataSet: TDataSet);
@@ -242,8 +251,10 @@ begin
   NewLookupField(TbResourceRestriction, TbResourceRestrictionType,
                   'IdResourceRestrictionType', 'NaResourceRestrictionType');
   NewLookupField(TbParticipant, TbResource, 'IdResource', 'NaResource');
+  {NewLookupField(TbParticipant, TbResource, 'IdResource', 'IdResourceType');}
   NewLookupField(TbRequirement, TbResourceType, 'IdResourceType', 'NaResourceType');
   NewLookupField(TbFillRequirement, TbResource, 'IdResource', 'NaResource');
+  {NewLookupField(TbFillRequirement, TbResource, 'IdResource', 'IdResourceType');}
 end;
 
 procedure TSourceDataModule.PrepareCalcFields;

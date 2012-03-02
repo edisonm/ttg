@@ -16,9 +16,12 @@ type
   { TThemeForm }
 
   TThemeForm	= class(TMasterDetailEditorForm)
+    ActFilterByResourceType: TAction;
+    CBFilterByResourceType: TCheckBox;
     DbGParticipants: TDBGrid;
     DbGParticipants1: TDBGrid;
     DbGParticipants2: TDBGrid;
+    DBLResourceType: TDBLookupComboBox;
     GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;
     GroupBox5: TGroupBox;
@@ -26,8 +29,10 @@ type
     Splitter2: TSplitter;
     Splitter3: TSplitter;
     Splitter4: TSplitter;
+    procedure ActFilterByResourceTypeExecute(Sender: TObject);
     procedure ActFindExecute(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
+    procedure DSResourceTypeDataChange(Sender: TObject; Field: TField);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure DataSourceStateChange(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -70,6 +75,28 @@ begin
   inherited;
 end;
 
+procedure TThemeForm.ActFilterByResourceTypeExecute(Sender: TObject);
+begin
+  with SourceDataModule do
+  begin
+    with ActFilterByResourceType do
+    begin
+      //DBLResourceType.Enabled := Checked;
+      if not Checked then
+      begin
+        TbResource.MasterFields := 'IdResourceType';
+        TbResource.LinkedFields := 'IdResourceType';
+        TbResource.MasterSource := DSResourceType;
+      end
+      else
+      begin
+        TbResource.MasterSource := nil;
+      end;
+      TbResource.Refresh;
+    end;
+  end;
+end;
+
 procedure TThemeForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   inherited;
@@ -84,6 +111,10 @@ procedure TThemeForm.DataSourceDataChange(Sender: TObject; Field: TField);
 begin
   inherited;
   {Caption := FSuperTitle + Format(' - %s: %d', [SLoad, GetCurrentLoad]);}
+end;
+
+procedure TThemeForm.DSResourceTypeDataChange(Sender: TObject; Field: TField);
+begin
 end;
 
 procedure TThemeForm.FormActivate(Sender: TObject);

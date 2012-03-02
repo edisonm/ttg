@@ -51,7 +51,7 @@ type
 
 implementation
 uses
-  UTTGBasics, dsourcebaseconsts;
+  UTTGBasics, DSourceBaseConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}

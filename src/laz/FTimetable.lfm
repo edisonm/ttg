@@ -1,5 +1,5 @@
 inherited TimetableForm: TTimetableForm
-  Left = 583
+  Left = 576
   Height = 545
   Top = 293
   Width = 899
@@ -81,53 +81,59 @@ inherited TimetableForm: TTimetableForm
     Width = 899
     ClientHeight = 501
     ClientWidth = 899
-    inherited DBGrid: TDBGrid
+    inherited GroupBox: TGroupBox
       Height = 499
-      Width = 411
+      Width = 434
       Align = alLeft
-      Columns = <      
-        item
-          PickList.Strings = (          )
-          Title.Caption = 'Timetable Id'
-          FieldName = 'IdTimetable'
-        end      
-        item
-          PickList.Strings = (          )
-          ReadOnly = True
-          Title.Caption = 'Start'
-          Width = 110
-          FieldName = 'TimeIni'
-        end      
-        item
-          PickList.Strings = (          )
-          ReadOnly = True
-          Title.Caption = 'End'
-          Width = 110
-          FieldName = 'TimeEnd'
-        end>
-      OnDblClick = DBGridDblClick
+      ClientHeight = 481
+      ClientWidth = 426
+      inherited DBGrid: TDBGrid
+        Height = 481
+        Width = 426
+        Columns = <        
+          item
+            PickList.Strings = (            )
+            Title.Caption = 'Timetable Id'
+            FieldName = 'IdTimetable'
+          end        
+          item
+            PickList.Strings = (            )
+            ReadOnly = True
+            Title.Caption = 'Start'
+            Width = 110
+            FieldName = 'TimeIni'
+          end        
+          item
+            PickList.Strings = (            )
+            ReadOnly = True
+            Title.Caption = 'End'
+            Width = 110
+            FieldName = 'TimeEnd'
+          end>
+        OnDblClick = DBGridDblClick
+      end
     end
     object Splitter1: TSplitter[1]
-      Left = 412
+      Left = 435
       Height = 499
       Top = 1
       Width = 5
     end
     object Panel2: TPanel[2]
-      Left = 417
+      Left = 440
       Height = 499
       Top = 1
-      Width = 481
+      Width = 458
       Align = alClient
       BevelOuter = bvNone
       ClientHeight = 499
-      ClientWidth = 481
+      ClientWidth = 458
       TabOrder = 1
       object DBMSummary: TDBMemo
         Left = 0
         Height = 499
         Top = 0
-        Width = 481
+        Width = 458
         Align = alClient
         DataField = 'Summary'
         DataSource = DataSource
@@ -1248,6 +1254,7 @@ inherited TimetableForm: TTimetableForm
     DataSource = SourceDataModule.DSTimetable
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
+    IndexFieldNames = 'IdTimetable Asc;IdDay Asc;IdHour Asc'
     left = 312
     top = 280
     ParamData = <    
