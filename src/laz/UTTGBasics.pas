@@ -136,11 +136,10 @@ begin
     for i := VarArrayLowBound(v, 1) to VarArrayHighBound(v, 1) do
     begin
       if Result = '' then
-        Result := VarArrToStr(v[i])
+        Result := VarToStr(v[i])
       else
-        Result := Result + Separator + VarArrToStr(v[i]);
+        Result := Result + Separator + VarToStr(v[i]);
     end;
-    Result := '[' + Result + ']';
   end
   else
     Result := VarToStr(v);
