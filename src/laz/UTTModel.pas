@@ -719,12 +719,12 @@ var
       FieldTheme := FindField('IdTheme');
       FieldResource := FindField('IdResource');
       FieldNumResource := FindField('NumResource');
-      NumResource := FieldNumResource.AsInteger;
       for FillRequirement := 0 to FillRequirementCount - 1 do
       begin
         Theme := FIdThemeToTheme[FieldTheme.AsInteger - FMinIdTheme];
         Resource := FIdResourceToResource[FieldResource.AsInteger - FMinIdResource];
         ResourceType := FResourceToResourceType[Resource];
+        NumResource := FieldNumResource.AsInteger;
         Counter := Length(FThemeToResources[Theme]);
         SetLength(FThemeToResources[Theme], Counter + 1);
         SetLength(FThemeToNumResources[Theme], Counter + 1);
@@ -808,10 +808,6 @@ var
         raise Exception.CreateFmt(SResourceOverflow, [FResourceToName[Resource], Duration, Number]);
       ResourceToFreedomDegrees[Resource] := FreedomDegrees;
       FResourceSorted[Resource] := Resource;
-      WriteLn(Format('Resource %s(%d), FreedomDegrees=%g',
-                     [FResourceToName[Resource],
-                      FResourceToIdResource[Resource],
-                      ResourceToFreedomDegrees[Resource]]));
     end;
     for Activity := 0 to FActivityCount - 1 do
     begin
@@ -821,8 +817,8 @@ var
         ActivityResourceToFreedomDegrees[ActivityResource] :=
           ResourceToFreedomDegrees[FActivityToResources[Activity, ActivityResource]];
       end;
-      TSortDoubleInt.QuickSort(ActivityResourceToFreedomDegrees, FActivityToResources[Activity],
-                               0, High(FActivityToResources[Activity]));
+      TSortDoubleInt.QuickSort(ActivityResourceToFreedomDegrees, FActivityToResources[Activity]);
+      TSortDoubleInt.QuickSort(ActivityResourceToFreedomDegrees, FActivityToNumResources[Activity]);
     end;
     for Theme := 0 to FThemeCount - 1 do
     begin
@@ -832,11 +828,11 @@ var
         ThemeResourceToFreedomDegrees[ThemeResource] :=
           ResourceToFreedomDegrees[FThemeToResources[Theme, ThemeResource]];
       end;
-      TSortDoubleInt.QuickSort(ThemeResourceToFreedomDegrees, FThemeToResources[Theme],
-                               0, High(FThemeToResources[Theme]));
+      TSortDoubleInt.QuickSort(ThemeResourceToFreedomDegrees, FThemeToResources[Theme]);
+      TSortDoubleInt.QuickSort(ThemeResourceToFreedomDegrees, FThemeToNumResources[Theme]);
+      TSortDoubleInt.QuickSort(ThemeResourceToFreedomDegrees, FThemeToLimits[Theme]);
     end;
     TSortDoubleInt.QuickSort(ResourceToFreedomDegrees, FResourceSorted, 0, FResourceCount - 1);
-    WriteLn;
     SetLength(ActivityIsPlaced, FActivityCount);
     for Activity := 0 to FActivityCount - 1 do
     begin
@@ -851,9 +847,10 @@ var
     for Counter := 0 to FResourceCount -1 do
     begin
       Resource := FResourceSorted[Counter];
-      WriteLn(Format('Resource %s(%d), FreedomDegrees=%g',
+      WriteLn(Format('Resource %s/%d/%d, FreedomDegrees=%g',
                      [FResourceToName[Resource],
                       FResourceToIdResource[Resource],
+                      Resource,
                       ResourceToFreedomDegrees[Group]]));
       for ResourceActivity := 0 to High(FResourceToActivities[Resource]) do
       begin
@@ -885,7 +882,6 @@ var
     end;
     FGRoupCount := Group;
     SetLength(FGroupSessions, FGroupCount);
-    WriteLn;
   end;
 begin
   inherited Create;
@@ -925,6 +921,8 @@ begin
     LoadRequirement;
     LoadFillRequirement;
     LoadGreedyData;
+    WriteLn(Format('FThemeToResources=%s', [TIntArrayArrayToString.ValueToString(FThemeToResources)]));
+    WriteLn(Format('FThemeToNumResources=%s', [TIntArrayArrayToString.ValueToString(FThemeToNumResources)]));
   end;
 end;
 
@@ -1108,8 +1106,8 @@ begin
     end;
     for Count := 0 to FActivityCount - 1 do
     begin
-      //Activity := FActivitySorted[Count];
-      Activity := Count;
+      Activity := FActivitySorted[Count];
+      //Activity := Count;
       Theme := FActivityToTheme[Activity];
       for FillRequirement := 0 to High(FThemeToResources[Theme]) do
       begin
@@ -1127,10 +1125,7 @@ begin
           Inc(FTTActivityToNumResources[Activity, Participant], NumAssigned);
         end
       end;
-      WriteLn(Format('Count=%d/%d', [Count, FActivityCount]));
     end;
-    WriteLn(Format('ActivityResourceTypeToNumber=%s', [TIntArrayArrayToString.ValueToString(ActivityResourceTypeToNumber)]));
-    WriteLn(Format('ActivityResourceTypeToNumber=%s', [VarArrToStr(ActivityResourceTypeToNumber)]));
     for Count := 0 to FActivityCount - 1 do
     begin
       Activity := FActivitySorted[Count];
@@ -1404,18 +1399,6 @@ var
 begin
   with TTimetableModel(Model) do
   begin
-    for Activity := 0 to FActivityCount - 1 do
-    begin
-      {
-      for Participant := 0 to High(FTTActivityToResources[Activity]) do
-      begin
-        WriteLn(Format('FTTActivityToResources[%d,%d]=%d',
-                       [Activity, Participant, FTTActivityToResources[Activity, Participant]]));
-        WriteLn(Format('FTTActivityToNumResources[%d,%d]=%d',
-                       [Activity, Participant, FTTActivityToNumResources[Activity, Participant]]));
-      end;
-      }
-    end;
     Session1 := Random(FSessionCount);
     Activity1 := FSessionToActivity[Session1];
     repeat

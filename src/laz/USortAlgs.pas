@@ -50,17 +50,32 @@ uses
 
 type
   generic TSortAlgorithm<K,T> = class
-    class procedure Quicksort(var KeyList: array of K; var ValueList: array of T; min, max: Integer); overload;
+    class procedure QuickSort(const KeyList: array of K; var ValueList: array of T); overload;
+    class procedure QuickSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer); overload;
     class procedure BubbleSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer); overload;
     class procedure SelectionSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer);
     class procedure PartialSort(var KeyList: array of K; var ValueList: array of T; min, max, med: Integer);
-    class procedure Quicksort(var KeyList: array of K; min, max: Integer); overload;
+    class procedure QuickSort(var KeyList: array of K; min, max: Integer); overload;
     class procedure BubbleSort(var KeyList: array of K; min, max: Integer); overload;
   end;
 
 implementation
 
-class procedure TSortAlgorithm.Quicksort(var KeyList: array of K; var ValueList: array of T; min, max: Integer);
+class procedure TSortAlgorithm.QuickSort(const KeyList: array of K; var ValueList: array of T);
+var
+  i, l: Integer;
+  KeyListCopy: array of K;
+begin
+  l := Length(KeyList);
+  if l = 0 then
+    exit;
+  SetLength(KeyListCopy, l);
+  for i := 0 to High(KeyList) do
+    KeyListCopy[i] := KeyList[i];
+  QuickSort(KeyListCopy, ValueList, Low(KeyList), High(KeyList));
+end;
+
+class procedure TSortAlgorithm.QuickSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer);
 var
   med_value1: K;
   med_value2: T;
@@ -84,8 +99,7 @@ begin
   while (True) do
   begin
         // Look down from hi for a value < med_value.
-    while (KeyList[hi] >= med_value1) and ((KeyList[hi] <> med_value1) or (ValueList[hi]
-      >= med_value2)) do
+    while (KeyList[hi] >= med_value1) do // and ((KeyList[hi] <> med_value1) or (ValueList[hi] >= med_value2)) do
     begin
       hi := hi - 1;
       if (hi <= lo) then Break;
@@ -104,8 +118,7 @@ begin
 
         // Look up from lo for a value >= med_value.
     lo := lo + 1;
-    while (KeyList[lo] < med_value1) or ((KeyList[lo] = med_value1) and (ValueList[lo] <
-      med_value2)) do
+    while (KeyList[lo] < med_value1) do // or ((KeyList[lo] = med_value1) and (ValueList[lo] < med_value2)) do
     begin
       lo := lo + 1;
       if (lo >= hi) then Break;
@@ -146,7 +159,7 @@ begin
     while (i <= max) do
     begin
       // Find a bubble.
-      if (KeyList[i - 1] > KeyList[i]) or ((KeyList[i - 1] = KeyList[i]) and (ValueList[i - 1] > ValueList[i])) then
+      if (KeyList[i - 1] > KeyList[i]) then // or ((KeyList[i - 1] = KeyList[i]) and (ValueList[i - 1] > ValueList[i])) then
       begin
         // See where to drop the bubble.
         tmp1 := KeyList[i - 1];
@@ -157,7 +170,7 @@ begin
           ValueList[j - 1] := ValueList[j];
           j := j + 1;
           if (j > max) then Break;
-        until (KeyList[j] >= tmp1) and ((KeyList[j] <> tmp1) or (ValueList[j] >= tmp2));
+        until (KeyList[j] >= tmp1); // and ((KeyList[j] <> tmp1) or (ValueList[j] >= tmp2));
         KeyList[j - 1] := tmp1;
         ValueList[j - 1] := tmp2;
         last_swap := j - 1;
@@ -177,7 +190,7 @@ begin
     while (i >= min) do
     begin
     // Find a bubble.
-      if (KeyList[i + 1] < KeyList[i]) or ((KeyList[i + 1] = KeyList[i]) and (ValueList[i + 1] < ValueList[i])) then
+      if (KeyList[i + 1] < KeyList[i]) then // or ((KeyList[i + 1] = KeyList[i]) and (ValueList[i + 1] < ValueList[i])) then
       begin
         // See where to drop the bubble.
         tmp1 := KeyList[i + 1];
@@ -188,7 +201,7 @@ begin
           ValueList[j + 1] := ValueList[j];
           j := j - 1;
           if j < min then Break;
-        until (KeyList[j] <= tmp1) and ((KeyList[j] <> tmp1) or (ValueList[j] <= tmp2));
+        until (KeyList[j] <= tmp1);// and ((KeyList[j] <> tmp1) or (ValueList[j] <= tmp2));
         KeyList[j + 1] := tmp1;
         ValueList[j + 1] := tmp2;
         last_swap := j + 1;
@@ -349,7 +362,7 @@ end;
 
 // Run quicksort.
 
-class procedure TSortAlgorithm.Quicksort(var KeyList: array of K; min, max: Integer);
+class procedure TSortAlgorithm.QuickSort(var KeyList: array of K; min, max: Integer);
 var
   med_value1: K;
   hi, lo, i: Integer;
@@ -399,11 +412,10 @@ begin
       KeyList[hi] := med_value1;
       Break;
     end;
-
-        // Swap the lo and hi values.
+    // Swap the lo and hi values.
     KeyList[hi] := KeyList[lo];
   end; // while (True) do
-    // Sort the two sublists.
+  // Sort the two sublists.
   Quicksort(KeyList, min, lo - 1);
   Quicksort(KeyList, lo + 1, max);
 end;
