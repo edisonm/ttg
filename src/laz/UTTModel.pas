@@ -364,6 +364,7 @@ var
     FResourceRestrictionTypeToIdResourceRestrictionType: TDynamicIntegerArray;
   FResourceActivityToNumResources, FResourceThemeToNumResources,
     FThemeToComposition: TDynamicIntegerArrayArray;
+  SOverflows: String;
   procedure Load(ATable: TDataSet; const AListName: string; out FMinIdList: Integer;
     out FIdListToList: TDynamicIntegerArray;
     out FListToIdList: TDynamicIntegerArray);
@@ -807,7 +808,8 @@ var
       end;
       FreedomDegrees := Number - Duration;
       if FreedomDegrees < 0 then
-        raise Exception.CreateFmt(SResourceOverflow, [FResourceToName[Resource], Duration, Number]);
+        SOverflows := SOverflows
+          + Format(SResourceOverflow, [FResourceToName[Resource], Duration, Number]);
       ResourceToFreedomDegrees[Resource] := FreedomDegrees;
       FResourceSorted[Resource] := Resource;
     end;
@@ -933,7 +935,6 @@ var
         FTmplActivityToNumResources[Activity, Participant] := 0;
       end;
     end;
-    
     for Theme := 0 to FThemeCount - 1 do
     begin
       for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
@@ -956,6 +957,8 @@ var
           end
         end;
       end;
+    end;
+    for Theme := 0 to FThemeCount - 1 do // Sanity Check
       for FillRequirement := 0 to High(FThemeToResources[Theme]) do
       begin
         Remaining := ThemeToRemainings[Theme, FillRequirement];
@@ -964,43 +967,19 @@ var
         begin
           Resource := FThemeToResources[Theme, FillRequirement];
           ResourceType := FResourceToResourceType[Resource];
-          raise Exception.CreateFmt(SThemeOverflow,
-                                    [FThemeToName[Theme],
-                                     FResourceTypeToName[ResourceType] + ' (e.g. ' + 
-                                       FResourceToName[Resource] + ')',
-                                     Limit, Remaining]);
+          SOverflows := SOverflows
+            + Format(SThemeOverflow,
+                     [FThemeToName[Theme],
+                      FResourceTypeToName[ResourceType] + ' (for example ' + FResourceToName[Resource] + ')',
+                      Limit, Remaining]);
         end;
       end;
-    end;
-    WriteLn(Format('ThemeToRemainings[,]=%s',[TIntArrayArrayToString.ValueToString(ThemeToRemainings)]));
-    (*
-    for Count := 0 to FActivityCount - 1 do
-    begin
-      Activity := FActivitySorted[Count];
-      Theme := FActivityToTheme[Activity];
-      for FillRequirement := 0 to High(FThemeToResources[Theme]) do
-      begin
-        Resource := FThemeToResources[Theme, FillRequirement];
-        ResourceType := FResourceToResourceType[Resource];
-        Limit := FThemeToLimits[Theme, FillRequirement];
-        Remaining := ThemeToRemainings[Theme, FillRequirement];
-        NumResource := ActivityResourceTypeToNumber[Activity, ResourceType];
-        if (Remaining > 0) and (NumResource < Limit) then
-        begin
-          NumAssigned := Min(Remaining, Limit - NumResource);
-          Participant := Length(FActivityToResources[Activity]) + FillRequirement;
-          Dec(ThemeToRemainings[Theme, FillRequirement], NumAssigned);
-          Inc(ActivityResourceTypeToNumber[Activity, ResourceType], NumAssigned);
-          Inc(FTmplActivityToNumResources[Activity, Participant], NumAssigned);
-        end
-      end;
-    end;
-    *)
   end;
 begin
   inherited Create;
   with SourceDataModule do
   begin
+    SOverflows := '';
     Configure(AClashActivityValue,
       ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue,
       ABrokenSessionValue, ANonScatteredActivityValue);
@@ -1036,6 +1015,8 @@ begin
     LoadFillRequirement;
     LoadGreedyData;
     LoadTemplateData;
+    if SOverflows <> '' then
+      raise Exception.Create(SOverflows);
     WriteLn(Format('FThemeToResources=%s', [TIntArrayArrayToString.ValueToString(FThemeToResources)]));
     WriteLn(Format('FThemeToNumResources=%s', [TIntArrayArrayToString.ValueToString(FThemeToNumResources)]));
   end;
