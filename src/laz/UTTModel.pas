@@ -77,6 +77,7 @@ type
     FResourceTypeToName: TDynamicStringArray;
     FResourceTypeToDefaultMaxNumResource: TDynamicIntegerArray;
     FThemeToIdTheme: TDynamicIntegerArray;
+    FThemeToName: TDynamicStringArray;
     FDayToIdDay: TDynamicIntegerArray;
     FHourToIdHour: TDynamicIntegerArray;
     FActivityToIdActivity: TDynamicIntegerArray;
@@ -97,19 +98,14 @@ type
     FSessionToDuration: TDynamicIntegerArray;
 
     FDayHourToPeriod: TDynamicIntegerArrayArray;
-    FActivityToResources: TDynamicIntegerArrayArray;
-    FActivityToNumResources: TDynamicIntegerArrayArray;
     FTmplActivityToResources: TDynamicIntegerArrayArray;
     FTmplActivityToNumResources: TDynamicIntegerArrayArray;
     FActivityResourceTypeToNumber: TDynamicIntegerArrayArray;
     FResourceToActivities: TDynamicIntegerArrayArray;
     FThemeResourceTypeToLimit: TDynamicIntegerArrayArray;
-    FThemeToResources: TDynamicIntegerArrayArray;
-    FResourceToThemes: TDynamicIntegerArrayArray;
     FThemeToActivities: TDynamicIntegerArrayArray;
-    FThemeToNumResources: TDynamicIntegerArrayArray;
     FThemeToLimits: TDynamicIntegerArrayArray;
-    //FTimetableDetailPattern: TDynamicIntegerArrayArray;
+    FResourceToThemes: TDynamicIntegerArrayArray;
     FActivityToSessions: TDynamicIntegerArrayArray;
     FResourcePeriodToResourceRestrictionType: TDynamicIntegerArrayArray;
 
@@ -356,6 +352,10 @@ constructor TTimetableModel.Create(AClashActivityValue,
                                    ABrokenSessionValue,
                                    ANonScatteredActivityValue: Integer);
 var
+  FThemeToResources: TDynamicIntegerArrayArray;
+  FThemeToNumResources: TDynamicIntegerArrayArray;
+  FActivityToResources: TDynamicIntegerArrayArray;
+  FActivityToNumResources: TDynamicIntegerArrayArray;
   FMinIdResourceRestrictionType, FMinIdTheme,
     FMinIdResource, FMinIdResourceType: Integer;
   FIdThemeToTheme, FIdResourceToResource, FIdResourceTypeToResourceType,
@@ -544,7 +544,7 @@ var
   procedure LoadTheme;
   var
     Theme, CompositionCount, VPos: Integer;
-    FieldComposition: TField;
+    FieldComposition, FieldName: TField;
     Composition: string;
   begin
     with SourceDataModule.TbTheme do
@@ -552,10 +552,13 @@ var
       IndexFieldNames := 'IdTheme';
       First;
       FieldComposition := FindField('Composition');
+      FieldName := FindField('NaTheme');
       SetLength(FThemeToComposition, FThemeCount, 0);
+      SetLength(FThemeToName, FThemeCount);
       for Theme := 0 to FThemeCount - 1 do
       begin
         Composition := FieldComposition.AsString;
+        FThemeToName[Theme] := FieldName.AsString;
         VPos := 1;
         CompositionCount := 0;
         while VPos <= Length(Composition) do
@@ -884,7 +887,7 @@ var
   end;
   procedure LoadTemplateData;
   var
-    Count, Activity, FillRequirement, Participant, ResourceType,
+    Count, Activity, FillRequirement, Participant, ResourceType, ThemeActivity,
     Resource, Limit, Theme, NumResource, NumAssigned, Remaining: Integer;
     ThemeToRemainings: TDynamicIntegerArrayArray;
     ActivityResourceTypeToNumber: TDynamicIntegerArrayArray;
@@ -930,6 +933,47 @@ var
         FTmplActivityToNumResources[Activity, Participant] := 0;
       end;
     end;
+    
+    for Theme := 0 to FThemeCount - 1 do
+    begin
+      for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
+      begin
+        Activity := FThemeToActivities[Theme, ThemeActivity];
+        for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+        begin
+          Resource := FThemeToResources[Theme, FillRequirement];
+          ResourceType := FResourceToResourceType[Resource];
+          Limit := FThemeToLimits[Theme, FillRequirement];
+          Remaining := ThemeToRemainings[Theme, FillRequirement];
+          NumResource := ActivityResourceTypeToNumber[Activity, ResourceType];
+          if (Remaining > 0) and (NumResource < Limit) then
+          begin
+            NumAssigned := Min(Remaining, Limit - NumResource);
+            Participant := Length(FActivityToResources[Activity]) + FillRequirement;
+            Dec(ThemeToRemainings[Theme, FillRequirement], NumAssigned);
+            Inc(ActivityResourceTypeToNumber[Activity, ResourceType], NumAssigned);
+            Inc(FTmplActivityToNumResources[Activity, Participant], NumAssigned);
+          end
+        end;
+      end;
+      for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+      begin
+        Remaining := ThemeToRemainings[Theme, FillRequirement];
+        Limit := FThemeToLimits[Theme, FillRequirement];
+        if Remaining <> 0 then
+        begin
+          Resource := FThemeToResources[Theme, FillRequirement];
+          ResourceType := FResourceToResourceType[Resource];
+          raise Exception.CreateFmt(SThemeOverflow,
+                                    [FThemeToName[Theme],
+                                     FResourceTypeToName[ResourceType] + ' (e.g. ' + 
+                                       FResourceToName[Resource] + ')',
+                                     Limit, Remaining]);
+        end;
+      end;
+    end;
+    WriteLn(Format('ThemeToRemainings[,]=%s',[TIntArrayArrayToString.ValueToString(ThemeToRemainings)]));
+    (*
     for Count := 0 to FActivityCount - 1 do
     begin
       Activity := FActivitySorted[Count];
@@ -951,6 +995,7 @@ var
         end
       end;
     end;
+    *)
   end;
 begin
   inherited Create;

@@ -562,6 +562,7 @@ msgid "Weights"
 msgstr ""
 
 #: tcrossmanytomanyeditor0form.panel2.caption
+msgctxt "tcrossmanytomanyeditor0form.panel2.caption"
 msgid "Panel2"
 msgstr ""
 
@@ -615,6 +616,10 @@ msgstr ""
 
 #: tdbexplorerform.cbtable.hint
 msgid "Tables"
+msgstr ""
+
+#: tdbexplorerform.groupbox.caption
+msgid "Browse DataSet"
 msgstr ""
 
 #: tdbexplorerform.tbshowmetadata.caption

@@ -567,6 +567,7 @@ msgid "Weights"
 msgstr "Pesos"
 
 #: tcrossmanytomanyeditor0form.panel2.caption
+msgctxt "tcrossmanytomanyeditor0form.panel2.caption"
 msgid "Panel2"
 msgstr "Panel2"
 
@@ -621,6 +622,10 @@ msgstr "Tipo de metadato"
 #: tdbexplorerform.cbtable.hint
 msgid "Tables"
 msgstr "Tablas"
+
+#: tdbexplorerform.groupbox.caption
+msgid "Browse DataSet"
+msgstr ""
 
 #: tdbexplorerform.tbshowmetadata.caption
 msgid "Show Metadata"

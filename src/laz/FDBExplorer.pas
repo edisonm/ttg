@@ -6,8 +6,9 @@ unit FDBExplorer;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs, db,
-  StdCtrls, DBGrids, Menus, DbCtrls, ZDataset, ZSqlMetadata, DSource, FSingleEditor;
+  Classes, SysUtils, FileUtil, SynHighlighterSQL, SynMemo, LResources, Forms,
+  Controls, Graphics, Dialogs, db, StdCtrls, DBGrids, Menus, DbCtrls, ComCtrls,
+  ExtCtrls, ActnList, ZDataset, ZSqlMetadata, DSource, FSingleEditor;
 
 type
 
@@ -15,19 +16,25 @@ type
 
   TDBExplorerForm = class(TSingleEditorForm)
     BtExecuteScript: TButton;
-    TBShowMetadata: TButton;
-    BtSaveResults: TButton;
-    TBShowTable: TButton;
     BtOpenQuery: TButton;
     BtOpenScript: TButton;
+    BtSaveResults: TButton;
     BtSaveScript: TButton;
     CBMetadataType: TComboBox;
-    DSTables: TDatasource;
     CBTable: TDBLookupComboBox;
-    Memo1: TMemo;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    DSTables: TDatasource;
     OpenScript: TOpenDialog;
+    Panel3: TPanel;
     SaveScript: TSaveDialog;
     SaveResults: TSaveDialog;
+    Splitter1: TSplitter;
+    Splitter2: TSplitter;
+    Memo1: TSynMemo;
+    SynSQLSyn1: TSynSQLSyn;
+    TBShowMetadata: TButton;
+    TBShowTable: TButton;
     ZQuery1: TZQuery;
     ZTables: TZQuery;
     ZSQLMetadata1: TZSQLMetadata;
@@ -83,6 +90,17 @@ begin
     Add('mdIndexInfo');
     Add('mdSequences');
     Add('mdUserDefinedTypes');
+  end;
+  with SynSQLSyn1.TableNames do
+  begin
+    ZTables.First;
+    Clear;
+    while not ZTables.EOF do
+    begin
+      Add(ZTables.FindField('Name').AsString);
+      ZTables.Next;
+    end;
+    ZTables.First;
   end;
 end;
 
