@@ -1475,6 +1475,10 @@ msgstr "No existe registro maestro en %s para %s.[%s]=%s"
 msgid "When processing %s"
 msgstr "Mientras se procesaba %s"
 
+#: uttgconsts.sactivitywithoutresources
+msgid "Activity %s does not have assigned resources"
+msgstr ""
+
 #: uttgconsts.sapplydownhill
 msgid "Applying Downhill"
 msgstr "Aplicar Descenso"
@@ -1748,7 +1752,7 @@ msgid "Repair Probability"
 msgstr "Probabilidad de Reparacion"
 
 #: uttgconsts.sresourceoverflow
-msgid "For Resource [%s], the number of activities (%d)  exceed its capacity(%d)"
+msgid "For [%s], the number of activities %d exceeds its capacity %d"
 msgstr ""
 
 #: uttgconsts.sresourcerestrictionshead
@@ -1789,6 +1793,10 @@ msgstr "Buscar por %s"
 
 #: uttgconsts.ssupervisor
 msgid "Supervisor"
+msgstr ""
+
+#: uttgconsts.sthemeoverflow
+msgid "For [%s] and the Resources [%s], the limit %d has been exceeded in %d"
 msgstr ""
 
 #: uttgconsts.sthenexttimetablesalreadyexists

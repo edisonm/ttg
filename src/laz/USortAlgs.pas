@@ -52,6 +52,7 @@ type
   generic TSortAlgorithm<K,T> = class
     class procedure QuickSort(const KeyList: array of K; var ValueList: array of T); overload;
     class procedure QuickSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer); overload;
+    class procedure BubbleSort(const KeyList: array of K; var ValueList: array of T); overload;
     class procedure BubbleSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer); overload;
     class procedure SelectionSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer);
     class procedure PartialSort(var KeyList: array of K; var ValueList: array of T; min, max, med: Integer);
@@ -75,68 +76,83 @@ begin
   QuickSort(KeyListCopy, ValueList, Low(KeyList), High(KeyList));
 end;
 
+class procedure TSortAlgorithm.BubbleSort(const KeyList: array of K; var ValueList: array of T);
+var
+  i, l: Integer;
+  KeyListCopy: array of K;
+begin
+  l := Length(KeyList);
+  if l = 0 then
+    exit;
+  SetLength(KeyListCopy, l);
+  for i := 0 to High(KeyList) do
+    KeyListCopy[i] := KeyList[i];
+  BubbleSort(KeyListCopy, ValueList, Low(KeyList), High(KeyList));
+end;
+
 class procedure TSortAlgorithm.QuickSort(var KeyList: array of K; var ValueList: array of T; min, max: Integer);
 var
-  med_value1: K;
-  med_value2: T;
+  MedKey: K;
+  MedValue: T;
   hi, lo, i: Integer;
 begin
-    // If the list has <= 1 element, it's sorted.
+  // If the list has <= 1 element, it's sorted.
   if (min >= max) then Exit;
 
-    // Pick a dividing item randomly.
+  // Pick a dividing item randomly.
   i := min + Trunc(Random(max - min + 1));
-  med_value1 := KeyList[i];
-  med_value2 := ValueList[i];
-    // Swap it to the front so we can find it easily.
+  // i := (1 + min + max) div 2;
+  MedKey := KeyList[i];
+  MedValue := ValueList[i];
+  // Swap it to the front so we can find it easily.
   KeyList[i] := KeyList[min];
   ValueList[i] := ValueList[min];
-
-    // Move the items smaller than this into the left
-    // half of the list. Move the others into the right.
+  
+  // Move the items smaller than this into the left
+  // half of the list. Move the others into the right.
   lo := min;
   hi := max;
   while (True) do
   begin
-        // Look down from hi for a value < med_value.
-    while (KeyList[hi] >= med_value1) do // and ((KeyList[hi] <> med_value1) or (ValueList[hi] >= med_value2)) do
+    // Look down from hi for a value < med_value.
+    while (KeyList[hi] >= MedKey) do // and ((KeyList[hi] <> MedKey) or (ValueList[hi] >= MedValue)) do
     begin
       hi := hi - 1;
       if (hi <= lo) then Break;
     end;
     if (hi <= lo) then
     begin
-            // We're done separating the items.
-      KeyList[lo] := med_value1;
-      ValueList[lo] := med_value2;
+      // We're done separating the items.
+      KeyList[lo] := MedKey;
+      ValueList[lo] := MedValue;
       Break;
     end;
-
-        // Swap the lo and hi values.
+    
+    // Swap the lo and hi values.
     KeyList[lo] := KeyList[hi];
     ValueList[lo] := ValueList[hi];
 
-        // Look up from lo for a value >= med_value.
+    // Look up from lo for a value >= med_value.
     lo := lo + 1;
-    while (KeyList[lo] < med_value1) do // or ((KeyList[lo] = med_value1) and (ValueList[lo] < med_value2)) do
+    while (KeyList[lo] < MedKey) do // or ((KeyList[lo] = MedKey) and (ValueList[lo] < MedValue)) do
     begin
       lo := lo + 1;
       if (lo >= hi) then Break;
     end;
     if (lo >= hi) then
     begin
-            // We're done separating the items.
+      // We're done separating the items.
       lo := hi;
-      KeyList[hi] := med_value1;
-      ValueList[hi] := med_value2;
+      KeyList[hi] := MedKey;
+      ValueList[hi] := MedValue;
       Break;
     end;
 
-        // Swap the lo and hi values.
+    // Swap the lo and hi values.
     KeyList[hi] := KeyList[lo];
     ValueList[hi] := ValueList[lo];
   end; // while (True) do
-    // Sort the two sublists.
+       // Sort the two sublists.
   Quicksort(KeyList, ValueList, min, lo - 1);
   Quicksort(KeyList, ValueList, lo + 1, max);
 end;
@@ -364,7 +380,7 @@ end;
 
 class procedure TSortAlgorithm.QuickSort(var KeyList: array of K; min, max: Integer);
 var
-  med_value1: K;
+  MedKey: K;
   hi, lo, i: Integer;
 begin
     // If the list has <= 1 element, it's sorted.
@@ -372,7 +388,8 @@ begin
 
     // Pick a dividing item randomly.
   i := min + Trunc(Random(max - min + 1));
-  med_value1 := KeyList[i];
+  // i := (1 + min + max) div 2;
+  MedKey := KeyList[i];
     // Swap it to the front so we can find it easily.
   KeyList[i] := KeyList[min];
 
@@ -383,7 +400,7 @@ begin
   while (True) do
   begin
         // Look down from hi for a value < med_value.
-    while (KeyList[hi] >= med_value1) do
+    while (KeyList[hi] >= MedKey) do
     begin
       hi := hi - 1;
       if (hi <= lo) then Break;
@@ -391,7 +408,7 @@ begin
     if (hi <= lo) then
     begin
             // We're done separating the items.
-      KeyList[lo] := med_value1;
+      KeyList[lo] := MedKey;
       Break;
     end;
 
@@ -400,7 +417,7 @@ begin
 
         // Look up from lo for a value >= med_value.
     lo := lo + 1;
-    while (KeyList[lo] < med_value1) do
+    while (KeyList[lo] < MedKey) do
     begin
       lo := lo + 1;
       if (lo >= hi) then Break;
@@ -409,7 +426,7 @@ begin
     begin
             // We're done separating the items.
       lo := hi;
-      KeyList[hi] := med_value1;
+      KeyList[hi] := MedKey;
       Break;
     end;
     // Swap the lo and hi values.

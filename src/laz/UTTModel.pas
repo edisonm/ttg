@@ -7,33 +7,9 @@ interface
 
 uses
   {$IFDEF UNIX}CThreads, CMem, {$ENDIF}Classes, DB, Dialogs, Forms, UModel,
-  UTTGBasics, USortAlgs;
-
-var
-  SortInteger: procedure(var KeyList: array of Integer;
-    var ValueList: array of Integer; min, max: Integer) of object;
-  Sort: procedure(var KeyList: array of Integer; min, max: Integer) of object;
+  UTTGBasics;
 
 type
-  TSortInteger = specialize TSortAlgorithm<Integer,Integer>;
-
-type
-  {
-    Clase TTimetableModel
-    Descripcion:
-    Implementa la carga de la informacion desde la base de datos a la memoria
-    RAM.
-    Miembros privados:
-    Todos los arreglos dinamicos que contienen la informacion, los campos que
-    contienen los pesos de la funcion objetivo y las funciones de uso interno.
-    Miembros protegidos:
-    Arreglo dinamico que contiene el molde de un horario, que facilita la
-    construccion de soluciones.
-    Miembros publicos:
-    El constructor, la funcion que permite configurar los pesos y los pesos
-    de cada restriccion.
-  }
-
   TTimetable = class;
   TTimetableArray = array of TTimetable;
 
@@ -41,6 +17,12 @@ type
 
 
   TTimetableModel = class(TModel)
+    (* Class TTimetableModel: Implements the load of the DataBase to
+       the RAM memory.
+       
+       IMPORTANT NOTE: We are using BubbleSort instead of QuickSort
+       because we need to ensure equal sort order when de Keys are not
+       unique.  Note that QuickSort takes a random position as pivot. *)
   private
     FClashActivityValue: Integer;
     FOutOfPositionEmptyHourValue: Integer;
@@ -84,6 +66,8 @@ type
     FIdActivityToActivity: TDynamicIntegerArray;
     FResourceToIdResource: TDynamicIntegerArray;
     FActivityToTheme: TDynamicIntegerArray;
+    FActivityToName: TDynamicStringArray;
+    FActivityToOffsetReconfigurable: TDynamicIntegerArray;
     FIdDayToDay: TDynamicIntegerArray;
     FIdHourToHour: TDynamicIntegerArray;
 
@@ -100,11 +84,9 @@ type
     FDayHourToPeriod: TDynamicIntegerArrayArray;
     FTmplActivityToResources: TDynamicIntegerArrayArray;
     FTmplActivityToNumResources: TDynamicIntegerArrayArray;
-    FActivityResourceTypeToNumber: TDynamicIntegerArrayArray;
     FResourceToActivities: TDynamicIntegerArrayArray;
     FThemeResourceTypeToLimit: TDynamicIntegerArrayArray;
     FThemeToActivities: TDynamicIntegerArrayArray;
-    FThemeToLimits: TDynamicIntegerArrayArray;
     FResourceToThemes: TDynamicIntegerArrayArray;
     FActivityToSessions: TDynamicIntegerArrayArray;
     FResourcePeriodToResourceRestrictionType: TDynamicIntegerArrayArray;
@@ -341,10 +323,10 @@ type
 implementation
 
 uses
-  SysUtils, ZSysUtils, MTProcs, DSource, UTTGConsts, DSourceBaseConsts, Math;
+  SysUtils, ZSysUtils, MTProcs, DSource, UTTGConsts, DSourceBaseConsts, USortAlgs, Math;
 
 type
-  TSortDoubleInt = specialize TSortAlgorithm<Double, Integer>;
+  TSortInteger = specialize TSortAlgorithm<Integer,Integer>;
 
 constructor TTimetableModel.Create(AClashActivityValue,
                                    ABreakTimetableResourceValue,
@@ -352,6 +334,8 @@ constructor TTimetableModel.Create(AClashActivityValue,
                                    ABrokenSessionValue,
                                    ANonScatteredActivityValue: Integer);
 var
+  FActivityResourceTypeToNumber: TDynamicIntegerArrayArray;
+  FThemeToLimits: TDynamicIntegerArrayArray;
   FThemeToResources: TDynamicIntegerArrayArray;
   FThemeToNumResources: TDynamicIntegerArrayArray;
   FActivityToResources: TDynamicIntegerArrayArray;
@@ -362,9 +346,8 @@ var
     FResourceTypeToIdResourceType,
     FIdResourceRestrictionTypeToResourceRestrictionType,
     FResourceRestrictionTypeToIdResourceRestrictionType: TDynamicIntegerArray;
-  FResourceActivityToNumResources, FResourceThemeToNumResources,
-    FThemeToComposition: TDynamicIntegerArrayArray;
-  SOverflows: String;
+  FResourceThemeToNumResources, FThemeToComposition: TDynamicIntegerArrayArray;
+  SErrors: String;
   procedure Load(ATable: TDataSet; const AListName: string; out FMinIdList: Integer;
     out FIdListToList: TDynamicIntegerArray;
     out FListToIdList: TDynamicIntegerArray);
@@ -577,22 +560,25 @@ var
   procedure LoadActivity;
   var
     Counter, Theme, Session1, Activity, Session2, Session: Integer;
-    FieldTheme: TField;
+    FieldTheme, FieldName: TField;
   begin
     with SourceDataModule.TbActivity do
     begin
       IndexFieldNames := 'IdActivity';
       First;
       FieldTheme := FindField('IdTheme');
+      FieldName := FindField('NaActivity');
       FActivityCount := RecordCount;
       SetLength(FActivityToSessions, FActivityCount);
       SetLength(FActivityToTheme, FActivityCount);
       SetLength(FThemeToActivities, FThemeCount, 0);
       Session2 := 0;
+      SetLength(FActivityToName, FActivityCount);
       for Activity := 0 to FActivityCount - 1 do
       begin
         Theme := FIdThemeToTheme[FieldTheme.AsInteger - FMinIdTheme];
         FActivityToTheme[Activity] := Theme;
+        FActivityToName[Activity] := FieldName.AsString;
         Counter := Length(FThemeToActivities[Theme]);
         SetLength(FThemeToActivities[Theme], Counter + 1);
         FThemeToActivities[Theme, Counter] := Activity;
@@ -634,8 +620,6 @@ var
       ParticipantCount := RecordCount;
       SetLength(FActivityToResources, FActivityCount, 0);
       SetLength(FActivityToNumResources, FActivityCount, 0);
-      SetLength(FResourceToActivities, FResourceCount, 0);
-      SetLength(FResourceActivityToNumResources, FResourceCount, 0);
       SetLength(FActivityResourceTypeToNumber, FActivityCount, FResourceTypeCount);
       for Activity := 0 to FActivityCount - 1 do
         for ResourceType := 0 to FResourceTypeCount - 1 do
@@ -653,11 +637,6 @@ var
         FActivityToResources[Activity, Counter] := Resource;
         Number := FieldNumResource.AsInteger;
         FActivityToNumResources[Activity, Counter] := Number;
-        Counter := Length(FResourceToActivities[Resource]);
-        SetLength(FResourceToActivities[Resource], Counter + 1);
-        FResourceToActivities[Resource, Counter] := Activity;
-        SetLength(FResourceActivityToNumResources[Resource], Counter + 1);
-        FResourceActivityToNumResources[Resource, Counter] := Number;
         Inc(FActivityResourceTypeToNumber[Activity, FResourceToResourceType[Resource]], Number);
         Next;
       end;
@@ -745,6 +724,148 @@ var
       First;
     end;
   end;
+var
+  ActivityToResources, ActivityToNumResources: TDynamicIntegerArrayArray;
+  procedure FillTemplateData;
+  var
+    Activity, Participant, FillRequirement: Integer;
+  begin
+    SetLength(FTmplActivityToResources, FActivityCount);
+    SetLength(FTmplActivityToNumResources, FActivityCount);
+    for Activity := 0 to FActivityCount - 1 do
+    begin
+      SetLength(FTmplActivityToResources[Activity],
+                Length(FActivityToResources[Activity])
+                + Length(ActivityToResources[Activity]));
+      SetLength(FTmplActivityToNumResources[Activity],
+                Length(FActivityToResources[Activity])
+                + Length(ActivityToNumResources[Activity]));
+      for Participant := 0 to High(FActivityToResources[Activity]) do
+      begin
+        FTmplActivityToResources[Activity, Participant]
+          := FActivityToResources[Activity, Participant];
+        FTmplActivityToNumResources[Activity, Participant]
+          := FActivityToNumResources[Activity, Participant];
+      end;
+      for FillRequirement := 0 to High(ActivityToResources[Activity]) do
+      begin
+        Participant := Length(FActivityToResources[Activity]) + FillRequirement;
+        FTmplActivityToResources[Activity, Participant]
+          := ActivityToResources[Activity, FillRequirement];
+        FTmplActivityToNumResources[Activity, Participant]
+          := ActivityToNumResources[Activity, FillRequirement];
+      end;
+    end;
+  end;
+  procedure GenerateTemplateData;
+  var
+    Activity, FillRequirement, ResourceType, ThemeActivity,
+    OffsetReconfigurable, Resource, Limit, Theme, NumResource, NumAssigned,
+    Remaining, Number: Integer;
+    ResourceTypeToNumber, ThemeResourceReconfigurable: TDynamicIntegerArray;
+    ThemeToRemainings, ActivityResourceTypeToNumber: TDynamicIntegerArrayArray;
+  begin
+    SetLength(ActivityToResources, FActivityCount);
+    SetLength(ActivityToNumResources, FActivityCount);
+    SetLength(ThemeToRemainings, FThemeCount);
+    for Activity := 0 to FActivityCount - 1 do
+    begin
+      SetLength(ActivityToResources[Activity],
+                Length(FThemeToResources[FActivityToTheme[Activity]]));
+      SetLength(ActivityToNumResources[Activity],
+                Length(FThemeToResources[FActivityToTheme[Activity]]));
+    end;
+    for Theme := 0 to FThemeCount - 1 do
+    begin
+      SetLength(ThemeToRemainings[Theme], Length(FThemeToResources[Theme]));
+      for FillRequirement := 0 to High(ThemeToRemainings[Theme]) do
+        ThemeToRemainings[Theme, FillRequirement]
+          := FThemeToNumResources[Theme, FillRequirement];
+    end;
+    SetLength(ActivityResourceTypeToNumber, FActivityCount, FResourceTypeCount);
+    for Activity := 0 to FActivityCount - 1 do
+    begin
+      for ResourceType := 0 to FResourceTypeCount -1 do
+        ActivityResourceTypeToNumber[Activity, ResourceType]
+          := FActivityResourceTypeToNumber[Activity, ResourceType];
+      Theme := FActivityToTheme[Activity];
+      for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+      begin
+        ActivityToResources[Activity, FillRequirement]
+          := FThemeToResources[Theme, FillRequirement];
+        ActivityToNumResources[Activity, FillRequirement] := 0;
+      end;
+    end;
+    for Theme := 0 to FThemeCount - 1 do
+    begin
+      for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
+      begin
+        Activity := FThemeToActivities[Theme, ThemeActivity];
+        for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+        begin
+          Resource := FThemeToResources[Theme, FillRequirement];
+          ResourceType := FResourceToResourceType[Resource];
+          Limit := FThemeToLimits[Theme, FillRequirement];
+          Remaining := ThemeToRemainings[Theme, FillRequirement];
+          NumResource := ActivityResourceTypeToNumber[Activity, ResourceType];
+          if (Remaining > 0) and (NumResource < Limit) then
+          begin
+            NumAssigned := Min(Remaining, Limit - NumResource);
+            Dec(ThemeToRemainings[Theme, FillRequirement], NumAssigned);
+            Inc(ActivityResourceTypeToNumber[Activity, ResourceType], NumAssigned);
+            Inc(ActivityToNumResources[Activity, FillRequirement], NumAssigned);
+          end
+        end;
+      end;
+    end;
+    SetLength(ResourceTypeToNumber, FResourceTypeCount);
+    SetLength(FActivityToOffsetReconfigurable, FActivityCount);
+    for Theme := 0 to FThemeCount - 1 do
+    begin
+      for ResourceType := 0 to FResourceTypeCount - 1 do
+      begin
+        Number := 0;
+        for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
+        begin
+          Activity := FThemeToActivities[Theme, ThemeActivity];
+          Inc(Number, FActivityResourceTypeToNumber[Activity, ResourceType]);
+        end;
+        ResourceTypeToNumber[ResourceType] := Number;
+      end;
+      SetLength(ThemeResourceReconfigurable, Length(FThemeToResources[Theme]));
+      OffsetReconfigurable := 0;
+      for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+      begin
+        Remaining := ThemeToRemainings[Theme, FillRequirement];
+        Resource := FThemeToResources[Theme, FillRequirement];
+        ResourceType := FResourceToResourceType[Resource];
+        Limit := FThemeToLimits[Theme, FillRequirement];
+        if Remaining <> 0 then // Sanity Check
+        begin
+          SErrors := SErrors
+            + Format(SThemeOverflow,
+                     [FThemeToName[Theme],
+                      FResourceTypeToName[ResourceType] + ' (for example ' + FResourceToName[Resource] + ')',
+                      Limit, Remaining]) + #13#10;
+        end;
+        if Limit * Length(FThemeToActivities[Theme])
+           = FThemeToNumResources[Theme, FillRequirement] + ResourceTypeToNumber[ResourceType] then
+        begin
+          ThemeResourceReconfigurable[FillRequirement] := 0;
+          Inc(OffsetReconfigurable);
+        end
+        else
+          ThemeResourceReconfigurable[FillRequirement] := 1;
+      end;
+      for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
+      begin
+        Activity := FThemeToActivities[Theme, ThemeActivity];
+        FActivityToOffsetReconfigurable[Activity] := OffsetReconfigurable + Length(FActivityToResources[Activity]);
+        TSortInteger.BubbleSort(ThemeResourceReconfigurable, ActivityToResources[Activity]);
+        TSortInteger.BubbleSort(ThemeResourceReconfigurable, ActivityToNumResources[Activity]);
+      end;
+    end;
+  end;
   procedure LoadGreedyData;
   var
     Session: Integer;
@@ -771,72 +892,50 @@ var
       end;
     end;
   var
-    FreedomDegrees: Double; // Logaritmic to prevent overfloat
-    Group, Number, Duration, ActivityResource, Theme, ResourceTheme,
-      Activity, ActivitySession, ResourceActivity, ThemeActivity, UBound,
-      Counter, Component, ThemeResource,  Resource: Integer;
-    ThemeResourceToFreedomDegrees, ActivityResourceToFreedomDegrees,
-      ResourceToFreedomDegrees: TDynamicDoubleArray;
+    FreePeriods: Integer;
+    Group, Number, Duration,
+      Activity, ResourceActivity,
+      Participant, Counter, Resource: Integer;
+    ActivityResourceToFreePeriods, ResourceToFreePeriods: TDynamicIntegerArray;
   begin
-    SetLength(ResourceToFreedomDegrees, FResourceCount);
+    SetLength(ResourceToFreePeriods, FResourceCount);
     SetLength(FResourceSorted, FResourceCount);
-    for Resource := 0 to FResourceCount -1 do
+    for Resource := 0 to FResourceCount - 1 do
     begin
-      Duration := 0;
-      // Upper bound, not exact due to there is not overlapping
-      // between session of the same activity (for example):
+      ResourceToFreePeriods[Resource] := 0;
+    end;
+    for Activity := 0 to FActivityCount - 1 do
+    begin
+      for Participant := 0 to High(FTmplActivityToResources[Activity]) do
+      begin
+        Resource := FTmplActivityToResources[Activity, Participant];
+        Inc(ResourceToFreePeriods[Resource], FTmplActivityToNumResources[Activity, Participant]);
+      end;
+    end;
+    for Resource := 0 to FResourceCount - 1 do
+    begin
+      // Upper bound, better approximation is FPeriodCount - GetHardResourceRestrictions(...)
       Number := FResourceToNumber[Resource] * FPeriodCount;
-      for ResourceActivity := 0 to High(FResourceToActivities[Resource]) do
-      begin
-        Activity := FResourceToActivities[Resource, ResourceActivity];
-        for ActivitySession := 0 to High(FActivityToSessions[Activity]) do
-        begin
-          Inc(Duration, FResourceActivityToNumResources[Resource, ResourceActivity]
-                        * FSessionToDuration[FActivityToSessions[Activity, ActivitySession]]);
-        end;
-      end;
-      // Upper bound
-      for ResourceTheme := 0 to High(FResourceToThemes[Resource]) do
-      begin
-        Theme := FResourceToThemes[Resource, ResourceTheme];
-        UBound := Min(FThemeResourceTypeToLimit[Theme, FResourceToResourceType[Resource]],
-                      FResourceThemeToNumResources[Resource, ResourceTheme]);
-        for Component := 0 to High(FThemeToComposition[Theme]) do
-        begin
-          Inc(Duration, UBound * FThemeToComposition[Theme, Component]);
-        end;
-      end;
-      FreedomDegrees := Number - Duration;
-      if FreedomDegrees < 0 then
-        SOverflows := SOverflows
-          + Format(SResourceOverflow, [FResourceToName[Resource], Duration, Number]);
-      ResourceToFreedomDegrees[Resource] := FreedomDegrees;
+      Duration := ResourceToFreePeriods[Resource];
+      FreePeriods := Number - Duration;
+      if FreePeriods < 0 then
+        SErrors := SErrors
+          + Format(SResourceOverflow, [FResourceToName[Resource], Duration, Number]) + #13#10;
+      ResourceToFreePeriods[Resource] := FreePeriods;
       FResourceSorted[Resource] := Resource;
     end;
     for Activity := 0 to FActivityCount - 1 do
     begin
-      SetLength(ActivityResourceToFreedomDegrees, Length(FActivityToResources[Activity]));
-      for ActivityResource := 0 to High(FActivityToResources[Activity]) do
+      SetLength(ActivityResourceToFreePeriods, Length(FTmplActivityToResources[Activity]));
+      for Participant := 0 to High(FTmplActivityToResources[Activity]) do
       begin
-        ActivityResourceToFreedomDegrees[ActivityResource] :=
-          ResourceToFreedomDegrees[FActivityToResources[Activity, ActivityResource]];
+        ActivityResourceToFreePeriods[Participant] :=
+          ResourceToFreePeriods[FTmplActivityToResources[Activity, Participant]];
       end;
-      TSortDoubleInt.QuickSort(ActivityResourceToFreedomDegrees, FActivityToResources[Activity]);
-      TSortDoubleInt.QuickSort(ActivityResourceToFreedomDegrees, FActivityToNumResources[Activity]);
+      TSortInteger.BubbleSort(ActivityResourceToFreePeriods, FTmplActivityToResources[Activity]);
+      TSortInteger.BubbleSort(ActivityResourceToFreePeriods, FTmplActivityToNumResources[Activity]);
     end;
-    for Theme := 0 to FThemeCount - 1 do
-    begin
-      SetLength(ThemeResourceToFreedomDegrees, Length(FThemeToResources[Theme]));
-      for ThemeResource := 0 to High(FThemeToResources[Theme]) do
-      begin
-        ThemeResourceToFreedomDegrees[ThemeResource] :=
-          ResourceToFreedomDegrees[FThemeToResources[Theme, ThemeResource]];
-      end;
-      TSortDoubleInt.QuickSort(ThemeResourceToFreedomDegrees, FThemeToResources[Theme]);
-      TSortDoubleInt.QuickSort(ThemeResourceToFreedomDegrees, FThemeToNumResources[Theme]);
-      TSortDoubleInt.QuickSort(ThemeResourceToFreedomDegrees, FThemeToLimits[Theme]);
-    end;
-    TSortDoubleInt.QuickSort(ResourceToFreedomDegrees, FResourceSorted, 0, FResourceCount - 1);
+    TSortInteger.BubbleSort(ResourceToFreePeriods, FResourceSorted, 0, FResourceCount - 1);
     SetLength(ActivityIsPlaced, FActivityCount);
     for Activity := 0 to FActivityCount - 1 do
     begin
@@ -847,139 +946,50 @@ var
     HighActivitySorted := 0;
     HighSessionSorted := 0;
     SetLength(FGroupSessions, FActivityCount, 0); // Upper Bound
+    SetLength(FResourceToActivities, FResourceCount, 0);
+    for Activity := 0 to FActivityCount - 1 do
+    begin
+      for Participant := 0 to High(FTmplActivityToResources[Activity]) do
+      begin
+        Resource := FTmplActivityToResources[Activity, Participant];
+        Counter := Length(FResourceToActivities[Resource]);
+        SetLength(FResourceToActivities[Resource], Counter + 1);
+        FResourceToActivities[Resource, Counter] := Activity;
+      end;
+    end;
     Group := 0;
     for Counter := 0 to FResourceCount -1 do
     begin
       Resource := FResourceSorted[Counter];
-      WriteLn(Format('Resource %s/%d/%d, FreedomDegrees=%g',
-                     [FResourceToName[Resource],
-                      FResourceToIdResource[Resource],
-                      Resource,
-                      ResourceToFreedomDegrees[Group]]));
       for ResourceActivity := 0 to High(FResourceToActivities[Resource]) do
       begin
         Activity := FResourceToActivities[Resource, ResourceActivity];
         PushSessionsToGroup(Group, Activity);
       end;
-      for ResourceTheme := 0 to High(FResourceToThemes[Resource]) do
-      begin
-        Theme := FResourceToThemes[Resource, ResourceTheme];
-        for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
-        begin
-          Activity := FThemeToActivities[Theme, ThemeActivity];
-          PushSessionsToGroup(Group, Activity);
-        end;
-      end;
       if Length(FGroupSessions[Group]) > 0 then
       begin
         Inc(Group);
       end;
     end;
-    for Activity := 0 to FActivityCount - 1 do
-    begin
-      PushSessionsToGroup(Group, Activity);
-      if Length(FGroupSessions[Group]) > 0 then
-      begin
-        Inc(Group);
-        SetLength(FGroupSessions, Group + 1);
-      end;
-    end;
-    FGRoupCount := Group;
+    FGroupCount := Group;
     SetLength(FGroupSessions, FGroupCount);
-  end;
-  procedure LoadTemplateData;
-  var
-    Count, Activity, FillRequirement, Participant, ResourceType, ThemeActivity,
-    Resource, Limit, Theme, NumResource, NumAssigned, Remaining: Integer;
-    ThemeToRemainings: TDynamicIntegerArrayArray;
-    ActivityResourceTypeToNumber: TDynamicIntegerArrayArray;
-  begin
-    SetLength(FTmplActivityToResources, FActivityCount);
-    SetLength(FTmplActivityToNumResources, FActivityCount);
+    WriteLn(Format('FGroupSessions=%s', [TIntArrayArrayToString.ValueToString(FGroupSessions)]));
+    WriteLn(Format('FResourceToActivities=%s', [TIntArrayArrayToString.ValueToString(FResourceToActivities)]));
     for Activity := 0 to FActivityCount - 1 do
     begin
-      SetLength(FTmplActivityToResources[Activity],
-                Length(FActivityToResources[Activity])
-                + Length(FThemeToResources[FActivityToTheme[Activity]]));
-      SetLength(FTmplActivityToNumResources[Activity],
-                Length(FActivityToResources[Activity])
-                + Length(FThemeToResources[FActivityToTheme[Activity]]));
-    end;
-    SetLength(ThemeToRemainings, FThemeCount);
-    for Theme := 0 to FThemeCount - 1 do
-    begin
-      SetLength(ThemeToRemainings[Theme], Length(FThemeToResources[Theme]));
-      for FillRequirement := 0 to High(ThemeToRemainings[Theme]) do
-        ThemeToRemainings[Theme, FillRequirement]
-          := FThemeToNumResources[Theme, FillRequirement];
-    end;
-    SetLength(ActivityResourceTypeToNumber, FActivityCount, FResourceTypeCount);
-    for Activity := 0 to FActivityCount - 1 do
-    begin
-      for ResourceType := 0 to FResourceTypeCount -1 do
-        ActivityResourceTypeToNumber[Activity, ResourceType]
-          := FActivityResourceTypeToNumber[Activity, ResourceType];
-      for Participant := 0 to High(FActivityToResources[Activity]) do
+      if not ActivityIsPlaced[Activity] then
       begin
-        FTmplActivityToResources[Activity, Participant]
-          := FActivityToResources[Activity, Participant];
-        FTmplActivityToNumResources[Activity, Participant]
-          := FActivityToNumResources[Activity, Participant];
-      end;
-      Theme := FActivityToTheme[Activity];
-      for FillRequirement := 0 to High(FThemeToResources[Theme]) do
-      begin
-        Participant := Length(FActivityToResources[Activity]) + FillRequirement;
-        FTmplActivityToResources[Activity, Participant]
-          := FThemeToResources[Theme, FillRequirement];
-        FTmplActivityToNumResources[Activity, Participant] := 0;
+        SErrors := SErrors + Format(SActivityWithoutResources,
+                             [FThemeToName[FActivityToTheme[Activity]]
+                              + ' ' + FActivityToName[Activity]]) + #13#10;
       end;
     end;
-    for Theme := 0 to FThemeCount - 1 do
-    begin
-      for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
-      begin
-        Activity := FThemeToActivities[Theme, ThemeActivity];
-        for FillRequirement := 0 to High(FThemeToResources[Theme]) do
-        begin
-          Resource := FThemeToResources[Theme, FillRequirement];
-          ResourceType := FResourceToResourceType[Resource];
-          Limit := FThemeToLimits[Theme, FillRequirement];
-          Remaining := ThemeToRemainings[Theme, FillRequirement];
-          NumResource := ActivityResourceTypeToNumber[Activity, ResourceType];
-          if (Remaining > 0) and (NumResource < Limit) then
-          begin
-            NumAssigned := Min(Remaining, Limit - NumResource);
-            Participant := Length(FActivityToResources[Activity]) + FillRequirement;
-            Dec(ThemeToRemainings[Theme, FillRequirement], NumAssigned);
-            Inc(ActivityResourceTypeToNumber[Activity, ResourceType], NumAssigned);
-            Inc(FTmplActivityToNumResources[Activity, Participant], NumAssigned);
-          end
-        end;
-      end;
-    end;
-    for Theme := 0 to FThemeCount - 1 do // Sanity Check
-      for FillRequirement := 0 to High(FThemeToResources[Theme]) do
-      begin
-        Remaining := ThemeToRemainings[Theme, FillRequirement];
-        Limit := FThemeToLimits[Theme, FillRequirement];
-        if Remaining <> 0 then
-        begin
-          Resource := FThemeToResources[Theme, FillRequirement];
-          ResourceType := FResourceToResourceType[Resource];
-          SOverflows := SOverflows
-            + Format(SThemeOverflow,
-                     [FThemeToName[Theme],
-                      FResourceTypeToName[ResourceType] + ' (for example ' + FResourceToName[Resource] + ')',
-                      Limit, Remaining]);
-        end;
-      end;
   end;
 begin
   inherited Create;
   with SourceDataModule do
   begin
-    SOverflows := '';
+    SErrors := '';
     Configure(AClashActivityValue,
       ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue,
       ABrokenSessionValue, ANonScatteredActivityValue);
@@ -1013,10 +1023,11 @@ begin
     LoadParticipant;
     LoadRequirement;
     LoadFillRequirement;
+    GenerateTemplateData;
+    FillTemplateData;
     LoadGreedyData;
-    LoadTemplateData;
-    if SOverflows <> '' then
-      raise Exception.Create(SOverflows);
+    if SErrors <> '' then
+      raise Exception.Create(SErrors);
     WriteLn(Format('FThemeToResources=%s', [TIntArrayArrayToString.ValueToString(FThemeToResources)]));
     WriteLn(Format('FThemeToNumResources=%s', [TIntArrayArrayToString.ValueToString(FThemeToNumResources)]));
   end;
@@ -1084,8 +1095,8 @@ begin
         + Timetable2.FTTSessionToPeriod[Session];
       Sessions2[Counter] := Session;
     end;
-    SortInteger(SortKey1, Sessions1, 0, GroupSessionsCount - 1);
-    SortInteger(SortKey2, Sessions2, 0, GroupSessionsCount - 1);
+    TSortInteger.BubbleSort(SortKey1, Sessions1, 0, GroupSessionsCount - 1);
+    TSortInteger.BubbleSort(SortKey2, Sessions2, 0, GroupSessionsCount - 1);
     for Counter := 0 to GroupSessionsCount - 1 do
     begin
       Session1 := Sessions1[Counter];
@@ -1434,46 +1445,28 @@ end;
 
 procedure TTimetable.Mutate;
 var
-  ResourceActivity, ResourceActivities, Themes, ThemeActivities, Theme2,
-  Session1, Session2, Activity, Activity1, Activity2, Activity21,
-  Activity22, Participant, NumResource, Resource, Period: Integer;
+  ResourceActivity, ResourceActivities, Session1, Session2, Activity1,
+  Activity2, Participant, NumResource, Resource, Period: Integer;
 begin
   with TTimetableModel(Model) do
   begin
-    Session1 := Random(FSessionCount);
-    Activity1 := FSessionToActivity[Session1];
-    repeat
+    if Random(3) > 0 then
+    begin
+      Session1 := Random(FSessionCount);
+      Activity1 := FSessionToActivity[Session1];
+      // repeat
       Participant := Random(Length(FTmplActivityToResources[Activity1]));
       Resource := FTmplActivityToResources[Activity1, Participant];
-      NumResource := FTTActivityToNumResources[Activity1, Participant];
-    until NumResource > 0;
-    ResourceActivities := Length(FResourceToActivities[Resource]);
-    Activity21 := 0;
-    if ResourceActivities > 0 then
-    begin
+      //   NumResource := FTTActivityToNumResources[Activity1, Participant];
+      // until NumResource > 0;
+      ResourceActivities := Length(FResourceToActivities[Resource]);
+      Activity2 := 0;
       ResourceActivity := Random(ResourceActivities);
-      Activity21 := FResourceToActivities[Resource, ResourceActivity];
-    end;
-    Themes := Length(FResourceToThemes[Resource]);
-    Activity22 := 0;
-    if Themes > 0 then
-    begin
-      Theme2 := FResourceToThemes[Resource, Random(Themes)];
-      ThemeActivities := Length(FThemeToActivities[Theme2]);
-      if ThemeActivities > 0 then
-        Activity22 := FThemeToActivities[Theme2, Random(ThemeActivities)];
-    end;
-    if ResourceActivities = 0 then
-      Activity2 := Activity22
-    else if (Themes = 0) or (ThemeActivities = 0) then
-      Activity2 := Activity21
-    else if Random(2) = 0 then
-      Activity2 := Activity21
-    else
-      Activity2 := Activity22;
-    Session2 := FActivityToSessions[Activity2, Random(Length(FActivityToSessions[Activity2]))];
-    if Session1 <> Session2 then
-      Swap(Session1, Session2)
+      Activity2 := FResourceToActivities[Resource, ResourceActivity];
+      Session2 := FActivityToSessions[Activity2, Random(Length(FActivityToSessions[Activity2]))];
+      if Session1 <> Session2 then
+        Swap(Session1, Session2);
+    end
     else
     begin
       Period := Round(PeriodCount - FSessionToDuration[Session1]);
@@ -2084,11 +2077,13 @@ begin
       Inc(FGroupSession1);
       if FGroupSession1 = Length(FGroupSessions[FGroup]) - 1 then
       begin
-        Inc(FGroup);
-        if FGroup = FGroupCount then
-        begin
-          FGroup := 0;
-        end;
+        repeat
+          Inc(FGroup);
+          if FGroup = FGroupCount then
+          begin
+            FGroup := 0;
+          end;
+        until Length(FGroupSessions[FGroup]) > 1;
         FGroupSession1 := 0;
       end;
       FGroupSession2 := FGroupSession1 + 1;
@@ -2213,11 +2208,13 @@ begin
         Inc(FGroupSession1);
         if FGroupSession1 = Length(FGroupSessions[FGroup]) - 1 then
         begin
-          Inc(FGroup);
-          if FGroup = FGroupCount then
-          begin
-            FGroup := 0;
-          end;
+          repeat
+            Inc(FGroup);
+            if FGroup = FGroupCount then
+            begin
+              FGroup := 0;
+            end;
+          until Length(FGroupSessions[FGroup]) > 1;
           FGroupSession1 := 0;
         end;
         FGroupSession2 := FGroupSession1 + 1;
@@ -2304,11 +2301,6 @@ begin
 end;
 
 initialization
-
-  SortInteger := TSortInteger.Quicksort;
-  Sort := TSortInteger.Quicksort;
-  // SortInteger := TSortInteger.BubbleSort;
-  // Sort := TSortInteger.BubbleSort;
 
 end.
 

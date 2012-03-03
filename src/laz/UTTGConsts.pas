@@ -9,7 +9,7 @@ uses
   Classes, SysUtils;
 
 resourcestring
-
+  SActivityWithoutResources = 'Activity %s does not have assigned resources';
   SApplyDownhill = 'Applying Downhill';
   SAttendant = 'Attendant';
   SAssign = 'Assign';

@@ -1450,6 +1450,10 @@ msgstr ""
 msgid "When processing %s"
 msgstr ""
 
+#: uttgconsts.sactivitywithoutresources
+msgid "Activity %s does not have assigned resources"
+msgstr ""
+
 #: uttgconsts.sapplydownhill
 msgid "Applying Downhill"
 msgstr ""
@@ -1717,7 +1721,7 @@ msgid "Repair Probability"
 msgstr ""
 
 #: uttgconsts.sresourceoverflow
-msgid "For Resource [%s], the number of activities (%d)  exceed its capacity(%d)"
+msgid "For [%s], the number of activities %d exceeds its capacity %d"
 msgstr ""
 
 #: uttgconsts.sresourcerestrictionshead
@@ -1758,6 +1762,10 @@ msgstr ""
 
 #: uttgconsts.ssupervisor
 msgid "Supervisor"
+msgstr ""
+
+#: uttgconsts.sthemeoverflow
+msgid "For [%s] and the Resources [%s], the limit %d has been exceeded in %d"
 msgstr ""
 
 #: uttgconsts.sthenexttimetablesalreadyexists
