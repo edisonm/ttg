@@ -24,19 +24,25 @@ type
   TBooleanArray = array [0 .. 16383] of Boolean;
   
 type
-  generic TArrayToString<T,E> = class
+  generic TArrayHandler<T,E> = class
   public
-    class function ValueToString(const Value: array of T; const Separator: string = ' '): string;
+    type
+      TArrayOfT = array of T;
+      class function ValueToString(const Value: TArrayOfT; const Separator: string = ' '): string;
+      class function Clone(const Value: TArrayOfT): TArrayOfT;
+      class procedure Copy(const Source: TArrayOfT; var Target: TArrayOfT);
   end;
   
-  TIntToString = class
+  TIntegerHandler = class
   public
-    class function ValueToString(const Value: Integer; const Separator: string): string;
+    class function ValueToString(const Value: Integer; const Separator: string): string; inline;
+    class function Clone(const Value: Integer): Integer; inline;
+    class procedure Copy(const Source: Integer; var Target: Integer); inline;
   end;
   
-  TIntArrayToString = specialize TArrayToString<Integer,TIntToString>;
-  TIntArrayArrayToString = specialize TArrayToString<TDynamicIntegerArray,TIntArrayToString>;
-
+  TIntegerArrayHandler = specialize TArrayHandler<Integer,TIntegerHandler>;
+  TIntegerArrayArrayHandler = specialize TArrayHandler<TDynamicIntegerArray,TIntegerArrayHandler>;
+  
 procedure EqualSpaced(Strings: TStrings; ini, fin: Integer; const delim: string);
 function ExtractString(const Strings: string; var Pos: Integer; Separator: Char): string;
 procedure LoadNames(Source, Destination: TStrings);
@@ -45,6 +51,39 @@ function VarArrToStr(v: Variant; Separator: string = '; '): string;
 function RandomIndexes(Length: Integer): TDynamicIntegerArray;
 
 implementation
+
+class function TIntegerHandler.Clone(const Value: Integer): Integer; inline;
+begin
+  Result := Value;
+end;
+
+class procedure TIntegerHandler.Copy(const Source: Integer; var Target: Integer); inline;
+begin
+  Target := Source;
+end;
+
+
+class function TArrayHandler.Clone(const Value: TArrayOfT): TArrayOfT;
+var
+  i: Integer;
+begin
+  SetLength(Result, Length(Value));
+  for i := 0 to High(Value) do
+  begin
+    Result[i] := E.Clone(Value[i]);
+  end;
+end;
+
+class procedure TArrayHandler.Copy(const Source: TArrayOfT; var Target: TArrayOfT);
+var
+  i: Integer;
+begin
+  for i := 0 to High(Source) do
+  begin
+    E.Copy(Source[i], Target[i]);
+  end;
+end;
+
 
 procedure EqualSpaced(Strings: TStrings; ini, fin: Integer; const delim: string);
 var
@@ -102,12 +141,12 @@ begin
     Result := A;
 end;
   
-class function TIntToString.ValueToString(const Value: Integer; const Separator: string): string;
+class function TIntegerHandler.ValueToString(const Value: Integer; const Separator: string): string;
 begin
   Result := IntToStr(Value);
 end;
 
-class function TArrayToString.ValueToString(const Value: array of T; const Separator: string = ' '): string;
+class function TArrayHandler.ValueToString(const Value: TArrayOfT; const Separator: string = ' '): string;
 var
   i: Integer;
   SElement: string;
