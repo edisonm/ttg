@@ -771,6 +771,30 @@ var
         ActivityToNumResources[Activity, FillRequirement] := 0;
       end;
     end;
+    SetLength(ResourceTypeToNumber, FResourceTypeCount);
+    for Theme := 0 to FThemeCount - 1 do
+    begin
+      for ResourceType := 0 to FResourceTypeCount - 1 do
+      begin
+        Number := 0;
+        for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
+        begin
+          Activity := FThemeToActivities[Theme, ThemeActivity];
+          Inc(Number, FTmplActivityResourceTypeToNumber[Activity, ResourceType]);
+        end;
+        ResourceTypeToNumber[ResourceType] := Number;
+      end;
+      SetLength(ThemeResourceReconfigurable[Theme], Length(FThemeToResources[Theme]));
+      for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+      begin
+        Remaining := ThemeToRemainings[Theme, FillRequirement];
+        Resource := FThemeToResources[Theme, FillRequirement];
+        ResourceType := FResourceToResourceType[Resource];
+        Limit := FThemeToLimits[Theme, FillRequirement];
+        ThemeResourceReconfigurable[Theme, FillRequirement] := Limit * Length(FThemeToActivities[Theme])
+           <> FThemeToNumResources[Theme, FillRequirement] + ResourceTypeToNumber[ResourceType];
+      end;
+    end;
     for Theme := 0 to FThemeCount - 1 do
     begin
       for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
@@ -792,21 +816,6 @@ var
           end
         end;
       end;
-    end;
-    SetLength(ResourceTypeToNumber, FResourceTypeCount);
-    for Theme := 0 to FThemeCount - 1 do
-    begin
-      for ResourceType := 0 to FResourceTypeCount - 1 do
-      begin
-        Number := 0;
-        for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
-        begin
-          Activity := FThemeToActivities[Theme, ThemeActivity];
-          Inc(Number, FTmplActivityResourceTypeToNumber[Activity, ResourceType]);
-        end;
-        ResourceTypeToNumber[ResourceType] := Number;
-      end;
-      SetLength(ThemeResourceReconfigurable[Theme], Length(FThemeToResources[Theme]));
       for FillRequirement := 0 to High(FThemeToResources[Theme]) do
       begin
         Remaining := ThemeToRemainings[Theme, FillRequirement];
@@ -821,8 +830,6 @@ var
                       FResourceTypeToName[ResourceType] + ' (for example ' + FResourceToName[Resource] + ')',
                       Limit, Remaining]) + #13#10;
         end;
-        ThemeResourceReconfigurable[Theme, FillRequirement] := Limit * Length(FThemeToActivities[Theme])
-           <> FThemeToNumResources[Theme, FillRequirement] + ResourceTypeToNumber[ResourceType];
       end;
     end;
   end;
@@ -1179,7 +1186,7 @@ begin
   begin
     SetLength(FTTSessionToPeriod, FSessionCount);
     FTTActivityToNumResources := TIntegerArrayArrayHandler.Clone(FTmplActivityToNumResources);
-    FTmplActivityResourceTypeToNumber := TIntegerArrayArrayHandler.Clone(FTmplActivityResourceTypeToNumber);
+    FTTActivityResourceTypeToNumber := TIntegerArrayArrayHandler.Clone(FTmplActivityResourceTypeToNumber);
     FTablingInfo := TTimetableTablingInfo.Create;
     with TablingInfo do
     begin
