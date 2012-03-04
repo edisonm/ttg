@@ -714,7 +714,7 @@ msgid "Working days|Working days"
 msgstr ""
 
 #: tmainform.actdbexplorer.caption
-msgid "Database Explorer..."
+msgid "Database Explorer"
 msgstr ""
 
 #: tmainform.actexit.caption
@@ -1342,7 +1342,7 @@ msgstr ""
 
 #: ttimetableform.actbrokensessionday.caption
 msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONDAY.CAPTION"
-msgid "Themes cut by the day"
+msgid "Broken Sessions by Day"
 msgstr ""
 
 #: ttimetableform.actbrokensessionday.hint
@@ -1352,7 +1352,7 @@ msgstr ""
 
 #: ttimetableform.actbrokensessionhour.caption
 msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONHOUR.CAPTION"
-msgid "Themes cut by the hour"
+msgid "Broken Sessions by Hour"
 msgstr ""
 
 #: ttimetableform.actbrokensessionhour.hint
@@ -1361,7 +1361,7 @@ msgid "Themes cut by the hour|Themes cut by the hour"
 msgstr ""
 
 #: ttimetableform.actclashactivity.caption
-msgid "Clashes of subjects"
+msgid "Clashes of Activities"
 msgstr ""
 
 #: ttimetableform.actclashactivity.hint

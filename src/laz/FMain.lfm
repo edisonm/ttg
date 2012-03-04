@@ -1990,7 +1990,7 @@ object MainForm: TMainForm
     object ActDBExplorer: TAction
       Category = 'Tools'
       AutoCheck = True
-      Caption = 'Database Explorer...'
+      Caption = 'Database Explorer'
       OnExecute = ActDBExplorerExecute
     end
     object ActLangDefault: TAction
