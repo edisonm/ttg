@@ -31,6 +31,7 @@ type
       class function ValueToString(const Value: TArrayOfT; const Separator: string = ' '): string;
       class function Clone(const Value: TArrayOfT): TArrayOfT;
       class procedure Copy(const Source: TArrayOfT; var Target: TArrayOfT);
+      class function IndexOf(const Source: TArrayOfT; const Value: T): Integer;
   end;
   
   TIntegerHandler = class
@@ -84,6 +85,20 @@ begin
   end;
 end;
 
+class function TArrayHandler.IndexOf(const Source: TArrayOfT; const Value: T): Integer;
+var
+  i: Integer;
+begin
+  Result := -1;
+  for i := 0 to High(Source) do
+  begin
+    if Source[i] = Value then
+    begin
+      Result := i;
+      exit;
+    end;
+  end;
+end;
 
 procedure EqualSpaced(Strings: TStrings; ini, fin: Integer; const delim: string);
 var

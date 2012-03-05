@@ -734,7 +734,7 @@ var
     end;
   end;
 var
-  ActivityToResources, ActivityToNumResources, ResourceToNumResources: TDynamicIntegerArrayArray;
+  ActivityToNumResources, ResourceToNumResources: TDynamicIntegerArrayArray;
   ThemeResourceReconfigurable: TDynamicBooleanArrayArray;
   procedure GenerateTemplateData;
   var
@@ -743,14 +743,11 @@ var
     ResourceTypeToNumber: TDynamicIntegerArray;
     ThemeToRemainings: TDynamicIntegerArrayArray;
   begin
-    SetLength(ActivityToResources, FActivityCount);
     SetLength(ActivityToNumResources, FActivityCount);
     SetLength(ThemeToRemainings, FThemeCount);
     SetLength(ThemeResourceReconfigurable, FThemeCount);
     for Activity := 0 to FActivityCount - 1 do
     begin
-      SetLength(ActivityToResources[Activity],
-                Length(FThemeToResources[FActivityToTheme[Activity]]));
       SetLength(ActivityToNumResources[Activity],
                 Length(FThemeToResources[FActivityToTheme[Activity]]));
     end;
@@ -766,8 +763,6 @@ var
       Theme := FActivityToTheme[Activity];
       for FillRequirement := 0 to High(FThemeToResources[Theme]) do
       begin
-        ActivityToResources[Activity, FillRequirement]
-          := FThemeToResources[Theme, FillRequirement];
         ActivityToNumResources[Activity, FillRequirement] := 0;
       end;
     end;
@@ -835,8 +830,9 @@ var
   end;
   procedure FillTemplateData;
   var
-    Activity, Counter, Resource, NumResource, Participant, Offset, FillRequirement: Integer;
-    Added: Boolean;
+    Theme, Activity, ThemeActivity, Counter, Resource, NumResource, Participant,
+    Offset, FillRequirement: Integer;
+    DoAdd, DoDrop: Boolean;
   begin
     SetLength(FTmplActivityToResources, FActivityCount);
     SetLength(FTmplActivityToNumResources, FActivityCount);
@@ -845,7 +841,7 @@ var
     begin
       SetLength(FTmplActivityToResources[Activity],
                 Length(FActivityToResources[Activity])
-                + Length(ActivityToResources[Activity]));
+                + Length(FThemeToResources[FActivityToTheme[Activity]]));
       SetLength(FTmplActivityToNumResources[Activity],
                 Length(FActivityToResources[Activity])
                 + Length(ActivityToNumResources[Activity]));
@@ -856,48 +852,67 @@ var
         FTmplActivityToNumResources[Activity, Participant]
           := FActivityToNumResources[Activity, Participant];
       end;
-      Offset := Length(FActivityToResources[Activity]);
-      for FillRequirement := 0 to High(ActivityToResources[Activity]) do
+      FActivityToNumFixeds[Activity] := Length(FActivityToResources[Activity]);
+    end;
+    for Theme := 0 to FThemeCount - 1 do
+    begin
+      for FillRequirement := 0 to High(FThemeToResources[Theme]) do
       begin
-        Resource := ActivityToResources[Activity, FillRequirement];
-        if not ThemeResourceReconfigurable[FActivityToTheme[Activity], FillRequirement] then
+        if not ThemeResourceReconfigurable[Theme, FillRequirement] then
         begin
-          Added := False;
-          for Participant := 0 to High(FActivityToResources[Activity]) do
+          DoAdd := True;
+          DoDrop := True;
+          Resource := FThemeToResources[Theme, FillRequirement];
+          for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
           begin
-            if Resource = FActivityToResources[Activity, Participant] then
-            begin
-              Inc(FTmplActivityToNumResources[Activity, Participant],
-                  ActivityToNumResources[Activity, Participant]);
-              Added := True;
-              Break;
-            end;
+            Activity := FThemeToActivities[Theme, ThemeActivity];
+            if ActivityToNumResources[Activity, FillRequirement] <> 0 then
+              DoDrop := False;
+            Participant := TIntegerArrayHandler.IndexOf(FActivityToResources[Activity], Resource);
+            if Participant < 0 then
+              DoAdd := False;
           end;
-          if not Added then
+          if not DoDrop then
+          begin
+            if DoAdd then
+              for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
+              begin
+                Activity := FThemeToActivities[Theme, ThemeActivity];
+                Participant := TIntegerArrayHandler.IndexOf(FActivityToResources[Activity], Resource);
+                Inc(FTmplActivityToNumResources[Activity, Participant],
+                    ActivityToNumResources[Activity, FillRequirement]);
+              end
+            else
+              for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
+              begin
+                Activity := FThemeToActivities[Theme, ThemeActivity];
+                FTmplActivityToResources[Activity, FActivityToNumFixeds[Activity]]
+                  := FThemeToResources[Theme, FillRequirement];
+                FTmplActivityToNumResources[Activity, FActivityToNumFixeds[Activity]]
+                  := ActivityToNumResources[Activity, FillRequirement];
+                Inc(FActivityToNumFixeds[Activity]);
+              end;
+          end;
+        end;
+      end;
+      for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
+      begin
+        Activity := FThemeToActivities[Theme, ThemeActivity];
+        Offset := FActivityToNumFixeds[Activity];
+        for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+        begin
+          if ThemeResourceReconfigurable[Theme, FillRequirement] then
           begin
             FTmplActivityToResources[Activity, Offset]
-              := ActivityToResources[Activity, FillRequirement];
+              := FThemeToResources[Theme, FillRequirement];
             FTmplActivityToNumResources[Activity, Offset] :=
               ActivityToNumResources[Activity, FillRequirement];
             Inc(Offset);
           end;
         end;
+        SetLength(FTmplActivityToResources[Activity], Offset);
+        SetLength(FTmplActivityToNumResources[Activity], Offset);
       end;
-      FActivityToNumFixeds[Activity] := Offset;
-      for FillRequirement := 0 to High(ActivityToResources[Activity]) do
-      begin
-        Resource := ActivityToResources[Activity, FillRequirement];
-        if ThemeResourceReconfigurable[FActivityToTheme[Activity], FillRequirement] then
-        begin
-            FTmplActivityToResources[Activity, Offset]
-              := ActivityToResources[Activity, FillRequirement];
-            FTmplActivityToNumResources[Activity, Offset] :=
-              ActivityToNumResources[Activity, FillRequirement];
-            Inc(Offset);
-        end;
-      end;
-      SetLength(FTmplActivityToResources[Activity], Offset);
-      SetLength(FTmplActivityToNumResources[Activity], Offset);
     end;
     SetLength(FResourceToActivities, FResourceCount, 0);
     SetLength(ResourceToNumResources, FResourceCount, 0); 
@@ -1543,6 +1558,8 @@ begin
             ResourceType = FResourceToResourceType[Resource];
             NumResources1 := FTTActivityToNumResources[Activity, Participant1];
             Theme := FActivityToTheme[Activity];
+            Limit := FThemeResourceTypeToLimit[Theme, ResourceType];
+            Free1 := Limit - FTTActivityResourceTypeToNumber[Activity1];
             for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
             begin
               Activity2 := FThemeToActivities[ThemeActivity];
