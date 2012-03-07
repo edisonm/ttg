@@ -1581,13 +1581,13 @@ procedure TTimetable.Mutate;
       if (Random(2) = 0) and (Length(TablingInfo.FPriorityActivity) > 0) then
       begin
         {WriteLn(Format('Priority List: %s', [TIntegerArrayHandler.ValueToString(TablingInfo.FPriorityActivity)]));}
-        WriteLn(Format('Priority List: %d', [Length(TablingInfo.FPriorityActivity)]));
+        {WriteLn(Format('Priority List: %d', [Length(TablingInfo.FPriorityActivity)]));}
         Activity1 := TablingInfo.FPriorityActivity[Random(Length(TablingInfo.FPriorityActivity))];
         Session1 := FActivityToSessions[Activity1, Random(Length(FActivityToSessions[Activity1]))];
       end
       else
       begin
-        WriteLn('Unexpected behavior');
+        {WriteLn('Priority List Empty');}
         Session1 := Random(FSessionCount);
         Activity1 := FSessionToActivity[Session1];
       end;
