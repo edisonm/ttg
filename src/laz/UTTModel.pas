@@ -1256,7 +1256,6 @@ begin
   with TTimetableModel(Model) do
   begin
     Reset;
-    TIntegerArrayHandler.PushBack(TablingInfo.FPriorityActivity, Random(FActivityCount));
     SetLength(SelectedPeriod, FPeriodCount);
     for Count := 0 to FActivityCount - 1 do
     begin
@@ -1448,7 +1447,10 @@ begin
     for Day := Day1 to Day2 do
     begin
       if FDayActivityCount[Day, Activity] > IsNegative then
+      begin
         Inc(FClashActivity, Sign);
+        Result := True;
+      end;
       Inc(FDayActivityCount[Day, Activity], Sign);
     end;
     DDay := FDayCount div Length(FActivityToSessions[Activity]);
@@ -1512,7 +1514,9 @@ begin
       if Sign > 0 then
       begin
         TIntegerArrayHandler.Push(TablingInfo.FPriorityActivity, Activity);
-      end;
+      end
+      else
+        TIntegerArrayHandler.Drop(TablingInfo.FPriorityActivity, Activity);;
     end;
   end;
 end;
@@ -1574,13 +1578,16 @@ procedure TTimetable.Mutate;
   begin
     with TTimetableModel(Model) do
     begin
-      if Length(TablingInfo.FPriorityActivity) > 0 then
+      if (Random(2) = 0) and (Length(TablingInfo.FPriorityActivity) > 0) then
       begin
+        {WriteLn(Format('Priority List: %s', [TIntegerArrayHandler.ValueToString(TablingInfo.FPriorityActivity)]));}
+        WriteLn(Format('Priority List: %d', [Length(TablingInfo.FPriorityActivity)]));
         Activity1 := TablingInfo.FPriorityActivity[Random(Length(TablingInfo.FPriorityActivity))];
         Session1 := FActivityToSessions[Activity1, Random(Length(FActivityToSessions[Activity1]))];
       end
       else
       begin
+        WriteLn('Unexpected behavior');
         Session1 := Random(FSessionCount);
         Activity1 := FSessionToActivity[Session1];
       end;
@@ -1844,7 +1851,7 @@ begin
   begin
     Copy(ATimetableTablingInfo.FClashResourceType, FClashResourceType);
     Copy(ATimetableTablingInfo.FResourceRestrictionTypeToResourceCount, FResourceRestrictionTypeToResourceCount);
-    Copy(ATimetableTablingInfo.FPriorityActivity, FPriorityActivity);
+    FPriorityActivity := Clone(ATimetableTablingInfo.FPriorityActivity);
   end;
   with TIntegerArrayArrayHandler do
   begin
@@ -1866,7 +1873,7 @@ begin
   ATimetable := TTimetable(AIndividual);
   FValue := ATimetable.FValue;
   TablingInfo.Assign(ATimetable.TablingInfo);
-  TIntegerArrayHandler.Copy(ATimetable.FTTSessionToPeriod, FTTSessionToPeriod);
+  FTTSessionToPeriod := TIntegerArrayHandler.Clone(ATimetable.FTTSessionToPeriod);
   TIntegerArrayArrayHandler.Copy(ATimetable.FTTActivityToNumResources, FTTActivityToNumResources);
 end;
 
@@ -2127,7 +2134,6 @@ begin
   with TTimetableModel(Model), TablingInfo do
   begin
     Reset;
-    TIntegerArrayHandler.PushBack(FPriorityActivity, Random(FActivityCount));
     for Session := 0 to FSessionCount - 1 do
       DeltaValue(1, Session);
     DoUpdateValue;
