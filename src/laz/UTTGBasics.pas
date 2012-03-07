@@ -41,7 +41,10 @@ type
     class procedure Copy(const Source: Integer; var Target: Integer); inline;
   end;
   
-  TIntegerArrayHandler = specialize TArrayHandler<Integer,TIntegerHandler>;
+  TIntegerArrayHandler = class(specialize TArrayHandler<Integer,TIntegerHandler>)
+  public
+    class function Product(const Vector1, Vector2: TDynamicIntegerArray): Integer;
+  end;
   TIntegerArrayArrayHandler = specialize TArrayHandler<TDynamicIntegerArray,TIntegerArrayHandler>;
   
 procedure EqualSpaced(Strings: TStrings; ini, fin: Integer; const delim: string);
@@ -55,6 +58,9 @@ function RandomUniform(a, b: Integer): Integer;
 
 implementation
 
+uses
+  Math;
+
 class function TIntegerHandler.Clone(const Value: Integer): Integer; inline;
 begin
   Result := Value;
@@ -65,6 +71,15 @@ begin
   Target := Source;
 end;
 
+class function TIntegerArrayHandler.Product(const Vector1, Vector2: TDynamicIntegerArray): Integer;
+var
+  i, n: Integer;
+begin
+  Result := 0;
+  n := Min(High(Vector1), High(Vector2));
+  for i := 0 to n do
+    Result := Result + Vector1[i] * Vector2[i];
+end;
 
 class function TArrayHandler.Clone(const Value: TArrayOfT): TArrayOfT;
 var
