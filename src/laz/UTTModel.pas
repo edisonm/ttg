@@ -1035,6 +1035,7 @@ var
       FreePeriods := ResourceToFreePeriods[Resource];
       Number := FResourceToNumber[Resource] * FPeriodCount;
       Duration := Number - FreePeriods;
+      {$IFDEF DEBUG}
       WriteLn(Format('Resource %s/%d/%d, Activities=%d, Number=%d, Duration=%d, FreePeriods=%d',
                      [FResourceToName[Resource],
                       FResourceToIdResource[Resource],
@@ -1043,6 +1044,7 @@ var
                       Number,
                       Duration,
                       FreePeriods]));
+      {$ENDIF}
       for ResourceActivity := 0 to High(FResourceToActivities[Resource]) do
       begin
         Activity := FResourceToActivities[Resource, ResourceActivity];
@@ -1096,25 +1098,25 @@ begin
       FMinIdResourceRestrictionType,
       FIdResourceRestrictionTypeToResourceRestrictionType,
       FResourceRestrictionTypeToIdResourceRestrictionType);
-    FResourceRestrictionTypeCount := Length(FResourceRestrictionTypeToIdResourceRestrictionType);
-    LoadPeriod;
-    LoadResourceType;
-    LoadResource;
-    LoadResourceRestrictionType;
-    LoadResourceRestriction;
-    LoadTheme;
-    LoadActivity;
-    LoadParticipant;
-    LoadRequirement;
-    LoadFillRequirement;
-    GenerateTemplateData;
-    FillTemplateData;
-    LoadGreedyData;
-    if SErrors <> '' then
-      raise Exception.Create(SErrors);
-    WriteLn(Format('FThemeToResources=%s', [TIntegerArrayArrayHandler.ValueToString(FThemeToResources)]));
-    WriteLn(Format('FThemeToNumResources=%s', [TIntegerArrayArrayHandler.ValueToString(FThemeToNumResources)]));
   end;
+  FResourceRestrictionTypeCount := Length(FResourceRestrictionTypeToIdResourceRestrictionType);
+  LoadPeriod;
+  LoadResourceType;
+  LoadResource;
+  LoadResourceRestrictionType;
+  LoadResourceRestriction;
+  LoadTheme;
+  LoadActivity;
+  LoadParticipant;
+  LoadRequirement;
+  LoadFillRequirement;
+  GenerateTemplateData;
+  FillTemplateData;
+  LoadGreedyData;
+  if SErrors <> '' then
+    raise Exception.Create(SErrors);
+  WriteLn(Format('FThemeToResources=%s', [TIntegerArrayArrayHandler.ValueToString(FThemeToResources)]));
+  WriteLn(Format('FThemeToNumResources=%s', [TIntegerArrayArrayHandler.ValueToString(FThemeToNumResources)]));
 end;
 
 procedure TTimetableModel.Configure(AClashActivityValue,
@@ -1193,13 +1195,53 @@ end;
 
 procedure TTimetable.Cross(AIndividual: TIndividual);
 var
-  Group: Integer;
+  Group, MobileTheme, Theme, ResourceType, Activity, ThemeActivity, Tmp,
+  Participant: Integer;
+  SwapResourceType: TDynamicBooleanArray;
 begin
   with TTimetableModel(Model) do
   begin
     for Group := 0 to FGroupCount - 1 do
     begin
       CrossGroup(TTimetable(AIndividual), Group);
+    end;
+    // Note: [Theme * ResourceType] are swapables:
+    SetLength(SwapResourceType, FResourceTypeCount);
+    for MobileTheme := 0 to High(FThemeWithMobileResources) do
+    begin
+      Theme := FThemeWithMobileResources[MobileTheme];
+      for ResourceType := 0 to FResourceTypeCount - 1 do
+      begin
+        SwapResourceType[ResourceType] := (Random(2) = 0);
+      end;
+      for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
+      begin
+        Activity := FThemeToActivities[Theme, ThemeActivity];
+        for ResourceType := 0 to FResourceTypeCount - 1 do
+        begin
+          if SwapResourceType[ResourceType] then
+          begin
+            with TablingInfo do
+            begin
+              Tmp := TTimetable(AIndividual).TablingInfo.FActivityResourceTypeToNumber[Activity, ResourceType];
+              TTimetable(AIndividual).TablingInfo.FActivityResourceTypeToNumber[Activity, ResourceType]
+                := FActivityResourceTypeToNumber[Activity, ResourceType];
+              FActivityResourceTypeToNumber[Activity, ResourceType] := Tmp;
+            end;
+          end;
+        end;
+        for Participant := FActivityToNumFixeds[Activity] to High(FTTActivityToNumResources[Activity]) do
+        begin
+          ResourceType := FResourceToResourceType[FTmplActivityToResources[Activity, Participant]];
+          if SwapResourceType[ResourceType] then
+          begin
+            Tmp := TTimetable(AIndividual).FTTActivityToNumResources[Activity, Participant];
+            TTimetable(AIndividual).FTTActivityToNumResources[Activity, Participant]
+              := FTTActivityToNumResources[Activity, Participant];
+            FTTActivityToNumResources[Activity, Participant] := Tmp;
+          end;
+        end;
+      end;
     end;
     Update;
     TTimetable(AIndividual).Update;
@@ -1792,11 +1834,11 @@ function TTimetable.GetValue: Integer;
 begin
   Result :=
     ClashResourceValue +
+    ResourceRestrictionValue +
     ClashActivityValue +
     OutOfPositionEmptyHourValue +
     NonScatteredActivityValue +
     BreakTimetableResourceValue +
-    ResourceRestrictionValue +
     BrokenSessionValue;
 end;
 

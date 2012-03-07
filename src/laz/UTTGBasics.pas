@@ -35,6 +35,7 @@ type
       class function Push(var Vector: TArrayOfT; const Value: T): Integer;
       class function Drop(var Vector: TArrayOfT; const Value: T): Integer;
       class procedure PushBack(var Vector: TArrayOfT; const Value: T);
+      class procedure Zero(var Vector: TArrayOfT);
   end;
   
   TIntegerHandler = class
@@ -42,11 +43,14 @@ type
     class function ValueToString(const Value: Integer; const Separator: string): string; inline;
     class function Clone(const Value: Integer): Integer; inline;
     class procedure Copy(const Source: Integer; var Target: Integer); inline;
+    class procedure Zero(var Value: Integer); inline;
   end;
   
   TIntegerArrayHandler = class(specialize TArrayHandler<Integer,TIntegerHandler>)
   public
     class function Product(const Vector1, Vector2: TDynamicIntegerArray): Integer;
+    class procedure Inc(var Value: TDynamicIntegerArray; const Increment: TDynamicIntegerArray);
+    class function Max(const Vector: TDynamicIntegerArray): Integer;
   end;
   TIntegerArrayArrayHandler = specialize TArrayHandler<TDynamicIntegerArray,TIntegerArrayHandler>;
   
@@ -66,6 +70,25 @@ implementation
 
 uses
   Math;
+
+class procedure TArrayHandler.Zero(var Vector: TArrayOfT);
+var
+  i: Integer;
+begin
+  for i := 0 to High(Vector) do
+  begin
+    E.Zero(Vector[i]);
+  end;
+end;
+
+class procedure TIntegerArrayHandler.Inc(var Value: TDynamicIntegerArray; const Increment: TDynamicIntegerArray);
+var
+  i, n: Integer;
+begin
+  n := Min(High(Value), High(Increment));
+  for i := 0 to n do
+    Value[i] := Value[i] + Increment[i];
+end;
 
 function CummulatedTable(Table: TDynamicIntegerArray): TDynamicIntegerArray;
 var
@@ -107,6 +130,11 @@ begin
   end;
 end;
 
+class procedure TIntegerHandler.Zero(var Value: Integer); inline;
+begin
+  Value := 0;
+end;
+
 class function TIntegerHandler.Clone(const Value: Integer): Integer; inline;
 begin
   Result := Value;
@@ -127,6 +155,15 @@ begin
     Result := Result + Vector1[i] * Vector2[i];
 end;
 
+class function TIntegerArrayHandler.Max(const Vector: TDynamicIntegerArray): Integer;
+var
+  i: Integer;
+begin
+  Result := -MaxInt;
+  for i := 0 to High(Vector) do
+    Result := Math.Max(Result, Vector[i]);
+end;
+
 class function TArrayHandler.Push(var Vector: TArrayOfT; const Value: T): Integer;
 begin
   Result := IndexOf(Vector, Value);
@@ -136,7 +173,6 @@ begin
     Result := High(Vector);
   end;
 end;
-
 
 class function TArrayHandler.Drop(var Vector: TArrayOfT; const Value: T): Integer;
 var

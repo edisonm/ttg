@@ -41,6 +41,9 @@
             </SyntaxOptions>
           </Parsing>
           <CodeGeneration>
+            <Checks>
+              <RangeChecks Value="True"/>
+            </Checks>
             <Optimizations>
               <VariablesInRegisters Value="True"/>
             </Optimizations>
