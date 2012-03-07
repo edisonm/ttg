@@ -124,7 +124,7 @@ type
       FBrokenSessionDayForm, FClashResourceForm: TMasterDetailEditorForm;
     FResourceRestrictionNonSatisfiedForm: TSingleEditorForm;
     FTimetableResourceForm: TTimetableResourceForm;
-    {$IFNDEF FREEWARE}
+    {$IFNDEF READER}
     procedure ImproveTimetable;
     {$ENDIF}
   protected
@@ -195,7 +195,7 @@ procedure TTimetableForm.ActImproveTimeTableExecute(Sender: TObject);
 begin
   ActImproveTimeTable.Enabled := False;
   try
-{$IFNDEF FREEWARE}
+{$IFNDEF READER}
     ImproveTimetable;
 {$ENDIF}
   finally
@@ -204,7 +204,7 @@ begin
   end;
 end;
 
-{$IFNDEF FREEWARE}
+{$IFNDEF READER}
 procedure TTimetableForm.ImproveTimetable;
 var
   IdTimetableSource, IdTimetableTarget: Integer;

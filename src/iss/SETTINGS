@@ -1,6 +1,6 @@
 # -*- mode: Makefile; -*-
 
-BuildMode?=full
+BuildMode?=release
 TTGSRC=../laz
 BuildId?=$(shell cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getBuildId)
 TTGEXE?=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getTTGEXE)

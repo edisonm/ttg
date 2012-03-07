@@ -17,7 +17,7 @@ uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, MTProcs, SysUtils, Classes, Graphics,
   Forms, Dialogs, ExtCtrls, Menus, ComCtrls, Buttons, ActnList, FSplash, FSingleEditor,
   Controls, FCrossManyToManyEditor0, FEditor, UConfigStorage
-{$IFNDEF FREEWARE}, UTTModel, UMakeTT{$ENDIF};
+{$IFNDEF READER}, UTTModel, UMakeTT{$ENDIF};
 
 type
 
@@ -165,7 +165,7 @@ type
     procedure LoadFromFile(const AFileName: string);
     procedure SaveToFile(const AFileName: string);
     function ConfirmOperation: boolean;
-{$IFNDEF FREEWARE}
+{$IFNDEF READER}
     procedure ElaborarTimetables(const SIdTimetables: string);
 {$ENDIF}
     procedure RegisterSoftware;
@@ -380,12 +380,12 @@ begin
 end;
 
 procedure TMainForm.ActMakeTimetableExecute(Sender: TObject);
-{$IFNDEF FREEWARE}
+{$IFNDEF READER}
 var
   SIdTimetables: string;
 {$ENDIF}
 begin
-{$IFNDEF FREEWARE}
+{$IFNDEF READER}
   try
     SIdTimetables := IntToStr(MasterDataModule.NewIdTimetable);
     if not InputQuery(SGenerateTimetables, STimetableCodesToGenerate, SIdTimetables) then
@@ -397,7 +397,7 @@ begin
 {$ENDIF}
 end;
 
-{$IFNDEF FREEWARE}
+{$IFNDEF READER}
 procedure TMainForm.ElaborarTimetables(const SIdTimetables: string);
 var
   ValidIds, WrongIds: TDynamicIntegerArray;
@@ -616,7 +616,7 @@ begin
     FRelProgress := 0;
     FStep := 1;
     FLogStrings := TStringList.Create;
-    {$IFDEF FREEWARE}
+    {$IFDEF READER}
     ActMakeTimetable.Enabled := False;
     Caption := Caption + ' >>> Freeware <<<';
     {$ENDIF}
@@ -645,7 +645,7 @@ begin
     begin
       MainForm.Caption := Application.Title + ' - ' +
         MasterDataModule.ConfigStorage.NaInstitution;
-      {$IFNDEF FREEWARE}
+      {$IFNDEF READER}
       Inc(FUpdateIndex);
       {$ENDIF}
     end

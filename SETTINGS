@@ -2,7 +2,7 @@
 
 TTGSQL=dat/ttg.sql
 
-BUILDMODES=free debug release
+BUILDMODES=reader debug release
 
 ISSSRC=src/iss
 

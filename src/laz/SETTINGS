@@ -1,6 +1,6 @@
 # -*- mode: Makefile; -*-
 
-BuildMode?=full
+BuildMode?=release
 APPNAME=Automatic Timetable Generator
 APPVERSION=1.2.2
 REVISION:=$(shell svnversion|sed -e s/':'/'_'/g)
