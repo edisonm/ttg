@@ -23,7 +23,7 @@
       <BuildNr Value="314"/>
       <Language Value="040A"/>
       <CharSet Value="04B0"/>
-      <StringTable LegalCopyright="2011 por Edison Mera" ProductVersion="" FileDescription="Horarios para Colegio"/>
+      <StringTable FileDescription="Timetable Generator System" LegalCopyright="2012, Edison Mera" ProductVersion=""/>
     </VersionInfo>
     <BuildModes Count="2">
       <Item1 Name="full" Default="True"/>
@@ -385,7 +385,6 @@
       <Checks>
         <RangeChecks Value="True"/>
       </Checks>
-      <SmallerCode Value="True"/>
     </CodeGeneration>
     <Other>
       <CompilerMessages>
@@ -397,7 +396,8 @@
 -dZEOS_DISABLE_ADO
 -dZEOS_DISABLE_INTERBASE
 -dZEOS_DISABLE_ORACLE
--dZEOS_DISABLE_ASA"/>
+-dZEOS_DISABLE_ASA
+-dDEBUG"/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>

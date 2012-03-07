@@ -612,6 +612,7 @@ msgid "Save Script"
 msgstr "Guardar script"
 
 #: tdbexplorerform.caption
+msgctxt "tdbexplorerform.caption"
 msgid "Database Explorer"
 msgstr "Base de datos"
 
@@ -721,6 +722,7 @@ msgid "Working days|Working days"
 msgstr "Dias laborables|Dias laborables"
 
 #: tmainform.actdbexplorer.caption
+msgctxt "tmainform.actdbexplorer.caption"
 msgid "Database Explorer"
 msgstr "Base de datos..."
 

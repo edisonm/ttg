@@ -400,7 +400,7 @@ end;
 {$IFNDEF FREEWARE}
 procedure TMainForm.ElaborarTimetables(const SIdTimetables: string);
 var
-  ValidIdes, WrongIdes: TDynamicIntegerArray;
+  ValidIds, WrongIds: TDynamicIntegerArray;
   procedure ProcessIdList(const IdList: string);
   var
     d: string;
@@ -420,24 +420,24 @@ var
         IdTimetable2 := StrToInt(ExtractString(d, Position2, '-'));
       if Position2 <= Length(d) then
         raise Exception.Create(SInvalidData);
-      SetLength(ValidIdes, Valids + IdTimetable2 - IdTimetable1 + 1);
-      SetLength(WrongIdes, Wrongs + IdTimetable2 - IdTimetable1 + 1);
+      SetLength(ValidIds, Valids + IdTimetable2 - IdTimetable1 + 1);
+      SetLength(WrongIds, Wrongs + IdTimetable2 - IdTimetable1 + 1);
       for IdTimetable := IdTimetable1 to IdTimetable2 do
       begin
         if SourceDataModule.TbTimetable.Locate('IdTimetable', IdTimetable, []) then
         begin
-          WrongIdes[Wrongs] := IdTimetable;
+          WrongIds[Wrongs] := IdTimetable;
           Inc(Wrongs);
         end
         else
         begin
-          ValidIdes[Valids] := IdTimetable;
+          ValidIds[Valids] := IdTimetable;
           Inc(Valids);
         end;
       end;
     end;
-    SetLength(ValidIdes, Valids);
-    SetLength(WrongIdes, Wrongs);
+    SetLength(ValidIds, Valids);
+    SetLength(WrongIds, Wrongs);
   end;
 begin
   with SourceDataModule do
@@ -446,17 +446,17 @@ begin
     try
       ProcessIdList(SIdTimetables);
       {$IFDEF THREADED}
-      TMakeTimetableThread.Create(ValidIdes, False);
+      TMakeTimetableThread.Create(ValidIds, False);
       {$ELSE}
-      with TMakeTimetableThread.Create(ValidIdes, True) do
+      with TMakeTimetableThread.Create(ValidIds, True) do
       try
         Execute;
       finally
         Free;
       end;
       {$ENDIF}
-      if Length(WrongIdes) > 0 then
-        MessageDlg(Format(STheNextTimetablesAlreadyExists, [VarArrToStr(WrongIdes)]),
+      if Length(WrongIds) > 0 then
+        MessageDlg(Format(STheNextTimetablesAlreadyExists, [VarArrToStr(WrongIds)]),
           mtError, [mbOK], 0);
     finally
       ActMakeTimetable.Enabled := True;

@@ -7,7 +7,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, SynHighlighterSQL, SynMemo, LResources, Forms,
-  Controls, Graphics, Dialogs, db, StdCtrls, DBGrids, Menus, DbCtrls, ComCtrls,
+  Controls, Graphics, Dialogs, db, StdCtrls, Menus, DbCtrls,
   ExtCtrls, ActnList, ZDataset, ZSqlMetadata, DSource, FSingleEditor;
 
 type

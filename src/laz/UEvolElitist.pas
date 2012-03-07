@@ -252,7 +252,7 @@ begin
   Offset := MaxValue;
   //Offset := (MaxValue - MinValue) * FPopulationSize + 1;
   Offset := 1;
-  for Individual := 0 to High(FPopulation) do
+  for Individual := 0 to FPopulationSize - 1 do
   begin
     Selecteds[Individual] := 0;
     Aptitudes[Individual] := Offset + MaxValue - FPopulation[Individual].Value;

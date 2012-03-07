@@ -16,12 +16,12 @@ type
   TMakeTimetableThread = class(TThread)
   private
     FTimetableModel: TTimetableModel;
-    FValidIdes: TDynamicIntegerArray;
+    FValidIds: TDynamicIntegerArray;
     procedure Parallel(Index: PtrInt; Data: Pointer; Item: TMultiThreadProcItem);
     function ProcessTimetable(AIdTimetable, ATimetable: Integer): Boolean;
   public
   procedure Execute; override;
-  constructor Create(const AValidIdes: TDynamicIntegerArray; CreateSuspended: Boolean);
+  constructor Create(const AValidIds: TDynamicIntegerArray; CreateSuspended: Boolean);
   destructor Destroy; override;
   end;
 
@@ -202,17 +202,34 @@ end;
 procedure TMakeTimetableThread.Parallel(Index: PtrInt; Data: Pointer;
   Item: TMultiThreadProcItem);
 begin
-  MasterDataModule.ConfigStorage.InitRandom;
-  if ProcessTimetable(FValidIdes[Index], Index) then
-    Terminate;
+  try
+    MasterDataModule.ConfigStorage.InitRandom;
+    if ProcessTimetable(FValidIds[Index], Index) then
+      Terminate;
+  except
+    on E: Exception do
+      begin
+        WriteLn(StdErr, E.Message);
+        raise;
+      end;
+  end;
 end;
 
 procedure TMakeTimetableThread.Execute;
+{$IFNDEF THREADED}
+var
+  Index: PtrInt;
+{$ENDIF}
 begin
-  ProcThreadPool.DoParallel(Parallel, 0, High(FValidIdes), nil);
+  {$IFDEF THREADED}
+  ProcThreadPool.DoParallel(Parallel, 0, High(FValidIds), nil);
+  {$ELSE}
+  for Index := 0 to High(FValidIds) do
+    Parallel(Index, nil, nil);
+  {$ENDIF}
 end;
 
-constructor TMakeTimetableThread.Create(const AValidIdes: TDynamicIntegerArray;
+constructor TMakeTimetableThread.Create(const AValidIds: TDynamicIntegerArray;
   CreateSuspended: Boolean);
 var
   i: Integer;
@@ -222,10 +239,10 @@ begin
     FTimetableModel := TTimetableModel.Create(
       ClashActivity, BreakTimetableResource, OutOfPositionEmptyHour,
       BrokenSession, NonScatteredActivity);
-  SetLength(FValidIdes, Length(AValidIdes));
-  // ProcThreadPool.MaxThreadCount := Length(AValidIdes);
-  for i := 0 to High(AValidIdes) do
-    FValidIdes[i] := AValidIdes[i];
+  SetLength(FValidIds, Length(AValidIds));
+  // ProcThreadPool.MaxThreadCount := Length(AValidIds);
+  for i := 0 to High(AValidIds) do
+    FValidIds[i] := AValidIds[i];
   inherited Create(CreateSuspended);
 end;
 

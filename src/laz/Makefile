@@ -33,7 +33,7 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-$(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs
+$(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
 	cp $(TTGEXE) $(TTGEXE)_strip
 	strip --strip-all $(TTGEXE)_strip

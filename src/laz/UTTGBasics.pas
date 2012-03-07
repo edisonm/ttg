@@ -49,7 +49,9 @@ function ExtractString(const Strings: string; var Pos: Integer; Separator: Char)
 procedure LoadNames(Source, Destination: TStrings);
 function NullToZero(A: Variant): Variant;
 function VarArrToStr(v: Variant; Separator: string = '; '): string;
-function RandomIndexes(Length: Integer): TDynamicIntegerArray;
+function RandomIndexes(Length: Integer): TDynamicIntegerArray; overload;
+function RandomIndexes(Length, Limit: Integer): TDynamicIntegerArray; overload;
+function RandomUniform(a, b: Integer): Integer;
 
 implementation
 
@@ -199,23 +201,34 @@ begin
     Result := VarToStr(v);
 end;
 
-function RandomIndexes(Length: Integer): TDynamicIntegerArray;
+function RandomIndexes(Length, Limit: Integer): TDynamicIntegerArray;
 var
-  I, N, Tmp: Integer;
+  I, N: Integer;
+  Numbers: TDynamicIntegerArray;
 begin
   SetLength(Result, Length);
-  for I := 0 to Length - 1 do
-    Result[I] := I;
+  SetLength(Numbers, Limit);
+  for I := 0 to Limit - 1 do
+    Numbers[I] := I;
   for I := 0 to Length - 1 do
   begin
-    N := Random(Length - I);
+    N := Random(Limit - I);
     if N <> 0 then
     begin
-      Tmp := Result[I];
-      Result[I] := Result[N + I];
-      Result[N + I] := Tmp;
+      Result[I] := Numbers[N + I];
+      Numbers[N + I] := Numbers[I];
     end;
   end;
+end;
+
+function RandomIndexes(Length: Integer): TDynamicIntegerArray;
+begin
+  Result := RandomIndexes(Length, Length);
+end;
+
+function RandomUniform(a, b: Integer): Integer;
+begin
+  Result := a + Random(b - a + 1);
 end;
 
 end.
