@@ -32,6 +32,8 @@ type
       class function Clone(const Value: TArrayOfT): TArrayOfT;
       class procedure Copy(const Source: TArrayOfT; var Target: TArrayOfT);
       class function IndexOf(const Source: TArrayOfT; const Value: T): Integer;
+      class function Push(Vector: TArrayOfT; const Value: T): Integer;
+      class procedure PushBack(Vector: TArrayOfT; const Value: T);
   end;
   
   TIntegerHandler = class
@@ -79,6 +81,25 @@ begin
   n := Min(High(Vector1), High(Vector2));
   for i := 0 to n do
     Result := Result + Vector1[i] * Vector2[i];
+end;
+
+class function TArrayHandler.Push(Vector: TArrayOfT; const Value: T): Integer;
+begin
+  Result := IndexOf(Vector, Value);
+  if Result = -1 then
+  begin
+    PushBack(Vector, Value);
+    Result := High(Vector);
+  end;
+end;
+
+class procedure TArrayHandler.PushBack(Vector: TArrayOfT; const Value: T);
+var
+  Count: Integer;
+begin
+  Count := Length(Vector);
+  SetLength(Vector, Count + 1);
+  Vector[Count] := Value;
 end;
 
 class function TArrayHandler.Clone(const Value: TArrayOfT): TArrayOfT;
