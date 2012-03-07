@@ -180,10 +180,10 @@ type
     procedure CrossGroup(Timetable2: TTimetable; AGroup: Integer);
     procedure DeltaActivityResourceValue(Activity, Participant, Resource,
                                          DeltaNumResource: Integer);
-    function DeltaResourceValue(Period1, Period2, Resource, NumResource: Integer): Boolean;
+    procedure DeltaResourceValue(Period1, Period2, Resource, NumResource: Integer);
     procedure DeltaResourcesValue(Sign, Period1, Period2: Integer;
                                   Resources, NumResources: TDynamicIntegerArray);
-    function DeltaPeriodsValue(Sign, IsNegative, Period1, Period2, Activity: Integer): Boolean;
+    procedure DeltaPeriodsValue(Sign, Period1, Period2, Activity: Integer);
     procedure DeltaValue(Sign, Session: Integer);
     function GetClashActivityValue: Integer;
     function GetNonScatteredActivityValue: Integer;
@@ -1231,7 +1231,7 @@ begin
       SetLength(FDayResourceEmptyHourCount, FDayCount, FResourceCount);
       SetLength(FClashResourceType, FResourceTypeCount);
       SetLength(FResourceRestrictionTypeToResourceCount, FResourceRestrictionTypeCount);
-      SetLength(FPriorityActivity, 0);
+      SetLength(FPriorityActivity, FActivityCount);
     end;
   end;
 end;
@@ -1320,13 +1320,11 @@ begin
   end;
 end;
 
-// Returns True if the function modifies the hard restrictions
-function TTimetable.DeltaResourceValue(Period1, Period2, Resource, NumResource: Integer): Boolean;
+procedure TTimetable.DeltaResourceValue(Period1, Period2, Resource, NumResource: Integer);
 var
   DeltaClashResource, DeltaBreakTimetableResource, ResourceRestrictionType,
   Day, Hour, Period, Period0, MinPeriod, MaxPeriod: Integer;
 begin
-  Result := False;
   if NumResource <> 0 then
   with TTimetableModel(Model), TablingInfo do
   begin
@@ -1423,17 +1421,20 @@ begin
           end;
         end;
       end;
-      Result := Result or (DeltaClashResource <> 0)
     end;
   end;
   {else if FHourCount - 1 <> FPeriodToHour[Period] then
    Inc(FOutOfPositionEmptyHour, Sign);}
 end;
 
-function TTimetable.DeltaPeriodsValue(Sign, IsNegative, Period1, Period2, Activity: Integer): Boolean;
+procedure TTimetable.DeltaPeriodsValue(Sign, Period1, Period2, Activity: Integer);
 var
-  Day, DDay, Day1, Day2, Hour1, Hour2, DeltaBrokenSession: Integer;
+  IsNegative, Day, DDay, Day1, Day2, Hour1, Hour2, DeltaBrokenSession: Integer;
 begin
+  if Sign > 0 then
+    IsNegative := 0
+  else
+    IsNegative := 1;
   with TTimetableModel(Model), TablingInfo do
   begin
     Day1 := FPeriodToDay[Period1];
@@ -1443,13 +1444,11 @@ begin
     DeltaBrokenSession := (Day2 - Day1) * (FHourCount + 1)
       + Hour2 - Hour1 + Period1 - Period2;
     Inc(FBrokenSession, Sign * DeltaBrokenSession);
-    Result := DeltaBrokenSession <> 0;
     for Day := Day1 to Day2 do
     begin
       if FDayActivityCount[Day, Activity] > IsNegative then
       begin
         Inc(FClashActivity, Sign);
-        Result := True;
       end;
       Inc(FDayActivityCount[Day, Activity], Sign);
     end;
@@ -1462,7 +1461,6 @@ begin
         if FDayActivityAccumulated[Day, Activity] > IsNegative then
         begin
           Inc(FNonScatteredActivity, Sign);
-          Result := True;
         end;
         Inc(FDayActivityAccumulated[Day, Activity], Sign);
       end;
@@ -1486,38 +1484,21 @@ end;
 procedure TTimetable.DeltaValue(Sign, Session: Integer);
 var
   Participant,  Resource, NumResource, Period1, Period2,
-  Activity, Duration, IsNegative: Integer;
-  HavePriority: Boolean;
+  Activity, Duration: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
     Duration := FSessionToDuration[Session];
     Period1 := FTTSessionToPeriod[Session];
     Period2 := Period1 + Duration - 1;
-    if Sign > 0 then
-      IsNegative := 0
-    else
-      IsNegative := 1;
     Activity := FSessionToActivity[Session];
-    HavePriority := False;
     for Participant := 0 to High(FTmplActivityToResources[Activity]) do
     begin
       Resource := FTmplActivityToResources[Activity, Participant];
       NumResource := FTTActivityToNumResources[Activity, Participant];
-      if DeltaResourceValue(Period1, Period2, Resource, Sign * NumResource) then
-        HavePriority := True;
+      DeltaResourceValue(Period1, Period2, Resource, Sign * NumResource);
     end;
-    if DeltaPeriodsValue(Sign, IsNegative, Period1, Period2, Activity) then
-      HavePriority := True;
-    if HavePriority and (Sign > 0) then
-    begin
-      if Sign > 0 then
-      begin
-        TIntegerArrayHandler.Push(TablingInfo.FPriorityActivity, Activity);
-      end
-      else
-        TIntegerArrayHandler.Drop(TablingInfo.FPriorityActivity, Activity);;
-    end;
+    DeltaPeriodsValue(Sign, Period1, Period2, Activity);
   end;
 end;
 
@@ -1578,16 +1559,13 @@ procedure TTimetable.Mutate;
   begin
     with TTimetableModel(Model) do
     begin
-      if (Random(2) = 0) and (Length(TablingInfo.FPriorityActivity) > 0) then
+      if (Random(1) = 0) then
       begin
-        {WriteLn(Format('Priority List: %s', [TIntegerArrayHandler.ValueToString(TablingInfo.FPriorityActivity)]));}
-        {WriteLn(Format('Priority List: %d', [Length(TablingInfo.FPriorityActivity)]));}
-        Activity1 := TablingInfo.FPriorityActivity[Random(Length(TablingInfo.FPriorityActivity))];
+        Activity1 := RandomTable(TablingInfo.FPriorityActivity);
         Session1 := FActivityToSessions[Activity1, Random(Length(FActivityToSessions[Activity1]))];
       end
       else
       begin
-        {WriteLn('Priority List Empty');}
         Session1 := Random(FSessionCount);
         Activity1 := FSessionToActivity[Session1];
       end;
@@ -1777,16 +1755,12 @@ begin
 end;
 
 function TTimetable.GetClashResourceValue: Integer;
-var
-  ResourceType: Integer;
 begin
   Result := TIntegerArrayHandler.Product(TablingInfo.FClashResourceType,
                                     TTimetableModel(Model).FResourceTypeToValue);
 end;
 
 function TTimetable.GetResourceRestrictionValue: Integer;
-var
-  ResourceRestrictionType: Integer;
 begin
   Result := TIntegerArrayHandler.Product(TablingInfo.FResourceRestrictionTypeToResourceCount,
                                    TTimetableModel(Model).FResourceRestrictionTypeToValue);
@@ -1851,7 +1825,7 @@ begin
   begin
     Copy(ATimetableTablingInfo.FClashResourceType, FClashResourceType);
     Copy(ATimetableTablingInfo.FResourceRestrictionTypeToResourceCount, FResourceRestrictionTypeToResourceCount);
-    FPriorityActivity := Clone(ATimetableTablingInfo.FPriorityActivity);
+    Copy(ATimetableTablingInfo.FPriorityActivity, FPriorityActivity);
   end;
   with TIntegerArrayArrayHandler do
   begin
@@ -1878,15 +1852,33 @@ begin
 end;
 
 procedure TTimetable.SaveToStream(Stream: TStream);
+var
+  Activity: Integer;
 begin
   with TTimetableModel(Model) do
+  begin
     Stream.Write(FTTSessionToPeriod[0], FSessionCount * SizeOf(Integer));
+    for Activity := 0 to FActivityCount - 1 do
+      Stream.Write(FTTActivityToNumResources[Activity, 0], Length(FTTActivityToNumResources[Activity]) * SizeOf(Integer));
+    for Activity := 0 to FActivityCount - 1 do
+      Stream.Write(TablingInfo.FActivityResourceTypeToNumber[Activity, 0],
+                   Length(TablingInfo.FActivityResourceTypeToNumber[Activity]) * SizeOf(Integer));
+  end;
 end;
 
 procedure TTimetable.LoadFromStream(Stream: TStream);
+var
+  Activity: Integer;
 begin
   with TTimetableModel(Model) do
+  begin
     Stream.Read(FTTSessionToPeriod[0], FSessionCount * SizeOf(Integer));
+    for Activity := 0 to FActivityCount - 1 do
+      Stream.Read(FTTActivityToNumResources[Activity, 0], Length(FTTActivityToNumResources[Activity]) * SizeOf(Integer));
+    for Activity := 0 to FActivityCount - 1 do
+      Stream.Read(TablingInfo.FActivityResourceTypeToNumber[Activity, 0],
+                   Length(TablingInfo.FActivityResourceTypeToNumber[Activity]) * SizeOf(Integer));
+  end;
   Update;
 end;
 
@@ -2123,21 +2115,46 @@ begin
         FDayActivityCount[Day, Activity] := 0;
       end;
     end;
-    SetLength(FPriorityActivity, 0);
+    SetLength(FPriorityActivity, FActivityCount);
+    for Activity := 0 to FActivityCount - 1 do
+      FPriorityActivity[Activity] := 0;
+    FValue := 0;
   end;
 end;
 
 procedure TTimetable.Update;
 var
-  Session: Integer;
+  Activity, Session, ActivitySession, Delta, Value1: Integer;
+  function PartialValue: Integer;
+  begin
+    Result := ClashResourceValue + ClashActivityValue + BrokenSessionValue;
+  end;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
     Reset;
-    for Session := 0 to FSessionCount - 1 do
-      DeltaValue(1, Session);
-    DoUpdateValue;
-  end
+    {DoUpdateValue;}
+    {MinValue := MaxInt;}
+    for Activity := 0 to FActivityCount - 1 do
+    begin
+      Value1 := PartialValue;
+      for ActivitySession := 0 to High(FActivityToSessions[Activity]) do
+      begin
+        Session := FActivityToSessions[Activity, ActivitySession];
+        DeltaValue(1, Session);
+      end;
+      DoUpdateValue;
+      Delta := PartialValue - Value1;
+      TablingInfo.FPriorityActivity[Activity] := Max(0, Delta);
+      {if MinValue > Delta then
+        MinValue := Delta;}
+    end;
+    {for Activity := 0 to FActivityCount - 1 do
+    begin
+      Dec(TablingInfo.FPriorityActivity[Activity], MinValue);
+    end;}
+  end;
+  {WriteLn(Format('Priority List: %s', [TIntegerArrayHandler.ValueToString(TablingInfo.FPriorityActivity)]));}
 end;
 
 {$IFDEF DEBUG}

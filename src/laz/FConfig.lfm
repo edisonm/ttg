@@ -434,7 +434,7 @@ object ConfigForm: TConfigForm
         Height = 15
         Top = 86
         Width = 98
-        Caption = 'Broken Activities:'
+        Caption = 'Broken Sessions:'
         ParentColor = False
       end
       object LbNonScatteredActivity: TLabel

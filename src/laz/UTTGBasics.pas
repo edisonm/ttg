@@ -58,11 +58,54 @@ function VarArrToStr(v: Variant; Separator: string = '; '): string;
 function RandomIndexes(Length: Integer): TDynamicIntegerArray; overload;
 function RandomIndexes(Length, Limit: Integer): TDynamicIntegerArray; overload;
 function RandomUniform(a, b: Integer): Integer;
+function RandomTable(Table: TDynamicIntegerArray): Integer;
+function RandomCummulated(Cummulated: TDynamicIntegerArray): Integer;
+function CummulatedTable(Table: TDynamicIntegerArray): TDynamicIntegerArray;
 
 implementation
 
 uses
   Math;
+
+function CummulatedTable(Table: TDynamicIntegerArray): TDynamicIntegerArray;
+var
+  i: Integer;
+begin
+  SetLength(Result, Length(Table));
+  Result[0] := Table[0];
+  for i := 1 to High(Table) do
+  begin
+    Result[i] := Result[i - 1] + Table[i];
+  end;
+end;
+
+function RandomTable(Table: TDynamicIntegerArray): Integer;
+begin
+  if Length(Table) = 0 then
+  begin
+    Result := -1;
+    Exit;
+  end;
+  Result := RandomCummulated(CummulatedTable(Table));
+end;
+
+function RandomCummulated(Cummulated: TDynamicIntegerArray): Integer;
+var
+  p, Sum: Integer;
+begin
+  Sum := Cummulated[High(Cummulated)];
+  if Sum = 0 then
+  begin
+    Result := Random(Length(Cummulated));
+    Exit;
+  end;
+  Result := 0;
+  p := Random(Sum);
+  while Cummulated[Result] <= p do
+  begin
+    Inc(Result);
+  end;
+end;
 
 class function TIntegerHandler.Clone(const Value: Integer): Integer; inline;
 begin
@@ -162,7 +205,7 @@ var
 begin
   Com := 1;
   while True do begin
-//    if Finalice then Exit;
+    // if Finalice then Exit;
     Max := -MaxLongint - 1;
     for i := ini to fin do begin
       s := Copy(Strings[i], Com, Length(Strings[i]) - Com + 1);

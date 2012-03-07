@@ -413,6 +413,7 @@
     </SearchPaths>
     <CodeGeneration>
       <SmartLinkUnit Value="True"/>
+      <SmallerCode Value="True"/>
       <Optimizations>
         <OptimizationLevel Value="3"/>
       </Optimizations>
@@ -434,7 +435,7 @@
 -dZEOS_DISABLE_INTERBASE
 -dZEOS_DISABLE_ORACLE
 -dZEOS_DISABLE_ASA
--Xs- -FW../../bin/$(TargetCPU)-$(TargetOS)-reader/ttg.wpo -OWall"/>
+-Xs- -FW../../bin/$(TargetCPU)-$(TargetOS)-release/ttg.wpo -OWall"/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>

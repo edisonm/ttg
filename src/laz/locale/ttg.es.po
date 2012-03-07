@@ -399,7 +399,7 @@ msgstr "Huecos h. prof.:"
 
 #: tconfigform.lbbrokenactivity.caption
 msgctxt "tconfigform.lbbrokenactivity.caption"
-msgid "Broken Activities:"
+msgid "Broken Sessions:"
 msgstr "Materias cortadas:"
 
 #: tconfigform.lbclashactivity.caption

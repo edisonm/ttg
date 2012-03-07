@@ -393,7 +393,7 @@ msgstr ""
 
 #: tconfigform.lbbrokenactivity.caption
 msgctxt "TCONFIGFORM.LBBROKENACTIVITY.CAPTION"
-msgid "Broken Activities:"
+msgid "Broken Sessions:"
 msgstr ""
 
 #: tconfigform.lbclashactivity.caption

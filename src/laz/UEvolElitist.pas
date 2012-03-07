@@ -268,7 +268,7 @@ begin
   begin
     p := Random(Sum);
     Selected := 0;
-    while Cummulated[Selected] < p do
+    while Cummulated[Selected] <= p do
     begin
       Inc(Selected);
     end;
