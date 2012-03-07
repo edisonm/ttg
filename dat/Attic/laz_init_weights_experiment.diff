@@ -1,0 +1,121 @@
+Index: UEvolElitist.pas
+===================================================================
+--- UEvolElitist.pas	(revision 878)
++++ UEvolElitist.pas	(working copy)
+@@ -45,6 +45,7 @@
+     procedure Select;
+     procedure Cross;
+     procedure Mutate;
++    procedure InitWeights;
+     procedure InternalCrossIndividuals(Individual1, Individual2: Integer);
+     function GetAverageValue: Double;
+     procedure SetPopulationSize(APopulationSize: Integer);
+@@ -331,6 +332,11 @@
+   end;
+ end;
+ 
++procedure TEvolElitist.InitWeights;
++begin
++  Model.InitWeights(BestIndividual, Length(FPopulation));
++end;
++
+ procedure TEvolElitist.Execute(RefreshInterval: Integer);
+ var
+   Stop: Boolean;
+@@ -339,6 +345,7 @@
+   inherited;
+   FRandSeed := RandSeed;
+   MakeRandom;
++  Model.InitWeights(FPopulation, Length(FPopulation));
+   Elitist;
+   Stop := False;
+   Iteration := 0;
+@@ -346,6 +353,7 @@
+     while (Iteration < FMaxIteration) and not Stop do
+     begin
+       DoProgress(Iteration, FMaxIteration, RefreshInterval, Self, Stop);
++      InitWeights;
+       Cross;
+       Mutate;
+       Repair;
+Index: UTTModel.pas
+===================================================================
+--- UTTModel.pas	(revision 878)
++++ UTTModel.pas	(working copy)
+@@ -109,6 +109,8 @@
+     destructor Destroy; override;
+     procedure ReportParameters(AReport: TStrings);
+     function NewIndividual: TIndividual; override;
++    procedure InitWeights(const AIndividuals: TIndividualArray; AFactor: Integer); overload; override;
++    procedure InitWeights(const AIndividual: TIndividual; AFactor: Integer); overload; override;
+     property PeriodCount: Integer read FPeriodCount;
+     property SessionCount: Integer read FSessionCount;
+     property ClashActivityValue: Integer read FClashActivityValue;
+@@ -1119,6 +1121,54 @@
+   WriteLn(Format('FThemeToNumResources=%s', [TIntegerArrayArrayHandler.ValueToString(FThemeToNumResources)]));
+ end;
+ 
++procedure TTimetableModel.InitWeights(const AIndividuals: TIndividualArray; AFactor: Integer);
++var
++  ResourceType, ResourceRestrictionType, Base, Individual: Integer;
++begin
++  TIntegerArrayHandler.Zero(FResourceTypeToValue);
++  TIntegerArrayHandler.Zero(FResourceRestrictionTypeToValue);
++  FClashActivityValue := 0;
++  FBreakTimetableResourceValue := 0;
++  FNonScatteredActivityValue := 0;
++  FBrokenSessionValue := 0;
++  for Individual := 0 to High(AIndividuals) do
++  begin
++    with TTimetable(AIndividuals[Individual]) do
++    begin
++      Inc(FClashActivityValue, TablingInfo.FClashActivity);
++      Inc(FBreakTimetableResourceValue, TablingInfo.FBreakTimetableResource);
++      Inc(FNonScatteredActivityValue, NonScatteredActivity);
++      Inc(FBrokenSessionValue, BrokenSession);
++      TIntegerArrayHandler.Inc(FResourceTypeToValue, TablingInfo.FClashResourceType);
++      TIntegerArrayHandler.Inc(FResourceRestrictionTypeToValue,
++                               TablingInfo.FResourceRestrictionTypeToResourceCount);
++    end;
++  end;
++  Base := Max(Max(Max(Max(Max(FBreakTimetableResourceValue, FClashActivityValue),
++                          FNonScatteredActivityValue), FBrokenSessionValue),
++                  TIntegerArrayHandler.Max(FResourceTypeToValue)),
++              TIntegerArrayHandler.Max(FResourceTypeToValue));
++  for ResourceType := 0 to FResourceTypeCount - 1 do
++    FResourceTypeToValue[ResourceType]
++      := (AFactor * (1 + Random(10) * Base) div (1 + FResourceTypeToValue[ResourceType]);
++  for ResourceRestrictionType := 0 to FResourceRestrictionTypeCount - 1 do
++    FResourceRestrictionTypeToValue[ResourceRestrictionType]
++      := (AFactor * Base) div (1 + FResourceRestrictionTypeToValue[ResourceRestrictionType]);
++  FClashActivityValue := (AFactor * Base) div (1 + FClashActivityValue);
++  FBreakTimetableResourceValue := (AFactor * Base) div (1 + FBreakTimetableResourceValue);
++  FNonScatteredActivityValue := (AFactor * Base) div (1 + FNonScatteredActivityValue);
++  FBrokenSessionValue := (AFactor * Base) div (1 + FBrokenSessionValue);;
++end;
++
++procedure TTimetableModel.InitWeights(const AIndividual: TIndividual; AFactor: Integer);
++var
++  IndividualArray: TIndividualArray;
++begin
++  SetLength(IndividualArray, 1);
++  IndividualArray[0] := AIndividual;
++  InitWeights(IndividualArray, AFactor);
++end;
++
+ procedure TTimetableModel.Configure(AClashActivityValue,
+   ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue,
+   ABrokenSessionValue, ANonScatteredActivityValue: Integer);
+Index: UModel.pas
+===================================================================
+--- UModel.pas	(revision 878)
++++ UModel.pas	(working copy)
+@@ -71,6 +71,8 @@
+   public
+     function NewIndividual: TIndividual; virtual; abstract;
+     property ElitistCount: Integer read GetElitistCount;
++    procedure InitWeights(const AIndividuals: TIndividualArray; AFactor: Integer); overload; virtual; abstract;
++    procedure InitWeights(const AIndividual: TIndividual; AFactor: Integer); overload; virtual; abstract;
+     {procedure DoProgress(Position, RefreshInterval: Integer;
+       Individual: IIndividual; var Stop: Boolean);}
+   end;
