@@ -1497,14 +1497,16 @@ begin
     else
       IsNegative := 1;
     Activity := FSessionToActivity[Session];
-    HavePriority := True;
+    HavePriority := False;
     for Participant := 0 to High(FTmplActivityToResources[Activity]) do
     begin
       Resource := FTmplActivityToResources[Activity, Participant];
       NumResource := FTTActivityToNumResources[Activity, Participant];
-      HavePriority := DeltaResourceValue(Period1, Period2, Resource, Sign * NumResource) and HavePriority;
+      if DeltaResourceValue(Period1, Period2, Resource, Sign * NumResource) then
+        HavePriority := True;
     end;
-    HavePriority := DeltaPeriodsValue(Sign, IsNegative, Period1, Period2, Activity) and HavePriority;
+    if DeltaPeriodsValue(Sign, IsNegative, Period1, Period2, Activity) then
+      HavePriority := True;
     if HavePriority and (Sign > 0) then
     begin
       if Sign > 0 then
