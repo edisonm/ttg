@@ -1,11 +1,3 @@
-/*
-INSERT INTO Requirement(IdTheme,IdResourceType,`Limit`)
-SELECT Activity.IdTheme,Resource.IdResourceType,MAX(Participant.NumResource) AS `Limit`
-FROM Activity INNER JOIN Participant ON Activity.IdActivity=Participant.IdActivity
-INNER JOIN Resource ON Participant.IdResource=Resource.IdResource
-GROUP BY Activity.IdTheme,Resource.IdResourceType;
-*/
-
 INSERT INTO FillRequirement(IdTheme,IdResource,NumResource)
 SELECT Activity.IdTheme,Participant.IdResource,SUM(Participant.NumResource) AS NumResource
 FROM Activity INNER JOIN Participant ON Activity.IdActivity=Participant.IdActivity
