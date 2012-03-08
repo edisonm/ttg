@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = -8
+  Left = 59
   Height = 362
-  Top = -29
+  Top = 24
   Width = 718
   Caption = 'MainForm'
   ClientHeight = 362
@@ -136,35 +136,35 @@ object MainForm: TMainForm
       ShowHint = True
     end
     object TBTheme: TToolButton
-      Left = 264
+      Left = 172
       Top = 2
       Action = ActTheme
       ParentShowHint = False
       ShowHint = True
     end
     object TBResourceType: TToolButton
-      Left = 287
+      Left = 195
       Top = 2
       Action = ActResourceType
       ParentShowHint = False
       ShowHint = True
     end
     object TBResource: TToolButton
-      Left = 310
+      Left = 218
       Top = 2
       Action = ActResource
       ParentShowHint = False
       ShowHint = True
     end
     object TBConfig: TToolButton
-      Left = 333
+      Left = 241
       Top = 2
       Action = ActConfigure
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton3: TToolButton
-      Left = 356
+      Left = 264
       Top = 2
       Width = 10
       Caption = 'ToolButton3'
@@ -174,14 +174,14 @@ object MainForm: TMainForm
       Style = tbsSeparator
     end
     object TBFindBetter: TToolButton
-      Left = 366
+      Left = 274
       Top = 2
       Action = ActMakeTimetable
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton4: TToolButton
-      Left = 389
+      Left = 297
       Top = 2
       Width = 10
       Caption = 'ToolButton4'
@@ -191,14 +191,14 @@ object MainForm: TMainForm
       Style = tbsSeparator
     end
     object TBTimetable: TToolButton
-      Left = 399
+      Left = 307
       Top = 2
       Action = ActTimetable
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton2: TToolButton
-      Left = 422
+      Left = 330
       Top = 2
       Width = 10
       Caption = 'ToolButton2'
@@ -208,14 +208,14 @@ object MainForm: TMainForm
       Style = tbsSeparator
     end
     object TBContent: TToolButton
-      Left = 432
+      Left = 340
       Top = 2
       Action = ActContents
       ParentShowHint = False
       ShowHint = True
     end
     object TBIndex: TToolButton
-      Left = 455
+      Left = 363
       Top = 2
       Action = ActIndex
       ParentShowHint = False
@@ -758,10 +758,6 @@ object MainForm: TMainForm
         }
         OnClick = ActConfigureExecute
       end
-      object MICheckFeasibility: TMenuItem
-        Action = ActCheckFeasibility
-        OnClick = ActCheckFeasibilityExecute
-      end
       object MIMakeTimetable: TMenuItem
         Action = ActMakeTimetable
         AutoCheck = True
@@ -829,6 +825,7 @@ object MainForm: TMainForm
       end
       object MIDBExplorer: TMenuItem
         Action = ActDBExplorer
+        AutoCheck = True
       end
     end
     object MIHelp: TMenuItem
@@ -1970,13 +1967,6 @@ object MainForm: TMainForm
       Hint = 'Configure|Edit the system configuration'
       ImageIndex = 19
       OnExecute = ActConfigureExecute
-    end
-    object ActCheckFeasibility: TAction
-      Category = 'Tools'
-      Caption = 'Check feasibility'
-      HelpContext = 260
-      Hint = 'Check feasibility|Check feasibility of input data'
-      OnExecute = ActCheckFeasibilityExecute
     end
     object ActMakeTimetable: TAction
       Category = 'Tools'

@@ -78,7 +78,6 @@ type
     TBIndex: TToolButton;
     MIConfig: TMenuItem;
     TBConfig: TToolButton;
-    MICheckFeasibility: TMenuItem;
     ActionList: TActionList;
     ActNew: TAction;
     ActOpen: TAction;
@@ -91,7 +90,6 @@ type
     ActResourceType: TAction;
     ActPeriod: TAction;
     ActTheme: TAction;
-    ActCheckFeasibility: TAction;
     ActMakeTimetable: TAction;
     ActConfigure: TAction;
     ActTimetable: TAction;
@@ -131,7 +129,6 @@ type
       Panel: TStatusPanel; const Rect: TRect);
     procedure FormCreate(Sender: TObject);
     procedure ActConfigureExecute(Sender: TObject);
-    procedure ActCheckFeasibilityExecute(Sender: TObject);
     procedure ActAboutExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDestroy(Sender: TObject);
@@ -655,21 +652,6 @@ begin
     end;
   finally
     ActConfigure.Checked := False;
-  end;
-end;
-
-procedure TMainForm.ActCheckFeasibilityExecute(Sender: TObject);
-begin
-  MessageViewForm.HelpContext := ActCheckFeasibility.HelpContext;
-  if MasterDataModule.PerformAllChecks(MessageViewForm.MemLog.Lines,
-                                       MessageViewForm.MemSummary.Lines) then
-  begin
-    MessageViewForm.Show;
-  end
-  else
-  begin
-    if MessageDlg(SNoErrorReadyForCheckSummary, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-      MessageViewForm.Show;
   end;
 end;
 

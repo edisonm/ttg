@@ -624,38 +624,12 @@ msgstr ""
 msgid "About|Information about this program"
 msgstr ""
 
-#: tmainform.actcategory.caption
-msgctxt "tmainform.actcategory.caption"
-msgid "Categories"
-msgstr ""
-
-#: tmainform.actcategory.hint
-msgid "Categories|Categories"
-msgstr ""
-
 #: tmainform.actchangepasswd.caption
 msgid "Change password..."
 msgstr ""
 
 #: tmainform.actchangepasswd.hint
 msgid "Change password|Change the system password"
-msgstr ""
-
-#: tmainform.actcheckfeasibility.caption
-msgid "Check feasibility"
-msgstr ""
-
-#: tmainform.actcheckfeasibility.hint
-msgid "Check feasibility|Check feasibility of input data"
-msgstr ""
-
-#: tmainform.actclass.caption
-msgid "Classes"
-msgstr ""
-
-#: tmainform.actclass.hint
-msgctxt "TMAINFORM.ACTCLASS.HINT"
-msgid "Categories|Categories with its parallels"
 msgstr ""
 
 #: tmainform.actconfigure.caption
@@ -750,21 +724,22 @@ msgstr ""
 msgid "Open|Open saved institution"
 msgstr ""
 
-#: tmainform.actparallel.caption
-msgctxt "tmainform.actparallel.caption"
-msgid "Parallels"
-msgstr ""
-
-#: tmainform.actparallel.hint
-msgid "Parallels|Parallels"
-msgstr ""
-
 #: tmainform.actpasswd.caption
 msgid "Password..."
 msgstr ""
 
 #: tmainform.actpasswd.hint
 msgid "Password|Change system password"
+msgstr ""
+
+#: tmainform.actperiod.caption
+msgctxt "TMAINFORM.ACTPERIOD.CAPTION"
+msgid "Working Time Slots"
+msgstr ""
+
+#: tmainform.actperiod.hint
+msgctxt "TMAINFORM.ACTPERIOD.HINT"
+msgid "Working Time Slots|Working Time Slots"
 msgstr ""
 
 #: tmainform.actregistrationinfo.caption
@@ -779,6 +754,14 @@ msgstr ""
 #: tmainform.actresource.hint
 msgctxt "TMAINFORM.ACTRESOURCE.HINT"
 msgid "Resources|Resources"
+msgstr ""
+
+#: tmainform.actresourcetype.caption
+msgid "Resource Types"
+msgstr ""
+
+#: tmainform.actresourcetype.hint
+msgid "Resource Types|Resource Types"
 msgstr ""
 
 #: tmainform.actsave.caption
@@ -797,16 +780,6 @@ msgstr ""
 #: tmainform.acttheme.hint
 msgctxt "TMAINFORM.ACTTHEME.HINT"
 msgid "Themes|Themes"
-msgstr ""
-
-#: tmainform.acttimeslot.caption
-msgctxt "TMAINFORM.ACTTIMESLOT.CAPTION"
-msgid "Working Time Slots"
-msgstr ""
-
-#: tmainform.acttimeslot.hint
-msgctxt "TMAINFORM.ACTTIMESLOT.HINT"
-msgid "Working Time Slots|Working Time Slots"
 msgstr ""
 
 #: tmainform.acttimetable.caption
