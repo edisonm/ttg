@@ -2,7 +2,7 @@
 unit DSourceBaseConsts;
 
 (*
-  01/03/2012 13:02
+  08/03/2012 14:59
 
   Warning:
 
@@ -60,7 +60,7 @@ resourcestring
   SFlPeriod_IdHour = 'Hour';
   SFlActivity_IdActivity = 'Id';
   SFlActivity_IdTheme = 'Theme';
-  SFlActivity_NaActivity = 'Category';
+  SFlActivity_NaActivity = 'Name';
   SFlFillRequirement_IdTheme = 'Theme';
   SFlFillRequirement_IdResource = 'Resource';
   SFlFillRequirement_NumResource = 'Number';

@@ -35,7 +35,7 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 
 $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
-ifeq ($(BuildMode),release)
+ifneq ($(BuildMode),debug)
 	cp $(TTGEXE) $(TTGEXE).bak
 	strip --strip-all $(TTGEXE)
 	upx $(TTGEXE)

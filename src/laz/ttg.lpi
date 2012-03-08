@@ -23,7 +23,7 @@
       <BuildNr Value="314"/>
       <Language Value="040A"/>
       <CharSet Value="04B0"/>
-      <StringTable FileDescription="Timetable Generator System" LegalCopyright="2012, Edison Mera" ProductVersion=""/>
+      <StringTable LegalCopyright="2012, Edison Mera" ProductVersion="" FileDescription="Timetable Generator System"/>
     </VersionInfo>
     <BuildModes Count="3">
       <Item1 Name="debug" Default="True"/>
@@ -410,6 +410,7 @@
       <IncludeFiles Value="$(ProjOutDir)"/>
       <OtherUnitFiles Value="../../../zeosdbo/packages/lazarus;../../../zeosdbo/src/core;../../../zeosdbo/src/dbc;../../../zeosdbo/src/parsesql;../../../zeosdbo/src/plain;../../../zeosdbo/src/component;../../../multithreadprocs;../../../DBConvert/auxiliary"/>
       <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-debug"/>
+      <SrcPath Value="$(LazarusDir)fpc/$(FPCVer)/source/rtl/objpas;$(LazarusDir)fpc/$(FPCVer)/source/rtl/inc;$(LazarusDir)fpc/$(FPCVer)/source/rtl/$(TargetOS)"/>
     </SearchPaths>
     <Parsing>
       <SyntaxOptions>

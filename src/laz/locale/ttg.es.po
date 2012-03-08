@@ -13,7 +13,7 @@ msgstr "Materia"
 
 #: dsourcebaseconsts.sflactivity_naactivity
 msgctxt "dsourcebaseconsts.sflactivity_naactivity"
-msgid "Category"
+msgid "Name"
 msgstr ""
 
 #: dsourcebaseconsts.sflday_idday
