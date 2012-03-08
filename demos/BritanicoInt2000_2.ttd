@@ -109,7 +109,7 @@ ResourceType
 "1";"Profesor";"1";"655";
 "2";"Aula";"1";"413";
 "3";"Curso";"1";"902";
-"4";"Campo";"1";"0";
+"4";"Restriccion";"1";"0";
 "5";"Ayudante";"1";"655";
 Hour
 11

@@ -147,7 +147,7 @@ ResourceType
 "1";"Profesor";"1";"497";
 "2";"Aula";"1";"393";
 "3";"Curso";"1";"901";
-"4";"Campo";"1";"0";
+"4";"Restriccion";"1";"0";
 Hour
 7
 "IdHour";"NaHour";"Interval";
