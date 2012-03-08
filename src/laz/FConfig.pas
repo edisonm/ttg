@@ -36,11 +36,8 @@ type
     EdPollinationProbability: TEdit;
     spePopulationSize: TSpinEdit;
     TSWeights: TTabSheet;
-    LbClashResource: TLabel;
-    LbOutOfPositionEmptyHour: TLabel;
     LbBrokenActivity: TLabel;
     LbNonScatteredActivity: TLabel;
-    EdEmptyHour: TEdit;
     EdBrokenSession: TEdit;
     EdNonScatteredActivity: TEdit;
     TSInstitution: TTabSheet;
@@ -70,9 +67,6 @@ type
     EdBreakTimetableResource: TEdit;
     LbInitialTimetables: TLabel;
     EdInitialTimetables: TEdit;
-    LbSRName: TLabel;
-    LbSRColor: TLabel;
-    LbSRValue: TLabel;
     LbTRName: TLabel;
     EdNaResourceRestrictionType: TDBEdit;
     LbTRColor: TLabel;
@@ -169,7 +163,6 @@ begin
       speNumIterations.Value := RefreshInterval;
       EdClashActivity.Text := FloatToStr(ClashActivity);
       EdBreakTimetableResource.Text := FloatToStr(BreakTimetableResource);
-      EdEmptyHour.Text := FloatToStr(OutOfPositionEmptyHour);
       EdBrokenSession.Text := FloatToStr(BrokenSession);
       EdNonScatteredActivity.Text := FloatToStr(NonScatteredActivity);
       spePopulationSize.Value := PopulationSize;
@@ -202,7 +195,6 @@ begin
       RefreshInterval := speNumIterations.Value;
       ClashActivity := StrToInt(EdClashActivity.Text);
       BreakTimetableResource := StrToInt(EdBreakTimetableResource.Text);
-      OutOfPositionEmptyHour := StrToInt(EdEmptyHour.Text);
       BrokenSession := StrToInt(EdBrokenSession.Text);
       NonScatteredActivity := StrToInt(EdNonScatteredActivity.Text);
       PopulationSize := spePopulationSize.Value;

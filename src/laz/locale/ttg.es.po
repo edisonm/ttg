@@ -363,8 +363,10 @@ msgid "Configure"
 msgstr "Configure"
 
 #: tconfigform.cbapplydoubledownhill.caption
+#, fuzzy
+#| msgid "Apply Downhill - slow"
 msgctxt "TCONFIGFORM.CBAPPLYDOUBLEDOWNHILL.CAPTION"
-msgid "Apply Downhill - slow"
+msgid "Apply Downhill"
 msgstr "Aplicar descenso  - lento"
 
 #: tconfigform.cbrandomize.caption
@@ -407,11 +409,6 @@ msgctxt "tconfigform.lbclashactivity.caption"
 msgid "Clash of Activities:"
 msgstr "Cruce materias:"
 
-#: tconfigform.lbclashresource.caption
-msgctxt "tconfigform.lbclashresource.caption"
-msgid "Clash of Resources:"
-msgstr "Cruce profesores:"
-
 #: tconfigform.lbcomments.caption
 msgctxt "tconfigform.lbcomments.caption"
 msgid "Comments:"
@@ -443,8 +440,10 @@ msgid "Iterations:"
 msgstr "Iteraciones:"
 
 #: tconfigform.lbmaxresourceworkload.caption
+#, fuzzy
+#| msgid "Max work load per resource:"
 msgctxt "tconfigform.lbmaxresourceworkload.caption"
-msgid "Max work load per resource:"
+msgid "Max work load per teacher:"
 msgstr "Carga Maxima por Profesor:"
 
 #: tconfigform.lbmutationprobability.caption
@@ -456,11 +455,6 @@ msgstr "Prob. Mutacion"
 msgctxt "tconfigform.lbnonscatteredactivity.caption"
 msgid "Non Scattered Activities:"
 msgstr "Materias juntas:"
-
-#: tconfigform.lboutofpositionemptyhour.caption
-msgctxt "tconfigform.lboutofpositionemptyhour.caption"
-msgid "Out of Position Empty Hours:"
-msgstr "Horas huecas:"
 
 #: tconfigform.lbpollinationprobability.caption
 msgctxt "TCONFIGFORM.LBPOLLINATIONPROBABILITY.CAPTION"
@@ -506,25 +500,6 @@ msgstr "Semilla:"
 msgctxt "TCONFIGFORM.LBSHAREDDIRECTORY.CAPTION"
 msgid "Shared directory:"
 msgstr "Directorio compartido:"
-
-#: tconfigform.lbsrcolor.caption
-msgctxt "TCONFIGFORM.LBSRCOLOR.CAPTION"
-msgid "Color:"
-msgstr "Color:"
-
-#: tconfigform.lbsrname.caption
-msgctxt "TCONFIGFORM.LBSRNAME.CAPTION"
-msgid "Name:"
-msgstr "Nombre:"
-
-#: tconfigform.lbsrvalue.caption
-msgctxt "TCONFIGFORM.LBSRVALUE.CAPTION"
-msgid "Value:"
-msgstr "Valor:"
-
-#: tconfigform.lbthemerestrictions.caption
-msgid "Theme Restrictions:"
-msgstr ""
 
 #: tconfigform.lbtrcolor.caption
 msgctxt "TCONFIGFORM.LBTRCOLOR.CAPTION"
@@ -735,11 +710,11 @@ msgid "Exit|Exit from program"
 msgstr "Salir|Salir del programa"
 
 #: tmainform.acthour.caption
-msgid "Academic hours"
+msgid "Hours"
 msgstr "Horas academicas"
 
 #: tmainform.acthour.hint
-msgid "Academic hours|Academic hours"
+msgid "Hours|Hours"
 msgstr "Horas academicas|Horas academicas"
 
 #: tmainform.actindex.caption
@@ -1705,10 +1680,6 @@ msgstr "Numero de prohibiciones de profesores con problemas..."
 #| msgid "Number of soft resource restrictions..."
 msgid "Number of soft teacher restrictions..."
 msgstr "Numero de prohibiciones de profesores sin problemas..."
-
-#: uttgconsts.soutofpositionemptyhour
-msgid "Out of position empty hours"
-msgstr "Horas huecas desubicadas"
 
 #: uttgconsts.spendingchangeswillbelostyoureallywanttoquit
 msgid "Pending changes will be lost. Do you really want to quit?"

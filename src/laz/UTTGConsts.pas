@@ -65,7 +65,6 @@ resourcestring
   SNonScatteredActivity = 'Non Scattered Activities';
   SNumHardResourceRestrictions = 'Number of hard teacher restrictions...';
   SNumSoftResourceRestrictions = 'Number of soft teacher restrictions...';
-  SOutOfPositionEmptyHour = 'Out of position empty hours';
   SPendingChangesWillBeLostYouReallyWantToQuit = 'Pending changes will be lost. Do you really want to quit?';
   SPollinationProbability = 'Pollination Probability';
   SPopulationSize = 'Population size';

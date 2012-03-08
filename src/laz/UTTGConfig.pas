@@ -42,8 +42,6 @@ type
     procedure SetClashActivity(Value: Integer);
     function GetBreakTimetableResource: Integer;
     procedure SetBreakTimetableResource(Value: Integer);
-    function GetOutOfPositionEmptyHour: Integer;
-    procedure SetOutOfPositionEmptyHour(Value: Integer);
     function GetBrokenSession: Integer;
     procedure SetBrokenSession(Value: Integer);
     function GetNonScatteredActivity: Integer;
@@ -82,7 +80,6 @@ type
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
     property ClashActivity: Integer read GetClashActivity write SetClashActivity;
     property BreakTimetableResource: Integer read GetBreakTimetableResource write SetBreakTimetableResource;
-    property OutOfPositionEmptyHour: Integer read GetOutOfPositionEmptyHour write SetOutOfPositionEmptyHour;
     property BrokenSession: Integer read GetBrokenSession write SetBrokenSession;
     property NonScatteredActivity: Integer read GetNonScatteredActivity write SetNonScatteredActivity;
     property PopulationSize: Integer read GetPopulationSize write SetPopulationSize;
@@ -239,16 +236,6 @@ begin
   Integers['BreakTimetableResource'] := Value;
 end;
 
-function TTTGConfig.GetOutOfPositionEmptyHour: Integer;
-begin
-  Result := Integers['EmptyHour'];
-end;
-
-procedure TTTGConfig.SetOutOfPositionEmptyHour(Value: Integer);
-begin
-  Integers['EmptyHour'] := Value;
-end;
-
 function TTTGConfig.GetBrokenSession: Integer;
 begin
   Result := Integers['BrokenSession'];
@@ -375,7 +362,6 @@ begin
   RefreshInterval := 1;
   ClashActivity := 200;
   BreakTimetableResource := 50;
-  OutOfPositionEmptyHour := 100;
   BrokenSession := 150;
   NonScatteredActivity := 5;
   PopulationSize := 10;

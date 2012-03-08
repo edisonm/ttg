@@ -358,7 +358,7 @@ msgstr ""
 
 #: tconfigform.cbapplydoubledownhill.caption
 msgctxt "TCONFIGFORM.CBAPPLYDOUBLEDOWNHILL.CAPTION"
-msgid "Apply Downhill - slow"
+msgid "Apply Downhill"
 msgstr ""
 
 #: tconfigform.cbrandomize.caption
@@ -401,11 +401,6 @@ msgctxt "tconfigform.lbclashactivity.caption"
 msgid "Clash of Activities:"
 msgstr ""
 
-#: tconfigform.lbclashresource.caption
-msgctxt "tconfigform.lbclashresource.caption"
-msgid "Clash of Resources:"
-msgstr ""
-
 #: tconfigform.lbcomments.caption
 msgctxt "tconfigform.lbcomments.caption"
 msgid "Comments:"
@@ -438,7 +433,7 @@ msgstr ""
 
 #: tconfigform.lbmaxresourceworkload.caption
 msgctxt "tconfigform.lbmaxresourceworkload.caption"
-msgid "Max work load per resource:"
+msgid "Max work load per teacher:"
 msgstr ""
 
 #: tconfigform.lbmutationprobability.caption
@@ -449,11 +444,6 @@ msgstr ""
 #: tconfigform.lbnonscatteredactivity.caption
 msgctxt "TCONFIGFORM.LBNONSCATTEREDACTIVITY.CAPTION"
 msgid "Non Scattered Activities:"
-msgstr ""
-
-#: tconfigform.lboutofpositionemptyhour.caption
-msgctxt "tconfigform.lboutofpositionemptyhour.caption"
-msgid "Out of Position Empty Hours:"
 msgstr ""
 
 #: tconfigform.lbpollinationprobability.caption
@@ -499,26 +489,6 @@ msgstr ""
 #: tconfigform.lbshareddirectory.caption
 msgctxt "TCONFIGFORM.LBSHAREDDIRECTORY.CAPTION"
 msgid "Shared directory:"
-msgstr ""
-
-#: tconfigform.lbsrcolor.caption
-msgctxt "TCONFIGFORM.LBSRCOLOR.CAPTION"
-msgid "Color:"
-msgstr ""
-
-#: tconfigform.lbsrname.caption
-msgctxt "TCONFIGFORM.LBSRNAME.CAPTION"
-msgid "Name:"
-msgstr ""
-
-#: tconfigform.lbsrvalue.caption
-msgctxt "TCONFIGFORM.LBSRVALUE.CAPTION"
-msgid "Value:"
-msgstr ""
-
-#: tconfigform.lbthemerestrictions.caption
-msgctxt "tconfigform.lbthemerestrictions.caption"
-msgid "Theme Restrictions:"
 msgstr ""
 
 #: tconfigform.lbtrcolor.caption
@@ -728,11 +698,11 @@ msgid "Exit|Exit from program"
 msgstr ""
 
 #: tmainform.acthour.caption
-msgid "Academic hours"
+msgid "Hours"
 msgstr ""
 
 #: tmainform.acthour.hint
-msgid "Academic hours|Academic hours"
+msgid "Hours|Hours"
 msgstr ""
 
 #: tmainform.actindex.caption
@@ -1673,10 +1643,6 @@ msgstr ""
 
 #: uttgconsts.snumsoftresourcerestrictions
 msgid "Number of soft teacher restrictions..."
-msgstr ""
-
-#: uttgconsts.soutofpositionemptyhour
-msgid "Out of position empty hours"
 msgstr ""
 
 #: uttgconsts.spendingchangeswillbelostyoureallywanttoquit

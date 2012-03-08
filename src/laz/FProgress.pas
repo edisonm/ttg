@@ -36,11 +36,6 @@ type
     LbClashResourceValue: TLabel;
     PnClashResourceNumber: TPanel;
     LbClashResource: TLabel;
-    PnOutOfPositionEmptyHour: TPanel;
-    PnOutOfPositionEmptyHourNumber: TPanel;
-    LbOutOfPositionEmptyHour: TLabel;
-    PnOutOfPositionEmptyHourValue: TPanel;
-    LbOutOfPositionEmptyHourValue: TLabel;
     PnBrokenSession: TPanel;
     PnBrokenSessionNumber: TPanel;
     LbBrokenSession: TLabel;
@@ -142,7 +137,6 @@ begin
     with MasterDataModule.ConfigStorage do
       TTimetableModel(ASolver.Model).Configure(ClashActivity,
                                                BreakTimetableResource,
-                                               OutOfPositionEmptyHour,
                                                BrokenSession,
                                                NonScatteredActivity);
     //ASolver.Update;
@@ -164,7 +158,6 @@ begin
     LbClashActivity.Caption := Format('%d ', [ClashActivity]);
     LbBreakTimetableResourceCount.Caption :=
       Format('%d ', [BreakTimetableResource]);
-    LbOutOfPositionEmptyHour.Caption := Format('%d ', [OutOfPositionEmptyHour]);
     LbBrokenSession.Caption := Format('%d ', [BrokenSession]);
     LbClashResource.Caption :=
       Format('%s ', [VarArrToStr(ClashResourceType)]);
@@ -174,8 +167,6 @@ begin
     LbClashActivityValue.Caption := Format('%d ', [ClashActivityValue]);
     LbBreakTimetableResourceValue.Caption :=
       Format('%d ', [BreakTimetableResourceValue]);
-    LbOutOfPositionEmptyHourValue.Caption := Format('%d ',
-      [OutOfPositionEmptyHourValue]);
     LbBrokenSessionValue.Caption := Format('%d ', [BrokenSessionValue]);
     LbClashResourceValue.Caption := Format('%d ', [ClashResourceValue]);
     LbResourceRestrictionValue.Caption := Format('%d ', [ResourceRestrictionValue]);

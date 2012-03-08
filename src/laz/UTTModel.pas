@@ -25,7 +25,6 @@ type
        unique.  Note that QuickSort takes a random position as pivot. *)
   private
     FClashActivityValue: Integer;
-    FOutOfPositionEmptyHourValue: Integer;
     FBrokenSessionValue: Integer;
     FBreakTimetableResourceValue: Integer;
     FNonScatteredActivityValue: Integer;
@@ -101,11 +100,9 @@ type
     function GetElitistCount: Integer; override;
   public
     procedure Configure(AClashActivityValue, ABreakTimetableResourceValue,
-                        AOutOfPositionEmptyHourValue, ABrokenSessionValue,
-                        ANonScatteredActivityValue: Integer);
+                        ABrokenSessionValue, ANonScatteredActivityValue: Integer);
     constructor Create(AClashActivityValue, ABreakTimetableResourceValue,
-                       AOutOfPositionEmptyHourValue, ABrokenSessionValue,
-                       ANonScatteredActivityValue: Integer);
+                       ABrokenSessionValue, ANonScatteredActivityValue: Integer);
     destructor Destroy; override;
     procedure ReportParameters(AReport: TStrings);
     function NewIndividual: TIndividual; override;
@@ -113,7 +110,6 @@ type
     property SessionCount: Integer read FSessionCount;
     property ClashActivityValue: Integer read FClashActivityValue;
     property BreakTimetableResourceValue: Integer read FBreakTimetableResourceValue;
-    property OutOfPositionEmptyHourValue: Integer read FOutOfPositionEmptyHourValue;
     property BrokenSessionValue: Integer read FBrokenSessionValue;
     property NonScatteredActivityValue: Integer read FNonScatteredActivityValue;
     property SessionToDuration: TDynamicIntegerArray read FSessionToDuration;
@@ -151,7 +147,6 @@ type
   protected
     FClashActivity: Integer;
     FBreakTimetableResource: Integer;
-    FOutOfPositionEmptyHour: Integer;
     FNonScatteredActivity: Integer;
     FBrokenSession: Integer;
     
@@ -187,7 +182,6 @@ type
     procedure DeltaValue(Sign, Session: Integer);
     function GetClashActivityValue: Integer;
     function GetNonScatteredActivityValue: Integer;
-    function GetOutOfPositionEmptyHourValue: Integer;
     function GetClashResourceValue: Integer;
     function GetResourceRestrictionValue: Integer;
     function GetBreakTimetableResourceValue: Integer;
@@ -223,7 +217,6 @@ type
     function MoveSession(Session, Period: Integer): Integer;
     procedure DoMoveSession(Session, Period: Integer);
     {procedure SaveToFile(const AFileName: string);}
-    property OutOfPositionEmptyHour: Integer read FTablingInfo.FOutOfPositionEmptyHour;
     property ResourceRestrictionTypeToResourceCount: TDynamicIntegerArray
       read FTablingInfo.FResourceRestrictionTypeToResourceCount;
     property ClashResourceType: TDynamicIntegerArray read FTablingInfo.FClashResourceType;
@@ -233,7 +226,6 @@ type
     property ClashResourceValue: Integer read GetClashResourceValue;
     property ClashActivityValue: Integer read GetClashActivityValue;
     property BreakTimetableResourceValue: Integer read GetBreakTimetableResourceValue;
-    property OutOfPositionEmptyHourValue: Integer read GetOutOfPositionEmptyHourValue;
     property BrokenSessionValue: Integer read GetBrokenSessionValue;
     property NonScatteredActivityValue: Integer read GetNonScatteredActivityValue;
     property ResourceRestrictionValue: Integer read GetResourceRestrictionValue;
@@ -348,7 +340,6 @@ type
 
 constructor TTimetableModel.Create(AClashActivityValue,
                                    ABreakTimetableResourceValue,
-                                   AOutOfPositionEmptyHourValue,
                                    ABrokenSessionValue,
                                    ANonScatteredActivityValue: Integer);
 var
@@ -1076,8 +1067,7 @@ begin
   with SourceDataModule do
   begin
     SErrors := '';
-    Configure(AClashActivityValue,
-      ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue,
+    Configure(AClashActivityValue, ABreakTimetableResourceValue,
       ABrokenSessionValue, ANonScatteredActivityValue);
     Load(TbResourceType, 'IdResourceType', FMinIdResourceType,
          FIdResourceTypeToResourceType, FResourceTypeToIdResourceType);
@@ -1120,12 +1110,12 @@ begin
 end;
 
 procedure TTimetableModel.Configure(AClashActivityValue,
-  ABreakTimetableResourceValue, AOutOfPositionEmptyHourValue,
-  ABrokenSessionValue, ANonScatteredActivityValue: Integer);
+                                    ABreakTimetableResourceValue,
+                                    ABrokenSessionValue,
+                                    ANonScatteredActivityValue: Integer);
 begin
   FClashActivityValue := AClashActivityValue;
   FBreakTimetableResourceValue := ABreakTimetableResourceValue;
-  FOutOfPositionEmptyHourValue := AOutOfPositionEmptyHourValue;
   FBrokenSessionValue := ABrokenSessionValue;
   FNonScatteredActivityValue := ANonScatteredActivityValue;
 end;
@@ -1149,7 +1139,6 @@ begin
         '  %0:-29s %8.2f', [SWeights,
           SClashActivity              + ':', ClashActivityValue,
           SBreakTimetableResource  + ':', BreakTimetableResourceValue,
-          SOutOfPositionEmptyHour  + ':', OutOfPositionEmptyHourValue,
           SBrokenSession           + ':', BrokenSessionValue,
           SNonScatteredActivity       + ':', NonScatteredActivityValue]));
 end;
@@ -1465,8 +1454,6 @@ begin
       end;
     end;
   end;
-  {else if FHourCount - 1 <> FPeriodToHour[Period] then
-   Inc(FOutOfPositionEmptyHour, Sign);}
 end;
 
 procedure TTimetable.DeltaPeriodsValue(Sign, Period1, Period2, Activity: Integer);
@@ -1570,8 +1557,6 @@ begin
       TTimetableModel(Model).ClashActivityValue, ClashActivityValue]));
     Add(Format(SRowFormat, [SBreakTimetableResource + ':', BreakTimetableResource,
       TTimetableModel(Model).BreakTimetableResourceValue, BreakTimetableResourceValue]));
-    Add(Format(SRowFormat, [SOutOfPositionEmptyHour + ':', OutOfPositionEmptyHour,
-      TTimetableModel(Model).OutOfPositionEmptyHourValue, OutOfPositionEmptyHourValue]));
     Add(Format(SRowFormat, [SBrokenSession + ':', BrokenSession,
       TTimetableModel(Model).BrokenSessionValue, BrokenSessionValue]));
     Add(Format(SRowFormat, [SNonScatteredActivity + ':', NonScatteredActivity,
@@ -1792,11 +1777,6 @@ begin
   end;
 end;
 
-function TTimetable.GetOutOfPositionEmptyHourValue: Integer;
-begin
-  Result := TTimetableModel(Model).FOutOfPositionEmptyHourValue * OutOfPositionEmptyHour;
-end;
-
 function TTimetable.GetClashResourceValue: Integer;
 begin
   Result := TIntegerArrayHandler.Product(TablingInfo.FClashResourceType,
@@ -1837,7 +1817,6 @@ begin
     ClashResourceValue +
     ResourceRestrictionValue +
     ClashActivityValue +
-    OutOfPositionEmptyHourValue +
     NonScatteredActivityValue +
     BreakTimetableResourceValue +
     BrokenSessionValue;
@@ -1861,7 +1840,6 @@ procedure TTimetableTablingInfo.Assign(ATimetableTablingInfo: TTimetableTablingI
 begin
   FClashActivity := ATimetableTablingInfo.FClashActivity;
   FBreakTimetableResource := ATimetableTablingInfo.FBreakTimetableResource;
-  FOutOfPositionEmptyHour := ATimetableTablingInfo.FOutOfPositionEmptyHour;
   FNonScatteredActivity := ATimetableTablingInfo.FNonScatteredActivity;
   FBrokenSession := ATimetableTablingInfo.FBrokenSession;
   with TIntegerArrayHandler do
@@ -2130,7 +2108,6 @@ begin
   with TTimetableModel(Model), TablingInfo do
   begin
     FClashActivity := 0;
-    FOutOfPositionEmptyHour := 0;
     FBreakTimetableResource := 0;
     FBrokenSession := 0;
     FNonScatteredActivity := 0;
@@ -2204,12 +2181,10 @@ end;
 procedure TTimetable.CheckIntegrity(const ALabel: string);
 var
   ResourceType, Value1, Value2: Integer;
-  ClashResourceValue1, ClashActivity1, OutOfPositionEmptyHour1,
-  NonScatteredActivity1, BreakTimetableResource1,
-  ResourceRestrictionValue1, BrokenSession1: Integer;
-  ClashResourceValue2, ClashActivity2, OutOfPositionEmptyHour2,
-  NonScatteredActivity2, BreakTimetableResource2,
-  ResourceRestrictionValue2, BrokenSession2: Integer;
+  ClashResourceValue1, ClashActivity1, NonScatteredActivity1,
+  BreakTimetableResource1, ResourceRestrictionValue1, BrokenSession1: Integer;
+  ClashResourceValue2, ClashActivity2, NonScatteredActivity2,
+  BreakTimetableResource2, ResourceRestrictionValue2, BrokenSession2: Integer;
 begin
   Value2 := Value;
   UpdateValue;
@@ -2219,7 +2194,6 @@ begin
   
   ClashResourceValue1 := ClashResourceValue;
   ClashActivity1 := ClashActivity;
-  OutOfPositionEmptyHour1 := OutOfPositionEmptyHour;
   NonScatteredActivity1 := NonScatteredActivity;
   BreakTimetableResource1 := BreakTimetableResource;
   ResourceRestrictionValue1 := ResourceRestrictionValue;
@@ -2228,7 +2202,6 @@ begin
   Value2 := Value;
   ClashResourceValue2 := ClashResourceValue;
   ClashActivity2 := ClashActivity;
-  OutOfPositionEmptyHour2 := OutOfPositionEmptyHour;
   NonScatteredActivity2 := NonScatteredActivity;
   BreakTimetableResource2 := BreakTimetableResource;
   ResourceRestrictionValue2 := ResourceRestrictionValue;
@@ -2248,11 +2221,6 @@ begin
                    [ClashActivity1, ClashActivity2]))
   else if ClashActivity2 < 0 then
     WriteLn(Format('  Incorrect ClashActivity: %d<0', [ClashActivity2]));
-  if OutOfPositionEmptyHour1 <> OutOfPositionEmptyHour2 then
-    WriteLn(Format('  Incorrect OutOfPositionEmptyHour: %d<>%d',
-                   [OutOfPositionEmptyHour1, OutOfPositionEmptyHour2]))
-  else if OutOfPositionEmptyHour2 < 0 then
-    WriteLn(Format('  Incorrect OutOfPositionEmptyHour: %d<0', [OutOfPositionEmptyHour2]));
   if NonScatteredActivity1 <> NonScatteredActivity2 then
     WriteLn(Format('  Incorrect NonScatteredActivity: %d<>%d',
                    [NonScatteredActivity1, NonScatteredActivity2]))

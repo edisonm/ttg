@@ -1915,9 +1915,9 @@ object MainForm: TMainForm
     object ActHour: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Academic hours'
+      Caption = 'Hours'
       HelpContext = 150
-      Hint = 'Academic hours|Academic hours'
+      Hint = 'Hours|Hours'
       ImageIndex = 5
       OnExecute = ActHourExecute
       ShortCut = 16456

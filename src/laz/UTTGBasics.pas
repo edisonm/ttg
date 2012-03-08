@@ -61,7 +61,7 @@ function NullToZero(A: Variant): Variant;
 function VarArrToStr(v: Variant; Separator: string = '; '): string;
 function RandomIndexes(Length: Integer): TDynamicIntegerArray; overload;
 function RandomIndexes(Length, Limit: Integer): TDynamicIntegerArray; overload;
-function RandomUniform(a, b: Integer): Integer;
+function RandomUniform(Min, Max: Integer): Integer;
 function RandomTable(Table: TDynamicIntegerArray): Integer;
 function RandomCummulated(Cummulated: TDynamicIntegerArray): Integer;
 function CummulatedTable(Table: TDynamicIntegerArray): TDynamicIntegerArray;
@@ -355,9 +355,9 @@ begin
   Result := RandomIndexes(Length, Length);
 end;
 
-function RandomUniform(a, b: Integer): Integer;
+function RandomUniform(Min, Max: Integer): Integer;
 begin
-  Result := a + Random(b - a + 1);
+  Result := Min + Random(Max - Min + 1);
 end;
 
 end.
