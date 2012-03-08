@@ -1,4 +1,4 @@
-INSERT INTO FillRequirement(IdTheme,IdResource,NumResource)
+INSERT INTO Availability(IdTheme,IdResource,NumResource)
 SELECT Activity.IdTheme,Participant.IdResource,SUM(Participant.NumResource) AS NumResource
 FROM Activity INNER JOIN Participant ON Activity.IdActivity=Participant.IdActivity
 INNER JOIN Resource ON Participant.IdResource=Resource.IdResource
@@ -30,14 +30,14 @@ HAVING COUNT(Activity2.IdActivity) <> 1
 ) IS NOT NULL
 
 /*
-SELECT FillRequirement.*,Theme.NaTheme,Resource.NaResource
-FROM FillRequirement INNER JOIN Theme ON FillRequirement.IdTheme=Theme.IdTheme
-INNER JOIN Resource ON FillRequirement.IdResource=Resource.IdResource
+SELECT Availability.*,Theme.NaTheme,Resource.NaResource
+FROM Availability INNER JOIN Theme ON Availability.IdTheme=Theme.IdTheme
+INNER JOIN Resource ON Availability.IdResource=Resource.IdResource
 WHERE Resource.IdResourceType<>3
-AND FillRequirement.NumResource<(
+AND Availability.NumResource<(
   SELECT COUNT(*)
   FROM Activity
-  WHERE Activity.IdTheme=FillRequirement.IdTheme
+  WHERE Activity.IdTheme=Availability.IdTheme
   GROUP BY Activity.IdTheme
   HAVING COUNT(*)>1
 );

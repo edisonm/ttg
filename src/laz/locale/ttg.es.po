@@ -26,20 +26,20 @@ msgctxt "dsourcebaseconsts.sflday_naday"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sflfillrequirement_idresource
+#: dsourcebaseconsts.sflavailability_idresource
 #, fuzzy
 #| msgid "Assistant"
-msgctxt "dsourcebaseconsts.sflfillrequirement_idresource"
+msgctxt "dsourcebaseconsts.sflavailability_idresource"
 msgid "Resource"
 msgstr "Ayudante"
 
-#: dsourcebaseconsts.sflfillrequirement_idtheme
-msgctxt "dsourcebaseconsts.sflfillrequirement_idtheme"
+#: dsourcebaseconsts.sflavailability_idtheme
+msgctxt "dsourcebaseconsts.sflavailability_idtheme"
 msgid "Theme"
 msgstr "Materia"
 
-#: dsourcebaseconsts.sflfillrequirement_numresource
-msgctxt "dsourcebaseconsts.sflfillrequirement_numresource"
+#: dsourcebaseconsts.sflavailability_numresource
+msgctxt "dsourcebaseconsts.sflavailability_numresource"
 msgid "Number"
 msgstr "Apellido"
 
@@ -85,18 +85,18 @@ msgctxt "dsourcebaseconsts.sflperiod_idhour"
 msgid "Hour"
 msgstr "Hour"
 
-#: dsourcebaseconsts.sflrequirement_idresourcetype
-msgctxt "dsourcebaseconsts.sflrequirement_idresourcetype"
+#: dsourcebaseconsts.sflresourcetypelimit_idresourcetype
+msgctxt "dsourcebaseconsts.sflresourcetypelimit_idresourcetype"
 msgid "Resource Type"
 msgstr ""
 
-#: dsourcebaseconsts.sflrequirement_idtheme
-msgctxt "dsourcebaseconsts.sflrequirement_idtheme"
+#: dsourcebaseconsts.sflresourcetypelimit_idtheme
+msgctxt "dsourcebaseconsts.sflresourcetypelimit_idtheme"
 msgid "Theme"
 msgstr "Materia"
 
-#: dsourcebaseconsts.sflrequirement_maxnumresource
-msgctxt "dsourcebaseconsts.sflrequirement_maxnumresource"
+#: dsourcebaseconsts.sflresourcetypelimit_numresourcelimit
+msgctxt "dsourcebaseconsts.sflresourcetypelimit_numresourcelimit"
 msgid "Limit"
 msgstr ""
 
@@ -140,7 +140,7 @@ msgctxt "dsourcebaseconsts.sflresourcerestriction_idresourcerestrictiontype"
 msgid "Restriction Type"
 msgstr "Tipo de Restriccion"
 
-#: dsourcebaseconsts.sflresourcetype_defaultmaxnumresource
+#: dsourcebaseconsts.sflresourcetype_numresourcelimit
 msgid "Default Max Number"
 msgstr ""
 
@@ -272,8 +272,8 @@ msgctxt "dsourcebaseconsts.stbday"
 msgid "Working Days"
 msgstr "Dias Laborables"
 
-#: dsourcebaseconsts.stbfillrequirement
-msgctxt "dsourcebaseconsts.stbfillrequirement"
+#: dsourcebaseconsts.stbavailability
+msgctxt "dsourcebaseconsts.stbavailability"
 msgid "Participants"
 msgstr "Ayudas"
 
@@ -294,8 +294,8 @@ msgctxt "dsourcebaseconsts.stbperiod"
 msgid "Periods"
 msgstr "Periodos"
 
-#: dsourcebaseconsts.stbrequirement
-msgctxt "dsourcebaseconsts.stbrequirement"
+#: dsourcebaseconsts.stbresourcetypelimit
+msgctxt "dsourcebaseconsts.stbresourcetypelimit"
 msgid "Participants"
 msgstr "Ayudas"
 

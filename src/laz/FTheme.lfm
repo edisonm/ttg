@@ -97,7 +97,7 @@ inherited ThemeForm: TThemeForm
             Align = alClient
             Color = clWindow
             Columns = <>
-            DataSource = SourceDataModule.DSFillRequirement
+            DataSource = SourceDataModule.DSAvailability
             Scrollbars = ssAutoBoth
             TabOrder = 0
             TitleFont.Height = -11
@@ -122,7 +122,7 @@ inherited ThemeForm: TThemeForm
             Align = alClient
             Color = clWindow
             Columns = <>
-            DataSource = SourceDataModule.DSRequirement
+            DataSource = SourceDataModule.DSResourceTypeLimit
             Scrollbars = ssAutoBoth
             TabOrder = 0
             TitleFont.Height = -11

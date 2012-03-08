@@ -80,7 +80,7 @@ procedure TSourceDataModule.DSResourceTypeDataChange(Sender: TObject;
 begin
   TbParticipant.Filter := 'IdResourceType='
     + IntToStr(TbResourceType.FindField('IdResourceType').AsInteger);
-  TbFillRequirement.Filter := TbParticipant.Filter;
+  TbAvailability.Filter := TbParticipant.Filter;
 end;
 
 procedure TSourceDataModule.TbThemeCalcFields(DataSet: TDataSet);
@@ -201,7 +201,7 @@ begin
         Append;
         FindField('IdResourceType').AsInteger := i;
         FindField('NaResourceType').AsString := SNaResourceType[i];
-        FindField('DefaultMaxNumResource').AsInteger := 1;
+        FindField('NumResourceLimit').AsInteger := 1;
         FindField('ValResourceType').AsFloat := EValResourceType[i];
         Post;
       end;
@@ -252,9 +252,9 @@ begin
                   'IdResourceRestrictionType', 'NaResourceRestrictionType');
   NewLookupField(TbParticipant, TbResource, 'IdResource', 'NaResource');
   {NewLookupField(TbParticipant, TbResource, 'IdResource', 'IdResourceType');}
-  NewLookupField(TbRequirement, TbResourceType, 'IdResourceType', 'NaResourceType');
-  NewLookupField(TbFillRequirement, TbResource, 'IdResource', 'NaResource');
-  {NewLookupField(TbFillRequirement, TbResource, 'IdResource', 'IdResourceType');}
+  NewLookupField(TbResourceTypeLimit, TbResourceType, 'IdResourceType', 'NaResourceType');
+  NewLookupField(TbAvailability, TbResource, 'IdResource', 'NaResource');
+  {NewLookupField(TbAvailability, TbResource, 'IdResource', 'IdResourceType');}
 end;
 
 procedure TSourceDataModule.PrepareCalcFields;
@@ -297,12 +297,12 @@ begin
     FindField('IdActivity').Visible := False;
     FindField('IdResource').Visible := False;
   end;
-  with TbRequirement do
+  with TbResourceTypeLimit do
   begin
     FindField('IdTheme').Visible := False;
     FindField('IdResourceType').Visible := False;
   end;
-  with TbFillRequirement do
+  with TbAvailability do
   begin
     FindField('IdTheme').Visible := False;
     FindField('IdResource').Visible := False;
@@ -471,10 +471,10 @@ begin
   end;
 end;
 
-function GetFieldAssignments(const Fields: string; const Values: Variant): string;
+function GetFieldAvailabilities(const Fields: string; const Values: Variant): string;
 var
   Pos, l: Integer;
-  Field, Assignment: string;
+  Field, Availability: string;
 begin
   Result := '';
   if VarIsArray(Values) then
@@ -486,11 +486,11 @@ begin
       Field := ScapedToString(Fields, Pos);
       if Field = '' then
         break;
-      Assignment := Format('%s="%s"', [Field, Values[l]]);
+      Availability := Format('%s="%s"', [Field, Values[l]]);
       if l = 0 then
-        Result := Assignment
+        Result := Availability
       else
-        Result := Result + ' and ' + Assignment;
+        Result := Result + ' and ' + Availability;
       Inc(l);
       Inc(Pos, 3);
     end;
@@ -507,8 +507,8 @@ begin
   begin
     Connection.ExecuteDirect(
     Format('UPDATE %s SET %s WHERE %s', [TableName,
-      GetFieldAssignments(ADetailFields, CurValues),
-      GetFieldAssignments(ADetailFields, OldValues)]));
+      GetFieldAvailabilities(ADetailFields, CurValues),
+      GetFieldAvailabilities(ADetailFields, OldValues)]));
     Refresh;
   end
 end;
@@ -520,7 +520,7 @@ begin
   with TZTable(ADetail) do
   begin
     DbZConnection.ExecuteDirect(Format('DELETE FROM %s WHERE %s;',
-      [TableName, GetFieldAssignments(AMasterFields, AMasterValues)]));
+      [TableName, GetFieldAvailabilities(AMasterFields, AMasterValues)]));
     Refresh;
   end
 end;

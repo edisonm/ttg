@@ -105,7 +105,7 @@ Day
 "6";"Viernes";
 ResourceType
 5
-"IdResourceType";"NaResourceType";"DefaultMaxNumResource";"ValResourceType";
+"IdResourceType";"NaResourceType";"NumResourceLimit";"ValResourceType";
 "1";"Profesor";"1";"655";
 "2";"Aula";"1";"413";
 "3";"Curso";"1";"902";
@@ -349,7 +349,7 @@ Activity
 "388";"92";"A";
 "389";"15";"A";
 "390";"15";"B";
-FillRequirement
+Availability
 69
 "IdTheme";"IdResource";"NumResource";
 "1";"3";"2";
@@ -765,9 +765,9 @@ ResourceRestriction
 "97";"6";"4";"4";
 "97";"6";"6";"4";
 "97";"6";"7";"3";
-Requirement
+ResourceTypeLimit
 0
-"IdTheme";"IdResourceType";"MaxNumResource";
+"IdTheme";"IdResourceType";"NumResourceLimit";
 Participant
 259
 "IdActivity";"IdResource";"NumResource";

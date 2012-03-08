@@ -56,7 +56,7 @@ type
     FResourceRestrictionTypeToName: TDynamicStringArray;
     FResourceTypeToValue: TDynamicIntegerArray;
     FResourceTypeToName: TDynamicStringArray;
-    FResourceTypeToDefaultMaxNumResource: TDynamicIntegerArray;
+    FResourceTypeToNumResourceLimit: TDynamicIntegerArray;
     FThemeToIdTheme: TDynamicIntegerArray;
     FThemeToName: TDynamicStringArray;
     FDayToIdDay: TDynamicIntegerArray;
@@ -428,7 +428,7 @@ var
   procedure LoadResourceType;
   var
     ResourceType: Integer;
-    FieldValue, FieldName, FieldDefaultMaxNumResource: TField;
+    FieldValue, FieldName, FieldNumResourceLimit: TField;
   begin
     with SourceDataModule.TbResourceType do
     begin
@@ -436,15 +436,15 @@ var
       First;
       FieldName := FindField('NaResourceType');
       FieldValue := FindField('ValResourceType');
-      FieldDefaultMaxNumResource := FindField('DefaultMaxNumResource');
+      FieldNumResourceLimit := FindField('NumResourceLimit');
       SetLength(FResourceTypeToName, FResourceTypeCount);
       SetLength(FResourceTypeToValue, FResourceTypeCount);
-      SetLength(FResourceTypeToDefaultMaxNumResource, FResourceTypeCount);
+      SetLength(FResourceTypeToNumResourceLimit, FResourceTypeCount);
       for ResourceType := 0 to FResourceTypeCount - 1 do
       begin
         FResourceTypeToName[ResourceType] := FieldName.AsString;
         FResourceTypeToValue[ResourceType] := FieldValue.AsInteger;
-        FResourceTypeToDefaultMaxNumResource[ResourceType] := FieldDefaultMaxNumResource.AsInteger;
+        FResourceTypeToNumResourceLimit[ResourceType] := FieldNumResourceLimit.AsInteger;
         Next;
       end;
       First;
@@ -654,46 +654,46 @@ var
       First;
     end;
   end;
-  procedure LoadRequirement;
+  procedure LoadResourceTypeLimit;
   var
-    Requirement, RequirementCount, Theme, ResourceType: Integer;
-    FieldTheme, FieldResourceType, FieldMaxNumResource: TField;
+    ResourceTypeLimit, ResourceTypeLimitCount, Theme, ResourceType: Integer;
+    FieldTheme, FieldResourceType, FieldNumResourceLimit: TField;
   begin
-    with SourceDataModule.TbRequirement do
+    with SourceDataModule.TbResourceTypeLimit do
     begin
       IndexFieldNames := 'IdTheme;IdResourceType';
       First;
-      RequirementCount := RecordCount;
+      ResourceTypeLimitCount := RecordCount;
       SetLength(FThemeResourceTypeToLimit, FThemeCount, FResourceTypeCount);
       FieldTheme := FindField('IdTheme');
       FieldResourceType := FindField('IdResourceType');
-      FieldMaxNumResource := FindField('MaxNumResource');
+      FieldNumResourceLimit := FindField('NumResourceLimit');
       for Theme := 0 to FThemeCount - 1 do
         for ResourceType := 0 to FResourceTypeCount - 1 do
         begin
-          FThemeResourceTypeToLimit[Theme, ResourceType] := FResourceTypeToDefaultMaxNumResource[ResourceType];
+          FThemeResourceTypeToLimit[Theme, ResourceType] := FResourceTypeToNumResourceLimit[ResourceType];
         end;
-      for Requirement := 0 to RequirementCount - 1 do
+      for ResourceTypeLimit := 0 to ResourceTypeLimitCount - 1 do
       begin
         Theme := FIdThemeToTheme[FieldTheme.AsInteger - FMinIdTheme];
         ResourceType := FIdResourceTypeToResourceType[FieldResourceType.AsInteger - FMinIdResourceType];
-        FThemeResourceTypeToLimit[Theme, ResourceType] := FieldMaxNumResource.AsInteger;
+        FThemeResourceTypeToLimit[Theme, ResourceType] := FieldNumResourceLimit.AsInteger;
         Next;
       end;
       First;
     end;
   end;
-  procedure LoadFillRequirement;
+  procedure LoadAvailability;
   var
-    NumResource, FillRequirement, Count, FillRequirementCount, Resource,
+    NumResource, Availability, Count, AvailabilityCount, Resource,
       Theme, ResourceType: Integer;
     FieldTheme, FieldResource, FieldNumResource: TField;
   begin
-    with SourceDataModule.TbFillRequirement do
+    with SourceDataModule.TbAvailability do
     begin
       IndexFieldNames := 'IdTheme;IdResource';
       First;
-      FillRequirementCount := RecordCount;
+      AvailabilityCount := RecordCount;
       SetLength(FThemeToResources, FThemeCount, 0);
       SetLength(FThemeToNumResources, FThemeCount, 0);
       SetLength(FThemeToLimits, FThemeCount, 0);
@@ -702,7 +702,7 @@ var
       FieldTheme := FindField('IdTheme');
       FieldResource := FindField('IdResource');
       FieldNumResource := FindField('NumResource');
-      for FillRequirement := 0 to FillRequirementCount - 1 do
+      for Availability := 0 to AvailabilityCount - 1 do
       begin
         Theme := FIdThemeToTheme[FieldTheme.AsInteger - FMinIdTheme];
         Resource := FIdResourceToResource[FieldResource.AsInteger - FMinIdResource];
@@ -730,7 +730,7 @@ var
   ThemeResourceIsFixed: TDynamicBooleanArrayArray;
   procedure GenerateTemplateData;
   var
-    Activity, FillRequirement, ResourceType, ThemeActivity, Resource, Limit,
+    Activity, Availability, ResourceType, ThemeActivity, Resource, Limit,
       Theme, NumResource, NumAssigned, Remaining, Number: Integer;
     ResourceTypeToNumber: TDynamicIntegerArray;
     ThemeToRemainings: TDynamicIntegerArrayArray;
@@ -746,16 +746,16 @@ var
     for Theme := 0 to FThemeCount - 1 do
     begin
       SetLength(ThemeToRemainings[Theme], Length(FThemeToResources[Theme]));
-      for FillRequirement := 0 to High(ThemeToRemainings[Theme]) do
-        ThemeToRemainings[Theme, FillRequirement]
-          := FThemeToNumResources[Theme, FillRequirement];
+      for Availability := 0 to High(ThemeToRemainings[Theme]) do
+        ThemeToRemainings[Theme, Availability]
+          := FThemeToNumResources[Theme, Availability];
     end;
     for Activity := 0 to FActivityCount - 1 do
     begin
       Theme := FActivityToTheme[Activity];
-      for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+      for Availability := 0 to High(FThemeToResources[Theme]) do
       begin
-        ActivityToNumResources[Activity, FillRequirement] := 0;
+        ActivityToNumResources[Activity, Availability] := 0;
       end;
     end;
     SetLength(ResourceTypeToNumber, FResourceTypeCount);
@@ -772,15 +772,15 @@ var
         ResourceTypeToNumber[ResourceType] := Number;
       end;
       SetLength(ThemeResourceIsFixed[Theme], Length(FThemeToResources[Theme]));
-      for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+      for Availability := 0 to High(FThemeToResources[Theme]) do
       begin
-        Remaining := ThemeToRemainings[Theme, FillRequirement];
-        Resource := FThemeToResources[Theme, FillRequirement];
+        Remaining := ThemeToRemainings[Theme, Availability];
+        Resource := FThemeToResources[Theme, Availability];
         ResourceType := FResourceToResourceType[Resource];
-        Limit := FThemeToLimits[Theme, FillRequirement];
-        ThemeResourceIsFixed[Theme, FillRequirement] :=
+        Limit := FThemeToLimits[Theme, Availability];
+        ThemeResourceIsFixed[Theme, Availability] :=
           (Length(FThemeToActivities[Theme]) <= 1) or (Limit * Length(FThemeToActivities[Theme])
-           = FThemeToNumResources[Theme, FillRequirement] + ResourceTypeToNumber[ResourceType]);
+           = FThemeToNumResources[Theme, Availability] + ResourceTypeToNumber[ResourceType]);
       end;
     end;
     for Theme := 0 to FThemeCount - 1 do
@@ -788,28 +788,28 @@ var
       for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
       begin
         Activity := FThemeToActivities[Theme, ThemeActivity];
-        for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+        for Availability := 0 to High(FThemeToResources[Theme]) do
         begin
-          Resource := FThemeToResources[Theme, FillRequirement];
+          Resource := FThemeToResources[Theme, Availability];
           ResourceType := FResourceToResourceType[Resource];
-          Limit := FThemeToLimits[Theme, FillRequirement];
-          Remaining := ThemeToRemainings[Theme, FillRequirement];
+          Limit := FThemeToLimits[Theme, Availability];
+          Remaining := ThemeToRemainings[Theme, Availability];
           NumResource := FTmplActivityResourceTypeToNumber[Activity, ResourceType];
           if (Remaining > 0) and (NumResource < Limit) then
           begin
             NumAssigned := Min(Remaining, Limit - NumResource);
-            Dec(ThemeToRemainings[Theme, FillRequirement], NumAssigned);
+            Dec(ThemeToRemainings[Theme, Availability], NumAssigned);
             Inc(FTmplActivityResourceTypeToNumber[Activity, ResourceType], NumAssigned);
-            Inc(ActivityToNumResources[Activity, FillRequirement], NumAssigned);
+            Inc(ActivityToNumResources[Activity, Availability], NumAssigned);
           end
         end;
       end;
-      for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+      for Availability := 0 to High(FThemeToResources[Theme]) do
       begin
-        Remaining := ThemeToRemainings[Theme, FillRequirement];
-        Resource := FThemeToResources[Theme, FillRequirement];
+        Remaining := ThemeToRemainings[Theme, Availability];
+        Resource := FThemeToResources[Theme, Availability];
         ResourceType := FResourceToResourceType[Resource];
-        Limit := FThemeToLimits[Theme, FillRequirement];
+        Limit := FThemeToLimits[Theme, Availability];
         if Remaining <> 0 then // Sanity Check
         begin
           SErrors := SErrors
@@ -824,7 +824,7 @@ var
   procedure FillTemplateData;
   var
     Theme, Activity, ThemeActivity, Count, Resource, NumResource, Participant,
-    Offset, FillRequirement: Integer;
+    Offset, Availability: Integer;
     DoAdd, DoDrop: Boolean;
   begin
     SetLength(FTmplActivityToResources, FActivityCount);
@@ -849,17 +849,17 @@ var
     end;
     for Theme := 0 to FThemeCount - 1 do
     begin
-      for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+      for Availability := 0 to High(FThemeToResources[Theme]) do
       begin
-        if ThemeResourceIsFixed[Theme, FillRequirement] then
+        if ThemeResourceIsFixed[Theme, Availability] then
         begin
           DoAdd := True;
           DoDrop := True;
-          Resource := FThemeToResources[Theme, FillRequirement];
+          Resource := FThemeToResources[Theme, Availability];
           for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
           begin
             Activity := FThemeToActivities[Theme, ThemeActivity];
-            if ActivityToNumResources[Activity, FillRequirement] <> 0 then
+            if ActivityToNumResources[Activity, Availability] <> 0 then
               DoDrop := False;
             Participant := TIntegerArrayHandler.IndexOf(FActivityToResources[Activity], Resource);
             if Participant < 0 then
@@ -873,16 +873,16 @@ var
                 Activity := FThemeToActivities[Theme, ThemeActivity];
                 Participant := TIntegerArrayHandler.IndexOf(FActivityToResources[Activity], Resource);
                 Inc(FTmplActivityToNumResources[Activity, Participant],
-                    ActivityToNumResources[Activity, FillRequirement]);
+                    ActivityToNumResources[Activity, Availability]);
               end
             else
               for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
               begin
                 Activity := FThemeToActivities[Theme, ThemeActivity];
                 FTmplActivityToResources[Activity, FActivityToNumFixeds[Activity]]
-                  := FThemeToResources[Theme, FillRequirement];
+                  := FThemeToResources[Theme, Availability];
                 FTmplActivityToNumResources[Activity, FActivityToNumFixeds[Activity]]
-                  := ActivityToNumResources[Activity, FillRequirement];
+                  := ActivityToNumResources[Activity, Availability];
                 Inc(FActivityToNumFixeds[Activity]);
               end;
           end;
@@ -892,14 +892,14 @@ var
       begin
         Activity := FThemeToActivities[Theme, ThemeActivity];
         Offset := FActivityToNumFixeds[Activity];
-        for FillRequirement := 0 to High(FThemeToResources[Theme]) do
+        for Availability := 0 to High(FThemeToResources[Theme]) do
         begin
-          if not ThemeResourceIsFixed[Theme, FillRequirement] then
+          if not ThemeResourceIsFixed[Theme, Availability] then
           begin
             FTmplActivityToResources[Activity, Offset]
-              := FThemeToResources[Theme, FillRequirement];
+              := FThemeToResources[Theme, Availability];
             FTmplActivityToNumResources[Activity, Offset] :=
-              ActivityToNumResources[Activity, FillRequirement];
+              ActivityToNumResources[Activity, Availability];
             Inc(Offset);
           end;
         end;
@@ -1098,8 +1098,8 @@ begin
   LoadTheme;
   LoadActivity;
   LoadParticipant;
-  LoadRequirement;
-  LoadFillRequirement;
+  LoadResourceTypeLimit;
+  LoadAvailability;
   GenerateTemplateData;
   FillTemplateData;
   LoadGreedyData;

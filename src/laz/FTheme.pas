@@ -155,12 +155,12 @@ begin
   with SourceDataModule do
   begin
     FSuperTitle := Description[TbTheme];
-    TbRequirement.MasterFields := 'IdTheme';
-    TbRequirement.LinkedFields := 'IdTheme';
-    TbRequirement.MasterSource := DSTheme;
-    TbFillRequirement.MasterFields := 'IdTheme';
-    TbFillRequirement.LinkedFields := 'IdTheme';
-    TbFillRequirement.MasterSource := DSTheme;
+    TbResourceTypeLimit.MasterFields := 'IdTheme';
+    TbResourceTypeLimit.LinkedFields := 'IdTheme';
+    TbResourceTypeLimit.MasterSource := DSTheme;
+    TbAvailability.MasterFields := 'IdTheme';
+    TbAvailability.LinkedFields := 'IdTheme';
+    TbAvailability.MasterSource := DSTheme;
     TbActivity.MasterFields := 'IdTheme';
     TbActivity.LinkedFields := 'IdTheme';
     TbActivity.MasterSource := DSTheme;
@@ -173,8 +173,8 @@ end;
 procedure TThemeForm.FormDestroy(Sender: TObject);
 begin
   inherited;
-  SourceDataModule.TbRequirement.MasterSource := nil;
-  SourceDataModule.TbFillRequirement.MasterSource := nil;
+  SourceDataModule.TbResourceTypeLimit.MasterSource := nil;
+  SourceDataModule.TbAvailability.MasterSource := nil;
   SourceDataModule.TbParticipant.MasterSource := nil;
   SourceDataModule.TbActivity.MasterSource := nil;
 end;

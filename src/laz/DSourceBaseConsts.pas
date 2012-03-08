@@ -30,10 +30,10 @@ resourcestring
   STbResource = 'Resources';
   STbPeriod = 'Periods';
   STbActivity = 'Activities';
-  STbFillRequirement = 'Participants';
+  STbAvailability = 'Participants';
   STbResourceRestrictionType = 'Types of Resource Restrictions';
   STbResourceRestriction = 'Resource Restrictions';
-  STbRequirement = 'Participants';
+  STbResourceTypeLimit = 'Participants';
   STbParticipant = 'Participants';
   STbTimetable = 'Timetables';
   STbTimetableDetail = 'Detail of Timetables';
@@ -46,7 +46,7 @@ resourcestring
   SFlDay_NaDay = 'Name';
   SFlResourceType_IdResourceType = 'IdResourceType';
   SFlResourceType_NaResourceType = 'Name';
-  SFlResourceType_DefaultMaxNumResource = 'Default Max Number';
+  SFlResourceType_NumResourceLimit = 'Default Max Number';
   SFlResourceType_ValResourceType = 'Value';
   SFlHour_IdHour = 'Id';
   SFlHour_NaHour = 'Name';
@@ -61,9 +61,9 @@ resourcestring
   SFlActivity_IdActivity = 'Id';
   SFlActivity_IdTheme = 'Theme';
   SFlActivity_NaActivity = 'Name';
-  SFlFillRequirement_IdTheme = 'Theme';
-  SFlFillRequirement_IdResource = 'Resource';
-  SFlFillRequirement_NumResource = 'Number';
+  SFlAvailability_IdTheme = 'Theme';
+  SFlAvailability_IdResource = 'Resource';
+  SFlAvailability_NumResource = 'Number';
   SFlResourceRestrictionType_IdResourceRestrictionType = 'Id';
   SFlResourceRestrictionType_NaResourceRestrictionType = 'Name';
   SFlResourceRestrictionType_ColResourceRestrictionType = 'Color';
@@ -72,9 +72,9 @@ resourcestring
   SFlResourceRestriction_IdDay = 'Day';
   SFlResourceRestriction_IdHour = 'Hour';
   SFlResourceRestriction_IdResourceRestrictionType = 'Restriction Type';
-  SFlRequirement_IdTheme = 'Theme';
-  SFlRequirement_IdResourceType = 'Resource Type';
-  SFlRequirement_MaxNumResource = 'Limit';
+  SFlResourceTypeLimit_IdTheme = 'Theme';
+  SFlResourceTypeLimit_IdResourceType = 'Resource Type';
+  SFlResourceTypeLimit_NumResourceLimit = 'Limit';
   SFlParticipant_IdActivity = 'Category';
   SFlParticipant_IdResource = 'Resource';
   SFlParticipant_NumResource = 'Number';
