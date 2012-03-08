@@ -30,7 +30,6 @@ type
     LbDownhillLevels: TLabel;
     LbPollinationProbability: TLabel;
     LbPopulationSize: TLabel;
-    LbMaxResourceWorkLoad: TLabel;
     PCConfig: TPageControl;
     SEMaxIteration: TSpinEdit;
     EdPollinationProbability: TEdit;
@@ -41,28 +40,18 @@ type
     EdBrokenSession: TEdit;
     EdNonScatteredActivity: TEdit;
     TSInstitution: TTabSheet;
-    SEMaxResourceWorkLoad: TSpinEdit;
     MeComments: TMemo;
     LbComments: TLabel;
     LbInstitutionName: TLabel;
     EdNaInstitution: TEdit;
     LbResourceRestrictions: TLabel;
     TSOptions: TTabSheet;
-    CBRandomize: TCheckBox;
-    LbSeed: TLabel;
+    CBUseCustomSeed: TCheckBox;
     speSeed: TSpinEdit;
-    LbResponsible: TLabel;
-    EdNameResponsible: TEdit;
-    LbResponsiblePosition: TLabel;
-    EdPositionResponsible: TEdit;
     LbAuthority: TLabel;
     EdNameAuthority: TEdit;
-    EdPositionAuthority: TEdit;
-    LbAuthorityPosition: TLabel;
     LbUpdateEach: TLabel;
     speNumIterations: TSpinEdit;
-    LbSchoolYear: TLabel;
-    EdSchoolYear: TEdit;
     LbBreakTimetableResource: TLabel;
     EdBreakTimetableResource: TEdit;
     LbInitialTimetables: TLabel;
@@ -79,7 +68,7 @@ type
     DBGrid2: TDBGrid;
     DSResourceRestrictionType: TDataSource;
     CBColResourceRestrictionType: TColorBox;
-    procedure CBRandomizeClick(Sender: TObject);
+    procedure CBUseCustomSeedClick(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure CBColResourceRestrictionTypeChange(Sender: TObject);
@@ -138,7 +127,7 @@ begin
   DBGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
-procedure TConfigForm.CBRandomizeClick(Sender: TObject);
+procedure TConfigForm.CBUseCustomSeedClick(Sender: TObject);
 begin
   with (Sender as TCheckbox) do
   begin
@@ -151,14 +140,9 @@ begin
    with MasterDataModule.ConfigStorage do
    begin
       EdNaInstitution.Text := NaInstitution;
-      EdSchoolYear.Text := SchoolYear;
       EdNameAuthority.Text := NameAuthority;
-      EdPositionAuthority.Text := PositionAuthority;
-      EdNameResponsible.Text := NameResponsible;
-      EdPositionResponsible.Text := PositionResponsible;
-      SEMaxResourceWorkLoad.Value := MaxResourceWorkLoad;
       MeComments.Lines.Text := Comments;
-      CBRandomize.Checked := Randomize;
+      CBUseCustomSeed.Checked := UseCustomSeed;
       speSeed.Value := Seed;
       speNumIterations.Value := RefreshInterval;
       EdClashActivity.Text := FloatToStr(ClashActivity);
@@ -183,14 +167,9 @@ begin
    with MasterDataModule.ConfigStorage do
    begin
       NaInstitution := EdNaInstitution.Text;
-      SchoolYear := EdSchoolYear.Text;
       NameAuthority := EdNameAuthority.Text;
-      PositionAuthority := EdPositionAuthority.Text;
-      NameResponsible := EdNameResponsible.Text;
-      PositionResponsible := EdPositionResponsible.Text;
-      MaxResourceWorkLoad := SEMaxResourceWorkLoad.Value;
       Comments := MeComments.Lines.Text;
-      Randomize := CBRandomize.Checked;
+      UseCustomSeed := CBUseCustomSeed.Checked;
       Seed := speSeed.Value;
       RefreshInterval := speNumIterations.Value;
       ClashActivity := StrToInt(EdClashActivity.Text);

@@ -662,8 +662,7 @@ procedure TMainForm.ActCheckFeasibilityExecute(Sender: TObject);
 begin
   MessageViewForm.HelpContext := ActCheckFeasibility.HelpContext;
   if MasterDataModule.PerformAllChecks(MessageViewForm.MemLog.Lines,
-                                       MessageViewForm.MemSummary.Lines,
-                                       MasterDataModule.ConfigStorage.MaxResourceWorkLoad) then
+                                       MessageViewForm.MemSummary.Lines) then
   begin
     MessageViewForm.Show;
   end

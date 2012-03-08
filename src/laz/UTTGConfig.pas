@@ -18,22 +18,12 @@ type
     function GetNaInstitution: string;
     procedure SetBookmarks(const AValue: string);
     procedure SetNaInstitution(const Value: string);
-    function GetSchoolYear: string;
-    procedure SetSchoolYear(const Value: string);
     function GetNameAuthority: string;
     procedure SetNameAuthority(const Value: string);
-    function GetPositionAuthority: string;
-    procedure SetPositionAuthority(const Value: string);
-    function GetNameResponsible: string;
-    procedure SetNameResponsible(const Value: string);
-    function GetPositionResponsible: string;
-    procedure SetPositionResponsible(const Value: string);
-    function GetMaxResourceWorkLoad: Integer;
-    procedure SetMaxResourceWorkLoad(Value: Integer);
     function GetComments: string;
     procedure SetComments(const Value: string);
-    function GetRandomize: Boolean;
-    procedure SetRandomize(Value: Boolean);
+    function GetUseCustomSeed: Boolean;
+    procedure SetUseCustomSeed(Value: Boolean);
     function GetSeed: Integer;
     procedure SetSeed(Value: Integer);
     function GetRefreshInterval: Integer;
@@ -68,14 +58,9 @@ type
     procedure SetDefaults;
     procedure InitRandom;
     property NaInstitution: string read GetNaInstitution write SetNaInstitution;
-    property SchoolYear: string read GetSchoolYear write SetSchoolYear;
     property NameAuthority: string read GetNameAuthority write SetNameAuthority;
-    property PositionAuthority: string read GetPositionAuthority write SetPositionAuthority;
-    property NameResponsible: string read GetNameResponsible write SetNameResponsible;
-    property PositionResponsible: string read GetPositionResponsible write SetPositionResponsible;
-    property MaxResourceWorkLoad: Integer read GetMaxResourceWorkLoad write SetMaxResourceWorkLoad;
     property Comments: string read GetComments write SetComments;
-    property Randomize: Boolean read GetRandomize write SetRandomize;
+    property UseCustomSeed: Boolean read GetUseCustomSeed write SetUseCustomSeed;
     property Seed: Integer read GetSeed write SetSeed;
     property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
     property ClashActivity: Integer read GetClashActivity write SetClashActivity;
@@ -116,16 +101,6 @@ begin
    Values['NaInstitution'] := Value;
 end;
 
-function TTTGConfig.GetSchoolYear: string;
-begin
-   Result := Values['SchoolYear'];
-end;
-
-procedure TTTGConfig.SetSchoolYear(const Value: string);
-begin
-   Values['SchoolYear'] := Value;
-end;
-
 function TTTGConfig.GetNameAuthority: string;
 begin
    Result := Values['NameAuthority'];
@@ -134,46 +109,6 @@ end;
 procedure TTTGConfig.SetNameAuthority(const Value: string);
 begin
    Values['NameAuthority'] := Value;
-end;
-
-function TTTGConfig.GetPositionAuthority: string;
-begin
-   Result := Values['PositionAuthority'];
-end;
-
-procedure TTTGConfig.SetPositionAuthority(const Value: string);
-begin
-   Values['PositionAuthority'] := Value;
-end;
-
-function TTTGConfig.GetNameResponsible: string;
-begin
-   Result := Values['NameResponsible'];
-end;
-
-procedure TTTGConfig.SetNameResponsible(const Value: string);
-begin
-   Values['NameResponsible'] := Value;
-end;
-
-function TTTGConfig.GetPositionResponsible: string;
-begin
-   Result := Values['PositionResponsible'];
-end;
-
-procedure TTTGConfig.SetPositionResponsible(const Value: string);
-begin
-   Values['PositionResponsible'] := Value;
-end;
-
-function TTTGConfig.GetMaxResourceWorkLoad: Integer;
-begin
-   Result := Integers['MaxResourceWorkLoad'];
-end;
-
-procedure TTTGConfig.SetMaxResourceWorkLoad(Value: Integer);
-begin
-   Integers['MaxResourceWorkLoad'] := Value;
 end;
 
 function TTTGConfig.GetComments: string;
@@ -186,14 +121,14 @@ begin
   Texts['Comments'] := Value;
 end;
 
-function TTTGConfig.GetRandomize: Boolean;
+function TTTGConfig.GetUseCustomSeed: Boolean;
 begin
-   Result := Booleans['Randomize'];
+   Result := Booleans['UseCustomSeed'];
 end;
 
-procedure TTTGConfig.SetRandomize(Value: Boolean);
+procedure TTTGConfig.SetUseCustomSeed(Value: Boolean);
 begin
-  Booleans['Randomize'] := Value;
+  Booleans['UseCustomSeed'] := Value;
 end;
 
 function TTTGConfig.GetSeed: Integer;
@@ -350,14 +285,9 @@ procedure TTTGConfig.SetDefaults;
 begin
   // Default configuration
   NaInstitution := '';
-  SchoolYear := '';
   NameAuthority := '';
-  PositionAuthority := '';
-  NameResponsible := '';
-  PositionResponsible := '';
-  MaxResourceWorkLoad := 20;
   Comments := '';
-  Randomize := True;
+  UseCustomSeed := True;
   Self.Seed := 1;
   RefreshInterval := 1;
   ClashActivity := 200;
@@ -378,10 +308,10 @@ end;
 
 procedure TTTGConfig.InitRandom;
 begin
-  if Randomize then
-    System.Randomize
+  if UseCustomSeed then
+    RandSeed := Seed
   else
-    RandSeed := Seed;
+    System.Randomize;
 end;
 
 end.

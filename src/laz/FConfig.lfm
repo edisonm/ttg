@@ -66,11 +66,11 @@ object ConfigForm: TConfigForm
     Height = 331
     Top = 8
     Width = 314
-    ActivePage = TSInstitution
+    ActivePage = TSOptions
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     object TSInstitution: TTabSheet
       Hint = 'Institution Data'
@@ -78,18 +78,10 @@ object ConfigForm: TConfigForm
       ClientHeight = 301
       ClientWidth = 310
       ImageIndex = 2
-      object LbMaxResourceWorkLoad: TLabel
-        Left = 8
-        Height = 15
-        Top = 156
-        Width = 157
-        Caption = 'Max work load per teacher:'
-        ParentColor = False
-      end
       object LbComments: TLabel
-        Left = 8
+        Left = 6
         Height = 15
-        Top = 180
+        Top = 76
         Width = 66
         Caption = 'Comments:'
         ParentColor = False
@@ -97,67 +89,25 @@ object ConfigForm: TConfigForm
       object LbInstitutionName: TLabel
         Left = 8
         Height = 15
-        Top = 13
+        Top = 17
         Width = 38
         Caption = 'Name:'
-        ParentColor = False
-      end
-      object LbResponsible: TLabel
-        Left = 8
-        Height = 15
-        Top = 108
-        Width = 73
-        Caption = 'Responsible:'
-        ParentColor = False
-      end
-      object LbResponsiblePosition: TLabel
-        Left = 174
-        Height = 15
-        Top = 108
-        Width = 49
-        Caption = 'Position:'
         ParentColor = False
       end
       object LbAuthority: TLabel
         Left = 8
         Height = 15
-        Top = 61
+        Top = 45
         Width = 56
         Caption = 'Authority:'
         ParentColor = False
       end
-      object LbAuthorityPosition: TLabel
-        Left = 174
-        Height = 15
-        Top = 61
-        Width = 49
-        Caption = 'Position:'
-        ParentColor = False
-      end
-      object LbSchoolYear: TLabel
-        Left = 8
-        Height = 15
-        Top = 36
-        Width = 71
-        Caption = 'School Year:'
-        ParentColor = False
-      end
-      object SEMaxResourceWorkLoad: TSpinEdit
-        Left = 172
-        Height = 24
-        Top = 147
-        Width = 130
-        MaxValue = 2147483647
-        MinValue = 1
-        TabOrder = 6
-        Value = 20
-      end
       object MeComments: TMemo
         Left = 8
-        Height = 96
-        Top = 196
+        Height = 200
+        Top = 92
         Width = 294
-        TabOrder = 7
+        TabOrder = 2
       end
       object EdNaInstitution: TEdit
         Left = 108
@@ -167,38 +117,10 @@ object ConfigForm: TConfigForm
         Width = 194
         TabOrder = 0
       end
-      object EdNameResponsible: TEdit
-        Left = 8
-        Height = 24
-        Top = 124
-        Width = 149
-        TabOrder = 4
-      end
-      object EdPositionResponsible: TEdit
-        Left = 158
-        Height = 24
-        Top = 124
-        Width = 144
-        TabOrder = 5
-      end
       object EdNameAuthority: TEdit
-        Left = 8
-        Height = 24
-        Top = 76
-        Width = 149
-        TabOrder = 2
-      end
-      object EdPositionAuthority: TEdit
-        Left = 158
-        Height = 24
-        Top = 76
-        Width = 144
-        TabOrder = 3
-      end
-      object EdSchoolYear: TEdit
         Left = 108
         Height = 24
-        Top = 32
+        Top = 36
         Width = 194
         TabOrder = 1
       end
@@ -208,14 +130,6 @@ object ConfigForm: TConfigForm
       ClientHeight = 301
       ClientWidth = 310
       ImageIndex = 3
-      object LbSeed: TLabel
-        Left = 8
-        Height = 15
-        Top = 39
-        Width = 33
-        Caption = 'Seed:'
-        ParentColor = False
-      end
       object LbUpdateEach: TLabel
         Left = 9
         Height = 15
@@ -296,13 +210,13 @@ object ConfigForm: TConfigForm
         Caption = 'Downhill Levels:'
         ParentColor = False
       end
-      object CBRandomize: TCheckBox
+      object CBUseCustomSeed: TCheckBox
         Left = 8
         Height = 21
-        Top = 8
-        Width = 171
-        Caption = 'Init with the system time'
-        OnClick = CBRandomizeClick
+        Top = 31
+        Width = 132
+        Caption = 'Use custom Seed:'
+        OnClick = CBUseCustomSeedClick
         TabOrder = 0
       end
       object speSeed: TSpinEdit
@@ -393,7 +307,7 @@ object ConfigForm: TConfigForm
         TabOrder = 10
       end
       object CBApplyDoubleDownHill: TCheckBox
-        Left = 190
+        Left = 9
         Height = 21
         Top = 8
         Width = 114

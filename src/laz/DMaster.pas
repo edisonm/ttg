@@ -32,8 +32,7 @@ type
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
   public
     { Public declarations }
-    function PerformAllChecks(AMainStrings, ASubStrings: TStrings;
-      AMaxResourceWorkLoad: Integer): Boolean;
+    function PerformAllChecks(AMainStrings, ASubStrings: TStrings): Boolean;
     function NewIdTimetable: Integer;
     procedure SaveToStrings(AStrings: TStrings);
     procedure SaveIniStrings(AStrings: TStrings);
@@ -97,8 +96,8 @@ begin
   end;
 end;
 
-function TMasterDataModule.PerformAllChecks(AMainStrings, ASubStrings:
-  TStrings; AMaxResourceWorkLoad: Integer): Boolean;
+// TODO: Remove this function and related stuff
+function TMasterDataModule.PerformAllChecks(AMainStrings, ASubStrings: TStrings): Boolean;
 var
   HaveProblems: Boolean;
   iPeriodCount: Integer;
@@ -215,7 +214,7 @@ var
         ASubStrings.Add(SResourcesWorkLoadWithoutProblems);
         vSubMin := ASubStrings.Count;
         ASubStrings.Add(SResourceWorkLoadHead);
-        while not Eof do
+        {while not Eof do
         begin
           if TbTmpResourceWorkLoadWorkLoad.Value > AMaxResourceWorkLoad then
           begin
@@ -239,6 +238,7 @@ var
           end;
           Next;
         end;
+        }
         if HaveProblems then
         begin
           vMainMax := AMainStrings.Count - 1;

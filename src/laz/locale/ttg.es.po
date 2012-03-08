@@ -369,8 +369,8 @@ msgctxt "TCONFIGFORM.CBAPPLYDOUBLEDOWNHILL.CAPTION"
 msgid "Apply Downhill"
 msgstr "Aplicar descenso  - lento"
 
-#: tconfigform.cbrandomize.caption
-msgctxt "TCONFIGFORM.CBRANDOMIZE.CAPTION"
+#: tconfigform.cbusecustomseed.caption
+msgctxt "TCONFIGFORM.CBUSECUSTOMSEED.CAPTION"
 msgid "Init with the system time"
 msgstr "Inicializar con la hora del sistema"
 

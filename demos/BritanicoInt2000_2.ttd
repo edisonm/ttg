@@ -1792,15 +1792,15 @@ TimetableResource
 "1";"390";"82";"1";
 39
 NaInstitution=Colegio Experimental Britanico Internacional (2)
-SchoolYear=2000-2001
-NameAuthority=Dr. Benjamín Tobar
-PositionAuthority=Rector
-NameResponsible=Comisión
-PositionResponsible=Comisión
+SchoolYear=
+NameAuthority=Dr. Benjamín Tobar. Rector
+PositionAuthority=
+NameResponsible=
+PositionResponsible=
 MaxResourceWorkLoad=35
 TimetableSeleccionado=3
-Comments=""
-Randomize=-1
+Comments="Año 2000-2001"
+UseCustomSeed=-1
 Seed=2591
 NumIterations=25
 ClashResource=305

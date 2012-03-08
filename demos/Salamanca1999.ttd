@@ -2579,15 +2579,15 @@ TimetableResource
 "IdTimetable";"IdActivity";"IdResource";"NumResource";
 39
 NaInstitution=Colegio Nacional Mixto Nocturno Salamanca
-SchoolYear=1999-2000
-NameAuthority=Dr. Edgar Velasco
-PositionAuthority=Rector
-NameResponsible=Ing. Edison Mera
-PositionResponsible=Prof. Suplente
+SchoolYear=
+NameAuthority=Dr. Edgar Velasco. Rector
+PositionAuthority=
+NameResponsible=
+PositionResponsible=
 MaxResourceWorkLoad=23
 TimetableSeleccionado=8
-Comments="Pruebas realizadas.\n\r\n\rDatos necesarios para la realizacion del horario definitivo.\n\r"
-Randomize=-1
+Comments="Año Lectivo 1999-2000\n\rResponsable: Ing. Edison Mera."
+UseCustomSeed=-1
 Seed=11558
 NumIterations=25
 ClashResource=299
