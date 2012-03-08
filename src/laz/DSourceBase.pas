@@ -2,7 +2,7 @@
 unit DSourceBase;
 
 (*
-  08/03/2012 16:21
+  08/03/2012 17:19
 
   Warning:
 
@@ -110,7 +110,7 @@ begin
     MasterFields := 'IdTheme';
     DetailFields := 'IdTheme';
     UpdateCascade := True;
-    DeleteCascade := False;
+    DeleteCascade := True;
   end;
   with FMasterRels[0, 1] do
   begin

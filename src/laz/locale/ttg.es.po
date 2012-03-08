@@ -673,11 +673,11 @@ msgid "Contents|Help contents"
 msgstr "Contenido|Contenido de la ayuda"
 
 #: tmainform.actday.caption
-msgid "Working days"
+msgid "Days"
 msgstr "Dias laborables"
 
 #: tmainform.actday.hint
-msgid "Working days|Working days"
+msgid "Days|Days"
 msgstr "Dias laborables|Dias laborables"
 
 #: tmainform.actdbexplorer.caption
@@ -756,12 +756,12 @@ msgstr "Clave|Cambiar la clave del sistema"
 
 #: tmainform.actperiod.caption
 msgctxt "tmainform.actperiod.caption"
-msgid "Working Time Slots"
+msgid "Periods"
 msgstr "Periodos laborables"
 
 #: tmainform.actperiod.hint
 msgctxt "tmainform.actperiod.hint"
-msgid "Working Time Slots|Working Time Slots"
+msgid "Periods|Periods"
 msgstr "Periodos laborables|Periodos laborables"
 
 #: tmainform.actregistrationinfo.caption

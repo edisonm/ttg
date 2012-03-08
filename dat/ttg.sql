@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  08/03/2012 16:21
+  08/03/2012 17:19
 
   Warning:
 
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `Activity`(
     `NaActivity` VARCHAR(25) NOT NULL /* Activity Name */,
   CONSTRAINT `ixThemeActivity` UNIQUE(`IdTheme`,`NaActivity`),
   CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
-    REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE RESTRICT
+    REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE CASCADE
 ); /* Activities */
 CREATE TABLE IF NOT EXISTS `Availability`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,

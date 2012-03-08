@@ -655,11 +655,11 @@ msgid "Contents|Help contents"
 msgstr ""
 
 #: tmainform.actday.caption
-msgid "Working days"
+msgid "Days"
 msgstr ""
 
 #: tmainform.actday.hint
-msgid "Working days|Working days"
+msgid "Days|Days"
 msgstr ""
 
 #: tmainform.actdbexplorer.caption
@@ -738,12 +738,12 @@ msgstr ""
 
 #: tmainform.actperiod.caption
 msgctxt "TMAINFORM.ACTPERIOD.CAPTION"
-msgid "Working Time Slots"
+msgid "Periods"
 msgstr ""
 
 #: tmainform.actperiod.hint
 msgctxt "TMAINFORM.ACTPERIOD.HINT"
-msgid "Working Time Slots|Working Time Slots"
+msgid "Periods|Periods"
 msgstr ""
 
 #: tmainform.actregistrationinfo.caption

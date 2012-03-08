@@ -1,5 +1,5 @@
 object MainForm: TMainForm
-  Left = 264
+  Left = 257
   Height = 362
   Top = 260
   Width = 718
@@ -136,21 +136,21 @@ object MainForm: TMainForm
       ShowHint = True
     end
     object TBTheme: TToolButton
-      Left = 172
+      Left = 218
       Top = 2
       Action = ActTheme
       ParentShowHint = False
       ShowHint = True
     end
     object TBResourceType: TToolButton
-      Left = 195
+      Left = 172
       Top = 2
       Action = ActResourceType
       ParentShowHint = False
       ShowHint = True
     end
     object TBResource: TToolButton
-      Left = 218
+      Left = 195
       Top = 2
       Action = ActResource
       ParentShowHint = False
@@ -1902,9 +1902,9 @@ object MainForm: TMainForm
     object ActDay: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Working days'
+      Caption = 'Days'
       HelpContext = 140
-      Hint = 'Working days|Working days'
+      Hint = 'Days|Days'
       ImageIndex = 4
       OnExecute = ActDayExecute
       ShortCut = 16452
@@ -1922,9 +1922,9 @@ object MainForm: TMainForm
     object ActPeriod: TAction
       Category = 'Data'
       AutoCheck = True
-      Caption = 'Working Time Slots'
+      Caption = 'Periods'
       HelpContext = 160
-      Hint = 'Working Time Slots|Working Time Slots'
+      Hint = 'Periods|Periods'
       ImageIndex = 13
       OnExecute = ActPeriodExecute
       ShortCut = 49225

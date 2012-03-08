@@ -63,7 +63,6 @@ procedure TSourceDataModule.TbThemeBeforePost(DataSet: TDataSet);
 var
   s: string;
 begin
-  inherited DataSetBeforePost(DataSet);
   with DataSet do
   begin
     s := FindField('Composition').AsString;
@@ -248,13 +247,11 @@ procedure TSourceDataModule.PrepareLookupFields;
     ADataSet.FindField(AKeyFields).Index := ADataSet.FieldCount - 1;
   end;
 begin
-  NewLookupField(TbRestriction, TbRestrictionType,
-                  'IdRestrictionType', 'NaRestrictionType');
+  NewLookupField(TbResource, TbResourceType, 'IdResourceType', 'NaResourceType');
+  NewLookupField(TbRestriction, TbRestrictionType, 'IdRestrictionType', 'NaRestrictionType');
   NewLookupField(TbParticipant, TbResource, 'IdResource', 'NaResource');
-  {NewLookupField(TbParticipant, TbResource, 'IdResource', 'IdResourceType');}
   NewLookupField(TbResourceTypeLimit, TbResourceType, 'IdResourceType', 'NaResourceType');
   NewLookupField(TbAvailability, TbResource, 'IdResource', 'NaResource');
-  {NewLookupField(TbAvailability, TbResource, 'IdResource', 'IdResourceType');}
 end;
 
 procedure TSourceDataModule.PrepareCalcFields;
@@ -278,6 +275,7 @@ begin
   TbHour.FindField('IdHour').Visible := False;
   TbPeriod.FindField('IdDay').Visible := False;
   TbPeriod.FindField('IdHour').Visible := False;
+  TbResourceType.FindField('IdResourceType').Visible := False;
   TbResource.FindField('IdResource').Visible := False;
   with TbTimetableDetail do
   begin
