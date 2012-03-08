@@ -16,16 +16,6 @@ msgctxt "dsourcebaseconsts.sflactivity_naactivity"
 msgid "Name"
 msgstr ""
 
-#: dsourcebaseconsts.sflday_idday
-msgctxt "dsourcebaseconsts.sflday_idday"
-msgid "Id"
-msgstr "Codigo"
-
-#: dsourcebaseconsts.sflday_naday
-msgctxt "dsourcebaseconsts.sflday_naday"
-msgid "Name"
-msgstr "Nombre"
-
 #: dsourcebaseconsts.sflavailability_idresource
 #, fuzzy
 #| msgid "Assistant"
@@ -42,6 +32,16 @@ msgstr "Materia"
 msgctxt "dsourcebaseconsts.sflavailability_numresource"
 msgid "Number"
 msgstr "Apellido"
+
+#: dsourcebaseconsts.sflday_idday
+msgctxt "dsourcebaseconsts.sflday_idday"
+msgid "Id"
+msgstr "Codigo"
+
+#: dsourcebaseconsts.sflday_naday
+msgctxt "dsourcebaseconsts.sflday_naday"
+msgid "Name"
+msgstr "Nombre"
 
 #: dsourcebaseconsts.sflhour_idhour
 msgctxt "dsourcebaseconsts.sflhour_idhour"
@@ -100,6 +100,52 @@ msgctxt "dsourcebaseconsts.sflresourcetypelimit_numresourcelimit"
 msgid "Limit"
 msgstr ""
 
+#: dsourcebaseconsts.sflresourcetype_idresourcetype
+msgid "IdResourceType"
+msgstr ""
+
+#: dsourcebaseconsts.sflresourcetype_maxworkload
+msgid "MaxWorkLoad"
+msgstr ""
+
+#: dsourcebaseconsts.sflresourcetype_naresourcetype
+msgctxt "dsourcebaseconsts.sflresourcetype_naresourcetype"
+msgid "Name"
+msgstr "Nombre"
+
+#: dsourcebaseconsts.sflresourcetype_numresourcelimit
+msgid "Resource Limit"
+msgstr ""
+
+#: dsourcebaseconsts.sflresourcetype_valresourcetype
+msgctxt "dsourcebaseconsts.sflresourcetype_valresourcetype"
+msgid "Value"
+msgstr "Valor"
+
+#: dsourcebaseconsts.sflresource_abresource
+msgctxt "dsourcebaseconsts.sflresource_abresource"
+msgid "Abbreviation"
+msgstr "Identificacion"
+
+#: dsourcebaseconsts.sflresource_idresource
+msgctxt "dsourcebaseconsts.sflresource_idresource"
+msgid "Id"
+msgstr "Codigo"
+
+#: dsourcebaseconsts.sflresource_idresourcetype
+msgid "Type"
+msgstr ""
+
+#: dsourcebaseconsts.sflresource_naresource
+msgctxt "dsourcebaseconsts.sflresource_naresource"
+msgid "Name"
+msgstr "Nombre"
+
+#: dsourcebaseconsts.sflresource_numresource
+msgctxt "dsourcebaseconsts.sflresource_numresource"
+msgid "Number"
+msgstr "Apellido"
+
 #: dsourcebaseconsts.sflrestrictiontype_colrestrictiontype
 msgctxt "dsourcebaseconsts.sflrestrictiontype_colrestrictiontype"
 msgid "Color"
@@ -139,48 +185,6 @@ msgstr "Profesor"
 msgctxt "dsourcebaseconsts.sflrestriction_idrestrictiontype"
 msgid "Restriction Type"
 msgstr "Tipo de Restriccion"
-
-#: dsourcebaseconsts.sflresourcetype_numresourcelimit
-msgid "Default Max Number"
-msgstr ""
-
-#: dsourcebaseconsts.sflresourcetype_idresourcetype
-msgid "IdResourceType"
-msgstr ""
-
-#: dsourcebaseconsts.sflresourcetype_naresourcetype
-msgctxt "dsourcebaseconsts.sflresourcetype_naresourcetype"
-msgid "Name"
-msgstr "Nombre"
-
-#: dsourcebaseconsts.sflresourcetype_valresourcetype
-msgctxt "dsourcebaseconsts.sflresourcetype_valresourcetype"
-msgid "Value"
-msgstr "Valor"
-
-#: dsourcebaseconsts.sflresource_abresource
-msgctxt "dsourcebaseconsts.sflresource_abresource"
-msgid "Abbreviation"
-msgstr "Identificacion"
-
-#: dsourcebaseconsts.sflresource_idresource
-msgctxt "dsourcebaseconsts.sflresource_idresource"
-msgid "Id"
-msgstr "Codigo"
-
-#: dsourcebaseconsts.sflresource_idresourcetype
-msgid "Type"
-msgstr ""
-
-#: dsourcebaseconsts.sflresource_naresource
-msgctxt "dsourcebaseconsts.sflresource_naresource"
-msgid "Name"
-msgstr "Nombre"
-
-#: dsourcebaseconsts.sflresource_numresource
-msgctxt "dsourcebaseconsts.sflresource_numresource"
-msgid "Number"
-msgstr "Apellido"
 
 #: dsourcebaseconsts.sfltheme_composition
 msgctxt "dsourcebaseconsts.sfltheme_composition"
@@ -267,15 +271,17 @@ msgctxt "dsourcebaseconsts.stbactivity"
 msgid "Activities"
 msgstr "Distribucion de la carga"
 
+#: dsourcebaseconsts.stbavailability
+#, fuzzy
+#| msgid "Participants"
+msgctxt "dsourcebaseconsts.stbavailability"
+msgid "Availability of Resources to Cover Requirements in the Theme"
+msgstr "Ayudas"
+
 #: dsourcebaseconsts.stbday
 msgctxt "dsourcebaseconsts.stbday"
 msgid "Working Days"
 msgstr "Dias Laborables"
-
-#: dsourcebaseconsts.stbavailability
-msgctxt "dsourcebaseconsts.stbavailability"
-msgid "Participants"
-msgstr "Ayudas"
 
 #: dsourcebaseconsts.stbhour
 msgctxt "dsourcebaseconsts.stbhour"
@@ -294,29 +300,35 @@ msgctxt "dsourcebaseconsts.stbperiod"
 msgid "Periods"
 msgstr "Periodos"
 
-#: dsourcebaseconsts.stbresourcetypelimit
-msgctxt "dsourcebaseconsts.stbresourcetypelimit"
-msgid "Participants"
-msgstr "Ayudas"
-
 #: dsourcebaseconsts.stbresource
 msgctxt "dsourcebaseconsts.stbresource"
 msgid "Resources"
 msgstr "Profesores"
 
-#: dsourcebaseconsts.stbrestriction
-msgctxt "dsourcebaseconsts.stbrestriction"
-msgid "Resource Restrictions"
-msgstr "Restricciones de profesores"
-
-#: dsourcebaseconsts.stbrestrictiontype
-msgctxt "dsourcebaseconsts.stbrestrictiontype"
-msgid "Types of Resource Restrictions"
-msgstr "Tipos de restricciones de profesores"
-
 #: dsourcebaseconsts.stbresourcetype
 msgid "Resource types"
 msgstr ""
+
+#: dsourcebaseconsts.stbresourcetypelimit
+#, fuzzy
+#| msgid "Participants"
+msgctxt "dsourcebaseconsts.stbresourcetypelimit"
+msgid "Limits for usage of Resource Types in Themes"
+msgstr "Ayudas"
+
+#: dsourcebaseconsts.stbrestriction
+#, fuzzy
+#| msgid "Resource Restrictions"
+msgctxt "dsourcebaseconsts.stbrestriction"
+msgid "Restrictions"
+msgstr "Restricciones de profesores"
+
+#: dsourcebaseconsts.stbrestrictiontype
+#, fuzzy
+#| msgid "Types of Resource Restrictions"
+msgctxt "dsourcebaseconsts.stbrestrictiontype"
+msgid "Types of Restrictions"
+msgstr "Tipos de restricciones de profesores"
 
 #: dsourcebaseconsts.stbtheme
 msgctxt "dsourcebaseconsts.stbtheme"
@@ -471,11 +483,6 @@ msgctxt "TCONFIGFORM.LBREPARATIONPROBABILITY.CAPTION"
 msgid "Reparation Probability:"
 msgstr "Prob. Reparacion:"
 
-#: tconfigform.lbrestrictions.caption
-msgctxt "tconfigform.lbrestrictions.caption"
-msgid "Resource Restrictions:"
-msgstr "Prohibiciones de profesor:"
-
 #: tconfigform.lbresponsible.caption
 msgctxt "tconfigform.lbresponsible.caption"
 msgid "Responsible:"
@@ -485,6 +492,11 @@ msgstr "Responsable:"
 msgctxt "TCONFIGFORM.LBRESPONSIBLEPOSITION.CAPTION"
 msgid "Position:"
 msgstr "Cargo:"
+
+#: tconfigform.lbrestrictions.caption
+msgctxt "tconfigform.lbrestrictions.caption"
+msgid "Resource Restrictions:"
+msgstr "Prohibiciones de profesor:"
 
 #: tconfigform.lbschoolyear.caption
 msgctxt "tconfigform.lbschoolyear.caption"
@@ -1695,10 +1707,6 @@ msgstr "Probabilidad de Reparacion"
 msgid "For [%s], the number of activities %d exceeds its capacity %d"
 msgstr ""
 
-#: uttgconsts.srestrictionshead
-msgid "Resource; Restrictions"
-msgstr "Profesor; Restricciones"
-
 #: uttgconsts.sresourcesworkloadwithoutproblems
 msgid "Resources' Work load without problems..."
 msgstr "Carga horaria de los profesores sin problemas..."
@@ -1710,6 +1718,10 @@ msgstr "Carga horaria de los profesores con problemas..."
 #: uttgconsts.sresourceworkloadhead
 msgid "Resource; Work Load"
 msgstr "Profesor; Carga horaria"
+
+#: uttgconsts.srestrictionshead
+msgid "Resource; Restrictions"
+msgstr "Profesor; Restricciones"
 
 #: uttgconsts.sroom
 msgid "Room"

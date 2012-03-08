@@ -16,16 +16,6 @@ msgctxt "dsourcebaseconsts.sflactivity_naactivity"
 msgid "Name"
 msgstr ""
 
-#: dsourcebaseconsts.sflday_idday
-msgctxt "dsourcebaseconsts.sflday_idday"
-msgid "Id"
-msgstr ""
-
-#: dsourcebaseconsts.sflday_naday
-msgctxt "dsourcebaseconsts.sflday_naday"
-msgid "Name"
-msgstr ""
-
 #: dsourcebaseconsts.sflavailability_idresource
 msgctxt "dsourcebaseconsts.sflavailability_idresource"
 msgid "Resource"
@@ -39,6 +29,16 @@ msgstr ""
 #: dsourcebaseconsts.sflavailability_numresource
 msgctxt "dsourcebaseconsts.sflavailability_numresource"
 msgid "Number"
+msgstr ""
+
+#: dsourcebaseconsts.sflday_idday
+msgctxt "dsourcebaseconsts.sflday_idday"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflday_naday
+msgctxt "dsourcebaseconsts.sflday_naday"
+msgid "Name"
 msgstr ""
 
 #: dsourcebaseconsts.sflhour_idhour
@@ -96,6 +96,52 @@ msgctxt "dsourcebaseconsts.sflresourcetypelimit_numresourcelimit"
 msgid "Limit"
 msgstr ""
 
+#: dsourcebaseconsts.sflresourcetype_idresourcetype
+msgid "IdResourceType"
+msgstr ""
+
+#: dsourcebaseconsts.sflresourcetype_maxworkload
+msgid "MaxWorkLoad"
+msgstr ""
+
+#: dsourcebaseconsts.sflresourcetype_naresourcetype
+msgctxt "dsourcebaseconsts.sflresourcetype_naresourcetype"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflresourcetype_numresourcelimit
+msgid "Resource Limit"
+msgstr ""
+
+#: dsourcebaseconsts.sflresourcetype_valresourcetype
+msgctxt "dsourcebaseconsts.sflresourcetype_valresourcetype"
+msgid "Value"
+msgstr ""
+
+#: dsourcebaseconsts.sflresource_abresource
+msgctxt "dsourcebaseconsts.sflresource_abresource"
+msgid "Abbreviation"
+msgstr ""
+
+#: dsourcebaseconsts.sflresource_idresource
+msgctxt "dsourcebaseconsts.sflresource_idresource"
+msgid "Id"
+msgstr ""
+
+#: dsourcebaseconsts.sflresource_idresourcetype
+msgid "Type"
+msgstr ""
+
+#: dsourcebaseconsts.sflresource_naresource
+msgctxt "dsourcebaseconsts.sflresource_naresource"
+msgid "Name"
+msgstr ""
+
+#: dsourcebaseconsts.sflresource_numresource
+msgctxt "dsourcebaseconsts.sflresource_numresource"
+msgid "Number"
+msgstr ""
+
 #: dsourcebaseconsts.sflrestrictiontype_colrestrictiontype
 msgctxt "dsourcebaseconsts.sflrestrictiontype_colrestrictiontype"
 msgid "Color"
@@ -134,48 +180,6 @@ msgstr ""
 #: dsourcebaseconsts.sflrestriction_idrestrictiontype
 msgctxt "dsourcebaseconsts.sflrestriction_idrestrictiontype"
 msgid "Restriction Type"
-msgstr ""
-
-#: dsourcebaseconsts.sflresourcetype_numresourcelimit
-msgid "Default Max Number"
-msgstr ""
-
-#: dsourcebaseconsts.sflresourcetype_idresourcetype
-msgid "IdResourceType"
-msgstr ""
-
-#: dsourcebaseconsts.sflresourcetype_naresourcetype
-msgctxt "dsourcebaseconsts.sflresourcetype_naresourcetype"
-msgid "Name"
-msgstr ""
-
-#: dsourcebaseconsts.sflresourcetype_valresourcetype
-msgctxt "dsourcebaseconsts.sflresourcetype_valresourcetype"
-msgid "Value"
-msgstr ""
-
-#: dsourcebaseconsts.sflresource_abresource
-msgctxt "dsourcebaseconsts.sflresource_abresource"
-msgid "Abbreviation"
-msgstr ""
-
-#: dsourcebaseconsts.sflresource_idresource
-msgctxt "dsourcebaseconsts.sflresource_idresource"
-msgid "Id"
-msgstr ""
-
-#: dsourcebaseconsts.sflresource_idresourcetype
-msgid "Type"
-msgstr ""
-
-#: dsourcebaseconsts.sflresource_naresource
-msgctxt "dsourcebaseconsts.sflresource_naresource"
-msgid "Name"
-msgstr ""
-
-#: dsourcebaseconsts.sflresource_numresource
-msgctxt "dsourcebaseconsts.sflresource_numresource"
-msgid "Number"
 msgstr ""
 
 #: dsourcebaseconsts.sfltheme_composition
@@ -263,14 +267,14 @@ msgctxt "dsourcebaseconsts.stbactivity"
 msgid "Activities"
 msgstr ""
 
+#: dsourcebaseconsts.stbavailability
+msgctxt "dsourcebaseconsts.stbavailability"
+msgid "Availability of Resources to Cover Requirements in the Theme"
+msgstr ""
+
 #: dsourcebaseconsts.stbday
 msgctxt "dsourcebaseconsts.stbday"
 msgid "Working Days"
-msgstr ""
-
-#: dsourcebaseconsts.stbavailability
-msgctxt "dsourcebaseconsts.stbavailability"
-msgid "Participants"
 msgstr ""
 
 #: dsourcebaseconsts.stbhour
@@ -288,28 +292,28 @@ msgctxt "dsourcebaseconsts.stbperiod"
 msgid "Periods"
 msgstr ""
 
-#: dsourcebaseconsts.stbresourcetypelimit
-msgctxt "dsourcebaseconsts.stbresourcetypelimit"
-msgid "Participants"
-msgstr ""
-
 #: dsourcebaseconsts.stbresource
 msgctxt "dsourcebaseconsts.stbresource"
 msgid "Resources"
 msgstr ""
 
+#: dsourcebaseconsts.stbresourcetype
+msgid "Resource types"
+msgstr ""
+
+#: dsourcebaseconsts.stbresourcetypelimit
+msgctxt "dsourcebaseconsts.stbresourcetypelimit"
+msgid "Limits for usage of Resource Types in Themes"
+msgstr ""
+
 #: dsourcebaseconsts.stbrestriction
 msgctxt "dsourcebaseconsts.stbrestriction"
-msgid "Resource Restrictions"
+msgid "Restrictions"
 msgstr ""
 
 #: dsourcebaseconsts.stbrestrictiontype
 msgctxt "dsourcebaseconsts.stbrestrictiontype"
-msgid "Types of Resource Restrictions"
-msgstr ""
-
-#: dsourcebaseconsts.stbresourcetype
-msgid "Resource types"
+msgid "Types of Restrictions"
 msgstr ""
 
 #: dsourcebaseconsts.stbtheme
@@ -461,11 +465,6 @@ msgctxt "TCONFIGFORM.LBREPARATIONPROBABILITY.CAPTION"
 msgid "Reparation Probability:"
 msgstr ""
 
-#: tconfigform.lbrestrictions.caption
-msgctxt "tconfigform.lbrestrictions.caption"
-msgid "Resource Restrictions:"
-msgstr ""
-
 #: tconfigform.lbresponsible.caption
 msgctxt "tconfigform.lbresponsible.caption"
 msgid "Responsible:"
@@ -474,6 +473,11 @@ msgstr ""
 #: tconfigform.lbresponsibleposition.caption
 msgctxt "TCONFIGFORM.LBRESPONSIBLEPOSITION.CAPTION"
 msgid "Position:"
+msgstr ""
+
+#: tconfigform.lbrestrictions.caption
+msgctxt "tconfigform.lbrestrictions.caption"
+msgid "Resource Restrictions:"
 msgstr ""
 
 #: tconfigform.lbschoolyear.caption
@@ -1665,10 +1669,6 @@ msgstr ""
 msgid "For [%s], the number of activities %d exceeds its capacity %d"
 msgstr ""
 
-#: uttgconsts.srestrictionshead
-msgid "Resource; Restrictions"
-msgstr ""
-
 #: uttgconsts.sresourcesworkloadwithoutproblems
 msgid "Resources' Work load without problems..."
 msgstr ""
@@ -1679,6 +1679,10 @@ msgstr ""
 
 #: uttgconsts.sresourceworkloadhead
 msgid "Resource; Work Load"
+msgstr ""
+
+#: uttgconsts.srestrictionshead
+msgid "Resource; Restrictions"
 msgstr ""
 
 #: uttgconsts.sroom
