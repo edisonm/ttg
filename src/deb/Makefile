@@ -7,7 +7,12 @@ include SETTINGS
 
 all: $(INSTALLER)
 
-$(INSTALLER): $(CONTROL) $(TTGDESKTOP) $(TTGTARGET)
+$(INSTALLER): $(CONTROL) $(TTGDESKTOP) $(TTGEXE)
+	mkdir -p $(DEBIAN)/usr/bin
+	mkdir -p $(DEBIAN)/usr/share/doc/ttg/examples/
+	cp $(TTGEXE) $(DEBIAN)/usr/bin
+	cp $(TTGDIR)/examples/Britanico2000.ttd $(DEBIAN)/usr/share/doc/ttg/examples/Britanico2000.ttd
+	cp $(TTGDIR)/examples/Salamanca1999.ttd $(DEBIAN)/usr/share/doc/ttg/examples/Salamanca1999.ttd
 	cd $(TTGDIR)/bin/$(BuildId) ; dpkg --build debian .
 
 $(TTGEXE):
