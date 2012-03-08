@@ -2,7 +2,7 @@
 unit DSourceBaseConsts;
 
 (*
-  08/03/2012 14:59
+  08/03/2012 16:13
 
   Warning:
 
@@ -24,16 +24,16 @@ uses
 resourcestring
 
   STbTheme = 'Themes';
-  STbDay = 'Working Days';
   STbResourceType = 'Resource types';
+  STbDay = 'Working Days';
   STbHour = 'Academic Hours';
   STbResource = 'Resources';
   STbPeriod = 'Periods';
   STbActivity = 'Activities';
-  STbAvailability = 'Participants';
   STbResourceRestrictionType = 'Types of Resource Restrictions';
   STbResourceRestriction = 'Resource Restrictions';
-  STbResourceTypeLimit = 'Participants';
+  STbAvailability = 'Availability of Resources to Cover Requirements in the Theme';
+  STbResourceTypeLimit = 'Limits for usage of Resource Types in Themes';
   STbParticipant = 'Participants';
   STbTimetable = 'Timetables';
   STbTimetableDetail = 'Detail of Timetables';
@@ -42,12 +42,13 @@ resourcestring
   SFlTheme_IdTheme = 'Id';
   SFlTheme_NaTheme = 'Name';
   SFlTheme_Composition = 'Composition';
-  SFlDay_IdDay = 'Id';
-  SFlDay_NaDay = 'Name';
   SFlResourceType_IdResourceType = 'IdResourceType';
   SFlResourceType_NaResourceType = 'Name';
-  SFlResourceType_NumResourceLimit = 'Default Max Number';
+  SFlResourceType_NumResourceLimit = 'Resource Limit';
   SFlResourceType_ValResourceType = 'Value';
+  SFlResourceType_MaxWorkLoad = 'MaxWorkLoad';
+  SFlDay_IdDay = 'Id';
+  SFlDay_NaDay = 'Name';
   SFlHour_IdHour = 'Id';
   SFlHour_NaHour = 'Name';
   SFlHour_Interval = 'Interval';
@@ -61,9 +62,6 @@ resourcestring
   SFlActivity_IdActivity = 'Id';
   SFlActivity_IdTheme = 'Theme';
   SFlActivity_NaActivity = 'Name';
-  SFlAvailability_IdTheme = 'Theme';
-  SFlAvailability_IdResource = 'Resource';
-  SFlAvailability_NumResource = 'Number';
   SFlResourceRestrictionType_IdResourceRestrictionType = 'Id';
   SFlResourceRestrictionType_NaResourceRestrictionType = 'Name';
   SFlResourceRestrictionType_ColResourceRestrictionType = 'Color';
@@ -72,6 +70,9 @@ resourcestring
   SFlResourceRestriction_IdDay = 'Day';
   SFlResourceRestriction_IdHour = 'Hour';
   SFlResourceRestriction_IdResourceRestrictionType = 'Restriction Type';
+  SFlAvailability_IdTheme = 'Theme';
+  SFlAvailability_IdResource = 'Resource';
+  SFlAvailability_NumResource = 'Number';
   SFlResourceTypeLimit_IdTheme = 'Theme';
   SFlResourceTypeLimit_IdResourceType = 'Resource Type';
   SFlResourceTypeLimit_NumResourceLimit = 'Limit';

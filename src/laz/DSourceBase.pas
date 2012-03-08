@@ -2,7 +2,7 @@
 unit DSourceBase;
 
 (*
-  08/03/2012 14:59
+  08/03/2012 16:13
 
   Warning:
 
@@ -29,10 +29,10 @@ type
     DbZConnection: TZConnection;
     TbTheme: TZTable;
     DSTheme: TDataSource;
-    TbDay: TZTable;
-    DSDay: TDataSource;
     TbResourceType: TZTable;
     DSResourceType: TDataSource;
+    TbDay: TZTable;
+    DSDay: TDataSource;
     TbHour: TZTable;
     DSHour: TDataSource;
     TbResource: TZTable;
@@ -41,12 +41,12 @@ type
     DSPeriod: TDataSource;
     TbActivity: TZTable;
     DSActivity: TDataSource;
-    TbAvailability: TZTable;
-    DSAvailability: TDataSource;
     TbResourceRestrictionType: TZTable;
     DSResourceRestrictionType: TDataSource;
     TbResourceRestriction: TZTable;
     DSResourceRestriction: TDataSource;
+    TbAvailability: TZTable;
+    DSAvailability: TDataSource;
     TbResourceTypeLimit: TZTable;
     DSResourceTypeLimit: TDataSource;
     TbParticipant: TZTable;
@@ -81,19 +81,20 @@ begin
   Tables[0] := TbTheme;
   TbTheme.AfterPost := DataSetAfterPost;
   TbTheme.AfterDelete := DataSetAfterDelete;
-  Tables[1] := TbDay;
-  Tables[2] := TbResourceType;
+  Tables[1] := TbResourceType;
   TbResourceType.AfterPost := DataSetAfterPost;
+  Tables[2] := TbDay;
   Tables[3] := TbHour;
   Tables[4] := TbResource;
   TbResource.AfterPost := DataSetAfterPost;
+  TbResource.AfterDelete := DataSetAfterDelete;
   Tables[5] := TbPeriod;
   Tables[6] := TbActivity;
   TbActivity.AfterPost := DataSetAfterPost;
   TbActivity.AfterDelete := DataSetAfterDelete;
-  Tables[7] := TbAvailability;
-  Tables[8] := TbResourceRestrictionType;
-  Tables[9] := TbResourceRestriction;
+  Tables[7] := TbResourceRestrictionType;
+  Tables[8] := TbResourceRestriction;
+  Tables[9] := TbAvailability;
   Tables[10] := TbResourceTypeLimit;
   Tables[11] := TbParticipant;
   Tables[12] := TbTimetable;
@@ -126,8 +127,8 @@ begin
     UpdateCascade := True;
     DeleteCascade := True;
   end;
-  SetLength(FMasterRels[2], 1);
-  with FMasterRels[2, 0] do
+  SetLength(FMasterRels[1], 1);
+  with FMasterRels[1, 0] do
   begin
     DetailDataSet := TbResourceTypeLimit;
     MasterFields := 'IdResourceType';
@@ -142,7 +143,7 @@ begin
     MasterFields := 'IdResource';
     DetailFields := 'IdResource';
     UpdateCascade := True;
-    DeleteCascade := False;
+    DeleteCascade := True;
   end;
   with FMasterRels[4, 1] do
   begin
@@ -213,15 +214,15 @@ begin
   with DataSetNameList do
   begin
     Add('TbTheme=Theme');
-    Add('TbDay=Day');
     Add('TbResourceType=ResourceType');
+    Add('TbDay=Day');
     Add('TbHour=Hour');
     Add('TbResource=Resource');
     Add('TbPeriod=Period');
     Add('TbActivity=Activity');
-    Add('TbAvailability=Availability');
     Add('TbResourceRestrictionType=ResourceRestrictionType');
     Add('TbResourceRestriction=ResourceRestriction');
+    Add('TbAvailability=Availability');
     Add('TbResourceTypeLimit=ResourceTypeLimit');
     Add('TbParticipant=Participant');
     Add('TbTimetable=Timetable');
@@ -233,12 +234,13 @@ begin
     Add('TbTheme.IdTheme=' + SFlTheme_IdTheme);
     Add('TbTheme.NaTheme=' + SFlTheme_NaTheme);
     Add('TbTheme.Composition=' + SFlTheme_Composition);
-    Add('TbDay.IdDay=' + SFlDay_IdDay);
-    Add('TbDay.NaDay=' + SFlDay_NaDay);
     Add('TbResourceType.IdResourceType=' + SFlResourceType_IdResourceType);
     Add('TbResourceType.NaResourceType=' + SFlResourceType_NaResourceType);
     Add('TbResourceType.NumResourceLimit=' + SFlResourceType_NumResourceLimit);
     Add('TbResourceType.ValResourceType=' + SFlResourceType_ValResourceType);
+    Add('TbResourceType.MaxWorkLoad=' + SFlResourceType_MaxWorkLoad);
+    Add('TbDay.IdDay=' + SFlDay_IdDay);
+    Add('TbDay.NaDay=' + SFlDay_NaDay);
     Add('TbHour.IdHour=' + SFlHour_IdHour);
     Add('TbHour.NaHour=' + SFlHour_NaHour);
     Add('TbHour.Interval=' + SFlHour_Interval);
@@ -252,9 +254,6 @@ begin
     Add('TbActivity.IdActivity=' + SFlActivity_IdActivity);
     Add('TbActivity.IdTheme=' + SFlActivity_IdTheme);
     Add('TbActivity.NaActivity=' + SFlActivity_NaActivity);
-    Add('TbAvailability.IdTheme=' + SFlAvailability_IdTheme);
-    Add('TbAvailability.IdResource=' + SFlAvailability_IdResource);
-    Add('TbAvailability.NumResource=' + SFlAvailability_NumResource);
     Add('TbResourceRestrictionType.IdResourceRestrictionType=' + SFlResourceRestrictionType_IdResourceRestrictionType);
     Add('TbResourceRestrictionType.NaResourceRestrictionType=' + SFlResourceRestrictionType_NaResourceRestrictionType);
     Add('TbResourceRestrictionType.ColResourceRestrictionType=' + SFlResourceRestrictionType_ColResourceRestrictionType);
@@ -263,6 +262,9 @@ begin
     Add('TbResourceRestriction.IdDay=' + SFlResourceRestriction_IdDay);
     Add('TbResourceRestriction.IdHour=' + SFlResourceRestriction_IdHour);
     Add('TbResourceRestriction.IdResourceRestrictionType=' + SFlResourceRestriction_IdResourceRestrictionType);
+    Add('TbAvailability.IdTheme=' + SFlAvailability_IdTheme);
+    Add('TbAvailability.IdResource=' + SFlAvailability_IdResource);
+    Add('TbAvailability.NumResource=' + SFlAvailability_NumResource);
     Add('TbResourceTypeLimit.IdTheme=' + SFlResourceTypeLimit_IdTheme);
     Add('TbResourceTypeLimit.IdResourceType=' + SFlResourceTypeLimit_IdResourceType);
     Add('TbResourceTypeLimit.NumResourceLimit=' + SFlResourceTypeLimit_NumResourceLimit);
@@ -286,15 +288,15 @@ begin
   with DataSetDescList do
   begin
     Add('TbTheme=' + STbTheme);
-    Add('TbDay=' + STbDay);
     Add('TbResourceType=' + STbResourceType);
+    Add('TbDay=' + STbDay);
     Add('TbHour=' + STbHour);
     Add('TbResource=' + STbResource);
     Add('TbPeriod=' + STbPeriod);
     Add('TbActivity=' + STbActivity);
-    Add('TbAvailability=' + STbAvailability);
     Add('TbResourceRestrictionType=' + STbResourceRestrictionType);
     Add('TbResourceRestriction=' + STbResourceRestriction);
+    Add('TbAvailability=' + STbAvailability);
     Add('TbResourceTypeLimit=' + STbResourceTypeLimit);
     Add('TbParticipant=' + STbParticipant);
     Add('TbTimetable=' + STbTimetable);

@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  08/03/2012 14:51
+  08/03/2012 16:13
 
   Warning:
 
@@ -14,16 +14,17 @@ CREATE TABLE IF NOT EXISTS `Theme`(
     `NaTheme` VARCHAR(30) NOT NULL UNIQUE /* Theme Name */,
     `Composition` VARCHAR(40) NOT NULL /* Configuration of periods */
 ); /* Themes */
+CREATE TABLE IF NOT EXISTS `ResourceType`(
+    `IdResourceType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Type Id */,
+    `NaResourceType` VARCHAR(15) NOT NULL UNIQUE /* Name */,
+    `NumResourceLimit` INTEGER NOT NULL /* Default Max Number of Resources per Activity */,
+    `ValResourceType` INTEGER NOT NULL /* Value of Clashes */,
+    `MaxWorkLoad` INTEGER /* Work Load Limit of Resource */
+); /* Resource types */
 CREATE TABLE IF NOT EXISTS `Day`(
     `IdDay` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Day Id */,
     `NaDay` VARCHAR(10) NOT NULL UNIQUE /* Name of Day */
 ); /* Working Days */
-CREATE TABLE IF NOT EXISTS `ResourceType`(
-    `IdResourceType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Type Id */,
-    `NaResourceType` VARCHAR(15) NOT NULL UNIQUE /* Name */,
-    `NumResourceLimit` INTEGER NOT NULL /* Default Max Number of Resources */,
-    `ValResourceType` INTEGER NOT NULL /* Value of Clashes */
-); /* Resource types */
 CREATE TABLE IF NOT EXISTS `Hour`(
     `IdHour` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Hour Id */,
     `NaHour` VARCHAR(10) NOT NULL UNIQUE /* Hour Name */,
@@ -56,16 +57,6 @@ CREATE TABLE IF NOT EXISTS `Activity`(
   CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE RESTRICT
 ); /* Activities */
-CREATE TABLE IF NOT EXISTS `Availability`(
-    `IdTheme` INTEGER NOT NULL /* Theme Id */,
-    `IdResource` INTEGER NOT NULL /* Resource Id */,
-    `NumResource` INTEGER NOT NULL /* Number of Resource */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdResource`),
-  CONSTRAINT `ResourceAvailability` FOREIGN KEY (`IdResource`)
-    REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT `ThemeAvailability` FOREIGN KEY (`IdTheme`)
-    REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE CASCADE
-); /* Participants */
 CREATE TABLE IF NOT EXISTS `ResourceRestrictionType`(
     `IdResourceRestrictionType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Restriction Type Id */,
     `NaResourceRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
@@ -85,6 +76,16 @@ CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
   CONSTRAINT `ResourceRestrictionTypeResourceRestriction` FOREIGN KEY (`IdResourceRestrictionType`)
     REFERENCES `ResourceRestrictionType`(`IdResourceRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Resource Restrictions */
+CREATE TABLE IF NOT EXISTS `Availability`(
+    `IdTheme` INTEGER NOT NULL /* Theme Id */,
+    `IdResource` INTEGER NOT NULL /* Resource Id */,
+    `NumResource` INTEGER NOT NULL /* Number of Resource */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdTheme`,`IdResource`),
+  CONSTRAINT `ResourceAvailability` FOREIGN KEY (`IdResource`)
+    REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `ThemeAvailability` FOREIGN KEY (`IdTheme`)
+    REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE CASCADE
+); /* Availability of Resources to Cover Requirements in the Theme */
 CREATE TABLE IF NOT EXISTS `ResourceTypeLimit`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdResourceType` INTEGER NOT NULL /* Resource Type Id */,
@@ -94,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `ResourceTypeLimit`(
     REFERENCES `ResourceType`(`IdResourceType`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `ThemeResourceTypeLimit` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE CASCADE
-); /* Participants */
+); /* Limits for usage of Resource Types in Themes */
 CREATE TABLE IF NOT EXISTS `Participant`(
     `IdActivity` INTEGER NOT NULL /* Category Id */,
     `IdResource` INTEGER NOT NULL /* Resource Id */,
