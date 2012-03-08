@@ -307,7 +307,7 @@ object ProgressForm: TProgressForm
       ParentFont = False
       TabOrder = 15
     end
-    object PnResourceRestriction: TPanel
+    object PnRestriction: TPanel
       Left = 8
       Height = 21
       Top = 224
@@ -317,7 +317,7 @@ object ProgressForm: TProgressForm
       Caption = 'Resource Restrictions:'
       TabOrder = 16
     end
-    object PnResourceRestrictionNumber: TPanel
+    object PnRestrictionNumber: TPanel
       Left = 192
       Height = 21
       Top = 224
@@ -327,7 +327,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 117
       TabOrder = 17
-      object LbResourceRestriction: TLabel
+      object LbRestriction: TLabel
         Left = 104
         Height = 19
         Top = 1
@@ -344,7 +344,7 @@ object ProgressForm: TProgressForm
         Transparent = False
       end
     end
-    object PnResourceRestrictionValue: TPanel
+    object PnRestrictionValue: TPanel
       Left = 312
       Height = 21
       Top = 224
@@ -354,7 +354,7 @@ object ProgressForm: TProgressForm
       ClientHeight = 21
       ClientWidth = 129
       TabOrder = 18
-      object LbResourceRestrictionValue: TLabel
+      object LbRestrictionValue: TLabel
         Left = 116
         Height = 19
         Top = 1

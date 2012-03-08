@@ -17,7 +17,7 @@ type
   { TTimetableForm }
 
   TTimetableForm = class(TSingleEditorForm)
-    TBResourceRestrictionNonSatisfied: TToolButton;
+    TBRestrictionNonSatisfied: TToolButton;
     BtTimetableResource: TToolButton;
     BtClashResource: TToolButton;
     BtClashActivity: TToolButton;
@@ -45,17 +45,17 @@ type
     QuClashActivityDetailIdHour: TLongintField;
     QuClashActivityDetailNaDay: TStringField;
     QuClashActivityDetailNaHour: TStringField;
-    QuTimetableDetailResourceRestriction: TZQuery;
-    QuTimetableDetailResourceRestrictionIdTimetable: TLongintField;
-    QuTimetableDetailResourceRestrictionIdActivity: TLongintField;
-    QuTimetableDetailResourceRestrictionNaResourceType: TStringField;
-    QuTimetableDetailResourceRestrictionIdResourceRestrictionType: TLongintField;
-    QuTimetableDetailResourceRestrictionNaResource: TStringField;
-    QuTimetableDetailResourceRestrictionIdDay: TLongintField;
-    QuTimetableDetailResourceRestrictionIdHour: TLongintField;
-    QuTimetableDetailResourceRestrictionNaResourceRestrictionType: TStringField;
-    QuTimetableDetailResourceRestrictionNaDay: TStringField;
-    QuTimetableDetailResourceRestrictionNaHour: TStringField;
+    QuTimetableDetailRestriction: TZQuery;
+    QuTimetableDetailRestrictionIdTimetable: TLongintField;
+    QuTimetableDetailRestrictionIdActivity: TLongintField;
+    QuTimetableDetailRestrictionNaResourceType: TStringField;
+    QuTimetableDetailRestrictionIdRestrictionType: TLongintField;
+    QuTimetableDetailRestrictionNaResource: TStringField;
+    QuTimetableDetailRestrictionIdDay: TLongintField;
+    QuTimetableDetailRestrictionIdHour: TLongintField;
+    QuTimetableDetailRestrictionNaRestrictionType: TStringField;
+    QuTimetableDetailRestrictionNaDay: TStringField;
+    QuTimetableDetailRestrictionNaHour: TStringField;
     
     Panel2: TPanel;
     DBMSummary: TDBMemo;
@@ -87,7 +87,7 @@ type
     ActTimetableResource: TAction;
     ActClashResource: TAction;
     ActClashActivity: TAction;
-    ActResourceRestrictionNonSatisfied: TAction;
+    ActRestrictionNonSatisfied: TAction;
     ActBrokenSessionDay: TAction;
     ActBrokenSessionHour: TAction;
     DSClashResource: TDataSource;
@@ -107,7 +107,7 @@ type
     procedure ActClashResourceExecute(Sender: TObject);
     procedure ActClashActivityExecute(Sender: TObject);
     procedure ActTimetableResourceExecute(Sender: TObject);
-    procedure ActResourceRestrictionNonSatisfiedExecute(Sender: TObject);
+    procedure ActRestrictionNonSatisfiedExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure QuClashResourceAfterScroll(DataSet: TDataSet);
     procedure QuClashActivityAfterScroll(DataSet: TDataSet);
@@ -122,7 +122,7 @@ type
     { Private declarations }
     FClashActivityForm, FBrokenSessionHourForm,
       FBrokenSessionDayForm, FClashResourceForm: TMasterDetailEditorForm;
-    FResourceRestrictionNonSatisfiedForm: TSingleEditorForm;
+    FRestrictionNonSatisfiedForm: TSingleEditorForm;
     FTimetableResourceForm: TTimetableResourceForm;
     {$IFNDEF READER}
     procedure ImproveTimetable;
@@ -237,16 +237,16 @@ begin
 end;
 {$ENDIF}
 
-procedure TTimetableForm.ActResourceRestrictionNonSatisfiedExecute
+procedure TTimetableForm.ActRestrictionNonSatisfiedExecute
   (Sender: TObject);
 begin
   inherited;
   if TSingleEditorForm.ToggleSingleEditor(Self,
-    FResourceRestrictionNonSatisfiedForm, ConfigStorage,
-    ActResourceRestrictionNonSatisfied, QuTimetableDetailResourceRestriction) then
+    FRestrictionNonSatisfiedForm, ConfigStorage,
+    ActRestrictionNonSatisfied, QuTimetableDetailRestriction) then
   begin
-    QuTimetableDetailResourceRestriction.Close;
-    QuTimetableDetailResourceRestriction.Open;
+    QuTimetableDetailRestriction.Close;
+    QuTimetableDetailRestriction.Open;
   end;
 end;
 
@@ -260,11 +260,11 @@ begin
   QuClashActivityNaTheme.DisplayLabel := SFlActivity_IdTheme;
   QuClashActivityDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuClashActivityDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuTimetableDetailResourceRestrictionNaDay.DisplayLabel
+  QuTimetableDetailRestrictionNaDay.DisplayLabel
     := SFlTimetableDetail_IdDay;
-  QuTimetableDetailResourceRestrictionNaResourceRestrictionType.DisplayLabel
-    := SFlResourceRestriction_IdResourceRestrictionType;
-  QuTimetableDetailResourceRestrictionNaHour.DisplayLabel
+  QuTimetableDetailRestrictionNaRestrictionType.DisplayLabel
+    := SFlRestriction_IdRestrictionType;
+  QuTimetableDetailRestrictionNaHour.DisplayLabel
     := SFlTimetableDetail_IdHour;
   QuBrokenSessionDayIdTimetable.DisplayLabel := SFlTimetableDetail_IdTimeTable;
   QuBrokenSessionDayNaDay.DisplayLabel := SFlTimetableDetail_IdDay;

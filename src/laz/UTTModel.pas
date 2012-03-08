@@ -30,7 +30,7 @@ type
     FNonScatteredActivityValue: Integer;
     FThemeCount: Integer;
     FResourceTypeCount: Integer;
-    FResourceRestrictionTypeCount: Integer;
+    FRestrictionTypeCount: Integer;
     FDayCount: Integer;
     FHourCount: Integer;
     FPeriodCount: Integer;
@@ -52,8 +52,8 @@ type
     FActivitySorted: TDynamicIntegerArray;
     FSessionSorted: TDynamicIntegerArray;
     FResourceToResourceType: TDynamicIntegerArray;
-    FResourceRestrictionTypeToValue: TDynamicIntegerArray;
-    FResourceRestrictionTypeToName: TDynamicStringArray;
+    FRestrictionTypeToValue: TDynamicIntegerArray;
+    FRestrictionTypeToName: TDynamicStringArray;
     FResourceTypeToValue: TDynamicIntegerArray;
     FResourceTypeToName: TDynamicStringArray;
     FResourceTypeToNumResourceLimit: TDynamicIntegerArray;
@@ -92,7 +92,7 @@ type
     FThemeToDuration: TDynamicIntegerArray;
     FResourceToThemes: TDynamicIntegerArrayArray;
     FActivityToSessions: TDynamicIntegerArrayArray;
-    FResourcePeriodToResourceRestrictionType: TDynamicIntegerArrayArray;
+    FResourcePeriodToRestrictionType: TDynamicIntegerArrayArray;
 
     function GetDayToMaxPeriod(Day: Integer): Integer;
   protected
@@ -151,7 +151,7 @@ type
     FBrokenSession: Integer;
     
     FClashResourceType: TDynamicIntegerArray;
-    FResourceRestrictionTypeToResourceCount: TDynamicIntegerArray;
+    FRestrictionTypeToResourceCount: TDynamicIntegerArray;
     FPriorityActivity: TDynamicIntegerArray;
     
     FActivityResourceTypeToNumber: TDynamicIntegerArrayArray;
@@ -183,7 +183,7 @@ type
     function GetClashActivityValue: Integer;
     function GetNonScatteredActivityValue: Integer;
     function GetClashResourceValue: Integer;
-    function GetResourceRestrictionValue: Integer;
+    function GetRestrictionValue: Integer;
     function GetBreakTimetableResourceValue: Integer;
     function GetBrokenSessionValue: Integer;
     function GetValue: Integer;
@@ -217,8 +217,8 @@ type
     function MoveSession(Session, Period: Integer): Integer;
     procedure DoMoveSession(Session, Period: Integer);
     {procedure SaveToFile(const AFileName: string);}
-    property ResourceRestrictionTypeToResourceCount: TDynamicIntegerArray
-      read FTablingInfo.FResourceRestrictionTypeToResourceCount;
+    property RestrictionTypeToResourceCount: TDynamicIntegerArray
+      read FTablingInfo.FRestrictionTypeToResourceCount;
     property ClashResourceType: TDynamicIntegerArray read FTablingInfo.FClashResourceType;
     property NonScatteredActivity: Integer read FTablingInfo.FNonScatteredActivity;
     property BrokenSession: Integer read FTablingInfo.FBrokenSession;
@@ -228,7 +228,7 @@ type
     property BreakTimetableResourceValue: Integer read GetBreakTimetableResourceValue;
     property BrokenSessionValue: Integer read GetBrokenSessionValue;
     property NonScatteredActivityValue: Integer read GetNonScatteredActivityValue;
-    property ResourceRestrictionValue: Integer read GetResourceRestrictionValue;
+    property RestrictionValue: Integer read GetRestrictionValue;
     property TTSessionToPeriod: TDynamicIntegerArray
                                   read FTTSessionToPeriod;
     property TTActivityToNumResources: TDynamicIntegerArrayArray
@@ -348,12 +348,12 @@ var
   FThemeToNumResources: TDynamicIntegerArrayArray;
   FActivityToResources: TDynamicIntegerArrayArray;
   FActivityToNumResources: TDynamicIntegerArrayArray;
-  FMinIdResourceRestrictionType, FMinIdTheme,
+  FMinIdRestrictionType, FMinIdTheme,
     FMinIdResource, FMinIdResourceType: Integer;
   FIdThemeToTheme, FIdResourceToResource, FIdResourceTypeToResourceType,
     FResourceTypeToIdResourceType,
-    FIdResourceRestrictionTypeToResourceRestrictionType,
-    FResourceRestrictionTypeToIdResourceRestrictionType: TDynamicIntegerArray;
+    FIdRestrictionTypeToRestrictionType,
+    FRestrictionTypeToIdRestrictionType: TDynamicIntegerArray;
   FResourceThemeToNumResources, FThemeToComposition: TDynamicIntegerArrayArray;
   SErrors: String;
   procedure Load(ATable: TDataSet; const AListName: string; out FMinIdList: Integer;
@@ -476,56 +476,56 @@ var
       First;
     end;
   end;
-  procedure LoadResourceRestrictionType;
+  procedure LoadRestrictionType;
   var
-    ResourceRestrictionType: Integer;
+    RestrictionType: Integer;
     FieldValue, FieldName: TField;
   begin
-    with SourceDataModule.TbResourceRestrictionType do
+    with SourceDataModule.TbRestrictionType do
     begin
-      IndexFieldNames := 'IdResourceRestrictionType';
+      IndexFieldNames := 'IdRestrictionType';
       First;
-      FieldValue := FindField('ValResourceRestrictionType');
-      FieldName := FindField('NaResourceRestrictionType');
-      SetLength(FResourceRestrictionTypeToValue, RecordCount);
-      SetLength(FResourceRestrictionTypeToName, RecordCount);
-      for ResourceRestrictionType := 0 to RecordCount - 1 do
+      FieldValue := FindField('ValRestrictionType');
+      FieldName := FindField('NaRestrictionType');
+      SetLength(FRestrictionTypeToValue, RecordCount);
+      SetLength(FRestrictionTypeToName, RecordCount);
+      for RestrictionType := 0 to RecordCount - 1 do
       begin
-        FResourceRestrictionTypeToValue[ResourceRestrictionType] := FieldValue.AsInteger;
-        FResourceRestrictionTypeToName[ResourceRestrictionType] := FieldName.AsString;
+        FRestrictionTypeToValue[RestrictionType] := FieldValue.AsInteger;
+        FRestrictionTypeToName[RestrictionType] := FieldName.AsString;
         Next;
       end;
       First;
     end;
   end;
-  procedure LoadResourceRestriction;
+  procedure LoadRestriction;
   var
-    ResourceRestriction, Resource, Period, Day, Hour,
-      ResourceRestrictionType: Integer;
+    Restriction, Resource, Period, Day, Hour,
+      RestrictionType: Integer;
     FieldResource, FieldDay, FieldHour,
-      FieldResourceRestrictionType: TField;
+      FieldRestrictionType: TField;
   begin
-    with SourceDataModule.TbResourceRestriction do
+    with SourceDataModule.TbRestriction do
     begin
-      IndexFieldNames := 'IdResource;IdDay;IdHour;IdResourceRestrictionType';
+      IndexFieldNames := 'IdResource;IdDay;IdHour;IdRestrictionType';
       First;
-      SetLength(FResourcePeriodToResourceRestrictionType, FResourceCount, FPeriodCount);
+      SetLength(FResourcePeriodToRestrictionType, FResourceCount, FPeriodCount);
       for Resource := 0 to FResourceCount - 1 do
         for Period := 0 to FPeriodCount - 1 do
-          FResourcePeriodToResourceRestrictionType[Resource, Period] := -1;
+          FResourcePeriodToRestrictionType[Resource, Period] := -1;
       FieldResource := FindField('IdResource');
       FieldHour := FindField('IdHour');
       FieldDay := FindField('IdDay');
-      FieldResourceRestrictionType := FindField('IdResourceRestrictionType');
-      for ResourceRestriction := 0 to RecordCount - 1 do
+      FieldRestrictionType := FindField('IdRestrictionType');
+      for Restriction := 0 to RecordCount - 1 do
       begin
         Resource := FIdResourceToResource[FieldResource.AsInteger - FMinIdResource];
         Day := FIdDayToDay[FieldDay.AsInteger - FMinIdDay];
         Hour := FIdHourToHour[FieldHour.AsInteger - FMinIdHour];
         Period := FDayHourToPeriod[Day, Hour];
-        ResourceRestrictionType := FIdResourceRestrictionTypeToResourceRestrictionType
-          [FieldResourceRestrictionType.AsInteger - FMinIdResourceRestrictionType];
-        FResourcePeriodToResourceRestrictionType[Resource, Period] := ResourceRestrictionType;
+        RestrictionType := FIdRestrictionTypeToRestrictionType
+          [FieldRestrictionType.AsInteger - FMinIdRestrictionType];
+        FResourcePeriodToRestrictionType[Resource, Period] := RestrictionType;
         Next;
       end;
       First;
@@ -987,7 +987,7 @@ var
     end;
     for Resource := 0 to FResourceCount - 1 do
     begin
-      // Upper bound, better approximation is FPeriodCount - GetHardResourceRestrictions(...)
+      // Upper bound, better approximation is FPeriodCount - GetHardRestrictions(...)
       Number := FResourceToNumber[Resource] * FPeriodCount;
       Duration := ResourceToFreePeriods[Resource];
       FreePeriods := Number - Duration;
@@ -1084,17 +1084,17 @@ begin
     FDayCount := Length(FDayToIdDay);
     Load(TbHour, 'IdHour', FMinIdHour, FIdHourToHour, FHourToIdHour);
     FHourCount := Length(FHourToIdHour);
-    Load(TbResourceRestrictionType, 'IdResourceRestrictionType',
-      FMinIdResourceRestrictionType,
-      FIdResourceRestrictionTypeToResourceRestrictionType,
-      FResourceRestrictionTypeToIdResourceRestrictionType);
+    Load(TbRestrictionType, 'IdRestrictionType',
+      FMinIdRestrictionType,
+      FIdRestrictionTypeToRestrictionType,
+      FRestrictionTypeToIdRestrictionType);
   end;
-  FResourceRestrictionTypeCount := Length(FResourceRestrictionTypeToIdResourceRestrictionType);
+  FRestrictionTypeCount := Length(FRestrictionTypeToIdRestrictionType);
   LoadPeriod;
   LoadResourceType;
   LoadResource;
-  LoadResourceRestrictionType;
-  LoadResourceRestriction;
+  LoadRestrictionType;
+  LoadRestriction;
   LoadTheme;
   LoadActivity;
   LoadParticipant;
@@ -1261,7 +1261,7 @@ begin
       SetLength(FDayResourceMaxHour, FDayCount, FResourceCount);
       SetLength(FDayResourceEmptyHourCount, FDayCount, FResourceCount);
       SetLength(FClashResourceType, FResourceTypeCount);
-      SetLength(FResourceRestrictionTypeToResourceCount, FResourceRestrictionTypeCount);
+      SetLength(FRestrictionTypeToResourceCount, FRestrictionTypeCount);
       SetLength(FPriorityActivity, FActivityCount);
     end;
   end;
@@ -1353,7 +1353,7 @@ end;
 
 procedure TTimetable.DeltaResourceValue(Period1, Period2, Resource, NumResource: Integer);
 var
-  DeltaClashResource, DeltaBreakTimetableResource, ResourceRestrictionType,
+  DeltaClashResource, DeltaBreakTimetableResource, RestrictionType,
   Day, Hour, Period, Period0, MinPeriod, MaxPeriod: Integer;
 begin
   if NumResource <> 0 then
@@ -1361,10 +1361,10 @@ begin
   begin
     for Period := Period1 to Period2 do
     begin
-      ResourceRestrictionType := FResourcePeriodToResourceRestrictionType[Resource, Period];
-      if ResourceRestrictionType >= 0 then
+      RestrictionType := FResourcePeriodToRestrictionType[Resource, Period];
+      if RestrictionType >= 0 then
       begin
-        Inc(FResourceRestrictionTypeToResourceCount[ResourceRestrictionType], NumResource);
+        Inc(FRestrictionTypeToResourceCount[RestrictionType], NumResource);
       end;
       Day := FPeriodToDay[Period];
       Hour := FPeriodToHour[Period];
@@ -1533,7 +1533,7 @@ end;
 
 procedure TTimetable.ReportValues(AReport: TStrings);
 var
-  ResourceType, ResourceRestrictionType: Integer;
+  ResourceType, RestrictionType: Integer;
   SRowFormat: string = '%0:-28s %12d %12d %12d';
 begin
   with AReport, TablingInfo do
@@ -1562,16 +1562,16 @@ begin
     Add(Format(SRowFormat, [SNonScatteredActivity + ':', NonScatteredActivity,
         TTimetableModel(Model).NonScatteredActivityValue, NonScatteredActivityValue]));
     Add('-------------------------------------------------------------------');
-    Add(Format('%0:-28s %12s %12s %12s)', [STbResourceRestriction + ':', '', '',
-                                          '(' + IntToStr(ResourceRestrictionValue)]));
-    for ResourceRestrictionType := 0 to TTimetableModel(Model).FResourceRestrictionTypeCount - 1 do
+    Add(Format('%0:-28s %12s %12s %12s)', [STbRestriction + ':', '', '',
+                                          '(' + IntToStr(RestrictionValue)]));
+    for RestrictionType := 0 to TTimetableModel(Model).FRestrictionTypeCount - 1 do
     begin
       Add(Format('%0:-28s %12d %12d %12d',
-                 ['  ' + TTimetableModel(Model).FResourceRestrictionTypeToName[ResourceRestrictionType] + ':',
-                  FResourceRestrictionTypeToResourceCount[ResourceRestrictionType],
-                  TTimetableModel(Model).FResourceRestrictionTypeToValue[ResourceRestrictionType],
-                  FResourceRestrictionTypeToResourceCount[ResourceRestrictionType]
-                  * TTimetableModel(Model).FResourceRestrictionTypeToValue[ResourceRestrictionType]]));
+                 ['  ' + TTimetableModel(Model).FRestrictionTypeToName[RestrictionType] + ':',
+                  FRestrictionTypeToResourceCount[RestrictionType],
+                  TTimetableModel(Model).FRestrictionTypeToValue[RestrictionType],
+                  FRestrictionTypeToResourceCount[RestrictionType]
+                  * TTimetableModel(Model).FRestrictionTypeToValue[RestrictionType]]));
     end;
     Add('___________________________________________________________________');
     Add(Format('%0:-54s %12d', [STotalValue, Value]));
@@ -1783,10 +1783,10 @@ begin
                                     TTimetableModel(Model).FResourceTypeToValue);
 end;
 
-function TTimetable.GetResourceRestrictionValue: Integer;
+function TTimetable.GetRestrictionValue: Integer;
 begin
-  Result := TIntegerArrayHandler.Product(TablingInfo.FResourceRestrictionTypeToResourceCount,
-                                   TTimetableModel(Model).FResourceRestrictionTypeToValue);
+  Result := TIntegerArrayHandler.Product(TablingInfo.FRestrictionTypeToResourceCount,
+                                   TTimetableModel(Model).FRestrictionTypeToValue);
 end;
 
 function TTimetable.GetBrokenSessionValue: Integer;
@@ -1815,7 +1815,7 @@ function TTimetable.GetValue: Integer;
 begin
   Result :=
     ClashResourceValue +
-    ResourceRestrictionValue +
+    RestrictionValue +
     ClashActivityValue +
     NonScatteredActivityValue +
     BreakTimetableResourceValue +
@@ -1845,7 +1845,7 @@ begin
   with TIntegerArrayHandler do
   begin
     Copy(ATimetableTablingInfo.FClashResourceType, FClashResourceType);
-    Copy(ATimetableTablingInfo.FResourceRestrictionTypeToResourceCount, FResourceRestrictionTypeToResourceCount);
+    Copy(ATimetableTablingInfo.FRestrictionTypeToResourceCount, FRestrictionTypeToResourceCount);
     Copy(ATimetableTablingInfo.FPriorityActivity, FPriorityActivity);
   end;
   with TIntegerArrayArrayHandler do
@@ -2103,7 +2103,7 @@ end;
 
 procedure TTimetable.Reset;
 var
-  Resource, ResourceType, Period, ResourceRestrictionType, Day, Activity: Integer;
+  Resource, ResourceType, Period, RestrictionType, Day, Activity: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
@@ -2120,8 +2120,8 @@ begin
       end;
     for ResourceType := 0 to FResourceTypeCount - 1 do
       FClashResourceType[ResourceType] := 0;
-    for ResourceRestrictionType := 0 to FResourceRestrictionTypeCount - 1 do
-      FResourceRestrictionTypeToResourceCount[ResourceRestrictionType] := 0;
+    for RestrictionType := 0 to FRestrictionTypeCount - 1 do
+      FRestrictionTypeToResourceCount[RestrictionType] := 0;
     for Period := 0 to FPeriodCount - 1 do
     begin
       for Resource := 0 to FResourceCount - 1 do
@@ -2182,9 +2182,9 @@ procedure TTimetable.CheckIntegrity(const ALabel: string);
 var
   ResourceType, Value1, Value2: Integer;
   ClashResourceValue1, ClashActivity1, NonScatteredActivity1,
-  BreakTimetableResource1, ResourceRestrictionValue1, BrokenSession1: Integer;
+  BreakTimetableResource1, RestrictionValue1, BrokenSession1: Integer;
   ClashResourceValue2, ClashActivity2, NonScatteredActivity2,
-  BreakTimetableResource2, ResourceRestrictionValue2, BrokenSession2: Integer;
+  BreakTimetableResource2, RestrictionValue2, BrokenSession2: Integer;
 begin
   Value2 := Value;
   UpdateValue;
@@ -2196,7 +2196,7 @@ begin
   ClashActivity1 := ClashActivity;
   NonScatteredActivity1 := NonScatteredActivity;
   BreakTimetableResource1 := BreakTimetableResource;
-  ResourceRestrictionValue1 := ResourceRestrictionValue;
+  RestrictionValue1 := RestrictionValue;
   BrokenSession1 := BrokenSession;
   Update;
   Value2 := Value;
@@ -2204,7 +2204,7 @@ begin
   ClashActivity2 := ClashActivity;
   NonScatteredActivity2 := NonScatteredActivity;
   BreakTimetableResource2 := BreakTimetableResource;
-  ResourceRestrictionValue2 := ResourceRestrictionValue;
+  RestrictionValue2 := RestrictionValue;
   BrokenSession2 := BrokenSession;
   
   if Value1 <> Value2 then
@@ -2231,14 +2231,14 @@ begin
                    [BreakTimetableResource1, BreakTimetableResource2]))
   else if BreakTimetableResource2 < 0 then
     WriteLn(Format('  Incorrect BreakTimetableResource: %d<0', [BreakTimetableResource2]));
-  if ResourceRestrictionValue1 <> ResourceRestrictionValue2 then
-    WriteLn(Format('  Incorrect ResourceRestrictionValue: %d<>%d',
-                   [ResourceRestrictionValue1, ResourceRestrictionValue2]))
-  else if ResourceRestrictionValue2 < 0 then
-    WriteLn(Format('  Incorrect ResourceRestrictionValue: %s*%s=%d<0', [
-                     TIntegerArrayHandler.ValueToString(ResourceRestrictionTypeToResourceCount),
-                     TIntegerArrayHandler.ValueToString(TTimetableModel(Model).FResourceRestrictionTypeToValue),
-                     ResourceRestrictionValue2]));
+  if RestrictionValue1 <> RestrictionValue2 then
+    WriteLn(Format('  Incorrect RestrictionValue: %d<>%d',
+                   [RestrictionValue1, RestrictionValue2]))
+  else if RestrictionValue2 < 0 then
+    WriteLn(Format('  Incorrect RestrictionValue: %s*%s=%d<0', [
+                     TIntegerArrayHandler.ValueToString(RestrictionTypeToResourceCount),
+                     TIntegerArrayHandler.ValueToString(TTimetableModel(Model).FRestrictionTypeToValue),
+                     RestrictionValue2]));
   if BrokenSession1 <> BrokenSession2 then
     WriteLn(Format('  Incorrect BrokenSession: %d<>%d', [BrokenSession1, BrokenSession2]))
   else if BrokenSession2 < 0 then

@@ -41,10 +41,10 @@ type
     DSPeriod: TDataSource;
     TbActivity: TZTable;
     DSActivity: TDataSource;
-    TbResourceRestrictionType: TZTable;
-    DSResourceRestrictionType: TDataSource;
-    TbResourceRestriction: TZTable;
-    DSResourceRestriction: TDataSource;
+    TbRestrictionType: TZTable;
+    DSRestrictionType: TDataSource;
+    TbRestriction: TZTable;
+    DSRestriction: TDataSource;
     TbAvailability: TZTable;
     DSAvailability: TDataSource;
     TbResourceTypeLimit: TZTable;
@@ -92,8 +92,8 @@ begin
   Tables[6] := TbActivity;
   TbActivity.AfterPost := DataSetAfterPost;
   TbActivity.AfterDelete := DataSetAfterDelete;
-  Tables[7] := TbResourceRestrictionType;
-  Tables[8] := TbResourceRestriction;
+  Tables[7] := TbRestrictionType;
+  Tables[8] := TbRestriction;
   Tables[9] := TbAvailability;
   Tables[10] := TbResourceTypeLimit;
   Tables[11] := TbParticipant;
@@ -155,7 +155,7 @@ begin
   end;
   with FMasterRels[4, 2] do
   begin
-    DetailDataSet := TbResourceRestriction;
+    DetailDataSet := TbRestriction;
     MasterFields := 'IdResource';
     DetailFields := 'IdResource';
     UpdateCascade := True;
@@ -220,8 +220,8 @@ begin
     Add('TbResource=Resource');
     Add('TbPeriod=Period');
     Add('TbActivity=Activity');
-    Add('TbResourceRestrictionType=ResourceRestrictionType');
-    Add('TbResourceRestriction=ResourceRestriction');
+    Add('TbRestrictionType=RestrictionType');
+    Add('TbRestriction=Restriction');
     Add('TbAvailability=Availability');
     Add('TbResourceTypeLimit=ResourceTypeLimit');
     Add('TbParticipant=Participant');
@@ -254,14 +254,14 @@ begin
     Add('TbActivity.IdActivity=' + SFlActivity_IdActivity);
     Add('TbActivity.IdTheme=' + SFlActivity_IdTheme);
     Add('TbActivity.NaActivity=' + SFlActivity_NaActivity);
-    Add('TbResourceRestrictionType.IdResourceRestrictionType=' + SFlResourceRestrictionType_IdResourceRestrictionType);
-    Add('TbResourceRestrictionType.NaResourceRestrictionType=' + SFlResourceRestrictionType_NaResourceRestrictionType);
-    Add('TbResourceRestrictionType.ColResourceRestrictionType=' + SFlResourceRestrictionType_ColResourceRestrictionType);
-    Add('TbResourceRestrictionType.ValResourceRestrictionType=' + SFlResourceRestrictionType_ValResourceRestrictionType);
-    Add('TbResourceRestriction.IdResource=' + SFlResourceRestriction_IdResource);
-    Add('TbResourceRestriction.IdDay=' + SFlResourceRestriction_IdDay);
-    Add('TbResourceRestriction.IdHour=' + SFlResourceRestriction_IdHour);
-    Add('TbResourceRestriction.IdResourceRestrictionType=' + SFlResourceRestriction_IdResourceRestrictionType);
+    Add('TbRestrictionType.IdRestrictionType=' + SFlRestrictionType_IdRestrictionType);
+    Add('TbRestrictionType.NaRestrictionType=' + SFlRestrictionType_NaRestrictionType);
+    Add('TbRestrictionType.ColRestrictionType=' + SFlRestrictionType_ColRestrictionType);
+    Add('TbRestrictionType.ValRestrictionType=' + SFlRestrictionType_ValRestrictionType);
+    Add('TbRestriction.IdResource=' + SFlRestriction_IdResource);
+    Add('TbRestriction.IdDay=' + SFlRestriction_IdDay);
+    Add('TbRestriction.IdHour=' + SFlRestriction_IdHour);
+    Add('TbRestriction.IdRestrictionType=' + SFlRestriction_IdRestrictionType);
     Add('TbAvailability.IdTheme=' + SFlAvailability_IdTheme);
     Add('TbAvailability.IdResource=' + SFlAvailability_IdResource);
     Add('TbAvailability.NumResource=' + SFlAvailability_NumResource);
@@ -294,8 +294,8 @@ begin
     Add('TbResource=' + STbResource);
     Add('TbPeriod=' + STbPeriod);
     Add('TbActivity=' + STbActivity);
-    Add('TbResourceRestrictionType=' + STbResourceRestrictionType);
-    Add('TbResourceRestriction=' + STbResourceRestriction);
+    Add('TbRestrictionType=' + STbRestrictionType);
+    Add('TbRestriction=' + STbRestriction);
     Add('TbAvailability=' + STbAvailability);
     Add('TbResourceTypeLimit=' + STbResourceTypeLimit);
     Add('TbParticipant=' + STbParticipant);

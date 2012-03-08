@@ -39,10 +39,10 @@ inherited TimetableForm: TTimetableForm
       ParentShowHint = False
       ShowHint = True
     end
-    object TBResourceRestrictionNonSatisfied: TToolButton[6]
+    object TBRestrictionNonSatisfied: TToolButton[6]
       Left = 270
       Top = 2
-      Action = ActResourceRestrictionNonSatisfied
+      Action = ActRestrictionNonSatisfied
       ParentShowHint = False
       ShowHint = True
     end
@@ -505,12 +505,12 @@ inherited TimetableForm: TTimetableForm
       ImageIndex = 5
       OnExecute = ActClashActivityExecute
     end
-    object ActResourceRestrictionNonSatisfied: TAction[5]
+    object ActRestrictionNonSatisfied: TAction[5]
       AutoCheck = True
       Caption = 'Resource restrictions'
       Hint = 'Resource retrictions|Resource restrictions non satisfied'
       ImageIndex = 8
-      OnExecute = ActResourceRestrictionNonSatisfiedExecute
+      OnExecute = ActRestrictionNonSatisfiedExecute
     end
     object ActBrokenSessionDay: TAction[6]
       AutoCheck = True
@@ -1051,7 +1051,7 @@ inherited TimetableForm: TTimetableForm
       Size = 10
     end
   end
-  object QuTimetableDetailResourceRestriction: TZQuery[10]
+  object QuTimetableDetailRestriction: TZQuery[10]
     Connection = SourceDataModule.DbZConnection
     AutoCalcFields = False
     ReadOnly = True
@@ -1060,28 +1060,28 @@ inherited TimetableForm: TTimetableForm
       '  TimetableDetail.IdTimetable,'
       '  TimetableDetail.IdActivity,'
       '  ResourceType.NaResourceType,'
-      '  ResourceRestriction.IdResourceRestrictionType,'
+      '  Restriction.IdRestrictionType,'
       '  Resource.NaResource,'
-      '  ResourceRestriction.IdDay,'
-      '  ResourceRestriction.IdHour'
+      '  Restriction.IdDay,'
+      '  Restriction.IdHour'
       'FROM TimetableDetail INNER JOIN TimetableResource'
       '   ON TimetableDetail.IdTimetable=TimetableResource.IdTimetable'
       '  AND TimetableDetail.IdActivity=TimetableResource.IdActivity'
-      '  INNER JOIN ResourceRestriction'
-      '   ON ResourceRestriction.IdDay=TimetableDetail.IdDay'
-      '  AND ResourceRestriction.IdHour=TimetableDetail.IdHour'
-      '  AND ResourceRestriction.IdResource=TimetableResource.IdResource'
-      '  INNER JOIN Resource ON ResourceRestriction.IdResource=Resource.IdResource'
+      '  INNER JOIN Restriction'
+      '   ON Restriction.IdDay=TimetableDetail.IdDay'
+      '  AND Restriction.IdHour=TimetableDetail.IdHour'
+      '  AND Restriction.IdResource=TimetableResource.IdResource'
+      '  INNER JOIN Resource ON Restriction.IdResource=Resource.IdResource'
       '  INNER JOIN ResourceType ON Resource.IdResourceType=ResourceType.IdResourceType'
       'WHERE'
       '  TimetableDetail.IdTimetable=:IdTimetable'
       'ORDER BY'
       '  TimetableDetail.IdActivity,'
       '  ResourceType.NaResourceType,'
-      '  ResourceRestriction.IdResourceRestrictionType DESC,'
+      '  Restriction.IdRestrictionType DESC,'
       '  Resource.NaResource,'
-      '  ResourceRestriction.IdDay,'
-      '  ResourceRestriction.IdHour'
+      '  Restriction.IdDay,'
+      '  Restriction.IdHour'
     )
     Params = <    
       item
@@ -1100,7 +1100,7 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuTimetableDetailResourceRestrictionIdTimetable: TLongintField
+    object QuTimetableDetailRestrictionIdTimetable: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdTimetable'
@@ -1111,7 +1111,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuTimetableDetailResourceRestrictionIdActivity: TLongintField
+    object QuTimetableDetailRestrictionIdActivity: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdActivity'
@@ -1122,7 +1122,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuTimetableDetailResourceRestrictionNaResourceType: TStringField
+    object QuTimetableDetailRestrictionNaResourceType: TStringField
       DisplayWidth = 15
       FieldKind = fkData
       FieldName = 'NaResourceType'
@@ -1133,10 +1133,10 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 15
     end
-    object QuTimetableDetailResourceRestrictionIdResourceRestrictionType: TLongintField
+    object QuTimetableDetailRestrictionIdRestrictionType: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
-      FieldName = 'IdResourceRestrictionType'
+      FieldName = 'IdRestrictionType'
       Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -1144,7 +1144,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuTimetableDetailResourceRestrictionNaResource: TStringField
+    object QuTimetableDetailRestrictionNaResource: TStringField
       DisplayWidth = 25
       FieldKind = fkData
       FieldName = 'NaResource'
@@ -1155,7 +1155,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 25
     end
-    object QuTimetableDetailResourceRestrictionIdDay: TLongintField
+    object QuTimetableDetailRestrictionIdDay: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdDay'
@@ -1166,7 +1166,7 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuTimetableDetailResourceRestrictionIdHour: TLongintField
+    object QuTimetableDetailRestrictionIdHour: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdHour'
@@ -1177,22 +1177,22 @@ inherited TimetableForm: TTimetableForm
       Required = False
       Visible = False
     end
-    object QuTimetableDetailResourceRestrictionNaResourceRestrictionType: TStringField
+    object QuTimetableDetailRestrictionNaRestrictionType: TStringField
       DisplayWidth = 10
       FieldKind = fkLookup
-      FieldName = 'NaResourceRestrictionType'
+      FieldName = 'NaRestrictionType'
       Index = 7
-      KeyFields = 'IdResourceRestrictionType'
+      KeyFields = 'IdRestrictionType'
       LookupCache = False
-      LookupDataSet = SourceDataModule.TbResourceRestrictionType
-      LookupKeyFields = 'IdResourceRestrictionType'
-      LookupResultField = 'NaResourceRestrictionType'
+      LookupDataSet = SourceDataModule.TbRestrictionType
+      LookupKeyFields = 'IdRestrictionType'
+      LookupResultField = 'NaRestrictionType'
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = True
       Size = 10
     end
-    object QuTimetableDetailResourceRestrictionNaDay: TStringField
+    object QuTimetableDetailRestrictionNaDay: TStringField
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'NaDay'
@@ -1207,7 +1207,7 @@ inherited TimetableForm: TTimetableForm
       Required = True
       Size = 10
     end
-    object QuTimetableDetailResourceRestrictionNaHour: TStringField
+    object QuTimetableDetailRestrictionNaHour: TStringField
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'NaHour'

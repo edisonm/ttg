@@ -15,10 +15,10 @@ inherited ResourceForm: TResourceForm
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
     end
-    object TBResourceRestriction: TToolButton[3]
+    object TBRestriction: TToolButton[3]
       Left = 257
       Top = 2
-      Action = ActResourceRestriction
+      Action = ActRestriction
       ParentShowHint = False
       ShowHint = True
     end
@@ -159,12 +159,12 @@ inherited ResourceForm: TResourceForm
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
-    object ActResourceRestriction: TAction[2]
+    object ActRestriction: TAction[2]
       AutoCheck = True
       Caption = 'Resource restrictions'
       Hint = 'Resource restrictions|Input Resource restrictions'
       ImageIndex = 2
-      OnExecute = ActResourceRestrictionExecute
+      OnExecute = ActRestrictionExecute
     end
   end
 end

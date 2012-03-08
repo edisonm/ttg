@@ -551,16 +551,16 @@ Activity
 Availability
 0
 "IdTheme";"IdResource";"NumResource";
-ResourceRestrictionType
+RestrictionType
 4
-"IdResourceRestrictionType";"NaResourceRestrictionType";"ColResourceRestrictionType";"ValResourceRestrictionType";
+"IdRestrictionType";"NaRestrictionType";"ColRestrictionType";"ValRestrictionType";
 "2";"No Gusta";"65280";"10";
 "3";"No Puede";"255";"300";
 "4";"Inadecuado";"65280";"10";
 "5";"Imposible";"255";"200";
-ResourceRestriction
+Restriction
 373
-"IdResource";"IdDay";"IdHour";"IdResourceRestrictionType";
+"IdResource";"IdDay";"IdHour";"IdRestrictionType";
 "3";"2";"7";"2";
 "3";"3";"7";"2";
 "3";"4";"7";"2";
@@ -2604,7 +2604,7 @@ MutationProbability2=0,2
 ReparationProbability=0,1
 ResourceTimetableShowText=AbCategory + " " + NaParallel + " " + NaTheme
 ResourceTimetableShowLength=20
-ResourceTimetableExcluirProfRestriction=(ResourceRestriction.IdResourceRestrictionType <> 2)AND(ResourceRestriction.IdResourceRestrictionType <> 3)
+ResourceTimetableExcluirProfRestriction=(Restriction.IdRestrictionType <> 2)AND(Restriction.IdRestrictionType <> 3)
 PollinationProbability=0,1
 InitialTimetables=
 SharedDirectory=

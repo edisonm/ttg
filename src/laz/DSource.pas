@@ -128,13 +128,13 @@ const
     300,
     120,
     50);
-  SNaResourceRestrictionType: array[0..1] of string = (
+  SNaRestrictionType: array[0..1] of string = (
     SInadequate,
     SImpossible);
-  EColResourceRestrictionType: array[0..1] of TColor = (
+  EColRestrictionType: array[0..1] of TColor = (
     clLime,
     clRed);
-  EValResourceRestrictionType: array[0..1] of Integer = (
+  EValRestrictionType: array[0..1] of Integer = (
     50,
     500);
 var
@@ -206,15 +206,15 @@ begin
         Post;
       end;
     end;
-    with TbResourceRestrictionType do
+    with TbRestrictionType do
     begin
-      for i := Low(SNaResourceRestrictionType) to High(SNaResourceRestrictionType) do
+      for i := Low(SNaRestrictionType) to High(SNaRestrictionType) do
       begin
         Append;
         Fields[0].AsInteger := i;
-        Fields[1].AsString := SNaResourceRestrictionType[i];
-        Fields[2].AsInteger := EColResourceRestrictionType[i];
-        Fields[3].AsFloat := EValResourceRestrictionType[i];
+        Fields[1].AsString := SNaRestrictionType[i];
+        Fields[2].AsInteger := EColRestrictionType[i];
+        Fields[3].AsFloat := EValRestrictionType[i];
         Post;
       end;
     end;
@@ -248,8 +248,8 @@ procedure TSourceDataModule.PrepareLookupFields;
     ADataSet.FindField(AKeyFields).Index := ADataSet.FieldCount - 1;
   end;
 begin
-  NewLookupField(TbResourceRestriction, TbResourceRestrictionType,
-                  'IdResourceRestrictionType', 'NaResourceRestrictionType');
+  NewLookupField(TbRestriction, TbRestrictionType,
+                  'IdRestrictionType', 'NaRestrictionType');
   NewLookupField(TbParticipant, TbResource, 'IdResource', 'NaResource');
   {NewLookupField(TbParticipant, TbResource, 'IdResource', 'IdResourceType');}
   NewLookupField(TbResourceTypeLimit, TbResourceType, 'IdResourceType', 'NaResourceType');
@@ -286,7 +286,7 @@ begin
     FindField('IdDay').Visible := False;
     FindField('IdHour').Visible := False;
   end;
-  TbResourceRestrictionType.FindField('IdResourceRestrictionType').Visible := False;
+  TbRestrictionType.FindField('IdRestrictionType').Visible := False;
   with TbActivity do
   begin
     FindField('IdActivity').Visible := False;

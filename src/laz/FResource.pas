@@ -15,10 +15,10 @@ type
   { TResourceForm }
 
   TResourceForm = class(TSingleEditorForm)
-    TBResourceRestriction: TToolButton;
-    ActResourceRestriction: TAction;
+    TBRestriction: TToolButton;
+    ActRestriction: TAction;
     procedure ActFindExecute(Sender: TObject);
-    procedure ActResourceRestrictionExecute(Sender: TObject);
+    procedure ActRestrictionExecute(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure DataSourceStateChange(Sender: TObject);
@@ -29,7 +29,7 @@ type
     procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
-    FResourceRestrictionForm: TCrossManyToManyEditorRForm;
+    FRestrictionForm: TCrossManyToManyEditorRForm;
   public
     { Public declarations }
   end;
@@ -45,32 +45,32 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-procedure TResourceForm.ActResourceRestrictionExecute(Sender: TObject);
+procedure TResourceForm.ActRestrictionExecute(Sender: TObject);
 begin
   with SourceDataModule do
-  if TCrossManyToManyEditorRForm.ToggleEditor(Self, FResourceRestrictionForm,
-    ConfigStorage, ActResourceRestriction) then
-  with FResourceRestrictionForm do
+  if TCrossManyToManyEditorRForm.ToggleEditor(Self, FRestrictionForm,
+    ConfigStorage, ActRestriction) then
+  with FRestrictionForm do
   begin
     Tag := TbResource.FindField('IdResource').AsInteger;
-    TbResourceRestriction.MasterSource := DSResource;
-    TbResourceRestriction.MasterFields := 'IdResource';
-    TbResourceRestriction.LinkedFields := 'IdResource';
+    TbRestriction.MasterSource := DSResource;
+    TbRestriction.MasterFields := 'IdResource';
+    TbRestriction.LinkedFields := 'IdResource';
     Caption := Format('%s %s  - %s %s', [NameDataSet[TbResource],
       TbResource.FindField('NaResource').AsString,
-      SEditing, Description[TbResourceRestriction]]);
+      SEditing, Description[TbRestriction]]);
     DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
-      [Description[TbResourceRestriction], Description[TbDay], Description[TbHour]]);
+      [Description[TbRestriction], Description[TbDay], Description[TbHour]]);
     ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda',
-      [NameDataSet[TbResourceRestrictionType], Description[TbResourceRestrictionType]]);
-    ShowEditor(TbDay, TbHour, TbResourceRestrictionType, TbResourceRestriction,
+      [NameDataSet[TbRestrictionType], Description[TbRestrictionType]]);
+    ShowEditor(TbDay, TbHour, TbRestrictionType, TbRestriction,
 	    TbPeriod, 'IdDay', 'NaDay', 'IdDay', 'IdDay', 'IdHour', 'NaHour',
-      'IdHour', 'IdHour', 'IdResourceRestrictionType', 'NaResourceRestrictionType',
-      'ColResourceRestrictionType', 'IdResourceRestrictionType');
+      'IdHour', 'IdHour', 'IdRestrictionType', 'NaRestrictionType',
+      'ColRestrictionType', 'IdRestrictionType');
   end
   else
   begin
-    TbResourceRestriction.MasterSource := nil;
+    TbRestriction.MasterSource := nil;
   end;
 end;
 

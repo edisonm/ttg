@@ -93,29 +93,29 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 152
     Top = 148
   end
-  object TbResourceRestrictionType: TZTable
+  object TbRestrictionType: TZTable
     Tag = 7
     Connection = DbZConnection
-    TableName = 'ResourceRestrictionType'
-    IndexFieldNames = 'IdResourceRestrictionType'
+    TableName = 'RestrictionType'
+    IndexFieldNames = 'IdRestrictionType'
     Left = 240
     Top = 144
   end
-  object DSResourceRestrictionType: TDataSource
-    DataSet = TbResourceRestrictionType
+  object DSRestrictionType: TDataSource
+    DataSet = TbRestrictionType
     Left = 248
     Top = 136
   end
-  object TbResourceRestriction: TZTable
+  object TbRestriction: TZTable
     Tag = 8
     Connection = DbZConnection
-    TableName = 'ResourceRestriction'
+    TableName = 'Restriction'
     IndexFieldNames = 'IdResource;IdDay;IdHour'
     Left = 336
     Top = 156
   end
-  object DSResourceRestriction: TDataSource
-    DataSet = TbResourceRestriction
+  object DSRestriction: TDataSource
+    DataSet = TbRestriction
     Left = 344
     Top = 148
   end

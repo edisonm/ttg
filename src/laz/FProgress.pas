@@ -50,11 +50,11 @@ type
     PnDescription: TPanel;
     PnNumber: TPanel;
     PnValue: TPanel;
-    PnResourceRestriction: TPanel;
-    PnResourceRestrictionNumber: TPanel;
-    LbResourceRestriction: TLabel;
-    PnResourceRestrictionValue: TPanel;
-    LbResourceRestrictionValue: TLabel;
+    PnRestriction: TPanel;
+    PnRestrictionNumber: TPanel;
+    LbRestriction: TLabel;
+    PnRestrictionValue: TPanel;
+    LbRestrictionValue: TLabel;
     PnNonScatteredActivity: TPanel;
     PnNonScatteredActivityCount: TPanel;
     LbNonScatteredActivityCount: TLabel;
@@ -161,15 +161,15 @@ begin
     LbBrokenSession.Caption := Format('%d ', [BrokenSession]);
     LbClashResource.Caption :=
       Format('%s ', [VarArrToStr(ClashResourceType)]);
-    LbResourceRestriction.Caption :=
-      Format('%s ', [VarArrToStr(ResourceRestrictionTypeToResourceCount)]);
+    LbRestriction.Caption :=
+      Format('%s ', [VarArrToStr(RestrictionTypeToResourceCount)]);
     LbNonScatteredActivityCount.Caption := Format('%d ', [NonScatteredActivity]);
     LbClashActivityValue.Caption := Format('%d ', [ClashActivityValue]);
     LbBreakTimetableResourceValue.Caption :=
       Format('%d ', [BreakTimetableResourceValue]);
     LbBrokenSessionValue.Caption := Format('%d ', [BrokenSessionValue]);
     LbClashResourceValue.Caption := Format('%d ', [ClashResourceValue]);
-    LbResourceRestrictionValue.Caption := Format('%d ', [ResourceRestrictionValue]);
+    LbRestrictionValue.Caption := Format('%d ', [RestrictionValue]);
     LbNonScatteredActivityValue.Caption := Format('%d ', [NonScatteredActivityValue]);
     LbTotalValue.Caption := Format('%d ', [Value]);
   end;

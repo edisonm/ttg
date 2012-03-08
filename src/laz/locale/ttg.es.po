@@ -100,43 +100,43 @@ msgctxt "dsourcebaseconsts.sflresourcetypelimit_numresourcelimit"
 msgid "Limit"
 msgstr ""
 
-#: dsourcebaseconsts.sflresourcerestrictiontype_colresourcerestrictiontype
-msgctxt "dsourcebaseconsts.sflresourcerestrictiontype_colresourcerestrictiontype"
+#: dsourcebaseconsts.sflrestrictiontype_colrestrictiontype
+msgctxt "dsourcebaseconsts.sflrestrictiontype_colrestrictiontype"
 msgid "Color"
 msgstr "Color"
 
-#: dsourcebaseconsts.sflresourcerestrictiontype_idresourcerestrictiontype
-msgctxt "dsourcebaseconsts.sflresourcerestrictiontype_idresourcerestrictiontype"
+#: dsourcebaseconsts.sflrestrictiontype_idrestrictiontype
+msgctxt "dsourcebaseconsts.sflrestrictiontype_idrestrictiontype"
 msgid "Id"
 msgstr "Codigo"
 
-#: dsourcebaseconsts.sflresourcerestrictiontype_naresourcerestrictiontype
-msgctxt "dsourcebaseconsts.sflresourcerestrictiontype_naresourcerestrictiontype"
+#: dsourcebaseconsts.sflrestrictiontype_narestrictiontype
+msgctxt "dsourcebaseconsts.sflrestrictiontype_narestrictiontype"
 msgid "Name"
 msgstr "Nombre"
 
-#: dsourcebaseconsts.sflresourcerestrictiontype_valresourcerestrictiontype
-msgctxt "dsourcebaseconsts.sflresourcerestrictiontype_valresourcerestrictiontype"
+#: dsourcebaseconsts.sflrestrictiontype_valrestrictiontype
+msgctxt "dsourcebaseconsts.sflrestrictiontype_valrestrictiontype"
 msgid "Value"
 msgstr "Valor"
 
-#: dsourcebaseconsts.sflresourcerestriction_idday
-msgctxt "dsourcebaseconsts.sflresourcerestriction_idday"
+#: dsourcebaseconsts.sflrestriction_idday
+msgctxt "dsourcebaseconsts.sflrestriction_idday"
 msgid "Day"
 msgstr "Day"
 
-#: dsourcebaseconsts.sflresourcerestriction_idhour
-msgctxt "dsourcebaseconsts.sflresourcerestriction_idhour"
+#: dsourcebaseconsts.sflrestriction_idhour
+msgctxt "dsourcebaseconsts.sflrestriction_idhour"
 msgid "Hour"
 msgstr "Hour"
 
-#: dsourcebaseconsts.sflresourcerestriction_idresource
-msgctxt "dsourcebaseconsts.sflresourcerestriction_idresource"
+#: dsourcebaseconsts.sflrestriction_idresource
+msgctxt "dsourcebaseconsts.sflrestriction_idresource"
 msgid "Resource"
 msgstr "Profesor"
 
-#: dsourcebaseconsts.sflresourcerestriction_idresourcerestrictiontype
-msgctxt "dsourcebaseconsts.sflresourcerestriction_idresourcerestrictiontype"
+#: dsourcebaseconsts.sflrestriction_idrestrictiontype
+msgctxt "dsourcebaseconsts.sflrestriction_idrestrictiontype"
 msgid "Restriction Type"
 msgstr "Tipo de Restriccion"
 
@@ -304,13 +304,13 @@ msgctxt "dsourcebaseconsts.stbresource"
 msgid "Resources"
 msgstr "Profesores"
 
-#: dsourcebaseconsts.stbresourcerestriction
-msgctxt "dsourcebaseconsts.stbresourcerestriction"
+#: dsourcebaseconsts.stbrestriction
+msgctxt "dsourcebaseconsts.stbrestriction"
 msgid "Resource Restrictions"
 msgstr "Restricciones de profesores"
 
-#: dsourcebaseconsts.stbresourcerestrictiontype
-msgctxt "dsourcebaseconsts.stbresourcerestrictiontype"
+#: dsourcebaseconsts.stbrestrictiontype
+msgctxt "dsourcebaseconsts.stbrestrictiontype"
 msgid "Types of Resource Restrictions"
 msgstr "Tipos de restricciones de profesores"
 
@@ -471,8 +471,8 @@ msgctxt "TCONFIGFORM.LBREPARATIONPROBABILITY.CAPTION"
 msgid "Reparation Probability:"
 msgstr "Prob. Reparacion:"
 
-#: tconfigform.lbresourcerestrictions.caption
-msgctxt "tconfigform.lbresourcerestrictions.caption"
+#: tconfigform.lbrestrictions.caption
+msgctxt "tconfigform.lbrestrictions.caption"
 msgid "Resource Restrictions:"
 msgstr "Prohibiciones de profesor:"
 
@@ -1024,13 +1024,13 @@ msgctxt "tprogressform.lbremainingtime.caption"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lbresourcerestriction.caption
-msgctxt "tprogressform.lbresourcerestriction.caption"
+#: tprogressform.lbrestriction.caption
+msgctxt "tprogressform.lbrestriction.caption"
 msgid "0 "
 msgstr "0 "
 
-#: tprogressform.lbresourcerestrictionvalue.caption
-msgctxt "tprogressform.lbresourcerestrictionvalue.caption"
+#: tprogressform.lbrestrictionvalue.caption
+msgctxt "tprogressform.lbrestrictionvalue.caption"
 msgid "0 "
 msgstr "0 "
 
@@ -1118,8 +1118,8 @@ msgctxt "tprogressform.pnposition.caption"
 msgid " Iteration:"
 msgstr " Iteracion:"
 
-#: tprogressform.pnresourcerestriction.caption
-msgctxt "tprogressform.pnresourcerestriction.caption"
+#: tprogressform.pnrestriction.caption
+msgctxt "tprogressform.pnrestriction.caption"
 msgid "Resource Restrictions:"
 msgstr " Prohibiciones de profesor:"
 
@@ -1133,12 +1133,12 @@ msgctxt "tprogressform.pnvalue.caption"
 msgid "Value:"
 msgstr " Valor:"
 
-#: tresourceform.actresourcerestriction.caption
-msgctxt "tresourceform.actresourcerestriction.caption"
+#: tresourceform.actrestriction.caption
+msgctxt "tresourceform.actrestriction.caption"
 msgid "Resource restrictions"
 msgstr "Prohibiciones de profesor"
 
-#: tresourceform.actresourcerestriction.hint
+#: tresourceform.actrestriction.hint
 msgid "Resource restrictions|Input Resource restrictions"
 msgstr ""
 
@@ -1353,13 +1353,13 @@ msgstr "Mejorar horario"
 msgid "Improve timetable|Improve selected timetable"
 msgstr "Mejorar horario|Mejorar horario seleccionado"
 
-#: ttimetableform.actresourcerestrictionnonsatisfied.caption
-msgctxt "ttimetableform.actresourcerestrictionnonsatisfied.caption"
+#: ttimetableform.actrestrictionnonsatisfied.caption
+msgctxt "ttimetableform.actrestrictionnonsatisfied.caption"
 msgid "Resource restrictions"
 msgstr "Prohibiciones de profesor"
 
-#: ttimetableform.actresourcerestrictionnonsatisfied.hint
-msgctxt "ttimetableform.actresourcerestrictionnonsatisfied.hint"
+#: ttimetableform.actrestrictionnonsatisfied.hint
+msgctxt "ttimetableform.actrestrictionnonsatisfied.hint"
 msgid "Resource retrictions|Resource restrictions non satisfied"
 msgstr "Prohibiciones de profesor|Prohibiciones de profesor no respetadas"
 
@@ -1636,13 +1636,13 @@ msgstr "Listo para generar horario. Mostrar resumen del chequeo del horario?"
 msgid "Non Scattered Activities"
 msgstr "Materias no dispersas"
 
-#: uttgconsts.snumhardresourcerestrictions
+#: uttgconsts.snumhardrestrictions
 #, fuzzy
 #| msgid "Number of hard resource restrictions..."
 msgid "Number of hard teacher restrictions..."
 msgstr "Numero de prohibiciones de profesores con problemas..."
 
-#: uttgconsts.snumsoftresourcerestrictions
+#: uttgconsts.snumsoftrestrictions
 #, fuzzy
 #| msgid "Number of soft resource restrictions..."
 msgid "Number of soft teacher restrictions..."
@@ -1695,7 +1695,7 @@ msgstr "Probabilidad de Reparacion"
 msgid "For [%s], the number of activities %d exceeds its capacity %d"
 msgstr ""
 
-#: uttgconsts.sresourcerestrictionshead
+#: uttgconsts.srestrictionshead
 msgid "Resource; Restrictions"
 msgstr "Profesor; Restricciones"
 

@@ -648,7 +648,7 @@ begin
     end
     else
     begin
-      SourceDataModule.TbResourceRestrictionType.Refresh;
+      SourceDataModule.TbRestrictionType.Refresh;
     end;
   finally
     ActConfigure.Checked := False;

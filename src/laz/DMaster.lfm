@@ -47,12 +47,12 @@ object MasterDataModule: TMasterDataModule
       Required = False
     end
   end
-  object QuResourceRestrictionCount: TZTable
+  object QuRestrictionCount: TZTable
     Connection = SourceDataModule.DbZConnection
     AutoCalcFields = False
     left = 88
     top = 120
-    object QuResourceRestrictionCountIdResource: TLongintField
+    object QuRestrictionCountIdResource: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'IdResource'
@@ -62,7 +62,7 @@ object MasterDataModule: TMasterDataModule
       ReadOnly = False
       Required = False
     end
-    object QuResourceRestrictionCountNumber: TLongintField
+    object QuRestrictionCountNumber: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'Number'

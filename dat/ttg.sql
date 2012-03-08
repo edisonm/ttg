@@ -57,24 +57,24 @@ CREATE TABLE IF NOT EXISTS `Activity`(
   CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE RESTRICT
 ); /* Activities */
-CREATE TABLE IF NOT EXISTS `ResourceRestrictionType`(
-    `IdResourceRestrictionType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Restriction Type Id */,
-    `NaResourceRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
-    `ColResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
-    `ValResourceRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
+CREATE TABLE IF NOT EXISTS `RestrictionType`(
+    `IdRestrictionType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Restriction Type Id */,
+    `NaRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
+    `ColRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
+    `ValRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
 ); /* Types of Resource Restrictions */
-CREATE TABLE IF NOT EXISTS `ResourceRestriction`(
+CREATE TABLE IF NOT EXISTS `Restriction`(
     `IdResource` INTEGER NOT NULL /* Resource Id */,
     `IdDay` INTEGER NOT NULL /* Day Id */,
     `IdHour` INTEGER NOT NULL /* Hour Id */,
-    `IdResourceRestrictionType` INTEGER NOT NULL /* Resource Restriction Type Id */,
+    `IdRestrictionType` INTEGER NOT NULL /* Resource Restriction Type Id */,
   CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdResource`,`IdDay`,`IdHour`),
-  CONSTRAINT `PeriodResourceRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
+  CONSTRAINT `PeriodRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
     REFERENCES `Period`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `ResourceResourceRestriction` FOREIGN KEY (`IdResource`)
+  CONSTRAINT `ResourceRestriction` FOREIGN KEY (`IdResource`)
     REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT `ResourceRestrictionTypeResourceRestriction` FOREIGN KEY (`IdResourceRestrictionType`)
-    REFERENCES `ResourceRestrictionType`(`IdResourceRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT
+  CONSTRAINT `RestrictionTypeRestriction` FOREIGN KEY (`IdRestrictionType`)
+    REFERENCES `RestrictionType`(`IdRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT
 ); /* Resource Restrictions */
 CREATE TABLE IF NOT EXISTS `Availability`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,

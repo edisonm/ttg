@@ -343,7 +343,7 @@ object ConfigForm: TConfigForm
         Caption = 'Non Scattered Activities:'
         ParentColor = False
       end
-      object LbResourceRestrictions: TLabel
+      object LbRestrictions: TLabel
         Left = 8
         Height = 15
         Top = 108
@@ -415,24 +415,24 @@ object ConfigForm: TConfigForm
         AutoSize = False
         TabOrder = 0
       end
-      object EdNaResourceRestrictionType: TDBEdit
+      object EdNaRestrictionType: TDBEdit
         Left = 8
         Height = 24
         Top = 148
         Width = 93
-        DataField = 'NaResourceRestrictionType'
-        DataSource = SourceDataModule.DSResourceRestrictionType
+        DataField = 'NaRestrictionType'
+        DataSource = SourceDataModule.DSRestrictionType
         CharCase = ecNormal
         MaxLength = 0
         TabOrder = 1
       end
-      object EdValResourceRestrictionType: TDBEdit
+      object EdValRestrictionType: TDBEdit
         Left = 207
         Height = 24
         Top = 148
         Width = 93
-        DataField = 'ValResourceRestrictionType'
-        DataSource = SourceDataModule.DSResourceRestrictionType
+        DataField = 'ValRestrictionType'
+        DataSource = SourceDataModule.DSRestrictionType
         CharCase = ecNormal
         MaxLength = 0
         TabOrder = 3
@@ -444,19 +444,19 @@ object ConfigForm: TConfigForm
         Width = 292
         Color = clWindow
         Columns = <>
-        DataSource = SourceDataModule.DSResourceRestrictionType
+        DataSource = SourceDataModule.DSRestrictionType
         TabOrder = 6
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
       end
-      object CBColResourceRestrictionType: TColorBox
+      object CBColRestrictionType: TColorBox
         Left = 110
         Height = 24
         Top = 148
         Width = 93
         ItemHeight = 16
-        OnChange = CBColResourceRestrictionTypeChange
-        OnExit = CBColResourceRestrictionTypeExit
+        OnChange = CBColRestrictionTypeChange
+        OnExit = CBColRestrictionTypeExit
         TabOrder = 5
       end
       object EdClashActivity: TEdit
@@ -482,9 +482,9 @@ object ConfigForm: TConfigForm
     OnClick = BBCancelClick
     TabOrder = 2
   end
-  object DSResourceRestrictionType: TDatasource
-    DataSet = SourceDataModule.TbResourceRestrictionType
-    OnDataChange = DSResourceRestrictionTypeDataChange
+  object DSRestrictionType: TDatasource
+    DataSet = SourceDataModule.TbRestrictionType
+    OnDataChange = DSRestrictionTypeDataChange
     left = 128
     top = 264
   end

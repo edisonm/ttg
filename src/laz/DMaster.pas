@@ -18,9 +18,9 @@ type
     TbTmpResourceWorkLoadIdResource: TLongintField;
     TbTmpResourceWorkLoadNaResource: TStringField;
     TbTmpResourceWorkLoadWorkLoad: TLongintField;
-    QuResourceRestrictionCount: TZTable;
-    QuResourceRestrictionCountIdResource: TLongintField;
-    QuResourceRestrictionCountNumber: TLongintField;
+    QuRestrictionCount: TZTable;
+    QuRestrictionCountIdResource: TLongintField;
+    QuRestrictionCountNumber: TLongintField;
     QuNewIdTimetable: TZReadOnlyQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
@@ -28,7 +28,7 @@ type
     { Private declarations }
     FStringsShowResource: TStrings;
     FConfigStorage: TTTGConfig;
-    procedure FillResourceRestrictionCount;
+    procedure FillRestrictionCount;
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
   public
     { Public declarations }
@@ -59,39 +59,39 @@ uses
 const
   pfhVersionNumber = 293;
 
-procedure TMasterDataModule.FillResourceRestrictionCount;
+procedure TMasterDataModule.FillRestrictionCount;
 var
   IdResource, IdResource1: Integer;
   s: string;
 begin
-  with SourceDataModule, QuResourceRestrictionCount do
+  with SourceDataModule, QuRestrictionCount do
   begin
     Close;
     Open;
-    s := TbResourceRestriction.IndexFieldNames;
-    TbResourceRestriction.IndexFieldNames := 'IdResource';
-    TbResourceRestriction.First;
+    s := TbRestriction.IndexFieldNames;
+    TbRestriction.IndexFieldNames := 'IdResource';
+    TbRestriction.First;
     IdResource := -$7FFFFFFF;
-    while not TbResourceRestriction.Eof do
+    while not TbRestriction.Eof do
     begin
-      IdResource1 := TbResourceRestriction.FindField('IdResource').AsInteger;
+      IdResource1 := TbRestriction.FindField('IdResource').AsInteger;
       if IdResource <> IdResource1 then
       begin
         Append;
-        with QuResourceRestrictionCountNumber do
+        with QuRestrictionCountNumber do
           Value := 1;
         IdResource := IdResource1;
       end
       else
       begin
         Edit;
-        with QuResourceRestrictionCountNumber do
+        with QuRestrictionCountNumber do
           Value := Value + 1;
       end;
       Post;
-      TbResourceRestriction.Next;
+      TbRestriction.Next;
     end;
-    TbResourceRestriction.IndexFieldNames := s;
+    TbRestriction.IndexFieldNames := s;
   end;
 end;
 

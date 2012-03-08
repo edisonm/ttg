@@ -63,8 +63,8 @@ resourcestring
   SNo = 'No';
   SNoErrorReadyForCheckSummary = 'Ready to generate timetable. Show timetable check Summary?';
   SNonScatteredActivity = 'Non Scattered Activities';
-  SNumHardResourceRestrictions = 'Number of hard teacher restrictions...';
-  SNumSoftResourceRestrictions = 'Number of soft teacher restrictions...';
+  SNumHardRestrictions = 'Number of hard teacher restrictions...';
+  SNumSoftRestrictions = 'Number of soft teacher restrictions...';
   SPendingChangesWillBeLostYouReallyWantToQuit = 'Pending changes will be lost. Do you really want to quit?';
   SPollinationProbability = 'Pollination Probability';
   SPopulationSize = 'Population size';
@@ -80,7 +80,7 @@ resourcestring
   SSaveDialogFilter = 'Timetable (*.ttd)|*.ttd';
   SSearchBy = 'Search by %s';
   SSupervisor = 'Supervisor';
-  SResourceRestrictionsHead = 'Resource; Restrictions';
+  SRestrictionsHead = 'Resource; Restrictions';
   SResourceWorkLoadHead = 'Resource; Work Load';
   SResourcesWorkLoadWithProblems = 'Resources'' work load with problems...';
   SResourcesWorkLoadWithoutProblems = 'Resources'' Work load without problems...';

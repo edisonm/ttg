@@ -1,6 +1,6 @@
 DELETE FROM TimetableResource;
-DELETE FROM ResourceRestriction;
-DELETE FROM ResourceRestrictionType;
+DELETE FROM Restriction;
+DELETE FROM RestrictionType;
 DELETE FROM Participant;
 DELETE FROM Resource;
 DELETE FROM ResourceType;
@@ -39,17 +39,17 @@ INSERT INTO Participant(IdResource,IdTheme,IdCategory,IdParallel,IsFixed,NumReso
 SELECT IdResource AS IdResource,IdTheme,IdCategory,IdParallel,1 as IsFixed,1 as NumResource
 FROM Participant;
 
-INSERT INTO ResourceRestrictionType(IdResourceRestrictionType,IdResourceType,NaResourceRestrictionType,
-       ColResourceRestrictionType,ValResourceRestrictionType)
-SELECT IdResourceRestrictionType AS IdResourceRestrictionType,
+INSERT INTO RestrictionType(IdRestrictionType,IdResourceType,NaRestrictionType,
+       ColRestrictionType,ValRestrictionType)
+SELECT IdRestrictionType AS IdRestrictionType,
        1 AS IdResourceType,
-       NaResourceRestrictionType AS NaResourceRestrictionType,
-       ColResourceRestrictionType AS ColResourceRestrictionType,
-       ValResourceRestrictionType AS ValResourceRestrictionType
-FROM ResourceRestrictionType;
-INSERT INTO ResourceRestriction(IdResource,IdDay,IdHour,IdResourceRestrictionType)
-SELECT IdResource as IdResource,IdDay,IdHour,"1" as IdResourceRestrictionType
-FROM ResourceRestriction;
+       NaRestrictionType AS NaRestrictionType,
+       ColRestrictionType AS ColRestrictionType,
+       ValRestrictionType AS ValRestrictionType
+FROM RestrictionType;
+INSERT INTO Restriction(IdResource,IdDay,IdHour,IdRestrictionType)
+SELECT IdResource as IdResource,IdDay,IdHour,"1" as IdRestrictionType
+FROM Restriction;
 INSERT INTO TimetableResource(IdTimetable,IdResource,IdTheme,IdCategory,IdParallel)
 SELECT IdTimetable,IdResource,IdTheme,IdCategory,IdParallel
 FROM Timetable,Participant;

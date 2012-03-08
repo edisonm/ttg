@@ -44,7 +44,7 @@ type
     LbComments: TLabel;
     LbInstitutionName: TLabel;
     EdNaInstitution: TEdit;
-    LbResourceRestrictions: TLabel;
+    LbRestrictions: TLabel;
     TSOptions: TTabSheet;
     CBUseCustomSeed: TCheckBox;
     speSeed: TSpinEdit;
@@ -57,23 +57,23 @@ type
     LbInitialTimetables: TLabel;
     EdInitialTimetables: TEdit;
     LbTRName: TLabel;
-    EdNaResourceRestrictionType: TDBEdit;
+    EdNaRestrictionType: TDBEdit;
     LbTRColor: TLabel;
     LbTRValue: TLabel;
-    EdValResourceRestrictionType: TDBEdit;
+    EdValRestrictionType: TDBEdit;
     LbSharedDirectory: TLabel;
     dedSharedDirectory: TDirectoryEdit;
     BBCancel: TBitBtn;
     DBGrid1: TDBGrid;
     DBGrid2: TDBGrid;
-    DSResourceRestrictionType: TDataSource;
-    CBColResourceRestrictionType: TColorBox;
+    DSRestrictionType: TDataSource;
+    CBColRestrictionType: TColorBox;
     procedure CBUseCustomSeedClick(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure CBColResourceRestrictionTypeChange(Sender: TObject);
-    procedure CBColResourceRestrictionTypeExit(Sender: TObject);
-    procedure DSResourceRestrictionTypeDataChange(Sender: TObject;
+    procedure CBColRestrictionTypeChange(Sender: TObject);
+    procedure CBColRestrictionTypeExit(Sender: TObject);
+    procedure DSRestrictionTypeDataChange(Sender: TObject;
       Field: TField);
     procedure BBOkClick(Sender: TObject);
     procedure BBCancelClick(Sender: TObject);
@@ -199,29 +199,29 @@ begin
   ModalResult := mrOk;
 end;
 
-procedure TConfigForm.CBColResourceRestrictionTypeChange(Sender: TObject);
+procedure TConfigForm.CBColRestrictionTypeChange(Sender: TObject);
 begin
-  with DSResourceRestrictionType do
+  with DSRestrictionType do
   begin
     OnDataChange := nil;
     Edit;
-    OnDataChange := DSResourceRestrictionTypeDataChange;
+    OnDataChange := DSRestrictionTypeDataChange;
   end
 end;
 
-procedure TConfigForm.CBColResourceRestrictionTypeExit(Sender: TObject);
+procedure TConfigForm.CBColRestrictionTypeExit(Sender: TObject);
 begin
-  with SourceDataModule.TbResourceRestrictionType.FindField('ColResourceRestrictionType') do
-    if (DSResourceRestrictionType.State in [dsEdit, dsInsert])
-        and (AsInteger <> CBColResourceRestrictionType.Selected) then
-      AsInteger := CBColResourceRestrictionType.Selected;
+  with SourceDataModule.TbRestrictionType.FindField('ColRestrictionType') do
+    if (DSRestrictionType.State in [dsEdit, dsInsert])
+        and (AsInteger <> CBColRestrictionType.Selected) then
+      AsInteger := CBColRestrictionType.Selected;
 end;
 
-procedure TConfigForm.DSResourceRestrictionTypeDataChange(
+procedure TConfigForm.DSRestrictionTypeDataChange(
   Sender: TObject; Field: TField);
 begin
-  CBColResourceRestrictionType.Selected
-    := SourceDataModule.TbResourceRestrictionType.FindField('ColResourceRestrictionType').AsInteger;
+  CBColRestrictionType.Selected
+    := SourceDataModule.TbRestrictionType.FindField('ColRestrictionType').AsInteger;
 end;
 
 initialization
