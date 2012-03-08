@@ -1,0 +1,16 @@
+# -*- mode: Makefile; -*-
+
+BuildMode?=release
+TTGSRC=../laz
+BuildId?=$(shell cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getBuildId)
+TTGEXE?=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getTTGEXE)
+APPNAME=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getAPPNAME)
+APPVERSION=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getAPPVERSION)
+REVISION=$(shell cd $(TTGSRC) ; $(MAKE) -s getREVISION)
+ARCHITECTURE=$(shell dpkg --print-architecture)
+INSTALLER=$(TTGDIR)/bin/$(BuildId)/ttg_$(APPVERSION)_$(ARCHITECTURE).deb
+FILES=$(INSTALLER)
+DEBIAN=$(TTGDIR)/bin/$(BuildId)/debian
+CONTROL=$(DEBIAN)/DEBIAN/control
+TTGDESKTOP=$(DEBIAN)/usr/share/applications/ttg.desktop
+TTGTARGET=$(DEBIAN)/usr/bin/ttg

@@ -91,7 +91,6 @@ test:
 	@echo DSRCBASE=$(DSRCBASE)
 	@echo DBCONVERT=$(DBCONVERT)
 	@echo BuildId=$(BuildId)
-
 	@echo $(TTGMYSQL): $(DBCONVERT) $(TTGMDB)
 	@echo $(DBCONVERT) /ACC2SQL $(TTGMDB) $(TTGMYSQL) mysql
 
