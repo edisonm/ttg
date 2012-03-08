@@ -590,7 +590,7 @@ end;
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   FUpdateIndex := 0;
-  Height := 10 + Toolbar.Height + StatusBar.Height;
+  Height := 10 + Toolbar.Top + Toolbar.Height + StatusBar.Height;
   SaveDialog.DefaultExt := '.ttd';
   SaveDialog.Filter := SSaveDialogFilter;
   SaveDialogCSV.DefaultExt := '.csv';

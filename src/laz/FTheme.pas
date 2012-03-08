@@ -18,9 +18,9 @@ type
   TThemeForm	= class(TMasterDetailEditorForm)
     ActFilterByResourceType: TAction;
     CBFilterByResourceType: TCheckBox;
-    DbGParticipants: TDBGrid;
-    DbGParticipants1: TDBGrid;
-    DbGParticipants2: TDBGrid;
+    DbGParticipant: TDBGrid;
+    DBGAvailability: TDBGrid;
+    DBGResourceTypeLimit: TDBGrid;
     DBLResourceType: TDBLookupComboBox;
     GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;

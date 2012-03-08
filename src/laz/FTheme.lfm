@@ -1,7 +1,7 @@
 inherited ThemeForm: TThemeForm
-  Left = 375
+  Left = 675
   Height = 644
-  Top = 283
+  Top = 254
   Width = 1024
   Caption = 'Theme'
   ClientHeight = 644
@@ -89,7 +89,7 @@ inherited ThemeForm: TThemeForm
           ClientHeight = 251
           ClientWidth = 310
           TabOrder = 0
-          object DbGParticipants1: TDBGrid
+          object DBGAvailability: TDBGrid
             Left = 0
             Height = 251
             Top = 0
@@ -114,7 +114,7 @@ inherited ThemeForm: TThemeForm
           ClientHeight = 251
           ClientWidth = 297
           TabOrder = 1
-          object DbGParticipants2: TDBGrid
+          object DBGResourceTypeLimit: TDBGrid
             Left = 0
             Height = 251
             Top = 0
@@ -188,7 +188,7 @@ inherited ThemeForm: TThemeForm
         ClientHeight = 251
         ClientWidth = 368
         TabOrder = 2
-        object DbGParticipants: TDBGrid
+        object DbGParticipant: TDBGrid
           Left = 0
           Height = 251
           Top = 0

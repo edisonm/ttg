@@ -382,8 +382,10 @@ msgid "Apply Downhill"
 msgstr "Aplicar descenso  - lento"
 
 #: tconfigform.cbusecustomseed.caption
+#, fuzzy
+#| msgid "Init with the system time"
 msgctxt "TCONFIGFORM.CBUSECUSTOMSEED.CAPTION"
-msgid "Init with the system time"
+msgid "Use custom Seed:"
 msgstr "Inicializar con la hora del sistema"
 
 #: tconfigform.edbookmarks.text
@@ -400,11 +402,6 @@ msgstr "Institucion|Nombre de la Institucion"
 msgctxt "tconfigform.lbauthority.caption"
 msgid "Authority:"
 msgstr "Autoridad:"
-
-#: tconfigform.lbauthorityposition.caption
-msgctxt "TCONFIGFORM.LBAUTHORITYPOSITION.CAPTION"
-msgid "Position:"
-msgstr "Cargo:"
 
 #: tconfigform.lbbreaktimetableresource.caption
 msgctxt "tconfigform.lbbreaktimetableresource.caption"
@@ -451,13 +448,6 @@ msgctxt "tconfigform.lbiterations.caption"
 msgid "Iterations:"
 msgstr "Iteraciones:"
 
-#: tconfigform.lbmaxresourceworkload.caption
-#, fuzzy
-#| msgid "Max work load per resource:"
-msgctxt "tconfigform.lbmaxresourceworkload.caption"
-msgid "Max work load per teacher:"
-msgstr "Carga Maxima por Profesor:"
-
 #: tconfigform.lbmutationprobability.caption
 msgctxt "TCONFIGFORM.LBMUTATIONPROBABILITY.CAPTION"
 msgid "Mutation Probability:"
@@ -483,30 +473,10 @@ msgctxt "TCONFIGFORM.LBREPARATIONPROBABILITY.CAPTION"
 msgid "Reparation Probability:"
 msgstr "Prob. Reparacion:"
 
-#: tconfigform.lbresponsible.caption
-msgctxt "tconfigform.lbresponsible.caption"
-msgid "Responsible:"
-msgstr "Responsable:"
-
-#: tconfigform.lbresponsibleposition.caption
-msgctxt "TCONFIGFORM.LBRESPONSIBLEPOSITION.CAPTION"
-msgid "Position:"
-msgstr "Cargo:"
-
 #: tconfigform.lbrestrictions.caption
 msgctxt "tconfigform.lbrestrictions.caption"
 msgid "Resource Restrictions:"
 msgstr "Prohibiciones de profesor:"
-
-#: tconfigform.lbschoolyear.caption
-msgctxt "tconfigform.lbschoolyear.caption"
-msgid "School Year:"
-msgstr "Periodo Lectivo:"
-
-#: tconfigform.lbseed.caption
-msgctxt "TCONFIGFORM.LBSEED.CAPTION"
-msgid "Seed:"
-msgstr "Semilla:"
 
 #: tconfigform.lbshareddirectory.caption
 msgctxt "TCONFIGFORM.LBSHAREDDIRECTORY.CAPTION"

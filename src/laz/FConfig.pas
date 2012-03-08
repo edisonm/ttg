@@ -69,8 +69,6 @@ type
     DSRestrictionType: TDataSource;
     CBColRestrictionType: TColorBox;
     procedure CBUseCustomSeedClick(Sender: TObject);
-    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure CBColRestrictionTypeChange(Sender: TObject);
     procedure CBColRestrictionTypeExit(Sender: TObject);
     procedure DSRestrictionTypeDataChange(Sender: TObject;
@@ -113,26 +111,9 @@ begin
       end;
 end;
 
-procedure TConfigForm.DBGridDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-var
-  DBGrid: TCustomDBGrid;
-begin
-  DBGrid := Sender as TCustomDBGrid;
-  if (Copy(Column.Field.FieldName, 1, 3) = 'Col') and not Column.Field.isNull then
-    Column.Color := Column.Field.AsInteger
-  else
-    Column.Color := clWhite;
-  DBGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
-end;
-
 procedure TConfigForm.CBUseCustomSeedClick(Sender: TObject);
 begin
-  with (Sender as TCheckbox) do
-  begin
-    speSeed.Enabled := not Checked;
-  end;
+  speSeed.Enabled := CBUseCustomSeed.Checked;
 end;
 
 procedure TConfigForm.LoadFromSourceDataModule;

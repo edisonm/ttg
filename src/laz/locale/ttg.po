@@ -367,7 +367,7 @@ msgstr ""
 
 #: tconfigform.cbusecustomseed.caption
 msgctxt "TCONFIGFORM.CBUSECUSTOMSEED.CAPTION"
-msgid "Init with the system time"
+msgid "Use custom Seed:"
 msgstr ""
 
 #: tconfigform.edbookmarks.text
@@ -383,11 +383,6 @@ msgstr ""
 #: tconfigform.lbauthority.caption
 msgctxt "tconfigform.lbauthority.caption"
 msgid "Authority:"
-msgstr ""
-
-#: tconfigform.lbauthorityposition.caption
-msgctxt "TCONFIGFORM.LBAUTHORITYPOSITION.CAPTION"
-msgid "Position:"
 msgstr ""
 
 #: tconfigform.lbbreaktimetableresource.caption
@@ -435,11 +430,6 @@ msgctxt "tconfigform.lbiterations.caption"
 msgid "Iterations:"
 msgstr ""
 
-#: tconfigform.lbmaxresourceworkload.caption
-msgctxt "tconfigform.lbmaxresourceworkload.caption"
-msgid "Max work load per teacher:"
-msgstr ""
-
 #: tconfigform.lbmutationprobability.caption
 msgctxt "TCONFIGFORM.LBMUTATIONPROBABILITY.CAPTION"
 msgid "Mutation Probability:"
@@ -465,29 +455,9 @@ msgctxt "TCONFIGFORM.LBREPARATIONPROBABILITY.CAPTION"
 msgid "Reparation Probability:"
 msgstr ""
 
-#: tconfigform.lbresponsible.caption
-msgctxt "tconfigform.lbresponsible.caption"
-msgid "Responsible:"
-msgstr ""
-
-#: tconfigform.lbresponsibleposition.caption
-msgctxt "TCONFIGFORM.LBRESPONSIBLEPOSITION.CAPTION"
-msgid "Position:"
-msgstr ""
-
 #: tconfigform.lbrestrictions.caption
 msgctxt "tconfigform.lbrestrictions.caption"
 msgid "Resource Restrictions:"
-msgstr ""
-
-#: tconfigform.lbschoolyear.caption
-msgctxt "tconfigform.lbschoolyear.caption"
-msgid "School Year:"
-msgstr ""
-
-#: tconfigform.lbseed.caption
-msgctxt "TCONFIGFORM.LBSEED.CAPTION"
-msgid "Seed:"
 msgstr ""
 
 #: tconfigform.lbshareddirectory.caption
