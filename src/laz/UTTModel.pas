@@ -1653,6 +1653,7 @@ procedure TTimetable.Mutate;
         ThemeActivities := RandomIndexes(2, Activities);
         Activity1 := FThemeToActivities[Theme, ThemeActivities[0]];
         Activity2 := FThemeToActivities[Theme, ThemeActivities[1]];
+        Assert(Activity1<>Activity2);
         NumFixeds1 := FActivityToNumFixeds[Activity1];
         NumFixeds2 := FActivityToNumFixeds[Activity2];
         repeat

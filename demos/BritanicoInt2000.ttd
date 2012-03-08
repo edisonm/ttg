@@ -104,12 +104,13 @@ Day
 "5";"Jueves";
 "6";"Viernes";
 ResourceType
-4
+5
 "IdResourceType";"NaResourceType";"DefaultMaxNumResource";"ValResourceType";
-"1";"Profesor";"1";"345";
+"1";"Profesor";"1";"645";
 "2";"Aula";"1";"413";
 "3";"Curso";"1";"902";
 "4";"Campo";"1";"0";
+"5";"Ayudante";"1";"645";
 Hour
 11
 "IdHour";"NaHour";"Interval";
@@ -146,7 +147,7 @@ Resource
 "1";"17";"Rodas Paul";"17";"1";
 "1";"18";"Buchelli Clara";"18";"1";
 "1";"19";"Daulon Marina";"19";"1";
-"1";"20";"Velasco Rosa";"20";"1";
+"5";"20";"Velasco Rosa";"20";"1";
 "2";"21";"Aula normal";"NORM";"8";
 "2";"22";"Lab Fisica y Dibujo Tec.";"FISICADIB";"1";
 "2";"23";"Lab Computac";"COMP";"1";

@@ -26,28 +26,29 @@
       <StringTable FileDescription="Timetable Generator System" LegalCopyright="2012, Edison Mera" ProductVersion=""/>
     </VersionInfo>
     <BuildModes Count="3">
-      <Item1 Name="release" Default="True"/>
-      <Item2 Name="debug">
+      <Item1 Name="debug" Default="True"/>
+      <Item2 Name="release">
         <CompilerOptions>
           <Version Value="11"/>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
             <OtherUnitFiles Value="../../../zeosdbo/packages/lazarus;../../../zeosdbo/src/core;../../../zeosdbo/src/dbc;../../../zeosdbo/src/parsesql;../../../zeosdbo/src/plain;../../../zeosdbo/src/component;../../../multithreadprocs;../../../DBConvert/auxiliary"/>
-            <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-debug"/>
+            <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-release"/>
+            <SrcPath Value="../../../GLScene/Source"/>
           </SearchPaths>
-          <Parsing>
-            <SyntaxOptions>
-              <UseAnsiStrings Value="False"/>
-            </SyntaxOptions>
-          </Parsing>
           <CodeGeneration>
-            <Checks>
-              <RangeChecks Value="True"/>
-            </Checks>
+            <SmartLinkUnit Value="True"/>
+            <SmallerCode Value="True"/>
             <Optimizations>
-              <VariablesInRegisters Value="True"/>
+              <OptimizationLevel Value="3"/>
             </Optimizations>
           </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+            </Debugging>
+            <LinkSmart Value="True"/>
+          </Linking>
           <Other>
             <CompilerMessages>
               <UseMsgFile Value="True"/>
@@ -59,11 +60,8 @@
 -dZEOS_DISABLE_INTERBASE
 -dZEOS_DISABLE_ORACLE
 -dZEOS_DISABLE_ASA
--dDEBUG"/>
+-Xs- -FW../../bin/$(TargetCPU)-$(TargetOS)-release/ttg.wpo -OWall"/>
             <CompilerPath Value="$(CompPath)"/>
-            <ExecuteAfter>
-              <ShowAllMessages Value="True"/>
-            </ExecuteAfter>
           </Other>
         </CompilerOptions>
       </Item2>
@@ -411,22 +409,21 @@
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
       <OtherUnitFiles Value="../../../zeosdbo/packages/lazarus;../../../zeosdbo/src/core;../../../zeosdbo/src/dbc;../../../zeosdbo/src/parsesql;../../../zeosdbo/src/plain;../../../zeosdbo/src/component;../../../multithreadprocs;../../../DBConvert/auxiliary"/>
-      <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-release"/>
-      <SrcPath Value="../../../GLScene/Source"/>
+      <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-debug"/>
     </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <UseAnsiStrings Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
     <CodeGeneration>
-      <SmartLinkUnit Value="True"/>
-      <SmallerCode Value="True"/>
+      <Checks>
+        <RangeChecks Value="True"/>
+      </Checks>
       <Optimizations>
-        <OptimizationLevel Value="3"/>
+        <VariablesInRegisters Value="True"/>
       </Optimizations>
     </CodeGeneration>
-    <Linking>
-      <Debugging>
-        <GenerateDebugInfo Value="False"/>
-      </Debugging>
-      <LinkSmart Value="True"/>
-    </Linking>
     <Other>
       <CompilerMessages>
         <UseMsgFile Value="True"/>
@@ -438,8 +435,11 @@
 -dZEOS_DISABLE_INTERBASE
 -dZEOS_DISABLE_ORACLE
 -dZEOS_DISABLE_ASA
--Xs- -FW../../bin/$(TargetCPU)-$(TargetOS)-release/ttg.wpo -OWall"/>
+-dDEBUG"/>
       <CompilerPath Value="$(CompPath)"/>
+      <ExecuteAfter>
+        <ShowAllMessages Value="True"/>
+      </ExecuteAfter>
     </Other>
   </CompilerOptions>
 </CONFIG>

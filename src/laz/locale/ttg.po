@@ -1367,7 +1367,7 @@ msgid "Clashes of Activities"
 msgstr ""
 
 #: ttimetableform.actclashactivity.hint
-msgid "Clashes of subjects|Clashes of subjects"
+msgid "Clashes of Activities|Clashes of Activities"
 msgstr ""
 
 #: ttimetableform.actclashresource.caption

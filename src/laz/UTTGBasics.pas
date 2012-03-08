@@ -345,11 +345,8 @@ begin
   for I := 0 to Length - 1 do
   begin
     N := Random(Limit - I);
-    if N <> 0 then
-    begin
-      Result[I] := Numbers[N + I];
-      Numbers[N + I] := Numbers[I];
-    end;
+    Result[I] := Numbers[N + I];
+    Numbers[N + I] := Numbers[I];
   end;
 end;
 

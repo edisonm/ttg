@@ -501,7 +501,7 @@ inherited TimetableForm: TTimetableForm
     object ActClashActivity: TAction[4]
       AutoCheck = True
       Caption = 'Clashes of Activities'
-      Hint = 'Clashes of subjects|Clashes of subjects'
+      Hint = 'Clashes of Activities|Clashes of Activities'
       ImageIndex = 5
       OnExecute = ActClashActivityExecute
     end
