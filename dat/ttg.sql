@@ -1,6 +1,6 @@
 /* -*- mode: SQL; -*-
 
-  08/03/2012 16:13
+  08/03/2012 16:21
 
   Warning:
 
@@ -57,25 +57,6 @@ CREATE TABLE IF NOT EXISTS `Activity`(
   CONSTRAINT `ThemeActivity` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE RESTRICT
 ); /* Activities */
-CREATE TABLE IF NOT EXISTS `RestrictionType`(
-    `IdRestrictionType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Resource Restriction Type Id */,
-    `NaRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
-    `ColRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
-    `ValRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
-); /* Types of Resource Restrictions */
-CREATE TABLE IF NOT EXISTS `Restriction`(
-    `IdResource` INTEGER NOT NULL /* Resource Id */,
-    `IdDay` INTEGER NOT NULL /* Day Id */,
-    `IdHour` INTEGER NOT NULL /* Hour Id */,
-    `IdRestrictionType` INTEGER NOT NULL /* Resource Restriction Type Id */,
-  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdResource`,`IdDay`,`IdHour`),
-  CONSTRAINT `PeriodRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
-    REFERENCES `Period`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT,
-  CONSTRAINT `ResourceRestriction` FOREIGN KEY (`IdResource`)
-    REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT `RestrictionTypeRestriction` FOREIGN KEY (`IdRestrictionType`)
-    REFERENCES `RestrictionType`(`IdRestrictionType`) ON UPDATE RESTRICT ON DELETE RESTRICT
-); /* Resource Restrictions */
 CREATE TABLE IF NOT EXISTS `Availability`(
     `IdTheme` INTEGER NOT NULL /* Theme Id */,
     `IdResource` INTEGER NOT NULL /* Resource Id */,
@@ -96,6 +77,25 @@ CREATE TABLE IF NOT EXISTS `ResourceTypeLimit`(
   CONSTRAINT `ThemeResourceTypeLimit` FOREIGN KEY (`IdTheme`)
     REFERENCES `Theme`(`IdTheme`) ON UPDATE CASCADE ON DELETE CASCADE
 ); /* Limits for usage of Resource Types in Themes */
+CREATE TABLE IF NOT EXISTS `RestrictionType`(
+    `IdRestrictionType` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT /* Restriction Type Id */,
+    `NaRestrictionType` VARCHAR(10) NOT NULL UNIQUE /* Restriction Type Name */,
+    `ColRestrictionType` INTEGER NOT NULL /* Restriction Type Color */,
+    `ValRestrictionType` INTEGER NOT NULL /* Restriction Type Value */
+); /* Types of Restrictions */
+CREATE TABLE IF NOT EXISTS `Restriction`(
+    `IdResource` INTEGER NOT NULL /* Resource Id */,
+    `IdDay` INTEGER NOT NULL /* Day Id */,
+    `IdHour` INTEGER NOT NULL /* Hour Id */,
+    `IdRestrictionType` INTEGER NOT NULL /* Resource Restriction Type Id */,
+  CONSTRAINT `PrimaryKey` PRIMARY KEY(`IdResource`,`IdDay`,`IdHour`),
+  CONSTRAINT `PeriodRestriction` FOREIGN KEY (`IdDay`,`IdHour`)
+    REFERENCES `Period`(`IdDay`,`IdHour`) ON UPDATE RESTRICT ON DELETE RESTRICT,
+  CONSTRAINT `ResourceRestriction` FOREIGN KEY (`IdResource`)
+    REFERENCES `Resource`(`IdResource`) ON UPDATE CASCADE ON DELETE CASCADE,
+  CONSTRAINT `RestrictionTypeRestriction` FOREIGN KEY (`IdRestrictionType`)
+    REFERENCES `RestrictionType`(`IdRestrictionType`) ON UPDATE CASCADE ON DELETE RESTRICT
+); /* Restrictions */
 CREATE TABLE IF NOT EXISTS `Participant`(
     `IdActivity` INTEGER NOT NULL /* Category Id */,
     `IdResource` INTEGER NOT NULL /* Resource Id */,

@@ -93,55 +93,55 @@ inherited SourceBaseDataModule: TSourceBaseDataModule
     Left = 152
     Top = 148
   end
-  object TbRestrictionType: TZTable
-    Tag = 7
-    Connection = DbZConnection
-    TableName = 'RestrictionType'
-    IndexFieldNames = 'IdRestrictionType'
-    Left = 240
-    Top = 144
-  end
-  object DSRestrictionType: TDataSource
-    DataSet = TbRestrictionType
-    Left = 248
-    Top = 136
-  end
-  object TbRestriction: TZTable
-    Tag = 8
-    Connection = DbZConnection
-    TableName = 'Restriction'
-    IndexFieldNames = 'IdResource;IdDay;IdHour'
-    Left = 336
-    Top = 156
-  end
-  object DSRestriction: TDataSource
-    DataSet = TbRestriction
-    Left = 344
-    Top = 148
-  end
   object TbAvailability: TZTable
-    Tag = 9
+    Tag = 7
     Connection = DbZConnection
     TableName = 'Availability'
     IndexFieldNames = 'IdTheme;IdResource'
-    Left = 432
+    Left = 240
     Top = 144
   end
   object DSAvailability: TDataSource
     DataSet = TbAvailability
-    Left = 440
+    Left = 248
     Top = 136
   end
   object TbResourceTypeLimit: TZTable
-    Tag = 10
+    Tag = 8
     Connection = DbZConnection
     TableName = 'ResourceTypeLimit'
     IndexFieldNames = 'IdTheme;IdResourceType'
-    Left = 48
-    Top = 240
+    Left = 336
+    Top = 156
   end
   object DSResourceTypeLimit: TDataSource
     DataSet = TbResourceTypeLimit
+    Left = 344
+    Top = 148
+  end
+  object TbRestrictionType: TZTable
+    Tag = 9
+    Connection = DbZConnection
+    TableName = 'RestrictionType'
+    IndexFieldNames = 'IdRestrictionType'
+    Left = 432
+    Top = 144
+  end
+  object DSRestrictionType: TDataSource
+    DataSet = TbRestrictionType
+    Left = 440
+    Top = 136
+  end
+  object TbRestriction: TZTable
+    Tag = 10
+    Connection = DbZConnection
+    TableName = 'Restriction'
+    IndexFieldNames = 'IdResource;IdDay;IdHour'
+    Left = 48
+    Top = 240
+  end
+  object DSRestriction: TDataSource
+    DataSet = TbRestriction
     Left = 56
     Top = 232
   end
