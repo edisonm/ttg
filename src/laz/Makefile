@@ -126,3 +126,6 @@ getAPPVERSION:
 
 getAPPNAME:
 	@echo $(APPNAME)
+
+getTargetCPU:
+	@echo =$(shell $(FPC) -iSP)

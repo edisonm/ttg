@@ -7,9 +7,14 @@ TTGEXE?=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getTTGEXE)
 APPNAME=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getAPPNAME)
 APPVERSION=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getAPPVERSION)
 REVISION=$(shell cd $(TTGSRC) ; $(MAKE) -s getREVISION)
+ifeq ($(BuildMode),release)
+VERSION=$(APPVERSION)
+else
+VERSION=$(APPVERSION)-$(REVISION)-$(BuildMode)
+endif
 ARCHITECTURE=$(shell dpkg --print-architecture)
-INSTALLER=$(TTGDIR)/bin/$(BuildId)/ttg_$(APPVERSION)_$(ARCHITECTURE).deb
-FILES=$(INSTALLER)
+PKG=$(TTGDIR)/packages/ttg_$(VERSION)_$(ARCHITECTURE).deb
+FILES=$(PKG)
 DEBIAN=$(TTGDIR)/bin/$(BuildId)/debian
 CONTROL=$(DEBIAN)/DEBIAN/control
 TTGDESKTOP=$(DEBIAN)/usr/share/applications/ttg.desktop

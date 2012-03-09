@@ -13,7 +13,7 @@ TTGSQLITE3=dat/ttg.s3fpc
 
 
 all test:
-	cd $(CHAINSRC) ; for BuildMode in $(BUILDMODES); do \
+	cd $(PKGSRC) ; for BuildMode in $(BUILDMODES); do \
 	  $(MAKE) BuildMode=$$BuildMode $@ ; \
 	  done
 

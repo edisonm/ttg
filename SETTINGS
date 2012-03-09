@@ -4,19 +4,22 @@ TTGSQL=dat/ttg.sql
 
 BUILDMODES=reader debug release
 
-ISSSRC=src/iss
-
 TTGSRC=src/laz
 
 ifeq ($(shell uname -o),Cygwin)
 DBCONVERT=$(TTGDIR)/bin/dbconvert.exe
 FILES=$(TTGSQLITE3)
-CHAINSRC=$(ISSSRC)
+ISSSRC=src/iss
+PKGSRC=$(ISSSRC)
 else
+ifneq ($(shell which dpkg),)
+DEBSRC=src/deb
+PKGSRC=$(DEBSRC)
+else
+PKGSRC=$(TTGSRC)
+endif
 FILES=
-CHAINSRC=$(TTGSRC)
 endif
 
 TTGDPR=ttg.dpr
 TTGLPR=ttg.lpr
-

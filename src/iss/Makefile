@@ -12,17 +12,18 @@ default:
 
 endif
 
-all: $(INSTALLER)
+all: $(PKG)
 
-$(INSTALLER): $(ISS) $(TTGEXE)
+$(PKG): $(ISS) $(TTGEXE)
 	$(INNOIDE) $(ISSWIN)
 
 $(ISS): $(ISSTMPL) $(TTGEXE)
 	sed  -e s:'<v>Revision</v>':'$(REVISION)':g \
-	  -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
+	  -e s:'<v>AppVersion</v>':'$(VERSION)':g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g \
 	  -e s/'<v>ProgramFiles<\/v>'/'$(PROGRAMFILES)'/g \
-	  -e s/'<v>BuildId<\/v>'/'$(BuildId)'/g $< > $@
+	  -e s:'<v>InstBase</v>':'$(INSTBASE)':g \
+	  -e s:'<v>BuildId</v>':'$(BuildId)':g $< > $@
 
 $(TTGEXE):
 	cd $(TTGSRC) ; $(MAKE) BuildMode=$(BuildMode) all
@@ -35,7 +36,7 @@ test:
 	cd $(TTGSRC) ; $(MAKE) BuildMode=$(BuildMode) test
 
 cleanthis:
-	$(RM) $(ISS) $(TTGEXE) $(INSTALLER)
+	$(RM) $(ISS) $(TTGEXE) $(PKG)
 
 clean: cleanthis
 	cd $(TTGSRC) ; $(MAKE) clean
