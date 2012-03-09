@@ -17,6 +17,6 @@ VERSION=$(APPVERSION)
 else
 VERSION=$(APPVERSION)-$(REVISION)-$(BuildMode)
 endif
-INSTBASE=ttg_$(VERSION)_$(TargetCPU).exe
-PKG=$(TTGDIR)/packages/$(INSTBASE)
+INSTBASE=ttg_$(VERSION)_$(TargetCPU)
+PKG=$(TTGDIR)/packages/$(INSTBASE).exe
 FILES=$(PKG)

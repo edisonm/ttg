@@ -128,4 +128,4 @@ getAPPNAME:
 	@echo $(APPNAME)
 
 getTargetCPU:
-	@echo =$(shell $(FPC) -iSP)
+	@echo $(TargetCPU)
