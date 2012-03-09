@@ -97,19 +97,22 @@ test:
 	@echo $(DBCONVERT) /ACC2SQL $(TTGMDB) $(TTGMYSQL) mysql
 
 run:
-	cd $(TTGDIR)/bin/$(BuildId) ; $(TTGEXE)
+	cd $(TTGDIR)/bin ; $(TTGEXE)
 
 ex1:
-	cd $(TTGDIR)/bin/$(BuildId) ; $(TTGEXE) $(TTGDIR)/examples/Britanico2000.ttd
+	cd $(TTGDIR)/bin ; $(TTGEXE) $(TTGDIR)/examples/Britanico2000.ttd
 
 ex2:
-	cd $(TTGDIR)/bin/$(BuildId) ; $(TTGEXE) $(TTGDIR)/examples/Salamanca1999.ttd
+	cd $(TTGDIR)/bin ; $(TTGEXE) $(TTGDIR)/examples/Salamanca1999.ttd
 
 ex3:
-	cd $(TTGDIR)/bin/$(BuildId) ; $(TTGEXE) $(TTGDIR)/examples/original/Britanico2000.ttd
+	cd $(TTGDIR)/bin ; $(TTGEXE) $(TTGDIR)/examples/original/Britanico2000.ttd
 
 ex4:
-	cd $(TTGDIR)/bin/$(BuildId) ; $(TTGEXE) $(TTGDIR)/examples/origincal/Salamanca1999.ttd
+	cd $(TTGDIR)/bin ; $(TTGEXE) $(TTGDIR)/examples/origincal/Salamanca1999.ttd
+
+debug:
+	$(MAKE) BuildMode=debug ex2
 
 ide:
 	$(LAZIDE) ttg.lpi &
