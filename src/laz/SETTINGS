@@ -14,7 +14,6 @@ ABOUT=UAbout
 DSRCBASE=DSourceBase
 
 ifeq ($(shell uname -o),Cygwin)
-EXEEXT=.exe
 FILES=$(TTGMYSQL)
 DBCONVERTSRC=../../../DBConvert
 # Due to a bug in cygwin, I cannot use (absolute) dirs that contains ':'
@@ -22,7 +21,6 @@ DBCONVERTSRC=../../../DBConvert
 DBCONVERT=$(DBCONVERTSRC)/bin/dbconvert.exe
 LAZBUILD=$(LAZBASE)/lazbuild
 else
-EXEEXT=
 # LAZRES=lazres
 # LAZBUILD=lazbuild
 # LAZIDE=lazarus-ide

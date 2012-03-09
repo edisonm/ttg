@@ -3,7 +3,7 @@
 BuildMode?=release
 APPNAME=Automatic Timetable Generator
 APPVERSION=1.2.2
-REVISION:=$(shell svnversion|sed -e s/':'/'_'/g)
+REVISION:=$(shell cd $(TTGSRC) ; svnversion|sed -e s/':'/'_'/g)
 VERSION=$(APPVERSION)-$(REVISION)
 TargetCPU=$(shell $(FPC) -iSP)
 TargetOS=$(shell $(FPC) -iSO)
@@ -11,12 +11,14 @@ ifneq ($(BuildMode),release)
 BuildLabel=-$(BuildMode)
 endif
 BuildId=$(TargetCPU)-$(TargetOS)$(BuildLabel)
-TTGEXE=$(TTGDIR)/bin/ttg-$(BuildId)$(EXEEXT)
 ifeq ($(shell uname -o),Cygwin)
+EXEEXT=.exe
 LAZBASE=/cygdrive/c/lazarus32
 FPC=$(LAZBASE)/fpc/2.4.4/bin/i386-win32/fpc
 else
+EXEEXT=
 LAZBASE=/home/edison/apps/pascal/lazarus
 FPC=fpc
 endif
+TTGEXE=$(TTGDIR)/bin/ttg-$(BuildId)$(EXEEXT)
 OBJDIR=$(TTGDIR)/obj/$(BuildId)
