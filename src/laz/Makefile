@@ -5,6 +5,8 @@
 RELDIR:=../..
 TTGDIR:=$(shell cd $(RELDIR); pwd)
 
+TTGSRC=.
+
 include SETTINGS
 
 .PHONY: prjdel srcdel
@@ -36,7 +38,6 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
 ifneq ($(BuildMode),debug)
-	cp $(TTGEXE) $(TTGEXE).bak
 	strip --strip-all $(TTGEXE)
 	upx $(TTGEXE)
 endif
@@ -79,7 +80,7 @@ cleanthisw:
 endif
 
 cleanthis: cleanthisw
-	$(RM) -r $(TTGEXE) $(TTGDIR)/bin/* $(ABOUT).pas *.lrs
+	$(RM) -r $(TTGEXE) $(TTGDIR)/bin/* $(TTGDIR)/obj/* $(ABOUT).pas *.lrs
 
 clean: cleanthis
 

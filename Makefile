@@ -16,6 +16,7 @@ all test:
 	cd $(PKGSRC) ; for BuildMode in $(BUILDMODES); do \
 	  $(MAKE) BuildMode=$$BuildMode $@ ; \
 	  done
+	cd $(PKGSRC) && $(MAKE) catalog
 
 run ex1 ex2 ex3 ex4 ide clean:
 	cd $(TTGSRC) ; $(MAKE) $@

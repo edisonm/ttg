@@ -1,21 +1,22 @@
 # -*- mode: Makefile; -*-
 
-BuildMode?=release
 TTGSRC=../laz
-BuildId?=$(shell cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getBuildId)
-TTGEXE?=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getTTGEXE)
-APPNAME=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getAPPNAME)
-APPVERSION=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getAPPVERSION)
-REVISION=$(shell cd $(TTGSRC) ; $(MAKE) -s getREVISION)
+
+include $(TTGSRC)/COMMON
+
+ARCH=$(shell dpkg --print-architecture)
+
+BASE_PKGTTG=ttg$(BuildLabel)_$(VERSION)_$(ARCH)
+
+PKGDIR=$(TTGDIR)/packages/
+PKGTTG=$(PKGDIR)$(BASE_PKGTTG).deb
 ifeq ($(BuildMode),release)
-VERSION=$(APPVERSION)
-else
-VERSION=$(APPVERSION)-$(REVISION)-$(BuildMode)
+PKGTTG_DOC=$(PKGDIR)$(BASE_PKGTTG_DOC).deb
+BASE_PKGTTG_DOC=ttg-doc_$(VERSION)_all
 endif
-ARCHITECTURE=$(shell dpkg --print-architecture)
-PKG=$(TTGDIR)/packages/ttg_$(VERSION)_$(ARCHITECTURE).deb
-FILES=$(PKG)
-DEBIAN=$(TTGDIR)/bin/$(BuildId)/debian
-CONTROL=$(DEBIAN)/DEBIAN/control
-TTGDESKTOP=$(DEBIAN)/usr/share/applications/ttg.desktop
-TTGTARGET=$(DEBIAN)/usr/bin/ttg
+
+CATALOG=$(TTGDIR)/packages/Packages.gz
+
+PACKAGES=$(PKGTTG) $(PKGTTG_DOC)
+FILES=$(PACKAGES)
+DEBIAN=$(OBJDIR)/debian

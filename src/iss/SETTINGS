@@ -1,22 +1,15 @@
 # -*- mode: Makefile; -*-
 
-BuildMode?=release
 TTGSRC=../laz
-BuildId?=$(shell cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getBuildId)
-TTGEXE?=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getTTGEXE)
+
+include $(TTGSRC)/COMMON
+
+ARCH=$(TargetCPU)
+PKGBASE=ttg$(BuildLabel)_$(VERSION)_$(ARCH)
+PKG=$(TTGDIR)/packages/$(PKGBASE).exe
+FILES=$(PKG)
+
 INNOIDE="$(PROGRAMFILES)/Inno Setup 5/ISCC.exe"
 ISSTMPL=$(TTGDIR)/src/iss/ttg.iss.tmpl
-ISS=$(TTGDIR)/bin/$(BuildId)/ttg.iss
+ISS=$(OBJDIR)/ttg.iss
 ISSWIN='$(shell cygpath -w $(ISS))'
-APPNAME=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getAPPNAME)
-APPVERSION=$(shell  cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getAPPVERSION)
-REVISION=$(shell cd $(TTGSRC) ; $(MAKE) -s getREVISION)
-TargetCPU=$(shell cd $(TTGSRC) ; $(MAKE) -s BuildMode=$(BuildMode) getTargetCPU)
-ifeq ($(BuildMode),release)
-VERSION=$(APPVERSION)
-else
-VERSION=$(APPVERSION)-$(REVISION)-$(BuildMode)
-endif
-INSTBASE=ttg_$(VERSION)_$(TargetCPU)
-PKG=$(TTGDIR)/packages/$(INSTBASE).exe
-FILES=$(PKG)

@@ -1,9 +1,7 @@
 # -*- mode: Makefile; -*-
 
-BuildMode?=release
-APPNAME=Automatic Timetable Generator
-APPVERSION=1.2.2
-REVISION:=$(shell svnversion|sed -e s/':'/'_'/g)
+include $(TTGSRC)/COMMON
+
 BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ %Y)
 
 UNITS:=$(shell cat ttg.lpi |grep '<Filename Value=".*\.pas"/>'|sed -e s:'^.*<Filename Value="\(.*\)\.pas"/>.*':'\1':g)
@@ -17,43 +15,27 @@ DSRCBASE=DSourceBase
 
 ifeq ($(shell uname -o),Cygwin)
 EXEEXT=.exe
-LAZBASE=/cygdrive/c/lazarus32
-FPC=$(LAZBASE)/fpc/2.4.4/bin/i386-win32/fpc
 FILES=$(TTGMYSQL)
 DBCONVERTSRC=../../../DBConvert
-
 # Due to a bug in cygwin, I cannot use (absolute) dirs that contains ':'
 #DBCONVERT=$(shell cd $(DBCONVERTSRC) ; $(MAKE) -s getDBConvert)
 DBCONVERT=$(DBCONVERTSRC)/bin/dbconvert.exe
-
 LAZBUILD=$(LAZBASE)/lazbuild
-
 else
-
-LAZBASE=/home/edison/apps/pascal/lazarus
 EXEEXT=
-FPC=fpc
 # LAZRES=lazres
 # LAZBUILD=lazbuild
 # LAZIDE=lazarus-ide
-
 LAZBUILD=$(LAZBASE)/lazbuild --ws=qt
-
 endif
 
 LAZIDE=$(LAZBASE)/lazarus
 LAZRES=$(LAZBASE)/tools/lazres
 LRSDEP=$(LAZRES)
 
-TargetCPU=$(shell $(FPC) -iSP)
-TargetOS=$(shell $(FPC) -iSO)
-BuildId=$(TargetCPU)-$(TargetOS)-$(BuildMode)
-
 TTGMDB=$(RELDIR)/dat/ttg.mdb
 TTGSQL=$(RELDIR)/dat/ttg.sql
 TTGMYSQL=$(RELDIR)/dat/ttg.mysql
-
-TTGEXE=$(TTGDIR)/bin/$(BuildId)/ttg$(EXEEXT)
 
 FILES=$(TTGEXE)
 

@@ -21,19 +21,27 @@
       <MinorVersionNr Value="2"/>
       <RevisionNr Value="2"/>
       <BuildNr Value="314"/>
-      <Language Value="040A"/>
       <CharSet Value="04B0"/>
       <StringTable LegalCopyright="2012, Edison Mera" ProductVersion="" FileDescription="Timetable Generator System"/>
     </VersionInfo>
+    <MacroValues Count="1">
+      <Macro1 Name="BuildLabel" Value="-debug"/>
+    </MacroValues>
     <BuildModes Count="3">
       <Item1 Name="debug" Default="True"/>
       <Item2 Name="release">
+        <MacroValues Count="1">
+          <Macro1 Name="BuildLabel"/>
+        </MacroValues>
         <CompilerOptions>
           <Version Value="11"/>
+          <Target>
+            <Filename Value="../../bin/ttg-$(TargetCPU)-$(TargetOS)"/>
+          </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
             <OtherUnitFiles Value="../../../zeosdbo/packages/lazarus;../../../zeosdbo/src/core;../../../zeosdbo/src/dbc;../../../zeosdbo/src/parsesql;../../../zeosdbo/src/plain;../../../zeosdbo/src/component;../../../multithreadprocs;../../../DBConvert/auxiliary"/>
-            <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-release"/>
+            <UnitOutputDirectory Value="../../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)"/>
             <SrcPath Value="../../../GLScene/Source"/>
           </SearchPaths>
           <CodeGeneration>
@@ -60,18 +68,24 @@
 -dZEOS_DISABLE_INTERBASE
 -dZEOS_DISABLE_ORACLE
 -dZEOS_DISABLE_ASA
--Xs- -FW../../bin/$(TargetCPU)-$(TargetOS)-release/ttg.wpo -OWall"/>
+-Xs- -FW../../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)/ttg.wpo -OWall"/>
             <CompilerPath Value="$(CompPath)"/>
           </Other>
         </CompilerOptions>
       </Item2>
       <Item3 Name="reader">
+        <MacroValues Count="1">
+          <Macro1 Name="BuildLabel" Value="-reader"/>
+        </MacroValues>
         <CompilerOptions>
           <Version Value="11"/>
+          <Target>
+            <Filename Value="../../bin/ttg-$(TargetCPU)-$(TargetOS)-reader"/>
+          </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
             <OtherUnitFiles Value="../../../zeosdbo/packages/lazarus;../../../zeosdbo/src/core;../../../zeosdbo/src/dbc;../../../zeosdbo/src/parsesql;../../../zeosdbo/src/plain;../../../zeosdbo/src/component;../../../multithreadprocs;../../../DBConvert/auxiliary"/>
-            <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-reader"/>
+            <UnitOutputDirectory Value="../../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)"/>
           </SearchPaths>
           <Parsing>
             <SyntaxOptions>
@@ -103,7 +117,7 @@
 -dZEOS_DISABLE_INTERBASE
 -dZEOS_DISABLE_ORACLE
 -dZEOS_DISABLE_ASA
--Xs- -FW../../bin/$(TargetCPU)-$(TargetOS)-reader/ttg.wpo -OWall"/>
+-Xs- -FW../../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)/ttg.wpo -OWall"/>
             <CompilerPath Value="$(CompPath)"/>
             <ExecuteAfter>
               <ShowAllMessages Value="True"/>
@@ -406,10 +420,13 @@
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="11"/>
+    <Target>
+      <Filename Value="../../bin/ttg-$(TargetCPU)-$(TargetOS)-debug"/>
+    </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
       <OtherUnitFiles Value="../../../zeosdbo/packages/lazarus;../../../zeosdbo/src/core;../../../zeosdbo/src/dbc;../../../zeosdbo/src/parsesql;../../../zeosdbo/src/plain;../../../zeosdbo/src/component;../../../multithreadprocs;../../../DBConvert/auxiliary"/>
-      <UnitOutputDirectory Value="../../bin/$(TargetCPU)-$(TargetOS)-debug"/>
+      <UnitOutputDirectory Value="../../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)"/>
       <SrcPath Value="$(LazarusDir)fpc/$(FPCVer)/source/rtl/objpas;$(LazarusDir)fpc/$(FPCVer)/source/rtl/inc;$(LazarusDir)fpc/$(FPCVer)/source/rtl/$(TargetOS)"/>
     </SearchPaths>
     <Parsing>

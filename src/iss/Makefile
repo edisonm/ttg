@@ -14,15 +14,18 @@ endif
 
 all: $(PKG)
 
+catalog:
+
 $(PKG): $(ISS) $(TTGEXE)
 	$(INNOIDE) $(ISSWIN)
 
 $(ISS): $(ISSTMPL) $(TTGEXE)
-	sed  -e s:'<v>Revision</v>':'$(REVISION)':g \
-	  -e s:'<v>AppVersion</v>':'$(VERSION)':g \
+	sed -e s:'<v>Revision</v>':'$(REVISION)':g \
+	  -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g \
 	  -e s/'<v>ProgramFiles<\/v>'/'$(PROGRAMFILES)'/g \
-	  -e s:'<v>InstBase</v>':'$(INSTBASE)':g \
+	  -e s:'<v>PkgBase</v>':'$(PKGBASE)':g \
+	  -e s:'<v>BuildLabel</v>':'$(PKGBASE)':g \
 	  -e s:'<v>BuildId</v>':'$(BuildId)':g $< > $@
 
 $(TTGEXE):
@@ -35,8 +38,7 @@ test:
 	@echo REVISION=$(REVISION)
 	cd $(TTGSRC) ; $(MAKE) BuildMode=$(BuildMode) test
 
-cleanthis:
-	$(RM) $(ISS) $(TTGEXE) $(PKG)
+clean:
+	$(RM) $(ISS) $(PKG)
 
-clean: cleanthis
-	cd $(TTGSRC) ; $(MAKE) clean
+
