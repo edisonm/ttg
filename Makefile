@@ -17,14 +17,15 @@ all test:
 	  $(MAKE) BuildMode=$$BuildMode $@ ; \
 	  done
 	cd $(PKGSRC) && $(MAKE) catalog
+ifneq ($(FILES),)
+	$(MAKE) $(FILES)
+endif
 
 run ex1 ex2 ex3 ex4 ide clean:
 	cd $(TTGSRC) ; $(MAKE) $@
 
 debug:
 	cd $(TTGSRC) ; $(MAKE) BuildMode=debug ex3
-
-all: $(FILES)
 
 $(TTGSQLITE3): $(TTGSQL)
 	$(RM) $@
