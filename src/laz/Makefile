@@ -109,7 +109,7 @@ ex3:
 	cd $(TTGDIR)/bin ; $(TTGEXE) $(TTGDIR)/examples/original/Britanico2000.ttd
 
 ex4:
-	cd $(TTGDIR)/bin ; $(TTGEXE) $(TTGDIR)/examples/origincal/Salamanca1999.ttd
+	cd $(TTGDIR)/bin ; $(TTGEXE) $(TTGDIR)/examples/original/Salamanca1999.ttd
 
 debug:
 	$(MAKE) BuildMode=debug ex2

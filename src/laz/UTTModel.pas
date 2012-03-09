@@ -1630,7 +1630,7 @@ procedure TTimetable.Mutate;
       DeltaActivityResourceValue(Activity2, Participant2, Resource, -DeltaNumResource);
     end;
   var
-    Free11, Free21, Free12, Free22, Limit, NumFixeds1, NumFixeds2, Offset,
+    Free11, Free21, Free12, Free22, Limit, NumFixeds1, NumFixeds2, Offset1, Offset2,
     Theme, Activities, Resource1, Resource2, ResourceType, Activity1, Activity2,
     DeltaNumResource1, DeltaNumResource2, Participant11, Participant21,
     Participant12, Participant22, NumResource11, NumResource21, NumResource12,
@@ -1648,24 +1648,22 @@ procedure TTimetable.Mutate;
         Assert(Activity1<>Activity2);
         NumFixeds1 := FActivityToNumFixeds[Activity1];
         NumFixeds2 := FActivityToNumFixeds[Activity2];
-        repeat
-          Offset := Random(Length(FTmplActivityToResources[Activity1]) - NumFixeds1);
-          Participant11 := NumFixeds1 + Offset;
-          NumResource11 := FTTActivityToNumResources[Activity1, Participant11];
-          Participant21 := NumFixeds2 + Offset;
-          NumResource21 := FTTActivityToNumResources[Activity2, Participant21];
-        until NumResource11 + NumResource21 > 0;
+        Offset1 := Random(Length(FTmplActivityToResources[Activity1]) - NumFixeds1);
+        Participant11 := NumFixeds1 + Offset1;
+        NumResource11 := FTTActivityToNumResources[Activity1, Participant11];
+        Participant21 := NumFixeds2 + Offset1;
+        NumResource21 := FTTActivityToNumResources[Activity2, Participant21];
         Resource1 := FTmplActivityToResources[Activity1, Participant11];
         ResourceType := FResourceToResourceType[Resource1];
         Limit := FThemeResourceTypeToLimit[Theme, ResourceType];
         repeat
-          Offset := Random(Length(FTmplActivityToResources[Activity1]) - NumFixeds1);
-          Participant12 := NumFixeds1 + Offset;
+          Offset2 := Random(Length(FTmplActivityToResources[Activity1]) - NumFixeds1);
+          Participant12 := NumFixeds1 + Offset2;
           Resource2 := FTmplActivityToResources[Activity2, Participant12];
           NumResource12 := FTTActivityToNumResources[Activity1, Participant12];
-          Participant22 := NumFixeds2 + Offset;
+          Participant22 := NumFixeds2 + Offset2;
           NumResource22 := FTTActivityToNumResources[Activity2, Participant22];
-        until (ResourceType = FResourceToResourceType[Resource2]) or (NumResource12 + NumResource22 > 0);
+        until (ResourceType = FResourceToResourceType[Resource2]);
         Free11 := Limit - FTablingInfo.FActivityResourceTypeToNumber[Activity1, ResourceType] + NumResource12;
         Free21 := Limit - FTablingInfo.FActivityResourceTypeToNumber[Activity2, ResourceType] + NumResource22;
         DeltaNumResource1 := RandomUniform(-Min(NumResource11, Free21), Min(NumResource21, Free11));
