@@ -1630,10 +1630,11 @@ procedure TTimetable.Mutate;
       DeltaActivityResourceValue(Activity2, Participant2, Resource, -DeltaNumResource);
     end;
   var
-    NumFixeds1, NumFixeds2, Offset, Theme, Activities, Resource1, Resource2,
-    DeltaNumResource1, DeltaNumResource2, ResourceType, Activity1, Activity2,
-    Participant11, Participant21, Participant12, Participant22, Free1, Free2,
-    Limit, NumResource11, NumResource21, NumResource12, NumResource22: Integer;
+    Free11, Free21, Free12, Free22, Limit, NumFixeds1, NumFixeds2, Offset,
+    Theme, Activities, Resource1, Resource2, ResourceType, Activity1, Activity2,
+    DeltaNumResource1, DeltaNumResource2, Participant11, Participant21,
+    Participant12, Participant22, NumResource11, NumResource21, NumResource12,
+    NumResource22: Integer;
     ThemeActivities: TDynamicIntegerArray;
   begin
      with TTimetableModel(Model) do
@@ -1661,43 +1662,18 @@ procedure TTimetable.Mutate;
           Offset := Random(Length(FTmplActivityToResources[Activity1]) - NumFixeds1);
           Participant12 := NumFixeds1 + Offset;
           Resource2 := FTmplActivityToResources[Activity2, Participant12];
-        until ResourceType = FResourceToResourceType[Resource2];
-        NumResource12 := FTTActivityToNumResources[Activity1, Participant12];
-        Participant22 := NumFixeds2 + Offset;
-        NumResource22 := FTTActivityToNumResources[Activity2, Participant22];
-        if (Resource1 = Resource2) or (NumResource12 + NumResource22 = 0) then
-        begin
-          Free1 := Limit - FTablingInfo.FActivityResourceTypeToNumber[Activity1, ResourceType];
-          Free2 := Limit - FTablingInfo.FActivityResourceTypeToNumber[Activity2, ResourceType];
-          if (Free1 > 0) or (Free2 > 0) then
-          begin
-            DeltaNumResource1 :=
-              RandomUniform(-Min(NumResource11, Free2), Min(NumResource21, Free1) - 1);
-            if DeltaNumResource1 >= 0 then Inc(DeltaNumResource1);
-            SwapResource(Activity1, Activity2, Participant11, Participant21, Resource1, DeltaNumResource1);
-          end;
-        end
-        else
-        begin
-          Free1 := Limit - FTablingInfo.FActivityResourceTypeToNumber[Activity1, ResourceType] + NumResource12;
-          Free2 := Limit - FTablingInfo.FActivityResourceTypeToNumber[Activity2, ResourceType] + NumResource22;
-          if (Free1 > 0) or (Free2 > 0) then
-          begin
-            DeltaNumResource1 :=
-              RandomUniform(-Min(NumResource11, Free2), Min(NumResource21, Free1) - 1);
-            if DeltaNumResource1 >= 0 then Inc(DeltaNumResource1);
-            SwapResource(Activity1, Activity2, Participant11, Participant21, Resource1, DeltaNumResource1);
-            Dec(Free1, NumResource12 + DeltaNumResource1);
-            Dec(Free2, NumResource22 - DeltaNumResource1);
-            if (Free1 > 0) or (Free2 > 0) then
-            begin
-              DeltaNumResource2 :=
-                RandomUniform(-Min(NumResource12, Free2), Min(NumResource22, Free1) - 1);
-              if DeltaNumResource2 >= 0 then Inc(DeltaNumResource1);
-              SwapResource(Activity1, Activity2, Participant12, Participant22, Resource2, DeltaNumResource1);
-            end;
-          end;
-        end;
+          NumResource12 := FTTActivityToNumResources[Activity1, Participant12];
+          Participant22 := NumFixeds2 + Offset;
+          NumResource22 := FTTActivityToNumResources[Activity2, Participant22];
+        until (ResourceType = FResourceToResourceType[Resource2]) or (NumResource12 + NumResource22 > 0);
+        Free11 := Limit - FTablingInfo.FActivityResourceTypeToNumber[Activity1, ResourceType] + NumResource12;
+        Free21 := Limit - FTablingInfo.FActivityResourceTypeToNumber[Activity2, ResourceType] + NumResource22;
+        DeltaNumResource1 := RandomUniform(-Min(NumResource11, Free21), Min(NumResource21, Free11));
+        Free12 := Free11 - NumResource12 - DeltaNumResource1;
+        Free22 := Free21 - NumResource22 + DeltaNumResource1;
+        DeltaNumResource2 := RandomUniform(-Min(NumResource12, Free22), Min(NumResource22, Free12));
+        SwapResource(Activity1, Activity2, Participant11, Participant21, Resource1, DeltaNumResource1);
+        SwapResource(Activity1, Activity2, Participant12, Participant22, Resource2, DeltaNumResource1);
       end;
    end;
 begin
@@ -2241,7 +2217,7 @@ begin
     WriteLn(Format('  Incorrect RestrictionValue: %s*%s=%d<0', [
                      TIntegerArrayHandler.ValueToString(RestrictionTypeToResourceCount),
                      TIntegerArrayHandler.ValueToString(TTimetableModel(Model).FRestrictionTypeToValue),
-                 FResRestrictionValue2]));
+                 RestrictionValue2]));
   if BrokenSession1 <> BrokenSession2 then
     WriteLn(Format('  Incorrect BrokenSession: %d<>%d', [BrokenSession1, BrokenSession2]))
   else if BrokenSession2 < 0 then
