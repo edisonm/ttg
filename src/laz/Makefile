@@ -36,7 +36,8 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
 $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc
-	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
+	sed -e s:'^ .*<BuildNr Value=\"[0-9].*\"/>':'      <BuildNr Value="$(REVISION)"/>':g ttg.lpi > ttg_.lpi
+	$(LAZBUILD) --build-mode=$(BuildMode) ttg_.lpi
 ifneq ($(BuildMode),debug)
 	strip --strip-all $(TTGEXE)
 	upx $(TTGEXE)
