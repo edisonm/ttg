@@ -19,19 +19,23 @@ type
   private
     FIndividual: TIndividual;
   protected
-    function GetProgress: Integer; virtual; abstract;
-    function GetMax: Integer; virtual; abstract;
+    FPosition: Integer;
+    FOffset: Integer;
+    FMaxPosition: Integer;
+    function GetProgress: Integer; virtual;
+    function GetMax: Integer; virtual;
+    function GetMaxPosition: Integer; virtual; abstract;
     property Individual: TIndividual read FIndividual;
   public
     constructor Create(AIndividual: TIndividual); overload;
-    function Clone: TBookmark; virtual; abstract;
-    procedure First; virtual; abstract;
-    procedure Next; virtual; abstract;
-    procedure Rewind; virtual; abstract;
+    procedure First; virtual;
+    procedure Next; virtual;
+    procedure Rewind; virtual;
     function Move: Integer; virtual; abstract;
     function Undo: Integer; virtual; abstract;
-    function Eof: Boolean; virtual; abstract;
+    function Eof: Boolean; virtual;
     property Progress: Integer read GetProgress;
+    property MaxPosition: Integer read FMaxPosition;
     property Max: Integer read GetMax;
   end;
 
@@ -87,7 +91,6 @@ type
     function GetMax: Integer; override;
   public
     constructor Create(ABookmark1, ABookmark2: TBookmark); overload;
-    function Clone: TBookmark; override;
     procedure First; override;
     procedure Next; override;
     procedure Rewind; override;
@@ -105,6 +108,40 @@ implementation
 constructor TBookmark.Create(AIndividual: TIndividual);
 begin
   FIndividual := AIndividual;
+  FMaxPosition := GetMaxPosition;
+  First;
+end;
+
+procedure TBookmark.First;
+begin
+  FPosition := 0;
+  FOffset := 0;
+end;
+
+procedure TBookmark.Next;
+begin
+  Inc(FPosition);
+end;
+
+function TBookmark.GetProgress: Integer;
+begin
+  Result := FOffset + FPosition;
+end;
+
+procedure TBookmark.Rewind;
+begin
+  Inc(FOffset, FPosition);
+  FPosition := 0;
+end;
+
+function TBookmark.Eof: Boolean;
+begin
+  Result := FPosition = MaxPosition;
+end;
+
+function TBookmark.GetMax: Integer;
+begin
+  Result := FOffset + FMaxPosition;
 end;
 
 { TIndividual }
@@ -133,11 +170,6 @@ begin
   inherited Create(ABookmark1.Individual);
   FBookmark1 := ABookmark1;
   FBookmark2 := ABookmark2;
-end;
-
-function TMultiBookmark.Clone: TBookmark;
-begin
-  Result := TMultiBookmark.Create(FBookmark1.Clone, FBookmark2.Clone);
 end;
 
 procedure TMultiBookmark.First;
