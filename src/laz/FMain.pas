@@ -744,10 +744,6 @@ begin
       Values['Language'] := 'es'
     else
       Values['Language'] := '';
-{
-    Values['MessageViewForm_MemSummary_Height'] :=
-      IntToStr(MessageViewForm.MemSummary.Height);
-}
   end;
 end;
 
