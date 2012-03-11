@@ -173,8 +173,7 @@ type
     FTTSessionToPeriod: TDynamicIntegerArray;
     FTTActivityToNumResources: TDynamicIntegerArrayArray;
     procedure CrossGroup(Timetable2: TTimetable; AGroup: Integer);
-    procedure DeltaActivityResourceValue(Activity, Participant, Resource,
-                                         DeltaNumResource: Integer);
+    procedure DeltaActivityParticipantValue(Activity, Participant, DeltaNumResource: Integer);
     procedure DeltaResourceValue(Period1, Period2, Resource, NumResource: Integer);
     procedure DeltaResourcesValue(Sign, Period1, Period2: Integer;
                                   Resources, NumResources: TDynamicIntegerArray);
@@ -1371,14 +1370,15 @@ begin
 end;
 
 
-procedure TTimetable.DeltaActivityResourceValue(Activity, Participant, Resource, DeltaNumResource: Integer);
+procedure TTimetable.DeltaActivityParticipantValue(Activity, Participant, DeltaNumResource: Integer);
 var
-  Session, ActivitySession, Duration, Period1, Period2: Integer;
+  Session, ActivitySession, Resource, Duration, Period1, Period2: Integer;
 begin
   if DeltaNumResource <> 0 then
   begin
     with TTimetableModel(Model) do
     begin
+      Resource := FTmplActivityToResources[Activity, Participant];
       for ActivitySession := 0 to High(FActivityToSessions[Activity]) do
       begin
         Session := FActivityToSessions[Activity, ActivitySession];
@@ -1667,12 +1667,6 @@ procedure TTimetable.Mutate;
     end;
   end;
   procedure SwapRandomResources;
-    procedure SwapResource(Activity1, Activity2, Participant1, Participant2,
-                           Resource, DeltaNumResource: Integer);
-    begin
-      DeltaActivityResourceValue(Activity1, Participant1, Resource, +DeltaNumResource);
-      DeltaActivityResourceValue(Activity2, Participant2, Resource, -DeltaNumResource);
-    end;
   var
     Themes, Theme, Free11, Free21, Free12, Free22, NumFixeds1, NumFixeds2,
     Activities, Resource1, Resource2, ResourceType1, Activity1, Activity2,
@@ -1716,8 +1710,10 @@ procedure TTimetable.Mutate;
         Free12 := Free11 - NumResource12 - DeltaNumResource1;
         Free22 := Free21 - NumResource22 + DeltaNumResource1;
         DeltaNumResource2 := RandomUniform(-Min(NumResource12, Free22), Min(NumResource22, Free12));
-        SwapResource(Activity1, Activity2, Participant11, Participant21, Resource1, DeltaNumResource1);
-        SwapResource(Activity1, Activity2, Participant12, Participant22, Resource2, DeltaNumResource2);
+        DeltaActivityParticipantValue(Activity1, Participant11, +DeltaNumResource1);
+        DeltaActivityParticipantValue(Activity2, Participant21, -DeltaNumResource1);
+        DeltaActivityParticipantValue(Activity1, Participant12, +DeltaNumResource2);
+        DeltaActivityParticipantValue(Activity2, Participant22, -DeltaNumResource2);
       end;
     end;
    end;
@@ -1848,10 +1844,11 @@ end;
 
 function TTimetable.NewBookmark: TBookmark;
 begin
-  if Random(2) = 0 then
-    Result := TTTBookmark1.Create(Self)
-  else
-    Result := TTTBookmark2.Create(Self);
+  case Random(3) of
+    0: Result := TTTBookmark1.Create(Self);
+    1: Result := TTTBookmark2.Create(Self);
+    2: Result := TTTBookmarkTheme.Create(Self);
+  end;
 end;
 
 destructor TTimetable.Destroy;
@@ -2538,8 +2535,8 @@ begin
   FThemeIndex := 0;
   FThemeActivity1 := 0;
   FThemeActivity2 := 1;
-  FParticipant11 := 0;
-  FParticipant12 := 0;
+  FParticipant11 := NumFixeds1;
+  FParticipant12 := NumFixeds1;
   FDeltaNumResource1 := -Min(NumResource11, Free21);
   FDeltaNumResource2 := -Min(NumResource12, Free22);
 end;
@@ -2549,10 +2546,10 @@ begin
   with TimetableModel, Timetable do
   begin
     Inc(FDeltaNumResource2);
-    if FDeltaNumResource2 = Min(NumResource22, Free12) then
+    if FDeltaNumResource2 > Min(NumResource22, Free12) then
     begin
       Inc(FDeltaNumResource1);
-      if FDeltaNumResource1 = Min(NumResource21, Free11) then
+      if FDeltaNumResource1 > Min(NumResource21, Free11) then
       begin
         Inc(FParticipant12);
         if FParticipant12 = Length(FTmplActivityToResources[Activity1]) then
@@ -2569,6 +2566,7 @@ begin
               Inc(FThemeActivity1);
               if FThemeActivity1 = Length(FThemeToActivities[Theme]) - 1 then
               begin
+                inherited;
                 Inc(FThemeIndex);
                 if FThemeIndex = Length(FThemeWithMobileResources) then
                 begin
@@ -2586,7 +2584,6 @@ begin
       end;
       FDeltaNumResource2 := -Min(NumResource12, Free22);
     end;
-    inherited;
   end;
 end;
 
@@ -2613,6 +2610,16 @@ end;
 function TTTBookmarkTheme.GetResource2: Integer;
 begin
   Result := TimetableModel.FTmplActivityToResources[Activity1, FParticipant12];
+end;
+
+function TTTBookmarkTheme.GetNumFixeds1: Integer;
+begin
+  Result := TimetableModel.FActivityToNumFixeds[Activity1];
+end;
+
+function TTTBookmarkTheme.GetNumFixeds2: Integer;
+begin
+  Result := TimetableModel.FActivityToNumFixeds[Activity2];
 end;
 
 function TTTBookmarkTheme.GetParticipant21: Integer;
@@ -2682,24 +2689,26 @@ begin
   Result := Timetable.TTActivityToNumResources[Activity2, Participant22];
 end;
 
-function TTTBookmarkTheme.GetNumFixeds1: Integer;
-begin
-  Result := TimetableModel.FActivityToNumFixeds[Activity1];
-end;
-
-function TTTBookmarkTheme.GetNumFixeds2: Integer;
-begin
-  Result := TimetableModel.FActivityToNumFixeds[Activity2];
-end;
-
 function TTTBookmarkTheme.Move: Integer;
 begin
-  
+  with Timetable do
+  begin
+    DeltaActivityParticipantValue(Activity1, Participant11, +FDeltaNumResource1);
+    DeltaActivityParticipantValue(Activity2, Participant21, -FDeltaNumResource1);
+    DeltaActivityParticipantValue(Activity1, Participant12, +FDeltaNumResource2);
+    DeltaActivityParticipantValue(Activity2, Participant22, -FDeltaNumResource2);
+  end;
 end;
 
 function TTTBookmarkTheme.Undo: Integer;
 begin
-
+  with Timetable do
+  begin
+    DeltaActivityParticipantValue(Activity2, Participant22, +FDeltaNumResource2);
+    DeltaActivityParticipantValue(Activity1, Participant12, -FDeltaNumResource2);
+    DeltaActivityParticipantValue(Activity2, Participant21, +FDeltaNumResource1);
+    DeltaActivityParticipantValue(Activity1, Participant11, -FDeltaNumResource1);
+  end;
 end;
 
 function TTTBookmarkTheme.Eof: Boolean;

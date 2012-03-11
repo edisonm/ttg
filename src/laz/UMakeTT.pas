@@ -92,6 +92,7 @@ begin
     1: Bookmarks[i] := TTTBookmark1.Create(TTimetable(Individual));
     2: Bookmarks[i] := TTTBookmark2.Create(TTimetable(Individual));
     3: Bookmarks[i] := TTTBookmark3.Create(TTimetable(Individual));
+    4: Bookmarks[i] := TTTBookmarkTheme.Create(TTimetable(Individual));
     end;
     Inc(i);
   end;

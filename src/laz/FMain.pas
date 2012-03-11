@@ -163,7 +163,7 @@ type
     procedure SaveToFile(const AFileName: string);
     function ConfirmOperation: boolean;
 {$IFNDEF READER}
-    procedure ElaborarTimetables(const SIdTimetables: string);
+    procedure MakeTimetables(const SIdTimetables: string);
 {$ENDIF}
     procedure RegisterSoftware;
     procedure ProtectSoftware;
@@ -387,7 +387,7 @@ begin
     SIdTimetables := IntToStr(MasterDataModule.NewIdTimetable);
     if not InputQuery(SGenerateTimetables, STimetableCodesToGenerate, SIdTimetables) then
       Exit;
-    ElaborarTimetables(SIdTimetables);
+    MakeTimetables(SIdTimetables);
   finally
     ActMakeTimetable.Checked := False;
   end;
@@ -395,7 +395,7 @@ begin
 end;
 
 {$IFNDEF READER}
-procedure TMainForm.ElaborarTimetables(const SIdTimetables: string);
+procedure TMainForm.MakeTimetables(const SIdTimetables: string);
 var
   ValidIds, WrongIds: TDynamicIntegerArray;
   procedure ProcessIdList(const IdList: string);
