@@ -21,6 +21,7 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure TbThemeCalcFields(DataSet: TDataSet);
+    procedure TbTimetableCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     procedure SetFieldCaption(ADataSet: TDataSet);
@@ -80,21 +81,6 @@ begin
   TbParticipant.Filter := 'IdResourceType='
     + IntToStr(TbResourceType.FindField('IdResourceType').AsInteger);
   TbAvailability.Filter := TbParticipant.Filter;
-end;
-
-procedure TSourceDataModule.TbThemeCalcFields(DataSet: TDataSet);
-var
-  v: Variant;
-begin
-  try
-    v := DataSet['Composition'];
-    if VarIsNull(v) then
-      DataSet['Duration'] := 0
-    else
-      DataSet['Duration'] := CompositionToDuration(v);
-  except
-    DataSet['Duration'] := 0;
-  end
 end;
 
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
@@ -266,6 +252,41 @@ begin
     FieldName := 'Duration';
     DataSet := TbTheme;
   end;
+  Field := TTimeField.Create(TbTimetable.Owner);
+  with Field do
+  begin
+    FieldKind := fkCalculated;
+    DisplayWidth := 5;
+    FieldName := 'Elapsed';
+    DisplayLabel := SElapsedTime;
+    DataSet := TbTimetable;
+  end;
+end;
+
+procedure TSourceDataModule.TbThemeCalcFields(DataSet: TDataSet);
+var
+  v: Variant;
+begin
+  try
+    v := DataSet['Composition'];
+    if VarIsNull(v) then
+      DataSet['Duration'] := 0
+    else
+      DataSet['Duration'] := CompositionToDuration(v);
+  except
+    DataSet['Duration'] := 0;
+  end
+end;
+
+procedure TSourceDataModule.TbTimetableCalcFields(DataSet: TDataSet);
+begin
+  with DataSet do
+  begin
+  if not (FindField('TimeEnd').IsNull or FindField('TimeIni').IsNull) then
+    FindField('Elapsed').AsDateTime
+      := FindField('TimeEnd').AsDateTime
+      - FindField('TimeIni').AsDateTime;
+  end;
 end;
 
 procedure TSourceDataModule.HideFields;
@@ -277,6 +298,7 @@ begin
   TbPeriod.FindField('IdHour').Visible := False;
   TbResourceType.FindField('IdResourceType').Visible := False;
   TbResource.FindField('IdResource').Visible := False;
+  TbTimetable.FindField('Summary').Visible := False;
   with TbTimetableDetail do
   begin
     FindField('IdTimetable').Visible := False;

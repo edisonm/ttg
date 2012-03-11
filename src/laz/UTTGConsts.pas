@@ -87,6 +87,7 @@ resourcestring
   SRoom = 'Room';
   STheNextTimetablesAlreadyExists = 'The next Timetables already exists: %s';
   STimetableCodesToGenerate = 'Codes of Timetables to generate';
+  SElapsedTime = 'Elapsed Time';
   STotalValue = 'Total Value';
   SValue = 'Value';
   SWeight = 'Weight';

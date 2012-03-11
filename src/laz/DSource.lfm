@@ -15,6 +15,9 @@ inherited SourceDataModule: TSourceDataModule
   inherited TbTheme: TZTable
     OnCalcFields = TbThemeCalcFields
   end
+  inherited TbTimetable: TZTable
+    OnCalcFields = TbTimetableCalcFields
+  end
   inherited DSResourceType: TDatasource
     OnDataChange = DSResourceTypeDataChange
   end
