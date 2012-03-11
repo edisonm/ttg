@@ -320,6 +320,8 @@ type
     FParticipant12: Integer;
     FDeltaNumResource1: Integer;
     FDeltaNumResource2: Integer;
+    FMaxDeltaNumResource1: Integer;
+    FMaxDeltaNumResource2: Integer;
     function GetActivity1: Integer; inline;
     function GetActivity2: Integer; inline;
     function GetResource1: Integer; inline;
@@ -2201,7 +2203,7 @@ end;
 {$IFDEF DEBUG}
 procedure TTimetable.CheckIntegrity(const ALabel: string);
 var
-  ResourceType, Value1, Value2: Integer;
+  Value1, Value2: Integer;
   ClashResourceValue1, ClashActivity1, NonScatteredActivity1,
   BreakTimetableResource1, RestrictionValue1, BrokenSession1: Integer;
   ClashResourceValue2, ClashActivity2, NonScatteredActivity2,
@@ -2539,6 +2541,8 @@ begin
   FParticipant12 := NumFixeds1;
   FDeltaNumResource1 := -Min(NumResource11, Free21);
   FDeltaNumResource2 := -Min(NumResource12, Free22);
+  FMaxDeltaNumResource1 := Min(NumResource21, Free11);
+  FMaxDeltaNumResource2 := Min(NumResource22, Free12);
 end;
 
 procedure TTTBookmarkTheme.Next;
@@ -2546,10 +2550,10 @@ begin
   with TimetableModel, Timetable do
   begin
     Inc(FDeltaNumResource2);
-    if FDeltaNumResource2 > Min(NumResource22, Free12) then
+    if FDeltaNumResource2 > FMaxDeltaNumResource2 then
     begin
       Inc(FDeltaNumResource1);
-      if FDeltaNumResource1 > Min(NumResource21, Free11) then
+      if FDeltaNumResource1 > FMaxDeltaNumResource1 then
       begin
         Inc(FParticipant12);
         if FParticipant12 = Length(FTmplActivityToResources[Activity1]) then
@@ -2581,8 +2585,10 @@ begin
           FParticipant12 := NumFixeds1;
         end;
         FDeltaNumResource1 := -Min(NumResource11, Free21);
+        FMaxDeltaNumResource1 := Min(NumResource21, Free11);
       end;
       FDeltaNumResource2 := -Min(NumResource12, Free22);
+      FMaxDeltaNumResource2 := Min(NumResource22, Free12)
     end;
   end;
 end;
@@ -2625,11 +2631,15 @@ end;
 function TTTBookmarkTheme.GetParticipant21: Integer;
 begin
   Result := Participant11 + NumFixeds2 - NumFixeds1;
+  Assert(Result>=NumFixeds2);
+  Assert(Result<Length(TimetableModel.FTmplActivityToResources[Activity2]));
 end;
 
 function TTTBookmarkTheme.GetParticipant22: Integer;
 begin
   Result := Participant12 + NumFixeds2 - NumFixeds1;
+  Assert(Result>=NumFixeds2);
+  Assert(Result<Length(TimetableModel.FTmplActivityToResources[Activity2]));
 end;
 
 function TTTBookmarkTheme.GetResourceType1: Integer;
@@ -2645,33 +2655,7 @@ end;
 function TTTBookmarkTheme.GetLimit: Integer;
 begin
   Result := TimetableModel.FThemeResourceTypeToLimit[Theme, ResourceType1];
-end;
-
-
-function TTTBookmarkTheme.GetFree12: Integer;
-begin
-  Result := Free11 - NumResource12 - FDeltaNumResource1;
-end;
-
-
-function TTTBookmarkTheme.GetFree22: Integer;
-begin
-  Result := Free21 - NumResource22 + FDeltaNumResource1;
-end;
-      
-function TTTBookmarkTheme.GetFree11: Integer;
-begin
-  Result := Limit - Timetable.TablingInfo.FActivityResourceTypeToNumber[Activity1, ResourceType1] + NumResource12;
-end;
-
-function TTTBookmarkTheme.GetFree21: Integer;
-begin
-  Result := Limit - Timetable.TablingInfo.FActivityResourceTypeToNumber[Activity2, ResourceType1] + NumResource22;
-end;
-
-function TTTBookmarkTheme.GetNumResource11: Integer;
-begin
-  Result := Timetable.TTActivityToNumResources[Activity1, Participant11];
+  Assert(Result>=0);
 end;
 
 function TTTBookmarkTheme.GetNumResource12: Integer;
@@ -2679,9 +2663,11 @@ begin
   Result := Timetable.TTActivityToNumResources[Activity1, Participant12];
 end;
 
-function TTTBookmarkTheme.GetNumResource21: Integer;
+function TTTBookmarkTheme.GetFree12: Integer;
 begin
-  Result := Timetable.TTActivityToNumResources[Activity2, Participant21];
+  Result := Free11;
+  Dec(Result, NumResource12 + FDeltaNumResource1);
+  Assert(Result>=0);
 end;
 
 function TTTBookmarkTheme.GetNumResource22: Integer;
@@ -2689,14 +2675,49 @@ begin
   Result := Timetable.TTActivityToNumResources[Activity2, Participant22];
 end;
 
+function TTTBookmarkTheme.GetFree22: Integer;
+begin
+  Result := Free21;
+  Dec(Result, NumResource22 - FDeltaNumResource1);
+  if Result < 0 then
+    WriteLn(Format('Result=%d,Free21=%d,NumResource22=%d,FDeltaNumResource1=%d',
+      [Result, Free21, NumResource22, FDeltaNumResource1]));
+  Assert(Result>=0);
+end;
+      
+function TTTBookmarkTheme.GetFree11: Integer;
+begin
+  Result := Limit - Timetable.TablingInfo.FActivityResourceTypeToNumber[Activity1, ResourceType1] + NumResource12;
+  Assert(Result>=0);
+end;
+
+function TTTBookmarkTheme.GetFree21: Integer;
+begin
+  Result := Limit - Timetable.TablingInfo.FActivityResourceTypeToNumber[Activity2, ResourceType1] + NumResource22;
+  Assert(Result>=0);
+end;
+
+function TTTBookmarkTheme.GetNumResource11: Integer;
+begin
+  Result := Timetable.TTActivityToNumResources[Activity1, Participant11];
+end;
+
+function TTTBookmarkTheme.GetNumResource21: Integer;
+begin
+  Result := Timetable.TTActivityToNumResources[Activity2, Participant21];
+end;
+
 function TTTBookmarkTheme.Move: Integer;
 begin
   with Timetable do
   begin
+    Result := FValue;
     DeltaActivityParticipantValue(Activity1, Participant11, +FDeltaNumResource1);
     DeltaActivityParticipantValue(Activity2, Participant21, -FDeltaNumResource1);
     DeltaActivityParticipantValue(Activity1, Participant12, +FDeltaNumResource2);
     DeltaActivityParticipantValue(Activity2, Participant22, -FDeltaNumResource2);
+    DoUpdateValue;
+    Result := FValue - Result;
   end;
 end;
 
@@ -2704,10 +2725,13 @@ function TTTBookmarkTheme.Undo: Integer;
 begin
   with Timetable do
   begin
+    Result := FValue;
     DeltaActivityParticipantValue(Activity2, Participant22, +FDeltaNumResource2);
     DeltaActivityParticipantValue(Activity1, Participant12, -FDeltaNumResource2);
     DeltaActivityParticipantValue(Activity2, Participant21, +FDeltaNumResource1);
     DeltaActivityParticipantValue(Activity1, Participant11, -FDeltaNumResource1);
+    DoUpdateValue;
+    Result := FValue - Result;
   end;
 end;
 
