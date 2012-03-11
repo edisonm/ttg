@@ -2566,7 +2566,6 @@ begin
         end;
         Assert(ResourceType1=ResourceType2);
         FDeltaNumResource1 := -Min(NumResource11, Free21);
-        //FDeltaNumResource2 := -Min(NumResource12, Free22);
       end;
       Assert(ResourceType1=ResourceType2);
       FDeltaNumResource2 := -Min(NumResource12, Free22);
