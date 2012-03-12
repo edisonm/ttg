@@ -7,7 +7,9 @@ include SETTINGS
 
 all: $(FILES)
 
-$(PKGTTG): $(TTGEXE) ttg_control.tmpl ttg_desktop.tmpl
+.PHONY:ttg
+
+$(PKGTTG): ttg ttg_control.tmpl ttg_desktop.tmpl
 	mkdir -p $(DEBIAN)/ttg.dir/DEBIAN
 	mkdir -p $(DEBIAN)/ttg.dir/usr/bin
 	mkdir -p $(DEBIAN)/ttg.dir/usr/share/applications
@@ -36,7 +38,7 @@ $(PKGTTG_DOC): ttg-doc_control.tmpl \
 	cd $(OBJDIR)/debian ; dpkg --build ttg-doc.dir $(PKGDIR)
 endif
 
-$(TTGEXE):
+ttg $(TTGEXE):
 	cd $(TTGSRC) ; $(MAKE) BuildMode=$(BuildMode) all
 
 $(CATALOG): $(PACKAGES)

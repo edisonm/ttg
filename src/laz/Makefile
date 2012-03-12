@@ -37,7 +37,7 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
 $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc Makefile SETTINGS COMMON
-ifneq ($(BuildNr0),$(SvnVersion))
+ifneq ($(BuildNr0),$(BuindNr))
 	sed -e s:"^ *<BuildNr Value=\"[0-9]*\"/>":"      <BuildNr Value=\"$(BuildNr)\"/>":g ttg.lpi > ttg_.lpi && \
 	  mv ttg_.lpi ttg.lpi
 endif
@@ -97,6 +97,7 @@ test:
 	@echo BuildNr0="$(BuildNr0)"
 	@echo BuildNr=$(BuildNr)
 	@echo Revision=$(Revision)
+	@echo SvnVersion=$(SvnVersion)
 	@echo TTGEXE=$(TTGEXE)
 	@echo BASELAZFILES=$(BASELAZFILES)
 	@echo DSRCBASE=$(DSRCBASE)
