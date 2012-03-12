@@ -31,6 +31,7 @@ ttgsql.lrs: $(TTGSQL)
 
 $(ABOUT).pas: $(ABOUT).pas.tmpl
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
+	  -e s:'<v>BuildMode</v>':'$(BuildMode)':g \
 	  -e s:'<v>Revision</v>':'$(BuildNr)':g \
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>Copyright</v>':'$(Copyright)':g \

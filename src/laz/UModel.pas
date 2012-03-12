@@ -24,7 +24,7 @@ type
     FMaxPosition: Integer;
     function GetProgress: Integer; virtual;
     function GetMax: Integer; virtual;
-    function GetMaxPosition: Integer; virtual; abstract;
+    function GetMaxPosition: Integer; virtual;
     property Individual: TIndividual read FIndividual;
   public
     constructor Create(AIndividual: TIndividual); overload;
@@ -34,6 +34,7 @@ type
     function Move: Integer; virtual; abstract;
     function Undo: Integer; virtual; abstract;
     function Eof: Boolean; virtual;
+    function Bof: Boolean; virtual; abstract;
     property Progress: Integer read GetProgress;
     property MaxPosition: Integer read FMaxPosition;
     property Max: Integer read GetMax;
@@ -109,7 +110,6 @@ constructor TBookmark.Create(AIndividual: TIndividual);
 begin
   FIndividual := AIndividual;
   FMaxPosition := GetMaxPosition;
-  First;
 end;
 
 procedure TBookmark.First;
@@ -128,6 +128,16 @@ begin
   Result := FOffset + FPosition;
 end;
 
+function TBookmark.GetMaxPosition: Integer;
+begin
+  Result := 0;
+  First;
+  repeat
+    Next;
+    Inc(Result);
+  until Bof;
+end;
+
 procedure TBookmark.Rewind;
 begin
   Inc(FOffset, FPosition);
@@ -136,7 +146,7 @@ end;
 
 function TBookmark.Eof: Boolean;
 begin
-  Result := FPosition = MaxPosition;
+  Result := FPosition = FMaxPosition;
 end;
 
 function TBookmark.GetMax: Integer;

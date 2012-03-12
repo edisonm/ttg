@@ -266,6 +266,7 @@ type
   public
     procedure First; override;
     procedure Next; override;
+    function Bof: Boolean; override;
     function Move: Integer; override;
     function Undo: Integer; override;
   end;
@@ -284,6 +285,7 @@ type
   public
     procedure First; override;
     procedure Next; override;
+    function Bof: Boolean; override;
     function Move: Integer; override;
     function Undo: Integer; override;
   end;
@@ -304,6 +306,7 @@ type
   public
     procedure First; override;
     procedure Next; override;
+    function Bof: Boolean; override;
     function Move: Integer; override;
     function Undo: Integer; override;
   end;
@@ -344,6 +347,7 @@ type
   public
     procedure First; override;
     procedure Next; override;
+    function Bof: Boolean; override;
     function Move: Integer; override;
     function Undo: Integer; override;
     property Offset: Integer read FOffset write FOffset;
@@ -2137,7 +2141,7 @@ begin
         begin
           Activity := FIdActivityToActivity[FieldActivity.AsInteger - FMinIdActivity];
           Resource := FIdResourceToResource[FieldResource.AsInteger - FMinIdResource];
-          NumResource := FResourceToNumResource[Resource];
+          NumResource := FieldNumResource.AsInteger;
           ActivityResourceToNumResource[Activity, Resource] := NumResource;
           Next;
         end;
@@ -2362,6 +2366,11 @@ end;
 
 { TTTBookmark1 }
 
+function TTTBookmark1.Bof: Boolean;
+begin
+  Result := FSession = 0;
+end;
+
 procedure TTTBookmark1.First;
 begin
   inherited;
@@ -2371,12 +2380,12 @@ end;
 
 procedure TTTBookmark1.Next;
 begin
+  inherited;
   with TTimetableModel(Individual.Model), TTimetable(Individual) do
   begin
     Inc(FPeriod);
     if FPeriod = PeriodCount - FSessionToDuration[FSession] then
     begin
-      inherited;
       Inc(FSession);
       if FSession = SessionCount then
         FSession := 0;
@@ -2386,8 +2395,16 @@ begin
 end;
 
 function TTTBookmark1.GetMaxPosition: Integer;
+var
+  Session: Integer;
 begin
-  Result := TTimetableModel(Individual.Model).SessionCount;
+  Result := 0;
+  with TimetableModel do
+    for Session := 0 to SessionCount - 1 do
+      Inc(Result, PeriodCount - FSessionToDuration[Session]);
+  {$IFDEF DEBUG}
+  Assert(Result = inherited GetMaxPosition);
+  {$ENDIF}
 end;
 
 function TTTBookmark1.Move: Integer;
@@ -2402,6 +2419,11 @@ begin
 end;
 
 { TTTBookmark2 }
+
+function TTTBookmark2.Bof: Boolean;
+begin
+  Result := (FGroup = 0) and (FGroupSession1 = 0) and (FGroupSession2 = 1);
+end;
 
 procedure TTTBookmark2.First;
 begin
@@ -2449,6 +2471,9 @@ begin
       Inc(Result, GroupSessionsCount * (GroupSessionsCount - 1) div 2);
     end;
   end;
+  {$IFDEF DEBUG}
+  Assert(Result = inherited GetMaxPosition);
+  {$ENDIF}
 end;
 
 function TTTBookmark2.Move: Integer;
@@ -2486,7 +2511,12 @@ begin
   FGroup := 0;
   FGroupSession1 := 0;
   FGroupSession2 := 1;
-  FGroupSession2 := 2;
+  FGroupSession3 := 1;
+end;
+
+function TTTBookmark3.Bof: Boolean;
+begin
+  Result := (FGroup = 0) and (FGroupSession1 = 0) and (FGroupSession2 = 1) and (FGroupSession3 = 1);
 end;
 
 procedure TTTBookmark3.Next;
@@ -2533,6 +2563,9 @@ begin
                   * (2 * GroupSessionsCount - 1) div 3);
     end;
   end;
+  {$IFDEF DEBUG}
+  Assert(Result = inherited GetMaxPosition);
+  {$ENDIF}
 end;
 
 function TTTBookmark3.Move: Integer;
@@ -2572,8 +2605,17 @@ begin
   end;
 end;
 
+function TTTBookmarkTheme.Bof: Boolean;
+begin
+  Result := (FThemeIndex = 0) and (FThemeActivity1 = 0) and (FThemeActivity2 = 1)
+    and (FParticipant11 = NumFixeds1) and (FParticipant12 = NumFixeds1)
+    and (FDeltaNumResource1 = -Min(NumResource11, Free21))
+    and (FDeltaNumResource2 = -Min(NumResource12, Free22));
+end;
+
 procedure TTTBookmarkTheme.First;
 begin
+  inherited;
   FThemeIndex := 0;
   FThemeActivity1 := 0;
   FThemeActivity2 := 1;
@@ -2585,6 +2627,7 @@ end;
 
 procedure TTTBookmarkTheme.Next;
 begin
+  inherited;
   with TimetableModel, Timetable do
   begin
     Inc(FDeltaNumResource2);
@@ -2602,7 +2645,6 @@ begin
           Inc(FParticipant11);
           if FParticipant11 = Length(FActivityParticipantToResource[Activity1]) then
           begin
-            inherited;
             Inc(FThemeActivity2);
             if FThemeActivity2 = Length(FThemeToActivities[Theme]) then
             begin
@@ -2771,20 +2813,9 @@ begin
 end;
 
 function TTTBookmarkTheme.GetMaxPosition: Integer;
-var
-  Theme, Count: Integer;
 begin
-  with TTimetableModel(Individual.Model) do
-  begin
-    Result := 0;
-    for Theme := 0 to High(FThemeWithMobileResources) do
-    begin
-      Count := Length(FThemeToActivities[Theme]);
-      Inc(Result, Count * (Count - 1) div 2);
-    end;
-  end;
+  Result := inherited GetMaxPosition;
+  WriteLn('TTTBookmarkTheme.GetMaxPosition=' + IntToStr(Result));
 end;
-
-initialization
 
 end.
