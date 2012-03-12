@@ -10,11 +10,13 @@ default:
 	@echo "This Makefile only works in Cygwin"
 endif
 
-all: $(FILES)
+all:
+	$(MAKE) ttg
+	$(MAKE) $(FILES)
 
 catalog:
 
-$(PKG): $(TTGEXE) ttg.iss.tmpl
+$(PKG): ttg.iss.tmpl
 	sed -e s:'<v>Revision</v>':'$(BuildNr)':g \
 	  -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g \
@@ -25,7 +27,7 @@ $(PKG): $(TTGEXE) ttg.iss.tmpl
 	  -e s:'<v>BuildId</v>':'$(BuildId)':g ttg.iss.tmpl > $(ISS)
 	$(INNOIDE) $(ISSWIN)
 
-$(TTGEXE):
+ttg $(TTGEXE):
 	cd $(TTGSRC) ; $(MAKE) BuildMode=$(BuildMode) all
 
 test:

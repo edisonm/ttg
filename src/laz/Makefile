@@ -37,7 +37,7 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
 $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc Makefile SETTINGS COMMON
-ifneq ($(BuildNr0),$(BuindNr))
+ifneq ($(BuildNr0),$(BuildNr))
 	sed -e s:"^ *<BuildNr Value=\"[0-9]*\"/>":"      <BuildNr Value=\"$(BuildNr)\"/>":g ttg.lpi > ttg_.lpi && \
 	  mv ttg_.lpi ttg.lpi
 endif

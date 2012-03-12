@@ -5,11 +5,13 @@ TTGDIR:=$(shell cd $(RELDIR); pwd)
 
 include SETTINGS
 
-all: $(FILES)
+all:
+	$(MAKE) ttg
+	$(MAKE) $(FILES)
 
 .PHONY:ttg
 
-$(PKGTTG): ttg ttg_control.tmpl ttg_desktop.tmpl
+$(PKGTTG): $(TTGEXE) ttg_control.tmpl ttg_desktop.tmpl
 	mkdir -p $(DEBIAN)/ttg.dir/DEBIAN
 	mkdir -p $(DEBIAN)/ttg.dir/usr/bin
 	mkdir -p $(DEBIAN)/ttg.dir/usr/share/applications
