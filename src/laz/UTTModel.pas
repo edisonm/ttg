@@ -2131,6 +2131,7 @@ begin
         FieldActivity := FindField('IdActivity');
         FieldResource := FindField('IdResource');
         FieldNumResource := FindField('NumResource');
+        First;
         while not Eof do
         begin
           Activity := FIdActivityToActivity[FieldActivity.AsInteger - FMinIdActivity];
