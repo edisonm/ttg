@@ -1,0 +1,41 @@
+Tables
+======
+
+AulaTipo --> RoomType
+Curso --> Course
+Dia --> Day
+Distributivo --> Distribution
+Especializacion --> Specialization
+Hora --> Hour
+Materia --> Subject
+MateriaProhibicion --> SubjectRestriction
+MateriaProhibicionTipo --> SubjectRestrictionType
+Horario --> Timetable
+HorarioDetalle --> TimetableDetail
+Paralelo --> Class
+Nivel --> Level
+ParaleloId --> GroupId
+Periodo --> TimeSlot
+Profesor --> Teacher
+ProfesorProhibicion --> TeacherRestriction
+
+Fields
+======
+
+Cod... --> Id...
+Nom... --> Na...
+Composicion... --> Composition
+Cantidad --> Number
+Abr... --> Ab...
+
+Abbreviature
+
+MomentoInicial --> TimeIni
+MomentoFinal --> TimeEnd
+Informe --> Summary
+Sesion --> Session
+
+Indexes
+=======
+HorarioDetalleCodMateria --> ixTimetableDetailIdSubject
+
