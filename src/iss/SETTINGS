@@ -5,8 +5,7 @@ TTGSRC=../laz
 include $(TTGSRC)/COMMON
 
 ARCH=$(TargetCPU)
-PKGBASE=ttg$(BuildLabel)_$(VERSION)_$(ARCH)
-PKG=$(TTGDIR)/packages/$(PKGBASE).exe
+PKG=$(PKGDIR)/$(PKGBASE).exe
 FILES=$(PKG)
 
 INNOIDE="$(PROGRAMFILES)/Inno Setup 5/ISCC.exe"

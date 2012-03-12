@@ -49,3 +49,4 @@ test:
 	@echo PKGTTG=$(PKGTTG)
 	@echo PKGTTG_DOC=$(PKGTTG_DOC)
 	@echo DEBIAN=$(DEBIAN)
+	cd $(TTGSRC) ; $(MAKE) test

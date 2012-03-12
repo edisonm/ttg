@@ -19,8 +19,9 @@ $(PKG): $(TTGEXE) ttg.iss.tmpl
 	  -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g \
 	  -e s/'<v>ProgramFiles<\/v>'/'$(PROGRAMFILES)'/g \
+	  -e s:'<v>PkgDir</v>':'$(shell cygpath -w $(PKGDIR))':g \
 	  -e s:'<v>PkgBase</v>':'$(PKGBASE)':g \
-	  -e s:'<v>BuildLabel</v>':'$(PKGBASE)':g \
+	  -e s:'<v>BuildLabel</v>':'$(BuildLabel)':g \
 	  -e s:'<v>BuildId</v>':'$(BuildId)':g ttg.iss.tmpl > $(ISS)
 	$(INNOIDE) $(ISSWIN)
 

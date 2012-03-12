@@ -19,10 +19,10 @@ ifneq ($(FILES),)
 	$(MAKE) $(FILES)
 endif
 
-$(BUILDMODE):
+$(BUILDMODES):
 	cd $(PKGSRC) ; $(MAKE) BuildMode=$@ ;
 
-run ex1 ex2 ex3 ex4 ide clean debug:
+run ex1 ex2 ex3 ex4 ide clean:
 	cd $(TTGSRC) ; $(MAKE) $@
 
 $(TTGSQLITE3): $(TTGSQL)
@@ -36,6 +36,6 @@ $(TTGSQL):
 endif
 
 cleanthis:
-	$(RM) $(TTGSQLITE3)
+	$(RM) -rf $(TTGSQLITE3) packages
 
 clean: cleanthis

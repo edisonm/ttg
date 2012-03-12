@@ -68,10 +68,10 @@ procedure TSplashForm.FormCreate(Sender: TObject);
   end;
 begin
   UpdBackground;
-  Caption := sAppName + ' ' + sAppVersion;
+  Caption := sAppName + ' ' + SAppVersion;
   LbProductName.Caption := Caption;
-  LbProductVersion.Caption := sAppVersion + '-' + sRevision;
-  LbYearLabel.Caption := 'Build (' + sBuildDateTime + ')';
+  LbProductVersion.Caption := SAppVersion + '-' + SRevision;
+  LbYearLabel.Caption := 'Build (' + SBuildDateTime + ')';
   LbCopyright.Caption := SCopyright;
 end;
 

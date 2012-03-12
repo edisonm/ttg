@@ -33,11 +33,12 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
 	  -e s:'<v>Revision</v>':'$(BuildNr)':g \
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
+	  -e s:'<v>Copyright</v>':'$(Copyright)':g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
 $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc Makefile SETTINGS COMMON
-ifneq ($(BuildNr0),$(BuildNr))
-	BuildNr=$(BuildNr); sed -e s:"^ *<BuildNr Value=\"[0-9]*\"/>":"      <BuildNr Value=\"$$((${BuildNr}+1))\"/>":g ttg.lpi > ttg_.lpi && \
+ifneq ($(BuildNr0),$(SvnVersion))
+	sed -e s:"^ *<BuildNr Value=\"[0-9]*\"/>":"      <BuildNr Value=\"$(BuildNr)\"/>":g ttg.lpi > ttg_.lpi && \
 	  mv ttg_.lpi ttg.lpi
 endif
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
@@ -89,10 +90,13 @@ cleanthis: cleanthisw
 clean: cleanthis
 
 test:
+	@echo APPNAME=$(APPNAME)
+	@echo Copyright=$(Copyright)
 	@echo UNITS=$(UNITS)
 	@echo VERSION=$(VERSION)
 	@echo BuildNr0="$(BuildNr0)"
 	@echo BuildNr=$(BuildNr)
+	@echo Revision=$(Revision)
 	@echo TTGEXE=$(TTGEXE)
 	@echo BASELAZFILES=$(BASELAZFILES)
 	@echo DSRCBASE=$(DSRCBASE)
@@ -115,9 +119,6 @@ ex3:
 
 ex4:
 	cd $(TTGDIR)/bin ; $(TTGEXE) $(TTGDIR)/examples/original/Salamanca1999.ttd
-
-debug:
-	$(MAKE) BuildMode=debug ex2
 
 ide:
 	$(LAZIDE) ttg.lpi &

@@ -20,9 +20,9 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="2"/>
       <RevisionNr Value="2"/>
-      <BuildNr Value="930"/>
+      <BuildNr Value="932"/>
       <CharSet Value="04B0"/>
-      <StringTable LegalCopyright="2012, Edison Mera" ProductVersion="" FileDescription="Timetable Generator System"/>
+      <StringTable LegalCopyright="1999-2012, Edison Mera" ProductVersion="" FileDescription="Automatic Timetable Generator"/>
     </VersionInfo>
     <MacroValues Count="1">
       <Macro1 Name="BuildLabel" Value="-debug"/>

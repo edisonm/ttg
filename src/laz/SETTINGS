@@ -2,7 +2,6 @@
 
 include $(TTGSRC)/COMMON
 
-REPOSITORY=file:///home/edison/LocalReps/TTG/trunk/
 BUILDDATETIME=$(shell date +%a\ %b\ %e\ %H\\:%M\\:%S\ %Y)
 
 UNITS:=$(shell cat ttg.lpi |grep '<Filename Value=".*\.pas"/>'|sed -e s:'^.*<Filename Value="\(.*\)\.pas"/>.*':'\1':g)

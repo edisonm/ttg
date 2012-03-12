@@ -1,13 +1,22 @@
 # -*- mode: Makefile; -*-
 
 BuildMode?=release
-APPNAME=Automatic Timetable Generator
+APPNAME=$(shell grep "StringTable" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<StringTable LegalCopyright=\"[^\"]*\" ProductVersion=\"[^\"]*\" FileDescription=\"\([^\"]*\)\"/>":'\1':g)
+Copyright=$(shell grep "StringTable" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<StringTable LegalCopyright=\"\([^\"]*\)\" ProductVersion=\"[^\"]*\" FileDescription=\"[^\"]*\"/>":'\1':g)
+REPOSITORY=file:///home/edison/LocalReps/TTG/trunk/
 MajorVersionNr=$(shell grep "^ *<MajorVersionNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<MajorVersionNr Value=\"\([0-9]*\)\"/>":"\1":g)
 MinorVersionNr=$(shell grep "^ *<MinorVersionNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<MinorVersionNr Value=\"\([0-9]*\)\"/>":"\1":g)
 RevisionNr=$(shell grep "^ *<RevisionNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<RevisionNr Value=\"\([0-9]*\)\"/>":"\1":g)
 BuildNr0=$(shell grep "^ *<BuildNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<BuildNr Value=\"\([0-9]*\)\"/>":"\1":g)
 # BuildNr:=$(shell cd $(TTGSRC) ; svnversion|sed -e s/':'/'_'/g)
-BuildNr:=$(shell svn info file:///home/edison/LocalReps/TTG|grep Revision|sed -e s:'Revision\: ':'':g -)
+Revision:=$(shell svn info $(REPOSITORY)|grep Revision|sed -e s:'Revision\: ':'':g -)
+SvnVersion:=$(shell svnversion $(TTGSRC))
+ifneq ($(BuildNr0),$(SvnVersion))
+  BuildNr:=$(shell Revision=$(Revision) ; echo "$$((${Revision}+1))")
+else
+  BuildNr:= $(Revision)
+endif
+
 APPVERSION=$(MajorVersionNr).$(MinorVersionNr).$(RevisionNr)
 VERSION=$(APPVERSION)-$(BuildNr)
 TargetCPU=$(shell $(FPC) -iSP)
@@ -27,3 +36,7 @@ FPC=fpc
 endif
 TTGEXE=$(TTGDIR)/bin/ttg-$(BuildId)$(EXEEXT)
 OBJDIR=$(TTGDIR)/obj/$(BuildId)
+
+# PACKAGING RELATED:
+PKGDIR=$(TTGDIR)/packages/$(BuildMode)
+PKGBASE=ttg$(BuildLabel)_$(VERSION)_$(ARCH)
