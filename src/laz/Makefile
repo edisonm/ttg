@@ -35,11 +35,11 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-OLDREVISION=$(shell grep "^ .*<BuildNr Value=\"[0-9].*\"/>" ttg.lpi|sed -e s:'^ .*<BuildNr Value=\"\([0-9].*\)\"/>':'\1':g)
+OLDREVISION=$(shell grep "^ .*<BuildNr Value=\"[0-9]*\"/>" ttg.lpi|sed -e s:'^ .*<BuildNr Value=\"\([0-9]*\)\"/>':'\1':g)
 
 $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc
 ifneq ($(OLDREVISION),$(REVISION))
-	sed -e s:'^ .*<BuildNr Value=\"[0-9].*\"/>':'      <BuildNr Value="$(($(REVISION)+1))"/>':g ttg.lpi > ttg_.lpi && \
+	sed -e s:'^ .*<BuildNr Value=\"[0-9]*\"/>':'      <BuildNr Value="$$(($(REVISION)+1))"/>':g ttg.lpi > ttg_.lpi && \
 	  mv ttg_.lpi ttg.lpi
 endif
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
