@@ -11,21 +11,19 @@ include COMMON
 TTGMDB=dat/$(TTGMDBBASE)
 TTGSQLITE3=dat/ttg.s3fpc
 
-
 all test:
 	cd $(PKGSRC) ; for BuildMode in $(BUILDMODES); do \
 	  $(MAKE) BuildMode=$$BuildMode $@ ; \
 	  done
-	cd $(PKGSRC) && $(MAKE) catalog
 ifneq ($(FILES),)
 	$(MAKE) $(FILES)
 endif
 
-run ex1 ex2 ex3 ex4 ide clean:
-	cd $(TTGSRC) ; $(MAKE) $@
+$(BUILDMODE):
+	cd $(PKGSRC) ; $(MAKE) BuildMode=$@ ;
 
-debug:
-	cd $(TTGSRC) ; $(MAKE) BuildMode=debug ex3
+run ex1 ex2 ex3 ex4 ide clean debug:
+	cd $(TTGSRC) ; $(MAKE) $@
 
 $(TTGSQLITE3): $(TTGSQL)
 	$(RM) $@

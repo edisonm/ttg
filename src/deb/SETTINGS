@@ -8,15 +8,15 @@ ARCH=$(shell dpkg --print-architecture)
 
 BASE_PKGTTG=ttg$(BuildLabel)_$(VERSION)_$(ARCH)
 
-PKGDIR=$(TTGDIR)/packages/
+PKGDIR=$(TTGDIR)/packages/$(BuildMode)
 PKGTTG=$(PKGDIR)$(BASE_PKGTTG).deb
 ifeq ($(BuildMode),release)
 PKGTTG_DOC=$(PKGDIR)$(BASE_PKGTTG_DOC).deb
 BASE_PKGTTG_DOC=ttg-doc_$(VERSION)_all
 endif
 
-CATALOG=$(TTGDIR)/packages/Packages.gz
+CATALOG=$(PKGDIR)/Packages.gz
 
 PACKAGES=$(PKGTTG) $(PKGTTG_DOC)
-FILES=$(PACKAGES)
+FILES=$(PACKAGES) $(CATALOG)
 DEBIAN=$(OBJDIR)/debian
