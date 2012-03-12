@@ -11,9 +11,15 @@ include COMMON
 TTGMDB=dat/$(TTGMDBBASE)
 TTGSQLITE3=dat/ttg.s3fpc
 
-all test:
+all:
+	cd $(PKGSRC) ; $(MAKE) all
+ifneq ($(FILES),)
+	$(MAKE) $(FILES)
+endif
+
+allmodes:
 	cd $(PKGSRC) ; for BuildMode in $(BUILDMODES); do \
-	  $(MAKE) BuildMode=$$BuildMode $@ ; \
+	  $(MAKE) BuildMode=$$BuildMode all ; \
 	  done
 ifneq ($(FILES),)
 	$(MAKE) $(FILES)
