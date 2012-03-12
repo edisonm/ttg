@@ -1,6 +1,6 @@
 # -*- mode: Makefile; -*-
 
-RELDIR:=../..
+RELDIR:=..
 TTGDIR:=$(shell cd $(RELDIR); pwd)
 
 include SETTINGS

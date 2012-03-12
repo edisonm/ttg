@@ -1,6 +1,6 @@
 # -*- mode: Makefile; -*-
 
-TTGSRC=../laz
+TTGSRC=../src
 
 include $(TTGSRC)/COMMON
 

@@ -4,16 +4,16 @@ TTGSQL=dat/ttg.sql
 
 BUILDMODES=reader debug release
 
-TTGSRC=src/laz
+TTGSRC=src
 
 ifeq ($(shell uname -o),Cygwin)
 DBCONVERT=$(TTGDIR)/bin/dbconvert.exe
 FILES=$(TTGSQLITE3)
-ISSSRC=src/iss
+ISSSRC=iss
 PKGSRC=$(ISSSRC)
 else
 ifneq ($(shell which dpkg),)
-DEBSRC=src/deb
+DEBSRC=deb
 PKGSRC=$(DEBSRC)
 else
 PKGSRC=$(TTGSRC)

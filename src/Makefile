@@ -2,7 +2,7 @@
 
 # This makefile is used only to generate the lazarus project
 
-RELDIR:=../..
+RELDIR:=..
 TTGDIR:=$(shell cd $(RELDIR); pwd)
 
 TTGSRC=.
