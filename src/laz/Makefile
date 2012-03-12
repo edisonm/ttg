@@ -35,9 +35,14 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
+OLDREVISION=$(shell grep "^ .*<BuildNr Value=\"[0-9].*\"/>" ttg.lpi|sed -e s:'^ .*<BuildNr Value=\"\([0-9].*\)\"/>':'\1':g)
+
 $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc
-	sed -e s:'^ .*<BuildNr Value=\"[0-9].*\"/>':'      <BuildNr Value="$(REVISION)"/>':g ttg.lpi > ttg_.lpi
-	$(LAZBUILD) --build-mode=$(BuildMode) ttg_.lpi
+ifneq ($(OLDREVISION),$(REVISION))
+	sed -e s:'^ .*<BuildNr Value=\"[0-9].*\"/>':'      <BuildNr Value="$(($(REVISION)+1))"/>':g ttg.lpi > ttg_.lpi && \
+	  mv ttg_.lpi ttg.lpi
+endif
+	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
 ifneq ($(BuildMode),debug)
 	strip --strip-all $(TTGEXE)
 	upx $(TTGEXE)
@@ -87,6 +92,7 @@ clean: cleanthis
 
 test:
 	@echo UNITS=$(UNITS)
+	@echo OLDREVISION="$(OLDREVISION)"
 	@echo REVISION=$(REVISION)
 	@echo TTGEXE=$(TTGEXE)
 	@echo BASELAZFILES=$(BASELAZFILES)
