@@ -35,7 +35,7 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-$(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc
+$(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc Makefile SETTINGS COMMON
 ifneq ($(BuildNr0),$(BuildNr))
 	BuildNr=$(BuildNr); sed -e s:"^ *<BuildNr Value=\"[0-9]*\"/>":"      <BuildNr Value=\"$$((${BuildNr}+1))\"/>":g ttg.lpi > ttg_.lpi && \
 	  mv ttg_.lpi ttg.lpi
@@ -91,7 +91,7 @@ clean: cleanthis
 test:
 	@echo UNITS=$(UNITS)
 	@echo VERSION=$(VERSION)
-	@echo OLDBuildNr="$(OLDBuildNr)"
+	@echo BuildNr0="$(BuildNr0)"
 	@echo BuildNr=$(BuildNr)
 	@echo TTGEXE=$(TTGEXE)
 	@echo BASELAZFILES=$(BASELAZFILES)

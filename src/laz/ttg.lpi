@@ -20,7 +20,7 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="2"/>
       <RevisionNr Value="2"/>
-      <BuildNr Value="928"/>
+      <BuildNr Value="930"/>
       <CharSet Value="04B0"/>
       <StringTable LegalCopyright="2012, Edison Mera" ProductVersion="" FileDescription="Timetable Generator System"/>
     </VersionInfo>
