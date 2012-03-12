@@ -8,9 +8,9 @@ ARCH=$(shell dpkg --print-architecture)
 
 PKGBASE=ttg$(BuildLabel)_$(VERSION)_$(ARCH)
 
-PKGTTG=$(PKGDIR)$(PKGBASE).deb
+PKGTTG=$(PKGDIR)/$(PKGBASE).deb
 ifeq ($(BuildMode),release)
-PKGTTG_DOC=$(PKGDIR)$(PKGBASE_DOC).deb
+PKGTTG_DOC=$(PKGDIR)/$(PKGBASE_DOC).deb
 PKGBASE_DOC=ttg-doc_$(VERSION)_all
 endif
 
