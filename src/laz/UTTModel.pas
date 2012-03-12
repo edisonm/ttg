@@ -2069,6 +2069,7 @@ begin
       DbZConnection.ExecuteDirect(SQL.Text);
       TbTimetable.Refresh;
       TbTimetableDetail.Refresh;
+      TbTimetableResource.Refresh;
     end;
     {$ENDIF}
   finally
@@ -2307,9 +2308,9 @@ begin
     WriteLn(Format('  Incorrect RestrictionValue: %d<>%d',
                    [RestrictionValue1, RestrictionValue2]))
   else if RestrictionValue2 < 0 then
-    WriteLn(Format('  Incorrect RestrictionValue: %s*%s=%d<0', [
-                     TIntegerArrayHandler.ValueToString(RestrictionTypeToResourceCount),
-                     TIntegerArrayHandler.ValueToString(TTimetableModel(Model).FRestrictionTypeToValue),
+    WriteLn(Format('  Incorrect RestrictionValue: %s*%s=%d<0',
+                   [TIntegerArrayHandler.ValueToString(RestrictionTypeToResourceCount),
+                    TIntegerArrayHandler.ValueToString(TTimetableModel(Model).FRestrictionTypeToValue),
                  RestrictionValue2]));
   if BrokenSession1 <> BrokenSession2 then
     WriteLn(Format('  Incorrect BrokenSession: %d<>%d', [BrokenSession1, BrokenSession2]))
@@ -2441,7 +2442,7 @@ var
 begin
   with TTimetableModel(Individual.Model) do
   begin
-    Result := FOffset;
+    Result := 0;
     for Group := 0 to FGroupCount - 1 do
     begin
       GroupSessionsCount := Length(FGroupSessions[Group]);
@@ -2524,12 +2525,12 @@ var
 begin
   with TTimetableModel(Individual.Model) do
   begin
-    Result := FOffset;
+    Result := 0;
     for Group := 0 to FGroupCount - 1 do
     begin
       GroupSessionsCount := Length(FGroupSessions[Group]);
       Inc(Result, (GroupSessionsCount * (GroupSessionsCount - 1) div 2)
-                  * (2*GroupSessionsCount - 1) div 3);
+                  * (2 * GroupSessionsCount - 1) div 3);
     end;
   end;
 end;
@@ -2601,13 +2602,13 @@ begin
           Inc(FParticipant11);
           if FParticipant11 = Length(FActivityParticipantToResource[Activity1]) then
           begin
+            inherited;
             Inc(FThemeActivity2);
             if FThemeActivity2 = Length(FThemeToActivities[Theme]) then
             begin
               Inc(FThemeActivity1);
               if FThemeActivity1 = Length(FThemeToActivities[Theme]) - 1 then
               begin
-                inherited;
                 Inc(FThemeIndex);
                 if FThemeIndex = Length(FThemeWithMobileResources) then
                 begin
@@ -2704,34 +2705,6 @@ function TTTBookmarkTheme.GetFree12: Integer;
 begin
   Result := Free11 - NumResource12 - FDeltaNumResource1;
 end;
-(*
-begin
-  if Result < 0 then
-  begin
-    WriteLn(Format('Free11=%d=%d-%d+%d'#13#10
-                   + 'Free12=%d=%d-%d-%d'#13#10
-                   + 'Free21=%d=%d-%d+%d'#13#10
-                   + 'Free22=%d=%d-%d+%d'#13#10
-                   +' Activity1=%d, ResourceType1=%d'#13#10
-                   + 'Activity2=%d, ResourceType2=%d'#13#10,
-                   [Free11, Limit, Timetable.TablingInfo.FActivityResourceTypeToNumber[Activity1, ResourceType1], NumResource12,
-                    Result, Free11, NumResource12, FDeltaNumResource1,
-                    Free21, Limit, Timetable.TablingInfo.FActivityResourceTypeToNumber[Activity2, ResourceType1], NumResource22,
-                    Free22, Free21, NumResource22, FDeltaNumResource1,
-                    Activity1, ResourceType1,Activity2,  ResourceType2]));
-    WriteLn(Format('Min(DeltaNumResource1) := -Min(NumResource11, Free21)=-Min(%d,%d)=%d',
-       [NumResource11, Free21, -Min(NumResource11, Free21)]));
-    WriteLn(Format('Max(DeltaNumResource1) := Min(NumResource21, Free11)=Min(%d,%d)=%d',
-                   [NumResource21, Free11, Min(NumResource21, Free11)]));
-    WriteLn(Format('Min(DeltaNumResource2) := -Min(NumResource12, Free22)=-Min(%d,%d)=%d',
-       [NumResource12, Free22, -Min(NumResource12, Free22)]));
-    WriteLn(Format('Max(DeltaNumResource2) := Min(NumResource22, Free12)=Min(%d,%d)=%d',
-                   [NumResource22, Free12, Min(NumResource22, Free12)]));
-    FDeltaNumResource2 := -Min(NumResource12, Free22);
-    Assert(Result>=0);
-  end;
-end;
-*)
 
 function TTTBookmarkTheme.GetNumResource22: Integer;
 begin
@@ -2742,34 +2715,6 @@ function TTTBookmarkTheme.GetFree22: Integer;
 begin
   Result := Free21 - NumResource22 + FDeltaNumResource1
 end;
-(*
-begin
-  if Result < 0 then
-  begin
-    WriteLn(Format('Free11=%d=%d-%d+%d'#13#10
-                   + 'Free12=%d=%d-%d-%d'#13#10
-                   + 'Free21=%d=%d-%d+%d'#13#10
-                   + 'Free22=%d=%d-%d+%d'#13#10
-                   + 'Activity1=%d, ResourceType1=%d'#13#10
-                   + 'Activity2=%d, ResourceType2=%d'#13#10,
-                   [Free11, Limit, Timetable.TablingInfo.FActivityResourceTypeToNumber[Activity1, ResourceType1], NumResource12,
-                    Free12, Free11, NumResource12, FDeltaNumResource1,
-                    Free21, Limit, Timetable.TablingInfo.FActivityResourceTypeToNumber[Activity2, ResourceType1], NumResource22,
-                    Result, Free21, NumResource22, FDeltaNumResource1,
-                    Activity1, ResourceType1, Activity2, ResourceType2]));
-    WriteLn(Format('Min(DeltaNumResource1) := -Min(NumResource11, Free21)=-Min(%d,%d)=%d',
-       [NumResource11, Free21, -Min(NumResource11, Free21)]));
-    WriteLn(Format('Max(DeltaNumResource1) :=  Min(NumResource21, Free11)= Min(%d,%d)=%d',
-                   [NumResource21, Free11, Min(NumResource21, Free11)]));
-    WriteLn(Format('Min(DeltaNumResource2) := -Min(NumResource12, Free22)=-Min(%d,%d)=%d',
-                   [NumResource12, Result, -Min(NumResource12, Result)]));
-    WriteLn(Format('Max(DeltaNumResource2) :=  Min(NumResource22, Free12)= Min(%d,%d)=%d',
-                   [NumResource22, Free12, Min(NumResource22, Free12)]));
-    WriteLn(Format('Resource1=%d, Resource2=%d', [Resource1, Resource2]));
-    Assert(Result>=0);
-  end;
-end;
-*)
 
 function TTTBookmarkTheme.GetFree11: Integer;
 begin
@@ -2826,9 +2771,18 @@ begin
 end;
 
 function TTTBookmarkTheme.GetMaxPosition: Integer;
+var
+  Theme, Count: Integer;
 begin
   with TTimetableModel(Individual.Model) do
-    Result := Length(FThemeWithMobileResources);
+  begin
+    Result := 0;
+    for Theme := 0 to High(FThemeWithMobileResources) do
+    begin
+      Count := Length(FThemeToActivities[Theme]);
+      Inc(Result, Count * (Count - 1) div 2);
+    end;
+  end;
 end;
 
 initialization
