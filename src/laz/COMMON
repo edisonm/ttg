@@ -2,9 +2,14 @@
 
 BuildMode?=release
 APPNAME=Automatic Timetable Generator
-APPVERSION=1.2.2
-REVISION:=$(shell cd $(TTGSRC) ; svnversion|sed -e s/':'/'_'/g)
-VERSION=$(APPVERSION)-$(REVISION)
+MajorVersionNr=$(shell grep "^ *<MajorVersionNr Value=\"[0-9]*\"/>" ttg.lpi|sed -e s:"^ *<MajorVersionNr Value=\"\([0-9]*\)\"/>":"\1":g)
+MinorVersionNr=$(shell grep "^ *<MinorVersionNr Value=\"[0-9]*\"/>" ttg.lpi|sed -e s:"^ *<MinorVersionNr Value=\"\([0-9]*\)\"/>":"\1":g)
+RevisionNr=$(shell grep "^ *<RevisionNr Value=\"[0-9]*\"/>" ttg.lpi|sed -e s:"^ *<RevisionNr Value=\"\([0-9]*\)\"/>":"\1":g)
+BuildNr0=$(shell grep "^ *<BuildNr Value=\"[0-9]*\"/>" ttg.lpi|sed -e s:"^ *<BuildNr Value=\"\([0-9]*\)\"/>":"\1":g)
+# BuildNr:=$(shell cd $(TTGSRC) ; svnversion|sed -e s/':'/'_'/g)
+BuildNr:=$(shell svn info file:///home/edison/LocalReps/TTG|grep Revision|sed -e s:'Revision\: ':'':g -)
+APPVERSION=$(MajorVersionNr).$(MinorVersionNr).$(RevisionNr)
+VERSION=$(APPVERSION)-$(BuildNr)
 TargetCPU=$(shell $(FPC) -iSP)
 TargetOS=$(shell $(FPC) -iSO)
 ifneq ($(BuildMode),release)

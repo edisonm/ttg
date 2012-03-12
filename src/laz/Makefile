@@ -31,15 +31,13 @@ ttgsql.lrs: $(TTGSQL)
 
 $(ABOUT).pas: $(ABOUT).pas.tmpl
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
-	  -e s:'<v>Revision</v>':'$(REVISION)':g \
+	  -e s:'<v>Revision</v>':'$(BuildNr)':g \
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
-OLDREVISION=$(shell grep "^ .*<BuildNr Value=\"[0-9]*\"/>" ttg.lpi|sed -e s:'^ .*<BuildNr Value=\"\([0-9]*\)\"/>':'\1':g)
-
 $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc
-ifneq ($(OLDREVISION),$(REVISION))
-	REVISION=$(REVISION); sed -e s:'^ .*<BuildNr Value=\"[0-9]*\"/>':"      <BuildNr Value=\"$$((${REVISION}+1))\"/>":g ttg.lpi > ttg_.lpi && \
+ifneq ($(BuildNr0),$(BuildNr))
+	BuildNr=$(BuildNr); sed -e s:"^ *<BuildNr Value=\"[0-9]*\"/>":"      <BuildNr Value=\"$$((${BuildNr}+1))\"/>":g ttg.lpi > ttg_.lpi && \
 	  mv ttg_.lpi ttg.lpi
 endif
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
@@ -92,8 +90,9 @@ clean: cleanthis
 
 test:
 	@echo UNITS=$(UNITS)
-	@echo OLDREVISION="$(OLDREVISION)"
-	@echo REVISION=$(REVISION)
+	@echo VERSION=$(VERSION)
+	@echo OLDBuildNr="$(OLDBuildNr)"
+	@echo BuildNr=$(BuildNr)
 	@echo TTGEXE=$(TTGEXE)
 	@echo BASELAZFILES=$(BASELAZFILES)
 	@echo DSRCBASE=$(DSRCBASE)
@@ -122,21 +121,3 @@ debug:
 
 ide:
 	$(LAZIDE) ttg.lpi &
-
-getBuildId:
-	@echo $(BuildId)
-
-getTTGEXE:
-	@echo $(TTGEXE)
-
-getREVISION:
-	@echo $(REVISION)
-
-getAPPVERSION:
-	@echo $(APPVERSION)
-
-getAPPNAME:
-	@echo $(APPNAME)
-
-getTargetCPU:
-	@echo $(TargetCPU)
