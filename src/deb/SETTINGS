@@ -6,8 +6,6 @@ include $(TTGSRC)/COMMON
 
 ARCH=$(shell dpkg --print-architecture)
 
-PKGBASE=ttg$(BuildLabel)_$(VERSION)_$(ARCH)
-
 PKGTTG=$(PKGDIR)/$(PKGBASE).deb
 ifeq ($(BuildMode),release)
 PKGTTG_DOC=$(PKGDIR)/$(PKGBASE_DOC).deb

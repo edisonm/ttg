@@ -39,3 +39,11 @@ cleanthis:
 	$(RM) -rf $(TTGSQLITE3) packages
 
 clean: cleanthis
+
+tbz:
+	svn export --force $(REPOSITORY) $(TGZBASE)
+	tar -cf - --owner=0 --group=0 $(TGZBASE)/* | bzip2 --best -c > $(TGZBASE).tar.bz2
+
+tgz:
+	svn export --force $(REPOSITORY) $(TGZBASE)
+	tar -cf - --owner=0 --group=0 $(TGZBASE)/* --exclude-from=Exclude --exclude-backups | gzip --best -c > $(TGZBASE).tar.gz

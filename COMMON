@@ -1,1 +1,26 @@
 # -*- mode: Makefile; -*-
+
+BuildMode?=release
+ifneq ($(BuildMode),release)
+BuildLabel=-$(BuildMode)
+endif
+
+MajorVersionNr=$(shell grep "^ *<MajorVersionNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<MajorVersionNr Value=\"\([0-9]*\)\"/>":"\1":g)
+MinorVersionNr=$(shell grep "^ *<MinorVersionNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<MinorVersionNr Value=\"\([0-9]*\)\"/>":"\1":g)
+RevisionNr=$(shell grep "^ *<RevisionNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<RevisionNr Value=\"\([0-9]*\)\"/>":"\1":g)
+BuildNr0=$(shell grep "^ *<BuildNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<BuildNr Value=\"\([0-9]*\)\"/>":"\1":g)
+Revision:=$(shell svn info $(REPOSITORY)|grep Revision|sed -e s:'Revision\: ':'':g -)
+SvnVersion:=$(shell svnversion $(TTGSRC))
+ifneq ($(BuildNr0),$(SvnVersion))
+  BuildNr:=$(shell Revision=$(Revision) ; echo "$$((${Revision}+1))")
+else
+  BuildNr:=$(Revision)
+endif
+APPVERSION=$(MajorVersionNr).$(MinorVersionNr).$(RevisionNr)
+VERSION=$(APPVERSION)-$(BuildNr)
+
+REPOSITORY=file:///home/edison/LocalReps/TTG/trunk/
+# PACKAGING RELATED:
+TGZBASE=ttg$(BuildLabel)_$(VERSION)
+PKGBASE=$(TGZBASE)_$(ARCH)
+PKGDIR=$(TTGDIR)/packages/$(BuildMode)
