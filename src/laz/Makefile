@@ -39,7 +39,7 @@ OLDREVISION=$(shell grep "^ .*<BuildNr Value=\"[0-9]*\"/>" ttg.lpi|sed -e s:'^ .
 
 $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc
 ifneq ($(OLDREVISION),$(REVISION))
-	REVISION=$REVISION; sed -e s:'^ .*<BuildNr Value=\"[0-9]*\"/>':'      <BuildNr Value="$$((${REVISION}+1))"/>':g ttg.lpi > ttg_.lpi && \
+	REVISION=$(REVISION); sed -e s:'^ .*<BuildNr Value=\"[0-9]*\"/>':'      <BuildNr Value="$$((${REVISION}+1))"/>':g ttg.lpi > ttg_.lpi && \
 	  mv ttg_.lpi ttg.lpi
 endif
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
