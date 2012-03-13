@@ -262,6 +262,7 @@ type
     FPeriod: Integer;
     FPreviousPeriod: Integer;
   protected
+    function GetMaxPosition: Integer; override;
   public
     procedure First; override;
     procedure Next; override;
@@ -342,7 +343,6 @@ type
     function GetResourceType1: Integer; inline;
     function GetResourceType2: Integer; inline;
   protected
-    function GetMaxPosition: Integer; override;
   public
     procedure First; override;
     procedure Next; override;
