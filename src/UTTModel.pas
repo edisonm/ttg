@@ -187,20 +187,18 @@ type
     function GetRestrictionValue: Integer;
     function GetBreakTimetableResourceValue: Integer;
     function GetBrokenSessionValue: Integer;
-    function GetValue: Integer;
     procedure Reset;
     {$IFDEF DEBUG}
     procedure CheckIntegrity(const ALabel: string);
     {$ENDIF}
   protected
     function GetElitistValues(Index: Integer): Integer; override;
+    function GetValue: Integer; override;
   public
     constructor Create(ATimetableModel: TTimetableModel);
     destructor Destroy; override;
     {Implements abstract class TIndividual:}
     procedure Update; override;
-    procedure UpdateValue; override;
-    procedure DoUpdateValue; inline;
     function NewBookmark: TBookmark; override;
     procedure SaveToDataModule(IdTimetable: Integer;
       TimeIni, TimeEnd: TDateTime; Summary: TStrings); override;
@@ -1345,7 +1343,6 @@ begin
         begin
           FTTSessionToPeriod[Session] := Period;
           DeltaValue(1, Session);
-          DoUpdateValue;
           if MinValue > Value then
           begin
             SelectedPeriodCount := 1;
@@ -1364,7 +1361,6 @@ begin
       end;
     end;
   end;
-  DoUpdateValue;
   {$IFDEF DEBUG}
   CheckIntegrity('After MakeRandom');
   {$ENDIF}
@@ -1727,7 +1723,6 @@ begin
     1: MoveRandomSession;
     2: SwapRandomResources;
   end;
-  DoUpdateValue;
   {$IFDEF DEBUG}
   CheckIntegrity('After Mutate');
   {$ENDIF}
@@ -1735,10 +1730,9 @@ end;
 
 function TTimetable.MoveSession(Session, Period: Integer): Integer;
 begin
-  Result := FValue;
+  Result := Value;
   DoMoveSession(Session, Period);
-  DoUpdateValue;
-  Result := FValue - Result;
+  Result := Value - Result;
 end;
 
 procedure TTimetable.DoMoveSession(Session, Period: Integer);
@@ -1756,10 +1750,9 @@ end;
 
 function TTimetable.Swap(Session1, Session2: Integer): Integer;
 begin
-  Result := FValue;
+  Result := Value;
   DoSwap(Session1, Session2);
-  DoUpdateValue;
-  Result := FValue - Result;
+  Result := Value - Result;
 end;
 
 procedure TTimetable.DoSwap(Session1, Session2: Integer);
@@ -1888,10 +1881,10 @@ var
 begin
   inherited;
   ATimetable := TTimetable(AIndividual);
-  FValue := ATimetable.FValue;
   TablingInfo.Assign(ATimetable.TablingInfo);
   FTTSessionToPeriod := TIntegerArrayHandler.Clone(ATimetable.FTTSessionToPeriod);
   TIntegerArrayArrayHandler.Copy(ATimetable.FTTActivityToNumResources, FTTActivityToNumResources);
+  Assert(Value = AIndividual.Value);
 end;
 
 procedure TTimetable.SaveToStream(Stream: TStream);
@@ -2214,7 +2207,6 @@ begin
     SetLength(FPriorityActivity, FActivityCount);
     for Activity := 0 to FActivityCount - 1 do
       FPriorityActivity[Activity] := 0;
-    FValue := 0;
   end;
 end;
 
@@ -2229,8 +2221,6 @@ begin
   with TTimetableModel(Model), TablingInfo do
   begin
     Reset;
-    {DoUpdateValue;}
-    {MinValue := MaxInt;}
     for Activity := 0 to FActivityCount - 1 do
     begin
       Value1 := PartialValue;
@@ -2239,18 +2229,10 @@ begin
         Session := FActivityToSessions[Activity, ActivitySession];
         DeltaValue(1, Session);
       end;
-      DoUpdateValue;
       Delta := PartialValue - Value1;
       TablingInfo.FPriorityActivity[Activity] := Max(0, Delta);
-      {if MinValue > Delta then
-        MinValue := Delta;}
     end;
-    {for Activity := 0 to FActivityCount - 1 do
-    begin
-      Dec(TablingInfo.FPriorityActivity[Activity], MinValue);
-    end;}
   end;
-  {WriteLn(Format('Priority List: %s', [TIntegerArrayHandler.ValueToString(TablingInfo.FPriorityActivity)]));}
 end;
 
 {$IFDEF DEBUG}
@@ -2262,12 +2244,7 @@ var
   ClashResourceValue2, ClashActivity2, NonScatteredActivity2,
   BreakTimetableResource2, RestrictionValue2, BrokenSession2: Integer;
 begin
-  Value2 := Value;
-  UpdateValue;
   Value1 := Value;
-  if Value1 <> Value2 then
-    WriteLn(Format('%s: Out of date Value: %d<>%d', [ALabel, Value2, Value1]));
-  
   ClashResourceValue1 := ClashResourceValue;
   ClashActivity1 := ClashActivity;
   NonScatteredActivity1 := NonScatteredActivity;
@@ -2321,16 +2298,6 @@ begin
     WriteLn(Format('  Incorrect BrokenSession: %d<>%d', [BrokenSession2]));
 end;
 {$ENDIF}
-
-procedure TTimetable.UpdateValue;
-begin
-  DoUpdateValue;
-end;
-
-procedure TTimetable.DoUpdateValue;
-begin
-  FValue := GetValue;
-end;
 
 destructor TTimetableModel.Destroy;
 begin
@@ -2782,7 +2749,7 @@ function TTTBookmarkTheme.Move: Integer;
 begin
   with Timetable do
   begin
-    Result := FValue;
+    Result := Value;
     FPreviousDeltaNumResource1 := FDeltaNumResource1;
     FPreviousDeltaNumResource2 := FDeltaNumResource2;
     DeltaActivityParticipantValue(Activity1, Participant11, +FDeltaNumResource1);
@@ -2791,8 +2758,7 @@ begin
     DeltaActivityParticipantValue(Activity2, Participant22, -FDeltaNumResource2);
     FDeltaNumResource1 := 0;
     FDeltaNumResource2 := 0;
-    DoUpdateValue;
-    Result := FValue - Result;
+    Result := Value - Result;
   end;
 end;
 
@@ -2800,15 +2766,14 @@ function TTTBookmarkTheme.Undo: Integer;
 begin
   with Timetable do
   begin
-    Result := FValue;
+    Result := Value;
     FDeltaNumResource1 := FPreviousDeltaNumResource1;
     FDeltaNumResource2 := FPreviousDeltaNumResource2;
     DeltaActivityParticipantValue(Activity2, Participant22, +FDeltaNumResource2);
     DeltaActivityParticipantValue(Activity1, Participant12, -FDeltaNumResource2);
     DeltaActivityParticipantValue(Activity2, Participant21, +FDeltaNumResource1);
     DeltaActivityParticipantValue(Activity1, Participant11, -FDeltaNumResource1);
-    DoUpdateValue;
-    Result := FValue - Result;
+    Result := Value - Result;
   end;
 end;
 

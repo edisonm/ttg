@@ -47,8 +47,8 @@ type
   TIndividual = class
   protected
     FModel: TModel;
-    FValue: Integer;
     function GetElitistValues(Index: Integer): Integer; virtual; abstract;
+    function GetValue: Integer; virtual; abstract;
   public
     procedure ReportValues(AReport: TStrings); virtual; abstract;
     procedure Assign(AIndividual: TIndividual); virtual;
@@ -56,7 +56,6 @@ type
     procedure LoadFromDataModule(Index: Integer); virtual; abstract;
     procedure Mutate; virtual; abstract;
     procedure Update; virtual; abstract;
-    procedure UpdateValue; virtual; abstract;
     procedure MakeRandom; virtual; abstract;
     function NewBookmark: TBookmark; virtual; abstract;
     procedure SaveToStream(Stream: TStream); virtual; abstract;
@@ -65,7 +64,7 @@ type
       TimeEnd: TDateTime; Summary: TStrings); virtual; abstract;
     property ElitistValues[Index: Integer]: Integer read GetElitistValues;
     property Model: TModel read FModel;
-    property Value: Integer read FValue;
+    property Value: Integer read GetValue;
   end;
 
   TIndividualArray = array of TIndividual;
@@ -158,7 +157,7 @@ end;
 
 procedure TIndividual.Assign(AIndividual: TIndividual);
 begin
-  FValue := AIndividual.FValue;
+  FModel := AIndividual.FModel;
 end;
 
 { TMultiBookmark }

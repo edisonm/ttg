@@ -6,7 +6,7 @@ unit UDownHill;
 interface
 
 uses
-  Classes, SysUtils, USolver, UModel, UTTModel;
+  Classes, SysUtils, USolver, UModel;
 
 type
 

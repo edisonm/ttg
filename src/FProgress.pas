@@ -139,8 +139,6 @@ begin
                                                BreakTimetableResource,
                                                BrokenSession,
                                                NonScatteredActivity);
-    //ASolver.Update;
-    ASolver.UpdateValue;
     FUpdateIndex := MainForm.UpdateIndex;
   end;
   with ASolver, TTimetable(BestIndividual) do

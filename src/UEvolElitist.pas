@@ -64,7 +64,6 @@ type
     function DownHill: Integer;
     procedure Repair;
     procedure Update; override;
-    procedure UpdateValue; override;
     property PopulationSize: Integer read FPopulationSize write SetPopulationSize;
     property OnRecordBest: TNotifyEvent read FOnRecordBest write FOnRecordBest;
     property MaxIteration: Integer read FMaxIteration write FMaxIteration;
@@ -171,18 +170,6 @@ begin
   for EIndivitual := 0 to Model.ElitistCount - 1 do
     FElitists[EIndivitual].Update;
 end;
-
-procedure TEvolElitist.UpdateValue;
-var
-  Individual, EIndivitual: Integer;
-begin
-  inherited UpdateValue;
-  for Individual := 0 to FPopulationSize - 1 do
-    FPopulation[Individual].UpdateValue;
-  for EIndivitual := 0 to Model.ElitistCount - 1 do
-    FElitists[EIndivitual].UpdateValue
-end;
-
 
 procedure TEvolElitist.Elitist;
 var

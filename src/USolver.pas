@@ -34,7 +34,6 @@ type
       APollinationProbability: Double);
     destructor Destroy; override;
     procedure Update; virtual;
-    procedure UpdateValue; virtual;
     procedure Execute(RefreshInterval: Integer); virtual;
     procedure SaveSolutionToDatabase(AIdTimetable: Integer;
       const AExtraInfo: string; ATimeIni, ATimeEnd: TDateTime); virtual; abstract;
@@ -88,11 +87,6 @@ end;
 procedure TSolver.Update;
 begin
   BestIndividual.Update;
-end;
-
-procedure TSolver.UpdateValue;
-begin
-  BestIndividual.UpdateValue;
 end;
 
 procedure TSolver.Execute(RefreshInterval: Integer);
