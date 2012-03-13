@@ -2368,7 +2368,7 @@ end;
 
 function TTTBookmark1.Bof: Boolean;
 begin
-  Result := FSession = 0;
+  Result := (FSession = 0) and (FPeriod = 0);
 end;
 
 procedure TTTBookmark1.First;
@@ -2384,7 +2384,7 @@ begin
   with TTimetableModel(Individual.Model), TTimetable(Individual) do
   begin
     Inc(FPeriod);
-    if FPeriod = PeriodCount - FSessionToDuration[FSession] then
+    if FPeriod = PeriodCount - FSessionToDuration[FSession] + 1 then
     begin
       Inc(FSession);
       if FSession = SessionCount then
@@ -2401,9 +2401,10 @@ begin
   Result := 0;
   with TimetableModel do
     for Session := 0 to SessionCount - 1 do
-      Inc(Result, PeriodCount - FSessionToDuration[Session]);
+      Inc(Result, PeriodCount - FSessionToDuration[Session] + 1);
   {$IFDEF DEBUG}
-  Assert(Result = inherited GetMaxPosition);
+  Assert(Result = inherited GetMaxPosition,
+    Format('%d<>%d', [Result, inherited GetMaxPosition]));
   {$ENDIF}
 end;
 
