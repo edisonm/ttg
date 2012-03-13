@@ -262,7 +262,6 @@ type
     FPeriod: Integer;
     FPreviousPeriod: Integer;
   protected
-    function GetMaxPosition: Integer; override;
   public
     procedure First; override;
     procedure Next; override;
@@ -2811,12 +2810,6 @@ begin
     DoUpdateValue;
     Result := FValue - Result;
   end;
-end;
-
-function TTTBookmarkTheme.GetMaxPosition: Integer;
-begin
-  Result := inherited GetMaxPosition;
-  WriteLn('TTTBookmarkTheme.GetMaxPosition=' + IntToStr(Result));
 end;
 
 end.
