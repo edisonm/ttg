@@ -93,15 +93,16 @@ type
   TProgressFormDrv = class
   private
     FProgressForm: TProgressForm;
+    FThread: TThread;
     FMax: Integer;
     FPosition: Integer;
     FTimetable: Integer;
     FSolver: TSolver;
     FCaption: string;
     procedure SetCaption(const AValue: string);
-    procedure UpdateCaption;
   public
-    constructor Create(Timetable: Integer);
+    procedure UpdateCaption;
+    constructor Create(AThread: TThread; Timetable: Integer);
     destructor Destroy; override;
     procedure CreateForm;
     procedure DestroyForm;
@@ -115,7 +116,7 @@ type
 implementation
 
 uses
-  FMain, DMaster, DSource, MTProcs, UTTGBasics;
+  FMain, DMaster, DSource, UTTGBasics;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -210,10 +211,18 @@ end;
 
 { TProgressFormDrv }
 
+constructor TProgressFormDrv.Create(AThread: TThread; Timetable: Integer);
+begin
+  inherited Create;
+  FThread := AThread;
+  FTimetable := Timetable;
+  TThread.Synchronize(FThread, CreateForm);
+end;
+
 procedure TProgressFormDrv.SetCaption(const AValue: string);
 begin
   FCaption := AValue;
-  TThread.Synchronize(CurrentThread, UpdateCaption);
+  TThread.Synchronize(FThread, UpdateCaption);
 end;
 
 procedure TProgressFormDrv.UpdateCaption;
@@ -221,16 +230,9 @@ begin
   FProgressForm.Caption := FCaption;
 end;
 
-constructor TProgressFormDrv.Create(Timetable: Integer);
-begin
-  inherited Create;
-  FTimetable := Timetable;
-  TThread.Synchronize(CurrentThread, CreateForm);
-end;
-
 destructor TProgressFormDrv.Destroy;
 begin
-  TThread.Synchronize(CurrentThread, DestroyForm);
+  TThread.Synchronize(FThread, DestroyForm);
   inherited Destroy;
 end;
 
@@ -261,7 +263,7 @@ begin
   FPosition := APosition;
   FMax := AMax;
   FSolver := ASolver;
-  TThread.Synchronize(CurrentThread, DoProgress);
+  TThread.Synchronize(FThread, DoProgress);
   with FProgressForm do
     if (CloseClick or CancelClick) then
       Stop := True;

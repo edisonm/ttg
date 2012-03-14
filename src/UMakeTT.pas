@@ -145,7 +145,7 @@ begin
       MutationProbability, ReparationProbability, InitialTimetables);
     try
       Synchronize(EvolElitist.Initialize);
-      ProgressFormDrv := TProgressFormDrv.Create(ATimetable);
+      ProgressFormDrv := TProgressFormDrv.Create(Self, ATimetable);
       try
         ProgressFormDrv.Caption := Format(SWorkInProgress, [AIdTimetable]);
         EvolElitist.OnProgress := ProgressFormDrv.OnProgress;
@@ -285,7 +285,7 @@ begin
         Free;
       end;
       TDownHill.DownHill(DownHill.BestIndividual);
-      ProgressFormDrv := TProgressFormDrv.Create(0);
+      ProgressFormDrv := TProgressFormDrv.Create(Self, 0);
       try
         DownHill.OnProgress := ProgressFormDrv.OnProgress;
         ProgressFormDrv.Caption := Format(SImprovingTimetableIn,
