@@ -1093,8 +1093,8 @@ var
     SetLength(FGroupSessions, FGroupCount);
     {$IFDEF DEBUG}
     WriteLn(Format('Length(FGroupSessions)=%d', [Length(FGroupSessions)]));
-    WriteLn(Format('FGroupSessions=%s', [TIntArrayArrayToString.ValueToString(FGroupSessions)]));
-    WriteLn(Format('FResourceToActivities=%s', [TIntArrayArrayToString.ValueToString(FResourceToActivities)]));
+    WriteLn(Format('FGroupSessions=%s', [TIntegerArrayArrayHandler.ValueToString(FGroupSessions)]));
+    WriteLn(Format('FResourceToActivities=%s', [TIntegerArrayArrayHandler.ValueToString(FResourceToActivities)]));
     {$ENDIF}
     for Activity := 0 to FActivityCount - 1 do
     begin

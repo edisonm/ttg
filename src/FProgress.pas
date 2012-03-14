@@ -109,6 +109,7 @@ type
     procedure DoProgress;
     procedure OnProgress(APosition, AMax: Integer; ASolver: TSolver;
       var Stop: Boolean);
+    property CloseClick: Boolean read FProgressForm.FCloseClick;
     property CancelClick: Boolean read FProgressForm.FCancelClick;
     property Caption: string read FCaption write SetCaption;
   end;

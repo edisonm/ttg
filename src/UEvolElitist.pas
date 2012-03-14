@@ -309,6 +309,9 @@ end;
 
 procedure TEvolElitist.ApplyOperators;
 var
+  {$IFNDEF THREADED}
+  Pair: Integer;
+  {$ENDIF}
   Pairs: TDynamicIntegerArray;
 begin
   // Cross;

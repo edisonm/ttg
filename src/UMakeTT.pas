@@ -155,7 +155,7 @@ begin
           Result := True;
           Exit;
         end;
-        if ApplyDoubleDownHill then
+        if not ProgressFormDrv.CloseClick and ApplyDoubleDownHill then
         begin
           DownHill := TDownHill.Create(FTimetableModel,
             SharedDirectory, PollinationProbability);
