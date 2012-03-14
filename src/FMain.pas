@@ -16,8 +16,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, MTProcs, SysUtils, Classes, Graphics,
   Forms, Dialogs, ExtCtrls, Menus, ComCtrls, Buttons, ActnList, FSplash, FSingleEditor,
-  Controls, FCrossManyToManyEditor0, FEditor, UConfigStorage
-{$IFNDEF READER}, UTTModel, UMakeTT{$ENDIF};
+  Controls, FCrossManyToManyEditor0, FEditor, UConfigStorage, UTTModel, UMakeTT;
 
 type
 
@@ -162,9 +161,7 @@ type
     procedure LoadFromFile(const AFileName: string);
     procedure SaveToFile(const AFileName: string);
     function ConfirmOperation: boolean;
-{$IFNDEF READER}
     procedure MakeTimetables(const SIdTimetables: string);
-{$ENDIF}
     procedure RegisterSoftware;
     procedure ProtectSoftware;
 
@@ -377,12 +374,9 @@ begin
 end;
 
 procedure TMainForm.ActMakeTimetableExecute(Sender: TObject);
-{$IFNDEF READER}
 var
   SIdTimetables: string;
-{$ENDIF}
 begin
-{$IFNDEF READER}
   try
     SIdTimetables := IntToStr(MasterDataModule.NewIdTimetable);
     if not InputQuery(SGenerateTimetables, STimetableCodesToGenerate, SIdTimetables) then
@@ -391,10 +385,8 @@ begin
   finally
     ActMakeTimetable.Checked := False;
   end;
-{$ENDIF}
 end;
 
-{$IFNDEF READER}
 procedure TMainForm.MakeTimetables(const SIdTimetables: string);
 var
   ValidIds, WrongIds: TDynamicIntegerArray;
@@ -461,7 +453,6 @@ begin
     end;
   end;
 end;
-{$ENDIF}
 
 procedure TMainForm.SetMax(Value: Integer);
 begin
@@ -613,22 +604,6 @@ begin
     FRelProgress := 0;
     FStep := 1;
     FLogStrings := TStringList.Create;
-    {$IFDEF READER}
-    ActMakeTimetable.Enabled := False;
-    Caption := Caption + ' >>> Freeware <<<';
-    {$ENDIF}
-{    Protect1.ExpirationDays := 60;}
-{    with FSProtection do
-    begin
-      //StoredValue['Password'] := '';
-      //StoredValue['InitDate'] := '';
-      //StoredValue['LastDate'] := '';
-      RestoreFormPlacement;
-      Protect1.UserID := Protect1.HardDiskID;
-      if StoredValue['Password'] <> Protect1.Password then
-        RegisterSoftware;
-      ProtectSoftware;
-    end;}
   except
     ActMakeTimetable.Enabled := False;
     raise;
@@ -642,9 +617,7 @@ begin
     begin
       MainForm.Caption := Application.Title + ' - ' +
         MasterDataModule.ConfigStorage.NaInstitution;
-      {$IFNDEF READER}
       Inc(FUpdateIndex);
-      {$ENDIF}
     end
     else
     begin
