@@ -50,7 +50,7 @@ var
 implementation
 
 uses
-  UTTGBasics, UTTGDBUtils, UTTGConsts, DSource, DSourceBaseConsts;
+  UTTGConsts, DSource, DSourceBaseConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}

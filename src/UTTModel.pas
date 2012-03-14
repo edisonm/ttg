@@ -1642,7 +1642,10 @@ procedure TTimetable.Mutate;
   begin
     with TTimetableModel(Model) do
     begin
-      if (Random(1) = 0) then
+      Activity1 := RandomTable(TablingInfo.FPriorityActivity);
+      Session1 := FActivityToSessions[Activity1, Random(Length(FActivityToSessions[Activity1]))];
+      {
+      if (Random(2) = 0) then
       begin
         Activity1 := RandomTable(TablingInfo.FPriorityActivity);
         Session1 := FActivityToSessions[Activity1, Random(Length(FActivityToSessions[Activity1]))];
@@ -1652,6 +1655,7 @@ procedure TTimetable.Mutate;
         Session1 := Random(FSessionCount);
         Activity1 := FSessionToActivity[Session1];
       end;
+      }
       // repeat
       Participant := Random(Length(FActivityParticipantToResource[Activity1]));
       Resource := FActivityParticipantToResource[Activity1, Participant];
@@ -2222,7 +2226,8 @@ var
   Activity, Session, ActivitySession, Delta, Value1: Integer;
   function PartialValue: Integer;
   begin
-    Result := ClashResourceValue + ClashActivityValue + BrokenSessionValue;
+    Result := Value;
+    //Result := ClashResourceValue + ClashActivityValue + BrokenSessionValue;
   end;
 begin
   with TTimetableModel(Model), TablingInfo do
@@ -2230,14 +2235,28 @@ begin
     Reset;
     for Activity := 0 to FActivityCount - 1 do
     begin
-      Value1 := PartialValue;
       for ActivitySession := 0 to High(FActivityToSessions[Activity]) do
       begin
         Session := FActivityToSessions[Activity, ActivitySession];
         DeltaValue(1, Session);
       end;
-      Delta := PartialValue - Value1;
-      TablingInfo.FPriorityActivity[Activity] := Max(0, Delta);
+    end;
+    Value1 := PartialValue;
+    for Activity := 0 to FActivityCount - 1 do
+    begin
+      for ActivitySession := 0 to High(FActivityToSessions[Activity]) do
+      begin
+        Session := FActivityToSessions[Activity, ActivitySession];
+        DeltaValue(-1, Session);
+      end;
+      Delta := Value1 - PartialValue;
+      TablingInfo.FPriorityActivity[Activity] := 1 + Max(0, Delta); // > 0
+      for ActivitySession := 0 to High(FActivityToSessions[Activity]) do
+      begin
+        Session := FActivityToSessions[Activity, ActivitySession];
+        DeltaValue(1, Session);
+      end;
+      Assert(PartialValue=Value1);
     end;
   end;
 end;

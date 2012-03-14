@@ -36,6 +36,7 @@ type
       class function Drop(var Vector: TArrayOfT; const Value: T): Integer;
       class procedure PushBack(var Vector: TArrayOfT; const Value: T);
       class procedure Zero(var Vector: TArrayOfT);
+      class function Compare(const Vector1, Vector2: TArrayOfT): Boolean;
   end;
   
   TIntegerHandler = class
@@ -44,6 +45,7 @@ type
     class function Clone(const Value: Integer): Integer; inline;
     class procedure Copy(const Source: Integer; var Target: Integer); inline;
     class procedure Zero(var Value: Integer); inline;
+    class function Compare(const Value1, Value2: Integer): Boolean; inline;
   end;
   
   TIntegerArrayHandler = class(specialize TArrayHandler<Integer,TIntegerHandler>)
@@ -102,6 +104,27 @@ begin
   end;
 end;
 
+function TestRandomCummulated(Table: TDynamicIntegerArray): Boolean;
+var
+  Sum, p, Index: Integer;
+  Cummulated, RTable: TDynamicIntegerArray;
+begin
+  Cummulated := CummulatedTable(Table);
+  Sum := Cummulated[High(Cummulated)];
+  SetLength(RTable, Length(Table));
+  TIntegerArrayHandler.Zero(RTable);
+  for p := 0 to Sum - 1 do
+  begin
+    Index := 0;
+    while Cummulated[Index] <= p do
+    begin
+      Inc(Index);
+    end;
+    Inc(RTable[Index]);
+  end;
+  Result := TIntegerArrayHandler.Compare(Table, RTable);
+end;
+
 function RandomTable(Table: TDynamicIntegerArray): Integer;
 begin
   if Length(Table) = 0 then
@@ -110,6 +133,9 @@ begin
     Exit;
   end;
   Result := RandomCummulated(CummulatedTable(Table));
+  {$IFDEF DEBUG}
+  Assert(TestRandomCummulated(Table));
+  {$ENDIF}
 end;
 
 function RandomCummulated(Cummulated: TDynamicIntegerArray): Integer;
@@ -140,6 +166,11 @@ begin
   Result := Value;
 end;
 
+class function TIntegerHandler.Compare(const Value1, Value2: Integer): Boolean; inline;
+begin
+  Result := Value1 = Value2;
+end;
+
 class procedure TIntegerHandler.Copy(const Source: Integer; var Target: Integer); inline;
 begin
   Target := Source;
@@ -153,6 +184,26 @@ begin
   n := Min(High(Vector1), High(Vector2));
   for i := 0 to n do
     Result := Result + Vector1[i] * Vector2[i];
+end;
+
+class function TArrayHandler.Compare(const Vector1, Vector2: TArrayOfT): Boolean;
+var
+  i: Integer;
+begin
+  if Length(Vector1) <> Length(Vector2) then
+    Result := False
+  else
+  begin
+    for i := 0 to High(Vector1) do
+    begin
+      if not E.Compare(Vector1[i], Vector2[i]) then
+      begin
+        Result := False;
+        exit;
+      end;
+    end;
+    Result := True;
+  end;
 end;
 
 class function TIntegerArrayHandler.Max(const Vector: TDynamicIntegerArray): Integer;
