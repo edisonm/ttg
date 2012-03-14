@@ -1091,9 +1091,11 @@ var
     end;
     FGroupCount := Group;
     SetLength(FGroupSessions, FGroupCount);
+    {$IFDEF DEBUG}
     WriteLn(Format('Length(FGroupSessions)=%d', [Length(FGroupSessions)]));
-    {WriteLn(Format('FGroupSessions=%s', [TIntArrayArrayToString.ValueToString(FGroupSessions)]));
-    WriteLn(Format('FResourceToActivities=%s', [TIntArrayArrayToString.ValueToString(FResourceToActivities)]));}
+    WriteLn(Format('FGroupSessions=%s', [TIntArrayArrayToString.ValueToString(FGroupSessions)]));
+    WriteLn(Format('FResourceToActivities=%s', [TIntArrayArrayToString.ValueToString(FResourceToActivities)]));
+    {$ENDIF}
     for Activity := 0 to FActivityCount - 1 do
     begin
       if not ActivityIsPlaced[Activity] then
@@ -1147,8 +1149,10 @@ begin
   LoadGreedyData;
   if SErrors <> '' then
     raise Exception.Create(SErrors);
+  {$IFDEF DEBUG}
   WriteLn(Format('FThemeToResources=%s', [TIntegerArrayArrayHandler.ValueToString(FThemeToResources)]));
   WriteLn(Format('FThemeToNumResources=%s', [TIntegerArrayArrayHandler.ValueToString(FThemeToNumResources)]));
+  {$ENDIF}
 end;
 
 procedure TTimetableModel.Configure(AClashActivityValue,
