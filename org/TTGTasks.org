@@ -5,3 +5,27 @@
   - Remove dependencies of ArControls.
 * TODO To migrate this project to Lazarus and see if it works ok	 :EM:
 
+2012-02-08
+==========
+TODO:
+
+Distribution changes:
+
+- One teacher for two or more classes. DONE
+- In one Class, one or more Teachers. DONE
+- Allow swapping of teachers of same subjects, assigned to groups in
+  same courses. DONE
+
+2012-02-15
+==========
+New Goal: generalize the tool to any kind of timetable. DONE
+- Rename Subject to Theme. DONE
+- Rename Teacher to Resource
+- Rename Class to Cluster
+- Rename Course to Category. DONE
+- Add ResourceType . DONE
+- Unify Teachers and Classrooms, and differentiate the items with ResourceType. DONE
+
+- usolver.pp(38,23) Hint: Parameter "RefreshInterval" not used
+- usolver.pp(137,26) Hint: Local variable "Value" does not seem to be initialized
+- IntercambiarTimeSlots --> SwapTimeSlots. DONE
