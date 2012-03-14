@@ -16,5 +16,5 @@ EXEEXT=
 LAZBASE=/home/edison/apps/pascal/lazarus
 FPC=fpc
 endif
-TTGEXE=$(TTGDIR)/bin/ttg-$(BuildId)$(EXEEXT)
+TTGEXE=$(TTGDIR)/bin/$(BuildId)$(EXEEXT)/ttg
 OBJDIR=$(TTGDIR)/obj/$(BuildId)

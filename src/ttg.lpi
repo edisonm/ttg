@@ -20,14 +20,14 @@
       <MajorVersionNr Value="1"/>
       <MinorVersionNr Value="2"/>
       <RevisionNr Value="2"/>
-      <BuildNr Value="961"/>
+      <BuildNr Value="963"/>
       <CharSet Value="04B0"/>
       <StringTable LegalCopyright="1999-2012, Edison Mera" ProductVersion="" FileDescription="Automatic Timetable Generator"/>
     </VersionInfo>
     <MacroValues Count="1">
       <Macro1 Name="BuildLabel" Value="-debug"/>
     </MacroValues>
-    <BuildModes Count="3">
+    <BuildModes Count="2">
       <Item1 Name="debug" Default="True"/>
       <Item2 Name="release">
         <MacroValues Count="1">
@@ -36,7 +36,7 @@
         <CompilerOptions>
           <Version Value="11"/>
           <Target>
-            <Filename Value="../bin/ttg-$(TargetCPU)-$(TargetOS)"/>
+            <Filename Value="../bin/$(TargetCPU)-$(TargetOS)/ttg"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
@@ -71,58 +71,6 @@
           </Other>
         </CompilerOptions>
       </Item2>
-      <Item3 Name="reader">
-        <MacroValues Count="1">
-          <Macro1 Name="BuildLabel" Value="-reader"/>
-        </MacroValues>
-        <CompilerOptions>
-          <Version Value="11"/>
-          <Target>
-            <Filename Value="../bin/ttg-$(TargetCPU)-$(TargetOS)-reader"/>
-          </Target>
-          <SearchPaths>
-            <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="../../zeosdbo/packages/lazarus;../../zeosdbo/src/core;../../zeosdbo/src/dbc;../../zeosdbo/src/parsesql;../../zeosdbo/src/plain;../../zeosdbo/src/component;../../multithreadprocs;../../DBConvert/auxiliary"/>
-            <UnitOutputDirectory Value="../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)"/>
-          </SearchPaths>
-          <Parsing>
-            <SyntaxOptions>
-              <UseAnsiStrings Value="False"/>
-            </SyntaxOptions>
-          </Parsing>
-          <CodeGeneration>
-            <SmartLinkUnit Value="True"/>
-            <Optimizations>
-              <VariablesInRegisters Value="True"/>
-              <OptimizationLevel Value="3"/>
-            </Optimizations>
-          </CodeGeneration>
-          <Linking>
-            <Debugging>
-              <GenerateDebugInfo Value="False"/>
-            </Debugging>
-            <LinkSmart Value="True"/>
-          </Linking>
-          <Other>
-            <CompilerMessages>
-              <UseMsgFile Value="True"/>
-            </CompilerMessages>
-            <CustomOptions Value="-dREADER
--dZEOS_DISABLE_MYSQL
--dZEOS_DISABLE_POSTGRESQL
--dZEOS_DISABLE_DBLIB
--dZEOS_DISABLE_ADO
--dZEOS_DISABLE_INTERBASE
--dZEOS_DISABLE_ORACLE
--dZEOS_DISABLE_ASA
--Xs- -FW../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)/ttg.wpo -OWall"/>
-            <CompilerPath Value="$(CompPath)"/>
-            <ExecuteAfter>
-              <ShowAllMessages Value="True"/>
-            </ExecuteAfter>
-          </Other>
-        </CompilerOptions>
-      </Item3>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -419,7 +367,7 @@
   <CompilerOptions>
     <Version Value="11"/>
     <Target>
-      <Filename Value="../bin/ttg-$(TargetCPU)-$(TargetOS)-debug"/>
+      <Filename Value="../bin/$(TargetCPU)-$(TargetOS)-debug/ttg"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
