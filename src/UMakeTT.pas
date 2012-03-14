@@ -6,7 +6,7 @@ unit UMakeTT;
 interface
 
 uses
-  Classes, SysUtils, MTProcs, UTTModel, DMaster, USolver, UModel, UTTGBasics,
+  Classes, SysUtils, UTTModel, DMaster, USolver, UModel, UTTGBasics,
     UDownHill;
 
 type
@@ -17,7 +17,6 @@ type
   private
     FTimetableModel: TTimetableModel;
     FValidIds: TDynamicIntegerArray;
-    procedure Parallel(Index: PtrInt; Data: Pointer; Item: TMultiThreadProcItem);
     function ProcessTimetable(AIdTimetable, ATimetable: Integer): Boolean;
   public
   procedure Execute; override;
@@ -127,7 +126,7 @@ end;
 
 function TMakeTimetableThread.ProcessTimetable(AIdTimetable, ATimetable: Integer): Boolean;
 var
-  VEvolElitist: TEvolElitist;
+  EvolElitist: TEvolElitist;
   DownHill: TDownHill;
   FTimeIni: TDateTime;
   ProgressFormDrv: TProgressFormDrv;
@@ -141,16 +140,16 @@ begin
   FBoolToStr[True] := SYes;
   with MasterDataModule.ConfigStorage do
   begin
-    VEvolElitist := TEvolElitist.Create(FTimetableModel, SharedDirectory,
+    EvolElitist := TEvolElitist.Create(FTimetableModel, SharedDirectory,
       PollinationProbability, PopulationSize, MaxIteration, CrossProbability,
       MutationProbability, ReparationProbability, InitialTimetables);
     try
-      TThread.Synchronize(CurrentThread, VEvolElitist.Initialize);
+      Synchronize(EvolElitist.Initialize);
       ProgressFormDrv := TProgressFormDrv.Create(ATimetable);
       try
         ProgressFormDrv.Caption := Format(SWorkInProgress, [AIdTimetable]);
-        VEvolElitist.OnProgress := ProgressFormDrv.OnProgress;
-        VEvolElitist.Execute(RefreshInterval);
+        EvolElitist.OnProgress := ProgressFormDrv.OnProgress;
+        EvolElitist.Execute(RefreshInterval);
         if ProgressFormDrv.CancelClick then
         begin
           Result := True;
@@ -161,7 +160,7 @@ begin
           DownHill := TDownHill.Create(FTimetableModel,
             SharedDirectory, PollinationProbability);
           try
-            DownHill.BestIndividual.Assign(VEvolElitist.BestIndividual);
+            DownHill.BestIndividual.Assign(EvolElitist.BestIndividual);
             ProgressFormDrv.Caption := Format(SImprovingTimetable, [AIdTimetable]);
             DownHill.OnProgress := ProgressFormDrv.OnProgress;
             ExecuteDownHill(DownHill, Bookmarks, RefreshInterval);
@@ -170,64 +169,44 @@ begin
               Result := True;
               Exit;
             end;
-            VEvolElitist.BestIndividual.Assign(DownHill.BestIndividual);
+            EvolElitist.BestIndividual.Assign(DownHill.BestIndividual);
           finally
             DownHill.Free;
           end;
         end
         else
         begin
-          VEvolElitist.DownHill;
+          EvolElitist.DownHill;
         end;
       finally
         ProgressFormDrv.Free;
       end;
-      VEvolElitist.BestIndividual.Update;
+      EvolElitist.BestIndividual.Update;
       ExtraInfo := Format('%0:-28s %12s',
         [SApplyDownhill + ':', FBoolToStr[ApplyDoubleDownHill]]);
-      with TSyncSaver.Create(VEvolElitist, AIdTimetable, ExtraInfo,
+      with TSyncSaver.Create(EvolElitist, AIdTimetable, ExtraInfo,
         FTimeIni, Now) do
       try
-        TThread.Synchronize(CurrentThread, Execute);
+        Synchronize(Execute);
       finally
         Free;
       end;
     finally
-      VEvolElitist.Free;
+      EvolElitist.Free;
     end;
   end;
 end;
 
-{ TMakeTimetableThread }
-
-procedure TMakeTimetableThread.Parallel(Index: PtrInt; Data: Pointer;
-  Item: TMultiThreadProcItem);
-begin
-  try
-    MasterDataModule.ConfigStorage.InitRandom;
-    if ProcessTimetable(FValidIds[Index], Index) then
-      Terminate;
-  except
-    on E: Exception do
-      begin
-        WriteLn(StdErr, E.Message);
-        raise;
-      end;
-  end;
-end;
-
 procedure TMakeTimetableThread.Execute;
-{$IFNDEF THREADED}
 var
-  Index: PtrInt;
-{$ENDIF}
+  ValidId: Integer;
 begin
-  {$IFDEF THREADED}
-  ProcThreadPool.DoParallel(Parallel, 0, High(FValidIds), nil);
-  {$ELSE}
-  for Index := 0 to High(FValidIds) do
-    Parallel(Index, nil, nil);
-  {$ENDIF}
+  for ValidId := 0 to High(FValidIds) do
+  begin
+    MasterDataModule.ConfigStorage.InitRandom;
+    if ProcessTimetable(FValidIds[ValidId], ValidId) then
+      Terminate;
+  end;
 end;
 
 constructor TMakeTimetableThread.Create(const AValidIds: TDynamicIntegerArray;
@@ -301,7 +280,7 @@ begin
       with TSyncLoader.Create(TTimetable(DownHill.BestIndividual),
         FIdTimetableFuente) do
       try
-        TThread.Synchronize(CurrentThread, Execute);
+        Synchronize(Execute);
       finally
         Free;
       end;
@@ -322,7 +301,7 @@ begin
           with TSyncSaver.Create(DownHill, FIdTimetable, ExtraInfo,
             TimeIni, Now) do
           try
-            TThread.Synchronize(CurrentThread, Execute);
+            Synchronize(Execute);
           finally
             Free;
           end;

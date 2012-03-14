@@ -1,17 +1,17 @@
 inherited TimetableForm: TTimetableForm
-  Left = 843
+  Left = 836
   Height = 545
   Top = 415
-  Width = 899
+  Width = 913
   Caption = 'TimetableForm'
   ClientHeight = 545
-  ClientWidth = 899
+  ClientWidth = 913
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   inherited TBEditor: TToolBar
-    Width = 899
+    Width = 913
     inherited DBNavigator: TDBNavigator
       Width = 154
       ClientWidth = 154
@@ -70,50 +70,50 @@ inherited TimetableForm: TTimetableForm
   end
   inherited PnStatus: TPanel
     Top = 526
-    Width = 899
-    ClientWidth = 899
+    Width = 913
+    ClientWidth = 913
     inherited LbRecordNo: TLabel
-      Left = 897
+      Left = 911
     end
   end
   inherited PnEditor: TPanel
     Height = 501
-    Width = 899
+    Width = 913
     ClientHeight = 501
-    ClientWidth = 899
+    ClientWidth = 913
     inherited GroupBox: TGroupBox
       Height = 499
-      Width = 378
+      Width = 412
       Align = alLeft
       ClientHeight = 481
-      ClientWidth = 370
+      ClientWidth = 404
       inherited DBGrid: TDBGrid
         Height = 481
-        Width = 370
+        Width = 404
         OnDblClick = DBGridDblClick
       end
     end
     object Splitter1: TSplitter[1]
-      Left = 379
+      Left = 413
       Height = 499
       Top = 1
       Width = 5
     end
     object Panel2: TPanel[2]
-      Left = 384
+      Left = 418
       Height = 499
       Top = 1
-      Width = 514
+      Width = 494
       Align = alClient
       BevelOuter = bvNone
       ClientHeight = 499
-      ClientWidth = 514
+      ClientWidth = 494
       TabOrder = 1
       object DBMSummary: TDBMemo
         Left = 0
         Height = 499
         Top = 0
-        Width = 514
+        Width = 494
         Align = alClient
         DataField = 'Summary'
         DataSource = DataSource

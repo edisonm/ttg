@@ -6,7 +6,7 @@ unit UEvolElitist;
 interface
 
 uses
-  Classes, SysUtils, UModel, USolver, UTTGBasics, UDownHill;
+  Classes, SysUtils, UModel, USolver, UTTGBasics, UDownHill, MTProcs;
 
 type
 
@@ -43,13 +43,15 @@ type
     procedure MakeRandom;
     procedure Elitist;
     procedure Select;
-    procedure Cross;
-    procedure Mutate;
-    procedure InternalCrossIndividuals(Individual1, Individual2: Integer);
+    function Cross(Individual1, Individual2: Integer): Boolean; inline;
+    function Mutate(Individual: Integer): Boolean; inline;
+    procedure Repair(Individual: Integer); inline;
+    procedure ApplyOperators;
     function GetAverageValue: Double;
     procedure SetPopulationSize(APopulationSize: Integer);
   protected
   public
+    procedure ApplyOperatorsPairs(Pair: PtrInt; Data: Pointer; Item: TMultiThreadProcItem);
     procedure Initialize;
     procedure ReportParameters(ASummary: TStrings);
     constructor Create(AModel: TModel; const ASharedDirectory: string;
@@ -62,7 +64,6 @@ type
     procedure SaveBestToStream(AStream: TStream);
     procedure Execute(RefreshInterval: Integer); override;
     function DownHill: Integer;
-    procedure Repair;
     procedure Update; override;
     property PopulationSize: Integer read FPopulationSize write SetPopulationSize;
     property OnRecordBest: TNotifyEvent read FOnRecordBest write FOnRecordBest;
@@ -145,19 +146,6 @@ begin
     FElitists[Individual].MakeRandom;
   end;
   BestIndividual.MakeRandom;
-end;
-
-procedure TEvolElitist.Repair;
-var
-  Individual: Integer;
-begin
-  for Individual := 0 to FPopulationSize - 1 do
-  begin
-    if Random < FReparationProbability then
-    begin
-      TDownHill.DownHill(FPopulation[Individual]);
-    end;
-  end;
 end;
 
 procedure TEvolElitist.Update;
@@ -283,39 +271,51 @@ begin
   end;
 end;
 
-procedure TEvolElitist.Cross;
-var
-  Individual, One, First: Integer;
+function TEvolElitist.Cross(Individual1, Individual2: Integer): Boolean;
 begin
-  First := 0;
-  One := 0;
-  for Individual := 0 to FPopulationSize - 1 do
-  begin
-    if Random < FCrossProbability then
-    begin
-      Inc(First);
-      if First mod 2 = 0 then
-        InternalCrossIndividuals(One, Individual)
-      else
-        One := Individual;
-    end;
-  end;
+  Result := Random < FCrossProbability;
+  if Result then
+    FPopulation[Individual1].Cross(FPopulation[Individual2]);
 end;
 
-procedure TEvolElitist.InternalCrossIndividuals(Individual1, Individual2: Integer);
+function TEvolElitist.Mutate(Individual: Integer): Boolean;
 begin
-  FPopulation[Individual1].Cross(FPopulation[Individual2]);
+  Result := Random < FMutationProbability;
+  if Result then
+    FPopulation[Individual].Mutate;
 end;
 
-procedure TEvolElitist.Mutate;
-var
-  Individual: Integer;
+procedure TEvolElitist.Repair(Individual: Integer);
 begin
-  for Individual := 0 to FPopulationSize - 1 do
-  begin
-    if Random < FMutationProbability then
-      FPopulation[Individual].Mutate;
-  end;
+  if Random < FReparationProbability then
+    TDownHill.DownHill(FPopulation[Individual]);
+end;
+
+procedure TEvolElitist.ApplyOperatorsPairs(Pair: PtrInt; Data: Pointer; Item: TMultiThreadProcItem);
+var
+  Pairs: PIntegerArray;
+  Individual1, Individual2: Integer;
+  NeedsRepairing1, NeedsRepairing2: Boolean;
+begin
+  Pairs := PIntegerArray(Data);
+  Individual1 := Pairs[2*Pair];
+  Individual2 := Pairs[2*Pair + 1];
+  NeedsRepairing1 := Cross(Individual1, Individual2);
+  NeedsRepairing2 := Mutate(Individual2) or NeedsRepairing1;
+  NeedsRepairing1 := Mutate(Individual1) or NeedsRepairing1;
+  if NeedsRepairing1 then Repair(Individual1);
+  if NeedsRepairing2 then Repair(Individual2);
+end;
+
+procedure TEvolElitist.ApplyOperators;
+var
+  Pairs: TDynamicIntegerArray;
+begin
+  // Cross;
+  // Mutate;
+  // Repair;
+  Pairs := RandomIndexes(2 * (FPopulationSize div 2));
+  ProcThreadPool.DoParallel(ApplyOperatorsPairs, 0, FPopulationSize div 2 - 1, @Pairs[0]);
 end;
 
 procedure TEvolElitist.Execute(RefreshInterval: Integer);
@@ -333,9 +333,7 @@ begin
     while (Iteration < FMaxIteration) and not Stop do
     begin
       DoProgress(Iteration, FMaxIteration, RefreshInterval, Self, Stop);
-      Cross;
-      Mutate;
-      Repair;
+      ApplyOperators;
       Pollinate;
       Elitist;
       Select;
