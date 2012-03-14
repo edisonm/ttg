@@ -50,8 +50,6 @@ type
     speSeed: TSpinEdit;
     LbAuthority: TLabel;
     EdNameAuthority: TEdit;
-    LbUpdateEach: TLabel;
-    speNumIterations: TSpinEdit;
     LbBreakTimetableResource: TLabel;
     EdBreakTimetableResource: TEdit;
     LbInitialTimetables: TLabel;
@@ -125,7 +123,6 @@ begin
       MeComments.Lines.Text := Comments;
       CBUseCustomSeed.Checked := UseCustomSeed;
       speSeed.Value := Seed;
-      speNumIterations.Value := RefreshInterval;
       EdClashActivity.Text := FloatToStr(ClashActivity);
       EdBreakTimetableResource.Text := FloatToStr(BreakTimetableResource);
       EdBrokenSession.Text := FloatToStr(BrokenSession);
@@ -152,7 +149,6 @@ begin
       Comments := MeComments.Lines.Text;
       UseCustomSeed := CBUseCustomSeed.Checked;
       Seed := speSeed.Value;
-      RefreshInterval := speNumIterations.Value;
       ClashActivity := StrToInt(EdClashActivity.Text);
       BreakTimetableResource := StrToInt(EdBreakTimetableResource.Text);
       BrokenSession := StrToInt(EdBrokenSession.Text);

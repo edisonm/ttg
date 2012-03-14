@@ -31,13 +31,12 @@ type
     procedure SetUpToDate;
   protected
   public
-    procedure DoProgress(Position, Max, RefreshInterval: Integer; Solver: TSolver;
-      var Stop: Boolean);
+    procedure DoProgress(Position, Max: Integer; Solver: TSolver; var Stop: Boolean);
     constructor Create(AModel: TModel; const ASharedDirectory: string;
       APollinationProbability: Double);
     destructor Destroy; override;
     procedure Update; virtual;
-    procedure Execute(RefreshInterval: Integer); virtual;
+    procedure Execute; virtual;
     procedure SaveSolutionToDatabase(AIdTimetable: Integer;
       const AExtraInfo: string; ATimeIni, ATimeEnd: TDateTime); virtual; abstract;
     function Pollinate: Boolean; overload;
@@ -72,17 +71,13 @@ begin
   FLastUpdate := Now;
 end;
 
-procedure TSolver.DoProgress(Position, Max, RefreshInterval: Integer;
-  Solver: TSolver; var Stop: Boolean);
+procedure TSolver.DoProgress(Position, Max: Integer; Solver: TSolver; var Stop: Boolean);
 begin
   if Assigned(FOnProgress) and RequiresUpdate then
   begin
     FOnProgress(Position, Max, Solver, Stop);
     SetUpToDate;
   end;
-  {if (RefreshInterval <> 0)
-      and Assigned(FOnProgress)
-      and (Position mod RefreshInterval = 0) then}
 end;
 
 constructor TSolver.Create(AModel: TModel; const ASharedDirectory: string;
@@ -107,7 +102,7 @@ begin
   BestIndividual.Update;
 end;
 
-procedure TSolver.Execute(RefreshInterval: Integer);
+procedure TSolver.Execute;
 begin
   FNumImports := 0;
   FNumExports := 0;

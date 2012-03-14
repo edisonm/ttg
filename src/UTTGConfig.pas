@@ -26,8 +26,6 @@ type
     procedure SetUseCustomSeed(Value: Boolean);
     function GetSeed: Integer;
     procedure SetSeed(Value: Integer);
-    function GetRefreshInterval: Integer;
-    procedure SetRefreshInterval(Value: Integer);
     function GetClashActivity: Integer;
     procedure SetClashActivity(Value: Integer);
     function GetBreakTimetableResource: Integer;
@@ -62,7 +60,6 @@ type
     property Comments: string read GetComments write SetComments;
     property UseCustomSeed: Boolean read GetUseCustomSeed write SetUseCustomSeed;
     property Seed: Integer read GetSeed write SetSeed;
-    property RefreshInterval: Integer read GetRefreshInterval write SetRefreshInterval;
     property ClashActivity: Integer read GetClashActivity write SetClashActivity;
     property BreakTimetableResource: Integer read GetBreakTimetableResource write SetBreakTimetableResource;
     property BrokenSession: Integer read GetBrokenSession write SetBrokenSession;
@@ -139,16 +136,6 @@ end;
 procedure TTTGConfig.SetSeed(Value: Integer);
 begin
   Integers['Seed'] := Value;
-end;
-
-function TTTGConfig.GetRefreshInterval: Integer;
-begin
-  Result := Integers['NumIterations'];
-end;
-
-procedure TTTGConfig.SetRefreshInterval(Value: Integer);
-begin
-  Integers['NumIterations'] := Value;
 end;
 
 function TTTGConfig.GetClashActivity: Integer;
@@ -289,7 +276,6 @@ begin
   Comments := '';
   UseCustomSeed := True;
   Self.Seed := 1;
-  RefreshInterval := 1;
   ClashActivity := 200;
   BreakTimetableResource := 50;
   BrokenSession := 150;

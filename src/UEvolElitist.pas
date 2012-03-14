@@ -62,7 +62,7 @@ type
     procedure SaveSolutionToDatabase(IdTimetable: Integer;
       const AExtraInfo: string; TimeIni, TimeEnd: TDateTime); override;
     procedure SaveBestToStream(AStream: TStream);
-    procedure Execute(RefreshInterval: Integer); override;
+    procedure Execute; override;
     function DownHill: Integer;
     procedure Update; override;
     property PopulationSize: Integer read FPopulationSize write SetPopulationSize;
@@ -326,7 +326,7 @@ begin
   {$ENDIF}
 end;
 
-procedure TEvolElitist.Execute(RefreshInterval: Integer);
+procedure TEvolElitist.Execute;
 var
   Stop: Boolean;
   Iteration: Integer;
@@ -340,7 +340,7 @@ begin
   try
     while (Iteration < FMaxIteration) and not Stop do
     begin
-      DoProgress(Iteration, FMaxIteration, RefreshInterval, Self, Stop);
+      DoProgress(Iteration, FMaxIteration, Self, Stop);
       ApplyOperators;
       Pollinate;
       Elitist;

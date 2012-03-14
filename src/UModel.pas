@@ -75,8 +75,6 @@ type
   public
     function NewIndividual: TIndividual; virtual; abstract;
     property ElitistCount: Integer read GetElitistCount;
-    {procedure DoProgress(Position, RefreshInterval: Integer;
-      Individual: IIndividual; var Stop: Boolean);}
   end;
 
   { TMultiBookmark }

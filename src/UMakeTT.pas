@@ -98,8 +98,7 @@ begin
   SetLength(Bookmarks, i);
 end;
 
-procedure ExecuteDownHill(DownHill: TDownHill; const Bookmarks: string;
-    RefreshInterval: Integer);
+procedure ExecuteDownHill(DownHill: TDownHill; const Bookmarks: string);
 var
   i: Integer;
   Individual: TIndividual;
@@ -112,8 +111,7 @@ begin
       Individual.Assign(DownHill.BestIndividual);
       LoadBookmarks(Bookmarks, Individual, BookmarkArray);
       try
-        TDownHill.MultiDownHill(DownHill, Individual, BookmarkArray,
-                                False, RefreshInterval);
+        TDownHill.MultiDownHill(DownHill, Individual, BookmarkArray, False);
       finally
         for i := 0 to High(BookmarkArray) do
           BookmarkArray[i].Free;
@@ -149,7 +147,7 @@ begin
       try
         ProgressFormDrv.Caption := Format(SWorkInProgress, [AIdTimetable]);
         EvolElitist.OnProgress := ProgressFormDrv.OnProgress;
-        EvolElitist.Execute(RefreshInterval);
+        EvolElitist.Execute;
         if ProgressFormDrv.CancelClick then
         begin
           Result := True;
@@ -163,7 +161,7 @@ begin
             DownHill.BestIndividual.Assign(EvolElitist.BestIndividual);
             ProgressFormDrv.Caption := Format(SImprovingTimetable, [AIdTimetable]);
             DownHill.OnProgress := ProgressFormDrv.OnProgress;
-            ExecuteDownHill(DownHill, Bookmarks, RefreshInterval);
+            ExecuteDownHill(DownHill, Bookmarks);
             if ProgressFormDrv.CancelClick then
             begin
               Result := True;
@@ -290,7 +288,7 @@ begin
         DownHill.OnProgress := ProgressFormDrv.OnProgress;
         ProgressFormDrv.Caption := Format(SImprovingTimetableIn,
           [FIdTimetableFuente, FIdTimetable]);
-        ExecuteDownHill(DownHill, Bookmarks, RefreshInterval);
+        ExecuteDownHill(DownHill, Bookmarks);
         if ProgressFormDrv.CancelClick then
         begin
           Terminate;

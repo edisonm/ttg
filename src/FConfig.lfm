@@ -130,14 +130,6 @@ object ConfigForm: TConfigForm
       ClientHeight = 301
       ClientWidth = 310
       ImageIndex = 3
-      object LbUpdateEach: TLabel
-        Left = 9
-        Height = 15
-        Top = 157
-        Width = 76
-        Caption = 'Update each:'
-        ParentColor = False
-      end
       object LbInitialTimetables: TLabel
         Left = 9
         Height = 15
@@ -228,16 +220,6 @@ object ConfigForm: TConfigForm
         MinValue = 1
         TabOrder = 1
         Value = 1
-      end
-      object speNumIterations: TSpinEdit
-        Left = 154
-        Height = 24
-        Top = 153
-        Width = 147
-        MaxValue = 2147483647
-        MinValue = 1
-        TabOrder = 2
-        Value = 10
       end
       object EdInitialTimetables: TEdit
         Left = 154

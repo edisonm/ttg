@@ -1503,12 +1503,8 @@ end;
 
 procedure TTimetable.DeltaPeriodsValue(Sign, Period1, Period2, Activity: Integer);
 var
-  IsNegative, Day, DDay, Day1, Day2, Hour1, Hour2, DeltaBrokenSession: Integer;
+  Day, DDay, Day1, Day2, Hour1, Hour2, DeltaBrokenSession: Integer;
 begin
-  if Sign > 0 then
-    IsNegative := 0
-  else
-    IsNegative := 1;
   with TTimetableModel(Model), TablingInfo do
   begin
     Day1 := FPeriodToDay[Period1];
@@ -1518,25 +1514,40 @@ begin
     DeltaBrokenSession := (Day2 - Day1) * (FHourCount + 1)
       + Hour2 - Hour1 + Period1 - Period2;
     Inc(FBrokenSession, Sign * DeltaBrokenSession);
-    for Day := Day1 to Day2 do
+    if Sign > 0 then
     begin
-      if FDayActivityCount[Day, Activity] > IsNegative then
+      for Day := Day1 to Day2 do
       begin
-        Inc(FClashActivity, Sign);
+        Inc(FClashActivity, Min(FDayActivityCount[Day, Activity], 1));
+        Inc(FDayActivityCount[Day, Activity]);
       end;
-      Inc(FDayActivityCount[Day, Activity], Sign);
-    end;
-    DDay := FDayCount div Length(FActivityToSessions[Activity]);
-    for Day2 := Day1 to Day1 + DDay - 1 do
-    begin
-      Day := Day2 mod (FDayCount + 1);
-      if Day <> FDayCount then
+      DDay := FDayCount div Length(FActivityToSessions[Activity]);
+      for Day2 := Day1 to Day1 + DDay - 1 do
       begin
-        if FDayActivityAccumulated[Day, Activity] > IsNegative then
+        Day := Day2 mod (FDayCount + 1);
+        if Day <> FDayCount then
         begin
-          Inc(FNonScatteredActivity, Sign);
+          Inc(FNonScatteredActivity, Min(FDayActivityAccumulated[Day, Activity], 1));
+          Inc(FDayActivityAccumulated[Day, Activity]);
         end;
-        Inc(FDayActivityAccumulated[Day, Activity], Sign);
+      end;
+    end
+    else
+    begin
+      for Day := Day1 to Day2 do
+      begin
+        Dec(FDayActivityCount[Day, Activity]);
+        Dec(FClashActivity, Min(FDayActivityCount[Day, Activity], 1));
+      end;
+      DDay := FDayCount div Length(FActivityToSessions[Activity]);
+      for Day2 := Day1 to Day1 + DDay - 1 do
+      begin
+        Day := Day2 mod (FDayCount + 1);
+        if Day <> FDayCount then
+        begin
+          Dec(FDayActivityAccumulated[Day, Activity]);
+          Dec(FNonScatteredActivity, Min(FDayActivityAccumulated[Day, Activity], 1));
+        end;
       end;
     end;
   end;
@@ -2176,7 +2187,7 @@ end;
 
 procedure TTimetable.Reset;
 var
-  Resource, ResourceType, Period, RestrictionType, Day, Activity: Integer;
+  Resource, Day: Integer;
 begin
   with TTimetableModel(Model), TablingInfo do
   begin
