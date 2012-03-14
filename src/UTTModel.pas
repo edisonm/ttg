@@ -2187,30 +2187,22 @@ begin
     for Day := 0 to FDayCount - 1 do
       for Resource := 0 to FResourceCount - 1 do
       begin
-        FDayResourceEmptyHourCount[Day, Resource] := 0;
         FDayResourceMinHour[Day, Resource] := 1;
-        FDayResourceMaxHour[Day, Resource] := 0;
       end;
-    for ResourceType := 0 to FResourceTypeCount - 1 do
-      FClashResourceType[ResourceType] := 0;
-    for RestrictionType := 0 to FRestrictionTypeCount - 1 do
-      FRestrictionTypeToResourceCount[RestrictionType] := 0;
-    for Period := 0 to FPeriodCount - 1 do
+    with TIntegerArrayHandler do
     begin
-      for Resource := 0 to FResourceCount - 1 do
-        FResourcePeriodNumber[Resource, Period] := 0;
+      Zero(FClashResourceType);
+      Zero(FRestrictionTypeToResourceCount);
+      Zero(FPriorityActivity);
     end;
-    for Day := 0 to FDayCount - 1 do
+    with TIntegerArrayArrayHandler do
     begin
-      for Activity := 0 to FActivityCount - 1 do
-      begin
-        FDayActivityAccumulated[Day, Activity] := 0;
-        FDayActivityCount[Day, Activity] := 0;
-      end;
+      Zero(FDayResourceEmptyHourCount);
+      Zero(FDayResourceMaxHour);
+      Zero(FResourcePeriodNumber);
+      Zero(FDayActivityAccumulated);
+      Zero(FDayActivityCount);
     end;
-    SetLength(FPriorityActivity, FActivityCount);
-    for Activity := 0 to FActivityCount - 1 do
-      FPriorityActivity[Activity] := 0;
   end;
 end;
 

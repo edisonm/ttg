@@ -25,7 +25,10 @@ type
     FSharedDirectory: string;
     FPollinationProbability: Double;
     FNumImports, FNumExports, FColision: Integer;
+    FLastUpdate: TDateTime;
     function GetFileName: string;
+    function RequiresUpdate: Boolean;
+    procedure SetUpToDate;
   protected
   public
     procedure DoProgress(Position, Max, RefreshInterval: Integer; Solver: TSolver;
@@ -59,13 +62,27 @@ begin
   Result := FSharedDirectory + 'ttable.dat';
 end;
 
+function TSolver.RequiresUpdate: Boolean;
+begin
+  Result := (Now - FLastUpdate) > 1/86400.0; // update each second
+end;
+
+procedure TSolver.SetUpToDate;
+begin
+  FLastUpdate := Now;
+end;
+
 procedure TSolver.DoProgress(Position, Max, RefreshInterval: Integer;
   Solver: TSolver; var Stop: Boolean);
 begin
-  if (RefreshInterval <> 0)
-      and Assigned(FOnProgress)
-      and (Position mod RefreshInterval = 0) then
+  if Assigned(FOnProgress) and RequiresUpdate then
+  begin
     FOnProgress(Position, Max, Solver, Stop);
+    SetUpToDate;
+  end;
+  {if (RefreshInterval <> 0)
+      and Assigned(FOnProgress)
+      and (Position mod RefreshInterval = 0) then}
 end;
 
 constructor TSolver.Create(AModel: TModel; const ASharedDirectory: string;
@@ -76,6 +93,7 @@ begin
   FBestIndividual := FModel.NewIndividual;
   FSharedDirectory := ASharedDirectory;
   FPollinationProbability := APollinationProbability;
+  FLastUpdate := Now;
 end;
 
 destructor TSolver.Destroy;
