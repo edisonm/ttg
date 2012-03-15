@@ -48,10 +48,10 @@ clean: cleanthis
 
 tbz:
 	mkdir -p $(PKGDIR)
-	cd $(PKGDIR) ; svn export --force $(REPOSITORY) $(TGZBASE) ; \
-	  tar -cf --owner=0 --group=0 $(TGZBASE)/* --exclude-from=../Exclude --exclude-backups | bzip2 --best -c > $(TGZBASE).tar.bz2
+	cd $(PKGDIR) ; svn export --force $(REPOSITORY) $(TGZSRC) ; \
+	  tar -c --owner=0 --group=0 $(TGZSRC)/* --exclude-from=../Exclude --exclude-backups | bzip2 --best -c > $(TGZBASE).tar.bz2
 
 tgz:
 	mkdir -p $(PKGDIR)
-	cd $(PKGDIR) ; svn export --force $(REPOSITORY) $(TGZBASE) ; \
-	  tar -cf --owner=0 --group=0 $(TGZBASE)/* --exclude-from=../Exclude --exclude-backups | gzip  --best -c > $(TGZBASE).tar.gz
+	cd $(PKGDIR) ; svn export --force $(REPOSITORY) $(TGZSRC) ; \
+	  tar -c --owner=0 --group=0 $(TGZSRC)/* --exclude-from=../../Exclude --exclude-backups | gzip  --best -c > $(TGZBASE).tar.gz

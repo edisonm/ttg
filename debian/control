@@ -1,0 +1,23 @@
+Source: ttg2
+Section: base
+Priority: optional
+Maintainer: Edison Mera <efmera@gmail.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.2
+Homepage: edisonm.dyndns.org/blog/
+#Vcs-Git: git://git.debian.org/collab-maint/ttg2.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/ttg2.git;a=summary
+
+Package: ttg2
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Automatic Timetable Generator
+  This program provides an  automatic timetable generator, that can be
+  used in  Schools, Universities, or Institutions  where several tasks
+  must  be scheduled  and they  require the  participation  of several
+  general  resources,  such   as,  for  example,  rooms,  supervisors,
+  teachers,  students, materials  like  projectors, blackboards,  etc.
+  but  can be  any abstract  concept, like  a group  of  students that
+  receive similar  classes or a customized restriction.   This work is
+  based on my Master  Thesis/PhD experience but has been reimplemented
+  from scratch to be applicable in more general scenarios.

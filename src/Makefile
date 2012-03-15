@@ -37,11 +37,20 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 	  -e s:'<v>Copyright</v>':'$(Copyright)':g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
 
+buildnr:
+	SvnVersion=`svnversion $(TTGDIR)` ; \
+	  Revision=`svn info $(REPOSITORY)|grep Revision|sed -e s:'Revision\: ':'':g -` ; \
+	  if [ x"$(BuildNr)"=x"$${SvnVersion}" ] ; then \
+	    BuildNr0=$$(($${Revision}+1)) ; \
+	  else \
+	    BuildNr0=$${Revision} ; \
+	  fi ; \
+	  if [ x"$(BuildNr)"=x"$${BuildNr0}" ] ; then \
+	    ( sed -e s:"^ *<BuildNr Value=\"[0-9]*\"/>":"      <BuildNr Value=\"$${BuildNr0}\"/>":g ttg.lpi > ttg_.lpi && \
+	      mv ttg_.lpi ttg.lpi ) ; \
+	  fi
+
 $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc Makefile SETTINGS COMMON
-ifneq ($(BuildNr0),$(BuildNr))
-	sed -e s:"^ *<BuildNr Value=\"[0-9]*\"/>":"      <BuildNr Value=\"$(BuildNr)\"/>":g ttg.lpi > ttg_.lpi && \
-	  mv ttg_.lpi ttg.lpi
-endif
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
 ifneq ($(BuildMode),debug)
 	strip --strip-all $(TTGEXE)
