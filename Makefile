@@ -46,12 +46,7 @@ cleanthis:
 
 clean: cleanthis
 
-tbz:
-	mkdir -p $(PKGDIR)
-	cd $(PKGDIR) ; svn export --force $(REPOSITORY) $(TGZSRC) ; \
-	  tar -c --owner=0 --group=0 $(TGZSRC)/* --exclude-from=../Exclude --exclude-backups | bzip2 --best -c > $(TGZBASE).tar.bz2
-
 tgz:
 	mkdir -p $(PKGDIR)
 	cd $(PKGDIR) ; svn export --force $(REPOSITORY) $(TGZSRC) ; \
-	  tar -c --owner=0 --group=0 $(TGZSRC)/* --exclude-from=../../Exclude --exclude-backups | gzip  --best -c > $(TGZBASE).tar.gz
+	  tar -c --owner=0 --group=0 --exclude=Attic --exclude-from=../../Exclude --exclude-backups $(TGZSRC)/* | gzip  --best -c > $(TGZBASE).orig.tar.gz
