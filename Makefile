@@ -12,7 +12,7 @@ TTGMDB=dat/$(TTGMDBBASE)
 TTGSQLITE3=dat/ttg.s3fpc
 
 all:
-	cd $(PKGSRC) ; $(MAKE) all
+	cd $(TTGSRC) ; $(MAKE) all
 ifneq ($(FILES),)
 	$(MAKE) $(FILES)
 endif
@@ -46,7 +46,11 @@ cleanthis:
 
 clean: cleanthis
 
+test:
+	@echo TTGDIR=$(TTGDIR)
 tgz:
 	mkdir -p $(PKGDIR)
-	cd $(PKGDIR) ; svn export --force $(REPOSITORY) $(TGZSRC) ; \
-	  tar -c --owner=0 --group=0 --exclude=Attic --exclude-from=../../Exclude --exclude-backups $(TGZSRC)/* | gzip  --best -c > $(TGZBASE).orig.tar.gz
+# svn export --force $(REPOSITORY) $(TGZSRC) ;
+	rsync -av --exclude-from=Exclude --delete $(TTGDIR)/ $(PKGDIR)/$(TGZSRC)/
+	cd $(PKGDIR) ; \
+	  tar -c --owner=0 --group=0 --exclude=Attic --exclude-backups $(TGZSRC)/* | gzip  --best -c > $(TGZBASE).orig.tar.gz
