@@ -49,7 +49,7 @@ begin
     ResourceTranslator.TranslateUnitResourceStrings('dsourcebaseconsts');
   end;
   DecimalSeparator := ',';
-  RequireDerivedFormResource := True;
+  //RequireDerivedFormResource := True;
   Application.Initialize;
   Application.Title := sAppName + ' ' + sAppVersion;
   Application.HelpFile := '../hlp/ttg.hlp';

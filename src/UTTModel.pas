@@ -324,12 +324,12 @@ type
     function GetActivity2: Integer; inline;
     function GetResource1: Integer; inline;
     function GetResource2: Integer; inline;
-    function GetNumFixeds1: Integer; inline;
-    function GetNumFixeds2: Integer; inline;
-    function GetParticipant21: Integer; inline;
-    function GetParticipant22: Integer; inline;
-    function GetNumResource11: Integer; inline;
-    function GetNumResource21: Integer; inline;
+    function GetNumFixeds1: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
+    function GetNumFixeds2: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
+    function GetParticipant21: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
+    function GetParticipant22: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
+    function GetNumResource11: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
+    function GetNumResource21: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
     function GetNumResource12: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
     function GetNumResource22: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
     function GetFree11: Integer; inline;

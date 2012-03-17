@@ -1359,21 +1359,6 @@ msgctxt "ttimetableform.caption"
 msgid "TimetableForm"
 msgstr "TimetableForm"
 
-#: ttimetableform.dbgrid.columns[0].title.caption
-msgctxt "ttimetableform.dbgrid.columns[0].title.caption"
-msgid "Timetable Id"
-msgstr "Id Horario"
-
-#: ttimetableform.dbgrid.columns[1].title.caption
-msgctxt "ttimetableform.dbgrid.columns[1].title.caption"
-msgid "Start"
-msgstr "Inicio"
-
-#: ttimetableform.dbgrid.columns[2].title.caption
-msgctxt "ttimetableform.dbgrid.columns[2].title.caption"
-msgid "End"
-msgstr "Final"
-
 #: ttimetableresourceform.cbshowresource.hint
 #, fuzzy
 #| msgid "Show|Param to show in the resource timetable"
@@ -1511,6 +1496,10 @@ msgstr "Algoritmo de Descenso"
 #: uttgconsts.sediting
 msgid "Editing"
 msgstr "Editando"
+
+#: uttgconsts.selapsedtime
+msgid "Elapsed Time"
+msgstr ""
 
 #: uttgconsts.sevolutiveelitistalgorithm
 msgid "Evolutive Elitist Algorithm"

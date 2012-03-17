@@ -1329,21 +1329,6 @@ msgctxt "TTIMETABLEFORM.CAPTION"
 msgid "TimetableForm"
 msgstr ""
 
-#: ttimetableform.dbgrid.columns[0].title.caption
-msgctxt "TTIMETABLEFORM.DBGRID.COLUMNS[0].TITLE.CAPTION"
-msgid "Timetable Id"
-msgstr ""
-
-#: ttimetableform.dbgrid.columns[1].title.caption
-msgctxt "TTIMETABLEFORM.DBGRID.COLUMNS[1].TITLE.CAPTION"
-msgid "Start"
-msgstr ""
-
-#: ttimetableform.dbgrid.columns[2].title.caption
-msgctxt "TTIMETABLEFORM.DBGRID.COLUMNS[2].TITLE.CAPTION"
-msgid "End"
-msgstr ""
-
 #: ttimetableresourceform.cbshowresource.hint
 msgctxt "TTIMETABLERESOURCEFORM.CBSHOWRESOURCE.HINT"
 msgid "Show|Param to show in the teacher timetable"
@@ -1476,6 +1461,10 @@ msgstr ""
 
 #: uttgconsts.sediting
 msgid "Editing"
+msgstr ""
+
+#: uttgconsts.selapsedtime
+msgid "Elapsed Time"
 msgstr ""
 
 #: uttgconsts.sevolutiveelitistalgorithm
