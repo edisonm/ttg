@@ -12,9 +12,10 @@ BuildNr=$(shell grep "^ *<BuildNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s
 
 
 
-PACKAGE=ttg$(MajorVersionNr)
-APPVERSION=$(PACKAGE)-$(MinorVersionNr).$(RevisionNr)
-VERSION=$(MinorVersionNr).$(RevisionNr).$(BuildNr)
+PACKAGE=ttg
+BASEVERSION=$(MajorVersionNr).$(MinorVersionNr).$(RevisionNr)
+APPVERSION=$(PACKAGE)-$(BASEVERSION)
+VERSION=$(MajorVersionNr).$(MinorVersionNr).$(RevisionNr).$(BuildNr)
 
 REPOSITORY=file:///home/edison/LocalReps/TTG/trunk/
 # PACKAGING RELATED:
