@@ -1,5 +1,5 @@
 #!/bin/sh
-# postinst script for ttg2
+# postinst script for ttg
 #
 # see: dh_installdeb(1)
 

@@ -26,8 +26,8 @@ manpage.1: manpage.sgml
   <!ENTITY dhsection   "<manvolnum>SECTION</manvolnum>">
   <!ENTITY dhemail     "<email>efmera@gmail.com</email>">
   <!ENTITY dhusername  "Edison Mera">
-  <!ENTITY dhucpackage "<refentrytitle>TTG2</refentrytitle>">
-  <!ENTITY dhpackage   "ttg2">
+  <!ENTITY dhucpackage "<refentrytitle>TTG</refentrytitle>">
+  <!ENTITY dhpackage   "ttg">
 
   <!ENTITY debian      "<productname>Debian</productname>">
   <!ENTITY gnu         "<acronym>GNU</acronym>">

@@ -1,5 +1,5 @@
 #!/bin/sh
-# postrm script for ttg2
+# postrm script for ttg
 #
 # see: dh_installdeb(1)
 

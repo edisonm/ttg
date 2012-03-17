@@ -8,16 +8,16 @@ version=3
 
 # Uncomment to examine a Webpage
 # <Webpage URL> <string match>
-#http://www.example.com/downloads.php ttg2-(.*)\.tar\.gz
+#http://www.example.com/downloads.php ttg-(.*)\.tar\.gz
 
 # Uncomment to examine a Webserver directory
-#http://www.example.com/pub/ttg2-(.*)\.tar\.gz
+#http://www.example.com/pub/ttg-(.*)\.tar\.gz
 
 # Uncommment to examine a FTP server
-#ftp://ftp.example.com/pub/ttg2-(.*)\.tar\.gz debian uupdate
+#ftp://ftp.example.com/pub/ttg-(.*)\.tar\.gz debian uupdate
 
 # Uncomment to find new files on sourceforge, for devscripts >= 2.9
-# http://sf.net/ttg2/ttg2-(.*)\.tar\.gz
+# http://sf.net/ttg/ttg-(.*)\.tar\.gz
 
 # Uncomment to find new files on GooglePages
-# http://example.googlepages.com/foo.html ttg2-(.*)\.tar\.gz
+# http://example.googlepages.com/foo.html ttg-(.*)\.tar\.gz

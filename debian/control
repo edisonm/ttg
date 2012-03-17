@@ -1,16 +1,16 @@
-Source: ttg2
+Source: ttg
 Section: base
 Priority: optional
 Maintainer: Edison Mera <efmera@gmail.com>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.2
 Homepage: edisonm.dyndns.org/blog/
-#Vcs-Git: git://git.debian.org/collab-maint/ttg2.git
-#Vcs-Browser: http://git.debian.org/?p=collab-maint/ttg2.git;a=summary
+#Vcs-Git: git://git.debian.org/collab-maint/ttg.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/ttg.git;a=summary
 
-Package: ttg2
+Package: ttg
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, zeosdbo-src (>= 1073)
 Description: Automatic Timetable Generator
   This program provides an  automatic timetable generator, that can be
   used in  Schools, Universities, or Institutions  where several tasks
@@ -19,5 +19,20 @@ Description: Automatic Timetable Generator
   teachers,  students, materials  like  projectors, blackboards,  etc.
   but  can be  any abstract  concept, like  a group  of  students that
   receive similar  classes or a customized restriction.   This work is
-  based on my Master  Thesis/PhD experience but has been reimplemented
-  from scratch to be applicable in more general scenarios.
+  based on  my Master Thesis and  further PhD experience  but has been
+  reimplemented  from  scratch  to   be  applicable  in  more  general
+  scenarios.
+
+Package: ttg-doc
+Architecture: all
+Depends:
+Description: Automatic Timetable Generator -- Documentation files
+  This package  contains documentation and examples  for the Automatic
+  Timetable Generator.
+
+Package: ttg-es
+Architecture: all
+Depends: ttg
+Description: Automatic Timetable Generator -- Spanish translation
+  This  package  contains the  Spanish  translation  of the  Automatic
+  Timetable Generator.

@@ -1,5 +1,5 @@
 #!/bin/sh
-# preinst script for ttg2
+# preinst script for ttg
 #
 # see: dh_installdeb(1)
 

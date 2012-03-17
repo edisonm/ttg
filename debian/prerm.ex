@@ -1,5 +1,5 @@
 #!/bin/sh
-# prerm script for ttg2
+# prerm script for ttg
 #
 # see: dh_installdeb(1)
 
