@@ -41,6 +41,9 @@ $(TTGSQL):
 	cd $(TTGSRC) ; $(MAKE) ttgsql
 endif
 
+buildnr:
+	cd $(TTGSRC) ; $(MAKE) buildnr
+
 cleanthis:
 	$(RM) -rf $(TTGSQLITE3) packages
 
