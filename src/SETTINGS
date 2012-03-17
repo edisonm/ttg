@@ -13,7 +13,7 @@ BASELAZFILES=$(addsuffix .pas, $(UNITS)) $(addsuffix .lfm, $(FORMS)) ttg.lpr ttg
 ABOUT=UAbout
 DSRCBASE=DSourceBase
 
-ifneq ($(DEBIAN),yes)
+ifeq ($(LAZLOCAL),yes)
 ifeq ($(shell uname -o),Cygwin)
 FILES=$(TTGMYSQL)
 DBCONVERTSRC=../../../DBConvert
@@ -26,7 +26,7 @@ endif
 LAZBUILD=$(LAZBASE)/lazbuild $(LAZBUILDOPTS)
 LAZRES=$(LAZBASE)/tools/lazres
 LAZIDE=$(LAZBASE)/lazarus
-else # DEBIAN=yes:
+else # LAZLOCAL!=yes:
 LAZRES=lazres
 LAZBUILD=lazbuild --ws=qt
 LAZIDE=lazarus-ide
