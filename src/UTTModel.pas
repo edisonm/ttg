@@ -378,7 +378,7 @@ uses
   SysUtils, ZSysUtils, MTProcs, DSource, UTTGConsts, DSourceBaseConsts, USortAlgs, Math;
 
 type
-  TSortInteger = specialize TSortAlgorithm<Integer,Integer>;
+  TSortInteger = TSortAlgorithm<Integer,Integer>;
 
 constructor TTimetableModel.Create(AClashActivityValue,
                                    ABreakTimetableResourceValue,

@@ -56,8 +56,9 @@ tgz:
 	  tar -c --owner=0 --group=0 --exclude=Attic --exclude-backups $(TGZSRC)/* | gzip  --best -c > $(TGZBASE).orig.tar.gz
 
 install:
-	mkdir -p $(DESTDIR)/usr/share/doc/$(PACKAGE)/examples/
-	mkdir -p $(DESTDIR)/usr/share/locale/es/LC_MESSAGES/
+	mkdir -p $(DESTDIR)/usr/bin
+	mkdir -p $(DESTDIR)/usr/share/doc/$(PACKAGE)/examples
+	mkdir -p $(DESTDIR)/usr/share/locale/es/LC_MESSAGES
 	cp $(TTGEXE) $(DESTDIR)/usr/bin/
-	cp $(TTGDIR)/examples/{Salamanca1999,Britanico2000}.ttd $(DESTDIR)/usr/share/doc/$(PACKAGE)/examples/
+	cp $(TTGDIR)/examples/Britanico2000.ttd $(TTGDIR)/examples/Salamanca1999.ttd  $(DESTDIR)/usr/share/doc/$(PACKAGE)/examples/
 	cp $(TTGSRC)/locale/ttg.es.po $(DESTDIR)/usr/share/locale/es/LC_MESSAGES/

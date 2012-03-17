@@ -17,8 +17,10 @@ include SETTINGS
 
 all: $(FILES)
 
+ifeq ($(shell uname -o),Cygwin)
 $(LAZRES): $(LAZBASE)/tools/lazres.lpi
 	cd "$(LAZBASE)/tools" && $(LAZBUILD) "lazres.lpi"
+endif
 
 # %.lrs: %.lfm $(LRSDEP)
 # 	$(LAZRES) $@ $<

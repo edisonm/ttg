@@ -4,17 +4,4 @@ include $(TTGDIR)/COMMON
 
 APPNAME=$(shell grep "StringTable" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<StringTable LegalCopyright=\"[^\"]*\" ProductVersion=\"[^\"]*\" FileDescription=\"\([^\"]*\)\"/>":'\1':g)
 Copyright=$(shell grep "StringTable" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<StringTable LegalCopyright=\"\([^\"]*\)\" ProductVersion=\"[^\"]*\" FileDescription=\"[^\"]*\"/>":'\1':g)
-TargetCPU=$(shell $(FPC) -iSP)
-TargetOS=$(shell $(FPC) -iSO)
-BuildId=$(TargetCPU)-$(TargetOS)$(BuildLabel)
-ifeq ($(shell uname -o),Cygwin)
-EXEEXT=.exe
-LAZBASE=/cygdrive/c/lazarus32
-FPC=$(LAZBASE)/fpc/2.4.4/bin/i386-win32/fpc
-else
-EXEEXT=
-LAZBASE=/home/edison/apps/pascal/lazarus
-FPC=fpc
-endif
-TTGEXE=$(TTGDIR)/bin/$(BuildId)$(EXEEXT)/ttg
 OBJDIR=$(TTGDIR)/obj/$(BuildId)

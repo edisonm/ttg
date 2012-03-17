@@ -13,22 +13,25 @@ BASELAZFILES=$(addsuffix .pas, $(UNITS)) $(addsuffix .lfm, $(FORMS)) ttg.lpr ttg
 ABOUT=UAbout
 DSRCBASE=DSourceBase
 
+ifneq ($(DEBIAN),yes)
 ifeq ($(shell uname -o),Cygwin)
 FILES=$(TTGMYSQL)
 DBCONVERTSRC=../../../DBConvert
 # Due to a bug in cygwin, I cannot use (absolute) dirs that contains ':'
-#DBCONVERT=$(shell cd $(DBCONVERTSRC) ; $(MAKE) -s getDBConvert)
 DBCONVERT=$(DBCONVERTSRC)/bin/dbconvert.exe
-LAZBUILD=$(LAZBASE)/lazbuild
+LAZBUILDOPTS=
 else
-# LAZRES=lazres
-# LAZBUILD=lazbuild
-# LAZIDE=lazarus-ide
-LAZBUILD=$(LAZBASE)/lazbuild --ws=qt
+LAZBUILDOPTS=--ws=qt
+endif
+LAZBUILD=$(LAZBASE)/lazbuild $(LAZBUILDOPTS)
+LAZRES=$(LAZBASE)/tools/lazres
+LAZIDE=$(LAZBASE)/lazarus
+else # DEBIAN=yes:
+LAZRES=lazres
+LAZBUILD=lazbuild --ws=qt
+LAZIDE=lazarus-ide
 endif
 
-LAZIDE=$(LAZBASE)/lazarus
-LAZRES=$(LAZBASE)/tools/lazres
 LRSDEP=$(LAZRES)
 
 TTGMDB=$(RELDIR)/dat/ttg.mdb

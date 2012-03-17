@@ -5,14 +5,12 @@ ifneq ($(BuildMode),release)
 BuildLabel=-$(BuildMode)
 endif
 
+PACKAGE=ttg
 MajorVersionNr=$(shell grep "^ *<MajorVersionNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<MajorVersionNr Value=\"\([0-9]*\)\"/>":"\1":g)
 MinorVersionNr=$(shell grep "^ *<MinorVersionNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<MinorVersionNr Value=\"\([0-9]*\)\"/>":"\1":g)
 RevisionNr=$(shell grep "^ *<RevisionNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<RevisionNr Value=\"\([0-9]*\)\"/>":"\1":g)
 BuildNr=$(shell grep "^ *<BuildNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<BuildNr Value=\"\([0-9]*\)\"/>":"\1":g)
 
-
-
-PACKAGE=ttg
 BASEVERSION=$(MajorVersionNr).$(MinorVersionNr).$(RevisionNr)
 APPVERSION=$(PACKAGE)-$(BASEVERSION)
 VERSION=$(MajorVersionNr).$(MinorVersionNr).$(RevisionNr).$(BuildNr)
@@ -23,3 +21,17 @@ TGZBASE=$(PACKAGE)_$(VERSION)
 TGZSRC=$(PACKAGE)-$(VERSION)
 PKGBASE=$(TGZBASE)$(BuildLabel)_$(ARCH)
 PKGDIR=$(TTGDIR)/packages/$(BuildMode)
+
+ifeq ($(shell uname -o),Cygwin)
+LAZBASE=/cygdrive/c/lazarus32
+FPC=$(LAZBASE)/fpc/2.4.4/bin/i386-win32/fpc
+EXEEXT=.exe
+else
+LAZBASE=/home/edison/apps/pascal/lazarus
+FPC=fpc
+EXEEXT=
+endif
+TargetCPU=$(shell $(FPC) -iSP)
+TargetOS=$(shell $(FPC) -iSO)
+BuildId=$(TargetCPU)-$(TargetOS)$(BuildLabel)
+TTGEXE=$(TTGDIR)/bin/$(BuildId)/ttg$(EXEEXT)
