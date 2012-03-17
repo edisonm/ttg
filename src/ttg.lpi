@@ -30,11 +30,8 @@
     <BuildModes Count="2">
       <Item1 Name="debug" Default="True"/>
       <Item2 Name="release">
-        <MacroValues Count="1">
-          <Macro1 Name="BuildLabel"/>
-        </MacroValues>
         <CompilerOptions>
-          <Version Value="9"/>
+          <Version Value="11"/>
           <Target>
             <Filename Value="../bin/$(TargetCPU)-$(TargetOS)/ttg"/>
           </Target>
@@ -50,6 +47,10 @@
             </Optimizations>
           </CodeGeneration>
           <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+              <UseLineInfoUnit Value="False"/>
+            </Debugging>
             <LinkSmart Value="True"/>
           </Linking>
           <Other>
@@ -356,7 +357,7 @@
     </Units>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="9"/>
+    <Version Value="11"/>
     <Target>
       <Filename Value="../bin/$(TargetCPU)-$(TargetOS)-debug/ttg"/>
     </Target>
