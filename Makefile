@@ -54,9 +54,9 @@ test:
 tgz:
 	mkdir -p $(PKGDIR)
 # svn export --force $(REPOSITORY) $(TGZSRC) ;
-	rsync -av --exclude-from=Exclude --delete $(TTGDIR)/ $(PKGDIR)/$(TGZSRC)/
+	rsync -av --exclude-from=Exclude --delete-excluded $(TTGDIR)/ $(PKGDIR)/$(TGZSRC)/
 	cd $(PKGDIR) ; \
-	  tar -c --owner=0 --group=0 --exclude=Attic --exclude-backups $(TGZSRC)/* | gzip  --best -c > $(TGZBASE).orig.tar.gz
+	  tar -c --owner=0 --group=0 --exclude-backups $(TGZSRC)/* | gzip  --best -c > $(TGZBASE).orig.tar.gz
 
 install:
 	mkdir -p $(DESTDIR)/usr/bin
