@@ -30,6 +30,9 @@
     <BuildModes Count="2">
       <Item1 Name="debug" Default="True"/>
       <Item2 Name="release">
+        <MacroValues Count="1">
+          <Macro1 Name="BuildLabel"/>
+        </MacroValues>
         <CompilerOptions>
           <Version Value="11"/>
           <Target>
