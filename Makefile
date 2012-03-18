@@ -55,7 +55,7 @@ test:
 tgz:
 	mkdir -p $(PKGDIR)
 # svn export --force $(REPOSITORY) $(TGZSRC) ;
-	rsync -a --exclude-from=Exclude --delete-excluded $(TTGDIR)/ $(PKGDIR)/$(TGZSRC)/
+	rsync -a --exclude-from=Exclude --include=images/ttg-icon.png --delete-excluded $(TTGDIR)/ $(PKGDIR)/$(TGZSRC)/
 	mkdir -p $(PKGDIR)/$(TGZSRC)/src/dbcshared
 	cp $(DBCONVERTDIR)/auxiliary/*.* $(PKGDIR)/$(TGZSRC)/src/dbcshared/
 	sed -e s:'../../DBConvert/auxiliary':'dbcshared':g -e s:'../../multithreadprocs':'/usr/share/multithreadprocs/src':g $(TTGSRC)/ttg.lpi \
