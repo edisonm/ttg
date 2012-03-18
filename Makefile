@@ -3,6 +3,7 @@
 # GuideLine: Prefer definition of posix directories, because we are
 # migrating this system to Linux.
 
+RELDIR=.
 TTGDIR:=$(shell pwd)
 
 include SETTINGS
@@ -54,7 +55,13 @@ test:
 tgz:
 	mkdir -p $(PKGDIR)
 # svn export --force $(REPOSITORY) $(TGZSRC) ;
-	rsync -av --exclude-from=Exclude --delete-excluded $(TTGDIR)/ $(PKGDIR)/$(TGZSRC)/
+	rsync -a --exclude-from=Exclude --delete-excluded $(TTGDIR)/ $(PKGDIR)/$(TGZSRC)/
+	mkdir -p $(PKGDIR)/$(TGZSRC)/src/dbcshared
+	mkdir -p $(PKGDIR)/$(TGZSRC)/src/multithreadprocs
+	cp $(DBCONVERTDIR)/auxiliary/*.* $(PKGDIR)/$(TGZSRC)/src/dbcshared/
+	cp ../multithreadprocs/*.pas ../multithreadprocs/*.lpk $(PKGDIR)/$(TGZSRC)/src/multithreadprocs/
+	sed -e s:'../../DBConvert/auxiliary':'dbcshared':g -e s:'../../multithreadprocs':'multithreadprocs':g $(TTGSRC)/ttg.lpi \
+	  -e s:'../../zeosdbo/':'/usr/share/zeosdbo/':g > $(PKGDIR)/$(TGZSRC)/src/ttg.lpi
 	cd $(PKGDIR) ; \
 	  tar -c --owner=0 --group=0 --exclude-backups $(TGZSRC)/* | gzip  --best -c > $(TGZBASE).orig.tar.gz
 
@@ -65,3 +72,9 @@ install:
 	cp $(TTGEXE) $(DESTDIR)/usr/bin/
 	cp $(TTGDIR)/examples/Britanico2000.ttd $(TTGDIR)/examples/Salamanca1999.ttd  $(DESTDIR)/usr/share/doc/$(PACKAGE)/examples/
 	cp $(TTGSRC)/locale/ttg.es.po $(DESTDIR)/usr/share/locale/es/LC_MESSAGES/
+
+debiansrc: tgz
+	cd $(PKGDIR)/$(TGZSRC) ; debuild -S
+
+debianbin: debiansrc
+	cd $(PKGDIR)/$(TGZSRC) ; debuild

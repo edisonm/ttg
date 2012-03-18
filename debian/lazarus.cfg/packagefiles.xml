@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <UserPkgLinks Version="2" Count="6">
+    <Item1>
+      <Name Value="MultiThreadProcsLaz"/>
+      <Version Major="1" Minor="2" Release="1"/>
+      <Filename Value="multithreadprocs/multithreadprocslaz.lpk"/>
+      <LastUsed Value="20120318"/>
+    </Item1>
+    <Item2>
+      <Name Value="zcomponent"/>
+      <Version Major="7"/>
+      <Filename Value="/usr/share/zeosdbo/packages/lazarus/zcomponent.lpk"/>
+      <LastUsed Value="20120318"/>
+    </Item2>
+    <Item3>
+      <Name Value="zcore"/>
+      <Version Major="7"/>
+      <Filename Value="/usr/share/zeosdbo/packages/lazarus/zcore.lpk"/>
+      <LastUsed Value="20120318"/>
+    </Item3>
+    <Item4>
+      <Name Value="zdbc"/>
+      <Version Major="7"/>
+      <Filename Value="/usr/share/zeosdbo/packages/lazarus/zdbc.lpk"/>
+      <LastUsed Value="20120318"/>
+    </Item4>
+    <Item5>
+      <Name Value="zparsesql"/>
+      <Version Major="7"/>
+      <Filename Value="/usr/share/zeosdbo/packages/lazarus/zparsesql.lpk"/>
+      <LastUsed Value="20120318"/>
+    </Item5>
+    <Item6>
+      <Name Value="zplain"/>
+      <Version Major="7"/>
+      <Filename Value="/usr/share/zeosdbo/packages/lazarus/zplain.lpk"/>
+      <LastUsed Value="20120318"/>
+    </Item6>
+  </UserPkgLinks>
+</CONFIG>

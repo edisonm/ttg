@@ -16,7 +16,7 @@ uses
   FSplash {SplashForm},
   DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   UAbout,
-  UTTGi18n;
+  UTTGi18n, zcomponent;
 
 {$IFNDEF FPC}
 {$R *.res}

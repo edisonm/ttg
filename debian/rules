@@ -12,10 +12,7 @@
 %:
 	dh $@ 
 
-package = ttg
-
 clean:
-	rm -f build
 	dh_auto_clean
 	dh_clean
 
@@ -25,10 +22,11 @@ install: build
 
 build:
 #	dh_auto_configure
-	dh_auto_build
+	make LAZBUILD="lazbuild --ws=qt --pcp=debian/lazarus.cfg"
 	touch build
 
 binary-indep: install
+	dh_install -i
 	dh_installchangelogs -i ChangeLog
 	dh_compress -i
 	dh_fixperms -i
@@ -41,6 +39,7 @@ binary-indep: install
 binary-arch: install
 #	dh_installdocs -a NEWS
 #	dh_installinfo -a doc/*.info
+	dh_install -a
 	dh_strip -a
 	dh_compress -a
 	dh_fixperms -a

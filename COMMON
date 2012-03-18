@@ -34,4 +34,7 @@ endif
 TargetCPU=$(shell $(FPC) -iSP)
 TargetOS=$(shell $(FPC) -iSO)
 BuildId=$(TargetCPU)-$(TargetOS)$(BuildLabel)
-TTGEXE=$(TTGDIR)/bin/$(BuildId)/ttg$(EXEEXT)
+TTGEXE=$(TTGDIR)/bin/$(BuildId)/$(PACKAGE)$(EXEEXT)
+
+DBCONVERTDIR=$(RELDIR)/../DBConvert
+DBCONVERTSRC=$(DBCONVERTDIR)/src

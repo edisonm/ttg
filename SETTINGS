@@ -7,7 +7,6 @@ BUILDMODES=debug release
 TTGSRC=src
 
 ifeq ($(shell uname -o),Cygwin)
-DBCONVERT=$(TTGDIR)/bin/dbconvert.exe
 FILES=$(TTGSQLITE3)
 ISSSRC=iss
 PKGSRC=$(ISSSRC)

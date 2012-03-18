@@ -15,7 +15,6 @@ DSRCBASE=DSourceBase
 
 ifeq ($(shell uname -o),Cygwin)
 FILES=$(TTGMYSQL)
-DBCONVERTSRC=../../../DBConvert
 # Due to a bug in cygwin, I cannot use (absolute) dirs that contains ':'
 DBCONVERT=$(DBCONVERTSRC)/bin/dbconvert.exe
 LAZBUILDOPTS=
@@ -24,9 +23,8 @@ LAZBUILDOPTS=--ws=qt
 endif
 
 LAZRES?=lazres
-LAZBUILD?=lazbuild --ws=qt $(LAZBUILDOPTS)
+LAZBUILD?=lazbuild $(LAZBUILDOPTS)
 LAZIDE?=lazarus-ide
-
 LRSDEP=$(LAZRES)
 
 TTGMDB=$(RELDIR)/dat/ttg.mdb
