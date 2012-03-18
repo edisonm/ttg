@@ -16,18 +16,14 @@ clean:
 	dh_auto_clean
 	dh_clean
 
-install: build debian/ttg.desktop
+install: build
 #	dh_clean
 	dh_auto_install
 	mkdir -p debian/tmp/usr/share/applications
 	mkdir -p debian/tmp/usr/share/doc/ttg
 	mkdir -p debian/tmp/usr/share/pixmaps
-	cp debian/ttg.desktop debian/tmp/usr/share/applications
 	cp images/ttg-icon.png debian/tmp/usr/share/doc/ttg/ttg-icon.png
 	ln -s /usr/share/doc/ttg/ttg-icon.png debian/tmp/usr/share/pixmaps/ttg-icon.png
-
-debian/%.desktop: debian/%.desktop.in
-	cat $< | sed "s,@AppName@,$(AppName),g" >$@
 
 build:
 #	dh_auto_configure
@@ -36,7 +32,8 @@ build:
 
 binary-indep: install
 	dh_install -i
-#	dh_installchangelogs -i ChangeLog
+	dh_installdocs -i debian/copyright
+	dh_installchangelogs -i
 	dh_compress -i
 	dh_fixperms -i
 	dh_installdeb -i
@@ -46,9 +43,9 @@ binary-indep: install
 	dh_builddeb -i
 
 binary-arch: install
-#	dh_installdocs -a NEWS
-#	dh_installinfo -a doc/*.info
 	dh_install -a
+	dh_installdocs -a debian/copyright
+	dh_installchangelogs -a
 	dh_strip -a
 	dh_compress -a
 	dh_fixperms -a
