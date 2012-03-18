@@ -57,10 +57,8 @@ tgz:
 # svn export --force $(REPOSITORY) $(TGZSRC) ;
 	rsync -a --exclude-from=Exclude --delete-excluded $(TTGDIR)/ $(PKGDIR)/$(TGZSRC)/
 	mkdir -p $(PKGDIR)/$(TGZSRC)/src/dbcshared
-	mkdir -p $(PKGDIR)/$(TGZSRC)/src/multithreadprocs
 	cp $(DBCONVERTDIR)/auxiliary/*.* $(PKGDIR)/$(TGZSRC)/src/dbcshared/
-	cp ../multithreadprocs/*.pas ../multithreadprocs/*.lpk $(PKGDIR)/$(TGZSRC)/src/multithreadprocs/
-	sed -e s:'../../DBConvert/auxiliary':'dbcshared':g -e s:'../../multithreadprocs':'multithreadprocs':g $(TTGSRC)/ttg.lpi \
+	sed -e s:'../../DBConvert/auxiliary':'dbcshared':g -e s:'../../multithreadprocs':'/usr/share/multithreadprocs/src':g $(TTGSRC)/ttg.lpi \
 	  -e s:'../../zeosdbo/':'/usr/share/zeosdbo/':g > $(PKGDIR)/$(TGZSRC)/src/ttg.lpi
 	cd $(PKGDIR) ; \
 	  tar -c --owner=0 --group=0 --exclude-backups $(TGZSRC)/* | gzip  --best -c > $(TGZBASE).orig.tar.gz
@@ -69,6 +67,7 @@ install:
 	mkdir -p $(DESTDIR)/usr/bin
 	mkdir -p $(DESTDIR)/usr/share/doc/$(PACKAGE)/examples
 	mkdir -p $(DESTDIR)/usr/share/locale/es/LC_MESSAGES
+	mkdir -p $(DESTDIR)/usr/share/applications
 	cp $(TTGEXE) $(DESTDIR)/usr/bin/
 	cp $(TTGDIR)/examples/Britanico2000.ttd $(TTGDIR)/examples/Salamanca1999.ttd  $(DESTDIR)/usr/share/doc/$(PACKAGE)/examples/
 	cp $(TTGSRC)/locale/ttg.es.po $(DESTDIR)/usr/share/locale/es/LC_MESSAGES/

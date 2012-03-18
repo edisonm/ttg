@@ -4,7 +4,7 @@
     <Item1>
       <Name Value="MultiThreadProcsLaz"/>
       <Version Major="1" Minor="2" Release="1"/>
-      <Filename Value="multithreadprocs/multithreadprocslaz.lpk"/>
+      <Filename Value="/usr/share/multithreadprocs/src/multithreadprocslaz.lpk"/>
       <LastUsed Value="20120318"/>
     </Item1>
     <Item2>

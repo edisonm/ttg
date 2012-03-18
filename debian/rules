@@ -16,18 +16,27 @@ clean:
 	dh_auto_clean
 	dh_clean
 
-install: build
+install: build debian/ttg.desktop
 #	dh_clean
 	dh_auto_install
+	mkdir -p debian/tmp/usr/share/applications
+	mkdir -p debian/tmp/usr/share/doc/ttg
+	mkdir -p debian/tmp/usr/share/pixmaps
+	cp debian/ttg.desktop debian/tmp/usr/share/applications
+	cp images/ttg-icon.png debian/tmp/usr/share/doc/ttg/ttg-icon.png
+	ln -s /usr/share/doc/ttg/ttg-icon.png debian/tmp/usr/share/pixmaps/ttg-icon.png
+
+debian/%.desktop: debian/%.desktop.in
+	cat $< | sed "s,@AppName@,$(AppName),g" >$@
 
 build:
 #	dh_auto_configure
-	make LAZBUILD="lazbuild --ws=qt --pcp=debian/lazarus.cfg"
+	make LAZBUILD="lazbuild --pcp=$$(pwd)/debian/lazarus.cfg"
 	touch build
 
 binary-indep: install
 	dh_install -i
-	dh_installchangelogs -i ChangeLog
+#	dh_installchangelogs -i ChangeLog
 	dh_compress -i
 	dh_fixperms -i
 	dh_installdeb -i
