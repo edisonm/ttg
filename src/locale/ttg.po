@@ -1266,7 +1266,7 @@ msgstr ""
 
 #: ttimetableform.actbrokensessionday.hint
 msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONDAY.HINT"
-msgid "Themes cut by the day|Themes cut by the day"
+msgid "Broken Sessions by Day|Broken Sessions by Day"
 msgstr ""
 
 #: ttimetableform.actbrokensessionhour.caption
@@ -1276,7 +1276,7 @@ msgstr ""
 
 #: ttimetableform.actbrokensessionhour.hint
 msgctxt "TTIMETABLEFORM.ACTBROKENSESSIONHOUR.HINT"
-msgid "Themes cut by the hour|Themes cut by the hour"
+msgid "Broken Sessions by Hour|Broken Sessions by Hour"
 msgstr ""
 
 #: ttimetableform.actclashactivity.caption

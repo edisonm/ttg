@@ -1292,7 +1292,7 @@ msgstr "Materias cortadas por el dia"
 
 #: ttimetableform.actbrokensessionday.hint
 msgctxt "ttimetableform.actbrokensessionday.hint"
-msgid "Themes cut by the day|Themes cut by the day"
+msgid "Broken Sessions by Day|Broken Sessions by Day"
 msgstr "Materias cortadas por el dia|Materias cortadas por el dia"
 
 #: ttimetableform.actbrokensessionhour.caption
@@ -1302,7 +1302,7 @@ msgstr "Materias cortadas por la hora"
 
 #: ttimetableform.actbrokensessionhour.hint
 msgctxt "ttimetableform.actbrokensessionhour.hint"
-msgid "Themes cut by the hour|Themes cut by the hour"
+msgid "Broken Sessions by Hour|Broken Sessions by Hour"
 msgstr "Materias cortadas por la hora|Materias cortadas por la hora"
 
 #: ttimetableform.actclashactivity.caption

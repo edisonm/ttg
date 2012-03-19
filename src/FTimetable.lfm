@@ -495,14 +495,14 @@ inherited TimetableForm: TTimetableForm
     object ActBrokenSessionDay: TAction[6]
       AutoCheck = True
       Caption = 'Broken Sessions by Day'
-      Hint = 'Themes cut by the day|Themes cut by the day'
+      Hint = 'Broken Sessions by Day|Broken Sessions by Day'
       ImageIndex = 5
       OnExecute = ActBrokenSessionDayExecute
     end
     object ActBrokenSessionHour: TAction[7]
       AutoCheck = True
       Caption = 'Broken Sessions by Hour'
-      Hint = 'Themes cut by the hour|Themes cut by the hour'
+      Hint = 'Broken Sessions by Hour|Broken Sessions by Hour'
       ImageIndex = 5
       OnExecute = ActBrokenSessionHourExecute
     end

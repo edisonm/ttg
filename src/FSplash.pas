@@ -71,7 +71,7 @@ begin
   Caption := SAppName;
   LbProductName.Caption := Caption;
   LbProductVersion.Caption := SAppVersion + '-' + SRevision;
-  LbYearLabel.Caption := SBuildMode + ' (' + SBuildDateTime + ')';
+  LbYearLabel.Caption := SBuildDateTime + ' - ' + SBuildMode;
   LbCopyright.Caption := SCopyright;
 end;
 
