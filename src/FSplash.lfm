@@ -93,8 +93,8 @@ object SplashForm: TSplashForm
     Left = 88
     Height = 18
     Top = 88
-    Width = 74
-    Caption = 'Executable'
+    Width = 65
+    Caption = 'Copyright'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     ParentColor = False

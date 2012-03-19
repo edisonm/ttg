@@ -51,7 +51,7 @@ begin
   DecimalSeparator := ',';
   //RequireDerivedFormResource := True;
   Application.Initialize;
-  Application.Title := sAppName + ' ' + sAppVersion;
+  Application.Title := sAppName;
   Application.HelpFile := '../hlp/ttg.hlp';
   Application.CreateForm(TSourceDataModule, SourceDataModule);
   Application.CreateForm(TMasterDataModule, MasterDataModule);
