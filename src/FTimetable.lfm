@@ -1,5 +1,5 @@
 inherited TimetableForm: TTimetableForm
-  Left = 836
+  Left = 829
   Height = 545
   Top = 415
   Width = 913
@@ -10,6 +10,7 @@ inherited TimetableForm: TTimetableForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  Visible = True
   inherited TBEditor: TToolBar
     Width = 913
     inherited DBNavigator: TDBNavigator
@@ -119,6 +120,7 @@ inherited TimetableForm: TTimetableForm
         DataSource = DataSource
         Font.Height = -11
         Font.Name = 'Courier New'
+        Font.Quality = fqNonAntialiased
         ParentFont = False
         TabOrder = 0
       end
@@ -658,7 +660,6 @@ inherited TimetableForm: TTimetableForm
   object QuClashResource: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
     AutoCalcFields = False
-    AfterScroll = QuClashResourceAfterScroll
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
@@ -838,7 +839,6 @@ inherited TimetableForm: TTimetableForm
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimetable;NaTheme'
     AutoCalcFields = False
-    AfterScroll = QuClashActivityAfterScroll
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'
@@ -1207,7 +1207,6 @@ inherited TimetableForm: TTimetableForm
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTimetable;IdDay;IdHour'
     AutoCalcFields = False
-    AfterScroll = QuClashActivityAfterScroll
     ReadOnly = True
     SQL.Strings = (
       'SELECT DISTINCT'

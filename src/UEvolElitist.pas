@@ -370,7 +370,7 @@ begin
   with Report do
   try
     Add(SEvolutiveElitistAlgorithm);
-    Add('============================');
+    Add('===========================');
     if AExtraInfo <> '' then
       Add(AExtraInfo);
     ReportParameters(Report);

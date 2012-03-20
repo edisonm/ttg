@@ -6,10 +6,10 @@ unit FTimetable;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, Db, FSingleEditor, Grids, Buttons, FEditor, DBCtrls,
-  ExtCtrls, ComCtrls, ActnList, ZDataset, FCrossManytoManyEditorR,
-  DMaster, FCrossManyToManyEditor1, FConfig, DSource, FMasterDetailEditor,
+  LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Db, FSingleEditor, Grids, Buttons, FEditor, DBCtrls, ExtCtrls, ComCtrls,
+  ActnList, StdCtrls, DBGrids, ZDataset, FCrossManytoManyEditorR, DMaster,
+  FCrossManyToManyEditor1, FConfig, DSource, FMasterDetailEditor,
   FTimetableResource;
 
 type
@@ -35,7 +35,6 @@ type
     QuClashActivity: TZQuery;
     QuClashActivityIdTimetable: TLongintField;
     QuClashActivityIdActivity: TLongintField;
-    QuClashActivityIdTheme: TLongintField;
     QuClashActivityNaTheme: TStringField;
     QuClashActivityDetail: TZQuery;
     QuClashActivityDetailIdTimetable: TLongintField;
@@ -109,8 +108,6 @@ type
     procedure ActTimetableResourceExecute(Sender: TObject);
     procedure ActRestrictionNonSatisfiedExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure QuClashResourceAfterScroll(DataSet: TDataSet);
-    procedure QuClashActivityAfterScroll(DataSet: TDataSet);
     procedure ActBrokenSessionDayExecute(Sender: TObject);
     procedure ActBrokenSessionHourExecute(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
@@ -269,22 +266,6 @@ begin
   QuBrokenSessionHourDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
   QuBrokenSessionHourDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
   QuBrokenSessionHourDetailNaActivity.DisplayLabel := SFlTimetableDetail_IdActivity;
-end;
-
-procedure TTimetableForm.QuClashResourceAfterScroll(DataSet: TDataSet);
-begin
-  inherited;
-  QuClashResourceDetail.Filter := Format(
-    'IdDay=%d and IdHour=%d and IdResource=%d',
-    [QuClashResourceIdDay.Value, QuClashResourceIdHour.Value,
-    QuClashResourceIdResource.Value]);
-end;
-
-procedure TTimetableForm.QuClashActivityAfterScroll(DataSet: TDataSet);
-begin
-  inherited;
-  QuClashActivityDetail.Filter := Format('IdTheme=%d',
-    [QuClashActivityIdTheme.Value]);
 end;
 
 procedure TTimetableForm.ActBrokenSessionDayExecute(Sender: TObject);
