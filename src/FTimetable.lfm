@@ -8,7 +8,6 @@ inherited TimetableForm: TTimetableForm
   ClientWidth = 913
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
-  OnCreate = FormCreate
   OnDestroy = FormDestroy
   inherited TBEditor: TToolBar
     Width = 913

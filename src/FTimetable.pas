@@ -51,7 +51,6 @@ type
     procedure ActClashActivityExecute(Sender: TObject);
     procedure ActTimetableResourceExecute(Sender: TObject);
     procedure ActRestrictionNonSatisfiedExecute(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure ActBrokenSessionDayExecute(Sender: TObject);
     procedure ActBrokenSessionHourExecute(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
@@ -116,6 +115,7 @@ begin
       FindField('IdHour').Visible := False;
       FindField('IdActivity').Visible := False;
       FindField('NaTheme').DisplayLabel := SFlActivity_IdTheme;
+      FindField('NaActivity').DisplayLabel := SFlTimetableDetail_IdActivity;
     end;
   end;
 end;
@@ -234,10 +234,6 @@ begin
   end;
 end;
 
-procedure TTimetableForm.FormCreate(Sender: TObject);
-begin
-end;
-
 procedure TTimetableForm.ActBrokenSessionDayExecute(Sender: TObject);
 begin
   inherited;
@@ -249,6 +245,9 @@ begin
       Close;
       Open;
       FindField('IdTimetable').Visible := False;
+      FindField('IdDay').Visible := False;
+      FindField('IdHour').Visible := False;
+      FindField('IdActivity').Visible := False;
       FindField('NaDay').DisplayLabel := SFlTimetableDetail_IdDay;
       FindField('NaHour').DisplayLabel := SFlTimetableDetail_IdHour;
       FindField('NaActivity').DisplayLabel := SFlTimetableDetail_IdActivity;
@@ -267,7 +266,7 @@ begin
     begin
       Close;
       Open;
-      FindField('IdTimeTable').Visible := False;
+      FindField('IdTimetable').Visible := False;
       FindField('IdDay').Visible := False;
       FindField('IdHour').Visible := False;
       FindField('NaDay').DisplayLabel := SFlTimetableDetail_IdDay;
@@ -277,7 +276,7 @@ begin
     begin
       Close;
       Open;
-      FindField('IdTimeTable').Visible := False;
+      FindField('IdTimetable').Visible := False;
       FindField('IdDay').Visible := False;
       FindField('IdHour').Visible := False;
       FindField('IdHour0').Visible := False;
