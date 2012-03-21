@@ -1,7 +1,7 @@
 inherited TimetableForm: TTimetableForm
-  Left = 829
+  Left = 991
   Height = 545
-  Top = 415
+  Top = 380
   Width = 913
   Caption = 'TimetableForm'
   ClientHeight = 545
@@ -10,7 +10,6 @@ inherited TimetableForm: TTimetableForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Visible = True
   inherited TBEditor: TToolBar
     Width = 913
     inherited DBNavigator: TDBNavigator
@@ -127,8 +126,8 @@ inherited TimetableForm: TTimetableForm
     end
   end
   inherited ImageList: TImageList
-    left = 24
-    top = 64
+    left = 312
+    top = 392
     Bitmap = {
       4C690A0000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -457,12 +456,12 @@ inherited TimetableForm: TTimetableForm
     DataSet = SourceDataModule.TbTimetable
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
-    left = 24
-    top = 168
+    left = 112
+    top = 224
   end
   inherited ActionList: TActionList
-    left = 24
-    top = 113
+    left = 312
+    top = 56
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
@@ -568,8 +567,8 @@ inherited TimetableForm: TTimetableForm
     DataSource = DSClashResource
     MasterFields = 'IdTimetable;IdResource;IdDay;IdHour'
     LinkedFields = 'IdTimetable;IdResource;IdDay;IdHour'
-    left = 136
-    top = 416
+    left = 112
+    top = 392
     ParamData = <    
       item
         DataType = ftUnknown
@@ -591,71 +590,6 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdHour'
         ParamType = ptUnknown
       end>
-    object QuClashResourceDetailIdTimetable: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdTimetable'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      Visible = False
-    end
-    object QuClashResourceDetailIdResource: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdResource'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Visible = False
-    end
-    object QuClashResourceDetailIdDay: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdDay'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuClashResourceDetailIdHour: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdHour'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuClashResourceDetailIdActivity: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdActivity'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Visible = False
-    end
-    object QuClashResourceDetailNaTheme: TStringField
-      DisplayWidth = 20
-      FieldKind = fkData
-      FieldName = 'NaTheme'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
   end
   object QuClashResource: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
@@ -670,6 +604,8 @@ inherited TimetableForm: TTimetableForm
       '  Resource.IdResourceType,'
       '  ResourceType.NaResourceType,'
       '  Resource.NaResource,'
+      '  Day.NaDay,'
+      '  Hour.NaHour,'
       '  SUM(TimetableResource.NumResource) AS Occupied,'
       '  SUM(TimetableResource.NumResource) - Resource.NumResource AS Clashes'
       'FROM TimetableDetail'
@@ -678,6 +614,8 @@ inherited TimetableForm: TTimetableForm
       '  AND TimetableDetail.IdActivity=TimetableResource.IdActivity'
       '  INNER JOIN Resource ON TimetableResource.IdResource=Resource.IdResource'
       '  INNER JOIN ResourceType ON Resource.IdResourceType=ResourceType.IdResourceType'
+      '  INNER JOIN Day ON TimetableDetail.IdDay=Day.IdDay'
+      '  INNER JOIN Hour ON TimetableDetail.IdHour=Hour.IdHour'
       'WHERE TimetableDetail.IdTimetable=:IdTimetable'
       'GROUP BY'
       '  TimetableDetail.IdTimetable,'
@@ -699,141 +637,14 @@ inherited TimetableForm: TTimetableForm
     DataSource = SourceDataModule.DSTimetable
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
-    left = 136
-    top = 352
+    left = 112
+    top = 336
     ParamData = <    
       item
         DataType = ftUnknown
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuClashResourceIdTimetable: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdTimetable'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Visible = False
-    end
-    object QuClashResourceIdResource: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdResource'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuClashResourceIdDay: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdDay'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuClashResourceIdHour: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdHour'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuClashResourceIdResourceType: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdResourceType'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = True
-      Visible = False
-    end
-    object QuClashResourceNaResourceType: TStringField
-      DisplayWidth = 15
-      FieldKind = fkData
-      FieldName = 'NaResourceType'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = True
-      Size = 15
-    end
-    object QuClashResourceNaResource: TStringField
-      DisplayWidth = 25
-      FieldKind = fkData
-      FieldName = 'NaResource'
-      Index = 6
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = True
-      Size = 25
-    end
-    object QuClashResourceNaHour: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NaHour'
-      Index = 7
-      KeyFields = 'IdHour'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbHour
-      LookupKeyFields = 'IdHour'
-      LookupResultField = 'NaHour'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 10
-    end
-    object QuClashResourceNaDay: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NaDay'
-      Index = 8
-      KeyFields = 'IdDay'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbDay
-      LookupKeyFields = 'IdDay'
-      LookupResultField = 'NaDay'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 10
-    end
-    object QuClashResourceOccupied: TLongintField
-      DisplayWidth = 5
-      FieldKind = fkData
-      FieldName = 'Occupied'
-      Index = 9
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-    end
-    object QuClashResourceClashes: TLongintField
-      DisplayWidth = 5
-      FieldKind = fkData
-      FieldName = 'Clashes'
-      Index = 10
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-    end
   end
   object QuClashActivity: TZQuery[8]
     Connection = SourceDataModule.DbZConnection
@@ -875,38 +686,6 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuClashActivityIdTimetable: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdTimetable'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      Visible = False
-    end
-    object QuClashActivityIdActivity: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdActivity'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      Visible = False
-    end
-    object QuClashActivityNaTheme: TStringField
-      DisplayWidth = 20
-      FieldKind = fkData
-      FieldName = 'NaTheme'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
   end
   object QuClashActivityDetail: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
@@ -918,12 +697,16 @@ inherited TimetableForm: TTimetableForm
       '  TimetableDetail.IdTimetable,'
       '  TimetableDetail.IdActivity,'
       '  TimetableDetail.IdDay,'
-      '  TimetableDetail.IdHour'
+      '  TimetableDetail.IdHour,'
+      '  Day.NaDay,'
+      '  Hour.NaHour'
       'FROM'
       '  TimetableDetail INNER JOIN TimetableDetail as TimetableDetail1'
       '     ON TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable'
       '    AND TimetableDetail.IdActivity=TimetableDetail1.IdActivity'
       '    AND TimetableDetail.IdDay=TimetableDetail1.IdDay'
+      '  INNER JOIN Day ON TimetableDetail.IdDay=Day.IdDay'
+      '  INNER JOIN Hour ON TimetableDetail.IdHour=Hour.IdHour'
       'WHERE (TimetableDetail.Session<>TimetableDetail1.Session)'
       '  AND (TimetableDetail.IdTimetable=:IdTimetable)'
       '  AND (TimetableDetail.IdActivity=:IdActivity)'
@@ -956,80 +739,6 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTheme'
         ParamType = ptUnknown
       end>
-    object QuClashActivityDetailIdTimetable: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdTimetable'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuClashActivityDetailIdActivity: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdActivity'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuClashActivityDetailIdDay: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdDay'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Visible = False
-    end
-    object QuClashActivityDetailIdHour: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdHour'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Visible = False
-    end
-    object QuClashActivityDetailNaDay: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NaDay'
-      Index = 4
-      KeyFields = 'IdDay'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbDay
-      LookupKeyFields = 'IdDay'
-      LookupResultField = 'NaDay'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 10
-    end
-    object QuClashActivityDetailNaHour: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NaHour'
-      Index = 5
-      KeyFields = 'IdHour'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbHour
-      LookupKeyFields = 'IdHour'
-      LookupResultField = 'NaHour'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 10
-    end
   end
   object QuTimetableDetailRestriction: TZQuery[10]
     Connection = SourceDataModule.DbZConnection
@@ -1039,11 +748,14 @@ inherited TimetableForm: TTimetableForm
       'SELECT DISTINCT'
       '  TimetableDetail.IdTimetable,'
       '  TimetableDetail.IdActivity,'
-      '  ResourceType.NaResourceType,'
       '  Restriction.IdRestrictionType,'
-      '  Resource.NaResource,'
       '  Restriction.IdDay,'
-      '  Restriction.IdHour'
+      '  Restriction.IdHour,'
+      '  ResourceType.NaResourceType,'
+      '  Resource.NaResource,'
+      '  Day.NaDay,'
+      '  Hour.NaHour,'
+      '  RestrictionType.NaRestrictionType'
       'FROM TimetableDetail INNER JOIN TimetableResource'
       '   ON TimetableDetail.IdTimetable=TimetableResource.IdTimetable'
       '  AND TimetableDetail.IdActivity=TimetableResource.IdActivity'
@@ -1053,6 +765,9 @@ inherited TimetableForm: TTimetableForm
       '  AND Restriction.IdResource=TimetableResource.IdResource'
       '  INNER JOIN Resource ON Restriction.IdResource=Resource.IdResource'
       '  INNER JOIN ResourceType ON Resource.IdResourceType=ResourceType.IdResourceType'
+      '  INNER JOIN Day ON TimetableDetail.IdDay=Day.IdDay'
+      '  INNER JOIN Hour ON TimetableDetail.IdHour=Hour.IdHour'
+      '  INNER JOIN RestrictionType ON Restriction.IdRestrictionType=RestrictionType.IdRestrictionType'
       'WHERE'
       '  TimetableDetail.IdTimetable=:IdTimetable'
       'ORDER BY'
@@ -1080,128 +795,6 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuTimetableDetailRestrictionIdTimetable: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdTimetable'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      Visible = False
-    end
-    object QuTimetableDetailRestrictionIdActivity: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdActivity'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = True
-      Required = False
-      Visible = False
-    end
-    object QuTimetableDetailRestrictionNaResourceType: TStringField
-      DisplayWidth = 15
-      FieldKind = fkData
-      FieldName = 'NaResourceType'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 15
-    end
-    object QuTimetableDetailRestrictionIdRestrictionType: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdRestrictionType'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuTimetableDetailRestrictionNaResource: TStringField
-      DisplayWidth = 25
-      FieldKind = fkData
-      FieldName = 'NaResource'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 25
-    end
-    object QuTimetableDetailRestrictionIdDay: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdDay'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuTimetableDetailRestrictionIdHour: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdHour'
-      Index = 6
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuTimetableDetailRestrictionNaRestrictionType: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NaRestrictionType'
-      Index = 7
-      KeyFields = 'IdRestrictionType'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbRestrictionType
-      LookupKeyFields = 'IdRestrictionType'
-      LookupResultField = 'NaRestrictionType'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 10
-    end
-    object QuTimetableDetailRestrictionNaDay: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NaDay'
-      Index = 8
-      KeyFields = 'IdDay'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbDay
-      LookupKeyFields = 'IdDay'
-      LookupResultField = 'NaDay'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 10
-    end
-    object QuTimetableDetailRestrictionNaHour: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NaHour'
-      Index = 9
-      KeyFields = 'IdHour'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbHour
-      LookupKeyFields = 'IdHour'
-      LookupResultField = 'NaHour'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 10
-    end
   end
   object QuBrokenSessionDay: TZQuery[11]
     Connection = SourceDataModule.DbZConnection
@@ -1213,13 +806,19 @@ inherited TimetableForm: TTimetableForm
       '  TimetableDetail.IdTimetable,'
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour,'
-      '  TimetableDetail.IdActivity'
+      '  TimetableDetail.IdActivity,'
+      '  Day.NaDay,'
+      '  Hour.NaHour,'
+      '  Activity.NaActivity'
       'FROM'
       '  TimetableDetail'
       '  INNER JOIN TimetableDetail TimetableDetail1'
       '     ON TimetableDetail.IdTimetable=TimetableDetail1.IdTimetable'
       '    AND TimetableDetail.IdActivity=TimetableDetail1.IdActivity'
       '    AND TimetableDetail.Session=TimetableDetail1.Session'
+      '  INNER JOIN Day ON TimetableDetail.IdDay=Day.IdDay'
+      '  INNER JOIN Hour ON TimetableDetail.IdHour=Hour.IdHour'
+      '  INNER JOIN Activity ON TimetableDetail.IdActivity=Activity.IdActivity'
       'WHERE TimetableDetail.IdTimetable=:IdTimetable'
       '  AND TimetableDetail.IdDay<>TimetableDetail1.IdDay'
     )
@@ -1241,94 +840,6 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuBrokenSessionDayIdTimetable: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdTimetable'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-    end
-    object QuBrokenSessionDayIdDay: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdDay'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuBrokenSessionDayIdHour: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdHour'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuBrokenSessionDayIdActivity: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdActivity'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuBrokenSessionDayNaDay: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NaDay'
-      Index = 4
-      KeyFields = 'IdDay'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbDay
-      LookupKeyFields = 'IdDay'
-      LookupResultField = 'NaDay'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 10
-    end
-    object QuBrokenSessionDayNaHour: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NaHour'
-      Index = 5
-      KeyFields = 'IdHour'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbHour
-      LookupKeyFields = 'IdHour'
-      LookupResultField = 'NaHour'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 10
-    end
-    object QuBrokenSessionDayNaActivity: TStringField
-      DisplayWidth = 15
-      FieldKind = fkLookup
-      FieldName = 'NaActivity'
-      Index = 6
-      KeyFields = 'IdActivity'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbActivity
-      LookupKeyFields = 'IdActivity'
-      LookupResultField = 'NaActivity'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 15
-    end
   end
   object QuBrokenSessionHour: TZQuery[12]
     Connection = SourceDataModule.DbZConnection
@@ -1336,7 +847,7 @@ inherited TimetableForm: TTimetableForm
     AutoCalcFields = False
     ReadOnly = True
     SQL.Strings = (
-      'SELECT IdTimetable, IdDay, IdHour'
+      'SELECT IdTimetable, IdDay, IdHour, NaDay, NaHour'
       'FROM Timetable, Day, Hour'
       'WHERE'
       '  IdTimetable=:IdTimetable'
@@ -1378,69 +889,6 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    object QuBrokenSessionHourIdTimetable: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdTimetable'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Visible = False
-    end
-    object QuBrokenSessionHourIdDay: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdDay'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuBrokenSessionHourIdHour: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdHour'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuBrokenSessionHourNaDay: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NaDay'
-      Index = 3
-      KeyFields = 'IdDay'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbDay
-      LookupKeyFields = 'IdDay'
-      LookupResultField = 'NaDay'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 10
-    end
-    object QuBrokenSessionHourNaHour: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NaHour'
-      Index = 4
-      KeyFields = 'IdHour'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbHour
-      LookupKeyFields = 'IdHour'
-      LookupResultField = 'NaHour'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 10
-    end
   end
   object QuBrokenSessionHourDetail: TZQuery[13]
     Connection = SourceDataModule.DbZConnection
@@ -1452,7 +900,11 @@ inherited TimetableForm: TTimetableForm
       '  TimetableDetail.IdDay,'
       '  TimetableDetail.IdHour,'
       '  TimetableDetail1.IdHour AS IdHour0,'
-      '  TimetableDetail.IdActivity'
+      '  TimetableDetail.IdActivity,'
+      '  Day.NaDay,'
+      '  Hour.NaHour,'
+      '  Hour0.NaHour AS NaHour0,'
+      '  Activity.NaActivity'
       'FROM'
       '  TimetableDetail'
       '  INNER JOIN TimetableDetail TimetableDetail1'
@@ -1460,6 +912,10 @@ inherited TimetableForm: TTimetableForm
       '   AND TimetableDetail.IdActivity=TimetableDetail1.IdActivity'
       '   AND TimetableDetail.Session=TimetableDetail1.Session'
       '   AND TimetableDetail.IdDay=TimetableDetail1.IdDay'
+      '  INNER JOIN Day ON TimetableDetail.IdDay=Day.IdDay'
+      '  INNER JOIN Hour ON TimetableDetail.IdHour=Hour.IdHour'
+      '  INNER JOIN Hour Hour0 ON TimetableDetail.IdHour=Hour0.IdHour'
+      '  INNER JOIN Activity ON TimetableDetail.IdActivity=Activity.IdActivity'
       'WHERE'
       '  TimetableDetail.IdTimetable=:IdTimetable'
       '   AND TimetableDetail.IdDay=:IdDay'
@@ -1505,106 +961,6 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdHour'
         ParamType = ptUnknown
       end>
-    object QuBrokenSessionHourDetailIdTimetable: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdTimetable'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuBrokenSessionHourDetailIdDay: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdDay'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuBrokenSessionHourDetailIdHour: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdHour'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuBrokenSessionHourDetailIdHour0: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdHour0'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuBrokenSessionHourDetailIdActivity: TLongintField
-      DisplayWidth = 10
-      FieldKind = fkData
-      FieldName = 'IdActivity'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Visible = False
-    end
-    object QuBrokenSessionHourDetailNaDay: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NaDay'
-      Index = 5
-      KeyFields = 'IdDay'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbDay
-      LookupKeyFields = 'IdDay'
-      LookupResultField = 'NaDay'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 10
-    end
-    object QuBrokenSessionHourDetailNaHour: TStringField
-      DisplayWidth = 10
-      FieldKind = fkLookup
-      FieldName = 'NaHour'
-      Index = 6
-      KeyFields = 'IdHour0'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbHour
-      LookupKeyFields = 'IdHour'
-      LookupResultField = 'NaHour'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = True
-      Size = 10
-    end
-    object QuBrokenSessionHourDetailNaActivity: TStringField
-      DisplayWidth = 5
-      FieldKind = fkLookup
-      FieldName = 'NaActivity'
-      Index = 7
-      KeyFields = 'IdActivity'
-      LookupCache = False
-      LookupDataSet = SourceDataModule.TbActivity
-      LookupKeyFields = 'IdActivity'
-      LookupResultField = 'NaActivity'
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 5
-    end
   end
   object DSBrokenSessionHour: TDatasource[14]
     DataSet = QuBrokenSessionHour

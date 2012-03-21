@@ -22,66 +22,20 @@ type
     BtClashResource: TToolButton;
     BtClashActivity: TToolButton;
     QuClashResource: TZQuery;
-    QuClashResourceIdResource: TLongintField;
-    QuClashResourceIdDay: TLongintField;
-    QuClashResourceIdHour: TLongintField;
-    QuClashResourceIdResourceType: TLongintField;
-    QuClashResourceNaDay: TStringField;
-    QuClashResourceNaHour: TStringField;
     QuClashResourceDetail: TZQuery;
-    QuClashResourceDetailIdResource: TLongintField;
-    QuClashResourceDetailIdActivity: TLongintField;
-    QuClashResourceDetailNaTheme: TStringField;
     QuClashActivity: TZQuery;
-    QuClashActivityIdTimetable: TLongintField;
-    QuClashActivityIdActivity: TLongintField;
-    QuClashActivityNaTheme: TStringField;
     QuClashActivityDetail: TZQuery;
-    QuClashActivityDetailIdTimetable: TLongintField;
-    QuClashActivityDetailIdActivity: TLongintField;
     QuClashActivityDetailIdTheme: TLongintField;
-    QuClashActivityDetailIdDay: TLongintField;
-    QuClashActivityDetailIdHour: TLongintField;
-    QuClashActivityDetailNaDay: TStringField;
-    QuClashActivityDetailNaHour: TStringField;
     QuTimetableDetailRestriction: TZQuery;
-    QuTimetableDetailRestrictionIdTimetable: TLongintField;
-    QuTimetableDetailRestrictionIdActivity: TLongintField;
-    QuTimetableDetailRestrictionNaResourceType: TStringField;
-    QuTimetableDetailRestrictionIdRestrictionType: TLongintField;
-    QuTimetableDetailRestrictionNaResource: TStringField;
-    QuTimetableDetailRestrictionIdDay: TLongintField;
-    QuTimetableDetailRestrictionIdHour: TLongintField;
-    QuTimetableDetailRestrictionNaRestrictionType: TStringField;
-    QuTimetableDetailRestrictionNaDay: TStringField;
-    QuTimetableDetailRestrictionNaHour: TStringField;
     
     Panel2: TPanel;
     DBMSummary: TDBMemo;
     TBBrokenSessionDay: TToolButton;
     QuBrokenSessionDay: TZQuery;
-    QuBrokenSessionDayIdDay: TLongintField;
-    QuBrokenSessionDayIdHour: TLongintField;
-    QuBrokenSessionDayIdActivity: TLongintField;
-    QuBrokenSessionDayNaActivity: TStringField;
-    QuBrokenSessionDayNaDay: TStringField;
-    QuBrokenSessionDayNaHour: TStringField;
     TBBrokenSessionHour: TToolButton;
     DSBrokenSessionHour: TDataSource;
     QuBrokenSessionHour: TZQuery;
-    QuBrokenSessionHourIdTimetable: TLongintField;
-    QuBrokenSessionHourIdDay: TLongintField;
-    QuBrokenSessionHourIdHour: TLongintField;
-    QuBrokenSessionHourNaDay: TStringField;
-    QuBrokenSessionHourNaHour: TStringField;
     QuBrokenSessionHourDetail: TZQuery;
-    QuBrokenSessionHourDetailIdDay: TLongintField;
-    QuBrokenSessionHourDetailIdHour: TLongintField;
-    QuBrokenSessionHourDetailIdHour0: TLongintField;
-    QuBrokenSessionHourDetailIdActivity: TLongintField;
-    QuBrokenSessionHourDetailNaDay: TStringField;
-    QuBrokenSessionHourDetailNaHour: TStringField;
-    QuBrokenSessionHourDetailNaActivity: TStringField;
     Splitter1: TSplitter;
     ActTimetableResource: TAction;
     ActClashResource: TAction;
@@ -90,17 +44,7 @@ type
     ActBrokenSessionDay: TAction;
     ActBrokenSessionHour: TAction;
     DSClashResource: TDataSource;
-    QuClashResourceIdTimetable: TLongintField;
-    QuBrokenSessionDayIdTimetable: TLongintField;
-    QuClashResourceNaResourceType: TStringField;
-    QuClashResourceNaResource: TStringField;
-    QuClashResourceOccupied: TLongintField;
-    QuClashResourceClashes: TLongintField;
-    QuClashResourceDetailIdTimetable: TLongintField;
     DSClashActivity: TDataSource;
-    QuBrokenSessionHourDetailIdTimetable: TLongintField;
-    QuClashResourceDetailIdDay: TLongintField;
-    QuClashResourceDetailIdHour: TLongintField;
     BtImproveTimetable: TToolButton;
     ActImproveTimeTable: TAction;
     procedure ActClashResourceExecute(Sender: TObject);
@@ -135,7 +79,7 @@ var
 implementation
 
 uses
-  Variants, UTTModel, UMakeTT, UTTGConsts, dsourcebaseconsts;
+  Variants, UTTModel, UMakeTT, UTTGConsts, DSourceBaseConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -148,10 +92,31 @@ begin
        (Self, FClashResourceForm, ConfigStorage, ActClashResource,
         QuClashResource, QuClashResourceDetail) then
   begin
-    QuClashResource.Close;
-    QuClashResourceDetail.Close;
-    QuClashResource.Open;
-    QuClashResourceDetail.Open;
+    with QuClashResource do
+    begin
+      Close;
+      Open;
+      FindField('IdTimetable').Visible := False;
+      FindField('IdResource').Visible := False;
+      FindField('IdDay').Visible := False;
+      FindField('IdHour').Visible := False;
+      FindField('IdResourceType').Visible := False;
+      FindField('NaResourceType').DisplayLabel := SFlResource_IdResourceType;
+      FindField('NaResource').DisplayLabel := SFlRestriction_IdResource;
+      FindField('NaDay').DisplayLabel := SFlTimetableDetail_IdDay;
+      FindField('NaHour').DisplayLabel := SFlTimetableDetail_IdHour;
+    end;
+    with QuClashResourceDetail do
+    begin
+      Close;
+      Open;
+      FindField('IdTimetable').Visible := False;
+      FindField('IdResource').Visible := False;
+      FindField('IdDay').Visible := False;
+      FindField('IdHour').Visible := False;
+      FindField('IdActivity').Visible := False;
+      FindField('NaTheme').DisplayLabel := SFlActivity_IdTheme;
+    end;
   end;
 end;
 
@@ -179,10 +144,25 @@ begin
        (Self, FClashActivityForm, ConfigStorage, ActClashActivity, QuClashActivity,
         QuClashActivityDetail) then
   begin
-    QuClashActivity.Close;
-    QuClashActivity.Open;
-    QuClashActivityDetail.Close;
-    QuClashActivityDetail.Open;
+    with QuClashActivity do
+    begin
+      Close;
+      Open;
+      FindField('IdTimetable').Visible := False;
+      FindField('IdActivity').Visible := False;
+      FindField('NaTheme').DisplayLabel := SFlActivity_IdTheme;
+    end;
+    with QuClashActivityDetail do
+    begin
+      Close;
+      Open;
+      FindField('IdTimetable').Visible := False;
+      FindField('IdActivity').Visible := False;
+      FindField('IdDay').Visible := False;
+      FindField('IdHour').Visible := False;
+      FindField('NaDay').DisplayLabel := SFlTimetableDetail_IdDay;
+      FindField('NaHour').DisplayLabel := SFlTimetableDetail_IdHour;
+    end;
   end;
 end;
 
@@ -236,36 +216,26 @@ begin
     FRestrictionNonSatisfiedForm, ConfigStorage,
     ActRestrictionNonSatisfied, QuTimetableDetailRestriction) then
   begin
-    QuTimetableDetailRestriction.Close;
-    QuTimetableDetailRestriction.Open;
+    with QuTimetableDetailRestriction do
+    begin
+      Close;
+      Open;
+      FindField('IdTimetable').Visible := False;
+      FindField('IdActivity').Visible := False;
+      FindField('IdRestrictionType').Visible := False;
+      FindField('IdDay').Visible := False;
+      FindField('IdHour').Visible := False;
+      FindField('NaResourceType').DisplayLabel := SFlResource_IdResourceType;
+      FindField('NaResource').DisplayLabel := SFlRestriction_IdResource;
+      FindField('NaDay').DisplayLabel := SFlTimetableDetail_IdDay;
+      FindField('NaHour').DisplayLabel := SFlTimetableDetail_IdHour;
+      FindField('NaRestrictionType').DisplayLabel := SFlRestriction_IdRestrictionType;
+    end;
   end;
 end;
 
 procedure TTimetableForm.FormCreate(Sender: TObject);
 begin
-  QuClashResourceClashes.DisplayLabel := SClashes;
-  QuClashResourceNaResource.DisplayLabel := SFlResource_NaResource;
-  QuClashResourceNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuClashResourceNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuClashResourceDetailNaTheme.DisplayLabel := SFlActivity_IdTheme;
-  QuClashActivityNaTheme.DisplayLabel := SFlActivity_IdTheme;
-  QuClashActivityDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuClashActivityDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuTimetableDetailRestrictionNaDay.DisplayLabel
-    := SFlTimetableDetail_IdDay;
-  QuTimetableDetailRestrictionNaRestrictionType.DisplayLabel
-    := SFlRestriction_IdRestrictionType;
-  QuTimetableDetailRestrictionNaHour.DisplayLabel
-    := SFlTimetableDetail_IdHour;
-  QuBrokenSessionDayIdTimetable.DisplayLabel := SFlTimetableDetail_IdTimeTable;
-  QuBrokenSessionDayNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuBrokenSessionDayNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuBrokenSessionDayNaActivity.DisplayLabel := SFlTimetableDetail_IdActivity;
-  QuBrokenSessionHourNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuBrokenSessionHourNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuBrokenSessionHourDetailNaDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuBrokenSessionHourDetailNaHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuBrokenSessionHourDetailNaActivity.DisplayLabel := SFlTimetableDetail_IdActivity;
 end;
 
 procedure TTimetableForm.ActBrokenSessionDayExecute(Sender: TObject);
@@ -274,8 +244,15 @@ begin
   if TSingleEditorForm.ToggleSingleEditor(Self, FBrokenSessionDayForm,
     ConfigStorage, ActBrokenSessionDay, QuBrokenSessionDay) then
   begin
-    QuBrokenSessionDay.Close;
-    QuBrokenSessionDay.Open;
+    with QuBrokenSessionDay do
+    begin
+      Close;
+      Open;
+      FindField('IdTimetable').Visible := False;
+      FindField('NaDay').DisplayLabel := SFlTimetableDetail_IdDay;
+      FindField('NaHour').DisplayLabel := SFlTimetableDetail_IdHour;
+      FindField('NaActivity').DisplayLabel := SFlTimetableDetail_IdActivity;
+    end;
   end;
 end;
 
@@ -286,10 +263,30 @@ begin
        (Self, FBrokenSessionHourForm, ConfigStorage, ActBrokenSessionHour,
         QuBrokenSessionHour, QuBrokenSessionHourDetail) then
   begin
-    QuBrokenSessionHour.Close;
-    QuBrokenSessionHour.Open;
-    QuBrokenSessionHourDetail.Close;
-    QuBrokenSessionHourDetail.Open;
+    with QuBrokenSessionHour do
+    begin
+      Close;
+      Open;
+      FindField('IdTimeTable').Visible := False;
+      FindField('IdDay').Visible := False;
+      FindField('IdHour').Visible := False;
+      FindField('NaDay').DisplayLabel := SFlTimetableDetail_IdDay;
+      FindField('NaHour').DisplayLabel := SFlTimetableDetail_IdHour;
+    end;
+    with QuBrokenSessionHourDetail do
+    begin
+      Close;
+      Open;
+      FindField('IdTimeTable').Visible := False;
+      FindField('IdDay').Visible := False;
+      FindField('IdHour').Visible := False;
+      FindField('IdHour0').Visible := False;
+      FindField('IdActivity').Visible := False;
+      FindField('NaDay').DisplayLabel := SFlTimetableDetail_IdDay;
+      FindField('NaHour').DisplayLabel := SFlTimetableDetail_IdHour;
+      FindField('NaHour0').DisplayLabel := SFlTimetableDetail_IdHour + ' (2)';
+      FindField('NaActivity').DisplayLabel := SFlTimetableDetail_IdActivity;
+    end;
   end;
 end;
 
