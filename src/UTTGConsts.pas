@@ -57,7 +57,7 @@ resourcestring
   SInvalidData = 'Invalid input data';
   SIsEmpty = '%s is empty';
   SLoad = 'Load';
-  SMaxIteration = 'Max number of iterations';
+  SIterations = 'Number of iterations';
   SMutationProbability = 'Mutation Probability';
   SName = 'Name';
   SNo = 'No';

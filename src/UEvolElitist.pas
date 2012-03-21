@@ -405,7 +405,7 @@ begin
   begin
     Add(Format('%0:-28s %12.u', [SRandSeed               + ':', FRandSeed]));
     Add(Format('%0:-28s %12.d', [SPopulationSize         + ':', FPopulationSize]));
-    Add(Format('%0:-28s %12.d', [SMaxIteration           + ':', FMaxIteration]));
+    Add(Format('%0:-28s %12.d', [SIterations             + ':', FMaxIteration]));
     Add(Format('%0:-34s %1.4f', [SCrossProbability       + ':', FCrossProbability]));
     Add(Format('%0:-34s %1.4f', [SMutationProbability    + ':', FMutationProbability]));
     Add(Format('%0:-34s %1.4f', [SReparationProbability  + ':', FReparationProbability]));

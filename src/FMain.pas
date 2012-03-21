@@ -68,13 +68,8 @@ type
     TBTheme: TToolButton;
     MIReopen: TMenuItem;
     ImageList: TImageList;
-    MIContent: TMenuItem;
-    MIIndex: TMenuItem;
-    N3: TMenuItem;
     TBFindBetter: TToolButton;
     TBTimetable: TToolButton;
-    TBContent: TToolButton;
-    TBIndex: TToolButton;
     MIConfig: TMenuItem;
     TBConfig: TToolButton;
     ActionList: TActionList;
@@ -93,10 +88,7 @@ type
     ActConfigure: TAction;
     ActTimetable: TAction;
     ActAbout: TAction;
-    ActContents: TAction;
-    ActIndex: TAction;
     ToolButton1: TToolButton;
-    ToolButton2: TToolButton;
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;
     MIChangePassword: TMenuItem;
@@ -106,7 +98,6 @@ type
     N6: TMenuItem;
     SaveDialogCSV: TSaveDialog;
     ActRegistrationInfo: TAction;
-    MIRegistrationInfo: TMenuItem;
     ToolBar: TToolBar;
     procedure ActDBExplorerExecute(Sender: TObject);
     procedure ActExitExecute(Sender: TObject);
@@ -131,9 +122,6 @@ type
     procedure ActAboutExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDestroy(Sender: TObject);
-    procedure ActContentsExecute(Sender: TObject);
-    procedure ActIndexExecute(Sender: TObject);
-    procedure ActRegistrationInfoExecute(Sender: TObject);
   private
     { Private declarations }
     FConfigFileName: string;
@@ -162,8 +150,6 @@ type
     procedure SaveToFile(const AFileName: string);
     function ConfirmOperation: boolean;
     procedure MakeTimetables(const SIdTimetables: string);
-    procedure RegisterSoftware;
-    procedure ProtectSoftware;
 
   public
     { Public declarations }
@@ -519,60 +505,6 @@ begin
     StatusBar.Canvas.FillRect(Rect);
 end;
 
-procedure TMainForm.RegisterSoftware;
-{var
-  InitDate: TDateTime;}
-begin
-{  with FSProtection do
-    if Protect1.Execute(VarToStr(StoredValue['Password'])) then
-    begin
-      InitDate := Now;
-      StoredValue['Password'] := Protect1.Password;
-      if VarToStr(StoredValue['InitDate']) = '' then
-        StoredValue['InitDate'] := Double(InitDate);
-    end;}
-end;
-
-procedure TMainForm.ProtectSoftware;
-{var
-  LastDate, InitDate: TDateTime;}
-begin
-{  with FSProtection do
-  begin
-    if VarToStr(StoredValue['LastDate']) = '' then
-      StoredValue['LastDate'] := Double(Now);
-    if VarToStr(StoredValue['Password']) = Protect1.Password then
-    begin
-      InitDate := StoredValue['InitDate'];
-      LastDate := StoredValue['LastDate'];
-      if LastDate < Now then
-      begin
-        LastDate := Now;
-        StoredValue['LastDate'] := Double(LastDate);
-      end;
-      if (Protect1.ExpirationDays > 0) and ((Protect1.ExpirationDays + InitDate < LastDate)
-        or (LastDate > Now)) then
-      begin
-        MessageDlg('El tiempo de prueba a concluido'#13#10 +
-          ' El sistema se ejecutara sin las opciones que permiten generar el horario',
-          mtWarning, [mbOk], 0);
-        ActMakeTimetable.Enabled := False;
-        ActImproveTimeTable.Enabled := False;
-      end
-      else if Protect1.ExpirationDays > 0 then
-      begin
-        StatusBar.Panels[2].Text := Format('Transcurridos %d de %d dias',
-          [Trunc(LastDate - InitDate), Protect1.ExpirationDays]);
-      end
-      else
-      begin
-        ActMakeTimetable.Enabled := True;
-        ActImproveTimeTable.Enabled := True;
-      end;
-    end;
-  end;}
-end;
-
 procedure TMainForm.LoadStoredConfig;
 begin
   LoadConfig(FConfigStorage.ConfigStrings);
@@ -651,26 +583,6 @@ begin
   SaveConfig(FConfigStorage.ConfigStrings);
   FConfigStorage.ConfigStrings.SaveToFile(FConfigFileName);
   FLogStrings.Free;
-end;
-
-procedure TMainForm.ActContentsExecute(Sender: TObject);
-begin
-{$IFNDEF FPC}
-  Application.HelpCommand(HELP_FINDER, 0);
-{$ENDIF}
-end;
-
-procedure TMainForm.ActIndexExecute(Sender: TObject);
-begin
-{$IFNDEF FPC}
-  Application.HelpCommand(HELP_FINDER, 0);
-{$ENDIF}
-end;
-
-procedure TMainForm.ActRegistrationInfoExecute(Sender: TObject);
-begin
-  RegisterSoftware;
-  ProtectSoftware;
 end;
 
 procedure TMainForm.LoadConfig(Strings: TStrings);
