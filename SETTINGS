@@ -11,12 +11,7 @@ FILES=$(TTGSQLITE3)
 ISSSRC=iss
 PKGSRC=$(ISSSRC)
 else
-ifneq ($(shell which dpkg),)
-DEBSRC=deb
-PKGSRC=$(DEBSRC)
-else
 PKGSRC=$(TTGSRC)
-endif
 FILES=
 endif
 
