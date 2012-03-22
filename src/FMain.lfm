@@ -1,5 +1,5 @@
 object MainForm: TMainForm
-  Left = 250
+  Left = 243
   Height = 362
   Top = 260
   Width = 718
@@ -97,15 +97,8 @@ object MainForm: TMainForm
       ParentShowHint = False
       ShowHint = True
     end
-    object TBPassword: TToolButton
-      Left = 70
-      Top = 2
-      Action = ActPasswd
-      ParentShowHint = False
-      ShowHint = True
-    end
     object ToolButton1: TToolButton
-      Left = 93
+      Left = 70
       Top = 2
       Width = 10
       Caption = 'ToolButton1'
@@ -115,56 +108,56 @@ object MainForm: TMainForm
       Style = tbsSeparator
     end
     object TBDay: TToolButton
-      Left = 103
+      Left = 80
       Top = 2
       Action = ActDay
       ParentShowHint = False
       ShowHint = True
     end
     object TBHour: TToolButton
-      Left = 126
+      Left = 103
       Top = 2
       Action = ActHour
       ParentShowHint = False
       ShowHint = True
     end
     object TBPeriod: TToolButton
-      Left = 149
+      Left = 126
       Top = 2
       Action = ActPeriod
       ParentShowHint = False
       ShowHint = True
     end
     object TBTheme: TToolButton
-      Left = 218
+      Left = 195
       Top = 2
       Action = ActTheme
       ParentShowHint = False
       ShowHint = True
     end
     object TBResourceType: TToolButton
-      Left = 172
+      Left = 149
       Top = 2
       Action = ActResourceType
       ParentShowHint = False
       ShowHint = True
     end
     object TBResource: TToolButton
-      Left = 195
+      Left = 172
       Top = 2
       Action = ActResource
       ParentShowHint = False
       ShowHint = True
     end
     object TBConfig: TToolButton
-      Left = 241
+      Left = 218
       Top = 2
       Action = ActConfigure
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton3: TToolButton
-      Left = 264
+      Left = 241
       Top = 2
       Width = 10
       Caption = 'ToolButton3'
@@ -174,14 +167,14 @@ object MainForm: TMainForm
       Style = tbsSeparator
     end
     object TBFindBetter: TToolButton
-      Left = 274
+      Left = 251
       Top = 2
       Action = ActMakeTimetable
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton4: TToolButton
-      Left = 297
+      Left = 274
       Top = 2
       Width = 10
       Caption = 'ToolButton4'
@@ -191,7 +184,7 @@ object MainForm: TMainForm
       Style = tbsSeparator
     end
     object TBTimetable: TToolButton
-      Left = 307
+      Left = 284
       Top = 2
       Action = ActTimetable
       ParentShowHint = False
@@ -332,7 +325,7 @@ object MainForm: TMainForm
         Hint = 'Reopen|Reopen Timetable'
       end
       object MIPasswd: TMenuItem
-        Action = ActPasswd
+        Caption = 'Password...'
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
           2000000000000004000064000000640000000000000000000000FF00FF00FF00
@@ -369,9 +362,15 @@ object MainForm: TMainForm
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
           FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
         }
+        HelpContext = 110
+        Hint = 'Password|Change system password'
+        ImageIndex = 3
+        ShortCut = 16459
       end
       object MIChangePassword: TMenuItem
-        Action = ActChangePasswd
+        Caption = 'Change password...'
+        HelpContext = 120
+        Hint = 'Change password|Change the system password'
       end
       object N1: TMenuItem
         Caption = '-'
@@ -1749,20 +1748,6 @@ object MainForm: TMainForm
       ImageIndex = 2
       OnExecute = ActSaveExecute
       ShortCut = 16455
-    end
-    object ActPasswd: TAction
-      Category = 'File'
-      Caption = 'Password...'
-      HelpContext = 110
-      Hint = 'Password|Change system password'
-      ImageIndex = 3
-      ShortCut = 16459
-    end
-    object ActChangePasswd: TAction
-      Category = 'File'
-      Caption = 'Change password...'
-      HelpContext = 120
-      Hint = 'Change password|Change the system password'
     end
     object ActExit: TAction
       Category = 'File'

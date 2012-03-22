@@ -59,7 +59,6 @@ type
     TBNew: TToolButton;
     TBSave: TToolButton;
     TBOpen: TToolButton;
-    TBPassword: TToolButton;
     TBDay: TToolButton;
     TBHour: TToolButton;
     TBResourceType: TToolButton;
@@ -76,7 +75,6 @@ type
     ActNew: TAction;
     ActOpen: TAction;
     ActSave: TAction;
-    ActPasswd: TAction;
     ActExit: TAction;
     ActDay: TAction;
     ActHour: TAction;
@@ -92,7 +90,6 @@ type
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;
     MIChangePassword: TMenuItem;
-    ActChangePasswd: TAction;
     N2: TMenuItem;
     N5: TMenuItem;
     N6: TMenuItem;

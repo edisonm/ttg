@@ -8,7 +8,7 @@ interface
 uses
   LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Db, FSingleEditor, Grids, Buttons, FEditor, DBCtrls, ExtCtrls, ComCtrls,
-  ActnList, StdCtrls, DBGrids, ZDataset, FCrossManytoManyEditorR, DMaster,
+  ActnList, ZDataset, FCrossManytoManyEditorR, DMaster,
   FCrossManyToManyEditor1, FConfig, DSource, FMasterDetailEditor,
   FTimetableResource;
 
@@ -78,7 +78,7 @@ var
 implementation
 
 uses
-  Variants, UTTModel, UMakeTT, UTTGConsts, DSourceBaseConsts;
+  Variants, UMakeTT, UTTGConsts, DSourceBaseConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -282,8 +282,8 @@ begin
       FindField('IdHour0').Visible := False;
       FindField('IdActivity').Visible := False;
       FindField('NaDay').DisplayLabel := SFlTimetableDetail_IdDay;
-      FindField('NaHour').DisplayLabel := SFlTimetableDetail_IdHour;
-      FindField('NaHour0').DisplayLabel := SFlTimetableDetail_IdHour + ' (2)';
+      FindField('NaHour').DisplayLabel := SFlTimetableDetail_IdHour + '1';
+      FindField('NaHour0').DisplayLabel := SFlTimetableDetail_IdHour + '2';
       FindField('NaActivity').DisplayLabel := SFlTimetableDetail_IdActivity;
     end;
   end;

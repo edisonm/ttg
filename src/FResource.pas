@@ -8,7 +8,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, FSingleEditor, Grids, Buttons, DBCtrls, ExtCtrls,
-  Printers, ComCtrls, ActnList, FCrossManytoManyEditorR, ZDataset, db;
+  Printers, ComCtrls, ActnList, FCrossManytoManyEditorR, db;
 
 type
 

@@ -1,5 +1,5 @@
 inherited ThemeForm: TThemeForm
-  Left = 675
+  Left = 668
   Height = 644
   Top = 254
   Width = 1024

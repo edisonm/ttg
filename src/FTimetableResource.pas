@@ -18,25 +18,11 @@ type
   TTimetableResourceForm = class(TCrossManyToManyEditor1Form)
     QuTimetableResource: TZQuery;
     CBShowResource: TComboBox;
-    QuTimetableResourceIdCategory: TLongintField;
-    QuTimetableResourceIdParallel: TLongintField;
-    QuTimetableResourceIdHour: TLongintField;
-    QuTimetableResourceIdDay: TLongintField;
-    QuTimetableResourceIdTheme: TLongintField;
-    QuTimetableResourceNaTheme: TStringField;
-    QuTimetableResourceName: TStringField;
-    QuTimetableResourceAbCategory: TStringField;
-    QuTimetableResourceNaParallel: TStringField;
     DSResource: TDataSource;
     DBNavigator: TDBNavigator;
     DBGrid1: TDBGrid;
     Splitter1: TSplitter;
     QuResource: TZQuery;
-    QuResourceIdTimetable: TLongintField;
-    QuResourceIdResource: TLongintField;
-    QuResourceNaResource: TStringField;
-    QuTimetableResourceIdTimetable: TLongintField;
-    QuTimetableResourceIdResource: TLongintField;
     procedure TBShowClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure QuTimetableResourceCalcFields(DataSet: TDataSet);
@@ -51,7 +37,7 @@ type
 
 implementation
 uses
-  UTTGBasics, DSourceBaseConsts;
+  UTTGBasics, DSourceBaseConsts, URelUtils;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -72,17 +58,36 @@ begin
 end;
 
 procedure TTimetableResourceForm.FormCreate(Sender: TObject);
+var
+  Field: TField;
 begin
   inherited;
   QuResource.Open;
+  with QuResource do
+  begin
+    FindField('IdTimetable').Visible := False;
+    FindField('IdResource').Visible := False;
+    FindField('NaResource').DisplayLabel := SFlResource_NaResource;
+  end;
   CBShowResource.Items.Clear;
-  QuTimetableResource.Open;
-  QuTimetableResourceNaTheme.DisplayLabel := SFlActivity_IdTheme;
-  QuTimetableResourceName.DisplayLabel := SFlResource_NaResource;
-  QuResourceNaResource.DisplayLabel := SFlResource_NaResource;
-  QuTimetableResourceIdHour.DisplayLabel := SFlTimetableDetail_IdHour;
-  QuTimetableResourceIdDay.DisplayLabel := SFlTimetableDetail_IdDay;
-  QuTimetableResourceIdTheme.DisplayLabel := SFlActivity_IdTheme;
+  with QuTimetableResource do
+  begin
+    PrepareDatasetFields(QuTimetableResource);
+    Field := TStringField.Create(Owner);
+    with Field do
+    begin
+      FieldKind := fkCalculated;
+      Size := 40;
+      DisplayLabel :=  SFlResource_NaResource;
+      FieldName := 'Name';
+      DataSet := QuTimetableResource;
+    end;
+    Open;
+    FindField('NaTheme').DisplayLabel := SFlActivity_IdTheme;
+    FindField('IdHour').DisplayLabel := SFlTimetableDetail_IdHour;
+    FindField('IdDay').DisplayLabel := SFlTimetableDetail_IdDay;
+    FindField('IdTheme').DisplayLabel := SFlActivity_IdTheme;
+  end;
   LoadNames(MasterDataModule.StringsShowResource, CBShowResource.Items);
   CBShowResource.Text := CBShowResource.Items[0];
 end;

@@ -6,7 +6,7 @@ unit DMaster;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics, DB,
+  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, ZDataset, Variants, UTTGConfig;
 
 type
@@ -14,13 +14,6 @@ type
   { TMasterDataModule }
 
   TMasterDataModule = class(TDataModule)
-    TbTmpResourceWorkLoad: TZTable;
-    TbTmpResourceWorkLoadIdResource: TLongintField;
-    TbTmpResourceWorkLoadNaResource: TStringField;
-    TbTmpResourceWorkLoadWorkLoad: TLongintField;
-    QuRestrictionCount: TZTable;
-    QuRestrictionCountIdResource: TLongintField;
-    QuRestrictionCountNumber: TLongintField;
     QuNewIdTimetable: TZReadOnlyQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
@@ -28,7 +21,6 @@ type
     { Private declarations }
     FStringsShowResource: TStrings;
     FConfigStorage: TTTGConfig;
-    procedure FillRestrictionCount;
     procedure LoadIniStrings(AStrings: TStrings; var APosition: Integer);
   public
     { Public declarations }
@@ -50,7 +42,7 @@ var
 implementation
 
 uses
-  UTTGConsts, DSource, DSourceBaseConsts;
+  DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -58,42 +50,6 @@ uses
 
 const
   pfhVersionNumber = 293;
-
-procedure TMasterDataModule.FillRestrictionCount;
-var
-  IdResource, IdResource1: Integer;
-  s: string;
-begin
-  with SourceDataModule, QuRestrictionCount do
-  begin
-    Close;
-    Open;
-    s := TbRestriction.IndexFieldNames;
-    TbRestriction.IndexFieldNames := 'IdResource';
-    TbRestriction.First;
-    IdResource := -$7FFFFFFF;
-    while not TbRestriction.Eof do
-    begin
-      IdResource1 := TbRestriction.FindField('IdResource').AsInteger;
-      if IdResource <> IdResource1 then
-      begin
-        Append;
-        with QuRestrictionCountNumber do
-          Value := 1;
-        IdResource := IdResource1;
-      end
-      else
-      begin
-        Edit;
-        with QuRestrictionCountNumber do
-          Value := Value + 1;
-      end;
-      Post;
-      TbRestriction.Next;
-    end;
-    TbRestriction.IndexFieldNames := s;
-  end;
-end;
 
 function TMasterDataModule.NewIdTimetable: Integer;
 begin
@@ -156,17 +112,13 @@ end;
 
 procedure TMasterDataModule.DataModuleCreate(Sender: TObject);
 begin
-  TbTmpResourceWorkLoadIdResource.DisplayLabel := SFlParticipant_IdResource;
-  TbTmpResourceWorkLoadNaResource.DisplayLabel := SFlResource_NaResource;
-  TbTmpResourceWorkLoadWorkLoad.DisplayLabel := SLoad;
-  
   FStringsShowResource := TStringList.Create;
   FConfigStorage := TTTGConfig.Create(Self);
   with FStringsShowResource do
   begin
+    Add('Theme_Activity=NaTheme;NaActivity');
     Add('Theme=NaTheme');
     Add('Activity=NaActivity');
-    Add('Theme_Activity=NaTheme;NaActivity');
   end;
   with SourceDataModule do
   begin

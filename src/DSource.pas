@@ -298,6 +298,7 @@ begin
   TbPeriod.FindField('IdHour').Visible := False;
   TbResourceType.FindField('IdResourceType').Visible := False;
   TbResource.FindField('IdResource').Visible := False;
+  TbResource.FindField('IdResourceType').Visible := False;
   TbTimetable.FindField('Summary').Visible := False;
   with TbTimetableDetail do
   begin

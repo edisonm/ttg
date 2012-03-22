@@ -8,7 +8,7 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, Db, Grids, Buttons, DBCtrls, Variants, ExtCtrls,
-  ComCtrls, Printers, ActnList, StdCtrls, DBGrids, FMasterDetailEditor,
+  Printers, ActnList, StdCtrls, DBGrids, FMasterDetailEditor,
   FCrossManytoManyEditorR;
 
 type
@@ -54,7 +54,7 @@ var
 implementation
 
 uses
-  DMaster, FConfig, DSource, FEditor, UTTGDBUtils, UTTGConsts;
+  DMaster, FConfig, DSource, FEditor;
 
 {$IFNDEF FPC}
 {$R *.DFM}

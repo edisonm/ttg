@@ -616,14 +616,6 @@ msgstr "Acerca de..."
 msgid "About|Information about this program"
 msgstr "Acerca de|Informacion referente a este programa"
 
-#: tmainform.actchangepasswd.caption
-msgid "Change password..."
-msgstr "Cambiar clave..."
-
-#: tmainform.actchangepasswd.hint
-msgid "Change password|Change the system password"
-msgstr "Cambiar clave|Cambiar la clave del sistema"
-
 #: tmainform.actconfigure.caption
 msgctxt "tmainform.actconfigure.caption"
 msgid "Configure..."
@@ -700,14 +692,6 @@ msgstr "Abrir"
 msgid "Open|Open saved institution"
 msgstr "Abrir|Abrir horario guardado"
 
-#: tmainform.actpasswd.caption
-msgid "Password..."
-msgstr "Clave..."
-
-#: tmainform.actpasswd.hint
-msgid "Password|Change system password"
-msgstr "Clave|Cambiar la clave del sistema"
-
 #: tmainform.actperiod.caption
 msgctxt "tmainform.actperiod.caption"
 msgid "Periods"
@@ -772,6 +756,16 @@ msgctxt "tmainform.caption"
 msgid "MainForm"
 msgstr "MainForm"
 
+#: tmainform.michangepassword.caption
+msgctxt "tmainform.michangepassword.caption"
+msgid "Change password..."
+msgstr "Cambiar clave..."
+
+#: tmainform.michangepassword.hint
+msgctxt "tmainform.michangepassword.hint"
+msgid "Change password|Change the system password"
+msgstr "Cambiar clave|Cambiar la clave del sistema"
+
 #: tmainform.midata.caption
 msgid "&Data"
 msgstr "&Datos"
@@ -799,6 +793,16 @@ msgstr "Ayuda|Ayuda en linea"
 #: tmainform.milanguages.caption
 msgid "Languages"
 msgstr "Lenguajes"
+
+#: tmainform.mipasswd.caption
+msgctxt "tmainform.mipasswd.caption"
+msgid "Password..."
+msgstr "Clave..."
+
+#: tmainform.mipasswd.hint
+msgctxt "tmainform.mipasswd.hint"
+msgid "Password|Change system password"
+msgstr "Clave|Cambiar la clave del sistema"
 
 #: tmainform.mireopen.caption
 msgid "Reopen"
@@ -1552,13 +1556,13 @@ msgstr "El dato ingresado no es valido"
 msgid "%s is empty"
 msgstr "%s esta vacio"
 
-#: uttgconsts.sload
-msgid "Load"
-msgstr "Carga"
-
 #: uttgconsts.siterations
 msgid "Number of iterations"
 msgstr "Maximo de generaciones"
+
+#: uttgconsts.sload
+msgid "Load"
+msgstr "Carga"
 
 #: uttgconsts.smutationprobability
 msgctxt "uttgconsts.smutationprobability"
