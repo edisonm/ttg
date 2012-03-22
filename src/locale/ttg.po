@@ -1215,7 +1215,7 @@ msgid "Available Resources"
 msgstr ""
 
 #: tthemeform.groupbox5.caption
-msgid "Resource Type Limits"
+msgid "Resource Type Limit"
 msgstr ""
 
 #: ttimetableclassform.cbshowclass.hint

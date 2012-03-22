@@ -16,6 +16,7 @@ type
   TSourceDataModule = class(TSourceBaseDataModule)
     ZTables: TZReadOnlyQuery;
     QuResource: TZReadOnlyQuery;
+    procedure DbZConnectionAfterConnect(Sender: TObject);
     procedure DSResourceTypeDataChange(Sender: TObject; Field: TField);
     procedure TbThemeBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
@@ -81,6 +82,11 @@ begin
   TbParticipant.Filter := 'IdResourceType='
     + IntToStr(TbResourceType.FindField('IdResourceType').AsInteger);
   TbAvailability.Filter := TbParticipant.Filter;
+end;
+
+procedure TSourceDataModule.DbZConnectionAfterConnect(Sender: TObject);
+begin
+
 end;
 
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
@@ -209,35 +215,11 @@ begin
 end;
 
 procedure TSourceDataModule.PrepareLookupFields;
-  procedure NewLookupField(ADataSet, ALookupDataSet: TDataSet;
-                            const AKeyFields, AFieldName: string);
-  var
-    Field: TField;
-  begin
-    Field := TStringField.Create(ADataSet.Owner);
-    with Field do
-    begin
-      DisplayLabel := FieldCaptionList.Values[ADataSet.Name + '.' + AKeyFields];
-      DisplayWidth := ALookupDataSet.FindField(AFieldName).DisplayWidth;
-      FieldKind := fkLookup;
-      FieldName := AFieldName;
-      LookupDataSet := ALookupDataSet;
-      LookupKeyFields := AKeyFields;
-      LookupResultField := AFieldName;
-      KeyFields := AKeyFields;
-      Size := ALookupDataSet.FindField(AFieldName).Size;
-      Lookup := True;
-      DataSet := ADataSet;
-      Index := ADataSet.FindField(AKeyFields).Index;
-    end;
-    ADataSet.FindField(AKeyFields).Index := ADataSet.FieldCount - 1;
-  end;
 begin
   NewLookupField(TbResource, TbResourceType, 'IdResourceType', 'NaResourceType');
   NewLookupField(TbRestriction, TbRestrictionType, 'IdRestrictionType', 'NaRestrictionType');
   NewLookupField(TbParticipant, TbResource, 'IdResource', 'NaResource');
   NewLookupField(TbResourceTypeLimit, TbResourceType, 'IdResourceType', 'NaResourceType');
-  NewLookupField(TbAvailability, TbResource, 'IdResource', 'NaResource');
 end;
 
 procedure TSourceDataModule.PrepareCalcFields;

@@ -1,7 +1,7 @@
 inherited ResourceForm: TResourceForm
-  Left = 524
+  Left = 518
   Height = 461
-  Top = 340
+  Top = 369
   Width = 588
   Caption = 'Resources'
   ClientHeight = 461
@@ -10,6 +10,7 @@ inherited ResourceForm: TResourceForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  Visible = True
   inherited TBEditor: TToolBar
     Width = 588
     inherited DBNavigator: TDBNavigator

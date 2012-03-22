@@ -1,7 +1,7 @@
 inherited ThemeForm: TThemeForm
-  Left = 668
+  Left = 792
   Height = 644
-  Top = 254
+  Top = 252
   Width = 1024
   Caption = 'Theme'
   ClientHeight = 644
@@ -34,6 +34,7 @@ inherited ThemeForm: TThemeForm
       Top = 2
       Width = 163
       Action = ActFilterByResourceType
+      OnChange = CBFilterByResourceTypeChange
       TabOrder = 2
     end
   end
@@ -97,7 +98,7 @@ inherited ThemeForm: TThemeForm
             Align = alClient
             Color = clWindow
             Columns = <>
-            DataSource = SourceDataModule.DSAvailability
+            DataSource = DSAvailability
             Scrollbars = ssAutoBoth
             TabOrder = 0
             TitleFont.Height = -11
@@ -110,7 +111,7 @@ inherited ThemeForm: TThemeForm
           Top = 1
           Width = 305
           Align = alRight
-          Caption = 'Resource Type Limits'
+          Caption = 'Resource Type Limit'
           ClientHeight = 251
           ClientWidth = 297
           TabOrder = 1
@@ -207,7 +208,7 @@ inherited ThemeForm: TThemeForm
   end
   inherited ImageList: TImageList
     left = 96
-    top = 216
+    top = 208
     Bitmap = {
       4C69040000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -348,6 +349,7 @@ inherited ThemeForm: TThemeForm
     top = 144
   end
   inherited ActionList: TActionList
+    left = 96
     top = 144
     inherited ActFind: TAction
       OnExecute = ActFindExecute
@@ -360,6 +362,96 @@ inherited ThemeForm: TThemeForm
   inherited DataSourceDetail: TDatasource
     DataSet = SourceDataModule.TbActivity
     left = 200
-    top = 216
+    top = 208
+  end
+  object UpAvailability: TZUpdateSQL[7]
+    DeleteSQL.Strings = (
+      'DELETE FROM Availability'
+      'WHERE'
+      '  Availability.IdTheme = :OLD_IdTheme AND'
+      '  Availability.IdResource = :OLD_IdResource'
+    )
+    InsertSQL.Strings = (
+      'INSERT INTO Availability'
+      '  (IdTheme, IdResource, NumResource)'
+      'VALUES'
+      '  (:IdTheme, :IdResource, :NumResource)'
+    )
+    ModifySQL.Strings = (
+      'UPDATE Availability SET'
+      '  IdTheme = :IdTheme,'
+      '  IdResource = :IdResource,'
+      '  NumResource = :NumResource'
+      'WHERE'
+      '  Availability.IdTheme = :OLD_IdTheme AND'
+      '  Availability.IdResource = :OLD_IdResource'
+    )
+    UseSequenceFieldForRefreshSQL = False
+    left = 376
+    top = 144
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'IdTheme'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'IdResource'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'NumResource'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'OLD_IdTheme'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'OLD_IdResource'
+        ParamType = ptUnknown
+      end>
+  end
+  object QuAvailability: TZQuery[8]
+    Connection = SourceDataModule.DbZConnection
+    OnFilterRecord = QuAvailabilityFilterRecord
+    UpdateObject = UpAvailability
+    SQL.Strings = (
+      'SELECT Resource.IdResourceType,Availability.IdResource,Availability.IdTheme,Availability.NumResource'
+      'FROM Availability INNER JOIN Resource ON Availability.IdResource=Resource.IdResource'
+      'WHERE Availability.IdTheme=:IdTheme'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'IdTheme'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSTheme
+    LinkedFields = 'IdTheme'
+    left = 376
+    top = 208
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'IdTheme'
+        ParamType = ptUnknown
+      end>
+  end
+  object ZConnection1: TZConnection[9]
+    AfterConnect = ZConnection1AfterConnect
+    Protocol = 'sqlite-3'
+    Database = '/home/edison/apps/pascal/TTG/dat/ttg.s3fpc'
+    left = 499
+    top = 144
+  end
+  object DSAvailability: TDatasource[10]
+    DataSet = QuAvailability
+    left = 376
+    top = 272
   end
 end

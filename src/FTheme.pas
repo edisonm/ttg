@@ -8,8 +8,8 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, Db, Grids, Buttons, DBCtrls, Variants, ExtCtrls,
-  Printers, ActnList, StdCtrls, DBGrids, FMasterDetailEditor,
-  FCrossManytoManyEditorR;
+  Printers, ActnList, StdCtrls, DBGrids, ComCtrls, FMasterDetailEditor,
+  FCrossManytoManyEditorR, ZSqlUpdate, ZDataset, ZConnection;
 
 type
 
@@ -18,6 +18,7 @@ type
   TThemeForm	= class(TMasterDetailEditorForm)
     ActFilterByResourceType: TAction;
     CBFilterByResourceType: TCheckBox;
+    DSAvailability: TDatasource;
     DbGParticipant: TDBGrid;
     DBGAvailability: TDBGrid;
     DBGResourceTypeLimit: TDBGrid;
@@ -29,8 +30,12 @@ type
     Splitter2: TSplitter;
     Splitter3: TSplitter;
     Splitter4: TSplitter;
+    QuAvailability: TZQuery;
+    UpAvailability: TZUpdateSQL;
+    ZConnection1: TZConnection;
     procedure ActFilterByResourceTypeExecute(Sender: TObject);
     procedure ActFindExecute(Sender: TObject);
+    procedure CBFilterByResourceTypeChange(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
     procedure DSResourceTypeDataChange(Sender: TObject; Field: TField);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
@@ -40,6 +45,9 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure QuAvailabilityFilterRecord(DataSet: TDataSet; var Accept: Boolean
+      );
+    procedure ZConnection1AfterConnect(Sender: TObject);
   private
     { Private declarations }
     FSuperTitle: string;
@@ -54,7 +62,7 @@ var
 implementation
 
 uses
-  DMaster, FConfig, DSource, FEditor;
+  DMaster, FConfig, DSource, FEditor, URelUtils, DSourceBaseConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -75,13 +83,19 @@ begin
   inherited;
 end;
 
+procedure TThemeForm.CBFilterByResourceTypeChange(Sender: TObject);
+begin
+
+end;
+
 procedure TThemeForm.ActFilterByResourceTypeExecute(Sender: TObject);
 begin
   with SourceDataModule do
   begin
     with ActFilterByResourceType do
     begin
-      //DBLResourceType.Enabled := Checked;
+      DBLResourceType.Enabled := not Checked;
+      QuAvailability.Filtered := not Checked;
       if not Checked then
       begin
         TbResource.MasterFields := 'IdResourceType';
@@ -91,8 +105,11 @@ begin
       else
       begin
         TbResource.MasterSource := nil;
+        TbResource.LinkedFields := '';
+        TbResource.MasterFields := '';
       end;
       TbResource.Refresh;
+      TbResourceTypeLimit.Refresh;
     end;
   end;
 end;
@@ -122,33 +139,6 @@ begin
   SourceDataModule.TbTheme.Locate('IdTheme', (Sender as TCustomForm).Tag, []);
 end;
 
-{
-function TThemeForm.GetCurrentLoad: Integer;
-var
-  VBookmark: TBookmark;
-  FieldComposition: TField;
-begin
-  Result := 0;
-  with SourceDataModule, TbTheme do
-  begin
-    VBookmark := GetBookmark;
-    DisableControls;
-    try
-      First;
-      FieldComposition := FindField('Composition');
-      while not Eof do
-      begin
-        Inc(Result, CompositionToDuration(FieldComposition.AsString));
-        Next;
-      end;
-    finally
-      GotoBookmark(VBookmark);
-      EnableControls;
-    end;
-  end;
-end;
-}
-
 procedure TThemeForm.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -158,15 +148,22 @@ begin
     TbResourceTypeLimit.MasterFields := 'IdTheme';
     TbResourceTypeLimit.LinkedFields := 'IdTheme';
     TbResourceTypeLimit.MasterSource := DSTheme;
-    TbAvailability.MasterFields := 'IdTheme';
-    TbAvailability.LinkedFields := 'IdTheme';
-    TbAvailability.MasterSource := DSTheme;
     TbActivity.MasterFields := 'IdTheme';
     TbActivity.LinkedFields := 'IdTheme';
     TbActivity.MasterSource := DSTheme;
     TbParticipant.MasterFields := 'IdActivity';
     TbParticipant.LinkedFields := 'IdActivity';
     TbParticipant.MasterSource := DSActivity;
+    PrepareDataSetFields(QuAvailability);
+    NewLookupField(QuAvailability, TbResource, 'IdResource', 'NaResource');
+    with QuAvailability do
+    begin
+      Open;
+      FindField('IdResourceType').Visible := False;
+      FindField('IdResource').Visible := False;
+      FindField('IdTheme').Visible := False;
+      FindField('NumResource').DisplayLabel := SFlAvailability_NumResource;
+    end;
   end;
 end;
 
@@ -177,6 +174,19 @@ begin
   SourceDataModule.TbAvailability.MasterSource := nil;
   SourceDataModule.TbParticipant.MasterSource := nil;
   SourceDataModule.TbActivity.MasterSource := nil;
+end;
+
+procedure TThemeForm.QuAvailabilityFilterRecord(DataSet: TDataSet;
+  var Accept: Boolean);
+begin
+  Accept := QuAvailability.FindField('IdResourceType').AsInteger
+    = DBLResourceType.KeyValue;
+//    = SourceDataModule.TbResourceType.FindField('IdResourceType').AsInteger;
+end;
+
+procedure TThemeForm.ZConnection1AfterConnect(Sender: TObject);
+begin
+
 end;
 
 initialization
