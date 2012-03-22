@@ -31,7 +31,7 @@ Description: Automatic Timetable Generator -- Documentation files
  This package  contains documentation  and examples for  the Automatic
  Timetable Generator.
 
-Package: ttg-es
+Package: ttg-locale-es
 Architecture: all
 Depends: ${misc:Depends}, ttg
 Description: Automatic Timetable Generator -- Spanish translation
