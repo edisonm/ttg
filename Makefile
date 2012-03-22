@@ -82,3 +82,7 @@ debianbin: debiansrc
 
 winsetup:
 	cd iss ; $(MAKE) all
+
+ci:
+	$(MAKE) buildnr
+	svn ci
