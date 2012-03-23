@@ -18,11 +18,14 @@ type
   TThemeForm	= class(TMasterDetailEditorForm)
     ActFilterByResourceType: TAction;
     CBFilterByResourceType: TCheckBox;
+    DSParticipant: TDatasource;
+    DSResourceType: TDatasource;
+    DBNResourceType: TDBNavigator;
+    DBTResourceType: TDBText;
     DSAvailability: TDatasource;
     DbGParticipant: TDBGrid;
     DBGAvailability: TDBGrid;
     DBGResourceTypeLimit: TDBGrid;
-    DBLResourceType: TDBLookupComboBox;
     GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;
     GroupBox5: TGroupBox;
@@ -31,26 +34,27 @@ type
     Splitter3: TSplitter;
     Splitter4: TSplitter;
     QuAvailability: TZQuery;
+    TbResource: TZTable;
+    TbResourceType: TZTable;
     UpAvailability: TZUpdateSQL;
     ZConnection1: TZConnection;
+    QuParticipant: TZQuery;
+    UpParticipant: TZUpdateSQL;
     procedure ActFilterByResourceTypeExecute(Sender: TObject);
     procedure ActFindExecute(Sender: TObject);
-    procedure CBFilterByResourceTypeChange(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
-    procedure DSResourceTypeDataChange(Sender: TObject; Field: TField);
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure DataSourceStateChange(Sender: TObject);
+    procedure DSResourceTypeDataChange(Sender: TObject; Field: TField);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure QuAvailabilityFilterRecord(DataSet: TDataSet; var Accept: Boolean
-      );
-    procedure ZConnection1AfterConnect(Sender: TObject);
   private
     { Private declarations }
     FSuperTitle: string;
+    procedure UpdateResourceTypeParam;
     {function GetCurrentLoad: Integer;}
   public
     { Public declarations }
@@ -73,6 +77,22 @@ begin
   inherited;
 end;
 
+procedure TThemeForm.UpdateResourceTypeParam;
+var
+  IdResourceType: Integer;
+begin
+  IdResourceType := TbResourceType.FindField('IdResourceType').AsInteger;
+  QuAvailability.ParamByName('IdResourceType').AsInteger := IdResourceType;
+  QuParticipant.ParamByName('IdResourceType').AsInteger := IdResourceType;
+end;
+
+procedure TThemeForm.DSResourceTypeDataChange(Sender: TObject; Field: TField);
+begin
+  UpdateResourceTypeParam;
+  QuAvailability.Refresh;
+  QuParticipant.Refresh;
+end;
+
 procedure TThemeForm.DBGridDblClick(Sender: TObject);
 begin
   inherited;
@@ -83,35 +103,39 @@ begin
   inherited;
 end;
 
-procedure TThemeForm.CBFilterByResourceTypeChange(Sender: TObject);
-begin
-
-end;
-
 procedure TThemeForm.ActFilterByResourceTypeExecute(Sender: TObject);
 begin
-  with SourceDataModule do
+  with ActFilterByResourceType do
   begin
-    with ActFilterByResourceType do
+    if Checked then
     begin
-      DBLResourceType.Enabled := not Checked;
-      QuAvailability.Filtered := not Checked;
-      if not Checked then
-      begin
-        TbResource.MasterFields := 'IdResourceType';
-        TbResource.LinkedFields := 'IdResourceType';
-        TbResource.MasterSource := DSResourceType;
-      end
-      else
-      begin
-        TbResource.MasterSource := nil;
-        TbResource.LinkedFields := '';
-        TbResource.MasterFields := '';
-      end;
-      TbResource.Refresh;
-      TbResourceTypeLimit.Refresh;
+      TbResource.MasterFields := 'IdResourceType';
+      TbResource.LinkedFields := 'IdResourceType';
+      TbResource.MasterSource := DSResourceType;
+      DSResourceType.OnDataChange := DSResourceTypeDataChange;
+      with QuAvailability.SQL do Add(' AND Resource.IdResourceType=:IdResourceType');
+      with QuParticipant.SQL  do Add(' AND Resource.IdResourceType=:IdResourceType');
+      UpdateResourceTypeParam;
+    end
+    else
+    begin
+      TbResource.MasterSource := nil;
+      TbResource.LinkedFields := '';
+      TbResource.MasterFields := '';
+      DSResourceType.OnDataChange := nil;
+      with QuAvailability.SQL do Delete(Count - 1);
+      with QuParticipant.SQL do Delete(Count - 1);
     end;
+    DBTResourceType.Enabled := Checked;
+    DBNResourceType.Enabled := Checked;
+    QuAvailability.FindField('NaResourceType').Visible := not Checked;
+    QuParticipant.FindField('NaResourceType').Visible := not Checked;
   end;
+  QuAvailability.Close;
+  QuAvailability.Open;
+  QuParticipant.Close;
+  QuParticipant.Open;
+  TbResource.Refresh;
 end;
 
 procedure TThemeForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -130,10 +154,6 @@ begin
   {Caption := FSuperTitle + Format(' - %s: %d', [SLoad, GetCurrentLoad]);}
 end;
 
-procedure TThemeForm.DSResourceTypeDataChange(Sender: TObject; Field: TField);
-begin
-end;
-
 procedure TThemeForm.FormActivate(Sender: TObject);
 begin
   SourceDataModule.TbTheme.Locate('IdTheme', (Sender as TCustomForm).Tag, []);
@@ -142,6 +162,8 @@ end;
 procedure TThemeForm.FormCreate(Sender: TObject);
 begin
   inherited;
+  TbResourceType.Open;
+  TbResource.Open;
   with SourceDataModule do
   begin
     FSuperTitle := Description[TbTheme];
@@ -151,18 +173,29 @@ begin
     TbActivity.MasterFields := 'IdTheme';
     TbActivity.LinkedFields := 'IdTheme';
     TbActivity.MasterSource := DSTheme;
-    TbParticipant.MasterFields := 'IdActivity';
-    TbParticipant.LinkedFields := 'IdActivity';
-    TbParticipant.MasterSource := DSActivity;
     PrepareDataSetFields(QuAvailability);
     NewLookupField(QuAvailability, TbResource, 'IdResource', 'NaResource');
     with QuAvailability do
     begin
       Open;
       FindField('IdResourceType').Visible := False;
+      FindField('IdResourceType').ReadOnly := True;
       FindField('IdResource').Visible := False;
       FindField('IdTheme').Visible := False;
+      FindField('NaResourceType').DisplayLabel := SFlResource_IdResourceType;
       FindField('NumResource').DisplayLabel := SFlAvailability_NumResource;
+    end;
+    PrepareDataSetFields(QuParticipant);
+    NewLookupField(QuParticipant, TbResource, 'IdResource', 'NaResource');
+    with QuParticipant do
+    begin
+      Open;
+      FindField('IdResourceType').Visible := False;
+      FindField('IdResourceType').ReadOnly := True;
+      FindField('IdResource').Visible := False;
+      FindField('IdActivity').Visible := False;
+      FindField('NaResourceType').DisplayLabel := SFlResource_IdResourceType;
+      FindField('NumResource').DisplayLabel := SFlParticipant_NumResource;
     end;
   end;
 end;
@@ -174,19 +207,6 @@ begin
   SourceDataModule.TbAvailability.MasterSource := nil;
   SourceDataModule.TbParticipant.MasterSource := nil;
   SourceDataModule.TbActivity.MasterSource := nil;
-end;
-
-procedure TThemeForm.QuAvailabilityFilterRecord(DataSet: TDataSet;
-  var Accept: Boolean);
-begin
-  Accept := QuAvailability.FindField('IdResourceType').AsInteger
-    = DBLResourceType.KeyValue;
-//    = SourceDataModule.TbResourceType.FindField('IdResourceType').AsInteger;
-end;
-
-procedure TThemeForm.ZConnection1AfterConnect(Sender: TObject);
-begin
-
 end;
 
 initialization

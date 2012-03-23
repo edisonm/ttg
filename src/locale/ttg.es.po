@@ -1222,8 +1222,10 @@ msgid "Activity of Themes"
 msgstr "Distribucion de la carga"
 
 #: tthemeform.grbdetail.caption
+#, fuzzy
+#| msgid "Activity"
 msgctxt "tthemeform.grbdetail.caption"
-msgid "Activity"
+msgid "Activities"
 msgstr "Distribucion"
 
 #: tthemeform.groupbox.caption

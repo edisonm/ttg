@@ -2,7 +2,7 @@
 unit DSourceBaseConsts;
 
 (*
-  09/03/2012 18:05
+  23/03/2012 1:47
 
   Warning:
 
@@ -79,7 +79,7 @@ resourcestring
   SFlParticipant_IdActivity = 'Category';
   SFlParticipant_IdResource = 'Resource';
   SFlParticipant_NumResource = 'Number';
-  SFlTimetable_IdTimetable = 'Id';
+  SFlTimetable_IdTimetable = 'Timetable Id';
   SFlTimetable_TimeIni = 'Initial Time';
   SFlTimetable_TimeEnd = 'End Time';
   SFlTimetable_Summary = 'Summary';

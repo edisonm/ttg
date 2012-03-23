@@ -16,8 +16,6 @@ type
   TSourceDataModule = class(TSourceBaseDataModule)
     ZTables: TZReadOnlyQuery;
     QuResource: TZReadOnlyQuery;
-    procedure DbZConnectionAfterConnect(Sender: TObject);
-    procedure DSResourceTypeDataChange(Sender: TObject; Field: TField);
     procedure TbThemeBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
@@ -74,19 +72,6 @@ begin
     // with FindField('IdCategory') do DefaultExpression := AsString;
     // with FindField('IdParallel') do DefaultExpression := AsString;
   end;
-end;
-
-procedure TSourceDataModule.DSResourceTypeDataChange(Sender: TObject;
-  Field: TField);
-begin
-  TbParticipant.Filter := 'IdResourceType='
-    + IntToStr(TbResourceType.FindField('IdResourceType').AsInteger);
-  TbAvailability.Filter := TbParticipant.Filter;
-end;
-
-procedure TSourceDataModule.DbZConnectionAfterConnect(Sender: TObject);
-begin
-
 end;
 
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);

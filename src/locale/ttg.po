@@ -1197,7 +1197,7 @@ msgstr ""
 
 #: tthemeform.grbdetail.caption
 msgctxt "TTHEMEFORM.GRBDETAIL.CAPTION"
-msgid "Activity"
+msgid "Activities"
 msgstr ""
 
 #: tthemeform.groupbox.caption

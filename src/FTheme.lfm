@@ -1,100 +1,127 @@
 inherited ThemeForm: TThemeForm
-  Left = 792
-  Height = 644
-  Top = 252
-  Width = 1024
+  Left = 444
+  Height = 730
+  Top = 207
+  Width = 1140
   Caption = 'Theme'
-  ClientHeight = 644
-  ClientWidth = 1024
+  ClientHeight = 730
+  ClientWidth = 1140
   OnActivate = FormActivate
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   inherited TBEditor: TToolBar
-    Width = 1024
+    Width = 1140
     inherited DBNavigator: TDBNavigator
+      Height = 20
+      Width = 200
+      AutoSize = True
+      ClientHeight = 20
+      ClientWidth = 200
       Hints.Strings = (      )
     end
-    object DBLResourceType: TDBLookupComboBox[3]
-      Left = 420
-      Height = 24
-      Top = 2
-      Width = 231
-      KeyField = 'IdResourceType'
-      ListField = 'NaResourceType'
-      ListFieldIndex = 0
-      ListSource = SourceDataModule.DSResourceType
-      LookupCache = False
-      TabOrder = 1
-    end
-    object CBFilterByResourceType: TCheckBox[4]
-      Left = 257
+    object CBFilterByResourceType: TCheckBox[3]
+      Left = 247
       Height = 21
       Top = 2
       Width = 163
       Action = ActFilterByResourceType
-      OnChange = CBFilterByResourceTypeChange
+      TabOrder = 1
+    end
+    object DBTResourceType: TDBText[4]
+      Left = 490
+      Height = 22
+      Top = 2
+      Width = 134
+      AutoSize = False
+      Color = clBackground
+      DataField = 'NaResourceType'
+      DataSource = DSResourceType
+      Enabled = False
+      Layout = tlCenter
+      ParentColor = False
+      Transparent = False
+    end
+    object DBNResourceType: TDBNavigator[5]
+      Left = 410
+      Height = 20
+      Top = 2
+      Width = 80
+      AutoSize = True
+      BevelOuter = bvNone
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsScaleChilds
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 100
+      ClientHeight = 20
+      ClientWidth = 80
+      DataSource = DSResourceType
+      Enabled = False
+      Options = []
       TabOrder = 2
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
     end
   end
   inherited PnStatus: TPanel
-    Top = 625
-    Width = 1024
-    ClientWidth = 1024
+    Top = 711
+    Width = 1140
+    ClientWidth = 1140
     inherited LbRecordNo: TLabel
-      Left = 1022
+      Left = 1138
     end
   end
   inherited PnEditor: TPanel
-    Height = 600
-    Width = 1024
-    ClientHeight = 600
-    ClientWidth = 1024
+    Height = 686
+    Width = 1140
+    ClientHeight = 686
+    ClientWidth = 1140
     inherited GroupBox: TGroupBox
-      Height = 598
-      Width = 638
+      Height = 684
+      Width = 711
       Caption = 'Themes'
-      ClientHeight = 580
-      ClientWidth = 630
+      ClientHeight = 666
+      ClientWidth = 703
       inherited DBGrid: TDBGrid
-        Height = 303
-        Width = 630
+        Height = 368
+        Width = 703
         OnDblClick = DBGridDblClick
       end
       object Splitter3: TSplitter[1]
         Cursor = crVSplit
         Left = 0
         Height = 6
-        Top = 303
-        Width = 630
+        Top = 368
+        Width = 703
         Align = alBottom
         ResizeAnchor = akBottom
       end
       object Panel1: TPanel[2]
         Left = 0
-        Height = 271
-        Top = 309
-        Width = 630
+        Height = 292
+        Top = 374
+        Width = 703
         Align = alBottom
-        ClientHeight = 271
-        ClientWidth = 630
+        ClientHeight = 292
+        ClientWidth = 703
         TabOrder = 1
         object GroupBox4: TGroupBox
           Left = 1
-          Height = 269
+          Height = 290
           Top = 1
-          Width = 318
+          Width = 398
           Align = alClient
           Caption = 'Available Resources'
-          ClientHeight = 251
-          ClientWidth = 310
+          ClientHeight = 272
+          ClientWidth = 390
           TabOrder = 0
           object DBGAvailability: TDBGrid
             Left = 0
-            Height = 251
+            Height = 272
             Top = 0
-            Width = 310
+            Width = 390
             Align = alClient
             Color = clWindow
             Columns = <>
@@ -106,20 +133,20 @@ inherited ThemeForm: TThemeForm
           end
         end
         object GroupBox5: TGroupBox
-          Left = 324
-          Height = 269
+          Left = 405
+          Height = 290
           Top = 1
-          Width = 305
+          Width = 297
           Align = alRight
           Caption = 'Resource Type Limit'
-          ClientHeight = 251
-          ClientWidth = 297
+          ClientHeight = 272
+          ClientWidth = 289
           TabOrder = 1
           object DBGResourceTypeLimit: TDBGrid
             Left = 0
-            Height = 251
+            Height = 272
             Top = 0
-            Width = 297
+            Width = 289
             Align = alClient
             Color = clWindow
             Columns = <>
@@ -131,10 +158,10 @@ inherited ThemeForm: TThemeForm
           end
         end
         object Splitter4: TSplitter
-          Left = 319
-          Height = 269
+          Left = 399
+          Height = 290
           Top = 1
-          Width = 5
+          Width = 6
           Align = alRight
           ResizeAnchor = akRight
         end
@@ -142,31 +169,31 @@ inherited ThemeForm: TThemeForm
     end
     inherited Splitter1: TSplitter
       Cursor = crHSplit
-      Left = 639
-      Height = 598
+      Left = 712
+      Height = 684
       Top = 1
       Width = 6
       Align = alRight
       ResizeAnchor = akRight
     end
     inherited PnDetail: TPanel
-      Left = 645
-      Height = 598
+      Left = 718
+      Height = 684
       Top = 1
-      Width = 378
+      Width = 421
       Align = alRight
-      ClientHeight = 598
-      ClientWidth = 378
+      ClientHeight = 684
+      ClientWidth = 421
       inherited GrBDetail: TGroupBox
-        Height = 321
-        Width = 376
-        Caption = 'Activity'
-        ClientHeight = 303
-        ClientWidth = 368
+        Height = 385
+        Width = 419
+        Caption = 'Activities'
+        ClientHeight = 367
+        ClientWidth = 411
         inherited DBGridDetail: TDBGrid
-          Height = 303
+          Height = 367
           Hint = 'Activity of Themes'
-          Width = 368
+          Width = 411
           ShowHint = True
         end
       end
@@ -174,30 +201,30 @@ inherited ThemeForm: TThemeForm
         Cursor = crVSplit
         Left = 1
         Height = 6
-        Top = 322
-        Width = 376
+        Top = 386
+        Width = 419
         Align = alBottom
         ResizeAnchor = akBottom
       end
       object GroupBox3: TGroupBox[2]
         Left = 1
-        Height = 269
-        Top = 328
-        Width = 376
+        Height = 291
+        Top = 392
+        Width = 419
         Align = alBottom
         Caption = 'Participants'
-        ClientHeight = 251
-        ClientWidth = 368
+        ClientHeight = 273
+        ClientWidth = 411
         TabOrder = 2
         object DbGParticipant: TDBGrid
           Left = 0
-          Height = 251
+          Height = 273
           Top = 0
-          Width = 368
+          Width = 411
           Align = alClient
           Color = clWindow
           Columns = <>
-          DataSource = SourceDataModule.DSParticipant
+          DataSource = DSParticipant
           Scrollbars = ssAutoBoth
           TabOrder = 0
           TitleFont.Height = -11
@@ -207,7 +234,7 @@ inherited ThemeForm: TThemeForm
     end
   end
   inherited ImageList: TImageList
-    left = 96
+    left = 48
     top = 208
     Bitmap = {
       4C69040000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -345,23 +372,24 @@ inherited ThemeForm: TThemeForm
     DataSet = SourceDataModule.TbTheme
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
-    left = 200
+    left = 160
     top = 144
   end
   inherited ActionList: TActionList
-    left = 96
+    left = 48
     top = 144
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
     object ActFilterByResourceType: TAction[2]
+      AutoCheck = True
       Caption = 'Filter by Resource Type'
       OnExecute = ActFilterByResourceTypeExecute
     end
   end
   inherited DataSourceDetail: TDatasource
     DataSet = SourceDataModule.TbActivity
-    left = 200
+    left = 160
     top = 208
   end
   object UpAvailability: TZUpdateSQL[7]
@@ -387,8 +415,8 @@ inherited ThemeForm: TThemeForm
       '  Availability.IdResource = :OLD_IdResource'
     )
     UseSequenceFieldForRefreshSQL = False
-    left = 376
-    top = 144
+    left = 296
+    top = 80
     ParamData = <    
       item
         DataType = ftUnknown
@@ -418,11 +446,17 @@ inherited ThemeForm: TThemeForm
   end
   object QuAvailability: TZQuery[8]
     Connection = SourceDataModule.DbZConnection
-    OnFilterRecord = QuAvailabilityFilterRecord
+    SortedFields = 'IdTheme;IdResource'
     UpdateObject = UpAvailability
     SQL.Strings = (
-      'SELECT Resource.IdResourceType,Availability.IdResource,Availability.IdTheme,Availability.NumResource'
+      'SELECT'
+      '  ResourceType.NaResourceType,'
+      '  Resource.IdResourceType,'
+      '  Availability.IdResource,'
+      '  Availability.IdTheme,'
+      '  Availability.NumResource'
       'FROM Availability INNER JOIN Resource ON Availability.IdResource=Resource.IdResource'
+      'INNER JOIN ResourceType ON Resource.IdResourceType=ResourceType.IdResourceType'
       'WHERE Availability.IdTheme=:IdTheme'
     )
     Params = <    
@@ -432,9 +466,11 @@ inherited ThemeForm: TThemeForm
         ParamType = ptUnknown
       end>
     DataSource = SourceDataModule.DSTheme
+    MasterFields = 'IdTheme'
     LinkedFields = 'IdTheme'
-    left = 376
-    top = 208
+    IndexFieldNames = 'IdTheme Asc;IdResource Asc'
+    left = 296
+    top = 144
     ParamData = <    
       item
         DataType = ftUnknown
@@ -443,15 +479,131 @@ inherited ThemeForm: TThemeForm
       end>
   end
   object ZConnection1: TZConnection[9]
-    AfterConnect = ZConnection1AfterConnect
+    Connected = True
     Protocol = 'sqlite-3'
     Database = '/home/edison/apps/pascal/TTG/dat/ttg.s3fpc'
-    left = 499
+    left = 424
     top = 144
   end
   object DSAvailability: TDatasource[10]
     DataSet = QuAvailability
-    left = 376
-    top = 272
+    left = 296
+    top = 208
+  end
+  object DSResourceType: TDatasource[11]
+    DataSet = TbResourceType
+    left = 424
+    top = 208
+  end
+  object QuParticipant: TZQuery[12]
+    Connection = SourceDataModule.DbZConnection
+    SortedFields = 'IdActivity;IdResource'
+    UpdateObject = UpParticipant
+    SQL.Strings = (
+      'SELECT'
+      '  Participant.IdActivity,'
+      '  Resource.IdResourceType,'
+      '  ResourceType.NaResourceType,'
+      '  Participant.IdResource,'
+      '  Participant.NumResource'
+      'FROM Participant INNER JOIN Resource ON Participant.IdResource=Resource.IdResource'
+      'INNER JOIN ResourceType ON Resource.IdResourceType=ResourceType.IdResourceType'
+      'WHERE Participant.IdActivity=:IdActivity'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'IdActivity'
+        ParamType = ptUnknown
+      end>
+    DataSource = SourceDataModule.DSActivity
+    MasterFields = 'IdActivity'
+    LinkedFields = 'IdActivity'
+    IndexFieldNames = 'IdActivity Asc;IdResource Asc'
+    left = 552
+    top = 144
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'IdActivity'
+        ParamType = ptUnknown
+      end>
+  end
+  object DSParticipant: TDatasource[13]
+    DataSet = QuParticipant
+    left = 552
+    top = 208
+  end
+  object UpParticipant: TZUpdateSQL[14]
+    DeleteSQL.Strings = (
+      'DELETE FROM Participant'
+      'WHERE'
+      '  Participant.IdActivity = :OLD_IdActivity AND'
+      '  Participant.IdResource = :OLD_IdResource'
+    )
+    InsertSQL.Strings = (
+      'INSERT INTO Participant'
+      '  (IdActivity, IdResource, NumResource)'
+      'VALUES'
+      '  (:IdActivity, :IdResource, :NumResource)'
+    )
+    ModifySQL.Strings = (
+      'UPDATE Participant SET'
+      '  IdActivity = :IdActivity,'
+      '  IdResource = :IdResource,'
+      '  NumResource = :NumResource'
+      'WHERE'
+      '  Participant.IdActivity = :OLD_IdActivity AND'
+      '  Participant.IdResource = :OLD_IdResource'
+    )
+    UseSequenceFieldForRefreshSQL = False
+    left = 552
+    top = 80
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'IdActivity'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'IdResource'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'NumResource'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'OLD_IdActivity'
+        ParamType = ptUnknown
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'OLD_IdResource'
+        ParamType = ptUnknown
+      end>
+  end
+  object TbResourceType: TZTable[15]
+    Tag = 1
+    Connection = SourceDataModule.DbZConnection
+    SortedFields = 'IdResourceType'
+    ReadOnly = True
+    TableName = 'ResourceType'
+    IndexFieldNames = 'IdResourceType Asc'
+    left = 424
+    top = 80
+  end
+  object TbResource: TZTable[16]
+    Tag = 4
+    Connection = SourceDataModule.DbZConnection
+    SortedFields = 'IdResource'
+    ReadOnly = True
+    TableName = 'Resource'
+    IndexFieldNames = 'IdResource Asc'
+    left = 160
+    top = 80
   end
 end

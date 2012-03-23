@@ -2,22 +2,18 @@ inherited SourceDataModule: TSourceDataModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 440
-  HorizontalOffset = 540
-  VerticalOffset = 459
+  HorizontalOffset = 857
+  VerticalOffset = 504
   Width = 667
   inherited DbZConnection: TZConnection
     Connected = True
-    AfterConnect = DbZConnectionAfterConnect
     Protocol = 'sqlite-3'
     Database = ':memory:'
-    left = 544
-    top = 24
+    left = 560
+    top = 52
   end
   inherited TbTheme: TZTable
     OnCalcFields = TbThemeCalcFields
-  end
-  inherited DSResourceType: TDatasource
-    OnDataChange = DSResourceTypeDataChange
   end
   inherited TbTimetable: TZTable
     OnCalcFields = TbTimetableCalcFields
@@ -29,8 +25,8 @@ inherited SourceDataModule: TSourceDataModule
       'WHERE type=''table'''
     )
     Params = <>
-    left = 544
-    top = 112
+    left = 560
+    top = 144
   end
   object QuResource: TZReadOnlyQuery[32]
     Connection = DbZConnection
@@ -50,8 +46,8 @@ inherited SourceDataModule: TSourceDataModule
     DataSource = DSActivity
     MasterFields = 'IdResource'
     LinkedFields = 'IdResource'
-    left = 552
-    top = 184
+    left = 560
+    top = 240
     ParamData = <    
       item
         DataType = ftInteger

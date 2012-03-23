@@ -16,7 +16,7 @@ DSRCBASE=DSourceBase
 ifeq ($(shell uname -o),Cygwin)
 FILES=$(TTGMYSQL)
 # Due to a bug in cygwin, I cannot use (absolute) dirs that contains ':'
-DBCONVERT=$(DBCONVERTSRC)/bin/dbconvert.exe
+DBCONVERT=$(DBCONVERTDIR)/bin/dbconvert.exe
 LAZBUILDOPTS=
 else
 LAZBUILDOPTS=--ws=qt

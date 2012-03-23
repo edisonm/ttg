@@ -1,5 +1,5 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 776
+  Left = 769
   Height = 308
   Top = 168
   Width = 485
@@ -23,9 +23,10 @@ inherited SingleEditorForm: TSingleEditorForm
     end
     object DBNavigator: TDBNavigator[2]
       Left = 47
-      Height = 22
+      Height = 20
       Top = 2
-      Width = 210
+      Width = 200
+      AutoSize = True
       BevelOuter = bvNone
       ChildSizing.EnlargeHorizontal = crsScaleChilds
       ChildSizing.EnlargeVertical = crsScaleChilds
@@ -33,8 +34,8 @@ inherited SingleEditorForm: TSingleEditorForm
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 100
-      ClientHeight = 22
-      ClientWidth = 210
+      ClientHeight = 20
+      ClientWidth = 200
       DataSource = DataSource
       Flat = True
       Options = []

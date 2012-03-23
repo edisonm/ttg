@@ -82,6 +82,8 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
+        <CommandLineParams Value="Salamanca1999.ttd"/>
+        <WorkingDirectory Value="/home/edison/apps/pascal/TTG/examples"/>
       </local>
     </RunParams>
     <RequiredPackages Count="5">
