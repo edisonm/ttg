@@ -173,30 +173,32 @@ begin
     TbActivity.MasterFields := 'IdTheme';
     TbActivity.LinkedFields := 'IdTheme';
     TbActivity.MasterSource := DSTheme;
-    PrepareDataSetFields(QuAvailability);
-    NewLookupField(QuAvailability, TbResource, 'IdResource', 'NaResource');
-    with QuAvailability do
-    begin
-      Open;
-      FindField('IdResourceType').Visible := False;
-      FindField('IdResourceType').ReadOnly := True;
-      FindField('IdResource').Visible := False;
-      FindField('IdTheme').Visible := False;
-      FindField('NaResourceType').DisplayLabel := SFlResource_IdResourceType;
-      FindField('NumResource').DisplayLabel := SFlAvailability_NumResource;
-    end;
-    PrepareDataSetFields(QuParticipant);
-    NewLookupField(QuParticipant, TbResource, 'IdResource', 'NaResource');
-    with QuParticipant do
-    begin
-      Open;
-      FindField('IdResourceType').Visible := False;
-      FindField('IdResourceType').ReadOnly := True;
-      FindField('IdResource').Visible := False;
-      FindField('IdActivity').Visible := False;
-      FindField('NaResourceType').DisplayLabel := SFlResource_IdResourceType;
-      FindField('NumResource').DisplayLabel := SFlParticipant_NumResource;
-    end;
+  end;
+  PrepareDataSetFields(QuAvailability);
+  NewLookupField(QuAvailability, TbResource, 'IdResource', 'NaResource');
+  with QuAvailability do
+  begin
+    Open;
+    FindField('IdResourceType').Visible := False;
+    FindField('IdResourceType').ReadOnly := True;
+    FindField('IdResource').Visible := False;
+    FindField('IdTheme').Visible := False;
+    FindField('NaResourceType').DisplayLabel := SFlResource_IdResourceType;
+    FindField('NaResource').DisplayLabel := SFlAvailability_IdResource;
+    FindField('NumResource').DisplayLabel := SFlAvailability_NumResource;
+  end;
+  PrepareDataSetFields(QuParticipant);
+  NewLookupField(QuParticipant, TbResource, 'IdResource', 'NaResource');
+  with QuParticipant do
+  begin
+    Open;
+    FindField('IdResourceType').Visible := False;
+    FindField('IdResourceType').ReadOnly := True;
+    FindField('IdResource').Visible := False;
+    FindField('IdActivity').Visible := False;
+    FindField('NaResourceType').DisplayLabel := SFlResource_IdResourceType;
+    FindField('NaResource').DisplayLabel := SFlAvailability_IdResource;
+    FindField('NumResource').DisplayLabel := SFlParticipant_NumResource;
   end;
 end;
 

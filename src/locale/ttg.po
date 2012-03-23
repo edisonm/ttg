@@ -97,11 +97,11 @@ msgid "Limit"
 msgstr ""
 
 #: dsourcebaseconsts.sflresourcetype_idresourcetype
-msgid "IdResourceType"
+msgid "Id"
 msgstr ""
 
 #: dsourcebaseconsts.sflresourcetype_maxworkload
-msgid "MaxWorkLoad"
+msgid "Max Work Load"
 msgstr ""
 
 #: dsourcebaseconsts.sflresourcetype_naresourcetype
@@ -244,7 +244,7 @@ msgstr ""
 
 #: dsourcebaseconsts.sfltimetable_idtimetable
 msgctxt "dsourcebaseconsts.sfltimetable_idtimetable"
-msgid "Id"
+msgid "Timetable Id"
 msgstr ""
 
 #: dsourcebaseconsts.sfltimetable_summary

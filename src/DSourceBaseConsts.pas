@@ -2,7 +2,7 @@
 unit DSourceBaseConsts;
 
 (*
-  23/03/2012 1:47
+  23/03/2012 1:52
 
   Warning:
 
@@ -42,11 +42,11 @@ resourcestring
   SFlTheme_IdTheme = 'Id';
   SFlTheme_NaTheme = 'Name';
   SFlTheme_Composition = 'Composition';
-  SFlResourceType_IdResourceType = 'IdResourceType';
+  SFlResourceType_IdResourceType = 'Id';
   SFlResourceType_NaResourceType = 'Name';
   SFlResourceType_NumResourceLimit = 'Resource Limit';
   SFlResourceType_ValResourceType = 'Value';
-  SFlResourceType_MaxWorkLoad = 'MaxWorkLoad';
+  SFlResourceType_MaxWorkLoad = 'Max Work Load';
   SFlDay_IdDay = 'Id';
   SFlDay_NaDay = 'Name';
   SFlHour_IdHour = 'Id';
