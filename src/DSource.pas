@@ -61,16 +61,13 @@ uses
 
 procedure TSourceDataModule.TbThemeBeforePost(DataSet: TDataSet);
 var
-  s: string;
+  Composition: string;
 begin
   with DataSet do
   begin
-    s := FindField('Composition').AsString;
-    if CompositionToDuration(s) <= 0 then
-      raise Exception.CreateFmt(SInvalidComposition, [s]);
-    // with FindField('IdTheme') do DefaultExpression := AsString;
-    // with FindField('IdCategory') do DefaultExpression := AsString;
-    // with FindField('IdParallel') do DefaultExpression := AsString;
+    Composition := FindField('Composition').AsString;
+    if CompositionToDuration(Composition) <= 0 then
+      raise Exception.CreateFmt(SInvalidComposition, [Composition]);
   end;
 end;
 

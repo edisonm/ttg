@@ -1,17 +1,6 @@
 { -*- mode: Delphi -*- }
 unit DSourceBaseConsts;
 
-(*
-  23/03/2012 1:52
-
-  Warning:
-
-    This module has been created automatically.
-    Do not modify it manually or the changes will be lost the next update
-
-
-*)
-
 {$IFDEF FPC}
 {$MODE Delphi}
 {$ENDIF}
