@@ -1,31 +1,35 @@
-* TODO To remove dependencies of third part packages.			 :EM:
+* TODO <2012-03-24 Sat> Remove all dependencies of non-free software:
+** TODO <2012-03-24 Sat> Merge TDataModule and TSourceDataModule
+** TODO <2012-03-24 Sat> Remove tables of TSourceDataModule
+** TODO <2012-03-24 Sat> Remove dependencies of *.mdb and DBConvert
+  Now the application must have simple, and all the data managing must
+  be handled using sqlite (or the current database backend). Note:
+  just to preserve properties, generate a last ttg.mysql and commit it.
+* TODO <2012-03-24 Sat> Upload TTG to the ppa
+  DEADLINE: <2012-04-01 Sat>
+* DONE Generalize the tool to any kind of timetable
+  DEADLINE: <2012-02-15 Wed> CLOSED: [2012-03-24 Sat 00:44]
+  - Rename Subject to Theme. DONE
+  - Rename Teacher to Resource
+  - Rename Class to Cluster
+  - Rename Course to Category. DONE
+  - Add ResourceType . DONE
+  - Unify Teachers and Classrooms, and differentiate the items with ResourceType. DONE
+  - IntercambiarTimeSlots --> SwapTimeSlots. DONE
+* DONE Distribution changes 
+  DEADLINE: <2012-02-08 Sat> CLOSED: [2012-03-24 Sat 00:43]
+  - One teacher for two or more classes.
+  - In one Class, one or more Teachers.
+  - Allow swapping of teachers of same subjects, assigned to groups in
+    same courses.
+
+* DONE To remove dependencies of third part packages. 			 :EM:
+  CLOSED: [2012-03-24 Sat 00:41]
   - Currently, toolbar97, navbtn.  Remove dependencies of TDBPacker 
     In the case of kbmMemTable, to ensure that we are using only
     TDataSet methods in all the project
   - Remove dependencies of ArControls.
-* TODO To migrate this project to Lazarus and see if it works ok	 :EM:
+* DONE To migrate this project to Lazarus and see if it works ok	 :EM:
+  CLOSED: [2012-03-24 Sat 00:42]
 
-2012-02-08
-==========
-TODO:
 
-Distribution changes:
-
-- One teacher for two or more classes. DONE
-- In one Class, one or more Teachers. DONE
-- Allow swapping of teachers of same subjects, assigned to groups in
-  same courses. DONE
-
-2012-02-15
-==========
-New Goal: generalize the tool to any kind of timetable. DONE
-- Rename Subject to Theme. DONE
-- Rename Teacher to Resource
-- Rename Class to Cluster
-- Rename Course to Category. DONE
-- Add ResourceType . DONE
-- Unify Teachers and Classrooms, and differentiate the items with ResourceType. DONE
-
-- usolver.pp(38,23) Hint: Parameter "RefreshInterval" not used
-- usolver.pp(137,26) Hint: Local variable "Value" does not seem to be initialized
-- IntercambiarTimeSlots --> SwapTimeSlots. DONE
