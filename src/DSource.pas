@@ -7,16 +7,16 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, DSourceBase, DBase, Db, ZDataset;
+  Controls, Forms, Dialogs, DSourceBase, DBase, Db, ZDataset, ZConnection;
 
 type
 
   { TSourceDataModule }
 
   TSourceDataModule = class(TSourceBaseDataModule)
+    DbZConnection: TZConnection;
     ZTables: TZReadOnlyQuery;
     QuResource: TZReadOnlyQuery;
-    procedure TbThemeBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure TbTimetableCalcFields(DataSet: TDataSet);
@@ -57,18 +57,6 @@ implementation
 uses
   Variants, FConfig, UTTGDBUtils, URelUtils, UTTGConsts;
 
-procedure TSourceDataModule.TbThemeBeforePost(DataSet: TDataSet);
-var
-  Composition: string;
-begin
-  with DataSet do
-  begin
-    Composition := FindField('Composition').AsString;
-    if CompositionToDuration(Composition) <= 0 then
-      raise Exception.CreateFmt(SInvalidComposition, [Composition]);
-  end;
-end;
-
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
 begin
   inherited;
@@ -91,14 +79,6 @@ procedure TSourceDataModule.PrepareCalcFields;
 var
   Field: TField;
 begin
-  Field := TLongintField.Create(TbTheme.Owner);
-  with Field do
-  begin
-    FieldKind := fkCalculated;
-    DisplayWidth := 5;
-    FieldName := 'Duration';
-    DataSet := TbTheme;
-  end;
   Field := TTimeField.Create(TbTimetable.Owner);
   with Field do
   begin
@@ -124,7 +104,6 @@ end;
 procedure TSourceDataModule.HideFields;
 begin
   TbDay.FindField('IdDay').Visible := False;
-  TbTheme.FindField('IdTheme').Visible := False;
   TbHour.FindField('IdHour').Visible := False;
   TbPeriod.FindField('IdDay').Visible := False;
   TbPeriod.FindField('IdHour').Visible := False;
@@ -316,7 +295,6 @@ end;
 procedure TSourceDataModule.PrepareTables;
 begin
   PrepareFields;
-  TbTheme.FindField('Composition').DisplayWidth := 10;
   ApplyOnTables(SetFieldCaption);
   PrepareLookupFields;
   PrepareCalcFields;

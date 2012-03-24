@@ -1,5 +1,5 @@
 inherited ThemeForm: TThemeForm
-  Left = 723
+  Left = 716
   Height = 730
   Top = 299
   Width = 1140
@@ -230,7 +230,7 @@ inherited ThemeForm: TThemeForm
   end
   inherited ImageList: TImageList
     left = 48
-    top = 208
+    top = 272
     Bitmap = {
       4C69040000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
       FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -371,8 +371,8 @@ inherited ThemeForm: TThemeForm
     top = 144
   end
   inherited ActionList: TActionList
-    left = 48
-    top = 144
+    left = 160
+    top = 272
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
@@ -609,5 +609,10 @@ inherited ThemeForm: TThemeForm
     IndexFieldNames = 'IdTheme Asc'
     left = 48
     top = 80
+  end
+  object DSTheme: TDatasource[18]
+    DataSet = TbTheme
+    left = 48
+    top = 144
   end
 end

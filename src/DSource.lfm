@@ -5,7 +5,7 @@ inherited SourceDataModule: TSourceDataModule
   HorizontalOffset = 850
   VerticalOffset = 504
   Width = 667
-  inherited DbZConnection: TZConnection
+  object DbZConnection: TZConnection
     Connected = True
     Protocol = 'sqlite-3'
     Database = ':memory:'

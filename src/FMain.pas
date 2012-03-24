@@ -234,7 +234,7 @@ begin
 				   ThemeForm,
 				   ConfigStorage,
 				   ActTheme,
-				   SourceDataModule.TbTheme);
+				   ThemeForm.TbTheme);
 end;
 
 procedure TMainForm.ActResourceTypeExecute(Sender: TObject);

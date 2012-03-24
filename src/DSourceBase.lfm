@@ -1,213 +1,200 @@
 inherited SourceBaseDataModule: TSourceBaseDataModule
   OnCreate = DataModuleCreate
   OnDestroy = nil
-  object DbZConnection: TZConnection[0]
-  end
-  object TbTheme: TZTable[1]
-    Connection = DbZConnection
+  Height = 480
+  HorizontalOffset = 693
+  VerticalOffset = 227
+  Width = 928
+  object TbTheme: TZTable[0]
     SortedFields = 'IdTheme'
     TableName = 'Theme'
     IndexFieldNames = 'IdTheme Asc'
     left = 48
     top = 48
   end
-  object DSTheme: TDatasource[2]
+  object DSTheme: TDatasource[1]
     DataSet = TbTheme
     left = 56
     top = 40
   end
-  object TbResourceType: TZTable[3]
+  object TbResourceType: TZTable[2]
     Tag = 1
-    Connection = DbZConnection
     SortedFields = 'IdResourceType'
     TableName = 'ResourceType'
     IndexFieldNames = 'IdResourceType Asc'
     left = 144
     top = 60
   end
-  object DSResourceType: TDatasource[4]
+  object DSResourceType: TDatasource[3]
     DataSet = TbResourceType
     left = 152
     top = 52
   end
-  object TbDay: TZTable[5]
+  object TbDay: TZTable[4]
     Tag = 2
-    Connection = DbZConnection
     SortedFields = 'IdDay'
     TableName = 'Day'
     IndexFieldNames = 'IdDay Asc'
     left = 240
     top = 48
   end
-  object DSDay: TDatasource[6]
+  object DSDay: TDatasource[5]
     DataSet = TbDay
     left = 248
     top = 40
   end
-  object TbHour: TZTable[7]
+  object TbHour: TZTable[6]
     Tag = 3
-    Connection = DbZConnection
     SortedFields = 'IdHour'
     TableName = 'Hour'
     IndexFieldNames = 'IdHour Asc'
     left = 336
     top = 60
   end
-  object DSHour: TDatasource[8]
+  object DSHour: TDatasource[7]
     DataSet = TbHour
     left = 344
     top = 52
   end
-  object TbResource: TZTable[9]
+  object TbResource: TZTable[8]
     Tag = 4
-    Connection = DbZConnection
     SortedFields = 'IdResource'
     TableName = 'Resource'
     IndexFieldNames = 'IdResource Asc'
     left = 432
     top = 48
   end
-  object DSResource: TDatasource[10]
+  object DSResource: TDatasource[9]
     DataSet = TbResource
     left = 440
     top = 40
   end
-  object TbPeriod: TZTable[11]
+  object TbPeriod: TZTable[10]
     Tag = 5
-    Connection = DbZConnection
     SortedFields = 'IdDay;IdHour'
     TableName = 'Period'
     IndexFieldNames = 'IdDay Asc;IdHour Asc'
     left = 48
     top = 144
   end
-  object DSPeriod: TDatasource[12]
+  object DSPeriod: TDatasource[11]
     DataSet = TbPeriod
     left = 56
     top = 136
   end
-  object TbActivity: TZTable[13]
+  object TbActivity: TZTable[12]
     Tag = 6
-    Connection = DbZConnection
     SortedFields = 'IdActivity'
     TableName = 'Activity'
     IndexFieldNames = 'IdActivity Asc'
     left = 144
     top = 156
   end
-  object DSActivity: TDatasource[14]
+  object DSActivity: TDatasource[13]
     DataSet = TbActivity
     left = 152
     top = 148
   end
-  object TbAvailability: TZTable[15]
+  object TbAvailability: TZTable[14]
     Tag = 7
-    Connection = DbZConnection
     SortedFields = 'IdTheme;IdResource'
     TableName = 'Availability'
     IndexFieldNames = 'IdTheme Asc;IdResource Asc'
     left = 240
     top = 144
   end
-  object DSAvailability: TDatasource[16]
+  object DSAvailability: TDatasource[15]
     DataSet = TbAvailability
     left = 248
     top = 136
   end
-  object TbResourceTypeLimit: TZTable[17]
+  object TbResourceTypeLimit: TZTable[16]
     Tag = 8
-    Connection = DbZConnection
     SortedFields = 'IdTheme;IdResourceType'
     TableName = 'ResourceTypeLimit'
     IndexFieldNames = 'IdTheme Asc;IdResourceType Asc'
     left = 336
     top = 156
   end
-  object DSResourceTypeLimit: TDatasource[18]
+  object DSResourceTypeLimit: TDatasource[17]
     DataSet = TbResourceTypeLimit
     left = 344
     top = 148
   end
-  object TbRestrictionType: TZTable[19]
+  object TbRestrictionType: TZTable[18]
     Tag = 9
-    Connection = DbZConnection
     SortedFields = 'IdRestrictionType'
     TableName = 'RestrictionType'
     IndexFieldNames = 'IdRestrictionType Asc'
     left = 432
     top = 144
   end
-  object DSRestrictionType: TDatasource[20]
+  object DSRestrictionType: TDatasource[19]
     DataSet = TbRestrictionType
     left = 440
     top = 136
   end
-  object TbRestriction: TZTable[21]
+  object TbRestriction: TZTable[20]
     Tag = 10
-    Connection = DbZConnection
     SortedFields = 'IdResource;IdDay;IdHour'
     TableName = 'Restriction'
     IndexFieldNames = 'IdResource Asc;IdDay Asc;IdHour Asc'
     left = 48
     top = 240
   end
-  object DSRestriction: TDatasource[22]
+  object DSRestriction: TDatasource[21]
     DataSet = TbRestriction
     left = 56
     top = 232
   end
-  object TbParticipant: TZTable[23]
+  object TbParticipant: TZTable[22]
     Tag = 11
-    Connection = DbZConnection
     SortedFields = 'IdActivity;IdResource'
     TableName = 'Participant'
     IndexFieldNames = 'IdActivity Asc;IdResource Asc'
     left = 144
     top = 252
   end
-  object DSParticipant: TDatasource[24]
+  object DSParticipant: TDatasource[23]
     DataSet = TbParticipant
     left = 152
     top = 244
   end
-  object TbTimetable: TZTable[25]
+  object TbTimetable: TZTable[24]
     Tag = 12
-    Connection = DbZConnection
     SortedFields = 'IdTimetable'
     TableName = 'Timetable'
     IndexFieldNames = 'IdTimetable Asc'
     left = 240
     top = 240
   end
-  object DSTimetable: TDatasource[26]
+  object DSTimetable: TDatasource[25]
     DataSet = TbTimetable
     left = 248
     top = 232
   end
-  object TbTimetableDetail: TZTable[27]
+  object TbTimetableDetail: TZTable[26]
     Tag = 13
-    Connection = DbZConnection
     SortedFields = 'IdTimetable;IdActivity;IdDay;IdHour'
     TableName = 'TimetableDetail'
     IndexFieldNames = 'IdTimetable Asc;IdActivity Asc;IdDay Asc;IdHour Asc'
     left = 336
     top = 252
   end
-  object DSTimetableDetail: TDatasource[28]
+  object DSTimetableDetail: TDatasource[27]
     DataSet = TbTimetableDetail
     left = 344
     top = 244
   end
-  object TbTimetableResource: TZTable[29]
+  object TbTimetableResource: TZTable[28]
     Tag = 14
-    Connection = DbZConnection
     SortedFields = 'IdTimetable;IdActivity;IdResource'
     TableName = 'TimetableResource'
     IndexFieldNames = 'IdTimetable Asc;IdActivity Asc;IdResource Asc'
     left = 432
     top = 240
   end
-  object DSTimetableResource: TDatasource[30]
+  object DSTimetableResource: TDatasource[29]
     DataSet = TbTimetableResource
     left = 440
     top = 232

@@ -144,7 +144,6 @@ begin
       QuResource.Open;
       OpenTables;
     end;
-    TbTheme.BeforePost := TbThemeBeforePost;
   end;
 end;
 

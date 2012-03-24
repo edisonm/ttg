@@ -375,7 +375,7 @@ type
 implementation
 
 uses
-  SysUtils, ZSysUtils, MTProcs, DSource, UTTGConsts, DSourceBaseConsts, USortAlgs, Math;
+  SysUtils, ZSysUtils, MTProcs, DSource, UTTGConsts, DSourceBaseConsts, USortAlgs, Math, ZDataset;
 
 type
   TSortInteger = TSortAlgorithm<Integer,Integer>;
@@ -385,6 +385,7 @@ constructor TTimetableModel.Create(AClashActivityValue,
                                    ABrokenSessionValue,
                                    ANonScatteredActivityValue: Integer);
 var
+  TbTheme: TZTable;
   FThemeToLimits: TDynamicIntegerArrayArray;
   FThemeToResources: TDynamicIntegerArrayArray;
   FThemeToNumResources: TDynamicIntegerArrayArray;
@@ -581,9 +582,12 @@ var
     FieldComposition, FieldName: TField;
     Composition: string;
   begin
-    with SourceDataModule.TbTheme do
+    with TbTheme do
     begin
+      Connection := SourceDataModule.DbZConnection;
+      TableName := 'Theme';
       IndexFieldNames := 'IdTheme';
+      Open;
       First;
       FieldComposition := FindField('Composition');
       FieldName := FindField('NaTheme');
@@ -1108,6 +1112,8 @@ var
   end;
 begin
   inherited Create;
+  TbTheme := TZTable.Create(nil);
+  try
   with SourceDataModule do
   begin
     SErrors := '';
@@ -1149,6 +1155,9 @@ begin
   LoadGreedyData;
   if SErrors <> '' then
     raise Exception.Create(SErrors);
+  finally
+    TbTheme.Free;
+  end;
   {$IFDEF DEBUG}
   WriteLn(Format('FThemeToResources=%s', [TIntegerArrayArrayHandler.ValueToString(FThemeToResources)]));
   WriteLn(Format('FThemeToNumResources=%s', [TIntegerArrayArrayHandler.ValueToString(FThemeToNumResources)]));

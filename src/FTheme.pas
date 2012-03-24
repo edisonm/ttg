@@ -26,6 +26,7 @@ type
     DbGParticipant: TDBGrid;
     DBGAvailability: TDBGrid;
     DBGResourceTypeLimit: TDBGrid;
+    DSTheme: TDatasource;
     GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;
     GroupBox5: TGroupBox;
@@ -56,6 +57,7 @@ type
   private
     { Private declarations }
     FSuperTitle: string;
+    procedure TbThemeBeforePost(DataSet: TDataSet);
     procedure UpdateResourceTypeParam;
     {function GetCurrentLoad: Integer;}
   public
@@ -68,7 +70,8 @@ var
 implementation
 
 uses
-  DMaster, FConfig, DSource, FEditor, URelUtils, UTTGDBUtils, DSourceBaseConsts;
+  DMaster, FConfig, DSource, FEditor, URelUtils, UTTGDBUtils, DSourceBaseConsts,
+    UTTGConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -158,10 +161,12 @@ end;
 
 procedure TThemeForm.FormActivate(Sender: TObject);
 begin
-  SourceDataModule.TbTheme.Locate('IdTheme', (Sender as TCustomForm).Tag, []);
+  TbTheme.Locate('IdTheme', (Sender as TCustomForm).Tag, []);
 end;
 
 procedure TThemeForm.FormCreate(Sender: TObject);
+var
+  Field: TField;
 begin
   inherited;
   TbResourceType.Open;
@@ -202,6 +207,21 @@ begin
     FindField('NaResource').DisplayLabel := SFlAvailability_IdResource;
     FindField('NumResource').DisplayLabel := SFlParticipant_NumResource;
   end;
+  PrepareDataSetFields(TbTheme);
+  Field := TLongintField.Create(TbTheme.Owner);
+  with Field do
+  begin
+    FieldKind := fkCalculated;
+    DisplayWidth := 5;
+    FieldName := 'Duration';
+    DataSet := TbTheme;
+  end;
+  with TbTheme do
+  begin
+    FindField('Composition').DisplayWidth := 10;
+    FindField('IdTheme').Visible := False;
+    BeforePost := TbThemeBeforePost;
+  end;
 end;
 
 procedure TThemeForm.FormDestroy(Sender: TObject);
@@ -211,6 +231,18 @@ begin
   SourceDataModule.TbAvailability.MasterSource := nil;
   SourceDataModule.TbParticipant.MasterSource := nil;
   SourceDataModule.TbActivity.MasterSource := nil;
+end;
+
+procedure TThemeForm.TbThemeBeforePost(DataSet: TDataSet);
+var
+  Composition: string;
+begin
+  with DataSet do
+  begin
+    Composition := FindField('Composition').AsString;
+    if CompositionToDuration(Composition) <= 0 then
+      raise Exception.CreateFmt(SInvalidComposition, [Composition]);
+  end;
 end;
 
 procedure TThemeForm.TbThemeCalcFields(DataSet: TDataSet);

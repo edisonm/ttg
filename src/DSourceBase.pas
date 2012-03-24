@@ -10,14 +10,10 @@ interface
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF},
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db,
-  DSourceBaseConsts,
-  DBase, ZConnection, ZDataset;
+  DSourceBaseConsts, DBase, ZDataset;
 
 type
   TSourceBaseDataModule = class(TBaseDataModule)
-    DbZConnection: TZConnection;
-    TbTheme: TZTable;
-    DSTheme: TDataSource;
     TbResourceType: TZTable;
     DSResourceType: TDataSource;
     TbDay: TZTable;
@@ -66,7 +62,6 @@ begin
   inherited;
   OnDestroy := DataModuleDestroy;
   SetLength(FTables, 15);
-  Tables[0] := TbTheme;
   Tables[1] := TbResourceType;
   Tables[2] := TbDay;
   Tables[3] := TbHour;
