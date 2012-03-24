@@ -101,8 +101,9 @@ msgid "Limit"
 msgstr ""
 
 #: dsourcebaseconsts.sflresourcetype_idresourcetype
+msgctxt "dsourcebaseconsts.sflresourcetype_idresourcetype"
 msgid "Id"
-msgstr ""
+msgstr "Codigo"
 
 #: dsourcebaseconsts.sflresourcetype_maxworkload
 msgid "Max Work Load"

@@ -36,6 +36,7 @@ type
     QuAvailability: TZQuery;
     TbResource: TZTable;
     TbResourceType: TZTable;
+    TbTheme: TZTable;
     UpAvailability: TZUpdateSQL;
     ZConnection1: TZConnection;
     QuParticipant: TZQuery;
@@ -51,6 +52,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure TbThemeCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     FSuperTitle: string;
@@ -66,7 +68,7 @@ var
 implementation
 
 uses
-  DMaster, FConfig, DSource, FEditor, URelUtils, DSourceBaseConsts;
+  DMaster, FConfig, DSource, FEditor, URelUtils, UTTGDBUtils, DSourceBaseConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -209,6 +211,21 @@ begin
   SourceDataModule.TbAvailability.MasterSource := nil;
   SourceDataModule.TbParticipant.MasterSource := nil;
   SourceDataModule.TbActivity.MasterSource := nil;
+end;
+
+procedure TThemeForm.TbThemeCalcFields(DataSet: TDataSet);
+var
+  v: Variant;
+begin
+  try
+    v := DataSet['Composition'];
+    if VarIsNull(v) then
+      DataSet['Duration'] := 0
+    else
+      DataSet['Duration'] := CompositionToDuration(v);
+  except
+    DataSet['Duration'] := 0;
+  end
 end;
 
 initialization

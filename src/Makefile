@@ -25,8 +25,8 @@ endif
 # %.lrs: %.lfm $(LRSDEP)
 # 	$(LAZRES) $@ $<
 
-ttg.lrs: locale/ttg.es.po
-	$(LAZRES) $@ $<
+ttg.lrs: locale/ttg.es.po $(TTGDIR)/dat/default.ttd
+	$(LAZRES) $@ locale/ttg.es.po $(TTGDIR)/dat/default.ttd
 
 ttgsql.lrs: $(TTGSQL)
 	$(LAZRES) $@ $<

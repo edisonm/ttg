@@ -19,7 +19,6 @@ type
     procedure TbThemeBeforePost(DataSet: TDataSet);
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
-    procedure TbThemeCalcFields(DataSet: TDataSet);
     procedure TbTimetableCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
@@ -44,7 +43,6 @@ type
     procedure EmptyTables; override;
     procedure SaveToStrings(AStrings: TStrings); override;
     procedure PrepareTables;
-    procedure FillDefaultData;
   end;
 
 var
@@ -81,121 +79,6 @@ begin
   inherited;
 end;
 
-procedure TSourceDataModule.FillDefaultData;
-const
-  SNaHour: array[1..9] of string = (
-    SHour1,
-    SHour2,
-    SHour3,
-    SHour4,
-    SHourF,
-    SHour5,
-    SHour6,
-    SHour7,
-    SHour8);
-  SNaResourceType: array[0..2] of string = (
-    SSupervisor,
-    SRoom,
-    SAttendant);
-  EValResourceType: array[0..2] of Integer = (
-    300,
-    120,
-    50);
-  SNaRestrictionType: array[0..1] of string = (
-    SInadequate,
-    SImpossible);
-  EColRestrictionType: array[0..1] of TColor = (
-    clLime,
-    clRed);
-  EValRestrictionType: array[0..1] of Integer = (
-    50,
-    500);
-var
-  t: TDateTime;
-  i: Integer;
-  s: string;
-  DayNames: array[0..6] of string =
-    (SDay0, SDay1, SDay2, SDay3, SDay4, SDay5, SDay6);
-begin
-  CheckRelations := False;
-  try
-    with TbDay do
-    begin
-      for i := Low(DayNames) + 1 to High(DayNames) - 1 do
-      begin
-        Append;
-        FindField('IdDay').AsInteger := i;
-        FindField('NaDay').AsString := DayNames[i];
-        Post;
-      end;
-    end;
-    with TbHour do
-    begin
-      t := 7 / 24;
-      for i := Low(SNaHour) to High(SNaHour) do
-      begin
-        s := FormatDateTime(ShortTimeFormat, t);
-        if i = 5 then
-          t := t + 1 / 48
-        else
-          t := t + 1 / 32;
-        s := s + '-' + FormatDateTime(ShortTimeFormat, t);
-        Append;
-        FindField('IdHour').AsInteger := i;
-        FindField('NaHour').AsString := SNaHour[i];
-        FindField('Interval').AsString := s;
-        Post;
-      end;
-    end;
-    with TbPeriod do
-    begin
-      TbDay.First;
-      while not TbDay.Eof do
-      begin
-        TbHour.First;
-        while not TbHour.Eof do
-        begin
-          if TbHour.FindField('NaHour').AsString <> SHourF then
-          begin
-            Append;
-            FindField('IdDay').AsInteger := TbDay.FindField('IdDay').AsInteger;
-            FindField('IdHour').AsInteger := TbHour.FindField('IdHour').AsInteger;
-            Post;
-          end;
-          TbHour.Next;
-        end;
-        TbDay.Next;
-      end;
-    end;
-    with TbResourceType do
-    begin
-      for i := Low(SNaResourceType) to High(SNaResourceType) do
-      begin
-        Append;
-        FindField('IdResourceType').AsInteger := i;
-        FindField('NaResourceType').AsString := SNaResourceType[i];
-        FindField('NumResourceLimit').AsInteger := 1;
-        FindField('ValResourceType').AsFloat := EValResourceType[i];
-        Post;
-      end;
-    end;
-    with TbRestrictionType do
-    begin
-      for i := Low(SNaRestrictionType) to High(SNaRestrictionType) do
-      begin
-        Append;
-        Fields[0].AsInteger := i;
-        Fields[1].AsString := SNaRestrictionType[i];
-        Fields[2].AsInteger := EColRestrictionType[i];
-        Fields[3].AsFloat := EValRestrictionType[i];
-        Post;
-      end;
-    end;
-  finally
-    CheckRelations := True;
-  end;
-end;
-
 procedure TSourceDataModule.PrepareLookupFields;
 begin
   NewLookupField(TbResource, TbResourceType, 'IdResourceType', 'NaResourceType');
@@ -225,21 +108,6 @@ begin
     DisplayLabel := SElapsedTime;
     DataSet := TbTimetable;
   end;
-end;
-
-procedure TSourceDataModule.TbThemeCalcFields(DataSet: TDataSet);
-var
-  v: Variant;
-begin
-  try
-    v := DataSet['Composition'];
-    if VarIsNull(v) then
-      DataSet['Duration'] := 0
-    else
-      DataSet['Duration'] := CompositionToDuration(v);
-  except
-    DataSet['Duration'] := 0;
-  end
 end;
 
 procedure TSourceDataModule.TbTimetableCalcFields(DataSet: TDataSet);
@@ -392,10 +260,22 @@ begin
 end;
 
 procedure TSourceDataModule.EmptyTables;
+var
+  Field: TField;
 begin
+  ZTables.Close;
+  ZTables.Open;
   try
     DbZConnection.StartTransaction;
-    inherited EmptyTables;
+    Field := ZTables.Fields[0];
+    while not ZTables.EOF do
+    begin
+      if Field.AsString <> 'sqlite_sequence' then
+      begin
+        DbZConnection.ExecuteDirect(Format('DELETE FROM %s', [Field.AsString]));
+      end;
+      ZTables.Next;
+    end;
     DbZConnection.Commit;
   except
     DbZConnection.Rollback;

@@ -34,6 +34,7 @@ type
     property StringsShowResource: TStrings read FStringsShowResource;
     property ConfigStorage: TTTGConfig read FConfigStorage;
     procedure NewDatabase;
+    procedure FillDefaultData;
   end;
 
 var
@@ -156,7 +157,22 @@ procedure TMasterDataModule.NewDatabase;
 begin
   SourceDataModule.EmptyTables;
   ConfigStorage.ConfigStrings.Clear;
-  SourceDataModule.FillDefaultData;
+  FillDefaultData;
+end;
+
+procedure TMasterDataModule.FillDefaultData;
+var
+  AStrings: TStrings;
+  APosition: Integer;
+begin
+  AStrings := TStringList.Create;
+  try
+    AStrings.Text := LazarusResources.Find('Default', 'TTD').Value;
+    APosition := 0;
+    MasterDataModule.LoadFromStrings(AStrings, APosition);
+  finally
+    AStrings.Free;
+  end;
 end;
 
 procedure TMasterDataModule.LoadFromTextFile(const AFileName: TFileName);

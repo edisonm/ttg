@@ -62,4 +62,3 @@ begin
     MainForm.LoadStoredConfig;
   Application.Run;
 end.
-

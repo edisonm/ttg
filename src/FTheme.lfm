@@ -1,7 +1,7 @@
 inherited ThemeForm: TThemeForm
-  Left = 444
+  Left = 723
   Height = 730
-  Top = 207
+  Top = 299
   Width = 1140
   Caption = 'Theme'
   ClientHeight = 730
@@ -14,11 +14,6 @@ inherited ThemeForm: TThemeForm
   inherited TBEditor: TToolBar
     Width = 1140
     inherited DBNavigator: TDBNavigator
-      Height = 20
-      Width = 200
-      AutoSize = True
-      ClientHeight = 20
-      ClientWidth = 200
       Hints.Strings = (      )
     end
     object CBFilterByResourceType: TCheckBox[3]
@@ -604,6 +599,15 @@ inherited ThemeForm: TThemeForm
     TableName = 'Resource'
     IndexFieldNames = 'IdResource Asc'
     left = 160
+    top = 80
+  end
+  object TbTheme: TZTable[17]
+    Connection = SourceDataModule.DbZConnection
+    SortedFields = 'IdTheme'
+    OnCalcFields = TbThemeCalcFields
+    TableName = 'Theme'
+    IndexFieldNames = 'IdTheme Asc'
+    left = 48
     top = 80
   end
 end

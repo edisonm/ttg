@@ -2,7 +2,7 @@ inherited SourceDataModule: TSourceDataModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
   Height = 440
-  HorizontalOffset = 857
+  HorizontalOffset = 850
   VerticalOffset = 504
   Width = 667
   inherited DbZConnection: TZConnection
@@ -11,9 +11,6 @@ inherited SourceDataModule: TSourceDataModule
     Database = ':memory:'
     left = 560
     top = 52
-  end
-  inherited TbTheme: TZTable
-    OnCalcFields = TbThemeCalcFields
   end
   inherited TbTimetable: TZTable
     OnCalcFields = TbTimetableCalcFields

@@ -66,150 +66,21 @@ begin
   inherited;
   OnDestroy := DataModuleDestroy;
   SetLength(FTables, 15);
-  SetLength(FMasterRels, 15);
   Tables[0] := TbTheme;
-  TbTheme.AfterPost := DataSetAfterPost;
-  TbTheme.AfterDelete := DataSetAfterDelete;
   Tables[1] := TbResourceType;
-  TbResourceType.AfterPost := DataSetAfterPost;
   Tables[2] := TbDay;
   Tables[3] := TbHour;
   Tables[4] := TbResource;
-  TbResource.AfterPost := DataSetAfterPost;
-  TbResource.AfterDelete := DataSetAfterDelete;
   Tables[5] := TbPeriod;
   Tables[6] := TbActivity;
-  TbActivity.AfterPost := DataSetAfterPost;
-  TbActivity.AfterDelete := DataSetAfterDelete;
   Tables[7] := TbAvailability;
   Tables[8] := TbResourceTypeLimit;
   Tables[9] := TbRestrictionType;
-  TbRestrictionType.AfterPost := DataSetAfterPost;
   Tables[10] := TbRestriction;
   Tables[11] := TbParticipant;
   Tables[12] := TbTimetable;
-  TbTimetable.AfterPost := DataSetAfterPost;
-  TbTimetable.AfterDelete := DataSetAfterDelete;
   Tables[13] := TbTimetableDetail;
   Tables[14] := TbTimetableResource;
-  SetLength(FMasterRels[0], 3);
-  with FMasterRels[0, 0] do
-  begin
-    DetailDataSet := TbActivity;
-    MasterFields := 'IdTheme';
-    DetailFields := 'IdTheme';
-    UpdateCascade := True;
-    DeleteCascade := True;
-  end;
-  with FMasterRels[0, 1] do
-  begin
-    DetailDataSet := TbAvailability;
-    MasterFields := 'IdTheme';
-    DetailFields := 'IdTheme';
-    UpdateCascade := True;
-    DeleteCascade := True;
-  end;
-  with FMasterRels[0, 2] do
-  begin
-    DetailDataSet := TbResourceTypeLimit;
-    MasterFields := 'IdTheme';
-    DetailFields := 'IdTheme';
-    UpdateCascade := True;
-    DeleteCascade := True;
-  end;
-  SetLength(FMasterRels[1], 1);
-  with FMasterRels[1, 0] do
-  begin
-    DetailDataSet := TbResourceTypeLimit;
-    MasterFields := 'IdResourceType';
-    DetailFields := 'IdResourceType';
-    UpdateCascade := True;
-    DeleteCascade := False;
-  end;
-  SetLength(FMasterRels[4], 4);
-  with FMasterRels[4, 0] do
-  begin
-    DetailDataSet := TbAvailability;
-    MasterFields := 'IdResource';
-    DetailFields := 'IdResource';
-    UpdateCascade := True;
-    DeleteCascade := True;
-  end;
-  with FMasterRels[4, 1] do
-  begin
-    DetailDataSet := TbParticipant;
-    MasterFields := 'IdResource';
-    DetailFields := 'IdResource';
-    UpdateCascade := True;
-    DeleteCascade := False;
-  end;
-  with FMasterRels[4, 2] do
-  begin
-    DetailDataSet := TbRestriction;
-    MasterFields := 'IdResource';
-    DetailFields := 'IdResource';
-    UpdateCascade := True;
-    DeleteCascade := True;
-  end;
-  with FMasterRels[4, 3] do
-  begin
-    DetailDataSet := TbTimetableResource;
-    MasterFields := 'IdResource';
-    DetailFields := 'IdResource';
-    UpdateCascade := True;
-    DeleteCascade := False;
-  end;
-  SetLength(FMasterRels[6], 3);
-  with FMasterRels[6, 0] do
-  begin
-    DetailDataSet := TbParticipant;
-    MasterFields := 'IdActivity';
-    DetailFields := 'IdActivity';
-    UpdateCascade := True;
-    DeleteCascade := True;
-  end;
-  with FMasterRels[6, 1] do
-  begin
-    DetailDataSet := TbTimetableDetail;
-    MasterFields := 'IdActivity';
-    DetailFields := 'IdActivity';
-    UpdateCascade := True;
-    DeleteCascade := True;
-  end;
-  with FMasterRels[6, 2] do
-  begin
-    DetailDataSet := TbTimetableResource;
-    MasterFields := 'IdActivity';
-    DetailFields := 'IdActivity';
-    UpdateCascade := True;
-    DeleteCascade := False;
-  end;
-  SetLength(FMasterRels[9], 1);
-  with FMasterRels[9, 0] do
-  begin
-    DetailDataSet := TbRestriction;
-    MasterFields := 'IdRestrictionType';
-    DetailFields := 'IdRestrictionType';
-    UpdateCascade := True;
-    DeleteCascade := False;
-  end;
-  SetLength(FMasterRels[12], 2);
-  with FMasterRels[12, 0] do
-  begin
-    DetailDataSet := TbTimetableDetail;
-    MasterFields := 'IdTimetable';
-    DetailFields := 'IdTimetable';
-    UpdateCascade := True;
-    DeleteCascade := True;
-  end;
-  with FMasterRels[12, 1] do
-  begin
-    DetailDataSet := TbTimetableResource;
-    MasterFields := 'IdTimetable';
-    DetailFields := 'IdTimetable';
-    UpdateCascade := True;
-    DeleteCascade := True;
-  end;
   with DataSetNameList do
   begin
     Add('TbTheme=Theme');
