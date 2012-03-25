@@ -14,8 +14,8 @@ TODO:
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, MTProcs, SysUtils, Classes, Graphics,
-  Forms, Dialogs, ExtCtrls, Menus, ComCtrls, Buttons, ActnList, FSplash, FSingleEditor,
+  LResources, MTProcs, ZDataset, SysUtils, Classes, Graphics, Forms,
+  Dialogs, ExtCtrls, Menus, ComCtrls, Buttons, ActnList, FSplash, FSingleEditor,
   Controls, FCrossManyToManyEditor0, FEditor, UConfigStorage, UMakeTT;
 
 type
@@ -59,8 +59,8 @@ type
     TBNew: TToolButton;
     TBSave: TToolButton;
     TBOpen: TToolButton;
-    TBDay: TToolButton;
-    TBHour: TToolButton;
+    TBtDay: TToolButton;
+    TBtHour: TToolButton;
     TBResourceType: TToolButton;
     TBResource: TToolButton;
     TBPeriod: TToolButton;
@@ -167,7 +167,7 @@ implementation
 
 uses
   FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FTheme, FResource,
-  FTimetable, FMasterDetailEditor, FConfig, Printers, DSource, DSourceBase,
+  FTimetable, FMasterDetailEditor, FConfig, Printers, DSource,
   UTTGBasics, FMessageView, UTTGi18n, UTTGConsts, FDBExplorer;
 
 {$IFNDEF FPC}
@@ -207,14 +207,12 @@ end;
 
 procedure TMainForm.ActResourceExecute(Sender: TObject);
 begin
-  TResourceForm.ToggleSingleEditor(Self,
-				  ResourceForm,
-				  ConfigStorage,
-				  actResource,
-				  SourceDataModule.TbResource);
+  TResourceForm.ToggleEditor(Self, ResourceForm, ConfigStorage, actResource);
 end;
 
 procedure TMainForm.ActPeriodExecute(Sender: TObject);
+var
+  TbDay, TbHour, TbPeriod: TZTable;
 begin
   if TCrossManyToManyEditor0Form.ToggleEditor(Self, FPeriodForm,
     ConfigStorage, ActPeriod) then
@@ -223,6 +221,12 @@ begin
     {$IFDEF FPC}
     FPeriodForm.DrawGrid.OnPrepareCanvas := FPeriodForm.DrawGridPrepareCanvas;
     {$ENDIF}
+    TbDay := SourceDataModule.NewTable('Day', FPeriodForm);
+    TbHour := SourceDataModule.NewTable('Hour', FPeriodForm);
+    TbPeriod := SourceDataModule.NewTable('Period', FPeriodForm);
+    TbDay.Open;
+    TbHour.Open;
+    TbPeriod.Open;
     FPeriodForm.ShowEditor(TbDay, TbHour, TbPeriod, nil, 'IdDay', 'NaDay',
       'IdDay', '', 'IdHour', 'NaHour', 'IdHour', '');
   end;
@@ -230,11 +234,7 @@ end;
 
 procedure TMainForm.ActThemeExecute(Sender: TObject);
 begin
-   TThemeForm.ToggleSingleEditor(Self,
-				   ThemeForm,
-				   ConfigStorage,
-				   ActTheme,
-				   ThemeForm.TbTheme);
+   TThemeForm.ToggleEditor(Self, ThemeForm, ConfigStorage, ActTheme);
 end;
 
 procedure TMainForm.ActResourceTypeExecute(Sender: TObject);
@@ -243,7 +243,7 @@ begin
 					FResourceTypeForm,
 					ConfigStorage,
 					ActResourceType,
-					SourceDataModule.TbResourceType);
+					'ResourceType');
 end;
 
 procedure TMainForm.ActDayExecute(Sender: TObject);
@@ -252,7 +252,7 @@ begin
 					FDayForm,
 					ConfigStorage,
 					ActDay,
-					SourceDataModule.TbDay);
+					'Day');
 end;
 
 procedure TMainForm.ActHourExecute(Sender: TObject);
@@ -261,16 +261,12 @@ begin
 					FHourForm,
 					ConfigStorage,
 					ActHour,
-					SourceDataModule.TbHour);
+					'Hour');
 end;
 
 procedure TMainForm.ActTimetableExecute(Sender: TObject);
 begin
-  TTimetableForm.ToggleSingleEditor(Self,
-                                    TimetableForm,
-				    ConfigStorage,
-				    ActTimetable,
-				    SourceDataModule.TbTimetable);
+  TTimetableForm.ToggleEditor(Self, TimetableForm, ConfigStorage, ActTimetable);
 end;
 
 function TMainForm.ConfirmOperation: boolean;
@@ -394,17 +390,24 @@ var
         raise Exception.Create(SInvalidData);
       SetLength(ValidIds, Valids + IdTimetable2 - IdTimetable1 + 1);
       SetLength(WrongIds, Wrongs + IdTimetable2 - IdTimetable1 + 1);
-      for IdTimetable := IdTimetable1 to IdTimetable2 do
+      with SourceDataModule.QuTimetable do
       begin
-        if SourceDataModule.TbTimetable.Locate('IdTimetable', IdTimetable, []) then
+        Close;
+        for IdTimetable := IdTimetable1 to IdTimetable2 do
         begin
-          WrongIds[Wrongs] := IdTimetable;
-          Inc(Wrongs);
-        end
-        else
-        begin
-          ValidIds[Valids] := IdTimetable;
-          Inc(Valids);
+          ParamByName('IdTimetable').AsInteger := IdTimetable;
+          Open;
+          if not IsEmpty then
+          begin
+            WrongIds[Wrongs] := IdTimetable;
+            Inc(Wrongs);
+          end
+          else
+          begin
+            ValidIds[Valids] := IdTimetable;
+            Inc(Valids);
+          end;
+          Close;
         end;
       end;
     end;
@@ -432,7 +435,6 @@ begin
           mtError, [mbOK], 0);
     finally
       ActMakeTimetable.Enabled := True;
-      TbTimetableDetail.Refresh;
     end;
   end;
 end;
@@ -547,10 +549,6 @@ begin
       MainForm.Caption := Application.Title + ' - ' +
         MasterDataModule.ConfigStorage.NaInstitution;
       Inc(FUpdateIndex);
-    end
-    else
-    begin
-      SourceDataModule.TbRestrictionType.Refresh;
     end;
   finally
     ActConfigure.Checked := False;

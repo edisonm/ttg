@@ -6,17 +6,24 @@ unit FResource;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, FSingleEditor, Grids, Buttons, DBCtrls, ExtCtrls,
-  Printers, ComCtrls, ActnList, FCrossManytoManyEditorR, db;
+  LResources, SysUtils, Classes, db, Graphics, Controls, Forms,
+  Dialogs, FSingleEditor, Grids, Buttons, DBCtrls, ExtCtrls, Printers, ComCtrls,
+  ActnList, StdCtrls, DBGrids, FCrossManytoManyEditorR, ZDataset, DSource;
 
 type
 
   { TResourceForm }
 
   TResourceForm = class(TSingleEditorForm)
-    TBRestriction: TToolButton;
+    DSResource: TDatasource;
+    DSResourceType: TDatasource;
+    DSRestriction: TDatasource;
+    TbResource: TZTable;
+    TbResourceType: TZTable;
+    TbRestrictionType: TZTable;
+    TBtRestriction: TToolButton;
     ActRestriction: TAction;
+    TbRestriction: TZTable;
     procedure ActFindExecute(Sender: TObject);
     procedure ActRestrictionExecute(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
@@ -39,13 +46,16 @@ var
 
 implementation
 uses
-  DMaster, FCrossManyToManyEditor, FConfig, DSource, UTTGConsts;
+  URelUtils, DMaster, FCrossManyToManyEditor, FConfig, UTTGConsts,
+    DSourceBaseConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
 {$ENDIF}
 
 procedure TResourceForm.ActRestrictionExecute(Sender: TObject);
+var
+  TbDay, TbHour, TbPeriod: TDataSet;
 begin
   with SourceDataModule do
   if TCrossManyToManyEditorRForm.ToggleEditor(Self, FRestrictionForm,
@@ -53,24 +63,21 @@ begin
   with FRestrictionForm do
   begin
     Tag := TbResource.FindField('IdResource').AsInteger;
-    TbRestriction.MasterSource := DSResource;
-    TbRestriction.MasterFields := 'IdResource';
-    TbRestriction.LinkedFields := 'IdResource';
     Caption := Format('%s %s  - %s %s', [NameDataSet[TbResource],
       TbResource.FindField('NaResource').AsString,
       SEditing, Description[TbRestriction]]);
-    DrawGrid.Hint := Format('%s|Columnas: %s - Filas: %s ',
-      [Description[TbRestriction], Description[TbDay], Description[TbHour]]);
-    ListBox.Hint := Format('%s|%s.  Presione <Supr> para borrar la celda',
-      [NameDataSet[TbRestrictionType], Description[TbRestrictionType]]);
-    ShowEditor(TbDay, TbHour, TbRestrictionType, TbRestriction,
-	    TbPeriod, 'IdDay', 'NaDay', 'IdDay', 'IdDay', 'IdHour', 'NaHour',
-      'IdHour', 'IdHour', 'IdRestrictionType', 'NaRestrictionType',
-      'ColRestrictionType', 'IdRestrictionType');
-  end
-  else
-  begin
-    TbRestriction.MasterSource := nil;
+    DrawGrid.Hint := Format(SRelColsRows, [STbRestriction, STbDay, STbHour]);
+    ListBox.Hint := Format('%s|%s. %s',
+      [NameDataSet[TbRestrictionType], Description[TbRestrictionType], SDeleteCell]);
+    TbDay := NewTable('Day', FRestrictionForm);
+    TbHour := NewTable('Hour', FRestrictionForm);
+    TbPeriod :=  NewTable('Period', FRestrictionForm);
+    TbDay.Open;
+    TbHour.Open;
+    TbPeriod.Open;
+    ShowEditor(TbDay, TbHour, TbRestrictionType, TbRestriction, TbPeriod,
+      'IdDay', 'NaDay', 'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour',
+      'IdRestrictionType', 'NaRestrictionType', 'ColRestrictionType', 'IdRestrictionType');
   end;
 end;
 
@@ -94,8 +101,7 @@ begin
   inherited;
 end;
 
-procedure TResourceForm.FormClose(Sender: TObject; var CloseAction: TCloseAction
-  );
+procedure TResourceForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   inherited;
 end;
@@ -116,6 +122,16 @@ end;
 procedure TResourceForm.FormCreate(Sender: TObject);
 begin
   inherited;
+  SourceDataModule.PrepareTable(TbResourceType);
+  SourceDataModule.PrepareTable(TbResource);
+  SourceDataModule.PrepareTable(TbRestrictionType);
+  SourceDataModule.PrepareTable(TbRestriction);
+  NewLookupField(TbRestriction, TbRestrictionType, 'IdRestrictionType', 'NaRestrictionType');
+  NewLookupField(TbResource, TbResourceType, 'IdResourceType', 'NaResourceType');
+  TbResourceType.Open;
+  TbResource.Open;
+  TbRestrictionType.Open;
+  TbRestriction.Open;
 end;
 
 procedure TResourceForm.FormDestroy(Sender: TObject);

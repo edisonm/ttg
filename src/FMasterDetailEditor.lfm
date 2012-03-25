@@ -1,5 +1,5 @@
 inherited MasterDetailEditorForm: TMasterDetailEditorForm
-  Left = 752
+  Left = 745
   Height = 430
   Top = 441
   Width = 603
@@ -27,11 +27,16 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
     Width = 603
     ClientHeight = 386
     ClientWidth = 603
-    inherited DBGrid: TDBGrid
+    inherited GroupBox: TGroupBox
       Height = 275
       Width = 601
-      TabOrder = 1
-      OnDblClick = DBGridDblClick
+      ClientHeight = 257
+      ClientWidth = 593
+      inherited DBGrid: TDBGrid
+        Height = 257
+        Width = 593
+        OnDblClick = DBGridDblClick
+      end
     end
     object Splitter1: TSplitter[1]
       Cursor = crVSplit
@@ -85,18 +90,17 @@ inherited MasterDetailEditorForm: TMasterDetailEditorForm
   inherited DataSource: TDatasource
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
-    left = 280
-    top = 72
+    left = 104
+    top = 216
   end
   inherited ActionList: TActionList
-    left = 104
-    top = 136
+    left = 184
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
   end
   object DataSourceDetail: TDatasource[6]
-    left = 280
-    top = 136
+    left = 216
+    top = 216
   end
 end

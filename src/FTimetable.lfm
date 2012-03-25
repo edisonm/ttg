@@ -1,5 +1,5 @@
 inherited TimetableForm: TTimetableForm
-  Left = 690
+  Left = 669
   Height = 545
   Top = 209
   Width = 913
@@ -8,60 +8,60 @@ inherited TimetableForm: TTimetableForm
   ClientWidth = 913
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Visible = True
   inherited TBEditor: TToolBar
     Width = 913
     inherited DBNavigator: TDBNavigator
-      Width = 154
-      ClientWidth = 154
+      Width = 140
+      ClientWidth = 140
       Hints.Strings = (      )
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbPost, nbCancel]
     end
     object BtTimetableResource: TToolButton[3]
-      Left = 201
+      Left = 187
       Top = 2
       Action = ActTimetableResource
       ParentShowHint = False
       ShowHint = True
     end
     object BtClashResource: TToolButton[4]
-      Left = 224
+      Left = 210
       Top = 2
       Action = ActClashResource
       ParentShowHint = False
       ShowHint = True
     end
     object BtClashActivity: TToolButton[5]
-      Left = 247
+      Left = 233
       Top = 2
       Action = ActClashActivity
       ParentShowHint = False
       ShowHint = True
     end
     object TBRestrictionNonSatisfied: TToolButton[6]
-      Left = 270
+      Left = 256
       Top = 2
       Action = ActRestrictionNonSatisfied
       ParentShowHint = False
       ShowHint = True
     end
     object TBBrokenSessionDay: TToolButton[7]
-      Left = 293
+      Left = 279
       Top = 2
       Action = ActBrokenSessionDay
       ParentShowHint = False
       ShowHint = True
     end
     object TBBrokenSessionHour: TToolButton[8]
-      Left = 316
+      Left = 302
       Top = 2
       Action = ActBrokenSessionHour
       ParentShowHint = False
       ShowHint = True
     end
     object BtImproveTimetable: TToolButton[9]
-      Left = 339
+      Left = 325
       Top = 2
       Action = ActImproveTimeTable
       ParentShowHint = False
@@ -453,11 +453,11 @@ inherited TimetableForm: TTimetableForm
     }
   end
   inherited DataSource: TDatasource
-    DataSet = SourceDataModule.TbTimetable
+    DataSet = TbTimetable
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
     left = 112
-    top = 224
+    top = 232
   end
   inherited ActionList: TActionList
     left = 312
@@ -634,7 +634,6 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimetable
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
     left = 112
@@ -674,7 +673,6 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimetable
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
     IndexFieldNames = 'IdTimetable Asc;NaTheme Asc'
@@ -784,7 +782,6 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimetable
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
     left = 112
@@ -828,7 +825,6 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimetable
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
     IndexFieldNames = 'IdTimetable Asc;IdDay Asc;IdHour Asc'
@@ -877,7 +873,6 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimetable
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
     IndexFieldNames = 'IdTimetable Asc'
@@ -976,5 +971,15 @@ inherited TimetableForm: TTimetableForm
     DataSet = QuClashActivity
     left = 312
     top = 168
+  end
+  object TbTimetable: TZTable[17]
+    Tag = 12
+    Connection = SourceDataModule.DbZConnection
+    SortedFields = 'IdTimetable'
+    OnCalcFields = TbTimetableCalcFields
+    TableName = 'Timetable'
+    IndexFieldNames = 'IdTimetable Asc'
+    left = 112
+    top = 456
   end
 end

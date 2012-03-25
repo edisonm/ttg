@@ -8,9 +8,8 @@ interface
 uses
   LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Db, FSingleEditor, Grids, Buttons, FEditor, DBCtrls, ExtCtrls, ComCtrls,
-  ActnList, ZDataset, FCrossManytoManyEditorR, DMaster,
-  FCrossManyToManyEditor1, FConfig, DSource, FMasterDetailEditor,
-  FTimetableResource;
+  ActnList, ZDataset, FCrossManytoManyEditorR, DMaster, FConfig, DSource,
+  FCrossManyToManyEditor1, FMasterDetailEditor, FTimetableResource;
 
 type
 
@@ -47,6 +46,7 @@ type
     DSClashActivity: TDataSource;
     BtImproveTimetable: TToolButton;
     ActImproveTimeTable: TAction;
+    TbTimetable: TZTable;
     procedure ActClashResourceExecute(Sender: TObject);
     procedure ActClashActivityExecute(Sender: TObject);
     procedure ActTimetableResourceExecute(Sender: TObject);
@@ -58,6 +58,8 @@ type
     procedure DataSourceStateChange(Sender: TObject);
     procedure ActFindExecute(Sender: TObject);
     procedure ActImproveTimeTableExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure TbTimetableCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
     FClashActivityForm, FBrokenSessionHourForm,
@@ -65,6 +67,7 @@ type
     FRestrictionNonSatisfiedForm: TSingleEditorForm;
     FTimetableResourceForm: TTimetableResourceForm;
     procedure ImproveTimetable;
+    procedure PrepareCalcFields;
   protected
     procedure doLoadConfig; override;
     procedure doSaveConfig; override;
@@ -78,7 +81,7 @@ var
 implementation
 
 uses
-  Variants, UMakeTT, UTTGConsts, DSourceBaseConsts;
+  Variants, UMakeTT, UTTGConsts, URelUtils, DSourceBaseConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -128,13 +131,8 @@ end;
 procedure TTimetableForm.ActTimetableResourceExecute(Sender: TObject);
 begin
   inherited;
-  if TTimetableResourceForm.ToggleEditor(Self, FTimetableResourceForm,
-    ConfigStorage, ActTimetableResource) then
-  begin
-    with SourceDataModule do
-      FTimetableResourceForm.LoadHints(TbDay, TbHour, TbResource);
-    FTimetableResourceForm.TBShowClick(nil);
-  end
+  TTimetableResourceForm.ToggleEditor(Self, FTimetableResourceForm,
+    ConfigStorage, ActTimetableResource);
 end;
 
 procedure TTimetableForm.ActClashActivityExecute(Sender: TObject);
@@ -177,12 +175,48 @@ begin
   end;
 end;
 
+procedure TTimetableForm.PrepareCalcFields;
+var
+  Field: TField;
+begin
+  Field := TTimeField.Create(TbTimetable.Owner);
+  with Field do
+  begin
+    FieldKind := fkCalculated;
+    DisplayWidth := 5;
+    FieldName := 'Elapsed';
+    DisplayLabel := SElapsedTime;
+    DataSet := TbTimetable;
+  end;
+end;
+
+procedure TTimetableForm.TbTimetableCalcFields(DataSet: TDataSet);
+begin
+  with DataSet do
+  begin
+  if not (FindField('TimeEnd').IsNull or FindField('TimeIni').IsNull) then
+    FindField('Elapsed').AsDateTime
+      := FindField('TimeEnd').AsDateTime
+      - FindField('TimeIni').AsDateTime;
+  end;
+end;
+
+
+procedure TTimetableForm.FormCreate(Sender: TObject);
+begin
+  SourceDataModule.PrepareTable(TbTimetable);
+  PrepareCalcFields;
+  TbTimetable.FindField('Summary').Visible := False;
+  TbTimetable.FindField('IdTimetable').Visible := True;
+  TbTimetable.Open;
+end;
+
 procedure TTimetableForm.ImproveTimetable;
 var
   IdTimetableSource, IdTimetableTarget: Integer;
   SNewIdTimetable: string;
 begin
-  IdTimetableSource := SourceDataModule.TbTimetable.FindField('IdTimetable').AsInteger;
+  IdTimetableSource := TbTimetable.FindField('IdTimetable').AsInteger;
   SNewIdTimetable := IntToStr(MasterDataModule.NewIdTimetable);
   if not InputQuery(Format(SImprovingTimetable, [IdTimetableSource]),
     SImprovedTimetableId, SNewIdTimetable) then
@@ -203,7 +237,6 @@ begin
       {$ENDIF}
     finally
       ActImproveTimeTable.Enabled := True;
-      SourceDataModule.TbTimetableDetail.Refresh;
     end;
   end;
 end;

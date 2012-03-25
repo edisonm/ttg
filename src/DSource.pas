@@ -7,42 +7,56 @@ interface
 
 uses
   {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, DSourceBase, DBase, Db, ZDataset, ZConnection;
+  Controls, Forms, Dialogs, DSourceBaseConsts, Db, ZDataset, ZConnection;
 
 type
 
   { TSourceDataModule }
 
-  TSourceDataModule = class(TSourceBaseDataModule)
+  TSourceDataModule = class(TDataModule)
     DbZConnection: TZConnection;
+    QuTimetable: TZQuery;
+    QuTimetableResource: TZQuery;
+    QuTimetableDetail: TZQuery;
+    ZConnection1: TZConnection;
+    ZTable1IdDay1: TAutoIncField;
+    ZTable1NaHour1: TVariantField;
     ZTables: TZReadOnlyQuery;
-    QuResource: TZReadOnlyQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
-    procedure TbTimetableCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
-    procedure SetFieldCaption(ADataSet: TDataSet);
-    procedure PrepareLookupFields;
-    procedure PrepareCalcFields;
-    procedure HideFields;
+    FDataSetNameList: TStrings;
+    FDataSetDescList: TStrings;
+    FFieldCaptionList: TStrings;
+    function GetDescription(ADataSet: TDataSet): string;
+    function GetNameDataSet(ADataSet: TDataSet): string;
+    function GetFieldCaption(ADataSet: TDataSet; AField: TField): string; overload;
+    function GetFieldCaption(AField: TField): string; overload;
+
   protected
+    property DataSetNameList: TStrings read FDataSetNameList;
+    property DataSetDescList: TStrings read FDataSetDescList;
+    property FieldCaptionList: TStrings read FFieldCaptionList;
     procedure LoadDataSetFromStrings(const ATableName: string;
-                                     AStrings: TStrings; var APosition: Integer); override;
-    procedure EmptyDataSet(ADataSet: TDataSet); override;
+                                     AStrings: TStrings; var APosition: Integer);
     procedure UpdateDetailFields(ADetail: TDataSet;
                                  const ADetailFields: string;
-                                 const OldValues, CurValues: Variant); override;
+                                 const OldValues, CurValues: Variant);
     procedure DeleteDetailFields(ADetail: TDataSet;
                                  const AMasterFields: string;
-                                 const AMasterValues: Variant); override;
-    procedure CheckDetailRelation(AMaster, ADetail: TDataSet;
-                                  const AMasterFields, ADetailFields: string); override;
+                                 const AMasterValues: Variant);
+    procedure SetFieldCaption(ADataSet: TDataSet); overload;
   public
     { Public declarations }
-    procedure EmptyTables; override;
-    procedure SaveToStrings(AStrings: TStrings); override;
-    procedure PrepareTables;
+    procedure EmptyTables;
+    procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer);
+    procedure SaveToStrings(AStrings: TStrings);
+    procedure PrepareTable(ADataSet: TDataSet);
+    function NewTable(const ATableName: string; AOwner: TComponent): TZTable;
+    property Description[ADataSet: TDataSet]: string read GetDescription;
+    property NameDataSet[ADataSet: TDataSet]: string read GetNameDataSet;
+    property FieldCaption[AField: TField]: string read GetFieldCaption;
   end;
 
 var
@@ -57,94 +71,125 @@ implementation
 uses
   Variants, FConfig, UTTGDBUtils, URelUtils, UTTGConsts;
 
+function TSourceDataModule.NewTable(const ATableName: string; AOwner: TComponent): TZTable;
+begin
+  Result := TZTable.Create(AOwner);
+  Result.TableName := ATableName;
+  Result.Connection := SourceDataModule.DbZConnection;
+  PrepareTable(Result);
+end;
+
+procedure TSourceDataModule.PrepareTable(ADataSet: TDataSet);
+begin
+  PrepareDataSetFields(ADataSet);
+  SetFieldCaption(ADataSet);
+  HideAutoIncFields(ADataSet);
+end;
+
 procedure TSourceDataModule.DataModuleCreate(Sender: TObject);
 begin
-  inherited;
+  FDataSetNameList := TStringList.Create;
+  FDataSetDescList := TStringList.Create;
+  FFieldCaptionList := TStringList.Create;
+  with DataSetNameList do
+  begin
+    Add('TbTheme=Theme');
+    Add('TbResourceType=ResourceType');
+    Add('TbDay=Day');
+    Add('TbHour=Hour');
+    Add('TbResource=Resource');
+    Add('TbPeriod=Period');
+    Add('TbActivity=Activity');
+    Add('TbAvailability=Availability');
+    Add('TbResourceTypeLimit=ResourceTypeLimit');
+    Add('TbRestrictionType=RestrictionType');
+    Add('TbRestriction=Restriction');
+    Add('TbParticipant=Participant');
+    Add('TbTimetable=Timetable');
+    Add('TbTimetableDetail=TimetableDetail');
+    Add('TbTimetableResource=TimetableResource');
+  end;
+  with FieldCaptionList do
+  begin
+    Add('TbTheme.IdTheme=' + SFlTheme_IdTheme);
+    Add('TbTheme.NaTheme=' + SFlTheme_NaTheme);
+    Add('TbTheme.Composition=' + SFlTheme_Composition);
+    Add('TbResourceType.IdResourceType=' + SFlResourceType_IdResourceType);
+    Add('TbResourceType.NaResourceType=' + SFlResourceType_NaResourceType);
+    Add('TbResourceType.NumResourceLimit=' + SFlResourceType_NumResourceLimit);
+    Add('TbResourceType.ValResourceType=' + SFlResourceType_ValResourceType);
+    Add('TbResourceType.MaxWorkLoad=' + SFlResourceType_MaxWorkLoad);
+    Add('TbDay.IdDay=' + SFlDay_IdDay);
+    Add('TbDay.NaDay=' + SFlDay_NaDay);
+    Add('TbHour.IdHour=' + SFlHour_IdHour);
+    Add('TbHour.NaHour=' + SFlHour_NaHour);
+    Add('TbHour.Interval=' + SFlHour_Interval);
+    Add('TbResource.IdResourceType=' + SFlResource_IdResourceType);
+    Add('TbResource.IdResource=' + SFlResource_IdResource);
+    Add('TbResource.NaResource=' + SFlResource_NaResource);
+    Add('TbResource.AbResource=' + SFlResource_AbResource);
+    Add('TbResource.NumResource=' + SFlResource_NumResource);
+    Add('TbPeriod.IdDay=' + SFlPeriod_IdDay);
+    Add('TbPeriod.IdHour=' + SFlPeriod_IdHour);
+    Add('TbActivity.IdActivity=' + SFlActivity_IdActivity);
+    Add('TbActivity.IdTheme=' + SFlActivity_IdTheme);
+    Add('TbActivity.NaActivity=' + SFlActivity_NaActivity);
+    Add('TbAvailability.IdTheme=' + SFlAvailability_IdTheme);
+    Add('TbAvailability.IdResource=' + SFlAvailability_IdResource);
+    Add('TbAvailability.NumResource=' + SFlAvailability_NumResource);
+    Add('TbResourceTypeLimit.IdTheme=' + SFlResourceTypeLimit_IdTheme);
+    Add('TbResourceTypeLimit.IdResourceType=' + SFlResourceTypeLimit_IdResourceType);
+    Add('TbResourceTypeLimit.NumResourceLimit=' + SFlResourceTypeLimit_NumResourceLimit);
+    Add('TbRestrictionType.IdRestrictionType=' + SFlRestrictionType_IdRestrictionType);
+    Add('TbRestrictionType.NaRestrictionType=' + SFlRestrictionType_NaRestrictionType);
+    Add('TbRestrictionType.ColRestrictionType=' + SFlRestrictionType_ColRestrictionType);
+    Add('TbRestrictionType.ValRestrictionType=' + SFlRestrictionType_ValRestrictionType);
+    Add('TbRestriction.IdResource=' + SFlRestriction_IdResource);
+    Add('TbRestriction.IdDay=' + SFlRestriction_IdDay);
+    Add('TbRestriction.IdHour=' + SFlRestriction_IdHour);
+    Add('TbRestriction.IdRestrictionType=' + SFlRestriction_IdRestrictionType);
+    Add('TbParticipant.IdActivity=' + SFlParticipant_IdActivity);
+    Add('TbParticipant.IdResource=' + SFlParticipant_IdResource);
+    Add('TbParticipant.NumResource=' + SFlParticipant_NumResource);
+    Add('TbTimetable.IdTimetable=' + SFlTimetable_IdTimetable);
+    Add('TbTimetable.TimeIni=' + SFlTimetable_TimeIni);
+    Add('TbTimetable.TimeEnd=' + SFlTimetable_TimeEnd);
+    Add('TbTimetable.Summary=' + SFlTimetable_Summary);
+    Add('TbTimetableDetail.IdTimetable=' + SFlTimetableDetail_IdTimetable);
+    Add('TbTimetableDetail.IdActivity=' + SFlTimetableDetail_IdActivity);
+    Add('TbTimetableDetail.IdDay=' + SFlTimetableDetail_IdDay);
+    Add('TbTimetableDetail.IdHour=' + SFlTimetableDetail_IdHour);
+    Add('TbTimetableDetail.Session=' + SFlTimetableDetail_Session);
+    Add('TbTimetableResource.IdTimetable=' + SFlTimetableResource_IdTimetable);
+    Add('TbTimetableResource.IdActivity=' + SFlTimetableResource_IdActivity);
+    Add('TbTimetableResource.IdResource=' + SFlTimetableResource_IdResource);
+    Add('TbTimetableResource.NumResource=' + SFlTimetableResource_NumResource);
+  end;
+  with DataSetDescList do
+  begin
+    Add('TbTheme=' + STbTheme);
+    Add('TbResourceType=' + STbResourceType);
+    Add('TbDay=' + STbDay);
+    Add('TbHour=' + STbHour);
+    Add('TbResource=' + STbResource);
+    Add('TbPeriod=' + STbPeriod);
+    Add('TbActivity=' + STbActivity);
+    Add('TbAvailability=' + STbAvailability);
+    Add('TbResourceTypeLimit=' + STbResourceTypeLimit);
+    Add('TbRestrictionType=' + STbRestrictionType);
+    Add('TbRestriction=' + STbRestriction);
+    Add('TbParticipant=' + STbParticipant);
+    Add('TbTimetable=' + STbTimetable);
+    Add('TbTimetableDetail=' + STbTimetableDetail);
+    Add('TbTimetableResource=' + STbTimetableResource);
+  end;
 end;
 
 procedure TSourceDataModule.DataModuleDestroy(Sender: TObject);
 begin
-  inherited;
-end;
-
-procedure TSourceDataModule.PrepareLookupFields;
-begin
-  NewLookupField(TbResource, TbResourceType, 'IdResourceType', 'NaResourceType');
-  NewLookupField(TbRestriction, TbRestrictionType, 'IdRestrictionType', 'NaRestrictionType');
-  NewLookupField(TbParticipant, TbResource, 'IdResource', 'NaResource');
-  NewLookupField(TbResourceTypeLimit, TbResourceType, 'IdResourceType', 'NaResourceType');
-end;
-
-procedure TSourceDataModule.PrepareCalcFields;
-var
-  Field: TField;
-begin
-  Field := TTimeField.Create(TbTimetable.Owner);
-  with Field do
-  begin
-    FieldKind := fkCalculated;
-    DisplayWidth := 5;
-    FieldName := 'Elapsed';
-    DisplayLabel := SElapsedTime;
-    DataSet := TbTimetable;
-  end;
-end;
-
-procedure TSourceDataModule.TbTimetableCalcFields(DataSet: TDataSet);
-begin
-  with DataSet do
-  begin
-  if not (FindField('TimeEnd').IsNull or FindField('TimeIni').IsNull) then
-    FindField('Elapsed').AsDateTime
-      := FindField('TimeEnd').AsDateTime
-      - FindField('TimeIni').AsDateTime;
-  end;
-end;
-
-procedure TSourceDataModule.HideFields;
-begin
-  TbDay.FindField('IdDay').Visible := False;
-  TbHour.FindField('IdHour').Visible := False;
-  TbPeriod.FindField('IdDay').Visible := False;
-  TbPeriod.FindField('IdHour').Visible := False;
-  TbResourceType.FindField('IdResourceType').Visible := False;
-  TbResource.FindField('IdResource').Visible := False;
-  TbResource.FindField('IdResourceType').Visible := False;
-  TbTimetable.FindField('Summary').Visible := False;
-  with TbTimetableDetail do
-  begin
-    FindField('IdTimetable').Visible := False;
-    FindField('IdActivity').Visible := False;
-    FindField('IdDay').Visible := False;
-    FindField('IdHour').Visible := False;
-  end;
-  TbRestrictionType.FindField('IdRestrictionType').Visible := False;
-  with TbActivity do
-  begin
-    FindField('IdActivity').Visible := False;
-    FindField('IdTheme').Visible := False;
-  end;
-  with TbParticipant do
-  begin
-    FindField('IdActivity').Visible := False;
-    FindField('IdResource').Visible := False;
-  end;
-  with TbResourceTypeLimit do
-  begin
-    FindField('IdTheme').Visible := False;
-    FindField('IdResourceType').Visible := False;
-  end;
-  with TbAvailability do
-  begin
-    FindField('IdTheme').Visible := False;
-    FindField('IdResource').Visible := False;
-  end;
-end;
-
-procedure TSourceDataModule.EmptyDataSet(ADataSet: TDataSet);
-begin
-  DbZConnection.ExecuteDirect(Format('DELETE FROM %s', [NameDataSet[ADataSet]]));
-  ADataSet.Refresh;
+  FDataSetNameList.Free;
+  FDataSetDescList.Free;
+  FFieldCaptionList.Free;
 end;
 
 procedure TSourceDataModule.LoadDataSetFromStrings(const ATableName: string;
@@ -292,13 +337,28 @@ begin
   end;
 end;
 
-procedure TSourceDataModule.PrepareTables;
+procedure TSourceDataModule.LoadFromStrings(AStrings: TStrings; var APosition: Integer);
+var
+  i, NumTables: Integer;
+  TableName: string;
 begin
-  PrepareFields;
-  ApplyOnTables(SetFieldCaption);
-  PrepareLookupFields;
-  PrepareCalcFields;
-  HideFields;
+  NumTables := StrToInt(AStrings[APosition]);
+  Inc(APosition);
+  for i := 0 to NumTables - 1 do
+  begin
+    TableName := AStrings[APosition];
+    Inc(APosition);
+    try
+      try
+        LoadDataSetFromStrings(TableName, AStrings, APosition);
+      except
+        MessageDlg(Format(SWhenProcessing, [TableName]), mtError, [mbOk], 0);
+        raise;
+      end;
+    finally
+    end;
+  end;
+  // RefreshTables;
 end;
 
 procedure TSourceDataModule.SetFieldCaption(ADataSet: TDataSet);
@@ -314,6 +374,16 @@ begin
   end;
 end;
 
+(*
+procedure TSourceDataModule.PrepareTables;
+begin
+  // PrepareFields;
+  // ApplyOnTables(SetFieldCaption);
+  // PrepareLookupFields;
+  // PrepareCalcFields;
+  // HideFields;
+end;
+*)
 function GetFieldAvailabilities(const Fields: string; const Values: Variant): string;
 var
   Pos, l: Integer;
@@ -368,22 +438,37 @@ begin
   end
 end;
 
-procedure TSourceDataModule.CheckDetailRelation(AMaster, ADetail: TDataSet;
-                                                const AMasterFields, ADetailFields: string);
-  function SkipCheckDetailRelation(ADataSet: TZTable): Boolean;
-  begin
-    Result := Assigned(ADataSet.MasterSource) and ADataSet.MasterSource.Enabled
-      and Assigned(ADataSet.MasterSource.DataSet)
-      and (ADataSet.MasterSource.DataSet = AMaster);
-  end;
+
+function TSourceDataModule.GetDescription(ADataSet: TDataSet): string;
 begin
-  if not SkipCheckDetailRelation(ADetail as TZTable)
-  then // this condition avoids an undesirable loop in DoBeforePost
-       // that causes a key violation, and also is an optimization:
-       // We do not need to verify master-detail relationship if the tables
-       // are already linked using the MasterSource property.
-    inherited CheckDetailRelation(AMaster, ADetail,
-                                  AMasterFields, ADetailFields);
+  Result := DataSetDescList.Values[ADataSet.Name];
+  if Result = '' then
+    Result := ADataSet.Name;
+end;
+
+function TSourceDataModule.GetFieldCaption(ADataSet: TDataSet; AField: TField): string;
+var
+  ValueName: string;
+begin
+  if ADataSet is TZTable then
+    ValueName := 'Tb' + TZTable(ADataSet).TableName + '.' + AField.FieldName
+  else
+    ValueName := ADataSet.Name + '.' + AField.FieldName;
+  Result := FieldCaptionList.Values[ValueName];
+end;
+
+function TSourceDataModule.GetFieldCaption(AField: TField): string;
+begin
+  Result := GetFieldCaption(AField.DataSet, AField);
+  if Result = '' then
+    Result := AField.FieldName;
+end;
+
+function TSourceDataModule.GetNameDataSet(ADataSet: TDataSet): string;
+begin
+  Result := DataSetNameList.Values[ADataSet.Name];
+  if Result = '' then
+    Result := ADataSet.Name;
 end;
 
 initialization

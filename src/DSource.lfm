@@ -1,55 +1,98 @@
-inherited SourceDataModule: TSourceDataModule
+object SourceDataModule: TSourceDataModule
   OnCreate = DataModuleCreate
   OnDestroy = DataModuleDestroy
-  Height = 440
-  HorizontalOffset = 850
-  VerticalOffset = 504
-  Width = 667
+  OldCreateOrder = False
+  Height = 160
+  HorizontalOffset = 1196
+  VerticalOffset = 585
+  Width = 398
   object DbZConnection: TZConnection
-    Connected = True
     Protocol = 'sqlite-3'
     Database = ':memory:'
-    left = 560
-    top = 52
+    left = 312
+    top = 24
   end
-  inherited TbTimetable: TZTable
-    OnCalcFields = TbTimetableCalcFields
-  end
-  object ZTables: TZReadOnlyQuery[31]
+  object ZTables: TZReadOnlyQuery
     Connection = DbZConnection
     SQL.Strings = (
       'SELECT trim(name) as Name FROM sqlite_master'
       'WHERE type=''table'''
     )
     Params = <>
-    left = 560
-    top = 144
+    left = 40
+    top = 96
   end
-  object QuResource: TZReadOnlyQuery[32]
+  object QuTimetableDetail: TZQuery
     Connection = DbZConnection
     SQL.Strings = (
-      'SELECT IdResource, NaResource AS NameResource'
-      'FROM Resource'
-      'WHERE IdResource<>:IdResource'
-      'ORDER BY'
-      '  NaResource'
+      'SELECT IdDay,IdHour,Session'
+      'FROM TimetableDetail'
+      'WHERE IdTimetable=:IdTimetable'
     )
     Params = <    
       item
-        DataType = ftInteger
-        Name = 'IdResource'
+        DataType = ftUnknown
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = DSActivity
-    MasterFields = 'IdResource'
-    LinkedFields = 'IdResource'
-    left = 560
-    top = 240
+    left = 168
+    top = 96
     ParamData = <    
       item
-        DataType = ftInteger
-        Name = 'IdResource'
+        DataType = ftUnknown
+        Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
+  end
+  object QuTimetableResource: TZQuery
+    Connection = DbZConnection
+    SQL.Strings = (
+      'SELECT IdActivity,IdResource,NumResource'
+      'FROM TimetableResource'
+      'WHERE IdTimetable=:IdTimetable'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'IdTimetable'
+        ParamType = ptUnknown
+      end>
+    left = 168
+    top = 24
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'IdTimetable'
+        ParamType = ptUnknown
+      end>
+  end
+  object QuTimetable: TZQuery
+    Connection = DbZConnection
+    SQL.Strings = (
+      'SELECT IdTimetable'
+      'FROM Timetable'
+      'WHERE IdTimetable=:IdTimetable'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'IdTimetable'
+        ParamType = ptUnknown
+      end>
+    left = 32
+    top = 24
+    ParamData = <    
+      item
+        DataType = ftUnknown
+        Name = 'IdTimetable'
+        ParamType = ptUnknown
+      end>
+  end
+  object ZConnection1: TZConnection
+    Connected = True
+    Protocol = 'sqlite-3'
+    Database = '/home/edison/apps/pascal/TTG/dat/ttg.s3fpc'
+    left = 310
+    top = 98
   end
 end

@@ -1,10 +1,10 @@
 object MainForm: TMainForm
-  Left = 243
-  Height = 362
-  Top = 260
+  Left = 477
+  Height = 371
+  Top = 240
   Width = 718
   Caption = 'MainForm'
-  ClientHeight = 362
+  ClientHeight = 371
   ClientWidth = 718
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -53,7 +53,7 @@ object MainForm: TMainForm
   object StatusBar: TStatusBar
     Left = 0
     Height = 19
-    Top = 343
+    Top = 352
     Width = 718
     AutoHint = True
     Panels = <    
@@ -107,14 +107,14 @@ object MainForm: TMainForm
       ShowHint = True
       Style = tbsSeparator
     end
-    object TBDay: TToolButton
+    object TBtDay: TToolButton
       Left = 80
       Top = 2
       Action = ActDay
       ParentShowHint = False
       ShowHint = True
     end
-    object TBHour: TToolButton
+    object TBtHour: TToolButton
       Left = 103
       Top = 2
       Action = ActHour

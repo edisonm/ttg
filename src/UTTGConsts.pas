@@ -32,6 +32,7 @@ resourcestring
   SDay4 = 'Thursday';
   SDay5 = 'Friday';
   SDay6 = 'Saturday';
+  SDeleteCell = 'Press <Del> to clean the cell';
   SDetail = 'Detail';
   SDoNotHaveResource = 'do not have teacher';
   SDoNotAppearsIn = 'do not appears in';

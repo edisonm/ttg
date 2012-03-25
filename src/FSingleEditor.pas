@@ -46,13 +46,18 @@ TSingleEditorForm = class(TEditorForm)
                                       var AForm;
                                       AConfigStorage: TConfigStorage;
                                       AAction: TAction;
-                                      ADataSet: TDataSet): Boolean;
+                                      ADataSet: TDataSet): Boolean; overload;
+    class function ToggleSingleEditor(AOwner: TComponent;
+                                      var AForm;
+                                      AConfigStorage: TConfigStorage;
+                                      AAction: TAction;
+                                      ATableName: string): Boolean; overload;
   end;
 
 implementation
 
 uses
-  UTTGDBUtils, DMaster;
+  UTTGDBUtils, URelUtils, DMaster, DSource;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -67,6 +72,24 @@ begin
   Result := ToggleEditor(AOwner, AForm, AConfigStorage, AAction);
   if Result then
     TSingleEditorForm(AForm).DataSet := ADataSet;
+end;
+
+
+class function TSingleEditorForm.ToggleSingleEditor(AOwner: TComponent;
+                                                    var AForm;
+                                                    AConfigStorage: TConfigStorage;
+                                                    AAction: TAction;
+                                                    ATableName: string): Boolean;
+var
+  ZTable: TZTable;
+begin
+  Result := ToggleEditor(AOwner, AForm, AConfigStorage, AAction);
+  if Result then
+  begin
+    ZTable := SourceDataModule.NewTable(ATableName, TSingleEditorForm(AForm));
+    ZTable.Open;
+    TSingleEditorForm(AForm).DataSet := ZTable;
+  end;
 end;
 
 procedure TSingleEditorForm.SetDataSet(ADataSet: TDataSet);

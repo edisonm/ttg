@@ -1,5 +1,5 @@
 object ConfigForm: TConfigForm
-  Left = 774
+  Left = 767
   Height = 387
   Top = 482
   Width = 331
@@ -46,6 +46,7 @@ object ConfigForm: TConfigForm
     0000000000000000000000000000000000000000000000000000000000000000
     00000000000000000000000000000000000000000000FFFF0000
   }
+  OnCreate = FormCreate
   Position = poDesktopCenter
   LCLVersion = '0.9.31'
   object BBOk: TBitBtn
@@ -226,7 +227,7 @@ object ConfigForm: TConfigForm
         Height = 24
         Top = 272
         Width = 147
-        TabOrder = 3
+        TabOrder = 2
       end
       object dedSharedDirectory: TDirectoryEdit
         Left = 154
@@ -238,7 +239,7 @@ object ConfigForm: TConfigForm
         ButtonWidth = 23
         NumGlyphs = 0
         MaxLength = 0
-        TabOrder = 4
+        TabOrder = 3
       end
       object spePopulationSize: TSpinEdit
         Left = 154
@@ -247,7 +248,7 @@ object ConfigForm: TConfigForm
         Width = 147
         MaxValue = 2147483647
         MinValue = 1
-        TabOrder = 5
+        TabOrder = 4
         Value = 1
       end
       object SEMaxIteration: TSpinEdit
@@ -257,7 +258,7 @@ object ConfigForm: TConfigForm
         Width = 147
         MaxValue = 2147483647
         MinValue = 1
-        TabOrder = 6
+        TabOrder = 5
         Value = 1
       end
       object EdCrossProbability: TEdit
@@ -265,28 +266,28 @@ object ConfigForm: TConfigForm
         Height = 24
         Top = 56
         Width = 147
-        TabOrder = 7
+        TabOrder = 6
       end
       object EdMutationProbability: TEdit
         Left = 154
         Height = 24
         Top = 80
         Width = 147
-        TabOrder = 8
+        TabOrder = 7
       end
       object EdReparationProbability: TEdit
         Left = 154
         Height = 24
         Top = 104
         Width = 147
-        TabOrder = 9
+        TabOrder = 8
       end
       object EdPollinationProbability: TEdit
         Left = 154
         Height = 24
         Top = 128
         Width = 147
-        TabOrder = 10
+        TabOrder = 9
       end
       object CBApplyDoubleDownHill: TCheckBox
         Left = 9
@@ -301,7 +302,7 @@ object ConfigForm: TConfigForm
         Height = 24
         Top = 200
         Width = 147
-        TabOrder = 12
+        TabOrder = 10
         Text = '1,2'
       end
     end
@@ -403,7 +404,6 @@ object ConfigForm: TConfigForm
         Top = 148
         Width = 93
         DataField = 'NaRestrictionType'
-        DataSource = SourceDataModule.DSRestrictionType
         CharCase = ecNormal
         MaxLength = 0
         TabOrder = 1
@@ -414,7 +414,6 @@ object ConfigForm: TConfigForm
         Top = 148
         Width = 93
         DataField = 'ValRestrictionType'
-        DataSource = SourceDataModule.DSRestrictionType
         CharCase = ecNormal
         MaxLength = 0
         TabOrder = 3
@@ -426,7 +425,6 @@ object ConfigForm: TConfigForm
         Width = 292
         Color = clWindow
         Columns = <>
-        DataSource = SourceDataModule.DSRestrictionType
         TabOrder = 6
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
@@ -465,9 +463,18 @@ object ConfigForm: TConfigForm
     TabOrder = 2
   end
   object DSRestrictionType: TDatasource
-    DataSet = SourceDataModule.TbRestrictionType
+    DataSet = TbRestrictionType
     OnDataChange = DSRestrictionTypeDataChange
-    left = 128
-    top = 264
+    left = 184
+    top = 336
+  end
+  object TbRestrictionType: TZTable
+    Tag = 9
+    Connection = SourceDataModule.DbZConnection
+    SortedFields = 'IdRestrictionType'
+    TableName = 'RestrictionType'
+    IndexFieldNames = 'IdRestrictionType Asc'
+    left = 56
+    top = 336
   end
 end

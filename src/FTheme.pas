@@ -18,15 +18,15 @@ type
   TThemeForm	= class(TMasterDetailEditorForm)
     ActFilterByResourceType: TAction;
     CBFilterByResourceType: TCheckBox;
+    DSAvailability: TDatasource;
     DSParticipant: TDatasource;
     DSResourceType: TDatasource;
     DBNResourceType: TDBNavigator;
     DBTResourceType: TDBText;
-    DSAvailability: TDatasource;
     DbGParticipant: TDBGrid;
     DBGAvailability: TDBGrid;
     DBGResourceTypeLimit: TDBGrid;
-    DSTheme: TDatasource;
+    DSResourceTypeLimit: TDatasource;
     GroupBox3: TGroupBox;
     GroupBox4: TGroupBox;
     GroupBox5: TGroupBox;
@@ -35,11 +35,12 @@ type
     Splitter3: TSplitter;
     Splitter4: TSplitter;
     QuAvailability: TZQuery;
+    TbActivity: TZTable;
     TbResource: TZTable;
     TbResourceType: TZTable;
+    TbResourceTypeLimit: TZTable;
     TbTheme: TZTable;
     UpAvailability: TZUpdateSQL;
-    ZConnection1: TZConnection;
     QuParticipant: TZQuery;
     UpParticipant: TZUpdateSQL;
     procedure ActFilterByResourceTypeExecute(Sender: TObject);
@@ -171,15 +172,13 @@ begin
   inherited;
   TbResourceType.Open;
   TbResource.Open;
-  with SourceDataModule do
+  FSuperTitle := SourceDataModule.Description[TbTheme];
+  with TbActivity do
   begin
-    FSuperTitle := Description[TbTheme];
-    TbResourceTypeLimit.MasterFields := 'IdTheme';
-    TbResourceTypeLimit.LinkedFields := 'IdTheme';
-    TbResourceTypeLimit.MasterSource := DSTheme;
-    TbActivity.MasterFields := 'IdTheme';
-    TbActivity.LinkedFields := 'IdTheme';
-    TbActivity.MasterSource := DSTheme;
+    PrepareDataSetFields(TbActivity);
+    FindField('IdActivity').Visible := False;
+    FindField('IdTheme').Visible := False;
+    Open;
   end;
   PrepareDataSetFields(QuAvailability);
   NewLookupField(QuAvailability, TbResource, 'IdResource', 'NaResource');
@@ -207,7 +206,7 @@ begin
     FindField('NaResource').DisplayLabel := SFlAvailability_IdResource;
     FindField('NumResource').DisplayLabel := SFlParticipant_NumResource;
   end;
-  PrepareDataSetFields(TbTheme);
+  SourceDataModule.PrepareTable(TbTheme);
   Field := TLongintField.Create(TbTheme.Owner);
   with Field do
   begin
@@ -221,16 +220,21 @@ begin
     FindField('Composition').DisplayWidth := 10;
     FindField('IdTheme').Visible := False;
     BeforePost := TbThemeBeforePost;
+    Open;
+  end;
+  SourceDataModule.PrepareTable(TbResourceTypeLimit);
+  NewLookupField(TbResourceTypeLimit, TbResourceType, 'IdResourceType', 'NaResourceType');
+  with TbResourceTypeLimit do
+  begin
+    FindField('IdTheme').Visible := False;
+    FindField('IdResourceType').Visible := False;
+    Open;
   end;
 end;
 
 procedure TThemeForm.FormDestroy(Sender: TObject);
 begin
   inherited;
-  SourceDataModule.TbResourceTypeLimit.MasterSource := nil;
-  SourceDataModule.TbAvailability.MasterSource := nil;
-  SourceDataModule.TbParticipant.MasterSource := nil;
-  SourceDataModule.TbActivity.MasterSource := nil;
 end;
 
 procedure TThemeForm.TbThemeBeforePost(DataSet: TDataSet);

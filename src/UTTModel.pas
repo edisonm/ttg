@@ -385,7 +385,7 @@ constructor TTimetableModel.Create(AClashActivityValue,
                                    ABrokenSessionValue,
                                    ANonScatteredActivityValue: Integer);
 var
-  TbTheme: TZTable;
+  ZTable: TZTable;
   FThemeToLimits: TDynamicIntegerArrayArray;
   FThemeToResources: TDynamicIntegerArrayArray;
   FThemeToNumResources: TDynamicIntegerArrayArray;
@@ -399,16 +399,17 @@ var
     FIdRestrictionTypeToRestrictionType,
     FRestrictionTypeToIdRestrictionType: TDynamicIntegerArray;
   SErrors: String;
-  procedure Load(ATable: TDataSet; const AListName: string; out FMinIdList: Integer;
+  procedure Load(const ATableName, AListName: string; out FMinIdList: Integer;
     out FIdListToList: TDynamicIntegerArray;
     out FListToIdList: TDynamicIntegerArray);
   var
     Field: TField;
     Index, Value, MaxIdList: Integer;
   begin
-    with ATable do
+    with ZTable do
     begin
-      First;
+      TableName := ATableName;
+      Open;
       Field := FindField(AListName);
       FMinIdList := Field.AsInteger;
       MaxIdList := Field.AsInteger;
@@ -430,7 +431,7 @@ var
         FIdListToList[Field.AsInteger - FMinIdList] := Index;
         Next;
       end;
-      First;
+      Close;
     end;
   end;
   procedure LoadPeriod;
@@ -438,10 +439,12 @@ var
     Period, Day, Hour: Integer;
     FieldDay, FieldHour: TField;
   begin
-    with SourceDataModule.TbPeriod do
+    with ZTable do
     begin
+      Close;
+      TableName := 'Period';
       IndexFieldNames := 'IdDay;IdHour';
-      First;
+      Open;
       FPeriodCount := RecordCount;
       SetLength(FPeriodToDay, FPeriodCount);
       SetLength(FDayToMaxPeriod, FDayCount);
@@ -465,7 +468,6 @@ var
       begin
         FDayToMaxPeriod[Day] := GetDayToMaxPeriod(Day);
       end;
-      First;
     end;
   end;
   procedure LoadResourceType;
@@ -473,8 +475,10 @@ var
     ResourceType: Integer;
     FieldValue, FieldName, FieldNumResourceLimit: TField;
   begin
-    with SourceDataModule.TbResourceType do
+    with ZTable do
     begin
+      Close;
+      TableName := 'ResourceType';
       IndexFieldNames := 'IdResourceType';
       First;
       FieldName := FindField('NaResourceType');
@@ -490,7 +494,6 @@ var
         FResourceTypeToNumResourceLimit[ResourceType] := FieldNumResourceLimit.AsInteger;
         Next;
       end;
-      First;
     end;
   end;
   procedure LoadResource;
@@ -498,10 +501,12 @@ var
     Resource: Integer;
     FieldResourceType, FieldResourceNumber, FieldResourceName: TField;
   begin
-    with SourceDataModule.TbResource do
+    with ZTable do
     begin
+      Close;
+      TableName := 'Resource';
       IndexFieldNames := 'IdResource';
-      First;
+      Open;
       FieldResourceType := FindField('IdResourceType');
       FieldResourceNumber := FindField('NumResource');
       FieldResourceName := FindField('NaResource');
@@ -516,7 +521,6 @@ var
         FResourceToName[Resource] := FieldResourceName.AsString;
         Next;
       end;
-      First;
     end;
   end;
   procedure LoadRestrictionType;
@@ -524,10 +528,12 @@ var
     RestrictionType: Integer;
     FieldValue, FieldName: TField;
   begin
-    with SourceDataModule.TbRestrictionType do
+    with ZTable do
     begin
+      Close;
+      TableName := 'RestrictionType';
       IndexFieldNames := 'IdRestrictionType';
-      First;
+      Open;
       FieldValue := FindField('ValRestrictionType');
       FieldName := FindField('NaRestrictionType');
       SetLength(FRestrictionTypeToValue, RecordCount);
@@ -538,7 +544,6 @@ var
         FRestrictionTypeToName[RestrictionType] := FieldName.AsString;
         Next;
       end;
-      First;
     end;
   end;
   procedure LoadRestriction;
@@ -548,10 +553,12 @@ var
     FieldResource, FieldDay, FieldHour,
       FieldRestrictionType: TField;
   begin
-    with SourceDataModule.TbRestriction do
+    with ZTable do
     begin
+      Close;
+      TableName := 'Restriction';
       IndexFieldNames := 'IdResource;IdDay;IdHour;IdRestrictionType';
-      First;
+      Open;
       SetLength(FResourcePeriodToRestrictionType, FResourceCount, FPeriodCount);
       for Resource := 0 to FResourceCount - 1 do
         for Period := 0 to FPeriodCount - 1 do
@@ -571,9 +578,6 @@ var
         FResourcePeriodToRestrictionType[Resource, Period] := RestrictionType;
         Next;
       end;
-      First;
-      Filter := '';
-      Filtered := False;
     end;
   end;
   procedure LoadTheme;
@@ -582,13 +586,12 @@ var
     FieldComposition, FieldName: TField;
     Composition: string;
   begin
-    with TbTheme do
+    with ZTable do
     begin
-      Connection := SourceDataModule.DbZConnection;
+      Close;
       TableName := 'Theme';
       IndexFieldNames := 'IdTheme';
       Open;
-      First;
       FieldComposition := FindField('Composition');
       FieldName := FindField('NaTheme');
       SetLength(FThemeToComposition, FThemeCount, 0);
@@ -611,7 +614,6 @@ var
         end;
         Next;
       end;
-      First;
     end;
   end;
   procedure LoadActivity;
@@ -619,10 +621,12 @@ var
     Count, Theme, Session1, Activity, Session2, Session: Integer;
     FieldTheme, FieldName: TField;
   begin
-    with SourceDataModule.TbActivity do
+    with ZTable do
     begin
+      Close;
+      TableName := 'Activity';
       IndexFieldNames := 'IdActivity';
-      First;
+      Open;
       FieldTheme := FindField('IdTheme');
       FieldName := FindField('NaActivity');
       FActivityCount := RecordCount;
@@ -670,10 +674,12 @@ var
       ResourceType: Integer;
     FieldActivity, FieldResource, FieldNumResource: TField;
   begin
-    with SourceDataModule.TbParticipant do
+    with ZTable do
     begin
+      Close;
+      TableName := 'Participant';
       IndexFieldNames := 'IdActivity;IdResource';
-      First;
+      Open;
       ParticipantCount := RecordCount;
       SetLength(FActivityToResources, FActivityCount, 0);
       SetLength(FActivityToNumResources, FActivityCount, 0);
@@ -697,7 +703,6 @@ var
         Inc(FTmplActivityResourceTypeToNumber[Activity, FResourceToResourceType[Resource]], Number);
         Next;
       end;
-      First;
     end;
   end;
   procedure LoadResourceTypeLimit;
@@ -705,10 +710,12 @@ var
     ResourceTypeLimit, ResourceTypeLimitCount, Theme, ResourceType: Integer;
     FieldTheme, FieldResourceType, FieldNumResourceLimit: TField;
   begin
-    with SourceDataModule.TbResourceTypeLimit do
+    with ZTable do
     begin
+      Close;
+      TableName := 'ResourceTypeLimit';
       IndexFieldNames := 'IdTheme;IdResourceType';
-      First;
+      Open;
       ResourceTypeLimitCount := RecordCount;
       SetLength(FThemeResourceTypeToLimit, FThemeCount, FResourceTypeCount);
       FieldTheme := FindField('IdTheme');
@@ -726,7 +733,6 @@ var
         FThemeResourceTypeToLimit[Theme, ResourceType] := FieldNumResourceLimit.AsInteger;
         Next;
       end;
-      First;
     end;
   end;
   procedure LoadAvailability;
@@ -735,10 +741,12 @@ var
       Theme, ResourceType: Integer;
     FieldTheme, FieldResource, FieldNumResource: TField;
   begin
-    with SourceDataModule.TbAvailability do
+    with ZTable do
     begin
+      Close;
+      TableName := 'Availability';
       IndexFieldNames := 'IdTheme;IdResource';
-      First;
+      Open;
       AvailabilityCount := RecordCount;
       SetLength(FThemeToResources, FThemeCount, 0);
       SetLength(FThemeToNumResources, FThemeCount, 0);
@@ -768,7 +776,6 @@ var
         FResourceThemeToNumResources[Resource, Count] := NumResource;
         Next;
       end;
-      First;
     end;
   end;
 var
@@ -1112,51 +1119,51 @@ var
   end;
 begin
   inherited Create;
-  TbTheme := TZTable.Create(nil);
+  ZTable := TZTable.Create(nil);
   try
-  with SourceDataModule do
-  begin
-    SErrors := '';
-    Configure(AClashActivityValue, ABreakTimetableResourceValue,
-      ABrokenSessionValue, ANonScatteredActivityValue);
-    Load(TbResourceType, 'IdResourceType', FMinIdResourceType,
-         FIdResourceTypeToResourceType, FResourceTypeToIdResourceType);
-    FResourceTypeCount := Length(FResourceTypeToIdResourceType);
-    Load(TbResource, 'IdResource', FMinIdResource, FIdResourceToResource,
-         FResourceToIdResource);
-    FResourceCount := Length(FResourceToIdResource);
-    Load(TbTheme, 'IdTheme', FMinIdTheme, FIdThemeToTheme, FThemeToIdTheme);
-    FThemeCount := Length(FThemeToIdTheme);
-    Load(TbActivity, 'IdActivity', FMinIdActivity, FIdActivityToActivity,
-         FActivityToIdActivity);
-    FActivityCount := Length(FActivityToIdActivity);
-    Load(TbDay, 'IdDay', FMinIdDay, FIdDayToDay, FDayToIdDay);
-    FDayCount := Length(FDayToIdDay);
-    Load(TbHour, 'IdHour', FMinIdHour, FIdHourToHour, FHourToIdHour);
-    FHourCount := Length(FHourToIdHour);
-    Load(TbRestrictionType, 'IdRestrictionType',
-      FMinIdRestrictionType,
-      FIdRestrictionTypeToRestrictionType,
-      FRestrictionTypeToIdRestrictionType);
-  end;
-  FRestrictionTypeCount := Length(FRestrictionTypeToIdRestrictionType);
-  LoadPeriod;
-  LoadResourceType;
-  LoadResource;
-  LoadRestrictionType;
-  LoadRestriction;
-  LoadTheme;
-  LoadActivity;
-  LoadParticipant;
-  LoadResourceTypeLimit;
-  LoadAvailability;
-  GenerateTemplateData;
-  FillTemplateData;
-  LoadGreedyData;
-  if SErrors <> '' then
-    raise Exception.Create(SErrors);
+    with SourceDataModule do
+    begin
+      SErrors := '';
+      Configure(AClashActivityValue, ABreakTimetableResourceValue,
+        ABrokenSessionValue, ANonScatteredActivityValue);
+      Load('ResourceType', 'IdResourceType', FMinIdResourceType,
+           FIdResourceTypeToResourceType, FResourceTypeToIdResourceType);
+      FResourceTypeCount := Length(FResourceTypeToIdResourceType);
+      Load('Resource', 'IdResource', FMinIdResource, FIdResourceToResource,
+           FResourceToIdResource);
+      FResourceCount := Length(FResourceToIdResource);
+      Load('Theme', 'IdTheme', FMinIdTheme, FIdThemeToTheme, FThemeToIdTheme);
+      FThemeCount := Length(FThemeToIdTheme);
+      Load('Activity', 'IdActivity', FMinIdActivity, FIdActivityToActivity,
+           FActivityToIdActivity);
+      FActivityCount := Length(FActivityToIdActivity);
+      Load('Day', 'IdDay', FMinIdDay, FIdDayToDay, FDayToIdDay);
+      FDayCount := Length(FDayToIdDay);
+      Load('Hour', 'IdHour', FMinIdHour, FIdHourToHour, FHourToIdHour);
+      FHourCount := Length(FHourToIdHour);
+      Load('RestrictionType', 'IdRestrictionType',
+        FMinIdRestrictionType,
+        FIdRestrictionTypeToRestrictionType,
+        FRestrictionTypeToIdRestrictionType);
+    end;
+    FRestrictionTypeCount := Length(FRestrictionTypeToIdRestrictionType);
+    LoadPeriod;
+    LoadResourceType;
+    LoadResource;
+    LoadRestrictionType;
+    LoadRestriction;
+    LoadTheme;
+    LoadActivity;
+    LoadParticipant;
+    LoadResourceTypeLimit;
+    LoadAvailability;
+    GenerateTemplateData;
+    FillTemplateData;
+    LoadGreedyData;
+    if SErrors <> '' then
+      raise Exception.Create(SErrors);
   finally
-    TbTheme.Free;
+    ZTable.Free;
   end;
   {$IFDEF DEBUG}
   WriteLn(Format('FThemeToResources=%s', [TIntegerArrayArrayHandler.ValueToString(FThemeToResources)]));
@@ -2091,9 +2098,6 @@ begin
     with SourceDataModule do
     begin
       DbZConnection.ExecuteDirect(SQL.Text);
-      TbTimetable.Refresh;
-      TbTimetableDetail.Refresh;
-      TbTimetableResource.Refresh;
     end;
     {$ENDIF}
   finally
@@ -2115,14 +2119,13 @@ var
 begin
   with SourceDataModule, TTimetableModel(Model) do
   begin
-    TbTimetable.Locate('IdTimetable', IdTimetable, []);
     for Session := 0 to FSessionCount - 1 do
       FTTSessionToPeriod[Session] := MaxInt;
-    with TbTimetableDetail do
+    with QuTimetableDetail do
     begin
-      LinkedFields := 'IdTimetable';
-      MasterFields := 'IdTimetable';
-      MasterSource := DSTimetable;
+      Close;
+      ParamByName('IdTimetable').AsInteger := IdTimetable;
+      Open;
       try
         FieldDay := FindField('IdDay');
         FieldHour := FindField('IdHour');
@@ -2138,20 +2141,18 @@ begin
           Next;
         end;
       finally
-        MasterSource := nil;
-        MasterFields := '';
-        LinkedFields := '';
+        Close;
       end;
     end;
     SetLength(ActivityResourceToNumResource, FActivityCount, FResourceCount);
     for Activity := 0 to FActivityCount - 1 do
       for Resource := 0 to FResourceCount - 1 do
         ActivityResourceToNumResource[Activity, Resource] := 0;
-    with TbTimetableResource do
+    with QuTimetableResource do
     begin
-      LinkedFields := 'IdTimetable';
-      MasterFields := 'IdTimetable';
-      MasterSource := DSTimetable;
+      Close;
+      ParamByName('IdTimetable').AsInteger := IdTimetable;
+      Open;
       try
         FieldActivity := FindField('IdActivity');
         FieldResource := FindField('IdResource');
@@ -2166,9 +2167,7 @@ begin
           Next;
         end;
       finally
-        MasterSource := nil;
-        MasterFields := '';
-        LinkedFields := '';
+        Close;
       end;
       for Activity := 0 to FActivityCount - 1 do
       begin

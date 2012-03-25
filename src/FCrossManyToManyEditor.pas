@@ -111,9 +111,6 @@ type
       write FOnGetRowName;
   end;
 
-var
-  CrossManyToManyEditorForm: TCrossManyToManyEditorForm;
-
 implementation
 
 uses

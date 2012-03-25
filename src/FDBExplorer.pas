@@ -146,7 +146,7 @@ begin
   ZTable1.Close;
   ZQuery1.Close;
   ZTables.Open;
-  SourceDataModule.RefreshTables;
+  // SourceDataModule.RefreshTables;
 end;
 
 procedure TDBExplorerForm.BtSaveResultsClick(Sender: TObject);

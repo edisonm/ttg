@@ -7,7 +7,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, Buttons, DBGrids, DbCtrls, ExtCtrls, Db, Variants,
+  StdCtrls, Buttons, DBGrids, DbCtrls, ExtCtrls, Grids, ComCtrls, Db, Variants,
   ZDataset, FConfig, FCrossManyToManyEditor0,
   FCrossManyToManyEditor1, FCrossManyToManyEditor, DMaster, DSource;
 
@@ -23,7 +23,10 @@ type
     DBGrid1: TDBGrid;
     Splitter1: TSplitter;
     QuResource: TZQuery;
-    procedure TBShowClick(Sender: TObject);
+    TbDay: TZTable;
+    TbHour: TZTable;
+    TbPeriod: TZTable;
+    procedure CBShowResourceChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure QuTimetableResourceCalcFields(DataSet: TDataSet);
     procedure DSResourceDataChange(Sender: TObject; Field: TField);
@@ -43,25 +46,14 @@ uses
 {$R *.DFM}
 {$ENDIF}
 
-Procedure TTimetableResourceForm.TBShowClick(Sender: TObject);
-begin
-  inherited;
-  with SourceDataModule do
-  begin
-    Caption := Format('[%s %d] - %s', [SuperTitle,
-      Self.QuResource.FindField('IdTimetable').AsInteger,
-      Self.QuResource.FindField('NaResource').AsString]);
-    FName := MasterDataModule.StringsShowResource.Values[CBShowResource.Text];
-    ShowEditor(TbDay, TbHour, QuTimetableResource, TbPeriod, 'IdDay', 'NaDay',
-      'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
-  end;
-end;
-
 procedure TTimetableResourceForm.FormCreate(Sender: TObject);
 var
   Field: TField;
 begin
   inherited;
+  TbDay.Open;
+  TbHour.Open;
+  TbPeriod.Open;
   QuResource.Open;
   with QuResource do
   begin
@@ -92,6 +84,19 @@ begin
   CBShowResource.Text := CBShowResource.Items[0];
 end;
 
+procedure TTimetableResourceForm.CBShowResourceChange(Sender: TObject);
+begin
+  with SourceDataModule do
+  begin
+    Caption := Format('[%s %d] - %s', [SuperTitle,
+      Self.QuResource.FindField('IdTimetable').AsInteger,
+      Self.QuResource.FindField('NaResource').AsString]);
+    FName := MasterDataModule.StringsShowResource.Values[CBShowResource.Text];
+    ShowEditor(TbDay, TbHour, QuTimetableResource, TbPeriod, 'IdDay', 'NaDay',
+      'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
+  end;
+end;
+
 procedure TTimetableResourceForm.QuTimetableResourceCalcFields(DataSet: TDataSet);
 begin
   inherited;
@@ -104,8 +109,7 @@ end;
 procedure TTimetableResourceForm.DSResourceDataChange(Sender: TObject;
   Field: TField);
 begin
-  inherited;
-  TBShowClick(nil);
+  CBShowResourceChange(Sender);
 end;
 
 initialization

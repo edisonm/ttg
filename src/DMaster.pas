@@ -27,7 +27,6 @@ type
     function NewIdTimetable: Integer;
     procedure SaveToStrings(AStrings: TStrings);
     procedure SaveIniStrings(AStrings: TStrings);
-    procedure SaveToTextDir(const ADirName: TFileName);
     procedure LoadFromStrings(AStrings: TStrings; var APosition: Integer);
     procedure LoadFromTextFile(const AFileName: TFileName);
     procedure SaveToTextFile(const AFileName: TFileName);
@@ -81,12 +80,6 @@ begin
   AStrings.AddStrings(FConfigStorage.ConfigStrings);
 end;
 
-procedure TMasterDataModule.SaveToTextDir(const ADirName: TFileName);
-begin
-  SourceDataModule.SaveToTextDir(ADirName);
-  FConfigStorage.ConfigStrings.SaveToFile(ADirName + '/config.ini');
-end;
-
 procedure TMasterDataModule.LoadIniStrings(AStrings: TStrings; var APosition: Integer);
 var
   Count, Limit: Integer;
@@ -129,20 +122,11 @@ begin
     if DbZConnection.Database = ':memory:' then
     begin
       DbZConnection.ExecuteDirect(LazarusResources.Find('ttg', 'SQL').Value);
-      PrepareTables;
-      QuResource.Open;
-      OpenTables;
       if Paramcount <> 1 then
       begin
         NewDatabase;
         ConfigStorage.SetDefaults;
       end;
-    end
-    else
-    begin
-      PrepareTables;
-      QuResource.Open;
-      OpenTables;
     end;
   end;
 end;

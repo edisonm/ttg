@@ -20,7 +20,7 @@
       <MajorVersionNr Value="2"/>
       <MinorVersionNr Value="1"/>
       <RevisionNr Value="1"/>
-      <BuildNr Value="1006"/>
+      <BuildNr Value="1013"/>
       <CharSet Value="04B0"/>
       <StringTable LegalCopyright="1999-2012, Edison Mera" ProductVersion="" FileDescription="Automatic Timetable Generator"/>
     </VersionInfo>
@@ -104,7 +104,7 @@
         <PackageName Value="LCL"/>
       </Item5>
     </RequiredPackages>
-    <Units Count="39">
+    <Units Count="37">
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -264,107 +264,91 @@
         <UnitName Value="FTimetableResource"/>
       </Unit21>
       <Unit22>
-        <Filename Value="DSourceBase.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="SourceBaseDataModule"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="DataModule"/>
-        <UnitName Value="DSourceBase"/>
-      </Unit22>
-      <Unit23>
         <Filename Value="../../DBConvert/auxiliary/URelUtils.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="URelUtils"/>
-      </Unit23>
-      <Unit24>
+      </Unit22>
+      <Unit23>
         <Filename Value="DSource.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SourceDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSource"/>
-      </Unit24>
-      <Unit25>
+      </Unit23>
+      <Unit24>
         <Filename Value="FSelPeriod.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SelPeriodForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FSelPeriod"/>
-      </Unit25>
-      <Unit26>
-        <Filename Value="../../DBConvert/auxiliary/DBase.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="BaseDataModule"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="DataModule"/>
-        <UnitName Value="DBase"/>
-      </Unit26>
-      <Unit27>
+      </Unit24>
+      <Unit25>
         <Filename Value="UTTGConfig.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGConfig"/>
-      </Unit27>
-      <Unit28>
+      </Unit25>
+      <Unit26>
         <Filename Value="UModel.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UModel"/>
-      </Unit28>
-      <Unit29>
+      </Unit26>
+      <Unit27>
         <Filename Value="UMakeTT.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UMakeTT"/>
-      </Unit29>
-      <Unit30>
+      </Unit27>
+      <Unit28>
         <Filename Value="UDownHill.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UDownHill"/>
-      </Unit30>
-      <Unit31>
+      </Unit28>
+      <Unit29>
         <Filename Value="USolver.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="USolver"/>
-      </Unit31>
-      <Unit32>
+      </Unit29>
+      <Unit30>
         <Filename Value="UTTGBasics.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGBasics"/>
-      </Unit32>
-      <Unit33>
+      </Unit30>
+      <Unit31>
         <Filename Value="UAbout.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UAbout"/>
-      </Unit33>
-      <Unit34>
+      </Unit31>
+      <Unit32>
         <Filename Value="FMessageView.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MessageViewForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FMessageView"/>
-      </Unit34>
-      <Unit35>
+      </Unit32>
+      <Unit33>
         <Filename Value="UTTGi18n.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGi18n"/>
-      </Unit35>
-      <Unit36>
+      </Unit33>
+      <Unit34>
         <Filename Value="UTTGConsts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGConsts"/>
-      </Unit36>
-      <Unit37>
+      </Unit34>
+      <Unit35>
         <Filename Value="DSourceBaseConsts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DSourceBaseConsts"/>
-      </Unit37>
-      <Unit38>
+      </Unit35>
+      <Unit36>
         <Filename Value="FDBExplorer.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="DBExplorerForm"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FDBExplorer"/>
-      </Unit38>
+      </Unit36>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

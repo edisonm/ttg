@@ -501,11 +501,6 @@ msgctxt "TCONFIGFORM.LBTRVALUE.CAPTION"
 msgid "Value:"
 msgstr "Valor:"
 
-#: tconfigform.lbupdateeach.caption
-msgctxt "tconfigform.lbupdateeach.caption"
-msgid "Update each:"
-msgstr "Actualizar cada:"
-
 #: tconfigform.tsinstitution.caption
 msgctxt "tconfigform.tsinstitution.caption"
 msgid "Institution"
@@ -535,16 +530,6 @@ msgstr "Panel2"
 msgctxt "tcrossmanytomanyeditorform.btcancel.hint"
 msgid "Cancel|Cancel"
 msgstr "Cancelar|Cancelar"
-
-#: tcrossmanytomanyeditorform.btncancel.hint
-msgctxt "tcrossmanytomanyeditorform.btncancel.hint"
-msgid "Cancel|Cancel"
-msgstr "Cancelar|Cancelar"
-
-#: tcrossmanytomanyeditorform.btnok.hint
-msgctxt "tcrossmanytomanyeditorform.btnok.hint"
-msgid "Ok|Ok"
-msgstr "Aceptar|Aceptar"
 
 #: tcrossmanytomanyeditorform.btok.hint
 msgctxt "tcrossmanytomanyeditorform.btok.hint"
@@ -1457,6 +1442,10 @@ msgstr "Viernes"
 #: uttgconsts.sday6
 msgid "Saturday"
 msgstr "Sabado"
+
+#: uttgconsts.sdeletecell
+msgid "Press <Del> to clean the cell"
+msgstr "Presione <Supr> para borrar la celda"
 
 #: uttgconsts.sdetail
 msgctxt "uttgconsts.sdetail"

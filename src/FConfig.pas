@@ -8,7 +8,7 @@ interface
 uses
   {$IFDEF FPC}ColorBox, LResources{$ELSE}Mask, Windows{$ENDIF}, SysUtils, Grids,
   Classes, Graphics, Controls, Forms, Dialogs, StdCtrls, Buttons, ComCtrls,
-  Spin, DBGrids, DSource, DMaster, DB, ExtCtrls, DBCtrls, EditBtn;
+  Spin, DBGrids, DSource, DMaster, DB, ExtCtrls, DBCtrls, EditBtn, ZDataset;
 
 type
 
@@ -34,6 +34,7 @@ type
     SEMaxIteration: TSpinEdit;
     EdPollinationProbability: TEdit;
     spePopulationSize: TSpinEdit;
+    TbRestrictionType: TZTable;
     TSWeights: TTabSheet;
     LbBrokenActivity: TLabel;
     LbNonScatteredActivity: TLabel;
@@ -73,6 +74,7 @@ type
       Field: TField);
     procedure BBOkClick(Sender: TObject);
     procedure BBCancelClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -84,9 +86,6 @@ type
 function ShowConfigForm(AHelpContext: THelpContext): Integer;
 
 implementation
-
-uses
-  DSourceBase;
 
 {$IFNDEF FPC}
 {$R *.DFM}
@@ -171,6 +170,12 @@ begin
   ModalResult := mrCancel;
 end;
 
+procedure TConfigForm.FormCreate(Sender: TObject);
+begin
+  SourceDataModule.PrepareTable(TbRestrictionType);
+  TbRestrictionType.Open;
+end;
+
 procedure TConfigForm.BBOkClick(Sender: TObject);
 begin
   ModalResult := mrOk;
@@ -188,7 +193,7 @@ end;
 
 procedure TConfigForm.CBColRestrictionTypeExit(Sender: TObject);
 begin
-  with SourceDataModule.TbRestrictionType.FindField('ColRestrictionType') do
+  with TbRestrictionType.FindField('ColRestrictionType') do
     if (DSRestrictionType.State in [dsEdit, dsInsert])
         and (AsInteger <> CBColRestrictionType.Selected) then
       AsInteger := CBColRestrictionType.Selected;
@@ -198,7 +203,7 @@ procedure TConfigForm.DSRestrictionTypeDataChange(
   Sender: TObject; Field: TField);
 begin
   CBColRestrictionType.Selected
-    := SourceDataModule.TbRestrictionType.FindField('ColRestrictionType').AsInteger;
+    := TbRestrictionType.FindField('ColRestrictionType').AsInteger;
 end;
 
 initialization

@@ -481,11 +481,6 @@ msgctxt "TCONFIGFORM.LBTRVALUE.CAPTION"
 msgid "Value:"
 msgstr ""
 
-#: tconfigform.lbupdateeach.caption
-msgctxt "tconfigform.lbupdateeach.caption"
-msgid "Update each:"
-msgstr ""
-
 #: tconfigform.tsinstitution.caption
 msgctxt "tconfigform.tsinstitution.caption"
 msgid "Institution"
@@ -514,16 +509,6 @@ msgstr ""
 #: tcrossmanytomanyeditorform.btcancel.hint
 msgctxt "tcrossmanytomanyeditorform.btcancel.hint"
 msgid "Cancel|Cancel"
-msgstr ""
-
-#: tcrossmanytomanyeditorform.btncancel.hint
-msgctxt "TCROSSMANYTOMANYEDITORFORM.BTNCANCEL.HINT"
-msgid "Cancel|Cancel"
-msgstr ""
-
-#: tcrossmanytomanyeditorform.btnok.hint
-msgctxt "TCROSSMANYTOMANYEDITORFORM.BTNOK.HINT"
-msgid "Ok|Ok"
 msgstr ""
 
 #: tcrossmanytomanyeditorform.btok.hint
@@ -1420,6 +1405,10 @@ msgstr ""
 
 #: uttgconsts.sday6
 msgid "Saturday"
+msgstr ""
+
+#: uttgconsts.sdeletecell
+msgid "Press <Del> to clean the cell"
 msgstr ""
 
 #: uttgconsts.sdetail

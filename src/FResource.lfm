@@ -1,7 +1,7 @@
 inherited ResourceForm: TResourceForm
-  Left = 518
+  Left = 1128
   Height = 461
-  Top = 369
+  Top = 511
   Width = 588
   Caption = 'Resources'
   ClientHeight = 461
@@ -10,14 +10,13 @@ inherited ResourceForm: TResourceForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Visible = True
   inherited TBEditor: TToolBar
     Width = 588
     inherited DBNavigator: TDBNavigator
       Hints.Strings = (      )
     end
-    object TBRestriction: TToolButton[3]
-      Left = 257
+    object TBtRestriction: TToolButton[3]
+      Left = 247
       Top = 2
       Action = ActRestriction
       ParentShowHint = False
@@ -152,7 +151,7 @@ inherited ResourceForm: TResourceForm
     }
   end
   inherited DataSource: TDatasource
-    DataSet = SourceDataModule.TbResource
+    DataSet = TbResource
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
   end
@@ -167,5 +166,58 @@ inherited ResourceForm: TResourceForm
       ImageIndex = 2
       OnExecute = ActRestrictionExecute
     end
+  end
+  object TbRestriction: TZTable[6]
+    Tag = 10
+    Connection = SourceDataModule.DbZConnection
+    SortedFields = 'IdResource;IdDay;IdHour'
+    TableName = 'Restriction'
+    MasterFields = 'IdResource'
+    MasterSource = DSResource
+    LinkedFields = 'IdResource'
+    IndexFieldNames = 'IdResource Asc;IdDay Asc;IdHour Asc'
+    left = 76
+    top = 224
+  end
+  object DSRestriction: TDatasource[7]
+    left = 200
+    top = 224
+  end
+  object TbResourceType: TZTable[8]
+    Tag = 1
+    Connection = SourceDataModule.DbZConnection
+    SortedFields = 'IdResourceType'
+    TableName = 'ResourceType'
+    IndexFieldNames = 'IdResourceType Asc'
+    left = 368
+    top = 288
+  end
+  object DSResourceType: TDatasource[9]
+    DataSet = TbResourceType
+    left = 368
+    top = 224
+  end
+  object TbResource: TZTable[10]
+    Tag = 4
+    Connection = SourceDataModule.DbZConnection
+    SortedFields = 'IdResource'
+    TableName = 'Resource'
+    IndexFieldNames = 'IdResource Asc'
+    left = 460
+    top = 76
+  end
+  object DSResource: TDatasource[11]
+    DataSet = TbResource
+    left = 460
+    top = 144
+  end
+  object TbRestrictionType: TZTable[12]
+    Tag = 9
+    Connection = SourceDataModule.DbZConnection
+    SortedFields = 'IdRestrictionType'
+    TableName = 'RestrictionType'
+    IndexFieldNames = 'IdRestrictionType Asc'
+    left = 352
+    top = 76
   end
 end

@@ -1,7 +1,7 @@
 inherited ThemeForm: TThemeForm
-  Left = 716
+  Left = 632
   Height = 730
-  Top = 299
+  Top = 265
   Width = 1140
   Caption = 'Theme'
   ClientHeight = 730
@@ -145,7 +145,7 @@ inherited ThemeForm: TThemeForm
             Align = alClient
             Color = clWindow
             Columns = <>
-            DataSource = SourceDataModule.DSResourceTypeLimit
+            DataSource = DSResourceTypeLimit
             Scrollbars = ssAutoBoth
             TabOrder = 0
             TitleFont.Height = -11
@@ -229,7 +229,7 @@ inherited ThemeForm: TThemeForm
     end
   end
   inherited ImageList: TImageList
-    left = 48
+    left = 56
     top = 272
     Bitmap = {
       4C69040000001000000010000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
@@ -364,7 +364,7 @@ inherited ThemeForm: TThemeForm
     }
   end
   inherited DataSource: TDatasource
-    DataSet = SourceDataModule.TbTheme
+    DataSet = TbTheme
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
     left = 160
@@ -383,7 +383,7 @@ inherited ThemeForm: TThemeForm
     end
   end
   inherited DataSourceDetail: TDatasource
-    DataSet = SourceDataModule.TbActivity
+    DataSet = TbActivity
     left = 160
     top = 208
   end
@@ -460,7 +460,7 @@ inherited ThemeForm: TThemeForm
         Name = 'IdTheme'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTheme
+    DataSource = DataSource
     MasterFields = 'IdTheme'
     LinkedFields = 'IdTheme'
     IndexFieldNames = 'IdTheme Asc;IdResource Asc'
@@ -473,24 +473,12 @@ inherited ThemeForm: TThemeForm
         ParamType = ptUnknown
       end>
   end
-  object ZConnection1: TZConnection[9]
-    Connected = True
-    Protocol = 'sqlite-3'
-    Database = '/home/edison/apps/pascal/TTG/dat/ttg.s3fpc'
+  object DSResourceType: TDatasource[9]
+    DataSet = TbResourceType
     left = 424
     top = 144
   end
-  object DSAvailability: TDatasource[10]
-    DataSet = QuAvailability
-    left = 296
-    top = 208
-  end
-  object DSResourceType: TDatasource[11]
-    DataSet = TbResourceType
-    left = 424
-    top = 208
-  end
-  object QuParticipant: TZQuery[12]
+  object QuParticipant: TZQuery[10]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdActivity;IdResource'
     UpdateObject = UpParticipant
@@ -511,7 +499,7 @@ inherited ThemeForm: TThemeForm
         Name = 'IdActivity'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSActivity
+    DataSource = DataSourceDetail
     MasterFields = 'IdActivity'
     LinkedFields = 'IdActivity'
     IndexFieldNames = 'IdActivity Asc;IdResource Asc'
@@ -524,12 +512,12 @@ inherited ThemeForm: TThemeForm
         ParamType = ptUnknown
       end>
   end
-  object DSParticipant: TDatasource[13]
+  object DSParticipant: TDatasource[11]
     DataSet = QuParticipant
     left = 552
     top = 208
   end
-  object UpParticipant: TZUpdateSQL[14]
+  object UpParticipant: TZUpdateSQL[12]
     DeleteSQL.Strings = (
       'DELETE FROM Participant'
       'WHERE'
@@ -581,7 +569,7 @@ inherited ThemeForm: TThemeForm
         ParamType = ptUnknown
       end>
   end
-  object TbResourceType: TZTable[15]
+  object TbResourceType: TZTable[13]
     Tag = 1
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdResourceType'
@@ -591,7 +579,7 @@ inherited ThemeForm: TThemeForm
     left = 424
     top = 80
   end
-  object TbResource: TZTable[16]
+  object TbResource: TZTable[14]
     Tag = 4
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdResource'
@@ -601,18 +589,47 @@ inherited ThemeForm: TThemeForm
     left = 160
     top = 80
   end
-  object TbTheme: TZTable[17]
+  object TbTheme: TZTable[15]
     Connection = SourceDataModule.DbZConnection
     SortedFields = 'IdTheme'
     OnCalcFields = TbThemeCalcFields
     TableName = 'Theme'
     IndexFieldNames = 'IdTheme Asc'
-    left = 48
-    top = 80
-  end
-  object DSTheme: TDatasource[18]
-    DataSet = TbTheme
-    left = 48
+    left = 56
     top = 144
+  end
+  object TbResourceTypeLimit: TZTable[16]
+    Tag = 8
+    Connection = SourceDataModule.DbZConnection
+    SortedFields = 'IdTheme;IdResourceType'
+    TableName = 'ResourceTypeLimit'
+    MasterFields = 'IdTheme'
+    MasterSource = DataSource
+    LinkedFields = 'IdTheme'
+    IndexFieldNames = 'IdTheme Asc;IdResourceType Asc'
+    left = 552
+    top = 272
+  end
+  object DSResourceTypeLimit: TDatasource[17]
+    DataSet = TbResourceTypeLimit
+    left = 552
+    top = 336
+  end
+  object TbActivity: TZTable[18]
+    Tag = 6
+    Connection = SourceDataModule.DbZConnection
+    SortedFields = 'IdTheme;IdActivity'
+    TableName = 'Activity'
+    MasterFields = 'IdTheme'
+    MasterSource = DataSource
+    LinkedFields = 'IdTheme'
+    IndexFieldNames = 'IdTheme Asc;IdActivity Asc'
+    left = 56
+    top = 208
+  end
+  object DSAvailability: TDatasource[19]
+    DataSet = QuAvailability
+    left = 296
+    top = 208
   end
 end

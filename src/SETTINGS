@@ -11,7 +11,6 @@ BASELAZFILES=$(addsuffix .pas, $(UNITS)) $(addsuffix .lfm, $(FORMS)) ttg.lpr ttg
 #	  $(addsuffix .lrs, $(FORMS))
 
 ABOUT=UAbout
-DSRCBASE=DSourceBase
 
 ifeq ($(shell uname -o),Cygwin)
 FILES=$(TTGMYSQL)

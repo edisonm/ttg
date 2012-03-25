@@ -1,5 +1,5 @@
 inherited TimetableResourceForm: TTimetableResourceForm
-  Left = 806
+  Left = 785
   Height = 462
   Top = 324
   Width = 804
@@ -52,7 +52,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
       Top = 2
       Width = 193
       ItemHeight = 0
-      OnChange = TBShowClick
+      OnChange = CBShowResourceChange
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
@@ -374,9 +374,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
-    DataSource = SourceDataModule.DSTimetable
     MasterFields = 'IdTimetable'
-    MasterSource = SourceDataModule.DSTimetable
     LinkedFields = 'IdTimetable'
     left = 184
     top = 145
@@ -386,5 +384,23 @@ inherited TimetableResourceForm: TTimetableResourceForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
+  end
+  object TbDay: TZTable[10]
+    Connection = SourceDataModule.DbZConnection
+    TableName = 'Day'
+    left = 65
+    top = 213
+  end
+  object TbHour: TZTable[11]
+    Connection = SourceDataModule.DbZConnection
+    TableName = 'Hour'
+    left = 184
+    top = 213
+  end
+  object TbPeriod: TZTable[12]
+    Connection = SourceDataModule.DbZConnection
+    TableName = 'Period'
+    left = 64
+    top = 280
   end
 end
