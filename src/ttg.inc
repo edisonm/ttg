@@ -2,9 +2,6 @@
 {$MODE Delphi}
 {$ENDIF}
 
-{Enable this if the database engine supports SQL}
-{$DEFINE USE_SQL}
-
 {$IFDEF DEBUG}
 {$ASSERTIONS+}
 {$ELSE}

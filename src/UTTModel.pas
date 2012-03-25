@@ -1955,99 +1955,37 @@ end;
 
 procedure TTimetable.SaveToDataModule(IdTimetable: Integer;
   TimeIni, TimeEnd: TDateTime; Summary: TStrings);
-  {$IFDEF USE_SQL}
 var
   SQL: TStrings;
-  {$ENDIF}
   procedure SaveTimetable;
-  {$IFNDEF USE_SQL}
-  var
-    Stream: TStream;
-  {$ENDIF}
   begin
-    {$IFDEF USE_SQL}
     SQL.Add(Format('INSERT INTO Timetable(IdTimetable,TimeIni,TimeEnd,Summary) ' +
       'VALUES (%d,"%s","%s","%s");', [
       IdTimetable,
       DateTimeToAnsiSQLDate(TimeIni),
       DateTimeToAnsiSQLDate(TimeEnd),
       Summary.Text]));
-    {$ELSE}
-    with SourceDataModule, TbTimetable do
-    begin
-      DisableControls;
-      try
-        IndexFieldNames := 'IdTimetable';
-        Append;
-        TbTimetable.FindField('IdTimetable').AsInteger := IdTimetable;
-        TbTimetable.FindField('TimeIni').AsDateTime := TimeIni;
-        TbTimetable.FindField('TimeEnd').AsDateTime := TimeEnd;
-        Stream := TMemoryStream.Create;
-        try
-          Summary.SaveToStream(Stream);
-          Stream.Position := 0;
-          TBlobField(TbTimetable.FindField('Summary')).LoadFromStream(Stream);
-        finally
-          Stream.Free;
-        end;
-        Post;
-      finally
-        EnableControls;
-      end;
-    end;
-    {$ENDIF}
   end;
   procedure SaveTimetableDetail;
   var
     Activity, Period1, Period2, Period, IdActivity, Session: Integer;
-    {$IFNDEF USE_SQL}
-    FieldTimetable, FieldActivity, FieldDay, FieldHour, FieldSession: TField;
-    {$ENDIF}
   begin
-    {$IFNDEF USE_SQL}
-    with SourceDataModule.TbTimetableDetail do
-    begin
-      DisableControls;
-      try
-        Last;
-        FieldTimetable := FindField('IdTimetable');
-        FieldActivity := FindField('IdActivity');
-        FieldDay := FindField('IdDay');
-        FieldHour := FindField('IdHour');
-        FieldSession := FindField('Session');
-    {$ENDIF}
-        with TTimetableModel(Model) do
-        for Session := 0 to FSessionCount - 1 do
+    with TTimetableModel(Model) do
+      for Session := 0 to FSessionCount - 1 do
+      begin
+        Activity := FSessionToActivity[Session];
+        IdActivity := FActivityToIdActivity[Activity];
+        Period1 := FTTSessionToPeriod[Session];
+        Period2 := Period1 + FSessionToDuration[Session] - 1;
+        for Period := Period1 to Period2 do
         begin
-          Activity := FSessionToActivity[Session];
-          IdActivity := FActivityToIdActivity[Activity];
-          Period1 := FTTSessionToPeriod[Session];
-          Period2 := Period1 + FSessionToDuration[Session] - 1;
-          for Period := Period1 to Period2 do
-          begin
-            {$IFDEF USE_SQL}
-            SQL.Add(Format(
-                      'INSERT INTO TimetableDetail' +
-                        '(IdTimetable,IdActivity,IdDay,IdHour,Session) VALUES (%d,%d,%d,%d,%d);',
-                      [IdTimetable, IdActivity, FDayToIdDay[FPeriodToDay[Period]],
-                       FHourToIdHour[FPeriodToHour[Period]], Session]));
-            {$ELSE}
-            Append;
-            FieldTimetable.AsInteger := IdTimetable;
-            FieldActivity.AsInteger := IdActivity;
-            FieldDay.AsInteger := FDayAIdDay[FPeriodADay[Period]];
-            FieldHour.AsInteger := FHourAIdHour[FPeriodAHour[Period]];
-            FieldSession.AsInteger := Session;
-            Post;
-            {$ENDIF}
-          end;
+          SQL.Add(Format(
+                    'INSERT INTO TimetableDetail' +
+                      '(IdTimetable,IdActivity,IdDay,IdHour,Session) VALUES (%d,%d,%d,%d,%d);',
+                    [IdTimetable, IdActivity, FDayToIdDay[FPeriodToDay[Period]],
+                     FHourToIdHour[FPeriodToHour[Period]], Session]));
         end;
-    {$IFNDEF USE_SQL}
-      finally
-        EnableControls;
       end;
-    end;
-    {$ENDIF}
   end;
   procedure SaveTimetableResource;
   var
@@ -2085,27 +2023,17 @@ var
     end;
   end;
 begin
-  {$IFDEF USE_SQL}
   SQL := TStringList.Create;
-  {$ELSE}
-  SourceDataModule.CheckRelations := False;
-  {$ENDIF}
   try
     SaveTimetable;
     SaveTimetableDetail;
     SaveTimetableResource;
-    {$IFDEF USE_SQL}
     with SourceDataModule do
     begin
       DbZConnection.ExecuteDirect(SQL.Text);
     end;
-    {$ENDIF}
   finally
-    {$IFDEF USE_SQL}
     SQL.Free;
-    {$ELSE}
-    SourceDataModule.CheckRelations := True;
-    {$ENDIF};
   end;
 end;
 

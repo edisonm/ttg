@@ -692,6 +692,14 @@ msgstr ""
 msgid "Resource Types|Resource Types"
 msgstr ""
 
+#: tmainform.actrestrictiontype.caption
+msgid "ActRestrictionType"
+msgstr ""
+
+#: tmainform.actrestrictiontype.hint
+msgid "Restriction Types|Restriction Types"
+msgstr ""
+
 #: tmainform.actsave.caption
 msgid "Save..."
 msgstr ""

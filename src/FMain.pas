@@ -24,6 +24,7 @@ type
 
   TMainForm = class(TForm)
     ActDBExplorer: TAction;
+    ActRestrictionType: TAction;
     ActLangDefault: TAction;
     ActLangEnglish: TAction;
     ActLangSpanish: TAction;
@@ -57,6 +58,7 @@ type
     OpenDialog: TOpenDialog;
     MIPeriod: TMenuItem;
     TBNew: TToolButton;
+    TBtRestrictionType: TToolButton;
     TBSave: TToolButton;
     TBOpen: TToolButton;
     TBtDay: TToolButton;
@@ -102,6 +104,7 @@ type
     procedure ActLangEnglishExecute(Sender: TObject);
     procedure ActLangSpanishExecute(Sender: TObject);
     procedure ActResourceExecute(Sender: TObject);
+    procedure ActRestrictionTypeExecute(Sender: TObject);
     procedure ActThemeExecute(Sender: TObject);
     procedure ActResourceTypeExecute(Sender: TObject);
     procedure ActDayExecute(Sender: TObject);
@@ -125,6 +128,7 @@ type
     FConfigStorage: TConfigStorage;
     FDayForm,
     FResourceTypeForm,
+    FRestrictionTypeForm,
     FHourForm,
     FDBExplorerForm,
     FPeriodForm: TCrossManyToManyEditor0Form;
@@ -208,6 +212,12 @@ end;
 procedure TMainForm.ActResourceExecute(Sender: TObject);
 begin
   TResourceForm.ToggleEditor(Self, ResourceForm, ConfigStorage, actResource);
+end;
+
+procedure TMainForm.ActRestrictionTypeExecute(Sender: TObject);
+begin
+  TSingleEditorForm.ToggleSingleEditor(Self, FRestrictionTypeForm, ConfigStorage,
+    ActRestrictionType, 'RestrictionType');
 end;
 
 procedure TMainForm.ActPeriodExecute(Sender: TObject);

@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 477
+  Left = 618
   Height = 371
-  Top = 240
+  Top = 235
   Width = 718
   Caption = 'MainForm'
   ClientHeight = 371
@@ -129,7 +129,7 @@ object MainForm: TMainForm
       ShowHint = True
     end
     object TBTheme: TToolButton
-      Left = 195
+      Left = 218
       Top = 2
       Action = ActTheme
       ParentShowHint = False
@@ -150,14 +150,14 @@ object MainForm: TMainForm
       ShowHint = True
     end
     object TBConfig: TToolButton
-      Left = 218
+      Left = 241
       Top = 2
       Action = ActConfigure
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton3: TToolButton
-      Left = 241
+      Left = 264
       Top = 2
       Width = 10
       Caption = 'ToolButton3'
@@ -167,14 +167,14 @@ object MainForm: TMainForm
       Style = tbsSeparator
     end
     object TBFindBetter: TToolButton
-      Left = 251
+      Left = 274
       Top = 2
       Action = ActMakeTimetable
       ParentShowHint = False
       ShowHint = True
     end
     object ToolButton4: TToolButton
-      Left = 274
+      Left = 297
       Top = 2
       Width = 10
       Caption = 'ToolButton4'
@@ -184,9 +184,16 @@ object MainForm: TMainForm
       Style = tbsSeparator
     end
     object TBTimetable: TToolButton
-      Left = 284
+      Left = 307
       Top = 2
       Action = ActTimetable
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object TBtRestrictionType: TToolButton
+      Left = 195
+      Top = 2
+      Action = ActRestrictionType
       ParentShowHint = False
       ShowHint = True
     end
@@ -1861,6 +1868,14 @@ object MainForm: TMainForm
       Caption = 'Spanish'
       GroupIndex = 1
       OnExecute = ActLangSpanishExecute
+    end
+    object ActRestrictionType: TAction
+      Category = 'Data'
+      AutoCheck = True
+      Caption = 'ActRestrictionType'
+      Hint = 'Restriction Types|Restriction Types'
+      ImageIndex = 21
+      OnExecute = ActRestrictionTypeExecute
     end
   end
   object SaveDialogCSV: TSaveDialog
