@@ -125,7 +125,7 @@ procedure TTimetableForm.ActTimetableResourceExecute(Sender: TObject);
 begin
   inherited;
   TTimetableResourceForm.ToggleEditor(Self, FTimetableResourceForm,
-                                      ConfigStorage, ActTimetableResource);
+                                      ConfigStorage, ActTimetableResource, TbTimetable);
 end;
 
 procedure TTimetableForm.ActClashActivityExecute(Sender: TObject);

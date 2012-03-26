@@ -39,7 +39,7 @@ type
   public
     { Public declarations }
     class function ToggleEditor(AOwner: TComponent;
-                                var AForm: TTimetableResourceForm;
+                                var AForm;
                                 AConfigStorage: TConfigStorage;
                                 AAction: TAction;
                                 ADataSet: TDataSet): Boolean; overload;
@@ -50,17 +50,17 @@ uses
   UTTGBasics, DSourceConsts, URelUtils;
 
 class function TTimetableResourceForm.ToggleEditor(AOwner: TComponent;
-                                                   var AForm: TTimetableResourceForm;
+                                                   var AForm;
                                                    AConfigStorage: TConfigStorage;
                                                    AAction: TAction;
                                                    ADataSet: TDataSet): Boolean;
 begin
   Result := ToggleEditor(AOwner, AForm, AConfigStorage, AAction);
-  if Result then with AForm do
+  if Result then with TTimetableResourceForm(AForm) do
   begin
     DSTimetable.DataSet := ADataSet;
-    CBShowResource.OnChange := CBShowResourceChange;
     DSResource.OnDataChange := DSResourceDataChange;
+    CBShowResource.OnChange := CBShowResourceChange;
     DSTimetableDataChange(nil, nil);
     CBShowResourceChange(nil);
   end;
@@ -119,6 +119,7 @@ begin
   QuTimetableResource.ParamByName('IdTimetable').AsInteger
     := DSTimetable.DataSet.FindField('IdTimetable').AsInteger;
   QuTimetableResource.Refresh;
+  CBShowResourceChange(Sender);
 end;
 
 procedure TTimetableResourceForm.QuTimetableResourceCalcFields(DataSet: TDataSet);

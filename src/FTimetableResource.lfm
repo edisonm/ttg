@@ -1,7 +1,7 @@
 inherited TimetableResourceForm: TTimetableResourceForm
-  Left = 618
+  Left = 974
   Height = 462
-  Top = 224
+  Top = 455
   Width = 797
   ActiveControl = DBNavigator
   ClientHeight = 462
