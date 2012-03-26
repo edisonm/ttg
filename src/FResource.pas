@@ -108,10 +108,7 @@ end;
 
 procedure TResourceForm.FormActivate(Sender: TObject);
 begin
-  with SourceDataModule do
-  begin
-    TbResource.Locate('IdResource', (Sender as TCustomForm).Tag, []);
-  end;
+  TbResource.Locate('IdResource', (Sender as TCustomForm).Tag, []);
 end;
 
 procedure TResourceForm.FormCreate(Sender: TObject);

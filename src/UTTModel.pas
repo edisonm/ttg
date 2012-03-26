@@ -1121,32 +1121,29 @@ begin
   inherited Create;
   ZTable := TZTable.Create(nil);
   try
-    with SourceDataModule do
-    begin
-      ZTable.Connection := DbZConnection;
-      SErrors := '';
-      Configure(AClashActivityValue, ABreakTimetableResourceValue,
-        ABrokenSessionValue, ANonScatteredActivityValue);
-      Load('ResourceType', 'IdResourceType', FMinIdResourceType,
-           FIdResourceTypeToResourceType, FResourceTypeToIdResourceType);
-      FResourceTypeCount := Length(FResourceTypeToIdResourceType);
-      Load('Resource', 'IdResource', FMinIdResource, FIdResourceToResource,
-           FResourceToIdResource);
-      FResourceCount := Length(FResourceToIdResource);
-      Load('Theme', 'IdTheme', FMinIdTheme, FIdThemeToTheme, FThemeToIdTheme);
-      FThemeCount := Length(FThemeToIdTheme);
-      Load('Activity', 'IdActivity', FMinIdActivity, FIdActivityToActivity,
-           FActivityToIdActivity);
-      FActivityCount := Length(FActivityToIdActivity);
-      Load('Day', 'IdDay', FMinIdDay, FIdDayToDay, FDayToIdDay);
-      FDayCount := Length(FDayToIdDay);
-      Load('Hour', 'IdHour', FMinIdHour, FIdHourToHour, FHourToIdHour);
-      FHourCount := Length(FHourToIdHour);
-      Load('RestrictionType', 'IdRestrictionType',
-        FMinIdRestrictionType,
-        FIdRestrictionTypeToRestrictionType,
-        FRestrictionTypeToIdRestrictionType);
-    end;
+    ZTable.Connection := SourceDataModule.DbZConnection;
+    SErrors := '';
+    Configure(AClashActivityValue, ABreakTimetableResourceValue,
+              ABrokenSessionValue, ANonScatteredActivityValue);
+    Load('ResourceType', 'IdResourceType', FMinIdResourceType,
+         FIdResourceTypeToResourceType, FResourceTypeToIdResourceType);
+    FResourceTypeCount := Length(FResourceTypeToIdResourceType);
+    Load('Resource', 'IdResource', FMinIdResource, FIdResourceToResource,
+         FResourceToIdResource);
+    FResourceCount := Length(FResourceToIdResource);
+    Load('Theme', 'IdTheme', FMinIdTheme, FIdThemeToTheme, FThemeToIdTheme);
+    FThemeCount := Length(FThemeToIdTheme);
+    Load('Activity', 'IdActivity', FMinIdActivity, FIdActivityToActivity,
+         FActivityToIdActivity);
+    FActivityCount := Length(FActivityToIdActivity);
+    Load('Day', 'IdDay', FMinIdDay, FIdDayToDay, FDayToIdDay);
+    FDayCount := Length(FDayToIdDay);
+    Load('Hour', 'IdHour', FMinIdHour, FIdHourToHour, FHourToIdHour);
+    FHourCount := Length(FHourToIdHour);
+    Load('RestrictionType', 'IdRestrictionType',
+         FMinIdRestrictionType,
+         FIdRestrictionTypeToRestrictionType,
+         FRestrictionTypeToIdRestrictionType);
     FRestrictionTypeCount := Length(FRestrictionTypeToIdRestrictionType);
     LoadPeriod;
     LoadResourceType;
@@ -2029,10 +2026,7 @@ begin
     SaveTimetable;
     SaveTimetableDetail;
     SaveTimetableResource;
-    with SourceDataModule do
-    begin
-      DbZConnection.ExecuteDirect(SQL.Text);
-    end;
+    SourceDataModule.DbZConnection.ExecuteDirect(SQL.Text);
   finally
     SQL.Free;
   end;
