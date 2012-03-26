@@ -1,12 +1,12 @@
 object ProgressForm: TProgressForm
-  Left = 767
-  Height = 353
+  Left = 760
+  Height = 326
   Top = 314
   Width = 465
   ActiveControl = PnProgress
   BorderStyle = bsDialog
   Caption = 'Search progress'
-  ClientHeight = 353
+  ClientHeight = 326
   ClientWidth = 465
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -15,16 +15,16 @@ object ProgressForm: TProgressForm
   LCLVersion = '0.9.31'
   object PnProgress: TPanel
     Left = 8
-    Height = 296
+    Height = 272
     Top = 8
     Width = 448
-    ClientHeight = 296
+    ClientHeight = 272
     ClientWidth = 448
     TabOrder = 0
     object PnTotalValue: TPanel
       Left = 8
       Height = 21
-      Top = 248
+      Top = 224
       Width = 433
       Alignment = taLeftJustify
       BevelOuter = bvLowered
@@ -121,23 +121,23 @@ object ProgressForm: TProgressForm
     object PnBrokenSession: TPanel
       Left = 8
       Height = 21
-      Top = 176
+      Top = 152
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = 'Broken Sessions:'
-      TabOrder = 7
+      TabOrder = 4
     end
     object PnBrokenSessionNumber: TPanel
       Left = 192
       Height = 21
-      Top = 176
+      Top = 152
       Width = 117
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       ClientHeight = 21
       ClientWidth = 117
-      TabOrder = 8
+      TabOrder = 5
       object LbBrokenSession: TLabel
         Left = 104
         Height = 19
@@ -158,13 +158,13 @@ object ProgressForm: TProgressForm
     object PnBrokenSessionValue: TPanel
       Left = 312
       Height = 21
-      Top = 176
+      Top = 152
       Width = 129
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       ClientHeight = 21
       ClientWidth = 129
-      TabOrder = 9
+      TabOrder = 6
       object LbBrokenSessionValue: TLabel
         Left = 116
         Height = 19
@@ -192,7 +192,7 @@ object ProgressForm: TProgressForm
       Caption = 'Started at:'
       ClientHeight = 21
       ClientWidth = 215
-      TabOrder = 10
+      TabOrder = 7
       object LbInit: TLabel
         Left = 213
         Height = 19
@@ -219,7 +219,7 @@ object ProgressForm: TProgressForm
       Caption = 'Elapsed Time:'
       ClientHeight = 21
       ClientWidth = 215
-      TabOrder = 11
+      TabOrder = 8
       object LbElapsedTime: TLabel
         Left = 202
         Height = 19
@@ -247,7 +247,7 @@ object ProgressForm: TProgressForm
       Caption = 'Remaining time:'
       ClientHeight = 21
       ClientWidth = 215
-      TabOrder = 12
+      TabOrder = 9
       object LbRemainingTime: TLabel
         Left = 202
         Height = 19
@@ -277,7 +277,7 @@ object ProgressForm: TProgressForm
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 13
+      TabOrder = 10
     end
     object PnNumber: TPanel
       Left = 192
@@ -291,7 +291,7 @@ object ProgressForm: TProgressForm
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 14
+      TabOrder = 11
     end
     object PnValue: TPanel
       Left = 312
@@ -305,28 +305,28 @@ object ProgressForm: TProgressForm
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 15
+      TabOrder = 12
     end
     object PnRestriction: TPanel
       Left = 8
       Height = 21
-      Top = 224
+      Top = 200
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = 'Resource Restrictions:'
-      TabOrder = 16
+      TabOrder = 13
     end
     object PnRestrictionNumber: TPanel
       Left = 192
       Height = 21
-      Top = 224
+      Top = 200
       Width = 117
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       ClientHeight = 21
       ClientWidth = 117
-      TabOrder = 17
+      TabOrder = 14
       object LbRestriction: TLabel
         Left = 104
         Height = 19
@@ -347,13 +347,13 @@ object ProgressForm: TProgressForm
     object PnRestrictionValue: TPanel
       Left = 312
       Height = 21
-      Top = 224
+      Top = 200
       Width = 129
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       ClientHeight = 21
       ClientWidth = 129
-      TabOrder = 18
+      TabOrder = 15
       object LbRestrictionValue: TLabel
         Left = 116
         Height = 19
@@ -374,23 +374,23 @@ object ProgressForm: TProgressForm
     object PnNonScatteredActivity: TPanel
       Left = 8
       Height = 21
-      Top = 200
+      Top = 176
       Width = 181
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = 'Non Scattered Activities:'
-      TabOrder = 19
+      TabOrder = 16
     end
     object PnNonScatteredActivityCount: TPanel
       Left = 192
       Height = 21
-      Top = 200
+      Top = 176
       Width = 117
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       ClientHeight = 21
       ClientWidth = 117
-      TabOrder = 20
+      TabOrder = 17
       object LbNonScatteredActivityCount: TLabel
         Left = 104
         Height = 19
@@ -411,13 +411,13 @@ object ProgressForm: TProgressForm
     object PnNonScatteredActivityValue: TPanel
       Left = 312
       Height = 21
-      Top = 200
+      Top = 176
       Width = 129
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       ClientHeight = 21
       ClientWidth = 129
-      TabOrder = 21
+      TabOrder = 18
       object LbNonScatteredActivityValue: TLabel
         Left = 116
         Height = 19
@@ -443,7 +443,7 @@ object ProgressForm: TProgressForm
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = 'Break TT. Resources:'
-      TabOrder = 22
+      TabOrder = 19
     end
     object PnBreakTimetableResourceCount: TPanel
       Left = 192
@@ -454,7 +454,7 @@ object ProgressForm: TProgressForm
       BevelOuter = bvLowered
       ClientHeight = 21
       ClientWidth = 117
-      TabOrder = 23
+      TabOrder = 20
       object LbBreakTimetableResourceCount: TLabel
         Left = 104
         Height = 19
@@ -481,7 +481,7 @@ object ProgressForm: TProgressForm
       BevelOuter = bvLowered
       ClientHeight = 21
       ClientWidth = 129
-      TabOrder = 24
+      TabOrder = 21
       object LbBreakTimetableResourceValue: TLabel
         Left = 116
         Height = 19
@@ -509,7 +509,7 @@ object ProgressForm: TProgressForm
       Caption = ' Iteration:'
       ClientHeight = 21
       ClientWidth = 215
-      TabOrder = 25
+      TabOrder = 23
       object LbPosition: TLabel
         Left = 201
         Height = 19
@@ -531,24 +531,24 @@ object ProgressForm: TProgressForm
     object PnPollination: TPanel
       Left = 8
       Height = 21
-      Top = 272
+      Top = 248
       Width = 85
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = 'Pollination:'
-      TabOrder = 26
+      TabOrder = 25
     end
     object PnImports: TPanel
       Left = 96
       Height = 21
-      Top = 272
+      Top = 248
       Width = 127
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Imports:'
       ClientHeight = 21
       ClientWidth = 127
-      TabOrder = 28
+      TabOrder = 27
       object LbImports: TLabel
         Left = 114
         Height = 19
@@ -569,14 +569,14 @@ object ProgressForm: TProgressForm
     object PnExports: TPanel
       Left = 226
       Height = 21
-      Top = 272
+      Top = 248
       Width = 107
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Exports:'
       ClientHeight = 21
       ClientWidth = 107
-      TabOrder = 30
+      TabOrder = 22
       object LbExports: TLabel
         Left = 94
         Height = 19
@@ -597,14 +597,14 @@ object ProgressForm: TProgressForm
     object PnCrashes: TPanel
       Left = 336
       Height = 21
-      Top = 272
+      Top = 248
       Width = 105
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = ' Crashes:'
       ClientHeight = 21
       ClientWidth = 105
-      TabOrder = 32
+      TabOrder = 24
       object LbColision: TLabel
         Left = 92
         Height = 19
@@ -630,7 +630,7 @@ object ProgressForm: TProgressForm
       Alignment = taLeftJustify
       BevelOuter = bvLowered
       Caption = 'Clash of Activities:'
-      TabOrder = 27
+      TabOrder = 26
     end
     object PnClashActivityNumber: TPanel
       Left = 192
@@ -668,7 +668,7 @@ object ProgressForm: TProgressForm
       BevelOuter = bvLowered
       ClientHeight = 21
       ClientWidth = 129
-      TabOrder = 31
+      TabOrder = 28
       object LbClashActivityValue: TLabel
         Left = 116
         Height = 19
@@ -688,9 +688,9 @@ object ProgressForm: TProgressForm
     end
   end
   object BBClose: TBitBtn
-    Left = 248
-    Height = 32
-    Top = 312
+    Left = 256
+    Height = 28
+    Top = 288
     Width = 96
     Caption = 'Ok'
     Default = True
@@ -738,10 +738,10 @@ object ProgressForm: TProgressForm
     TabOrder = 1
   end
   object BBCancel: TBitBtn
-    Left = 349
-    Height = 32
-    Top = 312
-    Width = 107
+    Left = 360
+    Height = 28
+    Top = 288
+    Width = 96
     Cancel = True
     Caption = 'Cancel'
     Font.Height = -11
@@ -790,8 +790,8 @@ object ProgressForm: TProgressForm
   object PBProgress: TProgressBar
     Left = 8
     Height = 28
-    Top = 316
-    Width = 232
+    Top = 288
+    Width = 240
     ParentShowHint = False
     ShowHint = True
     TabOrder = 3

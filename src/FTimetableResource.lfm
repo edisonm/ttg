@@ -1,17 +1,18 @@
 inherited TimetableResourceForm: TTimetableResourceForm
-  Left = 785
+  Left = 632
   Height = 462
-  Top = 324
-  Width = 804
+  Top = 224
+  Width = 797
   ActiveControl = DBNavigator
   ClientHeight = 462
-  ClientWidth = 804
+  ClientWidth = 797
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  Visible = True
   inherited TBEditor: TToolBar
-    Width = 804
+    Width = 797
     inherited BtOk: TToolButton
       Enabled = False
       OnClick = BtOkClick
@@ -60,17 +61,17 @@ inherited TimetableResourceForm: TTimetableResourceForm
   end
   inherited PnStatus: TPanel
     Top = 443
-    Width = 804
+    Width = 797
   end
   inherited PnEditor: TPanel
     Left = 272
     Height = 418
-    Width = 532
+    Width = 525
   end
   inherited DrawGrid: TDrawGrid
     Left = 272
     Height = 418
-    Width = 532
+    Width = 525
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goColSizing]
     OnDrawCell = DrawGridDrawCell
     OnGetEditText = DrawGridGetEditText
@@ -296,7 +297,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
   end
   object QuTimetableResource: TZQuery[7]
     Connection = SourceDataModule.DbZConnection
-    AutoCalcFields = False
+    SortedFields = 'IdTimetable;IdResource'
     OnCalcFields = QuTimetableResourceCalcFields
     SQL.Strings = (
       'SELECT'
@@ -331,6 +332,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
     DataSource = DSResource
     MasterFields = 'IdTimetable;IdResource'
     LinkedFields = 'IdTimetable;IdResource'
+    IndexFieldNames = 'IdTimetable Asc;IdResource Asc'
     left = 64
     top = 88
     ParamData = <    
@@ -353,7 +355,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
   end
   object QuResource: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
-    AutoCalcFields = False
+    SortedFields = 'IdTimetable'
     OnCalcFields = QuTimetableResourceCalcFields
     SQL.Strings = (
       'SELECT'
@@ -374,8 +376,10 @@ inherited TimetableResourceForm: TTimetableResourceForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
+    DataSource = TimetableForm.DataSource
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
+    IndexFieldNames = 'IdTimetable Asc'
     left = 184
     top = 145
     ParamData = <    
@@ -388,19 +392,19 @@ inherited TimetableResourceForm: TTimetableResourceForm
   object TbDay: TZTable[10]
     Connection = SourceDataModule.DbZConnection
     TableName = 'Day'
-    left = 65
-    top = 213
+    left = 64
+    top = 200
   end
   object TbHour: TZTable[11]
     Connection = SourceDataModule.DbZConnection
     TableName = 'Hour'
     left = 184
-    top = 213
+    top = 200
   end
   object TbPeriod: TZTable[12]
     Connection = SourceDataModule.DbZConnection
     TableName = 'Period'
     left = 64
-    top = 280
+    top = 256
   end
 end

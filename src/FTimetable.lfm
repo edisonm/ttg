@@ -1,7 +1,7 @@
 inherited TimetableForm: TTimetableForm
-  Left = 669
+  Left = 656
   Height = 545
-  Top = 209
+  Top = 238
   Width = 913
   Caption = 'TimetableForm'
   ClientHeight = 545
@@ -456,12 +456,12 @@ inherited TimetableForm: TTimetableForm
     DataSet = TbTimetable
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
-    left = 112
-    top = 232
+    left = 312
+    top = 224
   end
   inherited ActionList: TActionList
     left = 312
-    top = 56
+    top = 448
     inherited ActFind: TAction
       OnExecute = ActFindExecute
     end
@@ -634,6 +634,7 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
+    DataSource = DataSource
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
     left = 112
@@ -673,11 +674,12 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
+    DataSource = DataSource
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
     IndexFieldNames = 'IdTimetable Asc;NaTheme Asc'
     left = 312
-    top = 112
+    top = 56
     ParamData = <    
       item
         DataType = ftUnknown
@@ -725,7 +727,7 @@ inherited TimetableForm: TTimetableForm
     LinkedFields = 'IdTimetable;IdActivity'
     IndexFieldNames = 'IdTimetable Asc;IdActivity Asc;IdDay Asc;IdHour Asc'
     left = 312
-    top = 224
+    top = 168
     ParamData = <    
       item
         DataType = ftUnknown
@@ -782,6 +784,7 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
+    DataSource = DataSource
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
     left = 112
@@ -825,6 +828,7 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
+    DataSource = DataSource
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
     IndexFieldNames = 'IdTimetable Asc;IdDay Asc;IdHour Asc'
@@ -873,6 +877,7 @@ inherited TimetableForm: TTimetableForm
         Name = 'IdTimetable'
         ParamType = ptUnknown
       end>
+    DataSource = DataSource
     MasterFields = 'IdTimetable'
     LinkedFields = 'IdTimetable'
     IndexFieldNames = 'IdTimetable Asc'
@@ -970,7 +975,7 @@ inherited TimetableForm: TTimetableForm
   object DSClashActivity: TDatasource[16]
     DataSet = QuClashActivity
     left = 312
-    top = 168
+    top = 112
   end
   object TbTimetable: TZTable[17]
     Tag = 12
@@ -980,6 +985,6 @@ inherited TimetableForm: TTimetableForm
     TableName = 'Timetable'
     IndexFieldNames = 'IdTimetable Asc'
     left = 112
-    top = 456
+    top = 224
   end
 end
