@@ -46,7 +46,7 @@ binary-arch: install
 	dh_install -a
 	dh_installdocs -a debian/copyright
 	dh_installchangelogs -a
-	dh_strip -a
+#	dh_strip -a
 	dh_compress -a
 	dh_fixperms -a
 	dh_installdeb -a

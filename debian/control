@@ -10,7 +10,7 @@ Homepage: http://edisonm.dyndns.org/blog/
 
 Package: ttg
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, zeosdbo-src (>= 1073)
+Depends: ${shlibs:Depends}, ${misc:Depends}, zeosdbo-dev (>= 7.0.0.1073-1), multithreadprocs-dev (>=1.2.1.2349-1)
 Description: Automatic Timetable Generator
  This program  provides an automatic timetable generator,  that can be
  used in  Schools, Universities,  or Institutions where  several tasks
