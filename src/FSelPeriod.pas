@@ -30,10 +30,6 @@ type
 
 implementation
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 { TSelPeriodForm }
 
 class function TSelPeriodForm.SeleccionarPeriod(out AIdDay, AIdHour: Integer): Boolean;
@@ -58,9 +54,6 @@ end;
 
 initialization
 
-{$IFDEF FPC}
-  {$I FSelPeriod.lrs}
-{$ENDIF}
+{$I FSelPeriod.lrs}
 
 end.
-

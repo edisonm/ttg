@@ -76,9 +76,6 @@ implementation
 
 uses
   DSource, UTTGConsts;
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
 
 { TFCrMMEditorR }
 
@@ -290,13 +287,8 @@ begin
       begin
         if Sel[VCol - 1, VRow - 1] then
           FRel[VCol - 1, VRow - 1] := ListBox.ItemIndex;
-{$IFDEF FPC}
 	InvalidateCell(VCol, VRow);
-{$ENDIF}
       end;
-{$IFNDEF FPC}
-    Invalidate;
-{$ENDIF}
   end;
 end;
 
@@ -335,13 +327,8 @@ begin
       for VRow := Selection.Top to Selection.Bottom do
       begin
         FRel[VCol - 1, VRow - 1] := -1;
-{$IFDEF FPC}
 	InvalidateCell(VCol, VRow);
-{$ENDIF}
       end;
-{$IFNDEF FPC}
-    Invalidate;
-{$ENDIF}
     ListBox.ItemIndex := -1;
   end;
 end;
@@ -373,8 +360,6 @@ end;
 
 initialization
 
-{$IFDEF FPC}
-  {$i FCrossManytoManyEditorR.lrs}
-{$ENDIF}
+{$i FCrossManytoManyEditorR.lrs}
 
 end.

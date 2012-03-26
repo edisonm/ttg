@@ -33,10 +33,6 @@ implementation
 uses
   UAbout, UTTGConsts;
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 procedure TSplashForm.Image1Click(Sender: TObject);
 begin
   ModalResult := mrOk;
@@ -77,8 +73,6 @@ end;
 
 initialization
 
-{$IFDEF FPC}
-  {$i FSplash.lrs}
-{$ENDIF}
+{$i FSplash.lrs}
 
 end.

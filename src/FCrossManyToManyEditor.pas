@@ -115,10 +115,6 @@ implementation
 uses
   DSource, UTTGConsts;
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 procedure TCrossManyToManyEditorForm.LoadHints(AColDataSet, ARowDataSet,
   ARelDataSet: TDataSet);
 begin
@@ -178,14 +174,10 @@ begin
     FRowFieldName := ARowDataSet.FindField(ARowFieldName);
     FRowField := ARelDataSet.FindField(ARowField);
     ReadData;
-{$IFDEF FPC}
     DrawGrid.OnPrepareCanvas := DrawGridPrepareCanvas;
-{$ENDIF}
     DrawGrid.OnDrawCell := DrawGridDrawCell;
     DrawGrid.OnSelectCell := DrawGridSelectCell;
     InvalidateData;
-    {if not Visible then
-      ShowModal;}
   finally
     FColDataSet.EnableControls;
     FRowDataSet.EnableControls;
@@ -339,9 +331,6 @@ procedure TCrossManyToManyEditorForm.DrawGridDrawCell(Sender: TObject; aCol,
     end;
   end;
 begin
-{ $IFNDEF FPC}
-  DrawGridPrepareCanvas(Sender, aCol, aRow, aState);
-{ $ENDIF}
   TDrawGrid(Sender).Canvas.TextRect(aRect, aRect.Left+2, aRect.Top+2, GetValue);
 end;
 
@@ -378,13 +367,6 @@ end;
 procedure TCrossManyToManyEditorForm.DrawGridSelectCell(Sender: TObject; ACol,
   ARow: Integer; var CanSelect: Boolean);
 begin
-{$IFDEF FPC}
-  {with (Sender as TDrawGrid) do
-  begin
-    if ACol <> Col then InvalidateCell(Col, 0);
-    if ARow <> Row then InvalidateCell(0, Row);
-  end;}
-{$ENDIF}
   if Assigned(FSelDataSet) then
     CanSelect := FSel[ACol - 1, ARow - 1];
 end;
@@ -442,9 +424,7 @@ begin
 end;
 
 initialization
-{$IFDEF FPC}
-  {$i FCrossManyToManyEditor.lrs}
-{$ENDIF}
+
+{$i FCrossManyToManyEditor.lrs}
 
 end.
-

@@ -63,10 +63,6 @@ type
 
 implementation
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 class function TEditorForm.ToggleEditor(AOwner: TComponent; var AForm;
                                         AConfigStorage: TConfigStorage;
                                         AAction: TAction): Boolean;
@@ -194,8 +190,6 @@ end;
 
 initialization
 
-{$IFDEF FPC}
-  {$i FEditor.lrs}
-{$ENDIF}
+{$i FEditor.lrs}
 
 end.

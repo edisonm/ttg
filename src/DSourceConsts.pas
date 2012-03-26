@@ -1,9 +1,7 @@
 { -*- mode: Delphi -*- }
 unit DSourceConsts;
 
-{$IFDEF FPC}
-{$MODE Delphi}
-{$ENDIF}
+{$I ttg.inc}
 
 interface
 
@@ -85,4 +83,3 @@ resourcestring
 implementation
 
 end.
-

@@ -48,10 +48,6 @@ var
 
 implementation
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 class function TMasterDetailEditorForm.ToggleMasterDetailEditor(AOwner: TComponent;
                                                                 var AForm;
                                                                 AConfigStorage: TConfigStorage;
@@ -122,8 +118,7 @@ begin
 end;
 
 initialization
-{$IFDEF FPC}
-  {$i FMasterDetailEditor.lrs}
-{$ENDIF}
+
+{$i FMasterDetailEditor.lrs}
 
 end.

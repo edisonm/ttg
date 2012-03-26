@@ -120,10 +120,6 @@ function ShowConfigForm(AHelpContext: THelpContext): Integer;
 
 implementation
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 function ShowConfigForm(AHelpContext: THelpContext): Integer;
 var
    ConfigForm: TConfigForm;
@@ -352,9 +348,8 @@ begin
 end;
 
 initialization
-{$IFDEF FPC}
-  {$i FConfig.lrs}
-{$ENDIF}
+  
+{$i FConfig.lrs}
 
 end.
 

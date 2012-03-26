@@ -48,10 +48,6 @@ implementation
 uses
   URelUtils, DMaster, FCrossManyToManyEditor, FConfig, UTTGConsts, DSourceConsts;
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 procedure TResourceForm.ActRestrictionExecute(Sender: TObject);
 var
   TbDay, TbHour, TbPeriod: TDataSet;
@@ -140,8 +136,6 @@ end;
 
 initialization
 
-{$IFDEF FPC}
 {$i FResource.lrs}
-{$ENDIF}
 
 end.

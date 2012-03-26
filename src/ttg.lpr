@@ -1,12 +1,7 @@
 program ttg;
-{$IFNDEF FPC}
-{$IMAGEBASE $00400000}
-{$ENDIF}
 uses
-{$IFDEF UNIX}
   CThreads,
   CMem,
-{$ENDIF}
   Forms,
   Dialogs, Interfaces,
   SysUtils,
@@ -17,10 +12,6 @@ uses
   DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   UAbout,
   UTTGi18n, zcomponent;
-
-{$IFNDEF FPC}
-{$R *.res}
-{$ENDIF}
 
 {$IFDEF WINDOWS}{$R ttg.rc}{$ENDIF}
 

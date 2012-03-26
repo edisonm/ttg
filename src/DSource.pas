@@ -64,10 +64,6 @@ var
 
 implementation
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 uses
   Variants, FConfig, UTTGDBUtils, URelUtils, UTTGConsts;
 
@@ -472,8 +468,7 @@ begin
 end;
 
 initialization
-{$IFDEF FPC}
-  {$i DSource.lrs}
-{$ENDIF}
+
+{$i DSource.lrs}
 
 end.

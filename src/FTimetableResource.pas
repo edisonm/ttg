@@ -42,10 +42,6 @@ implementation
 uses
   UTTGBasics, DSourceConsts, URelUtils;
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 procedure TTimetableResourceForm.FormCreate(Sender: TObject);
 var
   Field: TField;
@@ -114,8 +110,7 @@ begin
 end;
 
 initialization
-{$IFDEF FPC}
-  {$i FTimetableResource.lrs}
-{$ENDIF}
+
+{$i FTimetableResource.lrs}
 
 end.

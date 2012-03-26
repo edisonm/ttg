@@ -1,6 +1,4 @@
-{$IFDEF FPC}
 {$MODE Delphi}
-{$ENDIF}
 
 {$IFDEF DEBUG}
 {$ASSERTIONS+}

@@ -83,10 +83,6 @@ implementation
 uses
   Variants, UMakeTT, UTTGConsts, DSourceConsts;
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 procedure TTimetableForm.ActClashResourceExecute(Sender: TObject);
 begin
   inherited;

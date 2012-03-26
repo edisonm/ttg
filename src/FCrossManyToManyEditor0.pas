@@ -63,10 +63,6 @@ implementation
 uses
   UTTGConsts;
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 { TFCrMMEditor0 }
 
 function TCrossManyToManyEditor0Form.GetColorHighLight(ACol, ARow: Integer): TColor;
@@ -212,9 +208,7 @@ begin
       for VRow := Selection.Top to Selection.Bottom do
       begin
         FRel[VCol - 1, VRow - 1] := False;
-{$IFDEF FPC}
 	InvalidateCell(VCol, VRow);
-{$ENDIF}
       end;
     ListBox.ItemIndex := -1;
   end;
@@ -233,9 +227,7 @@ begin
       for VRow := Selection.Top to Selection.Bottom do
       begin
         FRel[VCol - 1, VRow - 1] := LstSelection[ListBox.ItemIndex];
-{$IFDEF FPC}
 	InvalidateCell(VCol, VRow);
-{$ENDIF}
       end;
   end;
 end;
@@ -249,8 +241,7 @@ begin
 end;
 
 initialization
-{$IFDEF FPC}
-  {$i FCrossManyToManyEditor0.lrs}
-{$ENDIF}
+
+{$i FCrossManyToManyEditor0.lrs}
 
 end.

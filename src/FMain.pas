@@ -174,10 +174,6 @@ uses
   FTimetable, FMasterDetailEditor, FConfig, Printers, DSource, UTTGBasics,
   UTTGi18n, UTTGConsts, FDBExplorer;
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 procedure TMainForm.ActExitExecute(Sender: TObject);
 begin
   Close;
@@ -228,9 +224,7 @@ begin
     ConfigStorage, ActPeriod) then
   with SourceDataModule do
   begin
-    {$IFDEF FPC}
     FPeriodForm.DrawGrid.OnPrepareCanvas := FPeriodForm.DrawGridPrepareCanvas;
-    {$ENDIF}
     TbDay := SourceDataModule.NewTable('Day', FPeriodForm);
     TbHour := SourceDataModule.NewTable('Hour', FPeriodForm);
     TbPeriod := SourceDataModule.NewTable('Period', FPeriodForm);
@@ -639,8 +633,6 @@ end;
 
 initialization
 
-{$IFDEF FPC}
-  {$i FMain.lrs}
-{$ENDIF}
+{$i FMain.lrs}
 
 end.

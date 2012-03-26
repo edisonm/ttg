@@ -74,10 +74,6 @@ uses
   DMaster, FConfig, DSource, FEditor, URelUtils, UTTGDBUtils, DSourceConsts,
     UTTGConsts;
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 procedure TThemeForm.DataSourceStateChange(Sender: TObject);
 begin
   inherited;
@@ -266,8 +262,6 @@ end;
 
 initialization
 
-{$IFDEF FPC}
-  {$i FTheme.lrs}
-{$ENDIF}
+{$i FTheme.lrs}
 
 end.

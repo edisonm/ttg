@@ -54,10 +54,6 @@ var
 
 implementation
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 { TFCrMMEditor1 }
 
 function TCrossManyToManyEditor1Form.GetColorHighLight(i, j: Integer): TColor;
@@ -194,8 +190,7 @@ begin
 end;
 
 initialization
-{$IFDEF FPC}
-  {$i FCrossManyToManyEditor1.lrs}
-{$ENDIF}
+
+{$i FCrossManyToManyEditor1.lrs}
 
 end.

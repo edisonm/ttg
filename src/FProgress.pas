@@ -118,10 +118,6 @@ implementation
 uses
   FMain, DMaster, DSource, UTTGBasics;
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 { TFProgress }
 
 function TProgressForm.GetProgressMax: Integer;
@@ -270,8 +266,7 @@ begin
 end;
 
 initialization
-{$IFDEF FPC}
-  {$i FProgress.lrs}
-{$ENDIF}
+
+{$i FProgress.lrs}
 
 end.
