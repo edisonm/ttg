@@ -59,8 +59,7 @@ tgz:
 	mkdir -p $(PKGDIR)/$(TGZSRC)/images
 	cp  $(TTGDIR)/images/ttg-icon.png $(PKGDIR)/$(TGZSRC)/images
 	mkdir -p $(PKGDIR)/$(TGZSRC)/src/dbcshared
-	cp $(DBCONVERTDIR)/auxiliary/URelUtils.pas $(PKGDIR)/$(TGZSRC)/src/dbcshared/
-	sed -e s:'../../DBConvert/auxiliary':'dbcshared':g -e s:'../../multithreadprocs':'/usr/share/multithreadprocs/src':g $(TTGSRC)/ttg.lpi \
+	sed -e s:'../../multithreadprocs':'/usr/share/multithreadprocs/src':g $(TTGSRC)/ttg.lpi \
 	  -e s:'../../zeosdbo/':'/usr/share/zeosdbo/':g > $(PKGDIR)/$(TGZSRC)/src/ttg.lpi
 	cd $(PKGDIR) ; tar -c --owner=0 --group=0 --exclude-backups $(TGZSRC)/* | gzip  --best -c > $(TGZBASE).orig.tar.gz
 
@@ -85,4 +84,4 @@ winsetup:
 
 ci:
 	$(MAKE) buildnr
-	svn ci
+	svn ci -m MSG="$(MSG)"
