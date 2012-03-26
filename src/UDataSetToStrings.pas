@@ -15,6 +15,7 @@ function ScapedToString(const AString: string): string; overload;
 function ScapedToString(const AString: string; var i: Integer): string; overload;
 procedure SaveDataSetToStrings(ADataSet:TDataSet; AStrings: TStrings);
 procedure SaveDataSetToStrings0(ADataSet:TDataSet; AStrings: TSTrings);
+procedure SaveDataSetToCSVFile(ADataSet: TDataSet; const AFileName: TFileName);
 
 implementation
 
@@ -151,6 +152,19 @@ procedure SaveDataSetToStrings(ADataSet:TDataSet; AStrings: TStrings);
 begin
   AStrings.Add(IntToStr(ADataSet.RecordCount));
   SaveDataSetToStrings0(ADataSet, AStrings);
+end;
+
+procedure SaveDataSetToCSVFile(ADataSet: TDataSet; const AFileName: TFileName);
+var
+  AStrings: TStrings;
+begin
+  AStrings := TStringList.Create;
+  try
+    SaveDataSetToStrings0(ADataSet, AStrings);
+    AStrings.SaveToFile(AFileName);
+  finally
+    AStrings.Free;
+  end;
 end;
 
 end.

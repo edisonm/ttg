@@ -46,7 +46,7 @@ type
 implementation
 
 uses
-  URelUtils;
+  UDataSetToStrings;
 
 constructor TConfigStorage.Create(AOwner: TComponent);
 begin

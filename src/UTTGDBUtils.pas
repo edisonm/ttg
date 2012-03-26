@@ -19,6 +19,8 @@ procedure SearchInField(AField: TField; AValue: Variant);
 procedure SearchInDBGrid(DBGrid: TDBGrid);
 procedure PrepareDataSetFields(ADataSet: TDataSet);
 procedure HideAutoIncFields(ADataSet: TDataSet);
+procedure NewLookupField(ADataSet, ALookupDataSet: TDataSet;
+                         const AKeyFields, AFieldName: string);
 
 implementation
 
@@ -248,6 +250,36 @@ begin
     for j := 0 to FieldDefs.Count - 1 do
       FieldDefs[j].CreateField(ADataSet);
   end;
+end;
+
+procedure NewLookupField(ADataSet, ALookupDataSet: TDataSet;
+                         const AKeyFields, AFieldName: string);
+var
+  KeyField, LookupField, Field: TField;
+begin
+  Field := TStringField.Create(ADataSet.Owner);
+  with Field do
+  begin
+    KeyField := ADataSet.FindField(AKeyFields);
+    LookupField := ALookupDataSet.FindField(AFieldName);
+    DisplayWidth := LookupField.DisplayWidth;
+    FieldKind := fkLookup;
+    FieldName := AFieldName;
+    LookupDataSet := ALookupDataSet;
+    LookupKeyFields := AKeyFields;
+    LookupResultField := AFieldName;
+    KeyFields := AKeyFields;
+    Size := LookupField.Size;
+    Lookup := True;
+    DataSet := ADataSet;
+    DisplayLabel := KeyField.DisplayLabel;
+    if Assigned(KeyField) then
+    begin
+      Index := KeyField.Index;
+      KeyField.Visible := False;
+    end;
+  end;
+  ADataSet.FindField(AKeyFields).Index := ADataSet.FieldCount - 1;
 end;
 
 end.

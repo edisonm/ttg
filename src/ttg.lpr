@@ -11,7 +11,7 @@ uses
   FSplash {SplashForm},
   DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   UAbout,
-  UTTGi18n, UDataSetToStrings, zcomponent;
+  UTTGi18n, zcomponent;
 
 {$IFDEF WINDOWS}{$R ttg.rc}{$ENDIF}
 
@@ -34,10 +34,10 @@ begin
   if Assigned(ResourceTranslator) then
   begin
     ResourceTranslator.TranslateUnitResourceStrings('UAbout');
-    ResourceTranslator.TranslateUnitResourceStrings('URelUtils');
-    ResourceTranslator.TranslateUnitResourceStrings('UTTGii18n');
+    ResourceTranslator.TranslateUnitResourceStrings('UDataSetToStrings');
+    ResourceTranslator.TranslateUnitResourceStrings('UTTGi18n');
     ResourceTranslator.TranslateUnitResourceStrings('UTTGConsts');
-    ResourceTranslator.TranslateUnitResourceStrings('dsourcebaseconsts');
+    ResourceTranslator.TranslateUnitResourceStrings('DSourceConsts');
   end;
   DecimalSeparator := ',';
   //RequireDerivedFormResource := True;

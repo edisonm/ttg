@@ -8,7 +8,7 @@ interface
 uses
   LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, Grids,
   Buttons, DBCtrls, Variants, ExtCtrls, Printers, ActnList, StdCtrls, DBGrids, ComCtrls,
-  XMLPropStorage, FMasterDetailEditor, FCrossManytoManyEditorR, ZSqlUpdate, ZDataset;
+  FMasterDetailEditor, FCrossManytoManyEditorR, ZSqlUpdate, ZDataset;
 
 type
 
@@ -71,8 +71,7 @@ var
 implementation
 
 uses
-  DMaster, FConfig, DSource, FEditor, URelUtils, UTTGDBUtils, DSourceConsts,
-    UTTGConsts;
+  DMaster, FConfig, DSource, FEditor, UTTGDBUtils, DSourceConsts, UTTGConsts;
 
 procedure TThemeForm.DataSourceStateChange(Sender: TObject);
 begin

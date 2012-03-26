@@ -1,14 +1,13 @@
 inherited DBExplorerForm: TDBExplorerForm
-  Left = 992
+  Left = 962
   Height = 762
-  Top = 195
+  Top = 199
   Width = 797
   Caption = 'Database Explorer'
   ClientHeight = 762
   ClientWidth = 797
   OnClose = FormClose
   OnCreate = FormCreate
-  Visible = True
   inherited TBEditor: TToolBar
     Width = 797
     inherited DBNavigator: TDBNavigator
@@ -725,6 +724,7 @@ inherited DBExplorerForm: TDBExplorerForm
   end
   object SynSQLSyn1: TSynSQLSyn[14]
     DefaultFilter = 'SQL Files (*.sql)|*.sql'
+    Enabled = False
     CommentAttri.Foreground = clGray
     CommentAttri.FrameEdges = sfeAround
     DataTypeAttri.Foreground = clTeal

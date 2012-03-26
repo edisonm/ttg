@@ -57,7 +57,7 @@ TSingleEditorForm = class(TEditorForm)
 implementation
 
 uses
-  UTTGDBUtils, URelUtils, DMaster, DSource;
+  UTTGDBUtils, DMaster, DSource;
 
 class function TSingleEditorForm.ToggleSingleEditor(AOwner: TComponent;
                                                     var AForm;

@@ -46,7 +46,7 @@ var
 
 implementation
 uses
-  URelUtils, DMaster, FCrossManyToManyEditor, FConfig, UTTGConsts, DSourceConsts;
+  DMaster, FCrossManyToManyEditor, FConfig, UTTGConsts, DSourceConsts, UTTGDBUtils;
 
 procedure TResourceForm.ActRestrictionExecute(Sender: TObject);
 var
