@@ -50,8 +50,6 @@ cleanthis:
 
 clean: cleanthis
 
-test:
-	@echo TTGDIR=$(TTGDIR)
 tgz:
 	mkdir -p $(PKGDIR)
 # svn export --force $(REPOSITORY) $(TGZSRC) ;
@@ -85,3 +83,7 @@ winsetup:
 ci:
 	$(MAKE) buildnr
 	svn ci -m MSG="$(MSG)"
+
+test:
+	@echo TTGDIR=$(TTGDIR)
+	@echo APPNAME=$(APPNAME)
