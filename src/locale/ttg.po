@@ -381,6 +381,15 @@ msgctxt "TCONFIGFORM.EDNAINSTITUTION.HINT"
 msgid "Institution|Institution Name"
 msgstr ""
 
+#: tconfigform.groupbox1.caption
+msgid "Comments"
+msgstr ""
+
+#: tconfigform.groupbox2.caption
+msgctxt "TCONFIGFORM.GROUPBOX2.CAPTION"
+msgid "Resource Restrictions:"
+msgstr ""
+
 #: tconfigform.lbauthority.caption
 msgctxt "tconfigform.lbauthority.caption"
 msgid "Authority:"
@@ -399,11 +408,6 @@ msgstr ""
 #: tconfigform.lbclashactivity.caption
 msgctxt "tconfigform.lbclashactivity.caption"
 msgid "Clash of Activities:"
-msgstr ""
-
-#: tconfigform.lbcomments.caption
-msgctxt "tconfigform.lbcomments.caption"
-msgid "Comments:"
 msgstr ""
 
 #: tconfigform.lbcrossprobability.caption
@@ -454,11 +458,6 @@ msgstr ""
 #: tconfigform.lbreparationprobability.caption
 msgctxt "TCONFIGFORM.LBREPARATIONPROBABILITY.CAPTION"
 msgid "Reparation Probability:"
-msgstr ""
-
-#: tconfigform.lbrestrictions.caption
-msgctxt "tconfigform.lbrestrictions.caption"
-msgid "Resource Restrictions:"
 msgstr ""
 
 #: tconfigform.lbshareddirectory.caption
@@ -829,6 +828,7 @@ msgid "ToolButton1"
 msgstr ""
 
 #: tmainform.toolbutton3.caption
+msgctxt "tmainform.toolbutton3.caption"
 msgid "ToolButton3"
 msgstr ""
 
@@ -1210,6 +1210,11 @@ msgstr ""
 
 #: tthemeform.groupbox5.caption
 msgid "Resource Type Limit"
+msgstr ""
+
+#: tthemeform.toolbutton3.caption
+msgctxt "TTHEMEFORM.TOOLBUTTON3.CAPTION"
+msgid "ToolButton3"
 msgstr ""
 
 #: ttimetableclassform.cbshowclass.hint

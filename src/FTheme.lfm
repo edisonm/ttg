@@ -1,7 +1,7 @@
 inherited ThemeForm: TThemeForm
-  Left = 632
+  Left = 798
   Height = 730
-  Top = 265
+  Top = 392
   Width = 1140
   Caption = 'Theme'
   ClientHeight = 730
@@ -20,12 +20,16 @@ inherited ThemeForm: TThemeForm
       Left = 247
       Height = 21
       Top = 2
-      Width = 163
+      Width = 177
       Action = ActFilterByResourceType
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
       TabOrder = 1
     end
     object DBTResourceType: TDBText[4]
-      Left = 490
+      Left = 514
       Height = 22
       Top = 2
       Width = 134
@@ -34,12 +38,16 @@ inherited ThemeForm: TThemeForm
       DataField = 'NaResourceType'
       DataSource = DSResourceType
       Enabled = False
+      Font.Height = -16
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       Layout = tlCenter
       ParentColor = False
+      ParentFont = False
       Transparent = False
     end
     object DBNResourceType: TDBNavigator[5]
-      Left = 410
+      Left = 424
       Height = 20
       Top = 2
       Width = 80
@@ -58,6 +66,16 @@ inherited ThemeForm: TThemeForm
       Options = []
       TabOrder = 2
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
+    end
+    object ToolButton3: TToolButton[6]
+      Left = 504
+      Top = 2
+      Width = 10
+      Caption = 'ToolButton3'
+      ImageIndex = 27
+      ParentShowHint = False
+      ShowHint = True
+      Style = tbsSeparator
     end
   end
   inherited PnStatus: TPanel

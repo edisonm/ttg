@@ -375,7 +375,7 @@ type
 implementation
 
 uses
-  SysUtils, ZSysUtils, MTProcs, DSource, UTTGConsts, DSourceBaseConsts, USortAlgs, Math, ZDataset;
+  SysUtils, ZSysUtils, MTProcs, DSource, UTTGConsts, DSourceConsts, USortAlgs, Math, ZDataset;
 
 type
   TSortInteger = TSortAlgorithm<Integer,Integer>;
@@ -480,7 +480,7 @@ var
       Close;
       TableName := 'ResourceType';
       IndexFieldNames := 'IdResourceType';
-      First;
+      Open;
       FieldName := FindField('NaResourceType');
       FieldValue := FindField('ValResourceType');
       FieldNumResourceLimit := FindField('NumResourceLimit');
@@ -1123,6 +1123,7 @@ begin
   try
     with SourceDataModule do
     begin
+      ZTable.Connection := DbZConnection;
       SErrors := '';
       Configure(AClashActivityValue, ABreakTimetableResourceValue,
         ABrokenSessionValue, ANonScatteredActivityValue);
@@ -2058,7 +2059,6 @@ begin
         FieldDay := FindField('IdDay');
         FieldHour := FindField('IdHour');
         FieldSession := FindField('Session');
-        First;
         while not Eof do
         begin
           Session := FieldSession.AsInteger;
@@ -2085,7 +2085,6 @@ begin
         FieldActivity := FindField('IdActivity');
         FieldResource := FindField('IdResource');
         FieldNumResource := FindField('NumResource');
-        First;
         while not Eof do
         begin
           Activity := FIdActivityToActivity[FieldActivity.AsInteger - FMinIdActivity];

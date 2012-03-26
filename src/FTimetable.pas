@@ -81,7 +81,7 @@ var
 implementation
 
 uses
-  Variants, UMakeTT, UTTGConsts, URelUtils, DSourceBaseConsts;
+  Variants, UMakeTT, UTTGConsts, DSourceConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}

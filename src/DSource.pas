@@ -6,8 +6,8 @@ unit DSource;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, DSourceBaseConsts, Db, ZDataset, ZConnection;
+  LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, ZDataset,
+  ZConnection, DSourceConsts;
 
 type
 

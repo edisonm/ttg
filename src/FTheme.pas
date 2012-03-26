@@ -6,10 +6,9 @@ unit FTheme;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, Db, Grids, Buttons, DBCtrls, Variants, ExtCtrls,
-  Printers, ActnList, StdCtrls, DBGrids, ComCtrls, FMasterDetailEditor,
-  FCrossManytoManyEditorR, ZSqlUpdate, ZDataset, ZConnection;
+  LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, Grids,
+  Buttons, DBCtrls, Variants, ExtCtrls, Printers, ActnList, StdCtrls, DBGrids, ComCtrls,
+  XMLPropStorage, FMasterDetailEditor, FCrossManytoManyEditorR, ZSqlUpdate, ZDataset;
 
 type
 
@@ -40,6 +39,7 @@ type
     TbResourceType: TZTable;
     TbResourceTypeLimit: TZTable;
     TbTheme: TZTable;
+    ToolButton3: TToolButton;
     UpAvailability: TZUpdateSQL;
     QuParticipant: TZQuery;
     UpParticipant: TZUpdateSQL;
@@ -71,7 +71,7 @@ var
 implementation
 
 uses
-  DMaster, FConfig, DSource, FEditor, URelUtils, UTTGDBUtils, DSourceBaseConsts,
+  DMaster, FConfig, DSource, FEditor, URelUtils, UTTGDBUtils, DSourceConsts,
     UTTGConsts;
 
 {$IFNDEF FPC}

@@ -6,8 +6,8 @@ unit DMaster;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, ZDataset, Variants, UTTGConfig;
+  LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, ZDataset,
+  Variants, UTTGConfig;
 
 type
 

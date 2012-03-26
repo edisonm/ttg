@@ -1,5 +1,5 @@
 { -*- mode: Delphi -*- }
-unit DSourceBaseConsts;
+unit DSourceConsts;
 
 {$IFDEF FPC}
 {$MODE Delphi}

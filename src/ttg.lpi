@@ -338,9 +338,9 @@
         <UnitName Value="UTTGConsts"/>
       </Unit34>
       <Unit35>
-        <Filename Value="DSourceBaseConsts.pas"/>
+        <Filename Value="DSourceConsts.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="DSourceBaseConsts"/>
+        <UnitName Value="DSourceConsts"/>
       </Unit35>
       <Unit36>
         <Filename Value="FDBExplorer.pas"/>

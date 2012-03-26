@@ -8,7 +8,7 @@ interface
 uses
   LResources, SysUtils, Classes, db, Graphics, Controls, Forms,
   Dialogs, FSingleEditor, Grids, Buttons, DBCtrls, ExtCtrls, Printers, ComCtrls,
-  ActnList, StdCtrls, DBGrids, FCrossManytoManyEditorR, ZDataset, DSource;
+  ActnList, FCrossManytoManyEditorR, ZDataset, DSource;
 
 type
 
@@ -46,8 +46,7 @@ var
 
 implementation
 uses
-  URelUtils, DMaster, FCrossManyToManyEditor, FConfig, UTTGConsts,
-    DSourceBaseConsts;
+  URelUtils, DMaster, FCrossManyToManyEditor, FConfig, UTTGConsts, DSourceConsts;
 
 {$IFNDEF FPC}
 {$R *.DFM}

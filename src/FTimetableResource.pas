@@ -7,7 +7,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, Buttons, DBGrids, DbCtrls, ExtCtrls, Grids, ComCtrls, Db, Variants,
+  StdCtrls, Buttons, DBGrids, DbCtrls, ExtCtrls, Grids, Db, Variants,
   ZDataset, FConfig, FCrossManyToManyEditor0,
   FCrossManyToManyEditor1, FCrossManyToManyEditor, DMaster, DSource;
 
@@ -40,7 +40,7 @@ type
 
 implementation
 uses
-  UTTGBasics, DSourceBaseConsts, URelUtils;
+  UTTGBasics, DSourceConsts, URelUtils;
 
 {$IFNDEF FPC}
 {$R *.DFM}
