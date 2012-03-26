@@ -58,7 +58,7 @@ type
     class function ToggleEditor(AOwner: TComponent;
                                 var AForm;
                                 AConfigStorage: TConfigStorage;
-                                AAction: TAction): Boolean;
+                                AAction: TAction): Boolean; overload;
   end;
 
 implementation

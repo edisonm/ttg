@@ -7,15 +7,16 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, Buttons, DBGrids, DbCtrls, ExtCtrls, Grids, Db, Variants, ZDataset,
-  FConfig, FCrossManyToManyEditor0, FCrossManyToManyEditor1, DMaster, DSource,
-  FCrossManyToManyEditor;
+  StdCtrls, Buttons, DBGrids, DbCtrls, ExtCtrls, Grids, ComCtrls, Db, Variants,
+  ZDataset, FConfig, FCrossManyToManyEditor0, FCrossManyToManyEditor1, DMaster,
+  DSource, FCrossManyToManyEditor, FTimetable, UConfigStorage, ActnList;
 
 type
 
   { TTimetableResourceForm }
 
   TTimetableResourceForm = class(TCrossManyToManyEditor1Form)
+    DSTimetable: TDatasource;
     QuTimetableResource: TZQuery;
     CBShowResource: TComboBox;
     DSResource: TDataSource;
@@ -27,6 +28,7 @@ type
     TbHour: TZTable;
     TbPeriod: TZTable;
     procedure CBShowResourceChange(Sender: TObject);
+    procedure DSTimetableDataChange(Sender: TObject; Field: TField);
     procedure FormCreate(Sender: TObject);
     procedure QuTimetableResourceCalcFields(DataSet: TDataSet);
     procedure DSResourceDataChange(Sender: TObject; Field: TField);
@@ -36,11 +38,33 @@ type
   protected
   public
     { Public declarations }
+    class function ToggleEditor(AOwner: TComponent;
+                                var AForm: TTimetableResourceForm;
+                                AConfigStorage: TConfigStorage;
+                                AAction: TAction;
+                                ADataSet: TDataSet): Boolean; overload;
   end;
 
 implementation
 uses
   UTTGBasics, DSourceConsts, URelUtils;
+
+class function TTimetableResourceForm.ToggleEditor(AOwner: TComponent;
+                                                   var AForm: TTimetableResourceForm;
+                                                   AConfigStorage: TConfigStorage;
+                                                   AAction: TAction;
+                                                   ADataSet: TDataSet): Boolean;
+begin
+  Result := ToggleEditor(AOwner, AForm, AConfigStorage, AAction);
+  if Result then with AForm do
+  begin
+    DSTimetable.DataSet := ADataSet;
+    CBShowResource.OnChange := CBShowResourceChange;
+    DSResource.OnDataChange := DSResourceDataChange;
+    DSTimetableDataChange(nil, nil);
+    CBShowResourceChange(nil);
+  end;
+end;
 
 procedure TTimetableResourceForm.FormCreate(Sender: TObject);
 var
@@ -53,7 +77,6 @@ begin
   QuResource.Open;
   with QuResource do
   begin
-    FindField('IdTimetable').Visible := False;
     FindField('IdResource').Visible := False;
     FindField('NaResource').DisplayLabel := SFlResource_NaResource;
   end;
@@ -78,20 +101,24 @@ begin
   end;
   LoadNames(MasterDataModule.StringsShowResource, CBShowResource.Items);
   CBShowResource.Text := CBShowResource.Items[0];
-  CBShowResourceChange(nil);
 end;
 
 procedure TTimetableResourceForm.CBShowResourceChange(Sender: TObject);
 begin
-  with SourceDataModule do
-  begin
-    Caption := Format('[%s %d] - %s', [SuperTitle,
-      Self.QuResource.FindField('IdTimetable').AsInteger,
-      Self.QuResource.FindField('NaResource').AsString]);
-    FName := MasterDataModule.StringsShowResource.Values[CBShowResource.Text];
-    ShowEditor(TbDay, TbHour, QuTimetableResource, TbPeriod, 'IdDay', 'NaDay',
-      'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
-  end;
+  Caption := Format('[%s %d] - %s', [SuperTitle,
+    DSTimetable.DataSet.FindField('IdTimetable').AsInteger,
+    QuResource.FindField('NaResource').AsString]);
+  FName := MasterDataModule.StringsShowResource.Values[CBShowResource.Text];
+  ShowEditor(TbDay, TbHour, QuTimetableResource, TbPeriod, 'IdDay', 'NaDay',
+    'IdDay', 'IdDay', 'IdHour', 'NaHour', 'IdHour', 'IdHour', 'Name');
+end;
+
+procedure TTimetableResourceForm.DSTimetableDataChange(Sender: TObject;
+  Field: TField);
+begin
+  QuTimetableResource.ParamByName('IdTimetable').AsInteger
+    := DSTimetable.DataSet.FindField('IdTimetable').AsInteger;
+  QuTimetableResource.Refresh;
 end;
 
 procedure TTimetableResourceForm.QuTimetableResourceCalcFields(DataSet: TDataSet);

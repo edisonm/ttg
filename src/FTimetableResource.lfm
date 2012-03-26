@@ -1,5 +1,5 @@
 inherited TimetableResourceForm: TTimetableResourceForm
-  Left = 632
+  Left = 618
   Height = 462
   Top = 224
   Width = 797
@@ -10,7 +10,6 @@ inherited TimetableResourceForm: TTimetableResourceForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Visible = True
   inherited TBEditor: TToolBar
     Width = 797
     inherited BtOk: TToolButton
@@ -53,7 +52,6 @@ inherited TimetableResourceForm: TTimetableResourceForm
       Top = 2
       Width = 193
       ItemHeight = 0
-      OnChange = CBShowResourceChange
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
@@ -349,45 +347,24 @@ inherited TimetableResourceForm: TTimetableResourceForm
   end
   object DSResource: TDatasource[8]
     DataSet = QuResource
-    OnDataChange = DSResourceDataChange
     left = 64
     top = 145
   end
   object QuResource: TZQuery[9]
     Connection = SourceDataModule.DbZConnection
-    SortedFields = 'IdTimetable'
     OnCalcFields = QuTimetableResourceCalcFields
     SQL.Strings = (
       'SELECT'
-      '  IdTimetable,'
       '  IdResource,'
       '  NaResource'
       'FROM'
-      '  Resource,'
-      '  Timetable'
-      'WHERE'
-      '  IdTimetable=:IdTimetable'
+      '  Resource'
       'ORDER BY'
-      '  IdTimetable, NaResource'
+      '  NaResource'
     )
-    Params = <    
-      item
-        DataType = ftUnknown
-        Name = 'IdTimetable'
-        ParamType = ptUnknown
-      end>
-    DataSource = TimetableForm.DataSource
-    MasterFields = 'IdTimetable'
-    LinkedFields = 'IdTimetable'
-    IndexFieldNames = 'IdTimetable Asc'
+    Params = <>
     left = 184
     top = 145
-    ParamData = <    
-      item
-        DataType = ftUnknown
-        Name = 'IdTimetable'
-        ParamType = ptUnknown
-      end>
   end
   object TbDay: TZTable[10]
     Connection = SourceDataModule.DbZConnection
@@ -405,6 +382,11 @@ inherited TimetableResourceForm: TTimetableResourceForm
     Connection = SourceDataModule.DbZConnection
     TableName = 'Period'
     left = 64
+    top = 256
+  end
+  object DSTimetable: TDatasource[13]
+    OnDataChange = DSTimetableDataChange
+    left = 186
     top = 256
   end
 end

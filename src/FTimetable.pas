@@ -9,7 +9,7 @@ uses
   LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Db, FSingleEditor, Grids, Buttons, FEditor, DBCtrls, ExtCtrls, ComCtrls,
   ActnList, ZDataset, FCrossManytoManyEditorR, DMaster, FConfig, DSource,
-  FCrossManyToManyEditor1, FMasterDetailEditor, FTimetableResource;
+  FCrossManyToManyEditor1, FMasterDetailEditor;
 
 type
 
@@ -65,7 +65,7 @@ type
     FClashActivityForm, FBrokenSessionHourForm,
       FBrokenSessionDayForm, FClashResourceForm: TMasterDetailEditorForm;
     FRestrictionNonSatisfiedForm: TSingleEditorForm;
-    FTimetableResourceForm: TTimetableResourceForm;
+    FTimetableResourceForm: TEditorForm;
     procedure ImproveTimetable;
     procedure PrepareCalcFields;
   protected
@@ -75,13 +75,10 @@ type
     { Public declarations }
   end;
 
-var
-  TimetableForm: TTimetableForm;
-
 implementation
 
 uses
-  Variants, UMakeTT, UTTGConsts, DSourceConsts;
+  Variants, UMakeTT, UTTGConsts, DSourceConsts, FTimetableResource;
 
 procedure TTimetableForm.ActClashResourceExecute(Sender: TObject);
 begin
@@ -128,7 +125,7 @@ procedure TTimetableForm.ActTimetableResourceExecute(Sender: TObject);
 begin
   inherited;
   TTimetableResourceForm.ToggleEditor(Self, FTimetableResourceForm,
-    ConfigStorage, ActTimetableResource);
+                                      ConfigStorage, ActTimetableResource);
 end;
 
 procedure TTimetableForm.ActClashActivityExecute(Sender: TObject);

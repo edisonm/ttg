@@ -126,12 +126,13 @@ type
     { Private declarations }
     FConfigFileName: string;
     FConfigStorage: TConfigStorage;
-    FDayForm,
-    FResourceTypeForm,
-    FRestrictionTypeForm,
-    FHourForm,
+    FDayForm: TSingleEditorForm;
+    FHourForm: TSingleEditorForm;
+    FResourceTypeForm: TSingleEditorForm;
+    FRestrictionTypeForm: TSingleEditorForm;
     FDBExplorerForm,
     FPeriodForm: TCrossManyToManyEditor0Form;
+    FTimetableForm: TSingleEditorForm;
     FProgress: Integer;
     FRelProgress: Integer;
     FMin: Integer;
@@ -270,7 +271,7 @@ end;
 
 procedure TMainForm.ActTimetableExecute(Sender: TObject);
 begin
-  TTimetableForm.ToggleEditor(Self, TimetableForm, ConfigStorage, ActTimetable);
+  TTimetableForm.ToggleEditor(Self, FTimetableForm, ConfigStorage, ActTimetable);
 end;
 
 function TMainForm.ConfirmOperation: boolean;
