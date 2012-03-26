@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 unit FMessageView;
 
 {$I ttg.inc}
@@ -5,8 +6,8 @@ unit FMessageView;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls;
+  LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls,
+  Buttons, ExtCtrls;
 
 type
 

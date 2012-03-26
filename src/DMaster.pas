@@ -44,10 +44,6 @@ implementation
 uses
   DSource;
 
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
-
 const
   pfhVersionNumber = 293;
 
@@ -187,10 +183,8 @@ begin
 end;
 
 initialization
-{$IFDEF FPC}
-  {$i DMaster.lrs}
-{$ENDIF}
-  
+
+{$i DMaster.lrs}
 {$i ttgsql.lrs}
 
 end.

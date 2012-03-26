@@ -171,8 +171,8 @@ implementation
 
 uses
   FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FTheme, FResource,
-  FTimetable, FMasterDetailEditor, FConfig, Printers, DSource,
-  UTTGBasics, FMessageView, UTTGi18n, UTTGConsts, FDBExplorer;
+  FTimetable, FMasterDetailEditor, FConfig, Printers, DSource, UTTGBasics,
+  UTTGi18n, UTTGConsts, FDBExplorer;
 
 {$IFNDEF FPC}
 {$R *.DFM}

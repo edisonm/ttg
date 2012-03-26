@@ -351,8 +351,6 @@ end;
 
 initialization
 
-{$IFDEF FPC}
-{$I FTimetable.lrs}
-{$ENDIF}
+{$i FTimetable.lrs}
 
 end.

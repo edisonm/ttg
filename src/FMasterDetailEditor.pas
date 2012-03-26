@@ -6,9 +6,9 @@ unit FMasterDetailEditor;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, FSingleEditor, Db, Grids, DBGrids, Buttons, UConfigStorage,
-  DBCtrls, ExtCtrls, ActnList, StdCtrls, ComCtrls, ZDataset;
+  LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, Grids,
+  FSingleEditor, DBGrids, Buttons, UConfigStorage, DBCtrls, ExtCtrls, ActnList,
+  StdCtrls, ComCtrls, ZDataset;
 
 type
 

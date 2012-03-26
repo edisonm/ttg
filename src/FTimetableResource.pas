@@ -7,9 +7,9 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, Buttons, DBGrids, DbCtrls, ExtCtrls, Grids, Db, Variants,
-  ZDataset, FConfig, FCrossManyToManyEditor0,
-  FCrossManyToManyEditor1, FCrossManyToManyEditor, DMaster, DSource;
+  StdCtrls, Buttons, DBGrids, DbCtrls, ExtCtrls, Grids, Db, Variants, ZDataset,
+  FConfig, FCrossManyToManyEditor0, FCrossManyToManyEditor1, DMaster, DSource,
+  FCrossManyToManyEditor;
 
 type
 
@@ -82,6 +82,7 @@ begin
   end;
   LoadNames(MasterDataModule.StringsShowResource, CBShowResource.Items);
   CBShowResource.Text := CBShowResource.Items[0];
+  CBShowResourceChange(nil);
 end;
 
 procedure TTimetableResourceForm.CBShowResourceChange(Sender: TObject);

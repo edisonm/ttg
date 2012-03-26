@@ -6,9 +6,8 @@ unit FCrossManyToManyEditor;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-  Controls, Forms, Dialogs, Buttons, ExtCtrls, DB, Variants, FEditor, ComCtrls,
-  Grids;
+  LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Buttons,
+  ExtCtrls, DB, Variants, FEditor, ComCtrls, Grids;
 
 type
   TDynamicStringArray = array of string;

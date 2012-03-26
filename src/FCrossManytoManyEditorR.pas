@@ -6,7 +6,7 @@ unit FCrossManytoManyEditorR;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
+  LResources, SysUtils, Classes, Graphics,
   Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, Grids, DB, FCrossManyToManyEditor;
 
 type

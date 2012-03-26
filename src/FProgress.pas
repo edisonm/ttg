@@ -6,9 +6,8 @@ unit FProgress;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics,
-    Controls, Forms, Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls,
-    UTTModel, USolver;
+  LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls,
+  Buttons, ExtCtrls, ComCtrls, UTTModel, USolver;
 
 type
 

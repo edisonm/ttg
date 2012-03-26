@@ -6,7 +6,7 @@ unit FEditor;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes, Graphics, Controls,
+  LResources, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs, DBCtrls, Buttons, ExtCtrls, ComCtrls, ActnList, UConfigStorage;
 
 type

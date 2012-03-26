@@ -6,9 +6,9 @@ unit FSingleEditor;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, SysUtils, Classes,
-  Graphics, Controls, Forms, Dialogs, Db, StdCtrls, DBCtrls, Grids, DBGrids,
-  Buttons, ExtCtrls, ComCtrls, FEditor, ActnList, ZDataset, UConfigStorage;
+  LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Db, Grids,
+  DBGrids, StdCtrls, DBCtrls, Buttons, ExtCtrls, ComCtrls, FEditor, ActnList,
+  ZDataset, UConfigStorage;
 
 type
 
@@ -58,10 +58,6 @@ implementation
 
 uses
   UTTGDBUtils, URelUtils, DMaster, DSource;
-
-{$IFNDEF FPC}
-{$R *.DFM}
-{$ENDIF}
 
 class function TSingleEditorForm.ToggleSingleEditor(AOwner: TComponent;
                                                     var AForm;
@@ -178,9 +174,8 @@ begin
 end;
 
 initialization
-{$IFDEF FPC}
-  {$i FSingleEditor.lrs}
-{$ENDIF}
+  
+{$i FSingleEditor.lrs}
 
 end.
 

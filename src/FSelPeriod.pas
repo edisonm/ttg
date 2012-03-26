@@ -6,8 +6,8 @@ unit FSelPeriod;
 interface
 
 uses
-  {$IFDEF FPC}LResources{$ELSE}Windows{$ENDIF}, Classes, SysUtils, FileUtil,
-  Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons, DbCtrls, DSource;
+  LResources, Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs,
+  StdCtrls, Buttons, DbCtrls, DSource;
 
 type
 
