@@ -1,3 +1,4 @@
 debian/tmp/usr/bin
 debian/tmp/usr/share/applications/ttg.desktop
+debian/tmp/usr/share/doc/ttg/ttg-icon.png
 debian/tmp/usr/share/pixmaps/ttg-icon.png
