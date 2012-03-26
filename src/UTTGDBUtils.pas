@@ -17,6 +17,8 @@ procedure LoadStringsFromDataSet(Strings: TStrings; DataSet: TDataSet;
   FieldNames: string; Title, Column: Boolean);
 procedure SearchInField(AField: TField; AValue: Variant);
 procedure SearchInDBGrid(DBGrid: TDBGrid);
+procedure PrepareDataSetFields(ADataSet: TDataSet);
+procedure HideAutoIncFields(ADataSet: TDataSet);
 
 implementation
 
@@ -221,5 +223,31 @@ begin
   end;
 end;
 
-end.
+procedure HideAutoIncFields(ADataSet: TDataSet);
+var
+  i: Integer;
+begin
+  with ADataSet do
+  begin
+    for i := 0 to Fields.Count - 1 do
+    begin
+      if Fields[i].DataType = ftAutoInc then
+        Fields[i].Visible := False;
+    end;
+  end;
+end;
 
+procedure PrepareDataSetFields(ADataSet: TDataSet);
+var
+  j: Integer;
+begin
+  with ADataSet do
+  begin
+    FieldDefs.Update;
+    Fields.Clear;
+    for j := 0 to FieldDefs.Count - 1 do
+      FieldDefs[j].CreateField(ADataSet);
+  end;
+end;
+
+end.

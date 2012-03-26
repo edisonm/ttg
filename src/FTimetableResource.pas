@@ -47,7 +47,7 @@ type
 
 implementation
 uses
-  UTTGBasics, DSourceConsts, URelUtils;
+  UTTGBasics, DSourceConsts, UTTGDBUtils;
 
 class function TTimetableResourceForm.ToggleEditor(AOwner: TComponent;
                                                    var AForm;

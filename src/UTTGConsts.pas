@@ -93,6 +93,7 @@ resourcestring
   SValue = 'Value';
   SWeight = 'Weight';
   SWeights = 'Weights';
+  SWhenProcessing = 'When processing %s';
   SWorkInProgress = 'Work in progress [%d]';
   SWrongComposition = 'Wrong Composition';
   SYes = 'Yes';

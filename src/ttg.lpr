@@ -11,7 +11,7 @@ uses
   FSplash {SplashForm},
   DSource in 'DSource.pp' {SourceDataModule: TDataModule},
   UAbout,
-  UTTGi18n, zcomponent;
+  UTTGi18n, UDataSetToStrings, zcomponent;
 
 {$IFDEF WINDOWS}{$R ttg.rc}{$ENDIF}
 

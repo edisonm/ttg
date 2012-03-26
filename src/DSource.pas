@@ -65,7 +65,7 @@ var
 implementation
 
 uses
-  Variants, FConfig, UTTGDBUtils, URelUtils, UTTGConsts;
+  Variants, FConfig, UTTGDBUtils, UTTGConsts, UDataSetToStrings;
 
 function TSourceDataModule.NewTable(const ATableName: string; AOwner: TComponent): TZTable;
 begin

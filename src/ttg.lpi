@@ -264,82 +264,82 @@
         <UnitName Value="FTimetableResource"/>
       </Unit21>
       <Unit22>
-        <Filename Value="../../DBConvert/auxiliary/URelUtils.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="URelUtils"/>
-      </Unit22>
-      <Unit23>
         <Filename Value="DSource.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SourceDataModule"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <UnitName Value="DSource"/>
-      </Unit23>
-      <Unit24>
+      </Unit22>
+      <Unit23>
         <Filename Value="FSelPeriod.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SelPeriodForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FSelPeriod"/>
-      </Unit24>
-      <Unit25>
+      </Unit23>
+      <Unit24>
         <Filename Value="UTTGConfig.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGConfig"/>
-      </Unit25>
-      <Unit26>
+      </Unit24>
+      <Unit25>
         <Filename Value="UModel.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UModel"/>
-      </Unit26>
-      <Unit27>
+      </Unit25>
+      <Unit26>
         <Filename Value="UMakeTT.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UMakeTT"/>
-      </Unit27>
-      <Unit28>
+      </Unit26>
+      <Unit27>
         <Filename Value="UDownHill.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UDownHill"/>
-      </Unit28>
-      <Unit29>
+      </Unit27>
+      <Unit28>
         <Filename Value="USolver.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="USolver"/>
-      </Unit29>
-      <Unit30>
+      </Unit28>
+      <Unit29>
         <Filename Value="UTTGBasics.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGBasics"/>
-      </Unit30>
-      <Unit31>
+      </Unit29>
+      <Unit30>
         <Filename Value="UAbout.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UAbout"/>
-      </Unit31>
-      <Unit32>
+      </Unit30>
+      <Unit31>
         <Filename Value="UTTGi18n.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGi18n"/>
-      </Unit32>
-      <Unit33>
+      </Unit31>
+      <Unit32>
         <Filename Value="UTTGConsts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UTTGConsts"/>
-      </Unit33>
-      <Unit34>
+      </Unit32>
+      <Unit33>
         <Filename Value="DSourceConsts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DSourceConsts"/>
-      </Unit34>
-      <Unit35>
+      </Unit33>
+      <Unit34>
         <Filename Value="FDBExplorer.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="DBExplorerForm"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FDBExplorer"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="UDataSetToStrings.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UDataSetToStrings"/>
       </Unit35>
     </Units>
   </ProjectOptions>
@@ -350,7 +350,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../../zeosdbo/packages/lazarus;../../zeosdbo/src/core;../../zeosdbo/src/dbc;../../zeosdbo/src/parsesql;../../zeosdbo/src/plain;../../zeosdbo/src/component;../../multithreadprocs;../../DBConvert/auxiliary"/>
+      <OtherUnitFiles Value="../../zeosdbo/packages/lazarus;../../zeosdbo/src/core;../../zeosdbo/src/dbc;../../zeosdbo/src/parsesql;../../zeosdbo/src/plain;../../zeosdbo/src/component;../../multithreadprocs"/>
       <UnitOutputDirectory Value="../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)"/>
       <SrcPath Value="$(LazarusDir)fpc/$(FPCVer)/source/rtl/objpas;$(LazarusDir)fpc/$(FPCVer)/source/rtl/inc;$(LazarusDir)fpc/$(FPCVer)/source/rtl/$(TargetOS)"/>
     </SearchPaths>
