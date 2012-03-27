@@ -2,6 +2,5 @@
 
 include $(TTGDIR)/COMMON
 
-APPNAME=$(shell grep "StringTable" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<StringTable LegalCopyright=\"[^\"]*\" ProductVersion=\"[^\"]*\" FileDescription=\"\([^\"]*\)\"/>":'\1':g)
 Copyright=$(shell grep "StringTable" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<StringTable LegalCopyright=\"\([^\"]*\)\" ProductVersion=\"[^\"]*\" FileDescription=\"[^\"]*\"/>":'\1':g)
 OBJDIR=$(TTGDIR)/obj/$(BuildId)

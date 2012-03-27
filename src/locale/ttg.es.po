@@ -1,362 +1,6 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: dsourcebaseconsts.sflactivity_idactivity
-msgctxt "dsourcebaseconsts.sflactivity_idactivity"
-msgid "Id"
-msgstr "Codigo"
-
-#: dsourcebaseconsts.sflactivity_idtheme
-msgctxt "dsourcebaseconsts.sflactivity_idtheme"
-msgid "Theme"
-msgstr "Materia"
-
-#: dsourcebaseconsts.sflactivity_naactivity
-msgctxt "dsourcebaseconsts.sflactivity_naactivity"
-msgid "Name"
-msgstr ""
-
-#: dsourcebaseconsts.sflavailability_idresource
-#, fuzzy
-#| msgid "Assistant"
-msgctxt "dsourcebaseconsts.sflavailability_idresource"
-msgid "Resource"
-msgstr "Ayudante"
-
-#: dsourcebaseconsts.sflavailability_idtheme
-msgctxt "dsourcebaseconsts.sflavailability_idtheme"
-msgid "Theme"
-msgstr "Materia"
-
-#: dsourcebaseconsts.sflavailability_numresource
-msgctxt "dsourcebaseconsts.sflavailability_numresource"
-msgid "Number"
-msgstr "Apellido"
-
-#: dsourcebaseconsts.sflday_idday
-msgctxt "dsourcebaseconsts.sflday_idday"
-msgid "Id"
-msgstr "Codigo"
-
-#: dsourcebaseconsts.sflday_naday
-msgctxt "dsourcebaseconsts.sflday_naday"
-msgid "Name"
-msgstr "Nombre"
-
-#: dsourcebaseconsts.sflhour_idhour
-msgctxt "dsourcebaseconsts.sflhour_idhour"
-msgid "Id"
-msgstr "Codigo"
-
-#: dsourcebaseconsts.sflhour_interval
-msgctxt "dsourcebaseconsts.sflhour_interval"
-msgid "Interval"
-msgstr "Intervalo"
-
-#: dsourcebaseconsts.sflhour_nahour
-msgctxt "dsourcebaseconsts.sflhour_nahour"
-msgid "Name"
-msgstr "Nombre"
-
-#: dsourcebaseconsts.sflparticipant_idactivity
-msgctxt "dsourcebaseconsts.sflparticipant_idactivity"
-msgid "Category"
-msgstr ""
-
-#: dsourcebaseconsts.sflparticipant_idresource
-#, fuzzy
-#| msgid "Assistant"
-msgctxt "dsourcebaseconsts.sflparticipant_idresource"
-msgid "Resource"
-msgstr "Ayudante"
-
-#: dsourcebaseconsts.sflparticipant_numresource
-msgctxt "dsourcebaseconsts.sflparticipant_numresource"
-msgid "Number"
-msgstr "Apellido"
-
-#: dsourcebaseconsts.sflperiod_idday
-msgctxt "dsourcebaseconsts.sflperiod_idday"
-msgid "Day"
-msgstr "Day"
-
-#: dsourcebaseconsts.sflperiod_idhour
-msgctxt "dsourcebaseconsts.sflperiod_idhour"
-msgid "Hour"
-msgstr "Hour"
-
-#: dsourcebaseconsts.sflresourcetypelimit_idresourcetype
-msgctxt "dsourcebaseconsts.sflresourcetypelimit_idresourcetype"
-msgid "Resource Type"
-msgstr ""
-
-#: dsourcebaseconsts.sflresourcetypelimit_idtheme
-msgctxt "dsourcebaseconsts.sflresourcetypelimit_idtheme"
-msgid "Theme"
-msgstr "Materia"
-
-#: dsourcebaseconsts.sflresourcetypelimit_numresourcelimit
-msgctxt "dsourcebaseconsts.sflresourcetypelimit_numresourcelimit"
-msgid "Limit"
-msgstr ""
-
-#: dsourcebaseconsts.sflresourcetype_idresourcetype
-msgctxt "dsourcebaseconsts.sflresourcetype_idresourcetype"
-msgid "Id"
-msgstr "Codigo"
-
-#: dsourcebaseconsts.sflresourcetype_maxworkload
-msgctxt "dsourcebaseconsts.sflresourcetype_maxworkload"
-msgid "Max Work Load"
-msgstr ""
-
-#: dsourcebaseconsts.sflresourcetype_naresourcetype
-msgctxt "dsourcebaseconsts.sflresourcetype_naresourcetype"
-msgid "Name"
-msgstr "Nombre"
-
-#: dsourcebaseconsts.sflresourcetype_numresourcelimit
-msgctxt "dsourcebaseconsts.sflresourcetype_numresourcelimit"
-msgid "Resource Limit"
-msgstr ""
-
-#: dsourcebaseconsts.sflresourcetype_valresourcetype
-msgctxt "dsourcebaseconsts.sflresourcetype_valresourcetype"
-msgid "Value"
-msgstr "Valor"
-
-#: dsourcebaseconsts.sflresource_abresource
-msgctxt "dsourcebaseconsts.sflresource_abresource"
-msgid "Abbreviation"
-msgstr "Identificacion"
-
-#: dsourcebaseconsts.sflresource_idresource
-msgctxt "dsourcebaseconsts.sflresource_idresource"
-msgid "Id"
-msgstr "Codigo"
-
-#: dsourcebaseconsts.sflresource_idresourcetype
-msgctxt "dsourcebaseconsts.sflresource_idresourcetype"
-msgid "Type"
-msgstr ""
-
-#: dsourcebaseconsts.sflresource_naresource
-msgctxt "dsourcebaseconsts.sflresource_naresource"
-msgid "Name"
-msgstr "Nombre"
-
-#: dsourcebaseconsts.sflresource_numresource
-msgctxt "dsourcebaseconsts.sflresource_numresource"
-msgid "Number"
-msgstr "Apellido"
-
-#: dsourcebaseconsts.sflrestrictiontype_colrestrictiontype
-msgctxt "dsourcebaseconsts.sflrestrictiontype_colrestrictiontype"
-msgid "Color"
-msgstr "Color"
-
-#: dsourcebaseconsts.sflrestrictiontype_idrestrictiontype
-msgctxt "dsourcebaseconsts.sflrestrictiontype_idrestrictiontype"
-msgid "Id"
-msgstr "Codigo"
-
-#: dsourcebaseconsts.sflrestrictiontype_narestrictiontype
-msgctxt "dsourcebaseconsts.sflrestrictiontype_narestrictiontype"
-msgid "Name"
-msgstr "Nombre"
-
-#: dsourcebaseconsts.sflrestrictiontype_valrestrictiontype
-msgctxt "dsourcebaseconsts.sflrestrictiontype_valrestrictiontype"
-msgid "Value"
-msgstr "Valor"
-
-#: dsourcebaseconsts.sflrestriction_idday
-msgctxt "dsourcebaseconsts.sflrestriction_idday"
-msgid "Day"
-msgstr "Day"
-
-#: dsourcebaseconsts.sflrestriction_idhour
-msgctxt "dsourcebaseconsts.sflrestriction_idhour"
-msgid "Hour"
-msgstr "Hour"
-
-#: dsourcebaseconsts.sflrestriction_idresource
-msgctxt "dsourcebaseconsts.sflrestriction_idresource"
-msgid "Resource"
-msgstr "Profesor"
-
-#: dsourcebaseconsts.sflrestriction_idrestrictiontype
-msgctxt "dsourcebaseconsts.sflrestriction_idrestrictiontype"
-msgid "Restriction Type"
-msgstr "Tipo de Restriccion"
-
-#: dsourcebaseconsts.sfltheme_composition
-msgctxt "dsourcebaseconsts.sfltheme_composition"
-msgid "Composition"
-msgstr "Composicion"
-
-#: dsourcebaseconsts.sfltheme_idtheme
-msgctxt "dsourcebaseconsts.sfltheme_idtheme"
-msgid "Id"
-msgstr "Codigo"
-
-#: dsourcebaseconsts.sfltheme_natheme
-msgctxt "dsourcebaseconsts.sfltheme_natheme"
-msgid "Name"
-msgstr "Nombre"
-
-#: dsourcebaseconsts.sfltimetabledetail_idactivity
-msgctxt "dsourcebaseconsts.sfltimetabledetail_idactivity"
-msgid "Activity"
-msgstr "Distribucion"
-
-#: dsourcebaseconsts.sfltimetabledetail_idday
-msgctxt "dsourcebaseconsts.sfltimetabledetail_idday"
-msgid "Day"
-msgstr "Day"
-
-#: dsourcebaseconsts.sfltimetabledetail_idhour
-msgctxt "dsourcebaseconsts.sfltimetabledetail_idhour"
-msgid "Hour"
-msgstr "Hour"
-
-#: dsourcebaseconsts.sfltimetabledetail_idtimetable
-msgctxt "dsourcebaseconsts.sfltimetabledetail_idtimetable"
-msgid "Timetable"
-msgstr "Horario"
-
-#: dsourcebaseconsts.sfltimetabledetail_session
-msgctxt "dsourcebaseconsts.sfltimetabledetail_session"
-msgid "Session"
-msgstr "Sesion"
-
-#: dsourcebaseconsts.sfltimetableresource_idactivity
-msgctxt "dsourcebaseconsts.sfltimetableresource_idactivity"
-msgid "Activity"
-msgstr "Distribucion"
-
-#: dsourcebaseconsts.sfltimetableresource_idresource
-msgctxt "dsourcebaseconsts.sfltimetableresource_idresource"
-msgid "Resource"
-msgstr "Profesor"
-
-#: dsourcebaseconsts.sfltimetableresource_idtimetable
-msgctxt "dsourcebaseconsts.sfltimetableresource_idtimetable"
-msgid "Timetable"
-msgstr "Horario"
-
-#: dsourcebaseconsts.sfltimetableresource_numresource
-msgctxt "dsourcebaseconsts.sfltimetableresource_numresource"
-msgid "Number"
-msgstr "Apellido"
-
-#: dsourcebaseconsts.sfltimetable_idtimetable
-#, fuzzy
-#| msgid "Id"
-msgctxt "dsourcebaseconsts.sfltimetable_idtimetable"
-msgid "Timetable Id"
-msgstr "Codigo"
-
-#: dsourcebaseconsts.sfltimetable_summary
-msgctxt "dsourcebaseconsts.sfltimetable_summary"
-msgid "Summary"
-msgstr "Resumen"
-
-#: dsourcebaseconsts.sfltimetable_timeend
-msgctxt "dsourcebaseconsts.sfltimetable_timeend"
-msgid "End Time"
-msgstr "Final"
-
-#: dsourcebaseconsts.sfltimetable_timeini
-msgctxt "dsourcebaseconsts.sfltimetable_timeini"
-msgid "Initial Time"
-msgstr "Inicio"
-
-#: dsourcebaseconsts.stbactivity
-msgctxt "dsourcebaseconsts.stbactivity"
-msgid "Activities"
-msgstr "Distribucion de la carga"
-
-#: dsourcebaseconsts.stbavailability
-#, fuzzy
-#| msgid "Participants"
-msgctxt "dsourcebaseconsts.stbavailability"
-msgid "Availability of Resources to Cover Requirements in the Theme"
-msgstr "Ayudas"
-
-#: dsourcebaseconsts.stbday
-msgctxt "dsourcebaseconsts.stbday"
-msgid "Working Days"
-msgstr "Dias Laborables"
-
-#: dsourcebaseconsts.stbhour
-msgctxt "dsourcebaseconsts.stbhour"
-msgid "Academic Hours"
-msgstr "Horas academicas"
-
-#: dsourcebaseconsts.stbparticipant
-msgctxt "dsourcebaseconsts.stbparticipant"
-msgid "Participants"
-msgstr "Ayudas"
-
-#: dsourcebaseconsts.stbperiod
-#, fuzzy
-#| msgid "Time Slots"
-msgctxt "dsourcebaseconsts.stbperiod"
-msgid "Periods"
-msgstr "Periodos"
-
-#: dsourcebaseconsts.stbresource
-msgctxt "dsourcebaseconsts.stbresource"
-msgid "Resources"
-msgstr "Profesores"
-
-#: dsourcebaseconsts.stbresourcetype
-msgctxt "dsourcebaseconsts.stbresourcetype"
-msgid "Resource types"
-msgstr ""
-
-#: dsourcebaseconsts.stbresourcetypelimit
-#, fuzzy
-#| msgid "Participants"
-msgctxt "dsourcebaseconsts.stbresourcetypelimit"
-msgid "Limits for usage of Resource Types in Themes"
-msgstr "Ayudas"
-
-#: dsourcebaseconsts.stbrestriction
-#, fuzzy
-#| msgid "Resource Restrictions"
-msgctxt "dsourcebaseconsts.stbrestriction"
-msgid "Restrictions"
-msgstr "Restricciones de profesores"
-
-#: dsourcebaseconsts.stbrestrictiontype
-#, fuzzy
-#| msgid "Types of Resource Restrictions"
-msgctxt "dsourcebaseconsts.stbrestrictiontype"
-msgid "Types of Restrictions"
-msgstr "Tipos de restricciones de profesores"
-
-#: dsourcebaseconsts.stbtheme
-msgctxt "dsourcebaseconsts.stbtheme"
-msgid "Themes"
-msgstr "Materias"
-
-#: dsourcebaseconsts.stbtimetable
-msgctxt "dsourcebaseconsts.stbtimetable"
-msgid "Timetables"
-msgstr "Horarios"
-
-#: dsourcebaseconsts.stbtimetabledetail
-msgctxt "dsourcebaseconsts.stbtimetabledetail"
-msgid "Detail of Timetables"
-msgstr "Detalle de los horarios"
-
-#: dsourcebaseconsts.stbtimetableresource
-msgctxt "dsourcebaseconsts.stbtimetableresource"
-msgid "Resources of Timetables"
-msgstr ""
-
 #: dsourceconsts.sflactivity_idactivity
 msgctxt "dsourceconsts.sflactivity_idactivity"
 msgid "Id"
@@ -416,8 +60,8 @@ msgstr "Nombre"
 
 #: dsourceconsts.sflparticipant_idactivity
 msgctxt "dsourceconsts.sflparticipant_idactivity"
-msgid "Category"
-msgstr ""
+msgid "Activity"
+msgstr "Actividad"
 
 #: dsourceconsts.sflparticipant_idresource
 #, fuzzy
@@ -444,11 +88,9 @@ msgstr "Hour"
 #: dsourceconsts.sflresourcetypelimit_idresourcetype
 msgctxt "dsourceconsts.sflresourcetypelimit_idresourcetype"
 msgid "Resource Type"
-msgstr ""
+msgstr "Tipo de Recurso"
 
 #: dsourceconsts.sflresourcetypelimit_idtheme
-#, fuzzy
-#| msgid "Resource"
 msgctxt "dsourceconsts.sflresourcetypelimit_idtheme"
 msgid "Theme"
 msgstr "Materias"
@@ -456,7 +98,7 @@ msgstr "Materias"
 #: dsourceconsts.sflresourcetypelimit_numresourcelimit
 msgctxt "dsourceconsts.sflresourcetypelimit_numresourcelimit"
 msgid "Limit"
-msgstr ""
+msgstr "Límite"
 
 #: dsourceconsts.sflresourcetype_idresourcetype
 msgctxt "dsourceconsts.sflresourcetype_idresourcetype"
@@ -466,7 +108,7 @@ msgstr "Codigo"
 #: dsourceconsts.sflresourcetype_maxworkload
 msgctxt "dsourceconsts.sflresourcetype_maxworkload"
 msgid "Max Work Load"
-msgstr ""
+msgstr "Carga Máxima"
 
 #: dsourceconsts.sflresourcetype_naresourcetype
 msgctxt "dsourceconsts.sflresourcetype_naresourcetype"
@@ -476,7 +118,7 @@ msgstr "Nombre"
 #: dsourceconsts.sflresourcetype_numresourcelimit
 msgctxt "dsourceconsts.sflresourcetype_numresourcelimit"
 msgid "Resource Limit"
-msgstr ""
+msgstr "Límite del Recurso"
 
 #: dsourceconsts.sflresourcetype_valresourcetype
 msgctxt "dsourceconsts.sflresourcetype_valresourcetype"
@@ -496,7 +138,7 @@ msgstr "Codigo"
 #: dsourceconsts.sflresource_idresourcetype
 msgctxt "dsourceconsts.sflresource_idresourcetype"
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: dsourceconsts.sflresource_naresource
 msgctxt "dsourceconsts.sflresource_naresource"
@@ -678,14 +320,12 @@ msgstr "Profesores"
 #: dsourceconsts.stbresourcetype
 msgctxt "dsourceconsts.stbresourcetype"
 msgid "Resource types"
-msgstr ""
+msgstr "Tipos de Recursos"
 
 #: dsourceconsts.stbresourcetypelimit
-#, fuzzy
-#| msgid "Participants"
 msgctxt "dsourceconsts.stbresourcetypelimit"
 msgid "Limits for usage of Resource Types in Themes"
-msgstr "Ayudas"
+msgstr "Limites de uso de los Tipos de Recursos en Temas"
 
 #: dsourceconsts.stbrestriction
 #, fuzzy
@@ -719,17 +359,7 @@ msgstr "Detalle de los horarios"
 #: dsourceconsts.stbtimetableresource
 msgctxt "dsourceconsts.stbtimetableresource"
 msgid "Resources of Timetables"
-msgstr ""
-
-#: tclassform.dbgrid.hint
-msgctxt "tclassform.dbgrid.hint"
-msgid "Categories|Available categories"
-msgstr "Cursos|Cursos disponibles"
-
-#: tclusterform.dbgrid.hint
-msgctxt "tclusterform.dbgrid.hint"
-msgid "Categories|Available categories"
-msgstr "Cursos|Cursos disponibles"
+msgstr "Recursos de Horarios"
 
 #: tconfigform.bbcancel.caption
 msgctxt "TCONFIGFORM.BBCANCEL.CAPTION"
@@ -772,7 +402,7 @@ msgstr "Institucion|Nombre de la Institucion"
 
 #: tconfigform.groupbox1.caption
 msgid "Comments"
-msgstr ""
+msgstr "Comentarios"
 
 #: tconfigform.groupbox2.caption
 msgctxt "tconfigform.groupbox2.caption"
@@ -939,7 +569,7 @@ msgstr "Tablas"
 
 #: tdbexplorerform.groupbox.caption
 msgid "Browse DataSet"
-msgstr ""
+msgstr "Navegar por Datos"
 
 #: tdbexplorerform.tbshowmetadata.caption
 msgid "Show Metadata"
@@ -1070,23 +700,23 @@ msgstr "Profesores"
 #: tmainform.actresource.hint
 msgctxt "tmainform.actresource.hint"
 msgid "Resources|Resources"
-msgstr ""
+msgstr "Recursos|Recursos"
 
 #: tmainform.actresourcetype.caption
 msgid "Resource Types"
-msgstr ""
+msgstr "Tipos de Recursos"
 
 #: tmainform.actresourcetype.hint
 msgid "Resource Types|Resource Types"
-msgstr ""
+msgstr "Tipos de Recursos|Tipos de Recursos"
 
 #: tmainform.actrestrictiontype.caption
 msgid "ActRestrictionType"
-msgstr ""
+msgstr "Tipos de Restricciones"
 
 #: tmainform.actrestrictiontype.hint
 msgid "Restriction Types|Restriction Types"
-msgstr ""
+msgstr "Tipos de Restricciones|Tipos de Restricciones"
 
 #: tmainform.actsave.caption
 msgid "Save..."
@@ -1382,7 +1012,7 @@ msgstr " Colisiones:"
 
 #: tprogressform.pndescription.caption
 msgid "Description:"
-msgstr ""
+msgstr "Descripción:"
 
 #: tprogressform.pnelapsedtime.caption
 msgctxt "tprogressform.pnelapsedtime.caption"
@@ -1451,19 +1081,17 @@ msgstr "Prohibiciones de profesor"
 
 #: tresourceform.actrestriction.hint
 msgid "Resource restrictions|Input Resource restrictions"
-msgstr ""
+msgstr "Restricciones de Recurso|Ingresar Restricciones de Recurso"
 
 #: tresourceform.caption
-#, fuzzy
-#| msgid "Themes"
 msgctxt "tresourceform.caption"
 msgid "Resources"
-msgstr "Profesor"
+msgstr "Recursos"
 
 #: tresourceform.groupbox.caption
 msgctxt "tresourceform.groupbox.caption"
 msgid "Resources"
-msgstr "Profesores"
+msgstr "Recursos"
 
 #: tselperiodform.bbcancel.caption
 msgctxt "TSELPERIODFORM.BBCANCELAR.CAPTION"
@@ -1476,11 +1104,9 @@ msgid "Ok"
 msgstr "Aceptar"
 
 #: tselperiodform.caption
-#, fuzzy
-#| msgid "Swap periods"
 msgctxt "tselperiodform.caption"
 msgid "Intercambiar Period"
-msgstr "Intercambiar periodos"
+msgstr "Intercambiar Períodos"
 
 #: tselperiodform.lbday.caption
 msgctxt "tselperiodform.lbday.caption"
@@ -1555,11 +1181,9 @@ msgstr "Version"
 
 #: tthemeform.actfilterbyresourcetype.caption
 msgid "Filter by Resource Type"
-msgstr ""
+msgstr "Filtrar por Tipo de Recurso"
 
 #: tthemeform.caption
-#, fuzzy
-#| msgid "Resource"
 msgctxt "tthemeform.caption"
 msgid "Theme"
 msgstr "Materias"
@@ -1590,11 +1214,11 @@ msgstr "Ayudas"
 
 #: tthemeform.groupbox4.caption
 msgid "Available Resources"
-msgstr ""
+msgstr "Recursos Disponibles"
 
 #: tthemeform.groupbox5.caption
 msgid "Resource Type Limit"
-msgstr ""
+msgstr "Límite del Tipo de Recurso"
 
 #: tthemeform.toolbutton3.caption
 msgctxt "tthemeform.toolbutton3.caption"
@@ -1643,25 +1267,21 @@ msgstr "Materias cortadas por la hora|Materias cortadas por la hora"
 
 #: ttimetableform.actclashactivity.caption
 msgid "Clashes of Activities"
-msgstr ""
+msgstr "Conflictos de Actividades"
 
 #: ttimetableform.actclashactivity.hint
 msgid "Clashes of Activities|Clashes of Activities"
-msgstr ""
+msgstr "Conflictos de Actividades|Conflictos de Actividades"
 
 #: ttimetableform.actclashresource.caption
-#, fuzzy
-#| msgid "Clashes of resources"
 msgctxt "TTIMETABLEFORM.ACTCLASHRESOURCE.CAPTION"
 msgid "Clashes of Resources"
-msgstr "Cruce de profesores"
+msgstr "Cruces de Recursos"
 
 #: ttimetableform.actclashresource.hint
-#, fuzzy
-#| msgid "Clashes of resources|Clashes of resources"
 msgctxt "TTIMETABLEFORM.ACTCLASHRESOURCE.HINT"
 msgid "Clashes of Resources|Clashes of Resources"
-msgstr "Cruce de profesores|Cruce de profesores"
+msgstr "Cruce de Recursos|Cruce de Recursos"
 
 #: ttimetableform.actimprovetimetable.caption
 msgid "Improve timetable"
@@ -1674,12 +1294,12 @@ msgstr "Mejorar horario|Mejorar horario seleccionado"
 #: ttimetableform.actrestrictionnonsatisfied.caption
 msgctxt "ttimetableform.actrestrictionnonsatisfied.caption"
 msgid "Resource restrictions"
-msgstr "Prohibiciones de profesor"
+msgstr "Restricciones de Recursos"
 
 #: ttimetableform.actrestrictionnonsatisfied.hint
 msgctxt "ttimetableform.actrestrictionnonsatisfied.hint"
 msgid "Resource retrictions|Resource restrictions non satisfied"
-msgstr "Prohibiciones de profesor|Prohibiciones de profesor no respetadas"
+msgstr "Restricciones de Recursos|Restricciones de Recrursos no satisfechas"
 
 #: ttimetableform.acttimetableresource.caption
 msgctxt "ttimetableform.acttimetableresource.caption"
@@ -1725,7 +1345,7 @@ msgstr "Mientras se procesaba %s"
 
 #: uttgconsts.sactivitywithoutresources
 msgid "Activity %s does not have assigned resources"
-msgstr ""
+msgstr "La Actividad %s no tiene recursos asignados"
 
 #: uttgconsts.sapplydownhill
 msgid "Applying Downhill"
@@ -1737,7 +1357,7 @@ msgstr "Asignar"
 
 #: uttgconsts.sattendant
 msgid "Attendant"
-msgstr ""
+msgstr "Asistente"
 
 #: uttgconsts.sbasetimetable
 msgid "Base Timetable: %d"
@@ -1840,7 +1460,7 @@ msgstr "Editando"
 
 #: uttgconsts.selapsedtime
 msgid "Elapsed Time"
-msgstr ""
+msgstr "Tiempo Transcurrido"
 
 #: uttgconsts.sevolutiveelitistalgorithm
 msgid "Evolutive Elitist Algorithm"
@@ -2005,7 +1625,7 @@ msgstr "Probabilidad de Reparacion"
 
 #: uttgconsts.sresourceoverflow
 msgid "For [%s], the number of activities %d exceeds its capacity %d"
-msgstr ""
+msgstr "Para [%s], el número de actividades %d excede su capacidad %d"
 
 #: uttgconsts.sresourcesworkloadwithoutproblems
 msgid "Resources' Work load without problems..."
@@ -2025,7 +1645,7 @@ msgstr "Profesor; Restricciones"
 
 #: uttgconsts.sroom
 msgid "Room"
-msgstr ""
+msgstr "Sala"
 
 #: uttgconsts.ssavechanges
 msgid "Do you want to save the changes?"
@@ -2045,11 +1665,11 @@ msgstr "Buscar por %s"
 
 #: uttgconsts.ssupervisor
 msgid "Supervisor"
-msgstr ""
+msgstr "Supervisor"
 
 #: uttgconsts.sthemeoverflow
 msgid "For [%s] and the Resources [%s], the limit %d has been exceeded in %d"
-msgstr ""
+msgstr "Para [%s] y el Recurso [%s], el límite %d ha sido excedido en %d"
 
 #: uttgconsts.sthenexttimetablesalreadyexists
 msgid "The next Timetables already exists: %s"

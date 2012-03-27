@@ -68,7 +68,7 @@ install:
 	mkdir -p $(DESTDIR)/usr/share/applications
 	cp $(TTGEXE) $(DESTDIR)/usr/bin/
 	cp $(TTGDIR)/examples/Britanico2000.ttd $(TTGDIR)/examples/Salamanca1999.ttd  $(DESTDIR)/usr/share/doc/$(PACKAGE)/examples/
-	cp $(TTGSRC)/locale/ttg.es.po $(DESTDIR)/usr/share/locale/es/LC_MESSAGES/
+	msgfmt $(TTGSRC)/locale/ttg.es.po $(DESTDIR)/usr/share/locale/es/LC_MESSAGES/ttg.mo
 	sed -e s:'<v>AppName</v>':'$(APPNAME)':g ttg_desktop.tmpl > $(DESTDIR)/usr/share/applications/ttg.desktop
 
 debiansrc: tgz

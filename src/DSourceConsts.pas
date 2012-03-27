@@ -63,7 +63,7 @@ resourcestring
   SFlRestriction_IdDay = 'Day';
   SFlRestriction_IdHour = 'Hour';
   SFlRestriction_IdRestrictionType = 'Restriction Type';
-  SFlParticipant_IdActivity = 'Category';
+  SFlParticipant_IdActivity = 'Activity';
   SFlParticipant_IdResource = 'Resource';
   SFlParticipant_NumResource = 'Number';
   SFlTimetable_IdTimetable = 'Timetable Id';
