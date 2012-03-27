@@ -48,7 +48,7 @@ inherited TimetableResourceForm: TTimetableResourceForm
     object CBShowResource: TComboBox[4]
       Left = 162
       Height = 24
-      Hint = 'Show|Param to show in the teacher timetable'
+      Hint = 'Show|Param to show in the resource timetable'
       Top = 2
       Width = 193
       ItemHeight = 0

@@ -34,7 +34,7 @@ resourcestring
   SDay6 = 'Saturday';
   SDeleteCell = 'Press <Del> to clean the cell';
   SDetail = 'Detail';
-  SDoNotHaveResource = 'do not have teacher';
+  SDoNotHaveResource = 'do not have resource';
   SDoNotAppearsIn = 'do not appears in';
   SDownHillAlgorithm = 'Downhill Algorithm';
   SEditing = 'Editing';
@@ -64,8 +64,8 @@ resourcestring
   SNo = 'No';
   SNoErrorReadyForCheckSummary = 'Ready to generate timetable. Show timetable check Summary?';
   SNonScatteredActivity = 'Non Scattered Activities';
-  SNumHardRestrictions = 'Number of hard teacher restrictions...';
-  SNumSoftRestrictions = 'Number of soft teacher restrictions...';
+  SNumHardRestrictions = 'Number of hard resource restrictions...';
+  SNumSoftRestrictions = 'Number of soft resource restrictions...';
   SPendingChangesWillBeLostYouReallyWantToQuit = 'Pending changes will be lost. Do you really want to quit?';
   SPollinationProbability = 'Pollination Probability';
   SPopulationSize = 'Population size';

@@ -17,11 +17,9 @@ msgid "Name"
 msgstr "Nombre"
 
 #: dsourceconsts.sflavailability_idresource
-#, fuzzy
-#| msgid "Assistant"
 msgctxt "dsourceconsts.sflavailability_idresource"
 msgid "Resource"
-msgstr "Ayudante"
+msgstr "Recurso"
 
 #: dsourceconsts.sflavailability_idtheme
 msgctxt "dsourceconsts.sflavailability_idtheme"
@@ -64,11 +62,9 @@ msgid "Activity"
 msgstr "Actividad"
 
 #: dsourceconsts.sflparticipant_idresource
-#, fuzzy
-#| msgid "Assistant"
 msgctxt "dsourceconsts.sflparticipant_idresource"
 msgid "Resource"
-msgstr "Ayudante"
+msgstr "Recurso"
 
 #: dsourceconsts.sflparticipant_numresource
 msgctxt "dsourceconsts.sflparticipant_numresource"
@@ -181,11 +177,9 @@ msgid "Hour"
 msgstr "Hour"
 
 #: dsourceconsts.sflrestriction_idresource
-#, fuzzy
-#| msgid "Assistant"
 msgctxt "dsourceconsts.sflrestriction_idresource"
 msgid "Resource"
-msgstr "Ayudante"
+msgstr "Recurso"
 
 #: dsourceconsts.sflrestriction_idrestrictiontype
 msgctxt "dsourceconsts.sflrestriction_idrestrictiontype"
@@ -238,11 +232,9 @@ msgid "Activity"
 msgstr "Distribucion"
 
 #: dsourceconsts.sfltimetableresource_idresource
-#, fuzzy
-#| msgid "Assistant"
 msgctxt "dsourceconsts.sfltimetableresource_idresource"
 msgid "Resource"
-msgstr "Ayudante"
+msgstr "Recurso"
 
 #: dsourceconsts.sfltimetableresource_idtimetable
 msgctxt "dsourceconsts.sfltimetableresource_idtimetable"
@@ -255,11 +247,9 @@ msgid "Number"
 msgstr "Apellido"
 
 #: dsourceconsts.sfltimetable_idtimetable
-#, fuzzy
-#| msgid "Id"
 msgctxt "dsourceconsts.sfltimetable_idtimetable"
 msgid "Timetable Id"
-msgstr "Codigo"
+msgstr "Id Horario"
 
 #: dsourceconsts.sfltimetable_summary
 msgctxt "dsourceconsts.sfltimetable_summary"
@@ -277,18 +267,14 @@ msgid "Initial Time"
 msgstr "Inicio"
 
 #: dsourceconsts.stbactivity
-#, fuzzy
-#| msgid "Activity"
 msgctxt "dsourceconsts.stbactivity"
 msgid "Activities"
-msgstr "Distribucion"
+msgstr "Actividades"
 
 #: dsourceconsts.stbavailability
-#, fuzzy
-#| msgid "Participants"
 msgctxt "dsourceconsts.stbavailability"
 msgid "Availability of Resources to Cover Requirements in the Theme"
-msgstr "Ayudas"
+msgstr "Disponibilidad de Recursos para Cubrir Requerimientos de los Temas"
 
 #: dsourceconsts.stbday
 msgctxt "dsourceconsts.stbday"
@@ -306,8 +292,6 @@ msgid "Participants"
 msgstr "Ayudas"
 
 #: dsourceconsts.stbperiod
-#, fuzzy
-#| msgid "Time Slots"
 msgctxt "dsourceconsts.stbperiod"
 msgid "Periods"
 msgstr "Periodos"
@@ -328,18 +312,14 @@ msgid "Limits for usage of Resource Types in Themes"
 msgstr "Limites de uso de los Tipos de Recursos en Temas"
 
 #: dsourceconsts.stbrestriction
-#, fuzzy
-#| msgid "Resource Restrictions"
 msgctxt "dsourceconsts.stbrestriction"
 msgid "Restrictions"
-msgstr "Restricciones de profesores"
+msgstr "Restricciones"
 
 #: dsourceconsts.stbrestrictiontype
-#, fuzzy
-#| msgid "Types of Resource Restrictions"
 msgctxt "dsourceconsts.stbrestrictiontype"
 msgid "Types of Restrictions"
-msgstr "Tipos de restricciones de profesores"
+msgstr "Tipos de restricciones"
 
 #: dsourceconsts.stbtheme
 msgctxt "dsourceconsts.stbtheme"
@@ -362,12 +342,12 @@ msgid "Resources of Timetables"
 msgstr "Recursos de Horarios"
 
 #: tconfigform.bbcancel.caption
-msgctxt "TCONFIGFORM.BBCANCEL.CAPTION"
+msgctxt "tconfigform.bbcancel.caption"
 msgid "Cancel"
 msgstr "Cancelar"
 
 #: tconfigform.bbok.caption
-msgctxt "TCONFIGFORM.BBOK.CAPTION"
+msgctxt "tconfigform.bbok.caption"
 msgid "Ok"
 msgstr "Aceptar"
 
@@ -377,18 +357,14 @@ msgid "Configure"
 msgstr "Configure"
 
 #: tconfigform.cbapplydoubledownhill.caption
-#, fuzzy
-#| msgid "Apply Downhill - slow"
-msgctxt "TCONFIGFORM.CBAPPLYDOUBLEDOWNHILL.CAPTION"
+msgctxt "tconfigform.cbapplydoubledownhill.caption"
 msgid "Apply Downhill"
-msgstr "Aplicar descenso  - lento"
+msgstr "Aplicar descenso"
 
 #: tconfigform.cbusecustomseed.caption
-#, fuzzy
-#| msgid "Init with the system time"
-msgctxt "TCONFIGFORM.CBUSECUSTOMSEED.CAPTION"
+msgctxt "tconfigform.cbusecustomseed.caption"
 msgid "Use custom Seed:"
-msgstr "Inicializar con la hora del sistema"
+msgstr "Definir semilla:"
 
 #: tconfigform.edbookmarks.text
 msgctxt "tconfigform.edbookmarks.text"
@@ -396,7 +372,7 @@ msgid "1,2"
 msgstr "1,2"
 
 #: tconfigform.ednainstitution.hint
-msgctxt "TCONFIGFORM.EDNAINSTITUTION.HINT"
+msgctxt "tconfigform.ednainstitution.hint"
 msgid "Institution|Institution Name"
 msgstr "Institucion|Nombre de la Institucion"
 
@@ -430,22 +406,22 @@ msgid "Clash of Activities:"
 msgstr "Cruce materias:"
 
 #: tconfigform.lbcrossprobability.caption
-msgctxt "TCONFIGFORM.LBCROSSPROBABILITY.CAPTION"
+msgctxt "tconfigform.lbcrossprobability.caption"
 msgid "Cross Probability:"
 msgstr "Prob. Cruce:"
 
 #: tconfigform.lbdownhilllevels.caption
-msgctxt "TCONFIGFORM.LBDOWNHILLLEVELS.CAPTION"
+msgctxt "tconfigform.lbdownhilllevels.caption"
 msgid "Downhill Levels:"
 msgstr "Niveles de descenso:"
 
 #: tconfigform.lbinitialtimetables.caption
-msgctxt "TCONFIGFORM.LBINITIALTIMETABLES.CAPTION"
+msgctxt "tconfigform.lbinitialtimetables.caption"
 msgid "Initial Timetables:"
 msgstr "Horarios iniciales:"
 
 #: tconfigform.lbinstitutionname.caption
-msgctxt "TCONFIGFORM.LBINSTITUTIONNAME.CAPTION"
+msgctxt "tconfigform.lbinstitutionname.caption"
 msgid "Name:"
 msgstr "Nombre:"
 
@@ -455,7 +431,7 @@ msgid "Iterations:"
 msgstr "Iteraciones:"
 
 #: tconfigform.lbmutationprobability.caption
-msgctxt "TCONFIGFORM.LBMUTATIONPROBABILITY.CAPTION"
+msgctxt "tconfigform.lbmutationprobability.caption"
 msgid "Mutation Probability:"
 msgstr "Prob. Mutacion"
 
@@ -465,37 +441,37 @@ msgid "Non Scattered Activities:"
 msgstr "Materias juntas:"
 
 #: tconfigform.lbpollinationprobability.caption
-msgctxt "TCONFIGFORM.LBPOLLINATIONPROBABILITY.CAPTION"
+msgctxt "tconfigform.lbpollinationprobability.caption"
 msgid "Pollination Probability:"
 msgstr "Prob. Polinizacion:"
 
 #: tconfigform.lbpopulationsize.caption
-msgctxt "TCONFIGFORM.LBPOPULATIONSIZE.CAPTION"
+msgctxt "tconfigform.lbpopulationsize.caption"
 msgid "Population Size:"
 msgstr "Individuos:"
 
 #: tconfigform.lbreparationprobability.caption
-msgctxt "TCONFIGFORM.LBREPARATIONPROBABILITY.CAPTION"
+msgctxt "tconfigform.lbreparationprobability.caption"
 msgid "Reparation Probability:"
 msgstr "Prob. Reparacion:"
 
 #: tconfigform.lbshareddirectory.caption
-msgctxt "TCONFIGFORM.LBSHAREDDIRECTORY.CAPTION"
+msgctxt "tconfigform.lbshareddirectory.caption"
 msgid "Shared directory:"
 msgstr "Directorio compartido:"
 
 #: tconfigform.lbtrcolor.caption
-msgctxt "TCONFIGFORM.LBTRCOLOR.CAPTION"
+msgctxt "tconfigform.lbtrcolor.caption"
 msgid "Color:"
 msgstr "Color:"
 
 #: tconfigform.lbtrname.caption
-msgctxt "TCONFIGFORM.LBTRNAME.CAPTION"
+msgctxt "tconfigform.lbtrname.caption"
 msgid "Name:"
 msgstr "Nombre:"
 
 #: tconfigform.lbtrvalue.caption
-msgctxt "TCONFIGFORM.LBTRVALUE.CAPTION"
+msgctxt "tconfigform.lbtrvalue.caption"
 msgid "Value:"
 msgstr "Valor:"
 
@@ -515,7 +491,7 @@ msgid "Options"
 msgstr "Opciones"
 
 #: tconfigform.tsweights.caption
-msgctxt "TCONFIGFORM.TSWEIGHTS.CAPTION"
+msgctxt "tconfigform.tsweights.caption"
 msgid "Weights"
 msgstr "Pesos"
 
@@ -823,22 +799,22 @@ msgid "View|View results"
 msgstr "Ver|Ver resultados"
 
 #: tmainform.n1.caption
-msgctxt "TMAINFORM.N1.CAPTION"
+msgctxt "tmainform.n1.caption"
 msgid "-"
 msgstr "-"
 
 #: tmainform.n2.caption
-msgctxt "TMAINFORM.N2.CAPTION"
+msgctxt "tmainform.n2.caption"
 msgid "-"
 msgstr "-"
 
 #: tmainform.n5.caption
-msgctxt "TMAINFORM.N5.CAPTION"
+msgctxt "tmainform.n5.caption"
 msgid "-"
 msgstr "-"
 
 #: tmainform.n6.caption
-msgctxt "TMAINFORM.N6.CAPTION"
+msgctxt "tmainform.n6.caption"
 msgid "-"
 msgstr "-"
 
@@ -1094,7 +1070,7 @@ msgid "Resources"
 msgstr "Recursos"
 
 #: tselperiodform.bbcancel.caption
-msgctxt "TSELPERIODFORM.BBCANCELAR.CAPTION"
+msgctxt "tselperiodform.bbcancelar.caption"
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -1138,7 +1114,7 @@ msgid "Show"
 msgstr "Mostrar"
 
 #: tsingleeditorform.actshow.hint
-msgctxt "TSINGLEEDITORFORM.ACTSHOW.HINT"
+msgctxt "tsingleeditorform.actshow.hint"
 msgid "Show|Show the grid content in a report"
 msgstr "Presentar|Presenta el contenido en un reporte"
 
@@ -1189,28 +1165,23 @@ msgid "Theme"
 msgstr "Materias"
 
 #: tthemeform.dbgriddetail.hint
-#, fuzzy
-#| msgid "Activities"
 msgctxt "tthemeform.dbgriddetail.hint"
-msgid "Activity of Themes"
-msgstr "Distribucion de la carga"
+msgid "Activities of Theme"
+msgstr "Actividades del Tema"
 
-#: tthemeform.grbdetail.caption
-#, fuzzy
-#| msgid "Activity"
 msgctxt "tthemeform.grbdetail.caption"
 msgid "Activities"
-msgstr "Distribucion"
+msgstr "Actividades"
 
 #: tthemeform.groupbox.caption
 msgctxt "tthemeform.groupbox.caption"
 msgid "Themes"
-msgstr "Materias"
+msgstr "Temas"
 
 #: tthemeform.groupbox3.caption
 msgctxt "tthemeform.groupbox3.caption"
 msgid "Participants"
-msgstr "Ayudas"
+msgstr "Participantes"
 
 #: tthemeform.groupbox4.caption
 msgid "Available Resources"
@@ -1228,7 +1199,7 @@ msgstr "ToolButton3"
 #: ttimetableclassform.cbshowclass.hint
 msgctxt "ttimetableclassform.cbshowclass.hint"
 msgid "Show|Param to show in the timetable"
-msgstr "Mostrar|Parametro a mostrar en el horario"
+msgstr "Mostrar|Parámetro a mostrar en el horario"
 
 #: ttimetableclassform.tbswaptimeslots.hint
 msgctxt "ttimetableclassform.tbswaptimeslots.hint"
@@ -1274,12 +1245,12 @@ msgid "Clashes of Activities|Clashes of Activities"
 msgstr "Conflictos de Actividades|Conflictos de Actividades"
 
 #: ttimetableform.actclashresource.caption
-msgctxt "TTIMETABLEFORM.ACTCLASHRESOURCE.CAPTION"
+msgctxt "ttimetableform.actclashresource.caption"
 msgid "Clashes of Resources"
 msgstr "Cruces de Recursos"
 
 #: ttimetableform.actclashresource.hint
-msgctxt "TTIMETABLEFORM.ACTCLASHRESOURCE.HINT"
+msgctxt "ttimetableform.actclashresource.hint"
 msgid "Clashes of Resources|Clashes of Resources"
 msgstr "Cruce de Recursos|Cruce de Recursos"
 
@@ -1316,11 +1287,9 @@ msgid "TimetableForm"
 msgstr "TimetableForm"
 
 #: ttimetableresourceform.cbshowresource.hint
-#, fuzzy
-#| msgid "Show|Param to show in the resource timetable"
 msgctxt "ttimetableresourceform.cbshowresource.hint"
-msgid "Show|Param to show in the teacher timetable"
-msgstr "Mostrar|Parametro a mostrar en el horario del profesor"
+msgid "Show|Param to show in the resource timetable"
+msgstr "Mostrar|Parametro a mostrar en el horario de recurso"
 
 #: uabout.sappname
 msgid "Automatic Timetable Generator"
@@ -1445,10 +1414,8 @@ msgid "do not appears in"
 msgstr "no aparece en"
 
 #: uttgconsts.sdonothaveresource
-#, fuzzy
-#| msgid "do not have resource"
-msgid "do not have teacher"
-msgstr "no tiene profesor"
+msgid "do not have resource"
+msgstr "no tiene recurso"
 
 #: uttgconsts.sdownhillalgorithm
 msgid "Downhill Algorithm"
@@ -1569,16 +1536,12 @@ msgid "Non Scattered Activities"
 msgstr "Materias no dispersas"
 
 #: uttgconsts.snumhardrestrictions
-#, fuzzy
-#| msgid "Number of hard resource restrictions..."
-msgid "Number of hard teacher restrictions..."
-msgstr "Numero de prohibiciones de profesores con problemas..."
+msgid "Number of hard resource restrictions..."
+msgstr "Numero de prohibiciones ..."
 
 #: uttgconsts.snumsoftrestrictions
-#, fuzzy
-#| msgid "Number of soft resource restrictions..."
-msgid "Number of soft teacher restrictions..."
-msgstr "Numero de prohibiciones de profesores sin problemas..."
+msgid "Number of soft resource restrictions..."
+msgstr "Numero de prohibiciones ligeras ..."
 
 #: uttgconsts.spendingchangeswillbelostyoureallywanttoquit
 msgid "Pending changes will be lost. Do you really want to quit?"

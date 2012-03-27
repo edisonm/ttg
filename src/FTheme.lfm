@@ -205,7 +205,7 @@ inherited ThemeForm: TThemeForm
         ClientWidth = 411
         inherited DBGridDetail: TDBGrid
           Height = 367
-          Hint = 'Activity of Themes'
+          Hint = 'Activities of Theme'
           Width = 411
           ShowHint = True
         end
