@@ -22,8 +22,8 @@ $(LAZRES): $(LAZBASE)/tools/lazres.lpi
 	cd "$(LAZBASE)/tools" && $(LAZBUILD) "lazres.lpi"
 endif
 
-# %.lrs: %.lfm $(LRSDEP)
-# 	$(LAZRES) $@ $<
+%.lrs: %.lfm $(LRSDEP)
+	$(LAZRES) $@ $<
 
 ttg.lrs: locale/ttg.es.po $(TTGDIR)/dat/default.ttd
 	$(LAZRES) $@ locale/ttg.es.po $(TTGDIR)/dat/default.ttd

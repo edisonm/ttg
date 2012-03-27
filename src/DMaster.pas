@@ -184,8 +184,8 @@ end;
 
 initialization
 
-{$i DMaster.lrs}
-{$i ttgsql.lrs}
+{$I DMaster.lrs}
+{$I ttgsql.lrs}
 
 end.
 

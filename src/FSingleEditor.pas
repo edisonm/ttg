@@ -175,7 +175,7 @@ end;
 
 initialization
   
-{$i FSingleEditor.lrs}
+{$I FSingleEditor.lrs}
 
 end.
 

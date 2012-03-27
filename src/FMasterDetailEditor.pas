@@ -119,6 +119,6 @@ end;
 
 initialization
 
-{$i FMasterDetailEditor.lrs}
+{$I FMasterDetailEditor.lrs}
 
 end.

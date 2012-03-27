@@ -73,6 +73,6 @@ end;
 
 initialization
 
-{$i FSplash.lrs}
+{$I FSplash.lrs}
 
 end.

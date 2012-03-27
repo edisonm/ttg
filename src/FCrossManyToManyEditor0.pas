@@ -242,6 +242,6 @@ end;
 
 initialization
 
-{$i FCrossManyToManyEditor0.lrs}
+{$I FCrossManyToManyEditor0.lrs}
 
 end.

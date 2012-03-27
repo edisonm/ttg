@@ -32,7 +32,7 @@ begin
   if Language = '' then
     EnableTranslator('ttg')
   else
-    EnableTranslator(GetLResourceForLanguage('ttg', Language));
+    EnableTranslator('ttg', Language);
   if Assigned(ResourceTranslator) then
   begin
     ResourceTranslator.TranslateUnitResourceStrings('UAbout');

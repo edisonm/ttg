@@ -139,6 +139,6 @@ end;
 
 initialization
 
-{$i FTimetableResource.lrs}
+{$I FTimetableResource.lrs}
 
 end.

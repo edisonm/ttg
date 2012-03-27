@@ -360,6 +360,6 @@ end;
 
 initialization
 
-{$i FCrossManytoManyEditorR.lrs}
+{$I FCrossManytoManyEditorR.lrs}
 
 end.

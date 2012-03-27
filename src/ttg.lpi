@@ -34,7 +34,7 @@
           <Macro1 Name="BuildLabel"/>
         </MacroValues>
         <CompilerOptions>
-          <Version Value="9"/>
+          <Version Value="11"/>
           <Target>
             <Filename Value="../bin/$(TargetCPU)-$(TargetOS)/ttg"/>
           </Target>
@@ -51,6 +51,7 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
+              <GenerateDebugInfo Value="False"/>
               <UseLineInfoUnit Value="False"/>
             </Debugging>
             <LinkSmart Value="True"/>
@@ -82,7 +83,7 @@
       <local>
         <FormatVersion Value="1"/>
         <CommandLineParams Value="Salamanca1999.ttd"/>
-        <WorkingDirectory Value="/home/edison/apps/pascal/TTG/examples"/>
+        <WorkingDirectory Value="../examples"/>
       </local>
     </RunParams>
     <RequiredPackages Count="5">
@@ -343,7 +344,7 @@
     </Units>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="9"/>
+    <Version Value="11"/>
     <Target>
       <Filename Value="../bin/$(TargetCPU)-$(TargetOS)-debug/ttg"/>
     </Target>

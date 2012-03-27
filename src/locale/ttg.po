@@ -1659,6 +1659,7 @@ msgid "Master record not found in %s for %s.[%s]=%s"
 msgstr ""
 
 #: urelutils.swhenprocessing
+msgctxt "urelutils.swhenprocessing"
 msgid "When processing %s"
 msgstr ""
 
@@ -2008,6 +2009,11 @@ msgstr ""
 #: uttgconsts.sweights
 msgctxt "uttgconsts.sweights"
 msgid "Weights"
+msgstr ""
+
+#: uttgconsts.swhenprocessing
+msgctxt "uttgconsts.swhenprocessing"
+msgid "When processing %s"
 msgstr ""
 
 #: uttgconsts.sworkinprogress

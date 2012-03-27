@@ -469,6 +469,6 @@ end;
 
 initialization
 
-{$i DSource.lrs}
+{$I DSource.lrs}
 
 end.

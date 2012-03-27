@@ -16,7 +16,7 @@ type
   private
     FPOFile: TPOFile;
   public
-    constructor Create(LResource: TLResource);
+    constructor Create(APOFile: TPOFile); overload;
     destructor Destroy; override;
     procedure TranslateStringProperty(Sender: TObject; const Instance: TPersistent;
       PropInfo: PPropInfo; var Content: string); override;
@@ -24,11 +24,11 @@ type
     function TranslateUnitResourceStrings(const ResUnitName: string): Boolean;
   end;
 
-  function GetLResourceForLanguage(const Name, Lang: AnsiString): TLResource;
+  function GetLResourceForLanguage(const ResName, Language: AnsiString): TLResource;
   function GetLResourceForDefaultLanguage(const ResName: AnsiString): TLResource;
 
   procedure DisposeTranslator;
-  procedure EnableTranslator(LResource: TLResource); overload;
+  procedure EnableTranslator(const ResName, Language: AnsiString); overload;
   procedure EnableTranslator(const ResName: AnsiString); overload;
 
 var
@@ -40,31 +40,32 @@ uses
   FileUtil, LCLProc;
 { TResourceTranslator }
 
-function GetLResourceForLanguage(const Name, Lang: AnsiString): TLResource;
+function GetLResourceForLanguage(const ResName, Language: AnsiString): TLResource;
 begin
-  Result := LazarusResources.Find(Name + '.' + Lang, 'PO');
+  Result := LazarusResources.Find(ResName + '.' + Language, 'PO');
+  if Result = nil then
+  begin
+    Result := LazarusResources.Find(ResName + '.' + Copy(Language, 1, 2), 'PO');
+  end;
+end;
+
+function GetDefaultLanguage: string;
+var
+  LangShortID, T: string;
+begin
+  Result := GetEnvironmentVariableUTF8('LANG');
+  T := '';
+  if Result = '' then LCLGetLanguageIDs(Result, T);
 end;
 
 function GetLResourceForDefaultLanguage(const ResName: AnsiString): TLResource;
-var
-  Lang, LangShortID, T: string;
 begin
-  Lang := GetEnvironmentVariableUTF8('LANG');
-  T := '';
-  if Lang = '' then
-    LCLGetLanguageIDs(Lang, T);
-  Result := GetLResourceForLanguage(ResName, Lang);
-  if Result = nil then
-  begin
-    LangShortID := copy(Lang, 1, 2);
-    Result := GetLResourceForLanguage(ResName, LangShortID);
-  end
+  Result := GetLResourceForLanguage(ResName, GetDefaultLanguage);
 end;
 
-constructor TResourceTranslator.Create(LResource: TLResource);
+constructor TResourceTranslator.Create(APOFile: TPOFile);
 begin
-  FPOFile:=TPOFile.Create;
-  FPOFile.ReadPOText(LResource.Value);
+  FPOFile := APOFile;
 end;
 
 destructor TResourceTranslator.Destroy;
@@ -138,30 +139,57 @@ begin
   end;
 end;
 
-procedure EnableTranslator(LResource: TLResource); overload;
-begin
-  if LResource <> nil then
-    ResourceTranslator := TResourceTranslator.Create(LResource);
-  if ResourceTranslator <> nil then
-    LRSTranslator := ResourceTranslator;
-end;
-
-procedure EnableTranslator(const ResName: AnsiString); overload;
+function NewPOFile(const ResName, Language: AnsiString): TPOFile;
 var
+  LangFile: string;
   LResource: TLResource;
 begin
-  LResource := GetLResourceForDefaultLanguage(ResName);
+  LResource := GetLResourceForLanguage(ResName, Language);
   if LResource <> nil then
   begin
-    EnableTranslator(LResource);
+    Result := TPOFile.Create;
+    Result.ReadPOText(LResource.Value);
+  end
+  {$IFDEF UNIX}
+  else
+  begin
+    LangFile := '/usr/share/locale/' + Language + '/LC_MESSAGES/' +
+      ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.po');
+    if not FileExistsUTF8(LangFile) then
+      LangFile := '/usr/share/locale/' + Copy(Language, 1, 2) + '/LC_MESSAGES/' +
+        ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.po');
+    if FileExistsUTF8(LangFile) then
+    begin
+      Result := TPOFile.Create(LangFile);
+    end
+    else
+      Result := nil;
+  end;
+  {$ENDIF}
+end;
+
+procedure EnableTranslator(const ResName, Language: AnsiString); overload;
+var
+  LResource: TLResource;
+  LangFile: string;
+  POFile: TPOFile;
+begin
+  POFile := NewPOFile(ResName, Language);
+  if POFile <> nil then
+  begin
+    ResourceTranslator := TResourceTranslator.Create(POFile);
   end
   else
     ResourceTranslator := nil;
+  LRSTranslator := ResourceTranslator;
+end;
+
+procedure EnableTranslator(const ResName: AnsiString); overload;
+begin
+  EnableTranslator(ResName, GetDefaultLanguage);
 end;
 
 initialization
   {$I ttg.lrs}
-finalization
-  DisposeTranslator;
 end.
 

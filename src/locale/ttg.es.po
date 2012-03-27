@@ -370,7 +370,7 @@ msgstr "Materia"
 #: dsourceconsts.sflactivity_naactivity
 msgctxt "dsourceconsts.sflactivity_naactivity"
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: dsourceconsts.sflavailability_idresource
 #, fuzzy
@@ -563,7 +563,7 @@ msgstr "Codigo"
 #: dsourceconsts.sfltheme_natheme
 msgctxt "dsourceconsts.sfltheme_natheme"
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: dsourceconsts.sfltimetabledetail_idactivity
 msgctxt "dsourceconsts.sfltimetabledetail_idactivity"
@@ -1719,6 +1719,7 @@ msgid "Master record not found in %s for %s.[%s]=%s"
 msgstr "No existe registro maestro en %s para %s.[%s]=%s"
 
 #: urelutils.swhenprocessing
+msgctxt "urelutils.swhenprocessing"
 msgid "When processing %s"
 msgstr "Mientras se procesaba %s"
 
@@ -2075,6 +2076,11 @@ msgstr "Peso"
 msgctxt "uttgconsts.sweights"
 msgid "Weights"
 msgstr "Pesos"
+
+#: uttgconsts.swhenprocessing
+msgctxt "uttgconsts.swhenprocessing"
+msgid "When processing %s"
+msgstr "Mientras se procesaba %s"
 
 #: uttgconsts.sworkinprogress
 msgid "Work in progress [%d]"

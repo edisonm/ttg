@@ -261,6 +261,6 @@ end;
 
 initialization
 
-{$i FTheme.lrs}
+{$I FTheme.lrs}
 
 end.

@@ -190,6 +190,6 @@ end;
 
 initialization
 
-{$i FEditor.lrs}
+{$I FEditor.lrs}
 
 end.

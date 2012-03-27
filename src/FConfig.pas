@@ -349,7 +349,7 @@ end;
 
 initialization
   
-{$i FConfig.lrs}
+{$I FConfig.lrs}
 
 end.
 

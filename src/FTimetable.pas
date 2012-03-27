@@ -344,6 +344,6 @@ end;
 
 initialization
 
-{$i FTimetable.lrs}
+{$I FTimetable.lrs}
 
 end.

@@ -267,6 +267,6 @@ end;
 
 initialization
 
-{$i FProgress.lrs}
+{$I FProgress.lrs}
 
 end.

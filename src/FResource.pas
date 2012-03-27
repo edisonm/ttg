@@ -133,6 +133,6 @@ end;
 
 initialization
 
-{$i FResource.lrs}
+{$I FResource.lrs}
 
 end.

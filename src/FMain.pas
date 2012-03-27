@@ -203,7 +203,7 @@ end;
 procedure TMainForm.ActLangSpanishExecute(Sender: TObject);
 begin
   DisposeTranslator;
-  EnableTranslator(GetLResourceForLanguage('ttg', 'es'));
+  EnableTranslator('ttg', 'es');
 end;
 
 procedure TMainForm.ActResourceExecute(Sender: TObject);
@@ -634,6 +634,6 @@ end;
 
 initialization
 
-{$i FMain.lrs}
+{$I FMain.lrs}
 
 end.

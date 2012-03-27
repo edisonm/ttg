@@ -1,7 +1,8 @@
 * TODO <2012-03-27 Tue> Improve current i18n support:
 ** TODO <2012-03-27 Tue> Do not put po files as resources in the executable.
 ** TODO <2012-03-27 Tue> update ttg-locale-es debian package.
-* TODO <2012-03-24 Sat> Remove all dependencies of non-free software:
+* DONE <2012-03-24 Sat> Remove all dependencies of non-free software:
+  CLOSED: [2012-03-27 Tue 19:50]
 ** DONE <2012-03-24 Sat> Merge TSourceBaseDataModule and TSourceDataModule
    CLOSED: [2012-03-27 Tue 13:15]
 ** DONE <2012-03-24 Sat> Remove tables of TSourceDataModule
