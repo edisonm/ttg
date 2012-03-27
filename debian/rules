@@ -27,7 +27,7 @@ install: build
 
 build:
 #	dh_auto_configure
-	make LAZBUILD="lazbuild --pcp=$$(pwd)/debian/lazarus.cfg"
+	make LAZBUILD="lazbuild --ws=qt --pcp=$$(pwd)/debian/lazarus.cfg"
 	touch build
 
 binary-indep: install

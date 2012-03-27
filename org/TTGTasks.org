@@ -1,10 +1,17 @@
+* TODO <2012-03-27 Tue> Improve current i18n support:
+** TODO <2012-03-27 Tue> Do not put po files as resources in the executable.
+** TODO <2012-03-27 Tue> update ttg-locale-es debian package.
 * TODO <2012-03-24 Sat> Remove all dependencies of non-free software:
-** TODO <2012-03-24 Sat> Merge TDataModule and TSourceDataModule
-** TODO <2012-03-24 Sat> Remove tables of TSourceDataModule
-** TODO <2012-03-24 Sat> Remove dependencies of *.mdb and DBConvert
-  Now the application must have simple, and all the data managing must
-  be handled using sqlite (or the current database backend). Note:
-  just to preserve properties, generate a last ttg.mysql and commit it.
+** DONE <2012-03-24 Sat> Merge TSourceBaseDataModule and TSourceDataModule
+   CLOSED: [2012-03-27 Tue 13:15]
+** DONE <2012-03-24 Sat> Remove tables of TSourceDataModule
+   CLOSED: [2012-03-27 Tue 13:15]
+** DONE <2012-03-24 Sat> Remove dependencies of *.mdb and DBConvert
+   CLOSED: [2012-03-27 Tue 13:15]
+  Now the application must be simplified, and all the data managing
+  must be handled using sqlite (or the current database
+  backend). Note: just to preserve properties, generate a last
+  ttg.mysql and commit it.
 * TODO <2012-03-24 Sat> Upload TTG to the ppa
   DEADLINE: <2012-04-01 Sat>
 * DONE Generalize the tool to any kind of timetable

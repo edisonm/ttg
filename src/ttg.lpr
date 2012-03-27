@@ -1,7 +1,9 @@
 program ttg;
 uses
+  {$IFDEF UNIX}
   CThreads,
   CMem,
+  {$ENDIF}
   Forms,
   Dialogs, Interfaces,
   SysUtils,

@@ -34,7 +34,7 @@
           <Macro1 Name="BuildLabel"/>
         </MacroValues>
         <CompilerOptions>
-          <Version Value="11"/>
+          <Version Value="9"/>
           <Target>
             <Filename Value="../bin/$(TargetCPU)-$(TargetOS)/ttg"/>
           </Target>
@@ -51,7 +51,6 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
-              <GenerateDebugInfo Value="False"/>
               <UseLineInfoUnit Value="False"/>
             </Debugging>
             <LinkSmart Value="True"/>
@@ -344,7 +343,7 @@
     </Units>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="11"/>
+    <Version Value="9"/>
     <Target>
       <Filename Value="../bin/$(TargetCPU)-$(TargetOS)-debug/ttg"/>
     </Target>
