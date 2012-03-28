@@ -1,9 +1,8 @@
 inherited TimetableForm: TTimetableForm
-  Left = 998
+  Left = 970
   Height = 545
   Top = 228
   Width = 913
-  Caption = 'TimetableForm'
   ClientHeight = 545
   ClientWidth = 913
   OnClose = FormClose

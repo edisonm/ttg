@@ -1071,11 +1071,6 @@ msgctxt "tsingleeditorform.actfind.hint"
 msgid "Find|Find by Field"
 msgstr ""
 
-#: tsingleeditorform.tbeditor.caption
-msgctxt "TSINGLEEDITORFORM.TBEDITOR.CAPTION"
-msgid "Show"
-msgstr ""
-
 #: tsplashform.caption
 msgctxt "tsplashform.caption"
 msgid "SplashForm"
@@ -1226,11 +1221,6 @@ msgstr ""
 
 #: ttimetableform.acttimetableresource.hint
 msgid "Resources' timetables|Resources' timetables"
-msgstr ""
-
-#: ttimetableform.caption
-msgctxt "ttimetableform.caption"
-msgid "TimetableForm"
 msgstr ""
 
 #: ttimetableform.tbrestrictionnonsatisfied.caption

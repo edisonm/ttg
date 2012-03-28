@@ -1,7 +1,7 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 734
+  Left = 720
   Height = 308
-  Top = 168
+  Top = 176
   Width = 485
   ActiveControl = DBNavigator
   ClientHeight = 308
@@ -11,14 +11,10 @@ inherited SingleEditorForm: TSingleEditorForm
   OnDestroy = FormDestroy
   inherited TBEditor: TToolBar
     Width = 485
-    Caption = 'Show'
     object BtFind: TToolButton[1]
       Left = 24
-      Hint = 'Search|Search using a specific field'
       Top = 2
-      Caption = 'Search'
-      ImageIndex = 1
-      OnClick = ActFindExecute
+      Action = ActFind
       ParentShowHint = False
       ShowHint = True
     end
