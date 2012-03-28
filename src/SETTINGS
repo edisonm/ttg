@@ -13,13 +13,13 @@ BASELAZFILES=$(addsuffix .pas, $(UNITS)) $(addsuffix .lfm, $(FORMS)) ttg.lpr ttg
 ABOUT=UAbout
 
 ifeq ($(shell uname -o),Cygwin)
-LAZBUILDOPTS=
+LAZBUILD?=$(LAZBASE)/lazbuild
+LAZRES?=$(LAZBASE)/tools/lazres
 else
-LAZBUILDOPTS=--ws=qt
+LAZBUILD?=lazbuild --ws=qt
+LAZRES?=lazres
 endif
 
-LAZRES?=lazres
-LAZBUILD?=lazbuild $(LAZBUILDOPTS)
 LAZIDE?=lazarus-ide
 LRSDEP=$(LAZRES)
 
