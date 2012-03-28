@@ -556,12 +556,12 @@ msgid "Show Table"
 msgstr ""
 
 #: teditorform.actshow.caption
-msgctxt "TEDITORFORM.ACTSHOW.CAPTION"
+msgctxt "teditorform.actshow.caption"
 msgid "Show"
 msgstr ""
 
 #: teditorform.actshow.hint
-msgctxt "TEDITORFORM.ACTSHOW.HINT"
+msgctxt "teditorform.actshow.hint"
 msgid "Show|Show the grid content in a report"
 msgstr ""
 

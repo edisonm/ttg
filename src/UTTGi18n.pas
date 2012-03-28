@@ -123,6 +123,7 @@ end;
 function TPOTrFile.Translate(const Identifier, OriginalValue: String): String;
 begin
   Result := FPOFile.Translate(Identifier, OriginalValue);
+  WriteLn(Format('(PO) %s::[%s] --> [%s]', [Identifier, OriginalValue, Result]));
 end;
 
 function TPOTrFile.TranslateResourceStrings: Boolean;
@@ -158,9 +159,11 @@ function TMOTrFile.Translate(const Identifier, OriginalValue: String): String;
 begin
   Result := FMOFile.Translate(Identifier + #4 + OriginalValue);
   if Result = '' then
+  begin
     Result := FMOFile.Translate(OriginalValue);
-  if Result = '' then
-    WriteLn(Format('%s::%s --> %s', [Identifier, OriginalValue, Result]));
+    Write('*** -->');
+  end;
+  WriteLn(Format('(MO) %s::[%s] --> [%s]', [Identifier, OriginalValue, Result]));
 end;
 
 function TMOTrFile.TranslateResourceStrings: Boolean;
@@ -248,7 +251,7 @@ begin
     Result := TLRSObjectReader(Reader.Driver).GetStackPath
   else
     Result := Instance.ClassName + '.' + PropInfo^.Name;
-  Result := UpperCase(Result);
+  Result := LowerCase(Result);
 end;
 
 procedure TResourceTranslator.TranslateStringProperty(Sender: TObject;
