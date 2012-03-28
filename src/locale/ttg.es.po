@@ -1067,22 +1067,16 @@ msgid "Find"
 msgstr "Buscar"
 
 #: tsingleeditorform.actfind.hint
-#, fuzzy
-#| msgid "Search|Search using a specific field"
 msgctxt "tsingleeditorform.actfind.hint"
 msgid "Find|Find by Field"
 msgstr "Buscar|Buscar por campo"
 
 #: tsingleeditorform.btfind.caption
-#, fuzzy
-#| msgid "Search"
 msgctxt "tsingleeditorform.btfind.caption"
 msgid "Search"
 msgstr "Buscar"
 
 #: tsingleeditorform.btfind.hint
-#, fuzzy
-#| msgid "Search|Search using a specific field"
 msgctxt "tsingleeditorform.btfind.hint"
 msgid "Search|Search using a specific field"
 msgstr "Buscar|Buscar un campo especifico"
@@ -1102,15 +1096,20 @@ msgctxt "tsplashform.lbcopyright.caption"
 msgid "..."
 msgstr "..."
 
+#: tsplashform.lbcopyrighttitle.caption
+msgctxt "tsplashform.lbcopyrighttitle.caption"
+msgid "Copyright"
+msgstr "Copyright"
+
 #: tsplashform.lbedition.caption
+msgctxt "tsplashform.lbedition.caption"
+msgid "..."
+msgstr "..."
+
+#: tsplashform.lbeditiontitle.caption
+msgctxt "tsplashform.lbeditiontitle.caption"
 msgid "Edition"
 msgstr "Edicion"
-
-#: tsplashform.lbexecutable.caption
-#, fuzzy
-#| msgid "Executable"
-msgid "Copyright"
-msgstr "Ejecutable"
 
 #: tsplashform.lbproductname.caption
 msgctxt "tsplashform.lbproductname.caption"
@@ -1122,14 +1121,10 @@ msgctxt "tsplashform.lbproductversion.caption"
 msgid "..."
 msgstr "..."
 
-#: tsplashform.lbversion.caption
+#: tsplashform.lbproductversiontitle.caption
+msgctxt "tsplashform.lbproductversiontitle.caption"
 msgid "Version"
 msgstr "Version"
-
-#: tsplashform.lbyearlabel.caption
-msgctxt "tsplashform.lbyearlabel.caption"
-msgid "..."
-msgstr "..."
 
 #: tthemeform.actfilterbyresourcetype.caption
 msgid "Filter by Resource Type"

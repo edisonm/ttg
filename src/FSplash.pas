@@ -15,13 +15,13 @@ type
     LbProductVersion: TLabel;
     LbCopyright: TLabel;
     LbTable: TLabel;
-    LbYearLabel: TLabel;
-    LbVersion: TLabel;
-    LbExecutable: TLabel;
     LbEdition: TLabel;
-    Image1: TImage;
+    LbProductVersionTitle: TLabel;
+    LbCopyrightTitle: TLabel;
+    LbEditionTitle: TLabel;
+    Image: TImage;
     procedure FormCreate(Sender: TObject);
-    procedure Image1Click(Sender: TObject);
+    procedure ImageClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,7 +33,7 @@ implementation
 uses
   UAbout, UTTGConsts;
 
-procedure TSplashForm.Image1Click(Sender: TObject);
+procedure TSplashForm.ImageClick(Sender: TObject);
 begin
   ModalResult := mrOk;
 end;
@@ -43,12 +43,12 @@ procedure TSplashForm.FormCreate(Sender: TObject);
   var
     i, j, k, l, w, h: Integer;
   begin
-    with Image1.Canvas do
+    with Image.Canvas do
     begin
       Pen.Color := clBlue;
       Brush.Color := clBlue;
-      w := Image1.ClientWidth;
-      h := Image1.ClientHeight;
+      w := Image.ClientWidth;
+      h := Image.ClientHeight;
       Rectangle(0, 0, w, h);
       for i := 1 to w - 2 do
       begin
@@ -67,7 +67,7 @@ begin
   Caption := SAppName;
   LbProductName.Caption := Caption;
   LbProductVersion.Caption := SAppVersion + '-' + SRevision;
-  LbYearLabel.Caption := SBuildDateTime + ' - ' + SBuildMode;
+  LbEdition.Caption := SBuildDateTime + ' - ' + SBuildMode;
   LbCopyright.Caption := SCopyright;
 end;
 

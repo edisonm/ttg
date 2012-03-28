@@ -1,7 +1,7 @@
 object SplashForm: TSplashForm
-  Left = 203
+  Left = 695
   Height = 155
-  Top = 281
+  Top = 317
   Width = 509
   BorderStyle = bsNone
   Caption = 'SplashForm'
@@ -12,13 +12,13 @@ object SplashForm: TSplashForm
   OnCreate = FormCreate
   Position = poDesktopCenter
   LCLVersion = '0.9.31'
-  object Image1: TImage
+  object Image: TImage
     Left = 0
     Height = 155
     Top = 0
     Width = 509
     Align = alClient
-    OnClick = Image1Click
+    OnClick = ImageClick
     Stretch = True
   end
   object LbProductName: TLabel
@@ -67,7 +67,7 @@ object SplashForm: TSplashForm
     ParentColor = False
     ParentFont = False
   end
-  object LbYearLabel: TLabel
+  object LbEdition: TLabel
     Left = 168
     Height = 18
     Top = 112
@@ -78,7 +78,7 @@ object SplashForm: TSplashForm
     ParentColor = False
     ParentFont = False
   end
-  object LbVersion: TLabel
+  object LbProductVersionTitle: TLabel
     Left = 88
     Height = 18
     Top = 64
@@ -89,7 +89,7 @@ object SplashForm: TSplashForm
     ParentColor = False
     ParentFont = False
   end
-  object LbExecutable: TLabel
+  object LbCopyrightTitle: TLabel
     Left = 88
     Height = 18
     Top = 88
@@ -100,7 +100,7 @@ object SplashForm: TSplashForm
     ParentColor = False
     ParentFont = False
   end
-  object LbEdition: TLabel
+  object LbEditionTitle: TLabel
     Left = 88
     Height = 18
     Top = 112

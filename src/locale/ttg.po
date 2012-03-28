@@ -1096,12 +1096,19 @@ msgctxt "TSPLASHFORM.LBCOPYRIGHT.CAPTION"
 msgid "..."
 msgstr ""
 
-#: tsplashform.lbedition.caption
-msgid "Edition"
+#: tsplashform.lbcopyrighttitle.caption
+msgctxt "TSPLASHFORM.LBCOPYRIGHTTITLE.CAPTION"
+msgid "Copyright"
 msgstr ""
 
-#: tsplashform.lbexecutable.caption
-msgid "Copyright"
+#: tsplashform.lbedition.caption
+msgctxt "tsplashform.lbedition.caption"
+msgid "..."
+msgstr ""
+
+#: tsplashform.lbeditiontitle.caption
+msgctxt "TSPLASHFORM.LBEDITIONTITLE.CAPTION"
+msgid "Edition"
 msgstr ""
 
 #: tsplashform.lbproductname.caption
@@ -1114,13 +1121,9 @@ msgctxt "TSPLASHFORM.LBPRODUCTVERSION.CAPTION"
 msgid "..."
 msgstr ""
 
-#: tsplashform.lbversion.caption
+#: tsplashform.lbproductversiontitle.caption
+msgctxt "TSPLASHFORM.LBPRODUCTVERSIONTITLE.CAPTION"
 msgid "Version"
-msgstr ""
-
-#: tsplashform.lbyearlabel.caption
-msgctxt "TSPLASHFORM.LBYEARLABEL.CAPTION"
-msgid "..."
 msgstr ""
 
 #: tthemeform.actfilterbyresourcetype.caption
