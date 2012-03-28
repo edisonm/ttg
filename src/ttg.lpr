@@ -1,3 +1,4 @@
+{ -*- mode: Delphi -*- }
 program ttg;
 uses
   {$IFDEF UNIX}
@@ -5,7 +6,7 @@ uses
   CMem,
   {$ENDIF}
   Forms,
-  Dialogs, Interfaces,
+  Dialogs, Interfaces, LResources,
   SysUtils,
   FMain {MainForm},
   DMaster in 'DMaster.pas' {MasterDataModule: TDataModule},
@@ -22,6 +23,7 @@ var
   FConfigFileName, Language: string;
 
 begin
+  {$I ttg.lrs}
   FConfigFileName := GetCurrentDir + '/ttg.cfg';
   FConfigStorage := TConfigStorage.Create(Application);
   if FileExists(FConfigFileName) then

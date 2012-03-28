@@ -25,11 +25,13 @@ endif
 %.lrs: %.lfm $(LRSDEP)
 	$(LAZRES) $@ $<
 
-ttg.lrs: locale/ttg.es.po $(TTGDIR)/dat/default.ttd
-	$(LAZRES) $@ locale/ttg.es.po $(TTGDIR)/dat/default.ttd
+%.mo: %.po
+	msgfmt $< -o $@
 
-ttgsql.lrs: $(TTGSQL)
-	$(LAZRES) $@ $<
+# LOCALEFILES=locale/ttg.es.po
+
+ttg.lrs: $(LOCALEFILES) $(TTGDIR)/dat/default.ttd $(TTGSQL)
+	$(LAZRES) $@ $(LOCALEFILES) $(TTGDIR)/dat/default.ttd $(TTGSQL)
 
 $(ABOUT).pas: $(ABOUT).pas.tmpl
 	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
@@ -52,11 +54,11 @@ buildnr:
 	      mv ttg_.lpi ttg.lpi ) ; \
 	  fi
 
-$(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttgsql.lrs ttg.lrs ttg.inc Makefile SETTINGS COMMON
+$(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttg.lrs ttg.inc Makefile SETTINGS COMMON
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
 ifneq ($(BuildMode),debug)
 	strip --strip-all $(TTGEXE)
-	upx $(TTGEXE)
+# upx $(TTGEXE)
 endif
 
 ifeq ($(shell uname -o),Cygwin)
@@ -119,7 +121,7 @@ test:
 	@echo $(DBCONVERT) /ACC2SQL $(TTGMDB) $(TTGMYSQL) mysql
 
 run:
-	cd $(TTGDIR)/bin ; $(TTGEXE)
+	$(TTGEXE)
 
 ex1:
 	cd $(TTGDIR)/bin ; $(TTGEXE) $(TTGDIR)/examples/Britanico2000.ttd

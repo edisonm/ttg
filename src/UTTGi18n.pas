@@ -285,6 +285,115 @@ begin
   end;
 end;
 
+function GetLocaleFileName(const LangID, LCExt: string): string;
+var
+  LangShortID: string;
+  function GetLanguageFileName(const Language, LCExt: string): string;
+  begin
+    //ParamStrUTF8(0) is said not to work properly in linux, but I've tested it
+    Result := ExtractFilePath(ParamStrUTF8(0)) + Language +
+      DirectorySeparator + ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), LCExt);
+    if FileExistsUTF8(Result) then
+      exit;
+    
+    Result := ExtractFilePath(ParamStrUTF8(0)) + 'languages' + DirectorySeparator + Language +
+      DirectorySeparator + ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), LCExt);
+    if FileExistsUTF8(Result) then
+      exit;
+    
+    Result := ExtractFilePath(ParamStrUTF8(0)) + 'locale' + DirectorySeparator
+      + Language + DirectorySeparator + ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), LCExt);
+    if FileExistsUTF8(Result) then
+      exit;
+    
+    Result := ExtractFilePath(ParamStrUTF8(0)) + 'locale' + DirectorySeparator
+      + Language + DirectorySeparator + 'LC_MESSAGES' + DirectorySeparator +
+      ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), LCExt);
+    
+    if FileExistsUTF8(Result) then
+      exit;
+    {$IFDEF UNIX}
+    //In unix-like systems we can try to search for global locale
+    Result := '/usr/share/locale/' + Language + '/LC_MESSAGES/' +
+      ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), LCExt);
+    
+    if FileExistsUTF8(Result) then
+      exit;
+    {$ENDIF}
+    //Full language in file name - this will be default for the project
+    //We need more careful handling, as it MAY result in incorrect filename
+    try
+      Result := ExtractFilePath(ParamStrUTF8(0)) + ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.' + Language) + LCExt;
+      if FileExistsUTF8(Result) then
+        exit;
+      
+      //Common location (like in Lazarus)
+      Result := ExtractFilePath(ParamStrUTF8(0)) + 'locale' + DirectorySeparator +
+        ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.' + Language) + LCExt;
+      if FileExistsUTF8(Result) then
+        exit;
+      
+      Result := 'locale' + DirectorySeparator +
+        ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.' + Language) + LCExt;
+      WriteLn(Result);
+      if FileExistsUTF8(Result) then
+        exit;
+      
+      Result := ExtractFilePath(ParamStrUTF8(0)) + 'languages' +
+        DirectorySeparator + ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.' + Language) + LCExt;
+      if FileExistsUTF8(Result) then
+        exit;
+    except
+      Result := '';//Or do something else (useless)
+    end;
+    Result := '';
+  end;
+begin
+  if LangID <> '' then
+  begin
+    //Let us search for reducted files
+    Result := GetLanguageFileName(LangID, LCExt);
+    if Result = '' then
+    begin
+      LangShortID := copy(LangID, 1, 2);
+      Result := GetLanguageFileName(LangShortID, LCExt);
+    end;
+  end
+  else
+    Result := '';
+end;
+
+function FindLocaleFileName(LCExt: string): string;
+var
+  Lang, T: string;
+  i: integer;
+begin
+  Result := '';
+  Lang := '';
+
+  for i := 1 to Paramcount - 1 do
+    if (ParamStrUTF8(i) = '--LANG') or (ParamStrUTF8(i) = '-l') or
+      (ParamStrUTF8(i) = '--lang') then
+      Lang := ParamStrUTF8(i + 1);
+
+  //Win32 user may decide to override locale with LANG variable.
+  if Lang = '' then
+    Lang := GetEnvironmentVariableUTF8('LANG');
+
+  if Lang = '' then
+    LCLGetLanguageIDs(Lang, T);
+
+  Result := GetLocaleFileName(Lang, LCExt);
+  if Result <> '' then
+    exit;
+
+  Result := ChangeFileExt(ParamStrUTF8(0), LCExt);
+  if FileExistsUTF8(Result) then
+    exit;
+
+  Result := '';
+end;
+
 function NewTrFile(const ResName, Language, ValueType: AnsiString): TTrFile;
 var
   LangFile: string;
@@ -294,15 +403,13 @@ begin
   if LResource <> nil then
   begin
     Result := TTrFile.CreateTrFile(LResource, ValueType);
+    WriteLn('LResource');
   end
   {$IFDEF UNIX}
   else
   begin
-    LangFile := '/usr/share/locale/' + Language + '/LC_MESSAGES/' +
-      ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.' + LowerCase(ValueType));
-    if not FileExistsUTF8(LangFile) then
-      LangFile := '/usr/share/locale/' + Copy(Language, 1, 2) + '/LC_MESSAGES/' +
-        ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.' + LowerCase(ValueType));
+    LangFile := GetLocaleFileName(Language, '.' + LowerCase(ValueType));
+    WriteLn('LangFile=' + LangFile);
     if FileExistsUTF8(LangFile) then
     begin
       Result := TTrFile.CreateTrFile(LangFile, ValueType);
@@ -336,7 +443,5 @@ begin
   EnableTranslator(ResName, GetDefaultLanguage);
 end;
 
-initialization
-  {$I ttg.lrs}
 end.
 

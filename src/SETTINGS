@@ -30,6 +30,6 @@ TTGMDB=$(RELDIR)/dat/ttg.mdb
 TTGSQL=$(RELDIR)/dat/ttg.sql
 TTGMYSQL=$(RELDIR)/dat/ttg.mysql
 
-FILES=$(TTGEXE)
+FILES=$(TTGEXE) locale/ttg.es.mo
 
 TTGLPR=ttg.lpr
