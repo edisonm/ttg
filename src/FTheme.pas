@@ -39,7 +39,7 @@ type
     TbResourceType: TZTable;
     TbResourceTypeLimit: TZTable;
     TbTheme: TZTable;
-    ToolButton3: TToolButton;
+    TBSeparator1: TToolButton;
     UpAvailability: TZUpdateSQL;
     QuParticipant: TZQuery;
     UpParticipant: TZUpdateSQL;

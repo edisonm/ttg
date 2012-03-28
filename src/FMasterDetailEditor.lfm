@@ -1,5 +1,5 @@
 inherited MasterDetailEditorForm: TMasterDetailEditorForm
-  Left = 745
+  Left = 738
   Height = 430
   Top = 441
   Width = 603

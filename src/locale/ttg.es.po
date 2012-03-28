@@ -798,19 +798,6 @@ msgctxt "tmainform.n6.caption"
 msgid "-"
 msgstr "-"
 
-#: tmainform.toolbutton1.caption
-msgid "ToolButton1"
-msgstr "ToolButton1"
-
-#: tmainform.toolbutton3.caption
-msgctxt "tmainform.toolbutton3.caption"
-msgid "ToolButton3"
-msgstr "ToolButton3"
-
-#: tmainform.toolbutton4.caption
-msgid "ToolButton4"
-msgstr "ToolButton4"
-
 #: tmasterdetaileditorform.grbdetail.caption
 msgctxt "tmasterdetaileditorform.grbdetail.caption"
 msgid "Detail"
@@ -1171,21 +1158,6 @@ msgstr "Recursos Disponibles"
 #: tthemeform.groupbox5.caption
 msgid "Resource Type Limit"
 msgstr "Límite del Tipo de Recurso"
-
-#: tthemeform.toolbutton3.caption
-msgctxt "tthemeform.toolbutton3.caption"
-msgid "ToolButton3"
-msgstr "ToolButton3"
-
-#: ttimetableclassform.cbshowclass.hint
-msgctxt "ttimetableclassform.cbshowclass.hint"
-msgid "Show|Param to show in the timetable"
-msgstr "Mostrar|Parámetro a mostrar en el horario"
-
-#: ttimetableclassform.tbswaptimeslots.hint
-msgctxt "ttimetableclassform.tbswaptimeslots.hint"
-msgid "Swap time slots|Swap time slots"
-msgstr "Intercambiar periodos|Intercambiar periodos"
 
 #: ttimetableclusterform.cbshowcluster.hint
 msgctxt "ttimetableclusterform.cbshowcluster.hint"

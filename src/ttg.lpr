@@ -6,7 +6,7 @@ uses
   CMem,
   {$ENDIF}
   Forms,
-  Dialogs, Interfaces, LResources,
+  Dialogs, Interfaces,
   SysUtils,
   FMain {MainForm},
   DMaster in 'DMaster.pas' {MasterDataModule: TDataModule},
@@ -22,8 +22,9 @@ var
   FConfigStorage: TConfigStorage;
   FConfigFileName, Language: string;
 
+{$R *.res}
+
 begin
-  {$I ttg.lrs}
   FConfigFileName := GetCurrentDir + '/ttg.cfg';
   FConfigStorage := TConfigStorage.Create(Application);
   if FileExists(FConfigFileName) then

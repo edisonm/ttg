@@ -87,9 +87,8 @@ type
     ActConfigure: TAction;
     ActTimetable: TAction;
     ActAbout: TAction;
-    ToolButton1: TToolButton;
-    ToolButton3: TToolButton;
-    ToolButton4: TToolButton;
+    TBSeparator1: TToolButton;
+    TBSeparator2: TToolButton;
     N2: TMenuItem;
     N5: TMenuItem;
     N6: TMenuItem;

@@ -1,7 +1,7 @@
 inherited ThemeForm: TThemeForm
-  Left = 798
+  Left = 771
   Height = 730
-  Top = 392
+  Top = 320
   Width = 1140
   Caption = 'Theme'
   ClientHeight = 730
@@ -67,11 +67,10 @@ inherited ThemeForm: TThemeForm
       TabOrder = 2
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
     end
-    object ToolButton3: TToolButton[6]
+    object TBSeparator1: TToolButton[6]
       Left = 504
       Top = 2
       Width = 10
-      Caption = 'ToolButton3'
       ImageIndex = 27
       ParentShowHint = False
       ShowHint = True

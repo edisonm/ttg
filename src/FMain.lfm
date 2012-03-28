@@ -1,5 +1,5 @@
 object MainForm: TMainForm
-  Left = 592
+  Left = 585
   Height = 371
   Top = 413
   Width = 718
@@ -97,11 +97,10 @@ object MainForm: TMainForm
       ParentShowHint = False
       ShowHint = True
     end
-    object ToolButton1: TToolButton
+    object TBSeparator1: TToolButton
       Left = 70
       Top = 2
       Width = 10
-      Caption = 'ToolButton1'
       ImageIndex = 26
       ParentShowHint = False
       ShowHint = True
@@ -156,11 +155,10 @@ object MainForm: TMainForm
       ParentShowHint = False
       ShowHint = True
     end
-    object ToolButton3: TToolButton
+    object TBSeparator2: TToolButton
       Left = 264
       Top = 2
       Width = 10
-      Caption = 'ToolButton3'
       ImageIndex = 27
       ParentShowHint = False
       ShowHint = True
@@ -173,18 +171,8 @@ object MainForm: TMainForm
       ParentShowHint = False
       ShowHint = True
     end
-    object ToolButton4: TToolButton
-      Left = 297
-      Top = 2
-      Width = 10
-      Caption = 'ToolButton4'
-      ImageIndex = 26
-      ParentShowHint = False
-      ShowHint = True
-      Style = tbsSeparator
-    end
     object TBTimetable: TToolButton
-      Left = 307
+      Left = 297
       Top = 2
       Action = ActTimetable
       ParentShowHint = False
