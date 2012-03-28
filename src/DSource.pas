@@ -472,5 +472,6 @@ end;
 initialization
 
 {$I DSource.lrs}
-
+{$I ttg.lrs}
+  
 end.

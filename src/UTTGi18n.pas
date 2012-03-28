@@ -39,7 +39,8 @@ type
   procedure DisposeTranslator;
   procedure EnableTranslator(const ResName, Language: AnsiString); overload;
   procedure EnableTranslator(const ResName: AnsiString); overload;
-
+  function GetDefaultLanguage: string;
+  
 var
   ResourceTranslator: TResourceTranslator;
 

@@ -6,7 +6,6 @@ uses
   CMem,
   {$ENDIF}
   Forms,
-  LResources,
   Dialogs, Interfaces,
   SysUtils,
   FMain {MainForm},
@@ -17,8 +16,6 @@ uses
   UAbout,
   UTTGi18n, zcomponent;
 
-{$IFDEF WINDOWS}{$R ttg.rc}{$ENDIF}
-
 var
   FConfigStorage: TConfigStorage;
   FConfigFileName, Language: string;
@@ -26,27 +23,23 @@ var
 {$R *.res}
 
 begin
-  {$I ttg.lrs}
   FConfigFileName := GetCurrentDir + '/ttg.cfg';
   FConfigStorage := TConfigStorage.Create(Application);
   if FileExists(FConfigFileName) then
   begin
     FConfigStorage.ConfigStrings.LoadFromFile(FConfigFileName);
+    Language := FConfigStorage.Values['Language'];
   end;
-  Language := FConfigStorage.Values['Language'];
   if Language = '' then
-    EnableTranslator('ttg')
-  else
-    EnableTranslator('ttg', Language);
+    Language := GetDefaultLanguage;
+  EnableTranslator('ttg', Language);
   if Assigned(ResourceTranslator) then
-  begin
     ResourceTranslator.TranslateResourceStrings;
-  end;
   DecimalSeparator := ',';
   //RequireDerivedFormResource := True;
   Application.Initialize;
   Application.Title := sAppName;
-  Application.HelpFile := '../hlp/ttg.hlp';
+  {Application.HelpFile := '../hlp/ttg.hlp';}
   Application.CreateForm(TSourceDataModule, SourceDataModule);
   Application.CreateForm(TMasterDataModule, MasterDataModule);
   Application.CreateForm(TMainForm, MainForm);
