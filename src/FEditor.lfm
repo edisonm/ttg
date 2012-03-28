@@ -1,10 +1,9 @@
 object EditorForm: TEditorForm
-  Left = 731
+  Left = 602
   Height = 299
-  Top = 129
+  Top = 412
   Width = 479
   ActiveControl = PnEditor
-  Caption = 'EditorForm'
   ClientHeight = 299
   ClientWidth = 479
   Font.Height = -11
@@ -19,14 +18,12 @@ object EditorForm: TEditorForm
     Height = 25
     Top = 0
     Width = 479
-    Caption = 'Show'
     Images = ImageList
     TabOrder = 2
     object TBShow: TToolButton
       Left = 1
-      Hint = 'Show|Show the grid content in a report'
       Top = 2
-      ImageIndex = 0
+      Action = ActShow
       ParentShowHint = False
       ShowHint = True
     end
@@ -87,5 +84,15 @@ object EditorForm: TEditorForm
       00FF000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
       00FFFF00FF00FF00FF00000000FF
     }
+  end
+  object ActionList: TActionList
+    Images = ImageList
+    left = 192
+    top = 88
+    object ActShow: TAction
+      Caption = 'Show'
+      Hint = 'Show|Show the grid content in a report'
+      ImageIndex = 0
+    end
   end
 end

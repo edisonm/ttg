@@ -15,6 +15,7 @@ type
 { TSingleEditorForm }
 
 TSingleEditorForm = class(TEditorForm)
+    ActFind: TAction;
     DBNavigator: TDBNavigator;
     DataSource: TDataSource;
     GroupBox: TGroupBox;
@@ -22,9 +23,6 @@ TSingleEditorForm = class(TEditorForm)
     LbState: TLabel;
     DBGrid: TDBGrid;
     BtFind: TToolButton;
-    ActionList: TActionList;
-    ActShow: TAction;
-    ActFind: TAction;
     procedure ActFindExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);

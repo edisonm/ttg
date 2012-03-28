@@ -1,9 +1,10 @@
 inherited SingleEditorForm: TSingleEditorForm
-  Left = 755
+  Left = 741
   Height = 308
   Top = 168
   Width = 485
   ActiveControl = DBNavigator
+  Caption = 'EditorForm'
   ClientHeight = 308
   ClientWidth = 485
   OnClose = FormClose
@@ -11,13 +12,17 @@ inherited SingleEditorForm: TSingleEditorForm
   OnDestroy = FormDestroy
   inherited TBEditor: TToolBar
     Width = 485
+    Caption = 'Show'
     inherited TBShow: TToolButton
-      Action = ActShow
+      Caption = 'Show'
     end
     object BtFind: TToolButton[1]
       Left = 24
+      Hint = 'Search|Search using a specific field'
       Top = 2
-      Action = ActFind
+      Caption = 'Search'
+      ImageIndex = 1
+      OnClick = ActFindExecute
       ParentShowHint = False
       ShowHint = True
     end
@@ -166,26 +171,19 @@ inherited SingleEditorForm: TSingleEditorForm
       8000008080000080800000808000
     }
   end
-  object DataSource: TDatasource[4]
+  inherited ActionList: TActionList
+    left = 208
+    top = 160
+    object ActFind: TAction[1]
+      Caption = 'Find'
+      Hint = 'Find|Find Value'
+      ImageIndex = 1
+    end
+  end
+  object DataSource: TDatasource[5]
     OnStateChange = DataSourceStateChange
     OnDataChange = DataSourceDataChange
     left = 36
     top = 88
-  end
-  object ActionList: TActionList[5]
-    Images = ImageList
-    left = 120
-    top = 88
-    object ActShow: TAction
-      Caption = 'Show'
-      Hint = 'Show|Show the grid content in a report'
-      ImageIndex = 0
-    end
-    object ActFind: TAction
-      Caption = 'Search'
-      Hint = 'Search|Search using a specific field'
-      ImageIndex = 1
-      OnExecute = ActFindExecute
-    end
   end
 end

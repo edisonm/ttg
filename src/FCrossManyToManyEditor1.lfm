@@ -1,5 +1,6 @@
 inherited CrossManyToManyEditor1Form: TCrossManyToManyEditor1Form
-  Top = 101
+  Left = 641
+  Top = 173
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy

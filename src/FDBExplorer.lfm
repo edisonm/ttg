@@ -1,7 +1,7 @@
 inherited DBExplorerForm: TDBExplorerForm
-  Left = 962
+  Left = 856
   Height = 762
-  Top = 199
+  Top = 251
   Width = 797
   Caption = 'Database Explorer'
   ClientHeight = 762
@@ -663,12 +663,12 @@ inherited DBExplorerForm: TDBExplorerForm
     left = 48
     top = 280
   end
-  inherited DataSource: TDatasource
-    left = 139
-    top = 336
-  end
   inherited ActionList: TActionList
     left = 368
+    top = 336
+  end
+  inherited DataSource: TDatasource
+    left = 139
     top = 336
   end
   object ZTable1: TZTable[6]

@@ -1,5 +1,5 @@
 inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
-  Left = 541
+  Left = 534
   Height = 314
   Top = 470
   Width = 518
@@ -9,7 +9,6 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Position = poDesktopCenter
   inherited TBEditor: TToolBar
     Width = 518
     inherited BtOk: TToolButton
@@ -74,5 +73,7 @@ inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
     end
   end
   inherited ImageList: TImageList[6]
+  end
+  inherited ActionList: TActionList[7]
   end
 end

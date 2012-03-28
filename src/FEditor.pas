@@ -10,7 +10,12 @@ uses
   Forms, Dialogs, DBCtrls, Buttons, ExtCtrls, ComCtrls, ActnList, UConfigStorage;
 
 type
+
+  { TEditorForm }
+
   TEditorForm = class(TForm)
+    ActionList: TActionList;
+    ActShow: TAction;
     PnStatus: TPanel;
     TBEditor: TToolBar;
     TBShow: TToolButton;

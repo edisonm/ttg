@@ -1,5 +1,5 @@
 object SplashForm: TSplashForm
-  Left = 210
+  Left = 203
   Height = 155
   Top = 281
   Width = 509

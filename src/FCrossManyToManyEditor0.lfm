@@ -1,11 +1,10 @@
 inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
-  Left = 933
+  Left = 926
   Top = 442
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Visible = True
   inherited TBEditor: TToolBar
     inherited BtOk: TToolButton
       OnClick = BtOkClick
@@ -52,12 +51,12 @@ inherited CrossManyToManyEditor0Form: TCrossManyToManyEditor0Form
       OnClick = ListBoxClick
       OnDrawItem = ListBoxDrawItem
       OnKeyUp = ListBoxKeyUp
-      ScrollWidth = 109
       Style = lbOwnerDrawFixed
       TabOrder = 0
-      TopIndex = -1
     end
   end
   inherited ImageList: TImageList[6]
+  end
+  inherited ActionList: TActionList[7]
   end
 end

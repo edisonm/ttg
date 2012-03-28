@@ -1,7 +1,7 @@
 object SelPeriodForm: TSelPeriodForm
-  Left = 466
+  Left = 515
   Height = 123
-  Top = 316
+  Top = 279
   Width = 295
   ActiveControl = CBDay
   Caption = 'Intercambiar Period'
@@ -43,7 +43,6 @@ object SelPeriodForm: TSelPeriodForm
     KeyField = 'IdDay'
     ListField = 'NaDay'
     ListFieldIndex = 0
-    ListSource = SourceDataModule.DSDay
     LookupCache = False
     TabOrder = 0
   end
@@ -55,7 +54,6 @@ object SelPeriodForm: TSelPeriodForm
     KeyField = 'IdHour'
     ListField = 'NaHour'
     ListFieldIndex = 0
-    ListSource = SourceDataModule.DSHour
     LookupCache = False
     TabOrder = 1
   end

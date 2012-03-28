@@ -1,7 +1,7 @@
 inherited TimetableForm: TTimetableForm
-  Left = 649
+  Left = 1103
   Height = 545
-  Top = 238
+  Top = 228
   Width = 913
   Caption = 'TimetableForm'
   ClientHeight = 545
@@ -12,6 +12,12 @@ inherited TimetableForm: TTimetableForm
   OnDestroy = FormDestroy
   inherited TBEditor: TToolBar
     Width = 913
+    inherited TBShow: TToolButton
+      Action = ActShow
+    end
+    inherited BtFind: TToolButton
+      Action = ActFind
+    end
     inherited DBNavigator: TDBNavigator
       Width = 140
       ClientWidth = 140
@@ -41,8 +47,10 @@ inherited TimetableForm: TTimetableForm
     end
     object TBRestrictionNonSatisfied: TToolButton[6]
       Left = 256
+      Hint = 'Resource Restrictions|Resource Restrictions non satisfied'
       Top = 2
       Action = ActRestrictionNonSatisfied
+      Caption = 'Resource Restrictions'
       ParentShowHint = False
       ShowHint = True
     end
@@ -460,54 +468,52 @@ inherited TimetableForm: TTimetableForm
     top = 224
   end
   inherited ActionList: TActionList
+    Images = ImageList
     left = 312
     top = 448
-    inherited ActFind: TAction
-      OnExecute = ActFindExecute
-    end
-    object ActTimetableResource: TAction[2]
+    object ActTimetableResource: TAction
       AutoCheck = True
       Caption = 'Resources'' timetables'
       Hint = 'Resources'' timetables|Resources'' timetables'
       ImageIndex = 3
       OnExecute = ActTimetableResourceExecute
     end
-    object ActClashResource: TAction[3]
+    object ActClashResource: TAction
       AutoCheck = True
       Caption = 'Clashes of Resources'
       Hint = 'Clashes of Resources|Clashes of Resources'
       ImageIndex = 4
       OnExecute = ActClashResourceExecute
     end
-    object ActClashActivity: TAction[4]
+    object ActClashActivity: TAction
       AutoCheck = True
       Caption = 'Clashes of Activities'
       Hint = 'Clashes of Activities|Clashes of Activities'
       ImageIndex = 5
       OnExecute = ActClashActivityExecute
     end
-    object ActRestrictionNonSatisfied: TAction[5]
+    object ActRestrictionNonSatisfied: TAction
       AutoCheck = True
       Caption = 'Resource restrictions'
       Hint = 'Resource retrictions|Resource restrictions non satisfied'
       ImageIndex = 8
       OnExecute = ActRestrictionNonSatisfiedExecute
     end
-    object ActBrokenSessionDay: TAction[6]
+    object ActBrokenSessionDay: TAction
       AutoCheck = True
       Caption = 'Broken Sessions by Day'
       Hint = 'Broken Sessions by Day|Broken Sessions by Day'
       ImageIndex = 5
       OnExecute = ActBrokenSessionDayExecute
     end
-    object ActBrokenSessionHour: TAction[7]
+    object ActBrokenSessionHour: TAction
       AutoCheck = True
       Caption = 'Broken Sessions by Hour'
       Hint = 'Broken Sessions by Hour|Broken Sessions by Hour'
       ImageIndex = 5
       OnExecute = ActBrokenSessionHourExecute
     end
-    object ActImproveTimeTable: TAction[8]
+    object ActImproveTimeTable: TAction
       AutoCheck = True
       Caption = 'Improve timetable'
       Hint = 'Improve timetable|Improve selected timetable'

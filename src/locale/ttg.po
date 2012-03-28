@@ -555,6 +555,16 @@ msgstr ""
 msgid "Show Table"
 msgstr ""
 
+#: teditorform.actshow.caption
+msgctxt "TEDITORFORM.ACTSHOW.CAPTION"
+msgid "Show"
+msgstr ""
+
+#: teditorform.actshow.hint
+msgctxt "TEDITORFORM.ACTSHOW.HINT"
+msgid "Show|Show the grid content in a report"
+msgstr ""
+
 #: teditorform.btnshow.hint
 msgctxt "teditorform.btnshow.hint"
 msgid "Show|Show the grid content in a report"
@@ -563,6 +573,16 @@ msgstr ""
 #: teditorform.caption
 msgctxt "teditorform.caption"
 msgid "EditorForm"
+msgstr ""
+
+#: teditorform.tbeditor.caption
+msgctxt "TEDITORFORM.TBEDITOR.CAPTION"
+msgid "Show"
+msgstr ""
+
+#: teditorform.tbshow.hint
+msgctxt "TEDITORFORM.TBSHOW.HINT"
+msgid "Show|Show the grid content in a report"
 msgstr ""
 
 #: teditorform.tlbshow.caption
@@ -1067,22 +1087,38 @@ msgid "Select the time slot to swap"
 msgstr ""
 
 #: tsingleeditorform.actfind.caption
-msgid "Search"
+msgctxt "tsingleeditorform.actfind.caption"
+msgid "Find"
 msgstr ""
 
 #: tsingleeditorform.actfind.hint
 msgctxt "tsingleeditorform.actfind.hint"
+msgid "Find|Find Value"
+msgstr ""
+
+#: tsingleeditorform.btfind.caption
+msgctxt "TSINGLEEDITORFORM.BTFIND.CAPTION"
+msgid "Search"
+msgstr ""
+
+#: tsingleeditorform.btfind.hint
+msgctxt "TSINGLEEDITORFORM.BTFIND.HINT"
 msgid "Search|Search using a specific field"
 msgstr ""
 
-#: tsingleeditorform.actshow.caption
-msgctxt "tsingleeditorform.actshow.caption"
+#: tsingleeditorform.caption
+msgctxt "TSINGLEEDITORFORM.CAPTION"
+msgid "EditorForm"
+msgstr ""
+
+#: tsingleeditorform.tbeditor.caption
+msgctxt "TSINGLEEDITORFORM.TBEDITOR.CAPTION"
 msgid "Show"
 msgstr ""
 
-#: tsingleeditorform.actshow.hint
-msgctxt "tsingleeditorform.actshow.hint"
-msgid "Show|Show the grid content in a report"
+#: tsingleeditorform.tbshow.caption
+msgctxt "TSINGLEEDITORFORM.TBSHOW.CAPTION"
+msgid "Show"
 msgstr ""
 
 #: tsplashform.caption
@@ -1090,36 +1126,36 @@ msgctxt "tsplashform.caption"
 msgid "SplashForm"
 msgstr ""
 
+#: tsplashform.lbcopyright.caption
+msgctxt "TSPLASHFORM.LBCOPYRIGHT.CAPTION"
+msgid "..."
+msgstr ""
+
 #: tsplashform.lbedition.caption
 msgid "Edition"
 msgstr ""
 
 #: tsplashform.lbexecutable.caption
-msgid "Executable"
+msgid "Copyright"
 msgstr ""
 
-#: tsplashform.lblcopyright.caption
-msgctxt "tsplashform.lblcopyright.caption"
+#: tsplashform.lbproductname.caption
+msgctxt "TSPLASHFORM.LBPRODUCTNAME.CAPTION"
 msgid "..."
 msgstr ""
 
-#: tsplashform.lblproductname.caption
-msgctxt "tsplashform.lblproductname.caption"
-msgid "..."
-msgstr ""
-
-#: tsplashform.lblproductversion.caption
-msgctxt "tsplashform.lblproductversion.caption"
-msgid "..."
-msgstr ""
-
-#: tsplashform.lblyearlabel.caption
-msgctxt "tsplashform.lblyearlabel.caption"
+#: tsplashform.lbproductversion.caption
+msgctxt "TSPLASHFORM.LBPRODUCTVERSION.CAPTION"
 msgid "..."
 msgstr ""
 
 #: tsplashform.lbversion.caption
 msgid "Version"
+msgstr ""
+
+#: tsplashform.lbyearlabel.caption
+msgctxt "TSPLASHFORM.LBYEARLABEL.CAPTION"
+msgid "..."
 msgstr ""
 
 #: tthemeform.actfilterbyresourcetype.caption
@@ -1207,6 +1243,16 @@ msgctxt "ttimetableform.actclashresource.hint"
 msgid "Clashes of Resources|Clashes of Resources"
 msgstr ""
 
+#: ttimetableform.actfind.caption
+msgctxt "TTIMETABLEFORM.ACTFIND.CAPTION"
+msgid "Search"
+msgstr ""
+
+#: ttimetableform.actfind.hint
+msgctxt "TTIMETABLEFORM.ACTFIND.HINT"
+msgid "Search|Search using a specific field"
+msgstr ""
+
 #: ttimetableform.actimprovetimetable.caption
 msgid "Improve timetable"
 msgstr ""
@@ -1225,6 +1271,16 @@ msgctxt "ttimetableform.actrestrictionnonsatisfied.hint"
 msgid "Resource retrictions|Resource restrictions non satisfied"
 msgstr ""
 
+#: ttimetableform.actshow.caption
+msgctxt "TTIMETABLEFORM.ACTSHOW.CAPTION"
+msgid "Show"
+msgstr ""
+
+#: ttimetableform.actshow.hint
+msgctxt "TTIMETABLEFORM.ACTSHOW.HINT"
+msgid "Show|Show the grid content in a report"
+msgstr ""
+
 #: ttimetableform.acttimetableresource.caption
 msgctxt "ttimetableform.acttimetableresource.caption"
 msgid "Resources' timetables"
@@ -1237,6 +1293,14 @@ msgstr ""
 #: ttimetableform.caption
 msgctxt "ttimetableform.caption"
 msgid "TimetableForm"
+msgstr ""
+
+#: ttimetableform.tbrestrictionnonsatisfied.caption
+msgid "Resource Restrictions"
+msgstr ""
+
+#: ttimetableform.tbrestrictionnonsatisfied.hint
+msgid "Resource Restrictions|Resource Restrictions non satisfied"
 msgstr ""
 
 #: ttimetableresourceform.cbshowresource.hint

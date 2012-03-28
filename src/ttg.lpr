@@ -6,6 +6,7 @@ uses
   CMem,
   {$ENDIF}
   Forms,
+  LResources,
   Dialogs, Interfaces,
   SysUtils,
   FMain {MainForm},
@@ -25,6 +26,7 @@ var
 {$R *.res}
 
 begin
+  {$I ttg.lrs}
   FConfigFileName := GetCurrentDir + '/ttg.cfg';
   FConfigStorage := TConfigStorage.Create(Application);
   if FileExists(FConfigFileName) then

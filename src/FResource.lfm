@@ -1,5 +1,5 @@
 inherited ResourceForm: TResourceForm
-  Left = 1128
+  Left = 1121
   Height = 461
   Top = 511
   Width = 588
@@ -150,11 +150,6 @@ inherited ResourceForm: TResourceForm
       0000808000008080000080800000
     }
   end
-  inherited DataSource: TDatasource
-    DataSet = TbResource
-    OnStateChange = DataSourceStateChange
-    OnDataChange = DataSourceDataChange
-  end
   inherited ActionList: TActionList
     inherited ActFind: TAction
       OnExecute = ActFindExecute
@@ -166,6 +161,11 @@ inherited ResourceForm: TResourceForm
       ImageIndex = 2
       OnExecute = ActRestrictionExecute
     end
+  end
+  inherited DataSource: TDatasource
+    DataSet = TbResource
+    OnStateChange = DataSourceStateChange
+    OnDataChange = DataSourceDataChange
   end
   object TbRestriction: TZTable[6]
     Tag = 10
