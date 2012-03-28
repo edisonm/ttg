@@ -136,7 +136,7 @@ Theme
 ResourceType
 4
 "IdResourceType";"NaResourceType";"NumResourceLimit";"ValResourceType";"MaxWorkLoad";
-"1";"Profesor";"1";"597";"0";
+"1";"Profesor";"1";"597";"23";
 "2";"Aula";"1";"393";"0";
 "3";"Curso";"1";"901";"0";
 "4";"Restriccion";"1";"0";"0";
@@ -4817,7 +4817,6 @@ NameAuthority=Dr. Edgar Velasco. Rector
 PositionAuthority=
 NameResponsible=
 PositionResponsible=
-MaxResourceWorkLoad=23
 TimetableSeleccionado=8
 Comments="Año 1999-2000\n\rResponsable: Ing. Edison Mera."
 UseCustomSeed=-1

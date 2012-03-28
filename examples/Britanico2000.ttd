@@ -98,11 +98,11 @@ Theme
 ResourceType
 5
 "IdResourceType";"NaResourceType";"NumResourceLimit";"ValResourceType";"MaxWorkLoad";
-"1";"Profesor";"1";"655";"0";
+"1";"Profesor";"1";"655";"35";
 "2";"Aula";"1";"413";"0";
 "3";"Curso";"1";"902";"0";
 "4";"Restriccion";"1";"0";"0";
-"5";"Ayudante";"1";"655";"0";
+"5";"Ayudante";"1";"655";"35";
 Day
 5
 "IdDay";"NaDay";
@@ -2548,7 +2548,6 @@ NameAuthority=Dr. Benjamín Tobar. Rector
 PositionAuthority=
 NameResponsible=
 PositionResponsible=
-MaxResourceWorkLoad=35
 TimetableSeleccionado=3
 Comments="Año 2000-2001"
 UseCustomSeed=-1
