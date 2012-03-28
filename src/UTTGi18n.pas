@@ -161,9 +161,10 @@ begin
   if Result = '' then
   begin
     Result := FMOFile.Translate(OriginalValue);
-    Write('*** -->');
+    //Write('*** -->');
   end;
-  WriteLn(Format('(MO) %s::[%s] --> [%s]', [Identifier, OriginalValue, Result]));
+  if Result = '' then
+    WriteLn(Format('(MO) %s::[%s] --> [%s]', [Identifier, OriginalValue, Result]));
 end;
 
 function TMOTrFile.TranslateResourceStrings: Boolean;

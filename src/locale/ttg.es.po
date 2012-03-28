@@ -501,12 +501,10 @@ msgid "Panel2"
 msgstr "Panel2"
 
 #: tcrossmanytomanyeditorform.btcancel.hint
-msgctxt "tcrossmanytomanyeditorform.btcancel.hint"
 msgid "Cancel|Cancel"
 msgstr "Cancelar|Cancelar"
 
 #: tcrossmanytomanyeditorform.btok.hint
-msgctxt "tcrossmanytomanyeditorform.btok.hint"
 msgid "Ok|Ok"
 msgstr "Aceptar|Aceptar"
 
@@ -556,12 +554,10 @@ msgid "Show Table"
 msgstr "Mostrar tabla"
 
 #: teditorform.actshow.caption
-msgctxt "teditorform.actshow.caption"
 msgid "Show"
 msgstr "Presentar"
 
 #: teditorform.actshow.hint
-msgctxt "teditorform.actshow.hint"
 msgid "Show|Show the grid content in a report"
 msgstr "Presentar|Presentar el contenido en un reporte"
 
@@ -1062,12 +1058,10 @@ msgid "Select the time slot to swap"
 msgstr "Seleccione el periodo a intercambiar"
 
 #: tsingleeditorform.actfind.caption
-msgctxt "tsingleeditorform.actfind.caption"
 msgid "Find"
 msgstr "Buscar"
 
 #: tsingleeditorform.actfind.hint
-msgctxt "tsingleeditorform.actfind.hint"
 msgid "Find|Find by Field"
 msgstr "Buscar|Buscar por campo"
 
