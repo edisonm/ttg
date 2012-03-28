@@ -1045,8 +1045,11 @@ var
       Duration := ResourceToFreePeriods[Resource];
       FreePeriods := Number - Duration;
       if FreePeriods < 0 then
+      begin
         SErrors := SErrors
+          + Format('FPeriodCount=%d'#13#10, [FPeriodCount])
           + Format(SResourceOverflow, [FResourceToName[Resource], Duration, Number]) + #13#10;
+      end;
       ResourceToFreePeriods[Resource] := FreePeriods;
       ResourceToKeySort[Resource] := FreePeriods * FActivityCount + Length(FResourceToActivities[Resource]);
       FResourceSorted[Resource] := Resource;

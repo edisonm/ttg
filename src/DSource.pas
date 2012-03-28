@@ -264,13 +264,13 @@ var
     SQL: TStrings;
   begin
     SQL := TStringList.Create;
-    // DbZConnection.ExecuteDirect('pragma foreign_keys=off');
+    DbZConnection.ExecuteDirect('pragma foreign_keys=off');
     try
       StringsToSQL(SQL, APosition, RecordCount);
       DbZConnection.ExecuteDirect(SQL.Text);
     finally
       SQL.Free;
-      // DbZConnection.ExecuteDirect('pragma foreign_keys=on');
+      DbZConnection.ExecuteDirect('pragma foreign_keys=on');
     end;
   end;
 begin
@@ -285,21 +285,18 @@ var
 begin
   ZTables.Close;
   ZTables.Open;
+  DbZConnection.ExecuteDirect('pragma foreign_keys=off');
   try
-    DbZConnection.StartTransaction;
     Field := ZTables.Fields[0];
-    while not ZTables.EOF do
+    ZTables.Last;
+    while not ZTables.BOF do
     begin
       if Field.AsString <> 'sqlite_sequence' then
-      begin
         DbZConnection.ExecuteDirect(Format('DELETE FROM %s', [Field.AsString]));
-      end;
-      ZTables.Next;
+      ZTables.Prior;
     end;
-    DbZConnection.Commit;
-  except
-    DbZConnection.Rollback;
-    raise;
+  finally
+    DbZConnection.ExecuteDirect('pragma foreign_keys=on');
   end;
 end;
 
