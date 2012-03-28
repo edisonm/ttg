@@ -61,44 +61,7 @@ ifneq ($(BuildMode),debug)
 # upx $(TTGEXE)
 endif
 
-ifeq ($(shell uname -o),Cygwin)
-
-dbfiles: $(TTGSQL) $(TTGMYSQL) $(DSRCBASE).pas $(DSRCBASE)consts.pas $(DSRCBASE).lfm
-
-dbclean:
-	$(RM) $(TTGSQL) $(TTGMYSQL) $(DSRCBASE).pas $(DSRCBASE)consts.pas $(DSRCBASE).lfm
-
-ttgsql: $(TTGSQL)
-
-$(TTGSQL): $(DBCONVERT) $(TTGMDB)
-	$(DBCONVERT) /ACC2SQL $(TTGMDB) $(TTGSQL) sqlite
-	dos2unix $(TTGSQL)
-
-$(TTGMYSQL): $(DBCONVERT) $(TTGMDB)
-	$(DBCONVERT) /ACC2SQL $(TTGMDB) $(TTGMYSQL) mysql
-	dos2unix $(TTGSQL)
-
-$(DSRCBASE).pas $(DSRCBASE)consts.pas $(DSRCBASE).lfm: $(DBCONVERT) $(TTGMDB) Makefile
-	$(DBCONVERT) /ACC2DM $(TTGMDB) SourceBaseDataModule \
-	  $(DSRCBASE) 'cds;urt;lfm;U=ZConnection, ZDataset;DS=ZTable;DB=ZConnection;DP=Connection'
-	dos2unix $(DSRCBASE).pas $(DSRCBASE)Consts.pas $(DSRCBASE).lfm
-
-cleanthisw:
-	$(RM) $(DSRCBASE).{lfm,lrs,pas} $(DSRCBASE)Consts.pas $(TTGSQL) $(TTGMYSQL)
-
-$(DBCONVERT):
-	cd $(DBCONVERTSRC) ; $(MAKE) all
-
-clean:
-	cd $(DBCONVERTSRC) ; $(MAKE) clean
-
-else
-
-cleanthisw:
-
-endif
-
-cleanthis: cleanthisw
+cleanthis:
 	$(RM) -r $(TTGEXE) $(TTGDIR)/bin/* $(TTGDIR)/obj/* $(ABOUT).pas *.lrs
 
 clean: cleanthis
@@ -115,10 +78,7 @@ test:
 	@echo TTGEXE=$(TTGEXE)
 	@echo BASELAZFILES=$(BASELAZFILES)
 	@echo DSRCBASE=$(DSRCBASE)
-	@echo DBCONVERT=$(DBCONVERT)
 	@echo BuildId=$(BuildId)
-	@echo $(TTGMYSQL): $(DBCONVERT) $(TTGMDB)
-	@echo $(DBCONVERT) /ACC2SQL $(TTGMDB) $(TTGMYSQL) mysql
 
 run:
 	$(TTGEXE)

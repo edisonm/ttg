@@ -13,9 +13,6 @@ BASELAZFILES=$(addsuffix .pas, $(UNITS)) $(addsuffix .lfm, $(FORMS)) ttg.lpr ttg
 ABOUT=UAbout
 
 ifeq ($(shell uname -o),Cygwin)
-FILES=$(TTGMYSQL)
-# Due to a bug in cygwin, I cannot use (absolute) dirs that contains ':'
-DBCONVERT=$(DBCONVERTDIR)/bin/dbconvert.exe
 LAZBUILDOPTS=
 else
 LAZBUILDOPTS=--ws=qt
@@ -26,7 +23,6 @@ LAZBUILD?=lazbuild $(LAZBUILDOPTS)
 LAZIDE?=lazarus-ide
 LRSDEP=$(LAZRES)
 
-TTGMDB=$(RELDIR)/dat/ttg.mdb
 TTGSQL=$(RELDIR)/dat/ttg.sql
 TTGMYSQL=$(RELDIR)/dat/ttg.mysql
 

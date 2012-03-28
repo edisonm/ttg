@@ -9,7 +9,6 @@ TTGDIR:=$(shell pwd)
 include SETTINGS
 include COMMON
 
-TTGMDB=dat/$(TTGMDBBASE)
 TTGSQLITE3=dat/ttg.s3fpc
 
 all:
