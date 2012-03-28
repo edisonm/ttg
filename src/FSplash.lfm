@@ -1,10 +1,9 @@
 object SplashForm: TSplashForm
-  Left = 695
+  Left = 686
   Height = 155
-  Top = 317
+  Top = 322
   Width = 509
   BorderStyle = bsNone
-  Caption = 'SplashForm'
   ClientHeight = 155
   ClientWidth = 509
   Font.Height = -11

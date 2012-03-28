@@ -1071,16 +1071,6 @@ msgctxt "tsingleeditorform.actfind.hint"
 msgid "Find|Find by Field"
 msgstr "Buscar|Buscar por campo"
 
-#: tsingleeditorform.btfind.caption
-msgctxt "tsingleeditorform.btfind.caption"
-msgid "Search"
-msgstr "Buscar"
-
-#: tsingleeditorform.btfind.hint
-msgctxt "tsingleeditorform.btfind.hint"
-msgid "Search|Search using a specific field"
-msgstr "Buscar|Buscar un campo especifico"
-
 #: tsingleeditorform.tbeditor.caption
 msgctxt "tsingleeditorform.tbeditor.caption"
 msgid "Show"
