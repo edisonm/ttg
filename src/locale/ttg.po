@@ -565,31 +565,6 @@ msgctxt "TEDITORFORM.ACTSHOW.HINT"
 msgid "Show|Show the grid content in a report"
 msgstr ""
 
-#: teditorform.btnshow.hint
-msgctxt "teditorform.btnshow.hint"
-msgid "Show|Show the grid content in a report"
-msgstr ""
-
-#: teditorform.caption
-msgctxt "teditorform.caption"
-msgid "EditorForm"
-msgstr ""
-
-#: teditorform.tbeditor.caption
-msgctxt "TEDITORFORM.TBEDITOR.CAPTION"
-msgid "Show"
-msgstr ""
-
-#: teditorform.tbshow.hint
-msgctxt "TEDITORFORM.TBSHOW.HINT"
-msgid "Show|Show the grid content in a report"
-msgstr ""
-
-#: teditorform.tlbshow.caption
-msgctxt "teditorform.tlbshow.caption"
-msgid "Show"
-msgstr ""
-
 #: tmainform.actabout.caption
 msgid "About..."
 msgstr ""
@@ -1093,7 +1068,7 @@ msgstr ""
 
 #: tsingleeditorform.actfind.hint
 msgctxt "tsingleeditorform.actfind.hint"
-msgid "Find|Find Value"
+msgid "Find|Find by Field"
 msgstr ""
 
 #: tsingleeditorform.btfind.caption
@@ -1106,18 +1081,8 @@ msgctxt "TSINGLEEDITORFORM.BTFIND.HINT"
 msgid "Search|Search using a specific field"
 msgstr ""
 
-#: tsingleeditorform.caption
-msgctxt "TSINGLEEDITORFORM.CAPTION"
-msgid "EditorForm"
-msgstr ""
-
 #: tsingleeditorform.tbeditor.caption
 msgctxt "TSINGLEEDITORFORM.TBEDITOR.CAPTION"
-msgid "Show"
-msgstr ""
-
-#: tsingleeditorform.tbshow.caption
-msgctxt "TSINGLEEDITORFORM.TBSHOW.CAPTION"
 msgid "Show"
 msgstr ""
 
@@ -1243,16 +1208,6 @@ msgctxt "ttimetableform.actclashresource.hint"
 msgid "Clashes of Resources|Clashes of Resources"
 msgstr ""
 
-#: ttimetableform.actfind.caption
-msgctxt "TTIMETABLEFORM.ACTFIND.CAPTION"
-msgid "Search"
-msgstr ""
-
-#: ttimetableform.actfind.hint
-msgctxt "TTIMETABLEFORM.ACTFIND.HINT"
-msgid "Search|Search using a specific field"
-msgstr ""
-
 #: ttimetableform.actimprovetimetable.caption
 msgid "Improve timetable"
 msgstr ""
@@ -1269,16 +1224,6 @@ msgstr ""
 #: ttimetableform.actrestrictionnonsatisfied.hint
 msgctxt "ttimetableform.actrestrictionnonsatisfied.hint"
 msgid "Resource retrictions|Resource restrictions non satisfied"
-msgstr ""
-
-#: ttimetableform.actshow.caption
-msgctxt "TTIMETABLEFORM.ACTSHOW.CAPTION"
-msgid "Show"
-msgstr ""
-
-#: ttimetableform.actshow.hint
-msgctxt "TTIMETABLEFORM.ACTSHOW.HINT"
-msgid "Show|Show the grid content in a report"
 msgstr ""
 
 #: ttimetableform.acttimetableresource.caption

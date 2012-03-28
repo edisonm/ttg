@@ -1,5 +1,5 @@
 inherited TimetableForm: TTimetableForm
-  Left = 1103
+  Left = 998
   Height = 545
   Top = 228
   Width = 913
@@ -12,9 +12,6 @@ inherited TimetableForm: TTimetableForm
   OnDestroy = FormDestroy
   inherited TBEditor: TToolBar
     Width = 913
-    inherited TBShow: TToolButton
-      Action = ActShow
-    end
     inherited BtFind: TToolButton
       Action = ActFind
     end
@@ -460,66 +457,65 @@ inherited TimetableForm: TTimetableForm
       8000008080000080800000808000
     }
   end
-  inherited DataSource: TDatasource
-    DataSet = TbTimetable
-    OnStateChange = DataSourceStateChange
-    OnDataChange = DataSourceDataChange
-    left = 312
-    top = 224
-  end
   inherited ActionList: TActionList
-    Images = ImageList
     left = 312
     top = 448
-    object ActTimetableResource: TAction
+    object ActTimetableResource: TAction[2]
       AutoCheck = True
       Caption = 'Resources'' timetables'
       Hint = 'Resources'' timetables|Resources'' timetables'
       ImageIndex = 3
       OnExecute = ActTimetableResourceExecute
     end
-    object ActClashResource: TAction
+    object ActClashResource: TAction[3]
       AutoCheck = True
       Caption = 'Clashes of Resources'
       Hint = 'Clashes of Resources|Clashes of Resources'
       ImageIndex = 4
       OnExecute = ActClashResourceExecute
     end
-    object ActClashActivity: TAction
+    object ActClashActivity: TAction[4]
       AutoCheck = True
       Caption = 'Clashes of Activities'
       Hint = 'Clashes of Activities|Clashes of Activities'
       ImageIndex = 5
       OnExecute = ActClashActivityExecute
     end
-    object ActRestrictionNonSatisfied: TAction
+    object ActRestrictionNonSatisfied: TAction[5]
       AutoCheck = True
       Caption = 'Resource restrictions'
       Hint = 'Resource retrictions|Resource restrictions non satisfied'
       ImageIndex = 8
       OnExecute = ActRestrictionNonSatisfiedExecute
     end
-    object ActBrokenSessionDay: TAction
+    object ActBrokenSessionDay: TAction[6]
       AutoCheck = True
       Caption = 'Broken Sessions by Day'
       Hint = 'Broken Sessions by Day|Broken Sessions by Day'
       ImageIndex = 5
       OnExecute = ActBrokenSessionDayExecute
     end
-    object ActBrokenSessionHour: TAction
+    object ActBrokenSessionHour: TAction[7]
       AutoCheck = True
       Caption = 'Broken Sessions by Hour'
       Hint = 'Broken Sessions by Hour|Broken Sessions by Hour'
       ImageIndex = 5
       OnExecute = ActBrokenSessionHourExecute
     end
-    object ActImproveTimeTable: TAction
+    object ActImproveTimeTable: TAction[8]
       AutoCheck = True
       Caption = 'Improve timetable'
       Hint = 'Improve timetable|Improve selected timetable'
       ImageIndex = 9
       OnExecute = ActImproveTimeTableExecute
     end
+  end
+  inherited DataSource: TDatasource
+    DataSet = TbTimetable
+    OnStateChange = DataSourceStateChange
+    OnDataChange = DataSourceDataChange
+    left = 312
+    top = 224
   end
   object QuClashResourceDetail: TZQuery[6]
     Connection = SourceDataModule.DbZConnection

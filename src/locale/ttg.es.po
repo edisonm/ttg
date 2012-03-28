@@ -565,31 +565,6 @@ msgctxt "teditorform.actshow.hint"
 msgid "Show|Show the grid content in a report"
 msgstr "Presentar|Presentar el contenido en un reporte"
 
-#: teditorform.btnshow.hint
-msgctxt "teditorform.btnshow.hint"
-msgid "Show|Show the grid content in a report"
-msgstr "Presentar|Presenta el contenido en un reporte"
-
-#: teditorform.caption
-msgctxt "teditorform.caption"
-msgid "EditorForm"
-msgstr "EditorForm"
-
-#: teditorform.tbeditor.caption
-msgctxt "teditorform.tbeditor.caption"
-msgid "Show"
-msgstr "Presentar"
-
-#: teditorform.tbshow.hint
-msgctxt "teditorform.tbshow.hint"
-msgid "Show|Show the grid content in a report"
-msgstr "Presentar|Presentar el contenido en un reporte"
-
-#: teditorform.tlbshow.caption
-msgctxt "teditorform.tlbshow.caption"
-msgid "Show"
-msgstr "Presentar"
-
 #: tmainform.actabout.caption
 msgid "About..."
 msgstr "Acerca de..."
@@ -1087,8 +1062,6 @@ msgid "Select the time slot to swap"
 msgstr "Seleccione el periodo a intercambiar"
 
 #: tsingleeditorform.actfind.caption
-#, fuzzy
-#| msgid "Search"
 msgctxt "tsingleeditorform.actfind.caption"
 msgid "Find"
 msgstr "Buscar"
@@ -1097,8 +1070,8 @@ msgstr "Buscar"
 #, fuzzy
 #| msgid "Search|Search using a specific field"
 msgctxt "tsingleeditorform.actfind.hint"
-msgid "Find|Find Value"
-msgstr "Buscar|Buscar un campo especifico"
+msgid "Find|Find by Field"
+msgstr "Buscar|Buscar por campo"
 
 #: tsingleeditorform.btfind.caption
 #, fuzzy
@@ -1114,18 +1087,8 @@ msgctxt "tsingleeditorform.btfind.hint"
 msgid "Search|Search using a specific field"
 msgstr "Buscar|Buscar un campo especifico"
 
-#: tsingleeditorform.caption
-msgctxt "tsingleeditorform.caption"
-msgid "EditorForm"
-msgstr "EditorForm"
-
 #: tsingleeditorform.tbeditor.caption
 msgctxt "tsingleeditorform.tbeditor.caption"
-msgid "Show"
-msgstr "Presentar"
-
-#: tsingleeditorform.tbshow.caption
-msgctxt "tsingleeditorform.tbshow.caption"
 msgid "Show"
 msgstr "Presentar"
 
@@ -1253,20 +1216,6 @@ msgctxt "ttimetableform.actclashresource.hint"
 msgid "Clashes of Resources|Clashes of Resources"
 msgstr "Cruce de Recursos|Cruce de Recursos"
 
-#: ttimetableform.actfind.caption
-#, fuzzy
-#| msgid "Search"
-msgctxt "ttimetableform.actfind.caption"
-msgid "Search"
-msgstr "Buscar"
-
-#: ttimetableform.actfind.hint
-#, fuzzy
-#| msgid "Search|Search using a specific field"
-msgctxt "ttimetableform.actfind.hint"
-msgid "Search|Search using a specific field"
-msgstr "Buscar|Buscar un campo especifico"
-
 #: ttimetableform.actimprovetimetable.caption
 msgid "Improve timetable"
 msgstr "Mejorar horario"
@@ -1284,16 +1233,6 @@ msgstr "Restricciones de Recursos"
 msgctxt "ttimetableform.actrestrictionnonsatisfied.hint"
 msgid "Resource retrictions|Resource restrictions non satisfied"
 msgstr "Restricciones de Recursos|Restricciones de Recrursos no satisfechas"
-
-#: ttimetableform.actshow.caption
-msgctxt "ttimetableform.actshow.caption"
-msgid "Show"
-msgstr "Presentar"
-
-#: ttimetableform.actshow.hint
-msgctxt "ttimetableform.actshow.hint"
-msgid "Show|Show the grid content in a report"
-msgstr "Presentar|Presentar el contenido en un reporte"
 
 #: ttimetableform.acttimetableresource.caption
 msgctxt "ttimetableform.acttimetableresource.caption"
