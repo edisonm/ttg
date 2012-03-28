@@ -9,7 +9,7 @@ msgstr "Codigo"
 #: dsourceconsts.sflactivity_idtheme
 msgctxt "dsourceconsts.sflactivity_idtheme"
 msgid "Theme"
-msgstr "Materia"
+msgstr "Tema"
 
 #: dsourceconsts.sflactivity_naactivity
 msgctxt "dsourceconsts.sflactivity_naactivity"
@@ -24,7 +24,7 @@ msgstr "Recurso"
 #: dsourceconsts.sflavailability_idtheme
 msgctxt "dsourceconsts.sflavailability_idtheme"
 msgid "Theme"
-msgstr "Materia"
+msgstr "Tema"
 
 #: dsourceconsts.sflavailability_numresource
 msgctxt "dsourceconsts.sflavailability_numresource"
@@ -89,7 +89,7 @@ msgstr "Tipo de Recurso"
 #: dsourceconsts.sflresourcetypelimit_idtheme
 msgctxt "dsourceconsts.sflresourcetypelimit_idtheme"
 msgid "Theme"
-msgstr "Materias"
+msgstr "Temas"
 
 #: dsourceconsts.sflresourcetypelimit_numresourcelimit
 msgctxt "dsourceconsts.sflresourcetypelimit_numresourcelimit"
@@ -324,7 +324,7 @@ msgstr "Tipos de restricciones"
 #: dsourceconsts.stbtheme
 msgctxt "dsourceconsts.stbtheme"
 msgid "Themes"
-msgstr "Materias"
+msgstr "Temas"
 
 #: dsourceconsts.stbtimetable
 msgctxt "dsourceconsts.stbtimetable"
@@ -398,12 +398,12 @@ msgstr "Fracc. h. Recursos:"
 #: tconfigform.lbbrokenactivity.caption
 msgctxt "tconfigform.lbbrokenactivity.caption"
 msgid "Broken Sessions:"
-msgstr "Materias cortadas:"
+msgstr "Sesiones cortadas:"
 
 #: tconfigform.lbclashactivity.caption
 msgctxt "tconfigform.lbclashactivity.caption"
 msgid "Clash of Activities:"
-msgstr "Cruce materias:"
+msgstr "Cruce de Actividades:"
 
 #: tconfigform.lbcrossprobability.caption
 msgctxt "tconfigform.lbcrossprobability.caption"
@@ -438,7 +438,7 @@ msgstr "Prob. Mutacion"
 #: tconfigform.lbnonscatteredactivity.caption
 msgctxt "tconfigform.lbnonscatteredactivity.caption"
 msgid "Non Scattered Activities:"
-msgstr "Materias juntas:"
+msgstr "Actividades no dispersas:"
 
 #: tconfigform.lbpollinationprobability.caption
 msgctxt "tconfigform.lbpollinationprobability.caption"
@@ -696,12 +696,12 @@ msgstr "Guardar|Guardar horario"
 #: tmainform.acttheme.caption
 msgctxt "tmainform.acttheme.caption"
 msgid "Themes"
-msgstr "Materias"
+msgstr "Temas"
 
 #: tmainform.acttheme.hint
 msgctxt "tmainform.acttheme.hint"
 msgid "Themes|Themes"
-msgstr "Materias|Materias"
+msgstr "Temas|Temas"
 
 #: tmainform.acttimetable.caption
 msgctxt "tmainform.acttimetable.caption"
@@ -788,11 +788,6 @@ msgstr "-"
 msgctxt "tmainform.n6.caption"
 msgid "-"
 msgstr "-"
-
-#: tmasterdetaileditorform.grbdetail.caption
-msgctxt "tmasterdetaileditorform.grbdetail.caption"
-msgid "Detail"
-msgstr "Detalle"
 
 #: tmessageviewform.bbtclose.caption
 msgctxt "tmessageviewform.bbtclose.caption"
@@ -927,7 +922,7 @@ msgstr "Fracc. h. Recursos:"
 #: tprogressform.pnbrokensession.caption
 msgctxt "tprogressform.pnbrokensession.caption"
 msgid "Broken Sessions:"
-msgstr "Materias cortadas:"
+msgstr "Sesiones Cortadas:"
 
 #: tprogressform.pnclashactivity.caption
 msgctxt "tprogressform.pnclashactivity.caption"
@@ -1112,7 +1107,7 @@ msgstr "Filtrar por Tipo de Recurso"
 #: tthemeform.caption
 msgctxt "tthemeform.caption"
 msgid "Theme"
-msgstr "Materias"
+msgstr "Tema"
 
 #: tthemeform.dbgriddetail.hint
 msgctxt "tthemeform.dbgriddetail.hint"
@@ -1155,22 +1150,22 @@ msgstr "Intercambiar periodos|Intercambiar periodos"
 #: ttimetableform.actbrokensessionday.caption
 msgctxt "ttimetableform.actbrokensessionday.caption"
 msgid "Broken Sessions by Day"
-msgstr "Materias cortadas por el dia"
+msgstr "Sesiones cortadas por el dia"
 
 #: ttimetableform.actbrokensessionday.hint
 msgctxt "ttimetableform.actbrokensessionday.hint"
 msgid "Broken Sessions by Day|Broken Sessions by Day"
-msgstr "Materias cortadas por el dia|Materias cortadas por el dia"
+msgstr "Sesiones cortadas por el dia|Sesiones cortadas por el dia"
 
 #: ttimetableform.actbrokensessionhour.caption
 msgctxt "ttimetableform.actbrokensessionhour.caption"
 msgid "Broken Sessions by Hour"
-msgstr "Materias cortadas por la hora"
+msgstr "Sesiones cortadas por la hora"
 
 #: ttimetableform.actbrokensessionhour.hint
 msgctxt "ttimetableform.actbrokensessionhour.hint"
 msgid "Broken Sessions by Hour|Broken Sessions by Hour"
-msgstr "Materias cortadas por la hora|Materias cortadas por la hora"
+msgstr "Sesiones cortadas por la hora|Sesiones cortadas por la hora"
 
 #: ttimetableform.actclashactivity.caption
 msgid "Clashes of Activities"
@@ -1278,7 +1273,7 @@ msgstr "Fracc. h. Recursos"
 
 #: uttgconsts.sbrokensession
 msgid "Broken Sessions"
-msgstr "Materias cortadas"
+msgstr "Sesiones cortadas"
 
 #: uttgconsts.schangeswillbelostwarning
 msgid "Changes will be lost, are you sure?"
@@ -1287,7 +1282,7 @@ msgstr "Los cambios realizados se perderan, Esta seguro?"
 #: uttgconsts.sclashactivity
 msgctxt "uttgconsts.sclashactivity"
 msgid "Clash of Activities"
-msgstr "Cruce de materias"
+msgstr "Cruce de Actividades"
 
 #: uttgconsts.sclashes
 msgid "Clashes"
@@ -1344,7 +1339,6 @@ msgid "Press <Del> to clean the cell"
 msgstr "Presione <Supr> para borrar la celda"
 
 #: uttgconsts.sdetail
-msgctxt "uttgconsts.sdetail"
 msgid "Detail"
 msgstr "Detalle"
 
@@ -1472,7 +1466,7 @@ msgstr "Listo para generar horario. Mostrar resumen del chequeo del horario?"
 
 #: uttgconsts.snonscatteredactivity
 msgid "Non Scattered Activities"
-msgstr "Materias no dispersas"
+msgstr "Actividades no dispersas"
 
 #: uttgconsts.snumhardrestrictions
 msgid "Number of hard resource restrictions..."

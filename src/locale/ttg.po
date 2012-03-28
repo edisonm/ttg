@@ -789,11 +789,6 @@ msgctxt "tmainform.n6.caption"
 msgid "-"
 msgstr ""
 
-#: tmasterdetaileditorform.grbdetail.caption
-msgctxt "tmasterdetaileditorform.grbdetail.caption"
-msgid "Detail"
-msgstr ""
-
 #: tmessageviewform.bbtclose.caption
 msgctxt "tmessageviewform.bbtclose.caption"
 msgid "&Close"
@@ -1344,7 +1339,6 @@ msgid "Press <Del> to clean the cell"
 msgstr ""
 
 #: uttgconsts.sdetail
-msgctxt "uttgconsts.sdetail"
 msgid "Detail"
 msgstr ""
 
