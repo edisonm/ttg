@@ -50,7 +50,6 @@ type
     MINew: TMenuItem;
     MIOpen: TMenuItem;
     StatusBar: TStatusBar;
-    MIPasswd: TMenuItem;
     MITimetable: TMenuItem;
     MIDay: TMenuItem;
     MIHour: TMenuItem;
@@ -91,7 +90,6 @@ type
     ToolButton1: TToolButton;
     ToolButton3: TToolButton;
     ToolButton4: TToolButton;
-    MIChangePassword: TMenuItem;
     N2: TMenuItem;
     N5: TMenuItem;
     N6: TMenuItem;

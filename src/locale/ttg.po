@@ -580,7 +580,7 @@ msgstr ""
 
 #: tmainform.actconfigure.caption
 msgctxt "tmainform.actconfigure.caption"
-msgid "Configure..."
+msgid "Configure"
 msgstr ""
 
 #: tmainform.actconfigure.hint
@@ -726,16 +726,6 @@ msgctxt "tmainform.caption"
 msgid "MainForm"
 msgstr ""
 
-#: tmainform.michangepassword.caption
-msgctxt "tmainform.michangepassword.caption"
-msgid "Change password..."
-msgstr ""
-
-#: tmainform.michangepassword.hint
-msgctxt "tmainform.michangepassword.hint"
-msgid "Change password|Change the system password"
-msgstr ""
-
 #: tmainform.midata.caption
 msgid "&Data"
 msgstr ""
@@ -762,16 +752,6 @@ msgstr ""
 
 #: tmainform.milanguages.caption
 msgid "Languages"
-msgstr ""
-
-#: tmainform.mipasswd.caption
-msgctxt "tmainform.mipasswd.caption"
-msgid "Password..."
-msgstr ""
-
-#: tmainform.mipasswd.hint
-msgctxt "tmainform.mipasswd.hint"
-msgid "Password|Change system password"
 msgstr ""
 
 #: tmainform.mireopen.caption

@@ -354,7 +354,7 @@ msgstr "Aceptar"
 #: tconfigform.caption
 msgctxt "tconfigform.caption"
 msgid "Configure"
-msgstr "Configure"
+msgstr "Configurar"
 
 #: tconfigform.cbapplydoubledownhill.caption
 msgctxt "tconfigform.cbapplydoubledownhill.caption"
@@ -580,8 +580,8 @@ msgstr "Acerca de|Informacion referente a este programa"
 
 #: tmainform.actconfigure.caption
 msgctxt "tmainform.actconfigure.caption"
-msgid "Configure..."
-msgstr "Configurar..."
+msgid "Configure"
+msgstr "Configurar"
 
 #: tmainform.actconfigure.hint
 msgctxt "tmainform.actconfigure.hint"
@@ -657,12 +657,12 @@ msgstr "Abrir|Abrir horario guardado"
 #: tmainform.actperiod.caption
 msgctxt "tmainform.actperiod.caption"
 msgid "Periods"
-msgstr "Periodos laborables"
+msgstr "Períodos"
 
 #: tmainform.actperiod.hint
 msgctxt "tmainform.actperiod.hint"
 msgid "Periods|Periods"
-msgstr "Periodos laborables|Periodos laborables"
+msgstr "Períodos|Períodos laborables"
 
 #: tmainform.actregistrationinfo.caption
 msgid "Registration Info"
@@ -726,16 +726,6 @@ msgctxt "tmainform.caption"
 msgid "MainForm"
 msgstr "MainForm"
 
-#: tmainform.michangepassword.caption
-msgctxt "tmainform.michangepassword.caption"
-msgid "Change password..."
-msgstr "Cambiar clave..."
-
-#: tmainform.michangepassword.hint
-msgctxt "tmainform.michangepassword.hint"
-msgid "Change password|Change the system password"
-msgstr "Cambiar clave|Cambiar la clave del sistema"
-
 #: tmainform.midata.caption
 msgid "&Data"
 msgstr "&Datos"
@@ -763,16 +753,6 @@ msgstr "Ayuda|Ayuda en linea"
 #: tmainform.milanguages.caption
 msgid "Languages"
 msgstr "Lenguajes"
-
-#: tmainform.mipasswd.caption
-msgctxt "tmainform.mipasswd.caption"
-msgid "Password..."
-msgstr "Clave..."
-
-#: tmainform.mipasswd.hint
-msgctxt "tmainform.mipasswd.hint"
-msgid "Password|Change system password"
-msgstr "Clave|Cambiar la clave del sistema"
 
 #: tmainform.mireopen.caption
 msgid "Reopen"
@@ -969,12 +949,12 @@ msgstr "Fracc. h. Recursos:"
 #: tprogressform.pnbrokensession.caption
 msgctxt "tprogressform.pnbrokensession.caption"
 msgid "Broken Sessions:"
-msgstr " Materias cortadas:"
+msgstr "Materias cortadas:"
 
 #: tprogressform.pnclashactivity.caption
 msgctxt "tprogressform.pnclashactivity.caption"
 msgid "Clash of Activities:"
-msgstr " Cruce materias:"
+msgstr "Cruce de Actividades:"
 
 #: tprogressform.pnclashresource.caption
 msgctxt "tprogressform.pnclashresource.caption"
@@ -993,7 +973,7 @@ msgstr "Descripción:"
 #: tprogressform.pnelapsedtime.caption
 msgctxt "tprogressform.pnelapsedtime.caption"
 msgid "Elapsed Time:"
-msgstr " Tiempo transcurrido:"
+msgstr "Tiempo transcurrido:"
 
 #: tprogressform.pnestimatedtime.caption
 msgctxt "tprogressform.pnestimatedtime.caption"
@@ -1023,7 +1003,7 @@ msgstr "Actividades no dispersas:"
 #: tprogressform.pnnumber.caption
 msgctxt "tprogressform.pnnumber.caption"
 msgid "Number:"
-msgstr " Numero:"
+msgstr "Número:"
 
 #: tprogressform.pnpollination.caption
 msgctxt "tprogressform.pnpollination.caption"
@@ -1038,17 +1018,17 @@ msgstr " Iteracion:"
 #: tprogressform.pnrestriction.caption
 msgctxt "tprogressform.pnrestriction.caption"
 msgid "Resource Restrictions:"
-msgstr " Prohibiciones de Recursos:"
+msgstr "Prohibiciones de Recursos:"
 
 #: tprogressform.pntotalvalue.caption
 msgctxt "tprogressform.pntotalvalue.caption"
 msgid "Total Value:"
-msgstr " Valor Total:"
+msgstr "Valor Total:"
 
 #: tprogressform.pnvalue.caption
 msgctxt "tprogressform.pnvalue.caption"
 msgid "Value:"
-msgstr " Valor:"
+msgstr "Valor:"
 
 #: tresourceform.actrestriction.caption
 msgctxt "tresourceform.actrestriction.caption"

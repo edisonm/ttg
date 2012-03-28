@@ -159,6 +159,7 @@ begin
   Result := FMOFile.Translate(Identifier + #4 + OriginalValue);
   if Result = '' then
     Result := FMOFile.Translate(OriginalValue);
+  WriteLn(Format('%s::%s --> %s', [Identifier, OriginalValue, Result]));
 end;
 
 function TMOTrFile.TranslateResourceStrings: Boolean;
