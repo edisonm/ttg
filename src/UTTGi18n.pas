@@ -157,6 +157,8 @@ end;
 function TMOTrFile.Translate(const Identifier, OriginalValue: String): String;
 begin
   Result := FMOFile.Translate(Identifier + #4 + OriginalValue);
+  if Result = '' then
+    Result := FMOFile.Translate(OriginalValue);
 end;
 
 function TMOTrFile.TranslateResourceStrings: Boolean;
