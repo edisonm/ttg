@@ -1,5 +1,5 @@
 object ProgressForm: TProgressForm
-  Left = 760
+  Left = 757
   Height = 326
   Top = 314
   Width = 465

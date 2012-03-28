@@ -307,13 +307,18 @@ procedure TSourceDataModule.SaveToStrings(AStrings: TStrings);
 var
   ZTable: TZTable;
   Field: TField;
+  NumTables: Integer;
 begin
   ZTables.Close;
   ZTables.Open;
   ZTable := TZTable.Create(nil);
   try
     // sqlite_sequence is a system table that must not be saved:
-    AStrings.Add(IntToStr(ZTables.RecordCount - 1));
+    if ZTable.Locate('Name', 'sqlite_sequence', []) then
+      NumTables := ZTables.RecordCount - 1
+    else
+      NumTables := ZTables.RecordCount;
+    AStrings.Add(IntToStr(NumTables));
     ZTable.Connection := ZTables.Connection;
     Field := ZTables.Fields[0];
     while not ZTables.EOF do

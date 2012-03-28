@@ -299,7 +299,7 @@ msgstr "Periodos"
 #: dsourceconsts.stbresource
 msgctxt "dsourceconsts.stbresource"
 msgid "Resources"
-msgstr "Profesores"
+msgstr "Recursos"
 
 #: dsourceconsts.stbresourcetype
 msgctxt "dsourceconsts.stbresourcetype"
@@ -383,7 +383,7 @@ msgstr "Comentarios"
 #: tconfigform.groupbox2.caption
 msgctxt "tconfigform.groupbox2.caption"
 msgid "Resource Restrictions:"
-msgstr "Prohibiciones de profesor:"
+msgstr "Prohibiciones de Recursos:"
 
 #: tconfigform.lbauthority.caption
 msgctxt "tconfigform.lbauthority.caption"
@@ -393,7 +393,7 @@ msgstr "Autoridad:"
 #: tconfigform.lbbreaktimetableresource.caption
 msgctxt "tconfigform.lbbreaktimetableresource.caption"
 msgid "Break TT. Resources:"
-msgstr "Huecos h. prof.:"
+msgstr "Fracc. h. Recursos:"
 
 #: tconfigform.lbbrokenactivity.caption
 msgctxt "tconfigform.lbbrokenactivity.caption"
@@ -448,7 +448,7 @@ msgstr "Prob. Polinizacion:"
 #: tconfigform.lbpopulationsize.caption
 msgctxt "tconfigform.lbpopulationsize.caption"
 msgid "Population Size:"
-msgstr "Individuos:"
+msgstr "Tam. Población:"
 
 #: tconfigform.lbreparationprobability.caption
 msgctxt "tconfigform.lbreparationprobability.caption"
@@ -671,7 +671,7 @@ msgstr "Informacion de registro"
 #: tmainform.actresource.caption
 msgctxt "tmainform.actresource.caption"
 msgid "Resources"
-msgstr "Profesores"
+msgstr "Recursos"
 
 #: tmainform.actresource.hint
 msgctxt "tmainform.actresource.hint"
@@ -964,7 +964,7 @@ msgstr "0 "
 #: tprogressform.pnbreaktimetableresource.caption
 msgctxt "tprogressform.pnbreaktimetableresource.caption"
 msgid "Break TT. Resources:"
-msgstr "Fracc. h. profesores:"
+msgstr "Fracc. h. Recursos:"
 
 #: tprogressform.pnbrokensession.caption
 msgctxt "tprogressform.pnbrokensession.caption"
@@ -979,7 +979,7 @@ msgstr " Cruce materias:"
 #: tprogressform.pnclashresource.caption
 msgctxt "tprogressform.pnclashresource.caption"
 msgid "Clash of Resources:"
-msgstr " Cruce profesores:"
+msgstr "Cruce Recursos:"
 
 #: tprogressform.pncrashes.caption
 msgctxt "tprogressform.pncrashes.caption"
@@ -1038,7 +1038,7 @@ msgstr " Iteracion:"
 #: tprogressform.pnrestriction.caption
 msgctxt "tprogressform.pnrestriction.caption"
 msgid "Resource Restrictions:"
-msgstr " Prohibiciones de profesor:"
+msgstr " Prohibiciones de Recursos:"
 
 #: tprogressform.pntotalvalue.caption
 msgctxt "tprogressform.pntotalvalue.caption"
@@ -1053,7 +1053,7 @@ msgstr " Valor:"
 #: tresourceform.actrestriction.caption
 msgctxt "tresourceform.actrestriction.caption"
 msgid "Resource restrictions"
-msgstr "Prohibiciones de profesor"
+msgstr "Prohibiciones de Recursos"
 
 #: tresourceform.actrestriction.hint
 msgid "Resource restrictions|Input Resource restrictions"
@@ -1169,6 +1169,7 @@ msgctxt "tthemeform.dbgriddetail.hint"
 msgid "Activities of Theme"
 msgstr "Actividades del Tema"
 
+#: tthemeform.grbdetail.caption
 msgctxt "tthemeform.grbdetail.caption"
 msgid "Activities"
 msgstr "Actividades"
@@ -1275,11 +1276,11 @@ msgstr "Restricciones de Recursos|Restricciones de Recrursos no satisfechas"
 #: ttimetableform.acttimetableresource.caption
 msgctxt "ttimetableform.acttimetableresource.caption"
 msgid "Resources' timetables"
-msgstr "Horario de profesores"
+msgstr "Horario de Recursos"
 
 #: ttimetableform.acttimetableresource.hint
 msgid "Resources' timetables|Resources' timetables"
-msgstr "Horario de profesores|Horario de profesores"
+msgstr "Horario de Recursos|Horario de Recursos"
 
 #: ttimetableform.caption
 msgctxt "ttimetableform.caption"
@@ -1335,7 +1336,7 @@ msgstr "Horario base: %d"
 #: uttgconsts.sbreaktimetableresource
 msgctxt "uttgconsts.sbreaktimetableresource"
 msgid "Break TT. Resources"
-msgstr "Fracc. h. profesores"
+msgstr "Fracc. h. Recursos"
 
 #: uttgconsts.sbrokensession
 msgid "Broken Sessions"
@@ -1357,7 +1358,7 @@ msgstr "Cruces"
 #: uttgconsts.sclashresource
 msgctxt "uttgconsts.sclashresource"
 msgid "Clash of Resources"
-msgstr "Cruce de profesores"
+msgstr "Cruce de Recursos"
 
 #: uttgconsts.scopyright
 msgid "1999-2012 by Edison Mera"
@@ -1554,7 +1555,7 @@ msgstr "Probabilidad de polinizacion"
 
 #: uttgconsts.spopulationsize
 msgid "Population size"
-msgstr "Numero de individuos"
+msgstr "Tam. Población"
 
 #: uttgconsts.spressdeltoclearcell
 msgid "Press <Del> to clear cell"
@@ -1592,19 +1593,19 @@ msgstr "Para [%s], el número de actividades %d excede su capacidad %d"
 
 #: uttgconsts.sresourcesworkloadwithoutproblems
 msgid "Resources' Work load without problems..."
-msgstr "Carga horaria de los profesores sin problemas..."
+msgstr "Carga horaria de Recursos sin problemas..."
 
 #: uttgconsts.sresourcesworkloadwithproblems
 msgid "Resources' work load with problems..."
-msgstr "Carga horaria de los profesores con problemas..."
+msgstr "Carga horaria de Recursos con problemas..."
 
 #: uttgconsts.sresourceworkloadhead
 msgid "Resource; Work Load"
-msgstr "Profesor; Carga horaria"
+msgstr "Recurso; Carga horaria"
 
 #: uttgconsts.srestrictionshead
 msgid "Resource; Restrictions"
-msgstr "Profesor; Restricciones"
+msgstr "Recurso; Restricciones"
 
 #: uttgconsts.sroom
 msgid "Room"

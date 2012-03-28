@@ -1,5 +1,5 @@
 object ConfigForm: TConfigForm
-  Left = 599
+  Left = 592
   Height = 434
   Top = 296
   Width = 475
@@ -67,11 +67,11 @@ object ConfigForm: TConfigForm
     Height = 378
     Top = 8
     Width = 458
-    ActivePage = TSWeights
+    ActivePage = TSInstitution
     Anchors = [akTop, akLeft, akRight, akBottom]
     ParentShowHint = False
     ShowHint = True
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 1
     object TSInstitution: TTabSheet
       Hint = 'Institution Data'

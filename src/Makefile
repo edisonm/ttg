@@ -124,16 +124,16 @@ run:
 	$(TTGEXE)
 
 ex1:
-	cd $(TTGDIR)/bin ; $(TTGEXE) $(TTGDIR)/examples/Britanico2000.ttd
+	$(TTGEXE) $(TTGDIR)/examples/Britanico2000.ttd
 
 ex2:
-	cd $(TTGDIR)/bin ; $(TTGEXE) $(TTGDIR)/examples/Salamanca1999.ttd
+	$(TTGEXE) $(TTGDIR)/examples/Salamanca1999.ttd
 
 ex3:
-	cd $(TTGDIR)/bin ; $(TTGEXE) $(TTGDIR)/examples/original/Britanico2000.ttd
+	$(TTGEXE) $(TTGDIR)/examples/original/Britanico2000.ttd
 
 ex4:
-	cd $(TTGDIR)/bin ; $(TTGEXE) $(TTGDIR)/examples/original/Salamanca1999.ttd
+	$(TTGEXE) $(TTGDIR)/examples/original/Salamanca1999.ttd
 
 ide:
 	$(LAZIDE) ttg.lpi &

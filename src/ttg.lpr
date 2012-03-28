@@ -37,11 +37,7 @@ begin
     EnableTranslator('ttg', Language);
   if Assigned(ResourceTranslator) then
   begin
-    ResourceTranslator.TranslateUnitResourceStrings('UAbout');
-    ResourceTranslator.TranslateUnitResourceStrings('UDataSetToStrings');
-    ResourceTranslator.TranslateUnitResourceStrings('UTTGi18n');
-    ResourceTranslator.TranslateUnitResourceStrings('UTTGConsts');
-    ResourceTranslator.TranslateUnitResourceStrings('DSourceConsts');
+    ResourceTranslator.TranslateResourceStrings;
   end;
   DecimalSeparator := ',';
   //RequireDerivedFormResource := True;
