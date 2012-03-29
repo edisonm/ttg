@@ -49,17 +49,6 @@ cleanthis:
 
 clean: cleanthis
 
-tgz:
-	mkdir -p $(PKGDIR)
-# svn export --force $(REPOSITORY) $(TGZSRC) ;
-	rsync -a --exclude-from=Exclude --delete-excluded $(TTGDIR)/ $(PKGDIR)/$(TGZSRC)/
-	mkdir -p $(PKGDIR)/$(TGZSRC)/images
-	cp  $(TTGDIR)/images/ttg-icon.png $(PKGDIR)/$(TGZSRC)/images
-	mkdir -p $(PKGDIR)/$(TGZSRC)/src/dbcshared
-	sed -e s:'../../multithreadprocs':'/usr/share/multithreadprocs/src':g $(TTGSRC)/ttg.lpi \
-	  -e s:'../../zeosdbo/':'/usr/share/zeosdbo/':g > $(PKGDIR)/$(TGZSRC)/src/ttg.lpi
-	cd $(PKGDIR) ; tar -c --owner=0 --group=0 --exclude-backups $(TGZSRC)/* | gzip  --best -c > $(TGZBASE).orig.tar.gz
-
 install:
 	mkdir -p $(DESTDIR)/usr/bin
 	mkdir -p $(DESTDIR)/usr/share/doc/$(Package)/examples
