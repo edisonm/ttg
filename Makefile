@@ -70,12 +70,6 @@ install:
 	cp $(TTGSRC)/locale/ttg.es.mo $(DESTDIR)/usr/share/locale/es/LC_MESSAGES/ttg.mo
 	sed -e s:'<v>AppName</v>':'$(APPNAME)':g ttg_desktop.tmpl > $(DESTDIR)/usr/share/applications/ttg.desktop
 
-debiansrc: tgz
-	cd $(PKGDIR)/$(TGZSRC) ; debuild -S
-
-debianbin: debiansrc
-	cd $(PKGDIR)/$(TGZSRC) ; debuild
-
 winsetup:
 	cd iss ; $(MAKE) all
 
