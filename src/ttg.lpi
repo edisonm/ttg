@@ -40,7 +40,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="../../zeosdbo/packages/lazarus;../../zeosdbo/src/core;../../zeosdbo/src/dbc;../../zeosdbo/src/parsesql;../../zeosdbo/src/plain;../../zeosdbo/src/component;../../multithreadprocs;../../DBConvert/auxiliary"/>
+            <OtherUnitFiles Value="../../zeosdbo/packages/lazarus;../../zeosdbo/src/core;../../zeosdbo/src/dbc;../../zeosdbo/src/parsesql;../../zeosdbo/src/plain;../../zeosdbo/src/component;../../multithreadprocs;../obj/$(TargetCPU)-$(TargetOS)"/>
             <UnitOutputDirectory Value="../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)"/>
           </SearchPaths>
           <Parsing>
@@ -57,7 +57,6 @@
           <Linking>
             <Debugging>
               <GenerateDebugInfo Value="False"/>
-              <UseLineInfoUnit Value="False"/>
             </Debugging>
             <LinkSmart Value="True"/>
             <Options>
@@ -92,7 +91,8 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <CommandLineParams Value="../examples/Salamanca1999.ttd"/>
+        <CommandLineParams Value="Salamanca1999.ttd"/>
+        <WorkingDirectory Value="../examples"/>
       </local>
     </RunParams>
     <RequiredPackages Count="5">
@@ -360,26 +360,25 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../../zeosdbo/packages/lazarus;../../zeosdbo/src/core;../../zeosdbo/src/dbc;../../zeosdbo/src/parsesql;../../zeosdbo/src/plain;../../zeosdbo/src/component;../../multithreadprocs"/>
+      <OtherUnitFiles Value="../../zeosdbo/packages/lazarus;../../zeosdbo/src/core;../../zeosdbo/src/dbc;../../zeosdbo/src/parsesql;../../zeosdbo/src/plain;../../zeosdbo/src/component;../../multithreadprocs;../obj/$(TargetCPU)-$(TargetOS)-debug"/>
       <UnitOutputDirectory Value="../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)"/>
-      <SrcPath Value="$(LazarusDir)fpc/$(FPCVer)/source/rtl/objpas;$(LazarusDir)fpc/$(FPCVer)/source/rtl/inc;$(LazarusDir)fpc/$(FPCVer)/source/rtl/$(TargetOS)"/>
     </SearchPaths>
     <Parsing>
       <SyntaxOptions>
-        <UseAnsiStrings Value="False"/>
+        <SyntaxMode Value="Delphi"/>
       </SyntaxOptions>
     </Parsing>
     <CodeGeneration>
+      <SmartLinkUnit Value="True"/>
       <Checks>
         <RangeChecks Value="True"/>
       </Checks>
-      <Optimizations>
-        <VariablesInRegisters Value="True"/>
-      </Optimizations>
     </CodeGeneration>
+    <Linking>
+      <LinkSmart Value="True"/>
+    </Linking>
     <Other>
       <CompilerMessages>
-        <IgnoredMessages idx5024="True"/>
         <UseMsgFile Value="True"/>
       </CompilerMessages>
       <CustomOptions Value="-dZEOS_DISABLE_MYSQL
@@ -391,9 +390,6 @@
 -dZEOS_DISABLE_ASA
 -dDEBUG"/>
       <CompilerPath Value="$(CompPath)"/>
-      <ExecuteAfter>
-        <ShowAllMessages Value="True"/>
-      </ExecuteAfter>
     </Other>
   </CompilerOptions>
 </CONFIG>

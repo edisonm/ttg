@@ -8,7 +8,7 @@ UNITS:=$(shell cat ttg.lpi |grep '<Filename Value=".*\.pas"/>'|sed -e s:'^.*<Fil
 FORMS:=$(shell for i in $(UNITS) ; do if [ -f $$i.pas ] && [ -f $$i.lfm ]; then echo $$i; fi; done)
 
 BASELAZFILES=$(addsuffix .pas, $(UNITS)) $(addsuffix .lfm, $(FORMS)) ttg.lpr ttg.lpi
-#	  $(addsuffix .lrs, $(FORMS))
+# $(addsuffix .lrs, $(FORMS))
 
 ABOUT=UAbout
 

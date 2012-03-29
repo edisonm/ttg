@@ -9,6 +9,8 @@ TTGSRC=.
 
 include SETTINGS
 
+VPATH:=$(OBJDIR)
+
 .PHONY: prjdel srcdel
 
 .SUFFIXES: .lrs .lfm .dfm .pas .lpr .dpr
@@ -22,8 +24,8 @@ $(LAZRES): $(LAZBASE)/tools/lazres.lpi
 	cd "$(LAZBASE)/tools" && $(LAZBUILD) "lazres.lpi"
 endif
 
-%.lrs: %.lfm $(LRSDEP)
-	$(LAZRES) $@ $<
+# %.lrs: %.lfm $(LRSDEP)
+# 	$(LAZRES) $(OBJDIR)/$@ $<
 
 %.mo: %.po
 	msgfmt $< -o $@
@@ -31,16 +33,17 @@ endif
 # LOCALEFILES=locale/ttg.es.po
 
 ttg.lrs: $(LOCALEFILES) $(TTGDIR)/dat/default.ttd $(TTGSQL)
-	$(LAZRES) $@ $(LOCALEFILES) $(TTGDIR)/dat/default.ttd $(TTGSQL)
+	$(LAZRES) $(OBJDIR)/$@ $(LOCALEFILES) $(TTGDIR)/dat/default.ttd $(TTGSQL)
 
 $(ABOUT).pas: $(ABOUT).pas.tmpl
+	mkdir -p $(OBJDIR)
 	sed -e s:'@Package@':'$(Package)':g \
 	  -e s:'@BaseVersion@':'$(BaseVersion)':g \
 	  -e s:'@BuildMode@':'$(BuildMode)':g \
 	  -e s:'@Revision@':'$(BuildNr)':g \
 	  -e s:'@BuildDateTime@':"$(BUILDDATETIME)":g \
 	  -e s:'@Copyright@':'$(Copyright)':g \
-	  -e s:'@AppName@':'$(APPNAME)':g $< > $@
+	  -e s:'@AppName@':'$(APPNAME)':g $< > $(OBJDIR)/$@
 
 buildnr:
 	SvnVersion=`svnversion $(TTGDIR)` ; \
