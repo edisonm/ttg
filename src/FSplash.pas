@@ -66,7 +66,8 @@ begin
   UpdBackground;
   Caption := SAppName;
   LbProductName.Caption := Caption;
-  LbProductVersion.Caption := SAppVersion + '-' + SRevision;
+  LbProductVersion.Caption := SBaseVersion + '-' + SRevision
+    + ' (' + {$I %FPCTARGETCPU%} + '-' + {$I %FPCTARGETOS%} + ')';
   LbEdition.Caption := SBuildDateTime + ' - ' + SBuildMode;
   LbCopyright.Caption := SCopyright;
 end;

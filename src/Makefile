@@ -34,7 +34,7 @@ ttg.lrs: $(LOCALEFILES) $(TTGDIR)/dat/default.ttd $(TTGSQL)
 	$(LAZRES) $@ $(LOCALEFILES) $(TTGDIR)/dat/default.ttd $(TTGSQL)
 
 $(ABOUT).pas: $(ABOUT).pas.tmpl
-	sed -e s:'<v>AppVersion</v>':'$(AppVersion)':g \
+	sed -e s:'<v>Package</v>':'$(Package)':g \
 	  -e s:'<v>BaseVersion</v>':'$(BaseVersion)':g \
 	  -e s:'<v>BuildMode</v>':'$(BuildMode)':g \
 	  -e s:'<v>Revision</v>':'$(BuildNr)':g \
