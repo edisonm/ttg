@@ -17,15 +17,17 @@ all:
 catalog:
 
 $(PKG): ttg.iss.tmpl
-	sed -e s:'<v>Revision</v>':'$(BuildNr)':g \
-	  -e s:'<v>AppVersion</v>':'$(AppVersion)':g \
-	  -e s:'<v>AppName</v>':'$(APPNAME)':g \
-	  -e s/'<v>ProgramFiles<\/v>'/'$(PROGRAMFILES)'/g \
-	  -e s:'<v>Copyright</v>':'$(Copyright)':g \
-	  -e s:'<v>PkgDir</v>':'$(shell cygpath -w $(PKGDIR))':g \
-	  -e s:'<v>PkgBase</v>':'$(PKGBASE)':g \
-	  -e s:'<v>BuildId</v>':'$(BuildId)':g ttg.iss.tmpl > $(ISS)
+	sed -e s:'@Revision@':'$(BuildNr)':g \
+	  -e s:'@BaseVersion@':'$(BaseVersion)':g \
+	  -e s:'@AppName@':'$(APPNAME)':g \
+	  -e s/'@ProgramFiles@'/'$(PROGRAMFILES)'/g \
+	  -e s/'@Copyright@'/'$(Copyright)'/g \
+	  -e s/'@BuildMode@'/'$(BuildMode)'/g \
+	  -e s:'@PkgBase@':'$(PKGBASE)':g \
+	  -e s:'@BuildId@':'$(BuildId)':g ttg.iss.tmpl > $(ISS)
+	mkdir -p $(PKGDIR)
 	$(INNOIDE) $(ISSWIN)
+# -e s/'@PkgDir@'/'..\$(shell cygpath -w $(PKGDIR))'/g
 
 ttg $(TTGEXE):
 	cd $(TTGSRC) ; $(MAKE) BuildMode=$(BuildMode) all

@@ -5,14 +5,14 @@
 
 [Setup]
 MinVersion=5.0,5.0
-AppName=<v>AppName</v>
-AppId=<v>AppName</v>
+AppName=@AppName@
+AppId=@AppName@
 CreateUninstallRegKey=1
 UsePreviousAppDir=1
 UsePreviousGroup=1
-AppVersion=<v>AppVersion</v>
-AppVerName=<v>AppName</v> <v>AppVersion</v> (r<v>Revision</v> <v>BuildId</v>)
-AppCopyright=<v>Copyright</v>
+AppVersion=@BaseVersion@
+AppVerName=@AppName@ @BaseVersion@ (r@Revision@ @BuildId@)
+AppCopyright=@Copyright@
 WindowShowCaption=0
 WindowStartMaximized=0
 WindowVisible=0
@@ -24,17 +24,17 @@ DisableStartupPrompt=0
 CreateAppDir=1
 DisableProgramGroupPage=0
 Uninstallable=1
-DefaultDirName={pf}\TTG\<v>AppVersion</v>
-DefaultGroupName=<v>AppName</v> <v>AppVersion</v>
-LicenseFile=..\debian\copyright
-InfoAfterFile=..\README.TXT
-OutputBaseFilename=<v>PkgBase</v>
+DefaultDirName={pf}\TTG\@BaseVersion@
+DefaultGroupName=@AppName@ @BaseVersion@
+LicenseFile=..\..\debian\copyright
+InfoAfterFile=..\..\README.TXT
+OutputBaseFilename=@PkgBase@
 DiskSpanning=0
 DiskClusterSize=512
 ReserveBytes=4096
 UseSetupLdr=1
 SourceDir=.
-OutputDir=<v>PkgDir</v>
+OutputDir=..\..\packages\@BuildMode@
 
 [Dirs]
 Name: {app}\hlp
@@ -44,19 +44,19 @@ Name: {app}\examples
 Name: {app}\doc
 
 [Files]
-Source: ..\bin\<v>BuildId</v>\ttg.exe; DestDir: {app}\bin\<v>BuildId</v>\; DestName: ttg.exe
-Source: ..\src\locale\ttg.es.mo; DestDir: {app}\bin\locale\; DestName: ttg.es.mo
-;Source: ..\hlp\ttg.cnt; DestDir: {app}\hlp\; DestName: ttg.cnt
-;Source: ..\hlp\ttg.hlp; DestDir: {app}\hlp\; DestName: ttg.hlp
-;Source: ..\doc\ttg.doc; DestDir: {app}\doc\; DestName: ttg.doc
-Source: ..\..\sqlite3\sqlite3.dll; DestDir: {sys}; DestName: sqlite3.dll
-Source: ..\examples\Britanico2000.ttd; DestDir: {app}\examples\; DestName: Britanico2000.ttd
-Source: ..\examples\Salamanca1999.ttd; DestDir: {app}\examples\; DestName: Salamanca1999.ttd
+Source: ..\..\bin\@BuildId@\ttg.exe; DestDir: {app}\bin\@BuildId@\; DestName: ttg.exe
+Source: ..\..\src\locale\ttg.es.mo; DestDir: {app}\bin\locale\; DestName: ttg.es.mo
+;Source: ..\..\hlp\ttg.cnt; DestDir: {app}\hlp\; DestName: ttg.cnt
+;Source: ..\..\hlp\ttg.hlp; DestDir: {app}\hlp\; DestName: ttg.hlp
+;Source: ..\..\doc\ttg.doc; DestDir: {app}\doc\; DestName: ttg.doc
+Source: ..\..\..\sqlite3\sqlite3.dll; DestDir: {sys}; DestName: sqlite3.dll
+Source: ..\..\examples\Britanico2000.ttd; DestDir: {app}\examples\; DestName: Britanico2000.ttd
+Source: ..\..\examples\Salamanca1999.ttd; DestDir: {app}\examples\; DestName: Salamanca1999.ttd
 [Icons]
-Name: {group}\<v>AppName</v> <v>AppVersion</v>; Filename: {app}\bin\<v>BuildId</v>\ttg.exe; WorkingDir: {app}\bin\<v>BuildId</v>\; IconIndex: 0
+Name: {group}\@AppName@ @BaseVersion@; Filename: {app}\bin\@BuildId@\ttg.exe; WorkingDir: {app}\bin\@BuildId@\; IconIndex: 0
 ;Name: {group}\Manual del Usuario (doc); Filename: {app}\doc\ttg.doc
 ;Name: {group}\Manual del Usuario (hlp); Filename: {app}\hlp\ttg.hlp
-Name: {group}\{cm:UninstallProgram, <v>AppName</v> <v>AppVersion</v>}; Filename: {uninstallexe}
+Name: {group}\{cm:UninstallProgram, @AppName@ @BaseVersion@}; Filename: {uninstallexe}
 [INI]
 
 [Registry]
@@ -71,4 +71,4 @@ Root: HKCU; SubKey: Software\TTG; ValueType: none; Flags: uninsdeletekey
 [UninstallRun]
 
 [Languages]
-Name: default; MessagesFile: <v>ProgramFiles</v>\Inno Setup 5\Languages\Spanish.isl
+Name: default; MessagesFile: @ProgramFiles@\Inno Setup 5\Languages\Spanish.isl

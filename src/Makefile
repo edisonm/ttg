@@ -34,13 +34,13 @@ ttg.lrs: $(LOCALEFILES) $(TTGDIR)/dat/default.ttd $(TTGSQL)
 	$(LAZRES) $@ $(LOCALEFILES) $(TTGDIR)/dat/default.ttd $(TTGSQL)
 
 $(ABOUT).pas: $(ABOUT).pas.tmpl
-	sed -e s:'<v>Package</v>':'$(Package)':g \
-	  -e s:'<v>BaseVersion</v>':'$(BaseVersion)':g \
-	  -e s:'<v>BuildMode</v>':'$(BuildMode)':g \
-	  -e s:'<v>Revision</v>':'$(BuildNr)':g \
-	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
-	  -e s:'<v>Copyright</v>':'$(Copyright)':g \
-	  -e s:'<v>AppName</v>':'$(APPNAME)':g $< > $@
+	sed -e s:'@Package@':'$(Package)':g \
+	  -e s:'@BaseVersion@':'$(BaseVersion)':g \
+	  -e s:'@BuildMode@':'$(BuildMode)':g \
+	  -e s:'@Revision@':'$(BuildNr)':g \
+	  -e s:'@BuildDateTime@':"$(BUILDDATETIME)":g \
+	  -e s:'@Copyright@':'$(Copyright)':g \
+	  -e s:'@AppName@':'$(APPNAME)':g $< > $@
 
 buildnr:
 	SvnVersion=`svnversion $(TTGDIR)` ; \
