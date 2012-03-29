@@ -5,21 +5,21 @@ ifneq ($(BuildMode),release)
 BuildLabel=-$(BuildMode)
 endif
 
-PACKAGE=ttg
+Package=ttg
 MajorVersionNr=$(shell grep "^ *<MajorVersionNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<MajorVersionNr Value=\"\([0-9]*\)\"/>":"\1":g)
 MinorVersionNr=$(shell grep "^ *<MinorVersionNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<MinorVersionNr Value=\"\([0-9]*\)\"/>":"\1":g)
 RevisionNr=$(shell grep "^ *<RevisionNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<RevisionNr Value=\"\([0-9]*\)\"/>":"\1":g)
 BuildNr=$(shell grep "^ *<BuildNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<BuildNr Value=\"\([0-9]*\)\"/>":"\1":g)
 APPNAME=$(shell grep "StringTable" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<StringTable LegalCopyright=\"[^\"]*\" ProductVersion=\"[^\"]*\" FileDescription=\"\([^\"]*\)\"/>":'\1':g)
 
-BASEVERSION=$(MajorVersionNr).$(MinorVersionNr).$(RevisionNr)
-APPVERSION=$(PACKAGE)-$(BASEVERSION)
-VERSION=$(MajorVersionNr).$(MinorVersionNr).$(RevisionNr).$(BuildNr)
+BaseVersion=$(MajorVersionNr).$(MinorVersionNr).$(RevisionNr)
+AppVersion=$(Package)-$(BaseVersion)
+Version=$(BaseVersion).$(BuildNr)
 
 REPOSITORY=file:///home/edison/LocalReps/TTG/trunk/
 # PACKAGING RELATED:
-TGZBASE=$(PACKAGE)_$(VERSION)
-TGZSRC=$(PACKAGE)-$(VERSION)
+TGZBASE=$(Package)_$(Version)
+TGZSRC=$(Package)-$(Version)
 PKGBASE=$(TGZBASE)$(BuildLabel)_$(ARCH)
 PKGDIR=$(TTGDIR)/packages/$(BuildMode)
 
@@ -35,7 +35,7 @@ endif
 TargetCPU=$(shell $(FPC) -iSP)
 TargetOS=$(shell $(FPC) -iSO)
 BuildId=$(TargetCPU)-$(TargetOS)$(BuildLabel)
-TTGEXE=$(TTGDIR)/bin/$(BuildId)/$(PACKAGE)$(EXEEXT)
+TTGEXE=$(TTGDIR)/bin/$(BuildId)/$(Package)$(EXEEXT)
 
 DBCONVERTDIR=$(RELDIR)/../DBConvert
 DBCONVERTSRC=$(DBCONVERTDIR)/src

@@ -18,7 +18,7 @@ catalog:
 
 $(PKG): ttg.iss.tmpl
 	sed -e s:'<v>Revision</v>':'$(BuildNr)':g \
-	  -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
+	  -e s:'<v>AppVersion</v>':'$(AppVersion)':g \
 	  -e s:'<v>AppName</v>':'$(APPNAME)':g \
 	  -e s/'<v>ProgramFiles<\/v>'/'$(PROGRAMFILES)'/g \
 	  -e s:'<v>PkgDir</v>':'$(shell cygpath -w $(PKGDIR))':g \

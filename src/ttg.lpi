@@ -60,6 +60,11 @@
               <UseLineInfoUnit Value="False"/>
             </Debugging>
             <LinkSmart Value="True"/>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
           </Linking>
           <Other>
             <CompilerMessages>
@@ -87,8 +92,7 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <CommandLineParams Value="Salamanca1999.ttd"/>
-        <WorkingDirectory Value="../examples"/>
+        <CommandLineParams Value="../examples/Salamanca1999.ttd"/>
       </local>
     </RunParams>
     <RequiredPackages Count="5">
@@ -338,6 +342,7 @@
         <Filename Value="FDBExplorer.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="DBExplorerForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="FDBExplorer"/>
       </Unit34>

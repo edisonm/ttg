@@ -34,7 +34,8 @@ ttg.lrs: $(LOCALEFILES) $(TTGDIR)/dat/default.ttd $(TTGSQL)
 	$(LAZRES) $@ $(LOCALEFILES) $(TTGDIR)/dat/default.ttd $(TTGSQL)
 
 $(ABOUT).pas: $(ABOUT).pas.tmpl
-	sed -e s:'<v>AppVersion</v>':'$(APPVERSION)':g \
+	sed -e s:'<v>AppVersion</v>':'$(AppVersion)':g \
+	  -e s:'<v>BaseVersion</v>':'$(BaseVersion)':g \
 	  -e s:'<v>BuildMode</v>':'$(BuildMode)':g \
 	  -e s:'<v>Revision</v>':'$(BuildNr)':g \
 	  -e s:'<v>BuildDateTime</v>':"$(BUILDDATETIME)":g \
@@ -58,7 +59,7 @@ $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttg.lrs ttg.inc Makefile SETTINGS COMMON
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
 ifneq ($(BuildMode),debug)
 	strip --strip-all $(TTGEXE)
-# upx $(TTGEXE)
+#	upx $(TTGEXE)
 endif
 
 cleanthis:
@@ -70,30 +71,29 @@ test:
 	@echo APPNAME=$(APPNAME)
 	@echo Copyright=$(Copyright)
 	@echo UNITS=$(UNITS)
-	@echo VERSION=$(VERSION)
+	@echo Version=$(Version)
 	@echo BuildNr0="$(BuildNr0)"
 	@echo BuildNr=$(BuildNr)
 	@echo Revision=$(Revision)
 	@echo SvnVersion=$(SvnVersion)
 	@echo TTGEXE=$(TTGEXE)
 	@echo BASELAZFILES=$(BASELAZFILES)
-	@echo DSRCBASE=$(DSRCBASE)
 	@echo BuildId=$(BuildId)
 
 run:
 	$(TTGEXE)
 
 ex1:
-	$(TTGEXE) $(TTGDIR)/examples/Britanico2000.ttd
+	$(TTGEXE) $(RELDIR)/examples/Britanico2000.ttd
 
 ex2:
-	$(TTGEXE) $(TTGDIR)/examples/Salamanca1999.ttd
+	$(TTGEXE) $(RELDIR)/examples/Salamanca1999.ttd
 
 ex3:
-	$(TTGEXE) $(TTGDIR)/examples/original/Britanico2000.ttd
+	$(TTGEXE) $(RELDIR)/examples/original/Britanico2000.ttd
 
 ex4:
-	$(TTGEXE) $(TTGDIR)/examples/original/Salamanca1999.ttd
+	$(TTGEXE) $(RELDIR)/examples/original/Salamanca1999.ttd
 
 ide:
 	$(LAZIDE) ttg.lpi &

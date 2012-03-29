@@ -106,12 +106,14 @@ end;
 
 constructor TPOTrFile.Create(ALResource: TLResource);
 begin
+  inherited Create;
   FPOFile := TPOFile.Create;
   FPOFile.ReadPOText(ALResource.Value);
 end;
 
 constructor TPOTrFile.Create(const FileName: TFileName);
 begin
+  inherited Create;
   FPOFile := TPOFile.Create(FileName);
 end;
 
@@ -124,7 +126,9 @@ end;
 function TPOTrFile.Translate(const Identifier, OriginalValue: String): String;
 begin
   Result := FPOFile.Translate(Identifier, OriginalValue);
-  WriteLn(Format('(PO) %s::[%s] --> [%s]', [Identifier, OriginalValue, Result]));
+  {$IFDEF DEBUG}
+  WriteLn(Format('PO %s::[%s] --> [%s]', [Identifier, OriginalValue, Result]));
+  {$ENDIF}
 end;
 
 function TPOTrFile.TranslateResourceStrings: Boolean;
@@ -143,6 +147,7 @@ constructor TMOTrFile.Create(ALResource: TLResource);
 var
   Stream: TStream;
 begin
+  inherited Create;
   Stream := TStringStream.Create(ALResource.Value);
   try
     FMOFile := TMOFile.Create(Stream);
@@ -153,6 +158,7 @@ end;
 
 constructor TMOTrFile.Create(const FileName: string);
 begin
+  inherited Create;
   FMOFile := TMOFile.Create(FileName);
 end;
 
@@ -160,12 +166,12 @@ function TMOTrFile.Translate(const Identifier, OriginalValue: String): String;
 begin
   Result := FMOFile.Translate(Identifier + #4 + OriginalValue);
   if Result = '' then
-  begin
     Result := FMOFile.Translate(OriginalValue);
-    //Write('*** -->');
-  end;
+  {$IFDEF DEBUG}
   if Result = '' then
-    WriteLn(Format('(MO) %s::[%s] --> [%s]', [Identifier, OriginalValue, Result]));
+    WriteLn(Format('MO %s::[%s] --> [%s]',
+                   [Identifier, OriginalValue, Result]));
+  {$ENDIF}
 end;
 
 function TMOTrFile.TranslateResourceStrings: Boolean;
@@ -188,6 +194,7 @@ end;
 
 constructor TResourceTranslator.Create(ATrFile: TTrFile);
 begin
+  inherited Create;
   FTrFile := ATrFile;
 end;
 
@@ -204,15 +211,6 @@ begin
   begin
     Result := LazarusResources.Find(ResName + '.' + Copy(Language, 1, 2), ValueType);
   end;
-end;
-
-function GetDefaultLanguage: string;
-var
-  T: string;
-begin
-  Result := GetEnvironmentVariableUTF8('LANG');
-  T := '';
-  if Result = '' then LCLGetLanguageIDs(Result, T);
 end;
 
 function GetLResourceForDefaultLanguage(const ResName, ValueType: AnsiString): TLResource;
@@ -341,10 +339,12 @@ var
         ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.' + Language) + LCExt;
       if FileExistsUTF8(Result) then
         exit;
-      
+
       Result := 'locale' + DirectorySeparator +
         ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.' + Language) + LCExt;
+      {$IFDEF DEBUG}
       WriteLn(Result);
+      {$ENDIF}
       if FileExistsUTF8(Result) then
         exit;
       
@@ -372,26 +372,25 @@ begin
     Result := '';
 end;
 
-function FindLocaleFileName(LCExt: string): string;
+function GetDefaultLanguage: string;
 var
-  Lang, T: string;
+  T: string;
   i: integer;
 begin
   Result := '';
-  Lang := '';
-
   for i := 1 to Paramcount - 1 do
     if (ParamStrUTF8(i) = '--LANG') or (ParamStrUTF8(i) = '-l') or
-      (ParamStrUTF8(i) = '--lang') then
-      Lang := ParamStrUTF8(i + 1);
+       (ParamStrUTF8(i) = '--lang') then
+      Result := ParamStrUTF8(i + 1);
+  if Result = '' then
+    LCLGetLanguageIDs(Result, T);
+  // Win32 user may decide to override locale with LANG variable.
+  if Result = '' then
+    Result := GetEnvironmentVariableUTF8('LANG');
+end;
 
-  //Win32 user may decide to override locale with LANG variable.
-  if Lang = '' then
-    Lang := GetEnvironmentVariableUTF8('LANG');
-
-  if Lang = '' then
-    LCLGetLanguageIDs(Lang, T);
-
+function FindLocaleFileName(Lang, LCExt: string): string;
+begin
   Result := GetLocaleFileName(Lang, LCExt);
   if Result <> '' then
     exit;
@@ -408,25 +407,24 @@ var
   LangFile: string;
   LResource: TLResource;
 begin
+  Result := nil;
   LResource := GetLResourceForLanguage(ResName, Language, UpperCase(ValueType));
   if LResource <> nil then
   begin
     Result := TTrFile.CreateTrFile(LResource, ValueType);
+    {$IFDEF DEBUG}
     WriteLn('LResource');
+    {$ENDIF}
   end
-  {$IFDEF UNIX}
   else
   begin
-    LangFile := GetLocaleFileName(Language, '.' + LowerCase(ValueType));
+    LangFile := FindLocaleFileName(Language, '.' + LowerCase(ValueType));
+    {$IFDEF DEBUG}
     WriteLn('LangFile=' + LangFile);
+    {$ENDIF}
     if FileExistsUTF8(LangFile) then
-    begin
       Result := TTrFile.CreateTrFile(LangFile, ValueType);
-    end
-    else
-      Result := nil;
   end;
-  {$ENDIF}
 end;
 
 procedure EnableTranslator(const ResName, Language: AnsiString); overload;

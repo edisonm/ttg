@@ -18,7 +18,6 @@ type
     QuTimetable: TZQuery;
     QuTimetableResource: TZQuery;
     QuTimetableDetail: TZQuery;
-    ZConnection1: TZConnection;
     ZTable1IdDay1: TAutoIncField;
     ZTable1NaHour1: TVariantField;
     ZTables: TZReadOnlyQuery;

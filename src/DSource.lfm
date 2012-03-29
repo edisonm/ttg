@@ -88,11 +88,4 @@ object SourceDataModule: TSourceDataModule
         ParamType = ptUnknown
       end>
   end
-  object ZConnection1: TZConnection
-    Connected = True
-    Protocol = 'sqlite-3'
-    Database = '/home/edison/apps/pascal/TTG/dat/ttg.s3fpc'
-    left = 310
-    top = 98
-  end
 end
