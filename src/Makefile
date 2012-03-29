@@ -32,8 +32,8 @@ endif
 
 # LOCALEFILES=locale/ttg.es.po
 
-ttg.lrs: $(LOCALEFILES) $(TTGDIR)/dat/default.ttd $(TTGSQL)
-	$(LAZRES) $(OBJDIR)/$@ $(LOCALEFILES) $(TTGDIR)/dat/default.ttd $(TTGSQL)
+ttg.lrs: $(LOCALEFILES) $(RELDIR)/dat/default.ttd $(TTGSQL)
+	$(LAZRES) $(OBJDIR)/$@ $(LOCALEFILES) $(RELDIR)/dat/default.ttd $(TTGSQL)
 
 $(ABOUT).pas: $(ABOUT).pas.tmpl
 	mkdir -p $(OBJDIR)
