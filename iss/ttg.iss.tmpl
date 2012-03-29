@@ -12,7 +12,7 @@ UsePreviousAppDir=1
 UsePreviousGroup=1
 AppVersion=<v>AppVersion</v>
 AppVerName=<v>AppName</v> <v>AppVersion</v> (r<v>Revision</v> <v>BuildId</v>)
-AppCopyright=30-03-2012 by Edison Mera. Madrid-Spain.
+AppCopyright=<v>Copyright</v>
 WindowShowCaption=0
 WindowStartMaximized=0
 WindowVisible=0
@@ -26,8 +26,8 @@ DisableProgramGroupPage=0
 Uninstallable=1
 DefaultDirName={pf}\TTG\<v>AppVersion</v>
 DefaultGroupName=<v>AppName</v> <v>AppVersion</v>
-LicenseFile=..\..\doc\Licencia.txt
-InfoAfterFile=..\..\doc\Leame.txt
+LicenseFile=..\debian\copyright
+InfoAfterFile=..\README.TXT
 OutputBaseFilename=<v>PkgBase</v>
 DiskSpanning=0
 DiskClusterSize=512
@@ -44,13 +44,14 @@ Name: {app}\examples
 Name: {app}\doc
 
 [Files]
-Source: ..\..\bin\<v>BuildId</v>\ttg.exe; DestDir: {app}\bin\<v>BuildId</v>\; DestName: ttg.exe
-;Source: ..\..\hlp\ttg.cnt; DestDir: {app}\hlp\; DestName: ttg.cnt
-;Source: ..\..\hlp\ttg.hlp; DestDir: {app}\hlp\; DestName: ttg.hlp
-;Source: ..\..\doc\ttg.doc; DestDir: {app}\doc\; DestName: ttg.doc
-Source: ..\..\..\sqlite3\sqlite3.dll; DestDir: {sys}; DestName: sqlite3.dll
-Source: ..\..\examples\Britanico2000.ttd; DestDir: {app}\examples\; DestName: Britanico2000.ttd
-Source: ..\..\examples\Salamanca1999.ttd; DestDir: {app}\examples\; DestName: Salamanca1999.ttd
+Source: ..\bin\<v>BuildId</v>\ttg.exe; DestDir: {app}\bin\<v>BuildId</v>\; DestName: ttg.exe
+Source: ..\src\locale\ttg.es.mo; DestDir: {app}\bin\locale\; DestName: ttg.es.mo
+;Source: ..\hlp\ttg.cnt; DestDir: {app}\hlp\; DestName: ttg.cnt
+;Source: ..\hlp\ttg.hlp; DestDir: {app}\hlp\; DestName: ttg.hlp
+;Source: ..\doc\ttg.doc; DestDir: {app}\doc\; DestName: ttg.doc
+Source: ..\..\sqlite3\sqlite3.dll; DestDir: {sys}; DestName: sqlite3.dll
+Source: ..\examples\Britanico2000.ttd; DestDir: {app}\examples\; DestName: Britanico2000.ttd
+Source: ..\examples\Salamanca1999.ttd; DestDir: {app}\examples\; DestName: Salamanca1999.ttd
 [Icons]
 Name: {group}\<v>AppName</v> <v>AppVersion</v>; Filename: {app}\bin\<v>BuildId</v>\ttg.exe; WorkingDir: {app}\bin\<v>BuildId</v>\; IconIndex: 0
 ;Name: {group}\Manual del Usuario (doc); Filename: {app}\doc\ttg.doc
