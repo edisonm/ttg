@@ -324,18 +324,20 @@ type
     function GetActivity2: Integer; inline;
     function GetResource1: Integer; inline;
     function GetResource2: Integer; inline;
-    function GetNumFixeds1: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
-    function GetNumFixeds2: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
-    function GetParticipant21: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
-    function GetParticipant22: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
-    function GetNumResource11: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
-    function GetNumResource21: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
-    function GetNumResource12: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
-    function GetNumResource22: Integer; {$IFNDEF DEBUG}inline;{$ENDIF}
-    function GetFree11: Integer; inline;
-    function GetFree21: Integer; inline;
-    function GetFree12: Integer; inline;
-    function GetFree22: Integer; inline;
+    {Kludge: Using PtrInt to avoid Error: Asm:
+    [movsxd mem64,reg32] invalid combination of opcode and operands}
+    function GetNumFixeds1: PtrInt; inline;
+    function GetNumFixeds2: PtrInt; inline;
+    function GetParticipant21: Integer; inline;
+    function GetParticipant22: Integer; inline;
+    function GetNumResource11: Integer; inline;
+    function GetNumResource21: Integer; inline;
+    function GetNumResource12: Integer; inline;
+    function GetNumResource22: Integer; inline;
+    function GetFree11: PtrInt; inline;
+    function GetFree21: PtrInt; inline;
+    function GetFree12: PtrInt; inline;
+    function GetFree22: PtrInt; inline;
     function GetTheme: Integer; inline;
     function GetLimit: Integer; inline;
     function GetResourceType1: Integer; inline;
@@ -352,8 +354,8 @@ type
     property Activity2: Integer read GetActivity2;
     property Resource1: Integer read GetResource1;
     property Resource2: Integer read GetResource2;
-    property NumFixeds1: Integer read GetNumFixeds1;
-    property NumFixeds2: Integer read GetNumFixeds2;
+    property NumFixeds1: PtrInt read GetNumFixeds1;
+    property NumFixeds2: PtrInt read GetNumFixeds2;
     property ResourceType1: Integer read GetResourceType1;
     property ResourceType2: Integer read GetResourceType2;
     property Participant11: Integer read FParticipant11;
@@ -364,10 +366,10 @@ type
     property NumResource21: Integer read GetNumResource21;
     property NumResource12: Integer read GetNumResource12;
     property NumResource22: Integer read GetNumResource22;
-    property Free11: Integer read GetFree11;
-    property Free21: Integer read GetFree21;
-    property Free12: Integer read GetFree12;
-    property Free22: Integer read GetFree22;
+    property Free11: PtrInt read GetFree11;
+    property Free21: PtrInt read GetFree21;
+    property Free12: PtrInt read GetFree12;
+    property Free22: PtrInt read GetFree22;
     property Limit: Integer read GetLimit;
     property Theme: Integer read GetTheme;
   end;
@@ -2623,12 +2625,12 @@ begin
   Result := TimetableModel.FActivityParticipantToResource[Activity1, FParticipant12];
 end;
 
-function TTTBookmarkTheme.GetNumFixeds1: Integer;
+function TTTBookmarkTheme.GetNumFixeds1: PtrInt;
 begin
   Result := TimetableModel.FActivityToNumFixeds[Activity1];
 end;
 
-function TTTBookmarkTheme.GetNumFixeds2: Integer;
+function TTTBookmarkTheme.GetNumFixeds2: PtrInt;
 begin
   Result := TimetableModel.FActivityToNumFixeds[Activity2];
 end;
@@ -2668,7 +2670,7 @@ begin
   Result := Timetable.TTActivityToNumResources[Activity1, Participant12];
 end;
 
-function TTTBookmarkTheme.GetFree12: Integer;
+function TTTBookmarkTheme.GetFree12: PtrInt;
 begin
   Result := Free11 - NumResource12 - FDeltaNumResource1;
 end;
@@ -2678,17 +2680,17 @@ begin
   Result := Timetable.TTActivityToNumResources[Activity2, Participant22];
 end;
 
-function TTTBookmarkTheme.GetFree22: Integer;
+function TTTBookmarkTheme.GetFree22: PtrInt;
 begin
   Result := Free21 - NumResource22 + FDeltaNumResource1
 end;
 
-function TTTBookmarkTheme.GetFree11: Integer;
+function TTTBookmarkTheme.GetFree11: PtrInt;
 begin
   Result := Limit - Timetable.TablingInfo.FActivityResourceTypeToNumber[Activity1, ResourceType1] + NumResource12;
 end;
 
-function TTTBookmarkTheme.GetFree21: Integer;
+function TTTBookmarkTheme.GetFree21: PtrInt;
 begin
   Result := Limit - Timetable.TablingInfo.FActivityResourceTypeToNumber[Activity2, ResourceType1] + NumResource22;
 end;
