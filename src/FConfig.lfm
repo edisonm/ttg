@@ -1,7 +1,7 @@
 object ConfigForm: TConfigForm
-  Left = 592
+  Left = 580
   Height = 434
-  Top = 296
+  Top = 302
   Width = 475
   ActiveControl = PCConfig
   BorderStyle = bsDialog
@@ -133,7 +133,7 @@ object ConfigForm: TConfigForm
     end
     object TSOptions: TTabSheet
       Caption = 'Options'
-      ClientHeight = 348
+      ClientHeight = 347
       ClientWidth = 454
       ImageIndex = 3
       object LbInitialTimetables: TLabel
@@ -361,7 +361,7 @@ object ConfigForm: TConfigForm
     end
     object TSWeights: TTabSheet
       Caption = 'Weights'
-      ClientHeight = 348
+      ClientHeight = 347
       ClientWidth = 454
       object GroupBox2: TGroupBox
         Left = 0
@@ -371,8 +371,8 @@ object ConfigForm: TConfigForm
         Align = alBottom
         Anchors = [akTop, akLeft, akRight, akBottom]
         Caption = 'Resource Restrictions:'
-        ClientHeight = 206
-        ClientWidth = 446
+        ClientHeight = 224
+        ClientWidth = 454
         TabOrder = 4
         object DBGrid2: TDBGrid
           Left = 0

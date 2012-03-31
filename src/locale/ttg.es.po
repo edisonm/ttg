@@ -531,7 +531,7 @@ msgstr "Guardar script"
 #: tdbexplorerform.caption
 msgctxt "tdbexplorerform.caption"
 msgid "Database Explorer"
-msgstr "Base de datos"
+msgstr "Base de datos..."
 
 #: tdbexplorerform.cbmetadatatype.hint
 msgid "Metadata Type"
@@ -1059,11 +1059,6 @@ msgstr "Buscar"
 #: tsingleeditorform.actfind.hint
 msgid "Find|Find by Field"
 msgstr "Buscar|Buscar por campo"
-
-#: tsplashform.caption
-msgctxt "tsplashform.caption"
-msgid "SplashForm"
-msgstr "SplashForm"
 
 #: tsplashform.lbcopyright.caption
 msgctxt "tsplashform.lbcopyright.caption"

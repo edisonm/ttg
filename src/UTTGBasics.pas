@@ -24,7 +24,7 @@ type
   TBooleanArray = array [0 .. 16383] of Boolean;
   
 type
-  TArrayHandler<T,E> = class
+  generic TArrayHandler<T,E> = class
   public
     type
       TArrayOfT = array of T;
@@ -54,7 +54,7 @@ type
     class procedure Inc(var Value: TDynamicIntegerArray; const Increment: TDynamicIntegerArray);
     class function Max(const Vector: TDynamicIntegerArray): Integer;
   end;
-  TIntegerArrayArrayHandler = TArrayHandler<TDynamicIntegerArray,TIntegerArrayHandler>;
+  TIntegerArrayArrayHandler = specialize TArrayHandler<TDynamicIntegerArray,TIntegerArrayHandler>;
   
 procedure EqualSpaced(Strings: TStrings; ini, fin: Integer; const delim: string);
 function ExtractString(const Strings: string; var Pos: Integer; Separator: Char): string;
@@ -73,7 +73,7 @@ implementation
 uses
   Math;
 
-class procedure TArrayHandler<T,E>.Zero(var Vector: TArrayOfT);
+class procedure TArrayHandler.Zero(var Vector: TArrayOfT);
 var
   i: Integer;
 begin
@@ -186,7 +186,7 @@ begin
     Result := Result + Vector1[i] * Vector2[i];
 end;
 
-class function TArrayHandler<T,E>.Compare(const Vector1, Vector2: TArrayOfT): Boolean;
+class function TArrayHandler.Compare(const Vector1, Vector2: TArrayOfT): Boolean;
 var
   i: Integer;
 begin
@@ -215,7 +215,7 @@ begin
     Result := Math.Max(Result, Vector[i]);
 end;
 
-class function TArrayHandler<T,E>.Push(var Vector: TArrayOfT; const Value: T): Integer;
+class function TArrayHandler.Push(var Vector: TArrayOfT; const Value: T): Integer;
 begin
   Result := IndexOf(Vector, Value);
   if Result = -1 then
@@ -225,7 +225,7 @@ begin
   end;
 end;
 
-class function TArrayHandler<T,E>.Drop(var Vector: TArrayOfT; const Value: T): Integer;
+class function TArrayHandler.Drop(var Vector: TArrayOfT; const Value: T): Integer;
 var
   i: Integer;
 begin
@@ -240,7 +240,7 @@ begin
   end;
 end;
 
-class procedure TArrayHandler<T,E>.PushBack(var Vector: TArrayOfT; const Value: T);
+class procedure TArrayHandler.PushBack(var Vector: TArrayOfT; const Value: T);
 var
   Count: Integer;
 begin
@@ -249,7 +249,7 @@ begin
   Vector[Count] := Value;
 end;
 
-class function TArrayHandler<T,E>.Clone(const Value: TArrayOfT): TArrayOfT;
+class function TArrayHandler.Clone(const Value: TArrayOfT): TArrayOfT;
 var
   i: Integer;
 begin
@@ -260,7 +260,7 @@ begin
   end;
 end;
 
-class procedure TArrayHandler<T,E>.Copy(const Source: TArrayOfT; var Target: TArrayOfT);
+class procedure TArrayHandler.Copy(const Source: TArrayOfT; var Target: TArrayOfT);
 var
   i: Integer;
 begin
@@ -270,7 +270,7 @@ begin
   end;
 end;
 
-class function TArrayHandler<T,E>.IndexOf(const Source: TArrayOfT; const Value: T): Integer;
+class function TArrayHandler.IndexOf(const Source: TArrayOfT; const Value: T): Integer;
 var
   i: Integer;
 begin
@@ -346,7 +346,7 @@ begin
   Result := IntToStr(Value);
 end;
 
-class function TArrayHandler<T,E>.ValueToString(const Value: TArrayOfT; const Separator: string = ' '): string;
+class function TArrayHandler.ValueToString(const Value: TArrayOfT; const Separator: string = ' '): string;
 var
   i: Integer;
   SElement: string;

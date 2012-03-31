@@ -57,6 +57,7 @@
           <Linking>
             <Debugging>
               <GenerateDebugInfo Value="False"/>
+              <UseLineInfoUnit Value="False"/>
             </Debugging>
             <LinkSmart Value="True"/>
             <Options>
@@ -92,6 +93,7 @@
       <local>
         <FormatVersion Value="1"/>
         <CommandLineParams Value="Salamanca1999.ttd"/>
+        <LaunchingApplication PathPlusParams="/usr/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
         <WorkingDirectory Value="../examples"/>
       </local>
     </RunParams>

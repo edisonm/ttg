@@ -3,8 +3,8 @@ object SourceDataModule: TSourceDataModule
   OnDestroy = DataModuleDestroy
   OldCreateOrder = False
   Height = 160
-  HorizontalOffset = 1196
-  VerticalOffset = 585
+  HorizontalOffset = 1185
+  VerticalOffset = 591
   Width = 398
   object DbZConnection: TZConnection
     Protocol = 'sqlite-3'

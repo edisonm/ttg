@@ -1,5 +1,3 @@
-{$MODE Delphi}
-
 {$IFDEF DEBUG}
 {$ASSERTIONS+}
 {$ELSE}

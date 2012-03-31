@@ -247,9 +247,9 @@ begin
   if not (Sender is TReader) then
     exit;
   Reader := TReader(Sender);
-  if Reader.Driver is TLRSObjectReader then
+  {if Reader.Driver is TLRSObjectReader then
     Result := TLRSObjectReader(Reader.Driver).GetStackPath
-  else
+  else}
     Result := Instance.ClassName + '.' + PropInfo^.Name;
   Result := LowerCase(Result);
 end;

@@ -1,7 +1,7 @@
 inherited ResourceForm: TResourceForm
-  Left = 1121
+  Left = 645
   Height = 461
-  Top = 511
+  Top = 313
   Width = 588
   Caption = 'Resources'
   ClientHeight = 461

@@ -1,7 +1,7 @@
 object ProgressForm: TProgressForm
-  Left = 750
+  Left = 737
   Height = 326
-  Top = 314
+  Top = 321
   Width = 465
   ActiveControl = PnProgress
   BorderStyle = bsDialog

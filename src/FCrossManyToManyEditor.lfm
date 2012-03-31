@@ -1,6 +1,6 @@
 inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
-  Left = 620
-  Top = 60
+  Left = 706
+  Top = 389
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnDestroy = FormDestroy
@@ -150,5 +150,7 @@ inherited CrossManyToManyEditorForm: TCrossManyToManyEditorForm
       80FF000080FF808080FF00808000008080000080800000808000008080000000
       FFFF808080FF0080800000808000
     }
+  end
+  inherited ActionList: TActionList[5]
   end
 end

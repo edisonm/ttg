@@ -1,7 +1,7 @@
 object EditorForm: TEditorForm
-  Left = 612
+  Left = 710
   Height = 299
-  Top = 418
+  Top = 399
   Width = 479
   ActiveControl = PnEditor
   ClientHeight = 299

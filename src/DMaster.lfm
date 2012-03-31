@@ -3,8 +3,8 @@ object MasterDataModule: TMasterDataModule
   OnDestroy = DataModuleDestroy
   OldCreateOrder = False
   Height = 404
-  HorizontalOffset = 1073
-  VerticalOffset = 507
+  HorizontalOffset = 1049
+  VerticalOffset = 512
   Width = 748
   object QuNewIdTimetable: TZReadOnlyQuery
     Connection = SourceDataModule.DbZConnection

@@ -1,7 +1,7 @@
 inherited TimetableForm: TTimetableForm
-  Left = 970
+  Left = 479
   Height = 545
-  Top = 228
+  Top = 263
   Width = 920
   ClientHeight = 545
   ClientWidth = 920

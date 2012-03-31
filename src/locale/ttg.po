@@ -352,7 +352,7 @@ msgid "Ok"
 msgstr ""
 
 #: tconfigform.caption
-msgctxt "tconfigform.caption"
+msgctxt "TCONFIGFORM.CAPTION"
 msgid "Configure"
 msgstr ""
 
@@ -529,7 +529,7 @@ msgid "Save Script"
 msgstr ""
 
 #: tdbexplorerform.caption
-msgctxt "tdbexplorerform.caption"
+msgctxt "TDBEXPLORERFORM.CAPTION"
 msgid "Database Explorer"
 msgstr ""
 
@@ -713,7 +713,7 @@ msgid "Timetables|Show Timetables"
 msgstr ""
 
 #: tmainform.caption
-msgctxt "tmainform.caption"
+msgctxt "TMAINFORM.CAPTION"
 msgid "MainForm"
 msgstr ""
 
@@ -815,7 +815,7 @@ msgid "Ok"
 msgstr ""
 
 #: tprogressform.caption
-msgctxt "tprogressform.caption"
+msgctxt "TPROGRESSFORM.CAPTION"
 msgid "Search progress"
 msgstr ""
 
@@ -1013,7 +1013,7 @@ msgid "Resource restrictions|Input Resource restrictions"
 msgstr ""
 
 #: tresourceform.caption
-msgctxt "tresourceform.caption"
+msgctxt "TRESOURCEFORM.CAPTION"
 msgid "Resources"
 msgstr ""
 
@@ -1033,7 +1033,7 @@ msgid "Ok"
 msgstr ""
 
 #: tselperiodform.caption
-msgctxt "tselperiodform.caption"
+msgctxt "TSELPERIODFORM.CAPTION"
 msgid "Intercambiar Period"
 msgstr ""
 
@@ -1058,11 +1058,6 @@ msgstr ""
 
 #: tsingleeditorform.actfind.hint
 msgid "Find|Find by Field"
-msgstr ""
-
-#: tsplashform.caption
-msgctxt "tsplashform.caption"
-msgid "SplashForm"
 msgstr ""
 
 #: tsplashform.lbcopyright.caption
@@ -1105,7 +1100,7 @@ msgid "Filter by Resource Type"
 msgstr ""
 
 #: tthemeform.caption
-msgctxt "tthemeform.caption"
+msgctxt "TTHEMEFORM.CAPTION"
 msgid "Theme"
 msgstr ""
 

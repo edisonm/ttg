@@ -1,7 +1,7 @@
 inherited CrossManyToManyEditorRForm: TCrossManyToManyEditorRForm
-  Left = 534
+  Left = 686
   Height = 314
-  Top = 470
+  Top = 393
   Width = 518
   ClientHeight = 314
   ClientWidth = 518

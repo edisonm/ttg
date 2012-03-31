@@ -1,7 +1,7 @@
 object SelPeriodForm: TSelPeriodForm
-  Left = 515
+  Left = 505
   Height = 123
-  Top = 279
+  Top = 286
   Width = 295
   ActiveControl = CBDay
   Caption = 'Intercambiar Period'
@@ -21,7 +21,7 @@ object SelPeriodForm: TSelPeriodForm
     Left = 16
     Height = 18
     Top = 27
-    Width = 28
+    Width = 27
     Caption = 'Day'
     FocusControl = CBDay
     ParentColor = False

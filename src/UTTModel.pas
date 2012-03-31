@@ -380,7 +380,7 @@ uses
   SysUtils, ZSysUtils, MTProcs, DSource, UTTGConsts, DSourceConsts, USortAlgs, Math, ZDataset;
 
 type
-  TSortInteger = TSortAlgorithm<Integer,Integer>;
+  TSortInteger = specialize TSortAlgorithm<Integer,Integer>;
 
 constructor TTimetableModel.Create(AClashActivityValue,
                                    ABreakTimetableResourceValue,

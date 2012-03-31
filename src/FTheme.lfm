@@ -1,7 +1,7 @@
 inherited ThemeForm: TThemeForm
-  Left = 771
+  Left = 184
   Height = 730
-  Top = 320
+  Top = 183
   Width = 1140
   Caption = 'Theme'
   ClientHeight = 730
@@ -380,13 +380,6 @@ inherited ThemeForm: TThemeForm
       0000808000008080000080800000
     }
   end
-  inherited DataSource: TDatasource
-    DataSet = TbTheme
-    OnStateChange = DataSourceStateChange
-    OnDataChange = DataSourceDataChange
-    left = 160
-    top = 144
-  end
   inherited ActionList: TActionList
     left = 160
     top = 272
@@ -398,6 +391,13 @@ inherited ThemeForm: TThemeForm
       Caption = 'Filter by Resource Type'
       OnExecute = ActFilterByResourceTypeExecute
     end
+  end
+  inherited DataSource: TDatasource
+    DataSet = TbTheme
+    OnStateChange = DataSourceStateChange
+    OnDataChange = DataSourceDataChange
+    left = 160
+    top = 144
   end
   inherited DataSourceDetail: TDatasource
     DataSet = TbActivity
