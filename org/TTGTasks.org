@@ -1,6 +1,12 @@
-* TODO <2012-03-27 Tue> Improve current i18n support:
-** TODO <2012-03-27 Tue> Do not put po files as resources in the executable.
-** TODO <2012-03-27 Tue> update ttg-locale-es debian package.
+* TODO [#B] <2012-03-31 Sat> build ttg using pbuilder
+  I have finished this task, however due to a bug in lazarus/fpc,
+  compilation of ttg never finishes
+* DONE <2012-03-27 Tue> Improve current i18n support:
+  CLOSED: [2012-03-31 Sat 15:47]
+** DONE <2012-03-27 Tue> Do not put po files as resources in the executable.
+   CLOSED: [2012-03-31 Sat 15:47]
+** DONE <2012-03-27 Tue> update ttg-locale-es debian package.
+   CLOSED: [2012-03-31 Sat 15:47]
 * DONE <2012-03-24 Sat> Remove all dependencies of non-free software:
   CLOSED: [2012-03-27 Tue 19:50]
 ** DONE <2012-03-24 Sat> Merge TSourceBaseDataModule and TSourceDataModule
