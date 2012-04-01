@@ -38,8 +38,8 @@ unit USortAlgs;
 
   Recuerde que la pirateria esta penada por la Ley.
 
-  Edison Mera.
-  efmera@gmail.com
+  Edison Mera Menendez.
+  efmera@yahoo.com
 
 *******************************************************************************)
 

@@ -20,8 +20,8 @@
  You can send your suggestions or to ask for further information to the
  following address:
 
-	   Dr. Edison Mera Menéndez
-	   email:    efmera@gmail.com
+	   Edison Mera Menéndez, PhD.
+	   email:    efmera@yahoo.com
 	   web page: http://efmera.dyndns.org/blog/
 
 	   Madrid - Spain
