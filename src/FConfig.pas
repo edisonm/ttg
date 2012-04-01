@@ -328,7 +328,7 @@ begin
   begin
     OnDataChange := nil;
     Edit;
-    OnDataChange := DSRestrictionTypeDataChange;
+    OnDataChange := @DSRestrictionTypeDataChange;
   end
 end;
 

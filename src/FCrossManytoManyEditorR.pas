@@ -29,7 +29,7 @@ type
       Shift: TShiftState);
     procedure DrawGridMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormClose(Sender: TObject; var AAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormDestroy(Sender: TObject);
     procedure BtOkClick(Sender: TObject);
@@ -119,7 +119,7 @@ begin
 end;
 
 procedure TCrossManyToManyEditorRForm.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+  var AAction: TCloseAction);
 begin
   inherited;
 end;

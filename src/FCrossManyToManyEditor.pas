@@ -174,9 +174,9 @@ begin
     FRowFieldName := ARowDataSet.FindField(ARowFieldName);
     FRowField := ARelDataSet.FindField(ARowField);
     ReadData;
-    DrawGrid.OnPrepareCanvas := DrawGridPrepareCanvas;
-    DrawGrid.OnDrawCell := DrawGridDrawCell;
-    DrawGrid.OnSelectCell := DrawGridSelectCell;
+    DrawGrid.OnPrepareCanvas := @DrawGridPrepareCanvas;
+    DrawGrid.OnDrawCell := @DrawGridDrawCell;
+    DrawGrid.OnSelectCell := @DrawGridSelectCell;
     InvalidateData;
   finally
     FColDataSet.EnableControls;

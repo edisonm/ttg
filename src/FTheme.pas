@@ -54,11 +54,11 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure TbThemeCalcFields(DataSet: TDataSet);
+    procedure TbThemeCalcFields(ADataSet: TDataSet);
   private
     { Private declarations }
     FSuperTitle: string;
-    procedure TbThemeBeforePost(DataSet: TDataSet);
+    procedure TbThemeBeforePost(ADataSet: TDataSet);
     procedure UpdateResourceTypeParam;
     {function GetCurrentLoad: Integer;}
   public
@@ -113,7 +113,7 @@ begin
       TbResource.MasterFields := 'IdResourceType';
       TbResource.LinkedFields := 'IdResourceType';
       TbResource.MasterSource := DSResourceType;
-      DSResourceType.OnDataChange := DSResourceTypeDataChange;
+      DSResourceType.OnDataChange := @DSResourceTypeDataChange;
       with QuAvailability.SQL do Add(' AND Resource.IdResourceType=:IdResourceType');
       with QuParticipant.SQL  do Add(' AND Resource.IdResourceType=:IdResourceType');
       UpdateResourceTypeParam;
@@ -214,7 +214,7 @@ begin
   begin
     FindField('Composition').DisplayWidth := 10;
     FindField('IdTheme').Visible := False;
-    BeforePost := TbThemeBeforePost;
+    BeforePost := @TbThemeBeforePost;
     Open;
   end;
   SourceDataModule.PrepareTable(TbResourceTypeLimit);
@@ -232,11 +232,11 @@ begin
   inherited;
 end;
 
-procedure TThemeForm.TbThemeBeforePost(DataSet: TDataSet);
+procedure TThemeForm.TbThemeBeforePost(ADataSet: TDataSet);
 var
   Composition: string;
 begin
-  with DataSet do
+  with ADataSet do
   begin
     Composition := FindField('Composition').AsString;
     if CompositionToDuration(Composition) <= 0 then
@@ -244,18 +244,18 @@ begin
   end;
 end;
 
-procedure TThemeForm.TbThemeCalcFields(DataSet: TDataSet);
+procedure TThemeForm.TbThemeCalcFields(ADataSet: TDataSet);
 var
   v: Variant;
 begin
   try
-    v := DataSet['Composition'];
+    v := ADataSet['Composition'];
     if VarIsNull(v) then
-      DataSet['Duration'] := 0
+      ADataSet['Duration'] := 0
     else
-      DataSet['Duration'] := CompositionToDuration(v);
+      ADataSet['Duration'] := CompositionToDuration(v);
   except
-    DataSet['Duration'] := 0;
+    ADataSet['Duration'] := 0;
   end
 end;
 

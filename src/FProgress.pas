@@ -212,13 +212,13 @@ begin
   inherited Create;
   FThread := AThread;
   FTimetable := Timetable;
-  TThread.Synchronize(FThread, CreateForm);
+  TThread.Synchronize(FThread, @CreateForm);
 end;
 
 procedure TProgressFormDrv.SetCaption(const AValue: string);
 begin
   FCaption := AValue;
-  TThread.Synchronize(FThread, UpdateCaption);
+  TThread.Synchronize(FThread, @UpdateCaption);
 end;
 
 procedure TProgressFormDrv.UpdateCaption;
@@ -228,7 +228,7 @@ end;
 
 destructor TProgressFormDrv.Destroy;
 begin
-  TThread.Synchronize(FThread, DestroyForm);
+  TThread.Synchronize(FThread, @DestroyForm);
   inherited Destroy;
 end;
 
@@ -259,7 +259,7 @@ begin
   FPosition := APosition;
   FMax := AMax;
   FSolver := ASolver;
-  TThread.Synchronize(FThread, DoProgress);
+  TThread.Synchronize(FThread, @DoProgress);
   with FProgressForm do
     if (CloseClick or CancelClick) then
       Stop := True;

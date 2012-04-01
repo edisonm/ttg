@@ -1,5 +1,5 @@
 object MainForm: TMainForm
-  Left = 574
+  Left = 567
   Height = 371
   Top = 424
   Width = 718
@@ -49,7 +49,7 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Position = poDesktopCenter
-  LCLVersion = '0.9.31'
+  LCLVersion = '1.1'
   object StatusBar: TStatusBar
     Left = 0
     Height = 19
@@ -120,7 +120,7 @@ object MainForm: TMainForm
       ParentShowHint = False
       ShowHint = True
     end
-    object TBPeriod: TToolButton
+    object TBtPeriod: TToolButton
       Left = 126
       Top = 2
       Action = ActPeriod

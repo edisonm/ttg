@@ -142,11 +142,11 @@ begin
       PollinationProbability, PopulationSize, MaxIteration, CrossProbability,
       MutationProbability, ReparationProbability, InitialTimetables);
     try
-      Synchronize(EvolElitist.Initialize);
+      Synchronize(@EvolElitist.Initialize);
       ProgressFormDrv := TProgressFormDrv.Create(Self, ATimetable);
       try
         ProgressFormDrv.Caption := Format(SWorkInProgress, [AIdTimetable]);
-        EvolElitist.OnProgress := ProgressFormDrv.OnProgress;
+        EvolElitist.OnProgress := @ProgressFormDrv.OnProgress;
         EvolElitist.Execute;
         if ProgressFormDrv.CancelClick then
         begin
@@ -160,7 +160,7 @@ begin
           try
             DownHill.BestIndividual.Assign(EvolElitist.BestIndividual);
             ProgressFormDrv.Caption := Format(SImprovingTimetable, [AIdTimetable]);
-            DownHill.OnProgress := ProgressFormDrv.OnProgress;
+            DownHill.OnProgress := @ProgressFormDrv.OnProgress;
             ExecuteDownHill(DownHill, Bookmarks);
             if ProgressFormDrv.CancelClick then
             begin
@@ -185,7 +185,7 @@ begin
       with TSyncSaver.Create(EvolElitist, AIdTimetable, ExtraInfo,
         FTimeIni, Now) do
       try
-        Synchronize(Execute);
+        Synchronize(@Execute);
       finally
         Free;
       end;
@@ -278,14 +278,14 @@ begin
       with TSyncLoader.Create(TTimetable(DownHill.BestIndividual),
         FIdTimetableFuente) do
       try
-        Synchronize(Execute);
+        Synchronize(@Execute);
       finally
         Free;
       end;
       TDownHill.DownHill(DownHill.BestIndividual);
       ProgressFormDrv := TProgressFormDrv.Create(Self, 0);
       try
-        DownHill.OnProgress := ProgressFormDrv.OnProgress;
+        DownHill.OnProgress := @ProgressFormDrv.OnProgress;
         ProgressFormDrv.Caption := Format(SImprovingTimetableIn,
           [FIdTimetableFuente, FIdTimetable]);
         ExecuteDownHill(DownHill, Bookmarks);
@@ -299,7 +299,7 @@ begin
           with TSyncSaver.Create(DownHill, FIdTimetable, ExtraInfo,
             TimeIni, Now) do
           try
-            Synchronize(Execute);
+            Synchronize(@Execute);
           finally
             Free;
           end;

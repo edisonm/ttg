@@ -365,11 +365,6 @@
       <OtherUnitFiles Value="../../zeosdbo/packages/lazarus;../../zeosdbo/src/core;../../zeosdbo/src/dbc;../../zeosdbo/src/parsesql;../../zeosdbo/src/plain;../../zeosdbo/src/component;../../multithreadprocs;../obj/$(TargetCPU)-$(TargetOS)-debug"/>
       <UnitOutputDirectory Value="../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)"/>
     </SearchPaths>
-    <Parsing>
-      <SyntaxOptions>
-        <SyntaxMode Value="Delphi"/>
-      </SyntaxOptions>
-    </Parsing>
     <CodeGeneration>
       <SmartLinkUnit Value="True"/>
       <Checks>

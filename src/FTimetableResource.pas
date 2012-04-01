@@ -59,8 +59,8 @@ begin
   if Result then with TTimetableResourceForm(AForm) do
   begin
     DSTimetable.DataSet := ADataSet;
-    DSResource.OnDataChange := DSResourceDataChange;
-    CBShowResource.OnChange := CBShowResourceChange;
+    DSResource.OnDataChange := @DSResourceDataChange;
+    CBShowResource.OnChange := @CBShowResourceChange;
     DSTimetableDataChange(nil, nil);
     CBShowResourceChange(nil);
   end;

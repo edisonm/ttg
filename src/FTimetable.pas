@@ -59,7 +59,7 @@ type
     procedure ActFindExecute(Sender: TObject);
     procedure ActImproveTimeTableExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure TbTimetableCalcFields(DataSet: TDataSet);
+    procedure TbTimetableCalcFields(ADataSet: TDataSet);
   private
     { Private declarations }
     FClashActivityForm, FBrokenSessionHourForm,
@@ -183,9 +183,9 @@ begin
   end;
 end;
 
-procedure TTimetableForm.TbTimetableCalcFields(DataSet: TDataSet);
+procedure TTimetableForm.TbTimetableCalcFields(ADataSet: TDataSet);
 begin
-  with DataSet do
+  with ADataSet do
   begin
   if not (FindField('TimeEnd').IsNull or FindField('TimeIni').IsNull) then
     FindField('Elapsed').AsDateTime

@@ -298,8 +298,8 @@ var
   NeedsRepairing1, NeedsRepairing2: Boolean;
 begin
   Pairs := PIntegerArray(Data);
-  Individual1 := Pairs[2*Pair];
-  Individual2 := Pairs[2*Pair + 1];
+  Individual1 := Pairs^[2*Pair];
+  Individual2 := Pairs^[2*Pair + 1];
   NeedsRepairing1 := Cross(Individual1, Individual2);
   NeedsRepairing2 := Mutate(Individual2) or NeedsRepairing1; // yes, is 1, not 2
   NeedsRepairing1 := Mutate(Individual1) or NeedsRepairing1;

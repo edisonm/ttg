@@ -24,7 +24,7 @@ type
     procedure DataSourceDataChange(Sender: TObject; Field: TField);
     procedure DataSourceStateChange(Sender: TObject);
     procedure DBGridDblClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormClose(Sender: TObject; var AAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormDestroy(Sender: TObject);
   private
@@ -67,7 +67,7 @@ begin
 end;
 
 procedure TMasterDetailEditorForm.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+  var AAction: TCloseAction);
 begin
   DataSourceDetail.DataSet := nil;
   inherited;

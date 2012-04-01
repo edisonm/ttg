@@ -64,7 +64,7 @@ type
     TBtHour: TToolButton;
     TBResourceType: TToolButton;
     TBResource: TToolButton;
-    TBPeriod: TToolButton;
+    TBtPeriod: TToolButton;
     TBTheme: TToolButton;
     MIReopen: TMenuItem;
     ImageList: TImageList;
@@ -112,7 +112,7 @@ type
     procedure ActTimetableExecute(Sender: TObject);
     procedure ActMakeTimetableExecute(Sender: TObject);
     procedure ActPeriodExecute(Sender: TObject);
-    procedure StatusBarDrawPanel(StatusBar: TStatusBar;
+    procedure StatusBarDrawPanel(AStatusBar: TStatusBar;
       Panel: TStatusPanel; const Rect: TRect);
     procedure FormCreate(Sender: TObject);
     procedure ActConfigureExecute(Sender: TObject);
@@ -216,20 +216,20 @@ end;
 
 procedure TMainForm.ActPeriodExecute(Sender: TObject);
 var
-  TbDay, TbHour, TbPeriod: TZTable;
+  TbDay, TbHour, TBPeriod: TZTable;
 begin
   if TCrossManyToManyEditor0Form.ToggleEditor(Self, FPeriodForm,
     ConfigStorage, ActPeriod) then
   with SourceDataModule do
   begin
-    FPeriodForm.DrawGrid.OnPrepareCanvas := FPeriodForm.DrawGridPrepareCanvas;
+    FPeriodForm.DrawGrid.OnPrepareCanvas := @FPeriodForm.DrawGridPrepareCanvas;
     TbDay := SourceDataModule.NewTable('Day', FPeriodForm);
     TbHour := SourceDataModule.NewTable('Hour', FPeriodForm);
-    TbPeriod := SourceDataModule.NewTable('Period', FPeriodForm);
+    TBPeriod := SourceDataModule.NewTable('Period', FPeriodForm);
     TbDay.Open;
     TbHour.Open;
-    TbPeriod.Open;
-    FPeriodForm.ShowEditor(TbDay, TbHour, TbPeriod, nil, 'IdDay', 'NaDay',
+    TBPeriod.Open;
+    FPeriodForm.ShowEditor(TbDay, TbHour, TBPeriod, nil, 'IdDay', 'NaDay',
       'IdDay', '', 'IdHour', 'NaHour', 'IdHour', '');
   end;
 end;
@@ -489,7 +489,7 @@ begin
   end;
 end;
 
-procedure TMainForm.StatusBarDrawPanel(StatusBar: TStatusBar;
+procedure TMainForm.StatusBarDrawPanel(AStatusBar: TStatusBar;
   Panel: TStatusPanel; const Rect: TRect);
 var
   VRect: TRect;
