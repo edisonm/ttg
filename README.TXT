@@ -20,7 +20,7 @@
  You can send your suggestions or to ask for further information to the
  following address:
 
-	   Edison Mera Menéndez, PhD.
+	   Edison Mera Menendez, PhD.
 	   email:    efmera@yahoo.com
 	   web page: http://efmera.dyndns.org/blog/
 
