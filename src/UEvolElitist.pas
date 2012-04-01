@@ -319,7 +319,7 @@ begin
   // Repair;
   Pairs := RandomIndexes(2 * (FPopulationSize div 2));
   {$IFDEF THREADED}
-  ProcThreadPool.DoParallel(ApplyOperatorsPairs, 0, FPopulationSize div 2 - 1, @Pairs[0]);
+  ProcThreadPool.DoParallel(@ApplyOperatorsPairs, 0, FPopulationSize div 2 - 1, @Pairs[0]);
   {$ELSE}
   for Pair := 0 to FPopulationSize div 2 - 1 do
     ApplyOperatorsPairs(Pair, @Pairs[0], nil);
