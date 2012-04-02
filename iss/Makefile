@@ -22,11 +22,11 @@ $(PKG): ttg.iss.tmpl
 	  -e s:'@AppName@':'$(APPNAME)':g \
 	  -e s/'@ProgramFiles@'/'$(PROGRAMFILES)'/g \
 	  -e s/'@Copyright@'/'$(Copyright)'/g \
-	  -e s/'@BuildMode@'/'$(BuildMode)'/g \
 	  -e s:'@PkgBase@':'$(PKGBASE)':g \
 	  -e s:'@BuildId@':'$(BuildId)':g ttg.iss.tmpl > $(ISS)
 	mkdir -p $(PKGDIR)
 	$(INNOIDE) $(ISSWIN)
+# -e s/'@BuildMode@'/'$(BuildMode)'/g
 # -e s/'@PkgDir@'/'..\$(shell cygpath -w $(PKGDIR))'/g
 
 ttg $(TTGEXE):

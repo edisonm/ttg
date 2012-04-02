@@ -21,7 +21,7 @@ REPOSITORY=file:///home/edison/LocalReps/TTG/trunk/
 TGZBASE=$(Package)_$(Version)
 TGZSRC=$(Package)-$(Version)
 PKGBASE=$(TGZBASE)$(BuildLabel)_$(ARCH)
-PKGDIR=$(TTGDIR)/packages/$(BuildMode)
+PKGDIR=$(TTGDIR)/../debianization/packages
 
 ifeq ($(shell uname -o),Cygwin)
 LAZBASE=/cygdrive/c/lazarus32
