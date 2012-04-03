@@ -1,3 +1,5 @@
+* TODO <2012-04-04 Wed> To register this software in mcu:
+  http://www.mcu.es/propiedadInt/CE/RegistroPropiedad/RegistroPropiedad.html
 * TODO <2012-04-04 Wed> Write a Scientific Paper about this Program.
 * TODO <2012-04-04 Wed> Benchmark this software and compare with others.
 * TODO <2012-04-04 Wed> Add Cusomized labels depending on the "profile"
