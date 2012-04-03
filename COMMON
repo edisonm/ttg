@@ -16,7 +16,7 @@ BaseVersion=$(MajorVersionNr).$(MinorVersionNr).$(RevisionNr)
 AppVersion=$(Package)-$(BaseVersion)
 Version=$(BaseVersion).$(BuildNr)
 
-REPOSITORY=file:///home/edison/LocalReps/TTG/trunk/
+REPOSITORY=svn+ssh://mntedison/home/edison/LocalReps/ttg/trunk/
 # PACKAGING RELATED:
 TGZBASE=$(Package)_$(Version)
 TGZSRC=$(Package)-$(Version)
