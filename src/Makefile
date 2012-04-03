@@ -66,7 +66,7 @@ ifneq ($(BuildMode),debug)
 endif
 
 cleanthis:
-	$(RM) -r $(TTGEXE) $(TTGDIR)/bin/* $(TTGDIR)/obj/* $(ABOUT).pas *.lrs
+	$(RM) -r $(TTGDIR)/bin $(TTGDIR)/obj $(ABOUT).pas *.lrs
 
 clean: cleanthis
 
