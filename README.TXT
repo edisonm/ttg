@@ -21,7 +21,7 @@
  following address:
 
 	   Edison Mera Menendez, PhD.
-	   email:    efmera@yahoo.com
+	   email:    efmera@gmail.com
 	   web page: http://efmera.dyndns.org/blog/
 
 	   Madrid - Spain

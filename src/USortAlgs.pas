@@ -3,46 +3,6 @@ unit USortAlgs;
 
 {$I ttg.inc}
 
-(*******************************************************************************
-
-  Archivo: SortAlgs.pas
-  Sistema: Common Unit
-  Version: 1.0
-
-  Creado:
-    15/02/1999
-
-  Descripcion:
-    Contiene funciones de ordenamiento de datos en memoria.
-
-  Referencia:
-    Delphi Informant Vol. ? No. ?
-
-  Compatibilidad:
-    Delphi 4.0 / Tiene caracteristicas propias del Delphi 4.0, que lo hacen
-    dificil de hacer compatible con Delphi 3.0/2.0/1.0
-
-  Últimas revisiones:
-    20-04-1999
-
-  Lista de cosas por hacer:
-
-  Responsable(s):
-    Edison Mera
-
-  Derechos de Autor (c) 1999, Edison Mera.  Todos los derechos reservados.
-
-  Este codigo fuente contiene informacion privada con secretos de fabrica,
-  y no esta disponible para publicacion.  Este codigo no debe ser desclasificado
-  a NADIE, excepto a quienes tengan una autorizacion escrita.
-
-  Recuerde que la pirateria esta penada por la Ley.
-
-  Edison Mera Menendez.
-  efmera@yahoo.com
-
-*******************************************************************************)
-
 interface
 
 uses
