@@ -46,8 +46,9 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 	  -e s:'@AppName@':'$(APPNAME)':g $< > $(OBJDIR)/$@
 
 buildnr:
+#	grep Revision|sed -e s:'Revision\: ':'':g -`
 	SvnVersion=`svnversion -n $(TTGDIR)` ; \
-	  Revision=`svn info $(REPOSITORY)|grep Revision|sed -e s:'Revision\: ':'':g -` ; \
+	  Revision=`svn info $(TTGDIR)|grep 'Last Changed Rev'|sed -e s/'Last Changed Rev: '//g -` ; \
 	  if [ x"$(BuildNr)"=x"$${SvnVersion}" ] ; then \
 	    BuildNr0=$$(($${Revision}+1)) ; \
 	  else \
