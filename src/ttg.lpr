@@ -12,7 +12,7 @@ uses
   DMaster in 'DMaster.pas' {MasterDataModule: TDataModule},
   UConfigStorage,
   FSplash {SplashForm},
-  DSource in 'DSource.pp' {SourceDataModule: TDataModule},
+  DSource in 'DSource.pas' {SourceDataModule: TDataModule},
   UAbout,
   UTTGi18n, zcomponent;
 
@@ -23,7 +23,16 @@ var
 {$R *.res}
 
 begin
-  FConfigFileName := GetCurrentDir + '/ttg.cfg';
+  {$IFDEF UNIX}
+  FConfigFileName := GetEnvironmentVariable('HOME') + '/.ttg.conf';
+  {$ELSE}
+  {$IFDEF WINDOWS}
+  FConfigFileName := GetEnvironmentVariable('HOMEDRIVE')
+    + GetEnvironmentVariable('HOMEPATH') + '\.ttg.conf';
+  {$ELSE}
+  FConfigFileName := GetCurrentDir + '/ttg.conf';
+  {$ENDIF}
+  {$ENDIF}
   FConfigStorage := TConfigStorage.Create(Application);
   if FileExists(FConfigFileName) then
   begin

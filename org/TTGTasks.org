@@ -1,49 +1,107 @@
-* TODO [#B] <2012-03-31 Sat> build ttg using pbuilder
+* TODO <2012-04-04 Wed> Write a Scientific Paper about this Program.
+* TODO <2012-04-04 Wed> Benchmark this software and compare with others.
+* TODO <2012-04-04 Wed> Add Cusomized labels depending on the "profile"
+  For example, "Standard/University/High School/Hospital/Bus Station",
+  etc.  Also allow to add customized profiles.
+* TODO <2012-04-03 Tue> Add Documentation and up to date Help files
+* TODO <2012-04-03 Tue> Improve Grid computing support
+  The current way of configuring instances of ttg to work concurrently
+  is no clear and must be by hand.  We have to improve GUI support and
+  customization.
+* TODO <2012-04-03 Tue> Read from other format files: FET for example.
+  FET have a lot of examples, and could be a good start point to
+  perform benchmarking and comparisons between tools.
+* TODO <2012-04-03 Tue> Add Reports. See http://lazreport.sourceforge.net/
+* TODO [#C] <2012-03-31 Sat> build ttg using pbuilder
+  DELAYED: <2012-04-03 Tue>
   I have finished this task, however due to a bug in lazarus/fpc,
-  compilation of ttg never finishes
-* DONE <2012-03-27 Tue> Improve current i18n support:
-  CLOSED: [2012-03-31 Sat 15:47]
-** DONE <2012-03-27 Tue> Do not put po files as resources in the executable.
-   CLOSED: [2012-03-31 Sat 15:47]
-** DONE <2012-03-27 Tue> update ttg-locale-es debian package.
-   CLOSED: [2012-03-31 Sat 15:47]
-* DONE <2012-03-24 Sat> Remove all dependencies of non-free software:
-  CLOSED: [2012-03-27 Tue 19:50]
-** DONE <2012-03-24 Sat> Merge TSourceBaseDataModule and TSourceDataModule
-   CLOSED: [2012-03-27 Tue 13:15]
-** DONE <2012-03-24 Sat> Remove tables of TSourceDataModule
-   CLOSED: [2012-03-27 Tue 13:15]
-** DONE <2012-03-24 Sat> Remove dependencies of *.mdb and DBConvert
-   CLOSED: [2012-03-27 Tue 13:15]
-  Now the application must be simplified, and all the data managing
-  must be handled using sqlite (or the current database
-  backend). Note: just to preserve properties, generate a last
-  ttg.mysql and commit it.
+  compilation of ttg never finishes. It is difficult to report this
+  bug because others programmers might found difficult to reproduce.
 * TODO <2012-03-24 Sat> Upload TTG to the ppa
   DEADLINE: <2012-04-01 Sat>
-* DONE Generalize the tool to any kind of timetable
-  DEADLINE: <2012-02-15 Wed> CLOSED: [2012-03-24 Sat 00:44]
-  - Rename Subject to Theme. DONE
-  - Rename Teacher to Resource
-  - Rename Class to Cluster
-  - Rename Course to Category. DONE
-  - Add ResourceType . DONE
-  - Unify Teachers and Classrooms, and differentiate the items with ResourceType. DONE
-  - IntercambiarTimeSlots --> SwapTimeSlots. DONE
-* DONE Distribution changes 
-  DEADLINE: <2012-02-08 Sat> CLOSED: [2012-03-24 Sat 00:43]
-  - One teacher for two or more classes.
-  - In one Class, one or more Teachers.
-  - Allow swapping of teachers of same subjects, assigned to groups in
-    same courses.
+** <2012-04-03 Tue> Delayed: alternatively I have configured
+   an ubuntu repository in edisonm.dyndns.org/ubuntu
+   
+   
+    
+* Archive
+** DONE To migrate this project to Lazarus and see if it works ok
+   CLOSED: [2012-03-24 Sat 00:42]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2012-04-03 Tue 23:50
+   :ARCHIVE_FILE: ~/apps/ttg/org/TTGTasks.org
+   :ARCHIVE_CATEGORY: TTGTasks
+   :ARCHIVE_TODO: DONE
+   :END:
 
-* DONE To remove dependencies of third part packages. 			 :EM:
-  CLOSED: [2012-03-24 Sat 00:41]
-  - Currently, toolbar97, navbtn.  Remove dependencies of TDBPacker 
-    In the case of kbmMemTable, to ensure that we are using only
-    TDataSet methods in all the project
-  - Remove dependencies of ArControls.
-* DONE To migrate this project to Lazarus and see if it works ok	 :EM:
-  CLOSED: [2012-03-24 Sat 00:42]
+** DONE To remove dependencies of third part packages.
+   CLOSED: [2012-03-24 Sat 00:41]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2012-04-03 Tue 23:51
+   :ARCHIVE_FILE: ~/apps/ttg/org/TTGTasks.org
+   :ARCHIVE_CATEGORY: TTGTasks
+   :ARCHIVE_TODO: DONE
+   :END:
+   - Currently, toolbar97, navbtn.  Remove dependencies of TDBPacker 
+     In the case of kbmMemTable, to ensure that we are using only
+     TDataSet methods in all the project
+   - Remove dependencies of ArControls.
+** DONE Distribution changes
+   DEADLINE: <2012-02-08 Sat> CLOSED: [2012-03-24 Sat 00:43]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2012-04-03 Tue 23:52
+   :ARCHIVE_FILE: ~/apps/ttg/org/TTGTasks.org
+   :ARCHIVE_CATEGORY: TTGTasks
+   :ARCHIVE_TODO: DONE
+   :END:
+   - One teacher for two or more classes.
+   - In one Class, one or more Teachers.
+   - Allow swapping of teachers of same subjects, assigned to groups in
+     same courses.
+** DONE <2012-03-24 Sat> Remove all dependencies of non-free software:
+   CLOSED: [2012-03-27 Tue 19:50]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2012-04-03 Tue 23:52
+   :ARCHIVE_FILE: ~/apps/ttg/org/TTGTasks.org
+   :ARCHIVE_CATEGORY: TTGTasks
+   :ARCHIVE_TODO: DONE
+   :END:
+*** DONE <2012-03-24 Sat> Merge TSourceBaseDataModule and TSourceDataModule
+    CLOSED: [2012-03-27 Tue 13:15]
+*** DONE <2012-03-24 Sat> Remove tables of TSourceDataModule
+    CLOSED: [2012-03-27 Tue 13:15]
+*** DONE <2012-03-24 Sat> Remove dependencies of *.mdb and DBConvert
+    CLOSED: [2012-03-27 Tue 13:15]
+   Now the application must be simplified, and all the data managing
+   must be handled using sqlite (or the current database
+   backend). Note: just to preserve properties, generate a last
+   ttg.mysql and commit it.
+** DONE <2012-03-27 Tue> Improve current i18n support:
+   CLOSED: [2012-03-31 Sat 15:47]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2012-04-03 Tue 23:52
+   :ARCHIVE_FILE: ~/apps/ttg/org/TTGTasks.org
+   :ARCHIVE_CATEGORY: TTGTasks
+   :ARCHIVE_TODO: DONE
+   :END:
+*** DONE <2012-03-27 Tue> Do not put po files as resources in the executable.
+    CLOSED: [2012-03-31 Sat 15:47]
+*** DONE <2012-03-27 Tue> update ttg-locale-es debian package.
+    CLOSED: [2012-03-31 Sat 15:47]
+** DONE Generalize the tool to any kind of timetable
+   DEADLINE: <2012-02-15 Wed> CLOSED: [2012-03-24 Sat 00:44]
+   :PROPERTIES:
+   :ARCHIVE_TIME: 2012-04-03 Tue 23:53
+   :ARCHIVE_FILE: ~/apps/ttg/org/TTGTasks.org
+   :ARCHIVE_CATEGORY: TTGTasks
+   :ARCHIVE_TODO: DONE
+   :END:
+   - Rename Subject to Theme. DONE
+   - Rename Teacher to Resource
+   - Rename Class to Cluster
+   - Rename Course to Category. DONE
+   - Add ResourceType . DONE
+   - Unify Teachers and Classrooms, and differentiate the items with ResourceType. DONE
+   - IntercambiarTimeSlots --> SwapTimeSlots. DONE
 
 
