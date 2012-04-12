@@ -6,8 +6,7 @@ unit UTTModel;
 interface
 
 uses
-  {$IFDEF UNIX}CThreads, CMem, {$ENDIF}Classes, DB, Dialogs, Forms, UModel,
-  UTTGBasics;
+  {$IFDEF UNIX}CThreads, CMem, {$ENDIF}Classes, DB, UModel, UTTGBasics;
 
 type
   TTimetable = class;

@@ -6,8 +6,8 @@ unit UMakeTT;
 interface
 
 uses
-  Classes, SysUtils, UTTModel, DMaster, USolver, UModel, UTTGBasics,
-    UDownHill;
+  Classes, SysUtils, UTTModel, UTTGConfig, USolver, UModel, UTTGBasics, UDownHill,
+  UProgress;
 
 type
 
@@ -17,10 +17,14 @@ type
   private
     FTimetableModel: TTimetableModel;
     FValidIds: TDynamicIntegerArray;
-    function ProcessTimetable(AIdTimetable, ATimetable: Integer): Boolean;
+    FTTGConfig: TTTGConfig;
+    FProgressViewer: TProgressViewer;
+    function ProcessTimetable(AIdTimetable, ATimetable: Integer;
+      AProgressViewer: TProgressViewer): Boolean;
   public
   procedure Execute; override;
-  constructor Create(const AValidIds: TDynamicIntegerArray; CreateSuspended: Boolean);
+  constructor Create(const AValidIds: TDynamicIntegerArray; ATTGConfig: TTTGConfig;
+    AProgressViewer: TProgressViewer; CreateSuspended: Boolean);
   destructor Destroy; override;
   end;
 
@@ -29,17 +33,20 @@ type
   TImproveTimetableThread = class(TThread)
   private
     FTimetableModel: TTimetableModel;
-    FIdTimetableFuente, FIdTimetable: Integer;
+    FIdTimetableSource, FIdTimetable: Integer;
+    FTTGConfig: TTTGConfig;
+    FProgressViewer: TProgressViewer;
   public
   procedure Execute; override;
-  constructor Create(AIdTimetableFuente, AIdTimetable: Integer; CreateSuspended: Boolean);
+  constructor Create(AIdTimetableFuente, AIdTimetable: Integer;
+    ATTGConfig: TTTGConfig; AProgressViewer: TProgressViewer; CreateSuspended: Boolean);
   destructor Destroy; override;
   end;
 
 implementation
 
 uses
-  UEvolElitist, FProgress, UTTGConsts;
+  UEvolElitist, UTTGConsts;
 
 type
 
@@ -122,12 +129,12 @@ begin
   end;
 end;
 
-function TMakeTimetableThread.ProcessTimetable(AIdTimetable, ATimetable: Integer): Boolean;
+function TMakeTimetableThread.ProcessTimetable(AIdTimetable, ATimetable: Integer;
+                                               AProgressViewer: TProgressViewer): Boolean;
 var
   EvolElitist: TEvolElitist;
   DownHill: TDownHill;
   FTimeIni: TDateTime;
-  ProgressFormDrv: TProgressFormDrv;
   ExtraInfo: string;
   FBoolToStr: array [Boolean] of string;
 begin
@@ -136,33 +143,34 @@ begin
   // We hav to initialize here due to SNo and SYes are location dependent
   FBoolToStr[False] := SNo;
   FBoolToStr[True] := SYes;
-  with MasterDataModule.ConfigStorage do
+  with FTTGConfig do
   begin
     EvolElitist := TEvolElitist.Create(FTimetableModel, SharedDirectory,
       PollinationProbability, PopulationSize, MaxIteration, CrossProbability,
       MutationProbability, ReparationProbability, InitialTimetables);
     try
       Synchronize(@EvolElitist.Initialize);
-      ProgressFormDrv := TProgressFormDrv.Create(Self, ATimetable);
+      AProgressViewer.Thread := Self;
+      AProgressViewer.Timetable := ATimetable;
       try
-        ProgressFormDrv.Caption := Format(SWorkInProgress, [AIdTimetable]);
-        EvolElitist.OnProgress := @ProgressFormDrv.OnProgress;
+        AProgressViewer.Caption := Format(SWorkInProgress, [AIdTimetable]);
+        EvolElitist.OnProgress := @AProgressViewer.OnProgress;
         EvolElitist.Execute;
-        if ProgressFormDrv.CancelClick then
+        if AProgressViewer.CancelClick then
         begin
           Result := True;
           Exit;
         end;
-        if not ProgressFormDrv.CloseClick and ApplyDoubleDownHill then
+        if not AProgressViewer.CloseClick and ApplyDoubleDownHill then
         begin
           DownHill := TDownHill.Create(FTimetableModel,
             SharedDirectory, PollinationProbability);
           try
             DownHill.BestIndividual.Assign(EvolElitist.BestIndividual);
-            ProgressFormDrv.Caption := Format(SImprovingTimetable, [AIdTimetable]);
-            DownHill.OnProgress := @ProgressFormDrv.OnProgress;
+            AProgressViewer.Caption := Format(SImprovingTimetable, [AIdTimetable]);
+            DownHill.OnProgress := @AProgressViewer.OnProgress;
             ExecuteDownHill(DownHill, Bookmarks);
-            if ProgressFormDrv.CancelClick then
+            if AProgressViewer.CancelClick then
             begin
               Result := True;
               Exit;
@@ -177,7 +185,7 @@ begin
           EvolElitist.DownHill;
         end;
       finally
-        ProgressFormDrv.Free;
+        AProgressViewer.Thread := nil;
       end;
       EvolElitist.BestIndividual.Update;
       ExtraInfo := Format('%0:-28s %12s',
@@ -201,19 +209,21 @@ var
 begin
   for ValidId := 0 to High(FValidIds) do
   begin
-    MasterDataModule.ConfigStorage.InitRandom;
-    if ProcessTimetable(FValidIds[ValidId], ValidId) then
+    FTTGConfig.InitRandom;
+    if ProcessTimetable(FValidIds[ValidId], ValidId, FProgressViewer) then
       Terminate;
   end;
 end;
 
 constructor TMakeTimetableThread.Create(const AValidIds: TDynamicIntegerArray;
-  CreateSuspended: Boolean);
+  ATTGConfig: TTTGConfig; AProgressViewer: TProgressViewer; CreateSuspended: Boolean);
 var
   i: Integer;
 begin
   FreeOnTerminate := True;
-  with MasterDataModule.ConfigStorage do
+  FTTGConfig := ATTGConfig;
+  FProgressViewer := AProgressViewer;
+  with FTTGConfig do
     FTimetableModel := TTimetableModel.Create(
       ClashActivity, BreakTimetableResource, BrokenSession, NonScatteredActivity);
   SetLength(FValidIds, Length(AValidIds));
@@ -260,13 +270,12 @@ end;
 
 procedure TImproveTimetableThread.Execute;
 var
-  ProgressFormDrv: TProgressFormDrv;
   TimeIni: TDateTime;
   DownHill: TDownHill;
   ExtraInfo: string;
 begin
   TimeIni := Now;
-  with MasterDataModule.ConfigStorage do
+  with FTTGConfig do
   begin
     InitRandom;
     DownHill := TDownHill.Create(FTimetableModel,
@@ -276,35 +285,31 @@ begin
         Timetable.MakeRandom
       else}
       with TSyncLoader.Create(TTimetable(DownHill.BestIndividual),
-        FIdTimetableFuente) do
+        FIdTimetableSource) do
       try
         Synchronize(@Execute);
       finally
         Free;
       end;
       TDownHill.DownHill(DownHill.BestIndividual);
-      ProgressFormDrv := TProgressFormDrv.Create(Self, 0);
+      DownHill.OnProgress := @FProgressViewer.OnProgress;
+      FProgressViewer.Caption := Format(SImprovingTimetableIn,
+        [FIdTimetableSource, FIdTimetable]);
+      ExecuteDownHill(DownHill, Bookmarks);
+      FProgressViewer.Thread := Self;
+      if FProgressViewer.CancelClick then
+      begin
+        Terminate;
+        Exit;
+      end
+      else
+        ExtraInfo := Format(SBaseTimetable, [FIdTimetableSource]);
+      with TSyncSaver.Create(DownHill, FIdTimetable, ExtraInfo,
+        TimeIni, Now) do
       try
-        DownHill.OnProgress := @ProgressFormDrv.OnProgress;
-        ProgressFormDrv.Caption := Format(SImprovingTimetableIn,
-          [FIdTimetableFuente, FIdTimetable]);
-        ExecuteDownHill(DownHill, Bookmarks);
-        if ProgressFormDrv.CancelClick then
-        begin
-          Terminate;
-          Exit;
-        end
-        else
-          ExtraInfo := Format(SBaseTimetable, [FIdTimetableFuente]);
-          with TSyncSaver.Create(DownHill, FIdTimetable, ExtraInfo,
-            TimeIni, Now) do
-          try
-            Synchronize(@Execute);
-          finally
-            Free;
-          end;
+        Synchronize(@Execute);
       finally
-        ProgressFormDrv.Free;
+        Free;
       end;
     finally
       DownHill.Free;
@@ -313,12 +318,14 @@ begin
 end;
 
 constructor TImproveTimetableThread.Create(AIdTimetableFuente, AIdTimetable: Integer;
-  CreateSuspended: Boolean);
+  ATTGConfig: TTTGConfig; AProgressViewer: TProgressViewer; CreateSuspended: Boolean);
 begin
   FreeOnTerminate := True;
-  FIdTimetableFuente := AIdTimetableFuente;
+  FIdTimetableSource := AIdTimetableFuente;
   FIdTimetable := AIdTimetable;
-  with MasterDataModule.ConfigStorage do
+  FTTGConfig := ATTGConfig;
+  FProgressViewer := AProgressViewer;
+  with FTTGConfig do
     FTimetableModel := TTimetableModel.Create(
       ClashActivity, BreakTimetableResource, BrokenSession, NonScatteredActivity);
   inherited Create(CreateSuspended);
@@ -327,6 +334,7 @@ end;
 destructor TImproveTimetableThread.Destroy;
 begin
   FTimetableModel.Free;
+  FProgressViewer.Free;
   inherited Destroy;
 end;
 

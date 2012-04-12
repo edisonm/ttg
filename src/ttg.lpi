@@ -9,7 +9,6 @@
       <SessionStorage Value="None"/>
       <MainUnit Value="0"/>
       <UseAppBundle Value="False"/>
-      <Icon Value="0"/>
     </General>
     <i18n>
       <EnableI18N Value="True"/>
@@ -110,7 +109,7 @@
         <PackageName Value="LCL"/>
       </Item5>
     </RequiredPackages>
-    <Units Count="36">
+    <Units Count="37">
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -348,6 +347,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UDataSetToStrings"/>
       </Unit35>
+      <Unit36>
+        <Filename Value="UProgress.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UProgress"/>
+      </Unit36>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

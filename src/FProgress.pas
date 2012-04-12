@@ -7,7 +7,7 @@ interface
 
 uses
   LResources, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, StdCtrls,
-  Buttons, ExtCtrls, ComCtrls, UTTModel, USolver;
+  Buttons, ExtCtrls, ComCtrls, UTTModel, USolver, UProgress;
 
 type
 
@@ -87,30 +87,29 @@ type
     procedure DoProgress(APosition, AMax: Integer; ASolver: TSolver);
   end;
 
-  { TProgressFormDrv }
+  { TProgressViewerForm }
 
-  TProgressFormDrv = class
+  TProgressViewerForm = class(TProgressViewer)
   private
     FProgressForm: TProgressForm;
-    FThread: TThread;
     FMax: Integer;
     FPosition: Integer;
-    FTimetable: Integer;
     FSolver: TSolver;
-    FCaption: string;
-    procedure SetCaption(const AValue: string);
+    procedure UpdateTimetable;
+  protected
+    procedure SetCaption(const AValue: string); override;
+    procedure SetTimetable(AValue: Integer); override;
+    function GetCloseClick: Boolean; override;
+    function GetCancelClick: Boolean; override;
   public
     procedure UpdateCaption;
-    constructor Create(AThread: TThread; Timetable: Integer);
+    constructor Create;
     destructor Destroy; override;
     procedure CreateForm;
+    procedure OnProgress(APosition, AMax: Integer; ASolver: TSolver;
+      var Stop: Boolean); override;
     procedure DestroyForm;
     procedure DoProgress;
-    procedure OnProgress(APosition, AMax: Integer; ASolver: TSolver;
-      var Stop: Boolean);
-    property CloseClick: Boolean read FProgressForm.FCloseClick;
-    property CancelClick: Boolean read FProgressForm.FCancelClick;
-    property Caption: string read FCaption write SetCaption;
   end;
 
 implementation
@@ -205,47 +204,66 @@ begin
   Show;
 end;
 
-{ TProgressFormDrv }
+{ TProgressViewerForm }
 
-constructor TProgressFormDrv.Create(AThread: TThread; Timetable: Integer);
+constructor TProgressViewerForm.Create;
 begin
   inherited Create;
-  FThread := AThread;
-  FTimetable := Timetable;
-  TThread.Synchronize(FThread, @CreateForm);
+  // TThread.Synchronize(FThread, @CreateForm);
+  CreateForm;
 end;
 
-procedure TProgressFormDrv.SetCaption(const AValue: string);
+procedure TProgressViewerForm.SetCaption(const AValue: string);
 begin
-  FCaption := AValue;
-  TThread.Synchronize(FThread, @UpdateCaption);
+  inherited;
+  TThread.Synchronize(Thread, @UpdateCaption);
 end;
 
-procedure TProgressFormDrv.UpdateCaption;
+function TProgressViewerForm.GetCloseClick: Boolean;
 begin
-  FProgressForm.Caption := FCaption;
+  Result := FProgressForm.FCloseClick;
 end;
 
-destructor TProgressFormDrv.Destroy;
+function TProgressViewerForm.GetCancelClick: Boolean;
 begin
-  TThread.Synchronize(FThread, @DestroyForm);
+  Result := FProgressForm.FCancelClick;
+end;
+
+procedure TProgressViewerForm.UpdateCaption;
+begin
+  FProgressForm.Caption := Caption;
+end;
+
+destructor TProgressViewerForm.Destroy;
+begin
+  TThread.Synchronize(Thread, @DestroyForm);
   inherited Destroy;
 end;
 
-procedure TProgressFormDrv.CreateForm;
+procedure TProgressViewerForm.SetTimetable(AValue: Integer);
+begin
+  inherited;
+  TThread.Synchronize(Thread, @UpdateTimetable);
+end;
+
+procedure TProgressViewerForm.UpdateTimetable;
+begin
+  FProgressForm.Top := FProgressForm.Top + 20 * Timetable;
+  FProgressForm.Left := FProgressForm.Left + 20 * Timetable;
+end;
+
+procedure TProgressViewerForm.CreateForm;
 begin
   FProgressForm := TProgressForm.Create(Application);
   FProgressForm.FUpdateIndex := MainForm.UpdateIndex;
-  FProgressForm.Top := FProgressForm.Top + 20 * FTimetable;
-  FProgressForm.Left := FProgressForm.Left + 20 * FTimetable;
 end;
 
-procedure TProgressFormDrv.DestroyForm;
+procedure TProgressViewerForm.DestroyForm;
 begin
   FProgressForm.Free;
 end;
 
-procedure TProgressFormDrv.DoProgress;
+procedure TProgressViewerForm.DoProgress;
 begin
   FProgressForm.DoProgress(FPosition, FMax, FSolver);
   {$IFNDEF THREADED}
@@ -253,13 +271,13 @@ begin
   {$ENDIF}
 end;
 
-procedure TProgressFormDrv.OnProgress(APosition, AMax: Integer; ASolver: TSolver;
+procedure TProgressViewerForm.OnProgress(APosition, AMax: Integer; ASolver: TSolver;
     var Stop: Boolean);
 begin
   FPosition := APosition;
   FMax := AMax;
   FSolver := ASolver;
-  TThread.Synchronize(FThread, @DoProgress);
+  TThread.Synchronize(Thread, @DoProgress);
   with FProgressForm do
     if (CloseClick or CancelClick) then
       Stop := True;

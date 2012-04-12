@@ -170,7 +170,7 @@ implementation
 uses
   FCrossManyToManyEditor, FCrossManyToManyEditor1, DMaster, FTheme, FResource,
   FTimetable, FMasterDetailEditor, FConfig, Printers, DSource, UTTGBasics,
-  UTTGi18n, UTTGConsts, FDBExplorer;
+  UTTGi18n, UTTGConsts, FDBExplorer, FProgress;
 
 procedure TMainForm.ActExitExecute(Sender: TObject);
 begin
@@ -423,9 +423,11 @@ begin
     try
       ProcessIdList(SIdTimetables);
       {$IFDEF THREADED}
-      TMakeTimetableThread.Create(ValidIds, False);
+      TMakeTimetableThread.Create(ValidIds, MasterDataModule.ConfigStorage,
+        TProgressViewerForm.Create, False);
       {$ELSE}
-      with TMakeTimetableThread.Create(ValidIds, True) do
+      with TMakeTimetableThread.Create(ValidIds, MasterDataModule.ConfigStorage,
+        TProgressViewerForm.Create, True) do
       try
         Execute;
       finally

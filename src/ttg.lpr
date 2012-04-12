@@ -10,11 +10,9 @@ uses
   SysUtils,
   FMain {MainForm},
   DMaster in 'DMaster.pas' {MasterDataModule: TDataModule},
-  UConfigStorage,
   FSplash {SplashForm},
   DSource in 'DSource.pas' {SourceDataModule: TDataModule},
-  UAbout,
-  UTTGi18n, zcomponent;
+  UConfigStorage, UAbout, UTTGi18n, zcomponent, UProgress;
 
 var
   FConfigStorage: TConfigStorage;

@@ -78,7 +78,8 @@ type
 implementation
 
 uses
-  Variants, UMakeTT, UTTGConsts, DSourceConsts, FTimetableResource;
+  Variants, UProgress, FProgress, UMakeTT, UTTGConsts, DSourceConsts,
+    FTimetableResource;
 
 procedure TTimetableForm.ActClashResourceExecute(Sender: TObject);
 begin
@@ -219,9 +220,11 @@ begin
     ActImproveTimeTable.Enabled := False;
     try
       {$IFDEF THREADED}
-      TImproveTimetableThread.Create(IdTimetableSource, IdTimetableTarget, False);
+      TImproveTimetableThread.Create(IdTimetableSource, IdTimetableTarget,
+        MasterDataModule.ConfigStorage, TProgressViewerForm.Create, False);
       {$ELSE}
-      with TImproveTimetableThread.Create(IdTimetableSource, IdTimetableTarget, True) do
+      with TImproveTimetableThread.Create(IdTimetableSource, IdTimetableTarget,
+        MasterDataModule.ConfigStorage, TProgressViewerForm.Create, True) do
       try
         Execute;
       finally
