@@ -348,7 +348,7 @@
         <UnitName Value="UDataSetToStrings"/>
       </Unit35>
       <Unit36>
-        <Filename Value="UProgress.pas"/>
+        <Filename Value="uprogress.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UProgress"/>
       </Unit36>
