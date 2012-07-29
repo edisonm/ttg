@@ -1,3 +1,6 @@
+* TODO <2012-04-12 Thu> Encapsulate the alorithm in a library
+** TODO <2012-04-12 Thu> Divide the algorithm, put it in a library
+** TODO <2012-04-12 Thu> Migrate such algorithm to C++
 * TODO <2012-04-04 Wed> To register this software in mcu:
   http://www.mcu.es/propiedadInt/CE/RegistroPropiedad/RegistroPropiedad.html
 * TODO <2012-04-04 Wed> Write a Scientific Paper about this Program.
