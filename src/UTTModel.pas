@@ -1876,19 +1876,22 @@ end;
 
 function TTimetable.NewBookmark: TBookmark;
 begin
-  if Length(FThemeWithMobileResources) = 0 then
+  with TTimetableModel(Model) do
   begin
-    case Random(2) of
-      0: Result := TTTBookmark1.Create(Self);
-      1: Result := TTTBookmark2.Create(Self);
+    if Length(FThemeWithMobileResources) = 0 then
+    begin
+      case Random(2) of
+        0: Result := TTTBookmark1.Create(Self);
+        1: Result := TTTBookmark2.Create(Self);
+      end
     end
-  end
-  else
-  begin
-    case Random(3) of
-      0: Result := TTTBookmark1.Create(Self);
-      1: Result := TTTBookmark2.Create(Self);
-      2: Result := TTTBookmarkTheme.Create(Self);
+    else
+    begin
+      case Random(3) of
+        0: Result := TTTBookmark1.Create(Self);
+        1: Result := TTTBookmark2.Create(Self);
+        2: Result := TTTBookmarkTheme.Create(Self);
+      end
     end
   end
 end;
