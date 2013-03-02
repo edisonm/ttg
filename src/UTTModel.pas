@@ -376,7 +376,8 @@ type
 implementation
 
 uses
-  SysUtils, ZSysUtils, MTProcs, DSource, UTTGConsts, DSourceConsts, USortAlgs, Math, ZDataset;
+  SysUtils, ZSysUtils, MTProcs, DSource, UTTGConsts, DSourceConsts, USortAlgs,
+  Math, ZDataset;
 
 type
   TSortInteger = specialize TSortAlgorithm<Integer,Integer>;
@@ -1875,11 +1876,21 @@ end;
 
 function TTimetable.NewBookmark: TBookmark;
 begin
-  case Random(3) of
-    0: Result := TTTBookmark1.Create(Self);
-    1: Result := TTTBookmark2.Create(Self);
-    2: Result := TTTBookmarkTheme.Create(Self);
-  end;
+  if Length(FThemeWithMobileResources) = 0 then
+  begin
+    case Random(2) of
+      0: Result := TTTBookmark1.Create(Self);
+      1: Result := TTTBookmark2.Create(Self);
+    end
+  end
+  else
+  begin
+    case Random(3) of
+      0: Result := TTTBookmark1.Create(Self);
+      1: Result := TTTBookmark2.Create(Self);
+      2: Result := TTTBookmarkTheme.Create(Self);
+    end
+  end
 end;
 
 destructor TTimetable.Destroy;
@@ -2626,11 +2637,13 @@ end;
 
 function TTTBookmarkTheme.GetNumFixeds1: PtrInt;
 begin
+  assert(Activity1 >= Length(TimetableModel.FActivityToNumFixeds));
   Result := TimetableModel.FActivityToNumFixeds[Activity1];
 end;
 
 function TTTBookmarkTheme.GetNumFixeds2: PtrInt;
 begin
+  assert(Activity2 >= Length(TimetableModel.FActivityToNumFixeds));
   Result := TimetableModel.FActivityToNumFixeds[Activity2];
 end;
 
