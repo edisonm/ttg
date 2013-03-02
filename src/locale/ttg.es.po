@@ -29,7 +29,7 @@ msgstr "Tema"
 #: dsourceconsts.sflavailability_numresource
 msgctxt "dsourceconsts.sflavailability_numresource"
 msgid "Number"
-msgstr "Apellido"
+msgstr "Disponibles"
 
 #: dsourceconsts.sflday_idday
 msgctxt "dsourceconsts.sflday_idday"
@@ -69,7 +69,7 @@ msgstr "Recurso"
 #: dsourceconsts.sflparticipant_numresource
 msgctxt "dsourceconsts.sflparticipant_numresource"
 msgid "Number"
-msgstr "Apellido"
+msgstr "Numero"
 
 #: dsourceconsts.sflperiod_idday
 msgctxt "dsourceconsts.sflperiod_idday"
@@ -144,7 +144,7 @@ msgstr "Nombre"
 #: dsourceconsts.sflresource_numresource
 msgctxt "dsourceconsts.sflresource_numresource"
 msgid "Number"
-msgstr "Apellido"
+msgstr "Numero"
 
 #: dsourceconsts.sflrestrictiontype_colrestrictiontype
 msgctxt "dsourceconsts.sflrestrictiontype_colrestrictiontype"
@@ -244,7 +244,7 @@ msgstr "Horario"
 #: dsourceconsts.sfltimetableresource_numresource
 msgctxt "dsourceconsts.sfltimetableresource_numresource"
 msgid "Number"
-msgstr "Apellido"
+msgstr "Numero"
 
 #: dsourceconsts.sfltimetable_idtimetable
 msgctxt "dsourceconsts.sfltimetable_idtimetable"
