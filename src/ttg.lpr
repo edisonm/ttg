@@ -16,21 +16,27 @@ uses
 
 var
   FConfigStorage: TConfigStorage;
-  FConfigFileName, Language: string;
+  FConfigFileName, ExecutableExt, FConfigPath, Language: string;
+  
+const
+  AppBaseName: string = 'ttg';
 
 {$R *.res}
 
 begin
   {$IFDEF UNIX}
-  FConfigFileName := GetEnvironmentVariable('HOME') + '/.ttg.conf';
+  FConfigPath := GetEnvironmentVariable('HOME');
   {$ELSE}
   {$IFDEF WINDOWS}
-  FConfigFileName := GetEnvironmentVariable('HOMEDRIVE')
-    + GetEnvironmentVariable('HOMEPATH') + '\.ttg.conf';
+  FConfigPath := GetEnvironmentVariable('HOMEDRIVE')
+    + GetEnvironmentVariable('HOMEPATH');
+  ExecutableExt = '.exe';
   {$ELSE}
-  FConfigFileName := GetCurrentDir + '/ttg.conf';
+  FConfigPath := GetCurrentDir;
   {$ENDIF}
   {$ENDIF}
+  FConfigFileName := FConfigPath + DirectorySeparator + AppBaseName + '.conf';
+  AppFullPath := GetCurrentDir + DirectorySeparator + AppBaseName + ExecutableExt;
   FConfigStorage := TConfigStorage.Create(Application);
   if FileExists(FConfigFileName) then
   begin

@@ -43,7 +43,7 @@ type
   
 var
   ResourceTranslator: TResourceTranslator;
-
+  AppFullPath: string;
 implementation
 
 uses
@@ -293,71 +293,95 @@ begin
 end;
 
 function GetLocaleFileName(const LangID, LCExt: string): string;
+  {$IFDEF DEBUG}
 var
-  LangShortID: string;
+  Paths: string;
+  {$ENDIF}
   function GetLanguageFileName(const Language, LCExt: string): string;
   begin
-    //ParamStrUTF8(0) is said not to work properly in linux, but I've tested it
-    Result := ExtractFilePath(ParamStrUTF8(0)) + Language +
-      DirectorySeparator + ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), LCExt);
+    Result := ExtractFilePath(AppFullPath) + Language
+      + DirectorySeparator + ChangeFileExt(ExtractFileName(AppFullPath), LCExt);
     if FileExistsUTF8(Result) then
       exit;
-    
-    Result := ExtractFilePath(ParamStrUTF8(0)) + 'languages' + DirectorySeparator + Language +
-      DirectorySeparator + ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), LCExt);
+    {$IFDEF DEBUG}
+    Paths := Paths + #13#10 + Result;
+    {$ENDIF}
+    Result := ExtractFilePath(AppFullPath) + 'languages'
+      + DirectorySeparator + Language + DirectorySeparator
+      + ChangeFileExt(ExtractFileName(AppFullPath), LCExt);
     if FileExistsUTF8(Result) then
       exit;
-    
-    Result := ExtractFilePath(ParamStrUTF8(0)) + 'locale' + DirectorySeparator
-      + Language + DirectorySeparator + ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), LCExt);
+  {$IFDEF DEBUG}
+    Paths := Paths + #13#10 + Result;  {$ENDIF}
+    Result := ExtractFilePath(AppFullPath) + 'locale' + DirectorySeparator
+      + Language + DirectorySeparator
+      + ChangeFileExt(ExtractFileName(AppFullPath), LCExt);
     if FileExistsUTF8(Result) then
       exit;
-    
-    Result := ExtractFilePath(ParamStrUTF8(0)) + 'locale' + DirectorySeparator
-      + Language + DirectorySeparator + 'LC_MESSAGES' + DirectorySeparator +
-      ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), LCExt);
-    
+    {$IFDEF DEBUG}
+    Paths := Paths + #13#10 + Result;
+    {$ENDIF}
+    Result := ExtractFilePath(AppFullPath) + 'locale' + DirectorySeparator
+      + Language + DirectorySeparator + 'LC_MESSAGES' + DirectorySeparator
+      + ChangeFileExt(ExtractFileName(AppFullPath), LCExt);
     if FileExistsUTF8(Result) then
       exit;
+    {$IFDEF DEBUG}
+    Paths := Paths + #13#10 + Result;
+    {$ENDIF}
     {$IFDEF UNIX}
     //In unix-like systems we can try to search for global locale
-    Result := '/usr/share/locale/' + Language + '/LC_MESSAGES/' +
-      ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), LCExt);
-    
+    Result := '/usr/share/locale/' + Language + '/LC_MESSAGES/'
+      + ChangeFileExt(ExtractFileName(AppFullPath), LCExt);
     if FileExistsUTF8(Result) then
       exit;
+    {$IFDEF DEBUG}
+    Paths := Paths + #13#10 + Result;
+    {$ENDIF}
     {$ENDIF}
     //Full language in file name - this will be default for the project
     //We need more careful handling, as it MAY result in incorrect filename
     try
-      Result := ExtractFilePath(ParamStrUTF8(0)) + ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.' + Language) + LCExt;
+      Result := ExtractFilePath(AppFullPath)
+        + ChangeFileExt(ExtractFileName(AppFullPath), '.' + Language) + LCExt;
       if FileExistsUTF8(Result) then
         exit;
-      
-      //Common location (like in Lazarus)
-      Result := ExtractFilePath(ParamStrUTF8(0)) + 'locale' + DirectorySeparator +
-        ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.' + Language) + LCExt;
-      if FileExistsUTF8(Result) then
-        exit;
-
-      Result := 'locale' + DirectorySeparator +
-        ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.' + Language) + LCExt;
       {$IFDEF DEBUG}
-      WriteLn(Result);
+      Paths := Paths + #13#10 + Result;
       {$ENDIF}
+      //Common location (like in Lazarus)
+      Result := ExtractFilePath(AppFullPath) + 'locale' + DirectorySeparator
+        + ChangeFileExt(ExtractFileName(AppFullPath), '.' + Language) + LCExt;
       if FileExistsUTF8(Result) then
         exit;
-      
-      Result := ExtractFilePath(ParamStrUTF8(0)) + 'languages' +
-        DirectorySeparator + ChangeFileExt(ExtractFileName(ParamStrUTF8(0)), '.' + Language) + LCExt;
+      {$IFDEF DEBUG}
+      Paths := Paths + #13#10 + Result;
+      {$ENDIF}
+      Result := 'locale' + DirectorySeparator +
+        ChangeFileExt(ExtractFileName(AppFullPath), '.' + Language) + LCExt;
       if FileExistsUTF8(Result) then
         exit;
+      {$IFDEF DEBUG}
+      Paths := Paths + #13#10 + Result;      
+      {$ENDIF}
+      Result := ExtractFilePath(AppFullPath) + 'languages' + DirectorySeparator
+        + ChangeFileExt(ExtractFileName(AppFullPath), '.' + Language) + LCExt;
+      if FileExistsUTF8(Result) then
+        exit;
+      {$IFDEF DEBUG}
+      Paths := Paths + #13#10 + Result;
+      {$ENDIF}
     except
       Result := '';//Or do something else (useless)
     end;
     Result := '';
   end;
+var
+    LangShortID: string;
 begin
+  {$IFDEF DEBUG}
+  Paths := '';
+  {$ENDIF}
   if LangID <> '' then
   begin
     //Let us search for reducted files
@@ -366,6 +390,13 @@ begin
     begin
       LangShortID := copy(LangID, 1, 2);
       Result := GetLanguageFileName(LangShortID, LCExt);
+      {$IFDEF DEBUG}
+      if Result = '' then
+      begin
+        WriteLn(Format('ERROR: Translation to %s not found. Paths tried:%s',
+                       [LangId, Paths]));
+      end;
+      {$ENDIF}
     end;
   end
   else
@@ -395,7 +426,7 @@ begin
   if Result <> '' then
     exit;
 
-  Result := ChangeFileExt(ParamStrUTF8(0), LCExt);
+  Result := ChangeFileExt(AppFullPath, LCExt);
   if FileExistsUTF8(Result) then
     exit;
 
@@ -450,5 +481,9 @@ begin
   EnableTranslator(ResName, GetDefaultLanguage);
 end;
 
+initialization
+  //ParamStrUTF8(0) is said not to work properly in linux, but I've tested it
+  // A work-around to the bad functioning of ParamStr in current lazarus version:
+  // You can redefine AppFullPath from the outside world
+  AppFullPath := ParamStrUTF8(0);
 end.
-
