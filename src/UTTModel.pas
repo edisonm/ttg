@@ -890,7 +890,6 @@ var
   var
     Theme, Activity, ThemeActivity, Count, Resource, NumResource, Participant,
     Availability: Integer;
-    DoAdd, DoDrop: Boolean;
   begin
     SetLength(FActivityParticipantToResource, FActivityCount);
     SetLength(FTmplActivityParticipantToNumResource, FActivityCount);
@@ -1025,7 +1024,6 @@ var
     SetLength(ResourceToFreePeriods, FResourceCount);
     SetLength(FResourceSorted, FResourceCount);
     SetLength(ResourceToKeySort, FResourceCount);
-    SetLength(s, FResourceCount);
     for Resource := 0 to FResourceCount - 1 do
     begin
       ResourceToFreePeriods[Resource] := 0;
