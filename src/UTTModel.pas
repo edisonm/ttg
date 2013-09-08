@@ -411,6 +411,7 @@ var
     with ZTable do
     begin
       TableName := ATableName;
+      IndexFieldNames := AListName;
       Open;
       Field := FindField(AListName);
       FMinIdList := Field.AsInteger;
@@ -703,8 +704,14 @@ var
         Number := FieldNumResource.AsInteger;
         FActivityToNumResources[Activity, Count] := Number;
         Inc(FTmplActivityResourceTypeToNumber[Activity, FResourceToResourceType[Resource]], Number);
-        WriteLn(Format('Resource=%d(%d), Activity=%d(%d), Participant=%d',
-                       [Resource, FieldResource.AsInteger, Activity, FieldActivity.AsInteger, Count]));
+        {$IFDEF DEBUG}
+        WriteLn(Format('Resource=%d(%d), Activity=%d(%d, %s, %s), Participant=%d ',
+                       [Resource, FResourceToIdResource[Resource],
+                        Activity, FActivityToIdActivity[Activity],
+                        FActivityToName[Activity],
+                        FThemeToName[FActivityToTheme[Activity]],
+                        Participant]));
+        {$ENDIF}
         Next;
       end;
     end;
@@ -1009,7 +1016,6 @@ var
     end;
   var
     FreePeriods: Integer;
-    s: array of string;
     Group, Number, Duration,
       Activity, ResourceActivity,
       Participant, Count, Resource: Integer;
@@ -1023,7 +1029,6 @@ var
     for Resource := 0 to FResourceCount - 1 do
     begin
       ResourceToFreePeriods[Resource] := 0;
-      s[Resource] := '';
     end;
     for Activity := 0 to FActivityCount - 1 do
     begin
@@ -1033,15 +1038,6 @@ var
         Inc(ResourceToFreePeriods[Resource],
             FTmplActivityParticipantToNumResource[Activity, Participant]
             * FThemeToDuration[FActivityToTheme[Activity]]);
-        if FTmplActivityParticipantToNumResource[Activity, Participant] <> 0 then
-        begin
-          s[Resource] := s[Resource] + Format('Resource=%d, Activity=%d, Theme=%d, Participant=%d, Activity(%s-%s)x%d, Duration(%d)'#13#10,
-                                              [Resource, Activity, FActivityToTheme[Activity], Participant,
-                                               FActivityToName[Activity],
-                                               FThemeToName[FActivityToTheme[Activity]],
-                                               FTmplActivityParticipantToNumResource[Activity, Participant],
-                                               FThemeToDuration[FActivityToTheme[Activity]]]);
-        end
       end;
     end;
     for Resource := 0 to FResourceCount - 1 do
@@ -1054,7 +1050,6 @@ var
       begin
         SErrors := SErrors
           + Format('FPeriodCount=%d'#13#10, [FPeriodCount])
-          + s[Resource]
           + Format(SResourceOverflow, [FResourceToName[Resource], Duration, Number]) + #13#10;
       end;
       ResourceToFreePeriods[Resource] := FreePeriods;
