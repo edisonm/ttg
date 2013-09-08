@@ -703,7 +703,8 @@ var
         Number := FieldNumResource.AsInteger;
         FActivityToNumResources[Activity, Count] := Number;
         Inc(FTmplActivityResourceTypeToNumber[Activity, FResourceToResourceType[Resource]], Number);
-        format('Resource=%d, Activity=%d, Participant=%d'#13#10, [Resource, Activity, Count]);
+        WriteLn(Format('Resource=%d(%d), Activity=%d(%d), Participant=%d',
+                       [Resource, FieldResource.AsInteger, Activity, FieldActivity.AsInteger, Count]));
         Next;
       end;
     end;
@@ -881,7 +882,7 @@ var
   procedure FillTemplateData;
   var
     Theme, Activity, ThemeActivity, Count, Resource, NumResource, Participant,
-    Offset, Availability: Integer;
+    Availability: Integer;
     DoAdd, DoDrop: Boolean;
   begin
     SetLength(FActivityParticipantToResource, FActivityCount);
@@ -950,8 +951,8 @@ var
             Inc(Participant);
           end;
         end;
-        SetLength(FActivityParticipantToResource[Activity], Offset);
-        SetLength(FTmplActivityParticipantToNumResource[Activity], Offset);
+        SetLength(FActivityParticipantToResource[Activity], Participant);
+        SetLength(FTmplActivityParticipantToNumResource[Activity], Participant);
       end;
     end;
     SetLength(FResourceToActivities, FResourceCount, 0);
