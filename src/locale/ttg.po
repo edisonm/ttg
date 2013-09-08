@@ -1289,7 +1289,7 @@ msgid "Clash of Resources"
 msgstr ""
 
 #: uttgconsts.scopyright
-msgid "1999-2012 by Edison Mera"
+msgid "1999-2013 by Edison Mera"
 msgstr ""
 
 #: uttgconsts.scount

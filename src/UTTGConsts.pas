@@ -22,7 +22,7 @@ resourcestring
   SClashes = 'Clashes';
   SResourceOverflow = 'For [%s], the number of activities %d exceeds its capacity %d';
   SThemeOverflow = 'For [%s] and the Resources [%s], the limit %d has been exceeded in %d';
-  SCopyright = '1999-2012 by Edison Mera';
+  SCopyright = '1999-2013 by Edison Mera';
   SCount = 'Count';
   SCrossProbability = 'Cross Probability';
   SDay0 = 'Sunday';

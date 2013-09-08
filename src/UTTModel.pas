@@ -703,6 +703,7 @@ var
         Number := FieldNumResource.AsInteger;
         FActivityToNumResources[Activity, Count] := Number;
         Inc(FTmplActivityResourceTypeToNumber[Activity, FResourceToResourceType[Resource]], Number);
+        format('Resource=%d, Activity=%d, Participant=%d'#13#10, [Resource, Activity, Count]);
         Next;
       end;
     end;
@@ -781,7 +782,8 @@ var
     end;
   end;
 var
-  ActivityToNumResources, ResourceToNumResources: TDynamicIntegerArrayArray;
+  ActivityAvailabilityToNumResources,
+  ResourceToNumResources: TDynamicIntegerArrayArray;
   ThemeResourceIsFixed: TDynamicBooleanArrayArray;
   procedure GenerateTemplateData;
   var
@@ -790,12 +792,12 @@ var
     ResourceTypeToNumber: TDynamicIntegerArray;
     ThemeToRemainings: TDynamicIntegerArrayArray;
   begin
-    SetLength(ActivityToNumResources, FActivityCount);
+    SetLength(ActivityAvailabilityToNumResources, FActivityCount);
     SetLength(ThemeToRemainings, FThemeCount);
     SetLength(ThemeResourceIsFixed, FThemeCount);
     for Activity := 0 to FActivityCount - 1 do
     begin
-      SetLength(ActivityToNumResources[Activity],
+      SetLength(ActivityAvailabilityToNumResources[Activity],
                 Length(FThemeToResources[FActivityToTheme[Activity]]));
     end;
     for Theme := 0 to FThemeCount - 1 do
@@ -810,7 +812,7 @@ var
       Theme := FActivityToTheme[Activity];
       for Availability := 0 to High(FThemeToResources[Theme]) do
       begin
-        ActivityToNumResources[Activity, Availability] := 0;
+        ActivityAvailabilityToNumResources[Activity, Availability] := 0;
       end;
     end;
     SetLength(ResourceTypeToNumber, FResourceTypeCount);
@@ -855,7 +857,7 @@ var
             NumAssigned := Min(Remaining, Limit - NumResource);
             Dec(ThemeToRemainings[Theme, Availability], NumAssigned);
             Inc(FTmplActivityResourceTypeToNumber[Activity, ResourceType], NumAssigned);
-            Inc(ActivityToNumResources[Activity, Availability], NumAssigned);
+            Inc(ActivityAvailabilityToNumResources[Activity, Availability], NumAssigned);
           end
         end;
       end;
@@ -865,12 +867,12 @@ var
         Resource := FThemeToResources[Theme, Availability];
         ResourceType := FResourceToResourceType[Resource];
         Limit := FThemeToLimits[Theme, Availability];
-        if Remaining <> 0 then // Sanity Check
+        if Remaining < 0 then // Sanity Check
         begin
           SErrors := SErrors
             + Format(SThemeOverflow,
                      [FThemeToName[Theme],
-                      FResourceTypeToName[ResourceType] + ' (for example ' + FResourceToName[Resource] + ')',
+                      FResourceTypeToName[ResourceType] + ' (' + FResourceToName[Resource] + ')',
                       Limit, Remaining]) + #13#10;
         end;
       end;
@@ -892,7 +894,7 @@ var
                 + Length(FThemeToResources[FActivityToTheme[Activity]]));
       SetLength(FTmplActivityParticipantToNumResource[Activity],
                 Length(FActivityToResources[Activity])
-                + Length(ActivityToNumResources[Activity]));
+                + Length(FThemeToResources[FActivityToTheme[Activity]]));
       for Participant := 0 to High(FActivityToResources[Activity]) do
       begin
         FActivityParticipantToResource[Activity, Participant]
@@ -908,54 +910,44 @@ var
       begin
         if ThemeResourceIsFixed[Theme, Availability] then
         begin
-          DoAdd := True;
-          DoDrop := True;
           Resource := FThemeToResources[Theme, Availability];
           for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
           begin
             Activity := FThemeToActivities[Theme, ThemeActivity];
-            if ActivityToNumResources[Activity, Availability] <> 0 then
-              DoDrop := False;
             Participant := TIntegerArrayHandler.IndexOf(FActivityToResources[Activity], Resource);
-            if Participant < 0 then
-              DoAdd := False;
-          end;
-          if not DoDrop then
-          begin
-            if DoAdd then
-              for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
+            if ActivityAvailabilityToNumResources[Activity, Availability] <> 0 then
+            begin
+              if Participant >= 0 then
               begin
-                Activity := FThemeToActivities[Theme, ThemeActivity];
-                Participant := TIntegerArrayHandler.IndexOf(FActivityToResources[Activity], Resource);
                 Inc(FTmplActivityParticipantToNumResource[Activity, Participant],
-                    ActivityToNumResources[Activity, Availability]);
+                    ActivityAvailabilityToNumResources[Activity, Availability]);
               end
-            else
-              for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
+              else
               begin
-                Activity := FThemeToActivities[Theme, ThemeActivity];
-                FActivityParticipantToResource[Activity, FActivityToNumFixeds[Activity]]
+                Participant := FActivityToNumFixeds[Activity];
+                FActivityParticipantToResource[Activity, Participant]
                   := FThemeToResources[Theme, Availability];
-                FTmplActivityParticipantToNumResource[Activity, FActivityToNumFixeds[Activity]]
-                  := ActivityToNumResources[Activity, Availability];
+                FTmplActivityParticipantToNumResource[Activity, Participant]
+                  := ActivityAvailabilityToNumResources[Activity, Availability];
                 Inc(FActivityToNumFixeds[Activity]);
               end;
+            end;
           end;
         end;
       end;
       for ThemeActivity := 0 to High(FThemeToActivities[Theme]) do
       begin
         Activity := FThemeToActivities[Theme, ThemeActivity];
-        Offset := FActivityToNumFixeds[Activity];
+        Participant := FActivityToNumFixeds[Activity];
         for Availability := 0 to High(FThemeToResources[Theme]) do
         begin
           if not ThemeResourceIsFixed[Theme, Availability] then
           begin
-            FActivityParticipantToResource[Activity, Offset]
+            FActivityParticipantToResource[Activity, Participant]
               := FThemeToResources[Theme, Availability];
-            FTmplActivityParticipantToNumResource[Activity, Offset] :=
-              ActivityToNumResources[Activity, Availability];
-            Inc(Offset);
+            FTmplActivityParticipantToNumResource[Activity, Participant] :=
+              ActivityAvailabilityToNumResources[Activity, Availability];
+            Inc(Participant);
           end;
         end;
         SetLength(FActivityParticipantToResource[Activity], Offset);
@@ -1016,6 +1008,7 @@ var
     end;
   var
     FreePeriods: Integer;
+    s: array of string;
     Group, Number, Duration,
       Activity, ResourceActivity,
       Participant, Count, Resource: Integer;
@@ -1025,9 +1018,11 @@ var
     SetLength(ResourceToFreePeriods, FResourceCount);
     SetLength(FResourceSorted, FResourceCount);
     SetLength(ResourceToKeySort, FResourceCount);
+    SetLength(s, FResourceCount);
     for Resource := 0 to FResourceCount - 1 do
     begin
       ResourceToFreePeriods[Resource] := 0;
+      s[Resource] := '';
     end;
     for Activity := 0 to FActivityCount - 1 do
     begin
@@ -1037,7 +1032,15 @@ var
         Inc(ResourceToFreePeriods[Resource],
             FTmplActivityParticipantToNumResource[Activity, Participant]
             * FThemeToDuration[FActivityToTheme[Activity]]);
-        
+        if FTmplActivityParticipantToNumResource[Activity, Participant] <> 0 then
+        begin
+          s[Resource] := s[Resource] + Format('Resource=%d, Activity=%d, Theme=%d, Participant=%d, Activity(%s-%s)x%d, Duration(%d)'#13#10,
+                                              [Resource, Activity, FActivityToTheme[Activity], Participant,
+                                               FActivityToName[Activity],
+                                               FThemeToName[FActivityToTheme[Activity]],
+                                               FTmplActivityParticipantToNumResource[Activity, Participant],
+                                               FThemeToDuration[FActivityToTheme[Activity]]]);
+        end
       end;
     end;
     for Resource := 0 to FResourceCount - 1 do
@@ -1050,6 +1053,7 @@ var
       begin
         SErrors := SErrors
           + Format('FPeriodCount=%d'#13#10, [FPeriodCount])
+          + s[Resource]
           + Format(SResourceOverflow, [FResourceToName[Resource], Duration, Number]) + #13#10;
       end;
       ResourceToFreePeriods[Resource] := FreePeriods;

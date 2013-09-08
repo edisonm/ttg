@@ -430,7 +430,7 @@ begin
   end;
   {$IFDEF DEBUG}
   if Result = '' then
-    WriteLn(Format('ERROR: Translation to %s not found.%s', [Lang]))
+    WriteLn(Format('ERROR: Translation to %s not found.', [Lang]))
   else
     WriteLn(Format('Note: Translation to %s found in %s.', [Lang, Result]));
   WriteLn('Paths tried:' + Paths);

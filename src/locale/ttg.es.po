@@ -1289,8 +1289,8 @@ msgid "Clash of Resources"
 msgstr "Cruce de Recursos"
 
 #: uttgconsts.scopyright
-msgid "1999-2012 by Edison Mera"
-msgstr "1999-2012 by Edison Mera"
+msgid "1999-2013 by Edison Mera"
+msgstr "1999-2013 by Edison Mera"
 
 #: uttgconsts.scount
 msgid "Count"
