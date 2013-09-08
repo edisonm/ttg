@@ -1,7 +1,7 @@
 inherited DBExplorerForm: TDBExplorerForm
-  Left = 433
+  Left = 856
   Height = 762
-  Top = 202
+  Top = 251
   Width = 797
   Caption = 'Database Explorer'
   ClientHeight = 762
@@ -23,14 +23,14 @@ inherited DBExplorerForm: TDBExplorerForm
     end
   end
   inherited PnEditor: TPanel
-    Height = 713
+    Height = 718
     Width = 797
     Anchors = [akTop, akLeft]
-    ClientHeight = 713
+    ClientHeight = 718
     ClientWidth = 797
     inherited GroupBox: TGroupBox
       Height = 305
-      Top = 407
+      Top = 412
       Width = 795
       Align = alBottom
       Caption = 'Browse DataSet'
@@ -186,17 +186,9 @@ inherited DBExplorerForm: TDBExplorerForm
           ParentColor = False
           ParentFont = False
           TabOrder = 2
-          Gutter.Width = 24
-          Gutter.MouseActions = <          
-            item
-              ClickCount = ccAny
-              ClickDir = cdDown
-              Command = emcOnMainGutterClick
-            end          
-            item
-              Button = mbRight
-              Command = emcContextMenu
-            end>
+          Gutter.Width = 55
+          Gutter.MouseActions = <>
+          Highlighter = SynSQLSyn1
           Keystrokes = <          
             item
               Command = ecUp
@@ -618,98 +610,145 @@ inherited DBExplorerForm: TDBExplorerForm
               Command = ecColSelEditorBottom
               ShortCut = 57379
             end>
-          MouseActions = <          
-            item
-              ShiftMask = [ssShift, ssAlt]
-              ClickDir = cdDown
-              Command = emcStartSelections
-              MoveCaret = True
-            end          
-            item
-              Shift = [ssShift]
-              ShiftMask = [ssShift, ssAlt]
-              ClickDir = cdDown
-              Command = emcStartSelections
-              MoveCaret = True
-              Option = 1
-            end          
-            item
-              Shift = [ssAlt]
-              ShiftMask = [ssShift, ssAlt]
-              ClickDir = cdDown
-              Command = emcStartColumnSelections
-              MoveCaret = True
-            end          
-            item
-              Shift = [ssShift, ssAlt]
-              ShiftMask = [ssShift, ssAlt]
-              ClickDir = cdDown
-              Command = emcStartColumnSelections
-              MoveCaret = True
-              Option = 1
-            end          
-            item
-              Button = mbRight
-              Command = emcContextMenu
-            end          
-            item
-              ClickCount = ccDouble
-              ClickDir = cdDown
-              Command = emcSelectWord
-              MoveCaret = True
-            end          
-            item
-              ClickCount = ccTriple
-              ClickDir = cdDown
-              Command = emcSelectLine
-              MoveCaret = True
-            end          
-            item
-              ClickCount = ccQuad
-              ClickDir = cdDown
-              Command = emcSelectPara
-              MoveCaret = True
-            end          
-            item
-              Button = mbMiddle
-              ClickDir = cdDown
-              Command = emcPasteSelection
-              MoveCaret = True
-            end          
-            item
-              Shift = [ssCtrl]
-              ShiftMask = [ssShift, ssAlt, ssCtrl]
-              Command = emcMouseLink
-            end>
-          MouseSelActions = <          
-            item
-              ClickDir = cdDown
-              Command = emcStartDragMove
-            end>
+          MouseActions = <>
+          MouseSelActions = <>
           ScrollBars = ssAutoBoth
           inline SynLeftGutterPartList1: TSynGutterPartList
             object SynGutterMarks1: TSynGutterMarks
               Width = 24
               MouseActions = <>
             end
+            object SynGutterLineNumber1: TSynGutterLineNumber
+              Width = 15
+              MouseActions = <>
+              MarkupInfo.Background = clBtnFace
+              MarkupInfo.Foreground = clNone
+              DigitCount = 2
+              ShowOnlyLineNumbersMultiplesOf = 1
+              ZeroStart = False
+              LeadingZeros = False
+            end
+            object SynGutterChanges1: TSynGutterChanges
+              Width = 4
+              MouseActions = <>
+              ModifiedColor = 59900
+              SavedColor = clGreen
+            end
+            object SynGutterSeparator1: TSynGutterSeparator
+              Width = 2
+              MouseActions = <>
+            end
+            object SynGutterCodeFolding1: TSynGutterCodeFolding
+              MouseActions = <>
+              MarkupInfo.Background = clNone
+              MarkupInfo.Foreground = clGray
+              MouseActionsExpanded = <>
+              MouseActionsCollapsed = <>
+            end
           end
         end
       end
     end
+    object Splitter1: TSplitter[2]
+      Cursor = crVSplit
+      Left = 1
+      Height = 5
+      Top = 407
+      Width = 795
+      Align = alBottom
+      ResizeAnchor = akBottom
+    end
   end
-  object Splitter1: TSplitter[3]
-    Cursor = crVSplit
-    Left = 0
-    Height = 5
-    Top = 738
-    Width = 797
-    Align = alBottom
-    ResizeAnchor = akBottom
+  inherited ImageList: TImageList
+    left = 48
+    top = 280
   end
-  inherited ImageList: TImageList[4]
+  inherited ActionList: TActionList
+    left = 368
+    top = 336
   end
-  inherited ActionList: TActionList[5]
+  inherited DataSource: TDatasource
+    left = 139
+    top = 336
   end
-  inherited DataSource: TDatasource[6]
+  object ZTable1: TZTable[6]
+    Connection = SourceDataModule.DbZConnection
+    left = 48
+    top = 400
   end
-end
+  object ZSQLMetadata1: TZSQLMetadata[7]
+    Connection = SourceDataModule.DbZConnection
+    MetadataType = mdProcedures
+    left = 488
+    top = 280
+  end
+  object ZQuery1: TZQuery[8]
+    Connection = SourceDataModule.DbZConnection
+    Params = <>
+    left = 488
+    top = 336
+  end
+  object SaveResults: TSaveDialog[9]
+    DefaultExt = '.csv'
+    Filter = 'Comma delimited file (*.csv)|*.csv'
+    left = 368
+    top = 280
+  end
+  object DSTables: TDatasource[10]
+    DataSet = ZTables
+    left = 48
+    top = 336
+  end
+  object OpenScript: TOpenDialog[11]
+    DefaultExt = '.sql'
+    Filter = 'SQL Script (*.sql)|*.sql'
+    left = 139
+    top = 280
+  end
+  object SaveScript: TSaveDialog[12]
+    DefaultExt = '.sql'
+    Filter = 'SQL Script (*.sql)|*.sql'
+    left = 248
+    top = 280
+  end
+  object ZTables: TZQuery[13]
+    Connection = SourceDataModule.DbZConnection
+    SQL.Strings = (
+      'SELECT trim(name) as Name FROM sqlite_master'
+      'WHERE type=''table'''
+      'ORDER BY name;'
+    )
+    Params = <>
+    left = 248
+    top = 336
+  end
+  object SynSQLSyn1: TSynSQLSyn[14]
+    DefaultFilter = 'SQL Files (*.sql)|*.sql'
+    Enabled = False
+    CommentAttri.Foreground = clGray
+    CommentAttri.FrameEdges = sfeAround
+    DataTypeAttri.Foreground = clTeal
+    DataTypeAttri.FrameEdges = sfeAround
+    DefaultPackageAttri.FrameEdges = sfeAround
+    ExceptionAttri.FrameEdges = sfeAround
+    FunctionAttri.FrameEdges = sfeAround
+    IdentifierAttri.FrameEdges = sfeAround
+    KeyAttri.FrameEdges = sfeAround
+    NumberAttri.Foreground = clPurple
+    NumberAttri.FrameEdges = sfeAround
+    PLSQLAttri.FrameEdges = sfeAround
+    SpaceAttri.FrameEdges = sfeAround
+    SQLPlusAttri.FrameEdges = sfeAround
+    StringAttri.Foreground = clBlue
+    StringAttri.FrameEdges = sfeAround
+    SymbolAttri.Foreground = clRed
+    SymbolAttri.FrameEdges = sfeAround
+    TableNameAttri.Foreground = clBlue
+    TableNameAttri.FrameEdges = sfeAround
+    TableNameAttri.Style = [fsBold]
+    VariableAttri.FrameEdges = sfeAround
+    SQLDialect = sqlStandard
+    left = 144
+    top = 400
+  end
+end
