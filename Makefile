@@ -28,7 +28,7 @@ endif
 $(BUILDMODES):
 	cd $(PKGSRC) ; $(MAKE) BuildMode=$@ ;
 
-run ex1 ex2 ex3 ex4 ide clean:
+run ex1 ex2 ex3 ex4 ex5 ide clean:
 	cd $(TTGSRC) ; $(MAKE) $@
 
 $(TTGSQLITE3): $(TTGSQL)

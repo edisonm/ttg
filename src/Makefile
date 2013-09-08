@@ -98,5 +98,8 @@ ex3:
 ex4:
 	$(TTGEXE) $(RELDIR)/examples/original/Salamanca1999.ttd
 
+ex5:
+	$(TTGEXE) $(RELDIR)/examples/Herradura2013.ttd
+
 ide:
 	$(LAZIDE) ttg.lpi &
