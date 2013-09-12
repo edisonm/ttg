@@ -12,7 +12,7 @@ uses
   DMaster in 'DMaster.pas' {MasterDataModule: TDataModule},
   FSplash {SplashForm},
   DSource in 'DSource.pas' {SourceDataModule: TDataModule},
-  UConfigStorage, UAbout, UTTGi18n, zcomponent, UProgress;
+  UConfigStorage, UTTGi18n, zcomponent, UProgress, UAbout;
 
 var
   FConfigStorage: TConfigStorage;
@@ -30,7 +30,7 @@ begin
   {$IFDEF WINDOWS}
   FConfigPath := GetEnvironmentVariable('HOMEDRIVE')
     + GetEnvironmentVariable('HOMEPATH');
-  ExecutableExt = '.exe';
+  ExecutableExt := '.exe';
   {$ELSE}
   FConfigPath := GetCurrentDir;
   {$ENDIF}

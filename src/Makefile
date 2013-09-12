@@ -43,6 +43,7 @@ $(ABOUT).pas: $(ABOUT).pas.tmpl
 	  -e s:'@Revision@':'$(BuildNr)':g \
 	  -e s:'@BuildDateTime@':"$(BUILDDATETIME)":g \
 	  -e s:'@Copyright@':'$(Copyright)':g \
+	  -e s:'@BuildId@':'$(BuildId)':g \
 	  -e s:'@AppName@':'$(APPNAME)':g $< > $(OBJDIR)/$@
 
 buildnr:

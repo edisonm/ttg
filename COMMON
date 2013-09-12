@@ -24,8 +24,11 @@ PKGBASE=$(TGZBASE)$(BuildLabel)_$(ARCH)
 PKGDIR=$(TTGDIR)/../debianization/packages
 
 ifeq ($(shell uname -o),Cygwin)
+# LAZBASE=/cygdrive/c/lazarus64
+# FPC=$(LAZBASE)/fpc/2.6.2/bin/x86_64-win64/fpc
+# EXEEXT=.exe
 LAZBASE=/cygdrive/c/lazarus32
-FPC=$(LAZBASE)/fpc/2.6.0/bin/i386-win32/fpc
+FPC=$(LAZBASE)/fpc/2.6.2/bin/i386-win32/fpc
 EXEEXT=.exe
 else
 LAZBASE=/home/edison/apps/pascal/lazarus
