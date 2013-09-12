@@ -1,4 +1,4 @@
-                Automatic Timetable Generator 1.2.1
+                Automatic Timetable Generator 2.1.1
                 ===================================
                  (c) Copyright 2013 by Edison Mera
 
