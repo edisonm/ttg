@@ -371,6 +371,10 @@ var
           ChangeFileExt(ExtractFileName(AppFullPath), '.' + Language) + LCExt;
         if FileExistsUTF8(Result) then
           exit;
+        Result := '..' + DirectorySeparator + 'locale' + DirectorySeparator +
+          ChangeFileExt(ExtractFileName(AppFullPath), '.' + Language) + LCExt;
+        if FileExistsUTF8(Result) then
+          exit;
         {$IFDEF DEBUG}
         Paths := Paths + #13#10 + Result;      
         {$ENDIF}
