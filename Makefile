@@ -62,6 +62,9 @@ install:
 winsetup:
 	cd iss ; $(MAKE) all
 
+runsetup:
+	cd iss ; $(MAKE) run
+
 ci:
 	$(MAKE) buildnr
 	svn ci -m MSG="$(MSG)"
@@ -69,3 +72,4 @@ ci:
 test:
 	@echo TTGDIR=$(TTGDIR)
 	@echo APPNAME=$(APPNAME)
+	cd $(TTGSRC) ; $(MAKE) test

@@ -42,4 +42,5 @@ test:
 clean:
 	$(RM) $(ISS) $(PKG)
 
-
+run:
+	$(PKG)
