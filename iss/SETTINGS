@@ -4,8 +4,7 @@ TTGSRC=../src
 
 include $(TTGSRC)/COMMON
 
-ARCH=$(TargetCPU)
-PKG=$(PKGDIR)/$(PKGBASE).exe
+PKG=$(PKGDIR)/$(PKGBASE)$(EXEEXT)
 FILES=$(PKG)
 
 INNOIDE="$(PROGRAMFILES)/Inno Setup 5/ISCC.exe"
