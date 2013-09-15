@@ -35,6 +35,7 @@ ReserveBytes=4096
 UseSetupLdr=1
 SourceDir=.
 OutputDir=..\..\..\debianization\packages
+ArchitecturesInstallIn64BitMode=@IssArch@
 
 [Dirs]
 Name: {app}\hlp
@@ -49,7 +50,7 @@ Source: ..\..\src\locale\ttg.es.mo; DestDir: {app}\bin\locale\; DestName: ttg.es
 ;Source: ..\..\hlp\ttg.cnt; DestDir: {app}\hlp\; DestName: ttg.cnt
 ;Source: ..\..\hlp\ttg.hlp; DestDir: {app}\hlp\; DestName: ttg.hlp
 ;Source: ..\..\doc\ttg.doc; DestDir: {app}\doc\; DestName: ttg.doc
-Source: ..\..\..\sqlite3\sqlite3.dll; DestDir: {sys}; DestName: sqlite3.dll
+Source: ..\..\..\sqlite3\sqlite3-@TargetOS@.dll; DestDir: {sys}; DestName: sqlite3.dll
 Source: ..\..\examples\Herradura2013.ttd; DestDir: {app}\examples\; DestName: Herradura2013.ttd
 Source: ..\..\examples\Britanico2000.ttd; DestDir: {app}\examples\; DestName: Britanico2000.ttd
 Source: ..\..\examples\Salamanca1999.ttd; DestDir: {app}\examples\; DestName: Salamanca1999.ttd
@@ -72,4 +73,4 @@ Root: HKCU; SubKey: Software\TTG; ValueType: none; Flags: uninsdeletekey
 [UninstallRun]
 
 [Languages]
-Name: default; MessagesFile: @ProgramFiles@\Inno Setup 5\Languages\Spanish.isl
+Name: default; MessagesFile: @ProgramFiles32@\Inno Setup 5\Languages\Spanish.isl

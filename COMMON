@@ -5,8 +5,6 @@ ifneq ($(BuildMode),release)
 BuildLabel=-$(BuildMode)
 endif
 
-ARCH=$(TargetCPU)
-
 Package=ttg
 
 MajorVersionNr=$(shell grep "^ *<MajorVersionNr Value=\"[0-9]*\"/>" $(TTGSRC)/ttg.lpi|sed -e s:"^ *<MajorVersionNr Value=\"\([0-9]*\)\"/>":"\1":g)
@@ -19,28 +17,38 @@ BaseVersion=$(MajorVersionNr).$(MinorVersionNr).$(RevisionNr)
 AppVersion=$(Package)-$(BaseVersion)
 Version=$(BaseVersion).$(BuildNr)
 
-REPOSITORY=svn+ssh://mntedison/home/edison/LocalReps/ttg/trunk/
 # PACKAGING RELATED:
 TGZBASE=$(Package)_$(Version)
 TGZSRC=$(Package)-$(Version)
-PKGBASE=$(TGZBASE)$(BuildLabel)_$(ARCH)
 PKGDIR=$(TTGDIR)/../debianization/packages
 
 ifeq ($(shell uname -o),Cygwin)
-# LAZBASE=/cygdrive/c/lazarus64
-# FPC=$(LAZBASE)/fpc/2.6.2/bin/x86_64-win64/fpc
-# EXEEXT=.exe
-LAZBASE=/cygdrive/c/lazarus32
-FPC=$(LAZBASE)/fpc/2.6.2/bin/i386-win32/fpc
+
+MARCH=$(shell uname -m)
+ifeq ($(MARCH),i686)
+OSBITS=32
+ARCH=i386
+else
+ifeq ($(MARCH),x86_64)
+OSBITS=64
+ARCH=$(MARCH)
+endif
+endif
+
+LAZBASE=/cygdrive/c/lazarus$(OSBITS)
+FPC=$(LAZBASE)/fpc/2.6.2/bin/$(ARCH)-win$(OSBITS)/fpc
 EXEEXT=.exe
 else
 LAZBASE=/usr/share/lazarus/1.0.12
 FPC=fpc
 EXEEXT=
+ARCH=$(TargetCPU)
 endif
+
 TargetCPU=$(shell $(FPC) -iSP)
 TargetOS=$(shell $(FPC) -iSO)
-BuildId=$(TargetCPU)-$(TargetOS)$(BuildLabel)
+TargetSYS=$(TargetCPU)-$(TargetOS)
+BuildId=$(TargetSYS)$(BuildLabel)
 TTGEXE=$(TTGDIR)/bin/$(BuildId)/$(Package)$(EXEEXT)
 
 DBCONVERTDIR=$(RELDIR)/../DBConvert

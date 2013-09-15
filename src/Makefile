@@ -63,7 +63,9 @@ $(TTGEXE): $(BASELAZFILES) $(TTGLPR) ttg.lrs ttg.inc Makefile SETTINGS COMMON
 	$(LAZBUILD) --build-mode=$(BuildMode) ttg.lpi
 ifneq ($(BuildMode),debug)
 	strip --strip-all $(TTGEXE)
+ifneq ($(TargetSYS),x86_64-win64)
 	upx $(TTGEXE)
+endif
 endif
 
 cleanthis:

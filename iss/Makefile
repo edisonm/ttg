@@ -12,17 +12,25 @@ endif
 
 all:
 	$(MAKE) ttg
-	$(MAKE) $(FILES)
+	$(MAKE) pkg
 
 catalog:
 
-$(PKG): ttg.iss.tmpl
-	sed -e s:'@Revision@':'$(BuildNr)':g \
-	  -e s:'@BaseVersion@':'$(BaseVersion)':g \
-	  -e s:'@AppName@':'$(APPNAME)':g \
-	  -e s/'@ProgramFiles@'/'$(PROGRAMFILES)'/g \
-	  -e s/'@Copyright@'/'$(Copyright)'/g \
-	  -e s:'@PkgBase@':'$(PKGBASE)':g \
+ifeq ($(ARCH),x86_64)
+IssArch=x64
+else
+IssArch=
+endif
+
+pkg $(PKG): ttg.iss.tmpl
+	sed -e s:'@Revision@':'$(BuildNr)':g            \
+	  -e s:'@BaseVersion@':'$(BaseVersion)':g       \
+	  -e s:'@AppName@':'$(APPNAME)':g               \
+	  -e s/'@ProgramFiles32@'/'$(PROGRAMFILES32)'/g \
+	  -e s/'@Copyright@'/'$(Copyright)'/g           \
+	  -e s:'@PkgBase@':'$(PkgBase)':g               \
+	  -e s:'@IssArch@':'$(IssArch)':g               \
+	  -e s:'@TargetOS@':'$(TargetOS)':g             \
 	  -e s:'@BuildId@':'$(BuildId)':g ttg.iss.tmpl > $(ISS)
 	mkdir -p $(PKGDIR)
 	$(INNOIDE) $(ISSWIN)

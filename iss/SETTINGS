@@ -4,10 +4,15 @@ TTGSRC=../src
 
 include $(TTGSRC)/COMMON
 
-PKG=$(PKGDIR)/$(PKGBASE)$(EXEEXT)
+PkgBase=$(TGZBASE)$(BuildLabel)_$(TargetOS)
+PKG=$(PKGDIR)/$(PkgBase)$(EXEEXT)
 FILES=$(PKG)
-
-INNOIDE="$(PROGRAMFILES)/Inno Setup 5/ISCC.exe"
+ifeq ($(TargetOS),win32)
+PROGRAMFILES32=$(PROGRAMFILES)
+else
+PROGRAMFILES32=$(PROGRAMFILES) (x86)
+endif
+INNOIDE="$(PROGRAMFILES32)/Inno Setup 5/ISCC.exe"
 ISSTMPL=$(TTGDIR)/src/iss/ttg.iss.tmpl
 ISS=$(OBJDIR)/ttg.iss
 ISSWIN='$(shell cygpath -w $(ISS))'

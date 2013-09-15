@@ -75,4 +75,6 @@ ci:
 test:
 	@echo TTGDIR=$(TTGDIR)
 	@echo APPNAME=$(APPNAME)
+	@echo ARCH=$(ARCH)
+	@echo OSBITS=$(OSBITS)
 	cd $(TTGSRC) ; $(MAKE) test
