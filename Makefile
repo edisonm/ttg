@@ -55,7 +55,10 @@ install:
 	mkdir -p $(DESTDIR)/usr/share/locale/es/LC_MESSAGES
 	mkdir -p $(DESTDIR)/usr/share/applications
 	cp $(TTGEXE) $(DESTDIR)/usr/bin/
-	cp $(TTGDIR)/examples/Britanico2000.ttd $(TTGDIR)/examples/Salamanca1999.ttd  $(DESTDIR)/usr/share/doc/$(Package)/examples/
+	cp $(TTGDIR)/examples/Herradura2013.ttd \
+	   $(TTGDIR)/examples/Britanico2000.ttd \
+	   $(TTGDIR)/examples/Salamanca1999.ttd \
+	   $(DESTDIR)/usr/share/doc/$(Package)/examples/
 	cp $(TTGSRC)/locale/ttg.es.mo $(DESTDIR)/usr/share/locale/es/LC_MESSAGES/ttg.mo
 	sed -e s:'<v>AppName</v>':'$(APPNAME)':g ttg_desktop.tmpl > $(DESTDIR)/usr/share/applications/ttg.desktop
 
