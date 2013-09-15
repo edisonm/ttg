@@ -34,7 +34,7 @@ LAZBASE=/cygdrive/c/lazarus32
 FPC=$(LAZBASE)/fpc/2.6.2/bin/i386-win32/fpc
 EXEEXT=.exe
 else
-LAZBASE=/home/edison/apps/pascal/lazarus
+LAZBASE=/usr/share/lazarus/1.0.12
 FPC=fpc
 EXEEXT=
 endif
