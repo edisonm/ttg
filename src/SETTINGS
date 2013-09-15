@@ -14,14 +14,14 @@ ABOUT=UAbout
 
 ifeq ($(shell uname -o),Cygwin)
 LAZBUILD?=$(LAZBASE)/lazbuild
-LAZRES?=$(LAZBASE)/tools/lazres
 LAZIDE?=$(LAZBASE)/lazarus
 else
 LAZBUILD?=lazbuild
 # --ws=qt
-LAZRES?=lazres
 LAZIDE?=lazarus-ide
 endif
+
+LAZRES?=$(LAZBASE)/tools/lazres
 
 TTGSQL=$(RELDIR)/dat/ttg.sql
 
