@@ -191,6 +191,11 @@ msgctxt "dsourceconsts.sfltheme_composition"
 msgid "Composition"
 msgstr "Composicion"
 
+#: dsourceconsts.sfltheme_duration
+msgctxt "dsourceconsts.sfltheme_duration"
+msgid "Duration"
+msgstr "Duracion"
+
 #: dsourceconsts.sfltheme_idtheme
 msgctxt "dsourceconsts.sfltheme_idtheme"
 msgid "Id"

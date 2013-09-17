@@ -25,6 +25,7 @@ LAZRES?=$(LAZBASE)/tools/lazres
 
 TTGSQL=$(RELDIR)/dat/ttg.sql
 
-FILES=$(TTGEXE) locale/ttg.es.mo
+FILES=$(TTGEXE)
+# FILES=$(TTGEXE) locale/ttg.es.mo
 
 TTGLPR=ttg.lpr

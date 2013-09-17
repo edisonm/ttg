@@ -59,7 +59,7 @@ install:
 	   $(TTGDIR)/examples/Britanico2000.ttd \
 	   $(TTGDIR)/examples/Salamanca1999.ttd \
 	   $(DESTDIR)/usr/share/doc/$(Package)/examples/
-	cp $(TTGSRC)/locale/ttg.es.mo $(DESTDIR)/usr/share/locale/es/LC_MESSAGES/ttg.mo
+	cp $(TTGSRC)/locale/ttg.es.po $(DESTDIR)/usr/share/locale/es/LC_MESSAGES/ttg.po
 	sed -e s:'<v>AppName</v>':'$(APPNAME)':g ttg_desktop.tmpl > $(DESTDIR)/usr/share/applications/ttg.desktop
 
 winsetup:

@@ -29,6 +29,7 @@ resourcestring
   SFlTheme_IdTheme = 'Id';
   SFlTheme_NaTheme = 'Name';
   SFlTheme_Composition = 'Composition';
+  SFlTheme_Duration = 'Duration';
   SFlResourceType_IdResourceType = 'Id';
   SFlResourceType_NaResourceType = 'Name';
   SFlResourceType_NumResourceLimit = 'Resource Limit';

@@ -173,6 +173,7 @@ begin
     PrepareDataSetFields(TbActivity);
     FindField('IdActivity').Visible := False;
     FindField('IdTheme').Visible := False;
+    FindField('NaActivity').DisplayLabel := SFlActivity_NaActivity;
     Open;
   end;
   PrepareDataSetFields(QuAvailability);
@@ -208,6 +209,7 @@ begin
     FieldKind := fkCalculated;
     DisplayWidth := 5;
     FieldName := 'Duration';
+    DisplayLabel := SFlTheme_Duration;
     DataSet := TbTheme;
   end;
   with TbTheme do
