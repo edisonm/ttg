@@ -33,7 +33,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="../../zeosdbo/packages/lazarus;../../zeosdbo/src/core;../../zeosdbo/src/dbc;../../zeosdbo/src/parsesql;../../zeosdbo/src/plain;../../zeosdbo/src/component;../../multithreadprocs;../obj/$(TargetCPU)-$(TargetOS)"/>
+            <OtherUnitFiles Value="../../zeoslib/packages/lazarus;../../zeoslib/src/core;../../zeoslib/src/dbc;../../zeoslib/src/parsesql;../../zeoslib/src/plain;../../zeoslib/src/component;../../multithreadprocs;../obj/$(TargetCPU)-$(TargetOS)"/>
             <UnitOutputDirectory Value="../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -320,7 +320,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="../../zeosdbo/packages/lazarus;../../zeosdbo/src/core;../../zeosdbo/src/dbc;../../zeosdbo/src/parsesql;../../zeosdbo/src/plain;../../zeosdbo/src/component;../../multithreadprocs;../obj/$(TargetCPU)-$(TargetOS)-debug"/>
+      <OtherUnitFiles Value="../../zeoslib/packages/lazarus;../../zeoslib/src/core;../../zeoslib/src/dbc;../../zeoslib/src/parsesql;../../zeoslib/src/plain;../../zeoslib/src/component;../../multithreadprocs;../obj/$(TargetCPU)-$(TargetOS)-debug"/>
       <UnitOutputDirectory Value="../obj/$(TargetCPU)-$(TargetOS)-debug"/>
     </SearchPaths>
     <CodeGeneration>
