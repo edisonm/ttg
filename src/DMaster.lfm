@@ -16,7 +16,7 @@ object MasterDataModule: TMasterDataModule
       'Timetable1.IdTimetable is NULL'
     )
     Params = <>
-    left = 250
-    top = 120
+    Left = 250
+    Top = 120
   end
 end

@@ -4,7 +4,7 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 #: dsourceconsts.sflactivity_idactivity
 msgctxt "dsourceconsts.sflactivity_idactivity"
 msgid "Id"
-msgstr "Codigo"
+msgstr "Código"
 
 #: dsourceconsts.sflactivity_idtheme
 msgctxt "dsourceconsts.sflactivity_idtheme"
@@ -34,7 +34,7 @@ msgstr "Disponibles"
 #: dsourceconsts.sflday_idday
 msgctxt "dsourceconsts.sflday_idday"
 msgid "Id"
-msgstr "Codigo"
+msgstr "Código"
 
 #: dsourceconsts.sflday_naday
 msgctxt "dsourceconsts.sflday_naday"
@@ -44,7 +44,7 @@ msgstr "Nombre"
 #: dsourceconsts.sflhour_idhour
 msgctxt "dsourceconsts.sflhour_idhour"
 msgid "Id"
-msgstr "Codigo"
+msgstr "Código"
 
 #: dsourceconsts.sflhour_interval
 msgctxt "dsourceconsts.sflhour_interval"
@@ -69,17 +69,17 @@ msgstr "Recurso"
 #: dsourceconsts.sflparticipant_numresource
 msgctxt "dsourceconsts.sflparticipant_numresource"
 msgid "Number"
-msgstr "Numero"
+msgstr "Número"
 
 #: dsourceconsts.sflperiod_idday
 msgctxt "dsourceconsts.sflperiod_idday"
 msgid "Day"
-msgstr "Day"
+msgstr "Día"
 
 #: dsourceconsts.sflperiod_idhour
 msgctxt "dsourceconsts.sflperiod_idhour"
 msgid "Hour"
-msgstr "Hour"
+msgstr "Hora"
 
 #: dsourceconsts.sflresourcetypelimit_idresourcetype
 msgctxt "dsourceconsts.sflresourcetypelimit_idresourcetype"
@@ -99,7 +99,7 @@ msgstr "Límite"
 #: dsourceconsts.sflresourcetype_idresourcetype
 msgctxt "dsourceconsts.sflresourcetype_idresourcetype"
 msgid "Id"
-msgstr "Codigo"
+msgstr "Código"
 
 #: dsourceconsts.sflresourcetype_maxworkload
 msgctxt "dsourceconsts.sflresourcetype_maxworkload"
@@ -124,7 +124,7 @@ msgstr "Valor"
 #: dsourceconsts.sflresource_abresource
 msgctxt "dsourceconsts.sflresource_abresource"
 msgid "Abbreviation"
-msgstr "Identificacion"
+msgstr "Identificación"
 
 #: dsourceconsts.sflresource_idresource
 msgctxt "dsourceconsts.sflresource_idresource"
@@ -144,7 +144,7 @@ msgstr "Nombre"
 #: dsourceconsts.sflresource_numresource
 msgctxt "dsourceconsts.sflresource_numresource"
 msgid "Number"
-msgstr "Numero"
+msgstr "Número"
 
 #: dsourceconsts.sflrestrictiontype_colrestrictiontype
 msgctxt "dsourceconsts.sflrestrictiontype_colrestrictiontype"
@@ -154,7 +154,7 @@ msgstr "Color"
 #: dsourceconsts.sflrestrictiontype_idrestrictiontype
 msgctxt "dsourceconsts.sflrestrictiontype_idrestrictiontype"
 msgid "Id"
-msgstr "Codigo"
+msgstr "Código"
 
 #: dsourceconsts.sflrestrictiontype_narestrictiontype
 msgctxt "dsourceconsts.sflrestrictiontype_narestrictiontype"
@@ -184,22 +184,22 @@ msgstr "Recurso"
 #: dsourceconsts.sflrestriction_idrestrictiontype
 msgctxt "dsourceconsts.sflrestriction_idrestrictiontype"
 msgid "Restriction Type"
-msgstr "Tipo de Restriccion"
+msgstr "Tipo de Restricción"
 
 #: dsourceconsts.sfltheme_composition
 msgctxt "dsourceconsts.sfltheme_composition"
 msgid "Composition"
-msgstr "Composicion"
+msgstr "Composición"
 
 #: dsourceconsts.sfltheme_duration
 msgctxt "dsourceconsts.sfltheme_duration"
 msgid "Duration"
-msgstr "Duracion"
+msgstr "Duración"
 
 #: dsourceconsts.sfltheme_idtheme
 msgctxt "dsourceconsts.sfltheme_idtheme"
 msgid "Id"
-msgstr "Codigo"
+msgstr "Código"
 
 #: dsourceconsts.sfltheme_natheme
 msgctxt "dsourceconsts.sfltheme_natheme"
@@ -209,17 +209,17 @@ msgstr "Nombre"
 #: dsourceconsts.sfltimetabledetail_idactivity
 msgctxt "dsourceconsts.sfltimetabledetail_idactivity"
 msgid "Activity"
-msgstr "Distribucion"
+msgstr "Distribución"
 
 #: dsourceconsts.sfltimetabledetail_idday
 msgctxt "dsourceconsts.sfltimetabledetail_idday"
 msgid "Day"
-msgstr "Day"
+msgstr "Día"
 
 #: dsourceconsts.sfltimetabledetail_idhour
 msgctxt "dsourceconsts.sfltimetabledetail_idhour"
 msgid "Hour"
-msgstr "Hour"
+msgstr "Hora"
 
 #: dsourceconsts.sfltimetabledetail_idtimetable
 msgctxt "dsourceconsts.sfltimetabledetail_idtimetable"
@@ -249,7 +249,7 @@ msgstr "Horario"
 #: dsourceconsts.sfltimetableresource_numresource
 msgctxt "dsourceconsts.sfltimetableresource_numresource"
 msgid "Number"
-msgstr "Numero"
+msgstr "Número"
 
 #: dsourceconsts.sfltimetable_idtimetable
 msgctxt "dsourceconsts.sfltimetable_idtimetable"
@@ -346,173 +346,6 @@ msgctxt "dsourceconsts.stbtimetableresource"
 msgid "Resources of Timetables"
 msgstr "Recursos de Horarios"
 
-#: tconfigform.bbcancel.caption
-msgctxt "tconfigform.bbcancel.caption"
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: tconfigform.bbok.caption
-msgctxt "tconfigform.bbok.caption"
-msgid "Ok"
-msgstr "Aceptar"
-
-#: tconfigform.caption
-msgctxt "tconfigform.caption"
-msgid "Configure"
-msgstr "Configurar"
-
-#: tconfigform.cbapplydoubledownhill.caption
-msgctxt "tconfigform.cbapplydoubledownhill.caption"
-msgid "Apply Downhill"
-msgstr "Aplicar descenso"
-
-#: tconfigform.cbusecustomseed.caption
-msgctxt "tconfigform.cbusecustomseed.caption"
-msgid "Use custom Seed:"
-msgstr "Definir semilla:"
-
-#: tconfigform.edbookmarks.text
-msgctxt "tconfigform.edbookmarks.text"
-msgid "1,2"
-msgstr "1,2"
-
-#: tconfigform.ednainstitution.hint
-msgctxt "tconfigform.ednainstitution.hint"
-msgid "Institution|Institution Name"
-msgstr "Institucion|Nombre de la Institucion"
-
-#: tconfigform.groupbox1.caption
-msgid "Comments"
-msgstr "Comentarios"
-
-#: tconfigform.groupbox2.caption
-msgctxt "tconfigform.groupbox2.caption"
-msgid "Resource Restrictions:"
-msgstr "Prohibiciones de Recursos:"
-
-#: tconfigform.lbauthority.caption
-msgctxt "tconfigform.lbauthority.caption"
-msgid "Authority:"
-msgstr "Autoridad:"
-
-#: tconfigform.lbbreaktimetableresource.caption
-msgctxt "tconfigform.lbbreaktimetableresource.caption"
-msgid "Break TT. Resources:"
-msgstr "Fracc. h. Recursos:"
-
-#: tconfigform.lbbrokenactivity.caption
-msgctxt "tconfigform.lbbrokenactivity.caption"
-msgid "Broken Sessions:"
-msgstr "Sesiones cortadas:"
-
-#: tconfigform.lbclashactivity.caption
-msgctxt "tconfigform.lbclashactivity.caption"
-msgid "Clash of Activities:"
-msgstr "Cruce de Actividades:"
-
-#: tconfigform.lbcrossprobability.caption
-msgctxt "tconfigform.lbcrossprobability.caption"
-msgid "Cross Probability:"
-msgstr "Prob. Cruce:"
-
-#: tconfigform.lbdownhilllevels.caption
-msgctxt "tconfigform.lbdownhilllevels.caption"
-msgid "Downhill Levels:"
-msgstr "Niveles de descenso:"
-
-#: tconfigform.lbinitialtimetables.caption
-msgctxt "tconfigform.lbinitialtimetables.caption"
-msgid "Initial Timetables:"
-msgstr "Horarios iniciales:"
-
-#: tconfigform.lbinstitutionname.caption
-msgctxt "tconfigform.lbinstitutionname.caption"
-msgid "Name:"
-msgstr "Nombre:"
-
-#: tconfigform.lbiterations.caption
-msgctxt "tconfigform.lbiterations.caption"
-msgid "Iterations:"
-msgstr "Iteraciones:"
-
-#: tconfigform.lbmutationprobability.caption
-msgctxt "tconfigform.lbmutationprobability.caption"
-msgid "Mutation Probability:"
-msgstr "Prob. Mutacion"
-
-#: tconfigform.lbnonscatteredactivity.caption
-msgctxt "tconfigform.lbnonscatteredactivity.caption"
-msgid "Non Scattered Activities:"
-msgstr "Actividades no dispersas:"
-
-#: tconfigform.lbpollinationprobability.caption
-msgctxt "tconfigform.lbpollinationprobability.caption"
-msgid "Pollination Probability:"
-msgstr "Prob. Polinizacion:"
-
-#: tconfigform.lbpopulationsize.caption
-msgctxt "tconfigform.lbpopulationsize.caption"
-msgid "Population Size:"
-msgstr "Tam. Población:"
-
-#: tconfigform.lbreparationprobability.caption
-msgctxt "tconfigform.lbreparationprobability.caption"
-msgid "Reparation Probability:"
-msgstr "Prob. Reparacion:"
-
-#: tconfigform.lbshareddirectory.caption
-msgctxt "tconfigform.lbshareddirectory.caption"
-msgid "Shared directory:"
-msgstr "Directorio compartido:"
-
-#: tconfigform.lbtrcolor.caption
-msgctxt "tconfigform.lbtrcolor.caption"
-msgid "Color:"
-msgstr "Color:"
-
-#: tconfigform.lbtrname.caption
-msgctxt "tconfigform.lbtrname.caption"
-msgid "Name:"
-msgstr "Nombre:"
-
-#: tconfigform.lbtrvalue.caption
-msgctxt "tconfigform.lbtrvalue.caption"
-msgid "Value:"
-msgstr "Valor:"
-
-#: tconfigform.tsinstitution.caption
-msgctxt "tconfigform.tsinstitution.caption"
-msgid "Institution"
-msgstr "Institucion"
-
-#: tconfigform.tsinstitution.hint
-msgctxt "tconfigform.tsinstitution.hint"
-msgid "Institution Data"
-msgstr "Datos del instituto"
-
-#: tconfigform.tsoptions.caption
-msgctxt "tconfigform.tsoptions.caption"
-msgid "Options"
-msgstr "Opciones"
-
-#: tconfigform.tsweights.caption
-msgctxt "tconfigform.tsweights.caption"
-msgid "Weights"
-msgstr "Pesos"
-
-#: tcrossmanytomanyeditor0form.panel2.caption
-msgctxt "tcrossmanytomanyeditor0form.panel2.caption"
-msgid "Panel2"
-msgstr "Panel2"
-
-#: tcrossmanytomanyeditorform.btcancel.hint
-msgid "Cancel|Cancel"
-msgstr "Cancelar|Cancelar"
-
-#: tcrossmanytomanyeditorform.btok.hint
-msgid "Ok|Ok"
-msgstr "Aceptar|Aceptar"
-
 #: tdbexplorerform.btexecutescript.caption
 msgid "Execute Script"
 msgstr "Ejecutar script"
@@ -536,11 +369,11 @@ msgstr "Guardar script"
 #: tdbexplorerform.caption
 msgctxt "tdbexplorerform.caption"
 msgid "Database Explorer"
-msgstr "Base de datos..."
+msgstr "Explorar datos"
 
 #: tdbexplorerform.cbmetadatatype.hint
 msgid "Metadata Type"
-msgstr "Tipo de metadato"
+msgstr "Tipos de metadatos"
 
 #: tdbexplorerform.cbtable.hint
 msgid "Tables"
@@ -548,7 +381,7 @@ msgstr "Tablas"
 
 #: tdbexplorerform.groupbox.caption
 msgid "Browse DataSet"
-msgstr "Navegar por Datos"
+msgstr "Explorar base de datos"
 
 #: tdbexplorerform.tbshowmetadata.caption
 msgid "Show Metadata"
@@ -558,44 +391,34 @@ msgstr "Mostrar metadatos"
 msgid "Show Table"
 msgstr "Mostrar tabla"
 
-#: teditorform.actshow.caption
-msgid "Show"
-msgstr "Presentar"
-
-#: teditorform.actshow.hint
-msgid "Show|Show the grid content in a report"
-msgstr "Presentar|Presentar el contenido en un reporte"
-
 #: tmainform.actabout.caption
 msgid "About..."
 msgstr "Acerca de..."
 
 #: tmainform.actabout.hint
 msgid "About|Information about this program"
-msgstr "Acerca de|Informacion referente a este programa"
+msgstr "Acerca de|Información acerca de este programa"
 
 #: tmainform.actconfigure.caption
-msgctxt "tmainform.actconfigure.caption"
 msgid "Configure"
 msgstr "Configurar"
 
 #: tmainform.actconfigure.hint
-msgctxt "tmainform.actconfigure.hint"
 msgid "Configure|Edit the system configuration"
-msgstr "Configurar|Editar la configuracion del sistema"
+msgstr "Configurar|Editar configuracion del sistema"
 
 #: tmainform.actday.caption
 msgid "Days"
-msgstr "Dias laborables"
+msgstr "Días"
 
 #: tmainform.actday.hint
 msgid "Days|Days"
-msgstr "Dias laborables|Dias laborables"
+msgstr "Días|Días"
 
 #: tmainform.actdbexplorer.caption
 msgctxt "tmainform.actdbexplorer.caption"
 msgid "Database Explorer"
-msgstr "Base de datos..."
+msgstr "Explorar datos"
 
 #: tmainform.actexit.caption
 msgid "Exit"
@@ -607,15 +430,15 @@ msgstr "Salir|Salir del programa"
 
 #: tmainform.acthour.caption
 msgid "Hours"
-msgstr "Horas academicas"
+msgstr "Horas"
 
 #: tmainform.acthour.hint
 msgid "Hours|Hours"
-msgstr "Horas academicas|Horas academicas"
+msgstr "Horas|Horas"
 
 #: tmainform.actlangdefault.caption
 msgid "Default Language"
-msgstr "Idioma por defecto"
+msgstr "Predeterminado"
 
 #: tmainform.actlangenglish.caption
 msgid "English"
@@ -630,7 +453,6 @@ msgid "Make Timetables"
 msgstr "Elaborar horarios"
 
 #: tmainform.actmaketimetable.hint
-msgctxt "tmainform.actmaketimetable.hint"
 msgid "Make Timetables|Make Timetables"
 msgstr "Elaborar horarios|Elaborar horarios"
 
@@ -648,47 +470,47 @@ msgstr "Abrir"
 
 #: tmainform.actopen.hint
 msgid "Open|Open saved institution"
-msgstr "Abrir|Abrir horario guardado"
+msgstr "Abrir|Abrir institución guardada"
 
 #: tmainform.actperiod.caption
+#, fuzzy
 msgctxt "tmainform.actperiod.caption"
 msgid "Periods"
-msgstr "Períodos"
+msgstr "Periodos"
 
 #: tmainform.actperiod.hint
-msgctxt "tmainform.actperiod.hint"
 msgid "Periods|Periods"
-msgstr "Períodos|Períodos laborables"
+msgstr "Períodos|Períodos"
 
 #: tmainform.actregistrationinfo.caption
 msgid "Registration Info"
-msgstr "Informacion de registro"
+msgstr "Información de registro"
 
 #: tmainform.actresource.caption
+#, fuzzy
 msgctxt "tmainform.actresource.caption"
 msgid "Resources"
 msgstr "Recursos"
 
 #: tmainform.actresource.hint
-msgctxt "tmainform.actresource.hint"
 msgid "Resources|Resources"
 msgstr "Recursos|Recursos"
 
 #: tmainform.actresourcetype.caption
 msgid "Resource Types"
-msgstr "Tipos de Recursos"
+msgstr "Tipos de recursos"
 
 #: tmainform.actresourcetype.hint
 msgid "Resource Types|Resource Types"
-msgstr "Tipos de Recursos|Tipos de Recursos"
+msgstr "Tipos de recursos|Tipos de recursos"
 
 #: tmainform.actrestrictiontype.caption
 msgid "ActRestrictionType"
-msgstr "Tipos de Restricciones"
+msgstr "Tipo de restricción"
 
 #: tmainform.actrestrictiontype.hint
 msgid "Restriction Types|Restriction Types"
-msgstr "Tipos de Restricciones|Tipos de Restricciones"
+msgstr "Tipo de restricción|Tipo de restricción"
 
 #: tmainform.actsave.caption
 msgid "Save..."
@@ -699,16 +521,17 @@ msgid "Save|Save Timetable"
 msgstr "Guardar|Guardar horario"
 
 #: tmainform.acttheme.caption
+#, fuzzy
 msgctxt "tmainform.acttheme.caption"
 msgid "Themes"
 msgstr "Temas"
 
 #: tmainform.acttheme.hint
-msgctxt "tmainform.acttheme.hint"
 msgid "Themes|Themes"
-msgstr "Temas|Temas"
+msgstr ""
 
 #: tmainform.acttimetable.caption
+#, fuzzy
 msgctxt "tmainform.acttimetable.caption"
 msgid "Timetables"
 msgstr "Horarios"
@@ -718,17 +541,16 @@ msgid "Timetables|Show Timetables"
 msgstr "Horarios|Mostrar horarios"
 
 #: tmainform.caption
-msgctxt "tmainform.caption"
 msgid "MainForm"
-msgstr "MainForm"
+msgstr ""
 
 #: tmainform.midata.caption
 msgid "&Data"
-msgstr "&Datos"
+msgstr "Datos"
 
 #: tmainform.midata.hint
 msgid "Data|Input Data"
-msgstr "Datos|Ingreso de datos"
+msgstr "Datos|Ingresar datos"
 
 #: tmainform.mifile.caption
 msgid "&File"
@@ -736,11 +558,11 @@ msgstr "&Archivo"
 
 #: tmainform.mifile.hint
 msgid "File|File tools"
-msgstr "Archivo|Herramientas de archivo"
+msgstr "Archivo|herramientas"
 
 #: tmainform.mihelp.caption
 msgid "&Help"
-msgstr "A&yuda"
+msgstr "Ayuda"
 
 #: tmainform.mihelp.hint
 msgid "Help|Online help"
@@ -752,19 +574,19 @@ msgstr "Lenguajes"
 
 #: tmainform.mireopen.caption
 msgid "Reopen"
-msgstr "Volver a abrir"
+msgstr "Reabrir"
 
 #: tmainform.mireopen.hint
 msgid "Reopen|Reopen Timetable"
-msgstr "Volver a abrir|Volver a abrir el horario"
+msgstr "Reabrir|Reabrir horario"
 
 #: tmainform.mitool.caption
 msgid "&Tools"
-msgstr "&Herramientas"
+msgstr "Herramientas"
 
 #: tmainform.mitool.hint
 msgid "Tools|Tools that allow to make a timetable"
-msgstr "Herramientas|Herramientas que permiten elaborar un horario"
+msgstr "Herramientas|Herramientas para elaborar horarios"
 
 #: tmainform.miview.caption
 msgid "&View"
@@ -774,289 +596,6 @@ msgstr "&Ver"
 msgid "View|View results"
 msgstr "Ver|Ver resultados"
 
-#: tmainform.n1.caption
-msgctxt "tmainform.n1.caption"
-msgid "-"
-msgstr "-"
-
-#: tmainform.n2.caption
-msgctxt "tmainform.n2.caption"
-msgid "-"
-msgstr "-"
-
-#: tmainform.n5.caption
-msgctxt "tmainform.n5.caption"
-msgid "-"
-msgstr "-"
-
-#: tmainform.n6.caption
-msgctxt "tmainform.n6.caption"
-msgid "-"
-msgstr "-"
-
-#: tmessageviewform.bbtclose.caption
-msgctxt "tmessageviewform.bbtclose.caption"
-msgid "&Close"
-msgstr "&Cerrar"
-
-#: tmessageviewform.caption
-msgctxt "tmessageviewform.caption"
-msgid "Message viewer"
-msgstr "Visor de mensajes"
-
-#: tmessageviewform.panel1.caption
-msgctxt "tmessageviewform.panel1.caption"
-msgid "Panel1"
-msgstr "Panel1"
-
-#: tprogressform.bbcancel.caption
-msgctxt "tprogressform.bbcancel.caption"
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: tprogressform.bbclose.caption
-msgctxt "tprogressform.bbclose.caption"
-msgid "Ok"
-msgstr "Aceptar"
-
-#: tprogressform.caption
-msgctxt "tprogressform.caption"
-msgid "Search progress"
-msgstr "Progreso de la busqueda"
-
-#: tprogressform.lbbreaktimetableresourcecount.caption
-msgctxt "tprogressform.lbbreaktimetableresourcecount.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbbreaktimetableresourcevalue.caption
-msgctxt "tprogressform.lbbreaktimetableresourcevalue.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbbrokensession.caption
-msgctxt "tprogressform.lbbrokensession.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbbrokensessionvalue.caption
-msgctxt "tprogressform.lbbrokensessionvalue.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbclashactivity.caption
-msgctxt "tprogressform.lbclashactivity.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbclashactivityvalue.caption
-msgctxt "tprogressform.lbclashactivityvalue.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbclashresource.caption
-msgctxt "tprogressform.lbclashresource.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbclashresourcevalue.caption
-msgctxt "tprogressform.lbclashresourcevalue.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbcolision.caption
-msgctxt "tprogressform.lbcolision.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbelapsedtime.caption
-msgctxt "tprogressform.lbelapsedtime.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbexports.caption
-msgctxt "tprogressform.lbexports.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbimports.caption
-msgctxt "tprogressform.lbimports.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbnonscatteredactivitycount.caption
-msgctxt "tprogressform.lbnonscatteredactivitycount.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbnonscatteredactivityvalue.caption
-msgctxt "tprogressform.lbnonscatteredactivityvalue.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbposition.caption
-msgctxt "tprogressform.lbposition.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbremainingtime.caption
-msgctxt "tprogressform.lbremainingtime.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbrestriction.caption
-msgctxt "tprogressform.lbrestriction.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbrestrictionvalue.caption
-msgctxt "tprogressform.lbrestrictionvalue.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.lbtotalvalue.caption
-msgctxt "tprogressform.lbtotalvalue.caption"
-msgid "0 "
-msgstr "0 "
-
-#: tprogressform.pnbreaktimetableresource.caption
-msgctxt "tprogressform.pnbreaktimetableresource.caption"
-msgid "Break TT. Resources:"
-msgstr "Fracc. h. Recursos:"
-
-#: tprogressform.pnbrokensession.caption
-msgctxt "tprogressform.pnbrokensession.caption"
-msgid "Broken Sessions:"
-msgstr "Sesiones Cortadas:"
-
-#: tprogressform.pnclashactivity.caption
-msgctxt "tprogressform.pnclashactivity.caption"
-msgid "Clash of Activities:"
-msgstr "Cruce de Actividades:"
-
-#: tprogressform.pnclashresource.caption
-msgctxt "tprogressform.pnclashresource.caption"
-msgid "Clash of Resources:"
-msgstr "Cruce Recursos:"
-
-#: tprogressform.pncrashes.caption
-msgctxt "tprogressform.pncrashes.caption"
-msgid " Crashes:"
-msgstr " Colisiones:"
-
-#: tprogressform.pndescription.caption
-msgid "Description:"
-msgstr "Descripción:"
-
-#: tprogressform.pnelapsedtime.caption
-msgctxt "tprogressform.pnelapsedtime.caption"
-msgid "Elapsed Time:"
-msgstr "Tiempo transcurrido:"
-
-#: tprogressform.pnestimatedtime.caption
-msgctxt "tprogressform.pnestimatedtime.caption"
-msgid "Remaining time:"
-msgstr "Tiempo restante:"
-
-#: tprogressform.pnexports.caption
-msgctxt "tprogressform.pnexports.caption"
-msgid " Exports:"
-msgstr " Exportaciones:"
-
-#: tprogressform.pnimports.caption
-msgctxt "tprogressform.pnimports.caption"
-msgid " Imports:"
-msgstr " Importaciones:"
-
-#: tprogressform.pninitdatetime.caption
-msgctxt "tprogressform.pninitdatetime.caption"
-msgid "Started at:"
-msgstr "Iniciado el:"
-
-#: tprogressform.pnnonscatteredactivity.caption
-msgctxt "tprogressform.pnnonscatteredactivity.caption"
-msgid "Non Scattered Activities:"
-msgstr "Actividades no dispersas:"
-
-#: tprogressform.pnnumber.caption
-msgctxt "tprogressform.pnnumber.caption"
-msgid "Number:"
-msgstr "Número:"
-
-#: tprogressform.pnpollination.caption
-msgctxt "tprogressform.pnpollination.caption"
-msgid "Pollination:"
-msgstr "Polinizacion:"
-
-#: tprogressform.pnposition.caption
-msgctxt "tprogressform.pnposition.caption"
-msgid " Iteration:"
-msgstr " Iteracion:"
-
-#: tprogressform.pnrestriction.caption
-msgctxt "tprogressform.pnrestriction.caption"
-msgid "Resource Restrictions:"
-msgstr "Prohibiciones de Recursos:"
-
-#: tprogressform.pntotalvalue.caption
-msgctxt "tprogressform.pntotalvalue.caption"
-msgid "Total Value:"
-msgstr "Valor Total:"
-
-#: tprogressform.pnvalue.caption
-msgctxt "tprogressform.pnvalue.caption"
-msgid "Value:"
-msgstr "Valor:"
-
-#: tresourceform.actrestriction.caption
-msgctxt "tresourceform.actrestriction.caption"
-msgid "Resource restrictions"
-msgstr "Prohibiciones de Recursos"
-
-#: tresourceform.actrestriction.hint
-msgid "Resource restrictions|Input Resource restrictions"
-msgstr "Restricciones de Recurso|Ingresar Restricciones de Recurso"
-
-#: tresourceform.caption
-msgctxt "tresourceform.caption"
-msgid "Resources"
-msgstr "Recursos"
-
-#: tresourceform.groupbox.caption
-msgctxt "tresourceform.groupbox.caption"
-msgid "Resources"
-msgstr "Recursos"
-
-#: tselperiodform.bbcancel.caption
-msgctxt "tselperiodform.bbcancelar.caption"
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: tselperiodform.bbok.caption
-msgctxt "tselperiodform.bbok.caption"
-msgid "Ok"
-msgstr "Aceptar"
-
-#: tselperiodform.caption
-msgctxt "tselperiodform.caption"
-msgid "Intercambiar Period"
-msgstr "Intercambiar Períodos"
-
-#: tselperiodform.lbday.caption
-msgctxt "tselperiodform.lbday.caption"
-msgid "Day"
-msgstr "Day"
-
-#: tselperiodform.lbhour.caption
-msgctxt "tselperiodform.lbhour.caption"
-msgid "Hour"
-msgstr "Hour"
-
-#: tselperiodform.lbperiod.caption
-msgctxt "tselperiodform.lbperiod.caption"
-msgid "Select the time slot to swap"
-msgstr "Seleccione el periodo a intercambiar"
-
 #: tsingleeditorform.actfind.caption
 msgid "Find"
 msgstr "Buscar"
@@ -1065,188 +604,14 @@ msgstr "Buscar"
 msgid "Find|Find by Field"
 msgstr "Buscar|Buscar por campo"
 
-#: tsplashform.lbcopyright.caption
-msgctxt "tsplashform.lbcopyright.caption"
-msgid "..."
-msgstr "..."
-
-#: tsplashform.lbcopyrighttitle.caption
-msgctxt "tsplashform.lbcopyrighttitle.caption"
-msgid "Copyright"
-msgstr "Copyright"
-
-#: tsplashform.lbedition.caption
-msgctxt "tsplashform.lbedition.caption"
-msgid "..."
-msgstr "..."
-
-#: tsplashform.lbeditiontitle.caption
-msgctxt "tsplashform.lbeditiontitle.caption"
-msgid "Edition"
-msgstr "Edicion"
-
-#: tsplashform.lbproductname.caption
-msgctxt "tsplashform.lbproductname.caption"
-msgid "..."
-msgstr "..."
-
-#: tsplashform.lbproductversion.caption
-msgctxt "tsplashform.lbproductversion.caption"
-msgid "..."
-msgstr "..."
-
-#: tsplashform.lbproductversiontitle.caption
-msgctxt "tsplashform.lbproductversiontitle.caption"
-msgid "Version"
-msgstr "Version"
-
-#: tthemeform.actfilterbyresourcetype.caption
-msgid "Filter by Resource Type"
-msgstr "Filtrar por Tipo de Recurso"
-
-#: tthemeform.caption
-msgctxt "tthemeform.caption"
-msgid "Theme"
-msgstr "Tema"
-
-#: tthemeform.dbgriddetail.hint
-msgctxt "tthemeform.dbgriddetail.hint"
-msgid "Activities of Theme"
-msgstr "Actividades del Tema"
-
-#: tthemeform.grbdetail.caption
-msgctxt "tthemeform.grbdetail.caption"
-msgid "Activities"
-msgstr "Actividades"
-
-#: tthemeform.groupbox.caption
-msgctxt "tthemeform.groupbox.caption"
-msgid "Themes"
-msgstr "Temas"
-
-#: tthemeform.groupbox3.caption
-msgctxt "tthemeform.groupbox3.caption"
-msgid "Participants"
-msgstr "Participantes"
-
-#: tthemeform.groupbox4.caption
-msgid "Available Resources"
-msgstr "Recursos Disponibles"
-
-#: tthemeform.groupbox5.caption
-msgid "Resource Type Limit"
-msgstr "Límite del Tipo de Recurso"
-
-#: ttimetableclusterform.cbshowcluster.hint
-msgctxt "ttimetableclusterform.cbshowcluster.hint"
-msgid "Show|Param to show in the timetable"
-msgstr "Mostrar|Parametro a mostrar en el horario"
-
-#: ttimetableclusterform.tbswapperiods.hint
-msgctxt "ttimetableclusterform.tbswapperiods.hint"
-msgid "Swap time slots|Swap time slots"
-msgstr "Intercambiar periodos|Intercambiar periodos"
-
-#: ttimetableform.actbrokensessionday.caption
-msgctxt "ttimetableform.actbrokensessionday.caption"
-msgid "Broken Sessions by Day"
-msgstr "Sesiones cortadas por el dia"
-
-#: ttimetableform.actbrokensessionday.hint
-msgctxt "ttimetableform.actbrokensessionday.hint"
-msgid "Broken Sessions by Day|Broken Sessions by Day"
-msgstr "Sesiones cortadas por el dia|Sesiones cortadas por el dia"
-
-#: ttimetableform.actbrokensessionhour.caption
-msgctxt "ttimetableform.actbrokensessionhour.caption"
-msgid "Broken Sessions by Hour"
-msgstr "Sesiones cortadas por la hora"
-
-#: ttimetableform.actbrokensessionhour.hint
-msgctxt "ttimetableform.actbrokensessionhour.hint"
-msgid "Broken Sessions by Hour|Broken Sessions by Hour"
-msgstr "Sesiones cortadas por la hora|Sesiones cortadas por la hora"
-
-#: ttimetableform.actclashactivity.caption
-msgid "Clashes of Activities"
-msgstr "Conflictos de Actividades"
-
-#: ttimetableform.actclashactivity.hint
-msgid "Clashes of Activities|Clashes of Activities"
-msgstr "Conflictos de Actividades|Conflictos de Actividades"
-
-#: ttimetableform.actclashresource.caption
-msgctxt "ttimetableform.actclashresource.caption"
-msgid "Clashes of Resources"
-msgstr "Cruces de Recursos"
-
-#: ttimetableform.actclashresource.hint
-msgctxt "ttimetableform.actclashresource.hint"
-msgid "Clashes of Resources|Clashes of Resources"
-msgstr "Cruce de Recursos|Cruce de Recursos"
-
-#: ttimetableform.actimprovetimetable.caption
-msgid "Improve timetable"
-msgstr "Mejorar horario"
-
-#: ttimetableform.actimprovetimetable.hint
-msgid "Improve timetable|Improve selected timetable"
-msgstr "Mejorar horario|Mejorar horario seleccionado"
-
-#: ttimetableform.actrestrictionnonsatisfied.caption
-msgctxt "ttimetableform.actrestrictionnonsatisfied.caption"
-msgid "Resource restrictions"
-msgstr "Restricciones de Recursos"
-
-#: ttimetableform.actrestrictionnonsatisfied.hint
-msgctxt "ttimetableform.actrestrictionnonsatisfied.hint"
-msgid "Resource retrictions|Resource restrictions non satisfied"
-msgstr "Restricciones de Recursos|Restricciones de Recrursos no satisfechas"
-
-#: ttimetableform.acttimetableresource.caption
-msgctxt "ttimetableform.acttimetableresource.caption"
-msgid "Resources' timetables"
-msgstr "Horario de Recursos"
-
-#: ttimetableform.acttimetableresource.hint
-msgid "Resources' timetables|Resources' timetables"
-msgstr "Horario de Recursos|Horario de Recursos"
-
-#: ttimetableform.tbrestrictionnonsatisfied.caption
-msgid "Resource Restrictions"
-msgstr "Restricciones de Recurso"
-
-#: ttimetableform.tbrestrictionnonsatisfied.hint
-msgid "Resource Restrictions|Resource Restrictions non satisfied"
-msgstr "Restricciones de Recurso|Restricciones de Recurso no satisfechas"
-
-#: ttimetableresourceform.cbshowresource.hint
-msgctxt "ttimetableresourceform.cbshowresource.hint"
-msgid "Show|Param to show in the resource timetable"
-msgstr "Mostrar|Parametro a mostrar en el horario de recurso"
-
 #: uabout.sappname
-msgid "Automatic Timetable Generator"
+#, fuzzy
+#| msgid "Automatic Timetable Generator"
+msgid "      <StringTable LegalCopyright=\"1999-2013 by Edison Mera\" FileDescription=\"Automatic Timetable Generator\"/>"
 msgstr "Generador Automatico de Horarios"
 
-#: urelutils.sdetailfieldswithoutmasterfields
-msgid "No master fields in %s for the detail table %s"
-msgstr "No existe registro maestro en %s para la tabla detalle %s"
-
-#: urelutils.sdetailrecordsexists
-msgid "There are related records in table %s"
-msgstr "Existen registros relacionados en la tabla %s"
-
-#: urelutils.smasterrecordnotfound
-msgid "Master record not found in %s for %s.[%s]=%s"
-msgstr "No existe registro maestro en %s para %s.[%s]=%s"
-
-#: urelutils.swhenprocessing
-msgctxt "urelutils.swhenprocessing"
-msgid "When processing %s"
-msgstr "Mientras se procesaba %s"
-
 #: uttgconsts.sactivitywithoutresources
+#, object-pascal-format
 msgid "Activity %s does not have assigned resources"
 msgstr "La Actividad %s no tiene recursos asignados"
 
@@ -1263,6 +628,7 @@ msgid "Attendant"
 msgstr "Asistente"
 
 #: uttgconsts.sbasetimetable
+#, object-pascal-format
 msgid "Base Timetable: %d"
 msgstr "Horario base: %d"
 
@@ -1415,10 +781,12 @@ msgid "Improved Timetable Id"
 msgstr "Codigo del horario mejorado"
 
 #: uttgconsts.simprovingtimetable
+#, object-pascal-format
 msgid "Improving Timetable [%d]"
 msgstr "Mejorando Timetable [%d]"
 
 #: uttgconsts.simprovingtimetablein
+#, object-pascal-format
 msgid "Improving Timetable [%d] in [%d]"
 msgstr "Mejorando Timetable [%d] en [%d]"
 
@@ -1427,6 +795,7 @@ msgid "Inadequate"
 msgstr "Inadecuado"
 
 #: uttgconsts.sinvalidcomposition
+#, object-pascal-format
 msgid "Invalid Composition: [%s]"
 msgstr "Composicion no valida: [%s]"
 
@@ -1435,6 +804,7 @@ msgid "Invalid input data"
 msgstr "El dato ingresado no es valido"
 
 #: uttgconsts.sisempty
+#, object-pascal-format
 msgid "%s is empty"
 msgstr "%s esta vacio"
 
@@ -1506,6 +876,7 @@ msgid "Ready"
 msgstr "Listo"
 
 #: uttgconsts.srelcolsrows
+#, object-pascal-format
 msgctxt "uttgconsts.srelcolsrows"
 msgid "%s|Columns: %s - Rows: %s "
 msgstr "%s|Columnas: %s - Filas: %s "
@@ -1520,6 +891,7 @@ msgid "Repair Probability"
 msgstr "Probabilidad de Reparacion"
 
 #: uttgconsts.sresourceoverflow
+#, object-pascal-format
 msgid "For [%s], the number of activities %d exceeds its capacity %d"
 msgstr "Para [%s], el número de actividades %d excede su capacidad %d"
 
@@ -1556,6 +928,7 @@ msgid "Timetable (*.ttd)|*.ttd"
 msgstr "Horario (*.ttd)|*.ttd"
 
 #: uttgconsts.ssearchby
+#, object-pascal-format
 msgid "Search by %s"
 msgstr "Buscar por %s"
 
@@ -1564,10 +937,12 @@ msgid "Supervisor"
 msgstr "Supervisor"
 
 #: uttgconsts.sthemeoverflow
+#, object-pascal-format
 msgid "For [%s] and the Resources [%s], the limit %d has been exceeded in %d"
 msgstr "Para [%s] y el Recurso [%s], el límite %d ha sido excedido en %d"
 
 #: uttgconsts.sthenexttimetablesalreadyexists
+#, object-pascal-format
 msgid "The next Timetables already exists: %s"
 msgstr "Los siguientes horarios ya existian: %s"
 
@@ -1594,11 +969,13 @@ msgid "Weights"
 msgstr "Pesos"
 
 #: uttgconsts.swhenprocessing
+#, object-pascal-format
 msgctxt "uttgconsts.swhenprocessing"
 msgid "When processing %s"
 msgstr "Mientras se procesaba %s"
 
 #: uttgconsts.sworkinprogress
+#, object-pascal-format
 msgid "Work in progress [%d]"
 msgstr "Elaboracion en progreso [%d]"
 

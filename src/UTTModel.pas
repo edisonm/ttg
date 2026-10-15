@@ -187,6 +187,13 @@ type
     function GetBreakTimetableResourceValue: Integer;
     function GetBrokenSessionValue: Integer;
     procedure Reset;
+    function GetRestrictionTypeToResourceCount:TDynamicIntegerArray;
+    function GetClashResourceType: TDynamicIntegerArray;
+    function GetNonScatteredActivity: Integer;
+    function GetBrokenSession: Integer;
+    function GetClashActivity: Integer;
+    function GetActivityResourceTypeToNumber: TDynamicIntegerArrayArray;
+    function GetBreakTimetableResource: Integer;
     {$IFDEF DEBUG}
     procedure CheckIntegrity(const ALabel: string);
     {$ENDIF}
@@ -215,26 +222,21 @@ type
     function MoveSession(Session, Period: Integer): Integer;
     procedure DoMoveSession(Session, Period: Integer);
     {procedure SaveToFile(const AFileName: string);}
-    property RestrictionTypeToResourceCount: TDynamicIntegerArray
-      read FTablingInfo.FRestrictionTypeToResourceCount;
-    property ClashResourceType: TDynamicIntegerArray read FTablingInfo.FClashResourceType;
-    property NonScatteredActivity: Integer read FTablingInfo.FNonScatteredActivity;
-    property BrokenSession: Integer read FTablingInfo.FBrokenSession;
-    property ClashActivity: Integer read FTablingInfo.FClashActivity;
+    property RestrictionTypeToResourceCount: TDynamicIntegerArray read GetRestrictionTypeToResourceCount;
+    property ClashResourceType: TDynamicIntegerArray read GetClashResourceType;
+    property NonScatteredActivity: Integer read GetNonScatteredActivity;
+    property BrokenSession: Integer read GetBrokenSession;
+    property ClashActivity: Integer read GetClashActivity;
     property ClashResourceValue: Integer read GetClashResourceValue;
     property ClashActivityValue: Integer read GetClashActivityValue;
     property BreakTimetableResourceValue: Integer read GetBreakTimetableResourceValue;
     property BrokenSessionValue: Integer read GetBrokenSessionValue;
     property NonScatteredActivityValue: Integer read GetNonScatteredActivityValue;
     property RestrictionValue: Integer read GetRestrictionValue;
-    property TTSessionToPeriod: TDynamicIntegerArray
-                                  read FTTSessionToPeriod;
-    property TTActivityToNumResources: TDynamicIntegerArrayArray
-                                          read FTTActivityToNumResources;
-    property ActivityResourceTypeToNumber: TDynamicIntegerArrayArray
-                                                 read FTablingInfo.FActivityResourceTypeToNumber;
-
-    property BreakTimetableResource: Integer read FTablingInfo.FBreakTimetableResource;
+    property TTSessionToPeriod: TDynamicIntegerArray read FTTSessionToPeriod;
+    property TTActivityToNumResources: TDynamicIntegerArrayArray read FTTActivityToNumResources;
+    property ActivityResourceTypeToNumber: TDynamicIntegerArrayArray read GetActivityResourceTypeToNumber;
+    property BreakTimetableResource: Integer read GetBreakTimetableResource;
     property TablingInfo: TTimetableTablingInfo read FTablingInfo;
   end;
   
@@ -1211,6 +1213,41 @@ begin
   Result := TTimetable.Create(Self);
 end;
 
+function TTimetable.GetRestrictionTypeToResourceCount:TDynamicIntegerArray;
+begin
+  Result := FTablingInfo.FRestrictionTypeToResourceCount;
+end;
+
+function TTimetable.GetClashResourceType: TDynamicIntegerArray;
+begin
+  Result := FTablingInfo.FClashResourceType;
+end;
+
+function TTimetable.GetNonScatteredActivity: Integer;
+begin
+  Result := FTablingInfo.FNonScatteredActivity;
+end;
+
+function TTimetable.GetBrokenSession: Integer;
+begin
+  Result := FTablingInfo.FBrokenSession;
+end;
+
+function TTimetable.GetClashActivity: Integer;
+begin
+  Result := FTablingInfo.FClashActivity;
+end;
+
+function TTimetable.GetActivityResourceTypeToNumber: TDynamicIntegerArrayArray;
+begin
+  Result := FTablingInfo.FActivityResourceTypeToNumber;
+end;
+
+function TTimetable.GetBreakTimetableResource: Integer;
+begin
+  Result := FTablingInfo.FBreakTimetableResource;
+end;
+
 procedure TTimetable.CrossGroup(Timetable2: TTimetable; AGroup: Integer);
 var
   Session, Session1, Session2, Count, GroupSessionsCount: Integer;
@@ -1965,6 +2002,11 @@ begin
                    Length(TablingInfo.FActivityResourceTypeToNumber[Activity]) * SizeOf(Integer));
   end;
   Update;
+end;
+
+function DateTimeToAnsiSQLDate(Value: TDateTime): string;
+begin
+  Result := FormatDateTime('yyyy-mm-dd hh:nn:ss', Value)
 end;
 
 procedure TTimetable.SaveToDataModule(IdTimetable: Integer;

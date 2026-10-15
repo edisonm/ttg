@@ -11,6 +11,10 @@ inherited DBExplorerForm: TDBExplorerForm
   inherited TBEditor: TToolBar
     Width = 797
     inherited DBNavigator: TDBNavigator
+      Height = 26
+      Width = 260
+      ClientHeight = 26
+      ClientWidth = 260
       Hints.Strings = (      )
     end
   end
@@ -34,12 +38,12 @@ inherited DBExplorerForm: TDBExplorerForm
       Width = 795
       Align = alBottom
       Caption = 'Browse DataSet'
-      ClientHeight = 287
-      ClientWidth = 787
+      ClientHeight = 288
+      ClientWidth = 793
       TabOrder = 1
       inherited DBGrid: TDBGrid
-        Height = 287
-        Width = 787
+        Height = 288
+        Width = 793
         Anchors = [akLeft, akRight, akBottom]
       end
     end
@@ -68,8 +72,8 @@ inherited DBExplorerForm: TDBExplorerForm
           Width = 116
           Align = alTop
           Caption = 'Show Metadata'
-          OnClick = TBShowMetadataClick
           TabOrder = 0
+          OnClick = TBShowMetadataClick
         end
         object TBShowTable: TButton
           Left = 1
@@ -78,8 +82,8 @@ inherited DBExplorerForm: TDBExplorerForm
           Width = 116
           Align = alTop
           Caption = 'Show Table'
-          OnClick = TBShowTableClick
           TabOrder = 1
+          OnClick = TBShowTableClick
         end
         object BtOpenScript: TButton
           Left = 1
@@ -88,8 +92,8 @@ inherited DBExplorerForm: TDBExplorerForm
           Width = 116
           Align = alTop
           Caption = 'Open Script'
-          OnClick = BtOpenScriptClick
           TabOrder = 2
+          OnClick = BtOpenScriptClick
         end
         object BtSaveScript: TButton
           Left = 1
@@ -98,8 +102,8 @@ inherited DBExplorerForm: TDBExplorerForm
           Width = 116
           Align = alTop
           Caption = 'Save Script'
-          OnClick = BtSaveScriptClick
           TabOrder = 3
+          OnClick = BtSaveScriptClick
         end
         object BtExecuteScript: TButton
           Left = 1
@@ -108,8 +112,8 @@ inherited DBExplorerForm: TDBExplorerForm
           Width = 116
           Align = alTop
           Caption = 'Execute Script'
-          OnClick = BtExecuteScriptClick
           TabOrder = 4
+          OnClick = BtExecuteScriptClick
         end
         object BtOpenQuery: TButton
           Left = 1
@@ -118,8 +122,8 @@ inherited DBExplorerForm: TDBExplorerForm
           Width = 116
           Align = alTop
           Caption = 'Open Query'
-          OnClick = BtOpenQueryClick
           TabOrder = 5
+          OnClick = BtOpenQueryClick
         end
         object BtSaveResults: TButton
           Left = 1
@@ -128,8 +132,8 @@ inherited DBExplorerForm: TDBExplorerForm
           Width = 116
           Align = alTop
           Caption = 'Save Results'
-          OnClick = BtSaveResultsClick
           TabOrder = 6
+          OnClick = BtSaveResultsClick
         end
       end
       object Splitter2: TSplitter
@@ -151,7 +155,7 @@ inherited DBExplorerForm: TDBExplorerForm
         TabOrder = 2
         object CBMetadataType: TComboBox
           Left = 1
-          Height = 24
+          Height = 33
           Hint = 'Metadata Type'
           Top = 1
           Width = 668
@@ -161,9 +165,9 @@ inherited DBExplorerForm: TDBExplorerForm
         end
         object CBTable: TDBLookupComboBox
           Left = 1
-          Height = 24
+          Height = 33
           Hint = 'Tables'
-          Top = 25
+          Top = 34
           Width = 668
           Align = alTop
           KeyField = 'Name'
@@ -175,8 +179,8 @@ inherited DBExplorerForm: TDBExplorerForm
         inline Memo1: TSynMemo
           Cursor = crIBeam
           Left = 1
-          Height = 354
-          Top = 49
+          Height = 336
+          Top = 67
           Width = 668
           Align = alClient
           Font.Height = -11
@@ -611,12 +615,25 @@ inherited DBExplorerForm: TDBExplorerForm
               ShortCut = 57379
             end>
           MouseActions = <>
+          MouseTextActions = <>
           MouseSelActions = <>
+          VisibleSpecialChars = [vscSpace, vscTabAtLast]
           ScrollBars = ssAutoBoth
+          SelectedColor.BackPriority = 50
+          SelectedColor.ForePriority = 50
+          SelectedColor.FramePriority = 50
+          SelectedColor.BoldPriority = 50
+          SelectedColor.ItalicPriority = 50
+          SelectedColor.UnderlinePriority = 50
+          SelectedColor.StrikeOutPriority = 50
           inline SynLeftGutterPartList1: TSynGutterPartList
             object SynGutterMarks1: TSynGutterMarks
               Width = 24
               MouseActions = <>
+              MaxExtraMarksColums = 0
+              Options = [sgmoDeDuplicateMarksOnOverflow]
+              MarkupInfo.Background = clBtnFace
+              MarkupInfo.Foreground = clNone
             end
             object SynGutterLineNumber1: TSynGutterLineNumber
               Width = 15
@@ -633,10 +650,15 @@ inherited DBExplorerForm: TDBExplorerForm
               MouseActions = <>
               ModifiedColor = 59900
               SavedColor = clGreen
+              MarkupInfo.Background = clNone
+              MarkupInfo.Foreground = clGreen
+              MarkupInfo.FrameColor = 59900
             end
             object SynGutterSeparator1: TSynGutterSeparator
               Width = 2
               MouseActions = <>
+              MarkupInfo.Background = clWhite
+              MarkupInfo.Foreground = clGray
             end
             object SynGutterCodeFolding1: TSynGutterCodeFolding
               MouseActions = <>
@@ -660,56 +682,56 @@ inherited DBExplorerForm: TDBExplorerForm
     end
   end
   inherited ImageList: TImageList
-    left = 48
-    top = 280
+    Left = 48
+    Top = 280
   end
   inherited ActionList: TActionList
-    left = 368
-    top = 336
+    Left = 368
+    Top = 336
   end
-  inherited DataSource: TDatasource
-    left = 139
-    top = 336
+  inherited DataSource: TDataSource
+    Left = 139
+    Top = 336
   end
   object ZTable1: TZTable[6]
     Connection = SourceDataModule.DbZConnection
-    left = 48
-    top = 400
+    Left = 48
+    Top = 400
   end
   object ZSQLMetadata1: TZSQLMetadata[7]
     Connection = SourceDataModule.DbZConnection
     MetadataType = mdProcedures
-    left = 488
-    top = 280
+    Left = 488
+    Top = 280
   end
   object ZQuery1: TZQuery[8]
     Connection = SourceDataModule.DbZConnection
     Params = <>
-    left = 488
-    top = 336
+    Left = 488
+    Top = 336
   end
   object SaveResults: TSaveDialog[9]
     DefaultExt = '.csv'
     Filter = 'Comma delimited file (*.csv)|*.csv'
-    left = 368
-    top = 280
+    Left = 368
+    Top = 280
   end
-  object DSTables: TDatasource[10]
+  object DSTables: TDataSource[10]
     DataSet = ZTables
-    left = 48
-    top = 336
+    Left = 48
+    Top = 336
   end
   object OpenScript: TOpenDialog[11]
     DefaultExt = '.sql'
     Filter = 'SQL Script (*.sql)|*.sql'
-    left = 139
-    top = 280
+    Left = 139
+    Top = 280
   end
   object SaveScript: TSaveDialog[12]
     DefaultExt = '.sql'
     Filter = 'SQL Script (*.sql)|*.sql'
-    left = 248
-    top = 280
+    Left = 248
+    Top = 280
   end
   object ZTables: TZQuery[13]
     Connection = SourceDataModule.DbZConnection
@@ -719,36 +741,21 @@ inherited DBExplorerForm: TDBExplorerForm
       'ORDER BY name;'
     )
     Params = <>
-    left = 248
-    top = 336
+    Left = 248
+    Top = 336
   end
   object SynSQLSyn1: TSynSQLSyn[14]
     DefaultFilter = 'SQL Files (*.sql)|*.sql'
     Enabled = False
     CommentAttri.Foreground = clGray
-    CommentAttri.FrameEdges = sfeAround
     DataTypeAttri.Foreground = clTeal
-    DataTypeAttri.FrameEdges = sfeAround
-    DefaultPackageAttri.FrameEdges = sfeAround
-    ExceptionAttri.FrameEdges = sfeAround
-    FunctionAttri.FrameEdges = sfeAround
-    IdentifierAttri.FrameEdges = sfeAround
-    KeyAttri.FrameEdges = sfeAround
     NumberAttri.Foreground = clPurple
-    NumberAttri.FrameEdges = sfeAround
-    PLSQLAttri.FrameEdges = sfeAround
-    SpaceAttri.FrameEdges = sfeAround
-    SQLPlusAttri.FrameEdges = sfeAround
     StringAttri.Foreground = clBlue
-    StringAttri.FrameEdges = sfeAround
     SymbolAttri.Foreground = clRed
-    SymbolAttri.FrameEdges = sfeAround
     TableNameAttri.Foreground = clBlue
-    TableNameAttri.FrameEdges = sfeAround
     TableNameAttri.Style = [fsBold]
-    VariableAttri.FrameEdges = sfeAround
     SQLDialect = sqlStandard
-    left = 144
-    top = 400
+    Left = 144
+    Top = 400
   end
-end
+end

@@ -143,9 +143,9 @@ begin
 end;
 
 const
-  TextState: array[TDataSetState] of string = ('dsInactive', 'dsBrowse',
-    'dsEdit', 'dsInsert', 'dsSetKey', 'dsCalcFields', 'dsFilter', 'dsNewValue',
-    'dsOldValue', 'dsCurValue', 'dsBlockRead', 'dsInternalCalc', 'dsOpening');
+  TextState: array[TDataSetState] of string = ('dsInactive', 'dsBrowse', 'dsEdit',
+    'dsInsert', 'dsSetKey', 'dsCalcFields', 'dsFilter', 'dsNewValue', 'dsOldValue',
+    'dsCurValue', 'dsBlockRead', 'dsInternalCalc', 'dsOpening', 'dsRefreshFields');
 
 procedure TSingleEditorForm.DataSourceStateChange(Sender: TObject);
 begin

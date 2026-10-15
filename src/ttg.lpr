@@ -12,7 +12,7 @@ uses
   DMaster in 'DMaster.pas' {MasterDataModule: TDataModule},
   FSplash {SplashForm},
   DSource in 'DSource.pas' {SourceDataModule: TDataModule},
-  UConfigStorage, UTTGi18n, zcomponent, UProgress, UAbout;
+  UConfigStorage, UTTGi18n, UProgress, zdbc, UAbout;
 
 var
   FConfigStorage: TConfigStorage;
@@ -26,6 +26,7 @@ const
 begin
   {$IFDEF UNIX}
   FConfigPath := GetEnvironmentVariable('HOME');
+  ExecutableExt := '';
   {$ELSE}
   {$IFDEF WINDOWS}
   FConfigPath := GetEnvironmentVariable('HOMEDRIVE')
@@ -48,10 +49,10 @@ begin
   EnableTranslator('ttg', Language);
   if Assigned(ResourceTranslator) then
     ResourceTranslator.TranslateResourceStrings;
-  DecimalSeparator := ',';
+  DefaultFormatSettings.DecimalSeparator := ',';
   //RequireDerivedFormResource := True;
   Application.Initialize;
-  Application.Title := SAppName;
+  Application.Title:='';
   {Application.HelpFile := '../hlp/ttg.hlp';}
   Application.CreateForm(TSourceDataModule, SourceDataModule);
   Application.CreateForm(TMasterDataModule, MasterDataModule);

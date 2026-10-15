@@ -1,6 +1,6 @@
 # -*- mode: Makefile; -*-
 
-BuildMode?=release
+BuildMode?=debug
 ifneq ($(BuildMode),release)
 BuildLabel=-$(BuildMode)
 endif
@@ -36,10 +36,10 @@ endif
 endif
 
 LAZBASE=/cygdrive/c/lazarus$(OSBITS)
-FPC=$(LAZBASE)/fpc/2.6.2/bin/$(ARCH)-win$(OSBITS)/fpc
+FPC=$(LAZBASE)/fpc/3.2.2/bin/$(ARCH)-win$(OSBITS)/fpc
 EXEEXT=.exe
 else
-LAZBASE=/usr/share/lazarus/1.0.12
+LAZBASE=/usr/share/lazarus/4.8.0
 FPC=fpc
 EXEEXT=
 ARCH=$(TargetCPU)

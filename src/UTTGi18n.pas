@@ -299,15 +299,16 @@ var
 begin
   Result := '';
   for i := 1 to Paramcount - 1 do
-    if (ParamStrUTF8(i) = '--LANG')
-       or (ParamStrUTF8(i) = '-l')
-       or (ParamStrUTF8(i) = '--lang') then
-      Result := ParamStrUTF8(i + 1);
-  if Result = '' then
-    LCLGetLanguageIDs(Result, T);
+    if (ParamStr(i) = '--LANG')
+       or (ParamStr(i) = '-l')
+       or (ParamStr(i) = '--lang') then
+      Result := ParamStr(i + 1);
+  { if Result = '' then
+      LCLGetLanguageIDs(Result, T);
+  }
   // Win32 user may decide to override locale with LANG variable.
   if Result = '' then
-    Result := GetEnvironmentVariableUTF8('LANG');
+    Result := GetEnvironmentVariable('LANG');
 end;
 
 function FindLocaleFileName(Lang, LCExt: string): string;
@@ -320,7 +321,7 @@ var
     begin
       Result := ExtractFilePath(AppFullPath) + Language
         + DirectorySeparator + ChangeFileExt(ExtractFileName(AppFullPath), LCExt);
-      if FileExistsUTF8(Result) then
+      if FileExists(Result) then
         exit;
       {$IFDEF DEBUG}
       Paths := Paths + #13#10 + Result;
@@ -328,7 +329,7 @@ var
       Result := ExtractFilePath(AppFullPath) + 'languages'
         + DirectorySeparator + Language + DirectorySeparator
         + ChangeFileExt(ExtractFileName(AppFullPath), LCExt);
-      if FileExistsUTF8(Result) then
+      if FileExists(Result) then
         exit;
       {$IFDEF DEBUG}
       Paths := Paths + #13#10 + Result;
@@ -336,7 +337,7 @@ var
       Result := ExtractFilePath(AppFullPath) + 'locale' + DirectorySeparator
         + Language + DirectorySeparator
         + ChangeFileExt(ExtractFileName(AppFullPath), LCExt);
-      if FileExistsUTF8(Result) then
+      if FileExists(Result) then
         exit;
       {$IFDEF DEBUG}
       Paths := Paths + #13#10 + Result;
@@ -344,7 +345,7 @@ var
       Result := ExtractFilePath(AppFullPath) + 'locale' + DirectorySeparator
         + Language + DirectorySeparator + 'LC_MESSAGES' + DirectorySeparator
         + ChangeFileExt(ExtractFileName(AppFullPath), LCExt);
-      if FileExistsUTF8(Result) then
+      if FileExists(Result) then
         exit;
       {$IFDEF DEBUG}
       Paths := Paths + #13#10 + Result;
@@ -354,7 +355,7 @@ var
       try
         Result := ExtractFilePath(AppFullPath)
           + ChangeFileExt(ExtractFileName(AppFullPath), '.' + Language) + LCExt;
-        if FileExistsUTF8(Result) then
+        if FileExists(Result) then
           exit;
         {$IFDEF DEBUG}
         Paths := Paths + #13#10 + Result;
@@ -362,25 +363,25 @@ var
         //Common location (like in Lazarus)
         Result := ExtractFilePath(AppFullPath) + 'locale' + DirectorySeparator
           + ChangeFileExt(ExtractFileName(AppFullPath), '.' + Language) + LCExt;
-        if FileExistsUTF8(Result) then
+        if FileExists(Result) then
           exit;
         {$IFDEF DEBUG}
         Paths := Paths + #13#10 + Result;
         {$ENDIF}
         Result := 'locale' + DirectorySeparator +
           ChangeFileExt(ExtractFileName(AppFullPath), '.' + Language) + LCExt;
-        if FileExistsUTF8(Result) then
+        if FileExists(Result) then
           exit;
         Result := '..' + DirectorySeparator + 'locale' + DirectorySeparator +
           ChangeFileExt(ExtractFileName(AppFullPath), '.' + Language) + LCExt;
-        if FileExistsUTF8(Result) then
+        if FileExists(Result) then
           exit;
         {$IFDEF DEBUG}
         Paths := Paths + #13#10 + Result;      
         {$ENDIF}
         Result := ExtractFilePath(AppFullPath) + 'languages' + DirectorySeparator
           + ChangeFileExt(ExtractFileName(AppFullPath), '.' + Language) + LCExt;
-        if FileExistsUTF8(Result) then
+        if FileExists(Result) then
           exit;
         {$IFDEF DEBUG}
         Paths := Paths + #13#10 + Result;
@@ -392,7 +393,7 @@ var
       //In unix-like systems we can try to search for global locale
       Result := '/usr/share/locale/' + Language + '/LC_MESSAGES/'
         + ChangeFileExt(ExtractFileName(AppFullPath), LCExt);
-      if FileExistsUTF8(Result) then
+      if FileExists(Result) then
         exit;
       {$IFDEF DEBUG}
       Paths := Paths + #13#10 + Result;
@@ -424,7 +425,7 @@ begin
   if Result = '' then
   begin
     Result := ChangeFileExt(AppFullPath, LCExt);
-    if not FileExistsUTF8(Result) then
+    if not FileExists(Result) then
     begin
       {$IFDEF DEBUG}
       Paths := Paths + #13#10 + Result;
@@ -458,7 +459,7 @@ begin
   else
   begin
     LangFile := FindLocaleFileName(Language, '.' + LowerCase(ValueType));
-    if FileExistsUTF8(LangFile) then
+    if FileExists(LangFile) then
       Result := TTrFile.CreateTrFile(LangFile, ValueType);
   end;
 end;
@@ -490,5 +491,5 @@ initialization
   //ParamStrUTF8(0) is said not to work properly in linux, but I've tested it
   // A work-around to the bad functioning of ParamStr in current lazarus version:
   // You can redefine AppFullPath from the outside world
-  AppFullPath := ParamStrUTF8(0);
+  AppFullPath := ParamStr(0);
 end.

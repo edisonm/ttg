@@ -7,10 +7,16 @@ object SourceDataModule: TSourceDataModule
   VerticalOffset = 591
   Width = 398
   object DbZConnection: TZConnection
-    Protocol = 'sqlite-3'
+    ControlsCodePage = cCP_UTF8
+    Properties.Strings = (
+      'RawStringEncoding=DB_CP'
+    )
+    DisableSavepoints = False
+    Port = 0
     Database = ':memory:'
-    left = 312
-    top = 24
+    Protocol = 'sqlite'
+    Left = 312
+    Top = 24
   end
   object ZTables: TZReadOnlyQuery
     Connection = DbZConnection
@@ -19,8 +25,8 @@ object SourceDataModule: TSourceDataModule
       'WHERE type=''table'''
     )
     Params = <>
-    left = 40
-    top = 96
+    Left = 40
+    Top = 96
   end
   object QuTimetableDetail: TZQuery
     Connection = DbZConnection
@@ -31,17 +37,13 @@ object SourceDataModule: TSourceDataModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'IdTimetable'
-        ParamType = ptUnknown
       end>
-    left = 168
-    top = 96
+    Left = 168
+    Top = 96
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'IdTimetable'
-        ParamType = ptUnknown
       end>
   end
   object QuTimetableResource: TZQuery
@@ -53,17 +55,13 @@ object SourceDataModule: TSourceDataModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'IdTimetable'
-        ParamType = ptUnknown
       end>
-    left = 168
-    top = 24
+    Left = 168
+    Top = 24
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'IdTimetable'
-        ParamType = ptUnknown
       end>
   end
   object QuTimetable: TZQuery
@@ -75,17 +73,13 @@ object SourceDataModule: TSourceDataModule
     )
     Params = <    
       item
-        DataType = ftUnknown
         Name = 'IdTimetable'
-        ParamType = ptUnknown
       end>
-    left = 32
-    top = 24
+    Left = 32
+    Top = 24
     ParamData = <    
       item
-        DataType = ftUnknown
         Name = 'IdTimetable'
-        ParamType = ptUnknown
       end>
   end
 end
