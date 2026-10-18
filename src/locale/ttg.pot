@@ -1,0 +1,947 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: dsourceconsts.sflactivity_idactivity
+msgctxt "dsourceconsts.sflactivity_idactivity"
+msgid "Id"
+msgstr ""
+
+#: dsourceconsts.sflactivity_idtheme
+msgctxt "dsourceconsts.sflactivity_idtheme"
+msgid "Theme"
+msgstr ""
+
+#: dsourceconsts.sflactivity_naactivity
+msgctxt "dsourceconsts.sflactivity_naactivity"
+msgid "Name"
+msgstr ""
+
+#: dsourceconsts.sflavailability_idresource
+msgctxt "dsourceconsts.sflavailability_idresource"
+msgid "Resource"
+msgstr ""
+
+#: dsourceconsts.sflavailability_idtheme
+msgctxt "dsourceconsts.sflavailability_idtheme"
+msgid "Theme"
+msgstr ""
+
+#: dsourceconsts.sflavailability_numresource
+msgctxt "dsourceconsts.sflavailability_numresource"
+msgid "Number"
+msgstr ""
+
+#: dsourceconsts.sflday_idday
+msgctxt "dsourceconsts.sflday_idday"
+msgid "Id"
+msgstr ""
+
+#: dsourceconsts.sflday_naday
+msgctxt "dsourceconsts.sflday_naday"
+msgid "Name"
+msgstr ""
+
+#: dsourceconsts.sflhour_idhour
+msgctxt "dsourceconsts.sflhour_idhour"
+msgid "Id"
+msgstr ""
+
+#: dsourceconsts.sflhour_interval
+msgid "Interval"
+msgstr ""
+
+#: dsourceconsts.sflhour_nahour
+msgctxt "dsourceconsts.sflhour_nahour"
+msgid "Name"
+msgstr ""
+
+#: dsourceconsts.sflparticipant_idactivity
+msgctxt "dsourceconsts.sflparticipant_idactivity"
+msgid "Activity"
+msgstr ""
+
+#: dsourceconsts.sflparticipant_idresource
+msgctxt "dsourceconsts.sflparticipant_idresource"
+msgid "Resource"
+msgstr ""
+
+#: dsourceconsts.sflparticipant_numresource
+msgctxt "dsourceconsts.sflparticipant_numresource"
+msgid "Number"
+msgstr ""
+
+#: dsourceconsts.sflperiod_idday
+msgctxt "dsourceconsts.sflperiod_idday"
+msgid "Day"
+msgstr ""
+
+#: dsourceconsts.sflperiod_idhour
+msgctxt "dsourceconsts.sflperiod_idhour"
+msgid "Hour"
+msgstr ""
+
+#: dsourceconsts.sflresourcetypelimit_idresourcetype
+msgid "Resource Type"
+msgstr ""
+
+#: dsourceconsts.sflresourcetypelimit_idtheme
+msgctxt "dsourceconsts.sflresourcetypelimit_idtheme"
+msgid "Theme"
+msgstr ""
+
+#: dsourceconsts.sflresourcetypelimit_numresourcelimit
+msgid "Limit"
+msgstr ""
+
+#: dsourceconsts.sflresourcetype_idresourcetype
+msgctxt "dsourceconsts.sflresourcetype_idresourcetype"
+msgid "Id"
+msgstr ""
+
+#: dsourceconsts.sflresourcetype_maxworkload
+msgid "Max Work Load"
+msgstr ""
+
+#: dsourceconsts.sflresourcetype_naresourcetype
+msgctxt "dsourceconsts.sflresourcetype_naresourcetype"
+msgid "Name"
+msgstr ""
+
+#: dsourceconsts.sflresourcetype_numresourcelimit
+msgid "Resource Limit"
+msgstr ""
+
+#: dsourceconsts.sflresourcetype_valresourcetype
+msgctxt "dsourceconsts.sflresourcetype_valresourcetype"
+msgid "Value"
+msgstr ""
+
+#: dsourceconsts.sflresource_abresource
+msgid "Abbreviation"
+msgstr ""
+
+#: dsourceconsts.sflresource_idresource
+msgctxt "dsourceconsts.sflresource_idresource"
+msgid "Id"
+msgstr ""
+
+#: dsourceconsts.sflresource_idresourcetype
+msgid "Type"
+msgstr ""
+
+#: dsourceconsts.sflresource_naresource
+msgctxt "dsourceconsts.sflresource_naresource"
+msgid "Name"
+msgstr ""
+
+#: dsourceconsts.sflresource_numresource
+msgctxt "dsourceconsts.sflresource_numresource"
+msgid "Number"
+msgstr ""
+
+#: dsourceconsts.sflrestrictiontype_colrestrictiontype
+msgid "Color"
+msgstr ""
+
+#: dsourceconsts.sflrestrictiontype_idrestrictiontype
+msgctxt "dsourceconsts.sflrestrictiontype_idrestrictiontype"
+msgid "Id"
+msgstr ""
+
+#: dsourceconsts.sflrestrictiontype_narestrictiontype
+msgctxt "dsourceconsts.sflrestrictiontype_narestrictiontype"
+msgid "Name"
+msgstr ""
+
+#: dsourceconsts.sflrestrictiontype_valrestrictiontype
+msgctxt "dsourceconsts.sflrestrictiontype_valrestrictiontype"
+msgid "Value"
+msgstr ""
+
+#: dsourceconsts.sflrestriction_idday
+msgctxt "dsourceconsts.sflrestriction_idday"
+msgid "Day"
+msgstr ""
+
+#: dsourceconsts.sflrestriction_idhour
+msgctxt "dsourceconsts.sflrestriction_idhour"
+msgid "Hour"
+msgstr ""
+
+#: dsourceconsts.sflrestriction_idresource
+msgctxt "dsourceconsts.sflrestriction_idresource"
+msgid "Resource"
+msgstr ""
+
+#: dsourceconsts.sflrestriction_idrestrictiontype
+msgid "Restriction Type"
+msgstr ""
+
+#: dsourceconsts.sfltheme_composition
+msgid "Composition"
+msgstr ""
+
+#: dsourceconsts.sfltheme_duration
+msgid "Duration"
+msgstr ""
+
+#: dsourceconsts.sfltheme_idtheme
+msgctxt "dsourceconsts.sfltheme_idtheme"
+msgid "Id"
+msgstr ""
+
+#: dsourceconsts.sfltheme_natheme
+msgctxt "dsourceconsts.sfltheme_natheme"
+msgid "Name"
+msgstr ""
+
+#: dsourceconsts.sfltimetabledetail_idactivity
+msgctxt "dsourceconsts.sfltimetabledetail_idactivity"
+msgid "Activity"
+msgstr ""
+
+#: dsourceconsts.sfltimetabledetail_idday
+msgctxt "dsourceconsts.sfltimetabledetail_idday"
+msgid "Day"
+msgstr ""
+
+#: dsourceconsts.sfltimetabledetail_idhour
+msgctxt "dsourceconsts.sfltimetabledetail_idhour"
+msgid "Hour"
+msgstr ""
+
+#: dsourceconsts.sfltimetabledetail_idtimetable
+msgctxt "dsourceconsts.sfltimetabledetail_idtimetable"
+msgid "Timetable"
+msgstr ""
+
+#: dsourceconsts.sfltimetabledetail_session
+msgid "Session"
+msgstr ""
+
+#: dsourceconsts.sfltimetableresource_idactivity
+msgctxt "dsourceconsts.sfltimetableresource_idactivity"
+msgid "Activity"
+msgstr ""
+
+#: dsourceconsts.sfltimetableresource_idresource
+msgctxt "dsourceconsts.sfltimetableresource_idresource"
+msgid "Resource"
+msgstr ""
+
+#: dsourceconsts.sfltimetableresource_idtimetable
+msgctxt "dsourceconsts.sfltimetableresource_idtimetable"
+msgid "Timetable"
+msgstr ""
+
+#: dsourceconsts.sfltimetableresource_numresource
+msgctxt "dsourceconsts.sfltimetableresource_numresource"
+msgid "Number"
+msgstr ""
+
+#: dsourceconsts.sfltimetable_idtimetable
+msgid "Timetable Id"
+msgstr ""
+
+#: dsourceconsts.sfltimetable_summary
+msgid "Summary"
+msgstr ""
+
+#: dsourceconsts.sfltimetable_timeend
+msgid "End Time"
+msgstr ""
+
+#: dsourceconsts.sfltimetable_timeini
+msgid "Initial Time"
+msgstr ""
+
+#: dsourceconsts.stbactivity
+msgid "Activities"
+msgstr ""
+
+#: dsourceconsts.stbavailability
+msgid "Availability of Resources to Cover Requirements in the Theme"
+msgstr ""
+
+#: dsourceconsts.stbday
+msgid "Working Days"
+msgstr ""
+
+#: dsourceconsts.stbhour
+msgid "Academic Hours"
+msgstr ""
+
+#: dsourceconsts.stbparticipant
+msgid "Participants"
+msgstr ""
+
+#: dsourceconsts.stbperiod
+msgctxt "dsourceconsts.stbperiod"
+msgid "Periods"
+msgstr ""
+
+#: dsourceconsts.stbresource
+msgctxt "dsourceconsts.stbresource"
+msgid "Resources"
+msgstr ""
+
+#: dsourceconsts.stbresourcetype
+msgid "Resource types"
+msgstr ""
+
+#: dsourceconsts.stbresourcetypelimit
+msgid "Limits for usage of Resource Types in Themes"
+msgstr ""
+
+#: dsourceconsts.stbrestriction
+msgid "Restrictions"
+msgstr ""
+
+#: dsourceconsts.stbrestrictiontype
+msgid "Types of Restrictions"
+msgstr ""
+
+#: dsourceconsts.stbtheme
+msgctxt "dsourceconsts.stbtheme"
+msgid "Themes"
+msgstr ""
+
+#: dsourceconsts.stbtimetable
+msgctxt "dsourceconsts.stbtimetable"
+msgid "Timetables"
+msgstr ""
+
+#: dsourceconsts.stbtimetabledetail
+msgid "Detail of Timetables"
+msgstr ""
+
+#: dsourceconsts.stbtimetableresource
+msgid "Resources of Timetables"
+msgstr ""
+
+#: tdbexplorerform.btexecutescript.caption
+msgid "Execute Script"
+msgstr ""
+
+#: tdbexplorerform.btopenquery.caption
+msgid "Open Query"
+msgstr ""
+
+#: tdbexplorerform.btopenscript.caption
+msgid "Open Script"
+msgstr ""
+
+#: tdbexplorerform.btsaveresults.caption
+msgid "Save Results"
+msgstr ""
+
+#: tdbexplorerform.btsavescript.caption
+msgid "Save Script"
+msgstr ""
+
+#: tdbexplorerform.caption
+msgctxt "tdbexplorerform.caption"
+msgid "Database Explorer"
+msgstr ""
+
+#: tdbexplorerform.cbmetadatatype.hint
+msgid "Metadata Type"
+msgstr ""
+
+#: tdbexplorerform.cbtable.hint
+msgid "Tables"
+msgstr ""
+
+#: tdbexplorerform.groupbox.caption
+msgid "Browse DataSet"
+msgstr ""
+
+#: tdbexplorerform.tbshowmetadata.caption
+msgid "Show Metadata"
+msgstr ""
+
+#: tdbexplorerform.tbshowtable.caption
+msgid "Show Table"
+msgstr ""
+
+#: tmainform.actabout.caption
+msgid "About..."
+msgstr ""
+
+#: tmainform.actabout.hint
+msgid "About|Information about this program"
+msgstr ""
+
+#: tmainform.actconfigure.caption
+msgid "Configure"
+msgstr ""
+
+#: tmainform.actconfigure.hint
+msgid "Configure|Edit the system configuration"
+msgstr ""
+
+#: tmainform.actday.caption
+msgid "Days"
+msgstr ""
+
+#: tmainform.actday.hint
+msgid "Days|Days"
+msgstr ""
+
+#: tmainform.actdbexplorer.caption
+msgctxt "tmainform.actdbexplorer.caption"
+msgid "Database Explorer"
+msgstr ""
+
+#: tmainform.actexit.caption
+msgid "Exit"
+msgstr ""
+
+#: tmainform.actexit.hint
+msgid "Exit|Exit from program"
+msgstr ""
+
+#: tmainform.acthour.caption
+msgid "Hours"
+msgstr ""
+
+#: tmainform.acthour.hint
+msgid "Hours|Hours"
+msgstr ""
+
+#: tmainform.actlangdefault.caption
+msgid "Default Language"
+msgstr ""
+
+#: tmainform.actlangenglish.caption
+msgid "English"
+msgstr ""
+
+#: tmainform.actlangspanish.caption
+msgid "Spanish"
+msgstr ""
+
+#: tmainform.actmaketimetable.caption
+msgid "Make Timetables"
+msgstr ""
+
+#: tmainform.actmaketimetable.hint
+msgid "Make Timetables|Make Timetables"
+msgstr ""
+
+#: tmainform.actnew.caption
+msgid "&New"
+msgstr ""
+
+#: tmainform.actnew.hint
+msgid "New|New Timetable"
+msgstr ""
+
+#: tmainform.actopen.caption
+msgid "Open"
+msgstr ""
+
+#: tmainform.actopen.hint
+msgid "Open|Open saved institution"
+msgstr ""
+
+#: tmainform.actperiod.caption
+msgctxt "tmainform.actperiod.caption"
+msgid "Periods"
+msgstr ""
+
+#: tmainform.actperiod.hint
+msgid "Periods|Periods"
+msgstr ""
+
+#: tmainform.actregistrationinfo.caption
+msgid "Registration Info"
+msgstr ""
+
+#: tmainform.actresource.caption
+msgctxt "tmainform.actresource.caption"
+msgid "Resources"
+msgstr ""
+
+#: tmainform.actresource.hint
+msgid "Resources|Resources"
+msgstr ""
+
+#: tmainform.actresourcetype.caption
+msgid "Resource Types"
+msgstr ""
+
+#: tmainform.actresourcetype.hint
+msgid "Resource Types|Resource Types"
+msgstr ""
+
+#: tmainform.actrestrictiontype.caption
+msgid "ActRestrictionType"
+msgstr ""
+
+#: tmainform.actrestrictiontype.hint
+msgid "Restriction Types|Restriction Types"
+msgstr ""
+
+#: tmainform.actsave.caption
+msgid "Save..."
+msgstr ""
+
+#: tmainform.actsave.hint
+msgid "Save|Save Timetable"
+msgstr ""
+
+#: tmainform.acttheme.caption
+msgctxt "tmainform.acttheme.caption"
+msgid "Themes"
+msgstr ""
+
+#: tmainform.acttheme.hint
+msgid "Themes|Themes"
+msgstr ""
+
+#: tmainform.acttimetable.caption
+msgctxt "tmainform.acttimetable.caption"
+msgid "Timetables"
+msgstr ""
+
+#: tmainform.acttimetable.hint
+msgid "Timetables|Show Timetables"
+msgstr ""
+
+#: tmainform.caption
+msgid "MainForm"
+msgstr ""
+
+#: tmainform.midata.caption
+msgid "&Data"
+msgstr ""
+
+#: tmainform.midata.hint
+msgid "Data|Input Data"
+msgstr ""
+
+#: tmainform.mifile.caption
+msgid "&File"
+msgstr ""
+
+#: tmainform.mifile.hint
+msgid "File|File tools"
+msgstr ""
+
+#: tmainform.mihelp.caption
+msgid "&Help"
+msgstr ""
+
+#: tmainform.mihelp.hint
+msgid "Help|Online help"
+msgstr ""
+
+#: tmainform.milanguages.caption
+msgid "Languages"
+msgstr ""
+
+#: tmainform.mireopen.caption
+msgid "Reopen"
+msgstr ""
+
+#: tmainform.mireopen.hint
+msgid "Reopen|Reopen Timetable"
+msgstr ""
+
+#: tmainform.mitool.caption
+msgid "&Tools"
+msgstr ""
+
+#: tmainform.mitool.hint
+msgid "Tools|Tools that allow to make a timetable"
+msgstr ""
+
+#: tmainform.miview.caption
+msgid "&View"
+msgstr ""
+
+#: tmainform.miview.hint
+msgid "View|View results"
+msgstr ""
+
+#: tsingleeditorform.actfind.caption
+msgid "Find"
+msgstr ""
+
+#: tsingleeditorform.actfind.hint
+msgid "Find|Find by Field"
+msgstr ""
+
+#: uabout.sappname
+msgid "Automatic Timetable Generator"
+msgstr ""
+
+#: uttgconsts.sactivitywithoutresources
+#, object-pascal-format
+msgid "Activity %s does not have assigned resources"
+msgstr ""
+
+#: uttgconsts.sapplydownhill
+msgid "Applying Downhill"
+msgstr ""
+
+#: uttgconsts.sassign
+msgid "Assign"
+msgstr ""
+
+#: uttgconsts.sattendant
+msgid "Attendant"
+msgstr ""
+
+#: uttgconsts.sbasetimetable
+#, object-pascal-format
+msgid "Base Timetable: %d"
+msgstr ""
+
+#: uttgconsts.sbreaktimetableresource
+msgid "Break TT. Resources"
+msgstr ""
+
+#: uttgconsts.sbrokensession
+msgid "Broken Sessions"
+msgstr ""
+
+#: uttgconsts.schangeswillbelostwarning
+msgid "Changes will be lost, are you sure?"
+msgstr ""
+
+#: uttgconsts.sclashactivity
+msgid "Clash of Activities"
+msgstr ""
+
+#: uttgconsts.sclashes
+msgid "Clashes"
+msgstr ""
+
+#: uttgconsts.sclashresource
+msgid "Clash of Resources"
+msgstr ""
+
+#: uttgconsts.scopyright
+msgid "1999-2013 by Edison Mera"
+msgstr ""
+
+#: uttgconsts.scount
+msgid "Count"
+msgstr ""
+
+#: uttgconsts.scrossprobability
+msgid "Cross Probability"
+msgstr ""
+
+#: uttgconsts.sday0
+msgid "Sunday"
+msgstr ""
+
+#: uttgconsts.sday1
+msgid "Monday"
+msgstr ""
+
+#: uttgconsts.sday2
+msgid "Tuesday"
+msgstr ""
+
+#: uttgconsts.sday3
+msgid "Wednesday"
+msgstr ""
+
+#: uttgconsts.sday4
+msgid "Thursday"
+msgstr ""
+
+#: uttgconsts.sday5
+msgid "Friday"
+msgstr ""
+
+#: uttgconsts.sday6
+msgid "Saturday"
+msgstr ""
+
+#: uttgconsts.sdeletecell
+msgid "Press <Del> to clean the cell"
+msgstr ""
+
+#: uttgconsts.sdetail
+msgid "Detail"
+msgstr ""
+
+#: uttgconsts.sdonotappearsin
+msgid "do not appears in"
+msgstr ""
+
+#: uttgconsts.sdonothaveresource
+msgid "do not have resource"
+msgstr ""
+
+#: uttgconsts.sdownhillalgorithm
+msgid "Downhill Algorithm"
+msgstr ""
+
+#: uttgconsts.sediting
+msgid "Editing"
+msgstr ""
+
+#: uttgconsts.selapsedtime
+msgid "Elapsed Time"
+msgstr ""
+
+#: uttgconsts.sevolutiveelitistalgorithm
+msgid "Evolutive Elitist Algorithm"
+msgstr ""
+
+#: uttgconsts.sgeneratetimetables
+msgid "Generate Timetables"
+msgstr ""
+
+#: uttgconsts.shour1
+msgid "First"
+msgstr ""
+
+#: uttgconsts.shour2
+msgid "Second"
+msgstr ""
+
+#: uttgconsts.shour3
+msgid "Third"
+msgstr ""
+
+#: uttgconsts.shour4
+msgid "Fourth"
+msgstr ""
+
+#: uttgconsts.shour5
+msgid "Fifth"
+msgstr ""
+
+#: uttgconsts.shour6
+msgid "Sixth"
+msgstr ""
+
+#: uttgconsts.shour7
+msgid "Seventh"
+msgstr ""
+
+#: uttgconsts.shour8
+msgid "Eighth"
+msgstr ""
+
+#: uttgconsts.shourf
+msgid "Free"
+msgstr ""
+
+#: uttgconsts.simpossible
+msgid "Impossible"
+msgstr ""
+
+#: uttgconsts.simprovedtimetableid
+msgid "Improved Timetable Id"
+msgstr ""
+
+#: uttgconsts.simprovingtimetable
+#, object-pascal-format
+msgid "Improving Timetable [%d]"
+msgstr ""
+
+#: uttgconsts.simprovingtimetablein
+#, object-pascal-format
+msgid "Improving Timetable [%d] in [%d]"
+msgstr ""
+
+#: uttgconsts.sinadequate
+msgid "Inadequate"
+msgstr ""
+
+#: uttgconsts.sinvalidcomposition
+#, object-pascal-format
+msgid "Invalid Composition: [%s]"
+msgstr ""
+
+#: uttgconsts.sinvaliddata
+msgid "Invalid input data"
+msgstr ""
+
+#: uttgconsts.sisempty
+#, object-pascal-format
+msgid "%s is empty"
+msgstr ""
+
+#: uttgconsts.siterations
+msgid "Number of iterations"
+msgstr ""
+
+#: uttgconsts.sload
+msgctxt "uttgconsts.sload"
+msgid "Load"
+msgstr ""
+
+#: uttgconsts.smutationprobability
+msgid "Mutation Probability"
+msgstr ""
+
+#: uttgconsts.sname
+msgctxt "uttgconsts.sname"
+msgid "Name"
+msgstr ""
+
+#: uttgconsts.sno
+msgid "No"
+msgstr ""
+
+#: uttgconsts.snoerrorreadyforchecksummary
+msgid "Ready to generate timetable. Show timetable check Summary?"
+msgstr ""
+
+#: uttgconsts.snonscatteredactivity
+msgid "Non Scattered Activities"
+msgstr ""
+
+#: uttgconsts.snumhardrestrictions
+msgid "Number of hard resource restrictions..."
+msgstr ""
+
+#: uttgconsts.snumsoftrestrictions
+msgid "Number of soft resource restrictions..."
+msgstr ""
+
+#: uttgconsts.spendingchangeswillbelostyoureallywanttoquit
+msgid "Pending changes will be lost. Do you really want to quit?"
+msgstr ""
+
+#: uttgconsts.spollinationprobability
+msgid "Pollination Probability"
+msgstr ""
+
+#: uttgconsts.spopulationsize
+msgid "Population size"
+msgstr ""
+
+#: uttgconsts.spressdeltoclearcell
+msgid "Press <Del> to clear cell"
+msgstr ""
+
+#: uttgconsts.sproblems
+msgid "Problems"
+msgstr ""
+
+#: uttgconsts.srandseed
+msgid "Random Generator Seed"
+msgstr ""
+
+#: uttgconsts.sready
+msgid "Ready"
+msgstr ""
+
+#: uttgconsts.srelcolsrows
+#, object-pascal-format
+msgid "%s|Columns: %s - Rows: %s "
+msgstr ""
+
+#: uttgconsts.srelease
+msgid "Release"
+msgstr ""
+
+#: uttgconsts.sreparationprobability
+msgid "Repair Probability"
+msgstr ""
+
+#: uttgconsts.sresourceoverflow
+#, object-pascal-format
+msgid "For [%s], the number of activities %d exceeds its capacity %d"
+msgstr ""
+
+#: uttgconsts.sresourcesworkloadwithoutproblems
+msgid "Resources' Work load without problems..."
+msgstr ""
+
+#: uttgconsts.sresourcesworkloadwithproblems
+msgid "Resources' work load with problems..."
+msgstr ""
+
+#: uttgconsts.sresourceworkloadhead
+msgid "Resource; Work Load"
+msgstr ""
+
+#: uttgconsts.srestrictionshead
+msgid "Resource; Restrictions"
+msgstr ""
+
+#: uttgconsts.sroom
+msgid "Room"
+msgstr ""
+
+#: uttgconsts.ssavechanges
+msgid "Do you want to save the changes?"
+msgstr ""
+
+#: uttgconsts.ssavedialogcsvfilter
+msgid "Comma delimited CSV (*.csv)|*.csv"
+msgstr ""
+
+#: uttgconsts.ssavedialogfilter
+msgid "Timetable (*.ttd)|*.ttd"
+msgstr ""
+
+#: uttgconsts.ssearchby
+#, object-pascal-format
+msgid "Search by %s"
+msgstr ""
+
+#: uttgconsts.ssupervisor
+msgid "Supervisor"
+msgstr ""
+
+#: uttgconsts.sthemeoverflow
+#, object-pascal-format
+msgid "For [%s] and the Resources [%s], the limit %d has been exceeded in %d"
+msgstr ""
+
+#: uttgconsts.sthenexttimetablesalreadyexists
+#, object-pascal-format
+msgid "The next Timetables already exists: %s"
+msgstr ""
+
+#: uttgconsts.stimetablecodestogenerate
+msgid "Codes of Timetables to generate"
+msgstr ""
+
+#: uttgconsts.stotalvalue
+msgid "Total Value"
+msgstr ""
+
+#: uttgconsts.svalue
+msgctxt "uttgconsts.svalue"
+msgid "Value"
+msgstr ""
+
+#: uttgconsts.sweight
+msgid "Weight"
+msgstr ""
+
+#: uttgconsts.sweights
+msgid "Weights"
+msgstr ""
+
+#: uttgconsts.swhenprocessing
+#, object-pascal-format
+msgid "When processing %s"
+msgstr ""
+
+#: uttgconsts.sworkinprogress
+#, object-pascal-format
+msgid "Work in progress [%d]"
+msgstr ""
+
+#: uttgconsts.swrongcomposition
+msgid "Wrong Composition"
+msgstr ""
+
+#: uttgconsts.syes
+msgid "Yes"
+msgstr ""
+

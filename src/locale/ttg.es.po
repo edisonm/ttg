@@ -607,7 +607,7 @@ msgstr "Buscar|Buscar por campo"
 #: uabout.sappname
 #, fuzzy
 #| msgid "Automatic Timetable Generator"
-msgid "      <StringTable LegalCopyright=\"1999-2013 by Edison Mera\" FileDescription=\"Automatic Timetable Generator\"/>"
+msgid "Automatic Timetable Generator"
 msgstr "Generador Automatico de Horarios"
 
 #: uttgconsts.sactivitywithoutresources

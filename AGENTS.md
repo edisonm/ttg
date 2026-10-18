@@ -10,8 +10,10 @@ primary target; a Cygwin/Windows flow also exists but is secondary.
   `lazbuild --build-mode=debug ttg.lpi` for the GUI (`bin/<cpu>-<os>-debug/ttg`)
   and `lazbuild --ws=nogui ttgsolve.lpi` for the headless binary
   (`bin/<cpu>-<os>-debug/ttgsolve`).
-- Mode selection: `make BuildMode=release` (release also strips; debug is the
-  default and is much slower — benchmarks need release).
+- Mode selection: `make BuildMode=release` (release also strips, and skips
+  `upx` if it is not installed; debug is the default and is much slower —
+  benchmarks need release). Release output goes to `bin/<cpu>-<os>/` and
+  `obj/<cpu>-<os>/` (no `-debug` suffix).
 - `make run` runs the GUI; `make ex1`..`ex5` open bundled example `.ttd`
   files; `make solve [EX=Herradura2013.ttd]` runs a headless solve of an
   example (default `Britanico2000.ttd`) with full config iteration counts —
@@ -100,7 +102,10 @@ swap in a vanilla ZeosLib without re-applying them. `multithreadprocs` and
   (`SourceDataModule` first!) before calling into them outside the GUI.
 - i18n: resource strings (`.lrt` files) + gettext catalogs in `src/locale/`.
   Team convention: ship the `.po` file directly (the Makefile install target
-  copies `ttg.es.po`); compiled `.mo` was dropped as buggy.
+  copies `ttg.es.po`); compiled `.mo` was dropped as buggy. The template
+  `src/locale/ttg.pot` is tracked and regenerated with `make pot` (needs a
+  built project: it feeds the compiler-written `.rsj` + form `.lrj` files to
+  Lazarus' `updatepofiles`, which also merges new strings into `ttg.*.po`).
 - `src/backup/` contains **stale old copies** of units with the same names —
   never edit or `uses`-resolve into them.
 - Root is full of untracked cruft (`*.log`, `*.diff`, `README.md~`); the

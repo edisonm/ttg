@@ -22,6 +22,7 @@ LAZIDE?=lazarus-ide
 endif
 
 LAZRES?=$(LAZBASE)/tools/lazres
+LAZUPDATEPOFILES?=$(LAZBASE)/tools/updatepofiles
 
 TTGSQL=$(RELDIR)/dat/ttg.sql
 
