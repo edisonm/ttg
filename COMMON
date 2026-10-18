@@ -50,6 +50,7 @@ TargetOS=$(shell $(FPC) -iSO)
 TargetSYS=$(TargetCPU)-$(TargetOS)
 BuildId=$(TargetSYS)$(BuildLabel)
 TTGEXE=$(TTGDIR)/bin/$(BuildId)/$(Package)$(EXEEXT)
+TTGSOLVE=$(TTGDIR)/bin/$(BuildId)/ttgsolve$(EXEEXT)
 
 DBCONVERTDIR=$(RELDIR)/../DBConvert
 DBCONVERTSRC=$(DBCONVERTDIR)/src

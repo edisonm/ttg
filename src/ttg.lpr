@@ -12,11 +12,12 @@ uses
   DMaster in 'DMaster.pas' {MasterDataModule: TDataModule},
   FSplash {SplashForm},
   DSource in 'DSource.pas' {SourceDataModule: TDataModule},
-  UConfigStorage, UTTGi18n, UProgress, zdbc, UAbout;
+  UConfigStorage, UTTGi18n, UProgress, zdbc, UAbout, UConsole;
 
 var
   FConfigStorage: TConfigStorage;
   FConfigFileName, ExecutableExt, FConfigPath, Language: string;
+  Args: TCommandLine;
   
 const
   AppBaseName: string = 'ttg';
@@ -24,6 +25,33 @@ const
 {$R *.res}
 
 begin
+  { Command line interface: --solve runs headlessly, before any GUI is
+    initialized; use the ttgsolve build when no display is available. }
+  ParseCommandLine(Args);
+  if Args.ShowHelp then
+  begin
+    PrintUsage;
+    Halt(0);
+  end;
+  if Args.Solving then
+  begin
+    if Args.InputFile = '' then
+    begin
+      WriteLn(StdErr, 'ttg --solve: missing input .ttd file');
+      PrintUsage;
+      Halt(2);
+    end;
+    try
+      Halt(SolveFile(Args.InputFile, Args.OutputFile, Args.Seed,
+        Args.MaxIteration, Args.NoDownHill));
+    except
+      on E: Exception do
+      begin
+        WriteLn(StdErr, 'ttg: ', E.Message);
+        Halt(1);
+      end;
+    end;
+  end;
   {$IFDEF UNIX}
   FConfigPath := GetEnvironmentVariable('HOME');
   ExecutableExt := '';

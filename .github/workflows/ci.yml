@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Lazarus/FPC
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends lazarus fpc
+
+      # ttg.lpi expects ZeosLib and multithreadprocs in sibling dirs of the
+      # repo (../../zeoslib, ../../multithreadprocs relative to src/).
+      # The frones/ZeosLib 8.0-patches branch already contains the two fixes
+      # we used to carry as local patches (see patches/zeoslib/).
+      - name: Check out dependencies
+        run: |
+          PARENT="$(dirname "$GITHUB_WORKSPACE")"
+          git clone --depth 1 -b 8.0-patches \
+            https://github.com/frones/ZeosLib.git "$PARENT/zeoslib"
+          MT="$(dirname "$(find /usr/share/lazarus /usr/lib/lazarus \
+            -name mtprocs.pas 2>/dev/null | head -1)")"
+          test -n "$MT"
+          ln -s "$MT" "$PARENT/multithreadprocs"
+          for lpk in "$PARENT"/zeoslib/packages/lazarus/z*.lpk; do
+            lazbuild --add-package-link "$lpk"
+          done
+
+      # SynEdit (required by ttg.lpi) ships with the distro Lazarus.
+      - name: Build GUI (ttg) and headless (ttgsolve) binaries
+        run: make
+
+      - name: Run headless solver tests
+        run: make test

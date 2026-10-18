@@ -52,6 +52,8 @@ type
     procedure SetPollinationProbability(Value: Double);
     function GetApplyDoubleDownHill: Boolean;
     procedure SetApplyDoubleDownHill(Value: Boolean);
+    function GetSkipDownHill: Boolean;
+    procedure SetSkipDownHill(Value: Boolean);
   public
     procedure SetDefaults;
     procedure InitRandom;
@@ -73,6 +75,7 @@ type
     property SharedDirectory: string read GetSharedDirectory write SetSharedDirectory;
     property PollinationProbability: Double read GetPollinationProbability write SetPollinationProbability;
     property ApplyDoubleDownHill: Boolean read GetApplyDoubleDownHill write SetApplyDoubleDownHill;
+    property SkipDownHill: Boolean read GetSkipDownHill write SetSkipDownHill;
     property Bookmarks: string read GetBookmarks write SetBookmarks;
   end;
 
@@ -266,6 +269,19 @@ end;
 procedure TTTGConfig.SetApplyDoubleDownHill(Value: Boolean);
 begin
   Booleans['ApplyDoubleDownHill'] := Value;
+end;
+
+{ Not stored in the .ttd by the GUI: set only by `ttgsolve --no-downhill`
+  to bound the solve time of automated tests. Missing key => False. }
+
+function TTTGConfig.GetSkipDownHill: Boolean;
+begin
+  Result := Booleans['SkipDownHill'];
+end;
+
+procedure TTTGConfig.SetSkipDownHill(Value: Boolean);
+begin
+  Booleans['SkipDownHill'] := Value;
 end;
 
 procedure TTTGConfig.SetDefaults;

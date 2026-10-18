@@ -161,7 +161,11 @@ begin
           Result := True;
           Exit;
         end;
-        if not AProgressViewer.CloseClick and ApplyDoubleDownHill then
+        if SkipDownHill then
+        begin
+          { bound the solve: skip the unbounded descent phases }
+        end
+        else if not AProgressViewer.CloseClick and ApplyDoubleDownHill then
         begin
           DownHill := TDownHill.Create(FTimetableModel,
             SharedDirectory, PollinationProbability);

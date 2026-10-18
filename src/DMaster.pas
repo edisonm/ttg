@@ -148,7 +148,7 @@ begin
   try
     AStrings.Text := LazarusResources.Find('Default', 'TTD').Value;
     APosition := 0;
-    MasterDataModule.LoadFromStrings(AStrings, APosition);
+    LoadFromStrings(AStrings, APosition);
   finally
     AStrings.Free;
   end;

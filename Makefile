@@ -28,7 +28,7 @@ endif
 $(BUILDMODES):
 	cd $(PKGSRC) ; $(MAKE) BuildMode=$@ ;
 
-run ex1 ex2 ex3 ex4 ex5 ide clean:
+run solve ex1 ex2 ex3 ex4 ex5 ide clean:
 	cd $(TTGSRC) ; $(MAKE) $@
 
 $(TTGSQLITE3): $(TTGSQL)
@@ -55,6 +55,7 @@ install:
 	mkdir -p $(DESTDIR)/usr/share/locale/es/LC_MESSAGES
 	mkdir -p $(DESTDIR)/usr/share/applications
 	cp $(TTGEXE) $(DESTDIR)/usr/bin/
+	cp $(TTGSOLVE) $(DESTDIR)/usr/bin/
 	cp $(TTGDIR)/examples/Herradura2013.ttd \
 	   $(TTGDIR)/examples/Britanico2000.ttd \
 	   $(TTGDIR)/examples/Salamanca1999.ttd \

@@ -17,7 +17,7 @@ VPATH:=$(OBJDIR)
 
 #.PRECIOUS: ttg.iss
 
-all: $(FILES)
+all: $(FILES) $(TTGSOLVE)
 
 ifeq ($(shell uname -o),Cygwin)
 $(LAZRES): $(LAZBASE)/tools/lazres.lpi
@@ -68,26 +68,27 @@ ifneq ($(TargetSYS),x86_64-win64)
 endif
 endif
 
+$(TTGSOLVE): $(BASELAZFILES) ttgsolve.lpr ttgsolve.lpi ttg.lrs ttg.inc Makefile SETTINGS COMMON
+	$(LAZBUILD) --build-mode=$(BuildMode) --ws=nogui ttgsolve.lpi
+ifneq ($(BuildMode),debug)
+	strip --strip-all $(TTGSOLVE)
+endif
+
 cleanthis:
 	$(RM) -r $(TTGDIR)/bin $(TTGDIR)/obj $(ABOUT).pas *.lrs
 
 clean: cleanthis
 
-test:
-	@echo APPNAME=$(APPNAME)
-	@echo Copyright=$(Copyright)
-	@echo UNITS=$(UNITS)
-	@echo Version=$(Version)
-	@echo BuildNr0="$(BuildNr0)"
-	@echo BuildNr=$(BuildNr)
-	@echo Revision=$(Revision)
-	@echo SvnVersion=$(SvnVersion)
-	@echo TTGEXE=$(TTGEXE)
-	@echo BASELAZFILES=$(BASELAZFILES)
-	@echo BuildId=$(BuildId)
+test: $(TTGSOLVE)
+	sh $(RELDIR)/tests/run-tests.sh $(TTGSOLVE) $(RELDIR)/examples
 
 run:
 	$(TTGEXE)
+
+EX?=Britanico2000.ttd
+
+solve:
+	$(TTGSOLVE) --solve $(RELDIR)/examples/$(EX)
 
 ex1:
 	$(TTGEXE) $(RELDIR)/examples/Britanico2000.ttd

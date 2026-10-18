@@ -1,0 +1,73 @@
+From 51b382a630eb5987fe0c4039658eac10ae124216 Mon Sep 17 00:00:00 2001
+From: Edison Mera <efmera@gmail.com>
+Date: Thu, 15 Oct 2026 21:31:36 +0200
+Subject: [PATCH 1/2]  Fixed a problem related to execution of SQL commands:
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Root cause: TZSQLiteConnection.ExecuteImmediat (used by
+TZConnection.ExecuteDirect) in ZEOS 8.0.0 calls sqlite3_prepare_v2 once and
+ignores the pZTail pointer, so only the first statement of a multi- statement
+script runs.
+
+Fix: patched ZDbcSqLite.pas:603 to loop over pzTail like sqlite3_exec does —
+prepare/step/finalize each statement in turn (with a safety break against
+zero-advance loops).
+---
+ src/dbc/ZDbcSqLite.pas | 32 +++++++++++++++++++++++++++-----
+ 1 file changed, 27 insertions(+), 5 deletions(-)
+
+diff --git a/src/dbc/ZDbcSqLite.pas b/src/dbc/ZDbcSqLite.pas
+index a70a26e94..1bbe1e0e9 100644
+--- a/src/dbc/ZDbcSqLite.pas
++++ b/src/dbc/ZDbcSqLite.pas
+@@ -604,18 +604,40 @@ procedure TZSQLiteConnection.ExecuteImmediat(const SQL: RawByteString;
+   LoggingCategory: TZLoggingCategory);
+ var Stmt: Psqlite3_stmt;
+   Status: Integer;
++  PStart, PZTail: PAnsiChar;
++  Remaining: PtrInt;
+ begin
+-  Stmt := nil;
+-  try
+-    ExecuteImmediat(SQL, LoggingCategory, Stmt);
+-  finally
+-    if Stmt <> nil then begin
++  if Pointer(SQL) = nil then
++    Exit;
++  PStart := Pointer(SQL);
++  Remaining := Length(SQL);
++  while Remaining > 0 do begin
++    Stmt := nil;
++    PZTail := nil;
++    Status := FPlainDriver.sqlite3_prepare_v2(FHandle, PStart, Remaining, Stmt, PZTail);
++    if (Status <> SQLITE_OK) and (Status <> SQLITE_DONE) then
++      HandleErrorOrWarning(lcPrepStmt, Status, string(SQL),
++        IImmediatelyReleasable(FWeakImmediatRelPtr));
++    if (PZTail = nil) or (PZTail <= PStart) then
++      Break;
++    Dec(Remaining, PZTail - PStart);
++    PStart := PZTail;
++    if Stmt = nil then
++      Continue;
++    try
++      Status := FPlainDriver.sqlite3_step(Stmt);
++      if (Status <> SQLITE_OK) and (Status <> SQLITE_DONE) then
++        HandleErrorOrWarning(LoggingCategory, Status, string(SQL),
++          IImmediatelyReleasable(FWeakImmediatRelPtr));
++    finally
+       Status := FPlainDriver.sqlite3_finalize(Stmt);
+       if Status <> SQLITE_OK then
+         HandleErrorOrWarning(lcUnprepStmt, Status, 'sqlite3_finalize',
+           IImmediatelyReleasable(FWeakImmediatRelPtr));
+     end;
+   end;
++  if DriverManager.HasLoggingListener then
++    DriverManager.LogMessage(LoggingCategory, URL.Protocol, string(SQL));
+ end;
+ 
+ {**
+-- 
+2.47.3
+

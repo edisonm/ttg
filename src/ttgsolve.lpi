@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="12"/>
+    <General>
+      <Flags>
+        <CompatibilityMode Value="True"/>
+      </Flags>
+      <SessionStorage Value="None"/>
+      <UseAppBundle Value="False"/>
+      <MainUnit Value="0"/>
+      <Title Value="ttgsolve"/>
+    </General>
+    <MacroValues Count="1">
+      <Macro1 Name="LCLWidgetType" Value="nogui"/>
+    </MacroValues>
+    <BuildModes Count="2">
+      <Item1 Name="debug" Default="True">
+        <MacroValues Count="1">
+          <Macro1 Name="LCLWidgetType" Value="nogui"/>
+        </MacroValues>
+      </Item1>
+      <Item2 Name="release">
+        <MacroValues Count="1">
+          <Macro1 Name="LCLWidgetType" Value="nogui"/>
+        </MacroValues>
+        <CompilerOptions>
+          <Version Value="11"/>
+          <Target>
+            <Filename Value="../bin/$(TargetCPU)-$(TargetOS)/ttgsolve"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir)"/>
+            <OtherUnitFiles Value="../../zeoslib/packages/lazarus;../../zeoslib/src/core;../../zeoslib/src/dbc;../../zeoslib/src/parsesql;../../zeoslib/src/plain;../../zeoslib/src/component;../../multithreadprocs;../obj/$(TargetCPU)-$(TargetOS)"/>
+            <UnitOutputDirectory Value="../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)"/>
+          </SearchPaths>
+          <CodeGeneration>
+            <SmartLinkUnit Value="True"/>
+            <Optimizations>
+              <OptimizationLevel Value="3"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+              <DebugInfoType Value="dsDwarf3"/>
+              <UseLineInfoUnit Value="False"/>
+            </Debugging>
+            <LinkSmart Value="True"/>
+          </Linking>
+          <Other>
+            <CustomOptions Value="-dZEOS_DISABLE_MYSQL
+-dZEOS_DISABLE_POSTGRESQL
+-dZEOS_DISABLE_DBLIB
+-dZEOS_DISABLE_ADO
+-dZEOS_DISABLE_INTERBASE
+-dZEOS_DISABLE_ORACLE
+-dZEOS_DISABLE_ASA
+-Xs- -FW../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)/ttgsolve.wpo -OWall"/>
+          </Other>
+        </CompilerOptions>
+      </Item2>
+    </BuildModes>
+    <RequiredPackages Count="4">
+      <Item1>
+        <PackageName Value="zdbc"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="MultiThreadProcsLaz"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item3>
+      <Item4>
+        <PackageName Value="LCL"/>
+      </Item4>
+    </RequiredPackages>
+    <Units Count="2">
+      <Unit0>
+        <Filename Value="ttgsolve.lpr"/>
+        <IsPartOfProject Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="UConsole.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit1>
+    </Units>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <Target>
+      <Filename Value="../bin/$(TargetCPU)-$(TargetOS)-debug/ttgsolve"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="../../zeoslib/packages/lazarus;../../zeoslib/src/core;../../zeoslib/src/dbc;../../zeoslib/src/parsesql;../../zeoslib/src/plain;../../zeoslib/src/component;../../multithreadprocs;../obj/$(TargetCPU)-$(TargetOS)-debug"/>
+      <UnitOutputDirectory Value="../obj/$(TargetCPU)-$(TargetOS)-debug"/>
+    </SearchPaths>
+    <CodeGeneration>
+      <SmartLinkUnit Value="True"/>
+      <Checks>
+        <RangeChecks Value="True"/>
+      </Checks>
+    </CodeGeneration>
+    <Linking>
+      <Debugging>
+        <DebugInfoType Value="dsDwarf3"/>
+      </Debugging>
+      <LinkSmart Value="True"/>
+    </Linking>
+    <Other>
+      <CustomOptions Value="-dZEOS_DISABLE_MYSQL
+-dZEOS_DISABLE_POSTGRESQL
+-dZEOS_DISABLE_DBLIB
+-dZEOS_DISABLE_ADO
+-dZEOS_DISABLE_INTERBASE
+-dZEOS_DISABLE_FIREBIRD
+-dZEOS_DISABLE_ORACLE
+-dZEOS_DISABLE_ASA
+-dZEOS_DISABLE_SQLANY
+-dZEOS_DISABLE_POOLED
+-dZEOS_DISABLE_OLEDB
+-dZEOS_DISABLE_ODBC
+-dZEOS_DISABLE_PROXY
+-dDISABLE_INTERBASE_AND_FIREBIRD
+-dDEBUG"/>
+    </Other>
+  </CompilerOptions>
+</CONFIG>

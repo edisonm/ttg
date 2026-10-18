@@ -104,7 +104,7 @@
         <PackageName Value="LCL"/>
       </Item5>
     </RequiredPackages>
-    <Units Count="37">
+    <Units Count="38">
       <Unit0>
         <Filename Value="ttg.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -311,6 +311,10 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UProgress"/>
       </Unit36>
+      <Unit37>
+        <Filename Value="UConsole.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit37>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

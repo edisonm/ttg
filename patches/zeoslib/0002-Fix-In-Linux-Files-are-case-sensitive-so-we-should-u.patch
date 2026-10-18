@@ -1,0 +1,40 @@
+From effd9b2beb9766cbbf3176aff0e09e37cac70488 Mon Sep 17 00:00:00 2001
+From: Edison Mera <efmera@gmail.com>
+Date: Thu, 15 Oct 2026 21:38:02 +0200
+Subject: [PATCH 2/2] Fix: In Linux, Files are case-sensitive, so we should use
+ the modules with the right names
+
+---
+ src/dbc/ZDbcDbLibResultSet.pas | 2 +-
+ src/dbc/ZDbcDbLibUtils.pas     | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/dbc/ZDbcDbLibResultSet.pas b/src/dbc/ZDbcDbLibResultSet.pas
+index 14a4f4099..aa33a4826 100644
+--- a/src/dbc/ZDbcDbLibResultSet.pas
++++ b/src/dbc/ZDbcDbLibResultSet.pas
+@@ -72,7 +72,7 @@ uses
+   FmtBCD,
+   ZDbcIntfs, ZDbcResultSet, ZCompatibility, ZDbcResultsetMetadata,
+   ZDbcGenericResolver, ZDbcCachedResultSet, ZDbcCache, ZDbcDBLib,
+-  ZPlainDBLibDriver;
++  ZPlainDbLibDriver;
+ 
+ type
+   {$IFNDEF ZEOS_DISABLE_DBLIB} //if set we have an empty unit
+diff --git a/src/dbc/ZDbcDbLibUtils.pas b/src/dbc/ZDbcDbLibUtils.pas
+index 9fb4c3255..956d8400e 100644
+--- a/src/dbc/ZDbcDbLibUtils.pas
++++ b/src/dbc/ZDbcDbLibUtils.pas
+@@ -57,7 +57,7 @@ interface
+ 
+ {$IFNDEF ZEOS_DISABLE_DBLIB} //if set we have an empty unit
+ uses Classes, SysUtils,
+-  ZVariant, ZDbcIntfs, ZPlainDBLibDriver, ZCompatibility;
++  ZVariant, ZDbcIntfs, ZPlainDbLibDriver, ZCompatibility;
+ 
+ {**
+   Converts an ODBC native types into ZDBC SQL types.
+-- 
+2.47.3
+
