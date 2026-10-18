@@ -39,7 +39,19 @@ LAZBASE=/cygdrive/c/lazarus$(OSBITS)
 FPC=$(LAZBASE)/fpc/3.2.2/bin/$(ARCH)-win$(OSBITS)/fpc
 EXEEXT=.exe
 else
-LAZBASE=/usr/share/lazarus/4.8.0
+# Find the Lazarus install dir from the lazbuild program: Debian/Ubuntu ship
+# /usr/bin/lazbuild, a symlink (or wrapper) pointing into
+# <prefix>/<version>/lazbuild, where <prefix> is /usr/share/lazarus or
+# /usr/lib/lazarus depending on the distro release; tools/lazres and
+# tools/updatepofiles live beside it.
+define find_lazbase
+r=$$(readlink -f "$$(command -v lazbuild 2>/dev/null)" 2>/dev/null); \
+d=$$(dirname "$$r"); \
+if [ -x "$$d/lazbuild" ] && [ -d "$$d/tools" ]; then echo "$$d"; exit; fi; \
+f=$$(find /usr/share/lazarus /usr/lib/lazarus -maxdepth 2 -name lazbuild -type f 2>/dev/null | head -1); \
+if [ -n "$$f" ]; then dirname "$$f"; else echo /usr/share/lazarus; fi
+endef
+LAZBASE:=$(shell $(find_lazbase))
 FPC=fpc
 EXEEXT=
 ARCH=$(TargetCPU)

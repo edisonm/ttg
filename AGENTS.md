@@ -71,8 +71,10 @@ swap in a vanilla ZeosLib without re-applying them. `multithreadprocs` and
 - `src/ttg.lrs` embeds `dat/default.ttd` and `dat/ttg.sql` as lazres
   resources (`LazarusResources.Find('ttg','SQL')` / `('Default','TTD')` are
   how code reads them). Changing either `dat/` file invalidates `ttg.lrs`,
-  whose rebuild needs `$(LAZBASE)/tools/lazres` — `LAZBASE` is pinned to
-  `/usr/share/lazarus/4.8.0` in the root `COMMON`.
+  whose rebuild needs `$(LAZBASE)/tools/lazres` — `LAZBASE` is derived in the
+  root `COMMON` from where `lazbuild` resolves to (symlink target, or a
+  `find` under `/usr/share/lazarus` and `/usr/lib/lazarus` when `lazbuild`
+  is a wrapper script), so it follows the distro's Lazarus version.
 - Per-form `*.lrs` files and all compiler intermediates are generated into
   `obj/<buildid>/` by lazbuild; `bin/` and `obj/` are fully disposable
   (`make clean`).
