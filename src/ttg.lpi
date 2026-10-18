@@ -34,7 +34,7 @@
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
             <OtherUnitFiles Value="../../zeoslib/packages/lazarus;../../zeoslib/src/core;../../zeoslib/src/dbc;../../zeoslib/src/parsesql;../../zeoslib/src/plain;../../zeoslib/src/component;../../multithreadprocs;../obj/$(TargetCPU)-$(TargetOS)"/>
-            <UnitOutputDirectory Value="../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)"/>
+            <UnitOutputDirectory Value="../obj/$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
             <SmartLinkUnit Value="True"/>
@@ -61,9 +61,16 @@
 -dZEOS_DISABLE_DBLIB
 -dZEOS_DISABLE_ADO
 -dZEOS_DISABLE_INTERBASE
+-dZEOS_DISABLE_FIREBIRD
+-dZEOS_DISABLE_SQLANY
+-dZEOS_DISABLE_POOLED
+-dZEOS_DISABLE_OLEDB
+-dZEOS_DISABLE_ODBC
+-dZEOS_DISABLE_PROXY
+-dDISABLE_INTERBASE_AND_FIREBIRD
 -dZEOS_DISABLE_ORACLE
 -dZEOS_DISABLE_ASA
--Xs- -FW../obj/$(TargetCPU)-$(TargetOS)$(BuildLabel)/ttg.wpo -OWall"/>
+-Xs- -FW../obj/$(TargetCPU)-$(TargetOS)/ttg.wpo -OWall"/>
           </Other>
         </CompilerOptions>
       </Item2>
