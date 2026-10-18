@@ -17,13 +17,21 @@ jobs:
 
       # ttg.lpi expects ZeosLib and multithreadprocs in sibling dirs of the
       # repo (../../zeoslib, ../../multithreadprocs relative to src/).
-      # The frones/ZeosLib 8.0-patches branch already contains the two fixes
-      # we used to carry as local patches (see patches/zeoslib/).
       - name: Check out dependencies
         run: |
           PARENT="$(dirname "$GITHUB_WORKSPACE")"
           git clone --depth 1 -b 8.0-patches \
             https://github.com/frones/ZeosLib.git "$PARENT/zeoslib"
+          # The two local fixes (patches/zeoslib/) are not (yet) in the
+          # cloned branch; apply them, skipping any that are already merged.
+          cd "$PARENT/zeoslib"
+          for p in "$GITHUB_WORKSPACE"/patches/zeoslib/*.patch; do
+            if git apply --reverse --check "$p" 2>/dev/null; then
+              echo "already applied: $(basename "$p")"
+            else
+              git apply "$p" && echo "applied: $(basename "$p")"
+            fi
+          done
           MT="$(dirname "$(find /usr/share/lazarus /usr/lib/lazarus \
             -name mtprocs.pas 2>/dev/null | head -1)")"
           test -n "$MT"

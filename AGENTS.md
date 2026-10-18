@@ -57,10 +57,10 @@ display is available. Key facts:
 `SynEdit`, FCL, LCL. Unit search paths are relative to `src/`:
 `../../zeoslib/...` and `../../multithreadprocs`, i.e. sibling dirs of the
 repo (`/home/edison/apps/zeoslib`, `/home/edison/apps/multithreadprocs`).
-The ZeosLib checkout has **local patches applied** (copied into
-`patches/zeoslib/` here); they are also upstream as commits in
-`github.com/frones/ZeosLib` branch `8.0-patches`, which CI clones. Don't
-swap in a vanilla ZeosLib without re-applying them. `multithreadprocs` and
+The ZeosLib checkout needs **local patches applied** (kept in
+`patches/zeoslib/` here); CI clones `github.com/frones/ZeosLib` branch
+`8.0-patches` and `git apply`s those patches on top (skipping any already
+merged into the branch). Don't swap in a vanilla ZeosLib without applying them. `multithreadprocs` and
 `SynEdit` also ship inside the Lazarus installation
 (`components/multithreadprocs`, `components/synedit`).
 
