@@ -11,9 +11,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Lazarus/FPC
+        # libgtk2.0-dev: the GUI links the gtk2 LCL widgetset (the .lpi
+        # default); FPC's gtk2 bindings compile without it, but linking
+        # needs -lgtk-x11-2.0/-lgdk-x11-2.0. Not pulled in automatically
+        # with --no-install-recommends. Still available on 26.04, but
+        # slated for removal from the archive, so keep an eye on it.
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends lazarus fpc
+          sudo apt-get install -y --no-install-recommends lazarus fpc libgtk2.0-dev
 
       # ttg.lpi expects ZeosLib and multithreadprocs in sibling dirs of the
       # repo (../../zeoslib, ../../multithreadprocs relative to src/).
